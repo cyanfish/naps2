@@ -6,15 +6,15 @@ namespace NAPS2.Util
 {
     /// <summary>
     /// A base interface for objects capable of displaying error output.
-    ///
-    /// Implementors: MessageBoxErrorOutput, ConsoleErrorOutput
     /// </summary>
-    public interface IErrorOutput
+    public abstract class ErrorOutput
     {
-        void DisplayError(string errorMessage);
+        public static ErrorOutput Default = new StubErrorOutput();
 
-        void DisplayError(string errorMessage, string details);
+        public abstract void DisplayError(string errorMessage);
 
-        void DisplayError(string errorMessage, Exception exception);
+        public abstract void DisplayError(string errorMessage, string details);
+
+        public abstract void DisplayError(string errorMessage, Exception exception);
     }
 }

@@ -15,9 +15,9 @@ namespace NAPS2.ImportExport.Email.Mapi
     {
         private readonly IWorkerServiceFactory workerServiceFactory;
         private readonly MapiWrapper mapiWrapper;
-        private readonly IErrorOutput errorOutput;
+        private readonly ErrorOutput errorOutput;
 
-        public MapiEmailProvider(IWorkerServiceFactory workerServiceFactory, MapiWrapper mapiWrapper, IErrorOutput errorOutput)
+        public MapiEmailProvider(IWorkerServiceFactory workerServiceFactory, MapiWrapper mapiWrapper, ErrorOutput errorOutput)
         {
             this.workerServiceFactory = workerServiceFactory;
             this.mapiWrapper = mapiWrapper;

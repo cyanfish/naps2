@@ -19,13 +19,13 @@ namespace NAPS2.Scan.Wia
         private readonly OperationProgress operationProgress;
         private readonly ScannedImageHelper scannedImageHelper;
 
-        public WiaScanDriver()
+        public WiaScanDriver() : base(ErrorOutput.Default)
         {
             operationProgress = OperationProgress.Default;
             scannedImageHelper = new ScannedImageHelper();
         }
 
-        public WiaScanDriver(OperationProgress operationProgress, ScannedImageHelper scannedImageHelper)
+        public WiaScanDriver(OperationProgress operationProgress, ScannedImageHelper scannedImageHelper, ErrorOutput errorOutput) : base(errorOutput)
         {
             this.operationProgress = operationProgress;
             this.scannedImageHelper = scannedImageHelper;

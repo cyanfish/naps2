@@ -10,9 +10,9 @@ namespace NAPS2.DI
     public class NinjectOperationFactory : IOperationFactory
     {
         private readonly IKernel kernel;
-        private readonly IErrorOutput errorOutput;
+        private readonly ErrorOutput errorOutput;
 
-        public NinjectOperationFactory(IKernel kernel, IErrorOutput errorOutput)
+        public NinjectOperationFactory(IKernel kernel, ErrorOutput errorOutput)
         {
             this.kernel = kernel;
             this.errorOutput = errorOutput;

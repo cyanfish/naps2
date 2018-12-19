@@ -17,7 +17,7 @@ namespace NAPS2.ClientServer
 
         private readonly ClientContextFactory clientContextFactory;
 
-        public ProxiedScanDriver(ClientContextFactory clientContextFactory)
+        public ProxiedScanDriver(ClientContextFactory clientContextFactory, ErrorOutput errorOutput) : base(errorOutput)
         {
             this.clientContextFactory = clientContextFactory;
         }

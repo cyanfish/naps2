@@ -20,7 +20,7 @@ namespace NAPS2.WinForms
     public partial class FEditProfile : FormBase
     {
         private readonly IScanDriverFactory driverFactory;
-        private readonly IErrorOutput errorOutput;
+        private readonly ErrorOutput errorOutput;
         private readonly ProfileNameTracker profileNameTracker;
 
         private ScanProfile scanProfile;
@@ -33,7 +33,7 @@ namespace NAPS2.WinForms
 
         private bool suppressChangeEvent;
 
-        public FEditProfile(IScanDriverFactory driverFactory, IErrorOutput errorOutput, ProfileNameTracker profileNameTracker)
+        public FEditProfile(IScanDriverFactory driverFactory, ErrorOutput errorOutput, ProfileNameTracker profileNameTracker)
         {
             this.driverFactory = driverFactory;
             this.errorOutput = errorOutput;

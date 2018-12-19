@@ -22,11 +22,11 @@ namespace NAPS2.ImportExport
         private readonly IOperationFactory operationFactory;
         private readonly PdfSettingsContainer pdfSettingsContainer;
         private readonly OcrManager ocrManager;
-        private readonly IErrorOutput errorOutput;
+        private readonly ErrorOutput errorOutput;
         private readonly DialogHelper dialogHelper;
         private readonly OperationProgress operationProgress;
 
-        public AutoSave(IOperationFactory operationFactory, PdfSettingsContainer pdfSettingsContainer, OcrManager ocrManager, IErrorOutput errorOutput, DialogHelper dialogHelper, OperationProgress operationProgress)
+        public AutoSave(IOperationFactory operationFactory, PdfSettingsContainer pdfSettingsContainer, OcrManager ocrManager, ErrorOutput errorOutput, DialogHelper dialogHelper, OperationProgress operationProgress)
         {
             this.operationFactory = operationFactory;
             this.pdfSettingsContainer = pdfSettingsContainer;

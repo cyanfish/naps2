@@ -9,14 +9,14 @@ namespace NAPS2.WinForms
 {
     public partial class FProgress : FormBase
     {
-        private readonly IErrorOutput errorOutput;
+        private readonly ErrorOutput errorOutput;
         private readonly OperationProgress operationProgress;
 
         private volatile bool loaded;
         private volatile bool background;
         private IOperation operation;
 
-        public FProgress(IErrorOutput errorOutput, OperationProgress operationProgress)
+        public FProgress(ErrorOutput errorOutput, OperationProgress operationProgress)
         {
             this.errorOutput = errorOutput;
             this.operationProgress = operationProgress;

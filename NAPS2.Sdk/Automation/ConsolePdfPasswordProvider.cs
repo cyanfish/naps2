@@ -9,9 +9,9 @@ namespace NAPS2.Automation
 {
     public class ConsolePdfPasswordProvider : IPdfPasswordProvider
     {
-        private readonly IErrorOutput errorOutput;
+        private readonly ErrorOutput errorOutput;
 
-        public ConsolePdfPasswordProvider(IErrorOutput errorOutput)
+        public ConsolePdfPasswordProvider(ErrorOutput errorOutput)
         {
             this.errorOutput = errorOutput;
         }

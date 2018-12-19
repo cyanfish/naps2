@@ -10,13 +10,6 @@ namespace NAPS2.WinForms
 {
     public class DialogHelper
     {
-        private readonly IFormFactory formFactory;
-
-        public DialogHelper(IFormFactory formFactory)
-        {
-            this.formFactory = formFactory;
-        }
-
         public bool PromptToSavePdfOrImage(string defaultPath, out string savePath)
         {
             var sd = new SaveFileDialog
@@ -123,9 +116,11 @@ namespace NAPS2.WinForms
 
         public void ShowErrorWithDetails(string errorMesage, string details)
         {
-            var form = formFactory.Create<FError>();
-            form.ErrorMessage = errorMesage;
-            form.Details = details;
+            var form = new FError
+            {
+                ErrorMessage = errorMesage,
+                Details = details
+            };
             form.ShowDialog();
         }
     }

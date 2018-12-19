@@ -28,7 +28,7 @@ namespace NAPS2.Scan.Sane
         private readonly BlankDetector blankDetector;
         private readonly ScannedImageHelper scannedImageHelper;
 
-        public SaneScanDriver(SaneWrapper saneWrapper, IFormFactory formFactory, BlankDetector blankDetector, ScannedImageHelper scannedImageHelper)
+        public SaneScanDriver(SaneWrapper saneWrapper, IFormFactory formFactory, BlankDetector blankDetector, ScannedImageHelper scannedImageHelper, ErrorOutput errorOutput) : base(errorOutput)
         {
             this.saneWrapper = saneWrapper;
             this.formFactory = formFactory;

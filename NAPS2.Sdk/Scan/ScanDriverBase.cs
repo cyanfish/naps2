@@ -9,6 +9,7 @@ using NAPS2.Scan.Exceptions;
 using NAPS2.Images;
 using NAPS2.Lang.Resources;
 using NAPS2.Logging;
+using NAPS2.Util;
 using NAPS2.WinForms;
 using NAPS2.Worker;
 
@@ -19,6 +20,13 @@ namespace NAPS2.Scan
     /// </summary>
     public abstract class ScanDriverBase : IScanDriver
     {
+        private readonly ErrorOutput errorOutput;
+
+        protected ScanDriverBase(ErrorOutput errorOutput)
+        {
+            this.errorOutput = errorOutput;
+        }
+
         public abstract string DriverName { get; }
 
         public abstract bool IsSupported { get; }
@@ -100,6 +108,7 @@ namespace NAPS2.Scan
             var sink = new ScannedImageSink();
             Task.Factory.StartNew(async () =>
             {
+                ScanDriverException error = null;
                 try
                 {
                     var device = GetScanDevice(scanProfile);
@@ -124,15 +133,37 @@ namespace NAPS2.Scan
                 }
                 catch (ScanDriverException e)
                 {
-                    sink.SetError(e);
+                    error = e;
                 }
                 catch (FaultException<ScanDriverExceptionDetail> e)
                 {
-                    sink.SetError(e.Detail.Exception);
+                    error = e.Detail.Exception;
                 }
                 catch (Exception e)
                 {
-                    sink.SetError(new ScanDriverUnknownException(e));
+                    error = new ScanDriverUnknownException(e);
+                }
+
+                if (error != null)
+                {
+                    if (error is ScanDriverUnknownException)
+                    {
+                        Log.ErrorException(error.Message, error.InnerException);
+                        errorOutput?.DisplayError(error.Message, error);
+                    }
+                    else
+                    {
+                        errorOutput?.DisplayError(error.Message);
+                    }
+
+                    if (scanParams.PropagateErrors)
+                    {
+                        sink.SetError(error);
+                    }
+                    else
+                    {
+                        sink.SetCompleted();
+                    }
                 }
             }, TaskCreationOptions.LongRunning);
             return sink.AsSource();

@@ -13,6 +13,8 @@ namespace NAPS2.Scan
     /// </summary>
     public class ScanParams
     {
+        public bool PropagateErrors { get; set; }
+
         public bool DetectPatchCodes { get; set; }
 
         public bool Modal { get; set; } = true;

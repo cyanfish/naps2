@@ -16,12 +16,13 @@ namespace NAPS2.DI.Modules
         public override void Load()
         {
             Bind<IPdfPasswordProvider>().To<ConsolePdfPasswordProvider>();
-            Bind<IErrorOutput>().To<ConsoleErrorOutput>();
+            Bind<ErrorOutput>().To<ConsoleErrorOutput>();
             Bind<IOverwritePrompt>().To<ConsoleOverwritePrompt>();
             Bind<OperationProgress>().To<ConsoleOperationProgress>();
             Bind<IComponentInstallPrompt>().To<ConsoleComponentInstallPrompt>();
 
             OperationProgress.Default = Kernel.Get<OperationProgress>();
+            ErrorOutput.Default = Kernel.Get<ConsoleErrorOutput>();
         }
     }
 }

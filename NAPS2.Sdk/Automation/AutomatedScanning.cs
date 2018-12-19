@@ -27,7 +27,7 @@ namespace NAPS2.Automation
     {
         private readonly IEmailProviderFactory emailProviderFactory;
         private readonly IScanPerformer scanPerformer;
-        private readonly IErrorOutput errorOutput;
+        private readonly ErrorOutput errorOutput;
         private readonly IScannedImageImporter scannedImageImporter;
         private readonly PdfSettingsContainer pdfSettingsContainer;
         private readonly ImageSettingsContainer imageSettingsContainer;
@@ -43,7 +43,7 @@ namespace NAPS2.Automation
         private List<string> actualOutputPaths;
         private OcrParams ocrParams;
 
-        public AutomatedScanning(AutomatedScanningOptions options, IScanPerformer scanPerformer, IErrorOutput errorOutput, IEmailProviderFactory emailProviderFactory, IScannedImageImporter scannedImageImporter, PdfSettingsContainer pdfSettingsContainer, ImageSettingsContainer imageSettingsContainer, IOperationFactory operationFactory, OcrManager ocrManager, IFormFactory formFactory)
+        public AutomatedScanning(AutomatedScanningOptions options, IScanPerformer scanPerformer, ErrorOutput errorOutput, IEmailProviderFactory emailProviderFactory, IScannedImageImporter scannedImageImporter, PdfSettingsContainer pdfSettingsContainer, ImageSettingsContainer imageSettingsContainer, IOperationFactory operationFactory, OcrManager ocrManager, IFormFactory formFactory)
         {
             this.options = options;
             this.scanPerformer = scanPerformer;

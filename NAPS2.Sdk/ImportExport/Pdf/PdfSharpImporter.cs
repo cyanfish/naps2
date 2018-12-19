@@ -23,13 +23,13 @@ namespace NAPS2.ImportExport.Pdf
 {
     public class PdfSharpImporter : IPdfImporter
     {
-        private readonly IErrorOutput errorOutput;
+        private readonly ErrorOutput errorOutput;
         private readonly IPdfPasswordProvider pdfPasswordProvider;
         private readonly ImageRenderer imageRenderer;
         private readonly IPdfRenderer pdfRenderer;
         private readonly IComponentInstallPrompt componentInstallPrompt;
 
-        public PdfSharpImporter(IErrorOutput errorOutput, IPdfPasswordProvider pdfPasswordProvider, ImageRenderer imageRenderer, IPdfRenderer pdfRenderer, IComponentInstallPrompt componentInstallPrompt)
+        public PdfSharpImporter(ErrorOutput errorOutput, IPdfPasswordProvider pdfPasswordProvider, ImageRenderer imageRenderer, IPdfRenderer pdfRenderer, IComponentInstallPrompt componentInstallPrompt)
         {
             this.errorOutput = errorOutput;
             this.pdfPasswordProvider = pdfPasswordProvider;

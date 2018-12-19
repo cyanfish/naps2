@@ -23,13 +23,13 @@ namespace NAPS2.WinForms
         public const string PATCH_CODE_INFO_URL = "http://www.naps2.com/doc-batch-scan.html#patch-t";
         
         private readonly BatchScanPerformer batchScanPerformer;
-        private readonly IErrorOutput errorOutput;
+        private readonly ErrorOutput errorOutput;
         private readonly DialogHelper dialogHelper;
 
         private bool batchRunning;
         private CancellationTokenSource cts = new CancellationTokenSource();
 
-        public FBatchScan(BatchScanPerformer batchScanPerformer, IErrorOutput errorOutput, DialogHelper dialogHelper)
+        public FBatchScan(BatchScanPerformer batchScanPerformer, ErrorOutput errorOutput, DialogHelper dialogHelper)
         {
             this.batchScanPerformer = batchScanPerformer;
             this.errorOutput = errorOutput;

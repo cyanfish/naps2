@@ -11,9 +11,9 @@ namespace NAPS2.Automation
     {
         public static bool ForceOverwrite { get; set; }
 
-        private readonly IErrorOutput errorOutput;
+        private readonly ErrorOutput errorOutput;
 
-        public ConsoleOverwritePrompt(IErrorOutput errorOutput)
+        public ConsoleOverwritePrompt(ErrorOutput errorOutput)
         {
             this.errorOutput = errorOutput;
         }

@@ -14,10 +14,10 @@ namespace NAPS2.WinForms
 {
     public partial class FAuthorize : FormBase
     {
-        private readonly IErrorOutput errorOutput;
+        private readonly ErrorOutput errorOutput;
         private CancellationTokenSource cancelTokenSource;
 
-        public FAuthorize(IErrorOutput errorOutput)
+        public FAuthorize(ErrorOutput errorOutput)
         {
             this.errorOutput = errorOutput;
             RestoreFormState = false;

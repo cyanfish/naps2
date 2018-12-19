@@ -21,7 +21,7 @@ namespace NAPS2.Update
 {
     public class UpdateOperation : OperationBase
     {
-        private readonly IErrorOutput errorOutput;
+        private readonly ErrorOutput errorOutput;
 
         private readonly ManualResetEvent waitHandle = new ManualResetEvent(false);
         private WebClient client;
@@ -41,7 +41,7 @@ namespace NAPS2.Update
             }
         }
 
-        public UpdateOperation(IErrorOutput errorOutput)
+        public UpdateOperation(ErrorOutput errorOutput)
         {
             this.errorOutput = errorOutput;
 

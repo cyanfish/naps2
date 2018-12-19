@@ -11,6 +11,8 @@ using NAPS2.Ocr;
 using NAPS2.Platform;
 using NAPS2.Images.Storage;
 using NAPS2.Scan;
+using NAPS2.Util;
+using NAPS2.WinForms;
 using NLog;
 
 namespace NAPS2.DI
