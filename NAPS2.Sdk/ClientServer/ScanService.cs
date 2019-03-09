@@ -71,6 +71,7 @@ namespace NAPS2.ClientServer
             }
             scanProfile.UseNativeUI = false;
 
+            // TODO: Turn PropagateErrors on?
             var internalParams = new ScanParams
             {
                 DetectPatchCodes = scanParams.DetectPatchCodes,

@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using NAPS2.Config;
 using NAPS2.Scan.Exceptions;
 using NAPS2.Images;
+using NAPS2.ImportExport;
 using NAPS2.Lang.Resources;
 using NAPS2.Logging;
 using NAPS2.Util;
@@ -166,52 +167,51 @@ namespace NAPS2.Scan
                     }
                 }
             }, TaskCreationOptions.LongRunning);
-            return sink.AsSource();
+            return AutoSave(sink, scanParams, scanProfile);
         }
 
-        private void AutoSaveStuff()
+        private ScannedImageSource AutoSave(ScannedImageSink sink, ScanParams scanParams, ScanProfile scanProfile)
         {
-            // TODO
-            //bool doAutoSave = !scanParams.NoAutoSave && !AppConfig.Current.DisableAutoSave && scanProfile.EnableAutoSave && scanProfile.AutoSaveSettings != null;
-            //if (doAutoSave)
-            //{
-            //    if (scanProfile.AutoSaveSettings.ClearImagesAfterSaving)
-            //    {
-            //        // Auto save without piping images
-            //        var images = await source.ToList();
-            //        if (await autoSave.Save(scanProfile.AutoSaveSettings, images, notify))
-            //        {
-            //            foreach (ScannedImage img in images)
-            //            {
-            //                img.Dispose();
-            //            }
-            //        }
-            //        else
-            //        {
-            //            // Fallback in case auto save failed; pipe all the images back at once
-            //            foreach (ScannedImage img in images)
-            //            {
-            //                imageCallback(img);
-            //            }
-            //        }
-            //    }
-            //    else
-            //    {
-            //        // Basic auto save, so keep track of images as we pipe them and try to auto save afterwards
-            //        var images = new List<ScannedImage>();
-            //        await source.ForEach(scannedImage =>
-            //        {
-            //            imageCallback(scannedImage);
-            //            images.Add(scannedImage);
-            //        });
-            //        await autoSave.Save(scanProfile.AutoSaveSettings, images, notify);
-            //    }
-            //}
-            //else
-            //{
-            //    // No auto save, so just pipe images back as we get them
-            //    await source.ForEach(imageCallback);
-            //}
+            bool doAutoSave = !scanParams.NoAutoSave && !AppConfig.Current.DisableAutoSave && scanProfile.EnableAutoSave && scanProfile.AutoSaveSettings != null;
+            IAutoSave autoSave = null; // TODO
+
+            if (!doAutoSave)
+            {
+                // No auto save, so just pipe images back as we get them
+                return sink.AsSource();
+            }
+
+            if (!scanProfile.AutoSaveSettings.ClearImagesAfterSaving)
+            {
+                // Basic auto save, so keep track of images as we pipe them and try to auto save afterwards
+                sink.AsSource().ToList().ContinueWith(async t => await autoSave.Save(scanProfile.AutoSaveSettings, t.Result));
+                return sink.AsSource();
+            }
+
+            // Auto save without piping images
+            ScannedImageSink resultSink = new ScannedImageSink();
+            // TODO: This may fail if PropagateErrors is true
+            sink.AsSource().ToList().ContinueWith(async t =>
+            {
+                if (await autoSave.Save(scanProfile.AutoSaveSettings, t.Result))
+                {
+                    foreach (ScannedImage img in t.Result)
+                    {
+                        img.Dispose();
+                    }
+                }
+                else
+                {
+                    // Fallback in case auto save failed; pipe all the images back at once
+                    foreach (ScannedImage img in t.Result)
+                    {
+                        resultSink.PutImage(img);
+                    }
+                }
+
+                resultSink.SetCompleted();
+            });
+            return resultSink.AsSource();
         }
 
         private ScanDevice GetScanDevice(ScanProfile scanProfile)

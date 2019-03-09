@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using NAPS2.Lang.Resources;
@@ -82,7 +83,19 @@ namespace NAPS2.Scan.Wia
                     try
                     {
                         smoothProgress.Reset();
-                        Scan(sink);
+                        try
+                        {
+                            Scan(sink, ScanProfile.WiaVersion);
+                        }
+                        catch (WiaException e) when
+                            (e.ErrorCode == Hresult.E_INVALIDARG &&
+                             ScanProfile.WiaVersion == WiaVersion.Default &&
+                             NativeWiaObject.DefaultWiaVersion == WiaVersion.Wia20
+                             && !ScanProfile.UseNativeUI)
+                        {
+                            Debug.WriteLine("Falling back to WIA 1.0 due to E_INVALIDARG");
+                            Scan(sink, WiaVersion.Wia10);
+                        }
                     }
                     catch (WiaException e)
                     {
@@ -106,9 +119,9 @@ namespace NAPS2.Scan.Wia
             return true;
         }
 
-        private void Scan(ScannedImageSink sink)
+        private void Scan(ScannedImageSink sink, WiaVersion wiaVersion)
         {
-            using (var deviceManager = new WiaDeviceManager(ScanProfile.WiaVersion))
+            using (var deviceManager = new WiaDeviceManager(wiaVersion))
             using (var device = deviceManager.FindDevice(ScanDevice.ID))
             {
                 if (device.Version == WiaVersion.Wia20 && ScanProfile.UseNativeUI)

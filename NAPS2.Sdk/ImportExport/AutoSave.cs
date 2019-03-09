@@ -25,8 +25,9 @@ namespace NAPS2.ImportExport
         private readonly ErrorOutput errorOutput;
         private readonly DialogHelper dialogHelper;
         private readonly OperationProgress operationProgress;
+        private readonly ISaveNotify notify;
 
-        public AutoSave(IOperationFactory operationFactory, PdfSettingsContainer pdfSettingsContainer, OcrManager ocrManager, ErrorOutput errorOutput, DialogHelper dialogHelper, OperationProgress operationProgress)
+        public AutoSave(IOperationFactory operationFactory, PdfSettingsContainer pdfSettingsContainer, OcrManager ocrManager, ErrorOutput errorOutput, DialogHelper dialogHelper, OperationProgress operationProgress, ISaveNotify notify)
         {
             this.operationFactory = operationFactory;
             this.pdfSettingsContainer = pdfSettingsContainer;
@@ -34,9 +35,10 @@ namespace NAPS2.ImportExport
             this.errorOutput = errorOutput;
             this.dialogHelper = dialogHelper;
             this.operationProgress = operationProgress;
+            this.notify = notify;
         }
 
-        public async Task<bool> Save(AutoSaveSettings settings, List<ScannedImage> images, ISaveNotify notify)
+        public async Task<bool> Save(AutoSaveSettings settings, List<ScannedImage> images)
         {
             if (AppConfig.Current.DisableAutoSave)
             {

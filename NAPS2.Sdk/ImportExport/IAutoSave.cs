@@ -10,6 +10,6 @@ namespace NAPS2.ImportExport
 {
     public interface IAutoSave
     {
-        Task<bool> Save(AutoSaveSettings settings, List<ScannedImage> images, ISaveNotify notify);
+        Task<bool> Save(AutoSaveSettings settings, List<ScannedImage> images);
     }
 }
