@@ -29,4 +29,5 @@ _ReSharper*/
 $tf*/
 publish/
 bin/
-*.VisualState.xml
+temp/
+*.credentials.json

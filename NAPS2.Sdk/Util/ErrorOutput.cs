@@ -9,7 +9,17 @@ namespace NAPS2.Util
     /// </summary>
     public abstract class ErrorOutput
     {
-        public static ErrorOutput Default = new StubErrorOutput();
+        private static ErrorOutput _default = new StubErrorOutput();
+
+        public static ErrorOutput Default
+        {
+            get
+            {
+                TestingContext.NoStaticDefaults();
+                return _default;
+            }
+            set => _default = value;
+        }
 
         public abstract void DisplayError(string errorMessage);
 

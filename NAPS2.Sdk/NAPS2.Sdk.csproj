@@ -277,6 +277,7 @@
     <Compile Include="Util\SmoothProgress.cs" />
     <Compile Include="Util\StubErrorOutput.cs" />
     <Compile Include="Util\TaskExtensions.cs" />
+    <Compile Include="Util\TestingContext.cs" />
     <Compile Include="Util\WebClientExtensions.cs" />
     <Compile Include="Util\Win32Window.cs" />
     <Compile Include="Logging\WindowsEventLogger.cs" />
@@ -437,7 +438,7 @@
     <Compile Include="Images\Transforms\Transform.cs" />
     <Compile Include="Scan\IScanDriverFactory.cs" />
     <Compile Include="Util\CultureInitializer.cs" />
-    <Compile Include="Util\IErrorOutput.cs" />
+    <Compile Include="Util\ErrorOutput.cs" />
     <Compile Include="Logging\ILogger.cs" />
     <Compile Include="WinForms\ILProfileIcons.cs">
       <SubType>Component</SubType>

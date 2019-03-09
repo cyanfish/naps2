@@ -3,20 +3,19 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using NAPS2.Scan.Sane;
-using NUnit.Framework;
+using Xunit;
 
-namespace NAPS2.Tests.Unit
+namespace NAPS2.Sdk.Tests.Scan
 {
-    [TestFixture(Category = "unit,fast")]
-    class SaneOptionParserTests
+    public class SaneOptionParserTests
     {
-        [Test]
+        [Fact]
         public void Parse()
         {
             var parser = new SaneOptionParser();
             var options = parser.Parse(GetStreamReader(TEST_OUTPUT));
 
-            Assert.That(options.Keys, Is.EquivalentTo(new []
+            Assert.Equal(options.Keys, new []
             {
                 "--resolution",
                 "--mode",
@@ -32,18 +31,18 @@ namespace NAPS2.Tests.Unit
                 "--button-update",
                 "--threshold",
                 "--threshold-curve"
-            }));
-            Assert.That(options["--resolution"].WordList, Is.EquivalentTo(new double[] { 75, 150, 300, 600, 1200 }));
-            Assert.That(options["--resolution"].Unit, Is.EqualTo(SaneUnit.Dpi));
-            Assert.That(options["--mode"].StringList, Is.EquivalentTo(new [] { "Color", "Gray", "Lineart" }));
-            Assert.That(options["--mode"].Capabilities & SaneCapabilities.Automatic, Is.EqualTo(SaneCapabilities.Automatic));
-            Assert.That(options["-x"].Type, Is.EqualTo(SaneValueType.Numeric));
-            Assert.That(options["-x"].Range.Min, Is.EqualTo(0));
-            Assert.That(options["-x"].Range.Max, Is.EqualTo(decimal.Parse("216.069")));
-            Assert.That(options["-x"].CurrentNumericValue, Is.EqualTo(decimal.Parse("216.069")));
-            Assert.That(options["--source"].Desc, Is.EqualTo("Selects the scan source (such as a document-feeder). Set source before mode and resolution. Resets mode and resolution to auto values."));
-            Assert.That(options["--gamma-table"].Type, Is.EqualTo(SaneValueType.Group));
-            Assert.That(options["--button-update"].Type, Is.EqualTo(SaneValueType.Button));
+            });
+            Assert.Equal(options["--resolution"].WordList, new decimal[] { 75, 150, 300, 600, 1200 });
+            Assert.Equal(options["--resolution"].Unit, SaneUnit.Dpi);
+            Assert.Equal(options["--mode"].StringList, new [] { "Color", "Gray", "Lineart" });
+            Assert.Equal(options["--mode"].Capabilities & SaneCapabilities.Automatic, SaneCapabilities.Automatic);
+            Assert.Equal(options["-x"].Type, SaneValueType.Numeric);
+            Assert.Equal(options["-x"].Range.Min, 0);
+            Assert.Equal(options["-x"].Range.Max, decimal.Parse("216.069"));
+            Assert.Equal(options["-x"].CurrentNumericValue, decimal.Parse("216.069"));
+            Assert.Equal(options["--source"].Desc, "Selects the scan source (such as a document-feeder). Set source before mode and resolution. Resets mode and resolution to auto values.");
+            Assert.Equal(options["--gamma-table"].Type, SaneValueType.Group);
+            Assert.Equal(options["--button-update"].Type, SaneValueType.Button);
         }
 
         private StreamReader GetStreamReader(string str)

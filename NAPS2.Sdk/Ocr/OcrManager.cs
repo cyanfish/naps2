@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using NAPS2.Config;
+using NAPS2.Util;
 
 namespace NAPS2.Ocr
 {
@@ -11,7 +12,11 @@ namespace NAPS2.Ocr
 
         public static OcrManager Default
         {
-            get => _default;
+            get
+            {
+                TestingContext.NoStaticDefaults();
+                return _default;
+            }
             set => _default = value ?? throw new ArgumentNullException(nameof(value));
         }
 

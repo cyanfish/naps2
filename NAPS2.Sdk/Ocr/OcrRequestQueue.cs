@@ -17,7 +17,11 @@ namespace NAPS2.Ocr
 
         public static OcrRequestQueue Default
         {
-            get => _default ?? (_default = new OcrRequestQueue());
+            get
+            {
+                TestingContext.NoStaticDefaults();
+                return _default ?? (_default = new OcrRequestQueue());
+            }
             set => _default = value ?? throw new ArgumentNullException(nameof(value));
         }
 

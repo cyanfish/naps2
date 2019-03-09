@@ -32,7 +32,7 @@ namespace NAPS2.Images.Storage
 
         private static readonly Dictionary<Type, IImageFactory> ImageFactories = new Dictionary<Type, IImageFactory>();
 
-        public static IImageMetadataFactory ImageMetadataFactory { get; set; }
+        public static IImageMetadataFactory ImageMetadataFactory { get; set; } = new StubImageMetadataFactory();
         
         private static readonly Dictionary<(Type, Type), (object, MethodInfo)> Converters = new Dictionary<(Type, Type), (object, MethodInfo)>();
 

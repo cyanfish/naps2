@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using NAPS2.Images.Storage;
 using NAPS2.Scan;
+using NAPS2.Util;
 
 namespace NAPS2.Images
 {
@@ -12,7 +13,11 @@ namespace NAPS2.Images
 
         public static BlankDetector Default
         {
-            get => _default;
+            get
+            {
+                TestingContext.NoStaticDefaults();
+                return _default;
+            }
             set => _default = value ?? throw new ArgumentNullException(nameof(value));
         }
 
