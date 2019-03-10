@@ -138,9 +138,7 @@ namespace NAPS2.ImportExport.Pdf
                 {
                     // Support multiple filter schemes
                     var element = xObject.Elements.Single(x => x.Key == "/Filter");
-                    var elementAsArray = element.Value as PdfArray;
-                    var elementAsName = element.Value as PdfName;
-                    if (elementAsArray != null)
+                    if (element.Value is PdfArray elementAsArray)
                     {
                         string[] arrayElements = elementAsArray.Elements.Select(x => x.ToString()).ToArray();
                         if (arrayElements.Length == 2)
@@ -148,7 +146,7 @@ namespace NAPS2.ImportExport.Pdf
                             sink.PutImage(DecodeImage(arrayElements[1], page, xObject, Filtering.Decode(xObject.Stream.Value, arrayElements[0]), importParams));
                         }
                     }
-                    else if (elementAsName != null)
+                    else if (element.Value is PdfName elementAsName)
                     {
                         sink.PutImage(DecodeImage(elementAsName.Value, page, xObject, xObject.Stream.Value, importParams));
                     }
