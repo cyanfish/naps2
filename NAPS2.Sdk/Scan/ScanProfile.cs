@@ -141,11 +141,6 @@ namespace NAPS2.Scan
     [Serializable]
     public class AutoSaveSettings
     {
-        public AutoSaveSettings()
-        {
-            Separator = SaveSeparator.FilePerPage;
-        }
-
         internal AutoSaveSettings Clone() => (AutoSaveSettings) MemberwiseClone();
 
         public string FilePath { get; set; }
@@ -154,7 +149,7 @@ namespace NAPS2.Scan
 
         public bool ClearImagesAfterSaving { get; set; }
 
-        public SaveSeparator Separator { get; set; }
+        public SaveSeparator Separator { get; set; } = SaveSeparator.FilePerPage;
     }
 
     /// <summary>
