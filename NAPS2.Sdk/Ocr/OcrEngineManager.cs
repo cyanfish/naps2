@@ -6,11 +6,11 @@ using NAPS2.Util;
 
 namespace NAPS2.Ocr
 {
-    public class OcrManager
+    public class OcrEngineManager
     {
-        private static OcrManager _default = new OcrManager();
+        private static OcrEngineManager _default = new OcrEngineManager();
 
-        public static OcrManager Default
+        public static OcrEngineManager Default
         {
             get
             {
@@ -23,9 +23,9 @@ namespace NAPS2.Ocr
         private readonly List<IOcrEngine> engines;
 
         /// <summary>
-        /// Creates a new instance of OcrManager that only looks for Tesseract on the system path.
+        /// Creates a new instance of OcrEngineManager that only looks for Tesseract on the system path.
         /// </summary>
-        public OcrManager()
+        public OcrEngineManager()
         {
             engines = new List<IOcrEngine>
             {
@@ -34,19 +34,19 @@ namespace NAPS2.Ocr
         }
 
         /// <summary>
-        /// Creates a new instance of OcrManager with the specified engines. The order of engines is important; preferred/newer first.
+        /// Creates a new instance of OcrEngineManager with the specified engines. The order of engines is important; preferred/newer first.
         /// </summary>
         /// <param name="orderedEngineList"></param>
-        public OcrManager(IEnumerable<IOcrEngine> orderedEngineList)
+        public OcrEngineManager(IEnumerable<IOcrEngine> orderedEngineList)
         {
             engines = orderedEngineList.ToList();
         }
 
         /// <summary>
-        /// Creates a new instance of OcrManager with the default set of engines.
+        /// Creates a new instance of OcrEngineManager with the default set of engines.
         /// <param name="basePath">The base path for installed engines.</param>
         /// </summary>
-        public OcrManager(string basePath)
+        public OcrEngineManager(string basePath)
         {
             engines = new List<IOcrEngine>
             {
@@ -84,6 +84,7 @@ namespace NAPS2.Ocr
 
         public IOcrEngine EngineToInstall => engines.FirstOrDefault(x => x.IsSupported && x.CanInstall);
 
+        // TODO: This needs to move elsewhere. Perhaps create some kind of factory class, or perhaps change the callers to avoid using this. Or a combination.
         public OcrParams DefaultParams
         {
             get

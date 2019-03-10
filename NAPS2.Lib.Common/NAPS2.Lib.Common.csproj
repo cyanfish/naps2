@@ -85,6 +85,7 @@
     <Compile Include="EntryPoints\WorkerEntryPoint.cs" />
     <Compile Include="Modules\CommonModule.cs" />
     <Compile Include="Modules\ConsoleModule.cs" />
+    <Compile Include="Modules\StaticDefaultsModule.cs" />
     <Compile Include="Modules\WinFormsModule.cs" />
     <Compile Include="NinjectEmailProviderFactory.cs" />
     <Compile Include="NinjectFormFactory.cs" />

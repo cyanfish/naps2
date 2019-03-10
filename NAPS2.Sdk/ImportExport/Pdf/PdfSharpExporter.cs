@@ -24,7 +24,7 @@ using PdfSharp.Pdf.Security;
 namespace NAPS2.ImportExport.Pdf
 {
     // TODO: Avoid Task.Result use here (and elsewhere)
-    public class PdfSharpExporter : IPdfExporter
+    public class PdfSharpExporter : PdfExporter
     {
         static PdfSharpExporter()
         {
@@ -35,23 +35,18 @@ namespace NAPS2.ImportExport.Pdf
         }
         
         private readonly MemoryStreamRenderer memoryStreamRenderer;
-        private readonly OcrRequestQueue ocrRequestQueue;
 
         public PdfSharpExporter()
         {
             memoryStreamRenderer = new MemoryStreamRenderer();
-            ocrRequestQueue = OcrRequestQueue.Default;
         }
-
-        public PdfSharpExporter(MemoryStreamRenderer memoryStreamRenderer, OcrRequestQueue ocrRequestQueue)
+        
+        public PdfSharpExporter(MemoryStreamRenderer memoryStreamRenderer)
         {
             this.memoryStreamRenderer = memoryStreamRenderer;
-            this.ocrRequestQueue = ocrRequestQueue;
         }
 
-        public OcrManager OcrManager { get; set; }
-
-        public async Task<bool> Export(string path, ICollection<ScannedImage.Snapshot> snapshots, PdfSettings settings, OcrParams ocrParams, ProgressHandler progressCallback, CancellationToken cancelToken)
+        public override async Task<bool> Export(string path, ICollection<ScannedImage.Snapshot> snapshots, PdfSettings settings, OcrContext ocrContext, ProgressHandler progressCallback, CancellationToken cancelToken)
         {
             return await Task.Factory.StartNew(() =>
             {
@@ -90,16 +85,16 @@ namespace NAPS2.ImportExport.Pdf
                 }
 
                 IOcrEngine ocrEngine = null;
-                if (ocrParams?.LanguageCode != null)
+                if (ocrContext.Params?.LanguageCode != null)
                 {
-                    var activeEngine = (OcrManager ?? OcrManager.Default).ActiveEngine;
+                    var activeEngine = ocrContext.EngineManager.ActiveEngine;
                     if (activeEngine == null)
                     {
-                        Log.Error("Supported OCR engine not installed.", ocrParams.LanguageCode);
+                        Log.Error("Supported OCR engine not installed.", ocrContext.Params.LanguageCode);
                     }
-                    else if (!activeEngine.CanProcess(ocrParams.LanguageCode))
+                    else if (!activeEngine.CanProcess(ocrContext.Params.LanguageCode))
                     {
-                        Log.Error("OCR files not available for '{0}'.", ocrParams.LanguageCode);
+                        Log.Error("OCR files not available for '{0}'.", ocrContext.Params.LanguageCode);
                     }
                     else
                     {
@@ -108,7 +103,7 @@ namespace NAPS2.ImportExport.Pdf
                 }
 
                 bool result = ocrEngine != null
-                    ? BuildDocumentWithOcr(progressCallback, cancelToken, document, compat, snapshots, ocrEngine, ocrParams)
+                    ? BuildDocumentWithOcr(progressCallback, cancelToken, document, compat, snapshots, ocrContext, ocrEngine)
                     : BuildDocumentWithoutOcr(progressCallback, cancelToken, document, compat, snapshots);
                 if (!result)
                 {
@@ -167,7 +162,7 @@ namespace NAPS2.ImportExport.Pdf
             return true;
         }
 
-        private bool BuildDocumentWithOcr(ProgressHandler progressCallback, CancellationToken cancelToken, PdfDocument document, PdfCompat compat, ICollection<ScannedImage.Snapshot> snapshots, IOcrEngine ocrEngine, OcrParams ocrParams)
+        private bool BuildDocumentWithOcr(ProgressHandler progressCallback, CancellationToken cancelToken, PdfDocument document, PdfCompat compat, ICollection<ScannedImage.Snapshot> snapshots, OcrContext ocrContext, IOcrEngine ocrEngine)
         {
             int progress = 0;
             progressCallback(progress, snapshots.Count);
@@ -220,7 +215,7 @@ namespace NAPS2.ImportExport.Pdf
                         break;
                     }
 
-                    if (!ocrRequestQueue.HasCachedResult(ocrEngine, snapshot, ocrParams))
+                    if (!ocrContext.RequestQueue.HasCachedResult(ocrEngine, snapshot, ocrContext.Params))
                     {
                         img.GdiImage.Save(tempImageFilePath);
                     }
@@ -233,7 +228,7 @@ namespace NAPS2.ImportExport.Pdf
                 }
 
                 // Start OCR
-                var ocrTask = ocrRequestQueue.QueueForeground(ocrEngine, snapshot, tempImageFilePath, ocrParams, cancelToken);
+                var ocrTask = ocrContext.RequestQueue.QueueForeground(ocrEngine, snapshot, tempImageFilePath, ocrContext.Params, cancelToken);
                 ocrTask.ContinueWith(task =>
                 {
                     // This is the best place to put progress reporting

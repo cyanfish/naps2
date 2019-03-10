@@ -170,12 +170,15 @@
     <Compile Include="Images\Storage\PdfConverters.cs" />
     <Compile Include="Images\Storage\PdfStorage.cs" />
     <Compile Include="ImportExport\Email\Mapi\MapiWrapper.cs" />
+    <Compile Include="ImportExport\Images\ImageSettingsProvider.cs" />
     <Compile Include="ImportExport\Pdf\GhostscriptManager.cs" />
+    <Compile Include="ImportExport\Pdf\PdfSettingsProvider.cs" />
     <Compile Include="Logging\EventParams.cs" />
     <Compile Include="Logging\EventType.cs" />
     <Compile Include="Logging\IEventLogger.cs" />
     <Compile Include="Logging\NullEventLogger.cs" />
-    <Compile Include="Ocr\OcrManager.cs" />
+    <Compile Include="Ocr\OcrContext.cs" />
+    <Compile Include="Ocr\OcrEngineManager.cs" />
     <Compile Include="Ocr\OcrMode.cs" />
     <Compile Include="Ocr\OcrParams.cs" />
     <Compile Include="Ocr\OcrRequest.cs" />
@@ -276,11 +279,14 @@
     <Compile Include="Util\ServiceFactoryBehavior.cs" />
     <Compile Include="Util\SmoothProgress.cs" />
     <Compile Include="Util\StubErrorOutput.cs" />
+    <Compile Include="Util\StubOverwritePrompt.cs" />
     <Compile Include="Util\TaskExtensions.cs" />
     <Compile Include="Util\TestingContext.cs" />
     <Compile Include="Util\WebClientExtensions.cs" />
     <Compile Include="Util\Win32Window.cs" />
     <Compile Include="Logging\WindowsEventLogger.cs" />
+    <Compile Include="WinForms\StubDialogHelper.cs" />
+    <Compile Include="WinForms\WinFormsDialogHelper.cs" />
     <Compile Include="WinForms\FProxyConfig.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -319,7 +325,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Icons.resx</DependentUpon>
     </Compile>
-    <Compile Include="ImportExport\AutoSave.cs" />
+    <Compile Include="ImportExport\AutoSaver.cs" />
     <Compile Include="ImportExport\DirectProfileTransfer.cs" />
     <Compile Include="ImportExport\DirectImportOperation.cs" />
     <Compile Include="ImportExport\Email\EmailProviderType.cs" />
@@ -419,7 +425,7 @@
     <Compile Include="Util\ConditionalControls.cs" />
     <Compile Include="Operation\IOperation.cs" />
     <Compile Include="Worker\IWorkerServiceFactory.cs" />
-    <Compile Include="Util\IOverwritePrompt.cs" />
+    <Compile Include="Util\OverwritePrompt.cs" />
     <Compile Include="Worker\IWorkerService.cs" />
     <Compile Include="Util\ISaveNotify.cs" />
     <Compile Include="Util\Lifecycle.cs" />
@@ -463,7 +469,7 @@
     <Compile Include="ImportExport\Images\IImageImporter.cs" />
     <Compile Include="ImportExport\Images\TiffHelper.cs" />
     <Compile Include="ImportExport\IScannedImageImporter.cs" />
-    <Compile Include="ImportExport\Pdf\IPdfExporter.cs" />
+    <Compile Include="ImportExport\Pdf\PdfExporter.cs" />
     <Compile Include="ImportExport\Pdf\IPdfImporter.cs" />
     <Compile Include="ImportExport\Pdf\PdfSettings.cs" />
     <Compile Include="ImportExport\Pdf\PdfSharpExporter.cs" />

@@ -19,7 +19,7 @@ namespace NAPS2.Sdk.Tests
 
         public void Dispose()
         {
-            Directory.Delete(FolderPath);
+            Directory.Delete(FolderPath, true);
         }
     }
 }

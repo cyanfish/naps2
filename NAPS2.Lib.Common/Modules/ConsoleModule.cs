@@ -6,6 +6,7 @@ using NAPS2.Dependencies;
 using NAPS2.ImportExport.Pdf;
 using NAPS2.Operation;
 using NAPS2.Util;
+using NAPS2.WinForms;
 using Ninject;
 using Ninject.Modules;
 
@@ -17,12 +18,10 @@ namespace NAPS2.DI.Modules
         {
             Bind<IPdfPasswordProvider>().To<ConsolePdfPasswordProvider>();
             Bind<ErrorOutput>().To<ConsoleErrorOutput>();
-            Bind<IOverwritePrompt>().To<ConsoleOverwritePrompt>();
+            Bind<OverwritePrompt>().To<ConsoleOverwritePrompt>();
             Bind<OperationProgress>().To<ConsoleOperationProgress>();
             Bind<IComponentInstallPrompt>().To<ConsoleComponentInstallPrompt>();
-
-            OperationProgress.Default = Kernel.Get<OperationProgress>();
-            ErrorOutput.Default = Kernel.Get<ConsoleErrorOutput>();
+            Bind<DialogHelper>().To<WinFormsDialogHelper>(); // TODO: We don't really want this, but it is an explicit option, so it's okay for now...
         }
     }
 }

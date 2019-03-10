@@ -27,7 +27,7 @@ namespace NAPS2.DI.EntryPoints
             try
             {
                 // Initialize Ninject (the DI framework)
-                var kernel = new StandardKernel(new CommonModule(), new WinFormsModule());
+                var kernel = new StandardKernel(new CommonModule(), new WinFormsModule(), new StaticDefaultsModule());
 
                 // Start a pending worker process
                 WorkerManager.Init();

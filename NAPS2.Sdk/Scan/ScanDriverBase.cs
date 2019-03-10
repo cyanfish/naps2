@@ -22,10 +22,12 @@ namespace NAPS2.Scan
     public abstract class ScanDriverBase : IScanDriver
     {
         private readonly ErrorOutput errorOutput;
+        private readonly AutoSaver autoSaver;
 
-        protected ScanDriverBase(ErrorOutput errorOutput)
+        protected ScanDriverBase(ErrorOutput errorOutput, AutoSaver autoSaver)
         {
             this.errorOutput = errorOutput;
+            this.autoSaver = autoSaver;
         }
 
         public abstract string DriverName { get; }
@@ -172,46 +174,13 @@ namespace NAPS2.Scan
 
         private ScannedImageSource AutoSave(ScannedImageSink sink, ScanParams scanParams, ScanProfile scanProfile)
         {
-            bool doAutoSave = !scanParams.NoAutoSave && !AppConfig.Current.DisableAutoSave && scanProfile.EnableAutoSave && scanProfile.AutoSaveSettings != null;
-            IAutoSave autoSave = null; // TODO
-
+            bool doAutoSave = !scanParams.NoAutoSave && !AppConfig.Current.DisableAutoSave && scanProfile.EnableAutoSave && scanProfile.AutoSaveSettings != null && autoSaver != null;
             if (!doAutoSave)
             {
                 // No auto save, so just pipe images back as we get them
                 return sink.AsSource();
             }
-
-            if (!scanProfile.AutoSaveSettings.ClearImagesAfterSaving)
-            {
-                // Basic auto save, so keep track of images as we pipe them and try to auto save afterwards
-                sink.AsSource().ToList().ContinueWith(async t => await autoSave.Save(scanProfile.AutoSaveSettings, t.Result));
-                return sink.AsSource();
-            }
-
-            // Auto save without piping images
-            ScannedImageSink resultSink = new ScannedImageSink();
-            // TODO: This may fail if PropagateErrors is true
-            sink.AsSource().ToList().ContinueWith(async t =>
-            {
-                if (await autoSave.Save(scanProfile.AutoSaveSettings, t.Result))
-                {
-                    foreach (ScannedImage img in t.Result)
-                    {
-                        img.Dispose();
-                    }
-                }
-                else
-                {
-                    // Fallback in case auto save failed; pipe all the images back at once
-                    foreach (ScannedImage img in t.Result)
-                    {
-                        resultSink.PutImage(img);
-                    }
-                }
-
-                resultSink.SetCompleted();
-            });
-            return resultSink.AsSource();
+            return autoSaver.Save(scanProfile.AutoSaveSettings, sink.AsSource());
         }
 
         private ScanDevice GetScanDevice(ScanProfile scanProfile)

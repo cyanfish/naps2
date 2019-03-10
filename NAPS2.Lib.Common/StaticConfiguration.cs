@@ -40,7 +40,7 @@ namespace NAPS2.DI
                 : Environment.ExpandEnvironmentVariables(customPath);
 
             GhostscriptManager.BasePath = basePath;
-            OcrManager.Default = new OcrManager(basePath);
+            OcrEngineManager.Default = new OcrEngineManager(basePath);
 
             var recoveryFolderPath = Path.Combine(Paths.Recovery, Path.GetRandomFileName());
             var rsm = new RecoveryStorageManager(recoveryFolderPath);

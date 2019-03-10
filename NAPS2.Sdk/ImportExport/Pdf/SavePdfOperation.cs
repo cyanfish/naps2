@@ -16,11 +16,19 @@ namespace NAPS2.ImportExport.Pdf
 {
     public class SavePdfOperation : OperationBase
     {
-        private readonly IPdfExporter pdfExporter;
-        private readonly IOverwritePrompt overwritePrompt;
+        private readonly PdfExporter pdfExporter;
+        private readonly OverwritePrompt overwritePrompt;
         private readonly IEmailProviderFactory emailProviderFactory;
 
-        public SavePdfOperation(IPdfExporter pdfExporter, IOverwritePrompt overwritePrompt, IEmailProviderFactory emailProviderFactory)
+        public SavePdfOperation() : this(PdfExporter.Default, OverwritePrompt.Default, null)
+        {
+        }
+
+        public SavePdfOperation(PdfExporter pdfExporter, OverwritePrompt overwritePrompt) : this(pdfExporter, overwritePrompt, null)
+        {
+        }
+
+        public SavePdfOperation(PdfExporter pdfExporter, OverwritePrompt overwritePrompt, IEmailProviderFactory emailProviderFactory)
         {
             this.pdfExporter = pdfExporter;
             this.overwritePrompt = overwritePrompt;
@@ -30,7 +38,12 @@ namespace NAPS2.ImportExport.Pdf
             AllowBackground = true;
         }
 
-        public bool Start(string fileName, Placeholders placeholders, ICollection<ScannedImage> images, PdfSettings pdfSettings, OcrParams ocrParams, bool email, EmailMessage emailMessage)
+        public bool Start(string fileName, Placeholders placeholders, ICollection<ScannedImage> images, PdfSettings pdfSettings, OcrContext ocrContext)
+        {
+            return Start(fileName, placeholders, images, pdfSettings, ocrContext, false, null);
+        }
+
+        public bool Start(string fileName, Placeholders placeholders, ICollection<ScannedImage> images, PdfSettings pdfSettings, OcrContext ocrContext, bool email, EmailMessage emailMessage)
         {
             ProgressTitle = email ? MiscResources.EmailPdfProgress : MiscResources.SavePdfProgress;
             var subFileName = placeholders.Substitute(fileName);
@@ -59,7 +72,7 @@ namespace NAPS2.ImportExport.Pdf
                 bool result = false;
                 try
                 {
-                    result = await pdfExporter.Export(subFileName, snapshots, pdfSettings, ocrParams, OnProgress, CancelToken);
+                    result = await pdfExporter.Export(subFileName, snapshots, pdfSettings, ocrContext, OnProgress, CancelToken);
                 }
                 catch (UnauthorizedAccessException ex)
                 {

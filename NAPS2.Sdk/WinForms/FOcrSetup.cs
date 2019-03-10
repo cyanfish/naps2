@@ -11,16 +11,16 @@ namespace NAPS2.WinForms
 {
     public partial class FOcrSetup : FormBase
     {
-        private readonly OcrManager ocrManager;
+        private readonly OcrEngineManager ocrEngineManager;
         private readonly List<OcrMode> availableModes;
 
-        public FOcrSetup(OcrManager ocrManager)
+        public FOcrSetup(OcrEngineManager ocrEngineManager)
         {
-            this.ocrManager = ocrManager;
+            this.ocrEngineManager = ocrEngineManager;
             InitializeComponent();
 
             comboOcrMode.Format += (sender, e) => e.Value = ((Enum)e.ListItem).Description();
-            availableModes = ocrManager.ActiveEngine?.SupportedModes?.ToList();
+            availableModes = ocrEngineManager.ActiveEngine?.SupportedModes?.ToList();
             if (availableModes != null)
             {
                 foreach (var mode in availableModes)
@@ -95,12 +95,12 @@ namespace NAPS2.WinForms
 
         private void LoadLanguages()
         {
-            var languages = ocrManager.ActiveEngine?.InstalledLanguages
+            var languages = ocrEngineManager.ActiveEngine?.InstalledLanguages
                 .OrderBy(x => x.Name)
                 .ToList();
             comboLanguages.DataSource = languages;
 
-            linkGetLanguages.Visible = ocrManager.EngineToInstall != null;
+            linkGetLanguages.Visible = ocrEngineManager.EngineToInstall != null;
         }
 
         private void UpdateView()

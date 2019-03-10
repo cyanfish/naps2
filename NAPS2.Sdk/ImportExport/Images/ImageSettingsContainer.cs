@@ -5,14 +5,10 @@ using NAPS2.Config;
 
 namespace NAPS2.ImportExport.Images
 {
-    public class ImageSettingsContainer
+    public class ImageSettingsContainer : ImageSettingsProvider
     {
-        private ImageSettings localImageSettings;
+        public override ImageSettings ImageSettings => LocalImageSettings ?? UserConfig.Current.ImageSettings ?? new ImageSettings();
 
-        public ImageSettings ImageSettings
-        {
-            get => localImageSettings ?? UserConfig.Current.ImageSettings ?? new ImageSettings();
-            set => localImageSettings = value;
-        }
+        public ImageSettings LocalImageSettings { get; set; }
     }
 }

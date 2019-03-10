@@ -7,7 +7,7 @@ using NAPS2.Util;
 
 namespace NAPS2.Automation
 {
-    public class ConsoleOverwritePrompt : IOverwritePrompt
+    public class ConsoleOverwritePrompt : OverwritePrompt
     {
         public static bool ForceOverwrite { get; set; }
 
@@ -18,7 +18,7 @@ namespace NAPS2.Automation
             this.errorOutput = errorOutput;
         }
 
-        public DialogResult ConfirmOverwrite(string path)
+        public override DialogResult ConfirmOverwrite(string path)
         {
             if (ForceOverwrite)
             {

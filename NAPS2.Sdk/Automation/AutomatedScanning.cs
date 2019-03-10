@@ -32,7 +32,7 @@ namespace NAPS2.Automation
         private readonly PdfSettingsContainer pdfSettingsContainer;
         private readonly ImageSettingsContainer imageSettingsContainer;
         private readonly IOperationFactory operationFactory;
-        private readonly OcrManager ocrManager;
+        private readonly OcrEngineManager ocrEngineManager;
         private readonly IFormFactory formFactory;
 
         private readonly AutomatedScanningOptions options;
@@ -43,7 +43,7 @@ namespace NAPS2.Automation
         private List<string> actualOutputPaths;
         private OcrParams ocrParams;
 
-        public AutomatedScanning(AutomatedScanningOptions options, IScanPerformer scanPerformer, ErrorOutput errorOutput, IEmailProviderFactory emailProviderFactory, IScannedImageImporter scannedImageImporter, PdfSettingsContainer pdfSettingsContainer, ImageSettingsContainer imageSettingsContainer, IOperationFactory operationFactory, OcrManager ocrManager, IFormFactory formFactory)
+        public AutomatedScanning(AutomatedScanningOptions options, IScanPerformer scanPerformer, ErrorOutput errorOutput, IEmailProviderFactory emailProviderFactory, IScannedImageImporter scannedImageImporter, PdfSettingsContainer pdfSettingsContainer, ImageSettingsContainer imageSettingsContainer, IOperationFactory operationFactory, OcrEngineManager ocrEngineManager, IFormFactory formFactory)
         {
             this.options = options;
             this.scanPerformer = scanPerformer;
@@ -53,7 +53,7 @@ namespace NAPS2.Automation
             this.pdfSettingsContainer = pdfSettingsContainer;
             this.imageSettingsContainer = imageSettingsContainer;
             this.operationFactory = operationFactory;
-            this.ocrManager = ocrManager;
+            this.ocrEngineManager = ocrEngineManager;
             this.formFactory = formFactory;
         }
 
@@ -147,14 +147,14 @@ namespace NAPS2.Automation
         {
             bool canUseOcr = IsPdfFile(options.OutputPath) || IsPdfFile(options.EmailFileName);
             bool useOcr = canUseOcr && !options.DisableOcr && (options.EnableOcr || options.OcrLang != null || UserConfig.Current.EnableOcr || AppConfig.Current.OcrState == OcrState.Enabled);
-            string ocrLanguageCode = useOcr ? (options.OcrLang ?? ocrManager.DefaultParams?.LanguageCode) : null;
-            ocrParams = new OcrParams(ocrLanguageCode, ocrManager.DefaultParams?.Mode ?? OcrMode.Default);
+            string ocrLanguageCode = useOcr ? (options.OcrLang ?? ocrEngineManager.DefaultParams?.LanguageCode) : null;
+            ocrParams = new OcrParams(ocrLanguageCode, ocrEngineManager.DefaultParams?.Mode ?? OcrMode.Default);
         }
 
         private void InstallComponents()
         {
             var availableComponents = new List<IExternalComponent>();
-            var ocrEngine = ocrManager.EngineToInstall;
+            var ocrEngine = ocrEngineManager.EngineToInstall;
             if (ocrEngine != null)
             {
                 availableComponents.Add(ocrEngine.Component);
@@ -436,7 +436,7 @@ namespace NAPS2.Automation
         private async Task DoExportToImageFiles(string outputPath)
         {
             // TODO: If I add new image settings this may break things
-            imageSettingsContainer.ImageSettings = new ImageSettings
+            imageSettingsContainer.LocalImageSettings = new ImageSettings
             {
                 JpegQuality = options.JpegQuality,
                 TiffCompression = Enum.TryParse<TiffCompression>(options.TiffComp, true, out var tc) ? tc : TiffCompression.Auto
@@ -543,7 +543,7 @@ namespace NAPS2.Automation
                 };
                 int digits = (int)Math.Floor(Math.Log10(scanList.Count)) + 1;
                 string actualPath = placeholders.Substitute(path, true, scanIndex++, scanList.Count > 1 ? digits : 0);
-                op.Start(actualPath, placeholders, fileContents, pdfSettings, ocrParams, email, null);
+                op.Start(actualPath, placeholders, fileContents, pdfSettings, new OcrContext(ocrParams), email, null);
                 if (!await op.Success)
                 {
                     return false;

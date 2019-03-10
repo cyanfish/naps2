@@ -102,7 +102,7 @@ namespace NAPS2.WinForms
                 Compat = (PdfCompat)cmbCompat.SelectedIndex
             };
 
-            pdfSettingsContainer.PdfSettings = pdfSettings;
+            pdfSettingsContainer.LocalPdfSettings = pdfSettings;
             UserConfig.Current.PdfSettings = cbRememberSettings.Checked ? pdfSettings : null;
             UserConfig.Manager.Save();
 

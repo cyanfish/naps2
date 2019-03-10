@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using NAPS2.Logging;
 using NAPS2.Scan;
 using NAPS2.Images;
+using NAPS2.ImportExport;
 using NAPS2.Util;
 using NAPS2.WinForms;
 
@@ -17,7 +18,7 @@ namespace NAPS2.ClientServer
 
         private readonly ClientContextFactory clientContextFactory;
 
-        public ProxiedScanDriver(ClientContextFactory clientContextFactory, ErrorOutput errorOutput) : base(errorOutput)
+        public ProxiedScanDriver(ClientContextFactory clientContextFactory, ErrorOutput errorOutput, AutoSaver autoSaver) : base(errorOutput, autoSaver)
         {
             this.clientContextFactory = clientContextFactory;
         }

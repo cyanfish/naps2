@@ -9,20 +9,20 @@ namespace NAPS2.WinForms
 {
     public partial class FOcrLanguageDownload : FormBase
     {
-        private readonly OcrManager ocrManager;
+        private readonly OcrEngineManager ocrEngineManager;
         private readonly IOcrEngine engineToInstall;
 
-        public FOcrLanguageDownload(OcrManager ocrManager)
+        public FOcrLanguageDownload(OcrEngineManager ocrEngineManager)
         {
-            this.ocrManager = ocrManager;
-            engineToInstall = ocrManager.EngineToInstall;
+            this.ocrEngineManager = ocrEngineManager;
+            engineToInstall = ocrEngineManager.EngineToInstall;
             InitializeComponent();
 
             var initialSelection = new HashSet<string>();
-            if (ocrManager.InstalledEngine != null && ocrManager.InstalledEngine != engineToInstall)
+            if (ocrEngineManager.InstalledEngine != null && ocrEngineManager.InstalledEngine != engineToInstall)
             {
                 // Upgrading from an old version, so pre-select previously used languages
-                foreach (var lang in ocrManager.InstalledEngine.LanguageComponents.Where(x => x.IsInstalled))
+                foreach (var lang in ocrEngineManager.InstalledEngine.LanguageComponents.Where(x => x.IsInstalled))
                 {
                     initialSelection.Add(lang.Id);
                 }

@@ -30,25 +30,25 @@ namespace NAPS2.Ocr
         private List<Task> workerTasks = new List<Task>();
         private CancellationTokenSource workerCts = new CancellationTokenSource();
 
-        private readonly OcrManager ocrManager;
+        private readonly OcrEngineManager ocrEngineManager;
         private readonly OperationProgress operationProgress;
 
         private OcrOperation currentOp;
 
-        public OcrRequestQueue() : this(OcrManager.Default, OperationProgress.Default)
+        public OcrRequestQueue() : this(OcrEngineManager.Default, OperationProgress.Default)
         {
         }
 
-        public OcrRequestQueue(OcrManager ocrManager, OperationProgress operationProgress)
+        public OcrRequestQueue(OcrEngineManager ocrEngineManager, OperationProgress operationProgress)
         {
-            this.ocrManager = ocrManager;
+            this.ocrEngineManager = ocrEngineManager;
             this.operationProgress = operationProgress;
         }
 
         public bool HasCachedResult(IOcrEngine ocrEngine, ScannedImage.Snapshot snapshot, OcrParams ocrParams)
         {
-            ocrEngine = ocrEngine ?? ocrManager.ActiveEngine ?? throw new ArgumentException("No OCR engine available");
-            ocrParams = ocrParams ?? ocrManager.DefaultParams;
+            ocrEngine = ocrEngine ?? ocrEngineManager.ActiveEngine ?? throw new ArgumentException("No OCR engine available");
+            ocrParams = ocrParams ?? ocrEngineManager.DefaultParams;
             var reqParams = new OcrRequestParams(snapshot, ocrEngine, ocrParams);
             lock (this)
             {
@@ -61,8 +61,8 @@ namespace NAPS2.Ocr
             OcrRequest req;
             lock (this)
             {
-                ocrEngine = ocrEngine ?? ocrManager.ActiveEngine ?? throw new ArgumentException("No OCR engine available");
-                ocrParams = ocrParams ?? ocrManager.DefaultParams;
+                ocrEngine = ocrEngine ?? ocrEngineManager.ActiveEngine ?? throw new ArgumentException("No OCR engine available");
+                ocrParams = ocrParams ?? ocrEngineManager.DefaultParams;
 
                 var reqParams = new OcrRequestParams(snapshot, ocrEngine, ocrParams);
                 req = requestCache.GetOrSet(reqParams, () => new OcrRequest(reqParams));
@@ -118,9 +118,9 @@ namespace NAPS2.Ocr
             CancellationTokenSource cts = new CancellationTokenSource();
             lock (this)
             {
-                var ocrEngine = ocrManager.ActiveEngine;
+                var ocrEngine = ocrEngineManager.ActiveEngine;
                 if (ocrEngine == null) return;
-                ocrParams = ocrParams ?? ocrManager.DefaultParams;
+                ocrParams = ocrParams ?? ocrEngineManager.DefaultParams;
 
                 var reqParams = new OcrRequestParams(snapshot, ocrEngine, ocrParams);
                 req = requestCache.GetOrSet(reqParams, () => new OcrRequest(reqParams));

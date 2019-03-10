@@ -31,7 +31,7 @@ namespace NAPS2.DI.EntryPoints
 #endif
 
                 // Initialize Ninject (the DI framework)
-                var kernel = new StandardKernel(new CommonModule(), new WinFormsModule());
+                var kernel = new StandardKernel(new CommonModule(), new WinFormsModule(), new StaticDefaultsModule());
 
                 // Expect a single argument, the parent process id
                 if (args.Length != 1 || !int.TryParse(args[0], out int procId) || !IsProcessRunning(procId))

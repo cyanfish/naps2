@@ -17,12 +17,10 @@ namespace NAPS2.DI.Modules
         {
             Bind<IPdfPasswordProvider>().To<WinFormsPdfPasswordProvider>();
             Bind<ErrorOutput>().To<MessageBoxErrorOutput>();
-            Bind<IOverwritePrompt>().To<WinFormsOverwritePrompt>();
+            Bind<OverwritePrompt>().To<WinFormsOverwritePrompt>();
             Bind<OperationProgress>().To<WinFormsOperationProgress>().InSingletonScope();
             Bind<IComponentInstallPrompt>().To<WinFormsComponentInstallPrompt>();
-
-            OperationProgress.Default = Kernel.Get<OperationProgress>();
-            ErrorOutput.Default = Kernel.Get<MessageBoxErrorOutput>();
+            Bind<DialogHelper>().To<WinFormsDialogHelper>();
         }
     }
 }

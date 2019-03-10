@@ -19,14 +19,14 @@ namespace NAPS2.ImportExport.Images
     // TODO: Avoid GDI dependency
     public class SaveImagesOperation : OperationBase
     {
-        private readonly ImageSettingsContainer imageSettingsContainer;
-        private readonly IOverwritePrompt overwritePrompt;
+        private readonly ImageSettingsProvider imageSettingsProvider;
+        private readonly OverwritePrompt overwritePrompt;
         private readonly BitmapRenderer bitmapRenderer;
         private readonly TiffHelper tiffHelper;
 
-        public SaveImagesOperation(ImageSettingsContainer imageSettingsContainer, IOverwritePrompt overwritePrompt, BitmapRenderer bitmapRenderer, TiffHelper tiffHelper)
+        public SaveImagesOperation(ImageSettingsProvider imageSettingsProvider, OverwritePrompt overwritePrompt, BitmapRenderer bitmapRenderer, TiffHelper tiffHelper)
         {
-            this.imageSettingsContainer = imageSettingsContainer;
+            this.imageSettingsProvider = imageSettingsProvider;
             this.overwritePrompt = overwritePrompt;
             this.bitmapRenderer = bitmapRenderer;
             this.tiffHelper = tiffHelper;
@@ -67,7 +67,7 @@ namespace NAPS2.ImportExport.Images
                     }
                     ImageFormat format = GetImageFormat(subFileName);
 
-                    if (Equals(format, ImageFormat.Tiff) && !imageSettingsContainer.ImageSettings.SinglePageTiff)
+                    if (Equals(format, ImageFormat.Tiff) && !imageSettingsProvider.ImageSettings.SinglePageTiff)
                     {
                         if (File.Exists(subFileName))
                         {
@@ -78,7 +78,7 @@ namespace NAPS2.ImportExport.Images
                         }
                         Status.StatusText = string.Format(MiscResources.SavingFormat, Path.GetFileName(subFileName));
                         FirstFileSaved = subFileName;
-                        return await tiffHelper.SaveMultipage(snapshots, subFileName, imageSettingsContainer.ImageSettings.TiffCompression, OnProgress, CancelToken);
+                        return await tiffHelper.SaveMultipage(snapshots, subFileName, imageSettingsProvider.ImageSettings.TiffCompression, OnProgress, CancelToken);
                     }
 
                     int i = 0;
@@ -166,11 +166,11 @@ namespace NAPS2.ImportExport.Images
             PathHelper.EnsureParentDirExists(path);
             if (Equals(format, ImageFormat.Tiff))
             {
-                await tiffHelper.SaveMultipage(new List<ScannedImage.Snapshot> { snapshot }, path, imageSettingsContainer.ImageSettings.TiffCompression, (i, j) => { }, CancellationToken.None);
+                await tiffHelper.SaveMultipage(new List<ScannedImage.Snapshot> { snapshot }, path, imageSettingsProvider.ImageSettings.TiffCompression, (i, j) => { }, CancellationToken.None);
             }
             else if (Equals(format, ImageFormat.Jpeg))
             {
-                var quality = Math.Max(Math.Min(imageSettingsContainer.ImageSettings.JpegQuality, 100), 0);
+                var quality = Math.Max(Math.Min(imageSettingsProvider.ImageSettings.JpegQuality, 100), 0);
                 var encoder = ImageCodecInfo.GetImageEncoders().First(x => x.FormatID == ImageFormat.Jpeg.Guid);
                 var encoderParams = new EncoderParameters(1);
                 encoderParams.Param[0] = new EncoderParameter(Encoder.Quality, quality);

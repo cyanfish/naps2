@@ -23,12 +23,21 @@ namespace NAPS2.WinForms
 
         public override void DisplayError(string errorMessage, string details)
         {
-            Invoker.Current.SafeInvoke(() => dialogHelper.ShowErrorWithDetails(errorMessage, details));
+            Invoker.Current.SafeInvoke(() => ShowErrorWithDetails(errorMessage, details));
         }
 
         public override void DisplayError(string errorMessage, Exception exception)
         {
-            Invoker.Current.SafeInvoke(() => dialogHelper.ShowErrorWithDetails(errorMessage, exception.ToString()));
+            Invoker.Current.SafeInvoke(() => ShowErrorWithDetails(errorMessage, exception.ToString()));
+        }
+        private void ShowErrorWithDetails(string errorMessage, string details)
+        {
+            var form = new FError
+            {
+                ErrorMessage = errorMessage,
+                Details = details
+            };
+            form.ShowDialog();
         }
     }
 }

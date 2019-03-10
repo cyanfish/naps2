@@ -6,6 +6,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Moq;
 using NAPS2.Images;
+using NAPS2.ImportExport;
 using NAPS2.Scan;
 using NAPS2.Util;
 
@@ -13,7 +14,7 @@ namespace NAPS2.Sdk.Tests.Mocks
 {
     public class MockScanDriver : ScanDriverBase
     {
-        public MockScanDriver(ErrorOutput errorOutput) : base(errorOutput)
+        public MockScanDriver(ErrorOutput errorOutput, AutoSaver autoSaver) : base(errorOutput, autoSaver)
         {
         }
 

@@ -12,6 +12,7 @@ using NAPS2.Scan.Exceptions;
 using NAPS2.Images;
 using NAPS2.Images.Storage;
 using NAPS2.Images.Transforms;
+using NAPS2.ImportExport;
 using NAPS2.Util;
 using NAPS2.WinForms;
 
@@ -28,7 +29,7 @@ namespace NAPS2.Scan.Sane
         private readonly BlankDetector blankDetector;
         private readonly ScannedImageHelper scannedImageHelper;
 
-        public SaneScanDriver(SaneWrapper saneWrapper, IFormFactory formFactory, BlankDetector blankDetector, ScannedImageHelper scannedImageHelper, ErrorOutput errorOutput) : base(errorOutput)
+        public SaneScanDriver(SaneWrapper saneWrapper, IFormFactory formFactory, BlankDetector blankDetector, ScannedImageHelper scannedImageHelper, ErrorOutput errorOutput, AutoSaver autoSaver) : base(errorOutput, autoSaver)
         {
             this.saneWrapper = saneWrapper;
             this.formFactory = formFactory;

@@ -22,25 +22,25 @@ namespace NAPS2.Scan.Batch
     public class BatchScanPerformer
     {
         private readonly IScanPerformer scanPerformer;
-        private readonly IPdfExporter pdfExporter;
+        private readonly PdfExporter pdfExporter;
         private readonly IOperationFactory operationFactory;
         private readonly PdfSettingsContainer pdfSettingsContainer;
-        private readonly OcrManager ocrManager;
+        private readonly OcrEngineManager ocrEngineManager;
         private readonly IFormFactory formFactory;
 
-        public BatchScanPerformer(IScanPerformer scanPerformer, IPdfExporter pdfExporter, IOperationFactory operationFactory, PdfSettingsContainer pdfSettingsContainer, OcrManager ocrManager, IFormFactory formFactory)
+        public BatchScanPerformer(IScanPerformer scanPerformer, PdfExporter pdfExporter, IOperationFactory operationFactory, PdfSettingsContainer pdfSettingsContainer, OcrEngineManager ocrEngineManager, IFormFactory formFactory)
         {
             this.scanPerformer = scanPerformer;
             this.pdfExporter = pdfExporter;
             this.operationFactory = operationFactory;
             this.pdfSettingsContainer = pdfSettingsContainer;
-            this.ocrManager = ocrManager;
+            this.ocrEngineManager = ocrEngineManager;
             this.formFactory = formFactory;
         }
 
         public async Task PerformBatchScan(BatchSettings settings, FormBase batchForm, Action<ScannedImage> imageCallback, Action<string> progressCallback, CancellationToken cancelToken)
         {
-            var state = new BatchState(scanPerformer, pdfExporter, operationFactory, pdfSettingsContainer, ocrManager, formFactory)
+            var state = new BatchState(scanPerformer, pdfExporter, operationFactory, pdfSettingsContainer, ocrEngineManager, formFactory)
             {
                 Settings = settings,
                 ProgressCallback = progressCallback,
@@ -54,23 +54,23 @@ namespace NAPS2.Scan.Batch
         private class BatchState
         {
             private readonly IScanPerformer scanPerformer;
-            private readonly IPdfExporter pdfExporter;
+            private readonly PdfExporter pdfExporter;
             private readonly IOperationFactory operationFactory;
             private readonly PdfSettingsContainer pdfSettingsContainer;
-            private readonly OcrManager ocrManager;
+            private readonly OcrEngineManager ocrEngineManager;
             private readonly IFormFactory formFactory;
 
             private ScanProfile profile;
             private ScanParams scanParams;
             private List<List<ScannedImage>> scans;
 
-            public BatchState(IScanPerformer scanPerformer, IPdfExporter pdfExporter, IOperationFactory operationFactory, PdfSettingsContainer pdfSettingsContainer, OcrManager ocrManager, IFormFactory formFactory)
+            public BatchState(IScanPerformer scanPerformer, PdfExporter pdfExporter, IOperationFactory operationFactory, PdfSettingsContainer pdfSettingsContainer, OcrEngineManager ocrEngineManager, IFormFactory formFactory)
             {
                 this.scanPerformer = scanPerformer;
                 this.pdfExporter = pdfExporter;
                 this.operationFactory = operationFactory;
                 this.pdfSettingsContainer = pdfSettingsContainer;
-                this.ocrManager = ocrManager;
+                this.ocrEngineManager = ocrEngineManager;
                 this.formFactory = formFactory;
             }
 
@@ -92,7 +92,7 @@ namespace NAPS2.Scan.Batch
                     DetectPatchCodes = Settings.OutputType == BatchOutputType.MultipleFiles && Settings.SaveSeparator == SaveSeparator.PatchT,
                     NoUI = true,
                     DoOcr = Settings.OutputType == BatchOutputType.Load ? (bool?)null // Use the default behaviour if we don't know what will be done with the images
-                        : GetSavePathExtension().ToLower() == ".pdf" && ocrManager.DefaultParams?.LanguageCode != null,
+                        : GetSavePathExtension().ToLower() == ".pdf" && ocrEngineManager.DefaultParams?.LanguageCode != null,
                     OcrCancelToken = CancelToken
                 };
 
@@ -269,7 +269,7 @@ namespace NAPS2.Scan.Batch
                     var snapshots = images.Select(x => x.Preserve()).ToList();
                     try
                     {
-                        await pdfExporter.Export(subPath, snapshots, pdfSettingsContainer.PdfSettings, ocrManager.DefaultParams, (j, k) => { }, CancelToken);
+                        await pdfExporter.Export(subPath, snapshots, pdfSettingsContainer.PdfSettings, new OcrContext(ocrEngineManager.DefaultParams), (j, k) => { }, CancelToken);
                     }
                     finally
                     {

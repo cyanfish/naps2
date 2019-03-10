@@ -26,10 +26,10 @@ namespace NAPS2.WinForms
         private readonly ChangeTracker changeTracker;
         private readonly IOperationFactory operationFactory;
         private readonly IFormFactory formFactory;
-        private readonly OcrManager ocrManager;
+        private readonly OcrEngineManager ocrEngineManager;
         private readonly OperationProgress operationProgress;
 
-        public WinFormsExportHelper(PdfSettingsContainer pdfSettingsContainer, ImageSettingsContainer imageSettingsContainer, EmailSettingsContainer emailSettingsContainer, DialogHelper dialogHelper, ChangeTracker changeTracker, IOperationFactory operationFactory, IFormFactory formFactory, OcrManager ocrManager, OperationProgress operationProgress)
+        public WinFormsExportHelper(PdfSettingsContainer pdfSettingsContainer, ImageSettingsContainer imageSettingsContainer, EmailSettingsContainer emailSettingsContainer, DialogHelper dialogHelper, ChangeTracker changeTracker, IOperationFactory operationFactory, IFormFactory formFactory, OcrEngineManager ocrEngineManager, OperationProgress operationProgress)
         {
             this.pdfSettingsContainer = pdfSettingsContainer;
             this.imageSettingsContainer = imageSettingsContainer;
@@ -38,7 +38,7 @@ namespace NAPS2.WinForms
             this.changeTracker = changeTracker;
             this.operationFactory = operationFactory;
             this.formFactory = formFactory;
-            this.ocrManager = ocrManager;
+            this.ocrEngineManager = ocrEngineManager;
             this.operationProgress = operationProgress;
         }
 
@@ -79,7 +79,7 @@ namespace NAPS2.WinForms
 
             var pdfSettings = pdfSettingsContainer.PdfSettings;
             pdfSettings.Metadata.Creator = MiscResources.NAPS2;
-            if (op.Start(filename, Placeholders.All.WithDate(DateTime.Now), images, pdfSettings, ocrManager.DefaultParams, email, emailMessage))
+            if (op.Start(filename, Placeholders.All.WithDate(DateTime.Now), images, pdfSettings, new OcrContext(ocrEngineManager.DefaultParams), email, emailMessage))
             {
                 operationProgress.ShowProgress(op);
             }

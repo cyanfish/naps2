@@ -5,14 +5,10 @@ using NAPS2.Config;
 
 namespace NAPS2.ImportExport.Pdf
 {
-    public class PdfSettingsContainer
+    public class PdfSettingsContainer : PdfSettingsProvider
     {
-        private PdfSettings localPdfSettings;
+        public override PdfSettings PdfSettings => LocalPdfSettings ?? UserConfig.Current.PdfSettings ?? new PdfSettings();
 
-        public PdfSettings PdfSettings
-        {
-            get => localPdfSettings ?? UserConfig.Current.PdfSettings ?? new PdfSettings();
-            set => localPdfSettings = value;
-        }
+        public PdfSettings LocalPdfSettings { get; set; }
     }
 }

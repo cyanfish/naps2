@@ -41,7 +41,7 @@ namespace NAPS2.WinForms
 
         private readonly StringWrapper stringWrapper;
         private readonly RecoveryManager recoveryManager;
-        private readonly OcrManager ocrManager;
+        private readonly OcrEngineManager ocrEngineManager;
         private readonly IScanPerformer scanPerformer;
         private readonly IScannedImagePrinter scannedImagePrinter;
         private readonly ChangeTracker changeTracker;
@@ -72,11 +72,11 @@ namespace NAPS2.WinForms
 
         #region Initialization and Culture
 
-        public FDesktop(StringWrapper stringWrapper, RecoveryManager recoveryManager, OcrManager ocrManager, IScanPerformer scanPerformer, IScannedImagePrinter scannedImagePrinter, ChangeTracker changeTracker, StillImage stillImage, IOperationFactory operationFactory, KeyboardShortcutManager ksm, ThumbnailRenderer thumbnailRenderer, WinFormsExportHelper exportHelper, BitmapRenderer bitmapRenderer, ImageRenderer imageRenderer, NotificationManager notify, CultureInitializer cultureInitializer, IWorkerServiceFactory workerServiceFactory, OperationProgress operationProgress, UpdateChecker updateChecker)
+        public FDesktop(StringWrapper stringWrapper, RecoveryManager recoveryManager, OcrEngineManager ocrEngineManager, IScanPerformer scanPerformer, IScannedImagePrinter scannedImagePrinter, ChangeTracker changeTracker, StillImage stillImage, IOperationFactory operationFactory, KeyboardShortcutManager ksm, ThumbnailRenderer thumbnailRenderer, WinFormsExportHelper exportHelper, BitmapRenderer bitmapRenderer, ImageRenderer imageRenderer, NotificationManager notify, CultureInitializer cultureInitializer, IWorkerServiceFactory workerServiceFactory, OperationProgress operationProgress, UpdateChecker updateChecker)
         {
             this.stringWrapper = stringWrapper;
             this.recoveryManager = recoveryManager;
-            this.ocrManager = ocrManager;
+            this.ocrEngineManager = ocrEngineManager;
             this.scanPerformer = scanPerformer;
             this.scannedImagePrinter = scannedImagePrinter;
             this.changeTracker = changeTracker;
@@ -1213,23 +1213,23 @@ namespace NAPS2.WinForms
                 return;
             }
 
-            if (ocrManager.MustUpgrade && !AppConfig.Current.NoUpdatePrompt)
+            if (ocrEngineManager.MustUpgrade && !AppConfig.Current.NoUpdatePrompt)
             {
                 // Re-download a fixed version on Windows XP if needed
                 MessageBox.Show(MiscResources.OcrUpdateAvailable, "", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 var progressForm = FormFactory.Create<FDownloadProgress>();
-                progressForm.QueueFile(ocrManager.EngineToInstall.Component);
+                progressForm.QueueFile(ocrEngineManager.EngineToInstall.Component);
                 progressForm.ShowDialog();
             }
 
-            if (ocrManager.MustInstallPackage)
+            if (ocrEngineManager.MustInstallPackage)
             {
                 const string packages = "\ntesseract-ocr";
                 MessageBox.Show(MiscResources.TesseractNotAvailable + packages, MiscResources.Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            else if (ocrManager.IsReady)
+            else if (ocrEngineManager.IsReady)
             {
-                if (ocrManager.CanUpgrade && !AppConfig.Current.NoUpdatePrompt)
+                if (ocrEngineManager.CanUpgrade && !AppConfig.Current.NoUpdatePrompt)
                 {
                     MessageBox.Show(MiscResources.OcrUpdateAvailable, "", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     FormFactory.Create<FOcrLanguageDownload>().ShowDialog();
@@ -1239,7 +1239,7 @@ namespace NAPS2.WinForms
             else
             {
                 FormFactory.Create<FOcrLanguageDownload>().ShowDialog();
-                if (ocrManager.IsReady)
+                if (ocrEngineManager.IsReady)
                 {
                     FormFactory.Create<FOcrSetup>().ShowDialog();
                 }

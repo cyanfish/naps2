@@ -225,7 +225,7 @@ namespace NAPS2.Images
             {
                 return false;
             }
-            bool ocrEnabled = OcrManager.Default.DefaultParams != null;
+            bool ocrEnabled = OcrEngineManager.Default.DefaultParams != null;
             bool afterScanning = AppConfig.Current.OcrState == OcrState.Enabled && AppConfig.Current.OcrDefaultAfterScanning
                                  || AppConfig.Current.OcrState == OcrState.UserConfig &&
                                  (UserConfig.Current.OcrAfterScanning ?? AppConfig.Current.OcrDefaultAfterScanning);

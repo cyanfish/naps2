@@ -7,6 +7,7 @@ using NAPS2.Operation;
 using NAPS2.Platform;
 using NAPS2.Scan.Exceptions;
 using NAPS2.Images;
+using NAPS2.ImportExport;
 using NAPS2.Scan.Wia.Native;
 using NAPS2.Util;
 
@@ -19,13 +20,13 @@ namespace NAPS2.Scan.Wia
         private readonly OperationProgress operationProgress;
         private readonly ScannedImageHelper scannedImageHelper;
 
-        public WiaScanDriver() : base(ErrorOutput.Default)
+        public WiaScanDriver() : base(ErrorOutput.Default, new AutoSaver())
         {
             operationProgress = OperationProgress.Default;
             scannedImageHelper = new ScannedImageHelper();
         }
 
-        public WiaScanDriver(OperationProgress operationProgress, ScannedImageHelper scannedImageHelper, ErrorOutput errorOutput) : base(errorOutput)
+        public WiaScanDriver(OperationProgress operationProgress, ScannedImageHelper scannedImageHelper, ErrorOutput errorOutput, AutoSaver autoSaver) : base(errorOutput, autoSaver)
         {
             this.operationProgress = operationProgress;
             this.scannedImageHelper = scannedImageHelper;

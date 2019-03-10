@@ -7,10 +7,16 @@ using System.Threading.Tasks;
 using Moq;
 using NAPS2.Images;
 using NAPS2.Images.Storage;
+using NAPS2.ImportExport;
+using NAPS2.ImportExport.Images;
+using NAPS2.ImportExport.Pdf;
+using NAPS2.Ocr;
+using NAPS2.Operation;
 using NAPS2.Scan;
 using NAPS2.Sdk.Tests.Asserts;
 using NAPS2.Sdk.Tests.Mocks;
 using NAPS2.Util;
+using NAPS2.WinForms;
 using Xunit;
 
 namespace NAPS2.Sdk.Tests.Scan
@@ -21,25 +27,17 @@ namespace NAPS2.Sdk.Tests.Scan
         public async Task NoImages()
         {
             var errorOutput = new Mock<ErrorOutput>();
-            var device = new ScanDevice("test_id", "test_name");
-            var driver = new MockScanDriver(errorOutput.Object)
-            {
-                MockDevices = new List<ScanDevice> { device }
-            };
+            var driver = Driver(errorOutput.Object, 0);
 
-            var scanProfile = new ScanProfile
+            var scanProfile = Profile(new AutoSaveSettings
             {
-                Device = device,
-                EnableAutoSave = true,
-                AutoSaveSettings = new AutoSaveSettings
-                {
-                    FilePath = Path.Combine(FolderPath, "test$(n).pdf")
-                }
-            };
+                FilePath = Path.Combine(FolderPath, "test$(n).pdf")
+            });
             var scanParams = new ScanParams();
-            await driver.Scan(scanProfile, scanParams).ToList();
+            var scannedImages = await driver.Scan(scanProfile, scanParams).ToList();
             var files = Folder.GetFiles();
 
+            Assert.Empty(scannedImages);
             Assert.Empty(files);
             errorOutput.VerifyNoOtherCalls();
         }
@@ -48,32 +46,51 @@ namespace NAPS2.Sdk.Tests.Scan
         public async Task OneImageOnePdf()
         {
             var errorOutput = new Mock<ErrorOutput>();
-            var device = new ScanDevice("test_id", "test_name");
-            var driver = new MockScanDriver(errorOutput.Object)
-            {
-                MockDevices = new List<ScanDevice> { device },
-                MockOutput = new List<ScannedImage>
-                {
-                    CreateScannedImage()
-                }
-            };
+            var driver = Driver(errorOutput.Object, 1);
 
-            var scanProfile = new ScanProfile
+            var scanProfile = Profile(new AutoSaveSettings
             {
-                Device = device,
-                EnableAutoSave = true,
-                AutoSaveSettings = new AutoSaveSettings
-                {
-                    FilePath = Path.Combine(FolderPath, "test$(n).pdf")
-                }
-            };
+                FilePath = Path.Combine(FolderPath, "test$(n).pdf")
+            });
             var scanParams = new ScanParams();
-            await driver.Scan(scanProfile, scanParams).ToList();
+            var scannedImages = await driver.Scan(scanProfile, scanParams).ToList();
             var files = Folder.GetFiles();
 
+            Assert.Single(scannedImages);
             Assert.Single(files);
             PdfAsserts.AssertPageCount(1, files[0].FullName);
             errorOutput.VerifyNoOtherCalls();
+        }
+
+        private ScanDevice Device => new ScanDevice("test_id", "test_name");
+
+        private MockScanDriver Driver(ErrorOutput errorOutput, int images) => new MockScanDriver(errorOutput, CreateAutoSaver(errorOutput))
+        {
+            MockDevices = new List<ScanDevice> { Device },
+            MockOutput = Enumerable.Range(0, images).Select(i => CreateScannedImage()).ToList()
+        };
+
+        private ScanProfile Profile(AutoSaveSettings autoSaveSettings) => new ScanProfile
+        {
+            Device = Device,
+            EnableAutoSave = true,
+            AutoSaveSettings = autoSaveSettings
+        };
+
+        private static AutoSaver CreateAutoSaver(ErrorOutput errorOutput)
+        {
+            return new AutoSaver(
+                PdfSettingsProvider.Wrap(new PdfSettings()),
+                ImageSettingsProvider.Wrap(new ImageSettings()),
+                new OcrEngineManager(),
+                new OcrRequestQueue(new OcrEngineManager(), new StubOperationProgress()),
+                errorOutput,
+                new StubDialogHelper(),
+                new StubOperationProgress(),
+                null,
+                new PdfSharpExporter(new MemoryStreamRenderer()),
+                new StubOverwritePrompt(),
+                new BitmapRenderer());
         }
 
         private ScannedImage CreateScannedImage()

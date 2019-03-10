@@ -68,7 +68,7 @@ namespace NAPS2.WinForms
                 SinglePageTiff = cbSinglePageTiff.Checked
             };
 
-            imageSettingsContainer.ImageSettings = imageSettings;
+            imageSettingsContainer.LocalImageSettings = imageSettings;
             UserConfig.Current.ImageSettings = cbRememberSettings.Checked ? imageSettings : null;
             UserConfig.Manager.Save();
 

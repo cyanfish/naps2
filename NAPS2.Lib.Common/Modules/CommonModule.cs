@@ -16,6 +16,7 @@ using NAPS2.Scan.Wia;
 using NAPS2.Util;
 using NAPS2.WinForms;
 using NAPS2.Worker;
+using Ninject;
 using Ninject.Modules;
 using ILogger = NAPS2.Logging.ILogger;
 
@@ -32,10 +33,10 @@ namespace NAPS2.DI.Modules
             Bind<IPdfRenderer>().To<GhostscriptPdfRenderer>().InSingletonScope();
 
             // Export
-            Bind<IPdfExporter>().To<PdfSharpExporter>();
+            Bind<PdfExporter>().To<PdfSharpExporter>();
             Bind<IScannedImagePrinter>().To<PrintDocumentPrinter>();
             Bind<IEmailProviderFactory>().To<NinjectEmailProviderFactory>();
-            Bind<OcrManager>().ToMethod(ctx => OcrManager.Default);
+            Bind<OcrEngineManager>().ToMethod(ctx => OcrEngineManager.Default);
             Bind<OcrRequestQueue>().ToSelf().InSingletonScope();
 
             // Scan
@@ -52,7 +53,9 @@ namespace NAPS2.DI.Modules
 
             // Config
             Bind<PdfSettingsContainer>().ToSelf().InSingletonScope();
+            Bind<PdfSettingsProvider>().ToMethod(ctx => ctx.Kernel.Get<PdfSettingsContainer>());
             Bind<ImageSettingsContainer>().ToSelf().InSingletonScope();
+            Bind<ImageSettingsProvider>().ToMethod(ctx => ctx.Kernel.Get<ImageSettingsContainer>());
             Bind<EmailSettingsContainer>().ToSelf().InSingletonScope();
 
             // Host
@@ -66,7 +69,7 @@ namespace NAPS2.DI.Modules
             Bind<ChangeTracker>().ToSelf().InSingletonScope();
             Bind<StillImage>().ToSelf().InSingletonScope();
             Bind<BlankDetector>().To<ThresholdBlankDetector>();
-            Bind<IAutoSave>().To<AutoSave>();
+            Bind<AutoSaver>().ToSelf();
 
             StaticConfiguration.Initialize();
         }

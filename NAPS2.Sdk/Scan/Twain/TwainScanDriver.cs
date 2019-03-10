@@ -5,6 +5,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using NAPS2.Platform;
 using NAPS2.Images;
+using NAPS2.ImportExport;
 using NAPS2.Util;
 using NAPS2.Worker;
 
@@ -17,13 +18,13 @@ namespace NAPS2.Scan.Twain
         private readonly TwainWrapper twainWrapper;
         private readonly ScannedImageHelper scannedImageHelper;
 
-        public TwainScanDriver() : base(ErrorOutput.Default)
+        public TwainScanDriver() : base(ErrorOutput.Default, new AutoSaver())
         {
             twainWrapper = new TwainWrapper();
             scannedImageHelper = new ScannedImageHelper();
         }
 
-        public TwainScanDriver(TwainWrapper twainWrapper, ScannedImageHelper scannedImageHelper, ErrorOutput errorOutput) : base(errorOutput)
+        public TwainScanDriver(TwainWrapper twainWrapper, ScannedImageHelper scannedImageHelper, ErrorOutput errorOutput, AutoSaver autoSaver) : base(errorOutput, autoSaver)
         {
             this.twainWrapper = twainWrapper;
             this.scannedImageHelper = scannedImageHelper;
