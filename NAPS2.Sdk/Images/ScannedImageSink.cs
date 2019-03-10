@@ -63,8 +63,14 @@ namespace NAPS2.Images
         {
             lock (this)
             {
-                images.Last().SetResult(image);
+                var last = images.Last();
+                // Despite the lock, images.Add needs to happen before SetResult to avoid a race condition.
+                // Otherwise, SetResult synchronously continues the Next() method, and user code will run.
+                // Then if Next() is called again, it will be able to get the lock because it's actually on the same
+                // thread that holds the lock in PutImage!
+                // Yet another "gotcha" of async/await.
                 images.Add(new TaskCompletionSource<ScannedImage>());
+                last.SetResult(image);
             }
         }
 

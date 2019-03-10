@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using NAPS2.Images;
 using NAPS2.Images.Storage;
@@ -74,6 +75,29 @@ namespace NAPS2.Sdk.Tests.Images
             await source.Next();
             await source.Next();
             await Assert.ThrowsAsync<Exception>(() => source.Next());
+        }
+
+        [Fact]
+        public async Task RaceCondition()
+        {
+            var wait = new ManualResetEvent(false);
+
+            var sink = new ScannedImageSink();
+            var source = sink.AsSource();
+            var t1 = Task.Run(async () =>
+            {
+                wait.Set();
+                Assert.NotNull(await source.Next());
+                Assert.Null(await source.Next());
+            });
+            var t2 = Task.Run(() =>
+            {
+                wait.WaitOne();
+                sink.PutImage(CreateScannedImage());
+                sink.SetCompleted();
+            });
+            await t1;
+            await t2;
         }
 
         private ScannedImage CreateScannedImage()
