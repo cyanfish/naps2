@@ -16,7 +16,9 @@ namespace NAPS2.Images.Transforms
             .GetExecutingAssembly()
             .GetTypes()
             .Where(t => typeof(Transform).IsAssignableFrom(t))
-            .ToList(); private static readonly Dictionary<(Type, Type), (object, MethodInfo)> Transformers = new Dictionary<(Type, Type), (object, MethodInfo)>();
+            .ToList();
+
+        private static readonly Dictionary<(Type, Type), (object, MethodInfo)> Transformers = new Dictionary<(Type, Type), (object, MethodInfo)>();
         
         /// <summary>
         /// Enumerates all methods on transformerObj that have a TransformerAttribute and registers them

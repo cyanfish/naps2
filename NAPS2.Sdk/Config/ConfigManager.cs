@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Xml.Serialization;
+using NAPS2.Images.Transforms;
 using NAPS2.Logging;
 
 namespace NAPS2.Config
@@ -65,7 +66,7 @@ namespace NAPS2.Config
             {
                 using (Stream strFile = File.Open(primaryConfigPath, FileMode.Create))
                 {
-                    var serializer = new XmlSerializer(typeof(T));
+                    var serializer = new XmlSerializer(typeof(T), Transform.KnownTransformTypes.ToArray());
                     // TODO: Rather than overwrite, do the write-to-temp/move song-and-dance to avoid corruption
                     serializer.Serialize(strFile, config);
                 }
@@ -74,7 +75,7 @@ namespace NAPS2.Config
 
         protected virtual T Deserialize(Stream configFileStream)
         {
-            var serializer = new XmlSerializer(typeof(T));
+            var serializer = new XmlSerializer(typeof(T), Transform.KnownTransformTypes.ToArray());
             return (T)serializer.Deserialize(configFileStream);
         }
 
