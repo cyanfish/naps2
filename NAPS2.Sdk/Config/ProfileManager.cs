@@ -6,6 +6,7 @@ using System.Xml.Serialization;
 using NAPS2.Scan;
 using NAPS2.Scan.Twain;
 using NAPS2.Scan.Wia;
+using NAPS2.Util;
 
 namespace NAPS2.Config
 {
@@ -19,8 +20,8 @@ namespace NAPS2.Config
             set => _current = value ?? throw new ArgumentNullException(nameof(value));
         }
 
-        public ProfileManager(string indexFileName, string recoveryFolderPath, string secondaryFolder, Func<List<ScanProfile>> factory)
-            : base(indexFileName, recoveryFolderPath, secondaryFolder, factory)
+        public ProfileManager(string indexFileName, string primaryFolder, string secondaryFolder)
+            : base(indexFileName, primaryFolder, secondaryFolder, () => new List<ScanProfile>(), new ProfileSerializer())
         {
         }
 
@@ -49,6 +50,12 @@ namespace NAPS2.Config
         public override void Load()
         {
             base.Load();
+            var upgradedFrom = Config.Select(x => x.UpgradedFrom).FirstOrDefault();
+            if (upgradedFrom != null)
+            {
+                // We've upgraded to a new profiles version, so make a backup in case the user downgrades.
+                File.Copy(primaryConfigPath, $"{primaryConfigPath}.v{upgradedFrom}.bak", true);
+            }
             if (AppConfig.Current.LockSystemProfiles)
             {
                 var systemProfiles = TryLoadConfig(secondaryConfigPath);
@@ -93,33 +100,40 @@ namespace NAPS2.Config
                 }
             }
         }
+    }
 
-        protected override List<ScanProfile> Deserialize(Stream configFileStream)
+    public class ProfileSerializer : VersionedSerializer<List<ScanProfile>>
+    {
+        protected override void InternalSerialize(Stream stream, List<ScanProfile> obj) => XmlSerialize(stream, obj);
+
+        protected override List<ScanProfile> InternalDeserialize(Stream stream, string rootName, int version)
         {
             try
             {
-                return ReadProfiles(configFileStream);
+                return ReadProfiles(stream);
             }
             catch (InvalidOperationException)
             {
                 // Continue, and try to read using the old serializer now
-                configFileStream.Seek(0, SeekOrigin.Begin);
+                stream.Seek(0, SeekOrigin.Begin);
             }
 
             try
             {
-                return ReadOldProfiles(configFileStream);
+                return ReadOldProfiles(stream);
             }
             catch (InvalidOperationException)
             {
                 // Continue, and try to read using the older serializer now
-                configFileStream.Seek(0, SeekOrigin.Begin);
+                stream.Seek(0, SeekOrigin.Begin);
             }
 
-            return ReadVeryOldProfiles(configFileStream);
+            return ReadVeryOldProfiles(stream);
         }
 
-        private static List<ScanProfile> ReadProfiles(Stream configFileStream)
+        protected override IEnumerable<Type> KnownTypes() => null;
+
+        private List<ScanProfile> ReadProfiles(Stream configFileStream)
         {
             var serializer = new XmlSerializer(typeof(List<ScanProfile>));
             var settingsList = (List<ScanProfile>)serializer.Deserialize(configFileStream);
@@ -133,15 +147,15 @@ namespace NAPS2.Config
                         settings.UseNativeUI = true;
                     }
                     settings.Version = ScanProfile.CURRENT_VERSION;
+                    settings.UpgradedFrom = 1;
                 }
             }
             return settingsList;
         }
 
-        private static List<ScanProfile> ReadOldProfiles(Stream configFileStream)
+        private List<ScanProfile> ReadOldProfiles(Stream configFileStream)
         {
-            var serializer = new XmlSerializer(typeof(List<OldExtendedScanSettings>));
-            var profiles = (List<OldExtendedScanSettings>)serializer.Deserialize(configFileStream);
+            var profiles = XmlDeserialize<List<OldExtendedScanSettings>>(configFileStream);
             // Upgrade from v1 to v2 if necessary
             foreach (var settings in profiles)
             {
@@ -157,6 +171,7 @@ namespace NAPS2.Config
             return profiles.Select(profile => new ScanProfile
             {
                 Version = ScanProfile.CURRENT_VERSION,
+                UpgradedFrom = 0,
                 Device = profile.Device,
                 DriverName = profile.DriverName,
                 DisplayName = profile.DisplayName,
@@ -179,11 +194,7 @@ namespace NAPS2.Config
         private List<ScanProfile> ReadVeryOldProfiles(Stream configFileStream)
         {
             // For compatibility with profiles.xml from old versions, load OldScanSettings instead of ScanProfile (which is used exclusively now)
-            var deprecatedSerializer = new XmlSerializer(typeof (List<OldScanSettings>));
-            var profiles = (List<OldScanSettings>) deprecatedSerializer.Deserialize(configFileStream);
-
-            // Okay, we've read the old version of profiles.txt. Since we're going to eventually change it to the new version, make a backup in case the user downgrades.
-            File.Copy(primaryConfigPath, primaryConfigPath + ".bak", true);
+            var profiles = XmlDeserialize<List<OldScanSettings>>(configFileStream);
 
             return profiles.Select(profile =>
             {
@@ -198,6 +209,7 @@ namespace NAPS2.Config
                 var result = new ScanProfile
                 {
                     Version = ScanProfile.CURRENT_VERSION,
+                    UpgradedFrom = 0,
                     Device = profile.Device,
                     DriverName = profile.DriverName,
                     DisplayName = profile.DisplayName,

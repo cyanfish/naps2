@@ -5,6 +5,7 @@ using System.Linq;
 using System.Xml.Serialization;
 using NAPS2.Images.Transforms;
 using NAPS2.Logging;
+using NAPS2.Util;
 
 namespace NAPS2.Config
 {
@@ -14,17 +15,19 @@ namespace NAPS2.Config
         protected readonly string secondaryConfigPath;
 
         private readonly Func<T> factory;
+        private readonly ISerializer<T> serializer;
 
         private T config;
 
-        public ConfigManager(string indexFileName, string recoveryFolderPath, string secondaryFolder, Func<T> factory)
+        public ConfigManager(string indexFileName, string primaryFolder, string secondaryFolder, Func<T> factory, ISerializer<T> serializer)
         {
-            primaryConfigPath = Path.Combine(recoveryFolderPath, indexFileName);
+            primaryConfigPath = Path.Combine(primaryFolder, indexFileName);
             if (secondaryFolder != null)
             {
                 secondaryConfigPath = Path.Combine(secondaryFolder, indexFileName);
             }
             this.factory = factory;
+            this.serializer = serializer;
         }
 
         public T Config
@@ -64,19 +67,9 @@ namespace NAPS2.Config
         {
             lock (this)
             {
-                using (Stream strFile = File.Open(primaryConfigPath, FileMode.Create))
-                {
-                    var serializer = new XmlSerializer(typeof(T), Transform.KnownTransformTypes.ToArray());
-                    // TODO: Rather than overwrite, do the write-to-temp/move song-and-dance to avoid corruption
-                    serializer.Serialize(strFile, config);
-                }
+                // TODO: Rather than overwrite, do the write-to-temp/move song-and-dance to avoid corruption
+                serializer.SerializeToFile(primaryConfigPath, config);
             }
-        }
-
-        protected virtual T Deserialize(Stream configFileStream)
-        {
-            var serializer = new XmlSerializer(typeof(T), Transform.KnownTransformTypes.ToArray());
-            return (T)serializer.Deserialize(configFileStream);
         }
 
         protected T TryLoadConfig(string configPath)
@@ -85,10 +78,7 @@ namespace NAPS2.Config
             {
                 try
                 {
-                    using (Stream configFileStream = File.OpenRead(configPath))
-                    {
-                        return Deserialize(configFileStream);
-                    }
+                    return serializer.DeserializeFromFile(configPath);
                 }
                 catch (Exception ex)
                 {

@@ -1,0 +1,51 @@
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Xml.Linq;
+using System.Xml.Serialization;
+
+namespace NAPS2.Util
+{
+    public abstract class VersionedSerializer<T> : ISerializer<T>
+    {
+        public void Serialize(Stream stream, T obj)
+        {
+            InternalSerialize(stream, obj);
+        }
+
+        public T Deserialize(Stream stream)
+        {
+            var doc = XDocument.Load(stream);
+            stream.Seek(0, SeekOrigin.Begin);
+            var rootName = doc.Root?.Name.ToString();
+            var versionElement = doc.Root?.Descendants("Version").FirstOrDefault();
+            int.TryParse(versionElement?.Value, out var version);
+            return InternalDeserialize(stream, rootName, version);
+        }
+
+        protected abstract void InternalSerialize(Stream stream, T obj);
+
+        protected abstract T InternalDeserialize(Stream stream, string rootName, int version);
+
+        protected abstract IEnumerable<Type> KnownTypes();
+
+        protected void XmlSerialize(Stream stream, T obj)
+        {
+            var xmlSerializer = new XmlSerializer(typeof(T), KnownTypes().ToArray());
+            xmlSerializer.Serialize(stream, obj);
+        }
+
+        protected T XmlDeserialize(Stream stream)
+        {
+            var xmlSerializer = new XmlSerializer(typeof(T), KnownTypes().ToArray());
+            return (T)xmlSerializer.Deserialize(stream);
+        }
+
+        protected T2 XmlDeserialize<T2>(Stream stream)
+        {
+            var xmlSerializer = new XmlSerializer(typeof(T2), KnownTypes().ToArray());
+            return (T2)xmlSerializer.Deserialize(stream);
+        }
+    }
+}

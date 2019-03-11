@@ -53,7 +53,7 @@ namespace NAPS2.Images.Storage
                 folder.Create();
                 folderLockFile = new FileInfo(Path.Combine(RecoveryFolderPath, LOCK_FILE_NAME));
                 folderLock = folderLockFile.Open(FileMode.CreateNew, FileAccess.Write, FileShare.None);
-                indexConfigManager = new ConfigManager<RecoveryIndex>("index.xml", RecoveryFolderPath, null, RecoveryIndex.Create);
+                indexConfigManager = new ConfigManager<RecoveryIndex>("index.xml", RecoveryFolderPath, null, RecoveryIndex.Create, new RecoveryIndexSerializer());
                 folderCreated = true;
             }
         }

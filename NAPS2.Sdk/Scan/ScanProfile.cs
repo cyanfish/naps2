@@ -66,6 +66,9 @@ namespace NAPS2.Scan
 
         public int Version { get; set; }
 
+        [XmlIgnore]
+        public int? UpgradedFrom { get; set; }
+
         public bool UseNativeUI { get; set; }
 
         public ScanScale AfterScanScale { get; set; }

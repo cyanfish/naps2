@@ -30,9 +30,9 @@ namespace NAPS2.DI
             Debug.Listeners.Add(new NLogTraceListener());
 #endif
 
-            ProfileManager.Current = new ProfileManager("profiles.xml", Paths.AppData, Paths.Executable, () => new List<ScanProfile>());
-            UserConfig.Manager = new ConfigManager<UserConfig>("config.xml", Paths.AppData, Paths.Executable, UserConfig.Create);
-            AppConfig.Manager = new ConfigManager<AppConfig>("appsettings.xml", Paths.Executable, null, AppConfig.Create);
+            ProfileManager.Current = new ProfileManager("profiles.xml", Paths.AppData, Paths.Executable);
+            UserConfig.Manager = new ConfigManager<UserConfig>("config.xml", Paths.AppData, Paths.Executable, UserConfig.Create, new DefaultSerializer<UserConfig>());
+            AppConfig.Manager = new ConfigManager<AppConfig>("appsettings.xml", Paths.Executable, null, AppConfig.Create, new DefaultSerializer<AppConfig>());
 
             var customPath = AppConfig.Current.ComponentsPath;
             var basePath = string.IsNullOrWhiteSpace(customPath)

@@ -2,9 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Xml.Serialization;
 using NAPS2.Config;
-using NAPS2.Images.Transforms;
 
 namespace NAPS2.Recovery
 {
@@ -13,16 +11,10 @@ namespace NAPS2.Recovery
         private const string INDEX_FILE_NAME = "index.xml";
 
         public RecoveryIndexManager(DirectoryInfo recoveryFolder)
-            : base(INDEX_FILE_NAME, recoveryFolder.FullName, null, () => new RecoveryIndex { Version = RecoveryIndex.CURRENT_VERSION })
+            : base(INDEX_FILE_NAME, recoveryFolder.FullName, null, () => new RecoveryIndex { Version = RecoveryIndex.CURRENT_VERSION }, new RecoveryIndexSerializer())
         {
         }
 
         public RecoveryIndex Index => Config;
-
-        protected override RecoveryIndex Deserialize(Stream configFileStream)
-        {
-            var serializer = new XmlSerializer(typeof(RecoveryIndex), Transform.KnownTransformTypes.ToArray());
-            return (RecoveryIndex)serializer.Deserialize(configFileStream);
-        }
     }
 }

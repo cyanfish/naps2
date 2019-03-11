@@ -201,6 +201,7 @@
     <Compile Include="Config\OcrState.cs" />
     <Compile Include="Config\SaveButtonDefaultAction.cs" />
     <Compile Include="Platform\DefaultRuntimeCompat.cs" />
+    <Compile Include="Recovery\RecoveryIndexSerializer.cs" />
     <Compile Include="Scan\Exceptions\DriverNotSupportedException.cs" />
     <Compile Include="Images\ScannedImageSource.cs" />
     <Compile Include="Images\Storage\GdiTransformers.cs" />
@@ -273,6 +274,7 @@
     <Compile Include="Util\IInvoker.cs" />
     <Compile Include="Util\ImageExtensions.cs" />
     <Compile Include="Util\Invoker.cs" />
+    <Compile Include="Util\ISerializer.cs" />
     <Compile Include="Util\NaturalStringComparer.cs" />
     <Compile Include="Util\ProgressHandler.cs" />
     <Compile Include="Util\SecureString.cs" />
@@ -282,6 +284,9 @@
     <Compile Include="Util\StubOverwritePrompt.cs" />
     <Compile Include="Util\TaskExtensions.cs" />
     <Compile Include="Util\TestingContext.cs" />
+    <Compile Include="Util\SerializerExtensions.cs" />
+    <Compile Include="Util\DefaultSerializer.cs" />
+    <Compile Include="Util\VersionedSerializer.cs" />
     <Compile Include="Util\WebClientExtensions.cs" />
     <Compile Include="Util\Win32Window.cs" />
     <Compile Include="Logging\WindowsEventLogger.cs" />
