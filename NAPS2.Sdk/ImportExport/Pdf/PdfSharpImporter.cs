@@ -41,7 +41,7 @@ namespace NAPS2.ImportExport.Pdf
         public ScannedImageSource Import(string filePath, ImportParams importParams, ProgressHandler progressCallback, CancellationToken cancelToken)
         {
             var sink = new ScannedImageSink();
-            Task.Factory.StartNew(async () =>
+            Task.Run(async () =>
             {
                 if (cancelToken.IsCancellationRequested)
                 {
@@ -110,7 +110,7 @@ namespace NAPS2.ImportExport.Pdf
                 {
                     sink.SetCompleted();
                 }
-            }, TaskCreationOptions.LongRunning);
+            });
             return sink.AsSource();
         }
 

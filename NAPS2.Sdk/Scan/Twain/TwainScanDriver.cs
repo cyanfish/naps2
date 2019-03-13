@@ -57,7 +57,7 @@ namespace NAPS2.Scan.Twain
 
         protected override async Task ScanInternal(ScannedImageSink sink, ScanDevice scanDevice, ScanProfile scanProfile, ScanParams scanParams, IntPtr dialogParent, CancellationToken cancelToken)
         {
-            await Task.Factory.StartNew(async () =>
+            await Task.Run(async () =>
             {
                 if (UseWorker(scanProfile))
                 {
@@ -76,7 +76,7 @@ namespace NAPS2.Scan.Twain
                 {
                     twainWrapper.Scan(dialogParent, scanDevice, scanProfile, scanParams, cancelToken, sink, scannedImageHelper.RunBackgroundOcr);
                 }
-            }, TaskCreationOptions.LongRunning).Unwrap();
+            });
         }
     }
 }

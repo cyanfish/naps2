@@ -73,7 +73,7 @@ namespace NAPS2.ImportExport
             }
 
             var snapshots = imagesToPrint.Select(x => x.Preserve()).ToList();
-            return await Task.Factory.StartNew(() =>
+            return await Task.Run(() =>
             {
                 try
                 {
@@ -121,7 +121,7 @@ namespace NAPS2.ImportExport
                 {
                     snapshots.ForEach(s => s.Dispose());
                 }
-            }, TaskCreationOptions.LongRunning);
+            });
         }
     }
 }

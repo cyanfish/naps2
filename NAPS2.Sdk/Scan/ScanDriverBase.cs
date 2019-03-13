@@ -109,7 +109,7 @@ namespace NAPS2.Scan
             }
 
             var sink = new ScannedImageSink();
-            Task.Factory.StartNew(async () =>
+            Task.Run(async () =>
             {
                 ScanDriverException error = null;
                 try
@@ -168,7 +168,7 @@ namespace NAPS2.Scan
                         sink.SetCompleted();
                     }
                 }
-            }, TaskCreationOptions.LongRunning);
+            });
             return AutoSave(sink, scanParams, scanProfile);
         }
 

@@ -48,7 +48,7 @@ namespace NAPS2.ImportExport.Pdf
 
         public override async Task<bool> Export(string path, ICollection<ScannedImage.Snapshot> snapshots, PdfSettings settings, OcrContext ocrContext, ProgressHandler progressCallback, CancellationToken cancelToken)
         {
-            return await Task.Factory.StartNew(() =>
+            return await Task.Run(() =>
             {
                 var forced = AppConfig.Current.ForcePdfCompat;
                 var compat = forced == PdfCompat.Default ? settings.Compat : forced;
@@ -129,7 +129,7 @@ namespace NAPS2.ImportExport.Pdf
                 PathHelper.EnsureParentDirExists(path);
                 document.Save(path);
                 return true;
-            }, TaskCreationOptions.LongRunning);
+            });
         }
 
         private bool BuildDocumentWithoutOcr(ProgressHandler progressCallback, CancellationToken cancelToken, PdfDocument document, PdfCompat compat, ICollection<ScannedImage.Snapshot> snapshots)

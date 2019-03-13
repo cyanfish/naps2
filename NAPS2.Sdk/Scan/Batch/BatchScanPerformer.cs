@@ -125,7 +125,7 @@ namespace NAPS2.Scan.Batch
 
             private async Task Input()
             {
-                await Task.Factory.StartNew(async () =>
+                await Task.Run(async () =>
                 {
                     scans = new List<List<ScannedImage>>();
 
@@ -163,7 +163,7 @@ namespace NAPS2.Scan.Batch
                             CancelToken.ThrowIfCancellationRequested();
                         } while (PromptForNextScan());
                     }
-                }, TaskCreationOptions.LongRunning).Unwrap();
+                });
             }
 
             private void ThreadSleepWithCancel(TimeSpan sleepDuration, CancellationToken cancelToken)

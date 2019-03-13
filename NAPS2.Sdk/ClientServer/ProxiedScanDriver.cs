@@ -47,7 +47,7 @@ namespace NAPS2.ClientServer
                 throw new InvalidOperationException("ScanProfile.ProxyConfig must be specified to use ProxiedScanDriver.");
             }
 
-            return Task.Factory.StartNew(async () =>
+            return Task.Run(async () =>
             {
                 try
                 {
@@ -120,7 +120,7 @@ namespace NAPS2.ClientServer
                 {
                     Log.ErrorException("Error scanning with proxy", e);
                 }
-            }, TaskCreationOptions.LongRunning).Unwrap();
+            });
         }
     }
 }

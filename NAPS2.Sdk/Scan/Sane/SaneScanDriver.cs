@@ -221,7 +221,7 @@ namespace NAPS2.Scan.Sane
 
         private async Task<(ScannedImage, bool)> Transfer(Lazy<KeyValueScanOptions> options, int pageNumber, ScanProfile scanProfile, ScanParams scanParams, ScanDevice scanDevice, CancellationToken cancelToken)
         {
-            return await Task.Factory.StartNew(() =>
+            return await Task.Run(() =>
             {
                 Stream stream;
                 if (scanParams.NoUI)
@@ -272,7 +272,7 @@ namespace NAPS2.Scan.Sane
                         return (image, false);
                     }
                 }
-            }, TaskCreationOptions.LongRunning);
+            });
         }
     }
 }

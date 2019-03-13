@@ -68,7 +68,7 @@ namespace NAPS2.WinForms
 
         private void FScanProgress_Shown(object sender, EventArgs e)
         {
-            Task.Factory.StartNew(async () =>
+            Task.Run(async () =>
             {
                 try
                 {
@@ -91,7 +91,7 @@ namespace NAPS2.WinForms
                     DialogResult = CancelToken.IsCancellationRequested ? DialogResult.Cancel : DialogResult.OK;
                     Close();
                 });
-            }, TaskCreationOptions.LongRunning);
+            });
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
