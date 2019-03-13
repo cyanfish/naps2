@@ -13,6 +13,6 @@ namespace NAPS2.Recovery
 
         protected override RecoveryIndex InternalDeserialize(Stream stream, string rootName, int version) => XmlDeserialize(stream);
 
-        protected override IEnumerable<Type> KnownTypes() => Transform.KnownTransformTypes;
+        protected override IEnumerable<Type> KnownTypes => Transform.KnownTransformTypes;
     }
 }

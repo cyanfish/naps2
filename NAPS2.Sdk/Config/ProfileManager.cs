@@ -131,7 +131,7 @@ namespace NAPS2.Config
             return ReadVeryOldProfiles(stream);
         }
 
-        protected override IEnumerable<Type> KnownTypes() => null;
+        protected override IEnumerable<Type> KnownTypes => null;
 
         private List<ScanProfile> ReadProfiles(Stream configFileStream)
         {

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text;
 
 namespace NAPS2.Util
 {
@@ -24,6 +25,11 @@ namespace NAPS2.Util
             }
         }
 
+        public static string SerializeToString<T>(this ISerializer<T> serializer, T obj)
+        {
+            return Encoding.UTF8.GetString(serializer.SerializeToBytes(obj));
+        }
+
         public static T DeserializeFromFile<T>(this ISerializer<T> serializer, string path)
         {
             using (var stream = File.Open(path, FileMode.Open))
@@ -38,6 +44,11 @@ namespace NAPS2.Util
             {
                 return serializer.Deserialize(stream);
             }
+        }
+
+        public static T DeserializeFromString<T>(this ISerializer<T> serializer, string str)
+        {
+            return serializer.DeserializeFromBytes(Encoding.UTF8.GetBytes(str));
         }
     }
 }

@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
-using System.Text;
+using System.Text.RegularExpressions;
 
 namespace NAPS2.Util
 {
@@ -11,7 +10,11 @@ namespace NAPS2.Util
     /// </summary>
     public static class TestingContext
     {
-        public static bool IsTesting => Assembly.GetEntryAssembly() == null;
+        private static readonly Regex TestingAssemblyRegex = new Regex("NUnit|XUnit", RegexOptions.IgnoreCase);
+
+        private static readonly Lazy<bool> Testing = new Lazy<bool>(() => AppDomain.CurrentDomain.GetAssemblies().Any(x => TestingAssemblyRegex.IsMatch(x.FullName)));
+
+        public static bool IsTesting => Testing.Value;
 
         /// <summary>
         /// If testing, throws an exception.

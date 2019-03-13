@@ -28,24 +28,26 @@ namespace NAPS2.Util
 
         protected abstract T InternalDeserialize(Stream stream, string rootName, int version);
 
-        protected abstract IEnumerable<Type> KnownTypes();
+        protected abstract IEnumerable<Type> KnownTypes { get; }
 
         protected void XmlSerialize(Stream stream, T obj)
         {
-            var xmlSerializer = new XmlSerializer(typeof(T), KnownTypes().ToArray());
+            var xmlSerializer = new XmlSerializer(typeof(T), KnownTypesArray);
             xmlSerializer.Serialize(stream, obj);
         }
 
         protected T XmlDeserialize(Stream stream)
         {
-            var xmlSerializer = new XmlSerializer(typeof(T), KnownTypes().ToArray());
+            var xmlSerializer = new XmlSerializer(typeof(T), KnownTypesArray);
             return (T)xmlSerializer.Deserialize(stream);
         }
 
         protected T2 XmlDeserialize<T2>(Stream stream)
         {
-            var xmlSerializer = new XmlSerializer(typeof(T2), KnownTypes().ToArray());
+            var xmlSerializer = new XmlSerializer(typeof(T2), KnownTypesArray);
             return (T2)xmlSerializer.Deserialize(stream);
         }
+
+        private Type[] KnownTypesArray => KnownTypes?.ToArray() ?? new Type[] { };
     }
 }
