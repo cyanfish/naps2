@@ -930,6 +930,16 @@ namespace NAPS2.WinForms
             }
         }
 
+        private void OpenAbout()
+        {
+            FormFactory.Create<FAbout>().ShowDialog();
+        }
+
+        private void OpenSettings()
+        {
+            // FormFactory.Create<FSettings>().ShowDialog();
+        }
+
         #endregion
 
         #region Actions - Save/Email/Import
@@ -1033,7 +1043,7 @@ namespace NAPS2.WinForms
             ksm.Assign("Ctrl+Down", MoveDown);
             ksm.Assign("Ctrl+Right", MoveDown);
             ksm.Assign("Ctrl+Shift+Del", tsClear);
-            ksm.Assign("F1", tsAbout);
+            ksm.Assign("F1", OpenAbout);
             ksm.Assign("Ctrl+OemMinus", btnZoomOut);
             ksm.Assign("Ctrl+Oemplus", btnZoomIn);
             ksm.Assign("Del", ctxDelete);
@@ -1045,7 +1055,7 @@ namespace NAPS2.WinForms
 
             var ks = UserConfig.Current.KeyboardShortcuts ?? AppConfig.Current.KeyboardShortcuts ?? new KeyboardShortcuts();
 
-            ksm.Assign(ks.About, tsAbout);
+            ksm.Assign(ks.About, OpenAbout);
             ksm.Assign(ks.BatchScan, tsBatchScan);
             ksm.Assign(ks.Clear, tsClear);
             ksm.Assign(ks.Delete, tsDelete);
@@ -1364,7 +1374,12 @@ namespace NAPS2.WinForms
 
         private void tsAbout_Click(object sender, EventArgs e)
         {
-            FormFactory.Create<FAbout>().ShowDialog();
+            OpenAbout();
+        }
+
+        private void tsSettings_Click(object sender, EventArgs e)
+        {
+            OpenSettings();
         }
 
         #endregion

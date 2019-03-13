@@ -6188,6 +6188,8 @@
     <None Include="Icons\arrow_up.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Icons\cog.png" />
+    <None Include="Icons\cog-small.png" />
     <Content Include="Icons\wireless16.png" />
     <None Include="Icons\btn_donate_LG.gif" />
     <None Include="Icons\application_cascade.png" />

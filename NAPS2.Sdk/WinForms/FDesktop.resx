@@ -238,7 +238,7 @@
     <value>thumbnailList1</value>
   </data>
   <data name="&gt;&gt;thumbnailList1.Type" xml:space="preserve">
-    <value>NAPS2.WinForms.ThumbnailList, NAPS2.Core, Version=5.5.0.37941, Culture=neutral, PublicKeyToken=null</value>
+    <value>NAPS2.WinForms.ThumbnailList, NAPS2.Core, Version=6.0.4.41373, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;thumbnailList1.Parent" xml:space="preserve">
     <value>toolStripContainer1.ContentPanel</value>
@@ -442,69 +442,6 @@
   <data name="toolStripSeparator4.Size" type="System.Drawing.Size, System.Drawing">
     <value>6, 54</value>
   </data>
-  <data name="tsView.Size" type="System.Drawing.Size, System.Drawing">
-    <value>185, 22</value>
-  </data>
-  <data name="tsView.Text" xml:space="preserve">
-    <value>&amp;View</value>
-  </data>
-  <data name="toolStripSeparator6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>182, 6</value>
-  </data>
-  <data name="tsCrop.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
-    <value>None</value>
-  </data>
-  <data name="tsCrop.Size" type="System.Drawing.Size, System.Drawing">
-    <value>185, 22</value>
-  </data>
-  <data name="tsCrop.Text" xml:space="preserve">
-    <value>&amp;Crop</value>
-  </data>
-  <data name="tsBrightnessContrast.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
-    <value>None</value>
-  </data>
-  <data name="tsBrightnessContrast.Size" type="System.Drawing.Size, System.Drawing">
-    <value>185, 22</value>
-  </data>
-  <data name="tsBrightnessContrast.Text" xml:space="preserve">
-    <value>&amp;Brightness / Contrast</value>
-  </data>
-  <data name="tsHueSaturation.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
-    <value>None</value>
-  </data>
-  <data name="tsHueSaturation.Size" type="System.Drawing.Size, System.Drawing">
-    <value>185, 22</value>
-  </data>
-  <data name="tsHueSaturation.Text" xml:space="preserve">
-    <value>&amp;Hue / Saturation</value>
-  </data>
-  <data name="tsBlackWhite.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
-    <value>None</value>
-  </data>
-  <data name="tsBlackWhite.Size" type="System.Drawing.Size, System.Drawing">
-    <value>185, 22</value>
-  </data>
-  <data name="tsBlackWhite.Text" xml:space="preserve">
-    <value>Black and &amp;White</value>
-  </data>
-  <data name="tsSharpen.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
-    <value>None</value>
-  </data>
-  <data name="tsSharpen.Size" type="System.Drawing.Size, System.Drawing">
-    <value>185, 22</value>
-  </data>
-  <data name="tsSharpen.Text" xml:space="preserve">
-    <value>&amp;Sharpen</value>
-  </data>
-  <data name="toolStripSeparator7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>182, 6</value>
-  </data>
-  <data name="tsReset.Size" type="System.Drawing.Size, System.Drawing">
-    <value>185, 22</value>
-  </data>
-  <data name="tsReset.Text" xml:space="preserve">
-    <value>&amp;Reset</value>
-  </data>
   <data name="tsdImage.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
   </data>
@@ -529,14 +466,14 @@
   <data name="tsdRotate.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
     <value>ImageAboveText</value>
   </data>
-  <data name="tsMove.Size" type="System.Drawing.Size, System.Drawing">
-    <value>96, 51</value>
-  </data>
   <data name="tsMove.FirstText" xml:space="preserve">
     <value>Move Up</value>
   </data>
   <data name="tsMove.SecondText" xml:space="preserve">
     <value>Move Down</value>
+  </data>
+  <data name="tsMove.Size" type="System.Drawing.Size, System.Drawing">
+    <value>96, 51</value>
   </data>
   <data name="tsdReorder.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
@@ -592,57 +529,14 @@
   <data name="toolStripDropDownButton1.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
     <value>ImageAboveText</value>
   </data>
-  <data name="tsAbout.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        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
-</value>
+  <data name="tsSettingsAbout.FirstText" xml:space="preserve">
+    <value>Settings</value>
   </data>
-  <data name="tsAbout.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
-    <value>Magenta</value>
+  <data name="tsSettingsAbout.SecondText" xml:space="preserve">
+    <value>About</value>
   </data>
-  <data name="tsAbout.Size" type="System.Drawing.Size, System.Drawing">
-    <value>64, 51</value>
-  </data>
-  <data name="tsAbout.Text" xml:space="preserve">
-    <value>&amp;About</value>
-  </data>
-  <data name="tsAbout.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
-    <value>ImageAboveText</value>
+  <data name="tsSettingsAbout.Size" type="System.Drawing.Size, System.Drawing">
+    <value>74, 48</value>
   </data>
   <data name="tStrip.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 0</value>
@@ -826,6 +720,69 @@
   </data>
   <data name="tsPdfSettings2.Text" xml:space="preserve">
     <value>&amp;PDF Settings</value>
+  </data>
+  <data name="tsView.Size" type="System.Drawing.Size, System.Drawing">
+    <value>185, 22</value>
+  </data>
+  <data name="tsView.Text" xml:space="preserve">
+    <value>&amp;View</value>
+  </data>
+  <data name="toolStripSeparator6.Size" type="System.Drawing.Size, System.Drawing">
+    <value>182, 6</value>
+  </data>
+  <data name="tsCrop.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
+    <value>None</value>
+  </data>
+  <data name="tsCrop.Size" type="System.Drawing.Size, System.Drawing">
+    <value>185, 22</value>
+  </data>
+  <data name="tsCrop.Text" xml:space="preserve">
+    <value>&amp;Crop</value>
+  </data>
+  <data name="tsBrightnessContrast.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
+    <value>None</value>
+  </data>
+  <data name="tsBrightnessContrast.Size" type="System.Drawing.Size, System.Drawing">
+    <value>185, 22</value>
+  </data>
+  <data name="tsBrightnessContrast.Text" xml:space="preserve">
+    <value>&amp;Brightness / Contrast</value>
+  </data>
+  <data name="tsHueSaturation.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
+    <value>None</value>
+  </data>
+  <data name="tsHueSaturation.Size" type="System.Drawing.Size, System.Drawing">
+    <value>185, 22</value>
+  </data>
+  <data name="tsHueSaturation.Text" xml:space="preserve">
+    <value>&amp;Hue / Saturation</value>
+  </data>
+  <data name="tsBlackWhite.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
+    <value>None</value>
+  </data>
+  <data name="tsBlackWhite.Size" type="System.Drawing.Size, System.Drawing">
+    <value>185, 22</value>
+  </data>
+  <data name="tsBlackWhite.Text" xml:space="preserve">
+    <value>Black and &amp;White</value>
+  </data>
+  <data name="tsSharpen.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
+    <value>None</value>
+  </data>
+  <data name="tsSharpen.Size" type="System.Drawing.Size, System.Drawing">
+    <value>185, 22</value>
+  </data>
+  <data name="tsSharpen.Text" xml:space="preserve">
+    <value>&amp;Sharpen</value>
+  </data>
+  <data name="toolStripSeparator7.Size" type="System.Drawing.Size, System.Drawing">
+    <value>182, 6</value>
+  </data>
+  <data name="tsReset.Size" type="System.Drawing.Size, System.Drawing">
+    <value>185, 22</value>
+  </data>
+  <data name="tsReset.Text" xml:space="preserve">
+    <value>&amp;Reset</value>
   </data>
   <data name="tsRotateLeft.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
     <value>None</value>
@@ -1175,6 +1132,18 @@
   <data name="&gt;&gt;tsBrightnessContrast.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;tsHueSaturation.Name" xml:space="preserve">
+    <value>tsHueSaturation</value>
+  </data>
+  <data name="&gt;&gt;tsHueSaturation.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tsBlackWhite.Name" xml:space="preserve">
+    <value>tsBlackWhite</value>
+  </data>
+  <data name="&gt;&gt;tsBlackWhite.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;tsSharpen.Name" xml:space="preserve">
     <value>tsSharpen</value>
   </data>
@@ -1233,7 +1202,7 @@
     <value>tsMove</value>
   </data>
   <data name="&gt;&gt;tsMove.Type" xml:space="preserve">
-    <value>NAPS2.WinForms.ToolStripDoubleButton, NAPS2.Core, Version=5.5.0.37941, Culture=neutral, PublicKeyToken=null</value>
+    <value>NAPS2.WinForms.ToolStripDoubleButton, NAPS2.Core, Version=6.0.4.41373, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;tsdReorder.Name" xml:space="preserve">
     <value>tsdReorder</value>
@@ -1325,28 +1294,16 @@
   <data name="&gt;&gt;toolStripDropDownButton1.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripDropDownButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;tsAbout.Name" xml:space="preserve">
-    <value>tsAbout</value>
+  <data name="&gt;&gt;tsSettingsAbout.Name" xml:space="preserve">
+    <value>tsSettingsAbout</value>
   </data>
-  <data name="&gt;&gt;tsAbout.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tsHueSaturation.Name" xml:space="preserve">
-    <value>tsHueSaturation</value>
-  </data>
-  <data name="&gt;&gt;tsHueSaturation.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tsBlackWhite.Name" xml:space="preserve">
-    <value>tsBlackWhite</value>
-  </data>
-  <data name="&gt;&gt;tsBlackWhite.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;tsSettingsAbout.Type" xml:space="preserve">
+    <value>NAPS2.WinForms.ToolStripDoubleButton, NAPS2.Core, Version=6.0.4.41373, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>FDesktop</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>NAPS2.WinForms.FormBase, NAPS2.Core, Version=5.5.0.37941, Culture=neutral, PublicKeyToken=null</value>
+    <value>NAPS2.WinForms.FormBase, NAPS2.Core, Version=6.0.4.41373, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

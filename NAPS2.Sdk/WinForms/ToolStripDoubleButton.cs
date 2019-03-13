@@ -107,11 +107,11 @@ namespace NAPS2.WinForms
             {
                 if (Enabled)
                 {
-                    e.Graphics.DrawImage(FirstImage, new Point(Padding.Left, Height / 4 - FirstImage.Height / 2));
+                    e.Graphics.DrawImage(FirstImage, new Point(Padding.Left, Height / 4 - FirstImage.Height / 2 + 1));
                 }
                 else
                 {
-                    ControlPaint.DrawImageDisabled(e.Graphics, FirstImage, Padding.Left, Height / 4 - FirstImage.Height / 2, Color.Transparent);
+                    ControlPaint.DrawImageDisabled(e.Graphics, FirstImage, Padding.Left, Height / 4 - FirstImage.Height / 2 + 1, Color.Transparent);
                 }
 
                 var textRectangle = new Rectangle(Padding.Left + FirstImage.Width, 0, textWidth, Height / 2);
