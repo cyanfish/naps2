@@ -261,7 +261,7 @@ namespace NAPS2.WinForms
             SaveToolStripLocation();
             UserConfig.Current.Culture = cultureId;
             UserConfig.Manager.Save();
-            cultureInitializer.InitCulture(Thread.CurrentThread);
+            cultureInitializer.InitCulture();
 
             // Update localized values
             // Since all forms are opened modally and this is the root form, it should be the only one that needs to be updated live

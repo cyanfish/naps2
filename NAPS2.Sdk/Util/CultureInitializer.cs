@@ -14,7 +14,7 @@ namespace NAPS2.Util
     /// </summary>
     public class CultureInitializer
     {
-        public void InitCulture(Thread thread)
+        public void InitCulture()
         {
             var cultureId = UserConfig.Current.Culture ?? AppConfig.Current.DefaultCulture;
             if (!string.IsNullOrWhiteSpace(cultureId))
@@ -22,8 +22,8 @@ namespace NAPS2.Util
                 try
                 {
                     var culture = new CultureInfo(cultureId);
-                    thread.CurrentUICulture = culture;
-                    thread.CurrentCulture = culture;
+                    CultureInfo.DefaultThreadCurrentCulture = culture;
+                    CultureInfo.DefaultThreadCurrentUICulture = culture;
                     MiscResources.Culture = culture;
                     SettingsResources.Culture = culture;
                 }

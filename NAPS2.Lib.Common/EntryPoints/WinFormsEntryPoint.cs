@@ -34,7 +34,7 @@ namespace NAPS2.DI.EntryPoints
             WorkerManager.Init();
 
             // Set up basic application configuration
-            kernel.Get<CultureInitializer>().InitCulture(Thread.CurrentThread);
+            kernel.Get<CultureInitializer>().InitCulture();
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.ThreadException += UnhandledException;
