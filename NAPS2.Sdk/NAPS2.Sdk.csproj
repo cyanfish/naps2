@@ -76,9 +76,11 @@
     <DefineConstants>DEBUG;TRACE;NONWINDOWS</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="BouncyCastle.Crypto, Version=1.8.4.0, Culture=neutral, PublicKeyToken=0e99375e54769942">
+      <HintPath>..\packages\BouncyCastle.1.8.4\lib\BouncyCastle.Crypto.dll</HintPath>
+    </Reference>
     <Reference Include="CommandLine, Version=1.9.71.2, Culture=neutral, PublicKeyToken=de6f01bd326f8c32, processorArchitecture=MSIL">
-      <HintPath>..\packages\CommandLineParser.1.9.71\lib\net40\CommandLine.dll</HintPath>
-      <Private>True</Private>
+      <HintPath>..\packages\CommandLineParser.1.9.71\lib\net45\CommandLine.dll</HintPath>
     </Reference>
     <Reference Include="Ghostscript.NET, Version=1.2.1.0, Culture=neutral, PublicKeyToken=f85051de34525b59, processorArchitecture=MSIL">
       <HintPath>..\packages\Ghostscript.NET.1.2.1\lib\net40\Ghostscript.NET.dll</HintPath>
@@ -87,13 +89,13 @@
       <HintPath>..\packages\SharpZipLib.0.86.0\lib\20\ICSharpCode.SharpZipLib.dll</HintPath>
     </Reference>
     <Reference Include="MailKit, Version=1.22.0.0, Culture=neutral, PublicKeyToken=4e064fe7c44a8f1b, processorArchitecture=MSIL">
-      <HintPath>..\packages\MailKit.1.22.0\lib\net40\MailKit.dll</HintPath>
+      <HintPath>..\packages\MailKit.1.22.0\lib\net451\MailKit.dll</HintPath>
     </Reference>
     <Reference Include="MimeKit, Version=1.22.0.0, Culture=neutral, PublicKeyToken=bede1c8a46c66814, processorArchitecture=MSIL">
-      <HintPath>..\packages\MimeKit.1.22.0\lib\net40\MimeKit.dll</HintPath>
+      <HintPath>..\packages\MimeKit.1.22.0\lib\net451\MimeKit.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net40\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="NTwain, Version=3.0.0.0, Culture=neutral, PublicKeyToken=f9f7e0c5169536c8, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -111,16 +113,16 @@
     <Reference Include="System.Security" />
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.ValueTuple, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.ValueTuple.4.3.1\lib\portable-net40+sl4+win8+wp8\System.ValueTuple.dll</HintPath>
+      <HintPath>..\packages\System.ValueTuple.4.3.1\lib\netstandard1.0\System.ValueTuple.dll</HintPath>
     </Reference>
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Xml" />
     <Reference Include="zxing, Version=0.16.4.0, Culture=neutral, PublicKeyToken=4e88037ac681fe60, processorArchitecture=MSIL">
-      <HintPath>..\packages\ZXing.Net.0.16.4\lib\net40\zxing.dll</HintPath>
+      <HintPath>..\packages\ZXing.Net.0.16.4\lib\net461\zxing.dll</HintPath>
     </Reference>
     <Reference Include="zxing.presentation, Version=0.16.4.0, Culture=neutral, PublicKeyToken=4e88037ac681fe60, processorArchitecture=MSIL">
-      <HintPath>..\packages\ZXing.Net.0.16.4\lib\net40\zxing.presentation.dll</HintPath>
+      <HintPath>..\packages\ZXing.Net.0.16.4\lib\net461\zxing.presentation.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -6164,8 +6166,8 @@
     <None Include="Lang\po\zh-CHS.po" />
     <None Include="Lang\po\zh-TW.po" />
     <None Include="naps2-public.cer" />
-    <None Include="packages.config" />
     <None Include="Icons\accept-small.png" />
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Icons\accept.png" />

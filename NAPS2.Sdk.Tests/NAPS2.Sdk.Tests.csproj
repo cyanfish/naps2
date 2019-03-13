@@ -96,12 +96,6 @@
     <Compile Include="Util\TestingContextTests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Analyzer Include="..\packages\xunit.analyzers.0.10.0\analyzers\dotnet\cs\xunit.analyzers.dll" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\NAPS2.Sdk\NAPS2.Sdk.csproj">
       <Project>{968378fa-a649-4058-a928-1fcd97b23070}</Project>
       <Name>NAPS2.Sdk</Name>
@@ -112,6 +106,12 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>ProfileSerializerTestsData.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Analyzer Include="..\packages\xunit.analyzers.0.10.0\analyzers\dotnet\cs\xunit.analyzers.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
