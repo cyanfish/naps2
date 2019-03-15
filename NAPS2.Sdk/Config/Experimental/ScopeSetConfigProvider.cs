@@ -4,16 +4,16 @@ using System.Linq;
 
 namespace NAPS2.Config.Experimental
 {
-    public class ScopeSetConfigProvider : ConfigProvider
+    public class ScopeSetConfigProvider<TConfig> : ConfigProvider<TConfig> where TConfig : new()
     {
-        private readonly ConfigScope[] scopes;
+        private readonly ConfigScope<TConfig>[] scopes;
 
-        public ScopeSetConfigProvider(params ConfigScope[] scopes)
+        public ScopeSetConfigProvider(params ConfigScope<TConfig>[] scopes)
         {
             this.scopes = scopes.ToArray();
         }
 
-        protected override T GetInternal<T>(Func<CommonConfig, T> func)
+        protected override T GetInternal<T>(Func<TConfig, T> func)
         {
             foreach (var scope in scopes)
             {

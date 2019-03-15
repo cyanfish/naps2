@@ -7,22 +7,22 @@ using NAPS2.Util;
 
 namespace NAPS2.Config.Experimental
 {
-    public class FileConfigScope : ConfigScope
+    public class FileConfigScope<TConfig> : ConfigScope<TConfig> where TConfig : new()
     {
         private readonly string filePath;
-        private readonly ISerializer<CommonConfig> serializer;
-        private CommonConfig cache;
-        private CommonConfig changes;
+        private readonly ISerializer<TConfig> serializer;
+        private TConfig cache;
+        private TConfig changes;
 
-        public FileConfigScope(string filePath, ISerializer<CommonConfig> serializer, ConfigScopeMode mode) : base(mode)
+        public FileConfigScope(string filePath, ISerializer<TConfig> serializer, ConfigScopeMode mode) : base(mode)
         {
             this.filePath = filePath;
             this.serializer = serializer;
-            cache = new CommonConfig();
-            changes = new CommonConfig();
+            cache = new TConfig();
+            changes = new TConfig();
         }
 
-        protected override T GetInternal<T>(Func<CommonConfig, T> func)
+        protected override T GetInternal<T>(Func<TConfig, T> func)
         {
             // TODO: Use FileSystemWatcher to determine if we actually
             // TODO: need to read from disk. Also to create change events.
@@ -35,13 +35,13 @@ namespace NAPS2.Config.Experimental
             return func(cache);
         }
 
-        protected override void SetInternal(Action<CommonConfig> func)
+        protected override void SetInternal(Action<TConfig> func)
         {
             func(changes);
             WriteHandshake();
         }
 
-        public override void SetAllInternal(CommonConfig delta)
+        public override void SetAllInternal(TConfig delta)
         {
             ConfigCopier.Copy(delta, changes);
             WriteHandshake();
@@ -77,7 +77,7 @@ namespace NAPS2.Config.Experimental
                     var copy = ConfigCopier.Copy(cache);
                     serializer.Serialize(stream, copy);
                     cache = copy;
-                    changes = new CommonConfig();
+                    changes = new TConfig();
                 }
             }
             catch (IOException ex)

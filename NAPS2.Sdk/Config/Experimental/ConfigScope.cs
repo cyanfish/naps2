@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace NAPS2.Config.Experimental
 {
-    public abstract class ConfigScope
+    public abstract class ConfigScope<TConfig> where TConfig : new()
     {
         protected ConfigScope(ConfigScopeMode mode)
         {
@@ -13,7 +13,7 @@ namespace NAPS2.Config.Experimental
 
         public ConfigScopeMode Mode { get; }
 
-        public T Get<T>(Func<CommonConfig, T> func)
+        public T Get<T>(Func<TConfig, T> func)
         {
             lock (this)
             {
@@ -21,7 +21,7 @@ namespace NAPS2.Config.Experimental
             }
         }
 
-        public void Set(Action<CommonConfig> func)
+        public void Set(Action<TConfig> func)
         {
             if (Mode == ConfigScopeMode.ReadOnly)
             {
@@ -33,7 +33,7 @@ namespace NAPS2.Config.Experimental
             }
         }
 
-        public void SetAll(CommonConfig changes)
+        public void SetAll(TConfig changes)
         {
             if (Mode == ConfigScopeMode.ReadOnly)
             {
@@ -45,10 +45,10 @@ namespace NAPS2.Config.Experimental
             }
         }
 
-        protected abstract T GetInternal<T>(Func<CommonConfig, T> func);
+        protected abstract T GetInternal<T>(Func<TConfig, T> func);
 
-        protected abstract void SetInternal(Action<CommonConfig> func);
+        protected abstract void SetInternal(Action<TConfig> func);
 
-        public abstract void SetAllInternal(CommonConfig delta);
+        public abstract void SetAllInternal(TConfig delta);
     }
 }

@@ -12,9 +12,9 @@ namespace NAPS2.Config.Experimental
             throw new NotImplementedException();
         }
 
-        public static T Copy<T>(T src)
+        public static T Copy<T>(T src) where T : new()
         {
-            var copy = (T)Activator.CreateInstance(typeof(T));
+            var copy = new T();
             Copy(src, copy);
             return copy;
         }
