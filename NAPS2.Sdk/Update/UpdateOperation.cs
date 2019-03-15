@@ -185,7 +185,7 @@ namespace NAPS2.Update
 
         private bool VerifyHash()
         {
-            using (var sha = new SHA1Managed())
+            using (var sha = new SHA1CryptoServiceProvider())
             {
                 using (FileStream stream = File.OpenRead(tempPath))
                 {

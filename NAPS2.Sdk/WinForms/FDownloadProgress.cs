@@ -93,7 +93,7 @@ namespace NAPS2.WinForms
 
         private string CalculateSha1(string filePath)
         {
-            using (var sha = new SHA1Managed())
+            using (var sha = new SHA1CryptoServiceProvider())
             {
                 using (FileStream stream = File.OpenRead(filePath))
                 {
