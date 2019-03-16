@@ -15,7 +15,7 @@ namespace NAPS2.Scan.Twain
     {
         public const string DRIVER_NAME = "twain";
         
-        private readonly TwainWrapper twainWrapper;
+        private readonly ITwainWrapper twainWrapper;
         private readonly ScannedImageHelper scannedImageHelper;
 
         public TwainScanDriver() : base(ErrorOutput.Default, new AutoSaver())
@@ -24,7 +24,7 @@ namespace NAPS2.Scan.Twain
             scannedImageHelper = new ScannedImageHelper();
         }
 
-        public TwainScanDriver(TwainWrapper twainWrapper, ScannedImageHelper scannedImageHelper, ErrorOutput errorOutput, AutoSaver autoSaver) : base(errorOutput, autoSaver)
+        public TwainScanDriver(ITwainWrapper twainWrapper, ScannedImageHelper scannedImageHelper, ErrorOutput errorOutput, AutoSaver autoSaver) : base(errorOutput, autoSaver)
         {
             this.twainWrapper = twainWrapper;
             this.scannedImageHelper = scannedImageHelper;
@@ -63,13 +63,11 @@ namespace NAPS2.Scan.Twain
                 {
                     using (var worker = WorkerManager.Factory.Create())
                     {
-                        worker.Callback.ImageCallback += (img, tempPath) =>
+                        await worker.Service.TwainScan(scanDevice, scanProfile, scanParams, dialogParent, cancelToken, (img, tempPath) =>
                         {
                             if (tempPath != null) scannedImageHelper.RunBackgroundOcr(img, scanParams, tempPath);
                             sink.PutImage(img);
-                        };
-                        cancelToken.Register(worker.Service.CancelTwainScan);
-                        await worker.Service.TwainScan(scanDevice, scanProfile, scanParams, dialogParent);
+                        });
                     }
                 }
                 else

@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.ServiceModel;
 using System.Threading;
 using System.Threading.Tasks;
 using NAPS2.Config;
@@ -12,7 +11,6 @@ using NAPS2.Lang.Resources;
 using NAPS2.Logging;
 using NAPS2.Util;
 using NAPS2.WinForms;
-using NAPS2.Worker;
 
 namespace NAPS2.Scan
 {
@@ -138,10 +136,11 @@ namespace NAPS2.Scan
                 {
                     error = e;
                 }
-                catch (FaultException<ScanDriverExceptionDetail> e)
-                {
-                    error = e.Detail.Exception;
-                }
+                // TODO
+                //catch (FaultException<ScanDriverExceptionDetail> e)
+                //{
+                //    error = e.Detail.Exception;
+                //}
                 catch (Exception e)
                 {
                     error = new ScanDriverUnknownException(e);

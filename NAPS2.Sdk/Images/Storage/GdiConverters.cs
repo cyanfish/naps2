@@ -38,6 +38,7 @@ namespace NAPS2.Images.Storage
             // TODO: Better format choice?
             var format = convertParams.Lossless ? ImageFormat.Png : ImageFormat.Jpeg;
             input.Bitmap.Save(stream, format);
+            stream.Seek(0, SeekOrigin.Begin);
             return new MemoryStreamStorage(stream);
         }
     }

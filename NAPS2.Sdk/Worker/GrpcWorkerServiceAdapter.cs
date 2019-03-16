@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using Grpc.Core;
 using NAPS2.Images;
@@ -12,38 +13,83 @@ using NAPS2.Util;
 
 namespace NAPS2.Worker
 {
-    class GrpcWorkerServiceAdapter : IWorkerService
+    public class GrpcWorkerServiceAdapter
     {
-        private int port;
+        private GrpcWorkerService.GrpcWorkerServiceClient client;
 
         public GrpcWorkerServiceAdapter(int port)
         {
-            this.port = port;
+            this.client = new GrpcWorkerService.GrpcWorkerServiceClient(new Channel("localhost", port, ChannelCredentials.Insecure));
+        }
+        public void Init(string recoveryFolderPath)
+        {
+            var req = new InitRequest { RecoveryFolderPath = recoveryFolderPath };
+            var resp = client.Init(req);
+            GrpcHelper.HandleErrors(resp.Error);
         }
 
-        public WiaConfiguration Wia10NativeUI(string scanDevice, IntPtr hwnd) => throw new NotImplementedException();
+        public WiaConfiguration Wia10NativeUI(string scanDevice, IntPtr hwnd)
+        {
+            var req = new Wia10NativeUiRequest
+            {
+                DeviceId = scanDevice,
+                Hwnd = (ulong)hwnd
+            };
+            var resp = client.Wia10NativeUi(req);
+            GrpcHelper.HandleErrors(resp.Error);
+            return resp.WiaConfigurationXml.FromXml<WiaConfiguration>();
+        }
 
         public List<ScanDevice> TwainGetDeviceList(TwainImpl twainImpl)
         {
-            var client = new GrpcWorkerService.GrpcWorkerServiceClient(new Channel("localhost", port, ChannelCredentials.Insecure));
-            var response = client.TwainGetDeviceList(new TwainGetDeviceListRequest { TwainImpl = twainImpl.ToXml() });
-            return response.DeviceListXml.FromXml<List<ScanDevice>>();
+            var req = new TwainGetDeviceListRequest { TwainImpl = twainImpl.ToXml() };
+            var resp = client.TwainGetDeviceList(req);
+            GrpcHelper.HandleErrors(resp.Error);
+            return resp.DeviceListXml.FromXml<List<ScanDevice>>();
         }
 
-        public Task TwainScan(ScanDevice scanDevice, ScanProfile scanProfile, ScanParams scanParams, IntPtr hwnd) => throw new NotImplementedException();
-
-        public void CancelTwainScan()
+        public async Task TwainScan(ScanDevice scanDevice, ScanProfile scanProfile, ScanParams scanParams, IntPtr hwnd, CancellationToken cancelToken, Action<ScannedImage, string> imageCallback)
         {
-            throw new NotImplementedException();
+            var req = new TwainScanRequest
+            {
+                ScanDeviceXml = scanDevice.ToXml(),
+                ScanProfileXml = scanProfile.ToXml(),
+                ScanParamsXml = scanParams.ToXml(),
+                Hwnd = (ulong)hwnd
+            };
+            var streamingCall = client.TwainScan(req, cancellationToken: cancelToken);
+            while (await streamingCall.ResponseStream.MoveNext())
+            {
+                var resp = streamingCall.ResponseStream.Current;
+                GrpcHelper.HandleErrors(resp.Error);
+                // TODO
+                //var scannedImage = new ScannedImage(image);
+                //if (thumbnail != null)
+                //{
+                //    scannedImage.SetThumbnail(StorageManager.MemoryStorageFactory.Decode(new MemoryStream(thumbnail), ".bmp"));
+                //}
+                //ImageCallback?.Invoke(scannedImage, tempImageFilePath);
+            }
         }
 
-        public MapiSendMailReturnCode SendMapiEmail(EmailMessage message) => throw new NotImplementedException();
-
-        public byte[] RenderThumbnail(ScannedImage.Snapshot snapshot, int size) => throw new NotImplementedException();
-
-        public void Init(string recoveryFolderPath)
+        public MapiSendMailReturnCode SendMapiEmail(EmailMessage message)
         {
-            //throw new NotImplementedException();
+            var req = new SendMapiEmailRequest { EmailMessageXml = message.ToXml() };
+            var resp = client.SendMapiEmail(req);
+            GrpcHelper.HandleErrors(resp.Error);
+            return resp.ReturnCodeXml.FromXml<MapiSendMailReturnCode>();
+        }
+
+        public byte[] RenderThumbnail(ScannedImage.Snapshot snapshot, int size)
+        {
+            var req = new RenderThumbnailRequest
+            {
+                SnapshotXml = snapshot.ToXml(),
+                Size = size
+            };
+            var resp = client.RenderThumbnail(req);
+            GrpcHelper.HandleErrors(resp.Error);
+            return resp.Thumbnail.ToByteArray();
         }
     }
 }

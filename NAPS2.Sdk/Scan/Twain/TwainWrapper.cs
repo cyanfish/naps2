@@ -18,7 +18,7 @@ using NAPS2.Util;
 
 namespace NAPS2.Scan.Twain
 {
-    public class TwainWrapper
+    public class TwainWrapper : ITwainWrapper
     {
         private static readonly TWIdentity TwainAppId = TWIdentity.CreateFromAssembly(DataGroups.Image | DataGroups.Control, Assembly.GetEntryAssembly());
         

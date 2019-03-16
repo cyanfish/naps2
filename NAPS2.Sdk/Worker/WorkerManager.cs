@@ -5,7 +5,6 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.ServiceModel;
 using System.Threading.Tasks;
 using NAPS2.Platform;
 
@@ -16,7 +15,6 @@ namespace NAPS2.Worker
     /// </summary>
     public static class WorkerManager
     {
-        public const string PIPE_NAME_FORMAT = "net.pipe://localhost/NAPS2.Worker/{0}";
         public const string WORKER_EXE_NAME = "NAPS2.Worker.exe";
         public static readonly string[] SearchDirs =
         {
@@ -86,18 +84,7 @@ namespace NAPS2.Worker
             Task.Factory.StartNew(() =>
             {
                 var (proc, port) = StartWorkerProcess();
-                //var pipeName = string.Format(PIPE_NAME_FORMAT, proc.Id);
-                //var callback = new WorkerCallback();
-                //var instanceContext = new InstanceContext(callback);
-                //var channelFactory = new DuplexChannelFactory<IWorkerService>(instanceContext,
-                //    new NetNamedPipeBinding
-                //    {
-                //        SendTimeout = TimeSpan.FromHours(24),
-                //        MaxReceivedMessageSize = int.MaxValue
-                //    },
-                //    new EndpointAddress(pipeName));
-                //var channel = channelFactory.CreateChannel();
-                _workerQueue.Add(new WorkerContext { Service = new GrpcWorkerServiceAdapter(port), Callback = null, Process = proc });
+                _workerQueue.Add(new WorkerContext { Service = new GrpcWorkerServiceAdapter(port), Process = proc });
             });
         }
 

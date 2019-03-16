@@ -188,6 +188,7 @@
     <Compile Include="Images\ScannedImageSink.cs" />
     <Compile Include="Images\Storage\PdfConverters.cs" />
     <Compile Include="Images\Storage\PdfStorage.cs" />
+    <Compile Include="ImportExport\Email\Mapi\IMapiWrapper.cs" />
     <Compile Include="ImportExport\Email\Mapi\MapiWrapper.cs" />
     <Compile Include="ImportExport\Images\ImageSettingsProvider.cs" />
     <Compile Include="ImportExport\Pdf\GhostscriptManager.cs" />
@@ -255,6 +256,7 @@
     <Compile Include="Scan\Sane\SaneOptionParser.cs" />
     <Compile Include="Scan\Sane\SaneScanDriver.cs" />
     <Compile Include="Scan\Sane\SaneWrapper.cs" />
+    <Compile Include="Scan\Twain\ITwainWrapper.cs" />
     <Compile Include="Scan\Wia\Native\Hresult.cs" />
     <Compile Include="Scan\Wia\Native\IWiaDeviceProps.cs" />
     <Compile Include="Scan\Wia\Native\NativeStreamWrapper.cs" />
@@ -290,6 +292,7 @@
     <Compile Include="Platform\IRuntimeCompat.cs" />
     <Compile Include="Platform\MonoRuntimeCompat.cs" />
     <Compile Include="Util\ExpFallback.cs" />
+    <Compile Include="Worker\GrpcHelper.cs" />
     <Compile Include="Util\IInvoker.cs" />
     <Compile Include="Util\ImageExtensions.cs" />
     <Compile Include="Util\Invoker.cs" />
@@ -342,11 +345,7 @@
     </Compile>
     <Compile Include="Worker\GrpcWorkerServiceImpl.cs" />
     <Compile Include="Worker\GrpcWorkerServiceAdapter.cs" />
-    <Compile Include="Worker\IWorkerCallback.cs" />
-    <Compile Include="Worker\ScanDriverExceptionDetail.cs" />
-    <Compile Include="Worker\WorkerCallback.cs" />
     <Compile Include="Worker\WorkerContext.cs" />
-    <Compile Include="Worker\WorkerService.cs" />
     <Compile Include="Icons.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -453,7 +452,6 @@
     <Compile Include="Operation\IOperation.cs" />
     <Compile Include="Worker\IWorkerServiceFactory.cs" />
     <Compile Include="Util\OverwritePrompt.cs" />
-    <Compile Include="Worker\IWorkerService.cs" />
     <Compile Include="Util\ISaveNotify.cs" />
     <Compile Include="Util\Lifecycle.cs" />
     <Compile Include="Logging\Log.cs" />

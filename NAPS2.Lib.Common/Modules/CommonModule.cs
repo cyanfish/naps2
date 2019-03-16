@@ -10,6 +10,7 @@ using NAPS2.Ocr;
 using NAPS2.Operation;
 using NAPS2.Scan;
 using NAPS2.Images;
+using NAPS2.ImportExport.Email.Mapi;
 using NAPS2.Scan.Sane;
 using NAPS2.Scan.Twain;
 using NAPS2.Scan.Wia;
@@ -36,6 +37,7 @@ namespace NAPS2.DI.Modules
             Bind<PdfExporter>().To<PdfSharpExporter>();
             Bind<IScannedImagePrinter>().To<PrintDocumentPrinter>();
             Bind<IEmailProviderFactory>().To<NinjectEmailProviderFactory>();
+            Bind<IMapiWrapper>().To<MapiWrapper>();
             Bind<OcrEngineManager>().ToMethod(ctx => OcrEngineManager.Default);
             Bind<OcrRequestQueue>().ToSelf().InSingletonScope();
 
@@ -50,6 +52,7 @@ namespace NAPS2.DI.Modules
             Bind<IScanDriver>().To<TwainScanDriver>().InSingletonScope().Named(TwainScanDriver.DRIVER_NAME);
             Bind<IScanDriver>().To<SaneScanDriver>().InSingletonScope().Named(SaneScanDriver.DRIVER_NAME);
             Bind<IScanDriver>().To<ProxiedScanDriver>().InSingletonScope().Named(ProxiedScanDriver.DRIVER_NAME);
+            Bind<ITwainWrapper>().To<TwainWrapper>();
 
             // Config
             Bind<PdfSettingsContainer>().ToSelf().InSingletonScope();

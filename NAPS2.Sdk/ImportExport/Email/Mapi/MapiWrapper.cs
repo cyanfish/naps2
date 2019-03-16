@@ -6,7 +6,7 @@ using NAPS2.Util;
 
 namespace NAPS2.ImportExport.Email.Mapi
 {
-    public class MapiWrapper
+    public class MapiWrapper : IMapiWrapper
     {
         private readonly SystemEmailClients systemEmailClients;
 

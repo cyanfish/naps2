@@ -14,10 +14,10 @@ namespace NAPS2.ImportExport.Email.Mapi
     public class MapiEmailProvider : IEmailProvider
     {
         private readonly IWorkerServiceFactory workerServiceFactory;
-        private readonly MapiWrapper mapiWrapper;
+        private readonly IMapiWrapper mapiWrapper;
         private readonly ErrorOutput errorOutput;
 
-        public MapiEmailProvider(IWorkerServiceFactory workerServiceFactory, MapiWrapper mapiWrapper, ErrorOutput errorOutput)
+        public MapiEmailProvider(IWorkerServiceFactory workerServiceFactory, IMapiWrapper mapiWrapper, ErrorOutput errorOutput)
         {
             this.workerServiceFactory = workerServiceFactory;
             this.mapiWrapper = mapiWrapper;
