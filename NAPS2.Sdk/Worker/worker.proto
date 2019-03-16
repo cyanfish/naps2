@@ -1,0 +1,42 @@
+﻿syntax = "proto3";
+
+package NAPS2.Worker;
+
+service GrpcWorkerService {
+	rpc Init (InitRequest) returns (InitResponse) {}
+	rpc Wia10NativeUi (Wia10NativeUiRequest) returns (Wia10NativeUiResponse) {}
+	rpc TwainGetDeviceList (TwainGetDeviceListRequest) returns (TwainGetDeviceListResponse) {}
+}
+
+message Error {
+	string xml = 1;
+}
+
+message InitRequest {
+	string recoveryFolderPath = 1;
+}
+
+message InitResponse {
+	Error error = 1;
+}
+
+message Wia10NativeUiRequest {
+	string deviceId = 1;
+	fixed64 hwnd = 2;
+}
+
+message Wia10NativeUiResponse {
+	Error error = 1;
+	string wiaConfigurationXml = 2;
+}
+
+message TwainGetDeviceListRequest {
+	string twainImpl = 1;
+}
+
+message TwainGetDeviceListResponse {
+	Error error = 1;
+	string deviceListXml = 2;
+}
+
+// TODO more. Use streaming for scan callback/cancel.

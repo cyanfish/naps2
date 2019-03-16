@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Grpc.Tools.1.19.0\build\Grpc.Tools.props" Condition="Exists('..\packages\Grpc.Tools.1.19.0\build\Grpc.Tools.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -86,6 +87,9 @@
     </Reference>
     <Reference Include="Ghostscript.NET, Version=1.2.1.0, Culture=neutral, PublicKeyToken=f85051de34525b59, processorArchitecture=MSIL">
       <HintPath>..\packages\Ghostscript.NET.1.2.1\lib\net40\Ghostscript.NET.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Protobuf, Version=3.7.0.0, Culture=neutral, PublicKeyToken=a7d26565bac4d604, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Protobuf.3.7.0\lib\net45\Google.Protobuf.dll</HintPath>
     </Reference>
     <Reference Include="Grpc.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=d754f35622e28bad, processorArchitecture=MSIL">
       <HintPath>..\packages\Grpc.Core.1.19.0\lib\net45\Grpc.Core.dll</HintPath>
@@ -295,6 +299,7 @@
     <Compile Include="Util\SecureString.cs" />
     <Compile Include="Util\ServiceFactoryBehavior.cs" />
     <Compile Include="Util\SmoothProgress.cs" />
+    <Compile Include="Util\SslHelper.cs" />
     <Compile Include="Util\StubErrorOutput.cs" />
     <Compile Include="Util\StubOverwritePrompt.cs" />
     <Compile Include="Util\TaskExtensions.cs" />
@@ -335,6 +340,8 @@
     <Compile Include="WinForms\BackgroundForm.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Worker\GrpcWorkerServiceImpl.cs" />
+    <Compile Include="Worker\GrpcWorkerServiceAdapter.cs" />
     <Compile Include="Worker\IWorkerCallback.cs" />
     <Compile Include="Worker\ScanDriverExceptionDetail.cs" />
     <Compile Include="Worker\WorkerCallback.cs" />
@@ -6193,6 +6200,7 @@
     <None Include="naps2-public.cer" />
     <None Include="Icons\accept-small.png" />
     <None Include="packages.config" />
+    <Protobuf Include="Worker\worker.proto" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Icons\accept.png" />
@@ -6311,6 +6319,8 @@
     </PropertyGroup>
     <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
     <Error Condition="!Exists('..\packages\Grpc.Core.1.19.0\build\net45\Grpc.Core.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Grpc.Core.1.19.0\build\net45\Grpc.Core.targets'))" />
+    <Error Condition="!Exists('..\packages\Grpc.Tools.1.19.0\build\Grpc.Tools.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Grpc.Tools.1.19.0\build\Grpc.Tools.props'))" />
+    <Error Condition="!Exists('..\packages\Grpc.Tools.1.19.0\build\Grpc.Tools.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Grpc.Tools.1.19.0\build\Grpc.Tools.targets'))" />
   </Target>
   <PropertyGroup>
     <PreBuildEvent Condition="'$(OS)' == 'Windows_NT'">If Not Exist $(ProjectDir)google.credentials.json (
@@ -6329,4 +6339,5 @@ echo { client_id: null, client_secret: null } &gt; $(ProjectDir)microsoft.creden
   -->
   <Import Project="..\NAPS2.Setup\CommonTargets.targets" />
   <Import Project="..\packages\Grpc.Core.1.19.0\build\net45\Grpc.Core.targets" Condition="Exists('..\packages\Grpc.Core.1.19.0\build\net45\Grpc.Core.targets')" />
+  <Import Project="..\packages\Grpc.Tools.1.19.0\build\Grpc.Tools.targets" Condition="Exists('..\packages\Grpc.Tools.1.19.0\build\Grpc.Tools.targets')" />
 </Project>

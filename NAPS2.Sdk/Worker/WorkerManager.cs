@@ -47,7 +47,7 @@ namespace NAPS2.Worker
             }
         }
 
-        private static Process StartWorkerProcess()
+        private static (Process, int) StartWorkerProcess()
         {
             var parentId = Process.GetCurrentProcess().Id;
             var proc = Process.Start(new ProcessStartInfo
@@ -76,28 +76,28 @@ namespace NAPS2.Worker
                 }
             }
 
-            proc.StandardOutput.Read();
+            int port = int.Parse(proc.StandardOutput.ReadLine() ?? throw new Exception("Could not read worker port"));
 
-            return proc;
+            return (proc, port);
         }
 
         private static void StartWorkerService()
         {
             Task.Factory.StartNew(() =>
             {
-                var proc = StartWorkerProcess();
-                var pipeName = string.Format(PIPE_NAME_FORMAT, proc.Id);
-                var callback = new WorkerCallback();
-                var instanceContext = new InstanceContext(callback);
-                var channelFactory = new DuplexChannelFactory<IWorkerService>(instanceContext,
-                    new NetNamedPipeBinding
-                    {
-                        SendTimeout = TimeSpan.FromHours(24),
-                        MaxReceivedMessageSize = int.MaxValue
-                    },
-                    new EndpointAddress(pipeName));
-                var channel = channelFactory.CreateChannel();
-                _workerQueue.Add(new WorkerContext { Service = channel, Callback = callback, Process = proc });
+                var (proc, port) = StartWorkerProcess();
+                //var pipeName = string.Format(PIPE_NAME_FORMAT, proc.Id);
+                //var callback = new WorkerCallback();
+                //var instanceContext = new InstanceContext(callback);
+                //var channelFactory = new DuplexChannelFactory<IWorkerService>(instanceContext,
+                //    new NetNamedPipeBinding
+                //    {
+                //        SendTimeout = TimeSpan.FromHours(24),
+                //        MaxReceivedMessageSize = int.MaxValue
+                //    },
+                //    new EndpointAddress(pipeName));
+                //var channel = channelFactory.CreateChannel();
+                _workerQueue.Add(new WorkerContext { Service = new GrpcWorkerServiceAdapter(port), Callback = null, Process = proc });
             });
         }
 

@@ -16,7 +16,7 @@ namespace NAPS2.Util
 
         public DefaultSerializer(IEnumerable<Type> knownTypes)
         {
-            this.knownTypes = this.knownTypes.ToArray();
+            this.knownTypes = this.knownTypes?.ToArray();
         }
 
         public void Serialize(Stream stream, T obj)

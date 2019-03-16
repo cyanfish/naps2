@@ -6,6 +6,7 @@ using System.ServiceModel;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Grpc.Core;
 using NAPS2.DI.Modules;
 using NAPS2.Logging;
 using NAPS2.Util;
@@ -50,17 +51,27 @@ namespace NAPS2.DI.EntryPoints
                 var form = new BackgroundForm();
                 Invoker.Current = form;
 
+                var (rootCert, rootPrivate) = SslHelper.GenerateRootCertificate();
+                //var (cert, privateKey) = SslHelper.GenerateCertificateChain(rootCert, rootPrivate);
+                var creds = new SslServerCredentials(new[] {new KeyCertificatePair(rootCert, rootPrivate)}, rootCert,
+                    SslClientCertificateRequestType.RequestAndRequireAndVerify);
+
                 // Connect to the main NAPS2 process and listen for assigned work
-                string pipeName = string.Format(WorkerManager.PIPE_NAME_FORMAT, Process.GetCurrentProcess().Id);
-                using (var host = new ServiceHost(typeof(WorkerService)))
+                Server server = new Server
                 {
-                    host.Description.Behaviors.Add(new ServiceFactoryBehavior(() => kernel.Get<WorkerService>()));
-                    host.AddServiceEndpoint(typeof (IWorkerService),
-                        new NetNamedPipeBinding {ReceiveTimeout = TimeSpan.FromHours(24), SendTimeout = TimeSpan.FromHours(24)}, pipeName);
-                    host.Open();
-                    // Send a character to stdout to indicate that the process is ready for work
-                    Console.Write('k');
+                    Services = { GrpcWorkerService.BindService(kernel.Get<GrpcWorkerServiceImpl>()) },
+                    Ports = { new ServerPort("localhost", 0, creds) }
+                };
+                server.Start();
+                try
+                {
+                    // Send the port to stdout
+                    Console.WriteLine(server.Ports.First().BoundPort);
                     Application.Run(form);
+                }
+                finally
+                {
+                    server.ShutdownAsync().Wait();
                 }
             }
             catch (Exception ex)

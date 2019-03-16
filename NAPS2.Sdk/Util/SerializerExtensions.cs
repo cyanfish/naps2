@@ -50,5 +50,19 @@ namespace NAPS2.Util
         {
             return serializer.DeserializeFromBytes(Encoding.UTF8.GetBytes(str));
         }
+
+        public static string ToXml<T>(this T obj) => obj.ToXml(null);
+
+        public static string ToXml<T>(this T obj, Type[] knownTypes)
+        {
+            return new DefaultSerializer<T>(knownTypes).SerializeToString(obj);
+        }
+
+        public static T FromXml<T>(this string xml) => xml.FromXml<T>(null);
+
+        public static T FromXml<T>(this string xml, Type[] knownTypes)
+        {
+            return new DefaultSerializer<T>(knownTypes).DeserializeFromString(xml);
+        }
     }
 }
