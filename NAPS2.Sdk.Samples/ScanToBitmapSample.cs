@@ -55,6 +55,7 @@ namespace NAPS2.Sdk.Samples
             // ForEach allows you to asynchronously process images as they arrive.
             await imageSource.ForEach(async scannedImage =>
             {
+                // Make sure ScannedImage and rendered images are disposed after use
                 using (scannedImage)
                 using (Bitmap bitmap = await renderer.Render(scannedImage))
                 {
