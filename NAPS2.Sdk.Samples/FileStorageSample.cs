@@ -20,7 +20,7 @@ namespace NAPS2.Sdk.Samples
             // This will put files in the system temp folder by default, which can be
             // overriden by changing FileStorageManager.Current.
             // TODO: Probably this should go on StorageManager? It's weird to have to remember what's where
-            ScannedImage.ConfigureBackingStorage<IFileStorage>();
+            ScannedImage.ConfigureBackingStorage<FileStorage>();
             
             IScanDriver driver = new WiaScanDriver();
             ScanDevice device = driver.GetDeviceList().First();

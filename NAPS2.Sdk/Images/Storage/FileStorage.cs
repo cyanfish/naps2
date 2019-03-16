@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace NAPS2.Images.Storage
 {
-    public class FileStorage : IFileStorage
+    public class FileStorage : IStorage
     {
         public FileStorage(string fullPath)
         {

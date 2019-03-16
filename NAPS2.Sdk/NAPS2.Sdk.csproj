@@ -188,7 +188,6 @@
     <Compile Include="Images\ScannedImageSink.cs" />
     <Compile Include="Images\Storage\OwnershipConverters.cs" />
     <Compile Include="Images\Storage\PdfConverters.cs" />
-    <Compile Include="Images\Storage\OwnedTransferStorage.cs" />
     <Compile Include="Images\Storage\UnownedTransferStorage.cs" />
     <Compile Include="Images\Storage\PdfStorage.cs" />
     <Compile Include="ImportExport\Email\Mapi\IMapiWrapper.cs" />
@@ -228,11 +227,9 @@
     <Compile Include="Scan\Exceptions\DriverNotSupportedException.cs" />
     <Compile Include="Images\ScannedImageSource.cs" />
     <Compile Include="Images\Storage\GdiTransformers.cs" />
-    <Compile Include="Images\Storage\IFileStorage.cs" />
     <Compile Include="Images\Storage\IImageMetadata.cs" />
     <Compile Include="Images\Storage\IImageMetadataFactory.cs" />
     <Compile Include="Images\Storage\MemoryStreamStorage.cs" />
-    <Compile Include="Images\Storage\PdfFileStorage.cs" />
     <Compile Include="Images\Storage\FileStorageManager.cs" />
     <Compile Include="Images\Storage\GdiConverters.cs" />
     <Compile Include="Images\Storage\GdiImage.cs" />

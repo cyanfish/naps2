@@ -68,7 +68,7 @@ namespace NAPS2.Images.Storage
 
         public IImageMetadata CreateMetadata(IStorage storage)
         {
-            if (!(storage is IFileStorage fileStorage))
+            if (!(storage is FileStorage fileStorage))
             {
                 throw new ArgumentException("RecoveryStorageManager can only used with IFileStorage.");
             }

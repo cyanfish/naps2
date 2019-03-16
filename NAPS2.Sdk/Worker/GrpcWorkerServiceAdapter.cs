@@ -64,7 +64,7 @@ namespace NAPS2.Worker
             {
                 var resp = streamingCall.ResponseStream.Current;
                 GrpcHelper.HandleErrors(resp.Error);
-                var storage = new OwnedTransferStorage(resp.FilePath);
+                var storage = new FileStorage(resp.FilePath);
                 var metadata = StorageManager.ImageMetadataFactory.CreateMetadata(storage);
                 metadata.Deserialize(resp.MetadataXml);
                 var scannedImage = new ScannedImage(storage, metadata, new StorageConvertParams());

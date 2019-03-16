@@ -183,7 +183,7 @@ namespace NAPS2.ImportExport.Pdf
             // TODO: It would make sense to have in-memory PDFs be an option.
             // TODO: Really, ConvertToBacking should convert PdfStorage -> PdfFileStorage.
             // TODO: Then we wouldn't need a static FileStorageManager.
-            var image = new ScannedImage(new PdfFileStorage(pdfPath));
+            var image = new ScannedImage(new FileStorage(pdfPath));
             if (!importParams.NoThumbnails || importParams.DetectPatchCodes)
             {
                 using (var bitmap = await imageRenderer.Render(image))

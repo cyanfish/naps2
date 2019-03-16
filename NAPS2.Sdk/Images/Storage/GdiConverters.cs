@@ -10,7 +10,7 @@ namespace NAPS2.Images.Storage
     public class GdiConverters
     {
         [StorageConverter]
-        public IFileStorage ConvertToFile(GdiImage input, StorageConvertParams convertParams)
+        public FileStorage ConvertToFile(GdiImage input, StorageConvertParams convertParams)
         {
             if (convertParams.Temporary)
             {

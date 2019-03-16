@@ -135,7 +135,7 @@ namespace NAPS2.Worker
                 {
                     stream = StorageManager.Convert<MemoryStreamStorage>(thumb, new StorageConvertParams { Lossless = true }).Stream;
                 }
-                if (!(image.BackingStorage is IFileStorage fileStorage))
+                if (!(image.BackingStorage is FileStorage fileStorage))
                 {
                     throw new InvalidOperationException("The worker can only be used with IFileStorage backing storage.");
                 }

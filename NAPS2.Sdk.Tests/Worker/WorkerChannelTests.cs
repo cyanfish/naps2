@@ -83,7 +83,9 @@ namespace NAPS2.Sdk.Tests.Worker
         [Fact]
         public async Task TwainScan()
         {
-            ScannedImage.ConfigureBackingStorage<IFileStorage>();
+            // TODO: More tests, verifying correct serialization and using RecoveryStorageManager
+            // TODO: Also check correct error handling
+            ScannedImage.ConfigureBackingStorage<FileStorage>();
             try
             {
                 var twainWrapper = new TwainWrapperMockScanner

@@ -138,9 +138,9 @@ namespace NAPS2.ImportExport.Pdf
             progressCallback(progress, snapshots.Count);
             foreach (var snapshot in snapshots)
             {
-                if (snapshot.Source.BackingStorage is PdfFileStorage pdfFileStorage && !snapshot.TransformList.Any())
+                if (snapshot.Source.BackingStorage is FileStorage fileStorage && IsPdfFile(fileStorage) && !snapshot.TransformList.Any())
                 {
-                    CopyPdfPageToDoc(document, pdfFileStorage);
+                    CopyPdfPageToDoc(document, fileStorage);
                 }
                 else
                 {
@@ -162,6 +162,8 @@ namespace NAPS2.ImportExport.Pdf
             return true;
         }
 
+        private static bool IsPdfFile(FileStorage fileStorage) => Path.GetExtension(fileStorage.FullPath)?.Equals(".pdf", StringComparison.InvariantCultureIgnoreCase) ?? false;
+
         private bool BuildDocumentWithOcr(ProgressHandler progressCallback, CancellationToken cancelToken, PdfDocument document, PdfCompat compat, ICollection<ScannedImage.Snapshot> snapshots, OcrContext ocrContext, IOcrEngine ocrEngine)
         {
             int progress = 0;
@@ -180,10 +182,10 @@ namespace NAPS2.ImportExport.Pdf
                 PdfPage page;
                 bool importedPdfPassThrough = false;
 
-                if (snapshot.Source.BackingStorage is PdfFileStorage pdfFileStorage && !snapshot.TransformList.Any())
+                if (snapshot.Source.BackingStorage is FileStorage fileStorage && IsPdfFile(fileStorage) && !snapshot.TransformList.Any())
                 {
                     importedPdfPassThrough = true;
-                    page = CopyPdfPageToDoc(document, pdfFileStorage);
+                    page = CopyPdfPageToDoc(document, fileStorage);
                     if (PageContainsText(page))
                     {
                         // Since this page already contains text, don't use OCR
@@ -292,10 +294,10 @@ namespace NAPS2.ImportExport.Pdf
             return false;
         }
 
-        private PdfPage CopyPdfPageToDoc(PdfDocument destDoc, PdfFileStorage pdfFileStorage)
+        private PdfPage CopyPdfPageToDoc(PdfDocument destDoc, FileStorage fileStorage)
         {
             // Pull the PDF content directly to maintain objects, dpi, etc.
-            PdfDocument sourceDoc = PdfReader.Open(pdfFileStorage.FullPath, PdfDocumentOpenMode.Import);
+            PdfDocument sourceDoc = PdfReader.Open(fileStorage.FullPath, PdfDocumentOpenMode.Import);
             PdfPage sourcePage = sourceDoc.Pages.Cast<PdfPage>().Single();
             PdfPage destPage = destDoc.AddPage(sourcePage);
             destPage.CustomValues["/NAPS2ImportedPage"] = new PdfCustomValue(new byte[] { 0xFF });
