@@ -19,7 +19,6 @@ namespace NAPS2.Sdk.Samples
             // To save memory, we can store scanned images on disk after initial processing.
             // This will put files in the system temp folder by default, which can be
             // overriden by changing FileStorageManager.Current.
-            // TODO: Probably this should go on StorageManager? It's weird to have to remember what's where
             StorageManager.ConfigureBackingStorage<FileStorage>();
             
             IScanDriver driver = new WiaScanDriver();

@@ -60,7 +60,7 @@ namespace NAPS2.DI.EntryPoints
                 Server server = new Server
                 {
                     Services = { GrpcWorkerService.BindService(kernel.Get<GrpcWorkerServiceImpl>()) },
-                    Ports = { new ServerPort("localhost", 0, creds) }
+                    Ports = { new ServerPort("localhost", 0, ServerCredentials.Insecure) }
                 };
                 server.Start();
                 try

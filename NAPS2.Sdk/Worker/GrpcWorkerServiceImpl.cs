@@ -37,7 +37,10 @@ namespace NAPS2.Worker
             GrpcHelper.WrapFunc(
                 () =>
                 {
-                    FileStorageManager.Current = new RecoveryStorageManager(request.RecoveryFolderPath);
+                    if (!string.IsNullOrEmpty(request.RecoveryFolderPath))
+                    {
+                        FileStorageManager.Current = new RecoveryStorageManager(request.RecoveryFolderPath, true);
+                    }
                     return new InitResponse();
                 },
                 err => new InitResponse { Error = err });
@@ -144,7 +147,7 @@ namespace NAPS2.Worker
                     FilePath = fileStorage.FullPath,
                     MetadataXml = image.Metadata.Serialize(),
                     Thumbnail = stream != null ? ByteString.FromStream(stream) : ByteString.Empty,
-                    RenderedFilePath = imagePathDict.Get(image, "")
+                    RenderedFilePath = imagePathDict.Get(image) ?? ""
                 });
             }
         }

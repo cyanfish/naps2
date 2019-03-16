@@ -20,9 +20,10 @@ namespace NAPS2.Images.Storage
         private Stream folderLock;
         private ConfigManager<RecoveryIndex> indexConfigManager;
 
-        public RecoveryStorageManager(string recoveryFolderPath)
+        public RecoveryStorageManager(string recoveryFolderPath, bool skipCreate = false)
         {
             RecoveryFolderPath = recoveryFolderPath;
+            folderCreated = skipCreate;
         }
 
         public string RecoveryFolderPath { get; }
@@ -45,7 +46,7 @@ namespace NAPS2.Images.Storage
             return Path.Combine(RecoveryFolderPath, fileName);
         }
 
-        private void EnsureFolderCreated()
+        public void EnsureFolderCreated()
         {
             if (!folderCreated)
             {

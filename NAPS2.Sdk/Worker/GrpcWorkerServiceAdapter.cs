@@ -17,15 +17,15 @@ namespace NAPS2.Worker
 {
     public class GrpcWorkerServiceAdapter
     {
-        private GrpcWorkerService.GrpcWorkerServiceClient client;
+        private readonly GrpcWorkerService.GrpcWorkerServiceClient client;
 
         public GrpcWorkerServiceAdapter(int port)
         {
-            this.client = new GrpcWorkerService.GrpcWorkerServiceClient(new Channel("localhost", port, ChannelCredentials.Insecure));
+            client = new GrpcWorkerService.GrpcWorkerServiceClient(new Channel("localhost", port, ChannelCredentials.Insecure));
         }
         public void Init(string recoveryFolderPath)
         {
-            var req = new InitRequest { RecoveryFolderPath = recoveryFolderPath };
+            var req = new InitRequest { RecoveryFolderPath = recoveryFolderPath ?? "" };
             var resp = client.Init(req);
             GrpcHelper.HandleErrors(resp.Error);
         }

@@ -32,6 +32,9 @@ namespace NAPS2.Images.Storage
         public GdiImage ConvertToGdi(FileStorage input, StorageConvertParams convertParams) => new GdiImage(new Bitmap(input.FullPath));
 
         [StorageConverter]
+        public GdiImage ConvertToGdi(MemoryStreamStorage input, StorageConvertParams convertParams) => new GdiImage(new Bitmap(input.Stream));
+
+        [StorageConverter]
         public MemoryStreamStorage ConvertToMemoryStream(GdiImage input, StorageConvertParams convertParams)
         {
             var stream = new MemoryStream();

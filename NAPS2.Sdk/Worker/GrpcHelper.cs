@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
+using NAPS2.Logging;
 using NAPS2.Util;
 
 namespace NAPS2.Worker
@@ -17,6 +19,27 @@ namespace NAPS2.Worker
                 exception.PreserveStackTrace();
                 throw exception;
             }
+            else if (!string.IsNullOrEmpty(error?.Name))
+            {
+                throw new Exception($"GRPC endpoint error {error.Name}: {error.Message}");
+            }
+        }
+
+        private static Error ToError(Exception e)
+        {
+            var error = new Error();
+            try
+            {
+                error.Xml = e.ToXml();
+            }
+            catch (Exception serializerEx)
+            {
+                Log.ErrorException("Error serializing exception object", serializerEx);
+                Log.ErrorException("Original exception", e);
+            }
+            error.Name = e.GetType().Name;
+            error.Message = e.Message;
+            return error;
         }
 
         public static Task<TResponse> WrapFunc<TResponse>(Func<TResponse> action, Func<Error, TResponse> error) =>
@@ -28,7 +51,7 @@ namespace NAPS2.Worker
                 }
                 catch (Exception e)
                 {
-                    return error(new Error { Xml = e.ToXml() });
+                    return error(ToError(e));
                 }
             });
 
@@ -41,7 +64,7 @@ namespace NAPS2.Worker
                 }
                 catch (Exception e)
                 {
-                    return error(new Error { Xml = e.ToXml() });
+                    return error(ToError(e));
                 }
             });
 

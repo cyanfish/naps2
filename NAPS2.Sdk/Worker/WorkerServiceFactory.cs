@@ -10,17 +10,18 @@ namespace NAPS2.Worker
     {
         public WorkerContext Create()
         {
+            var rsm = FileStorageManager.Current as RecoveryStorageManager;
+            rsm?.EnsureFolderCreated();
             var worker = WorkerManager.NextWorker();
             try
             {
-                // TODO: Simplify
-                worker.Service.Init(((RecoveryStorageManager)FileStorageManager.Current).RecoveryFolderPath);
+                worker.Service.Init(rsm?.RecoveryFolderPath);
             }
             catch (EndpointNotFoundException)
             {
                 // Retry once
                 worker = WorkerManager.NextWorker();
-                worker.Service.Init(((RecoveryStorageManager)FileStorageManager.Current).RecoveryFolderPath);
+                worker.Service.Init(rsm?.RecoveryFolderPath);
             }
             return worker;
         }

@@ -13,6 +13,8 @@ service GrpcWorkerService {
 
 message Error {
 	string xml = 1;
+	string name = 2;
+	string message = 3;
 }
 
 message InitRequest {
