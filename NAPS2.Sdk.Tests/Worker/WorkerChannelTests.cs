@@ -1,9 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 using Grpc.Core;
 using Moq;
 using NAPS2.Images;
+using NAPS2.Images.Storage;
 using NAPS2.ImportExport.Email.Mapi;
 using NAPS2.Scan;
 using NAPS2.Scan.Twain;
@@ -14,14 +18,11 @@ namespace NAPS2.Sdk.Tests.Worker
 {
     public class WorkerChannelTests
     {
-        private Channel Start()
+        private Channel Start(ITwainWrapper twainWrapper = null, ThumbnailRenderer thumbnailRenderer = null, IMapiWrapper mapiWrapper = null)
         {
-            var twainWrapper = new Mock<ITwainWrapper>();
-            var thumbnailRenderer = new ThumbnailRenderer();
-            var mapiWrapper = new Mock<IMapiWrapper>();
             Server server = new Server
             {
-                Services = { GrpcWorkerService.BindService(new GrpcWorkerServiceImpl(twainWrapper.Object, thumbnailRenderer, mapiWrapper.Object)) },
+                Services = { GrpcWorkerService.BindService(new GrpcWorkerServiceImpl(twainWrapper, thumbnailRenderer, mapiWrapper)) },
                 Ports = { new ServerPort("localhost", 0, ServerCredentials.Insecure) }
             };
             server.Start();
@@ -29,10 +30,7 @@ namespace NAPS2.Sdk.Tests.Worker
             return new Channel
             {
                 Server = server,
-                Client = client,
-                TwainWrapper = twainWrapper,
-                ThumbnailRenderer = thumbnailRenderer,
-                MapiWrapper = mapiWrapper
+                Client = client
             };
         }
 
@@ -41,17 +39,34 @@ namespace NAPS2.Sdk.Tests.Worker
         {
             using (var channel = Start())
             {
-                // TODO: When init actually does something, do a better test
-                channel.Client.Init("");
+                var fsm = FileStorageManager.Current;
+                try
+                {
+                    channel.Client.Init(@"C:\Somewhere");
+                    Assert.IsType<RecoveryStorageManager>(FileStorageManager.Current);
+                    Assert.StartsWith(@"C:\Somewhere", ((RecoveryStorageManager)FileStorageManager.Current).RecoveryFolderPath);
+                }
+                finally
+                {
+                    FileStorageManager.Current = fsm;
+                }
             }
+        }
+
+        [Fact]
+        public void Wia10NativeUi()
+        {
+            // TODO: This is not testable yet
+            // channel.Client.Wia10NativeUI(...);
         }
 
         [Fact]
         public void TwainGetDeviceList()
         {
-            using (var channel = Start())
+            var twainWrapper = new Mock<ITwainWrapper>();
+            using (var channel = Start(twainWrapper.Object))
             {
-                channel.TwainWrapper
+                twainWrapper
                     .Setup(tw => tw.GetDeviceList(TwainImpl.OldDsm))
                     .Returns(new List<ScanDevice> { new ScanDevice("test_id", "test_name") });
 
@@ -60,8 +75,60 @@ namespace NAPS2.Sdk.Tests.Worker
                 Assert.Single(deviceList);
                 Assert.Equal("test_id", deviceList[0].ID);
                 Assert.Equal("test_name", deviceList[0].Name);
-                channel.TwainWrapper.Verify(tw => tw.GetDeviceList(TwainImpl.OldDsm));
-                channel.TwainWrapper.VerifyNoOtherCalls();
+                twainWrapper.Verify(tw => tw.GetDeviceList(TwainImpl.OldDsm));
+                twainWrapper.VerifyNoOtherCalls();
+            }
+        }
+
+        [Fact]
+        public async Task TwainScan()
+        {
+            ScannedImage.ConfigureBackingStorage<IFileStorage>();
+            try
+            {
+                var twainWrapper = new TwainWrapperMockScanner
+                {
+                    Images = new List<ScannedImage>
+                    {
+                        CreateScannedImage(),
+                        CreateScannedImage()
+                    }
+                };
+
+                using (var channel = Start(twainWrapper))
+                {
+                    var receivedImages = new List<ScannedImage>();
+                    await channel.Client.TwainScan(new ScanDevice("test_id", "test_name"), new ScanProfile(), new ScanParams(), IntPtr.Zero,
+                        CancellationToken.None,
+                        (img, path) => { receivedImages.Add(img); });
+
+                    Assert.Equal(2, receivedImages.Count);
+                }
+            }
+            finally
+            {
+                ScannedImage.ConfigureBackingStorage<GdiImage>();
+            }
+        }
+
+        private ScannedImage CreateScannedImage()
+        {
+            return new ScannedImage(new GdiImage(new Bitmap(100, 100)));
+        }
+
+        private class TwainWrapperMockScanner : ITwainWrapper
+        {
+            public List<ScannedImage> Images { get; set; } = new List<ScannedImage>();
+
+            public List<ScanDevice> GetDeviceList(TwainImpl twainImpl) => throw new NotSupportedException();
+
+            public void Scan(IntPtr dialogParent, ScanDevice scanDevice, ScanProfile scanProfile, ScanParams scanParams, CancellationToken cancelToken, ScannedImageSink sink,
+                Action<ScannedImage, ScanParams, string> runBackgroundOcr)
+            {
+                foreach (var img in Images)
+                {
+                    sink.PutImage(img);
+                }
             }
         }
 
@@ -70,12 +137,6 @@ namespace NAPS2.Sdk.Tests.Worker
             public Server Server { get; set; }
 
             public GrpcWorkerServiceAdapter Client { get; set; }
-
-            public Mock<ITwainWrapper> TwainWrapper { get; set; }
-
-            public ThumbnailRenderer ThumbnailRenderer { get; set; }
-
-            public Mock<IMapiWrapper> MapiWrapper { get; set; }
 
             public void Dispose()
             {

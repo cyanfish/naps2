@@ -51,9 +51,10 @@ message TwainScanRequest {
 
 message TwainScanResponse {
 	Error error = 1;
-	string recoveryIndexImageXml = 2;
-	bytes thumbnail = 3;
-	string tempImageFilePath = 4;
+	string filePath = 2;
+	string metadataXml = 3;
+	bytes thumbnail = 4;
+	string renderedFilePath = 5;
 }
 
 message SendMapiEmailRequest {

@@ -20,8 +20,8 @@ namespace NAPS2.Images.Storage
 
         bool CanSerialize { get; }
 
-        byte[] Serialize(IStorage storage);
+        string Serialize();
 
-        IStorage Deserialize(byte[] serializedData);
+        void Deserialize(string serializedData);
     }
 }

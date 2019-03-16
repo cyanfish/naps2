@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Runtime.Serialization;
 using NAPS2.Images.Transforms;
 using NAPS2.Recovery;
 using NAPS2.Scan;
+using NAPS2.Util;
 
 namespace NAPS2.Images.Storage
 {
@@ -57,61 +56,14 @@ namespace NAPS2.Images.Storage
 
         public bool CanSerialize => true;
 
-        public byte[] Serialize(IStorage storage)
-        {
-            var stream = new MemoryStream();
-            var serializer = new DataContractSerializer(typeof(SerializedMetadata), Transform.KnownTransformTypes);
-            serializer.WriteObject(stream, new SerializedMetadata
-            {
-                RecoveryIndexImage = indexImage,
-                RecoveryFolderPath = rsm.RecoveryFolderPath
-            });
-            return stream.ToArray();
-        }
+        public string Serialize() => indexImage.ToXml();
 
-        public IStorage Deserialize(byte[] serializedData)
-        {
-            var serializer = new DataContractSerializer(typeof(SerializedMetadata), Transform.KnownTransformTypes);
-            using (var stream = new MemoryStream(serializedData))
-            {
-                var data = (SerializedMetadata)serializer.ReadObject(stream);
-                indexImage = data.RecoveryIndexImage;
-                if (data.RecoveryFolderPath == rsm.RecoveryFolderPath)
-                {
-                    // Already exists in our recovery folder (i.e. it came from a worker scan)
-                    return new FileStorage(Path.Combine(rsm.RecoveryFolderPath, indexImage.FileName));
-                }
-                else
-                {
-                    // Exists elsewhere (i.e. copying from another NAPS2 instance)
-                    var oldPath = Path.Combine(data.RecoveryFolderPath, indexImage.FileName);
-                    var ext = Path.GetExtension(indexImage.FileName);
-                    var newPath = rsm.NextFilePath() + ext;
-                    indexImage.FileName = Path.GetFileName(newPath);
-                    File.Copy(oldPath, newPath);
-                    if (ext.Equals(".pdf", StringComparison.InvariantCultureIgnoreCase))
-                    {
-                        return new PdfFileStorage(newPath);
-                    }
-                    else
-                    {
-                        return new FileStorage(newPath);
-                    }
-                }
-            }
-        }
+        public void Deserialize(string serializedData) => indexImage = serializedData.FromXml<RecoveryIndexImage>();
 
         public void Dispose()
         {
             rsm.Index.Images.Remove(indexImage);
             // TODO: Commit?
-        }
-
-        private class SerializedMetadata
-        {
-            public RecoveryIndexImage RecoveryIndexImage { get; set; }
-
-            public string RecoveryFolderPath { get; set; }
         }
     }
 }

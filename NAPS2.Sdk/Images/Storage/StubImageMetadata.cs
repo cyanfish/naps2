@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using NAPS2.Images.Transforms;
 using NAPS2.Scan;
+using NAPS2.Util;
 
 namespace NAPS2.Images.Storage
 {
@@ -20,11 +21,21 @@ namespace NAPS2.Images.Storage
         {
         }
 
-        public bool CanSerialize => false;
+        public bool CanSerialize => true;
 
-        public byte[] Serialize(IStorage storage) => throw new NotSupportedException();
+        public string Serialize()
+        {
+            return this.ToXml(Transform.KnownTransformTypes);
+        }
 
-        public IStorage Deserialize(byte[] serializedData) => throw new NotSupportedException();
+        public void Deserialize(string serializedData)
+        {
+            var other = serializedData.FromXml<StubImageMetadata>(Transform.KnownTransformTypes);
+            TransformList = other.TransformList;
+            Index = other.Index;
+            BitDepth = other.BitDepth;
+            Lossless = other.Lossless;
+        }
 
         public void Dispose()
         {

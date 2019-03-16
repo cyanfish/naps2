@@ -132,6 +132,7 @@ namespace NAPS2.Recovery
                     }
 
                     string imagePath = Path.Combine(folderToRecoverFrom.FullName, indexImage.FileName);
+                    // TODO use UnownedFileStorage
                     ScannedImage scannedImage;
                     if (".pdf".Equals(Path.GetExtension(imagePath), StringComparison.InvariantCultureIgnoreCase))
                     {

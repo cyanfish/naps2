@@ -65,7 +65,7 @@ namespace NAPS2.Scan.Twain
                     {
                         await worker.Service.TwainScan(scanDevice, scanProfile, scanParams, dialogParent, cancelToken, (img, tempPath) =>
                         {
-                            if (tempPath != null) scannedImageHelper.RunBackgroundOcr(img, scanParams, tempPath);
+                            if (!string.IsNullOrEmpty(tempPath)) scannedImageHelper.RunBackgroundOcr(img, scanParams, tempPath);
                             sink.PutImage(img);
                         });
                     }

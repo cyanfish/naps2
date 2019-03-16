@@ -35,7 +35,11 @@ namespace NAPS2.Worker
 
         public override Task<InitResponse> Init(InitRequest request, ServerCallContext context) =>
             GrpcHelper.WrapFunc(
-                () => new InitResponse(),
+                () =>
+                {
+                    FileStorageManager.Current = new RecoveryStorageManager(request.RecoveryFolderPath);
+                    return new InitResponse();
+                },
                 err => new InitResponse { Error = err });
 
         public override Task<Wia10NativeUiResponse> Wia10NativeUi(Wia10NativeUiRequest request, ServerCallContext context) =>
@@ -125,19 +129,23 @@ namespace NAPS2.Worker
             public override void PutImage(ScannedImage image)
             {
                 // TODO: Ideally this shouldn't be inheriting ScannedImageSink, some other cleaner mechanism
-
-                // TODO
                 MemoryStream stream = null;
                 var thumb = image.GetThumbnail();
                 if (thumb != null)
                 {
                     stream = StorageManager.Convert<MemoryStreamStorage>(thumb, new StorageConvertParams { Lossless = true }).Stream;
                 }
-                //callback.WriteAsync(new TwainScanResponse
-                //{
-                //    RecoveryIndexImageXml = image.
-                //});
-                //callback.TwainImageReceived(image.RecoveryIndexImage, stream?.ToArray(), imagePathDict.Get(image));
+                if (!(image.BackingStorage is IFileStorage fileStorage))
+                {
+                    throw new InvalidOperationException("The worker can only be used with IFileStorage backing storage.");
+                }
+                callback.WriteAsync(new TwainScanResponse
+                {
+                    FilePath = fileStorage.FullPath,
+                    MetadataXml = image.Metadata.Serialize(),
+                    Thumbnail = stream != null ? ByteString.FromStream(stream) : ByteString.Empty,
+                    RenderedFilePath = imagePathDict.Get(image, "")
+                });
             }
         }
     }

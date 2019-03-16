@@ -186,7 +186,10 @@
     <Compile Include="Images\IScannedImageRenderer.cs" />
     <Compile Include="Images\MemoryStreamRenderer.cs" />
     <Compile Include="Images\ScannedImageSink.cs" />
+    <Compile Include="Images\Storage\OwnershipConverters.cs" />
     <Compile Include="Images\Storage\PdfConverters.cs" />
+    <Compile Include="Images\Storage\OwnedTransferStorage.cs" />
+    <Compile Include="Images\Storage\UnownedTransferStorage.cs" />
     <Compile Include="Images\Storage\PdfStorage.cs" />
     <Compile Include="ImportExport\Email\Mapi\IMapiWrapper.cs" />
     <Compile Include="ImportExport\Email\Mapi\MapiWrapper.cs" />

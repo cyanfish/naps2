@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Grpc.Core;
 using NAPS2.Images;
+using NAPS2.Images.Storage;
 using NAPS2.ImportExport.Email;
 using NAPS2.ImportExport.Email.Mapi;
 using NAPS2.Scan;
@@ -62,13 +64,17 @@ namespace NAPS2.Worker
             {
                 var resp = streamingCall.ResponseStream.Current;
                 GrpcHelper.HandleErrors(resp.Error);
-                // TODO
-                //var scannedImage = new ScannedImage(image);
-                //if (thumbnail != null)
-                //{
-                //    scannedImage.SetThumbnail(StorageManager.MemoryStorageFactory.Decode(new MemoryStream(thumbnail), ".bmp"));
-                //}
-                //ImageCallback?.Invoke(scannedImage, tempImageFilePath);
+                var storage = new OwnedTransferStorage(resp.FilePath);
+                var metadata = StorageManager.ImageMetadataFactory.CreateMetadata(storage);
+                metadata.Deserialize(resp.MetadataXml);
+                var scannedImage = new ScannedImage(storage, metadata, new StorageConvertParams());
+                var thumbnail = resp.Thumbnail.ToByteArray();
+                if (thumbnail.Length > 0)
+                {
+                    var thumbnailStorage = new MemoryStreamStorage(new MemoryStream(thumbnail));
+                    scannedImage.SetThumbnail(StorageManager.ConvertToImage(thumbnailStorage, new StorageConvertParams()));
+                }
+                imageCallback?.Invoke(scannedImage, resp.RenderedFilePath);
             }
         }
 
