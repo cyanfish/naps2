@@ -85,7 +85,7 @@ namespace NAPS2.Sdk.Tests.Worker
         {
             // TODO: More tests, verifying correct serialization and using RecoveryStorageManager
             // TODO: Also check correct error handling
-            ScannedImage.ConfigureBackingStorage<FileStorage>();
+            StorageManager.ConfigureBackingStorage<FileStorage>();
             try
             {
                 var twainWrapper = new TwainWrapperMockScanner
@@ -109,7 +109,7 @@ namespace NAPS2.Sdk.Tests.Worker
             }
             finally
             {
-                ScannedImage.ConfigureBackingStorage<GdiImage>();
+                StorageManager.ConfigureBackingStorage<GdiImage>();
             }
         }
 

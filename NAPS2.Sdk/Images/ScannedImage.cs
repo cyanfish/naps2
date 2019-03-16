@@ -12,13 +12,6 @@ namespace NAPS2.Images
 {
     public class ScannedImage : IDisposable
     {
-        public static void ConfigureBackingStorage<TStorage>() where TStorage : IStorage
-        {
-            BackingStorageType = typeof(TStorage);
-        }
-
-        public static Type BackingStorageType { get; private set; } = typeof(IStorage);
-
         private IImage thumbnail;
         private int thumbnailState;
         private int transformState;
@@ -32,21 +25,21 @@ namespace NAPS2.Images
 
         public ScannedImage(IStorage storage, StorageConvertParams convertParams)
         {
-            BackingStorage = StorageManager.Convert(storage, BackingStorageType, convertParams);
+            BackingStorage = StorageManager.ConvertToBacking(storage, convertParams);
             Metadata = StorageManager.ImageMetadataFactory.CreateMetadata(BackingStorage);
             Metadata.Commit();
         }
 
         public ScannedImage(IStorage storage, IImageMetadata metadata, StorageConvertParams convertParams)
         {
-            BackingStorage = StorageManager.Convert(storage, BackingStorageType, convertParams);
+            BackingStorage = StorageManager.ConvertToBacking(storage, convertParams);
             Metadata = metadata;
         }
 
         public ScannedImage(IStorage storage, ScanBitDepth bitDepth, bool highQuality, int quality)
         {
             var convertParams = new StorageConvertParams { Lossless = highQuality, LossyQuality = quality };
-            BackingStorage = StorageManager.Convert(storage, BackingStorageType, convertParams);
+            BackingStorage = StorageManager.ConvertToBacking(storage, convertParams);
             Metadata = StorageManager.ImageMetadataFactory.CreateMetadata(BackingStorage);
             // TODO: Is this stuff really needed in metadata?
             Metadata.BitDepth = bitDepth;

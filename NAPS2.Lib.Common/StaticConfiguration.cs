@@ -45,7 +45,7 @@ namespace NAPS2.DI
             var recoveryFolderPath = Path.Combine(Paths.Recovery, Path.GetRandomFileName());
             var rsm = new RecoveryStorageManager(recoveryFolderPath);
             FileStorageManager.Current = rsm;
-            ScannedImage.ConfigureBackingStorage<FileStorage>();
+            StorageManager.ConfigureBackingStorage<FileStorage>();
             StorageManager.ImageMetadataFactory = rsm;
         }
     }

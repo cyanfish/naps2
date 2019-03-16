@@ -28,6 +28,13 @@ namespace NAPS2.Images.Storage
         
         public static Type ImageType { get; private set; }
 
+        public static void ConfigureBackingStorage<TStorage>() where TStorage : IStorage
+        {
+            BackingStorageType = typeof(TStorage);
+        }
+
+        public static Type BackingStorageType { get; private set; } = typeof(IStorage);
+
         public static IImageFactory ImageFactory => ImageFactories.Get(ImageType) ?? throw new InvalidOperationException($"No factory has been registered for the image type {ImageType.FullName}.");
 
         private static readonly Dictionary<Type, IImageFactory> ImageFactories = new Dictionary<Type, IImageFactory>();
@@ -61,6 +68,11 @@ namespace NAPS2.Images.Storage
                 return image;
             }
             return (IImage)Convert(storage, ImageType, convertParams);
+        }
+
+        public static IStorage ConvertToBacking(IStorage storage, StorageConvertParams convertParams)
+        {
+            return Convert(storage, BackingStorageType, convertParams);
         }
 
         public static TStorage Convert<TStorage>(IStorage storage)
