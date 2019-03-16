@@ -75,6 +75,9 @@
   <PropertyGroup>
     <ApplicationIcon>scanner-app.ico</ApplicationIcon>
   </PropertyGroup>
+  <PropertyGroup>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
