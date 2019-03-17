@@ -118,6 +118,9 @@
       <HintPath>..\NAPS2.Setup\lib\PdfSharp.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Collections.Immutable, Version=1.2.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Collections.Immutable.1.5.0\lib\netstandard2.0\System.Collections.Immutable.dll</HintPath>
+    </Reference>
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -163,8 +166,12 @@
     <Compile Include="ClientServer\ScanCallback.cs" />
     <Compile Include="ClientServer\ScanService.cs" />
     <Compile Include="ClientServer\ServerDiscovery.cs" />
+    <Compile Include="Config\Experimental\UserAttribute.cs" />
+    <Compile Include="Config\Experimental\AppAttribute.cs" />
+    <Compile Include="Config\Experimental\CommonAttribute.cs" />
     <Compile Include="Config\Experimental\CommonConfig.cs" />
     <Compile Include="Config\Experimental\ConfigCopier.cs" />
+    <Compile Include="Config\Experimental\ConfigPropAttribute.cs" />
     <Compile Include="Config\Experimental\ConfigReadMode.cs" />
     <Compile Include="Config\Experimental\ConfigScope.cs" />
     <Compile Include="Config\Experimental\ConfigProvider.cs" />
@@ -175,6 +182,7 @@
     <Compile Include="Config\Experimental\InternalDefaults.cs" />
     <Compile Include="Config\Experimental\ObjectConfigScope.cs" />
     <Compile Include="Config\Experimental\ScopeSetConfigProvider.cs" />
+    <Compile Include="Config\Experimental\ToolbarButtons.cs" />
     <Compile Include="Config\Experimental\TransactionConfigScope.cs" />
     <Compile Include="Config\StubConfigManager.cs" />
     <Compile Include="Config\StubProfileManager.cs" />
