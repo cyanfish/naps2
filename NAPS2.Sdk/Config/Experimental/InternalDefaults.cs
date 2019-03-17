@@ -46,7 +46,7 @@ namespace NAPS2.Config.Experimental
                 DisableExitConfirmation = false,
                 SingleInstance = false,
                 ComponentsPath = "",
-                OcrTimeoutInSeconds = 10 * 60 * 1000, // 10 minutes
+                OcrTimeoutInSeconds = 10 * 60, // 10 minutes
                 EnableOcr = false,
                 OcrLanguageCode = "",
                 OcrMode = OcrMode.Default,

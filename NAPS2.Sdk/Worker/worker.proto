@@ -12,9 +12,9 @@ service GrpcWorkerService {
 }
 
 message Error {
-	string xml = 1;
-	string name = 2;
-	string message = 3;
+	string type = 1;
+	string message = 2;
+	string stackTrace = 3;
 }
 
 message InitRequest {

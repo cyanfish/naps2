@@ -5,11 +5,9 @@ using System.Runtime.Serialization;
 
 namespace NAPS2.Scan.Exceptions
 {
-    [Serializable]
     public abstract class ScanDriverException : Exception
     {
-        protected ScanDriverException(SerializationInfo info, StreamingContext context)
-            : base(info, context)
+        protected ScanDriverException()
         {
         }
 

@@ -6,14 +6,8 @@ using NAPS2.Lang.Resources;
 
 namespace NAPS2.Scan.Exceptions
 {
-    [Serializable]
     public class NoFeederSupportException : ScanDriverException
     {
-        protected NoFeederSupportException(SerializationInfo info, StreamingContext context)
-            : base(info, context)
-        {
-        }
-
         public NoFeederSupportException()
             : base(MiscResources.NoFeederSupport)
         {

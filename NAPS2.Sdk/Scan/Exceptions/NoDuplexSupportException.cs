@@ -6,14 +6,8 @@ using NAPS2.Lang.Resources;
 
 namespace NAPS2.Scan.Exceptions
 {
-    [Serializable]
     public class NoDuplexSupportException : ScanDriverException
     {
-        protected NoDuplexSupportException(SerializationInfo info, StreamingContext context)
-            : base(info, context)
-        {
-        }
-
         public NoDuplexSupportException()
             : base(MiscResources.NoDuplexSupport)
         {

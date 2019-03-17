@@ -6,11 +6,9 @@ using NAPS2.Lang.Resources;
 
 namespace NAPS2.Scan.Exceptions
 {
-    [Serializable]
     public class ScanDriverUnknownException : ScanDriverException
     {
-        protected ScanDriverUnknownException(SerializationInfo info, StreamingContext context)
-            : base(info, context)
+        public ScanDriverUnknownException()
         {
         }
 

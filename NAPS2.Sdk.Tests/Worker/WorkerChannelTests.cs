@@ -10,6 +10,7 @@ using NAPS2.Images;
 using NAPS2.Images.Storage;
 using NAPS2.ImportExport.Email.Mapi;
 using NAPS2.Scan;
+using NAPS2.Scan.Exceptions;
 using NAPS2.Scan.Twain;
 using NAPS2.Worker;
 using Xunit;
@@ -113,6 +114,27 @@ namespace NAPS2.Sdk.Tests.Worker
             }
         }
 
+        [Fact]
+        public async Task TwainScanException()
+        {
+            var twainWrapper = new TwainWrapperMockScanner
+            {
+                Exception = new DeviceException("Test error")
+            };
+            using (var channel = Start(twainWrapper))
+            {
+                var ex = await Assert.ThrowsAsync<DeviceException>(async () => await channel.Client.TwainScan(
+                    new ScanDevice("test_id", "test_name"),
+                    new ScanProfile(),
+                    new ScanParams(),
+                    IntPtr.Zero,
+                    CancellationToken.None,
+                    (img, path) => { }));
+                Assert.Contains(nameof(TwainWrapperMockScanner), ex.StackTrace);
+                Assert.Contains("Test error", ex.Message);
+            }
+        }
+
         private ScannedImage CreateScannedImage()
         {
             return new ScannedImage(new GdiImage(new Bitmap(100, 100)));
@@ -122,6 +144,8 @@ namespace NAPS2.Sdk.Tests.Worker
         {
             public List<ScannedImage> Images { get; set; } = new List<ScannedImage>();
 
+            public Exception Exception { get; set; }
+
             public List<ScanDevice> GetDeviceList(TwainImpl twainImpl) => throw new NotSupportedException();
 
             public void Scan(IntPtr dialogParent, ScanDevice scanDevice, ScanProfile scanProfile, ScanParams scanParams, CancellationToken cancelToken, ScannedImageSink sink,
@@ -130,6 +154,11 @@ namespace NAPS2.Sdk.Tests.Worker
                 foreach (var img in Images)
                 {
                     sink.PutImage(img);
+                }
+
+                if (Exception != null)
+                {
+                    throw Exception;
                 }
             }
         }

@@ -6,14 +6,8 @@ using NAPS2.Lang.Resources;
 
 namespace NAPS2.Scan.Exceptions
 {
-    [Serializable]
     public class NoDevicesFoundException : ScanDriverException
     {
-        protected NoDevicesFoundException(SerializationInfo info, StreamingContext context)
-            : base(info, context)
-        {
-        }
-
         public NoDevicesFoundException()
             : base(MiscResources.NoDevicesFound)
         {

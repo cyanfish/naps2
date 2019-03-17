@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
-using System.Xml.Serialization;
-using NAPS2.Logging;
+using NAPS2.Scan.Exceptions;
 using NAPS2.Util;
 
 namespace NAPS2.Worker
@@ -12,35 +12,32 @@ namespace NAPS2.Worker
     {
         public static void HandleErrors(Error error)
         {
-            if (!string.IsNullOrEmpty(error?.Xml))
+            if (!string.IsNullOrEmpty(error?.Type))
             {
-                var knownExceptionTypes = new Type[] { }; // TODO
-                var exception = error.Xml.FromXml<Exception>();
-                exception.PreserveStackTrace();
-                throw exception;
-            }
-            else if (!string.IsNullOrEmpty(error?.Name))
-            {
-                throw new Exception($"GRPC endpoint error {error.Name}: {error.Message}");
+                var exceptionType = Assembly.GetAssembly(typeof(ScanDriverException))
+                    .GetTypes()
+                    .FirstOrDefault(x => x.FullName == error.Type);
+                if (exceptionType != null)
+                {
+                    var exception = (Exception)Activator.CreateInstance(exceptionType);
+                    var messageField = typeof(Exception).GetField("_message", BindingFlags.NonPublic | BindingFlags.Instance);
+                    var stackTraceField = typeof(Exception).GetField("_stackTraceString", BindingFlags.NonPublic | BindingFlags.Instance);
+                    messageField?.SetValue(exception, error.Message);
+                    stackTraceField?.SetValue(exception, error.StackTrace);
+                    exception.PreserveStackTrace();
+                    throw exception;
+                }
+                throw new Exception($"An error occurred on the gRPC server.\n{error.Type}: {error.Message}\n{error.StackTrace}");
             }
         }
 
-        private static Error ToError(Exception e)
-        {
-            var error = new Error();
-            try
+        private static Error ToError(Exception e) =>
+            new Error
             {
-                error.Xml = e.ToXml();
-            }
-            catch (Exception serializerEx)
-            {
-                Log.ErrorException("Error serializing exception object", serializerEx);
-                Log.ErrorException("Original exception", e);
-            }
-            error.Name = e.GetType().Name;
-            error.Message = e.Message;
-            return error;
-        }
+                Type = e.GetType().FullName,
+                Message = e.Message,
+                StackTrace = e.StackTrace
+            };
 
         public static Task<TResponse> WrapFunc<TResponse>(Func<TResponse> action, Func<Error, TResponse> error) =>
             Task.Run(() =>
@@ -77,7 +74,7 @@ namespace NAPS2.Worker
                 }
                 catch (Exception e)
                 {
-                    error(new Error { Xml = e.ToXml() });
+                    error(ToError(e));
                 }
             });
     }

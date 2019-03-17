@@ -22,5 +22,15 @@ namespace NAPS2.Sdk.Tests.Config
             Assert.Single(config2.FormStates);
             Assert.Equal("Test", config2.FormStates[0].Name);
         }
+
+        [Fact]
+        public void NoNulls()
+        {
+            var config = InternalDefaults.GetCommonConfig();
+            foreach (var prop in typeof(CommonConfig).GetProperties())
+            {
+                Assert.NotNull(prop.GetValue(config));
+            }
+        }
     }
 }
