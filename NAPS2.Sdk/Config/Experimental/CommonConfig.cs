@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.Immutable;
 using System.Linq;
 using System.Windows.Forms;
 using NAPS2.ImportExport.Email;
@@ -24,16 +23,16 @@ namespace NAPS2.Config.Experimental
         public string Culture { get; set; }
 
         [User]
-        public ImmutableList<FormState> FormStates { get; set; }
+        public List<FormState> FormStates { get; set; }
 
         [User]
-        public ImmutableHashSet<string> BackgroundOperations { get; set; }
+        public HashSet<string> BackgroundOperations { get; set; }
 
         [Common]
-        public ImmutableList<NamedPageSize> CustomPageSizePresets { get; set; }
+        public List<NamedPageSize> CustomPageSizePresets { get; set; }
 
         [User]
-        public ImmutableList<ScanProxyConfig> SavedProxies { get; set; }
+        public List<ScanProxyConfig> SavedProxies { get; set; }
 
         [App]
         public string StartupMessageTitle { get; set; }

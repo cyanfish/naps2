@@ -89,6 +89,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Asserts\PdfAsserts.cs" />
+    <Compile Include="Config\CommonConfigTests.cs" />
     <Compile Include="Config\ProfileSerializerTests.cs" />
     <Compile Include="FileSystemTests.cs" />
     <Compile Include="GlobalSuppressions.cs" />

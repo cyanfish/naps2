@@ -1,0 +1,26 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using NAPS2.Config;
+using NAPS2.Config.Experimental;
+using NAPS2.Util;
+using Xunit;
+
+namespace NAPS2.Sdk.Tests.Config
+{
+    public class CommonConfigTests
+    {
+        [Fact]
+        public void CanSerialize()
+        {
+            var config = InternalDefaults.GetCommonConfig();
+            config.FormStates.Add(new FormState { Name = "Test" });
+            
+            var xml = config.ToXml();
+            var config2 = xml.FromXml<CommonConfig>();
+
+            Assert.Single(config2.FormStates);
+            Assert.Equal("Test", config2.FormStates[0].Name);
+        }
+    }
+}

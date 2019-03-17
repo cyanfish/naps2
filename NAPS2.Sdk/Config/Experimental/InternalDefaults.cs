@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.Immutable;
 using System.Linq;
 using System.Windows.Forms;
 using NAPS2.ImportExport.Email;
@@ -13,17 +12,17 @@ using NAPS2.Scan.Batch;
 
 namespace NAPS2.Config.Experimental
 {
-    public class InternalDefaults
+    public static class InternalDefaults
     {
         // TODO: Test that no properties are null
         public static CommonConfig GetCommonConfig() =>
             new CommonConfig
             {
                 Culture = "en",
-                FormStates = ImmutableList<FormState>.Empty,
-                BackgroundOperations = ImmutableHashSet<string>.Empty,
-                CustomPageSizePresets = ImmutableList<NamedPageSize>.Empty,
-                SavedProxies = ImmutableList<ScanProxyConfig>.Empty,
+                FormStates = new List<FormState>(),
+                BackgroundOperations = new HashSet<string>(),
+                CustomPageSizePresets = new List<NamedPageSize>(),
+                SavedProxies = new List<ScanProxyConfig>(),
                 StartupMessageTitle = "",
                 StartupMessageText = "",
                 StartupMessageIcon = MessageBoxIcon.None,
