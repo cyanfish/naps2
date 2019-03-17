@@ -56,35 +56,13 @@ namespace NAPS2.Config.Experimental
                 ThumbnailSize = 128,
                 DesktopToolStripDock = DockStyle.Top,
                 EventLogging = EventType.None,
-                PdfSettings = new PdfSettings
-                {
-
-                },
-                ImageSettings = new ImageSettings
-                {
-
-                },
-                EmailSettings = new EmailSettings
-                {
-
-                },
-                EmailSetup = new EmailSetup
-                {
-
-                },
-                BatchSettings = new BatchSettings
-                {
-
-                },
-                KeyboardShortcuts = new KeyboardShortcuts
-                {
-
-                },
-                DefaultProfileSettings = new ScanProfile
-                {
-
-                },
-                RequiredProfileSettings = new ScanProfile()
+                PdfSettings = new PdfSettings(),
+                ImageSettings = new ImageSettings(),
+                EmailSettings = new EmailSettings(),
+                EmailSetup = new EmailSetup(),
+                BatchSettings = new BatchSettings(),
+                KeyboardShortcuts = new KeyboardShortcuts(),
+                DefaultProfileSettings = new ScanProfile()
             };
     }
 }

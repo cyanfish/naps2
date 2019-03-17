@@ -151,8 +151,5 @@ namespace NAPS2.Config.Experimental
 
         [Common]
         public ScanProfile DefaultProfileSettings { get; set; }
-
-        [App]
-        public ScanProfile RequiredProfileSettings { get; set; }
     }
 }
