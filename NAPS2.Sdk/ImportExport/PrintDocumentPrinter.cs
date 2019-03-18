@@ -81,7 +81,7 @@ namespace NAPS2.ImportExport
                     int i = 0;
                     printDocument.PrintPage += (sender, e) =>
                     {
-                        var image = Task.Factory.StartNew(() => imageRenderer.Render(imagesToPrint[i])).Unwrap().Result;
+                        var image = Task.Run(() => imageRenderer.Render(imagesToPrint[i])).Result;
                         try
                         {
                             var pb = e.PageBounds;

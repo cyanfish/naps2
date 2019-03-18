@@ -35,7 +35,7 @@ namespace NAPS2.ImportExport.Email.Mapi
         /// <returns>Returns true if the message was sent, false if the user aborted.</returns>
         public async Task<bool> SendEmail(EmailMessage message, ProgressHandler progressCallback, CancellationToken cancelToken)
         {
-            return await Task.Factory.StartNew(() =>
+            return await Task.Run(() =>
             {
                 MapiSendMailReturnCode returnCode;
 

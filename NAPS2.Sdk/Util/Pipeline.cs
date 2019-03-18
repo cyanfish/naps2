@@ -21,9 +21,6 @@ namespace NAPS2.Util
     /// </summary>
     public static class Pipeline
     {
-        private static readonly TaskFactory TaskFactory =
-            new TaskFactory(TaskCreationOptions.LongRunning, TaskContinuationOptions.None);
-
         /// <summary>
         /// Creates a pipeline to process the given input.
         /// </summary>
@@ -99,7 +96,7 @@ namespace NAPS2.Util
             {
                 var collection = new BlockingCollection<T2>();
                 var input = previous.GetOutput(taskList);
-                taskList.Add(TaskFactory.StartNew(() =>
+                taskList.Add(Task.Run(() =>
                 {
                     try
                     {
@@ -151,7 +148,7 @@ namespace NAPS2.Util
             {
                 var collection = new BlockingCollection<T2>();
                 var input = previous.GetOutput(taskList);
-                taskList.Add(TaskFactory.StartNew(() =>
+                taskList.Add(Task.Run(() =>
                 {
                     try
                     {
@@ -188,7 +185,7 @@ namespace NAPS2.Util
             {
                 var collection = new BlockingCollection<T2>();
                 var input = previous.GetOutput(taskList);
-                taskList.Add(TaskFactory.StartNew(() =>
+                taskList.Add(Task.Run(() =>
                 {
                     try
                     {

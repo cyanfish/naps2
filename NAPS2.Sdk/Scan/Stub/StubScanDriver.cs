@@ -39,14 +39,14 @@ namespace NAPS2.Scan.Stub
         public ScannedImageSource Scan(ScanProfile scanProfile, ScanParams scanParams, IntPtr dialogParent, CancellationToken cancelToken)
         {
             var sink = new ScannedImageSink();
-            Task.Factory.StartNew(() =>
+            Task.Run(() =>
             {
                 for (int i = 0; i < ImageCount; i++)
                 {
                     Thread.Sleep(500);
                     sink.PutImage(MakeImage());
                 }
-            }, TaskCreationOptions.LongRunning);
+            });
             return sink.AsSource();
         }
 

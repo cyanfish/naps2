@@ -365,7 +365,7 @@ namespace NAPS2.Images.Transforms
             for (int i = 0; i < partitionCount; i++)
             {
                 int start = div * i, end = Math.Min(div * (i + 1), count);
-                tasks[i] = Task.Factory.StartNew(() => action(start, end));
+                tasks[i] = Task.Run(() => action(start, end));
             }
             Task.WaitAll(tasks);
         }

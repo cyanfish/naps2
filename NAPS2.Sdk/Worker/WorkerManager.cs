@@ -94,7 +94,7 @@ namespace NAPS2.Worker
 
         private static void StartWorkerService()
         {
-            Task.Factory.StartNew(() =>
+            Task.Run(() =>
             {
                 var (proc, port, cert, privateKey) = StartWorkerProcess();
                 var creds = GrpcHelper.GetClientCreds(cert, privateKey);

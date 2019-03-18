@@ -59,7 +59,7 @@ namespace NAPS2.Operation
 
         private Task<T> StartTask<T>(Func<T> action)
         {
-            return Task.Factory.StartNew(() =>
+            return Task.Run(() =>
             {
                 // We don't need to catch errors in general. The idea is that for a typical operation,
                 // OperationManager will handle it and show an error message box.
@@ -73,7 +73,7 @@ namespace NAPS2.Operation
                     InvokeFinished();
                 }
                 // TODO: Maybe try and move away from "return false on cancel" and use cancellation tokens/OperationCancelledException via ct.ThrowIfCancellationRequested
-            }, CancelToken, TaskCreationOptions.LongRunning, TaskScheduler.Default);
+            }, CancelToken);
         }
 
         protected void InvokeFinished()

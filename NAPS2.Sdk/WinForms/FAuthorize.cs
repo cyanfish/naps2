@@ -32,7 +32,7 @@ namespace NAPS2.WinForms
             MinimumSize = new Size(Math.Max(lblWaiting.Width + 142, 272), Height);
 
             cancelTokenSource = new CancellationTokenSource();
-            Task.Factory.StartNew(() =>
+            Task.Run(() =>
             {
                 try
                 {
@@ -56,7 +56,7 @@ namespace NAPS2.WinForms
                         Close();
                     });
                 }
-            }, TaskCreationOptions.LongRunning);
+            });
         }
 
         private void FAuthorize_FormClosed(object sender, FormClosedEventArgs e)

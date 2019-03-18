@@ -19,7 +19,7 @@ namespace NAPS2.Images
 
         public async Task<IImage> Render(ScannedImage.Snapshot snapshot, int outputSize = 0)
         {
-            return await Task.Factory.StartNew(() =>
+            return await Task.Run(() =>
             {
                 var storage = StorageManager.ConvertToImage(snapshot.Source.BackingStorage, new StorageConvertParams());
                 if (outputSize > 0)

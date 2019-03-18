@@ -79,7 +79,7 @@ namespace NAPS2.Update
 
         private async Task<JObject> GetJson(string url)
         {
-            return await Task.Factory.StartNew(() =>
+            return await Task.Run(() =>
             {
                 using (var client = new WebClient())
                 {

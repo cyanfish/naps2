@@ -272,7 +272,7 @@ namespace NAPS2.Images
         public async Task RotateFlip(IEnumerable<int> selection, double angle)
         {
             var images = Images.ElementsAt(selection).ToList();
-            await Task.Factory.StartNew(() =>
+            await Task.Run(() =>
             {
                 foreach (ScannedImage img in images)
                 {

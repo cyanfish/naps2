@@ -415,7 +415,7 @@ namespace NAPS2.WinForms
                 e.Cancel = true;
                 Hide();
                 ShowInTaskbar = false;
-                Task.Factory.StartNew(() =>
+                Task.Run(() =>
                 {
                     var timeoutCts = new CancellationTokenSource();
                     timeoutCts.CancelAfter(TimeSpan.FromSeconds(60));

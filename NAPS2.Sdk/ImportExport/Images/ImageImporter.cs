@@ -24,7 +24,7 @@ namespace NAPS2.ImportExport.Images
         public ScannedImageSource Import(string filePath, ImportParams importParams, ProgressHandler progressCallback, CancellationToken cancelToken)
         {
             var sink = new ScannedImageSink();
-            Task.Factory.StartNew(() =>
+            Task.Run(() =>
             {
                 try
                 {
@@ -82,7 +82,7 @@ namespace NAPS2.ImportExport.Images
                 {
                     sink.SetError(e);
                 }
-            }, TaskCreationOptions.LongRunning);
+            });
             return sink.AsSource();
         }
     }

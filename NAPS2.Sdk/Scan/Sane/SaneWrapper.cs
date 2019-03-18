@@ -76,12 +76,12 @@ namespace NAPS2.Scan.Sane
 
             // Read the image output into a MemoryStream off-thread
             var outputStream = new MemoryStream();
-            Task.Factory.StartNew(() =>
+            Task.Run(() =>
             {
                 proc.StandardOutput.BaseStream.CopyTo(outputStream);
                 outputStream.Seek(0, SeekOrigin.Begin);
                 outputFinishedWaitHandle.Set();
-            }, TaskCreationOptions.LongRunning);
+            });
 
             // Wait for the process to stop (or for the user to cancel)
             WaitHandle.WaitAny(new[] { procExitWaitHandle, cancelToken.WaitHandle });

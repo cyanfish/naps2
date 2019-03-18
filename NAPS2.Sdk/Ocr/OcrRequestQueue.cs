@@ -88,7 +88,7 @@ namespace NAPS2.Ocr
             // If no worker threads are running, start them
             EnsureWorkerThreads();
             // Wait for completion or cancellation
-            await Task.Factory.StartNew(() =>
+            await Task.Run(() =>
             {
                 try
                 {
@@ -98,7 +98,7 @@ namespace NAPS2.Ocr
                 {
                     Log.ErrorException("Error in OcrRequestQueue.QueueForeground response task", e);
                 }
-            }, TaskCreationOptions.LongRunning);
+            });
             lock (this)
             {
                 // Decrement the reference count
@@ -147,7 +147,7 @@ namespace NAPS2.Ocr
             // If no worker threads are running, start them
             EnsureWorkerThreads();
             var op = StartingOne();
-            Task.Factory.StartNew(() =>
+            Task.Run(() =>
             {
                 try
                 {
@@ -168,7 +168,7 @@ namespace NAPS2.Ocr
                 {
                     Log.ErrorException("Error in OcrRequestQueue.QueueBackground response task", e);
                 }
-            }, TaskCreationOptions.LongRunning);
+            });
         }
 
         private void DestroyRequest(OcrRequest req)
@@ -216,7 +216,7 @@ namespace NAPS2.Ocr
                 {
                     for (int i = 0; i < Environment.ProcessorCount; i++)
                     {
-                        workerTasks.Add(Task.Factory.StartNew(() => RunWorkerTask(workerCts), TaskCreationOptions.LongRunning));
+                        workerTasks.Add(Task.Run(() => RunWorkerTask(workerCts)));
                     }
                 }
                 if (workerTasks.Count > 0 && !hasPending)
