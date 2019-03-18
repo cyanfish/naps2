@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
+using Grpc.Core;
 using NAPS2.Scan.Exceptions;
 using NAPS2.Util;
 
@@ -77,5 +78,14 @@ namespace NAPS2.Worker
                     error(ToError(e));
                 }
             });
+
+        public static ChannelCredentials GetClientCreds(string cert, string privateKey) =>
+            new SslCredentials(cert, new KeyCertificatePair(cert, privateKey));
+
+        public static ServerCredentials GetServerCreds(string cert, string privateKey) =>
+            new SslServerCredentials(
+                new[] { new KeyCertificatePair(cert, privateKey) },
+                cert,
+                SslClientCertificateRequestType.RequestAndRequireAndVerify);
     }
 }

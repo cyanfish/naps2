@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading;
 using System.Threading.Tasks;
 using Grpc.Core;
@@ -12,6 +13,7 @@ using NAPS2.ImportExport.Email.Mapi;
 using NAPS2.Scan;
 using NAPS2.Scan.Exceptions;
 using NAPS2.Scan.Twain;
+using NAPS2.Util;
 using NAPS2.Worker;
 using Xunit;
 
@@ -19,20 +21,32 @@ namespace NAPS2.Sdk.Tests.Worker
 {
     public class WorkerChannelTests
     {
-        private Channel Start(ITwainWrapper twainWrapper = null, ThumbnailRenderer thumbnailRenderer = null, IMapiWrapper mapiWrapper = null)
+        private Channel Start(ITwainWrapper twainWrapper = null, ThumbnailRenderer thumbnailRenderer = null, IMapiWrapper mapiWrapper = null, ServerCredentials serverCreds = null, ChannelCredentials clientCreds = null)
         {
             Server server = new Server
             {
                 Services = { GrpcWorkerService.BindService(new GrpcWorkerServiceImpl(twainWrapper, thumbnailRenderer, mapiWrapper)) },
-                Ports = { new ServerPort("localhost", 0, ServerCredentials.Insecure) }
+                Ports = { new ServerPort("localhost", 0, serverCreds ?? ServerCredentials.Insecure) }
             };
             server.Start();
-            var client = new GrpcWorkerServiceAdapter(server.Ports.First().BoundPort);
+            var client = new GrpcWorkerServiceAdapter(server.Ports.First().BoundPort, clientCreds ?? ChannelCredentials.Insecure);
             return new Channel
             {
                 Server = server,
                 Client = client
             };
+        }
+
+        [Fact]
+        public void SslCreds()
+        {
+            var (cert, privateKey) = SslHelper.GenerateRootCertificate();
+            var serverCreds = GrpcHelper.GetServerCreds(cert, privateKey);
+            var clientCreds = GrpcHelper.GetClientCreds(cert, privateKey);
+            using (var channel = Start(serverCreds: serverCreds, clientCreds: clientCreds))
+            {
+                channel.Client.Init(null);
+            }
         }
 
         [Fact]

@@ -5,8 +5,12 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Security.Cryptography.X509Certificates;
+using System.Text;
 using System.Threading.Tasks;
+using Grpc.Core;
 using NAPS2.Platform;
+using NAPS2.Util;
 
 namespace NAPS2.Worker
 {
@@ -45,13 +49,14 @@ namespace NAPS2.Worker
             }
         }
 
-        private static (Process, int) StartWorkerProcess()
+        private static (Process, int, string, string) StartWorkerProcess()
         {
             var parentId = Process.GetCurrentProcess().Id;
             var proc = Process.Start(new ProcessStartInfo
             {
                 FileName = PlatformCompat.Runtime.ExeRunner ?? WorkerExePath,
                 Arguments = PlatformCompat.Runtime.ExeRunner != null ? $"{WorkerExePath} {parentId}" : $"{parentId}",
+                RedirectStandardInput = true,
                 RedirectStandardOutput = true,
                 UseShellExecute = false
             });
@@ -74,17 +79,26 @@ namespace NAPS2.Worker
                 }
             }
 
+            var (cert, privateKey) = SslHelper.GenerateRootCertificate();
+            WriteEncodedString(proc.StandardInput, cert);
+            WriteEncodedString(proc.StandardInput, privateKey);
             int port = int.Parse(proc.StandardOutput.ReadLine() ?? throw new Exception("Could not read worker port"));
 
-            return (proc, port);
+            return (proc, port, cert, privateKey);
+        }
+
+        private static void WriteEncodedString(StreamWriter streamWriter, string value)
+        {
+            streamWriter.WriteLine(Convert.ToBase64String(Encoding.UTF8.GetBytes(value)));
         }
 
         private static void StartWorkerService()
         {
             Task.Factory.StartNew(() =>
             {
-                var (proc, port) = StartWorkerProcess();
-                _workerQueue.Add(new WorkerContext { Service = new GrpcWorkerServiceAdapter(port), Process = proc });
+                var (proc, port, cert, privateKey) = StartWorkerProcess();
+                var creds = GrpcHelper.GetClientCreds(cert, privateKey);
+                _workerQueue.Add(new WorkerContext { Service = new GrpcWorkerServiceAdapter(port, creds), Process = proc });
             });
         }
 

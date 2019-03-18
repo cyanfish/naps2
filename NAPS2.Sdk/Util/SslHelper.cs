@@ -42,8 +42,8 @@ namespace NAPS2.Util
         {
             var gen = new X509V3CertificateGenerator();
             gen.SetPublicKey(keyPair.Public);
-            gen.SetIssuerDN(new X509Name("CN=naps2"));
-            gen.SetSubjectDN(new X509Name("CN=naps2"));
+            gen.SetIssuerDN(new X509Name("CN=localhost"));
+            gen.SetSubjectDN(new X509Name("CN=localhost"));
             gen.SetNotBefore(DateTime.Now - TimeSpan.FromDays(2));
             gen.SetNotAfter(DateTime.Now + TimeSpan.FromDays(365));
             gen.SetSerialNumber(new BigInteger(128, Random));

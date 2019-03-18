@@ -19,10 +19,11 @@ namespace NAPS2.Worker
     {
         private readonly GrpcWorkerService.GrpcWorkerServiceClient client;
 
-        public GrpcWorkerServiceAdapter(int port)
+        public GrpcWorkerServiceAdapter(int port, ChannelCredentials creds)
         {
-            client = new GrpcWorkerService.GrpcWorkerServiceClient(new Channel("localhost", port, ChannelCredentials.Insecure));
+            client = new GrpcWorkerService.GrpcWorkerServiceClient(new Channel("localhost", port, creds));
         }
+
         public void Init(string recoveryFolderPath)
         {
             var req = new InitRequest { RecoveryFolderPath = recoveryFolderPath ?? "" };

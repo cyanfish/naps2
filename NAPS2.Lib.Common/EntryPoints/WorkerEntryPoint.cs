@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.ServiceModel;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -51,16 +52,20 @@ namespace NAPS2.DI.EntryPoints
                 var form = new BackgroundForm();
                 Invoker.Current = form;
 
-                var (rootCert, rootPrivate) = SslHelper.GenerateRootCertificate();
-                //var (cert, privateKey) = SslHelper.GenerateCertificateChain(rootCert, rootPrivate);
-                var creds = new SslServerCredentials(new[] {new KeyCertificatePair(rootCert, rootPrivate)}, rootCert,
-                    SslClientCertificateRequestType.RequestAndRequireAndVerify);
+                // We share the TLS public and private key between worker and parent;
+                // this is equivalent to using a symmetric key. The only point is to
+                // prevent other applications sniffing the TCP traffic, since there's
+                // already full trust between worker and parent, and stdin/stdout are
+                // secure channels for key sharing.
+                var cert = ReadEncodedString();
+                var privateKey = ReadEncodedString();
+                var creds = GrpcHelper.GetServerCreds(cert, privateKey);
 
                 // Connect to the main NAPS2 process and listen for assigned work
                 Server server = new Server
                 {
                     Services = { GrpcWorkerService.BindService(kernel.Get<GrpcWorkerServiceImpl>()) },
-                    Ports = { new ServerPort("localhost", 0, ServerCredentials.Insecure) }
+                    Ports = { new ServerPort("localhost", 0, creds) }
                 };
                 server.Start();
                 try
@@ -80,6 +85,12 @@ namespace NAPS2.DI.EntryPoints
                 Log.FatalException("An error occurred that caused the worker application to close.", ex);
                 Environment.Exit(1);
             }
+        }
+
+        private static string ReadEncodedString()
+        {
+            string input = Console.ReadLine() ?? throw new InvalidOperationException("No input");
+            return Encoding.UTF8.GetString(Convert.FromBase64String(input));
         }
 
         private static bool IsProcessRunning(int procId)
