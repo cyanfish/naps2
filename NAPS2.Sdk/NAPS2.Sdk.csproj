@@ -191,6 +191,7 @@
     <Compile Include="Images\IScannedImageRenderer.cs" />
     <Compile Include="Images\MemoryStreamRenderer.cs" />
     <Compile Include="Images\ScannedImageSink.cs" />
+    <Compile Include="Images\Storage\LockMode.cs" />
     <Compile Include="Images\Storage\OwnershipConverters.cs" />
     <Compile Include="Images\Storage\PdfConverters.cs" />
     <Compile Include="Images\Storage\UnownedFileStorage.cs" />
@@ -288,6 +289,7 @@
     <Compile Include="Scan\Wia\WiaScanErrors.cs" />
     <Compile Include="Scan\Wia\WiaScanOperation.cs" />
     <Compile Include="Serialization\SerializedImageHelper.cs" />
+    <Compile Include="Serialization\XmlSerializerCache.cs" />
     <Compile Include="Update\UpdateOperation.cs" />
     <Compile Include="Update\UpdateInfo.cs" />
     <Compile Include="Update\UpdateChecker.cs" />

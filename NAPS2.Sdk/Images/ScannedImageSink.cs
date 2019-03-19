@@ -70,7 +70,7 @@ namespace NAPS2.Images
                 // thread that holds the lock in PutImage!
                 // Yet another "gotcha" of async/await.
                 images.Add(new TaskCompletionSource<ScannedImage>());
-                last.SetResult(image);
+                Task.Run(() => last.SetResult(image));
             }
         }
 

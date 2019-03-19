@@ -8,6 +8,38 @@ namespace NAPS2.Util
     public static class CollectionExtensions
     {
         /// <summary>
+        /// Appends the given item to the end of the enumerable.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="enumerable"></param>
+        /// <param name="item"></param>
+        /// <returns></returns>
+        public static IEnumerable<T> Append<T>(this IEnumerable<T> enumerable, T item)
+        {
+            foreach (var obj in enumerable)
+            {
+                yield return obj;
+            }
+            yield return item;
+        }
+
+        /// <summary>
+        /// Prepends the given item to the start of the enumerable.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="enumerable"></param>
+        /// <param name="item"></param>
+        /// <returns></returns>
+        public static IEnumerable<T> Prepend<T>(this IEnumerable<T> enumerable, T item)
+        {
+            yield return item;
+            foreach (var obj in enumerable)
+            {
+                yield return obj;
+            }
+        }
+
+        /// <summary>
         /// Removes multiple elements from the list at the specified indices.
         /// </summary>
         /// <param name="list"></param>

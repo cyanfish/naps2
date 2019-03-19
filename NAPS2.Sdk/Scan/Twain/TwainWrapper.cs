@@ -328,7 +328,7 @@ namespace NAPS2.Scan.Twain
             int imageWidth = imageInfo.ImageWidth;
             int imageHeight = imageInfo.ImageLength;
             var bitmap = StorageManager.ImageFactory.FromDimensions(imageWidth, imageHeight, pixelFormat);
-            var data = bitmap.Lock(out var scan0, out var stride);
+            var data = bitmap.Lock(LockMode.WriteOnly, out var scan0, out var stride);
             try
             {
                 byte[] source = memoryData;

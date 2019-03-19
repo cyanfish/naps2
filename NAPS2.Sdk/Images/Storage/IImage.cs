@@ -4,7 +4,6 @@ using System.Linq;
 
 namespace NAPS2.Images.Storage
 {
-    // TODO: Maybe just call this IImage.
     public interface IImage : IStorage
     {
         int Width { get; }
@@ -21,7 +20,7 @@ namespace NAPS2.Images.Storage
 
         bool IsOriginalLossless { get; }
 
-        object Lock(out IntPtr scan0, out int stride);
+        object Lock(LockMode lockMode, out IntPtr scan0, out int stride);
 
         void Unlock(object state);
 

@@ -128,7 +128,7 @@ namespace NAPS2.Images
 
         private void LoadImage(IImage image)
         {
-            var data = image.Lock(out var scan0, out stride);
+            var data = image.Lock(LockMode.ReadOnly, out var scan0, out stride);
             stride = Math.Abs(stride);
             bitmapBytes = new byte[stride * image.Height];
             Marshal.Copy(scan0, bitmapBytes, 0, bitmapBytes.Length);

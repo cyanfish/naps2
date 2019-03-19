@@ -45,7 +45,7 @@ namespace NAPS2.Images
             long totalPixels = image.Width * image.Height;
             long matchPixels = 0;
 
-            var data = image.Lock(out var scan0, out var stride);
+            var data = image.Lock(LockMode.ReadOnly, out var scan0, out var stride);
             var bytes = new byte[stride * image.Height];
             Marshal.Copy(scan0, bytes, 0, bytes.Length);
             image.Unlock(data);

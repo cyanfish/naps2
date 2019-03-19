@@ -59,12 +59,25 @@ namespace NAPS2.Images.Storage
 
         public bool IsOriginalLossless => Equals(Bitmap.RawFormat, ImageFormat.Bmp) || Equals(Bitmap.RawFormat, ImageFormat.Png);
 
-        public object Lock(out IntPtr scan0, out int stride)
+        public object Lock(LockMode lockMode, out IntPtr scan0, out int stride)
         {
-            var bitmapData = Bitmap.LockBits(new Rectangle(0, 0, Bitmap.Width, Bitmap.Height), ImageLockMode.ReadWrite, Bitmap.PixelFormat);
+            var bitmapData = Bitmap.LockBits(new Rectangle(0, 0, Bitmap.Width, Bitmap.Height), GetGdiLockMode(lockMode), Bitmap.PixelFormat);
             scan0 = bitmapData.Scan0;
             stride = Math.Abs(bitmapData.Stride);
             return bitmapData;
+        }
+
+        private ImageLockMode GetGdiLockMode(LockMode lockMode)
+        {
+            switch (lockMode)
+            {
+                case LockMode.ReadOnly:
+                    return ImageLockMode.ReadOnly;
+                case LockMode.WriteOnly:
+                    return ImageLockMode.WriteOnly;
+                default:
+                    return ImageLockMode.ReadWrite;
+            }
         }
 
         public void Unlock(object state)

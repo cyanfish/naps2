@@ -87,6 +87,7 @@ namespace NAPS2.ImportExport.Pdf
                     }
                     else
                     {
+                        // TODO: Maybe can parallelize this
                         foreach (var page in pages)
                         {
                             await GetImagesFromPage(page, importParams, sink);
@@ -267,15 +268,17 @@ namespace NAPS2.ImportExport.Pdf
 
         private static void RgbToBitmapUnmanaged(IImage image, byte[] rgbBuffer)
         {
-            var data = image.Lock(out var scan0, out var stride);
+            var data = image.Lock(LockMode.WriteOnly, out var scan0, out var stride);
+            int height = image.Height;
+            int width = image.Width;
             try
             {
-                for (int y = 0; y < image.Height; y++)
+                for (int y = 0; y < height; y++)
                 {
-                    for (int x = 0; x < image.Width; x++)
+                    for (int x = 0; x < width; x++)
                     {
                         IntPtr pixelData = scan0 + y * stride + x * 3;
-                        int bufferIndex = (y * image.Width + x) * 3;
+                        int bufferIndex = (y * width + x) * 3;
                         Marshal.WriteByte(pixelData, rgbBuffer[bufferIndex + 2]);
                         Marshal.WriteByte(pixelData + 1, rgbBuffer[bufferIndex + 1]);
                         Marshal.WriteByte(pixelData + 2, rgbBuffer[bufferIndex]);
@@ -290,7 +293,7 @@ namespace NAPS2.ImportExport.Pdf
 
         private static void BlackAndWhiteToBitmapUnmanaged(IImage image, byte[] bwBuffer)
         {
-            var data = image.Lock(out var scan0, out var stride);
+            var data = image.Lock(LockMode.WriteOnly, out var scan0, out var stride);
             try
             {
                 int bytesPerRow = (image.Width - 1) / 8 + 1;
