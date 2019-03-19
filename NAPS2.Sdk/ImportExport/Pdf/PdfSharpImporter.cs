@@ -294,10 +294,12 @@ namespace NAPS2.ImportExport.Pdf
         private static void BlackAndWhiteToBitmapUnmanaged(IImage image, byte[] bwBuffer)
         {
             var data = image.Lock(LockMode.WriteOnly, out var scan0, out var stride);
+            int height = image.Height;
+            int width = image.Width;
             try
             {
-                int bytesPerRow = (image.Width - 1) / 8 + 1;
-                for (int y = 0; y < image.Height; y++)
+                int bytesPerRow = (width - 1) / 8 + 1;
+                for (int y = 0; y < height; y++)
                 {
                     for (int x = 0; x < bytesPerRow; x++)
                     {
