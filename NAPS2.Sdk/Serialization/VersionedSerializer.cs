@@ -5,7 +5,7 @@ using System.Linq;
 using System.Xml.Linq;
 using System.Xml.Serialization;
 
-namespace NAPS2.Util
+namespace NAPS2.Serialization
 {
     public abstract class VersionedSerializer<T> : ISerializer<T>
     {

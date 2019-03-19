@@ -5,6 +5,7 @@ using System.Linq;
 using System.Xml.Serialization;
 using NAPS2.Images.Transforms;
 using NAPS2.Logging;
+using NAPS2.Serialization;
 using NAPS2.Util;
 
 namespace NAPS2.Config

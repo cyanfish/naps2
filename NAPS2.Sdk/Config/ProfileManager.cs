@@ -6,6 +6,7 @@ using System.Xml.Serialization;
 using NAPS2.Scan;
 using NAPS2.Scan.Twain;
 using NAPS2.Scan.Wia;
+using NAPS2.Serialization;
 using NAPS2.Util;
 
 namespace NAPS2.Config

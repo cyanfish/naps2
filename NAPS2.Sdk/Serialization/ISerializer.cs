@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
-namespace NAPS2.Util
+namespace NAPS2.Serialization
 {
     public interface ISerializer<T>
     {

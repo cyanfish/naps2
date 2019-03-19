@@ -4,7 +4,7 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace NAPS2.Util
+namespace NAPS2.Serialization
 {
     /// <summary>
     /// A class to help encrypt and decrypt passwords/tokens using the ProtectedData API.
@@ -12,7 +12,7 @@ namespace NAPS2.Util
     /// The encryption is tied to the current user so other users can't steal credentials.
     /// It is potentially vulnerable to malicious applications running under the same user.
     /// </summary>
-    public class SecureStorage
+    public static class SecureStorage
     {
         public static Lazy<RNGCryptoServiceProvider> CryptoRandom { get; } = new Lazy<RNGCryptoServiceProvider>();
 

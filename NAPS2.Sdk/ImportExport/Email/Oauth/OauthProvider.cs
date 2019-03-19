@@ -8,6 +8,7 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using NAPS2.Serialization;
 using NAPS2.Util;
 using Newtonsoft.Json.Linq;
 

@@ -303,10 +303,10 @@
     <Compile Include="Util\IInvoker.cs" />
     <Compile Include="Util\ImageExtensions.cs" />
     <Compile Include="Util\Invoker.cs" />
-    <Compile Include="Util\ISerializer.cs" />
+    <Compile Include="Serialization\ISerializer.cs" />
     <Compile Include="Util\NaturalStringComparer.cs" />
     <Compile Include="Util\ProgressHandler.cs" />
-    <Compile Include="Util\SecureString.cs" />
+    <Compile Include="Serialization\SecureString.cs" />
     <Compile Include="Util\ServiceFactoryBehavior.cs" />
     <Compile Include="Util\SmoothProgress.cs" />
     <Compile Include="Util\SslHelper.cs" />
@@ -314,9 +314,9 @@
     <Compile Include="Util\StubOverwritePrompt.cs" />
     <Compile Include="Util\TaskExtensions.cs" />
     <Compile Include="Util\TestingContext.cs" />
-    <Compile Include="Util\SerializerExtensions.cs" />
-    <Compile Include="Util\DefaultSerializer.cs" />
-    <Compile Include="Util\VersionedSerializer.cs" />
+    <Compile Include="Serialization\SerializerExtensions.cs" />
+    <Compile Include="Serialization\DefaultSerializer.cs" />
+    <Compile Include="Serialization\VersionedSerializer.cs" />
     <Compile Include="Util\WebClientExtensions.cs" />
     <Compile Include="Util\Win32Window.cs" />
     <Compile Include="Logging\WindowsEventLogger.cs" />
@@ -549,7 +549,7 @@
     <Compile Include="Worker\ProcessJob.cs" />
     <Compile Include="ImportExport\DirectImageTransfer.cs" />
     <Compile Include="Util\KeyboardShortcutManager.cs" />
-    <Compile Include="Util\SecureStorage.cs" />
+    <Compile Include="Serialization\SecureStorage.cs" />
     <Compile Include="Util\Slice.cs" />
     <Compile Include="Util\StillImage.cs" />
     <Compile Include="Util\StringWrapper.cs" />

@@ -5,7 +5,7 @@ using System.Xml;
 using System.Xml.Schema;
 using System.Xml.Serialization;
 
-namespace NAPS2.Util
+namespace NAPS2.Serialization
 {
     /// <summary>
     /// A class for strings that are encrypted when XML-serialized.

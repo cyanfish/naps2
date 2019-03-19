@@ -4,7 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 
-namespace NAPS2.Util
+namespace NAPS2.Serialization
 {
     public static class SerializerExtensions
     {
