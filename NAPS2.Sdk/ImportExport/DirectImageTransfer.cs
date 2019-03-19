@@ -18,13 +18,6 @@ namespace NAPS2.ImportExport
             SerializedImages = serializedImages.Select(x => x.ToByteArray()).ToList();
         }
 
-        public DirectImageTransfer(IEnumerable<ScannedImage.Snapshot> snapshots)
-        {
-            ProcessID = Process.GetCurrentProcess().Id;
-            var serializedImages = snapshots.Select(x => SerializedImageHelper.Serialize(x, new SerializedImageHelper.SerializeOptions()));
-            SerializedImages = serializedImages.Select(x => x.ToByteArray()).ToList();
-        }
-
         public int ProcessID { get; }
 
         public List<byte[]> SerializedImages { get; }
