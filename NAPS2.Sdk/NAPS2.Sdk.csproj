@@ -193,7 +193,7 @@
     <Compile Include="Images\ScannedImageSink.cs" />
     <Compile Include="Images\Storage\OwnershipConverters.cs" />
     <Compile Include="Images\Storage\PdfConverters.cs" />
-    <Compile Include="Images\Storage\UnownedTransferStorage.cs" />
+    <Compile Include="Images\Storage\UnownedFileStorage.cs" />
     <Compile Include="Images\Storage\PdfStorage.cs" />
     <Compile Include="ImportExport\Email\Mapi\IMapiWrapper.cs" />
     <Compile Include="ImportExport\Email\Mapi\MapiWrapper.cs" />
@@ -287,6 +287,7 @@
     <Compile Include="Scan\Wia\WiaConfiguration.cs" />
     <Compile Include="Scan\Wia\WiaScanErrors.cs" />
     <Compile Include="Scan\Wia\WiaScanOperation.cs" />
+    <Compile Include="Serialization\SerializedImageHelper.cs" />
     <Compile Include="Update\UpdateOperation.cs" />
     <Compile Include="Update\UpdateInfo.cs" />
     <Compile Include="Update\UpdateChecker.cs" />
@@ -297,6 +298,7 @@
     <Compile Include="Platform\IRuntimeCompat.cs" />
     <Compile Include="Platform\MonoRuntimeCompat.cs" />
     <Compile Include="Util\ExpFallback.cs" />
+    <Compile Include="WinForms\ImageClipboard.cs" />
     <Compile Include="Worker\GrpcHelper.cs" />
     <Compile Include="Util\IInvoker.cs" />
     <Compile Include="Util\ImageExtensions.cs" />
@@ -6203,6 +6205,7 @@
     <None Include="naps2-public.cer" />
     <None Include="Icons\accept-small.png" />
     <None Include="packages.config" />
+    <ProtoBuf Include="Serialization\common.proto" />
     <Protobuf Include="Worker\worker.proto" />
   </ItemGroup>
   <ItemGroup>

@@ -14,6 +14,7 @@ using NAPS2.Scan;
 using NAPS2.Scan.Twain;
 using NAPS2.Scan.Wia;
 using NAPS2.Scan.Wia.Native;
+using NAPS2.Serialization;
 using NAPS2.Util;
 
 namespace NAPS2.Worker
@@ -109,12 +110,19 @@ namespace NAPS2.Worker
             GrpcHelper.WrapFunc(
                 async () =>
                 {
-                    var thumbnail = await thumbnailRenderer.Render(request.SnapshotXml.FromXml<ScannedImage.Snapshot>(), request.Size);
-                    var stream = StorageManager.Convert<MemoryStreamStorage>(thumbnail, new StorageConvertParams { Lossless = true }).Stream;
-                    return new RenderThumbnailResponse
+                    var deserializeOptions = new SerializedImageHelper.DeserializeOptions
                     {
-                        Thumbnail = ByteString.FromStream(stream)
+                        ShareFileStorage = true
                     };
+                    using (var image = SerializedImageHelper.Deserialize(request.Image, deserializeOptions))
+                    {
+                        var thumbnail = await thumbnailRenderer.Render(image, request.Size);
+                        var stream = StorageManager.Convert<MemoryStreamStorage>(thumbnail, new StorageConvertParams { Lossless = true }).Stream;
+                        return new RenderThumbnailResponse
+                        {
+                            Thumbnail = ByteString.FromStream(stream)
+                        };
+                    }
                 },
                 err => new RenderThumbnailResponse { Error = err });
 
@@ -132,22 +140,14 @@ namespace NAPS2.Worker
             public override void PutImage(ScannedImage image)
             {
                 // TODO: Ideally this shouldn't be inheriting ScannedImageSink, some other cleaner mechanism
-                MemoryStream stream = null;
-                var thumb = image.GetThumbnail();
-                if (thumb != null)
-                {
-                    stream = StorageManager.Convert<MemoryStreamStorage>(thumb, new StorageConvertParams { Lossless = true }).Stream;
-                }
-                if (!(image.BackingStorage is FileStorage fileStorage))
-                {
-                    throw new InvalidOperationException("The worker can only be used with IFileStorage backing storage.");
-                }
                 callback.WriteAsync(new TwainScanResponse
                 {
-                    FilePath = fileStorage.FullPath,
-                    MetadataXml = image.Metadata.Serialize(),
-                    Thumbnail = stream != null ? ByteString.FromStream(stream) : ByteString.Empty,
-                    RenderedFilePath = imagePathDict.Get(image) ?? ""
+                    Image = SerializedImageHelper.Serialize(image, new SerializedImageHelper.SerializeOptions
+                    {
+                        TransferOwnership = true,
+                        IncludeThumbnail = true,
+                        RenderedFilePath = imagePathDict.Get(image) ?? ""
+                    })
                 });
             }
         }

@@ -27,7 +27,7 @@ namespace NAPS2.Images
                     double scaleFactor = Math.Min(outputSize / (double)storage.Height, outputSize / (double)storage.Width);
                     storage = Transform.Perform(storage, new ScaleTransform(scaleFactor));
                 }
-                return Transform.PerformAll(storage, snapshot.TransformList);
+                return Transform.PerformAll(storage, snapshot.Metadata.TransformList);
             });
         }
     }

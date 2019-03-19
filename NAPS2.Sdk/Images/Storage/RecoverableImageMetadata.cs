@@ -27,6 +27,8 @@ namespace NAPS2.Images.Storage
             set => indexImage.TransformList = value;
         }
 
+        public int TransformState { get; set; }
+
         public int Index
         {
             get => rsm.Index.Images.IndexOf(indexImage);
@@ -60,6 +62,16 @@ namespace NAPS2.Images.Storage
         public string Serialize() => indexImage.ToXml();
 
         public void Deserialize(string serializedData) => indexImage = serializedData.FromXml<RecoveryIndexImage>();
+
+        public IImageMetadata Clone() =>
+            new StubImageMetadata
+            {
+                TransformList = TransformList.ToList(),
+                TransformState = TransformState,
+                Index = Index,
+                BitDepth = BitDepth,
+                Lossless = Lossless
+            };
 
         public void Dispose()
         {

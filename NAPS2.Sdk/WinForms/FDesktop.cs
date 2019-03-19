@@ -1885,7 +1885,7 @@ namespace NAPS2.WinForms
                                 continue;
                             }
 
-                            next.SetThumbnail(thumb, snapshot.TransformState);
+                            next.SetThumbnail(thumb, snapshot.Metadata.TransformState);
                         }
                         fallback.Reset();
                     }

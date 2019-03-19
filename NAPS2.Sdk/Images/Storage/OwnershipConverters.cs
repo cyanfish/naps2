@@ -8,7 +8,7 @@ namespace NAPS2.Images.Storage
     public class OwnershipConverters
     {
         [StorageConverter]
-        public FileStorage ConvertToFile(UnownedTransferStorage input, StorageConvertParams convertParams)
+        public FileStorage ConvertToFile(UnownedFileStorage input, StorageConvertParams convertParams)
         {
             string newPath = FileStorageManager.Current.NextFilePath();
             File.Copy(input.FilePath, newPath);

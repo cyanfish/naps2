@@ -1,16 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Grpc.Core;
 using NAPS2.Images;
-using NAPS2.Images.Storage;
 using NAPS2.ImportExport.Email;
 using NAPS2.ImportExport.Email.Mapi;
 using NAPS2.Scan;
 using NAPS2.Scan.Wia;
+using NAPS2.Serialization;
 using NAPS2.Util;
 
 namespace NAPS2.Worker
@@ -65,17 +64,8 @@ namespace NAPS2.Worker
             {
                 var resp = streamingCall.ResponseStream.Current;
                 GrpcHelper.HandleErrors(resp.Error);
-                var storage = new FileStorage(resp.FilePath);
-                var metadata = StorageManager.ImageMetadataFactory.CreateMetadata(storage);
-                metadata.Deserialize(resp.MetadataXml);
-                var scannedImage = new ScannedImage(storage, metadata, new StorageConvertParams());
-                var thumbnail = resp.Thumbnail.ToByteArray();
-                if (thumbnail.Length > 0)
-                {
-                    var thumbnailStorage = new MemoryStreamStorage(new MemoryStream(thumbnail));
-                    scannedImage.SetThumbnail(StorageManager.ConvertToImage(thumbnailStorage, new StorageConvertParams()));
-                }
-                imageCallback?.Invoke(scannedImage, resp.RenderedFilePath);
+                var scannedImage = SerializedImageHelper.Deserialize(resp.Image, new SerializedImageHelper.DeserializeOptions());
+                imageCallback?.Invoke(scannedImage, resp.Image.RenderedFilePath);
             }
         }
 
@@ -91,7 +81,10 @@ namespace NAPS2.Worker
         {
             var req = new RenderThumbnailRequest
             {
-                SnapshotXml = snapshot.ToXml(),
+                Image = SerializedImageHelper.Serialize(snapshot, new SerializedImageHelper.SerializeOptions
+                {
+                    RequireFileStorage = true
+                }),
                 Size = size
             };
             var resp = client.RenderThumbnail(req);

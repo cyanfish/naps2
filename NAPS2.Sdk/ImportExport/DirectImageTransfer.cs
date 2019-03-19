@@ -2,29 +2,31 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using NAPS2.Recovery;
+using Google.Protobuf;
 using NAPS2.Images;
+using NAPS2.Serialization;
 
 namespace NAPS2.ImportExport
 {
     [Serializable]
     public class DirectImageTransfer
     {
-        public DirectImageTransfer(IEnumerable<ScannedImage> selectedImages)
+        public DirectImageTransfer(IEnumerable<ScannedImage> images)
         {
             ProcessID = Process.GetCurrentProcess().Id;
-            // TODO
-            //ImageRecovery = selectedImages.Select(x => x.RecoveryIndexImage).ToArray();
-            //if (ImageRecovery.Length > 0)
-            //{
-            //    RecoveryFolder = RecoveryImage.RecoveryFolder.FullName;
-            //}
+            var serializedImages = images.Select(x => SerializedImageHelper.Serialize(x, new SerializedImageHelper.SerializeOptions()));
+            SerializedImages = serializedImages.Select(x => x.ToByteArray()).ToList();
+        }
+
+        public DirectImageTransfer(IEnumerable<ScannedImage.Snapshot> snapshots)
+        {
+            ProcessID = Process.GetCurrentProcess().Id;
+            var serializedImages = snapshots.Select(x => SerializedImageHelper.Serialize(x, new SerializedImageHelper.SerializeOptions()));
+            SerializedImages = serializedImages.Select(x => x.ToByteArray()).ToList();
         }
 
         public int ProcessID { get; }
 
-        public RecoveryIndexImage[] ImageRecovery { get; }
-
-        public string RecoveryFolder { get; }
+        public List<byte[]> SerializedImages { get; }
     }
 }

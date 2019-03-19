@@ -11,6 +11,8 @@ namespace NAPS2.Images.Storage
     {
         public List<Transform> TransformList { get; set; } = new List<Transform>();
 
+        public int TransformState { get; set; }
+
         public int Index { get; set; }
 
         public ScanBitDepth BitDepth { get; set; }
@@ -36,6 +38,16 @@ namespace NAPS2.Images.Storage
             BitDepth = other.BitDepth;
             Lossless = other.Lossless;
         }
+
+        public IImageMetadata Clone() =>
+            new StubImageMetadata
+            {
+                TransformList = TransformList.ToList(),
+                TransformState = TransformState,
+                Index = Index,
+                BitDepth = BitDepth,
+                Lossless = Lossless
+            };
 
         public void Dispose()
         {

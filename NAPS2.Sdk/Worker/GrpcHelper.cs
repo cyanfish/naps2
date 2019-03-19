@@ -5,6 +5,7 @@ using System.Reflection;
 using System.Threading.Tasks;
 using Grpc.Core;
 using NAPS2.Scan.Exceptions;
+using NAPS2.Serialization;
 using NAPS2.Util;
 
 namespace NAPS2.Worker

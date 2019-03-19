@@ -10,7 +10,7 @@ namespace NAPS2.Ocr
         public OcrRequestParams(ScannedImage.Snapshot snapshot, IOcrEngine ocrEngine, OcrParams ocrParams)
         {
             ScannedImage = snapshot.Source;
-            TransformState = snapshot.TransformList.Count == 0 ? -1 : snapshot.TransformState;
+            TransformState = snapshot.Metadata.TransformList.Count == 0 ? -1 : snapshot.Metadata.TransformState;
             Engine = ocrEngine;
             OcrParams = ocrParams;
         }

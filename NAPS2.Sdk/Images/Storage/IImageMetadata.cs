@@ -10,6 +10,8 @@ namespace NAPS2.Images.Storage
     {
         List<Transform> TransformList { get; set; }
 
+        int TransformState { get; set; }
+
         int Index { get; set; }
 
         ScanBitDepth BitDepth { get; set; }
@@ -23,5 +25,7 @@ namespace NAPS2.Images.Storage
         string Serialize();
 
         void Deserialize(string serializedData);
+
+        IImageMetadata Clone();
     }
 }

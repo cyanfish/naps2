@@ -2,6 +2,8 @@
 
 package NAPS2.Worker;
 
+import "Serialization/common.proto";
+
 service GrpcWorkerService {
 	rpc Init (InitRequest) returns (InitResponse) {}
 	rpc Wia10NativeUi (Wia10NativeUiRequest) returns (Wia10NativeUiResponse) {}
@@ -11,18 +13,12 @@ service GrpcWorkerService {
 	rpc RenderThumbnail (RenderThumbnailRequest) returns (RenderThumbnailResponse) {}
 }
 
-message Error {
-	string type = 1;
-	string message = 2;
-	string stackTrace = 3;
-}
-
 message InitRequest {
 	string recoveryFolderPath = 1;
 }
 
 message InitResponse {
-	Error error = 1;
+	NAPS2.Serialization.Error error = 1;
 }
 
 message Wia10NativeUiRequest {
@@ -31,7 +27,7 @@ message Wia10NativeUiRequest {
 }
 
 message Wia10NativeUiResponse {
-	Error error = 1;
+	NAPS2.Serialization.Error error = 1;
 	string wiaConfigurationXml = 2;
 }
 
@@ -40,7 +36,7 @@ message TwainGetDeviceListRequest {
 }
 
 message TwainGetDeviceListResponse {
-	Error error = 1;
+	NAPS2.Serialization.Error error = 1;
 	string deviceListXml = 2;
 }
 
@@ -52,11 +48,8 @@ message TwainScanRequest {
 }
 
 message TwainScanResponse {
-	Error error = 1;
-	string filePath = 2;
-	string metadataXml = 3;
-	bytes thumbnail = 4;
-	string renderedFilePath = 5;
+	NAPS2.Serialization.Error error = 1;
+	NAPS2.Serialization.SerializedImage image = 2;
 }
 
 message SendMapiEmailRequest {
@@ -64,16 +57,16 @@ message SendMapiEmailRequest {
 }
 
 message SendMapiEmailResponse {
-	Error error = 1;
+	NAPS2.Serialization.Error error = 1;
 	string returnCodeXml = 2;
 }
 
 message RenderThumbnailRequest {
-	string snapshotXml = 1;
+	NAPS2.Serialization.SerializedImage image = 1;
 	int32 size = 2;
 }
 
 message RenderThumbnailResponse {
-	Error error = 1;
+	NAPS2.Serialization.Error error = 1;
 	bytes thumbnail = 2;
 }

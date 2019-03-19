@@ -1,0 +1,20 @@
+﻿syntax = "proto3";
+
+package NAPS2.Serialization;
+
+message Error {
+	string type = 1;
+	string message = 2;
+	string stackTrace = 3;
+}
+
+message SerializedImage {
+	bool transferOwnership = 1;
+	oneof image {
+		string filePath = 2;
+		bytes fileContent = 3;
+	}
+	string metadataXml = 4;
+	bytes thumbnail = 5;
+	string renderedFilePath = 6;
+}

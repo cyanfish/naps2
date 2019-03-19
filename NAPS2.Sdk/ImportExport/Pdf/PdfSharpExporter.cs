@@ -138,7 +138,7 @@ namespace NAPS2.ImportExport.Pdf
             progressCallback(progress, snapshots.Count);
             foreach (var snapshot in snapshots)
             {
-                if (snapshot.Source.BackingStorage is FileStorage fileStorage && IsPdfFile(fileStorage) && !snapshot.TransformList.Any())
+                if (snapshot.Source.BackingStorage is FileStorage fileStorage && IsPdfFile(fileStorage) && !snapshot.Metadata.TransformList.Any())
                 {
                     CopyPdfPageToDoc(document, fileStorage);
                 }
@@ -182,7 +182,7 @@ namespace NAPS2.ImportExport.Pdf
                 PdfPage page;
                 bool importedPdfPassThrough = false;
 
-                if (snapshot.Source.BackingStorage is FileStorage fileStorage && IsPdfFile(fileStorage) && !snapshot.TransformList.Any())
+                if (snapshot.Source.BackingStorage is FileStorage fileStorage && IsPdfFile(fileStorage) && !snapshot.Metadata.TransformList.Any())
                 {
                     importedPdfPassThrough = true;
                     page = CopyPdfPageToDoc(document, fileStorage);

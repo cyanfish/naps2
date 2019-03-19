@@ -78,7 +78,7 @@ namespace NAPS2.Images
             {
                 outputSize = UserConfig.Current.ThumbnailSize;
             }
-            using (var bitmap = await imageRenderer.Render(snapshot, snapshot.TransformList.Count == 0 ? 0 : outputSize * OVERSAMPLE))
+            using (var bitmap = await imageRenderer.Render(snapshot, snapshot.Metadata.TransformList.Count == 0 ? 0 : outputSize * OVERSAMPLE))
             {
                 return Transform.Perform(bitmap, new ThumbnailTransform(outputSize));
             }

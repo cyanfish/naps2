@@ -1,11 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
-using System.Runtime.Serialization;
 using NAPS2.Images.Storage;
 using NAPS2.Images.Transforms;
-using NAPS2.Recovery;
 using NAPS2.Scan;
 
 namespace NAPS2.Images
@@ -14,7 +11,6 @@ namespace NAPS2.Images
     {
         private IImage thumbnail;
         private int thumbnailState;
-        private int transformState;
 
         private bool disposed;
         private int snapshotCount;
@@ -34,6 +30,14 @@ namespace NAPS2.Images
         {
             BackingStorage = StorageManager.ConvertToBacking(storage, convertParams);
             Metadata = metadata;
+        }
+
+        public ScannedImage(IStorage storage, string serializedMetadata, StorageConvertParams convertParams)
+        {
+            BackingStorage = StorageManager.ConvertToBacking(storage, convertParams);
+            Metadata = StorageManager.ImageMetadataFactory.CreateMetadata(BackingStorage);
+            Metadata.Deserialize(serializedMetadata);
+            Metadata.Commit();
         }
 
         public ScannedImage(IStorage storage, ScanBitDepth bitDepth, bool highQuality, int quality)
@@ -83,7 +87,7 @@ namespace NAPS2.Images
             {
                 // Also updates the recovery index since they reference the same list
                 Transform.AddOrSimplify(Metadata.TransformList, transform);
-                transformState++;
+                Metadata.TransformState++;
             }
             Metadata.Commit();
             ThumbnailInvalidated?.Invoke(this, new EventArgs());
@@ -98,7 +102,7 @@ namespace NAPS2.Images
                     return;
                 }
                 Metadata.TransformList.Clear();
-                transformState++;
+                Metadata.TransformState++;
             }
             Metadata.Commit();
             ThumbnailInvalidated?.Invoke(this, new EventArgs());
@@ -118,12 +122,12 @@ namespace NAPS2.Images
             {
                 thumbnail?.Dispose();
                 thumbnail = image;
-                thumbnailState = state ?? transformState;
+                thumbnailState = state ?? Metadata.TransformState;
             }
             ThumbnailChanged?.Invoke(this, new EventArgs());
         }
 
-        public bool IsThumbnailDirty => thumbnailState != transformState;
+        public bool IsThumbnailDirty => thumbnailState != Metadata.TransformState;
 
         public EventHandler ThumbnailChanged;
 
@@ -139,9 +143,7 @@ namespace NAPS2.Images
 
         public Snapshot Preserve() => new Snapshot(this);
 
-        [Serializable]
-        [KnownType("KnownTypes")]
-        public class Snapshot : IDisposable, ISerializable
+        public class Snapshot : IDisposable
         {
             private bool disposed;
 
@@ -155,16 +157,13 @@ namespace NAPS2.Images
                     }
                     source.snapshotCount++;
                     Source = source;
-                    TransformList = source.Metadata.TransformList.ToList();
-                    TransformState = source.transformState;
+                    Metadata = source.Metadata.Clone();
                 }
             }
 
             public ScannedImage Source { get; }
 
-            public List<Transform> TransformList { get; }
-
-            public int TransformState { get; }
+            public IImageMetadata Metadata { get; }
 
             public void Dispose()
             {
@@ -178,29 +177,6 @@ namespace NAPS2.Images
                         Source.Dispose();
                     }
                 }
-            }
-
-            public void GetObjectData(SerializationInfo info, StreamingContext context)
-            {
-                // TODO
-                //info.AddValue("RecoveryIndexImage", Source.RecoveryIndexImage);
-                info.AddValue("TransformList", TransformList);
-                info.AddValue("TransformState", TransformState);
-            }
-
-            private Snapshot(SerializationInfo info, StreamingContext context)
-            {
-                // TODO
-                //Source = new ScannedImage((RecoveryIndexImage)info.GetValue("RecoveryIndexImage", typeof(RecoveryIndexImage)));
-                TransformList = (List<Transform>)info.GetValue("TransformList", typeof(List<Transform>));
-                TransformState = (int)info.GetValue("TransformState", typeof(int));
-            }
-
-            // ReSharper disable once UnusedMember.Local
-            private static Type[] KnownTypes()
-            {
-                var transformTypes = Assembly.GetExecutingAssembly().GetTypes().Where(x => x.IsSubclassOf(typeof(Transform)));
-                return transformTypes.Concat(new[] { typeof(List<Transform>), typeof(RecoveryIndexImage) }).ToArray();
             }
         }
     }

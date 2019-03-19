@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using Google.Protobuf;
 using NAPS2.Lang.Resources;
 using NAPS2.Logging;
 using NAPS2.Operation;
 using NAPS2.Images;
 using NAPS2.Images.Storage;
 using NAPS2.Images.Transforms;
+using NAPS2.Serialization;
 
 namespace NAPS2.ImportExport
 {
@@ -29,25 +31,19 @@ namespace NAPS2.ImportExport
             Status = new OperationStatus
             {
                 StatusText = copy ? MiscResources.Copying : MiscResources.Importing,
-                MaxProgress = data.ImageRecovery.Length
+                MaxProgress = data.SerializedImages.Count
             };
 
             RunAsync(async () =>
             {
                 Exception error = null;
-                foreach (var ir in data.ImageRecovery)
+                foreach (var serializedImageBytes in data.SerializedImages)
                 {
                     try
                     {
-                        ScannedImage img;
-                        using (var storage = StorageManager.ConvertToImage(new FileStorage(Path.Combine(data.RecoveryFolder, ir.FileName)), new StorageConvertParams()))
-                        {
-                            img = new ScannedImage(storage, ir.BitDepth, ir.HighQuality, -1);
-                        }
-                        foreach (var transform in ir.TransformList)
-                        {
-                            img.AddTransform(transform);
-                        }
+                        var serializedImage = new SerializedImage();
+                        serializedImage.MergeFrom(serializedImageBytes);
+                        ScannedImage img = SerializedImageHelper.Deserialize(serializedImage, new SerializedImageHelper.DeserializeOptions());
                         // TODO: Don't bother, here, in recovery, etc.
                         img.SetThumbnail(Transform.Perform(await imageRenderer.Render(img), new ThumbnailTransform()));
                         imageCallback(img);
@@ -66,7 +62,7 @@ namespace NAPS2.ImportExport
                 }
                 if (error != null)
                 {
-                    Log.ErrorException(string.Format(MiscResources.ImportErrorCouldNot, data.RecoveryFolder), error);
+                    Log.ErrorException(string.Format(MiscResources.ImportErrorCouldNot, "<data>"), error);
                 }
                 return true;
             });

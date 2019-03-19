@@ -8,14 +8,14 @@ namespace NAPS2.Images.Storage
     /// Represents an image received across the wire where we must copy the backing
     /// file before it can be used.
     /// </summary>
-    public class UnownedTransferStorage : IStorage
+    public class UnownedFileStorage : IStorage
     {
-        static UnownedTransferStorage()
+        static UnownedFileStorage()
         {
             StorageManager.RegisterConverters(new OwnershipConverters());
         }
 
-        public UnownedTransferStorage(string filePath)
+        public UnownedFileStorage(string filePath)
         {
             FilePath = filePath ?? throw new ArgumentNullException(nameof(filePath));
         }
