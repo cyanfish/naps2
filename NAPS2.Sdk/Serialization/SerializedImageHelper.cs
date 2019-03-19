@@ -40,9 +40,9 @@ namespace NAPS2.Serialization
             var result = new SerializedImage
             {
                 TransferOwnership = options.TransferOwnership,
-                MetadataXml = image.Metadata.Serialize(),
+                MetadataXml = metadata.Serialize(),
                 Thumbnail = thumbStream != null ? ByteString.FromStream(thumbStream) : ByteString.Empty,
-                RenderedFilePath = options.RenderedFilePath
+                RenderedFilePath = options.RenderedFilePath ?? ""
             };
             if (fileStorage != null)
             {

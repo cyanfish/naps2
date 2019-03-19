@@ -49,24 +49,24 @@ namespace NAPS2.Operation
 
         protected void RunAsync(Func<Task<bool>> action)
         {
-            Success = StartTask(() => action().Result);
+            Success = StartTask(action);
         }
 
         protected void RunAsync(Func<bool> action)
         {
-            Success = StartTask(action);
+            Success = StartTask(() => Task.FromResult(action()));
         }
 
-        private Task<T> StartTask<T>(Func<T> action)
+        private Task<T> StartTask<T>(Func<Task<T>> action)
         {
-            return Task.Run(() =>
+            return Task.Run(async () =>
             {
                 // We don't need to catch errors in general. The idea is that for a typical operation,
                 // OperationManager will handle it and show an error message box.
                 // For other uses, consumers should catch the errors.
                 try
                 {
-                    return action();
+                    return await action();
                 }
                 finally
                 {

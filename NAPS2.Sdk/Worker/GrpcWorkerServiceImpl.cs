@@ -146,7 +146,7 @@ namespace NAPS2.Worker
                     {
                         TransferOwnership = true,
                         IncludeThumbnail = true,
-                        RenderedFilePath = imagePathDict.Get(image) ?? ""
+                        RenderedFilePath = imagePathDict.Get(image)
                     })
                 });
             }

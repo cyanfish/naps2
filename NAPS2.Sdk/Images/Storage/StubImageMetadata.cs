@@ -26,10 +26,7 @@ namespace NAPS2.Images.Storage
 
         public bool CanSerialize => true;
 
-        public string Serialize()
-        {
-            return this.ToXml(Transform.KnownTransformTypes);
-        }
+        public string Serialize() => this.ToXml(Transform.KnownTransformTypes);
 
         public void Deserialize(string serializedData)
         {

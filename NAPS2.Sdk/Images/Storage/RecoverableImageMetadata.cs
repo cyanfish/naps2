@@ -60,9 +60,9 @@ namespace NAPS2.Images.Storage
 
         public bool CanSerialize => true;
 
-        public string Serialize() => indexImage.ToXml();
+        public string Serialize() => indexImage.ToXml(Transform.KnownTransformTypes);
 
-        public void Deserialize(string serializedData) => indexImage = serializedData.FromXml<RecoveryIndexImage>();
+        public void Deserialize(string serializedData) => indexImage = serializedData.FromXml<RecoveryIndexImage>(Transform.KnownTransformTypes);
 
         public IImageMetadata Clone() =>
             new StubImageMetadata
