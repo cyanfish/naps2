@@ -20,8 +20,8 @@ namespace NAPS2.Sdk.Tests.Util
             var obj = reader.ReadPemObject();
             Assert.Equal("CERTIFICATE", obj.Type);
             var certObj = new X509Certificate(obj.Content);
-            Assert.Equal("CN=naps2", certObj.Issuer);
-            Assert.Equal("CN=naps2", certObj.Subject);
+            Assert.Equal("CN=localhost", certObj.Issuer);
+            Assert.Equal("CN=localhost", certObj.Subject);
         }
     }
 }

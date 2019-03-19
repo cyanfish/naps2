@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using NAPS2.Images.Storage;
 
 namespace NAPS2.Sdk.Tests
 {
@@ -9,8 +10,9 @@ namespace NAPS2.Sdk.Tests
     {
         public FileSystemTests()
         {
-            FolderPath = $"temp_{Path.GetRandomFileName()}";
+            FolderPath = $"naps2_test_temp_{Path.GetRandomFileName()}";
             Folder = Directory.CreateDirectory(FolderPath);
+            FileStorageManager.Current = new FileStorageManager(FolderPath);
         }
 
         public string FolderPath { get; }

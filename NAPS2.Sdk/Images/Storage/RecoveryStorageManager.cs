@@ -20,13 +20,12 @@ namespace NAPS2.Images.Storage
         private Stream folderLock;
         private ConfigManager<RecoveryIndex> indexConfigManager;
 
-        public RecoveryStorageManager(string recoveryFolderPath, bool skipCreate = false)
+        public RecoveryStorageManager(string recoveryFolderPath, bool skipCreate = false) : base(recoveryFolderPath)
         {
-            RecoveryFolderPath = recoveryFolderPath;
             folderCreated = skipCreate;
         }
 
-        public string RecoveryFolderPath { get; }
+        public string RecoveryFolderPath => FolderPath;
 
         public bool DisableRecoveryCleanup { get; set; }
 
@@ -61,10 +60,18 @@ namespace NAPS2.Images.Storage
 
         public void Commit()
         {
-            // TODO: Clean up when all contents are removed
-
             EnsureFolderCreated();
-            indexConfigManager.Save();
+            if (indexConfigManager.Config.Images.Count == 0)
+            {
+                // Clean up
+                ForceReleaseLock();
+                Directory.Delete(RecoveryFolderPath, true);
+                folderCreated = false;
+            }
+            else
+            {
+                indexConfigManager.Save();
+            }
         }
 
         public IImageMetadata CreateMetadata(IStorage storage)
@@ -78,6 +85,14 @@ namespace NAPS2.Images.Storage
                 FileName = Path.GetFileName(fileStorage.FullPath),
                 TransformList = new List<Transform>()
             });
+        }
+
+        public void ForceReleaseLock()
+        {
+            folderLock?.Close();
+            folderLockFile?.Delete();
+            folderLock = null;
+            folderLockFile = null;
         }
     }
 }

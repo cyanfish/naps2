@@ -18,6 +18,7 @@ namespace NAPS2.Images.Storage
             this.rsm = rsm;
             // TODO: Maybe not a constructor param?
             this.indexImage = indexImage;
+            rsm.Index.Images.Add(indexImage);
         }
 
         public List<Transform> TransformList

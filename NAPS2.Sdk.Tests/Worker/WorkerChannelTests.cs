@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
 using System.Threading;
 using System.Threading.Tasks;
 using Grpc.Core;
@@ -19,7 +18,7 @@ using Xunit;
 
 namespace NAPS2.Sdk.Tests.Worker
 {
-    public class WorkerChannelTests
+    public class WorkerChannelTests : FileSystemTests
     {
         private Channel Start(ITwainWrapper twainWrapper = null, ThumbnailRenderer thumbnailRenderer = null, IMapiWrapper mapiWrapper = null, ServerCredentials serverCreds = null, ChannelCredentials clientCreds = null)
         {
@@ -54,17 +53,9 @@ namespace NAPS2.Sdk.Tests.Worker
         {
             using (var channel = Start())
             {
-                var fsm = FileStorageManager.Current;
-                try
-                {
-                    channel.Client.Init(@"C:\Somewhere");
-                    Assert.IsType<RecoveryStorageManager>(FileStorageManager.Current);
-                    Assert.StartsWith(@"C:\Somewhere", ((RecoveryStorageManager)FileStorageManager.Current).RecoveryFolderPath);
-                }
-                finally
-                {
-                    FileStorageManager.Current = fsm;
-                }
+                channel.Client.Init(@"C:\Somewhere");
+                Assert.IsType<RecoveryStorageManager>(FileStorageManager.Current);
+                Assert.StartsWith(@"C:\Somewhere", ((RecoveryStorageManager)FileStorageManager.Current).RecoveryFolderPath);
             }
         }
 
@@ -96,35 +87,72 @@ namespace NAPS2.Sdk.Tests.Worker
         }
 
         [Fact]
-        public async Task TwainScan()
+        public async Task TwainScanWithMemoryStorage()
         {
-            // TODO: More tests, verifying correct serialization and using RecoveryStorageManager
-            // TODO: Also check correct error handling
-            StorageManager.ConfigureBackingStorage<FileStorage>();
+            StorageManager.ConfigureBackingStorage<GdiImage>();
             try
             {
-                var twainWrapper = new TwainWrapperMockScanner
-                {
-                    Images = new List<ScannedImage>
-                    {
-                        CreateScannedImage(),
-                        CreateScannedImage()
-                    }
-                };
-
-                using (var channel = Start(twainWrapper))
-                {
-                    var receivedImages = new List<ScannedImage>();
-                    await channel.Client.TwainScan(new ScanDevice("test_id", "test_name"), new ScanProfile(), new ScanParams(), IntPtr.Zero,
-                        CancellationToken.None,
-                        (img, path) => { receivedImages.Add(img); });
-
-                    Assert.Equal(2, receivedImages.Count);
-                }
+                await TwainScanInternalTest();
             }
             finally
             {
-                StorageManager.ConfigureBackingStorage<GdiImage>();
+                StorageManager.ConfigureBackingStorage<IStorage>();
+            }
+        }
+
+        [Fact]
+        public async Task TwainScanWithFileStorage()
+        {
+            StorageManager.ConfigureBackingStorage<FileStorage>();
+            try
+            {
+                await TwainScanInternalTest();
+            }
+            finally
+            {
+                StorageManager.ConfigureBackingStorage<IStorage>();
+            }
+        }
+
+        [Fact]
+        public async Task TwainScanWithRecovery()
+        {
+            StorageManager.ConfigureBackingStorage<FileStorage>();
+            var rsm = new RecoveryStorageManager(FolderPath);
+            StorageManager.ImageMetadataFactory = rsm;
+            FileStorageManager.Current = rsm;
+            try
+            {
+                await TwainScanInternalTest();
+            }
+            finally
+            {
+                // TODO: Set all static things in a base class constructor so we don't have any fragility here
+                StorageManager.ConfigureBackingStorage<IStorage>();
+                StorageManager.ImageMetadataFactory = new StubImageMetadataFactory();
+                rsm.ForceReleaseLock();
+            }
+        }
+
+        private async Task TwainScanInternalTest()
+        {
+            var twainWrapper = new TwainWrapperMockScanner
+            {
+                Images = new List<ScannedImage>
+                {
+                    CreateScannedImage(),
+                    CreateScannedImage()
+                }
+            };
+
+            using (var channel = Start(twainWrapper))
+            {
+                var receivedImages = new List<ScannedImage>();
+                await channel.Client.TwainScan(new ScanDevice("test_id", "test_name"), new ScanProfile(), new ScanParams(), IntPtr.Zero,
+                    CancellationToken.None,
+                    (img, path) => { receivedImages.Add(img); });
+
+                Assert.Equal(2, receivedImages.Count);
             }
         }
 

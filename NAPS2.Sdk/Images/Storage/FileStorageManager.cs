@@ -15,6 +15,17 @@ namespace NAPS2.Images.Storage
             set => _current = value ?? throw new ArgumentNullException(nameof(value));
         }
 
-        public virtual string NextFilePath() => Path.Combine(Paths.Temp, Path.GetRandomFileName());
+        public FileStorageManager() : this(Paths.Temp)
+        {
+        }
+
+        public FileStorageManager(string folderPath)
+        {
+            FolderPath = folderPath;
+        }
+
+        protected string FolderPath { get; }
+
+        public virtual string NextFilePath() => Path.Combine(FolderPath, Path.GetRandomFileName());
     }
 }
