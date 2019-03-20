@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Xml.Linq;
 using System.Xml.Serialization;
 using NAPS2.Scan;
 using NAPS2.Scan.Twain;
@@ -107,7 +108,7 @@ namespace NAPS2.Config
     {
         protected override void InternalSerialize(Stream stream, List<ScanProfile> obj) => XmlSerialize(stream, obj);
 
-        protected override List<ScanProfile> InternalDeserialize(Stream stream, string rootName, int version)
+        protected override List<ScanProfile> InternalDeserialize(Stream stream, XDocument doc)
         {
             try
             {

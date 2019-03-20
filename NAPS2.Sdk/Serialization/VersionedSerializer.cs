@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Xml.Linq;
-using System.Xml.Serialization;
 
 namespace NAPS2.Serialization
 {
@@ -18,15 +17,12 @@ namespace NAPS2.Serialization
         {
             var doc = XDocument.Load(stream);
             stream.Seek(0, SeekOrigin.Begin);
-            var rootName = doc.Root?.Name.ToString();
-            var versionElement = doc.Root?.Descendants("Version").FirstOrDefault();
-            int.TryParse(versionElement?.Value, out var version);
-            return InternalDeserialize(stream, rootName, version);
+            return InternalDeserialize(stream, doc);
         }
 
         protected abstract void InternalSerialize(Stream stream, T obj);
 
-        protected abstract T InternalDeserialize(Stream stream, string rootName, int version);
+        protected abstract T InternalDeserialize(Stream stream, XDocument doc);
 
         protected abstract IEnumerable<Type> KnownTypes { get; }
 
@@ -46,6 +42,13 @@ namespace NAPS2.Serialization
         {
             var xmlSerializer = XmlSerializerCache.GetSerializer(typeof(T2), KnownTypesArray);
             return (T2)xmlSerializer.Deserialize(stream);
+        }
+
+        protected int GetVersion(XDocument doc)
+        {
+            var versionElement = doc.Root?.Descendants("Version").FirstOrDefault();
+            int.TryParse(versionElement?.Value, out var version);
+            return version;
         }
 
         private Type[] KnownTypesArray => KnownTypes?.ToArray() ?? new Type[] { };
