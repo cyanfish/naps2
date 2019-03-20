@@ -91,7 +91,6 @@
     <Compile Include="Asserts\PdfAsserts.cs" />
     <Compile Include="Config\CommonConfigTests.cs" />
     <Compile Include="Config\ProfileSerializerTests.cs" />
-    <Compile Include="FileSystemTests.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Images\ScannedImageSinkTests.cs" />
     <Compile Include="Images\StorageTests.cs" />
@@ -102,6 +101,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ProfileSerializerTestsData.resx</DependentUpon>
     </Compile>
+    <Compile Include="ContextualTexts.cs" />
     <Compile Include="Util\NaturalStringComparerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Scan\SaneOptionParserTests.cs" />

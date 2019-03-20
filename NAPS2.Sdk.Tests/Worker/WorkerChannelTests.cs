@@ -18,7 +18,7 @@ using Xunit;
 
 namespace NAPS2.Sdk.Tests.Worker
 {
-    public class WorkerChannelTests : FileSystemTests
+    public class WorkerChannelTests : ContextualTexts
     {
         private Channel Start(ITwainWrapper twainWrapper = null, ThumbnailRenderer thumbnailRenderer = null, IMapiWrapper mapiWrapper = null, ServerCredentials serverCreds = null, ChannelCredentials clientCreds = null)
         {
@@ -90,48 +90,21 @@ namespace NAPS2.Sdk.Tests.Worker
         public async Task TwainScanWithMemoryStorage()
         {
             StorageManager.ConfigureBackingStorage<GdiImage>();
-            try
-            {
-                await TwainScanInternalTest();
-            }
-            finally
-            {
-                StorageManager.ConfigureBackingStorage<IStorage>();
-            }
+            await TwainScanInternalTest();
         }
 
         [Fact]
         public async Task TwainScanWithFileStorage()
         {
-            StorageManager.ConfigureBackingStorage<FileStorage>();
-            try
-            {
-                await TwainScanInternalTest();
-            }
-            finally
-            {
-                StorageManager.ConfigureBackingStorage<IStorage>();
-            }
+            UseFileStorage();
+            await TwainScanInternalTest();
         }
 
         [Fact]
         public async Task TwainScanWithRecovery()
         {
-            StorageManager.ConfigureBackingStorage<FileStorage>();
-            var rsm = new RecoveryStorageManager(FolderPath);
-            StorageManager.ImageMetadataFactory = rsm;
-            FileStorageManager.Current = rsm;
-            try
-            {
-                await TwainScanInternalTest();
-            }
-            finally
-            {
-                // TODO: Set all static things in a base class constructor so we don't have any fragility here
-                StorageManager.ConfigureBackingStorage<IStorage>();
-                StorageManager.ImageMetadataFactory = new StubImageMetadataFactory();
-                rsm.ForceReleaseLock();
-            }
+            UseRecovery();
+            await TwainScanInternalTest();
         }
 
         private async Task TwainScanInternalTest()

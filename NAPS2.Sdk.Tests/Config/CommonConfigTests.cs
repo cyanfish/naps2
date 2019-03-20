@@ -4,12 +4,11 @@ using System.Linq;
 using NAPS2.Config;
 using NAPS2.Config.Experimental;
 using NAPS2.Serialization;
-using NAPS2.Util;
 using Xunit;
 
 namespace NAPS2.Sdk.Tests.Config
 {
-    public class CommonConfigTests
+    public class CommonConfigTests : ContextualTexts
     {
         [Fact]
         public void CanSerialize()

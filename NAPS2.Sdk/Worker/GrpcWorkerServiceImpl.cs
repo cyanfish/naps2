@@ -148,7 +148,7 @@ namespace NAPS2.Worker
                         IncludeThumbnail = true,
                         RenderedFilePath = imagePathDict.Get(image)
                     })
-                });
+                }).Wait();
             }
         }
     }

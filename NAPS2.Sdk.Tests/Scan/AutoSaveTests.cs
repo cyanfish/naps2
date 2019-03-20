@@ -21,7 +21,7 @@ using Xunit;
 
 namespace NAPS2.Sdk.Tests.Scan
 {
-    public class AutoSaveTests : FileSystemTests
+    public class AutoSaveTests : ContextualTexts
     {
         [Fact]
         public async Task NoImages()

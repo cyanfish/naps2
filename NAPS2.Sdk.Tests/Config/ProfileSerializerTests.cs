@@ -5,12 +5,11 @@ using System.Xml.Linq;
 using NAPS2.Config;
 using NAPS2.Scan;
 using NAPS2.Serialization;
-using NAPS2.Util;
 using Xunit;
 
 namespace NAPS2.Sdk.Tests.Config
 {
-    public class ProfileSerializerTests
+    public class ProfileSerializerTests : ContextualTexts
     {
         [Fact]
         public void Serialization()

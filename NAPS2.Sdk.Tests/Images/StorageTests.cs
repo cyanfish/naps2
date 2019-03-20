@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace NAPS2.Sdk.Tests.Images
 {
-    public class StorageTests
+    public class StorageTests : ContextualTexts
     {
 
     }
