@@ -117,6 +117,48 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="OldProfile" xml:space="preserve">
+    <value>&lt;?xml version="1.0"?&gt;
+&lt;ArrayOfExtendedScanSettings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;ExtendedScanSettings&gt;
+    &lt;Device&gt;
+      &lt;ID&gt;test_id&lt;/ID&gt;
+      &lt;Name&gt;test_name&lt;/Name&gt;
+    &lt;/Device&gt;
+    &lt;DriverName&gt;wia&lt;/DriverName&gt;
+    &lt;DisplayName&gt;Test Profile&lt;/DisplayName&gt;
+    &lt;IconID&gt;0&lt;/IconID&gt;
+    &lt;MaxQuality&gt;false&lt;/MaxQuality&gt;
+    &lt;IsDefault&gt;false&lt;/IsDefault&gt;
+    &lt;Version&gt;1&lt;/Version&gt;
+    &lt;UseNativeUI&gt;false&lt;/UseNativeUI&gt;
+    &lt;AfterScanScale&gt;OneToOne&lt;/AfterScanScale&gt;
+    &lt;Brightness&gt;0&lt;/Brightness&gt;
+    &lt;Contrast&gt;0&lt;/Contrast&gt;
+    &lt;BitDepth&gt;C24Bit&lt;/BitDepth&gt;
+    &lt;PageAlign&gt;Left&lt;/PageAlign&gt;
+    &lt;PageSize&gt;Letter&lt;/PageSize&gt;
+    &lt;Resolution&gt;Dpi200&lt;/Resolution&gt;
+    &lt;PaperSource&gt;Glass&lt;/PaperSource&gt;
+  &lt;/ExtendedScanSettings&gt;
+&lt;/ArrayOfExtendedScanSettings&gt;</value>
+  </data>
+  <data name="OldTwainProfile" xml:space="preserve">
+    <value>&lt;?xml version="1.0"?&gt;
+&lt;ArrayOfExtendedScanSettings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;ExtendedScanSettings&gt;
+    &lt;Device&gt;
+      &lt;ID&gt;test_id&lt;/ID&gt;
+      &lt;Name&gt;test_name&lt;/Name&gt;
+    &lt;/Device&gt;
+    &lt;DriverName&gt;twain&lt;/DriverName&gt;
+    &lt;DisplayName&gt;Test Profile&lt;/DisplayName&gt;
+    &lt;IconID&gt;0&lt;/IconID&gt;
+    &lt;Version&gt;1&lt;/Version&gt;
+    &lt;UseNativeUI&gt;false&lt;/UseNativeUI&gt;
+  &lt;/ExtendedScanSettings&gt;
+&lt;/ArrayOfExtendedScanSettings&gt;</value>
+  </data>
   <data name="SingleProfile" xml:space="preserve">
     <value>&lt;?xml version="1.0"?&gt;
 &lt;ArrayOfScanProfile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
@@ -129,5 +171,29 @@
     &lt;Version&gt;2&lt;/Version&gt;
   &lt;/ScanProfile&gt;
 &lt;/ArrayOfScanProfile&gt;</value>
+  </data>
+  <data name="VeryOldProfile" xml:space="preserve">
+    <value>&lt;?xml version="1.0"?&gt;
+&lt;ArrayOfScanSettings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;ScanSettings xsi:type="ExtendedScanSettings"&gt;
+    &lt;Device&gt;
+      &lt;ID&gt;test_id&lt;/ID&gt;
+      &lt;Name&gt;test_name&lt;/Name&gt;
+      &lt;DriverName&gt;wia&lt;/DriverName&gt;
+    &lt;/Device&gt;
+    &lt;DisplayName&gt;Test Profile&lt;/DisplayName&gt;
+    &lt;IconID&gt;0&lt;/IconID&gt;
+    &lt;MaxQuality&gt;false&lt;/MaxQuality&gt;
+    &lt;IsDefault&gt;false&lt;/IsDefault&gt;
+    &lt;AfterScanScale&gt;OneToOne&lt;/AfterScanScale&gt;
+    &lt;Brightness&gt;0&lt;/Brightness&gt;
+    &lt;Contrast&gt;0&lt;/Contrast&gt;
+    &lt;BitDepth&gt;C24Bit&lt;/BitDepth&gt;
+    &lt;PageAlign&gt;Left&lt;/PageAlign&gt;
+    &lt;PageSize&gt;A5&lt;/PageSize&gt;
+    &lt;Resolution&gt;Dpi200&lt;/Resolution&gt;
+    &lt;PaperSource&gt;Glass&lt;/PaperSource&gt;
+  &lt;/ScanSettings&gt;
+&lt;/ArrayOfScanSettings&gt;</value>
   </data>
 </root>

@@ -62,6 +62,51 @@ namespace NAPS2.Sdk.Tests.Config {
         
         /// <summary>
         ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot;?&gt;
+        ///&lt;ArrayOfExtendedScanSettings xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xmlns:xsd=&quot;http://www.w3.org/2001/XMLSchema&quot;&gt;
+        ///  &lt;ExtendedScanSettings&gt;
+        ///    &lt;Device&gt;
+        ///      &lt;ID&gt;test_id&lt;/ID&gt;
+        ///      &lt;Name&gt;test_name&lt;/Name&gt;
+        ///    &lt;/Device&gt;
+        ///    &lt;DriverName&gt;wia&lt;/DriverName&gt;
+        ///    &lt;DisplayName&gt;Test Profile&lt;/DisplayName&gt;
+        ///    &lt;IconID&gt;0&lt;/IconID&gt;
+        ///    &lt;MaxQuality&gt;false&lt;/MaxQuality&gt;
+        ///    &lt;IsDefault&gt;false&lt;/IsDefault&gt;
+        ///    &lt;Version&gt;1&lt;/Version&gt;
+        ///    &lt;UseNativeUI&gt;false&lt;/UseNativeUI&gt;
+        ///    &lt;AfterSca [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string OldProfile {
+            get {
+                return ResourceManager.GetString("OldProfile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot;?&gt;
+        ///&lt;ArrayOfExtendedScanSettings xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xmlns:xsd=&quot;http://www.w3.org/2001/XMLSchema&quot;&gt;
+        ///  &lt;ExtendedScanSettings&gt;
+        ///    &lt;Device&gt;
+        ///      &lt;ID&gt;test_id&lt;/ID&gt;
+        ///      &lt;Name&gt;test_name&lt;/Name&gt;
+        ///    &lt;/Device&gt;
+        ///    &lt;DriverName&gt;twain&lt;/DriverName&gt;
+        ///    &lt;DisplayName&gt;Test Profile&lt;/DisplayName&gt;
+        ///    &lt;IconID&gt;0&lt;/IconID&gt;
+        ///    &lt;Version&gt;1&lt;/Version&gt;
+        ///    &lt;UseNativeUI&gt;false&lt;/UseNativeUI&gt;
+        ///  &lt;/ExtendedScanSettings&gt;
+        ///&lt;/ArrayOfExtendedScanSettings&gt;.
+        /// </summary>
+        internal static string OldTwainProfile {
+            get {
+                return ResourceManager.GetString("OldTwainProfile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot;?&gt;
         ///&lt;ArrayOfScanProfile xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xmlns:xsd=&quot;http://www.w3.org/2001/XMLSchema&quot;&gt;
         ///  &lt;ScanProfile&gt;
         ///    &lt;Device&gt;
@@ -76,6 +121,28 @@ namespace NAPS2.Sdk.Tests.Config {
         internal static string SingleProfile {
             get {
                 return ResourceManager.GetString("SingleProfile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot;?&gt;
+        ///&lt;ArrayOfScanSettings xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xmlns:xsd=&quot;http://www.w3.org/2001/XMLSchema&quot;&gt;
+        ///  &lt;ScanSettings xsi:type=&quot;ExtendedScanSettings&quot;&gt;
+        ///    &lt;Device&gt;
+        ///      &lt;ID&gt;test_id&lt;/ID&gt;
+        ///      &lt;Name&gt;test_name&lt;/Name&gt;
+        ///      &lt;DriverName&gt;wia&lt;/DriverName&gt;
+        ///    &lt;/Device&gt;
+        ///    &lt;DisplayName&gt;Test Profile&lt;/DisplayName&gt;
+        ///    &lt;IconID&gt;0&lt;/IconID&gt;
+        ///    &lt;MaxQuality&gt;false&lt;/MaxQuality&gt;
+        ///    &lt;IsDefault&gt;false&lt;/IsDefault&gt;
+        ///    &lt;AfterScanScale&gt;OneToOne&lt;/AfterScanScale&gt;
+        ///    &lt;Brightn [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string VeryOldProfile {
+            get {
+                return ResourceManager.GetString("VeryOldProfile", resourceCulture);
             }
         }
     }

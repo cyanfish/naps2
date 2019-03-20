@@ -51,5 +51,53 @@ namespace NAPS2.Sdk.Tests.Config
             Assert.Equal(2, profile.Version);
             Assert.Null(profile.UpgradedFrom);
         }
+
+        [Fact]
+        public void DeserializeVeryOldProfile()
+        {
+            var serializer = new ProfileSerializer();
+            var xml = ProfileSerializerTestsData.VeryOldProfile;
+
+            var profiles = serializer.DeserializeFromString(xml);
+            var profile = profiles.Single();
+
+            Assert.Equal("wia", profile.DriverName);
+            Assert.Equal("test_id", profile.Device.ID);
+            Assert.Equal(ScanDpi.Dpi200, profile.Resolution);
+            Assert.Equal(2, profile.Version);
+            Assert.Equal(0, profile.UpgradedFrom);
+        }
+
+        [Fact]
+        public void DeserializeOldProfile()
+        {
+            var serializer = new ProfileSerializer();
+            var xml = ProfileSerializerTestsData.OldProfile;
+
+            var profiles = serializer.DeserializeFromString(xml);
+            var profile = profiles.Single();
+
+            Assert.Equal("wia", profile.DriverName);
+            Assert.Equal("test_id", profile.Device.ID);
+            Assert.Equal(ScanDpi.Dpi200, profile.Resolution);
+            Assert.Equal(2, profile.Version);
+            Assert.Equal(1, profile.UpgradedFrom);
+        }
+
+        [Fact]
+        public void DeserializeOldTwainProfile()
+        {
+            var serializer = new ProfileSerializer();
+            var xml = ProfileSerializerTestsData.OldTwainProfile;
+
+            var profiles = serializer.DeserializeFromString(xml);
+            var profile = profiles.Single();
+
+            Assert.Equal("twain", profile.DriverName);
+            Assert.Equal("test_id", profile.Device.ID);
+            Assert.True(profile.UseNativeUI);
+            Assert.Equal(2, profile.Version);
+            Assert.Equal(1, profile.UpgradedFrom);
+        }
     }
 }

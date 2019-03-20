@@ -163,6 +163,9 @@
     <Compile Include="ClientServer\ScanCallback.cs" />
     <Compile Include="ClientServer\ScanService.cs" />
     <Compile Include="ClientServer\ServerDiscovery.cs" />
+    <Compile Include="Config\Experimental\ObsoleteTypes\ExtendedScanSettingsV0.cs" />
+    <Compile Include="Config\Experimental\ObsoleteTypes\ScanSettingsV0.cs" />
+    <Compile Include="Config\Experimental\ObsoleteTypes\ScanDeviceV0.cs" />
     <Compile Include="Config\Experimental\UserAttribute.cs" />
     <Compile Include="Config\Experimental\AppAttribute.cs" />
     <Compile Include="Config\Experimental\CommonAttribute.cs" />
@@ -181,6 +184,7 @@
     <Compile Include="Config\Experimental\ScopeSetConfigProvider.cs" />
     <Compile Include="Config\Experimental\ToolbarButtons.cs" />
     <Compile Include="Config\Experimental\TransactionConfigScope.cs" />
+    <Compile Include="Config\ProfileSerializer.cs" />
     <Compile Include="Config\StubConfigManager.cs" />
     <Compile Include="Config\StubProfileManager.cs" />
     <Compile Include="Dependencies\DownloadMirror.cs" />

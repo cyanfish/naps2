@@ -42,6 +42,12 @@ namespace NAPS2.Scan
             return profile;
         }
 
+        public int? Version { get; set; }
+
+        [XmlIgnore]
+        public int? UpgradedFrom { get; set; }
+
+        // TODO: These shouldn't be part of this class
         [XmlIgnore]
         public bool IsLocked { get; set; }
 
@@ -63,11 +69,6 @@ namespace NAPS2.Scan
         public bool MaxQuality { get; set; }
 
         public bool IsDefault { get; set; }
-
-        public int Version { get; set; }
-
-        [XmlIgnore]
-        public int? UpgradedFrom { get; set; }
 
         public bool UseNativeUI { get; set; }
 
