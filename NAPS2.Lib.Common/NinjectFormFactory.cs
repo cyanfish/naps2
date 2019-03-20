@@ -4,7 +4,7 @@ using System.Linq;
 using NAPS2.WinForms;
 using Ninject;
 
-namespace NAPS2.DI
+namespace NAPS2.Lib
 {
     public class NinjectFormFactory : IFormFactory
     {

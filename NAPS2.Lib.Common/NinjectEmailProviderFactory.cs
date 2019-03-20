@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using NAPS2.Config;
 using NAPS2.ImportExport.Email;
-using NAPS2.ImportExport.Email.Oauth;
 using NAPS2.ImportExport.Email.Mapi;
+using NAPS2.ImportExport.Email.Oauth;
 using Ninject;
 
-namespace NAPS2.DI
+namespace NAPS2.Lib
 {
     public class NinjectEmailProviderFactory : IEmailProviderFactory
     {

@@ -4,19 +4,15 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using NAPS2.Config;
-using NAPS2.Images;
+using NAPS2.Images.Storage;
 using NAPS2.ImportExport.Pdf;
 using NAPS2.Logging;
 using NAPS2.Ocr;
 using NAPS2.Platform;
-using NAPS2.Images.Storage;
-using NAPS2.Scan;
 using NAPS2.Serialization;
-using NAPS2.Util;
-using NAPS2.WinForms;
 using NLog;
 
-namespace NAPS2.DI
+namespace NAPS2.Lib
 {
     public static class StaticConfiguration
     {

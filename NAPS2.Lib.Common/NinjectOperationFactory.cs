@@ -5,7 +5,7 @@ using NAPS2.Operation;
 using NAPS2.Util;
 using Ninject;
 
-namespace NAPS2.DI
+namespace NAPS2.Lib
 {
     public class NinjectOperationFactory : IOperationFactory
     {

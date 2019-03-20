@@ -7,10 +7,9 @@ using NAPS2.ImportExport.Pdf;
 using NAPS2.Operation;
 using NAPS2.Util;
 using NAPS2.WinForms;
-using Ninject;
 using Ninject.Modules;
 
-namespace NAPS2.DI.Modules
+namespace NAPS2.Lib.Modules
 {
     public class ConsoleModule : NinjectModule
     {

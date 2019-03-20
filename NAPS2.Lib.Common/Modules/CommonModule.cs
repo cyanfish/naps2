@@ -2,15 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using NAPS2.ClientServer;
+using NAPS2.Images;
 using NAPS2.ImportExport;
 using NAPS2.ImportExport.Email;
+using NAPS2.ImportExport.Email.Mapi;
 using NAPS2.ImportExport.Images;
 using NAPS2.ImportExport.Pdf;
 using NAPS2.Ocr;
 using NAPS2.Operation;
 using NAPS2.Scan;
-using NAPS2.Images;
-using NAPS2.ImportExport.Email.Mapi;
 using NAPS2.Scan.Sane;
 using NAPS2.Scan.Twain;
 using NAPS2.Scan.Wia;
@@ -21,7 +21,7 @@ using Ninject;
 using Ninject.Modules;
 using ILogger = NAPS2.Logging.ILogger;
 
-namespace NAPS2.DI.Modules
+namespace NAPS2.Lib.Modules
 {
     public class CommonModule : NinjectModule
     {

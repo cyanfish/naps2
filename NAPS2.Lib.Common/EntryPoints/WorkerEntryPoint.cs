@@ -2,20 +2,19 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.ServiceModel;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Grpc.Core;
-using NAPS2.DI.Modules;
+using NAPS2.Lib.Modules;
 using NAPS2.Logging;
 using NAPS2.Util;
 using NAPS2.WinForms;
 using NAPS2.Worker;
 using Ninject;
 
-namespace NAPS2.DI.EntryPoints
+namespace NAPS2.Lib.EntryPoints
 {
     /// <summary>
     /// The entry point for NAPS2.Worker.exe, an off-process worker.
