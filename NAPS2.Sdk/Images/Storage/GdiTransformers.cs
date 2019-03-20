@@ -270,12 +270,12 @@ namespace NAPS2.Images.Storage
             Bitmap result;
             if (transform.Angle > 45.0 && transform.Angle < 135.0 || transform.Angle > 225.0 && transform.Angle < 315.0)
             {
-                result = new Bitmap(image.Height, image.Width);
+                result = new Bitmap(image.Height, image.Width, PixelFormat.Format24bppRgb);
                 result.SafeSetResolution(image.VerticalResolution, image.HorizontalResolution);
             }
             else
             {
-                result = new Bitmap(image.Width, image.Height);
+                result = new Bitmap(image.Width, image.Height, PixelFormat.Format24bppRgb);
                 result.SafeSetResolution(image.HorizontalResolution, image.VerticalResolution);
             }
             using (var g = Graphics.FromImage(result))
@@ -402,7 +402,7 @@ namespace NAPS2.Images.Storage
         /// If the provided bitmap is 1-bit (black and white), replace it with a 24-bit bitmap so that image transforms will work. If the bitmap is replaced, the original is disposed.
         /// </summary>
         /// <param name="bitmap">The bitmap that may be replaced.</param>
-        protected static void EnsurePixelFormat(ref Bitmap bitmap)
+        protected internal static void EnsurePixelFormat(ref Bitmap bitmap)
         {
             if (bitmap.PixelFormat == PixelFormat.Format1bppIndexed)
             {

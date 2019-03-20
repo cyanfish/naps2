@@ -25,6 +25,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -33,6 +34,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="BouncyCastle.Crypto, Version=1.8.4.0, Culture=neutral, PublicKeyToken=0e99375e54769942">
@@ -88,12 +90,20 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Asserts\ImageAsserts.cs" />
     <Compile Include="Asserts\PdfAsserts.cs" />
     <Compile Include="Config\CommonConfigTests.cs" />
     <Compile Include="Config\ProfileSerializerTests.cs" />
     <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="Images\GdiTests.cs" />
     <Compile Include="Images\ScannedImageSinkTests.cs" />
     <Compile Include="Images\StorageTests.cs" />
+    <Compile Include="Images\TransformTests.cs" />
+    <Compile Include="Images\TransformTestsData.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TransformTestsData.resx</DependentUpon>
+    </Compile>
     <Compile Include="Mocks\MockScanDriver.cs" />
     <Compile Include="Scan\AutoSaveTests.cs" />
     <Compile Include="Config\ProfileSerializerTestsData.Designer.cs">
@@ -121,6 +131,11 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>ProfileSerializerTestsData.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Images\TransformTestsData.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>TransformTestsData.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
@@ -128,6 +143,60 @@
   </ItemGroup>
   <ItemGroup>
     <Analyzer Include="..\packages\xunit.analyzers.0.10.0\analyzers\dotnet\cs\xunit.analyzers.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\color_image_s_p300.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\color_image_h_n300.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\color_image_h_p300.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\color_image_c_n300.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\color_image_c_p300.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\color_image_b_n300.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\color_image_b_p300.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\color_image.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\color_image_c_5_10_15_20.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\color_image_r_180.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\color_image_r_p46.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\color_image_r_n45.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\color_image_r_p90.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\color_image_bw_p300.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\color_image_bw.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\color_image_sh_n1000.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\color_image_sh_p1000.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\color_image_s_n300.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
