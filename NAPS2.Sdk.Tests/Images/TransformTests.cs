@@ -16,6 +16,12 @@ namespace NAPS2.Sdk.Tests.Images
 
         private const double NULL_RMSE_THRESHOLD = 0.5;
 
+        // TODO: Test handling of other pixel formats
+        // ARGB32 -> should work (ignoring alpha channel)
+        // BW1 -> should work where applicable
+        // Unsupported -> should throw an exception
+        // This might require some actual changes to the transforms.
+
         [Fact]
         public void BrightnessNull()
         {
