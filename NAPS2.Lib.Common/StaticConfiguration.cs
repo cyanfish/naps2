@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using NAPS2.Config;
+using NAPS2.Config.Experimental;
 using NAPS2.Images.Storage;
 using NAPS2.ImportExport.Pdf;
 using NAPS2.Logging;
@@ -27,11 +28,16 @@ namespace NAPS2
             Debug.Listeners.Add(new NLogTraceListener());
 #endif
 
-            ProfileManager.Current = new ProfileManager("profiles.xml", Paths.AppData, Paths.Executable);
-            UserConfig.Manager = new ConfigManager<UserConfig>("config.xml", Paths.AppData, Paths.Executable, UserConfig.Create, new DefaultSerializer<UserConfig>());
-            AppConfig.Manager = new ConfigManager<AppConfig>("appsettings.xml", Paths.Executable, null, AppConfig.Create, new DefaultSerializer<AppConfig>());
+            ConfigScopes.Current = new ConfigScopes(Path.Combine(Paths.Executable, "appsettings.xml"), Path.Combine(Paths.AppData, "config.xml"));
+            var configProvider = ConfigScopes.Current.Provider;
+            ProfileManager.Current = new ProfileManager(
+                Path.Combine(Paths.AppData, "profiles.xml"),
+                Path.Combine(Paths.Executable, "profiles.xml"),
+                configProvider.Get(c => c.LockSystemProfiles),
+                configProvider.Get(c => c.LockUnspecifiedDevices),
+                configProvider.Get(c => c.NoUserProfiles));
 
-            var customPath = AppConfig.Current.ComponentsPath;
+            var customPath = configProvider.Get(c => c.ComponentsPath);
             var basePath = string.IsNullOrWhiteSpace(customPath)
                 ? Paths.Components
                 : Environment.ExpandEnvironmentVariables(customPath);

@@ -25,6 +25,7 @@ namespace NAPS2.Config.Experimental
         Clear = 1 << 14,
         Language = 1 << 15,
         Settings = 1 << 16,
-        About = 1 << 17
+        About = 1 << 17,
+        Donate = 1 << 18
     }
 }

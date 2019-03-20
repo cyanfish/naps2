@@ -36,6 +36,7 @@ namespace NAPS2.Config.Experimental
                 DisableGenericPdfImport = false,
                 NoUpdatePrompt = false,
                 CheckForUpdates = false,
+                HasCheckedForUpdates = false,
                 LastUpdateCheckDate = DateTime.MinValue,
                 HasBeenRun = false,
                 FirstRunDate = DateTime.MinValue,
@@ -61,7 +62,7 @@ namespace NAPS2.Config.Experimental
                 EmailSetup = new EmailSetup(),
                 BatchSettings = new BatchSettings(),
                 KeyboardShortcuts = new KeyboardShortcuts(),
-                DefaultProfileSettings = new ScanProfile()
+                DefaultProfileSettings = new ScanProfile { Version = ScanProfile.CURRENT_VERSION }
             };
     }
 }

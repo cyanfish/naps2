@@ -17,7 +17,7 @@ namespace NAPS2.Config.Experimental
 
         protected override void SetInternal(Action<TConfig> func) => func(obj);
 
-        public override void SetAllInternal(TConfig delta)
+        protected override void SetAllInternal(TConfig delta)
         {
             ConfigCopier.Copy(delta, obj);
         }

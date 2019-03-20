@@ -62,7 +62,7 @@ namespace NAPS2.Config.Experimental
             }
         }
 
-        public override void SetAllInternal(TConfig delta)
+        protected override void SetAllInternal(TConfig delta)
         {
             ConfigCopier.Copy(delta, changes);
         }

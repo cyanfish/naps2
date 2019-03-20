@@ -1,11 +1,28 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using NAPS2.Util;
 
 namespace NAPS2.Config.Experimental
 {
     public class ConfigScopes
     {
+        private static ConfigScopes _current;
+
+        public static ConfigScopes Current
+        {
+            get
+            {
+                TestingContext.NoStaticDefaults();
+                if (_current == null)
+                {
+                    throw new InvalidOperationException("Config scopes have not been specified.");
+                }
+                return _current;
+            }
+            set => _current = value;
+        }
+
         public ConfigScopes(string appConfigPath, string userConfigPath)
         {
             AppLocked = new FileConfigScope<CommonConfig>(appConfigPath, CommonConfig.Create, new ConfigSerializer(ConfigReadMode.LockedOnly), ConfigScopeMode.ReadOnly);

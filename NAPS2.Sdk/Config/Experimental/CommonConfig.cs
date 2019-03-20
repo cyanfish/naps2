@@ -76,6 +76,9 @@ namespace NAPS2.Config.Experimental
         public bool? CheckForUpdates { get; set; }
 
         [User]
+        public bool? HasCheckedForUpdates { get; set; }
+
+        [User]
         public DateTime? LastUpdateCheckDate { get; set; }
 
         [User]

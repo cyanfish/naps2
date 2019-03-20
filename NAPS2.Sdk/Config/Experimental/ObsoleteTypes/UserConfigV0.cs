@@ -10,24 +10,10 @@ using NAPS2.Scan;
 using NAPS2.Scan.Batch;
 using NAPS2.Images;
 
-namespace NAPS2.Config
+namespace NAPS2.Config.Experimental.ObsoleteTypes
 {
-    public class UserConfig
+    public class UserConfigV0
     {
-        public const int CURRENT_VERSION = 2;
-
-        private static IConfigManager<UserConfig> _manager = new StubConfigManager<UserConfig>(Create());
-
-        public static IConfigManager<UserConfig> Manager
-        {
-            get => _manager;
-            set => _manager = value ?? throw new ArgumentNullException(nameof(value));
-        }
-
-        public static UserConfig Current => Manager.Config;
-
-        public static UserConfig Create() => new UserConfig { Version = CURRENT_VERSION };
-
         public int Version { get; set; }
 
         public string Culture { get; set; }

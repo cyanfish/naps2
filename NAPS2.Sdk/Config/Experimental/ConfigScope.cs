@@ -49,6 +49,6 @@ namespace NAPS2.Config.Experimental
 
         protected abstract void SetInternal(Action<TConfig> func);
 
-        public abstract void SetAllInternal(TConfig delta);
+        protected abstract void SetAllInternal(TConfig delta);
     }
 }

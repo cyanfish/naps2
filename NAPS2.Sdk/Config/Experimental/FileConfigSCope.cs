@@ -43,7 +43,7 @@ namespace NAPS2.Config.Experimental
             WriteHandshake();
         }
 
-        public override void SetAllInternal(TConfig delta)
+        protected override void SetAllInternal(TConfig delta)
         {
             ConfigCopier.Copy(delta, changes);
             WriteHandshake();

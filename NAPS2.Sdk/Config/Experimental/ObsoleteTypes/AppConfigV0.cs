@@ -7,24 +7,10 @@ using NAPS2.Logging;
 using NAPS2.Ocr;
 using NAPS2.Scan;
 
-namespace NAPS2.Config
+namespace NAPS2.Config.Experimental.ObsoleteTypes
 {
-    public class AppConfig
+    public class AppConfigV0
     {
-        public const int CURRENT_VERSION = 2;
-
-        private static IConfigManager<AppConfig> _manager = new StubConfigManager<AppConfig>(Create());
-
-        public static IConfigManager<AppConfig> Manager
-        {
-            get => _manager;
-            set => _manager = value ?? throw new ArgumentNullException(nameof(value));
-        }
-
-        public static AppConfig Current => Manager.Config;
-
-        public static AppConfig Create() => new AppConfig { Version = CURRENT_VERSION };
-
         public int Version { get; set; }
 
         public string DefaultCulture { get; set; }
