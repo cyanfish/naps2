@@ -4,7 +4,7 @@ using System.Linq;
 using NAPS2.Scan;
 using Ninject;
 
-namespace NAPS2.Lib
+namespace NAPS2
 {
     public class NinjectScanDriverFactory : IScanDriverFactory
     {

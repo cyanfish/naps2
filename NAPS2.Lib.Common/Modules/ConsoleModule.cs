@@ -9,7 +9,7 @@ using NAPS2.Util;
 using NAPS2.WinForms;
 using Ninject.Modules;
 
-namespace NAPS2.Lib.Modules
+namespace NAPS2.Modules
 {
     public class ConsoleModule : NinjectModule
     {

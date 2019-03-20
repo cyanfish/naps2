@@ -21,7 +21,7 @@ using Ninject;
 using Ninject.Modules;
 using ILogger = NAPS2.Logging.ILogger;
 
-namespace NAPS2.Lib.Modules
+namespace NAPS2.Modules
 {
     public class CommonModule : NinjectModule
     {

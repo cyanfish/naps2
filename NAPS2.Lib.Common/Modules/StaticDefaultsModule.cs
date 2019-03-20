@@ -7,7 +7,7 @@ using NAPS2.WinForms;
 using Ninject;
 using Ninject.Modules;
 
-namespace NAPS2.Lib.Modules
+namespace NAPS2.Modules
 {
     public class StaticDefaultsModule : NinjectModule
     {

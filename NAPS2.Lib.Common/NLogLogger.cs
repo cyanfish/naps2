@@ -7,7 +7,7 @@ using NLog.Config;
 using NLog.Targets;
 using ILogger = NAPS2.Logging.ILogger;
 
-namespace NAPS2.Lib
+namespace NAPS2
 {
     public class NLogLogger : ILogger
     {

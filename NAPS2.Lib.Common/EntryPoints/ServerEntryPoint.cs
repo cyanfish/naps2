@@ -6,14 +6,14 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using NAPS2.ClientServer;
-using NAPS2.Lib.Modules;
 using NAPS2.Logging;
+using NAPS2.Modules;
 using NAPS2.Util;
 using NAPS2.WinForms;
 using NAPS2.Worker;
 using Ninject;
 
-namespace NAPS2.Lib.EntryPoints
+namespace NAPS2.EntryPoints
 {
     /// <summary>
     /// The entry point for NAPS2.Server.exe, which exposes scanning devices over the network to other NAPS2 applications.

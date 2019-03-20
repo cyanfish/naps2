@@ -7,7 +7,7 @@ using NAPS2.ImportExport.Email.Mapi;
 using NAPS2.ImportExport.Email.Oauth;
 using Ninject;
 
-namespace NAPS2.Lib
+namespace NAPS2
 {
     public class NinjectEmailProviderFactory : IEmailProviderFactory
     {

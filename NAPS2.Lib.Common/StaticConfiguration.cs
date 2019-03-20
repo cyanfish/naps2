@@ -12,7 +12,7 @@ using NAPS2.Platform;
 using NAPS2.Serialization;
 using NLog;
 
-namespace NAPS2.Lib
+namespace NAPS2
 {
     public static class StaticConfiguration
     {

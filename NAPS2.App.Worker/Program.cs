@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using NAPS2.Lib.EntryPoints;
+using NAPS2.EntryPoints;
 
 namespace NAPS2.Worker
 {
