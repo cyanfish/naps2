@@ -185,7 +185,6 @@
     <Compile Include="Config\Experimental\ToolbarButtons.cs" />
     <Compile Include="Config\Experimental\TransactionConfigScope.cs" />
     <Compile Include="Config\ProfileSerializer.cs" />
-    <Compile Include="Config\StubConfigManager.cs" />
     <Compile Include="Config\StubProfileManager.cs" />
     <Compile Include="Dependencies\DownloadMirror.cs" />
     <Compile Include="Dependencies\MultiFileExternalComponent.cs" />
@@ -433,10 +432,8 @@
     <Compile Include="Util\ChaosMonkey.cs" />
     <Compile Include="Util\CollectionExtensions.cs" />
     <Compile Include="Config\AppConfig.cs" />
-    <Compile Include="Config\ConfigManager.cs" />
     <Compile Include="Config\FormState.cs" />
     <Compile Include="Config\IProfileManager.cs" />
-    <Compile Include="Config\IConfigManager.cs" />
     <Compile Include="Config\ProfileManager.cs" />
     <Compile Include="Config\UserConfig.cs" />
     <Compile Include="ImportExport\Placeholders.cs" />
@@ -522,7 +519,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Recovery\RecoveryIndex.cs" />
     <Compile Include="Recovery\RecoveryIndexImage.cs" />
-    <Compile Include="Recovery\RecoveryIndexManager.cs" />
     <Compile Include="Recovery\RecoveryManager.cs" />
     <Compile Include="Scan\Exceptions\DeviceNotFoundException.cs" />
     <Compile Include="Scan\Exceptions\DeviceException.cs" />
@@ -540,7 +536,6 @@
     <Compile Include="Scan\LocalizedDescriptionAttribute.cs" />
     <Compile Include="Scan\ScanDevice.cs" />
     <Compile Include="Scan\ScanPerformer.cs" />
-    <Compile Include="Scan\OldScanSettings.cs" />
     <Compile Include="Scan\Stub\StubScanDriverFactory.cs" />
     <Compile Include="Scan\Stub\StubScanDriver.cs" />
     <Compile Include="Scan\Twain\TwainScanDriver.cs" />

@@ -4,19 +4,21 @@ using System.Linq;
 
 namespace NAPS2.Config.Experimental
 {
-    public class TransactionConfigScope<TConfig> : ConfigScope<TConfig> where TConfig : new()
+    public class TransactionConfigScope<TConfig> : ConfigScope<TConfig>
     {
         private readonly ConfigScope<TConfig> store;
+        private readonly Func<TConfig> factory;
         private TConfig changes;
 
-        public TransactionConfigScope(ConfigScope<TConfig> store) : base(ConfigScopeMode.ReadWrite)
+        public TransactionConfigScope(ConfigScope<TConfig> store, Func<TConfig> factory) : base(ConfigScopeMode.ReadWrite)
         {
             if (store.Mode == ConfigScopeMode.ReadOnly)
             {
                 throw new ArgumentException("A transaction can't be created for a ReadOnly scope.", nameof(store));
             }
             this.store = store;
-            changes = new TConfig();
+            this.factory = factory;
+            changes = factory();
         }
 
         public bool HasChanges { get; private set; }
@@ -30,7 +32,7 @@ namespace NAPS2.Config.Experimental
                 lock (store)
                 {
                     store.SetAll(changes);
-                    changes = new TConfig();
+                    changes = factory();
                 }
                 if (HasChanges)
                 {

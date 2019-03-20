@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace NAPS2.Config.Experimental
 {
-    public abstract class ConfigScope<TConfig> where TConfig : new()
+    public abstract class ConfigScope<TConfig>
     {
         protected ConfigScope(ConfigScopeMode mode)
         {

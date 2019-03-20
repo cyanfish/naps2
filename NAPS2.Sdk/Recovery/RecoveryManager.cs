@@ -10,6 +10,7 @@ using NAPS2.Operation;
 using NAPS2.Images;
 using NAPS2.Images.Storage;
 using NAPS2.Images.Transforms;
+using NAPS2.Serialization;
 using NAPS2.WinForms;
 
 namespace NAPS2.Recovery
@@ -43,7 +44,7 @@ namespace NAPS2.Recovery
 
             private FileStream lockFile;
             private DirectoryInfo folderToRecoverFrom;
-            private RecoveryIndexManager recoveryIndexManager;
+            private RecoveryIndex recoveryIndex;
             private int imageCount;
             private DateTime scannedDateTime;
 
@@ -71,8 +72,9 @@ namespace NAPS2.Recovery
                 }
                 try
                 {
-                    recoveryIndexManager = new RecoveryIndexManager(folderToRecoverFrom);
-                    imageCount = recoveryIndexManager.Index.Images.Count;
+                    var serializer = new DefaultSerializer<RecoveryIndex>();
+                    recoveryIndex = serializer.DeserializeFromFile(Path.Combine(folderToRecoverFrom.FullName, "index.xml"));
+                    imageCount = recoveryIndex.Images.Count;
                     scannedDateTime = folderToRecoverFrom.LastWriteTime;
                     if (imageCount == 0)
                     {
@@ -121,10 +123,10 @@ namespace NAPS2.Recovery
 
             private async Task<bool> DoRecover(Action<ScannedImage> imageCallback)
             {
-                Status.MaxProgress = recoveryIndexManager.Index.Images.Count;
+                Status.MaxProgress = recoveryIndex.Images.Count;
                 InvokeStatusChanged();
 
-                foreach (RecoveryIndexImage indexImage in recoveryIndexManager.Index.Images)
+                foreach (RecoveryIndexImage indexImage in recoveryIndex.Images)
                 {
                     if (CancelToken.IsCancellationRequested)
                     {

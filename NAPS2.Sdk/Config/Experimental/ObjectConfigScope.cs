@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace NAPS2.Config.Experimental
 {
-    public class ObjectConfigScope<TConfig> : ConfigScope<TConfig> where TConfig : new()
+    public class ObjectConfigScope<TConfig> : ConfigScope<TConfig>
     {
         private readonly TConfig obj;
 

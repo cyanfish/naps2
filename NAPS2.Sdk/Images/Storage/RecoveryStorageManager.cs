@@ -4,9 +4,9 @@ using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Linq;
-using NAPS2.Config;
 using NAPS2.Images.Transforms;
 using NAPS2.Recovery;
+using NAPS2.Serialization;
 
 namespace NAPS2.Images.Storage
 {
@@ -14,11 +14,13 @@ namespace NAPS2.Images.Storage
     {
         public const string LOCK_FILE_NAME = ".lock";
 
+        private readonly ISerializer<RecoveryIndex> serializer = new DefaultSerializer<RecoveryIndex>();
+
         private int fileNumber;
         private bool folderCreated;
         private FileInfo folderLockFile;
         private Stream folderLock;
-        private ConfigManager<RecoveryIndex> indexConfigManager;
+        private RecoveryIndex recoveryIndex;
 
         public RecoveryStorageManager(string recoveryFolderPath, bool skipCreate = false) : base(recoveryFolderPath)
         {
@@ -34,7 +36,7 @@ namespace NAPS2.Images.Storage
             get
             {
                 EnsureFolderCreated();
-                return indexConfigManager.Config;
+                return recoveryIndex;
             }
         }
 
@@ -53,7 +55,7 @@ namespace NAPS2.Images.Storage
                 folder.Create();
                 folderLockFile = new FileInfo(Path.Combine(RecoveryFolderPath, LOCK_FILE_NAME));
                 folderLock = folderLockFile.Open(FileMode.CreateNew, FileAccess.Write, FileShare.None);
-                indexConfigManager = new ConfigManager<RecoveryIndex>("index.xml", RecoveryFolderPath, null, RecoveryIndex.Create, new RecoveryIndexSerializer());
+                recoveryIndex = new RecoveryIndex();
                 folderCreated = true;
             }
         }
@@ -61,16 +63,17 @@ namespace NAPS2.Images.Storage
         public void Commit()
         {
             EnsureFolderCreated();
-            if (indexConfigManager.Config.Images.Count == 0)
+            if (recoveryIndex.Images.Count == 0)
             {
                 // Clean up
                 ForceReleaseLock();
                 Directory.Delete(RecoveryFolderPath, true);
+                recoveryIndex = null;
                 folderCreated = false;
             }
             else
             {
-                indexConfigManager.Save();
+                serializer.SerializeToFile(Path.Combine(RecoveryFolderPath, "index.xml"), recoveryIndex);
             }
         }
 
