@@ -6,6 +6,7 @@ using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
 using NAPS2.Config;
+using NAPS2.Config.Experimental;
 using NAPS2.Lang.Resources;
 using NAPS2.Logging;
 using NAPS2.Update;
@@ -35,7 +36,7 @@ namespace NAPS2.WinForms
             // Grow the form to fit the copyright text if necessary
             Width = Math.Max(Width, labelCopyright.Right + 25);
 
-            if (AppConfig.Current.HideDonateButton)
+            if (ConfigProvider.Get(c => c.HiddenButtons).HasFlag(ToolbarButtons.Donate))
             {
                 btnDonate.Visible = false;
             }
@@ -52,7 +53,7 @@ namespace NAPS2.WinForms
             ConditionalControls.Hide(cbCheckForUpdates, 15);
             ConditionalControls.Hide(lblUpdateStatus, 5);
 #else
-            cbCheckForUpdates.Checked = UserConfig.Current.CheckForUpdates;
+            cbCheckForUpdates.Checked = ConfigProvider.Get(c => c.CheckForUpdates);
             UpdateControls();
             DoUpdateCheck();
 #endif
@@ -70,8 +71,11 @@ namespace NAPS2.WinForms
                     }
                     else
                     {
-                        UserConfig.Current.LastUpdateCheckDate = DateTime.Now;
-                        UserConfig.Manager.Save();
+                        ConfigScopes.User.SetAll(new CommonConfig
+                        {
+                            HasCheckedForUpdates = true,
+                            LastUpdateCheckDate = DateTime.Now
+                        });
                     }
                     update = task.Result;
                     hasCheckedForUpdates = true;
@@ -120,8 +124,7 @@ namespace NAPS2.WinForms
 
         private void cbCheckForUpdates_CheckedChanged(object sender, EventArgs e)
         {
-            UserConfig.Current.CheckForUpdates = cbCheckForUpdates.Checked;
-            UserConfig.Manager.Save();
+            ConfigScopes.User.Set(c => c.CheckForUpdates = cbCheckForUpdates.Checked);
             UpdateControls();
             DoUpdateCheck();
         }

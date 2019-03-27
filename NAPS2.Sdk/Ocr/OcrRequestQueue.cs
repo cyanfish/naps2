@@ -47,8 +47,6 @@ namespace NAPS2.Ocr
 
         public bool HasCachedResult(IOcrEngine ocrEngine, ScannedImage.Snapshot snapshot, OcrParams ocrParams)
         {
-            ocrEngine = ocrEngine ?? ocrEngineManager.ActiveEngine ?? throw new ArgumentException("No OCR engine available");
-            ocrParams = ocrParams ?? ocrEngineManager.DefaultParams;
             var reqParams = new OcrRequestParams(snapshot, ocrEngine, ocrParams);
             lock (this)
             {
@@ -62,7 +60,6 @@ namespace NAPS2.Ocr
             lock (this)
             {
                 ocrEngine = ocrEngine ?? ocrEngineManager.ActiveEngine ?? throw new ArgumentException("No OCR engine available");
-                ocrParams = ocrParams ?? ocrEngineManager.DefaultParams;
 
                 var reqParams = new OcrRequestParams(snapshot, ocrEngine, ocrParams);
                 req = requestCache.GetOrSet(reqParams, () => new OcrRequest(reqParams));
@@ -120,7 +117,6 @@ namespace NAPS2.Ocr
             {
                 var ocrEngine = ocrEngineManager.ActiveEngine;
                 if (ocrEngine == null) return;
-                ocrParams = ocrParams ?? ocrEngineManager.DefaultParams;
 
                 var reqParams = new OcrRequestParams(snapshot, ocrEngine, ocrParams);
                 req = requestCache.GetOrSet(reqParams, () => new OcrRequest(reqParams));

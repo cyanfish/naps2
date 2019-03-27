@@ -183,7 +183,7 @@ namespace NAPS2.ImportExport.Email.Oauth
         {
             var client = new WebClient();
             var token = Token;
-            if (token != null)
+            if (!string.IsNullOrEmpty(token.AccessToken))
             {
                 if (token.Expiry < DateTime.Now + TimeSpan.FromMinutes(10))
                 {

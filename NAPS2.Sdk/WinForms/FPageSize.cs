@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Windows.Forms;
-using NAPS2.Config;
 using NAPS2.Lang.Resources;
 using NAPS2.Scan;
 
@@ -53,7 +52,7 @@ namespace NAPS2.WinForms
         private void UpdateDropdown()
         {
             comboName.Items.Clear();
-            foreach (var preset in UserConfig.Current.CustomPageSizePresets.OrderBy(x => x.Name))
+            foreach (var preset in ConfigProvider.Get(c => c.CustomPageSizePresets).OrderBy(x => x.Name))
             {
                 comboName.Items.Add(preset.Name);
             }
@@ -68,7 +67,7 @@ namespace NAPS2.WinForms
 
         private void comboName_SelectionChangeCommitted(object sender, EventArgs e)
         {
-            var presets = UserConfig.Current.CustomPageSizePresets;
+            var presets = ConfigProvider.Get(c => c.CustomPageSizePresets);
             var dimens = presets.Where(x => x.Name == (string)comboName.SelectedItem).Select(x => x.Dimens).FirstOrDefault();
             if (dimens != null)
             {
@@ -78,7 +77,7 @@ namespace NAPS2.WinForms
 
         private void comboName_TextChanged(object sender, EventArgs e)
         {
-            var presets = UserConfig.Current.CustomPageSizePresets;
+            var presets = ConfigProvider.Get(c => c.CustomPageSizePresets);
             btnDelete.Enabled = presets.Any(x => x.Name == comboName.Text);
         }
 
@@ -110,14 +109,14 @@ namespace NAPS2.WinForms
             if (!string.IsNullOrWhiteSpace(comboName.Text))
             {
                 PageSizeName = comboName.Text;
-                var presets = UserConfig.Current.CustomPageSizePresets;
+                var presets = ConfigProvider.Get(c => c.CustomPageSizePresets);
                 presets.RemoveAll(x => x.Name == PageSizeName);
                 presets.Add(new NamedPageSize
                 {
                     Name = PageSizeName,
                     Dimens = PageSizeDimens
                 });
-                UserConfig.Manager.Save();
+                ConfigScopes.User.Set(c => c.CustomPageSizePresets = presets);
             }
             DialogResult = DialogResult.OK;
             Close();
@@ -127,9 +126,9 @@ namespace NAPS2.WinForms
         {
             if (MessageBox.Show(string.Format(MiscResources.ConfirmDelete, comboName.Text), MiscResources.Delete, MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
             {
-                var presets = UserConfig.Current.CustomPageSizePresets;
+                var presets = ConfigProvider.Get(c => c.CustomPageSizePresets);
                 presets.RemoveAll(x => x.Name == comboName.Text);
-                UserConfig.Manager.Save();
+                ConfigScopes.User.Set(c => c.CustomPageSizePresets = presets);
 
                 UpdateDropdown();
                 comboName.Text = "";

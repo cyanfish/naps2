@@ -58,8 +58,6 @@ namespace NAPS2.WinForms
         private readonly IWorkerServiceFactory workerServiceFactory;
         private readonly OperationProgress operationProgress;
         private readonly UpdateChecker updateChecker;
-        private readonly ConfigScopes configScopes;
-        private readonly ConfigProvider<CommonConfig> configProvider;
 
         #endregion
 
@@ -75,7 +73,7 @@ namespace NAPS2.WinForms
 
         #region Initialization and Culture
 
-        public FDesktop(StringWrapper stringWrapper, RecoveryManager recoveryManager, OcrEngineManager ocrEngineManager, IScanPerformer scanPerformer, IScannedImagePrinter scannedImagePrinter, ChangeTracker changeTracker, StillImage stillImage, IOperationFactory operationFactory, KeyboardShortcutManager ksm, ThumbnailRenderer thumbnailRenderer, WinFormsExportHelper exportHelper, ImageClipboard imageClipboard, ImageRenderer imageRenderer, NotificationManager notify, CultureInitializer cultureInitializer, IWorkerServiceFactory workerServiceFactory, OperationProgress operationProgress, UpdateChecker updateChecker, ConfigScopes configScopes)
+        public FDesktop(StringWrapper stringWrapper, RecoveryManager recoveryManager, OcrEngineManager ocrEngineManager, IScanPerformer scanPerformer, IScannedImagePrinter scannedImagePrinter, ChangeTracker changeTracker, StillImage stillImage, IOperationFactory operationFactory, KeyboardShortcutManager ksm, ThumbnailRenderer thumbnailRenderer, WinFormsExportHelper exportHelper, ImageClipboard imageClipboard, ImageRenderer imageRenderer, NotificationManager notify, CultureInitializer cultureInitializer, IWorkerServiceFactory workerServiceFactory, OperationProgress operationProgress, UpdateChecker updateChecker)
         {
             this.stringWrapper = stringWrapper;
             this.recoveryManager = recoveryManager;
@@ -95,8 +93,6 @@ namespace NAPS2.WinForms
             this.workerServiceFactory = workerServiceFactory;
             this.operationProgress = operationProgress;
             this.updateChecker = updateChecker;
-            this.configScopes = configScopes;
-            configProvider = configScopes.Provider;
             InitializeComponent();
 
             notify.ParentForm = this;
@@ -117,11 +113,11 @@ namespace NAPS2.WinForms
         {
             imageList.ThumbnailRenderer = thumbnailRenderer;
             thumbnailList1.ThumbnailRenderer = thumbnailRenderer;
-            int thumbnailSize = configProvider.Get(c => c.ThumbnailSize);
+            int thumbnailSize = ConfigProvider.Get(c => c.ThumbnailSize);
             thumbnailList1.ThumbnailSize = new Size(thumbnailSize, thumbnailSize);
             SetThumbnailSpacing(thumbnailSize);
 
-            var hiddenButtons = configProvider.Get(c => c.HiddenButtons);
+            var hiddenButtons = ConfigProvider.Get(c => c.HiddenButtons);
             var buttonMap = new List<(ToolbarButtons, ToolStripItem)>
             {
                 (ToolbarButtons.Scan, tsScan),
@@ -268,7 +264,7 @@ namespace NAPS2.WinForms
         private void SetCulture(string cultureId)
         {
             SaveToolStripLocation();
-            configScopes.User.Set(c => c.Culture = cultureId);
+            ConfigScopes.User.Set(c => c.Culture = cultureId);
             cultureInitializer.InitCulture();
 
             // Update localized values
@@ -312,10 +308,10 @@ namespace NAPS2.WinForms
             });
 
             // If configured (e.g. by a business), show a customizable message box on application startup.
-            if (!string.IsNullOrWhiteSpace(configProvider.Get(c => c.StartupMessageText)))
+            if (!string.IsNullOrWhiteSpace(ConfigProvider.Get(c => c.StartupMessageText)))
             {
-                MessageBox.Show(configProvider.Get(c => c.StartupMessageText), configProvider.Get(c => c.StartupMessageTitle), MessageBoxButtons.OK,
-                    configProvider.Get(c => c.StartupMessageIcon));
+                MessageBox.Show(ConfigProvider.Get(c => c.StartupMessageText), ConfigProvider.Get(c => c.StartupMessageTitle), MessageBoxButtons.OK,
+                    ConfigProvider.Get(c => c.StartupMessageIcon));
             }
 
             // Allow scanned images to be recovered in case of an unexpected close
@@ -327,20 +323,20 @@ namespace NAPS2.WinForms
             await RunStillImageEvents();
 
             // Show a donation prompt after a month of use
-            if (!configProvider.Get(c => c.HasBeenRun))
+            if (!ConfigProvider.Get(c => c.HasBeenRun))
             {
-                configScopes.User.SetAll(new CommonConfig
+                ConfigScopes.User.SetAll(new CommonConfig
                 {
                     HasBeenRun = true,
                     FirstRunDate = DateTime.Now
                 });
             }
 #if !INSTALLER_MSI
-            else if (!configProvider.Get(c => c.HiddenButtons).HasFlag(ToolbarButtons.Donate) &&
-                !configProvider.Get(c => c.HasBeenPromptedForDonation) &&
-                DateTime.Now - configProvider.Get(c => c.FirstRunDate) > TimeSpan.FromDays(30))
+            else if (!ConfigProvider.Get(c => c.HiddenButtons).HasFlag(ToolbarButtons.Donate) &&
+                !ConfigProvider.Get(c => c.HasBeenPromptedForDonation) &&
+                DateTime.Now - ConfigProvider.Get(c => c.FirstRunDate) > TimeSpan.FromDays(30))
             {
-                configScopes.User.SetAll(new CommonConfig
+                ConfigScopes.User.SetAll(new CommonConfig
                 {
                     HasBeenPromptedForDonation = true,
                     LastDonatePromptDate = DateTime.Now
@@ -348,9 +344,9 @@ namespace NAPS2.WinForms
                 notify.DonatePrompt();
             }
 
-            if (configProvider.Get(c => c.CheckForUpdates) &&
-                (!configProvider.Get(c => c.HasCheckedForUpdates) ||
-                 configProvider.Get(c => c.LastUpdateCheckDate) < DateTime.Now - updateChecker.CheckInterval))
+            if (ConfigProvider.Get(c => c.CheckForUpdates) &&
+                (!ConfigProvider.Get(c => c.HasCheckedForUpdates) ||
+                 ConfigProvider.Get(c => c.LastUpdateCheckDate) < DateTime.Now - updateChecker.CheckInterval))
             {
                 updateChecker.CheckForUpdates().ContinueWith(task =>
                 {
@@ -360,7 +356,7 @@ namespace NAPS2.WinForms
                     }
                     else
                     {
-                        configScopes.User.SetAll(new CommonConfig
+                        ConfigScopes.User.SetAll(new CommonConfig
                         {
                             HasCheckedForUpdates = true,
                             LastUpdateCheckDate = DateTime.Now
@@ -469,6 +465,12 @@ namespace NAPS2.WinForms
             }
         }
 
+        private ScanParams DefaultScanParams() =>
+            new ScanParams
+            {
+                DoOcr = ConfigProvider.Get(c => c.EnableOcr) && ConfigProvider.Get(c => c.OcrAfterScanning)
+            };
+
         private async Task ScanWithDevice(string deviceID)
         {
             Activate();
@@ -486,14 +488,14 @@ namespace NAPS2.WinForms
             }
             if (profile == null)
             {
-                if (configProvider.Get(c => c.NoUserProfiles) && ProfileManager.Current.Profiles.Any(x => x.IsLocked))
+                if (ConfigProvider.Get(c => c.NoUserProfiles) && ProfileManager.Current.Profiles.Any(x => x.IsLocked))
                 {
                     return;
                 }
 
                 // No profile for the device we're scanning with, so prompt to create one
                 var editSettingsForm = FormFactory.Create<FEditProfile>();
-                editSettingsForm.ScanProfile = configProvider.Get(c => c.DefaultProfileSettings);
+                editSettingsForm.ScanProfile = ConfigProvider.Get(c => c.DefaultProfileSettings);
                 try
                 {
                     // Populate the device field automatically (because we can do that!)
@@ -521,7 +523,7 @@ namespace NAPS2.WinForms
             if (profile != null)
             {
                 // We got a profile, yay, so we can actually do the scan now
-                var source = scanPerformer.PerformScan(profile, new ScanParams(), Handle);
+                var source = scanPerformer.PerformScan(profile, DefaultScanParams(), Handle);
                 await source.ForEach(ReceiveScannedImage());
                 Activate();
             }
@@ -531,7 +533,7 @@ namespace NAPS2.WinForms
         {
             if (ProfileManager.Current.DefaultProfile != null)
             {
-                var source = scanPerformer.PerformScan(ProfileManager.Current.DefaultProfile, new ScanParams(), Handle);
+                var source = scanPerformer.PerformScan(ProfileManager.Current.DefaultProfile, DefaultScanParams(), Handle);
                 await source.ForEach(ReceiveScannedImage());
                 Activate();
             }
@@ -548,7 +550,7 @@ namespace NAPS2.WinForms
         private async Task ScanWithNewProfile()
         {
             var editSettingsForm = FormFactory.Create<FEditProfile>();
-            editSettingsForm.ScanProfile = configProvider.Get(c => c.DefaultProfileSettings);
+            editSettingsForm.ScanProfile = ConfigProvider.Get(c => c.DefaultProfileSettings);
             editSettingsForm.ShowDialog();
             if (!editSettingsForm.Result)
             {
@@ -560,7 +562,7 @@ namespace NAPS2.WinForms
 
             UpdateScanButton();
 
-            var source = scanPerformer.PerformScan(editSettingsForm.ScanProfile, new ScanParams(), Handle);
+            var source = scanPerformer.PerformScan(editSettingsForm.ScanProfile, DefaultScanParams(), Handle);
             await source.ForEach(ReceiveScannedImage());
             Activate();
         }
@@ -719,9 +721,9 @@ namespace NAPS2.WinForms
             ctxSelectAll.Enabled = imageList.Images.Any();
 
             // Other
-            btnZoomIn.Enabled = imageList.Images.Any() && configProvider.Get(c => c.ThumbnailSize) < ThumbnailRenderer.MAX_SIZE;
-            btnZoomOut.Enabled = imageList.Images.Any() && configProvider.Get(c => c.ThumbnailSize) > ThumbnailRenderer.MIN_SIZE;
-            tsNewProfile.Enabled = !(configProvider.Get(c => c.NoUserProfiles) && ProfileManager.Current.Profiles.Any(x => x.IsLocked));
+            btnZoomIn.Enabled = imageList.Images.Any() && ConfigProvider.Get(c => c.ThumbnailSize) < ThumbnailRenderer.MAX_SIZE;
+            btnZoomOut.Enabled = imageList.Images.Any() && ConfigProvider.Get(c => c.ThumbnailSize) > ThumbnailRenderer.MIN_SIZE;
+            tsNewProfile.Enabled = !(ConfigProvider.Get(c => c.NoUserProfiles) && ProfileManager.Current.Profiles.Any(x => x.IsLocked));
 
             if (PlatformCompat.Runtime.RefreshListViewAfterChange)
             {
@@ -759,7 +761,7 @@ namespace NAPS2.WinForms
 
                     UpdateScanButton();
 
-                    var source = scanPerformer.PerformScan(profile, new ScanParams(), Handle);
+                    var source = scanPerformer.PerformScan(profile, DefaultScanParams(), Handle);
                     await source.ForEach(ReceiveScannedImage());
                     Activate();
                 };
@@ -776,12 +778,12 @@ namespace NAPS2.WinForms
 
         private void SaveToolStripLocation()
         {
-            configScopes.User.Set(c => c.DesktopToolStripDock = tStrip.Parent.Dock);
+            ConfigScopes.User.Set(c => c.DesktopToolStripDock = tStrip.Parent.Dock);
         }
 
         private void LoadToolStripLocation()
         {
-            var dock = configProvider.Get(c => c.DesktopToolStripDock);
+            var dock = ConfigProvider.Get(c => c.DesktopToolStripDock);
             if (dock != DockStyle.None)
             {
                 var panel = toolStripContainer1.Controls.OfType<ToolStripPanel>().FirstOrDefault(x => x.Dock == dock);
@@ -962,7 +964,7 @@ namespace NAPS2.WinForms
         {
             if (await exportHelper.SavePDF(images, notify))
             {
-                if (configProvider.Get(c => c.DeleteAfterSaving))
+                if (ConfigProvider.Get(c => c.DeleteAfterSaving))
                 {
                     SafeInvoke(() =>
                     {
@@ -977,7 +979,7 @@ namespace NAPS2.WinForms
         {
             if (await exportHelper.SaveImages(images, notify))
             {
-                if (configProvider.Get(c => c.DeleteAfterSaving))
+                if (ConfigProvider.Get(c => c.DeleteAfterSaving))
                 {
                     imageList.Delete(imageList.Images.IndiciesOf(images));
                     DeleteThumbnails();
@@ -1067,7 +1069,7 @@ namespace NAPS2.WinForms
 
             // Configured
 
-            var ks = configProvider.Get(c => c.KeyboardShortcuts);
+            var ks = ConfigProvider.Get(c => c.KeyboardShortcuts);
 
             ksm.Assign(ks.About, OpenAbout);
             ksm.Assign(ks.BatchScan, tsBatchScan);
@@ -1127,7 +1129,7 @@ namespace NAPS2.WinForms
 
         private string GetProfileShortcut(int i)
         {
-            var ks = configProvider.Get(c => c.KeyboardShortcuts);
+            var ks = ConfigProvider.Get(c => c.KeyboardShortcuts);
             switch (i)
             {
                 case 1:
@@ -1232,7 +1234,7 @@ namespace NAPS2.WinForms
 
         private void tsOcr_Click(object sender, EventArgs e)
         {
-            if (ocrEngineManager.MustUpgrade && !configProvider.Get(c => c.NoUpdatePrompt))
+            if (ocrEngineManager.MustUpgrade && !ConfigProvider.Get(c => c.NoUpdatePrompt))
             {
                 // Re-download a fixed version on Windows XP if needed
                 MessageBox.Show(MiscResources.OcrUpdateAvailable, "", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -1248,7 +1250,7 @@ namespace NAPS2.WinForms
             }
             else if (ocrEngineManager.IsReady)
             {
-                if (ocrEngineManager.CanUpgrade && !configProvider.Get(c => c.NoUpdatePrompt))
+                if (ocrEngineManager.CanUpgrade && !ConfigProvider.Get(c => c.NoUpdatePrompt))
                 {
                     MessageBox.Show(MiscResources.OcrUpdateAvailable, "", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     FormFactory.Create<FOcrLanguageDownload>().ShowDialog();
@@ -1272,7 +1274,7 @@ namespace NAPS2.WinForms
 
         private void tsdSavePDF_ButtonClick(object sender, EventArgs e)
         {
-            var action = configProvider.Get(c => c.SaveButtonDefaultAction);
+            var action = ConfigProvider.Get(c => c.SaveButtonDefaultAction);
 
             if (action == SaveButtonDefaultAction.AlwaysPrompt
                 || action == SaveButtonDefaultAction.PromptIfSelected && SelectedIndices.Any())
@@ -1291,7 +1293,7 @@ namespace NAPS2.WinForms
 
         private void tsdSaveImages_ButtonClick(object sender, EventArgs e)
         {
-            var action = configProvider.Get(c => c.SaveButtonDefaultAction);
+            var action = ConfigProvider.Get(c => c.SaveButtonDefaultAction);
 
             if (action == SaveButtonDefaultAction.AlwaysPrompt
                 || action == SaveButtonDefaultAction.PromptIfSelected && SelectedIndices.Any())
@@ -1310,7 +1312,7 @@ namespace NAPS2.WinForms
 
         private void tsdEmailPDF_ButtonClick(object sender, EventArgs e)
         {
-            var action = configProvider.Get(c => c.SaveButtonDefaultAction);
+            var action = ConfigProvider.Get(c => c.SaveButtonDefaultAction);
 
             if (action == SaveButtonDefaultAction.AlwaysPrompt
                 || action == SaveButtonDefaultAction.PromptIfSelected && SelectedIndices.Any())
@@ -1637,7 +1639,7 @@ namespace NAPS2.WinForms
 
         private void StepThumbnailSize(double step)
         {
-            int thumbnailSize = configProvider.Get(c => c.ThumbnailSize);
+            int thumbnailSize = ConfigProvider.Get(c => c.ThumbnailSize);
             thumbnailSize = (int)ThumbnailRenderer.StepNumberToSize(ThumbnailRenderer.SizeToStepNumber(thumbnailSize) + step);
             thumbnailSize = Math.Max(Math.Min(thumbnailSize, ThumbnailRenderer.MAX_SIZE), ThumbnailRenderer.MIN_SIZE);
             ResizeThumbnails(thumbnailSize);
@@ -1657,7 +1659,7 @@ namespace NAPS2.WinForms
             }
 
             // Save the new size to config
-            configScopes.User.Set(c => c.ThumbnailSize = thumbnailSize);
+            ConfigScopes.User.Set(c => c.ThumbnailSize = thumbnailSize);
             // Adjust the visible thumbnail display with the new size
             lock (thumbnailList1)
             {

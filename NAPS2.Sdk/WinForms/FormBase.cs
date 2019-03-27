@@ -4,6 +4,7 @@ using System.Globalization;
 using System.Linq;
 using System.Windows.Forms;
 using NAPS2.Config;
+using NAPS2.Config.Experimental;
 using NAPS2.Scan;
 using NAPS2.Util;
 
@@ -13,6 +14,7 @@ namespace NAPS2.WinForms
     public class FormBase : Form, IInvoker
     {
         private bool loaded;
+        private FormState formState;
 
         public FormBase()
         {
@@ -29,29 +31,13 @@ namespace NAPS2.WinForms
 
         public IFormFactory FormFactory { get; set; }
 
+        public ConfigScopes ConfigScopes { get; set; }
+
+        public ConfigProvider<CommonConfig> ConfigProvider { get; set; }
+
         protected bool RestoreFormState { get; set; }
 
         protected bool SaveFormState { get; set; }
-
-        #region Helper Properties
-
-        private List<FormState> FormStates => UserConfig.Current.FormStates;
-
-        private FormState FormState
-        {
-            get
-            {
-                var state = FormStates.SingleOrDefault(x => x.Name == Name);
-                if (state == null)
-                {
-                    state = new FormState { Name = Name };
-                    FormStates.Add(state);
-                }
-                return state;
-            }
-        }
-
-        #endregion
 
         #region Helper Methods
 
@@ -139,7 +125,10 @@ namespace NAPS2.WinForms
         {
             OnLoad(sender, eventArgs);
 
-            if (FormState != null && RestoreFormState)
+            var formStates = ConfigProvider.Get(c => c.FormStates);
+            formState = formStates.SingleOrDefault(x => x.Name == Name) ?? new FormState { Name = Name };
+
+            if (RestoreFormState)
             {
                 DoRestoreFormState();
             }
@@ -148,7 +137,6 @@ namespace NAPS2.WinForms
 
         protected void DoRestoreFormState()
         {
-            FormState formState = FormState;
             if (!formState.Location.IsEmpty)
             {
                 if (Screen.AllScreens.Any(x => x.WorkingArea.Contains(formState.Location)))
@@ -172,10 +160,10 @@ namespace NAPS2.WinForms
         {
             if (loaded && SaveFormState)
             {
-                FormState.Maximized = (WindowState == FormWindowState.Maximized);
+                formState.Maximized = (WindowState == FormWindowState.Maximized);
                 if (WindowState == FormWindowState.Normal)
                 {
-                    FormState.Size = Size;
+                    formState.Size = Size;
                 }
             }
         }
@@ -186,7 +174,7 @@ namespace NAPS2.WinForms
             {
                 if (WindowState == FormWindowState.Normal)
                 {
-                    FormState.Location = Location;
+                    formState.Location = Location;
                 }
             }
         }
@@ -195,7 +183,10 @@ namespace NAPS2.WinForms
         {
             if (SaveFormState)
             {
-                UserConfig.Manager?.Save();
+                var formStates = ConfigProvider.Get(c => c.FormStates);
+                formStates.RemoveAll(fs => fs.Name == Name);
+                formStates.Add(formState);
+                ConfigScopes.User.Set(c => c.FormStates = formStates);
             }
         }
 

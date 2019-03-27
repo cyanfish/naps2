@@ -55,16 +55,18 @@ namespace NAPS2.WinForms
             }
         }
 
+        private bool NoUserProfiles => ConfigProvider.Get(c => c.NoUserProfiles) && ProfileManager.Current.Profiles.Any(x => x.IsLocked);
+
         protected override void OnLoad(object sender, EventArgs e)
         {
             lvProfiles.LargeImageList = ilProfileIcons.IconsList;
-            btnAdd.Enabled = !(AppConfig.Current.NoUserProfiles && ProfileManager.Current.Profiles.Any(x => x.IsLocked));
+            btnAdd.Enabled = !NoUserProfiles;
             btnEdit.Enabled = false;
             btnDelete.Enabled = false;
             UpdateProfiles();
             SelectProfile(x => x.IsDefault);
 
-            if (AppConfig.Current.NoUserProfiles && ProfileManager.Current.Profiles.Any(x => x.IsLocked))
+            if (NoUserProfiles)
             {
                 contextMenuStrip.Items.Remove(ctxCopy);
                 contextMenuStrip.Items.Remove(ctxPaste);
@@ -130,7 +132,7 @@ namespace NAPS2.WinForms
         private void btnAdd_Click(object sender, EventArgs e)
         {
             var fedit = FormFactory.Create<FEditProfile>();
-            fedit.ScanProfile = AppConfig.Current.DefaultProfileSettings ?? new ScanProfile { Version = ScanProfile.CURRENT_VERSION };
+            fedit.ScanProfile = ConfigProvider.Get(c => c.DefaultProfileSettings);
             fedit.ShowDialog();
             if (fedit.Result)
             {
@@ -219,6 +221,12 @@ namespace NAPS2.WinForms
             PerformScan();
         }
 
+        private ScanParams DefaultScanParams() =>
+            new ScanParams
+            {
+                DoOcr = ConfigProvider.Get(c => c.EnableOcr) && ConfigProvider.Get(c => c.OcrAfterScanning)
+            };
+
         private async void PerformScan()
         {
             if (ProfileManager.Current.Profiles.Count == 0)
@@ -253,7 +261,7 @@ namespace NAPS2.WinForms
                 SelectProfile(x => x == profile);
             }
             ProfileManager.Current.Save();
-            var source = scanPerformer.PerformScan(SelectedProfile, new ScanParams(), Handle);
+            var source = scanPerformer.PerformScan(SelectedProfile, DefaultScanParams(), Handle);
             await source.ForEach(ImageCallback);
             Activate();
         }
@@ -349,7 +357,7 @@ namespace NAPS2.WinForms
 
         private void ctxPaste_Click(object sender, EventArgs e)
         {
-            if (AppConfig.Current.NoUserProfiles && ProfileManager.Current.Profiles.Any(x => x.IsLocked))
+            if (NoUserProfiles)
             {
                 return;
             }
@@ -380,7 +388,7 @@ namespace NAPS2.WinForms
         private void lvProfiles_DragEnter(object sender, DragEventArgs e)
         {
             // Determine if drop data is compatible
-            if (AppConfig.Current.NoUserProfiles && ProfileManager.Current.Profiles.Any(x => x.IsLocked))
+            if (NoUserProfiles)
             {
                 return;
             }
@@ -414,7 +422,7 @@ namespace NAPS2.WinForms
                 }
                 else
                 {
-                    if (!(AppConfig.Current.NoUserProfiles && ProfileManager.Current.Profiles.Any(x => x.IsLocked)))
+                    if (!NoUserProfiles)
                     {
                         AddProfile(data.ScanProfile);
                     }

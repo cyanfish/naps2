@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 using NAPS2.Config;
+using NAPS2.Config.Experimental;
 using NAPS2.Ocr;
 using NAPS2.Scan;
 using NAPS2.Util;
@@ -48,27 +49,10 @@ namespace NAPS2.WinForms
             labelOcrMode.Visible = availableModes != null;
             ConditionalControls.LockHeight(this);
 
-            if (AppConfig.Current.OcrState == OcrState.Enabled)
-            {
-                checkBoxEnableOcr.Checked = true;
-                SetSelectedValue(comboLanguages, AppConfig.Current.OcrDefaultLanguage ?? "");
-                SetSelectedItem(comboOcrMode, AppConfig.Current.OcrDefaultMode);
-                checkBoxRunInBG.Checked = AppConfig.Current.OcrDefaultAfterScanning;
-            }
-            else if (AppConfig.Current.OcrState == OcrState.Disabled)
-            {
-                checkBoxEnableOcr.Checked = false;
-                comboLanguages.SelectedValue = "";
-                comboOcrMode.SelectedValue = "";
-                checkBoxRunInBG.Checked = false;
-            }
-            else
-            {
-                checkBoxEnableOcr.Checked = UserConfig.Current.EnableOcr;
-                SetSelectedValue(comboLanguages, UserConfig.Current.OcrLanguageCode ?? AppConfig.Current.OcrDefaultLanguage ?? "");
-                SetSelectedItem(comboOcrMode, UserConfig.Current.OcrMode == OcrMode.Default ? AppConfig.Current.OcrDefaultMode : UserConfig.Current.OcrMode);
-                checkBoxRunInBG.Checked = UserConfig.Current.OcrAfterScanning ?? AppConfig.Current.OcrDefaultAfterScanning;
-            }
+            checkBoxEnableOcr.Checked = ConfigProvider.Get(c => c.EnableOcr);
+            SetSelectedValue(comboLanguages, ConfigProvider.Get(c => c.OcrLanguageCode));
+            SetSelectedItem(comboOcrMode, ConfigProvider.Get(c => c.OcrMode));
+            checkBoxRunInBG.Checked = ConfigProvider.Get(c => c.OcrAfterScanning);
 
             UpdateView();
         }
@@ -105,10 +89,10 @@ namespace NAPS2.WinForms
 
         private void UpdateView()
         {
-            bool canChangeEnabled = AppConfig.Current.OcrState == OcrState.UserConfig;
-            bool canChangeLanguage = AppConfig.Current.OcrState == OcrState.UserConfig
-                                     || AppConfig.Current.OcrState == OcrState.Enabled
-                                        && string.IsNullOrWhiteSpace(AppConfig.Current.OcrDefaultLanguage);
+            bool canChangeEnabled = ConfigScopes.AppLocked.Get(c => c.EnableOcr) == null;
+            bool canChangeLanguage = canChangeEnabled
+                                     || ConfigProvider.Get(c => c.EnableOcr)
+                                        && ConfigScopes.AppLocked.Get(c => c.OcrLanguageCode) == null;
             checkBoxEnableOcr.Enabled = canChangeEnabled;
             comboLanguages.Enabled = checkBoxEnableOcr.Checked && canChangeLanguage;
             linkGetLanguages.Enabled = canChangeLanguage;
@@ -138,13 +122,15 @@ namespace NAPS2.WinForms
 
         private void btnOK_Click(object sender, EventArgs e)
         {
-            if (AppConfig.Current.OcrState == OcrState.UserConfig)
+            if (ConfigScopes.AppLocked.Get(c => c.EnableOcr) == null)
             {
-                UserConfig.Current.EnableOcr = checkBoxEnableOcr.Checked;
-                UserConfig.Current.OcrLanguageCode = (string) comboLanguages.SelectedValue;
-                UserConfig.Current.OcrMode = availableModes != null ? (OcrMode) comboOcrMode.SelectedItem : OcrMode.Default;
-                UserConfig.Current.OcrAfterScanning = checkBoxRunInBG.Checked;
-                UserConfig.Manager.Save();
+                ConfigScopes.User.SetAll(new CommonConfig
+                {
+                    EnableOcr = checkBoxEnableOcr.Checked,
+                    OcrLanguageCode = (string)comboLanguages.SelectedValue,
+                    OcrMode = availableModes != null ? (OcrMode)comboOcrMode.SelectedItem : OcrMode.Default,
+                    OcrAfterScanning = checkBoxRunInBG.Checked
+                });
             }
             Close();
         }

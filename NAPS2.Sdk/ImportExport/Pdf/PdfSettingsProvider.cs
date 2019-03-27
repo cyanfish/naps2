@@ -5,6 +5,7 @@ using NAPS2.Util;
 
 namespace NAPS2.ImportExport.Pdf
 {
+    // TODO: Maybe this can be replaced with ConfigProvider<T>? Somehow get individual property locks to work on PdfSettings properties (after ensuring they're all nullable)
     public abstract class PdfSettingsProvider
     {
         private static PdfSettingsProvider _default = Wrap(new PdfSettings());

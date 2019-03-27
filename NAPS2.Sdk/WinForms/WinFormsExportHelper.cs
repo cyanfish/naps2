@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using NAPS2.Config;
+using NAPS2.Config.Experimental;
 using NAPS2.ImportExport;
 using NAPS2.ImportExport.Email;
 using NAPS2.ImportExport.Images;
@@ -28,8 +29,9 @@ namespace NAPS2.WinForms
         private readonly IFormFactory formFactory;
         private readonly OcrEngineManager ocrEngineManager;
         private readonly OperationProgress operationProgress;
+        private readonly ConfigScopes configScopes;
 
-        public WinFormsExportHelper(PdfSettingsContainer pdfSettingsContainer, ImageSettingsContainer imageSettingsContainer, EmailSettingsContainer emailSettingsContainer, DialogHelper dialogHelper, ChangeTracker changeTracker, IOperationFactory operationFactory, IFormFactory formFactory, OcrEngineManager ocrEngineManager, OperationProgress operationProgress)
+        public WinFormsExportHelper(PdfSettingsContainer pdfSettingsContainer, ImageSettingsContainer imageSettingsContainer, EmailSettingsContainer emailSettingsContainer, DialogHelper dialogHelper, ChangeTracker changeTracker, IOperationFactory operationFactory, IFormFactory formFactory, OcrEngineManager ocrEngineManager, OperationProgress operationProgress, ConfigScopes configScopes)
         {
             this.pdfSettingsContainer = pdfSettingsContainer;
             this.imageSettingsContainer = imageSettingsContainer;
@@ -40,6 +42,7 @@ namespace NAPS2.WinForms
             this.formFactory = formFactory;
             this.ocrEngineManager = ocrEngineManager;
             this.operationProgress = operationProgress;
+            this.configScopes = configScopes;
         }
 
         public async Task<bool> SavePDF(List<ScannedImage> images, ISaveNotify notify)
@@ -79,7 +82,7 @@ namespace NAPS2.WinForms
 
             var pdfSettings = pdfSettingsContainer.PdfSettings;
             pdfSettings.Metadata.Creator = MiscResources.NAPS2;
-            if (op.Start(filename, Placeholders.All.WithDate(DateTime.Now), images, pdfSettings, new OcrContext(ocrEngineManager.DefaultParams), email, emailMessage))
+            if (op.Start(filename, Placeholders.All.WithDate(DateTime.Now), images, pdfSettings, new OcrContext(configScopes.Provider.DefaultOcrParams()), email, emailMessage))
             {
                 operationProgress.ShowProgress(op);
             }
@@ -128,7 +131,7 @@ namespace NAPS2.WinForms
                 return false;
             }
 
-            if (UserConfig.Current.EmailSetup == null)
+            if (configScopes == null)
             {
                 // First run; prompt for a 
                 var form = formFactory.Create<FEmailProvider>();

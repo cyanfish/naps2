@@ -4,7 +4,9 @@ using System.Linq;
 
 namespace NAPS2.Config.Experimental
 {
-    public abstract class ConfigProvider<TConfig> where TConfig : new()
+    // TODO: It is pretty ugly to have ConfigProvider<CommonConfig> everywhere.
+    // TODO: Maybe a CommonConfigProvider subclass. Or maybe give in and remove generics.
+    public abstract class ConfigProvider<TConfig>
     {
         public T Get<T>(Func<TConfig, T> func) where T : class => GetInternal(func);
 

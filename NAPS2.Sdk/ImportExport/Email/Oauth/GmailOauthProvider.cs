@@ -5,20 +5,31 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using NAPS2.Config;
+using NAPS2.Config.Experimental;
 using NAPS2.Util;
 using Newtonsoft.Json.Linq;
 
 namespace NAPS2.ImportExport.Email.Oauth
 {
+    // TODO: The config references should be pulled elsewhere so this can be included in the SDK
     public class GmailOauthProvider : OauthProvider
     {
+        private readonly ConfigScopes configScopes;
+        private readonly ConfigProvider<CommonConfig> configProvider;
+
         private OauthClientCreds creds;
+
+        public GmailOauthProvider(ConfigScopes configScopes, ConfigProvider<CommonConfig> configProvider)
+        {
+            this.configScopes = configScopes;
+            this.configProvider = configProvider;
+        }
 
         #region Authorization
 
-        public override OauthToken Token => UserConfig.Current.EmailSetup?.GmailToken;
+        public override OauthToken Token => configProvider.Get(c => c.EmailSetup.GmailToken);
 
-        public override string User => UserConfig.Current.EmailSetup?.GmailUser;
+        public override string User => configProvider.Get(c => c.EmailSetup.GmailUser);
 
         protected override OauthClientCreds ClientCreds
         {
@@ -42,14 +53,14 @@ namespace NAPS2.ImportExport.Email.Oauth
 
         protected override void SaveToken(OauthToken token, bool refresh)
         {
-            UserConfig.Current.EmailSetup = UserConfig.Current.EmailSetup ?? new EmailSetup();
-            UserConfig.Current.EmailSetup.GmailToken = token;
+            var emailSetup = configProvider.Get(c => c.EmailSetup);
+            emailSetup.GmailToken = token;
             if (!refresh)
             {
-                UserConfig.Current.EmailSetup.GmailUser = GetEmailAddress();
-                UserConfig.Current.EmailSetup.ProviderType = EmailProviderType.Gmail;
+                emailSetup.GmailUser = GetEmailAddress();
+                emailSetup.ProviderType = EmailProviderType.Gmail;
             }
-            UserConfig.Manager.Save();
+            configScopes.User.Set(c => c.EmailSetup = emailSetup);
         }
 
         #endregion

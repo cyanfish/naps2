@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
-using NAPS2.Config;
+using NAPS2.Config.Experimental;
 using NAPS2.Lang.Resources;
 using NAPS2.Operation;
 
@@ -12,13 +12,17 @@ namespace NAPS2.WinForms
     {
         private readonly IFormFactory formFactory;
         private readonly NotificationManager notificationManager;
+        private readonly ConfigScopes configScopes;
+        private readonly ConfigProvider<CommonConfig> configProvider;
 
         private readonly HashSet<IOperation> activeOperations = new HashSet<IOperation>();
 
-        public WinFormsOperationProgress(IFormFactory formFactory, NotificationManager notificationManager)
+        public WinFormsOperationProgress(IFormFactory formFactory, NotificationManager notificationManager, ConfigScopes configScopes, ConfigProvider<CommonConfig> configProvider)
         {
             this.formFactory = formFactory;
             this.notificationManager = notificationManager;
+            this.configScopes = configScopes;
+            this.configProvider = configProvider;
         }
 
         public override void Attach(IOperation op)
@@ -36,7 +40,7 @@ namespace NAPS2.WinForms
 
         public override void ShowProgress(IOperation op)
         {
-            if (UserConfig.Current.BackgroundOperations.Contains(op.GetType().Name))
+            if (configProvider.Get(c => c.BackgroundOperations).Contains(op.GetType().Name))
             {
                 ShowBackgroundProgress(op);
             }
@@ -50,8 +54,9 @@ namespace NAPS2.WinForms
         {
             Attach(op);
 
-            UserConfig.Current.BackgroundOperations.Remove(op.GetType().Name);
-            UserConfig.Manager.Save();
+            var bgOps = configProvider.Get(c => c.BackgroundOperations) ?? new HashSet<string>();
+            bgOps.Remove(op.GetType().Name);
+            configScopes.User.Set(c => c.BackgroundOperations = bgOps);
 
             if (!op.IsFinished)
             {
@@ -70,8 +75,9 @@ namespace NAPS2.WinForms
         {
             Attach(op);
 
-            UserConfig.Current.BackgroundOperations.Add(op.GetType().Name);
-            UserConfig.Manager.Save();
+            var bgOps = configProvider.Get(c => c.BackgroundOperations) ?? new HashSet<string>();
+            bgOps.Add(op.GetType().Name);
+            configScopes.User.Set(c => c.BackgroundOperations = bgOps);
 
             if (!op.IsFinished)
             {

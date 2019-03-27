@@ -27,7 +27,7 @@ namespace NAPS2.Scan
 
         public bool SkipPostProcessing { get; set; }
 
-        public bool? DoOcr { get; set; }
+        public bool DoOcr { get; set; }
 
         [IgnoreDataMember]
         public OcrParams OcrParams { get; set; }

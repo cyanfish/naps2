@@ -4,7 +4,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using Ghostscript.NET.Rasterizer;
-using NAPS2.Config;
+using NAPS2.Config.Experimental;
 using NAPS2.Dependencies;
 using NAPS2.Lang.Resources;
 using NAPS2.Scan;
@@ -16,6 +16,13 @@ namespace NAPS2.ImportExport.Pdf
     public class GhostscriptPdfRenderer : IPdfRenderer
     {
         private static byte[] _gsLibBytes;
+
+        private readonly ConfigProvider<CommonConfig> configProvider;
+
+        public GhostscriptPdfRenderer(ConfigProvider<CommonConfig> configProvider)
+        {
+            this.configProvider = configProvider;
+        }
 
         public IEnumerable<Bitmap> Render(string path)
         {
@@ -52,7 +59,7 @@ namespace NAPS2.ImportExport.Pdf
 
         public void PromptToInstallIfNeeded(IComponentInstallPrompt componentInstallPrompt)
         {
-            if (AppConfig.Current.NoUpdatePrompt || AppConfig.Current.DisableGenericPdfImport)
+            if (configProvider.Get(c => c.NoUpdatePrompt) || configProvider.Get(c => c.DisableGenericPdfImport))
             {
                 return;
             }
@@ -61,7 +68,7 @@ namespace NAPS2.ImportExport.Pdf
 
         public void ThrowIfCantRender()
         {
-            if (AppConfig.Current.DisableGenericPdfImport || !GhostscriptManager.GhostscriptComponent.IsInstalled)
+            if (configProvider.Get(c => c.DisableGenericPdfImport) || !GhostscriptManager.GhostscriptComponent.IsInstalled)
             {
                 throw new ImageRenderException();
             }

@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Moq;
+using NAPS2.Config.Experimental;
 using NAPS2.Images;
 using NAPS2.Images.Storage;
 using NAPS2.ImportExport;
@@ -174,7 +175,8 @@ namespace NAPS2.Sdk.Tests.Scan
                 null,
                 new PdfSharpExporter(new MemoryStreamRenderer()),
                 new StubOverwritePrompt(),
-                new BitmapRenderer());
+                new BitmapRenderer(),
+                new StubConfigProvider<CommonConfig>(InternalDefaults.GetCommonConfig()));
         }
 
         private ScannedImage CreateScannedImage()

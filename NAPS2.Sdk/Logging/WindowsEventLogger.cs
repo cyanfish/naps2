@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using NAPS2.Config;
+using NAPS2.Config.Experimental;
 
 namespace NAPS2.Logging
 {
@@ -10,7 +10,14 @@ namespace NAPS2.Logging
     {
         private const string SOURCE_NAME = "NAPS2";
         private const string LOG_NAME = "Application";
-        
+
+        private readonly ConfigProvider<CommonConfig> configProvider;
+
+        public WindowsEventLogger(ConfigProvider<CommonConfig> configProvider)
+        {
+            this.configProvider = configProvider;
+        }
+
         public void CreateEventSource()
         {
             if (!EventLog.SourceExists(SOURCE_NAME))
@@ -21,7 +28,7 @@ namespace NAPS2.Logging
 
         public void LogEvent(EventType eventType, EventParams eventParams)
         {
-            if ((eventType & AppConfig.Current.EventLogging) != eventType) return;
+            if (!configProvider.Get(c => c.EventLogging).HasFlag(eventType)) return;
             try
             {
                 EventLog.WriteEntry(SOURCE_NAME, eventParams.ToString(), EventLogEntryType.Information);

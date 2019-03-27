@@ -225,11 +225,7 @@ namespace NAPS2.Images
             {
                 return false;
             }
-            bool ocrEnabled = OcrEngineManager.Default.DefaultParams != null;
-            bool afterScanning = AppConfig.Current.OcrState == OcrState.Enabled && AppConfig.Current.OcrDefaultAfterScanning
-                                 || AppConfig.Current.OcrState == OcrState.UserConfig &&
-                                 (UserConfig.Current.OcrAfterScanning ?? AppConfig.Current.OcrDefaultAfterScanning);
-            return scanParams.DoOcr ?? (ocrEnabled && afterScanning);
+            return scanParams.DoOcr && !string.IsNullOrEmpty(scanParams.OcrParams?.LanguageCode);
         }
 
         public string SaveForBackgroundOcr(IImage bitmap, ScanParams scanParams)

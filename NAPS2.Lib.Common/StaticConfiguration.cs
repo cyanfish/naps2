@@ -10,7 +10,6 @@ using NAPS2.ImportExport.Pdf;
 using NAPS2.Logging;
 using NAPS2.Ocr;
 using NAPS2.Platform;
-using NAPS2.Serialization;
 using NLog;
 
 namespace NAPS2
@@ -19,15 +18,6 @@ namespace NAPS2
     {
         public static void Initialize()
         {
-            Log.Logger = new NLogLogger();
-            if (PlatformCompat.System.CanUseWin32)
-            {
-                Log.EventLogger = new WindowsEventLogger();
-            }
-#if DEBUG
-            Debug.Listeners.Add(new NLogTraceListener());
-#endif
-
             ConfigScopes.Current = new ConfigScopes(Path.Combine(Paths.Executable, "appsettings.xml"), Path.Combine(Paths.AppData, "config.xml"));
             var configProvider = ConfigScopes.Current.Provider;
             ProfileManager.Current = new ProfileManager(
@@ -36,6 +26,15 @@ namespace NAPS2
                 configProvider.Get(c => c.LockSystemProfiles),
                 configProvider.Get(c => c.LockUnspecifiedDevices),
                 configProvider.Get(c => c.NoUserProfiles));
+
+            Log.Logger = new NLogLogger();
+            if (PlatformCompat.System.CanUseWin32)
+            {
+                Log.EventLogger = new WindowsEventLogger(configProvider);
+            }
+#if DEBUG
+            Debug.Listeners.Add(new NLogTraceListener());
+#endif
 
             var customPath = configProvider.Get(c => c.ComponentsPath);
             var basePath = string.IsNullOrWhiteSpace(customPath)

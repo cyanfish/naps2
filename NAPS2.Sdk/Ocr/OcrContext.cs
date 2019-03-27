@@ -6,6 +6,8 @@ namespace NAPS2.Ocr
 {
     public class OcrContext
     {
+        public static OcrContext None => new OcrContext(null, null, null);
+
         public OcrContext(OcrParams ocrParams)
         {
             Params = ocrParams;

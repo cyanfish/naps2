@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using NAPS2.Config.Experimental;
 using NAPS2.WinForms;
 using Ninject;
 
@@ -19,6 +20,8 @@ namespace NAPS2
         {
             var form = kernel.Get<T>();
             form.FormFactory = kernel.Get<IFormFactory>();
+            form.ConfigScopes = kernel.Get<ConfigScopes>();
+            form.ConfigProvider = kernel.Get<ConfigProvider<CommonConfig>>();
             return form;
         }
     }

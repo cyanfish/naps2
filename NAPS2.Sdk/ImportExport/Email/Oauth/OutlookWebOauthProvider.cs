@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using NAPS2.Config;
+using NAPS2.Config.Experimental;
 using NAPS2.Util;
 using Newtonsoft.Json.Linq;
 
@@ -12,13 +12,22 @@ namespace NAPS2.ImportExport.Email.Oauth
 {
     public class OutlookWebOauthProvider : OauthProvider
     {
+        private readonly ConfigScopes configScopes;
+        private readonly ConfigProvider<CommonConfig> configProvider;
+
         private OauthClientCreds creds;
+
+        public OutlookWebOauthProvider(ConfigScopes configScopes, ConfigProvider<CommonConfig> configProvider)
+        {
+            this.configScopes = configScopes;
+            this.configProvider = configProvider;
+        }
 
         #region Authorization
 
-        public override OauthToken Token => UserConfig.Current.EmailSetup?.OutlookWebToken;
+        public override OauthToken Token => configProvider.Get(c => c.EmailSetup.OutlookWebToken);
 
-        public override string User => UserConfig.Current.EmailSetup?.OutlookWebUser;
+        public override string User => configProvider.Get(c => c.EmailSetup.OutlookWebUser);
 
         protected override OauthClientCreds ClientCreds
         {
@@ -41,14 +50,14 @@ namespace NAPS2.ImportExport.Email.Oauth
 
         protected override void SaveToken(OauthToken token, bool refresh)
         {
-            UserConfig.Current.EmailSetup = UserConfig.Current.EmailSetup ?? new EmailSetup();
-            UserConfig.Current.EmailSetup.OutlookWebToken = token;
+            var emailSetup = configProvider.Get(c => c.EmailSetup);
+            emailSetup.OutlookWebToken = token;
             if (!refresh)
             {
-                UserConfig.Current.EmailSetup.OutlookWebUser = GetEmailAddress();
-                UserConfig.Current.EmailSetup.ProviderType = EmailProviderType.OutlookWeb;
+                emailSetup.OutlookWebUser = GetEmailAddress();
+                emailSetup.ProviderType = EmailProviderType.OutlookWeb;
             }
-            UserConfig.Manager.Save();
+            configScopes.User.Set(c => c.EmailSetup = emailSetup);
         }
 
         #endregion

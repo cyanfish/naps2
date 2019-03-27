@@ -7,6 +7,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
 using NAPS2.Config;
+using NAPS2.Config.Experimental;
 using NAPS2.Dependencies;
 using NAPS2.ImportExport;
 using NAPS2.ImportExport.Email;
@@ -34,6 +35,8 @@ namespace NAPS2.Automation
         private readonly IOperationFactory operationFactory;
         private readonly OcrEngineManager ocrEngineManager;
         private readonly IFormFactory formFactory;
+        private readonly ConfigScopes configScopes;
+        private readonly ConfigProvider<CommonConfig> configProvider;
 
         private readonly AutomatedScanningOptions options;
         private List<List<ScannedImage>> scanList;
@@ -43,7 +46,7 @@ namespace NAPS2.Automation
         private List<string> actualOutputPaths;
         private OcrParams ocrParams;
 
-        public AutomatedScanning(AutomatedScanningOptions options, IScanPerformer scanPerformer, ErrorOutput errorOutput, IEmailProviderFactory emailProviderFactory, IScannedImageImporter scannedImageImporter, PdfSettingsContainer pdfSettingsContainer, ImageSettingsContainer imageSettingsContainer, IOperationFactory operationFactory, OcrEngineManager ocrEngineManager, IFormFactory formFactory)
+        public AutomatedScanning(AutomatedScanningOptions options, IScanPerformer scanPerformer, ErrorOutput errorOutput, IEmailProviderFactory emailProviderFactory, IScannedImageImporter scannedImageImporter, PdfSettingsContainer pdfSettingsContainer, ImageSettingsContainer imageSettingsContainer, IOperationFactory operationFactory, OcrEngineManager ocrEngineManager, IFormFactory formFactory, ConfigScopes configScopes, ConfigProvider<CommonConfig> configProvider)
         {
             this.options = options;
             this.scanPerformer = scanPerformer;
@@ -55,6 +58,8 @@ namespace NAPS2.Automation
             this.operationFactory = operationFactory;
             this.ocrEngineManager = ocrEngineManager;
             this.formFactory = formFactory;
+            this.configScopes = configScopes;
+            this.configProvider = configProvider;
         }
 
         public IEnumerable<ScannedImage> AllImages => scanList.SelectMany(x => x);
@@ -146,9 +151,20 @@ namespace NAPS2.Automation
         private void ConfigureOcr()
         {
             bool canUseOcr = IsPdfFile(options.OutputPath) || IsPdfFile(options.EmailFileName);
-            bool useOcr = canUseOcr && !options.DisableOcr && (options.EnableOcr || options.OcrLang != null || UserConfig.Current.EnableOcr || AppConfig.Current.OcrState == OcrState.Enabled);
-            string ocrLanguageCode = useOcr ? (options.OcrLang ?? ocrEngineManager.DefaultParams?.LanguageCode) : null;
-            ocrParams = new OcrParams(ocrLanguageCode, ocrEngineManager.DefaultParams?.Mode ?? OcrMode.Default);
+            if (!canUseOcr)
+            {
+                return;
+            }
+            if (options.DisableOcr)
+            {
+                configScopes.Run.Set(c => c.EnableOcr = false);
+            }
+            else if (options.EnableOcr || options.OcrLang != null)
+            {
+                configScopes.Run.Set(c => c.EnableOcr = true);
+            }
+            configScopes.Run.Set(c => c.OcrLanguageCode = options.OcrLang);
+            ocrParams = configProvider.DefaultOcrParams();
         }
 
         private void InstallComponents()
@@ -526,7 +542,7 @@ namespace NAPS2.Automation
             }
 
             var pdfSettings = new PdfSettings { Metadata = metadata, Encryption = encryption, Compat = compat };
-            
+
             int scanIndex = 0;
             actualOutputPaths = new List<string>();
             foreach (var fileContents in scanList)
@@ -561,7 +577,7 @@ namespace NAPS2.Automation
         {
             OutputVerbose(ConsoleResources.BeginningScan);
 
-            bool autoSaveEnabled = !AppConfig.Current.DisableAutoSave && profile.EnableAutoSave && profile.AutoSaveSettings != null;
+            bool autoSaveEnabled = !configProvider.Get(c => c.DisableAutoSave) && profile.EnableAutoSave && profile.AutoSaveSettings != null;
             if (options.AutoSave && !autoSaveEnabled)
             {
                 errorOutput.DisplayError(ConsoleResources.AutoSaveNotEnabled);
@@ -588,7 +604,7 @@ namespace NAPS2.Automation
                     NoAutoSave = !options.AutoSave,
                     NoThumbnails = true,
                     DetectPatchCodes = options.SplitPatchT,
-                    DoOcr = ocrParams?.LanguageCode != null,
+                    DoOcr = ocrParams != null,
                     OcrParams = ocrParams
                 };
                 var source = scanPerformer.PerformScan(profile, scanParams);

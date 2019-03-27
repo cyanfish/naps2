@@ -6,7 +6,6 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Xml.Linq;
-using NAPS2.Config;
 using NAPS2.Dependencies;
 using NAPS2.Logging;
 
@@ -14,7 +13,6 @@ namespace NAPS2.Ocr
 {
     public abstract class TesseractBaseEngine : IOcrEngine
     {
-        private const int DEFAULT_TIMEOUT = 600 * 1000;
         private const int CHECK_INTERVAL = 500;
 
         public bool CanProcess(string langCode)
@@ -59,15 +57,11 @@ namespace NAPS2.Ocr
                     Log.Error("Couldn't start OCR process.");
                     return null;
                 }
-                var timeout = (int)(AppConfig.Current.OcrTimeoutInSeconds * 1000);
-                if (timeout == 0)
-                {
-                    timeout = DEFAULT_TIMEOUT;
-                }
+                var timeout = (int)(ocrParams.TimeoutInSeconds * 1000);
                 var stopwatch = Stopwatch.StartNew();
                 while (!tesseractProcess.WaitForExit(CHECK_INTERVAL))
                 {
-                    if (stopwatch.ElapsedMilliseconds >= timeout || cancelToken.IsCancellationRequested)
+                    if (timeout != 0 && stopwatch.ElapsedMilliseconds >= timeout || cancelToken.IsCancellationRequested)
                     {
                         if (stopwatch.ElapsedMilliseconds >= timeout)
                         {

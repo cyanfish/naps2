@@ -83,48 +83,5 @@ namespace NAPS2.Ocr
         public IOcrEngine InstalledEngine => engines.FirstOrDefault(x => x.IsInstalled && x.InstalledLanguages.Any());
 
         public IOcrEngine EngineToInstall => engines.FirstOrDefault(x => x.IsSupported && x.CanInstall);
-
-        // TODO: This needs to move elsewhere. Perhaps create some kind of factory class, or perhaps change the callers to avoid using this. Or a combination.
-        public OcrParams DefaultParams
-        {
-            get
-            {
-                OcrParams AppLevelParams()
-                {
-                    if (!string.IsNullOrWhiteSpace(AppConfig.Current.OcrDefaultLanguage))
-                    {
-                        return new OcrParams(AppConfig.Current.OcrDefaultLanguage, AppConfig.Current.OcrDefaultMode);
-                    }
-                    return null;
-                }
-
-                OcrParams UserLevelParams()
-                {
-                    if (!string.IsNullOrWhiteSpace(UserConfig.Current.OcrLanguageCode))
-                    {
-                        return new OcrParams(UserConfig.Current.OcrLanguageCode, UserConfig.Current.OcrMode);
-                    }
-                    return null;
-                }
-
-                OcrParams ArbitraryParams() => new OcrParams(ActiveEngine?.InstalledLanguages.OrderBy(x => x.Name).Select(x => x.Code).FirstOrDefault(), OcrMode.Default);
-
-                // Prioritize app-level overrides
-                if (AppConfig.Current.OcrState == OcrState.Disabled)
-                {
-                    return null;
-                }
-                if (AppConfig.Current.OcrState == OcrState.Enabled)
-                {
-                    return AppLevelParams() ?? UserLevelParams() ?? ArbitraryParams();
-                }
-                // No overrides, so prioritize the user settings
-                if (UserConfig.Current.EnableOcr)
-                {
-                    return UserLevelParams() ?? AppLevelParams() ?? ArbitraryParams();
-                }
-                return null;
-            }
-        }
     }
 }

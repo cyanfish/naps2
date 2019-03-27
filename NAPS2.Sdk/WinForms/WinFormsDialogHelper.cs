@@ -3,13 +3,20 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
-using NAPS2.Config;
+using NAPS2.Config.Experimental;
 using NAPS2.Lang.Resources;
 
 namespace NAPS2.WinForms
 {
     public class WinFormsDialogHelper : DialogHelper
     {
+        private readonly ConfigScopes configScopes;
+
+        public WinFormsDialogHelper(ConfigScopes configScopes)
+        {
+            this.configScopes = configScopes;
+        }
+
         public override bool PromptToSavePdfOrImage(string defaultPath, out string savePath)
         {
             var sd = new SaveFileDialog
@@ -71,7 +78,7 @@ namespace NAPS2.WinForms
                 FileName = Path.GetFileName(defaultPath),
                 InitialDirectory = GetDir(defaultPath)
             };
-            switch ((UserConfig.Current.LastImageExt ?? "").ToLowerInvariant())
+            switch (configScopes.Provider.Get(c => c.LastImageExt).ToLowerInvariant())
             {
                 case "bmp":
                     sd.FilterIndex = 1;
@@ -99,8 +106,7 @@ namespace NAPS2.WinForms
             if (sd.ShowDialog() == DialogResult.OK)
             {
                 savePath = sd.FileName;
-                UserConfig.Current.LastImageExt = (Path.GetExtension(savePath) ?? "").Replace(".", "");
-                UserConfig.Manager.Save();
+                configScopes.User.Set(c => c.LastImageExt = (Path.GetExtension(sd.FileName) ?? "").Replace(".", ""));
                 return true;
             }
             savePath = null;

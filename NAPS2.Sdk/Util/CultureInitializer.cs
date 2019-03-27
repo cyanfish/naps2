@@ -2,8 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using System.Threading;
-using NAPS2.Config;
+using NAPS2.Config.Experimental;
 using NAPS2.Lang.Resources;
 using NAPS2.Logging;
 
@@ -14,9 +13,16 @@ namespace NAPS2.Util
     /// </summary>
     public class CultureInitializer
     {
+        private readonly ConfigProvider<CommonConfig> configProvider;
+
+        public CultureInitializer(ConfigProvider<CommonConfig> configProvider)
+        {
+            this.configProvider = configProvider;
+        }
+
         public void InitCulture()
         {
-            var cultureId = UserConfig.Current.Culture ?? AppConfig.Current.DefaultCulture;
+            var cultureId = configProvider.Get(c => c.Culture);
             if (!string.IsNullOrWhiteSpace(cultureId))
             {
                 try
