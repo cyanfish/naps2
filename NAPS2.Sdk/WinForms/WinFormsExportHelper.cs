@@ -4,13 +4,11 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using NAPS2.Config;
 using NAPS2.Config.Experimental;
 using NAPS2.ImportExport;
 using NAPS2.ImportExport.Email;
 using NAPS2.ImportExport.Images;
 using NAPS2.ImportExport.Pdf;
-using NAPS2.Lang.Resources;
 using NAPS2.Ocr;
 using NAPS2.Operation;
 using NAPS2.Images;
@@ -20,27 +18,25 @@ namespace NAPS2.WinForms
 {
     public class WinFormsExportHelper
     {
-        private readonly PdfSettingsContainer pdfSettingsContainer;
+        private readonly ConfigProvider<PdfSettings> pdfSettingsProvider;
         private readonly ImageSettingsContainer imageSettingsContainer;
         private readonly EmailSettingsContainer emailSettingsContainer;
         private readonly DialogHelper dialogHelper;
         private readonly ChangeTracker changeTracker;
         private readonly IOperationFactory operationFactory;
         private readonly IFormFactory formFactory;
-        private readonly OcrEngineManager ocrEngineManager;
         private readonly OperationProgress operationProgress;
         private readonly ConfigScopes configScopes;
 
-        public WinFormsExportHelper(PdfSettingsContainer pdfSettingsContainer, ImageSettingsContainer imageSettingsContainer, EmailSettingsContainer emailSettingsContainer, DialogHelper dialogHelper, ChangeTracker changeTracker, IOperationFactory operationFactory, IFormFactory formFactory, OcrEngineManager ocrEngineManager, OperationProgress operationProgress, ConfigScopes configScopes)
+        public WinFormsExportHelper(ConfigProvider<PdfSettings> pdfSettingsProvider, ImageSettingsContainer imageSettingsContainer, EmailSettingsContainer emailSettingsContainer, DialogHelper dialogHelper, ChangeTracker changeTracker, IOperationFactory operationFactory, IFormFactory formFactory, OperationProgress operationProgress, ConfigScopes configScopes)
         {
-            this.pdfSettingsContainer = pdfSettingsContainer;
+            this.pdfSettingsProvider = pdfSettingsProvider;
             this.imageSettingsContainer = imageSettingsContainer;
             this.emailSettingsContainer = emailSettingsContainer;
             this.dialogHelper = dialogHelper;
             this.changeTracker = changeTracker;
             this.operationFactory = operationFactory;
             this.formFactory = formFactory;
-            this.ocrEngineManager = ocrEngineManager;
             this.operationProgress = operationProgress;
             this.configScopes = configScopes;
         }
@@ -51,14 +47,14 @@ namespace NAPS2.WinForms
             {
                 string savePath;
 
-                var pdfSettings = pdfSettingsContainer.PdfSettings;
-                if (pdfSettings.SkipSavePrompt && Path.IsPathRooted(pdfSettings.DefaultFileName))
+                var defaultFileName = pdfSettingsProvider.Get(c => c.DefaultFileName);
+                if (pdfSettingsProvider.Get(c => c.SkipSavePrompt) && Path.IsPathRooted(defaultFileName))
                 {
-                    savePath = pdfSettings.DefaultFileName;
+                    savePath = defaultFileName;
                 }
                 else
                 {
-                    if (!dialogHelper.PromptToSavePdf(pdfSettings.DefaultFileName, out savePath))
+                    if (!dialogHelper.PromptToSavePdf(defaultFileName, out savePath))
                     {
                         return false;
                     }
@@ -80,9 +76,7 @@ namespace NAPS2.WinForms
         {
             var op = operationFactory.Create<SavePdfOperation>();
 
-            var pdfSettings = pdfSettingsContainer.PdfSettings;
-            pdfSettings.Metadata.Creator = MiscResources.NAPS2;
-            if (op.Start(filename, Placeholders.All.WithDate(DateTime.Now), images, pdfSettings, new OcrContext(configScopes.Provider.DefaultOcrParams()), email, emailMessage))
+            if (op.Start(filename, Placeholders.All.WithDate(DateTime.Now), images, pdfSettingsProvider, new OcrContext(configScopes.Provider.DefaultOcrParams()), email, emailMessage))
             {
                 operationProgress.ShowProgress(op);
             }

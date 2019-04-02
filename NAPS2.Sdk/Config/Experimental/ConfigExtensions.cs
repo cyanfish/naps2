@@ -19,5 +19,11 @@ namespace NAPS2.Config.Experimental
             }
             return new OcrParams(provider.Get(c => c.OcrLanguageCode), provider.Get(c => c.OcrMode), provider.Get(c => c.OcrTimeoutInSeconds));
         }
+
+        public static TransactionConfigScope<T> BeginTransaction<T>(this ConfigScope<T> scope) where T : new() => 
+            new TransactionConfigScope<T>(scope, () => new T());
+
+        public static ConfigProvider<CommonConfig> WithTransactions(this ConfigScopes configScopes, TransactionConfigScope<CommonConfig> userTransact, TransactionConfigScope<CommonConfig> runTransact) =>
+            new ScopeSetConfigProvider<CommonConfig>(configScopes.AppLocked, runTransact, userTransact, configScopes.AppDefault, configScopes.InternalDefault);
     }
 }

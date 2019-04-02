@@ -57,6 +57,7 @@ namespace NAPS2.Config.Experimental
                 DesktopToolStripDock = DockStyle.Top,
                 EventLogging = EventType.None,
                 PdfSettings = new PdfSettings(),
+                RememberPdfSettings = false,
                 ImageSettings = new ImageSettings(),
                 EmailSettings = new EmailSettings(),
                 EmailSetup = new EmailSetup(),

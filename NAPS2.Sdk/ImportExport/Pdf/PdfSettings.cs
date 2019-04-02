@@ -17,7 +17,7 @@ namespace NAPS2.ImportExport.Pdf
 
         public string DefaultFileName { get; set; }
 
-        public bool SkipSavePrompt { get; set; }
+        public bool? SkipSavePrompt { get; set; }
 
         public PdfMetadata Metadata
         {
@@ -31,6 +31,6 @@ namespace NAPS2.ImportExport.Pdf
             set => encryption = value ?? throw new ArgumentNullException(nameof(value));
         }
 
-        public PdfCompat Compat { get; set; }
+        public PdfCompat? Compat { get; set; }
     }
 }

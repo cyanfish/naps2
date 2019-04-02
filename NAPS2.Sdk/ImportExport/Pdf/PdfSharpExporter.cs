@@ -8,6 +8,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using NAPS2.Config;
+using NAPS2.Config.Experimental;
 using NAPS2.Logging;
 using NAPS2.Ocr;
 using NAPS2.Platform;
@@ -46,42 +47,41 @@ namespace NAPS2.ImportExport.Pdf
             this.memoryStreamRenderer = memoryStreamRenderer;
         }
 
-        public override async Task<bool> Export(string path, ICollection<ScannedImage.Snapshot> snapshots, PdfSettings settings, OcrContext ocrContext, ProgressHandler progressCallback, CancellationToken cancelToken)
+        public override async Task<bool> Export(string path, ICollection<ScannedImage.Snapshot> snapshots, ConfigProvider<PdfSettings> settings, OcrContext ocrContext, ProgressHandler progressCallback, CancellationToken cancelToken)
         {
             return await Task.Run(() =>
             {
-                var forced = AppConfig.Current.ForcePdfCompat;
-                var compat = forced == PdfCompat.Default ? settings.Compat : forced;
+                var compat = settings.Get(c => c.Compat);
 
                 var document = new PdfDocument();
-                document.Info.Author = settings.Metadata.Author;
-                document.Info.Creator = settings.Metadata.Creator;
-                document.Info.Keywords = settings.Metadata.Keywords;
-                document.Info.Subject = settings.Metadata.Subject;
-                document.Info.Title = settings.Metadata.Title;
+                document.Info.Author = settings.Get(c => c.Metadata.Author);
+                document.Info.Creator = settings.Get(c => c.Metadata.Creator);
+                document.Info.Keywords = settings.Get(c => c.Metadata.Keywords);
+                document.Info.Subject = settings.Get(c => c.Metadata.Subject);
+                document.Info.Title = settings.Get(c => c.Metadata.Title);
 
-                if (settings.Encryption.EncryptPdf
-                    && (!string.IsNullOrEmpty(settings.Encryption.OwnerPassword) || !string.IsNullOrEmpty(settings.Encryption.UserPassword)))
+                if (settings.Get(c => c.Encryption.EncryptPdf)
+                    && (!string.IsNullOrEmpty(settings.Get(c => c.Encryption.OwnerPassword)) || !string.IsNullOrEmpty(settings.Get(c => c.Encryption.UserPassword))))
                 {
                     document.SecuritySettings.DocumentSecurityLevel = PdfDocumentSecurityLevel.Encrypted128Bit;
-                    if (!string.IsNullOrEmpty(settings.Encryption.OwnerPassword))
+                    if (!string.IsNullOrEmpty(settings.Get(c => c.Encryption.OwnerPassword)))
                     {
-                        document.SecuritySettings.OwnerPassword = settings.Encryption.OwnerPassword;
+                        document.SecuritySettings.OwnerPassword = settings.Get(c => c.Encryption.OwnerPassword);
                     }
 
-                    if (!string.IsNullOrEmpty(settings.Encryption.UserPassword))
+                    if (!string.IsNullOrEmpty(settings.Get(c => c.Encryption.UserPassword)))
                     {
-                        document.SecuritySettings.UserPassword = settings.Encryption.UserPassword;
+                        document.SecuritySettings.UserPassword = settings.Get(c => c.Encryption.UserPassword);
                     }
 
-                    document.SecuritySettings.PermitAccessibilityExtractContent = settings.Encryption.AllowContentCopyingForAccessibility;
-                    document.SecuritySettings.PermitAnnotations = settings.Encryption.AllowAnnotations;
-                    document.SecuritySettings.PermitAssembleDocument = settings.Encryption.AllowDocumentAssembly;
-                    document.SecuritySettings.PermitExtractContent = settings.Encryption.AllowContentCopying;
-                    document.SecuritySettings.PermitFormsFill = settings.Encryption.AllowFormFilling;
-                    document.SecuritySettings.PermitFullQualityPrint = settings.Encryption.AllowFullQualityPrinting;
-                    document.SecuritySettings.PermitModifyDocument = settings.Encryption.AllowDocumentModification;
-                    document.SecuritySettings.PermitPrint = settings.Encryption.AllowPrinting;
+                    document.SecuritySettings.PermitAccessibilityExtractContent = settings.Get(c => c.Encryption.AllowContentCopyingForAccessibility);
+                    document.SecuritySettings.PermitAnnotations = settings.Get(c => c.Encryption.AllowAnnotations);
+                    document.SecuritySettings.PermitAssembleDocument = settings.Get(c => c.Encryption.AllowDocumentAssembly);
+                    document.SecuritySettings.PermitExtractContent = settings.Get(c => c.Encryption.AllowContentCopying);
+                    document.SecuritySettings.PermitFormsFill = settings.Get(c => c.Encryption.AllowFormFilling);
+                    document.SecuritySettings.PermitFullQualityPrint = settings.Get(c => c.Encryption.AllowFullQualityPrinting);
+                    document.SecuritySettings.PermitModifyDocument = settings.Get(c => c.Encryption.AllowDocumentModification);
+                    document.SecuritySettings.PermitPrint = settings.Get(c => c.Encryption.AllowPrinting);
                 }
 
                 IOcrEngine ocrEngine = null;

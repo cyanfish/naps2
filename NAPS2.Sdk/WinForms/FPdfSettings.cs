@@ -3,19 +3,20 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
-using NAPS2.Config;
+using NAPS2.Config.Experimental;
 using NAPS2.ImportExport.Pdf;
 
 namespace NAPS2.WinForms
 {
     public partial class FPdfSettings : FormBase
     {
-        private readonly PdfSettingsContainer pdfSettingsContainer;
         private readonly DialogHelper dialogHelper;
+        private TransactionConfigScope<CommonConfig> userTransact;
+        private TransactionConfigScope<CommonConfig> runTransact;
+        private ConfigProvider<CommonConfig> transactProvider;
 
-        public FPdfSettings(PdfSettingsContainer pdfSettingsContainer, DialogHelper dialogHelper)
+        public FPdfSettings(DialogHelper dialogHelper)
         {
-            this.pdfSettingsContainer = pdfSettingsContainer;
             this.dialogHelper = dialogHelper;
             InitializeComponent();
             AddEnumItems<PdfCompat>(cmbCompat);
@@ -32,32 +33,34 @@ namespace NAPS2.WinForms
                     .WidthToForm()
                 .Activate();
 
-            UpdateValues(pdfSettingsContainer.PdfSettings);
+            userTransact = ConfigScopes.User.BeginTransaction();
+            runTransact = ConfigScopes.Run.BeginTransaction();
+            transactProvider = ConfigScopes.WithTransactions(userTransact, runTransact);
+            UpdateValues();
             UpdateEnabled();
-            cbRememberSettings.Checked = UserConfig.Current.PdfSettings != null;
         }
 
-        private void UpdateValues(PdfSettings pdfSettings)
+        private void UpdateValues()
         {
-            txtDefaultFilePath.Text = pdfSettings.DefaultFileName;
-            cbSkipSavePrompt.Checked = pdfSettings.SkipSavePrompt;
-            txtTitle.Text = pdfSettings.Metadata.Title;
-            txtAuthor.Text = pdfSettings.Metadata.Author;
-            txtSubject.Text = pdfSettings.Metadata.Subject;
-            txtKeywords.Text = pdfSettings.Metadata.Keywords;
-            cbEncryptPdf.Checked = pdfSettings.Encryption.EncryptPdf;
-            txtOwnerPassword.Text = pdfSettings.Encryption.OwnerPassword;
-            txtUserPassword.Text = pdfSettings.Encryption.UserPassword;
-            clbPerms.SetItemChecked(0, pdfSettings.Encryption.AllowPrinting);
-            clbPerms.SetItemChecked(1, pdfSettings.Encryption.AllowFullQualityPrinting);
-            clbPerms.SetItemChecked(2, pdfSettings.Encryption.AllowDocumentModification);
-            clbPerms.SetItemChecked(3, pdfSettings.Encryption.AllowDocumentAssembly);
-            clbPerms.SetItemChecked(4, pdfSettings.Encryption.AllowContentCopying);
-            clbPerms.SetItemChecked(5, pdfSettings.Encryption.AllowContentCopyingForAccessibility);
-            clbPerms.SetItemChecked(6, pdfSettings.Encryption.AllowAnnotations);
-            clbPerms.SetItemChecked(7, pdfSettings.Encryption.AllowFormFilling);
-            var forced = AppConfig.Current.ForcePdfCompat;
-            cmbCompat.SelectedIndex = (int)(forced == PdfCompat.Default ? pdfSettings.Compat : forced);
+            txtDefaultFilePath.Text = transactProvider.Get(c => c.PdfSettings.DefaultFileName);
+            cbSkipSavePrompt.Checked = transactProvider.Get(c => c.PdfSettings.SkipSavePrompt);
+            txtTitle.Text = transactProvider.Get(c => c.PdfSettings.Metadata.Title);
+            txtAuthor.Text = transactProvider.Get(c => c.PdfSettings.Metadata.Author);
+            txtSubject.Text = transactProvider.Get(c => c.PdfSettings.Metadata.Subject);
+            txtKeywords.Text = transactProvider.Get(c => c.PdfSettings.Metadata.Keywords);
+            cbEncryptPdf.Checked = transactProvider.Get(c => c.PdfSettings.Encryption.EncryptPdf);
+            txtOwnerPassword.Text = transactProvider.Get(c => c.PdfSettings.Encryption.OwnerPassword);
+            txtUserPassword.Text = transactProvider.Get(c => c.PdfSettings.Encryption.UserPassword);
+            clbPerms.SetItemChecked(0, transactProvider.Get(c => c.PdfSettings.Encryption.AllowPrinting));
+            clbPerms.SetItemChecked(1, transactProvider.Get(c => c.PdfSettings.Encryption.AllowFullQualityPrinting));
+            clbPerms.SetItemChecked(2, transactProvider.Get(c => c.PdfSettings.Encryption.AllowDocumentModification));
+            clbPerms.SetItemChecked(3, transactProvider.Get(c => c.PdfSettings.Encryption.AllowDocumentAssembly));
+            clbPerms.SetItemChecked(4, transactProvider.Get(c => c.PdfSettings.Encryption.AllowContentCopying));
+            clbPerms.SetItemChecked(5, transactProvider.Get(c => c.PdfSettings.Encryption.AllowContentCopyingForAccessibility));
+            clbPerms.SetItemChecked(6, transactProvider.Get(c => c.PdfSettings.Encryption.AllowAnnotations));
+            clbPerms.SetItemChecked(7, transactProvider.Get(c => c.PdfSettings.Encryption.AllowFormFilling));
+            cmbCompat.SelectedIndex = (int)transactProvider.Get(c => c.PdfSettings.Compat);
+            cbRememberSettings.Checked = transactProvider.Get(c => c.RememberPdfSettings);
         }
 
         private void UpdateEnabled()
@@ -69,7 +72,7 @@ namespace NAPS2.WinForms
                 lblUserPassword.Enabled = lblOwnerPassword.Enabled = encrypt;
             clbPerms.Enabled = encrypt;
 
-            cmbCompat.Enabled = AppConfig.Current.ForcePdfCompat == PdfCompat.Default;
+            cmbCompat.Enabled = ConfigScopes.AppLocked.Get(c => c.PdfSettings.Compat) == null;
         }
 
         private void btnOK_Click(object sender, EventArgs e)
@@ -102,9 +105,17 @@ namespace NAPS2.WinForms
                 Compat = (PdfCompat)cmbCompat.SelectedIndex
             };
 
-            pdfSettingsContainer.LocalPdfSettings = pdfSettings;
-            UserConfig.Current.PdfSettings = cbRememberSettings.Checked ? pdfSettings : null;
-            UserConfig.Manager.Save();
+            // Clear old run scope
+            runTransact.Set(c => c.PdfSettings = new PdfSettings());
+
+            var scope = cbRememberSettings.Checked ? userTransact : runTransact;
+            scope.SetAll(new CommonConfig
+            {
+                PdfSettings = pdfSettings
+            });
+
+            userTransact.Commit();
+            runTransact.Commit();
 
             Close();
         }
@@ -116,9 +127,11 @@ namespace NAPS2.WinForms
 
         private void btnRestoreDefaults_Click(object sender, EventArgs e)
         {
-            UpdateValues(new PdfSettings());
+            runTransact.Set(c => c.PdfSettings = new PdfSettings());
+            userTransact.Set(c => c.PdfSettings = new PdfSettings());
+            userTransact.Set(c => c.RememberPdfSettings = false);
+            UpdateValues();
             UpdateEnabled();
-            cbRememberSettings.Checked = false;
         }
 
         private void txtDefaultFilePath_TextChanged(object sender, EventArgs e)

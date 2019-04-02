@@ -206,7 +206,6 @@
     <Compile Include="ImportExport\Email\Mapi\MapiWrapper.cs" />
     <Compile Include="ImportExport\Images\ImageSettingsProvider.cs" />
     <Compile Include="ImportExport\Pdf\GhostscriptManager.cs" />
-    <Compile Include="ImportExport\Pdf\PdfSettingsProvider.cs" />
     <Compile Include="Logging\EventParams.cs" />
     <Compile Include="Logging\EventType.cs" />
     <Compile Include="Logging\IEventLogger.cs" />
@@ -447,7 +446,6 @@
     <Compile Include="ImportExport\Pdf\IPdfPasswordProvider.cs" />
     <Compile Include="ImportExport\Pdf\PdfEncryption.cs" />
     <Compile Include="ImportExport\Pdf\PdfMetadata.cs" />
-    <Compile Include="ImportExport\Pdf\PdfSettingsContainer.cs" />
     <Compile Include="ImportExport\PrintDocumentPrinter.cs" />
     <Compile Include="ImportExport\IScannedImagePrinter.cs" />
     <Compile Include="ImportExport\Pdf\WinFormsPdfPasswordProvider.cs" />

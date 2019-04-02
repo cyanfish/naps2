@@ -138,6 +138,9 @@ namespace NAPS2.Config.Experimental
         [Common]
         public PdfSettings PdfSettings { get; set; }
 
+        [User]
+        public bool? RememberPdfSettings { get; set; }
+
         [Common]
         public ImageSettings ImageSettings { get; set; }
 

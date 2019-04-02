@@ -30,13 +30,13 @@ namespace NAPS2.Automation
         private readonly IScanPerformer scanPerformer;
         private readonly ErrorOutput errorOutput;
         private readonly IScannedImageImporter scannedImageImporter;
-        private readonly PdfSettingsContainer pdfSettingsContainer;
         private readonly ImageSettingsContainer imageSettingsContainer;
         private readonly IOperationFactory operationFactory;
         private readonly OcrEngineManager ocrEngineManager;
         private readonly IFormFactory formFactory;
         private readonly ConfigScopes configScopes;
         private readonly ConfigProvider<CommonConfig> configProvider;
+        private readonly ConfigProvider<PdfSettings> pdfSettingsProvider;
 
         private readonly AutomatedScanningOptions options;
         private List<List<ScannedImage>> scanList;
@@ -46,20 +46,20 @@ namespace NAPS2.Automation
         private List<string> actualOutputPaths;
         private OcrParams ocrParams;
 
-        public AutomatedScanning(AutomatedScanningOptions options, IScanPerformer scanPerformer, ErrorOutput errorOutput, IEmailProviderFactory emailProviderFactory, IScannedImageImporter scannedImageImporter, PdfSettingsContainer pdfSettingsContainer, ImageSettingsContainer imageSettingsContainer, IOperationFactory operationFactory, OcrEngineManager ocrEngineManager, IFormFactory formFactory, ConfigScopes configScopes, ConfigProvider<CommonConfig> configProvider)
+        public AutomatedScanning(AutomatedScanningOptions options, IScanPerformer scanPerformer, ErrorOutput errorOutput, IEmailProviderFactory emailProviderFactory, IScannedImageImporter scannedImageImporter, ImageSettingsContainer imageSettingsContainer, IOperationFactory operationFactory, OcrEngineManager ocrEngineManager, IFormFactory formFactory, ConfigScopes configScopes, ConfigProvider<CommonConfig> configProvider, ConfigProvider<PdfSettings> pdfSettingsProvider)
         {
             this.options = options;
             this.scanPerformer = scanPerformer;
             this.errorOutput = errorOutput;
             this.emailProviderFactory = emailProviderFactory;
             this.scannedImageImporter = scannedImageImporter;
-            this.pdfSettingsContainer = pdfSettingsContainer;
             this.imageSettingsContainer = imageSettingsContainer;
             this.operationFactory = operationFactory;
             this.ocrEngineManager = ocrEngineManager;
             this.formFactory = formFactory;
             this.configScopes = configScopes;
             this.configProvider = configProvider;
+            this.pdfSettingsProvider = pdfSettingsProvider;
         }
 
         public IEnumerable<ScannedImage> AllImages => scanList.SelectMany(x => x);
@@ -482,25 +482,22 @@ namespace NAPS2.Automation
 
         private async Task<bool> DoExportToPdf(string path, bool email)
         {
-            var metadata = options.UseSavedMetadata ? pdfSettingsContainer.PdfSettings.Metadata : new PdfMetadata();
-            metadata.Creator = ConsoleResources.NAPS2;
-            if (options.PdfTitle != null)
+            var defaultVal = options.UseSavedMetadata ? null : "";
+            configScopes.Run.SetAll(new CommonConfig
             {
-                metadata.Title = options.PdfTitle;
-            }
-            if (options.PdfAuthor != null)
-            {
-                metadata.Author = options.PdfAuthor;
-            }
-            if (options.PdfSubject != null)
-            {
-                metadata.Subject = options.PdfSubject;
-            }
-            if (options.PdfKeywords != null)
-            {
-                metadata.Keywords = options.PdfKeywords;
-            }
-
+                PdfSettings =
+                {
+                    Metadata =
+                    {
+                        Author = options.PdfAuthor ?? defaultVal,
+                        Creator = ConsoleResources.NAPS2,
+                        Keywords = options.PdfKeywords ?? defaultVal,
+                        Subject = options.PdfSubject ?? defaultVal,
+                        Title = options.PdfTitle ?? defaultVal
+                    }
+                }
+            });
+            
             var encryption = options.UseSavedEncryptConfig ? pdfSettingsContainer.PdfSettings.Encryption : new PdfEncryption();
             if (options.EncryptConfig != null)
             {
@@ -559,7 +556,7 @@ namespace NAPS2.Automation
                 };
                 int digits = (int)Math.Floor(Math.Log10(scanList.Count)) + 1;
                 string actualPath = placeholders.Substitute(path, true, scanIndex++, scanList.Count > 1 ? digits : 0);
-                op.Start(actualPath, placeholders, fileContents, pdfSettings, new OcrContext(ocrParams), email, null);
+                op.Start(actualPath, placeholders, fileContents, pdfSettingsProvider, new OcrContext(ocrParams), email, null);
                 if (!await op.Success)
                 {
                     return false;

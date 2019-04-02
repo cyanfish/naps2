@@ -19,7 +19,7 @@ namespace NAPS2.ImportExport
 {
     public class AutoSaver
     {
-        private readonly PdfSettingsProvider pdfSettingsProvider;
+        private readonly ConfigProvider<PdfSettings> pdfSettingsProvider;
         private readonly ImageSettingsProvider imageSettingsProvider;
         private readonly OcrEngineManager ocrEngineManager;
         private readonly OcrRequestQueue ocrRequestQueue;
@@ -34,7 +34,7 @@ namespace NAPS2.ImportExport
 
         public AutoSaver()
         {
-            pdfSettingsProvider = PdfSettingsProvider.Default;
+            pdfSettingsProvider = new StubConfigProvider<PdfSettings>(new PdfSettings());
             imageSettingsProvider = ImageSettingsProvider.Default;
             ocrEngineManager = OcrEngineManager.Default;
             ocrRequestQueue = OcrRequestQueue.Default;
@@ -48,7 +48,7 @@ namespace NAPS2.ImportExport
             configProvider = ConfigScopes.Current.Provider;
         }
 
-        public AutoSaver(PdfSettingsProvider pdfSettingsProvider, ImageSettingsProvider imageSettingsProvider, OcrEngineManager ocrEngineManager, OcrRequestQueue ocrRequestQueue, ErrorOutput errorOutput, DialogHelper dialogHelper, OperationProgress operationProgress, ISaveNotify notify, PdfExporter pdfExporter, OverwritePrompt overwritePrompt, BitmapRenderer bitmapRenderer, ConfigProvider<CommonConfig> configProvider)
+        public AutoSaver(ConfigProvider<PdfSettings> pdfSettingsProvider, ImageSettingsProvider imageSettingsProvider, OcrEngineManager ocrEngineManager, OcrRequestQueue ocrRequestQueue, ErrorOutput errorOutput, DialogHelper dialogHelper, OperationProgress operationProgress, ISaveNotify notify, PdfExporter pdfExporter, OverwritePrompt overwritePrompt, BitmapRenderer bitmapRenderer, ConfigProvider<CommonConfig> configProvider)
         {
             this.pdfSettingsProvider = pdfSettingsProvider;
             this.imageSettingsProvider = imageSettingsProvider;
@@ -180,7 +180,7 @@ namespace NAPS2.ImportExport
                 }
                 var op = new SavePdfOperation(pdfExporter, overwritePrompt);
                 var ocrContext = new OcrContext(configProvider.DefaultOcrParams(), ocrEngineManager, ocrRequestQueue);
-                if (op.Start(subPath, placeholders, images, pdfSettingsProvider.PdfSettings, ocrContext))
+                if (op.Start(subPath, placeholders, images, pdfSettingsProvider, ocrContext))
                 {
                     operationProgress.ShowProgress(op);
                 }

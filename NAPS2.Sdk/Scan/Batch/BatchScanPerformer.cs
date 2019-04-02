@@ -25,17 +25,17 @@ namespace NAPS2.Scan.Batch
         private readonly IScanPerformer scanPerformer;
         private readonly PdfExporter pdfExporter;
         private readonly IOperationFactory operationFactory;
-        private readonly PdfSettingsContainer pdfSettingsContainer;
+        private readonly ConfigProvider<PdfSettings> pdfSettingsProvider;
         private readonly OcrEngineManager ocrEngineManager;
         private readonly IFormFactory formFactory;
         private readonly ConfigProvider<CommonConfig> configProvider;
 
-        public BatchScanPerformer(IScanPerformer scanPerformer, PdfExporter pdfExporter, IOperationFactory operationFactory, PdfSettingsContainer pdfSettingsContainer, OcrEngineManager ocrEngineManager, IFormFactory formFactory, ConfigProvider<CommonConfig> configProvider)
+        public BatchScanPerformer(IScanPerformer scanPerformer, PdfExporter pdfExporter, IOperationFactory operationFactory, ConfigProvider<PdfSettings> pdfSettingsProvider, OcrEngineManager ocrEngineManager, IFormFactory formFactory, ConfigProvider<CommonConfig> configProvider)
         {
             this.scanPerformer = scanPerformer;
             this.pdfExporter = pdfExporter;
             this.operationFactory = operationFactory;
-            this.pdfSettingsContainer = pdfSettingsContainer;
+            this.pdfSettingsProvider = pdfSettingsProvider;
             this.ocrEngineManager = ocrEngineManager;
             this.formFactory = formFactory;
             this.configProvider = configProvider;
@@ -43,7 +43,7 @@ namespace NAPS2.Scan.Batch
 
         public async Task PerformBatchScan(BatchSettings settings, FormBase batchForm, Action<ScannedImage> imageCallback, Action<string> progressCallback, CancellationToken cancelToken)
         {
-            var state = new BatchState(scanPerformer, pdfExporter, operationFactory, pdfSettingsContainer, ocrEngineManager, formFactory, configProvider)
+            var state = new BatchState(scanPerformer, pdfExporter, operationFactory, pdfSettingsProvider, ocrEngineManager, formFactory, configProvider)
             {
                 Settings = settings,
                 ProgressCallback = progressCallback,
@@ -59,7 +59,7 @@ namespace NAPS2.Scan.Batch
             private readonly IScanPerformer scanPerformer;
             private readonly PdfExporter pdfExporter;
             private readonly IOperationFactory operationFactory;
-            private readonly PdfSettingsContainer pdfSettingsContainer;
+            private readonly ConfigProvider<PdfSettings> pdfSettingsProvider;
             private readonly OcrEngineManager ocrEngineManager;
             private readonly IFormFactory formFactory;
             private readonly ConfigProvider<CommonConfig> configProvider;
@@ -69,12 +69,12 @@ namespace NAPS2.Scan.Batch
             private List<List<ScannedImage>> scans;
 
             public BatchState(IScanPerformer scanPerformer, PdfExporter pdfExporter, IOperationFactory operationFactory,
-                PdfSettingsContainer pdfSettingsContainer, OcrEngineManager ocrEngineManager, IFormFactory formFactory, ConfigProvider<CommonConfig> configProvider)
+                ConfigProvider<PdfSettings> pdfSettingsProvider, OcrEngineManager ocrEngineManager, IFormFactory formFactory, ConfigProvider<CommonConfig> configProvider)
             {
                 this.scanPerformer = scanPerformer;
                 this.pdfExporter = pdfExporter;
                 this.operationFactory = operationFactory;
-                this.pdfSettingsContainer = pdfSettingsContainer;
+                this.pdfSettingsProvider = pdfSettingsProvider;
                 this.ocrEngineManager = ocrEngineManager;
                 this.formFactory = formFactory;
                 this.configProvider = configProvider;
@@ -277,7 +277,7 @@ namespace NAPS2.Scan.Batch
                     var snapshots = images.Select(x => x.Preserve()).ToList();
                     try
                     {
-                        await pdfExporter.Export(subPath, snapshots, pdfSettingsContainer.PdfSettings, new OcrContext(configProvider.DefaultOcrParams()), (j, k) => { }, CancelToken);
+                        await pdfExporter.Export(subPath, snapshots, pdfSettingsProvider, new OcrContext(configProvider.DefaultOcrParams()), (j, k) => { }, CancelToken);
                     }
                     finally
                     {
