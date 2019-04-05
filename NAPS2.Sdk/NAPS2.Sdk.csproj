@@ -204,7 +204,6 @@
     <Compile Include="Images\Storage\PdfStorage.cs" />
     <Compile Include="ImportExport\Email\Mapi\IMapiWrapper.cs" />
     <Compile Include="ImportExport\Email\Mapi\MapiWrapper.cs" />
-    <Compile Include="ImportExport\Images\ImageSettingsProvider.cs" />
     <Compile Include="ImportExport\Pdf\GhostscriptManager.cs" />
     <Compile Include="Logging\EventParams.cs" />
     <Compile Include="Logging\EventType.cs" />
@@ -440,9 +439,7 @@
     <Compile Include="Config\Experimental\ObsoleteTypes\UserConfigV0.cs" />
     <Compile Include="ImportExport\Placeholders.cs" />
     <Compile Include="ImportExport\Email\EmailSettings.cs" />
-    <Compile Include="ImportExport\Email\EmailSettingsContainer.cs" />
     <Compile Include="ImportExport\Images\ImageSettings.cs" />
-    <Compile Include="ImportExport\Images\ImageSettingsContainer.cs" />
     <Compile Include="ImportExport\Pdf\IPdfPasswordProvider.cs" />
     <Compile Include="ImportExport\Pdf\PdfEncryption.cs" />
     <Compile Include="ImportExport\Pdf\PdfMetadata.cs" />

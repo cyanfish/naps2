@@ -144,8 +144,14 @@ namespace NAPS2.Config.Experimental
         [Common]
         public ImageSettings ImageSettings { get; set; }
 
+        [User]
+        public bool? RememberImageSettings { get; set; }
+
         [Common]
         public EmailSettings EmailSettings { get; set; }
+
+        [User]
+        public bool? RememberEmailSettings { get; set; }
 
         [Common]
         public EmailSetup EmailSetup { get; set; }

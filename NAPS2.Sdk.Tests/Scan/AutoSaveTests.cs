@@ -166,7 +166,7 @@ namespace NAPS2.Sdk.Tests.Scan
         {
             return new AutoSaver(
                 new StubConfigProvider<PdfSettings>(new PdfSettings()),
-                ImageSettingsProvider.Wrap(new ImageSettings()),
+                new StubConfigProvider<ImageSettings>(new ImageSettings()),
                 new OcrEngineManager(),
                 new OcrRequestQueue(new OcrEngineManager(), new StubOperationProgress()),
                 errorOutput,

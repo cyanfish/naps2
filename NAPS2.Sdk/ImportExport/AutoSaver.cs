@@ -20,7 +20,7 @@ namespace NAPS2.ImportExport
     public class AutoSaver
     {
         private readonly ConfigProvider<PdfSettings> pdfSettingsProvider;
-        private readonly ImageSettingsProvider imageSettingsProvider;
+        private readonly ConfigProvider<ImageSettings> imageSettingsProvider;
         private readonly OcrEngineManager ocrEngineManager;
         private readonly OcrRequestQueue ocrRequestQueue;
         private readonly ErrorOutput errorOutput;
@@ -34,8 +34,9 @@ namespace NAPS2.ImportExport
 
         public AutoSaver()
         {
+            // TODO: Need to make SDK provider use safe for null defaults (maybe a helper method that reuses a subset of InternalDefaults somehow)
             pdfSettingsProvider = new StubConfigProvider<PdfSettings>(new PdfSettings());
-            imageSettingsProvider = ImageSettingsProvider.Default;
+            imageSettingsProvider = new StubConfigProvider<ImageSettings>(new ImageSettings());
             ocrEngineManager = OcrEngineManager.Default;
             ocrRequestQueue = OcrRequestQueue.Default;
             errorOutput = ErrorOutput.Default;
@@ -48,7 +49,7 @@ namespace NAPS2.ImportExport
             configProvider = ConfigScopes.Current.Provider;
         }
 
-        public AutoSaver(ConfigProvider<PdfSettings> pdfSettingsProvider, ImageSettingsProvider imageSettingsProvider, OcrEngineManager ocrEngineManager, OcrRequestQueue ocrRequestQueue, ErrorOutput errorOutput, DialogHelper dialogHelper, OperationProgress operationProgress, ISaveNotify notify, PdfExporter pdfExporter, OverwritePrompt overwritePrompt, BitmapRenderer bitmapRenderer, ConfigProvider<CommonConfig> configProvider)
+        public AutoSaver(ConfigProvider<PdfSettings> pdfSettingsProvider, ConfigProvider<ImageSettings> imageSettingsProvider, OcrEngineManager ocrEngineManager, OcrRequestQueue ocrRequestQueue, ErrorOutput errorOutput, DialogHelper dialogHelper, OperationProgress operationProgress, ISaveNotify notify, PdfExporter pdfExporter, OverwritePrompt overwritePrompt, BitmapRenderer bitmapRenderer, ConfigProvider<CommonConfig> configProvider)
         {
             this.pdfSettingsProvider = pdfSettingsProvider;
             this.imageSettingsProvider = imageSettingsProvider;
@@ -193,8 +194,8 @@ namespace NAPS2.ImportExport
             }
             else
             {
-                var op = new SaveImagesOperation(imageSettingsProvider, overwritePrompt, bitmapRenderer, new TiffHelper(bitmapRenderer));
-                if (op.Start(subPath, placeholders, images))
+                var op = new SaveImagesOperation(overwritePrompt, bitmapRenderer, new TiffHelper(bitmapRenderer));
+                if (op.Start(subPath, placeholders, images, imageSettingsProvider))
                 {
                     operationProgress.ShowProgress(op);
                 }

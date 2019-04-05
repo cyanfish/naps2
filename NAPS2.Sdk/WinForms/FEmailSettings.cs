@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
-using NAPS2.Config;
+using NAPS2.Config.Experimental;
 using NAPS2.ImportExport.Email;
 using NAPS2.ImportExport.Email.Mapi;
 using NAPS2.Lang.Resources;
@@ -11,12 +11,13 @@ namespace NAPS2.WinForms
 {
     public partial class FEmailSettings : FormBase
     {
-        private readonly EmailSettingsContainer emailSettingsContainer;
         private readonly SystemEmailClients systemEmailClients;
+        private TransactionConfigScope<CommonConfig> userTransact;
+        private TransactionConfigScope<CommonConfig> runTransact;
+        private ConfigProvider<CommonConfig> transactProvider;
 
-        public FEmailSettings(EmailSettingsContainer emailSettingsContainer, SystemEmailClients systemEmailClients)
+        public FEmailSettings(SystemEmailClients systemEmailClients)
         {
-            this.emailSettingsContainer = emailSettingsContainer;
             this.systemEmailClients = systemEmailClients;
             InitializeComponent();
         }
@@ -32,32 +33,34 @@ namespace NAPS2.WinForms
                     .WidthToForm()
                 .Activate();
 
+            userTransact = ConfigScopes.User.BeginTransaction();
+            runTransact = ConfigScopes.Run.BeginTransaction();
+            transactProvider = ConfigScopes.WithTransactions(userTransact, runTransact);
             UpdateProvider();
-            UpdateValues(emailSettingsContainer.EmailSettings);
-            cbRememberSettings.Checked = UserConfig.Current.EmailSettings != null;
+            UpdateValues();
         }
 
-        private void UpdateValues(EmailSettings emailSettings)
+        private void UpdateValues()
         {
-            txtAttachmentName.Text = emailSettings.AttachmentName;
+            txtAttachmentName.Text = transactProvider.Get(c => c.EmailSettings.AttachmentName);
+            cbRememberSettings.Checked = transactProvider.Get(c => c.RememberEmailSettings);
         }
 
         private void UpdateProvider()
         {
-            var setup = UserConfig.Current.EmailSetup;
-            switch (setup?.ProviderType)
+            switch (transactProvider.Get(c => c.EmailSetup.ProviderType))
             {
                 case EmailProviderType.Gmail:
-                    lblProvider.Text = SettingsResources.EmailProviderType_Gmail + '\n' + setup.GmailUser;
+                    lblProvider.Text = SettingsResources.EmailProviderType_Gmail + '\n' + transactProvider.Get(c => c.EmailSetup.GmailUser);
                     break;
                 case EmailProviderType.OutlookWeb:
-                    lblProvider.Text = SettingsResources.EmailProviderType_OutlookWeb + '\n' + setup.OutlookWebUser;
+                    lblProvider.Text = SettingsResources.EmailProviderType_OutlookWeb + '\n' + transactProvider.Get(c => c.EmailSetup.OutlookWebToken);
                     break;
                 case EmailProviderType.CustomSmtp:
-                    lblProvider.Text = setup.SmtpHost + '\n' + setup.SmtpUser;
+                    lblProvider.Text = transactProvider.Get(c => c.EmailSetup.SmtpHost) + '\n' + transactProvider.Get(c => c.EmailSetup.SmtpUser);
                     break;
                 case EmailProviderType.System:
-                    lblProvider.Text = setup.SystemProviderName ?? systemEmailClients.GetDefaultName();
+                    lblProvider.Text = transactProvider.Get(c => c.EmailSetup.SystemProviderName) ?? systemEmailClients.GetDefaultName();
                     break;
                 default:
                     lblProvider.Text = SettingsResources.EmailProvider_NotSelected;
@@ -72,9 +75,17 @@ namespace NAPS2.WinForms
                 AttachmentName = txtAttachmentName.Text
             };
 
-            emailSettingsContainer.EmailSettings = emailSettings;
-            UserConfig.Current.EmailSettings = cbRememberSettings.Checked ? emailSettings : null;
-            UserConfig.Manager.Save();
+            // Clear old run scope
+            runTransact.Set(c => c.EmailSettings = new EmailSettings());
+
+            var scope = cbRememberSettings.Checked ? userTransact : runTransact;
+            scope.SetAll(new CommonConfig
+            {
+                EmailSettings = emailSettings
+            });
+
+            userTransact.Commit();
+            runTransact.Commit();
 
             Close();
         }
@@ -86,8 +97,10 @@ namespace NAPS2.WinForms
 
         private void btnRestoreDefaults_Click(object sender, EventArgs e)
         {
-            UpdateValues(new EmailSettings());
-            cbRememberSettings.Checked = false;
+            runTransact.Set(c => c.EmailSettings = new EmailSettings());
+            userTransact.Set(c => c.EmailSettings = new EmailSettings());
+            userTransact.Set(c => c.RememberEmailSettings = false);
+            UpdateValues();
         }
 
         private void linkPlaceholders_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)

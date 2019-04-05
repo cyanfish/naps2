@@ -173,7 +173,7 @@ namespace NAPS2.Scan
 
         private ScannedImageSource AutoSave(ScannedImageSink sink, ScanParams scanParams, ScanProfile scanProfile)
         {
-            bool doAutoSave = !scanParams.NoAutoSave && !AppConfig.Current.DisableAutoSave && scanProfile.EnableAutoSave && scanProfile.AutoSaveSettings != null && autoSaver != null;
+            bool doAutoSave = !scanParams.NoAutoSave && scanProfile.EnableAutoSave && scanProfile.AutoSaveSettings != null && autoSaver != null;
             if (!doAutoSave)
             {
                 // No auto save, so just pipe images back as we get them
@@ -197,11 +197,12 @@ namespace NAPS2.Scan
                 // User cancelled
                 return null;
             }
-            if (AppConfig.Current.AlwaysRememberDevice)
-            {
-                scanProfile.Device = device;
-                ProfileManager.Current.Save();
-            }
+            // TODO: Figure out how to handle this
+            //if (AppConfig.Current.AlwaysRememberDevice)
+            //{
+            //    scanProfile.Device = device;
+            //    ProfileManager.Current.Save();
+            //}
             return device;
         }
 

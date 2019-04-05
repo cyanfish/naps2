@@ -165,7 +165,7 @@ namespace NAPS2.WinForms
 
         private void btnRestoreDefaults_Click(object sender, EventArgs e)
         {
-            UpdateValues(AppConfig.Current.DefaultProfileSettings ?? new ScanProfile { Version = ScanProfile.CURRENT_VERSION });
+            UpdateValues(ConfigProvider.Get(c => c.DefaultProfileSettings));
         }
     }
 }

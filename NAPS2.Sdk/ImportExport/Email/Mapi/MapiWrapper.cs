@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using NAPS2.Config;
+using NAPS2.Config.Experimental;
 using NAPS2.Util;
 
 namespace NAPS2.ImportExport.Email.Mapi
@@ -9,15 +10,17 @@ namespace NAPS2.ImportExport.Email.Mapi
     public class MapiWrapper : IMapiWrapper
     {
         private readonly SystemEmailClients systemEmailClients;
+        private readonly ConfigProvider<EmailSetup> emailSetupProvider;
 
-        public MapiWrapper(SystemEmailClients systemEmailClients)
+        public MapiWrapper(SystemEmailClients systemEmailClients, ConfigProvider<EmailSetup> emailSetupProvider)
         {
             this.systemEmailClients = systemEmailClients;
+            this.emailSetupProvider = emailSetupProvider;
         }
 
         public MapiSendMailReturnCode SendEmail(EmailMessage message)
         {
-            var clientName = UserConfig.Current.EmailSetup?.SystemProviderName;
+            var clientName = emailSetupProvider.Get(c => c.SystemProviderName);
             var (mapiSendMail, mapiSendMailW) = systemEmailClients.GetDelegate(clientName, out bool unicode);
 
             // Determine the flags used to send the message

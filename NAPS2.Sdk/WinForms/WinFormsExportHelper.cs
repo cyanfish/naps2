@@ -19,8 +19,8 @@ namespace NAPS2.WinForms
     public class WinFormsExportHelper
     {
         private readonly ConfigProvider<PdfSettings> pdfSettingsProvider;
-        private readonly ImageSettingsContainer imageSettingsContainer;
-        private readonly EmailSettingsContainer emailSettingsContainer;
+        private readonly ConfigProvider<ImageSettings> imageSettingsProvider;
+        private readonly ConfigProvider<EmailSettings> emailSettingsProvider;
         private readonly DialogHelper dialogHelper;
         private readonly ChangeTracker changeTracker;
         private readonly IOperationFactory operationFactory;
@@ -28,11 +28,11 @@ namespace NAPS2.WinForms
         private readonly OperationProgress operationProgress;
         private readonly ConfigScopes configScopes;
 
-        public WinFormsExportHelper(ConfigProvider<PdfSettings> pdfSettingsProvider, ImageSettingsContainer imageSettingsContainer, EmailSettingsContainer emailSettingsContainer, DialogHelper dialogHelper, ChangeTracker changeTracker, IOperationFactory operationFactory, IFormFactory formFactory, OperationProgress operationProgress, ConfigScopes configScopes)
+        public WinFormsExportHelper(ConfigProvider<PdfSettings> pdfSettingsProvider, ConfigProvider<ImageSettings> imageSettingsProvider, ConfigProvider<EmailSettings> emailSettingsProvider, DialogHelper dialogHelper, ChangeTracker changeTracker, IOperationFactory operationFactory, IFormFactory formFactory, OperationProgress operationProgress, ConfigScopes configScopes)
         {
             this.pdfSettingsProvider = pdfSettingsProvider;
-            this.imageSettingsContainer = imageSettingsContainer;
-            this.emailSettingsContainer = emailSettingsContainer;
+            this.imageSettingsProvider = imageSettingsProvider;
+            this.emailSettingsProvider = emailSettingsProvider;
             this.dialogHelper = dialogHelper;
             this.changeTracker = changeTracker;
             this.operationFactory = operationFactory;
@@ -89,14 +89,13 @@ namespace NAPS2.WinForms
             {
                 string savePath;
 
-                var imageSettings = imageSettingsContainer.ImageSettings;
-                if (imageSettings.SkipSavePrompt && Path.IsPathRooted(imageSettings.DefaultFileName))
+                if (imageSettingsProvider.Get(c => c.SkipSavePrompt) && Path.IsPathRooted(imageSettingsProvider.Get(c => c.DefaultFileName)))
                 {
-                    savePath = imageSettings.DefaultFileName;
+                    savePath = imageSettingsProvider.Get(c => c.DefaultFileName);
                 }
                 else
                 {
-                    if (!dialogHelper.PromptToSaveImage(imageSettings.DefaultFileName, out savePath))
+                    if (!dialogHelper.PromptToSaveImage(imageSettingsProvider.Get(c => c.DefaultFileName), out savePath))
                     {
                         return false;
                     }
@@ -104,7 +103,7 @@ namespace NAPS2.WinForms
 
                 var op = operationFactory.Create<SaveImagesOperation>();
                 var changeToken = changeTracker.State;
-                if (op.Start(savePath, Placeholders.All.WithDate(DateTime.Now), images))
+                if (op.Start(savePath, Placeholders.All.WithDate(DateTime.Now), images, imageSettingsProvider))
                 {
                     operationProgress.ShowProgress(op);
                 }
@@ -135,9 +134,8 @@ namespace NAPS2.WinForms
                 }
             }
 
-            var emailSettings = emailSettingsContainer.EmailSettings;
             var invalidChars = new HashSet<char>(Path.GetInvalidFileNameChars());
-            var attachmentName = new string(emailSettings.AttachmentName.Where(x => !invalidChars.Contains(x)).ToArray());
+            var attachmentName = new string(emailSettingsProvider.Get(c => c.AttachmentName).Where(x => !invalidChars.Contains(x)).ToArray());
             if (string.IsNullOrEmpty(attachmentName))
             {
                 attachmentName = "Scan.pdf";

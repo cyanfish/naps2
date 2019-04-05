@@ -468,6 +468,7 @@ namespace NAPS2.WinForms
         private ScanParams DefaultScanParams() =>
             new ScanParams
             {
+                NoAutoSave = ConfigProvider.Get(c => c.DisableAutoSave),
                 DoOcr = ConfigProvider.Get(c => c.EnableOcr) && ConfigProvider.Get(c => c.OcrAfterScanning)
             };
 
@@ -1069,6 +1070,7 @@ namespace NAPS2.WinForms
 
             // Configured
 
+            // TODO: Granular
             var ks = ConfigProvider.Get(c => c.KeyboardShortcuts);
 
             ksm.Assign(ks.About, OpenAbout);
@@ -1129,6 +1131,7 @@ namespace NAPS2.WinForms
 
         private string GetProfileShortcut(int i)
         {
+            // TODO: Granular
             var ks = ConfigProvider.Get(c => c.KeyboardShortcuts);
             switch (i)
             {

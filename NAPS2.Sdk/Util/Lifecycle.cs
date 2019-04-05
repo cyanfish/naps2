@@ -6,6 +6,7 @@ using System.Reflection;
 using System.Security.Principal;
 using System.Windows.Forms;
 using NAPS2.Config;
+using NAPS2.Config.Experimental;
 using NAPS2.Logging;
 
 namespace NAPS2.Util
@@ -17,14 +18,16 @@ namespace NAPS2.Util
     {
         private readonly StillImage sti;
         private readonly WindowsEventLogger windowsEventLogger;
+        private readonly ConfigProvider<CommonConfig> configProvider;
 
         private bool shouldCreateEventSource;
         private int returnCode;
 
-        public Lifecycle(StillImage sti, WindowsEventLogger windowsEventLogger)
+        public Lifecycle(StillImage sti, WindowsEventLogger windowsEventLogger, ConfigProvider<CommonConfig> configProvider)
         {
             this.sti = sti;
             this.windowsEventLogger = windowsEventLogger;
+            this.configProvider = configProvider;
         }
 
         /// <summary>
@@ -172,7 +175,7 @@ namespace NAPS2.Util
             }
 
             // Only start one instance if configured for SingleInstance
-            if (AppConfig.Current.SingleInstance)
+            if (configProvider.Get(c => c.SingleInstance))
             {
                 // See if there's another NAPS2 process running
                 foreach (var process in GetOtherNaps2Processes())

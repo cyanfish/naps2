@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using NAPS2.Config;
+using NAPS2.Config.Experimental;
 
 namespace NAPS2.Scan
 {
@@ -12,19 +12,24 @@ namespace NAPS2.Scan
     /// </summary>
     public class ProfileNameTracker
     {
+        private readonly ConfigProvider<CommonConfig> configProvider;
+        private readonly ConfigScopes configScopes;
+
+        public ProfileNameTracker(ConfigProvider<CommonConfig> configProvider, ConfigScopes configScopes)
+        {
+            this.configProvider = configProvider;
+            this.configScopes = configScopes;
+        }
+
         public void RenamingProfile(string oldName, string newName)
         {
             if (string.IsNullOrEmpty(oldName))
             {
                 return;
             }
-            if (UserConfig.Current.LastBatchSettings != null)
+            if (configProvider.Get(c => c.BatchSettings.ProfileDisplayName) == oldName)
             {
-                if (UserConfig.Current.LastBatchSettings.ProfileDisplayName == oldName)
-                {
-                    UserConfig.Current.LastBatchSettings.ProfileDisplayName = newName;
-                    UserConfig.Manager.Save();
-                }
+                configScopes.User.Set(c => c.BatchSettings.ProfileDisplayName = newName);
             }
         }
 
@@ -34,13 +39,9 @@ namespace NAPS2.Scan
             {
                 return;
             }
-            if (UserConfig.Current.LastBatchSettings != null)
+            if (configProvider.Get(c => c.BatchSettings.ProfileDisplayName) == name)
             {
-                if (UserConfig.Current.LastBatchSettings.ProfileDisplayName == name)
-                {
-                    UserConfig.Current.LastBatchSettings.ProfileDisplayName = null;
-                    UserConfig.Manager.Save();
-                }
+                configScopes.User.Set(c => c.BatchSettings.ProfileDisplayName = "");
             }
         }
     }

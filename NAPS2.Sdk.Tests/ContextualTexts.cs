@@ -30,8 +30,6 @@ namespace NAPS2.Sdk.Tests
             Log.Logger = new NullLogger();
             Log.EventLogger = new NullEventLogger();
             ProfileManager.Current = new StubProfileManager();
-            UserConfig.Manager = new StubConfigManager<UserConfig>(UserConfig.Create());
-            AppConfig.Manager = new StubConfigManager<AppConfig>(AppConfig.Create());
 
             var componentsPath = Path.Combine(FolderPath, "components");
             GhostscriptManager.BasePath = componentsPath;
@@ -44,8 +42,6 @@ namespace NAPS2.Sdk.Tests
             OverwritePrompt.Default = new StubOverwritePrompt();
             DialogHelper.Default = new StubDialogHelper();
             BlankDetector.Default = new ThresholdBlankDetector();
-            ImageSettingsProvider.Default = ImageSettingsProvider.Wrap(new ImageSettings());
-            PdfSettingsProvider.Default = PdfSettingsProvider.Wrap(new PdfSettings());
             PdfExporter.Default = new PdfSharpExporter();
             OcrRequestQueue.Default = new OcrRequestQueue(ocrEngineManager, operationProgress);
 

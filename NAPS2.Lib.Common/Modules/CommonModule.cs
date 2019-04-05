@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using NAPS2.ClientServer;
+using NAPS2.Config.Experimental;
 using NAPS2.Images;
 using NAPS2.ImportExport;
 using NAPS2.ImportExport.Email;
@@ -55,11 +56,11 @@ namespace NAPS2.Modules
             Bind<ITwainWrapper>().To<TwainWrapper>();
 
             // Config
-            Bind<PdfSettingsContainer>().ToSelf().InSingletonScope();
-            Bind<PdfSettingsProvider>().ToMethod(ctx => ctx.Kernel.Get<PdfSettingsContainer>());
-            Bind<ImageSettingsContainer>().ToSelf().InSingletonScope();
-            Bind<ImageSettingsProvider>().ToMethod(ctx => ctx.Kernel.Get<ImageSettingsContainer>());
-            Bind<EmailSettingsContainer>().ToSelf().InSingletonScope();
+            Bind<ConfigScopes>().ToSelf().InSingletonScope();
+            Bind<ConfigProvider<CommonConfig>>().ToMethod(ctx => ctx.Kernel.Get<ConfigScopes>().Provider);
+            Bind<ConfigProvider<PdfSettings>>().ToMethod(ctx => ctx.Kernel.Get<ConfigProvider<CommonConfig>>().Child(c => c.PdfSettings));
+            Bind<ConfigProvider<ImageSettings>>().ToMethod(ctx => ctx.Kernel.Get<ConfigProvider<CommonConfig>>().Child(c => c.ImageSettings));
+            Bind<ConfigProvider<EmailSettings>>().ToMethod(ctx => ctx.Kernel.Get<ConfigProvider<CommonConfig>>().Child(c => c.EmailSettings));
 
             // Host
             Bind<IWorkerServiceFactory>().ToMethod(ctx => WorkerManager.Factory);

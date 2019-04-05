@@ -129,7 +129,7 @@ namespace NAPS2.WinForms
             }
 
             // Custom Presets
-            foreach (var preset in UserConfig.Current.CustomPageSizePresets.OrderBy(x => x.Name))
+            foreach (var preset in ConfigProvider.Get(c => c.CustomPageSizePresets).OrderBy(x => x.Name))
             {
                 cmbPage.Items.Insert(cmbPage.Items.Count - 1, new PageSizeListItem
                 {
@@ -377,8 +377,8 @@ namespace NAPS2.WinForms
                 txtBrightness.Enabled = settingsEnabled;
                 txtContrast.Enabled = settingsEnabled;
 
-                cbAutoSave.Enabled = !locked && !AppConfig.Current.DisableAutoSave;
-                linkAutoSaveSettings.Visible = !locked && !AppConfig.Current.DisableAutoSave;
+                cbAutoSave.Enabled = !locked && !ConfigProvider.Get(c => c.DisableAutoSave);
+                linkAutoSaveSettings.Visible = !locked && !ConfigProvider.Get(c => c.DisableAutoSave);
 
                 btnAdvanced.Enabled = !locked;
 
@@ -460,7 +460,7 @@ namespace NAPS2.WinForms
 
         private void linkAutoSaveSettings_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            if (AppConfig.Current.DisableAutoSave)
+            if (ConfigProvider.Get(c => c.DisableAutoSave))
             {
                 return;
             }

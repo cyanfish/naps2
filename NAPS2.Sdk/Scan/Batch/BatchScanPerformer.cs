@@ -97,6 +97,7 @@ namespace NAPS2.Scan.Batch
                 {
                     DetectPatchCodes = Settings.OutputType == BatchOutputType.MultipleFiles && Settings.SaveSeparator == SaveSeparator.PatchT,
                     NoUI = true,
+                    NoAutoSave = configProvider.Get(c => c.DisableAutoSave),
                     DoOcr = Settings.OutputType == BatchOutputType.Load
                         ? configProvider.Get(c => c.EnableOcr) && configProvider.Get(c => c.OcrAfterScanning) // User configured
                         : configProvider.Get(c => c.EnableOcr) && GetSavePathExtension().ToLower() == ".pdf", // Fully automated
@@ -287,7 +288,7 @@ namespace NAPS2.Scan.Batch
                 else
                 {
                     var op = operationFactory.Create<SaveImagesOperation>();
-                    op.Start(subPath, placeholders, images, true);
+                    op.Start(subPath, placeholders, images, configProvider.Child(c => c.ImageSettings), true);
                     await op.Success;
                 }
             }

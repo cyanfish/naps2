@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using NAPS2.Config;
+using NAPS2.Config.Experimental;
 using NAPS2.Operation;
 using NAPS2.Update;
 using NAPS2.Util;
@@ -14,8 +15,14 @@ namespace NAPS2.WinForms
         private const int PADDING_X = 25, PADDING_Y = 25;
         private const int SPACING_Y = 20;
 
+        private readonly ConfigProvider<CommonConfig> configProvider;
         private readonly List<NotifyWidgetBase> slots = new List<NotifyWidgetBase>();
         private FormBase parentForm;
+
+        public NotificationManager(ConfigProvider<CommonConfig> configProvider)
+        {
+            this.configProvider = configProvider;
+        }
 
         public FormBase ParentForm
         {
@@ -74,7 +81,7 @@ namespace NAPS2.WinForms
 
         private void Show(NotifyWidgetBase n)
         {
-            if (AppConfig.Current.DisableSaveNotifications && n is NotifyWidget)
+            if (configProvider.Get(c => c.DisableSaveNotifications) && n is NotifyWidget)
             {
                 return;
             }

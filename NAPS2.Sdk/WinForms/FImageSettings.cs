@@ -4,19 +4,20 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
-using NAPS2.Config;
+using NAPS2.Config.Experimental;
 using NAPS2.ImportExport.Images;
 
 namespace NAPS2.WinForms
 {
     public partial class FImageSettings : FormBase
     {
-        private readonly ImageSettingsContainer imageSettingsContainer;
         private readonly DialogHelper dialogHelper;
+        private TransactionConfigScope<CommonConfig> userTransact;
+        private TransactionConfigScope<CommonConfig> runTransact;
+        private ConfigProvider<CommonConfig> transactProvider;
 
-        public FImageSettings(ImageSettingsContainer imageSettingsContainer, DialogHelper dialogHelper)
+        public FImageSettings(DialogHelper dialogHelper)
         {
-            this.imageSettingsContainer = imageSettingsContainer;
             this.dialogHelper = dialogHelper;
             InitializeComponent();
             AddEnumItems<TiffCompression>(cmbTiffCompr);
@@ -33,18 +34,21 @@ namespace NAPS2.WinForms
                     .WidthToForm()
                 .Activate();
 
-            UpdateValues(imageSettingsContainer.ImageSettings);
+            userTransact = ConfigScopes.User.BeginTransaction();
+            runTransact = ConfigScopes.Run.BeginTransaction();
+            transactProvider = ConfigScopes.WithTransactions(userTransact, runTransact);
+            UpdateValues();
             UpdateEnabled();
-            cbRememberSettings.Checked = UserConfig.Current.ImageSettings != null;
         }
 
-        private void UpdateValues(ImageSettings imageSettings)
+        private void UpdateValues()
         {
-            txtDefaultFilePath.Text = imageSettings.DefaultFileName;
-            cbSkipSavePrompt.Checked = imageSettings.SkipSavePrompt;
-            txtJpegQuality.Text = imageSettings.JpegQuality.ToString(CultureInfo.InvariantCulture);
-            cmbTiffCompr.SelectedIndex = (int) imageSettings.TiffCompression;
-            cbSinglePageTiff.Checked = imageSettings.SinglePageTiff;
+            txtDefaultFilePath.Text = transactProvider.Get(c => c.ImageSettings.DefaultFileName);
+            cbSkipSavePrompt.Checked = transactProvider.Get(c => c.ImageSettings.SkipSavePrompt);
+            txtJpegQuality.Text = transactProvider.Get(c => c.ImageSettings.JpegQuality).ToString(CultureInfo.InvariantCulture);
+            cmbTiffCompr.SelectedIndex = (int)transactProvider.Get(c => c.ImageSettings.TiffCompression);
+            cbSinglePageTiff.Checked = transactProvider.Get(c => c.ImageSettings.SinglePageTiff);
+            cbRememberSettings.Checked = transactProvider.Get(c => c.RememberImageSettings);
         }
 
         private void UpdateEnabled()
@@ -68,9 +72,17 @@ namespace NAPS2.WinForms
                 SinglePageTiff = cbSinglePageTiff.Checked
             };
 
-            imageSettingsContainer.LocalImageSettings = imageSettings;
-            UserConfig.Current.ImageSettings = cbRememberSettings.Checked ? imageSettings : null;
-            UserConfig.Manager.Save();
+            // Clear old run scope
+            runTransact.Set(c => c.ImageSettings = new ImageSettings());
+
+            var scope = cbRememberSettings.Checked ? userTransact : runTransact;
+            scope.SetAll(new CommonConfig
+            {
+                ImageSettings = imageSettings
+            });
+
+            userTransact.Commit();
+            runTransact.Commit();
 
             Close();
         }
@@ -82,8 +94,11 @@ namespace NAPS2.WinForms
 
         private void btnRestoreDefaults_Click(object sender, EventArgs e)
         {
-            UpdateValues(new ImageSettings());
-            cbRememberSettings.Checked = false;
+            runTransact.Set(c => c.ImageSettings = new ImageSettings());
+            userTransact.Set(c => c.ImageSettings = new ImageSettings());
+            userTransact.Set(c => c.RememberImageSettings = false);
+            UpdateValues();
+            UpdateEnabled();
         }
 
         private void tbJpegQuality_Scroll(object sender, EventArgs e)

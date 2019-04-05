@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using NAPS2.Config;
+using NAPS2.Config.Experimental;
 using NAPS2.Lang.Resources;
 using NAPS2.Operation;
 using NAPS2.Platform;
@@ -67,11 +68,11 @@ namespace NAPS2.WinForms
         protected override async void OnLoad(object sender, EventArgs e)
         {
             tbPageCurrent.Visible = PlatformCompat.Runtime.IsToolbarTextboxSupported;
-            if (AppConfig.Current.HideSavePdfButton)
+            if (ConfigProvider.Get(c => c.HiddenButtons).HasFlag(ToolbarButtons.SavePdf))
             {
                 toolStrip1.Items.Remove(tsSavePDF);
             }
-            if (AppConfig.Current.HideSaveImagesButton)
+            if (ConfigProvider.Get(c => c.HiddenButtons).HasFlag(ToolbarButtons.SaveImages))
             {
                 toolStrip1.Items.Remove(tsSaveImage);
             }
@@ -511,7 +512,7 @@ namespace NAPS2.WinForms
         {
             if (await exportHelper.SavePDF(new List<ScannedImage> { ImageList.Images[ImageIndex] }, null))
             {
-                if (AppConfig.Current.DeleteAfterSaving)
+                if (ConfigProvider.Get(c => c.DeleteAfterSaving))
                 {
                     await DeleteCurrentImage();
                 }
@@ -522,7 +523,7 @@ namespace NAPS2.WinForms
         {
             if (await exportHelper.SaveImages(new List<ScannedImage> { ImageList.Images[ImageIndex] }, null))
             {
-                if (AppConfig.Current.DeleteAfterSaving)
+                if (ConfigProvider.Get(c => c.DeleteAfterSaving))
                 {
                     await DeleteCurrentImage();
                 }
@@ -584,7 +585,8 @@ namespace NAPS2.WinForms
 
             // Configured
 
-            var ks = UserConfig.Current.KeyboardShortcuts ?? AppConfig.Current.KeyboardShortcuts ?? new KeyboardShortcuts();
+            // TODO: Granular
+            var ks = ConfigProvider.Get(c => c.KeyboardShortcuts);
 
             ksm.Assign(ks.Delete, tsDelete);
             ksm.Assign(ks.ImageBlackWhite, tsBlackWhite);
