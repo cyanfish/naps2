@@ -163,6 +163,7 @@
     <Compile Include="ClientServer\ScanCallback.cs" />
     <Compile Include="ClientServer\ScanService.cs" />
     <Compile Include="ClientServer\ServerDiscovery.cs" />
+    <Compile Include="Config\Experimental\ChildAttribute.cs" />
     <Compile Include="Config\Experimental\ConfigExtensions.cs" />
     <Compile Include="Config\Experimental\ObsoleteTypes\ExtendedScanSettingsV0.cs" />
     <Compile Include="Config\Experimental\ObsoleteTypes\ScanSettingsV0.cs" />
@@ -234,6 +235,8 @@
     <Compile Include="Config\SaveButtonDefaultAction.cs" />
     <Compile Include="Platform\DefaultRuntimeCompat.cs" />
     <Compile Include="Recovery\RecoveryIndexSerializer.cs" />
+    <Compile Include="Scan\Batch\BatchOutputType.cs" />
+    <Compile Include="Scan\Batch\BatchScanType.cs" />
     <Compile Include="Scan\Exceptions\DriverNotSupportedException.cs" />
     <Compile Include="Images\ScannedImageSource.cs" />
     <Compile Include="Images\Storage\GdiTransformers.cs" />

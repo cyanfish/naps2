@@ -93,6 +93,7 @@
     <Compile Include="Asserts\ImageAsserts.cs" />
     <Compile Include="Asserts\PdfAsserts.cs" />
     <Compile Include="Config\CommonConfigTests.cs" />
+    <Compile Include="Config\ConfigScopeTests.cs" />
     <Compile Include="Config\ProfileSerializerTests.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Images\GdiTests.cs" />

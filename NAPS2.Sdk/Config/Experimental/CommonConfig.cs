@@ -18,8 +18,18 @@ namespace NAPS2.Config.Experimental
 
         public static CommonConfig Create() => new CommonConfig { Version = CURRENT_VERSION };
 
+        public CommonConfig()
+        {
+            PdfSettings = new PdfSettings();
+            ImageSettings = new ImageSettings();
+            EmailSettings = new EmailSettings();
+            EmailSetup = new EmailSetup();
+            BatchSettings = new BatchSettings();
+            KeyboardShortcuts = new KeyboardShortcuts();
+        }
+
         [Common]
-        public int Version { get; set; }
+        public int? Version { get; set; }
 
         [Common]
         public string Culture { get; set; }
@@ -135,30 +145,36 @@ namespace NAPS2.Config.Experimental
         [App]
         public EventType? EventLogging { get; set; }
 
+        [Child]
         [Common]
         public PdfSettings PdfSettings { get; set; }
 
         [User]
         public bool? RememberPdfSettings { get; set; }
 
+        [Child]
         [Common]
         public ImageSettings ImageSettings { get; set; }
 
         [User]
         public bool? RememberImageSettings { get; set; }
 
+        [Child]
         [Common]
         public EmailSettings EmailSettings { get; set; }
 
         [User]
         public bool? RememberEmailSettings { get; set; }
 
+        [Child]
         [Common]
         public EmailSetup EmailSetup { get; set; }
 
+        [Child]
         [Common]
         public BatchSettings BatchSettings { get; set; }
 
+        [Child]
         [Common]
         public KeyboardShortcuts KeyboardShortcuts { get; set; }
 

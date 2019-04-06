@@ -7,6 +7,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using NAPS2.Config;
+using NAPS2.Config.Experimental;
 using NAPS2.ImportExport;
 using NAPS2.Lang.Resources;
 using NAPS2.Logging;
@@ -72,8 +73,8 @@ namespace NAPS2.WinForms
             rdMultipleScansDelay.Checked = BatchSettings.ScanType == BatchScanType.MultipleWithDelay;
 
             // TODO: Verify culture (+ vaildation ofc)
-            txtNumberOfScans.Text = BatchSettings.ScanCount.ToString(CultureInfo.CurrentCulture);
-            txtTimeBetweenScans.Text = BatchSettings.ScanIntervalSeconds.ToString(CultureInfo.CurrentCulture);
+            txtNumberOfScans.Text = (BatchSettings.ScanCount ?? 1).ToString(CultureInfo.CurrentCulture);
+            txtTimeBetweenScans.Text = (BatchSettings.ScanIntervalSeconds ?? 0).ToString(CultureInfo.CurrentCulture);
 
             rdLoadIntoNaps2.Checked = BatchSettings.OutputType == BatchOutputType.Load;
             rdSaveToSingleFile.Checked = BatchSettings.OutputType == BatchOutputType.SingleFile;
@@ -291,7 +292,7 @@ namespace NAPS2.WinForms
         {
             try
             {
-                await batchScanPerformer.PerformBatchScan(BatchSettings, this,
+                await batchScanPerformer.PerformBatchScan(ConfigProvider.Child(c => c.BatchSettings), this,
                     image => SafeInvoke(() => ImageCallback(image)), ProgressCallback, cts.Token);
                 SafeInvoke(() =>
                 {

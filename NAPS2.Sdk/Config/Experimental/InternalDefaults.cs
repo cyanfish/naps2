@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
+using NAPS2.ImportExport;
 using NAPS2.ImportExport.Email;
+using NAPS2.ImportExport.Email.Oauth;
 using NAPS2.ImportExport.Images;
 using NAPS2.ImportExport.Pdf;
 using NAPS2.Lang.Resources;
@@ -19,6 +21,7 @@ namespace NAPS2.Config.Experimental
         public static CommonConfig GetCommonConfig() =>
             new CommonConfig
             {
+                Version = CommonConfig.CURRENT_VERSION,
                 Culture = "en",
                 FormStates = new List<FormState>(),
                 BackgroundOperations = new HashSet<string>(),
@@ -64,7 +67,8 @@ namespace NAPS2.Config.Experimental
                         Title = MiscResources.ScannedImage,
                         Subject = MiscResources.ScannedImage,
                         Author = MiscResources.NAPS2,
-                        Creator = MiscResources.NAPS2
+                        Creator = MiscResources.NAPS2,
+                        Keywords = ""
                     },
                     Encryption = new PdfEncryption
                     {
@@ -96,12 +100,91 @@ namespace NAPS2.Config.Experimental
                 RememberImageSettings = false,
                 EmailSettings = new EmailSettings
                 {
-                    AttachmentName = ""
+                    AttachmentName = "Scan.pdf"
                 },
                 RememberEmailSettings = false,
-                EmailSetup = new EmailSetup(),
-                BatchSettings = new BatchSettings(),
-                KeyboardShortcuts = new KeyboardShortcuts(),
+                EmailSetup = new EmailSetup
+                {
+                    SystemProviderName = "",
+                    ProviderType = EmailProviderType.System,
+                    SmtpUser = "",
+                    GmailUser = "",
+                    OutlookWebToken = new OauthToken(),
+                    SmtpHost = "",
+                    GmailToken = new OauthToken(),
+                    OutlookWebUser = "",
+                    SmtpFrom = "",
+                    SmtpPassword = "",
+                    SmtpPort = 0,
+                    SmtpTls = false
+                },
+                BatchSettings = new BatchSettings
+                {
+                    OutputType = BatchOutputType.Load,
+                    SaveSeparator = SaveSeparator.FilePerPage,
+                    ScanType = BatchScanType.Single,
+                    SavePath = "",
+                    ScanIntervalSeconds = 0,
+                    ScanCount = 1,
+                    ProfileDisplayName = ""
+                },
+                KeyboardShortcuts = new KeyboardShortcuts
+                {
+                    ScanDefault = "Ctrl+Enter",
+                    ScanProfile1 = "F2",
+                    ScanProfile2 = "F3",
+                    ScanProfile3 = "F4",
+                    ScanProfile4 = "F5",
+                    ScanProfile5 = "F6",
+                    ScanProfile6 = "F7",
+                    ScanProfile7 = "F8",
+                    ScanProfile8 = "F9",
+                    ScanProfile9 = "F10",
+                    ScanProfile10 = "F11",
+                    ScanProfile11 = "F12",
+                    ScanProfile12 = "",
+                    NewProfile = "",
+                    BatchScan = "Ctrl+B",
+                    Profiles = "",
+                    Ocr = "",
+                    Import = "Ctrl+O",
+                    SavePDF = "Ctrl+S",
+                    SavePDFAll = "",
+                    SavePDFSelected = "",
+                    SaveImages = "",
+                    SaveImagesAll = "",
+                    SaveImagesSelected = "",
+                    EmailPDF = "",
+                    EmailPDFAll = "",
+                    EmailPDFSelected = "",
+                    Print = "Ctrl+P",
+                    ImageView = "",
+                    ImageBlackWhite = "",
+                    ImageBrightness = "",
+                    ImageContrast = "",
+                    ImageCrop = "",
+                    ImageHue = "",
+                    ImageReset = "",
+                    ImageSaturation = "",
+                    ImageSharpen = "",
+                    RotateLeft = "",
+                    RotateRight = "",
+                    RotateFlip = "",
+                    RotateCustom = "",
+                    MoveUp = "Ctrl+Up",
+                    MoveDown = "Ctrl+Down",
+                    ReorderInterleave = "",
+                    ReorderDeinterleave = "",
+                    ReorderAltInterleave = "",
+                    ReorderAltDeinterleave = "",
+                    ReorderReverseAll = "",
+                    ReorderReverseSelected = "",
+                    Delete = "",
+                    Clear = "Ctrl+Shift+Del",
+                    About = "F1",
+                    ZoomIn = "Ctrl+Oemplus",
+                    ZoomOut = "Ctrl+OemMinus"
+                },
                 DefaultProfileSettings = new ScanProfile { Version = ScanProfile.CURRENT_VERSION }
             };
     }

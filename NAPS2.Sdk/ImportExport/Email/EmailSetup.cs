@@ -13,7 +13,7 @@ namespace NAPS2.ImportExport.Email
         // Consider some kind of prefix for the encrypted text so anyone looking at the xml knows it is encrypted. "secure-xxx" "encrypted:xxx"
         // Would also allow an error when mapping from appsettings if they copy the wrong thing.
         // Consider how to behave if ProviderType is set (e.g. to gmail) but the user/token isn't.
-        public EmailProviderType ProviderType { get; set; }
+        public EmailProviderType? ProviderType { get; set; }
 
         public string SystemProviderName { get; set; }
 
@@ -31,7 +31,7 @@ namespace NAPS2.ImportExport.Email
 
         public int? SmtpPort { get; set; }
 
-        public bool SmtpTls { get; set; }
+        public bool? SmtpTls { get; set; }
 
         public string SmtpUser { get; set; }
 

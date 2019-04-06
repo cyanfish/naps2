@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using NAPS2.Config.Experimental;
 
 namespace NAPS2.ImportExport.Pdf
 {
@@ -19,12 +20,14 @@ namespace NAPS2.ImportExport.Pdf
 
         public bool? SkipSavePrompt { get; set; }
 
+        [Child]
         public PdfMetadata Metadata
         {
             get => metadata;
             set => metadata = value ?? throw new ArgumentNullException(nameof(value));
         }
 
+        [Child]
         public PdfEncryption Encryption
         {
             get => encryption;

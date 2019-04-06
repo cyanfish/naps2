@@ -41,7 +41,7 @@ namespace NAPS2.Scan.Batch
             this.configProvider = configProvider;
         }
 
-        public async Task PerformBatchScan(BatchSettings settings, FormBase batchForm, Action<ScannedImage> imageCallback, Action<string> progressCallback, CancellationToken cancelToken)
+        public async Task PerformBatchScan(ConfigProvider<BatchSettings> settings, FormBase batchForm, Action<ScannedImage> imageCallback, Action<string> progressCallback, CancellationToken cancelToken)
         {
             var state = new BatchState(scanPerformer, pdfExporter, operationFactory, pdfSettingsProvider, ocrEngineManager, formFactory, configProvider)
             {
@@ -80,7 +80,7 @@ namespace NAPS2.Scan.Batch
                 this.configProvider = configProvider;
             }
 
-            public BatchSettings Settings { get; set; }
+            public ConfigProvider<BatchSettings> Settings { get; set; }
 
             public Action<string> ProgressCallback { get; set; }
 
@@ -92,13 +92,13 @@ namespace NAPS2.Scan.Batch
 
             public async Task Do()
             {
-                profile = ProfileManager.Current.Profiles.First(x => x.DisplayName == Settings.ProfileDisplayName);
+                profile = ProfileManager.Current.Profiles.First(x => x.DisplayName == Settings.Get(c => c.ProfileDisplayName));
                 scanParams = new ScanParams
                 {
-                    DetectPatchCodes = Settings.OutputType == BatchOutputType.MultipleFiles && Settings.SaveSeparator == SaveSeparator.PatchT,
+                    DetectPatchCodes = Settings.Get(c => c.OutputType) == BatchOutputType.MultipleFiles && Settings.Get(c => c.SaveSeparator) == SaveSeparator.PatchT,
                     NoUI = true,
                     NoAutoSave = configProvider.Get(c => c.DisableAutoSave),
-                    DoOcr = Settings.OutputType == BatchOutputType.Load
+                    DoOcr = Settings.Get(c => c.OutputType) == BatchOutputType.Load
                         ? configProvider.Get(c => c.EnableOcr) && configProvider.Get(c => c.OcrAfterScanning) // User configured
                         : configProvider.Get(c => c.EnableOcr) && GetSavePathExtension().ToLower() == ".pdf", // Fully automated
                     OcrParams = configProvider.DefaultOcrParams(),
@@ -138,18 +138,18 @@ namespace NAPS2.Scan.Batch
                 {
                     scans = new List<List<ScannedImage>>();
 
-                    if (Settings.ScanType == BatchScanType.Single)
+                    if (Settings.Get(c => c.ScanType) == BatchScanType.Single)
                     {
                         await InputOneScan(-1);
                     }
-                    else if (Settings.ScanType == BatchScanType.MultipleWithDelay)
+                    else if (Settings.Get(c => c.ScanType) == BatchScanType.MultipleWithDelay)
                     {
-                        for (int i = 0; i < Settings.ScanCount; i++)
+                        for (int i = 0; i < Settings.Get(c => c.ScanCount); i++)
                         {
                             ProgressCallback(string.Format(MiscResources.BatchStatusWaitingForScan, i + 1));
                             if (i != 0)
                             {
-                                ThreadSleepWithCancel(TimeSpan.FromSeconds(Settings.ScanIntervalSeconds), CancelToken);
+                                ThreadSleepWithCancel(TimeSpan.FromSeconds(Settings.Get(c => c.ScanIntervalSeconds)), CancelToken);
                                 CancelToken.ThrowIfCancellationRequested();
                             }
 
@@ -159,7 +159,7 @@ namespace NAPS2.Scan.Batch
                             }
                         }
                     }
-                    else if (Settings.ScanType == BatchScanType.MultipleWithPrompt)
+                    else if (Settings.Get(c => c.ScanType) == BatchScanType.MultipleWithPrompt)
                     {
                         int i = 0;
                         do
@@ -233,14 +233,14 @@ namespace NAPS2.Scan.Batch
                 var placeholders = Placeholders.All.WithDate(DateTime.Now);
                 var allImages = scans.SelectMany(x => x).ToList();
 
-                if (Settings.OutputType == BatchOutputType.Load)
+                if (Settings.Get(c => c.OutputType) == BatchOutputType.Load)
                 {
                     foreach (var image in allImages)
                     {
                         LoadImageCallback(image);
                     }
                 }
-                else if (Settings.OutputType == BatchOutputType.SingleFile)
+                else if (Settings.Get(c => c.OutputType) == BatchOutputType.SingleFile)
                 {
                     await Save(placeholders, 0, allImages);
                     foreach (var img in allImages)
@@ -248,10 +248,10 @@ namespace NAPS2.Scan.Batch
                         img.Dispose();
                     }
                 }
-                else if (Settings.OutputType == BatchOutputType.MultipleFiles)
+                else if (Settings.Get(c => c.OutputType) == BatchOutputType.MultipleFiles)
                 {
                     int i = 0;
-                    foreach (var imageList in SaveSeparatorHelper.SeparateScans(scans, Settings.SaveSeparator))
+                    foreach (var imageList in SaveSeparatorHelper.SeparateScans(scans, Settings.Get(c => c.SaveSeparator)))
                     {
                         await Save(placeholders, i++, imageList);
                         foreach (var img in imageList)
@@ -268,7 +268,7 @@ namespace NAPS2.Scan.Batch
                 {
                     return;
                 }
-                var subPath = placeholders.Substitute(Settings.SavePath, true, i);
+                var subPath = placeholders.Substitute(Settings.Get(c => c.SavePath), true, i);
                 if (GetSavePathExtension().ToLower() == ".pdf")
                 {
                     if (File.Exists(subPath))
@@ -295,11 +295,11 @@ namespace NAPS2.Scan.Batch
 
             private string GetSavePathExtension()
             {
-                if (Settings.SavePath == null)
+                if (string.IsNullOrEmpty(Settings.Get(c => c.SavePath)))
                 {
                     throw new ArgumentException();
                 }
-                string extension = Path.GetExtension(Settings.SavePath);
+                string extension = Path.GetExtension(Settings.Get(c => c.SavePath));
                 Debug.Assert(extension != null);
                 return extension;
             }
