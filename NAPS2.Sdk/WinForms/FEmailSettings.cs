@@ -35,7 +35,7 @@ namespace NAPS2.WinForms
 
             userTransact = ConfigScopes.User.BeginTransaction();
             runTransact = ConfigScopes.Run.BeginTransaction();
-            transactProvider = ConfigScopes.WithTransactions(userTransact, runTransact);
+            transactProvider = ConfigProvider.Replace(ConfigScopes.User, userTransact).Replace(ConfigScopes.Run, runTransact);
             UpdateProvider();
             UpdateValues();
         }

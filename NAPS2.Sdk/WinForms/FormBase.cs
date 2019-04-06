@@ -10,7 +10,7 @@ using NAPS2.Util;
 
 namespace NAPS2.WinForms
 {
-    // TODO: Remove UserConfig dependency from reusable forms
+    // TODO: Remove ConfigScopes.User dependency from reusable forms
     public class FormBase : Form, IInvoker
     {
         private bool loaded;
@@ -33,7 +33,7 @@ namespace NAPS2.WinForms
 
         public ConfigScopes ConfigScopes { get; set; }
 
-        public ConfigProvider<CommonConfig> ConfigProvider { get; set; }
+        public ScopeSetConfigProvider<CommonConfig> ConfigProvider { get; set; }
 
         protected bool RestoreFormState { get; set; }
 

@@ -60,7 +60,7 @@ namespace NAPS2.Automation
             this.configScopes = configScopes;
 
             userTransact = configScopes.User.BeginTransaction();
-            configProvider = configScopes.WithTransactions(userTransact);
+            configProvider = configScopes.Provider.Replace(configScopes.User, userTransact);
             pdfSettingsProvider = configProvider.Child(c => c.PdfSettings);
             imageSettingsProvider = configProvider.Child(c => c.ImageSettings);
         }

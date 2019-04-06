@@ -21,7 +21,7 @@ namespace NAPS2
             var form = kernel.Get<T>();
             form.FormFactory = kernel.Get<IFormFactory>();
             form.ConfigScopes = kernel.Get<ConfigScopes>();
-            form.ConfigProvider = kernel.Get<ConfigProvider<CommonConfig>>();
+            form.ConfigProvider = kernel.Get<ScopeSetConfigProvider<CommonConfig>>();
             return form;
         }
     }

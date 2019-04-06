@@ -23,14 +23,16 @@ namespace NAPS2.WinForms
     {
         public const string PATCH_CODE_INFO_URL = "http://www.naps2.com/doc-batch-scan.html#patch-t";
         
-        private readonly BatchScanPerformer batchScanPerformer;
+        private readonly IBatchScanPerformer batchScanPerformer;
         private readonly ErrorOutput errorOutput;
         private readonly DialogHelper dialogHelper;
+        private TransactionConfigScope<CommonConfig> userTransact;
+        private ConfigProvider<CommonConfig> transactProvider;
 
         private bool batchRunning;
         private CancellationTokenSource cts = new CancellationTokenSource();
 
-        public FBatchScan(BatchScanPerformer batchScanPerformer, ErrorOutput errorOutput, DialogHelper dialogHelper)
+        public FBatchScan(IBatchScanPerformer batchScanPerformer, ErrorOutput errorOutput, DialogHelper dialogHelper)
         {
             this.batchScanPerformer = batchScanPerformer;
             this.errorOutput = errorOutput;
@@ -41,8 +43,6 @@ namespace NAPS2.WinForms
         }
 
         public Action<ScannedImage> ImageCallback { get; set; }
-
-        private BatchSettings BatchSettings { get; set; }
 
         protected override void OnLoad(object sender, EventArgs eventArgs)
         {
@@ -60,7 +60,8 @@ namespace NAPS2.WinForms
             ConditionalControls.LockHeight(this);
 
             // TODO: Granular
-            BatchSettings = ConfigProvider.Get(c => c.BatchSettings);
+            userTransact = ConfigScopes.User.BeginTransaction();
+            transactProvider = ConfigProvider.Replace(ConfigScopes.User, userTransact);
             UpdateUIFromSettings();
         }
 
@@ -68,39 +69,39 @@ namespace NAPS2.WinForms
         {
             UpdateProfiles();
 
-            rdSingleScan.Checked = BatchSettings.ScanType == BatchScanType.Single;
-            rdMultipleScansPrompt.Checked = BatchSettings.ScanType == BatchScanType.MultipleWithPrompt;
-            rdMultipleScansDelay.Checked = BatchSettings.ScanType == BatchScanType.MultipleWithDelay;
+            rdSingleScan.Checked = transactProvider.Get(c => c.BatchSettings.ScanType) == BatchScanType.Single;
+            rdMultipleScansPrompt.Checked = transactProvider.Get(c => c.BatchSettings.ScanType) == BatchScanType.MultipleWithPrompt;
+            rdMultipleScansDelay.Checked = transactProvider.Get(c => c.BatchSettings.ScanType) == BatchScanType.MultipleWithDelay;
 
             // TODO: Verify culture (+ vaildation ofc)
-            txtNumberOfScans.Text = (BatchSettings.ScanCount ?? 1).ToString(CultureInfo.CurrentCulture);
-            txtTimeBetweenScans.Text = (BatchSettings.ScanIntervalSeconds ?? 0).ToString(CultureInfo.CurrentCulture);
+            txtNumberOfScans.Text = transactProvider.Get(c => c.BatchSettings.ScanCount).ToString(CultureInfo.CurrentCulture);
+            txtTimeBetweenScans.Text = transactProvider.Get(c => c.BatchSettings.ScanIntervalSeconds).ToString(CultureInfo.CurrentCulture);
 
-            rdLoadIntoNaps2.Checked = BatchSettings.OutputType == BatchOutputType.Load;
-            rdSaveToSingleFile.Checked = BatchSettings.OutputType == BatchOutputType.SingleFile;
-            rdSaveToMultipleFiles.Checked = BatchSettings.OutputType == BatchOutputType.MultipleFiles;
+            rdLoadIntoNaps2.Checked = transactProvider.Get(c => c.BatchSettings.OutputType) == BatchOutputType.Load;
+            rdSaveToSingleFile.Checked = transactProvider.Get(c => c.BatchSettings.OutputType) == BatchOutputType.SingleFile;
+            rdSaveToMultipleFiles.Checked = transactProvider.Get(c => c.BatchSettings.OutputType) == BatchOutputType.MultipleFiles;
 
-            rdFilePerScan.Checked = BatchSettings.SaveSeparator == SaveSeparator.FilePerScan;
-            rdFilePerPage.Checked = BatchSettings.SaveSeparator == SaveSeparator.FilePerPage;
-            rdSeparateByPatchT.Checked = BatchSettings.SaveSeparator == SaveSeparator.PatchT;
+            rdFilePerScan.Checked = transactProvider.Get(c => c.BatchSettings.SaveSeparator) == SaveSeparator.FilePerScan;
+            rdFilePerPage.Checked = transactProvider.Get(c => c.BatchSettings.SaveSeparator) == SaveSeparator.FilePerPage;
+            rdSeparateByPatchT.Checked = transactProvider.Get(c => c.BatchSettings.SaveSeparator) == SaveSeparator.PatchT;
 
-            txtFilePath.Text = BatchSettings.SavePath;
+            txtFilePath.Text = transactProvider.Get(c => c.BatchSettings.SavePath);
         }
 
         private bool ValidateSettings()
         {
             bool ok = true;
 
-            BatchSettings.ProfileDisplayName = comboProfile.Text;
+            userTransact.Set(c => c.BatchSettings.ProfileDisplayName = comboProfile.Text);
             if (comboProfile.SelectedIndex == -1)
             {
                 ok = false;
                 comboProfile.Focus();
             }
 
-            BatchSettings.ScanType = rdMultipleScansPrompt.Checked ? BatchScanType.MultipleWithPrompt
+            userTransact.Set(c => c.BatchSettings.ScanType = rdMultipleScansPrompt.Checked ? BatchScanType.MultipleWithPrompt
                                    : rdMultipleScansDelay.Checked ? BatchScanType.MultipleWithDelay
-                                   : BatchScanType.Single;
+                                   : BatchScanType.Single);
 
             if (rdMultipleScansDelay.Checked)
             {
@@ -110,7 +111,7 @@ namespace NAPS2.WinForms
                     scanCount = 0;
                     txtNumberOfScans.Focus();
                 }
-                BatchSettings.ScanCount = scanCount;
+                userTransact.Set(c => c.BatchSettings.ScanCount = scanCount);
 
                 if (!double.TryParse(txtTimeBetweenScans.Text, out double scanInterval) || scanInterval < 0)
                 {
@@ -118,19 +119,19 @@ namespace NAPS2.WinForms
                     scanInterval = 0;
                     txtTimeBetweenScans.Focus();
                 }
-                BatchSettings.ScanIntervalSeconds = scanInterval;
+                userTransact.Set(c => c.BatchSettings.ScanIntervalSeconds = scanInterval);
             }
 
-            BatchSettings.OutputType = rdSaveToSingleFile.Checked ? BatchOutputType.SingleFile
+            userTransact.Set(c => c.BatchSettings.OutputType = rdSaveToSingleFile.Checked ? BatchOutputType.SingleFile
                                      : rdSaveToMultipleFiles.Checked ? BatchOutputType.MultipleFiles
-                                     : BatchOutputType.Load;
+                                     : BatchOutputType.Load);
 
-            BatchSettings.SaveSeparator = rdFilePerScan.Checked ? SaveSeparator.FilePerScan
+            userTransact.Set(c => c.BatchSettings.SaveSeparator = rdFilePerScan.Checked ? SaveSeparator.FilePerScan
                                         : rdSeparateByPatchT.Checked ? SaveSeparator.PatchT
-                                        : SaveSeparator.FilePerPage;
+                                        : SaveSeparator.FilePerPage);
 
-            BatchSettings.SavePath = txtFilePath.Text;
-            if (BatchSettings.OutputType != BatchOutputType.Load && string.IsNullOrWhiteSpace(BatchSettings.SavePath))
+            userTransact.Set(c => c.BatchSettings.SavePath = txtFilePath.Text);
+            if (transactProvider.Get(c => c.BatchSettings.OutputType) != BatchOutputType.Load && string.IsNullOrWhiteSpace(transactProvider.Get(c => c.BatchSettings.SavePath)))
             {
                 ok = false;
                 txtFilePath.Focus();
@@ -143,10 +144,10 @@ namespace NAPS2.WinForms
         {
             comboProfile.Items.Clear();
             comboProfile.Items.AddRange(ProfileManager.Current.Profiles.Cast<object>().ToArray());
-            if (BatchSettings.ProfileDisplayName != null &&
-                ProfileManager.Current.Profiles.Any(x => x.DisplayName == BatchSettings.ProfileDisplayName))
+            if (!string.IsNullOrEmpty(transactProvider.Get(c => c.BatchSettings.ProfileDisplayName)) &&
+                ProfileManager.Current.Profiles.Any(x => x.DisplayName == transactProvider.Get(c => c.BatchSettings.ProfileDisplayName)))
             {
-                comboProfile.Text = BatchSettings.ProfileDisplayName;
+                comboProfile.Text = transactProvider.Get(c => c.BatchSettings.ProfileDisplayName);
             }
             else if (ProfileManager.Current.DefaultProfile != null)
             {
@@ -216,7 +217,7 @@ namespace NAPS2.WinForms
                 {
                     ProfileManager.Current.Profiles[comboProfile.SelectedIndex] = fedit.ScanProfile;
                     ProfileManager.Current.Save();
-                    BatchSettings.ProfileDisplayName = fedit.ScanProfile.DisplayName;
+                    userTransact.Set(c => c.BatchSettings.ProfileDisplayName = fedit.ScanProfile.DisplayName);
                     UpdateProfiles();
                 }
             }
@@ -233,7 +234,7 @@ namespace NAPS2.WinForms
                 {
                     ProfileManager.Current.Profiles.Add(fedit.ScanProfile);
                     ProfileManager.Current.Save();
-                    BatchSettings.ProfileDisplayName = fedit.ScanProfile.DisplayName;
+                    userTransact.Set(c => c.BatchSettings.ProfileDisplayName = fedit.ScanProfile.DisplayName);
                     UpdateProfiles();
                 }
             }
@@ -264,7 +265,7 @@ namespace NAPS2.WinForms
             DoBatchScan().AssertNoAwait();
 
             // Save settings for next time (could also do on form close)
-            ConfigScopes.User.Set(c => c.BatchSettings = BatchSettings);
+            userTransact.Commit();
         }
 
         private void EnableDisableSettings(bool enabled)

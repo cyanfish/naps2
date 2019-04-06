@@ -12,6 +12,7 @@ using NAPS2.ImportExport.Pdf;
 using NAPS2.Ocr;
 using NAPS2.Operation;
 using NAPS2.Scan;
+using NAPS2.Scan.Batch;
 using NAPS2.Scan.Sane;
 using NAPS2.Scan.Twain;
 using NAPS2.Scan.Wia;
@@ -44,6 +45,7 @@ namespace NAPS2.Modules
 
             // Scan
             Bind<IScanPerformer>().To<ScanPerformer>();
+            Bind<IBatchScanPerformer>().To<BatchScanPerformer>();
 #if DEBUG && false
             Bind<IScanDriverFactory>().To<Scan.Stub.StubScanDriverFactory>();
 #else
@@ -57,6 +59,7 @@ namespace NAPS2.Modules
 
             // Config
             Bind<ConfigScopes>().ToSelf().InSingletonScope();
+            Bind<ScopeSetConfigProvider<CommonConfig>>().ToMethod(ctx => ctx.Kernel.Get<ConfigScopes>().Provider);
             Bind<ConfigProvider<CommonConfig>>().ToMethod(ctx => ctx.Kernel.Get<ConfigScopes>().Provider);
             Bind<ConfigProvider<PdfSettings>>().ToMethod(ctx => ctx.Kernel.Get<ConfigProvider<CommonConfig>>().Child(c => c.PdfSettings));
             Bind<ConfigProvider<ImageSettings>>().ToMethod(ctx => ctx.Kernel.Get<ConfigProvider<CommonConfig>>().Child(c => c.ImageSettings));

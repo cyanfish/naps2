@@ -11,7 +11,7 @@ namespace NAPS2.Images.Transforms
         {
             // TODO: Set this from the clients
             Size = 256;
-            //Size = UserConfig.Current.ThumbnailSize;
+            //Size = ConfigScopes.User.Current.ThumbnailSize;
         }
 
         public ThumbnailTransform(int size)

@@ -65,7 +65,7 @@ namespace NAPS2.WinForms
         {
             comboName.Items.Clear();
             // TODO: Fix this (once we actually get around to implementing scanner sharing for real)
-            //foreach (var proxyConfig in UserConfig.Current.SavedProxies.OrderBy(x => x.Name))
+            //foreach (var proxyConfig in ConfigScopes.User.Current.SavedProxies.OrderBy(x => x.Name))
             //{
             //    comboName.Items.Add(proxyConfig.Name);
             //}
@@ -82,7 +82,7 @@ namespace NAPS2.WinForms
 
         private void comboName_SelectionChangeCommitted(object sender, EventArgs e)
         {
-            //var savedProxies = UserConfig.Current.SavedProxies;
+            //var savedProxies = ConfigScopes.User.Current.SavedProxies;
             //var proxyConfig = savedProxies.FirstOrDefault(x => x.Name == (string)comboName.SelectedItem);
             //if (proxyConfig != null)
             //{
@@ -93,7 +93,7 @@ namespace NAPS2.WinForms
 
         private void comboName_TextChanged(object sender, EventArgs e)
         {
-            //var savedProxies = UserConfig.Current.SavedProxies;
+            //var savedProxies = ConfigScopes.User.Current.SavedProxies;
             //btnDelete.Enabled = savedProxies.Any(x => x.Name == comboName.Text);
         }
 
@@ -131,10 +131,10 @@ namespace NAPS2.WinForms
             };
             if (!string.IsNullOrWhiteSpace(comboName.Text))
             {
-                //var savedProxies = UserConfig.Current.SavedProxies;
+                //var savedProxies = ConfigScopes.User.Current.SavedProxies;
                 //savedProxies.RemoveAll(x => x.Name == ProxyConfig.Name);
                 //savedProxies.Add(ProxyConfig);
-                //UserConfig.Manager.Save();
+                //ConfigScopes.User.Manager.Save();
             }
             DialogResult = DialogResult.OK;
             Close();
@@ -144,9 +144,9 @@ namespace NAPS2.WinForms
         {
             if (MessageBox.Show(string.Format(MiscResources.ConfirmDelete, comboName.Text), MiscResources.Delete, MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
             {
-                //var savedProxies = UserConfig.Current.SavedProxies;
+                //var savedProxies = ConfigScopes.User.Current.SavedProxies;
                 //savedProxies.RemoveAll(x => x.Name == comboName.Text);
-                //UserConfig.Manager.Save();
+                //ConfigScopes.User.Manager.Save();
 
                 ProxyConfig = new ScanProxyConfig();
                 UpdateDropdown();

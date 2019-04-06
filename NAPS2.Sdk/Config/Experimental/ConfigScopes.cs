@@ -23,18 +23,38 @@ namespace NAPS2.Config.Experimental
             set => _current = value;
         }
 
+        public static ConfigScopes Stub() =>
+            new ConfigScopes(
+                ConfigScope.Object(new CommonConfig()),
+                ConfigScope.Object(new CommonConfig()),
+                ConfigScope.Object(new CommonConfig()),
+                ConfigScope.Object(new CommonConfig()),
+                ConfigScope.Object(InternalDefaults.GetCommonConfig()));
+
         public ConfigScopes(string appConfigPath, string userConfigPath)
         {
-            AppLocked = new FileConfigScope<CommonConfig>(appConfigPath, CommonConfig.Create, new ConfigSerializer(ConfigReadMode.LockedOnly), ConfigScopeMode.ReadOnly);
-            Run = new ObjectConfigScope<CommonConfig>(new CommonConfig(), ConfigScopeMode.ReadWrite);
-            User = new FileConfigScope<CommonConfig>(userConfigPath, CommonConfig.Create, new ConfigSerializer(ConfigReadMode.All), ConfigScopeMode.ReadWrite);
-            AppDefault = new FileConfigScope<CommonConfig>(appConfigPath, CommonConfig.Create, new ConfigSerializer(ConfigReadMode.DefaultOnly), ConfigScopeMode.ReadOnly);
-            InternalDefault = new ObjectConfigScope<CommonConfig>(InternalDefaults.GetCommonConfig(), ConfigScopeMode.ReadOnly);
+            AppLocked = ConfigScope.File(appConfigPath, CommonConfig.Create, new ConfigSerializer(ConfigReadMode.LockedOnly), ConfigScopeMode.ReadOnly);
+            Run = ConfigScope.Object(new CommonConfig(), ConfigScopeMode.ReadWrite);
+            User = ConfigScope.File(userConfigPath, CommonConfig.Create, new ConfigSerializer(ConfigReadMode.All), ConfigScopeMode.ReadWrite);
+            AppDefault = ConfigScope.File(appConfigPath, CommonConfig.Create, new ConfigSerializer(ConfigReadMode.DefaultOnly), ConfigScopeMode.ReadOnly);
+            InternalDefault = ConfigScope.Object(InternalDefaults.GetCommonConfig(), ConfigScopeMode.ReadOnly);
 
-            Provider = new ScopeSetConfigProvider<CommonConfig>(AppLocked, Run, User, AppDefault, InternalDefault);
+            Provider = ConfigProvider.Set(AppLocked, Run, User, AppDefault, InternalDefault);
         }
 
-        public ConfigProvider<CommonConfig> Provider { get; }
+        public ConfigScopes(ConfigScope<CommonConfig> appLocked, ConfigScope<CommonConfig> run, ConfigScope<CommonConfig> user,
+            ConfigScope<CommonConfig> appDefault, ConfigScope<CommonConfig> internalDefault)
+        {
+            AppLocked = appLocked;
+            Run = run;
+            User = user;
+            AppDefault = appDefault;
+            InternalDefault = internalDefault;
+
+            Provider = ConfigProvider.Set(AppLocked, Run, User, AppDefault, InternalDefault);
+        }
+
+        public ScopeSetConfigProvider<CommonConfig> Provider { get; }
 
         public ConfigScope<CommonConfig> AppLocked { get; }
         public ConfigScope<CommonConfig> Run { get; }

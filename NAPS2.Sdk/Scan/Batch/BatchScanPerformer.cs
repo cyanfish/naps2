@@ -20,7 +20,7 @@ using NAPS2.WinForms;
 
 namespace NAPS2.Scan.Batch
 {
-    public class BatchScanPerformer
+    public class BatchScanPerformer : IBatchScanPerformer
     {
         private readonly IScanPerformer scanPerformer;
         private readonly PdfExporter pdfExporter;

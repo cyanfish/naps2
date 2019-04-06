@@ -1,9 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using NAPS2.Serialization;
 
 namespace NAPS2.Config.Experimental
 {
+    public static class ConfigScope
+    {
+        public static ObjectConfigScope<T> Object<T>(T value) =>
+            new ObjectConfigScope<T>(value, ConfigScopeMode.ReadWrite);
+
+        public static ObjectConfigScope<T> Object<T>(T value, ConfigScopeMode mode) =>
+            new ObjectConfigScope<T>(value, mode);
+
+        public static FileConfigScope<T> File<T>(string filePath, Func<T> factory, ISerializer<T> serializer, ConfigScopeMode mode) =>
+            new FileConfigScope<T>(filePath, factory, serializer, mode);
+    }
+
     public abstract class ConfigScope<TConfig>
     {
         protected ConfigScope(ConfigScopeMode mode)

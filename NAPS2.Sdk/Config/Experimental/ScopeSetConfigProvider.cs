@@ -4,11 +4,16 @@ using System.Linq;
 
 namespace NAPS2.Config.Experimental
 {
-    public class ScopeSetConfigProvider<TConfig> : ConfigProvider<TConfig> where TConfig : new()
+    public class ScopeSetConfigProvider<TConfig> : ConfigProvider<TConfig>
     {
         private readonly ConfigScope<TConfig>[] scopes;
 
         public ScopeSetConfigProvider(params ConfigScope<TConfig>[] scopes)
+        {
+            this.scopes = scopes.ToArray();
+        }
+
+        public ScopeSetConfigProvider(IEnumerable<ConfigScope<TConfig>> scopes)
         {
             this.scopes = scopes.ToArray();
         }
@@ -26,5 +31,8 @@ namespace NAPS2.Config.Experimental
             // TODO: Consider throwing an exception
             return default;
         }
+
+        public ScopeSetConfigProvider<TConfig> Replace(ConfigScope<TConfig> original, ConfigScope<TConfig> replacement) =>
+            new ScopeSetConfigProvider<TConfig>(scopes.Select(x => x == original ? replacement : x));
     }
 }

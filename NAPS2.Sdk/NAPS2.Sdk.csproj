@@ -237,6 +237,7 @@
     <Compile Include="Recovery\RecoveryIndexSerializer.cs" />
     <Compile Include="Scan\Batch\BatchOutputType.cs" />
     <Compile Include="Scan\Batch\BatchScanType.cs" />
+    <Compile Include="Scan\Batch\IBatchScanPerformer.cs" />
     <Compile Include="Scan\Exceptions\DriverNotSupportedException.cs" />
     <Compile Include="Images\ScannedImageSource.cs" />
     <Compile Include="Images\Storage\GdiTransformers.cs" />
