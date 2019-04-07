@@ -78,6 +78,7 @@ namespace NAPS2.Config.Experimental
                     cache = serializer.Deserialize(stream);
                     var copy = factory();
                     ConfigCopier.Copy(cache, copy);
+                    stream.Seek(0, SeekOrigin.Begin);
                     serializer.Serialize(stream, copy);
                     cache = copy;
                     changes = factory();

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using NAPS2.ClientServer;
 using NAPS2.Config.Experimental;
@@ -58,12 +59,14 @@ namespace NAPS2.Modules
             Bind<ITwainWrapper>().To<TwainWrapper>();
 
             // Config
-            Bind<ConfigScopes>().ToSelf().InSingletonScope();
+            var configScopes = new ConfigScopes(Path.Combine(Paths.Executable, "appsettings.xml"), Path.Combine(Paths.AppData, "config.xml"));
+            Bind<ConfigScopes>().ToConstant(configScopes);
             Bind<ScopeSetConfigProvider<CommonConfig>>().ToMethod(ctx => ctx.Kernel.Get<ConfigScopes>().Provider);
             Bind<ConfigProvider<CommonConfig>>().ToMethod(ctx => ctx.Kernel.Get<ConfigScopes>().Provider);
             Bind<ConfigProvider<PdfSettings>>().ToMethod(ctx => ctx.Kernel.Get<ConfigProvider<CommonConfig>>().Child(c => c.PdfSettings));
             Bind<ConfigProvider<ImageSettings>>().ToMethod(ctx => ctx.Kernel.Get<ConfigProvider<CommonConfig>>().Child(c => c.ImageSettings));
             Bind<ConfigProvider<EmailSettings>>().ToMethod(ctx => ctx.Kernel.Get<ConfigProvider<CommonConfig>>().Child(c => c.EmailSettings));
+            Bind<ConfigProvider<EmailSetup>>().ToMethod(ctx => ctx.Kernel.Get<ConfigProvider<CommonConfig>>().Child(c => c.EmailSetup));
 
             // Host
             Bind<IWorkerServiceFactory>().ToMethod(ctx => WorkerManager.Factory);
@@ -78,7 +81,7 @@ namespace NAPS2.Modules
             Bind<BlankDetector>().To<ThresholdBlankDetector>();
             Bind<AutoSaver>().ToSelf();
 
-            StaticConfiguration.Initialize();
+            StaticConfiguration.Initialize(Kernel);
         }
     }
 }

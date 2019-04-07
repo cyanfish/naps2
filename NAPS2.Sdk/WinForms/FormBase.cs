@@ -125,8 +125,11 @@ namespace NAPS2.WinForms
         {
             OnLoad(sender, eventArgs);
 
-            var formStates = ConfigProvider.Get(c => c.FormStates);
-            formState = formStates.SingleOrDefault(x => x.Name == Name) ?? new FormState { Name = Name };
+            if (RestoreFormState || SaveFormState)
+            {
+                var formStates = ConfigProvider.Get(c => c.FormStates);
+                formState = formStates.SingleOrDefault(x => x.Name == Name) ?? new FormState {Name = Name};
+            }
 
             if (RestoreFormState)
             {

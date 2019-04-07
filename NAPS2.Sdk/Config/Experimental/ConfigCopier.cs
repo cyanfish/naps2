@@ -22,7 +22,11 @@ namespace NAPS2.Config.Experimental
             {
                 if (isChild)
                 {
-                    Copy(prop.GetValue(src), prop.GetValue(dst), prop.PropertyType);
+                    var srcChild = prop.GetValue(src);
+                    if (srcChild != null)
+                    {
+                        Copy(srcChild, prop.GetValue(dst), prop.PropertyType);
+                    }
                 }
                 else
                 {

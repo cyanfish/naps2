@@ -10,16 +10,16 @@ using NAPS2.ImportExport.Pdf;
 using NAPS2.Logging;
 using NAPS2.Ocr;
 using NAPS2.Platform;
+using Ninject;
 using NLog;
 
 namespace NAPS2
 {
     public static class StaticConfiguration
     {
-        public static void Initialize()
+        public static void Initialize(IKernel kernel)
         {
-            ConfigScopes.Current = new ConfigScopes(Path.Combine(Paths.Executable, "appsettings.xml"), Path.Combine(Paths.AppData, "config.xml"));
-            var configProvider = ConfigScopes.Current.Provider;
+            var configProvider = kernel.Get<ConfigScopes>().Provider;
             ProfileManager.Current = new ProfileManager(
                 Path.Combine(Paths.AppData, "profiles.xml"),
                 Path.Combine(Paths.Executable, "profiles.xml"),

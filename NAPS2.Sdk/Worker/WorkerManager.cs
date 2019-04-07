@@ -82,7 +82,12 @@ namespace NAPS2.Worker
             var (cert, privateKey) = SslHelper.GenerateRootCertificate();
             WriteEncodedString(proc.StandardInput, cert);
             WriteEncodedString(proc.StandardInput, privateKey);
-            int port = int.Parse(proc.StandardOutput.ReadLine() ?? throw new Exception("Could not read worker port"));
+            var portStr = proc.StandardOutput.ReadLine();
+            if (portStr?.Trim() == "error")
+            {
+                throw new InvalidOperationException("The worker could not start due to an error. See the worker logs.");
+            }
+            int port = int.Parse(portStr ?? throw new Exception("Could not read worker port"));
 
             return (proc, port, cert, privateKey);
         }

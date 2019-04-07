@@ -80,7 +80,7 @@ namespace NAPS2.EntryPoints
             }
             catch (Exception ex)
             {
-                Console.Write('k');
+                Console.Write(@"error");
                 Log.FatalException("An error occurred that caused the worker application to close.", ex);
                 Environment.Exit(1);
             }

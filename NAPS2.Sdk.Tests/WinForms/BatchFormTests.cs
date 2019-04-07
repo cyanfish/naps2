@@ -59,11 +59,13 @@ namespace NAPS2.Sdk.Tests.WinForms
 
         private FormContext CreateForm()
         {
-            var ctx = new FormContext();
-            ctx.Performer = new Mock<IBatchScanPerformer>();
-            ctx.ErrorOutput = new Mock<ErrorOutput>();
-            ctx.DialogHelper = new Mock<DialogHelper>();
-            ctx.ConfigScopes = ConfigScopes.Stub();
+            var ctx = new FormContext
+            {
+                Performer = new Mock<IBatchScanPerformer>(),
+                ErrorOutput = new Mock<ErrorOutput>(),
+                DialogHelper = new Mock<DialogHelper>(),
+                ConfigScopes = ConfigScopes.Stub()
+            };
             ctx.Form = new FBatchScan(ctx.Performer.Object, ctx.ErrorOutput.Object, ctx.DialogHelper.Object)
             {
                 ConfigScopes = ctx.ConfigScopes,

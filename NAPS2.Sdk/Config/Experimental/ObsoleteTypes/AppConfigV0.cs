@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
+using System.Xml.Serialization;
 using NAPS2.ImportExport.Pdf;
 using NAPS2.Logging;
 using NAPS2.Ocr;
@@ -9,6 +10,7 @@ using NAPS2.Scan;
 
 namespace NAPS2.Config.Experimental.ObsoleteTypes
 {
+    [XmlType("AppConfig")]
     public class AppConfigV0
     {
         public int Version { get; set; }

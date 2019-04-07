@@ -11,6 +11,7 @@ namespace NAPS2.WinForms
         public FError()
         {
             RestoreFormState = false;
+            SaveFormState = false;
             InitializeComponent();
             AcceptButton = btnOK;
         }

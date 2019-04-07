@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
+using System.Xml.Serialization;
 using NAPS2.ImportExport.Email;
 using NAPS2.ImportExport.Images;
 using NAPS2.ImportExport.Pdf;
@@ -12,6 +13,7 @@ using NAPS2.Images;
 
 namespace NAPS2.Config.Experimental.ObsoleteTypes
 {
+    [XmlType("UserConfig")]
     public class UserConfigV0
     {
         public int Version { get; set; }
