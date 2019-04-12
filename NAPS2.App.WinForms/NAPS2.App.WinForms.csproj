@@ -151,25 +151,25 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <SubType>Designer</SubType>
     </Content>
-    <ContentWithTargetPath Include="..\NAPS2.Setup\lib\dbg\64\NAPS2.WIA.dll">
+    <ContentWithTargetPath Include="..\NAPS2.Setup\lib\dbg\win64\NAPS2.WIA.dll">
       <CopyToOutputDirectory Condition=" '$(Configuration)' == 'Debug' Or '$(Configuration)' == 'DebugLang' ">PreserveNewest</CopyToOutputDirectory>
-      <Link>lib\dbg\64\NAPS2.WIA.dll</Link>
-      <TargetPath>64\NAPS2.WIA.dll</TargetPath>
+      <Link>lib\dbg\win64\NAPS2.WIA.dll</Link>
+      <TargetPath>_win64\NAPS2.WIA.dll</TargetPath>
     </ContentWithTargetPath>
-    <ContentWithTargetPath Include="..\NAPS2.Setup\lib\64\NAPS2.WIA.dll">
+    <ContentWithTargetPath Include="..\NAPS2.Setup\lib\win64\NAPS2.WIA.dll">
       <CopyToOutputDirectory Condition=" '$(Configuration)' != 'Debug' And '$(Configuration)' != 'DebugLang' ">PreserveNewest</CopyToOutputDirectory>
-      <Link>lib\64\NAPS2.WIA.dll</Link>
-      <TargetPath>64\NAPS2.WIA.dll</TargetPath>
+      <Link>lib\win64\NAPS2.WIA.dll</Link>
+      <TargetPath>_win64\NAPS2.WIA.dll</TargetPath>
     </ContentWithTargetPath>
-    <ContentWithTargetPath Include="..\NAPS2.Setup\lib\dbg\NAPS2.WIA.dll">
+    <ContentWithTargetPath Include="..\NAPS2.Setup\lib\dbg\win32\NAPS2.WIA.dll">
       <CopyToOutputDirectory Condition=" '$(Configuration)' == 'Debug' Or '$(Configuration)' == 'DebugLang' ">PreserveNewest</CopyToOutputDirectory>
-      <Link>lib\dbg\NAPS2.WIA.dll</Link>
-      <TargetPath>NAPS2.WIA.dll</TargetPath>
+      <Link>lib\dbg\win32\NAPS2.WIA.dll</Link>
+      <TargetPath>_win32\NAPS2.WIA.dll</TargetPath>
     </ContentWithTargetPath>
-    <ContentWithTargetPath Include="..\NAPS2.Setup\lib\NAPS2.WIA.dll">
+    <ContentWithTargetPath Include="..\NAPS2.Setup\lib\win32\NAPS2.WIA.dll">
       <CopyToOutputDirectory Condition=" '$(Configuration)' != 'Debug' And '$(Configuration)' != 'DebugLang' ">PreserveNewest</CopyToOutputDirectory>
-      <Link>lib\NAPS2.WIA.dll</Link>
-      <TargetPath>NAPS2.WIA.dll</TargetPath>
+      <Link>lib\win32\NAPS2.WIA.dll</Link>
+      <TargetPath>_win32\NAPS2.WIA.dll</TargetPath>
     </ContentWithTargetPath>
     <Content Include="scanner-app.ico" />
   </ItemGroup>

@@ -21,21 +21,21 @@ namespace NAPS2.Scan.Twain
     public class TwainWrapper : ITwainWrapper
     {
         private static readonly TWIdentity TwainAppId = TWIdentity.CreateFromAssembly(DataGroups.Image | DataGroups.Control, Assembly.GetEntryAssembly());
-        
+
         private readonly BlankDetector blankDetector;
         private readonly ScannedImageHelper scannedImageHelper;
 
         static TwainWrapper()
         {
             // Path to the folder containing the 64-bit twaindsm.dll relative to NAPS2.Core.dll
-            const string lib64Dir = "64";
-            if (Environment.Is64BitProcess && PlatformCompat.System.CanUseWin32)
+            if (PlatformCompat.System.CanUseWin32)
             {
+                string libDir = Environment.Is64BitProcess ? "_win64" : "_win32";
                 var location = Assembly.GetExecutingAssembly().Location;
                 var coreDllDir = System.IO.Path.GetDirectoryName(location);
                 if (coreDllDir != null)
                 {
-                    Win32.SetDllDirectory(System.IO.Path.Combine(coreDllDir, lib64Dir));
+                    Win32.SetDllDirectory(System.IO.Path.Combine(coreDllDir, libDir));
                 }
             }
 #if DEBUG
@@ -324,7 +324,7 @@ namespace NAPS2.Scan.Twain
         private static IImage GetBitmapFromMemXFer(byte[] memoryData, TWImageInfo imageInfo)
         {
             int bytesPerPixel = memoryData.Length / (imageInfo.ImageWidth * imageInfo.ImageLength);
-            var pixelFormat = bytesPerPixel == 0 ? StoragePixelFormat.BW1: StoragePixelFormat.RGB24;
+            var pixelFormat = bytesPerPixel == 0 ? StoragePixelFormat.BW1 : StoragePixelFormat.RGB24;
             int imageWidth = imageInfo.ImageWidth;
             int imageHeight = imageInfo.ImageLength;
             var bitmap = StorageManager.ImageFactory.FromDimensions(imageWidth, imageHeight, pixelFormat);

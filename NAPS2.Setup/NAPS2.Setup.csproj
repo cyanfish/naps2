@@ -57,14 +57,16 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>LanguageComponents.tt</DependentUpon>
     </None>
-    <None Include="lib\64\NAPS2.WIA.dll" />
-    <None Include="lib\64\twaindsm.dll" />
-    <None Include="lib\dbg\64\NAPS2.WIA.dll" />
-    <None Include="lib\dbg\NAPS2.WIA.dll" />
-    <None Include="lib\NAPS2.WIA.dll" />
+    <None Include="lib\win64\NAPS2.WIA.dll" />
+    <None Include="lib\win64\twaindsm.dll" />
+    <None Include="lib\dbg\win64\NAPS2.WIA.dll" />
+    <None Include="lib\dbg\win32\NAPS2.WIA.dll" />
+    <None Include="lib\linux\libpdfium.so" />
+    <None Include="lib\win32\NAPS2.WIA.dll" />
     <None Include="lib\NTwain.dll" />
+    <None Include="lib\osx\libpdfium.dylib" />
     <None Include="lib\PdfSharp.dll" />
-    <None Include="lib\twaindsm.dll" />
+    <None Include="lib\win32\twaindsm.dll" />
     <None Include="license.rtf" />
     <None Include="naps2.ps1" />
     <None Include="ps.bat" />
@@ -87,5 +89,10 @@
   <ItemGroup>
     <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="lib\win64\pdfium.dll" />
+    <Content Include="lib\win32\pdfium.dll" />
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

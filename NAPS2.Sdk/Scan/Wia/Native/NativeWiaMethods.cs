@@ -13,14 +13,14 @@ namespace NAPS2.Scan.Wia.Native
     {
         static NativeWiaMethods()
         {
-            const string lib64Dir = "64";
-            if (Environment.Is64BitProcess && PlatformCompat.System.CanUseWin32)
+            if (PlatformCompat.System.CanUseWin32)
             {
+                string libDir = Environment.Is64BitProcess ? "_win64" : "_win32";
                 var location = Assembly.GetExecutingAssembly().Location;
                 var coreDllDir = System.IO.Path.GetDirectoryName(location);
                 if (coreDllDir != null)
                 {
-                    Win32.SetDllDirectory(System.IO.Path.Combine(coreDllDir, lib64Dir));
+                    Win32.SetDllDirectory(System.IO.Path.Combine(coreDllDir, libDir));
                 }
             }
         }
