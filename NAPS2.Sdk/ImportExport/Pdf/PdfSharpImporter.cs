@@ -176,7 +176,7 @@ namespace NAPS2.ImportExport.Pdf
 
         private async Task<ScannedImage> ExportRawPdfPage(PdfPage page, ImportParams importParams)
         {
-            string pdfPath = FileStorageManager.Current.NextFilePath();
+            string pdfPath = FileStorageManager.Current.NextFilePath() + ".pdf";
             var document = new PdfDocument();
             document.Pages.Add(page);
             document.Save(pdfPath);

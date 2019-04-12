@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
+using NAPS2.ImportExport.Pdf;
 
 namespace NAPS2.Images.Storage
 {
@@ -29,7 +30,22 @@ namespace NAPS2.Images.Storage
         }
 
         [StorageConverter]
-        public GdiImage ConvertToGdi(FileStorage input, StorageConvertParams convertParams) => new GdiImage(new Bitmap(input.FullPath));
+        public GdiImage ConvertToGdi(FileStorage input, StorageConvertParams convertParams)
+        {
+            // TODO: Allow multiple converters (with priority?) and fall back to the next if it returns null
+            // Then we can have a PDF->Image converter that returns null if it's not a pdf file.
+            if (IsPdfFile(input))
+            {
+                var renderer = new GhostscriptPdfRenderer(null);
+                return new GdiImage(renderer.Render(input.FullPath).Single());
+            }
+            else
+            {
+                return new GdiImage(new Bitmap(input.FullPath));
+            }
+        }
+
+        private static bool IsPdfFile(FileStorage fileStorage) => Path.GetExtension(fileStorage.FullPath)?.Equals(".pdf", StringComparison.InvariantCultureIgnoreCase) ?? false;
 
         [StorageConverter]
         public GdiImage ConvertToGdi(MemoryStreamStorage input, StorageConvertParams convertParams) => new GdiImage(new Bitmap(input.Stream));

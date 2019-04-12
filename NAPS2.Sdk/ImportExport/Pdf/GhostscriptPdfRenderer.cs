@@ -26,7 +26,8 @@ namespace NAPS2.ImportExport.Pdf
 
         public IEnumerable<Bitmap> Render(string path)
         {
-            ThrowIfCantRender();
+            // TODO
+            // ThrowIfCantRender();
 
             if (_gsLibBytes == null)
             {
@@ -60,6 +61,10 @@ namespace NAPS2.ImportExport.Pdf
         public void PromptToInstallIfNeeded(IComponentInstallPrompt componentInstallPrompt)
         {
             if (configProvider.Get(c => c.NoUpdatePrompt) || configProvider.Get(c => c.DisableGenericPdfImport))
+            {
+                return;
+            }
+            if (GhostscriptManager.GhostscriptComponent.IsInstalled)
             {
                 return;
             }
