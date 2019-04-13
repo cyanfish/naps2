@@ -108,6 +108,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>TransformTestsData.resx</DependentUpon>
     </Compile>
+    <Compile Include="ImportExport\PdfiumTests.cs" />
+    <Compile Include="ImportExport\PdfiumTestsData.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PdfiumTestsData.resx</DependentUpon>
+    </Compile>
     <Compile Include="Mocks\MockScanDriver.cs" />
     <Compile Include="Scan\AutoSaveTests.cs" />
     <Compile Include="Config\ProfileSerializerTestsData.Designer.cs">
@@ -141,10 +147,15 @@
       <LastGenOutput>TransformTestsData.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="ImportExport\PdfiumTestsData.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>PdfiumTestsData.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
+    <None Include="Resources\word.pdf" />
   </ItemGroup>
   <ItemGroup>
     <Analyzer Include="..\packages\xunit.analyzers.0.10.0\analyzers\dotnet\cs\xunit.analyzers.dll" />
@@ -203,7 +214,48 @@
   <ItemGroup>
     <None Include="Resources\color_image_s_n300.jpg" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ContentWithTargetPath Include="..\NAPS2.Setup\lib\dbg\win64\NAPS2.WIA.dll">
+      <CopyToOutputDirectory Condition=" '$(Configuration)' == 'Debug' Or '$(Configuration)' == 'DebugLang' ">PreserveNewest</CopyToOutputDirectory>
+      <Link>lib\dbg\win64\NAPS2.WIA.dll</Link>
+      <TargetPath>_win64\NAPS2.WIA.dll</TargetPath>
+    </ContentWithTargetPath>
+    <ContentWithTargetPath Include="..\NAPS2.Setup\lib\win64\NAPS2.WIA.dll">
+      <CopyToOutputDirectory Condition=" '$(Configuration)' != 'Debug' And '$(Configuration)' != 'DebugLang' ">PreserveNewest</CopyToOutputDirectory>
+      <Link>lib\win64\NAPS2.WIA.dll</Link>
+      <TargetPath>_win64\NAPS2.WIA.dll</TargetPath>
+    </ContentWithTargetPath>
+    <ContentWithTargetPath Include="..\NAPS2.Setup\lib\dbg\win32\NAPS2.WIA.dll">
+      <CopyToOutputDirectory Condition=" '$(Configuration)' == 'Debug' Or '$(Configuration)' == 'DebugLang' ">PreserveNewest</CopyToOutputDirectory>
+      <Link>lib\dbg\win32\NAPS2.WIA.dll</Link>
+      <TargetPath>_win32\NAPS2.WIA.dll</TargetPath>
+    </ContentWithTargetPath>
+    <ContentWithTargetPath Include="..\NAPS2.Setup\lib\win32\NAPS2.WIA.dll">
+      <CopyToOutputDirectory Condition=" '$(Configuration)' != 'Debug' And '$(Configuration)' != 'DebugLang' ">PreserveNewest</CopyToOutputDirectory>
+      <Link>lib\win32\NAPS2.WIA.dll</Link>
+      <TargetPath>_win32\NAPS2.WIA.dll</TargetPath>
+    </ContentWithTargetPath>
+    <ContentWithTargetPath Include="..\NAPS2.Setup\lib\win64\pdfium.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Link>lib\win64\pdfium.dll</Link>
+      <TargetPath>_win64\pdfium.dll</TargetPath>
+    </ContentWithTargetPath>
+    <ContentWithTargetPath Include="..\NAPS2.Setup\lib\win32\pdfium.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Link>lib\win32\pdfium.dll</Link>
+      <TargetPath>_win32\pdfium.dll</TargetPath>
+    </ContentWithTargetPath>
+    <ContentWithTargetPath Include="..\NAPS2.Setup\lib\linux\libpdfium.so">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Link>lib\linux\libpdfium.so</Link>
+      <TargetPath>_linux\libpdfium.so</TargetPath>
+    </ContentWithTargetPath>
+    <ContentWithTargetPath Include="..\NAPS2.Setup\lib\osx\libpdfium.dylib">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Link>lib\osx\libpdfium.dylib</Link>
+      <TargetPath>_osx\libpdfium.dylib</TargetPath>
+    </ContentWithTargetPath>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
