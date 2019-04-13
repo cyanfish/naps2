@@ -57,6 +57,8 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>LanguageComponents.tt</DependentUpon>
     </None>
+    <None Include="lib\linux\libgrpc_csharp_ext.x64.so" />
+    <None Include="lib\osx\libgrpc_csharp_ext.x64.dylib" />
     <None Include="lib\win64\NAPS2.WIA.dll" />
     <None Include="lib\win64\twaindsm.dll" />
     <None Include="lib\dbg\win64\NAPS2.WIA.dll" />
@@ -90,6 +92,8 @@
     <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="lib\win32\grpc_csharp_ext.x86.dll" />
+    <Content Include="lib\win64\grpc_csharp_ext.x64.dll" />
     <Content Include="lib\win64\pdfium.dll" />
     <Content Include="lib\win32\pdfium.dll" />
   </ItemGroup>

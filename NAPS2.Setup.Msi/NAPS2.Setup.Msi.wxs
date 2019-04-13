@@ -88,6 +88,8 @@
         <File Source="..\NAPS2.App.WinForms\bin\InstallerMSI\NAPS2.Sdk.dll" />
         <File Source="..\NAPS2.App.WinForms\bin\InstallerMSI\CommandLine.dll" />
         <File Source="..\NAPS2.App.WinForms\bin\InstallerMSI\ICSharpCode.SharpZipLib.dll" />
+        <File Source="..\NAPS2.App.WinForms\bin\InstallerMSI\Grpc.Core.dll" />
+        <File Source="..\NAPS2.App.WinForms\bin\InstallerMSI\Grpc.Core.Api.dll" />
         <File Source="..\NAPS2.App.WinForms\bin\InstallerMSI\MimeKit.dll" />
         <File Source="..\NAPS2.App.WinForms\bin\InstallerMSI\Newtonsoft.Json.dll" />
         <File Source="..\NAPS2.App.WinForms\bin\InstallerMSI\Ninject.dll" />
@@ -102,6 +104,7 @@
     <!-- Platform-specific dependencies -->
     <DirectoryRef Id="LIBWIN32FOLDER">
       <Component Id="DepsWin32" Guid="2BE3E5A4-7526-4074-90A1-5B4E830EA337">
+        <File Source="..\NAPS2.Setup\lib\win32\grpc_csharp_ext.x86.dll" Id="grpc_win32" />
         <File Source="..\NAPS2.Setup\lib\win32\NAPS2.WIA.dll" Id="naps2wia_win32" />
         <File Source="..\NAPS2.Setup\lib\win32\pdfium.dll" Id="pdfium_win32" />
         <File Source="..\NAPS2.Setup\lib\win32\twaindsm.dll" Id="twaindsm_win32" />
@@ -109,6 +112,7 @@
     </DirectoryRef>
     <DirectoryRef Id="LIBWIN64FOLDER">
       <Component Id="DepsWin64" Guid="9F734E22-7835-43B9-8B58-E10EF6484DD7">
+        <File Source="..\NAPS2.Setup\lib\win64\grpc_csharp_ext.x64.dll" Id="grpc_win64" />
         <File Source="..\NAPS2.Setup\lib\win64\NAPS2.WIA.dll" Id="naps2wia_win64" />
         <File Source="..\NAPS2.Setup\lib\win64\twaindsm.dll" Id="twaindsm_win64" />
         <File Source="..\NAPS2.Setup\lib\win64\pdfium.dll" Id="pdfium_win64" />
