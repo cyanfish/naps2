@@ -9,7 +9,8 @@ namespace NAPS2.ImportExport.Pdf
 {
     public class PdfiumPdfRenderer : IPdfRenderer
     {
-        private const int RENDER_FLAGS = PdfiumNativeMethods.FPDF_PRINTING | PdfiumNativeMethods.FPDF_REVERSE_BYTE_ORDER;
+        private const int RENDER_FLAGS = PdfiumNativeMethods.FPDF_PRINTING;
+        private const uint COLOR_WHITE = uint.MaxValue;
 
         static PdfiumPdfRenderer()
         {
@@ -43,6 +44,7 @@ namespace NAPS2.ImportExport.Pdf
                 try
                 {
                     var pdfiumBitmap = PdfiumNativeMethods.FPDFBitmap_CreateEx(widthInPx, heightInPx, PdfiumNativeMethods.FPDFBitmap_BGR, scan0, stride);
+                    PdfiumNativeMethods.FPDFBitmap_FillRect(pdfiumBitmap, 0, 0, widthInPx, heightInPx, COLOR_WHITE);
                     PdfiumNativeMethods.FPDF_RenderPageBitmap(pdfiumBitmap, page, 0, 0, widthInPx, heightInPx, 0, RENDER_FLAGS);
                     yield return bitmap;
                 }

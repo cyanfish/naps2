@@ -40,6 +40,9 @@ namespace NAPS2.ImportExport.Pdf
         public static extern IntPtr FPDFBitmap_CreateEx(int width, int height, int format, IntPtr firstScan, int stride);
 
         [DllImport("pdfium.dll")]
+        public static extern void FPDFBitmap_FillRect(IntPtr bitmap, int left, int top, int width, int height, uint color);
+
+        [DllImport("pdfium.dll")]
         public static extern void FPDFBitmap_Destroy(IntPtr bitmap);
 
         [DllImport("pdfium.dll")]
