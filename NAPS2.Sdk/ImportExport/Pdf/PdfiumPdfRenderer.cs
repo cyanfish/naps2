@@ -24,35 +24,48 @@ namespace NAPS2.ImportExport.Pdf
         public static IEnumerable<IImage> Render(string path, float dpi)
         {
             var doc = NativeLib.FPDF_LoadDocument(path, null);
-            var pageCount = NativeLib.FPDF_GetPageCount(doc);
-
-            for (int pageIndex = 0; pageIndex < pageCount; pageIndex++)
+            try
             {
-                var page = NativeLib.FPDF_LoadPage(doc, pageIndex);
-                var widthInInches = NativeLib.FPDF_GetPageWidth(page) / 72;
-                var heightInInches = NativeLib.FPDF_GetPageHeight(page) / 72;
-
-                // Cap the resolution to 10k pixels in each dimension
-                dpi = Math.Min(dpi, (float)(10000 / heightInInches));
-                dpi = Math.Min(dpi, (float)(10000 / widthInInches));
-
-                int widthInPx = (int)Math.Round(widthInInches * dpi);
-                int heightInPx = (int)Math.Round(heightInInches * dpi);
-
-                var bitmap = StorageManager.ImageFactory.FromDimensions(widthInPx, heightInPx, StoragePixelFormat.RGB24);
-                bitmap.SetResolution(dpi, dpi);
-                var bitmapData = bitmap.Lock(LockMode.ReadWrite, out var scan0, out var stride);
-                try
+                var pageCount = NativeLib.FPDF_GetPageCount(doc);
+                for (int pageIndex = 0; pageIndex < pageCount; pageIndex++)
                 {
-                    var pdfiumBitmap = NativeLib.FPDFBitmap_CreateEx(widthInPx, heightInPx, PdfiumNativeLibrary.FPDFBitmap_BGR, scan0, stride);
-                    NativeLib.FPDFBitmap_FillRect(pdfiumBitmap, 0, 0, widthInPx, heightInPx, COLOR_WHITE);
-                    NativeLib.FPDF_RenderPageBitmap(pdfiumBitmap, page, 0, 0, widthInPx, heightInPx, 0, RENDER_FLAGS);
-                    yield return bitmap;
+                    var page = NativeLib.FPDF_LoadPage(doc, pageIndex);
+                    try
+                    {
+                        var widthInInches = NativeLib.FPDF_GetPageWidth(page) / 72;
+                        var heightInInches = NativeLib.FPDF_GetPageHeight(page) / 72;
+
+                        // Cap the resolution to 10k pixels in each dimension
+                        dpi = Math.Min(dpi, (float) (10000 / heightInInches));
+                        dpi = Math.Min(dpi, (float) (10000 / widthInInches));
+
+                        int widthInPx = (int) Math.Round(widthInInches * dpi);
+                        int heightInPx = (int) Math.Round(heightInInches * dpi);
+
+                        var bitmap = StorageManager.ImageFactory.FromDimensions(widthInPx, heightInPx, StoragePixelFormat.RGB24);
+                        bitmap.SetResolution(dpi, dpi);
+                        var bitmapData = bitmap.Lock(LockMode.ReadWrite, out var scan0, out var stride);
+                        try
+                        {
+                            var pdfiumBitmap = NativeLib.FPDFBitmap_CreateEx(widthInPx, heightInPx, PdfiumNativeLibrary.FPDFBitmap_BGR, scan0, stride);
+                            NativeLib.FPDFBitmap_FillRect(pdfiumBitmap, 0, 0, widthInPx, heightInPx, COLOR_WHITE);
+                            NativeLib.FPDF_RenderPageBitmap(pdfiumBitmap, page, 0, 0, widthInPx, heightInPx, 0, RENDER_FLAGS);
+                            yield return bitmap;
+                        }
+                        finally
+                        {
+                            bitmap.Unlock(bitmapData);
+                        }
+                    }
+                    finally
+                    {
+                        NativeLib.FPDF_ClosePage(page);
+                    }
                 }
-                finally
-                {
-                    bitmap.Unlock(bitmapData);
-                }
+            }
+            finally
+            {
+                NativeLib.FPDF_CloseDocument(doc);
             }
         }
     }

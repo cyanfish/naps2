@@ -34,9 +34,13 @@ namespace NAPS2.ImportExport.Pdf
 
         public delegate IntPtr FPDF_LoadMemDocument_delegate(IntPtr buffer, int size, [MarshalAs(UnmanagedType.LPStr)] string password);
 
+        public delegate void FPDF_CloseDocument_delegate(IntPtr document);
+
         public delegate int FPDF_GetPageCount_delegate(IntPtr document);
 
         public delegate IntPtr FPDF_LoadPage_delegate(IntPtr document, int pageIndex);
+
+        public delegate void FPDF_ClosePage_delegate(IntPtr page);
 
         public delegate double FPDF_GetPageWidth_delegate(IntPtr page);
 
@@ -51,8 +55,10 @@ namespace NAPS2.ImportExport.Pdf
         public FPDFBitmap_Destroy_delegate FPDFBitmap_Destroy => Load<FPDFBitmap_Destroy_delegate>();
         public FPDF_LoadDocument_delegate FPDF_LoadDocument => Load<FPDF_LoadDocument_delegate>();
         public FPDF_LoadMemDocument_delegate FPDF_LoadMemDocument => Load<FPDF_LoadMemDocument_delegate>();
+        public FPDF_CloseDocument_delegate FPDF_CloseDocument => Load<FPDF_CloseDocument_delegate>();
         public FPDF_GetPageCount_delegate FPDF_GetPageCount => Load<FPDF_GetPageCount_delegate>();
         public FPDF_LoadPage_delegate FPDF_LoadPage => Load<FPDF_LoadPage_delegate>();
+        public FPDF_ClosePage_delegate FPDF_ClosePage => Load<FPDF_ClosePage_delegate>();
         public FPDF_GetPageWidth_delegate FPDF_GetPageWidth => Load<FPDF_GetPageWidth_delegate>();
         public FPDF_GetPageHeight_delegate FPDF_GetPageHeight => Load<FPDF_GetPageHeight_delegate>();
         public FPDF_RenderPageBitmap_delegate FPDF_RenderPageBitmap => Load<FPDF_RenderPageBitmap_delegate>();
