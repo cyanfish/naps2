@@ -202,8 +202,8 @@
     <Compile Include="Images\Storage\PdfStorage.cs" />
     <Compile Include="ImportExport\Email\Mapi\IMapiWrapper.cs" />
     <Compile Include="ImportExport\Email\Mapi\MapiWrapper.cs" />
+    <Compile Include="ImportExport\Pdf\PdfiumNativeLibrary.cs" />
     <Compile Include="ImportExport\Pdf\PdfiumPdfRenderer.cs" />
-    <Compile Include="ImportExport\Pdf\PdfiumNativeMethods.cs" />
     <Compile Include="Logging\EventParams.cs" />
     <Compile Include="Logging\EventType.cs" />
     <Compile Include="Logging\IEventLogger.cs" />
@@ -306,6 +306,7 @@
     <Compile Include="Platform\IRuntimeCompat.cs" />
     <Compile Include="Platform\MonoRuntimeCompat.cs" />
     <Compile Include="Util\ExpFallback.cs" />
+    <Compile Include="Util\NativeLibrary.cs" />
     <Compile Include="WinForms\ImageClipboard.cs" />
     <Compile Include="Worker\GrpcHelper.cs" />
     <Compile Include="Util\IInvoker.cs" />

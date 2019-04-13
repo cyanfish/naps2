@@ -181,6 +181,16 @@
       <Link>lib\win32\pdfium.dll</Link>
       <TargetPath>_win32\pdfium.dll</TargetPath>
     </ContentWithTargetPath>
+    <ContentWithTargetPath Include="..\NAPS2.Setup\lib\linux\libpdfium.so">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Link>lib\linux\libpdfium.so</Link>
+      <TargetPath>_linux\libpdfium.so</TargetPath>
+    </ContentWithTargetPath>
+    <ContentWithTargetPath Include="..\NAPS2.Setup\lib\osx\libpdfium.dylib">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Link>lib\osx\libpdfium.dylib</Link>
+      <TargetPath>_osx\libpdfium.dylib</TargetPath>
+    </ContentWithTargetPath>
     <Content Include="scanner-app.ico" />
   </ItemGroup>
   <ItemGroup>
