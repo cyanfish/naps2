@@ -36,8 +36,8 @@ namespace NAPS2.Images.Storage
             // Then we can have a PDF->Image converter that returns null if it's not a pdf file.
             if (IsPdfFile(input))
             {
-                var renderer = new GhostscriptPdfRenderer(null);
-                return new GdiImage(renderer.Render(input.FullPath).Single());
+                var renderer = new PdfiumPdfRenderer();
+                return (GdiImage)renderer.Render(input.FullPath).Single();
             }
             else
             {

@@ -6,6 +6,7 @@ using System.Linq;
 using Ghostscript.NET.Rasterizer;
 using NAPS2.Config.Experimental;
 using NAPS2.Dependencies;
+using NAPS2.Images.Storage;
 using NAPS2.Lang.Resources;
 using NAPS2.Scan;
 using NAPS2.Util;
@@ -24,7 +25,7 @@ namespace NAPS2.ImportExport.Pdf
             this.configProvider = configProvider;
         }
 
-        public IEnumerable<Bitmap> Render(string path)
+        public IEnumerable<IImage> Render(string path)
         {
             // TODO
             // ThrowIfCantRender();
@@ -53,7 +54,7 @@ namespace NAPS2.ImportExport.Pdf
                 {
                     var bitmap = (Bitmap)rasterizer.GetPage(dpi, dpi, pageNumber);
                     bitmap.SafeSetResolution(dpi, dpi);
-                    yield return bitmap;
+                    yield return new GdiImage(bitmap);
                 }
             }
         }
