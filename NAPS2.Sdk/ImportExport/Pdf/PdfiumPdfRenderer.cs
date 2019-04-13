@@ -24,8 +24,8 @@ namespace NAPS2.ImportExport.Pdf
             for (int pageIndex = 0; pageIndex < pageCount; pageIndex++)
             {
                 var page = PdfiumNativeMethods.FPDF_LoadPage(doc, pageIndex);
-                var widthInInches = PdfiumNativeMethods.FPDF_GetPageWidth(page) * 72;
-                var heightInInches = PdfiumNativeMethods.FPDF_GetPageHeight(page) * 72;
+                var widthInInches = PdfiumNativeMethods.FPDF_GetPageWidth(page) / 72;
+                var heightInInches = PdfiumNativeMethods.FPDF_GetPageHeight(page) / 72;
 
                 // Cap the resolution to 10k pixels in each dimension
                 dpi = Math.Min(dpi, (float)(10000 / heightInInches));
