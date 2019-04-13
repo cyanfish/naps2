@@ -48,9 +48,16 @@ namespace NAPS2.ImportExport.Pdf
                         try
                         {
                             var pdfiumBitmap = NativeLib.FPDFBitmap_CreateEx(widthInPx, heightInPx, PdfiumNativeLibrary.FPDFBitmap_BGR, scan0, stride);
-                            NativeLib.FPDFBitmap_FillRect(pdfiumBitmap, 0, 0, widthInPx, heightInPx, COLOR_WHITE);
-                            NativeLib.FPDF_RenderPageBitmap(pdfiumBitmap, page, 0, 0, widthInPx, heightInPx, 0, RENDER_FLAGS);
-                            yield return bitmap;
+                            try
+                            {
+                                NativeLib.FPDFBitmap_FillRect(pdfiumBitmap, 0, 0, widthInPx, heightInPx, COLOR_WHITE);
+                                NativeLib.FPDF_RenderPageBitmap(pdfiumBitmap, page, 0, 0, widthInPx, heightInPx, 0, RENDER_FLAGS);
+                                yield return bitmap;
+                            }
+                            finally
+                            {
+                                NativeLib.FPDFBitmap_Destroy(pdfiumBitmap);
+                            }
                         }
                         finally
                         {
