@@ -35,15 +35,15 @@ namespace NAPS2.WinForms
             labelCopyright.Text = labelCopyright.Text.Replace("\\n", "\n");
             // Grow the form to fit the copyright text if necessary
             Width = Math.Max(Width, labelCopyright.Right + 25);
-
-            if (ConfigProvider.Get(c => c.HiddenButtons).HasFlag(ToolbarButtons.Donate))
-            {
-                btnDonate.Visible = false;
-            }
         }
 
         protected override void OnLoad(object sender, EventArgs eventArgs)
         {
+            if (ConfigProvider.Get(c => c.HiddenButtons).HasFlag(ToolbarButtons.Donate))
+            {
+                btnDonate.Visible = false;
+            }
+
             new LayoutManager(this)
                 .Bind(logoPictureBox)
                     .TopTo(() => Height / 2)
