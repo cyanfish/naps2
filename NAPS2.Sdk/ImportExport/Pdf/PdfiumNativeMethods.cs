@@ -31,6 +31,9 @@ namespace NAPS2.ImportExport.Pdf
         }
 
         [DllImport("pdfium.dll")]
+        public static extern IntPtr FPDF_InitLibrary();
+
+        [DllImport("pdfium.dll")]
         public static extern IntPtr FPDFBitmap_Create(int width, int height, int alpha);
 
         [DllImport("pdfium.dll")]
@@ -40,10 +43,10 @@ namespace NAPS2.ImportExport.Pdf
         public static extern void FPDFBitmap_Destroy(IntPtr bitmap);
 
         [DllImport("pdfium.dll")]
-        public static extern IntPtr FPDF_LoadDocument(string filePath, string password);
+        public static extern IntPtr FPDF_LoadDocument([MarshalAs(UnmanagedType.LPStr)] string filePath, [MarshalAs(UnmanagedType.LPStr)] string password);
 
         [DllImport("pdfium.dll")]
-        public static extern IntPtr FPDF_LoadMemDocument(IntPtr buffer, int size, string password);
+        public static extern IntPtr FPDF_LoadMemDocument(IntPtr buffer, int size, [MarshalAs(UnmanagedType.LPStr)] string password);
 
         [DllImport("pdfium.dll")]
         public static extern int FPDF_GetPageCount(IntPtr document);

@@ -171,6 +171,16 @@
       <Link>lib\win32\NAPS2.WIA.dll</Link>
       <TargetPath>_win32\NAPS2.WIA.dll</TargetPath>
     </ContentWithTargetPath>
+    <ContentWithTargetPath Include="..\NAPS2.Setup\lib\win64\pdfium.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Link>lib\win64\pdfium.dll</Link>
+      <TargetPath>_win64\pdfium.dll</TargetPath>
+    </ContentWithTargetPath>
+    <ContentWithTargetPath Include="..\NAPS2.Setup\lib\win32\pdfium.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Link>lib\win32\pdfium.dll</Link>
+      <TargetPath>_win32\pdfium.dll</TargetPath>
+    </ContentWithTargetPath>
     <Content Include="scanner-app.ico" />
   </ItemGroup>
   <ItemGroup>

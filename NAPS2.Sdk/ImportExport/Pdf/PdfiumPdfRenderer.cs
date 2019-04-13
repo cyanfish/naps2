@@ -11,10 +11,15 @@ namespace NAPS2.ImportExport.Pdf
     {
         private const int RENDER_FLAGS = PdfiumNativeMethods.FPDF_PRINTING | PdfiumNativeMethods.FPDF_REVERSE_BYTE_ORDER;
 
+        static PdfiumPdfRenderer()
+        {
+            PdfiumNativeMethods.FPDF_InitLibrary();
+        }
+
         public IEnumerable<IImage> Render(string path)
         {
             // TODO: Maybe allow this to be configured
-            int dpi = ScanDpi.Dpi300.ToIntDpi();
+            float dpi = ScanDpi.Dpi300.ToIntDpi();
 
             var doc = PdfiumNativeMethods.FPDF_LoadDocument(path, null);
             var pageCount = PdfiumNativeMethods.FPDF_GetPageCount(doc);
@@ -23,13 +28,14 @@ namespace NAPS2.ImportExport.Pdf
             {
                 var page = PdfiumNativeMethods.FPDF_LoadPage(doc, pageIndex);
                 var widthInInches = PdfiumNativeMethods.FPDF_GetPageWidth(page) * 72;
-                var heightInInches = PdfiumNativeMethods.FPDF_GetPageWidth(page) * 72;
-                int widthInPx = (int)Math.Round(widthInInches * dpi);
-                int heightInPx = (int)Math.Round(heightInInches * dpi);
+                var heightInInches = PdfiumNativeMethods.FPDF_GetPageHeight(page) * 72;
 
                 // Cap the resolution to 10k pixels in each dimension
-                dpi = Math.Min(dpi, (int)(10000 / heightInInches));
-                dpi = Math.Min(dpi, (int)(10000 / widthInInches));
+                dpi = Math.Min(dpi, (float)(10000 / heightInInches));
+                dpi = Math.Min(dpi, (float)(10000 / widthInInches));
+
+                int widthInPx = (int)Math.Round(widthInInches * dpi);
+                int heightInPx = (int)Math.Round(heightInInches * dpi);
 
                 var bitmap = StorageManager.ImageFactory.FromDimensions(widthInPx, heightInPx, StoragePixelFormat.RGB24);
                 bitmap.SetResolution(dpi, dpi);
