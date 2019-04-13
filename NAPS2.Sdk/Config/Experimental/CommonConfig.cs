@@ -16,7 +16,7 @@ namespace NAPS2.Config.Experimental
     {
         public const int CURRENT_VERSION = 3;
 
-        public static CommonConfig Create() => new CommonConfig { Version = CURRENT_VERSION };
+        public static CommonConfig Create() => new CommonConfig();
 
         public CommonConfig()
         {
@@ -29,7 +29,7 @@ namespace NAPS2.Config.Experimental
         }
 
         [Common]
-        public int? Version { get; set; }
+        public int? Version { get; set; } = CURRENT_VERSION;
 
         [Common]
         public string Culture { get; set; }

@@ -73,16 +73,23 @@ namespace NAPS2.Config.Experimental
             // TODO: Retry, maybe async?
             try
             {
+                TConfig copy;
                 using (var stream = new FileStream(filePath, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.None))
                 {
+                    // Reload cache so we don't overwrite concurrent changes
                     cache = serializer.Deserialize(stream);
-                    var copy = factory();
+                    // Merge the cache and our changes into a local copy (so in case of exceptions nothing is changed)
+                    copy = factory();
                     ConfigCopier.Copy(cache, copy);
+                    ConfigCopier.Copy(changes, copy);
+                    // Try and write the changes
                     stream.Seek(0, SeekOrigin.Begin);
                     serializer.Serialize(stream, copy);
-                    cache = copy;
-                    changes = factory();
+                    stream.SetLength(stream.Position);
                 }
+                // No exceptions, so we can commit the updated configuration and reset our changes
+                cache = copy;
+                changes = factory();
             }
             catch (IOException ex)
             {
