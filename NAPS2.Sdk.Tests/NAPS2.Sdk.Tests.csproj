@@ -256,6 +256,12 @@
       <TargetPath>_osx\libpdfium.dylib</TargetPath>
     </ContentWithTargetPath>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\word_p1.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\word_p2.jpg" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
