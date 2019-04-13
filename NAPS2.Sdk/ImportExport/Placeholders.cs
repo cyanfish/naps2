@@ -6,6 +6,10 @@ using System.Text.RegularExpressions;
 
 namespace NAPS2.ImportExport
 {
+    /// <summary>
+    /// Class for handling substitution of special values in file paths. For example, "$(YYYY)" can be substituted with the current year.
+    /// Use Placeholders.All for recommended substitutions. Alternatively, you can use Placeholders.Env or Placeholders.None if you prefer.
+    /// </summary>
     public abstract class Placeholders
     {
         public const string YEAR_4_DIGITS = "$(YYYY)";
@@ -20,12 +24,30 @@ namespace NAPS2.ImportExport
         public const string NUMBER_2_DIGITS = "$(nn)";
         public const string NUMBER_1_DIGIT = "$(n)";
 
+        /// <summary>
+        /// Substitutes all the standard placeholders. For example, "$(YYYY)-$(MM)-$(DD) $(hh):$(mm):$(ss)" is substituted with the current date and time. Substitutes environment variables. Handles auto-numbering for multiple files,
+        /// using the numeric placeholders ("$(n)", "$(nn)", "$(nnn)", or "$(nnnn)") if specified; otherwise, the number is appended to the file name.
+        /// </summary>
         public static DefaultPlaceholders All => new DefaultPlaceholders();
 
+        /// <summary>
+        /// Substitutes environment variables in file names. Not recommended if you may be saving multiple files.
+        /// </summary>
         public static EnvironmentPlaceholders Env => new EnvironmentPlaceholders();
 
+        /// <summary>
+        /// Does not make any changes to the file name. Not recommended if you may be saving multiple files.
+        /// </summary>
         public static StubPlaceholders None => new StubPlaceholders();
 
+        /// <summary>
+        /// Performs substitutions on the given file path.
+        /// </summary>
+        /// <param name="filePath">The file path to perform substitutions on.</param>
+        /// <param name="incrementIfExists">Whether to use an auto-incrementing file number to make the file name unique.</param>
+        /// <param name="numberSkip">The file number will be at least one bigger than this value.</param>
+        /// <param name="autoNumberDigits">The minimum number of digits in the file number. Only has an effect if the path does not contain a numeric placeholder like $(n) or $(nnn).</param>
+        /// <returns>The file path with substitutions.</returns>
         public abstract string Substitute(string filePath, bool incrementIfExists = true, int numberSkip = 0, int autoNumberDigits = 0);
 
         public class StubPlaceholders : Placeholders
@@ -60,6 +82,11 @@ namespace NAPS2.ImportExport
                 this.dateTimeOverride = dateTimeOverride;
             }
 
+            /// <summary>
+            /// Creates a copy of the DefaultPlaceholders object that will use the specified DateTime for date and time substitutions.
+            /// </summary>
+            /// <param name="dateTime">The date and time to use.</param>
+            /// <returns>The new DefaultPlaceholders object.</returns>
             public DefaultPlaceholders WithDate(DateTime dateTime) => new DefaultPlaceholders(dateTime);
 
             public override string Substitute(string filePath, bool incrementIfExists = true, int numberSkip = 0, int autoNumberDigits = 0)
