@@ -26,15 +26,13 @@ namespace NAPS2.ImportExport.Pdf
         private readonly ErrorOutput errorOutput;
         private readonly IPdfPasswordProvider pdfPasswordProvider;
         private readonly ImageRenderer imageRenderer;
-        private readonly IPdfRenderer pdfRenderer;
         private readonly IComponentInstallPrompt componentInstallPrompt;
 
-        public PdfSharpImporter(ErrorOutput errorOutput, IPdfPasswordProvider pdfPasswordProvider, ImageRenderer imageRenderer, IPdfRenderer pdfRenderer, IComponentInstallPrompt componentInstallPrompt)
+        public PdfSharpImporter(ErrorOutput errorOutput, IPdfPasswordProvider pdfPasswordProvider, ImageRenderer imageRenderer, IComponentInstallPrompt componentInstallPrompt)
         {
             this.errorOutput = errorOutput;
             this.pdfPasswordProvider = pdfPasswordProvider;
             this.imageRenderer = imageRenderer;
-            this.pdfRenderer = pdfRenderer;
             this.componentInstallPrompt = componentInstallPrompt;
         }
 
@@ -78,8 +76,6 @@ namespace NAPS2.ImportExport.Pdf
                         });
                     if (document.Info.Creator != MiscResources.NAPS2 && document.Info.Author != MiscResources.NAPS2)
                     {
-                        pdfRenderer.PromptToInstallIfNeeded(componentInstallPrompt);
-                        pdfRenderer.ThrowIfCantRender();
                         foreach (var page in pages)
                         {
                             sink.PutImage(await ExportRawPdfPage(page, importParams));

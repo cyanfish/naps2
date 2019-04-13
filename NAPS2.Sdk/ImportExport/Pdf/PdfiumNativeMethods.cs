@@ -8,7 +8,7 @@ using NAPS2.Util;
 
 namespace NAPS2.ImportExport.Pdf
 {
-    public class PdfiumNativeMethods
+    internal class PdfiumNativeMethods
     {
         public const int FPDFBitmap_BGR = 2;
         public const int FPDFBitmap_BGRA = 4;

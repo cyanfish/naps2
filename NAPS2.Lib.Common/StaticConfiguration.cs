@@ -41,7 +41,6 @@ namespace NAPS2
                 ? Paths.Components
                 : Environment.ExpandEnvironmentVariables(customPath);
 
-            GhostscriptManager.BasePath = basePath;
             OcrEngineManager.Default = new OcrEngineManager(basePath);
 
             var recoveryFolderPath = Path.Combine(Paths.Recovery, Path.GetRandomFileName());

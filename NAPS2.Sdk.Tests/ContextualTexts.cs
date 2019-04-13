@@ -32,7 +32,6 @@ namespace NAPS2.Sdk.Tests
             ProfileManager.Current = new StubProfileManager();
 
             var componentsPath = Path.Combine(FolderPath, "components");
-            GhostscriptManager.BasePath = componentsPath;
             var ocrEngineManager = new OcrEngineManager(componentsPath);
             OcrEngineManager.Default = ocrEngineManager;
 

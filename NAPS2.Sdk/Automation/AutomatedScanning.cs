@@ -179,10 +179,6 @@ namespace NAPS2.Automation
                 availableComponents.Add(ocrEngine.Component);
                 availableComponents.AddRange(ocrEngine.LanguageComponents);
             }
-            if (GhostscriptManager.IsSupported)
-            {
-                availableComponents.Add(GhostscriptManager.GhostscriptComponent);
-            }
 
             var componentDict = availableComponents.ToDictionary(x => x.Id.ToLowerInvariant());
             var installId = options.Install.ToLowerInvariant();

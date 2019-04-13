@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using NAPS2.Dependencies;
 using NAPS2.Images.Storage;
 using NAPS2.Scan;
 
 namespace NAPS2.ImportExport.Pdf
 {
-    public class PdfiumPdfRenderer : IPdfRenderer
+    public static class PdfiumPdfRenderer
     {
         private const int RENDER_FLAGS = PdfiumNativeMethods.FPDF_PRINTING;
         private const uint COLOR_WHITE = uint.MaxValue;
@@ -17,11 +16,8 @@ namespace NAPS2.ImportExport.Pdf
             PdfiumNativeMethods.FPDF_InitLibrary();
         }
 
-        public IEnumerable<IImage> Render(string path)
+        public static IEnumerable<IImage> Render(string path, float dpi)
         {
-            // TODO: Maybe allow this to be configured
-            float dpi = ScanDpi.Dpi300.ToIntDpi();
-
             var doc = PdfiumNativeMethods.FPDF_LoadDocument(path, null);
             var pageCount = PdfiumNativeMethods.FPDF_GetPageCount(doc);
 
@@ -53,14 +49,6 @@ namespace NAPS2.ImportExport.Pdf
                     bitmap.Unlock(bitmapData);
                 }
             }
-        }
-
-        public void PromptToInstallIfNeeded(IComponentInstallPrompt componentInstallPrompt)
-        {
-        }
-
-        public void ThrowIfCantRender()
-        {
         }
     }
 }

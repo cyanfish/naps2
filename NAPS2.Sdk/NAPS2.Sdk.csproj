@@ -85,9 +85,6 @@
     <Reference Include="CommandLine, Version=1.9.71.2, Culture=neutral, PublicKeyToken=de6f01bd326f8c32, processorArchitecture=MSIL">
       <HintPath>..\packages\CommandLineParser.1.9.71\lib\net45\CommandLine.dll</HintPath>
     </Reference>
-    <Reference Include="Ghostscript.NET, Version=1.2.1.0, Culture=neutral, PublicKeyToken=f85051de34525b59, processorArchitecture=MSIL">
-      <HintPath>..\packages\Ghostscript.NET.1.2.1\lib\net40\Ghostscript.NET.dll</HintPath>
-    </Reference>
     <Reference Include="Google.Protobuf, Version=3.7.0.0, Culture=neutral, PublicKeyToken=a7d26565bac4d604, processorArchitecture=MSIL">
       <HintPath>..\packages\Google.Protobuf.3.7.0\lib\net45\Google.Protobuf.dll</HintPath>
     </Reference>
@@ -205,7 +202,6 @@
     <Compile Include="Images\Storage\PdfStorage.cs" />
     <Compile Include="ImportExport\Email\Mapi\IMapiWrapper.cs" />
     <Compile Include="ImportExport\Email\Mapi\MapiWrapper.cs" />
-    <Compile Include="ImportExport\Pdf\GhostscriptManager.cs" />
     <Compile Include="ImportExport\Pdf\PdfiumPdfRenderer.cs" />
     <Compile Include="ImportExport\Pdf\PdfiumNativeMethods.cs" />
     <Compile Include="Logging\EventParams.cs" />
@@ -390,9 +386,7 @@
     <Compile Include="ImportExport\ImportOperation.cs" />
     <Compile Include="ImportExport\ImageRenderException.cs" />
     <Compile Include="ImportExport\ImportParams.cs" />
-    <Compile Include="ImportExport\Pdf\GhostscriptPdfRenderer.cs" />
     <Compile Include="Dependencies\IComponentInstallPrompt.cs" />
-    <Compile Include="ImportExport\Pdf\IPdfRenderer.cs" />
     <Compile Include="ImportExport\Pdf\PdfAHelper.cs" />
     <Compile Include="ImportExport\Pdf\PdfCompat.cs" />
     <Compile Include="Images\DeskewOperation.cs" />
