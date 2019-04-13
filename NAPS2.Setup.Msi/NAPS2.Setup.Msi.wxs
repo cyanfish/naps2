@@ -24,7 +24,6 @@
       <ComponentRef Id="Deps" />
       <ComponentRef Id="DepsWin32" />
       <ComponentRef Id="DepsWin64" />
-      <ComponentRef Id="twaindsm" />
       <ComponentRef Id="ApplicationShortcut" />
       <ComponentRef Id="RegistryEntries" />
       <ComponentGroupRef Id="LangComponents" />
@@ -85,23 +84,16 @@
     <DirectoryRef Id="LIBFOLDER">
       <Component Id="Deps" Guid="04AC2B17-BDFA-4AA0-B8CA-0AE208D9193A">
         <!-- Dependencies -->
-        <File Source="..\NAPS2.App.WinForms\bin\InstallerMSI\NAPS2.Core.dll" />
-        <File Source="..\NAPS2.App.WinForms\bin\InstallerMSI\NAPS2.DI.dll" />
+        <File Source="..\NAPS2.App.WinForms\bin\InstallerMSI\NAPS2.Lib.dll" />
+        <File Source="..\NAPS2.App.WinForms\bin\InstallerMSI\NAPS2.Sdk.dll" />
         <File Source="..\NAPS2.App.WinForms\bin\InstallerMSI\CommandLine.dll" />
-        <File Source="..\NAPS2.App.WinForms\bin\InstallerMSI\Ghostscript.NET.dll" />
         <File Source="..\NAPS2.App.WinForms\bin\InstallerMSI\ICSharpCode.SharpZipLib.dll" />
-        <File Source="..\NAPS2.App.WinForms\bin\InstallerMSI\Microsoft.Threading.Tasks.dll" />
-        <File Source="..\NAPS2.App.WinForms\bin\InstallerMSI\Microsoft.Threading.Tasks.Extensions.Desktop.dll" />
-        <File Source="..\NAPS2.App.WinForms\bin\InstallerMSI\Microsoft.Threading.Tasks.Extensions.dll" />
         <File Source="..\NAPS2.App.WinForms\bin\InstallerMSI\MimeKit.dll" />
         <File Source="..\NAPS2.App.WinForms\bin\InstallerMSI\Newtonsoft.Json.dll" />
         <File Source="..\NAPS2.App.WinForms\bin\InstallerMSI\Ninject.dll" />
         <File Source="..\NAPS2.App.WinForms\bin\InstallerMSI\NLog.dll" />
         <File Source="..\NAPS2.App.WinForms\bin\InstallerMSI\NTwain.dll" />
         <File Source="..\NAPS2.App.WinForms\bin\InstallerMSI\PdfSharp.dll" />
-        <File Source="..\NAPS2.App.WinForms\bin\InstallerMSI\System.IO.dll" />
-        <File Source="..\NAPS2.App.WinForms\bin\InstallerMSI\System.Runtime.dll" />
-        <File Source="..\NAPS2.App.WinForms\bin\InstallerMSI\System.Threading.Tasks.dll" />
         <File Source="..\NAPS2.App.WinForms\bin\InstallerMSI\System.ValueTuple.dll" />
         <File Source="..\NAPS2.App.WinForms\bin\InstallerMSI\zxing.dll" />
       </Component>
@@ -110,14 +102,16 @@
     <!-- Platform-specific dependencies -->
     <DirectoryRef Id="LIBWIN32FOLDER">
       <Component Id="DepsWin32" Guid="2BE3E5A4-7526-4074-90A1-5B4E830EA337">
-        <File Source="..\NAPS2.Setup\lib\win32\twaindsm.dll" Id="twaindsm_win32" />
         <File Source="..\NAPS2.Setup\lib\win32\NAPS2.WIA.dll" Id="naps2wia_win32" />
+        <File Source="..\NAPS2.Setup\lib\win32\pdfium.dll" Id="pdfium_win32" />
+        <File Source="..\NAPS2.Setup\lib\win32\twaindsm.dll" Id="twaindsm_win32" />
       </Component>
     </DirectoryRef>
     <DirectoryRef Id="LIBWIN64FOLDER">
       <Component Id="DepsWin64" Guid="9F734E22-7835-43B9-8B58-E10EF6484DD7">
-        <File Source="..\NAPS2.Setup\lib\win64\twaindsm.dll" Id="twaindsm_win64" />
         <File Source="..\NAPS2.Setup\lib\win64\NAPS2.WIA.dll" Id="naps2wia_win64" />
+        <File Source="..\NAPS2.Setup\lib\win64\twaindsm.dll" Id="twaindsm_win64" />
+        <File Source="..\NAPS2.Setup\lib\win64\pdfium.dll" Id="pdfium_win64" />
       </Component>
     </DirectoryRef>
 
