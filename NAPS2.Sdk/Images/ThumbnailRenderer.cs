@@ -64,7 +64,7 @@ namespace NAPS2.Images
             this.imageRenderer = imageRenderer;
         }
 
-        public async Task<IImage> Render(ScannedImage image, int outputSize = 0)
+        public async Task<IImage> Render(ScannedImage image, int outputSize)
         {
             using (var snapshot = image.Preserve())
             {
@@ -72,14 +72,8 @@ namespace NAPS2.Images
             }
         }
 
-        public async Task<IImage> Render(ScannedImage.Snapshot snapshot, int outputSize = 0)
+        public async Task<IImage> Render(ScannedImage.Snapshot snapshot, int outputSize)
         {
-            if (outputSize == 0)
-            {
-                // TODO: Set this from the caller
-                // outputSize = ConfigScopes.User.Current.ThumbnailSize;
-                outputSize = 256;
-            }
             using (var bitmap = await imageRenderer.Render(snapshot, snapshot.Metadata.TransformList.Count == 0 ? 0 : outputSize * OVERSAMPLE))
             {
                 return Transform.Perform(bitmap, new ThumbnailTransform(outputSize));

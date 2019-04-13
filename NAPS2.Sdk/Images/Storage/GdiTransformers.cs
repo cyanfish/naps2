@@ -317,17 +317,17 @@ namespace NAPS2.Images.Storage
         [Transformer]
         public GdiImage PerformTransform(GdiImage image, ScaleTransform transform)
         {
-            double realWidth = image.Width / transform.ScaleFactor;
-            double realHeight = image.Height / transform.ScaleFactor;
+            int realWidth = (int)Math.Round(image.Width / transform.ScaleFactor);
+            int realHeight = (int)Math.Round(image.Height / transform.ScaleFactor);
 
             double horizontalRes = image.HorizontalResolution / transform.ScaleFactor;
             double verticalRes = image.VerticalResolution / transform.ScaleFactor;
 
-            var result = new Bitmap((int)realWidth, (int)realHeight, PixelFormat.Format24bppRgb);
+            var result = new Bitmap(realWidth, realHeight, PixelFormat.Format24bppRgb);
             using (Graphics g = Graphics.FromImage(result))
             {
                 g.InterpolationMode = InterpolationMode.HighQualityBicubic;
-                g.DrawImage(image.Bitmap, 0, 0, (int)realWidth, (int)realHeight);
+                g.DrawImage(image.Bitmap, 0, 0, realWidth, realHeight);
                 result.SafeSetResolution((float)horizontalRes, (float)verticalRes);
                 return new GdiImage(result);
             }
@@ -391,10 +391,9 @@ namespace NAPS2.Images.Storage
                 var destRect = new RectangleF(left, top, width, height);
                 var srcRect = new RectangleF(0, 0, image.Width, image.Height);
                 g.DrawImage(image.Bitmap, destRect, srcRect, GraphicsUnit.Pixel);
-                // Draw a border around the orignal bitmap's content, inside the padding
+                // Draw a border around the original bitmap's content, inside the padding
                 g.DrawRectangle(Pens.Black, left, top, width - 1, height - 1);
             }
-
             return new GdiImage(result);
         }
 

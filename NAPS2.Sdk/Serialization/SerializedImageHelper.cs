@@ -79,7 +79,9 @@ namespace NAPS2.Serialization
                 var memoryStream = new MemoryStream(serializedImage.FileContent.ToByteArray());
                 storage = new MemoryStreamStorage(memoryStream);
             }
-            var scannedImage = new ScannedImage(storage, serializedImage.MetadataXml, new StorageConvertParams());
+            var scannedImage = serializedImage.TransferOwnership
+                ? new ScannedImage(storage, serializedImage.MetadataXml, new StorageConvertParams())
+                : new ScannedImage(storage, CreateStubMetadata(serializedImage.MetadataXml), new StorageConvertParams());
             var thumbnail = serializedImage.Thumbnail.ToByteArray();
             if (thumbnail.Length > 0)
             {
@@ -87,6 +89,13 @@ namespace NAPS2.Serialization
                 scannedImage.SetThumbnail(StorageManager.ConvertToImage(thumbnailStorage, new StorageConvertParams()));
             }
             return scannedImage;
+        }
+
+        private static IImageMetadata CreateStubMetadata(string metadataXml)
+        {
+            var metadata = new StubImageMetadata();
+            metadata.Deserialize(metadataXml);
+            return metadata;
         }
 
         public class SerializeOptions

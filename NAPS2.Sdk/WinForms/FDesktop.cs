@@ -1645,6 +1645,7 @@ namespace NAPS2.WinForms
             int thumbnailSize = ConfigProvider.Get(c => c.ThumbnailSize);
             thumbnailSize = (int)ThumbnailRenderer.StepNumberToSize(ThumbnailRenderer.SizeToStepNumber(thumbnailSize) + step);
             thumbnailSize = Math.Max(Math.Min(thumbnailSize, ThumbnailRenderer.MAX_SIZE), ThumbnailRenderer.MIN_SIZE);
+            ConfigScopes.User.Set(c => c.ThumbnailSize = thumbnailSize);
             ResizeThumbnails(thumbnailSize);
         }
 
@@ -1661,8 +1662,6 @@ namespace NAPS2.WinForms
                 return;
             }
 
-            // Save the new size to config
-            ConfigScopes.User.Set(c => c.ThumbnailSize = thumbnailSize);
             // Adjust the visible thumbnail display with the new size
             lock (thumbnailList1)
             {
@@ -1716,7 +1715,7 @@ namespace NAPS2.WinForms
                         {
                             var thumb = worker != null
                                 ? StorageManager.ImageFactory.Decode(new MemoryStream(worker.Service.RenderThumbnail(snapshot, thumbnailList1.ThumbnailSize.Height)), ".jpg")
-                                : imageRenderer.Render(snapshot, thumbnailList1.ThumbnailSize.Height).Result;
+                                : thumbnailRenderer.Render(snapshot, thumbnailList1.ThumbnailSize.Height).Result;
 
                             if (!ThumbnailStillNeedsRendering(next))
                             {
