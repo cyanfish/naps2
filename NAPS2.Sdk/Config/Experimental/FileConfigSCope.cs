@@ -77,7 +77,15 @@ namespace NAPS2.Config.Experimental
                 using (var stream = new FileStream(filePath, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.None))
                 {
                     // Reload cache so we don't overwrite concurrent changes
-                    cache = serializer.Deserialize(stream);
+                    try
+                    {
+                        cache = serializer.Deserialize(stream);
+                    }
+                    catch (Exception)
+                    {
+                        // Failed to load. Since we're using FileShare.None, it can't be concurrent modification.
+                        // Either the file is newly created, or it was corrupted. In either case we can ignore and overwrite.
+                    }
                     // Merge the cache and our changes into a local copy (so in case of exceptions nothing is changed)
                     copy = factory();
                     ConfigCopier.Copy(cache, copy);

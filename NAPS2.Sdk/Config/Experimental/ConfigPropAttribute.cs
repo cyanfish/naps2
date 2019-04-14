@@ -10,6 +10,7 @@ namespace NAPS2.Config.Experimental
         protected ConfigPropAttribute(int line)
         {
             Order = line;
+            IsNullable = true;
         }
     }
 }

@@ -30,7 +30,11 @@ namespace NAPS2.Config.Experimental
                 }
                 else
                 {
-                    prop.SetValue(dst, prop.GetValue(src));
+                    var srcValue = prop.GetValue(src);
+                    if (srcValue != null)
+                    {
+                        prop.SetValue(dst, srcValue);
+                    }
                 }
             }
         }
