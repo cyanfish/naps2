@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
-using ICSharpCode.SharpZipLib.Zip;
 using NAPS2.Util;
 
 namespace NAPS2.Dependencies
@@ -54,26 +53,9 @@ namespace NAPS2.Dependencies
                 }
 
                 var tempDir = Path.GetDirectoryName(tempFilePath) ?? throw new ArgumentNullException();
-                Extract(tempFilePath, tempDir);
+                ZipFile.ExtractToDirectory(tempFilePath, tempDir);
                 File.Delete(tempFilePath);
                 return tempDir;
-            }
-
-            private static void Extract(string zipFilePath, string outDir)
-            {
-                using (var zip = new ZipFile(zipFilePath))
-                {
-                    foreach (ZipEntry entry in zip)
-                    {
-                        if (!entry.IsFile) continue;
-                        var destPath = Path.Combine(outDir, entry.Name);
-                        PathHelper.EnsureParentDirExists(destPath);
-                        using (FileStream outFile = File.Create(destPath))
-                        {
-                            zip.GetInputStream(entry).CopyTo(outFile);
-                        }
-                    }
-                }
             }
         }
     }

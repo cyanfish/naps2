@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
+using System.IO.Compression;
 using System.Linq;
 using System.Net;
 using System.Reflection;
@@ -10,7 +11,6 @@ using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading;
 using System.Windows.Forms;
-using ICSharpCode.SharpZipLib.Zip;
 using NAPS2.Lang.Resources;
 using NAPS2.Logging;
 using NAPS2.Operation;
@@ -139,19 +139,7 @@ namespace NAPS2.Update
 
         private void InstallZip()
         {
-            using (var zip = new ZipFile(tempPath))
-            {
-                foreach (ZipEntry entry in zip)
-                {
-                    if (!entry.IsFile) continue;
-                    var destPath = Path.Combine(tempFolder, entry.Name);
-                    PathHelper.EnsureParentDirExists(destPath);
-                    using (FileStream outFile = File.Create(destPath))
-                    {
-                        zip.GetInputStream(entry).CopyTo(outFile);
-                    }
-                }
-            }
+            ZipFile.ExtractToDirectory(tempPath, tempFolder);
             string assemblyFolder = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) ?? "";
             string portableLauncherPath = Path.Combine(assemblyFolder, "..", "..", "NAPS2.Portable.exe");
             AtomicReplaceFile(Path.Combine(tempFolder, "NAPS2.Portable.exe"), portableLauncherPath);
