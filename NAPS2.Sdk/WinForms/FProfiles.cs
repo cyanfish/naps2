@@ -225,7 +225,8 @@ namespace NAPS2.WinForms
             new ScanParams
             {
                 NoAutoSave = ConfigProvider.Get(c => c.DisableAutoSave),
-                DoOcr = ConfigProvider.Get(c => c.EnableOcr) && ConfigProvider.Get(c => c.OcrAfterScanning)
+                DoOcr = ConfigProvider.Get(c => c.EnableOcr) && ConfigProvider.Get(c => c.OcrAfterScanning),
+                ThumbnailSize = ConfigProvider.Get(c => c.ThumbnailSize)
             };
 
         private async void PerformScan()

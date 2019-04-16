@@ -189,6 +189,7 @@
     <Compile Include="Dependencies\MultiFileExternalComponent.cs" />
     <Compile Include="Dependencies\IExternalComponent.cs" />
     <Compile Include="Images\BitmapRenderer.cs" />
+    <Compile Include="Images\DeskewParams.cs" />
     <Compile Include="Images\ImageRenderer.cs" />
     <Compile Include="Images\IScannedImageRenderer.cs" />
     <Compile Include="Images\MemoryStreamRenderer.cs" />
@@ -198,6 +199,7 @@
     <Compile Include="Images\Storage\PdfConverters.cs" />
     <Compile Include="Images\Storage\UnownedFileStorage.cs" />
     <Compile Include="Images\Storage\PdfStorage.cs" />
+    <Compile Include="ImportExport\DirectImportParams.cs" />
     <Compile Include="ImportExport\Email\Mapi\IMapiWrapper.cs" />
     <Compile Include="ImportExport\Email\Mapi\MapiWrapper.cs" />
     <Compile Include="ImportExport\Pdf\PdfiumNativeLibrary.cs" />
@@ -231,6 +233,7 @@
     <Compile Include="Config\SaveButtonDefaultAction.cs" />
     <Compile Include="Platform\DefaultRuntimeCompat.cs" />
     <Compile Include="Recovery\RecoveryIndexSerializer.cs" />
+    <Compile Include="Recovery\RecoveryParams.cs" />
     <Compile Include="Scan\Batch\BatchOutputType.cs" />
     <Compile Include="Scan\Batch\BatchScanType.cs" />
     <Compile Include="Scan\Batch\IBatchScanPerformer.cs" />

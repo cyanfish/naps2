@@ -23,7 +23,7 @@ namespace NAPS2.ImportExport
             AllowBackground = true;
         }
 
-        public bool Start(List<string> filesToImport, Action<ScannedImage> imageCallback)
+        public bool Start(List<string> filesToImport, Action<ScannedImage> imageCallback, ImportParams importParams)
         {
             bool oneFile = filesToImport.Count == 1;
             Status = new OperationStatus
@@ -41,7 +41,7 @@ namespace NAPS2.ImportExport
                         {
                             Status.StatusText = string.Format(MiscResources.ImportingFormat, Path.GetFileName(fileName));
                             InvokeStatusChanged();
-                            var imageSrc = scannedImageImporter.Import(fileName, new ImportParams(), oneFile ? OnProgress : new ProgressHandler((j, k) => { }), CancelToken);
+                            var imageSrc = scannedImageImporter.Import(fileName, importParams, oneFile ? OnProgress : new ProgressHandler((j, k) => { }), CancelToken);
                             await imageSrc.ForEach(imageCallback);
                         }
                         catch (Exception ex)

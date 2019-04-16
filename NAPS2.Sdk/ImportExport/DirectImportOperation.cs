@@ -25,7 +25,7 @@ namespace NAPS2.ImportExport
             AllowBackground = true;
         }
 
-        public bool Start(DirectImageTransfer data, bool copy, Action<ScannedImage> imageCallback)
+        public bool Start(DirectImageTransfer data, bool copy, Action<ScannedImage> imageCallback, DirectImportParams importParams)
         {
             ProgressTitle = copy ? MiscResources.CopyProgress : MiscResources.ImportProgress;
             Status = new OperationStatus
@@ -45,7 +45,10 @@ namespace NAPS2.ImportExport
                         serializedImage.MergeFrom(serializedImageBytes);
                         ScannedImage img = SerializedImageHelper.Deserialize(serializedImage, new SerializedImageHelper.DeserializeOptions());
                         // TODO: Don't bother, here, in recovery, etc.
-                        img.SetThumbnail(Transform.Perform(await imageRenderer.Render(img), new ThumbnailTransform()));
+                        if (importParams.ThumbnailSize.HasValue)
+                        {
+                            img.SetThumbnail(Transform.Perform(await imageRenderer.Render(img), new ThumbnailTransform(importParams.ThumbnailSize.Value)));
+                        }
                         imageCallback(img);
 
                         Status.CurrentProgress++;

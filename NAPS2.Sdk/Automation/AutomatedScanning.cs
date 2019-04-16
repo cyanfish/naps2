@@ -282,8 +282,7 @@ namespace NAPS2.Automation
                     var importParams = new ImportParams
                     {
                         Slice = Slice.Parse(filePath, out string actualPath),
-                        DetectPatchCodes = options.SplitPatchT,
-                        NoThumbnails = true
+                        DetectPatchCodes = options.SplitPatchT
                     };
                     var images = await scannedImageImporter.Import(actualPath, importParams, (j, k) => { }, CancellationToken.None).ToList();
                     scanList.Add(images);
@@ -594,7 +593,6 @@ namespace NAPS2.Automation
                 {
                     NoUI = !options.Progress,
                     NoAutoSave = !options.AutoSave || !autoSaveEnabled,
-                    NoThumbnails = true,
                     DetectPatchCodes = options.SplitPatchT,
                     DoOcr = ocrParams != null,
                     OcrParams = ocrParams

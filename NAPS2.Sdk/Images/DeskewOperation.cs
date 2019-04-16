@@ -25,7 +25,7 @@ namespace NAPS2.Images
             AllowBackground = true;
         }
 
-        public bool Start(ICollection<ScannedImage> images)
+        public bool Start(ICollection<ScannedImage> images, DeskewParams deskewParams)
         {
             ProgressTitle = MiscResources.AutoDeskewProgress;
             Status = new OperationStatus
@@ -57,11 +57,16 @@ namespace NAPS2.Images
                             return null;
                         }
                         bitmap = Transform.Perform(bitmap, transform);
-                        var thumbnail = Transform.Perform(bitmap, new ThumbnailTransform());
+                        var thumbnail = deskewParams.ThumbnailSize.HasValue
+                            ? Transform.Perform(bitmap, new ThumbnailTransform(deskewParams.ThumbnailSize.Value))
+                            : null;
                         lock (img)
                         {
                             img.AddTransform(transform);
-                            img.SetThumbnail(thumbnail);
+                            if (thumbnail != null)
+                            {
+                                img.SetThumbnail(thumbnail);
+                            }
                         }
 
                         // The final pipeline step is pretty fast, so updating progress here is more accurate

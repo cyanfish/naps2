@@ -16,6 +16,6 @@ namespace NAPS2.ImportExport
 
         public bool DetectPatchCodes { get; set; }
 
-        public bool NoThumbnails { get; set; }
+        public int? ThumbnailSize { get; set; }
     }
 }

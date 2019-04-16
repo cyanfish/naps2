@@ -60,9 +60,9 @@ namespace NAPS2.ImportExport.Images
                             }
                             
                             var image = new ScannedImage(frame, ScanBitDepth.C24Bit, frame.IsOriginalLossless, -1);
-                            if (!importParams.NoThumbnails)
+                            if (importParams.ThumbnailSize.HasValue)
                             {
-                                image.SetThumbnail(Transform.Perform(frame, new ThumbnailTransform()));
+                                image.SetThumbnail(Transform.Perform(frame, new ThumbnailTransform(importParams.ThumbnailSize.Value)));
                             }
 
                             if (importParams.DetectPatchCodes)

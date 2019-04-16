@@ -28,10 +28,10 @@ namespace NAPS2.Recovery
             this.operationProgress = operationProgress;
         }
 
-        public void RecoverScannedImages(Action<ScannedImage> imageCallback)
+        public void RecoverScannedImages(Action<ScannedImage> imageCallback, RecoveryParams recoveryParams)
         {
             var op = new RecoveryOperation(formFactory, imageRenderer);
-            if (op.Start(imageCallback))
+            if (op.Start(imageCallback, recoveryParams))
             {
                 operationProgress.ShowProgress(op);
             }
@@ -58,7 +58,7 @@ namespace NAPS2.Recovery
                 AllowBackground = true;
             }
 
-            public bool Start(Action<ScannedImage> imageCallback)
+            public bool Start(Action<ScannedImage> imageCallback, RecoveryParams recoveryParams)
             {
                 Status = new OperationStatus
                 {
@@ -89,7 +89,7 @@ namespace NAPS2.Recovery
                             {
                                 try
                                 {
-                                    if (await DoRecover(imageCallback))
+                                    if (await DoRecover(imageCallback, recoveryParams))
                                     {
                                         ReleaseFolderLock();
                                         DeleteFolder();
@@ -121,7 +121,7 @@ namespace NAPS2.Recovery
                 return false;
             }
 
-            private async Task<bool> DoRecover(Action<ScannedImage> imageCallback)
+            private async Task<bool> DoRecover(Action<ScannedImage> imageCallback, RecoveryParams recoveryParams)
             {
                 Status.MaxProgress = recoveryIndex.Images.Count;
                 InvokeStatusChanged();
@@ -153,7 +153,12 @@ namespace NAPS2.Recovery
                     {
                         scannedImage.AddTransform(transform);
                     }
-                    scannedImage.SetThumbnail(Transform.Perform(await imageRenderer.Render(scannedImage), new ThumbnailTransform()));
+
+                    if (recoveryParams.ThumbnailSize.HasValue)
+                    {
+                        scannedImage.SetThumbnail(Transform.Perform(await imageRenderer.Render(scannedImage), new ThumbnailTransform(recoveryParams.ThumbnailSize.Value)));
+                    }
+
                     imageCallback(scannedImage);
 
                     Status.CurrentProgress++;

@@ -1,17 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using NAPS2.Config;
 
 namespace NAPS2.Images.Transforms
 {
     public class ThumbnailTransform : Transform
     {
+        public const int DEFAULT_SIZE = 256;
+
         public ThumbnailTransform()
         {
-            // TODO: Set this from the clients
-            Size = 256;
-            //Size = ConfigScopes.User.Current.ThumbnailSize;
+            Size = DEFAULT_SIZE;
         }
 
         public ThumbnailTransform(int size)

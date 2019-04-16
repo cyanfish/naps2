@@ -78,7 +78,6 @@ namespace NAPS2.ClientServer
                 NoUI = true,
                 NoAutoSave = true,
                 DoOcr = false,
-                NoThumbnails = true,
                 SkipPostProcessing = true
             };
 

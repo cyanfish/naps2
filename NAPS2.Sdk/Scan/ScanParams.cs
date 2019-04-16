@@ -23,7 +23,7 @@ namespace NAPS2.Scan
 
         public bool NoAutoSave { get; set; }
 
-        public bool NoThumbnails { get; set; }
+        public int? ThumbnailSize { get; set; }
 
         public bool SkipPostProcessing { get; set; }
 

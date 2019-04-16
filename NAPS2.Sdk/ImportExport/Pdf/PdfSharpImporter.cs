@@ -181,13 +181,13 @@ namespace NAPS2.ImportExport.Pdf
             // TODO: Really, ConvertToBacking should convert PdfStorage -> PdfFileStorage.
             // TODO: Then we wouldn't need a static FileStorageManager.
             var image = new ScannedImage(new FileStorage(pdfPath));
-            if (!importParams.NoThumbnails || importParams.DetectPatchCodes)
+            if (importParams.ThumbnailSize.HasValue || importParams.DetectPatchCodes)
             {
                 using (var bitmap = await imageRenderer.Render(image))
                 {
-                    if (!importParams.NoThumbnails)
+                    if (importParams.ThumbnailSize.HasValue)
                     {
-                        image.SetThumbnail(Transform.Perform(bitmap, new ThumbnailTransform()));
+                        image.SetThumbnail(Transform.Perform(bitmap, new ThumbnailTransform(importParams.ThumbnailSize.Value)));
                     }
                     if (importParams.DetectPatchCodes)
                     {
@@ -207,9 +207,9 @@ namespace NAPS2.ImportExport.Pdf
                 {
                     storage.SetResolution(storage.Width / (float)page.Width.Inch, storage.Height / (float)page.Height.Inch);
                     var image = new ScannedImage(storage, ScanBitDepth.C24Bit, false, -1);
-                    if (!importParams.NoThumbnails)
+                    if (importParams.ThumbnailSize.HasValue)
                     {
-                        image.SetThumbnail(Transform.Perform(storage, new ThumbnailTransform()));
+                        image.SetThumbnail(Transform.Perform(storage, new ThumbnailTransform(importParams.ThumbnailSize.Value)));
                     }
                     if (importParams.DetectPatchCodes)
                     {
@@ -250,9 +250,9 @@ namespace NAPS2.ImportExport.Pdf
             {
                 storage.SetResolution(storage.Width / (float)page.Width.Inch, storage.Height / (float)page.Height.Inch);
                 var image = new ScannedImage(storage, bitDepth, true, -1);
-                if (!importParams.NoThumbnails)
+                if (importParams.ThumbnailSize.HasValue)
                 {
-                    image.SetThumbnail(Transform.Perform(storage, new ThumbnailTransform()));
+                    image.SetThumbnail(Transform.Perform(storage, new ThumbnailTransform(importParams.ThumbnailSize.Value)));
                 }
                 if (importParams.DetectPatchCodes)
                 {
@@ -362,9 +362,9 @@ namespace NAPS2.ImportExport.Pdf
                 storage.SetResolution(storage.Width / (float)page.Width.Inch, storage.Height / (float)page.Height.Inch);
 
                 var image = new ScannedImage(storage, ScanBitDepth.BlackWhite, true, -1);
-                if (!importParams.NoThumbnails)
+                if (importParams.ThumbnailSize.HasValue)
                 {
-                    image.SetThumbnail(Transform.Perform(storage, new ThumbnailTransform()));
+                    image.SetThumbnail(Transform.Perform(storage, new ThumbnailTransform(importParams.ThumbnailSize.Value)));
                 }
                 if (importParams.DetectPatchCodes)
                 {

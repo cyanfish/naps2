@@ -315,7 +315,7 @@ namespace NAPS2.WinForms
             }
 
             // Allow scanned images to be recovered in case of an unexpected close
-            recoveryManager.RecoverScannedImages(ReceiveScannedImage());
+            recoveryManager.RecoverScannedImages(ReceiveScannedImage(), new RecoveryParams { ThumbnailSize = ConfigProvider.Get(c => c.ThumbnailSize) });
 
             new Thread(RenderThumbnails).Start();
 
@@ -469,7 +469,8 @@ namespace NAPS2.WinForms
             new ScanParams
             {
                 NoAutoSave = ConfigProvider.Get(c => c.DisableAutoSave),
-                DoOcr = ConfigProvider.Get(c => c.EnableOcr) && ConfigProvider.Get(c => c.OcrAfterScanning)
+                DoOcr = ConfigProvider.Get(c => c.EnableOcr) && ConfigProvider.Get(c => c.OcrAfterScanning),
+                ThumbnailSize = ConfigProvider.Get(c => c.ThumbnailSize)
             };
 
         private async Task ScanWithDevice(string deviceID)
@@ -898,7 +899,7 @@ namespace NAPS2.WinForms
             }
 
             var op = operationFactory.Create<DeskewOperation>();
-            if (op.Start(SelectedImages.ToList()))
+            if (op.Start(SelectedImages.ToList(), new DeskewParams { ThumbnailSize = ConfigProvider.Get(c => c.ThumbnailSize) }))
             {
                 operationProgress.ShowProgress(op);
                 changeTracker.Made();
@@ -1019,7 +1020,7 @@ namespace NAPS2.WinForms
         private void ImportFiles(IEnumerable<string> files)
         {
             var op = operationFactory.Create<ImportOperation>();
-            if (op.Start(OrderFiles(files), ReceiveScannedImage()))
+            if (op.Start(OrderFiles(files), ReceiveScannedImage(), new ImportParams { ThumbnailSize = ConfigProvider.Get(c => c.ThumbnailSize) }))
             {
                 operationProgress.ShowProgress(op);
             }
@@ -1036,7 +1037,7 @@ namespace NAPS2.WinForms
         private void ImportDirect(DirectImageTransfer data, bool copy)
         {
             var op = operationFactory.Create<DirectImportOperation>();
-            if (op.Start(data, copy, ReceiveScannedImage()))
+            if (op.Start(data, copy, ReceiveScannedImage(), new DirectImportParams { ThumbnailSize = ConfigProvider.Get(c => c.ThumbnailSize) }))
             {
                 operationProgress.ShowProgress(op);
             }

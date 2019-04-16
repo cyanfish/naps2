@@ -414,7 +414,7 @@ namespace NAPS2.WinForms
         private async void tsDeskew_Click(object sender, EventArgs e)
         {
             var op = operationFactory.Create<DeskewOperation>();
-            if (op.Start(new[] { ImageList.Images[ImageIndex] }))
+            if (op.Start(new[] { ImageList.Images[ImageIndex] }, new DeskewParams { ThumbnailSize = ConfigProvider.Get(c => c.ThumbnailSize) }))
             {
                 operationProgress.ShowProgress(op);
                 await UpdateImage();

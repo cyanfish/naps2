@@ -102,7 +102,8 @@ namespace NAPS2.Scan.Batch
                         ? configProvider.Get(c => c.EnableOcr) && configProvider.Get(c => c.OcrAfterScanning) // User configured
                         : configProvider.Get(c => c.EnableOcr) && GetSavePathExtension().ToLower() == ".pdf", // Fully automated
                     OcrParams = configProvider.DefaultOcrParams(),
-                    OcrCancelToken = CancelToken
+                    OcrCancelToken = CancelToken,
+                    ThumbnailSize = configProvider.Get(c => c.ThumbnailSize)
                 };
 
                 try

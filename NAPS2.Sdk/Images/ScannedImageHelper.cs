@@ -102,7 +102,7 @@ namespace NAPS2.Images
             }
             return tempFilePath;
         }
-        
+
         private readonly OperationProgress operationProgress;
         private readonly OcrRequestQueue ocrRequestQueue;
         private readonly BlankDetector blankDetector;
@@ -181,9 +181,9 @@ namespace NAPS2.Images
 
         public void PostProcessStep2(ScannedImage scannedImage, IImage image, ScanProfile profile, ScanParams scanParams, int pageNumber, bool supportsNativeUI = true)
         {
-            if (!scanParams.NoThumbnails)
+            if (scanParams.ThumbnailSize.HasValue)
             {
-                scannedImage.SetThumbnail(Transform.Perform(image, new ThumbnailTransform()));
+                scannedImage.SetThumbnail(Transform.Perform(image, new ThumbnailTransform(scanParams.ThumbnailSize.Value)));
             }
             if (scanParams.SkipPostProcessing)
             {
@@ -193,21 +193,21 @@ namespace NAPS2.Images
             {
                 if (profile.Brightness != 0)
                 {
-                    AddTransformAndUpdateThumbnail(scannedImage, ref image, new BrightnessTransform(profile.Brightness));
+                    AddTransformAndUpdateThumbnail(scannedImage, ref image, new BrightnessTransform(profile.Brightness), scanParams);
                 }
                 if (profile.Contrast != 0)
                 {
-                    AddTransformAndUpdateThumbnail(scannedImage, ref image, new TrueContrastTransform(profile.Contrast));
+                    AddTransformAndUpdateThumbnail(scannedImage, ref image, new TrueContrastTransform(profile.Contrast), scanParams);
                 }
             }
             if (profile.FlipDuplexedPages && pageNumber % 2 == 0)
             {
-                AddTransformAndUpdateThumbnail(scannedImage, ref image, new RotationTransform(180));
+                AddTransformAndUpdateThumbnail(scannedImage, ref image, new RotationTransform(180), scanParams);
             }
             if (profile.AutoDeskew)
             {
                 var op = new DeskewOperation();
-                if (op.Start(new[] { scannedImage }))
+                if (op.Start(new[] { scannedImage }, new DeskewParams { ThumbnailSize = scanParams.ThumbnailSize }))
                 {
                     operationProgress.ShowProgress(op);
                     op.Wait();
@@ -257,14 +257,17 @@ namespace NAPS2.Images
             }
         }
 
-        private void AddTransformAndUpdateThumbnail(ScannedImage scannedImage, ref IImage image, Transform transform)
+        private void AddTransformAndUpdateThumbnail(ScannedImage scannedImage, ref IImage image, Transform transform, ScanParams scanParams)
         {
             scannedImage.AddTransform(transform);
-            var thumbnail = scannedImage.GetThumbnail();
-            if (thumbnail != null)
+            if (scanParams.ThumbnailSize.HasValue)
             {
-                image = Transform.Perform(image, transform);
-                scannedImage.SetThumbnail(Transform.Perform(image, new ThumbnailTransform()));
+                var thumbnail = scannedImage.GetThumbnail();
+                if (thumbnail != null)
+                {
+                    image = Transform.Perform(image, transform);
+                    scannedImage.SetThumbnail(Transform.Perform(image, new ThumbnailTransform(scanParams.ThumbnailSize.Value)));
+                }
             }
         }
 
