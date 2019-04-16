@@ -65,6 +65,7 @@ namespace NAPS2.Dependencies
                 {
                     foreach (ZipEntry entry in zip)
                     {
+                        if (!entry.IsFile) continue;
                         var destPath = Path.Combine(outDir, entry.Name);
                         PathHelper.EnsureParentDirExists(destPath);
                         using (FileStream outFile = File.Create(destPath))

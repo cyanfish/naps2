@@ -98,6 +98,12 @@
     <Compile Include="Config\ConfigCopierTests.cs" />
     <Compile Include="Config\ConfigScopeTests.cs" />
     <Compile Include="Config\ProfileSerializerTests.cs" />
+    <Compile Include="Dependencies\DownloadFormatTests.cs" />
+    <Compile Include="Dependencies\DownloadFormatTestsData.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DownloadFormatTestsData.resx</DependentUpon>
+    </Compile>
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Images\GdiTests.cs" />
     <Compile Include="Images\ScannedImageSinkTests.cs" />
@@ -142,6 +148,11 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>ProfileSerializerTestsData.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Dependencies\DownloadFormatTestsData.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>DownloadFormatTestsData.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Images\TransformTestsData.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>TransformTestsData.Designer.cs</LastGenOutput>
@@ -155,6 +166,8 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
+    <None Include="Resources\animals.zip" />
+    <None Include="Resources\stock-dog.jpeg.gz" />
     <None Include="Resources\word.pdf" />
   </ItemGroup>
   <ItemGroup>
@@ -261,6 +274,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\word_p2.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\stock-dog.jpeg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\stock-cat.jpeg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
