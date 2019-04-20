@@ -41,6 +41,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NAPS2.Setup", "NAPS2.Setup\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NAPS2.Sdk.Tests", "NAPS2.Sdk.Tests\NAPS2.Sdk.Tests.csproj", "{8F59DABD-EE59-471D-B3AE-9C2083FDB13E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NAPS2.Lib.WinForms", "NAPS2.Lib.WinForms\NAPS2.Lib.WinForms.csproj", "{95A03B74-A235-42A4-A433-E3884E180BE4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -164,6 +166,16 @@ Global
 		{8F59DABD-EE59-471D-B3AE-9C2083FDB13E}.InstallerMSI|Any CPU.Build.0 = Release|Any CPU
 		{8F59DABD-EE59-471D-B3AE-9C2083FDB13E}.Standalone|Any CPU.ActiveCfg = Release|Any CPU
 		{8F59DABD-EE59-471D-B3AE-9C2083FDB13E}.Standalone|Any CPU.Build.0 = Release|Any CPU
+		{95A03B74-A235-42A4-A433-E3884E180BE4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{95A03B74-A235-42A4-A433-E3884E180BE4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{95A03B74-A235-42A4-A433-E3884E180BE4}.DebugLang|Any CPU.ActiveCfg = Debug|Any CPU
+		{95A03B74-A235-42A4-A433-E3884E180BE4}.DebugLang|Any CPU.Build.0 = Debug|Any CPU
+		{95A03B74-A235-42A4-A433-E3884E180BE4}.InstallerEXE|Any CPU.ActiveCfg = Release|Any CPU
+		{95A03B74-A235-42A4-A433-E3884E180BE4}.InstallerEXE|Any CPU.Build.0 = Release|Any CPU
+		{95A03B74-A235-42A4-A433-E3884E180BE4}.InstallerMSI|Any CPU.ActiveCfg = Release|Any CPU
+		{95A03B74-A235-42A4-A433-E3884E180BE4}.InstallerMSI|Any CPU.Build.0 = Release|Any CPU
+		{95A03B74-A235-42A4-A433-E3884E180BE4}.Standalone|Any CPU.ActiveCfg = Release|Any CPU
+		{95A03B74-A235-42A4-A433-E3884E180BE4}.Standalone|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
