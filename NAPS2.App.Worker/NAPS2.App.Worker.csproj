@@ -106,6 +106,10 @@
       <Project>{4d349529-149b-498b-8a55-373e6a67e1f0}</Project>
       <Name>NAPS2.Lib.Common</Name>
     </ProjectReference>
+    <ProjectReference Include="..\NAPS2.Lib.WinForms\NAPS2.Lib.WinForms.csproj">
+      <Project>{95a03b74-a235-42a4-a433-e3884e180be4}</Project>
+      <Name>NAPS2.Lib.WinForms</Name>
+    </ProjectReference>
     <ProjectReference Include="..\NAPS2.Sdk\NAPS2.Sdk.csproj">
       <Project>{968378fa-a649-4058-a928-1fcd97b23070}</Project>
       <Name>NAPS2.Sdk</Name>
