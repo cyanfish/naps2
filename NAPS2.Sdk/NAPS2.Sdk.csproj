@@ -82,9 +82,6 @@
     <Reference Include="BouncyCastle.Crypto, Version=1.8.4.0, Culture=neutral, PublicKeyToken=0e99375e54769942">
       <HintPath>..\packages\BouncyCastle.1.8.4\lib\BouncyCastle.Crypto.dll</HintPath>
     </Reference>
-    <Reference Include="CommandLine, Version=1.9.71.2, Culture=neutral, PublicKeyToken=de6f01bd326f8c32, processorArchitecture=MSIL">
-      <HintPath>..\packages\CommandLineParser.1.9.71\lib\net45\CommandLine.dll</HintPath>
-    </Reference>
     <Reference Include="Google.Protobuf, Version=3.7.0.0, Culture=neutral, PublicKeyToken=a7d26565bac4d604, processorArchitecture=MSIL">
       <HintPath>..\packages\Google.Protobuf.3.7.0\lib\net45\Google.Protobuf.dll</HintPath>
     </Reference>
@@ -142,14 +139,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ClientCreds.resx</DependentUpon>
     </Compile>
-    <Compile Include="Automation\AutomatedScanning.cs" />
-    <Compile Include="Automation\AutomatedScanningOptions.cs" />
-    <Compile Include="Automation\CommandLineOptions.cs" />
-    <Compile Include="Automation\ConsoleErrorOutput.cs" />
-    <Compile Include="Automation\ConsoleOperationProgress.cs" />
-    <Compile Include="Automation\ConsoleOverwritePrompt.cs" />
-    <Compile Include="Automation\ConsolePdfPasswordProvider.cs" />
-    <Compile Include="Automation\ConsoleComponentInstallPrompt.cs" />
     <Compile Include="ClientServer\ClientContext.cs" />
     <Compile Include="ClientServer\ClientContextFactory.cs" />
     <Compile Include="ClientServer\IScanCallback.cs" />
@@ -394,11 +383,6 @@
     <Compile Include="Images\DeskewOperation.cs" />
     <Compile Include="ImportExport\Pdf\SavePdfOperation.cs" />
     <Compile Include="ImportExport\SaveSeparatorHelper.cs" />
-    <Compile Include="Lang\ConsoleResources\ConsoleResources.Designer.cs">
-      <DependentUpon>ConsoleResources.resx</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <Compile Include="Dependencies\PlatformSupport.cs" />
     <Compile Include="Images\AutoDeskew.cs" />
     <Compile Include="Operation\OperationProgress.cs" />
@@ -1089,11 +1073,6 @@
     <EmbeddedResource Include="Lang\LanguageNames.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>LanguageNames.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Lang\ConsoleResources\ConsoleResources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>ConsoleResources.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Lang\Resources\MiscResources.af.resx" Condition="'$(Configuration)' != 'Debug'">
       <DependentUpon>MiscResources.resx</DependentUpon>

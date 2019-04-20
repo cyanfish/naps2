@@ -31,8 +31,15 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CommandLine, Version=1.9.71.2, Culture=neutral, PublicKeyToken=de6f01bd326f8c32, processorArchitecture=MSIL">
+      <HintPath>..\packages\CommandLineParser.1.9.71\lib\net45\CommandLine.dll</HintPath>
+    </Reference>
+    <Reference Include="Ninject, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Ninject.3.2.2.0\lib\net45-full\Ninject.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -41,6 +48,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Automation\AutomatedScanning.cs" />
+    <Compile Include="Automation\AutomatedScanningOptions.cs" />
+    <Compile Include="Automation\CommandLineOptions.cs" />
+    <Compile Include="Automation\ConsoleComponentInstallPrompt.cs" />
+    <Compile Include="Automation\ConsoleErrorOutput.cs" />
+    <Compile Include="Automation\ConsoleOperationProgress.cs" />
+    <Compile Include="Automation\ConsoleOverwritePrompt.cs" />
+    <Compile Include="Automation\ConsolePdfPasswordProvider.cs" />
+    <Compile Include="EntryPoints\ConsoleEntryPoint.cs" />
+    <Compile Include="Lang\ConsoleResources\ConsoleResources.Designer.cs">
+      <DependentUpon>ConsoleResources.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Modules\ConsoleModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -52,6 +74,17 @@
       <Project>{968378fa-a649-4058-a928-1fcd97b23070}</Project>
       <Name>NAPS2.Sdk</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Lang\ConsoleResources\ConsoleResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ConsoleResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

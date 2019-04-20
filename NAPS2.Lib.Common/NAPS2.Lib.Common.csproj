@@ -76,11 +76,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="EntryPoints\ConsoleEntryPoint.cs" />
     <Compile Include="EntryPoints\ServerEntryPoint.cs" />
     <Compile Include="EntryPoints\WorkerEntryPoint.cs" />
     <Compile Include="Modules\CommonModule.cs" />
-    <Compile Include="Modules\ConsoleModule.cs" />
     <Compile Include="Modules\StaticDefaultsModule.cs" />
     <Compile Include="Modules\WinFormsModule.cs" />
     <Compile Include="NinjectEmailProviderFactory.cs" />
