@@ -5,12 +5,12 @@ using System.ServiceModel;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using NAPS2.ClientServer;
 using NAPS2.Logging;
 using NAPS2.Modules;
+using NAPS2.Remoting.ClientServer;
+using NAPS2.Remoting.Worker;
 using NAPS2.Util;
 using NAPS2.WinForms;
-using NAPS2.Worker;
 using Ninject;
 
 namespace NAPS2.EntryPoints

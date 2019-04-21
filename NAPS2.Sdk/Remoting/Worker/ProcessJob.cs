@@ -4,7 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Runtime.InteropServices;
 
-namespace NAPS2.Worker
+namespace NAPS2.Remoting.Worker
 {
     /// <summary>
     /// A helper class to provide access to Job Objects. This is used to group NAPS2.Worker.exe processes with

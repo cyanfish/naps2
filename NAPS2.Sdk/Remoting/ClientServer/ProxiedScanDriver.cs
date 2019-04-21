@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using NAPS2.Logging;
-using NAPS2.Scan;
 using NAPS2.Images;
 using NAPS2.ImportExport;
+using NAPS2.Logging;
+using NAPS2.Scan;
 using NAPS2.Util;
 using NAPS2.WinForms;
 
-namespace NAPS2.ClientServer
+namespace NAPS2.Remoting.ClientServer
 {
     public class ProxiedScanDriver : ScanDriverBase
     {

@@ -2,12 +2,6 @@
 
 package NAPS2.Serialization;
 
-message Error {
-	string type = 1;
-	string message = 2;
-	string stackTrace = 3;
-}
-
 message SerializedImage {
 	bool transferOwnership = 1;
 	oneof image {

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -17,9 +16,9 @@ using NAPS2.Scan.Wia.Native;
 using NAPS2.Serialization;
 using NAPS2.Util;
 
-namespace NAPS2.Worker
+namespace NAPS2.Remoting.Worker
 {
-    public class GrpcWorkerServiceImpl : GrpcWorkerService.GrpcWorkerServiceBase
+    public class WorkerServiceImpl : GrpcWorkerService.GrpcWorkerServiceBase
     {
         private readonly ITwainWrapper twainWrapper;
         private readonly ThumbnailRenderer thumbnailRenderer;
@@ -27,7 +26,7 @@ namespace NAPS2.Worker
 
         private CancellationTokenSource twainScanCts = new CancellationTokenSource();
 
-        public GrpcWorkerServiceImpl(ITwainWrapper twainWrapper, ThumbnailRenderer thumbnailRenderer, IMapiWrapper mapiWrapper)
+        public WorkerServiceImpl(ITwainWrapper twainWrapper, ThumbnailRenderer thumbnailRenderer, IMapiWrapper mapiWrapper)
         {
             this.twainWrapper = twainWrapper;
             this.thumbnailRenderer = thumbnailRenderer;

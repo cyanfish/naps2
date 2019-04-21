@@ -139,14 +139,14 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ClientCreds.resx</DependentUpon>
     </Compile>
-    <Compile Include="ClientServer\ClientContext.cs" />
-    <Compile Include="ClientServer\ClientContextFactory.cs" />
-    <Compile Include="ClientServer\IScanCallback.cs" />
-    <Compile Include="ClientServer\IScanService.cs" />
-    <Compile Include="ClientServer\ProxiedScanDriver.cs" />
-    <Compile Include="ClientServer\ScanCallback.cs" />
-    <Compile Include="ClientServer\ScanService.cs" />
-    <Compile Include="ClientServer\ServerDiscovery.cs" />
+    <Compile Include="Remoting\ClientServer\ClientContext.cs" />
+    <Compile Include="Remoting\ClientServer\ClientContextFactory.cs" />
+    <Compile Include="Remoting\ClientServer\IScanCallback.cs" />
+    <Compile Include="Remoting\ClientServer\IScanService.cs" />
+    <Compile Include="Remoting\ClientServer\ProxiedScanDriver.cs" />
+    <Compile Include="Remoting\ClientServer\ScanCallback.cs" />
+    <Compile Include="Remoting\ClientServer\ScanService.cs" />
+    <Compile Include="Remoting\ClientServer\ServerDiscovery.cs" />
     <Compile Include="Config\Experimental\ChildAttribute.cs" />
     <Compile Include="Config\Experimental\ConfigExtensions.cs" />
     <Compile Include="Config\Experimental\ObsoleteTypes\ExtendedScanSettingsV0.cs" />
@@ -298,7 +298,7 @@
     <Compile Include="Util\ExpFallback.cs" />
     <Compile Include="Util\NativeLibrary.cs" />
     <Compile Include="WinForms\ImageClipboard.cs" />
-    <Compile Include="Worker\GrpcHelper.cs" />
+    <Compile Include="Remoting\GrpcHelper.cs" />
     <Compile Include="Util\IInvoker.cs" />
     <Compile Include="Util\ImageExtensions.cs" />
     <Compile Include="Util\Invoker.cs" />
@@ -349,9 +349,9 @@
     <Compile Include="WinForms\BackgroundForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Worker\GrpcWorkerServiceImpl.cs" />
-    <Compile Include="Worker\GrpcWorkerServiceAdapter.cs" />
-    <Compile Include="Worker\WorkerContext.cs" />
+    <Compile Include="Remoting\Worker\WorkerServiceImpl.cs" />
+    <Compile Include="Remoting\Worker\WorkerServiceAdapter.cs" />
+    <Compile Include="Remoting\Worker\WorkerContext.cs" />
     <Compile Include="Icons.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -444,7 +444,7 @@
     </Compile>
     <Compile Include="Util\ConditionalControls.cs" />
     <Compile Include="Operation\IOperation.cs" />
-    <Compile Include="Worker\IWorkerServiceFactory.cs" />
+    <Compile Include="Remoting\Worker\IWorkerServiceFactory.cs" />
     <Compile Include="Util\OverwritePrompt.cs" />
     <Compile Include="Util\ISaveNotify.cs" />
     <Compile Include="Util\Lifecycle.cs" />
@@ -531,7 +531,7 @@
     <Compile Include="Util\PathHelper.cs" />
     <Compile Include="Util\Pipeline.cs" />
     <Compile Include="Util\Pipes.cs" />
-    <Compile Include="Worker\ProcessJob.cs" />
+    <Compile Include="Remoting\Worker\ProcessJob.cs" />
     <Compile Include="ImportExport\DirectImageTransfer.cs" />
     <Compile Include="Util\KeyboardShortcutManager.cs" />
     <Compile Include="Serialization\SecureStorage.cs" />
@@ -541,7 +541,7 @@
     <Compile Include="Util\Unmanaged.cs" />
     <Compile Include="Util\UnmanagedArray.cs" />
     <Compile Include="Util\UnmanagedBase.cs" />
-    <Compile Include="Worker\WorkerManager.cs" />
+    <Compile Include="Remoting\Worker\WorkerManager.cs" />
     <Compile Include="Util\Win32.cs" />
     <Compile Include="WinForms\DialogHelper.cs">
       <SubType>Code</SubType>
@@ -801,7 +801,7 @@
     <Compile Include="WinForms\WinFormsOverwritePrompt.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Worker\WorkerServiceFactory.cs" />
+    <Compile Include="Remoting\Worker\WorkerServiceFactory.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="ClientCreds.resx">
@@ -6185,8 +6185,9 @@
     <None Include="naps2-public.cer" />
     <None Include="Icons\accept-small.png" />
     <None Include="packages.config" />
-    <ProtoBuf Include="Serialization\common.proto" />
-    <Protobuf Include="Worker\worker.proto" />
+    <ProtoBuf Include="Remoting\Error.proto" />
+    <ProtoBuf Include="Serialization\SerializedImage.proto" />
+    <Protobuf Include="Remoting\Worker\WorkerService.proto" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Icons\accept.png" />

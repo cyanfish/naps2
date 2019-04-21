@@ -9,11 +9,12 @@ using Moq;
 using NAPS2.Images;
 using NAPS2.Images.Storage;
 using NAPS2.ImportExport.Email.Mapi;
+using NAPS2.Remoting;
+using NAPS2.Remoting.Worker;
 using NAPS2.Scan;
 using NAPS2.Scan.Exceptions;
 using NAPS2.Scan.Twain;
 using NAPS2.Util;
-using NAPS2.Worker;
 using Xunit;
 
 namespace NAPS2.Sdk.Tests.Worker
@@ -24,11 +25,11 @@ namespace NAPS2.Sdk.Tests.Worker
         {
             Server server = new Server
             {
-                Services = { GrpcWorkerService.BindService(new GrpcWorkerServiceImpl(twainWrapper, thumbnailRenderer, mapiWrapper)) },
+                Services = { GrpcWorkerService.BindService(new WorkerServiceImpl(twainWrapper, thumbnailRenderer, mapiWrapper)) },
                 Ports = { new ServerPort("localhost", 0, serverCreds ?? ServerCredentials.Insecure) }
             };
             server.Start();
-            var client = new GrpcWorkerServiceAdapter(server.Ports.First().BoundPort, clientCreds ?? ChannelCredentials.Insecure);
+            var client = new WorkerServiceAdapter(server.Ports.First().BoundPort, clientCreds ?? ChannelCredentials.Insecure);
             return new Channel
             {
                 Server = server,
@@ -182,7 +183,7 @@ namespace NAPS2.Sdk.Tests.Worker
         {
             public Server Server { get; set; }
 
-            public GrpcWorkerServiceAdapter Client { get; set; }
+            public WorkerServiceAdapter Client { get; set; }
 
             public void Dispose()
             {

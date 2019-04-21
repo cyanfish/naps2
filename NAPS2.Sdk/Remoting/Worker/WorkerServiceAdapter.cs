@@ -10,15 +10,14 @@ using NAPS2.ImportExport.Email.Mapi;
 using NAPS2.Scan;
 using NAPS2.Scan.Wia;
 using NAPS2.Serialization;
-using NAPS2.Util;
 
-namespace NAPS2.Worker
+namespace NAPS2.Remoting.Worker
 {
-    public class GrpcWorkerServiceAdapter
+    public class WorkerServiceAdapter
     {
         private readonly GrpcWorkerService.GrpcWorkerServiceClient client;
 
-        public GrpcWorkerServiceAdapter(int port, ChannelCredentials creds)
+        public WorkerServiceAdapter(int port, ChannelCredentials creds)
         {
             client = new GrpcWorkerService.GrpcWorkerServiceClient(new Channel("localhost", port, creds));
         }

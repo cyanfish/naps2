@@ -9,9 +9,9 @@ using NAPS2.Operation;
 using NAPS2.Scan.Exceptions;
 using NAPS2.Images;
 using NAPS2.Images.Storage;
+using NAPS2.Remoting.Worker;
 using NAPS2.Scan.Wia.Native;
 using NAPS2.Util;
-using NAPS2.Worker;
 
 namespace NAPS2.Scan.Wia
 {

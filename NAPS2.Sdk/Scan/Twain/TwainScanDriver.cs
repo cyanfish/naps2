@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 using NAPS2.Platform;
 using NAPS2.Images;
 using NAPS2.ImportExport;
+using NAPS2.Remoting.Worker;
 using NAPS2.Util;
-using NAPS2.Worker;
 
 namespace NAPS2.Scan.Twain
 {

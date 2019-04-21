@@ -1,0 +1,9 @@
+﻿syntax = "proto3";
+
+package NAPS2.Remoting;
+
+message Error {
+	string type = 1;
+	string message = 2;
+	string stackTrace = 3;
+}

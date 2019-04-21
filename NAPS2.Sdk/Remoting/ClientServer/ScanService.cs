@@ -10,7 +10,7 @@ using NAPS2.Scan.Sane;
 using NAPS2.Scan.Twain;
 using NAPS2.Scan.Wia;
 
-namespace NAPS2.ClientServer
+namespace NAPS2.Remoting.ClientServer
 {
     [ServiceBehavior(InstanceContextMode = InstanceContextMode.PerSession,
         IncludeExceptionDetailInFaults = true,

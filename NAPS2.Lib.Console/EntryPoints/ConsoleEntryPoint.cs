@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using NAPS2.Automation;
 using NAPS2.Modules;
-using NAPS2.Worker;
+using NAPS2.Remoting.Worker;
 using Ninject;
 using Ninject.Parameters;
 

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using NAPS2.Recovery;
 
-namespace NAPS2.ClientServer
+namespace NAPS2.Remoting.ClientServer
 {
     public class ScanCallback : IScanCallback
     {

@@ -4,7 +4,7 @@ using System.Linq;
 using System.ServiceModel;
 using NAPS2.Images.Storage;
 
-namespace NAPS2.Worker
+namespace NAPS2.Remoting.Worker
 {
     public class WorkerServiceFactory : IWorkerServiceFactory
     {

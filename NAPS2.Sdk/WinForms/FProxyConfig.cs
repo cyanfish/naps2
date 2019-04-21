@@ -4,9 +4,9 @@ using System.Globalization;
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
-using NAPS2.ClientServer;
 using NAPS2.Config;
 using NAPS2.Lang.Resources;
+using NAPS2.Remoting.ClientServer;
 using NAPS2.Scan;
 
 namespace NAPS2.WinForms

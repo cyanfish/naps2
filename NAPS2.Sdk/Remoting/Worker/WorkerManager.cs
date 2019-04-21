@@ -5,14 +5,12 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
-using Grpc.Core;
 using NAPS2.Platform;
 using NAPS2.Util;
 
-namespace NAPS2.Worker
+namespace NAPS2.Remoting.Worker
 {
     /// <summary>
     /// A class to manage the lifecycle of NAPS2.Worker.exe instances and hook up the WCF channels.
@@ -103,7 +101,7 @@ namespace NAPS2.Worker
             {
                 var (proc, port, cert, privateKey) = StartWorkerProcess();
                 var creds = GrpcHelper.GetClientCreds(cert, privateKey);
-                _workerQueue.Add(new WorkerContext { Service = new GrpcWorkerServiceAdapter(port, creds), Process = proc });
+                _workerQueue.Add(new WorkerContext { Service = new WorkerServiceAdapter(port, creds), Process = proc });
             });
         }
 

@@ -27,10 +27,10 @@ using NAPS2.Recovery;
 using NAPS2.Scan;
 using NAPS2.Images;
 using NAPS2.Images.Storage;
+using NAPS2.Remoting.Worker;
 using NAPS2.Scan.Wia.Native;
 using NAPS2.Update;
 using NAPS2.Util;
-using NAPS2.Worker;
 
 #endregion
 

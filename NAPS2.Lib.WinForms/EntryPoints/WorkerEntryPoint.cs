@@ -9,9 +9,10 @@ using System.Windows.Forms;
 using Grpc.Core;
 using NAPS2.Logging;
 using NAPS2.Modules;
+using NAPS2.Remoting;
+using NAPS2.Remoting.Worker;
 using NAPS2.Util;
 using NAPS2.WinForms;
-using NAPS2.Worker;
 using Ninject;
 
 namespace NAPS2.EntryPoints
@@ -63,7 +64,7 @@ namespace NAPS2.EntryPoints
                 // Connect to the main NAPS2 process and listen for assigned work
                 Server server = new Server
                 {
-                    Services = { GrpcWorkerService.BindService(kernel.Get<GrpcWorkerServiceImpl>()) },
+                    Services = { GrpcWorkerService.BindService(kernel.Get<WorkerServiceImpl>()) },
                     Ports = { new ServerPort("localhost", 0, creds) }
                 };
                 server.Start();
