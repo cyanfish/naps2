@@ -100,7 +100,7 @@ namespace NAPS2.Remoting.Worker
             Task.Run(() =>
             {
                 var (proc, port, cert, privateKey) = StartWorkerProcess();
-                var creds = GrpcHelper.GetClientCreds(cert, privateKey);
+                var creds = RemotingHelper.GetClientCreds(cert, privateKey);
                 _workerQueue.Add(new WorkerContext { Service = new WorkerServiceAdapter(port, creds), Process = proc });
             });
         }

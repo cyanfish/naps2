@@ -15,18 +15,18 @@ namespace NAPS2.Remoting.Worker
 {
     public class WorkerServiceAdapter
     {
-        private readonly GrpcWorkerService.GrpcWorkerServiceClient client;
+        private readonly WorkerService.WorkerServiceClient client;
 
         public WorkerServiceAdapter(int port, ChannelCredentials creds)
         {
-            client = new GrpcWorkerService.GrpcWorkerServiceClient(new Channel("localhost", port, creds));
+            client = new WorkerService.WorkerServiceClient(new Channel("localhost", port, creds));
         }
 
         public void Init(string recoveryFolderPath)
         {
             var req = new InitRequest { RecoveryFolderPath = recoveryFolderPath ?? "" };
             var resp = client.Init(req);
-            GrpcHelper.HandleErrors(resp.Error);
+            RemotingHelper.HandleErrors(resp.Error);
         }
 
         public WiaConfiguration Wia10NativeUI(string scanDevice, IntPtr hwnd)
@@ -37,7 +37,7 @@ namespace NAPS2.Remoting.Worker
                 Hwnd = (ulong)hwnd
             };
             var resp = client.Wia10NativeUi(req);
-            GrpcHelper.HandleErrors(resp.Error);
+            RemotingHelper.HandleErrors(resp.Error);
             return resp.WiaConfigurationXml.FromXml<WiaConfiguration>();
         }
 
@@ -45,7 +45,7 @@ namespace NAPS2.Remoting.Worker
         {
             var req = new TwainGetDeviceListRequest { TwainImpl = twainImpl.ToXml() };
             var resp = client.TwainGetDeviceList(req);
-            GrpcHelper.HandleErrors(resp.Error);
+            RemotingHelper.HandleErrors(resp.Error);
             return resp.DeviceListXml.FromXml<List<ScanDevice>>();
         }
 
@@ -62,7 +62,7 @@ namespace NAPS2.Remoting.Worker
             while (await streamingCall.ResponseStream.MoveNext())
             {
                 var resp = streamingCall.ResponseStream.Current;
-                GrpcHelper.HandleErrors(resp.Error);
+                RemotingHelper.HandleErrors(resp.Error);
                 var scannedImage = SerializedImageHelper.Deserialize(resp.Image, new SerializedImageHelper.DeserializeOptions());
                 imageCallback?.Invoke(scannedImage, resp.Image.RenderedFilePath);
             }
@@ -72,7 +72,7 @@ namespace NAPS2.Remoting.Worker
         {
             var req = new SendMapiEmailRequest { EmailMessageXml = message.ToXml() };
             var resp = client.SendMapiEmail(req);
-            GrpcHelper.HandleErrors(resp.Error);
+            RemotingHelper.HandleErrors(resp.Error);
             return resp.ReturnCodeXml.FromXml<MapiSendMailReturnCode>();
         }
 
@@ -87,7 +87,7 @@ namespace NAPS2.Remoting.Worker
                 Size = size
             };
             var resp = client.RenderThumbnail(req);
-            GrpcHelper.HandleErrors(resp.Error);
+            RemotingHelper.HandleErrors(resp.Error);
             return resp.Thumbnail.ToByteArray();
         }
     }

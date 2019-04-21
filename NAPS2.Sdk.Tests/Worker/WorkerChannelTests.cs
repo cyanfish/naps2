@@ -25,7 +25,7 @@ namespace NAPS2.Sdk.Tests.Worker
         {
             Server server = new Server
             {
-                Services = { GrpcWorkerService.BindService(new WorkerServiceImpl(twainWrapper, thumbnailRenderer, mapiWrapper)) },
+                Services = { WorkerService.BindService(new WorkerServiceImpl(twainWrapper, thumbnailRenderer, mapiWrapper)) },
                 Ports = { new ServerPort("localhost", 0, serverCreds ?? ServerCredentials.Insecure) }
             };
             server.Start();
@@ -41,8 +41,8 @@ namespace NAPS2.Sdk.Tests.Worker
         public void SslCreds()
         {
             var (cert, privateKey) = SslHelper.GenerateRootCertificate();
-            var serverCreds = GrpcHelper.GetServerCreds(cert, privateKey);
-            var clientCreds = GrpcHelper.GetClientCreds(cert, privateKey);
+            var serverCreds = RemotingHelper.GetServerCreds(cert, privateKey);
+            var clientCreds = RemotingHelper.GetClientCreds(cert, privateKey);
             using (var channel = Start(serverCreds: serverCreds, clientCreds: clientCreds))
             {
                 channel.Client.Init(null);

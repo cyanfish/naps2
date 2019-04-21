@@ -18,7 +18,7 @@ using NAPS2.Util;
 
 namespace NAPS2.Remoting.Worker
 {
-    public class WorkerServiceImpl : GrpcWorkerService.GrpcWorkerServiceBase
+    public class WorkerServiceImpl : WorkerService.WorkerServiceBase
     {
         private readonly ITwainWrapper twainWrapper;
         private readonly ThumbnailRenderer thumbnailRenderer;
@@ -34,7 +34,7 @@ namespace NAPS2.Remoting.Worker
         }
 
         public override Task<InitResponse> Init(InitRequest request, ServerCallContext context) =>
-            GrpcHelper.WrapFunc(
+            RemotingHelper.WrapFunc(
                 () =>
                 {
                     if (!string.IsNullOrEmpty(request.RecoveryFolderPath))
@@ -46,7 +46,7 @@ namespace NAPS2.Remoting.Worker
                 err => new InitResponse { Error = err });
 
         public override Task<Wia10NativeUiResponse> Wia10NativeUi(Wia10NativeUiRequest request, ServerCallContext context) =>
-            GrpcHelper.WrapFunc(
+            RemotingHelper.WrapFunc(
                 () =>
                 {
                     try
@@ -75,7 +75,7 @@ namespace NAPS2.Remoting.Worker
                 err => new Wia10NativeUiResponse { Error = err });
 
         public override Task<TwainGetDeviceListResponse> TwainGetDeviceList(TwainGetDeviceListRequest request, ServerCallContext context) =>
-            GrpcHelper.WrapFunc(
+            RemotingHelper.WrapFunc(
                 () => new TwainGetDeviceListResponse
                 {
                     DeviceListXml = twainWrapper.GetDeviceList(request.TwainImpl.FromXml<TwainImpl>()).ToXml()
@@ -83,7 +83,7 @@ namespace NAPS2.Remoting.Worker
                 err => new TwainGetDeviceListResponse { Error = err });
 
         public override Task TwainScan(TwainScanRequest request, IServerStreamWriter<TwainScanResponse> responseStream, ServerCallContext context) =>
-            GrpcHelper.WrapAction(
+            RemotingHelper.WrapAction(
                 () =>
                 {
                     var imagePathDict = new Dictionary<ScannedImage, string>();
@@ -98,7 +98,7 @@ namespace NAPS2.Remoting.Worker
                 }, err => responseStream.WriteAsync(new TwainScanResponse { Error = err }));
 
         public override Task<SendMapiEmailResponse> SendMapiEmail(SendMapiEmailRequest request, ServerCallContext context) =>
-            GrpcHelper.WrapFunc(
+            RemotingHelper.WrapFunc(
                 () => new SendMapiEmailResponse
                 {
                     ReturnCodeXml = mapiWrapper.SendEmail(request.EmailMessageXml.FromXml<EmailMessage>()).ToXml()
@@ -106,7 +106,7 @@ namespace NAPS2.Remoting.Worker
                 err => new SendMapiEmailResponse { Error = err });
 
         public override Task<RenderThumbnailResponse> RenderThumbnail(RenderThumbnailRequest request, ServerCallContext context) =>
-            GrpcHelper.WrapFunc(
+            RemotingHelper.WrapFunc(
                 async () =>
                 {
                     var deserializeOptions = new SerializedImageHelper.DeserializeOptions

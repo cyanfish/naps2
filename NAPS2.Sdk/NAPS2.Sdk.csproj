@@ -298,7 +298,7 @@
     <Compile Include="Util\ExpFallback.cs" />
     <Compile Include="Util\NativeLibrary.cs" />
     <Compile Include="WinForms\ImageClipboard.cs" />
-    <Compile Include="Remoting\GrpcHelper.cs" />
+    <Compile Include="Remoting\RemotingHelper.cs" />
     <Compile Include="Util\IInvoker.cs" />
     <Compile Include="Util\ImageExtensions.cs" />
     <Compile Include="Util\Invoker.cs" />

@@ -5,7 +5,7 @@ package NAPS2.Remoting.Worker;
 import "Remoting/Error.proto";
 import "Serialization/SerializedImage.proto";
 
-service GrpcWorkerService {
+service WorkerService {
 	rpc Init (InitRequest) returns (InitResponse) {}
 	rpc Wia10NativeUi (Wia10NativeUiRequest) returns (Wia10NativeUiResponse) {}
 	rpc TwainGetDeviceList (TwainGetDeviceListRequest) returns (TwainGetDeviceListResponse) {}

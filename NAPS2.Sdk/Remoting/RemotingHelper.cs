@@ -9,7 +9,7 @@ using NAPS2.Util;
 
 namespace NAPS2.Remoting
 {
-    public static class GrpcHelper
+    public static class RemotingHelper
     {
         public static void HandleErrors(Error error)
         {

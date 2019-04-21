@@ -59,12 +59,12 @@ namespace NAPS2.EntryPoints
                 // secure channels for key sharing.
                 var cert = ReadEncodedString();
                 var privateKey = ReadEncodedString();
-                var creds = GrpcHelper.GetServerCreds(cert, privateKey);
+                var creds = RemotingHelper.GetServerCreds(cert, privateKey);
 
                 // Connect to the main NAPS2 process and listen for assigned work
                 Server server = new Server
                 {
-                    Services = { GrpcWorkerService.BindService(kernel.Get<WorkerServiceImpl>()) },
+                    Services = { WorkerService.BindService(kernel.Get<WorkerServiceImpl>()) },
                     Ports = { new ServerPort("localhost", 0, creds) }
                 };
                 server.Start();
