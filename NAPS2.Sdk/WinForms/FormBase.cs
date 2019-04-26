@@ -124,6 +124,10 @@ namespace NAPS2.WinForms
         private void OnLoadInternal(object sender, EventArgs eventArgs)
         {
             OnLoad(sender, eventArgs);
+            if (DesignMode)
+            {
+                RestoreFormState = SaveFormState = false;
+            }
 
             if (RestoreFormState || SaveFormState)
             {
