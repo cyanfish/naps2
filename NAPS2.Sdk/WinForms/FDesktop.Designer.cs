@@ -132,8 +132,8 @@ namespace NAPS2.WinForms
             // 
             // btnZoomIn
             // 
-            this.btnZoomIn.BackColor = System.Drawing.Color.White;
             resources.ApplyResources(this.btnZoomIn, "btnZoomIn");
+            this.btnZoomIn.BackColor = System.Drawing.Color.White;
             this.btnZoomIn.Image = global::NAPS2.Icons.zoom_in;
             this.btnZoomIn.Name = "btnZoomIn";
             this.btnZoomIn.UseVisualStyleBackColor = false;
@@ -141,8 +141,8 @@ namespace NAPS2.WinForms
             // 
             // btnZoomOut
             // 
-            this.btnZoomOut.BackColor = System.Drawing.Color.White;
             resources.ApplyResources(this.btnZoomOut, "btnZoomOut");
+            this.btnZoomOut.BackColor = System.Drawing.Color.White;
             this.btnZoomOut.Image = global::NAPS2.Icons.zoom_out;
             this.btnZoomOut.Name = "btnZoomOut";
             this.btnZoomOut.UseVisualStyleBackColor = false;
@@ -256,6 +256,7 @@ namespace NAPS2.WinForms
             this.tsSettingsAbout});
             this.tStrip.Name = "tStrip";
             this.tStrip.ShowItemToolTips = false;
+            this.tStrip.TabStop = true;
             this.tStrip.DockChanged += new System.EventHandler(this.tStrip_DockChanged);
             // 
             // tsScan

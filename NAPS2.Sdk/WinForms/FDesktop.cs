@@ -63,6 +63,8 @@ namespace NAPS2.WinForms
 
         #region State Fields
 
+        private static readonly MethodInfo ToolStripPanelSetStyle = typeof(ToolStripPanel).GetMethod("SetStyle", BindingFlags.Instance | BindingFlags.NonPublic);
+
         private readonly ScannedImageList imageList = new ScannedImageList();
         private readonly AutoResetEvent renderThumbnailsWaitHandle = new AutoResetEvent(false);
         private bool closed = false;
@@ -111,6 +113,10 @@ namespace NAPS2.WinForms
         /// </summary>
         private void PostInitializeComponent()
         {
+            foreach (var panel in toolStripContainer1.Controls.OfType<ToolStripPanel>())
+            {
+                ToolStripPanelSetStyle.Invoke(panel, new object[] { ControlStyles.Selectable, true });
+            }
             imageList.ThumbnailRenderer = thumbnailRenderer;
             thumbnailList1.ThumbnailRenderer = thumbnailRenderer;
             int thumbnailSize = ConfigProvider.Get(c => c.ThumbnailSize);
@@ -794,6 +800,7 @@ namespace NAPS2.WinForms
                     tStrip.Parent = panel;
                 }
             }
+            tStrip.Parent.TabStop = true;
         }
 
         #endregion
