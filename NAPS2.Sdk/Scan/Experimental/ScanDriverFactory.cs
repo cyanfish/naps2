@@ -8,12 +8,7 @@ namespace NAPS2.Scan.Experimental
     {
         public IScanDriver Create(ScanOptions options)
         {
-            var driver = options.Driver;
-            if (driver == Driver.Default)
-            {
-                driver = GetSystemDefaultDriver();
-            }
-            switch (driver)
+            switch (options.Driver)
             {
                 case Driver.Wia:
                     return new WiaScanDriver();
@@ -26,21 +21,6 @@ namespace NAPS2.Scan.Experimental
                 default:
                     throw new InvalidOperationException("Unknown driver. Should never happen.");
             };
-        }
-
-        private Driver GetSystemDefaultDriver()
-        {
-            switch (Environment.OSVersion.Platform)
-            {
-                case PlatformID.Win32NT:
-                    return Driver.Wia;
-                case PlatformID.Unix:
-                    return Driver.Sane;
-                case PlatformID.MacOSX:
-                    return Driver.Twain;
-                default:
-                    throw new InvalidOperationException("Unsupported operating system.");
-            }
         }
     }
 }

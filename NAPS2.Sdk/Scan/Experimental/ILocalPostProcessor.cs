@@ -10,6 +10,6 @@ namespace NAPS2.Scan.Experimental
     /// </summary>
     public interface ILocalPostProcessor
     {
-        void PostProcess(ScannedImage image);
+        void PostProcess(ScannedImage image, PostProcessingContext postProcessingContext);
     }
 }

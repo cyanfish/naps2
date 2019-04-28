@@ -12,11 +12,16 @@ namespace NAPS2.Scan.Experimental
     /// <summary>
     /// Represents scanning in a worker process on the same machine.
     /// </summary>
-    public class WorkerScanAdapter : IScanAdapter
+    public class WorkerScanBridge : IScanBridge
     {
         private readonly IWorkerServiceFactory workerServiceFactory;
 
-        public WorkerScanAdapter(IWorkerServiceFactory workerServiceFactory)
+        public WorkerScanBridge()
+         : this(WorkerManager.Factory)
+        {
+        }
+
+        public WorkerScanBridge(IWorkerServiceFactory workerServiceFactory)
         {
             this.workerServiceFactory = workerServiceFactory;
         }

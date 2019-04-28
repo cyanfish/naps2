@@ -11,7 +11,7 @@ namespace NAPS2.Scan.Experimental
     /// <summary>
     /// Represents scanning across a network on a different machine.
     /// </summary>
-    public class NetworkScanAdapter : IScanAdapter
+    public class NetworkScanBridge : IScanBridge
     {
         public List<ScanDevice> GetDeviceList(ScanOptions options) => throw new NotImplementedException();
 

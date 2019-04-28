@@ -11,22 +11,27 @@ namespace NAPS2.Scan.Experimental
     /// <summary>
     /// Represents scanning in the local process.
     /// </summary>
-    public class LocalScanAdapter : IScanAdapter
+    public class LocalScanBridge : IScanBridge
     {
-        private readonly IScanDriverController scanDriverController;
+        private readonly IRemoteScanController remoteScanController;
 
-        public LocalScanAdapter(IScanDriverController scanDriverController)
+        public LocalScanBridge()
+          : this(new RemoteScanController())
         {
-            this.scanDriverController = scanDriverController;
+        }
+
+        public LocalScanBridge(IRemoteScanController remoteScanController)
+        {
+            this.remoteScanController = remoteScanController;
         }
 
         public List<ScanDevice> GetDeviceList(ScanOptions options) =>
-            scanDriverController.GetDeviceList(options);
+            remoteScanController.GetDeviceList(options);
 
         public ScanDevice PromptForDevice(ScanOptions options) =>
-            scanDriverController.PromptForDevice(options);
+            remoteScanController.PromptForDevice(options);
 
         public Task Scan(ScanOptions options, ProgressHandler progress, CancellationToken cancelToken, Action<ScannedImage, PostProcessingContext> callback) =>
-            scanDriverController.Scan(options, progress, cancelToken, callback);
+            remoteScanController.Scan(options, progress, cancelToken, callback);
     }
 }

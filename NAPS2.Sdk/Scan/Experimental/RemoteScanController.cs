@@ -4,17 +4,21 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using NAPS2.Images;
-using NAPS2.Images.Storage;
 using NAPS2.Util;
 
 namespace NAPS2.Scan.Experimental
 {
-    public class ScanDriverController : IScanDriverController
+    public class RemoteScanController : IRemoteScanController
     {
         private readonly IScanDriverFactory scanDriverFactory;
         private readonly IRemotePostProcessor remotePostProcessor;
 
-        public ScanDriverController(IScanDriverFactory scanDriverFactory, IRemotePostProcessor remotePostProcessor)
+        public RemoteScanController()
+          : this(new ScanDriverFactory(), new RemotePostProcessor())
+        {
+        }
+
+        public RemoteScanController(IScanDriverFactory scanDriverFactory, IRemotePostProcessor remotePostProcessor)
         {
             this.scanDriverFactory = scanDriverFactory;
             this.remotePostProcessor = remotePostProcessor;

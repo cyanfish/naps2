@@ -22,6 +22,8 @@ namespace NAPS2.Scan.Experimental
 
         public int Contrast { get; set; }
 
+        public NetworkOptions NetworkOptions { get; set; }
+
         public WiaOptions WiaOptions { get; set; }
 
         public TwainOptions TwainOptions { get; set; }

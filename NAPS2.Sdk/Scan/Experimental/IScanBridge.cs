@@ -9,9 +9,9 @@ using NAPS2.Util;
 namespace NAPS2.Scan.Experimental
 {
     /// <summary>
-    /// Delegates to an implementation of IScanDriver based on the options and environment.
+    /// Abstracts communication with the scanner. This enables scanning over a network or in a worker process.
     /// </summary>
-    public interface IScanDriverController
+    public interface IScanBridge
     {
         List<ScanDevice> GetDeviceList(ScanOptions options);
 
