@@ -257,13 +257,19 @@
     <Compile Include="Scan\Experimental\IScanController.cs" />
     <Compile Include="Scan\Experimental\IScanDriver.cs" />
     <Compile Include="Scan\Experimental\IScanDriverController.cs" />
+    <Compile Include="Scan\Experimental\IScanDriverFactory.cs" />
+    <Compile Include="Scan\Experimental\LocalScanAdapter.cs" />
+    <Compile Include="Scan\Experimental\NetworkScanAdapter.cs" />
     <Compile Include="Scan\Experimental\PageSize.cs" />
     <Compile Include="Scan\Experimental\PaperSource.cs" />
+    <Compile Include="Scan\Experimental\PostProcessingContext.cs" />
     <Compile Include="Scan\Experimental\SaneOptions.cs" />
     <Compile Include="Scan\Experimental\ScanController.cs" />
     <Compile Include="Scan\Experimental\ScanDriverController.cs" />
+    <Compile Include="Scan\Experimental\ScanDriverFactory.cs" />
     <Compile Include="Scan\Experimental\TwainOptions.cs" />
     <Compile Include="Scan\Experimental\WiaOptions.cs" />
+    <Compile Include="Scan\Experimental\WorkerScanAdapter.cs" />
     <Compile Include="Scan\KeyValueScanOptions.cs" />
     <Compile Include="Scan\Exceptions\SaneNotAvailableException.cs" />
     <Compile Include="Scan\Sane\SaneOption.cs" />
@@ -6200,6 +6206,7 @@
     <None Include="naps2-public.cer" />
     <None Include="Icons\accept-small.png" />
     <None Include="packages.config" />
+    <ProtoBuf Include="Remoting\Progress.proto" />
     <ProtoBuf Include="Remoting\Error.proto" />
     <ProtoBuf Include="Serialization\SerializedImage.proto" />
     <Protobuf Include="Remoting\Worker\WorkerService.proto" />

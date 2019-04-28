@@ -3,6 +3,7 @@
 package NAPS2.Remoting.Worker;
 
 import "Remoting/Error.proto";
+import "Remoting/Progress.proto";
 import "Serialization/SerializedImage.proto";
 
 service WorkerService {
@@ -12,6 +13,8 @@ service WorkerService {
 	rpc TwainScan (TwainScanRequest) returns (stream TwainScanResponse) {}
 	rpc SendMapiEmail (SendMapiEmailRequest) returns (SendMapiEmailResponse) {}
 	rpc RenderThumbnail (RenderThumbnailRequest) returns (RenderThumbnailResponse) {}
+	rpc Scan (ScanRequest) returns (stream ScanResponse) {}
+	rpc GetDeviceList (GetDeviceListRequest) returns (GetDeviceListResponse) {}
 }
 
 message InitRequest {
@@ -51,6 +54,25 @@ message TwainScanRequest {
 message TwainScanResponse {
 	NAPS2.Remoting.Error error = 1;
 	NAPS2.Serialization.SerializedImage image = 2;
+}
+
+message GetDeviceListRequest {
+	string optionsXml = 1;
+}
+
+message GetDeviceListResponse {
+	NAPS2.Remoting.Error error = 1;
+	string deviceListXml = 2;
+}
+
+message ScanRequest {
+	string optionsXml = 1;
+}
+
+message ScanResponse {
+	NAPS2.Remoting.Error error = 1;
+	NAPS2.Serialization.SerializedImage image = 2;
+	NAPS2.Remoting.Progress progress = 3;
 }
 
 message SendMapiEmailRequest {

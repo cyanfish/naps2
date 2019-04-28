@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
+using System.Threading.Tasks;
 using NAPS2.Images.Storage;
 using NAPS2.Util;
 
@@ -13,7 +14,7 @@ namespace NAPS2.Scan.Experimental
 
         ScanDevice PromptForDevice(ScanOptions options);
 
-        void Scan(ScanOptions options, ProgressHandler progress, CancellationToken cancelToken, Action<IImage> callback);
+        Task Scan(ScanOptions options, ProgressHandler progress, CancellationToken cancelToken, Action<IImage> callback);
     }
 
     public class WiaScanDriver : IScanDriver
@@ -22,7 +23,7 @@ namespace NAPS2.Scan.Experimental
 
         public ScanDevice PromptForDevice(ScanOptions options) => throw new NotImplementedException();
 
-        public void Scan(ScanOptions options, ProgressHandler progress, CancellationToken cancelToken, Action<IImage> callback)
+        public Task Scan(ScanOptions options, ProgressHandler progress, CancellationToken cancelToken, Action<IImage> callback)
         {
             throw new NotImplementedException();
         }
@@ -34,7 +35,7 @@ namespace NAPS2.Scan.Experimental
 
         public ScanDevice PromptForDevice(ScanOptions options) => throw new NotImplementedException();
 
-        public void Scan(ScanOptions options, ProgressHandler progress, CancellationToken cancelToken, Action<IImage> callback)
+        public Task Scan(ScanOptions options, ProgressHandler progress, CancellationToken cancelToken, Action<IImage> callback)
         {
             throw new NotImplementedException();
         }
@@ -46,7 +47,7 @@ namespace NAPS2.Scan.Experimental
 
         public ScanDevice PromptForDevice(ScanOptions options) => throw new NotImplementedException();
 
-        public void Scan(ScanOptions options, ProgressHandler progress, CancellationToken cancelToken, Action<IImage> callback)
+        public Task Scan(ScanOptions options, ProgressHandler progress, CancellationToken cancelToken, Action<IImage> callback)
         {
             throw new NotImplementedException();
         }
@@ -58,7 +59,7 @@ namespace NAPS2.Scan.Experimental
 
         public ScanDevice PromptForDevice(ScanOptions options) => throw new NotImplementedException();
 
-        public void Scan(ScanOptions options, ProgressHandler progress, CancellationToken cancelToken, Action<IImage> callback)
+        public Task Scan(ScanOptions options, ProgressHandler progress, CancellationToken cancelToken, Action<IImage> callback)
         {
             throw new NotImplementedException();
         }

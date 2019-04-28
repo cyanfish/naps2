@@ -8,8 +8,10 @@ using NAPS2.Images;
 using NAPS2.ImportExport.Email;
 using NAPS2.ImportExport.Email.Mapi;
 using NAPS2.Scan;
+using NAPS2.Scan.Experimental;
 using NAPS2.Scan.Wia;
 using NAPS2.Serialization;
+using NAPS2.Util;
 
 namespace NAPS2.Remoting.Worker
 {
@@ -65,6 +67,37 @@ namespace NAPS2.Remoting.Worker
                 RemotingHelper.HandleErrors(resp.Error);
                 var scannedImage = SerializedImageHelper.Deserialize(resp.Image, new SerializedImageHelper.DeserializeOptions());
                 imageCallback?.Invoke(scannedImage, resp.Image.RenderedFilePath);
+            }
+        }
+
+        public List<ScanDevice> GetDeviceList(ScanOptions options)
+        {
+            var req = new GetDeviceListRequest { OptionsXml = options.ToXml() };
+            var resp = client.GetDeviceList(req);
+            RemotingHelper.HandleErrors(resp.Error);
+            return resp.DeviceListXml.FromXml<List<ScanDevice>>();
+        }
+
+        public async Task Scan(ScanOptions options, ProgressHandler progress, CancellationToken cancelToken, Action<ScannedImage, string> imageCallback)
+        {
+            var req = new ScanRequest
+            {
+                OptionsXml = options.ToXml()
+            };
+            var streamingCall = client.Scan(req, cancellationToken: cancelToken);
+            while (await streamingCall.ResponseStream.MoveNext())
+            {
+                var resp = streamingCall.ResponseStream.Current;
+                RemotingHelper.HandleErrors(resp.Error);
+                if (resp.Progress != null)
+                {
+                    progress?.Invoke(resp.Progress.Current, resp.Progress.Total);
+                }
+                if (resp.Image != null)
+                {
+                    var scannedImage = SerializedImageHelper.Deserialize(resp.Image, new SerializedImageHelper.DeserializeOptions());
+                    imageCallback?.Invoke(scannedImage, resp.Image.RenderedFilePath);
+                }
             }
         }
 

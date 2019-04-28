@@ -11,6 +11,6 @@ namespace NAPS2.Scan.Experimental
     /// </summary>
     public interface IRemotePostProcessor
     {
-        ScannedImage PostProcess(IImage image);
+        (ScannedImage, PostProcessingContext) PostProcess(IImage image);
     }
 }

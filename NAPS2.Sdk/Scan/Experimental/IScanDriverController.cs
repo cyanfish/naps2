@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
+using System.Threading.Tasks;
 using NAPS2.Images;
-using NAPS2.Images.Storage;
 using NAPS2.Util;
 
 namespace NAPS2.Scan.Experimental
@@ -17,6 +17,6 @@ namespace NAPS2.Scan.Experimental
 
         ScanDevice PromptForDevice(ScanOptions options);
 
-        void Scan(ScanOptions options, ProgressHandler progress, CancellationToken cancelToken, Action<IImage> callback);
+        Task Scan(ScanOptions options, ProgressHandler progress, CancellationToken cancelToken, Action<ScannedImage, PostProcessingContext> callback);
     }
 }

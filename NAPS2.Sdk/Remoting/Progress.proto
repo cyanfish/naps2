@@ -1,0 +1,8 @@
+﻿syntax = "proto3";
+
+package NAPS2.Remoting;
+
+message Progress {
+	int32 current = 1;
+	int32 total = 2;
+}

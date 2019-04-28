@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
+using System.Threading.Tasks;
+using NAPS2.Images;
 using NAPS2.Images.Storage;
 using NAPS2.Util;
 
@@ -9,50 +11,29 @@ namespace NAPS2.Scan.Experimental
 {
     public class ScanDriverController : IScanDriverController
     {
-        public List<ScanDevice> GetDeviceList(ScanOptions options) =>
-            GetDriver(options).GetDeviceList(options);
+        private readonly IScanDriverFactory scanDriverFactory;
+        private readonly IRemotePostProcessor remotePostProcessor;
 
-        public ScanDevice PromptForDevice(ScanOptions options) =>
-            GetDriver(options).PromptForDevice(options);
-
-        public void Scan(ScanOptions options, ProgressHandler progress, CancellationToken cancelToken, Action<IImage> callback) =>
-            GetDriver(options).Scan(options, progress, cancelToken, callback);
-
-        private IScanDriver GetDriver(ScanOptions options)
+        public ScanDriverController(IScanDriverFactory scanDriverFactory, IRemotePostProcessor remotePostProcessor)
         {
-            var driver = options.Driver;
-            if (driver == Driver.Default)
-            {
-                driver = GetSystemDefaultDriver();
-            }
-            switch (driver)
-            {
-                case Driver.Wia:
-                    return new WiaScanDriver();
-                case Driver.Sane:
-                    return new SaneScanDriver();
-                case Driver.Twain:
-                    return options.TwainOptions.Adapter == TwainAdapter.Legacy
-                        ? new LegacyTwainScanDriver()
-                        : (IScanDriver)new TwainScanDriver();
-                default:
-                    throw new InvalidOperationException("Unknown driver. Should never happen.");
-            };
+            this.scanDriverFactory = scanDriverFactory;
+            this.remotePostProcessor = remotePostProcessor;
         }
 
-        private Driver GetSystemDefaultDriver()
+        public List<ScanDevice> GetDeviceList(ScanOptions options) =>
+            scanDriverFactory.Create(options).GetDeviceList(options);
+
+        public ScanDevice PromptForDevice(ScanOptions options) =>
+            scanDriverFactory.Create(options).PromptForDevice(options);
+
+        public async Task Scan(ScanOptions options, ProgressHandler progress, CancellationToken cancelToken, Action<ScannedImage, PostProcessingContext> callback)
         {
-            switch (Environment.OSVersion.Platform)
+            var driver = scanDriverFactory.Create(options);
+            await driver.Scan(options, progress, cancelToken, image =>
             {
-                case PlatformID.Win32NT:
-                    return Driver.Wia;
-                case PlatformID.Unix:
-                    return Driver.Sane;
-                case PlatformID.MacOSX:
-                    return Driver.Twain;
-                default:
-                    throw new InvalidOperationException("Unsupported operating system.");
-            }
+                var (scannedImage, postProcessingContext) = remotePostProcessor.PostProcess(image);
+                callback(scannedImage, postProcessingContext);
+            });
         }
     }
 }
