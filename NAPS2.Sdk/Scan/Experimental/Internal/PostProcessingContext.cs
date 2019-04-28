@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace NAPS2.Scan.Experimental
+namespace NAPS2.Scan.Experimental.Internal
 {
-    public class PostProcessingContext
+    internal class PostProcessingContext
     {
         public string TempPath { get; set; }
     }

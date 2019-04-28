@@ -6,16 +6,14 @@ using System.Threading.Tasks;
 using NAPS2.Images;
 using NAPS2.Util;
 
-namespace NAPS2.Scan.Experimental
+namespace NAPS2.Scan.Experimental.Internal
 {
     /// <summary>
-    /// Abstracts communication with the scanner. This enables scanning over a network or in a worker process.
+    /// Delegates to an implementation of IScanDriver based on the options and environment.
     /// </summary>
-    public interface IScanBridge
+    internal interface IRemoteScanController
     {
         List<ScanDevice> GetDeviceList(ScanOptions options);
-
-        ScanDevice PromptForDevice(ScanOptions options);
 
         Task Scan(ScanOptions options, ProgressHandler progress, CancellationToken cancelToken, Action<ScannedImage, PostProcessingContext> callback);
     }

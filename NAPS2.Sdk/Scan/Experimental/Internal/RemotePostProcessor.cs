@@ -4,9 +4,9 @@ using System.Linq;
 using NAPS2.Images;
 using NAPS2.Images.Storage;
 
-namespace NAPS2.Scan.Experimental
+namespace NAPS2.Scan.Experimental.Internal
 {
-    public class RemotePostProcessor : IRemotePostProcessor
+    internal class RemotePostProcessor : IRemotePostProcessor
     {
         public (ScannedImage, PostProcessingContext) PostProcess(IImage image) => throw new NotImplementedException();
     }

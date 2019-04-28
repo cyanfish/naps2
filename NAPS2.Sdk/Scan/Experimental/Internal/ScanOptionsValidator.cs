@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using NAPS2.Serialization;
 
-namespace NAPS2.Scan.Experimental
+namespace NAPS2.Scan.Experimental.Internal
 {
-    public class ScanOptionsValidator
+    internal class ScanOptionsValidator
     {
         public ScanOptions Validate(ScanOptions options)
         {

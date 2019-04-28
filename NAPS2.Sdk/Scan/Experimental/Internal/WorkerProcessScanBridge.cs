@@ -7,12 +7,12 @@ using NAPS2.Images;
 using NAPS2.Remoting.Worker;
 using NAPS2.Util;
 
-namespace NAPS2.Scan.Experimental
+namespace NAPS2.Scan.Experimental.Internal
 {
     /// <summary>
     /// Represents scanning in a worker process on the same machine.
     /// </summary>
-    public class WorkerScanBridge : IScanBridge
+    internal class WorkerScanBridge : IScanBridge
     {
         private readonly IWorkerServiceFactory workerServiceFactory;
 
@@ -32,11 +32,6 @@ namespace NAPS2.Scan.Experimental
             {
                 return ctx.Service.GetDeviceList(options);
             }
-        }
-
-        public ScanDevice PromptForDevice(ScanOptions options)
-        {
-            throw new NotSupportedException("PromptForDevice is not supported for worker scans.");
         }
 
         public async Task Scan(ScanOptions options, ProgressHandler progress, CancellationToken cancelToken, Action<ScannedImage, PostProcessingContext> callback)

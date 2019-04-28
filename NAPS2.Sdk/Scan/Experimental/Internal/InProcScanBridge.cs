@@ -6,30 +6,27 @@ using System.Threading.Tasks;
 using NAPS2.Images;
 using NAPS2.Util;
 
-namespace NAPS2.Scan.Experimental
+namespace NAPS2.Scan.Experimental.Internal
 {
     /// <summary>
     /// Represents scanning in the local process.
     /// </summary>
-    public class LocalScanBridge : IScanBridge
+    internal class InProcScanBridge : IScanBridge
     {
         private readonly IRemoteScanController remoteScanController;
 
-        public LocalScanBridge()
+        public InProcScanBridge()
           : this(new RemoteScanController())
         {
         }
 
-        public LocalScanBridge(IRemoteScanController remoteScanController)
+        public InProcScanBridge(IRemoteScanController remoteScanController)
         {
             this.remoteScanController = remoteScanController;
         }
 
         public List<ScanDevice> GetDeviceList(ScanOptions options) =>
             remoteScanController.GetDeviceList(options);
-
-        public ScanDevice PromptForDevice(ScanOptions options) =>
-            remoteScanController.PromptForDevice(options);
 
         public Task Scan(ScanOptions options, ProgressHandler progress, CancellationToken cancelToken, Action<ScannedImage, PostProcessingContext> callback) =>
             remoteScanController.Scan(options, progress, cancelToken, callback);

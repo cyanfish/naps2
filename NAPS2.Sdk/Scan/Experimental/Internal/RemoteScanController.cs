@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 using NAPS2.Images;
 using NAPS2.Util;
 
-namespace NAPS2.Scan.Experimental
+namespace NAPS2.Scan.Experimental.Internal
 {
-    public class RemoteScanController : IRemoteScanController
+    internal class RemoteScanController : IRemoteScanController
     {
         private readonly IScanDriverFactory scanDriverFactory;
         private readonly IRemotePostProcessor remotePostProcessor;
@@ -26,9 +26,6 @@ namespace NAPS2.Scan.Experimental
 
         public List<ScanDevice> GetDeviceList(ScanOptions options) =>
             scanDriverFactory.Create(options).GetDeviceList(options);
-
-        public ScanDevice PromptForDevice(ScanOptions options) =>
-            scanDriverFactory.Create(options).PromptForDevice(options);
 
         public async Task Scan(ScanOptions options, ProgressHandler progress, CancellationToken cancelToken, Action<ScannedImage, PostProcessingContext> callback)
         {

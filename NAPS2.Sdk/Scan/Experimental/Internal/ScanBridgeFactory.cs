@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace NAPS2.Scan.Experimental
+namespace NAPS2.Scan.Experimental.Internal
 {
-    public class ScanBridgeFactory : IScanBridgeFactory
+    internal class ScanBridgeFactory : IScanBridgeFactory
     {
         public IScanBridge Create(ScanOptions options)
         {
@@ -18,7 +18,7 @@ namespace NAPS2.Scan.Experimental
                 // 32-bit twain can only be used by a 32-bit process, so we use a separate worker process
                 return new WorkerScanBridge();
             }
-            return new LocalScanBridge();
+            return new InProcScanBridge();
         }
     }
 }

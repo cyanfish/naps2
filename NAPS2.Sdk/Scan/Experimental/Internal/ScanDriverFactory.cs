@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace NAPS2.Scan.Experimental
+namespace NAPS2.Scan.Experimental.Internal
 {
-    public class ScanDriverFactory : IScanDriverFactory
+    internal class ScanDriverFactory : IScanDriverFactory
     {
         public IScanDriver Create(ScanOptions options)
         {

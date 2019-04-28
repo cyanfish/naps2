@@ -11,8 +11,6 @@ namespace NAPS2.Scan.Experimental
     {
         List<ScanDevice> GetDeviceList(ScanOptions options);
 
-        ScanDevice PromptForDevice(ScanOptions options);
-
         ScannedImageSource Scan(ScanOptions options, ProgressHandler progress = default, CancellationToken cancelToken = default);
     }
 }

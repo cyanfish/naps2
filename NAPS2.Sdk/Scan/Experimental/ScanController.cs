@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using NAPS2.Images;
+using NAPS2.Scan.Experimental.Internal;
 using NAPS2.Util;
 
 namespace NAPS2.Scan.Experimental
@@ -13,7 +14,12 @@ namespace NAPS2.Scan.Experimental
         private readonly ScanOptionsValidator scanOptionsValidator;
         private readonly IScanBridgeFactory scanBridgeFactory;
 
-        public ScanController(ILocalPostProcessor localPostProcessor, ScanOptionsValidator scanOptionsValidator, IScanBridgeFactory scanBridgeFactory)
+        public ScanController()
+          : this(new LocalPostProcessor(), new ScanOptionsValidator(), new ScanBridgeFactory())
+        {
+        }
+
+        internal ScanController(ILocalPostProcessor localPostProcessor, ScanOptionsValidator scanOptionsValidator, IScanBridgeFactory scanBridgeFactory)
         {
             this.localPostProcessor = localPostProcessor;
             this.scanOptionsValidator = scanOptionsValidator;
@@ -21,8 +27,6 @@ namespace NAPS2.Scan.Experimental
         }
 
         public List<ScanDevice> GetDeviceList(ScanOptions options) => throw new NotImplementedException();
-
-        public ScanDevice PromptForDevice(ScanOptions options) => throw new NotImplementedException();
 
         public ScannedImageSource Scan(ScanOptions options, ProgressHandler progress = default, CancellationToken cancelToken = default)
         {
