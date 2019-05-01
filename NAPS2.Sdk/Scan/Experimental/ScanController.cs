@@ -30,7 +30,7 @@ namespace NAPS2.Scan.Experimental
 
         public ScannedImageSource Scan(ScanOptions options, ProgressHandler progress = default, CancellationToken cancelToken = default)
         {
-            options = scanOptionsValidator.Validate(options);
+            options = scanOptionsValidator.ValidateAll(options);
             var bridge = scanBridgeFactory.Create(options);
             var sink = new ScannedImageSink();
             bridge.Scan(options, progress, cancelToken, (scannedImage, postProcessingContext) =>

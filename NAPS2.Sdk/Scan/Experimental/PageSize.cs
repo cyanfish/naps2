@@ -40,5 +40,81 @@ namespace NAPS2.Scan.Experimental
         public decimal Height { get; }
 
         public PageSizeUnit Unit { get; }
+
+        public decimal WidthInMm
+        {
+            get
+            {
+                switch (Unit)
+                {
+                    case PageSizeUnit.Inch:
+                        return Width * 25.4m;
+                    case PageSizeUnit.Centimetre:
+                        return Width * 10;
+                    case PageSizeUnit.Millimetre:
+                        return Width;
+                    default:
+                        throw new ArgumentException();
+                }
+            }
+        }
+
+        public decimal WidthInInches
+        {
+            get
+            {
+                switch (Unit)
+                {
+                    case PageSizeUnit.Inch:
+                        return Width;
+                    case PageSizeUnit.Centimetre:
+                        return Width * 0.393701m;
+                    case PageSizeUnit.Millimetre:
+                        return Width * 0.0393701m;
+                    default:
+                        throw new ArgumentException();
+                }
+            }
+        }
+
+        public int WidthInThousandthsOfAnInch => (int)(WidthInInches * 1000);
+
+        public decimal HeightInMm
+        {
+            get
+            {
+                switch (Unit)
+                {
+                    case PageSizeUnit.Inch:
+                        return Height * 25.4m;
+                    case PageSizeUnit.Centimetre:
+                        return Height * 10;
+                    case PageSizeUnit.Millimetre:
+                        return Height;
+                    default:
+                        throw new ArgumentException();
+                }
+            }
+        }
+
+        public decimal HeightInInches
+        {
+            get
+            {
+                switch (Unit)
+                {
+                    case PageSizeUnit.Inch:
+                        return Height;
+                    case PageSizeUnit.Centimetre:
+                        return Height * 0.393701m;
+                    case PageSizeUnit.Millimetre:
+                        return Height * 0.0393701m;
+                    default:
+                        throw new ArgumentException();
+                }
+            }
+        }
+
+        public int HeightInThousandthsOfAnInch => (int)(HeightInInches * 1000);
     }
 }

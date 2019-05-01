@@ -29,5 +29,29 @@ namespace NAPS2.Scan.Experimental
         public TwainOptions TwainOptions { get; set; }
 
         public SaneOptions SaneOptions { get; set; }
+
+        public bool UseNativeUI { get; set; }
+
+        public IntPtr DialogParent { get; set; }
+
+        public BitDepth BitDepth { get; set; }
+
+        public HorizontalAlign PageAlign { get; set; }
+
+        public bool BrightnessContrastAfterScan { get; set; }
+    }
+
+    public enum HorizontalAlign
+    {
+        Right,
+        Center,
+        Left
+    }
+
+    public enum BitDepth
+    {
+        Color24,
+        Grayscale8,
+        BW1
     }
 }

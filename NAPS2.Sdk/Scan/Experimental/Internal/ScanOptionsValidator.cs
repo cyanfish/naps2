@@ -5,19 +5,26 @@ using NAPS2.Serialization;
 
 namespace NAPS2.Scan.Experimental.Internal
 {
-    internal class ScanOptionsValidator
+    public class ScanOptionsValidator
     {
-        public ScanOptions Validate(ScanOptions options)
+        public ScanOptions ValidateAll(ScanOptions options)
         {
             // Easy deep copy. Ideally we'd do this in a more efficient way.
             options = options.ToXml().FromXml<ScanOptions>();
 
-            if (options.Driver == Driver.Default)
-            {
-                options.Driver = GetSystemDefaultDriver();
-            }
+            options.Driver = ValidateDriver(options);
 
             return options;
+        }
+
+        public Driver ValidateDriver(ScanOptions options)
+        {
+            if (options.Driver == Driver.Default)
+            {
+                return GetSystemDefaultDriver();
+            }
+            // TODO: Throw NotSupportedException if the platform doesn't match the driver
+            return options.Driver;
         }
 
         private Driver GetSystemDefaultDriver()

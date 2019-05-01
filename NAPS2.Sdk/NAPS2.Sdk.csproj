@@ -277,6 +277,7 @@
     <Compile Include="Scan\Experimental\Internal\RemoteScanController.cs" />
     <Compile Include="Scan\Experimental\Internal\ScanDriverFactory.cs" />
     <Compile Include="Scan\Experimental\Internal\ScanOptionsValidator.cs" />
+    <Compile Include="Scan\Experimental\ScanPerformer.cs" />
     <Compile Include="Scan\Experimental\TwainOptions.cs" />
     <Compile Include="Scan\Experimental\WiaOptions.cs" />
     <Compile Include="Scan\Experimental\Internal\WorkerProcessScanBridge.cs" />
