@@ -10,6 +10,8 @@ namespace NAPS2.ImportExport.Email.Mapi
 {
     public class SystemEmailClients
     {
+        private const string DEFAULT_MAPI_DLL = "mapi32.dll";
+
         public string GetDefaultName()
         {
             using (var key = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\Clients\Mail", false))
@@ -48,30 +50,44 @@ namespace NAPS2.ImportExport.Email.Mapi
             }
         }
 
+        internal IntPtr GetLibrary(string clientName)
+        {
+            var dllPath = GetDllPath(clientName);
+            return Win32.LoadLibrary(dllPath);
+        }
+
         internal (MapiSendMailDelegate, MapiSendMailDelegateW) GetDelegate(string clientName, out bool unicode)
         {
-            var dllPath = clientName == null ? null : GetDllPath(clientName);
-            if (dllPath == null)
-            {
-                dllPath = "mapi32.dll";
-            }
+            var dllPath = GetDllPath(clientName);
             var module = Win32.LoadLibrary(dllPath);
-            var addr = Win32.GetProcAddress(module, "MAPISendMailW");
-            if (addr == IntPtr.Zero)
+            if (module == IntPtr.Zero)
             {
-                addr = Win32.GetProcAddress(module, "MAPISendMail");
+                throw new Exception($"Could not load dll for email: {dllPath}");
+            }
+            var addr = Win32.GetProcAddress(module, "MAPISendMailW");
+            if (addr != IntPtr.Zero)
+            {
+                unicode = true;
+                return (null, (MapiSendMailDelegateW)Marshal.GetDelegateForFunctionPointer(addr, typeof(MapiSendMailDelegateW)));
+            }
+            addr = Win32.GetProcAddress(module, "MAPISendMail");
+            if (addr != IntPtr.Zero)
+            {
                 unicode = false;
                 return ((MapiSendMailDelegate)Marshal.GetDelegateForFunctionPointer(addr, typeof(MapiSendMailDelegate)), null);
             }
-            unicode = true;
-            return (null, (MapiSendMailDelegateW)Marshal.GetDelegateForFunctionPointer(addr, typeof(MapiSendMailDelegateW)));
+            throw new Exception($"Could not find an entry point in dll for email: {dllPath}");
         }
 
         private static string GetDllPath(string clientName)
         {
+            if (clientName == null)
+            {
+                return DEFAULT_MAPI_DLL;
+            }
             using (var clientKey = Registry.LocalMachine.OpenSubKey($@"SOFTWARE\Clients\Mail\{clientName}"))
             {
-                return clientKey?.GetValue("DllPathEx")?.ToString() ?? clientKey?.GetValue("DllPath")?.ToString();
+                return clientKey?.GetValue("DllPathEx")?.ToString() ?? clientKey?.GetValue("DllPath")?.ToString() ?? DEFAULT_MAPI_DLL;
             }
         }
 

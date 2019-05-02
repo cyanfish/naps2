@@ -39,7 +39,7 @@ namespace NAPS2.ImportExport.Email.Mapi
             {
                 MapiSendMailReturnCode returnCode;
 
-                if (UseWorker)
+                if (UseWorker && !mapiWrapper.CanLoadClient)
                 {
                     using (var worker = workerServiceFactory.Create())
                     {

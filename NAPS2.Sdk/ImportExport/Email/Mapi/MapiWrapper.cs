@@ -18,6 +18,15 @@ namespace NAPS2.ImportExport.Email.Mapi
             this.emailSetupProvider = emailSetupProvider;
         }
 
+        public bool CanLoadClient
+        {
+            get
+            {
+                var clientName = emailSetupProvider.Get(c => c.SystemProviderName);
+                return systemEmailClients.GetLibrary(clientName) != IntPtr.Zero;
+            }
+        }
+
         public MapiSendMailReturnCode SendEmail(EmailMessage message)
         {
             var clientName = emailSetupProvider.Get(c => c.SystemProviderName);

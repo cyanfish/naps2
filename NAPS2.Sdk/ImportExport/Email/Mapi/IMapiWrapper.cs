@@ -2,6 +2,8 @@
 {
     public interface IMapiWrapper
     {
+        bool CanLoadClient { get; }
+
         MapiSendMailReturnCode SendEmail(EmailMessage message);
     }
 }

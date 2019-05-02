@@ -40,6 +40,8 @@ namespace NAPS2.WinForms
     {
         #region Dependencies
 
+        private static readonly MethodInfo ToolStripPanelSetStyle = typeof(ToolStripPanel).GetMethod("SetStyle", BindingFlags.Instance | BindingFlags.NonPublic);
+
         private readonly StringWrapper stringWrapper;
         private readonly RecoveryManager recoveryManager;
         private readonly OcrEngineManager ocrEngineManager;
@@ -62,8 +64,6 @@ namespace NAPS2.WinForms
         #endregion
 
         #region State Fields
-
-        private static readonly MethodInfo ToolStripPanelSetStyle = typeof(ToolStripPanel).GetMethod("SetStyle", BindingFlags.Instance | BindingFlags.NonPublic);
 
         private readonly ScannedImageList imageList = new ScannedImageList();
         private readonly AutoResetEvent renderThumbnailsWaitHandle = new AutoResetEvent(false);
