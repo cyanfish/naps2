@@ -10,6 +10,8 @@ namespace NAPS2.ImportExport.Email.Mapi
 {
     public class SystemEmailClients
     {
+        private const string DEFAULT_MAPI_DLL = "mapi32.dll";
+
         public string GetDefaultName()
         {
             using (var key = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\Clients\Mail", false))
@@ -48,9 +50,15 @@ namespace NAPS2.ImportExport.Email.Mapi
             }
         }
 
+        internal IntPtr GetLibrary(string clientName)
+        {
+            var dllPath = GetDllPath(clientName);
+            return Win32.LoadLibrary(dllPath);
+        }
+
         internal (MapiSendMailDelegate, MapiSendMailDelegateW) GetDelegate(string clientName, out bool unicode)
         {
-            var dllPath = GetDllPath(clientName) ?? "mapi32.dll";
+            var dllPath = GetDllPath(clientName);
             var module = Win32.LoadLibrary(dllPath);
             if (module == IntPtr.Zero)
             {
@@ -75,11 +83,11 @@ namespace NAPS2.ImportExport.Email.Mapi
         {
             if (clientName == null)
             {
-                return null;
+                return DEFAULT_MAPI_DLL;
             }
             using (var clientKey = Registry.LocalMachine.OpenSubKey($@"SOFTWARE\Clients\Mail\{clientName}"))
             {
-                return clientKey?.GetValue("DllPathEx")?.ToString() ?? clientKey?.GetValue("DllPath")?.ToString();
+                return clientKey?.GetValue("DllPathEx")?.ToString() ?? clientKey?.GetValue("DllPath")?.ToString() ?? DEFAULT_MAPI_DLL;
             }
         }
 
