@@ -14,7 +14,7 @@ namespace NAPS2.Images.Storage
     {
         public const string LOCK_FILE_NAME = ".lock";
 
-        private readonly ISerializer<RecoveryIndex> serializer = new DefaultSerializer<RecoveryIndex>();
+        private readonly ISerializer<RecoveryIndex> serializer = new DefaultSerializer<RecoveryIndex>(Transform.KnownTransformTypes);
 
         private int fileNumber;
         private bool folderCreated;
