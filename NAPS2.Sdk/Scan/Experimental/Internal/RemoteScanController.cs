@@ -39,7 +39,7 @@ namespace NAPS2.Scan.Experimental.Internal
             var driver = scanDriverFactory.Create(options);
             await driver.Scan(options, progress, cancelToken, image =>
             {
-                var (scannedImage, postProcessingContext) = remotePostProcessor.PostProcess(image);
+                var (scannedImage, postProcessingContext) = remotePostProcessor.PostProcess(image, options);
                 callback(scannedImage, postProcessingContext);
             });
         }
