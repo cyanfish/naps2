@@ -34,11 +34,11 @@ namespace NAPS2.Scan.Experimental.Internal
             }
         }
 
-        public async Task Scan(ScanOptions options, ProgressHandler progress, CancellationToken cancelToken, Action<ScannedImage, PostProcessingContext> callback)
+        public async Task Scan(ScanOptions options, CancellationToken cancelToken, IScanEvents scanEvents, Action<ScannedImage, PostProcessingContext> callback)
         {
             using (var ctx = workerServiceFactory.Create())
             {
-                await ctx.Service.Scan(options, progress, cancelToken, (image, tempPath) =>
+                await ctx.Service.Scan(options, cancelToken, scanEvents, (image, tempPath) =>
                 {
                     callback(image, new PostProcessingContext { TempPath = tempPath });
                 });

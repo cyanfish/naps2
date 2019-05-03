@@ -74,13 +74,13 @@ namespace NAPS2.Scan.Experimental.Internal
             }
         }
 
-        public Task Scan(ScanOptions options, ProgressHandler progress, CancellationToken cancelToken, Action<IImage> callback)
+        public Task Scan(ScanOptions options, CancellationToken cancelToken, IScanEvents scanEvents, Action<IImage> callback)
         {
             return Task.Run(() =>
             {
                 try
                 {
-                    InternalScan(options.TwainOptions.Dsm, options, cancelToken, callback);
+                    InternalScan(options.TwainOptions.Dsm, options, cancelToken, scanEvents, callback);
                 }
                 catch (DeviceNotFoundException)
                 {
@@ -88,7 +88,7 @@ namespace NAPS2.Scan.Experimental.Internal
                     {
                         // Fall back to OldDsm in case of no devices
                         // This is primarily for Citrix support, which requires using twain_32.dll for TWAIN passthrough
-                        InternalScan(TwainDsm.Old, options, cancelToken, callback);
+                        InternalScan(TwainDsm.Old, options, cancelToken, scanEvents, callback);
                     }
                     else
                     {
@@ -98,7 +98,7 @@ namespace NAPS2.Scan.Experimental.Internal
             });
         }
 
-        private void InternalScan(TwainDsm dsm, ScanOptions options, CancellationToken cancelToken, Action<IImage> callback)
+        private void InternalScan(TwainDsm dsm, ScanOptions options, CancellationToken cancelToken, IScanEvents scanEvents, Action<IImage> callback)
         {
             var dialogParent = options.DialogParent;
             if (dialogParent == IntPtr.Zero)
@@ -114,11 +114,10 @@ namespace NAPS2.Scan.Experimental.Internal
             DataSource ds = null;
             var waitHandle = new AutoResetEvent(false);
 
-            int pageNumber = 0;
-
             session.TransferReady += (sender, eventArgs) =>
             {
                 Debug.WriteLine("NAPS2.TW - TransferReady");
+                scanEvents.PageStart();
                 if (cancel)
                 {
                     eventArgs.CancelAll = true;
@@ -129,7 +128,6 @@ namespace NAPS2.Scan.Experimental.Internal
                 try
                 {
                     Debug.WriteLine("NAPS2.TW - DataTransferred");
-                    pageNumber++;
                     using (var image = options.TwainOptions.TransferMode == TwainTransferMode.Memory
                                         ? GetBitmapFromMemXFer(eventArgs.MemoryData, eventArgs.ImageInfo)
                                         : StorageManager.ImageFactory.Decode(eventArgs.GetNativeImageStream(), ".bmp"))

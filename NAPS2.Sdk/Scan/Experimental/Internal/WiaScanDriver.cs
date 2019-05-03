@@ -43,14 +43,14 @@ namespace NAPS2.Scan.Experimental.Internal
             }
         }
 
-        public Task Scan(ScanOptions options, ProgressHandler progress, CancellationToken cancelToken, Action<IImage> callback)
+        public Task Scan(ScanOptions options, CancellationToken cancelToken, IScanEvents scanEvents, Action<IImage> callback)
         {
             return Task.Run(() =>
             {
                 var context = new WiaScanContext(workerServiceFactory)
                 {
                     Options = options,
-                    Progress = progress,
+                    ScanEvents = scanEvents,
                     CancelToken = cancelToken,
                     Callback = callback
                 };
@@ -88,9 +88,9 @@ namespace NAPS2.Scan.Experimental.Internal
 
             public ScanOptions Options { get; set; }
 
-            public ProgressHandler Progress { get; set; }
-
             public CancellationToken CancelToken { get; set; }
+
+            public IScanEvents ScanEvents { get; set; }
 
             public Action<IImage> Callback { get; set; }
 
@@ -194,9 +194,10 @@ namespace NAPS2.Scan.Experimental.Internal
                             scanException = e;
                         }
                     };
-                    transfer.Progress += (sender, args) => Progress(args.Percent, 100);
+                    transfer.Progress += (sender, args) => ScanEvents.PageProgress(args.Percent / 100.0);
                     using (CancelToken.Register(transfer.Cancel))
                     {
+                        ScanEvents.PageStart();
                         transfer.Download();
 
                         if (device.Version == WiaVersion.Wia10 && Options.PaperSource != PaperSource.Flatbed)
@@ -206,6 +207,7 @@ namespace NAPS2.Scan.Experimental.Internal
                             {
                                 while (!CancelToken.IsCancellationRequested && scanException == null)
                                 {
+                                    ScanEvents.PageStart();
                                     transfer.Download();
                                 }
                             }

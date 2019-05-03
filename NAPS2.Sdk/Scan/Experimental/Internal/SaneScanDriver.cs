@@ -43,21 +43,23 @@ namespace NAPS2.Scan.Experimental.Internal
             return deviceList;
         }
 
-        public Task Scan(ScanOptions options, ProgressHandler progress, CancellationToken cancelToken, Action<IImage> callback)
+        public Task Scan(ScanOptions options, CancellationToken cancelToken, IScanEvents scanEvents, Action<IImage> callback)
         {
             return Task.Run(() =>
             {
                 // TODO: Test ADF
                 var keyValueOptions = new Lazy<KeyValueScanOptions>(() => GetKeyValueOptions(options));
-                bool result = Transfer(keyValueOptions, options, cancelToken, callback);
+                scanEvents.PageStart();
+                bool result = Transfer(keyValueOptions, options, cancelToken, scanEvents, callback);
 
                 if (result && options.PaperSource != PaperSource.Flatbed)
                 {
                     try
                     {
-                        while (Transfer(keyValueOptions, options, cancelToken, callback))
+                        do
                         {
-                        }
+                            scanEvents.PageStart();
+                        } while (Transfer(keyValueOptions, options, cancelToken, scanEvents, callback));
                     }
                     catch (Exception e)
                     {
@@ -67,7 +69,7 @@ namespace NAPS2.Scan.Experimental.Internal
             });
         }
 
-        private Stream ScanOne(string deviceId, KeyValueScanOptions options, ProgressHandler progressCallback, CancellationToken cancelToken)
+        private Stream ScanOne(string deviceId, KeyValueScanOptions options, CancellationToken cancelToken, IScanEvents scanEvents)
         {
             // Start the scanning process
             var profileOptions = options == null ? "" : string.Join("", options.Select(kvp => $@" {kvp.Key} ""{kvp.Value.Replace("\"", "\\\"")}"""));
@@ -79,7 +81,6 @@ namespace NAPS2.Scan.Experimental.Internal
             var outputFinishedWaitHandle = new ManualResetEvent(false);
             var errorOutput = new List<string>();
             bool cancelled = false;
-            const int maxProgress = 1000;
 
             // Set up events
             proc.ErrorDataReceived += (sender, args) =>
@@ -89,7 +90,7 @@ namespace NAPS2.Scan.Experimental.Internal
                     var match = ProgressRegex.Match(args.Data);
                     if (match.Success)
                     {
-                        progressCallback?.Invoke((int)float.Parse(match.Groups[1].Value) * 10, maxProgress);
+                        scanEvents.PageProgress(double.Parse(match.Groups[1].Value) / 100);
                     }
                     else
                     {
@@ -332,9 +333,9 @@ namespace NAPS2.Scan.Experimental.Internal
             return keyValueOptions;
         }
 
-        private bool Transfer(Lazy<KeyValueScanOptions> keyValueOptions, ScanOptions options, CancellationToken cancelToken, Action<IImage> callback)
+        private bool Transfer(Lazy<KeyValueScanOptions> keyValueOptions, ScanOptions options, CancellationToken cancelToken, IScanEvents scanEvents, Action<IImage> callback)
         {
-            Stream stream = ScanOne(options.Device.ID, keyValueOptions.Value, null, cancelToken);
+            Stream stream = ScanOne(options.Device.ID, keyValueOptions.Value, cancelToken, scanEvents);
             if (stream == null)
             {
                 return false;

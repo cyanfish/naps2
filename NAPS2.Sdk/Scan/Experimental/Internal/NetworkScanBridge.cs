@@ -15,6 +15,6 @@ namespace NAPS2.Scan.Experimental.Internal
     {
         public List<ScanDevice> GetDeviceList(ScanOptions options) => throw new NotImplementedException();
 
-        public Task Scan(ScanOptions options, ProgressHandler progress, CancellationToken cancelToken, Action<ScannedImage, PostProcessingContext> callback) => throw new NotImplementedException();
+        public Task Scan(ScanOptions options, CancellationToken cancelToken, IScanEvents scanEvents, Action<ScannedImage, PostProcessingContext> callback) => throw new NotImplementedException();
     }
 }

@@ -3,7 +3,6 @@
 package NAPS2.Remoting.Worker;
 
 import "Remoting/Error.proto";
-import "Remoting/Progress.proto";
 import "Serialization/SerializedImage.proto";
 
 service WorkerService {
@@ -70,9 +69,19 @@ message ScanRequest {
 }
 
 message ScanResponse {
-	NAPS2.Remoting.Error error = 1;
-	NAPS2.Serialization.SerializedImage image = 2;
-	NAPS2.Remoting.Progress progress = 3;
+	oneof event {
+		NAPS2.Remoting.Error error = 1;
+		NAPS2.Serialization.SerializedImage image = 2;
+		ProgressEvent progress = 3;
+		PageStartEvent pageStart = 4;
+	}
+}
+
+message ProgressEvent {
+	double value = 1;
+}
+
+message PageStartEvent {
 }
 
 message SendMapiEmailRequest {

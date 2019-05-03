@@ -9,9 +9,9 @@ using NAPS2.ImportExport.Email;
 using NAPS2.ImportExport.Email.Mapi;
 using NAPS2.Scan;
 using NAPS2.Scan.Experimental;
+using NAPS2.Scan.Experimental.Internal;
 using NAPS2.Scan.Wia;
 using NAPS2.Serialization;
-using NAPS2.Util;
 
 namespace NAPS2.Remoting.Worker
 {
@@ -78,7 +78,7 @@ namespace NAPS2.Remoting.Worker
             return resp.DeviceListXml.FromXml<List<ScanDevice>>();
         }
 
-        public async Task Scan(ScanOptions options, ProgressHandler progress, CancellationToken cancelToken, Action<ScannedImage, string> imageCallback)
+        public async Task Scan(ScanOptions options, CancellationToken cancelToken, IScanEvents scanEvents, Action<ScannedImage, string> imageCallback)
         {
             var req = new ScanRequest
             {
@@ -89,9 +89,13 @@ namespace NAPS2.Remoting.Worker
             {
                 var resp = streamingCall.ResponseStream.Current;
                 RemotingHelper.HandleErrors(resp.Error);
+                if (resp.PageStart != null)
+                {
+                    scanEvents.PageStart();
+                }
                 if (resp.Progress != null)
                 {
-                    progress?.Invoke(resp.Progress.Current, resp.Progress.Total);
+                    scanEvents.PageProgress(resp.Progress.Value);
                 }
                 if (resp.Image != null)
                 {

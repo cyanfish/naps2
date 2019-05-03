@@ -255,6 +255,7 @@
     <Compile Include="Scan\Experimental\Internal\IRemotePostProcessor.cs" />
     <Compile Include="Scan\Experimental\Internal\IScanBridge.cs" />
     <Compile Include="Scan\Experimental\Internal\IScanBridgeFactory.cs" />
+    <Compile Include="Scan\Experimental\Internal\IScanEvents.cs" />
     <Compile Include="Scan\Experimental\Internal\LegacyTwainScanDriver.cs" />
     <Compile Include="Scan\Experimental\Internal\LocalPostProcessor.cs" />
     <Compile Include="Scan\Experimental\Internal\SaneScanDriver.cs" />
@@ -266,7 +267,10 @@
     <Compile Include="Scan\Experimental\Internal\IScanDriverFactory.cs" />
     <Compile Include="Scan\Experimental\Internal\InProcScanBridge.cs" />
     <Compile Include="Scan\Experimental\Internal\NetworkScanBridge.cs" />
+    <Compile Include="Scan\Experimental\PageEndEventArgs.cs" />
+    <Compile Include="Scan\Experimental\PageProgressEventArgs.cs" />
     <Compile Include="Scan\Experimental\PageSize.cs" />
+    <Compile Include="Scan\Experimental\PageStartEventArgs.cs" />
     <Compile Include="Scan\Experimental\PaperSource.cs" />
     <Compile Include="Scan\Experimental\Internal\PostProcessingContext.cs" />
     <Compile Include="Scan\Experimental\NetworkOptions.cs" />
@@ -277,7 +281,10 @@
     <Compile Include="Scan\Experimental\Internal\RemoteScanController.cs" />
     <Compile Include="Scan\Experimental\Internal\ScanDriverFactory.cs" />
     <Compile Include="Scan\Experimental\Internal\ScanOptionsValidator.cs" />
+    <Compile Include="Scan\Experimental\ScanEndEventArgs.cs" />
+    <Compile Include="Scan\Experimental\ScanErrorEventArgs.cs" />
     <Compile Include="Scan\Experimental\ScanPerformer.cs" />
+    <Compile Include="Scan\Experimental\ScanStartEventArgs.cs" />
     <Compile Include="Scan\Experimental\TwainOptions.cs" />
     <Compile Include="Scan\Experimental\WiaOptions.cs" />
     <Compile Include="Scan\Experimental\Internal\WorkerProcessScanBridge.cs" />
@@ -6217,7 +6224,6 @@
     <None Include="naps2-public.cer" />
     <None Include="Icons\accept-small.png" />
     <None Include="packages.config" />
-    <ProtoBuf Include="Remoting\Progress.proto" />
     <ProtoBuf Include="Remoting\Error.proto" />
     <ProtoBuf Include="Serialization\SerializedImage.proto" />
     <Protobuf Include="Remoting\Worker\WorkerService.proto" />

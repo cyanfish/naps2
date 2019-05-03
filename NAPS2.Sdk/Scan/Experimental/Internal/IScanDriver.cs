@@ -12,6 +12,6 @@ namespace NAPS2.Scan.Experimental.Internal
     {
         List<ScanDevice> GetDeviceList(ScanOptions options);
 
-        Task Scan(ScanOptions options, ProgressHandler progress, CancellationToken cancelToken, Action<IImage> callback);
+        Task Scan(ScanOptions options, CancellationToken cancelToken, IScanEvents scanEvents, Action<IImage> callback);
     }
 }

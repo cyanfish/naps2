@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading;
 using NAPS2.Images;
 using NAPS2.Scan.Experimental.Internal;
-using NAPS2.Util;
 
 namespace NAPS2.Scan.Experimental
 {
@@ -26,29 +25,82 @@ namespace NAPS2.Scan.Experimental
             this.scanBridgeFactory = scanBridgeFactory;
         }
 
-        public List<ScanDevice> GetDeviceList(ScanOptions options) => throw new NotImplementedException();
+        public List<ScanDevice> GetDeviceList(ScanOptions options)
+        {
+            options = scanOptionsValidator.ValidateAll(options);
+            var bridge = scanBridgeFactory.Create(options);
+            return bridge.GetDeviceList(options);
+        }
 
-        public ScannedImageSource Scan(ScanOptions options, ProgressHandler progress = default, CancellationToken cancelToken = default)
+        public ScannedImageSource Scan(ScanOptions options, CancellationToken cancelToken = default)
         {
             options = scanOptionsValidator.ValidateAll(options);
             var bridge = scanBridgeFactory.Create(options);
             var sink = new ScannedImageSink();
-            bridge.Scan(options, progress, cancelToken, (scannedImage, postProcessingContext) =>
+            int pageNumber = 0;
+
+            void ScanStartCallback() => ScanStart?.Invoke(this, new ScanStartEventArgs());
+            void ScanEndCallback(ScannedImageSource source) => ScanEnd?.Invoke(this, new ScanEndEventArgs(source));
+            void ScanErrorCallback(Exception ex) => ScanError?.Invoke(this, new ScanErrorEventArgs(ex));
+            void PageStartCallback() => PageStart?.Invoke(this, new PageStartEventArgs(++pageNumber));
+            void PageProgressCallback(double progress) => PageProgress?.Invoke(this, new PageProgressEventArgs(pageNumber, progress));
+            void PageEndCallback(ScannedImage image) => PageEnd?.Invoke(this, new PageEndEventArgs(pageNumber, image));
+
+            ScanStartCallback();
+            bridge.Scan(options, cancelToken, new ScanEvents(PageStartCallback, PageProgressCallback), (scannedImage, postProcessingContext) =>
             {
                 localPostProcessor.PostProcess(scannedImage, postProcessingContext);
                 sink.PutImage(scannedImage);
+                PageEndCallback(scannedImage);
             }).ContinueWith(t =>
             {
                 if (t.IsFaulted)
                 {
                     sink.SetError(t.Exception);
+                    ScanErrorCallback(t.Exception);
                 }
                 else
                 {
                     sink.SetCompleted();
+                    ScanEndCallback(sink.AsSource());
                 }
             });
+
             return sink.AsSource();
+        }
+
+        public event EventHandler<ScanStartEventArgs> ScanStart;
+
+        public event EventHandler<ScanEndEventArgs> ScanEnd;
+
+        public event EventHandler<ScanErrorEventArgs> ScanError;
+
+        public event EventHandler<PageStartEventArgs> PageStart;
+
+        public event EventHandler<PageProgressEventArgs> PageProgress;
+
+        public event EventHandler<PageEndEventArgs> PageEnd;
+
+        private class ScanEvents : IScanEvents
+        {
+            private readonly Action pageStartCallback;
+            private readonly Action<double> pageProgressCallback;
+
+            public ScanEvents(Action pageStartCallback, Action<double> pageProgressCallback)
+            {
+                this.pageStartCallback = pageStartCallback;
+                this.pageProgressCallback = pageProgressCallback;
+            }
+
+            public void PageStart()
+            {
+                pageStartCallback();
+            }
+
+            public void PageProgress(double progress)
+            {
+                pageProgressCallback(progress);
+            }
         }
     }
 }

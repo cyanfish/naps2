@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using NAPS2.Images;
-using NAPS2.Util;
 
 namespace NAPS2.Scan.Experimental.Internal
 {
@@ -34,10 +33,10 @@ namespace NAPS2.Scan.Experimental.Internal
             return deviceList;
         }
 
-        public async Task Scan(ScanOptions options, ProgressHandler progress, CancellationToken cancelToken, Action<ScannedImage, PostProcessingContext> callback)
+        public async Task Scan(ScanOptions options, CancellationToken cancelToken, IScanEvents scanEvents, Action<ScannedImage, PostProcessingContext> callback)
         {
             var driver = scanDriverFactory.Create(options);
-            await driver.Scan(options, progress, cancelToken, image =>
+            await driver.Scan(options, cancelToken, scanEvents, image =>
             {
                 var (scannedImage, postProcessingContext) = remotePostProcessor.PostProcess(image, options);
                 callback(scannedImage, postProcessingContext);

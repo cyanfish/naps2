@@ -5,27 +5,32 @@ using System.Threading;
 using NAPS2.Images;
 using NAPS2.Lang.Resources;
 using NAPS2.Operation;
+using NAPS2.Util;
 
 namespace NAPS2.Scan.Experimental
 {
     public class ScanPerformer : IScanPerformer
     {
-        private readonly IScanController scanController;
-
-        public ScanPerformer(IScanController scanController)
-        {
-            this.scanController = scanController;
-        }
-
         public ScannedImageSource PerformScan(ScanProfile scanProfile, ScanParams scanParams, IntPtr dialogParent = default,
             CancellationToken cancelToken = default)
         {
             var options = BuildOptions(scanProfile, scanParams, dialogParent);
+            var controller = new ScanController();
             var op = new ScanOperation(options.Device, options.PaperSource);
+
+            controller.PageStart += (sender, args) => op.NextPage(args.PageNumber);
+            TranslateProgress(controller, op);
             cancelToken.Register(op.Cancel);
-            var source = scanController.Scan(options, op.Progress, op.CancelToken);
-            // TODO: op.NextPage() when source receives an image
-            return source;
+
+            return controller.Scan(options, op.CancelToken);
+        }
+
+        private void TranslateProgress(ScanController controller, ScanOperation op)
+        {
+            var smoothProgress = new SmoothProgress();
+            controller.PageStart += (sender, args) => smoothProgress.Reset();
+            controller.PageProgress += (sender, args) => smoothProgress.InputProgressChanged(args.Progress);
+            smoothProgress.OutputProgressChanged += (sender, args) => op.Progress((int) Math.Round(args.Value * 1000), 1000);
         }
 
         private ScanOptions BuildOptions(ScanProfile scanProfile, ScanParams scanParams, IntPtr dialogParent)
@@ -64,9 +69,9 @@ namespace NAPS2.Scan.Experimental
                 InvokeStatusChanged();
             }
 
-            public void NextPage()
+            public void NextPage(int newPageNumber)
             {
-                pageNumber++;
+                pageNumber = newPageNumber;
                 Status.StatusText = string.Format(MiscResources.ScanProgressPage, pageNumber);
                 InvokeStatusChanged();
             }
