@@ -251,6 +251,7 @@
     <Compile Include="Images\Transforms\TransformerAttribute.cs" />
     <Compile Include="Images\Transforms\ThumbnailTransform.cs" />
     <Compile Include="Images\Transforms\ScaleTransform.cs" />
+    <Compile Include="Util\EventThrottle.cs" />
     <Compile Include="Scan\Experimental\Internal\ILocalPostProcessor.cs" />
     <Compile Include="Scan\Experimental\Internal\IRemotePostProcessor.cs" />
     <Compile Include="Scan\Experimental\Internal\IScanBridge.cs" />
@@ -283,6 +284,7 @@
     <Compile Include="Scan\Experimental\Internal\ScanOptionsValidator.cs" />
     <Compile Include="Scan\Experimental\ScanEndEventArgs.cs" />
     <Compile Include="Scan\Experimental\ScanErrorEventArgs.cs" />
+    <Compile Include="Scan\Experimental\ScanEvents.cs" />
     <Compile Include="Scan\Experimental\ScanOperation.cs" />
     <Compile Include="Scan\Experimental\ScanPerformer.cs" />
     <Compile Include="Scan\Experimental\ScanStartEventArgs.cs" />
