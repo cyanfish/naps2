@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using NAPS2.Images;
-using NAPS2.Util;
 
 namespace NAPS2.Scan.Experimental.Internal
 {
@@ -15,6 +14,7 @@ namespace NAPS2.Scan.Experimental.Internal
     {
         public List<ScanDevice> GetDeviceList(ScanOptions options) => throw new NotImplementedException();
 
+        // TODO: On the network server, make sure to throttle progress events
         public Task Scan(ScanOptions options, CancellationToken cancelToken, IScanEvents scanEvents, Action<ScannedImage, PostProcessingContext> callback) => throw new NotImplementedException();
     }
 }

@@ -7,8 +7,10 @@ namespace NAPS2.Images
 {
     public abstract class ScannedImageSource
     {
+        public static ScannedImageSource Empty => new EmptySource();
+
         public abstract Task<ScannedImage> Next();
-        
+
         public async Task<List<ScannedImage>> ToList()
         {
             var list = new List<ScannedImage>();
@@ -23,8 +25,10 @@ namespace NAPS2.Images
                 {
                     image.Dispose();
                 }
+
                 throw;
             }
+
             return list;
         }
 
@@ -44,6 +48,11 @@ namespace NAPS2.Images
             {
                 await action(image);
             }
+        }
+
+        private class EmptySource : ScannedImageSource
+        {
+            public override Task<ScannedImage> Next() => Task.FromResult<ScannedImage>(null);
         }
     }
 }

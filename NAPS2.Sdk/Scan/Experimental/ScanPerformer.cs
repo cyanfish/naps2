@@ -2,9 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
+using System.Threading.Tasks;
 using NAPS2.Config;
 using NAPS2.Config.Experimental;
 using NAPS2.Images;
+using NAPS2.ImportExport;
+using NAPS2.Operation;
 using NAPS2.Scan.Wia.Native;
 using NAPS2.Util;
 using NAPS2.WinForms;
@@ -14,14 +17,16 @@ namespace NAPS2.Scan.Experimental
     public class ScanPerformer : IScanPerformer
     {
         private readonly IFormFactory formFactory;
-        private readonly ConfigScopes configScopes;
         private readonly ConfigProvider<CommonConfig> configProvider;
+        private readonly OperationProgress operationProgress;
+        private readonly AutoSaver autoSaver;
 
-        public ScanPerformer(IFormFactory formFactory, ConfigScopes configScopes, ConfigProvider<CommonConfig> configProvider)
+        public ScanPerformer(IFormFactory formFactory, ConfigProvider<CommonConfig> configProvider, OperationProgress operationProgress, AutoSaver autoSaver)
         {
             this.formFactory = formFactory;
-            this.configScopes = configScopes;
             this.configProvider = configProvider;
+            this.operationProgress = operationProgress;
+            this.autoSaver = autoSaver;
         }
 
         public ScannedImageSource PerformScan(ScanProfile scanProfile, ScanParams scanParams, IntPtr dialogParent = default,
@@ -31,17 +36,42 @@ namespace NAPS2.Scan.Experimental
             if (options == null)
             {
                 // User cancelled out of a dialog
-                return new ScannedImageSink().AsSource();
+                return ScannedImageSource.Empty;
             }
             var controller = new ScanController();
             var op = new ScanOperation(options.Device, options.PaperSource);
 
             controller.PageStart += (sender, args) => op.NextPage(args.PageNumber);
             TranslateProgress(controller, op);
+
+            ShowOperation(op, scanParams);
             cancelToken.Register(op.Cancel);
 
-            // TODO: Auto save
-            return controller.Scan(options, op.CancelToken);
+            var source = controller.Scan(options, op.CancelToken);
+
+            if (scanProfile.AutoSaveSettings != null)
+            {
+                source = autoSaver.Save(scanProfile.AutoSaveSettings, source);
+            }
+            return source;
+        }
+
+        private void ShowOperation(ScanOperation op, ScanParams scanParams)
+        {
+            Task.Run(() =>
+            {
+                Invoker.Current.SafeInvoke(() =>
+                {
+                    if (scanParams.Modal)
+                    {
+                        operationProgress.ShowModalProgress(op);
+                    }
+                    else
+                    {
+                        operationProgress.ShowBackgroundProgress(op);
+                    }
+                });
+            });
         }
 
         private void TranslateProgress(ScanController controller, ScanOperation op)
