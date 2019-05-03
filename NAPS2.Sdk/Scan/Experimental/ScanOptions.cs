@@ -22,13 +22,13 @@ namespace NAPS2.Scan.Experimental
 
         public int Contrast { get; set; }
 
-        public NetworkOptions NetworkOptions { get; set; }
+        public NetworkOptions NetworkOptions { get; set; } = new NetworkOptions();
 
-        public WiaOptions WiaOptions { get; set; }
+        public WiaOptions WiaOptions { get; set; } = new WiaOptions();
 
-        public TwainOptions TwainOptions { get; set; }
+        public TwainOptions TwainOptions { get; set; } = new TwainOptions();
 
-        public SaneOptions SaneOptions { get; set; }
+        public SaneOptions SaneOptions { get; set; } = new SaneOptions();
 
         public BitDepth BitDepth { get; set; }
 

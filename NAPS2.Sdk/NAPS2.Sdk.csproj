@@ -283,6 +283,7 @@
     <Compile Include="Scan\Experimental\Internal\ScanOptionsValidator.cs" />
     <Compile Include="Scan\Experimental\ScanEndEventArgs.cs" />
     <Compile Include="Scan\Experimental\ScanErrorEventArgs.cs" />
+    <Compile Include="Scan\Experimental\ScanOperation.cs" />
     <Compile Include="Scan\Experimental\ScanPerformer.cs" />
     <Compile Include="Scan\Experimental\ScanStartEventArgs.cs" />
     <Compile Include="Scan\Experimental\TwainOptions.cs" />
