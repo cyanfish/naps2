@@ -24,8 +24,15 @@ namespace NAPS2.Scan.Experimental.Internal
             this.remotePostProcessor = remotePostProcessor;
         }
 
-        public List<ScanDevice> GetDeviceList(ScanOptions options) =>
-            scanDriverFactory.Create(options).GetDeviceList(options);
+        public List<ScanDevice> GetDeviceList(ScanOptions options)
+        {
+            var deviceList = scanDriverFactory.Create(options).GetDeviceList(options);
+            if (options.Driver == Driver.Twain && !options.TwainOptions.IncludeWiaDevices)
+            {
+                deviceList = deviceList.Where(x => !x.ID.StartsWith("WIA-", StringComparison.InvariantCulture)).ToList();
+            }
+            return deviceList;
+        }
 
         public async Task Scan(ScanOptions options, ProgressHandler progress, CancellationToken cancelToken, Action<ScannedImage, PostProcessingContext> callback)
         {

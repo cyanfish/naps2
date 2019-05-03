@@ -30,15 +30,21 @@ namespace NAPS2.Scan.Experimental
 
         public SaneOptions SaneOptions { get; set; }
 
-        public bool UseNativeUI { get; set; }
-
-        public IntPtr DialogParent { get; set; }
-
         public BitDepth BitDepth { get; set; }
 
         public HorizontalAlign PageAlign { get; set; }
 
         public bool BrightnessContrastAfterScan { get; set; }
+
+        public bool UseNativeUI { get; set; }
+
+        public IntPtr DialogParent { get; set; }
+
+        public bool NoUI { get; set; }
+
+        public bool Modal { get; set; }
+
+        public bool DetectPatchCodes { get; set; }
     }
 
     public enum HorizontalAlign
@@ -50,8 +56,8 @@ namespace NAPS2.Scan.Experimental
 
     public enum BitDepth
     {
-        Color24,
-        Grayscale8,
-        BW1
+        Color,
+        Grayscale,
+        BlackAndWhite
     }
 }

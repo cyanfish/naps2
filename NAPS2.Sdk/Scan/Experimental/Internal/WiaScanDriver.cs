@@ -310,13 +310,13 @@ namespace NAPS2.Scan.Experimental.Internal
 
                 switch (Options.BitDepth)
                 {
-                    case BitDepth.Grayscale8:
+                    case BitDepth.Grayscale:
                         item.SetProperty(WiaPropertyId.IPA_DATATYPE, 2);
                         break;
-                    case BitDepth.Color24:
+                    case BitDepth.Color:
                         item.SetProperty(WiaPropertyId.IPA_DATATYPE, 3);
                         break;
-                    case BitDepth.BW1:
+                    case BitDepth.BlackAndWhite:
                         item.SetProperty(WiaPropertyId.IPA_DATATYPE, 0);
                         break;
                 }
