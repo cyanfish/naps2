@@ -11,7 +11,10 @@ namespace NAPS2.Images
         private const double ANGLE_MIN = -20;
         private const double ANGLE_MAX = 20;
         private const int ANGLE_STEPS = 201; // 0.2 degree step size
-        private const int BEST_COUNT = 20;
+        private const int BEST_MAX_COUNT = 100;
+        private const int BEST_THRESHOLD_INDEX = 9;
+        private const double BEST_THRESOLD_FACTOR = 0.5;
+        private const double CLUSTER_TARGET_SPREAD = 2.0;
 
         public override double GetSkewAngle(IImage image)
         {
@@ -45,22 +48,51 @@ namespace NAPS2.Images
             }
 
             var angles = GetAnglesOfBestLines(scores, dCount);
-            // TODO: Outlier detection
-            return angles.Sum() / angles.Length;
+            var cluster = ClusterAngles(angles);
+            if (cluster.Length < angles.Length / 2)
+            {
+                // Could not find a consistent skew angle
+                return 0;
+            }
+            return cluster.Sum() / cluster.Length;
+        }
+
+        private double[] ClusterAngles(double[] angles)
+        {
+            angles = angles.OrderBy(x => x).ToArray();
+            int n = angles.Length;
+            int largestCluster = 0;
+            int largestClusterIndex = 0;
+            for (int i = 0; i < n; i++)
+            {
+                int clusterSize = angles
+                    .Skip(i)
+                    .TakeWhile(x => x < angles[i] + CLUSTER_TARGET_SPREAD)
+                    .Count();
+                if (clusterSize > largestCluster)
+                {
+                    largestCluster = clusterSize;
+                    largestClusterIndex = i;
+                }
+            }
+            return angles
+                .Skip(largestClusterIndex)
+                .TakeWhile(x => x < angles[largestClusterIndex] + CLUSTER_TARGET_SPREAD)
+                .ToArray();
         }
 
         private static double[] GetAnglesOfBestLines(int[,] scores, int dCount)
         {
-            var best = new (int angleIndex, int count)[BEST_COUNT];
+            var best = new (int angleIndex, int count)[BEST_MAX_COUNT];
             for (int i = 0; i < dCount; i++)
             {
                 for (int angleIndex = 0; angleIndex < ANGLE_STEPS; angleIndex++)
                 {
                     int count = scores[i, angleIndex];
-                    if (count > best[BEST_COUNT - 1].count)
+                    if (count > best[BEST_MAX_COUNT - 1].count)
                     {
-                        best[BEST_COUNT - 1] = (angleIndex, count);
-                        for (int j = BEST_COUNT - 2; j >= 0; j--)
+                        best[BEST_MAX_COUNT - 1] = (angleIndex, count);
+                        for (int j = BEST_MAX_COUNT - 2; j >= 0; j--)
                         {
                             if (count > best[j].count)
                             {
@@ -70,8 +102,14 @@ namespace NAPS2.Images
                     }
                 }
             }
+
+            // Skip "insignificant" lines whose counts aren't close enough to the top 10
+            int threshold = (int)(best[BEST_THRESHOLD_INDEX].count * BEST_THRESOLD_FACTOR);
+            var bestWithinThreshold = best.Where(x => x.count >= threshold);
+
             double angleStepSize = (ANGLE_MAX - ANGLE_MIN) / (ANGLE_STEPS - 1);
-            return best.Select(x => ANGLE_MIN + angleStepSize * x.angleIndex).ToArray();
+            var angles = bestWithinThreshold.Select(x => ANGLE_MIN + angleStepSize * x.angleIndex);
+            return angles.ToArray();
         }
 
         private static SinCos[] PrecalculateSinCos()
