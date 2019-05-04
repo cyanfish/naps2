@@ -6,14 +6,14 @@ using NAPS2.Images.Transforms;
 
 namespace NAPS2.Images
 {
-    public static class Deskew
+    public class HoughLineDeskewer : Deskewer
     {
         private const double ANGLE_MIN = -20;
         private const double ANGLE_MAX = 20;
         private const int ANGLE_STEPS = 201; // 0.2 degree step size
         private const int BEST_COUNT = 20;
 
-        public static double GetSkewAngle(IImage image)
+        public override double GetSkewAngle(IImage image)
         {
             var bitArrays = UnsafeImageOps.ConvertToBitArrays(image);
 
@@ -25,6 +25,9 @@ namespace NAPS2.Images
             int dCount = 2 * (w + h);
             int[,] scores = new int[dCount, ANGLE_STEPS];
 
+            // TODO: This should be a good candidate for OpenCL optimization.
+            // TODO: If you parallelize over the angle, you're operating over
+            // TODO: the same input data with the same branches.
             for (int y = 1; y <= h - 2; y++)
             {
                 for (int x = 1; x <= w - 2; x++)

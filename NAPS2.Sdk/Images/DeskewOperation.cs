@@ -12,14 +12,16 @@ namespace NAPS2.Images
     public class DeskewOperation : OperationBase
     {
         private readonly ImageRenderer imageRenderer;
+        private readonly Deskewer deskewer;
 
-        public DeskewOperation() : this(new ImageRenderer())
+        public DeskewOperation() : this(new ImageRenderer(), new HoughLineDeskewer())
         {
         }
 
-        public DeskewOperation(ImageRenderer imageRenderer)
+        public DeskewOperation(ImageRenderer imageRenderer, Deskewer deskewer)
         {
             this.imageRenderer = imageRenderer;
+            this.deskewer = deskewer;
 
             AllowCancel = true;
             AllowBackground = true;
@@ -51,7 +53,7 @@ namespace NAPS2.Images
                         {
                             return null;
                         }
-                        var transform = RotationTransform.Auto(bitmap);
+                        var transform = RotationTransform.Auto(bitmap, deskewer);
                         if (CancelToken.IsCancellationRequested)
                         {
                             return null;

@@ -19,7 +19,8 @@ namespace NAPS2.Images.Transforms
             return mod;
         }
 
-        public static RotationTransform Auto(IImage image) => new RotationTransform(-image.GetSkewAngle());
+        public static RotationTransform Auto(IImage image, Deskewer deskewer) =>
+            new RotationTransform(-deskewer.GetSkewAngle(image));
 
         public RotationTransform()
         {
