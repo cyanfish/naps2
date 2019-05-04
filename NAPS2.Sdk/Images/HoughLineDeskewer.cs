@@ -8,6 +8,21 @@ namespace NAPS2.Images
 {
     public class HoughLineDeskewer : Deskewer
     {
+        // Conceptually, Hough Line deskewing works like this:
+        //
+        // 1. Convert the image to black and white.
+        // 2. Create an array with an int for every possible line in the image
+        // within 20 degrees of horizontal. Each line is represented by the distance
+        // from the origin and the angle (in math terms, a parametric line).
+        // 3. Find all black pixels with white pixels below (i.e. bottom edges).
+        // 4. For each pixel, do some trigonometry to find every one of those lines
+        // it intersects with, and increment the value in the array for each line.
+        // 5. By looking for the largest array entries you find the lines that are
+        // most aligned with the bottom edges of the letters/shapes in the image.
+        // 6. Among the best lines, look for a cluster of similar angles.
+        // 7. If it's a big enough cluster, return the average of those angles.
+        // 8. Otherwise, a consistent skew angle couldn't be found, so return 0.
+
         private const double ANGLE_MIN = -20;
         private const double ANGLE_MAX = 20;
         private const int ANGLE_STEPS = 201; // 0.2 degree step size
@@ -25,6 +40,8 @@ namespace NAPS2.Images
 
             var sinCos = PrecalculateSinCos();
 
+            // TODO: Consider reducing the precision of distance or angle,
+            // TODO: possibly with a second pass to restore precision.
             int dCount = 2 * (w + h);
             int[,] scores = new int[dCount, ANGLE_STEPS];
 
@@ -41,6 +58,7 @@ namespace NAPS2.Images
                         {
                             var sc = sinCos[i];
                             int d = (int)(y * sc.cos - x * sc.sin + w);
+                            // TODO: Verify that this will never under/overflow.
                             scores[d, i]++;
                         }
                     }
