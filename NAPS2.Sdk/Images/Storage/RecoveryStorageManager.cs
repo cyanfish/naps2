@@ -10,6 +10,7 @@ using NAPS2.Serialization;
 
 namespace NAPS2.Images.Storage
 {
+    // TODO: Locking needs a lot of work.
     public class RecoveryStorageManager : FileStorageManager, IImageMetadataFactory
     {
         public const string LOCK_FILE_NAME = ".lock";
@@ -42,38 +43,47 @@ namespace NAPS2.Images.Storage
 
         public override string NextFilePath()
         {
-            EnsureFolderCreated();
-            string fileName = $"{Process.GetCurrentProcess().Id}_{(++fileNumber).ToString("D5", CultureInfo.InvariantCulture)}";
-            return Path.Combine(RecoveryFolderPath, fileName);
+            lock (this)
+            {
+                EnsureFolderCreated();
+                string fileName = $"{Process.GetCurrentProcess().Id}_{(++fileNumber).ToString("D5", CultureInfo.InvariantCulture)}";
+                return Path.Combine(RecoveryFolderPath, fileName);
+            }
         }
 
         public void EnsureFolderCreated()
         {
-            if (!folderCreated)
+            lock (this)
             {
-                var folder = new DirectoryInfo(RecoveryFolderPath);
-                folder.Create();
-                folderLockFile = new FileInfo(Path.Combine(RecoveryFolderPath, LOCK_FILE_NAME));
-                folderLock = folderLockFile.Open(FileMode.CreateNew, FileAccess.Write, FileShare.None);
-                recoveryIndex = new RecoveryIndex();
-                folderCreated = true;
+                if (!folderCreated)
+                {
+                    var folder = new DirectoryInfo(RecoveryFolderPath);
+                    folder.Create();
+                    folderLockFile = new FileInfo(Path.Combine(RecoveryFolderPath, LOCK_FILE_NAME));
+                    folderLock = folderLockFile.Open(FileMode.CreateNew, FileAccess.Write, FileShare.None);
+                    recoveryIndex = new RecoveryIndex();
+                    folderCreated = true;
+                }
             }
         }
 
         public void Commit()
         {
-            EnsureFolderCreated();
-            if (recoveryIndex.Images.Count == 0)
+            lock (this)
             {
-                // Clean up
-                ForceReleaseLock();
-                Directory.Delete(RecoveryFolderPath, true);
-                recoveryIndex = null;
-                folderCreated = false;
-            }
-            else
-            {
-                serializer.SerializeToFile(Path.Combine(RecoveryFolderPath, "index.xml"), recoveryIndex);
+                EnsureFolderCreated();
+                if (recoveryIndex.Images.Count == 0)
+                {
+                    // Clean up
+                    ForceReleaseLock();
+                    Directory.Delete(RecoveryFolderPath, true);
+                    recoveryIndex = null;
+                    folderCreated = false;
+                }
+                else
+                {
+                    serializer.SerializeToFile(Path.Combine(RecoveryFolderPath, "index.xml"), recoveryIndex);
+                }
             }
         }
 
@@ -92,10 +102,13 @@ namespace NAPS2.Images.Storage
 
         public void ForceReleaseLock()
         {
-            folderLock?.Close();
-            folderLockFile?.Delete();
-            folderLock = null;
-            folderLockFile = null;
+            lock (this)
+            {
+                folderLock?.Close();
+                folderLockFile?.Delete();
+                folderLock = null;
+                folderLockFile = null;
+            }
         }
     }
 }
