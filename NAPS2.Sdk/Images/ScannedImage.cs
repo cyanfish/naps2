@@ -4,6 +4,7 @@ using System.Linq;
 using NAPS2.Images.Storage;
 using NAPS2.Images.Transforms;
 using NAPS2.Scan;
+using NAPS2.Scan.Experimental;
 
 namespace NAPS2.Images
 {
@@ -40,7 +41,7 @@ namespace NAPS2.Images
             Metadata.Commit();
         }
 
-        public ScannedImage(IStorage storage, ScanBitDepth bitDepth, bool highQuality, int quality)
+        public ScannedImage(IStorage storage, BitDepth bitDepth, bool highQuality, int quality)
         {
             var convertParams = new StorageConvertParams { Lossless = highQuality, LossyQuality = quality };
             BackingStorage = StorageManager.ConvertToBacking(storage, convertParams);

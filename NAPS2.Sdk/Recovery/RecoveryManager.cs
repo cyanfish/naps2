@@ -10,6 +10,7 @@ using NAPS2.Operation;
 using NAPS2.Images;
 using NAPS2.Images.Storage;
 using NAPS2.Images.Transforms;
+using NAPS2.Scan;
 using NAPS2.Serialization;
 using NAPS2.WinForms;
 
@@ -146,7 +147,7 @@ namespace NAPS2.Recovery
                     {
                         using (var bitmap = StorageManager.ImageFactory.Decode(imagePath))
                         {
-                            scannedImage = new ScannedImage(bitmap, indexImage.BitDepth, indexImage.HighQuality, -1);
+                            scannedImage = new ScannedImage(bitmap, indexImage.BitDepth.ToBitDepth(), indexImage.HighQuality, -1);
                         }
                     }
                     foreach (var transform in indexImage.TransformList)

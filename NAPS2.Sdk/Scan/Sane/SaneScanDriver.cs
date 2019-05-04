@@ -265,7 +265,7 @@ namespace NAPS2.Scan.Sane
                     // This converter also has the side effect of working even if the scanner doesn't support Lineart
                     using (var encoded = scanProfile.BitDepth == ScanBitDepth.BlackWhite ? Transform.Perform(result, new BlackWhiteTransform(-scanProfile.Brightness)) : result)
                     {
-                        var image = new ScannedImage(encoded, scanProfile.BitDepth, scanProfile.MaxQuality, scanProfile.Quality);
+                        var image = new ScannedImage(encoded, scanProfile.BitDepth.ToBitDepth(), scanProfile.MaxQuality, scanProfile.Quality);
                         scannedImageHelper.PostProcessStep2(image, result, scanProfile, scanParams, 1, false);
                         string tempPath = scannedImageHelper.SaveForBackgroundOcr(result, scanParams);
                         scannedImageHelper.RunBackgroundOcr(image, scanParams, tempPath);

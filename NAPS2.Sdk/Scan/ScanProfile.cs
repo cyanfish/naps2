@@ -6,6 +6,7 @@ using System.Linq;
 using System.Xml.Serialization;
 using NAPS2.ImportExport;
 using NAPS2.Lang.Resources;
+using NAPS2.Scan.Experimental;
 using NAPS2.Scan.Wia.Native;
 
 namespace NAPS2.Scan
@@ -486,6 +487,36 @@ namespace NAPS2.Scan
         {
             object[] attrs = enumValue.GetType().GetField(enumValue.ToString()).GetCustomAttributes(typeof(DescriptionAttribute), false);
             return attrs.Cast<DescriptionAttribute>().Select(x => x.Description).SingleOrDefault();
+        }
+
+        public static BitDepth ToBitDepth(this ScanBitDepth bitDepth)
+        {
+            switch (bitDepth)
+            {
+                case ScanBitDepth.C24Bit:
+                    return BitDepth.Color;
+                case ScanBitDepth.Grayscale:
+                    return BitDepth.Grayscale;
+                case ScanBitDepth.BlackWhite:
+                    return BitDepth.BlackAndWhite;
+                default:
+                    throw new ArgumentException();
+            }
+        }
+
+        public static ScanBitDepth ToScanBitDepth(this BitDepth bitDepth)
+        {
+            switch (bitDepth)
+            {
+                case BitDepth.Color:
+                    return ScanBitDepth.C24Bit;
+                case BitDepth.Grayscale:
+                    return ScanBitDepth.Grayscale;
+                case BitDepth.BlackAndWhite:
+                    return ScanBitDepth.BlackWhite;
+                default:
+                    throw new ArgumentException();
+            }
         }
     }
 }

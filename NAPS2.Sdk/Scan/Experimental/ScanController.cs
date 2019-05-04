@@ -49,7 +49,7 @@ namespace NAPS2.Scan.Experimental
             ScanStartCallback();
             bridge.Scan(options, cancelToken, new ScanEvents(PageStartCallback, PageProgressCallback), (scannedImage, postProcessingContext) =>
             {
-                localPostProcessor.PostProcess(scannedImage, postProcessingContext);
+                localPostProcessor.PostProcess(scannedImage, options, postProcessingContext);
                 sink.PutImage(scannedImage);
                 PageEndCallback(scannedImage);
             }).ContinueWith(t =>

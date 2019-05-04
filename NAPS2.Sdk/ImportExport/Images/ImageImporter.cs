@@ -8,6 +8,7 @@ using NAPS2.Scan;
 using NAPS2.Images;
 using NAPS2.Images.Storage;
 using NAPS2.Images.Transforms;
+using NAPS2.Scan.Experimental;
 using NAPS2.Util;
 
 namespace NAPS2.ImportExport.Images
@@ -59,7 +60,7 @@ namespace NAPS2.ImportExport.Images
                                 return;
                             }
                             
-                            var image = new ScannedImage(frame, ScanBitDepth.C24Bit, frame.IsOriginalLossless, -1);
+                            var image = new ScannedImage(frame, BitDepth.Color, frame.IsOriginalLossless, -1);
                             if (importParams.ThumbnailSize.HasValue)
                             {
                                 image.SetThumbnail(Transform.Perform(frame, new ThumbnailTransform(importParams.ThumbnailSize.Value)));

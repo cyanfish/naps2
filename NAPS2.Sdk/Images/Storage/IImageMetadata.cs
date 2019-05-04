@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using NAPS2.Images.Transforms;
-using NAPS2.Scan;
+using NAPS2.Scan.Experimental;
 
 namespace NAPS2.Images.Storage
 {
@@ -14,7 +14,7 @@ namespace NAPS2.Images.Storage
 
         int Index { get; set; }
 
-        ScanBitDepth BitDepth { get; set; }
+        BitDepth BitDepth { get; set; }
 
         bool Lossless { get; set; }
 

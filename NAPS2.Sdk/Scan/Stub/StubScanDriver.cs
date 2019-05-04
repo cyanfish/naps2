@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using NAPS2.Images;
 using NAPS2.Images.Storage;
+using NAPS2.Scan.Experimental;
 
 namespace NAPS2.Scan.Stub
 {
@@ -75,7 +76,7 @@ namespace NAPS2.Scan.Stub
                 g.FillRectangle(Brushes.LightGray, 0, 0, bitmap.Width, bitmap.Height);
                 g.DrawString((_number++).ToString("G"), new Font("Times New Roman", 80), Brushes.Black, 0, 350);
             }
-            var image = new ScannedImage(new GdiImage(bitmap), ScanBitDepth.C24Bit, ScanProfile.MaxQuality, ScanProfile.Quality);
+            var image = new ScannedImage(new GdiImage(bitmap), BitDepth.Color, ScanProfile.MaxQuality, ScanProfile.Quality);
             return image;
         }
 

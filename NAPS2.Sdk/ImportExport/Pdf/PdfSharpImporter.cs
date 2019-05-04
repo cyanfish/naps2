@@ -13,6 +13,7 @@ using NAPS2.Scan;
 using NAPS2.Images;
 using NAPS2.Images.Storage;
 using NAPS2.Images.Transforms;
+using NAPS2.Scan.Experimental;
 using NAPS2.Util;
 using PdfSharp.Pdf;
 using PdfSharp.Pdf.Advanced;
@@ -206,7 +207,7 @@ namespace NAPS2.ImportExport.Pdf
                 using (var storage = StorageManager.ImageFactory.Decode(memoryStream, ".jpg"))
                 {
                     storage.SetResolution(storage.Width / (float)page.Width.Inch, storage.Height / (float)page.Height.Inch);
-                    var image = new ScannedImage(storage, ScanBitDepth.C24Bit, false, -1);
+                    var image = new ScannedImage(storage, BitDepth.Color, false, -1);
                     if (importParams.ThumbnailSize.HasValue)
                     {
                         image.SetThumbnail(Transform.Perform(storage, new ThumbnailTransform(importParams.ThumbnailSize.Value)));
@@ -229,17 +230,17 @@ namespace NAPS2.ImportExport.Pdf
             var buffer = imageObject.Stream.UnfilteredValue;
 
             IImage storage;
-            ScanBitDepth bitDepth;
+            BitDepth bitDepth;
             switch (bitsPerComponent)
             {
                 case 8:
                     storage = StorageManager.ImageFactory.FromDimensions(width, height, StoragePixelFormat.RGB24);
-                    bitDepth = ScanBitDepth.C24Bit;
+                    bitDepth = BitDepth.Color;
                     RgbToBitmapUnmanaged(storage, buffer);
                     break;
                 case 1:
                     storage = StorageManager.ImageFactory.FromDimensions(width, height, StoragePixelFormat.BW1);
-                    bitDepth = ScanBitDepth.BlackWhite;
+                    bitDepth = BitDepth.BlackAndWhite;
                     BlackAndWhiteToBitmapUnmanaged(storage, buffer);
                     break;
                 default:
@@ -361,7 +362,7 @@ namespace NAPS2.ImportExport.Pdf
             {
                 storage.SetResolution(storage.Width / (float)page.Width.Inch, storage.Height / (float)page.Height.Inch);
 
-                var image = new ScannedImage(storage, ScanBitDepth.BlackWhite, true, -1);
+                var image = new ScannedImage(storage, BitDepth.BlackAndWhite, true, -1);
                 if (importParams.ThumbnailSize.HasValue)
                 {
                     image.SetThumbnail(Transform.Perform(storage, new ThumbnailTransform(importParams.ThumbnailSize.Value)));

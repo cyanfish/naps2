@@ -4,6 +4,7 @@ using System.Linq;
 using NAPS2.Images.Transforms;
 using NAPS2.Recovery;
 using NAPS2.Scan;
+using NAPS2.Scan.Experimental;
 using NAPS2.Serialization;
 using NAPS2.Util;
 
@@ -41,10 +42,10 @@ namespace NAPS2.Images.Storage
             }
         }
 
-        public ScanBitDepth BitDepth
+        public BitDepth BitDepth
         {
-            get => indexImage.BitDepth;
-            set => indexImage.BitDepth = value;
+            get => indexImage.BitDepth.ToBitDepth();
+            set => indexImage.BitDepth = value.ToScanBitDepth();
         }
 
         public bool Lossless

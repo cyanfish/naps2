@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Linq;
 using System.Threading.Tasks;
+using NAPS2.Images.Storage;
 using NAPS2.Util;
 
 namespace NAPS2.Images.Transforms
@@ -299,6 +301,22 @@ namespace NAPS2.Images.Transforms
             }
         }
 
+        private static int GetBytesPerPixel(IImage bitmap)
+        {
+            if (bitmap.PixelFormat == StoragePixelFormat.ARGB32)
+            {
+                return 4;
+            }
+            else if (bitmap.PixelFormat == StoragePixelFormat.RGB24)
+            {
+                return 3;
+            }
+            else
+            {
+                throw new ArgumentException("Unsupported pixel format: " + bitmap.PixelFormat);
+            }
+        }
+
         public static unsafe Bitmap ConvertTo1Bpp(Bitmap bitmap, int threshold)
         {
             int thresholdAdjusted = (threshold + 1000) * 255 / 2;
@@ -354,6 +372,50 @@ namespace NAPS2.Images.Transforms
             monoBitmap.SafeSetResolution(bitmap.HorizontalResolution, bitmap.VerticalResolution);
 
             return monoBitmap;
+        }
+
+        public static unsafe BitArray[] ConvertToBitArrays(IImage bitmap)
+        {
+            // TODO: Support black & white images
+            int thresholdAdjusted = 140;
+            int bytesPerPixel = GetBytesPerPixel(bitmap);
+
+            var bitmapData = bitmap.Lock(LockMode.ReadOnly, out var scan0, out var stride);
+            byte* data = (byte*)scan0;
+            int h = bitmap.Height;
+            int w = bitmap.Width;
+
+            var bitArrays = new BitArray[h];
+
+            PartitionRows(h, (start, end) =>
+            {
+                for (int y = start; y < end; y++)
+                {
+                    var outRow = new BitArray(w);
+                    bitArrays[y] = outRow;
+                    byte* row = data + stride * y;
+                    for (int x = 0; x < w; x += 8)
+                    {
+                        for (int k = 0; k < 8; k++)
+                        {
+                            if (x + k < w)
+                            {
+                                byte* pixel = row + (x + k) * bytesPerPixel;
+                                byte r = *pixel;
+                                byte g = *(pixel + 1);
+                                byte b = *(pixel + 2);
+                                // Use standard values for grayscale conversion to weight the RGB values
+                                int luma = r * 299 + g * 587 + b * 114;
+                                outRow[x] = luma >= thresholdAdjusted;
+                            }
+                        }
+                    }
+                }
+            });
+
+            bitmap.Unlock(bitmapData);
+
+            return bitArrays;
         }
 
         private static void PartitionRows(int count, Action<int, int> action)

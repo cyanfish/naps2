@@ -10,6 +10,7 @@ using NAPS2.Images.Transforms;
 using NAPS2.Ocr;
 using NAPS2.Operation;
 using NAPS2.Scan;
+using NAPS2.Scan.Experimental;
 using NAPS2.Util;
 
 namespace NAPS2.Images
@@ -280,7 +281,7 @@ namespace NAPS2.Images
                     return null;
                 }
 
-                ScanBitDepth bitDepth = scanProfile.UseNativeUI ? ScanBitDepth.C24Bit : scanProfile.BitDepth;
+                BitDepth bitDepth = scanProfile.UseNativeUI ? BitDepth.Color : scanProfile.BitDepth.ToBitDepth();
                 var image = new ScannedImage(result, bitDepth, scanProfile.MaxQuality, scanProfile.Quality);
                 PostProcessStep2(image, result, scanProfile, scanParams, pageNumber);
                 string tempPath = SaveForBackgroundOcr(result, scanParams);

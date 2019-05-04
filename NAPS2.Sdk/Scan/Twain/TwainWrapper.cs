@@ -162,7 +162,7 @@ namespace NAPS2.Scan.Twain
                             var bitDepth = output.PixelFormat == StoragePixelFormat.BW1
                                 ? ScanBitDepth.BlackWhite
                                 : ScanBitDepth.C24Bit;
-                            var image = new ScannedImage(result, bitDepth, scanProfile.MaxQuality, scanProfile.Quality);
+                            var image = new ScannedImage(result, bitDepth.ToBitDepth(), scanProfile.MaxQuality, scanProfile.Quality);
                             if (scanParams.DetectPatchCodes)
                             {
                                 foreach (var patchCodeInfo in eventArgs.GetExtImageInfo(ExtendedImageInfo.PatchCode))

@@ -39,9 +39,14 @@ namespace NAPS2.Scan.Experimental.Internal
             var driver = scanDriverFactory.Create(options);
             var progressThrottle = new EventThrottle<double>(scanEvents.PageProgress);
             var driverScanEvents = new ScanEvents(scanEvents.PageStart, progressThrottle.OnlyIfChanged);
+            int pageNumber = 0;
             await driver.Scan(options, cancelToken, driverScanEvents, image =>
             {
-                var (scannedImage, postProcessingContext) = remotePostProcessor.PostProcess(image, options);
+                var postProcessingContext = new PostProcessingContext
+                {
+                    PageNumber = ++pageNumber
+                };
+                var scannedImage = remotePostProcessor.PostProcess(image, options, postProcessingContext);
                 callback(scannedImage, postProcessingContext);
             });
         }

@@ -10,6 +10,6 @@ namespace NAPS2.Scan.Experimental.Internal
     /// </summary>
     internal interface ILocalPostProcessor
     {
-        void PostProcess(ScannedImage image, PostProcessingContext postProcessingContext);
+        void PostProcess(ScannedImage image, ScanOptions options, PostProcessingContext postProcessingContext);
     }
 }

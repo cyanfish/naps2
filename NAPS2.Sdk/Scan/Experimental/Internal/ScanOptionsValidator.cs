@@ -13,6 +13,12 @@ namespace NAPS2.Scan.Experimental.Internal
             options = options.ToXml().FromXml<ScanOptions>();
 
             options.Driver = ValidateDriver(options);
+            if (options.Driver == Driver.Sane)
+            {
+                options.UseNativeUI = false;
+            }
+
+            // TODO: Validate DoOcr based on OcrParams
 
             return options;
         }
