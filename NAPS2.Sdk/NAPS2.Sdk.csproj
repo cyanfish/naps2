@@ -139,6 +139,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ClientCreds.resx</DependentUpon>
     </Compile>
+    <Compile Include="Images\Deskew.cs" />
     <Compile Include="Remoting\ClientServer\ClientContext.cs" />
     <Compile Include="Remoting\ClientServer\ClientContextFactory.cs" />
     <Compile Include="Remoting\ClientServer\IScanCallback.cs" />
