@@ -68,7 +68,7 @@ namespace NAPS2.Scan.Experimental.Internal
             double scaleFactor = 1;
             if (!options.UseNativeUI)
             {
-                scaleFactor = options.ScaleRatio;
+                scaleFactor = 1.0 / options.ScaleRatio;
             }
 
             var scaled = Transform.Perform(original, new ScaleTransform(scaleFactor));

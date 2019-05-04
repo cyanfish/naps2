@@ -127,7 +127,7 @@ namespace NAPS2.Images
             double scaleFactor = 1;
             if (!profile.UseNativeUI || !supportsNativeUI)
             {
-                scaleFactor = profile.AfterScanScale.ToIntScaleFactor();
+                scaleFactor = 1.0 / profile.AfterScanScale.ToIntScaleFactor();
             }
             var result = Transform.Perform(output, new ScaleTransform(scaleFactor));
 

@@ -317,11 +317,11 @@ namespace NAPS2.Images.Storage
         [Transformer]
         public GdiImage PerformTransform(GdiImage image, ScaleTransform transform)
         {
-            int realWidth = (int)Math.Round(image.Width / transform.ScaleFactor);
-            int realHeight = (int)Math.Round(image.Height / transform.ScaleFactor);
+            int realWidth = (int)Math.Round(image.Width * transform.ScaleFactor);
+            int realHeight = (int)Math.Round(image.Height * transform.ScaleFactor);
 
-            double horizontalRes = image.HorizontalResolution / transform.ScaleFactor;
-            double verticalRes = image.VerticalResolution / transform.ScaleFactor;
+            double horizontalRes = image.HorizontalResolution * transform.ScaleFactor;
+            double verticalRes = image.VerticalResolution * transform.ScaleFactor;
 
             var result = new Bitmap(realWidth, realHeight, PixelFormat.Format24bppRgb);
             using (Graphics g = Graphics.FromImage(result))
