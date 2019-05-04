@@ -229,7 +229,7 @@ namespace NAPS2.Images.Transforms
                     {
                         byte* srcRow = (byte*)(srcData.Scan0 + srcStride * (y1 + y) + (x1 + 7) / 8);
                         byte* dstRow = (byte*)(dstData.Scan0 + dstStride * y);
-                        
+
                         for (int x = 0; x < bytesExceptLast; x++)
                         {
                             byte* srcPtr = srcRow + x;
@@ -377,7 +377,7 @@ namespace NAPS2.Images.Transforms
         public static unsafe BitArray[] ConvertToBitArrays(IImage bitmap)
         {
             // TODO: Support black & white images
-            int thresholdAdjusted = 140;
+            int thresholdAdjusted = 140 * 1000;
             int bytesPerPixel = GetBytesPerPixel(bitmap);
 
             var bitmapData = bitmap.Lock(LockMode.ReadOnly, out var scan0, out var stride);
@@ -394,21 +394,15 @@ namespace NAPS2.Images.Transforms
                     var outRow = new BitArray(w);
                     bitArrays[y] = outRow;
                     byte* row = data + stride * y;
-                    for (int x = 0; x < w; x += 8)
+                    for (int x = 0; x < w; x++)
                     {
-                        for (int k = 0; k < 8; k++)
-                        {
-                            if (x + k < w)
-                            {
-                                byte* pixel = row + (x + k) * bytesPerPixel;
-                                byte r = *pixel;
-                                byte g = *(pixel + 1);
-                                byte b = *(pixel + 2);
-                                // Use standard values for grayscale conversion to weight the RGB values
-                                int luma = r * 299 + g * 587 + b * 114;
-                                outRow[x] = luma >= thresholdAdjusted;
-                            }
-                        }
+                        byte* pixel = row + x * bytesPerPixel;
+                        byte r = *pixel;
+                        byte g = *(pixel + 1);
+                        byte b = *(pixel + 2);
+                        // Use standard values for grayscale conversion to weight the RGB values
+                        int luma = r * 299 + g * 587 + b * 114;
+                        outRow[x] = luma < thresholdAdjusted;
                     }
                 }
             });
