@@ -14,7 +14,7 @@ namespace NAPS2.Images
         private const int BEST_MAX_COUNT = 100;
         private const int BEST_THRESHOLD_INDEX = 9;
         private const double BEST_THRESOLD_FACTOR = 0.5;
-        private const double CLUSTER_TARGET_SPREAD = 2.0;
+        private const double CLUSTER_TARGET_SPREAD = 2.01;
 
         public override double GetSkewAngle(IImage image)
         {
