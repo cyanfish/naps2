@@ -23,56 +23,60 @@ namespace NAPS2.ImportExport.Pdf
 
         public static IEnumerable<IImage> Render(string path, float dpi)
         {
-            var doc = NativeLib.FPDF_LoadDocument(path, null);
-            try
+            // Pdfium is not thread-safe
+            lock (NativeLib)
             {
-                var pageCount = NativeLib.FPDF_GetPageCount(doc);
-                for (int pageIndex = 0; pageIndex < pageCount; pageIndex++)
+                var doc = NativeLib.FPDF_LoadDocument(path, null);
+                try
                 {
-                    var page = NativeLib.FPDF_LoadPage(doc, pageIndex);
-                    try
+                    var pageCount = NativeLib.FPDF_GetPageCount(doc);
+                    for (int pageIndex = 0; pageIndex < pageCount; pageIndex++)
                     {
-                        var widthInInches = NativeLib.FPDF_GetPageWidth(page) / 72;
-                        var heightInInches = NativeLib.FPDF_GetPageHeight(page) / 72;
-
-                        // Cap the resolution to 10k pixels in each dimension
-                        dpi = Math.Min(dpi, (float) (10000 / heightInInches));
-                        dpi = Math.Min(dpi, (float) (10000 / widthInInches));
-
-                        int widthInPx = (int) Math.Round(widthInInches * dpi);
-                        int heightInPx = (int) Math.Round(heightInInches * dpi);
-
-                        var bitmap = StorageManager.ImageFactory.FromDimensions(widthInPx, heightInPx, StoragePixelFormat.RGB24);
-                        bitmap.SetResolution(dpi, dpi);
-                        var bitmapData = bitmap.Lock(LockMode.ReadWrite, out var scan0, out var stride);
+                        var page = NativeLib.FPDF_LoadPage(doc, pageIndex);
                         try
                         {
-                            var pdfiumBitmap = NativeLib.FPDFBitmap_CreateEx(widthInPx, heightInPx, PdfiumNativeLibrary.FPDFBitmap_BGR, scan0, stride);
+                            var widthInInches = NativeLib.FPDF_GetPageWidth(page) / 72;
+                            var heightInInches = NativeLib.FPDF_GetPageHeight(page) / 72;
+
+                            // Cap the resolution to 10k pixels in each dimension
+                            dpi = Math.Min(dpi, (float) (10000 / heightInInches));
+                            dpi = Math.Min(dpi, (float) (10000 / widthInInches));
+
+                            int widthInPx = (int) Math.Round(widthInInches * dpi);
+                            int heightInPx = (int) Math.Round(heightInInches * dpi);
+
+                            var bitmap = StorageManager.ImageFactory.FromDimensions(widthInPx, heightInPx, StoragePixelFormat.RGB24);
+                            bitmap.SetResolution(dpi, dpi);
+                            var bitmapData = bitmap.Lock(LockMode.ReadWrite, out var scan0, out var stride);
                             try
                             {
-                                NativeLib.FPDFBitmap_FillRect(pdfiumBitmap, 0, 0, widthInPx, heightInPx, COLOR_WHITE);
-                                NativeLib.FPDF_RenderPageBitmap(pdfiumBitmap, page, 0, 0, widthInPx, heightInPx, 0, RENDER_FLAGS);
-                                yield return bitmap;
+                                var pdfiumBitmap = NativeLib.FPDFBitmap_CreateEx(widthInPx, heightInPx, PdfiumNativeLibrary.FPDFBitmap_BGR, scan0, stride);
+                                try
+                                {
+                                    NativeLib.FPDFBitmap_FillRect(pdfiumBitmap, 0, 0, widthInPx, heightInPx, COLOR_WHITE);
+                                    NativeLib.FPDF_RenderPageBitmap(pdfiumBitmap, page, 0, 0, widthInPx, heightInPx, 0, RENDER_FLAGS);
+                                    yield return bitmap;
+                                }
+                                finally
+                                {
+                                    NativeLib.FPDFBitmap_Destroy(pdfiumBitmap);
+                                }
                             }
                             finally
                             {
-                                NativeLib.FPDFBitmap_Destroy(pdfiumBitmap);
+                                bitmap.Unlock(bitmapData);
                             }
                         }
                         finally
                         {
-                            bitmap.Unlock(bitmapData);
+                            NativeLib.FPDF_ClosePage(page);
                         }
                     }
-                    finally
-                    {
-                        NativeLib.FPDF_ClosePage(page);
-                    }
                 }
-            }
-            finally
-            {
-                NativeLib.FPDF_CloseDocument(doc);
+                finally
+                {
+                    NativeLib.FPDF_CloseDocument(doc);
+                }
             }
         }
     }
