@@ -61,7 +61,14 @@ namespace NAPS2.Serialization
                 element.SetAttributeValue(Xsi + "nil", "true");
                 return element;
             }
-            var typeInfo = GetTypeInfo(obj.GetType());
+
+            var actualType = obj.GetType();
+            if (actualType != type)
+            {
+                element.SetAttributeValue(Xsi + "type", actualType.Name);
+            }
+            var typeInfo = GetTypeInfo(actualType);
+
             if (typeInfo.CustomSerializer != null)
             {
                 typeInfo.CustomSerializer.SerializeObject(obj, element, type);
@@ -74,6 +81,7 @@ namespace NAPS2.Serialization
                     element.Add(child);
                 }
             }
+
             return element;
         }
 
@@ -98,13 +106,23 @@ namespace NAPS2.Serialization
             {
                 return null;
             }
-            var typeInfo = GetTypeInfo(type);
+
+            var actualTypeName = element.Attribute(Xsi + "type")?.Value;
+            var actualType = type;
+            if (actualTypeName != null)
+            {
+                actualType = FindType(type, actualTypeName);
+                if (actualType == null)
+                {
+                    throw new InvalidOperationException($"Could not find type {actualTypeName} with base type {type.FullName}");
+                }
+            }
+            var typeInfo = GetTypeInfo(actualType);
             if (typeInfo.CustomSerializer != null)
             {
-                return typeInfo.CustomSerializer.DeserializeObject(element, type);
+                return typeInfo.CustomSerializer.DeserializeObject(element, actualType);
             }
-            // TODO: Subtypes
-            var obj = Activator.CreateInstance(type);
+            var obj = Activator.CreateInstance(actualType);
             foreach (var propInfo in typeInfo.Properties)
             {
                 // TODO: Detect unmapped elements
@@ -116,6 +134,16 @@ namespace NAPS2.Serialization
                 }
             }
             return obj;
+        }
+
+        private static Type FindType(Type baseType, string actualTypeName)
+        {
+            lock (TypeInfoCache)
+            {
+                // TODO: This should not use the cache (which is nondeterministic), instead TypeInfo should store a set of known types (by walking the property tree and unioning)
+                // TODO: Also have a separate set/logic for primitive and other built-in types
+                return TypeInfoCache.Keys.FirstOrDefault(x => x.Name == actualTypeName && baseType.IsAssignableFrom(x));
+            }
         }
 
         private static string GetElementNameForType(Type type)
