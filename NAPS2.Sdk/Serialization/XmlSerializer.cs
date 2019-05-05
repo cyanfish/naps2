@@ -5,6 +5,8 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Text;
+using System.Xml;
 using System.Xml.Linq;
 using System.Xml.Serialization;
 using NAPS2.Util;
@@ -152,7 +154,8 @@ namespace NAPS2.Serialization
             {
                 return TypeInfoCache.GetOrSet(type, () =>
                 {
-                    var props = type.GetProperties(BindingFlags.Instance | BindingFlags.Public).Where(x => x.GetMethod != null && x.SetMethod != null);
+                    var props = type.GetProperties(BindingFlags.Instance | BindingFlags.Public)
+                        .Where(x => x.GetMethod != null && x.SetMethod != null && !x.GetCustomAttributes(typeof(XmlIgnoreAttribute)).Any());
                     var typeInfo = new XmlTypeInfo
                     {
                         Properties = props.Select(x => new XmlPropertyInfo
@@ -576,7 +579,11 @@ namespace NAPS2.Serialization
     {
         public void Serialize(Stream stream, T obj)
         {
-            SerializeToXDocument(obj).Save(stream);
+            using (var writer = new XmlTextWriter(new StreamWriter(stream, new UTF8Encoding(false), 1024, true)) { Formatting = Formatting.Indented })
+            {
+                SerializeToXDocument(obj).Save(writer);
+                writer.Dispose();
+            }
         }
 
         public XDocument SerializeToXDocument(T obj)
@@ -605,6 +612,10 @@ namespace NAPS2.Serialization
 
         public T DeserializeFromXDocument(XDocument doc)
         {
+            if (doc.Root?.Name != GetElementNameForType(typeof(T)))
+            {
+                throw new InvalidOperationException($"Could not map XML element <{doc.Root?.Name}> to {typeof(T).FullName}. Expected <{GetElementNameForType(typeof(T))}>.");
+            }
             return DeserializeFromXElement(doc.Root);
         }
 
