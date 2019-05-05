@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Xml.Linq;
+using System.Xml.Serialization;
 using NAPS2.Util;
 
 namespace NAPS2.Serialization
@@ -112,12 +113,18 @@ namespace NAPS2.Serialization
         {
             lock (TypeInfoCache)
             {
-                return GetTypeInfo(baseType).KnownTypes?.SingleOrDefault(x => x.Name == actualTypeName);
+                return GetTypeInfo(baseType).KnownTypes?.SingleOrDefault(x => GetElementNameForType(x) == actualTypeName);
             }
         }
 
         protected static string GetElementNameForType(Type type)
         {
+            // TODO: Cache this?
+            var xmlNameAttribute = type.GetCustomAttributes(typeof(XmlTypeAttribute)).Cast<XmlTypeAttribute>().FirstOrDefault();
+            if (xmlNameAttribute != null)
+            {
+                return xmlNameAttribute.TypeName;
+            }
             if (type.IsArray)
             {
                 return "ArrayOf" + GetElementNameForType(type.GetElementType());
@@ -166,6 +173,10 @@ namespace NAPS2.Serialization
                         {
                             typeInfo.CustomSerializer = new ArraySerializer();
                         }
+                        else if (type.IsEnum)
+                        {
+                            typeInfo.CustomSerializer = new EnumSerializer();
+                        }
                         else
                         {
                             // Verify we can create an instance to fail fast
@@ -179,6 +190,7 @@ namespace NAPS2.Serialization
                             .Select(x => GetTypeInfo(x.PropertyType).KnownTypes)
                             .Where(x => x != null)
                             .Append(GetKnownTypes(type))
+                            .Append(type.GetCustomAttributes(typeof(XmlIncludeAttribute)).Cast<XmlIncludeAttribute>().Select(x => x.Type))
                             .Aggregate(new HashSet<Type>(), (x, y) => new HashSet<Type>(x.Union(y)));
                     }
 
@@ -543,6 +555,19 @@ namespace NAPS2.Serialization
             public override object DeserializeObject(XElement element, Type type)
             {
                 return DeserializeInternal(element, Nullable.GetUnderlyingType(type));
+            }
+        }
+
+        protected class EnumSerializer : CustomXmlSerializer
+        {
+            public override void SerializeObject(object obj, XElement element, Type type)
+            {
+                element.Value = obj.ToString();
+            }
+
+            public override object DeserializeObject(XElement element, Type type)
+            {
+                return Enum.Parse(type, element.Value);
             }
         }
     }
