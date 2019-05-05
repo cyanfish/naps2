@@ -58,7 +58,6 @@ namespace NAPS2.Images
                         {
                             var sc = sinCos[i];
                             int d = (int)(y * sc.cos - x * sc.sin + w);
-                            // TODO: Verify that this will never under/overflow.
                             scores[d, i]++;
                         }
                     }
