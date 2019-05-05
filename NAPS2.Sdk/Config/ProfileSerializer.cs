@@ -45,8 +45,8 @@ namespace NAPS2.Config
 
         private List<ScanProfile> ReadProfiles(Stream configFileStream)
         {
-            var serializer = new XmlSerializer(typeof(List<ScanProfile>));
-            var settingsList = (List<ScanProfile>)serializer.Deserialize(configFileStream);
+            var serializer = new XmlSerializer<List<ScanProfile>>();
+            var settingsList = serializer.Deserialize(configFileStream);
             // Upgrade from v1 to v2 if necessary
             foreach (var settings in settingsList)
             {

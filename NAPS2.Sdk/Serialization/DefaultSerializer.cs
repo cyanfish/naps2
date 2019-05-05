@@ -20,13 +20,13 @@ namespace NAPS2.Serialization
 
         public void Serialize(Stream stream, T obj)
         {
-            var xmlSerializer = XmlSerializerCache.GetSerializer(typeof(T), knownTypes);
+            var xmlSerializer = new XmlSerializer<T>();
             xmlSerializer.Serialize(stream, obj);
         }
 
         public T Deserialize(Stream stream)
         {
-            var xmlSerializer = XmlSerializerCache.GetSerializer(typeof(T), knownTypes);
+            var xmlSerializer = new XmlSerializer<T>();
             return (T)xmlSerializer.Deserialize(stream);
         }
     }

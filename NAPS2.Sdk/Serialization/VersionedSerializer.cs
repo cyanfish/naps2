@@ -28,20 +28,20 @@ namespace NAPS2.Serialization
 
         protected void XmlSerialize(Stream stream, T obj)
         {
-            var xmlSerializer = XmlSerializerCache.GetSerializer(typeof(T), KnownTypesArray);
+            var xmlSerializer = new XmlSerializer<T>();
             xmlSerializer.Serialize(stream, obj);
         }
 
         protected T XmlDeserialize(Stream stream)
         {
-            var xmlSerializer = XmlSerializerCache.GetSerializer(typeof(T), KnownTypesArray);
-            return (T)xmlSerializer.Deserialize(stream);
+            var xmlSerializer = new XmlSerializer<T>();
+            return xmlSerializer.Deserialize(stream);
         }
 
         protected T2 XmlDeserialize<T2>(Stream stream)
         {
-            var xmlSerializer = XmlSerializerCache.GetSerializer(typeof(T2), KnownTypesArray);
-            return (T2)xmlSerializer.Deserialize(stream);
+            var xmlSerializer = new XmlSerializer<T2>();
+            return xmlSerializer.Deserialize(stream);
         }
 
         protected int GetVersion(XDocument doc)

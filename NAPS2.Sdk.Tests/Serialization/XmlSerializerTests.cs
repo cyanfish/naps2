@@ -161,7 +161,6 @@ namespace NAPS2.Sdk.Tests.Serialization
             Assert.True(copySubtype.Bool);
         }
 
-        // TODO: Subtypes (with xsi:type)
         // TODO: Custom serialization
         // TODO: Ordering
 
@@ -180,6 +179,11 @@ namespace NAPS2.Sdk.Tests.Serialization
         private class PocoSubtype : Poco
         {
             public bool Bool { get; set; }
+        }
+
+        private class PocoTypes : CustomXmlTypes<Poco>
+        {
+            protected override Type[] GetKnownTypes() => new[] { typeof(PocoSubtype) };
         }
 
         private class PrivateSetter

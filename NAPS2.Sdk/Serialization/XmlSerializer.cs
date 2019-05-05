@@ -10,11 +10,15 @@ using NAPS2.Util;
 
 namespace NAPS2.Serialization
 {
-    public class XmlSerializer<T>
+    public abstract class XmlSerializer
     {
-        private static readonly XNamespace Xsi = "http://www.w3.org/2001/XMLSchema-instance";
+        protected static readonly XNamespace Xsi = "http://www.w3.org/2001/XMLSchema-instance";
 
-        private static readonly Dictionary<Type, XmlTypeInfo> TypeInfoCache = new Dictionary<Type, XmlTypeInfo>
+        protected static Dictionary<Type, CustomXmlSerializer> CustomSerializerCache;
+
+        protected static Dictionary<Type, List<CustomXmlTypes>> CustomTypesCache;
+
+        protected static readonly Dictionary<Type, XmlTypeInfo> TypeInfoCache = new Dictionary<Type, XmlTypeInfo>
         {
             { typeof(char), new XmlTypeInfo { CustomSerializer = new CharSerializer() } },
             { typeof(string), new XmlTypeInfo { CustomSerializer = new StringSerializer() } },
@@ -34,26 +38,7 @@ namespace NAPS2.Serialization
             { typeof(List<>), new XmlTypeInfo { CustomSerializer = new ListSerializer() } },
         };
 
-        public void Serialize(T obj, Stream stream)
-        {
-            SerializeToXDocument(obj).Save(stream);
-        }
-
-        public XDocument SerializeToXDocument(T obj)
-        {
-            var doc = new XDocument();
-            var root = SerializeToXElement(obj, GetElementNameForType(typeof(T)));
-            root.SetAttributeValue(XNamespace.Xmlns + "xsi", Xsi.NamespaceName);
-            doc.Add(root);
-            return doc;
-        }
-
-        public XElement SerializeToXElement(T obj, string elementName)
-        {
-            return SerializeInternal(obj, elementName, typeof(T));
-        }
-
-        private static XElement SerializeInternal(object obj, string elementName, Type type)
+        protected static XElement SerializeInternal(object obj, string elementName, Type type)
         {
             var element = new XElement(elementName);
             if (obj == null)
@@ -85,22 +70,7 @@ namespace NAPS2.Serialization
             return element;
         }
 
-        public T Deserialize(Stream stream)
-        {
-            return DeserializeFromXDocument(XDocument.Load(stream));
-        }
-
-        public T DeserializeFromXDocument(XDocument doc)
-        {
-            return DeserializeFromXElement(doc.Root);
-        }
-
-        public T DeserializeFromXElement(XElement element)
-        {
-            return (T)DeserializeInternal(element, typeof(T));
-        }
-
-        private static object DeserializeInternal(XElement element, Type type)
+        protected static object DeserializeInternal(XElement element, Type type)
         {
             if (element.Attribute(Xsi + "nil")?.Value == "true")
             {
@@ -136,17 +106,15 @@ namespace NAPS2.Serialization
             return obj;
         }
 
-        private static Type FindType(Type baseType, string actualTypeName)
+        protected static Type FindType(Type baseType, string actualTypeName)
         {
             lock (TypeInfoCache)
             {
-                // TODO: This should not use the cache (which is nondeterministic), instead TypeInfo should store a set of known types (by walking the property tree and unioning)
-                // TODO: Also have a separate set/logic for primitive and other built-in types
-                return TypeInfoCache.Keys.FirstOrDefault(x => x.Name == actualTypeName && baseType.IsAssignableFrom(x));
+                return GetTypeInfo(baseType).KnownTypes?.SingleOrDefault(x => x.Name == actualTypeName);
             }
         }
 
-        private static string GetElementNameForType(Type type)
+        protected static string GetElementNameForType(Type type)
         {
             if (type.IsArray)
             {
@@ -169,7 +137,7 @@ namespace NAPS2.Serialization
             return type.Name;
         }
 
-        private static XmlTypeInfo GetTypeInfo(Type type)
+        protected static XmlTypeInfo GetTypeInfo(Type type)
         {
             lock (TypeInfoCache)
             {
@@ -181,42 +149,99 @@ namespace NAPS2.Serialization
                         Properties = props.Select(x => new XmlPropertyInfo
                         {
                             Property = x
-                        }).ToArray()
+                        }).ToArray(),
+                        KnownTypes = props
+                            .Select(x => GetTypeInfo(x.PropertyType).KnownTypes)
+                            .Where(x => x != null)
+                            .Append(GetKnownTypes(type))
+                            .Aggregate(new HashSet<Type>(), (x, y) => new HashSet<Type>(x.Union(y))),
+                        CustomSerializer = GetCustomSerializer(type)
                     };
 
-                    if (type.IsGenericType)
+                    if (typeInfo.CustomSerializer == null)
                     {
-                        var baseType = type.GetGenericTypeDefinition();
-                        typeInfo.CustomSerializer = TypeInfoCache.Get(baseType)?.CustomSerializer;
+                        if (type.IsGenericType)
+                        {
+                            var baseType = type.GetGenericTypeDefinition();
+                            typeInfo.CustomSerializer = TypeInfoCache.Get(baseType)?.CustomSerializer;
+                        }
+                        if (type.IsArray)
+                        {
+                            typeInfo.CustomSerializer = new ArraySerializer();
+                        }
+                        else
+                        {
+                            // Verify we can create an instance to fail fast
+                            Activator.CreateInstance(type);
+                        }
                     }
 
-                    if (type.IsArray)
-                    {
-                        typeInfo.CustomSerializer = new ArraySerializer();
-                    }
-                    else
-                    {
-                        // Verify we can create an instance to fail fast
-                        Activator.CreateInstance(type);
-                    }
                     return typeInfo;
                 });
             }
         }
 
-        private class XmlTypeInfo
+        protected static IEnumerable<Type> GetKnownTypes(Type type)
+        {
+            lock (TypeInfoCache)
+            {
+                if (CustomTypesCache == null)
+                {
+                    CustomTypesCache = new Dictionary<Type, List<CustomXmlTypes>>();
+                    foreach (var customTypesType in AppDomain.CurrentDomain.GetAssemblies().SelectMany(x => x.GetTypes()))
+                    {
+                        if (customTypesType.BaseType != null
+                            && typeof(CustomXmlTypes).IsAssignableFrom(customTypesType)
+                            && customTypesType.BaseType.IsGenericType
+                            && typeof(CustomXmlTypes<>) == customTypesType.BaseType.GetGenericTypeDefinition())
+                        {
+                            var typeParam = customTypesType.BaseType.GetGenericArguments()[0];
+                            CustomTypesCache.GetOrSet(typeParam, () => new List<CustomXmlTypes>()).Add((CustomXmlTypes)Activator.CreateInstance(customTypesType));
+                        }
+                    }
+                }
+                return CustomTypesCache.Get(type)?.SelectMany(x => x.GetKnownTypes(type)) ?? Enumerable.Empty<Type>();
+            }
+        }
+
+        protected static CustomXmlSerializer GetCustomSerializer(Type type)
+        {
+            lock (TypeInfoCache)
+            {
+                if (CustomSerializerCache == null)
+                {
+                    CustomSerializerCache = new Dictionary<Type, CustomXmlSerializer>();
+                    foreach (var customSerializerType in AppDomain.CurrentDomain.GetAssemblies().SelectMany(x => x.GetTypes()))
+                    {
+                        if (customSerializerType.BaseType != null
+                            && typeof(CustomXmlSerializer).IsAssignableFrom(customSerializerType)
+                            && customSerializerType.BaseType.IsGenericType
+                            && typeof(CustomXmlSerializer<>) == customSerializerType.BaseType.GetGenericTypeDefinition())
+                        {
+                            var typeParam = customSerializerType.BaseType.GetGenericArguments()[0];
+                            CustomSerializerCache[typeParam] = (CustomXmlSerializer)Activator.CreateInstance(customSerializerType);
+                        }
+                    }
+                }
+                return CustomSerializerCache.Get(type);
+            }
+        }
+
+        protected class XmlTypeInfo
         {
             public XmlPropertyInfo[] Properties { get; set; }
 
             public CustomXmlSerializer CustomSerializer { get; set; }
+
+            public HashSet<Type> KnownTypes { get; set; }
         }
 
-        private class XmlPropertyInfo
+        protected class XmlPropertyInfo
         {
             public PropertyInfo Property { get; set; }
         }
 
-        private class CharSerializer : CustomXmlSerializer<char>
+        protected class CharSerializer : CustomXmlSerializer<char>
         {
             protected override void Serialize(char obj, XElement element)
             {
@@ -229,7 +254,7 @@ namespace NAPS2.Serialization
             }
         }
 
-        private class StringSerializer : CustomXmlSerializer<string>
+        protected class StringSerializer : CustomXmlSerializer<string>
         {
             protected override void Serialize(string obj, XElement element)
             {
@@ -242,7 +267,7 @@ namespace NAPS2.Serialization
             }
         }
 
-        private class BooleanSerializer : CustomXmlSerializer<bool>
+        protected class BooleanSerializer : CustomXmlSerializer<bool>
         {
             protected override void Serialize(bool obj, XElement element)
             {
@@ -255,7 +280,7 @@ namespace NAPS2.Serialization
             }
         }
 
-        private class ByteSerializer : CustomXmlSerializer<byte>
+        protected class ByteSerializer : CustomXmlSerializer<byte>
         {
             protected override void Serialize(byte obj, XElement element)
             {
@@ -268,7 +293,7 @@ namespace NAPS2.Serialization
             }
         }
 
-        private class SByteSerializer : CustomXmlSerializer<sbyte>
+        protected class SByteSerializer : CustomXmlSerializer<sbyte>
         {
             protected override void Serialize(sbyte obj, XElement element)
             {
@@ -281,7 +306,7 @@ namespace NAPS2.Serialization
             }
         }
 
-        private class Int16Serializer : CustomXmlSerializer<short>
+        protected class Int16Serializer : CustomXmlSerializer<short>
         {
             protected override void Serialize(short obj, XElement element)
             {
@@ -294,7 +319,7 @@ namespace NAPS2.Serialization
             }
         }
 
-        private class UInt16Serializer : CustomXmlSerializer<ushort>
+        protected class UInt16Serializer : CustomXmlSerializer<ushort>
         {
             protected override void Serialize(ushort obj, XElement element)
             {
@@ -307,7 +332,7 @@ namespace NAPS2.Serialization
             }
         }
 
-        private class Int32Serializer : CustomXmlSerializer<int>
+        protected class Int32Serializer : CustomXmlSerializer<int>
         {
             protected override void Serialize(int obj, XElement element)
             {
@@ -320,7 +345,7 @@ namespace NAPS2.Serialization
             }
         }
 
-        private class UInt32Serializer : CustomXmlSerializer<uint>
+        protected class UInt32Serializer : CustomXmlSerializer<uint>
         {
             protected override void Serialize(uint obj, XElement element)
             {
@@ -333,7 +358,7 @@ namespace NAPS2.Serialization
             }
         }
 
-        private class Int64Serializer : CustomXmlSerializer<long>
+        protected class Int64Serializer : CustomXmlSerializer<long>
         {
             protected override void Serialize(long obj, XElement element)
             {
@@ -346,7 +371,7 @@ namespace NAPS2.Serialization
             }
         }
 
-        private class UInt64Serializer : CustomXmlSerializer<ulong>
+        protected class UInt64Serializer : CustomXmlSerializer<ulong>
         {
             protected override void Serialize(ulong obj, XElement element)
             {
@@ -359,7 +384,7 @@ namespace NAPS2.Serialization
             }
         }
 
-        private class SingleSerializer : CustomXmlSerializer<float>
+        protected class SingleSerializer : CustomXmlSerializer<float>
         {
             protected override void Serialize(float obj, XElement element)
             {
@@ -372,7 +397,7 @@ namespace NAPS2.Serialization
             }
         }
 
-        private class DoubleSerializer : CustomXmlSerializer<double>
+        protected class DoubleSerializer : CustomXmlSerializer<double>
         {
             protected override void Serialize(double obj, XElement element)
             {
@@ -385,7 +410,7 @@ namespace NAPS2.Serialization
             }
         }
 
-        private class IntPtrSerializer : CustomXmlSerializer<IntPtr>
+        protected class IntPtrSerializer : CustomXmlSerializer<IntPtr>
         {
             protected override void Serialize(IntPtr obj, XElement element)
             {
@@ -398,7 +423,7 @@ namespace NAPS2.Serialization
             }
         }
 
-        private class UIntPtrSerializer : CustomXmlSerializer<UIntPtr>
+        protected class UIntPtrSerializer : CustomXmlSerializer<UIntPtr>
         {
             protected override void Serialize(UIntPtr obj, XElement element)
             {
@@ -411,7 +436,7 @@ namespace NAPS2.Serialization
             }
         }
 
-        private class ArraySerializer : CustomXmlSerializer
+        protected class ArraySerializer : CustomXmlSerializer
         {
             public override void SerializeObject(object obj, XElement element, Type type)
             {
@@ -436,7 +461,7 @@ namespace NAPS2.Serialization
             }
         }
 
-        private class ListSerializer : CustomXmlSerializer
+        protected class ListSerializer : CustomXmlSerializer
         {
             public override void SerializeObject(object obj, XElement element, Type type)
             {
@@ -472,6 +497,43 @@ namespace NAPS2.Serialization
                 }
                 return list;
             }
+        }
+    }
+
+    public class XmlSerializer<T> : XmlSerializer
+    {
+        public void Serialize(Stream stream, T obj)
+        {
+            SerializeToXDocument(obj).Save(stream);
+        }
+
+        public XDocument SerializeToXDocument(T obj)
+        {
+            var doc = new XDocument();
+            var root = SerializeToXElement(obj, GetElementNameForType(typeof(T)));
+            root.SetAttributeValue(XNamespace.Xmlns + "xsi", Xsi.NamespaceName);
+            doc.Add(root);
+            return doc;
+        }
+
+        public XElement SerializeToXElement(T obj, string elementName)
+        {
+            return SerializeInternal(obj, elementName, typeof(T));
+        }
+
+        public T Deserialize(Stream stream)
+        {
+            return DeserializeFromXDocument(XDocument.Load(stream));
+        }
+
+        public T DeserializeFromXDocument(XDocument doc)
+        {
+            return DeserializeFromXElement(doc.Root);
+        }
+
+        public T DeserializeFromXElement(XElement element)
+        {
+            return (T)DeserializeInternal(element, typeof(T));
         }
     }
 }
