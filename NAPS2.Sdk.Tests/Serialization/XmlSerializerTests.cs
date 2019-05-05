@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Xml.Linq;
 using NAPS2.Serialization;
 using Xunit;
 
@@ -46,6 +47,61 @@ namespace NAPS2.Sdk.Tests.Serialization
             Assert.Equal("Hello", obj2.Str);
         }
 
+        [Fact]
+        public void SerializeNested()
+        {
+            var obj = new NestedPoco
+            {
+                Child = new Poco
+                {
+                    Str = "Test"
+                }
+            };
+            var serializer = new XmlSerializer<NestedPoco>();
+            var doc = serializer.SerializeToXDocument(obj);
+            Assert.NotNull(doc.Root);
+            var childEl = doc.Root.Element("Child");
+            Assert.NotNull(childEl);
+            var strEl = childEl.Element("Str");
+            Assert.NotNull(strEl);
+            Assert.Equal("Test", strEl.Value);
+
+            var obj2 = serializer.DeserializeFromXDocument(doc);
+            Assert.Equal("Test", obj2?.Child.Str);
+        }
+
+        [Fact]
+        public void SerializeNull()
+        {
+            var xsi = (XNamespace)"http://www.w3.org/2001/XMLSchema-instance";
+            var obj = new Poco { Str = null };
+            var serializer = new XmlSerializer<Poco>();
+            var doc = serializer.SerializeToXDocument(obj);
+            Assert.NotNull(doc.Root);
+            var xsiAttr = doc.Root.Attribute(XNamespace.Xmlns + "xsi");
+            Assert.NotNull(xsiAttr);
+            Assert.Equal(xsiAttr.Value, xsi.NamespaceName);
+            var childEl = doc.Root.Element("Str");
+            Assert.NotNull(childEl);
+            Assert.True(childEl.IsEmpty);
+            var nullAttr = childEl.Attribute(xsi + "nil");
+            Assert.NotNull(nullAttr);
+            Assert.Equal("true", nullAttr.Value);
+
+            var obj2 = serializer.DeserializeFromXDocument(doc);
+            Assert.Null(obj2.Str);
+        }
+
+        // TODO: Collections (root + nested)
+        // TODO: Subtypes (with xsi:type)
+        // TODO: Custom serialization
+        // TODO: Ordering
+
+        private class NestedPoco
+        {
+            public Poco Child { get; set; }
+        }
+
         private class Poco
         {
             public string Str { get; set; }
@@ -68,3 +124,4 @@ namespace NAPS2.Sdk.Tests.Serialization
         }
     }
 }
+ 

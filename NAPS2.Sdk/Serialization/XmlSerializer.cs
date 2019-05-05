@@ -4,7 +4,6 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Xml;
 using System.Xml.Linq;
 using NAPS2.Util;
 
@@ -12,6 +11,8 @@ namespace NAPS2.Serialization
 {
     public class XmlSerializer<T>
     {
+        private static readonly XNamespace Xsi = "http://www.w3.org/2001/XMLSchema-instance";
+
         private static readonly Dictionary<Type, XmlTypeInfo> TypeInfoCache = new Dictionary<Type, XmlTypeInfo>
         {
             { typeof(char), new XmlTypeInfo { CustomSerializer = new CharSerializer() } },
@@ -39,7 +40,9 @@ namespace NAPS2.Serialization
         public XDocument SerializeToXDocument(T obj)
         {
             var doc = new XDocument();
-            doc.Add(SerializeToXElement(obj, typeof(T).Name));
+            var root = SerializeToXElement(obj, typeof(T).Name);
+            root.SetAttributeValue(XNamespace.Xmlns + "xsi", Xsi.NamespaceName);
+            doc.Add(root);
             return doc;
         }
 
@@ -53,7 +56,7 @@ namespace NAPS2.Serialization
             var element = new XElement(elementName);
             if (obj == null)
             {
-                // TODO: Maybe xsi:null
+                element.SetAttributeValue(Xsi + "nil", "true");
                 return element;
             }
             var typeInfo = GetTypeInfo(obj.GetType());
@@ -89,9 +92,8 @@ namespace NAPS2.Serialization
 
         private object DeserializeInternal(XElement element, Type type)
         {
-            if (element.Value == "")
+            if (element.Attribute(Xsi + "nil")?.Value == "true")
             {
-                // TODO: Maybe xsi:null
                 return null;
             }
             var typeInfo = GetTypeInfo(type);
