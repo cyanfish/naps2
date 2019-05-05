@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Xml;
-using System.Xml.Schema;
-using System.Xml.Serialization;
+using System.Xml.Linq;
 
 namespace NAPS2.Serialization
 {
@@ -13,7 +11,7 @@ namespace NAPS2.Serialization
     /// Includes implicit conversions to and from System.String.
     /// Encryption and decryption is lazy.
     /// </summary>
-    public class SecureString : IXmlSerializable
+    public class SecureString
     {
         private string value;
         private string valueEncrypted;
@@ -38,18 +36,17 @@ namespace NAPS2.Serialization
             return value;
         }
 
-        public XmlSchema GetSchema() => null;
-
-        public void ReadXml(XmlReader reader)
+        private class Serializer : CustomXmlSerializer<SecureString>
         {
-            valueEncrypted = reader.ReadString();
-            reader.ReadEndElement();
-        }
+            protected override void Serialize(SecureString obj, XElement element)
+            {
+                element.Value = obj.valueEncrypted ?? SecureStorage.Encrypt(obj.value);
+            }
 
-        public void WriteXml(XmlWriter writer)
-        {
-            valueEncrypted = valueEncrypted ?? SecureStorage.Encrypt(value);
-            writer.WriteString(valueEncrypted);
+            protected override SecureString Deserialize(XElement element)
+            {
+                return new SecureString { valueEncrypted = element.Value };
+            }
         }
     }
 }

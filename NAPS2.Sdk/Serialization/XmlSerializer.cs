@@ -36,18 +36,20 @@ namespace NAPS2.Serialization
             { typeof(IntPtr), new XmlTypeInfo { CustomSerializer = new IntPtrSerializer() } },
             { typeof(UIntPtr), new XmlTypeInfo { CustomSerializer = new UIntPtrSerializer() } },
             { typeof(List<>), new XmlTypeInfo { CustomSerializer = new ListSerializer() } },
+            { typeof(HashSet<>), new XmlTypeInfo { CustomSerializer = new CollectionSerializer() } },
+            { typeof(DateTime), new XmlTypeInfo { CustomSerializer = new DateTimeSerializer() } },
+            { typeof(Nullable<>), new XmlTypeInfo { CustomSerializer = new NullableSerializer() } },
         };
 
-        protected static XElement SerializeInternal(object obj, string elementName, Type type)
+        protected static XElement SerializeInternal(object obj, XElement element, Type type)
         {
-            var element = new XElement(elementName);
             if (obj == null)
             {
                 element.SetAttributeValue(Xsi + "nil", "true");
                 return element;
             }
 
-            var actualType = obj.GetType();
+            var actualType = Nullable.GetUnderlyingType(type) != null ? type : obj.GetType();
             if (actualType != type)
             {
                 element.SetAttributeValue(Xsi + "type", actualType.Name);
@@ -62,7 +64,7 @@ namespace NAPS2.Serialization
             {
                 foreach (var propInfo in typeInfo.Properties)
                 {
-                    var child = SerializeInternal(propInfo.Property.GetValue(obj), propInfo.Property.Name, propInfo.Property.PropertyType);
+                    var child = SerializeInternal(propInfo.Property.GetValue(obj), new XElement(propInfo.Property.Name), propInfo.Property.PropertyType);
                     element.Add(child);
                 }
             }
@@ -143,18 +145,13 @@ namespace NAPS2.Serialization
             {
                 return TypeInfoCache.GetOrSet(type, () =>
                 {
-                    var props = type.GetProperties(BindingFlags.Instance | BindingFlags.Public);
+                    var props = type.GetProperties(BindingFlags.Instance | BindingFlags.Public).Where(x => x.GetMethod != null && x.SetMethod != null);
                     var typeInfo = new XmlTypeInfo
                     {
                         Properties = props.Select(x => new XmlPropertyInfo
                         {
                             Property = x
                         }).ToArray(),
-                        KnownTypes = props
-                            .Select(x => GetTypeInfo(x.PropertyType).KnownTypes)
-                            .Where(x => x != null)
-                            .Append(GetKnownTypes(type))
-                            .Aggregate(new HashSet<Type>(), (x, y) => new HashSet<Type>(x.Union(y))),
                         CustomSerializer = GetCustomSerializer(type)
                     };
 
@@ -174,6 +171,15 @@ namespace NAPS2.Serialization
                             // Verify we can create an instance to fail fast
                             Activator.CreateInstance(type);
                         }
+                    }
+
+                    if (typeInfo.CustomSerializer == null)
+                    {
+                        typeInfo.KnownTypes = props
+                            .Select(x => GetTypeInfo(x.PropertyType).KnownTypes)
+                            .Where(x => x != null)
+                            .Append(GetKnownTypes(type))
+                            .Aggregate(new HashSet<Type>(), (x, y) => new HashSet<Type>(x.Union(y)));
                     }
 
                     return typeInfo;
@@ -271,7 +277,7 @@ namespace NAPS2.Serialization
         {
             protected override void Serialize(bool obj, XElement element)
             {
-                element.Value = obj.ToString();
+                element.Value = obj ? "true" : "false";
             }
 
             protected override bool Deserialize(XElement element)
@@ -444,7 +450,7 @@ namespace NAPS2.Serialization
                 var list = (IList)obj;
                 foreach (var item in list)
                 {
-                    element.Add(SerializeInternal(item, itemType.Name, itemType));
+                    element.Add(SerializeInternal(item, new XElement(itemType.Name), itemType));
                 }
             }
 
@@ -461,19 +467,19 @@ namespace NAPS2.Serialization
             }
         }
 
-        protected class ListSerializer : CustomXmlSerializer
+        protected class CollectionSerializer : CustomXmlSerializer
         {
             public override void SerializeObject(object obj, XElement element, Type type)
             {
                 var itemType = GetItemType(type);
-                var list = (IList)obj;
+                var list = (IEnumerable)obj;
                 foreach (var item in list)
                 {
-                    element.Add(SerializeInternal(item, itemType.Name, itemType));
+                    element.Add(SerializeInternal(item, new XElement(itemType.Name), itemType));
                 }
             }
 
-            private Type GetItemType(Type type)
+            protected Type GetItemType(Type type)
             {
                 if (type.IsGenericType)
                 {
@@ -490,12 +496,53 @@ namespace NAPS2.Serialization
             public override object DeserializeObject(XElement element, Type type)
             {
                 var itemType = GetItemType(type);
+                var list = Activator.CreateInstance(type);
+                var add = list.GetType().GetMethod("Add", BindingFlags.Public | BindingFlags.Instance) ?? throw new ArgumentException("Collection type has no Add method");
+                foreach (var itemElement in element.Elements())
+                {
+                    add.Invoke(list, new[] { DeserializeInternal(itemElement, itemType) });
+                }
+                return list;
+            }
+        }
+
+        protected class ListSerializer : CollectionSerializer
+        {
+            public override object DeserializeObject(XElement element, Type type)
+            {
+                var itemType = GetItemType(type);
                 var list = (IList)Activator.CreateInstance(type);
                 foreach (var itemElement in element.Elements())
                 {
                     list.Add(DeserializeInternal(itemElement, itemType));
                 }
                 return list;
+            }
+        }
+
+        protected class DateTimeSerializer : CustomXmlSerializer<DateTime>
+        {
+            protected override void Serialize(DateTime obj, XElement element)
+            {
+                element.Value = obj.ToString("O", CultureInfo.InvariantCulture);
+            }
+
+            protected override DateTime Deserialize(XElement element)
+            {
+                return DateTime.ParseExact(element.Value, "O", CultureInfo.InvariantCulture);
+            }
+        }
+
+        protected class NullableSerializer : CustomXmlSerializer
+        {
+            public override void SerializeObject(object obj, XElement element, Type type)
+            {
+                SerializeInternal(obj, element, Nullable.GetUnderlyingType(type));
+            }
+
+            public override object DeserializeObject(XElement element, Type type)
+            {
+                return DeserializeInternal(element, Nullable.GetUnderlyingType(type));
             }
         }
     }
@@ -518,7 +565,12 @@ namespace NAPS2.Serialization
 
         public XElement SerializeToXElement(T obj, string elementName)
         {
-            return SerializeInternal(obj, elementName, typeof(T));
+            return SerializeInternal(obj, new XElement(elementName), typeof(T));
+        }
+
+        public XElement SerializeToXElement(T obj, XElement element)
+        {
+            return SerializeInternal(obj, element, typeof(T));
         }
 
         public T Deserialize(Stream stream)

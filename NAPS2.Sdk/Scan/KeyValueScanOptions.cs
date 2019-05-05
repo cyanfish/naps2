@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Xml;
-using System.Xml.Schema;
-using System.Xml.Serialization;
+using System.Xml.Linq;
+using NAPS2.Serialization;
 
 namespace NAPS2.Scan
 {
@@ -13,7 +12,7 @@ namespace NAPS2.Scan
     /// This is only relevant for SANE. Currently NAPS2 does not actually support viewing/setting custom options.
     /// If someone was so inclined they could manually set them in the profiles.xml file.
     /// </summary>
-    public class KeyValueScanOptions : Dictionary<string, string>, IXmlSerializable
+    public class KeyValueScanOptions : Dictionary<string, string>
     {
         public KeyValueScanOptions()
         {
@@ -23,32 +22,26 @@ namespace NAPS2.Scan
         {
         }
 
-        public XmlSchema GetSchema() => null;
-
-        public void ReadXml(XmlReader reader)
+        private class Serializer : CustomXmlSerializer<KeyValueScanOptions>
         {
-            reader.Read();
-            while (true)
+            protected override void Serialize(KeyValueScanOptions obj, XElement element)
             {
-                if (reader.Name != @"Option")
+                foreach (var kvp in obj)
                 {
-                    break;
+                    var itemElement = new XElement("Option", kvp.Value);
+                    itemElement.SetAttributeValue("name", kvp.Key);
+                    element.Add(itemElement);
                 }
-                reader.MoveToAttribute("name");
-                string k = reader.Value;
-                string v = reader.ReadElementString();
-                Add(k, v);
             }
-        }
 
-        public void WriteXml(XmlWriter writer)
-        {
-            foreach (var kvp in this)
+            protected override KeyValueScanOptions Deserialize(XElement element)
             {
-                writer.WriteStartElement("Option");
-                writer.WriteAttributeString("name", kvp.Key);
-                writer.WriteString(kvp.Value);
-                writer.WriteEndElement();
+                var obj = new KeyValueScanOptions();
+                foreach (var itemElement in element.Elements())
+                {
+                    obj.Add(itemElement.Attribute("name").Value, itemElement.Value);
+                }
+                return obj;
             }
         }
     }
