@@ -164,7 +164,7 @@ namespace NAPS2.Serialization
 
                     if (type.IsArray)
                     {
-                        typeInfo.CustomSerializer = new ListSerializer();
+                        typeInfo.CustomSerializer = new ArraySerializer();
                     }
                     else
                     {
@@ -383,12 +383,37 @@ namespace NAPS2.Serialization
             }
         }
 
+        private class ArraySerializer : CustomXmlSerializer
+        {
+            public override void SerializeObject(object obj, XElement element, Type type)
+            {
+                var itemType = type.GetElementType() ?? throw new ArgumentException("Not an array type");
+                var list = (IList)obj;
+                foreach (var item in list)
+                {
+                    element.Add(SerializeInternal(item, itemType.Name, itemType));
+                }
+            }
+
+            public override object DeserializeObject(XElement element, Type type)
+            {
+                var itemType = type.GetElementType() ?? throw new ArgumentException("Not an array type");
+                var elements = element.Elements().ToArray();
+                var array = Array.CreateInstance(itemType, elements.Length);
+                for (int i = 0; i < elements.Length; i++)
+                {
+                    array.SetValue(DeserializeInternal(elements[i], itemType), i);
+                }
+                return array;
+            }
+        }
+
         private class ListSerializer : CustomXmlSerializer
         {
             public override void SerializeObject(object obj, XElement element, Type type)
             {
-                var list = (IList)obj;
                 var itemType = GetItemType(type);
+                var list = (IList)obj;
                 foreach (var item in list)
                 {
                     element.Add(SerializeInternal(item, itemType.Name, itemType));
@@ -397,10 +422,6 @@ namespace NAPS2.Serialization
 
             private Type GetItemType(Type type)
             {
-                if (type.IsArray)
-                {
-                    return type.GetElementType();
-                }
                 if (type.IsGenericType)
                 {
                     var typeArgs = type.GetGenericArguments();
@@ -416,25 +437,12 @@ namespace NAPS2.Serialization
             public override object DeserializeObject(XElement element, Type type)
             {
                 var itemType = GetItemType(type);
-                if (type.IsArray)
+                var list = (IList)Activator.CreateInstance(type);
+                foreach (var itemElement in element.Elements())
                 {
-                    var elements = element.Elements().ToArray();
-                    var array = Array.CreateInstance(itemType, elements.Length);
-                    for (int i = 0; i < elements.Length; i++)
-                    {
-                        array.SetValue(DeserializeInternal(elements[i], itemType), i);
-                    }
-                    return array;
+                    list.Add(DeserializeInternal(itemElement, itemType));
                 }
-                else
-                {
-                    var list = (IList)Activator.CreateInstance(type);
-                    foreach (var itemElement in element.Elements())
-                    {
-                        list.Add(DeserializeInternal(itemElement, itemType));
-                    }
-                    return list;
-                }
+                return list;
             }
         }
     }
