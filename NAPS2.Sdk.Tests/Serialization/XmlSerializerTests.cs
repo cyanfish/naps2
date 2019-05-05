@@ -92,7 +92,54 @@ namespace NAPS2.Sdk.Tests.Serialization
             Assert.Null(obj2.Str);
         }
 
-        // TODO: Collections (root + nested)
+        [Fact]
+        public void SerializeList()
+        {
+            var obj = new List<Poco> { new Poco { Str = "Hello" }, new Poco { Str = "World" } };
+            var serializer = new XmlSerializer<List<Poco>>();
+            var doc = serializer.SerializeToXDocument(obj);
+            Assert.NotNull(doc.Root);
+            Assert.Equal("ArrayOfPoco", doc.Root.Name);
+            Assert.Equal(2, doc.Root.Elements().Count());
+            var first = doc.Root.Elements().First();
+            Assert.NotNull(first);
+            Assert.Equal("Poco", first.Name);
+            Assert.Equal("Hello", first.Element("Str")?.Value);
+            var last = doc.Root.Elements().Last();
+            Assert.NotNull(last);
+            Assert.Equal("Poco", last.Name);
+            Assert.Equal("World", last.Element("Str")?.Value);
+
+            var obj2 = serializer.DeserializeFromXDocument(doc);
+            Assert.Equal(2, obj2.Count);
+            Assert.Equal("Hello", obj2[0].Str);
+            Assert.Equal("World", obj2[1].Str);
+        }
+
+        [Fact]
+        public void SerializeArray()
+        {
+            var obj = new[] { new Poco { Str = "Hello" }, new Poco { Str = "World" } };
+            var serializer = new XmlSerializer<Poco[]>();
+            var doc = serializer.SerializeToXDocument(obj);
+            Assert.NotNull(doc.Root);
+            Assert.Equal("ArrayOfPoco", doc.Root.Name);
+            Assert.Equal(2, doc.Root.Elements().Count());
+            var first = doc.Root.Elements().First();
+            Assert.NotNull(first);
+            Assert.Equal("Poco", first.Name);
+            Assert.Equal("Hello", first.Element("Str")?.Value);
+            var last = doc.Root.Elements().Last();
+            Assert.NotNull(last);
+            Assert.Equal("Poco", last.Name);
+            Assert.Equal("World", last.Element("Str")?.Value);
+
+            var obj2 = serializer.DeserializeFromXDocument(doc);
+            Assert.Equal(2, obj2.Length);
+            Assert.Equal("Hello", obj2[0].Str);
+            Assert.Equal("World", obj2[1].Str);
+        }
+
         // TODO: Subtypes (with xsi:type)
         // TODO: Custom serialization
         // TODO: Ordering
@@ -124,4 +171,3 @@ namespace NAPS2.Sdk.Tests.Serialization
         }
     }
 }
- 

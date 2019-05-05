@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
@@ -30,6 +31,7 @@ namespace NAPS2.Serialization
             { typeof(double), new XmlTypeInfo { CustomSerializer = new DoubleSerializer() } },
             { typeof(IntPtr), new XmlTypeInfo { CustomSerializer = new IntPtrSerializer() } },
             { typeof(UIntPtr), new XmlTypeInfo { CustomSerializer = new UIntPtrSerializer() } },
+            { typeof(List<>), new XmlTypeInfo { CustomSerializer = new ListSerializer() } },
         };
 
         public void Serialize(T obj, Stream stream)
@@ -40,7 +42,7 @@ namespace NAPS2.Serialization
         public XDocument SerializeToXDocument(T obj)
         {
             var doc = new XDocument();
-            var root = SerializeToXElement(obj, typeof(T).Name);
+            var root = SerializeToXElement(obj, GetElementNameForType(typeof(T)));
             root.SetAttributeValue(XNamespace.Xmlns + "xsi", Xsi.NamespaceName);
             doc.Add(root);
             return doc;
@@ -48,10 +50,10 @@ namespace NAPS2.Serialization
 
         public XElement SerializeToXElement(T obj, string elementName)
         {
-            return SerializeInternal(obj, elementName);
+            return SerializeInternal(obj, elementName, typeof(T));
         }
 
-        private XElement SerializeInternal(object obj, string elementName)
+        private static XElement SerializeInternal(object obj, string elementName, Type type)
         {
             var element = new XElement(elementName);
             if (obj == null)
@@ -62,13 +64,13 @@ namespace NAPS2.Serialization
             var typeInfo = GetTypeInfo(obj.GetType());
             if (typeInfo.CustomSerializer != null)
             {
-                typeInfo.CustomSerializer.SerializeObject(obj, element);
+                typeInfo.CustomSerializer.SerializeObject(obj, element, type);
             }
             else
             {
                 foreach (var propInfo in typeInfo.Properties)
                 {
-                    var child = SerializeInternal(propInfo.Property.GetValue(obj), propInfo.Property.Name);
+                    var child = SerializeInternal(propInfo.Property.GetValue(obj), propInfo.Property.Name, propInfo.Property.PropertyType);
                     element.Add(child);
                 }
             }
@@ -90,7 +92,7 @@ namespace NAPS2.Serialization
             return (T)DeserializeInternal(element, typeof(T));
         }
 
-        private object DeserializeInternal(XElement element, Type type)
+        private static object DeserializeInternal(XElement element, Type type)
         {
             if (element.Attribute(Xsi + "nil")?.Value == "true")
             {
@@ -99,7 +101,7 @@ namespace NAPS2.Serialization
             var typeInfo = GetTypeInfo(type);
             if (typeInfo.CustomSerializer != null)
             {
-                return typeInfo.CustomSerializer.DeserializeObject(element);
+                return typeInfo.CustomSerializer.DeserializeObject(element, type);
             }
             // TODO: Subtypes
             var obj = Activator.CreateInstance(type);
@@ -116,7 +118,30 @@ namespace NAPS2.Serialization
             return obj;
         }
 
-        private XmlTypeInfo GetTypeInfo(Type type)
+        private static string GetElementNameForType(Type type)
+        {
+            if (type.IsArray)
+            {
+                return "ArrayOf" + GetElementNameForType(type.GetElementType());
+            }
+            if (type.IsGenericType)
+            {
+                string baseName;
+                if (type.GetGenericTypeDefinition() == typeof(List<>))
+                {
+                    baseName = "Array";
+                }
+                else
+                {
+                    var backtickIndex = type.Name.IndexOf('`');
+                    baseName = type.Name.Substring(0, backtickIndex);
+                }
+                return baseName + "Of" + string.Join("", type.GetGenericArguments().Select(GetElementNameForType));
+            }
+            return type.Name;
+        }
+
+        private static XmlTypeInfo GetTypeInfo(Type type)
         {
             lock (TypeInfoCache)
             {
@@ -130,8 +155,22 @@ namespace NAPS2.Serialization
                             Property = x
                         }).ToArray()
                     };
-                    // Verify we can create an instance to fail fast
-                    Activator.CreateInstance(type);
+
+                    if (type.IsGenericType)
+                    {
+                        var baseType = type.GetGenericTypeDefinition();
+                        typeInfo.CustomSerializer = TypeInfoCache.Get(baseType)?.CustomSerializer;
+                    }
+
+                    if (type.IsArray)
+                    {
+                        typeInfo.CustomSerializer = new ListSerializer();
+                    }
+                    else
+                    {
+                        // Verify we can create an instance to fail fast
+                        Activator.CreateInstance(type);
+                    }
                     return typeInfo;
                 });
             }
@@ -341,6 +380,61 @@ namespace NAPS2.Serialization
             protected override UIntPtr Deserialize(XElement element)
             {
                 return (UIntPtr)ulong.Parse(element.Value);
+            }
+        }
+
+        private class ListSerializer : CustomXmlSerializer
+        {
+            public override void SerializeObject(object obj, XElement element, Type type)
+            {
+                var list = (IList)obj;
+                var itemType = GetItemType(type);
+                foreach (var item in list)
+                {
+                    element.Add(SerializeInternal(item, itemType.Name, itemType));
+                }
+            }
+
+            private Type GetItemType(Type type)
+            {
+                if (type.IsArray)
+                {
+                    return type.GetElementType();
+                }
+                if (type.IsGenericType)
+                {
+                    var typeArgs = type.GetGenericArguments();
+                    if (typeArgs.Length != 1)
+                    {
+                        throw new ArgumentException("Unexpected number of generic arguments for list type");
+                    }
+                    return typeArgs[0];
+                }
+                return typeof(object);
+            }
+
+            public override object DeserializeObject(XElement element, Type type)
+            {
+                var itemType = GetItemType(type);
+                if (type.IsArray)
+                {
+                    var elements = element.Elements().ToArray();
+                    var array = Array.CreateInstance(itemType, elements.Length);
+                    for (int i = 0; i < elements.Length; i++)
+                    {
+                        array.SetValue(DeserializeInternal(elements[i], itemType), i);
+                    }
+                    return array;
+                }
+                else
+                {
+                    var list = (IList)Activator.CreateInstance(type);
+                    foreach (var itemElement in element.Elements())
+                    {
+                        list.Add(DeserializeInternal(itemElement, itemType));
+                    }
+                    return list;
+                }
             }
         }
     }
