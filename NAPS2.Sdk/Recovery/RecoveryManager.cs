@@ -114,10 +114,10 @@ namespace NAPS2.Recovery
                             break;
                     }
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
                     ReleaseFolderLock();
-                    throw;
+                    Log.ErrorException("Could not open recovery folder.", ex);
                 }
                 return false;
             }
