@@ -97,7 +97,7 @@ namespace NAPS2.Serialization
             {
                 return typeInfo.CustomSerializer.DeserializeObject(element, actualType);
             }
-            var obj = Activator.CreateInstance(actualType);
+            var obj = Activator.CreateInstance(actualType, true);
             foreach (var propInfo in typeInfo.Properties)
             {
                 // TODO: Detect unmapped elements
@@ -183,7 +183,7 @@ namespace NAPS2.Serialization
                         else
                         {
                             // Verify we can create an instance to fail fast
-                            Activator.CreateInstance(type);
+                            Activator.CreateInstance(type, true);
                         }
                     }
 
@@ -511,7 +511,7 @@ namespace NAPS2.Serialization
             public override object DeserializeObject(XElement element, Type type)
             {
                 var itemType = GetItemType(type);
-                var list = Activator.CreateInstance(type);
+                var list = Activator.CreateInstance(type, true);
                 var add = list.GetType().GetMethod("Add", BindingFlags.Public | BindingFlags.Instance) ?? throw new ArgumentException("Collection type has no Add method");
                 foreach (var itemElement in element.Elements())
                 {
@@ -526,7 +526,7 @@ namespace NAPS2.Serialization
             public override object DeserializeObject(XElement element, Type type)
             {
                 var itemType = GetItemType(type);
-                var list = (IList)Activator.CreateInstance(type);
+                var list = (IList)Activator.CreateInstance(type, true);
                 foreach (var itemElement in element.Elements())
                 {
                     list.Add(DeserializeInternal(itemElement, itemType));

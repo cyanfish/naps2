@@ -41,5 +41,10 @@ namespace NAPS2.Scan.Experimental
             Status.StatusText = string.Format(MiscResources.ScanProgressPage, pageNumber);
             InvokeStatusChanged();
         }
+
+        public void Completed()
+        {
+            InvokeFinished();
+        }
     }
 }

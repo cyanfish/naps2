@@ -44,7 +44,7 @@ namespace NAPS2.Modules
             Bind<OcrRequestQueue>().ToSelf().InSingletonScope();
 
             // Scan
-            Bind<IScanPerformer>().To<ScanPerformer>();
+            Bind<IScanPerformer>().To<NAPS2.Scan.Experimental.ScanPerformer>();
             Bind<IBatchScanPerformer>().To<BatchScanPerformer>();
 #if DEBUG && false
             Bind<IScanDriverFactory>().To<Scan.Stub.StubScanDriverFactory>();
@@ -73,12 +73,14 @@ namespace NAPS2.Modules
             // Misc
             Bind<IFormFactory>().To<NinjectFormFactory>();
             Bind<NotificationManager>().ToSelf().InSingletonScope();
+            Bind<ISaveNotify>().ToMethod(ctx => ctx.Kernel.Get<NotificationManager>());
             Bind<IOperationFactory>().To<NinjectOperationFactory>();
             Bind<ILogger>().To<NLogLogger>().InSingletonScope();
             Bind<ChangeTracker>().ToSelf().InSingletonScope();
             Bind<StillImage>().ToSelf().InSingletonScope();
             Bind<BlankDetector>().To<ThresholdBlankDetector>();
             Bind<AutoSaver>().ToSelf();
+            Bind<BitmapRenderer>().ToSelf();
 
             StaticConfiguration.Initialize(Kernel);
         }

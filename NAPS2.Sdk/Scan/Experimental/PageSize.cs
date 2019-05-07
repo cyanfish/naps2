@@ -21,6 +21,10 @@ namespace NAPS2.Scan.Experimental
 
         public static PageSize B4 = new PageSize("250", "353", PageSizeUnit.Millimetre);
 
+        protected PageSize()
+        {
+        }
+
         public PageSize(string width, string height, PageSizeUnit unit)
         {
             Width = decimal.Parse(width, CultureInfo.InvariantCulture);
@@ -35,11 +39,11 @@ namespace NAPS2.Scan.Experimental
             Unit = unit;
         }
 
-        public decimal Width { get; }
+        public decimal Width { get; protected set; }
 
-        public decimal Height { get; }
+        public decimal Height { get; protected set; }
 
-        public PageSizeUnit Unit { get; }
+        public PageSizeUnit Unit { get; protected set; }
 
         public decimal WidthInMm
         {

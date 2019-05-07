@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using NAPS2.Serialization;
+using NAPS2.Util;
 
 namespace NAPS2.Scan.Experimental.Internal
 {
@@ -16,6 +17,35 @@ namespace NAPS2.Scan.Experimental.Internal
             if (options.Driver == Driver.Sane)
             {
                 options.UseNativeUI = false;
+            }
+
+            if (options.PageSize == null)
+            {
+                options.PageSize = PageSize.Letter;
+            }
+            if (options.Dpi == 0)
+            {
+                options.Dpi = 100;
+            }
+            if (options.Dpi < 0)
+            {
+                throw new ArgumentException("Invalid value for ScanOptions.Dpi.");
+            }
+            if (options.Brightness != options.Brightness.Clamp(-1000, 1000))
+            {
+                throw new ArgumentException("Invalid value for ScanOptions.Brightness.");
+            }
+            if (options.Contrast != options.Contrast.Clamp(-1000, 1000))
+            {
+                throw new ArgumentException("Invalid value for ScanOptions.Contrast.");
+            }
+            if (options.ScaleRatio == 0)
+            {
+                options.ScaleRatio = 1;
+            }
+            if (options.ScaleRatio < 0)
+            {
+                throw new ArgumentException("Invalid value for ScanOptions.ScaleRatio.");
             }
 
             // TODO: Validate DoOcr based on OcrParams

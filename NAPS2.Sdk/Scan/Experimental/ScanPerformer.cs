@@ -42,6 +42,7 @@ namespace NAPS2.Scan.Experimental
             var op = new ScanOperation(options.Device, options.PaperSource);
 
             controller.PageStart += (sender, args) => op.NextPage(args.PageNumber);
+            controller.ScanEnd += (sender, args) => op.Completed();
             TranslateProgress(controller, op);
 
             ShowOperation(op, scanParams);
@@ -79,6 +80,7 @@ namespace NAPS2.Scan.Experimental
             var smoothProgress = new SmoothProgress();
             controller.PageStart += (sender, args) => smoothProgress.Reset();
             controller.PageProgress += (sender, args) => smoothProgress.InputProgressChanged(args.Progress);
+            controller.ScanEnd += (senders, args) => smoothProgress.Reset();
             smoothProgress.OutputProgressChanged += (sender, args) => op.Progress((int) Math.Round(args.Value * 1000), 1000);
         }
 
@@ -131,6 +133,10 @@ namespace NAPS2.Scan.Experimental
                     scanProfile.Device = options.Device;
                     ProfileManager.Current.Save();
                 }
+            }
+            else
+            {
+                options.Device = scanProfile.Device;
             }
 
             return options;
