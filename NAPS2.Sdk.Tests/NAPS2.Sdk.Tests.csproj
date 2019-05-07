@@ -134,6 +134,7 @@
       <DependentUpon>ProfileSerializerTestsData.resx</DependentUpon>
     </Compile>
     <Compile Include="ContextualTexts.cs" />
+    <Compile Include="Scan\RemoteScanControllerTests.cs" />
     <Compile Include="Serialization\XmlSerializerTests.cs" />
     <Compile Include="Util\NaturalStringComparerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
