@@ -105,6 +105,12 @@
       <DependentUpon>DownloadFormatTestsData.resx</DependentUpon>
     </Compile>
     <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="Images\DeskewTests.cs" />
+    <Compile Include="Images\DeskewTestsData.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DeskewTestsData.resx</DependentUpon>
+    </Compile>
     <Compile Include="Images\GdiTests.cs" />
     <Compile Include="Images\ScannedImageSinkTests.cs" />
     <Compile Include="Images\StorageTests.cs" />
@@ -153,6 +159,10 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>DownloadFormatTestsData.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Images\DeskewTestsData.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>DeskewTestsData.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Images\TransformTestsData.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -281,6 +291,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\stock-cat.jpeg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\skewed.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
