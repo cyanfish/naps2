@@ -53,7 +53,7 @@ namespace NAPS2.Images
                         {
                             return null;
                         }
-                        var transform = RotationTransform.Auto(bitmap, deskewer);
+                        var transform = deskewer.GetDeskewTransform(bitmap);
                         if (CancelToken.IsCancellationRequested)
                         {
                             return null;

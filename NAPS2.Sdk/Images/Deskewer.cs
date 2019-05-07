@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using NAPS2.Images.Storage;
+using NAPS2.Images.Transforms;
 using NAPS2.Util;
 
 namespace NAPS2.Images
@@ -21,5 +22,7 @@ namespace NAPS2.Images
         }
 
         public abstract double GetSkewAngle(IImage image);
+
+        public RotationTransform GetDeskewTransform(IImage image) => new RotationTransform(-GetSkewAngle(image));
     }
 }

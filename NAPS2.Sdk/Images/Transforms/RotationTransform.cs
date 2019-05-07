@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using NAPS2.Images.Storage;
 
 namespace NAPS2.Images.Transforms
 {
@@ -18,9 +17,6 @@ namespace NAPS2.Images.Transforms
             }
             return mod;
         }
-
-        public static RotationTransform Auto(IImage image, Deskewer deskewer) =>
-            new RotationTransform(-deskewer.GetSkewAngle(image));
 
         public RotationTransform()
         {
