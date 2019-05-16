@@ -6,6 +6,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using NAPS2.Lang.Resources;
+using NAPS2.Util;
 
 namespace NAPS2.WinForms
 {
@@ -42,7 +43,7 @@ namespace NAPS2.WinForms
                 {
                     progressBar.Style = ProgressBarStyle.Continuous;
                     progressBar.Maximum = max;
-                    progressBar.Value = current;
+                    progressBar.Value = current.Clamp(0, max);
                 });
             }
         }
