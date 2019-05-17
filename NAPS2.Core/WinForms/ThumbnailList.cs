@@ -144,6 +144,7 @@ namespace NAPS2.WinForms
                 {
                     int imageIndex = Items[i].ImageIndex;
                     ilThumbnailList.Images[imageIndex] = GetThumbnail(images[i]);
+                    Items[i].Tag = images[i];
                 }
                 EndUpdate();
             }
