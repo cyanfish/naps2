@@ -578,7 +578,7 @@ namespace NAPS2.WinForms
         /// This keeps images from the same source together, even if multiple sources are providing images at the same time.
         /// </summary>
         /// <returns></returns>
-        public Action<ScannedImage> ReceiveScannedImage()
+        public Action<ScannedImage> ReceiveScannedImage(int atIndex=-1)
         {
             ScannedImage last = null;
             return scannedImage =>
@@ -587,8 +587,8 @@ namespace NAPS2.WinForms
                 {
                     lock (imageList)
                     {
-                        // Default to the end of the list
-                        int index = imageList.Images.Count;
+                        // Default to the end of the list or at index
+                        int index = atIndex >= 0 ? atIndex : imageList.Images.Count;
                         // Use the index after the last image from the same source (if it exists)
                         if (last != null)
                         {
@@ -989,10 +989,10 @@ namespace NAPS2.WinForms
             }
         }
 
-        private void ImportFiles(IEnumerable<string> files)
+        private void ImportFiles(IEnumerable<string> files, int atIndex=-1)
         {
             var op = operationFactory.Create<ImportOperation>();
-            if (op.Start(OrderFiles(files), ReceiveScannedImage()))
+            if (op.Start(OrderFiles(files), ReceiveScannedImage(atIndex)))
             {
                 operationProgress.ShowProgress(op);
             }
@@ -1971,7 +1971,7 @@ namespace NAPS2.WinForms
                 }
                 else if (e.Data.GetDataPresent(DataFormats.FileDrop))
                 {
-                    e.Effect = DragDropEffects.Copy;
+                    e.Effect = DragDropEffects.Move;
                 }
             }
             catch (Exception ex)
@@ -1998,7 +1998,8 @@ namespace NAPS2.WinForms
             else if (e.Data.GetDataPresent(DataFormats.FileDrop))
             {
                 var data = (string[])e.Data.GetData(DataFormats.FileDrop);
-                ImportFiles(data);
+                var atIndex = GetDragIndex(e);
+                ImportFiles(data, atIndex);
             }
             thumbnailList1.InsertionMark.Index = -1;
         }
@@ -2044,7 +2045,7 @@ namespace NAPS2.WinForms
         {
             Point cp = thumbnailList1.PointToClient(new Point(e.X, e.Y));
             ListViewItem dragToItem = thumbnailList1.GetItemAt(cp.X, cp.Y);
-            if (dragToItem == null)
+            if (dragToItem == null && thumbnailList1.Items.Count > 0)
             {
                 var items = thumbnailList1.Items.Cast<ListViewItem>().ToList();
                 var minY = items.Select(x => x.Bounds.Top).Min();
