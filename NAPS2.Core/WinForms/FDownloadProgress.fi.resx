@@ -19,9 +19,9 @@
     <value>{0} / {1} MB</value>
   </data>
   <data name="labelTop.Text" xml:space="preserve">
-    <value>{0} / {1} files</value>
+    <value>{0} / {1} tiedostoa</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>Download Progress</value>
+    <value>Latauksen eteneminen</value>
   </data>
 </root>

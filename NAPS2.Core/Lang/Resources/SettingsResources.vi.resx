@@ -13,7 +13,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="BitDepth_1BlackAndWhite" xml:space="preserve">
-    <value>Trắng &amp; Đen</value>
+    <value>Đen / Trắng</value>
   </data>
   <data name="BitDepth_24Color" xml:space="preserve">
     <value>24-bit Color</value>
@@ -46,7 +46,7 @@
     <value>800 dpi</value>
   </data>
   <data name="EmailProviderType_CustomSmtp" xml:space="preserve">
-    <value>Custom SMTP</value>
+    <value>SMTP tự điền</value>
   </data>
   <data name="EmailProviderType_Gmail" xml:space="preserve">
     <value>Gmail</value>
@@ -55,7 +55,7 @@
     <value>Outlook Web Access</value>
   </data>
   <data name="EmailProvider_NotSelected" xml:space="preserve">
-    <value>No provider selected.</value>
+    <value>Chưa chọn nhà cung cấp..</value>
   </data>
   <data name="HorizontalAlign_Center" xml:space="preserve">
     <value>Canh giữa</value>
@@ -124,7 +124,7 @@
     <value>Kính</value>
   </data>
   <data name="TiffComp_Auto" xml:space="preserve">
-    <value>Auto</value>
+    <value>Tự động</value>
   </data>
   <data name="TiffComp_Ccitt4" xml:space="preserve">
     <value>CCITT4</value>
@@ -142,7 +142,7 @@
     <value>Legacy (native UI only)</value>
   </data>
   <data name="TwainImpl_MemXfer" xml:space="preserve">
-    <value>Alternative Transfer</value>
+    <value>Cách chuyển khác</value>
   </data>
   <data name="TwainImpl_OldDsm" xml:space="preserve">
     <value>DSN Cũ</value>

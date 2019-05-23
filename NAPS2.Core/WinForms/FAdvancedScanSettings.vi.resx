@@ -28,7 +28,7 @@
     <value>Wia Version:</value>
   </data>
   <data name="cbForcePageSizeCrop.Text" xml:space="preserve">
-    <value>Crop to page size</value>
+    <value>Cắt về kích thước trang</value>
   </data>
   <data name="cbFlipDuplex.Text" xml:space="preserve">
     <value>Lật 2 mặt trang</value>
@@ -37,7 +37,7 @@
     <value>Offset width based on alignment (WIA)</value>
   </data>
   <data name="cbForcePageSize.Text" xml:space="preserve">
-    <value>Stretch to page size</value>
+    <value>Kéo dãn ra vừa kích thước trang</value>
   </data>
   <data name="cbBrightnessContrastAfterScan.Text" xml:space="preserve">
     <value>Áp dụng độ sáng / tương phản sau khi quét</value>

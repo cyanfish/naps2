@@ -16,7 +16,7 @@
     <value>Numériser</value>
   </data>
   <data name="ctxEdit.Text" xml:space="preserve">
-    <value>Éditer...</value>
+    <value>Modifier...</value>
   </data>
   <data name="ctxSetDefault.Text" xml:space="preserve">
     <value>Définir par défaut</value>
@@ -34,7 +34,7 @@
     <value>&amp;Nouveau...</value>
   </data>
   <data name="btnEdit.Text" xml:space="preserve">
-    <value>&amp;Éditer...</value>
+    <value>&amp;Modifier...</value>
   </data>
   <data name="btnDelete.Text" xml:space="preserve">
     <value>&amp;Supprimer</value>

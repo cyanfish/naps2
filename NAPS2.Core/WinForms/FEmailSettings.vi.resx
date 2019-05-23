@@ -31,13 +31,13 @@
     <value>Placeholders</value>
   </data>
   <data name="lblProvider.Text" xml:space="preserve">
-    <value>No provider selected.</value>
+    <value>Chưa chọn nhà cung cấp..</value>
   </data>
   <data name="btnChangeProvider.Text" xml:space="preserve">
-    <value>Change</value>
+    <value>Thay đổi</value>
   </data>
   <data name="groupBox1.Text" xml:space="preserve">
-    <value>Provider</value>
+    <value>Nhà cung cấp</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Cài đặt Email</value>

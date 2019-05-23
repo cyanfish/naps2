@@ -19,19 +19,19 @@
     <value>Muokkaa</value>
   </data>
   <data name="ctxSetDefault.Text" xml:space="preserve">
-    <value>Set Default</value>
+    <value>Asetta oletus</value>
   </data>
   <data name="ctxCopy.Text" xml:space="preserve">
-    <value>Copy</value>
+    <value>Kopioi</value>
   </data>
   <data name="ctxPaste.Text" xml:space="preserve">
-    <value>Paste</value>
+    <value>Liitä</value>
   </data>
   <data name="ctxDelete.Text" xml:space="preserve">
     <value>Poista</value>
   </data>
   <data name="btnAdd.Text" xml:space="preserve">
-    <value>&amp;New</value>
+    <value>&amp;Uusi</value>
   </data>
   <data name="btnEdit.Text" xml:space="preserve">
     <value>&amp;Muokkaa</value>

@@ -18,9 +18,6 @@
   <data name="btnCancel.Text" xml:space="preserve">
     <value>&amp;Отмена</value>
   </data>
-  <data name="groupMetadata.Text" xml:space="preserve">
-    <value>Метаданные</value>
-  </data>
   <data name="label6.Text" xml:space="preserve">
     <value>Ключевые слова:</value>
   </data>
@@ -33,8 +30,8 @@
   <data name="label4.Text" xml:space="preserve">
     <value>Заголовок:</value>
   </data>
-  <data name="groupProtection.Text" xml:space="preserve">
-    <value>Шифрование</value>
+  <data name="groupMetadata.Text" xml:space="preserve">
+    <value>Метаданные</value>
   </data>
   <data name="clbPerms.Items" xml:space="preserve">
     <value>Разрешить печать</value>
@@ -75,6 +72,9 @@
   <data name="cbEncryptPdf.Text" xml:space="preserve">
     <value>Шифрование PDF</value>
   </data>
+  <data name="groupProtection.Text" xml:space="preserve">
+    <value>Шифрование</value>
+  </data>
   <data name="cbRememberSettings.Text" xml:space="preserve">
     <value>Запомнить эти настройки</value>
   </data>
@@ -92,6 +92,9 @@
   </data>
   <data name="groupCompat.Text" xml:space="preserve">
     <value>Совместимость</value>
+  </data>
+  <data name="cbSinglePagePdf.Text" xml:space="preserve">
+    <value>Одностраничные файлы</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Настройки PDF</value>

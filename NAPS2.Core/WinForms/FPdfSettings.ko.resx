@@ -18,9 +18,6 @@
   <data name="btnCancel.Text" xml:space="preserve">
     <value>&amp;취소</value>
   </data>
-  <data name="groupMetadata.Text" xml:space="preserve">
-    <value>메타데이터</value>
-  </data>
   <data name="label6.Text" xml:space="preserve">
     <value>검색어:</value>
   </data>
@@ -33,8 +30,8 @@
   <data name="label4.Text" xml:space="preserve">
     <value>제목:</value>
   </data>
-  <data name="groupProtection.Text" xml:space="preserve">
-    <value>암호화</value>
+  <data name="groupMetadata.Text" xml:space="preserve">
+    <value>메타데이터</value>
   </data>
   <data name="clbPerms.Items" xml:space="preserve">
     <value>인쇄 허용</value>
@@ -75,6 +72,9 @@
   <data name="cbEncryptPdf.Text" xml:space="preserve">
     <value>PDF 암호화</value>
   </data>
+  <data name="groupProtection.Text" xml:space="preserve">
+    <value>암호화</value>
+  </data>
   <data name="cbRememberSettings.Text" xml:space="preserve">
     <value>설정값 기억</value>
   </data>
@@ -92,6 +92,9 @@
   </data>
   <data name="groupCompat.Text" xml:space="preserve">
     <value>호환성</value>
+  </data>
+  <data name="cbSinglePagePdf.Text" xml:space="preserve">
+    <value>Single page files</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>PDF 설정</value>

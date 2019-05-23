@@ -19,7 +19,7 @@
     <value>&amp;Numériser</value>
   </data>
   <data name="lblStatus.Text" xml:space="preserve">
-    <value>Prêt pour numériser {0}.</value>
+    <value>Prêt à numériser {0}.</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Prochaine acquisition</value>

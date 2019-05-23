@@ -18,9 +18,6 @@
   <data name="btnCancel.Text" xml:space="preserve">
     <value>&amp;Άκυρο</value>
   </data>
-  <data name="groupMetadata.Text" xml:space="preserve">
-    <value>Μεταδεδομένα (Metadata)</value>
-  </data>
   <data name="label6.Text" xml:space="preserve">
     <value>Λέξεις Κλειδιά:</value>
   </data>
@@ -33,8 +30,8 @@
   <data name="label4.Text" xml:space="preserve">
     <value>Τίτλος:</value>
   </data>
-  <data name="groupProtection.Text" xml:space="preserve">
-    <value>Κρυπτογράφηση</value>
+  <data name="groupMetadata.Text" xml:space="preserve">
+    <value>Μεταδεδομένα (Metadata)</value>
   </data>
   <data name="clbPerms.Items" xml:space="preserve">
     <value>Να Επιτρέπεται Εκτύπωση</value>
@@ -75,6 +72,9 @@
   <data name="cbEncryptPdf.Text" xml:space="preserve">
     <value>Κρυπτογραφημένο PDF</value>
   </data>
+  <data name="groupProtection.Text" xml:space="preserve">
+    <value>Κρυπτογράφηση</value>
+  </data>
   <data name="cbRememberSettings.Text" xml:space="preserve">
     <value>Απομνημόνευση αυτών των ρυθμίσεων</value>
   </data>
@@ -92,6 +92,9 @@
   </data>
   <data name="groupCompat.Text" xml:space="preserve">
     <value>Συμβατότητα</value>
+  </data>
+  <data name="cbSinglePagePdf.Text" xml:space="preserve">
+    <value>Αρχεία μιας σελίδας</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Ρυθμίσεις PDF</value>

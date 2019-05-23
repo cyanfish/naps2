@@ -46,16 +46,16 @@
     <value>Giây (00-59)</value>
   </data>
   <data name="label10.Text" xml:space="preserve">
-    <value>số tự động-incrementing (4 chữ số)</value>
+    <value>Tự động tăng số (4 chữ số)</value>
   </data>
   <data name="label11.Text" xml:space="preserve">
-    <value>số tự động-incrementing (3 chữ số)</value>
+    <value>Tự động tăng số (3 chữ số)</value>
   </data>
   <data name="label12.Text" xml:space="preserve">
-    <value>số tự động-incrementing (2 chữ số)</value>
+    <value>Tự động tăng số (2 chữ số)</value>
   </data>
   <data name="label13.Text" xml:space="preserve">
-    <value>số tự động-incrementing (1 chữ số)</value>
+    <value>Tự động tăng số (1 chữ số)</value>
   </data>
   <data name="gboxPlaceholders.Text" xml:space="preserve">
     <value>Placeholders</value>

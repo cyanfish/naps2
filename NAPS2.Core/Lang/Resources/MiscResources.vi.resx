@@ -19,10 +19,10 @@
     <value>Xóa</value>
   </data>
   <data name="ConfirmClearItems" xml:space="preserve">
-    <value>Bạn có chắc chắn bạn muốn xóa {0} sản phẩm (s)?</value>
+    <value>Bạn có chắc chắn bạn muốn xóa {0} mục?</value>
   </data>
   <data name="ConfirmDeleteItems" xml:space="preserve">
-    <value>Bạn có chắc chắn muốn xóa {0} sản phẩm (s)?</value>
+    <value>Bạn có chắc chắn muốn xóa {0} mục?</value>
   </data>
   <data name="ConfirmDeleteMultipleProfiles" xml:space="preserve">
     <value>Bạn có chắc chắn muốn xóa {0} hồ sơ?</value>
@@ -151,7 +151,7 @@
     <value>Quét</value>
   </data>
   <data name="ConfirmResetImages" xml:space="preserve">
-    <value>Bạn có chắc chắn bạn muốn hoàn tác các thay đổi đến {0} hình ảnh (s)?</value>
+    <value>Bạn có chắc chắn muốn hoàn tác các thay đổi đến {0} hình ảnh?</value>
   </data>
   <data name="ResetImage" xml:space="preserve">
     <value>Thiết lập lại hình ảnh</value>
@@ -160,13 +160,13 @@
     <value>Bạn có thay đổi chưa được lưu. Bạn có chắc chắn muốn thoát ra và loại bỏ những thay đổi?</value>
   </data>
   <data name="ExitWithActiveOperations" xml:space="preserve">
-    <value>An operation is in progress. Are you sure you want to exit and cancel the operation?</value>
+    <value>Đang thực thi lệnh nào đó. Bạn có muốn hủy lệnh và thoát?</value>
   </data>
   <data name="UnsavedChanges" xml:space="preserve">
     <value>Thay đổi chưa được lưu</value>
   </data>
   <data name="ActiveOperations" xml:space="preserve">
-    <value>Operation in Progress</value>
+    <value>Đang thực thi lệnh</value>
   </data>
   <data name="ScanPageProgress" xml:space="preserve">
     <value>Trang quét {0}</value>
@@ -181,13 +181,13 @@
     <value>Bạn không có quyền sao chép nội dung từ file '{0}'.</value>
   </data>
   <data name="ErrorSaving" xml:space="preserve">
-    <value>Có lỗi xảy ra khi cố gắng để lưu các tập tin.</value>
+    <value>Có lỗi khi lưu tập tin.</value>
   </data>
   <data name="OfN" xml:space="preserve">
     <value>of {0}</value>
   </data>
   <data name="BatchError" xml:space="preserve">
-    <value>xảy ra một lỗi không rõ trong đợt quét.</value>
+    <value>Có lỗi khi scan hàng loạt.</value>
   </data>
   <data name="BatchStatusCancelled" xml:space="preserve">
     <value>Hủy Scan hàng loạt.</value>
@@ -268,7 +268,7 @@
     <value>Email PDF Progress</value>
   </data>
   <data name="AutoSaveError" xml:space="preserve">
-    <value>Có lỗi xảy ra khi cố gắng tự động Lưu.</value>
+    <value>Có lỗi xảy ra khi lưu tự động.</value>
   </data>
   <data name="FileTypeAllFiles" xml:space="preserve">
     <value>Tất cả các tập tin</value>
@@ -289,7 +289,7 @@
     <value>Máy quét đang ấm dần lên.</value>
   </data>
   <data name="OcrUpdateAvailable" xml:space="preserve">
-    <value>Một bản cập nhật để OCR có sẵn.</value>
+    <value>OCR có bản cập nhật mới..</value>
   </data>
   <data name="ImageSaved" xml:space="preserve">
     <value>Lưu ảnh.</value>
@@ -316,67 +316,67 @@
     <value>Deskew Progress</value>
   </data>
   <data name="DownloadNeeded" xml:space="preserve">
-    <value>Download Needed</value>
+    <value>Cần Tải Về</value>
   </data>
   <data name="PdfImportComponentNeeded" xml:space="preserve">
-    <value>An additional component is needed to import this PDF file. Would you like to download it now?</value>
+    <value>Cần phải cài thêm phần mềm để nhập tập tin PDF này vào. Bạn có muốn tải ngay?</value>
   </data>
   <data name="ConfirmCancelBatch" xml:space="preserve">
-    <value>Are you sure you want to cancel the batch scan?</value>
+    <value>Bạn chắc chắn là muốn hủy lệnh scan liên tục này?</value>
   </data>
   <data name="CancelBatch" xml:space="preserve">
-    <value>Cancel Batch</value>
+    <value>Hủy lệnh</value>
   </data>
   <data name="Donate" xml:space="preserve">
     <value>Donate</value>
   </data>
   <data name="DonatePrompt" xml:space="preserve">
-    <value>NAPS2 is completely free. Consider making a donation.</value>
+    <value>NAPS2 miễn phí hoàn toàn. Bạn có thể ủng hộ tùy ý..</value>
   </data>
   <data name="SaneNotAvailable" xml:space="preserve">
     <value>The SANE driver is not available. Make sure to install the required packages:</value>
   </data>
   <data name="TesseractNotAvailable" xml:space="preserve">
-    <value>The OCR engine is not available. Make sure to install the required package:</value>
+    <value>OCR chưa được cài. Vui lòng cài đặt gói liên quan để thao tác.:</value>
   </data>
   <data name="DriverNotSupported" xml:space="preserve">
-    <value>The selected driver is not supported on this system.</value>
+    <value>Driver bạn đang chọn không hỗ trợ hệ điều hành này..</value>
   </data>
   <data name="OcrProgress" xml:space="preserve">
-    <value>OCR Progress</value>
+    <value>Quá trình OCR</value>
   </data>
   <data name="RunningOcr" xml:space="preserve">
-    <value>Running OCR...</value>
+    <value>Đang thực hiện OCR...</value>
   </data>
   <data name="UpdateProgress" xml:space="preserve">
-    <value>Update Progress</value>
+    <value>Tiến trình cập nhật</value>
   </data>
   <data name="Updating" xml:space="preserve">
-    <value>Updating...</value>
+    <value>Đang cập nhật...</value>
   </data>
   <data name="NoUpdates" xml:space="preserve">
-    <value>No updates available.</value>
+    <value>Chưa có phiên bản mới..</value>
   </data>
   <data name="CheckingForUpdates" xml:space="preserve">
-    <value>Checking...</value>
+    <value>Đang kiểm tra...</value>
   </data>
   <data name="UpdateError" xml:space="preserve">
-    <value>An error occured when trying to install the update.</value>
+    <value>Có lỗi khi đang cập nhật..</value>
   </data>
   <data name="Install" xml:space="preserve">
     <value>Install {0}</value>
   </data>
   <data name="UpdateAvailable" xml:space="preserve">
-    <value>An update is available.</value>
+    <value>Đã có phiên bản mới hơn..</value>
   </data>
   <data name="AuthError" xml:space="preserve">
-    <value>An error occurred when trying to authorize.</value>
+    <value>Có lỗi khi đang xác thực..</value>
   </data>
   <data name="UploadingEmail" xml:space="preserve">
-    <value>Uploading email...</value>
+    <value>Đang tải lên email...</value>
   </data>
   <data name="ErrorEmailing" xml:space="preserve">
-    <value>An error occurred when trying to send the email.</value>
+    <value>Có lỗi khi đang gửi email..</value>
   </data>
   <data name="Naps2Server" xml:space="preserve">
     <value>NAPS2 Server</value>

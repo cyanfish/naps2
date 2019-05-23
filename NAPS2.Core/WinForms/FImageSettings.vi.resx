@@ -31,13 +31,13 @@
     <value>Placeholders</value>
   </data>
   <data name="lblWarning.Text" xml:space="preserve">
-    <value>For high JPEG qualities (80+), also increase Image Quality in your profile for best results.</value>
+    <value>Để JPEG được chất lượng cao, nhớ tăng chất lượng hình trong thiết lập mẫu có sẵn của bạn..</value>
   </data>
   <data name="cbSkipSavePrompt.Text" xml:space="preserve">
     <value>Bỏ qua Lưu nhanh </value>
   </data>
   <data name="label3.Text" xml:space="preserve">
-    <value>Compression:</value>
+    <value>Nén:</value>
   </data>
   <data name="cbSinglePageTiff.Text" xml:space="preserve">
     <value>Single page files</value>
@@ -46,7 +46,7 @@
     <value>Jpeg Quality</value>
   </data>
   <data name="groupTiff.Text" xml:space="preserve">
-    <value>Tiff Options</value>
+    <value>Thông số Tiff</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Cài đặt ảnh</value>

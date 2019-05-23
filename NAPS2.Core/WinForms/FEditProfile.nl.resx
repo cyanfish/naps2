@@ -64,7 +64,7 @@
     <value>WIA driver</value>
   </data>
   <data name="rdSANE.Text" xml:space="preserve">
-    <value>SANE Driver</value>
+    <value>SANE driver</value>
   </data>
   <data name="cbAutoSave.Text" xml:space="preserve">
     <value>Automatisch opslaan inschakelen</value>

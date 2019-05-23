@@ -18,9 +18,6 @@
   <data name="btnCancel.Text" xml:space="preserve">
     <value>&amp;Отказ</value>
   </data>
-  <data name="groupMetadata.Text" xml:space="preserve">
-    <value>Допълнителни данни</value>
-  </data>
   <data name="label6.Text" xml:space="preserve">
     <value>Ключови думи:</value>
   </data>
@@ -33,8 +30,8 @@
   <data name="label4.Text" xml:space="preserve">
     <value>Заглавие:</value>
   </data>
-  <data name="groupProtection.Text" xml:space="preserve">
-    <value>Шифроване</value>
+  <data name="groupMetadata.Text" xml:space="preserve">
+    <value>Допълнителни данни</value>
   </data>
   <data name="clbPerms.Items" xml:space="preserve">
     <value>Разреши принтиране</value>
@@ -75,6 +72,9 @@
   <data name="cbEncryptPdf.Text" xml:space="preserve">
     <value>Шифроване на PDF</value>
   </data>
+  <data name="groupProtection.Text" xml:space="preserve">
+    <value>Шифроване</value>
+  </data>
   <data name="cbRememberSettings.Text" xml:space="preserve">
     <value>Запомни тези настройки</value>
   </data>
@@ -92,6 +92,9 @@
   </data>
   <data name="groupCompat.Text" xml:space="preserve">
     <value>Съвместимост</value>
+  </data>
+  <data name="cbSinglePagePdf.Text" xml:space="preserve">
+    <value>Single page files</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Настройки на PDF</value>

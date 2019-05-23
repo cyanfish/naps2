@@ -28,7 +28,7 @@
     <value>http://www.fatcow.com/free-icons</value>
   </data>
   <data name="cbCheckForUpdates.Text" xml:space="preserve">
-    <value>Check for updates</value>
+    <value>Kiểm tra phiên bản mới</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Thông Tin Phần Mềm</value>

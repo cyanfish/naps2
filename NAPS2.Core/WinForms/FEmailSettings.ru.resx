@@ -31,7 +31,7 @@
     <value>Подстановка</value>
   </data>
   <data name="lblProvider.Text" xml:space="preserve">
-    <value>No provider selected.</value>
+    <value>Поставщик не выбран.</value>
   </data>
   <data name="btnChangeProvider.Text" xml:space="preserve">
     <value>Change</value>

@@ -18,9 +18,6 @@
   <data name="btnCancel.Text" xml:space="preserve">
     <value>&amp;キャンセル</value>
   </data>
-  <data name="groupMetadata.Text" xml:space="preserve">
-    <value>メタデータ</value>
-  </data>
   <data name="label6.Text" xml:space="preserve">
     <value>キーワード:</value>
   </data>
@@ -33,8 +30,8 @@
   <data name="label4.Text" xml:space="preserve">
     <value>タイトル:</value>
   </data>
-  <data name="groupProtection.Text" xml:space="preserve">
-    <value>暗号化</value>
+  <data name="groupMetadata.Text" xml:space="preserve">
+    <value>メタデータ</value>
   </data>
   <data name="clbPerms.Items" xml:space="preserve">
     <value>印刷を許可する</value>
@@ -75,6 +72,9 @@
   <data name="cbEncryptPdf.Text" xml:space="preserve">
     <value>暗号化されたPDF</value>
   </data>
+  <data name="groupProtection.Text" xml:space="preserve">
+    <value>暗号化</value>
+  </data>
   <data name="cbRememberSettings.Text" xml:space="preserve">
     <value>設定を保存する</value>
   </data>
@@ -92,6 +92,9 @@
   </data>
   <data name="groupCompat.Text" xml:space="preserve">
     <value>互換性</value>
+  </data>
+  <data name="cbSinglePagePdf.Text" xml:space="preserve">
+    <value>単一ページのファイル</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>PDFの設定</value>

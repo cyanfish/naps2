@@ -142,7 +142,7 @@
     <value>وراثي (واجهة المستخدم الأصلية فقط)</value>
   </data>
   <data name="TwainImpl_MemXfer" xml:space="preserve">
-    <value>Alternative Transfer</value>
+    <value>التحويل البديل</value>
   </data>
   <data name="TwainImpl_OldDsm" xml:space="preserve">
     <value>DSM القديم</value>

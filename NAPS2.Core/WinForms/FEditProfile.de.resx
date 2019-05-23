@@ -64,7 +64,7 @@
     <value>WIA Treiber</value>
   </data>
   <data name="rdSANE.Text" xml:space="preserve">
-    <value>SANE Driver</value>
+    <value>SANE-Treiber</value>
   </data>
   <data name="cbAutoSave.Text" xml:space="preserve">
     <value>Erlaube automatisches Speichern</value>

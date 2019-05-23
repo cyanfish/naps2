@@ -31,7 +31,7 @@
     <value>Platzhalter</value>
   </data>
   <data name="lblWarning.Text" xml:space="preserve">
-    <value>Für eine hohe JPEG Qualtät (80+) ist ebenfalls die Bildqualität im Ihrem Profil zu erhöhen, um beste Ergebnisse zu erhalten.</value>
+    <value>Für eine hohe JPEG-Qualität (80+) ist ebenfalls die Bildqualität in Ihrem Profil zu erhöhen, um beste Ergebnisse zu erhalten.</value>
   </data>
   <data name="cbSkipSavePrompt.Text" xml:space="preserve">
     <value>Überspringe Speicherdialog</value>

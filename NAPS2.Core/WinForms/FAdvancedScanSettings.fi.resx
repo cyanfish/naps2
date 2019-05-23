@@ -19,57 +19,57 @@
     <value>&amp;Peruuta</value>
   </data>
   <data name="cbHighQuality.Text" xml:space="preserve">
-    <value>Korkea laatu (suuret tiedostot)</value>
+    <value>Korkein laatu (suuret tiedostot)</value>
   </data>
   <data name="groupBox1.Text" xml:space="preserve">
-    <value>Image Quality</value>
+    <value>Kuvan laatu</value>
   </data>
   <data name="label4.Text" xml:space="preserve">
     <value>Wia Version:</value>
   </data>
   <data name="cbForcePageSizeCrop.Text" xml:space="preserve">
-    <value>Crop to page size</value>
+    <value>Rajaa sivun kokoon</value>
   </data>
   <data name="cbFlipDuplex.Text" xml:space="preserve">
-    <value>Flip duplexed pages</value>
+    <value>Käännä kaksipuoleiset sivut</value>
   </data>
   <data name="cbWiaOffsetWidth.Text" xml:space="preserve">
-    <value>Offset width based on alignment (WIA)</value>
+    <value>Siirtymän suurus kohdistuksen perusteella (WIA)</value>
   </data>
   <data name="cbForcePageSize.Text" xml:space="preserve">
-    <value>Stretch to page size</value>
+    <value>Venytä sivun kokoon</value>
   </data>
   <data name="cbBrightnessContrastAfterScan.Text" xml:space="preserve">
-    <value>Apply brightness/contrast after scan</value>
+    <value>Käytä kirkkautta/kontrastia skannauksen jälkeen</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
-    <value>Twain Implementation:</value>
+    <value>Twain - toteutus:</value>
   </data>
   <data name="groupBox2.Text" xml:space="preserve">
-    <value>Compatibility</value>
+    <value>Yhteensopivuus</value>
   </data>
   <data name="label3.Text" xml:space="preserve">
-    <value>Coverage Threshold</value>
+    <value>Peitto</value>
   </data>
   <data name="label2.Text" xml:space="preserve">
-    <value>White Threshold</value>
+    <value>Valkoisen raja</value>
   </data>
   <data name="cbExcludeBlankPages.Text" xml:space="preserve">
-    <value>Exclude blank pages</value>
+    <value>Ohita tyhjät sivut</value>
   </data>
   <data name="groupBox3.Text" xml:space="preserve">
-    <value>Blank Pages</value>
+    <value>Tyhjät sivut</value>
   </data>
   <data name="btnRestoreDefaults.Text" xml:space="preserve">
-    <value>Restore &amp;Defaults</value>
+    <value>&amp;Palauta oletusarvoihin</value>
   </data>
   <data name="cbAutoDeskew.Text" xml:space="preserve">
-    <value>Deskew scanned pages</value>
+    <value>Suorista skannatut sivut</value>
   </data>
   <data name="groupBox4.Text" xml:space="preserve">
-    <value>Post-processing</value>
+    <value>Jälkikäsittely</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>Advanced Profile Settings</value>
+    <value>Profiilin lisäasetukset</value>
   </data>
 </root>

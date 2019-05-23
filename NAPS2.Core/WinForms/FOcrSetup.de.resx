@@ -16,7 +16,7 @@
     <value>&amp;PDF mittels OCR durchsuchbar machen</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
-    <value>Texterkennung Sprache:</value>
+    <value>Texterkennungs-Sprache:</value>
   </data>
   <data name="btnCancel.Text" xml:space="preserve">
     <value>&amp;Abbrechen</value>
@@ -28,10 +28,10 @@
     <value>&amp;OK</value>
   </data>
   <data name="labelOcrMode.Text" xml:space="preserve">
-    <value>OCR mode:</value>
+    <value>OCR-Modus:</value>
   </data>
   <data name="checkBoxRunInBG.Text" xml:space="preserve">
-    <value>&amp;Automatically run OCR after scanning</value>
+    <value>&amp;OCR nach dem Scannen automatisch starten</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Texterkennung einrichten</value>

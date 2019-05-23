@@ -391,6 +391,6 @@
     <value>Scanning page {0}...</value>
   </data>
   <data name="AcquiringData" xml:space="preserve">
-    <value>Acquiring data...</value>
+    <value>S'estan obtenint les dades...</value>
   </data>
 </root>

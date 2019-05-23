@@ -18,9 +18,6 @@
   <data name="btnCancel.Text" xml:space="preserve">
     <value>&amp;Prekliči</value>
   </data>
-  <data name="groupMetadata.Text" xml:space="preserve">
-    <value>Metapodatki</value>
-  </data>
   <data name="label6.Text" xml:space="preserve">
     <value>Ključne besede:</value>
   </data>
@@ -33,8 +30,8 @@
   <data name="label4.Text" xml:space="preserve">
     <value>Naslov:</value>
   </data>
-  <data name="groupProtection.Text" xml:space="preserve">
-    <value>Šifriranje</value>
+  <data name="groupMetadata.Text" xml:space="preserve">
+    <value>Metapodatki</value>
   </data>
   <data name="clbPerms.Items" xml:space="preserve">
     <value>Dovoli Tiskanje</value>
@@ -75,6 +72,9 @@
   <data name="cbEncryptPdf.Text" xml:space="preserve">
     <value>Šifriraj PDF</value>
   </data>
+  <data name="groupProtection.Text" xml:space="preserve">
+    <value>Šifriranje</value>
+  </data>
   <data name="cbRememberSettings.Text" xml:space="preserve">
     <value>Zapomni si te nastavitve</value>
   </data>
@@ -92,6 +92,9 @@
   </data>
   <data name="groupCompat.Text" xml:space="preserve">
     <value>Združljivost</value>
+  </data>
+  <data name="cbSinglePagePdf.Text" xml:space="preserve">
+    <value>Single page files</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>PDF Nastavitve</value>

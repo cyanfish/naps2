@@ -160,13 +160,13 @@
     <value>U heeft niet-opgeslagen wijzigingen. Weet u zeker dat u wilt afsluiten en wijzigingen annuleren?</value>
   </data>
   <data name="ExitWithActiveOperations" xml:space="preserve">
-    <value>An operation is in progress. Are you sure you want to exit and cancel the operation?</value>
+    <value>Er is een bewerking bezig. Weet u zeker dat u wilt stoppen en de bewerking annuleren?</value>
   </data>
   <data name="UnsavedChanges" xml:space="preserve">
     <value>Niet-opgeslagen wijzigingen</value>
   </data>
   <data name="ActiveOperations" xml:space="preserve">
-    <value>Operation in Progress</value>
+    <value>Bewerking is bezig</value>
   </data>
   <data name="ScanPageProgress" xml:space="preserve">
     <value>Scannen pagina {0}</value>
@@ -322,61 +322,61 @@
     <value>Er is een additioneel component nodig om deze PDF te importeren. Nu downloaden?</value>
   </data>
   <data name="ConfirmCancelBatch" xml:space="preserve">
-    <value>Are you sure you want to cancel the batch scan?</value>
+    <value>Weet u zeker dat u de batch scan wilt annuleren?</value>
   </data>
   <data name="CancelBatch" xml:space="preserve">
-    <value>Cancel Batch</value>
+    <value>Annuleer batch</value>
   </data>
   <data name="Donate" xml:space="preserve">
-    <value>Donate</value>
+    <value>Doneer</value>
   </data>
   <data name="DonatePrompt" xml:space="preserve">
-    <value>NAPS2 is completely free. Consider making a donation.</value>
+    <value>NAPS2 is helemaal gratis. Overweeg een donatie.</value>
   </data>
   <data name="SaneNotAvailable" xml:space="preserve">
-    <value>The SANE driver is not available. Make sure to install the required packages:</value>
+    <value>De SANE driver is niet beschikbaar. Installeer de vereiste pakketten:</value>
   </data>
   <data name="TesseractNotAvailable" xml:space="preserve">
-    <value>The OCR engine is not available. Make sure to install the required package:</value>
+    <value>De OCR engine is niet beschikbaar. Installeer het vereiste pakket:</value>
   </data>
   <data name="DriverNotSupported" xml:space="preserve">
-    <value>The selected driver is not supported on this system.</value>
+    <value>De gekozen driver wordt niet ondersteund op dit systeem.</value>
   </data>
   <data name="OcrProgress" xml:space="preserve">
-    <value>OCR Progress</value>
+    <value>OCR voortgang</value>
   </data>
   <data name="RunningOcr" xml:space="preserve">
-    <value>Running OCR...</value>
+    <value>OCR draait...</value>
   </data>
   <data name="UpdateProgress" xml:space="preserve">
-    <value>Update Progress</value>
+    <value>Voortgang bijwerken</value>
   </data>
   <data name="Updating" xml:space="preserve">
-    <value>Updating...</value>
+    <value>Bijwerken...</value>
   </data>
   <data name="NoUpdates" xml:space="preserve">
-    <value>No updates available.</value>
+    <value>Geen updates beschikbaar.</value>
   </data>
   <data name="CheckingForUpdates" xml:space="preserve">
-    <value>Checking...</value>
+    <value>Controleert...</value>
   </data>
   <data name="UpdateError" xml:space="preserve">
-    <value>An error occured when trying to install the update.</value>
+    <value>Er was een fout bij het installeren van de update.</value>
   </data>
   <data name="Install" xml:space="preserve">
-    <value>Install {0}</value>
+    <value>Installeer {0}</value>
   </data>
   <data name="UpdateAvailable" xml:space="preserve">
-    <value>An update is available.</value>
+    <value>Een update is beschikbaar.</value>
   </data>
   <data name="AuthError" xml:space="preserve">
-    <value>An error occurred when trying to authorize.</value>
+    <value>Er was een fout bij het autoriseren.</value>
   </data>
   <data name="UploadingEmail" xml:space="preserve">
-    <value>Uploading email...</value>
+    <value>E-mail uploaden...</value>
   </data>
   <data name="ErrorEmailing" xml:space="preserve">
-    <value>An error occurred when trying to send the email.</value>
+    <value>Er was een fout bij het verzenden van de e-mail.</value>
   </data>
   <data name="Naps2Server" xml:space="preserve">
     <value>NAPS2 Server</value>

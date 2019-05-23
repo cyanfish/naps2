@@ -13,27 +13,27 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="checkBoxEnableOcr.Text" xml:space="preserve">
-    <value>&amp;Make PDFs searchable using OCR</value>
+    <value>&amp;Mahdollista haku PDF:issä optisen tekstintunnistuksen avulla</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
-    <value>OCR language:</value>
+    <value>OCR kieli:</value>
   </data>
   <data name="btnCancel.Text" xml:space="preserve">
     <value>&amp;Peruuta</value>
   </data>
   <data name="linkGetLanguages.Text" xml:space="preserve">
-    <value>Get more languages</value>
+    <value>Hae lisää kieliä</value>
   </data>
   <data name="btnOK.Text" xml:space="preserve">
     <value>&amp;OK</value>
   </data>
   <data name="labelOcrMode.Text" xml:space="preserve">
-    <value>OCR mode:</value>
+    <value>OCR muoto:</value>
   </data>
   <data name="checkBoxRunInBG.Text" xml:space="preserve">
-    <value>&amp;Automatically run OCR after scanning</value>
+    <value>&amp;Tunnista teksti optisesti automaattisesti skannauksen jälkeen</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>OCR Setup</value>
+    <value>OCR asetus</value>
   </data>
 </root>

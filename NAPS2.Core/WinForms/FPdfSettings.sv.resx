@@ -18,9 +18,6 @@
   <data name="btnCancel.Text" xml:space="preserve">
     <value>&amp;Avbryt</value>
   </data>
-  <data name="groupMetadata.Text" xml:space="preserve">
-    <value>Metadata</value>
-  </data>
   <data name="label6.Text" xml:space="preserve">
     <value>Nyckelord:</value>
   </data>
@@ -33,8 +30,8 @@
   <data name="label4.Text" xml:space="preserve">
     <value>Titel:</value>
   </data>
-  <data name="groupProtection.Text" xml:space="preserve">
-    <value>Kryptering</value>
+  <data name="groupMetadata.Text" xml:space="preserve">
+    <value>Metadata</value>
   </data>
   <data name="clbPerms.Items" xml:space="preserve">
     <value>Tillåt utskrift</value>
@@ -75,6 +72,9 @@
   <data name="cbEncryptPdf.Text" xml:space="preserve">
     <value>Kryptera PDF</value>
   </data>
+  <data name="groupProtection.Text" xml:space="preserve">
+    <value>Kryptering</value>
+  </data>
   <data name="cbRememberSettings.Text" xml:space="preserve">
     <value>Kom ihåg dessa inställningar</value>
   </data>
@@ -92,6 +92,9 @@
   </data>
   <data name="groupCompat.Text" xml:space="preserve">
     <value>Kompatibilitet</value>
+  </data>
+  <data name="cbSinglePagePdf.Text" xml:space="preserve">
+    <value>Single page files</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>PDF-inställningar</value>

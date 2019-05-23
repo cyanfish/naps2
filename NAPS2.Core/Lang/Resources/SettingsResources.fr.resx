@@ -16,7 +16,7 @@
     <value>Noir et blanc</value>
   </data>
   <data name="BitDepth_24Color" xml:space="preserve">
-    <value>Couleur sur 24 bits</value>
+    <value>Couleurs sur 24 bits</value>
   </data>
   <data name="BitDepth_8Grayscale" xml:space="preserve">
     <value>Niveaux de gris</value>
@@ -46,16 +46,16 @@
     <value>800 ppp</value>
   </data>
   <data name="EmailProviderType_CustomSmtp" xml:space="preserve">
-    <value>Custom SMTP</value>
+    <value>SMTP personnalisé</value>
   </data>
   <data name="EmailProviderType_Gmail" xml:space="preserve">
     <value>Gmail</value>
   </data>
   <data name="EmailProviderType_OutlookWeb" xml:space="preserve">
-    <value>Outlook Web Access</value>
+    <value>Accès Web pour Outlook</value>
   </data>
   <data name="EmailProvider_NotSelected" xml:space="preserve">
-    <value>No provider selected.</value>
+    <value>Aucun fournisseur sélectionné.</value>
   </data>
   <data name="HorizontalAlign_Center" xml:space="preserve">
     <value>Centré</value>
@@ -76,13 +76,13 @@
     <value>mm</value>
   </data>
   <data name="PageSize_A3" xml:space="preserve">
-    <value>A3 (297 x 420 mm)</value>
+    <value>A3 (297 x 420 mm)</value>
   </data>
   <data name="PageSize_A4" xml:space="preserve">
     <value>A4 (210 x 297 mm)</value>
   </data>
   <data name="PageSize_A5" xml:space="preserve">
-    <value>A5 (148 x 210 mm)</value>
+    <value>A5 (148 x 210 mm)</value>
   </data>
   <data name="PageSize_B4" xml:space="preserve">
     <value>B4 (250x353 mm)</value>

@@ -31,22 +31,22 @@
     <value>Placeholders</value>
   </data>
   <data name="lblWarning.Text" xml:space="preserve">
-    <value>For high JPEG qualities (80+), also increase Image Quality in your profile for best results.</value>
+    <value>Voor hoge-kwaliteit JPEG (80+), verhoog ook de afbeeldingskwaliteit in uw profiel voor het beste resultaat.</value>
   </data>
   <data name="cbSkipSavePrompt.Text" xml:space="preserve">
     <value>Opslaanvenster overslaan</value>
   </data>
   <data name="label3.Text" xml:space="preserve">
-    <value>Compression:</value>
+    <value>Compressie:</value>
   </data>
   <data name="cbSinglePageTiff.Text" xml:space="preserve">
-    <value>Single page files</value>
+    <value>Enkele-pagina bestanden</value>
   </data>
   <data name="groupJpeg.Text" xml:space="preserve">
     <value>JPEG kwaliteit</value>
   </data>
   <data name="groupTiff.Text" xml:space="preserve">
-    <value>Tiff Options</value>
+    <value>Tiff opties</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Instellingen afbeeldingen</value>

@@ -19,7 +19,7 @@
     <value>&amp;Peruuta</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
-    <value>Name (optional)</value>
+    <value>Nimi (valinnainen)</value>
   </data>
   <data name="label2.Text" xml:space="preserve">
     <value>IP</value>
