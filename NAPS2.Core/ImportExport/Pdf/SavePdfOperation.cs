@@ -84,6 +84,11 @@ namespace NAPS2.ImportExport.Pdf
                         {
                             break;
                         }
+                        emailMessage.Attachments.Add(new EmailAttachment
+                        {
+                            FilePath = subFileName,
+                            AttachmentName = Path.GetFileName(subFileName)
+                        });
                         if (i == 0)
                         {
                             FirstFileSaved = subFileName;
@@ -122,7 +127,7 @@ namespace NAPS2.ImportExport.Pdf
                     GC.Collect();
                 }
 
-                if (result && email && emailMessage != null)
+                if (result && !CancelToken.IsCancellationRequested && email && emailMessage != null)
                 {
                     Status.StatusText = MiscResources.UploadingEmail;
                     Status.CurrentProgress = 0;
@@ -176,6 +181,7 @@ namespace NAPS2.ImportExport.Pdf
 
         private bool IsFileInUse(string filePath, out Exception exception)
         {
+            // TODO: Generalize this for images too
             exception = null;
             if (File.Exists(filePath))
             {

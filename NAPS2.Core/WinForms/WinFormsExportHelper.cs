@@ -164,18 +164,7 @@ namespace NAPS2.WinForms
                 string targetPath = Path.Combine(tempFolder.FullName, attachmentName);
                 var changeToken = changeTracker.State;
 
-                var message = new EmailMessage
-                {
-                    Attachments =
-                    {
-                        new EmailAttachment
-                        {
-                            FilePath = targetPath,
-                            AttachmentName = attachmentName
-                        }
-                    }
-                };
-
+                var message = new EmailMessage();
                 if (await ExportPDF(targetPath, images, true, message) != null)
                 {
                     changeTracker.Saved(changeToken);
