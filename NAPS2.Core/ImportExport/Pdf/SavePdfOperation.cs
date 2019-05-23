@@ -48,10 +48,7 @@ namespace NAPS2.ImportExport.Pdf
                 fileName = Path.Combine(fileName, "$(n).pdf");
             }
 
-            var snapshots = images.Select(x => x.Preserve()).ToList();
-            var snapshotsByFile = pdfSettings.SinglePagePdf ? snapshots.Select(x => new[] { x }).ToArray() : new[] { snapshots.ToArray() };
-            var singleFile = snapshotsByFile.Length == 1;
-
+            var singleFile = !pdfSettings.SinglePagePdf || images.Count == 1;
             var subFileName = fileNamePlaceholders.SubstitutePlaceholders(fileName, dateTime);
             if (singleFile)
             {
@@ -61,6 +58,8 @@ namespace NAPS2.ImportExport.Pdf
                 }
             }
 
+            var snapshots = images.Select(x => x.Preserve()).ToList();
+            var snapshotsByFile = pdfSettings.SinglePagePdf ? snapshots.Select(x => new[] { x }).ToArray() : new[] { snapshots.ToArray() };
             RunAsync(async () =>
             {
                 bool result = false;
