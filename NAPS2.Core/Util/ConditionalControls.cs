@@ -40,7 +40,7 @@ namespace NAPS2.Util
             }
             foreach (var c in EnumerateSiblingsAndUncles(control))
             {
-                if (LocationInForm(c).Y >= bottom)
+                if (LocationInForm(c).Y > bottom)
                 {
                     c.Top -= height;
                 }
@@ -64,7 +64,7 @@ namespace NAPS2.Util
             }
             foreach (var c in EnumerateSiblingsAndUncles(control))
             {
-                if (LocationInForm(c).Y >= top)
+                if (LocationInForm(c).Y > top)
                 {
                     c.Top += height;
                 }
