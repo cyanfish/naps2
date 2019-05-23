@@ -72,6 +72,11 @@ namespace NAPS2.ImportExport.Pdf
                         subFileName = fileNamePlaceholders.SubstitutePlaceholders(fileName, dateTime, true, i, singleFile ? 0 : digits);
                         Status.StatusText = string.Format(MiscResources.SavingFormat, Path.GetFileName(subFileName));
                         InvokeStatusChanged();
+                        if (singleFile && IsFileInUse(subFileName, out var ex))
+                        {
+                            InvokeError(MiscResources.FileInUse, ex);
+                            break;
+                        }
 
                         var progress = singleFile ? OnProgress : (ProgressHandler)((j, k) => { });
                         result = await pdfExporter.Export(subFileName, snapshotArray, pdfSettings, ocrParams, progress, CancelToken);
@@ -167,6 +172,26 @@ namespace NAPS2.ImportExport.Pdf
             }, TaskContinuationOptions.OnlyOnRanToCompletion);
 
             return true;
+        }
+
+        private bool IsFileInUse(string filePath, out Exception exception)
+        {
+            exception = null;
+            if (File.Exists(filePath))
+            {
+                try
+                {
+                    using (new FileStream(filePath, FileMode.Open, FileAccess.ReadWrite, FileShare.None))
+                    {
+                    }
+                }
+                catch (IOException ex)
+                {
+                    exception = ex;
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }
