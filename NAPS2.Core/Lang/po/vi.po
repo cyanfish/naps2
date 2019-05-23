@@ -3,14 +3,14 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-09-17 20:27+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"PO-Revision-Date: 2018-11-06 09:59+0000\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: vi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Translate Toolkit 2.2.5\n"
+"X-Generator: Pootle 2.8\n"
+"X-POOTLE-MTIME: 1541498375.501458\n"
 
 #: SettingsResources.resx$Dpi_100$Message
 msgid "100 dpi"
@@ -107,7 +107,7 @@ msgstr "Cho phép tài liệu Assembly"
 
 #: FPdfSettings.resx$clbPerms.Items2$Message
 msgid "Allow Document Modification"
-msgstr "Cho phép tài liệu Modification"
+msgstr "Cho phép thay đổi tài liệu"
 
 #: FPdfSettings.resx$clbPerms.Items7$Message
 msgid "Allow Form Filling"
@@ -131,33 +131,34 @@ msgstr "Alternate Interleave"
 
 #: SettingsResources.resx$TwainImpl_MemXfer$Message
 msgid "Alternative Transfer"
-msgstr ""
+msgstr "Cách chuyển khác"
 
 #: MiscResources.resx$PdfImportComponentNeeded$Message
 msgid ""
 "An additional component is needed to import this PDF file. Would you like to "
 "download it now?"
 msgstr ""
+"Cần phải cài thêm phần mềm để nhập tập tin PDF này vào. Bạn có muốn tải ngay?"
 
 #: MiscResources.resx$UpdateError$Message
 msgid "An error occured when trying to install the update"
-msgstr ""
+msgstr "Có lỗi khi đang cập nhật."
 
 #: MiscResources.resx$AuthError$Message
 msgid "An error occurred when trying to authorize"
-msgstr ""
+msgstr "Có lỗi khi đang xác thực."
 
 #: MiscResources.resx$AutoSaveError$Message
 msgid "An error occurred when trying to auto save"
-msgstr "Có lỗi xảy ra khi cố gắng tự động Lưu"
+msgstr "Có lỗi xảy ra khi lưu tự động"
 
 #: MiscResources.resx$ErrorSaving$Message
 msgid "An error occurred when trying to save the file"
-msgstr "Có lỗi xảy ra khi cố gắng để lưu các tập tin"
+msgstr "Có lỗi khi lưu tập tin"
 
 #: MiscResources.resx$ErrorEmailing$Message
 msgid "An error occurred when trying to send the email"
-msgstr ""
+msgstr "Có lỗi khi đang gửi email."
 
 #: MiscResources.resx$EmailError$Message
 msgid "An error occurred while trying to send an email"
@@ -171,19 +172,19 @@ msgstr "Có lỗi xảy ra với trình điều khiển máy quét"
 msgid ""
 "An operation is in progress. Are you sure you want to exit and cancel the "
 "operation?"
-msgstr ""
+msgstr "Đang thực thi lệnh nào đó. Bạn có muốn hủy lệnh và thoát?"
 
 #: MiscResources.resx$BatchError$Message
 msgid "An unknown error ocurred during the batch scan"
-msgstr "xảy ra một lỗi không rõ trong đợt quét"
+msgstr "Có lỗi khi scan hàng loạt"
 
 #: MiscResources.resx$UpdateAvailable$Message
 msgid "An update is available"
-msgstr ""
+msgstr "Đã có phiên bản mới hơn."
 
 #: MiscResources.resx$OcrUpdateAvailable$Message
 msgid "An update to OCR is available"
-msgstr "Một bản cập nhật để OCR có sẵn"
+msgstr "OCR có bản cập nhật mới."
 
 #: FAdvancedScanSettings.resx$cbBrightnessContrastAfterScan.Text$Message
 msgid "Apply brightness/contrast after scan"
@@ -195,11 +196,11 @@ msgstr "Áp dụng cho tất cả {0} hình ảnh được chọn"
 
 #: MiscResources.resx$ConfirmCancelBatch$Message
 msgid "Are you sure you want to cancel the batch scan?"
-msgstr ""
+msgstr "Bạn chắc chắn là muốn hủy lệnh scan liên tục này?"
 
 #: MiscResources.resx$ConfirmClearItems$Message
 msgid "Are you sure you want to clear {0} item(s)?"
-msgstr "Bạn có chắc chắn bạn muốn xóa {0} sản phẩm (s)?"
+msgstr "Bạn có chắc chắn bạn muốn xóa {0} mục?"
 
 #: MiscResources.resx$ConfirmDelete$Message
 msgid "Are you sure you want to delete \"{0}\"?"
@@ -211,7 +212,7 @@ msgstr "Bạn có chắc chắn bạn muốn xóa hồ sơ {0}?"
 
 #: MiscResources.resx$ConfirmDeleteItems$Message
 msgid "Are you sure you want to delete {0} item(s)?"
-msgstr "Bạn có chắc chắn muốn xóa {0} sản phẩm (s)?"
+msgstr "Bạn có chắc chắn muốn xóa {0} mục?"
 
 #: MiscResources.resx$ConfirmDeleteMultipleProfiles$Message
 msgid "Are you sure you want to delete {0} profiles?"
@@ -219,7 +220,7 @@ msgstr "Bạn có chắc chắn muốn xóa {0} hồ sơ?"
 
 #: MiscResources.resx$ConfirmResetImages$Message
 msgid "Are you sure you want undo your changes to {0} image(s)?"
-msgstr "Bạn có chắc chắn bạn muốn hoàn tác các thay đổi đến {0} hình ảnh (s)?"
+msgstr "Bạn có chắc chắn muốn hoàn tác các thay đổi đến {0} hình ảnh?"
 
 #: FEmailSettings.resx$label1.Text$Message
 msgid "Attachment Name"
@@ -231,11 +232,11 @@ msgstr "Tác giả"
 
 #: FAuthorize.resx$$this.Text$Message
 msgid "Authorize"
-msgstr ""
+msgstr "Cho phép"
 
 #: SettingsResources.resx$TiffComp_Auto$Message
 msgid "Auto"
-msgstr ""
+msgstr "Tự động"
 
 #: FAutoSaveSettings.resx$$this.Text$Message
 #: FEditProfile.resx$linkAutoSaveSettings.Text$Message
@@ -244,23 +245,23 @@ msgstr "Cài đặt Tự động Lưu"
 
 #: FPlaceholders.resx$label13.Text$Message
 msgid "Auto-incrementing number (1 digit)"
-msgstr "số tự động-incrementing (1 chữ số)"
+msgstr "Tự động tăng số (1 chữ số)"
 
 #: FPlaceholders.resx$label12.Text$Message
 msgid "Auto-incrementing number (2 digits)"
-msgstr "số tự động-incrementing (2 chữ số)"
+msgstr "Tự động tăng số (2 chữ số)"
 
 #: FPlaceholders.resx$label11.Text$Message
 msgid "Auto-incrementing number (3 digits)"
-msgstr "số tự động-incrementing (3 chữ số)"
+msgstr "Tự động tăng số (3 chữ số)"
 
 #: FPlaceholders.resx$label10.Text$Message
 msgid "Auto-incrementing number (4 digits)"
-msgstr "số tự động-incrementing (4 chữ số)"
+msgstr "Tự động tăng số (4 chữ số)"
 
 #: FOcrSetup.resx$checkBoxRunInBG.Text$Message
 msgid "Automatically run OCR after scanning"
-msgstr ""
+msgstr "Tự động thực thi OCR (nhận diện chữ trên bản scan) sau khi scan"
 
 #: SettingsResources.resx$PageSize_B4$Message
 msgid "B4 (250x353 mm)"
@@ -297,7 +298,7 @@ msgstr "Bitmap Files (*.bmp)"
 
 #: SettingsResources.resx$BitDepth_1BlackAndWhite$Message
 msgid "Black & White"
-msgstr "Trắng & Đen"
+msgstr "Đen / Trắng"
 
 #: FBlackWhite.resx$$this.Text$Message
 #: FDesktop.resx$tsBlackWhite.Text$Message
@@ -318,7 +319,7 @@ msgstr "Độ sáng"
 #: FDesktop.resx$tsBrightnessContrast.Text$Message
 #: FViewer.resx$tsBrightnessContrast.Text$Message
 msgid "Brightness / Contrast"
-msgstr ""
+msgstr "Độ Sáng / Tương Phản"
 
 #: SettingsResources.resx$TiffComp_Ccitt4$Message
 msgid "CCITT4"
@@ -349,7 +350,7 @@ msgstr "Hủy"
 
 #: MiscResources.resx$CancelBatch$Message
 msgid "Cancel Batch"
-msgstr ""
+msgstr "Hủy lệnh"
 
 #: MiscResources.resx$BatchStatusCancelling$Message
 msgid "Cancelling"
@@ -361,19 +362,19 @@ msgstr "Canh giữa"
 
 #: FEmailSettings.resx$btnChangeProvider.Text$Message
 msgid "Change"
-msgstr ""
+msgstr "Thay đổi"
 
 #: FAbout.resx$cbCheckForUpdates.Text$Message
 msgid "Check for updates"
-msgstr ""
+msgstr "Kiểm tra phiên bản mới"
 
 #: MiscResources.resx$CheckingForUpdates$Message
 msgid "Checking"
-msgstr ""
+msgstr "Đang kiểm tra"
 
 #: FEmailProvider.resx$$this.Text$Message
 msgid "Choose Email Provider"
-msgstr ""
+msgstr "Chọn nhà cung cấp Email"
 
 #: MiscResources.resx$ChooseProfile$Message
 msgid "Choose Profile"
@@ -403,7 +404,7 @@ msgstr "Khả năng tương thích"
 
 #: FImageSettings.resx$label3.Text$Message
 msgid "Compression"
-msgstr ""
+msgstr "Nén"
 
 #: FEditProfile.resx$label7.Text$Message
 msgid "Contrast"
@@ -438,7 +439,7 @@ msgstr "Chỉnh sửa"
 
 #: FAdvancedScanSettings.resx$cbForcePageSizeCrop.Text$Message
 msgid "Crop to page size"
-msgstr ""
+msgstr "Cắt về kích thước trang"
 
 #: SettingsResources.resx$PageSize_Custom$Message
 msgid "Custom"
@@ -459,7 +460,7 @@ msgstr "Tùy chỉnh xoay"
 
 #: SettingsResources.resx$EmailProviderType_CustomSmtp$Message
 msgid "Custom SMTP"
-msgstr ""
+msgstr "SMTP tự điền"
 
 #: FPlaceholders.resx$label6.Text$Message
 msgid "Day (01-31)"
@@ -481,7 +482,7 @@ msgstr "Deinterleave"
 
 #: FAdvancedScanSettings.resx$cbWiaDelayBetweenScans.Text$Message
 msgid "Delay between scans (WIA)"
-msgstr ""
+msgstr "Thời gian chờ giữa các lần scan (WIA)"
 
 #: FDesktop.resx$ctxDelete.Text$Message
 #: FDesktop.resx$tsDelete.Text$Message
@@ -541,7 +542,7 @@ msgstr "Tải Về lỗi"
 
 #: MiscResources.resx$DownloadNeeded$Message
 msgid "Download Needed"
-msgstr ""
+msgstr "Cần Tải Về"
 
 #: FDownloadProgress.resx$$this.Text$Message
 msgid "Download Progress"
@@ -630,6 +631,8 @@ msgid ""
 "For high JPEG qualities (80+), also increase Image Quality in your profile "
 "for best results"
 msgstr ""
+"Để JPEG được chất lượng cao, nhớ tăng chất lượng hình trong thiết lập mẫu có "
+"sẵn của bạn."
 
 #: MiscResources.resx$FileTypeGif$Message
 msgid "GIF File (*.gif)"
@@ -813,7 +816,7 @@ msgstr "NAPS2"
 
 #: MiscResources.resx$DonatePrompt$Message
 msgid "NAPS2 is completely free. Consider making a donation"
-msgstr ""
+msgstr "NAPS2 miễn phí hoàn toàn. Bạn có thể ủng hộ tùy ý."
 
 #: FPageSize.resx$label1.Text$Message
 msgid "Name (optional)"
@@ -850,7 +853,7 @@ msgstr "Không trang sau nằm trong máng"
 #: FEmailSettings.resx$lblProvider.Text$Message
 #: SettingsResources.resx$EmailProvider_NotSelected$Message
 msgid "No provider selected"
-msgstr ""
+msgstr "Chưa chọn nhà cung cấp."
 
 #: MiscResources.resx$NoDevicesFound$Message
 msgid "No scanning device was found"
@@ -858,7 +861,7 @@ msgstr "Không thấy thiết bị quét"
 
 #: MiscResources.resx$NoUpdates$Message
 msgid "No updates available"
-msgstr ""
+msgstr "Chưa có phiên bản mới."
 
 #: SettingsResources.resx$TiffComp_None$Message
 #, fuzzy
@@ -887,7 +890,7 @@ msgstr "Tải OCR"
 
 #: MiscResources.resx$OcrProgress$Message
 msgid "OCR Progress"
-msgstr ""
+msgstr "Quá trình OCR"
 
 #: FOcrSetup.resx$$this.Text$Message
 msgid "OCR Setup"
@@ -899,7 +902,7 @@ msgstr "Ngôn ngữ OCR"
 
 #: FOcrSetup.resx$labelOcrMode.Text$Message
 msgid "OCR mode"
-msgstr ""
+msgstr "Chế độ OCR"
 
 #: FAbout.resx$okButton.Text$Message
 #: FAdvancedScanSettings.resx$btnOK.Text$Message
@@ -945,7 +948,7 @@ msgstr "Mở Thư mục"
 
 #: MiscResources.resx$ActiveOperations$Message
 msgid "Operation in Progress"
-msgstr ""
+msgstr "Đang thực thi lệnh"
 
 #: SettingsResources.resx$EmailProviderType_OutlookWeb$Message
 msgid "Outlook Web Access"
@@ -1060,11 +1063,11 @@ msgstr "Profiles"
 
 #: FAutoSaveSettings.resx$cbPromptForFilePath.Text$Message
 msgid "Prompt for file path"
-msgstr ""
+msgstr "Hỏi nơi lưu."
 
 #: FEmailSettings.resx$groupBox1.Text$Message
 msgid "Provider"
-msgstr ""
+msgstr "Nhà cung cấp"
 
 #: FBatchPrompt.resx$lblStatus.Text$Message
 msgid "Ready for scan {0}"
@@ -1117,7 +1120,7 @@ msgstr "Khôi phục mặc định"
 
 #: FAdvancedScanSettings.resx$cbWiaRetryOnFailure.Text$Message
 msgid "Retry on failure (WIA)"
-msgstr ""
+msgstr "Thử lại nếu bị lỗi (WIA)"
 
 #: FDesktop.resx$tsReverse.Text$Message
 msgid "Reverse"
@@ -1149,11 +1152,11 @@ msgstr "Xoay Phải"
 
 #: FProgress.resx$btnRunInBG.Text$Message
 msgid "Run in Background"
-msgstr ""
+msgstr "Chạy ngầm"
 
 #: MiscResources.resx$RunningOcr$Message
 msgid "Running OCR"
-msgstr ""
+msgstr "Đang thực hiện OCR"
 
 #: FEditProfile.resx$rdSANE.Text$Message
 msgid "SANE Driver"
@@ -1276,7 +1279,7 @@ msgstr "Về mặc định"
 #: FSharpen.resx$$this.Text$Message
 #: FViewer.resx$tsSharpen.Text$Message
 msgid "Sharpen"
-msgstr ""
+msgstr "Độ nét"
 
 #: FPdfSettings.resx$cbShowOwnerPassword.Text$Message
 #: FPdfSettings.resx$cbShowUserPassword.Text$Message
@@ -1302,7 +1305,7 @@ msgstr "Bắt Đầu"
 
 #: FAdvancedScanSettings.resx$cbForcePageSize.Text$Message
 msgid "Stretch to page size"
-msgstr ""
+msgstr "Kéo dãn ra vừa kích thước trang"
 
 #: FPdfSettings.resx$label5.Text$Message
 msgid "Subject"
@@ -1323,7 +1326,7 @@ msgstr "Chi tiết kỹ thuật"
 #: MiscResources.resx$TesseractNotAvailable$Message
 msgid ""
 "The OCR engine is not available. Make sure to install the required package"
-msgstr ""
+msgstr "OCR chưa được cài. Vui lòng cài đặt gói liên quan để thao tác."
 
 #: MiscResources.resx$SaneNotAvailable$Message
 msgid ""
@@ -1368,7 +1371,7 @@ msgstr "Nắp máy quét mở"
 
 #: MiscResources.resx$DriverNotSupported$Message
 msgid "The selected driver is not supported on this system"
-msgstr ""
+msgstr "Driver bạn đang chọn không hỗ trợ hệ điều hành này."
 
 #: MiscResources.resx$DeviceNotFound$Message
 msgid "The selected scanner could not be found"
@@ -1400,7 +1403,7 @@ msgstr "Máy quét chọn đang ẩn"
 
 #: FImageSettings.resx$groupTiff.Text$Message
 msgid "Tiff Options"
-msgstr ""
+msgstr "Thông số Tiff"
 
 #: FBatchScan.resx$lblTimeBetweenScans.Text$Message
 msgid "Time between scans (seconds)"
@@ -1428,15 +1431,15 @@ msgstr "Thay đổi chưa được lưu"
 
 #: MiscResources.resx$UpdateProgress$Message
 msgid "Update Progress"
-msgstr ""
+msgstr "Tiến trình cập nhật"
 
 #: MiscResources.resx$Updating$Message
 msgid "Updating"
-msgstr ""
+msgstr "Đang cập nhật"
 
 #: MiscResources.resx$UploadingEmail$Message
 msgid "Uploading email"
-msgstr ""
+msgstr "Đang tải lên email"
 
 #: FEditProfile.resx$rdbNative.Text$Message
 msgid "Use native UI"
@@ -1473,7 +1476,7 @@ msgstr "Đang chờ TWAIN để hoàn thành"
 
 #: FAuthorize.resx$lblWaiting.Text$Message
 msgid "Waiting for authorization"
-msgstr ""
+msgstr "Đang đợi cho phép"
 
 #: MiscResources.resx$BatchStatusWaitingForScan$Message
 msgid "Waiting for scan {0}"

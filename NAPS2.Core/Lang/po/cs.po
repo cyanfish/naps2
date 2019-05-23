@@ -3,14 +3,14 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-09-17 20:27+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"PO-Revision-Date: 2019-05-15 11:11+0000\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Translate Toolkit 2.2.5\n"
+"X-Generator: Pootle 2.8\n"
+"X-POOTLE-MTIME: 1557918675.990307\n"
 
 #: SettingsResources.resx$Dpi_100$Message
 msgid "100 dpi"
@@ -142,11 +142,11 @@ msgstr ""
 
 #: MiscResources.resx$UpdateError$Message
 msgid "An error occured when trying to install the update"
-msgstr ""
+msgstr "Při pokusu o aktualizaci došlo k chybě."
 
 #: MiscResources.resx$AuthError$Message
 msgid "An error occurred when trying to authorize"
-msgstr ""
+msgstr "Došlo k chybě při pokusu o autorizaci"
 
 #: MiscResources.resx$AutoSaveError$Message
 msgid "An error occurred when trying to auto save"
@@ -158,7 +158,7 @@ msgstr "Při pokusu o uložení souboru došlo k chybě"
 
 #: MiscResources.resx$ErrorEmailing$Message
 msgid "An error occurred when trying to send the email"
-msgstr ""
+msgstr "Došlo k chybě při pokusu o odeslání emailu"
 
 #: MiscResources.resx$EmailError$Message
 msgid "An error occurred while trying to send an email"
@@ -172,7 +172,7 @@ msgstr "Došlo k chybě ovladače skeneru"
 msgid ""
 "An operation is in progress. Are you sure you want to exit and cancel the "
 "operation?"
-msgstr ""
+msgstr "Probíhá operace. Určitě chcete odejít a přerušit tuto operaci?"
 
 #: MiscResources.resx$BatchError$Message
 msgid "An unknown error ocurred during the batch scan"
@@ -180,7 +180,7 @@ msgstr "Během dávkového skenování došlo k chybě"
 
 #: MiscResources.resx$UpdateAvailable$Message
 msgid "An update is available"
-msgstr ""
+msgstr "Je dostupná aktualizace"
 
 #: MiscResources.resx$OcrUpdateAvailable$Message
 msgid "An update to OCR is available"
@@ -237,7 +237,7 @@ msgstr "Autor"
 
 #: FAuthorize.resx$$this.Text$Message
 msgid "Authorize"
-msgstr ""
+msgstr "Autorizovat"
 
 #: SettingsResources.resx$TiffComp_Auto$Message
 msgid "Auto"
@@ -266,7 +266,7 @@ msgstr "Automatické zvyšování čísla (4 číslice)"
 
 #: FOcrSetup.resx$checkBoxRunInBG.Text$Message
 msgid "Automatically run OCR after scanning"
-msgstr ""
+msgstr "Po skenování automaticky spustit OCR"
 
 #: SettingsResources.resx$PageSize_B4$Message
 msgid "B4 (250x353 mm)"
@@ -369,19 +369,19 @@ msgstr "Centrovat"
 
 #: FEmailSettings.resx$btnChangeProvider.Text$Message
 msgid "Change"
-msgstr ""
+msgstr "Změnit"
 
 #: FAbout.resx$cbCheckForUpdates.Text$Message
 msgid "Check for updates"
-msgstr ""
+msgstr "Vyhledat aktualizace"
 
 #: MiscResources.resx$CheckingForUpdates$Message
 msgid "Checking"
-msgstr ""
+msgstr "Vyhledávání"
 
 #: FEmailProvider.resx$$this.Text$Message
 msgid "Choose Email Provider"
-msgstr ""
+msgstr "Vybrat poskytovatele mailu"
 
 #: MiscResources.resx$ChooseProfile$Message
 msgid "Choose Profile"
@@ -432,7 +432,7 @@ msgstr "Kopírování"
 
 #: FAbout.resx$labelCopyright.Text$Message
 msgid "Copyright 2009, 2012-2018 NAPS2 Contributors"
-msgstr ""
+msgstr "Autorská práva 2009, 2012-2018 NAPS2 přispěvatelé"
 
 #: FAdvancedScanSettings.resx$label3.Text$Message
 msgid "Coverage Threshold"
@@ -467,7 +467,7 @@ msgstr "Vlastní otočení"
 
 #: SettingsResources.resx$EmailProviderType_CustomSmtp$Message
 msgid "Custom SMTP"
-msgstr ""
+msgstr "Vlastní SMTP"
 
 #: FPlaceholders.resx$label6.Text$Message
 msgid "Day (01-31)"
@@ -657,7 +657,7 @@ msgstr "Sklo"
 
 #: SettingsResources.resx$EmailProviderType_Gmail$Message
 msgid "Gmail"
-msgstr ""
+msgstr "Gmail"
 
 #: SettingsResources.resx$BitDepth_8Grayscale$Message
 msgid "Grayscale"
@@ -720,7 +720,7 @@ msgstr "Importuje se {0}"
 
 #: MiscResources.resx$Install$Message
 msgid "Install {0}"
-msgstr ""
+msgstr "Instalovat {0}"
 
 #: MiscResources.resx$InstallComplete$Message
 msgid "Installation Complete"
@@ -862,7 +862,7 @@ msgstr "V podavači nejsou žádné papíry"
 #: FEmailSettings.resx$lblProvider.Text$Message
 #: SettingsResources.resx$EmailProvider_NotSelected$Message
 msgid "No provider selected"
-msgstr ""
+msgstr "Nebyl vybrán poskytovatel"
 
 #: MiscResources.resx$NoDevicesFound$Message
 msgid "No scanning device was found"
@@ -870,7 +870,7 @@ msgstr "Nenalezeno žádné skenovací zařízení"
 
 #: MiscResources.resx$NoUpdates$Message
 msgid "No updates available"
-msgstr ""
+msgstr "Nejsou dostupné aktualizace"
 
 #: SettingsResources.resx$TiffComp_None$Message
 msgid "None"
@@ -900,7 +900,7 @@ msgstr "Stažení OCR"
 
 #: MiscResources.resx$OcrProgress$Message
 msgid "OCR Progress"
-msgstr ""
+msgstr "Průběh OCR"
 
 #: FOcrSetup.resx$$this.Text$Message
 msgid "OCR Setup"
@@ -912,7 +912,7 @@ msgstr "Jazyk OCR"
 
 #: FOcrSetup.resx$labelOcrMode.Text$Message
 msgid "OCR mode"
-msgstr ""
+msgstr "Mód OCR"
 
 #: FPdfPassword.resx$btnOK.Text$Message
 #: FPdfSettings.resx$btnOK.Text$Message
@@ -963,11 +963,11 @@ msgstr "Otevřít složku"
 
 #: MiscResources.resx$ActiveOperations$Message
 msgid "Operation in Progress"
-msgstr ""
+msgstr "Probíhá operace"
 
 #: SettingsResources.resx$EmailProviderType_OutlookWeb$Message
 msgid "Outlook Web Access"
-msgstr ""
+msgstr "Outlook Web Access"
 
 #: FBatchScan.resx$groupboxOutput.Text$Message
 msgid "Output"
@@ -1082,7 +1082,7 @@ msgstr "Výzva pro cestu k souboru"
 
 #: FEmailSettings.resx$groupBox1.Text$Message
 msgid "Provider"
-msgstr ""
+msgstr "Poskytovatel"
 
 #: FBatchPrompt.resx$lblStatus.Text$Message
 msgid "Ready for scan {0}"
@@ -1172,15 +1172,15 @@ msgstr "Otočit vpravo"
 
 #: FProgress.resx$btnRunInBG.Text$Message
 msgid "Run in Background"
-msgstr ""
+msgstr "Spustit na pozadí"
 
 #: MiscResources.resx$RunningOcr$Message
 msgid "Running OCR"
-msgstr ""
+msgstr "Spuštěno OCR"
 
 #: FEditProfile.resx$rdSANE.Text$Message
 msgid "SANE Driver"
-msgstr ""
+msgstr "SANE ovladač"
 
 #: FViewer.resx$tsSaveImage.Text$Message
 msgid "Save Image"
@@ -1345,12 +1345,12 @@ msgstr "Technické detaily"
 #: MiscResources.resx$TesseractNotAvailable$Message
 msgid ""
 "The OCR engine is not available. Make sure to install the required package"
-msgstr ""
+msgstr "OCR není dostupné. Ověřte instalaci požadovaného balíčku"
 
 #: MiscResources.resx$SaneNotAvailable$Message
 msgid ""
 "The SANE driver is not available. Make sure to install the required packages"
-msgstr ""
+msgstr "Ovladač SANE není dostupný. Ověřte instalaci požadovaných balíčků"
 
 #: MiscResources.resx$ImportErrorCouldNot$Message
 msgid "The file '{0}' could not be imported"
@@ -1390,7 +1390,7 @@ msgstr "Víko skeneru je otevřené"
 
 #: MiscResources.resx$DriverNotSupported$Message
 msgid "The selected driver is not supported on this system"
-msgstr ""
+msgstr "Vybraný ovladač není na tomto systému podporován"
 
 #: MiscResources.resx$DeviceNotFound$Message
 msgid "The selected scanner could not be found"
@@ -1452,15 +1452,15 @@ msgstr "Neuložené změny"
 
 #: MiscResources.resx$UpdateProgress$Message
 msgid "Update Progress"
-msgstr ""
+msgstr "Průběh aktualizace"
 
 #: MiscResources.resx$Updating$Message
 msgid "Updating"
-msgstr ""
+msgstr "Aktualizace"
 
 #: MiscResources.resx$UploadingEmail$Message
 msgid "Uploading email"
-msgstr ""
+msgstr "Odesílání emailu"
 
 #: FEditProfile.resx$rdbNative.Text$Message
 msgid "Use native UI"
@@ -1497,7 +1497,7 @@ msgstr "Čekání na dokončení TWAIN"
 
 #: FAuthorize.resx$lblWaiting.Text$Message
 msgid "Waiting for authorization"
-msgstr ""
+msgstr "Čekání na autorizaci"
 
 #: MiscResources.resx$BatchStatusWaitingForScan$Message
 msgid "Waiting for scan {0}"

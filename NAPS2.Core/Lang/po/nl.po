@@ -3,14 +3,14 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-09-17 20:27+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"PO-Revision-Date: 2018-10-07 18:35+0000\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Translate Toolkit 2.2.5\n"
+"X-Generator: Pootle 2.8\n"
+"X-POOTLE-MTIME: 1538937340.525830\n"
 
 #: SettingsResources.resx$Dpi_100$Message
 msgid "100 dpi"
@@ -144,11 +144,11 @@ msgstr ""
 
 #: MiscResources.resx$UpdateError$Message
 msgid "An error occured when trying to install the update"
-msgstr ""
+msgstr "Er was een fout bij het installeren van de update"
 
 #: MiscResources.resx$AuthError$Message
 msgid "An error occurred when trying to authorize"
-msgstr ""
+msgstr "Er was een fout bij het autoriseren"
 
 #: MiscResources.resx$AutoSaveError$Message
 msgid "An error occurred when trying to auto save"
@@ -160,7 +160,7 @@ msgstr "Er was een fout bij het opslaan van het bestand"
 
 #: MiscResources.resx$ErrorEmailing$Message
 msgid "An error occurred when trying to send the email"
-msgstr ""
+msgstr "Er was een fout bij het verzenden van de e-mail"
 
 #: MiscResources.resx$EmailError$Message
 msgid "An error occurred while trying to send an email"
@@ -175,6 +175,8 @@ msgid ""
 "An operation is in progress. Are you sure you want to exit and cancel the "
 "operation?"
 msgstr ""
+"Er is een bewerking bezig. Weet u zeker dat u wilt stoppen en de bewerking "
+"annuleren?"
 
 #: MiscResources.resx$BatchError$Message
 msgid "An unknown error ocurred during the batch scan"
@@ -182,7 +184,7 @@ msgstr "Er is een onbekende fout opgetreden tijdens het batch scannen."
 
 #: MiscResources.resx$UpdateAvailable$Message
 msgid "An update is available"
-msgstr ""
+msgstr "Een update is beschikbaar"
 
 #: MiscResources.resx$OcrUpdateAvailable$Message
 msgid "An update to OCR is available"
@@ -203,7 +205,7 @@ msgstr "Toepassen op {0} geselecteerde afbeeldingen"
 
 #: MiscResources.resx$ConfirmCancelBatch$Message
 msgid "Are you sure you want to cancel the batch scan?"
-msgstr ""
+msgstr "Weet u zeker dat u de batch scan wilt annuleren?"
 
 #: MiscResources.resx$ConfirmClearItems$Message
 msgid "Are you sure you want to clear {0} item(s)?"
@@ -240,11 +242,11 @@ msgstr "Auteur"
 
 #: FAuthorize.resx$$this.Text$Message
 msgid "Authorize"
-msgstr ""
+msgstr "Autoriseer"
 
 #: SettingsResources.resx$TiffComp_Auto$Message
 msgid "Auto"
-msgstr ""
+msgstr "Auto"
 
 #: FEditProfile.resx$linkAutoSaveSettings.Text$Message
 #: FAutoSaveSettings.resx$$this.Text$Message
@@ -269,7 +271,7 @@ msgstr "Automatisch ophogend nummer (4 cijfers)"
 
 #: FOcrSetup.resx$checkBoxRunInBG.Text$Message
 msgid "Automatically run OCR after scanning"
-msgstr ""
+msgstr "Start OCR automatisch na het scannen"
 
 #: SettingsResources.resx$PageSize_B4$Message
 msgid "B4 (250x353 mm)"
@@ -330,7 +332,7 @@ msgstr "Helderheid / contrast"
 
 #: SettingsResources.resx$TiffComp_Ccitt4$Message
 msgid "CCITT4"
-msgstr ""
+msgstr "CCITT4"
 
 #: FEmailSettings.resx$btnCancel.Text$Message
 #: FImageSettings.resx$btnCancel.Text$Message
@@ -360,7 +362,7 @@ msgstr "Annuleren"
 
 #: MiscResources.resx$CancelBatch$Message
 msgid "Cancel Batch"
-msgstr ""
+msgstr "Annuleer batch"
 
 #: MiscResources.resx$BatchStatusCancelling$Message
 msgid "Cancelling"
@@ -372,19 +374,19 @@ msgstr "Centreren"
 
 #: FEmailSettings.resx$btnChangeProvider.Text$Message
 msgid "Change"
-msgstr ""
+msgstr "Wijzig"
 
 #: FAbout.resx$cbCheckForUpdates.Text$Message
 msgid "Check for updates"
-msgstr ""
+msgstr "Controleer op updates"
 
 #: MiscResources.resx$CheckingForUpdates$Message
 msgid "Checking"
-msgstr ""
+msgstr "Controleert"
 
 #: FEmailProvider.resx$$this.Text$Message
 msgid "Choose Email Provider"
-msgstr ""
+msgstr "Kies e-mail provider"
 
 #: MiscResources.resx$ChooseProfile$Message
 msgid "Choose Profile"
@@ -414,7 +416,7 @@ msgstr "Compatibiliteit"
 
 #: FImageSettings.resx$label3.Text$Message
 msgid "Compression"
-msgstr ""
+msgstr "Compressie"
 
 #: FEditProfile.resx$label7.Text$Message
 msgid "Contrast"
@@ -435,7 +437,7 @@ msgstr "Bezig met kopiëren"
 
 #: FAbout.resx$labelCopyright.Text$Message
 msgid "Copyright 2009, 2012-2018 NAPS2 Contributors"
-msgstr ""
+msgstr "Copyright 2009, 2012-2018 NAPS2 bijdragers"
 
 #: FAdvancedScanSettings.resx$label3.Text$Message
 msgid "Coverage Threshold"
@@ -470,7 +472,7 @@ msgstr "Aangepast roteren"
 
 #: SettingsResources.resx$EmailProviderType_CustomSmtp$Message
 msgid "Custom SMTP"
-msgstr ""
+msgstr "Aangepaste SMTP"
 
 #: FPlaceholders.resx$label6.Text$Message
 msgid "Day (01-31)"
@@ -535,7 +537,7 @@ msgstr "Schermnaam"
 
 #: MiscResources.resx$Donate$Message
 msgid "Donate"
-msgstr ""
+msgstr "Doneer"
 
 #: FProfiles.resx$btnDone.Text$Message
 #: FBatchPrompt.resx$btnDone.Text$Message
@@ -643,6 +645,8 @@ msgid ""
 "For high JPEG qualities (80+), also increase Image Quality in your profile "
 "for best results"
 msgstr ""
+"Voor hoge-kwaliteit JPEG (80+), verhoog ook de afbeeldingskwaliteit in uw "
+"profiel voor het beste resultaat"
 
 #: MiscResources.resx$FileTypeGif$Message
 msgid "GIF File (*.gif)"
@@ -658,7 +662,7 @@ msgstr "Glasplaat"
 
 #: SettingsResources.resx$EmailProviderType_Gmail$Message
 msgid "Gmail"
-msgstr ""
+msgstr "Gmail"
 
 #: SettingsResources.resx$BitDepth_8Grayscale$Message
 msgid "Grayscale"
@@ -721,7 +725,7 @@ msgstr "Importeren {0}"
 
 #: MiscResources.resx$Install$Message
 msgid "Install {0}"
-msgstr ""
+msgstr "Installeer {0}"
 
 #: MiscResources.resx$InstallComplete$Message
 msgid "Installation Complete"
@@ -757,7 +761,7 @@ msgstr "Sleutelwoorden"
 
 #: SettingsResources.resx$TiffComp_Lzw$Message
 msgid "LZW"
-msgstr ""
+msgstr "LZW"
 
 #: FDesktop.resx$toolStripDropDownButton1.Text$Message
 msgid "Language"
@@ -827,7 +831,7 @@ msgstr "NAPS2"
 
 #: MiscResources.resx$DonatePrompt$Message
 msgid "NAPS2 is completely free. Consider making a donation"
-msgstr ""
+msgstr "NAPS2 is helemaal gratis. Overweeg een donatie"
 
 #: FPageSize.resx$label1.Text$Message
 msgid "Name (optional)"
@@ -864,7 +868,7 @@ msgstr "Geen pagina's in de invoerlade"
 #: FEmailSettings.resx$lblProvider.Text$Message
 #: SettingsResources.resx$EmailProvider_NotSelected$Message
 msgid "No provider selected"
-msgstr ""
+msgstr "Geen provider gekozen"
 
 #: MiscResources.resx$NoDevicesFound$Message
 msgid "No scanning device was found"
@@ -872,12 +876,11 @@ msgstr "Geen scanapparaat gevonden"
 
 #: MiscResources.resx$NoUpdates$Message
 msgid "No updates available"
-msgstr ""
+msgstr "Geen updates beschikbaar"
 
 #: SettingsResources.resx$TiffComp_None$Message
-#, fuzzy
 msgid "None"
-msgstr "Gereed"
+msgstr "Geen"
 
 #: FDesktop.resx$$this.Text$Message
 msgid "Not Another PDF Scanner 2"
@@ -903,7 +906,7 @@ msgstr "OCR downloaden"
 
 #: MiscResources.resx$OcrProgress$Message
 msgid "OCR Progress"
-msgstr ""
+msgstr "OCR voortgang"
 
 #: FOcrSetup.resx$$this.Text$Message
 msgid "OCR Setup"
@@ -915,7 +918,7 @@ msgstr "OCR taal"
 
 #: FOcrSetup.resx$labelOcrMode.Text$Message
 msgid "OCR mode"
-msgstr ""
+msgstr "OCR modus"
 
 #: FPdfPassword.resx$btnOK.Text$Message
 #: FPdfSettings.resx$btnOK.Text$Message
@@ -966,11 +969,11 @@ msgstr "Map openen"
 
 #: MiscResources.resx$ActiveOperations$Message
 msgid "Operation in Progress"
-msgstr ""
+msgstr "Bewerking is bezig"
 
 #: SettingsResources.resx$EmailProviderType_OutlookWeb$Message
 msgid "Outlook Web Access"
-msgstr ""
+msgstr "Outlook Web Access"
 
 #: FBatchScan.resx$groupboxOutput.Text$Message
 msgid "Output"
@@ -1000,19 +1003,19 @@ msgstr "PDF opgeslagen"
 
 #: SettingsResources.resx$PdfCompat_PdfA1B$Message
 msgid "PDF/A-1b"
-msgstr ""
+msgstr "PDF/A-1b"
 
 #: SettingsResources.resx$PdfCompat_PdfA2B$Message
 msgid "PDF/A-2b"
-msgstr ""
+msgstr "PDF/A-2b"
 
 #: SettingsResources.resx$PdfCompat_PdfA3B$Message
 msgid "PDF/A-3b"
-msgstr ""
+msgstr "PDF/A-3b"
 
 #: SettingsResources.resx$PdfCompat_PdfA3U$Message
 msgid "PDF/A-3u"
-msgstr ""
+msgstr "PDF/A-3u"
 
 #: MiscResources.resx$FileTypePng$Message
 msgid "PNG File (*.png)"
@@ -1085,7 +1088,7 @@ msgstr "Vraag om bestandspad"
 
 #: FEmailSettings.resx$groupBox1.Text$Message
 msgid "Provider"
-msgstr ""
+msgstr "Provider"
 
 #: FBatchPrompt.resx$lblStatus.Text$Message
 msgid "Ready for scan {0}"
@@ -1175,15 +1178,15 @@ msgstr "Rechtsom draaien"
 
 #: FProgress.resx$btnRunInBG.Text$Message
 msgid "Run in Background"
-msgstr ""
+msgstr "In de achtergrond draaien"
 
 #: MiscResources.resx$RunningOcr$Message
 msgid "Running OCR"
-msgstr ""
+msgstr "OCR draait"
 
 #: FEditProfile.resx$rdSANE.Text$Message
 msgid "SANE Driver"
-msgstr ""
+msgstr "SANE driver"
 
 #: FViewer.resx$tsSaveImage.Text$Message
 msgid "Save Image"
@@ -1310,7 +1313,7 @@ msgstr "Tonen"
 
 #: FImageSettings.resx$cbSinglePageTiff.Text$Message
 msgid "Single page files"
-msgstr ""
+msgstr "Enkele-pagina bestanden"
 
 #: FBatchScan.resx$rdSingleScan.Text$Message
 msgid "Single scan"
@@ -1348,12 +1351,12 @@ msgstr "Technische details"
 #: MiscResources.resx$TesseractNotAvailable$Message
 msgid ""
 "The OCR engine is not available. Make sure to install the required package"
-msgstr ""
+msgstr "De OCR engine is niet beschikbaar. Installeer het vereiste pakket"
 
 #: MiscResources.resx$SaneNotAvailable$Message
 msgid ""
 "The SANE driver is not available. Make sure to install the required packages"
-msgstr ""
+msgstr "De SANE driver is niet beschikbaar. Installeer de vereiste pakketten"
 
 #: MiscResources.resx$ImportErrorCouldNot$Message
 msgid "The file '{0}' could not be imported"
@@ -1395,7 +1398,7 @@ msgstr "Het deksel van de scanner is open"
 
 #: MiscResources.resx$DriverNotSupported$Message
 msgid "The selected driver is not supported on this system"
-msgstr ""
+msgstr "De gekozen driver wordt niet ondersteund op dit systeem"
 
 #: MiscResources.resx$DeviceNotFound$Message
 msgid "The selected scanner could not be found"
@@ -1427,7 +1430,7 @@ msgstr "De geselecteerde scanner is offline"
 
 #: FImageSettings.resx$groupTiff.Text$Message
 msgid "Tiff Options"
-msgstr ""
+msgstr "Tiff opties"
 
 #: FBatchScan.resx$lblTimeBetweenScans.Text$Message
 msgid "Time between scans (seconds)"
@@ -1455,15 +1458,15 @@ msgstr "Niet-opgeslagen wijzigingen"
 
 #: MiscResources.resx$UpdateProgress$Message
 msgid "Update Progress"
-msgstr ""
+msgstr "Voortgang bijwerken"
 
 #: MiscResources.resx$Updating$Message
 msgid "Updating"
-msgstr ""
+msgstr "Bijwerken"
 
 #: MiscResources.resx$UploadingEmail$Message
 msgid "Uploading email"
-msgstr ""
+msgstr "E-mail uploaden"
 
 #: FEditProfile.resx$rdbNative.Text$Message
 msgid "Use native UI"
@@ -1500,7 +1503,7 @@ msgstr "Wachten op TWAIN scan"
 
 #: FAuthorize.resx$lblWaiting.Text$Message
 msgid "Waiting for authorization"
-msgstr ""
+msgstr "Wacht op autorisatie"
 
 #: MiscResources.resx$BatchStatusWaitingForScan$Message
 msgid "Waiting for scan {0}"
