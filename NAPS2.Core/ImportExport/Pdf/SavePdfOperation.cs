@@ -84,7 +84,7 @@ namespace NAPS2.ImportExport.Pdf
                         {
                             break;
                         }
-                        emailMessage.Attachments.Add(new EmailAttachment
+                        emailMessage?.Attachments.Add(new EmailAttachment
                         {
                             FilePath = subFileName,
                             AttachmentName = Path.GetFileName(subFileName)
