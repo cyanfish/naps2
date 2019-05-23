@@ -45,6 +45,7 @@ namespace NAPS2.Scan.Stub
                     Thread.Sleep(500);
                     source.Put(MakeImage());
                 }
+                source.Done();
             }, TaskCreationOptions.LongRunning);
             return source;
         }
