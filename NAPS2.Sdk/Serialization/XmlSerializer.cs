@@ -544,7 +544,7 @@ namespace NAPS2.Serialization
 
             protected override DateTime Deserialize(XElement element)
             {
-                return DateTime.ParseExact(element.Value, "O", CultureInfo.InvariantCulture);
+                return DateTime.Parse(element.Value, CultureInfo.InvariantCulture);
             }
         }
 
