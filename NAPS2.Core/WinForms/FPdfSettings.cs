@@ -45,6 +45,7 @@ namespace NAPS2.WinForms
         {
             txtDefaultFilePath.Text = pdfSettings.DefaultFileName;
             cbSkipSavePrompt.Checked = pdfSettings.SkipSavePrompt;
+            cbSinglePagePdf.Checked = pdfSettings.SinglePagePdf;
             txtTitle.Text = pdfSettings.Metadata.Title;
             txtAuthor.Text = pdfSettings.Metadata.Author;
             txtSubject.Text = pdfSettings.Metadata.Subject;
@@ -82,6 +83,7 @@ namespace NAPS2.WinForms
             {
                 DefaultFileName = txtDefaultFilePath.Text,
                 SkipSavePrompt = cbSkipSavePrompt.Checked,
+                SinglePagePdf = cbSinglePagePdf.Checked,
                 Metadata =
                 {
                     Title = txtTitle.Text,

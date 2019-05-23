@@ -67,19 +67,19 @@ namespace NAPS2.WinForms
                     }
                 }
 
-                var subSavePath = fileNamePlaceholders.SubstitutePlaceholders(savePath, DateTime.Now);
                 var changeToken = changeTracker.State;
-                if (await ExportPDF(subSavePath, images, false, null))
+                string firstFileSaved = await ExportPDF(savePath, images, false, null);
+                if (firstFileSaved != null)
                 {
                     changeTracker.Saved(changeToken);
-                    notify?.PdfSaved(subSavePath);
+                    notify?.PdfSaved(firstFileSaved);
                     return true;
                 }
             }
             return false;
         }
 
-        public async Task<bool> ExportPDF(string filename, List<ScannedImage> images, bool email, EmailMessage emailMessage)
+        public async Task<string> ExportPDF(string filename, List<ScannedImage> images, bool email, EmailMessage emailMessage)
         {
             var op = operationFactory.Create<SavePdfOperation>();
 
@@ -89,7 +89,7 @@ namespace NAPS2.WinForms
             {
                 operationProgress.ShowProgress(op);
             }
-            return await op.Success;
+            return await op.Success ? op.FirstFileSaved : null;
         }
 
         public async Task<bool> SaveImages(List<ScannedImage> images, ISaveNotify notify)
@@ -176,7 +176,7 @@ namespace NAPS2.WinForms
                     }
                 };
 
-                if (await ExportPDF(targetPath, images, true, message))
+                if (await ExportPDF(targetPath, images, true, message) != null)
                 {
                     changeTracker.Saved(changeToken);
                     return true;

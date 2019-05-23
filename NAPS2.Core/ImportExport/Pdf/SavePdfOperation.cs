@@ -32,36 +32,64 @@ namespace NAPS2.ImportExport.Pdf
             AllowBackground = true;
         }
 
+        public string FirstFileSaved { get; private set; }
+
         public bool Start(string fileName, DateTime dateTime, ICollection<ScannedImage> images, PdfSettings pdfSettings, OcrParams ocrParams, bool email, EmailMessage emailMessage)
         {
             ProgressTitle = email ? MiscResources.EmailPdfProgress : MiscResources.SavePdfProgress;
-            var subFileName = fileNamePlaceholders.SubstitutePlaceholders(fileName, dateTime);
             Status = new OperationStatus
             {
-                StatusText = string.Format(MiscResources.SavingFormat, Path.GetFileName(subFileName)),
                 MaxProgress = images.Count
             };
 
-            if (Directory.Exists(subFileName))
+            if (Directory.Exists(fileNamePlaceholders.SubstitutePlaceholders(fileName, dateTime)))
             {
                 // Not supposed to be a directory, but ok...
-                subFileName = fileNamePlaceholders.SubstitutePlaceholders(Path.Combine(subFileName, "$(n).pdf"), dateTime);
+                fileName = Path.Combine(fileName, "$(n).pdf");
             }
-            if (File.Exists(subFileName))
+
+            var snapshots = images.Select(x => x.Preserve()).ToList();
+            var snapshotsByFile = pdfSettings.SinglePagePdf ? snapshots.Select(x => new[] { x }).ToArray() : new[] { snapshots.ToArray() };
+            var singleFile = snapshotsByFile.Length == 1;
+
+            var subFileName = fileNamePlaceholders.SubstitutePlaceholders(fileName, dateTime);
+            if (singleFile)
             {
-                if (overwritePrompt.ConfirmOverwrite(subFileName) != DialogResult.Yes)
+                if (File.Exists(subFileName) && overwritePrompt.ConfirmOverwrite(subFileName) != DialogResult.Yes)
                 {
                     return false;
                 }
             }
 
-            var snapshots = images.Select(x => x.Preserve()).ToList();
             RunAsync(async () =>
             {
                 bool result = false;
                 try
                 {
-                    result = await pdfExporter.Export(subFileName, snapshots, pdfSettings, ocrParams, OnProgress, CancelToken);
+                    int digits = (int)Math.Floor(Math.Log10(snapshots.Count)) + 1;
+                    int i = 0;
+                    foreach (var snapshotArray in snapshotsByFile)
+                    {
+                        subFileName = fileNamePlaceholders.SubstitutePlaceholders(fileName, dateTime, true, i, singleFile ? 0 : digits);
+                        Status.StatusText = string.Format(MiscResources.SavingFormat, Path.GetFileName(subFileName));
+                        InvokeStatusChanged();
+
+                        var progress = singleFile ? OnProgress : (ProgressHandler)((j, k) => { });
+                        result = await pdfExporter.Export(subFileName, snapshotArray, pdfSettings, ocrParams, progress, CancelToken);
+                        if (!result || CancelToken.IsCancellationRequested)
+                        {
+                            break;
+                        }
+                        if (i == 0)
+                        {
+                            FirstFileSaved = subFileName;
+                        }
+                        i++;
+                        if (!singleFile)
+                        {
+                            OnProgress(i, snapshotsByFile.Length);
+                        }
+                    }
                 }
                 catch (UnauthorizedAccessException ex)
                 {
@@ -89,7 +117,7 @@ namespace NAPS2.ImportExport.Pdf
                     snapshots.ForEach(s => s.Dispose());
                     GC.Collect();
                 }
-                
+
                 if (result && email && emailMessage != null)
                 {
                     Status.StatusText = MiscResources.UploadingEmail;

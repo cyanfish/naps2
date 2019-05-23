@@ -19,6 +19,8 @@ namespace NAPS2.ImportExport.Pdf
 
         public bool SkipSavePrompt { get; set; }
 
+        public bool SinglePagePdf { get; set; }
+
         public PdfMetadata Metadata
         {
             get => metadata;
