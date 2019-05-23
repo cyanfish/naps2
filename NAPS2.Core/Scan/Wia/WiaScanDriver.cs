@@ -75,7 +75,7 @@ namespace NAPS2.Scan.Wia
                 op.Start(ScanProfile, ScanDevice, ScanParams, DialogParent, source);
                 Invoker.Current.SafeInvoke(() =>
                 {
-                    if (ScanParams.Modal)
+                    if (ScanParams.Modal && !ScanParams.NoUI)
                     {
                         operationProgress.ShowModalProgress(op);
                     }
