@@ -40,9 +40,9 @@ namespace NAPS2.Logging
             _logger.FatalException(message, exception);
         }
 
-        public static void Event(EventType eventType, EventParams eventParams)
+        public static void Event(EventType eventType, Event evt)
         {
-            _eventLogger.LogEvent(eventType, eventParams);
+            _eventLogger.LogEvent(eventType, evt);
         }
     }
 }

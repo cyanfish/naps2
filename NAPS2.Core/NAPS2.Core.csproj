@@ -163,7 +163,7 @@
     <Compile Include="Dependencies\IExternalComponent.cs" />
     <Compile Include="ImportExport\Email\Mapi\MapiWrapper.cs" />
     <Compile Include="ImportExport\Pdf\GhostscriptManager.cs" />
-    <Compile Include="Logging\EventParams.cs" />
+    <Compile Include="Logging\Event.cs" />
     <Compile Include="Logging\EventType.cs" />
     <Compile Include="Logging\IEventLogger.cs" />
     <Compile Include="Logging\NullEventLogger.cs" />

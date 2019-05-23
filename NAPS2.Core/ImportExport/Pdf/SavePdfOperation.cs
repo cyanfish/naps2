@@ -120,7 +120,7 @@ namespace NAPS2.ImportExport.Pdf
                 {
                     if (email)
                     {
-                        Log.Event(EventType.Email, new EventParams
+                        Log.Event(EventType.Email, new Event
                         {
                             Name = MiscResources.EmailPdf,
                             Pages = snapshots.Count,
@@ -129,7 +129,7 @@ namespace NAPS2.ImportExport.Pdf
                     }
                     else
                     {
-                        Log.Event(EventType.SavePdf, new EventParams
+                        Log.Event(EventType.SavePdf, new Event
                         {
                             Name = MiscResources.SavePdf,
                             Pages = snapshots.Count,

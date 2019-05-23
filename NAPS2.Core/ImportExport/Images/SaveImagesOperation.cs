@@ -150,7 +150,7 @@ namespace NAPS2.ImportExport.Images
             {
                 if (task.Result)
                 {
-                    Log.Event(EventType.SaveImages, new EventParams
+                    Log.Event(EventType.SaveImages, new Event
                     {
                         Name = MiscResources.SaveImages,
                         Pages = snapshots.Count,

@@ -116,7 +116,7 @@ namespace NAPS2.Scan
 
                 if (imageCount > 0)
                 {
-                    Log.Event(EventType.Scan, new EventParams
+                    Log.Event(EventType.Scan, new Event
                     {
                         Name = MiscResources.Scan,
                         Pages = imageCount,

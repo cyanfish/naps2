@@ -26,12 +26,12 @@ namespace NAPS2.Logging
             }
         }
 
-        public void LogEvent(EventType eventType, EventParams eventParams)
+        public void LogEvent(EventType eventType, Event evt)
         {
             if ((eventType & appConfigManager.Config.EventLogging) != eventType) return;
             try
             {
-                EventLog.WriteEntry(SOURCE_NAME, eventParams.ToString(), EventLogEntryType.Information);
+                EventLog.WriteEntry(SOURCE_NAME, evt.ToString(), EventLogEntryType.Information);
             }
             catch (Exception ex)
             {
