@@ -97,6 +97,10 @@ namespace NAPS2.ImportExport
                 {
                     subPath = fileNamePlaceholders.SubstitutePlaceholders(newPath, now, true, i);
                 }
+                else
+                {
+                    return (false, null);
+                }
             }
             var extension = Path.GetExtension(subPath);
             if (extension != null && extension.Equals(".pdf", StringComparison.InvariantCultureIgnoreCase))
