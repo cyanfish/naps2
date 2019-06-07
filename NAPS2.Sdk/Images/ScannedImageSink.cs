@@ -8,9 +8,11 @@ namespace NAPS2.Images
 {
     public class ScannedImageSink
     {
+        private static TaskCompletionSource<ScannedImage> CreateTcs() => new TaskCompletionSource<ScannedImage>(TaskCreationOptions.RunContinuationsAsynchronously);
+
         private readonly List<TaskCompletionSource<ScannedImage>> images = new List<TaskCompletionSource<ScannedImage>>
         {
-            new TaskCompletionSource<ScannedImage>()
+            CreateTcs()
         };
 
         public bool Completed { get; private set; }
@@ -63,14 +65,8 @@ namespace NAPS2.Images
         {
             lock (this)
             {
-                var last = images.Last();
-                // Despite the lock, images.Add needs to happen before SetResult to avoid a race condition.
-                // Otherwise, SetResult synchronously continues the Next() method, and user code will run.
-                // Then if Next() is called again, it will be able to get the lock because it's actually on the same
-                // thread that holds the lock in PutImage!
-                // Yet another "gotcha" of async/await.
-                images.Add(new TaskCompletionSource<ScannedImage>());
-                Task.Run(() => last.SetResult(image));
+                images.Last().SetResult(image);
+                images.Add(CreateTcs());
             }
         }
 
