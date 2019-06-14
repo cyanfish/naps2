@@ -112,6 +112,7 @@
       <DependentUpon>DeskewTestsData.resx</DependentUpon>
     </Compile>
     <Compile Include="Images\GdiTests.cs" />
+    <Compile Include="Images\ImageSerializationTests.cs" />
     <Compile Include="Images\ScannedImageSinkTests.cs" />
     <Compile Include="Images\StorageTests.cs" />
     <Compile Include="Images\TransformTests.cs" />
