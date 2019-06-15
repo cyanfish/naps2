@@ -57,15 +57,33 @@ namespace NAPS2.Scan.Twain
             {
                 if (UseWorker)
                 {
-                    using (var worker = workerServiceFactory.Create())
+                    var parentHandle = DialogParent?.SafeHandle() ?? IntPtr.Zero;
+                    try
                     {
-                        worker.Callback.ImageCallback += (img, tempPath) =>
+                        using (var worker = workerServiceFactory.Create())
                         {
-                            if (tempPath != null) scannedImageHelper.RunBackgroundOcr(img, ScanParams, tempPath);
-                            source.Put(img);
-                        };
-                        CancelToken.Register(worker.Service.CancelTwainScan);
-                        await worker.Service.TwainScan(ScanDevice, ScanProfile, ScanParams, DialogParent?.SafeHandle() ?? IntPtr.Zero);
+                            worker.Callback.ImageCallback += (img, tempPath) =>
+                            {
+                                if (tempPath != null) scannedImageHelper.RunBackgroundOcr(img, ScanParams, tempPath);
+                                source.Put(img);
+                            };
+                            CancelToken.Register(worker.Service.CancelTwainScan);
+                            await worker.Service.TwainScan(ScanDevice, ScanProfile, ScanParams, parentHandle);
+                        }
+                    }
+                    finally
+                    {
+                        if (parentHandle != IntPtr.Zero)
+                        {
+                            // If the worker process hard crashes while a modal window is open, it may leave the parent
+                            // window in a state where it can't be interacted with. This fixes that interaction.
+                            //
+                            // At the Windows API level, a modal window is implemented by doing two things:
+                            // 1. Setting the parent on the child window
+                            // 2. Disabling the parent window
+                            // The first is implicitly undone when the worker process dies. The second is undone here.
+                            Win32.EnableWindow(parentHandle, true);
+                        }
                     }
                 }
                 else

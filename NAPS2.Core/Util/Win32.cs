@@ -25,6 +25,10 @@ namespace NAPS2.Util
 
         [DllImport("user32.dll")]
         [return: MarshalAs(UnmanagedType.Bool)]
+        public static extern bool EnableWindow(IntPtr hWnd, bool bEnable);
+
+        [DllImport("user32.dll")]
+        [return: MarshalAs(UnmanagedType.Bool)]
         public static extern bool ShowWindow(IntPtr hWnd, ShowWindowCommands nCmdShow);
 
         [DllImport("kernel32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
