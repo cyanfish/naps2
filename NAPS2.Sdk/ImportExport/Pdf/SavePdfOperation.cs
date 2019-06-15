@@ -11,6 +11,7 @@ using NAPS2.Logging;
 using NAPS2.Ocr;
 using NAPS2.Operation;
 using NAPS2.Images;
+using NAPS2.Images.Storage;
 using NAPS2.Util;
 
 namespace NAPS2.ImportExport.Pdf
@@ -21,7 +22,7 @@ namespace NAPS2.ImportExport.Pdf
         private readonly OverwritePrompt overwritePrompt;
         private readonly IEmailProviderFactory emailProviderFactory;
 
-        public SavePdfOperation() : this(PdfExporter.Default, OverwritePrompt.Default, null)
+        public SavePdfOperation() : this(new PdfSharpExporter(ImageContext.Default), OverwritePrompt.Default, null)
         {
         }
 

@@ -44,7 +44,7 @@ namespace NAPS2.ImportExport
             dialogHelper = DialogHelper.Default;
             operationProgress = OperationProgress.Default;
             notify = null;
-            pdfExporter = PdfExporter.Default;
+            pdfExporter = new PdfSharpExporter(ImageContext.Default);
             overwritePrompt = OverwritePrompt.Default;
             bitmapRenderer = new BitmapRenderer(ImageContext.Default);
             configProvider = ConfigScopes.Current.Provider;

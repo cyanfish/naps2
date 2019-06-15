@@ -41,7 +41,12 @@ namespace NAPS2.ImportExport.Pdf
         {
             memoryStreamRenderer = new MemoryStreamRenderer(ImageContext.Default);
         }
-        
+
+        public PdfSharpExporter(ImageContext imageContext)
+        {
+            memoryStreamRenderer = new MemoryStreamRenderer(imageContext);
+        }
+
         public PdfSharpExporter(MemoryStreamRenderer memoryStreamRenderer)
         {
             this.memoryStreamRenderer = memoryStreamRenderer;
