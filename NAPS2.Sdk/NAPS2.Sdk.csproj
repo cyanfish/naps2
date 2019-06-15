@@ -488,7 +488,7 @@
     </Compile>
     <Compile Include="Util\ConditionalControls.cs" />
     <Compile Include="Operation\IOperation.cs" />
-    <Compile Include="Remoting\Worker\IWorkerServiceFactory.cs" />
+    <Compile Include="Remoting\Worker\IWorkerFactory.cs" />
     <Compile Include="Util\OverwritePrompt.cs" />
     <Compile Include="Util\ISaveNotify.cs" />
     <Compile Include="Util\Lifecycle.cs" />
@@ -585,7 +585,7 @@
     <Compile Include="Util\Unmanaged.cs" />
     <Compile Include="Util\UnmanagedArray.cs" />
     <Compile Include="Util\UnmanagedBase.cs" />
-    <Compile Include="Remoting\Worker\WorkerManager.cs" />
+    <Compile Include="Remoting\Worker\WorkerFactory.cs" />
     <Compile Include="Util\Win32.cs" />
     <Compile Include="WinForms\DialogHelper.cs">
       <SubType>Code</SubType>
@@ -845,7 +845,6 @@
     <Compile Include="WinForms\WinFormsOverwritePrompt.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Remoting\Worker\WorkerServiceFactory.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="ClientCreds.resx">

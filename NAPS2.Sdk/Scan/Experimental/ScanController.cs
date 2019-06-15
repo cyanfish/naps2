@@ -25,6 +25,10 @@ namespace NAPS2.Scan.Experimental
             this.scanBridgeFactory = scanBridgeFactory;
         }
 
+        public List<ScanDevice> GetDeviceList() => GetDeviceList(new ScanOptions());
+
+        public List<ScanDevice> GetDeviceList(Driver driver) => GetDeviceList(new ScanOptions { Driver = driver });
+
         public List<ScanDevice> GetDeviceList(ScanOptions options)
         {
             options = scanOptionsValidator.ValidateAll(options);

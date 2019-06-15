@@ -58,7 +58,7 @@ namespace NAPS2.WinForms
         private readonly ImageRenderer imageRenderer;
         private readonly NotificationManager notify;
         private readonly CultureInitializer cultureInitializer;
-        private readonly IWorkerServiceFactory workerServiceFactory;
+        private readonly IWorkerFactory workerFactory;
         private readonly OperationProgress operationProgress;
         private readonly UpdateChecker updateChecker;
         private readonly IProfileManager profileManager;
@@ -77,7 +77,7 @@ namespace NAPS2.WinForms
 
         #region Initialization and Culture
 
-        public FDesktop(ImageContext imageContext, StringWrapper stringWrapper, RecoveryManager recoveryManager, OcrEngineManager ocrEngineManager, IScanPerformer scanPerformer, IScannedImagePrinter scannedImagePrinter, ChangeTracker changeTracker, StillImage stillImage, IOperationFactory operationFactory, KeyboardShortcutManager ksm, ThumbnailRenderer thumbnailRenderer, WinFormsExportHelper exportHelper, ImageClipboard imageClipboard, ImageRenderer imageRenderer, NotificationManager notify, CultureInitializer cultureInitializer, IWorkerServiceFactory workerServiceFactory, OperationProgress operationProgress, UpdateChecker updateChecker, IProfileManager profileManager)
+        public FDesktop(ImageContext imageContext, StringWrapper stringWrapper, RecoveryManager recoveryManager, OcrEngineManager ocrEngineManager, IScanPerformer scanPerformer, IScannedImagePrinter scannedImagePrinter, ChangeTracker changeTracker, StillImage stillImage, IOperationFactory operationFactory, KeyboardShortcutManager ksm, ThumbnailRenderer thumbnailRenderer, WinFormsExportHelper exportHelper, ImageClipboard imageClipboard, ImageRenderer imageRenderer, NotificationManager notify, CultureInitializer cultureInitializer, IWorkerFactory workerFactory, OperationProgress operationProgress, UpdateChecker updateChecker, IProfileManager profileManager)
         {
             this.imageContext = imageContext;
             this.stringWrapper = stringWrapper;
@@ -95,7 +95,7 @@ namespace NAPS2.WinForms
             this.imageRenderer = imageRenderer;
             this.notify = notify;
             this.cultureInitializer = cultureInitializer;
-            this.workerServiceFactory = workerServiceFactory;
+            this.workerFactory = workerFactory;
             this.operationProgress = operationProgress;
             this.updateChecker = updateChecker;
             this.profileManager = profileManager;
@@ -1711,7 +1711,7 @@ namespace NAPS2.WinForms
         private void RenderThumbnails()
         {
             bool useWorker = PlatformCompat.Runtime.UseWorker;
-            var worker = useWorker ? workerServiceFactory.Create() : null;
+            var worker = useWorker ? workerFactory.Create() : null;
             var fallback = new ExpFallback(100, 60 * 1000);
             while (!closed)
             {
@@ -1746,7 +1746,7 @@ namespace NAPS2.WinForms
                     if (worker != null)
                     {
                         worker.Dispose();
-                        worker = workerServiceFactory.Create();
+                        worker = workerFactory.Create();
                     }
                     Thread.Sleep(fallback.Value);
                     fallback.Increase();

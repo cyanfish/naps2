@@ -24,9 +24,9 @@ namespace NAPS2.WinForms
         private readonly IconButtonSizer iconButtonSizer;
         private readonly IScanPerformer scanPerformer;
         private readonly ProfileNameTracker profileNameTracker;
-        private readonly ProfileManager profileManager;
+        private readonly IProfileManager profileManager;
 
-        public FProfiles(IconButtonSizer iconButtonSizer, IScanPerformer scanPerformer, ProfileNameTracker profileNameTracker, ProfileManager profileManager)
+        public FProfiles(IconButtonSizer iconButtonSizer, IScanPerformer scanPerformer, ProfileNameTracker profileNameTracker, IProfileManager profileManager)
         {
             this.iconButtonSizer = iconButtonSizer;
             this.scanPerformer = scanPerformer;

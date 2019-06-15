@@ -19,19 +19,21 @@ namespace NAPS2.Scan.Twain
         private readonly ImageContext imageContext;
         private readonly ITwainWrapper twainWrapper;
         private readonly ScannedImageHelper scannedImageHelper;
+        private readonly IWorkerFactory workerFactory;
 
-        public TwainScanDriver() : base(ErrorOutput.Default, new AutoSaver())
-        {
-            imageContext = ImageContext.Default;
-            twainWrapper = new TwainWrapper();
-            scannedImageHelper = new ScannedImageHelper();
-        }
+        //public TwainScanDriver() : base(ErrorOutput.Default, new AutoSaver())
+        //{
+        //    imageContext = ImageContext.Default;
+        //    twainWrapper = new TwainWrapper();
+        //    scannedImageHelper = new ScannedImageHelper();
+        //}
 
-        public TwainScanDriver(ImageContext imageContext, ITwainWrapper twainWrapper, ScannedImageHelper scannedImageHelper, ErrorOutput errorOutput, AutoSaver autoSaver) : base(errorOutput, autoSaver)
+        public TwainScanDriver(ImageContext imageContext, ITwainWrapper twainWrapper, ScannedImageHelper scannedImageHelper, ErrorOutput errorOutput, AutoSaver autoSaver, IWorkerFactory workerFactory) : base(errorOutput, autoSaver)
         {
             this.imageContext = imageContext;
             this.twainWrapper = twainWrapper;
             this.scannedImageHelper = scannedImageHelper;
+            this.workerFactory = workerFactory;
         }
 
         public override string DriverName => DRIVER_NAME;
@@ -51,7 +53,7 @@ namespace NAPS2.Scan.Twain
             var twainImpl = scanProfile?.TwainImpl ?? TwainImpl.Default;
             if (UseWorker(scanProfile))
             {
-                using(var worker = WorkerManager.Factory.Create())
+                using(var worker = workerFactory.Create())
                 {
                     return worker.Service.TwainGetDeviceList(twainImpl);
                 }
@@ -65,7 +67,7 @@ namespace NAPS2.Scan.Twain
             {
                 if (UseWorker(scanProfile))
                 {
-                    using (var worker = WorkerManager.Factory.Create())
+                    using (var worker = workerFactory.Create())
                     {
                         await worker.Service.TwainScan(imageContext, scanDevice, scanProfile, scanParams, dialogParent, cancelToken, (img, tempPath) =>
                         {

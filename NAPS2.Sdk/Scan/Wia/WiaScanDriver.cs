@@ -9,6 +9,7 @@ using NAPS2.Scan.Exceptions;
 using NAPS2.Images;
 using NAPS2.Images.Storage;
 using NAPS2.ImportExport;
+using NAPS2.Remoting.Worker;
 using NAPS2.Scan.Wia.Native;
 using NAPS2.Util;
 
@@ -21,19 +22,21 @@ namespace NAPS2.Scan.Wia
         private readonly ImageContext imageContext;
         private readonly OperationProgress operationProgress;
         private readonly ScannedImageHelper scannedImageHelper;
+        private readonly IWorkerFactory workerFactory;
 
-        public WiaScanDriver() : base(ErrorOutput.Default, new AutoSaver())
-        {
-            imageContext = ImageContext.Default;
-            operationProgress = OperationProgress.Default;
-            scannedImageHelper = new ScannedImageHelper();
-        }
+        //public WiaScanDriver() : base(ErrorOutput.Default, new AutoSaver())
+        //{
+        //    imageContext = ImageContext.Default;
+        //    operationProgress = OperationProgress.Default;
+        //    scannedImageHelper = new ScannedImageHelper();
+        //}
 
-        public WiaScanDriver(ImageContext imageContext, OperationProgress operationProgress, ScannedImageHelper scannedImageHelper, ErrorOutput errorOutput, AutoSaver autoSaver) : base(errorOutput, autoSaver)
+        public WiaScanDriver(ImageContext imageContext, OperationProgress operationProgress, ScannedImageHelper scannedImageHelper, ErrorOutput errorOutput, AutoSaver autoSaver, IWorkerFactory workerFactory) : base(errorOutput, autoSaver)
         {
             this.imageContext = imageContext;
             this.operationProgress = operationProgress;
             this.scannedImageHelper = scannedImageHelper;
+            this.workerFactory = workerFactory;
         }
 
         public override string DriverName => DRIVER_NAME;
@@ -79,7 +82,7 @@ namespace NAPS2.Scan.Wia
 
         protected override async Task ScanInternal(ScannedImageSink sink, ScanDevice scanDevice, ScanProfile scanProfile, ScanParams scanParams, IntPtr dialogParent, CancellationToken cancelToken)
         {
-            var op = new WiaScanOperation(imageContext, scannedImageHelper);
+            var op = new WiaScanOperation(imageContext, scannedImageHelper, workerFactory);
             using (cancelToken.Register(op.Cancel))
             {
                 op.Start(scanProfile, scanDevice, scanParams, dialogParent, sink);

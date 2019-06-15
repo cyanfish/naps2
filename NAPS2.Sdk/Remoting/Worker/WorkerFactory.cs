@@ -5,8 +5,10 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
+using NAPS2.Images.Storage;
 using NAPS2.Platform;
 using NAPS2.Util;
 
@@ -15,8 +17,16 @@ namespace NAPS2.Remoting.Worker
     /// <summary>
     /// A class to manage the lifecycle of NAPS2.Worker.exe instances and hook up the WCF channels.
     /// </summary>
-    public static class WorkerManager
+    public class WorkerFactory : IWorkerFactory
     {
+        private static WorkerFactory _default;
+
+        public static WorkerFactory Default
+        {
+            get => _default ?? (_default = new WorkerFactory(ImageContext.Default));
+            set => _default = value ?? throw new ArgumentNullException(nameof(value));
+        }
+
         public const string WORKER_EXE_NAME = "NAPS2.Worker.exe";
         public static readonly string[] SearchDirs =
         {
@@ -24,30 +34,36 @@ namespace NAPS2.Remoting.Worker
             Path.GetDirectoryName(Assembly.GetEntryAssembly().Location)
         };
 
-        private static string _workerExePath;
+        private readonly ImageContext imageContext;
 
-        private static BlockingCollection<WorkerContext> _workerQueue;
+        private string workerExePath;
+        private BlockingCollection<WorkerContext> workerQueue;
 
-        private static string WorkerExePath
+        public WorkerFactory(ImageContext imageContext)
+        {
+            this.imageContext = imageContext;
+        }
+
+        private string WorkerExePath
         {
             get
             {
-                if (_workerExePath == null)
+                if (workerExePath == null)
                 {
                     foreach (var dir in SearchDirs)
                     {
-                        _workerExePath = Path.Combine(dir, WORKER_EXE_NAME);
+                        workerExePath = Path.Combine(dir, WORKER_EXE_NAME);
                         if (File.Exists(WorkerExePath))
                         {
                             break;
                         }
                     }
                 }
-                return _workerExePath;
+                return workerExePath;
             }
         }
 
-        private static (Process, int, string, string) StartWorkerProcess()
+        private (Process, int, string, string) StartWorkerProcess()
         {
             var parentId = Process.GetCurrentProcess().Id;
             var proc = Process.Start(new ProcessStartInfo
@@ -90,47 +106,56 @@ namespace NAPS2.Remoting.Worker
             return (proc, port, cert, privateKey);
         }
 
-        private static void WriteEncodedString(StreamWriter streamWriter, string value)
+        private void WriteEncodedString(StreamWriter streamWriter, string value)
         {
             streamWriter.WriteLine(Convert.ToBase64String(Encoding.UTF8.GetBytes(value)));
         }
 
-        private static void StartWorkerService()
+        private void StartWorkerService()
         {
             Task.Run(() =>
             {
                 var (proc, port, cert, privateKey) = StartWorkerProcess();
                 var creds = RemotingHelper.GetClientCreds(cert, privateKey);
-                _workerQueue.Add(new WorkerContext { Service = new WorkerServiceAdapter(port, creds), Process = proc });
+                workerQueue.Add(new WorkerContext { Service = new WorkerServiceAdapter(port, creds), Process = proc });
             });
         }
 
-        public static WorkerContext NextWorker()
+        private WorkerContext NextWorker()
         {
             StartWorkerService();
-            return _workerQueue.Take();
+            return workerQueue.Take();
         }
 
-        public static void Init()
+        public void Init()
         {
             if (!PlatformCompat.Runtime.UseWorker)
             {
                 return;
             }
-            if (_workerQueue == null)
+            if (workerQueue == null)
             {
-                _workerQueue = new BlockingCollection<WorkerContext>();
+                workerQueue = new BlockingCollection<WorkerContext>();
                 StartWorkerService();
             }
         }
 
-        // TODO: This should not be set by default
-        private static IWorkerServiceFactory _factory = new WorkerServiceFactory(); 
-
-        public static IWorkerServiceFactory Factory
+        public WorkerContext Create()
         {
-            get => _factory;
-            set => _factory = value ?? throw new ArgumentNullException(nameof(value));
+            var rsm = imageContext.FileStorageManager as RecoveryStorageManager;
+            rsm?.EnsureFolderCreated();
+            var worker = NextWorker();
+            try
+            {
+                worker.Service.Init(rsm?.RecoveryFolderPath);
+            }
+            catch (EndpointNotFoundException)
+            {
+                // Retry once
+                worker = NextWorker();
+                worker.Service.Init(rsm?.RecoveryFolderPath);
+            }
+            return worker;
         }
     }
 }

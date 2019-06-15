@@ -30,7 +30,7 @@ namespace NAPS2.EntryPoints
                 var kernel = new StandardKernel(new CommonModule(), new WinFormsModule(), new StaticDefaultsModule());
 
                 // Start a pending worker process
-                WorkerManager.Init();
+                kernel.Get<IWorkerFactory>().Init();
 
                 // Set up basic application configuration
                 Application.EnableVisualStyles();

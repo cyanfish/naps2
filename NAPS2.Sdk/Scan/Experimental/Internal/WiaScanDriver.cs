@@ -18,17 +18,17 @@ namespace NAPS2.Scan.Experimental.Internal
     internal class WiaScanDriver : IScanDriver
     {
         private readonly ImageContext imageContext;
-        private readonly IWorkerServiceFactory workerServiceFactory;
+        private readonly IWorkerFactory workerFactory;
 
         public WiaScanDriver(ImageContext imageContext)
-            : this(imageContext, new WorkerServiceFactory())
+            : this(imageContext, WorkerFactory.Default)
         {
         }
 
-        public WiaScanDriver(ImageContext imageContext, IWorkerServiceFactory workerServiceFactory)
+        public WiaScanDriver(ImageContext imageContext, IWorkerFactory workerFactory)
         {
             this.imageContext = imageContext;
-            this.workerServiceFactory = workerServiceFactory;
+            this.workerFactory = workerFactory;
         }
 
         public List<ScanDevice> GetDeviceList(ScanOptions options)
@@ -49,7 +49,7 @@ namespace NAPS2.Scan.Experimental.Internal
         {
             return Task.Run(() =>
             {
-                var context = new WiaScanContext(imageContext, workerServiceFactory)
+                var context = new WiaScanContext(imageContext, workerFactory)
                 {
                     Options = options,
                     ScanEvents = scanEvents,
@@ -82,12 +82,12 @@ namespace NAPS2.Scan.Experimental.Internal
         private class WiaScanContext
         {
             private readonly ImageContext imageContext;
-            private readonly IWorkerServiceFactory workerServiceFactory;
+            private readonly IWorkerFactory workerFactory;
 
-            public WiaScanContext(ImageContext imageContext, IWorkerServiceFactory workerServiceFactory)
+            public WiaScanContext(ImageContext imageContext, IWorkerFactory workerFactory)
             {
                 this.imageContext = imageContext;
-                this.workerServiceFactory = workerServiceFactory;
+                this.workerFactory = workerFactory;
             }
 
             public ScanOptions Options { get; set; }
@@ -235,7 +235,7 @@ namespace NAPS2.Scan.Experimental.Internal
                     if (useWorker)
                     {
                         WiaConfiguration config;
-                        using (var worker = workerServiceFactory.Create())
+                        using (var worker = workerFactory.Create())
                         {
                             config = worker.Service.Wia10NativeUI(device.Id(), Options.DialogParent);
                         }

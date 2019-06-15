@@ -14,24 +14,22 @@ namespace NAPS2.Scan.Experimental.Internal
     /// </summary>
     internal class WorkerScanBridge : IScanBridge
     {
-        // TODO: Might not need this after worker factory changes
         private readonly ImageContext imageContext;
-        private readonly IWorkerServiceFactory workerServiceFactory;
+        private readonly IWorkerFactory workerFactory;
 
-        public WorkerScanBridge()
-         : this(ImageContext.Default, WorkerManager.Factory)
+        public WorkerScanBridge() : this(ImageContext.Default, WorkerFactory.Default)
         {
         }
 
-        public WorkerScanBridge(ImageContext imageContext, IWorkerServiceFactory workerServiceFactory)
+        public WorkerScanBridge(ImageContext imageContext, IWorkerFactory workerFactory)
         {
             this.imageContext = imageContext;
-            this.workerServiceFactory = workerServiceFactory;
+            this.workerFactory = workerFactory;
         }
 
         public List<ScanDevice> GetDeviceList(ScanOptions options)
         {
-            using (var ctx = workerServiceFactory.Create())
+            using (var ctx = workerFactory.Create())
             {
                 return ctx.Service.GetDeviceList(options);
             }
@@ -39,7 +37,7 @@ namespace NAPS2.Scan.Experimental.Internal
 
         public async Task Scan(ScanOptions options, CancellationToken cancelToken, IScanEvents scanEvents, Action<ScannedImage, PostProcessingContext> callback)
         {
-            using (var ctx = workerServiceFactory.Create())
+            using (var ctx = workerFactory.Create())
             {
                 await ctx.Service.Scan(imageContext, options, cancelToken, scanEvents, (image, tempPath) =>
                 {

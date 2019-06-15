@@ -13,13 +13,13 @@ namespace NAPS2.ImportExport.Email.Mapi
 {
     public class MapiEmailProvider : IEmailProvider
     {
-        private readonly IWorkerServiceFactory workerServiceFactory;
+        private readonly IWorkerFactory workerFactory;
         private readonly IMapiWrapper mapiWrapper;
         private readonly ErrorOutput errorOutput;
 
-        public MapiEmailProvider(IWorkerServiceFactory workerServiceFactory, IMapiWrapper mapiWrapper, ErrorOutput errorOutput)
+        public MapiEmailProvider(IWorkerFactory workerFactory, IMapiWrapper mapiWrapper, ErrorOutput errorOutput)
         {
-            this.workerServiceFactory = workerServiceFactory;
+            this.workerFactory = workerFactory;
             this.mapiWrapper = mapiWrapper;
             this.errorOutput = errorOutput;
         }
@@ -41,7 +41,7 @@ namespace NAPS2.ImportExport.Email.Mapi
 
                 if (UseWorker && !mapiWrapper.CanLoadClient)
                 {
-                    using (var worker = workerServiceFactory.Create())
+                    using (var worker = workerFactory.Create())
                     {
                         returnCode = worker.Service.SendMapiEmail(message);
                     }

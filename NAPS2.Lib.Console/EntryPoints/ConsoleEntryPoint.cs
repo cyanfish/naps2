@@ -29,7 +29,7 @@ namespace NAPS2.EntryPoints
             }
             
             // Start a pending worker process
-            WorkerManager.Init();
+            kernel.Get<IWorkerFactory>().Init();
 
             // Run the scan automation logic
             var scanning = kernel.Get<AutomatedScanning>(new ConstructorArgument("options", options));

@@ -5,8 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using NAPS2.Images;
 using NAPS2.Images.Storage;
-using NAPS2.Scan;
-using NAPS2.Scan.Wia;
+using NAPS2.Scan.Experimental;
 
 namespace NAPS2.Sdk.Samples
 {
@@ -20,16 +19,13 @@ namespace NAPS2.Sdk.Samples
             // This will put files in the system temp folder by default, which can be
             // overriden by changing FileStorageManager.Current.
             imageContext.ConfigureBackingStorage<FileStorage>();
-            
-            IScanDriver driver = new WiaScanDriver();
-            ScanDevice device = driver.GetDeviceList().First();
-            ScanProfile scanProfile = new ScanProfile
+
+            var controller = new ScanController();
+            var device = controller.GetDeviceList().First();
+            var options = new ScanOptions
             {
                 Device = device,
-                Resolution = ScanDpi.Dpi300
-            };
-            ScanParams scanParams = new ScanParams
-            {
+                Dpi = 300,
                 NoUI = true
             };
             
@@ -37,7 +33,7 @@ namespace NAPS2.Sdk.Samples
             // excessive amount of memory, since it is all stored on disk until rendered.
             // This is just for illustration purposes; in real code you usually want to
             // process images as they come rather than waiting for the full scan.
-            List<ScannedImage> scannedImages = await driver.Scan(scanProfile, scanParams).ToList();
+            List<ScannedImage> scannedImages = await controller.Scan(options).ToList();
 
             try
             {

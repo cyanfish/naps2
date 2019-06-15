@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using NAPS2.Images;
 using NAPS2.Scan;
-using NAPS2.Scan.Wia;
+using NAPS2.Scan.Experimental;
 
 namespace NAPS2.Sdk.Samples
 {
@@ -15,8 +15,10 @@ namespace NAPS2.Sdk.Samples
             // This is the absolute bare bones example of scanning.
             // See the other samples for more description and functionality.
 
-            IScanDriver driver = new WiaScanDriver();
-            ScannedImageSource imageSource = driver.Scan(new ScanProfile(), new ScanParams());
+            ScanController controller = new ScanController();
+            ScanDevice device = controller.GetDeviceList().First();
+            ScanOptions options = new ScanOptions { Device = device };
+            ScannedImageSource imageSource = controller.Scan(options);
             await imageSource.ForEach(scannedImage =>
             {
                 using (scannedImage)

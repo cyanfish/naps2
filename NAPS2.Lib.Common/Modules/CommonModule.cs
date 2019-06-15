@@ -70,7 +70,7 @@ namespace NAPS2.Modules
             Bind<ConfigProvider<EmailSetup>>().ToMethod(ctx => ctx.Kernel.Get<ConfigProvider<CommonConfig>>().Child(c => c.EmailSetup));
 
             // Host
-            Bind<IWorkerServiceFactory>().ToMethod(ctx => WorkerManager.Factory);
+            Bind<IWorkerFactory>().To<WorkerFactory>().InSingletonScope();
 
             // Misc
             Bind<IFormFactory>().To<NinjectFormFactory>();

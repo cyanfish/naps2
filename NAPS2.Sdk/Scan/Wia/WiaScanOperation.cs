@@ -19,23 +19,19 @@ namespace NAPS2.Scan.Wia
     {
         private readonly ImageContext imageContext;
         private readonly ScannedImageHelper scannedImageHelper;
-        private readonly IWorkerServiceFactory workerServiceFactory;
+        private readonly IWorkerFactory workerFactory;
 
         private readonly SmoothProgress smoothProgress = new SmoothProgress();
 
-        public WiaScanOperation() : this(ImageContext.Default, new ScannedImageHelper())
-        {
-        }
+        //public WiaScanOperation() : this(ImageContext.Default, new ScannedImageHelper())
+        //{
+        //}
 
-        public WiaScanOperation(ImageContext imageContext, ScannedImageHelper scannedImageHelper) : this(imageContext, scannedImageHelper, WorkerManager.Factory)
-        {
-        }
-
-        public WiaScanOperation(ImageContext imageContext, ScannedImageHelper scannedImageHelper, IWorkerServiceFactory workerServiceFactory)
+        public WiaScanOperation(ImageContext imageContext, ScannedImageHelper scannedImageHelper, IWorkerFactory workerFactory)
         {
             this.imageContext = imageContext;
             this.scannedImageHelper = scannedImageHelper;
-            this.workerServiceFactory = workerServiceFactory;
+            this.workerFactory = workerFactory;
             AllowCancel = true;
             AllowBackground = true;
 
@@ -281,7 +277,7 @@ namespace NAPS2.Scan.Wia
                 if (useWorker)
                 {
                     WiaConfiguration config;
-                    using (var worker = workerServiceFactory.Create())
+                    using (var worker = workerFactory.Create())
                     {
                         config = worker.Service.Wia10NativeUI(device.Id(), DialogParent);
                     }

@@ -20,9 +20,9 @@ namespace NAPS2.Scan.Experimental
         private readonly ConfigProvider<CommonConfig> configProvider;
         private readonly OperationProgress operationProgress;
         private readonly AutoSaver autoSaver;
-        private readonly ProfileManager profileManager;
+        private readonly IProfileManager profileManager;
 
-        public ScanPerformer(IFormFactory formFactory, ConfigProvider<CommonConfig> configProvider, OperationProgress operationProgress, AutoSaver autoSaver, ProfileManager profileManager)
+        public ScanPerformer(IFormFactory formFactory, ConfigProvider<CommonConfig> configProvider, OperationProgress operationProgress, AutoSaver autoSaver, IProfileManager profileManager)
         {
             this.formFactory = formFactory;
             this.configProvider = configProvider;

@@ -31,7 +31,7 @@ namespace NAPS2.EntryPoints
             lifecycle.ExitIfRedundant();
 
             // Start a pending worker process
-            WorkerManager.Init();
+            kernel.Get<IWorkerFactory>().Init();
 
             // Set up basic application configuration
             kernel.Get<CultureInitializer>().InitCulture();

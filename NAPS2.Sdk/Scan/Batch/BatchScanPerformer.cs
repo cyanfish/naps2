@@ -29,9 +29,9 @@ namespace NAPS2.Scan.Batch
         private readonly OcrEngineManager ocrEngineManager;
         private readonly IFormFactory formFactory;
         private readonly ConfigProvider<CommonConfig> configProvider;
-        private readonly ProfileManager profileManager;
+        private readonly IProfileManager profileManager;
 
-        public BatchScanPerformer(IScanPerformer scanPerformer, PdfExporter pdfExporter, IOperationFactory operationFactory, ConfigProvider<PdfSettings> pdfSettingsProvider, OcrEngineManager ocrEngineManager, IFormFactory formFactory, ConfigProvider<CommonConfig> configProvider, ProfileManager profileManager)
+        public BatchScanPerformer(IScanPerformer scanPerformer, PdfExporter pdfExporter, IOperationFactory operationFactory, ConfigProvider<PdfSettings> pdfSettingsProvider, OcrEngineManager ocrEngineManager, IFormFactory formFactory, ConfigProvider<CommonConfig> configProvider, IProfileManager profileManager)
         {
             this.scanPerformer = scanPerformer;
             this.pdfExporter = pdfExporter;
@@ -65,14 +65,14 @@ namespace NAPS2.Scan.Batch
             private readonly OcrEngineManager ocrEngineManager;
             private readonly IFormFactory formFactory;
             private readonly ConfigProvider<CommonConfig> configProvider;
-            private readonly ProfileManager profileManager;
+            private readonly IProfileManager profileManager;
 
             private ScanProfile profile;
             private ScanParams scanParams;
             private List<List<ScannedImage>> scans;
 
             public BatchState(IScanPerformer scanPerformer, PdfExporter pdfExporter, IOperationFactory operationFactory,
-                ConfigProvider<PdfSettings> pdfSettingsProvider, OcrEngineManager ocrEngineManager, IFormFactory formFactory, ConfigProvider<CommonConfig> configProvider, ProfileManager profileManager)
+                ConfigProvider<PdfSettings> pdfSettingsProvider, OcrEngineManager ocrEngineManager, IFormFactory formFactory, ConfigProvider<CommonConfig> configProvider, IProfileManager profileManager)
             {
                 this.scanPerformer = scanPerformer;
                 this.pdfExporter = pdfExporter;
