@@ -23,8 +23,6 @@ using Xunit;
 // The following GUID is for the ID of the typelib if this project is exposed to COM
 [assembly: Guid("8f59dabd-ee59-471d-b3ae-9c2083fdb13e")]
 
-[assembly: CollectionBehavior(DisableTestParallelization = true)]
-
 // Version information for an assembly consists of the following four values:
 //
 //      Major Version

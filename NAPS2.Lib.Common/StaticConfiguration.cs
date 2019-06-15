@@ -19,12 +19,6 @@ namespace NAPS2
         public static void Initialize(IKernel kernel)
         {
             var configProvider = kernel.Get<ConfigScopes>().Provider;
-            ProfileManager.Current = new ProfileManager(
-                Path.Combine(Paths.AppData, "profiles.xml"),
-                Path.Combine(Paths.Executable, "profiles.xml"),
-                configProvider.Get(c => c.LockSystemProfiles),
-                configProvider.Get(c => c.LockUnspecifiedDevices),
-                configProvider.Get(c => c.NoUserProfiles));
 
             Log.Logger = new NLogLogger();
             if (PlatformCompat.System.CanUseWin32)

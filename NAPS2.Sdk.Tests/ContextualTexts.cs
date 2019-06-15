@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading;
 using NAPS2.Config;
 using NAPS2.Images.Storage;
 
@@ -18,13 +19,14 @@ namespace NAPS2.Sdk.Tests
             var tempPath = Path.Combine(FolderPath, "temp");
             Directory.CreateDirectory(tempPath);
 
-            ProfileManager.Current = new StubProfileManager();
-
+            ProfileManager = new StubProfileManager();
             ImageContext = new GdiImageContext
             {
                 FileStorageManager = new FileStorageManager(tempPath)
             };
         }
+
+        public IProfileManager ProfileManager { get; }
 
         public ImageContext ImageContext { get; }
 
@@ -49,7 +51,15 @@ namespace NAPS2.Sdk.Tests
         public virtual void Dispose()
         {
             rsm?.ForceReleaseLock();
-            Directory.Delete(FolderPath, true);
+            try
+            {
+                Directory.Delete(FolderPath, true);
+            }
+            catch (IOException)
+            {
+                Thread.Sleep(100);
+                Directory.Delete(FolderPath, true);
+            }
         }
     }
 }

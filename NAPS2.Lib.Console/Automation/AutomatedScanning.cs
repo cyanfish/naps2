@@ -40,6 +40,7 @@ namespace NAPS2.Automation
         private readonly ConfigProvider<CommonConfig> configProvider;
         private readonly ConfigProvider<PdfSettings> pdfSettingsProvider;
         private readonly ConfigProvider<ImageSettings> imageSettingsProvider;
+        private readonly IProfileManager profileManager;
 
         private readonly AutomatedScanningOptions options;
         private List<List<ScannedImage>> scanList;
@@ -49,7 +50,7 @@ namespace NAPS2.Automation
         private List<string> actualOutputPaths;
         private OcrParams ocrParams;
 
-        public AutomatedScanning(AutomatedScanningOptions options, ImageContext imageContext, IScanPerformer scanPerformer, ErrorOutput errorOutput, IEmailProviderFactory emailProviderFactory, IScannedImageImporter scannedImageImporter, IOperationFactory operationFactory, OcrEngineManager ocrEngineManager, IFormFactory formFactory, ConfigScopes configScopes)
+        public AutomatedScanning(AutomatedScanningOptions options, ImageContext imageContext, IScanPerformer scanPerformer, ErrorOutput errorOutput, IEmailProviderFactory emailProviderFactory, IScannedImageImporter scannedImageImporter, IOperationFactory operationFactory, OcrEngineManager ocrEngineManager, IFormFactory formFactory, ConfigScopes configScopes, IProfileManager profileManager)
         {
             this.options = options;
             this.imageContext = imageContext;
@@ -61,6 +62,7 @@ namespace NAPS2.Automation
             this.ocrEngineManager = ocrEngineManager;
             this.formFactory = formFactory;
             this.configScopes = configScopes;
+            this.profileManager = profileManager;
 
             userTransact = configScopes.User.BeginTransaction();
             configProvider = configScopes.Provider.Replace(configScopes.User, userTransact);
@@ -613,13 +615,13 @@ namespace NAPS2.Automation
                 if (options.ProfileName == null)
                 {
                     // If no profile is specified, use the default (if there is one)
-                    profile = ProfileManager.Current.Profiles.Single(x => x.IsDefault);
+                    profile = profileManager.Profiles.Single(x => x.IsDefault);
                 }
                 else
                 {
                     // Use the profile with the specified name (try case-sensitive first, then case-insensitive)
-                    profile = ProfileManager.Current.Profiles.FirstOrDefault(x => x.DisplayName == options.ProfileName) ??
-                              ProfileManager.Current.Profiles.First(x => x.DisplayName.ToLower() == options.ProfileName.ToLower());
+                    profile = profileManager.Profiles.FirstOrDefault(x => x.DisplayName == options.ProfileName) ??
+                              profileManager.Profiles.First(x => x.DisplayName.ToLower() == options.ProfileName.ToLower());
                 }
             }
             catch (InvalidOperationException)

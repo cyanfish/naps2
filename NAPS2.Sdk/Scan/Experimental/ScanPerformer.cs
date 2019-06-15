@@ -20,13 +20,15 @@ namespace NAPS2.Scan.Experimental
         private readonly ConfigProvider<CommonConfig> configProvider;
         private readonly OperationProgress operationProgress;
         private readonly AutoSaver autoSaver;
+        private readonly ProfileManager profileManager;
 
-        public ScanPerformer(IFormFactory formFactory, ConfigProvider<CommonConfig> configProvider, OperationProgress operationProgress, AutoSaver autoSaver)
+        public ScanPerformer(IFormFactory formFactory, ConfigProvider<CommonConfig> configProvider, OperationProgress operationProgress, AutoSaver autoSaver, ProfileManager profileManager)
         {
             this.formFactory = formFactory;
             this.configProvider = configProvider;
             this.operationProgress = operationProgress;
             this.autoSaver = autoSaver;
+            this.profileManager = profileManager;
         }
 
         public ScannedImageSource PerformScan(ScanProfile scanProfile, ScanParams scanParams, IntPtr dialogParent = default,
@@ -131,7 +133,7 @@ namespace NAPS2.Scan.Experimental
                 if (configProvider.Get(c => c.AlwaysRememberDevice))
                 {
                     scanProfile.Device = options.Device;
-                    ProfileManager.Current.Save();
+                    profileManager.Save();
                 }
             }
             else

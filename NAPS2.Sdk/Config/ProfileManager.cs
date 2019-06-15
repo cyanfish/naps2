@@ -9,14 +9,6 @@ namespace NAPS2.Config
 {
     public class ProfileManager : IProfileManager
     {
-        private static IProfileManager _current = new StubProfileManager();
-
-        public static IProfileManager Current
-        {
-            get => _current;
-            set => _current = value ?? throw new ArgumentNullException(nameof(value));
-        }
-
         private readonly ISerializer<List<ScanProfile>> serializer = new XmlSerializer<List<ScanProfile>>();
         private readonly string userPath;
         private readonly string systemPath;

@@ -32,12 +32,12 @@ namespace NAPS2.Sdk.Tests.WinForms
                     ProfileDisplayName = "test_name"
                 }
             });
-            ProfileManager.Current.Profiles.Add(new ScanProfile
+            ProfileManager.Profiles.Add(new ScanProfile
             {
                 DisplayName = "bad_name",
                 IsDefault = true
             });
-            ProfileManager.Current.Profiles.Add(new ScanProfile {
+            ProfileManager.Profiles.Add(new ScanProfile {
                 DisplayName = "test_name"
             });
             ctx.Form.Show();
@@ -66,7 +66,7 @@ namespace NAPS2.Sdk.Tests.WinForms
                 DialogHelper = new Mock<DialogHelper>(),
                 ConfigScopes = ConfigScopes.Stub()
             };
-            ctx.Form = new FBatchScan(ctx.Performer.Object, ctx.ErrorOutput.Object, ctx.DialogHelper.Object)
+            ctx.Form = new FBatchScan(ctx.Performer.Object, ctx.ErrorOutput.Object, ctx.DialogHelper.Object, ProfileManager)
             {
                 ConfigScopes = ctx.ConfigScopes,
                 ConfigProvider = ctx.ConfigScopes.Provider

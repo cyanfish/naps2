@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using NAPS2.Config;
 using NAPS2.Config.Experimental;
 using NAPS2.Images;
 using NAPS2.Images.Storage;
@@ -83,6 +84,15 @@ namespace NAPS2.Modules
             Bind<AutoSaver>().ToSelf();
             Bind<BitmapRenderer>().ToSelf();
             Bind<ImageContext>().To<GdiImageContext>().InSingletonScope();
+
+            var configProvider = Kernel.Get<ConfigScopes>().Provider;
+            var profileManager = new ProfileManager(
+                Path.Combine(Paths.AppData, "profiles.xml"),
+                Path.Combine(Paths.Executable, "profiles.xml"),
+                configProvider.Get(c => c.LockSystemProfiles),
+                configProvider.Get(c => c.LockUnspecifiedDevices),
+                configProvider.Get(c => c.NoUserProfiles));
+            Bind<IProfileManager>().ToConstant(profileManager);
 
             StaticConfiguration.Initialize(Kernel);
         }

@@ -26,17 +26,19 @@ namespace NAPS2.WinForms
         private readonly IBatchScanPerformer batchScanPerformer;
         private readonly ErrorOutput errorOutput;
         private readonly DialogHelper dialogHelper;
+        private readonly IProfileManager profileManager;
         private TransactionConfigScope<CommonConfig> userTransact;
         private ConfigProvider<CommonConfig> transactProvider;
 
         private bool batchRunning;
         private CancellationTokenSource cts = new CancellationTokenSource();
 
-        public FBatchScan(IBatchScanPerformer batchScanPerformer, ErrorOutput errorOutput, DialogHelper dialogHelper)
+        public FBatchScan(IBatchScanPerformer batchScanPerformer, ErrorOutput errorOutput, DialogHelper dialogHelper, IProfileManager profileManager)
         {
             this.batchScanPerformer = batchScanPerformer;
             this.errorOutput = errorOutput;
             this.dialogHelper = dialogHelper;
+            this.profileManager = profileManager;
             InitializeComponent();
 
             RestoreFormState = false;
@@ -55,7 +57,7 @@ namespace NAPS2.WinForms
                     .RightToForm()
                 .Activate();
 
-            btnAddProfile.Enabled = !(ConfigProvider.Get(c => c.NoUserProfiles) && ProfileManager.Current.Profiles.Any(x => x.IsLocked));
+            btnAddProfile.Enabled = !(ConfigProvider.Get(c => c.NoUserProfiles) && profileManager.Profiles.Any(x => x.IsLocked));
 
             ConditionalControls.LockHeight(this);
 
@@ -143,15 +145,15 @@ namespace NAPS2.WinForms
         private void UpdateProfiles()
         {
             comboProfile.Items.Clear();
-            comboProfile.Items.AddRange(ProfileManager.Current.Profiles.Cast<object>().ToArray());
+            comboProfile.Items.AddRange(profileManager.Profiles.Cast<object>().ToArray());
             if (!string.IsNullOrEmpty(transactProvider.Get(c => c.BatchSettings.ProfileDisplayName)) &&
-                ProfileManager.Current.Profiles.Any(x => x.DisplayName == transactProvider.Get(c => c.BatchSettings.ProfileDisplayName)))
+                profileManager.Profiles.Any(x => x.DisplayName == transactProvider.Get(c => c.BatchSettings.ProfileDisplayName)))
             {
                 comboProfile.Text = transactProvider.Get(c => c.BatchSettings.ProfileDisplayName);
             }
-            else if (ProfileManager.Current.DefaultProfile != null)
+            else if (profileManager.DefaultProfile != null)
             {
-                comboProfile.Text = ProfileManager.Current.DefaultProfile.DisplayName;
+                comboProfile.Text = profileManager.DefaultProfile.DisplayName;
             }
             else
             {
@@ -215,8 +217,8 @@ namespace NAPS2.WinForms
                 fedit.ShowDialog();
                 if (fedit.Result)
                 {
-                    ProfileManager.Current.Profiles[comboProfile.SelectedIndex] = fedit.ScanProfile;
-                    ProfileManager.Current.Save();
+                    profileManager.Profiles[comboProfile.SelectedIndex] = fedit.ScanProfile;
+                    profileManager.Save();
                     userTransact.Set(c => c.BatchSettings.ProfileDisplayName = fedit.ScanProfile.DisplayName);
                     UpdateProfiles();
                 }
@@ -225,15 +227,15 @@ namespace NAPS2.WinForms
 
         private void btnAddProfile_Click(object sender, EventArgs e)
         {
-            if (!(ConfigProvider.Get(c => c.NoUserProfiles) && ProfileManager.Current.Profiles.Any(x => x.IsLocked)))
+            if (!(ConfigProvider.Get(c => c.NoUserProfiles) && profileManager.Profiles.Any(x => x.IsLocked)))
             {
                 var fedit = FormFactory.Create<FEditProfile>();
                 fedit.ScanProfile = ConfigProvider.Get(c => c.DefaultProfileSettings);
                 fedit.ShowDialog();
                 if (fedit.Result)
                 {
-                    ProfileManager.Current.Profiles.Add(fedit.ScanProfile);
-                    ProfileManager.Current.Save();
+                    profileManager.Profiles.Add(fedit.ScanProfile);
+                    profileManager.Save();
                     userTransact.Set(c => c.BatchSettings.ProfileDisplayName = fedit.ScanProfile.DisplayName);
                     UpdateProfiles();
                 }
