@@ -15,9 +15,8 @@ namespace NAPS2.Sdk.Samples
         public static async Task Run()
         {
             // We configure scanned images to be stored in GDI+ format, which uses
-            // System.Drawing.Bitmap internally. This is for illustration purposes;
-            // GdiImage is already the default.
-            StorageManager.ConfigureImageType<GdiImage>();
+            // System.Drawing.Bitmap internally.
+            var imageContext = new GdiImageContext();
 
             // To select a device and scan, you need a driver.
             // Windows supports Wia and Twain. Linux supports Sane. Mac supports Twain.
@@ -49,7 +48,7 @@ namespace NAPS2.Sdk.Samples
             // To change a ScannedImage object into a Bitmap object we need a renderer.
             // Since our backing storage already uses a Bitmap, this is a fairly trivial operation.
             // However, in other situations this abstracts away additional I/O or transforms.
-            BitmapRenderer renderer = new BitmapRenderer();
+            BitmapRenderer renderer = new BitmapRenderer(imageContext);
 
             // ScannedImageSource has several different methods to help you consume images.
             // ForEach allows you to asynchronously process images as they arrive.

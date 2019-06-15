@@ -8,21 +8,25 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using NAPS2.Images;
+using NAPS2.Images.Storage;
 using NAPS2.ImportExport;
 
 namespace NAPS2.WinForms
 {
     public class ImageClipboard
     {
+        private readonly ImageContext imageContext;
         private readonly BitmapRenderer bitmapRenderer;
 
         public ImageClipboard()
         {
-            bitmapRenderer = new BitmapRenderer();
+            imageContext = ImageContext.Default;
+            bitmapRenderer = new BitmapRenderer(ImageContext.Default);
         }
 
-        public ImageClipboard(BitmapRenderer bitmapRenderer)
+        public ImageClipboard(ImageContext imageContext, BitmapRenderer bitmapRenderer)
         {
+            this.imageContext = imageContext;
             this.bitmapRenderer = bitmapRenderer;
         }
 
@@ -54,7 +58,7 @@ namespace NAPS2.WinForms
         public IDataObject GetDataObject(IEnumerable<ScannedImage> imageList)
         {
             IDataObject ido = new DataObject();
-            ido.SetData(typeof(DirectImageTransfer), new DirectImageTransfer(imageList));
+            ido.SetData(typeof(DirectImageTransfer), new DirectImageTransfer(imageContext, imageList));
             return ido;
         }
 

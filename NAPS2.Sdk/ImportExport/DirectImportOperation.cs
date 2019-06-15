@@ -15,10 +15,12 @@ namespace NAPS2.ImportExport
 {
     public class DirectImportOperation : OperationBase
     {
+        private readonly ImageContext imageContext;
         private readonly ImageRenderer imageRenderer;
 
-        public DirectImportOperation(ImageRenderer imageRenderer)
+        public DirectImportOperation(ImageContext imageContext, ImageRenderer imageRenderer)
         {
+            this.imageContext = imageContext;
             this.imageRenderer = imageRenderer;
 
             AllowCancel = true;
@@ -43,11 +45,11 @@ namespace NAPS2.ImportExport
                     {
                         var serializedImage = new SerializedImage();
                         serializedImage.MergeFrom(serializedImageBytes);
-                        ScannedImage img = SerializedImageHelper.Deserialize(serializedImage, new SerializedImageHelper.DeserializeOptions());
+                        ScannedImage img = SerializedImageHelper.Deserialize(imageContext, serializedImage, new SerializedImageHelper.DeserializeOptions());
                         // TODO: Don't bother, here, in recovery, etc.
                         if (importParams.ThumbnailSize.HasValue)
                         {
-                            img.SetThumbnail(Transform.Perform(await imageRenderer.Render(img), new ThumbnailTransform(importParams.ThumbnailSize.Value)));
+                            img.SetThumbnail(imageContext.PerformTransform(await imageRenderer.Render(img), new ThumbnailTransform(importParams.ThumbnailSize.Value)));
                         }
                         imageCallback(img);
 

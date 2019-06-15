@@ -10,20 +10,22 @@ namespace NAPS2.Remoting.Worker
     {
         public WorkerContext Create()
         {
-            var rsm = FileStorageManager.Current as RecoveryStorageManager;
-            rsm?.EnsureFolderCreated();
-            var worker = WorkerManager.NextWorker();
-            try
-            {
-                worker.Service.Init(rsm?.RecoveryFolderPath);
-            }
-            catch (EndpointNotFoundException)
-            {
-                // Retry once
-                worker = WorkerManager.NextWorker();
-                worker.Service.Init(rsm?.RecoveryFolderPath);
-            }
-            return worker;
+            // TODO: fix this
+            throw new NotImplementedException();
+            //var rsm = FileStorageManager.Current as RecoveryStorageManager;
+            //rsm?.EnsureFolderCreated();
+            //var worker = WorkerManager.NextWorker();
+            //try
+            //{
+            //    worker.Service.Init(rsm?.RecoveryFolderPath);
+            //}
+            //catch (EndpointNotFoundException)
+            //{
+            //    // Retry once
+            //    worker = WorkerManager.NextWorker();
+            //    worker.Service.Init(rsm?.RecoveryFolderPath);
+            //}
+            //return worker;
         }
     }
 }

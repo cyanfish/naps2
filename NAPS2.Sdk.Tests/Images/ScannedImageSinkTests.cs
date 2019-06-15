@@ -102,7 +102,7 @@ namespace NAPS2.Sdk.Tests.Images
 
         private ScannedImage CreateScannedImage()
         {
-            return new ScannedImage(new GdiImage(new Bitmap(100, 100)));
+            return ImageContext.CreateScannedImage(new GdiImage(new Bitmap(100, 100)));
         }
     }
 }

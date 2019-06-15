@@ -7,11 +7,6 @@ namespace NAPS2.Images.Storage
 {
     public class PdfStorage : IStorage
     {
-        static PdfStorage()
-        {
-            StorageManager.RegisterConverters(new PdfConverters());
-        }
-
         public PdfStorage(PdfDocument document)
         {
             Document = document ?? throw new ArgumentNullException(nameof(document));

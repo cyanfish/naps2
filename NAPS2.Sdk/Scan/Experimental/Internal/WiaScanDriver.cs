@@ -17,15 +17,17 @@ namespace NAPS2.Scan.Experimental.Internal
 {
     internal class WiaScanDriver : IScanDriver
     {
+        private readonly ImageContext imageContext;
         private readonly IWorkerServiceFactory workerServiceFactory;
 
-        public WiaScanDriver()
-            : this(new WorkerServiceFactory())
+        public WiaScanDriver(ImageContext imageContext)
+            : this(imageContext, new WorkerServiceFactory())
         {
         }
 
-        public WiaScanDriver(IWorkerServiceFactory workerServiceFactory)
+        public WiaScanDriver(ImageContext imageContext, IWorkerServiceFactory workerServiceFactory)
         {
+            this.imageContext = imageContext;
             this.workerServiceFactory = workerServiceFactory;
         }
 
@@ -47,7 +49,7 @@ namespace NAPS2.Scan.Experimental.Internal
         {
             return Task.Run(() =>
             {
-                var context = new WiaScanContext(workerServiceFactory)
+                var context = new WiaScanContext(imageContext, workerServiceFactory)
                 {
                     Options = options,
                     ScanEvents = scanEvents,
@@ -79,10 +81,12 @@ namespace NAPS2.Scan.Experimental.Internal
 
         private class WiaScanContext
         {
+            private readonly ImageContext imageContext;
             private readonly IWorkerServiceFactory workerServiceFactory;
 
-            public WiaScanContext(IWorkerServiceFactory workerServiceFactory)
+            public WiaScanContext(ImageContext imageContext, IWorkerServiceFactory workerServiceFactory)
             {
+                this.imageContext = imageContext;
                 this.workerServiceFactory = workerServiceFactory;
             }
 
@@ -135,7 +139,7 @@ namespace NAPS2.Scan.Experimental.Internal
                     {
                         using (var stream = new FileStream(path, FileMode.Open))
                         {
-                            foreach (var image in StorageManager.ImageFactory.DecodeMultiple(stream, Path.GetExtension(path), out _))
+                            foreach (var image in imageContext.ImageFactory.DecodeMultiple(stream, Path.GetExtension(path), out _))
                             {
                                 using (image)
                                 {
@@ -183,7 +187,7 @@ namespace NAPS2.Scan.Experimental.Internal
                         try
                         {
                             using (args.Stream)
-                            using (var image = StorageManager.ImageFactory.Decode(args.Stream, ".bmp"))
+                            using (var image = imageContext.ImageFactory.Decode(args.Stream, ".bmp"))
                             {
                                 Callback(image);
                             }

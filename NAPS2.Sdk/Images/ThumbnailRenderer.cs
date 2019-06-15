@@ -52,15 +52,18 @@ namespace NAPS2.Images
             return (size - 832) / 96 + 16;
         }
 
+        private readonly ImageContext imageContext;
         private readonly IScannedImageRenderer<IImage> imageRenderer;
 
-        public ThumbnailRenderer()
+        public ThumbnailRenderer(ImageContext imageContext)
         {
-            imageRenderer = new ImageRenderer();
+            this.imageContext = imageContext;
+            imageRenderer = new ImageRenderer(imageContext);
         }
 
-        public ThumbnailRenderer(IScannedImageRenderer<IImage> imageRenderer)
+        public ThumbnailRenderer(ImageContext imageContext, IScannedImageRenderer<IImage> imageRenderer)
         {
+            this.imageContext = imageContext;
             this.imageRenderer = imageRenderer;
         }
 
@@ -76,7 +79,7 @@ namespace NAPS2.Images
         {
             using (var bitmap = await imageRenderer.Render(snapshot, snapshot.Metadata.TransformList.Count == 0 ? 0 : outputSize * OVERSAMPLE))
             {
-                return Transform.Perform(bitmap, new ThumbnailTransform(outputSize));
+                return imageContext.PerformTransform(bitmap, new ThumbnailTransform(outputSize));
             }
         }
     }

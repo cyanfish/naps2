@@ -24,13 +24,15 @@ namespace NAPS2.ImportExport.Pdf
 {
     public class PdfSharpImporter : IPdfImporter
     {
+        private readonly ImageContext imageContext;
         private readonly ErrorOutput errorOutput;
         private readonly IPdfPasswordProvider pdfPasswordProvider;
         private readonly ImageRenderer imageRenderer;
         private readonly IComponentInstallPrompt componentInstallPrompt;
 
-        public PdfSharpImporter(ErrorOutput errorOutput, IPdfPasswordProvider pdfPasswordProvider, ImageRenderer imageRenderer, IComponentInstallPrompt componentInstallPrompt)
+        public PdfSharpImporter(ImageContext imageContext, ErrorOutput errorOutput, IPdfPasswordProvider pdfPasswordProvider, ImageRenderer imageRenderer, IComponentInstallPrompt componentInstallPrompt)
         {
+            this.imageContext = imageContext;
             this.errorOutput = errorOutput;
             this.pdfPasswordProvider = pdfPasswordProvider;
             this.imageRenderer = imageRenderer;
@@ -173,7 +175,7 @@ namespace NAPS2.ImportExport.Pdf
 
         private async Task<ScannedImage> ExportRawPdfPage(PdfPage page, ImportParams importParams)
         {
-            string pdfPath = FileStorageManager.Current.NextFilePath() + ".pdf";
+            string pdfPath = imageContext.FileStorageManager.NextFilePath() + ".pdf";
             var document = new PdfDocument();
             document.Pages.Add(page);
             document.Save(pdfPath);
@@ -181,14 +183,14 @@ namespace NAPS2.ImportExport.Pdf
             // TODO: It would make sense to have in-memory PDFs be an option.
             // TODO: Really, ConvertToBacking should convert PdfStorage -> PdfFileStorage.
             // TODO: Then we wouldn't need a static FileStorageManager.
-            var image = new ScannedImage(new FileStorage(pdfPath));
+            var image = imageContext.CreateScannedImage(new FileStorage(pdfPath));
             if (importParams.ThumbnailSize.HasValue || importParams.DetectPatchCodes)
             {
                 using (var bitmap = await imageRenderer.Render(image))
                 {
                     if (importParams.ThumbnailSize.HasValue)
                     {
-                        image.SetThumbnail(Transform.Perform(bitmap, new ThumbnailTransform(importParams.ThumbnailSize.Value)));
+                        image.SetThumbnail(imageContext.PerformTransform(bitmap, new ThumbnailTransform(importParams.ThumbnailSize.Value)));
                     }
                     if (importParams.DetectPatchCodes)
                     {
@@ -204,13 +206,13 @@ namespace NAPS2.ImportExport.Pdf
             // Fortunately JPEG has native support in PDF and exporting an image is just writing the stream to a file.
             using (var memoryStream = new MemoryStream(imageBytes))
             {
-                using (var storage = StorageManager.ImageFactory.Decode(memoryStream, ".jpg"))
+                using (var storage = imageContext.ImageFactory.Decode(memoryStream, ".jpg"))
                 {
                     storage.SetResolution(storage.Width / (float)page.Width.Inch, storage.Height / (float)page.Height.Inch);
-                    var image = new ScannedImage(storage, BitDepth.Color, false, -1);
+                    var image = imageContext.CreateScannedImage(storage, BitDepth.Color, false, -1);
                     if (importParams.ThumbnailSize.HasValue)
                     {
-                        image.SetThumbnail(Transform.Perform(storage, new ThumbnailTransform(importParams.ThumbnailSize.Value)));
+                        image.SetThumbnail(imageContext.PerformTransform(storage, new ThumbnailTransform(importParams.ThumbnailSize.Value)));
                     }
                     if (importParams.DetectPatchCodes)
                     {
@@ -234,12 +236,12 @@ namespace NAPS2.ImportExport.Pdf
             switch (bitsPerComponent)
             {
                 case 8:
-                    storage = StorageManager.ImageFactory.FromDimensions(width, height, StoragePixelFormat.RGB24);
+                    storage = imageContext.ImageFactory.FromDimensions(width, height, StoragePixelFormat.RGB24);
                     bitDepth = BitDepth.Color;
                     RgbToBitmapUnmanaged(storage, buffer);
                     break;
                 case 1:
-                    storage = StorageManager.ImageFactory.FromDimensions(width, height, StoragePixelFormat.BW1);
+                    storage = imageContext.ImageFactory.FromDimensions(width, height, StoragePixelFormat.BW1);
                     bitDepth = BitDepth.BlackAndWhite;
                     BlackAndWhiteToBitmapUnmanaged(storage, buffer);
                     break;
@@ -250,10 +252,10 @@ namespace NAPS2.ImportExport.Pdf
             using (storage)
             {
                 storage.SetResolution(storage.Width / (float)page.Width.Inch, storage.Height / (float)page.Height.Inch);
-                var image = new ScannedImage(storage, bitDepth, true, -1);
+                var image = imageContext.CreateScannedImage(storage, bitDepth, true, -1);
                 if (importParams.ThumbnailSize.HasValue)
                 {
-                    image.SetThumbnail(Transform.Perform(storage, new ThumbnailTransform(importParams.ThumbnailSize.Value)));
+                    image.SetThumbnail(imageContext.PerformTransform(storage, new ThumbnailTransform(importParams.ThumbnailSize.Value)));
                 }
                 if (importParams.DetectPatchCodes)
                 {
@@ -358,14 +360,14 @@ namespace NAPS2.ImportExport.Pdf
             Write(stream, TiffTrailer);
             stream.Seek(0, SeekOrigin.Begin);
 
-            using (var storage = StorageManager.ImageFactory.Decode(stream, ".tiff"))
+            using (var storage = imageContext.ImageFactory.Decode(stream, ".tiff"))
             {
                 storage.SetResolution(storage.Width / (float)page.Width.Inch, storage.Height / (float)page.Height.Inch);
 
-                var image = new ScannedImage(storage, BitDepth.BlackAndWhite, true, -1);
+                var image = imageContext.CreateScannedImage(storage, BitDepth.BlackAndWhite, true, -1);
                 if (importParams.ThumbnailSize.HasValue)
                 {
-                    image.SetThumbnail(Transform.Perform(storage, new ThumbnailTransform(importParams.ThumbnailSize.Value)));
+                    image.SetThumbnail(imageContext.PerformTransform(storage, new ThumbnailTransform(importParams.ThumbnailSize.Value)));
                 }
                 if (importParams.DetectPatchCodes)
                 {

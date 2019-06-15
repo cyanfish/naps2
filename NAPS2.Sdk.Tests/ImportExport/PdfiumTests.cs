@@ -20,7 +20,7 @@ namespace NAPS2.Sdk.Tests.ImportExport
             IImage expectedPage1 = new GdiImage(PdfiumTestsData.word_p1);
             IImage expectedPage2 = new GdiImage(PdfiumTestsData.word_p2);
 
-            var images = PdfiumPdfRenderer.Render(path, 300).ToList();
+            var images = new PdfiumPdfRenderer(ImageContext).Render(path, 300).ToList();
 
             Assert.Equal(2, images.Count);
             ImageAsserts.Similar(images[0], expectedPage1, 3);

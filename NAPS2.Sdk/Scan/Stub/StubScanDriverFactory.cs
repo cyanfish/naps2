@@ -1,11 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using NAPS2.Images.Storage;
 
 namespace NAPS2.Scan.Stub
 {
     public class StubScanDriverFactory : IScanDriverFactory
     {
-        public IScanDriver Create(string driverName) => new StubScanDriver(driverName);
+        private readonly ImageContext imageContext;
+
+        public StubScanDriverFactory(ImageContext imageContext)
+        {
+            this.imageContext = imageContext;
+        }
+
+        public IScanDriver Create(string driverName) => new StubScanDriver(imageContext, driverName);
     }
 }

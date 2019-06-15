@@ -10,6 +10,13 @@ namespace NAPS2.Images.Storage
 {
     public class GdiConverters
     {
+        private readonly ImageContext imageContext;
+
+        public GdiConverters(ImageContext imageContext)
+        {
+            this.imageContext = imageContext;
+        }
+
         [StorageConverter]
         public FileStorage ConvertToFile(GdiImage input, StorageConvertParams convertParams)
         {
@@ -23,7 +30,7 @@ namespace NAPS2.Images.Storage
             {
                 var tempPath = ScannedImageHelper.SaveSmallestBitmap(input.Bitmap, convertParams.BitDepth, convertParams.Lossless, convertParams.LossyQuality, out ImageFormat fileFormat);
                 string ext = Equals(fileFormat, ImageFormat.Png) ? ".png" : ".jpg";
-                var path = FileStorageManager.Current.NextFilePath() + ext;
+                var path = imageContext.FileStorageManager.NextFilePath() + ext;
                 File.Move(tempPath, path);
                 return new FileStorage(path);
             }
@@ -36,7 +43,7 @@ namespace NAPS2.Images.Storage
             // Then we can have a PDF->Image converter that returns null if it's not a pdf file.
             if (IsPdfFile(input))
             {
-                return (GdiImage)PdfiumPdfRenderer.Render(input.FullPath, 300).Single();
+                return (GdiImage)new PdfiumPdfRenderer(imageContext).Render(input.FullPath, 300).Single();
             }
             else
             {

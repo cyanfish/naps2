@@ -19,6 +19,7 @@ using NAPS2.Ocr;
 using NAPS2.Operation;
 using NAPS2.Scan;
 using NAPS2.Images;
+using NAPS2.Images.Storage;
 using NAPS2.Util;
 using NAPS2.WinForms;
 
@@ -26,6 +27,7 @@ namespace NAPS2.Automation
 {
     public class AutomatedScanning
     {
+        private readonly ImageContext imageContext;
         private readonly IEmailProviderFactory emailProviderFactory;
         private readonly IScanPerformer scanPerformer;
         private readonly ErrorOutput errorOutput;
@@ -47,9 +49,10 @@ namespace NAPS2.Automation
         private List<string> actualOutputPaths;
         private OcrParams ocrParams;
 
-        public AutomatedScanning(AutomatedScanningOptions options, IScanPerformer scanPerformer, ErrorOutput errorOutput, IEmailProviderFactory emailProviderFactory, IScannedImageImporter scannedImageImporter, IOperationFactory operationFactory, OcrEngineManager ocrEngineManager, IFormFactory formFactory, ConfigScopes configScopes)
+        public AutomatedScanning(AutomatedScanningOptions options, ImageContext imageContext, IScanPerformer scanPerformer, ErrorOutput errorOutput, IEmailProviderFactory emailProviderFactory, IScannedImageImporter scannedImageImporter, IOperationFactory operationFactory, OcrEngineManager ocrEngineManager, IFormFactory formFactory, ConfigScopes configScopes)
         {
             this.options = options;
+            this.imageContext = imageContext;
             this.scanPerformer = scanPerformer;
             this.errorOutput = errorOutput;
             this.emailProviderFactory = emailProviderFactory;
@@ -221,7 +224,7 @@ namespace NAPS2.Automation
 
             foreach (var scan in scanList)
             {
-                var imageList = new ScannedImageList(scan);
+                var imageList = new ScannedImageList(imageContext, scan);
                 var e = new List<int>();
 
                 if (options.AltDeinterleave)

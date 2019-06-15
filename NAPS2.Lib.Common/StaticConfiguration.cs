@@ -6,7 +6,6 @@ using System.Linq;
 using NAPS2.Config;
 using NAPS2.Config.Experimental;
 using NAPS2.Images.Storage;
-using NAPS2.ImportExport.Pdf;
 using NAPS2.Logging;
 using NAPS2.Ocr;
 using NAPS2.Platform;
@@ -43,11 +42,12 @@ namespace NAPS2
 
             OcrEngineManager.Default = new OcrEngineManager(basePath);
 
+            var imageContext = kernel.Get<ImageContext>();
             var recoveryFolderPath = Path.Combine(Paths.Recovery, Path.GetRandomFileName());
             var rsm = new RecoveryStorageManager(recoveryFolderPath);
-            FileStorageManager.Current = rsm;
-            StorageManager.ConfigureBackingStorage<FileStorage>();
-            StorageManager.ImageMetadataFactory = rsm;
+            imageContext.FileStorageManager = rsm;
+            imageContext.ConfigureBackingStorage<FileStorage>();
+            imageContext.ImageMetadataFactory = rsm;
         }
     }
 }

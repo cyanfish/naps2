@@ -14,12 +14,12 @@ namespace NAPS2.Sdk.Samples
     {
         public static async Task Run()
         {
-            StorageManager.ConfigureImageType<GdiImage>();
+            var imageContext = new GdiImageContext();
 
             // To save memory, we can store scanned images on disk after initial processing.
             // This will put files in the system temp folder by default, which can be
             // overriden by changing FileStorageManager.Current.
-            StorageManager.ConfigureBackingStorage<FileStorage>();
+            imageContext.ConfigureBackingStorage<FileStorage>();
             
             IScanDriver driver = new WiaScanDriver();
             ScanDevice device = driver.GetDeviceList().First();
@@ -41,7 +41,7 @@ namespace NAPS2.Sdk.Samples
 
             try
             {
-                BitmapRenderer renderer = new BitmapRenderer();
+                BitmapRenderer renderer = new BitmapRenderer(imageContext);
                 foreach (var scannedImage in scannedImages)
                 {
                     // This seamlessly loads the image data from disk.

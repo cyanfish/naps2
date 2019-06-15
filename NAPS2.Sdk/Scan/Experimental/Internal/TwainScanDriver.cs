@@ -40,6 +40,13 @@ namespace NAPS2.Scan.Experimental.Internal
 #endif
         }
 
+        private readonly ImageContext imageContext;
+
+        public TwainScanDriver(ImageContext imageContext)
+        {
+            this.imageContext = imageContext;
+        }
+
         public List<ScanDevice> GetDeviceList(ScanOptions options)
         {
             var deviceList = InternalGetDeviceList(options);
@@ -130,7 +137,7 @@ namespace NAPS2.Scan.Experimental.Internal
                     Debug.WriteLine("NAPS2.TW - DataTransferred");
                     using (var image = options.TwainOptions.TransferMode == TwainTransferMode.Memory
                                         ? GetBitmapFromMemXFer(eventArgs.MemoryData, eventArgs.ImageInfo)
-                                        : StorageManager.ImageFactory.Decode(eventArgs.GetNativeImageStream(), ".bmp"))
+                                        : imageContext.ImageFactory.Decode(eventArgs.GetNativeImageStream(), ".bmp"))
                     {
                         // TODO: Pipe back patch codes somehow... Or maybe just rely solely on Zxing
                         //if (scanParams.DetectPatchCodes)
@@ -287,13 +294,13 @@ namespace NAPS2.Scan.Experimental.Internal
             }
         }
 
-        private static IImage GetBitmapFromMemXFer(byte[] memoryData, TWImageInfo imageInfo)
+        private IImage GetBitmapFromMemXFer(byte[] memoryData, TWImageInfo imageInfo)
         {
             int bytesPerPixel = memoryData.Length / (imageInfo.ImageWidth * imageInfo.ImageLength);
             var pixelFormat = bytesPerPixel == 0 ? StoragePixelFormat.BW1 : StoragePixelFormat.RGB24;
             int imageWidth = imageInfo.ImageWidth;
             int imageHeight = imageInfo.ImageLength;
-            var bitmap = StorageManager.ImageFactory.FromDimensions(imageWidth, imageHeight, pixelFormat);
+            var bitmap = imageContext.ImageFactory.FromDimensions(imageWidth, imageHeight, pixelFormat);
             var data = bitmap.Lock(LockMode.WriteOnly, out var scan0, out var stride);
             try
             {

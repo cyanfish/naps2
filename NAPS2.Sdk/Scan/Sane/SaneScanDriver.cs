@@ -24,13 +24,15 @@ namespace NAPS2.Scan.Sane
 
         private static readonly Dictionary<string, SaneOptionCollection> SaneOptionCache = new Dictionary<string, SaneOptionCollection>();
 
+        private readonly ImageContext imageContext;
         private readonly SaneWrapper saneWrapper;
         private readonly IFormFactory formFactory;
         private readonly BlankDetector blankDetector;
         private readonly ScannedImageHelper scannedImageHelper;
 
-        public SaneScanDriver(SaneWrapper saneWrapper, IFormFactory formFactory, BlankDetector blankDetector, ScannedImageHelper scannedImageHelper, ErrorOutput errorOutput, AutoSaver autoSaver) : base(errorOutput, autoSaver)
+        public SaneScanDriver(ImageContext imageContext, SaneWrapper saneWrapper, IFormFactory formFactory, BlankDetector blankDetector, ScannedImageHelper scannedImageHelper, ErrorOutput errorOutput, AutoSaver autoSaver) : base(errorOutput, autoSaver)
         {
+            this.imageContext = imageContext;
             this.saneWrapper = saneWrapper;
             this.formFactory = formFactory;
             this.blankDetector = blankDetector;
@@ -253,7 +255,7 @@ namespace NAPS2.Scan.Sane
                     return (null, true);
                 }
                 using (stream)
-                using (var output = StorageManager.ImageFactory.Decode(stream, ".bmp"))
+                using (var output = imageContext.ImageFactory.Decode(stream, ".bmp"))
                 using (var result = scannedImageHelper.PostProcessStep1(output, scanProfile, false))
                 {
                     if (blankDetector.ExcludePage(result, scanProfile))
@@ -263,9 +265,9 @@ namespace NAPS2.Scan.Sane
 
                     // By converting to 1bpp here we avoid the Win32 call in the BitmapHelper conversion
                     // This converter also has the side effect of working even if the scanner doesn't support Lineart
-                    using (var encoded = scanProfile.BitDepth == ScanBitDepth.BlackWhite ? Transform.Perform(result, new BlackWhiteTransform(-scanProfile.Brightness)) : result)
+                    using (var encoded = scanProfile.BitDepth == ScanBitDepth.BlackWhite ? imageContext.PerformTransform(result, new BlackWhiteTransform(-scanProfile.Brightness)) : result)
                     {
-                        var image = new ScannedImage(encoded, scanProfile.BitDepth.ToBitDepth(), scanProfile.MaxQuality, scanProfile.Quality);
+                        var image = imageContext.CreateScannedImage(encoded, scanProfile.BitDepth.ToBitDepth(), scanProfile.MaxQuality, scanProfile.Quality);
                         scannedImageHelper.PostProcessStep2(image, result, scanProfile, scanParams, 1, false);
                         string tempPath = scannedImageHelper.SaveForBackgroundOcr(result, scanParams);
                         scannedImageHelper.RunBackgroundOcr(image, scanParams, tempPath);

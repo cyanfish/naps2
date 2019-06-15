@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using NAPS2.Images;
+using NAPS2.Images.Storage;
 using NAPS2.Util;
 
 namespace NAPS2.Scan.Experimental.Internal
@@ -14,7 +15,7 @@ namespace NAPS2.Scan.Experimental.Internal
         private readonly IRemotePostProcessor remotePostProcessor;
 
         public RemoteScanController()
-          : this(new ScanDriverFactory(), new RemotePostProcessor())
+          : this(new ScanDriverFactory(ImageContext.Default), new RemotePostProcessor())
         {
         }
 

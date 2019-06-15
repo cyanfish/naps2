@@ -22,6 +22,7 @@ namespace NAPS2.Scan.Twain
     {
         private static readonly TWIdentity TwainAppId = TWIdentity.CreateFromAssembly(DataGroups.Image | DataGroups.Control, Assembly.GetEntryAssembly());
 
+        private readonly ImageContext imageContext;
         private readonly BlankDetector blankDetector;
         private readonly ScannedImageHelper scannedImageHelper;
 
@@ -45,12 +46,14 @@ namespace NAPS2.Scan.Twain
 
         public TwainWrapper()
         {
+            imageContext = ImageContext.Default;
             blankDetector = BlankDetector.Default;
             scannedImageHelper = new ScannedImageHelper();
         }
 
-        public TwainWrapper(BlankDetector blankDetector, ScannedImageHelper scannedImageHelper)
+        public TwainWrapper(ImageContext imageContext, BlankDetector blankDetector, ScannedImageHelper scannedImageHelper)
         {
+            this.imageContext = imageContext;
             this.blankDetector = blankDetector;
             this.scannedImageHelper = scannedImageHelper;
         }
@@ -120,7 +123,7 @@ namespace NAPS2.Scan.Twain
             }
             if (twainImpl == TwainImpl.Legacy)
             {
-                Legacy.TwainApi.Scan(scanProfile, scanDevice, new Win32Window(dialogParent), sink);
+                Legacy.TwainApi.Scan(imageContext, scanProfile, scanDevice, new Win32Window(dialogParent), sink);
                 return;
             }
 
@@ -150,7 +153,7 @@ namespace NAPS2.Scan.Twain
                     pageNumber++;
                     using (var output = twainImpl == TwainImpl.MemXfer
                                         ? GetBitmapFromMemXFer(eventArgs.MemoryData, eventArgs.ImageInfo)
-                                        : StorageManager.ImageFactory.Decode(eventArgs.GetNativeImageStream(), ".bmp"))
+                                        : imageContext.ImageFactory.Decode(eventArgs.GetNativeImageStream(), ".bmp"))
                     {
                         using (var result = scannedImageHelper.PostProcessStep1(output, scanProfile))
                         {
@@ -162,7 +165,7 @@ namespace NAPS2.Scan.Twain
                             var bitDepth = output.PixelFormat == StoragePixelFormat.BW1
                                 ? ScanBitDepth.BlackWhite
                                 : ScanBitDepth.C24Bit;
-                            var image = new ScannedImage(result, bitDepth.ToBitDepth(), scanProfile.MaxQuality, scanProfile.Quality);
+                            var image = imageContext.CreateScannedImage(result, bitDepth.ToBitDepth(), scanProfile.MaxQuality, scanProfile.Quality);
                             if (scanParams.DetectPatchCodes)
                             {
                                 foreach (var patchCodeInfo in eventArgs.GetExtImageInfo(ExtendedImageInfo.PatchCode))
@@ -321,13 +324,13 @@ namespace NAPS2.Scan.Twain
             }
         }
 
-        private static IImage GetBitmapFromMemXFer(byte[] memoryData, TWImageInfo imageInfo)
+        private IImage GetBitmapFromMemXFer(byte[] memoryData, TWImageInfo imageInfo)
         {
             int bytesPerPixel = memoryData.Length / (imageInfo.ImageWidth * imageInfo.ImageLength);
             var pixelFormat = bytesPerPixel == 0 ? StoragePixelFormat.BW1 : StoragePixelFormat.RGB24;
             int imageWidth = imageInfo.ImageWidth;
             int imageHeight = imageInfo.ImageLength;
-            var bitmap = StorageManager.ImageFactory.FromDimensions(imageWidth, imageHeight, pixelFormat);
+            var bitmap = imageContext.ImageFactory.FromDimensions(imageWidth, imageHeight, pixelFormat);
             var data = bitmap.Lock(LockMode.WriteOnly, out var scan0, out var stride);
             try
             {

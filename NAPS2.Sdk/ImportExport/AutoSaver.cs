@@ -12,6 +12,7 @@ using NAPS2.Ocr;
 using NAPS2.Operation;
 using NAPS2.Scan;
 using NAPS2.Images;
+using NAPS2.Images.Storage;
 using NAPS2.Util;
 using NAPS2.WinForms;
 
@@ -45,7 +46,7 @@ namespace NAPS2.ImportExport
             notify = null;
             pdfExporter = PdfExporter.Default;
             overwritePrompt = OverwritePrompt.Default;
-            bitmapRenderer = new BitmapRenderer();
+            bitmapRenderer = new BitmapRenderer(ImageContext.Default);
             configProvider = ConfigScopes.Current.Provider;
         }
 

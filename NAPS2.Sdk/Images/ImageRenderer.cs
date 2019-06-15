@@ -9,6 +9,13 @@ namespace NAPS2.Images
 {
     public class ImageRenderer : IScannedImageRenderer<IImage>
     {
+        private readonly ImageContext imageContext;
+
+        public ImageRenderer(ImageContext imageContext)
+        {
+            this.imageContext = imageContext;
+        }
+
         public async Task<IImage> Render(ScannedImage image, int outputSize = 0)
         {
             using (var snapshot = image.Preserve())
@@ -21,13 +28,13 @@ namespace NAPS2.Images
         {
             return await Task.Run(() =>
             {
-                var storage = StorageManager.ConvertToImage(snapshot.Source.BackingStorage, new StorageConvertParams());
+                var storage = imageContext.ConvertToImage(snapshot.Source.BackingStorage, new StorageConvertParams());
                 if (outputSize > 0)
                 {
                     double scaleFactor = Math.Min(outputSize / (double)storage.Height, outputSize / (double)storage.Width);
-                    storage = Transform.Perform(storage, new ScaleTransform(scaleFactor));
+                    storage = imageContext.PerformTransform(storage, new ScaleTransform(scaleFactor));
                 }
-                return Transform.PerformAll(storage, snapshot.Metadata.TransformList);
+                return imageContext.PerformAllTransforms(storage, snapshot.Metadata.TransformList);
             });
         }
     }

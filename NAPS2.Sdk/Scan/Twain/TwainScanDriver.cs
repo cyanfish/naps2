@@ -5,6 +5,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using NAPS2.Platform;
 using NAPS2.Images;
+using NAPS2.Images.Storage;
 using NAPS2.ImportExport;
 using NAPS2.Remoting.Worker;
 using NAPS2.Util;
@@ -14,18 +15,21 @@ namespace NAPS2.Scan.Twain
     public class TwainScanDriver : ScanDriverBase
     {
         public const string DRIVER_NAME = "twain";
-        
+
+        private readonly ImageContext imageContext;
         private readonly ITwainWrapper twainWrapper;
         private readonly ScannedImageHelper scannedImageHelper;
 
         public TwainScanDriver() : base(ErrorOutput.Default, new AutoSaver())
         {
+            imageContext = ImageContext.Default;
             twainWrapper = new TwainWrapper();
             scannedImageHelper = new ScannedImageHelper();
         }
 
-        public TwainScanDriver(ITwainWrapper twainWrapper, ScannedImageHelper scannedImageHelper, ErrorOutput errorOutput, AutoSaver autoSaver) : base(errorOutput, autoSaver)
+        public TwainScanDriver(ImageContext imageContext, ITwainWrapper twainWrapper, ScannedImageHelper scannedImageHelper, ErrorOutput errorOutput, AutoSaver autoSaver) : base(errorOutput, autoSaver)
         {
+            this.imageContext = imageContext;
             this.twainWrapper = twainWrapper;
             this.scannedImageHelper = scannedImageHelper;
         }
@@ -63,7 +67,7 @@ namespace NAPS2.Scan.Twain
                 {
                     using (var worker = WorkerManager.Factory.Create())
                     {
-                        await worker.Service.TwainScan(scanDevice, scanProfile, scanParams, dialogParent, cancelToken, (img, tempPath) =>
+                        await worker.Service.TwainScan(imageContext, scanDevice, scanProfile, scanParams, dialogParent, cancelToken, (img, tempPath) =>
                         {
                             if (!string.IsNullOrEmpty(tempPath)) scannedImageHelper.RunBackgroundOcr(img, scanParams, tempPath);
                             sink.PutImage(img);

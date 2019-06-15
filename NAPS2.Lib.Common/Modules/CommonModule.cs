@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using NAPS2.Config.Experimental;
 using NAPS2.Images;
+using NAPS2.Images.Storage;
 using NAPS2.ImportExport;
 using NAPS2.ImportExport.Email;
 using NAPS2.ImportExport.Email.Mapi;
@@ -81,6 +82,7 @@ namespace NAPS2.Modules
             Bind<BlankDetector>().To<ThresholdBlankDetector>();
             Bind<AutoSaver>().ToSelf();
             Bind<BitmapRenderer>().ToSelf();
+            Bind<ImageContext>().To<GdiImageContext>().InSingletonScope();
 
             StaticConfiguration.Initialize(Kernel);
         }

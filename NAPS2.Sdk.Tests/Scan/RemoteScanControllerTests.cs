@@ -12,7 +12,7 @@ using IScanDriverFactory = NAPS2.Scan.Experimental.Internal.IScanDriverFactory;
 
 namespace NAPS2.Sdk.Tests.Scan
 {
-    public class RemoteScanControllerTests
+    public class RemoteScanControllerTests : ContextualTexts
     {
         [Fact]
         public void GetDeviceList()
@@ -23,7 +23,7 @@ namespace NAPS2.Sdk.Tests.Scan
             scanDriver.Setup(x => x.GetDeviceList(It.IsAny<ScanOptions>())).Returns(new List<ScanDevice> { device, wiaDevice });
             var scanDriverFactory = new Mock<IScanDriverFactory>();
             scanDriverFactory.Setup(x => x.Create(It.IsAny<ScanOptions>())).Returns(scanDriver.Object);
-            var controller = new RemoteScanController(scanDriverFactory.Object, new RemotePostProcessor(new ThresholdBlankDetector()));
+            var controller = new RemoteScanController(scanDriverFactory.Object, new RemotePostProcessor(ImageContext, new ThresholdBlankDetector()));
 
             var deviceList = controller.GetDeviceList(new ScanOptions { Driver = Driver.Wia });
             Assert.Equal(2, deviceList.Count);

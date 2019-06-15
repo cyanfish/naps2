@@ -6,7 +6,7 @@ using NAPS2.Images.Storage;
 
 namespace NAPS2.ImportExport.Pdf
 {
-    public static class PdfiumPdfRenderer
+    public class PdfiumPdfRenderer
     {
         private const int RENDER_FLAGS = PdfiumNativeLibrary.FPDF_PRINTING;
         private const uint COLOR_WHITE = uint.MaxValue;
@@ -21,7 +21,14 @@ namespace NAPS2.ImportExport.Pdf
             NativeLib.FPDF_InitLibrary();
         }
 
-        public static IEnumerable<IImage> Render(string path, float dpi)
+        private readonly ImageContext imageContext;
+
+        public PdfiumPdfRenderer(ImageContext imageContext)
+        {
+            this.imageContext = imageContext;
+        }
+
+        public IEnumerable<IImage> Render(string path, float dpi)
         {
             // Pdfium is not thread-safe
             lock (NativeLib)
@@ -45,7 +52,7 @@ namespace NAPS2.ImportExport.Pdf
                             int widthInPx = (int) Math.Round(widthInInches * dpi);
                             int heightInPx = (int) Math.Round(heightInInches * dpi);
 
-                            var bitmap = StorageManager.ImageFactory.FromDimensions(widthInPx, heightInPx, StoragePixelFormat.RGB24);
+                            var bitmap = imageContext.ImageFactory.FromDimensions(widthInPx, heightInPx, StoragePixelFormat.RGB24);
                             bitmap.SetResolution(dpi, dpi);
                             var bitmapData = bitmap.Lock(LockMode.ReadWrite, out var scan0, out var stride);
                             try

@@ -42,6 +42,7 @@ namespace NAPS2.WinForms
 
         private static readonly MethodInfo ToolStripPanelSetStyle = typeof(ToolStripPanel).GetMethod("SetStyle", BindingFlags.Instance | BindingFlags.NonPublic);
 
+        private readonly ImageContext imageContext;
         private readonly StringWrapper stringWrapper;
         private readonly RecoveryManager recoveryManager;
         private readonly OcrEngineManager ocrEngineManager;
@@ -65,7 +66,7 @@ namespace NAPS2.WinForms
 
         #region State Fields
 
-        private readonly ScannedImageList imageList = new ScannedImageList();
+        private readonly ScannedImageList imageList;
         private readonly AutoResetEvent renderThumbnailsWaitHandle = new AutoResetEvent(false);
         private bool closed = false;
         private LayoutManager layoutManager;
@@ -75,8 +76,9 @@ namespace NAPS2.WinForms
 
         #region Initialization and Culture
 
-        public FDesktop(StringWrapper stringWrapper, RecoveryManager recoveryManager, OcrEngineManager ocrEngineManager, IScanPerformer scanPerformer, IScannedImagePrinter scannedImagePrinter, ChangeTracker changeTracker, StillImage stillImage, IOperationFactory operationFactory, KeyboardShortcutManager ksm, ThumbnailRenderer thumbnailRenderer, WinFormsExportHelper exportHelper, ImageClipboard imageClipboard, ImageRenderer imageRenderer, NotificationManager notify, CultureInitializer cultureInitializer, IWorkerServiceFactory workerServiceFactory, OperationProgress operationProgress, UpdateChecker updateChecker)
+        public FDesktop(ImageContext imageContext, StringWrapper stringWrapper, RecoveryManager recoveryManager, OcrEngineManager ocrEngineManager, IScanPerformer scanPerformer, IScannedImagePrinter scannedImagePrinter, ChangeTracker changeTracker, StillImage stillImage, IOperationFactory operationFactory, KeyboardShortcutManager ksm, ThumbnailRenderer thumbnailRenderer, WinFormsExportHelper exportHelper, ImageClipboard imageClipboard, ImageRenderer imageRenderer, NotificationManager notify, CultureInitializer cultureInitializer, IWorkerServiceFactory workerServiceFactory, OperationProgress operationProgress, UpdateChecker updateChecker)
         {
+            this.imageContext = imageContext;
             this.stringWrapper = stringWrapper;
             this.recoveryManager = recoveryManager;
             this.ocrEngineManager = ocrEngineManager;
@@ -95,6 +97,7 @@ namespace NAPS2.WinForms
             this.workerServiceFactory = workerServiceFactory;
             this.operationProgress = operationProgress;
             this.updateChecker = updateChecker;
+            imageList = new ScannedImageList(imageContext);
             InitializeComponent();
 
             notify.ParentForm = this;
@@ -403,12 +406,12 @@ namespace NAPS2.WinForms
                 else
                 {
                     // TODO: Make nicer.
-                    ((RecoveryStorageManager)FileStorageManager.Current).DisableRecoveryCleanup = true;
+                    ((RecoveryStorageManager)imageContext.FileStorageManager).DisableRecoveryCleanup = true;
                 }
             }
             else if (changeTracker.HasUnsavedChanges)
             {
-                if (e.CloseReason == CloseReason.UserClosing && !((RecoveryStorageManager)FileStorageManager.Current).DisableRecoveryCleanup)
+                if (e.CloseReason == CloseReason.UserClosing && !((RecoveryStorageManager)imageContext.FileStorageManager).DisableRecoveryCleanup)
                 {
                     var result = MessageBox.Show(MiscResources.ExitWithUnsavedChanges, MiscResources.UnsavedChanges,
                         MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2);
@@ -423,7 +426,7 @@ namespace NAPS2.WinForms
                 }
                 else
                 {
-                    ((RecoveryStorageManager)FileStorageManager.Current).DisableRecoveryCleanup = true;
+                    ((RecoveryStorageManager)imageContext.FileStorageManager).DisableRecoveryCleanup = true;
                 }
             }
 
@@ -1722,7 +1725,7 @@ namespace NAPS2.WinForms
                         using (var snapshot = next.Preserve())
                         {
                             var thumb = worker != null
-                                ? StorageManager.ImageFactory.Decode(new MemoryStream(worker.Service.RenderThumbnail(snapshot, thumbnailList1.ThumbnailSize.Height)), ".jpg")
+                                ? imageContext.ImageFactory.Decode(new MemoryStream(worker.Service.RenderThumbnail(imageContext, snapshot, thumbnailList1.ThumbnailSize.Height)), ".jpg")
                                 : thumbnailRenderer.Render(snapshot, thumbnailList1.ThumbnailSize.Height).Result;
 
                             if (!ThumbnailStillNeedsRendering(next))

@@ -5,6 +5,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Grpc.Core;
 using NAPS2.Images;
+using NAPS2.Images.Storage;
 using NAPS2.ImportExport.Email;
 using NAPS2.ImportExport.Email.Mapi;
 using NAPS2.Scan;
@@ -51,7 +52,7 @@ namespace NAPS2.Remoting.Worker
             return resp.DeviceListXml.FromXml<List<ScanDevice>>();
         }
 
-        public async Task TwainScan(ScanDevice scanDevice, ScanProfile scanProfile, ScanParams scanParams, IntPtr hwnd, CancellationToken cancelToken, Action<ScannedImage, string> imageCallback)
+        public async Task TwainScan(ImageContext imageContext, ScanDevice scanDevice, ScanProfile scanProfile, ScanParams scanParams, IntPtr hwnd, CancellationToken cancelToken, Action<ScannedImage, string> imageCallback)
         {
             var req = new TwainScanRequest
             {
@@ -65,7 +66,7 @@ namespace NAPS2.Remoting.Worker
             {
                 var resp = streamingCall.ResponseStream.Current;
                 RemotingHelper.HandleErrors(resp.Error);
-                var scannedImage = SerializedImageHelper.Deserialize(resp.Image, new SerializedImageHelper.DeserializeOptions());
+                var scannedImage = SerializedImageHelper.Deserialize(imageContext, resp.Image, new SerializedImageHelper.DeserializeOptions());
                 imageCallback?.Invoke(scannedImage, resp.Image.RenderedFilePath);
             }
         }
@@ -78,7 +79,7 @@ namespace NAPS2.Remoting.Worker
             return resp.DeviceListXml.FromXml<List<ScanDevice>>();
         }
 
-        public async Task Scan(ScanOptions options, CancellationToken cancelToken, IScanEvents scanEvents, Action<ScannedImage, string> imageCallback)
+        public async Task Scan(ImageContext imageContext, ScanOptions options, CancellationToken cancelToken, IScanEvents scanEvents, Action<ScannedImage, string> imageCallback)
         {
             var req = new ScanRequest
             {
@@ -99,7 +100,7 @@ namespace NAPS2.Remoting.Worker
                 }
                 if (resp.Image != null)
                 {
-                    var scannedImage = SerializedImageHelper.Deserialize(resp.Image, new SerializedImageHelper.DeserializeOptions());
+                    var scannedImage = SerializedImageHelper.Deserialize(imageContext, resp.Image, new SerializedImageHelper.DeserializeOptions());
                     imageCallback?.Invoke(scannedImage, resp.Image.RenderedFilePath);
                 }
             }
@@ -113,11 +114,11 @@ namespace NAPS2.Remoting.Worker
             return resp.ReturnCodeXml.FromXml<MapiSendMailReturnCode>();
         }
 
-        public byte[] RenderThumbnail(ScannedImage.Snapshot snapshot, int size)
+        public byte[] RenderThumbnail(ImageContext imageContext, ScannedImage.Snapshot snapshot, int size)
         {
             var req = new RenderThumbnailRequest
             {
-                Image = SerializedImageHelper.Serialize(snapshot, new SerializedImageHelper.SerializeOptions
+                Image = SerializedImageHelper.Serialize(imageContext, snapshot, new SerializedImageHelper.SerializeOptions
                 {
                     RequireFileStorage = true
                 }),

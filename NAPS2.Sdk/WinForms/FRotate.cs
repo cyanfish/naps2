@@ -6,6 +6,7 @@ using System.Globalization;
 using System.Linq;
 using System.Windows.Forms;
 using NAPS2.Images;
+using NAPS2.Images.Storage;
 using NAPS2.Images.Transforms;
 using NAPS2.Util;
 
@@ -19,8 +20,8 @@ namespace NAPS2.WinForms
         private bool guideExists;
         private Point guideStart, guideEnd;
 
-        public FRotate(ChangeTracker changeTracker, BitmapRenderer bitmapRenderer)
-            : base(changeTracker, bitmapRenderer)
+        public FRotate(ImageContext imageContext, ChangeTracker changeTracker, BitmapRenderer bitmapRenderer)
+            : base(imageContext, changeTracker, bitmapRenderer)
         {
             InitializeComponent();
             txtAngle.Text += '\u00B0';

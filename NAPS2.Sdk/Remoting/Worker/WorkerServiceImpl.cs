@@ -20,14 +20,16 @@ namespace NAPS2.Remoting.Worker
 {
     public class WorkerServiceImpl : WorkerService.WorkerServiceBase
     {
+        private readonly ImageContext imageContext;
         private readonly ITwainWrapper twainWrapper;
         private readonly ThumbnailRenderer thumbnailRenderer;
         private readonly IMapiWrapper mapiWrapper;
 
         private CancellationTokenSource twainScanCts = new CancellationTokenSource();
 
-        public WorkerServiceImpl(ITwainWrapper twainWrapper, ThumbnailRenderer thumbnailRenderer, IMapiWrapper mapiWrapper)
+        public WorkerServiceImpl(ImageContext imageContext, ITwainWrapper twainWrapper, ThumbnailRenderer thumbnailRenderer, IMapiWrapper mapiWrapper)
         {
+            this.imageContext = imageContext;
             this.twainWrapper = twainWrapper;
             this.thumbnailRenderer = thumbnailRenderer;
             this.mapiWrapper = mapiWrapper;
@@ -39,7 +41,7 @@ namespace NAPS2.Remoting.Worker
                 {
                     if (!string.IsNullOrEmpty(request.RecoveryFolderPath))
                     {
-                        FileStorageManager.Current = new RecoveryStorageManager(request.RecoveryFolderPath, true);
+                        imageContext.FileStorageManager = new RecoveryStorageManager(request.RecoveryFolderPath, true);
                     }
                     return new InitResponse();
                 },
@@ -93,7 +95,7 @@ namespace NAPS2.Remoting.Worker
                         request.ScanProfileXml.FromXml<ScanProfile>(),
                         request.ScanParamsXml.FromXml<ScanParams>(),
                         context.CancellationToken,
-                        new WorkerImageSink(responseStream, imagePathDict),
+                        new WorkerImageSink(imageContext, responseStream, imagePathDict),
                         (img, _, path) => imagePathDict.Add(img, path));
                 }, err => responseStream.WriteAsync(new TwainScanResponse { Error = err }));
 
@@ -113,10 +115,10 @@ namespace NAPS2.Remoting.Worker
                     {
                         ShareFileStorage = true
                     };
-                    using (var image = SerializedImageHelper.Deserialize(request.Image, deserializeOptions))
+                    using (var image = SerializedImageHelper.Deserialize(imageContext, request.Image, deserializeOptions))
                     {
                         var thumbnail = await thumbnailRenderer.Render(image, request.Size);
-                        var stream = StorageManager.Convert<MemoryStreamStorage>(thumbnail, new StorageConvertParams { Lossless = true }).Stream;
+                        var stream = imageContext.Convert<MemoryStreamStorage>(thumbnail, new StorageConvertParams { Lossless = true }).Stream;
                         return new RenderThumbnailResponse
                         {
                             Thumbnail = ByteString.FromStream(stream)
@@ -127,11 +129,13 @@ namespace NAPS2.Remoting.Worker
 
         private class WorkerImageSink : ScannedImageSink
         {
+            private readonly ImageContext imageContext;
             private readonly IServerStreamWriter<TwainScanResponse> callback;
             private readonly Dictionary<ScannedImage, string> imagePathDict;
 
-            public WorkerImageSink(IServerStreamWriter<TwainScanResponse> callback, Dictionary<ScannedImage, string> imagePathDict)
+            public WorkerImageSink(ImageContext imageContext, IServerStreamWriter<TwainScanResponse> callback, Dictionary<ScannedImage, string> imagePathDict)
             {
+                this.imageContext = imageContext;
                 this.callback = callback;
                 this.imagePathDict = imagePathDict;
             }
@@ -141,7 +145,7 @@ namespace NAPS2.Remoting.Worker
                 // TODO: Ideally this shouldn't be inheriting ScannedImageSink, some other cleaner mechanism
                 callback.WriteAsync(new TwainScanResponse
                 {
-                    Image = SerializedImageHelper.Serialize(image, new SerializedImageHelper.SerializeOptions
+                    Image = SerializedImageHelper.Serialize(imageContext, image, new SerializedImageHelper.SerializeOptions
                     {
                         TransferOwnership = true,
                         IncludeThumbnail = true,

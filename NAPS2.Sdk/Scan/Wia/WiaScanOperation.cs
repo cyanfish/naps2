@@ -17,21 +17,23 @@ namespace NAPS2.Scan.Wia
 {
     public class WiaScanOperation : OperationBase
     {
+        private readonly ImageContext imageContext;
         private readonly ScannedImageHelper scannedImageHelper;
         private readonly IWorkerServiceFactory workerServiceFactory;
 
         private readonly SmoothProgress smoothProgress = new SmoothProgress();
 
-        public WiaScanOperation() : this(new ScannedImageHelper())
+        public WiaScanOperation() : this(ImageContext.Default, new ScannedImageHelper())
         {
         }
 
-        public WiaScanOperation(ScannedImageHelper scannedImageHelper) : this(scannedImageHelper, WorkerManager.Factory)
+        public WiaScanOperation(ImageContext imageContext, ScannedImageHelper scannedImageHelper) : this(imageContext, scannedImageHelper, WorkerManager.Factory)
         {
         }
 
-        public WiaScanOperation(ScannedImageHelper scannedImageHelper, IWorkerServiceFactory workerServiceFactory)
+        public WiaScanOperation(ImageContext imageContext, ScannedImageHelper scannedImageHelper, IWorkerServiceFactory workerServiceFactory)
         {
+            this.imageContext = imageContext;
             this.scannedImageHelper = scannedImageHelper;
             this.workerServiceFactory = workerServiceFactory;
             AllowCancel = true;
@@ -190,7 +192,7 @@ namespace NAPS2.Scan.Wia
                 {
                     using (var stream = new FileStream(path, FileMode.Open))
                     {
-                        foreach (var storage in StorageManager.ImageFactory.DecodeMultiple(stream, Path.GetExtension(path), out _))
+                        foreach (var storage in imageContext.ImageFactory.DecodeMultiple(stream, Path.GetExtension(path), out _))
                         {
                             using (storage)
                             {
@@ -238,7 +240,7 @@ namespace NAPS2.Scan.Wia
                     try
                     {
                         using (args.Stream)
-                        using (var storage = StorageManager.ImageFactory.Decode(args.Stream, ".bmp"))
+                        using (var storage = imageContext.ImageFactory.Decode(args.Stream, ".bmp"))
                         {
                             ProduceImage(sink, storage, ref pageNumber);
                         }

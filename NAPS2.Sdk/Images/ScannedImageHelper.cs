@@ -104,12 +104,14 @@ namespace NAPS2.Images
             return tempFilePath;
         }
 
+        private readonly ImageContext imageContext;
         private readonly OperationProgress operationProgress;
         private readonly OcrRequestQueue ocrRequestQueue;
         private readonly BlankDetector blankDetector;
 
         public ScannedImageHelper()
         {
+            imageContext = ImageContext.Default;
             operationProgress = OperationProgress.Default;
             ocrRequestQueue = OcrRequestQueue.Default;
             blankDetector = BlankDetector.Default;
@@ -129,7 +131,7 @@ namespace NAPS2.Images
             {
                 scaleFactor = 1.0 / profile.AfterScanScale.ToIntScaleFactor();
             }
-            var result = Transform.Perform(output, new ScaleTransform(scaleFactor));
+            var result = imageContext.PerformTransform(output, new ScaleTransform(scaleFactor));
 
             if ((!profile.UseNativeUI || !supportsNativeUI) && (profile.ForcePageSize || profile.ForcePageSizeCrop))
             {
@@ -145,7 +147,7 @@ namespace NAPS2.Images
                 {
                     if (profile.ForcePageSizeCrop)
                     {
-                        result = Transform.Perform(result, new CropTransform(
+                        result = imageContext.PerformTransform(result, new CropTransform(
                             0,
                             (int)((width - (float)pageDimensions.HeightInInches()) * output.HorizontalResolution),
                             0,
@@ -162,7 +164,7 @@ namespace NAPS2.Images
                 {
                     if (profile.ForcePageSizeCrop)
                     {
-                        result = Transform.Perform(result, new CropTransform
+                        result = imageContext.PerformTransform(result, new CropTransform
                         (
                             0,
                             (int)((width - (float)pageDimensions.WidthInInches()) * output.HorizontalResolution),
@@ -184,7 +186,7 @@ namespace NAPS2.Images
         {
             if (scanParams.ThumbnailSize.HasValue)
             {
-                scannedImage.SetThumbnail(Transform.Perform(image, new ThumbnailTransform(scanParams.ThumbnailSize.Value)));
+                scannedImage.SetThumbnail(imageContext.PerformTransform(image, new ThumbnailTransform(scanParams.ThumbnailSize.Value)));
             }
             if (scanParams.SkipPostProcessing)
             {
@@ -233,7 +235,7 @@ namespace NAPS2.Images
         {
             if (ShouldDoBackgroundOcr(scanParams))
             {
-                var fileStorage = StorageManager.Convert<FileStorage>(bitmap, new StorageConvertParams { Temporary = true });
+                var fileStorage = imageContext.Convert<FileStorage>(bitmap, new StorageConvertParams { Temporary = true });
                 // TODO: Maybe return the storage rather than the path
                 return fileStorage.FullPath;
             }
@@ -266,8 +268,8 @@ namespace NAPS2.Images
                 var thumbnail = scannedImage.GetThumbnail();
                 if (thumbnail != null)
                 {
-                    image = Transform.Perform(image, transform);
-                    scannedImage.SetThumbnail(Transform.Perform(image, new ThumbnailTransform(scanParams.ThumbnailSize.Value)));
+                    image = imageContext.PerformTransform(image, transform);
+                    scannedImage.SetThumbnail(imageContext.PerformTransform(image, new ThumbnailTransform(scanParams.ThumbnailSize.Value)));
                 }
             }
         }
@@ -282,7 +284,7 @@ namespace NAPS2.Images
                 }
 
                 BitDepth bitDepth = scanProfile.UseNativeUI ? BitDepth.Color : scanProfile.BitDepth.ToBitDepth();
-                var image = new ScannedImage(result, bitDepth, scanProfile.MaxQuality, scanProfile.Quality);
+                var image = imageContext.CreateScannedImage(result, bitDepth, scanProfile.MaxQuality, scanProfile.Quality);
                 PostProcessStep2(image, result, scanProfile, scanParams, pageNumber);
                 string tempPath = SaveForBackgroundOcr(result, scanParams);
                 RunBackgroundOcr(image, scanParams, tempPath);

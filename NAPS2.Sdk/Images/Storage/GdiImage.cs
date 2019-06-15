@@ -3,19 +3,11 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Linq;
-using NAPS2.Images.Transforms;
 
 namespace NAPS2.Images.Storage
 {
     public class GdiImage : IImage
     {
-        static GdiImage()
-        {
-            StorageManager.RegisterConverters(new GdiConverters());
-            StorageManager.RegisterImageFactory<GdiImage>(new GdiImageFactory());
-            Transform.RegisterTransformers<GdiImage>(new GdiTransformers());
-        }
-
         public GdiImage(Bitmap bitmap)
         {
             Bitmap = bitmap ?? throw new ArgumentNullException(nameof(bitmap));

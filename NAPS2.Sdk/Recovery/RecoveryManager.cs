@@ -18,12 +18,14 @@ namespace NAPS2.Recovery
 {
     public class RecoveryManager
     {
+        private readonly ImageContext imageContext;
         private readonly IFormFactory formFactory;
         private readonly ImageRenderer imageRenderer;
         private readonly OperationProgress operationProgress;
 
-        public RecoveryManager(IFormFactory formFactory, ImageRenderer imageRenderer, OperationProgress operationProgress)
+        public RecoveryManager(ImageContext imageContext, IFormFactory formFactory, ImageRenderer imageRenderer, OperationProgress operationProgress)
         {
+            this.imageContext = imageContext;
             this.formFactory = formFactory;
             this.imageRenderer = imageRenderer;
             this.operationProgress = operationProgress;
@@ -31,7 +33,7 @@ namespace NAPS2.Recovery
 
         public void RecoverScannedImages(Action<ScannedImage> imageCallback, RecoveryParams recoveryParams)
         {
-            var op = new RecoveryOperation(formFactory, imageRenderer);
+            var op = new RecoveryOperation(imageContext, formFactory, imageRenderer);
             if (op.Start(imageCallback, recoveryParams))
             {
                 operationProgress.ShowProgress(op);
@@ -40,6 +42,7 @@ namespace NAPS2.Recovery
 
         private class RecoveryOperation : OperationBase
         {
+            private readonly ImageContext imageContext;
             private readonly IFormFactory formFactory;
             private readonly ImageRenderer imageRenderer;
 
@@ -49,8 +52,9 @@ namespace NAPS2.Recovery
             private int imageCount;
             private DateTime scannedDateTime;
 
-            public RecoveryOperation(IFormFactory formFactory, ImageRenderer imageRenderer)
+            public RecoveryOperation(ImageContext imageContext, IFormFactory formFactory, ImageRenderer imageRenderer)
             {
+                this.imageContext = imageContext;
                 this.formFactory = formFactory;
                 this.imageRenderer = imageRenderer;
 
@@ -139,15 +143,15 @@ namespace NAPS2.Recovery
                     ScannedImage scannedImage;
                     if (".pdf".Equals(Path.GetExtension(imagePath), StringComparison.InvariantCultureIgnoreCase))
                     {
-                        string newPath = FileStorageManager.Current.NextFilePath() + ".pdf";
+                        string newPath = imageContext.FileStorageManager.NextFilePath() + ".pdf";
                         File.Copy(imagePath, newPath);
-                        scannedImage = new ScannedImage(new FileStorage(newPath));
+                        scannedImage = imageContext.CreateScannedImage(new FileStorage(newPath));
                     }
                     else
                     {
-                        using (var bitmap = StorageManager.ImageFactory.Decode(imagePath))
+                        using (var bitmap = imageContext.ImageFactory.Decode(imagePath))
                         {
-                            scannedImage = new ScannedImage(bitmap, indexImage.BitDepth.ToBitDepth(), indexImage.HighQuality, -1);
+                            scannedImage = imageContext.CreateScannedImage(bitmap, indexImage.BitDepth.ToBitDepth(), indexImage.HighQuality, -1);
                         }
                     }
                     foreach (var transform in indexImage.TransformList)
@@ -157,7 +161,7 @@ namespace NAPS2.Recovery
 
                     if (recoveryParams.ThumbnailSize.HasValue)
                     {
-                        scannedImage.SetThumbnail(Transform.Perform(await imageRenderer.Render(scannedImage), new ThumbnailTransform(recoveryParams.ThumbnailSize.Value)));
+                        scannedImage.SetThumbnail(imageContext.PerformTransform(await imageRenderer.Render(scannedImage), new ThumbnailTransform(recoveryParams.ThumbnailSize.Value)));
                     }
 
                     imageCallback(scannedImage);

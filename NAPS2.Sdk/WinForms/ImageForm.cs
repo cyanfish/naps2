@@ -13,6 +13,7 @@ namespace NAPS2.WinForms
 {
     partial class ImageForm : FormBase
     {
+        private readonly ImageContext imageContext;
         private readonly ChangeTracker changeTracker;
         private readonly BitmapRenderer bitmapRenderer;
 
@@ -29,8 +30,9 @@ namespace NAPS2.WinForms
             InitializeComponent();
         }
 
-        protected ImageForm(ChangeTracker changeTracker, BitmapRenderer bitmapRenderer)
+        protected ImageForm(ImageContext imageContext, ChangeTracker changeTracker, BitmapRenderer bitmapRenderer)
         {
+            this.imageContext = imageContext;
             this.changeTracker = changeTracker;
             this.bitmapRenderer = bitmapRenderer;
             InitializeComponent();
@@ -56,7 +58,7 @@ namespace NAPS2.WinForms
                 if (!transform.IsNull)
                 {
                     // TODO: Maybe the working images etc. should be storage
-                    result = ((GdiImage)Transform.Perform(new GdiImage(result), transform)).Bitmap;
+                    result = ((GdiImage)imageContext.PerformTransform(new GdiImage(result), transform)).Bitmap;
                 }
             }
             return result;

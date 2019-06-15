@@ -15,8 +15,11 @@ namespace NAPS2.Scan.Stub
     {
         private static int _number = 1;
 
-        public StubScanDriver(string driverName)
+        private readonly ImageContext imageContext;
+
+        public StubScanDriver(ImageContext imageContext, string driverName)
         {
+            this.imageContext = imageContext;
             DriverName = driverName;
         }
 
@@ -76,7 +79,7 @@ namespace NAPS2.Scan.Stub
                 g.FillRectangle(Brushes.LightGray, 0, 0, bitmap.Width, bitmap.Height);
                 g.DrawString((_number++).ToString("G"), new Font("Times New Roman", 80), Brushes.Black, 0, 350);
             }
-            var image = new ScannedImage(new GdiImage(bitmap), BitDepth.Color, ScanProfile.MaxQuality, ScanProfile.Quality);
+            var image = imageContext.CreateScannedImage(new GdiImage(bitmap), BitDepth.Color, ScanProfile.MaxQuality, ScanProfile.Quality);
             return image;
         }
 

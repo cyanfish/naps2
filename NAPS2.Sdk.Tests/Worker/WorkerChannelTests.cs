@@ -25,7 +25,7 @@ namespace NAPS2.Sdk.Tests.Worker
         {
             Server server = new Server
             {
-                Services = { WorkerService.BindService(new WorkerServiceImpl(twainWrapper, thumbnailRenderer, mapiWrapper)) },
+                Services = { WorkerService.BindService(new WorkerServiceImpl(ImageContext, twainWrapper, thumbnailRenderer, mapiWrapper)) },
                 Ports = { new ServerPort("localhost", 0, serverCreds ?? ServerCredentials.Insecure) }
             };
             server.Start();
@@ -55,8 +55,8 @@ namespace NAPS2.Sdk.Tests.Worker
             using (var channel = Start())
             {
                 channel.Client.Init(@"C:\Somewhere");
-                Assert.IsType<RecoveryStorageManager>(FileStorageManager.Current);
-                Assert.StartsWith(@"C:\Somewhere", ((RecoveryStorageManager)FileStorageManager.Current).RecoveryFolderPath);
+                Assert.IsType<RecoveryStorageManager>(ImageContext.FileStorageManager);
+                Assert.StartsWith(@"C:\Somewhere", ((RecoveryStorageManager)ImageContext.FileStorageManager).RecoveryFolderPath);
             }
         }
 
@@ -90,7 +90,7 @@ namespace NAPS2.Sdk.Tests.Worker
         [Fact]
         public async Task TwainScanWithMemoryStorage()
         {
-            StorageManager.ConfigureBackingStorage<GdiImage>();
+            ImageContext.ConfigureBackingStorage<GdiImage>();
             await TwainScanInternalTest();
         }
 
@@ -122,7 +122,7 @@ namespace NAPS2.Sdk.Tests.Worker
             using (var channel = Start(twainWrapper))
             {
                 var receivedImages = new List<ScannedImage>();
-                await channel.Client.TwainScan(new ScanDevice("test_id", "test_name"), new ScanProfile(), new ScanParams(), IntPtr.Zero,
+                await channel.Client.TwainScan(ImageContext, new ScanDevice("test_id", "test_name"), new ScanProfile(), new ScanParams(), IntPtr.Zero,
                     CancellationToken.None,
                     (img, path) => { receivedImages.Add(img); });
 
@@ -140,6 +140,7 @@ namespace NAPS2.Sdk.Tests.Worker
             using (var channel = Start(twainWrapper))
             {
                 var ex = await Assert.ThrowsAsync<DeviceException>(async () => await channel.Client.TwainScan(
+                    ImageContext,
                     new ScanDevice("test_id", "test_name"),
                     new ScanProfile(),
                     new ScanParams(),
@@ -153,7 +154,7 @@ namespace NAPS2.Sdk.Tests.Worker
 
         private ScannedImage CreateScannedImage()
         {
-            return new ScannedImage(new GdiImage(new Bitmap(100, 100)));
+            return ImageContext.CreateScannedImage(new GdiImage(new Bitmap(100, 100)));
         }
 
         private class TwainWrapperMockScanner : ITwainWrapper

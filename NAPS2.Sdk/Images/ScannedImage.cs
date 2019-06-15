@@ -4,7 +4,6 @@ using System.Linq;
 using NAPS2.Images.Storage;
 using NAPS2.Images.Transforms;
 using NAPS2.Scan;
-using NAPS2.Scan.Experimental;
 
 namespace NAPS2.Images
 {
@@ -16,40 +15,10 @@ namespace NAPS2.Images
         private bool disposed;
         private int snapshotCount;
 
-        public ScannedImage(IStorage storage) : this(storage, new StorageConvertParams())
+        public ScannedImage(IStorage backingStorage, IImageMetadata metadata)
         {
-        }
-
-        public ScannedImage(IStorage storage, StorageConvertParams convertParams)
-        {
-            BackingStorage = StorageManager.ConvertToBacking(storage, convertParams);
-            Metadata = StorageManager.ImageMetadataFactory.CreateMetadata(BackingStorage);
-            Metadata.Commit();
-        }
-
-        public ScannedImage(IStorage storage, IImageMetadata metadata, StorageConvertParams convertParams)
-        {
-            BackingStorage = StorageManager.ConvertToBacking(storage, convertParams);
+            BackingStorage = backingStorage;
             Metadata = metadata;
-        }
-
-        public ScannedImage(IStorage storage, string serializedMetadata, StorageConvertParams convertParams)
-        {
-            BackingStorage = StorageManager.ConvertToBacking(storage, convertParams);
-            Metadata = StorageManager.ImageMetadataFactory.CreateMetadata(BackingStorage);
-            Metadata.Deserialize(serializedMetadata);
-            Metadata.Commit();
-        }
-
-        public ScannedImage(IStorage storage, BitDepth bitDepth, bool highQuality, int quality)
-        {
-            var convertParams = new StorageConvertParams { Lossless = highQuality, LossyQuality = quality };
-            BackingStorage = StorageManager.ConvertToBacking(storage, convertParams);
-            Metadata = StorageManager.ImageMetadataFactory.CreateMetadata(BackingStorage);
-            // TODO: Is this stuff really needed in metadata?
-            Metadata.BitDepth = bitDepth;
-            Metadata.Lossless = highQuality;
-            Metadata.Commit();
         }
 
         public IStorage BackingStorage { get; }

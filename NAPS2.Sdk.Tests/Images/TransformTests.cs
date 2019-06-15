@@ -28,7 +28,7 @@ namespace NAPS2.Sdk.Tests.Images
             IImage actual = new GdiImage(TransformTestsData.color_image);
             IImage expected = new GdiImage(TransformTestsData.color_image);
 
-            actual = Transform.Perform(actual, new BrightnessTransform());
+            actual = ImageContext.PerformTransform(actual, new BrightnessTransform());
 
             ImageAsserts.Similar(expected, actual, NULL_RMSE_THRESHOLD);
         }
@@ -39,7 +39,7 @@ namespace NAPS2.Sdk.Tests.Images
             IImage actual = new GdiImage(TransformTestsData.color_image);
             IImage expected = new GdiImage(TransformTestsData.color_image_b_p300);
 
-            actual = Transform.Perform(actual, new BrightnessTransform(300));
+            actual = ImageContext.PerformTransform(actual, new BrightnessTransform(300));
 
             ImageAsserts.Similar(expected, actual, GENERAL_RMSE_THRESHOLD);
         }
@@ -50,7 +50,7 @@ namespace NAPS2.Sdk.Tests.Images
             IImage actual = new GdiImage(TransformTestsData.color_image);
             IImage expected = new GdiImage(TransformTestsData.color_image_b_n300);
 
-            actual = Transform.Perform(actual, new BrightnessTransform(-300));
+            actual = ImageContext.PerformTransform(actual, new BrightnessTransform(-300));
 
             ImageAsserts.Similar(expected, actual, GENERAL_RMSE_THRESHOLD);
         }
@@ -61,7 +61,7 @@ namespace NAPS2.Sdk.Tests.Images
             IImage actual = new GdiImage(TransformTestsData.color_image);
             IImage expected = new GdiImage(TransformTestsData.color_image);
 
-            actual = Transform.Perform(actual, new TrueContrastTransform());
+            actual = ImageContext.PerformTransform(actual, new TrueContrastTransform());
 
             ImageAsserts.Similar(expected, actual, NULL_RMSE_THRESHOLD);
         }
@@ -72,7 +72,7 @@ namespace NAPS2.Sdk.Tests.Images
             IImage actual = new GdiImage(TransformTestsData.color_image);
             IImage expected = new GdiImage(TransformTestsData.color_image_c_p300);
 
-            actual = Transform.Perform(actual, new TrueContrastTransform(300));
+            actual = ImageContext.PerformTransform(actual, new TrueContrastTransform(300));
 
             ImageAsserts.Similar(expected, actual, GENERAL_RMSE_THRESHOLD);
         }
@@ -83,7 +83,7 @@ namespace NAPS2.Sdk.Tests.Images
             IImage actual = new GdiImage(TransformTestsData.color_image);
             IImage expected = new GdiImage(TransformTestsData.color_image_c_n300);
 
-            actual = Transform.Perform(actual, new TrueContrastTransform(-300));
+            actual = ImageContext.PerformTransform(actual, new TrueContrastTransform(-300));
 
             ImageAsserts.Similar(expected, actual, GENERAL_RMSE_THRESHOLD);
         }
@@ -94,7 +94,7 @@ namespace NAPS2.Sdk.Tests.Images
             IImage actual = new GdiImage(TransformTestsData.color_image);
             IImage expected = new GdiImage(TransformTestsData.color_image);
 
-            actual = Transform.Perform(actual, new HueTransform());
+            actual = ImageContext.PerformTransform(actual, new HueTransform());
 
             ImageAsserts.Similar(expected, actual, NULL_RMSE_THRESHOLD);
         }
@@ -105,7 +105,7 @@ namespace NAPS2.Sdk.Tests.Images
             IImage actual = new GdiImage(TransformTestsData.color_image);
             IImage expected = new GdiImage(TransformTestsData.color_image_h_p300);
 
-            actual = Transform.Perform(actual, new HueTransform(300));
+            actual = ImageContext.PerformTransform(actual, new HueTransform(300));
 
             ImageAsserts.Similar(expected, actual, GENERAL_RMSE_THRESHOLD);
         }
@@ -116,7 +116,7 @@ namespace NAPS2.Sdk.Tests.Images
             IImage actual = new GdiImage(TransformTestsData.color_image);
             IImage expected = new GdiImage(TransformTestsData.color_image_h_n300);
 
-            actual = Transform.Perform(actual, new HueTransform(-300));
+            actual = ImageContext.PerformTransform(actual, new HueTransform(-300));
 
             ImageAsserts.Similar(expected, actual, GENERAL_RMSE_THRESHOLD);
         }
@@ -127,7 +127,7 @@ namespace NAPS2.Sdk.Tests.Images
             IImage actual = new GdiImage(TransformTestsData.color_image);
             IImage expected = new GdiImage(TransformTestsData.color_image);
 
-            actual = Transform.Perform(actual, new SaturationTransform());
+            actual = ImageContext.PerformTransform(actual, new SaturationTransform());
 
             ImageAsserts.Similar(expected, actual, NULL_RMSE_THRESHOLD);
         }
@@ -138,7 +138,7 @@ namespace NAPS2.Sdk.Tests.Images
             IImage actual = new GdiImage(TransformTestsData.color_image);
             IImage expected = new GdiImage(TransformTestsData.color_image_s_p300);
 
-            actual = Transform.Perform(actual, new SaturationTransform(300));
+            actual = ImageContext.PerformTransform(actual, new SaturationTransform(300));
 
             ImageAsserts.Similar(expected, actual, GENERAL_RMSE_THRESHOLD);
         }
@@ -149,7 +149,7 @@ namespace NAPS2.Sdk.Tests.Images
             IImage actual = new GdiImage(TransformTestsData.color_image);
             IImage expected = new GdiImage(TransformTestsData.color_image_s_n300);
 
-            actual = Transform.Perform(actual, new SaturationTransform(-300));
+            actual = ImageContext.PerformTransform(actual, new SaturationTransform(-300));
 
             ImageAsserts.Similar(expected, actual, GENERAL_RMSE_THRESHOLD);
         }
@@ -160,7 +160,7 @@ namespace NAPS2.Sdk.Tests.Images
             IImage actual = new GdiImage(TransformTestsData.color_image);
             IImage expected = new GdiImage(TransformTestsData.color_image);
 
-            actual = Transform.Perform(actual, new SharpenTransform());
+            actual = ImageContext.PerformTransform(actual, new SharpenTransform());
 
             ImageAsserts.Similar(expected, actual, NULL_RMSE_THRESHOLD);
         }
@@ -171,7 +171,7 @@ namespace NAPS2.Sdk.Tests.Images
             IImage actual = new GdiImage(TransformTestsData.color_image);
             IImage expected = new GdiImage(TransformTestsData.color_image_sh_p1000);
 
-            actual = Transform.Perform(actual, new SharpenTransform(1000));
+            actual = ImageContext.PerformTransform(actual, new SharpenTransform(1000));
 
             ImageAsserts.Similar(expected, actual, GENERAL_RMSE_THRESHOLD);
         }
@@ -182,7 +182,7 @@ namespace NAPS2.Sdk.Tests.Images
             IImage actual = new GdiImage(TransformTestsData.color_image);
             IImage expected = new GdiImage(TransformTestsData.color_image_sh_n1000);
 
-            actual = Transform.Perform(actual, new SharpenTransform(-1000));
+            actual = ImageContext.PerformTransform(actual, new SharpenTransform(-1000));
 
             ImageAsserts.Similar(expected, actual, GENERAL_RMSE_THRESHOLD);
         }
@@ -193,7 +193,7 @@ namespace NAPS2.Sdk.Tests.Images
             IImage actual = new GdiImage(TransformTestsData.color_image);
             IImage expected = new GdiImage(TransformTestsData.color_image);
 
-            actual = Transform.Perform(actual, new RotationTransform());
+            actual = ImageContext.PerformTransform(actual, new RotationTransform());
 
             ImageAsserts.Similar(expected, actual, NULL_RMSE_THRESHOLD);
         }
@@ -204,7 +204,7 @@ namespace NAPS2.Sdk.Tests.Images
             IImage actual = new GdiImage(TransformTestsData.color_image);
             IImage expected = new GdiImage(TransformTestsData.color_image_r_p90);
 
-            actual = Transform.Perform(actual, new RotationTransform(90));
+            actual = ImageContext.PerformTransform(actual, new RotationTransform(90));
 
             ImageAsserts.Similar(expected, actual, GENERAL_RMSE_THRESHOLD);
         }
@@ -215,7 +215,7 @@ namespace NAPS2.Sdk.Tests.Images
             IImage actual = new GdiImage(TransformTestsData.color_image);
             IImage expected = new GdiImage(TransformTestsData.color_image_r_p46);
 
-            actual = Transform.Perform(actual, new RotationTransform(46));
+            actual = ImageContext.PerformTransform(actual, new RotationTransform(46));
 
             ImageAsserts.Similar(expected, actual, GENERAL_RMSE_THRESHOLD);
         }
@@ -226,7 +226,7 @@ namespace NAPS2.Sdk.Tests.Images
             IImage actual = new GdiImage(TransformTestsData.color_image);
             IImage expected = new GdiImage(TransformTestsData.color_image_r_n45);
 
-            actual = Transform.Perform(actual, new RotationTransform(-45));
+            actual = ImageContext.PerformTransform(actual, new RotationTransform(-45));
 
             ImageAsserts.Similar(expected, actual, GENERAL_RMSE_THRESHOLD);
         }
@@ -238,8 +238,8 @@ namespace NAPS2.Sdk.Tests.Images
             IImage actual2 = new GdiImage(TransformTestsData.color_image);
             IImage expected = new GdiImage(TransformTestsData.color_image_r_180);
 
-            actual = Transform.Perform(actual, new RotationTransform(180));
-            actual2 = Transform.Perform(actual2, new RotationTransform(-180));
+            actual = ImageContext.PerformTransform(actual, new RotationTransform(180));
+            actual2 = ImageContext.PerformTransform(actual2, new RotationTransform(-180));
 
             ImageAsserts.Similar(actual2, actual, 0);
             ImageAsserts.Similar(expected, actual, GENERAL_RMSE_THRESHOLD);
@@ -251,7 +251,7 @@ namespace NAPS2.Sdk.Tests.Images
             IImage actual = new GdiImage(TransformTestsData.color_image);
             IImage expected = new GdiImage(TransformTestsData.color_image);
 
-            actual = Transform.Perform(actual, new CropTransform());
+            actual = ImageContext.PerformTransform(actual, new CropTransform());
 
             ImageAsserts.Similar(expected, actual, NULL_RMSE_THRESHOLD);
         }
@@ -262,7 +262,7 @@ namespace NAPS2.Sdk.Tests.Images
             IImage actual = new GdiImage(TransformTestsData.color_image);
             IImage expected = new GdiImage(TransformTestsData.color_image_c_5_10_15_20);
 
-            actual = Transform.Perform(actual, new CropTransform(10, 20, 15, 5));
+            actual = ImageContext.PerformTransform(actual, new CropTransform(10, 20, 15, 5));
 
             ImageAsserts.Similar(expected, actual, GENERAL_RMSE_THRESHOLD);
         }
@@ -273,7 +273,7 @@ namespace NAPS2.Sdk.Tests.Images
             IImage actual = new GdiImage(TransformTestsData.color_image);
             IImage expected = new GdiImage(TransformTestsData.color_image_c_5_10_15_20);
 
-            actual = Transform.Perform(actual, new CropTransform(10, 20, 15, 5, actual.Width, actual.Height));
+            actual = ImageContext.PerformTransform(actual, new CropTransform(10, 20, 15, 5, actual.Width, actual.Height));
 
             ImageAsserts.Similar(expected, actual, GENERAL_RMSE_THRESHOLD);
         }
@@ -284,7 +284,7 @@ namespace NAPS2.Sdk.Tests.Images
             IImage actual = new GdiImage(TransformTestsData.color_image);
             IImage expected = new GdiImage(TransformTestsData.color_image_c_5_10_15_20);
 
-            actual = Transform.Perform(actual, new CropTransform(20, 40, 30, 10, actual.Width * 2, actual.Height * 2));
+            actual = ImageContext.PerformTransform(actual, new CropTransform(20, 40, 30, 10, actual.Width * 2, actual.Height * 2));
 
             ImageAsserts.Similar(expected, actual, GENERAL_RMSE_THRESHOLD);
         }
@@ -295,7 +295,7 @@ namespace NAPS2.Sdk.Tests.Images
             IImage actual = new GdiImage(TransformTestsData.color_image);
             IImage expected = new GdiImage(TransformTestsData.color_image_bw);
 
-            actual = Transform.Perform(actual, new BlackWhiteTransform());
+            actual = ImageContext.PerformTransform(actual, new BlackWhiteTransform());
             Assert.Equal(StoragePixelFormat.BW1, actual.PixelFormat);
 
             actual = To24Bit(actual);
@@ -308,7 +308,7 @@ namespace NAPS2.Sdk.Tests.Images
             IImage actual = new GdiImage(TransformTestsData.color_image);
             IImage expected = new GdiImage(TransformTestsData.color_image_bw_p300);
 
-            actual = Transform.Perform(actual, new BlackWhiteTransform(300));
+            actual = ImageContext.PerformTransform(actual, new BlackWhiteTransform(300));
             Assert.Equal(StoragePixelFormat.BW1, actual.PixelFormat);
 
             actual = To24Bit(actual);

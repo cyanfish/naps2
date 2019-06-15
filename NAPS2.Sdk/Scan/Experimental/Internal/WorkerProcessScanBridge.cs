@@ -4,8 +4,8 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using NAPS2.Images;
+using NAPS2.Images.Storage;
 using NAPS2.Remoting.Worker;
-using NAPS2.Util;
 
 namespace NAPS2.Scan.Experimental.Internal
 {
@@ -14,15 +14,18 @@ namespace NAPS2.Scan.Experimental.Internal
     /// </summary>
     internal class WorkerScanBridge : IScanBridge
     {
+        // TODO: Might not need this after worker factory changes
+        private readonly ImageContext imageContext;
         private readonly IWorkerServiceFactory workerServiceFactory;
 
         public WorkerScanBridge()
-         : this(WorkerManager.Factory)
+         : this(ImageContext.Default, WorkerManager.Factory)
         {
         }
 
-        public WorkerScanBridge(IWorkerServiceFactory workerServiceFactory)
+        public WorkerScanBridge(ImageContext imageContext, IWorkerServiceFactory workerServiceFactory)
         {
+            this.imageContext = imageContext;
             this.workerServiceFactory = workerServiceFactory;
         }
 
@@ -38,7 +41,7 @@ namespace NAPS2.Scan.Experimental.Internal
         {
             using (var ctx = workerServiceFactory.Create())
             {
-                await ctx.Service.Scan(options, cancelToken, scanEvents, (image, tempPath) =>
+                await ctx.Service.Scan(imageContext, options, cancelToken, scanEvents, (image, tempPath) =>
                 {
                     callback(image, new PostProcessingContext { TempPath = tempPath });
                 });

@@ -162,7 +162,7 @@ namespace NAPS2.Sdk.Tests.Scan
             AutoSaveSettings = autoSaveSettings
         };
 
-        private static AutoSaver CreateAutoSaver(ErrorOutput errorOutput)
+        private AutoSaver CreateAutoSaver(ErrorOutput errorOutput)
         {
             return new AutoSaver(
                 new StubConfigProvider<PdfSettings>(new PdfSettings()),
@@ -173,15 +173,15 @@ namespace NAPS2.Sdk.Tests.Scan
                 new StubDialogHelper(),
                 new StubOperationProgress(),
                 null,
-                new PdfSharpExporter(new MemoryStreamRenderer()),
+                new PdfSharpExporter(new MemoryStreamRenderer(ImageContext)),
                 new StubOverwritePrompt(),
-                new BitmapRenderer(),
+                new BitmapRenderer(ImageContext),
                 new StubConfigProvider<CommonConfig>(InternalDefaults.GetCommonConfig()));
         }
 
         private ScannedImage CreateScannedImage()
         {
-            return new ScannedImage(new GdiImage(new Bitmap(100, 100)));
+            return ImageContext.CreateScannedImage(new GdiImage(new Bitmap(100, 100)));
         }
     }
 }

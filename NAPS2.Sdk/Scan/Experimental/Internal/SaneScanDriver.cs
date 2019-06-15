@@ -26,6 +26,13 @@ namespace NAPS2.Scan.Experimental.Internal
 
         private static readonly Dictionary<string, SaneOptionCollection> SaneOptionCache = new Dictionary<string, SaneOptionCollection>();
 
+        private readonly ImageContext imageContext;
+
+        public SaneScanDriver(ImageContext imageContext)
+        {
+            this.imageContext = imageContext;
+        }
+
         public List<ScanDevice> GetDeviceList(ScanOptions options)
         {
             var deviceList = new List<ScanDevice>();
@@ -341,7 +348,7 @@ namespace NAPS2.Scan.Experimental.Internal
                 return false;
             }
             using (stream)
-            using (var image = StorageManager.ImageFactory.Decode(stream, ".bmp"))
+            using (var image = imageContext.ImageFactory.Decode(stream, ".bmp"))
             {
                 callback(image);
                 return true;

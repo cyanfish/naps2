@@ -9,11 +9,13 @@ namespace NAPS2.Images
 {
     public class MemoryStreamRenderer : IScannedImageRenderer<MemoryStream>
     {
+        private readonly ImageContext imageContext;
         private readonly IScannedImageRenderer<IImage> imageRenderer;
 
-        public MemoryStreamRenderer()
+        public MemoryStreamRenderer(ImageContext imageContext)
         {
-            imageRenderer = new ImageRenderer();
+            this.imageContext = imageContext;
+            imageRenderer = new ImageRenderer(imageContext);
         }
 
         public MemoryStreamRenderer(IScannedImageRenderer<IImage> imageRenderer)
@@ -33,7 +35,7 @@ namespace NAPS2.Images
         {
             using (var transformed = await imageRenderer.Render(snapshot))
             {
-                return StorageManager.Convert<MemoryStreamStorage>(transformed, new StorageConvertParams
+                return imageContext.Convert<MemoryStreamStorage>(transformed, new StorageConvertParams
                 {
                     // TODO: Is this right?
                     Lossless = snapshot.Source.Metadata.Lossless

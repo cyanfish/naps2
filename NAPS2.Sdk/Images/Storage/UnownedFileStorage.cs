@@ -10,11 +10,6 @@ namespace NAPS2.Images.Storage
     /// </summary>
     public class UnownedFileStorage : IStorage
     {
-        static UnownedFileStorage()
-        {
-            StorageManager.RegisterConverters(new OwnershipConverters());
-        }
-
         public UnownedFileStorage(string filePath)
         {
             FilePath = filePath ?? throw new ArgumentNullException(nameof(filePath));

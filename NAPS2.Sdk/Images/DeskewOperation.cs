@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
+using NAPS2.Images.Storage;
 using NAPS2.Images.Transforms;
 using NAPS2.Lang.Resources;
 using NAPS2.Operation;
@@ -11,15 +12,17 @@ namespace NAPS2.Images
 {
     public class DeskewOperation : OperationBase
     {
+        private readonly ImageContext imageContext;
         private readonly ImageRenderer imageRenderer;
         private readonly Deskewer deskewer;
 
-        public DeskewOperation() : this(new ImageRenderer(), new HoughLineDeskewer())
+        public DeskewOperation() : this(ImageContext.Default, new ImageRenderer(ImageContext.Default), new HoughLineDeskewer())
         {
         }
 
-        public DeskewOperation(ImageRenderer imageRenderer, Deskewer deskewer)
+        public DeskewOperation(ImageContext imageContext, ImageRenderer imageRenderer, Deskewer deskewer)
         {
+            this.imageContext = imageContext;
             this.imageRenderer = imageRenderer;
             this.deskewer = deskewer;
 
@@ -58,9 +61,9 @@ namespace NAPS2.Images
                         {
                             return null;
                         }
-                        bitmap = Transform.Perform(bitmap, transform);
+                        bitmap = imageContext.PerformTransform(bitmap, transform);
                         var thumbnail = deskewParams.ThumbnailSize.HasValue
-                            ? Transform.Perform(bitmap, new ThumbnailTransform(deskewParams.ThumbnailSize.Value))
+                            ? imageContext.PerformTransform(bitmap, new ThumbnailTransform(deskewParams.ThumbnailSize.Value))
                             : null;
                         lock (img)
                         {

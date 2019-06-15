@@ -15,10 +15,12 @@ namespace NAPS2.ImportExport
 {
     public class PrintDocumentPrinter : IScannedImagePrinter
     {
+        private readonly ImageContext imageContext;
         private readonly ImageRenderer imageRenderer;
 
-        public PrintDocumentPrinter(ImageRenderer imageRenderer)
+        public PrintDocumentPrinter(ImageContext imageContext, ImageRenderer imageRenderer)
         {
+            this.imageContext = imageContext;
             this.imageRenderer = imageRenderer;
         }
 
@@ -88,7 +90,7 @@ namespace NAPS2.ImportExport
                             if (Math.Sign(image.Width - image.Height) != Math.Sign(pb.Width - pb.Height))
                             {
                                 // Flip portrait/landscape to match output
-                                image = Transform.Perform(image, new RotationTransform(90));
+                                image = imageContext.PerformTransform(image, new RotationTransform(90));
                             }
 
                             // Fit the image into the output rect while maintaining its aspect ratio
@@ -96,7 +98,7 @@ namespace NAPS2.ImportExport
                                 ? new Rectangle(pb.Left, pb.Top, image.Width * pb.Height / image.Height, pb.Height)
                                 : new Rectangle(pb.Left, pb.Top, pb.Width, image.Height * pb.Width / image.Width);
 
-                            e.Graphics.DrawImage(StorageManager.Convert<GdiImage>(image).Bitmap, rect);
+                            e.Graphics.DrawImage(imageContext.Convert<GdiImage>(image).Bitmap, rect);
                         }
                         finally
                         {

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 using NAPS2.Images;
+using NAPS2.Images.Storage;
 using NAPS2.Images.Transforms;
 using NAPS2.Util;
 
@@ -10,8 +11,8 @@ namespace NAPS2.WinForms
 {
     partial class FBlackWhite : ImageForm
     {
-        public FBlackWhite(ChangeTracker changeTracker, BitmapRenderer bitmapRenderer)
-            : base(changeTracker, bitmapRenderer)
+        public FBlackWhite(ImageContext imageContext, ChangeTracker changeTracker, BitmapRenderer bitmapRenderer)
+            : base(imageContext, changeTracker, bitmapRenderer)
         {
             InitializeComponent();
             ActiveControl = txtThreshold;

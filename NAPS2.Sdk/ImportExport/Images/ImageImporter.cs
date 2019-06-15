@@ -15,10 +15,12 @@ namespace NAPS2.ImportExport.Images
 {
     public class ImageImporter : IImageImporter
     {
+        private readonly ImageContext imageContext;
         private readonly ThumbnailRenderer thumbnailRenderer;
 
-        public ImageImporter(ThumbnailRenderer thumbnailRenderer)
+        public ImageImporter(ImageContext imageContext, ThumbnailRenderer thumbnailRenderer)
         {
+            this.imageContext = imageContext;
             this.thumbnailRenderer = thumbnailRenderer;
         }
 
@@ -39,7 +41,7 @@ namespace NAPS2.ImportExport.Images
                     int frameCount;
                     try
                     {
-                        toImport = StorageManager.ImageFactory.DecodeMultiple(filePath, out frameCount);
+                        toImport = imageContext.ImageFactory.DecodeMultiple(filePath, out frameCount);
                     }
                     catch (Exception e)
                     {
@@ -60,10 +62,10 @@ namespace NAPS2.ImportExport.Images
                                 return;
                             }
                             
-                            var image = new ScannedImage(frame, BitDepth.Color, frame.IsOriginalLossless, -1);
+                            var image = imageContext.CreateScannedImage(frame, BitDepth.Color, frame.IsOriginalLossless, -1);
                             if (importParams.ThumbnailSize.HasValue)
                             {
-                                image.SetThumbnail(Transform.Perform(frame, new ThumbnailTransform(importParams.ThumbnailSize.Value)));
+                                image.SetThumbnail(imageContext.PerformTransform(frame, new ThumbnailTransform(importParams.ThumbnailSize.Value)));
                             }
 
                             if (importParams.DetectPatchCodes)

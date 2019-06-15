@@ -54,7 +54,7 @@ namespace NAPS2.Scan.Twain.Legacy
             return result;
         }
 
-        public static void Scan(ScanProfile settings, ScanDevice device, IWin32Window pForm, ScannedImageSink sink)
+        public static void Scan(ImageContext imageContext, ScanProfile settings, ScanDevice device, IWin32Window pForm, ScannedImageSink sink)
         {
             var tw = new Twain();
             if (!tw.Init(pForm.Handle))
@@ -66,7 +66,7 @@ namespace NAPS2.Scan.Twain.Legacy
                 throw new DeviceNotFoundException();
             }
             var form = new FTwainGui();
-            var mf = new TwainMessageFilter(settings, tw, form);
+            var mf = new TwainMessageFilter(imageContext, settings, tw, form);
             form.ShowDialog(pForm);
             foreach (var b in mf.Bitmaps)
             {
@@ -76,6 +76,7 @@ namespace NAPS2.Scan.Twain.Legacy
 
         private class TwainMessageFilter : IMessageFilter
         {
+            private readonly ImageContext imageContext;
             private readonly ScanProfile settings;
             private readonly Twain tw;
             private readonly FTwainGui form;
@@ -83,8 +84,9 @@ namespace NAPS2.Scan.Twain.Legacy
             private bool activated;
             private bool msgfilter;
 
-            public TwainMessageFilter(ScanProfile settings, Twain tw, FTwainGui form)
+            public TwainMessageFilter(ImageContext imageContext, ScanProfile settings, Twain tw, FTwainGui form)
             {
+                this.imageContext = imageContext;
                 this.settings = settings;
                 this.tw = tw;
                 this.form = form;
@@ -130,7 +132,7 @@ namespace NAPS2.Scan.Twain.Legacy
 
                                 using (Bitmap bmp = DibUtils.BitmapFromDib(img, out bitcount))
                                 {
-                                    Bitmaps.Add(new ScannedImage(new GdiImage(bmp), bitcount == 1 ? BitDepth.BlackAndWhite : BitDepth.Color, settings.MaxQuality, settings.Quality));
+                                    Bitmaps.Add(imageContext.CreateScannedImage(new GdiImage(bmp), bitcount == 1 ? BitDepth.BlackAndWhite : BitDepth.Color, settings.MaxQuality, settings.Quality));
                                 }
                             }
                             form.Close();

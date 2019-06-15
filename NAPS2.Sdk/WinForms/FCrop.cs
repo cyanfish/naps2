@@ -5,6 +5,7 @@ using System.Drawing.Imaging;
 using System.Linq;
 using System.Windows.Forms;
 using NAPS2.Images;
+using NAPS2.Images.Storage;
 using NAPS2.Images.Transforms;
 using NAPS2.Util;
 
@@ -20,8 +21,8 @@ namespace NAPS2.WinForms
 
         private int originalWidth, originalHeight;
 
-        public FCrop(ChangeTracker changeTracker, BitmapRenderer bitmapRenderer)
-            : base(changeTracker, bitmapRenderer)
+        public FCrop(ImageContext imageContext, ChangeTracker changeTracker, BitmapRenderer bitmapRenderer)
+            : base(imageContext, changeTracker, bitmapRenderer)
         {
             InitializeComponent();
 

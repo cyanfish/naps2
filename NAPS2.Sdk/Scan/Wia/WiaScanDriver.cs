@@ -7,6 +7,7 @@ using NAPS2.Operation;
 using NAPS2.Platform;
 using NAPS2.Scan.Exceptions;
 using NAPS2.Images;
+using NAPS2.Images.Storage;
 using NAPS2.ImportExport;
 using NAPS2.Scan.Wia.Native;
 using NAPS2.Util;
@@ -16,18 +17,21 @@ namespace NAPS2.Scan.Wia
     public class WiaScanDriver : ScanDriverBase
     {
         public const string DRIVER_NAME = "wia";
-        
+
+        private readonly ImageContext imageContext;
         private readonly OperationProgress operationProgress;
         private readonly ScannedImageHelper scannedImageHelper;
 
         public WiaScanDriver() : base(ErrorOutput.Default, new AutoSaver())
         {
+            imageContext = ImageContext.Default;
             operationProgress = OperationProgress.Default;
             scannedImageHelper = new ScannedImageHelper();
         }
 
-        public WiaScanDriver(OperationProgress operationProgress, ScannedImageHelper scannedImageHelper, ErrorOutput errorOutput, AutoSaver autoSaver) : base(errorOutput, autoSaver)
+        public WiaScanDriver(ImageContext imageContext, OperationProgress operationProgress, ScannedImageHelper scannedImageHelper, ErrorOutput errorOutput, AutoSaver autoSaver) : base(errorOutput, autoSaver)
         {
+            this.imageContext = imageContext;
             this.operationProgress = operationProgress;
             this.scannedImageHelper = scannedImageHelper;
         }
@@ -75,7 +79,7 @@ namespace NAPS2.Scan.Wia
 
         protected override async Task ScanInternal(ScannedImageSink sink, ScanDevice scanDevice, ScanProfile scanProfile, ScanParams scanParams, IntPtr dialogParent, CancellationToken cancelToken)
         {
-            var op = new WiaScanOperation(scannedImageHelper);
+            var op = new WiaScanOperation(imageContext, scannedImageHelper);
             using (cancelToken.Register(op.Cancel))
             {
                 op.Start(scanProfile, scanDevice, scanParams, dialogParent, sink);

@@ -245,7 +245,7 @@
     <Compile Include="Images\Storage\RecoverableImageMetadata.cs" />
     <Compile Include="Images\Storage\RecoveryStorageManager.cs" />
     <Compile Include="Images\Storage\StorageConvertParams.cs" />
-    <Compile Include="Images\Storage\StorageManager.cs" />
+    <Compile Include="Images\Storage\ImageContext.cs" />
     <Compile Include="Images\Storage\StoragePixelFormat.cs" />
     <Compile Include="Images\Storage\StubImageMetadata.cs" />
     <Compile Include="Images\Storage\StubImageMetadataFactory.cs" />

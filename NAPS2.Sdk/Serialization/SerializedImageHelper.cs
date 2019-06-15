@@ -10,19 +10,19 @@ namespace NAPS2.Serialization
 {
     public static class SerializedImageHelper
     {
-        public static SerializedImage Serialize(ScannedImage image, SerializeOptions options) =>
-            Serialize(image, image.Metadata, options);
+        public static SerializedImage Serialize(ImageContext imageContext, ScannedImage image, SerializeOptions options) =>
+            Serialize(imageContext, image, image.Metadata, options);
 
-        public static SerializedImage Serialize(ScannedImage.Snapshot snapshot, SerializeOptions options) =>
-            Serialize(snapshot.Source, snapshot.Metadata, options);
+        public static SerializedImage Serialize(ImageContext imageContext, ScannedImage.Snapshot snapshot, SerializeOptions options) =>
+            Serialize(imageContext, snapshot.Source, snapshot.Metadata, options);
 
-        private static SerializedImage Serialize(ScannedImage image, IImageMetadata metadata, SerializeOptions options)
+        private static SerializedImage Serialize(ImageContext imageContext, ScannedImage image, IImageMetadata metadata, SerializeOptions options)
         {
             MemoryStream thumbStream = null;
             var thumb = image.GetThumbnail();
             if (thumb != null && options.IncludeThumbnail)
             {
-                thumbStream = StorageManager.Convert<MemoryStreamStorage>(thumb, new StorageConvertParams { Lossless = true }).Stream;
+                thumbStream = imageContext.Convert<MemoryStreamStorage>(thumb, new StorageConvertParams { Lossless = true }).Stream;
             }
 
             var fileStorage = image.BackingStorage as FileStorage;
@@ -34,7 +34,7 @@ namespace NAPS2.Serialization
             MemoryStream imageStream = null;
             if (fileStorage == null)
             {
-                imageStream = StorageManager.Convert<MemoryStreamStorage>(image.BackingStorage, new StorageConvertParams()).Stream;
+                imageStream = imageContext.Convert<MemoryStreamStorage>(image.BackingStorage, new StorageConvertParams()).Stream;
             }
 
             var result = new SerializedImage
@@ -55,7 +55,7 @@ namespace NAPS2.Serialization
             return result;
         }
 
-        public static ScannedImage Deserialize(SerializedImage serializedImage, DeserializeOptions options)
+        public static ScannedImage Deserialize(ImageContext imageContext, SerializedImage serializedImage, DeserializeOptions options)
         {
             IStorage storage;
             if (!string.IsNullOrEmpty(serializedImage.FilePath))
@@ -80,13 +80,13 @@ namespace NAPS2.Serialization
                 storage = new MemoryStreamStorage(memoryStream);
             }
             var scannedImage = serializedImage.TransferOwnership
-                ? new ScannedImage(storage, serializedImage.MetadataXml, new StorageConvertParams())
-                : new ScannedImage(storage, CreateStubMetadata(serializedImage.MetadataXml), new StorageConvertParams());
+                ? imageContext.CreateScannedImage(storage, serializedImage.MetadataXml, new StorageConvertParams())
+                : imageContext.CreateScannedImage(storage, CreateStubMetadata(serializedImage.MetadataXml), new StorageConvertParams());
             var thumbnail = serializedImage.Thumbnail.ToByteArray();
             if (thumbnail.Length > 0)
             {
                 var thumbnailStorage = new MemoryStreamStorage(new MemoryStream(thumbnail));
-                scannedImage.SetThumbnail(StorageManager.ConvertToImage(thumbnailStorage, new StorageConvertParams()));
+                scannedImage.SetThumbnail(imageContext.ConvertToImage(thumbnailStorage, new StorageConvertParams()));
             }
             return scannedImage;
         }

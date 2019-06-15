@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using NAPS2.Images.Storage;
 using NAPS2.Images.Transforms;
 using NAPS2.Util;
 
@@ -9,13 +10,17 @@ namespace NAPS2.Images
 {
     public class ScannedImageList
     {
-        public ScannedImageList()
+        private readonly ImageContext imageContext;
+
+        public ScannedImageList(ImageContext imageContext)
         {
+            this.imageContext = imageContext;
             Images = new List<ScannedImage>();
         }
 
-        public ScannedImageList(List<ScannedImage> images)
+        public ScannedImageList(ImageContext imageContext, List<ScannedImage> images)
         {
+            this.imageContext = imageContext;
             Images = images;
         }
 
@@ -283,7 +288,7 @@ namespace NAPS2.Images
                         var thumb = img.GetThumbnail();
                         if (thumb != null)
                         {
-                            img.SetThumbnail(Transform.Perform(thumb, transform));
+                            img.SetThumbnail(imageContext.PerformTransform(thumb, transform));
                         }
                     }
                 }

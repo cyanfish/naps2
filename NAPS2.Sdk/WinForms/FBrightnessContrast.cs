@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 using NAPS2.Images;
+using NAPS2.Images.Storage;
 using NAPS2.Images.Transforms;
 using NAPS2.Util;
 
@@ -10,8 +11,8 @@ namespace NAPS2.WinForms
 {
     partial class FBrightnessContrast : ImageForm
     {
-        public FBrightnessContrast(ChangeTracker changeTracker, BitmapRenderer bitmapRenderer)
-            : base(changeTracker, bitmapRenderer)
+        public FBrightnessContrast(ImageContext imageContext, ChangeTracker changeTracker, BitmapRenderer bitmapRenderer)
+            : base(imageContext, changeTracker, bitmapRenderer)
         {
             InitializeComponent();
             ActiveControl = txtBrightness;

@@ -12,15 +12,17 @@ namespace NAPS2.Scan.Experimental.Internal
 {
     internal class RemotePostProcessor : IRemotePostProcessor
     {
+        private readonly ImageContext imageContext;
         private readonly BlankDetector blankDetector;
 
         public RemotePostProcessor()
-            : this(BlankDetector.Default)
+            : this(ImageContext.Default, BlankDetector.Default)
         {
         }
 
-        public RemotePostProcessor(BlankDetector blankDetector)
+        public RemotePostProcessor(ImageContext imageContext, BlankDetector blankDetector)
         {
+            this.imageContext = imageContext;
             this.blankDetector = blankDetector;
         }
 
@@ -50,19 +52,19 @@ namespace NAPS2.Scan.Experimental.Internal
                 }
 
                 var bitDepth = options.UseNativeUI ? BitDepth.Color : options.BitDepth;
-                var scannedImage = new ScannedImage(image, bitDepth, options.MaxQuality, options.Quality);
+                var scannedImage = imageContext.CreateScannedImage(image, bitDepth, options.MaxQuality, options.Quality);
                 DoRevertibleTransforms(scannedImage, image, options, postProcessingContext);
                 postProcessingContext.TempPath = SaveForBackgroundOcr(image, options);
                 return scannedImage;
             }
         }
 
-        private static IImage DoInitialTransforms(IImage original, ScanOptions options)
+        private IImage DoInitialTransforms(IImage original, ScanOptions options)
         {
             if (!PlatformCompat.System.CanUseWin32 && options.BitDepth == BitDepth.BlackAndWhite)
             {
                 // TODO: Don't do this here, do it where BitmapHelper is used or something
-                original = Transform.Perform(original, new BlackWhiteTransform(-options.Brightness));
+                original = imageContext.PerformTransform(original, new BlackWhiteTransform(-options.Brightness));
             }
 
             double scaleFactor = 1;
@@ -71,7 +73,7 @@ namespace NAPS2.Scan.Experimental.Internal
                 scaleFactor = 1.0 / options.ScaleRatio;
             }
 
-            var scaled = Transform.Perform(original, new ScaleTransform(scaleFactor));
+            var scaled = imageContext.PerformTransform(original, new ScaleTransform(scaleFactor));
 
             if (!options.UseNativeUI && (options.StretchToPageSize || options.CropToPageSize))
             {
@@ -87,7 +89,7 @@ namespace NAPS2.Scan.Experimental.Internal
                 {
                     if (options.CropToPageSize)
                     {
-                        scaled = Transform.Perform(scaled, new CropTransform(
+                        scaled = imageContext.PerformTransform(scaled, new CropTransform(
                             0,
                             (int) ((width - (float) options.PageSize.HeightInInches) * original.HorizontalResolution),
                             0,
@@ -104,7 +106,7 @@ namespace NAPS2.Scan.Experimental.Internal
                 {
                     if (options.CropToPageSize)
                     {
-                        scaled = Transform.Perform(scaled, new CropTransform
+                        scaled = imageContext.PerformTransform(scaled, new CropTransform
                         (
                             0,
                             (int) ((width - (float) options.PageSize.WidthInInches) * original.HorizontalResolution),
@@ -127,7 +129,7 @@ namespace NAPS2.Scan.Experimental.Internal
         {
             if (options.ThumbnailSize.HasValue)
             {
-                scannedImage.SetThumbnail(Transform.Perform(image, new ThumbnailTransform(options.ThumbnailSize.Value)));
+                scannedImage.SetThumbnail(imageContext.PerformTransform(image, new ThumbnailTransform(options.ThumbnailSize.Value)));
             }
             if (!options.UseNativeUI && options.BrightnessContrastAfterScan)
             {
@@ -168,7 +170,7 @@ namespace NAPS2.Scan.Experimental.Internal
         {
             if (options.DoOcr)
             {
-                var fileStorage = StorageManager.Convert<FileStorage>(bitmap, new StorageConvertParams { Temporary = true });
+                var fileStorage = imageContext.Convert<FileStorage>(bitmap, new StorageConvertParams { Temporary = true });
                 // TODO: Maybe return the storage rather than the path
                 return fileStorage.FullPath;
             }
@@ -183,8 +185,8 @@ namespace NAPS2.Scan.Experimental.Internal
                 var thumbnail = scannedImage.GetThumbnail();
                 if (thumbnail != null)
                 {
-                    image = Transform.Perform(image, transform);
-                    scannedImage.SetThumbnail(Transform.Perform(image, new ThumbnailTransform(options.ThumbnailSize.Value)));
+                    image = imageContext.PerformTransform(image, transform);
+                    scannedImage.SetThumbnail(imageContext.PerformTransform(image, new ThumbnailTransform(options.ThumbnailSize.Value)));
                 }
             }
         }

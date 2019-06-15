@@ -21,6 +21,7 @@ namespace NAPS2.Update
 {
     public class UpdateOperation : OperationBase
     {
+        private readonly ImageContext imageContext;
         private readonly ErrorOutput errorOutput;
 
         private readonly ManualResetEvent waitHandle = new ManualResetEvent(false);
@@ -41,8 +42,9 @@ namespace NAPS2.Update
             }
         }
 
-        public UpdateOperation(ErrorOutput errorOutput)
+        public UpdateOperation(ImageContext imageContext, ErrorOutput errorOutput)
         {
+            this.imageContext = imageContext;
             this.errorOutput = errorOutput;
 
             ProgressTitle = MiscResources.UpdateProgress;
@@ -124,7 +126,7 @@ namespace NAPS2.Update
                 waitHandle.Set();
             }
             // TODO: Simplify
-            ((RecoveryStorageManager)FileStorageManager.Current).DisableRecoveryCleanup = true;
+            ((RecoveryStorageManager)imageContext.FileStorageManager).DisableRecoveryCleanup = true;
             Application.OpenForms.OfType<Form>().FirstOrDefault()?.Close();
         }
 
