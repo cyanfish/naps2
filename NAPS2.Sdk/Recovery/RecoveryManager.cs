@@ -73,7 +73,7 @@ namespace NAPS2.Recovery
                 }
                 try
                 {
-                    var serializer = new DefaultSerializer<RecoveryIndex>();
+                    var serializer = new XmlSerializer<RecoveryIndex>();
                     recoveryIndex = serializer.DeserializeFromFile(Path.Combine(folderToRecoverFrom.FullName, "index.xml"));
                     imageCount = recoveryIndex.Images.Count;
                     scannedDateTime = folderToRecoverFrom.LastWriteTime;

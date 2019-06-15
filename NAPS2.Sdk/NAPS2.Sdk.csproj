@@ -360,7 +360,6 @@
     <Compile Include="Util\TaskExtensions.cs" />
     <Compile Include="Util\TestingContext.cs" />
     <Compile Include="Serialization\SerializerExtensions.cs" />
-    <Compile Include="Serialization\DefaultSerializer.cs" />
     <Compile Include="Serialization\VersionedSerializer.cs" />
     <Compile Include="Util\WebClientExtensions.cs" />
     <Compile Include="Util\Win32Window.cs" />

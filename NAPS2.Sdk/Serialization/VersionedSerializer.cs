@@ -24,8 +24,6 @@ namespace NAPS2.Serialization
 
         protected abstract T InternalDeserialize(Stream stream, XDocument doc);
 
-        protected abstract IEnumerable<Type> KnownTypes { get; }
-
         protected void XmlSerialize(Stream stream, T obj)
         {
             var xmlSerializer = new XmlSerializer<T>();
@@ -50,7 +48,5 @@ namespace NAPS2.Serialization
             int.TryParse(versionElement?.Value, out var version);
             return version;
         }
-
-        private Type[] KnownTypesArray => KnownTypes?.ToArray() ?? new Type[] { };
     }
 }

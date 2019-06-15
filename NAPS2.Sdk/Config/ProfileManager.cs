@@ -17,7 +17,7 @@ namespace NAPS2.Config
             set => _current = value ?? throw new ArgumentNullException(nameof(value));
         }
 
-        private readonly ISerializer<List<ScanProfile>> serializer = new DefaultSerializer<List<ScanProfile>>();
+        private readonly ISerializer<List<ScanProfile>> serializer = new XmlSerializer<List<ScanProfile>>();
         private readonly string userPath;
         private readonly string systemPath;
         private readonly bool lockSystemProfiles;

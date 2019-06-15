@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Xml.Linq;
-using System.Xml.Serialization;
 using NAPS2.Config.Experimental.ObsoleteTypes;
 using NAPS2.Scan;
 using NAPS2.Scan.Twain;
@@ -40,8 +39,6 @@ namespace NAPS2.Config
 
             return ReadVeryOldProfiles(stream);
         }
-
-        protected override IEnumerable<Type> KnownTypes => null;
 
         private List<ScanProfile> ReadProfiles(Stream configFileStream)
         {

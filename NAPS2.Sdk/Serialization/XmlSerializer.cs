@@ -570,7 +570,7 @@ namespace NAPS2.Serialization
         }
     }
 
-    public class XmlSerializer<T> : XmlSerializer
+    public class XmlSerializer<T> : XmlSerializer, ISerializer<T>
     {
         public void Serialize(Stream stream, T obj)
         {

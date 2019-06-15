@@ -51,18 +51,8 @@ namespace NAPS2.Serialization
             return serializer.DeserializeFromBytes(Encoding.UTF8.GetBytes(str));
         }
 
-        public static string ToXml<T>(this T obj) => obj.ToXml(null);
+        public static string ToXml<T>(this T obj) => new XmlSerializer<T>().SerializeToString(obj);
 
-        public static string ToXml<T>(this T obj, IEnumerable<Type> knownTypes)
-        {
-            return new DefaultSerializer<T>(knownTypes).SerializeToString(obj);
-        }
-
-        public static T FromXml<T>(this string xml) => xml.FromXml<T>(null);
-
-        public static T FromXml<T>(this string xml, IEnumerable<Type> knownTypes)
-        {
-            return new DefaultSerializer<T>(knownTypes).DeserializeFromString(xml);
-        }
+        public static T FromXml<T>(this string xml) => new XmlSerializer<T>().DeserializeFromString(xml);
     }
 }

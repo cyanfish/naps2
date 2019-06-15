@@ -25,11 +25,11 @@ namespace NAPS2.Images.Storage
 
         public bool CanSerialize => true;
 
-        public string Serialize() => this.ToXml(Transform.KnownTransformTypes);
+        public string Serialize() => this.ToXml();
 
         public void Deserialize(string serializedData)
         {
-            var other = serializedData.FromXml<StubImageMetadata>(Transform.KnownTransformTypes);
+            var other = serializedData.FromXml<StubImageMetadata>();
             TransformList = other.TransformList;
             Index = other.Index;
             BitDepth = other.BitDepth;

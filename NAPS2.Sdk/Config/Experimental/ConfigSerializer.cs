@@ -166,7 +166,5 @@ namespace NAPS2.Config.Experimental
                 CustomPageSizePresets = c.CustomPageSizePresets,
                 SavedProxies = c.SavedProxies
             };
-
-        protected override IEnumerable<Type> KnownTypes => Enumerable.Empty<Type>();
     }
 }

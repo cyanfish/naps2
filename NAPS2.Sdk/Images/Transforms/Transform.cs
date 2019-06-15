@@ -9,17 +9,6 @@ namespace NAPS2.Images.Transforms
 {
     public abstract class Transform
     {
-        // TODO: Delete this
-        /// <summary>
-        /// Gets a list of Transform subclasses. This is used for serialization.
-        /// If you create a custom Transform subclass, you should add it to this list.
-        /// </summary>
-        public static List<Type> KnownTransformTypes { get; } = Assembly
-            .GetExecutingAssembly()
-            .GetTypes()
-            .Where(t => typeof(Transform).IsAssignableFrom(t))
-            .ToList();
-
         private static readonly Dictionary<(Type, Type), (object, MethodInfo)> Transformers = new Dictionary<(Type, Type), (object, MethodInfo)>();
         
         /// <summary>

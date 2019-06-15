@@ -6,7 +6,6 @@ using NAPS2.Recovery;
 using NAPS2.Scan;
 using NAPS2.Scan.Experimental;
 using NAPS2.Serialization;
-using NAPS2.Util;
 
 namespace NAPS2.Images.Storage
 {
@@ -61,9 +60,9 @@ namespace NAPS2.Images.Storage
 
         public bool CanSerialize => true;
 
-        public string Serialize() => indexImage.ToXml(Transform.KnownTransformTypes);
+        public string Serialize() => indexImage.ToXml();
 
-        public void Deserialize(string serializedData) => indexImage = serializedData.FromXml<RecoveryIndexImage>(Transform.KnownTransformTypes);
+        public void Deserialize(string serializedData) => indexImage = serializedData.FromXml<RecoveryIndexImage>();
 
         public IImageMetadata Clone() =>
             new StubImageMetadata
