@@ -180,11 +180,6 @@ namespace NAPS2.Serialization
                         {
                             typeInfo.CustomSerializer = new EnumSerializer();
                         }
-                        else
-                        {
-                            // Verify we can create an instance to fail fast
-                            Activator.CreateInstance(type, true);
-                        }
                     }
 
                     if (typeInfo.CustomSerializer == null)

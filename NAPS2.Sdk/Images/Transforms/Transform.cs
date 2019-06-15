@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using NAPS2.Images.Storage;
+using NAPS2.Serialization;
 
 namespace NAPS2.Images.Transforms
 {
     public abstract class Transform
     {
+        // TODO: Delete this
         /// <summary>
         /// Gets a list of Transform subclasses. This is used for serialization.
         /// If you create a custom Transform subclass, you should add it to this list.
@@ -121,5 +123,15 @@ namespace NAPS2.Images.Transforms
         /// Gets a value that indicates whether the transform is a null transformation (i.e. has no effect).
         /// </summary>
         public virtual bool IsNull => false;
+
+        // ReSharper disable once UnusedMember.Local
+        private class TransformTypes : CustomXmlTypes<Transform>
+        {
+            protected override Type[] GetKnownTypes() => Assembly
+                .GetExecutingAssembly()
+                .GetTypes()
+                .Where(t => typeof(Transform).IsAssignableFrom(t))
+                .ToArray();
+        }
     }
 }

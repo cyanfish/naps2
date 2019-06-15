@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+// ReSharper disable AutoPropertyCanBeMadeGetOnly.Local
 
 namespace NAPS2.Images.Transforms
 {
@@ -27,7 +28,7 @@ namespace NAPS2.Images.Transforms
             Angle = NormalizeAngle(angle);
         }
 
-        public double Angle { get; }
+        public double Angle { get; private set; }
 
         public override bool CanSimplify(Transform other) => other is RotationTransform;
 

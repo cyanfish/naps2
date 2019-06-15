@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+// ReSharper disable AutoPropertyCanBeMadeGetOnly.Local
 
 namespace NAPS2.Images.Transforms
 {
@@ -20,13 +21,13 @@ namespace NAPS2.Images.Transforms
             OriginalHeight = originalHeight;
         }
 
-        public int Left { get; }
-        public int Right { get; }
-        public int Top { get; }
-        public int Bottom { get; }
+        public int Left { get; private set; }
+        public int Right { get; private set; }
+        public int Top { get; private set; }
+        public int Bottom { get; private set; }
 
-        public int? OriginalWidth { get; }
-        public int? OriginalHeight { get; }
+        public int? OriginalWidth { get; private set; }
+        public int? OriginalHeight { get; private set; }
 
         public override bool CanSimplify(Transform other) => other is CropTransform other2
                                                              && OriginalHeight.HasValue && OriginalWidth.HasValue

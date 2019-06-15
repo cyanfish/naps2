@@ -22,6 +22,7 @@ namespace NAPS2.Scan
         {
         }
 
+        // ReSharper disable once UnusedMember.Local
         private class Serializer : CustomXmlSerializer<KeyValueScanOptions>
         {
             protected override void Serialize(KeyValueScanOptions obj, XElement element)

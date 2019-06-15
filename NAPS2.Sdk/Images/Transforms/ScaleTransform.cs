@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+// ReSharper disable AutoPropertyCanBeMadeGetOnly.Local
 
 namespace NAPS2.Images.Transforms
 {
@@ -16,7 +17,7 @@ namespace NAPS2.Images.Transforms
             ScaleFactor = scaleFactor;
         }
 
-        public double ScaleFactor { get; }
+        public double ScaleFactor { get; private set; }
 
         public override bool IsNull => ScaleFactor == 1;
     }
