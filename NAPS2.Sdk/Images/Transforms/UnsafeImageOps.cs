@@ -374,11 +374,11 @@ namespace NAPS2.Images.Transforms
             return monoBitmap;
         }
 
+
         public static unsafe BitArray[] ConvertToBitArrays(IImage bitmap)
         {
-            // TODO: Support black & white images
-            int thresholdAdjusted = 140 * 1000;
-            int bytesPerPixel = GetBytesPerPixel(bitmap);
+            bool bitPerPixel = bitmap.PixelFormat == StoragePixelFormat.BW1;
+            int bytesPerPixel = bitPerPixel ? 0 : GetBytesPerPixel(bitmap);
 
             var bitmapData = bitmap.Lock(LockMode.ReadOnly, out var scan0, out var stride);
             byte* data = (byte*)scan0;
@@ -387,25 +387,53 @@ namespace NAPS2.Images.Transforms
 
             var bitArrays = new BitArray[h];
 
-            PartitionRows(h, (start, end) =>
+            if (bitPerPixel)
             {
-                for (int y = start; y < end; y++)
+                PartitionRows(h, (start, end) =>
                 {
-                    var outRow = new BitArray(w);
-                    bitArrays[y] = outRow;
-                    byte* row = data + stride * y;
-                    for (int x = 0; x < w; x++)
+                    for (int y = start; y < end; y++)
                     {
-                        byte* pixel = row + x * bytesPerPixel;
-                        byte r = *pixel;
-                        byte g = *(pixel + 1);
-                        byte b = *(pixel + 2);
-                        // Use standard values for grayscale conversion to weight the RGB values
-                        int luma = r * 299 + g * 587 + b * 114;
-                        outRow[x] = luma < thresholdAdjusted;
+                        var outRow = new BitArray(w);
+                        bitArrays[y] = outRow;
+                        byte* row = data + stride * y;
+                        for (int x = 0; x < w; x += 8)
+                        {
+                            byte monoByte = *(row + x / 8);
+                            for (int k = 7; k >= 0; k--)
+                            {
+                                if (x + k < w)
+                                {
+                                    outRow[x] = (monoByte & 1) > 0;
+                                }
+                                monoByte >>= 1;
+                            }
+                        }
                     }
-                }
-            });
+                });
+            }
+            else
+            {
+                int thresholdAdjusted = 140 * 1000;
+                PartitionRows(h, (start, end) =>
+                {
+                    for (int y = start; y < end; y++)
+                    {
+                        var outRow = new BitArray(w);
+                        bitArrays[y] = outRow;
+                        byte* row = data + stride * y;
+                        for (int x = 0; x < w; x++)
+                        {
+                            byte* pixel = row + x * bytesPerPixel;
+                            byte r = *pixel;
+                            byte g = *(pixel + 1);
+                            byte b = *(pixel + 2);
+                            // Use standard values for grayscale conversion to weight the RGB values
+                            int luma = r * 299 + g * 587 + b * 114;
+                            outRow[x] = luma < thresholdAdjusted;
+                        }
+                    }
+                });
+            }
 
             bitmap.Unlock(bitmapData);
 
