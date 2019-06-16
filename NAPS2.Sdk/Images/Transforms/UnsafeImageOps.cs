@@ -374,7 +374,6 @@ namespace NAPS2.Images.Transforms
             return monoBitmap;
         }
 
-
         public static unsafe BitArray[] ConvertToBitArrays(IImage bitmap)
         {
             bool bitPerPixel = bitmap.PixelFormat == StoragePixelFormat.BW1;
@@ -403,7 +402,7 @@ namespace NAPS2.Images.Transforms
                             {
                                 if (x + k < w)
                                 {
-                                    outRow[x] = (monoByte & 1) > 0;
+                                    outRow[x + k] = (monoByte & 1) == 0;
                                 }
                                 monoByte >>= 1;
                             }
