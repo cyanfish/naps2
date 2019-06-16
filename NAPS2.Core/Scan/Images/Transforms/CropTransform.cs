@@ -25,10 +25,10 @@ namespace NAPS2.Scan.Images.Transforms
             double xScale = bitmap.Width / (double)(OriginalWidth ?? bitmap.Width),
                 yScale = bitmap.Height / (double)(OriginalHeight ?? bitmap.Height);
 
-            int x = (int)Math.Round(Left * xScale);
-            int y = (int)Math.Round(Top * yScale);
-            int width = Math.Max(bitmap.Width - (int)Math.Round((Left + Right) * xScale), 1);
-            int height = Math.Max(bitmap.Height - (int)Math.Round((Top + Bottom) * yScale), 1);
+            int x = ((int)Math.Round(Left * xScale)).Clamp(0, bitmap.Width - 1);
+            int y = ((int)Math.Round(Top * yScale)).Clamp(0, bitmap.Height - 1);
+            int width = (bitmap.Width - (int)Math.Round((Left + Right) * xScale)).Clamp(1, bitmap.Width - x);
+            int height = (bitmap.Height - (int)Math.Round((Top + Bottom) * yScale)).Clamp(1, bitmap.Height - y);
 
             var result = new Bitmap(width, height, bitmap.PixelFormat);
             result.SafeSetResolution(bitmap.HorizontalResolution, bitmap.VerticalResolution);
