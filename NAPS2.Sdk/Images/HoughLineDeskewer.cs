@@ -30,6 +30,7 @@ namespace NAPS2.Images
         private const int BEST_THRESHOLD_INDEX = 9;
         private const double BEST_THRESOLD_FACTOR = 0.5;
         private const double CLUSTER_TARGET_SPREAD = 2.01;
+        private const double IGNORE_EDGE_FRACTION = 0.01;
 
         public override double GetSkewAngle(IImage image)
         {
@@ -37,6 +38,10 @@ namespace NAPS2.Images
 
             int h = image.Height;
             int w = image.Width;
+            // Ignore a bit of the top/bottom so that artifacts from the edge
+            // of the scan area aren't counted. (Left/right don't matter since
+            // we only look at near-horizontal lines.)
+            int yOffset = (int)Math.Round(h * IGNORE_EDGE_FRACTION);
 
             var sinCos = PrecalculateSinCos();
 
@@ -48,7 +53,7 @@ namespace NAPS2.Images
             // TODO: This should be a good candidate for OpenCL optimization.
             // TODO: If you parallelize over the angle, you're operating over
             // TODO: the same input data with the same branches.
-            for (int y = 1; y <= h - 2; y++)
+            for (int y = 1 + yOffset; y <= h - 2 - yOffset; y++)
             {
                 for (int x = 1; x <= w - 2; x++)
                 {
