@@ -10,8 +10,8 @@ namespace NAPS2.WinForms
     {
         public FError()
         {
-            RestoreFormState = false;
             SaveFormState = false;
+            RestoreFormState = false;
             InitializeComponent();
             AcceptButton = btnOK;
         }

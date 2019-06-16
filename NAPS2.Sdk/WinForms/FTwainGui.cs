@@ -9,9 +9,8 @@ namespace NAPS2.WinForms
         public FTwainGui()
         {
             InitializeComponent();
-            RestoreFormState = false;
-            // This must be false to avoid cross-process contention over the config file
             SaveFormState = false;
+            RestoreFormState = false;
         }
     }
 }

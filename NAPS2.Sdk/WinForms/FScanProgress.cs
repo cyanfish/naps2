@@ -18,6 +18,7 @@ namespace NAPS2.WinForms
         {
             CancelToken = cts.Token;
 
+            SaveFormState = false;
             RestoreFormState = false;
             InitializeComponent();
         }

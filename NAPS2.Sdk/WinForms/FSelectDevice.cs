@@ -10,6 +10,7 @@ namespace NAPS2.WinForms
     {
         public FSelectDevice()
         {
+            SaveFormState = false;
             RestoreFormState = false;
             InitializeComponent();
             AcceptButton = btnSelect;
