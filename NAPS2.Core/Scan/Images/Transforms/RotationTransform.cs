@@ -23,7 +23,8 @@ namespace NAPS2.Scan.Images.Transforms
 
         public static RotationTransform Auto(Bitmap bitmap)
         {
-            return new RotationTransform(-bitmap.GetSkewAngle());
+            var deskewer = new HoughLineDeskewer();
+            return new RotationTransform(-deskewer.GetSkewAngle(bitmap));
         }
 
         private double angle;

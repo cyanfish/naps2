@@ -190,6 +190,7 @@
     <Compile Include="Config\SaveButtonDefaultAction.cs" />
     <Compile Include="Platform\DefaultRuntimeCompat.cs" />
     <Compile Include="Scan\Exceptions\DriverNotSupportedException.cs" />
+    <Compile Include="Scan\Images\HoughLineDeskewer.cs" />
     <Compile Include="Scan\Images\ScannedImageSource.cs" />
     <Compile Include="Scan\KeyValueScanOptions.cs" />
     <Compile Include="Scan\Exceptions\SaneNotAvailableException.cs" />
@@ -317,7 +318,6 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Dependencies\PlatformSupport.cs" />
-    <Compile Include="Scan\Images\AutoDeskew.cs" />
     <Compile Include="Operation\IOperationProgress.cs" />
     <Compile Include="Scan\Images\ScannedImageRenderer.cs" />
     <Compile Include="Dependencies\DownloadFormat.cs" />

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
@@ -357,9 +358,75 @@ namespace NAPS2.Scan.Images.Transforms
             return monoBitmap;
         }
 
+        public static unsafe BitArray[] ConvertToBitArrays(Bitmap bitmap)
+        {
+            bool bitPerPixel = bitmap.PixelFormat == PixelFormat.Format1bppIndexed;
+            int bytesPerPixel = bitPerPixel ? 0 : GetBytesPerPixel(bitmap);
+
+            var bitmapData = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height), ImageLockMode.ReadOnly, bitmap.PixelFormat);
+            var stride = Math.Abs(bitmapData.Stride);
+            byte* data = (byte*)bitmapData.Scan0;
+            int h = bitmap.Height;
+            int w = bitmap.Width;
+
+            var bitArrays = new BitArray[h];
+
+            if (bitPerPixel)
+            {
+                PartitionRows(h, (start, end) =>
+                {
+                    for (int y = start; y < end; y++)
+                    {
+                        var outRow = new BitArray(w);
+                        bitArrays[y] = outRow;
+                        byte* row = data + stride * y;
+                        for (int x = 0; x < w; x += 8)
+                        {
+                            byte monoByte = *(row + x / 8);
+                            for (int k = 7; k >= 0; k--)
+                            {
+                                if (x + k < w)
+                                {
+                                    outRow[x + k] = (monoByte & 1) == 0;
+                                }
+                                monoByte >>= 1;
+                            }
+                        }
+                    }
+                });
+            }
+            else
+            {
+                int thresholdAdjusted = 140 * 1000;
+                PartitionRows(h, (start, end) =>
+                {
+                    for (int y = start; y < end; y++)
+                    {
+                        var outRow = new BitArray(w);
+                        bitArrays[y] = outRow;
+                        byte* row = data + stride * y;
+                        for (int x = 0; x < w; x++)
+                        {
+                            byte* pixel = row + x * bytesPerPixel;
+                            byte r = *pixel;
+                            byte g = *(pixel + 1);
+                            byte b = *(pixel + 2);
+                            // Use standard values for grayscale conversion to weight the RGB values
+                            int luma = r * 299 + g * 587 + b * 114;
+                            outRow[x] = luma < thresholdAdjusted;
+                        }
+                    }
+                });
+            }
+
+            bitmap.UnlockBits(bitmapData);
+
+            return bitArrays;
+        }
+
         private static void PartitionRows(int count, Action<int, int> action)
         {
-            const int partitionCount = 8;
+            const int partitionCount = 1;
             int div = (count + partitionCount - 1) / partitionCount;
 
             var tasks = new Task[partitionCount];
