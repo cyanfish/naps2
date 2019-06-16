@@ -25,8 +25,6 @@ namespace NAPS2.Remoting.Worker
         private readonly ThumbnailRenderer thumbnailRenderer;
         private readonly IMapiWrapper mapiWrapper;
 
-        private CancellationTokenSource twainScanCts = new CancellationTokenSource();
-
         public WorkerServiceImpl(ImageContext imageContext, ITwainWrapper twainWrapper, ThumbnailRenderer thumbnailRenderer, IMapiWrapper mapiWrapper)
         {
             this.imageContext = imageContext;
