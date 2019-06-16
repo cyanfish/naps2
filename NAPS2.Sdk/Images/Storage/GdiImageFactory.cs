@@ -39,7 +39,18 @@ namespace NAPS2.Images.Storage
             }
         }
 
-        public IImage FromDimensions(int width, int height, StoragePixelFormat pixelFormat) => new GdiImage(new Bitmap(width, height, GdiPixelFormat(pixelFormat)));
+        public IImage FromDimensions(int width, int height, StoragePixelFormat pixelFormat)
+        {
+            var bitmap = new Bitmap(width, height, GdiPixelFormat(pixelFormat));
+            if (pixelFormat == StoragePixelFormat.BW1)
+            {
+                var p = bitmap.Palette;
+                p.Entries[0] = Color.Black;
+                p.Entries[1] = Color.White;
+                bitmap.Palette = p;
+            }
+            return new GdiImage(bitmap);
+        }
 
         private PixelFormat GdiPixelFormat(StoragePixelFormat pixelFormat)
         {
