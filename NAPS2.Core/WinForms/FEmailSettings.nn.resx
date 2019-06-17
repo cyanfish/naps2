@@ -31,13 +31,13 @@
     <value>Plassholdar</value>
   </data>
   <data name="lblProvider.Text" xml:space="preserve">
-    <value>No provider selected.</value>
+    <value>Ingen leverandør vald.</value>
   </data>
   <data name="btnChangeProvider.Text" xml:space="preserve">
-    <value>Change</value>
+    <value>Endre</value>
   </data>
   <data name="groupBox1.Text" xml:space="preserve">
-    <value>Provider</value>
+    <value>Leverandør</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Epost-settingar</value>
