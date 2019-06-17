@@ -90,7 +90,7 @@ namespace NAPS2.WinForms
         private void ChooseSystem(string clientName)
         {
             UserConfigManager.Config.EmailSetup = UserConfigManager.Config.EmailSetup ?? new EmailSetup();
-            UserConfigManager.Config.EmailSetup.SystemProviderName = clientName == defaultSystemClientName ? null : clientName;
+            UserConfigManager.Config.EmailSetup.SystemProviderName = clientName;
             UserConfigManager.Config.EmailSetup.ProviderType = EmailProviderType.System;
             UserConfigManager.Save();
             DialogResult = DialogResult.OK;
