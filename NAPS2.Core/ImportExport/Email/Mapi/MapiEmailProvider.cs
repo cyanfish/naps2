@@ -50,6 +50,15 @@ namespace NAPS2.ImportExport.Email.Mapi
                 else
                 {
                     returnCode = mapiWrapper.SendEmail(message);
+                    // It's difficult to get 32/64 bit right when using mapi32.dll. This can help sometimes.
+                    // https://docs.microsoft.com/en-us/office/client-developer/outlook/mapi/building-mapi-applications-on-32-bit-and-64-bit-platforms
+                    if (UseWorker && returnCode == MapiSendMailReturnCode.Failure)
+                    {
+                        using (var worker = workerServiceFactory.Create())
+                        {
+                            returnCode = worker.Service.SendMapiEmail(message);
+                        }
+                    }
                 }
 
                 // Process the result
