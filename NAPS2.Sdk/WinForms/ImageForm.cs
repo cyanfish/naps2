@@ -158,6 +158,12 @@ namespace NAPS2.WinForms
                         {
                             img.AddTransform(t);
                         }
+                        // Optimize thumbnail rendering for the first (or only) image since we already have it loaded into memory
+                        if (img == Image)
+                        {
+                            var transformed = imageContext.PerformAllTransforms(new GdiImage(workingImage).Clone(), Transforms);
+                            img.SetThumbnail(imageContext.PerformTransform(transformed, new ThumbnailTransform(ConfigProvider.Get(c => c.ThumbnailSize))));
+                        }
                     }
                 }
                 changeTracker.Made();
