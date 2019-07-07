@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using NAPS2.Config;
-using NAPS2.Config.Experimental;
 using NAPS2.Operation;
 using NAPS2.Update;
 using NAPS2.Util;

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using NAPS2.Config.Experimental;
+using NAPS2.Config;
 using NAPS2.Util;
 using Newtonsoft.Json.Linq;
 

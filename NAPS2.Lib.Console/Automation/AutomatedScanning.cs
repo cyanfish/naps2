@@ -7,7 +7,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
 using NAPS2.Config;
-using NAPS2.Config.Experimental;
 using NAPS2.Dependencies;
 using NAPS2.ImportExport;
 using NAPS2.ImportExport.Email;

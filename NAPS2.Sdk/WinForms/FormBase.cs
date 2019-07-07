@@ -4,7 +4,6 @@ using System.Globalization;
 using System.Linq;
 using System.Windows.Forms;
 using NAPS2.Config;
-using NAPS2.Config.Experimental;
 using NAPS2.Scan;
 using NAPS2.Util;
 

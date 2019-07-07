@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using NAPS2.Config;
-using NAPS2.Config.Experimental;
 using NAPS2.Images;
 using NAPS2.Images.Storage;
 using NAPS2.ImportExport;

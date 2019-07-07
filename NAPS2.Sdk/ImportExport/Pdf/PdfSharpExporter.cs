@@ -8,7 +8,6 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using NAPS2.Config;
-using NAPS2.Config.Experimental;
 using NAPS2.Logging;
 using NAPS2.Ocr;
 using NAPS2.Platform;

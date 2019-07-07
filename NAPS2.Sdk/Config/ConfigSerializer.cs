@@ -5,11 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Xml;
 using System.Xml.Linq;
-using NAPS2.Config.Experimental.ObsoleteTypes;
+using NAPS2.Config.ObsoleteTypes;
 using NAPS2.ImportExport.Pdf;
 using NAPS2.Serialization;
 
-namespace NAPS2.Config.Experimental
+namespace NAPS2.Config
 {
     public class ConfigSerializer : VersionedSerializer<CommonConfig>
     {

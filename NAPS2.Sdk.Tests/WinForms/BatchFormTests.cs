@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Moq;
 using NAPS2.Config;
-using NAPS2.Config.Experimental;
 using NAPS2.ImportExport;
 using NAPS2.Scan;
 using NAPS2.Scan.Batch;

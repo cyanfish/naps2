@@ -5,7 +5,7 @@ using System.Linq;
 using NAPS2.Logging;
 using NAPS2.Serialization;
 
-namespace NAPS2.Config.Experimental
+namespace NAPS2.Config
 {
     public class FileConfigScope<TConfig> : ConfigScope<TConfig>
     {

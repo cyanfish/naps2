@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace NAPS2.Config.Experimental
+namespace NAPS2.Config
 {
     public static class ConfigProvider
     {

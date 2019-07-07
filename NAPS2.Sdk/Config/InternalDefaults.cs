@@ -13,7 +13,7 @@ using NAPS2.Ocr;
 using NAPS2.Scan;
 using NAPS2.Scan.Batch;
 
-namespace NAPS2.Config.Experimental
+namespace NAPS2.Config
 {
     public static class InternalDefaults
     {

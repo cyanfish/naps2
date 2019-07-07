@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using NAPS2.Util;
 
-namespace NAPS2.Config.Experimental
+namespace NAPS2.Config
 {
     public class ConfigScopes
     {

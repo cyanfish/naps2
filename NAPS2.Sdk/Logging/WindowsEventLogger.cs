@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using NAPS2.Config.Experimental;
+using NAPS2.Config;
 
 namespace NAPS2.Logging
 {

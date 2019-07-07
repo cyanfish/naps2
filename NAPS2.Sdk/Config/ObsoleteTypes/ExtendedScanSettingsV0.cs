@@ -4,7 +4,7 @@ using System.Linq;
 using System.Xml.Serialization;
 using NAPS2.Scan;
 
-namespace NAPS2.Config.Experimental.ObsoleteTypes
+namespace NAPS2.Config.ObsoleteTypes
 {
     /// <summary>
     /// Used for compatibility when reading old profiles.xml files.

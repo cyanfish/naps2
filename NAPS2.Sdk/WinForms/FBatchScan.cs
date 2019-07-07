@@ -7,7 +7,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using NAPS2.Config;
-using NAPS2.Config.Experimental;
 using NAPS2.ImportExport;
 using NAPS2.Lang.Resources;
 using NAPS2.Logging;

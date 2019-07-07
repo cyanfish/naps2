@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 using System.Xml.Serialization;
+using NAPS2.Images;
 using NAPS2.ImportExport.Email;
 using NAPS2.ImportExport.Images;
 using NAPS2.ImportExport.Pdf;
 using NAPS2.Ocr;
 using NAPS2.Scan;
 using NAPS2.Scan.Batch;
-using NAPS2.Images;
 
-namespace NAPS2.Config.Experimental.ObsoleteTypes
+namespace NAPS2.Config.ObsoleteTypes
 {
     [XmlType("UserConfig")]
     public class UserConfigV0

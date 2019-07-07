@@ -8,7 +8,7 @@ using NAPS2.Logging;
 using NAPS2.Ocr;
 using NAPS2.Scan;
 
-namespace NAPS2.Config.Experimental.ObsoleteTypes
+namespace NAPS2.Config.ObsoleteTypes
 {
     [XmlType("AppConfig")]
     public class AppConfigV0

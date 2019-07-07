@@ -4,7 +4,7 @@ using System.Linq;
 using System.Reflection;
 using NAPS2.Util;
 
-namespace NAPS2.Config.Experimental
+namespace NAPS2.Config
 {
     public static class ConfigCopier
     {

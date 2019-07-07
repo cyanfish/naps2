@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Serialization;
 
-namespace NAPS2.Config.Experimental
+namespace NAPS2.Config
 {
     public abstract class ConfigPropAttribute : XmlElementAttribute
     {
