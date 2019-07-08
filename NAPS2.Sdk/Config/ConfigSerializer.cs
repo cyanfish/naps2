@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -144,8 +145,8 @@ namespace NAPS2.Config
             {
                 Version = CommonConfig.CURRENT_VERSION,
                 Culture = c.Culture,
-                FormStates = c.FormStates,
-                BackgroundOperations = c.BackgroundOperations,
+                FormStates = ImmutableList.CreateRange(c.FormStates),
+                BackgroundOperations = ImmutableHashSet.CreateRange(c.BackgroundOperations),
                 CheckForUpdates = c.CheckForUpdates,
                 LastUpdateCheckDate = c.LastUpdateCheckDate,
                 FirstRunDate = c.FirstRunDate,
@@ -163,8 +164,8 @@ namespace NAPS2.Config
                 BatchSettings = c.LastBatchSettings,
                 DesktopToolStripDock = c.DesktopToolStripDock,
                 KeyboardShortcuts = c.KeyboardShortcuts,
-                CustomPageSizePresets = c.CustomPageSizePresets,
-                SavedProxies = c.SavedProxies
+                CustomPageSizePresets = ImmutableList.CreateRange(c.CustomPageSizePresets),
+                SavedProxies = ImmutableList.CreateRange(c.SavedProxies)
             };
     }
 }

@@ -110,8 +110,8 @@ namespace NAPS2.WinForms
             {
                 PageSizeName = comboName.Text;
                 var presets = ConfigProvider.Get(c => c.CustomPageSizePresets);
-                presets.RemoveAll(x => x.Name == PageSizeName);
-                presets.Add(new NamedPageSize
+                presets = presets.RemoveAll(x => x.Name == PageSizeName);
+                presets = presets.Add(new NamedPageSize
                 {
                     Name = PageSizeName,
                     Dimens = PageSizeDimens
@@ -127,7 +127,7 @@ namespace NAPS2.WinForms
             if (MessageBox.Show(string.Format(MiscResources.ConfirmDelete, comboName.Text), MiscResources.Delete, MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
             {
                 var presets = ConfigProvider.Get(c => c.CustomPageSizePresets);
-                presets.RemoveAll(x => x.Name == comboName.Text);
+                presets = presets.RemoveAll(x => x.Name == comboName.Text);
                 ConfigScopes.User.Set(c => c.CustomPageSizePresets = presets);
 
                 UpdateDropdown();

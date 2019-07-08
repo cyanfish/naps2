@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -21,6 +22,14 @@ namespace NAPS2.Serialization
 
         protected static Dictionary<Type, List<CustomXmlTypes>> CustomTypesCache;
 
+        protected static List<Type> ArrayLikeTypes = new List<Type>
+        {
+            typeof(List<>),
+            typeof(HashSet<>),
+            typeof(ImmutableList<>),
+            typeof(ImmutableHashSet<>),
+        };
+
         protected static readonly Dictionary<Type, XmlTypeInfo> TypeInfoCache = new Dictionary<Type, XmlTypeInfo>
         {
             { typeof(char), new XmlTypeInfo { CustomSerializer = new CharSerializer() } },
@@ -38,8 +47,10 @@ namespace NAPS2.Serialization
             { typeof(double), new XmlTypeInfo { CustomSerializer = new DoubleSerializer() } },
             { typeof(IntPtr), new XmlTypeInfo { CustomSerializer = new IntPtrSerializer() } },
             { typeof(UIntPtr), new XmlTypeInfo { CustomSerializer = new UIntPtrSerializer() } },
-            { typeof(List<>), new XmlTypeInfo { CustomSerializer = new ListSerializer() } },
+            { typeof(List<>), new XmlTypeInfo { CustomSerializer = new CollectionSerializer() } },
             { typeof(HashSet<>), new XmlTypeInfo { CustomSerializer = new CollectionSerializer() } },
+            { typeof(ImmutableList<>), new XmlTypeInfo { CustomSerializer = new ImmutableListSerializer() } },
+            { typeof(ImmutableHashSet<>), new XmlTypeInfo { CustomSerializer = new ImmutableHashSetSerializer() } },
             { typeof(DateTime), new XmlTypeInfo { CustomSerializer = new DateTimeSerializer() } },
             { typeof(Nullable<>), new XmlTypeInfo { CustomSerializer = new NullableSerializer() } },
         };
@@ -134,7 +145,7 @@ namespace NAPS2.Serialization
             if (type.IsGenericType)
             {
                 string baseName;
-                if (type.GetGenericTypeDefinition() == typeof(List<>))
+                if (ArrayLikeTypes.Contains(type.GetGenericTypeDefinition()))
                 {
                     baseName = "Array";
                 }
@@ -506,27 +517,45 @@ namespace NAPS2.Serialization
             public override object DeserializeObject(XElement element, Type type)
             {
                 var itemType = GetItemType(type);
-                var list = Activator.CreateInstance(type, true);
+                var list = CreateInstance(type, itemType);
                 var add = list.GetType().GetMethod("Add", BindingFlags.Public | BindingFlags.Instance) ?? throw new ArgumentException("Collection type has no Add method");
-                foreach (var itemElement in element.Elements())
+                if (add.ReturnType == list.GetType())
                 {
-                    add.Invoke(list, new[] { DeserializeInternal(itemElement, itemType) });
+                    // Handle immutable collections
+                    foreach (var itemElement in element.Elements())
+                    {
+                        list = add.Invoke(list, new[] { DeserializeInternal(itemElement, itemType) });
+                    }
                 }
+                else
+                {
+                    foreach (var itemElement in element.Elements())
+                    {
+                        add.Invoke(list, new[] {DeserializeInternal(itemElement, itemType)});
+                    }
+                }
+
                 return list;
+            }
+
+            protected virtual object CreateInstance(Type type, Type itemType) => Activator.CreateInstance(type, true);
+        }
+
+        protected class ImmutableListSerializer : CollectionSerializer
+        {
+            protected override object CreateInstance(Type type, Type itemType)
+            {
+                var emptyField = typeof(ImmutableList<>).MakeGenericType(itemType).GetField("Empty", BindingFlags.Public | BindingFlags.Static) ?? throw new Exception("No Empty field on ImmutableList");
+                return emptyField.GetValue(null);
             }
         }
 
-        protected class ListSerializer : CollectionSerializer
+        protected class ImmutableHashSetSerializer : CollectionSerializer
         {
-            public override object DeserializeObject(XElement element, Type type)
+            protected override object CreateInstance(Type type, Type itemType)
             {
-                var itemType = GetItemType(type);
-                var list = (IList)Activator.CreateInstance(type, true);
-                foreach (var itemElement in element.Elements())
-                {
-                    list.Add(DeserializeInternal(itemElement, itemType));
-                }
-                return list;
+                var emptyField = typeof(ImmutableHashSet<>).MakeGenericType(itemType).GetField("Empty", BindingFlags.Public | BindingFlags.Static) ?? throw new Exception("No Empty field on ImmutableHashSet");
+                return emptyField.GetValue(null);
             }
         }
 

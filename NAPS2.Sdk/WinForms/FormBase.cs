@@ -190,8 +190,7 @@ namespace NAPS2.WinForms
             if (SaveFormState)
             {
                 var formStates = ConfigProvider.Get(c => c.FormStates);
-                formStates.RemoveAll(fs => fs.Name == Name);
-                formStates.Add(formState);
+                formStates = formStates.RemoveAll(fs => fs.Name == Name).Add(formState);
                 ConfigScopes.User.Set(c => c.FormStates = formStates);
             }
         }

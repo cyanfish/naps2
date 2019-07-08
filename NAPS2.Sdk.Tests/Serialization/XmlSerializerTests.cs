@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using System.Xml.Linq;
 using NAPS2.Serialization;
@@ -96,32 +97,36 @@ namespace NAPS2.Sdk.Tests.Serialization
         [Fact]
         public void SerializeList()
         {
-            var original = new List<Poco> { new Poco { Str = "Hello" }, new Poco { Str = "World" } };
-            var serializer = new XmlSerializer<List<Poco>>();
-            var doc = serializer.SerializeToXDocument(original);
-            Assert.NotNull(doc.Root);
-            Assert.Equal("ArrayOfPoco", doc.Root.Name);
-            Assert.Equal(2, doc.Root.Elements().Count());
-            var first = doc.Root.Elements().First();
-            Assert.NotNull(first);
-            Assert.Equal("Poco", first.Name);
-            Assert.Equal("Hello", first.Element("Str")?.Value);
-            var last = doc.Root.Elements().Last();
-            Assert.NotNull(last);
-            Assert.Equal("Poco", last.Name);
-            Assert.Equal("World", last.Element("Str")?.Value);
-
-            var copy = serializer.DeserializeFromXDocument(doc);
-            Assert.Equal(2, copy.Count);
-            Assert.Equal("Hello", copy[0].Str);
-            Assert.Equal("World", copy[1].Str);
+            VerifySerializeCollection(new List<Poco> { new Poco { Str = "Hello" }, new Poco { Str = "World" } });
         }
 
         [Fact]
         public void SerializeArray()
         {
-            var original = new[] { new Poco { Str = "Hello" }, new Poco { Str = "World" } };
-            var serializer = new XmlSerializer<Poco[]>();
+            VerifySerializeCollection(new[] { new Poco { Str = "Hello" }, new Poco { Str = "World" } });
+        }
+
+        [Fact]
+        public void SerializeHashSet()
+        {
+            VerifySerializeCollection(new HashSet<Poco> { new Poco { Str = "Hello" }, new Poco { Str = "World" } });
+        }
+
+        [Fact]
+        public void SerializeImmutableList()
+        {
+            VerifySerializeCollection(ImmutableList.Create(new Poco { Str = "Hello" }, new Poco { Str = "World" }));
+        }
+
+        [Fact]
+        public void SerializeImmutableHashSet()
+        {
+            VerifySerializeCollection(ImmutableHashSet.Create(new Poco { Str = "Hello" }, new Poco { Str = "World" }));
+        }
+
+        private void VerifySerializeCollection<T>(T original) where T : IEnumerable<Poco>
+        {
+            var serializer = new XmlSerializer<T>();
             var doc = serializer.SerializeToXDocument(original);
             Assert.NotNull(doc.Root);
             Assert.Equal("ArrayOfPoco", doc.Root.Name);
@@ -136,9 +141,9 @@ namespace NAPS2.Sdk.Tests.Serialization
             Assert.Equal("World", last.Element("Str")?.Value);
 
             var copy = serializer.DeserializeFromXDocument(doc);
-            Assert.Equal(2, copy.Length);
-            Assert.Equal("Hello", copy[0].Str);
-            Assert.Equal("World", copy[1].Str);
+            Assert.Equal(2, copy.Count());
+            Assert.Equal("Hello", copy.ElementAt(0).Str);
+            Assert.Equal("World", copy.ElementAt(1).Str);
         }
 
         [Fact]

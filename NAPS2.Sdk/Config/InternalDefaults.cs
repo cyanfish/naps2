@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using System.Windows.Forms;
 using NAPS2.ImportExport;
@@ -23,10 +24,10 @@ namespace NAPS2.Config
             {
                 Version = CommonConfig.CURRENT_VERSION,
                 Culture = "en",
-                FormStates = new List<FormState>(),
-                BackgroundOperations = new HashSet<string>(),
-                CustomPageSizePresets = new List<NamedPageSize>(),
-                SavedProxies = new List<ScanProxyConfig>(),
+                FormStates = ImmutableList<FormState>.Empty,
+                BackgroundOperations = ImmutableHashSet<string>.Empty,
+                CustomPageSizePresets = ImmutableList<NamedPageSize>.Empty,
+                SavedProxies = ImmutableList<ScanProxyConfig>.Empty,
                 StartupMessageTitle = "",
                 StartupMessageText = "",
                 StartupMessageIcon = MessageBoxIcon.None,

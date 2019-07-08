@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using System.Windows.Forms;
 using NAPS2.Config;
@@ -54,8 +55,8 @@ namespace NAPS2.WinForms
         {
             Attach(op);
 
-            var bgOps = configProvider.Get(c => c.BackgroundOperations) ?? new HashSet<string>();
-            bgOps.Remove(op.GetType().Name);
+            var bgOps = configProvider.Get(c => c.BackgroundOperations) ?? ImmutableHashSet<string>.Empty;
+            bgOps = bgOps.Remove(op.GetType().Name);
             configScopes.User.Set(c => c.BackgroundOperations = bgOps);
 
             if (!op.IsFinished)
@@ -75,8 +76,8 @@ namespace NAPS2.WinForms
         {
             Attach(op);
 
-            var bgOps = configProvider.Get(c => c.BackgroundOperations) ?? new HashSet<string>();
-            bgOps.Add(op.GetType().Name);
+            var bgOps = configProvider.Get(c => c.BackgroundOperations) ?? ImmutableHashSet<string>.Empty;
+            bgOps = bgOps.Add(op.GetType().Name);
             configScopes.User.Set(c => c.BackgroundOperations = bgOps);
 
             if (!op.IsFinished)
