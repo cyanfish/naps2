@@ -109,7 +109,7 @@ namespace NAPS2.Sdk.Tests.Serialization
         [Fact]
         public void SerializeHashSet()
         {
-            VerifySerializeCollection(new HashSet<Poco> { new Poco { Str = "Hello" }, new Poco { Str = "World" } });
+            VerifySerializeCollection(new HashSet<Poco> { new Poco { Str = "Hello" }, new Poco { Str = "World" } }, true);
         }
 
         [Fact]
@@ -121,29 +121,40 @@ namespace NAPS2.Sdk.Tests.Serialization
         [Fact]
         public void SerializeImmutableHashSet()
         {
-            VerifySerializeCollection(ImmutableHashSet.Create(new Poco { Str = "Hello" }, new Poco { Str = "World" }));
+            VerifySerializeCollection(ImmutableHashSet.Create(new Poco { Str = "Hello" }, new Poco { Str = "World" }), true);
         }
 
-        private void VerifySerializeCollection<T>(T original) where T : IEnumerable<Poco>
+        private void VerifySerializeCollection<T>(T original, bool unordered = false) where T : IEnumerable<Poco>
         {
             var serializer = new XmlSerializer<T>();
             var doc = serializer.SerializeToXDocument(original);
             Assert.NotNull(doc.Root);
             Assert.Equal("ArrayOfPoco", doc.Root.Name);
             Assert.Equal(2, doc.Root.Elements().Count());
-            var first = doc.Root.Elements().First();
-            Assert.NotNull(first);
-            Assert.Equal("Poco", first.Name);
-            Assert.Equal("Hello", first.Element("Str")?.Value);
-            var last = doc.Root.Elements().Last();
-            Assert.NotNull(last);
-            Assert.Equal("Poco", last.Name);
-            Assert.Equal("World", last.Element("Str")?.Value);
+            if (!unordered)
+            {
+                var first = doc.Root.Elements().First();
+                Assert.NotNull(first);
+                Assert.Equal("Poco", first.Name);
+                Assert.Equal("Hello", first.Element("Str")?.Value);
+                var last = doc.Root.Elements().Last();
+                Assert.NotNull(last);
+                Assert.Equal("Poco", last.Name);
+                Assert.Equal("World", last.Element("Str")?.Value);
+            }
 
             var copy = serializer.DeserializeFromXDocument(doc);
             Assert.Equal(2, copy.Count());
-            Assert.Equal("Hello", copy.ElementAt(0).Str);
-            Assert.Equal("World", copy.ElementAt(1).Str);
+            if (unordered)
+            {
+                Assert.Contains(copy, x => x.Str == "Hello");
+                Assert.Contains(copy, x => x.Str == "World");
+            }
+            else
+            {
+                Assert.Equal("Hello", copy.ElementAt(0).Str);
+                Assert.Equal("World", copy.ElementAt(1).Str);
+            }
         }
 
         [Fact]
