@@ -22,7 +22,7 @@ namespace NAPS2.Serialization
 
         protected static Dictionary<Type, List<CustomXmlTypes>> CustomTypesCache;
 
-        protected static List<Type> ArrayLikeTypes = new List<Type>
+        protected static readonly List<Type> ArrayLikeTypes = new List<Type>
         {
             typeof(List<>),
             typeof(HashSet<>),
@@ -166,7 +166,8 @@ namespace NAPS2.Serialization
                 return TypeInfoCache.GetOrSet(type, () =>
                 {
                     var props = type.GetProperties(BindingFlags.Instance | BindingFlags.Public)
-                        .Where(x => x.GetMethod != null && x.SetMethod != null && !x.GetCustomAttributes(typeof(XmlIgnoreAttribute)).Any());
+                        .Where(x => x.GetMethod != null && x.SetMethod != null && !x.GetCustomAttributes(typeof(XmlIgnoreAttribute)).Any())
+                        .ToArray();
                     var typeInfo = new XmlTypeInfo
                     {
                         Properties = props.Select(x => new XmlPropertyInfo
