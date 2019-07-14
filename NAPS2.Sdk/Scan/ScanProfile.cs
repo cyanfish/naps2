@@ -5,7 +5,6 @@ using System.Linq;
 using System.Xml.Serialization;
 using NAPS2.ImportExport;
 using NAPS2.Lang.Resources;
-using NAPS2.Scan.Experimental;
 using NAPS2.Scan.Wia.Native;
 
 namespace NAPS2.Scan

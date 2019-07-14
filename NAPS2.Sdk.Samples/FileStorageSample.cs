@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using NAPS2.Images;
 using NAPS2.Images.Storage;
-using NAPS2.Scan.Experimental;
+using NAPS2.Scan;
 
 namespace NAPS2.Sdk.Samples
 {

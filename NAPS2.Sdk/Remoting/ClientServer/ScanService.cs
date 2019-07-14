@@ -4,7 +4,7 @@ using System.ServiceModel;
 using System.Threading;
 using System.Threading.Tasks;
 using NAPS2.Scan;
-using NAPS2.Scan.Experimental.Internal;
+using NAPS2.Scan.Internal;
 
 namespace NAPS2.Remoting.ClientServer
 {

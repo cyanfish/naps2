@@ -8,7 +8,6 @@ using NAPS2.Images.Transforms;
 using NAPS2.Ocr;
 using NAPS2.Operation;
 using NAPS2.Scan;
-using NAPS2.Scan.Experimental;
 using NAPS2.Util;
 
 namespace NAPS2.Images

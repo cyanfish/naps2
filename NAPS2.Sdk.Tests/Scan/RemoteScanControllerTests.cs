@@ -3,11 +3,10 @@ using System.Threading.Tasks;
 using Moq;
 using NAPS2.Images;
 using NAPS2.Scan;
-using NAPS2.Scan.Experimental;
-using NAPS2.Scan.Experimental.Internal;
+using NAPS2.Scan.Internal;
 using Xunit;
-using IScanDriver = NAPS2.Scan.Experimental.Internal.IScanDriver;
-using IScanDriverFactory = NAPS2.Scan.Experimental.Internal.IScanDriverFactory;
+using IScanDriver = NAPS2.Scan.Internal.IScanDriver;
+using IScanDriverFactory = NAPS2.Scan.Internal.IScanDriverFactory;
 
 namespace NAPS2.Sdk.Tests.Scan
 {

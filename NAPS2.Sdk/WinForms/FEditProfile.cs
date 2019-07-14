@@ -9,7 +9,6 @@ using NAPS2.Platform;
 using NAPS2.Remoting.ClientServer;
 using NAPS2.Scan;
 using NAPS2.Scan.Exceptions;
-using NAPS2.Scan.Experimental;
 using NAPS2.Scan.Sane;
 using NAPS2.Scan.Twain;
 using NAPS2.Scan.Wia;

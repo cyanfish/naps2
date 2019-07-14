@@ -42,7 +42,7 @@ namespace NAPS2.Modules
             Bind<OcrRequestQueue>().ToSelf().InSingletonScope();
 
             // Scan
-            Bind<IScanPerformer>().To<NAPS2.Scan.Experimental.ScanPerformer>();
+            Bind<IScanPerformer>().To<ScanPerformer>();
             Bind<IBatchScanPerformer>().To<BatchScanPerformer>();
 
             // Config

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using NAPS2.Images.Transforms;
-using NAPS2.Scan.Experimental;
+using NAPS2.Scan;
 using NAPS2.Serialization;
 
 namespace NAPS2.Images.Storage

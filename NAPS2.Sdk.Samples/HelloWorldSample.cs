@@ -3,7 +3,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using NAPS2.Images;
 using NAPS2.Scan;
-using NAPS2.Scan.Experimental;
 
 namespace NAPS2.Sdk.Samples
 {

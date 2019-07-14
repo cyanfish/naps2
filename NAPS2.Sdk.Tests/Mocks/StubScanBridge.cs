@@ -4,8 +4,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using NAPS2.Images;
 using NAPS2.Scan;
-using NAPS2.Scan.Experimental;
-using NAPS2.Scan.Experimental.Internal;
+using NAPS2.Scan.Internal;
 
 namespace NAPS2.Sdk.Tests.Mocks
 {
