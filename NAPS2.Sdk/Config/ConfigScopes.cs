@@ -7,22 +7,6 @@ namespace NAPS2.Config
 {
     public class ConfigScopes
     {
-        private static ConfigScopes _current;
-
-        public static ConfigScopes Current
-        {
-            get
-            {
-                TestingContext.NoStaticDefaults();
-                if (_current == null)
-                {
-                    throw new InvalidOperationException("Config scopes have not been specified.");
-                }
-                return _current;
-            }
-            set => _current = value;
-        }
-
         public static ConfigScopes Stub() =>
             new ConfigScopes(
                 ConfigScope.Object(new CommonConfig()),

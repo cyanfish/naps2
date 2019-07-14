@@ -33,11 +33,11 @@ namespace NAPS2.ImportExport
         private readonly BitmapRenderer bitmapRenderer;
         private readonly ConfigProvider<CommonConfig> configProvider;
 
-        public AutoSaver()
+        public AutoSaver(ConfigProvider<CommonConfig> configProvider)
         {
-            // TODO: Need to make SDK provider use safe for null defaults (maybe a helper method that reuses a subset of InternalDefaults somehow)
-            pdfSettingsProvider = new StubConfigProvider<PdfSettings>(new PdfSettings());
-            imageSettingsProvider = new StubConfigProvider<ImageSettings>(new ImageSettings());
+            this.configProvider = configProvider;
+            pdfSettingsProvider = configProvider.Child(c => c.PdfSettings);
+            imageSettingsProvider = configProvider.Child(c => c.ImageSettings);
             ocrEngineManager = OcrEngineManager.Default;
             ocrRequestQueue = OcrRequestQueue.Default;
             errorOutput = ErrorOutput.Default;
@@ -47,7 +47,6 @@ namespace NAPS2.ImportExport
             pdfExporter = new PdfSharpExporter(ImageContext.Default);
             overwritePrompt = OverwritePrompt.Default;
             bitmapRenderer = new BitmapRenderer(ImageContext.Default);
-            configProvider = ConfigScopes.Current.Provider;
         }
 
         public AutoSaver(ConfigProvider<PdfSettings> pdfSettingsProvider, ConfigProvider<ImageSettings> imageSettingsProvider, OcrEngineManager ocrEngineManager, OcrRequestQueue ocrRequestQueue, ErrorOutput errorOutput, DialogHelper dialogHelper, OperationProgress operationProgress, ISaveNotify notify, PdfExporter pdfExporter, OverwritePrompt overwritePrompt, BitmapRenderer bitmapRenderer, ConfigProvider<CommonConfig> configProvider)
