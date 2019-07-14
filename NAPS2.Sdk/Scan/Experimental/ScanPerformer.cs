@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using NAPS2.Config;
 using NAPS2.Images;
 using NAPS2.ImportExport;
+using NAPS2.Lang.Resources;
 using NAPS2.Logging;
 using NAPS2.Operation;
 using NAPS2.Scan.Exceptions;
@@ -68,8 +69,24 @@ namespace NAPS2.Scan.Experimental
                 source = autoSaver.Save(scanProfile.AutoSaveSettings, source);
             }
             
-            // Errors are handled by the ScanError callback
-            return SwallowErrors(source);
+            var sink = new ScannedImageSink();
+            source.ForEach(img => sink.PutImage(img)).ContinueWith(t =>
+            {
+                // Errors are handled by the ScanError callback so we ignore them here
+                if (sink.ImageCount > 0)
+                {
+                    Log.Event(EventType.Scan, new EventParams
+                    {
+                        Name = MiscResources.Scan,
+                        Pages = sink.ImageCount,
+                        DeviceName = scanProfile.Device?.Name,
+                        ProfileName = scanProfile.DisplayName,
+                        BitDepth = scanProfile.BitDepth.Description()
+                    });
+                }
+                sink.SetCompleted();
+            }).AssertNoAwait();
+            return sink.AsSource();
         }
 
         private void HandleError(Exception error)
@@ -83,13 +100,6 @@ namespace NAPS2.Scan.Experimental
             {
                 errorOutput?.DisplayError(error.Message);
             }
-        }
-
-        private ScannedImageSource SwallowErrors(ScannedImageSource source)
-        {
-            var sink = new ScannedImageSink();
-            source.ForEach(img => sink.PutImage(img)).ContinueWith(t => sink.SetCompleted());
-            return sink.AsSource();
         }
 
         private void ShowOperation(ScanOperation op, ScanParams scanParams)
