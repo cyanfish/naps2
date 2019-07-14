@@ -13,6 +13,7 @@ namespace NAPS2.Scan
     /// </summary>
     public class ScanParams
     {
+        // TODO: Remove this after removing ScanDriverBase
         public bool PropagateErrors { get; set; }
 
         public bool DetectPatchCodes { get; set; }

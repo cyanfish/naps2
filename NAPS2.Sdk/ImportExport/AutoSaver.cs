@@ -96,7 +96,6 @@ namespace NAPS2.ImportExport
             }
 
             // Auto save without piping images
-            // TODO: This may fail if PropagateErrors is true
             source.ToList().ContinueWith(async t =>
             {
                 if (await InternalSave(settings, t.Result))
