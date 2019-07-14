@@ -24,7 +24,7 @@ namespace NAPS2.Scan.Experimental.Internal
 
         public IScanBridge Create(ScanOptions options)
         {
-            if (!string.IsNullOrEmpty(options.NetworkOptions?.Ip))
+            if (!string.IsNullOrEmpty(options.NetworkOptions?.Ip) && options.NetworkOptions?.Port != null)
             {
                 // The physical scanner is connected to a different computer, so we connect to a NAPS2 server process over the network
                 return networkScanBridge;

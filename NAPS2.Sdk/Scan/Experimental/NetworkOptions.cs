@@ -8,6 +8,6 @@ namespace NAPS2.Scan.Experimental
     {
         public string Ip { get; set; }
 
-        public int Port { get; set; }
+        public int? Port { get; set; }
     }
 }

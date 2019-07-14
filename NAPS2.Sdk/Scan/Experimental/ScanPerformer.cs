@@ -89,15 +89,70 @@ namespace NAPS2.Scan.Experimental
         {
             var options = new ScanOptions
             {
-                // TODO: Lots more
                 Driver = scanProfile.DriverName == "wia" ? Driver.Wia
                        : scanProfile.DriverName == "sane" ? Driver.Sane
-                       : Driver.Twain,
+                       : scanProfile.DriverName == "twain" ? Driver.Twain
+                       : Driver.Default,
                 WiaOptions =
                 {
-                    WiaVersion = scanProfile.WiaVersion
-                }
+                    WiaVersion = scanProfile.WiaVersion,
+                    OffsetWidth = scanProfile.WiaOffsetWidth
+                },
+                TwainOptions =
+                {
+                    Adapter = scanProfile.TwainImpl == TwainImpl.Legacy ? TwainAdapter.Legacy : TwainAdapter.NTwain,
+                    Dsm = scanProfile.TwainImpl == TwainImpl.X64 ? TwainDsm.NewX64
+                        : scanProfile.TwainImpl == TwainImpl.OldDsm || scanProfile.TwainImpl == TwainImpl.Legacy ? TwainDsm.Old
+                        : TwainDsm.New,
+                    TransferMode = scanProfile.TwainImpl == TwainImpl.MemXfer ? TwainTransferMode.Memory : TwainTransferMode.Native,
+                    IncludeWiaDevices = false
+                },
+                SaneOptions =
+                {
+                    KeyValueOptions = new KeyValueScanOptions(scanProfile.KeyValueOptions)
+                },
+                NetworkOptions =
+                {
+                    Ip = scanProfile.ProxyConfig.Ip,
+                    Port = scanProfile.ProxyConfig.Port
+                },
+                Brightness = scanProfile.Brightness,
+                Contrast = scanProfile.Contrast,
+                Dpi = scanProfile.Resolution.ToIntDpi(),
+                Modal = scanParams.Modal,
+                Quality = scanProfile.Quality,
+                AutoDeskew = scanProfile.AutoDeskew,
+                BitDepth = scanProfile.BitDepth.ToBitDepth(),
+                DialogParent = dialogParent,
+                DoOcr = scanParams.DoOcr,
+                MaxQuality = scanProfile.MaxQuality,
+                OcrParams = scanParams.OcrParams,
+                PageAlign = scanProfile.PageAlign.ToHorizontalAlign(),
+                PaperSource = scanProfile.PaperSource.ToPaperSource(),
+                ScaleRatio = scanProfile.AfterScanScale.ToIntScaleFactor(),
+                ThumbnailSize = scanParams.ThumbnailSize,
+                DetectPatchCodes = scanParams.DetectPatchCodes,
+                ExcludeBlankPages = scanProfile.ExcludeBlankPages,
+                FlipDuplexedPages = scanProfile.FlipDuplexedPages,
+                NoUI = scanParams.NoUI,
+                OcrCancelToken = scanParams.OcrCancelToken,
+                OcrInBackground = true, // TODO
+                BlankPageCoverageThreshold = scanProfile.BlankPageCoverageThreshold,
+                BlankPageWhiteThreshold = scanProfile.BlankPageWhiteThreshold,
+                BrightnessContrastAfterScan = scanProfile.BrightnessContrastAfterScan,
+                CropToPageSize = scanProfile.ForcePageSizeCrop,
+                StretchToPageSize = scanProfile.ForcePageSize,
+                UseNativeUI = scanProfile.UseNativeUI,
+                Device = null, // Set after
+                PageSize = null, // Set after
             };
+            
+            PageDimensions pageDimensions = scanProfile.PageSize.PageDimensions() ?? scanProfile.CustomPageSize;
+            if (pageDimensions == null)
+            {
+                throw new ArgumentException("No page size specified");
+            }
+            options.PageSize = new PageSize(pageDimensions.Width, pageDimensions.Height, pageDimensions.Unit);
 
             // If a device wasn't specified, prompt the user to pick one
             if (string.IsNullOrEmpty(scanProfile.Device?.ID))

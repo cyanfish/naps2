@@ -518,5 +518,35 @@ namespace NAPS2.Scan
                     throw new ArgumentException();
             }
         }
+
+        public static HorizontalAlign ToHorizontalAlign(this ScanHorizontalAlign horizontalAlign)
+        {
+            switch (horizontalAlign)
+            {
+                case ScanHorizontalAlign.Left:
+                    return HorizontalAlign.Left;
+                case ScanHorizontalAlign.Right:
+                    return HorizontalAlign.Right;
+                case ScanHorizontalAlign.Center:
+                    return HorizontalAlign.Center;
+                default:
+                    throw new ArgumentException();
+            }
+        }
+
+        public static PaperSource ToPaperSource(this ScanSource scanSource)
+        {
+            switch (scanSource)
+            {
+                case ScanSource.Glass:
+                    return PaperSource.Flatbed;
+                case ScanSource.Feeder:
+                    return PaperSource.Feeder;
+                case ScanSource.Duplex:
+                    return PaperSource.Duplex;
+                default:
+                    throw new ArgumentException();
+            }
+        }
     }
 }
