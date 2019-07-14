@@ -140,6 +140,7 @@
     <Compile Include="ContextualTexts.cs" />
     <Compile Include="Scan\RemoteScanControllerTests.cs" />
     <Compile Include="Scan\ScanErrorHandling.cs" />
+    <Compile Include="Serialization\ScanOptionsSerializationTests.cs" />
     <Compile Include="Serialization\XmlSerializerTests.cs" />
     <Compile Include="Util\NaturalStringComparerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using System.Xml.Linq;
+using NAPS2.Scan;
 using NAPS2.Serialization;
 using Xunit;
 

@@ -45,6 +45,7 @@ namespace NAPS2.Serialization
             { typeof(ulong), new XmlTypeInfo { CustomSerializer = new UInt64Serializer() } },
             { typeof(float), new XmlTypeInfo { CustomSerializer = new SingleSerializer() } },
             { typeof(double), new XmlTypeInfo { CustomSerializer = new DoubleSerializer() } },
+            { typeof(decimal), new XmlTypeInfo { CustomSerializer = new DecimalSerializer() } },
             { typeof(IntPtr), new XmlTypeInfo { CustomSerializer = new IntPtrSerializer() } },
             { typeof(UIntPtr), new XmlTypeInfo { CustomSerializer = new UIntPtrSerializer() } },
             { typeof(List<>), new XmlTypeInfo { CustomSerializer = new CollectionSerializer() } },
@@ -435,6 +436,19 @@ namespace NAPS2.Serialization
             protected override double Deserialize(XElement element)
             {
                 return double.Parse(element.Value);
+            }
+        }
+
+        protected class DecimalSerializer : CustomXmlSerializer<decimal>
+        {
+            protected override void Serialize(decimal obj, XElement element)
+            {
+                element.Value = obj.ToString(CultureInfo.InvariantCulture);
+            }
+
+            protected override decimal Deserialize(XElement element)
+            {
+                return decimal.Parse(element.Value);
             }
         }
 
