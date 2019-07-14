@@ -133,9 +133,9 @@ namespace NAPS2.Scan.Experimental
         {
             var options = new ScanOptions
             {
-                Driver = scanProfile.DriverName == "wia" ? Driver.Wia
-                    : scanProfile.DriverName == "sane" ? Driver.Sane
-                    : scanProfile.DriverName == "twain" ? Driver.Twain
+                Driver = scanProfile.DriverName == DriverNames.WIA ? Driver.Wia
+                    : scanProfile.DriverName == DriverNames.SANE ? Driver.Sane
+                    : scanProfile.DriverName == DriverNames.TWAIN ? Driver.Twain
                     : Driver.Default,
                 WiaOptions =
                 {

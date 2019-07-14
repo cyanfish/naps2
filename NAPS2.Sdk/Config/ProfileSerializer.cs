@@ -49,7 +49,7 @@ namespace NAPS2.Config
             {
                 if (settings.Version == 1)
                 {
-                    if (settings.DriverName == TwainScanDriver.DRIVER_NAME)
+                    if (settings.DriverName == DriverNames.TWAIN)
                     {
                         settings.UseNativeUI = true;
                     }
@@ -68,7 +68,7 @@ namespace NAPS2.Config
             {
                 if (settings.Version == 1)
                 {
-                    if (settings.DriverName == TwainScanDriver.DRIVER_NAME)
+                    if (settings.DriverName == DriverNames.TWAIN)
                     {
                         settings.UseNativeUI = true;
                     }
@@ -123,7 +123,7 @@ namespace NAPS2.Config
                     IsDefault = profile.IsDefault,
                     IconID = profile.IconID,
                     // If the driver is WIA and the profile type is not Extended, that meant the native UI was to be used
-                    UseNativeUI = profile.DriverName == WiaScanDriver.DRIVER_NAME
+                    UseNativeUI = profile.DriverName == DriverNames.WIA
                 };
                 if (profile is ExtendedScanSettingsV0 ext)
                 {

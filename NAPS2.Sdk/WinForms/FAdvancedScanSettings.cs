@@ -55,9 +55,9 @@ namespace NAPS2.WinForms
 
         private void UpdateEnabled()
         {
-            cmbTwainImpl.Enabled = ScanProfile.DriverName == TwainScanDriver.DRIVER_NAME;
-            cbWiaOffsetWidth.Enabled = ScanProfile.DriverName == WiaScanDriver.DRIVER_NAME;
-            cmbWiaVersion.Enabled = ScanProfile.DriverName == WiaScanDriver.DRIVER_NAME;
+            cmbTwainImpl.Enabled = ScanProfile.DriverName == DriverNames.TWAIN;
+            cbWiaOffsetWidth.Enabled = ScanProfile.DriverName == DriverNames.WIA;
+            cmbWiaVersion.Enabled = ScanProfile.DriverName == DriverNames.WIA;
             tbImageQuality.Enabled = !cbHighQuality.Checked;
             txtImageQuality.Enabled = !cbHighQuality.Checked;
             tbWhiteThreshold.Enabled = cbExcludeBlankPages.Checked && ScanProfile.BitDepth != ScanBitDepth.BlackWhite;

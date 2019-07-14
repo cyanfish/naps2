@@ -148,7 +148,6 @@
     <Compile Include="Remoting\ClientServer\ClientContextFactory.cs" />
     <Compile Include="Remoting\ClientServer\IScanCallback.cs" />
     <Compile Include="Remoting\ClientServer\IScanService.cs" />
-    <Compile Include="Remoting\ClientServer\ProxiedScanDriver.cs" />
     <Compile Include="Remoting\ClientServer\ScanCallback.cs" />
     <Compile Include="Remoting\ClientServer\ScanService.cs" />
     <Compile Include="Remoting\ClientServer\ServerDiscovery.cs" />
@@ -231,6 +230,7 @@
     <Compile Include="Scan\Batch\BatchOutputType.cs" />
     <Compile Include="Scan\Batch\BatchScanType.cs" />
     <Compile Include="Scan\Batch\IBatchScanPerformer.cs" />
+    <Compile Include="Scan\DriverNames.cs" />
     <Compile Include="Scan\Exceptions\DriverNotSupportedException.cs" />
     <Compile Include="Images\ScannedImageSource.cs" />
     <Compile Include="Images\Storage\GdiTransformers.cs" />
@@ -304,11 +304,8 @@
     <Compile Include="Scan\Sane\SaneOption.cs" />
     <Compile Include="Scan\Sane\SaneOptionCollection.cs" />
     <Compile Include="Scan\Sane\SaneOptionParser.cs" />
-    <Compile Include="Scan\Sane\SaneScanDriver.cs" />
-    <Compile Include="Scan\Sane\SaneWrapper.cs" />
     <Compile Include="Scan\Experimental\Driver.cs" />
     <Compile Include="Scan\Experimental\ScanOptions.cs" />
-    <Compile Include="Scan\Twain\ITwainWrapper.cs" />
     <Compile Include="Scan\Wia\Native\Hresult.cs" />
     <Compile Include="Scan\Wia\Native\IWiaDeviceProps.cs" />
     <Compile Include="Scan\Wia\Native\NativeStreamWrapper.cs" />
@@ -333,7 +330,6 @@
     <Compile Include="Scan\Wia\Native\WiaVersion.cs" />
     <Compile Include="Scan\Wia\WiaConfiguration.cs" />
     <Compile Include="Scan\Wia\WiaScanErrors.cs" />
-    <Compile Include="Scan\Wia\WiaScanOperation.cs" />
     <Compile Include="Serialization\SerializedImageHelper.cs" />
     <Compile Include="Update\UpdateOperation.cs" />
     <Compile Include="Update\UpdateInfo.cs" />
@@ -460,7 +456,6 @@
     <Compile Include="Scan\Twain\Legacy\TwainApi.cs" />
     <Compile Include="Scan\Twain\Legacy\TwainDefs.cs" />
     <Compile Include="Scan\Twain\Legacy\TwainLib.cs" />
-    <Compile Include="Scan\Twain\TwainWrapper.cs" />
     <Compile Include="Images\Transforms\UnsafeImageOps.cs" />
     <Compile Include="Util\ChangeTracker.cs" />
     <Compile Include="Util\ChaosMonkey.cs" />
@@ -508,7 +503,6 @@
     <Compile Include="Images\Transforms\CropTransform.cs" />
     <Compile Include="Images\Transforms\RotationTransform.cs" />
     <Compile Include="Images\Transforms\Transform.cs" />
-    <Compile Include="Scan\IScanDriverFactory.cs" />
     <Compile Include="Util\CultureInitializer.cs" />
     <Compile Include="Util\ErrorOutput.cs" />
     <Compile Include="Logging\ILogger.cs" />
@@ -562,16 +556,9 @@
     <Compile Include="Images\ScannedImageHelper.cs" />
     <Compile Include="Images\ScannedImageList.cs" />
     <Compile Include="Images\ThumbnailRenderer.cs" />
-    <Compile Include="Scan\IScanDriver.cs" />
     <Compile Include="Scan\IScanPerformer.cs" />
     <Compile Include="Scan\LocalizedDescriptionAttribute.cs" />
     <Compile Include="Scan\ScanDevice.cs" />
-    <Compile Include="Scan\ScanPerformer.cs" />
-    <Compile Include="Scan\Stub\StubScanDriverFactory.cs" />
-    <Compile Include="Scan\Stub\StubScanDriver.cs" />
-    <Compile Include="Scan\Twain\TwainScanDriver.cs" />
-    <Compile Include="Scan\ScanDriverBase.cs" />
-    <Compile Include="Scan\Wia\WiaScanDriver.cs" />
     <Compile Include="Operation\OperationErrorEventArgs.cs" />
     <Compile Include="Operation\OperationStatus.cs" />
     <Compile Include="Util\NumberExtensions.cs" />

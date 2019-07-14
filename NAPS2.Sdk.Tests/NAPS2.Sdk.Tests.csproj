@@ -130,7 +130,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>PdfiumTestsData.resx</DependentUpon>
     </Compile>
-    <Compile Include="Mocks\MockScanDriver.cs" />
     <Compile Include="Mocks\StubScanBridge.cs" />
     <Compile Include="Scan\AutoSaveTests.cs" />
     <Compile Include="Config\ProfileSerializerTestsData.Designer.cs">

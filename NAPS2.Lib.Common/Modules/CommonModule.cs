@@ -44,16 +44,6 @@ namespace NAPS2.Modules
             // Scan
             Bind<IScanPerformer>().To<NAPS2.Scan.Experimental.ScanPerformer>();
             Bind<IBatchScanPerformer>().To<BatchScanPerformer>();
-#if DEBUG && false
-            Bind<IScanDriverFactory>().To<Scan.Stub.StubScanDriverFactory>();
-#else
-            Bind<IScanDriverFactory>().To<NinjectScanDriverFactory>();
-#endif
-            Bind<IScanDriver>().To<WiaScanDriver>().InSingletonScope().Named(WiaScanDriver.DRIVER_NAME);
-            Bind<IScanDriver>().To<TwainScanDriver>().InSingletonScope().Named(TwainScanDriver.DRIVER_NAME);
-            Bind<IScanDriver>().To<SaneScanDriver>().InSingletonScope().Named(SaneScanDriver.DRIVER_NAME);
-            Bind<IScanDriver>().To<ProxiedScanDriver>().InSingletonScope().Named(ProxiedScanDriver.DRIVER_NAME);
-            Bind<ITwainWrapper>().To<TwainWrapper>();
 
             // Config
             var configScopes = new ConfigScopes(Path.Combine(Paths.Executable, "appsettings.xml"), Path.Combine(Paths.AppData, "config.xml"));

@@ -71,7 +71,7 @@ namespace NAPS2.WinForms
                 CurrentDevice = ScanProfile.Device;
             }
             isDefault = ScanProfile.IsDefault;
-            useProxy = ScanProfile.DriverName == ProxiedScanDriver.DRIVER_NAME;
+            useProxy = ScanProfile.DriverName == DriverNames.PROXY;
             iconID = ScanProfile.IconID;
 
             cmbSource.SelectedIndex = (int)ScanProfile.PaperSource;
@@ -188,20 +188,20 @@ namespace NAPS2.WinForms
 
         private string DeviceDriverName
         {
-            get => rdTWAIN.Checked ? TwainScanDriver.DRIVER_NAME
-                 : rdSANE.Checked  ? SaneScanDriver.DRIVER_NAME
-                                   : WiaScanDriver.DRIVER_NAME;
+            get => rdTWAIN.Checked ? DriverNames.TWAIN
+                 : rdSANE.Checked  ? DriverNames.SANE
+                                   : DriverNames.WIA;
             set
             {
-                if (value == TwainScanDriver.DRIVER_NAME)
+                if (value == DriverNames.TWAIN)
                 {
                     rdTWAIN.Checked = true;
                 }
-                else if (value == SaneScanDriver.DRIVER_NAME)
+                else if (value == DriverNames.SANE)
                 {
                     rdSANE.Checked = true;
                 }
-                else if (value == WiaScanDriver.DRIVER_NAME || PlatformCompat.System.IsWiaDriverSupported)
+                else if (value == DriverNames.WIA || PlatformCompat.System.IsWiaDriverSupported)
                 {
                     rdWIA.Checked = true;
                 }
@@ -253,7 +253,7 @@ namespace NAPS2.WinForms
 
         private async void btnChooseDevice_Click(object sender, EventArgs e)
         {
-            ScanProfile.DriverName = useProxy ? ProxiedScanDriver.DRIVER_NAME : DeviceDriverName;
+            ScanProfile.DriverName = useProxy ? DriverNames.PROXY : DeviceDriverName;
             ScanProfile.ProxyDriverName = useProxy ? DeviceDriverName : null;
             await ChooseDevice();
         }
@@ -279,7 +279,7 @@ namespace NAPS2.WinForms
 
                 Device = CurrentDevice,
                 IsDefault = isDefault,
-                DriverName = useProxy ? ProxiedScanDriver.DRIVER_NAME : DeviceDriverName,
+                DriverName = useProxy ? DriverNames.PROXY : DeviceDriverName,
                 ProxyConfig = ScanProfile.ProxyConfig,
                 ProxyDriverName = useProxy ? DeviceDriverName : null,
                 DisplayName = txtName.Text,
@@ -354,7 +354,7 @@ namespace NAPS2.WinForms
             {
                 suppressChangeEvent = true;
 
-                bool canUseNativeUi = DeviceDriverName != SaneScanDriver.DRIVER_NAME && !useProxy;
+                bool canUseNativeUi = DeviceDriverName != DriverNames.SANE && !useProxy;
                 bool locked = ScanProfile.IsLocked;
                 bool deviceLocked = ScanProfile.IsDeviceLocked;
                 bool settingsEnabled = !locked && (rdbConfig.Checked || !canUseNativeUi);
