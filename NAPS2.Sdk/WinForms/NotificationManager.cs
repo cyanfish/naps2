@@ -84,13 +84,16 @@ namespace NAPS2.WinForms
             {
                 return;
             }
-
-            int slot = FillNextSlot(n);
-            n.Location = GetPosition(n, slot);
-            n.Resize += parentForm_Resize;
-            n.BringToFront();
-            n.HideNotify += (sender, args) => ClearSlot(n);
-            n.ShowNotify();
+            
+            Invoker.Current.SafeInvoke(() =>
+            {
+                int slot = FillNextSlot(n);
+                n.Location = GetPosition(n, slot);
+                n.Resize += parentForm_Resize;
+                n.BringToFront();
+                n.HideNotify += (sender, args) => ClearSlot(n);
+                n.ShowNotify(); 
+            });
         }
 
         private void parentForm_Resize(object sender, EventArgs e)

@@ -136,7 +136,9 @@ namespace NAPS2.Scan.Experimental
                 },
                 SaneOptions =
                 {
-                    KeyValueOptions = new KeyValueScanOptions(scanProfile.KeyValueOptions)
+                    KeyValueOptions = scanProfile.KeyValueOptions != null
+                        ? new KeyValueScanOptions(scanProfile.KeyValueOptions)
+                        : new KeyValueScanOptions()
                 },
                 NetworkOptions =
                 {
