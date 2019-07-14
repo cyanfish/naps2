@@ -8,8 +8,6 @@ import "Serialization/SerializedImage.proto";
 service WorkerService {
 	rpc Init (InitRequest) returns (InitResponse) {}
 	rpc Wia10NativeUi (Wia10NativeUiRequest) returns (Wia10NativeUiResponse) {}
-	rpc TwainGetDeviceList (TwainGetDeviceListRequest) returns (TwainGetDeviceListResponse) {}
-	rpc TwainScan (TwainScanRequest) returns (stream TwainScanResponse) {}
 	rpc SendMapiEmail (SendMapiEmailRequest) returns (SendMapiEmailResponse) {}
 	rpc RenderThumbnail (RenderThumbnailRequest) returns (RenderThumbnailResponse) {}
 	rpc Scan (ScanRequest) returns (stream ScanResponse) {}
@@ -32,27 +30,6 @@ message Wia10NativeUiRequest {
 message Wia10NativeUiResponse {
 	NAPS2.Remoting.Error error = 1;
 	string wiaConfigurationXml = 2;
-}
-
-message TwainGetDeviceListRequest {
-	string twainImpl = 1;
-}
-
-message TwainGetDeviceListResponse {
-	NAPS2.Remoting.Error error = 1;
-	string deviceListXml = 2;
-}
-
-message TwainScanRequest {
-	string scanDeviceXml = 1;
-	string scanProfileXml = 2;
-	string scanParamsXml = 3;
-	fixed64 hwnd = 4;
-}
-
-message TwainScanResponse {
-	NAPS2.Remoting.Error error = 1;
-	NAPS2.Serialization.SerializedImage image = 2;
 }
 
 message GetDeviceListRequest {

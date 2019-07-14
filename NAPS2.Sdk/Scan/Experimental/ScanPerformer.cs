@@ -33,17 +33,24 @@ namespace NAPS2.Scan.Experimental
             this.errorOutput = errorOutput;
         }
 
+        public async Task<ScanDevice> PromptForDevice(ScanProfile scanProfile, IntPtr dialogParent = default)
+        {
+            var options = BuildOptions(scanProfile, new ScanParams(), dialogParent);
+            return await PromptForDevice(options);
+        }
+
         public async Task<ScannedImageSource> PerformScan(ScanProfile scanProfile, ScanParams scanParams, IntPtr dialogParent = default,
             CancellationToken cancelToken = default)
         {
-            var options = await BuildOptions(scanProfile, scanParams, dialogParent);
-            if (options == null)
+            var options = BuildOptions(scanProfile, scanParams, dialogParent);
+            if (!await PopulateDevice(scanProfile, options))
             {
                 // User cancelled out of a dialog
                 return ScannedImageSource.Empty;
             }
 
             var controller = new ScanController();
+            // TODO: Consider how to handle operations with Twain (right now there are duplicate progress windows).
             var op = new ScanOperation(options.Device, options.PaperSource);
 
             controller.PageStart += (sender, args) => op.NextPage(args.PageNumber);
@@ -112,7 +119,7 @@ namespace NAPS2.Scan.Experimental
             smoothProgress.OutputProgressChanged += (sender, args) => op.Progress((int) Math.Round(args.Value * 1000), 1000);
         }
 
-        private async Task<ScanOptions> BuildOptions(ScanProfile scanProfile, ScanParams scanParams, IntPtr dialogParent)
+        private ScanOptions BuildOptions(ScanProfile scanProfile, ScanParams scanParams, IntPtr dialogParent)
         {
             var options = new ScanOptions
             {
@@ -184,35 +191,18 @@ namespace NAPS2.Scan.Experimental
 
             options.PageSize = new PageSize(pageDimensions.Width, pageDimensions.Height, pageDimensions.Unit);
 
+            return options;
+        }
+
+        private async Task<bool> PopulateDevice(ScanProfile scanProfile, ScanOptions options)
+        {
             // If a device wasn't specified, prompt the user to pick one
             if (string.IsNullOrEmpty(scanProfile.Device?.ID))
             {
-                if (options.Driver == Driver.Wia)
+                options.Device = await PromptForDevice(options);
+                if (options.Device == null)
                 {
-                    // WIA has a nice built-in device selection dialog, so use it
-                    using (var deviceManager = new WiaDeviceManager(options.WiaOptions.WiaVersion))
-                    {
-                        var wiaDevice = deviceManager.PromptForDevice(dialogParent);
-                        if (wiaDevice == null)
-                        {
-                            return null;
-                        }
-
-                        options.Device = new ScanDevice(wiaDevice.Id(), wiaDevice.Name());
-                    }
-                }
-                else
-                {
-                    // Other drivers do not, so use a generic dialog
-                    var deviceForm = formFactory.Create<FSelectDevice>();
-                    deviceForm.DeviceList = await new ScanController().GetDeviceList(options);
-                    deviceForm.ShowDialog(new Win32Window(dialogParent));
-                    if (deviceForm.SelectedDevice == null)
-                    {
-                        return null;
-                    }
-
-                    options.Device = deviceForm.SelectedDevice;
+                    return false;
                 }
 
                 // Persist the device in the profile if configured to do so
@@ -226,8 +216,31 @@ namespace NAPS2.Scan.Experimental
             {
                 options.Device = scanProfile.Device;
             }
+            return true;
+        }
 
-            return options;
+        private async Task<ScanDevice> PromptForDevice(ScanOptions options)
+        {
+            if (options.Driver == Driver.Wia)
+            {
+                // WIA has a nice built-in device selection dialog, so use it
+                using (var deviceManager = new WiaDeviceManager(options.WiaOptions.WiaVersion))
+                {
+                    var wiaDevice = deviceManager.PromptForDevice(options.DialogParent);
+                    if (wiaDevice == null)
+                    {
+                        return null;
+                    }
+
+                    return new ScanDevice(wiaDevice.Id(), wiaDevice.Name());
+                }
+            }
+
+            // Other drivers do not, so use a generic dialog
+            var deviceForm = formFactory.Create<FSelectDevice>();
+            deviceForm.DeviceList = await new ScanController().GetDeviceList(options);
+            deviceForm.ShowDialog(new Win32Window(options.DialogParent));
+            return deviceForm.SelectedDevice;
         }
     }
 }

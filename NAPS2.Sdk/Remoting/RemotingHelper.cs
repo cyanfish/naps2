@@ -65,6 +65,19 @@ namespace NAPS2.Remoting
                 }
             });
 
+        public static Task WrapAction(Func<Task> action, Action<Error> error) =>
+            Task.Run(async () =>
+            {
+                try
+                {
+                    await action();
+                }
+                catch (Exception e)
+                {
+                    error(ToError(e));
+                }
+            });
+
         public static Task WrapAction(Action action, Action<Error> error) =>
             Task.Run(() =>
             {

@@ -21,6 +21,8 @@ namespace NAPS2.Scan
         // TODO: Move additional logic (auto save, event logging, device prompting) to the driver base class
         // TODO: Probably ISaveNotify should follow the static default/injected pattern so it doesn't have to be a parameter.
 
+        public Task<ScanDevice> PromptForDevice(ScanProfile scanProfile, IntPtr dialogParent = default) => throw new NotImplementedException();
+
         public Task<ScannedImageSource> PerformScan(ScanProfile scanProfile, ScanParams scanParams, IntPtr dialogParent = default, CancellationToken cancelToken = default)
         {
             return Task.Run(() =>

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using Google.Protobuf;
 using Grpc.Core;
@@ -7,26 +6,32 @@ using NAPS2.Images;
 using NAPS2.Images.Storage;
 using NAPS2.ImportExport.Email;
 using NAPS2.ImportExport.Email.Mapi;
-using NAPS2.Scan;
-using NAPS2.Scan.Twain;
+using NAPS2.Scan.Experimental;
+using NAPS2.Scan.Experimental.Internal;
 using NAPS2.Scan.Wia;
 using NAPS2.Scan.Wia.Native;
 using NAPS2.Serialization;
-using NAPS2.Util;
 
 namespace NAPS2.Remoting.Worker
 {
     public class WorkerServiceImpl : WorkerService.WorkerServiceBase
     {
         private readonly ImageContext imageContext;
-        private readonly ITwainWrapper twainWrapper;
+        private readonly IRemoteScanController remoteScanController;
         private readonly ThumbnailRenderer thumbnailRenderer;
         private readonly IMapiWrapper mapiWrapper;
 
-        public WorkerServiceImpl(ImageContext imageContext, ITwainWrapper twainWrapper, ThumbnailRenderer thumbnailRenderer, IMapiWrapper mapiWrapper)
+        public WorkerServiceImpl(ImageContext imageContext, ThumbnailRenderer thumbnailRenderer, IMapiWrapper mapiWrapper, BlankDetector blankDetector)
+            : this(imageContext, new RemoteScanController(new ScanDriverFactory(imageContext), new RemotePostProcessor(imageContext, blankDetector)),
+                thumbnailRenderer, mapiWrapper)
+        {
+        }
+
+        internal WorkerServiceImpl(ImageContext imageContext, IRemoteScanController remoteScanController, ThumbnailRenderer thumbnailRenderer,
+            IMapiWrapper mapiWrapper)
         {
             this.imageContext = imageContext;
-            this.twainWrapper = twainWrapper;
+            this.remoteScanController = remoteScanController;
             this.thumbnailRenderer = thumbnailRenderer;
             this.mapiWrapper = mapiWrapper;
         }
@@ -39,6 +44,7 @@ namespace NAPS2.Remoting.Worker
                     {
                         imageContext.FileStorageManager = new RecoveryStorageManager(request.RecoveryFolderPath, true);
                     }
+
                     return new InitResponse();
                 },
                 err => new InitResponse { Error = err });
@@ -52,7 +58,7 @@ namespace NAPS2.Remoting.Worker
                         using (var deviceManager = new WiaDeviceManager(WiaVersion.Wia10))
                         using (var device = deviceManager.FindDevice(request.DeviceId))
                         {
-                            var item = device.PromptToConfigure((IntPtr)request.Hwnd);
+                            var item = device.PromptToConfigure((IntPtr) request.Hwnd);
                             return new Wia10NativeUiResponse
                             {
                                 WiaConfigurationXml = new WiaConfiguration
@@ -72,28 +78,57 @@ namespace NAPS2.Remoting.Worker
                 },
                 err => new Wia10NativeUiResponse { Error = err });
 
-        public override Task<TwainGetDeviceListResponse> TwainGetDeviceList(TwainGetDeviceListRequest request, ServerCallContext context) =>
+        public override Task<GetDeviceListResponse> GetDeviceList(GetDeviceListRequest request, ServerCallContext context) =>
             RemotingHelper.WrapFunc(
-                () => new TwainGetDeviceListResponse
+                async () => new GetDeviceListResponse
                 {
-                    DeviceListXml = twainWrapper.GetDeviceList(request.TwainImpl.FromXml<TwainImpl>()).ToXml()
+                    DeviceListXml = (await remoteScanController.GetDeviceList(request.OptionsXml.FromXml<ScanOptions>())).ToXml()
                 },
-                err => new TwainGetDeviceListResponse { Error = err });
+                err => new GetDeviceListResponse { Error = err });
 
-        public override Task TwainScan(TwainScanRequest request, IServerStreamWriter<TwainScanResponse> responseStream, ServerCallContext context) =>
-            RemotingHelper.WrapAction(
-                () =>
+        public override Task Scan(ScanRequest request, IServerStreamWriter<ScanResponse> responseStream, ServerCallContext context)
+        {
+            // gRPC doesn't allow multiple pending writes. However, we don't want to write synchronously because that will slow down the scanning process.
+            // Instead, we can use some async magic (chained tasks) to only write one at a time. 
+            Task lastWriteTask = Task.CompletedTask;
+
+            Task WriteSequenced(ScanResponse response)
+            {
+                lastWriteTask = lastWriteTask.ContinueWith(t => responseStream.WriteAsync(response)).Unwrap();
+                return lastWriteTask;
+            }
+
+            return RemotingHelper.WrapAction(
+                async () =>
                 {
-                    var imagePathDict = new Dictionary<ScannedImage, string>();
-                    twainWrapper.Scan(
-                        (IntPtr)request.Hwnd,
-                        request.ScanDeviceXml.FromXml<ScanDevice>(),
-                        request.ScanProfileXml.FromXml<ScanProfile>(),
-                        request.ScanParamsXml.FromXml<ScanParams>(),
-                        context.CancellationToken,
-                        new WorkerImageSink(imageContext, responseStream, imagePathDict),
-                        (img, _, path) => imagePathDict.Add(img, path));
-                }, err => responseStream.WriteAsync(new TwainScanResponse { Error = err }));
+                    var scanEvents = new ScanEvents(
+                        () => WriteSequenced(new ScanResponse
+                        {
+                            PageStart = new PageStartEvent()
+                        }),
+                        progress => WriteSequenced(new ScanResponse
+                        {
+                            Progress = new ProgressEvent
+                            {
+                                Value = progress
+                            }
+                        })
+                    );
+                    await remoteScanController.Scan(request.OptionsXml.FromXml<ScanOptions>(), context.CancellationToken, scanEvents,
+                        (image, postProcessingContext) =>
+                            WriteSequenced(new ScanResponse
+                            {
+                                Image = SerializedImageHelper.Serialize(imageContext, image, new SerializedImageHelper.SerializeOptions
+                                {
+                                    TransferOwnership = true,
+                                    IncludeThumbnail = true,
+                                    RenderedFilePath = postProcessingContext.TempPath
+                                })
+                            }));
+                    // It's important that we wait for writes to complete, otherwise the channel might close first.
+                    await lastWriteTask;
+                }, err => WriteSequenced(new ScanResponse { Error = err }).Wait());
+        }
 
         public override Task<SendMapiEmailResponse> SendMapiEmail(SendMapiEmailRequest request, ServerCallContext context) =>
             RemotingHelper.WrapFunc(
@@ -122,33 +157,5 @@ namespace NAPS2.Remoting.Worker
                     }
                 },
                 err => new RenderThumbnailResponse { Error = err });
-
-        private class WorkerImageSink : ScannedImageSink
-        {
-            private readonly ImageContext imageContext;
-            private readonly IServerStreamWriter<TwainScanResponse> callback;
-            private readonly Dictionary<ScannedImage, string> imagePathDict;
-
-            public WorkerImageSink(ImageContext imageContext, IServerStreamWriter<TwainScanResponse> callback, Dictionary<ScannedImage, string> imagePathDict)
-            {
-                this.imageContext = imageContext;
-                this.callback = callback;
-                this.imagePathDict = imagePathDict;
-            }
-
-            public override void PutImage(ScannedImage image)
-            {
-                // TODO: Ideally this shouldn't be inheriting ScannedImageSink, some other cleaner mechanism
-                callback.WriteAsync(new TwainScanResponse
-                {
-                    Image = SerializedImageHelper.Serialize(imageContext, image, new SerializedImageHelper.SerializeOptions
-                    {
-                        TransferOwnership = true,
-                        IncludeThumbnail = true,
-                        RenderedFilePath = imagePathDict.Get(image)
-                    })
-                }).Wait();
-            }
-        }
     }
 }

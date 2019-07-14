@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -13,7 +12,8 @@ using NAPS2.Remoting;
 using NAPS2.Remoting.Worker;
 using NAPS2.Scan;
 using NAPS2.Scan.Exceptions;
-using NAPS2.Scan.Twain;
+using NAPS2.Scan.Experimental;
+using NAPS2.Scan.Experimental.Internal;
 using NAPS2.Util;
 using Xunit;
 
@@ -21,11 +21,11 @@ namespace NAPS2.Sdk.Tests.Worker
 {
     public class WorkerChannelTests : ContextualTexts
     {
-        private Channel Start(ITwainWrapper twainWrapper = null, ThumbnailRenderer thumbnailRenderer = null, IMapiWrapper mapiWrapper = null, ServerCredentials serverCreds = null, ChannelCredentials clientCreds = null)
+        private Channel Start(IRemoteScanController remoteScanController = null, ThumbnailRenderer thumbnailRenderer = null, IMapiWrapper mapiWrapper = null, ServerCredentials serverCreds = null, ChannelCredentials clientCreds = null)
         {
             Server server = new Server
             {
-                Services = { WorkerService.BindService(new WorkerServiceImpl(ImageContext, twainWrapper, thumbnailRenderer, mapiWrapper)) },
+                Services = { WorkerService.BindService(new WorkerServiceImpl(ImageContext, remoteScanController, thumbnailRenderer, mapiWrapper)) },
                 Ports = { new ServerPort("localhost", 0, serverCreds ?? ServerCredentials.Insecure) }
             };
             server.Start();
@@ -68,49 +68,49 @@ namespace NAPS2.Sdk.Tests.Worker
         }
 
         [Fact]
-        public void TwainGetDeviceList()
+        public async Task GetDeviceList()
         {
-            var twainWrapper = new Mock<ITwainWrapper>();
-            using (var channel = Start(twainWrapper.Object))
+            var remoteScanController = new Mock<IRemoteScanController>();
+            using (var channel = Start(remoteScanController.Object))
             {
-                twainWrapper
-                    .Setup(tw => tw.GetDeviceList(TwainImpl.OldDsm))
-                    .Returns(new List<ScanDevice> { new ScanDevice("test_id", "test_name") });
+                remoteScanController
+                    .Setup(rsc => rsc.GetDeviceList(It.IsAny<ScanOptions>()))
+                    .ReturnsAsync(new List<ScanDevice> { new ScanDevice("test_id", "test_name") });
 
-                var deviceList = channel.Client.TwainGetDeviceList(TwainImpl.OldDsm);
+                var deviceList = await channel.Client.GetDeviceList(new ScanOptions());
 
                 Assert.Single(deviceList);
                 Assert.Equal("test_id", deviceList[0].ID);
                 Assert.Equal("test_name", deviceList[0].Name);
-                twainWrapper.Verify(tw => tw.GetDeviceList(TwainImpl.OldDsm));
-                twainWrapper.VerifyNoOtherCalls();
+                remoteScanController.Verify(rsc => rsc.GetDeviceList(It.IsAny<ScanOptions>()));
+                remoteScanController.VerifyNoOtherCalls();
             }
         }
 
         [Fact]
-        public async Task TwainScanWithMemoryStorage()
+        public async Task ScanWithMemoryStorage()
         {
             ImageContext.ConfigureBackingStorage<GdiImage>();
-            await TwainScanInternalTest();
+            await ScanInternalTest();
         }
 
         [Fact]
-        public async Task TwainScanWithFileStorage()
+        public async Task ScanWithFileStorage()
         {
             UseFileStorage();
-            await TwainScanInternalTest();
+            await ScanInternalTest();
         }
 
         [Fact]
-        public async Task TwainScanWithRecovery()
+        public async Task ScanWithRecovery()
         {
             UseRecovery();
-            await TwainScanInternalTest();
+            await ScanInternalTest();
         }
 
-        private async Task TwainScanInternalTest()
+        private async Task ScanInternalTest()
         {
-            var twainWrapper = new TwainWrapperMockScanner
+            var remoteScanController = new MockRemoteScanController
             {
                 Images = new List<ScannedImage>
                 {
@@ -119,11 +119,11 @@ namespace NAPS2.Sdk.Tests.Worker
                 }
             };
 
-            using (var channel = Start(twainWrapper))
+            using (var channel = Start(remoteScanController))
             {
                 var receivedImages = new List<ScannedImage>();
-                await channel.Client.TwainScan(ImageContext, new ScanDevice("test_id", "test_name"), new ScanProfile(), new ScanParams(), IntPtr.Zero,
-                    CancellationToken.None,
+                await channel.Client.Scan(ImageContext, new ScanOptions(),
+                    CancellationToken.None, new ScanEvents(() => { }, _ => { }), 
                     (img, path) => { receivedImages.Add(img); });
 
                 Assert.Equal(2, receivedImages.Count);
@@ -131,47 +131,52 @@ namespace NAPS2.Sdk.Tests.Worker
         }
 
         [Fact]
-        public async Task TwainScanException()
+        public async Task ScanException()
         {
-            var twainWrapper = new TwainWrapperMockScanner
+            var remoteScanController = new MockRemoteScanController
             {
+                Images = new List<ScannedImage>
+                {
+                    CreateScannedImage(),
+                    CreateScannedImage()
+                },
                 Exception = new DeviceException("Test error")
             };
-            using (var channel = Start(twainWrapper))
+            using (var channel = Start(remoteScanController))
             {
-                var ex = await Assert.ThrowsAsync<DeviceException>(async () => await channel.Client.TwainScan(
+                var ex = await Assert.ThrowsAsync<DeviceException>(async () => await channel.Client.Scan(
                     ImageContext,
-                    new ScanDevice("test_id", "test_name"),
-                    new ScanProfile(),
-                    new ScanParams(),
-                    IntPtr.Zero,
+                    new ScanOptions(),
                     CancellationToken.None,
+                    new ScanEvents(() => { }, _ => { }), 
                     (img, path) => { }));
-                Assert.Contains(nameof(TwainWrapperMockScanner), ex.StackTrace);
+                Assert.Contains(nameof(MockRemoteScanController), ex.StackTrace);
                 Assert.Contains("Test error", ex.Message);
             }
         }
 
-        private class TwainWrapperMockScanner : ITwainWrapper
+        private class MockRemoteScanController : IRemoteScanController
         {
             public List<ScannedImage> Images { get; set; } = new List<ScannedImage>();
 
             public Exception Exception { get; set; }
 
-            public List<ScanDevice> GetDeviceList(TwainImpl twainImpl) => throw new NotSupportedException();
+            public Task<List<ScanDevice>> GetDeviceList(ScanOptions options) => throw new NotSupportedException();
 
-            public void Scan(IntPtr dialogParent, ScanDevice scanDevice, ScanProfile scanProfile, ScanParams scanParams, CancellationToken cancelToken, ScannedImageSink sink,
-                Action<ScannedImage, ScanParams, string> runBackgroundOcr)
+            public Task Scan(ScanOptions options, CancellationToken cancelToken, IScanEvents scanEvents, Action<ScannedImage, PostProcessingContext> callback)
             {
-                foreach (var img in Images)
+                return Task.Run(() =>
                 {
-                    sink.PutImage(img);
-                }
+                    foreach (var img in Images)
+                    {
+                        callback(img, new PostProcessingContext());
+                    }
 
-                if (Exception != null)
-                {
-                    throw Exception;
-                }
+                    if (Exception != null)
+                    {
+                        throw Exception;
+                    }
+                });
             }
         }
 

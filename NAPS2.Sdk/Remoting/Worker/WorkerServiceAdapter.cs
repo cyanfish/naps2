@@ -43,33 +43,6 @@ namespace NAPS2.Remoting.Worker
             return resp.WiaConfigurationXml.FromXml<WiaConfiguration>();
         }
 
-        public List<ScanDevice> TwainGetDeviceList(TwainImpl twainImpl)
-        {
-            var req = new TwainGetDeviceListRequest { TwainImpl = twainImpl.ToXml() };
-            var resp = client.TwainGetDeviceList(req);
-            RemotingHelper.HandleErrors(resp.Error);
-            return resp.DeviceListXml.FromXml<List<ScanDevice>>();
-        }
-
-        public async Task TwainScan(ImageContext imageContext, ScanDevice scanDevice, ScanProfile scanProfile, ScanParams scanParams, IntPtr hwnd, CancellationToken cancelToken, Action<ScannedImage, string> imageCallback)
-        {
-            var req = new TwainScanRequest
-            {
-                ScanDeviceXml = scanDevice.ToXml(),
-                ScanProfileXml = scanProfile.ToXml(),
-                ScanParamsXml = scanParams.ToXml(),
-                Hwnd = (ulong)hwnd
-            };
-            var streamingCall = client.TwainScan(req, cancellationToken: cancelToken);
-            while (await streamingCall.ResponseStream.MoveNext())
-            {
-                var resp = streamingCall.ResponseStream.Current;
-                RemotingHelper.HandleErrors(resp.Error);
-                var scannedImage = SerializedImageHelper.Deserialize(imageContext, resp.Image, new SerializedImageHelper.DeserializeOptions());
-                imageCallback?.Invoke(scannedImage, resp.Image.RenderedFilePath);
-            }
-        }
-
         public async Task<List<ScanDevice>> GetDeviceList(ScanOptions options)
         {
             var req = new GetDeviceListRequest { OptionsXml = options.ToXml() };

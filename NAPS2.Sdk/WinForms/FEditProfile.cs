@@ -1,6 +1,7 @@
 using System;
 using System.Drawing;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using NAPS2.Lang.Resources;
 using NAPS2.Logging;
@@ -8,6 +9,7 @@ using NAPS2.Platform;
 using NAPS2.Remoting.ClientServer;
 using NAPS2.Scan;
 using NAPS2.Scan.Exceptions;
+using NAPS2.Scan.Experimental;
 using NAPS2.Scan.Sane;
 using NAPS2.Scan.Twain;
 using NAPS2.Scan.Wia;
@@ -17,7 +19,7 @@ namespace NAPS2.WinForms
 {
     public partial class FEditProfile : FormBase
     {
-        private readonly IScanDriverFactory driverFactory;
+        private readonly IScanPerformer scanPerformer;
         private readonly ErrorOutput errorOutput;
         private readonly ProfileNameTracker profileNameTracker;
 
@@ -31,9 +33,9 @@ namespace NAPS2.WinForms
 
         private bool suppressChangeEvent;
 
-        public FEditProfile(IScanDriverFactory driverFactory, ErrorOutput errorOutput, ProfileNameTracker profileNameTracker)
+        public FEditProfile(IScanPerformer scanPerformer, ErrorOutput errorOutput, ProfileNameTracker profileNameTracker)
         {
-            this.driverFactory = driverFactory;
+            this.scanPerformer = scanPerformer;
             this.errorOutput = errorOutput;
             this.profileNameTracker = profileNameTracker;
             InitializeComponent();
@@ -220,12 +222,11 @@ namespace NAPS2.WinForms
             }
         }
 
-        private void ChooseDevice(string driverName)
+        private async Task ChooseDevice()
         {
-            var driver = driverFactory.Create(driverName);
             try
             {
-                ScanDevice device = driver.PromptForDevice(ScanProfile, Handle);
+                ScanDevice device = await scanPerformer.PromptForDevice(ScanProfile, Handle);
                 if (device != null)
                 {
                     if (string.IsNullOrEmpty(txtName.Text) ||
@@ -250,11 +251,11 @@ namespace NAPS2.WinForms
             }
         }
 
-        private void btnChooseDevice_Click(object sender, EventArgs e)
+        private async void btnChooseDevice_Click(object sender, EventArgs e)
         {
             ScanProfile.DriverName = useProxy ? ProxiedScanDriver.DRIVER_NAME : DeviceDriverName;
             ScanProfile.ProxyDriverName = useProxy ? DeviceDriverName : null;
-            ChooseDevice(ScanProfile.DriverName);
+            await ChooseDevice();
         }
 
         private void SaveSettings()

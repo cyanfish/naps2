@@ -50,37 +50,12 @@ namespace NAPS2.Scan.Twain
 
         private IEnumerable<ScanDevice> GetFullDeviceList(ScanProfile scanProfile)
         {
-            var twainImpl = scanProfile?.TwainImpl ?? TwainImpl.Default;
-            if (UseWorker(scanProfile))
-            {
-                using(var worker = workerFactory.Create())
-                {
-                    return worker.Service.TwainGetDeviceList(twainImpl);
-                }
-            }
-            return twainWrapper.GetDeviceList(twainImpl);
+            throw new NotImplementedException();
         }
 
-        protected override async Task ScanInternal(ScannedImageSink sink, ScanDevice scanDevice, ScanProfile scanProfile, ScanParams scanParams, IntPtr dialogParent, CancellationToken cancelToken)
+        protected override Task ScanInternal(ScannedImageSink sink, ScanDevice scanDevice, ScanProfile scanProfile, ScanParams scanParams, IntPtr dialogParent, CancellationToken cancelToken)
         {
-            await Task.Run(async () =>
-            {
-                if (UseWorker(scanProfile))
-                {
-                    using (var worker = workerFactory.Create())
-                    {
-                        await worker.Service.TwainScan(imageContext, scanDevice, scanProfile, scanParams, dialogParent, cancelToken, (img, tempPath) =>
-                        {
-                            if (!string.IsNullOrEmpty(tempPath)) scannedImageHelper.RunBackgroundOcr(img, scanParams, tempPath);
-                            sink.PutImage(img);
-                        });
-                    }
-                }
-                else
-                {
-                    twainWrapper.Scan(dialogParent, scanDevice, scanProfile, scanParams, cancelToken, sink, scannedImageHelper.RunBackgroundOcr);
-                }
-            });
+            throw new NotImplementedException();
         }
     }
 }
