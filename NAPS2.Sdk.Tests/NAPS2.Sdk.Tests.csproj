@@ -131,6 +131,7 @@
       <DependentUpon>PdfiumTestsData.resx</DependentUpon>
     </Compile>
     <Compile Include="Mocks\MockScanDriver.cs" />
+    <Compile Include="Mocks\StubScanBridge.cs" />
     <Compile Include="Scan\AutoSaveTests.cs" />
     <Compile Include="Config\ProfileSerializerTestsData.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -139,6 +140,7 @@
     </Compile>
     <Compile Include="ContextualTexts.cs" />
     <Compile Include="Scan\RemoteScanControllerTests.cs" />
+    <Compile Include="Scan\ScanErrorHandling.cs" />
     <Compile Include="Serialization\XmlSerializerTests.cs" />
     <Compile Include="Util\NaturalStringComparerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

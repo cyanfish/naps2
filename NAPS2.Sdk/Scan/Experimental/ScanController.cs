@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
+using System.Threading.Tasks;
 using NAPS2.Images;
 using NAPS2.Scan.Experimental.Internal;
 
@@ -39,7 +40,6 @@ namespace NAPS2.Scan.Experimental
         public ScannedImageSource Scan(ScanOptions options, CancellationToken cancelToken = default)
         {
             options = scanOptionsValidator.ValidateAll(options);
-            var bridge = scanBridgeFactory.Create(options);
             var sink = new ScannedImageSink();
             int pageNumber = 0;
 
@@ -51,25 +51,27 @@ namespace NAPS2.Scan.Experimental
             void PageEndCallback(ScannedImage image) => PageEnd?.Invoke(this, new PageEndEventArgs(pageNumber, image));
 
             ScanStartCallback();
-            bridge.Scan(options, cancelToken, new ScanEvents(PageStartCallback, PageProgressCallback), (scannedImage, postProcessingContext) =>
+            Task.Run(async () =>
             {
-                localPostProcessor.PostProcess(scannedImage, options, postProcessingContext);
-                sink.PutImage(scannedImage);
-                PageEndCallback(scannedImage);
-            }).ContinueWith(t =>
-            {
-                if (t.IsFaulted)
+                try
                 {
-                    sink.SetError(t.Exception);
-                    ScanErrorCallback(t.Exception);
-                }
-                else
-                {
+                    var bridge = scanBridgeFactory.Create(options);
+                    await bridge.Scan(options, cancelToken, new ScanEvents(PageStartCallback, PageProgressCallback),
+                        (scannedImage, postProcessingContext) =>
+                        {
+                            localPostProcessor.PostProcess(scannedImage, options, postProcessingContext);
+                            sink.PutImage(scannedImage);
+                            PageEndCallback(scannedImage);
+                        });
                     sink.SetCompleted();
-                    ScanEndCallback(sink.AsSource());
                 }
+                catch (Exception ex)
+                {
+                    sink.SetError(ex);
+                    ScanErrorCallback(ex);
+                }
+                ScanEndCallback(sink.AsSource());
             });
-
             return sink.AsSource();
         }
 

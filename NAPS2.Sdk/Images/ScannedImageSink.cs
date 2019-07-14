@@ -36,7 +36,7 @@ namespace NAPS2.Images
             {
                 if (Completed)
                 {
-                    throw new InvalidOperationException("Sink is already in the completed state");
+                    return;
                 }
                 Completed = true;
                 images.Last().SetResult(null);

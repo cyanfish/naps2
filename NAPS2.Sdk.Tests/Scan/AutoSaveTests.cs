@@ -178,10 +178,5 @@ namespace NAPS2.Sdk.Tests.Scan
                 new BitmapRenderer(ImageContext),
                 new StubConfigProvider<CommonConfig>(InternalDefaults.GetCommonConfig()));
         }
-
-        private ScannedImage CreateScannedImage()
-        {
-            return ImageContext.CreateScannedImage(new GdiImage(new Bitmap(100, 100)));
-        }
     }
 }

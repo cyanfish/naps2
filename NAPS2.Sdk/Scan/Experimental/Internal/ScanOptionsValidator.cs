@@ -49,6 +49,8 @@ namespace NAPS2.Scan.Experimental.Internal
             }
 
             // TODO: Validate DoOcr based on OcrParams
+            // TODO: Do we need to validate the presence of a device?
+            // TODO: Probably more things as well.
 
             return options;
         }

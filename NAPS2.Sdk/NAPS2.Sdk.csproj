@@ -298,7 +298,7 @@
     <Compile Include="Scan\Experimental\ScanStartEventArgs.cs" />
     <Compile Include="Scan\Experimental\TwainOptions.cs" />
     <Compile Include="Scan\Experimental\WiaOptions.cs" />
-    <Compile Include="Scan\Experimental\Internal\WorkerProcessScanBridge.cs" />
+    <Compile Include="Scan\Experimental\Internal\WorkerScanBridge.cs" />
     <Compile Include="Scan\KeyValueScanOptions.cs" />
     <Compile Include="Scan\Exceptions\SaneNotAvailableException.cs" />
     <Compile Include="Scan\Sane\SaneOption.cs" />

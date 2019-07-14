@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 using NAPS2.Config;
 using NAPS2.Images;
 using NAPS2.ImportExport;
+using NAPS2.Logging;
 using NAPS2.Operation;
+using NAPS2.Scan.Exceptions;
 using NAPS2.Scan.Wia.Native;
 using NAPS2.Util;
 using NAPS2.WinForms;
@@ -20,14 +22,17 @@ namespace NAPS2.Scan.Experimental
         private readonly OperationProgress operationProgress;
         private readonly AutoSaver autoSaver;
         private readonly IProfileManager profileManager;
+        private readonly ErrorOutput errorOutput;
 
-        public ScanPerformer(IFormFactory formFactory, ConfigProvider<CommonConfig> configProvider, OperationProgress operationProgress, AutoSaver autoSaver, IProfileManager profileManager)
+        public ScanPerformer(IFormFactory formFactory, ConfigProvider<CommonConfig> configProvider, OperationProgress operationProgress, AutoSaver autoSaver,
+            IProfileManager profileManager, ErrorOutput errorOutput)
         {
             this.formFactory = formFactory;
             this.configProvider = configProvider;
             this.operationProgress = operationProgress;
             this.autoSaver = autoSaver;
             this.profileManager = profileManager;
+            this.errorOutput = errorOutput;
         }
 
         public ScannedImageSource PerformScan(ScanProfile scanProfile, ScanParams scanParams, IntPtr dialogParent = default,
@@ -39,11 +44,13 @@ namespace NAPS2.Scan.Experimental
                 // User cancelled out of a dialog
                 return ScannedImageSource.Empty;
             }
+
             var controller = new ScanController();
             var op = new ScanOperation(options.Device, options.PaperSource);
 
             controller.PageStart += (sender, args) => op.NextPage(args.PageNumber);
             controller.ScanEnd += (sender, args) => op.Completed();
+            controller.ScanError += (sender, args) => HandleError(args.Exception);
             TranslateProgress(controller, op);
 
             ShowOperation(op, scanParams);
@@ -55,7 +62,29 @@ namespace NAPS2.Scan.Experimental
             {
                 source = autoSaver.Save(scanProfile.AutoSaveSettings, source);
             }
-            return source;
+            
+            // Errors are handled by the ScanError callback
+            return SwallowErrors(source);
+        }
+
+        private void HandleError(Exception error)
+        {
+            if (error is ScanDriverUnknownException)
+            {
+                Log.ErrorException(error.Message, error.InnerException);
+                errorOutput?.DisplayError(error.Message, error);
+            }
+            else
+            {
+                errorOutput?.DisplayError(error.Message);
+            }
+        }
+
+        private ScannedImageSource SwallowErrors(ScannedImageSource source)
+        {
+            var sink = new ScannedImageSink();
+            source.ForEach(img => sink.PutImage(img)).ContinueWith(t => sink.SetCompleted());
+            return sink.AsSource();
         }
 
         private void ShowOperation(ScanOperation op, ScanParams scanParams)
@@ -90,9 +119,9 @@ namespace NAPS2.Scan.Experimental
             var options = new ScanOptions
             {
                 Driver = scanProfile.DriverName == "wia" ? Driver.Wia
-                       : scanProfile.DriverName == "sane" ? Driver.Sane
-                       : scanProfile.DriverName == "twain" ? Driver.Twain
-                       : Driver.Default,
+                    : scanProfile.DriverName == "sane" ? Driver.Sane
+                    : scanProfile.DriverName == "twain" ? Driver.Twain
+                    : Driver.Default,
                 WiaOptions =
                 {
                     WiaVersion = scanProfile.WiaVersion,
@@ -146,12 +175,13 @@ namespace NAPS2.Scan.Experimental
                 Device = null, // Set after
                 PageSize = null, // Set after
             };
-            
+
             PageDimensions pageDimensions = scanProfile.PageSize.PageDimensions() ?? scanProfile.CustomPageSize;
             if (pageDimensions == null)
             {
                 throw new ArgumentException("No page size specified");
             }
+
             options.PageSize = new PageSize(pageDimensions.Width, pageDimensions.Height, pageDimensions.Unit);
 
             // If a device wasn't specified, prompt the user to pick one
@@ -167,6 +197,7 @@ namespace NAPS2.Scan.Experimental
                         {
                             return null;
                         }
+
                         options.Device = new ScanDevice(wiaDevice.Id(), wiaDevice.Name());
                     }
                 }
@@ -180,6 +211,7 @@ namespace NAPS2.Scan.Experimental
                     {
                         return null;
                     }
+
                     options.Device = deviceForm.SelectedDevice;
                 }
 
