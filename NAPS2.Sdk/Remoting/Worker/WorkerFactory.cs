@@ -5,7 +5,6 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
 using NAPS2.Images.Storage;
@@ -19,9 +18,9 @@ namespace NAPS2.Remoting.Worker
     /// </summary>
     public class WorkerFactory : IWorkerFactory
     {
-        private static WorkerFactory _default;
+        private static IWorkerFactory _default;
 
-        public static WorkerFactory Default
+        public static IWorkerFactory Default
         {
             get => _default ?? (_default = new WorkerFactory(ImageContext.Default));
             set => _default = value ?? throw new ArgumentNullException(nameof(value));
@@ -145,16 +144,7 @@ namespace NAPS2.Remoting.Worker
             var rsm = imageContext.FileStorageManager as RecoveryStorageManager;
             rsm?.EnsureFolderCreated();
             var worker = NextWorker();
-            try
-            {
-                worker.Service.Init(rsm?.RecoveryFolderPath);
-            }
-            catch (EndpointNotFoundException)
-            {
-                // Retry once
-                worker = NextWorker();
-                worker.Service.Init(rsm?.RecoveryFolderPath);
-            }
+            worker.Service.Init(rsm?.RecoveryFolderPath);
             return worker;
         }
     }
