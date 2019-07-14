@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using NAPS2.ImportExport.Pdf;
+﻿using NAPS2.ImportExport.Pdf;
 using NAPS2.Lang.ConsoleResources;
 using NAPS2.Util;
 

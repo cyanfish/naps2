@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
 using System.IO;
-using System.Linq;
 using NAPS2.Images.Transforms;
 using NAPS2.Recovery;
 using NAPS2.Serialization;

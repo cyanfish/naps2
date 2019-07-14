@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using NAPS2.Dependencies;
 using NAPS2.Lang.ConsoleResources;
 

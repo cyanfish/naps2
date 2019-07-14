@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-namespace NAPS2.Util
+﻿namespace NAPS2.Util
 {
     /// <summary>
     /// A common signature for progress handling.

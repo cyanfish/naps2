@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Threading;
 using NAPS2.Images;
-using NAPS2.Util;
 
 namespace NAPS2.Scan.Experimental
 {

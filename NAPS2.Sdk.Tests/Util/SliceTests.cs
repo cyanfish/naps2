@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using NAPS2.Util;
+﻿using NAPS2.Util;
 using Xunit;
 
 namespace NAPS2.Sdk.Tests.Util

@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 using Google.Protobuf;
 using NAPS2.Lang.Resources;
 using NAPS2.Logging;

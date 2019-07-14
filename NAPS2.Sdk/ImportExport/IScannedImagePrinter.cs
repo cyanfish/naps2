@@ -1,7 +1,5 @@
-using System;
 using System.Collections.Generic;
 using System.Drawing.Printing;
-using System.Linq;
 using System.Threading.Tasks;
 using NAPS2.Images;
 

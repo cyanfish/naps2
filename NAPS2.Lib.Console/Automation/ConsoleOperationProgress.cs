@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using NAPS2.Operation;
 using NAPS2.WinForms;
 

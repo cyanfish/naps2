@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using Google.Protobuf;
 using NAPS2.Images;
 using NAPS2.Images.Storage;

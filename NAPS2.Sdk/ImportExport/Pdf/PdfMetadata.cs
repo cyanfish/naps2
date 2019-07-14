@@ -1,5 +1,3 @@
-using NAPS2.Lang.Resources;
-
 namespace NAPS2.ImportExport.Pdf
 {
     public class PdfMetadata

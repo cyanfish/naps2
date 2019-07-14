@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Moq;
+﻿using Moq;
 using NAPS2.Config;
 using NAPS2.ImportExport;
 using NAPS2.Scan;

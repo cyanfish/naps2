@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-namespace NAPS2.Dependencies
+﻿namespace NAPS2.Dependencies
 {
     public class DownloadMirror
     {

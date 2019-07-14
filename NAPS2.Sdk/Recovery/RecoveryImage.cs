@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-namespace NAPS2.Recovery
+﻿namespace NAPS2.Recovery
 {
     //public class RecoveryImage : IDisposable
     //{

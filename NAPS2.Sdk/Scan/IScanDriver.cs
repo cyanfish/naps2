@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading;
 using NAPS2.Scan.Exceptions;
 using NAPS2.Images;

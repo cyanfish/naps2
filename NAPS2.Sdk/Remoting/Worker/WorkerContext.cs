@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
 using NAPS2.Logging;
 
 namespace NAPS2.Remoting.Worker

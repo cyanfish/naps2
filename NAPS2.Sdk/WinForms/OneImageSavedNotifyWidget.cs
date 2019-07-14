@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
+﻿using System.IO;
 using NAPS2.Lang.Resources;
 
 namespace NAPS2.WinForms

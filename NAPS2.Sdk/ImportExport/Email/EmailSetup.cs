@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using NAPS2.ImportExport.Email.Oauth;
+﻿using NAPS2.ImportExport.Email.Oauth;
 
 namespace NAPS2.ImportExport.Email
 {

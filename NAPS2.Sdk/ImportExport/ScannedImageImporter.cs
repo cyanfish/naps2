@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Threading;
 using NAPS2.ImportExport.Images;
 using NAPS2.ImportExport.Pdf;

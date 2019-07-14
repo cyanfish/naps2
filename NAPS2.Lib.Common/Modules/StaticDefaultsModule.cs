@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using NAPS2.Images.Storage;
+﻿using NAPS2.Images.Storage;
 using NAPS2.Operation;
 using NAPS2.Remoting.Worker;
 using NAPS2.Util;

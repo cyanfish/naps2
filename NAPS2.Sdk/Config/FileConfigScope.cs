@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using NAPS2.Logging;
 using NAPS2.Serialization;
 

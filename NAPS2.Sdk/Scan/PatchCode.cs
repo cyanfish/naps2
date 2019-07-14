@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-namespace NAPS2.Scan
+﻿namespace NAPS2.Scan
 {
     /// <summary>
     /// A representation for which patch code, if any, has been detected on a document.
