@@ -64,7 +64,7 @@ namespace NAPS2.Scan
 
             var source = controller.Scan(options, op.CancelToken);
 
-            if (scanProfile.AutoSaveSettings != null)
+            if (scanProfile.EnableAutoSave && scanProfile.AutoSaveSettings != null)
             {
                 source = autoSaver.Save(scanProfile.AutoSaveSettings, source);
             }
