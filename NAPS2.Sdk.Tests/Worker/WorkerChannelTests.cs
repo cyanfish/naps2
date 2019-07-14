@@ -152,11 +152,6 @@ namespace NAPS2.Sdk.Tests.Worker
             }
         }
 
-        private ScannedImage CreateScannedImage()
-        {
-            return ImageContext.CreateScannedImage(new GdiImage(new Bitmap(100, 100)));
-        }
-
         private class TwainWrapperMockScanner : ITwainWrapper
         {
             public List<ScannedImage> Images { get; set; } = new List<ScannedImage>();

@@ -97,10 +97,5 @@ namespace NAPS2.Sdk.Tests.Images
             await t1;
             await t2;
         }
-
-        private ScannedImage CreateScannedImage()
-        {
-            return ImageContext.CreateScannedImage(new GdiImage(new Bitmap(100, 100)));
-        }
     }
 }

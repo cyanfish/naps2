@@ -25,9 +25,9 @@ namespace NAPS2.Scan.Experimental.Internal
             this.remotePostProcessor = remotePostProcessor;
         }
 
-        public List<ScanDevice> GetDeviceList(ScanOptions options)
+        public async Task<List<ScanDevice>> GetDeviceList(ScanOptions options)
         {
-            var deviceList = scanDriverFactory.Create(options).GetDeviceList(options);
+            var deviceList = await scanDriverFactory.Create(options).GetDeviceList(options);
             if (options.Driver == Driver.Twain && !options.TwainOptions.IncludeWiaDevices)
             {
                 deviceList = deviceList.Where(x => !x.ID.StartsWith("WIA-", StringComparison.InvariantCulture)).ToList();

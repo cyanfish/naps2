@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading;
+using System.Threading.Tasks;
 using NAPS2.Images;
 
 namespace NAPS2.Scan
@@ -10,6 +11,6 @@ namespace NAPS2.Scan
     /// </summary>
     public interface IScanPerformer
     {
-        ScannedImageSource PerformScan(ScanProfile scanProfile, ScanParams scanParams, IntPtr dialogParent = default, CancellationToken cancelToken = default);
+        Task<ScannedImageSource> PerformScan(ScanProfile scanProfile, ScanParams scanParams, IntPtr dialogParent = default, CancellationToken cancelToken = default);
     }
 }

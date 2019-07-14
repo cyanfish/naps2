@@ -33,10 +33,10 @@ namespace NAPS2.Scan.Experimental
             this.errorOutput = errorOutput;
         }
 
-        public ScannedImageSource PerformScan(ScanProfile scanProfile, ScanParams scanParams, IntPtr dialogParent = default,
+        public async Task<ScannedImageSource> PerformScan(ScanProfile scanProfile, ScanParams scanParams, IntPtr dialogParent = default,
             CancellationToken cancelToken = default)
         {
-            var options = BuildOptions(scanProfile, scanParams, dialogParent);
+            var options = await BuildOptions(scanProfile, scanParams, dialogParent);
             if (options == null)
             {
                 // User cancelled out of a dialog
@@ -112,7 +112,7 @@ namespace NAPS2.Scan.Experimental
             smoothProgress.OutputProgressChanged += (sender, args) => op.Progress((int) Math.Round(args.Value * 1000), 1000);
         }
 
-        private ScanOptions BuildOptions(ScanProfile scanProfile, ScanParams scanParams, IntPtr dialogParent)
+        private async Task<ScanOptions> BuildOptions(ScanProfile scanProfile, ScanParams scanParams, IntPtr dialogParent)
         {
             var options = new ScanOptions
             {
@@ -203,7 +203,7 @@ namespace NAPS2.Scan.Experimental
                 {
                     // Other drivers do not, so use a generic dialog
                     var deviceForm = formFactory.Create<FSelectDevice>();
-                    deviceForm.DeviceList = new ScanController().GetDeviceList(options);
+                    deviceForm.DeviceList = await new ScanController().GetDeviceList(options);
                     deviceForm.ShowDialog(new Win32Window(dialogParent));
                     if (deviceForm.SelectedDevice == null)
                     {

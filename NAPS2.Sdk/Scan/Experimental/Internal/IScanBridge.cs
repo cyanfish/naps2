@@ -11,7 +11,7 @@ namespace NAPS2.Scan.Experimental.Internal
     /// </summary>
     internal interface IScanBridge
     {
-        List<ScanDevice> GetDeviceList(ScanOptions options);
+        Task<List<ScanDevice>> GetDeviceList(ScanOptions options);
 
         Task Scan(ScanOptions options, CancellationToken cancelToken, IScanEvents scanEvents, Action<ScannedImage, PostProcessingContext> callback);
     }

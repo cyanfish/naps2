@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading;
+using System.Threading.Tasks;
 using NAPS2.Images;
 
 namespace NAPS2.Scan
@@ -20,10 +21,13 @@ namespace NAPS2.Scan
         // TODO: Move additional logic (auto save, event logging, device prompting) to the driver base class
         // TODO: Probably ISaveNotify should follow the static default/injected pattern so it doesn't have to be a parameter.
 
-        public ScannedImageSource PerformScan(ScanProfile scanProfile, ScanParams scanParams, IntPtr dialogParent = default, CancellationToken cancelToken = default)
+        public Task<ScannedImageSource> PerformScan(ScanProfile scanProfile, ScanParams scanParams, IntPtr dialogParent = default, CancellationToken cancelToken = default)
         {
-            var driver = driverFactory.Create(scanProfile.DriverName);
-            return driver.Scan(scanProfile, scanParams, dialogParent, cancelToken);
+            return Task.Run(() =>
+            {
+                var driver = driverFactory.Create(scanProfile.DriverName);
+                return driver.Scan(scanProfile, scanParams, dialogParent, cancelToken);
+            });
         }
     }
 }

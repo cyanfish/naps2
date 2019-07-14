@@ -70,10 +70,10 @@ namespace NAPS2.Remoting.Worker
             }
         }
 
-        public List<ScanDevice> GetDeviceList(ScanOptions options)
+        public async Task<List<ScanDevice>> GetDeviceList(ScanOptions options)
         {
             var req = new GetDeviceListRequest { OptionsXml = options.ToXml() };
-            var resp = client.GetDeviceList(req);
+            var resp = await client.GetDeviceListAsync(req);
             RemotingHelper.HandleErrors(resp.Error);
             return resp.DeviceListXml.FromXml<List<ScanDevice>>();
         }

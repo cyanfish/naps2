@@ -212,7 +212,7 @@ namespace NAPS2.Scan.Batch
 
             private async Task DoScan(int scanNumber, List<ScannedImage> scan, int pageNumber)
             {
-                var source = scanPerformer.PerformScan(profile, scanParams, BatchForm.SafeHandle(), CancelToken);
+                var source = await scanPerformer.PerformScan(profile, scanParams, BatchForm.SafeHandle(), CancelToken);
                 await source.ForEach(image =>
                 {
                     scan.Add(image);

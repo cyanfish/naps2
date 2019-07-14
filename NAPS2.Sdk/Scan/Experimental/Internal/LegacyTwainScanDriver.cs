@@ -8,7 +8,7 @@ namespace NAPS2.Scan.Experimental.Internal
 {
     internal class LegacyTwainScanDriver : IScanDriver
     {
-        public List<ScanDevice> GetDeviceList(ScanOptions options) => throw new NotImplementedException();
+        public Task<List<ScanDevice>> GetDeviceList(ScanOptions options) => throw new NotImplementedException();
 
         public Task Scan(ScanOptions options, CancellationToken cancelToken, IScanEvents scanEvents, Action<IImage> callback)
         {

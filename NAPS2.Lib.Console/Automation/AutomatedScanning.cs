@@ -601,7 +601,7 @@ namespace NAPS2.Automation
                     DoOcr = ocrParams != null,
                     OcrParams = ocrParams
                 };
-                var source = scanPerformer.PerformScan(profile, scanParams);
+                var source = await scanPerformer.PerformScan(profile, scanParams);
                 await source.ForEach(ReceiveScannedImage);
                 OutputVerbose(ConsoleResources.PagesScanned, pagesScanned);
             }

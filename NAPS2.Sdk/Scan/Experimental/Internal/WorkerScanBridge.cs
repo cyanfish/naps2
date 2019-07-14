@@ -26,11 +26,11 @@ namespace NAPS2.Scan.Experimental.Internal
             this.workerFactory = workerFactory;
         }
 
-        public List<ScanDevice> GetDeviceList(ScanOptions options)
+        public async Task<List<ScanDevice>> GetDeviceList(ScanOptions options)
         {
             using (var ctx = workerFactory.Create())
             {
-                return ctx.Service.GetDeviceList(options);
+                return await ctx.Service.GetDeviceList(options);
             }
         }
 

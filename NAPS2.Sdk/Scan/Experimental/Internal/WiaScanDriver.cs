@@ -31,18 +31,21 @@ namespace NAPS2.Scan.Experimental.Internal
             this.workerFactory = workerFactory;
         }
 
-        public List<ScanDevice> GetDeviceList(ScanOptions options)
+        public Task<List<ScanDevice>> GetDeviceList(ScanOptions options)
         {
-            using (var deviceManager = new WiaDeviceManager(options.WiaOptions.WiaVersion))
+            return Task.Run(() =>
             {
-                return deviceManager.GetDeviceInfos().Select(deviceInfo =>
+                using (var deviceManager = new WiaDeviceManager(options.WiaOptions.WiaVersion))
                 {
-                    using (deviceInfo)
+                    return deviceManager.GetDeviceInfos().Select(deviceInfo =>
                     {
-                        return new ScanDevice(deviceInfo.Id(), deviceInfo.Name());
-                    }
-                }).ToList();
-            }
+                        using (deviceInfo)
+                        {
+                            return new ScanDevice(deviceInfo.Id(), deviceInfo.Name());
+                        }
+                    }).ToList();
+                }
+            });
         }
 
         public Task Scan(ScanOptions options, CancellationToken cancelToken, IScanEvents scanEvents, Action<IImage> callback)

@@ -533,7 +533,7 @@ namespace NAPS2.WinForms
             if (profile != null)
             {
                 // We got a profile, yay, so we can actually do the scan now
-                var source = scanPerformer.PerformScan(profile, DefaultScanParams(), Handle);
+                var source = await scanPerformer.PerformScan(profile, DefaultScanParams(), Handle);
                 await source.ForEach(ReceiveScannedImage());
                 Activate();
             }
@@ -543,7 +543,7 @@ namespace NAPS2.WinForms
         {
             if (profileManager.DefaultProfile != null)
             {
-                var source = scanPerformer.PerformScan(profileManager.DefaultProfile, DefaultScanParams(), Handle);
+                var source = await scanPerformer.PerformScan(profileManager.DefaultProfile, DefaultScanParams(), Handle);
                 await source.ForEach(ReceiveScannedImage());
                 Activate();
             }
@@ -572,7 +572,7 @@ namespace NAPS2.WinForms
 
             UpdateScanButton();
 
-            var source = scanPerformer.PerformScan(editSettingsForm.ScanProfile, DefaultScanParams(), Handle);
+            var source = await scanPerformer.PerformScan(editSettingsForm.ScanProfile, DefaultScanParams(), Handle);
             await source.ForEach(ReceiveScannedImage());
             Activate();
         }
@@ -771,7 +771,7 @@ namespace NAPS2.WinForms
 
                     UpdateScanButton();
 
-                    var source = scanPerformer.PerformScan(profile, DefaultScanParams(), Handle);
+                    var source = await scanPerformer.PerformScan(profile, DefaultScanParams(), Handle);
                     await source.ForEach(ReceiveScannedImage());
                     Activate();
                 };

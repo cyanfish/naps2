@@ -33,21 +33,25 @@ namespace NAPS2.Scan.Experimental.Internal
             this.imageContext = imageContext;
         }
 
-        public List<ScanDevice> GetDeviceList(ScanOptions options)
+        public Task<List<ScanDevice>> GetDeviceList(ScanOptions options)
         {
-            var deviceList = new List<ScanDevice>();
-            var proc = StartProcess(SCANIMAGE, @"--formatted-device-list=%d|%m%n");
-
-            string line;
-            while ((line = proc.StandardOutput.ReadLine()?.Trim()) != null)
+            return Task.Run(() =>
             {
-                string[] parts = line.Split('|');
-                if (parts.Length == 2)
+                var deviceList = new List<ScanDevice>();
+                var proc = StartProcess(SCANIMAGE, @"--formatted-device-list=%d|%m%n");
+
+                string line;
+                while ((line = proc.StandardOutput.ReadLine()?.Trim()) != null)
                 {
-                    deviceList.Add(new ScanDevice(parts[0], parts[1]));
+                    string[] parts = line.Split('|');
+                    if (parts.Length == 2)
+                    {
+                        deviceList.Add(new ScanDevice(parts[0], parts[1]));
+                    }
                 }
-            }
-            return deviceList;
+
+                return deviceList;
+            });
         }
 
         public Task Scan(ScanOptions options, CancellationToken cancelToken, IScanEvents scanEvents, Action<IImage> callback)

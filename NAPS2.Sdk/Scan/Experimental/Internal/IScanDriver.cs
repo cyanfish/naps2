@@ -8,7 +8,7 @@ namespace NAPS2.Scan.Experimental.Internal
 {
     internal interface IScanDriver
     {
-        List<ScanDevice> GetDeviceList(ScanOptions options);
+        Task<List<ScanDevice>> GetDeviceList(ScanOptions options);
 
         Task Scan(ScanOptions options, CancellationToken cancelToken, IScanEvents scanEvents, Action<IImage> callback);
     }

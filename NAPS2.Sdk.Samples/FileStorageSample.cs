@@ -20,7 +20,7 @@ namespace NAPS2.Sdk.Samples
             imageContext.ConfigureBackingStorage<FileStorage>();
 
             var controller = new ScanController();
-            var device = controller.GetDeviceList().First();
+            var device = (await controller.GetDeviceList()).First();
             var options = new ScanOptions
             {
                 Device = device,

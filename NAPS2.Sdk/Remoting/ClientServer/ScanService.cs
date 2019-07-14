@@ -82,7 +82,7 @@ namespace NAPS2.Remoting.ClientServer
             var callback = OperationContext.Current.GetCallbackChannel<IScanCallback>();
 
             int pages = 0;
-            var source = scanPerformer.PerformScan(scanProfile, internalParams, cancelToken: scanCts.Token);
+            var source = await scanPerformer.PerformScan(scanProfile, internalParams, cancelToken: scanCts.Token);
             await source.ForEach(image =>
             {
                 // TODO: Should stream this

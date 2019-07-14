@@ -34,7 +34,7 @@ namespace NAPS2.Sdk.Samples
             
             // For the purpose of this sample, we arbitrarily pick the first scanning device.
             // You probably want to let the user select one.
-            options.Device = controller.GetDeviceList(options).First();
+            options.Device = (await controller.GetDeviceList(options)).First();
 
             // This starts the scan and immediately returns with an object that asynchronously
             // receives the results of the scan.

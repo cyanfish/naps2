@@ -11,7 +11,7 @@ namespace NAPS2.Scan.Experimental.Internal
     /// </summary>
     internal class NetworkScanBridge : IScanBridge
     {
-        public List<ScanDevice> GetDeviceList(ScanOptions options) => throw new NotImplementedException();
+        public Task<List<ScanDevice>> GetDeviceList(ScanOptions options) => throw new NotImplementedException();
 
         // TODO: On the network server, make sure to throttle progress events
         public Task Scan(ScanOptions options, CancellationToken cancelToken, IScanEvents scanEvents, Action<ScannedImage, PostProcessingContext> callback) => throw new NotImplementedException();

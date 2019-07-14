@@ -15,7 +15,7 @@ namespace NAPS2.Sdk.Samples
             // See the other samples for more description and functionality.
 
             ScanController controller = new ScanController();
-            ScanDevice device = controller.GetDeviceList().First();
+            ScanDevice device = (await controller.GetDeviceList()).First();
             ScanOptions options = new ScanOptions { Device = device };
             ScannedImageSource imageSource = controller.Scan(options);
             await imageSource.ForEach(scannedImage =>

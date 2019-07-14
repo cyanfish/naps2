@@ -47,16 +47,20 @@ namespace NAPS2.Scan.Experimental.Internal
             this.imageContext = imageContext;
         }
 
-        public List<ScanDevice> GetDeviceList(ScanOptions options)
+        public Task<List<ScanDevice>> GetDeviceList(ScanOptions options)
         {
-            var deviceList = InternalGetDeviceList(options);
-            if (options.TwainOptions.Dsm != TwainDsm.Old && deviceList.Count == 0)
+            return Task.Run(() =>
             {
-                // Fall back to OldDsm in case of no devices
-                // This is primarily for Citrix support, which requires using twain_32.dll for TWAIN passthrough
-                deviceList = InternalGetDeviceList(options);
-            }
-            return deviceList;
+                var deviceList = InternalGetDeviceList(options);
+                if (options.TwainOptions.Dsm != TwainDsm.Old && deviceList.Count == 0)
+                {
+                    // Fall back to OldDsm in case of no devices
+                    // This is primarily for Citrix support, which requires using twain_32.dll for TWAIN passthrough
+                    deviceList = InternalGetDeviceList(options);
+                }
+
+                return deviceList;
+            });
         }
 
         private static List<ScanDevice> InternalGetDeviceList(ScanOptions options)
