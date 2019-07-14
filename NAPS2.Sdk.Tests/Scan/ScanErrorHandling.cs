@@ -96,5 +96,8 @@ namespace NAPS2.Sdk.Tests.Scan
             var source = controller.Scan(new ScanOptions());
             await Assert.ThrowsAsync<InvalidOperationException>(source.ToList);
         }
+        
+        // TODO: Add some testing that exceptions are wrapped up in ScanDriverUnknownException where appropriate (always? only from driver itself? is it really needed?)
+        // TODO: I guess the point is that you get the nice-ish "An error occurred with the scanning driver" instead of some inscrutable message. But is that more of a UI thing?
     }
 }

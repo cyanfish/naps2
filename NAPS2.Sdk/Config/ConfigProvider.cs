@@ -11,8 +11,6 @@ namespace NAPS2.Config
             new ScopeSetConfigProvider<T>(scopes);
     }
 
-    // TODO: It is pretty ugly to have ConfigProvider<CommonConfig> everywhere.
-    // TODO: Maybe a CommonConfigProvider subclass. Or maybe give in and remove generics.
     public abstract class ConfigProvider<TConfig>
     {
         public T Get<T>(Func<TConfig, T> func) => GetInternal(func);
