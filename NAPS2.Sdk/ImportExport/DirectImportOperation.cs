@@ -6,7 +6,6 @@ using NAPS2.Operation;
 using NAPS2.Images;
 using NAPS2.Images.Storage;
 using NAPS2.Images.Transforms;
-using NAPS2.obj.Debug;
 using NAPS2.Serialization;
 
 namespace NAPS2.ImportExport

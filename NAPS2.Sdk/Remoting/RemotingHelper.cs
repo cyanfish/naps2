@@ -3,7 +3,6 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using Grpc.Core;
-using NAPS2.obj.Debug;
 using NAPS2.Scan.Exceptions;
 using NAPS2.Util;
 

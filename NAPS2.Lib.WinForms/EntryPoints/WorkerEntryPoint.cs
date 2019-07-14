@@ -8,7 +8,6 @@ using System.Windows.Forms;
 using Grpc.Core;
 using NAPS2.Logging;
 using NAPS2.Modules;
-using NAPS2.obj.Debug;
 using NAPS2.Remoting;
 using NAPS2.Remoting.Worker;
 using NAPS2.Util;

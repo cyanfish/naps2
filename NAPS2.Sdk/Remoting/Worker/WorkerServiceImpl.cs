@@ -6,7 +6,6 @@ using NAPS2.Images;
 using NAPS2.Images.Storage;
 using NAPS2.ImportExport.Email;
 using NAPS2.ImportExport.Email.Mapi;
-using NAPS2.obj.Debug;
 using NAPS2.Scan;
 using NAPS2.Scan.Internal;
 using NAPS2.Scan.Wia;

@@ -3,7 +3,6 @@ using System.IO;
 using Google.Protobuf;
 using NAPS2.Images;
 using NAPS2.Images.Storage;
-using NAPS2.obj.Debug;
 
 namespace NAPS2.Serialization
 {
