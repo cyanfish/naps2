@@ -215,7 +215,6 @@ namespace NAPS2.Images.Storage
             RegisterTransformers<GdiImage>(new GdiTransformers());
             ImageType = typeof(GdiImage);
             // TODO: Not sure where to do these
-            RegisterConverters(new OwnershipConverters(this));
             RegisterConverters(new PdfConverters(this));
         }
     }

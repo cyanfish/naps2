@@ -188,9 +188,7 @@
     <Compile Include="Images\MemoryStreamRenderer.cs" />
     <Compile Include="Images\ScannedImageSink.cs" />
     <Compile Include="Images\Storage\LockMode.cs" />
-    <Compile Include="Images\Storage\OwnershipConverters.cs" />
     <Compile Include="Images\Storage\PdfConverters.cs" />
-    <Compile Include="Images\Storage\UnownedFileStorage.cs" />
     <Compile Include="Images\Storage\PdfStorage.cs" />
     <Compile Include="ImportExport\DirectImportParams.cs" />
     <Compile Include="ImportExport\Email\Mapi\IMapiWrapper.cs" />

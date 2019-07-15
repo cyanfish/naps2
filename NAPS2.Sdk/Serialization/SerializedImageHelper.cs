@@ -68,8 +68,10 @@ namespace NAPS2.Serialization
                 }
                 else
                 {
-                    // TODO: With this logic centralized, maybe we can remove UnownedFileStorage and just move the file copy logic here?
-                    storage = new UnownedFileStorage(serializedImage.FilePath);
+                    // Not transfering or sharing the file, so we need to make a copy
+                    string newPath = imageContext.FileStorageManager.NextFilePath();
+                    File.Copy(serializedImage.FilePath, newPath);
+                    storage = new FileStorage(newPath);
                 }
             }
             else
