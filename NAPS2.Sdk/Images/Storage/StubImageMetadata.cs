@@ -22,19 +22,6 @@ namespace NAPS2.Images.Storage
         {
         }
 
-        public bool CanSerialize => true;
-
-        public string Serialize() => this.ToXml();
-
-        public void Deserialize(string serializedData)
-        {
-            var other = serializedData.FromXml<StubImageMetadata>();
-            TransformList = other.TransformList;
-            Index = other.Index;
-            BitDepth = other.BitDepth;
-            Lossless = other.Lossless;
-        }
-
         public IImageMetadata Clone() =>
             new StubImageMetadata
             {

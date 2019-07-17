@@ -8,7 +8,18 @@ message SerializedImage {
 		string filePath = 2;
 		bytes fileContent = 3;
 	}
-	string metadataXml = 4;
+	SerializedImageMetadata metadata = 4;
 	bytes thumbnail = 5;
 	string renderedFilePath = 6;
+}
+
+message SerializedImageMetadata {
+	string transformListXml = 1;
+	enum BitDepth {
+		Color = 0;
+		Grayscale = 1;
+		BlackAndWhite = 2;
+	}
+	BitDepth bitDepth = 2;
+	bool lossless = 3;
 }

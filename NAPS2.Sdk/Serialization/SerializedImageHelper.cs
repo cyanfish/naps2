@@ -1,8 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using Google.Protobuf;
 using NAPS2.Images;
 using NAPS2.Images.Storage;
+using NAPS2.Images.Transforms;
+using NAPS2.Scan;
 
 namespace NAPS2.Serialization
 {
@@ -38,7 +41,12 @@ namespace NAPS2.Serialization
             var result = new SerializedImage
             {
                 TransferOwnership = options.TransferOwnership,
-                MetadataXml = metadata.Serialize(),
+                Metadata = new SerializedImageMetadata
+                {
+                    TransformListXml = metadata.TransformList.ToXml(),
+                    BitDepth = (SerializedImageMetadata.Types.BitDepth) metadata.BitDepth,
+                    Lossless = metadata.Lossless
+                },
                 Thumbnail = thumbStream != null ? ByteString.FromStream(thumbStream) : ByteString.Empty,
                 RenderedFilePath = options.RenderedFilePath ?? ""
             };
@@ -79,9 +87,14 @@ namespace NAPS2.Serialization
                 var memoryStream = new MemoryStream(serializedImage.FileContent.ToByteArray());
                 storage = new MemoryStreamStorage(memoryStream);
             }
-            var scannedImage = serializedImage.TransferOwnership
-                ? imageContext.CreateScannedImage(storage, serializedImage.MetadataXml, new StorageConvertParams())
-                : imageContext.CreateScannedImage(storage, CreateStubMetadata(serializedImage.MetadataXml), new StorageConvertParams());
+
+            var backingStorage = imageContext.ConvertToBacking(storage, new StorageConvertParams());
+            var metadata = imageContext.ImageMetadataFactory.CreateMetadata(backingStorage);
+            metadata.TransformList = serializedImage.Metadata.TransformListXml.FromXml<List<Transform>>();
+            metadata.BitDepth = (BitDepth) serializedImage.Metadata.BitDepth;
+            metadata.Lossless = serializedImage.Metadata.Lossless;
+
+            var scannedImage = imageContext.CreateScannedImage(backingStorage, metadata, new StorageConvertParams());
             var thumbnail = serializedImage.Thumbnail.ToByteArray();
             if (thumbnail.Length > 0)
             {
@@ -89,13 +102,6 @@ namespace NAPS2.Serialization
                 scannedImage.SetThumbnail(imageContext.ConvertToImage(thumbnailStorage, new StorageConvertParams()));
             }
             return scannedImage;
-        }
-
-        private static IImageMetadata CreateStubMetadata(string metadataXml)
-        {
-            var metadata = new StubImageMetadata();
-            metadata.Deserialize(metadataXml);
-            return metadata;
         }
 
         public class SerializeOptions

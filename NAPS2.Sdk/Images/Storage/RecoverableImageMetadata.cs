@@ -56,12 +56,6 @@ namespace NAPS2.Images.Storage
             rsm.Commit();
         }
 
-        public bool CanSerialize => true;
-
-        public string Serialize() => indexImage.ToXml();
-
-        public void Deserialize(string serializedData) => indexImage = serializedData.FromXml<RecoveryIndexImage>();
-
         public IImageMetadata Clone() =>
             new StubImageMetadata
             {

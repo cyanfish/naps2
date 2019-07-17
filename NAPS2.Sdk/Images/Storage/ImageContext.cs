@@ -175,15 +175,6 @@ namespace NAPS2.Images.Storage
             return new ScannedImage(backingStorage, metadata);
         }
 
-        public ScannedImage CreateScannedImage(IStorage storage, string serializedMetadata, StorageConvertParams convertParams)
-        {
-            var backingStorage = ConvertToBacking(storage, convertParams);
-            var metadata = ImageMetadataFactory.CreateMetadata(backingStorage);
-            metadata.Deserialize(serializedMetadata);
-            metadata.Commit();
-            return new ScannedImage(backingStorage, metadata);
-        }
-
         public ScannedImage CreateScannedImage(IStorage storage, BitDepth bitDepth, bool highQuality, int quality)
         {
             var convertParams = new StorageConvertParams { Lossless = highQuality, LossyQuality = quality };

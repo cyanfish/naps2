@@ -19,12 +19,6 @@ namespace NAPS2.Images.Storage
 
         void Commit();
 
-        bool CanSerialize { get; }
-
-        string Serialize();
-
-        void Deserialize(string serializedData);
-
         IImageMetadata Clone();
     }
 }
