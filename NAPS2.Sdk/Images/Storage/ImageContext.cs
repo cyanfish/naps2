@@ -195,6 +195,14 @@ namespace NAPS2.Images.Storage
             set => fileStorageManager = value ?? throw new ArgumentNullException(nameof(value));
         }
 
+        public ImageContext UseRecovery(string recoveryFolderPath)
+        {
+            var rsm = new RecoveryStorageManager(recoveryFolderPath);
+            FileStorageManager = rsm;
+            ImageMetadataFactory = rsm;
+            ConfigureBackingStorage<FileStorage>();
+            return this;
+        }
     }
 
     public class GdiImageContext : ImageContext

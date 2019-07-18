@@ -42,10 +42,7 @@ namespace NAPS2.Sdk.Tests
         public void UseRecovery()
         {
             var recoveryFolderPath = Path.Combine(FolderPath, "recovery", Path.GetRandomFileName());
-            rsm = new RecoveryStorageManager(recoveryFolderPath);
-            ImageContext.FileStorageManager = rsm;
-            ImageContext.ConfigureBackingStorage<FileStorage>();
-            ImageContext.ImageMetadataFactory = rsm;
+            ImageContext.UseRecovery(recoveryFolderPath);
         }
 
         public ScannedImage CreateScannedImage()
