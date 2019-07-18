@@ -42,6 +42,9 @@ namespace NAPS2.Sdk.Tests
         public void UseRecovery()
         {
             var recoveryFolderPath = Path.Combine(FolderPath, "recovery", Path.GetRandomFileName());
+            // TODO: This is broken because it doesn't set the local rsm variable.
+            // TODO: Really just need to figure out my Dispose model, ideally this would dispose imagecontext which would dispose FSM.
+            // TODO: But there are a lot of consistency issues to think through.
             ImageContext.UseRecovery(recoveryFolderPath);
         }
 
