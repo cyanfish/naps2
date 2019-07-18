@@ -184,16 +184,14 @@ namespace NAPS2.ImportExport.Pdf
             var image = imageContext.CreateScannedImage(new FileStorage(pdfPath));
             if (importParams.ThumbnailSize.HasValue || importParams.DetectPatchCodes)
             {
-                using (var bitmap = await imageRenderer.Render(image))
+                using var bitmap = await imageRenderer.Render(image);
+                if (importParams.ThumbnailSize.HasValue)
                 {
-                    if (importParams.ThumbnailSize.HasValue)
-                    {
-                        image.SetThumbnail(imageContext.PerformTransform(bitmap, new ThumbnailTransform(importParams.ThumbnailSize.Value)));
-                    }
-                    if (importParams.DetectPatchCodes)
-                    {
-                        image.PatchCode = PatchCodeDetector.Detect(bitmap);
-                    }
+                    image.SetThumbnail(imageContext.PerformTransform(bitmap, new ThumbnailTransform(importParams.ThumbnailSize.Value)));
+                }
+                if (importParams.DetectPatchCodes)
+                {
+                    image.PatchCode = PatchCodeDetector.Detect(bitmap);
                 }
             }
             return image;
@@ -202,23 +200,19 @@ namespace NAPS2.ImportExport.Pdf
         private ScannedImage ExportJpegImage(PdfPage page, byte[] imageBytes, ImportParams importParams)
         {
             // Fortunately JPEG has native support in PDF and exporting an image is just writing the stream to a file.
-            using (var memoryStream = new MemoryStream(imageBytes))
+            using var memoryStream = new MemoryStream(imageBytes);
+            using var storage = imageContext.ImageFactory.Decode(memoryStream, ".jpg");
+            storage.SetResolution(storage.Width / (float)page.Width.Inch, storage.Height / (float)page.Height.Inch);
+            var image = imageContext.CreateScannedImage(storage, BitDepth.Color, false, -1);
+            if (importParams.ThumbnailSize.HasValue)
             {
-                using (var storage = imageContext.ImageFactory.Decode(memoryStream, ".jpg"))
-                {
-                    storage.SetResolution(storage.Width / (float)page.Width.Inch, storage.Height / (float)page.Height.Inch);
-                    var image = imageContext.CreateScannedImage(storage, BitDepth.Color, false, -1);
-                    if (importParams.ThumbnailSize.HasValue)
-                    {
-                        image.SetThumbnail(imageContext.PerformTransform(storage, new ThumbnailTransform(importParams.ThumbnailSize.Value)));
-                    }
-                    if (importParams.DetectPatchCodes)
-                    {
-                        image.PatchCode = PatchCodeDetector.Detect(storage);
-                    }
-                    return image;
-                }
+                image.SetThumbnail(imageContext.PerformTransform(storage, new ThumbnailTransform(importParams.ThumbnailSize.Value)));
             }
+            if (importParams.DetectPatchCodes)
+            {
+                image.PatchCode = PatchCodeDetector.Detect(storage);
+            }
+            return image;
         }
 
         private ScannedImage ExportAsPngImage(PdfPage page, PdfDictionary imageObject, ImportParams importParams)
@@ -358,21 +352,19 @@ namespace NAPS2.ImportExport.Pdf
             Write(stream, TiffTrailer);
             stream.Seek(0, SeekOrigin.Begin);
 
-            using (var storage = imageContext.ImageFactory.Decode(stream, ".tiff"))
-            {
-                storage.SetResolution(storage.Width / (float)page.Width.Inch, storage.Height / (float)page.Height.Inch);
+            using var storage = imageContext.ImageFactory.Decode(stream, ".tiff");
+            storage.SetResolution(storage.Width / (float)page.Width.Inch, storage.Height / (float)page.Height.Inch);
 
-                var image = imageContext.CreateScannedImage(storage, BitDepth.BlackAndWhite, true, -1);
-                if (importParams.ThumbnailSize.HasValue)
-                {
-                    image.SetThumbnail(imageContext.PerformTransform(storage, new ThumbnailTransform(importParams.ThumbnailSize.Value)));
-                }
-                if (importParams.DetectPatchCodes)
-                {
-                    image.PatchCode = PatchCodeDetector.Detect(storage);
-                }
-                return image;
+            var image = imageContext.CreateScannedImage(storage, BitDepth.BlackAndWhite, true, -1);
+            if (importParams.ThumbnailSize.HasValue)
+            {
+                image.SetThumbnail(imageContext.PerformTransform(storage, new ThumbnailTransform(importParams.ThumbnailSize.Value)));
             }
+            if (importParams.DetectPatchCodes)
+            {
+                image.PatchCode = PatchCodeDetector.Detect(storage);
+            }
+            return image;
         }
 
         private void Write(MemoryStream stream, byte[] bytes)

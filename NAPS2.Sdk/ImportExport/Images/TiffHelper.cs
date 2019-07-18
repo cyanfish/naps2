@@ -40,13 +40,11 @@ namespace NAPS2.ImportExport.Images
                     var iparams = new EncoderParameters(1);
                     Encoder iparam = Encoder.Compression;
                     // TODO: More generic (?)
-                    using (var bitmap = await bitmapRenderer.Render(snapshots[0]))
-                    {
-                        ValidateBitmap(bitmap);
-                        var iparamPara = new EncoderParameter(iparam, (long)GetEncoderValue(compression, bitmap));
-                        iparams.Param[0] = iparamPara;
-                        bitmap.Save(location, codecInfo, iparams);
-                    }
+                    using var bitmap = await bitmapRenderer.Render(snapshots[0]);
+                    ValidateBitmap(bitmap);
+                    var iparamPara = new EncoderParameter(iparam, (long)GetEncoderValue(compression, bitmap));
+                    iparams.Param[0] = iparamPara;
+                    bitmap.Save(location, codecInfo, iparams);
                 }
                 else if (snapshots.Count > 1)
                 {
@@ -55,38 +53,34 @@ namespace NAPS2.ImportExport.Images
                     var compressionEncoder = Encoder.Compression;
 
                     File.Delete(location);
-                    using (var bitmap0 = await bitmapRenderer.Render(snapshots[0]))
+                    using var bitmap0 = await bitmapRenderer.Render(snapshots[0]);
+                    ValidateBitmap(bitmap0);
+                    encoderParams.Param[0] = new EncoderParameter(compressionEncoder, (long)GetEncoderValue(compression, bitmap0));
+                    encoderParams.Param[1] = new EncoderParameter(saveEncoder, (long)EncoderValue.MultiFrame);
+                    bitmap0.Save(location, codecInfo, encoderParams);
+
+                    for (int i = 1; i < snapshots.Count; i++)
                     {
-                        ValidateBitmap(bitmap0);
-                        encoderParams.Param[0] = new EncoderParameter(compressionEncoder, (long)GetEncoderValue(compression, bitmap0));
-                        encoderParams.Param[1] = new EncoderParameter(saveEncoder, (long)EncoderValue.MultiFrame);
-                        bitmap0.Save(location, codecInfo, encoderParams);
+                        if (snapshots[i] == null)
+                            break;
 
-                        for (int i = 1; i < snapshots.Count; i++)
+                        progressCallback(i, snapshots.Count);
+                        if (cancelToken.IsCancellationRequested)
                         {
-                            if (snapshots[i] == null)
-                                break;
-
-                            progressCallback(i, snapshots.Count);
-                            if (cancelToken.IsCancellationRequested)
-                            {
-                                bitmap0.Dispose();
-                                File.Delete(location);
-                                return false;
-                            }
-
-                            using (var bitmap = await bitmapRenderer.Render(snapshots[i]))
-                            {
-                                ValidateBitmap(bitmap);
-                                encoderParams.Param[0] = new EncoderParameter(compressionEncoder, (long)GetEncoderValue(compression, bitmap));
-                                encoderParams.Param[1] = new EncoderParameter(saveEncoder, (long)EncoderValue.FrameDimensionPage);
-                                bitmap0.SaveAdd(bitmap, encoderParams);
-                            }
+                            bitmap0.Dispose();
+                            File.Delete(location);
+                            return false;
                         }
 
-                        encoderParams.Param[0] = new EncoderParameter(saveEncoder, (long)EncoderValue.Flush);
-                        bitmap0.SaveAdd(encoderParams);
+                        using var bitmap = await bitmapRenderer.Render(snapshots[i]);
+                        ValidateBitmap(bitmap);
+                        encoderParams.Param[0] = new EncoderParameter(compressionEncoder, (long)GetEncoderValue(compression, bitmap));
+                        encoderParams.Param[1] = new EncoderParameter(saveEncoder, (long)EncoderValue.FrameDimensionPage);
+                        bitmap0.SaveAdd(bitmap, encoderParams);
                     }
+
+                    encoderParams.Param[0] = new EncoderParameter(saveEncoder, (long)EncoderValue.Flush);
+                    bitmap0.SaveAdd(encoderParams);
                 }
                 return true;
 

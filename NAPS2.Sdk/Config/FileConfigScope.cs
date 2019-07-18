@@ -52,10 +52,8 @@ namespace NAPS2.Config
             // TODO: Retry
             try
             {
-                using (var stream = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.Read))
-                {
-                    cache = serializer.Deserialize(stream);
-                }
+                using var stream = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.Read);
+                cache = serializer.Deserialize(stream);
             }
             catch (FileNotFoundException)
             {

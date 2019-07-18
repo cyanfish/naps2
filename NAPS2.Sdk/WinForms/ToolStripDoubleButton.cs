@@ -42,26 +42,24 @@ namespace NAPS2.WinForms
 
         private int MeasureTextWidth(string text, ref bool wrap)
         {
-            using (var g = Graphics.FromImage(new Bitmap(1, 1)))
+            using var g = Graphics.FromImage(new Bitmap(1, 1));
+            var width = (int)Math.Ceiling(g.MeasureString(text, Font).Width);
+            if (MaxTextWidth > 0 && width > MaxTextWidth)
             {
-                var width = (int)Math.Ceiling(g.MeasureString(text, Font).Width);
-                if (MaxTextWidth > 0 && width > MaxTextWidth)
+                var words = text.Split(' ');
+                for (int i = 1; i < words.Length; i++)
                 {
-                    var words = text.Split(' ');
-                    for (int i = 1; i < words.Length; i++)
+                    var left = string.Join(" ", words.Take(words.Length - i));
+                    var right = string.Join(" ", words.Skip(words.Length - i));
+                    var wrappedWidth = (int)Math.Ceiling(g.MeasureString(left + "\n" + right, Font).Width);
+                    if (wrappedWidth < width)
                     {
-                        var left = string.Join(" ", words.Take(words.Length - i));
-                        var right = string.Join(" ", words.Skip(words.Length - i));
-                        var wrappedWidth = (int)Math.Ceiling(g.MeasureString(left + "\n" + right, Font).Width);
-                        if (wrappedWidth < width)
-                        {
-                            width = wrappedWidth;
-                            wrap = true;
-                        }
+                        width = wrappedWidth;
+                        wrap = true;
                     }
                 }
-                return width;
             }
+            return width;
         }
 
         protected override void OnPaint(PaintEventArgs e)

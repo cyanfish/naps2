@@ -23,10 +23,8 @@ namespace NAPS2.Images
                 {
                     throw new InvalidOperationException("Patch code detection only supported for GdiStorage");
                 }
-                using (var bitmap2 = BitmapHelper.CopyToBpp(gdiImage.Bitmap, 8))
-                {
-                    return IsBlankRGB(new GdiImage(bitmap2), whiteThresholdNorm, coverageThresholdNorm);
-                }
+                using var bitmap2 = BitmapHelper.CopyToBpp(gdiImage.Bitmap, 8);
+                return IsBlankRGB(new GdiImage(bitmap2), whiteThresholdNorm, coverageThresholdNorm);
             }
             if (image.PixelFormat != StoragePixelFormat.RGB24)
             {

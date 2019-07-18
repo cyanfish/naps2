@@ -42,21 +42,17 @@ namespace NAPS2.Sdk.Tests.Worker
             var (cert, privateKey) = SslHelper.GenerateRootCertificate();
             var serverCreds = RemotingHelper.GetServerCreds(cert, privateKey);
             var clientCreds = RemotingHelper.GetClientCreds(cert, privateKey);
-            using (var channel = Start(serverCreds: serverCreds, clientCreds: clientCreds))
-            {
-                channel.Client.Init(null);
-            }
+            using var channel = Start(serverCreds: serverCreds, clientCreds: clientCreds);
+            channel.Client.Init(null);
         }
 
         [Fact]
         public void Init()
         {
-            using (var channel = Start())
-            {
-                channel.Client.Init(@"C:\Somewhere");
-                Assert.IsType<RecoveryStorageManager>(ImageContext.FileStorageManager);
-                Assert.StartsWith(@"C:\Somewhere", ((RecoveryStorageManager)ImageContext.FileStorageManager).RecoveryFolderPath);
-            }
+            using var channel = Start();
+            channel.Client.Init(@"C:\Somewhere");
+            Assert.IsType<RecoveryStorageManager>(ImageContext.FileStorageManager);
+            Assert.StartsWith(@"C:\Somewhere", ((RecoveryStorageManager)ImageContext.FileStorageManager).RecoveryFolderPath);
         }
 
         [Fact]
@@ -70,20 +66,18 @@ namespace NAPS2.Sdk.Tests.Worker
         public async Task GetDeviceList()
         {
             var remoteScanController = new Mock<IRemoteScanController>();
-            using (var channel = Start(remoteScanController.Object))
-            {
-                remoteScanController
-                    .Setup(rsc => rsc.GetDeviceList(It.IsAny<ScanOptions>()))
-                    .ReturnsAsync(new List<ScanDevice> { new ScanDevice("test_id", "test_name") });
+            using var channel = Start(remoteScanController.Object);
+            remoteScanController
+                .Setup(rsc => rsc.GetDeviceList(It.IsAny<ScanOptions>()))
+                .ReturnsAsync(new List<ScanDevice> { new ScanDevice("test_id", "test_name") });
 
-                var deviceList = await channel.Client.GetDeviceList(new ScanOptions());
+            var deviceList = await channel.Client.GetDeviceList(new ScanOptions());
 
-                Assert.Single(deviceList);
-                Assert.Equal("test_id", deviceList[0].ID);
-                Assert.Equal("test_name", deviceList[0].Name);
-                remoteScanController.Verify(rsc => rsc.GetDeviceList(It.IsAny<ScanOptions>()));
-                remoteScanController.VerifyNoOtherCalls();
-            }
+            Assert.Single(deviceList);
+            Assert.Equal("test_id", deviceList[0].ID);
+            Assert.Equal("test_name", deviceList[0].Name);
+            remoteScanController.Verify(rsc => rsc.GetDeviceList(It.IsAny<ScanOptions>()));
+            remoteScanController.VerifyNoOtherCalls();
         }
 
         [Fact]
@@ -118,15 +112,13 @@ namespace NAPS2.Sdk.Tests.Worker
                 }
             };
 
-            using (var channel = Start(remoteScanController))
-            {
-                var receivedImages = new List<ScannedImage>();
-                await channel.Client.Scan(ImageContext, new ScanOptions(),
-                    CancellationToken.None, new ScanEvents(() => { }, _ => { }), 
-                    (img, path) => { receivedImages.Add(img); });
+            using var channel = Start(remoteScanController);
+            var receivedImages = new List<ScannedImage>();
+            await channel.Client.Scan(ImageContext, new ScanOptions(),
+                CancellationToken.None, new ScanEvents(() => { }, _ => { }), 
+                (img, path) => { receivedImages.Add(img); });
 
-                Assert.Equal(2, receivedImages.Count);
-            }
+            Assert.Equal(2, receivedImages.Count);
         }
 
         [Fact]
@@ -141,17 +133,15 @@ namespace NAPS2.Sdk.Tests.Worker
                 },
                 Exception = new DeviceException("Test error")
             };
-            using (var channel = Start(remoteScanController))
-            {
-                var ex = await Assert.ThrowsAsync<DeviceException>(async () => await channel.Client.Scan(
-                    ImageContext,
-                    new ScanOptions(),
-                    CancellationToken.None,
-                    new ScanEvents(() => { }, _ => { }), 
-                    (img, path) => { }));
-                Assert.Contains(nameof(MockRemoteScanController), ex.StackTrace);
-                Assert.Contains("Test error", ex.Message);
-            }
+            using var channel = Start(remoteScanController);
+            var ex = await Assert.ThrowsAsync<DeviceException>(async () => await channel.Client.Scan(
+                ImageContext,
+                new ScanOptions(),
+                CancellationToken.None,
+                new ScanEvents(() => { }, _ => { }), 
+                (img, path) => { }));
+            Assert.Contains(nameof(MockRemoteScanController), ex.StackTrace);
+            Assert.Contains("Test error", ex.Message);
         }
 
         private class MockRemoteScanController : IRemoteScanController

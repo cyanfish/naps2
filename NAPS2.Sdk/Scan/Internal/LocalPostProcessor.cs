@@ -30,16 +30,14 @@ namespace NAPS2.Scan.Internal
         {
             if (options.DoOcr)
             {
-                using (var snapshot = image.Preserve())
+                using var snapshot = image.Preserve();
+                if (!options.OcrInBackground)
                 {
-                    if (!options.OcrInBackground)
-                    {
-                        ocrRequestQueue.QueueForeground(null, snapshot, tempPath, options.OcrParams, options.OcrCancelToken).AssertNoAwait();
-                    }
-                    else
-                    {
-                        ocrRequestQueue.QueueBackground(snapshot, tempPath, options.OcrParams);
-                    }
+                    ocrRequestQueue.QueueForeground(null, snapshot, tempPath, options.OcrParams, options.OcrCancelToken).AssertNoAwait();
+                }
+                else
+                {
+                    ocrRequestQueue.QueueBackground(snapshot, tempPath, options.OcrParams);
                 }
             }
         }

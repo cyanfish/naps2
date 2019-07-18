@@ -27,16 +27,10 @@ namespace NAPS2.Dependencies
 
             private static void Extract(string sourcePath, string destPath)
             {
-                using (FileStream inFile = new FileInfo(sourcePath).OpenRead())
-                {
-                    using (FileStream outFile = File.Create(destPath))
-                    {
-                        using (GZipStream decompress = new GZipStream(inFile, CompressionMode.Decompress))
-                        {
-                            decompress.CopyTo(outFile);
-                        }
-                    }
-                }
+                using FileStream inFile = new FileInfo(sourcePath).OpenRead();
+                using FileStream outFile = File.Create(destPath);
+                using GZipStream decompress = new GZipStream(inFile, CompressionMode.Decompress);
+                decompress.CopyTo(outFile);
             }
         }
 

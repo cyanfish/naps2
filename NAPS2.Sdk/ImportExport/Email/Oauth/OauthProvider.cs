@@ -137,45 +137,37 @@ namespace NAPS2.ImportExport.Email.Oauth
 
         protected JObject Get(string url)
         {
-            using (var client = new WebClient())
-            {
-                string response = client.DownloadString(url);
-                return JObject.Parse(response);
-            }
+            using var client = new WebClient();
+            string response = client.DownloadString(url);
+            return JObject.Parse(response);
         }
 
         protected JObject GetAuthorized(string url)
         {
-            using (var client = AuthorizedClient())
-            {
-                string response = client.DownloadString(url);
-                return JObject.Parse(response);
-            }
+            using var client = AuthorizedClient();
+            string response = client.DownloadString(url);
+            return JObject.Parse(response);
         }
 
         protected JObject Post(string url, NameValueCollection values)
         {
-            using (var client = new WebClient())
-            {
-                string response = Encoding.UTF8.GetString(client.UploadValues(url, "POST", values));
-                return JObject.Parse(response);
-            }
+            using var client = new WebClient();
+            string response = Encoding.UTF8.GetString(client.UploadValues(url, "POST", values));
+            return JObject.Parse(response);
         }
 
         protected async Task<JObject> PostAuthorized(string url, string body, string contentType, ProgressHandler progressCallback,
             CancellationToken cancelToken = default)
         {
-            using (var client = AuthorizedClient())
-            {
-                client.Headers.Add("Content-Type", contentType);
-                // TODO: Apparently upload progress doesn't work.
-                // It tracks progress to an internal buffer.
-                // https://stackoverflow.com/questions/8181114/uploading-http-progress-tracking
-                // Maybe using HttpClient would fix it.
-                //client.AddUploadProgressHandler(progressCallback);
-                string response = await client.UploadStringTaskAsync(url, "POST", body, cancelToken);
-                return JObject.Parse(response);
-            }
+            using var client = AuthorizedClient();
+            client.Headers.Add("Content-Type", contentType);
+            // TODO: Apparently upload progress doesn't work.
+            // It tracks progress to an internal buffer.
+            // https://stackoverflow.com/questions/8181114/uploading-http-progress-tracking
+            // Maybe using HttpClient would fix it.
+            //client.AddUploadProgressHandler(progressCallback);
+            string response = await client.UploadStringTaskAsync(url, "POST", body, cancelToken);
+            return JObject.Parse(response);
         }
 
         private WebClient AuthorizedClient()

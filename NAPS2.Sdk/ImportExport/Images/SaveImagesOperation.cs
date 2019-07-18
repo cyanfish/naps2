@@ -174,17 +174,13 @@ namespace NAPS2.ImportExport.Images
                 var encoderParams = new EncoderParameters(1);
                 encoderParams.Param[0] = new EncoderParameter(Encoder.Quality, quality);
                 // TODO: Something more generic
-                using (Bitmap bitmap = await bitmapRenderer.Render(snapshot))
-                {
-                    bitmap.Save(path, encoder, encoderParams);
-                }
+                using Bitmap bitmap = await bitmapRenderer.Render(snapshot);
+                bitmap.Save(path, encoder, encoderParams);
             }
             else
             {
-                using (Bitmap bitmap = await bitmapRenderer.Render(snapshot))
-                {
-                    bitmap.Save(path, format);
-                }
+                using Bitmap bitmap = await bitmapRenderer.Render(snapshot);
+                bitmap.Save(path, format);
             }
         }
 

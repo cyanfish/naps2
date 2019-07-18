@@ -322,13 +322,11 @@ namespace NAPS2.Images.Storage
             double verticalRes = image.VerticalResolution * transform.ScaleFactor;
 
             var result = new Bitmap(realWidth, realHeight, PixelFormat.Format24bppRgb);
-            using (Graphics g = Graphics.FromImage(result))
-            {
-                g.InterpolationMode = InterpolationMode.HighQualityBicubic;
-                g.DrawImage(image.Bitmap, 0, 0, realWidth, realHeight);
-                result.SafeSetResolution((float)horizontalRes, (float)verticalRes);
-                return new GdiImage(result);
-            }
+            using Graphics g = Graphics.FromImage(result);
+            g.InterpolationMode = InterpolationMode.HighQualityBicubic;
+            g.DrawImage(image.Bitmap, 0, 0, realWidth, realHeight);
+            result.SafeSetResolution((float)horizontalRes, (float)verticalRes);
+            return new GdiImage(result);
         }
 
         [Transformer]

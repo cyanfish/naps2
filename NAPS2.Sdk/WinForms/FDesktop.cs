@@ -509,11 +509,9 @@ namespace NAPS2.WinForms
                 try
                 {
                     // Populate the device field automatically (because we can do that!)
-                    using (var deviceManager = new WiaDeviceManager())
-                    using (var device = deviceManager.FindDevice(deviceID))
-                    {
-                        editSettingsForm.CurrentDevice = new ScanDevice(deviceID, device.Name());
-                    }
+                    using var deviceManager = new WiaDeviceManager();
+                    using var device = deviceManager.FindDevice(deviceID);
+                    editSettingsForm.CurrentDevice = new ScanDevice(deviceID, device.Name());
                 }
                 catch (WiaException)
                 {
@@ -919,21 +917,19 @@ namespace NAPS2.WinForms
         {
             if (SelectedIndices.Any())
             {
-                using (var viewer = FormFactory.Create<FViewer>())
+                using var viewer = FormFactory.Create<FViewer>();
+                viewer.ImageList = imageList;
+                viewer.ImageIndex = SelectedIndices.First();
+                viewer.DeleteCallback = DeleteThumbnails;
+                viewer.SelectCallback = i =>
                 {
-                    viewer.ImageList = imageList;
-                    viewer.ImageIndex = SelectedIndices.First();
-                    viewer.DeleteCallback = DeleteThumbnails;
-                    viewer.SelectCallback = i =>
+                    if (SelectedIndices.Count() <= 1)
                     {
-                        if (SelectedIndices.Count() <= 1)
-                        {
-                            SelectedIndices = new[] { i };
-                            thumbnailList1.Items[i].EnsureVisible();
-                        }
-                    };
-                    viewer.ShowDialog();
-                }
+                        SelectedIndices = new[] { i };
+                        thumbnailList1.Items[i].EnsureVisible();
+                    }
+                };
+                viewer.ShowDialog();
             }
         }
 

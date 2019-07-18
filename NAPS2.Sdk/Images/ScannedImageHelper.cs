@@ -27,11 +27,9 @@ namespace NAPS2.Images
             {
                 // Convert to a 1-bit bitmap before saving to help compression
                 // This is lossless and takes up minimal storage (best of both worlds), so highQuality is irrelevant
-                using (var bitmap = BitmapHelper.CopyToBpp(sourceImage, 1))
-                {
-                    imageFormat = ImageFormat.Png;
-                    return EncodePng(bitmap);
-                }
+                using var bitmap = BitmapHelper.CopyToBpp(sourceImage, 1);
+                imageFormat = ImageFormat.Png;
+                return EncodePng(bitmap);
                 // Note that if a black and white image comes from native WIA, bitDepth is unknown,
                 // so the image will be png-encoded below instead of using a 1-bit bitmap
             }
@@ -243,16 +241,14 @@ namespace NAPS2.Images
         {
             if (ShouldDoBackgroundOcr(scanParams))
             {
-                using (var snapshot = image.Preserve())
+                using var snapshot = image.Preserve();
+                if (scanParams.DoOcr == true)
                 {
-                    if (scanParams.DoOcr == true)
-                    {
-                        ocrRequestQueue.QueueForeground(null, snapshot, tempPath, scanParams.OcrParams, scanParams.OcrCancelToken).AssertNoAwait();
-                    }
-                    else
-                    {
-                        ocrRequestQueue.QueueBackground(snapshot, tempPath, scanParams.OcrParams);
-                    }
+                    ocrRequestQueue.QueueForeground(null, snapshot, tempPath, scanParams.OcrParams, scanParams.OcrCancelToken).AssertNoAwait();
+                }
+                else
+                {
+                    ocrRequestQueue.QueueBackground(snapshot, tempPath, scanParams.OcrParams);
                 }
             }
         }
@@ -273,20 +269,18 @@ namespace NAPS2.Images
 
         public ScannedImage PostProcess(IImage output, int pageNumber, ScanProfile scanProfile, ScanParams scanParams)
         {
-            using (var result = PostProcessStep1(output, scanProfile))
+            using var result = PostProcessStep1(output, scanProfile);
+            if (blankDetector.ExcludePage(result, scanProfile))
             {
-                if (blankDetector.ExcludePage(result, scanProfile))
-                {
-                    return null;
-                }
-
-                BitDepth bitDepth = scanProfile.UseNativeUI ? BitDepth.Color : scanProfile.BitDepth.ToBitDepth();
-                var image = imageContext.CreateScannedImage(result, bitDepth, scanProfile.MaxQuality, scanProfile.Quality);
-                PostProcessStep2(image, result, scanProfile, scanParams, pageNumber);
-                string tempPath = SaveForBackgroundOcr(result, scanParams);
-                RunBackgroundOcr(image, scanParams, tempPath);
-                return image;
+                return null;
             }
+
+            BitDepth bitDepth = scanProfile.UseNativeUI ? BitDepth.Color : scanProfile.BitDepth.ToBitDepth();
+            var image = imageContext.CreateScannedImage(result, bitDepth, scanProfile.MaxQuality, scanProfile.Quality);
+            PostProcessStep2(image, result, scanProfile, scanParams, pageNumber);
+            string tempPath = SaveForBackgroundOcr(result, scanParams);
+            RunBackgroundOcr(image, scanParams, tempPath);
+            return image;
         }
     }
 }

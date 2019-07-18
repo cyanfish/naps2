@@ -91,13 +91,11 @@ namespace NAPS2.WinForms
             }
             foreach (var img in images.Skip(1))
             {
-                using (var bitmap = await bitmapRenderer.Render(img))
+                using var bitmap = await bitmapRenderer.Render(img);
+                // TODO: Is this the right format?
+                if (!AppendRtfEncodedImage(bitmap, bitmap.RawFormat, sb, true))
                 {
-                    // TODO: Is this the right format?
-                    if (!AppendRtfEncodedImage(bitmap, bitmap.RawFormat, sb, true))
-                    {
-                        break;
-                    }
+                    break;
                 }
             }
             sb.Append("}");

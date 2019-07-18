@@ -55,20 +55,18 @@ namespace NAPS2.Remoting.Worker
                 {
                     try
                     {
-                        using (var deviceManager = new WiaDeviceManager(WiaVersion.Wia10))
-                        using (var device = deviceManager.FindDevice(request.DeviceId))
+                        using var deviceManager = new WiaDeviceManager(WiaVersion.Wia10);
+                        using var device = deviceManager.FindDevice(request.DeviceId);
+                        var item = device.PromptToConfigure((IntPtr) request.Hwnd);
+                        return new Wia10NativeUiResponse
                         {
-                            var item = device.PromptToConfigure((IntPtr) request.Hwnd);
-                            return new Wia10NativeUiResponse
+                            WiaConfigurationXml = new WiaConfiguration
                             {
-                                WiaConfigurationXml = new WiaConfiguration
-                                {
-                                    DeviceProps = device.Properties.SerializeEditable(),
-                                    ItemProps = item.Properties.SerializeEditable(),
-                                    ItemName = item.Name()
-                                }.ToXml()
-                            };
-                        }
+                                DeviceProps = device.Properties.SerializeEditable(),
+                                ItemProps = item.Properties.SerializeEditable(),
+                                ItemName = item.Name()
+                            }.ToXml()
+                        };
                     }
                     catch (WiaException e)
                     {
@@ -146,15 +144,13 @@ namespace NAPS2.Remoting.Worker
                     {
                         ShareFileStorage = true
                     };
-                    using (var image = SerializedImageHelper.Deserialize(imageContext, request.Image, deserializeOptions))
+                    using var image = SerializedImageHelper.Deserialize(imageContext, request.Image, deserializeOptions);
+                    var thumbnail = await thumbnailRenderer.Render(image, request.Size);
+                    var stream = imageContext.Convert<MemoryStreamStorage>(thumbnail, new StorageConvertParams { Lossless = true }).Stream;
+                    return new RenderThumbnailResponse
                     {
-                        var thumbnail = await thumbnailRenderer.Render(image, request.Size);
-                        var stream = imageContext.Convert<MemoryStreamStorage>(thumbnail, new StorageConvertParams { Lossless = true }).Stream;
-                        return new RenderThumbnailResponse
-                        {
-                            Thumbnail = ByteString.FromStream(stream)
-                        };
-                    }
+                        Thumbnail = ByteString.FromStream(stream)
+                    };
                 },
                 err => new RenderThumbnailResponse { Error = err });
     }

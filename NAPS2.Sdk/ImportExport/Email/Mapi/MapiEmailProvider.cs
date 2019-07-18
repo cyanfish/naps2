@@ -39,10 +39,8 @@ namespace NAPS2.ImportExport.Email.Mapi
 
                 if (UseWorker && !mapiWrapper.CanLoadClient)
                 {
-                    using (var worker = workerFactory.Create())
-                    {
-                        returnCode = worker.Service.SendMapiEmail(message);
-                    }
+                    using var worker = workerFactory.Create();
+                    returnCode = worker.Service.SendMapiEmail(message);
                 }
                 else
                 {

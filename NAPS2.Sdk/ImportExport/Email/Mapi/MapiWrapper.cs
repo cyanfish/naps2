@@ -47,44 +47,40 @@ namespace NAPS2.ImportExport.Email.Mapi
 
         private static MapiSendMailReturnCode SendMail(SystemEmailClients.MapiSendMailDelegate mapiSendMail, EmailMessage message, MapiSendMailFlags flags)
         {
-            using (var files = Unmanaged.CopyOf(GetFiles(message)))
-            using (var recips = Unmanaged.CopyOf(GetRecips(message)))
+            using var files = Unmanaged.CopyOf(GetFiles(message));
+            using var recips = Unmanaged.CopyOf(GetRecips(message));
+            // Create a MAPI structure for the entirety of the message
+            var mapiMessage = new MapiMessage
             {
-                // Create a MAPI structure for the entirety of the message
-                var mapiMessage = new MapiMessage
-                {
-                    subject = message.Subject,
-                    noteText = message.BodyText,
-                    recips = recips,
-                    recipCount = recips.Length,
-                    files = files,
-                    fileCount = files.Length
-                };
+                subject = message.Subject,
+                noteText = message.BodyText,
+                recips = recips,
+                recipCount = recips.Length,
+                files = files,
+                fileCount = files.Length
+            };
 
-                // Send the message
-                return mapiSendMail(IntPtr.Zero, IntPtr.Zero, mapiMessage, flags, 0);
-            }
+            // Send the message
+            return mapiSendMail(IntPtr.Zero, IntPtr.Zero, mapiMessage, flags, 0);
         }
 
         private static MapiSendMailReturnCode SendMailW(SystemEmailClients.MapiSendMailDelegateW mapiSendMailW, EmailMessage message, MapiSendMailFlags flags)
         {
-            using (var files = Unmanaged.CopyOf(GetFilesW(message)))
-            using (var recips = Unmanaged.CopyOf(GetRecipsW(message)))
+            using var files = Unmanaged.CopyOf(GetFilesW(message));
+            using var recips = Unmanaged.CopyOf(GetRecipsW(message));
+            // Create a MAPI structure for the entirety of the message
+            var mapiMessage = new MapiMessageW
             {
-                // Create a MAPI structure for the entirety of the message
-                var mapiMessage = new MapiMessageW
-                {
-                    subject = message.Subject,
-                    noteText = message.BodyText,
-                    recips = recips,
-                    recipCount = recips.Length,
-                    files = files,
-                    fileCount = files.Length
-                };
+                subject = message.Subject,
+                noteText = message.BodyText,
+                recips = recips,
+                recipCount = recips.Length,
+                files = files,
+                fileCount = files.Length
+            };
 
-                // Send the message
-                return mapiSendMailW(IntPtr.Zero, IntPtr.Zero, mapiMessage, flags, 0);
-            }
+            // Send the message
+            return mapiSendMailW(IntPtr.Zero, IntPtr.Zero, mapiMessage, flags, 0);
         }
 
         private static MapiRecipDesc[] GetRecips(EmailMessage message)

@@ -92,15 +92,11 @@ namespace NAPS2.WinForms
 
         private string CalculateSha1(string filePath)
         {
-            using (var sha = new SHA1CryptoServiceProvider())
-            {
-                using (FileStream stream = File.OpenRead(filePath))
-                {
-                    byte[] checksum = sha.ComputeHash(stream);
-                    string str = BitConverter.ToString(checksum).Replace("-", String.Empty).ToLowerInvariant();
-                    return str;
-                }
-            }
+            using var sha = new SHA1CryptoServiceProvider();
+            using FileStream stream = File.OpenRead(filePath);
+            byte[] checksum = sha.ComputeHash(stream);
+            string str = BitConverter.ToString(checksum).Replace("-", String.Empty).ToLowerInvariant();
+            return str;
         }
 
         private void StartNextDownload()

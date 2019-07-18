@@ -234,16 +234,14 @@ namespace NAPS2.Scan
             if (options.Driver == Driver.Wia)
             {
                 // WIA has a nice built-in device selection dialog, so use it
-                using (var deviceManager = new WiaDeviceManager(options.WiaOptions.WiaVersion))
+                using var deviceManager = new WiaDeviceManager(options.WiaOptions.WiaVersion);
+                var wiaDevice = deviceManager.PromptForDevice(options.DialogParent);
+                if (wiaDevice == null)
                 {
-                    var wiaDevice = deviceManager.PromptForDevice(options.DialogParent);
-                    if (wiaDevice == null)
-                    {
-                        return null;
-                    }
-
-                    return new ScanDevice(wiaDevice.Id(), wiaDevice.Name());
+                    return null;
                 }
+
+                return new ScanDevice(wiaDevice.Id(), wiaDevice.Name());
             }
 
             // Other drivers do not, so use a generic dialog

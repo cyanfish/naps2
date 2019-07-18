@@ -35,16 +35,14 @@ namespace NAPS2.Scan.Internal
         {
             return Task.Run(() =>
             {
-                using (var deviceManager = new WiaDeviceManager(options.WiaOptions.WiaVersion))
+                using var deviceManager = new WiaDeviceManager(options.WiaOptions.WiaVersion);
+                return deviceManager.GetDeviceInfos().Select(deviceInfo =>
                 {
-                    return deviceManager.GetDeviceInfos().Select(deviceInfo =>
+                    using (deviceInfo)
                     {
-                        using (deviceInfo)
-                        {
-                            return new ScanDevice(deviceInfo.Id(), deviceInfo.Name());
-                        }
-                    }).ToList();
-                }
+                        return new ScanDevice(deviceInfo.Id(), deviceInfo.Name());
+                    }
+                }).ToList();
             });
         }
 
@@ -103,25 +101,21 @@ namespace NAPS2.Scan.Internal
 
             public void Scan(WiaVersion wiaVersion)
             {
-                using (var deviceManager = new WiaDeviceManager(wiaVersion))
-                using (var device = deviceManager.FindDevice(Options.Device.ID))
+                using var deviceManager = new WiaDeviceManager(wiaVersion);
+                using var device = deviceManager.FindDevice(Options.Device.ID);
+                if (device.Version == WiaVersion.Wia20 && Options.UseNativeUI)
                 {
-                    if (device.Version == WiaVersion.Wia20 && Options.UseNativeUI)
-                    {
-                        DoWia20NativeTransfer(deviceManager, device);
-                        return;
-                    }
-
-                    using (var item = GetItem(device))
-                    {
-                        if (item == null)
-                        {
-                            return;
-                        }
-
-                        DoTransfer(device, item);
-                    }
+                    DoWia20NativeTransfer(deviceManager, device);
+                    return;
                 }
+
+                using var item = GetItem(device);
+                if (item == null)
+                {
+                    return;
+                }
+
+                DoTransfer(device, item);
             }
 
             private void DoWia20NativeTransfer(WiaDeviceManager deviceManager, WiaDevice device)
@@ -140,15 +134,13 @@ namespace NAPS2.Scan.Internal
                 {
                     foreach (var path in paths)
                     {
-                        using (var stream = new FileStream(path, FileMode.Open))
+                        using var stream = new FileStream(path, FileMode.Open);
+                        foreach (var image in imageContext.ImageFactory.DecodeMultiple(stream, Path.GetExtension(path), out _))
                         {
-                            foreach (var image in imageContext.ImageFactory.DecodeMultiple(stream, Path.GetExtension(path), out _))
+                            using (image)
                             {
-                                using (image)
-                                {
-                                    // TODO: Might still need to do some work on ownership for in-memory ScannedImage storage
-                                    Callback(image);
-                                }
+                                // TODO: Might still need to do some work on ownership for in-memory ScannedImage storage
+                                Callback(image);
                             }
                         }
                     }
@@ -182,51 +174,49 @@ namespace NAPS2.Scan.Internal
 
                 ConfigureProps(device, item);
 
-                using (var transfer = item.StartTransfer())
+                using var transfer = item.StartTransfer();
+                Exception scanException = null;
+                transfer.PageScanned += (sender, args) =>
                 {
-                    Exception scanException = null;
-                    transfer.PageScanned += (sender, args) =>
+                    try
                     {
+                        using (args.Stream)
+                        using (var image = imageContext.ImageFactory.Decode(args.Stream, ".bmp"))
+                        {
+                            Callback(image);
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                        e.PreserveStackTrace();
+                        scanException = e;
+                    }
+                };
+                transfer.Progress += (sender, args) => ScanEvents.PageProgress(args.Percent / 100.0);
+                using (CancelToken.Register(transfer.Cancel))
+                {
+                    ScanEvents.PageStart();
+                    transfer.Download();
+
+                    if (device.Version == WiaVersion.Wia10 && Options.PaperSource != PaperSource.Flatbed)
+                    {
+                        // For WIA 1.0 feeder scans, we need to repeatedly call Download until WIA_ERROR_PAPER_EMPTY is received.
                         try
                         {
-                            using (args.Stream)
-                            using (var image = imageContext.ImageFactory.Decode(args.Stream, ".bmp"))
+                            while (!CancelToken.IsCancellationRequested && scanException == null)
                             {
-                                Callback(image);
+                                ScanEvents.PageStart();
+                                transfer.Download();
                             }
                         }
-                        catch (Exception e)
+                        catch (WiaException e) when (e.ErrorCode == WiaErrorCodes.PAPER_EMPTY)
                         {
-                            e.PreserveStackTrace();
-                            scanException = e;
-                        }
-                    };
-                    transfer.Progress += (sender, args) => ScanEvents.PageProgress(args.Percent / 100.0);
-                    using (CancelToken.Register(transfer.Cancel))
-                    {
-                        ScanEvents.PageStart();
-                        transfer.Download();
-
-                        if (device.Version == WiaVersion.Wia10 && Options.PaperSource != PaperSource.Flatbed)
-                        {
-                            // For WIA 1.0 feeder scans, we need to repeatedly call Download until WIA_ERROR_PAPER_EMPTY is received.
-                            try
-                            {
-                                while (!CancelToken.IsCancellationRequested && scanException == null)
-                                {
-                                    ScanEvents.PageStart();
-                                    transfer.Download();
-                                }
-                            }
-                            catch (WiaException e) when (e.ErrorCode == WiaErrorCodes.PAPER_EMPTY)
-                            {
-                            }
                         }
                     }
-                    if (scanException != null)
-                    {
-                        throw scanException;
-                    }
+                }
+                if (scanException != null)
+                {
+                    throw scanException;
                 }
             }
 

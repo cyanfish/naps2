@@ -148,10 +148,8 @@ namespace NAPS2.Recovery
                     }
                     else
                     {
-                        using (var bitmap = imageContext.ImageFactory.Decode(imagePath))
-                        {
-                            scannedImage = imageContext.CreateScannedImage(bitmap, indexImage.BitDepth.ToBitDepth(), indexImage.HighQuality, -1);
-                        }
+                        using var bitmap = imageContext.ImageFactory.Decode(imagePath);
+                        scannedImage = imageContext.CreateScannedImage(bitmap, indexImage.BitDepth.ToBitDepth(), indexImage.HighQuality, -1);
                     }
                     foreach (var transform in indexImage.TransformList)
                     {

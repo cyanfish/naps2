@@ -79,11 +79,9 @@ namespace NAPS2.Update
         {
             return await Task.Run(() =>
             {
-                using (var client = new WebClient())
-                {
-                    var response = client.DownloadString(url);
-                    return JObject.Parse(response);
-                }
+                using var client = new WebClient();
+                var response = client.DownloadString(url);
+                return JObject.Parse(response);
             });
         }
     }

@@ -40,15 +40,13 @@ namespace NAPS2.Util
         {
             try
             {
-                using (var pipeClient = new NamedPipeClientStream(".", GetPipeName(recipient), PipeDirection.Out))
-                {
-                    //MessageBox.Show("Sending msg:" + msg);
-                    pipeClient.Connect(TIMEOUT);
-                    var streamString = new StreamString(pipeClient);
-                    streamString.WriteString(msg);
-                    //MessageBox.Show("Sent");
-                    return true;
-                }
+                using var pipeClient = new NamedPipeClientStream(".", GetPipeName(recipient), PipeDirection.Out);
+                //MessageBox.Show("Sending msg:" + msg);
+                pipeClient.Connect(TIMEOUT);
+                var streamString = new StreamString(pipeClient);
+                streamString.WriteString(msg);
+                //MessageBox.Show("Sent");
+                return true;
             }
             catch (Exception e)
             {
@@ -71,21 +69,19 @@ namespace NAPS2.Util
             {
                 try
                 {
-                    using (var pipeServer = new NamedPipeServerStream(GetPipeName(Process.GetCurrentProcess()), PipeDirection.In))
+                    using var pipeServer = new NamedPipeServerStream(GetPipeName(Process.GetCurrentProcess()), PipeDirection.In);
+                    while (true)
                     {
-                        while (true)
+                        pipeServer.WaitForConnection();
+                        var streamString = new StreamString(pipeServer);
+                        var msg = streamString.ReadString();
+                        //MessageBox.Show("Received msg:" + msg);
+                        if (msg == MSG_KILL_PIPE_SERVER)
                         {
-                            pipeServer.WaitForConnection();
-                            var streamString = new StreamString(pipeServer);
-                            var msg = streamString.ReadString();
-                            //MessageBox.Show("Received msg:" + msg);
-                            if (msg == MSG_KILL_PIPE_SERVER)
-                            {
-                                break;
-                            }
-                            msgCallback(msg);
-                            pipeServer.Disconnect();
+                            break;
                         }
+                        msgCallback(msg);
+                        pipeServer.Disconnect();
                     }
                 }
                 catch (Exception ex)

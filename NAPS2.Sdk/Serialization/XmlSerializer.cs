@@ -618,11 +618,9 @@ namespace NAPS2.Serialization
     {
         public void Serialize(Stream stream, T obj)
         {
-            using (var writer = new XmlTextWriter(new StreamWriter(stream, new UTF8Encoding(false), 1024, true)) { Formatting = Formatting.Indented })
-            {
-                SerializeToXDocument(obj).Save(writer);
-                writer.Dispose();
-            }
+            using var writer = new XmlTextWriter(new StreamWriter(stream, new UTF8Encoding(false), 1024, true)) { Formatting = Formatting.Indented };
+            SerializeToXDocument(obj).Save(writer);
+            writer.Dispose();
         }
 
         public XDocument SerializeToXDocument(T obj)

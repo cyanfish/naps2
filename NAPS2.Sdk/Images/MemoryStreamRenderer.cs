@@ -22,22 +22,18 @@ namespace NAPS2.Images
 
         public async Task<MemoryStream> Render(ScannedImage image, int outputSize = 0)
         {
-            using (var snapshot = image.Preserve())
-            {
-                return await Render(snapshot, outputSize);
-            }
+            using var snapshot = image.Preserve();
+            return await Render(snapshot, outputSize);
         }
 
         public async Task<MemoryStream> Render(ScannedImage.Snapshot snapshot, int outputSize = 0)
         {
-            using (var transformed = await imageRenderer.Render(snapshot))
+            using var transformed = await imageRenderer.Render(snapshot);
+            return imageContext.Convert<MemoryStreamStorage>(transformed, new StorageConvertParams
             {
-                return imageContext.Convert<MemoryStreamStorage>(transformed, new StorageConvertParams
-                {
-                    // TODO: Is this right?
-                    Lossless = snapshot.Source.Metadata.Lossless
-                }).Stream;
-            }
+                // TODO: Is this right?
+                Lossless = snapshot.Source.Metadata.Lossless
+            }).Stream;
         }
     }
 }

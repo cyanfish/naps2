@@ -148,17 +148,15 @@ namespace NAPS2.ImportExport.Pdf
                 }
                 else
                 {
-                    using (Stream stream = memoryStreamRenderer.Render(snapshot).Result)
-                    using (var img = XImage.FromStream(stream))
+                    using Stream stream = memoryStreamRenderer.Render(snapshot).Result;
+                    using var img = XImage.FromStream(stream);
+                    if (cancelToken.IsCancellationRequested)
                     {
-                        if (cancelToken.IsCancellationRequested)
-                        {
-                            return false;
-                        }
-
-                        PdfPage page = document.AddPage();
-                        DrawImageOnPage(page, img, compat);
+                        return false;
                     }
+
+                    PdfPage page = document.AddPage();
+                    DrawImageOnPage(page, img, compat);
                 }
                 progress++;
                 progressCallback(progress, snapshots.Count);
@@ -311,31 +309,29 @@ namespace NAPS2.ImportExport.Pdf
         private static void DrawOcrTextOnPage(PdfPage page, OcrResult ocrResult)
         {
 #if DEBUG && DEBUGOCR
-            using (XGraphics gfx = XGraphics.FromPdfPage(page, XGraphicsPdfPageOptions.Append))
+            using XGraphics gfx = XGraphics.FromPdfPage(page, XGraphicsPdfPageOptions.Append);
 #else
-            using (XGraphics gfx = XGraphics.FromPdfPage(page, XGraphicsPdfPageOptions.Prepend))
+            using XGraphics gfx = XGraphics.FromPdfPage(page, XGraphicsPdfPageOptions.Prepend);
 #endif
+            var tf = new XTextFormatter(gfx);
+            foreach (var element in ocrResult.Elements)
             {
-                var tf = new XTextFormatter(gfx);
-                foreach (var element in ocrResult.Elements)
-                {
-                    if (string.IsNullOrEmpty(element.Text)) continue;
+                if (string.IsNullOrEmpty(element.Text)) continue;
 
-                    var adjustedBounds = AdjustBounds(element.Bounds, (float)page.Width / ocrResult.PageBounds.Width, (float)page.Height / ocrResult.PageBounds.Height);
+                var adjustedBounds = AdjustBounds(element.Bounds, (float)page.Width / ocrResult.PageBounds.Width, (float)page.Height / ocrResult.PageBounds.Height);
 #if DEBUG && DEBUGOCR
                     gfx.DrawRectangle(new XPen(XColor.FromArgb(255, 0, 0)), adjustedBounds);
 #endif
-                    var adjustedFontSize = CalculateFontSize(element.Text, adjustedBounds, gfx);
-                    // Special case to avoid accidentally recognizing big lines as dashes/underscores
-                    if (adjustedFontSize > 100 && (element.Text == "-" || element.Text == "_")) continue;
-                    var font = new XFont("Times New Roman", adjustedFontSize, XFontStyle.Regular,
-                        new XPdfFontOptions(PdfFontEncoding.Unicode));
-                    var adjustedTextSize = gfx.MeasureString(element.Text, font);
-                    var verticalOffset = (adjustedBounds.Height - adjustedTextSize.Height) / 2;
-                    var horizontalOffset = (adjustedBounds.Width - adjustedTextSize.Width) / 2;
-                    adjustedBounds.Offset((float)horizontalOffset, (float)verticalOffset);
-                    tf.DrawString(ocrResult.RightToLeft ? ReverseText(element.Text) : element.Text, font, XBrushes.Transparent, adjustedBounds);
-                }
+                var adjustedFontSize = CalculateFontSize(element.Text, adjustedBounds, gfx);
+                // Special case to avoid accidentally recognizing big lines as dashes/underscores
+                if (adjustedFontSize > 100 && (element.Text == "-" || element.Text == "_")) continue;
+                var font = new XFont("Times New Roman", adjustedFontSize, XFontStyle.Regular,
+                    new XPdfFontOptions(PdfFontEncoding.Unicode));
+                var adjustedTextSize = gfx.MeasureString(element.Text, font);
+                var verticalOffset = (adjustedBounds.Height - adjustedTextSize.Height) / 2;
+                var horizontalOffset = (adjustedBounds.Width - adjustedTextSize.Width) / 2;
+                adjustedBounds.Offset((float)horizontalOffset, (float)verticalOffset);
+                tf.DrawString(ocrResult.RightToLeft ? ReverseText(element.Text) : element.Text, font, XBrushes.Transparent, adjustedBounds);
             }
         }
 
@@ -360,10 +356,8 @@ namespace NAPS2.ImportExport.Pdf
             Size realSize = GetRealSize(img);
             page.Width = realSize.Width;
             page.Height = realSize.Height;
-            using (XGraphics gfx = XGraphics.FromPdfPage(page))
-            {
-                gfx.DrawImage(img, 0, 0, realSize.Width, realSize.Height);
-            }
+            using XGraphics gfx = XGraphics.FromPdfPage(page);
+            gfx.DrawImage(img, 0, 0, realSize.Width, realSize.Height);
         }
 
         private static Size GetRealSize(XImage img)

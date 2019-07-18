@@ -60,13 +60,11 @@ namespace NAPS2.Util
                 key2.SetValue("NAPS2", exe);
             }
 
-            using (var key3 = Registry.LocalMachine.CreateSubKey(REGKEY_STI_EVENT_NAPS2))
-            {
-                key3.SetValue("Cmdline", $"{exe} /StiDevice:%1 /StiEvent:%2");
-                key3.SetValue("Desc", "Scan with NAPS2");
-                key3.SetValue("Icon", $"{exe},0");
-                key3.SetValue("Name", "NAPS2");
-            }
+            using var key3 = Registry.LocalMachine.CreateSubKey(REGKEY_STI_EVENT_NAPS2);
+            key3.SetValue("Cmdline", $"{exe} /StiDevice:%1 /StiEvent:%2");
+            key3.SetValue("Desc", "Scan with NAPS2");
+            key3.SetValue("Icon", $"{exe},0");
+            key3.SetValue("Name", "NAPS2");
         }
 
         public void Unregister()

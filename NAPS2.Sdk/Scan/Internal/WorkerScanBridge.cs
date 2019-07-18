@@ -28,21 +28,17 @@ namespace NAPS2.Scan.Internal
 
         public async Task<List<ScanDevice>> GetDeviceList(ScanOptions options)
         {
-            using (var ctx = workerFactory.Create())
-            {
-                return await ctx.Service.GetDeviceList(options);
-            }
+            using var ctx = workerFactory.Create();
+            return await ctx.Service.GetDeviceList(options);
         }
 
         public async Task Scan(ScanOptions options, CancellationToken cancelToken, IScanEvents scanEvents, Action<ScannedImage, PostProcessingContext> callback)
         {
-            using (var ctx = workerFactory.Create())
+            using var ctx = workerFactory.Create();
+            await ctx.Service.Scan(imageContext, options, cancelToken, scanEvents, (image, tempPath) =>
             {
-                await ctx.Service.Scan(imageContext, options, cancelToken, scanEvents, (image, tempPath) =>
-                {
-                    callback(image, new PostProcessingContext { TempPath = tempPath });
-                });
-            }
+                callback(image, new PostProcessingContext { TempPath = tempPath });
+            });
         }
     }
 }

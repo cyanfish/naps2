@@ -13,40 +13,32 @@ namespace NAPS2.ImportExport.Email.Mapi
 
         public string GetDefaultName()
         {
-            using (var key = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\Clients\Mail", false))
-            {
-                return key?.GetValue(null).ToString();
-            }
+            using var key = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\Clients\Mail", false);
+            return key?.GetValue(null).ToString();
         }
 
         public string[] GetNames()
         {
             // TODO: Swallow errors
-            using (var clientList = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Clients\Mail", false))
+            using var clientList = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Clients\Mail", false);
+            return clientList?.GetSubKeyNames().Where(clientName =>
             {
-                return clientList?.GetSubKeyNames().Where(clientName =>
-                {
-                    using (var clientKey = Registry.LocalMachine.OpenSubKey($@"SOFTWARE\Clients\Mail\{clientName}"))
-                    {
-                        return clientKey?.GetValue("DllPath") != null;
-                    }
-                }).ToArray() ?? new string[0];
-            }
+                using var clientKey = Registry.LocalMachine.OpenSubKey($@"SOFTWARE\Clients\Mail\{clientName}");
+                return clientKey?.GetValue("DllPath") != null;
+            }).ToArray() ?? new string[0];
         }
 
         public Image GetIcon(string clientName)
         {
-            using (var command = Registry.LocalMachine.OpenSubKey($@"SOFTWARE\Clients\Mail\{clientName}\shell\open\command", false))
+            using var command = Registry.LocalMachine.OpenSubKey($@"SOFTWARE\Clients\Mail\{clientName}\shell\open\command", false);
+            string commandText = command?.GetValue(null).ToString() ?? "";
+            if (!commandText.StartsWith("\"", StringComparison.InvariantCulture))
             {
-                string commandText = command?.GetValue(null).ToString() ?? "";
-                if (!commandText.StartsWith("\"", StringComparison.InvariantCulture))
-                {
-                    return null;
-                }
-                string exePath = commandText.Substring(1, commandText.IndexOf("\"", 1, StringComparison.InvariantCulture) - 1);
-                var icon = Icon.ExtractAssociatedIcon(exePath);
-                return icon?.ToBitmap();
+                return null;
             }
+            string exePath = commandText.Substring(1, commandText.IndexOf("\"", 1, StringComparison.InvariantCulture) - 1);
+            var icon = Icon.ExtractAssociatedIcon(exePath);
+            return icon?.ToBitmap();
         }
 
         internal IntPtr GetLibrary(string clientName)
@@ -84,10 +76,8 @@ namespace NAPS2.ImportExport.Email.Mapi
             {
                 return DEFAULT_MAPI_DLL;
             }
-            using (var clientKey = Registry.LocalMachine.OpenSubKey($@"SOFTWARE\Clients\Mail\{clientName}"))
-            {
-                return clientKey?.GetValue("DllPathEx")?.ToString() ?? clientKey?.GetValue("DllPath")?.ToString() ?? DEFAULT_MAPI_DLL;
-            }
+            using var clientKey = Registry.LocalMachine.OpenSubKey($@"SOFTWARE\Clients\Mail\{clientName}");
+            return clientKey?.GetValue("DllPathEx")?.ToString() ?? clientKey?.GetValue("DllPath")?.ToString() ?? DEFAULT_MAPI_DLL;
         }
 
         // MAPISendMail is documented at:

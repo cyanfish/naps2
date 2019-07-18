@@ -40,10 +40,8 @@ namespace NAPS2.Sdk.Samples
                 foreach (var scannedImage in scannedImages)
                 {
                     // This seamlessly loads the image data from disk.
-                    using (Bitmap bitmap = await renderer.Render(scannedImage))
-                    {
-                        // TODO: Do something with the bitmap
-                    }
+                    using Bitmap bitmap = await renderer.Render(scannedImage);
+                    // TODO: Do something with the bitmap
                 }
             }
             finally

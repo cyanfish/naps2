@@ -174,14 +174,10 @@ namespace NAPS2.Update
 
         private bool VerifyHash()
         {
-            using (var sha = new SHA1CryptoServiceProvider())
-            {
-                using (FileStream stream = File.OpenRead(tempPath))
-                {
-                    byte[] checksum = sha.ComputeHash(stream);
-                    return checksum.SequenceEqual(update.Sha1);
-                }
-            }
+            using var sha = new SHA1CryptoServiceProvider();
+            using FileStream stream = File.OpenRead(tempPath);
+            byte[] checksum = sha.ComputeHash(stream);
+            return checksum.SequenceEqual(update.Sha1);
         }
 
         private bool VerifySignature()

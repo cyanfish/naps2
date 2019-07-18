@@ -57,20 +57,18 @@ msgstr """"
 
         public void Save(string path)
         {
-            using (var writer = new StreamWriter(path))
+            using var writer = new StreamWriter(path);
+            writer.Write(HEADER);
+            writer.Write("\r\n\r\n");
+            foreach (var str in Strings.Values.OrderBy(x => x.Original, StringComparer.Ordinal))
             {
-                writer.Write(HEADER);
-                writer.Write("\r\n\r\n");
-                foreach (var str in Strings.Values.OrderBy(x => x.Original, StringComparer.Ordinal))
+                foreach (var context in str.Context.OrderBy(x => x))
                 {
-                    foreach (var context in str.Context.OrderBy(x => x))
-                    {
-                        writer.Write($"#: {context}\r\n");
-                    }
-                    writer.Write($"msgid \"{str.Original.Replace("\"", "\\\"")}\"\r\n");
-                    writer.Write($"msgstr \"\"\r\n");
-                    writer.Write("\r\n");
+                    writer.Write($"#: {context}\r\n");
                 }
+                writer.Write($"msgid \"{str.Original.Replace("\"", "\\\"")}\"\r\n");
+                writer.Write($"msgstr \"\"\r\n");
+                writer.Write("\r\n");
             }
         }
     }

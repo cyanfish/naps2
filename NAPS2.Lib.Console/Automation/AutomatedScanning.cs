@@ -501,12 +501,10 @@ namespace NAPS2.Automation
             {
                 try
                 {
-                    using (Stream configFileStream = File.OpenRead(options.EncryptConfig))
-                    {
-                        var serializer = new XmlSerializer(typeof(PdfEncryption));
-                        var encryption = (PdfEncryption)serializer.Deserialize(configFileStream);
-                        configScopes.Run.Set(c => c.PdfSettings.Encryption = encryption);
-                    }
+                    using Stream configFileStream = File.OpenRead(options.EncryptConfig);
+                    var serializer = new XmlSerializer(typeof(PdfEncryption));
+                    var encryption = (PdfEncryption)serializer.Deserialize(configFileStream);
+                    configScopes.Run.Set(c => c.PdfSettings.Encryption = encryption);
                 }
                 catch (Exception ex)
                 {

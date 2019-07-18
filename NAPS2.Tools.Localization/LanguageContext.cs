@@ -19,40 +19,38 @@ namespace NAPS2.Localization
 
         public void Load(string poFile)
         {
-            using (var reader = new StreamReader(poFile))
+            using var reader = new StreamReader(poFile);
+            string line;
+            string NextLine() => line = reader.ReadLine()?.Trim();
+            while (NextLine() != null)
             {
-                string line;
-                string NextLine() => line = reader.ReadLine()?.Trim();
-                while (NextLine() != null)
+                if (!line.StartsWith("msgid", StringComparison.InvariantCulture))
                 {
-                    if (!line.StartsWith("msgid", StringComparison.InvariantCulture))
-                    {
-                        continue;
-                    }
-
-                    string original = line.Substring(7, line.Length - 8);
-                    while (NextLine() != null && line.StartsWith("\"", StringComparison.InvariantCulture))
-                    {
-                        original += line.Substring(1, line.Length - 2);
-                    }
-
-                    if (line == null || !line.StartsWith("msgstr", StringComparison.InvariantCulture))
-                    {
-                        continue;
-                    }
-
-                    string translated = line.Substring(8, line.Length - 9);
-                    while (NextLine() != null && line.StartsWith("\"", StringComparison.InvariantCulture))
-                    {
-                        translated += line.Substring(1, line.Length - 2);
-                    }
-
-                    Strings[original] = new TranslatableString
-                    {
-                        Original = original,
-                        Translation = translated
-                    };
+                    continue;
                 }
+
+                string original = line.Substring(7, line.Length - 8);
+                while (NextLine() != null && line.StartsWith("\"", StringComparison.InvariantCulture))
+                {
+                    original += line.Substring(1, line.Length - 2);
+                }
+
+                if (line == null || !line.StartsWith("msgstr", StringComparison.InvariantCulture))
+                {
+                    continue;
+                }
+
+                string translated = line.Substring(8, line.Length - 9);
+                while (NextLine() != null && line.StartsWith("\"", StringComparison.InvariantCulture))
+                {
+                    translated += line.Substring(1, line.Length - 2);
+                }
+
+                Strings[original] = new TranslatableString
+                {
+                    Original = original,
+                    Translation = translated
+                };
             }
         }
 

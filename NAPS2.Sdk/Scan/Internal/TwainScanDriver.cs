@@ -139,23 +139,21 @@ namespace NAPS2.Scan.Internal
                 try
                 {
                     Debug.WriteLine("NAPS2.TW - DataTransferred");
-                    using (var image = options.TwainOptions.TransferMode == TwainTransferMode.Memory
-                                        ? GetBitmapFromMemXFer(eventArgs.MemoryData, eventArgs.ImageInfo)
-                                        : imageContext.ImageFactory.Decode(eventArgs.GetNativeImageStream(), ".bmp"))
-                    {
-                        // TODO: Pipe back patch codes somehow... Or maybe just rely solely on Zxing
-                        //if (scanParams.DetectPatchCodes)
-                        //{
-                        //    foreach (var patchCodeInfo in eventArgs.GetExtImageInfo(ExtendedImageInfo.PatchCode))
-                        //    {
-                        //        if (patchCodeInfo.ReturnCode == ReturnCode.Success)
-                        //        {
-                        //            image.PatchCode = GetPatchCode(patchCodeInfo);
-                        //        }
-                        //    }
-                        //}
-                        callback(image);
-                    }
+                    using var image = options.TwainOptions.TransferMode == TwainTransferMode.Memory
+                        ? GetBitmapFromMemXFer(eventArgs.MemoryData, eventArgs.ImageInfo)
+                        : imageContext.ImageFactory.Decode(eventArgs.GetNativeImageStream(), ".bmp");
+                    // TODO: Pipe back patch codes somehow... Or maybe just rely solely on Zxing
+                    //if (scanParams.DetectPatchCodes)
+                    //{
+                    //    foreach (var patchCodeInfo in eventArgs.GetExtImageInfo(ExtendedImageInfo.PatchCode))
+                    //    {
+                    //        if (patchCodeInfo.ReturnCode == ReturnCode.Success)
+                    //        {
+                    //            image.PatchCode = GetPatchCode(patchCodeInfo);
+                    //        }
+                    //    }
+                    //}
+                    callback(image);
                 }
                 catch (Exception ex)
                 {

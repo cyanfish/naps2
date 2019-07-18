@@ -16,10 +16,8 @@ namespace NAPS2.Images
 
         public async Task<IImage> Render(ScannedImage image, int outputSize = 0)
         {
-            using (var snapshot = image.Preserve())
-            {
-                return await Render(snapshot, outputSize);
-            }
+            using var snapshot = image.Preserve();
+            return await Render(snapshot, outputSize);
         }
 
         public async Task<IImage> Render(ScannedImage.Snapshot snapshot, int outputSize = 0)
