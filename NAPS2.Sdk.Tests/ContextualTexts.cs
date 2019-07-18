@@ -14,7 +14,7 @@ namespace NAPS2.Sdk.Tests
 
         public ContextualTexts()
         {
-            FolderPath = $"naps2_test_temp_{Path.GetRandomFileName()}";
+            FolderPath = $"naps2_test_temp/{Path.GetRandomFileName()}";
             Folder = Directory.CreateDirectory(FolderPath);
             var tempPath = Path.Combine(FolderPath, "temp");
             Directory.CreateDirectory(tempPath);
