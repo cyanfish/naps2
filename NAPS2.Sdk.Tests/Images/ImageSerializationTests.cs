@@ -1,12 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.IO;
+using NAPS2.Images.Storage;
 using NAPS2.Images.Transforms;
+using NAPS2.Scan;
 using NAPS2.Serialization;
 using Xunit;
 
 namespace NAPS2.Sdk.Tests.Images
 {
-    public class ImageSerializationTests
+    public class ImageSerializationTests : ContextualTexts
     {
         private const double TOLERANCE = 0.0001;
 
@@ -45,5 +49,40 @@ namespace NAPS2.Sdk.Tests.Images
             Assert.True(copy[9] is ThumbnailTransform tt && tt.Size == 15);
             Assert.True(copy[10] is TrueContrastTransform tct && tct.Contrast == 16);
         }
+
+        [Fact]
+        public void SerializeImage()
+        {
+            var sourceContext = new GdiImageContext().UseRecovery(Path.Combine(FolderPath, "source"));
+            var destContext = new GdiImageContext().UseRecovery(Path.Combine(FolderPath, "dest"));
+
+            using var _ = sourceContext.CreateScannedImage(new GdiImage(new Bitmap(100, 100))); // So sourceImage is at Index = 1
+            using var sourceImage = sourceContext.CreateScannedImage(new GdiImage(new Bitmap(100, 100)));
+            var sourceFilePath = Assert.IsType<FileStorage>(sourceImage.BackingStorage).FullPath;
+            sourceImage.Metadata.TransformList.Add(new BrightnessTransform(100));
+            sourceImage.Metadata.Lossless = true;
+            sourceImage.Metadata.BitDepth = BitDepth.Grayscale;
+            Assert.Equal(1, sourceImage.Metadata.Index);
+            sourceImage.Metadata.TransformState = 3;
+            sourceImage.Metadata.Commit();
+
+            var serializedImage = SerializedImageHelper.Serialize(sourceContext, sourceImage, new SerializedImageHelper.SerializeOptions());
+            using var destImage = SerializedImageHelper.Deserialize(destContext, serializedImage, new SerializedImageHelper.DeserializeOptions());
+            var destFilePath = Assert.IsType<FileStorage>(destImage.BackingStorage).FullPath;
+            
+            // Backing file should be copied
+            Assert.NotEqual(sourceFilePath, destFilePath);
+            Assert.Equal(File.ReadAllBytes(sourceFilePath), File.ReadAllBytes(destFilePath));
+            // Metadata should be (mostly) copied
+            Assert.Single(destImage.Metadata.TransformList);
+            Assert.Equal(100, Assert.IsType<BrightnessTransform>(destImage.Metadata.TransformList[0]).Brightness);
+            Assert.True(destImage.Metadata.Lossless);
+            Assert.Equal(BitDepth.Grayscale, destImage.Metadata.BitDepth);
+            // Index and TransformState should not be serialized
+            Assert.Equal(0, destImage.Metadata.Index);
+            Assert.Equal(0, destImage.Metadata.TransformState);
+        }
+        
+        // TODO: Add tests for other serialization cases (recovery/file/memory, serialize/deserialize options)
     }
 }
