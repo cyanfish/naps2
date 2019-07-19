@@ -9,80 +9,74 @@ using NAPS2.Serialization;
 
 namespace NAPS2.Images.Storage
 {
-    // TODO: Locking needs a lot of work.
+    /// <summary>
+    /// Manages the lifetime of a recovery folder.
+    ///
+    /// "Recovery" means that in the case of a crash (of the application or machine), there is enough information on disk to restore any ScannedImage objects
+    /// that weren't previously disposed.
+    ///
+    /// From a design perspective, there are several elements to recovery:
+    /// - The recovery folder. Created in the RecoveryStorageManager constructor and deleted by ImageContext.Dispose.
+    /// - The image files. Created when constructing the IFileStorage for ScannedImage and deleted by ScannedImage.Dispose.
+    /// - The image metadata entry. Created when constructing RecoverableImageMetadata and deleted by ScannedImage.Dispose.
+    /// - The recovery index. This is file named index.xml which stores the serialized metadata entries.
+    /// - The recovery lock. This is a file named .lock that is locked until RecoveryStorageManager is disposed. This is used to determine if the application is running or not (in which case you can prompt to recover from disk).
+    ///
+    /// To use recovery, follow these steps:
+    /// 1. Call ImageContext.UseRecovery with the path to the folder you want to store the recovery-related files.
+    /// 2. Scan as usual, creating ScannedImage objects.
+    /// 3. When you no longer need each ScannedImage, call its Dispose method.
+    /// 4. When you've disposed all ScannedImages and are done with scanning, call ImageContext.Dispose.
+    /// 5. If you want to deliberately keep image data to be recovered, don't call Dispose on ScannedImage or ImageContext.
+    /// 6. See the RecoveryManager doc for how to actually recover ScannedImage data from disk. 
+    /// </summary>
     public class RecoveryStorageManager : FileStorageManager, IImageMetadataFactory
     {
         public const string LOCK_FILE_NAME = ".lock";
 
         private readonly ISerializer<RecoveryIndex> serializer = new XmlSerializer<RecoveryIndex>();
+        private readonly bool shared;
+        private readonly DirectoryInfo folder;
+        private readonly FileInfo folderLockFile;
+        private readonly Stream folderLock;
 
         private int fileNumber;
-        private bool folderCreated;
-        private FileInfo folderLockFile;
-        private Stream folderLock;
-        private RecoveryIndex recoveryIndex;
+        private bool disposed;
 
-        public RecoveryStorageManager(string recoveryFolderPath, bool skipCreate = false) : base(recoveryFolderPath)
+        public RecoveryStorageManager(string recoveryFolderPath, bool shared = false) : base(recoveryFolderPath)
         {
-            folderCreated = skipCreate;
+            this.shared = shared;
+            if (!shared)
+            {
+                folder = new DirectoryInfo(RecoveryFolderPath);
+                folder.Create();
+                folderLockFile = new FileInfo(Path.Combine(RecoveryFolderPath, LOCK_FILE_NAME));
+                folderLock = folderLockFile.Open(FileMode.CreateNew, FileAccess.Write, FileShare.None);
+            }
         }
 
         public string RecoveryFolderPath => FolderPath;
 
-        public bool DisableRecoveryCleanup { get; set; }
-
-        public RecoveryIndex Index
-        {
-            get
-            {
-                EnsureFolderCreated();
-                return recoveryIndex;
-            }
-        }
+        public RecoveryIndex RecoveryIndex { get; } = new RecoveryIndex();
 
         public override string NextFilePath()
         {
             lock (this)
             {
-                EnsureFolderCreated();
+                if (disposed) throw new ObjectDisposedException(nameof(RecoveryStorageManager));
                 string fileName = $"{Process.GetCurrentProcess().Id}_{(++fileNumber).ToString("D5", CultureInfo.InvariantCulture)}";
                 return Path.Combine(RecoveryFolderPath, fileName);
             }
         }
 
-        public void EnsureFolderCreated()
-        {
-            lock (this)
-            {
-                if (!folderCreated)
-                {
-                    var folder = new DirectoryInfo(RecoveryFolderPath);
-                    folder.Create();
-                    folderLockFile = new FileInfo(Path.Combine(RecoveryFolderPath, LOCK_FILE_NAME));
-                    folderLock = folderLockFile.Open(FileMode.CreateNew, FileAccess.Write, FileShare.None);
-                    recoveryIndex = new RecoveryIndex();
-                    folderCreated = true;
-                }
-            }
-        }
-
         public void Commit()
         {
+            // TODO: Can maybe just lock on one of these, everywhere
             lock (this)
+            lock (RecoveryIndex)
             {
-                EnsureFolderCreated();
-                if (recoveryIndex.Images.Count == 0)
-                {
-                    // Clean up
-                    ForceReleaseLock();
-                    Directory.Delete(RecoveryFolderPath, true);
-                    recoveryIndex = null;
-                    folderCreated = false;
-                }
-                else
-                {
-                    serializer.SerializeToFile(Path.Combine(RecoveryFolderPath, "index.xml"), recoveryIndex);
-                }
+                if (disposed) throw new ObjectDisposedException(nameof(RecoveryStorageManager));
+                serializer.SerializeToFile(Path.Combine(RecoveryFolderPath, "index.xml"), RecoveryIndex);
             }
         }
 
@@ -92,21 +86,31 @@ namespace NAPS2.Images.Storage
             {
                 throw new ArgumentException("RecoveryStorageManager can only used with IFileStorage.");
             }
-            return new RecoverableImageMetadata(this, new RecoveryIndexImage
+            lock (this)
+            lock (RecoveryIndex)
             {
-                FileName = Path.GetFileName(fileStorage.FullPath),
-                TransformList = new List<Transform>()
-            });
+                if (disposed) throw new ObjectDisposedException(nameof(RecoveryStorageManager));
+                return new RecoverableImageMetadata(this, new RecoveryIndexImage
+                {
+                    FileName = Path.GetFileName(fileStorage.FullPath),
+                    TransformList = new List<Transform>()
+                });
+            }
         }
 
-        public void ForceReleaseLock()
+        protected override void Dispose(bool disposing)
         {
+            if (!disposing) return;
             lock (this)
+            lock (RecoveryIndex)
             {
-                folderLock?.Close();
-                folderLockFile?.Delete();
-                folderLock = null;
-                folderLockFile = null;
+                if (!shared)
+                {
+                    folderLock.Close();
+                    folderLockFile.Delete();
+                    folder.Delete(true);
+                }
+                disposed = true;
             }
         }
     }

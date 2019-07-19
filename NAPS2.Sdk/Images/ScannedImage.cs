@@ -35,6 +35,8 @@ namespace NAPS2.Images
 
                 // Delete the image data on disk
                 BackingStorage?.Dispose();
+                // Delete the recovery entry (if recovery is being used)
+                Metadata?.Dispose();
                 if (thumbnail != null)
                 {
                     thumbnail.Dispose();

@@ -69,6 +69,8 @@ namespace NAPS2.WinForms
         private bool closed = false;
         private LayoutManager layoutManager;
         private bool disableSelectedIndexChangedEvent;
+        
+        public bool SkipRecoveryCleanup { get; set; }
 
         #endregion
 
@@ -404,13 +406,12 @@ namespace NAPS2.WinForms
                 }
                 else
                 {
-                    // TODO: Make nicer.
-                    ((RecoveryStorageManager)imageContext.FileStorageManager).DisableRecoveryCleanup = true;
+                    SkipRecoveryCleanup = true;
                 }
             }
             else if (changeTracker.HasUnsavedChanges)
             {
-                if (e.CloseReason == CloseReason.UserClosing && !((RecoveryStorageManager)imageContext.FileStorageManager).DisableRecoveryCleanup)
+                if (e.CloseReason == CloseReason.UserClosing && !SkipRecoveryCleanup)
                 {
                     var result = MessageBox.Show(MiscResources.ExitWithUnsavedChanges, MiscResources.UnsavedChanges,
                         MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2);
@@ -425,7 +426,7 @@ namespace NAPS2.WinForms
                 }
                 else
                 {
-                    ((RecoveryStorageManager)imageContext.FileStorageManager).DisableRecoveryCleanup = true;
+                    SkipRecoveryCleanup = true;
                 }
             }
 
@@ -456,7 +457,11 @@ namespace NAPS2.WinForms
         {
             SaveToolStripLocation();
             Pipes.KillServer();
-            imageList.Delete(Enumerable.Range(0, imageList.Images.Count));
+            if (!SkipRecoveryCleanup)
+            {
+                imageList.Delete(Enumerable.Range(0, imageList.Images.Count));
+                imageContext.Dispose();
+            }
             closed = true;
             renderThumbnailsWaitHandle.Set();
         }

@@ -17,7 +17,7 @@ namespace NAPS2.Images.Storage
             this.rsm = rsm;
             // TODO: Maybe not a constructor param?
             this.indexImage = indexImage;
-            rsm.Index.Images.Add(indexImage);
+            rsm.RecoveryIndex.Images.Add(indexImage);
         }
 
         public List<Transform> TransformList
@@ -30,12 +30,12 @@ namespace NAPS2.Images.Storage
 
         public int Index
         {
-            get => rsm.Index.Images.IndexOf(indexImage);
+            get => rsm.RecoveryIndex.Images.IndexOf(indexImage);
             set
             {
                 // TODO: Locking
-                rsm.Index.Images.Remove(indexImage);
-                rsm.Index.Images.Insert(value, indexImage);
+                rsm.RecoveryIndex.Images.Remove(indexImage);
+                rsm.RecoveryIndex.Images.Insert(value, indexImage);
             }
         }
 
@@ -68,7 +68,7 @@ namespace NAPS2.Images.Storage
 
         public void Dispose()
         {
-            rsm.Index.Images.Remove(indexImage);
+            rsm.RecoveryIndex.Images.Remove(indexImage);
             // TODO: Commit?
         }
     }

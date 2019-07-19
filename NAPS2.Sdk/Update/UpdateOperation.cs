@@ -15,6 +15,7 @@ using NAPS2.Logging;
 using NAPS2.Operation;
 using NAPS2.Images.Storage;
 using NAPS2.Util;
+using NAPS2.WinForms;
 
 namespace NAPS2.Update
 {
@@ -125,8 +126,12 @@ namespace NAPS2.Update
                 waitHandle.Set();
             }
             // TODO: Simplify
-            ((RecoveryStorageManager)imageContext.FileStorageManager).DisableRecoveryCleanup = true;
-            Application.OpenForms.OfType<Form>().FirstOrDefault()?.Close();
+            var desktop = Application.OpenForms.OfType<FDesktop>().FirstOrDefault();
+            if (desktop != null)
+            {
+                desktop.SkipRecoveryCleanup = true;
+                desktop.Close();
+            }
         }
 
         private void InstallExe()

@@ -53,8 +53,8 @@ namespace NAPS2.Sdk.Tests.Images
         [Fact]
         public void SerializeImage()
         {
-            var sourceContext = new GdiImageContext().UseRecovery(Path.Combine(FolderPath, "source"));
-            var destContext = new GdiImageContext().UseRecovery(Path.Combine(FolderPath, "dest"));
+            using var sourceContext = new GdiImageContext().UseRecovery(Path.Combine(FolderPath, "source"));
+            using var destContext = new GdiImageContext().UseRecovery(Path.Combine(FolderPath, "dest"));
 
             using var _ = sourceContext.CreateScannedImage(new GdiImage(new Bitmap(100, 100))); // So sourceImage is at Index = 1
             using var sourceImage = sourceContext.CreateScannedImage(new GdiImage(new Bitmap(100, 100)));

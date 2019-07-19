@@ -35,10 +35,7 @@ namespace NAPS2
 
             var imageContext = kernel.Get<ImageContext>();
             var recoveryFolderPath = Path.Combine(Paths.Recovery, Path.GetRandomFileName());
-            var rsm = new RecoveryStorageManager(recoveryFolderPath);
-            imageContext.FileStorageManager = rsm;
-            imageContext.ConfigureBackingStorage<FileStorage>();
-            imageContext.ImageMetadataFactory = rsm;
+            imageContext.UseRecovery(recoveryFolderPath);
         }
     }
 }

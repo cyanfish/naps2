@@ -140,7 +140,6 @@ namespace NAPS2.Remoting.Worker
         public WorkerContext Create()
         {
             var rsm = imageContext.FileStorageManager as RecoveryStorageManager;
-            rsm?.EnsureFolderCreated();
             var worker = NextWorker();
             worker.Service.Init(rsm?.RecoveryFolderPath);
             return worker;

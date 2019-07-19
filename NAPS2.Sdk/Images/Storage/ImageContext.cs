@@ -8,7 +8,7 @@ using NAPS2.Util;
 
 namespace NAPS2.Images.Storage
 {
-    public abstract class ImageContext
+    public abstract class ImageContext : IDisposable
     {
         private static ImageContext _default = new GdiImageContext();
 
@@ -202,6 +202,20 @@ namespace NAPS2.Images.Storage
             ImageMetadataFactory = rsm;
             ConfigureBackingStorage<FileStorage>();
             return this;
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                fileStorageManager.Dispose();
+            }
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
         }
     }
 

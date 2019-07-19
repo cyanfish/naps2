@@ -10,8 +10,6 @@ namespace NAPS2.Sdk.Tests
 {
     public class ContextualTexts : IDisposable
     {
-        private RecoveryStorageManager rsm;
-
         public ContextualTexts()
         {
             FolderPath = $"naps2_test_temp/{Path.GetRandomFileName()}";
@@ -42,9 +40,6 @@ namespace NAPS2.Sdk.Tests
         public void UseRecovery()
         {
             var recoveryFolderPath = Path.Combine(FolderPath, "recovery", Path.GetRandomFileName());
-            // TODO: This is broken because it doesn't set the local rsm variable.
-            // TODO: Really just need to figure out my Dispose model, ideally this would dispose imagecontext which would dispose FSM.
-            // TODO: But there are a lot of consistency issues to think through.
             ImageContext.UseRecovery(recoveryFolderPath);
         }
 
@@ -55,7 +50,7 @@ namespace NAPS2.Sdk.Tests
 
         public virtual void Dispose()
         {
-            rsm?.ForceReleaseLock();
+            ImageContext.Dispose();
             try
             {
                 Directory.Delete(FolderPath, true);
