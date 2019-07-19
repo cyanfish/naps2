@@ -43,7 +43,17 @@ namespace NAPS2.Images.Storage
         private int fileNumber;
         private bool disposed;
 
-        public RecoveryStorageManager(string recoveryFolderPath, bool shared = false) : base(recoveryFolderPath)
+        public static RecoveryStorageManager CreateFolder(string recoveryFolderPath)
+        {
+            return new RecoveryStorageManager(recoveryFolderPath, false);
+        }
+
+        public static RecoveryStorageManager UseExistingFolder(string recoveryFolderPath)
+        {
+            return new RecoveryStorageManager(recoveryFolderPath, true);
+        }
+
+        private RecoveryStorageManager(string recoveryFolderPath, bool shared) : base(recoveryFolderPath)
         {
             this.shared = shared;
             if (!shared)

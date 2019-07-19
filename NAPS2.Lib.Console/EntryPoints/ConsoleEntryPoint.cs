@@ -14,7 +14,7 @@ namespace NAPS2.EntryPoints
         public static void Run(string[] args)
         {
             // Initialize Ninject (the DI framework)
-            var kernel = new StandardKernel(new CommonModule(), new ConsoleModule(), new StaticDefaultsModule());
+            var kernel = new StandardKernel(new CommonModule(), new ConsoleModule(), new StaticDefaultsModule(), new RecoveryModule());
 
             Paths.ClearTemp();
 

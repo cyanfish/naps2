@@ -144,6 +144,7 @@
     </Compile>
     <Compile Include="Images\HoughLineDeskewer.cs" />
     <Compile Include="Images\Deskewer.cs" />
+    <Compile Include="Images\Storage\NotToBeUsedStorageManager.cs" />
     <Compile Include="Remoting\ClientServer\ClientContext.cs" />
     <Compile Include="Remoting\ClientServer\ClientContextFactory.cs" />
     <Compile Include="Remoting\ClientServer\IScanCallback.cs" />

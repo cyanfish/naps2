@@ -69,7 +69,7 @@ namespace NAPS2.Images.Storage
         public void Dispose()
         {
             rsm.RecoveryIndex.Images.Remove(indexImage);
-            // TODO: Commit?
+            Commit();
         }
     }
 }

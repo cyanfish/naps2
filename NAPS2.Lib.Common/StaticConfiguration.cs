@@ -32,10 +32,6 @@ namespace NAPS2
                 : Environment.ExpandEnvironmentVariables(customPath);
 
             OcrEngineManager.Default = new OcrEngineManager(basePath);
-
-            var imageContext = kernel.Get<ImageContext>();
-            var recoveryFolderPath = Path.Combine(Paths.Recovery, Path.GetRandomFileName());
-            imageContext.UseRecovery(recoveryFolderPath);
         }
     }
 }
