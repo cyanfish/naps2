@@ -8,6 +8,11 @@ namespace NAPS2.Images.Transforms
 {
     public abstract class Transform
     {
+        static Transform()
+        {
+            XmlSerializer.RegisterCustomTypes(new TransformTypes());
+        }
+        
         /// <summary>
         /// Appends the specified transform to the list, merging with the previous transform on the list if simplication is possible.
         /// </summary>

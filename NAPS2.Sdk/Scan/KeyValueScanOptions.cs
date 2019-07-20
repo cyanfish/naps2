@@ -12,6 +12,11 @@ namespace NAPS2.Scan
     /// </summary>
     public class KeyValueScanOptions : Dictionary<string, string>
     {
+        static KeyValueScanOptions()
+        {
+            XmlSerializer.RegisterCustomSerializer(new Serializer());
+        }
+        
         public KeyValueScanOptions()
         {
         }
@@ -20,7 +25,6 @@ namespace NAPS2.Scan
         {
         }
 
-        // ReSharper disable once UnusedMember.Local
         private class Serializer : CustomXmlSerializer<KeyValueScanOptions>
         {
             protected override void Serialize(KeyValueScanOptions obj, XElement element)

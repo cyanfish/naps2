@@ -10,6 +10,11 @@ namespace NAPS2.Serialization
     /// </summary>
     public class SecureString
     {
+        static SecureString()
+        {
+            XmlSerializer.RegisterCustomSerializer(new Serializer());
+        }
+        
         private string value;
         private string valueEncrypted;
 
@@ -33,7 +38,6 @@ namespace NAPS2.Serialization
             return value;
         }
 
-        // ReSharper disable once UnusedMember.Local
         private class Serializer : CustomXmlSerializer<SecureString>
         {
             protected override void Serialize(SecureString obj, XElement element)

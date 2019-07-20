@@ -5,6 +5,7 @@ using System.Linq;
 using System.Xml.Linq;
 using NAPS2.Scan;
 using NAPS2.Serialization;
+using NAPS2.Util;
 using Xunit;
 
 namespace NAPS2.Sdk.Tests.Serialization
@@ -178,6 +179,38 @@ namespace NAPS2.Sdk.Tests.Serialization
             Assert.True(copySubtype.Bool);
         }
 
+        [Fact]
+        public void SerializationPerformance()
+        {
+            var original = Enumerable.Repeat(new Poco { Str = "hi", Int = 5 }, 10)
+                .Concat(Enumerable.Repeat(new PocoSubtype { Str = "yo", Int = 4, Bool = true}, 10))
+                .ToList();
+            var serializer = new XmlSerializer<List<Poco>>();
+            string str;
+            using (new DebugTimer("serialization cold"))
+            {
+                str = serializer.SerializeToString(original);
+            }
+            using (new DebugTimer("deserialization semi-cold"))
+            {
+                serializer.DeserializeFromString(str);
+            }
+            using (new DebugTimer("serialization warm x100"))
+            {
+                for (int i = 0; i < 100; i++)
+                {
+                    serializer.SerializeToString(original);
+                }
+            }
+            using (new DebugTimer("deserialization warm x100"))
+            {
+                for (int i = 0; i < 100; i++)
+                {
+                    serializer.DeserializeFromString(str);
+                }
+            }
+        }
+
         // TODO: Custom serialization
         // TODO: Ordering
 
@@ -188,6 +221,11 @@ namespace NAPS2.Sdk.Tests.Serialization
 
         private class Poco
         {
+            static Poco()
+            {
+                XmlSerializer.RegisterCustomTypes(new PocoTypes());
+            }
+            
             public string Str { get; set; }
 
             public int Int { get; set; }

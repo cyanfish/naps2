@@ -18,9 +18,9 @@ namespace NAPS2.Serialization
     {
         protected static readonly XNamespace Xsi = "http://www.w3.org/2001/XMLSchema-instance";
 
-        protected static Dictionary<Type, CustomXmlSerializer> CustomSerializerCache;
+        protected static readonly Dictionary<Type, CustomXmlSerializer> CustomSerializerCache = new Dictionary<Type, CustomXmlSerializer>();
 
-        protected static Dictionary<Type, List<CustomXmlTypes>> CustomTypesCache;
+        protected static readonly Dictionary<Type, List<CustomXmlTypes>> CustomTypesCache = new Dictionary<Type, List<CustomXmlTypes>>();
 
         protected static readonly List<Type> ArrayLikeTypes = new List<Type>
         {
@@ -55,6 +55,32 @@ namespace NAPS2.Serialization
             { typeof(DateTime), new XmlTypeInfo { CustomSerializer = new DateTimeSerializer() } },
             { typeof(Nullable<>), new XmlTypeInfo { CustomSerializer = new NullableSerializer() } },
         };
+
+        public static void RegisterCustomSerializer<T>(CustomXmlSerializer<T> customSerializer)
+        {
+            RegisterCustomSerializer(typeof(T), customSerializer);
+        }
+
+        public static void RegisterCustomSerializer(Type type, CustomXmlSerializer customSerializer)
+        {
+            lock (TypeInfoCache)
+            {
+                CustomSerializerCache[type] = customSerializer;
+            }
+        }
+
+        public static void RegisterCustomTypes<T>(CustomXmlTypes<T> customTypes)
+        {
+            RegisterCustomTypes(typeof(T), customTypes);
+        }
+
+        public static void RegisterCustomTypes(Type type, CustomXmlTypes customTypes)
+        {
+            lock (TypeInfoCache)
+            {
+                CustomTypesCache.GetOrSet(type, new List<CustomXmlTypes>()).Add(customTypes);
+            }
+        }
 
         protected static XElement SerializeInternal(object obj, XElement element, Type type)
         {
@@ -214,21 +240,6 @@ namespace NAPS2.Serialization
         {
             lock (TypeInfoCache)
             {
-                if (CustomTypesCache == null)
-                {
-                    CustomTypesCache = new Dictionary<Type, List<CustomXmlTypes>>();
-                    foreach (var customTypesType in AppDomain.CurrentDomain.GetAssemblies().SelectMany(x => x.GetTypes()))
-                    {
-                        if (customTypesType.BaseType != null
-                            && typeof(CustomXmlTypes).IsAssignableFrom(customTypesType)
-                            && customTypesType.BaseType.IsGenericType
-                            && typeof(CustomXmlTypes<>) == customTypesType.BaseType.GetGenericTypeDefinition())
-                        {
-                            var typeParam = customTypesType.BaseType.GetGenericArguments()[0];
-                            CustomTypesCache.GetOrSet(typeParam, () => new List<CustomXmlTypes>()).Add((CustomXmlTypes)Activator.CreateInstance(customTypesType));
-                        }
-                    }
-                }
                 return CustomTypesCache.Get(type)?.SelectMany(x => x.GetKnownTypes(type)) ?? Enumerable.Empty<Type>();
             }
         }
@@ -237,21 +248,6 @@ namespace NAPS2.Serialization
         {
             lock (TypeInfoCache)
             {
-                if (CustomSerializerCache == null)
-                {
-                    CustomSerializerCache = new Dictionary<Type, CustomXmlSerializer>();
-                    foreach (var customSerializerType in AppDomain.CurrentDomain.GetAssemblies().SelectMany(x => x.GetTypes()))
-                    {
-                        if (customSerializerType.BaseType != null
-                            && typeof(CustomXmlSerializer).IsAssignableFrom(customSerializerType)
-                            && customSerializerType.BaseType.IsGenericType
-                            && typeof(CustomXmlSerializer<>) == customSerializerType.BaseType.GetGenericTypeDefinition())
-                        {
-                            var typeParam = customSerializerType.BaseType.GetGenericArguments()[0];
-                            CustomSerializerCache[typeParam] = (CustomXmlSerializer)Activator.CreateInstance(customSerializerType);
-                        }
-                    }
-                }
                 return CustomSerializerCache.Get(type);
             }
         }
