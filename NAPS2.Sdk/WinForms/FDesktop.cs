@@ -64,6 +64,7 @@ namespace NAPS2.WinForms
 
         #region State Fields
 
+        private readonly UserActions userActions;
         private readonly ScannedImageList imageList;
         private readonly AutoResetEvent renderThumbnailsWaitHandle = new AutoResetEvent(false);
         private bool closed = false;
@@ -98,7 +99,8 @@ namespace NAPS2.WinForms
             this.operationProgress = operationProgress;
             this.updateChecker = updateChecker;
             this.profileManager = profileManager;
-            imageList = new ScannedImageList(imageContext);
+            imageList = new ScannedImageList(changeTracker);
+            userActions = new UserActions(imageContext, imageList);
             InitializeComponent();
 
             notify.ParentForm = this;
@@ -824,13 +826,7 @@ namespace NAPS2.WinForms
             {
                 if (MessageBox.Show(string.Format(MiscResources.ConfirmClearItems, imageList.Images.Count), MiscResources.Clear, MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
                 {
-                    foreach (var image in imageList.Images)
-                    {
-                        image.Dispose();
-                    }
-                    imageList.Images.Clear();
-                    DeleteThumbnails();
-                    changeTracker.Clear();
+                    userActions.DeleteAll();
                 }
             }
         }
@@ -841,96 +837,8 @@ namespace NAPS2.WinForms
             {
                 if (MessageBox.Show(string.Format(MiscResources.ConfirmDeleteItems, SelectedIndices.Count()), MiscResources.Delete, MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
                 {
-                    foreach (var image in imageList.Images.ElementsAt(SelectedIndices))
-                    {
-                        image.Dispose();
-                    }
-                    imageList.Images.RemoveAllAt(SelectedIndices);
-                    DeleteThumbnails();
-                    if (imageList.Images.Any())
-                    {
-                        changeTracker.Made();
-                    }
-                    else
-                    {
-                        changeTracker.Clear();
-                    }
+                    userActions.DeleteSelected();
                 }
-            }
-        }
-
-        private void MutateList(ListMutation mutation)
-        {
-            var originalList = imageList.Images.ToList();
-            var selection = ListSelection.FromSelectedIndices(imageList.Images, SelectedIndices);
-            mutation.Apply(imageList.Images, selection);
-            UpdateThumbnails(selection.ToSelectedIndices(imageList.Images), true, mutation.OnlyAffectsSelectionRange);
-            if (!originalList.SequenceEqual(imageList.Images))
-            {
-                changeTracker.Made();
-            }
-        }
-
-        private void SelectAll()
-        {
-            SelectedIndices = Enumerable.Range(0, imageList.Images.Count);
-        }
-
-        private void MoveDown()
-        {
-            MutateList(new ListMutation.MoveDown());
-        }
-
-        private void MoveUp()
-        {
-            MutateList(new ListMutation.MoveUp());
-        }
-
-        private async Task RotateLeft()
-        {
-            if (!SelectedIndices.Any())
-            {
-                return;
-            }
-            changeTracker.Made();
-            await imageList.RotateFlip(SelectedIndices, 270);
-            changeTracker.Made();
-        }
-
-        private async Task RotateRight()
-        {
-            if (!SelectedIndices.Any())
-            {
-                return;
-            }
-            changeTracker.Made();
-            await imageList.RotateFlip(SelectedIndices, 90);
-            changeTracker.Made();
-        }
-
-        private async Task Flip()
-        {
-            if (!SelectedIndices.Any())
-            {
-                return;
-            }
-            changeTracker.Made();
-            await imageList.RotateFlip(SelectedIndices, 180);
-            changeTracker.Made();
-        }
-
-        private void Deskew()
-        {
-            if (!SelectedIndices.Any())
-            {
-                return;
-            }
-
-            var op = operationFactory.Create<DeskewOperation>();
-            if (op.Start(SelectedImages.ToList(), new DeskewParams { ThumbnailSize = ConfigProvider.Get(c => c.ThumbnailSize) }))
-            {
-                operationProgress.ShowProgress(op);
-                changeTracker.Made();
             }
         }
 
@@ -968,8 +876,7 @@ namespace NAPS2.WinForms
             {
                 if (MessageBox.Show(string.Format(MiscResources.ConfirmResetImages, SelectedIndices.Count()), MiscResources.ResetImage, MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
                 {
-                    imageList.ResetTransforms(SelectedIndices);
-                    changeTracker.Made();
+                    userActions.ResetTransforms();
                 }
             }
         }
@@ -1090,10 +997,10 @@ namespace NAPS2.WinForms
             ksm.Assign("Ctrl+O", tsImport);
             ksm.Assign("Ctrl+S", tsdSavePDF);
             ksm.Assign("Ctrl+P", tsPrint);
-            ksm.Assign("Ctrl+Up", MoveUp);
-            ksm.Assign("Ctrl+Left", MoveUp);
-            ksm.Assign("Ctrl+Down", MoveDown);
-            ksm.Assign("Ctrl+Right", MoveDown);
+            ksm.Assign("Ctrl+Up", userActions.MoveUp);
+            ksm.Assign("Ctrl+Left", userActions.MoveUp);
+            ksm.Assign("Ctrl+Down", userActions.MoveDown);
+            ksm.Assign("Ctrl+Right", userActions.MoveDown);
             ksm.Assign("Ctrl+Shift+Del", tsClear);
             ksm.Assign("F1", OpenAbout);
             ksm.Assign("Ctrl+OemMinus", btnZoomOut);
@@ -1125,8 +1032,8 @@ namespace NAPS2.WinForms
             ksm.Assign(ks.ImageReset, tsReset);
             ksm.Assign(ks.ImageView, tsView);
             ksm.Assign(ks.Import, tsImport);
-            ksm.Assign(ks.MoveDown, MoveDown); // TODO
-            ksm.Assign(ks.MoveUp, MoveUp); // TODO
+            ksm.Assign(ks.MoveDown, userActions.MoveDown);
+            ksm.Assign(ks.MoveUp, userActions.MoveUp);
             ksm.Assign(ks.NewProfile, tsNewProfile);
             ksm.Assign(ks.Ocr, tsOcr);
             ksm.Assign(ks.Print, tsPrint);
@@ -1376,35 +1283,17 @@ namespace NAPS2.WinForms
             }
         }
 
-        private void tsMove_FirstClick(object sender, EventArgs e)
-        {
-            MoveUp();
-        }
+        private void tsMove_FirstClick(object sender, EventArgs e) => userActions.MoveUp();
 
-        private void tsMove_SecondClick(object sender, EventArgs e)
-        {
-            MoveDown();
-        }
+        private void tsMove_SecondClick(object sender, EventArgs e) => userActions.MoveDown();
 
-        private void tsDelete_Click(object sender, EventArgs e)
-        {
-            Delete();
-        }
+        private void tsDelete_Click(object sender, EventArgs e) => Delete();
 
-        private void tsClear_Click(object sender, EventArgs e)
-        {
-            Clear();
-        }
+        private void tsClear_Click(object sender, EventArgs e) => Clear();
 
-        private void tsAbout_Click(object sender, EventArgs e)
-        {
-            OpenAbout();
-        }
+        private void tsAbout_Click(object sender, EventArgs e) => OpenAbout();
 
-        private void tsSettings_Click(object sender, EventArgs e)
-        {
-            OpenSettings();
-        }
+        private void tsSettings_Click(object sender, EventArgs e) => OpenSettings();
 
         #endregion
 
@@ -1533,25 +1422,13 @@ namespace NAPS2.WinForms
 
         #region Event Handlers - Rotate Menu
 
-        private async void tsRotateLeft_Click(object sender, EventArgs e)
-        {
-            await RotateLeft();
-        }
+        private async void tsRotateLeft_Click(object sender, EventArgs e) => await userActions.RotateLeft();
 
-        private async void tsRotateRight_Click(object sender, EventArgs e)
-        {
-            await RotateRight();
-        }
+        private async void tsRotateRight_Click(object sender, EventArgs e) => await userActions.RotateRight();
 
-        private async void tsFlip_Click(object sender, EventArgs e)
-        {
-            await Flip();
-        }
+        private async void tsFlip_Click(object sender, EventArgs e) => await userActions.Flip();
 
-        private void tsDeskew_Click(object sender, EventArgs e)
-        {
-            Deskew();
-        }
+        private void tsDeskew_Click(object sender, EventArgs e) => userActions.Deskew();
 
         private void tsCustomRotation_Click(object sender, EventArgs e)
         {
@@ -1569,35 +1446,12 @@ namespace NAPS2.WinForms
 
         #region Event Handlers - Reorder Menu
 
-        private void tsInterleave_Click(object sender, EventArgs e)
-        {
-            MutateList(new ListMutation.Interleave());
-        }
-
-        private void tsDeinterleave_Click(object sender, EventArgs e)
-        {
-            MutateList(new ListMutation.Deinterleave());
-        }
-
-        private void tsAltInterleave_Click(object sender, EventArgs e)
-        {
-            MutateList(new ListMutation.AltInterleave());
-        }
-
-        private void tsAltDeinterleave_Click(object sender, EventArgs e)
-        {
-            MutateList(new ListMutation.AltDeinterleave());
-        }
-
-        private void tsReverseAll_Click(object sender, EventArgs e)
-        {
-            MutateList(new ListMutation.ReverseAll());
-        }
-
-        private void tsReverseSelected_Click(object sender, EventArgs e)
-        {
-            MutateList(new ListMutation.ReverseSelection());
-        }
+        private void tsInterleave_Click(object sender, EventArgs e) => userActions.Interleave();
+        private void tsDeinterleave_Click(object sender, EventArgs e) => userActions.Deinterleave();
+        private void tsAltInterleave_Click(object sender, EventArgs e) => userActions.AltInterleave();
+        private void tsAltDeinterleave_Click(object sender, EventArgs e) => userActions.AltDeinterleave();
+        private void tsReverseAll_Click(object sender, EventArgs e) => userActions.ReverseAll();
+        private void tsReverseSelected_Click(object sender, EventArgs e) => userActions.ReverseSelected();
 
         #endregion
 
@@ -1612,10 +1466,7 @@ namespace NAPS2.WinForms
             }
         }
 
-        private void ctxSelectAll_Click(object sender, EventArgs e)
-        {
-            SelectAll();
-        }
+        private void ctxSelectAll_Click(object sender, EventArgs e) => userActions.SelectAll();
 
         private void ctxView_Click(object sender, EventArgs e)
         {
@@ -1636,10 +1487,7 @@ namespace NAPS2.WinForms
             }
         }
 
-        private void ctxDelete_Click(object sender, EventArgs e)
-        {
-            Delete();
-        }
+        private void ctxDelete_Click(object sender, EventArgs e) => Delete();
 
         #endregion
 
@@ -1877,7 +1725,7 @@ namespace NAPS2.WinForms
             int index = GetDragIndex(e);
             if (index != -1)
             {
-                MutateList(new ListMutation.MoveTo(index));
+                userActions.MoveTo(index);
             }
         }
 

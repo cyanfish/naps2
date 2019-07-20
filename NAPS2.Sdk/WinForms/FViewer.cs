@@ -10,6 +10,7 @@ using NAPS2.Lang.Resources;
 using NAPS2.Operation;
 using NAPS2.Platform;
 using NAPS2.Images;
+using NAPS2.Images.Storage;
 using NAPS2.Util;
 
 namespace NAPS2.WinForms
@@ -47,8 +48,9 @@ namespace NAPS2.WinForms
         private readonly BitmapRenderer bitmapRenderer;
         private readonly KeyboardShortcutManager ksm;
         private readonly OperationProgress operationProgress;
+        private readonly ImageContext imageContext;
 
-        public FViewer(ChangeTracker changeTracker, IOperationFactory operationFactory, WinFormsExportHelper exportHelper, BitmapRenderer bitmapRenderer, KeyboardShortcutManager ksm, OperationProgress operationProgress)
+        public FViewer(ChangeTracker changeTracker, IOperationFactory operationFactory, WinFormsExportHelper exportHelper, BitmapRenderer bitmapRenderer, KeyboardShortcutManager ksm, OperationProgress operationProgress, ImageContext imageContext)
         {
             this.changeTracker = changeTracker;
             this.operationFactory = operationFactory;
@@ -56,6 +58,7 @@ namespace NAPS2.WinForms
             this.bitmapRenderer = bitmapRenderer;
             this.ksm = ksm;
             this.operationProgress = operationProgress;
+            this.imageContext = imageContext;
             InitializeComponent();
         }
 
@@ -63,6 +66,8 @@ namespace NAPS2.WinForms
         public int ImageIndex { get; set; }
         public Action DeleteCallback { get; set; }
         public Action<int> SelectCallback { get; set; }
+
+        private ScannedImage CurrentImage => ImageList.Images[ImageIndex];
 
         protected override async void OnLoad(object sender, EventArgs e)
         {
@@ -107,7 +112,7 @@ namespace NAPS2.WinForms
         {
             tiffViewer1.Image?.Dispose();
             tiffViewer1.Image = null;
-            tiffViewer1.Image = await bitmapRenderer.Render(ImageList.Images[ImageIndex]);
+            tiffViewer1.Image = await bitmapRenderer.Render(CurrentImage);
         }
 
         protected override void Dispose(bool disposing)
@@ -394,26 +399,26 @@ namespace NAPS2.WinForms
 
         private async void tsRotateLeft_Click(object sender, EventArgs e)
         {
-            await ImageList.RotateFlip(Enumerable.Range(ImageIndex, 1), 270);
+            await ImageList.MutateAsync(new ImageListMutation.RotateFlip(imageContext, 270), ListSelection.Single(CurrentImage));
             await UpdateImage();
         }
 
         private async void tsRotateRight_Click(object sender, EventArgs e)
         {
-            await ImageList.RotateFlip(Enumerable.Range(ImageIndex, 1), 90);
+            await ImageList.MutateAsync(new ImageListMutation.RotateFlip(imageContext, 90), ListSelection.Single(CurrentImage));
             await UpdateImage();
         }
 
         private async void tsFlip_Click(object sender, EventArgs e)
         {
-            await ImageList.RotateFlip(Enumerable.Range(ImageIndex, 1), 180);
+            await ImageList.MutateAsync(new ImageListMutation.RotateFlip(imageContext, 180), ListSelection.Single(CurrentImage));
             await UpdateImage();
         }
 
         private async void tsDeskew_Click(object sender, EventArgs e)
         {
             var op = operationFactory.Create<DeskewOperation>();
-            if (op.Start(new[] { ImageList.Images[ImageIndex] }, new DeskewParams { ThumbnailSize = ConfigProvider.Get(c => c.ThumbnailSize) }))
+            if (op.Start(new[] { CurrentImage }, new DeskewParams { ThumbnailSize = ConfigProvider.Get(c => c.ThumbnailSize) }))
             {
                 operationProgress.ShowProgress(op);
                 await UpdateImage();
@@ -423,7 +428,7 @@ namespace NAPS2.WinForms
         private async void tsCustomRotation_Click(object sender, EventArgs e)
         {
             var form = FormFactory.Create<FRotate>();
-            form.Image = ImageList.Images[ImageIndex];
+            form.Image = CurrentImage;
             form.ShowDialog();
             await UpdateImage();
         }
@@ -431,7 +436,7 @@ namespace NAPS2.WinForms
         private async void tsCrop_Click(object sender, EventArgs e)
         {
             var form = FormFactory.Create<FCrop>();
-            form.Image = ImageList.Images[ImageIndex];
+            form.Image = CurrentImage;
             form.ShowDialog();
             await UpdateImage();
         }
@@ -439,7 +444,7 @@ namespace NAPS2.WinForms
         private async void tsBrightnessContrast_Click(object sender, EventArgs e)
         {
             var form = FormFactory.Create<FBrightnessContrast>();
-            form.Image = ImageList.Images[ImageIndex];
+            form.Image = CurrentImage;
             form.ShowDialog();
             await UpdateImage();
         }
@@ -447,7 +452,7 @@ namespace NAPS2.WinForms
         private async void tsHueSaturation_Click(object sender, EventArgs e)
         {
             var form = FormFactory.Create<FHueSaturation>();
-            form.Image = ImageList.Images[ImageIndex];
+            form.Image = CurrentImage;
             form.ShowDialog();
             await UpdateImage();
         }
@@ -455,7 +460,7 @@ namespace NAPS2.WinForms
         private async void tsBlackWhite_Click(object sender, EventArgs e)
         {
             var form = FormFactory.Create<FBlackWhite>();
-            form.Image = ImageList.Images[ImageIndex];
+            form.Image = CurrentImage;
             form.ShowDialog();
             await UpdateImage();
         }
@@ -463,7 +468,7 @@ namespace NAPS2.WinForms
         private async void tsSharpen_Click(object sender, EventArgs e)
         {
             var form = FormFactory.Create<FSharpen>();
-            form.Image = ImageList.Images[ImageIndex];
+            form.Image = CurrentImage;
             form.ShowDialog();
             await UpdateImage();
         }
@@ -481,7 +486,7 @@ namespace NAPS2.WinForms
             // Need to dispose the bitmap first to avoid file access issues
             tiffViewer1.Image?.Dispose();
             // Actually delete the image
-            ImageList.Images[ImageIndex].Dispose();
+            CurrentImage.Dispose();
             ImageList.Images.RemoveAt(ImageIndex);
             // Update FDesktop in the background
             DeleteCallback();
@@ -510,7 +515,7 @@ namespace NAPS2.WinForms
 
         private async void tsSavePDF_Click(object sender, EventArgs e)
         {
-            if (await exportHelper.SavePDF(new List<ScannedImage> { ImageList.Images[ImageIndex] }, null))
+            if (await exportHelper.SavePDF(new List<ScannedImage> { CurrentImage }, null))
             {
                 if (ConfigProvider.Get(c => c.DeleteAfterSaving))
                 {
@@ -521,7 +526,7 @@ namespace NAPS2.WinForms
 
         private async void tsSaveImage_Click(object sender, EventArgs e)
         {
-            if (await exportHelper.SaveImages(new List<ScannedImage> { ImageList.Images[ImageIndex] }, null))
+            if (await exportHelper.SaveImages(new List<ScannedImage> { CurrentImage }, null))
             {
                 if (ConfigProvider.Get(c => c.DeleteAfterSaving))
                 {

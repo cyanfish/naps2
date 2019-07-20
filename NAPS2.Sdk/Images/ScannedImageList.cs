@@ -1,25 +1,25 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using NAPS2.Images.Storage;
-using NAPS2.Images.Transforms;
 using NAPS2.Util;
 
 namespace NAPS2.Images
 {
     public class ScannedImageList
     {
-        private readonly ImageContext imageContext;
+        private readonly ChangeTracker changeTracker;
+        private ListSelection<ScannedImage> selection;
 
-        public ScannedImageList(ImageContext imageContext)
+        public ScannedImageList(ChangeTracker changeTracker)
         {
-            this.imageContext = imageContext;
+            this.changeTracker = changeTracker;
             Images = new List<ScannedImage>();
         }
 
-        public ScannedImageList(ImageContext imageContext, List<ScannedImage> images)
+        public ScannedImageList(ChangeTracker changeTracker, List<ScannedImage> images)
         {
-            this.imageContext = imageContext;
+            this.changeTracker = changeTracker;
             Images = images;
         }
 
@@ -27,33 +27,44 @@ namespace NAPS2.Images
 
         public List<ScannedImage> Images { get; }
 
-        public async Task RotateFlip(IEnumerable<int> selection, double angle)
+        public ListSelection<ScannedImage> Selection
         {
-            var images = Images.ElementsAt(selection).ToList();
-            await Task.Run(() =>
-            {
-                foreach (ScannedImage img in images)
-                {
-                    lock (img)
-                    {
-                        var transform = new RotationTransform(angle);
-                        img.AddTransform(transform);
-                        var thumb = img.GetThumbnail();
-                        if (thumb != null)
-                        {
-                            img.SetThumbnail(imageContext.PerformTransform(thumb, transform));
-                        }
-                    }
-                }
-            });
+            get => selection;
+            // TODO: Need a selection change event
+            set => selection = value ?? throw new ArgumentNullException(nameof(value));
         }
 
-        public void ResetTransforms(IEnumerable<int> selection)
+        public void Mutate(ListMutation<ScannedImage> mutation, ListSelection<ScannedImage> selectionToMutate = null)
         {
-            foreach (ScannedImage img in Images.ElementsAt(selection))
+            // TODO: Make sure to update the selection
+            // TODO: Need to improve change detection (e.g. transforms) 
+            // TODO: Not sure if this should be here or in UserActions
+            var originalList = Images.ToList();
+            if (selectionToMutate != null)
             {
-                img.ResetTransforms();
+                mutation.Apply(Images, ref selectionToMutate);
             }
+            else
+            {
+                var selectionRef = Selection;
+                mutation.Apply(Images, ref selectionRef);
+                Selection = selectionRef;
+            }
+            // TODO (events - update and delete)
+            // UpdateThumbnails(selection.ToSelectedIndices(imageList.Images), true, mutation.OnlyAffectsSelectionRange);
+            if (!Images.Any())
+            {
+                changeTracker.Clear();
+            }
+            else if (!originalList.SequenceEqual(Images))
+            {
+                changeTracker.Made();
+            }
+        }
+
+        public Task MutateAsync(ListMutation<ScannedImage> mutation, ListSelection<ScannedImage> selectionToMutate = null)
+        {
+            return Task.Run(() => Mutate(mutation, selectionToMutate));
         }
     }
 }

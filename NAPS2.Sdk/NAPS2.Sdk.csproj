@@ -144,6 +144,7 @@
     </Compile>
     <Compile Include="Images\HoughLineDeskewer.cs" />
     <Compile Include="Images\Deskewer.cs" />
+    <Compile Include="Images\ImageListMutation.cs" />
     <Compile Include="Images\ListMutation.cs" />
     <Compile Include="Images\ListSelection.cs" />
     <Compile Include="Images\Storage\NotToBeUsedStorageManager.cs" />
@@ -365,6 +366,7 @@
     <Compile Include="Util\Win32Window.cs" />
     <Compile Include="Logging\WindowsEventLogger.cs" />
     <Compile Include="WinForms\StubDialogHelper.cs" />
+    <Compile Include="WinForms\UserActions.cs" />
     <Compile Include="WinForms\WinFormsDialogHelper.cs" />
     <Compile Include="WinForms\FProxyConfig.cs">
       <SubType>Form</SubType>

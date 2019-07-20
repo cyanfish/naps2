@@ -225,29 +225,28 @@ namespace NAPS2.Automation
 
             foreach (var scan in scanList)
             {
-                var imageList = new ScannedImageList(imageContext, scan);
-                var e = new List<int>();
+                var imageList = new ScannedImageList(new ChangeTracker(), scan);
 
                 if (options.AltDeinterleave)
                 {
-                    imageList.AltDeinterleave(e);
+                    imageList.Mutate(new ImageListMutation.AltDeinterleave());
                 }
                 else if (options.Deinterleave)
                 {
-                    imageList.Deinterleave(e);
+                    imageList.Mutate(new ImageListMutation.Deinterleave());
                 }
                 else if (options.AltInterleave)
                 {
-                    imageList.AltInterleave(e);
+                    imageList.Mutate(new ImageListMutation.AltInterleave());
                 }
                 else if (options.Interleave)
                 {
-                    imageList.Interleave(e);
+                    imageList.Mutate(new ImageListMutation.Interleave());
                 }
 
                 if (options.Reverse)
                 {
-                    imageList.Reverse(e);
+                    imageList.Mutate(new ImageListMutation.ReverseAll());
                 }
             }
         }

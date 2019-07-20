@@ -3,9 +3,9 @@ using System.Linq;
 
 namespace NAPS2.Images
 {
-    public abstract class ListMutation
+    public abstract class ListMutation<T>
     {
-        public abstract void Apply<T>(List<T> list, ListSelection<T> selection);
+        public abstract void Apply(List<T> list, ref ListSelection<T> selection);
 
         /// <summary>
         /// Whether the mutation won't affect items outside the range of selected indices (both before and after the mutation).
@@ -14,11 +14,11 @@ namespace NAPS2.Images
         /// </summary>
         public virtual bool OnlyAffectsSelectionRange => false;
 
-        public class MoveDown : ListMutation
+        public class MoveDown : ListMutation<T>
         {
             public override bool OnlyAffectsSelectionRange => true;
 
-            public override void Apply<T>(List<T> list, ListSelection<T> selection)
+            public override void Apply(List<T> list, ref ListSelection<T> selection)
             {
                 int lowerBound = 0;
                 foreach (int i in selection.ToSelectedIndices(list))
@@ -33,11 +33,11 @@ namespace NAPS2.Images
             }
         }
 
-        public class MoveUp : ListMutation
+        public class MoveUp : ListMutation<T>
         {
             public override bool OnlyAffectsSelectionRange => true;
             
-            public override void Apply<T>(List<T> list, ListSelection<T> selection)
+            public override void Apply(List<T> list, ref ListSelection<T> selection)
             {
                 int upperBound = list.Count - 1;
                 foreach (int i in selection.ToSelectedIndices(list).Reverse())
@@ -52,7 +52,7 @@ namespace NAPS2.Images
             }
         }
 
-        public class MoveTo : ListMutation
+        public class MoveTo : ListMutation<T>
         {
             private readonly int destinationIndex;
 
@@ -63,7 +63,7 @@ namespace NAPS2.Images
             
             public override bool OnlyAffectsSelectionRange => true;
 
-            public override void Apply<T>(List<T> list, ListSelection<T> selection)
+            public override void Apply(List<T> list, ref ListSelection<T> selection)
             {
                 var indexList = selection.ToSelectedIndices(list).ToList();
                 var bottom = indexList.Where(x => x < destinationIndex).OrderByDescending(x => x).ToList();
@@ -89,9 +89,9 @@ namespace NAPS2.Images
             }
         }
 
-        public class Interleave : ListMutation
+        public class Interleave : ListMutation<T>
         {
-            public override void Apply<T>(List<T> list, ListSelection<T> selection)
+            public override void Apply(List<T> list, ref ListSelection<T> selection)
             {
                 // Partition the image list in two
                 int count = list.Count;
@@ -105,14 +105,14 @@ namespace NAPS2.Images
                 {
                     list.Add(i % 2 == 0 ? p1[i / 2] : p2[i / 2]);
                 }
-                
-                selection.Clear();
+
+                selection = ListSelection.Empty<T>();
             }
         }
 
-        public class Deinterleave : ListMutation
+        public class Deinterleave : ListMutation<T>
         {
-            public override void Apply<T>(List<T> list, ListSelection<T> selection)
+            public override void Apply(List<T> list, ref ListSelection<T> selection)
             {
                 // Duplicate the list
                 int count = list.Count;
@@ -130,14 +130,14 @@ namespace NAPS2.Images
                 {
                     list.Add(copy[i * 2 + 1]);
                 }
-                
-                selection.Clear();
+
+                selection = ListSelection.Empty<T>();
             }
         }
 
-        public class AltInterleave : ListMutation
+        public class AltInterleave : ListMutation<T>
         {
-            public override void Apply<T>(List<T> list, ListSelection<T> selection)
+            public override void Apply(List<T> list, ref ListSelection<T> selection)
             {
                 // Partition the image list in two
                 int count = list.Count;
@@ -151,14 +151,14 @@ namespace NAPS2.Images
                 {
                     list.Add(i % 2 == 0 ? p1[i / 2] : p2[p2.Count - 1 - i / 2]);
                 }
-                
-                selection.Clear();
+
+                selection = ListSelection.Empty<T>();
             }
         }
 
-        public class AltDeinterleave : ListMutation
+        public class AltDeinterleave : ListMutation<T>
         {
-            public override void Apply<T>(List<T> list, ListSelection<T> selection)
+            public override void Apply(List<T> list, ref ListSelection<T> selection)
             {
                 // Duplicate the list
                 int count = list.Count;
@@ -176,24 +176,24 @@ namespace NAPS2.Images
                 {
                     list.Add(copy[i * 2 + 1]);
                 }
-                
-                selection.Clear();
+
+                selection = ListSelection.Empty<T>();
             }
         }
 
-        public class ReverseAll : ListMutation
+        public class ReverseAll : ListMutation<T>
         {
-            public override void Apply<T>(List<T> list, ListSelection<T> selection)
+            public override void Apply(List<T> list, ref ListSelection<T> selection)
             {
                 list.Reverse();
             }
         }
 
-        public class ReverseSelection : ListMutation
+        public class ReverseSelection : ListMutation<T>
         {
             public override bool OnlyAffectsSelectionRange => true;
             
-            public override void Apply<T>(List<T> list, ListSelection<T> selection)
+            public override void Apply(List<T> list, ref ListSelection<T> selection)
             {
                 var indexList = selection.ToSelectedIndices(list).ToList();
                 int pairCount = indexList.Count / 2;
