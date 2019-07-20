@@ -84,8 +84,16 @@ namespace NAPS2.Util
         /// <returns></returns>
         public static IEnumerable<int> IndiciesOf<T>(this IList<T> list, IEnumerable<T> elements)
         {
-            // TODO: O(n)
-            return elements.Select(list.IndexOf);
+            int i = 0;
+            var elementDict = list.ToDictionary(element => element, element => i++);
+            try
+            {
+                return elements.Select(x => elementDict[x]).ToList();
+            }
+            catch (KeyNotFoundException)
+            {
+                throw new ArgumentException("Not all elements present in list", nameof(elements));
+            }
         }
 
         /// <summary>

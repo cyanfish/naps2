@@ -143,6 +143,7 @@
     <Compile Include="Scan\ScanErrorHandling.cs" />
     <Compile Include="Serialization\ScanOptionsSerializationTests.cs" />
     <Compile Include="Serialization\XmlSerializerTests.cs" />
+    <Compile Include="Util\CollectionExtensionsTests.cs" />
     <Compile Include="Util\NaturalStringComparerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Scan\SaneOptionParserTests.cs" />
