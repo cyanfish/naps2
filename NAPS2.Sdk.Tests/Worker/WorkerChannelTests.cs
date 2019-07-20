@@ -51,8 +51,7 @@ namespace NAPS2.Sdk.Tests.Worker
         {
             using var channel = Start();
             channel.Client.Init(@"C:\Somewhere");
-            Assert.IsType<RecoveryStorageManager>(ImageContext.FileStorageManager);
-            Assert.StartsWith(@"C:\Somewhere", ((RecoveryStorageManager)ImageContext.FileStorageManager).RecoveryFolderPath);
+            Assert.StartsWith(@"C:\Somewhere", ImageContext.FileStorageManager.NextFilePath());
         }
 
         [Fact]
