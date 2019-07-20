@@ -42,7 +42,7 @@ namespace NAPS2.Remoting.Worker
                 {
                     if (!string.IsNullOrEmpty(request.RecoveryFolderPath))
                     {
-                        imageContext.UseExistingRecovery(request.RecoveryFolderPath);
+                        imageContext.UseFileStorage(request.RecoveryFolderPath);
                     }
 
                     return new InitResponse();

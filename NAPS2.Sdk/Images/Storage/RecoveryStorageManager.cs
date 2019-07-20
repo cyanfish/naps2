@@ -35,49 +35,28 @@ namespace NAPS2.Images.Storage
         public const string LOCK_FILE_NAME = ".lock";
 
         private readonly ISerializer<RecoveryIndex> serializer = new XmlSerializer<RecoveryIndex>();
-        private readonly bool shared;
         private readonly DirectoryInfo folder;
         private readonly FileInfo folderLockFile;
         private readonly Stream folderLock;
 
-        private int fileNumber;
         private bool disposed;
 
         public static RecoveryStorageManager CreateFolder(string recoveryFolderPath)
         {
-            return new RecoveryStorageManager(recoveryFolderPath, false);
+            return new RecoveryStorageManager(recoveryFolderPath);
         }
 
-        public static RecoveryStorageManager UseExistingFolder(string recoveryFolderPath)
+        private RecoveryStorageManager(string recoveryFolderPath) : base(recoveryFolderPath)
         {
-            return new RecoveryStorageManager(recoveryFolderPath, true);
-        }
-
-        private RecoveryStorageManager(string recoveryFolderPath, bool shared) : base(recoveryFolderPath)
-        {
-            this.shared = shared;
-            if (!shared)
-            {
-                folder = new DirectoryInfo(RecoveryFolderPath);
-                folder.Create();
-                folderLockFile = new FileInfo(Path.Combine(RecoveryFolderPath, LOCK_FILE_NAME));
-                folderLock = folderLockFile.Open(FileMode.CreateNew, FileAccess.Write, FileShare.None);
-            }
+            folder = new DirectoryInfo(RecoveryFolderPath);
+            folder.Create();
+            folderLockFile = new FileInfo(Path.Combine(RecoveryFolderPath, LOCK_FILE_NAME));
+            folderLock = folderLockFile.Open(FileMode.CreateNew, FileAccess.Write, FileShare.None);
         }
 
         public string RecoveryFolderPath => FolderPath;
 
         public RecoveryIndex RecoveryIndex { get; } = new RecoveryIndex();
-
-        public override string NextFilePath()
-        {
-            lock (this)
-            {
-                if (disposed) throw new ObjectDisposedException(nameof(RecoveryStorageManager));
-                string fileName = $"{Process.GetCurrentProcess().Id}_{(++fileNumber).ToString("D5", CultureInfo.InvariantCulture)}";
-                return Path.Combine(RecoveryFolderPath, fileName);
-            }
-        }
 
         public void Commit()
         {
@@ -114,12 +93,9 @@ namespace NAPS2.Images.Storage
             lock (this)
             lock (RecoveryIndex)
             {
-                if (!shared)
-                {
-                    folderLock.Close();
-                    folderLockFile.Delete();
-                    folder.Delete(true);
-                }
+                folderLock.Close();
+                folderLockFile.Delete();
+                folder.Delete(true);
                 disposed = true;
             }
         }

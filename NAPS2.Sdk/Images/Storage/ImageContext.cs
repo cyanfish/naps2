@@ -195,28 +195,25 @@ namespace NAPS2.Images.Storage
             set => fileStorageManager = value ?? throw new ArgumentNullException(nameof(value));
         }
 
-        public void UseFileStorage(string folderPath)
+        public ImageContext UseFileStorage(string folderPath)
         {
-            fileStorageManager = new FileStorageManager(folderPath);
+            FileStorageManager = new FileStorageManager(folderPath);
+            ImageMetadataFactory = new StubImageMetadataFactory();
+            ConfigureBackingStorage<FileStorage>();
+            return this;
         }
 
-        public void UseFileStorage(FileStorageManager manager)
+        public ImageContext UseFileStorage(FileStorageManager manager)
         {
-            fileStorageManager = manager ?? throw new ArgumentNullException(nameof(manager));
+            FileStorageManager = manager;
+            ImageMetadataFactory = new StubImageMetadataFactory();
+            ConfigureBackingStorage<FileStorage>();
+            return this;
         }
 
         public ImageContext UseRecovery(string recoveryFolderPath)
         {
             var rsm = RecoveryStorageManager.CreateFolder(recoveryFolderPath);
-            FileStorageManager = rsm;
-            ImageMetadataFactory = rsm;
-            ConfigureBackingStorage<FileStorage>();
-            return this;
-        }
-
-        public ImageContext UseExistingRecovery(string recoveryFolderPath)
-        {
-            var rsm = RecoveryStorageManager.UseExistingFolder(recoveryFolderPath);
             FileStorageManager = rsm;
             ImageMetadataFactory = rsm;
             ConfigureBackingStorage<FileStorage>();

@@ -93,6 +93,7 @@ namespace NAPS2.Serialization
             metadata.TransformList = serializedImage.Metadata.TransformListXml.FromXml<List<Transform>>();
             metadata.BitDepth = (BitDepth) serializedImage.Metadata.BitDepth;
             metadata.Lossless = serializedImage.Metadata.Lossless;
+            metadata.Commit();
 
             var scannedImage = imageContext.CreateScannedImage(backingStorage, metadata, new StorageConvertParams());
             var thumbnail = serializedImage.Thumbnail.ToByteArray();
