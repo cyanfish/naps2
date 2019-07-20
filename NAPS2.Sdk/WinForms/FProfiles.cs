@@ -184,7 +184,7 @@ namespace NAPS2.WinForms
                     {
                         profileNameTracker.DeletingProfile(profile.DisplayName);
                     }
-                    profileManager.Profiles.RemoveAll(lvProfiles.SelectedIndices.OfType<int>());
+                    profileManager.Profiles.RemoveAllAt(lvProfiles.SelectedIndices.OfType<int>());
                     if (profileManager.Profiles.Count == 1)
                     {
                         profileManager.DefaultProfile = profileManager.Profiles.First();

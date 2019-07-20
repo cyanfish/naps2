@@ -459,8 +459,14 @@ namespace NAPS2.WinForms
             Pipes.KillServer();
             if (!SkipRecoveryCleanup)
             {
-                imageList.Delete(Enumerable.Range(0, imageList.Images.Count));
-                imageContext.Dispose();
+                try
+                {
+                    imageContext.Dispose();
+                }
+                catch (Exception ex)
+                {
+                    Log.ErrorException("ImageContext.Dispose failed", ex);
+                }
             }
             closed = true;
             renderThumbnailsWaitHandle.Set();
@@ -653,9 +659,9 @@ namespace NAPS2.WinForms
             UpdateToolbar();
         }
 
-        private void UpdateThumbnails(IEnumerable<int> selection, bool scrollToSelection, bool optimizeForSelection)
+        private void UpdateThumbnails(IEnumerable<int> selection, bool scrollToSelection, bool optimizeForSelectionRange)
         {
-            thumbnailList1.UpdatedImages(imageList.Images, optimizeForSelection ? SelectedIndices.Concat(selection).ToList() : null);
+            thumbnailList1.UpdatedImages(imageList.Images, optimizeForSelectionRange ? SelectedIndices.Concat(selection).ToList() : null);
             SelectedIndices = selection;
             UpdateToolbar();
 
@@ -818,7 +824,11 @@ namespace NAPS2.WinForms
             {
                 if (MessageBox.Show(string.Format(MiscResources.ConfirmClearItems, imageList.Images.Count), MiscResources.Clear, MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
                 {
-                    imageList.Delete(Enumerable.Range(0, imageList.Images.Count));
+                    foreach (var image in imageList.Images)
+                    {
+                        image.Dispose();
+                    }
+                    imageList.Images.Clear();
                     DeleteThumbnails();
                     changeTracker.Clear();
                 }
@@ -831,7 +841,11 @@ namespace NAPS2.WinForms
             {
                 if (MessageBox.Show(string.Format(MiscResources.ConfirmDeleteItems, SelectedIndices.Count()), MiscResources.Delete, MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
                 {
-                    imageList.Delete(SelectedIndices);
+                    foreach (var image in imageList.Images.ElementsAt(SelectedIndices))
+                    {
+                        image.Dispose();
+                    }
+                    imageList.Images.RemoveAllAt(SelectedIndices);
                     DeleteThumbnails();
                     if (imageList.Images.Any())
                     {
@@ -845,6 +859,18 @@ namespace NAPS2.WinForms
             }
         }
 
+        private void MutateList(ListMutation mutation)
+        {
+            var originalList = imageList.Images.ToList();
+            var selection = ListSelection.FromSelectedIndices(imageList.Images, SelectedIndices);
+            mutation.Apply(imageList.Images, selection);
+            UpdateThumbnails(selection.ToSelectedIndices(imageList.Images), true, mutation.OnlyAffectsSelectionRange);
+            if (!originalList.SequenceEqual(imageList.Images))
+            {
+                changeTracker.Made();
+            }
+        }
+
         private void SelectAll()
         {
             SelectedIndices = Enumerable.Range(0, imageList.Images.Count);
@@ -852,22 +878,12 @@ namespace NAPS2.WinForms
 
         private void MoveDown()
         {
-            if (!SelectedIndices.Any())
-            {
-                return;
-            }
-            UpdateThumbnails(imageList.MoveDown(SelectedIndices), true, true);
-            changeTracker.Made();
+            MutateList(new ListMutation.MoveDown());
         }
 
         private void MoveUp()
         {
-            if (!SelectedIndices.Any())
-            {
-                return;
-            }
-            UpdateThumbnails(imageList.MoveUp(SelectedIndices), true, true);
-            changeTracker.Made();
+            MutateList(new ListMutation.MoveUp());
         }
 
         private async Task RotateLeft()
@@ -980,7 +996,11 @@ namespace NAPS2.WinForms
                 {
                     SafeInvoke(() =>
                     {
-                        imageList.Delete(imageList.Images.IndiciesOf(images));
+                        foreach (var image in images)
+                        {
+                            image.Dispose();
+                        }
+                        imageList.Images.RemoveAll(images);
                         DeleteThumbnails();
                     });
                 }
@@ -993,7 +1013,11 @@ namespace NAPS2.WinForms
             {
                 if (ConfigProvider.Get(c => c.DeleteAfterSaving))
                 {
-                    imageList.Delete(imageList.Images.IndiciesOf(images));
+                    foreach (var image in images)
+                    {
+                        image.Dispose();
+                    }
+                    imageList.Images.RemoveAll(images);
                     DeleteThumbnails();
                 }
             }
@@ -1547,62 +1571,32 @@ namespace NAPS2.WinForms
 
         private void tsInterleave_Click(object sender, EventArgs e)
         {
-            if (imageList.Images.Count < 3)
-            {
-                return;
-            }
-            UpdateThumbnails(imageList.Interleave(SelectedIndices), true, false);
-            changeTracker.Made();
+            MutateList(new ListMutation.Interleave());
         }
 
         private void tsDeinterleave_Click(object sender, EventArgs e)
         {
-            if (imageList.Images.Count < 3)
-            {
-                return;
-            }
-            UpdateThumbnails(imageList.Deinterleave(SelectedIndices), true, false);
-            changeTracker.Made();
+            MutateList(new ListMutation.Deinterleave());
         }
 
         private void tsAltInterleave_Click(object sender, EventArgs e)
         {
-            if (imageList.Images.Count < 3)
-            {
-                return;
-            }
-            UpdateThumbnails(imageList.AltInterleave(SelectedIndices), true, false);
-            changeTracker.Made();
+            MutateList(new ListMutation.AltInterleave());
         }
 
         private void tsAltDeinterleave_Click(object sender, EventArgs e)
         {
-            if (imageList.Images.Count < 3)
-            {
-                return;
-            }
-            UpdateThumbnails(imageList.AltDeinterleave(SelectedIndices), true, false);
-            changeTracker.Made();
+            MutateList(new ListMutation.AltDeinterleave());
         }
 
         private void tsReverseAll_Click(object sender, EventArgs e)
         {
-            if (imageList.Images.Count < 2)
-            {
-                return;
-            }
-            UpdateThumbnails(imageList.Reverse(), true, false);
-            changeTracker.Made();
+            MutateList(new ListMutation.ReverseAll());
         }
 
         private void tsReverseSelected_Click(object sender, EventArgs e)
         {
-            if (SelectedIndices.Count() < 2)
-            {
-                return;
-            }
-            UpdateThumbnails(imageList.Reverse(SelectedIndices), true, true);
-            changeTracker.Made();
+            MutateList(new ListMutation.ReverseSelection());
         }
 
         #endregion
@@ -1883,8 +1877,7 @@ namespace NAPS2.WinForms
             int index = GetDragIndex(e);
             if (index != -1)
             {
-                UpdateThumbnails(imageList.MoveTo(SelectedIndices, index), true, true);
-                changeTracker.Made();
+                MutateList(new ListMutation.MoveTo(index));
             }
         }
 

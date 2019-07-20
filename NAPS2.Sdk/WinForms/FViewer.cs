@@ -481,7 +481,8 @@ namespace NAPS2.WinForms
             // Need to dispose the bitmap first to avoid file access issues
             tiffViewer1.Image?.Dispose();
             // Actually delete the image
-            ImageList.Delete(Enumerable.Range(ImageIndex, 1));
+            ImageList.Images[ImageIndex].Dispose();
+            ImageList.Images.RemoveAt(ImageIndex);
             // Update FDesktop in the background
             DeleteCallback();
 
