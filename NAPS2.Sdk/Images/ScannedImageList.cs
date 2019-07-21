@@ -53,7 +53,20 @@ namespace NAPS2.Images
 
         public void Mutate(ListMutation<ScannedImage> mutation, ListSelection<ScannedImage> selectionToMutate = null)
         {
-            // TODO: Not sure if this should be here or in UserActions
+            MutateInternal(mutation, selectionToMutate);
+            UpdateImageMetadata();
+            ImagesUpdated?.Invoke(this, EventArgs.Empty);
+        }
+
+        public async Task MutateAsync(ListMutation<ScannedImage> mutation, ListSelection<ScannedImage> selectionToMutate = null)
+        {
+            await Task.Run(() => MutateInternal(mutation, selectionToMutate));
+            UpdateImageMetadata();
+            ImagesUpdated?.Invoke(this, EventArgs.Empty);
+        }
+
+        private void MutateInternal(ListMutation<ScannedImage> mutation, ListSelection<ScannedImage> selectionToMutate)
+        {
             if (selectionToMutate != null)
             {
                 mutation.Apply(Images, ref selectionToMutate);
@@ -62,8 +75,6 @@ namespace NAPS2.Images
             {
                 mutation.Apply(Images, ref selection); 
             }
-            UpdateImageMetadata();
-            ImagesUpdated?.Invoke(this, EventArgs.Empty);
         }
 
         private void UpdateImageMetadata()
@@ -80,13 +91,6 @@ namespace NAPS2.Images
         // A memento is a copy of a ScannedImage list with Snapshots
         // Need to add a Restore operation for Snapshots
         // This lends itself well to undoing deletions (since snapshots already persist on disk).
-        // However, we may need to tweak the way metadata disposal works (either dispose on ScannedImage.Dispose and restore on Snapshot.Restore, or add a Deleted flag to metadata)
-        // Restoring on a disposed ScannedImage is iffy. Maybe Restore and RestoreDeleted should be separate.
         // Perhaps everything that changes any image (including ImageForm stuff, insertions) should be encompassed by a mutation.
-
-        public Task MutateAsync(ListMutation<ScannedImage> mutation, ListSelection<ScannedImage> selectionToMutate = null)
-        {
-            return Task.Run(() => Mutate(mutation, selectionToMutate));
-        }
     }
 }
