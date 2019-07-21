@@ -6,6 +6,7 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Xml;
 using System.Xml.Linq;
@@ -192,6 +193,7 @@ namespace NAPS2.Serialization
             {
                 return TypeInfoCache.GetOrSet(type, () =>
                 {
+                    RuntimeHelpers.RunClassConstructor(type.TypeHandle);
                     var props = type.GetProperties(BindingFlags.Instance | BindingFlags.Public)
                         .Where(x => x.GetMethod != null && x.SetMethod != null && !x.GetCustomAttributes(typeof(XmlIgnoreAttribute)).Any())
                         .ToArray();

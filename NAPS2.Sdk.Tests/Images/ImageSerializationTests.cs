@@ -56,13 +56,12 @@ namespace NAPS2.Sdk.Tests.Images
             using var sourceContext = new GdiImageContext().UseRecovery(Path.Combine(FolderPath, "source"));
             using var destContext = new GdiImageContext().UseRecovery(Path.Combine(FolderPath, "dest"));
 
-            using var _ = sourceContext.CreateScannedImage(new GdiImage(new Bitmap(100, 100))); // So sourceImage is at Index = 1
             using var sourceImage = sourceContext.CreateScannedImage(new GdiImage(new Bitmap(100, 100)));
             var sourceFilePath = Assert.IsType<FileStorage>(sourceImage.BackingStorage).FullPath;
             sourceImage.Metadata.TransformList.Add(new BrightnessTransform(100));
             sourceImage.Metadata.Lossless = true;
             sourceImage.Metadata.BitDepth = BitDepth.Grayscale;
-            Assert.Equal(1, sourceImage.Metadata.Index);
+            sourceImage.Metadata.Index = 2;
             sourceImage.Metadata.TransformState = 3;
             sourceImage.Metadata.Commit();
 
