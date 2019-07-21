@@ -8,24 +8,30 @@ namespace NAPS2.Images
 {
     public class ScannedImageList
     {
-        private readonly ChangeTracker changeTracker;
+        private Memento savedState = Memento.Empty;
         private ListSelection<ScannedImage> selection;
 
-        public ScannedImageList(ChangeTracker changeTracker)
+        public ScannedImageList()
         {
-            this.changeTracker = changeTracker;
             Images = new List<ScannedImage>();
         }
 
-        public ScannedImageList(ChangeTracker changeTracker, List<ScannedImage> images)
+        public ScannedImageList(List<ScannedImage> images)
         {
-            this.changeTracker = changeTracker;
             Images = images;
         }
 
         public ThumbnailRenderer ThumbnailRenderer { get; set; }
 
         public List<ScannedImage> Images { get; }
+        
+        public Memento CurrentState => new Memento(Images);
+        
+        public Memento SavedState
+        {
+            get => savedState;
+            set => savedState = value ?? throw new ArgumentNullException(nameof(value));
+        }
 
         public ListSelection<ScannedImage> Selection
         {
@@ -53,14 +59,6 @@ namespace NAPS2.Images
             }
             // TODO (events - update and delete)
             // UpdateThumbnails(selection.ToSelectedIndices(imageList.Images), true, mutation.OnlyAffectsSelectionRange);
-            if (!Images.Any())
-            {
-                changeTracker.Clear();
-            }
-            else if (!originalList.SequenceEqual(Images))
-            {
-                changeTracker.Made();
-            }
         }
         
         // TODO: Undo/redo etc. thoughts:

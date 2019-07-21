@@ -14,7 +14,6 @@ namespace NAPS2.WinForms
     partial class ImageForm : FormBase
     {
         private readonly ImageContext imageContext;
-        private readonly ChangeTracker changeTracker;
         private readonly BitmapRenderer bitmapRenderer;
 
         protected Bitmap workingImage, workingImage2;
@@ -30,10 +29,9 @@ namespace NAPS2.WinForms
             InitializeComponent();
         }
 
-        protected ImageForm(ImageContext imageContext, ChangeTracker changeTracker, BitmapRenderer bitmapRenderer)
+        protected ImageForm(ImageContext imageContext, BitmapRenderer bitmapRenderer)
         {
             this.imageContext = imageContext;
-            this.changeTracker = changeTracker;
             this.bitmapRenderer = bitmapRenderer;
             InitializeComponent();
         }
@@ -166,7 +164,6 @@ namespace NAPS2.WinForms
                         }
                     }
                 }
-                changeTracker.Made();
             }
             TransformSaved();
             Close();

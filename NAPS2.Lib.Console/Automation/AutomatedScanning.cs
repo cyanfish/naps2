@@ -225,7 +225,7 @@ namespace NAPS2.Automation
 
             foreach (var scan in scanList)
             {
-                var imageList = new ScannedImageList(new ChangeTracker(), scan);
+                var imageList = new ScannedImageList(scan);
 
                 if (options.AltDeinterleave)
                 {

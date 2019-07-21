@@ -147,6 +147,7 @@
     <Compile Include="Images\ImageListMutation.cs" />
     <Compile Include="Images\ListMutation.cs" />
     <Compile Include="Images\ListSelection.cs" />
+    <Compile Include="Images\Memento.cs" />
     <Compile Include="Images\Storage\NotToBeUsedStorageManager.cs" />
     <Compile Include="Images\UndoStack.cs" />
     <Compile Include="Remoting\ClientServer\ClientContext.cs" />
@@ -461,7 +462,6 @@
     <Compile Include="Scan\Twain\Legacy\TwainDefs.cs" />
     <Compile Include="Scan\Twain\Legacy\TwainLib.cs" />
     <Compile Include="Images\Transforms\UnsafeImageOps.cs" />
-    <Compile Include="Util\ChangeTracker.cs" />
     <Compile Include="Util\ChaosMonkey.cs" />
     <Compile Include="Util\CollectionExtensions.cs" />
     <Compile Include="Config\ObsoleteTypes\AppConfigV0.cs" />

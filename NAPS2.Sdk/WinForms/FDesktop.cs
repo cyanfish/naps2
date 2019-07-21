@@ -45,7 +45,6 @@ namespace NAPS2.WinForms
         private readonly OcrEngineManager ocrEngineManager;
         private readonly IScanPerformer scanPerformer;
         private readonly IScannedImagePrinter scannedImagePrinter;
-        private readonly ChangeTracker changeTracker;
         private readonly StillImage stillImage;
         private readonly IOperationFactory operationFactory;
         private readonly KeyboardShortcutManager ksm;
@@ -59,13 +58,13 @@ namespace NAPS2.WinForms
         private readonly OperationProgress operationProgress;
         private readonly UpdateChecker updateChecker;
         private readonly IProfileManager profileManager;
+        private readonly ScannedImageList imageList;
 
         #endregion
 
         #region State Fields
 
         private readonly UserActions userActions;
-        private readonly ScannedImageList imageList;
         private readonly AutoResetEvent renderThumbnailsWaitHandle = new AutoResetEvent(false);
         private bool closed = false;
         private LayoutManager layoutManager;
@@ -77,7 +76,7 @@ namespace NAPS2.WinForms
 
         #region Initialization and Culture
 
-        public FDesktop(ImageContext imageContext, StringWrapper stringWrapper, RecoveryManager recoveryManager, OcrEngineManager ocrEngineManager, IScanPerformer scanPerformer, IScannedImagePrinter scannedImagePrinter, ChangeTracker changeTracker, StillImage stillImage, IOperationFactory operationFactory, KeyboardShortcutManager ksm, ThumbnailRenderer thumbnailRenderer, WinFormsExportHelper exportHelper, ImageClipboard imageClipboard, ImageRenderer imageRenderer, NotificationManager notify, CultureInitializer cultureInitializer, IWorkerFactory workerFactory, OperationProgress operationProgress, UpdateChecker updateChecker, IProfileManager profileManager)
+        public FDesktop(ImageContext imageContext, StringWrapper stringWrapper, RecoveryManager recoveryManager, OcrEngineManager ocrEngineManager, IScanPerformer scanPerformer, IScannedImagePrinter scannedImagePrinter, StillImage stillImage, IOperationFactory operationFactory, KeyboardShortcutManager ksm, ThumbnailRenderer thumbnailRenderer, WinFormsExportHelper exportHelper, ImageClipboard imageClipboard, ImageRenderer imageRenderer, NotificationManager notify, CultureInitializer cultureInitializer, IWorkerFactory workerFactory, OperationProgress operationProgress, UpdateChecker updateChecker, IProfileManager profileManager, ScannedImageList imageList)
         {
             this.imageContext = imageContext;
             this.stringWrapper = stringWrapper;
@@ -85,7 +84,6 @@ namespace NAPS2.WinForms
             this.ocrEngineManager = ocrEngineManager;
             this.scanPerformer = scanPerformer;
             this.scannedImagePrinter = scannedImagePrinter;
-            this.changeTracker = changeTracker;
             this.stillImage = stillImage;
             this.operationFactory = operationFactory;
             this.ksm = ksm;
@@ -99,7 +97,7 @@ namespace NAPS2.WinForms
             this.operationProgress = operationProgress;
             this.updateChecker = updateChecker;
             this.profileManager = profileManager;
-            imageList = new ScannedImageList(changeTracker);
+            this.imageList = imageList;
             userActions = new UserActions(imageContext, imageList);
             InitializeComponent();
 
@@ -411,7 +409,7 @@ namespace NAPS2.WinForms
                     SkipRecoveryCleanup = true;
                 }
             }
-            else if (changeTracker.HasUnsavedChanges)
+            else if (imageList.Images.Any() && imageList.SavedState != imageList.CurrentState)
             {
                 if (e.CloseReason == CloseReason.UserClosing && !SkipRecoveryCleanup)
                 {
@@ -419,7 +417,7 @@ namespace NAPS2.WinForms
                         MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2);
                     if (result == DialogResult.Yes)
                     {
-                        changeTracker.Clear();
+                        imageList.SavedState = imageList.CurrentState;
                     }
                     else
                     {
@@ -642,7 +640,6 @@ namespace NAPS2.WinForms
                         AddThumbnails();
                         last = scannedImage;
                     }
-                    changeTracker.Made();
                 });
                 // Trigger thumbnail rendering just in case the received image is out of date
                 renderThumbnailsWaitHandle.Set();
@@ -1276,10 +1273,10 @@ namespace NAPS2.WinForms
 
         private async void tsPrint_Click(object sender, EventArgs e)
         {
-            var changeToken = changeTracker.State;
+            var state = imageList.CurrentState; 
             if (await scannedImagePrinter.PromptToPrint(imageList.Images, SelectedImages.ToList()))
             {
-                changeTracker.Saved(changeToken);
+                imageList.SavedState = state;
             }
         }
 

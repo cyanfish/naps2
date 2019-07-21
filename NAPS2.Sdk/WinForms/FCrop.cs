@@ -20,8 +20,8 @@ namespace NAPS2.WinForms
 
         private int originalWidth, originalHeight;
 
-        public FCrop(ImageContext imageContext, ChangeTracker changeTracker, BitmapRenderer bitmapRenderer)
-            : base(imageContext, changeTracker, bitmapRenderer)
+        public FCrop(ImageContext imageContext, BitmapRenderer bitmapRenderer)
+            : base(imageContext, bitmapRenderer)
         {
             InitializeComponent();
 

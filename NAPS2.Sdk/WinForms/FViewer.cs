@@ -35,7 +35,6 @@ namespace NAPS2.WinForms
         private ToolStripButton tsDelete;
         private TiffViewerCtl tiffViewer1;
         private ToolStripMenuItem tsDeskew;
-        private readonly ChangeTracker changeTracker;
         private ToolStripSeparator toolStripSeparator3;
         private ToolStripButton tsSavePDF;
         private ToolStripSeparator toolStripSeparator2;
@@ -50,9 +49,8 @@ namespace NAPS2.WinForms
         private readonly OperationProgress operationProgress;
         private readonly ImageContext imageContext;
 
-        public FViewer(ChangeTracker changeTracker, IOperationFactory operationFactory, WinFormsExportHelper exportHelper, BitmapRenderer bitmapRenderer, KeyboardShortcutManager ksm, OperationProgress operationProgress, ImageContext imageContext)
+        public FViewer(IOperationFactory operationFactory, WinFormsExportHelper exportHelper, BitmapRenderer bitmapRenderer, KeyboardShortcutManager ksm, OperationProgress operationProgress, ImageContext imageContext)
         {
-            this.changeTracker = changeTracker;
             this.operationFactory = operationFactory;
             this.exportHelper = exportHelper;
             this.bitmapRenderer = bitmapRenderer;
@@ -493,7 +491,6 @@ namespace NAPS2.WinForms
 
             if (ImageList.Images.Any())
             {
-                changeTracker.Made();
                 // Update the GUI for the newly displayed image
                 if (ImageIndex >= ImageList.Images.Count)
                 {
@@ -507,7 +504,6 @@ namespace NAPS2.WinForms
             }
             else
             {
-                changeTracker.Clear();
                 // No images left to display, so no point keeping the form open
                 Close();
             }

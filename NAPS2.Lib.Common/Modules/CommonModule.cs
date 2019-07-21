@@ -64,7 +64,7 @@ namespace NAPS2.Modules
             Bind<ISaveNotify>().ToMethod(ctx => ctx.Kernel.Get<NotificationManager>());
             Bind<IOperationFactory>().To<NinjectOperationFactory>();
             Bind<ILogger>().To<NLogLogger>().InSingletonScope();
-            Bind<ChangeTracker>().ToSelf().InSingletonScope();
+            Bind<ScannedImageList>().ToSelf().InSingletonScope();
             Bind<StillImage>().ToSelf().InSingletonScope();
             Bind<BlankDetector>().To<ThresholdBlankDetector>();
             Bind<AutoSaver>().ToSelf();

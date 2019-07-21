@@ -11,27 +11,27 @@ namespace NAPS2.Sdk.Tests.Images
         [Fact]
         public void MementoComparison()
         {
-            var empty = UndoStack.Memento.Empty;
-            Assert.Equal(new UndoStack.Memento(new List<ScannedImage>()), empty);
+            var empty = Memento.Empty;
+            Assert.Equal(new Memento(new List<ScannedImage>()), empty);
 
             var image = CreateScannedImage();
-            var snapshot1 = new UndoStack.Memento(new[] { image.Preserve() });
+            var snapshot1 = new Memento(new[] { image.Preserve() });
             Assert.NotEqual(empty, snapshot1);
-            Assert.Equal(new UndoStack.Memento(new[] { image }), snapshot1);
-            Assert.Equal(new UndoStack.Memento(new[] { image.Preserve() }), snapshot1);
+            Assert.Equal(new Memento(new[] { image }), snapshot1);
+            Assert.Equal(new Memento(new[] { image.Preserve() }), snapshot1);
 
             image.AddTransform(new BrightnessTransform(100));
-            var snapshot2 = new UndoStack.Memento(new[] { image.Preserve() });
+            var snapshot2 = new Memento(new[] { image.Preserve() });
             Assert.NotEqual(snapshot1, snapshot2);
-            Assert.Equal(new UndoStack.Memento(new[] { image }), snapshot2);
-            Assert.Equal(new UndoStack.Memento(new[] { image.Preserve() }), snapshot2);
+            Assert.Equal(new Memento(new[] { image }), snapshot2);
+            Assert.Equal(new Memento(new[] { image.Preserve() }), snapshot2);
         }
 
         [Fact]
         public void Initial_IsEmpty()
         {
             var stack = new UndoStack(10);
-            Assert.Equal(UndoStack.Memento.Empty, stack.Current);
+            Assert.Equal(Memento.Empty, stack.Current);
         }
 
         [Fact]
@@ -48,26 +48,26 @@ namespace NAPS2.Sdk.Tests.Images
             var stack = new UndoStack(10);
             var image = CreateScannedImage();
             Assert.True(stack.Push(new[] { image }));
-            Assert.Equal(new UndoStack.Memento(new[] { image }), stack.Current);
+            Assert.Equal(new Memento(new[] { image }), stack.Current);
             Assert.True(stack.Undo());
-            Assert.Equal(UndoStack.Memento.Empty, stack.Current);
+            Assert.Equal(Memento.Empty, stack.Current);
             Assert.True(stack.Redo());
-            Assert.Equal(new UndoStack.Memento(new[] { image }), stack.Current);
+            Assert.Equal(new Memento(new[] { image }), stack.Current);
             Assert.True(stack.Undo());
-            Assert.Equal(UndoStack.Memento.Empty, stack.Current);
+            Assert.Equal(Memento.Empty, stack.Current);
         }
 
         [Fact]
         public void PushSame()
         {
             var stack = new UndoStack(10);
-            Assert.False(stack.Push(UndoStack.Memento.Empty));
+            Assert.False(stack.Push(Memento.Empty));
             Assert.False(stack.Undo());
             var imageArray = new[] { CreateScannedImage() };
             Assert.True(stack.Push(imageArray));
             Assert.False(stack.Push(imageArray));
             Assert.True(stack.Undo());
-            Assert.Equal(UndoStack.Memento.Empty, stack.Current);
+            Assert.Equal(Memento.Empty, stack.Current);
         }
 
         [Fact]
@@ -79,17 +79,17 @@ namespace NAPS2.Sdk.Tests.Images
             {
                 stack.Push(images.Take(i));
             }
-            Assert.Equal(new UndoStack.Memento(images.Take(10)), stack.Current);
+            Assert.Equal(new Memento(images.Take(10)), stack.Current);
             for (int i = 9; i >= 7; i--)
             {
                 Assert.True(stack.Undo());
-                Assert.Equal(new UndoStack.Memento(images.Take(i)), stack.Current);
+                Assert.Equal(new Memento(images.Take(i)), stack.Current);
             }
             Assert.False(stack.Undo());
             for (int i = 8; i <= 10; i++)
             {
                 Assert.True(stack.Redo());
-                Assert.Equal(new UndoStack.Memento(images.Take(i)), stack.Current);
+                Assert.Equal(new Memento(images.Take(i)), stack.Current);
             }
             Assert.False(stack.Redo());
         }
@@ -105,7 +105,7 @@ namespace NAPS2.Sdk.Tests.Images
             }
             stack.ClearUndo();
             Assert.False(stack.Undo());
-            Assert.Equal(new UndoStack.Memento(images.Take(5)), stack.Current);
+            Assert.Equal(new Memento(images.Take(5)), stack.Current);
         }
 
         [Fact]
@@ -123,7 +123,7 @@ namespace NAPS2.Sdk.Tests.Images
             }
             stack.ClearRedo();
             Assert.False(stack.Redo());
-            Assert.Equal(UndoStack.Memento.Empty, stack.Current);
+            Assert.Equal(Memento.Empty, stack.Current);
         }
 
         [Fact]
@@ -142,7 +142,7 @@ namespace NAPS2.Sdk.Tests.Images
             stack.ClearBoth();
             Assert.False(stack.Undo());
             Assert.False(stack.Redo());
-            Assert.Equal(new UndoStack.Memento(images.Take(3)), stack.Current);
+            Assert.Equal(new Memento(images.Take(3)), stack.Current);
         }
     }
 }

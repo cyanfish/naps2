@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using NAPS2.Config;
@@ -22,23 +23,23 @@ namespace NAPS2.WinForms
         private readonly ConfigProvider<ImageSettings> imageSettingsProvider;
         private readonly ConfigProvider<EmailSettings> emailSettingsProvider;
         private readonly DialogHelper dialogHelper;
-        private readonly ChangeTracker changeTracker;
         private readonly IOperationFactory operationFactory;
         private readonly IFormFactory formFactory;
         private readonly OperationProgress operationProgress;
         private readonly ConfigScopes configScopes;
+        private readonly ScannedImageList scannedImageList;
 
-        public WinFormsExportHelper(ConfigProvider<PdfSettings> pdfSettingsProvider, ConfigProvider<ImageSettings> imageSettingsProvider, ConfigProvider<EmailSettings> emailSettingsProvider, DialogHelper dialogHelper, ChangeTracker changeTracker, IOperationFactory operationFactory, IFormFactory formFactory, OperationProgress operationProgress, ConfigScopes configScopes)
+        public WinFormsExportHelper(ConfigProvider<PdfSettings> pdfSettingsProvider, ConfigProvider<ImageSettings> imageSettingsProvider, ConfigProvider<EmailSettings> emailSettingsProvider, DialogHelper dialogHelper, IOperationFactory operationFactory, IFormFactory formFactory, OperationProgress operationProgress, ConfigScopes configScopes, ScannedImageList scannedImageList)
         {
             this.pdfSettingsProvider = pdfSettingsProvider;
             this.imageSettingsProvider = imageSettingsProvider;
             this.emailSettingsProvider = emailSettingsProvider;
             this.dialogHelper = dialogHelper;
-            this.changeTracker = changeTracker;
             this.operationFactory = operationFactory;
             this.formFactory = formFactory;
             this.operationProgress = operationProgress;
             this.configScopes = configScopes;
+            this.scannedImageList = scannedImageList;
         }
 
         public async Task<bool> SavePDF(List<ScannedImage> images, ISaveNotify notify)
@@ -61,10 +62,10 @@ namespace NAPS2.WinForms
                 }
 
                 var subSavePath = Placeholders.All.Substitute(savePath);
-                var changeToken = changeTracker.State;
+                var state = scannedImageList.CurrentState;
                 if (await ExportPDF(subSavePath, images, false, null))
                 {
-                    changeTracker.Saved(changeToken);
+                    scannedImageList.SavedState = state;
                     notify?.PdfSaved(subSavePath);
                     return true;
                 }
@@ -102,14 +103,14 @@ namespace NAPS2.WinForms
                 }
 
                 var op = operationFactory.Create<SaveImagesOperation>();
-                var changeToken = changeTracker.State;
+                var state = scannedImageList.CurrentState;
                 if (op.Start(savePath, Placeholders.All.WithDate(DateTime.Now), images, imageSettingsProvider))
                 {
                     operationProgress.ShowProgress(op);
                 }
                 if (await op.Success)
                 {
-                    changeTracker.Saved(changeToken);
+                    scannedImageList.SavedState = state;
                     notify?.ImagesSaved(images.Count, op.FirstFileSaved);
                     return true;
                 }
@@ -151,7 +152,7 @@ namespace NAPS2.WinForms
             try
             {
                 string targetPath = Path.Combine(tempFolder.FullName, attachmentName);
-                var changeToken = changeTracker.State;
+                var state = scannedImageList.CurrentState;
 
                 var message = new EmailMessage
                 {
@@ -167,7 +168,7 @@ namespace NAPS2.WinForms
 
                 if (await ExportPDF(targetPath, images, true, message))
                 {
-                    changeTracker.Saved(changeToken);
+                    scannedImageList.SavedState = state;
                     return true;
                 }
             }
