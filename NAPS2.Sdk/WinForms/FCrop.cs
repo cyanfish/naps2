@@ -134,9 +134,9 @@ namespace NAPS2.WinForms
             tbTop.Maximum = tbBottom.Maximum = originalHeight;
 
             tbLeft.Value = CropTransform.Left;
-            tbBottom.Value = CropTransform.Bottom;
             tbRight.Value = originalWidth - CropTransform.Right;
             tbTop.Value = originalHeight - CropTransform.Top;
+            tbBottom.Value = CropTransform.Bottom;
         }
 
         private void UpdateTransform()
@@ -145,8 +145,8 @@ namespace NAPS2.WinForms
             (
                 Math.Min(tbLeft.Value, tbRight.Value),
                 originalWidth - Math.Max(tbLeft.Value, tbRight.Value),
-                Math.Min(tbTop.Value, tbBottom.Value),
                 originalHeight - Math.Max(tbTop.Value, tbBottom.Value),
+                Math.Min(tbTop.Value, tbBottom.Value),
                 originalWidth,
                 originalHeight
             );
