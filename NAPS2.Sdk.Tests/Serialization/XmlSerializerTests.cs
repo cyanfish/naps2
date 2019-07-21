@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.IO;
 using System.Linq;
 using System.Xml.Linq;
 using NAPS2.Scan;
@@ -182,10 +183,22 @@ namespace NAPS2.Sdk.Tests.Serialization
         [Fact]
         public void SerializationPerformance()
         {
-            var original = Enumerable.Repeat(new Poco { Str = "hi", Int = 5 }, 10)
-                .Concat(Enumerable.Repeat(new PocoSubtype { Str = "yo", Int = 4, Bool = true}, 10))
-                .ToList();
             var serializer = new XmlSerializer<List<Poco>>();
+            RunSerializationBenchmark(serializer);
+        }
+
+        [Fact]
+        public void SerializationPerformanceControl()
+        {
+            var serializer = new XmlSerializerControl<List<Poco>>(new[] { typeof(PocoSubtype) });
+            RunSerializationBenchmark(serializer);
+        }
+
+        private static void RunSerializationBenchmark(ISerializer<List<Poco>> serializer)
+        {
+            var original = Enumerable.Repeat(new Poco { Str = "hi", Int = 5 }, 10)
+                .Concat(Enumerable.Repeat(new PocoSubtype { Str = "yo", Int = 4, Bool = true }, 10))
+                .ToList();
             string str;
             using (new DebugTimer("serialization cold"))
             {
@@ -211,37 +224,51 @@ namespace NAPS2.Sdk.Tests.Serialization
             }
         }
 
+        private class XmlSerializerControl<T> : ISerializer<T>
+        {
+            private readonly System.Xml.Serialization.XmlSerializer serializer;
+
+            public XmlSerializerControl(Type[] knownTypes)
+            {
+                serializer = new System.Xml.Serialization.XmlSerializer(typeof(T), knownTypes);
+            }
+
+            public void Serialize(Stream stream, T obj) => serializer.Serialize(stream, obj);
+
+            public T Deserialize(Stream stream) => (T) serializer.Deserialize(stream);
+        }
+
         // TODO: Custom serialization
         // TODO: Ordering
 
-        private class NestedPoco
+        public class NestedPoco
         {
             public Poco Child { get; set; }
         }
 
-        private class Poco
+        public class Poco
         {
             static Poco()
             {
                 XmlSerializer.RegisterCustomTypes(new PocoTypes());
             }
-            
+
             public string Str { get; set; }
 
             public int Int { get; set; }
         }
 
-        private class PocoSubtype : Poco
+        public class PocoSubtype : Poco
         {
             public bool Bool { get; set; }
         }
 
-        private class PocoTypes : CustomXmlTypes<Poco>
+        public class PocoTypes : CustomXmlTypes<Poco>
         {
             protected override Type[] GetKnownTypes() => new[] { typeof(PocoSubtype) };
         }
 
-        private class PrivateSetter
+        public class PrivateSetter
         {
             public PrivateSetter()
             {
