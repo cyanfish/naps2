@@ -107,7 +107,9 @@ namespace NAPS2.WinForms
             Closed += FDesktop_Closed;
             thumbnailList1.ItemSelectionChanged += (sender, args) => imageList.Selection = ListSelection.From(SelectedImages); 
             imageList.SelectionChanged += (sender, args) => SelectedIndices = imageList.Selection.ToSelectedIndices(imageList.Images);
+            // TODO: Use a delta operation (using snapshot/memento logic) rather than added/updated/deleted
             imageList.ImagesUpdated += (sender, args) => UpdateThumbnails(imageList.Selection.ToSelectedIndices(imageList.Images), true, args.AffectedRangeMin, args.AffectedRangeMax);
+            imageList.ImagesAdded += (sender, args) => AddThumbnails();
             imageList.ImagesDeleted += (sender, args) => DeleteThumbnails();
         }
 
@@ -637,11 +639,9 @@ namespace NAPS2.WinForms
                                 index = lastIndex + 1;
                             }
                         }
-                        imageList.Images.Insert(index, scannedImage);
-                        scannedImage.MovedTo(index);
                         scannedImage.ThumbnailChanged += ImageThumbnailChanged;
                         scannedImage.ThumbnailInvalidated += ImageThumbnailInvalidated;
-                        AddThumbnails();
+                        imageList.Mutate(new ImageListMutation.InsertAt(index, scannedImage));
                         last = scannedImage;
                     }
                 });
@@ -904,12 +904,7 @@ namespace NAPS2.WinForms
                 {
                     SafeInvoke(() =>
                     {
-                        foreach (var image in images)
-                        {
-                            image.Dispose();
-                        }
-                        imageList.Images.RemoveAll(images);
-                        DeleteThumbnails();
+                        imageList.Mutate(new ImageListMutation.DeleteSelected(), ListSelection.From(images));
                     });
                 }
             }
@@ -921,12 +916,7 @@ namespace NAPS2.WinForms
             {
                 if (ConfigProvider.Get(c => c.DeleteAfterSaving))
                 {
-                    foreach (var image in images)
-                    {
-                        image.Dispose();
-                    }
-                    imageList.Images.RemoveAll(images);
-                    DeleteThumbnails();
+                    imageList.Mutate(new ImageListMutation.DeleteSelected(), ListSelection.From(images));
                 }
             }
         }

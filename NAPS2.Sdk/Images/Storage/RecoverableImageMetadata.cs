@@ -10,50 +10,29 @@ namespace NAPS2.Images.Storage
     public class RecoverableImageMetadata : IImageMetadata
     {
         private readonly RecoveryStorageManager rsm;
-        private RecoveryIndexImage indexImage;
 
-        public RecoverableImageMetadata(RecoveryStorageManager rsm, RecoveryIndexImage indexImage)
+        public RecoverableImageMetadata(RecoveryStorageManager rsm, string fileName)
         {
             this.rsm = rsm;
-            // TODO: Maybe not a constructor param?
-            this.indexImage = indexImage;
-            rsm.RecoveryIndex.Images.Add(indexImage);
+            FileName = fileName;
+            rsm.RegisterMetadata(this);
         }
-
-        public List<Transform> TransformList
-        {
-            get => indexImage.TransformList;
-            set => indexImage.TransformList = value;
-        }
+        
+        public string FileName { get; }
+        
+        public List<Transform> TransformList { get; set; } = new List<Transform>();
 
         public int TransformState { get; set; }
 
-        public int Index
-        {
-            get => rsm.RecoveryIndex.Images.IndexOf(indexImage);
-            set
-            {
-                // TODO: Locking
-                rsm.RecoveryIndex.Images.Remove(indexImage);
-                rsm.RecoveryIndex.Images.Insert(value, indexImage);
-            }
-        }
+        public int Index { get; set; }
 
-        public BitDepth BitDepth
-        {
-            get => indexImage.BitDepth.ToBitDepth();
-            set => indexImage.BitDepth = value.ToScanBitDepth();
-        }
+        public BitDepth BitDepth { get; set; }
 
-        public bool Lossless
-        {
-            get => indexImage.HighQuality;
-            set => indexImage.HighQuality = value;
-        }
+        public bool Lossless { get; set; }
 
         public void Commit()
         {
-            rsm.Commit();
+            rsm.CommitAllMetadata();
         }
 
         public IImageMetadata Clone() =>
@@ -68,8 +47,7 @@ namespace NAPS2.Images.Storage
 
         public void Dispose()
         {
-            rsm.RecoveryIndex.Images.Remove(indexImage);
-            Commit();
+            rsm.UnregisterMetadata(this);
         }
     }
 }

@@ -2,22 +2,26 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using NAPS2.Util;
+using NAPS2.Images.Storage;
 
 namespace NAPS2.Images
 {
     public class ScannedImageList
     {
+        private readonly ImageContext imageContext;
         private Memento savedState = Memento.Empty;
         private ListSelection<ScannedImage> selection;
 
-        public ScannedImageList()
+        public ScannedImageList(ImageContext imageContext)
         {
+            this.imageContext = imageContext;
             Images = new List<ScannedImage>();
+            Selection = ListSelection.Empty<ScannedImage>();
         }
 
-        public ScannedImageList(List<ScannedImage> images)
+        public ScannedImageList(ImageContext imageContext, List<ScannedImage> images)
         {
+            this.imageContext = imageContext;
             Images = images;
         }
 
@@ -43,13 +47,16 @@ namespace NAPS2.Images
 
         public event EventHandler<ImagesUpdatedEventArgs> ImagesUpdated;
 
+        public event EventHandler ImagesAdded;
+
         public event EventHandler ImagesDeleted;
 
         public void Mutate(ListMutation<ScannedImage> mutation, ListSelection<ScannedImage> selectionToMutate = null)
         {
             // TODO: Not sure if this should be here or in UserActions
-            int selectionMin = selection.ToSelectedIndices(Images).Min();
-            int selectionMax = selection.ToSelectedIndices(Images).Max();
+            // TODO: Selection min/max is broken, but I want to get rid of it anyway
+            int selectionMin = selection.Any() ? selection.ToSelectedIndices(Images).Min() : 0;
+            int selectionMax = selection.Any() ? selection.ToSelectedIndices(Images).Max() + 1 : 0;
             if (selectionToMutate != null)
             {
                 mutation.Apply(Images, ref selectionToMutate);
@@ -62,11 +69,16 @@ namespace NAPS2.Images
                 {
                     Selection = selectionRef;
                     SelectionChanged?.Invoke(this, EventArgs.Empty);
-                    selectionMin = Math.Min(selectionMin, selection.ToSelectedIndices(Images).Min());
-                    selectionMax = Math.Max(selectionMax, selection.ToSelectedIndices(Images).Max());
+                    selectionMin = selection.Any() ?  Math.Min(selectionMin, selection.ToSelectedIndices(Images).Min()) : selectionMin;
+                    selectionMax = selection.Any() ? Math.Max(selectionMax, selection.ToSelectedIndices(Images).Max() + 1) : selectionMax;
                 }
             }
-            if (mutation.IsDeletion)
+            UpdateImageMetadata();
+            if (mutation.IsAddition)
+            {
+                ImagesAdded?.Invoke(this, EventArgs.Empty);
+            }
+            else if (mutation.IsDeletion)
             {
                 ImagesDeleted?.Invoke(this, EventArgs.Empty);
             }
@@ -86,6 +98,16 @@ namespace NAPS2.Images
                     AffectedRangeMax = Images.Count
                 });
             }
+        }
+
+        private void UpdateImageMetadata()
+        {
+            int i = 0;
+            foreach (var image in Images)
+            {
+                image.Metadata.Index = i++;
+            }
+            imageContext.FileStorageManager.CommitAllMetadata();
         }
 
         // TODO: Undo/redo etc. thoughts:

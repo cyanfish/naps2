@@ -106,13 +106,6 @@ namespace NAPS2.Images
 
         public EventHandler FullyDisposed;
 
-        // TODO: Not using this any more, need to find a better way
-        public void MovedTo(int index)
-        {
-            Metadata.Index = index;
-            Metadata.Commit();
-        }
-
         public Snapshot Preserve() => new Snapshot(this);
 
         public class Snapshot : IDisposable, IEquatable<Snapshot>

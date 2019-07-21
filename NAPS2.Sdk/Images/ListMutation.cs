@@ -16,6 +16,8 @@ namespace NAPS2.Images
 
         public virtual bool IsDeletion => false;
 
+        public virtual bool IsAddition => false;
+
         public class MoveDown : ListMutation<T>
         {
             public override bool OnlyAffectsSelectionRange => true;

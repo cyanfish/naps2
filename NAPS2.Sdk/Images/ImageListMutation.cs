@@ -74,5 +74,24 @@ namespace NAPS2.Images
                 }
             }
         }
+
+        public class InsertAt : ListMutation<ScannedImage>
+        {
+            private readonly int index;
+            private readonly ScannedImage scannedImage;
+
+            public InsertAt(int index, ScannedImage scannedImage)
+            {
+                this.index = index;
+                this.scannedImage = scannedImage;
+            }
+
+            public override bool IsAddition => true;
+
+            public override void Apply(List<ScannedImage> list, ref ListSelection<ScannedImage> selection)
+            {
+                list.Insert(index, scannedImage);
+            }
+        }
     }
 }

@@ -19,8 +19,7 @@ namespace NAPS2.Images.Storage
         }
 
         protected string FolderPath { get; }
-
-
+        
         public virtual string NextFilePath()
         {
             lock (this)
@@ -28,6 +27,10 @@ namespace NAPS2.Images.Storage
                 string fileName = $"{prefix}.{(++fileNumber).ToString("D5", CultureInfo.InvariantCulture)}";
                 return Path.Combine(FolderPath, fileName);
             }
+        }
+
+        public virtual void CommitAllMetadata()
+        {
         }
 
         protected virtual void Dispose(bool disposing)

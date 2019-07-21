@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Globalization;
 using System.IO;
-using NAPS2.Images.Transforms;
+using System.Linq;
 using NAPS2.Recovery;
+using NAPS2.Scan;
 using NAPS2.Serialization;
 
 namespace NAPS2.Images.Storage
@@ -38,7 +37,9 @@ namespace NAPS2.Images.Storage
         private readonly DirectoryInfo folder;
         private readonly FileInfo folderLockFile;
         private readonly Stream folderLock;
+        private readonly Dictionary<RecoverableImageMetadata, int> metadataDict = new Dictionary<RecoverableImageMetadata, int>();
 
+        private int metadataOrdering;
         private bool disposed;
 
         public static RecoveryStorageManager CreateFolder(string recoveryFolderPath)
@@ -56,16 +57,21 @@ namespace NAPS2.Images.Storage
 
         public string RecoveryFolderPath => FolderPath;
 
-        public RecoveryIndex RecoveryIndex { get; } = new RecoveryIndex();
-
-        public void Commit()
+        public override void CommitAllMetadata()
         {
-            // TODO: Can maybe just lock on one of these, everywhere
             lock (this)
-            lock (RecoveryIndex)
             {
                 if (disposed) throw new ObjectDisposedException(nameof(RecoveryStorageManager));
-                serializer.SerializeToFile(Path.Combine(RecoveryFolderPath, "index.xml"), RecoveryIndex);
+                var recoveryIndex = RecoveryIndex.Create();
+                var orderedMetadata = metadataDict.OrderBy(x => x.Key.Index).ThenBy(x => x.Value).Select(x => x.Key);
+                recoveryIndex.Images = orderedMetadata.Select(metadata => new RecoveryIndexImage
+                {
+                    FileName = metadata.FileName,
+                    BitDepth = metadata.BitDepth.ToScanBitDepth(),
+                    HighQuality = metadata.Lossless,
+                    TransformList = metadata.TransformList
+                }).ToList();
+                serializer.SerializeToFile(Path.Combine(RecoveryFolderPath, "index.xml"), recoveryIndex);
             }
         }
 
@@ -76,14 +82,9 @@ namespace NAPS2.Images.Storage
                 throw new ArgumentException("RecoveryStorageManager can only used with IFileStorage.");
             }
             lock (this)
-            lock (RecoveryIndex)
             {
                 if (disposed) throw new ObjectDisposedException(nameof(RecoveryStorageManager));
-                return new RecoverableImageMetadata(this, new RecoveryIndexImage
-                {
-                    FileName = Path.GetFileName(fileStorage.FullPath),
-                    TransformList = new List<Transform>()
-                });
+                return new RecoverableImageMetadata(this, Path.GetFileName(fileStorage.FullPath));
             }
         }
 
@@ -91,12 +92,27 @@ namespace NAPS2.Images.Storage
         {
             if (!disposing) return;
             lock (this)
-            lock (RecoveryIndex)
             {
                 folderLock.Close();
                 folderLockFile.Delete();
                 folder.Delete(true);
                 disposed = true;
+            }
+        }
+
+        public void RegisterMetadata(RecoverableImageMetadata metadata)
+        {
+            lock (this)
+            {
+                metadataDict.Add(metadata, metadataOrdering++);
+            }
+        }
+
+        public void UnregisterMetadata(RecoverableImageMetadata metadata)
+        {
+            lock (this)
+            {
+                metadataDict.Remove(metadata);
             }
         }
     }
