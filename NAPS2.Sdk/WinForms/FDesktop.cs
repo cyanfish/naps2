@@ -105,6 +105,10 @@ namespace NAPS2.WinForms
             Shown += FDesktop_Shown;
             FormClosing += FDesktop_FormClosing;
             Closed += FDesktop_Closed;
+            thumbnailList1.ItemSelectionChanged += (sender, args) => imageList.Selection = ListSelection.From(SelectedImages); 
+            imageList.SelectionChanged += (sender, args) => SelectedIndices = imageList.Selection.ToSelectedIndices(imageList.Images);
+            imageList.ImagesUpdated += (sender, args) => UpdateThumbnails(imageList.Selection.ToSelectedIndices(imageList.Images), true, args.AffectedRangeMin, args.AffectedRangeMax);
+            imageList.ImagesDeleted += (sender, args) => DeleteThumbnails();
         }
 
         protected override void OnLoad(object sender, EventArgs eventArgs)
@@ -658,9 +662,9 @@ namespace NAPS2.WinForms
             UpdateToolbar();
         }
 
-        private void UpdateThumbnails(IEnumerable<int> selection, bool scrollToSelection, bool optimizeForSelectionRange)
+        private void UpdateThumbnails(IEnumerable<int> selection, bool scrollToSelection, int affectedRangeMin, int affectedRangeMax)
         {
-            thumbnailList1.UpdatedImages(imageList.Images, optimizeForSelectionRange ? SelectedIndices.Concat(selection).ToList() : null);
+            thumbnailList1.UpdatedImages(imageList.Images, affectedRangeMin, affectedRangeMax);
             SelectedIndices = selection;
             UpdateToolbar();
 
@@ -1435,7 +1439,7 @@ namespace NAPS2.WinForms
                 form.Image = SelectedImages.First();
                 form.SelectedImages = SelectedImages.ToList();
                 form.ShowDialog();
-                UpdateThumbnails(SelectedIndices.ToList(), false, true);
+                UpdateThumbnails(SelectedIndices.ToList(), false, SelectedIndices.Min(), SelectedIndices.Max());
             }
         }
 

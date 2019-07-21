@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ namespace NAPS2.Images
 {
     public static class ListSelection
     {
-        public static ListSelection<T> From<T>(List<T> list)
+        public static ListSelection<T> From<T>(IEnumerable<T> list)
         {
             return new ListSelection<T>(list);
         }
@@ -28,7 +29,7 @@ namespace NAPS2.Images
         }
     }
 
-    public class ListSelection<T> : IEnumerable<T>
+    public class ListSelection<T> : IEnumerable<T>, IEquatable<ListSelection<T>>
     {
         private readonly HashSet<T> internalSelection;
 
@@ -42,5 +43,26 @@ namespace NAPS2.Images
         public IEnumerator<T> GetEnumerator() => internalSelection.GetEnumerator();
 
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+
+        public bool Equals(ListSelection<T> other)
+        {
+            if (ReferenceEquals(null, other)) return false;
+            if (ReferenceEquals(this, other)) return true;
+            return internalSelection.SetEquals(other.internalSelection);
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(null, obj)) return false;
+            if (ReferenceEquals(this, obj)) return true;
+            if (obj.GetType() != this.GetType()) return false;
+            return Equals((ListSelection<T>) obj);
+        }
+
+        public override int GetHashCode() => internalSelection.GetHashCode();
+
+        public static bool operator ==(ListSelection<T> left, ListSelection<T> right) => Equals(left, right);
+
+        public static bool operator !=(ListSelection<T> left, ListSelection<T> right) => !Equals(left, right);
     }
 }

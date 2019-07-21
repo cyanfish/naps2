@@ -132,15 +132,13 @@ namespace NAPS2.WinForms
             Invalidate();
         }
 
-        public void UpdatedImages(List<ScannedImage> images, List<int> selection)
+        public void UpdatedImages(List<ScannedImage> images, int affectedRangeMin, int affectedRangeMax)
         {
             lock (this)
             {
                 BeginUpdate();
-                int min = selection == null || !selection.Any() ? 0 : selection.Min();
-                int max = selection == null || !selection.Any() ? images.Count : selection.Max() + 1;
 
-                for (int i = min; i < max; i++)
+                for (int i = affectedRangeMin; i < affectedRangeMax; i++)
                 {
                     int imageIndex = Items[i].ImageIndex;
                     ilThumbnailList.Images[imageIndex] = GetThumbnail(images[i]);
