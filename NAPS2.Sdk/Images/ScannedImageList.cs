@@ -38,6 +38,7 @@ namespace NAPS2.Images
         {
             // TODO: Make sure to update the selection
             // TODO: Need to improve change detection (e.g. transforms) 
+            // TODO: Note that change tracking is closely related to Undo/Redo (comparing mementos), so keep that in mind
             // TODO: Not sure if this should be here or in UserActions
             var originalList = Images.ToList();
             if (selectionToMutate != null)
@@ -61,6 +62,16 @@ namespace NAPS2.Images
                 changeTracker.Made();
             }
         }
+        
+        // TODO: Undo/redo etc. thoughts:
+        // A memento is a copy of a ScannedImage list with Snapshots
+        // Need to add a Restore operation for Snapshots
+        // This lends itself well to undoing deletions (since snapshots already persist on disk).
+        // However, we may need to tweak the way metadata disposal works (either dispose on ScannedImage.Dispose and restore on Snapshot.Restore, or add a Deleted flag to metadata)
+        // Restoring on a disposed ScannedImage is iffy. Maybe Restore and RestoreDeleted should be separate.
+        // Mementos should be comparable. When we mutate, we should add the end memento to the undo stack iff it's different than the top.
+        // Rather than ChangeTracker this should be encompassed in some UndoQueue class, which has a memento for the last saved state and can compare in order to determine if changes have been made.
+        // Perhaps everything that changes any image (including ImageForm stuff, insertions) should be encompassed by a mutation.
 
         public Task MutateAsync(ListMutation<ScannedImage> mutation, ListSelection<ScannedImage> selectionToMutate = null)
         {

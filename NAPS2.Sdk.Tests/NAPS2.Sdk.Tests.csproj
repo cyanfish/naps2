@@ -125,6 +125,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>TransformTestsData.resx</DependentUpon>
     </Compile>
+    <Compile Include="Images\UndoStackTests.cs" />
     <Compile Include="ImportExport\PdfiumTests.cs" />
     <Compile Include="ImportExport\PdfiumTestsData.Designer.cs">
       <AutoGen>True</AutoGen>

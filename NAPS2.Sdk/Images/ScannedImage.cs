@@ -2,6 +2,7 @@ using System;
 using NAPS2.Images.Storage;
 using NAPS2.Images.Transforms;
 using NAPS2.Scan;
+using NAPS2.Serialization;
 
 namespace NAPS2.Images
 {
@@ -114,8 +115,9 @@ namespace NAPS2.Images
 
         public Snapshot Preserve() => new Snapshot(this);
 
-        public class Snapshot : IDisposable
+        public class Snapshot : IDisposable, IEquatable<Snapshot>
         {
+            private readonly string transformListXml;
             private bool disposed;
 
             internal Snapshot(ScannedImage source)
@@ -129,6 +131,7 @@ namespace NAPS2.Images
                     source.snapshotCount++;
                     Source = source;
                     Metadata = source.Metadata.Clone();
+                    transformListXml = Metadata.TransformList.ToXml();
                 }
             }
 
@@ -149,6 +152,40 @@ namespace NAPS2.Images
                     }
                 }
             }
+
+            public bool Equals(Snapshot other)
+            {
+                if (ReferenceEquals(null, other)) return false;
+                if (ReferenceEquals(this, other)) return true;
+                return Equals(Source, other.Source)
+                       && Equals(Metadata.Lossless, other.Metadata.Lossless)
+                       && Equals(Metadata.BitDepth, other.Metadata.BitDepth)
+                       && Equals(transformListXml, other.transformListXml);
+            }
+
+            public override bool Equals(object obj)
+            {
+                if (ReferenceEquals(null, obj)) return false;
+                if (ReferenceEquals(this, obj)) return true;
+                if (obj.GetType() != GetType()) return false;
+                return Equals((Snapshot) obj);
+            }
+
+            public override int GetHashCode()
+            {
+                unchecked
+                {
+                    var hashCode = Source.GetHashCode();
+                    hashCode = (hashCode * 397) ^ Metadata.Lossless.GetHashCode();
+                    hashCode = (hashCode * 397) ^ Metadata.BitDepth.GetHashCode();
+                    hashCode = (hashCode * 397) ^ transformListXml.GetHashCode();
+                    return hashCode;
+                }
+            }
+
+            public static bool operator ==(Snapshot left, Snapshot right) => Equals(left, right);
+
+            public static bool operator !=(Snapshot left, Snapshot right) => !Equals(left, right);
         }
     }
 }
