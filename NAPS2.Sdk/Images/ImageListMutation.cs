@@ -9,8 +9,6 @@ namespace NAPS2.Images
     {
         public class DeleteAll : ImageListMutation
         {
-            public override bool IsDeletion => true;
-
             public override void Apply(List<ScannedImage> list, ref ListSelection<ScannedImage> selection)
             {
                 foreach (var image in list)
@@ -23,8 +21,6 @@ namespace NAPS2.Images
 
         public class DeleteSelected : ImageListMutation
         {
-            public override bool IsDeletion => true;
-            
             public override void Apply(List<ScannedImage> list, ref ListSelection<ScannedImage> selection)
             {
                 foreach (var image in selection)
@@ -48,7 +44,7 @@ namespace NAPS2.Images
 
             public override void Apply(List<ScannedImage> list, ref ListSelection<ScannedImage> selection)
             {
-                foreach (ScannedImage img in list)
+                foreach (ScannedImage img in selection)
                 {
                     lock (img)
                     {
@@ -85,8 +81,6 @@ namespace NAPS2.Images
                 this.index = index;
                 this.scannedImage = scannedImage;
             }
-
-            public override bool IsAddition => true;
 
             public override void Apply(List<ScannedImage> list, ref ListSelection<ScannedImage> selection)
             {

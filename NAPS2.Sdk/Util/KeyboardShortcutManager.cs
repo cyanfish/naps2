@@ -125,12 +125,14 @@ namespace NAPS2.Util
             return Assign(value, item.PerformClick);
         }
 
-        public void Perform(Keys keyData)
+        public bool Perform(Keys keyData)
         {
             if (dict.ContainsKey(keyData))
             {
                 dict[keyData]();
+                return true;
             }
+            return false;
         }
     }
 }

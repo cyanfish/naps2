@@ -65,7 +65,7 @@ namespace NAPS2.WinForms
 
         public void SelectAll()
         {
-            imageList.Selection = ListSelection.From(imageList.Images);
+            imageList.UpdateSelection(ListSelection.From(imageList.Images));
         }
     }
 }

@@ -43,61 +43,27 @@ namespace NAPS2.Images
             set => selection = value ?? throw new ArgumentNullException(nameof(value));
         }
 
-        public event EventHandler SelectionChanged;
+        public void UpdateSelection(ListSelection<ScannedImage> newSelection)
+        {
+            Selection = newSelection;
+            ImagesUpdated?.Invoke(this, EventArgs.Empty);
+        }
 
-        public event EventHandler<ImagesUpdatedEventArgs> ImagesUpdated;
-
-        public event EventHandler ImagesAdded;
-
-        public event EventHandler ImagesDeleted;
+        public event EventHandler ImagesUpdated;
 
         public void Mutate(ListMutation<ScannedImage> mutation, ListSelection<ScannedImage> selectionToMutate = null)
         {
             // TODO: Not sure if this should be here or in UserActions
-            // TODO: Selection min/max is broken, but I want to get rid of it anyway
-            int selectionMin = selection.Any() ? selection.ToSelectedIndices(Images).Min() : 0;
-            int selectionMax = selection.Any() ? selection.ToSelectedIndices(Images).Max() + 1 : 0;
             if (selectionToMutate != null)
             {
                 mutation.Apply(Images, ref selectionToMutate);
             }
             else
             {
-                var selectionRef = Selection;
-                mutation.Apply(Images, ref selectionRef);
-                if (selectionRef != Selection)
-                {
-                    Selection = selectionRef;
-                    SelectionChanged?.Invoke(this, EventArgs.Empty);
-                    selectionMin = selection.Any() ?  Math.Min(selectionMin, selection.ToSelectedIndices(Images).Min()) : selectionMin;
-                    selectionMax = selection.Any() ? Math.Max(selectionMax, selection.ToSelectedIndices(Images).Max() + 1) : selectionMax;
-                }
+                mutation.Apply(Images, ref selection); 
             }
             UpdateImageMetadata();
-            if (mutation.IsAddition)
-            {
-                ImagesAdded?.Invoke(this, EventArgs.Empty);
-            }
-            else if (mutation.IsDeletion)
-            {
-                ImagesDeleted?.Invoke(this, EventArgs.Empty);
-            }
-            else if(mutation.OnlyAffectsSelectionRange)
-            {
-                ImagesUpdated?.Invoke(this, new ImagesUpdatedEventArgs
-                {
-                    AffectedRangeMin = selectionMin,
-                    AffectedRangeMax = selectionMax
-                });
-            }
-            else
-            {
-                ImagesUpdated?.Invoke(this, new ImagesUpdatedEventArgs
-                {
-                    AffectedRangeMin = 0,
-                    AffectedRangeMax = Images.Count
-                });
-            }
+            ImagesUpdated?.Invoke(this, EventArgs.Empty);
         }
 
         private void UpdateImageMetadata()
@@ -121,13 +87,6 @@ namespace NAPS2.Images
         public Task MutateAsync(ListMutation<ScannedImage> mutation, ListSelection<ScannedImage> selectionToMutate = null)
         {
             return Task.Run(() => Mutate(mutation, selectionToMutate));
-        }
-
-        public class ImagesUpdatedEventArgs : EventArgs
-        {
-            public int AffectedRangeMin { get; set; }
-            
-            public int AffectedRangeMax { get; set; }
         }
     }
 }

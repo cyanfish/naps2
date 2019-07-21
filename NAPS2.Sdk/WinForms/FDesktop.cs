@@ -106,11 +106,12 @@ namespace NAPS2.WinForms
             FormClosing += FDesktop_FormClosing;
             Closed += FDesktop_Closed;
             thumbnailList1.ItemSelectionChanged += (sender, args) => imageList.Selection = ListSelection.From(SelectedImages); 
-            imageList.SelectionChanged += (sender, args) => SelectedIndices = imageList.Selection.ToSelectedIndices(imageList.Images);
             // TODO: Use a delta operation (using snapshot/memento logic) rather than added/updated/deleted
-            imageList.ImagesUpdated += (sender, args) => UpdateThumbnails(imageList.Selection.ToSelectedIndices(imageList.Images), true, args.AffectedRangeMin, args.AffectedRangeMax);
-            imageList.ImagesAdded += (sender, args) => AddThumbnails();
-            imageList.ImagesDeleted += (sender, args) => DeleteThumbnails();
+            imageList.ImagesUpdated += (sender, args) =>
+            {
+                SelectedIndices = imageList.Selection.ToSelectedIndices(imageList.Images);
+                UpdateThumbnails();
+            };
         }
 
         protected override void OnLoad(object sender, EventArgs eventArgs)
@@ -290,7 +291,7 @@ namespace NAPS2.WinForms
             UpdateRTL();
             InitializeComponent();
             PostInitializeComponent();
-            AddThumbnails();
+            UpdateThumbnails();
             notify.Rebuild();
             Focus();
             WindowState = FormWindowState.Normal;
@@ -650,25 +651,12 @@ namespace NAPS2.WinForms
             };
         }
 
-        private void AddThumbnails()
+        private void UpdateThumbnails()
         {
-            thumbnailList1.AddedImages(imageList.Images);
-            UpdateToolbar();
-        }
-
-        private void DeleteThumbnails()
-        {
-            thumbnailList1.DeletedImages(imageList.Images);
-            UpdateToolbar();
-        }
-
-        private void UpdateThumbnails(IEnumerable<int> selection, bool scrollToSelection, int affectedRangeMin, int affectedRangeMax)
-        {
-            thumbnailList1.UpdatedImages(imageList.Images, affectedRangeMin, affectedRangeMax);
-            SelectedIndices = selection;
+            thumbnailList1.UpdatedImages(imageList.Images, out var orderingChanged);
             UpdateToolbar();
 
-            if (scrollToSelection)
+            if (orderingChanged)
             {
                 // Scroll to selection
                 // If selection is empty (e.g. after interleave), this scrolls to top
@@ -850,7 +838,7 @@ namespace NAPS2.WinForms
                 using var viewer = FormFactory.Create<FViewer>();
                 viewer.ImageList = imageList;
                 viewer.ImageIndex = SelectedIndices.First();
-                viewer.DeleteCallback = DeleteThumbnails;
+                viewer.DeleteCallback = UpdateThumbnails;
                 viewer.SelectCallback = i =>
                 {
                     if (SelectedIndices.Count() <= 1)
@@ -1098,7 +1086,7 @@ namespace NAPS2.WinForms
 
         private void thumbnailList1_KeyDown(object sender, KeyEventArgs e)
         {
-            ksm.Perform(e.KeyData);
+            e.Handled = ksm.Perform(e.KeyData);
         }
 
         private void thumbnailList1_MouseWheel(object sender, MouseEventArgs e)
@@ -1429,7 +1417,7 @@ namespace NAPS2.WinForms
                 form.Image = SelectedImages.First();
                 form.SelectedImages = SelectedImages.ToList();
                 form.ShowDialog();
-                UpdateThumbnails(SelectedIndices.ToList(), false, SelectedIndices.Min(), SelectedIndices.Max());
+                UpdateThumbnails();
             }
         }
 

@@ -7,40 +7,8 @@ namespace NAPS2.Images
     {
         public abstract void Apply(List<T> list, ref ListSelection<T> selection);
 
-        /// <summary>
-        /// Whether the mutation won't affect items outside the range of selected indices (both before and after the mutation).
-        ///
-        /// For example, moving an item up from index 4 to index 5 does not affect any items besides at indices 4 and 5. 
-        /// </summary>
-        public virtual bool OnlyAffectsSelectionRange => false;
-
-        public virtual bool IsDeletion => false;
-
-        public virtual bool IsAddition => false;
-
         public class MoveDown : ListMutation<T>
         {
-            public override bool OnlyAffectsSelectionRange => true;
-
-            public override void Apply(List<T> list, ref ListSelection<T> selection)
-            {
-                int lowerBound = 0;
-                foreach (int i in selection.ToSelectedIndices(list))
-                {
-                    if (i != lowerBound++)
-                    {
-                        var item = list[i];
-                        list.RemoveAt(i);
-                        list.Insert(i - 1, item);
-                    }
-                }
-            }
-        }
-
-        public class MoveUp : ListMutation<T>
-        {
-            public override bool OnlyAffectsSelectionRange => true;
-            
             public override void Apply(List<T> list, ref ListSelection<T> selection)
             {
                 int upperBound = list.Count - 1;
@@ -56,6 +24,23 @@ namespace NAPS2.Images
             }
         }
 
+        public class MoveUp : ListMutation<T>
+        {
+            public override void Apply(List<T> list, ref ListSelection<T> selection)
+            {
+                int lowerBound = 0;
+                foreach (int i in selection.ToSelectedIndices(list))
+                {
+                    if (i != lowerBound++)
+                    {
+                        var item = list[i];
+                        list.RemoveAt(i);
+                        list.Insert(i - 1, item);
+                    }
+                }
+            }
+        }
+
         public class MoveTo : ListMutation<T>
         {
             private readonly int destinationIndex;
@@ -65,8 +50,6 @@ namespace NAPS2.Images
                 this.destinationIndex = destinationIndex;
             }
             
-            public override bool OnlyAffectsSelectionRange => true;
-
             public override void Apply(List<T> list, ref ListSelection<T> selection)
             {
                 var indexList = selection.ToSelectedIndices(list).ToList();
@@ -195,8 +178,6 @@ namespace NAPS2.Images
 
         public class ReverseSelection : ListMutation<T>
         {
-            public override bool OnlyAffectsSelectionRange => true;
-            
             public override void Apply(List<T> list, ref ListSelection<T> selection)
             {
                 var indexList = selection.ToSelectedIndices(list).ToList();

@@ -75,77 +75,146 @@ namespace NAPS2.WinForms
 
         private string ItemText => PlatformCompat.Runtime.UseSpaceInListViewItem ? " " : "";
 
-        private List<ScannedImage> CurrentImages => Items.Cast<ListViewItem>().Select(x => (ScannedImage)x.Tag).ToList();
+        private List<ImageInfo> CurrentImages => Items.Cast<ListViewItem>().Select(x => (ImageInfo)x.Tag).ToList();
 
-        public void AddedImages(List<ScannedImage> allImages)
+        private ImageInfo GetImageInfo(int i) => (ImageInfo) Items[i].Tag;
+
+//        public void AddedImages(List<ScannedImage> allImages)
+//        {
+//            lock (this)
+//            {
+//                BeginUpdate();
+//                for (int i = 0; i < ilThumbnailList.Images.Count; i++)
+//                {
+//                    if (GetImageInfo(i).Image != allImages[i])
+//                    {
+//                        ilThumbnailList.Images[i] = GetThumbnail(allImages[i]);
+//                        Items[i].Tag = allImages[i];
+//                    }
+//                }
+//                for (int i = ilThumbnailList.Images.Count; i < allImages.Count; i++)
+//                {
+//                    ilThumbnailList.Images.Add(GetThumbnail(allImages[i]));
+//                    Items.Add(ItemText, i).Tag = new ImageInfo(allImages[i]);
+//                }
+//                EndUpdate();
+//            }
+//            Invalidate();
+//        }
+//
+//        public void DeletedImages(List<ScannedImage> allImages)
+//        {
+//            lock (this)
+//            {
+//                BeginUpdate();
+//                if (allImages.Count == 0)
+//                {
+//                    ilThumbnailList.Images.Clear();
+//                    Items.Clear();
+//                }
+//                else
+//                {
+//                    foreach (var oldImg in CurrentImages.Except(allImages))
+//                    {
+//                        var item = Items.Cast<ListViewItem>().First(x => x.Tag == oldImg);
+//                        foreach (ListViewItem item2 in Items)
+//                        {
+//                            if (item2.ImageIndex > item.ImageIndex)
+//                            {
+//                                item2.ImageIndex -= 1;
+//                            }
+//                        }
+//
+//                        ilThumbnailList.Images.RemoveAt(item.ImageIndex);
+//                        Items.RemoveAt(item.Index);
+//                    }
+//                }
+//                EndUpdate();
+//            }
+//            Invalidate();
+//        }
+//
+//        public void UpdatedImages(List<ScannedImage> images, int affectedRangeMin, int affectedRangeMax)
+//        {
+//            lock (this)
+//            {
+//                BeginUpdate();
+//
+//                for (int i = affectedRangeMin; i < affectedRangeMax; i++)
+//                {
+//                    int imageIndex = Items[i].ImageIndex;
+//                    ilThumbnailList.Images[imageIndex] = GetThumbnail(images[i]);
+//                }
+//                EndUpdate();
+//            }
+//            Invalidate();
+//        }
+
+        public void UpdatedImages(List<ScannedImage> images, out bool orderingChanged)
         {
             lock (this)
             {
+                orderingChanged = false;
                 BeginUpdate();
-                for (int i = 0; i < ilThumbnailList.Images.Count; i++)
-                {
-                    if (Items[i].Tag != allImages[i])
-                    {
-                        ilThumbnailList.Images[i] = GetThumbnail(allImages[i]);
-                        Items[i].Tag = allImages[i];
-                    }
-                }
-                for (int i = ilThumbnailList.Images.Count; i < allImages.Count; i++)
-                {
-                    ilThumbnailList.Images.Add(GetThumbnail(allImages[i]));
-                    Items.Add(ItemText, i).Tag = allImages[i];
-                }
-                EndUpdate();
-            }
-            Invalidate();
-        }
 
-        public void DeletedImages(List<ScannedImage> allImages)
-        {
-            lock (this)
-            {
-                BeginUpdate();
-                if (allImages.Count == 0)
+                if (images.Count == 0)
                 {
                     ilThumbnailList.Images.Clear();
                     Items.Clear();
                 }
                 else
                 {
-                    foreach (var oldImg in CurrentImages.Except(allImages))
-                    {
-                        var item = Items.Cast<ListViewItem>().First(x => x.Tag == oldImg);
-                        foreach (ListViewItem item2 in Items)
-                        {
-                            if (item2.ImageIndex > item.ImageIndex)
-                            {
-                                item2.ImageIndex -= 1;
-                            }
-                        }
-
-                        ilThumbnailList.Images.RemoveAt(item.ImageIndex);
-                        Items.RemoveAt(item.Index);
-                    }
+                    DeleteExcessImages(images);
+                    AddMissingImages(images);
+                    UpdateChangedImages(images, ref orderingChanged);
                 }
                 EndUpdate();
             }
             Invalidate();
         }
 
-        public void UpdatedImages(List<ScannedImage> images, int affectedRangeMin, int affectedRangeMax)
+        private void UpdateChangedImages(List<ScannedImage> images, ref bool orderingChanged)
         {
-            lock (this)
+            for (int i = 0; i < ilThumbnailList.Images.Count; i++)
             {
-                BeginUpdate();
-
-                for (int i = affectedRangeMin; i < affectedRangeMax; i++)
+                var imageInfo = GetImageInfo(i);
+                if (imageInfo.Image != images[i])
                 {
-                    int imageIndex = Items[i].ImageIndex;
-                    ilThumbnailList.Images[imageIndex] = GetThumbnail(images[i]);
+                    orderingChanged = true;
                 }
-                EndUpdate();
+                if (imageInfo.Image != images[i] || imageInfo.TransformState != images[i].Metadata.TransformState)
+                {
+                    ilThumbnailList.Images[i] = GetThumbnail(images[i]);
+                    Items[i].Tag = new ImageInfo(images[i]);
+                }
             }
-            Invalidate();
+        }
+
+        private void DeleteExcessImages(List<ScannedImage> images)
+        {
+            foreach (var oldImg in CurrentImages.Select(x => x.Image).Except(images))
+            {
+                var item = Items.Cast<ListViewItem>().First(x => ((ImageInfo)x.Tag).Image == oldImg);
+                foreach (ListViewItem item2 in Items)
+                {
+                    if (item2.ImageIndex > item.ImageIndex)
+                    {
+                        item2.ImageIndex -= 1;
+                    }
+                }
+
+                ilThumbnailList.Images.RemoveAt(item.ImageIndex);
+                Items.RemoveAt(item.Index);
+            }
+        }
+
+        private void AddMissingImages(List<ScannedImage> images)
+        {
+            for (int i = ilThumbnailList.Images.Count; i < images.Count; i++)
+            {
+                ilThumbnailList.Images.Add(GetThumbnail(images[i]));
+                Items.Add(ItemText, i).Tag = new ImageInfo(images[i]);
+            }
         }
 
         public void ReplaceThumbnail(int index, ScannedImage img)
@@ -243,6 +312,19 @@ namespace NAPS2.WinForms
             }
             image.Dispose();
             return bitmap;
+        }
+
+        private class ImageInfo
+        {
+            public ImageInfo(ScannedImage image)
+            {
+                Image = image;
+                TransformState = image.Metadata.TransformState;
+            }
+
+            public ScannedImage Image { get; set; }
+            
+            public int TransformState { get; set; }
         }
     }
 }
