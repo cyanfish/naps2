@@ -69,14 +69,37 @@ namespace NAPS2.ImportExport.Email.Oauth
             return resp.Value<string>("emailAddress");
         }
 
-        public async Task<string> UploadDraft(string messageRaw, ProgressHandler progressCallback, CancellationToken cancelToken)
+        public async Task<DraftInfo> UploadDraft(string messageRaw, ProgressHandler progressCallback, CancellationToken cancelToken)
         {
             var resp = await PostAuthorized($"https://www.googleapis.com/upload/gmail/v1/users/{User}/drafts?uploadType=multipart",
                 messageRaw,
                 "message/rfc822",
                 progressCallback,
                 cancelToken);
-            return resp.Value<JObject>("message").Value<string>("id");
+            return new DraftInfo
+            {
+                MessageId = resp.Value<JObject>("message").Value<string>("id"),
+                DraftId = resp.Value<string>("id")
+            };
+        }
+
+        public async Task SendDraft(string draftId)
+        {
+            await PostAuthorized($"https://www.googleapis.com/gmail/v1/users/{User}/drafts/send",
+                new JObject
+                {
+                    { "id", draftId }
+                }.ToString(), 
+                "application/json",
+                (current, max) => { },
+                CancellationToken.None);
+        }
+
+        public class DraftInfo
+        {
+            public string DraftId { get; set; }
+            
+            public string MessageId { get; set; }
         }
 
         #endregion
