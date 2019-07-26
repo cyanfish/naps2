@@ -103,9 +103,9 @@ namespace NAPS2.Worker
             twainScanCts.Cancel();
         }
 
-        public MapiSendMailReturnCode SendMapiEmail(EmailMessage message)
+        public MapiSendMailReturnCode SendMapiEmail(string clientName, EmailMessage message)
         {
-            return mapiWrapper.SendEmail(message);
+            return mapiWrapper.SendEmail(clientName, message);
         }
 
         public byte[] RenderThumbnail(ScannedImage.Snapshot snapshot, int size)

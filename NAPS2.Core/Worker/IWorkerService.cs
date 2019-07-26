@@ -35,7 +35,7 @@ namespace NAPS2.Worker
         void CancelTwainScan();
 
         [OperationContract]
-        MapiSendMailReturnCode SendMapiEmail(EmailMessage message);
+        MapiSendMailReturnCode SendMapiEmail(string clientName, EmailMessage message);
 
         [OperationContract]
         byte[] RenderThumbnail(ScannedImage.Snapshot snapshot, int size);

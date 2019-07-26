@@ -17,12 +17,14 @@ namespace NAPS2.ImportExport.Email.Mapi
         private readonly IWorkerServiceFactory workerServiceFactory;
         private readonly MapiWrapper mapiWrapper;
         private readonly IErrorOutput errorOutput;
+        private readonly IUserConfigManager userConfigManager;
 
-        public MapiEmailProvider(IWorkerServiceFactory workerServiceFactory, MapiWrapper mapiWrapper, IErrorOutput errorOutput)
+        public MapiEmailProvider(IWorkerServiceFactory workerServiceFactory, MapiWrapper mapiWrapper, IErrorOutput errorOutput, IUserConfigManager userConfigManager)
         {
             this.workerServiceFactory = workerServiceFactory;
             this.mapiWrapper = mapiWrapper;
             this.errorOutput = errorOutput;
+            this.userConfigManager = userConfigManager;
         }
 
         private bool UseWorker => Environment.Is64BitProcess && PlatformCompat.Runtime.UseWorker;
@@ -36,28 +38,51 @@ namespace NAPS2.ImportExport.Email.Mapi
         /// <returns>Returns true if the message was sent, false if the user aborted.</returns>
         public async Task<bool> SendEmail(EmailMessage message, ProgressHandler progressCallback, CancellationToken cancelToken)
         {
+            var configuredClientName = userConfigManager.Config.EmailSetup?.SystemProviderName;
+            
+            MapiSendMailReturnCode EmailInProc(string clientName) => mapiWrapper.SendEmail(clientName, message);
+            MapiSendMailReturnCode EmailByWorker(string clientName)
+            {
+                using (var worker = workerServiceFactory.Create())
+                {
+                    return worker.Service.SendMapiEmail(clientName, message);
+                }
+            }
+
             return await Task.Factory.StartNew(() =>
             {
-                MapiSendMailReturnCode returnCode;
-
-                if (UseWorker && !mapiWrapper.CanLoadClient)
+                // It's difficult to get 32/64 bit right when using mapi32.dll:
+                // https://docs.microsoft.com/en-us/office/client-developer/outlook/mapi/building-mapi-applications-on-32-bit-and-64-bit-platforms
+                // Also some people have had issues with bad DLL paths (?), so we can fall back to mapi32.dll.
+                
+                var emailFuncs = new List<Func<MapiSendMailReturnCode>>();
+                if (configuredClientName != null)
                 {
-                    using (var worker = workerServiceFactory.Create())
+                    if (mapiWrapper.CanLoadClient(configuredClientName))
                     {
-                        returnCode = worker.Service.SendMapiEmail(message);
+                        emailFuncs.Add(() => EmailInProc(configuredClientName));
+                    }
+                    if (UseWorker)
+                    {
+                        emailFuncs.Add(() => EmailByWorker(configuredClientName));
                     }
                 }
-                else
+                if (mapiWrapper.CanLoadClient(null))
                 {
-                    returnCode = mapiWrapper.SendEmail(message);
-                    // It's difficult to get 32/64 bit right when using mapi32.dll. This can help sometimes.
-                    // https://docs.microsoft.com/en-us/office/client-developer/outlook/mapi/building-mapi-applications-on-32-bit-and-64-bit-platforms
-                    if (UseWorker && returnCode == MapiSendMailReturnCode.Failure)
+                    emailFuncs.Add(() => EmailInProc(null));
+                }
+                if (UseWorker)
+                {
+                    emailFuncs.Add(() => EmailByWorker(null));
+                }
+
+                var returnCode = MapiSendMailReturnCode.Failure;
+                foreach (var func in emailFuncs)
+                {
+                    returnCode = func();
+                    if (returnCode != MapiSendMailReturnCode.Failure)
                     {
-                        using (var worker = workerServiceFactory.Create())
-                        {
-                            returnCode = worker.Service.SendMapiEmail(message);
-                        }
+                        break;
                     }
                 }
 
