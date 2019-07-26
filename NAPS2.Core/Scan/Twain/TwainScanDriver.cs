@@ -30,7 +30,7 @@ namespace NAPS2.Scan.Twain
 
         public override bool IsSupported => PlatformCompat.System.IsTwainDriverSupported;
         
-        private bool UseWorker => ScanProfile.TwainImpl != TwainImpl.X64 && Environment.Is64BitProcess && PlatformCompat.Runtime.UseWorker;
+        private bool UseWorker => !(ScanProfile.TwainImpl == TwainImpl.X64 && Environment.Is64BitProcess) && PlatformCompat.Runtime.UseWorker;
         
         protected override List<ScanDevice> GetDeviceListInternal()
         {
