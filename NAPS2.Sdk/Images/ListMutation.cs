@@ -1,5 +1,7 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using NAPS2.Util;
 
 namespace NAPS2.Images
 {
@@ -190,6 +192,75 @@ namespace NAPS2.Images
                     int y = indexList[indexList.Count - i - 1];
                     (list[x], list[y]) = (list[y], list[x]);
                 }
+            }
+        }
+        
+        public class DeleteAll : ListMutation<T>
+        {
+            public override void Apply(List<T> list, ref ListSelection<T> selection)
+            {
+                foreach (var item in list)
+                {
+                    (item as IDisposable)?.Dispose();
+                }
+                list.Clear();
+            }
+        }
+
+        public class DeleteSelected : ListMutation<T>
+        {
+            public override void Apply(List<T> list, ref ListSelection<T> selection)
+            {
+                foreach (var item in list)
+                {
+                    (item as IDisposable)?.Dispose();
+                }
+                list.RemoveAll(selection);
+            }
+        }
+
+        public class InsertAt : ListMutation<T>
+        {
+            private readonly int index;
+            private readonly T item;
+
+            public InsertAt(int index, T item)
+            {
+                this.index = index;
+                this.item = item;
+            }
+
+            public override void Apply(List<T> list, ref ListSelection<T> selection)
+            {
+                list.Insert(index, item);
+            }
+        }
+
+        public class InsertAfter : ListMutation<T>
+        {
+            private readonly T itemToInsert;
+            private readonly T predecessor;
+
+            public InsertAfter(T itemToInsert, T predecessor)
+            {
+                this.itemToInsert = itemToInsert;
+                this.predecessor = predecessor;
+            }
+
+            public override void Apply(List<T> list, ref ListSelection<T> selection)
+            {
+                // Default to the end of the list
+                int index = list.Count;
+                // Use the index after the last image from the same source (if it exists)
+                if (predecessor != null)
+                {
+                    int lastIndex = list.IndexOf(predecessor);
+                    if (lastIndex != -1)
+                    {
+                        index = lastIndex + 1;
+                    }
+                }
+                list.Insert(index, itemToInsert);
             }
         }
     }

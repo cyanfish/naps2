@@ -7,30 +7,6 @@ namespace NAPS2.Images
 {
     public abstract class ImageListMutation : ListMutation<ScannedImage>
     {
-        public class DeleteAll : ImageListMutation
-        {
-            public override void Apply(List<ScannedImage> list, ref ListSelection<ScannedImage> selection)
-            {
-                foreach (var image in list)
-                {
-                    image.Dispose();
-                }
-                list.Clear();
-            }
-        }
-
-        public class DeleteSelected : ImageListMutation
-        {
-            public override void Apply(List<ScannedImage> list, ref ListSelection<ScannedImage> selection)
-            {
-                foreach (var image in selection)
-                {
-                    image.Dispose();
-                }
-                list.RemoveAll(selection);
-            }
-        }
-
         public class RotateFlip : ImageListMutation
         {
             private readonly ImageContext imageContext;
@@ -68,23 +44,6 @@ namespace NAPS2.Images
                 {
                     img.ResetTransforms();
                 }
-            }
-        }
-
-        public class InsertAt : ListMutation<ScannedImage>
-        {
-            private readonly int index;
-            private readonly ScannedImage scannedImage;
-
-            public InsertAt(int index, ScannedImage scannedImage)
-            {
-                this.index = index;
-                this.scannedImage = scannedImage;
-            }
-
-            public override void Apply(List<ScannedImage> list, ref ListSelection<ScannedImage> selection)
-            {
-                list.Insert(index, scannedImage);
             }
         }
     }

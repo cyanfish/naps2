@@ -629,20 +629,9 @@ namespace NAPS2.WinForms
                 {
                     lock (imageList)
                     {
-                        // Default to the end of the list
-                        int index = imageList.Images.Count;
-                        // Use the index after the last image from the same source (if it exists)
-                        if (last != null)
-                        {
-                            int lastIndex = imageList.Images.IndexOf(last);
-                            if (lastIndex != -1)
-                            {
-                                index = lastIndex + 1;
-                            }
-                        }
                         scannedImage.ThumbnailChanged += ImageThumbnailChanged;
                         scannedImage.ThumbnailInvalidated += ImageThumbnailInvalidated;
-                        imageList.Mutate(new ImageListMutation.InsertAt(index, scannedImage));
+                        imageList.Mutate(new ImageListMutation.InsertAfter(scannedImage, last));
                         last = scannedImage;
                     }
                 });
