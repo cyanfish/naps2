@@ -29,10 +29,6 @@ namespace NAPS2.Images.Storage
             }
         }
 
-        public virtual void CommitAllMetadata()
-        {
-        }
-
         protected virtual void Dispose(bool disposing)
         {
         }

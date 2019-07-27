@@ -84,7 +84,7 @@ namespace NAPS2.Images
             {
                 image.Metadata.Index = i++;
             }
-            imageContext.FileStorageManager.CommitAllMetadata();
+            imageContext.ImageMetadataFactory.CommitAllMetadata();
         }
 
         // TODO: Undo/redo etc. thoughts:

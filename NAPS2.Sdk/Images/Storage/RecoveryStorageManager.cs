@@ -57,7 +57,7 @@ namespace NAPS2.Images.Storage
 
         public string RecoveryFolderPath => FolderPath;
 
-        public override void CommitAllMetadata()
+        public void CommitAllMetadata()
         {
             lock (this)
             {
