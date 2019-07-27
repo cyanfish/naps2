@@ -145,17 +145,15 @@ namespace NAPS2.WinForms
         {
             if (lvProfiles.SelectedItems.Count > 0)
             {
-                int profileIndex = lvProfiles.SelectedItems[0].Index;
+                var originalProfile = profileManager.Profiles[lvProfiles.SelectedItems[0].Index];
                 var fedit = FormFactory.Create<FEditProfile>();
-                fedit.ScanProfile = profileManager.Profiles[profileIndex];
+                fedit.ScanProfile = originalProfile;
                 fedit.ShowDialog();
                 if (fedit.Result)
                 {
-                    profileManager.Profiles[profileIndex] = fedit.ScanProfile;
-                    profileManager.Save();
+                    profileManager.Mutate(new ListMutation<ScanProfile>.ReplaceWith(fedit.ScanProfile), ListSelection.Single(originalProfile));
                     UpdateProfiles();
                     SelectProfile(x => x == fedit.ScanProfile);
-                    lvProfiles.SelectedIndices.Add(profileIndex);
                 }
                 else
                 {
@@ -180,16 +178,19 @@ namespace NAPS2.WinForms
                     : string.Format(MiscResources.ConfirmDeleteMultipleProfiles, lvProfiles.SelectedIndices.Count);
                 if (MessageBox.Show(message, MiscResources.Delete, MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.Yes)
                 {
-                    foreach (var profile in profileManager.Profiles.ElementsAt(lvProfiles.SelectedIndices.OfType<int>()))
+                    var profilesToDelete = profileManager.Profiles.ElementsAt(lvProfiles.SelectedIndices.OfType<int>()).ToList();
+                    foreach (var profile in profilesToDelete)
                     {
                         profileNameTracker.DeletingProfile(profile.DisplayName);
                     }
-                    profileManager.Profiles.RemoveAllAt(lvProfiles.SelectedIndices.OfType<int>());
+                    // TODO: We should actually map the selection, maybe
+                    profileManager.Mutate(new ListMutation<ScanProfile>.DeleteSelected(), ListSelection.From(profilesToDelete));
                     if (profileManager.Profiles.Count == 1)
                     {
                         profileManager.DefaultProfile = profileManager.Profiles.First();
                     }
                     profileManager.Save();
+                    // TODO: Event based profile updating
                     UpdateProfiles();
                     lvProfiles_SelectedIndexChanged(null, null);
                 }
@@ -334,7 +335,7 @@ namespace NAPS2.WinForms
 
         private void AddProfile(ScanProfile profile)
         {
-            profileManager.Profiles.Add(profile);
+            profileManager.Mutate(new ListMutation<ScanProfile>.Append(profile), ListSelection.Empty<ScanProfile>());
             if (profileManager.Profiles.Count == 1)
             {
                 profileManager.DefaultProfile = profile;
@@ -458,15 +459,9 @@ namespace NAPS2.WinForms
                 {
                     index++;
                 }
-                profileManager.Profiles.RemoveAt(selectedIndex);
-                if (index > selectedIndex)
-                {
-                    index--;
-                }
-                profileManager.Profiles.Insert(index, selectedProfile);
+                profileManager.Mutate(new ListMutation<ScanProfile>.MoveTo(index), ListSelection.Single(selectedProfile));
                 UpdateProfiles();
                 SelectProfile(x => x == selectedProfile);
-                profileManager.Save();
             }
         }
 

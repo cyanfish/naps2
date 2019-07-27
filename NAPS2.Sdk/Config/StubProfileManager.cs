@@ -1,12 +1,21 @@
 ﻿using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
+using NAPS2.Images;
 using NAPS2.Scan;
 
 namespace NAPS2.Config
 {
     public class StubProfileManager : IProfileManager
     {
-        public List<ScanProfile> Profiles { get; } = new List<ScanProfile>();
+        private readonly List<ScanProfile> profiles = new List<ScanProfile>();
+
+        public ImmutableList<ScanProfile> Profiles => ImmutableList.CreateRange(profiles);
+
+        public void Mutate(ListMutation<ScanProfile> mutation, ListSelection<ScanProfile> selection)
+        {
+            mutation.Apply(profiles, ref selection);
+        }
 
         public ScanProfile DefaultProfile
         {

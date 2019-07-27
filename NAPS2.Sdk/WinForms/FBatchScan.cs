@@ -208,15 +208,15 @@ namespace NAPS2.WinForms
 
         private void btnEditProfile_Click(object sender, EventArgs e)
         {
-            if (comboProfile.SelectedItem != null)
+            var originalProfile = (ScanProfile) comboProfile.SelectedItem;
+            if (originalProfile != null)
             {
                 var fedit = FormFactory.Create<FEditProfile>();
-                fedit.ScanProfile = (ScanProfile)comboProfile.SelectedItem;
+                fedit.ScanProfile = originalProfile;
                 fedit.ShowDialog();
                 if (fedit.Result)
                 {
-                    profileManager.Profiles[comboProfile.SelectedIndex] = fedit.ScanProfile;
-                    profileManager.Save();
+                    profileManager.Mutate(new ListMutation<ScanProfile>.ReplaceWith(fedit.ScanProfile), ListSelection.Single(originalProfile));
                     userTransact.Set(c => c.BatchSettings.ProfileDisplayName = fedit.ScanProfile.DisplayName);
                     UpdateProfiles();
                 }
@@ -232,8 +232,7 @@ namespace NAPS2.WinForms
                 fedit.ShowDialog();
                 if (fedit.Result)
                 {
-                    profileManager.Profiles.Add(fedit.ScanProfile);
-                    profileManager.Save();
+                    profileManager.Mutate(new ListMutation<ScanProfile>.Append(fedit.ScanProfile), ListSelection.Empty<ScanProfile>());
                     userTransact.Set(c => c.BatchSettings.ProfileDisplayName = fedit.ScanProfile.DisplayName);
                     UpdateProfiles();
                 }

@@ -263,5 +263,55 @@ namespace NAPS2.Images
                 list.Insert(index, itemToInsert);
             }
         }
+
+        public class ReplaceWith : ListMutation<T>
+        {
+            private readonly T newItem;
+
+            public ReplaceWith(T newItem)
+            {
+                this.newItem = newItem;
+            }
+
+            public override void Apply(List<T> list, ref ListSelection<T> selection)
+            {
+                int firstIndex = -1;
+                for (int i = 0; i < list.Count; i++)
+                {
+                    if (selection.Contains(list[i]))
+                    {
+                        if (firstIndex == -1)
+                        {
+                            firstIndex = i;
+                        }
+                        list.RemoveAt(i);
+                        i--;
+                    }
+                }
+                if (firstIndex == -1)
+                {
+                    firstIndex = list.Count;
+                }
+                list.Insert(firstIndex, newItem);
+                
+                selection = ListSelection.Single(newItem);
+            }
+        }
+
+        public class Append : ListMutation<T>
+        {
+            private readonly T item;
+
+            public Append(T item)
+            {
+                this.item = item;
+            }
+
+            public override void Apply(List<T> list, ref ListSelection<T> selection)
+            {
+                list.Add(item);
+                selection = ListSelection.Single(item);
+            }
+        }
     }
 }

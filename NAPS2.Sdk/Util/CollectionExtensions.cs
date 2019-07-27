@@ -44,7 +44,7 @@ namespace NAPS2.Util
         /// </summary>
         /// <param name="list"></param>
         /// <param name="elements"></param>
-        public static void RemoveAll<T>(this IList<T> list, IEnumerable<T> elements)
+        public static void RemoveAll<T>(this List<T> list, IEnumerable<T> elements)
         {
             list.RemoveAllAt(list.IndiciesOf(elements));
         }
@@ -54,7 +54,7 @@ namespace NAPS2.Util
         /// </summary>
         /// <param name="list"></param>
         /// <param name="indices"></param>
-        public static void RemoveAllAt<T>(this IList<T> list, IEnumerable<int> indices)
+        public static void RemoveAllAt<T>(this List<T> list, IEnumerable<int> indices)
         {
             int offset = 0;
             foreach (int i in indices.OrderBy(x => x))

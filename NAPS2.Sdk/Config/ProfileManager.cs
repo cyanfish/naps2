@@ -1,6 +1,8 @@
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.IO;
 using System.Linq;
+using NAPS2.Images;
 using NAPS2.Scan;
 using NAPS2.Serialization;
 
@@ -8,9 +10,10 @@ namespace NAPS2.Config
 {
     public class ProfileManager : IProfileManager
     {
-        private readonly ISerializer<List<ScanProfile>> serializer = new XmlSerializer<List<ScanProfile>>();
-        private readonly string userPath;
-        private readonly string systemPath;
+        private readonly ISerializer<ProfileConfig> serializer = new ProfileSerializer();
+        private readonly FileConfigScope<ProfileConfig> userScope;
+        private readonly FileConfigScope<ProfileConfig> appScope;
+        private readonly bool userPathExisted;
         private readonly bool lockSystemProfiles;
         private readonly bool lockUnspecifiedDevices;
         private readonly bool noUserProfiles;
@@ -19,68 +22,116 @@ namespace NAPS2.Config
 
         public ProfileManager(string userPath, string systemPath, bool lockSystemProfiles, bool lockUnspecifiedDevices, bool noUserProfiles)
         {
-            this.userPath = userPath;
-            this.systemPath = systemPath;
+            userPathExisted = File.Exists(userPath);
+            userScope = ConfigScope.File(userPath, () => new ProfileConfig(), serializer, ConfigScopeMode.ReadWrite);
+            appScope = ConfigScope.File(systemPath, () => new ProfileConfig(), serializer, ConfigScopeMode.ReadOnly);
             this.lockSystemProfiles = lockSystemProfiles;
             this.lockUnspecifiedDevices = lockUnspecifiedDevices;
             this.noUserProfiles = noUserProfiles;
         }
 
-        public List<ScanProfile> Profiles
+        public ImmutableList<ScanProfile> Profiles
         {
             get
             {
-                if (profiles == null)
+                lock (this)
                 {
                     Load();
+                    return ImmutableList.CreateRange(profiles);
                 }
-                return profiles;
             }
+        }
+
+        public void Mutate(ListMutation<ScanProfile> mutation, ListSelection<ScanProfile> selection)
+        {
+            mutation.Apply(profiles, ref selection);
+            Save();
         }
 
         public ScanProfile DefaultProfile
         {
             get
             {
-                if (Profiles.Count == 1)
+                lock (this)
                 {
-                    return Profiles.First();
+                    Load();
+                    if (profiles.Count == 1)
+                    {
+                        return profiles.First();
+                    }
+                    return profiles.FirstOrDefault(x => x.IsDefault);
                 }
-                return Profiles.FirstOrDefault(x => x.IsDefault);
             }
             set
             {
-                foreach (ScanProfile profile in Profiles)
+                lock (this)
                 {
-                    profile.IsDefault = false;
+                    Load();
+                    foreach (var profile in profiles)
+                    {
+                        profile.IsDefault = false;
+                    }
+                    value.IsDefault = true;
+                    Save();
                 }
-                value.IsDefault = true;
             }
         }
 
         public void Load()
         {
-            if (File.Exists(userPath))
+            lock (this)
             {
-                profiles = serializer.DeserializeFromFile(userPath);
-                if (lockSystemProfiles && File.Exists(systemPath))
+                if (profiles != null)
                 {
-                    LoadLockedProfiles();
+                    return;
                 }
-            }
-            else if (File.Exists(systemPath))
-            {
-                profiles = serializer.DeserializeFromFile(systemPath);
-            }
-            else
-            {
-                profiles = new List<ScanProfile>();
+                profiles = GetProfiles();
             }
         }
 
-        private void LoadLockedProfiles()
+        public void Save()
         {
-            var systemProfiles = serializer.DeserializeFromFile(systemPath);
+            lock (this)
+            {
+                userScope.Set(c => c.Profiles = ImmutableList.CreateRange(profiles));
+            }
+        }
+
+        private List<ScanProfile> GetProfiles()
+        {
+            var userProfiles = (userScope.Get(c => c.Profiles) ?? ImmutableList<ScanProfile>.Empty).ToList();
+            var systemProfiles = (appScope.Get(c => c.Profiles) ?? ImmutableList<ScanProfile>.Empty).ToList();
+            if (noUserProfiles && systemProfiles.Count > 0)
+            {
+                // Configured by administrator to only use system profiles
+                // But the user might still be able to change devices
+                MergeUserProfilesIntoSystemProfiles(userProfiles, systemProfiles);
+                return systemProfiles;
+            }
+            if (!userPathExisted)
+            {
+                // Initialize with system profiles since it's a new user
+                return systemProfiles;
+            }
+            if (!lockSystemProfiles)
+            {
+                // Ignore the system profiles since the user already has their own
+                return userProfiles;
+            }
+            // LockSystemProfiles has been specified, so we need both user and system profiles.
+            MergeUserProfilesIntoSystemProfiles(userProfiles, systemProfiles);
+            if (userProfiles.Any(x => x.IsDefault))
+            {
+                foreach (var systemProfile in systemProfiles)
+                {
+                    systemProfile.IsDefault = false;
+                }
+            }
+            return systemProfiles.Concat(userProfiles).ToList();
+        }
+
+        private void MergeUserProfilesIntoSystemProfiles(List<ScanProfile> userProfiles, List<ScanProfile> systemProfiles)
+        {
             foreach (var systemProfile in systemProfiles)
             {
                 systemProfile.IsLocked = true;
@@ -88,7 +139,7 @@ namespace NAPS2.Config
             }
 
             var systemProfileNames = new HashSet<string>(systemProfiles.Select(x => x.DisplayName));
-            foreach (var profile in profiles)
+            foreach (var profile in userProfiles)
             {
                 if (systemProfileNames.Contains(profile.DisplayName))
                 {
@@ -102,32 +153,25 @@ namespace NAPS2.Config
                     systemProfile.IsDefault = profile.IsDefault;
 
                     // Delete the user's copy of the profile
-                    profiles.Remove(profile);
+                    userProfiles.Remove(profile);
                     // Avoid removing duplicates
                     systemProfileNames.Remove(profile.DisplayName);
                 }
             }
-            if (systemProfiles.Count > 0 && noUserProfiles)
-            {
-                profiles.Clear();
-            }
-            if (profiles.Any(x => x.IsDefault))
-            {
-                foreach (var systemProfile in systemProfiles)
-                {
-                    systemProfile.IsDefault = false;
-                }
-            }
-            profiles.InsertRange(0, systemProfiles);
         }
 
-        public void Save()
+        private class ProfileConfig
         {
-            if (profiles == null)
-            {
-                Load();
-            }
-            serializer.SerializeToFile(userPath, profiles);
+            public ImmutableList<ScanProfile> Profiles { get; set; }
+        }
+
+        private class ProfileSerializer : ISerializer<ProfileConfig>
+        {
+            private readonly XmlSerializer<ImmutableList<ScanProfile>> internalSerializer = new XmlSerializer<ImmutableList<ScanProfile>>();
+
+            public void Serialize(Stream stream, ProfileConfig obj) => internalSerializer.Serialize(stream, obj.Profiles);
+
+            public ProfileConfig Deserialize(Stream stream) => new ProfileConfig { Profiles = internalSerializer.Deserialize(stream) };
         }
     }
 }

@@ -186,7 +186,7 @@ namespace NAPS2.WinForms
 
         private void OnClosed(object sender, EventArgs eventArgs)
         {
-            if (SaveFormState)
+            if (SaveFormState && formState != null)
             {
                 var formStates = ConfigProvider.Get(c => c.FormStates);
                 formStates = formStates.RemoveAll(fs => fs.Name == Name).Add(formState);

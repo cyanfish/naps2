@@ -40,6 +40,8 @@ namespace NAPS2.Images
 
         public IEnumerable<int> ToSelectedIndices(List<T> list) => list.IndiciesOf(internalSelection);
 
+        public bool Contains(T item) => internalSelection.Contains(item);
+
         public IEnumerator<T> GetEnumerator() => internalSelection.GetEnumerator();
 
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
