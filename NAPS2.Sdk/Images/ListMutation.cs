@@ -204,6 +204,7 @@ namespace NAPS2.Images
                     (item as IDisposable)?.Dispose();
                 }
                 list.Clear();
+                selection = ListSelection.Empty<T>();
             }
         }
 
@@ -216,6 +217,7 @@ namespace NAPS2.Images
                     (item as IDisposable)?.Dispose();
                 }
                 list.RemoveAll(selection);
+                selection = ListSelection.Empty<T>();
             }
         }
 
