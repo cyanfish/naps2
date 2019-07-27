@@ -22,7 +22,7 @@
     <value>キーワード:</value>
   </data>
   <data name="label5.Text" xml:space="preserve">
-    <value>Subject:</value>
+    <value>件名:</value>
   </data>
   <data name="label3.Text" xml:space="preserve">
     <value>作成者:</value>
@@ -64,10 +64,10 @@
     <value>見せる</value>
   </data>
   <data name="lblUserPassword.Text" xml:space="preserve">
-    <value>User Password:</value>
+    <value>ユーザーのパスワード:</value>
   </data>
   <data name="lblOwnerPassword.Text" xml:space="preserve">
-    <value>Owner Password:</value>
+    <value>オーナーのパスワード:</value>
   </data>
   <data name="cbEncryptPdf.Text" xml:space="preserve">
     <value>暗号化されたPDF</value>
@@ -79,7 +79,7 @@
     <value>設定を保存する</value>
   </data>
   <data name="btnRestoreDefaults.Text" xml:space="preserve">
-    <value>Restore &amp;Defaults</value>
+    <value>&amp;標準設定に戻す</value>
   </data>
   <data name="linkPlaceholders.Text" xml:space="preserve">
     <value>プレースホルダー</value>

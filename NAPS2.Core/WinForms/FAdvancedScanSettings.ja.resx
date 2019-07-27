@@ -37,7 +37,7 @@
     <value>Offset width based on alignment (WIA)</value>
   </data>
   <data name="cbForcePageSize.Text" xml:space="preserve">
-    <value>Stretch to page size</value>
+    <value>ページの大きさに合わせる</value>
   </data>
   <data name="cbBrightnessContrastAfterScan.Text" xml:space="preserve">
     <value>スキャン後に明度とコントラストの処理を行う</value>
@@ -52,7 +52,7 @@
     <value>閾値</value>
   </data>
   <data name="label2.Text" xml:space="preserve">
-    <value>White Threshold</value>
+    <value>白さのしきい値</value>
   </data>
   <data name="cbExcludeBlankPages.Text" xml:space="preserve">
     <value>余白ページを除去</value>
@@ -61,7 +61,7 @@
     <value>空白のページ</value>
   </data>
   <data name="btnRestoreDefaults.Text" xml:space="preserve">
-    <value>Restore &amp;Defaults</value>
+    <value>&amp;標準設定に戻す</value>
   </data>
   <data name="cbAutoDeskew.Text" xml:space="preserve">
     <value>歪み補正をする</value>

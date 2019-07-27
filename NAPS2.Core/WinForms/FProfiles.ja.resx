@@ -13,13 +13,13 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ctxScan.Text" xml:space="preserve">
-    <value>Scan</value>
+    <value>スキャン</value>
   </data>
   <data name="ctxEdit.Text" xml:space="preserve">
     <value>編集</value>
   </data>
   <data name="ctxSetDefault.Text" xml:space="preserve">
-    <value>Set Default</value>
+    <value>既定の設定</value>
   </data>
   <data name="ctxCopy.Text" xml:space="preserve">
     <value>コピー</value>
@@ -40,10 +40,10 @@
     <value>&amp;削除</value>
   </data>
   <data name="btnDone.Text" xml:space="preserve">
-    <value>&amp;Done</value>
+    <value>&amp;完了しました</value>
   </data>
   <data name="btnScan.Text" xml:space="preserve">
-    <value>&amp;Scan</value>
+    <value>&amp;スキャン</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>プロファイル</value>

@@ -13,7 +13,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="lblPageTotal.Text" xml:space="preserve">
-    <value>of {0}</value>
+    <value>{0} の</value>
   </data>
   <data name="tsPrev.Text" xml:space="preserve">
     <value>前へ</value>
@@ -31,7 +31,7 @@
     <value>明度/コントラスト</value>
   </data>
   <data name="tsHueSaturation.Text" xml:space="preserve">
-    <value>Hue / Saturation</value>
+    <value>色相/彩度</value>
   </data>
   <data name="tsBlackWhite.Text" xml:space="preserve">
     <value>白黒</value>
@@ -58,7 +58,7 @@
     <value>反転</value>
   </data>
   <data name="tsDeskew.Text" xml:space="preserve">
-    <value>Deskew</value>
+    <value>傾き補正</value>
   </data>
   <data name="tsCustomRotation.Text" xml:space="preserve">
     <value>回転設定</value>

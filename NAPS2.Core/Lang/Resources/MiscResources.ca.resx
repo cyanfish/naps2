@@ -118,7 +118,7 @@
     <value>Installation Failed</value>
   </data>
   <data name="AllCount" xml:space="preserve">
-    <value>All ({0})</value>
+    <value>Tot ({0})</value>
   </data>
   <data name="SelectedCount" xml:space="preserve">
     <value>Selected ({0})</value>

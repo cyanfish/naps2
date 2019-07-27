@@ -52,7 +52,7 @@
     <value>&amp;Guardar PDF</value>
   </data>
   <data name="tsSavePDFAll.Text" xml:space="preserve">
-    <value>&amp;All ({0})</value>
+    <value>&amp;Tot ({0})</value>
   </data>
   <data name="tsSavePDFSelected.Text" xml:space="preserve">
     <value>&amp;Selected ({0})</value>
@@ -64,7 +64,7 @@
     <value>&amp;Desa les imatges</value>
   </data>
   <data name="tsSaveImagesAll.Text" xml:space="preserve">
-    <value>&amp;All ({0})</value>
+    <value>&amp;Tot ({0})</value>
   </data>
   <data name="tsSaveImagesSelected.Text" xml:space="preserve">
     <value>&amp;Selected ({0})</value>
@@ -76,7 +76,7 @@
     <value>&amp;Email PDF</value>
   </data>
   <data name="tsEmailPDFAll.Text" xml:space="preserve">
-    <value>&amp;All ({0})</value>
+    <value>&amp;Tot ({0})</value>
   </data>
   <data name="tsEmailPDFSelected.Text" xml:space="preserve">
     <value>&amp;Selected ({0})</value>
@@ -157,7 +157,7 @@
     <value>&amp;Reverse</value>
   </data>
   <data name="tsReverseAll.Text" xml:space="preserve">
-    <value>&amp;All ({0})</value>
+    <value>&amp;Tot ({0})</value>
   </data>
   <data name="tsReverseSelected.Text" xml:space="preserve">
     <value>&amp;Selected ({0})</value>

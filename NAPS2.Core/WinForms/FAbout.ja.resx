@@ -28,7 +28,7 @@
     <value>http://www.fatcow.com/free-icons</value>
   </data>
   <data name="cbCheckForUpdates.Text" xml:space="preserve">
-    <value>Check for updates</value>
+    <value>更新のチェック</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>NAPS2について</value>

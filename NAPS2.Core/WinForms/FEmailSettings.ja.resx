@@ -22,7 +22,7 @@
     <value>設定を保存する</value>
   </data>
   <data name="btnRestoreDefaults.Text" xml:space="preserve">
-    <value>Restore &amp;Defaults</value>
+    <value>&amp;標準設定に戻す</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
     <value>添付ファイルの名前:</value>
@@ -31,13 +31,13 @@
     <value>プレースホルダー</value>
   </data>
   <data name="lblProvider.Text" xml:space="preserve">
-    <value>No provider selected.</value>
+    <value>プロバイダが選択されていません。.</value>
   </data>
   <data name="btnChangeProvider.Text" xml:space="preserve">
-    <value>Change</value>
+    <value>変更</value>
   </data>
   <data name="groupBox1.Text" xml:space="preserve">
-    <value>Provider</value>
+    <value>プロバイダー</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>メールの設定</value>

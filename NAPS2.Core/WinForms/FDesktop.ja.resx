@@ -31,7 +31,7 @@
     <value>削除</value>
   </data>
   <data name="tsScan.Text" xml:space="preserve">
-    <value>Sca&amp;n</value>
+    <value>&amp;スキャン</value>
   </data>
   <data name="tsNewProfile.Text" xml:space="preserve">
     <value>&amp;新規プロファイル</value>
@@ -103,7 +103,7 @@
     <value>&amp;明度/コントラスト</value>
   </data>
   <data name="tsHueSaturation.Text" xml:space="preserve">
-    <value>&amp;Hue / Saturation</value>
+    <value>&amp;色相/彩度</value>
   </data>
   <data name="tsBlackWhite.Text" xml:space="preserve">
     <value>&amp;白黒</value>
@@ -127,7 +127,7 @@
     <value>&amp;反転</value>
   </data>
   <data name="tsDeskew.Text" xml:space="preserve">
-    <value>&amp;Deskew</value>
+    <value>&amp;傾き補正</value>
   </data>
   <data name="tsCustomRotation.Text" xml:space="preserve">
     <value>&amp;回転設定</value>
@@ -145,10 +145,10 @@
     <value>&amp;Interleave</value>
   </data>
   <data name="tsDeinterleave.Text" xml:space="preserve">
-    <value>&amp;Deinterleave</value>
+    <value>&amp;ディインターリーブ</value>
   </data>
   <data name="tsAltInterleave.Text" xml:space="preserve">
-    <value>&amp;Alternate Interleave</value>
+    <value>&amp;デインターリーブの変更</value>
   </data>
   <data name="tsAltDeinterleave.Text" xml:space="preserve">
     <value>A&amp;lternate Deinterleave</value>

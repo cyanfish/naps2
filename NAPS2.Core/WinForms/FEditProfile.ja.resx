@@ -37,7 +37,7 @@
     <value>ページサイズ:</value>
   </data>
   <data name="label5.Text" xml:space="preserve">
-    <value>Resolution:</value>
+    <value>解像度:</value>
   </data>
   <data name="label6.Text" xml:space="preserve">
     <value>明度:</value>
@@ -55,16 +55,16 @@
     <value>水平方向揃え:</value>
   </data>
   <data name="label10.Text" xml:space="preserve">
-    <value>Scale:</value>
+    <value>拡大・縮小:</value>
   </data>
   <data name="rdTWAIN.Text" xml:space="preserve">
-    <value>TWAIN Driver</value>
+    <value>TWAINドライバ</value>
   </data>
   <data name="rdWIA.Text" xml:space="preserve">
     <value>WIAドライバー</value>
   </data>
   <data name="rdSANE.Text" xml:space="preserve">
-    <value>SANE Driver</value>
+    <value>SANE ドライバ</value>
   </data>
   <data name="cbAutoSave.Text" xml:space="preserve">
     <value>自動保存を許可</value>

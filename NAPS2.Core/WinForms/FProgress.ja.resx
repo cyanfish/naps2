@@ -16,6 +16,6 @@
     <value>&amp;キャンセル</value>
   </data>
   <data name="btnRunInBG.Text" xml:space="preserve">
-    <value>Run in &amp;Background</value>
+    <value>&amp;バックグラウンドで実行</value>
   </data>
 </root>

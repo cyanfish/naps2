@@ -73,7 +73,7 @@
     <value>Auto Save Settings</value>
   </data>
   <data name="btnAdvanced.Text" xml:space="preserve">
-    <value>&amp;Advanced</value>
+    <value>&amp;Avançat</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Profile Settings</value>
