@@ -31,13 +31,14 @@ namespace NAPS2.Images
             lock (this)
             {
                 disposed = true;
-                // TODO: Does this work as intended? Since the recovery image isn't removed from the index
+                // Delete the recovery entry (if recovery is being used)
+                Metadata?.Dispose();
+                
+                // We defer deleting the actual data until all snapshots are disposed
                 if (snapshotCount != 0) return;
 
                 // Delete the image data on disk
                 BackingStorage?.Dispose();
-                // Delete the recovery entry (if recovery is being used)
-                Metadata?.Dispose();
                 if (thumbnail != null)
                 {
                     thumbnail.Dispose();
