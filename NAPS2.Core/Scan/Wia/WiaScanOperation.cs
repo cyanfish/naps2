@@ -231,9 +231,15 @@ namespace NAPS2.Scan.Wia
                     try
                     {
                         using (args.Stream)
-                        using (var output = Image.FromStream(args.Stream))
                         {
-                            ProduceImage(source, output, ref pageNumber);
+                            if (args.Stream.Length == 0)
+                            {
+                                return;
+                            }
+                            using (var output = Image.FromStream(args.Stream))
+                            {
+                                ProduceImage(source, output, ref pageNumber);
+                            }
                         }
                     }
                     catch (Exception e)
