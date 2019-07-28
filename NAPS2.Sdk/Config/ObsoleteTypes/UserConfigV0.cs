@@ -49,7 +49,7 @@ namespace NAPS2.Config.ObsoleteTypes
 
         public EmailSetup EmailSetup { get; set; }
 
-        public int ThumbnailSize { get; set; } = ThumbnailRenderer.DEFAULT_SIZE;
+        public int ThumbnailSize { get; set; } = ThumbnailSizes.DEFAULT_SIZE;
 
         public BatchSettings LastBatchSettings { get; set; }
 

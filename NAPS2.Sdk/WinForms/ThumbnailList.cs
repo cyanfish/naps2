@@ -32,7 +32,7 @@ namespace NAPS2.WinForms
             if (imageSizeField == null || performRecreateHandleMethod == null)
             {
                 // No joy, just be happy enough with 256
-                ThumbnailRenderer.MAX_SIZE = 256;
+                ThumbnailSizes.MAX_SIZE = 256;
             }
         }
 

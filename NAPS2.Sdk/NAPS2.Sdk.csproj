@@ -144,6 +144,7 @@
     <Compile Include="Images\ListSelection.cs" />
     <Compile Include="Images\Memento.cs" />
     <Compile Include="Images\Storage\NotToBeUsedStorageManager.cs" />
+    <Compile Include="Images\ThumbnailSizes.cs" />
     <Compile Include="Images\UndoStack.cs" />
     <Compile Include="Remoting\ClientServer\ClientContext.cs" />
     <Compile Include="Remoting\ClientServer\ClientContextFactory.cs" />

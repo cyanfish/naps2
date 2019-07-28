@@ -718,8 +718,8 @@ namespace NAPS2.WinForms
             ctxSelectAll.Enabled = imageList.Images.Any();
 
             // Other
-            btnZoomIn.Enabled = imageList.Images.Any() && ConfigProvider.Get(c => c.ThumbnailSize) < ThumbnailRenderer.MAX_SIZE;
-            btnZoomOut.Enabled = imageList.Images.Any() && ConfigProvider.Get(c => c.ThumbnailSize) > ThumbnailRenderer.MIN_SIZE;
+            btnZoomIn.Enabled = imageList.Images.Any() && ConfigProvider.Get(c => c.ThumbnailSize) < ThumbnailSizes.MAX_SIZE;
+            btnZoomOut.Enabled = imageList.Images.Any() && ConfigProvider.Get(c => c.ThumbnailSize) > ThumbnailSizes.MIN_SIZE;
             tsNewProfile.Enabled = !(ConfigProvider.Get(c => c.NoUserProfiles) && profileManager.Profiles.Any(x => x.IsLocked));
 
             if (PlatformCompat.Runtime.RefreshListViewAfterChange)
@@ -1461,8 +1461,8 @@ namespace NAPS2.WinForms
         private void StepThumbnailSize(double step)
         {
             int thumbnailSize = ConfigProvider.Get(c => c.ThumbnailSize);
-            thumbnailSize = (int)ThumbnailRenderer.StepNumberToSize(ThumbnailRenderer.SizeToStepNumber(thumbnailSize) + step);
-            thumbnailSize = Math.Max(Math.Min(thumbnailSize, ThumbnailRenderer.MAX_SIZE), ThumbnailRenderer.MIN_SIZE);
+            thumbnailSize = (int)ThumbnailSizes.StepNumberToSize(ThumbnailSizes.SizeToStepNumber(thumbnailSize) + step);
+            thumbnailSize = Math.Max(Math.Min(thumbnailSize, ThumbnailSizes.MAX_SIZE), ThumbnailSizes.MIN_SIZE);
             ConfigScopes.User.Set(c => c.ThumbnailSize = thumbnailSize);
             ResizeThumbnails(thumbnailSize);
         }
@@ -1501,7 +1501,7 @@ namespace NAPS2.WinForms
             const int MIN_PADDING = 6;
             const int MAX_PADDING = 66;
             // Linearly scale the padding with the thumbnail size
-            int padding = MIN_PADDING + (MAX_PADDING - MIN_PADDING) * (thumbnailSize - ThumbnailRenderer.MIN_SIZE) / (ThumbnailRenderer.MAX_SIZE - ThumbnailRenderer.MIN_SIZE);
+            int padding = MIN_PADDING + (MAX_PADDING - MIN_PADDING) * (thumbnailSize - ThumbnailSizes.MIN_SIZE) / (ThumbnailSizes.MAX_SIZE - ThumbnailSizes.MIN_SIZE);
             int spacing = thumbnailSize + padding * 2;
             SetListSpacing(thumbnailList1, spacing, spacing);
         }
