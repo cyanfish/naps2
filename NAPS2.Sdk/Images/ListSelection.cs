@@ -13,7 +13,7 @@ namespace NAPS2.Images
             return new ListSelection<T>(list);
         }
 
-        public static ListSelection<T> From<T>(params T[] items)
+        public static ListSelection<T> Of<T>(params T[] items)
         {
             return new ListSelection<T>(items);
         }

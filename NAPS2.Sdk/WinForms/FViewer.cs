@@ -397,19 +397,19 @@ namespace NAPS2.WinForms
 
         private async void tsRotateLeft_Click(object sender, EventArgs e)
         {
-            await ImageList.MutateAsync(new ImageListMutation.RotateFlip(imageContext, 270), ListSelection.From(CurrentImage));
+            await ImageList.MutateAsync(new ImageListMutation.RotateFlip(imageContext, 270), ListSelection.Of(CurrentImage));
             await UpdateImage();
         }
 
         private async void tsRotateRight_Click(object sender, EventArgs e)
         {
-            await ImageList.MutateAsync(new ImageListMutation.RotateFlip(imageContext, 90), ListSelection.From(CurrentImage));
+            await ImageList.MutateAsync(new ImageListMutation.RotateFlip(imageContext, 90), ListSelection.Of(CurrentImage));
             await UpdateImage();
         }
 
         private async void tsFlip_Click(object sender, EventArgs e)
         {
-            await ImageList.MutateAsync(new ImageListMutation.RotateFlip(imageContext, 180), ListSelection.From(CurrentImage));
+            await ImageList.MutateAsync(new ImageListMutation.RotateFlip(imageContext, 180), ListSelection.Of(CurrentImage));
             await UpdateImage();
         }
 

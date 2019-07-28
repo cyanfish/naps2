@@ -306,7 +306,7 @@ namespace NAPS2.Images
                 }
                 list.Insert(firstIndex, newItem);
                 
-                selection = ListSelection.From(newItem);
+                selection = ListSelection.Of(newItem);
             }
         }
 
@@ -322,7 +322,7 @@ namespace NAPS2.Images
             public override void Apply(List<T> list, ref ListSelection<T> selection)
             {
                 list.Add(item);
-                selection = ListSelection.From(item);
+                selection = ListSelection.Of(item);
             }
         }
     }
