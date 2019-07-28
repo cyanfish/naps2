@@ -22,6 +22,8 @@ namespace NAPS2.Scan.Internal
 
         public IScanBridge Create(ScanOptions options)
         {
+            // TODO: The server process may need to use a worker, so we probably need to add a separate layer
+            // TODO: Or, perhaps, with a bit of care we can reuse the IScanBridge interface/factory 
             if (!string.IsNullOrEmpty(options.NetworkOptions?.Ip) && options.NetworkOptions?.Port != null)
             {
                 // The physical scanner is connected to a different computer, so we connect to a NAPS2 server process over the network

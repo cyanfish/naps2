@@ -146,6 +146,7 @@ namespace NAPS2.Scan.Internal
 
             if (options.AutoDeskew)
             {
+                // TODO: Deskew should be local.
                 var op = new DeskewOperation();
                 if (op.Start(new[] { scannedImage }, new DeskewParams { ThumbnailSize = options.ThumbnailSize }))
                 {
