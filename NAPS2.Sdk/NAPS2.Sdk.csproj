@@ -362,6 +362,7 @@
     <Compile Include="Util\WebClientExtensions.cs" />
     <Compile Include="Util\Win32Window.cs" />
     <Compile Include="Logging\WindowsEventLogger.cs" />
+    <Compile Include="WinForms\SelectableListView.cs" />
     <Compile Include="WinForms\StubDialogHelper.cs" />
     <Compile Include="WinForms\UserActions.cs" />
     <Compile Include="WinForms\WinFormsDialogHelper.cs" />

@@ -64,7 +64,6 @@ namespace NAPS2.WinForms
             this.lvProfiles.UseCompatibleStateImageBehavior = false;
             this.lvProfiles.ItemActivate += new System.EventHandler(this.lvProfiles_ItemActivate);
             this.lvProfiles.ItemDrag += new System.Windows.Forms.ItemDragEventHandler(this.lvProfiles_ItemDrag);
-            this.lvProfiles.SelectedIndexChanged += new System.EventHandler(this.lvProfiles_SelectedIndexChanged);
             this.lvProfiles.DragDrop += new System.Windows.Forms.DragEventHandler(this.lvProfiles_DragDrop);
             this.lvProfiles.DragEnter += new System.Windows.Forms.DragEventHandler(this.lvProfiles_DragEnter);
             this.lvProfiles.DragOver += new System.Windows.Forms.DragEventHandler(this.lvProfiles_DragOver);
