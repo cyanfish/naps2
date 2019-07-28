@@ -12,6 +12,11 @@ namespace NAPS2.Images
         {
             return new ListSelection<T>(list);
         }
+
+        public static ListSelection<T> From<T>(params T[] items)
+        {
+            return new ListSelection<T>(items);
+        }
         
         public static ListSelection<T> FromSelectedIndices<T>(IList<T> list, IEnumerable<int> selectedIndices)
         {
@@ -21,11 +26,6 @@ namespace NAPS2.Images
         public static ListSelection<T> Empty<T>()
         {
             return new ListSelection<T>(Enumerable.Empty<T>());
-        }
-
-        public static ListSelection<T> Single<T>(T item)
-        {
-            return new ListSelection<T>(Enumerable.Repeat(item, 1));
         }
     }
 

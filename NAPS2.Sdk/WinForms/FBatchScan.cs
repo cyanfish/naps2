@@ -216,7 +216,7 @@ namespace NAPS2.WinForms
                 fedit.ShowDialog();
                 if (fedit.Result)
                 {
-                    profileManager.Mutate(new ListMutation<ScanProfile>.ReplaceWith(fedit.ScanProfile), ListSelection.Single(originalProfile));
+                    profileManager.Mutate(new ListMutation<ScanProfile>.ReplaceWith(fedit.ScanProfile), ListSelection.From(originalProfile));
                     userTransact.Set(c => c.BatchSettings.ProfileDisplayName = fedit.ScanProfile.DisplayName);
                     UpdateProfiles();
                 }

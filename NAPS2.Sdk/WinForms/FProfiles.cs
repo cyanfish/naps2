@@ -71,7 +71,7 @@ namespace NAPS2.WinForms
             var defaultProfile = profileManager.Profiles.FirstOrDefault(x => x.IsDefault);
             if (defaultProfile != null)
             {
-                selectableListView.Selection = ListSelection.Single(defaultProfile);
+                selectableListView.Selection = ListSelection.From(defaultProfile);
             }
 
             if (NoUserProfiles)
