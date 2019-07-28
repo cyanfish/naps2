@@ -41,6 +41,8 @@ namespace NAPS2.Scan
             return profile;
         }
 
+        public override string ToString() => DisplayName;
+
         public int? Version { get; set; }
 
         [XmlIgnore]
