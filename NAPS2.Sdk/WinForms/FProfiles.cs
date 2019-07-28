@@ -10,16 +10,17 @@ using NAPS2.Logging;
 using NAPS2.Platform;
 using NAPS2.Scan;
 using NAPS2.Images;
+using NAPS2.Serialization;
 using NAPS2.Util;
 
 namespace NAPS2.WinForms
 {
-    public partial class FProfiles : FormBase
+    public partial class FProfiles : FormBase, ISelectable<ScanProfile>
     {
         private const int DEFAULT_PROFILE_ICON_ID = 3;
         private const int LOCK_PROFILE_ICON_ID = 4;
         private const int DEFAULT_LOCK_PROFILE_ICON_ID = 5;
-        
+
         private readonly IconButtonSizer iconButtonSizer;
         private readonly IScanPerformer scanPerformer;
         private readonly ProfileNameTracker profileNameTracker;
@@ -32,17 +33,21 @@ namespace NAPS2.WinForms
             this.profileNameTracker = profileNameTracker;
             this.profileManager = profileManager;
             InitializeComponent();
+
+            profileManager.ProfilesUpdated += ProfilesUpdated;
         }
 
         public Action<ScannedImage> ImageCallback { get; set; }
+
+        public ListSelection<ScanProfile> Selection { get; set; }
 
         private ScanProfile SelectedProfile
         {
             get
             {
-                if (lvProfiles.SelectedIndices.Count == 1)
+                if (Selection.Count == 1)
                 {
-                    return profileManager.Profiles[lvProfiles.SelectedIndices[0]];
+                    return Selection.Single();
                 }
                 return null;
             }
@@ -50,10 +55,7 @@ namespace NAPS2.WinForms
 
         private bool SelectionLocked
         {
-            get
-            {
-                return profileManager.Profiles.ElementsAt(lvProfiles.SelectedIndices.OfType<int>()).Any(x => x.IsLocked);
-            }
+            get { return Selection.Any(x => x.IsLocked); }
         }
 
         private bool NoUserProfiles => ConfigProvider.Get(c => c.NoUserProfiles) && profileManager.Profiles.Any(x => x.IsLocked);
@@ -64,8 +66,12 @@ namespace NAPS2.WinForms
             btnAdd.Enabled = !NoUserProfiles;
             btnEdit.Enabled = false;
             btnDelete.Enabled = false;
-            UpdateProfiles();
-            SelectProfile(x => x.IsDefault);
+            ReloadProfiles();
+            var defaultProfile = profileManager.Profiles.FirstOrDefault(x => x.IsDefault);
+            if (defaultProfile != null)
+            {
+                Selection = ListSelection.Single(defaultProfile);
+            }
 
             if (NoUserProfiles)
             {
@@ -81,16 +87,16 @@ namespace NAPS2.WinForms
 
             var lm = new LayoutManager(this)
                 .Bind(lvProfiles)
-                    .WidthToForm()
-                    .HeightToForm()
+                .WidthToForm()
+                .HeightToForm()
                 .Bind(btnAdd, btnEdit, btnDelete, btnDone)
-                    .BottomToForm()
+                .BottomToForm()
                 .Bind(btnDone, btnScan)
-                    .RightToForm()
+                .RightToForm()
                 .Bind(btnEdit)
-                    .LeftTo(() => btnAdd.Right)
+                .LeftTo(() => btnAdd.Right)
                 .Bind(btnDelete)
-                    .LeftTo(() => btnEdit.Right)
+                .LeftTo(() => btnEdit.Right)
                 .Activate();
 
             iconButtonSizer.WidthOffset = 20;
@@ -101,32 +107,37 @@ namespace NAPS2.WinForms
             lm.UpdateLayout();
         }
 
-        private void UpdateProfiles()
+        private void ProfilesUpdated(object sender, EventArgs e)
+        {
+            var selection = Selection;
+            ReloadProfiles();
+            Selection = selection;
+            for (int i = 0; i < lvProfiles.Items.Count; i++)
+            {
+                lvProfiles.Items[i].Selected = selection.Contains(lvProfiles.Items[i].Tag);
+            }
+            
+            // If we only have one profile, make it the default
+            var profiles = profileManager.Profiles;
+            if (profiles.Count == 1 && !profiles[0].IsDefault)
+            {
+                profileManager.DefaultProfile = profiles.Single();
+            }
+            UpdateEnabledState();
+        }
+
+        private void ReloadProfiles()
         {
             lvProfiles.Items.Clear();
             foreach (var profile in profileManager.Profiles)
             {
-                lvProfiles.Items.Add(profile.DisplayName,
+                var listViewItem = lvProfiles.Items.Add(profile.DisplayName,
                     profile.IsDefault
                         ? profile.IsLocked ? DEFAULT_LOCK_PROFILE_ICON_ID : DEFAULT_PROFILE_ICON_ID
-                        : profile.IsLocked ? LOCK_PROFILE_ICON_ID : profile.IconID);
-            }
-        }
-
-        private void SelectProfile(Func<ScanProfile, bool> pred)
-        {
-            int i = 0;
-            foreach (var profile in profileManager.Profiles)
-            {
-                if (pred(profile))
-                {
-                    lvProfiles.Items[i].Selected = true;
-                }
-                i++;
-            }
-            if (profileManager.Profiles.Count == 1)
-            {
-                lvProfiles.Items[0].Selected = true;
+                        : profile.IsLocked
+                            ? LOCK_PROFILE_ICON_ID
+                            : profile.IconID);
+                listViewItem.Tag = profile;
             }
         }
 
@@ -137,62 +148,51 @@ namespace NAPS2.WinForms
             fedit.ShowDialog();
             if (fedit.Result)
             {
-                AddProfile(fedit.ScanProfile);
+                profileManager.Mutate(new ListMutation<ScanProfile>.Append(fedit.ScanProfile), this);
             }
         }
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            if (lvProfiles.SelectedItems.Count > 0)
+            var originalProfile = SelectedProfile;
+            if (originalProfile != null)
             {
-                var originalProfile = profileManager.Profiles[lvProfiles.SelectedItems[0].Index];
                 var fedit = FormFactory.Create<FEditProfile>();
                 fedit.ScanProfile = originalProfile;
                 fedit.ShowDialog();
                 if (fedit.Result)
                 {
-                    profileManager.Mutate(new ListMutation<ScanProfile>.ReplaceWith(fedit.ScanProfile), ListSelection.Single(originalProfile));
-                    UpdateProfiles();
-                    SelectProfile(x => x == fedit.ScanProfile);
-                }
-                else
-                {
-                    // Rollback
-                    profileManager.Load();
+                    profileManager.Mutate(new ListMutation<ScanProfile>.ReplaceWith(fedit.ScanProfile), this);
                 }
             }
         }
 
         private void lvProfiles_SelectedIndexChanged(object sender, EventArgs e)
         {
-            btnEdit.Enabled = lvProfiles.SelectedItems.Count == 1;
-            btnDelete.Enabled = lvProfiles.SelectedItems.Count > 0 && !SelectionLocked;
+            UpdateEnabledState();
+            Selection = ListSelection.From(lvProfiles.SelectedItems.Cast<ListViewItem>().Select(x => (ScanProfile) x.Tag));
+        }
+
+        private void UpdateEnabledState()
+        {
+            btnEdit.Enabled = lvProfiles.SelectedIndices.Count == 1;
+            btnDelete.Enabled = lvProfiles.SelectedIndices.Count > 0 && !SelectionLocked;
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            if (lvProfiles.SelectedItems.Count > 0 && !SelectionLocked)
+            if (lvProfiles.SelectedIndices.Count > 0 && !SelectionLocked)
             {
                 string message = lvProfiles.SelectedIndices.Count == 1
-                    ? string.Format(MiscResources.ConfirmDeleteSingleProfile, profileManager.Profiles[lvProfiles.SelectedIndices[0]].DisplayName)
+                    ? string.Format(MiscResources.ConfirmDeleteSingleProfile, SelectedProfile.DisplayName)
                     : string.Format(MiscResources.ConfirmDeleteMultipleProfiles, lvProfiles.SelectedIndices.Count);
                 if (MessageBox.Show(message, MiscResources.Delete, MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.Yes)
                 {
-                    var profilesToDelete = profileManager.Profiles.ElementsAt(lvProfiles.SelectedIndices.OfType<int>()).ToList();
-                    foreach (var profile in profilesToDelete)
+                    foreach (var profile in Selection)
                     {
                         profileNameTracker.DeletingProfile(profile.DisplayName);
                     }
-                    // TODO: We should actually map the selection, maybe
-                    profileManager.Mutate(new ListMutation<ScanProfile>.DeleteSelected(), ListSelection.From(profilesToDelete));
-                    if (profileManager.Profiles.Count == 1)
-                    {
-                        profileManager.DefaultProfile = profileManager.Profiles.First();
-                    }
-                    profileManager.Save();
-                    // TODO: Event based profile updating
-                    UpdateProfiles();
-                    lvProfiles_SelectedIndexChanged(null, null);
+                    profileManager.Mutate(new ListMutation<ScanProfile>.DeleteSelected(), this);
                 }
             }
         }
@@ -247,9 +247,6 @@ namespace NAPS2.WinForms
                 }
                 profileManager.Profiles.Add(editSettingsForm.ScanProfile);
                 profileManager.DefaultProfile = editSettingsForm.ScanProfile;
-                profileManager.Save();
-                UpdateProfiles();
-                lvProfiles.SelectedIndices.Add(0);
             }
             if (SelectedProfile == null)
             {
@@ -259,12 +256,8 @@ namespace NAPS2.WinForms
             }
             if (profileManager.DefaultProfile == null)
             {
-                var profile = SelectedProfile;
-                profileManager.DefaultProfile = profile;
-                UpdateProfiles();
-                SelectProfile(x => x == profile);
+                profileManager.DefaultProfile = SelectedProfile;
             }
-            profileManager.Save();
             var source = await scanPerformer.PerformScan(SelectedProfile, DefaultScanParams(), Handle);
             await source.ForEach(ImageCallback);
             Activate();
@@ -273,7 +266,7 @@ namespace NAPS2.WinForms
         private void contextMenuStrip_Opening(object sender, System.ComponentModel.CancelEventArgs e)
         {
             var ido = Clipboard.GetDataObject();
-            var canPaste = ido != null && ido.GetDataPresent(typeof (DirectProfileTransfer).FullName);
+            var canPaste = ido != null && ido.GetDataPresent(typeof(DirectProfileTransfer).FullName);
             if (SelectedProfile == null)
             {
                 if (canPaste)
@@ -326,31 +319,13 @@ namespace NAPS2.WinForms
             if (SelectedProfile != null)
             {
                 profileManager.DefaultProfile = SelectedProfile;
-                profileManager.Save();
-
-                UpdateProfiles();
-                SelectProfile(x => x.IsDefault);
             }
-        }
-
-        private void AddProfile(ScanProfile profile)
-        {
-            profileManager.Mutate(new ListMutation<ScanProfile>.Append(profile), ListSelection.Empty<ScanProfile>());
-            if (profileManager.Profiles.Count == 1)
-            {
-                profileManager.DefaultProfile = profile;
-            }
-            UpdateProfiles();
-            SelectProfile(x => x == profile);
-            profileManager.Save();
         }
 
         private IDataObject GetSelectedProfileDataObject()
         {
             IDataObject ido = new DataObject();
-            int profileIndex = lvProfiles.SelectedItems[0].Index;
-            var profile = profileManager.Profiles[profileIndex];
-            ido.SetData(typeof(DirectProfileTransfer), new DirectProfileTransfer(profile));
+            ido.SetData(typeof(DirectProfileTransfer), new DirectProfileTransfer(SelectedProfile));
             return ido;
         }
 
@@ -372,8 +347,8 @@ namespace NAPS2.WinForms
             }
             if (ido.GetDataPresent(typeof(DirectProfileTransfer).FullName))
             {
-                var data = (DirectProfileTransfer)ido.GetData(typeof(DirectProfileTransfer).FullName);
-                AddProfile(data.ScanProfile);
+                var data = (DirectProfileTransfer) ido.GetData(typeof(DirectProfileTransfer).FullName);
+                profileManager.Mutate(new ListMutation<ScanProfile>.Append(data.ScanProfileXml.FromXml<ScanProfile>()), this);
             }
         }
 
@@ -400,7 +375,7 @@ namespace NAPS2.WinForms
             {
                 if (e.Data.GetDataPresent(typeof(DirectProfileTransfer).FullName))
                 {
-                    var data = (DirectProfileTransfer)e.Data.GetData(typeof(DirectProfileTransfer).FullName);
+                    var data = (DirectProfileTransfer) e.Data.GetData(typeof(DirectProfileTransfer).FullName);
                     e.Effect = data.ProcessID == Process.GetCurrentProcess().Id
                         ? data.Locked
                             ? DragDropEffects.None
@@ -419,7 +394,7 @@ namespace NAPS2.WinForms
             // Receive drop data
             if (e.Data.GetDataPresent(typeof(DirectProfileTransfer).FullName))
             {
-                var data = (DirectProfileTransfer)e.Data.GetData(typeof(DirectProfileTransfer).FullName);
+                var data = (DirectProfileTransfer) e.Data.GetData(typeof(DirectProfileTransfer).FullName);
                 if (data.ProcessID == Process.GetCurrentProcess().Id)
                 {
                     DragMoveProfile(e);
@@ -428,7 +403,7 @@ namespace NAPS2.WinForms
                 {
                     if (!NoUserProfiles)
                     {
-                        AddProfile(data.ScanProfile);
+                        profileManager.Mutate(new ListMutation<ScanProfile>.Append(data.ScanProfileXml.FromXml<ScanProfile>()), this);
                     }
                 }
             }
@@ -442,15 +417,14 @@ namespace NAPS2.WinForms
 
         private void DragMoveProfile(DragEventArgs e)
         {
-            if (lvProfiles.SelectedItems.Count == 0)
+            var selectedProfile = SelectedProfile;
+            if (selectedProfile == null)
             {
                 return;
             }
             int index = GetDragIndex(e);
             if (index != -1)
             {
-                var selectedIndex = lvProfiles.SelectedItems[0].Index;
-                var selectedProfile = profileManager.Profiles[selectedIndex];
                 if (selectedProfile.IsLocked)
                 {
                     return;
@@ -459,9 +433,7 @@ namespace NAPS2.WinForms
                 {
                     index++;
                 }
-                profileManager.Mutate(new ListMutation<ScanProfile>.MoveTo(index), ListSelection.Single(selectedProfile));
-                UpdateProfiles();
-                SelectProfile(x => x == selectedProfile);
+                profileManager.Mutate(new ListMutation<ScanProfile>.MoveTo(index), this);
             }
         }
 

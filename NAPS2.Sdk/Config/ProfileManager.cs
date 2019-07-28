@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.IO;
@@ -30,6 +31,8 @@ namespace NAPS2.Config
             this.noUserProfiles = noUserProfiles;
         }
 
+        public event EventHandler ProfilesUpdated;
+
         public ImmutableList<ScanProfile> Profiles
         {
             get
@@ -40,6 +43,12 @@ namespace NAPS2.Config
                     return ImmutableList.CreateRange(profiles);
                 }
             }
+        }
+
+        public void Mutate(ListMutation<ScanProfile> mutation, ISelectable<ScanProfile> selectable)
+        {
+            mutation.Apply(profiles, selectable);
+            Save();
         }
 
         public void Mutate(ListMutation<ScanProfile> mutation, ListSelection<ScanProfile> selection)
@@ -95,6 +104,7 @@ namespace NAPS2.Config
             {
                 userScope.Set(c => c.Profiles = ImmutableList.CreateRange(profiles));
             }
+            ProfilesUpdated?.Invoke(this, EventArgs.Empty);
         }
 
         private List<ScanProfile> GetProfiles()

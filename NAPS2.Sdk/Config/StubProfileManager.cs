@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using NAPS2.Images;
@@ -12,9 +13,16 @@ namespace NAPS2.Config
 
         public ImmutableList<ScanProfile> Profiles => ImmutableList.CreateRange(profiles);
 
+        public void Mutate(ListMutation<ScanProfile> mutation, ISelectable<ScanProfile> selectable)
+        {
+            mutation.Apply(profiles, selectable);
+            Save();
+        }
+
         public void Mutate(ListMutation<ScanProfile> mutation, ListSelection<ScanProfile> selection)
         {
             mutation.Apply(profiles, ref selection);
+            Save();
         }
 
         public ScanProfile DefaultProfile
@@ -27,6 +35,7 @@ namespace NAPS2.Config
                     p.IsDefault = false;
                 }
                 value.IsDefault = true;
+                Save();
             }
         }
 
@@ -36,6 +45,9 @@ namespace NAPS2.Config
 
         public void Save()
         {
+            ProfilesUpdated?.Invoke(this, EventArgs.Empty);
         }
+
+        public event EventHandler ProfilesUpdated;
     }
 }

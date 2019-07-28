@@ -13,7 +13,7 @@ namespace NAPS2.Images
             return new ListSelection<T>(list);
         }
         
-        public static ListSelection<T> FromSelectedIndices<T>(List<T> list, IEnumerable<int> selectedIndices)
+        public static ListSelection<T> FromSelectedIndices<T>(IList<T> list, IEnumerable<int> selectedIndices)
         {
             return new ListSelection<T>(list.ElementsAt(selectedIndices));
         }
@@ -40,6 +40,8 @@ namespace NAPS2.Images
 
         public IEnumerable<int> ToSelectedIndices(List<T> list) => list.IndiciesOf(internalSelection);
 
+        public int Count => internalSelection.Count;
+        
         public bool Contains(T item) => internalSelection.Contains(item);
 
         public IEnumerator<T> GetEnumerator() => internalSelection.GetEnumerator();
@@ -66,5 +68,21 @@ namespace NAPS2.Images
         public static bool operator ==(ListSelection<T> left, ListSelection<T> right) => Equals(left, right);
 
         public static bool operator !=(ListSelection<T> left, ListSelection<T> right) => !Equals(left, right);
+    }
+
+    public interface ISelectable<T>
+    {
+        ListSelection<T> Selection { get; set; }
+    }
+    
+    public class Selectable<T>
+    {
+        private ListSelection<T> selection = ListSelection.Empty<T>();
+
+        public ListSelection<T> Selection
+        {
+            get => selection;
+            set => selection = value ?? throw new ArgumentNullException(nameof(value));
+        }
     }
 }

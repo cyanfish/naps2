@@ -7,6 +7,16 @@ namespace NAPS2.Images
 {
     public abstract class ListMutation<T>
     {
+        public void Apply(List<T> list, ISelectable<T> selectable)
+        {
+            var selection = selectable.Selection;
+            Apply(list, ref selection);
+            if (selection != selectable.Selection)
+            {
+                selectable.Selection = selection;
+            }
+        }
+        
         public abstract void Apply(List<T> list, ref ListSelection<T> selection);
 
         public class MoveDown : ListMutation<T>

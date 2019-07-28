@@ -73,7 +73,7 @@ namespace NAPS2.Images
             }
             else
             {
-                mutation.Apply(Images, ref selection); 
+                mutation.Apply(Images, ref selection);
             }
         }
 

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using NAPS2.Scan;
+using NAPS2.Serialization;
 
 namespace NAPS2.ImportExport
 {
@@ -10,18 +11,18 @@ namespace NAPS2.ImportExport
         public DirectProfileTransfer(ScanProfile profile)
         {
             ProcessID = Process.GetCurrentProcess().Id;
-            ScanProfile = profile.Clone();
+            ScanProfileXml = profile.ToXml();
 
-            Locked = ScanProfile.IsLocked;
+            Locked = profile.IsLocked;
 
-            ScanProfile.IsDefault = false;
-            ScanProfile.IsLocked = false;
-            ScanProfile.IsDeviceLocked = false;
+            profile.IsDefault = false;
+            profile.IsLocked = false;
+            profile.IsDeviceLocked = false;
         }
 
         public int ProcessID { get; }
 
-        public ScanProfile ScanProfile { get; }
+        public string ScanProfileXml { get; }
 
         public bool Locked { get; }
     }
