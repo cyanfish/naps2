@@ -23,7 +23,6 @@ using PdfSharp.Pdf.Security;
 
 namespace NAPS2.ImportExport.Pdf
 {
-    // TODO: Avoid Task.Result use here (and elsewhere)
     public class PdfSharpExporter : PdfExporter
     {
         static PdfSharpExporter()
@@ -53,7 +52,7 @@ namespace NAPS2.ImportExport.Pdf
 
         public override async Task<bool> Export(string path, ICollection<ScannedImage.Snapshot> snapshots, ConfigProvider<PdfSettings> settings, OcrContext ocrContext, ProgressHandler progressCallback, CancellationToken cancelToken)
         {
-            return await Task.Run(() =>
+            return await Task.Run(async () =>
             {
                 var compat = settings.Get(c => c.Compat);
 
@@ -107,8 +106,8 @@ namespace NAPS2.ImportExport.Pdf
                 }
 
                 bool result = ocrEngine != null
-                    ? BuildDocumentWithOcr(progressCallback, cancelToken, document, compat, snapshots, ocrContext, ocrEngine)
-                    : BuildDocumentWithoutOcr(progressCallback, cancelToken, document, compat, snapshots);
+                    ? await BuildDocumentWithOcr(progressCallback, cancelToken, document, compat, snapshots, ocrContext, ocrEngine)
+                    : await BuildDocumentWithoutOcr(progressCallback, cancelToken, document, compat, snapshots);
                 if (!result)
                 {
                     return false;
@@ -136,7 +135,7 @@ namespace NAPS2.ImportExport.Pdf
             });
         }
 
-        private bool BuildDocumentWithoutOcr(ProgressHandler progressCallback, CancellationToken cancelToken, PdfDocument document, PdfCompat compat, ICollection<ScannedImage.Snapshot> snapshots)
+        private async Task<bool> BuildDocumentWithoutOcr(ProgressHandler progressCallback, CancellationToken cancelToken, PdfDocument document, PdfCompat compat, ICollection<ScannedImage.Snapshot> snapshots)
         {
             int progress = 0;
             progressCallback(progress, snapshots.Count);
@@ -148,7 +147,7 @@ namespace NAPS2.ImportExport.Pdf
                 }
                 else
                 {
-                    using Stream stream = memoryStreamRenderer.Render(snapshot).Result;
+                    using Stream stream = await memoryStreamRenderer.Render(snapshot);
                     using var img = XImage.FromStream(stream);
                     if (cancelToken.IsCancellationRequested)
                     {
@@ -166,7 +165,7 @@ namespace NAPS2.ImportExport.Pdf
 
         private static bool IsPdfFile(FileStorage fileStorage) => Path.GetExtension(fileStorage.FullPath)?.Equals(".pdf", StringComparison.InvariantCultureIgnoreCase) ?? false;
 
-        private bool BuildDocumentWithOcr(ProgressHandler progressCallback, CancellationToken cancelToken, PdfDocument document, PdfCompat compat, ICollection<ScannedImage.Snapshot> snapshots, OcrContext ocrContext, IOcrEngine ocrEngine)
+        private async Task<bool> BuildDocumentWithOcr(ProgressHandler progressCallback, CancellationToken cancelToken, PdfDocument document, PdfCompat compat, ICollection<ScannedImage.Snapshot> snapshots, OcrContext ocrContext, IOcrEngine ocrEngine)
         {
             int progress = 0;
             progressCallback(progress, snapshots.Count);
@@ -201,7 +200,7 @@ namespace NAPS2.ImportExport.Pdf
 
                 string tempImageFilePath = Path.Combine(Paths.Temp, Path.GetRandomFileName());
 
-                using (Stream stream = memoryStreamRenderer.Render(snapshot).Result)
+                using (Stream stream = await memoryStreamRenderer.Render(snapshot))
                 using (var img = XImage.FromStream(stream))
                 {
                     if (cancelToken.IsCancellationRequested)
