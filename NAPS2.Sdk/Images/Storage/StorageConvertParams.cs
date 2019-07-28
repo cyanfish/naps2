@@ -10,7 +10,6 @@ namespace NAPS2.Images.Storage
 
         public int LossyQuality { get; set; }
 
-        // TODO: Move bit depth out of Scan namespace?
-        public ScanBitDepth BitDepth { get; set; }
+        public BitDepth BitDepth { get; set; }
     }
 }

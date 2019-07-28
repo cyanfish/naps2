@@ -3,18 +3,13 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
-using NAPS2.Images.Storage;
-using NAPS2.Images.Transforms;
-using NAPS2.Ocr;
-using NAPS2.Operation;
 using NAPS2.Scan;
-using NAPS2.Util;
 
 namespace NAPS2.Images
 {
     public class ScannedImageHelper
     {
-        public static string SaveSmallestBitmap(Bitmap sourceImage, ScanBitDepth bitDepth, bool highQuality, int quality, out ImageFormat imageFormat)
+        public static string SaveSmallestBitmap(Bitmap sourceImage, BitDepth bitDepth, bool highQuality, int quality, out ImageFormat imageFormat)
         {
             // Store the image in as little space as possible
             if (sourceImage.PixelFormat == PixelFormat.Format1bppIndexed)
@@ -23,7 +18,7 @@ namespace NAPS2.Images
                 imageFormat = ImageFormat.Png;
                 return EncodePng(sourceImage);
             }
-            else if (bitDepth == ScanBitDepth.BlackWhite)
+            else if (bitDepth == BitDepth.BlackAndWhite)
             {
                 // Convert to a 1-bit bitmap before saving to help compression
                 // This is lossless and takes up minimal storage (best of both worlds), so highQuality is irrelevant

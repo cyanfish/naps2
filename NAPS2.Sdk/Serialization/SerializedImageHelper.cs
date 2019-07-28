@@ -88,7 +88,11 @@ namespace NAPS2.Serialization
                 storage = new MemoryStreamStorage(memoryStream);
             }
 
-            var backingStorage = imageContext.ConvertToBacking(storage, new StorageConvertParams());
+            var backingStorage = imageContext.ConvertToBacking(storage, new StorageConvertParams
+            {
+                Lossless = serializedImage.Metadata.Lossless,
+                BitDepth = (BitDepth) serializedImage.Metadata.BitDepth
+            });
             var metadata = imageContext.ImageMetadataFactory.CreateMetadata(backingStorage);
             metadata.TransformList = serializedImage.Metadata.TransformListXml.FromXml<List<Transform>>();
             metadata.BitDepth = (BitDepth) serializedImage.Metadata.BitDepth;

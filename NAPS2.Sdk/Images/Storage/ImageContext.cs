@@ -177,10 +177,9 @@ namespace NAPS2.Images.Storage
 
         public ScannedImage CreateScannedImage(IStorage storage, BitDepth bitDepth, bool highQuality, int quality)
         {
-            var convertParams = new StorageConvertParams { Lossless = highQuality, LossyQuality = quality };
+            var convertParams = new StorageConvertParams { Lossless = highQuality, LossyQuality = quality, BitDepth = bitDepth };
             var backingStorage = ConvertToBacking(storage, convertParams);
             var metadata = ImageMetadataFactory.CreateMetadata(backingStorage);
-            // TODO: Is this stuff really needed in metadata?
             metadata.BitDepth = bitDepth;
             metadata.Lossless = highQuality;
             metadata.Commit();
