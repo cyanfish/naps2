@@ -1,5 +1,6 @@
 ﻿using Moq;
 using NAPS2.Config;
+using NAPS2.Images;
 using NAPS2.ImportExport;
 using NAPS2.Scan;
 using NAPS2.Scan.Batch;
@@ -28,14 +29,15 @@ namespace NAPS2.Sdk.Tests.WinForms
                     ProfileDisplayName = "test_name"
                 }
             });
-            ProfileManager.Profiles.Add(new ScanProfile
+            ProfileManager.Mutate(new ListMutation<ScanProfile>.Append(new ScanProfile
             {
                 DisplayName = "bad_name",
                 IsDefault = true
-            });
-            ProfileManager.Profiles.Add(new ScanProfile {
+            }), ListSelection.Empty<ScanProfile>());
+            ProfileManager.Mutate(new ListMutation<ScanProfile>.Append(new ScanProfile
+            {
                 DisplayName = "test_name"
-            });
+            }), ListSelection.Empty<ScanProfile>());
             ctx.Form.Show();
             try
             {

@@ -540,9 +540,8 @@ namespace NAPS2.WinForms
                     return;
                 }
                 profile = editSettingsForm.ScanProfile;
-                profileManager.Profiles.Add(profile);
+                profileManager.Mutate(new ListMutation<ScanProfile>.Append(profile), ListSelection.Empty<ScanProfile>());
                 profileManager.DefaultProfile = profile;
-                profileManager.Save();
 
                 UpdateScanButton();
             }
@@ -582,9 +581,8 @@ namespace NAPS2.WinForms
             {
                 return;
             }
-            profileManager.Profiles.Add(editSettingsForm.ScanProfile);
+            profileManager.Mutate(new ListMutation<ScanProfile>.Append(editSettingsForm.ScanProfile), ListSelection.Empty<ScanProfile>());
             profileManager.DefaultProfile = editSettingsForm.ScanProfile;
-            profileManager.Save();
 
             UpdateScanButton();
 
@@ -756,7 +754,6 @@ namespace NAPS2.WinForms
                 item.Click += async (sender, args) =>
                 {
                     profileManager.DefaultProfile = profile;
-                    profileManager.Save();
 
                     UpdateScanButton();
 

@@ -232,7 +232,7 @@ namespace NAPS2.WinForms
                 {
                     return;
                 }
-                profileManager.Profiles.Add(editSettingsForm.ScanProfile);
+                profileManager.Mutate(new ListMutation<ScanProfile>.Append(editSettingsForm.ScanProfile), ListSelection.Empty<ScanProfile>());
                 profileManager.DefaultProfile = editSettingsForm.ScanProfile;
             }
             if (SelectedProfile == null)
