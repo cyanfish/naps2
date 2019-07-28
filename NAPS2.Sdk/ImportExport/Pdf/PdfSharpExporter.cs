@@ -241,7 +241,7 @@ namespace NAPS2.ImportExport.Pdf
                         Interlocked.Increment(ref progress);
                         progressCallback(progress, snapshots.Count);
                     }
-                }, TaskContinuationOptions.ExecuteSynchronously);
+                }, TaskContinuationOptions.ExecuteSynchronously).AssertNoAwait();
                 // Record the page and task for step 2
                 ocrPairs.Add((page, ocrTask));
             }
