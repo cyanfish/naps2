@@ -159,8 +159,8 @@ namespace NAPS2.Scan
                 },
                 NetworkOptions =
                 {
-                    Ip = scanProfile.ProxyConfig.Ip,
-                    Port = scanProfile.ProxyConfig.Port
+                    Ip = scanProfile.ProxyConfig?.Ip,
+                    Port = scanProfile.ProxyConfig?.Port
                 },
                 Brightness = scanProfile.Brightness,
                 Contrast = scanProfile.Contrast,
