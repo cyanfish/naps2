@@ -79,10 +79,17 @@ namespace NAPS2.ImportExport.Email.Mapi
                 var returnCode = MapiSendMailReturnCode.Failure;
                 foreach (var func in emailFuncs)
                 {
-                    returnCode = func();
-                    if (returnCode != MapiSendMailReturnCode.Failure)
+                    try
                     {
-                        break;
+                        returnCode = func();
+                        if (returnCode != MapiSendMailReturnCode.Failure)
+                        {
+                            break;
+                        }
+                    }
+                    catch (Exception)
+                    {
+                        // Should only happen for DLLs that can't be loaded by the worker
                     }
                 }
 
