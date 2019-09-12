@@ -25,6 +25,7 @@ namespace NAPS2.Config
             EmailSetup = new EmailSetup();
             BatchSettings = new BatchSettings();
             KeyboardShortcuts = new KeyboardShortcuts();
+            SslSetup = new SslSetup();
         }
 
         [Common]
@@ -176,6 +177,10 @@ namespace NAPS2.Config
         [Child]
         [Common]
         public KeyboardShortcuts KeyboardShortcuts { get; set; }
+        
+        [Child]
+        [Common]
+        public SslSetup SslSetup { get; set; }
 
         [Common]
         public ScanProfile DefaultProfileSettings { get; set; }

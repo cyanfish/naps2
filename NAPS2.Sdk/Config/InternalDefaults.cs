@@ -16,7 +16,6 @@ namespace NAPS2.Config
 {
     public static class InternalDefaults
     {
-        // TODO: Test that no properties are null
         public static CommonConfig GetCommonConfig() =>
             new CommonConfig
             {
@@ -183,6 +182,11 @@ namespace NAPS2.Config
                     About = "F1",
                     ZoomIn = "Ctrl+Oemplus",
                     ZoomOut = "Ctrl+OemMinus"
+                },
+                SslSetup = new SslSetup
+                {
+                    WorkerCert = "",
+                    WorkerPrivateKey = ""
                 },
                 DefaultProfileSettings = new ScanProfile { Version = ScanProfile.CURRENT_VERSION }
             };

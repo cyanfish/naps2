@@ -33,7 +33,7 @@ namespace NAPS2.Sdk.Tests.Config
         public void InternalDefaultsNotNullProps()
         {
             var config = InternalDefaults.GetCommonConfig();
-            AssertPropNullOrNotNull(config, false);
+            AssertPropNullOrNotNull(config, false, "");
         }
 
         [Fact]
@@ -42,19 +42,19 @@ namespace NAPS2.Sdk.Tests.Config
             var config = new CommonConfig();
             Assert.NotNull(config.Version);
             config.Version = null;
-            AssertPropNullOrNotNull(config, true);
+            AssertPropNullOrNotNull(config, true, "");
         }
 
-        private static void AssertPropNullOrNotNull(object config, bool shouldBeNull)
+        private static void AssertPropNullOrNotNull(object config, bool shouldBeNull, string path)
         {
-            Assert.NotNull(config);
+            Assert.True(config != null, path);
             foreach (var prop in config.GetType().GetProperties())
             {
                 var value = prop.GetValue(config);
                 if (prop.CustomAttributes.Any(x => typeof(ChildAttribute).IsAssignableFrom(x.AttributeType)))
                 {
                     // Child, so recurse
-                    AssertPropNullOrNotNull(value, shouldBeNull);
+                    AssertPropNullOrNotNull(value, shouldBeNull, $"{path}{prop.Name}.");
                 }
                 else
                 {

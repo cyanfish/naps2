@@ -137,6 +137,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ClientCreds.resx</DependentUpon>
     </Compile>
+    <Compile Include="Config\SslSetup.cs" />
     <Compile Include="Images\HoughLineDeskewer.cs" />
     <Compile Include="Images\Deskewer.cs" />
     <Compile Include="Images\ImageListMutation.cs" />
