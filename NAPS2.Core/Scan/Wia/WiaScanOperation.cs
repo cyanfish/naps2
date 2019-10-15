@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
@@ -12,6 +12,7 @@ using NAPS2.Scan.Exceptions;
 using NAPS2.Scan.Images;
 using NAPS2.Scan.Wia.Native;
 using NAPS2.Util;
+using NAPS2.WinForms;
 using NAPS2.Worker;
 
 namespace NAPS2.Scan.Wia
@@ -165,7 +166,8 @@ namespace NAPS2.Scan.Wia
         {
             // WIA 2.0 doesn't support normal transfers with native UI.
             // Instead we need to have it write the scans to a set of files and load those.
-
+            if (DialogParent == null)
+                DialogParent = new BackgroundForm();
             var hwnd = Invoker.Current.InvokeGet(() => DialogParent.Handle);
             var paths = deviceManager.PromptForImage(hwnd, device);
 
