@@ -75,6 +75,8 @@ namespace NAPS2.Scan
         // TODO: Also try and get some tests going for OcrRequestQueue, that class is fragile.
         public bool OcrInBackground { get; set; }
 
+        // TODO: Get rid of this (and on ScanParams). Rather than OcrInBackground and OcrCancelToken we should have
+        // TODO: some kind of event trigger when a scanned image is available and start OCR there.
         public CancellationToken OcrCancelToken { get; set; }
     }
 
