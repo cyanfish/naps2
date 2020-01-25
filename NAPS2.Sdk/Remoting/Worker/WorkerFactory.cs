@@ -3,12 +3,10 @@ using System.Collections.Concurrent;
 using System.Diagnostics;
 using System.IO;
 using System.Reflection;
-using System.Text;
 using System.Threading.Tasks;
-using NAPS2.Config;
+using GrpcDotNetNamedPipes;
 using NAPS2.Images.Storage;
 using NAPS2.Platform;
-using NAPS2.Util;
 
 namespace NAPS2.Remoting.Worker
 {
@@ -26,6 +24,7 @@ namespace NAPS2.Remoting.Worker
         }
 
         public const string WORKER_EXE_NAME = "NAPS2.Worker.exe";
+        public const string PIPE_NAME_FORMAT = "NAPS2.Worker/{0}";
 
         public static readonly string[] SearchDirs =
         {
@@ -34,8 +33,6 @@ namespace NAPS2.Remoting.Worker
         };
 
         private readonly ImageContext imageContext;
-        private readonly ConfigProvider<CommonConfig> configProvider;
-        private readonly ConfigScopes configScopes;
 
         private string workerExePath;
         private BlockingCollection<WorkerContext> workerQueue;
@@ -43,13 +40,6 @@ namespace NAPS2.Remoting.Worker
         public WorkerFactory(ImageContext imageContext)
         {
             this.imageContext = imageContext;
-        }
-
-        public WorkerFactory(ImageContext imageContext, ConfigProvider<CommonConfig> configProvider, ConfigScopes configScopes)
-        {
-            this.imageContext = imageContext;
-            this.configProvider = configProvider;
-            this.configScopes = configScopes;
         }
 
         private string WorkerExePath
@@ -67,11 +57,12 @@ namespace NAPS2.Remoting.Worker
                         }
                     }
                 }
+
                 return workerExePath;
             }
         }
 
-        private (Process, int, string, string) StartWorkerProcess()
+        private Process StartWorkerProcess()
         {
             var parentId = Process.GetCurrentProcess().Id;
             var proc = Process.Start(new ProcessStartInfo
@@ -101,44 +92,27 @@ namespace NAPS2.Remoting.Worker
                 }
             }
 
-            var (cert, privateKey) = GetOrCreateCertAndPrivateKey();
-            WriteEncodedString(proc.StandardInput, cert);
-            WriteEncodedString(proc.StandardInput, privateKey);
-            var portStr = proc.StandardOutput.ReadLine();
-            if (portStr?.Trim() == "error")
+            var readyStr = proc.StandardOutput.ReadLine();
+            if (readyStr?.Trim() == "error")
             {
                 throw new InvalidOperationException("The worker could not start due to an error. See the worker logs.");
             }
-            int port = int.Parse(portStr ?? throw new Exception("Could not read worker port"));
 
-            return (proc, port, cert, privateKey);
-        }
-
-        private (string cert, string privateKey) GetOrCreateCertAndPrivateKey()
-        {
-            string cert = configProvider?.Get(c => c.SslSetup.WorkerCert);
-            string privateKey = configProvider?.Get(c => c.SslSetup.WorkerPrivateKey);
-            if (string.IsNullOrEmpty(cert) || string.IsNullOrEmpty(privateKey))
+            if (readyStr?.Trim() != "ready")
             {
-                (cert, privateKey) = SslHelper.GenerateRootCertificate();
-                configScopes?.User.Set(c => c.SslSetup.WorkerCert = cert);
-                configScopes?.User.Set(c => c.SslSetup.WorkerPrivateKey = privateKey);
+                throw new InvalidOperationException("Unknown problem starting the worker.");
             }
-            return (cert, privateKey);
-        }
 
-        private void WriteEncodedString(StreamWriter streamWriter, string value)
-        {
-            streamWriter.WriteLine(Convert.ToBase64String(Encoding.UTF8.GetBytes(value)));
+            return proc;
         }
 
         private void StartWorkerService()
         {
             Task.Run(() =>
             {
-                var (proc, port, cert, privateKey) = StartWorkerProcess();
-                var creds = RemotingHelper.GetClientCreds(cert, privateKey);
-                workerQueue.Add(new WorkerContext { Service = new WorkerServiceAdapter(port, creds), Process = proc });
+                var proc = StartWorkerProcess();
+                var channel = new NamedPipeChannel(".", string.Format(PIPE_NAME_FORMAT, proc.Id));
+                workerQueue.Add(new WorkerContext {Service = new WorkerServiceAdapter(channel), Process = proc});
             });
         }
 
@@ -154,6 +128,7 @@ namespace NAPS2.Remoting.Worker
             {
                 return;
             }
+
             if (workerQueue == null)
             {
                 workerQueue = new BlockingCollection<WorkerContext>();

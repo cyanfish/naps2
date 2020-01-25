@@ -1,50 +1,47 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Grpc.Core;
+using GrpcDotNetNamedPipes;
 using Moq;
 using NAPS2.Images;
 using NAPS2.Images.Storage;
 using NAPS2.ImportExport.Email.Mapi;
-using NAPS2.Remoting;
 using NAPS2.Remoting.Worker;
 using NAPS2.Scan;
 using NAPS2.Scan.Exceptions;
 using NAPS2.Scan.Internal;
-using NAPS2.Util;
 using Xunit;
 
 namespace NAPS2.Sdk.Tests.Worker
 {
     public class WorkerChannelTests : ContextualTexts
     {
-        private Channel Start(IRemoteScanController remoteScanController = null, ThumbnailRenderer thumbnailRenderer = null, IMapiWrapper mapiWrapper = null, ServerCredentials serverCreds = null, ChannelCredentials clientCreds = null)
+        private Channel Start(IRemoteScanController remoteScanController = null, ThumbnailRenderer thumbnailRenderer = null, IMapiWrapper mapiWrapper = null)
         {
-            Server server = new Server
-            {
-                Services = { WorkerService.BindService(new WorkerServiceImpl(ImageContext, remoteScanController, thumbnailRenderer, mapiWrapper)) },
-                Ports = { new ServerPort("localhost", 0, serverCreds ?? ServerCredentials.Insecure) }
-            };
+            string pipeName = $"WorkerNamedPipeTests/{Guid.NewGuid()}";
+            NamedPipeServer server = new NamedPipeServer(pipeName);
+            WorkerService.BindService(server.ServiceBinder, new WorkerServiceImpl(ImageContext, remoteScanController, thumbnailRenderer, mapiWrapper));
             server.Start();
-            var client = new WorkerServiceAdapter(server.Ports.First().BoundPort, clientCreds ?? ChannelCredentials.Insecure);
+            var client = new WorkerServiceAdapter(new NamedPipeChannel(".", pipeName));
             return new Channel
             {
                 Server = server,
                 Client = client
             };
+
         }
 
-        [Fact]
-        public void SslCreds()
-        {
-            var (cert, privateKey) = SslHelper.GenerateRootCertificate();
-            var serverCreds = RemotingHelper.GetServerCreds(cert, privateKey);
-            var clientCreds = RemotingHelper.GetClientCreds(cert, privateKey);
-            using var channel = Start(serverCreds: serverCreds, clientCreds: clientCreds);
-            channel.Client.Init(null);
-        }
+        // TODO: Move this to a client/server test
+        // [Fact]
+        // public void SslCreds()
+        // {
+        //     var (cert, privateKey) = SslHelper.GenerateRootCertificate();
+        //     var serverCreds = RemotingHelper.GetServerCreds(cert, privateKey);
+        //     var clientCreds = RemotingHelper.GetClientCreds(cert, privateKey);
+        //     using var channel = Start(serverCreds: serverCreds, clientCreds: clientCreds);
+        //     channel.Client.Init(null);
+        // }
 
         [Fact]
         public void Init()
@@ -170,13 +167,13 @@ namespace NAPS2.Sdk.Tests.Worker
 
         private class Channel : IDisposable
         {
-            public Server Server { get; set; }
+            public NamedPipeServer  Server { get; set; }
 
             public WorkerServiceAdapter Client { get; set; }
 
             public void Dispose()
             {
-                Server.KillAsync();
+                Server.Kill();
             }
         }
     }

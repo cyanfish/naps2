@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\packages\Grpc.Tools.1.19.0\build\Grpc.Tools.props" Condition="Exists('..\packages\Grpc.Tools.1.19.0\build\Grpc.Tools.props')" />
+  <Import Project="..\packages\Grpc.Tools.2.26.0\build\Grpc.Tools.props" Condition="Exists('..\packages\Grpc.Tools.2.26.0\build\Grpc.Tools.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -77,14 +77,17 @@
     <Reference Include="BouncyCastle.Crypto, Version=1.8.4.0, Culture=neutral, PublicKeyToken=0e99375e54769942">
       <HintPath>..\packages\BouncyCastle.1.8.4\lib\BouncyCastle.Crypto.dll</HintPath>
     </Reference>
-    <Reference Include="Google.Protobuf, Version=3.7.0.0, Culture=neutral, PublicKeyToken=a7d26565bac4d604, processorArchitecture=MSIL">
-      <HintPath>..\packages\Google.Protobuf.3.7.0\lib\net45\Google.Protobuf.dll</HintPath>
+    <Reference Include="Google.Protobuf, Version=3.11.2.0, Culture=neutral, PublicKeyToken=a7d26565bac4d604">
+      <HintPath>..\packages\Google.Protobuf.3.11.2\lib\net45\Google.Protobuf.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="Grpc.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=d754f35622e28bad, processorArchitecture=MSIL">
-      <HintPath>..\packages\Grpc.Core.1.19.0\lib\net45\Grpc.Core.dll</HintPath>
+    <Reference Include="Grpc.Core.Api, Version=2.0.0.0, Culture=neutral, PublicKeyToken=d754f35622e28bad">
+      <HintPath>..\packages\Grpc.Core.Api.2.26.0\lib\net45\Grpc.Core.Api.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="Grpc.Core.Api, Version=0.0.0.0, Culture=neutral, PublicKeyToken=d754f35622e28bad, processorArchitecture=MSIL">
-      <HintPath>..\packages\Grpc.Core.Api.1.19.0\lib\net45\Grpc.Core.Api.dll</HintPath>
+    <Reference Include="GrpcDotNetNamedPipes, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\packages\GrpcDotNetNamedPipes.1.0.1\lib\net46\GrpcDotNetNamedPipes.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="MailKit, Version=1.22.0.0, Culture=neutral, PublicKeyToken=4e064fe7c44a8f1b, processorArchitecture=MSIL">
       <HintPath>..\packages\MailKit.1.22.0\lib\net451\MailKit.dll</HintPath>
@@ -93,6 +96,7 @@
     <Reference Include="MimeKit, Version=1.22.0.0, Culture=neutral, PublicKeyToken=bede1c8a46c66814, processorArchitecture=MSIL">
       <HintPath>..\packages\MimeKit.1.22.0\lib\net451\MimeKit.dll</HintPath>
     </Reference>
+    <Reference Include="mscorlib" />
     <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -104,6 +108,10 @@
       <HintPath>..\NAPS2.Setup\lib\PdfSharp.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51">
+      <HintPath>..\packages\System.Buffers.4.4.0\lib\netstandard2.0\System.Buffers.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Collections.Immutable, Version=1.2.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Collections.Immutable.1.5.0\lib\netstandard2.0\System.Collections.Immutable.dll</HintPath>
     </Reference>
@@ -114,7 +122,20 @@
       <HintPath>..\packages\System.Interactive.Async.3.2.0\lib\net46\System.Interactive.Async.dll</HintPath>
     </Reference>
     <Reference Include="System.IO.Compression.FileSystem" />
+    <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51">
+      <HintPath>..\packages\System.Memory.4.5.3\lib\netstandard2.0\System.Memory.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Net" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <HintPath>..\packages\System.Numerics.Vectors.4.4.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.2\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.ServiceModel" />
@@ -6340,9 +6361,8 @@
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
-    <Error Condition="!Exists('..\packages\Grpc.Core.1.19.0\build\net45\Grpc.Core.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Grpc.Core.1.19.0\build\net45\Grpc.Core.targets'))" />
-    <Error Condition="!Exists('..\packages\Grpc.Tools.1.19.0\build\Grpc.Tools.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Grpc.Tools.1.19.0\build\Grpc.Tools.props'))" />
-    <Error Condition="!Exists('..\packages\Grpc.Tools.1.19.0\build\Grpc.Tools.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Grpc.Tools.1.19.0\build\Grpc.Tools.targets'))" />
+    <Error Condition="!Exists('..\packages\Grpc.Tools.2.26.0\build\Grpc.Tools.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Grpc.Tools.2.26.0\build\Grpc.Tools.props'))" />
+    <Error Condition="!Exists('..\packages\Grpc.Tools.2.26.0\build\Grpc.Tools.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Grpc.Tools.2.26.0\build\Grpc.Tools.targets'))" />
   </Target>
   <PropertyGroup>
     <PreBuildEvent Condition="'$(OS)' == 'Windows_NT'">If Not Exist $(ProjectDir)google.credentials.json (
@@ -6360,6 +6380,5 @@ echo { client_id: null, client_secret: null } &gt; $(ProjectDir)microsoft.creden
   </Target>
   -->
   <Import Project="..\NAPS2.Setup\CommonTargets.targets" />
-  <Import Project="..\packages\Grpc.Core.1.19.0\build\net45\Grpc.Core.targets" Condition="Exists('..\packages\Grpc.Core.1.19.0\build\net45\Grpc.Core.targets')" />
-  <Import Project="..\packages\Grpc.Tools.1.19.0\build\Grpc.Tools.targets" Condition="Exists('..\packages\Grpc.Tools.1.19.0\build\Grpc.Tools.targets')" />
+  <Import Project="..\packages\Grpc.Tools.2.26.0\build\Grpc.Tools.targets" Condition="Exists('..\packages\Grpc.Tools.2.26.0\build\Grpc.Tools.targets')" />
 </Project>

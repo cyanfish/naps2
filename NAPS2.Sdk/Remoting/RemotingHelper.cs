@@ -94,10 +94,11 @@ namespace NAPS2.Remoting
         public static ChannelCredentials GetClientCreds(string cert, string privateKey) =>
             new SslCredentials(cert, new KeyCertificatePair(cert, privateKey));
 
-        public static ServerCredentials GetServerCreds(string cert, string privateKey) =>
-            new SslServerCredentials(
-                new[] { new KeyCertificatePair(cert, privateKey) },
-                cert,
-                SslClientCertificateRequestType.RequestAndRequireAndVerify);
+        // TODO: Use this for client/server
+        // public static ServerCredentials GetServerCreds(string cert, string privateKey) =>
+        //     new SslServerCredentials(
+        //         new[] { new KeyCertificatePair(cert, privateKey) },
+        //         cert,
+        //         SslClientCertificateRequestType.RequestAndRequireAndVerify);
     }
 }

@@ -18,9 +18,9 @@ namespace NAPS2.Remoting.Worker
     {
         private readonly WorkerService.WorkerServiceClient client;
 
-        public WorkerServiceAdapter(int port, ChannelCredentials creds)
+        public WorkerServiceAdapter(CallInvoker callInvoker)
         {
-            client = new WorkerService.WorkerServiceClient(new Channel("localhost", port, creds));
+            client = new WorkerService.WorkerServiceClient(callInvoker);
         }
 
         public void Init(string recoveryFolderPath)

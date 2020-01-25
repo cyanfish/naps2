@@ -42,9 +42,6 @@
     <Reference Include="CommandLine, Version=1.9.71.2, Culture=neutral, PublicKeyToken=de6f01bd326f8c32, processorArchitecture=MSIL">
       <HintPath>..\packages\CommandLineParser.1.9.71\lib\net45\CommandLine.dll</HintPath>
     </Reference>
-    <Reference Include="Grpc.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=d754f35622e28bad, processorArchitecture=MSIL">
-      <HintPath>..\packages\Grpc.Core.1.19.0\lib\net45\Grpc.Core.dll</HintPath>
-    </Reference>
     <Reference Include="Grpc.Core.Api, Version=0.0.0.0, Culture=neutral, PublicKeyToken=d754f35622e28bad, processorArchitecture=MSIL">
       <HintPath>..\packages\Grpc.Core.Api.1.19.0\lib\net45\Grpc.Core.Api.dll</HintPath>
     </Reference>
@@ -103,7 +100,6 @@
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
-    <Error Condition="!Exists('..\packages\Grpc.Core.1.19.0\build\net45\Grpc.Core.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Grpc.Core.1.19.0\build\net45\Grpc.Core.targets'))" />
   </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
@@ -113,5 +109,4 @@
   </Target>
   -->
   <Import Project="..\NAPS2.Setup\CommonTargets.targets" />
-  <Import Project="..\packages\Grpc.Core.1.19.0\build\net45\Grpc.Core.targets" Condition="Exists('..\packages\Grpc.Core.1.19.0\build\net45\Grpc.Core.targets')" />
 </Project>

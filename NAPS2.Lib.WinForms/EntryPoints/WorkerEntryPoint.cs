@@ -1,15 +1,13 @@
 ﻿using System;
 using System.Diagnostics;
-using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Grpc.Core;
+using GrpcDotNetNamedPipes;
 using NAPS2.Images.Storage;
 using NAPS2.Logging;
 using NAPS2.Modules;
-using NAPS2.Remoting;
 using NAPS2.Remoting.Worker;
 using NAPS2.Util;
 using NAPS2.WinForms;
@@ -54,31 +52,18 @@ namespace NAPS2.EntryPoints
                 var form = new BackgroundForm();
                 Invoker.Current = form;
 
-                // We share the TLS public and private key between worker and parent;
-                // this is equivalent to using a symmetric key. The only point is to
-                // prevent other applications sniffing the TCP traffic, since there's
-                // already full trust between worker and parent, and stdin/stdout are
-                // secure channels for key sharing.
-                var cert = ReadEncodedString();
-                var privateKey = ReadEncodedString();
-                var creds = RemotingHelper.GetServerCreds(cert, privateKey);
-
                 // Connect to the main NAPS2 process and listen for assigned work
-                Server server = new Server
-                {
-                    Services = { WorkerService.BindService(kernel.Get<WorkerServiceImpl>()) },
-                    Ports = { new ServerPort("localhost", 0, creds) }
-                };
+                var server = new NamedPipeServer(string.Format(WorkerFactory.PIPE_NAME_FORMAT, Process.GetCurrentProcess().Id));
+                WorkerService.BindService(server.ServiceBinder, kernel.Get<WorkerServiceImpl>());
                 server.Start();
                 try
                 {
-                    // Send the port to stdout
-                    Console.WriteLine(server.Ports.First().BoundPort);
+                    Console.WriteLine(@"ready");
                     Application.Run(form);
                 }
                 finally
                 {
-                    server.ShutdownAsync().Wait();
+                    server.Kill();
                 }
             }
             catch (Exception ex)
