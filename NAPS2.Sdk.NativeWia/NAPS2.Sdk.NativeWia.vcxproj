@@ -106,7 +106,7 @@
       <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;shlwapi.lib;wiaguid.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>cp "$(OutputPath)NAPS2.WIA.dll" "$(ProjectDir)..\NAPS2.Setup\lib\dbg\win32\"</Command>
+      <Command>copy "$(OutputPath)NAPS2.WIA.dll" "$(ProjectDir)..\NAPS2.Setup\lib\dbg\win32\"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -125,7 +125,7 @@
       <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;shlwapi.lib;wiaguid.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>cp "$(OutputPath)NAPS2.WIA.dll" "$(ProjectDir)..\NAPS2.Setup\lib\dbg\win64\"</Command>
+      <Command>copy "$(OutputPath)NAPS2.WIA.dll" "$(ProjectDir)..\NAPS2.Setup\lib\dbg\win64\"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -148,7 +148,7 @@
       <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;shlwapi.lib;wiaguid.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>cp "$(OutputPath)NAPS2.WIA.dll" "$(ProjectDir)..\NAPS2.Setup\lib\"</Command>
+      <Command>copy "$(OutputPath)NAPS2.WIA.dll" "$(ProjectDir)..\NAPS2.Setup\lib\"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -171,7 +171,7 @@
       <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;shlwapi.lib;wiaguid.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>cp "$(OutputPath)NAPS2.WIA.dll" "$(ProjectDir)..\NAPS2.Setup\lib\64\"</Command>
+      <Command>copy "$(OutputPath)NAPS2.WIA.dll" "$(ProjectDir)..\NAPS2.Setup\lib\64\"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
