@@ -86,16 +86,19 @@
         <!-- Dependencies -->
         <File Source="..\NAPS2.App.WinForms\bin\InstallerMSI\NAPS2.Lib.dll" />
         <File Source="..\NAPS2.App.WinForms\bin\InstallerMSI\NAPS2.Sdk.dll" />
-        <File Source="..\NAPS2.App.WinForms\bin\InstallerMSI\CommandLine.dll" />
-        <File Source="..\NAPS2.App.WinForms\bin\InstallerMSI\ICSharpCode.SharpZipLib.dll" />
-        <File Source="..\NAPS2.App.WinForms\bin\InstallerMSI\Grpc.Core.dll" />
+        <File Source="..\NAPS2.App.Console\bin\InstallerMSI\CommandLine.dll" />
+        <File Source="..\NAPS2.App.WinForms\bin\InstallerMSI\Google.Protobuf.dll" />
         <File Source="..\NAPS2.App.WinForms\bin\InstallerMSI\Grpc.Core.Api.dll" />
+        <File Source="..\NAPS2.App.WinForms\bin\InstallerMSI\GrpcDotNetNamedPipes.dll" />
         <File Source="..\NAPS2.App.WinForms\bin\InstallerMSI\MimeKit.dll" />
         <File Source="..\NAPS2.App.WinForms\bin\InstallerMSI\Newtonsoft.Json.dll" />
         <File Source="..\NAPS2.App.WinForms\bin\InstallerMSI\Ninject.dll" />
         <File Source="..\NAPS2.App.WinForms\bin\InstallerMSI\NLog.dll" />
         <File Source="..\NAPS2.App.WinForms\bin\InstallerMSI\NTwain.dll" />
         <File Source="..\NAPS2.App.WinForms\bin\InstallerMSI\PdfSharp.dll" />
+        <File Source="..\NAPS2.App.WinForms\bin\InstallerMSI\System.Buffers.dll" />
+        <File Source="..\NAPS2.App.WinForms\bin\InstallerMSI\System.Memory.dll" />
+        <File Source="..\NAPS2.App.WinForms\bin\InstallerMSI\System.Runtime.CompilerServices.Unsafe.dll" />
         <File Source="..\NAPS2.App.WinForms\bin\InstallerMSI\System.ValueTuple.dll" />
         <File Source="..\NAPS2.App.WinForms\bin\InstallerMSI\zxing.dll" />
       </Component>
