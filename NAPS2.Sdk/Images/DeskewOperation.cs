@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading;
+﻿using System.Collections.Generic;
 using NAPS2.Images.Storage;
 using NAPS2.Images.Transforms;
 using NAPS2.Lang.Resources;
@@ -38,28 +36,16 @@ namespace NAPS2.Images
                 MaxProgress = images.Count
             };
 
-            RunAsync(() =>
+            RunAsync(async () =>
             {
-                var memoryLimitingSem = new Semaphore(4, 4);
-                Pipeline.For(images).StepParallel(img =>
+                return await Pipeline.For(images, CancelToken).RunParallel(async img =>
                 {
-                    if (CancelToken.IsCancellationRequested)
-                    {
-                        return null;
-                    }
-                    memoryLimitingSem.WaitOne();
-                    var bitmap = imageRenderer.Render(img).Result;
+                    var bitmap = await imageRenderer.Render(img);
                     try
                     {
-                        if (CancelToken.IsCancellationRequested)
-                        {
-                            return null;
-                        }
+                        CancelToken.ThrowIfCancellationRequested();
                         var transform = deskewer.GetDeskewTransform(bitmap);
-                        if (CancelToken.IsCancellationRequested)
-                        {
-                            return null;
-                        }
+                        CancelToken.ThrowIfCancellationRequested();
                         bitmap = imageContext.PerformTransform(bitmap, transform);
                         var thumbnail = deskewParams.ThumbnailSize.HasValue
                             ? imageContext.PerformTransform(bitmap, new ThumbnailTransform(deskewParams.ThumbnailSize.Value))
@@ -72,23 +58,17 @@ namespace NAPS2.Images
                                 img.SetThumbnail(thumbnail);
                             }
                         }
-
-                        // The final pipeline step is pretty fast, so updating progress here is more accurate
                         lock (this)
                         {
                             Status.CurrentProgress += 1;
                         }
                         InvokeStatusChanged();
-
-                        return Tuple.Create(img, transform);
                     }
                     finally
                     {
                         bitmap.Dispose();
-                        memoryLimitingSem.Release();
                     }
-                }).Run();
-                return !CancelToken.IsCancellationRequested;
+                });
             });
 
             return true;
