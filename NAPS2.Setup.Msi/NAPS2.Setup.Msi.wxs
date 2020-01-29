@@ -116,7 +116,6 @@
       <Component Id="DepsWin64" Guid="9F734E22-7835-43B9-8B58-E10EF6484DD7">
         <File Source="..\NAPS2.Setup\lib\win64\NAPS2.WIA.dll" Id="naps2wia_win64" />
         <File Source="..\NAPS2.Setup\lib\win64\twaindsm.dll" Id="twaindsm_win64" />
-        <File Source="..\NAPS2.Setup\lib\win64\pdfium.dll" Id="pdfium_win64" />
       </Component>
     </DirectoryRef>
 
