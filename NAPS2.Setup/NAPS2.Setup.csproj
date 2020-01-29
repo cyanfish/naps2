@@ -1,103 +1,25 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{AC67D0DB-F980-456C-9E91-654CB4989736}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>NAPS2.Setup2</RootNamespace>
-    <AssemblyName>NAPS2.Setup2</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <Deterministic>true</Deterministic>
-    <TargetFrameworkProfile />
+    <TargetFramework>net461</TargetFramework>
     <LangVersion>8</LangVersion>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <Prefer32Bit>false</Prefer32Bit>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <Prefer32Bit>false</Prefer32Bit>
-  </PropertyGroup>
+
   <ItemGroup>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Build-Test.ps1" />
-    <None Include="CommonTargets.targets" />
-    <None Include="LanguageComponents.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>LanguageComponents.wxs</LastGenOutput>
-    </None>
-    <None Include="LanguageComponents.wxs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>LanguageComponents.tt</DependentUpon>
-    </None>
-    <None Include="lib\linux\libgrpc_csharp_ext.x64.so" />
-    <None Include="lib\osx\libgrpc_csharp_ext.x64.dylib" />
-    <None Include="lib\win64\NAPS2.WIA.dll" />
-    <None Include="lib\win64\twaindsm.dll" />
-    <None Include="lib\dbg\win64\NAPS2.WIA.dll" />
-    <None Include="lib\dbg\win32\NAPS2.WIA.dll" />
-    <None Include="lib\linux\libpdfium.so" />
-    <None Include="lib\win32\NAPS2.WIA.dll" />
-    <None Include="lib\NTwain.dll" />
-    <None Include="lib\osx\libpdfium.dylib" />
-    <None Include="lib\PdfSharp.dll" />
-    <None Include="lib\win32\twaindsm.dll" />
-    <None Include="license.rtf" />
-    <None Include="naps2.ps1" />
-    <None Include="ps.bat" />
-    <None Include="Publish-NAPS2.ps1" />
-    <None Include="setup.iss" />
-    <None Include="setup.languagefiles.iss">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>setup.languagefiles.tt</DependentUpon>
-    </None>
-    <None Include="setup.languagefiles.tt">
+    <None Update="setup.languagefiles.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>setup.languagefiles.iss</LastGenOutput>
     </None>
-    <None Include="Test-Lang.ps1" />
-    <None Include="Update-Resources.ps1" />
-    <None Include="Update-Templates.ps1" />
-    <None Include="WIA-Build.ps1" />
+    <None Update="setup.languagefiles.iss">
+      <DependentUpon>setup.languagefiles.tt</DependentUpon>
+    </None>
+    <None Update="LanguageComponents.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>LanguageComponents.wxs</LastGenOutput>
+    </None>
+    <None Update="LanguageComponents.wxs">
+      <DependentUpon>LanguageComponents.tt</DependentUpon>
+    </None>
   </ItemGroup>
-  <ItemGroup>
-    <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="lib\win32\grpc_csharp_ext.x86.dll" />
-    <Content Include="lib\win64\grpc_csharp_ext.x64.dll" />
-    <Content Include="lib\win64\pdfium.dll" />
-    <Content Include="lib\win32\pdfium.dll" />
-  </ItemGroup>
-  <ItemGroup />
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  
 </Project>
