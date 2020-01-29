@@ -42,7 +42,7 @@ namespace NAPS2.Images.Storage
             // Then we can have a PDF->Image converter that returns null if it's not a pdf file.
             if (IsPdfFile(input))
             {
-                return (GdiImage)new PdfiumPdfRenderer(imageContext).Render(input.FullPath, 300).Single();
+                return (GdiImage)imageContext.PdfRenderer.Render(input.FullPath, 300).Single();
             }
             else
             {

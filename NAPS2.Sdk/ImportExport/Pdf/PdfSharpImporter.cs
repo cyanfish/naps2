@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -68,27 +70,38 @@ namespace NAPS2.ImportExport.Pdf
                         sink.SetCompleted();
                     }
 
+                    progressCallback(0, document.PageCount);
                     var pages = importParams.Slice.Indices(document.PageCount)
-                        .Select(index => document.Pages[index])
-                        .TakeWhile(page =>
-                        {
-                            progressCallback(i++, document.PageCount);
-                            return !cancelToken.IsCancellationRequested;
-                        });
+                        .Select(index => document.Pages[index]);
                     if (document.Info.Creator != MiscResources.NAPS2 && document.Info.Author != MiscResources.NAPS2)
                     {
-                        foreach (var page in pages)
-                        {
-                            sink.PutImage(await ExportRawPdfPage(page, importParams));
-                        }
+                        await Pipeline.For(pages, cancelToken)
+                            .StepParallel(async page => await ExportRawPdfPage(page, importParams))
+                            .Run(image =>
+                            {
+                                progressCallback(++i, document.PageCount);
+                                sink.PutImage(image);
+                            });
                     }
                     else
                     {
-                        // TODO: Maybe can parallelize this
-                        foreach (var page in pages)
-                        {
-                            await GetImagesFromPage(page, importParams, sink);
-                        }
+                        await Pipeline.For(pages, cancelToken)
+                            // Getting CustomValues is not thread safe, so we need to do it in a separate step
+                            .Step(page => (page, page.CustomValues.Elements.ContainsKey("/NAPS2ImportedPage")))
+                            .StepManyParallel(async tuple =>
+                            {
+                                var (page, isImportedPage) = tuple;
+                                if (isImportedPage)
+                                {
+                                    return new[] { await ExportRawPdfPage(page, importParams) };
+                                }
+                                return GetImagesFromPage(page, importParams);
+                            })
+                            .Run(image =>
+                            {
+                                progressCallback(++i, document.PageCount);
+                                sink.PutImage(image);
+                            });
                     }
                 }
                 catch (ImageRenderException e)
@@ -112,21 +125,15 @@ namespace NAPS2.ImportExport.Pdf
             return sink.AsSource();
         }
 
-        private async Task GetImagesFromPage(PdfPage page, ImportParams importParams, ScannedImageSink sink)
+        private IEnumerable<ScannedImage> GetImagesFromPage(PdfPage page, ImportParams importParams)
         {
-            if (page.CustomValues.Elements.ContainsKey("/NAPS2ImportedPage"))
-            {
-                sink.PutImage(await ExportRawPdfPage(page, importParams));
-                return;
-            }
-
             // Get resources dictionary
             PdfDictionary resources = page.Elements.GetDictionary("/Resources");
             // Get external objects dictionary
             PdfDictionary xObjects = resources?.Elements.GetDictionary("/XObject");
             if (xObjects == null)
             {
-                return;
+                yield break;
             }
             // Iterate references to external objects
             foreach (PdfItem item in xObjects.Elements.Values)
@@ -141,12 +148,12 @@ namespace NAPS2.ImportExport.Pdf
                         string[] arrayElements = elementAsArray.Elements.Select(x => x.ToString()).ToArray();
                         if (arrayElements.Length == 2)
                         {
-                            sink.PutImage(DecodeImage(arrayElements[1], page, xObject, Filtering.Decode(xObject.Stream.Value, arrayElements[0]), importParams));
+                            yield return DecodeImage(arrayElements[1], page, xObject, Filtering.Decode(xObject.Stream.Value, arrayElements[0]), importParams);
                         }
                     }
                     else if (element.Value is PdfName elementAsName)
                     {
-                        sink.PutImage(DecodeImage(elementAsName.Value, page, xObject, xObject.Stream.Value, importParams));
+                        yield return DecodeImage(elementAsName.Value, page, xObject, xObject.Stream.Value, importParams);
                     }
                     else
                     {

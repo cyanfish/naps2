@@ -99,5 +99,17 @@ namespace NAPS2.Remoting.Worker
             RemotingHelper.HandleErrors(resp.Error);
             return resp.Thumbnail.ToByteArray();
         }
+
+        public byte[] RenderPdf(string path, float dpi)
+        {
+            var req = new RenderPdfRequest
+            {
+                Path = path,
+                Dpi = dpi
+            };
+            var resp = client.RenderPdf(req);
+            RemotingHelper.HandleErrors(resp.Error);
+            return resp.Image.ToByteArray();
+        }
     }
 }

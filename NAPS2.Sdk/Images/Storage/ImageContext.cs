@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using NAPS2.Images.Transforms;
+using NAPS2.ImportExport.Pdf;
 using NAPS2.Scan;
 using NAPS2.Util;
 
@@ -23,6 +24,11 @@ namespace NAPS2.Images.Storage
         }
 
         private readonly Dictionary<(Type, Type), (object, MethodInfo)> Transformers = new Dictionary<(Type, Type), (object, MethodInfo)>();
+
+        protected ImageContext()
+        {
+            pdfRenderer = new PdfiumPdfRenderer(this);
+        }
 
         /// <summary>
         /// Enumerates all methods on transformerObj that have a TransformerAttribute and registers them
@@ -192,6 +198,14 @@ namespace NAPS2.Images.Storage
         {
             get => fileStorageManager;
             set => fileStorageManager = value ?? throw new ArgumentNullException(nameof(value));
+        }
+
+        private IPdfRenderer pdfRenderer;
+
+        public IPdfRenderer PdfRenderer
+        {
+            get => pdfRenderer;
+            set => pdfRenderer = value ?? throw new ArgumentNullException(nameof(value));
         }
 
         public ImageContext UseFileStorage(string folderPath)

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using Google.Protobuf;
 using Grpc.Core;
@@ -6,6 +7,7 @@ using NAPS2.Images;
 using NAPS2.Images.Storage;
 using NAPS2.ImportExport.Email;
 using NAPS2.ImportExport.Email.Mapi;
+using NAPS2.ImportExport.Pdf;
 using NAPS2.Scan;
 using NAPS2.Scan.Internal;
 using NAPS2.Scan.Wia;
@@ -153,5 +155,18 @@ namespace NAPS2.Remoting.Worker
                     };
                 },
                 err => new RenderThumbnailResponse { Error = err });
+
+        public override Task<RenderPdfResponse> RenderPdf(RenderPdfRequest request, ServerCallContext context) =>
+            RemotingHelper.WrapFunc(
+                () =>
+                {
+                    using var image = new PdfiumPdfRenderer(imageContext).Render(request.Path, request.Dpi).Single();
+                    var stream = imageContext.Convert<MemoryStreamStorage>(image, new StorageConvertParams { Lossless = true }).Stream;
+                    return new RenderPdfResponse
+                    {
+                        Image = ByteString.FromStream(stream)
+                    };
+                },
+                err => new RenderPdfResponse { Error = err });
     }
 }

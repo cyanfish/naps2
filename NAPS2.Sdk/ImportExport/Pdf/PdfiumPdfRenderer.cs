@@ -5,20 +5,19 @@ using NAPS2.Images.Storage;
 
 namespace NAPS2.ImportExport.Pdf
 {
-    public class PdfiumPdfRenderer
+    public class PdfiumPdfRenderer : IPdfRenderer
     {
         private const int RENDER_FLAGS = PdfiumNativeLibrary.FPDF_PRINTING;
         private const uint COLOR_WHITE = uint.MaxValue;
 
-        private static readonly PdfiumNativeLibrary NativeLib;
-
-        static PdfiumPdfRenderer()
+        private static readonly Lazy<PdfiumNativeLibrary> LazyNativeLib = new Lazy<PdfiumNativeLibrary>(() =>
         {
             var assemblyLocation = Assembly.GetExecutingAssembly().Location;
             var assemblyFolder = System.IO.Path.GetDirectoryName(assemblyLocation);
-            NativeLib = new PdfiumNativeLibrary(assemblyFolder, "_win32/pdfium.dll", "_win64/pdfium.dll", "_linux/libpdfium.so", "_osx/libpdfium.dylib");
-            NativeLib.FPDF_InitLibrary();
-        }
+            var nativeLib = new PdfiumNativeLibrary(assemblyFolder, "_win32/pdfium.dll", "_win64/pdfium.dll", "_linux/libpdfium.so", "_osx/libpdfium.dylib");
+            nativeLib.FPDF_InitLibrary();
+            return nativeLib;
+        });
 
         private readonly ImageContext imageContext;
 
@@ -29,20 +28,22 @@ namespace NAPS2.ImportExport.Pdf
 
         public IEnumerable<IImage> Render(string path, float dpi)
         {
+            var nativeLib = LazyNativeLib.Value;
+            
             // Pdfium is not thread-safe
-            lock (NativeLib)
+            lock (nativeLib)
             {
-                var doc = NativeLib.FPDF_LoadDocument(path, null);
+                var doc = nativeLib.FPDF_LoadDocument(path, null);
                 try
                 {
-                    var pageCount = NativeLib.FPDF_GetPageCount(doc);
+                    var pageCount = nativeLib.FPDF_GetPageCount(doc);
                     for (int pageIndex = 0; pageIndex < pageCount; pageIndex++)
                     {
-                        var page = NativeLib.FPDF_LoadPage(doc, pageIndex);
+                        var page = nativeLib.FPDF_LoadPage(doc, pageIndex);
                         try
                         {
-                            var widthInInches = NativeLib.FPDF_GetPageWidth(page) / 72;
-                            var heightInInches = NativeLib.FPDF_GetPageHeight(page) / 72;
+                            var widthInInches = nativeLib.FPDF_GetPageWidth(page) / 72;
+                            var heightInInches = nativeLib.FPDF_GetPageHeight(page) / 72;
 
                             // Cap the resolution to 10k pixels in each dimension
                             dpi = Math.Min(dpi, (float) (10000 / heightInInches));
@@ -56,16 +57,16 @@ namespace NAPS2.ImportExport.Pdf
                             var bitmapData = bitmap.Lock(LockMode.ReadWrite, out var scan0, out var stride);
                             try
                             {
-                                var pdfiumBitmap = NativeLib.FPDFBitmap_CreateEx(widthInPx, heightInPx, PdfiumNativeLibrary.FPDFBitmap_BGR, scan0, stride);
+                                var pdfiumBitmap = nativeLib.FPDFBitmap_CreateEx(widthInPx, heightInPx, PdfiumNativeLibrary.FPDFBitmap_BGR, scan0, stride);
                                 try
                                 {
-                                    NativeLib.FPDFBitmap_FillRect(pdfiumBitmap, 0, 0, widthInPx, heightInPx, COLOR_WHITE);
-                                    NativeLib.FPDF_RenderPageBitmap(pdfiumBitmap, page, 0, 0, widthInPx, heightInPx, 0, RENDER_FLAGS);
+                                    nativeLib.FPDFBitmap_FillRect(pdfiumBitmap, 0, 0, widthInPx, heightInPx, COLOR_WHITE);
+                                    nativeLib.FPDF_RenderPageBitmap(pdfiumBitmap, page, 0, 0, widthInPx, heightInPx, 0, RENDER_FLAGS);
                                     yield return bitmap;
                                 }
                                 finally
                                 {
-                                    NativeLib.FPDFBitmap_Destroy(pdfiumBitmap);
+                                    nativeLib.FPDFBitmap_Destroy(pdfiumBitmap);
                                 }
                             }
                             finally
@@ -75,13 +76,13 @@ namespace NAPS2.ImportExport.Pdf
                         }
                         finally
                         {
-                            NativeLib.FPDF_ClosePage(page);
+                            nativeLib.FPDF_ClosePage(page);
                         }
                     }
                 }
                 finally
                 {
-                    NativeLib.FPDF_CloseDocument(doc);
+                    nativeLib.FPDF_CloseDocument(doc);
                 }
             }
         }

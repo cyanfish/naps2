@@ -112,6 +112,8 @@
     <Compile Include="Images\Storage\NotToBeUsedStorageManager.cs" />
     <Compile Include="Images\ThumbnailSizes.cs" />
     <Compile Include="Images\UndoStack.cs" />
+    <Compile Include="ImportExport\Pdf\IPdfRenderer.cs" />
+    <Compile Include="ImportExport\Pdf\PdfiumWorkerCoordinator.cs" />
     <Compile Include="Remoting\ClientServer\ClientContext.cs" />
     <Compile Include="Remoting\ClientServer\ClientContextFactory.cs" />
     <Compile Include="Remoting\ClientServer\IScanCallback.cs" />

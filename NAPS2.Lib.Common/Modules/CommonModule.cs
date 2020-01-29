@@ -70,6 +70,8 @@ namespace NAPS2.Modules
             Bind<AutoSaver>().ToSelf();
             Bind<BitmapRenderer>().ToSelf();
             Bind<ImageContext>().To<GdiImageContext>().InSingletonScope();
+            
+            Kernel.Get<ImageContext>().PdfRenderer = Kernel.Get<PdfiumWorkerCoordinator>();
 
             var configProvider = Kernel.Get<ConfigScopes>().Provider;
             var profileManager = new ProfileManager(

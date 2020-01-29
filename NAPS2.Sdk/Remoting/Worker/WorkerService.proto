@@ -10,6 +10,7 @@ service WorkerService {
 	rpc Wia10NativeUi (Wia10NativeUiRequest) returns (Wia10NativeUiResponse) {}
 	rpc SendMapiEmail (SendMapiEmailRequest) returns (SendMapiEmailResponse) {}
 	rpc RenderThumbnail (RenderThumbnailRequest) returns (RenderThumbnailResponse) {}
+	rpc RenderPdf (RenderPdfRequest) returns (RenderPdfResponse) {}
 	rpc Scan (ScanRequest) returns (stream ScanResponse) {}
 	rpc GetDeviceList (GetDeviceListRequest) returns (GetDeviceListResponse) {}
 }
@@ -78,4 +79,14 @@ message RenderThumbnailRequest {
 message RenderThumbnailResponse {
 	NAPS2.Remoting.Error error = 1;
 	bytes thumbnail = 2;
+}
+
+message RenderPdfRequest {
+	string path = 1;
+	float dpi = 2;
+}
+
+message RenderPdfResponse {
+	NAPS2.Remoting.Error error = 1;
+	bytes image = 2;
 }
