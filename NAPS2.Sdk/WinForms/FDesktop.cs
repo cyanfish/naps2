@@ -601,10 +601,17 @@ namespace NAPS2.WinForms
             set
             {
                 disableSelectedIndexChangedEvent = true;
-                thumbnailList1.SelectedIndices.Clear();
-                foreach (int i in value)
+                if (imageList.Images.Count == 0)
                 {
-                    thumbnailList1.SelectedIndices.Add(i);
+                    thumbnailList1.Clear();
+                }
+                else
+                {
+                    thumbnailList1.SelectedIndices.Clear();
+                    foreach (int i in value)
+                    {
+                        thumbnailList1.SelectedIndices.Add(i);
+                    }
                 }
                 disableSelectedIndexChangedEvent = false;
                 thumbnailList1_SelectedIndexChanged(thumbnailList1, new EventArgs());
