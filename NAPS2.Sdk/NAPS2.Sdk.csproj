@@ -309,6 +309,7 @@
     <Compile Include="Platform\MonoRuntimeCompat.cs" />
     <Compile Include="Util\ExpFallback.cs" />
     <Compile Include="Util\NativeLibrary.cs" />
+    <Compile Include="Util\TimedThrottle.cs" />
     <Compile Include="WinForms\ImageClipboard.cs" />
     <Compile Include="Remoting\RemotingHelper.cs" />
     <Compile Include="Util\IInvoker.cs" />

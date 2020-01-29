@@ -1,28 +1,30 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using NAPS2.Images.Storage;
+using NAPS2.Util;
 
 namespace NAPS2.Images
 {
     public class ScannedImageList
     {
         private readonly ImageContext imageContext;
+        private readonly TimedThrottle runUpdateEventsThrottle;
         private Memento savedState = Memento.Empty;
         private ListSelection<ScannedImage> selection;
 
         public ScannedImageList(ImageContext imageContext)
+            : this(imageContext, new List<ScannedImage>())
         {
-            this.imageContext = imageContext;
-            Images = new List<ScannedImage>();
-            Selection = ListSelection.Empty<ScannedImage>();
         }
 
         public ScannedImageList(ImageContext imageContext, List<ScannedImage> images)
         {
             this.imageContext = imageContext;
+            runUpdateEventsThrottle = new TimedThrottle(RunUpdateEvents, TimeSpan.FromMilliseconds(100));
             Images = images;
+            Selection = ListSelection.Empty<ScannedImage>();
         }
 
         public ThumbnailRenderer ThumbnailRenderer { get; set; }
@@ -54,15 +56,13 @@ namespace NAPS2.Images
         public void Mutate(ListMutation<ScannedImage> mutation, ListSelection<ScannedImage> selectionToMutate = null)
         {
             MutateInternal(mutation, selectionToMutate);
-            UpdateImageMetadata();
-            ImagesUpdated?.Invoke(this, EventArgs.Empty);
+            runUpdateEventsThrottle.RunAction(SynchronizationContext.Current);
         }
 
         public async Task MutateAsync(ListMutation<ScannedImage> mutation, ListSelection<ScannedImage> selectionToMutate = null)
         {
             await Task.Run(() => MutateInternal(mutation, selectionToMutate));
-            UpdateImageMetadata();
-            ImagesUpdated?.Invoke(this, EventArgs.Empty);
+            runUpdateEventsThrottle.RunAction(SynchronizationContext.Current);
         }
 
         private void MutateInternal(ListMutation<ScannedImage> mutation, ListSelection<ScannedImage> selectionToMutate)
@@ -75,6 +75,12 @@ namespace NAPS2.Images
             {
                 mutation.Apply(Images, ref selection);
             }
+        }
+
+        private void RunUpdateEvents()
+        {
+            UpdateImageMetadata();
+            ImagesUpdated?.Invoke(this, EventArgs.Empty);
         }
 
         private void UpdateImageMetadata()
