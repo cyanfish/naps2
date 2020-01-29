@@ -15,7 +15,11 @@ namespace NAPS2.Images.Storage
         {
             this.imageContext = imageContext;
         }
-
+        
+        // TODO: I've gotten rid of most of the craziness. What remains is file/stream -> image and image -> file/stream.
+        // TODO: So it probably makes more sense to get rid of the "converters" and use imagecontext/iimage methods instead.
+        // TODO: That also might make lifetime easier to reason about.
+        
         [StorageConverter]
         public FileStorage ConvertToFile(GdiImage input, StorageConvertParams convertParams)
         {
