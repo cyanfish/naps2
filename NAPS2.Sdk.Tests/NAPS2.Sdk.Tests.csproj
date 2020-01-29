@@ -1,213 +1,31 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{8F59DABD-EE59-471D-B3AE-9C2083FDB13E}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>NAPS2.Sdk.Tests</RootNamespace>
-    <AssemblyName>NAPS2.Sdk.Tests</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <Deterministic>true</Deterministic>
-    <NuGetPackageImportStamp>
-    </NuGetPackageImportStamp>
-    <TargetFrameworkProfile />
+    <TargetFramework>net461</TargetFramework>
     <LangVersion>8</LangVersion>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-  </PropertyGroup>
+
   <ItemGroup>
-    <Reference Include="mscorlib" />
     <Reference Include="PdfSharp, Version=1.50.4589.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\NAPS2.Setup\lib\PdfSharp.dll</HintPath>
     </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.Configuration" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.Net" />
-    <Reference Include="System.Numerics" />
+  
     <Reference Include="System.Windows.Forms" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Net.Http" />
-    <Reference Include="System.Xml" />
+  
+    <ProjectReference Include="..\NAPS2.Sdk\NAPS2.Sdk.csproj" />
+  
+    <PackageReference Include="BouncyCastle" Version="1.8.4" />
+    <PackageReference Include="Grpc.Core.Api" Version="2.26.0" />
+    <PackageReference Include="GrpcDotNetNamedPipes" Version="1.0.2" />
+    <PackageReference Include="Moq" Version="4.10.1" />
+    <PackageReference Include="System.Collections.Immutable" Version="1.5.0" />
+    <PackageReference Include="System.Interactive.Async" Version="3.2.0" />
+    <PackageReference Include="xunit" Version="2.4.1" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.4.1" />
   </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Asserts\CollectionAsserts.cs" />
-    <Compile Include="Asserts\FormAsserts.cs" />
-    <Compile Include="Asserts\ImageAsserts.cs" />
-    <Compile Include="Asserts\PdfAsserts.cs" />
-    <Compile Include="Config\CommonConfigTests.cs" />
-    <Compile Include="Config\ConfigCopierTests.cs" />
-    <Compile Include="Config\ConfigScopeTests.cs" />
-    <Compile Include="Config\ProfileSerializerTests.cs" />
-    <Compile Include="Dependencies\DownloadFormatTests.cs" />
-    <Compile Include="Dependencies\DownloadFormatTestsData.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DownloadFormatTestsData.resx</DependentUpon>
-    </Compile>
-    <Compile Include="GlobalSuppressions.cs" />
-    <Compile Include="Images\DeskewTests.cs" />
-    <Compile Include="Images\DeskewTestsData.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DeskewTestsData.resx</DependentUpon>
-    </Compile>
-    <Compile Include="Images\GdiTests.cs" />
-    <Compile Include="Images\ImageSerializationTests.cs" />
-    <Compile Include="Images\ScannedImageSinkTests.cs" />
-    <Compile Include="Images\StorageTests.cs" />
-    <Compile Include="Images\TransformTests.cs" />
-    <Compile Include="Images\TransformTestsData.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>TransformTestsData.resx</DependentUpon>
-    </Compile>
-    <Compile Include="Images\UndoStackTests.cs" />
-    <Compile Include="ImportExport\PdfiumTests.cs" />
-    <Compile Include="ImportExport\PdfiumTestsData.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>PdfiumTestsData.resx</DependentUpon>
-    </Compile>
-    <Compile Include="Mocks\StubScanBridge.cs" />
-    <Compile Include="Scan\AutoSaveTests.cs" />
-    <Compile Include="Config\ProfileSerializerTestsData.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ProfileSerializerTestsData.resx</DependentUpon>
-    </Compile>
-    <Compile Include="ContextualTexts.cs" />
-    <Compile Include="Scan\RemoteScanControllerTests.cs" />
-    <Compile Include="Scan\ScanErrorHandling.cs" />
-    <Compile Include="Serialization\ScanOptionsSerializationTests.cs" />
-    <Compile Include="Serialization\XmlSerializerTests.cs" />
-    <Compile Include="Util\CollectionExtensionsTests.cs" />
-    <Compile Include="Util\ListMutationTests.cs" />
-    <Compile Include="Util\NaturalStringComparerTests.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Scan\SaneOptionParserTests.cs" />
-    <Compile Include="Util\SliceTests.cs" />
-    <Compile Include="Util\SslHelperTests.cs" />
-    <Compile Include="Util\TestingContextTests.cs" />
-    <Compile Include="WinForms\BatchFormTests.cs" />
-    <Compile Include="Worker\WorkerChannelTests.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\NAPS2.Sdk\NAPS2.Sdk.csproj">
-      <Project>{968378fa-a649-4058-a928-1fcd97b23070}</Project>
-      <Name>NAPS2.Sdk</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Config\ProfileSerializerTestsData.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>ProfileSerializerTestsData.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dependencies\DownloadFormatTestsData.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>DownloadFormatTestsData.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Images\DeskewTestsData.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>DeskewTestsData.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Images\TransformTestsData.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>TransformTestsData.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ImportExport\PdfiumTestsData.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>PdfiumTestsData.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="app.config" />
-    <None Include="Resources\animals.zip" />
-    <None Include="Resources\stock-dog.jpeg.gz" />
-    <None Include="Resources\word.pdf" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\color_image_s_p300.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\color_image_h_n300.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\color_image_h_p300.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\color_image_c_n300.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\color_image_c_p300.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\color_image_b_n300.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\color_image_b_p300.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\color_image.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\color_image_c_5_10_15_20.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\color_image_r_180.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\color_image_r_p46.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\color_image_r_n45.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\color_image_r_p90.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\color_image_bw_p300.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\color_image_bw.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\color_image_sh_n1000.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\color_image_sh_p1000.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\color_image_s_n300.jpg" />
-  </ItemGroup>
+  
   <ItemGroup>
     <ContentWithTargetPath Include="..\NAPS2.Setup\lib\dbg\win64\NAPS2.WIA.dll">
       <CopyToOutputDirectory Condition=" '$(Configuration)' == 'Debug' Or '$(Configuration)' == 'DebugLang' ">PreserveNewest</CopyToOutputDirectory>
@@ -250,52 +68,4 @@
       <TargetPath>_osx\libpdfium.dylib</TargetPath>
     </ContentWithTargetPath>
   </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\word_p1.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\word_p2.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\stock-dog.jpeg" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\stock-cat.jpeg" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\skewed.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\skewed_bw.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="BouncyCastle">
-      <Version>1.8.4</Version>
-    </PackageReference>
-    <PackageReference Include="Grpc.Core.Api">
-      <Version>2.26.0</Version>
-    </PackageReference>
-    <PackageReference Include="GrpcDotNetNamedPipes">
-      <Version>1.0.2</Version>
-    </PackageReference>
-    <PackageReference Include="Moq">
-      <Version>4.10.1</Version>
-    </PackageReference>
-    <PackageReference Include="System.Collections.Immutable">
-      <Version>1.5.0</Version>
-    </PackageReference>
-    <PackageReference Include="System.Interactive.Async">
-      <Version>3.2.0</Version>
-    </PackageReference>
-    <PackageReference Include="xunit">
-      <Version>2.4.1</Version>
-    </PackageReference>
-    <PackageReference Include="xunit.analyzers">
-      <Version>0.10.0</Version>
-    </PackageReference>
-    <PackageReference Include="xunit.core">
-      <Version>2.4.1</Version>
-    </PackageReference>
-  </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
