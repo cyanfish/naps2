@@ -32,7 +32,15 @@ namespace NAPS2.Update
 
         static UpdateOperation()
         {
-            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+            try
+            {
+                const int tls13 = 12288;
+                ServicePointManager.SecurityProtocol = (SecurityProtocolType) tls13;
+            }
+            catch (NotSupportedException)
+            {
+                ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+            }
         }
 
         public UpdateOperation(ImageContext imageContext, ErrorOutput errorOutput)
