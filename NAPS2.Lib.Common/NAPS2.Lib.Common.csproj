@@ -15,14 +15,9 @@
 
   <ItemGroup>
     <ProjectReference Include="..\NAPS2.Sdk\NAPS2.Sdk.csproj" />
-    
     <Reference Include="System.Windows.Forms" />
-
-    <PackageReference Include="CommandLineParser" Version="1.9.71" />
-    <PackageReference Include="Grpc.Core.Api" Version="2.26.0" />
     <PackageReference Include="Ninject" Version="3.2.2" />
     <PackageReference Include="NLog" Version="4.5.8" />
-    <PackageReference Include="System.ValueTuple" Version="4.5.0" />
   </ItemGroup>
   
 </Project>

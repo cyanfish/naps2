@@ -15,13 +15,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\NAPS2.Lib.Common\NAPS2.Lib.Common.csproj" />
-    <ProjectReference Include="..\NAPS2.Sdk\NAPS2.Sdk.csproj" />
-
     <Reference Include="System.Windows.Forms" />
-
-    <PackageReference Include="GrpcDotNetNamedPipes" Version="1.0.2" />
-    <PackageReference Include="Ninject" Version="3.2.2" />
-    <PackageReference Include="System.Interactive.Async" Version="3.2.0" />
   </ItemGroup>
 
 </Project>
