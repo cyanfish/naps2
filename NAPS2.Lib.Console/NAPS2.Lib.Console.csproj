@@ -1,95 +1,27 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{FDF64AB4-7495-4A3F-A017-441F6BC6D781}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>NAPS2</RootNamespace>
-    <AssemblyName>NAPS2.Lib.Console</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <Deterministic>true</Deterministic>
+    <TargetFramework>net461</TargetFramework>
     <LangVersion>8</LangVersion>
+    <RootNamespace>NAPS2</RootNamespace>
+
+    <Title>NAPS2 (Not Another PDF Scanner 2)</Title>
+    <Product>NAPS2 (Not Another PDF Scanner 2)</Product>
+    <Copyright>Copyright 2009, 2012-2020 NAPS2 Contributors; Icons from http://www.fatcow.com/free-icons</Copyright>
+    <Version>7.0.0</Version>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
+
+  <Import Project="..\NAPS2.Setup\CommonTargets.targets" />
+
   <ItemGroup>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
+    <ProjectReference Include="..\NAPS2.Lib.Common\NAPS2.Lib.Common.csproj" />
+    <ProjectReference Include="..\NAPS2.Sdk\NAPS2.Sdk.csproj" />
+
     <Reference Include="System.Windows.Forms" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Net.Http" />
-    <Reference Include="System.Xml" />
+
+    <PackageReference Include="CommandLineParser" Version="1.9.71" />
+    <PackageReference Include="Ninject" Version="3.2.2" />
+    <PackageReference Include="System.Collections.Immutable" Version="1.5.0" />
   </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Automation\AutomatedScanning.cs" />
-    <Compile Include="Automation\AutomatedScanningOptions.cs" />
-    <Compile Include="Automation\CommandLineOptions.cs" />
-    <Compile Include="Automation\ConsoleComponentInstallPrompt.cs" />
-    <Compile Include="Automation\ConsoleErrorOutput.cs" />
-    <Compile Include="Automation\ConsoleOperationProgress.cs" />
-    <Compile Include="Automation\ConsoleOverwritePrompt.cs" />
-    <Compile Include="Automation\ConsolePdfPasswordProvider.cs" />
-    <Compile Include="EntryPoints\ConsoleEntryPoint.cs" />
-    <Compile Include="Lang\ConsoleResources\ConsoleResources.Designer.cs">
-      <DependentUpon>ConsoleResources.resx</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="Modules\ConsoleModule.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\NAPS2.Lib.Common\NAPS2.Lib.Common.csproj">
-      <Project>{4d349529-149b-498b-8a55-373e6a67e1f0}</Project>
-      <Name>NAPS2.Lib.Common</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\NAPS2.Sdk\NAPS2.Sdk.csproj">
-      <Project>{968378fa-a649-4058-a928-1fcd97b23070}</Project>
-      <Name>NAPS2.Sdk</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="app.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Lang\ConsoleResources\ConsoleResources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>ConsoleResources.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="CommandLineParser">
-      <Version>1.9.71</Version>
-    </PackageReference>
-    <PackageReference Include="Ninject">
-      <Version>3.2.2</Version>
-    </PackageReference>
-    <PackageReference Include="System.Collections.Immutable">
-      <Version>1.5.0</Version>
-    </PackageReference>
-  </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+
 </Project>

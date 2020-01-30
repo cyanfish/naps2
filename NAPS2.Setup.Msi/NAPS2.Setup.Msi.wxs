@@ -84,7 +84,9 @@
     <DirectoryRef Id="LIBFOLDER">
       <Component Id="Deps" Guid="04AC2B17-BDFA-4AA0-B8CA-0AE208D9193A">
         <!-- Dependencies -->
-        <File Source="..\NAPS2.App.WinForms\bin\InstallerMSI\net461\NAPS2.Lib.dll" />
+        <File Source="..\NAPS2.App.WinForms\bin\InstallerMSI\net461\NAPS2.Lib.Common.dll" />
+        <File Source="..\NAPS2.App.Console\bin\InstallerMSI\net461\NAPS2.Lib.Console.dll" />
+        <File Source="..\NAPS2.App.WinForms\bin\InstallerMSI\net461\NAPS2.Lib.WinForms.dll" />
         <File Source="..\NAPS2.App.WinForms\bin\InstallerMSI\net461\NAPS2.Sdk.dll" />
         <File Source="..\NAPS2.App.Console\bin\InstallerMSI\net461\CommandLine.dll" />
         <File Source="..\NAPS2.App.WinForms\bin\InstallerMSI\net461\Google.Protobuf.dll" />
