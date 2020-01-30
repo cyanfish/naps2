@@ -25,10 +25,7 @@
     <ProjectReference Include="..\NAPS2.Lib.WinForms\NAPS2.Lib.WinForms.csproj" />
     <ProjectReference Include="..\NAPS2.Sdk\NAPS2.Sdk.csproj" />
     
-    <PackageReference Include="CommandLineParser" Version="1.9.71" />
     <PackageReference Include="LargeAddressAware" Version="1.0.3" />
-    <PackageReference Include="Ninject" Version="3.2.2" />
-    <PackageReference Include="NLog" Version="4.5.8" />
   </ItemGroup>
   
   <ItemGroup>

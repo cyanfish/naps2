@@ -21,6 +21,8 @@
     <ProjectReference Include="..\NAPS2.Lib.Common\NAPS2.Lib.Common.csproj" />
     <ProjectReference Include="..\NAPS2.Lib.WinForms\NAPS2.Lib.WinForms.csproj" />
     <ProjectReference Include="..\NAPS2.Sdk\NAPS2.Sdk.csproj" />
+    
+    <PackageReference Include="LargeAddressAware" Version="1.0.3" />
   </ItemGroup>
 
 </Project>
