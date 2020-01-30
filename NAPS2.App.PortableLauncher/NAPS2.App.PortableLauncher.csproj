@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net461</TargetFramework>
+    <TargetFramework>net46</TargetFramework>
     <LangVersion>8</LangVersion>
     <OutputType>Exe</OutputType>
     <RootNamespace>NAPS2.Portable</RootNamespace>

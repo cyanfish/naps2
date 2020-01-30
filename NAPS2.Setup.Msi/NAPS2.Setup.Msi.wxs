@@ -67,12 +67,12 @@
     <DirectoryRef Id="INSTALLFOLDER">
       <Component Id="Exec" Guid="3ED24800-E1D9-4D64-A106-6DC3597D9266">
         <!-- EXEs -->
-        <File Source="..\NAPS2.App.WinForms\bin\InstallerMSI\net461\NAPS2.exe" />
-        <File Source="..\NAPS2.App.WinForms\bin\InstallerMSI\net461\NAPS2.exe.config" />
-        <File Source="..\NAPS2.App.Console\bin\InstallerMSI\net461\NAPS2.Console.exe" />
-        <File Source="..\NAPS2.App.Console\bin\InstallerMSI\net461\NAPS2.Console.exe.config" />
-        <File Source="..\NAPS2.App.Worker\bin\InstallerMSI\net461\NAPS2.Worker.exe" />
-        <File Source="..\NAPS2.App.Worker\bin\InstallerMSI\net461\NAPS2.Worker.exe.config" />
+        <File Source="..\NAPS2.App.WinForms\bin\InstallerMSI\net46\NAPS2.exe" />
+        <File Source="..\NAPS2.App.WinForms\bin\InstallerMSI\net46\NAPS2.exe.config" />
+        <File Source="..\NAPS2.App.Console\bin\InstallerMSI\net46\NAPS2.Console.exe" />
+        <File Source="..\NAPS2.App.Console\bin\InstallerMSI\net46\NAPS2.Console.exe.config" />
+        <File Source="..\NAPS2.App.Worker\bin\InstallerMSI\net46\NAPS2.Worker.exe" />
+        <File Source="..\NAPS2.App.Worker\bin\InstallerMSI\net46\NAPS2.Worker.exe.config" />
         <!-- Configuration -->
         <File Source="..\NAPS2.App.WinForms\appsettings.xml" />
         <!-- License -->
@@ -84,25 +84,25 @@
     <DirectoryRef Id="LIBFOLDER">
       <Component Id="Deps" Guid="04AC2B17-BDFA-4AA0-B8CA-0AE208D9193A">
         <!-- Dependencies -->
-        <File Source="..\NAPS2.App.WinForms\bin\InstallerMSI\net461\NAPS2.Lib.Common.dll" />
-        <File Source="..\NAPS2.App.Console\bin\InstallerMSI\net461\NAPS2.Lib.Console.dll" />
-        <File Source="..\NAPS2.App.WinForms\bin\InstallerMSI\net461\NAPS2.Lib.WinForms.dll" />
-        <File Source="..\NAPS2.App.WinForms\bin\InstallerMSI\net461\NAPS2.Sdk.dll" />
-        <File Source="..\NAPS2.App.Console\bin\InstallerMSI\net461\CommandLine.dll" />
-        <File Source="..\NAPS2.App.WinForms\bin\InstallerMSI\net461\Google.Protobuf.dll" />
-        <File Source="..\NAPS2.App.WinForms\bin\InstallerMSI\net461\Grpc.Core.Api.dll" />
-        <File Source="..\NAPS2.App.WinForms\bin\InstallerMSI\net461\GrpcDotNetNamedPipes.dll" />
-        <File Source="..\NAPS2.App.WinForms\bin\InstallerMSI\net461\MimeKit.dll" />
-        <File Source="..\NAPS2.App.WinForms\bin\InstallerMSI\net461\Newtonsoft.Json.dll" />
-        <File Source="..\NAPS2.App.WinForms\bin\InstallerMSI\net461\Ninject.dll" />
-        <File Source="..\NAPS2.App.WinForms\bin\InstallerMSI\net461\NLog.dll" />
-        <File Source="..\NAPS2.App.WinForms\bin\InstallerMSI\net461\NTwain.dll" />
-        <File Source="..\NAPS2.App.WinForms\bin\InstallerMSI\net461\PdfSharp.dll" />
-        <File Source="..\NAPS2.App.WinForms\bin\InstallerMSI\net461\System.Buffers.dll" />
-        <File Source="..\NAPS2.App.WinForms\bin\InstallerMSI\net461\System.Memory.dll" />
-        <File Source="..\NAPS2.App.WinForms\bin\InstallerMSI\net461\System.Runtime.CompilerServices.Unsafe.dll" />
-        <File Source="..\NAPS2.App.WinForms\bin\InstallerMSI\net461\System.ValueTuple.dll" />
-        <File Source="..\NAPS2.App.WinForms\bin\InstallerMSI\net461\zxing.dll" />
+        <File Source="..\NAPS2.App.WinForms\bin\InstallerMSI\net46\NAPS2.Lib.Common.dll" />
+        <File Source="..\NAPS2.App.Console\bin\InstallerMSI\net46\NAPS2.Lib.Console.dll" />
+        <File Source="..\NAPS2.App.WinForms\bin\InstallerMSI\net46\NAPS2.Lib.WinForms.dll" />
+        <File Source="..\NAPS2.App.WinForms\bin\InstallerMSI\net46\NAPS2.Sdk.dll" />
+        <File Source="..\NAPS2.App.Console\bin\InstallerMSI\net46\CommandLine.dll" />
+        <File Source="..\NAPS2.App.WinForms\bin\InstallerMSI\net46\Google.Protobuf.dll" />
+        <File Source="..\NAPS2.App.WinForms\bin\InstallerMSI\net46\Grpc.Core.Api.dll" />
+        <File Source="..\NAPS2.App.WinForms\bin\InstallerMSI\net46\GrpcDotNetNamedPipes.dll" />
+        <File Source="..\NAPS2.App.WinForms\bin\InstallerMSI\net46\MimeKit.dll" />
+        <File Source="..\NAPS2.App.WinForms\bin\InstallerMSI\net46\Newtonsoft.Json.dll" />
+        <File Source="..\NAPS2.App.WinForms\bin\InstallerMSI\net46\Ninject.dll" />
+        <File Source="..\NAPS2.App.WinForms\bin\InstallerMSI\net46\NLog.dll" />
+        <File Source="..\NAPS2.App.WinForms\bin\InstallerMSI\net46\NTwain.dll" />
+        <File Source="..\NAPS2.App.WinForms\bin\InstallerMSI\net46\PdfSharp.dll" />
+        <File Source="..\NAPS2.App.WinForms\bin\InstallerMSI\net46\System.Buffers.dll" />
+        <File Source="..\NAPS2.App.WinForms\bin\InstallerMSI\net46\System.Memory.dll" />
+        <File Source="..\NAPS2.App.WinForms\bin\InstallerMSI\net46\System.Runtime.CompilerServices.Unsafe.dll" />
+        <File Source="..\NAPS2.App.WinForms\bin\InstallerMSI\net46\System.ValueTuple.dll" />
+        <File Source="..\NAPS2.App.WinForms\bin\InstallerMSI\net46\zxing.dll" />
       </Component>
     </DirectoryRef>
 
