@@ -28,7 +28,7 @@
 #>
       <Directory Id="LangFolder_<#= langName.Replace("-", "_") #>" Name="<#= langName #>">
         <Component Id="LangComponent_<#= langName.Replace("-", "_") #>">
-          <File Source="..\NAPS2.App.WinForms\bin\InstallerMSI<#= "\\" + langName #>\NAPS2.Sdk.resources.dll" Id="LangFile_<#= langName.Replace("-", "_") #>" />
+          <File Source="..\NAPS2.App.WinForms\bin\InstallerMSI\net461<#= "\\" + langName #>\NAPS2.Sdk.resources.dll" Id="LangFile_<#= langName.Replace("-", "_") #>" />
         </Component>
       </Directory>
 <#
