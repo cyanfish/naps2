@@ -5,7 +5,9 @@ NAPS2.Wia is a standalone component that acts as a low-level wrapper around [Win
 Compared to the COM-based [wiaaut.dll](https://docs.microsoft.com/en-us/previous-versions/windows/desktop/wiaaut/-wiaaut-startpage), you get:
 - WIA 2.0 support
 - Better feeder compatibility
-- Easy-to-use and idiomatic .NET interface
+- Idiomatic .NET interface
+
+If you're looking for a higher-level and easier-to-use scanning interface, check out [NAPS2.Sdk](https://github.com/cyanfish/naps2/tree/master/NAPS2.Sdk).
 
 ## Example
 
