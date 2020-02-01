@@ -1,4 +1,4 @@
-﻿namespace NAPS2.Scan.Wia.Native
+﻿namespace NAPS2.Wia
 {
     /// <summary>
     /// Error code constants.

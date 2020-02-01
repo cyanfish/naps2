@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 
-namespace NAPS2.Scan.Wia.Native
+namespace NAPS2.Wia
 {
     public class WiaDeviceManager : NativeWiaObject
     {
@@ -55,21 +55,22 @@ namespace NAPS2.Scan.Wia.Native
             return new WiaDevice(Version, deviceHandle); ;
         }
 
-        public string[] PromptForImage(IntPtr parentWindowHandle, WiaDevice device)
+        public string[] PromptForImage(IntPtr parentWindowHandle, WiaDevice device, string tempFolder = null)
         {
+            tempFolder ??= Path.GetTempPath();
             var fileName = Path.GetRandomFileName();
             IntPtr itemHandle = IntPtr.Zero;
             int fileCount = 0;
-            string[] filePaths = new string[10];
+            string[] filePaths = new string[10]; // TODO: wtf?
             var hr = Version == WiaVersion.Wia10
-                ? NativeWiaMethods.GetImage1(Handle, parentWindowHandle, SCANNER_DEVICE_TYPE, 0, 0, Path.Combine(Paths.Temp, fileName), IntPtr.Zero)
-                : NativeWiaMethods.GetImage2(Handle, 0, device.Id(), parentWindowHandle, Paths.Temp, fileName, ref fileCount, ref filePaths, ref itemHandle);
+                ? NativeWiaMethods.GetImage1(Handle, parentWindowHandle, SCANNER_DEVICE_TYPE, 0, 0, Path.Combine(tempFolder, fileName), IntPtr.Zero)
+                : NativeWiaMethods.GetImage2(Handle, 0, device.Id(), parentWindowHandle, tempFolder, fileName, ref fileCount, ref filePaths, ref itemHandle);
             if (hr == 1)
             {
                 return null;
             }
             WiaException.Check(hr);
-            return filePaths ?? new[] { Path.Combine(Paths.Temp, fileName) };
+            return filePaths ?? new[] { Path.Combine(tempFolder, fileName) };
         }
     }
 }

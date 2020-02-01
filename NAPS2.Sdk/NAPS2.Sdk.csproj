@@ -37,6 +37,8 @@
   </PropertyGroup>
   
   <ItemGroup>
+    <ProjectReference Include="..\NAPS2.Wia\NAPS2.Wia.csproj" />
+    
     <Reference Include="NTwain, Version=3.0.0.0, Culture=neutral, PublicKeyToken=f9f7e0c5169536c8, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\NAPS2.Setup\lib\NTwain.dll</HintPath>

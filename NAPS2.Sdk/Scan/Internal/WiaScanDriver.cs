@@ -10,7 +10,7 @@ using NAPS2.Logging;
 using NAPS2.Remoting.Worker;
 using NAPS2.Scan.Exceptions;
 using NAPS2.Scan.Wia;
-using NAPS2.Scan.Wia.Native;
+using NAPS2.Wia;
 using NAPS2.Util;
 
 namespace NAPS2.Scan.Internal
@@ -271,11 +271,11 @@ namespace NAPS2.Scan.Internal
                 {
                     if (device.Version == WiaVersion.Wia10)
                     {
-                        device.SetProperty(WiaPropertyId.DPS_PAGES, 1);
+                        device.SafeSetProperty(WiaPropertyId.DPS_PAGES, 1);
                     }
                     else
                     {
-                        item.SetProperty(WiaPropertyId.IPS_PAGES, 0);
+                        item.SafeSetProperty(WiaPropertyId.IPS_PAGES, 0);
                     }
                 }
 
@@ -284,13 +284,13 @@ namespace NAPS2.Scan.Internal
                     switch (Options.PaperSource)
                     {
                         case PaperSource.Flatbed:
-                            device.SetProperty(WiaPropertyId.DPS_DOCUMENT_HANDLING_SELECT, WiaPropertyValue.FLATBED);
+                            device.SafeSetProperty(WiaPropertyId.DPS_DOCUMENT_HANDLING_SELECT, WiaPropertyValue.FLATBED);
                             break;
                         case PaperSource.Feeder:
-                            device.SetProperty(WiaPropertyId.DPS_DOCUMENT_HANDLING_SELECT, WiaPropertyValue.FEEDER);
+                            device.SafeSetProperty(WiaPropertyId.DPS_DOCUMENT_HANDLING_SELECT, WiaPropertyValue.FEEDER);
                             break;
                         case PaperSource.Duplex:
-                            device.SetProperty(WiaPropertyId.DPS_DOCUMENT_HANDLING_SELECT, WiaPropertyValue.FEEDER | WiaPropertyValue.DUPLEX);
+                            device.SafeSetProperty(WiaPropertyId.DPS_DOCUMENT_HANDLING_SELECT, WiaPropertyValue.FEEDER | WiaPropertyValue.DUPLEX);
                             break;
                     }
                 }
@@ -299,10 +299,10 @@ namespace NAPS2.Scan.Internal
                     switch (Options.PaperSource)
                     {
                         case PaperSource.Feeder:
-                            item.SetProperty(WiaPropertyId.IPS_DOCUMENT_HANDLING_SELECT, WiaPropertyValue.FRONT_ONLY);
+                            item.SafeSetProperty(WiaPropertyId.IPS_DOCUMENT_HANDLING_SELECT, WiaPropertyValue.FRONT_ONLY);
                             break;
                         case PaperSource.Duplex:
-                            item.SetProperty(WiaPropertyId.IPS_DOCUMENT_HANDLING_SELECT, WiaPropertyValue.DUPLEX | WiaPropertyValue.FRONT_FIRST);
+                            item.SafeSetProperty(WiaPropertyId.IPS_DOCUMENT_HANDLING_SELECT, WiaPropertyValue.DUPLEX | WiaPropertyValue.FRONT_FIRST);
                             break;
                     }
                 }
@@ -310,20 +310,20 @@ namespace NAPS2.Scan.Internal
                 switch (Options.BitDepth)
                 {
                     case BitDepth.Grayscale:
-                        item.SetProperty(WiaPropertyId.IPA_DATATYPE, 2);
+                        item.SafeSetProperty(WiaPropertyId.IPA_DATATYPE, 2);
                         break;
                     case BitDepth.Color:
-                        item.SetProperty(WiaPropertyId.IPA_DATATYPE, 3);
+                        item.SafeSetProperty(WiaPropertyId.IPA_DATATYPE, 3);
                         break;
                     case BitDepth.BlackAndWhite:
-                        item.SetProperty(WiaPropertyId.IPA_DATATYPE, 0);
+                        item.SafeSetProperty(WiaPropertyId.IPA_DATATYPE, 0);
                         break;
                 }
 
                 int xRes = Options.Dpi;
                 int yRes = Options.Dpi;
-                item.SetPropertyClosest(WiaPropertyId.IPS_XRES, ref xRes);
-                item.SetPropertyClosest(WiaPropertyId.IPS_YRES, ref yRes);
+                item.SafeSetPropertyClosest(WiaPropertyId.IPS_XRES, ref xRes);
+                item.SafeSetPropertyClosest(WiaPropertyId.IPS_YRES, ref yRes);
 
                 int pageWidth = Options.PageSize.WidthInThousandthsOfAnInch * xRes / 1000;
                 int pageHeight = Options.PageSize.HeightInThousandthsOfAnInch * yRes / 1000;
@@ -360,20 +360,20 @@ namespace NAPS2.Scan.Internal
 
                 if (Options.WiaOptions.OffsetWidth)
                 {
-                    item.SetProperty(WiaPropertyId.IPS_XEXTENT, pageWidth + horizontalPos);
-                    item.SetProperty(WiaPropertyId.IPS_XPOS, horizontalPos);
+                    item.SafeSetProperty(WiaPropertyId.IPS_XEXTENT, pageWidth + horizontalPos);
+                    item.SafeSetProperty(WiaPropertyId.IPS_XPOS, horizontalPos);
                 }
                 else
                 {
-                    item.SetProperty(WiaPropertyId.IPS_XEXTENT, pageWidth);
-                    item.SetProperty(WiaPropertyId.IPS_XPOS, horizontalPos);
+                    item.SafeSetProperty(WiaPropertyId.IPS_XEXTENT, pageWidth);
+                    item.SafeSetProperty(WiaPropertyId.IPS_XPOS, horizontalPos);
                 }
-                item.SetProperty(WiaPropertyId.IPS_YEXTENT, pageHeight);
+                item.SafeSetProperty(WiaPropertyId.IPS_YEXTENT, pageHeight);
 
                 if (!Options.BrightnessContrastAfterScan)
                 {
-                    item.SetPropertyRange(WiaPropertyId.IPS_CONTRAST, Options.Contrast, -1000, 1000);
-                    item.SetPropertyRange(WiaPropertyId.IPS_BRIGHTNESS, Options.Brightness, -1000, 1000);
+                    item.SafeSetPropertyRange(WiaPropertyId.IPS_CONTRAST, Options.Contrast, -1000, 1000);
+                    item.SafeSetPropertyRange(WiaPropertyId.IPS_BRIGHTNESS, Options.Brightness, -1000, 1000);
                 }
             }
         }

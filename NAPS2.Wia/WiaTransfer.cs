@@ -3,7 +3,7 @@ using System.IO;
 using System.Runtime.InteropServices.ComTypes;
 using EventArgs = System.EventArgs;
 
-namespace NAPS2.Scan.Wia.Native
+namespace NAPS2.Wia
 {
     public class WiaTransfer : NativeWiaObject
     {

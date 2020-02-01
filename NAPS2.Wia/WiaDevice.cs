@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace NAPS2.Scan.Wia.Native
+namespace NAPS2.Wia
 {
     public class WiaDevice : WiaItemBase, IWiaDeviceProps
     {

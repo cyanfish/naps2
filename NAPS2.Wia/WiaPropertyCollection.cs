@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using NAPS2.Util;
 
-namespace NAPS2.Scan.Wia.Native
+namespace NAPS2.Wia
 {
     public class WiaPropertyCollection : NativeWiaObject, IEnumerable<WiaProperty>
     {
@@ -16,7 +15,7 @@ namespace NAPS2.Scan.Wia.Native
                 (id, name, type) => propertyDict.Add(id, new WiaProperty(Handle, id, name, type))));
         }
         
-        public WiaProperty this[int propId] => propertyDict.Get(propId);
+        public WiaProperty this[int propId] => propertyDict.ContainsKey(propId) ? propertyDict[propId] : null;
 
         public IEnumerator<WiaProperty> GetEnumerator() => propertyDict.Values.GetEnumerator();
 

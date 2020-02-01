@@ -22,25 +22,25 @@
   </ItemGroup>
   
   <ItemGroup>
-    <ContentWithTargetPath Include="..\NAPS2.Setup\lib\dbg\win64\NAPS2.WIA.dll">
+    <ContentWithTargetPath Include="..\NAPS2.Setup\lib\dbg\win64\NAPS2.Wia.Native.dll">
       <CopyToOutputDirectory Condition=" '$(Configuration)' == 'Debug' Or '$(Configuration)' == 'DebugLang' ">PreserveNewest</CopyToOutputDirectory>
-      <Link>lib\dbg\win64\NAPS2.WIA.dll</Link>
-      <TargetPath>_win64\NAPS2.WIA.dll</TargetPath>
+      <Link>lib\dbg\win64\NAPS2.Wia.Native.dll</Link>
+      <TargetPath>_win64\NAPS2.Wia.Native.dll</TargetPath>
     </ContentWithTargetPath>
-    <ContentWithTargetPath Include="..\NAPS2.Setup\lib\win64\NAPS2.WIA.dll">
+    <ContentWithTargetPath Include="..\NAPS2.Setup\lib\win64\NAPS2.Wia.Native.dll">
       <CopyToOutputDirectory Condition=" '$(Configuration)' != 'Debug' And '$(Configuration)' != 'DebugLang' ">PreserveNewest</CopyToOutputDirectory>
-      <Link>lib\win64\NAPS2.WIA.dll</Link>
-      <TargetPath>_win64\NAPS2.WIA.dll</TargetPath>
+      <Link>lib\win64\NAPS2.Wia.Native.dll</Link>
+      <TargetPath>_win64\NAPS2.Wia.Native.dll</TargetPath>
     </ContentWithTargetPath>
-    <ContentWithTargetPath Include="..\NAPS2.Setup\lib\dbg\win32\NAPS2.WIA.dll">
+    <ContentWithTargetPath Include="..\NAPS2.Setup\lib\dbg\win32\NAPS2.Wia.Native.dll">
       <CopyToOutputDirectory Condition=" '$(Configuration)' == 'Debug' Or '$(Configuration)' == 'DebugLang' ">PreserveNewest</CopyToOutputDirectory>
-      <Link>lib\dbg\win32\NAPS2.WIA.dll</Link>
-      <TargetPath>_win32\NAPS2.WIA.dll</TargetPath>
+      <Link>lib\dbg\win32\NAPS2.Wia.Native.dll</Link>
+      <TargetPath>_win32\NAPS2.Wia.Native.dll</TargetPath>
     </ContentWithTargetPath>
-    <ContentWithTargetPath Include="..\NAPS2.Setup\lib\win32\NAPS2.WIA.dll">
+    <ContentWithTargetPath Include="..\NAPS2.Setup\lib\win32\NAPS2.Wia.Native.dll">
       <CopyToOutputDirectory Condition=" '$(Configuration)' != 'Debug' And '$(Configuration)' != 'DebugLang' ">PreserveNewest</CopyToOutputDirectory>
-      <Link>lib\win32\NAPS2.WIA.dll</Link>
-      <TargetPath>_win32\NAPS2.WIA.dll</TargetPath>
+      <Link>lib\win32\NAPS2.Wia.Native.dll</Link>
+      <TargetPath>_win32\NAPS2.Wia.Native.dll</TargetPath>
     </ContentWithTargetPath>
     <ContentWithTargetPath Include="..\NAPS2.Setup\lib\win64\pdfium.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

@@ -3,9 +3,9 @@ using System.IO;
 using System.Runtime.InteropServices;
 using System.Runtime.InteropServices.ComTypes;
 
-namespace NAPS2.Scan.Wia.Native
+namespace NAPS2.Wia
 {
-    public class NativeStreamWrapper : Stream
+    internal class NativeStreamWrapper : Stream
     {
         private readonly IStream source;
         private readonly IntPtr nativeLong;

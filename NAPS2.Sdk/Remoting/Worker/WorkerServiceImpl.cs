@@ -11,7 +11,7 @@ using NAPS2.ImportExport.Pdf;
 using NAPS2.Scan;
 using NAPS2.Scan.Internal;
 using NAPS2.Scan.Wia;
-using NAPS2.Scan.Wia.Native;
+using NAPS2.Wia;
 using NAPS2.Serialization;
 
 namespace NAPS2.Remoting.Worker

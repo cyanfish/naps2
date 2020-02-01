@@ -1,12 +1,22 @@
 ﻿using System;
 using System.Runtime.InteropServices;
-using NAPS2.Platform;
 
-namespace NAPS2.Scan.Wia.Native
+namespace NAPS2.Wia
 {
     public abstract class NativeWiaObject : IDisposable
     {
-        public static WiaVersion DefaultWiaVersion => PlatformCompat.System.IsWia20Supported ? WiaVersion.Wia20 : WiaVersion.Wia10;
+        public static WiaVersion DefaultWiaVersion
+        {
+            get
+            {
+                if (Environment.OSVersion.Platform != PlatformID.Win32NT)
+                {
+                    throw new InvalidOperationException("Wia is only supported on Windows.");
+                }
+                // WIA 2.0 for Vista or later.
+                return Environment.OSVersion.Version.Major >= 6 ? WiaVersion.Wia20 : WiaVersion.Wia10;
+            }
+        }
 
         private bool disposed;
         private IntPtr handle;
@@ -25,14 +35,14 @@ namespace NAPS2.Scan.Wia.Native
         {
         }
 
-        protected internal IntPtr Handle
+        protected IntPtr Handle
         {
             get
             {
                 EnsureNotDisposed();
                 return handle;
             }
-            protected set => handle = value;
+            set => handle = value;
         }
 
         public WiaVersion Version { get; }

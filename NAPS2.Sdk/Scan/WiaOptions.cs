@@ -1,4 +1,4 @@
-﻿using NAPS2.Scan.Wia.Native;
+﻿using NAPS2.Wia;
 
 namespace NAPS2.Scan
 {

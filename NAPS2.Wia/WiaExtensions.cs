@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using NAPS2.Logging;
 
-namespace NAPS2.Scan.Wia.Native
+namespace NAPS2.Wia
 {
     public static class WiaExtensions
     {
@@ -50,14 +49,7 @@ namespace NAPS2.Scan.Wia.Native
             var prop = item.Properties[propId];
             if (prop != null)
             {
-                try
-                {
-                    prop.Value = value;
-                }
-                catch (Exception e)
-                {
-                    Log.ErrorException("Error setting property", e);
-                }
+                prop.Value = value;
             }
         }
 
@@ -79,14 +71,7 @@ namespace NAPS2.Scan.Wia.Native
                 else
                 {
                     // Not a list, try to set the property directly
-                    try
-                    {
-                        prop.Value = value;
-                    }
-                    catch (Exception e)
-                    {
-                        Log.ErrorException("Error setting property", e);
-                    }
+                    prop.Value = value;
                 }
             }
         }
@@ -114,14 +99,7 @@ namespace NAPS2.Scan.Wia.Native
                 else
                 {
                     // Not a range, try to set the property directly
-                    try
-                    {
-                        prop.Value = value;
-                    }
-                    catch (Exception e)
-                    {
-                        Log.ErrorException("Error setting property", e);
-                    }
+                    prop.Value = value;
                 }
             }
         }

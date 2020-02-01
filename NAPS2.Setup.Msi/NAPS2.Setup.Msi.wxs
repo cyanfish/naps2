@@ -88,6 +88,7 @@
         <File Source="..\NAPS2.App.Console\bin\InstallerMSI\net46\NAPS2.Lib.Console.dll" />
         <File Source="..\NAPS2.App.WinForms\bin\InstallerMSI\net46\NAPS2.Lib.WinForms.dll" />
         <File Source="..\NAPS2.App.WinForms\bin\InstallerMSI\net46\NAPS2.Sdk.dll" />
+        <File Source="..\NAPS2.App.WinForms\bin\InstallerMSI\net46\NAPS2.Wia.dll" />
         <File Source="..\NAPS2.App.Console\bin\InstallerMSI\net46\CommandLine.dll" />
         <File Source="..\NAPS2.App.WinForms\bin\InstallerMSI\net46\Google.Protobuf.dll" />
         <File Source="..\NAPS2.App.WinForms\bin\InstallerMSI\net46\Grpc.Core.Api.dll" />
@@ -109,14 +110,14 @@
     <!-- Platform-specific dependencies -->
     <DirectoryRef Id="LIBWIN32FOLDER">
       <Component Id="DepsWin32" Guid="2BE3E5A4-7526-4074-90A1-5B4E830EA337">
-        <File Source="..\NAPS2.Setup\lib\win32\NAPS2.WIA.dll" Id="naps2wia_win32" />
+        <File Source="..\NAPS2.Setup\lib\win32\NAPS2.Wia.Native.dll" Id="naps2wia_win32" />
         <File Source="..\NAPS2.Setup\lib\win32\pdfium.dll" Id="pdfium_win32" />
         <File Source="..\NAPS2.Setup\lib\win32\twaindsm.dll" Id="twaindsm_win32" />
       </Component>
     </DirectoryRef>
     <DirectoryRef Id="LIBWIN64FOLDER">
       <Component Id="DepsWin64" Guid="9F734E22-7835-43B9-8B58-E10EF6484DD7">
-        <File Source="..\NAPS2.Setup\lib\win64\NAPS2.WIA.dll" Id="naps2wia_win64" />
+        <File Source="..\NAPS2.Setup\lib\win64\NAPS2.Wia.Native.dll" Id="naps2wia_win64" />
         <File Source="..\NAPS2.Setup\lib\win64\twaindsm.dll" Id="twaindsm_win64" />
       </Component>
     </DirectoryRef>

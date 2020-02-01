@@ -33,7 +33,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NAPS2.Tools.Localization", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NAPS2.App.Server", "NAPS2.App.Server\NAPS2.App.Server.csproj", "{BC0E3031-6C00-4707-A424-4FF04425D719}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NAPS2.Sdk.NativeWia", "NAPS2.Sdk.NativeWia\NAPS2.Sdk.NativeWia.vcxproj", "{BB7D50B9-C3C2-46A9-AFBC-C15097413FCF}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NAPS2.Wia.Native", "NAPS2.Wia.Native\NAPS2.Wia.Native.vcxproj", "{BB7D50B9-C3C2-46A9-AFBC-C15097413FCF}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NAPS2.Sdk.Samples", "NAPS2.Sdk.Samples\NAPS2.Sdk.Samples.csproj", "{1165EE3A-5EE1-462B-8D9F-975D66710F1A}"
 EndProject
@@ -44,6 +44,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NAPS2.Lib.WinForms", "NAPS2.Lib.WinForms\NAPS2.Lib.WinForms.csproj", "{95A03B74-A235-42A4-A433-E3884E180BE4}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NAPS2.Lib.Console", "NAPS2.Lib.Console\NAPS2.Lib.Console.csproj", "{FDF64AB4-7495-4A3F-A017-441F6BC6D781}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NAPS2.Wia", "NAPS2.Wia\NAPS2.Wia.csproj", "{F82CF691-72D1-4C9B-A526-41CFA4180A4C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -188,6 +190,16 @@ Global
 		{FDF64AB4-7495-4A3F-A017-441F6BC6D781}.InstallerMSI|Any CPU.Build.0 = Release|Any CPU
 		{FDF64AB4-7495-4A3F-A017-441F6BC6D781}.Standalone|Any CPU.ActiveCfg = Release|Any CPU
 		{FDF64AB4-7495-4A3F-A017-441F6BC6D781}.Standalone|Any CPU.Build.0 = Release|Any CPU
+		{F82CF691-72D1-4C9B-A526-41CFA4180A4C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F82CF691-72D1-4C9B-A526-41CFA4180A4C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F82CF691-72D1-4C9B-A526-41CFA4180A4C}.DebugLang|Any CPU.ActiveCfg = Debug|Any CPU
+		{F82CF691-72D1-4C9B-A526-41CFA4180A4C}.DebugLang|Any CPU.Build.0 = Debug|Any CPU
+		{F82CF691-72D1-4C9B-A526-41CFA4180A4C}.InstallerEXE|Any CPU.ActiveCfg = Debug|Any CPU
+		{F82CF691-72D1-4C9B-A526-41CFA4180A4C}.InstallerEXE|Any CPU.Build.0 = Debug|Any CPU
+		{F82CF691-72D1-4C9B-A526-41CFA4180A4C}.InstallerMSI|Any CPU.ActiveCfg = Debug|Any CPU
+		{F82CF691-72D1-4C9B-A526-41CFA4180A4C}.InstallerMSI|Any CPU.Build.0 = Debug|Any CPU
+		{F82CF691-72D1-4C9B-A526-41CFA4180A4C}.Standalone|Any CPU.ActiveCfg = Debug|Any CPU
+		{F82CF691-72D1-4C9B-A526-41CFA4180A4C}.Standalone|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

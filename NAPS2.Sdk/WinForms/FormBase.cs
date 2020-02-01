@@ -3,6 +3,7 @@ using System.Globalization;
 using System.Linq;
 using System.Windows.Forms;
 using NAPS2.Config;
+using NAPS2.Remoting.Worker;
 using NAPS2.Scan;
 using NAPS2.Util;
 
@@ -42,6 +43,11 @@ namespace NAPS2.WinForms
         protected void AddEnumItems<T>(ComboBox combo)
         {
             AddEnumItems<T>(combo, Combo_Format);
+        }
+
+        protected void AddEnumItems<T>(ComboBox combo, Func<T, string> format)
+        {
+            AddEnumItems<T>(combo, (sender, e) => e.Value = format((T) e.ListItem));
         }
 
         protected void AddEnumItems<T>(ComboBox combo, ListControlConvertEventHandler format)

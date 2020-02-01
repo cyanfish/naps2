@@ -1,8 +1,9 @@
 using System;
+using NAPS2.Lang.Resources;
 using NAPS2.Scan;
 using NAPS2.Scan.Twain;
 using NAPS2.Scan.Wia;
-using NAPS2.Scan.Wia.Native;
+using NAPS2.Wia;
 
 namespace NAPS2.WinForms
 {
@@ -12,12 +13,24 @@ namespace NAPS2.WinForms
         {
             InitializeComponent();
 
-            AddEnumItems<WiaVersion>(cmbWiaVersion);
+            AddEnumItems<WiaVersion>(cmbWiaVersion, FormatWiaVersion);
             AddEnumItems<TwainImpl>(cmbTwainImpl);
             if (!Environment.Is64BitProcess)
             {
                 cmbTwainImpl.Items.Remove(TwainImpl.X64);
             }
+        }
+
+        // TODO: Standardize on this and put all formatters in some common location
+        private string FormatWiaVersion(WiaVersion value)
+        {
+            return value switch
+            {
+                WiaVersion.Default => SettingsResources.WiaVersion_Default,
+                WiaVersion.Wia10 => SettingsResources.WiaVersion_Wia10,
+                WiaVersion.Wia20 => SettingsResources.WiaVersion_Wia20,
+                _ => value.ToString()
+            };
         }
 
         protected override void OnLoad(object sender, EventArgs e)

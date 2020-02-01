@@ -1,6 +1,6 @@
 ﻿using NAPS2.Lang.Resources;
 using NAPS2.Scan.Exceptions;
-using NAPS2.Scan.Wia.Native;
+using NAPS2.Wia;
 
 namespace NAPS2.Scan.Wia
 {
