@@ -61,7 +61,7 @@ namespace NAPS2.Wia
             var fileName = Path.GetRandomFileName();
             IntPtr itemHandle = IntPtr.Zero;
             int fileCount = 0;
-            string[] filePaths = new string[10]; // TODO: wtf?
+            string[] filePaths = new string[0];
             var hr = Version == WiaVersion.Wia10
                 ? NativeWiaMethods.GetImage1(Handle, parentWindowHandle, SCANNER_DEVICE_TYPE, 0, 0, Path.Combine(tempFolder, fileName), IntPtr.Zero)
                 : NativeWiaMethods.GetImage2(Handle, 0, device.Id(), parentWindowHandle, tempFolder, fileName, ref fileCount, ref filePaths, ref itemHandle);
