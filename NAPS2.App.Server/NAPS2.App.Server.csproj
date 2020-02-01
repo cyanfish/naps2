@@ -19,7 +19,10 @@
   <ItemGroup>
     <ProjectReference Include="..\NAPS2.App.Worker\NAPS2.App.Worker.csproj" />
     <ProjectReference Include="..\NAPS2.Lib.WinForms\NAPS2.Lib.WinForms.csproj" />
+    <ProjectReference Include="..\NAPS2.Sdk.Network\NAPS2.Sdk.Network.csproj" />
     <PackageReference Include="LargeAddressAware" Version="1.0.3" />
+    
+    <Reference Include="System.Windows.Forms" />
   </ItemGroup>
 
 </Project>

@@ -317,14 +317,6 @@ namespace NAPS2.WinForms
             this.btnAdvanced.UseVisualStyleBackColor = true;
             this.btnAdvanced.Click += new System.EventHandler(this.btnAdvanced_Click);
             // 
-            // btnNetwork
-            // 
-            resources.ApplyResources(this.btnNetwork, "btnNetwork");
-            this.btnNetwork.Image = global::NAPS2.Icons.wireless16;
-            this.btnNetwork.Name = "btnNetwork";
-            this.btnNetwork.UseVisualStyleBackColor = true;
-            this.btnNetwork.Click += new System.EventHandler(this.btnNetwork_Click);
-            // 
             // FEditProfile
             // 
             this.AcceptButton = this.btnOK;

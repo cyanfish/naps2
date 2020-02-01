@@ -2,7 +2,7 @@
 using System.ServiceModel;
 using NAPS2.Recovery;
 
-namespace NAPS2.Remoting.ClientServer
+namespace NAPS2.Remoting.Network
 {
     [ServiceContract]
     public interface IScanCallback

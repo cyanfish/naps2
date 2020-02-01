@@ -47,7 +47,6 @@
       <HintPath>..\NAPS2.Setup\lib\PdfSharp.dll</HintPath>
     </Reference>
     <Reference Include="System.Windows.Forms" />
-    <Reference Include="System.ServiceModel" />
     
     <PackageReference Include="BouncyCastle" Version="1.8.4" />
     <PackageReference Include="CommandLineParser" Version="1.9.71" />

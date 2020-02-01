@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading;
 using NAPS2.Util;
 
-namespace NAPS2.Remoting.ClientServer
+namespace NAPS2.Remoting.Network
 {
     public class ServerDiscovery
     {

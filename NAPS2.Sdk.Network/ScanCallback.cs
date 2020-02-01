@@ -1,7 +1,7 @@
 ﻿using System;
 using NAPS2.Recovery;
 
-namespace NAPS2.Remoting.ClientServer
+namespace NAPS2.Remoting.Network
 {
     public class ScanCallback : IScanCallback
     {

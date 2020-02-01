@@ -47,6 +47,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NAPS2.Lib.Console", "NAPS2.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NAPS2.Wia", "NAPS2.Wia\NAPS2.Wia.csproj", "{F82CF691-72D1-4C9B-A526-41CFA4180A4C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NAPS2.Sdk.Network", "NAPS2.Sdk.Network\NAPS2.Sdk.Network.csproj", "{E8BBAE00-3F73-4AEF-9C88-6F56F30C54E5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NAPS2.Sdk.Network.Tests", "NAPS2.Sdk.Network.Tests\NAPS2.Sdk.Network.Tests.csproj", "{3A2865CE-9386-4760-A011-667855B58452}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -200,6 +204,26 @@ Global
 		{F82CF691-72D1-4C9B-A526-41CFA4180A4C}.InstallerMSI|Any CPU.Build.0 = Debug|Any CPU
 		{F82CF691-72D1-4C9B-A526-41CFA4180A4C}.Standalone|Any CPU.ActiveCfg = Debug|Any CPU
 		{F82CF691-72D1-4C9B-A526-41CFA4180A4C}.Standalone|Any CPU.Build.0 = Debug|Any CPU
+		{E8BBAE00-3F73-4AEF-9C88-6F56F30C54E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E8BBAE00-3F73-4AEF-9C88-6F56F30C54E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E8BBAE00-3F73-4AEF-9C88-6F56F30C54E5}.DebugLang|Any CPU.ActiveCfg = Debug|Any CPU
+		{E8BBAE00-3F73-4AEF-9C88-6F56F30C54E5}.DebugLang|Any CPU.Build.0 = Debug|Any CPU
+		{E8BBAE00-3F73-4AEF-9C88-6F56F30C54E5}.InstallerEXE|Any CPU.ActiveCfg = Debug|Any CPU
+		{E8BBAE00-3F73-4AEF-9C88-6F56F30C54E5}.InstallerEXE|Any CPU.Build.0 = Debug|Any CPU
+		{E8BBAE00-3F73-4AEF-9C88-6F56F30C54E5}.InstallerMSI|Any CPU.ActiveCfg = Debug|Any CPU
+		{E8BBAE00-3F73-4AEF-9C88-6F56F30C54E5}.InstallerMSI|Any CPU.Build.0 = Debug|Any CPU
+		{E8BBAE00-3F73-4AEF-9C88-6F56F30C54E5}.Standalone|Any CPU.ActiveCfg = Debug|Any CPU
+		{E8BBAE00-3F73-4AEF-9C88-6F56F30C54E5}.Standalone|Any CPU.Build.0 = Debug|Any CPU
+		{3A2865CE-9386-4760-A011-667855B58452}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3A2865CE-9386-4760-A011-667855B58452}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3A2865CE-9386-4760-A011-667855B58452}.DebugLang|Any CPU.ActiveCfg = Debug|Any CPU
+		{3A2865CE-9386-4760-A011-667855B58452}.DebugLang|Any CPU.Build.0 = Debug|Any CPU
+		{3A2865CE-9386-4760-A011-667855B58452}.InstallerEXE|Any CPU.ActiveCfg = Debug|Any CPU
+		{3A2865CE-9386-4760-A011-667855B58452}.InstallerEXE|Any CPU.Build.0 = Debug|Any CPU
+		{3A2865CE-9386-4760-A011-667855B58452}.InstallerMSI|Any CPU.ActiveCfg = Debug|Any CPU
+		{3A2865CE-9386-4760-A011-667855B58452}.InstallerMSI|Any CPU.Build.0 = Debug|Any CPU
+		{3A2865CE-9386-4760-A011-667855B58452}.Standalone|Any CPU.ActiveCfg = Debug|Any CPU
+		{3A2865CE-9386-4760-A011-667855B58452}.Standalone|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

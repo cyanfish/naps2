@@ -7,6 +7,7 @@ namespace NAPS2.Util
 {
     public static class CollectionExtensions
     {
+#if !NETCOREAPP3_0
         /// <summary>
         /// Appends the given item to the end of the enumerable.
         /// </summary>
@@ -22,6 +23,7 @@ namespace NAPS2.Util
             }
             yield return item;
         }
+#endif
 
         /// <summary>
         /// Prepends the given item to the start of the enumerable.

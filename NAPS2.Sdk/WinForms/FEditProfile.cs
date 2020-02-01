@@ -6,12 +6,8 @@ using System.Windows.Forms;
 using NAPS2.Lang.Resources;
 using NAPS2.Logging;
 using NAPS2.Platform;
-using NAPS2.Remoting.ClientServer;
 using NAPS2.Scan;
 using NAPS2.Scan.Exceptions;
-using NAPS2.Scan.Sane;
-using NAPS2.Scan.Twain;
-using NAPS2.Scan.Wia;
 using NAPS2.Util;
 
 namespace NAPS2.WinForms
@@ -513,19 +509,6 @@ namespace NAPS2.WinForms
             public string CustomName { get; set; }
 
             public PageDimensions CustomDimens { get; set; }
-        }
-
-        private void btnNetwork_Click(object sender, EventArgs e)
-        {
-            var form = FormFactory.Create<FProxyConfig>();
-            form.ProxyConfig = ScanProfile.ProxyConfig;
-            form.UseProxy = useProxy;
-            if (form.ShowDialog() == DialogResult.OK)
-            {
-                ScanProfile.ProxyConfig = form.ProxyConfig;
-                useProxy = form.UseProxy;
-                UpdateEnabledControls();
-            }
         }
     }
 }

@@ -6,25 +6,25 @@ using System.Threading.Tasks;
 using NAPS2.Scan;
 using NAPS2.Scan.Internal;
 
-namespace NAPS2.Remoting.ClientServer
+namespace NAPS2.Remoting.Network
 {
     [ServiceBehavior(InstanceContextMode = InstanceContextMode.PerSession,
         IncludeExceptionDetailInFaults = true,
         ConcurrencyMode = ConcurrencyMode.Multiple)]
     public class ScanService : IScanService
     {
-        private readonly IRemoteScanController remoteScanController;
-
-        private CancellationTokenSource scanCts = new CancellationTokenSource();
-
-        public ScanService() : this(new RemoteScanController())
-        {
-        }
-        
-        internal ScanService(IRemoteScanController remoteScanController)
-        {
-            this.remoteScanController = remoteScanController;
-        }
+        // private readonly IRemoteScanController remoteScanController;
+        //
+        // private CancellationTokenSource scanCts = new CancellationTokenSource();
+        //
+        // public ScanService() : this(new RemoteScanController())
+        // {
+        // }
+        //
+        // internal ScanService(IRemoteScanController remoteScanController)
+        // {
+        //     this.remoteScanController = remoteScanController;
+        // }
 
         public List<string> GetSupportedDriverNames()
         {
@@ -111,7 +111,7 @@ namespace NAPS2.Remoting.ClientServer
 
         public void CancelScan()
         {
-            scanCts.Cancel();
+            // scanCts.Cancel();
         }
     }
 }

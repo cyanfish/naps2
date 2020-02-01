@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using NAPS2.Logging;
 using NAPS2.Modules;
-using NAPS2.Remoting.ClientServer;
+using NAPS2.Remoting.Network;
 using NAPS2.Remoting.Worker;
 using NAPS2.Util;
 using NAPS2.WinForms;
 using Ninject;
 
-namespace NAPS2.EntryPoints
+namespace NAPS2.Server
 {
     /// <summary>
     /// The entry point for NAPS2.Server.exe, which exposes scanning devices over the network to other NAPS2 applications.
@@ -56,7 +56,7 @@ namespace NAPS2.EntryPoints
                 using var host = new ServiceHost(typeof(ScanService));
                 var serverIcon = new ServerNotifyIcon(port, () => form.Close());
                 host.Opened += (sender, eventArgs) => serverIcon.Show();
-                host.Description.Behaviors.Add(new ServiceFactoryBehavior(() => kernel.Get<ScanService>()));
+                // host.Description.Behaviors.Add(new ServiceFactoryBehavior(() => kernel.Get<ScanService>()));
                 var binding = new NetTcpBinding
                 {
                     ReceiveTimeout = TimeSpan.FromHours(1),

@@ -1137,33 +1137,6 @@
   <data name="&gt;&gt;btnAdvanced.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="btnNetwork.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="btnNetwork.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="btnNetwork.Location" type="System.Drawing.Point, System.Drawing">
-    <value>355, 96</value>
-  </data>
-  <data name="btnNetwork.Size" type="System.Drawing.Size, System.Drawing">
-    <value>26, 23</value>
-  </data>
-  <data name="btnNetwork.TabIndex" type="System.Int32, mscorlib">
-    <value>33</value>
-  </data>
-  <data name="&gt;&gt;btnNetwork.Name" xml:space="preserve">
-    <value>btnNetwork</value>
-  </data>
-  <data name="&gt;&gt;btnNetwork.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;btnNetwork.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;btnNetwork.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>

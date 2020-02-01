@@ -3,7 +3,7 @@ using System.ServiceModel;
 using System.Threading.Tasks;
 using NAPS2.Scan;
 
-namespace NAPS2.Remoting.ClientServer
+namespace NAPS2.Remoting.Network
 {
     [ServiceContract(CallbackContract = typeof(IScanCallback))]
     public interface IScanService

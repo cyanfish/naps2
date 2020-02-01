@@ -2,7 +2,7 @@
 using System.ServiceModel;
 using NAPS2.Scan;
 
-namespace NAPS2.Remoting.ClientServer
+namespace NAPS2.Remoting.Network
 {
     public class ClientContextFactory
     {

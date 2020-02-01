@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Runtime.InteropServices;
-using NAPS2.Util;
 // ReSharper disable InconsistentNaming
 
 namespace NAPS2.ImportExport.Pdf
 {
-    public class PdfiumNativeLibrary : NativeLibrary
+    public class PdfiumNativeLibrary : Util.NativeLibrary
     {
         public const int FPDFBitmap_BGR = 2;
         public const int FPDFBitmap_BGRA = 4;
