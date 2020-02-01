@@ -11,5 +11,10 @@ Other links:
 - [Discussion Forums](https://sourceforge.net/p/naps2/discussion/general/) - For more open-ended discussion.
 - [Donate](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=M77MFAP2ZV9RG)
 
-## For developers
-Have a look at the [Developer Onboarding](https://www.naps2.com/doc-dev-onboarding.html) page.
+## NAPS2.Sdk (for developers)
+
+[NAPS2.Sdk](https://github.com/cyanfish/naps2/tree/master/NAPS2.Sdk) is a fully-featured scanning library, supporting WIA, TWAIN, and SANE scanners on Windows and Linux.
+[Read more.](https://github.com/cyanfish/naps2/tree/master/NAPS2.Sdk)
+
+<!-- TODO: Move dev onboarding to the github wiki -->
+Looking to contribute to NAPS2 or NAPS2.Sdk? Have a look at the [Developer Onboarding](https://www.naps2.com/doc-dev-onboarding.html) page.
