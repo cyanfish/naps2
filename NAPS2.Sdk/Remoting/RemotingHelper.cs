@@ -31,7 +31,7 @@ namespace NAPS2.Remoting
             }
         }
 
-        private static Error ToError(Exception e) =>
+        public static Error ToError(Exception e) =>
             new Error
             {
                 Type = e.GetType().FullName,

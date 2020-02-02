@@ -3,16 +3,56 @@ using System.Collections.Generic;
 using System.ServiceModel;
 using System.Threading;
 using System.Threading.Tasks;
+using Grpc.Core;
 using NAPS2.Scan;
 using NAPS2.Scan.Internal;
+using NAPS2.Serialization;
 
 namespace NAPS2.Remoting.Network
 {
-    [ServiceBehavior(InstanceContextMode = InstanceContextMode.PerSession,
-        IncludeExceptionDetailInFaults = true,
-        ConcurrencyMode = ConcurrencyMode.Multiple)]
-    public class ScanService : IScanService
+    internal class ScanService : NetworkScanService.NetworkScanServiceBase
     {
+        public override Task<GetCapabilitiesResponse> GetCapabilities(GetCapabilitiesRequest request, ServerCallContext context)
+        {
+            return base.GetCapabilities(request, context);
+        }
+
+        public override async Task<GetDeviceListResponse> GetDeviceList(GetDeviceListRequest request, ServerCallContext context)
+        {
+            try
+            {
+                var controller = new ScanController();
+                var options = request.OptionsXml.FromXml<ScanOptions>();
+                var devices = await controller.GetDeviceList(options);
+                return new GetDeviceListResponse
+                {
+                    DeviceListXml = devices.ToXml()
+                };
+            }
+            catch (Exception e)
+            {
+                return new GetDeviceListResponse
+                {
+                    Error = RemotingHelper.ToError(e)
+                };
+            }
+        }
+
+        public override async Task Scan(ScanRequest request, IServerStreamWriter<ScanResponse> responseStream, ServerCallContext context)
+        {
+            try
+            {
+                // TODO
+            }
+            catch (Exception e)
+            {
+                await responseStream.WriteAsync(new ScanResponse
+                {
+                    Error = RemotingHelper.ToError(e)
+                });
+            }
+        }
+
         // private readonly IRemoteScanController remoteScanController;
         //
         // private CancellationTokenSource scanCts = new CancellationTokenSource();

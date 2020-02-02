@@ -9,16 +9,17 @@ using NAPS2.Util;
 
 namespace NAPS2.Remoting.Network
 {
-    public class ServerDiscovery
+    public class Discovery
     {
-        private const int DISCOVERY_PORT = 33277;
+        public const int DEFAULT_DISCOVERY_PORT = 33277;
+        
         private static readonly byte[] MagicBroadcastBytes = { 0x7f, 0x87, 0x00, 0x8b, 0x08, 0x87, 0x5d, 0xd3, 0x64, 0x1a };
         private static readonly byte[] MagicResponseBytes = { 0xf4, 0x38, 0xb9, 0xa3, 0xf7, 0x37, 0xaf, 0x35, 0x41, 0xc7 };
 
         public static void ListenForBroadcast(int serverPort)
         {
             var fallback = new ExpFallback(100, 60 * 1000);
-            var udpClient = new UdpClient(DISCOVERY_PORT) { Client = { ReceiveTimeout = 0 } };
+            var udpClient = new UdpClient(DEFAULT_DISCOVERY_PORT) { Client = { ReceiveTimeout = 0 } };
             IPEndPoint remoteEndpoint = null;
             while (true)
             {
@@ -45,7 +46,7 @@ namespace NAPS2.Remoting.Network
         public static void SendBroadcast(Action<string, IPEndPoint> callback)
         {
             var udpClient = new UdpClient { Client = { ReceiveTimeout = 1000 } };
-            udpClient.Send(MagicBroadcastBytes, MagicBroadcastBytes.Length, new IPEndPoint(IPAddress.Broadcast, DISCOVERY_PORT));
+            udpClient.Send(MagicBroadcastBytes, MagicBroadcastBytes.Length, new IPEndPoint(IPAddress.Broadcast, DEFAULT_DISCOVERY_PORT));
 
             var fallback = new ExpFallback(100, 60 * 1000);
             IPEndPoint remoteEndpoint = null;

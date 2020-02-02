@@ -86,48 +86,44 @@ namespace NAPS2.Remoting.Worker
                 },
                 err => new GetDeviceListResponse { Error = err });
 
-        public override Task Scan(ScanRequest request, IServerStreamWriter<ScanResponse> responseStream, ServerCallContext context)
+        public override async Task Scan(ScanRequest request, IServerStreamWriter<ScanResponse> responseStream, ServerCallContext context)
         {
-            // gRPC doesn't allow multiple pending writes. However, we don't want to write synchronously because that will slow down the scanning process.
-            // Instead, we can use some async magic (chained tasks) to only write one at a time. 
-            Task lastWriteTask = Task.CompletedTask;
-
-            Task WriteSequenced(ScanResponse response)
+            var sequencedWriter = new SequencedWriter<ScanResponse>(responseStream);
+            try
             {
-                lastWriteTask = lastWriteTask.ContinueWith(t => responseStream.WriteAsync(response)).Unwrap();
-                return lastWriteTask;
-            }
-
-            return RemotingHelper.WrapAction(
-                async () =>
-                {
-                    var scanEvents = new ScanEvents(
-                        () => WriteSequenced(new ScanResponse
+                var scanEvents = new ScanEvents(
+                    () => sequencedWriter.Write(new ScanResponse
+                    {
+                        PageStart = new PageStartEvent()
+                    }),
+                    progress => sequencedWriter.Write(new ScanResponse
+                    {
+                        Progress = new ProgressEvent
                         {
-                            PageStart = new PageStartEvent()
-                        }),
-                        progress => WriteSequenced(new ScanResponse
+                            Value = progress
+                        }
+                    })
+                );
+                await remoteScanController.Scan(request.OptionsXml.FromXml<ScanOptions>(),
+                    context.CancellationToken, scanEvents,
+                    (image, postProcessingContext) =>
+                        sequencedWriter.Write(new ScanResponse
                         {
-                            Progress = new ProgressEvent
-                            {
-                                Value = progress
-                            }
-                        })
-                    );
-                    await remoteScanController.Scan(request.OptionsXml.FromXml<ScanOptions>(), context.CancellationToken, scanEvents,
-                        (image, postProcessingContext) =>
-                            WriteSequenced(new ScanResponse
-                            {
-                                Image = SerializedImageHelper.Serialize(imageContext, image, new SerializedImageHelper.SerializeOptions
+                            Image = SerializedImageHelper.Serialize(imageContext, image,
+                                new SerializedImageHelper.SerializeOptions
                                 {
                                     TransferOwnership = true,
                                     IncludeThumbnail = true,
                                     RenderedFilePath = postProcessingContext.TempPath
                                 })
-                            }));
-                    // It's important that we wait for writes to complete, otherwise the channel might close first.
-                    await lastWriteTask;
-                }, err => WriteSequenced(new ScanResponse { Error = err }).Wait());
+                        }));
+                await sequencedWriter.WaitForCompletion();
+            }
+            catch (Exception e)
+            {
+                sequencedWriter.Write(new ScanResponse { Error = RemotingHelper.ToError(e) });
+                await sequencedWriter.WaitForCompletion();
+            }
         }
 
         public override Task<SendMapiEmailResponse> SendMapiEmail(SendMapiEmailRequest request, ServerCallContext context) =>

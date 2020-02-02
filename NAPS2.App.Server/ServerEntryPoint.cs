@@ -50,24 +50,24 @@ namespace NAPS2.Server
                     }
                 }
 
-                new Thread(() => ServerDiscovery.ListenForBroadcast(port)) { IsBackground = true }.Start();
+                new Thread(() => Discovery.ListenForBroadcast(port)) { IsBackground = true }.Start();
 
-                // Listen for requests
-                using var host = new ServiceHost(typeof(ScanService));
+                // // Listen for requests
+                // using var host = new ServiceHost(typeof(ScanService));
                 var serverIcon = new ServerNotifyIcon(port, () => form.Close());
-                host.Opened += (sender, eventArgs) => serverIcon.Show();
-                // host.Description.Behaviors.Add(new ServiceFactoryBehavior(() => kernel.Get<ScanService>()));
-                var binding = new NetTcpBinding
-                {
-                    ReceiveTimeout = TimeSpan.FromHours(1),
-                    SendTimeout = TimeSpan.FromHours(1),
-                    Security =
-                    {
-                        Mode = SecurityMode.None
-                    }
-                };
-                host.AddServiceEndpoint(typeof(IScanService), binding, $"net.tcp://0.0.0.0:{port}/NAPS2.Server");
-                host.Open();
+                // host.Opened += (sender, eventArgs) => serverIcon.Show();
+                // // host.Description.Behaviors.Add(new ServiceFactoryBehavior(() => kernel.Get<ScanService>()));
+                // var binding = new NetTcpBinding
+                // {
+                //     ReceiveTimeout = TimeSpan.FromHours(1),
+                //     SendTimeout = TimeSpan.FromHours(1),
+                //     Security =
+                //     {
+                //         Mode = SecurityMode.None
+                //     }
+                // };
+                // host.AddServiceEndpoint(typeof(IScanService), binding, $"net.tcp://0.0.0.0:{port}/NAPS2.Server");
+                // host.Open();
                 try
                 {
                     Application.Run(form);
