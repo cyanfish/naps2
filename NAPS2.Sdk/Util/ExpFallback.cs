@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace NAPS2.Util
 {
@@ -25,6 +27,17 @@ namespace NAPS2.Util
         public void Increase()
         {
             Value = Math.Min(Value * 2, Max);
+        }
+
+        public async Task DelayTask(CancellationToken cancellationToken = default)
+        {
+            try
+            {
+                await Task.Delay(Value, cancellationToken);
+            }
+            catch (OperationCanceledException)
+            {
+            }
         }
     }
 }

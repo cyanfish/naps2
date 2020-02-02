@@ -5,83 +5,107 @@ using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading;
+using System.Threading.Tasks;
+using NAPS2.Remoting.Network.Internal;
 using NAPS2.Util;
 
-namespace NAPS2.Remoting.Network
+namespace NAPS2.Remoting.Network.Internal
 {
-    public class Discovery
+    internal static class Discovery
     {
         public const int DEFAULT_DISCOVERY_PORT = 33277;
         
         private static readonly byte[] MagicBroadcastBytes = { 0x7f, 0x87, 0x00, 0x8b, 0x08, 0x87, 0x5d, 0xd3, 0x64, 0x1a };
         private static readonly byte[] MagicResponseBytes = { 0xf4, 0x38, 0xb9, 0xa3, 0xf7, 0x37, 0xaf, 0x35, 0x41, 0xc7 };
 
-        public static void ListenForBroadcast(int serverPort)
+        public static async Task ListenForBroadcast(int discoveryPort, int serverPort, string serverName,
+            CancellationToken cancellationToken)
         {
+            var udpClient = new UdpClient(discoveryPort);
+            using var cancelReg = cancellationToken.Register(() => udpClient.Dispose());
+            
             var fallback = new ExpFallback(100, 60 * 1000);
-            var udpClient = new UdpClient(DEFAULT_DISCOVERY_PORT) { Client = { ReceiveTimeout = 0 } };
-            IPEndPoint remoteEndpoint = null;
             while (true)
             {
                 try
                 {
-                    var receivedBytes = udpClient.Receive(ref remoteEndpoint);
-                    if (receivedBytes.SequenceEqual(MagicBroadcastBytes))
+                    var response = await udpClient.ReceiveAsync();
+                    if (cancellationToken.IsCancellationRequested)
+                    {
+                        return;
+                    }
+                    if (response.Buffer.SequenceEqual(MagicBroadcastBytes))
                     {
                         var responseBytes = MagicResponseBytes
                             .Concat(BitConverter.GetBytes(serverPort))
-                            .Concat(Encoding.UTF8.GetBytes(Environment.MachineName))
+                            .Concat(Encoding.UTF8.GetBytes(serverName))
                             .ToArray();
-                        udpClient.Send(responseBytes, responseBytes.Length, remoteEndpoint);
+                        udpClient.Send(responseBytes, responseBytes.Length, response.RemoteEndPoint);
                     }
+                }
+                catch (ObjectDisposedException)
+                {
+                    break;
                 }
                 catch (SocketException)
                 {
-                    Thread.Sleep(fallback.Value);
+                    await fallback.DelayTask(cancellationToken);
                     fallback.Increase();
                 }
             }
         }
 
-        public static void SendBroadcast(Action<string, IPEndPoint> callback)
+        public static async Task SendBroadcast(int discoveryPort, Action<DiscoveredServer> callback,
+            int timeout, CancellationToken cancellationToken)
         {
-            var udpClient = new UdpClient { Client = { ReceiveTimeout = 1000 } };
-            udpClient.Send(MagicBroadcastBytes, MagicBroadcastBytes.Length, new IPEndPoint(IPAddress.Broadcast, DEFAULT_DISCOVERY_PORT));
+            var udpClient = new UdpClient();
+            using var cancelReg = cancellationToken.Register(() => udpClient.Dispose());
 
-            var fallback = new ExpFallback(100, 60 * 1000);
-            IPEndPoint remoteEndpoint = null;
-            var stopwatch = new Stopwatch();
-            stopwatch.Start();
+            try
+            {
+                var broadcastEndpoint = new IPEndPoint(IPAddress.Broadcast, discoveryPort);
+                await udpClient.SendAsync(MagicBroadcastBytes, MagicBroadcastBytes.Length, broadcastEndpoint);
+            }
+            catch (ObjectDisposedException)
+            {
+                return;
+            }
+
+            var fallback = new ExpFallback(50, timeout / 2);
             while (true)
             {
                 try
                 {
-                    var receivedBytes = udpClient.Receive(ref remoteEndpoint);
+                    var response = await udpClient.ReceiveAsync();
                     int portIndex = MagicResponseBytes.Length;
                     int nameIndex = portIndex + 4;
-                    if (receivedBytes.Length >= nameIndex &&
-                        receivedBytes.Take(portIndex).SequenceEqual(MagicResponseBytes))
+                    if (response.Buffer.Length >= nameIndex &&
+                        response.Buffer.Take(portIndex).SequenceEqual(MagicResponseBytes))
                     {
-                        int port = BitConverter.ToInt32(receivedBytes, portIndex);
-                        string computerName = "";
+                        int port = BitConverter.ToInt32(response.Buffer, portIndex);
+                        string serverName = "";
                         try
                         {
-                            computerName = Encoding.UTF8.GetString(receivedBytes, nameIndex, receivedBytes.Length - nameIndex);
+                            serverName = Encoding.UTF8.GetString(response.Buffer, nameIndex,
+                                response.Buffer.Length - nameIndex);
                         }
                         catch (ArgumentException)
                         {
                         }
-                        callback(computerName, new IPEndPoint(remoteEndpoint.Address, port));
+
+                        var endpoint = new IPEndPoint(response.RemoteEndPoint.Address, port);
+                        callback(new DiscoveredServer(serverName, endpoint));
                     }
+                    fallback.Reset();
+                }
+                catch (ObjectDisposedException)
+                {
+                    break;
                 }
                 catch (SocketException)
                 {
-                    Thread.Sleep(fallback.Value);
+                    await fallback.DelayTask(cancellationToken);
                     fallback.Increase();
-                }
-                if (stopwatch.ElapsedMilliseconds > 10000)
-                {
-                    return;
                 }
             }
         }

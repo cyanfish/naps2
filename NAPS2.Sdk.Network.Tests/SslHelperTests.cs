@@ -4,7 +4,7 @@ using NAPS2.Util;
 using Org.BouncyCastle.OpenSsl;
 using Xunit;
 
-namespace NAPS2.Sdk.Network.Tests
+namespace NAPS2.Remoting.Network.Tests
 {
     public class SslHelperTests
     {

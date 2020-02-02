@@ -2,7 +2,11 @@
 
     <PropertyGroup>
         <TargetFramework>net46</TargetFramework>
+        <LangVersion>8</LangVersion>
+        <RootNamespace>NAPS2.Remoting.Network.Tests</RootNamespace>
     </PropertyGroup>
+
+    <Import Project="..\NAPS2.Setup\CommonTargets.targets" />
 
     <ItemGroup>
         <ProjectReference Include="..\NAPS2.Sdk.Network\NAPS2.Sdk.Network.csproj" />

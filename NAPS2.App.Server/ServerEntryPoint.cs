@@ -50,7 +50,7 @@ namespace NAPS2.Server
                     }
                 }
 
-                new Thread(() => Discovery.ListenForBroadcast(port)) { IsBackground = true }.Start();
+                // new Thread(() => Discovery.ListenForBroadcast(port)) { IsBackground = true }.Start();
 
                 // // Listen for requests
                 // using var host = new ServiceHost(typeof(ScanService));

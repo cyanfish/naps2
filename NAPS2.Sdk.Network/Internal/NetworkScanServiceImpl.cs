@@ -10,7 +10,7 @@ using NAPS2.Serialization;
 
 namespace NAPS2.Remoting.Network
 {
-    internal class ScanService : NetworkScanService.NetworkScanServiceBase
+    internal class NetworkScanServiceImpl : NetworkScanService.NetworkScanServiceBase
     {
         public override Task<GetCapabilitiesResponse> GetCapabilities(GetCapabilitiesRequest request, ServerCallContext context)
         {
