@@ -15,6 +15,7 @@
   </PropertyGroup>
 
   <Import Project="..\NAPS2.Setup\CommonTargets.targets" />
+  <Import Project="..\NAPS2.Setup\NativeLibs.targets" />
   
   <ItemGroup>
     <ProjectReference Include="..\NAPS2.App.Worker\NAPS2.App.Worker.csproj" />
@@ -27,45 +28,5 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <SubType>Designer</SubType>
     </Content>
-    <ContentWithTargetPath Include="..\NAPS2.Setup\lib\dbg\win64\NAPS2.Wia.Native.dll">
-      <CopyToOutputDirectory Condition=" '$(Configuration)' == 'Debug' Or '$(Configuration)' == 'DebugLang' ">PreserveNewest</CopyToOutputDirectory>
-      <Link>lib\dbg\win64\NAPS2.Wia.Native.dll</Link>
-      <TargetPath>_win64\NAPS2.Wia.Native.dll</TargetPath>
-    </ContentWithTargetPath>
-    <ContentWithTargetPath Include="..\NAPS2.Setup\lib\win64\NAPS2.Wia.Native.dll">
-      <CopyToOutputDirectory Condition=" '$(Configuration)' != 'Debug' And '$(Configuration)' != 'DebugLang' ">PreserveNewest</CopyToOutputDirectory>
-      <Link>lib\win64\NAPS2.Wia.Native.dll</Link>
-      <TargetPath>_win64\NAPS2.Wia.Native.dll</TargetPath>
-    </ContentWithTargetPath>
-    <ContentWithTargetPath Include="..\NAPS2.Setup\lib\dbg\win32\NAPS2.Wia.Native.dll">
-      <CopyToOutputDirectory Condition=" '$(Configuration)' == 'Debug' Or '$(Configuration)' == 'DebugLang' ">PreserveNewest</CopyToOutputDirectory>
-      <Link>lib\dbg\win32\NAPS2.Wia.Native.dll</Link>
-      <TargetPath>_win32\NAPS2.Wia.Native.dll</TargetPath>
-    </ContentWithTargetPath>
-    <ContentWithTargetPath Include="..\NAPS2.Setup\lib\win32\NAPS2.Wia.Native.dll">
-      <CopyToOutputDirectory Condition=" '$(Configuration)' != 'Debug' And '$(Configuration)' != 'DebugLang' ">PreserveNewest</CopyToOutputDirectory>
-      <Link>lib\win32\NAPS2.Wia.Native.dll</Link>
-      <TargetPath>_win32\NAPS2.Wia.Native.dll</TargetPath>
-    </ContentWithTargetPath>
-    <ContentWithTargetPath Include="..\NAPS2.Setup\lib\win64\pdfium.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      <Link>lib\win64\pdfium.dll</Link>
-      <TargetPath>_win64\pdfium.dll</TargetPath>
-    </ContentWithTargetPath>
-    <ContentWithTargetPath Include="..\NAPS2.Setup\lib\win32\pdfium.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      <Link>lib\win32\pdfium.dll</Link>
-      <TargetPath>_win32\pdfium.dll</TargetPath>
-    </ContentWithTargetPath>
-    <ContentWithTargetPath Include="..\NAPS2.Setup\lib\linux\libpdfium.so">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      <Link>lib\linux\libpdfium.so</Link>
-      <TargetPath>_linux\libpdfium.so</TargetPath>
-    </ContentWithTargetPath>
-    <ContentWithTargetPath Include="..\NAPS2.Setup\lib\osx\libpdfium.dylib">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      <Link>lib\osx\libpdfium.dylib</Link>
-      <TargetPath>_osx\libpdfium.dylib</TargetPath>
-    </ContentWithTargetPath>
   </ItemGroup>
 </Project>

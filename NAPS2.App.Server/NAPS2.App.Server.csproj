@@ -15,6 +15,7 @@
   </PropertyGroup>
 
   <Import Project="..\NAPS2.Setup\CommonTargets.targets" />
+  <Import Project="..\NAPS2.Setup\NativeLibs.targets" />
   
   <ItemGroup>
     <ProjectReference Include="..\NAPS2.App.Worker\NAPS2.App.Worker.csproj" />
