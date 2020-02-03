@@ -2,13 +2,11 @@
 
     <PropertyGroup>
         <TargetFrameworks>net40;netcoreapp2.0;netstandard2.0</TargetFrameworks>
-        <LangVersion>8</LangVersion>
         <RootNamespace>NAPS2.Wia</RootNamespace>
 
         <Title>NAPS2 (Not Another PDF Scanner 2)</Title>
         <Product>NAPS2 (Not Another PDF Scanner 2)</Product>
         <Copyright>Copyright 2018-2020 NAPS2 Contributors</Copyright>
-        <Version>7.0.0</Version>
     </PropertyGroup>
 
     <Import Project="..\NAPS2.Setup\CommonTargets.targets" />

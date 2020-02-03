@@ -2,9 +2,10 @@
   
   <PropertyGroup>
     <TargetFramework>net46</TargetFramework>
-    <LangVersion>8</LangVersion>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
+
+  <Import Project="..\NAPS2.Setup\CommonTargets.targets" />
 
   <ItemGroup>
     <Reference Include="PdfSharp, Version=1.50.4589.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
