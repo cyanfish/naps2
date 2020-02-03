@@ -26,7 +26,7 @@ namespace NAPS2.Serialization
                 thumbStream = imageContext.Convert<MemoryStreamStorage>(thumb, new StorageConvertParams { Lossless = true }).Stream;
             }
 
-            var fileStorage = image.BackingStorage as FileStorage;
+            var fileStorage = options.RequireMemoryStorage ? null : image.BackingStorage as FileStorage;
             if (fileStorage == null && options.RequireFileStorage)
             {
                 throw new InvalidOperationException("FileStorage is required for serialization.");
@@ -116,6 +116,8 @@ namespace NAPS2.Serialization
             public bool IncludeThumbnail { get; set; }
 
             public bool RequireFileStorage { get; set; }
+
+            public bool RequireMemoryStorage { get; set; }
 
             public string RenderedFilePath { get; set; }
         }

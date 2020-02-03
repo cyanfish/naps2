@@ -117,13 +117,12 @@ namespace NAPS2.Remoting.Worker
                                     RenderedFilePath = postProcessingContext.TempPath
                                 })
                         }));
-                await sequencedWriter.WaitForCompletion();
             }
             catch (Exception e)
             {
                 sequencedWriter.Write(new ScanResponse { Error = RemotingHelper.ToError(e) });
-                await sequencedWriter.WaitForCompletion();
             }
+            await sequencedWriter.WaitForCompletion();
         }
 
         public override Task<SendMapiEmailResponse> SendMapiEmail(SendMapiEmailRequest request, ServerCallContext context) =>

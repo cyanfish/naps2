@@ -1,4 +1,5 @@
 using System.Threading.Tasks;
+using NAPS2.Images.Storage;
 using Xunit;
 
 namespace NAPS2.Remoting.Network.Tests
@@ -8,7 +9,7 @@ namespace NAPS2.Remoting.Network.Tests
         [Fact]
         public async Task ServerDiscovery()
         {
-            using var server = new NetworkScanServer(new NetworkScanServerOptions
+            using var server = new NetworkScanServer(new GdiImageContext(), new NetworkScanServerOptions
             {
                 ServerName = "NetworkScanTests.ServerDiscovery"
             });
@@ -21,7 +22,7 @@ namespace NAPS2.Remoting.Network.Tests
         [Fact]
         public async Task ServerDiscoveryCustomPort()
         {
-            using var server = new NetworkScanServer(new NetworkScanServerOptions
+            using var server = new NetworkScanServer(new GdiImageContext(), new NetworkScanServerOptions
             {
                 ServerName = "NetworkScanTests.ServerDiscoveryCustomPort",
                 DiscoveryPort = 33433
@@ -38,7 +39,7 @@ namespace NAPS2.Remoting.Network.Tests
         [Fact]
         public async Task ServerDiscoveryMismatchPort()
         {
-            using var server = new NetworkScanServer(new NetworkScanServerOptions
+            using var server = new NetworkScanServer(new GdiImageContext(), new NetworkScanServerOptions
             {
                 ServerName = "NetworkScanTests.ServerDiscoveryMismatchPort",
                 DiscoveryPort = 33444
@@ -55,7 +56,7 @@ namespace NAPS2.Remoting.Network.Tests
         [Fact]
         public async Task ServerDiscoveryOff()
         {
-            using var server = new NetworkScanServer(new NetworkScanServerOptions
+            using var server = new NetworkScanServer(new GdiImageContext(), new NetworkScanServerOptions
             {
                 ServerName = "NetworkScanTests.ServerDiscoveryOff",
                 AllowDiscovery = false

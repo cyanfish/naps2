@@ -1,20 +1,42 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ServiceModel;
-using System.Threading;
 using System.Threading.Tasks;
 using Grpc.Core;
+using NAPS2.Images.Storage;
+using NAPS2.Platform;
 using NAPS2.Scan;
 using NAPS2.Scan.Internal;
 using NAPS2.Serialization;
 
-namespace NAPS2.Remoting.Network
+namespace NAPS2.Remoting.Network.Internal
 {
     internal class NetworkScanServiceImpl : NetworkScanService.NetworkScanServiceBase
     {
+        private readonly ImageContext imageContext;
+        private readonly IRemoteScanController remoteScanController;
+        
+        public NetworkScanServiceImpl(ImageContext imageContext, IRemoteScanController remoteScanController)
+        {
+            this.imageContext = imageContext;
+            this.remoteScanController = remoteScanController;
+        }
+        
         public override Task<GetCapabilitiesResponse> GetCapabilities(GetCapabilitiesRequest request, ServerCallContext context)
         {
-            return base.GetCapabilities(request, context);
+            var response = new GetCapabilitiesResponse();
+            if (PlatformCompat.System.IsWiaDriverSupported)
+            {
+                response.SupportedDrivers.Add(DriverNames.WIA);
+            }
+            if (PlatformCompat.System.IsTwainDriverSupported)
+            {
+                response.SupportedDrivers.Add(DriverNames.TWAIN);
+            }
+            if (PlatformCompat.System.IsSaneDriverSupported)
+            {
+                response.SupportedDrivers.Add(DriverNames.SANE);
+            }
+
+            return Task.FromResult(response);
         }
 
         public override async Task<GetDeviceListResponse> GetDeviceList(GetDeviceListRequest request, ServerCallContext context)
@@ -40,118 +62,61 @@ namespace NAPS2.Remoting.Network
 
         public override async Task Scan(ScanRequest request, IServerStreamWriter<ScanResponse> responseStream, ServerCallContext context)
         {
+            var sequencedWriter = new SequencedWriter<ScanResponse>(responseStream);
             try
             {
-                // TODO
+                var scanEvents = new ScanEvents(
+                    () => sequencedWriter.Write(new ScanResponse
+                    {
+                        PageStart = new PageStartEvent()
+                    }),
+                    // TODO: Throttle progress. Also whether to send progress at all should be an option somewhere.
+                    progress => sequencedWriter.Write(new ScanResponse
+                    {
+                        Progress = new ProgressEvent
+                        {
+                            Value = progress
+                        }
+                    })
+                );
+                
+                var options = request.OptionsXml.FromXml<ScanOptions>();
+                options = ValidateOptions(options);
+                await remoteScanController.Scan(options, context.CancellationToken, scanEvents, (image, _) =>
+                {
+                    sequencedWriter.Write(new ScanResponse
+                    {
+                        Image = SerializedImageHelper.Serialize(imageContext, image, new SerializedImageHelper.SerializeOptions
+                        {
+                            RequireMemoryStorage = true
+                        })
+                    });
+                });
             }
             catch (Exception e)
             {
-                await responseStream.WriteAsync(new ScanResponse
+                sequencedWriter.Write(new ScanResponse
                 {
                     Error = RemotingHelper.ToError(e)
                 });
             }
+            await sequencedWriter.WaitForCompletion();
         }
 
-        // private readonly IRemoteScanController remoteScanController;
-        //
-        // private CancellationTokenSource scanCts = new CancellationTokenSource();
-        //
-        // public ScanService() : this(new RemoteScanController())
-        // {
-        // }
-        //
-        // internal ScanService(IRemoteScanController remoteScanController)
-        // {
-        //     this.remoteScanController = remoteScanController;
-        // }
-
-        public List<string> GetSupportedDriverNames()
+        private ScanOptions ValidateOptions(ScanOptions options)
         {
-            throw new NotImplementedException();
-//            var driverNames = new List<string>();
-//            if (PlatformCompat.System.IsWiaDriverSupported)
-//            {
-//                driverNames.Add(WiaScanDriver.DRIVER_NAME);
-//            }
-//
-//            if (PlatformCompat.System.IsTwainDriverSupported)
-//            {
-//                driverNames.Add(TwainScanDriver.DRIVER_NAME);
-//            }
-//
-//            if (PlatformCompat.System.IsSaneDriverSupported)
-//            {
-//                driverNames.Add(SaneScanDriver.DRIVER_NAME);
-//            }
-//
-//            return driverNames;
-        }
-
-        public List<ScanDevice> GetDeviceList(ScanProfile scanProfile)
-        {
-            throw new NotImplementedException();
-//            if (scanProfile.DriverName == ProxiedScanDriver.DRIVER_NAME)
-//            {
-//                scanProfile.DriverName = scanProfile.ProxyDriverName;
-//            }
-//            var driver = scanDriverFactory.Create(scanProfile.DriverName);
-//            return driver.GetDeviceList(scanProfile);
-        }
-
-        public async Task<int> Scan(ScanProfile scanProfile, ScanParams scanParams)
-        {
-            throw new NotImplementedException();
-//            if (scanProfile.DriverName == ProxiedScanDriver.DRIVER_NAME)
-//            {
-//                scanProfile.DriverName = scanProfile.ProxyDriverName;
-//            }
-//            if (scanProfile.TwainImpl == TwainImpl.Legacy)
-//            {
-//                scanProfile.TwainImpl = TwainImpl.OldDsm;
-//            }
-//            scanProfile.UseNativeUI = false;
-//
-//            // TODO: Turn PropagateErrors on?
-//            var internalParams = new ScanParams
-//            {
-//                DetectPatchCodes = scanParams.DetectPatchCodes,
-//                NoUI = true,
-//                NoAutoSave = true,
-//                DoOcr = false,
-//                SkipPostProcessing = true
-//            };
-//
-//            var callback = OperationContext.Current.GetCallbackChannel<IScanCallback>();
-//
-//            int pages = 0;
-//            var source = await scanPerformer.PerformScan(scanProfile, internalParams, cancelToken: scanCts.Token);
-//            await source.ForEach(image =>
-//            {
-//                // TODO: Should stream this
-//                // TODO: Also should think about avoiding the intermediate filesystem
-//                using (image)
-//                {
-//                    // TODO
-//                    //var indexImage = image.RecoveryIndexImage;
-//                    //var imageBytes = File.ReadAllBytes(image.RecoveryFilePath);
-//                    //var sanitizedIndexImage = new RecoveryIndexImage
-//                    //{
-//                    //    FileName = Path.GetExtension(indexImage.FileName),
-//                    //    TransformList = indexImage.TransformList,
-//                    //    BitDepth = indexImage.BitDepth,
-//                    //    HighQuality = indexImage.HighQuality
-//                    //};
-//                    //callback.ImageReceived(imageBytes, sanitizedIndexImage);
-//                    //pages++;
-//                }
-//            });
-//            return pages;
-        }
-
-        public void CancelScan()
-        {
-            // scanCts.Cancel();
+            // No GUI support
+            options.UseNativeUI = false;
+            options.NoUI = true;
+            if (options.TwainOptions.Adapter == TwainAdapter.Legacy)
+            {
+                options.TwainOptions.Adapter = TwainAdapter.NTwain;
+            }
+            
+            // No OCR (note: this could be changed at some point)
+            options.DoOcr = false;
+            
+            return options;
         }
     }
 }
