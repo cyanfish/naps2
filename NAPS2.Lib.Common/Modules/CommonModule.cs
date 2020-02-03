@@ -62,7 +62,6 @@ namespace NAPS2.Modules
             Bind<ILogger>().To<NLogLogger>().InSingletonScope();
             Bind<ScannedImageList>().ToSelf().InSingletonScope();
             Bind<StillImage>().ToSelf().InSingletonScope();
-            Bind<BlankDetector>().To<ThresholdBlankDetector>();
             Bind<AutoSaver>().ToSelf();
             Bind<BitmapRenderer>().ToSelf();
             Bind<ImageContext>().To<GdiImageContext>().InSingletonScope();

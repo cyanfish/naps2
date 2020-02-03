@@ -29,7 +29,7 @@ namespace NAPS2.Remoting.Network
         }
 
         public NetworkScanServer(ImageContext imageContext, NetworkScanServerOptions options)
-            : this(imageContext, options, new RemoteScanController(new ScanDriverFactory(imageContext), new RemotePostProcessor(imageContext, new ThresholdBlankDetector())))
+            : this(imageContext, options, new RemoteScanController(imageContext))
         {
         }
 

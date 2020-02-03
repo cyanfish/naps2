@@ -23,8 +23,8 @@ namespace NAPS2.Remoting.Worker
         private readonly ThumbnailRenderer thumbnailRenderer;
         private readonly IMapiWrapper mapiWrapper;
 
-        public WorkerServiceImpl(ImageContext imageContext, ThumbnailRenderer thumbnailRenderer, IMapiWrapper mapiWrapper, BlankDetector blankDetector)
-            : this(imageContext, new RemoteScanController(new ScanDriverFactory(imageContext), new RemotePostProcessor(imageContext, blankDetector)),
+        public WorkerServiceImpl(ImageContext imageContext, ThumbnailRenderer thumbnailRenderer, IMapiWrapper mapiWrapper)
+            : this(imageContext, new RemoteScanController(imageContext),
                 thumbnailRenderer, mapiWrapper)
         {
         }

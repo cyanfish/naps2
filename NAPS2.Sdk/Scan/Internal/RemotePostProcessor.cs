@@ -8,17 +8,15 @@ namespace NAPS2.Scan.Internal
     internal class RemotePostProcessor : IRemotePostProcessor
     {
         private readonly ImageContext imageContext;
-        private readonly BlankDetector blankDetector;
 
         public RemotePostProcessor()
-            : this(ImageContext.Default, BlankDetector.Default)
+            : this(ImageContext.Default)
         {
         }
 
-        public RemotePostProcessor(ImageContext imageContext, BlankDetector blankDetector)
+        public RemotePostProcessor(ImageContext imageContext)
         {
             this.imageContext = imageContext;
-            this.blankDetector = blankDetector;
         }
 
         
@@ -41,7 +39,7 @@ namespace NAPS2.Scan.Internal
         {
             using (image = DoInitialTransforms(image, options))
             {
-                if (options.ExcludeBlankPages && blankDetector.IsBlank(image, options.BlankPageWhiteThreshold, options.BlankPageCoverageThreshold))
+                if (options.ExcludeBlankPages && BlankDetector.IsBlank(image, options.BlankPageWhiteThreshold, options.BlankPageCoverageThreshold))
                 {
                     return null;
                 }

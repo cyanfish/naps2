@@ -19,6 +19,11 @@ namespace NAPS2.Scan.Internal
         {
         }
 
+        public RemoteScanController(ImageContext imageContext)
+            : this(new ScanDriverFactory(imageContext), new RemotePostProcessor(imageContext))
+        {
+        }
+
         public RemoteScanController(IScanDriverFactory scanDriverFactory, IRemotePostProcessor remotePostProcessor)
         {
             this.scanDriverFactory = scanDriverFactory;

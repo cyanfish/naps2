@@ -21,7 +21,7 @@ namespace NAPS2.Sdk.Tests.Scan
             scanDriver.Setup(x => x.GetDeviceList(It.IsAny<ScanOptions>())).ReturnsAsync(new List<ScanDevice> { device, wiaDevice });
             var scanDriverFactory = new Mock<IScanDriverFactory>();
             scanDriverFactory.Setup(x => x.Create(It.IsAny<ScanOptions>())).Returns(scanDriver.Object);
-            var controller = new RemoteScanController(scanDriverFactory.Object, new RemotePostProcessor(ImageContext, new ThresholdBlankDetector()));
+            var controller = new RemoteScanController(scanDriverFactory.Object, new RemotePostProcessor(ImageContext));
 
             var deviceList = await controller.GetDeviceList(new ScanOptions { Driver = Driver.Wia });
             Assert.Equal(2, deviceList.Count);
