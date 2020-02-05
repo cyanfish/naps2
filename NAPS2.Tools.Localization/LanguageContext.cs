@@ -20,9 +20,9 @@ namespace NAPS2.Localization
         public void Load(string poFile)
         {
             using var reader = new StreamReader(poFile);
-            string line;
-            string NextLine() => line = reader.ReadLine()?.Trim();
-            while (NextLine() != null)
+            string? line;
+            string? NextLine() => reader.ReadLine()?.Trim();
+            while ((line = NextLine()) != null)
             {
                 if (!line.StartsWith("msgid", StringComparison.InvariantCulture))
                 {
@@ -30,7 +30,7 @@ namespace NAPS2.Localization
                 }
 
                 string original = line.Substring(7, line.Length - 8);
-                while (NextLine() != null && line.StartsWith("\"", StringComparison.InvariantCulture))
+                while ((line = NextLine()) != null && line.StartsWith("\"", StringComparison.InvariantCulture))
                 {
                     original += line.Substring(1, line.Length - 2);
                 }
@@ -41,16 +41,12 @@ namespace NAPS2.Localization
                 }
 
                 string translated = line.Substring(8, line.Length - 9);
-                while (NextLine() != null && line.StartsWith("\"", StringComparison.InvariantCulture))
+                while ((line = NextLine()) != null && line.StartsWith("\"", StringComparison.InvariantCulture))
                 {
                     translated += line.Substring(1, line.Length - 2);
                 }
 
-                Strings[original] = new TranslatableString
-                {
-                    Original = original,
-                    Translation = translated
-                };
+                Strings[original] = new TranslatableString(original, translated);
             }
         }
 
@@ -74,7 +70,7 @@ namespace NAPS2.Localization
             {
                 var prop = item.Attribute("name")?.Value;
                 var original = item.Element("value")?.Value;
-                if (!Rules.IsTranslatable(winforms, prop, ref original, out string prefix, out string suffix))
+                if (prop == null || original == null || !Rules.IsTranslatable(winforms, prop, ref original, out string prefix, out string suffix))
                 {
                     // Trim untranslatable strings from localized resx files
                     item.Remove();

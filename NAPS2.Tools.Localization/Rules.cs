@@ -13,7 +13,7 @@ namespace NAPS2.Localization
         {
             prefix = "";
             suffix = "";
-            if (prop == null || original == null || !original.Any(char.IsLetter))
+            if (!original.Any(char.IsLetter))
             {
                 return false;
             }

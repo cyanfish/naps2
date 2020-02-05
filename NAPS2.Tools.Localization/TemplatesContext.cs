@@ -43,13 +43,13 @@ msgstr """"
             {
                 var prop = item.Attribute("name")?.Value;
                 var original = item.Element("value")?.Value;
-                if (!Rules.IsTranslatable(winforms, prop, ref original, out _, out _))
+                if (prop == null || original == null || !Rules.IsTranslatable(winforms, prop, ref original, out _, out _))
                 {
                     continue;
                 }
                 if (!Strings.ContainsKey(original))
                 {
-                    Strings[original] = new TranslatableString { Original = original, Context = new List<string>()};
+                    Strings[original] = new TranslatableString(original);
                 }
                 Strings[original].Context.Add($"{file.Name}${prop}$Message");
             }

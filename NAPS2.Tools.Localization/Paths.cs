@@ -6,7 +6,7 @@ namespace NAPS2.Localization
 {
     internal class Paths
     {
-        private static string _root;
+        private static string? _root;
 
         public static string Root
         {
@@ -22,6 +22,7 @@ namespace NAPS2.Localization
                         {
                             Console.WriteLine("Couldn't find NAPS2 folder");
                             Environment.Exit(0);
+                            throw new Exception();
                         }
                     }
                 }
