@@ -4,7 +4,7 @@ namespace NAPS2.Wia
 {
     public class WiaProperty
     {
-        private WiaPropertyAttributes attributes;
+        private WiaPropertyAttributes? attributes;
 
         protected internal WiaProperty(IntPtr storage, int id, string name, ushort type)
         {

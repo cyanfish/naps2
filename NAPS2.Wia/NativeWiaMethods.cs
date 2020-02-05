@@ -117,7 +117,7 @@ namespace NAPS2.Wia
             [In, Out] ref IntPtr item);
 
         [DllImport("NAPS2.Wia.Native.dll")]
-        public static extern uint ConfigureDevice1(IntPtr device, IntPtr hwnd, int flags, int intent, [In, Out] ref int itemCount, [In, Out] ref IntPtr[] items);
+        public static extern uint ConfigureDevice1(IntPtr device, IntPtr hwnd, int flags, int intent, [In, Out] ref int itemCount, [In, Out] ref IntPtr[]? items);
 
         [DllImport("NAPS2.Wia.Native.dll")]
         public static extern uint ConfigureDevice2(

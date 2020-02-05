@@ -26,6 +26,6 @@ namespace NAPS2.Wia
 
         public int Step { get; }
 
-        public object[] Values { get; }
+        public object[]? Values { get; }
     }
 }

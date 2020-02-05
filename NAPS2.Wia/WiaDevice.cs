@@ -8,7 +8,7 @@ namespace NAPS2.Wia
         {
         }
         
-        public WiaItem PromptToConfigure(IntPtr parentWindowHandle)
+        public WiaItem? PromptToConfigure(IntPtr parentWindowHandle)
         {
             if (Version == WiaVersion.Wia20)
             {
@@ -16,13 +16,17 @@ namespace NAPS2.Wia
             }
 
             int itemCount = 0;
-            IntPtr[] items = null;
+            IntPtr[]? items = null;
             var hr = NativeWiaMethods.ConfigureDevice1(Handle, parentWindowHandle, 0, 0, ref itemCount, ref items);
             if (hr == 1)
             {
                 return null;
             }
             WiaException.Check(hr);
+            if (items == null)
+            {
+                return null;
+            }
             return new WiaItem(Version, items[0]);
         }
     }

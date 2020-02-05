@@ -46,7 +46,7 @@ namespace NAPS2.Wia
 
         public static void SetProperty(this WiaItemBase item, int propId, int value)
         {
-            var prop = item.Properties[propId];
+            var prop = item.Properties.GetOrNull(propId);
             if (prop != null)
             {
                 prop.Value = value;
@@ -55,7 +55,7 @@ namespace NAPS2.Wia
 
         public static void SetPropertyClosest(this WiaItemBase item, int propId, ref int value)
         {
-            var prop = item.Properties[propId];
+            var prop = item.Properties.GetOrNull(propId);
             if (prop != null)
             {
                 if (prop.Attributes.Flags.HasFlag(WiaPropertyFlags.List))
@@ -78,7 +78,7 @@ namespace NAPS2.Wia
 
         public static void SetPropertyRange(this WiaItemBase item, int propId, int value, int expectedMin, int expectedMax)
         {
-            var prop = item.Properties[propId];
+            var prop = item.Properties.GetOrNull(propId);
             if (prop != null)
             {
                 if (prop.Attributes.Flags.HasFlag(WiaPropertyFlags.Range))
@@ -127,7 +127,7 @@ namespace NAPS2.Wia
         {
             foreach (var kvp in values)
             {
-                var prop = props[kvp.Key];
+                var prop = props.GetOrNull(kvp.Key);
                 if (prop != null)
                 {
                     try

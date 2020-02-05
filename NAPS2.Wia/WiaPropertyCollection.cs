@@ -15,7 +15,9 @@ namespace NAPS2.Wia
                 (id, name, type) => propertyDict.Add(id, new WiaProperty(Handle, id, name, type))));
         }
         
-        public WiaProperty this[int propId] => propertyDict.ContainsKey(propId) ? propertyDict[propId] : null;
+        public WiaProperty this[int propId] => propertyDict[propId];
+        
+        public WiaProperty? GetOrNull(int propId) => propertyDict.ContainsKey(propId) ? propertyDict[propId] : null;
 
         public IEnumerator<WiaProperty> GetEnumerator() => propertyDict.Values.GetEnumerator();
 

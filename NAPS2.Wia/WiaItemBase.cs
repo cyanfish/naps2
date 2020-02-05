@@ -6,7 +6,7 @@ namespace NAPS2.Wia
 {
     public class WiaItemBase : NativeWiaObject
     {
-        private WiaPropertyCollection properties;
+        private WiaPropertyCollection? properties;
 
         protected internal WiaItemBase(WiaVersion version, IntPtr handle) : base(version, handle)
         {

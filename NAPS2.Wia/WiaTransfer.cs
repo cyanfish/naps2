@@ -17,11 +17,11 @@ namespace NAPS2.Wia
         {
         }
 
-        public event EventHandler<ProgressEventArgs> Progress;
+        public event EventHandler<ProgressEventArgs>? Progress;
 
-        public event EventHandler<PageScannedEventArgs> PageScanned;
+        public event EventHandler<PageScannedEventArgs>? PageScanned;
 
-        public event EventHandler TransferComplete;
+        public event EventHandler? TransferComplete;
 
         public bool Download()
         {
