@@ -3,7 +3,6 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Grpc.Core;
-using NAPS2.Images;
 using NAPS2.Images.Storage;
 using NAPS2.Remoting.Network.Internal;
 using NAPS2.Scan.Internal;
@@ -16,7 +15,7 @@ namespace NAPS2.Remoting.Network
         private readonly NetworkScanServerOptions options;
         private readonly IRemoteScanController remoteScanController;
         private readonly CancellationTokenSource cts = new CancellationTokenSource();
-        private Server server;
+        private Server? server;
 
         public NetworkScanServer()
             : this(ImageContext.Default, new NetworkScanServerOptions(), new RemoteScanController())

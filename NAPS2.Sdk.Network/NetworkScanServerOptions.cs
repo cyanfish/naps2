@@ -6,7 +6,7 @@ namespace NAPS2.Remoting.Network
         /// The name of the server that will be advertised through the discovery process. If not specified, defaults to
         /// Environment.MachineName.
         /// </summary>
-        public string ServerName { get; set; }
+        public string? ServerName { get; set; }
         
         /// <summary>
         /// The port the server should run on. If not specified, an unused port will be chosen.
