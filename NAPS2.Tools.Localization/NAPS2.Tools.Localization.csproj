@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net46</TargetFramework>
+    <Nullable>enable</Nullable>
     <OutputType>Exe</OutputType>
     <RootNamespace>NAPS2.Localization</RootNamespace>
     <AssemblyName>NAPS2.Localization</AssemblyName>
