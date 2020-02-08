@@ -177,7 +177,7 @@ namespace NAPS2.Scan
                 PaperSource = scanProfile.PaperSource.ToPaperSource(),
                 ScaleRatio = scanProfile.AfterScanScale.ToIntScaleFactor(),
                 ThumbnailSize = scanParams.ThumbnailSize,
-                DetectPatchCodes = scanParams.DetectPatchCodes,
+                DetectBarcodes = scanParams.DetectBarcodes,
                 ExcludeBlankPages = scanProfile.ExcludeBlankPages,
                 FlipDuplexedPages = scanProfile.FlipDuplexedPages,
                 NoUI = scanParams.NoUI,

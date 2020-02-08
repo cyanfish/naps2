@@ -11,6 +11,7 @@ namespace NAPS2.Images
         private IImage thumbnail;
         private int thumbnailState;
 
+        private BarcodeDetection barcodeDetection = BarcodeDetection.NotAttempted;
         private bool disposed;
         private int snapshotCount;
 
@@ -24,7 +25,11 @@ namespace NAPS2.Images
 
         public IImageMetadata Metadata { get; }
 
-        public PatchCode PatchCode { get; set; }
+        public BarcodeDetection BarcodeDetection
+        {
+            get => barcodeDetection;
+            set => barcodeDetection = value ?? throw new ArgumentNullException(nameof(value));
+        }
 
         public void Dispose()
         {

@@ -43,7 +43,7 @@ namespace NAPS2.ImportExport
                 {
                     foreach (var image in scan)
                     {
-                        if (image.PatchCode == PatchCode.PatchT)
+                        if (image.BarcodeDetection.IsPatchT)
                         {
                             image.Dispose();
                             if (images.Count > 0)

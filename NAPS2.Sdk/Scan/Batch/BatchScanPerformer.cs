@@ -98,7 +98,7 @@ namespace NAPS2.Scan.Batch
                 profile = profileManager.Profiles.First(x => x.DisplayName == Settings.Get(c => c.ProfileDisplayName));
                 scanParams = new ScanParams
                 {
-                    DetectPatchCodes = Settings.Get(c => c.OutputType) == BatchOutputType.MultipleFiles && Settings.Get(c => c.SaveSeparator) == SaveSeparator.PatchT,
+                    DetectBarcodes = Settings.Get(c => c.OutputType) == BatchOutputType.MultipleFiles && Settings.Get(c => c.SaveSeparator) == SaveSeparator.PatchT,
                     NoUI = true,
                     NoAutoSave = configProvider.Get(c => c.DisableAutoSave),
                     DoOcr = Settings.Get(c => c.OutputType) == BatchOutputType.Load

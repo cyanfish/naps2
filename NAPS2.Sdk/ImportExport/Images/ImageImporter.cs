@@ -66,9 +66,9 @@ namespace NAPS2.ImportExport.Images
                                 image.SetThumbnail(imageContext.PerformTransform(frame, new ThumbnailTransform(importParams.ThumbnailSize.Value)));
                             }
 
-                            if (importParams.DetectPatchCodes)
+                            if (importParams.DetectBarcodes)
                             {
-                                image.PatchCode = PatchCodeDetector.Detect(frame);
+                                image.BarcodeDetection = BarcodeDetection.Detect(frame);
                             }
 
                             sink.PutImage(image);

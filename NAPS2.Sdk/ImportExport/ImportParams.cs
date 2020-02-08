@@ -11,7 +11,7 @@ namespace NAPS2.ImportExport
 
         public Slice Slice { get; set; }
 
-        public bool DetectPatchCodes { get; set; }
+        public bool DetectBarcodes { get; set; }
 
         public int? ThumbnailSize { get; set; }
     }

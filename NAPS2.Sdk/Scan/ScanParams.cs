@@ -10,7 +10,7 @@ namespace NAPS2.Scan
     /// </summary>
     public class ScanParams
     {
-        public bool DetectPatchCodes { get; set; }
+        public bool DetectBarcodes { get; set; }
 
         public bool Modal { get; set; } = true;
 

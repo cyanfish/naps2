@@ -44,7 +44,7 @@ namespace NAPS2.Scan
 
         public bool Modal { get; set; }
 
-        public bool DetectPatchCodes { get; set; }
+        public bool DetectBarcodes { get; set; }
 
         public bool StretchToPageSize { get; set; }
 

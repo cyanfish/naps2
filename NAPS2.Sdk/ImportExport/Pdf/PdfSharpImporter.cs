@@ -189,16 +189,16 @@ namespace NAPS2.ImportExport.Pdf
             // TODO: Really, ConvertToBacking should convert PdfStorage -> PdfFileStorage.
             // TODO: Then we wouldn't need a static FileStorageManager.
             var image = imageContext.CreateScannedImage(new FileStorage(pdfPath));
-            if (importParams.ThumbnailSize.HasValue || importParams.DetectPatchCodes)
+            if (importParams.ThumbnailSize.HasValue || importParams.DetectBarcodes)
             {
                 using var bitmap = await imageRenderer.Render(image);
                 if (importParams.ThumbnailSize.HasValue)
                 {
                     image.SetThumbnail(imageContext.PerformTransform(bitmap, new ThumbnailTransform(importParams.ThumbnailSize.Value)));
                 }
-                if (importParams.DetectPatchCodes)
+                if (importParams.DetectBarcodes)
                 {
-                    image.PatchCode = PatchCodeDetector.Detect(bitmap);
+                    image.BarcodeDetection = BarcodeDetection.Detect(bitmap);
                 }
             }
             return image;
@@ -215,9 +215,9 @@ namespace NAPS2.ImportExport.Pdf
             {
                 image.SetThumbnail(imageContext.PerformTransform(storage, new ThumbnailTransform(importParams.ThumbnailSize.Value)));
             }
-            if (importParams.DetectPatchCodes)
+            if (importParams.DetectBarcodes)
             {
-                image.PatchCode = PatchCodeDetector.Detect(storage);
+                image.BarcodeDetection = BarcodeDetection.Detect(storage);
             }
             return image;
         }
@@ -256,9 +256,9 @@ namespace NAPS2.ImportExport.Pdf
                 {
                     image.SetThumbnail(imageContext.PerformTransform(storage, new ThumbnailTransform(importParams.ThumbnailSize.Value)));
                 }
-                if (importParams.DetectPatchCodes)
+                if (importParams.DetectBarcodes)
                 {
-                    image.PatchCode = PatchCodeDetector.Detect(storage);
+                    image.BarcodeDetection = BarcodeDetection.Detect(storage);
                 }
                 return image;
             }
@@ -367,9 +367,9 @@ namespace NAPS2.ImportExport.Pdf
             {
                 image.SetThumbnail(imageContext.PerformTransform(storage, new ThumbnailTransform(importParams.ThumbnailSize.Value)));
             }
-            if (importParams.DetectPatchCodes)
+            if (importParams.DetectBarcodes)
             {
-                image.PatchCode = PatchCodeDetector.Detect(storage);
+                image.BarcodeDetection = BarcodeDetection.Detect(storage);
             }
             return image;
         }

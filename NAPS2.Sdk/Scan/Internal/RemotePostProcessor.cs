@@ -154,9 +154,10 @@ namespace NAPS2.Scan.Internal
                 }
             }
 
-            if (options.DetectPatchCodes && scannedImage.PatchCode == PatchCode.None)
+            if (options.DetectBarcodes && !scannedImage.BarcodeDetection.IsBarcodePresent)
             {
-                scannedImage.PatchCode = PatchCodeDetector.Detect(image);
+                // Even if barcode detection was attempted previously and failed, image adjustments may improve detection.  
+                scannedImage.BarcodeDetection = BarcodeDetection.Detect(image);
             }
         }
 

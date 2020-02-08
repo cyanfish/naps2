@@ -142,17 +142,6 @@ namespace NAPS2.Scan.Internal
                     using var image = options.TwainOptions.TransferMode == TwainTransferMode.Memory
                         ? GetBitmapFromMemXFer(eventArgs.MemoryData, eventArgs.ImageInfo)
                         : imageContext.ImageFactory.Decode(eventArgs.GetNativeImageStream(), ".bmp");
-                    // TODO: Pipe back patch codes somehow... Or maybe just rely solely on Zxing
-                    //if (scanParams.DetectPatchCodes)
-                    //{
-                    //    foreach (var patchCodeInfo in eventArgs.GetExtImageInfo(ExtendedImageInfo.PatchCode))
-                    //    {
-                    //        if (patchCodeInfo.ReturnCode == ReturnCode.Success)
-                    //        {
-                    //            image.PatchCode = GetPatchCode(patchCodeInfo);
-                    //        }
-                    //    }
-                    //}
                     callback(image);
                 }
                 catch (Exception ex)
@@ -346,27 +335,6 @@ namespace NAPS2.Scan.Internal
             return bitmap;
         }
 
-        private static PatchCode GetPatchCode(TWInfo patchCodeInfo)
-        {
-            switch ((NTwain.Data.PatchCode)patchCodeInfo.Item)
-            {
-                case NTwain.Data.PatchCode.Patch1:
-                    return PatchCode.Patch1;
-                case NTwain.Data.PatchCode.Patch2:
-                    return PatchCode.Patch2;
-                case NTwain.Data.PatchCode.Patch3:
-                    return PatchCode.Patch3;
-                case NTwain.Data.PatchCode.Patch4:
-                    return PatchCode.Patch4;
-                case NTwain.Data.PatchCode.Patch6:
-                    return PatchCode.Patch6;
-                case NTwain.Data.PatchCode.PatchT:
-                    return PatchCode.PatchT;
-                default:
-                    throw new ArgumentException();
-            }
-        }
-
         private void ConfigureDS(DataSource ds, ScanOptions options)
         {
             if (options.UseNativeUI)
@@ -451,12 +419,6 @@ namespace NAPS2.Scan.Internal
             // Resolution
             ds.Capabilities.ICapXResolution.SetValue(options.Dpi);
             ds.Capabilities.ICapYResolution.SetValue(options.Dpi);
-
-            // Patch codes
-            if (options.DetectPatchCodes)
-            {
-                ds.Capabilities.ICapPatchCodeDetectionEnabled.SetValue(BoolType.True);
-            }
         }
     }
 }
