@@ -30,6 +30,8 @@ namespace NAPS2.Scan
 
         public SaneOptions SaneOptions { get; set; } = new SaneOptions();
 
+        public BarcodeDetectionOptions BarcodeDetectionOptions { get; set; } = new BarcodeDetectionOptions();
+
         public BitDepth BitDepth { get; set; }
 
         public HorizontalAlign PageAlign { get; set; }
@@ -43,8 +45,6 @@ namespace NAPS2.Scan
         public bool NoUI { get; set; }
 
         public bool Modal { get; set; }
-
-        public bool DetectBarcodes { get; set; }
 
         public bool StretchToPageSize { get; set; }
 

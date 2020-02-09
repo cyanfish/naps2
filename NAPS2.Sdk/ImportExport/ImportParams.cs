@@ -1,4 +1,5 @@
-﻿using NAPS2.Util;
+﻿using NAPS2.Scan;
+using NAPS2.Util;
 
 namespace NAPS2.ImportExport
 {
@@ -11,7 +12,7 @@ namespace NAPS2.ImportExport
 
         public Slice Slice { get; set; }
 
-        public bool DetectBarcodes { get; set; }
+        public BarcodeDetectionOptions BarcodeDetectionOptions { get; set; } = new BarcodeDetectionOptions();
 
         public int? ThumbnailSize { get; set; }
     }

@@ -154,10 +154,10 @@ namespace NAPS2.Scan.Internal
                 }
             }
 
-            if (options.DetectBarcodes && !scannedImage.BarcodeDetection.IsBarcodePresent)
+            if (!scannedImage.BarcodeDetection.IsBarcodePresent)
             {
-                // Even if barcode detection was attempted previously and failed, image adjustments may improve detection.  
-                scannedImage.BarcodeDetection = BarcodeDetection.Detect(image);
+                // Even if barcode detection was attempted previously and failed, image adjustments may improve detection.
+                scannedImage.BarcodeDetection = BarcodeDetection.Detect(image, options.BarcodeDetectionOptions);
             }
         }
 

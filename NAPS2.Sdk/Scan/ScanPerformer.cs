@@ -162,6 +162,11 @@ namespace NAPS2.Scan
                     Ip = scanProfile.ProxyConfig?.Ip,
                     Port = scanProfile.ProxyConfig?.Port
                 },
+                BarcodeDetectionOptions =
+                {
+                    DetectBarcodes = scanParams.DetectPatchT || scanProfile.AutoSaveSettings.Separator == SaveSeparator.PatchT,
+                    PatchTOnly = true
+                },
                 Brightness = scanProfile.Brightness,
                 Contrast = scanProfile.Contrast,
                 Dpi = scanProfile.Resolution.ToIntDpi(),
@@ -177,7 +182,6 @@ namespace NAPS2.Scan
                 PaperSource = scanProfile.PaperSource.ToPaperSource(),
                 ScaleRatio = scanProfile.AfterScanScale.ToIntScaleFactor(),
                 ThumbnailSize = scanParams.ThumbnailSize,
-                DetectBarcodes = scanParams.DetectBarcodes,
                 ExcludeBlankPages = scanProfile.ExcludeBlankPages,
                 FlipDuplexedPages = scanProfile.FlipDuplexedPages,
                 NoUI = scanParams.NoUI,

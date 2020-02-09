@@ -1,6 +1,8 @@
 using System;
+using System.Collections.Generic;
 using NAPS2.Images.Storage;
 using ZXing;
+using ZXing.Common;
 
 namespace NAPS2.Scan
 {
@@ -11,17 +13,28 @@ namespace NAPS2.Scan
     public class BarcodeDetection
     {
         private const string PATCH_T_TEXT = "PATCHT";
+        private static readonly BarcodeFormat PATCH_T_FORMAT = BarcodeFormat.CODE_39;
         
-        public static BarcodeDetection NotAttempted = new BarcodeDetection(false, null);
+        public static readonly BarcodeDetection NotAttempted = new BarcodeDetection(false, null);
         
-        public static BarcodeDetection Detect(IImage image)
+        public static BarcodeDetection Detect(IImage image, BarcodeDetectionOptions options)
         {
+            if (!options.DetectBarcodes)
+            {
+                return NotAttempted;
+            }
             // TODO: Make more generic
             if (!(image is GdiImage gdiImage))
             {
                 throw new InvalidOperationException("Patch code detection only supported for GdiStorage");
             }
-            var reader = new BarcodeReader();
+
+            var zxingOptions = options.ZXingOptions ?? new DecodingOptions
+            {
+                TryHarder = true,
+                PossibleFormats = options.PatchTOnly ? new List<BarcodeFormat> { PATCH_T_FORMAT } : null
+            };
+            var reader = new BarcodeReader { Options = zxingOptions };
             return new BarcodeDetection(true, reader.Decode(gdiImage.Bitmap));
         }
         
