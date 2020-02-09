@@ -12,6 +12,7 @@ using NAPS2.Operation;
 using NAPS2.Remoting.Worker;
 using NAPS2.Scan;
 using NAPS2.Scan.Batch;
+using NAPS2.Scan.Internal;
 using NAPS2.Util;
 using NAPS2.WinForms;
 using Ninject;
@@ -40,6 +41,14 @@ namespace NAPS2.Modules
             // Scan
             Bind<IScanPerformer>().To<ScanPerformer>();
             Bind<IBatchScanPerformer>().To<BatchScanPerformer>();
+            Bind<ILocalPostProcessor>().To<LocalPostProcessor>();
+            Bind<IRemotePostProcessor>().To<RemotePostProcessor>();
+            Bind<IScanBridgeFactory>().To<ScanBridgeFactory>();
+            Bind<IScanDriverFactory>().To<ScanDriverFactory>();
+            Bind<IRemoteScanController>().To<RemoteScanController>();
+            Bind<InProcScanBridge>().ToSelf();
+            Bind<WorkerScanBridge>().ToSelf();
+            Bind<NetworkScanBridge>().ToSelf();
 
             // Config
             var configScopes = new ConfigScopes(Path.Combine(Paths.Executable, "appsettings.xml"), Path.Combine(Paths.AppData, "config.xml"));

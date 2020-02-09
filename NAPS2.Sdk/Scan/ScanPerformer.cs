@@ -8,13 +8,14 @@ using NAPS2.Lang.Resources;
 using NAPS2.Logging;
 using NAPS2.Operation;
 using NAPS2.Scan.Exceptions;
+using NAPS2.Scan.Internal;
 using NAPS2.Wia;
 using NAPS2.Util;
 using NAPS2.WinForms;
 
 namespace NAPS2.Scan
 {
-    public class ScanPerformer : IScanPerformer
+    internal class ScanPerformer : IScanPerformer
     {
         private readonly IFormFactory formFactory;
         private readonly ConfigProvider<CommonConfig> configProvider;
@@ -22,9 +23,12 @@ namespace NAPS2.Scan
         private readonly AutoSaver autoSaver;
         private readonly IProfileManager profileManager;
         private readonly ErrorOutput errorOutput;
+        private readonly ILocalPostProcessor localPostProcessor;
+        private readonly ScanOptionsValidator scanOptionsValidator;
+        private readonly IScanBridgeFactory scanBridgeFactory;
 
         public ScanPerformer(IFormFactory formFactory, ConfigProvider<CommonConfig> configProvider, OperationProgress operationProgress, AutoSaver autoSaver,
-            IProfileManager profileManager, ErrorOutput errorOutput)
+            IProfileManager profileManager, ErrorOutput errorOutput, ILocalPostProcessor localPostProcessor, ScanOptionsValidator scanOptionsValidator, IScanBridgeFactory scanBridgeFactory)
         {
             this.formFactory = formFactory;
             this.configProvider = configProvider;
@@ -32,6 +36,9 @@ namespace NAPS2.Scan
             this.autoSaver = autoSaver;
             this.profileManager = profileManager;
             this.errorOutput = errorOutput;
+            this.localPostProcessor = localPostProcessor;
+            this.scanOptionsValidator = scanOptionsValidator;
+            this.scanBridgeFactory = scanBridgeFactory;
         }
 
         public async Task<ScanDevice> PromptForDevice(ScanProfile scanProfile, IntPtr dialogParent = default)
@@ -50,7 +57,7 @@ namespace NAPS2.Scan
                 return ScannedImageSource.Empty;
             }
 
-            var controller = new ScanController();
+            var controller = new ScanController(localPostProcessor, scanOptionsValidator, scanBridgeFactory);
             // TODO: Consider how to handle operations with Twain (right now there are duplicate progress windows).
             var op = new ScanOperation(options.Device, options.PaperSource);
 

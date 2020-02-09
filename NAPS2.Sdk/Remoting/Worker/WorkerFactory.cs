@@ -26,7 +26,7 @@ namespace NAPS2.Remoting.Worker
         public const string WORKER_EXE_NAME = "NAPS2.Worker.exe";
         public const string PIPE_NAME_FORMAT = "NAPS2.Worker/{0}";
 
-        public static readonly string[] SearchDirs =
+        public static string[] SearchDirs => new[]
         {
             Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location),
             Path.GetDirectoryName(Assembly.GetEntryAssembly().Location)

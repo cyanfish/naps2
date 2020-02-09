@@ -33,6 +33,7 @@ namespace NAPS2.Automation
         private readonly IScannedImageImporter scannedImageImporter;
         private readonly IOperationFactory operationFactory;
         private readonly OcrEngineManager ocrEngineManager;
+        private readonly OcrRequestQueue ocrRequestQueue;
         private readonly IFormFactory formFactory;
         private readonly ConfigScopes configScopes;
         private readonly TransactionConfigScope<CommonConfig> userTransact;
@@ -49,7 +50,7 @@ namespace NAPS2.Automation
         private List<string> actualOutputPaths;
         private OcrParams ocrParams;
 
-        public AutomatedScanning(AutomatedScanningOptions options, ImageContext imageContext, IScanPerformer scanPerformer, ErrorOutput errorOutput, IEmailProviderFactory emailProviderFactory, IScannedImageImporter scannedImageImporter, IOperationFactory operationFactory, OcrEngineManager ocrEngineManager, IFormFactory formFactory, ConfigScopes configScopes, IProfileManager profileManager)
+        public AutomatedScanning(AutomatedScanningOptions options, ImageContext imageContext, IScanPerformer scanPerformer, ErrorOutput errorOutput, IEmailProviderFactory emailProviderFactory, IScannedImageImporter scannedImageImporter, IOperationFactory operationFactory, OcrEngineManager ocrEngineManager, IFormFactory formFactory, ConfigScopes configScopes, IProfileManager profileManager, OcrRequestQueue ocrRequestQueue)
         {
             this.options = options;
             this.imageContext = imageContext;
@@ -62,6 +63,7 @@ namespace NAPS2.Automation
             this.formFactory = formFactory;
             this.configScopes = configScopes;
             this.profileManager = profileManager;
+            this.ocrRequestQueue = ocrRequestQueue;
 
             userTransact = configScopes.User.BeginTransaction();
             configProvider = configScopes.Provider.Replace(configScopes.User, userTransact);
@@ -547,7 +549,7 @@ namespace NAPS2.Automation
                 };
                 int digits = (int)Math.Floor(Math.Log10(scanList.Count)) + 1;
                 string actualPath = placeholders.Substitute(path, true, scanIndex++, scanList.Count > 1 ? digits : 0);
-                op.Start(actualPath, placeholders, fileContents, pdfSettingsProvider, new OcrContext(ocrParams), email, null);
+                op.Start(actualPath, placeholders, fileContents, pdfSettingsProvider, new OcrContext(ocrParams, ocrEngineManager, ocrRequestQueue), email, null);
                 if (!await op.Success)
                 {
                     return false;
