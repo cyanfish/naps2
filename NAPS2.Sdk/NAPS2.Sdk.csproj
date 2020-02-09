@@ -432,8 +432,4 @@
     
   </ItemGroup>
   
-  <ItemGroup>
-    <Compile Remove="Images\ThresholdBlankDetector.cs" />
-  </ItemGroup>
-  
 </Project>

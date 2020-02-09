@@ -13,8 +13,7 @@ namespace NAPS2.Sdk.Tests.Images
         {
             var image = new GdiImage(DeskewTestsData.skewed);
             Assert.Equal(StoragePixelFormat.RGB24, image.PixelFormat);
-            var deskewer = new HoughLineDeskewer();
-            var skewAngle = deskewer.GetSkewAngle(image);
+            var skewAngle = Deskewer.GetSkewAngle(image);
             Assert.InRange(skewAngle, 15.5, 16.5);
         }
 
@@ -23,8 +22,7 @@ namespace NAPS2.Sdk.Tests.Images
         {
             var image = new GdiImage(DeskewTestsData.skewed_bw);
             Assert.Equal(StoragePixelFormat.BW1, image.PixelFormat);
-            var deskewer = new HoughLineDeskewer();
-            var skewAngle = deskewer.GetSkewAngle(image);
+            var skewAngle = Deskewer.GetSkewAngle(image);
             Assert.InRange(skewAngle, 15.5, 16.5);
         }
     }

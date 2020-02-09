@@ -11,17 +11,15 @@ namespace NAPS2.Images
     {
         private readonly ImageContext imageContext;
         private readonly ImageRenderer imageRenderer;
-        private readonly Deskewer deskewer;
 
-        public DeskewOperation() : this(ImageContext.Default, new ImageRenderer(ImageContext.Default), new HoughLineDeskewer())
+        public DeskewOperation() : this(ImageContext.Default, new ImageRenderer(ImageContext.Default))
         {
         }
 
-        public DeskewOperation(ImageContext imageContext, ImageRenderer imageRenderer, Deskewer deskewer)
+        public DeskewOperation(ImageContext imageContext, ImageRenderer imageRenderer)
         {
             this.imageContext = imageContext;
             this.imageRenderer = imageRenderer;
-            this.deskewer = deskewer;
 
             AllowCancel = true;
             AllowBackground = true;
@@ -44,7 +42,7 @@ namespace NAPS2.Images
                     try
                     {
                         CancelToken.ThrowIfCancellationRequested();
-                        var transform = deskewer.GetDeskewTransform(bitmap);
+                        var transform = Deskewer.GetDeskewTransform(bitmap);
                         CancelToken.ThrowIfCancellationRequested();
                         bitmap = imageContext.PerformTransform(bitmap, transform);
                         var thumbnail = deskewParams.ThumbnailSize.HasValue
