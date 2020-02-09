@@ -171,7 +171,9 @@ namespace NAPS2.Scan.Internal
                 var thumbnail = scannedImage.GetThumbnail();
                 if (thumbnail != null)
                 {
+                    // TODO: This should probably be done even without thumbnails, otherwise deskew/barcode might misfire
                     image = imageContext.PerformTransform(image, transform);
+                    // TODO: This can end up being redundant.
                     scannedImage.SetThumbnail(imageContext.PerformTransform(image, new ThumbnailTransform(options.ThumbnailSize.Value)));
                 }
             }
