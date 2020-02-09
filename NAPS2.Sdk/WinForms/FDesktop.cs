@@ -1043,7 +1043,7 @@ namespace NAPS2.WinForms
             ksm.Assign(sh, item);
         }
 
-        private string GetProfileShortcut(int i)
+        private string? GetProfileShortcut(int i)
         {
             // TODO: Granular
             var ks = ConfigProvider.Get(c => c.KeyboardShortcuts);

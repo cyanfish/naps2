@@ -23,7 +23,7 @@ namespace NAPS2.Util
             { "break", Keys.Pause },
         }; 
 
-        public Keys Parse(string value)
+        public Keys Parse(string? value)
         {
             try
             {
@@ -51,7 +51,7 @@ namespace NAPS2.Util
             return Keys.None;
         }
 
-        public bool Assign(string value, Action action)
+        public bool Assign(string? value, Action action)
         {
             var keys = Parse(value);
             if (keys != Keys.None)
@@ -67,7 +67,7 @@ namespace NAPS2.Util
             return false;
         }
 
-        public bool Assign(string value, ToolStripMenuItem item, Action action)
+        public bool Assign(string? value, ToolStripMenuItem item, Action action)
         {
             var keys = Parse(value);
             if (keys != Keys.None)
@@ -93,7 +93,7 @@ namespace NAPS2.Util
             return false;
         }
 
-        public bool Assign(string value, ToolStripButton item)
+        public bool Assign(string? value, ToolStripButton item)
         {
             if (Assign(value, item.PerformClick))
             {
@@ -104,12 +104,12 @@ namespace NAPS2.Util
             return false;
         }
 
-        public bool Assign(string value, ToolStripMenuItem item)
+        public bool Assign(string? value, ToolStripMenuItem item)
         {
             return Assign(value, item, item.PerformClick);
         }
 
-        public bool Assign(string value, ToolStripSplitButton item)
+        public bool Assign(string? value, ToolStripSplitButton item)
         {
             if (Assign(value, item.PerformButtonClick))
             {
@@ -120,7 +120,7 @@ namespace NAPS2.Util
             return false;
         }
 
-        public bool Assign(string value, Button item)
+        public bool Assign(string? value, Button item)
         {
             return Assign(value, item.PerformClick);
         }
