@@ -343,11 +343,7 @@ namespace NAPS2.Automation
                         foreach (var path in actualOutputPaths)
                         {
                             string attachmentName = placeholders.Substitute(options.EmailFileName, false, i++, scanList.Count > 1 ? digits : 0);
-                            message.Attachments.Add(new EmailAttachment
-                            {
-                                FilePath = path,
-                                AttachmentName = attachmentName
-                            });
+                            message.Attachments.Add(new EmailAttachment(path, attachmentName));
                         }
                     }
                     else
@@ -395,11 +391,7 @@ namespace NAPS2.Automation
             foreach (var file in folder.EnumerateFiles())
             {
                 OutputVerbose(ConsoleResources.Attaching, file.Name);
-                message.Attachments.Add(new EmailAttachment
-                {
-                    FilePath = file.FullName,
-                    AttachmentName = file.Name
-                });
+                message.Attachments.Add(new EmailAttachment(file.FullName, file.Name));
             }
         }
 

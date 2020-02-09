@@ -12,18 +12,11 @@ namespace NAPS2.Util
         private static Lazy<Random> random = new Lazy<Random>();
 
         [Conditional("DEBUG")] 
-        public static void MaybeError(double chance, Exception exception = null)
+        public static void MaybeError(double chance, Exception? exception = null)
         {
             if (random.Value.NextDouble() < chance)
             {
-                if (exception != null)
-                {
-                    throw exception;
-                }
-                else
-                {
-                    throw new Exception("Randomly generated exception for testing");
-                }
+                throw exception ?? new Exception("Randomly generated exception for testing");
             }
         }
 

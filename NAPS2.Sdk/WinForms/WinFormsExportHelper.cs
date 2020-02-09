@@ -156,14 +156,7 @@ namespace NAPS2.WinForms
 
                 var message = new EmailMessage
                 {
-                    Attachments =
-                    {
-                        new EmailAttachment
-                        {
-                            FilePath = targetPath,
-                            AttachmentName = attachmentName
-                        }
-                    }
+                    Attachments = { new EmailAttachment(targetPath, attachmentName) }
                 };
 
                 if (await ExportPDF(targetPath, images, true, message))

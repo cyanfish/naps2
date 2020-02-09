@@ -10,8 +10,12 @@ namespace NAPS2.Config
     {
         private static readonly Dictionary<Type, (PropertyInfo, bool)[]> PropCache = new Dictionary<Type, (PropertyInfo, bool)[]>();
 
-        public static void Copy<T>(T src, T dst) =>
+        public static void Copy<T>(T src, T dst)
+        {
+            if (src == null) throw new ArgumentNullException(nameof(src));
+            if (dst == null) throw new ArgumentNullException(nameof(dst));
             Copy(src, dst, typeof(T));
+        }
 
         private static void Copy(object src, object dst, Type t)
         {

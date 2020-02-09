@@ -11,14 +11,14 @@
             RequestQueue = OcrRequestQueue.Default;
         }
 
-        public OcrContext(OcrParams ocrParams, OcrEngineManager ocrEngineManager, OcrRequestQueue ocrRequestQueue)
+        public OcrContext(OcrParams? ocrParams, OcrEngineManager? ocrEngineManager, OcrRequestQueue? ocrRequestQueue)
         {
             Params = ocrParams;
-            EngineManager = ocrEngineManager;
-            RequestQueue = ocrRequestQueue;
+            EngineManager = ocrEngineManager ?? OcrEngineManager.Default;
+            RequestQueue = ocrRequestQueue ?? OcrRequestQueue.Default;
         }
 
-        public OcrParams Params { get; }
+        public OcrParams? Params { get; }
 
         public OcrEngineManager EngineManager { get; }
 

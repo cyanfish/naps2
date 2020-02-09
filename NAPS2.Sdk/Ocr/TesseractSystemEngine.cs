@@ -11,7 +11,7 @@ namespace NAPS2.Ocr
     {
         private bool isInstalled;
         private DateTime? installCheckTime;
-        private List<Language> installedLanguages;
+        private List<Language>? installedLanguages;
 
         public TesseractSystemEngine()
         {
@@ -44,10 +44,9 @@ namespace NAPS2.Ocr
             get
             {
                 CheckIfInstalled();
-                return installedLanguages;
+                return installedLanguages ?? Enumerable.Empty<Language>();
             }
         }
-
 
         public override IEnumerable<Language> NotInstalledLanguages => Enumerable.Empty<Language>();
 

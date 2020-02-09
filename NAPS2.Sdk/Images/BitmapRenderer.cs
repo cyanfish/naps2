@@ -19,6 +19,7 @@ namespace NAPS2.Images
 
         public BitmapRenderer(ImageContext imageContext, IScannedImageRenderer<IImage> imageRenderer)
         {
+            this.imageContext = imageContext;
             this.imageRenderer = imageRenderer;
         }
 

@@ -198,9 +198,9 @@ namespace NAPS2.Ocr
         {
             public string Arguments { get; set; }
 
-            public string PrefixPath { get; set; }
+            public string? PrefixPath { get; set; }
 
-            public string DataPath { get; set; }
+            public string? DataPath { get; set; }
         }
     }
 }

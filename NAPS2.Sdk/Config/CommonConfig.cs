@@ -32,25 +32,25 @@ namespace NAPS2.Config
         public int? Version { get; set; } = CURRENT_VERSION;
 
         [Common]
-        public string Culture { get; set; }
+        public string? Culture { get; set; }
 
         [User]
-        public ImmutableList<FormState> FormStates { get; set; }
+        public ImmutableList<FormState>? FormStates { get; set; }
 
         [User]
-        public ImmutableHashSet<string> BackgroundOperations { get; set; }
+        public ImmutableHashSet<string>? BackgroundOperations { get; set; }
 
         [Common]
-        public ImmutableList<NamedPageSize> CustomPageSizePresets { get; set; }
+        public ImmutableList<NamedPageSize>? CustomPageSizePresets { get; set; }
 
         [User]
-        public ImmutableList<ScanProxyConfig> SavedProxies { get; set; }
+        public ImmutableList<ScanProxyConfig>? SavedProxies { get; set; }
 
         [App]
-        public string StartupMessageTitle { get; set; }
+        public string? StartupMessageTitle { get; set; }
 
         [App]
-        public string StartupMessageText { get; set; }
+        public string? StartupMessageText { get; set; }
 
         [App]
         public MessageBoxIcon? StartupMessageIcon { get; set; }
@@ -116,7 +116,7 @@ namespace NAPS2.Config
         public bool? SingleInstance { get; set; }
 
         [App]
-        public string ComponentsPath { get; set; }
+        public string? ComponentsPath { get; set; }
 
         [Common]
         public double? OcrTimeoutInSeconds { get; set; }
@@ -125,7 +125,7 @@ namespace NAPS2.Config
         public bool? EnableOcr { get; set; }
 
         [Common]
-        public string OcrLanguageCode { get; set; }
+        public string? OcrLanguageCode { get; set; }
 
         [Common]
         public OcrMode? OcrMode { get; set; }
@@ -134,7 +134,7 @@ namespace NAPS2.Config
         public bool? OcrAfterScanning { get; set; }
 
         [User]
-        public string LastImageExt { get; set; }
+        public string? LastImageExt { get; set; }
 
         [Common]
         public int? ThumbnailSize { get; set; }
@@ -183,6 +183,6 @@ namespace NAPS2.Config
         public SslSetup SslSetup { get; set; }
 
         [Common]
-        public ScanProfile DefaultProfileSettings { get; set; }
+        public ScanProfile? DefaultProfileSettings { get; set; }
     }
 }

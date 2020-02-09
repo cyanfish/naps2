@@ -2,7 +2,7 @@
 {
     public class ImageSettings
     {
-        public string DefaultFileName { get; set; }
+        public string? DefaultFileName { get; set; }
 
         public bool? SkipSavePrompt { get; set; }
 

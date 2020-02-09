@@ -21,7 +21,7 @@ namespace NAPS2.Config
 
         public bool HasChanges { get; private set; }
 
-        public event EventHandler HasChangesChanged;
+        public event EventHandler? HasChangesChanged;
 
         public void Commit()
         {

@@ -53,19 +53,19 @@ namespace NAPS2.Images
 
         public event EventHandler ImagesUpdated;
 
-        public void Mutate(ListMutation<ScannedImage> mutation, ListSelection<ScannedImage> selectionToMutate = null)
+        public void Mutate(ListMutation<ScannedImage> mutation, ListSelection<ScannedImage>? selectionToMutate = null)
         {
             MutateInternal(mutation, selectionToMutate);
             runUpdateEventsThrottle.RunAction(SynchronizationContext.Current);
         }
 
-        public async Task MutateAsync(ListMutation<ScannedImage> mutation, ListSelection<ScannedImage> selectionToMutate = null)
+        public async Task MutateAsync(ListMutation<ScannedImage> mutation, ListSelection<ScannedImage>? selectionToMutate = null)
         {
             await Task.Run(() => MutateInternal(mutation, selectionToMutate));
             runUpdateEventsThrottle.RunAction(SynchronizationContext.Current);
         }
 
-        private void MutateInternal(ListMutation<ScannedImage> mutation, ListSelection<ScannedImage> selectionToMutate)
+        private void MutateInternal(ListMutation<ScannedImage> mutation, ListSelection<ScannedImage>? selectionToMutate)
         {
             if (selectionToMutate != null)
             {

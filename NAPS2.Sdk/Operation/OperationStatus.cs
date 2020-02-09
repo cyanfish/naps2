@@ -5,7 +5,7 @@
     /// </summary>
     public class OperationStatus
     {
-        public string StatusText { get; set; }
+        public string? StatusText { get; set; }
 
         public int CurrentProgress { get; set; }
 
