@@ -124,17 +124,11 @@ namespace NAPS2.Scan.Internal
             {
                 scannedImage.SetThumbnail(imageContext.PerformTransform(image, new ThumbnailTransform(options.ThumbnailSize.Value)));
             }
+            
             if (!options.UseNativeUI && options.BrightnessContrastAfterScan)
             {
-                if (options.Brightness != 0)
-                {
-                    AddTransformAndUpdateThumbnail(scannedImage, ref image, new BrightnessTransform(options.Brightness), options);
-                }
-
-                if (options.Contrast != 0)
-                {
-                    AddTransformAndUpdateThumbnail(scannedImage, ref image, new TrueContrastTransform(options.Contrast), options);
-                }
+                AddTransformAndUpdateThumbnail(scannedImage, ref image, new BrightnessTransform(options.Brightness), options);
+                AddTransformAndUpdateThumbnail(scannedImage, ref image, new TrueContrastTransform(options.Contrast), options);
             }
 
             if (options.FlipDuplexedPages && postProcessingContext.PageNumber % 2 == 0)
@@ -144,14 +138,7 @@ namespace NAPS2.Scan.Internal
 
             if (options.AutoDeskew)
             {
-                // TODO: Deskew should be local.
-                var op = new DeskewOperation();
-                if (op.Start(new[] { scannedImage }, new DeskewParams { ThumbnailSize = options.ThumbnailSize }))
-                {
-                    // TODO: How to do this, if at all?
-                    //operationProgress.ShowProgress(op);
-                    op.Wait();
-                }
+                AddTransformAndUpdateThumbnail(scannedImage, ref image, Deskewer.GetDeskewTransform(image), options);
             }
 
             if (!scannedImage.BarcodeDetection.IsBarcodePresent)
@@ -174,6 +161,10 @@ namespace NAPS2.Scan.Internal
 
         private void AddTransformAndUpdateThumbnail(ScannedImage scannedImage, ref IImage image, Transform transform, ScanOptions options)
         {
+            if (transform.IsNull)
+            {
+                return;
+            }
             scannedImage.AddTransform(transform);
             if (options.ThumbnailSize.HasValue)
             {
