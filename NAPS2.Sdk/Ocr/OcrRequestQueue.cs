@@ -33,7 +33,7 @@ namespace NAPS2.Ocr
         private readonly OcrEngineManager ocrEngineManager;
         private readonly OperationProgress operationProgress;
 
-        private OcrOperation currentOp;
+        private OcrOperation? currentOp;
 
         public OcrRequestQueue() : this(OcrEngineManager.Default, OperationProgress.Default)
         {

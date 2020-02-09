@@ -4,7 +4,7 @@ namespace NAPS2.Scan.Batch
 {
     public class BatchSettings
     {
-        public string ProfileDisplayName { get; set; }
+        public string? ProfileDisplayName { get; set; }
 
         public BatchScanType? ScanType { get; set; }
 
@@ -16,6 +16,6 @@ namespace NAPS2.Scan.Batch
 
         public SaveSeparator? SaveSeparator { get; set; }
 
-        public string SavePath { get; set; }
+        public string? SavePath { get; set; }
     }
 }

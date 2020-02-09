@@ -16,7 +16,7 @@
 
         public bool RefreshListViewAfterChange => false;
 
-        public string ExeRunner => null;
+        public string? ExeRunner => null;
 
         public bool UseWorker => true;
     }

@@ -40,10 +40,10 @@ namespace NAPS2.Ocr
         {
             unchecked
             {
-                var hashCode = (ScannedImage != null ? ScannedImage.GetHashCode() : 0);
+                var hashCode = ScannedImage.GetHashCode();
                 hashCode = (hashCode * 397) ^ TransformState;
-                hashCode = (hashCode * 397) ^ (Engine != null ? Engine.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ (OcrParams != null ? OcrParams.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ Engine.GetHashCode();
+                hashCode = (hashCode * 397) ^ OcrParams.GetHashCode();
                 return hashCode;
             }
         }

@@ -2,6 +2,6 @@
 {
     public class EmailSettings
     {
-        public string AttachmentName { get; set; }
+        public string? AttachmentName { get; set; }
     }
 }

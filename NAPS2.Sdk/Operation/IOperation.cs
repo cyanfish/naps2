@@ -9,7 +9,7 @@ namespace NAPS2.Operation
     /// </summary>
     public interface IOperation
     {
-        string ProgressTitle { get; }
+        string? ProgressTitle { get; }
 
         bool AllowCancel { get; }
 
@@ -17,9 +17,9 @@ namespace NAPS2.Operation
 
         bool SkipExitPrompt { get; }
 
-        OperationStatus Status { get; }
+        OperationStatus? Status { get; }
 
-        Task<bool> Success { get; }
+        Task<bool>? Success { get; }
 
         bool IsFinished { get; }
 

@@ -16,7 +16,7 @@
 
         bool RefreshListViewAfterChange { get; }
 
-        string ExeRunner { get; }
+        string? ExeRunner { get; }
 
         bool UseWorker { get; }
     }

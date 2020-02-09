@@ -13,7 +13,7 @@ namespace NAPS2.ImportExport.Email.Oauth
         private readonly ConfigScopes configScopes;
         private readonly ConfigProvider<CommonConfig> configProvider;
 
-        private OauthClientCreds creds;
+        private OauthClientCreds? creds;
 
         public GmailOauthProvider(ConfigScopes configScopes, ConfigProvider<CommonConfig> configProvider)
         {

@@ -16,7 +16,7 @@ namespace NAPS2.WinForms
         private readonly UpdateChecker updateChecker;
 
         private bool hasCheckedForUpdates;
-        private UpdateInfo update;
+        private UpdateInfo? update;
 
         public FAbout(UpdateChecker updateChecker)
         {

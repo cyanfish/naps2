@@ -11,7 +11,7 @@ namespace NAPS2.Ocr
 
         public OcrRequestParams Params { get; }
 
-        public string TempImageFilePath { get; set; }
+        public string? TempImageFilePath { get; set; }
 
         public CancellationTokenSource CancelSource { get; } = new CancellationTokenSource();
 
@@ -19,7 +19,7 @@ namespace NAPS2.Ocr
 
         public bool IsProcessing { get; set; }
 
-        public OcrResult Result { get; set; }
+        public OcrResult? Result { get; set; }
 
         public int ForegroundCount { get; set; }
 

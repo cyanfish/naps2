@@ -8,14 +8,14 @@ namespace NAPS2.Ocr
         {
         }
 
-        public OcrParams(string langCode, OcrMode mode, double timeoutInSeconds)
+        public OcrParams(string? langCode, OcrMode mode, double timeoutInSeconds)
         {
             LanguageCode = langCode;
             Mode = mode;
             TimeoutInSeconds = timeoutInSeconds;
         }
 
-        public string LanguageCode { get; set; }
+        public string? LanguageCode { get; set; }
 
         public OcrMode Mode { get; set; }
 

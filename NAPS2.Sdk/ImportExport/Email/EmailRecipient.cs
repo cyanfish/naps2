@@ -34,7 +34,7 @@ namespace NAPS2.ImportExport.Email
         /// <summary>
         /// Gets or sets the recipient's email address.
         /// </summary>
-        public string Address { get; set; }
+        public string? Address { get; set; }
 
         /// <summary>
         /// Gets or sets the type of recipient ("to", "cc", "bcc").

@@ -6,6 +6,6 @@ namespace NAPS2.Ocr
     {
         public Rectangle Bounds { get; set; }
 
-        public string Text { get; set; }
+        public string? Text { get; set; }
     }
 }

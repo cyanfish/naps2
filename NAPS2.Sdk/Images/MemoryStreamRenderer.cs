@@ -15,8 +15,9 @@ namespace NAPS2.Images
             imageRenderer = new ImageRenderer(imageContext);
         }
 
-        public MemoryStreamRenderer(IScannedImageRenderer<IImage> imageRenderer)
+        public MemoryStreamRenderer(ImageContext imageContext, IScannedImageRenderer<IImage> imageRenderer)
         {
+            this.imageContext = imageContext;
             this.imageRenderer = imageRenderer;
         }
 

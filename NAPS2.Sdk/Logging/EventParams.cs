@@ -5,7 +5,7 @@ namespace NAPS2.Logging
 {
     public class EventParams
     {
-        public string Name { get; set; }
+        public string? Name { get; set; }
 
         public int? Pages { get; set; }
 
@@ -13,13 +13,13 @@ namespace NAPS2.Logging
 
         public string User { get; set; } = $"{Environment.UserDomainName}\\{Environment.UserName}";
 
-        public string DeviceName { get; set; }
+        public string? DeviceName { get; set; }
 
-        public string ProfileName { get; set; }
+        public string? ProfileName { get; set; }
 
-        public string BitDepth { get; set; }
+        public string? BitDepth { get; set; }
 
-        public string FileFormat { get; set; }
+        public string? FileFormat { get; set; }
 
         public override string ToString()
         {

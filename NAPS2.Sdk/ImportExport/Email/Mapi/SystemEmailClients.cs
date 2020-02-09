@@ -11,7 +11,7 @@ namespace NAPS2.ImportExport.Email.Mapi
     {
         private const string DEFAULT_MAPI_DLL = "mapi32.dll";
 
-        public string GetDefaultName()
+        public string? GetDefaultName()
         {
             using var key = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\Clients\Mail", false);
             return key?.GetValue(null).ToString();

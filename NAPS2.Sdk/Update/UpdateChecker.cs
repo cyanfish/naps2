@@ -51,13 +51,7 @@ namespace NAPS2.Update
                 var sig = updateFile.Value<string>("sig");
                 if (sha1 == null || sig == null) continue;
 
-                return new UpdateInfo
-                {
-                    Name = versionName,
-                    DownloadUrl = updateFile.Value<string>("url"),
-                    Sha1 = Convert.FromBase64String(sha1),
-                    Signature = Convert.FromBase64String(sig)
-                };
+                return new UpdateInfo(versionName, updateFile.Value<string>("url"), Convert.FromBase64String(sha1), Convert.FromBase64String(sig));
             }
             return null;
         }

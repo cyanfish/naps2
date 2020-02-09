@@ -26,7 +26,7 @@ namespace NAPS2.WinForms
             set => Text = value;
         }
 
-        public Action ClickAction { get; set; }
+        public Action? ClickAction { get; set; }
 
         private void EmailProviderWidget_MouseEnter(object sender, EventArgs e)
         {

@@ -48,6 +48,6 @@ namespace NAPS2.Config
             ProfilesUpdated?.Invoke(this, EventArgs.Empty);
         }
 
-        public event EventHandler ProfilesUpdated;
+        public event EventHandler? ProfilesUpdated;
     }
 }

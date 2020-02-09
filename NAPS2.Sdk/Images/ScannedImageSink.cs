@@ -8,9 +8,9 @@ namespace NAPS2.Images
 {
     public class ScannedImageSink
     {
-        private static TaskCompletionSource<ScannedImage> CreateTcs() => new TaskCompletionSource<ScannedImage>(TaskCreationOptions.RunContinuationsAsynchronously);
+        private static TaskCompletionSource<ScannedImage?> CreateTcs() => new TaskCompletionSource<ScannedImage?>(TaskCreationOptions.RunContinuationsAsynchronously);
 
-        private readonly List<TaskCompletionSource<ScannedImage>> images = new List<TaskCompletionSource<ScannedImage>>
+        private readonly List<TaskCompletionSource<ScannedImage?>> images = new List<TaskCompletionSource<ScannedImage?>>
         {
             CreateTcs()
         };

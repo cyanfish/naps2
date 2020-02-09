@@ -35,7 +35,7 @@ namespace NAPS2.Config.ObsoleteTypes
 
         public ScanPageSize PageSize { get; set; }
 
-        public PageDimensions CustomPageSize { get; set; }
+        public PageDimensions? CustomPageSize { get; set; }
 
         public ScanDpi Resolution { get; set; }
 

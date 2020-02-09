@@ -8,7 +8,7 @@ namespace NAPS2.Images
 {
     public class ScannedImage : IDisposable
     {
-        private IImage thumbnail;
+        private IImage? thumbnail;
         private int thumbnailState;
 
         private BarcodeDetection barcodeDetection = BarcodeDetection.NotAttempted;
@@ -85,7 +85,7 @@ namespace NAPS2.Images
             ThumbnailInvalidated?.Invoke(this, new EventArgs());
         }
 
-        public IImage GetThumbnail()
+        public IImage? GetThumbnail()
         {
             lock (this)
             {
@@ -106,11 +106,11 @@ namespace NAPS2.Images
 
         public bool IsThumbnailDirty => thumbnailState != Metadata.TransformState;
 
-        public EventHandler ThumbnailChanged;
+        public EventHandler? ThumbnailChanged;
 
-        public EventHandler ThumbnailInvalidated;
+        public EventHandler? ThumbnailInvalidated;
 
-        public EventHandler FullyDisposed;
+        public EventHandler? FullyDisposed;
 
         public Snapshot Preserve() => new Snapshot(this);
 

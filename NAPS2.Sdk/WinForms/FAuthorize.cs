@@ -13,7 +13,7 @@ namespace NAPS2.WinForms
     public partial class FAuthorize : FormBase
     {
         private readonly ErrorOutput errorOutput;
-        private CancellationTokenSource cancelTokenSource;
+        private CancellationTokenSource? cancelTokenSource;
 
         public FAuthorize(ErrorOutput errorOutput)
         {
@@ -22,10 +22,12 @@ namespace NAPS2.WinForms
             InitializeComponent();
         }
 
-        public OauthProvider OauthProvider { get; set; }
+        public OauthProvider? OauthProvider { get; set; }
 
         private void FAuthorize_Load(object sender, EventArgs e)
         {
+            if (OauthProvider == null) throw new InvalidOperationException("OauthProvider must be specified");
+            
             MaximumSize = new Size(Math.Max(lblWaiting.Width + 142, 272), Height);
             MinimumSize = new Size(Math.Max(lblWaiting.Width + 142, 272), Height);
 

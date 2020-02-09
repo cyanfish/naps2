@@ -20,7 +20,7 @@ namespace NAPS2.ImportExport.Pdf
     {
         private readonly PdfExporter pdfExporter;
         private readonly OverwritePrompt overwritePrompt;
-        private readonly IEmailProviderFactory emailProviderFactory;
+        private readonly IEmailProviderFactory? emailProviderFactory;
 
         public SavePdfOperation() : this(new PdfSharpExporter(ImageContext.Default), OverwritePrompt.Default, null)
         {
@@ -30,7 +30,7 @@ namespace NAPS2.ImportExport.Pdf
         {
         }
 
-        public SavePdfOperation(PdfExporter pdfExporter, OverwritePrompt overwritePrompt, IEmailProviderFactory emailProviderFactory)
+        public SavePdfOperation(PdfExporter pdfExporter, OverwritePrompt overwritePrompt, IEmailProviderFactory? emailProviderFactory)
         {
             this.pdfExporter = pdfExporter;
             this.overwritePrompt = overwritePrompt;
@@ -45,7 +45,7 @@ namespace NAPS2.ImportExport.Pdf
             return Start(fileName, placeholders, images, pdfSettings, ocrContext, false, null);
         }
 
-        public bool Start(string fileName, Placeholders placeholders, ICollection<ScannedImage> images, ConfigProvider<PdfSettings> pdfSettings, OcrContext ocrContext, bool email, EmailMessage emailMessage)
+        public bool Start(string fileName, Placeholders placeholders, ICollection<ScannedImage> images, ConfigProvider<PdfSettings> pdfSettings, OcrContext ocrContext, bool email, EmailMessage? emailMessage)
         {
             ProgressTitle = email ? MiscResources.EmailPdfProgress : MiscResources.SavePdfProgress;
             var subFileName = placeholders.Substitute(fileName);
@@ -103,7 +103,7 @@ namespace NAPS2.ImportExport.Pdf
                     GC.Collect();
                 }
                 
-                if (result && email && emailMessage != null)
+                if (result && email && emailMessage != null && emailProviderFactory != null)
                 {
                     Status.StatusText = MiscResources.UploadingEmail;
                     Status.CurrentProgress = 0;

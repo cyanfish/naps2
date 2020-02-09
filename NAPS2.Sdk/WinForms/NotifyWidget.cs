@@ -7,9 +7,9 @@ namespace NAPS2.WinForms
     public partial class NotifyWidget : NotifyWidgetBase
     {
         private readonly string linkTarget;
-        private readonly string folderTarget;
+        private readonly string? folderTarget;
 
-        public NotifyWidget(string title, string linkLabel, string linkTarget, string folderTarget)
+        public NotifyWidget(string title, string linkLabel, string linkTarget, string? folderTarget)
         {
             this.linkTarget = linkTarget;
             this.folderTarget = folderTarget;

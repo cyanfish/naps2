@@ -35,7 +35,7 @@ namespace NAPS2.ImportExport.Images
             AllowBackground = true;
         }
 
-        public string FirstFileSaved { get; private set; }
+        public string? FirstFileSaved { get; private set; }
 
         /// <summary>
         /// Saves the provided collection of images to a file with the given name. The image type is inferred from the file extension.

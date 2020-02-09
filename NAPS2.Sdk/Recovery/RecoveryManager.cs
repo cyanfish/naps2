@@ -45,9 +45,9 @@ namespace NAPS2.Recovery
             private readonly IFormFactory formFactory;
             private readonly ImageRenderer imageRenderer;
 
-            private FileStream lockFile;
-            private DirectoryInfo folderToRecoverFrom;
-            private RecoveryIndex recoveryIndex;
+            private FileStream? lockFile;
+            private DirectoryInfo? folderToRecoverFrom;
+            private RecoveryIndex? recoveryIndex;
             private int imageCount;
             private DateTime scannedDateTime;
 

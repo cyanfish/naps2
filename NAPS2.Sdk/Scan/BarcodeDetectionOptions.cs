@@ -8,6 +8,6 @@ namespace NAPS2.Scan
         
         public bool PatchTOnly { get; set; }
         
-        public DecodingOptions ZXingOptions { get; set; }
+        public DecodingOptions? ZXingOptions { get; set; }
     }
 }

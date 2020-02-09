@@ -27,7 +27,7 @@ namespace NAPS2.ImportExport
         private readonly ErrorOutput errorOutput;
         private readonly DialogHelper dialogHelper;
         private readonly OperationProgress operationProgress;
-        private readonly ISaveNotify notify;
+        private readonly ISaveNotify? notify;
         private readonly PdfExporter pdfExporter;
         private readonly OverwritePrompt overwritePrompt;
         private readonly BitmapRenderer bitmapRenderer;

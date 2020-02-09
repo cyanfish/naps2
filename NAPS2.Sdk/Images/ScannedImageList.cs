@@ -24,10 +24,10 @@ namespace NAPS2.Images
             this.imageContext = imageContext;
             runUpdateEventsThrottle = new TimedThrottle(RunUpdateEvents, TimeSpan.FromMilliseconds(100));
             Images = images;
-            Selection = ListSelection.Empty<ScannedImage>();
+            selection = ListSelection.Empty<ScannedImage>();
         }
 
-        public ThumbnailRenderer ThumbnailRenderer { get; set; }
+        public ThumbnailRenderer? ThumbnailRenderer { get; set; }
 
         public List<ScannedImage> Images { get; }
 
@@ -51,7 +51,7 @@ namespace NAPS2.Images
             ImagesUpdated?.Invoke(this, EventArgs.Empty);
         }
 
-        public event EventHandler ImagesUpdated;
+        public event EventHandler? ImagesUpdated;
 
         public void Mutate(ListMutation<ScannedImage> mutation, ListSelection<ScannedImage>? selectionToMutate = null)
         {
@@ -67,7 +67,7 @@ namespace NAPS2.Images
 
         private void MutateInternal(ListMutation<ScannedImage> mutation, ListSelection<ScannedImage>? selectionToMutate)
         {
-            if (selectionToMutate != null)
+            if (!ReferenceEquals(selectionToMutate, null))
             {
                 mutation.Apply(Images, ref selectionToMutate);
             }

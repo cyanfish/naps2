@@ -10,9 +10,9 @@ namespace NAPS2.ImportExport.Email
             Attachments = new List<EmailAttachment>();
         }
 
-        public string Subject { get; set; }
+        public string? Subject { get; set; }
 
-        public string BodyText { get; set; }
+        public string? BodyText { get; set; }
 
         public List<EmailRecipient> Recipients { get; set; }
 

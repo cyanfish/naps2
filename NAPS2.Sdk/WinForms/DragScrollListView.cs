@@ -19,27 +19,15 @@ namespace NAPS2.WinForms
 
         public DragScrollListView()
         {
-            InitializeComponent();
+            components = new System.ComponentModel.Container();
+            tmrLVScroll = new Timer(components);
+            SuspendLayout();
+            tmrLVScroll.Tick += tmrLVScroll_Tick;
+            DragOver += ListViewBase_DragOver;
+            ResumeLayout(false);
         }
 
         private int EdgeSize => Font.Height;
-
-        private void InitializeComponent()
-        {
-            this.components = new System.ComponentModel.Container();
-            this.tmrLVScroll = new System.Windows.Forms.Timer(this.components);
-            this.SuspendLayout();
-            // 
-            // tmrLVScroll
-            // 
-            this.tmrLVScroll.Tick += new System.EventHandler(this.tmrLVScroll_Tick);
-            // 
-            // ListViewBase
-            // 
-            this.DragOver += new System.Windows.Forms.DragEventHandler(this.ListViewBase_DragOver);
-            this.ResumeLayout(false);
-
-        }
 
         private void ListViewBase_DragOver(object sender, DragEventArgs e)
         {

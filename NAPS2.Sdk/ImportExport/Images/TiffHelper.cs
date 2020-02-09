@@ -61,9 +61,6 @@ namespace NAPS2.ImportExport.Images
 
                     for (int i = 1; i < snapshots.Count; i++)
                     {
-                        if (snapshots[i] == null)
-                            break;
-
                         progressCallback(i, snapshots.Count);
                         if (cancelToken.IsCancellationRequested)
                         {

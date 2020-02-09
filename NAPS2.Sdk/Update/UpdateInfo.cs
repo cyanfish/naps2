@@ -2,12 +2,20 @@
 {
     public class UpdateInfo
     {
-        public string Name { get; set; }
+        public UpdateInfo(string name, string downloadUrl, byte[] sha1, byte[] signature)
+        {
+            Name = name;
+            DownloadUrl = downloadUrl;
+            Sha1 = sha1;
+            Signature = signature;
+        }
 
-        public string DownloadUrl { get; set; }
+        public string Name { get; }
 
-        public byte[] Sha1 { get; set; }
+        public string DownloadUrl { get; }
 
-        public byte[] Signature { get; set; }
+        public byte[] Sha1 { get; }
+
+        public byte[] Signature { get; }
     }
 }

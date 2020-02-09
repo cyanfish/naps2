@@ -35,7 +35,7 @@ namespace NAPS2.ImportExport
 
             RunAsync(async () =>
             {
-                Exception error = null;
+                Exception? error = null;
                 foreach (var serializedImageBytes in data.SerializedImages)
                 {
                     try

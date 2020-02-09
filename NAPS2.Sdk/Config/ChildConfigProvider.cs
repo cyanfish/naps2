@@ -15,11 +15,7 @@ namespace NAPS2.Config
 
         protected override T GetInternal<T>(Func<TChild, T> func) => parentProvider.Get(parent =>
         {
-            var child = childSelector(parent);
-            if (child == null)
-            {
-                return default;
-            }
+            var child = childSelector(parent) ?? throw new InvalidOperationException("Child config should not be null");
             return func(child);
         });
     }

@@ -25,10 +25,10 @@ namespace NAPS2.Update
         private readonly ErrorOutput errorOutput;
 
         private readonly ManualResetEvent waitHandle = new ManualResetEvent(false);
-        private WebClient client;
-        private UpdateInfo update;
-        private string tempFolder;
-        private string tempPath;
+        private WebClient? client;
+        private UpdateInfo? update;
+        private string? tempFolder;
+        private string? tempPath;
 
         static UpdateOperation()
         {

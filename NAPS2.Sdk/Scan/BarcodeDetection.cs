@@ -38,13 +38,13 @@ namespace NAPS2.Scan
             return new BarcodeDetection(true, reader.Decode(gdiImage.Bitmap));
         }
         
-        private BarcodeDetection(bool isAttempted, Result detectionResult)
+        private BarcodeDetection(bool isAttempted, Result? detectionResult)
         {
             IsAttempted = isAttempted;
             DetectionResult = detectionResult;
         }
 
-        public Result DetectionResult { get; }
+        public Result? DetectionResult { get; }
         
         public bool IsAttempted { get; }
 

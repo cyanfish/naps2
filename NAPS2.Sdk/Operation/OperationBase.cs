@@ -11,7 +11,7 @@ namespace NAPS2.Operation
     {
         private readonly CancellationTokenSource cts = new CancellationTokenSource();
 
-        public string ProgressTitle { get; protected set; }
+        public string? ProgressTitle { get; protected set; }
 
         public bool AllowCancel { get; protected set; }
 
@@ -19,9 +19,9 @@ namespace NAPS2.Operation
 
         public bool SkipExitPrompt { get; protected set; }
 
-        public OperationStatus Status { get; protected set; }
+        public OperationStatus? Status { get; protected set; }
 
-        public Task<bool> Success { get; protected set; }
+        public Task<bool>? Success { get; protected set; }
 
         public bool IsFinished { get; protected set; }
 
@@ -35,13 +35,13 @@ namespace NAPS2.Operation
             cts.Cancel();
         }
 
-        public event EventHandler StatusChanged;
+        public event EventHandler? StatusChanged;
 
-        public event EventHandler Finished;
+        public event EventHandler? Finished;
 
-        public event EventHandler<OperationErrorEventArgs> Error;
+        public event EventHandler<OperationErrorEventArgs>? Error;
 
-        protected OperationErrorEventArgs LastError { get; private set; }
+        protected OperationErrorEventArgs? LastError { get; private set; }
 
         protected CancellationToken CancelToken => cts.Token;
 
