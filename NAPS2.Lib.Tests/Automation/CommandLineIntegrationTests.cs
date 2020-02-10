@@ -31,10 +31,8 @@ namespace NAPS2.Lib.Tests.Automation
 
         private async Task RunCommand(AutomatedScanningOptions options, params Bitmap[] imagesToScan)
         {
-            Console.SetOut(new TestWriter(testOutputHelper));
             var scanDriverFactory = new ScanDriverFactoryBuilder().WithScannedImages(imagesToScan).Build();
-            var kernel = new StandardKernel(new CommonModule(), new ConsoleModule(), new TestModule(ImageContext, scanDriverFactory));
-            // TODO: Consider how best to handle this - it isn't thread safe.
+            var kernel = new StandardKernel(new CommonModule(), new ConsoleModule(), new TestModule(ImageContext, scanDriverFactory, testOutputHelper));
             var automatedScanning = kernel.Get<AutomatedScanning>(new ConstructorArgument("options", options));
             await automatedScanning.Execute();
         }
@@ -46,7 +44,8 @@ namespace NAPS2.Lib.Tests.Automation
                 new AutomatedScanningOptions
                 {
                     Number = 1,
-                    OutputPath = $"{FolderPath}/test.pdf"
+                    OutputPath = $"{FolderPath}/test.pdf",
+                    Verbose = true
                 },
                 BarcodeTestsData.color_image);
             PdfAsserts.AssertPageCount(1, $"{FolderPath}/test.pdf");
@@ -60,7 +59,8 @@ namespace NAPS2.Lib.Tests.Automation
                 {
                     Number = 1,
                     SplitPatchT = true,
-                    OutputPath = $"{FolderPath}/$(n).pdf"
+                    OutputPath = $"{FolderPath}/$(n).pdf",
+                    Verbose = true
                 },
                 BarcodeTestsData.color_image,
                 BarcodeTestsData.color_image,
@@ -82,11 +82,13 @@ namespace NAPS2.Lib.Tests.Automation
         {
             private readonly ImageContext imageContext;
             private readonly IScanDriverFactory scanDriverFactory;
+            private readonly ITestOutputHelper testOutputHelper;
 
-            public TestModule(ImageContext imageContext, IScanDriverFactory scanDriverFactory)
+            public TestModule(ImageContext imageContext, IScanDriverFactory scanDriverFactory, ITestOutputHelper testOutputHelper)
             {
                 this.imageContext = imageContext;
                 this.scanDriverFactory = scanDriverFactory;
+                this.testOutputHelper = testOutputHelper;
             }
             
             public override void Load()
@@ -95,18 +97,15 @@ namespace NAPS2.Lib.Tests.Automation
                 Rebind<OcrEngineManager>().ToConstant(new OcrEngineManager());
                 Rebind<IScanDriverFactory>().ToConstant(scanDriverFactory);
                 Rebind<IScanBridgeFactory>().To<InProcScanBridgeFactory>();
+                Rebind<ConsoleOutput>().ToSelf().WithConstructorArgument("writer", new TestOutputTextWriter(testOutputHelper));
             }
         }
-        
-        // TODO: Clean this up.
-        // TODO: Probably AutomatedScanning should take a TextWriter (instead of Console.WriteLine) for test isolation.
-        
 
-        private class TestWriter : TextWriter
+        private class TestOutputTextWriter : TextWriter
         {
             readonly ITestOutputHelper output;
             
-            public TestWriter(ITestOutputHelper output)
+            public TestOutputTextWriter(ITestOutputHelper output)
             {
                 this.output = output;
             }

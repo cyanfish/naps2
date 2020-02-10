@@ -42,6 +42,7 @@ namespace NAPS2.Automation
         private readonly ConfigProvider<ImageSettings> imageSettingsProvider;
         private readonly IProfileManager profileManager;
 
+        private readonly ConsoleOutput output;
         private readonly AutomatedScanningOptions options;
         private List<List<ScannedImage>> scanList;
         private int pagesScanned;
@@ -50,8 +51,9 @@ namespace NAPS2.Automation
         private List<string> actualOutputPaths;
         private OcrParams ocrParams;
 
-        public AutomatedScanning(AutomatedScanningOptions options, ImageContext imageContext, IScanPerformer scanPerformer, ErrorOutput errorOutput, IEmailProviderFactory emailProviderFactory, IScannedImageImporter scannedImageImporter, IOperationFactory operationFactory, OcrEngineManager ocrEngineManager, IFormFactory formFactory, ConfigScopes configScopes, IProfileManager profileManager, OcrRequestQueue ocrRequestQueue)
+        public AutomatedScanning(ConsoleOutput output, AutomatedScanningOptions options, ImageContext imageContext, IScanPerformer scanPerformer, ErrorOutput errorOutput, IEmailProviderFactory emailProviderFactory, IScannedImageImporter scannedImageImporter, IOperationFactory operationFactory, OcrEngineManager ocrEngineManager, IFormFactory formFactory, ConfigScopes configScopes, IProfileManager profileManager, OcrRequestQueue ocrRequestQueue)
         {
+            this.output = output;
             this.options = options;
             this.imageContext = imageContext;
             this.scanPerformer = scanPerformer;
@@ -77,7 +79,7 @@ namespace NAPS2.Automation
         {
             if (options.Verbose)
             {
-                Console.WriteLine(value, args);
+                output.Writer.WriteLine(value, args);
             }
         }
 
@@ -146,7 +148,7 @@ namespace NAPS2.Automation
             catch (Exception ex)
             {
                 Log.FatalException("An error occurred that caused the console application to close.", ex);
-                Console.WriteLine(ConsoleResources.UnexpectedError);
+                output.Writer.WriteLine(ConsoleResources.UnexpectedError);
             }
             finally
             {
@@ -190,12 +192,12 @@ namespace NAPS2.Automation
             var installId = options.Install.ToLowerInvariant();
             if (!componentDict.TryGetValue(installId, out var toInstall))
             {
-                Console.WriteLine(ConsoleResources.ComponentNotAvailable);
+                output.Writer.WriteLine(ConsoleResources.ComponentNotAvailable);
                 return;
             }
             if (toInstall.IsInstalled)
             {
-                Console.WriteLine(ConsoleResources.ComponentAlreadyInstalled);
+                output.Writer.WriteLine(ConsoleResources.ComponentAlreadyInstalled);
                 return;
             }
             // Using a form here is not ideal (since this is supposed to be a console app), but good enough for now
@@ -206,13 +208,13 @@ namespace NAPS2.Automation
                 progressForm.QueueFile(ocrExe);
                 if (options.Verbose)
                 {
-                    Console.WriteLine(ConsoleResources.Installing, ocrExe.Id);
+                    output.Writer.WriteLine(ConsoleResources.Installing, ocrExe.Id);
                 }
             }
             progressForm.QueueFile(toInstall);
             if (options.Verbose)
             {
-                Console.WriteLine(ConsoleResources.Installing, toInstall.Id);
+                output.Writer.WriteLine(ConsoleResources.Installing, toInstall.Id);
             }
             progressForm.ShowDialog();
         }

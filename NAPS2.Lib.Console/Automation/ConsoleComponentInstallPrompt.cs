@@ -6,9 +6,16 @@ namespace NAPS2.Automation
 {
     public class ConsoleComponentInstallPrompt : IComponentInstallPrompt
     {
+        private readonly ConsoleOutput output;
+
+        public ConsoleComponentInstallPrompt(ConsoleOutput output)
+        {
+            this.output = output;
+        }
+
         public bool PromptToInstall(ExternalComponent component, string promptText)
         {
-            Console.WriteLine(ConsoleResources.ComponentNeeded, component.Id);
+            output.Writer.WriteLine(ConsoleResources.ComponentNeeded, component.Id);
             return false;
         }
     }

@@ -1,3 +1,4 @@
+using System;
 using NAPS2.Automation;
 using NAPS2.Dependencies;
 using NAPS2.ImportExport.Pdf;
@@ -18,6 +19,7 @@ namespace NAPS2.Modules
             Bind<OperationProgress>().To<ConsoleOperationProgress>();
             Bind<IComponentInstallPrompt>().To<ConsoleComponentInstallPrompt>();
             Bind<DialogHelper>().To<WinFormsDialogHelper>(); // TODO: We don't really want this, but it is an explicit option, so it's okay for now...
+            Bind<ConsoleOutput>().ToSelf().WithConstructorArgument("writer", Console.Out);
         }
     }
 }
