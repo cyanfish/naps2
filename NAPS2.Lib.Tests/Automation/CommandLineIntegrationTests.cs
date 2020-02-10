@@ -1,12 +1,10 @@
 using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 using NAPS2.Automation;
 using NAPS2.Images.Storage;
-using NAPS2.Logging;
 using NAPS2.Modules;
 using NAPS2.Ocr;
 using NAPS2.Scan.Internal;
@@ -37,7 +35,6 @@ namespace NAPS2.Lib.Tests.Automation
             var scanDriverFactory = new ScanDriverFactoryBuilder().WithScannedImages(imagesToScan).Build();
             var kernel = new StandardKernel(new CommonModule(), new ConsoleModule(), new TestModule(ImageContext, scanDriverFactory));
             // TODO: Consider how best to handle this - it isn't thread safe.
-            Log.Logger = new XunitLogger(testOutputHelper);
             var automatedScanning = kernel.Get<AutomatedScanning>(new ConstructorArgument("options", options));
             await automatedScanning.Execute();
         }
@@ -58,7 +55,6 @@ namespace NAPS2.Lib.Tests.Automation
         [Fact]
         public async Task SplitPatchT()
         {
-            // TODO: This test is too slow - even with writing to disk, something is wrong...
             await RunCommand(
                 new AutomatedScanningOptions
                 {
@@ -119,33 +115,6 @@ namespace NAPS2.Lib.Tests.Automation
             public override void WriteLine(string message) => output.WriteLine(message);
 
             public override void WriteLine(string format, params object[] args) => output.WriteLine(format, args);
-        }
-
-        private class XunitLogger : ILogger
-        {
-            private readonly ITestOutputHelper output;
-
-            public XunitLogger(ITestOutputHelper output)
-            {
-                this.output = output;
-            }
-
-            public void Error(string message)
-            {
-                output.WriteLine(message);
-            }
-
-            public void ErrorException(string message, Exception exception)
-            {
-                output.WriteLine(message);
-                output.WriteLine(exception.ToString());
-            }
-
-            public void FatalException(string message, Exception exception)
-            {
-                output.WriteLine(message);
-                output.WriteLine(exception.ToString());
-            }
         }
     }
 }
