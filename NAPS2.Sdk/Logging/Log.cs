@@ -7,7 +7,7 @@ namespace NAPS2.Logging
     /// </summary>
     public static class Log
     {
-        private static ILogger _logger = new NullLogger();
+        private static ILogger _logger = new DebugLogger();
         private static IEventLogger _eventLogger = new NullEventLogger();
 
         public static ILogger Logger
