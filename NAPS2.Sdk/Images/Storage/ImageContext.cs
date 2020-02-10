@@ -148,6 +148,10 @@ namespace NAPS2.Images.Storage
         {
             if (type.IsInstanceOfType(storage))
             {
+                if (storage is IImage image)
+                {
+                    return image.Clone();
+                }
                 return storage;
             }
             // TODO: Dispose old storage? Consider ownership. Possibility: Clone/Dispose ref counts.

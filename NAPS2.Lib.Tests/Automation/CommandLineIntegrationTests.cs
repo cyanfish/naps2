@@ -33,8 +33,6 @@ namespace NAPS2.Lib.Tests.Automation
 
         private async Task RunCommand(AutomatedScanningOptions options, params Bitmap[] imagesToScan)
         {
-            // TODO: There's a real bug (IImage reference counting) when using IImage as storage
-            UseRecovery();
             Console.SetOut(new TestWriter(testOutputHelper));
             var scanDriverFactory = new ScanDriverFactoryBuilder().WithScannedImages(imagesToScan).Build();
             var kernel = new StandardKernel(new CommonModule(), new ConsoleModule(), new TestModule(ImageContext, scanDriverFactory));
@@ -60,6 +58,7 @@ namespace NAPS2.Lib.Tests.Automation
         [Fact]
         public async Task SplitPatchT()
         {
+            // TODO: This test is too slow - even with writing to disk, something is wrong...
             await RunCommand(
                 new AutomatedScanningOptions
                 {

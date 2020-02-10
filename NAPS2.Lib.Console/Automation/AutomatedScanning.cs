@@ -593,7 +593,7 @@ namespace NAPS2.Automation
                     NoUI = !options.Progress,
                     NoAutoSave = !options.AutoSave || !autoSaveEnabled,
                     DetectPatchT = options.SplitPatchT,
-                    DoOcr = ocrParams != null,
+                    DoOcr = ocrParams?.LanguageCode != null,
                     OcrParams = ocrParams
                 };
                 var source = await scanPerformer.PerformScan(profile, scanParams);
