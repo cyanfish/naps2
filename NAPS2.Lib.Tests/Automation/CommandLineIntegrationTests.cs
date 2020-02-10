@@ -6,13 +6,14 @@ using System.Text;
 using System.Threading.Tasks;
 using NAPS2.Automation;
 using NAPS2.Images.Storage;
+using NAPS2.Logging;
 using NAPS2.Modules;
 using NAPS2.Ocr;
-using NAPS2.Scan;
 using NAPS2.Scan.Internal;
 using NAPS2.Sdk.Tests;
 using NAPS2.Sdk.Tests.Asserts;
 using NAPS2.Sdk.Tests.Images;
+using NAPS2.Sdk.Tests.Mocks;
 using Ninject;
 using Ninject.Modules;
 using Ninject.Parameters;
@@ -37,8 +38,23 @@ namespace NAPS2.Lib.Tests.Automation
             Console.SetOut(new TestWriter(testOutputHelper));
             var scanDriverFactory = new ScanDriverFactoryBuilder().WithScannedImages(imagesToScan).Build();
             var kernel = new StandardKernel(new CommonModule(), new ConsoleModule(), new TestModule(ImageContext, scanDriverFactory));
+            // TODO: Consider how best to handle this - it isn't thread safe.
+            Log.Logger = new XunitLogger(testOutputHelper);
             var automatedScanning = kernel.Get<AutomatedScanning>(new ConstructorArgument("options", options));
             await automatedScanning.Execute();
+        }
+
+        [Fact]
+        public async Task ScanSanity()
+        {
+            await RunCommand(
+                new AutomatedScanningOptions
+                {
+                    Number = 1,
+                    OutputPath = $"{FolderPath}/test.pdf"
+                },
+                BarcodeTestsData.color_image);
+            PdfAsserts.AssertPageCount(1, $"{FolderPath}/test.pdf");
         }
 
         [Fact]
@@ -64,6 +80,8 @@ namespace NAPS2.Lib.Tests.Automation
             PdfAsserts.AssertPageCount(1, $"{FolderPath}/3.pdf");
             Assert.False(File.Exists($"{FolderPath}/4.pdf"));
         }
+        
+        // TODO: Add tests for all options, as well as key combinations
 
         private class TestModule : NinjectModule
         {
@@ -81,9 +99,13 @@ namespace NAPS2.Lib.Tests.Automation
                 Rebind<ImageContext>().ToConstant(imageContext);
                 Rebind<OcrEngineManager>().ToConstant(new OcrEngineManager());
                 Rebind<IScanDriverFactory>().ToConstant(scanDriverFactory);
-                Rebind<IScanBridgeFactory>().To<StubScanBridgeFactory>();
+                Rebind<IScanBridgeFactory>().To<InProcScanBridgeFactory>();
             }
         }
+        
+        // TODO: Clean this up.
+        // TODO: Probably AutomatedScanning should take a TextWriter (instead of Console.WriteLine) for test isolation.
+        
 
         private class TestWriter : TextWriter
         {
@@ -99,20 +121,32 @@ namespace NAPS2.Lib.Tests.Automation
 
             public override void WriteLine(string format, params object[] args) => output.WriteLine(format, args);
         }
-    }
 
-    internal class StubScanBridgeFactory : IScanBridgeFactory
-    {
-        private readonly InProcScanBridge inProcScanBridge;
+        private class XunitLogger : ILogger
+        {
+            private readonly ITestOutputHelper output;
 
-        public StubScanBridgeFactory(InProcScanBridge inProcScanBridge)
-        {
-            this.inProcScanBridge = inProcScanBridge;
-        }
-        
-        public IScanBridge Create(ScanOptions options)
-        {
-            return inProcScanBridge;
+            public XunitLogger(ITestOutputHelper output)
+            {
+                this.output = output;
+            }
+
+            public void Error(string message)
+            {
+                output.WriteLine(message);
+            }
+
+            public void ErrorException(string message, Exception exception)
+            {
+                output.WriteLine(message);
+                output.WriteLine(exception.ToString());
+            }
+
+            public void FatalException(string message, Exception exception)
+            {
+                output.WriteLine(message);
+                output.WriteLine(exception.ToString());
+            }
         }
     }
 }
