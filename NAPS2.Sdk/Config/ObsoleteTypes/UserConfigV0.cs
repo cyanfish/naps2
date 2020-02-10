@@ -41,13 +41,13 @@ namespace NAPS2.Config.ObsoleteTypes
 
         public string LastImageExt { get; set; }
 
-        public PdfSettings PdfSettings { get; set; }
+        public PdfSettings PdfSettings { get; set; } = new PdfSettings();
 
-        public ImageSettings ImageSettings { get; set; }
+        public ImageSettings ImageSettings { get; set; } = new ImageSettings();
 
-        public EmailSettings EmailSettings { get; set; }
+        public EmailSettings EmailSettings { get; set; } = new EmailSettings();
 
-        public EmailSetup EmailSetup { get; set; }
+        public EmailSetup EmailSetup { get; set; } = new EmailSetup();
 
         public int ThumbnailSize { get; set; } = ThumbnailSizes.DEFAULT_SIZE;
 
@@ -55,7 +55,7 @@ namespace NAPS2.Config.ObsoleteTypes
 
         public DockStyle DesktopToolStripDock { get; set; }
 
-        public KeyboardShortcuts KeyboardShortcuts { get; set; }
+        public KeyboardShortcuts KeyboardShortcuts { get; set; } = new KeyboardShortcuts();
 
         public List<NamedPageSize> CustomPageSizePresets { get; set; } = new List<NamedPageSize>();
 

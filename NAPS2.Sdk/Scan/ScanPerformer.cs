@@ -111,6 +111,10 @@ namespace NAPS2.Scan
 
         private void ShowOperation(ScanOperation op, ScanParams scanParams)
         {
+            if (scanParams.NoUI)
+            {
+                return;
+            }
             Task.Run(() =>
             {
                 Invoker.Current.SafeInvoke(() =>
@@ -171,7 +175,7 @@ namespace NAPS2.Scan
                 },
                 BarcodeDetectionOptions =
                 {
-                    DetectBarcodes = scanParams.DetectPatchT || scanProfile.AutoSaveSettings.Separator == SaveSeparator.PatchT,
+                    DetectBarcodes = scanParams.DetectPatchT || scanProfile.AutoSaveSettings?.Separator == SaveSeparator.PatchT,
                     PatchTOnly = true
                 },
                 Brightness = scanProfile.Brightness,
