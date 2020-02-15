@@ -38,57 +38,5 @@ namespace NAPS2.Remoting
                 Message = e.Message,
                 StackTrace = e.StackTrace
             };
-
-        public static Task<TResponse> WrapFunc<TResponse>(Func<TResponse> action, Func<Error, TResponse> error) =>
-            Task.Run(() =>
-            {
-                try
-                {
-                    return action();
-                }
-                catch (Exception e)
-                {
-                    return error(ToError(e));
-                }
-            });
-
-        public static Task<TResponse> WrapFunc<TResponse>(Func<Task<TResponse>> action, Func<Error, TResponse> error) =>
-            Task.Run(async () =>
-            {
-                try
-                {
-                    return await action();
-                }
-                catch (Exception e)
-                {
-                    return error(ToError(e));
-                }
-            });
-
-        public static Task WrapAction(Func<Task> action, Action<Error> error) =>
-            Task.Run(async () =>
-            {
-                try
-                {
-                    await action();
-                }
-                catch (Exception e)
-                {
-                    error(ToError(e));
-                }
-            });
-
-        public static Task WrapAction(Action action, Action<Error> error) =>
-            Task.Run(() =>
-            {
-                try
-                {
-                    action();
-                }
-                catch (Exception e)
-                {
-                    error(ToError(e));
-                }
-            });
     }
 }

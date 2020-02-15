@@ -38,53 +38,70 @@ namespace NAPS2.Remoting.Worker
             this.mapiWrapper = mapiWrapper;
         }
 
-        public override Task<InitResponse> Init(InitRequest request, ServerCallContext context) =>
-            RemotingHelper.WrapFunc(
-                () =>
+        public override Task<InitResponse> Init(InitRequest request, ServerCallContext context)
+        {
+            try
+            {
+                if (!string.IsNullOrEmpty(request.RecoveryFolderPath))
                 {
-                    if (!string.IsNullOrEmpty(request.RecoveryFolderPath))
-                    {
-                        imageContext.UseFileStorage(request.RecoveryFolderPath);
-                    }
+                    imageContext.UseFileStorage(request.RecoveryFolderPath);
+                }
 
-                    return new InitResponse();
-                },
-                err => new InitResponse { Error = err });
+                return Task.FromResult(new InitResponse());
+            }
+            catch (Exception e)
+            {
+                return Task.FromResult(new InitResponse { Error = RemotingHelper.ToError(e) });
+            }
+        }
 
-        public override Task<Wia10NativeUiResponse> Wia10NativeUi(Wia10NativeUiRequest request, ServerCallContext context) =>
-            RemotingHelper.WrapFunc(
-                () =>
+        public override Task<Wia10NativeUiResponse> Wia10NativeUi(Wia10NativeUiRequest request, ServerCallContext context)
+        {
+            try
+            {
+                try
                 {
-                    try
+                    using var deviceManager = new WiaDeviceManager(WiaVersion.Wia10);
+                    using var device = deviceManager.FindDevice(request.DeviceId);
+                    var item = device.PromptToConfigure((IntPtr) request.Hwnd);
+                    return Task.FromResult(new Wia10NativeUiResponse
                     {
-                        using var deviceManager = new WiaDeviceManager(WiaVersion.Wia10);
-                        using var device = deviceManager.FindDevice(request.DeviceId);
-                        var item = device.PromptToConfigure((IntPtr) request.Hwnd);
-                        return new Wia10NativeUiResponse
+                        WiaConfigurationXml = new WiaConfiguration
                         {
-                            WiaConfigurationXml = new WiaConfiguration
-                            {
-                                DeviceProps = device.Properties.SerializeEditable(),
-                                ItemProps = item.Properties.SerializeEditable(),
-                                ItemName = item.Name()
-                            }.ToXml()
-                        };
-                    }
-                    catch (WiaException e)
-                    {
-                        WiaScanErrors.ThrowDeviceError(e);
-                        throw new InvalidOperationException();
-                    }
-                },
-                err => new Wia10NativeUiResponse { Error = err });
-
-        public override Task<GetDeviceListResponse> GetDeviceList(GetDeviceListRequest request, ServerCallContext context) =>
-            RemotingHelper.WrapFunc(
-                async () => new GetDeviceListResponse
+                            DeviceProps = device.Properties.SerializeEditable(),
+                            ItemProps = item.Properties.SerializeEditable(),
+                            ItemName = item.Name()
+                        }.ToXml()
+                    });
+                }
+                catch (WiaException e)
                 {
-                    DeviceListXml = (await remoteScanController.GetDeviceList(request.OptionsXml.FromXml<ScanOptions>())).ToXml()
-                },
-                err => new GetDeviceListResponse { Error = err });
+                    WiaScanErrors.ThrowDeviceError(e);
+                    throw new InvalidOperationException();
+                }
+            }
+            catch (Exception e)
+            {
+                return Task.FromResult(new Wia10NativeUiResponse { Error = RemotingHelper.ToError(e) });
+            }
+        }
+
+        public override async Task<GetDeviceListResponse> GetDeviceList(GetDeviceListRequest request, ServerCallContext context)
+        {
+            try
+            {
+                var scanOptions = request.OptionsXml.FromXml<ScanOptions>();
+                var deviceList = await remoteScanController.GetDeviceList(scanOptions);
+                return new GetDeviceListResponse
+                {
+                    DeviceListXml = deviceList.ToXml()
+                };
+            }
+            catch (Exception e)
+            {
+                return new GetDeviceListResponse { Error = RemotingHelper.ToError(e) };
+            }
+        }
 
         public override async Task Scan(ScanRequest request, IServerStreamWriter<ScanResponse> responseStream, ServerCallContext context)
         {
@@ -125,43 +142,64 @@ namespace NAPS2.Remoting.Worker
             await sequencedWriter.WaitForCompletion();
         }
 
-        public override Task<SendMapiEmailResponse> SendMapiEmail(SendMapiEmailRequest request, ServerCallContext context) =>
-            RemotingHelper.WrapFunc(
-                () => new SendMapiEmailResponse
+        public override async Task<SendMapiEmailResponse> SendMapiEmail(SendMapiEmailRequest request, ServerCallContext context)
+        {
+            try
+            {
+                var emailMessage = request.EmailMessageXml.FromXml<EmailMessage>();
+                var returnCode = await mapiWrapper.SendEmail(emailMessage);
+                return new SendMapiEmailResponse
                 {
-                    ReturnCodeXml = mapiWrapper.SendEmail(request.EmailMessageXml.FromXml<EmailMessage>()).ToXml()
-                },
-                err => new SendMapiEmailResponse { Error = err });
+                    ReturnCodeXml = returnCode.ToXml()
+                };
+            }
+            catch (Exception e)
+            {
+                return new SendMapiEmailResponse { Error = RemotingHelper.ToError(e) };
+            }
+        }
 
-        public override Task<RenderThumbnailResponse> RenderThumbnail(RenderThumbnailRequest request, ServerCallContext context) =>
-            RemotingHelper.WrapFunc(
-                async () =>
+        public override async Task<RenderThumbnailResponse> RenderThumbnail(RenderThumbnailRequest request, ServerCallContext context)
+        {
+            try
+            {
+                var deserializeOptions = new SerializedImageHelper.DeserializeOptions
                 {
-                    var deserializeOptions = new SerializedImageHelper.DeserializeOptions
-                    {
-                        ShareFileStorage = true
-                    };
-                    using var image = SerializedImageHelper.Deserialize(imageContext, request.Image, deserializeOptions);
-                    var thumbnail = await thumbnailRenderer.Render(image, request.Size);
-                    var stream = imageContext.Convert<MemoryStreamStorage>(thumbnail, new StorageConvertParams { Lossless = true }).Stream;
-                    return new RenderThumbnailResponse
-                    {
-                        Thumbnail = ByteString.FromStream(stream)
-                    };
-                },
-                err => new RenderThumbnailResponse { Error = err });
+                    ShareFileStorage = true
+                };
+                using var image =
+                    SerializedImageHelper.Deserialize(imageContext, request.Image, deserializeOptions);
+                var thumbnail = await thumbnailRenderer.Render(image, request.Size);
+                var stream = imageContext
+                    .Convert<MemoryStreamStorage>(thumbnail, new StorageConvertParams {Lossless = true}).Stream;
+                return new RenderThumbnailResponse
+                {
+                    Thumbnail = ByteString.FromStream(stream)
+                };
+            }
+            catch (Exception e)
+            {
+                return new RenderThumbnailResponse { Error = RemotingHelper.ToError(e) };
+            }
+        }
 
-        public override Task<RenderPdfResponse> RenderPdf(RenderPdfRequest request, ServerCallContext context) =>
-            RemotingHelper.WrapFunc(
-                () =>
+        public override Task<RenderPdfResponse> RenderPdf(RenderPdfRequest request, ServerCallContext context)
+        {
+            try
+            {
+                var renderer = new PdfiumPdfRenderer(imageContext);
+                using var image = renderer.Render(request.Path, request.Dpi).Single();
+                var stream = imageContext
+                    .Convert<MemoryStreamStorage>(image, new StorageConvertParams {Lossless = true}).Stream;
+                return Task.FromResult(new RenderPdfResponse
                 {
-                    using var image = new PdfiumPdfRenderer(imageContext).Render(request.Path, request.Dpi).Single();
-                    var stream = imageContext.Convert<MemoryStreamStorage>(image, new StorageConvertParams { Lossless = true }).Stream;
-                    return new RenderPdfResponse
-                    {
-                        Image = ByteString.FromStream(stream)
-                    };
-                },
-                err => new RenderPdfResponse { Error = err });
+                    Image = ByteString.FromStream(stream)
+                });
+            }
+            catch (Exception e)
+            {
+                return Task.FromResult(new RenderPdfResponse { Error = RemotingHelper.ToError(e) });
+            }
+        }
     }
 }
