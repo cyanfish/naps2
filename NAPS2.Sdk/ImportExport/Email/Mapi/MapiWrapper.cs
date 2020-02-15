@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Threading.Tasks;
 using NAPS2.Config;
 using NAPS2.Util;
 
@@ -25,24 +26,27 @@ namespace NAPS2.ImportExport.Email.Mapi
             }
         }
 
-        public MapiSendMailReturnCode SendEmail(EmailMessage message)
+        public Task<MapiSendMailReturnCode> SendEmail(EmailMessage message)
         {
-            var clientName = emailSetupProvider.Get(c => c.SystemProviderName);
-            var (mapiSendMail, mapiSendMailW) = systemEmailClients.GetDelegate(clientName, out bool unicode);
-
-            // Determine the flags used to send the message
-            var flags = MapiSendMailFlags.None;
-            if (!message.AutoSend)
+            return Task.Run(() =>
             {
-                flags |= MapiSendMailFlags.Dialog;
-            }
+                var clientName = emailSetupProvider.Get(c => c.SystemProviderName);
+                var (mapiSendMail, mapiSendMailW) = systemEmailClients.GetDelegate(clientName, out bool unicode);
 
-            if (!message.AutoSend || !message.SilentSend)
-            {
-                flags |= MapiSendMailFlags.LogonUI;
-            }
+                // Determine the flags used to send the message
+                var flags = MapiSendMailFlags.None;
+                if (!message.AutoSend)
+                {
+                    flags |= MapiSendMailFlags.Dialog;
+                }
 
-            return unicode ? SendMailW(mapiSendMailW, message, flags) : SendMail(mapiSendMail, message, flags);
+                if (!message.AutoSend || !message.SilentSend)
+                {
+                    flags |= MapiSendMailFlags.LogonUI;
+                }
+
+                return unicode ? SendMailW(mapiSendMailW, message, flags) : SendMail(mapiSendMail, message, flags);
+            });
         }
 
         private static MapiSendMailReturnCode SendMail(SystemEmailClients.MapiSendMailDelegate mapiSendMail, EmailMessage message, MapiSendMailFlags flags)

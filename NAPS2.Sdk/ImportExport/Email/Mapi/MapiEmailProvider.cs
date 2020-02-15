@@ -31,20 +31,20 @@ namespace NAPS2.ImportExport.Email.Mapi
         /// <param name="progressCallback"></param>
         /// <param name="cancelToken"></param>
         /// <returns>Returns true if the message was sent, false if the user aborted.</returns>
-        public async Task<bool> SendEmail(EmailMessage message, ProgressHandler progressCallback, CancellationToken cancelToken)
+        public Task<bool> SendEmail(EmailMessage message, ProgressHandler progressCallback, CancellationToken cancelToken)
         {
-            return await Task.Run(() =>
+            return Task.Run(async () =>
             {
                 MapiSendMailReturnCode returnCode;
 
                 if (UseWorker && !mapiWrapper.CanLoadClient)
                 {
                     using var worker = workerFactory.Create();
-                    returnCode = worker.Service.SendMapiEmail(message);
+                    returnCode = await worker.Service.SendMapiEmail(message);
                 }
                 else
                 {
-                    returnCode = mapiWrapper.SendEmail(message);
+                    returnCode = await mapiWrapper.SendEmail(message);
                 }
 
                 // Process the result

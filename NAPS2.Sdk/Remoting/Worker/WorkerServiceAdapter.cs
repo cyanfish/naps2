@@ -77,10 +77,10 @@ namespace NAPS2.Remoting.Worker
             }
         }
 
-        public MapiSendMailReturnCode SendMapiEmail(EmailMessage message)
+        public async Task<MapiSendMailReturnCode> SendMapiEmail(EmailMessage message)
         {
             var req = new SendMapiEmailRequest { EmailMessageXml = message.ToXml() };
-            var resp = client.SendMapiEmail(req);
+            var resp = await client.SendMapiEmailAsync(req);
             RemotingHelper.HandleErrors(resp.Error);
             return resp.ReturnCodeXml.FromXml<MapiSendMailReturnCode>();
         }
