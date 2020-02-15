@@ -124,7 +124,7 @@ namespace NAPS2.Images.Storage
         {
             if (storage is IImage image)
             {
-                return image;
+                return image.Clone();
             }
             return (IImage)Convert(storage, ImageType, convertParams);
         }
