@@ -62,14 +62,14 @@ namespace NAPS2.Lib.Tests.Automation
                     OutputPath = $"{FolderPath}/$(n).pdf",
                     Verbose = true
                 },
-                BarcodeTestsData.color_image,
-                BarcodeTestsData.color_image,
-                BarcodeTestsData.patcht,
-                BarcodeTestsData.color_image,
-                BarcodeTestsData.patcht,
-                BarcodeTestsData.patcht,
-                BarcodeTestsData.color_image,
-                BarcodeTestsData.patcht);
+                SharedData.color_image,
+                SharedData.color_image,
+                SharedData.patcht,
+                SharedData.color_image,
+                SharedData.patcht,
+                SharedData.patcht,
+                SharedData.color_image,
+                SharedData.patcht);
             PdfAsserts.AssertPageCount(2, $"{FolderPath}/1.pdf");
             PdfAsserts.AssertPageCount(1, $"{FolderPath}/2.pdf");
             PdfAsserts.AssertPageCount(1, $"{FolderPath}/3.pdf");
