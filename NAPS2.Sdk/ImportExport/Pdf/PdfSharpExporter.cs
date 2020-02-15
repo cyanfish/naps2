@@ -50,7 +50,7 @@ namespace NAPS2.ImportExport.Pdf
             this.memoryStreamRenderer = memoryStreamRenderer;
         }
 
-        public override async Task<bool> Export(string path, ICollection<ScannedImage.Snapshot> snapshots, ConfigProvider<PdfSettings> settings, OcrContext ocrContext, ProgressHandler progressCallback, CancellationToken cancelToken)
+        public override async Task<bool> Export(string path, ICollection<ScannedImage.Snapshot> snapshots, ConfigProvider<PdfSettings> settings, OcrContext? ocrContext = null, ProgressHandler? progressCallback = null, CancellationToken cancelToken = default)
         {
             return await Task.Run(async () =>
             {
@@ -88,7 +88,7 @@ namespace NAPS2.ImportExport.Pdf
                 }
 
                 IOcrEngine ocrEngine = null;
-                if (ocrContext.Params?.LanguageCode != null)
+                if (ocrContext?.Params?.LanguageCode != null)
                 {
                     var activeEngine = ocrContext.EngineManager.ActiveEngine;
                     if (activeEngine == null)
@@ -135,10 +135,10 @@ namespace NAPS2.ImportExport.Pdf
             });
         }
 
-        private async Task<bool> BuildDocumentWithoutOcr(ProgressHandler progressCallback, CancellationToken cancelToken, PdfDocument document, PdfCompat compat, ICollection<ScannedImage.Snapshot> snapshots)
+        private async Task<bool> BuildDocumentWithoutOcr(ProgressHandler? progressCallback, CancellationToken cancelToken, PdfDocument document, PdfCompat compat, ICollection<ScannedImage.Snapshot> snapshots)
         {
             int progress = 0;
-            progressCallback(progress, snapshots.Count);
+            progressCallback?.Invoke(progress, snapshots.Count);
             foreach (var snapshot in snapshots)
             {
                 if (snapshot.Source.BackingStorage is FileStorage fileStorage && IsPdfFile(fileStorage) && !snapshot.Metadata.TransformList.Any())
@@ -158,17 +158,17 @@ namespace NAPS2.ImportExport.Pdf
                     DrawImageOnPage(page, img, compat);
                 }
                 progress++;
-                progressCallback(progress, snapshots.Count);
+                progressCallback?.Invoke(progress, snapshots.Count);
             }
             return true;
         }
 
         private static bool IsPdfFile(FileStorage fileStorage) => Path.GetExtension(fileStorage.FullPath)?.Equals(".pdf", StringComparison.InvariantCultureIgnoreCase) ?? false;
 
-        private async Task<bool> BuildDocumentWithOcr(ProgressHandler progressCallback, CancellationToken cancelToken, PdfDocument document, PdfCompat compat, ICollection<ScannedImage.Snapshot> snapshots, OcrContext ocrContext, IOcrEngine ocrEngine)
+        private async Task<bool> BuildDocumentWithOcr(ProgressHandler? progressCallback, CancellationToken cancelToken, PdfDocument document, PdfCompat compat, ICollection<ScannedImage.Snapshot> snapshots, OcrContext ocrContext, IOcrEngine ocrEngine)
         {
             int progress = 0;
-            progressCallback(progress, snapshots.Count);
+            progressCallback?.Invoke(progress, snapshots.Count);
 
             List<(PdfPage, Task<OcrResult>)> ocrPairs = new List<(PdfPage, Task<OcrResult>)>();
 
@@ -239,7 +239,7 @@ namespace NAPS2.ImportExport.Pdf
                     if (!cancelToken.IsCancellationRequested)
                     {
                         Interlocked.Increment(ref progress);
-                        progressCallback(progress, snapshots.Count);
+                        progressCallback?.Invoke(progress, snapshots.Count);
                     }
                 }, TaskContinuationOptions.ExecuteSynchronously).AssertNoAwait();
                 // Record the page and task for step 2
