@@ -14,7 +14,7 @@ namespace NAPS2.ImportExport.Email.Mapi
         public string? GetDefaultName()
         {
             using var key = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\Clients\Mail", false);
-            return key?.GetValue(null).ToString();
+            return key?.GetValue(null)?.ToString();
         }
 
         public string[] GetNames()
