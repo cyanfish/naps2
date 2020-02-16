@@ -17,17 +17,6 @@ namespace NAPS2.Config
 
         public static CommonConfig Create() => new CommonConfig();
 
-        public CommonConfig()
-        {
-            PdfSettings = new PdfSettings();
-            ImageSettings = new ImageSettings();
-            EmailSettings = new EmailSettings();
-            EmailSetup = new EmailSetup();
-            BatchSettings = new BatchSettings();
-            KeyboardShortcuts = new KeyboardShortcuts();
-            SslSetup = new SslSetup();
-        }
-
         [Common]
         public int? Version { get; set; } = CURRENT_VERSION;
 
@@ -147,40 +136,40 @@ namespace NAPS2.Config
 
         [Child]
         [Common]
-        public PdfSettings PdfSettings { get; set; }
+        public PdfSettings PdfSettings { get; set; } = new PdfSettings();
 
         [User]
         public bool? RememberPdfSettings { get; set; }
 
         [Child]
         [Common]
-        public ImageSettings ImageSettings { get; set; }
+        public ImageSettings ImageSettings { get; set; } = new ImageSettings();
 
         [User]
         public bool? RememberImageSettings { get; set; }
 
         [Child]
         [Common]
-        public EmailSettings EmailSettings { get; set; }
+        public EmailSettings EmailSettings { get; set; } = new EmailSettings();
 
         [User]
         public bool? RememberEmailSettings { get; set; }
 
         [Child]
         [Common]
-        public EmailSetup EmailSetup { get; set; }
+        public EmailSetup EmailSetup { get; set; } = new EmailSetup();
 
         [Child]
         [Common]
-        public BatchSettings BatchSettings { get; set; }
+        public BatchSettings BatchSettings { get; set; } = new BatchSettings();
 
         [Child]
         [Common]
-        public KeyboardShortcuts KeyboardShortcuts { get; set; }
-        
+        public KeyboardShortcuts KeyboardShortcuts { get; set; } = new KeyboardShortcuts();
+
         [Child]
         [Common]
-        public SslSetup SslSetup { get; set; }
+        public SslSetup SslSetup { get; set; } = new SslSetup();
 
         [Common]
         public ScanProfile? DefaultProfileSettings { get; set; }
