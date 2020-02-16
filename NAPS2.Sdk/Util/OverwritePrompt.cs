@@ -1,5 +1,4 @@
-﻿using System;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
 
 namespace NAPS2.Util
 {
@@ -10,18 +9,6 @@ namespace NAPS2.Util
     /// </summary>
     public abstract class OverwritePrompt
     {
-        private static OverwritePrompt _default = new StubOverwritePrompt();
-
-        public static OverwritePrompt Default
-        {
-            get
-            {
-                TestingContext.NoStaticDefaults();
-                return _default;
-            }
-            set => _default = value ?? throw new ArgumentNullException(nameof(value));
-        }
-
         /// <summary>
         /// Asks the user if they would like to overwrite the specified file.
         ///

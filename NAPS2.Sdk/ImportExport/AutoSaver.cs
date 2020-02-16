@@ -33,22 +33,6 @@ namespace NAPS2.ImportExport
         private readonly BitmapRenderer bitmapRenderer;
         private readonly ConfigProvider<CommonConfig> configProvider;
 
-        public AutoSaver(ConfigProvider<CommonConfig> configProvider)
-        {
-            this.configProvider = configProvider;
-            pdfSettingsProvider = configProvider.Child(c => c.PdfSettings);
-            imageSettingsProvider = configProvider.Child(c => c.ImageSettings);
-            ocrEngineManager = OcrEngineManager.Default;
-            ocrRequestQueue = OcrRequestQueue.Default;
-            errorOutput = ErrorOutput.Default;
-            dialogHelper = DialogHelper.Default;
-            operationProgress = OperationProgress.Default;
-            notify = null;
-            pdfExporter = new PdfSharpExporter(ImageContext.Default);
-            overwritePrompt = OverwritePrompt.Default;
-            bitmapRenderer = new BitmapRenderer(ImageContext.Default);
-        }
-
         public AutoSaver(ConfigProvider<PdfSettings> pdfSettingsProvider, ConfigProvider<ImageSettings> imageSettingsProvider, OcrEngineManager ocrEngineManager, OcrRequestQueue ocrRequestQueue, ErrorOutput errorOutput, DialogHelper dialogHelper, OperationProgress operationProgress, ISaveNotify notify, PdfExporter pdfExporter, OverwritePrompt overwritePrompt, BitmapRenderer bitmapRenderer, ConfigProvider<CommonConfig> configProvider)
         {
             this.pdfSettingsProvider = pdfSettingsProvider;
