@@ -19,7 +19,7 @@ namespace NAPS2.Serialization
 
         private static SerializedImage Serialize(ImageContext imageContext, ScannedImage image, IImageMetadata metadata, SerializeOptions options)
         {
-            MemoryStream thumbStream = null;
+            MemoryStream? thumbStream = null;
             var thumb = image.GetThumbnail();
             if (thumb != null && options.IncludeThumbnail)
             {
@@ -32,7 +32,7 @@ namespace NAPS2.Serialization
                 throw new InvalidOperationException("FileStorage is required for serialization.");
             }
 
-            MemoryStream imageStream = null;
+            MemoryStream? imageStream = null;
             if (fileStorage == null)
             {
                 imageStream = imageContext.Convert<MemoryStreamStorage>(image.BackingStorage, new StorageConvertParams()).Stream;

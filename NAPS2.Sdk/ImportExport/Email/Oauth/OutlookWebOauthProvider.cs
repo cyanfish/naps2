@@ -22,9 +22,9 @@ namespace NAPS2.ImportExport.Email.Oauth
 
         #region Authorization
 
-        public override OauthToken Token => configProvider.Get(c => c.EmailSetup.OutlookWebToken);
+        public override OauthToken? Token => configProvider.Get(c => c.EmailSetup.OutlookWebToken);
 
-        public override string User => configProvider.Get(c => c.EmailSetup.OutlookWebUser);
+        public override string? User => configProvider.Get(c => c.EmailSetup.OutlookWebUser);
 
         protected override OauthClientCreds ClientCreds
         {

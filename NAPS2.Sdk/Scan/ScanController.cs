@@ -74,16 +74,16 @@ namespace NAPS2.Scan
             return sink.AsSource();
         }
 
-        public event EventHandler<ScanStartEventArgs> ScanStart;
+        public event EventHandler<ScanStartEventArgs>? ScanStart;
 
-        public event EventHandler<ScanEndEventArgs> ScanEnd;
+        public event EventHandler<ScanEndEventArgs>? ScanEnd;
 
-        public event EventHandler<ScanErrorEventArgs> ScanError;
+        public event EventHandler<ScanErrorEventArgs>? ScanError;
 
-        public event EventHandler<PageStartEventArgs> PageStart;
+        public event EventHandler<PageStartEventArgs>? PageStart;
 
-        public event EventHandler<PageProgressEventArgs> PageProgress;
+        public event EventHandler<PageProgressEventArgs>? PageProgress;
 
-        public event EventHandler<PageEndEventArgs> PageEnd;
+        public event EventHandler<PageEndEventArgs>? PageEnd;
     }
 }

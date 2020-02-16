@@ -8,10 +8,10 @@ namespace NAPS2.Config.ObsoleteTypes
     [XmlType("ScanDevice")]
     public class ScanDeviceV0
     {
-        public string ID { get; set; }
+        public string? ID { get; set; }
 
-        public string Name { get; set; }
+        public string? Name { get; set; }
 
-        public string DriverName { get; set; }
+        public string? DriverName { get; set; }
     }
 }

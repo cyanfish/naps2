@@ -73,7 +73,7 @@ namespace NAPS2.Update
 
         public override void Cancel()
         {
-            client.CancelAsync();
+            client?.CancelAsync();
         }
 
         public override void Wait(CancellationToken cancelToken)

@@ -15,8 +15,8 @@ namespace NAPS2.Serialization
             XmlSerializer.RegisterCustomSerializer(new Serializer());
         }
         
-        private string value;
-        private string valueEncrypted;
+        private string? value;
+        private string? valueEncrypted;
 
         public SecureString(string value)
         {
@@ -34,7 +34,7 @@ namespace NAPS2.Serialization
 
         public override string ToString()
         {
-            value = value ?? SecureStorage.Decrypt(valueEncrypted);
+            value ??= SecureStorage.Decrypt(valueEncrypted);
             return value;
         }
 

@@ -13,8 +13,8 @@ namespace NAPS2.ImportExport.Email.Mapi
         public int reserved;
         public int flags;
         public int position;
-        public string path;
-        public string name;
+        public string? path;
+        public string? name;
         public IntPtr type;
     }
 
@@ -24,8 +24,8 @@ namespace NAPS2.ImportExport.Email.Mapi
         public int reserved;
         public int flags;
         public int position;
-        public string path;
-        public string name;
+        public string? path;
+        public string? name;
         public IntPtr type;
     }
 }

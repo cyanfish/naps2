@@ -17,9 +17,9 @@ namespace NAPS2.ImportExport.Email.Oauth
     {
         private static readonly int[] PortNumbers = { 50086, 53893, 58985, 49319, 50320 };
 
-        public abstract OauthToken Token { get; }
+        public abstract OauthToken? Token { get; }
 
-        public abstract string User { get; }
+        public abstract string? User { get; }
 
         public bool HasClientCreds => ClientCreds.ClientId != null;
 

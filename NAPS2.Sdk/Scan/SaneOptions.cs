@@ -2,6 +2,6 @@
 {
     public class SaneOptions
     {
-        public KeyValueScanOptions KeyValueOptions { get; set; }
+        public KeyValueScanOptions? KeyValueOptions { get; set; }
     }
 }

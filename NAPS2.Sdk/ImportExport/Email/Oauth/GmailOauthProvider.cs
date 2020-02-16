@@ -23,9 +23,9 @@ namespace NAPS2.ImportExport.Email.Oauth
 
         #region Authorization
 
-        public override OauthToken Token => configProvider.Get(c => c.EmailSetup.GmailToken);
+        public override OauthToken? Token => configProvider.Get(c => c.EmailSetup.GmailToken);
 
-        public override string User => configProvider.Get(c => c.EmailSetup.GmailUser);
+        public override string? User => configProvider.Get(c => c.EmailSetup.GmailUser);
 
         protected override OauthClientCreds ClientCreds
         {

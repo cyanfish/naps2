@@ -14,7 +14,7 @@ namespace NAPS2.Serialization
     {
         public static Lazy<RNGCryptoServiceProvider> CryptoRandom { get; } = new Lazy<RNGCryptoServiceProvider>();
 
-        public static string Encrypt(string plaintext)
+        public static string? Encrypt(string plaintext)
         {
             if (plaintext == null)
             {
@@ -27,7 +27,7 @@ namespace NAPS2.Serialization
             return $"encrypted-{Convert.ToBase64String(salt)}-{Convert.ToBase64String(ciphertext)}";
         }
 
-        public static string Decrypt(string coded)
+        public static string? Decrypt(string coded)
         {
             if (coded == null)
             {

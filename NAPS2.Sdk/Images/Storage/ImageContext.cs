@@ -25,8 +25,9 @@ namespace NAPS2.Images.Storage
 
         private readonly Dictionary<(Type, Type), (object, MethodInfo)> Transformers = new Dictionary<(Type, Type), (object, MethodInfo)>();
 
-        protected ImageContext()
+        protected ImageContext(Type imageType)
         {
+            ImageType = imageType;
             pdfRenderer = new PdfiumPdfRenderer(this);
         }
 
@@ -85,7 +86,7 @@ namespace NAPS2.Images.Storage
             ImageFactories[typeof(TImage)] = factory ?? throw new ArgumentNullException(nameof(factory));
         }
         
-        public Type ImageType { get; protected set; }
+        public Type ImageType { get; }
 
         public void ConfigureBackingStorage<TStorage>() where TStorage : IStorage
         {
@@ -254,12 +255,11 @@ namespace NAPS2.Images.Storage
 
     public class GdiImageContext : ImageContext
     {
-        public GdiImageContext()
+        public GdiImageContext() : base(typeof(GdiImage))
         {
             RegisterConverters(new GdiConverters(this));
             RegisterImageFactory<GdiImage>(new GdiImageFactory());
             RegisterTransformers<GdiImage>(new GdiTransformers());
-            ImageType = typeof(GdiImage);
             // TODO: Not sure where to do these
             RegisterConverters(new PdfConverters(this));
         }

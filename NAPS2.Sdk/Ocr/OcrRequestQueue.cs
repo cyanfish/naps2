@@ -54,7 +54,7 @@ namespace NAPS2.Ocr
             }
         }
 
-        public async Task<OcrResult> QueueForeground(IOcrEngine ocrEngine, ScannedImage.Snapshot snapshot, string tempImageFilePath, OcrParams ocrParams, CancellationToken cancelToken)
+        public async Task<OcrResult?> QueueForeground(IOcrEngine ocrEngine, ScannedImage.Snapshot snapshot, string tempImageFilePath, OcrParams ocrParams, CancellationToken cancelToken)
         {
             OcrRequest req;
             lock (this)

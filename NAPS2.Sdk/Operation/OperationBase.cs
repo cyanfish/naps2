@@ -19,7 +19,7 @@ namespace NAPS2.Operation
 
         public bool SkipExitPrompt { get; protected set; }
 
-        public OperationStatus? Status { get; protected set; }
+        public OperationStatus Status { get; protected set; } = new OperationStatus();
 
         public Task<bool>? Success { get; protected set; }
 

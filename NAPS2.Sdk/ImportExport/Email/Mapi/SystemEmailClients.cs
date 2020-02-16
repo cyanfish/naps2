@@ -28,7 +28,7 @@ namespace NAPS2.ImportExport.Email.Mapi
             }).ToArray() ?? new string[0];
         }
 
-        public Image GetIcon(string clientName)
+        public Image? GetIcon(string clientName)
         {
             using var command = Registry.LocalMachine.OpenSubKey($@"SOFTWARE\Clients\Mail\{clientName}\shell\open\command", false);
             string commandText = command?.GetValue(null).ToString() ?? "";
@@ -47,7 +47,7 @@ namespace NAPS2.ImportExport.Email.Mapi
             return Win32.LoadLibrary(dllPath);
         }
 
-        internal (MapiSendMailDelegate, MapiSendMailDelegateW) GetDelegate(string clientName, out bool unicode)
+        internal (MapiSendMailDelegate?, MapiSendMailDelegateW?) GetDelegate(string clientName, out bool unicode)
         {
             var dllPath = GetDllPath(clientName);
             var module = Win32.LoadLibrary(dllPath);

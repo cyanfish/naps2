@@ -9,11 +9,11 @@ namespace NAPS2.ImportExport.Email.Mapi
     internal class MapiMessage
     {
         public int reserved;
-        public string subject;
-        public string noteText;
-        public string messageType;
-        public string dateReceived;
-        public string conversationID;
+        public string? subject;
+        public string? noteText;
+        public string? messageType;
+        public string? dateReceived;
+        public string? conversationID;
         public int flags;
         public IntPtr originator;
         public int recipCount;
@@ -26,11 +26,11 @@ namespace NAPS2.ImportExport.Email.Mapi
     internal class MapiMessageW
     {
         public int reserved;
-        public string subject;
-        public string noteText;
-        public string messageType;
-        public string dateReceived;
-        public string conversationID;
+        public string? subject;
+        public string? noteText;
+        public string? messageType;
+        public string? dateReceived;
+        public string? conversationID;
         public int flags;
         public IntPtr originator;
         public int recipCount;

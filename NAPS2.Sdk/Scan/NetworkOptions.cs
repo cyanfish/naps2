@@ -2,7 +2,7 @@
 {
     public class NetworkOptions
     {
-        public string Ip { get; set; }
+        public string? Ip { get; set; }
 
         public int? Port { get; set; }
     }
