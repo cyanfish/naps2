@@ -98,7 +98,12 @@ namespace NAPS2.Scan
 
         private void HandleError(Exception error)
         {
-            if (error is ScanDriverUnknownException)
+            if (!(error is ScanDriverException))
+            {
+                Log.ErrorException(error.Message, error);
+                errorOutput?.DisplayError(error.Message, error);
+            }
+            else if (error is ScanDriverUnknownException)
             {
                 Log.ErrorException(error.Message, error.InnerException);
                 errorOutput?.DisplayError(error.Message, error);
