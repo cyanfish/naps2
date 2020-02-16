@@ -31,7 +31,7 @@ namespace NAPS2.Config
             this.noUserProfiles = noUserProfiles;
         }
 
-        public event EventHandler ProfilesUpdated;
+        public event EventHandler? ProfilesUpdated;
 
         public ImmutableList<ScanProfile> Profiles
         {

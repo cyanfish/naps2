@@ -5,7 +5,7 @@ namespace NAPS2.Scan
     /// </summary>
     public class ScanDevice
     {
-        public ScanDevice(string id, string name)
+        public ScanDevice(string? id, string? name)
         {
             ID = id;
             Name = name;

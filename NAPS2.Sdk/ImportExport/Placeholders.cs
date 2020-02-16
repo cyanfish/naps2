@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -48,16 +49,16 @@ namespace NAPS2.ImportExport
         /// <param name="numberSkip">The file number will be at least one bigger than this value.</param>
         /// <param name="autoNumberDigits">The minimum number of digits in the file number. Only has an effect if the path does not contain a numeric placeholder like $(n) or $(nnn).</param>
         /// <returns>The file path with substitutions.</returns>
-        public abstract string Substitute(string filePath, bool incrementIfExists = true, int numberSkip = 0, int autoNumberDigits = 0);
+        public abstract string? Substitute(string? filePath, bool incrementIfExists = true, int numberSkip = 0, int autoNumberDigits = 0);
 
         public class StubPlaceholders : Placeholders
         {
-            public override string Substitute(string filePath, bool incrementIfExists = true, int numberSkip = 0, int autoNumberDigits = 0) => filePath;
+            public override string? Substitute(string? filePath, bool incrementIfExists = true, int numberSkip = 0, int autoNumberDigits = 0) => filePath;
         }
 
         public class EnvironmentPlaceholders : Placeholders
         {
-            public override string Substitute(string filePath, bool incrementIfExists = true, int numberSkip = 0, int autoNumberDigits = 0) => Environment.ExpandEnvironmentVariables(filePath);
+            public override string? Substitute(string? filePath, bool incrementIfExists = true, int numberSkip = 0, int autoNumberDigits = 0) => Environment.ExpandEnvironmentVariables(filePath);
         }
 
         public class DefaultPlaceholders : Placeholders
@@ -89,7 +90,8 @@ namespace NAPS2.ImportExport
             /// <returns>The new DefaultPlaceholders object.</returns>
             public DefaultPlaceholders WithDate(DateTime dateTime) => new DefaultPlaceholders(dateTime);
 
-            public override string Substitute(string filePath, bool incrementIfExists = true, int numberSkip = 0, int autoNumberDigits = 0)
+            [return: NotNullIfNotNull("filePath")]
+            public override string? Substitute(string? filePath, bool incrementIfExists = true, int numberSkip = 0, int autoNumberDigits = 0)
             {
                 if (filePath == null)
                 {

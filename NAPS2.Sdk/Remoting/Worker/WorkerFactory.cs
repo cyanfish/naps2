@@ -112,7 +112,7 @@ namespace NAPS2.Remoting.Worker
             {
                 var proc = StartWorkerProcess();
                 var channel = new NamedPipeChannel(".", string.Format(PIPE_NAME_FORMAT, proc.Id));
-                workerQueue.Add(new WorkerContext {Service = new WorkerServiceAdapter(channel), Process = proc});
+                workerQueue.Add(new WorkerContext(new WorkerServiceAdapter(channel), proc));
             });
         }
 

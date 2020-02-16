@@ -35,6 +35,10 @@ namespace NAPS2.Images.Transforms
         public override Transform Simplify(Transform other)
         {
             var other2 = (CropTransform)other;
+            if (OriginalWidth == null || OriginalHeight == null || other2.OriginalWidth == null || other2.OriginalHeight == null)
+            {
+                throw new Exception("Can't simplify");
+            }
             double xScale = (double)(other2.OriginalWidth - other2.Left - other2.Right) / (double)OriginalWidth;
             double yScale = (double)(other2.OriginalHeight - other2.Top - other2.Bottom) / (double)OriginalHeight;
             return new CropTransform

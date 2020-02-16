@@ -12,15 +12,15 @@ namespace NAPS2.Config.ObsoleteTypes
     {
         public int Version { get; set; }
 
-        public string DefaultCulture { get; set; }
+        public string? DefaultCulture { get; set; }
 
-        public string StartupMessageTitle { get; set; }
+        public string? StartupMessageTitle { get; set; }
 
-        public string StartupMessageText { get; set; }
+        public string? StartupMessageText { get; set; }
 
         public MessageBoxIcon StartupMessageIcon { get; set; }
 
-        public ScanProfile DefaultProfileSettings { get; set; }
+        public ScanProfile? DefaultProfileSettings { get; set; }
 
         public SaveButtonDefaultAction SaveButtonDefaultAction { get; set; }
 
@@ -58,13 +58,13 @@ namespace NAPS2.Config.ObsoleteTypes
 
         public bool SingleInstance { get; set; }
 
-        public string ComponentsPath { get; set; }
+        public string? ComponentsPath { get; set; }
 
         public double OcrTimeoutInSeconds { get; set; }
 
         public OcrState OcrState { get; set; }
 
-        public string OcrDefaultLanguage { get; set; }
+        public string? OcrDefaultLanguage { get; set; }
 
         public OcrMode OcrDefaultMode { get; set; }
 
@@ -74,6 +74,6 @@ namespace NAPS2.Config.ObsoleteTypes
 
         public EventType EventLogging { get; set; }
 
-        public KeyboardShortcuts KeyboardShortcuts { get; set; }
+        public KeyboardShortcuts? KeyboardShortcuts { get; set; }
     }
 }

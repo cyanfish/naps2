@@ -111,7 +111,7 @@ namespace NAPS2.Config
                 OcrMode = c.OcrDefaultMode,
                 OcrAfterScanning = c.OcrDefaultAfterScanning,
                 EventLogging = c.EventLogging,
-                KeyboardShortcuts = c.KeyboardShortcuts
+                KeyboardShortcuts = c.KeyboardShortcuts ?? new KeyboardShortcuts()
             };
 
         private CommonConfig AppConfigV0ToCommonConfigLocked(AppConfigV0 c) =>

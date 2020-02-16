@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 
 namespace NAPS2.Config
 {
@@ -13,6 +14,7 @@ namespace NAPS2.Config
 
     public abstract class ConfigProvider<TConfig>
     {
+        [return: NotNull]
         public T Get<T>(Func<TConfig, T> func) => GetInternal(func);
 
         public T Get<T>(Func<TConfig, T?> func) where T : struct => GetInternal(func) ?? default;

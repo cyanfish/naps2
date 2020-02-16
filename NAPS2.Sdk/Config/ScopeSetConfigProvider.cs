@@ -28,8 +28,8 @@ namespace NAPS2.Config
                     return value;
                 }
             }
-            // TODO: Consider throwing an exception
-            return default;
+            // This shouldn't happen - the last config scope should always define a default value for every property.
+            throw new Exception("Config value not defined.");
         }
 
         public ScopeSetConfigProvider<TConfig> Replace(ConfigScope<TConfig> original, ConfigScope<TConfig> replacement) =>

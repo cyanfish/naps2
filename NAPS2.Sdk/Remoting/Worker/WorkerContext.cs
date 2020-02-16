@@ -9,9 +9,15 @@ namespace NAPS2.Remoting.Worker
     /// </summary>
     public class WorkerContext : IDisposable
     {
-        public WorkerServiceAdapter Service { get; set; }
+        public WorkerContext(WorkerServiceAdapter service, Process process)
+        {
+            Service = service;
+            Process = process;
+        }
+        
+        public WorkerServiceAdapter Service { get; }
 
-        public Process Process { get; set; }
+        public Process Process { get; }
 
         public void Dispose()
         {

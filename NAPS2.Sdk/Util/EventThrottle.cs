@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 
 namespace NAPS2.Util
 {
@@ -7,6 +8,7 @@ namespace NAPS2.Util
         private readonly Action<T> eventCallback;
 
         private bool hasLastValue;
+        [MaybeNull]
         private T lastValue;
 
         public EventThrottle(Action<T> eventCallback)

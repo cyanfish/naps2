@@ -14,7 +14,7 @@ namespace NAPS2.ImportExport.Pdf
             encryption = new PdfEncryption();
         }
 
-        public string DefaultFileName { get; set; }
+        public string? DefaultFileName { get; set; }
 
         public bool? SkipSavePrompt { get; set; }
 

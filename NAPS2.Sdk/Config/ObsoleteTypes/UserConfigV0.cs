@@ -17,7 +17,7 @@ namespace NAPS2.Config.ObsoleteTypes
     {
         public int Version { get; set; }
 
-        public string Culture { get; set; }
+        public string? Culture { get; set; }
 
         public List<FormState> FormStates { get; set; } = new List<FormState>();
 
@@ -33,13 +33,13 @@ namespace NAPS2.Config.ObsoleteTypes
 
         public bool EnableOcr { get; set; }
 
-        public string OcrLanguageCode { get; set; }
+        public string? OcrLanguageCode { get; set; }
 
         public OcrMode OcrMode { get; set; }
 
         public bool? OcrAfterScanning { get; set; }
 
-        public string LastImageExt { get; set; }
+        public string? LastImageExt { get; set; }
 
         public PdfSettings PdfSettings { get; set; } = new PdfSettings();
 
@@ -51,7 +51,7 @@ namespace NAPS2.Config.ObsoleteTypes
 
         public int ThumbnailSize { get; set; } = ThumbnailSizes.DEFAULT_SIZE;
 
-        public BatchSettings LastBatchSettings { get; set; }
+        public BatchSettings? LastBatchSettings { get; set; }
 
         public DockStyle DesktopToolStripDock { get; set; }
 

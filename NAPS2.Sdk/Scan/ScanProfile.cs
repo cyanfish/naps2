@@ -55,15 +55,15 @@ namespace NAPS2.Scan
         [XmlIgnore]
         public bool IsDeviceLocked { get; set; }
 
-        public ScanDevice Device { get; set; }
+        public ScanDevice? Device { get; set; }
 
-        public string DriverName { get; set; }
+        public string? DriverName { get; set; }
 
         public ScanProxyConfig ProxyConfig { get; set; }
 
-        public string ProxyDriverName { get; set; }
+        public string? ProxyDriverName { get; set; }
 
-        public string DisplayName { get; set; }
+        public string? DisplayName { get; set; }
 
         public int IconID { get; set; }
 

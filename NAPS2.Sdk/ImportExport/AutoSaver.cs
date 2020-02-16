@@ -110,7 +110,7 @@ namespace NAPS2.ImportExport
                 bool ok = true;
                 var placeholders = Placeholders.All.WithDate(DateTime.Now);
                 int i = 0;
-                string firstFileSaved = null;
+                string? firstFileSaved = null;
                 var scans = SaveSeparatorHelper.SeparateScans(new[] { images }, settings.Separator).ToList();
                 foreach (var imageList in scans)
                 {

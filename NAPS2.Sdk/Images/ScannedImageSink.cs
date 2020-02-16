@@ -80,9 +80,9 @@ namespace NAPS2.Images
                 this.sink = sink;
             }
 
-            public override async Task<ScannedImage> Next()
+            public override async Task<ScannedImage?> Next()
             {
-                TaskCompletionSource<ScannedImage> tcs;
+                TaskCompletionSource<ScannedImage?> tcs;
                 lock (sink)
                 {
                     if (imagesRead >= sink.images.Count)

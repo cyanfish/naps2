@@ -8,7 +8,7 @@ namespace NAPS2.Images
     {
         public static ScannedImageSource Empty => new EmptySource();
 
-        public abstract Task<ScannedImage> Next();
+        public abstract Task<ScannedImage?> Next();
 
         public async Task<List<ScannedImage>> ToList()
         {
@@ -33,7 +33,7 @@ namespace NAPS2.Images
 
         public async Task ForEach(Action<ScannedImage> action)
         {
-            ScannedImage image;
+            ScannedImage? image;
             while ((image = await Next()) != null)
             {
                 action(image);
@@ -42,7 +42,7 @@ namespace NAPS2.Images
 
         public async Task ForEach(Func<ScannedImage, Task> action)
         {
-            ScannedImage image;
+            ScannedImage? image;
             while ((image = await Next()) != null)
             {
                 await action(image);
@@ -51,7 +51,7 @@ namespace NAPS2.Images
 
         private class EmptySource : ScannedImageSource
         {
-            public override Task<ScannedImage> Next() => Task.FromResult<ScannedImage>(null);
+            public override Task<ScannedImage?> Next() => Task.FromResult<ScannedImage?>(null);
         }
     }
 }
