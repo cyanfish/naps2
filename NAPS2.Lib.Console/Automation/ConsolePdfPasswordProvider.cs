@@ -6,11 +6,11 @@ namespace NAPS2.Automation
 {
     public class ConsolePdfPasswordProvider : IPdfPasswordProvider
     {
-        private readonly ErrorOutput errorOutput;
+        private readonly ErrorOutput _errorOutput;
 
         public ConsolePdfPasswordProvider(ErrorOutput errorOutput)
         {
-            this.errorOutput = errorOutput;
+            _errorOutput = errorOutput;
         }
 
         public bool ProvidePassword(string fileName, int attemptCount, out string password)
@@ -18,7 +18,7 @@ namespace NAPS2.Automation
             password = PasswordToProvide ?? "";
             if (attemptCount > 0)
             {
-                errorOutput.DisplayError(PasswordToProvide == null
+                _errorOutput.DisplayError(PasswordToProvide == null
                     ? ConsoleResources.ImportErrorNoPassword : ConsoleResources.ImportErrorWrongPassword);
                 return false;
             }

@@ -11,15 +11,15 @@ namespace NAPS2.ImportExport.Email.Mapi
 {
     public class MapiEmailProvider : IEmailProvider
     {
-        private readonly IWorkerFactory workerFactory;
-        private readonly IMapiWrapper mapiWrapper;
-        private readonly ErrorOutput errorOutput;
+        private readonly IWorkerFactory _workerFactory;
+        private readonly IMapiWrapper _mapiWrapper;
+        private readonly ErrorOutput _errorOutput;
 
         public MapiEmailProvider(IWorkerFactory workerFactory, IMapiWrapper mapiWrapper, ErrorOutput errorOutput)
         {
-            this.workerFactory = workerFactory;
-            this.mapiWrapper = mapiWrapper;
-            this.errorOutput = errorOutput;
+            _workerFactory = workerFactory;
+            _mapiWrapper = mapiWrapper;
+            _errorOutput = errorOutput;
         }
 
         private bool UseWorker => Environment.Is64BitProcess && PlatformCompat.Runtime.UseWorker;
@@ -37,14 +37,14 @@ namespace NAPS2.ImportExport.Email.Mapi
             {
                 MapiSendMailReturnCode returnCode;
 
-                if (UseWorker && !mapiWrapper.CanLoadClient)
+                if (UseWorker && !_mapiWrapper.CanLoadClient)
                 {
-                    using var worker = workerFactory.Create();
+                    using var worker = _workerFactory.Create();
                     returnCode = await worker.Service.SendMapiEmail(message);
                 }
                 else
                 {
-                    returnCode = await mapiWrapper.SendEmail(message);
+                    returnCode = await _mapiWrapper.SendEmail(message);
                 }
 
                 // Process the result
@@ -56,7 +56,7 @@ namespace NAPS2.ImportExport.Email.Mapi
                 if (returnCode != MapiSendMailReturnCode.Success)
                 {
                     Log.Error("Error sending email. MAPI error code: {0}", returnCode);
-                    errorOutput.DisplayError(MiscResources.EmailError, $"MAPI returned error code: {returnCode}");
+                    _errorOutput.DisplayError(MiscResources.EmailError, $"MAPI returned error code: {returnCode}");
                     return false;
                 }
 

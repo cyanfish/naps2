@@ -12,12 +12,12 @@ namespace NAPS2.WinForms
 {
     public partial class FAuthorize : FormBase
     {
-        private readonly ErrorOutput errorOutput;
-        private CancellationTokenSource? cancelTokenSource;
+        private readonly ErrorOutput _errorOutput;
+        private CancellationTokenSource? _cancelTokenSource;
 
         public FAuthorize(ErrorOutput errorOutput)
         {
-            this.errorOutput = errorOutput;
+            _errorOutput = errorOutput;
             RestoreFormState = false;
             InitializeComponent();
         }
@@ -31,12 +31,12 @@ namespace NAPS2.WinForms
             MaximumSize = new Size(Math.Max(lblWaiting.Width + 142, 272), Height);
             MinimumSize = new Size(Math.Max(lblWaiting.Width + 142, 272), Height);
 
-            cancelTokenSource = new CancellationTokenSource();
+            _cancelTokenSource = new CancellationTokenSource();
             Task.Run(() =>
             {
                 try
                 {
-                    OauthProvider.AcquireToken(cancelTokenSource.Token);
+                    OauthProvider.AcquireToken(_cancelTokenSource.Token);
                     Invoke(() =>
                     {
                         DialogResult = DialogResult.OK;
@@ -48,7 +48,7 @@ namespace NAPS2.WinForms
                 }
                 catch (Exception ex)
                 {
-                    errorOutput.DisplayError(MiscResources.AuthError, ex);
+                    _errorOutput.DisplayError(MiscResources.AuthError, ex);
                     Log.ErrorException("Error acquiring Oauth token", ex);
                     Invoke(() =>
                     {
@@ -61,7 +61,7 @@ namespace NAPS2.WinForms
 
         private void FAuthorize_FormClosed(object sender, FormClosedEventArgs e)
         {
-            cancelTokenSource?.Cancel();
+            _cancelTokenSource?.Cancel();
         }
     }
 }

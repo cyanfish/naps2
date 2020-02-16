@@ -8,11 +8,11 @@ namespace NAPS2.Automation
     {
         public static bool ForceOverwrite { get; set; }
 
-        private readonly ErrorOutput errorOutput;
+        private readonly ErrorOutput _errorOutput;
 
         public ConsoleOverwritePrompt(ErrorOutput errorOutput)
         {
-            this.errorOutput = errorOutput;
+            _errorOutput = errorOutput;
         }
 
         public override DialogResult ConfirmOverwrite(string path)
@@ -23,7 +23,7 @@ namespace NAPS2.Automation
             }
             else
             {
-                errorOutput.DisplayError(string.Format(ConsoleResources.FileAlreadyExists, path));
+                _errorOutput.DisplayError(string.Format(ConsoleResources.FileAlreadyExists, path));
                 return DialogResult.No;
             }
         }

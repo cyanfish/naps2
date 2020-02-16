@@ -9,8 +9,8 @@ namespace NAPS2.Images
 {
     public class DeskewOperation : OperationBase
     {
-        private readonly ImageContext imageContext;
-        private readonly ImageRenderer imageRenderer;
+        private readonly ImageContext _imageContext;
+        private readonly ImageRenderer _imageRenderer;
 
         public DeskewOperation() : this(ImageContext.Default, new ImageRenderer(ImageContext.Default))
         {
@@ -18,8 +18,8 @@ namespace NAPS2.Images
 
         public DeskewOperation(ImageContext imageContext, ImageRenderer imageRenderer)
         {
-            this.imageContext = imageContext;
-            this.imageRenderer = imageRenderer;
+            _imageContext = imageContext;
+            _imageRenderer = imageRenderer;
 
             AllowCancel = true;
             AllowBackground = true;
@@ -38,15 +38,15 @@ namespace NAPS2.Images
             {
                 return await Pipeline.For(images, CancelToken).RunParallel(async img =>
                 {
-                    var bitmap = await imageRenderer.Render(img);
+                    var bitmap = await _imageRenderer.Render(img);
                     try
                     {
                         CancelToken.ThrowIfCancellationRequested();
                         var transform = Deskewer.GetDeskewTransform(bitmap);
                         CancelToken.ThrowIfCancellationRequested();
-                        bitmap = imageContext.PerformTransform(bitmap, transform);
+                        bitmap = _imageContext.PerformTransform(bitmap, transform);
                         var thumbnail = deskewParams.ThumbnailSize.HasValue
-                            ? imageContext.PerformTransform(bitmap, new ThumbnailTransform(deskewParams.ThumbnailSize.Value))
+                            ? _imageContext.PerformTransform(bitmap, new ThumbnailTransform(deskewParams.ThumbnailSize.Value))
                             : null;
                         lock (img)
                         {

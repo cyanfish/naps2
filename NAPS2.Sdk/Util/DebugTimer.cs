@@ -5,20 +5,20 @@ namespace NAPS2.Util
 {
     public class DebugTimer : IDisposable
     {
-        private readonly string? label;
-        private readonly Stopwatch stopwatch;
+        private readonly string? _label;
+        private readonly Stopwatch _stopwatch;
 
         public DebugTimer(string? label = null)
         {
-            this.label = label;
-            stopwatch = Stopwatch.StartNew();
+            _label = label;
+            _stopwatch = Stopwatch.StartNew();
         }
 
         public void Dispose()
         {
-            Debug.WriteLine(label == null
-                ? $"{stopwatch.ElapsedMilliseconds} ms"
-                : $"{stopwatch.ElapsedMilliseconds} ms : {label}");
+            Debug.WriteLine(_label == null
+                ? $"{_stopwatch.ElapsedMilliseconds} ms"
+                : $"{_stopwatch.ElapsedMilliseconds} ms : {_label}");
         }
     }
 }

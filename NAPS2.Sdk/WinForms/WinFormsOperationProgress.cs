@@ -10,37 +10,37 @@ namespace NAPS2.WinForms
 {
     public class WinFormsOperationProgress : OperationProgress
     {
-        private readonly IFormFactory formFactory;
-        private readonly NotificationManager notificationManager;
-        private readonly ConfigScopes configScopes;
-        private readonly ConfigProvider<CommonConfig> configProvider;
+        private readonly IFormFactory _formFactory;
+        private readonly NotificationManager _notificationManager;
+        private readonly ConfigScopes _configScopes;
+        private readonly ConfigProvider<CommonConfig> _configProvider;
 
-        private readonly HashSet<IOperation> activeOperations = new HashSet<IOperation>();
+        private readonly HashSet<IOperation> _activeOperations = new HashSet<IOperation>();
 
         public WinFormsOperationProgress(IFormFactory formFactory, NotificationManager notificationManager, ConfigScopes configScopes, ConfigProvider<CommonConfig> configProvider)
         {
-            this.formFactory = formFactory;
-            this.notificationManager = notificationManager;
-            this.configScopes = configScopes;
-            this.configProvider = configProvider;
+            _formFactory = formFactory;
+            _notificationManager = notificationManager;
+            _configScopes = configScopes;
+            _configProvider = configProvider;
         }
 
         public override void Attach(IOperation op)
         {
             lock (this)
             {
-                if (!activeOperations.Contains(op))
+                if (!_activeOperations.Contains(op))
                 {
-                    activeOperations.Add(op);
-                    op.Finished += (sender, args) => activeOperations.Remove(op);
-                    if (op.IsFinished) activeOperations.Remove(op);
+                    _activeOperations.Add(op);
+                    op.Finished += (sender, args) => _activeOperations.Remove(op);
+                    if (op.IsFinished) _activeOperations.Remove(op);
                 }
             }
         }
 
         public override void ShowProgress(IOperation op)
         {
-            if (configProvider.Get(c => c.BackgroundOperations).Contains(op.GetType().Name))
+            if (_configProvider.Get(c => c.BackgroundOperations).Contains(op.GetType().Name))
             {
                 ShowBackgroundProgress(op);
             }
@@ -54,13 +54,13 @@ namespace NAPS2.WinForms
         {
             Attach(op);
 
-            var bgOps = configProvider.Get(c => c.BackgroundOperations) ?? ImmutableHashSet<string>.Empty;
+            var bgOps = _configProvider.Get(c => c.BackgroundOperations) ?? ImmutableHashSet<string>.Empty;
             bgOps = bgOps.Remove(op.GetType().Name);
-            configScopes.User.Set(c => c.BackgroundOperations = bgOps);
+            _configScopes.User.Set(c => c.BackgroundOperations = bgOps);
 
             if (!op.IsFinished)
             {
-                var form = formFactory.Create<FProgress>();
+                var form = _formFactory.Create<FProgress>();
                 form.Operation = op;
                 form.ShowDialog();
             }
@@ -75,13 +75,13 @@ namespace NAPS2.WinForms
         {
             Attach(op);
 
-            var bgOps = configProvider.Get(c => c.BackgroundOperations) ?? ImmutableHashSet<string>.Empty;
+            var bgOps = _configProvider.Get(c => c.BackgroundOperations) ?? ImmutableHashSet<string>.Empty;
             bgOps = bgOps.Add(op.GetType().Name);
-            configScopes.User.Set(c => c.BackgroundOperations = bgOps);
+            _configScopes.User.Set(c => c.BackgroundOperations = bgOps);
 
             if (!op.IsFinished)
             {
-                notificationManager.ParentForm.SafeInvoke(() => notificationManager.OperationProgress(this, op));
+                _notificationManager.ParentForm.SafeInvoke(() => _notificationManager.OperationProgress(this, op));
             }
         }
 
@@ -128,9 +128,9 @@ namespace NAPS2.WinForms
         {
             get
             {
-                lock (activeOperations)
+                lock (_activeOperations)
                 {
-                    return activeOperations.ToList();
+                    return _activeOperations.ToList();
                 }
             }
         }

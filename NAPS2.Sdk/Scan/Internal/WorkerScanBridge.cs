@@ -13,8 +13,8 @@ namespace NAPS2.Scan.Internal
     /// </summary>
     internal class WorkerScanBridge : IScanBridge
     {
-        private readonly ImageContext imageContext;
-        private readonly IWorkerFactory workerFactory;
+        private readonly ImageContext _imageContext;
+        private readonly IWorkerFactory _workerFactory;
 
         public WorkerScanBridge() : this(ImageContext.Default, WorkerFactory.Default)
         {
@@ -22,20 +22,20 @@ namespace NAPS2.Scan.Internal
 
         public WorkerScanBridge(ImageContext imageContext, IWorkerFactory workerFactory)
         {
-            this.imageContext = imageContext;
-            this.workerFactory = workerFactory;
+            _imageContext = imageContext;
+            _workerFactory = workerFactory;
         }
 
         public async Task<List<ScanDevice>> GetDeviceList(ScanOptions options)
         {
-            using var ctx = workerFactory.Create();
+            using var ctx = _workerFactory.Create();
             return await ctx.Service.GetDeviceList(options);
         }
 
         public async Task Scan(ScanOptions options, CancellationToken cancelToken, IScanEvents scanEvents, Action<ScannedImage, PostProcessingContext> callback)
         {
-            using var ctx = workerFactory.Create();
-            await ctx.Service.Scan(imageContext, options, cancelToken, scanEvents, (image, tempPath) =>
+            using var ctx = _workerFactory.Create();
+            await ctx.Service.Scan(_imageContext, options, cancelToken, scanEvents, (image, tempPath) =>
             {
                 callback(image, new PostProcessingContext { TempPath = tempPath });
             });

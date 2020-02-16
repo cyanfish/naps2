@@ -21,14 +21,14 @@ namespace NAPS2.Update
 {
     public class UpdateOperation : OperationBase
     {
-        private readonly ImageContext imageContext;
-        private readonly ErrorOutput errorOutput;
+        private readonly ImageContext _imageContext;
+        private readonly ErrorOutput _errorOutput;
 
-        private readonly ManualResetEvent waitHandle = new ManualResetEvent(false);
-        private WebClient? client;
-        private UpdateInfo? update;
-        private string? tempFolder;
-        private string? tempPath;
+        private readonly ManualResetEvent _waitHandle = new ManualResetEvent(false);
+        private WebClient? _client;
+        private UpdateInfo? _update;
+        private string? _tempFolder;
+        private string? _tempPath;
 
         static UpdateOperation()
         {
@@ -45,8 +45,8 @@ namespace NAPS2.Update
 
         public UpdateOperation(ImageContext imageContext, ErrorOutput errorOutput)
         {
-            this.imageContext = imageContext;
-            this.errorOutput = errorOutput;
+            _imageContext = imageContext;
+            _errorOutput = errorOutput;
 
             ProgressTitle = MiscResources.UpdateProgress;
             AllowBackground = true;
@@ -60,25 +60,25 @@ namespace NAPS2.Update
 
         public void Start(UpdateInfo updateInfo)
         {
-            update = updateInfo;
-            tempFolder = Path.Combine(Paths.Temp, Path.GetRandomFileName());
-            Directory.CreateDirectory(tempFolder);
-            tempPath = Path.Combine(tempFolder, updateInfo.DownloadUrl.Substring(updateInfo.DownloadUrl.LastIndexOf('/') + 1));
+            _update = updateInfo;
+            _tempFolder = Path.Combine(Paths.Temp, Path.GetRandomFileName());
+            Directory.CreateDirectory(_tempFolder);
+            _tempPath = Path.Combine(_tempFolder, updateInfo.DownloadUrl.Substring(updateInfo.DownloadUrl.LastIndexOf('/') + 1));
 
-            client = new WebClient();
-            client.DownloadProgressChanged += DownloadProgress;
-            client.DownloadFileCompleted += DownloadCompleted;
-            client.DownloadFileAsync(new Uri(updateInfo.DownloadUrl), tempPath);
+            _client = new WebClient();
+            _client.DownloadProgressChanged += DownloadProgress;
+            _client.DownloadFileCompleted += DownloadCompleted;
+            _client.DownloadFileAsync(new Uri(updateInfo.DownloadUrl), _tempPath);
         }
 
         public override void Cancel()
         {
-            client?.CancelAsync();
+            _client?.CancelAsync();
         }
 
         public override void Wait(CancellationToken cancelToken)
         {
-            while (!waitHandle.WaitOne(1000) && !cancelToken.IsCancellationRequested)
+            while (!_waitHandle.WaitOne(1000) && !cancelToken.IsCancellationRequested)
             {
             }
         }
@@ -98,14 +98,14 @@ namespace NAPS2.Update
                 }
                 if (!VerifyHash())
                 {
-                    Log.Error($"Update error for {update.Name}: hash does not match");
-                    errorOutput.DisplayError(MiscResources.UpdateError);
+                    Log.Error($"Update error for {_update.Name}: hash does not match");
+                    _errorOutput.DisplayError(MiscResources.UpdateError);
                     return;
                 }
                 if (!VerifySignature())
                 {
-                    Log.Error($"Update error for {update.Name}: signature does not validate");
-                    errorOutput.DisplayError(MiscResources.UpdateError);
+                    Log.Error($"Update error for {_update.Name}: signature does not validate");
+                    _errorOutput.DisplayError(MiscResources.UpdateError);
                     return;
                 }
 
@@ -118,13 +118,13 @@ namespace NAPS2.Update
             catch (Exception ex)
             {
                 Log.ErrorException("Update error", ex);
-                errorOutput.DisplayError(MiscResources.UpdateError);
+                _errorOutput.DisplayError(MiscResources.UpdateError);
                 return;
             }
             finally
             {
                 InvokeFinished();
-                waitHandle.Set();
+                _waitHandle.Set();
             }
             // TODO: Simplify
             var desktop = Application.OpenForms.OfType<FDesktop>().FirstOrDefault();
@@ -139,21 +139,21 @@ namespace NAPS2.Update
         {
             Process.Start(new ProcessStartInfo
             {
-                FileName = tempPath,
+                FileName = _tempPath,
                 Arguments = "/SILENT /CLOSEAPPLICATIONS"
             });
         }
 
         private void InstallZip()
         {
-            ZipFile.ExtractToDirectory(tempPath, tempFolder);
+            ZipFile.ExtractToDirectory(_tempPath, _tempFolder);
             string assemblyFolder = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) ?? "";
             string portableLauncherPath = Path.Combine(assemblyFolder, "..", "..", "NAPS2.Portable.exe");
-            AtomicReplaceFile(Path.Combine(tempFolder, "NAPS2.Portable.exe"), portableLauncherPath);
+            AtomicReplaceFile(Path.Combine(_tempFolder, "NAPS2.Portable.exe"), portableLauncherPath);
             Process.Start(new ProcessStartInfo
             {
                 FileName = portableLauncherPath,
-                Arguments = $"/Update {Process.GetCurrentProcess().Id} \"{Path.Combine(tempFolder, "App")}\""
+                Arguments = $"/Update {Process.GetCurrentProcess().Id} \"{Path.Combine(_tempFolder, "App")}\""
             });
         }
 
@@ -181,16 +181,16 @@ namespace NAPS2.Update
         private bool VerifyHash()
         {
             using var sha = new SHA1CryptoServiceProvider();
-            using FileStream stream = File.OpenRead(tempPath);
+            using FileStream stream = File.OpenRead(_tempPath);
             byte[] checksum = sha.ComputeHash(stream);
-            return checksum.SequenceEqual(update.Sha1);
+            return checksum.SequenceEqual(_update.Sha1);
         }
 
         private bool VerifySignature()
         {
             var cert = new X509Certificate2(ClientCreds.naps2_public);
             var csp = (RSACryptoServiceProvider)cert.PublicKey.Key;
-            return csp.VerifyHash(update.Sha1, CryptoConfig.MapNameToOID("SHA1"), update.Signature);
+            return csp.VerifyHash(_update.Sha1, CryptoConfig.MapNameToOID("SHA1"), _update.Signature);
         }
 
         private void DownloadProgress(object sender, DownloadProgressChangedEventArgs e)

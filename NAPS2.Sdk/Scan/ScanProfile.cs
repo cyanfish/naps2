@@ -336,7 +336,7 @@ namespace NAPS2.Scan
     {
         public PageDimensionsAttribute(string width, string height, PageSizeUnit unit)
         {
-            this.PageDimensions = new PageDimensions
+            PageDimensions = new PageDimensions
             {
                 Width = decimal.Parse(width, CultureInfo.InvariantCulture),
                 Height = decimal.Parse(height, CultureInfo.InvariantCulture),

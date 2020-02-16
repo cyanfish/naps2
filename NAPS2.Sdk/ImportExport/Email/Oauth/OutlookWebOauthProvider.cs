@@ -9,33 +9,33 @@ namespace NAPS2.ImportExport.Email.Oauth
 {
     public class OutlookWebOauthProvider : OauthProvider
     {
-        private readonly ConfigScopes configScopes;
-        private readonly ConfigProvider<CommonConfig> configProvider;
+        private readonly ConfigScopes _configScopes;
+        private readonly ConfigProvider<CommonConfig> _configProvider;
 
-        private OauthClientCreds? creds;
+        private OauthClientCreds? _creds;
 
         public OutlookWebOauthProvider(ConfigScopes configScopes, ConfigProvider<CommonConfig> configProvider)
         {
-            this.configScopes = configScopes;
-            this.configProvider = configProvider;
+            _configScopes = configScopes;
+            _configProvider = configProvider;
         }
 
         #region Authorization
 
-        public override OauthToken? Token => configProvider.Get(c => c.EmailSetup.OutlookWebToken);
+        public override OauthToken? Token => _configProvider.Get(c => c.EmailSetup.OutlookWebToken);
 
-        public override string? User => configProvider.Get(c => c.EmailSetup.OutlookWebUser);
+        public override string? User => _configProvider.Get(c => c.EmailSetup.OutlookWebUser);
 
         protected override OauthClientCreds ClientCreds
         {
             get
             {
-                if (creds == null)
+                if (_creds == null)
                 {
                     var credObj = JObject.Parse(Encoding.UTF8.GetString(NAPS2.ClientCreds.microsoft_credentials));
-                    creds = new OauthClientCreds(credObj.Value<string>("client_id"), credObj.Value<string>("client_secret"));
+                    _creds = new OauthClientCreds(credObj.Value<string>("client_id"), credObj.Value<string>("client_secret"));
                 }
-                return creds;
+                return _creds;
             }
         }
 
@@ -47,14 +47,14 @@ namespace NAPS2.ImportExport.Email.Oauth
 
         protected override void SaveToken(OauthToken token, bool refresh)
         {
-            var emailSetup = configProvider.Get(c => c.EmailSetup);
+            var emailSetup = _configProvider.Get(c => c.EmailSetup);
             emailSetup.OutlookWebToken = token;
             if (!refresh)
             {
                 emailSetup.OutlookWebUser = GetEmailAddress();
                 emailSetup.ProviderType = EmailProviderType.OutlookWeb;
             }
-            configScopes.User.Set(c => c.EmailSetup = emailSetup);
+            _configScopes.User.Set(c => c.EmailSetup = emailSetup);
         }
 
         #endregion

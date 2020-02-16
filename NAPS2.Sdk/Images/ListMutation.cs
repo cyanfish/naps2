@@ -55,25 +55,25 @@ namespace NAPS2.Images
 
         public class MoveTo : ListMutation<T>
         {
-            private readonly int destinationIndex;
+            private readonly int _destinationIndex;
 
             public MoveTo(int destinationIndex)
             {
-                this.destinationIndex = destinationIndex;
+                _destinationIndex = destinationIndex;
             }
             
             public override void Apply(List<T> list, ref ListSelection<T> selection)
             {
                 var indexList = selection.ToSelectedIndices(list).ToList();
-                var bottom = indexList.Where(x => x < destinationIndex).OrderByDescending(x => x).ToList();
-                var top = indexList.Where(x => x >= destinationIndex).OrderBy(x => x).ToList();
+                var bottom = indexList.Where(x => x < _destinationIndex).OrderByDescending(x => x).ToList();
+                var top = indexList.Where(x => x >= _destinationIndex).OrderBy(x => x).ToList();
 
                 int offset = 1;
                 foreach (int i in bottom)
                 {
                     var item = list[i];
                     list.RemoveAt(i);
-                    list.Insert(destinationIndex - offset, item);
+                    list.Insert(_destinationIndex - offset, item);
                     offset++;
                 }
 
@@ -82,7 +82,7 @@ namespace NAPS2.Images
                 {
                     var item = list[i];
                     list.RemoveAt(i);
-                    list.Insert(destinationIndex + offset, item);
+                    list.Insert(_destinationIndex + offset, item);
                     offset++;
                 }
             }
@@ -233,30 +233,30 @@ namespace NAPS2.Images
 
         public class InsertAt : ListMutation<T>
         {
-            private readonly int index;
-            private readonly T item;
+            private readonly int _index;
+            private readonly T _item;
 
             public InsertAt(int index, T item)
             {
-                this.index = index;
-                this.item = item;
+                _index = index;
+                _item = item;
             }
 
             public override void Apply(List<T> list, ref ListSelection<T> selection)
             {
-                list.Insert(index, item);
+                list.Insert(_index, _item);
             }
         }
 
         public class InsertAfter : ListMutation<T>
         {
-            private readonly T itemToInsert;
-            private readonly T predecessor;
+            private readonly T _itemToInsert;
+            private readonly T _predecessor;
 
             public InsertAfter(T itemToInsert, T predecessor)
             {
-                this.itemToInsert = itemToInsert;
-                this.predecessor = predecessor;
+                _itemToInsert = itemToInsert;
+                _predecessor = predecessor;
             }
 
             public override void Apply(List<T> list, ref ListSelection<T> selection)
@@ -264,25 +264,25 @@ namespace NAPS2.Images
                 // Default to the end of the list
                 int index = list.Count;
                 // Use the index after the last image from the same source (if it exists)
-                if (predecessor != null)
+                if (_predecessor != null)
                 {
-                    int lastIndex = list.IndexOf(predecessor);
+                    int lastIndex = list.IndexOf(_predecessor);
                     if (lastIndex != -1)
                     {
                         index = lastIndex + 1;
                     }
                 }
-                list.Insert(index, itemToInsert);
+                list.Insert(index, _itemToInsert);
             }
         }
 
         public class ReplaceWith : ListMutation<T>
         {
-            private readonly T newItem;
+            private readonly T _newItem;
 
             public ReplaceWith(T newItem)
             {
-                this.newItem = newItem;
+                _newItem = newItem;
             }
 
             public override void Apply(List<T> list, ref ListSelection<T> selection)
@@ -304,25 +304,25 @@ namespace NAPS2.Images
                 {
                     firstIndex = list.Count;
                 }
-                list.Insert(firstIndex, newItem);
+                list.Insert(firstIndex, _newItem);
                 
-                selection = ListSelection.Of(newItem);
+                selection = ListSelection.Of(_newItem);
             }
         }
 
         public class Append : ListMutation<T>
         {
-            private readonly T item;
+            private readonly T _item;
 
             public Append(T item)
             {
-                this.item = item;
+                _item = item;
             }
 
             public override void Apply(List<T> list, ref ListSelection<T> selection)
             {
-                list.Add(item);
-                selection = ListSelection.Of(item);
+                list.Add(_item);
+                selection = ListSelection.Of(_item);
             }
         }
     }

@@ -25,15 +25,15 @@ namespace NAPS2.Ocr
             set => _default = value ?? throw new ArgumentNullException(nameof(value));
         }
 
-        private readonly Dictionary<OcrRequestParams, OcrRequest> requestCache = new Dictionary<OcrRequestParams, OcrRequest>();
-        private readonly Semaphore queueWaitHandle = new Semaphore(0, int.MaxValue);
-        private List<Task> workerTasks = new List<Task>();
-        private CancellationTokenSource workerCts = new CancellationTokenSource();
+        private readonly Dictionary<OcrRequestParams, OcrRequest> _requestCache = new Dictionary<OcrRequestParams, OcrRequest>();
+        private readonly Semaphore _queueWaitHandle = new Semaphore(0, int.MaxValue);
+        private List<Task> _workerTasks = new List<Task>();
+        private CancellationTokenSource _workerCts = new CancellationTokenSource();
 
-        private readonly OcrEngineManager ocrEngineManager;
-        private readonly OperationProgress operationProgress;
+        private readonly OcrEngineManager _ocrEngineManager;
+        private readonly OperationProgress _operationProgress;
 
-        private OcrOperation? currentOp;
+        private OcrOperation? _currentOp;
 
         public OcrRequestQueue() : this(OcrEngineManager.Default, OperationProgress.Default)
         {
@@ -41,8 +41,8 @@ namespace NAPS2.Ocr
 
         public OcrRequestQueue(OcrEngineManager ocrEngineManager, OperationProgress operationProgress)
         {
-            this.ocrEngineManager = ocrEngineManager;
-            this.operationProgress = operationProgress;
+            _ocrEngineManager = ocrEngineManager;
+            _operationProgress = operationProgress;
         }
 
         public bool HasCachedResult(IOcrEngine ocrEngine, ScannedImage.Snapshot snapshot, OcrParams ocrParams)
@@ -50,7 +50,7 @@ namespace NAPS2.Ocr
             var reqParams = new OcrRequestParams(snapshot, ocrEngine, ocrParams);
             lock (this)
             {
-                return requestCache.ContainsKey(reqParams) && requestCache[reqParams].Result != null;
+                return _requestCache.ContainsKey(reqParams) && _requestCache[reqParams].Result != null;
             }
         }
 
@@ -59,10 +59,10 @@ namespace NAPS2.Ocr
             OcrRequest req;
             lock (this)
             {
-                ocrEngine = ocrEngine ?? ocrEngineManager.ActiveEngine ?? throw new ArgumentException("No OCR engine available");
+                ocrEngine = ocrEngine ?? _ocrEngineManager.ActiveEngine ?? throw new ArgumentException("No OCR engine available");
 
                 var reqParams = new OcrRequestParams(snapshot, ocrEngine, ocrParams);
-                req = requestCache.GetOrSet(reqParams, () => new OcrRequest(reqParams));
+                req = _requestCache.GetOrSet(reqParams, () => new OcrRequest(reqParams));
                 // Fast path for cached results
                 if (req.Result != null)
                 {
@@ -80,7 +80,7 @@ namespace NAPS2.Ocr
                 }
                 // Increment the reference count
                 req.ForegroundCount += 1;
-                queueWaitHandle.Release();
+                _queueWaitHandle.Release();
             }
             // If no worker threads are running, start them
             EnsureWorkerThreads();
@@ -115,11 +115,11 @@ namespace NAPS2.Ocr
             CancellationTokenSource cts = new CancellationTokenSource();
             lock (this)
             {
-                var ocrEngine = ocrEngineManager.ActiveEngine;
+                var ocrEngine = _ocrEngineManager.ActiveEngine;
                 if (ocrEngine == null) return;
 
                 var reqParams = new OcrRequestParams(snapshot, ocrEngine, ocrParams);
-                req = requestCache.GetOrSet(reqParams, () => new OcrRequest(reqParams));
+                req = _requestCache.GetOrSet(reqParams, () => new OcrRequest(reqParams));
                 // Fast path for cached results
                 if (req.Result != null)
                 {
@@ -138,7 +138,7 @@ namespace NAPS2.Ocr
                 req.BackgroundCount += 1;
                 snapshot.Source.ThumbnailInvalidated += (sender, args) => cts.Cancel();
                 snapshot.Source.FullyDisposed += (sender, args) => cts.Cancel();
-                queueWaitHandle.Release();
+                _queueWaitHandle.Release();
             }
             // If no worker threads are running, start them
             EnsureWorkerThreads();
@@ -178,7 +178,7 @@ namespace NAPS2.Ocr
                 if (req.Result == null)
                 {
                     req.CancelSource.Cancel();
-                    if (requestCache.Get(req.Params) == req) requestCache.Remove(req.Params);
+                    if (_requestCache.Get(req.Params) == req) _requestCache.Remove(req.Params);
                 }
             }
         }
@@ -207,19 +207,19 @@ namespace NAPS2.Ocr
         {
             lock (this)
             {
-                bool hasPending = requestCache.Values.Any(x => x.ForegroundCount + x.BackgroundCount > 0);
-                if (workerTasks.Count == 0 && hasPending)
+                bool hasPending = _requestCache.Values.Any(x => x.ForegroundCount + x.BackgroundCount > 0);
+                if (_workerTasks.Count == 0 && hasPending)
                 {
                     for (int i = 0; i < Environment.ProcessorCount; i++)
                     {
-                        workerTasks.Add(Task.Run(() => RunWorkerTask(workerCts)));
+                        _workerTasks.Add(Task.Run(() => RunWorkerTask(_workerCts)));
                     }
                 }
-                if (workerTasks.Count > 0 && !hasPending)
+                if (_workerTasks.Count > 0 && !hasPending)
                 {
-                    workerCts.Cancel();
-                    workerTasks = new List<Task>();
-                    workerCts = new CancellationTokenSource();
+                    _workerCts.Cancel();
+                    _workerTasks = new List<Task>();
+                    _workerCts = new CancellationTokenSource();
                 }
             }
         }
@@ -231,7 +231,7 @@ namespace NAPS2.Ocr
                 while (true)
                 {
                     // Wait for a queued ocr request to become available
-                    WaitHandle.WaitAny(new[] { queueWaitHandle, cts.Token.WaitHandle });
+                    WaitHandle.WaitAny(new[] { _queueWaitHandle, cts.Token.WaitHandle });
                     if (cts.IsCancellationRequested)
                     {
                         return;
@@ -242,7 +242,7 @@ namespace NAPS2.Ocr
                     string tempImageFilePath;
                     lock (this)
                     {
-                        next = requestCache.Values
+                        next = _requestCache.Values
                             .OrderByDescending(x => x.ForegroundCount)
                             .ThenByDescending(x => x.BackgroundCount)
                             .FirstOrDefault(x => x.BackgroundCount + x.ForegroundCount > 0 && !x.IsProcessing && x.Result == null);
@@ -267,7 +267,7 @@ namespace NAPS2.Ocr
 
                         if (next.Result == null)
                         {
-                            if (requestCache.Get(next.Params) == next) requestCache.Remove(next.Params);
+                            if (_requestCache.Get(next.Params) == next) _requestCache.Remove(next.Params);
                         }
 
                         next.IsProcessing = false;
@@ -290,18 +290,18 @@ namespace NAPS2.Ocr
             bool started = false;
             lock (this)
             {
-                if (currentOp == null)
+                if (_currentOp == null)
                 {
-                    currentOp = new OcrOperation(workerTasks);
+                    _currentOp = new OcrOperation(_workerTasks);
                     started = true;
                 }
-                op = currentOp;
+                op = _currentOp;
                 op.Status.MaxProgress += 1;
             }
             op.InvokeStatusChanged();
             if (started)
             {
-                operationProgress.ShowBackgroundProgress(op);
+                _operationProgress.ShowBackgroundProgress(op);
             }
             return op;
         }
@@ -312,11 +312,11 @@ namespace NAPS2.Ocr
             bool finished = false;
             lock (this)
             {
-                op = currentOp;
-                currentOp.Status.CurrentProgress += 1;
-                if (currentOp.Status.CurrentProgress == currentOp.Status.MaxProgress)
+                op = _currentOp;
+                _currentOp.Status.CurrentProgress += 1;
+                if (_currentOp.Status.CurrentProgress == _currentOp.Status.MaxProgress)
                 {
-                    currentOp = null;
+                    _currentOp = null;
                     finished = true;
                 }
             }

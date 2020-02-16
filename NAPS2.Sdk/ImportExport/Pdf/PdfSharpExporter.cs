@@ -33,21 +33,21 @@ namespace NAPS2.ImportExport.Pdf
             }
         }
         
-        private readonly MemoryStreamRenderer memoryStreamRenderer;
+        private readonly MemoryStreamRenderer _memoryStreamRenderer;
 
         public PdfSharpExporter()
         {
-            memoryStreamRenderer = new MemoryStreamRenderer(ImageContext.Default);
+            _memoryStreamRenderer = new MemoryStreamRenderer(ImageContext.Default);
         }
 
         public PdfSharpExporter(ImageContext imageContext)
         {
-            memoryStreamRenderer = new MemoryStreamRenderer(imageContext);
+            _memoryStreamRenderer = new MemoryStreamRenderer(imageContext);
         }
 
         public PdfSharpExporter(MemoryStreamRenderer memoryStreamRenderer)
         {
-            this.memoryStreamRenderer = memoryStreamRenderer;
+            _memoryStreamRenderer = memoryStreamRenderer;
         }
 
         public override async Task<bool> Export(string path, ICollection<ScannedImage.Snapshot> snapshots, ConfigProvider<PdfSettings> settings, OcrContext? ocrContext = null, ProgressHandler? progressCallback = null, CancellationToken cancelToken = default)
@@ -147,7 +147,7 @@ namespace NAPS2.ImportExport.Pdf
                 }
                 else
                 {
-                    using Stream stream = await memoryStreamRenderer.Render(snapshot);
+                    using Stream stream = await _memoryStreamRenderer.Render(snapshot);
                     using var img = XImage.FromStream(stream);
                     if (cancelToken.IsCancellationRequested)
                     {
@@ -200,7 +200,7 @@ namespace NAPS2.ImportExport.Pdf
 
                 string tempImageFilePath = Path.Combine(Paths.Temp, Path.GetRandomFileName());
 
-                using (Stream stream = await memoryStreamRenderer.Render(snapshot))
+                using (Stream stream = await _memoryStreamRenderer.Render(snapshot))
                 using (var img = XImage.FromStream(stream))
                 {
                     if (cancelToken.IsCancellationRequested)
@@ -389,7 +389,7 @@ namespace NAPS2.ImportExport.Pdf
         
         private class UnixFontResolver : IFontResolver
         {
-            private byte[] fontData;
+            private byte[] _fontData;
 
             public FontResolverInfo ResolveTypeface(string familyName, bool isBold, bool isItalic)
             {
@@ -398,7 +398,7 @@ namespace NAPS2.ImportExport.Pdf
 
             public byte[] GetFont(string faceName)
             {
-                if (fontData == null)
+                if (_fontData == null)
                 {
                     var proc = Process.Start(new ProcessStartInfo
                     {
@@ -409,9 +409,9 @@ namespace NAPS2.ImportExport.Pdf
                     var fonts = proc.StandardOutput.ReadToEnd().Split('\n').Select(x => x.Split(':')[0]);
                     // TODO: Maybe add more fonts here?
                     var freeserif = fonts.First(f => f.EndsWith("FreeSerif.ttf", StringComparison.OrdinalIgnoreCase));
-                    fontData = File.ReadAllBytes(freeserif);
+                    _fontData = File.ReadAllBytes(freeserif);
                 }
-                return fontData;
+                return _fontData;
             }
         }
     }

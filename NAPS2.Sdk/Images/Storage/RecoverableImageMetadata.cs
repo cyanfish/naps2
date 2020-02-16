@@ -9,11 +9,11 @@ namespace NAPS2.Images.Storage
 {
     public class RecoverableImageMetadata : IImageMetadata
     {
-        private readonly RecoveryStorageManager rsm;
+        private readonly RecoveryStorageManager _rsm;
 
         public RecoverableImageMetadata(RecoveryStorageManager rsm, string fileName)
         {
-            this.rsm = rsm;
+            _rsm = rsm;
             FileName = fileName;
             rsm.RegisterMetadata(this);
         }
@@ -32,7 +32,7 @@ namespace NAPS2.Images.Storage
 
         public void Commit()
         {
-            rsm.CommitAllMetadata();
+            _rsm.CommitAllMetadata();
         }
 
         public IImageMetadata Clone() =>
@@ -47,7 +47,7 @@ namespace NAPS2.Images.Storage
 
         public void Dispose()
         {
-            rsm.UnregisterMetadata(this);
+            _rsm.UnregisterMetadata(this);
         }
     }
 }

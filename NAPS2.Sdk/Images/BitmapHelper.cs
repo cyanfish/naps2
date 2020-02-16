@@ -34,7 +34,7 @@ namespace NAPS2.Images
                                          int ySrc, int rop);
 
         [DllImport("gdi32.dll")]
-        private static extern IntPtr CreateDIBSection(IntPtr hdc, ref BitmapInfo bmi, uint Usage, out IntPtr bits,
+        private static extern IntPtr CreateDIBSection(IntPtr hdc, ref BitmapInfo bmi, uint usage, out IntPtr bits,
                                                       IntPtr hSection, uint dwOffset);
 
         private static uint MakeRGB(int r, int g, int b)

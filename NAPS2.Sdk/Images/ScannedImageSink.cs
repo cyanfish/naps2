@@ -10,7 +10,7 @@ namespace NAPS2.Images
     {
         private static TaskCompletionSource<ScannedImage?> CreateTcs() => new TaskCompletionSource<ScannedImage?>(TaskCreationOptions.RunContinuationsAsynchronously);
 
-        private readonly List<TaskCompletionSource<ScannedImage?>> images = new List<TaskCompletionSource<ScannedImage?>>
+        private readonly List<TaskCompletionSource<ScannedImage?>> _images = new List<TaskCompletionSource<ScannedImage?>>
         {
             CreateTcs()
         };
@@ -23,7 +23,7 @@ namespace NAPS2.Images
             {
                 lock (this)
                 {
-                    return images.Count - 1;
+                    return _images.Count - 1;
                 }
             }
         }
@@ -39,7 +39,7 @@ namespace NAPS2.Images
                     return;
                 }
                 Completed = true;
-                images.Last().SetResult(null);
+                _images.Last().SetResult(null);
             }
         }
 
@@ -57,7 +57,7 @@ namespace NAPS2.Images
                 }
                 Completed = true;
                 ex.PreserveStackTrace();
-                images.Last().SetException(ex);
+                _images.Last().SetException(ex);
             }
         }
 
@@ -65,34 +65,34 @@ namespace NAPS2.Images
         {
             lock (this)
             {
-                images.Last().SetResult(image);
-                images.Add(CreateTcs());
+                _images.Last().SetResult(image);
+                _images.Add(CreateTcs());
             }
         }
 
         private class SinkSource : ScannedImageSource
         {
-            private readonly ScannedImageSink sink;
-            private int imagesRead;
+            private readonly ScannedImageSink _sink;
+            private int _imagesRead;
 
             public SinkSource(ScannedImageSink sink)
             {
-                this.sink = sink;
+                _sink = sink;
             }
 
             public override async Task<ScannedImage?> Next()
             {
                 TaskCompletionSource<ScannedImage?> tcs;
-                lock (sink)
+                lock (_sink)
                 {
-                    if (imagesRead >= sink.images.Count)
+                    if (_imagesRead >= _sink._images.Count)
                     {
-                        imagesRead--;
+                        _imagesRead--;
                     }
-                    tcs = sink.images[imagesRead];
+                    tcs = _sink._images[_imagesRead];
                 }
                 var result = await tcs.Task;
-                imagesRead++;
+                _imagesRead++;
                 return result;
             }
         }

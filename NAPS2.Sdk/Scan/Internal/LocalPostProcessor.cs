@@ -6,7 +6,7 @@ namespace NAPS2.Scan.Internal
 {
     internal class LocalPostProcessor : ILocalPostProcessor
     {
-        private readonly OcrRequestQueue ocrRequestQueue;
+        private readonly OcrRequestQueue _ocrRequestQueue;
 
         public LocalPostProcessor()
             : this(OcrRequestQueue.Default)
@@ -15,7 +15,7 @@ namespace NAPS2.Scan.Internal
 
         public LocalPostProcessor(OcrRequestQueue ocrRequestQueue)
         {
-            this.ocrRequestQueue = ocrRequestQueue;
+            _ocrRequestQueue = ocrRequestQueue;
         }
 
         public void PostProcess(ScannedImage scannedImage, ScanOptions options, PostProcessingContext postProcessingContext)
@@ -33,11 +33,11 @@ namespace NAPS2.Scan.Internal
                 using var snapshot = image.Preserve();
                 if (!options.OcrInBackground)
                 {
-                    ocrRequestQueue.QueueForeground(null, snapshot, tempPath, options.OcrParams, options.OcrCancelToken).AssertNoAwait();
+                    _ocrRequestQueue.QueueForeground(null, snapshot, tempPath, options.OcrParams, options.OcrCancelToken).AssertNoAwait();
                 }
                 else
                 {
-                    ocrRequestQueue.QueueBackground(snapshot, tempPath, options.OcrParams);
+                    _ocrRequestQueue.QueueBackground(snapshot, tempPath, options.OcrParams);
                 }
             }
         }

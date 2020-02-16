@@ -9,7 +9,7 @@ namespace NAPS2.WinForms
 {
     public partial class FPageSize : FormBase
     {
-        private PageDimensions initialDimens;
+        private PageDimensions _initialDimens;
 
         public FPageSize()
         {
@@ -41,11 +41,11 @@ namespace NAPS2.WinForms
                     .RightToForm()
                 .Activate();
 
-            initialDimens = PageSizeDimens ?? ScanPageSize.Letter.PageDimensions();
+            _initialDimens = PageSizeDimens ?? ScanPageSize.Letter.PageDimensions();
 
             UpdateDropdown();
             comboName.Text = PageSizeName ?? "";
-            UpdateDimens(initialDimens);
+            UpdateDimens(_initialDimens);
         }
 
         private void UpdateDropdown()
@@ -131,7 +131,7 @@ namespace NAPS2.WinForms
 
                 UpdateDropdown();
                 comboName.Text = "";
-                UpdateDimens(initialDimens);
+                UpdateDimens(_initialDimens);
             }
         }
     }

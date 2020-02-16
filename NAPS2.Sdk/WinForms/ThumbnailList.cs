@@ -36,7 +36,7 @@ namespace NAPS2.WinForms
             }
         }
 
-        private Bitmap placeholder;
+        private Bitmap _placeholder;
 
         public ThumbnailList()
         {
@@ -208,14 +208,14 @@ namespace NAPS2.WinForms
         {
             lock (this)
             {
-                if (placeholder?.Size == ThumbnailSize)
+                if (_placeholder?.Size == ThumbnailSize)
                 {
-                    return placeholder;
+                    return _placeholder;
                 }
-                placeholder?.Dispose();
-                placeholder = new Bitmap(ThumbnailSize.Width, ThumbnailSize.Height);
-                placeholder = DrawHourglass(placeholder);
-                return placeholder;
+                _placeholder?.Dispose();
+                _placeholder = new Bitmap(ThumbnailSize.Width, ThumbnailSize.Height);
+                _placeholder = DrawHourglass(_placeholder);
+                return _placeholder;
             }
         }
 

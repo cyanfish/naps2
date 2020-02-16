@@ -15,18 +15,18 @@ namespace NAPS2.Util
     /// </summary>
     public class Lifecycle
     {
-        private readonly StillImage sti;
-        private readonly WindowsEventLogger windowsEventLogger;
-        private readonly ConfigProvider<CommonConfig> configProvider;
+        private readonly StillImage _sti;
+        private readonly WindowsEventLogger _windowsEventLogger;
+        private readonly ConfigProvider<CommonConfig> _configProvider;
 
-        private bool shouldCreateEventSource;
-        private int returnCode;
+        private bool _shouldCreateEventSource;
+        private int _returnCode;
 
         public Lifecycle(StillImage sti, WindowsEventLogger windowsEventLogger, ConfigProvider<CommonConfig> configProvider)
         {
-            this.sti = sti;
-            this.windowsEventLogger = windowsEventLogger;
-            this.configProvider = configProvider;
+            _sti = sti;
+            _windowsEventLogger = windowsEventLogger;
+            _configProvider = configProvider;
         }
 
         /// <summary>
@@ -67,14 +67,14 @@ namespace NAPS2.Util
             }
 
             // Let StillImage figure out what it should do from the command-line args
-            sti.ParseArgs(args);
+            _sti.ParseArgs(args);
 
             // Actually do any specified StillImage actions
-            if (sti.ShouldRegister)
+            if (_sti.ShouldRegister)
             {
                 try
                 {
-                    if (ElevationRequired(sti.Register))
+                    if (ElevationRequired(_sti.Register))
                     {
                         Out("Successfully registered STI. A reboot may be needed.");
                     }
@@ -83,14 +83,14 @@ namespace NAPS2.Util
                 {
                     Log.ErrorException("Error registering STI", ex);
                     Out("Error registering STI. Maybe run as administrator?");
-                    returnCode = 1;
+                    _returnCode = 1;
                 }
             }
-            else if (sti.ShouldUnregister)
+            else if (_sti.ShouldUnregister)
             {
                 try
                 {
-                    if (ElevationRequired(sti.Unregister))
+                    if (ElevationRequired(_sti.Unregister))
                     {
                         Out("Successfully unregistered STI. A reboot may be needed.");
                     }
@@ -99,16 +99,16 @@ namespace NAPS2.Util
                 {
                     Log.ErrorException("Error unregistering STI", ex);
                     Out("Error unregistering STI. Maybe run as administrator?");
-                    returnCode = 1;
+                    _returnCode = 1;
                 }
             }
 
-            shouldCreateEventSource = args.Any(x => x.Equals("/CreateEventSource", StringComparison.InvariantCultureIgnoreCase));
-            if (shouldCreateEventSource)
+            _shouldCreateEventSource = args.Any(x => x.Equals("/CreateEventSource", StringComparison.InvariantCultureIgnoreCase));
+            if (_shouldCreateEventSource)
             {
                 try
                 {
-                    if (ElevationRequired(windowsEventLogger.CreateEventSource))
+                    if (ElevationRequired(_windowsEventLogger.CreateEventSource))
                     {
                         Out("Successfully created event source.");
                     }
@@ -117,7 +117,7 @@ namespace NAPS2.Util
                 {
                     Log.ErrorException("Error creating event source", ex);
                     Out("Error creating event source. Maybe run as administrator?");
-                    returnCode = 1;
+                    _returnCode = 1;
                 }
             }
         }
@@ -151,21 +151,21 @@ namespace NAPS2.Util
         /// </summary>
         public void ExitIfRedundant()
         {
-            if (sti.ShouldRegister || sti.ShouldUnregister || shouldCreateEventSource)
+            if (_sti.ShouldRegister || _sti.ShouldUnregister || _shouldCreateEventSource)
             {
                 // Was just started by the user to (un)register STI
-                Environment.Exit(returnCode);
+                Environment.Exit(_returnCode);
             }
 
             // If this instance of NAPS2 was spawned by STI, then there may be another instance of NAPS2 we want to get the scan signal instead
-            if (sti.ShouldScan)
+            if (_sti.ShouldScan)
             {
                 // Try each possible process in turn until one receives the message (most recently started first)
                 foreach (var process in GetOtherNaps2Processes())
                 {
                     // Another instance of NAPS2 is running, so send it the "Scan" signal
                     ActivateProcess(process);
-                    if (Pipes.SendMessage(process, Pipes.MSG_SCAN_WITH_DEVICE + sti.DeviceID))
+                    if (Pipes.SendMessage(process, Pipes.MSG_SCAN_WITH_DEVICE + _sti.DeviceID))
                     {
                         // Successful, so this instance can be closed before showing any UI
                         Environment.Exit(0);
@@ -174,7 +174,7 @@ namespace NAPS2.Util
             }
 
             // Only start one instance if configured for SingleInstance
-            if (configProvider.Get(c => c.SingleInstance))
+            if (_configProvider.Get(c => c.SingleInstance))
             {
                 // See if there's another NAPS2 process running
                 foreach (var process in GetOtherNaps2Processes())

@@ -13,13 +13,13 @@ namespace NAPS2.ImportExport.Images
 {
     public class ImageImporter : IImageImporter
     {
-        private readonly ImageContext imageContext;
-        private readonly ThumbnailRenderer thumbnailRenderer;
+        private readonly ImageContext _imageContext;
+        private readonly ThumbnailRenderer _thumbnailRenderer;
 
         public ImageImporter(ImageContext imageContext, ThumbnailRenderer thumbnailRenderer)
         {
-            this.imageContext = imageContext;
-            this.thumbnailRenderer = thumbnailRenderer;
+            _imageContext = imageContext;
+            _thumbnailRenderer = thumbnailRenderer;
         }
 
         public ScannedImageSource Import(string filePath, ImportParams importParams, ProgressHandler progressCallback, CancellationToken cancelToken)
@@ -39,7 +39,7 @@ namespace NAPS2.ImportExport.Images
                     int frameCount;
                     try
                     {
-                        toImport = imageContext.ImageFactory.DecodeMultiple(filePath, out frameCount);
+                        toImport = _imageContext.ImageFactory.DecodeMultiple(filePath, out frameCount);
                     }
                     catch (Exception e)
                     {
@@ -60,10 +60,10 @@ namespace NAPS2.ImportExport.Images
                                 return;
                             }
                             
-                            var image = imageContext.CreateScannedImage(frame, BitDepth.Color, frame.IsOriginalLossless, -1);
+                            var image = _imageContext.CreateScannedImage(frame, BitDepth.Color, frame.IsOriginalLossless, -1);
                             if (importParams.ThumbnailSize.HasValue)
                             {
-                                image.SetThumbnail(imageContext.PerformTransform(frame, new ThumbnailTransform(importParams.ThumbnailSize.Value)));
+                                image.SetThumbnail(_imageContext.PerformTransform(frame, new ThumbnailTransform(importParams.ThumbnailSize.Value)));
                             }
                             image.BarcodeDetection = BarcodeDetection.Detect(frame, importParams.BarcodeDetectionOptions);
 

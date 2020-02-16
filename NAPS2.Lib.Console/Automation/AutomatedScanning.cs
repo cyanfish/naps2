@@ -26,60 +26,60 @@ namespace NAPS2.Automation
 {
     public class AutomatedScanning
     {
-        private readonly ImageContext imageContext;
-        private readonly IEmailProviderFactory emailProviderFactory;
-        private readonly IScanPerformer scanPerformer;
-        private readonly ErrorOutput errorOutput;
-        private readonly IScannedImageImporter scannedImageImporter;
-        private readonly IOperationFactory operationFactory;
-        private readonly OcrEngineManager ocrEngineManager;
-        private readonly OcrRequestQueue ocrRequestQueue;
-        private readonly IFormFactory formFactory;
-        private readonly ConfigScopes configScopes;
-        private readonly TransactionConfigScope<CommonConfig> userTransact;
-        private readonly ConfigProvider<CommonConfig> configProvider;
-        private readonly ConfigProvider<PdfSettings> pdfSettingsProvider;
-        private readonly ConfigProvider<ImageSettings> imageSettingsProvider;
-        private readonly IProfileManager profileManager;
+        private readonly ImageContext _imageContext;
+        private readonly IEmailProviderFactory _emailProviderFactory;
+        private readonly IScanPerformer _scanPerformer;
+        private readonly ErrorOutput _errorOutput;
+        private readonly IScannedImageImporter _scannedImageImporter;
+        private readonly IOperationFactory _operationFactory;
+        private readonly OcrEngineManager _ocrEngineManager;
+        private readonly OcrRequestQueue _ocrRequestQueue;
+        private readonly IFormFactory _formFactory;
+        private readonly ConfigScopes _configScopes;
+        private readonly TransactionConfigScope<CommonConfig> _userTransact;
+        private readonly ConfigProvider<CommonConfig> _configProvider;
+        private readonly ConfigProvider<PdfSettings> _pdfSettingsProvider;
+        private readonly ConfigProvider<ImageSettings> _imageSettingsProvider;
+        private readonly IProfileManager _profileManager;
 
-        private readonly ConsoleOutput output;
-        private readonly AutomatedScanningOptions options;
-        private List<List<ScannedImage>> scanList;
-        private int pagesScanned;
-        private int totalPagesScanned;
-        private Placeholders placeholders;
-        private List<string> actualOutputPaths;
-        private OcrParams ocrParams;
+        private readonly ConsoleOutput _output;
+        private readonly AutomatedScanningOptions _options;
+        private List<List<ScannedImage>> _scanList;
+        private int _pagesScanned;
+        private int _totalPagesScanned;
+        private Placeholders _placeholders;
+        private List<string> _actualOutputPaths;
+        private OcrParams _ocrParams;
 
         public AutomatedScanning(ConsoleOutput output, AutomatedScanningOptions options, ImageContext imageContext, IScanPerformer scanPerformer, ErrorOutput errorOutput, IEmailProviderFactory emailProviderFactory, IScannedImageImporter scannedImageImporter, IOperationFactory operationFactory, OcrEngineManager ocrEngineManager, IFormFactory formFactory, ConfigScopes configScopes, IProfileManager profileManager, OcrRequestQueue ocrRequestQueue)
         {
-            this.output = output;
-            this.options = options;
-            this.imageContext = imageContext;
-            this.scanPerformer = scanPerformer;
-            this.errorOutput = errorOutput;
-            this.emailProviderFactory = emailProviderFactory;
-            this.scannedImageImporter = scannedImageImporter;
-            this.operationFactory = operationFactory;
-            this.ocrEngineManager = ocrEngineManager;
-            this.formFactory = formFactory;
-            this.configScopes = configScopes;
-            this.profileManager = profileManager;
-            this.ocrRequestQueue = ocrRequestQueue;
+            _output = output;
+            _options = options;
+            _imageContext = imageContext;
+            _scanPerformer = scanPerformer;
+            _errorOutput = errorOutput;
+            _emailProviderFactory = emailProviderFactory;
+            _scannedImageImporter = scannedImageImporter;
+            _operationFactory = operationFactory;
+            _ocrEngineManager = ocrEngineManager;
+            _formFactory = formFactory;
+            _configScopes = configScopes;
+            _profileManager = profileManager;
+            _ocrRequestQueue = ocrRequestQueue;
 
-            userTransact = configScopes.User.BeginTransaction();
-            configProvider = configScopes.Provider.Replace(configScopes.User, userTransact);
-            pdfSettingsProvider = configProvider.Child(c => c.PdfSettings);
-            imageSettingsProvider = configProvider.Child(c => c.ImageSettings);
+            _userTransact = configScopes.User.BeginTransaction();
+            _configProvider = configScopes.Provider.Replace(configScopes.User, _userTransact);
+            _pdfSettingsProvider = _configProvider.Child(c => c.PdfSettings);
+            _imageSettingsProvider = _configProvider.Child(c => c.ImageSettings);
         }
 
-        public IEnumerable<ScannedImage> AllImages => scanList.SelectMany(x => x);
+        public IEnumerable<ScannedImage> AllImages => _scanList.SelectMany(x => x);
 
         private void OutputVerbose(string value, params object[] args)
         {
-            if (options.Verbose)
+            if (_options.Verbose)
             {
-                output.Writer.WriteLine(value, args);
+                _output.Writer.WriteLine(value, args);
             }
         }
 
@@ -92,13 +92,13 @@ namespace NAPS2.Automation
                     return;
                 }
 
-                placeholders = Placeholders.All.WithDate(DateTime.Now);
-                ConsoleOverwritePrompt.ForceOverwrite = options.ForceOverwrite;
+                _placeholders = Placeholders.All.WithDate(DateTime.Now);
+                ConsoleOverwritePrompt.ForceOverwrite = _options.ForceOverwrite;
 
-                if (options.Install != null)
+                if (_options.Install != null)
                 {
                     InstallComponents();
-                    if (options.OutputPath == null && options.EmailFileName == null && !options.AutoSave)
+                    if (_options.OutputPath == null && _options.EmailFileName == null && !_options.AutoSave)
                     {
                         return;
                     }
@@ -109,16 +109,16 @@ namespace NAPS2.Automation
                     return;
                 }
 
-                scanList = new List<List<ScannedImage>>();
+                _scanList = new List<List<ScannedImage>>();
 
-                if (options.ImportPath != null)
+                if (_options.ImportPath != null)
                 {
                     await ImportImages();
                 }
 
                 ConfigureOcr();
 
-                if (options.Number > 0)
+                if (_options.Number > 0)
                 {
                     if (!GetProfile(out ScanProfile profile))
                     {
@@ -130,12 +130,12 @@ namespace NAPS2.Automation
 
                 ReorderScannedImages();
 
-                if (options.OutputPath != null)
+                if (_options.OutputPath != null)
                 {
                     await ExportScannedImages();
                 }
 
-                if (options.EmailFileName != null)
+                if (_options.EmailFileName != null)
                 {
                     await EmailScannedImages();
                 }
@@ -148,11 +148,11 @@ namespace NAPS2.Automation
             catch (Exception ex)
             {
                 Log.FatalException("An error occurred that caused the console application to close.", ex);
-                output.Writer.WriteLine(ConsoleResources.UnexpectedError);
+                _output.Writer.WriteLine(ConsoleResources.UnexpectedError);
             }
             finally
             {
-                if (options.WaitForEnter)
+                if (_options.WaitForEnter)
                 {
                     Console.ReadLine();
                 }
@@ -161,27 +161,27 @@ namespace NAPS2.Automation
 
         private void ConfigureOcr()
         {
-            bool canUseOcr = IsPdfFile(options.OutputPath) || IsPdfFile(options.EmailFileName);
+            bool canUseOcr = IsPdfFile(_options.OutputPath) || IsPdfFile(_options.EmailFileName);
             if (!canUseOcr)
             {
                 return;
             }
-            if (options.DisableOcr)
+            if (_options.DisableOcr)
             {
-                configScopes.Run.Set(c => c.EnableOcr = false);
+                _configScopes.Run.Set(c => c.EnableOcr = false);
             }
-            else if (options.EnableOcr || options.OcrLang != null)
+            else if (_options.EnableOcr || _options.OcrLang != null)
             {
-                configScopes.Run.Set(c => c.EnableOcr = true);
+                _configScopes.Run.Set(c => c.EnableOcr = true);
             }
-            configScopes.Run.Set(c => c.OcrLanguageCode = options.OcrLang);
-            ocrParams = configProvider.DefaultOcrParams();
+            _configScopes.Run.Set(c => c.OcrLanguageCode = _options.OcrLang);
+            _ocrParams = _configProvider.DefaultOcrParams();
         }
 
         private void InstallComponents()
         {
             var availableComponents = new List<IExternalComponent>();
-            var ocrEngine = ocrEngineManager.EngineToInstall;
+            var ocrEngine = _ocrEngineManager.EngineToInstall;
             if (ocrEngine != null)
             {
                 availableComponents.Add(ocrEngine.Component);
@@ -189,66 +189,66 @@ namespace NAPS2.Automation
             }
 
             var componentDict = availableComponents.ToDictionary(x => x.Id.ToLowerInvariant());
-            var installId = options.Install.ToLowerInvariant();
+            var installId = _options.Install.ToLowerInvariant();
             if (!componentDict.TryGetValue(installId, out var toInstall))
             {
-                output.Writer.WriteLine(ConsoleResources.ComponentNotAvailable);
+                _output.Writer.WriteLine(ConsoleResources.ComponentNotAvailable);
                 return;
             }
             if (toInstall.IsInstalled)
             {
-                output.Writer.WriteLine(ConsoleResources.ComponentAlreadyInstalled);
+                _output.Writer.WriteLine(ConsoleResources.ComponentAlreadyInstalled);
                 return;
             }
             // Using a form here is not ideal (since this is supposed to be a console app), but good enough for now
             // Especially considering wia/twain often show forms anyway
-            var progressForm = formFactory.Create<FDownloadProgress>();
+            var progressForm = _formFactory.Create<FDownloadProgress>();
             if (toInstall.Id.StartsWith("ocr-", StringComparison.InvariantCulture) && componentDict.TryGetValue("ocr", out var ocrExe) && !ocrExe.IsInstalled)
             {
                 progressForm.QueueFile(ocrExe);
-                if (options.Verbose)
+                if (_options.Verbose)
                 {
-                    output.Writer.WriteLine(ConsoleResources.Installing, ocrExe.Id);
+                    _output.Writer.WriteLine(ConsoleResources.Installing, ocrExe.Id);
                 }
             }
             progressForm.QueueFile(toInstall);
-            if (options.Verbose)
+            if (_options.Verbose)
             {
-                output.Writer.WriteLine(ConsoleResources.Installing, toInstall.Id);
+                _output.Writer.WriteLine(ConsoleResources.Installing, toInstall.Id);
             }
             progressForm.ShowDialog();
         }
 
         private void ReorderScannedImages()
         {
-            var sep = options.SplitPatchT ? SaveSeparator.PatchT
-                : options.SplitScans ? SaveSeparator.FilePerScan
-                    : options.SplitSize > 0 || options.Split ? SaveSeparator.FilePerPage
+            var sep = _options.SplitPatchT ? SaveSeparator.PatchT
+                : _options.SplitScans ? SaveSeparator.FilePerScan
+                    : _options.SplitSize > 0 || _options.Split ? SaveSeparator.FilePerPage
                         : SaveSeparator.None;
-            scanList = SaveSeparatorHelper.SeparateScans(scanList, sep, options.SplitSize).Where(x => x.Count > 0).ToList();
+            _scanList = SaveSeparatorHelper.SeparateScans(_scanList, sep, _options.SplitSize).Where(x => x.Count > 0).ToList();
 
-            foreach (var scan in scanList)
+            foreach (var scan in _scanList)
             {
-                var imageList = new ScannedImageList(imageContext, scan);
+                var imageList = new ScannedImageList(_imageContext, scan);
 
-                if (options.AltDeinterleave)
+                if (_options.AltDeinterleave)
                 {
                     imageList.Mutate(new ImageListMutation.AltDeinterleave());
                 }
-                else if (options.Deinterleave)
+                else if (_options.Deinterleave)
                 {
                     imageList.Mutate(new ImageListMutation.Deinterleave());
                 }
-                else if (options.AltInterleave)
+                else if (_options.AltInterleave)
                 {
                     imageList.Mutate(new ImageListMutation.AltInterleave());
                 }
-                else if (options.Interleave)
+                else if (_options.Interleave)
                 {
                     imageList.Mutate(new ImageListMutation.Interleave());
                 }
 
-                if (options.Reverse)
+                if (_options.Reverse)
                 {
                     imageList.Mutate(new ImageListMutation.ReverseAll());
                 }
@@ -257,17 +257,17 @@ namespace NAPS2.Automation
 
         private bool PreCheckOverwriteFile()
         {
-            if (options.OutputPath == null)
+            if (_options.OutputPath == null)
             {
                 // Email, so no check needed
                 return true;
             }
-            var subPath = placeholders.Substitute(options.OutputPath);
+            var subPath = _placeholders.Substitute(_options.OutputPath);
             if (IsPdfFile(subPath)
                 && File.Exists(subPath)
-                && !options.ForceOverwrite)
+                && !_options.ForceOverwrite)
             {
-                errorOutput.DisplayError(string.Format(ConsoleResources.FileAlreadyExists, Path.GetFullPath(subPath)));
+                _errorOutput.DisplayError(string.Format(ConsoleResources.FileAlreadyExists, Path.GetFullPath(subPath)));
                 return false;
             }
             return true;
@@ -277,9 +277,9 @@ namespace NAPS2.Automation
         {
             OutputVerbose(ConsoleResources.Importing);
 
-            ConsolePdfPasswordProvider.PasswordToProvide = options.ImportPassword;
+            ConsolePdfPasswordProvider.PasswordToProvide = _options.ImportPassword;
 
-            var filePaths = options.ImportPath.Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
+            var filePaths = _options.ImportPath.Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
             int i = 0;
             foreach (var filePath in filePaths)
             {
@@ -291,17 +291,17 @@ namespace NAPS2.Automation
                         Slice = Slice.Parse(filePath, out string actualPath),
                         BarcodeDetectionOptions = 
                         {
-                            DetectBarcodes = options.SplitPatchT,
+                            DetectBarcodes = _options.SplitPatchT,
                             PatchTOnly = true
                         }
                     };
-                    var images = await scannedImageImporter.Import(actualPath, importParams, (j, k) => { }, CancellationToken.None).ToList();
-                    scanList.Add(images);
+                    var images = await _scannedImageImporter.Import(actualPath, importParams, (j, k) => { }, CancellationToken.None).ToList();
+                    _scanList.Add(images);
                 }
                 catch (Exception ex)
                 {
                     Log.ErrorException(string.Format(ConsoleResources.ErrorImporting, filePath), ex);
-                    errorOutput.DisplayError(string.Format(ConsoleResources.ErrorImporting, filePath));
+                    _errorOutput.DisplayError(string.Format(ConsoleResources.ErrorImporting, filePath));
                     continue;
                 }
                 OutputVerbose(ConsoleResources.ImportedFile, i, filePaths.Length);
@@ -310,9 +310,9 @@ namespace NAPS2.Automation
 
         private async Task EmailScannedImages()
         {
-            if (scanList.Count == 0)
+            if (_scanList.Count == 0)
             {
-                errorOutput.DisplayError(ConsoleResources.NoPagesToEmail);
+                _errorOutput.DisplayError(ConsoleResources.NoPagesToEmail);
                 return;
             }
 
@@ -321,32 +321,32 @@ namespace NAPS2.Automation
 
             var message = new EmailMessage
             {
-                Subject = placeholders.Substitute(options.EmailSubject, false) ?? "",
-                BodyText = placeholders.Substitute(options.EmailBody, false),
-                AutoSend = options.EmailAutoSend,
-                SilentSend = options.EmailSilentSend
+                Subject = _placeholders.Substitute(_options.EmailSubject, false) ?? "",
+                BodyText = _placeholders.Substitute(_options.EmailBody, false),
+                AutoSend = _options.EmailAutoSend,
+                SilentSend = _options.EmailSilentSend
             };
 
-            message.Recipients.AddRange(EmailRecipient.FromText(EmailRecipientType.To, options.EmailTo));
-            message.Recipients.AddRange(EmailRecipient.FromText(EmailRecipientType.Cc, options.EmailCc));
-            message.Recipients.AddRange(EmailRecipient.FromText(EmailRecipientType.Bcc, options.EmailBcc));
+            message.Recipients.AddRange(EmailRecipient.FromText(EmailRecipientType.To, _options.EmailTo));
+            message.Recipients.AddRange(EmailRecipient.FromText(EmailRecipientType.Cc, _options.EmailCc));
+            message.Recipients.AddRange(EmailRecipient.FromText(EmailRecipientType.Bcc, _options.EmailBcc));
 
             var tempFolder = new DirectoryInfo(Path.Combine(Paths.Temp, Path.GetRandomFileName()));
             tempFolder.Create();
             try
             {
-                string targetPath = Path.Combine(tempFolder.FullName, options.EmailFileName);
+                string targetPath = Path.Combine(tempFolder.FullName, _options.EmailFileName);
                 if (IsPdfFile(targetPath))
                 {
-                    if (options.OutputPath != null && IsPdfFile(options.OutputPath))
+                    if (_options.OutputPath != null && IsPdfFile(_options.OutputPath))
                     {
                         // The scan has already been exported to PDF, so use that file
                         OutputVerbose(ConsoleResources.AttachingExportedPDF);
-                        int digits = (int)Math.Floor(Math.Log10(scanList.Count)) + 1;
+                        int digits = (int)Math.Floor(Math.Log10(_scanList.Count)) + 1;
                         int i = 0;
-                        foreach (var path in actualOutputPaths)
+                        foreach (var path in _actualOutputPaths)
                         {
-                            string attachmentName = placeholders.Substitute(options.EmailFileName, false, i++, scanList.Count > 1 ? digits : 0);
+                            string attachmentName = _placeholders.Substitute(_options.EmailFileName, false, i++, _scanList.Count > 1 ? digits : 0);
                             message.Attachments.Add(new EmailAttachment(path, attachmentName));
                         }
                     }
@@ -375,7 +375,7 @@ namespace NAPS2.Automation
                 }
 
                 OutputVerbose(ConsoleResources.SendingEmail);
-                if (await emailProviderFactory.Default.SendEmail(message, (j, k) => { }, CancellationToken.None))
+                if (await _emailProviderFactory.Default.SendEmail(message, (j, k) => { }, CancellationToken.None))
                 {
                     OutputVerbose(ConsoleResources.EmailSent);
                 }
@@ -402,14 +402,14 @@ namespace NAPS2.Automation
         public bool ValidateOptions()
         {
             // Most validation is done by the CommandLineParser library, but some constraints that can't be represented by that API need to be checked here
-            if (options.OutputPath == null && options.EmailFileName == null && options.Install == null && !options.AutoSave)
+            if (_options.OutputPath == null && _options.EmailFileName == null && _options.Install == null && !_options.AutoSave)
             {
-                errorOutput.DisplayError(ConsoleResources.OutputOrEmailRequired);
+                _errorOutput.DisplayError(ConsoleResources.OutputOrEmailRequired);
                 return false;
             }
-            if (options.OutputPath == null && options.EmailFileName == null && options.ImportPath != null)
+            if (_options.OutputPath == null && _options.EmailFileName == null && _options.ImportPath != null)
             {
-                errorOutput.DisplayError(ConsoleResources.OutputOrEmailRequiredForImport);
+                _errorOutput.DisplayError(ConsoleResources.OutputOrEmailRequiredForImport);
                 return false;
             }
             return true;
@@ -417,15 +417,15 @@ namespace NAPS2.Automation
 
         private async Task ExportScannedImages()
         {
-            if (scanList.Count == 0)
+            if (_scanList.Count == 0)
             {
-                errorOutput.DisplayError(ConsoleResources.NoPagesToExport);
+                _errorOutput.DisplayError(ConsoleResources.NoPagesToExport);
                 return;
             }
 
             OutputVerbose(ConsoleResources.Exporting);
 
-            if (IsPdfFile(options.OutputPath))
+            if (IsPdfFile(_options.OutputPath))
             {
                 await ExportToPdf();
             }
@@ -445,23 +445,23 @@ namespace NAPS2.Automation
 
         private async Task ExportToImageFiles()
         {
-            var path = placeholders.Substitute(options.OutputPath);
-            await DoExportToImageFiles(options.OutputPath);
+            var path = _placeholders.Substitute(_options.OutputPath);
+            await DoExportToImageFiles(_options.OutputPath);
             OutputVerbose(ConsoleResources.FinishedSavingImages, Path.GetFullPath(path));
         }
 
         private async Task DoExportToImageFiles(string outputPath)
         {
-            userTransact.Set(c => c.ImageSettings = new ImageSettings());
-            configScopes.Run.Set(c => c.ImageSettings = new ImageSettings
+            _userTransact.Set(c => c.ImageSettings = new ImageSettings());
+            _configScopes.Run.Set(c => c.ImageSettings = new ImageSettings
             {
-                JpegQuality = options.JpegQuality,
-                TiffCompression = Enum.TryParse<TiffCompression>(options.TiffComp, true, out var tc) ? tc : TiffCompression.Auto
+                JpegQuality = _options.JpegQuality,
+                TiffCompression = Enum.TryParse<TiffCompression>(_options.TiffComp, true, out var tc) ? tc : TiffCompression.Auto
             });
 
-            foreach (var scan in scanList)
+            foreach (var scan in _scanList)
             {
-                var op = operationFactory.Create<SaveImagesOperation>();
+                var op = _operationFactory.Create<SaveImagesOperation>();
                 int i = -1;
                 op.StatusChanged += (sender, args) =>
                 {
@@ -471,51 +471,51 @@ namespace NAPS2.Automation
                         i = op.Status.CurrentProgress;
                     }
                 };
-                op.Start(outputPath, placeholders, scan, imageSettingsProvider);
+                op.Start(outputPath, _placeholders, scan, _imageSettingsProvider);
                 await op.Success;
             }
         }
 
         private async Task ExportToPdf()
         {
-            await DoExportToPdf(options.OutputPath, false);
+            await DoExportToPdf(_options.OutputPath, false);
         }
 
         private async Task<bool> DoExportToPdf(string path, bool email)
         {
-            var savedMetadata = userTransact.Get(c => c.PdfSettings.Metadata);
-            var savedEncryptConfig = userTransact.Get(c => c.PdfSettings.Encryption);
+            var savedMetadata = _userTransact.Get(c => c.PdfSettings.Metadata);
+            var savedEncryptConfig = _userTransact.Get(c => c.PdfSettings.Encryption);
 
-            userTransact.Set(c => c.PdfSettings = new PdfSettings());
-            if (options.UseSavedMetadata)
+            _userTransact.Set(c => c.PdfSettings = new PdfSettings());
+            if (_options.UseSavedMetadata)
             {
-                userTransact.Set(c => c.PdfSettings.Metadata = savedMetadata);
+                _userTransact.Set(c => c.PdfSettings.Metadata = savedMetadata);
             }
-            if (options.UseSavedEncryptConfig)
+            if (_options.UseSavedEncryptConfig)
             {
-                userTransact.Set(c => c.PdfSettings.Encryption = savedEncryptConfig);
+                _userTransact.Set(c => c.PdfSettings.Encryption = savedEncryptConfig);
             }
 
-            if (options.EncryptConfig != null)
+            if (_options.EncryptConfig != null)
             {
                 try
                 {
-                    using Stream configFileStream = File.OpenRead(options.EncryptConfig);
+                    using Stream configFileStream = File.OpenRead(_options.EncryptConfig);
                     var serializer = new XmlSerializer(typeof(PdfEncryption));
                     var encryption = (PdfEncryption)serializer.Deserialize(configFileStream);
-                    configScopes.Run.Set(c => c.PdfSettings.Encryption = encryption);
+                    _configScopes.Run.Set(c => c.PdfSettings.Encryption = encryption);
                 }
                 catch (Exception ex)
                 {
                     Log.ErrorException(ConsoleResources.CouldntLoadEncryptionConfig, ex);
-                    errorOutput.DisplayError(ConsoleResources.CouldntLoadEncryptionConfig);
+                    _errorOutput.DisplayError(ConsoleResources.CouldntLoadEncryptionConfig);
                 }
             }
 
             var compat = PdfCompat.Default;
-            if (options.PdfCompat != null)
+            if (_options.PdfCompat != null)
             {
-                var t = options.PdfCompat.Replace(" ", "").Replace("-", "");
+                var t = _options.PdfCompat.Replace(" ", "").Replace("-", "");
                 if (t.EndsWith("a1b", StringComparison.InvariantCultureIgnoreCase))
                 {
                     compat = PdfCompat.PdfA1B;
@@ -533,13 +533,13 @@ namespace NAPS2.Automation
                     compat = PdfCompat.PdfA3U;
                 }
             }
-            configScopes.Run.Set(c => c.PdfSettings.Compat = compat);
+            _configScopes.Run.Set(c => c.PdfSettings.Compat = compat);
 
             int scanIndex = 0;
-            actualOutputPaths = new List<string>();
-            foreach (var fileContents in scanList)
+            _actualOutputPaths = new List<string>();
+            foreach (var fileContents in _scanList)
             {
-                var op = operationFactory.Create<SavePdfOperation>();
+                var op = _operationFactory.Create<SavePdfOperation>();
                 int i = -1;
                 op.StatusChanged += (sender, args) =>
                 {
@@ -549,14 +549,14 @@ namespace NAPS2.Automation
                         i = op.Status.CurrentProgress;
                     }
                 };
-                int digits = (int)Math.Floor(Math.Log10(scanList.Count)) + 1;
-                string actualPath = placeholders.Substitute(path, true, scanIndex++, scanList.Count > 1 ? digits : 0);
-                op.Start(actualPath, placeholders, fileContents, pdfSettingsProvider, new OcrContext(ocrParams, ocrEngineManager, ocrRequestQueue), email, null);
+                int digits = (int)Math.Floor(Math.Log10(_scanList.Count)) + 1;
+                string actualPath = _placeholders.Substitute(path, true, scanIndex++, _scanList.Count > 1 ? digits : 0);
+                op.Start(actualPath, _placeholders, fileContents, _pdfSettingsProvider, new OcrContext(_ocrParams, _ocrEngineManager, _ocrRequestQueue), email, null);
                 if (!await op.Success)
                 {
                     return false;
                 }
-                actualOutputPaths.Add(actualPath);
+                _actualOutputPaths.Add(actualPath);
                 if (!email)
                 {
                     OutputVerbose(ConsoleResources.SuccessfullySavedPdf, actualPath);
@@ -569,38 +569,38 @@ namespace NAPS2.Automation
         {
             OutputVerbose(ConsoleResources.BeginningScan);
 
-            bool autoSaveEnabled = !configProvider.Get(c => c.DisableAutoSave) && profile.EnableAutoSave && profile.AutoSaveSettings != null;
-            if (options.AutoSave && !autoSaveEnabled)
+            bool autoSaveEnabled = !_configProvider.Get(c => c.DisableAutoSave) && profile.EnableAutoSave && profile.AutoSaveSettings != null;
+            if (_options.AutoSave && !autoSaveEnabled)
             {
-                errorOutput.DisplayError(ConsoleResources.AutoSaveNotEnabled);
-                if (options.OutputPath == null && options.EmailFileName == null)
+                _errorOutput.DisplayError(ConsoleResources.AutoSaveNotEnabled);
+                if (_options.OutputPath == null && _options.EmailFileName == null)
                 {
                     return;
                 }
             }
 
-            totalPagesScanned = 0;
-            foreach (int i in Enumerable.Range(1, options.Number))
+            _totalPagesScanned = 0;
+            foreach (int i in Enumerable.Range(1, _options.Number))
             {
-                if (options.Delay > 0)
+                if (_options.Delay > 0)
                 {
-                    OutputVerbose(ConsoleResources.Waiting, options.Delay);
-                    Thread.Sleep(options.Delay);
+                    OutputVerbose(ConsoleResources.Waiting, _options.Delay);
+                    Thread.Sleep(_options.Delay);
                 }
-                OutputVerbose(ConsoleResources.StartingScan, i, options.Number);
-                pagesScanned = 0;
-                scanList.Add(new List<ScannedImage>());
+                OutputVerbose(ConsoleResources.StartingScan, i, _options.Number);
+                _pagesScanned = 0;
+                _scanList.Add(new List<ScannedImage>());
                 var scanParams = new ScanParams
                 {
-                    NoUI = !options.Progress,
-                    NoAutoSave = !options.AutoSave || !autoSaveEnabled,
-                    DetectPatchT = options.SplitPatchT,
-                    DoOcr = ocrParams?.LanguageCode != null,
-                    OcrParams = ocrParams
+                    NoUI = !_options.Progress,
+                    NoAutoSave = !_options.AutoSave || !autoSaveEnabled,
+                    DetectPatchT = _options.SplitPatchT,
+                    DoOcr = _ocrParams?.LanguageCode != null,
+                    OcrParams = _ocrParams
                 };
-                var source = await scanPerformer.PerformScan(profile, scanParams);
+                var source = await _scanPerformer.PerformScan(profile, scanParams);
                 await source.ForEach(ReceiveScannedImage);
-                OutputVerbose(ConsoleResources.PagesScanned, pagesScanned);
+                OutputVerbose(ConsoleResources.PagesScanned, _pagesScanned);
             }
         }
 
@@ -608,21 +608,21 @@ namespace NAPS2.Automation
         {
             try
             {
-                if (options.ProfileName == null)
+                if (_options.ProfileName == null)
                 {
                     // If no profile is specified, use the default (if there is one)
-                    profile = profileManager.Profiles.Single(x => x.IsDefault);
+                    profile = _profileManager.Profiles.Single(x => x.IsDefault);
                 }
                 else
                 {
                     // Use the profile with the specified name (try case-sensitive first, then case-insensitive)
-                    profile = profileManager.Profiles.FirstOrDefault(x => x.DisplayName == options.ProfileName) ??
-                              profileManager.Profiles.First(x => x.DisplayName.ToLower() == options.ProfileName.ToLower());
+                    profile = _profileManager.Profiles.FirstOrDefault(x => x.DisplayName == _options.ProfileName) ??
+                              _profileManager.Profiles.First(x => x.DisplayName.ToLower() == _options.ProfileName.ToLower());
                 }
             }
             catch (InvalidOperationException)
             {
-                errorOutput.DisplayError(ConsoleResources.ProfileUnavailableOrAmbiguous);
+                _errorOutput.DisplayError(ConsoleResources.ProfileUnavailableOrAmbiguous);
                 profile = null;
                 return false;
             }
@@ -631,10 +631,10 @@ namespace NAPS2.Automation
 
         public void ReceiveScannedImage(ScannedImage scannedImage)
         {
-            scanList.Last().Add(scannedImage);
-            pagesScanned++;
-            totalPagesScanned++;
-            OutputVerbose(ConsoleResources.ScannedPage, totalPagesScanned);
+            _scanList.Last().Add(scannedImage);
+            _pagesScanned++;
+            _totalPagesScanned++;
+            OutputVerbose(ConsoleResources.ScannedPage, _totalPagesScanned);
         }
     }
 }

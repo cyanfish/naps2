@@ -10,15 +10,15 @@ namespace NAPS2.Scan
     /// </summary>
     public class LocalizedDescriptionAttribute : DescriptionAttribute
     {
-        private readonly string resourceName;
-        private readonly ResourceManager resourceManager;
+        private readonly string _resourceName;
+        private readonly ResourceManager _resourceManager;
 
         public LocalizedDescriptionAttribute(Type resourceType, string resourceName)
         {
-            this.resourceName = resourceName;
-            resourceManager = new ResourceManager(resourceType);
+            _resourceName = resourceName;
+            _resourceManager = new ResourceManager(resourceType);
         }
 
-        public override string Description => resourceManager.GetString(resourceName);
+        public override string Description => _resourceManager.GetString(_resourceName);
     }
 }

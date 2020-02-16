@@ -13,15 +13,15 @@ namespace NAPS2.WinForms
 {
     public partial class FDownloadProgress : FormBase
     {
-        private readonly List<QueueItem> filesToDownload = new List<QueueItem>();
-        private int filesDownloaded = 0;
-        private int urlIndex = 0;
-        private double currentFileSize = 0.0;
-        private double currentFileProgress = 0.0;
-        private bool hasError;
-        private bool cancel;
+        private readonly List<QueueItem> _filesToDownload = new List<QueueItem>();
+        private int _filesDownloaded = 0;
+        private int _urlIndex = 0;
+        private double _currentFileSize = 0.0;
+        private double _currentFileProgress = 0.0;
+        private bool _hasError;
+        private bool _cancel;
 
-        private readonly WebClient client = new WebClient();
+        private readonly WebClient _client = new WebClient();
 
         static FDownloadProgress()
         {
@@ -39,8 +39,8 @@ namespace NAPS2.WinForms
         {
             InitializeComponent();
 
-            client.DownloadFileCompleted += client_DownloadFileCompleted;
-            client.DownloadProgressChanged += client_DownloadProgressChanged;
+            _client.DownloadFileCompleted += client_DownloadFileCompleted;
+            _client.DownloadProgressChanged += client_DownloadProgressChanged;
         }
 
         protected override void OnLoad(object sender, EventArgs eventArgs)
@@ -59,33 +59,33 @@ namespace NAPS2.WinForms
 
         void client_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
         {
-            currentFileProgress = e.BytesReceived;
-            currentFileSize = e.TotalBytesToReceive;
+            _currentFileProgress = e.BytesReceived;
+            _currentFileSize = e.TotalBytesToReceive;
             DisplayProgress();
         }
 
         void client_DownloadFileCompleted(object sender, AsyncCompletedEventArgs e)
         {
-            var file = filesToDownload[filesDownloaded];
+            var file = _filesToDownload[_filesDownloaded];
             if (e.Error != null)
             {
-                hasError = true;
-                if (!cancel)
+                _hasError = true;
+                if (!_cancel)
                 {
                     Log.ErrorException("Error downloading file: " + file.DownloadInfo.FileName, e.Error);
                 }
             }
             else if (file.DownloadInfo.Sha1 != CalculateSha1((Path.Combine(file.TempFolder, file.DownloadInfo.FileName))))
             {
-                hasError = true;
+                _hasError = true;
                 Log.Error("Error downloading file (invalid checksum): " + file.DownloadInfo.FileName);
             }
             else
             {
-                filesDownloaded++;
+                _filesDownloaded++;
             }
-            currentFileProgress = 0;
-            currentFileSize = 0;
+            _currentFileProgress = 0;
+            _currentFileSize = 0;
             DisplayProgress();
             StartNextDownload();
         }
@@ -101,25 +101,25 @@ namespace NAPS2.WinForms
 
         private void StartNextDownload()
         {
-            if (hasError)
+            if (_hasError)
             {
-                var prev = filesToDownload[filesDownloaded];
+                var prev = _filesToDownload[_filesDownloaded];
                 Directory.Delete(prev.TempFolder, true);
-                if (cancel)
+                if (_cancel)
                 {
                     return;
                 }
                 // Retry if possible
-                urlIndex++;
-                hasError = false;
+                _urlIndex++;
+                _hasError = false;
             }
             else
             {
-                urlIndex = 0;
+                _urlIndex = 0;
             }
-            if (filesDownloaded > 0 && urlIndex == 0)
+            if (_filesDownloaded > 0 && _urlIndex == 0)
             {
-                var prev = filesToDownload[filesDownloaded - 1];
+                var prev = _filesToDownload[_filesDownloaded - 1];
                 var filePath = Path.Combine(prev.TempFolder, prev.DownloadInfo.FileName);
                 try
                 {
@@ -133,42 +133,42 @@ namespace NAPS2.WinForms
                 }
                 Directory.Delete(prev.TempFolder, true);
             }
-            if (filesDownloaded >= filesToDownload.Count)
+            if (_filesDownloaded >= _filesToDownload.Count)
             {
                 Close();
                 return;
             }
-            if (urlIndex >= filesToDownload[filesDownloaded].DownloadInfo.Urls.Count)
+            if (_urlIndex >= _filesToDownload[_filesDownloaded].DownloadInfo.Urls.Count)
             {
                 Close();
                 MessageBox.Show(MiscResources.FilesCouldNotBeDownloaded, MiscResources.DownloadError, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            var next = filesToDownload[filesDownloaded];
+            var next = _filesToDownload[_filesDownloaded];
             next.TempFolder = Path.Combine(Paths.Temp, Path.GetRandomFileName());
             Directory.CreateDirectory(next.TempFolder);
-            client.DownloadFileAsync(new Uri(next.DownloadInfo.Urls[urlIndex]), Path.Combine(next.TempFolder, next.DownloadInfo.FileName));
+            _client.DownloadFileAsync(new Uri(next.DownloadInfo.Urls[_urlIndex]), Path.Combine(next.TempFolder, next.DownloadInfo.FileName));
         }
 
         public void QueueFile(DownloadInfo downloadInfo, Action<string> fileCallback)
         {
-            filesToDownload.Add(new QueueItem { DownloadInfo = downloadInfo, FileCallback = fileCallback });
+            _filesToDownload.Add(new QueueItem { DownloadInfo = downloadInfo, FileCallback = fileCallback });
         }
 
         public void QueueFile(IExternalComponent component)
         {
-            filesToDownload.Add(new QueueItem { DownloadInfo = component.DownloadInfo, FileCallback = component.Install });
+            _filesToDownload.Add(new QueueItem { DownloadInfo = component.DownloadInfo, FileCallback = component.Install });
         }
 
         private void DisplayProgress()
         {
-            labelTop.Text = string.Format(MiscResources.FilesProgressFormat, filesDownloaded, filesToDownload.Count);
-            progressBarTop.Maximum = filesToDownload.Count * 1000;
+            labelTop.Text = string.Format(MiscResources.FilesProgressFormat, _filesDownloaded, _filesToDownload.Count);
+            progressBarTop.Maximum = _filesToDownload.Count * 1000;
             // ReSharper disable once CompareOfFloatsByEqualityOperator
-            progressBarTop.Value = filesDownloaded * 1000 + (currentFileSize == 0 ? 0 : (int)(currentFileProgress / currentFileSize * 1000));
-            labelSub.Text = string.Format(MiscResources.SizeProgress, (currentFileProgress / 1000000.0).ToString("f1"), (currentFileSize / 1000000.0).ToString("f1"));
-            progressBarSub.Maximum = (int)(currentFileSize);
-            progressBarSub.Value = (int)(currentFileProgress);
+            progressBarTop.Value = _filesDownloaded * 1000 + (_currentFileSize == 0 ? 0 : (int)(_currentFileProgress / _currentFileSize * 1000));
+            labelSub.Text = string.Format(MiscResources.SizeProgress, (_currentFileProgress / 1000000.0).ToString("f1"), (_currentFileSize / 1000000.0).ToString("f1"));
+            progressBarSub.Maximum = (int)(_currentFileSize);
+            progressBarSub.Value = (int)(_currentFileProgress);
             Refresh();
         }
 
@@ -179,8 +179,8 @@ namespace NAPS2.WinForms
 
         private void FDownloadProgress_FormClosing(object sender, FormClosingEventArgs e)
         {
-            cancel = true;
-            client.CancelAsync();
+            _cancel = true;
+            _client.CancelAsync();
         }
 
         private class QueueItem

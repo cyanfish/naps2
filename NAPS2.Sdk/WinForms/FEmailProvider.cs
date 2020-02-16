@@ -12,59 +12,59 @@ namespace NAPS2.WinForms
 {
     public partial class FEmailProvider : FormBase
     {
-        private readonly GmailOauthProvider gmailOauthProvider;
-        private readonly OutlookWebOauthProvider outlookWebOauthProvider;
-        private readonly SystemEmailClients systemEmailClients;
+        private readonly GmailOauthProvider _gmailOauthProvider;
+        private readonly OutlookWebOauthProvider _outlookWebOauthProvider;
+        private readonly SystemEmailClients _systemEmailClients;
 
-        private List<EmailProviderWidget> providerWidgets;
-        private string[] systemClientNames;
-        private string defaultSystemClientName;
+        private List<EmailProviderWidget> _providerWidgets;
+        private string[] _systemClientNames;
+        private string _defaultSystemClientName;
 
         public FEmailProvider(GmailOauthProvider gmailOauthProvider, OutlookWebOauthProvider outlookWebOauthProvider, SystemEmailClients systemEmailClients)
         {
-            this.gmailOauthProvider = gmailOauthProvider;
-            this.outlookWebOauthProvider = outlookWebOauthProvider;
-            this.systemEmailClients = systemEmailClients;
+            _gmailOauthProvider = gmailOauthProvider;
+            _outlookWebOauthProvider = outlookWebOauthProvider;
+            _systemEmailClients = systemEmailClients;
 
             InitializeComponent();
         }
 
         private void FEmailProvider_Load(object sender, EventArgs e)
         {
-            providerWidgets = new List<EmailProviderWidget>();
-            systemClientNames = systemEmailClients.GetNames();
-            defaultSystemClientName = systemEmailClients.GetDefaultName();
+            _providerWidgets = new List<EmailProviderWidget>();
+            _systemClientNames = _systemEmailClients.GetNames();
+            _defaultSystemClientName = _systemEmailClients.GetDefaultName();
 
-            foreach (var clientName in systemClientNames.OrderBy(x => x == defaultSystemClientName ? 0 : 1))
+            foreach (var clientName in _systemClientNames.OrderBy(x => x == _defaultSystemClientName ? 0 : 1))
             {
-                providerWidgets.Add(new EmailProviderWidget
+                _providerWidgets.Add(new EmailProviderWidget
                 {
                     ProviderType = EmailProviderType.System,
-                    ProviderIcon = systemEmailClients.GetIcon(clientName) ?? Icons.mail_yellow,
+                    ProviderIcon = _systemEmailClients.GetIcon(clientName) ?? Icons.mail_yellow,
                     ProviderName = clientName,
                     ClickAction = () => ChooseSystem(clientName)
                 });
             }
 
-            if (gmailOauthProvider.HasClientCreds)
+            if (_gmailOauthProvider.HasClientCreds)
             {
-                providerWidgets.Add(new EmailProviderWidget
+                _providerWidgets.Add(new EmailProviderWidget
                 {
                     ProviderType = EmailProviderType.Gmail,
                     ProviderIcon = Icons.gmail,
                     ProviderName = EmailProviderType.Gmail.Description(),
-                    ClickAction = () => ChooseOauth(gmailOauthProvider)
+                    ClickAction = () => ChooseOauth(_gmailOauthProvider)
                 });
             }
 
-            if (outlookWebOauthProvider.HasClientCreds)
+            if (_outlookWebOauthProvider.HasClientCreds)
             {
-                providerWidgets.Add(new EmailProviderWidget
+                _providerWidgets.Add(new EmailProviderWidget
                 {
                     ProviderType = EmailProviderType.OutlookWeb,
                     ProviderIcon = Icons.outlookweb,
                     ProviderName = EmailProviderType.OutlookWeb.Description(),
-                    ClickAction = () => ChooseOauth(outlookWebOauthProvider)
+                    ClickAction = () => ChooseOauth(_outlookWebOauthProvider)
                 });
             }
 
@@ -80,8 +80,8 @@ namespace NAPS2.WinForms
             var defaultWidget = GetDefaultWidget();
             if (defaultWidget != null)
             {
-                providerWidgets.Remove(defaultWidget);
-                providerWidgets.Insert(0, defaultWidget);
+                _providerWidgets.Remove(defaultWidget);
+                _providerWidgets.Insert(0, defaultWidget);
             }
 
             ShowWidgets();
@@ -90,7 +90,7 @@ namespace NAPS2.WinForms
         private void ChooseSystem(string clientName)
         {
             var emailSetup = ConfigProvider.Get(c => c.EmailSetup);
-            emailSetup.SystemProviderName = clientName == defaultSystemClientName ? null : clientName;
+            emailSetup.SystemProviderName = clientName == _defaultSystemClientName ? null : clientName;
             emailSetup.ProviderType = EmailProviderType.System;
             ConfigScopes.User.Set(c => c.EmailSetup = emailSetup);
             DialogResult = DialogResult.OK;
@@ -112,7 +112,7 @@ namespace NAPS2.WinForms
         {
             int heightDiff = Height - panel1.Height;
             panel1.Height = 0;
-            foreach (var widget in providerWidgets)
+            foreach (var widget in _providerWidgets)
             {
                 panel1.Controls.Add(widget);
                 widget.Top = panel1.Height;
@@ -129,7 +129,7 @@ namespace NAPS2.WinForms
         private EmailProviderWidget GetDefaultWidget()
         {
             var emailSetup = ConfigProvider.Get(c => c.EmailSetup);
-            foreach (var widget in providerWidgets)
+            foreach (var widget in _providerWidgets)
             {
                 if (widget.ProviderType == emailSetup.ProviderType)
                 {
@@ -137,7 +137,7 @@ namespace NAPS2.WinForms
                     {
                         // System providers need additional logic since there may be more than one
                         if (widget.ProviderName == emailSetup.SystemProviderName
-                            || string.IsNullOrEmpty(emailSetup.SystemProviderName) && widget.ProviderName == defaultSystemClientName)
+                            || string.IsNullOrEmpty(emailSetup.SystemProviderName) && widget.ProviderName == _defaultSystemClientName)
                         {
                             return widget;
                         }

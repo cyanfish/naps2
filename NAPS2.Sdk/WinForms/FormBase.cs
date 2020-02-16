@@ -12,8 +12,8 @@ namespace NAPS2.WinForms
     // TODO: Remove ConfigScopes.User dependency from reusable forms
     public class FormBase : Form, IInvoker
     {
-        private bool loaded;
-        private FormState formState;
+        private bool _loaded;
+        private FormState _formState;
 
         public FormBase()
         {
@@ -136,32 +136,32 @@ namespace NAPS2.WinForms
             if (RestoreFormState || SaveFormState)
             {
                 var formStates = ConfigProvider.Get(c => c.FormStates);
-                formState = formStates.SingleOrDefault(x => x.Name == Name) ?? new FormState {Name = Name};
+                _formState = formStates.SingleOrDefault(x => x.Name == Name) ?? new FormState {Name = Name};
             }
 
             if (RestoreFormState)
             {
                 DoRestoreFormState();
             }
-            loaded = true;
+            _loaded = true;
         }
 
         protected void DoRestoreFormState()
         {
-            if (!formState.Location.IsEmpty)
+            if (!_formState.Location.IsEmpty)
             {
-                if (Screen.AllScreens.Any(x => x.WorkingArea.Contains(formState.Location)))
+                if (Screen.AllScreens.Any(x => x.WorkingArea.Contains(_formState.Location)))
                 {
                     // Only move to the specified location if it's onscreen
                     // It might be offscreen if the user has disconnected a monitor
-                    Location = formState.Location;
+                    Location = _formState.Location;
                 }
             }
-            if (!formState.Size.IsEmpty)
+            if (!_formState.Size.IsEmpty)
             {
-                Size = formState.Size;
+                Size = _formState.Size;
             }
-            if (formState.Maximized)
+            if (_formState.Maximized)
             {
                 WindowState = FormWindowState.Maximized;
             }
@@ -169,33 +169,33 @@ namespace NAPS2.WinForms
 
         private void OnResize(object sender, EventArgs eventArgs)
         {
-            if (loaded && SaveFormState)
+            if (_loaded && SaveFormState)
             {
-                formState.Maximized = (WindowState == FormWindowState.Maximized);
+                _formState.Maximized = (WindowState == FormWindowState.Maximized);
                 if (WindowState == FormWindowState.Normal)
                 {
-                    formState.Size = Size;
+                    _formState.Size = Size;
                 }
             }
         }
 
         private void OnMove(object sender, EventArgs eventArgs)
         {
-            if (loaded && SaveFormState)
+            if (_loaded && SaveFormState)
             {
                 if (WindowState == FormWindowState.Normal)
                 {
-                    formState.Location = Location;
+                    _formState.Location = Location;
                 }
             }
         }
 
         private void OnClosed(object sender, EventArgs eventArgs)
         {
-            if (SaveFormState && formState != null)
+            if (SaveFormState && _formState != null)
             {
                 var formStates = ConfigProvider.Get(c => c.FormStates);
-                formStates = formStates.RemoveAll(fs => fs.Name == Name).Add(formState);
+                formStates = formStates.RemoveAll(fs => fs.Name == Name).Add(_formState);
                 ConfigScopes.User.Set(c => c.FormStates = formStates);
             }
         }

@@ -8,19 +8,19 @@ namespace NAPS2.Images
     {
         private const int OVERSAMPLE = 3;
         
-        private readonly ImageContext imageContext;
-        private readonly IScannedImageRenderer<IImage> imageRenderer;
+        private readonly ImageContext _imageContext;
+        private readonly IScannedImageRenderer<IImage> _imageRenderer;
 
         public ThumbnailRenderer(ImageContext imageContext)
         {
-            this.imageContext = imageContext;
-            imageRenderer = new ImageRenderer(imageContext);
+            _imageContext = imageContext;
+            _imageRenderer = new ImageRenderer(imageContext);
         }
 
         public ThumbnailRenderer(ImageContext imageContext, IScannedImageRenderer<IImage> imageRenderer)
         {
-            this.imageContext = imageContext;
-            this.imageRenderer = imageRenderer;
+            _imageContext = imageContext;
+            _imageRenderer = imageRenderer;
         }
 
         public async Task<IImage> Render(ScannedImage image, int outputSize)
@@ -31,8 +31,8 @@ namespace NAPS2.Images
 
         public async Task<IImage> Render(ScannedImage.Snapshot snapshot, int outputSize)
         {
-            using var bitmap = await imageRenderer.Render(snapshot, snapshot.Metadata.TransformList.Count == 0 ? 0 : outputSize * OVERSAMPLE);
-            return imageContext.PerformTransform(bitmap, new ThumbnailTransform(outputSize));
+            using var bitmap = await _imageRenderer.Render(snapshot, snapshot.Metadata.TransformList.Count == 0 ? 0 : outputSize * OVERSAMPLE);
+            return _imageContext.PerformTransform(bitmap, new ThumbnailTransform(outputSize));
         }
     }
 }

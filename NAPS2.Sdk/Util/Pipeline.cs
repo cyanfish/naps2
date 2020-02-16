@@ -44,15 +44,15 @@ namespace NAPS2.Util
 
         public class PipelineStep<T>
         {
-            private readonly ISourceBlock<T> sourceBlock;
-            private readonly CancellationToken cancellationToken;
-            private readonly Action startPipeline;
+            private readonly ISourceBlock<T> _sourceBlock;
+            private readonly CancellationToken _cancellationToken;
+            private readonly Action _startPipeline;
 
             internal PipelineStep(ISourceBlock<T> sourceBlock, CancellationToken cancellationToken, Action startPipeline)
             {
-                this.sourceBlock = sourceBlock;
-                this.cancellationToken = cancellationToken;
-                this.startPipeline = startPipeline;
+                _sourceBlock = sourceBlock;
+                _cancellationToken = cancellationToken;
+                _startPipeline = startPipeline;
             }
             
             /// <summary>
@@ -148,7 +148,7 @@ namespace NAPS2.Util
             {
                 return new ExecutionDataflowBlockOptions
                 {
-                    CancellationToken = cancellationToken
+                    CancellationToken = _cancellationToken
                 };
             }
 
@@ -156,7 +156,7 @@ namespace NAPS2.Util
             {
                 return new ExecutionDataflowBlockOptions
                 {
-                    CancellationToken = cancellationToken,
+                    CancellationToken = _cancellationToken,
                     MaxDegreeOfParallelism = Math.Min(Environment.ProcessorCount, maxParallelism)
                 };
             }
@@ -171,14 +171,14 @@ namespace NAPS2.Util
 
             private PipelineStep<T2> Link<T2>(IPropagatorBlock<T, T2> transformBlock)
             {
-                sourceBlock.LinkTo(transformBlock, LinkOptions());
-                return new PipelineStep<T2>(transformBlock, cancellationToken, startPipeline);
+                _sourceBlock.LinkTo(transformBlock, LinkOptions());
+                return new PipelineStep<T2>(transformBlock, _cancellationToken, _startPipeline);
             }
 
             private void LinkAndStart(ActionBlock<T> actionBlock)
             {
-                sourceBlock.LinkTo(actionBlock, LinkOptions());
-                startPipeline();
+                _sourceBlock.LinkTo(actionBlock, LinkOptions());
+                _startPipeline();
             }
 
             private static async Task<bool> WaitForCompletion(ActionBlock<T> actionBlock)

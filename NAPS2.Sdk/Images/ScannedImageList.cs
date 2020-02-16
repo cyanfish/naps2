@@ -9,10 +9,10 @@ namespace NAPS2.Images
 {
     public class ScannedImageList
     {
-        private readonly ImageContext imageContext;
-        private readonly TimedThrottle runUpdateEventsThrottle;
-        private Memento savedState = Memento.Empty;
-        private ListSelection<ScannedImage> selection;
+        private readonly ImageContext _imageContext;
+        private readonly TimedThrottle _runUpdateEventsThrottle;
+        private Memento _savedState = Memento.Empty;
+        private ListSelection<ScannedImage> _selection;
 
         public ScannedImageList(ImageContext imageContext)
             : this(imageContext, new List<ScannedImage>())
@@ -21,10 +21,10 @@ namespace NAPS2.Images
 
         public ScannedImageList(ImageContext imageContext, List<ScannedImage> images)
         {
-            this.imageContext = imageContext;
-            runUpdateEventsThrottle = new TimedThrottle(RunUpdateEvents, TimeSpan.FromMilliseconds(100));
+            _imageContext = imageContext;
+            _runUpdateEventsThrottle = new TimedThrottle(RunUpdateEvents, TimeSpan.FromMilliseconds(100));
             Images = images;
-            selection = ListSelection.Empty<ScannedImage>();
+            _selection = ListSelection.Empty<ScannedImage>();
         }
 
         public ThumbnailRenderer? ThumbnailRenderer { get; set; }
@@ -35,14 +35,14 @@ namespace NAPS2.Images
 
         public Memento SavedState
         {
-            get => savedState;
-            set => savedState = value ?? throw new ArgumentNullException(nameof(value));
+            get => _savedState;
+            set => _savedState = value ?? throw new ArgumentNullException(nameof(value));
         }
 
         public ListSelection<ScannedImage> Selection
         {
-            get => selection;
-            set => selection = value ?? throw new ArgumentNullException(nameof(value));
+            get => _selection;
+            set => _selection = value ?? throw new ArgumentNullException(nameof(value));
         }
 
         public void UpdateSelection(ListSelection<ScannedImage> newSelection)
@@ -56,13 +56,13 @@ namespace NAPS2.Images
         public void Mutate(ListMutation<ScannedImage> mutation, ListSelection<ScannedImage>? selectionToMutate = null)
         {
             MutateInternal(mutation, selectionToMutate);
-            runUpdateEventsThrottle.RunAction(SynchronizationContext.Current);
+            _runUpdateEventsThrottle.RunAction(SynchronizationContext.Current);
         }
 
         public async Task MutateAsync(ListMutation<ScannedImage> mutation, ListSelection<ScannedImage>? selectionToMutate = null)
         {
             await Task.Run(() => MutateInternal(mutation, selectionToMutate));
-            runUpdateEventsThrottle.RunAction(SynchronizationContext.Current);
+            _runUpdateEventsThrottle.RunAction(SynchronizationContext.Current);
         }
 
         private void MutateInternal(ListMutation<ScannedImage> mutation, ListSelection<ScannedImage>? selectionToMutate)
@@ -73,7 +73,7 @@ namespace NAPS2.Images
             }
             else
             {
-                mutation.Apply(Images, ref selection);
+                mutation.Apply(Images, ref _selection);
             }
         }
 
@@ -90,7 +90,7 @@ namespace NAPS2.Images
             {
                 image.Metadata.Index = i++;
             }
-            imageContext.ImageMetadataFactory.CommitAllMetadata();
+            _imageContext.ImageMetadataFactory.CommitAllMetadata();
         }
 
         // TODO: Undo/redo etc. thoughts:

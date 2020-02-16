@@ -11,13 +11,13 @@ namespace NAPS2.Remoting.Network.Internal
 {
     internal class NetworkScanServiceImpl : NetworkScanService.NetworkScanServiceBase
     {
-        private readonly ImageContext imageContext;
-        private readonly IRemoteScanController remoteScanController;
+        private readonly ImageContext _imageContext;
+        private readonly IRemoteScanController _remoteScanController;
         
         public NetworkScanServiceImpl(ImageContext imageContext, IRemoteScanController remoteScanController)
         {
-            this.imageContext = imageContext;
-            this.remoteScanController = remoteScanController;
+            _imageContext = imageContext;
+            _remoteScanController = remoteScanController;
         }
         
         public override Task<GetCapabilitiesResponse> GetCapabilities(GetCapabilitiesRequest request, ServerCallContext context)
@@ -82,11 +82,11 @@ namespace NAPS2.Remoting.Network.Internal
                 
                 var options = request.OptionsXml.FromXml<ScanOptions>();
                 options = ValidateOptions(options);
-                await remoteScanController.Scan(options, context.CancellationToken, scanEvents, (image, _) =>
+                await _remoteScanController.Scan(options, context.CancellationToken, scanEvents, (image, _) =>
                 {
                     sequencedWriter.Write(new ScanResponse
                     {
-                        Image = SerializedImageHelper.Serialize(imageContext, image, new SerializedImageHelper.SerializeOptions
+                        Image = SerializedImageHelper.Serialize(_imageContext, image, new SerializedImageHelper.SerializeOptions
                         {
                             RequireMemoryStorage = true
                         })

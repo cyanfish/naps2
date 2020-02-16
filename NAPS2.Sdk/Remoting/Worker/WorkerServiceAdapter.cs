@@ -16,17 +16,17 @@ namespace NAPS2.Remoting.Worker
 {
     public class WorkerServiceAdapter
     {
-        private readonly WorkerService.WorkerServiceClient client;
+        private readonly WorkerService.WorkerServiceClient _client;
 
         public WorkerServiceAdapter(CallInvoker callInvoker)
         {
-            client = new WorkerService.WorkerServiceClient(callInvoker);
+            _client = new WorkerService.WorkerServiceClient(callInvoker);
         }
 
         public void Init(string recoveryFolderPath)
         {
             var req = new InitRequest { RecoveryFolderPath = recoveryFolderPath ?? "" };
-            var resp = client.Init(req);
+            var resp = _client.Init(req);
             RemotingHelper.HandleErrors(resp.Error);
         }
 
@@ -37,7 +37,7 @@ namespace NAPS2.Remoting.Worker
                 DeviceId = scanDevice,
                 Hwnd = (ulong)hwnd
             };
-            var resp = client.Wia10NativeUi(req);
+            var resp = _client.Wia10NativeUi(req);
             RemotingHelper.HandleErrors(resp.Error);
             return resp.WiaConfigurationXml.FromXml<WiaConfiguration>();
         }
@@ -45,7 +45,7 @@ namespace NAPS2.Remoting.Worker
         public async Task<List<ScanDevice>> GetDeviceList(ScanOptions options)
         {
             var req = new GetDeviceListRequest { OptionsXml = options.ToXml() };
-            var resp = await client.GetDeviceListAsync(req);
+            var resp = await _client.GetDeviceListAsync(req);
             RemotingHelper.HandleErrors(resp.Error);
             return resp.DeviceListXml.FromXml<List<ScanDevice>>();
         }
@@ -56,7 +56,7 @@ namespace NAPS2.Remoting.Worker
             {
                 OptionsXml = options.ToXml()
             };
-            var streamingCall = client.Scan(req, cancellationToken: cancelToken);
+            var streamingCall = _client.Scan(req, cancellationToken: cancelToken);
             while (await streamingCall.ResponseStream.MoveNext())
             {
                 var resp = streamingCall.ResponseStream.Current;
@@ -80,7 +80,7 @@ namespace NAPS2.Remoting.Worker
         public async Task<MapiSendMailReturnCode> SendMapiEmail(EmailMessage message)
         {
             var req = new SendMapiEmailRequest { EmailMessageXml = message.ToXml() };
-            var resp = await client.SendMapiEmailAsync(req);
+            var resp = await _client.SendMapiEmailAsync(req);
             RemotingHelper.HandleErrors(resp.Error);
             return resp.ReturnCodeXml.FromXml<MapiSendMailReturnCode>();
         }
@@ -95,7 +95,7 @@ namespace NAPS2.Remoting.Worker
                 }),
                 Size = size
             };
-            var resp = client.RenderThumbnail(req);
+            var resp = _client.RenderThumbnail(req);
             RemotingHelper.HandleErrors(resp.Error);
             return resp.Thumbnail.ToByteArray();
         }
@@ -107,7 +107,7 @@ namespace NAPS2.Remoting.Worker
                 Path = path,
                 Dpi = dpi
             };
-            var resp = client.RenderPdf(req);
+            var resp = _client.RenderPdf(req);
             RemotingHelper.HandleErrors(resp.Error);
             return resp.Image.ToByteArray();
         }

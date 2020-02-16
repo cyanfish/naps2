@@ -6,8 +6,8 @@ namespace NAPS2.Images.Storage
 {
     public class FileStorageManager : IDisposable
     {
-        private readonly string prefix = Path.GetRandomFileName();
-        private int fileNumber;
+        private readonly string _prefix = Path.GetRandomFileName();
+        private int _fileNumber;
         
         public FileStorageManager() : this(Paths.Temp)
         {
@@ -24,7 +24,7 @@ namespace NAPS2.Images.Storage
         {
             lock (this)
             {
-                string fileName = $"{prefix}.{(++fileNumber).ToString("D5", CultureInfo.InvariantCulture)}";
+                string fileName = $"{_prefix}.{(++_fileNumber).ToString("D5", CultureInfo.InvariantCulture)}";
                 return Path.Combine(FolderPath, fileName);
             }
         }

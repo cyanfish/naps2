@@ -8,12 +8,12 @@ namespace NAPS2.Images
 {
     public class ScannedImage : IDisposable
     {
-        private IImage? thumbnail;
-        private int thumbnailState;
+        private IImage? _thumbnail;
+        private int _thumbnailState;
 
-        private BarcodeDetection barcodeDetection = BarcodeDetection.NotAttempted;
-        private bool disposed;
-        private int snapshotCount;
+        private BarcodeDetection _barcodeDetection = BarcodeDetection.NotAttempted;
+        private bool _disposed;
+        private int _snapshotCount;
 
         public ScannedImage(IStorage backingStorage, IImageMetadata metadata)
         {
@@ -27,27 +27,27 @@ namespace NAPS2.Images
 
         public BarcodeDetection BarcodeDetection
         {
-            get => barcodeDetection;
-            set => barcodeDetection = value ?? throw new ArgumentNullException(nameof(value));
+            get => _barcodeDetection;
+            set => _barcodeDetection = value ?? throw new ArgumentNullException(nameof(value));
         }
 
         public void Dispose()
         {
             lock (this)
             {
-                disposed = true;
+                _disposed = true;
                 // Delete the recovery entry (if recovery is being used)
                 Metadata?.Dispose();
                 
                 // We defer deleting the actual data until all snapshots are disposed
-                if (snapshotCount != 0) return;
+                if (_snapshotCount != 0) return;
 
                 // Delete the image data on disk
                 BackingStorage?.Dispose();
-                if (thumbnail != null)
+                if (_thumbnail != null)
                 {
-                    thumbnail.Dispose();
-                    thumbnail = null;
+                    _thumbnail.Dispose();
+                    _thumbnail = null;
                 }
 
                 FullyDisposed?.Invoke(this, new EventArgs());
@@ -89,7 +89,7 @@ namespace NAPS2.Images
         {
             lock (this)
             {
-                return thumbnail?.Clone();
+                return _thumbnail?.Clone();
             }
         }
 
@@ -97,14 +97,14 @@ namespace NAPS2.Images
         {
             lock (this)
             {
-                thumbnail?.Dispose();
-                thumbnail = image;
-                thumbnailState = state ?? Metadata.TransformState;
+                _thumbnail?.Dispose();
+                _thumbnail = image;
+                _thumbnailState = state ?? Metadata.TransformState;
             }
             ThumbnailChanged?.Invoke(this, new EventArgs());
         }
 
-        public bool IsThumbnailDirty => thumbnailState != Metadata.TransformState;
+        public bool IsThumbnailDirty => _thumbnailState != Metadata.TransformState;
 
         public EventHandler? ThumbnailChanged;
 
@@ -116,21 +116,21 @@ namespace NAPS2.Images
 
         public class Snapshot : IDisposable, IEquatable<Snapshot>
         {
-            private readonly string transformListXml;
-            private bool disposed;
+            private readonly string _transformListXml;
+            private bool _disposed;
 
             internal Snapshot(ScannedImage source)
             {
                 lock (source)
                 {
-                    if (source.disposed)
+                    if (source._disposed)
                     {
                         throw new ObjectDisposedException("source");
                     }
-                    source.snapshotCount++;
+                    source._snapshotCount++;
                     Source = source;
                     Metadata = source.Metadata.Clone();
-                    transformListXml = Metadata.TransformList.ToXml();
+                    _transformListXml = Metadata.TransformList.ToXml();
                 }
             }
 
@@ -140,12 +140,12 @@ namespace NAPS2.Images
 
             public void Dispose()
             {
-                if (disposed) return;
+                if (_disposed) return;
                 lock (Source)
                 {
-                    disposed = true;
-                    Source.snapshotCount--;
-                    if (Source.disposed && Source.snapshotCount == 0)
+                    _disposed = true;
+                    Source._snapshotCount--;
+                    if (Source._disposed && Source._snapshotCount == 0)
                     {
                         Source.Dispose();
                     }
@@ -159,7 +159,7 @@ namespace NAPS2.Images
                 return Equals(Source, other.Source)
                        && Equals(Metadata.Lossless, other.Metadata.Lossless)
                        && Equals(Metadata.BitDepth, other.Metadata.BitDepth)
-                       && Equals(transformListXml, other.transformListXml);
+                       && Equals(_transformListXml, other._transformListXml);
             }
 
             public override bool Equals(object obj)
@@ -177,7 +177,7 @@ namespace NAPS2.Images
                     var hashCode = Source.GetHashCode();
                     hashCode = (hashCode * 397) ^ Metadata.Lossless.GetHashCode();
                     hashCode = (hashCode * 397) ^ Metadata.BitDepth.GetHashCode();
-                    hashCode = (hashCode * 397) ^ transformListXml.GetHashCode();
+                    hashCode = (hashCode * 397) ^ _transformListXml.GetHashCode();
                     return hashCode;
                 }
             }

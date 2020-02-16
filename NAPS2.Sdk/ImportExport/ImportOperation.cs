@@ -11,11 +11,11 @@ namespace NAPS2.ImportExport
 {
     public class ImportOperation : OperationBase
     {
-        private readonly IScannedImageImporter scannedImageImporter;
+        private readonly IScannedImageImporter _scannedImageImporter;
 
         public ImportOperation(IScannedImageImporter scannedImageImporter)
         {
-            this.scannedImageImporter = scannedImageImporter;
+            _scannedImageImporter = scannedImageImporter;
 
             ProgressTitle = MiscResources.ImportProgress;
             AllowCancel = true;
@@ -40,7 +40,7 @@ namespace NAPS2.ImportExport
                         {
                             Status.StatusText = string.Format(MiscResources.ImportingFormat, Path.GetFileName(fileName));
                             InvokeStatusChanged();
-                            var imageSrc = scannedImageImporter.Import(fileName, importParams, oneFile ? OnProgress : new ProgressHandler((j, k) => { }), CancelToken);
+                            var imageSrc = _scannedImageImporter.Import(fileName, importParams, oneFile ? OnProgress : new ProgressHandler((j, k) => { }), CancelToken);
                             await imageSrc.ForEach(imageCallback);
                         }
                         catch (Exception ex)

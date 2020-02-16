@@ -11,19 +11,19 @@ namespace NAPS2.WinForms
 {
     public partial class FOcrSetup : FormBase
     {
-        private readonly OcrEngineManager ocrEngineManager;
-        private readonly List<OcrMode> availableModes;
+        private readonly OcrEngineManager _ocrEngineManager;
+        private readonly List<OcrMode> _availableModes;
 
         public FOcrSetup(OcrEngineManager ocrEngineManager)
         {
-            this.ocrEngineManager = ocrEngineManager;
+            _ocrEngineManager = ocrEngineManager;
             InitializeComponent();
 
             comboOcrMode.Format += (sender, e) => e.Value = ((Enum)e.ListItem).Description();
-            availableModes = ocrEngineManager.ActiveEngine?.SupportedModes?.ToList();
-            if (availableModes != null)
+            _availableModes = ocrEngineManager.ActiveEngine?.SupportedModes?.ToList();
+            if (_availableModes != null)
             {
-                foreach (var mode in availableModes)
+                foreach (var mode in _availableModes)
                 {
                     comboOcrMode.Items.Add(mode);
                 }
@@ -44,8 +44,8 @@ namespace NAPS2.WinForms
             comboLanguages.ValueMember = "Code";
 
             ConditionalControls.UnlockHeight(this);
-            ConditionalControls.SetVisible(comboOcrMode, availableModes != null, 8);
-            labelOcrMode.Visible = availableModes != null;
+            ConditionalControls.SetVisible(comboOcrMode, _availableModes != null, 8);
+            labelOcrMode.Visible = _availableModes != null;
             ConditionalControls.LockHeight(this);
 
             checkBoxEnableOcr.Checked = ConfigProvider.Get(c => c.EnableOcr);
@@ -78,12 +78,12 @@ namespace NAPS2.WinForms
 
         private void LoadLanguages()
         {
-            var languages = ocrEngineManager.ActiveEngine?.InstalledLanguages
+            var languages = _ocrEngineManager.ActiveEngine?.InstalledLanguages
                 .OrderBy(x => x.Name)
                 .ToList();
             comboLanguages.DataSource = languages;
 
-            linkGetLanguages.Visible = ocrEngineManager.EngineToInstall != null;
+            linkGetLanguages.Visible = _ocrEngineManager.EngineToInstall != null;
         }
 
         private void UpdateView()
@@ -127,7 +127,7 @@ namespace NAPS2.WinForms
                 {
                     EnableOcr = checkBoxEnableOcr.Checked,
                     OcrLanguageCode = (string)comboLanguages.SelectedValue,
-                    OcrMode = availableModes != null ? (OcrMode)comboOcrMode.SelectedItem : OcrMode.Default,
+                    OcrMode = _availableModes != null ? (OcrMode)comboOcrMode.SelectedItem : OcrMode.Default,
                     OcrAfterScanning = checkBoxRunInBG.Checked
                 });
             }

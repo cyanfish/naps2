@@ -19,11 +19,11 @@ namespace NAPS2.ImportExport.Pdf
             return nativeLib;
         });
 
-        private readonly ImageContext imageContext;
+        private readonly ImageContext _imageContext;
 
         public PdfiumPdfRenderer(ImageContext imageContext)
         {
-            this.imageContext = imageContext;
+            _imageContext = imageContext;
         }
 
         public IEnumerable<IImage> Render(string path, float dpi)
@@ -52,7 +52,7 @@ namespace NAPS2.ImportExport.Pdf
                             int widthInPx = (int) Math.Round(widthInInches * dpi);
                             int heightInPx = (int) Math.Round(heightInInches * dpi);
 
-                            var bitmap = imageContext.ImageFactory.FromDimensions(widthInPx, heightInPx, StoragePixelFormat.RGB24);
+                            var bitmap = _imageContext.ImageFactory.FromDimensions(widthInPx, heightInPx, StoragePixelFormat.RGB24);
                             bitmap.SetResolution(dpi, dpi);
                             var bitmapData = bitmap.Lock(LockMode.ReadWrite, out var scan0, out var stride);
                             try

@@ -226,16 +226,16 @@ namespace NAPS2.Sdk.Tests.Serialization
 
         private class XmlSerializerControl<T> : ISerializer<T>
         {
-            private readonly System.Xml.Serialization.XmlSerializer serializer;
+            private readonly System.Xml.Serialization.XmlSerializer _serializer;
 
             public XmlSerializerControl(Type[] knownTypes)
             {
-                serializer = new System.Xml.Serialization.XmlSerializer(typeof(T), knownTypes);
+                _serializer = new System.Xml.Serialization.XmlSerializer(typeof(T), knownTypes);
             }
 
-            public void Serialize(Stream stream, T obj) => serializer.Serialize(stream, obj);
+            public void Serialize(Stream stream, T obj) => _serializer.Serialize(stream, obj);
 
-            public T Deserialize(Stream stream) => (T) serializer.Deserialize(stream);
+            public T Deserialize(Stream stream) => (T) _serializer.Deserialize(stream);
         }
 
         // TODO: Custom serialization

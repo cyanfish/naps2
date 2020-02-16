@@ -10,16 +10,16 @@ namespace NAPS2.Util
     /// </summary>
     public class CultureInitializer
     {
-        private readonly ConfigProvider<CommonConfig> configProvider;
+        private readonly ConfigProvider<CommonConfig> _configProvider;
 
         public CultureInitializer(ConfigProvider<CommonConfig> configProvider)
         {
-            this.configProvider = configProvider;
+            _configProvider = configProvider;
         }
 
         public void InitCulture()
         {
-            var cultureId = configProvider.Get(c => c.Culture);
+            var cultureId = _configProvider.Get(c => c.Culture);
             if (!string.IsNullOrWhiteSpace(cultureId))
             {
                 try

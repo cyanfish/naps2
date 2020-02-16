@@ -7,11 +7,11 @@ namespace NAPS2.WinForms
 {
     public class TiffViewer : UserControl
     {
-        private readonly Container components = null;
+        private readonly Container _components = null;
 
-        private Image image;
-        private PictureBox pbox;
-        private double xzoom;
+        private Image _image;
+        private PictureBox _pbox;
+        private double _xzoom;
 
         public TiffViewer()
         {
@@ -24,64 +24,64 @@ namespace NAPS2.WinForms
             {
                 if (value != null)
                 {
-                    image = value;
+                    _image = value;
                     Zoom = 100;
                 }
                 else
                 {
                     ClearImage();
-                    image = null;
+                    _image = null;
                 }
             }
         }
 
-        public int ImageWidth => image?.Width ?? 0;
+        public int ImageWidth => _image?.Width ?? 0;
 
-        public int ImageHeight => image?.Height ?? 0;
+        public int ImageHeight => _image?.Height ?? 0;
 
         public double Zoom
         {
             set
             {
-                if (image != null)
+                if (_image != null)
                 {
-                    double maxZoom = Math.Sqrt(1e8 / (image.Width * (double) image.Height)) * 100;
-                    xzoom = Math.Max(Math.Min(value, maxZoom), 10);
-                    double displayWidth = image.Width * (xzoom / 100);
-                    double displayHeight = image.Height * (xzoom / 100);
-                    if (image.HorizontalResolution > 0 && image.VerticalResolution > 0)
+                    double maxZoom = Math.Sqrt(1e8 / (_image.Width * (double) _image.Height)) * 100;
+                    _xzoom = Math.Max(Math.Min(value, maxZoom), 10);
+                    double displayWidth = _image.Width * (_xzoom / 100);
+                    double displayHeight = _image.Height * (_xzoom / 100);
+                    if (_image.HorizontalResolution > 0 && _image.VerticalResolution > 0)
                     {
-                        displayHeight *= image.HorizontalResolution / (double)image.VerticalResolution;
+                        displayHeight *= _image.HorizontalResolution / (double)_image.VerticalResolution;
                     }
-                    pbox.Image = image;
-                    pbox.BorderStyle = BorderStyle.FixedSingle;
-                    pbox.Width = (int)displayWidth;
-                    pbox.Height = (int)displayHeight;
+                    _pbox.Image = _image;
+                    _pbox.BorderStyle = BorderStyle.FixedSingle;
+                    _pbox.Width = (int)displayWidth;
+                    _pbox.Height = (int)displayHeight;
                     if (ZoomChanged != null)
                     {
-                        pbox.Cursor = HorizontalScroll.Visible || VerticalScroll.Visible ? Cursors.Hand : Cursors.Default;
+                        _pbox.Cursor = HorizontalScroll.Visible || VerticalScroll.Visible ? Cursors.Hand : Cursors.Default;
                         ZoomChanged.Invoke(this, new EventArgs());
                     }
                 }
             }
-            get => xzoom;
+            get => _xzoom;
         }
 
         public event EventHandler<EventArgs> ZoomChanged;
 
         private void ClearImage()
         {
-            pbox.Image = Icons.hourglass_grey;
-            pbox.BorderStyle = BorderStyle.None;
-            pbox.Width = 32;
-            pbox.Height = 32;
+            _pbox.Image = Icons.hourglass_grey;
+            _pbox.BorderStyle = BorderStyle.None;
+            _pbox.Width = 32;
+            _pbox.Height = 32;
         }
 
         protected override void Dispose(bool disposing)
         {
             if (disposing)
             {
-                components?.Dispose();
+                _components?.Dispose();
             }
             base.Dispose(disposing);
         }
@@ -123,18 +123,18 @@ namespace NAPS2.WinForms
             Zoom = Math.Round(Zoom * Math.Pow(1.2, steps));
         }
 
-        private Point mousePos;
+        private Point _mousePos;
 
         private void pbox_MouseDown(object sender, MouseEventArgs e)
         {
-            mousePos = e.Location;
+            _mousePos = e.Location;
         }
 
         private void pbox_MouseMove(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
             {
-                AutoScrollPosition = new Point(-AutoScrollPosition.X + mousePos.X - e.X, -AutoScrollPosition.Y + mousePos.Y - e.Y);
+                AutoScrollPosition = new Point(-AutoScrollPosition.X + _mousePos.X - e.X, -AutoScrollPosition.Y + _mousePos.Y - e.Y);
             }
         }
 
@@ -146,27 +146,27 @@ namespace NAPS2.WinForms
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TiffViewer));
-            this.pbox = new System.Windows.Forms.PictureBox();
-            ((System.ComponentModel.ISupportInitialize)(this.pbox)).BeginInit();
+            this._pbox = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this._pbox)).BeginInit();
             this.SuspendLayout();
             // 
             // pbox
             // 
-            resources.ApplyResources(this.pbox, "pbox");
-            this.pbox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pbox.Name = "pbox";
-            this.pbox.TabStop = false;
-            this.pbox.SizeMode = PictureBoxSizeMode.Zoom;
-            this.pbox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pbox_MouseDown);
-            this.pbox.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pbox_MouseMove);
+            resources.ApplyResources(this._pbox, "_pbox");
+            this._pbox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this._pbox.Name = "_pbox";
+            this._pbox.TabStop = false;
+            this._pbox.SizeMode = PictureBoxSizeMode.Zoom;
+            this._pbox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pbox_MouseDown);
+            this._pbox.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pbox_MouseMove);
             // 
             // TiffViewer
             // 
             resources.ApplyResources(this, "$this");
             this.BackColor = System.Drawing.Color.LightGray;
-            this.Controls.Add(this.pbox);
+            this.Controls.Add(this._pbox);
             this.Name = "TiffViewer";
-            ((System.ComponentModel.ISupportInitialize)(this.pbox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this._pbox)).EndInit();
             this.ResumeLayout(false);
 
         }

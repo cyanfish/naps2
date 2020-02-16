@@ -14,19 +14,19 @@ namespace NAPS2.WinForms
 {
     public class ImageClipboard
     {
-        private readonly ImageContext imageContext;
-        private readonly BitmapRenderer bitmapRenderer;
+        private readonly ImageContext _imageContext;
+        private readonly BitmapRenderer _bitmapRenderer;
 
         public ImageClipboard()
         {
-            imageContext = ImageContext.Default;
-            bitmapRenderer = new BitmapRenderer(ImageContext.Default);
+            _imageContext = ImageContext.Default;
+            _bitmapRenderer = new BitmapRenderer(ImageContext.Default);
         }
 
         public ImageClipboard(ImageContext imageContext, BitmapRenderer bitmapRenderer)
         {
-            this.imageContext = imageContext;
-            this.bitmapRenderer = bitmapRenderer;
+            _imageContext = imageContext;
+            _bitmapRenderer = bitmapRenderer;
         }
 
 
@@ -45,7 +45,7 @@ namespace NAPS2.WinForms
             // Slow path for more full-featured copying
             if (includeBitmap)
             {
-                using (var firstBitmap = await bitmapRenderer.Render(imageList[0]))
+                using (var firstBitmap = await _bitmapRenderer.Render(imageList[0]))
                 {
                     ido.SetData(DataFormats.Bitmap, true, new Bitmap(firstBitmap));
                     ido.SetData(DataFormats.Rtf, true, await RtfEncodeImages(firstBitmap, imageList));
@@ -57,7 +57,7 @@ namespace NAPS2.WinForms
         public IDataObject GetDataObject(IEnumerable<ScannedImage> imageList)
         {
             IDataObject ido = new DataObject();
-            ido.SetData(typeof(DirectImageTransfer), new DirectImageTransfer(imageContext, imageList));
+            ido.SetData(typeof(DirectImageTransfer), new DirectImageTransfer(_imageContext, imageList));
             return ido;
         }
 
@@ -91,7 +91,7 @@ namespace NAPS2.WinForms
             }
             foreach (var img in images.Skip(1))
             {
-                using var bitmap = await bitmapRenderer.Render(img);
+                using var bitmap = await _bitmapRenderer.Render(img);
                 // TODO: Is this the right format?
                 if (!AppendRtfEncodedImage(bitmap, bitmap.RawFormat, sb, true))
                 {

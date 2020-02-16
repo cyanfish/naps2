@@ -11,8 +11,8 @@ namespace NAPS2.Scan.Internal
 {
     internal class RemoteScanController : IRemoteScanController
     {
-        private readonly IScanDriverFactory scanDriverFactory;
-        private readonly IRemotePostProcessor remotePostProcessor;
+        private readonly IScanDriverFactory _scanDriverFactory;
+        private readonly IRemotePostProcessor _remotePostProcessor;
 
         public RemoteScanController()
           : this(new ScanDriverFactory(ImageContext.Default), new RemotePostProcessor())
@@ -26,13 +26,13 @@ namespace NAPS2.Scan.Internal
 
         public RemoteScanController(IScanDriverFactory scanDriverFactory, IRemotePostProcessor remotePostProcessor)
         {
-            this.scanDriverFactory = scanDriverFactory;
-            this.remotePostProcessor = remotePostProcessor;
+            _scanDriverFactory = scanDriverFactory;
+            _remotePostProcessor = remotePostProcessor;
         }
 
         public async Task<List<ScanDevice>> GetDeviceList(ScanOptions options)
         {
-            var deviceList = await scanDriverFactory.Create(options).GetDeviceList(options);
+            var deviceList = await _scanDriverFactory.Create(options).GetDeviceList(options);
             if (options.Driver == Driver.Twain && !options.TwainOptions.IncludeWiaDevices)
             {
                 deviceList = deviceList.Where(x => !x.ID.StartsWith("WIA-", StringComparison.InvariantCulture)).ToList();
@@ -42,7 +42,7 @@ namespace NAPS2.Scan.Internal
 
         public async Task Scan(ScanOptions options, CancellationToken cancelToken, IScanEvents scanEvents, Action<ScannedImage, PostProcessingContext> callback)
         {
-            var driver = scanDriverFactory.Create(options);
+            var driver = _scanDriverFactory.Create(options);
             var progressThrottle = new EventThrottle<double>(scanEvents.PageProgress);
             var driverScanEvents = new ScanEvents(scanEvents.PageStart, progressThrottle.OnlyIfChanged);
             int pageNumber = 0;
@@ -52,7 +52,7 @@ namespace NAPS2.Scan.Internal
                 {
                     PageNumber = ++pageNumber
                 };
-                var scannedImage = remotePostProcessor.PostProcess(image, options, postProcessingContext);
+                var scannedImage = _remotePostProcessor.PostProcess(image, options, postProcessingContext);
                 callback(scannedImage, postProcessingContext);
             });
         }

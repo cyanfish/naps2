@@ -7,11 +7,11 @@ namespace NAPS2.Automation
 {
     public class ConsoleOperationProgress : OperationProgress
     {
-        private readonly IFormFactory formFactory;
+        private readonly IFormFactory _formFactory;
 
         public ConsoleOperationProgress(IFormFactory formFactory)
         {
-            this.formFactory = formFactory;
+            _formFactory = formFactory;
         }
 
         public override void Attach(IOperation op)
@@ -27,7 +27,7 @@ namespace NAPS2.Automation
         {
             if (!op.IsFinished)
             {
-                var form = formFactory.Create<FProgress>();
+                var form = _formFactory.Create<FProgress>();
                 form.Operation = op;
                 form.ShowDialog();
             }

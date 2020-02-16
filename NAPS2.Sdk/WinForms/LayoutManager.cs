@@ -38,7 +38,7 @@ namespace NAPS2.WinForms
         /// <summary>
         /// A list of controls and their bindings at the time of activation, in a topological order
         /// </summary>
-        private readonly List<KeyValuePair<Control, HashSet<Binding>>> activatedControlBindings = new List<KeyValuePair<Control, HashSet<Binding>>>();
+        private readonly List<KeyValuePair<Control, HashSet<Binding>>> _activatedControlBindings = new List<KeyValuePair<Control, HashSet<Binding>>>();
 
         /// <summary>
         /// Initializes an instance of the LayoutManager class that will layout the controls of the given form.
@@ -126,7 +126,7 @@ namespace NAPS2.WinForms
                 }
 
                 // Topological sorting (see http://en.wikipedia.org/wiki/Topological_sorting)
-                activatedControlBindings.Clear();
+                _activatedControlBindings.Clear();
                 var controlsWithoutDependencies = new HashSet<Control>(controls.Where(x => dependencies[x].Count == 0));
                 while (controlsWithoutDependencies.Count > 0)
                 {
@@ -134,7 +134,7 @@ namespace NAPS2.WinForms
                     controlsWithoutDependencies.Remove(control);
                     if (controlBindings.ContainsKey(control))
                     {
-                        activatedControlBindings.Add(new KeyValuePair<Control, HashSet<Binding>>(control, controlBindings[control]));
+                        _activatedControlBindings.Add(new KeyValuePair<Control, HashSet<Binding>>(control, controlBindings[control]));
                     }
                     while (dependers[control].Count > 0)
                     {
@@ -182,7 +182,7 @@ namespace NAPS2.WinForms
             {
                 throw new InvalidOperationException("The LayoutManager can't update the layout without being activated first.");
             }
-            foreach (var pair in activatedControlBindings)
+            foreach (var pair in _activatedControlBindings)
             {
                 var control = pair.Key;
                 var bindings = pair.Value;
@@ -276,14 +276,14 @@ namespace NAPS2.WinForms
 
         public class Binding
         {
-            private readonly Func<int> compiledValueFunc;
+            private readonly Func<int> _compiledValueFunc;
 
             public Binding(Control control, BindingType bindingType, Expression<Func<int>> valueFunc)
             {
                 Control = control;
                 BindingType = bindingType;
                 ValueFunc = valueFunc;
-                compiledValueFunc = valueFunc.Compile();
+                _compiledValueFunc = valueFunc.Compile();
             }
 
             public Control Control { get; }
@@ -340,7 +340,7 @@ namespace NAPS2.WinForms
                 }
             }
 
-            internal int DependentValue => compiledValueFunc();
+            internal int DependentValue => _compiledValueFunc();
         }
 
         public enum BindingType
@@ -355,13 +355,13 @@ namespace NAPS2.WinForms
 
         public class BindingSyntax
         {
-            private readonly LayoutManager layoutManager;
-            private readonly Control[] controls;
+            private readonly LayoutManager _layoutManager;
+            private readonly Control[] _controls;
 
             public BindingSyntax(LayoutManager layoutManager, Control[] controls)
             {
-                this.layoutManager = layoutManager;
-                this.controls = controls;
+                _layoutManager = layoutManager;
+                _controls = controls;
             }
 
             /// <summary>
@@ -371,7 +371,7 @@ namespace NAPS2.WinForms
             /// <returns>An object that provides an interface to describe bindings.</returns>
             public BindingSyntax Bind(params Control[] controls)
             {
-                return new BindingSyntax(layoutManager, controls);
+                return new BindingSyntax(_layoutManager, controls);
             }
 
             /// <summary>
@@ -382,8 +382,8 @@ namespace NAPS2.WinForms
             /// </summary>
             public LayoutManager Activate()
             {
-                layoutManager.Activate();
-                return layoutManager;
+                _layoutManager.Activate();
+                return _layoutManager;
             }
 
             /// <summary>
@@ -393,9 +393,9 @@ namespace NAPS2.WinForms
             /// <returns>An object that provides an interface to describe bindings.</returns>
             public BindingSyntax WidthTo(Expression<Func<int>> func)
             {
-                foreach (var control in controls)
+                foreach (var control in _controls)
                 {
-                    layoutManager.Bindings.Add(new Binding(control, BindingType.Width, func));
+                    _layoutManager.Bindings.Add(new Binding(control, BindingType.Width, func));
                 }
                 return this;
             }
@@ -407,9 +407,9 @@ namespace NAPS2.WinForms
             /// <returns>An object that provides an interface to describe bindings.</returns>
             public BindingSyntax HeightTo(Expression<Func<int>> func)
             {
-                foreach (var control in controls)
+                foreach (var control in _controls)
                 {
-                    layoutManager.Bindings.Add(new Binding(control, BindingType.Height, func));
+                    _layoutManager.Bindings.Add(new Binding(control, BindingType.Height, func));
                 }
                 return this;
             }
@@ -421,9 +421,9 @@ namespace NAPS2.WinForms
             /// <returns>An object that provides an interface to describe bindings.</returns>
             public BindingSyntax LeftTo(Expression<Func<int>> func)
             {
-                foreach (var control in controls)
+                foreach (var control in _controls)
                 {
-                    layoutManager.Bindings.Add(new Binding(control, BindingType.Left, func));
+                    _layoutManager.Bindings.Add(new Binding(control, BindingType.Left, func));
                 }
                 return this;
             }
@@ -435,9 +435,9 @@ namespace NAPS2.WinForms
             /// <returns>An object that provides an interface to describe bindings.</returns>
             public BindingSyntax RightTo(Expression<Func<int>> func)
             {
-                foreach (var control in controls)
+                foreach (var control in _controls)
                 {
-                    layoutManager.Bindings.Add(new Binding(control, BindingType.Right, func));
+                    _layoutManager.Bindings.Add(new Binding(control, BindingType.Right, func));
                 }
                 return this;
             }
@@ -449,9 +449,9 @@ namespace NAPS2.WinForms
             /// <returns>An object that provides an interface to describe bindings.</returns>
             public BindingSyntax TopTo(Expression<Func<int>> func)
             {
-                foreach (var control in controls)
+                foreach (var control in _controls)
                 {
-                    layoutManager.Bindings.Add(new Binding(control, BindingType.Top, func));
+                    _layoutManager.Bindings.Add(new Binding(control, BindingType.Top, func));
                 }
                 return this;
             }
@@ -463,9 +463,9 @@ namespace NAPS2.WinForms
             /// <returns>An object that provides an interface to describe bindings.</returns>
             public BindingSyntax BottomTo(Expression<Func<int>> func)
             {
-                foreach (var control in controls)
+                foreach (var control in _controls)
                 {
-                    layoutManager.Bindings.Add(new Binding(control, BindingType.Bottom, func));
+                    _layoutManager.Bindings.Add(new Binding(control, BindingType.Bottom, func));
                 }
                 return this;
             }
@@ -476,7 +476,7 @@ namespace NAPS2.WinForms
             /// <returns>An object that provides an interface to describe bindings.</returns>
             public BindingSyntax WidthToForm()
             {
-                return WidthTo(() => layoutManager.Form.Width);
+                return WidthTo(() => _layoutManager.Form.Width);
             }
 
             /// <summary>
@@ -485,7 +485,7 @@ namespace NAPS2.WinForms
             /// <returns>An object that provides an interface to describe bindings.</returns>
             public BindingSyntax HeightToForm()
             {
-                return HeightTo(() => layoutManager.Form.Height);
+                return HeightTo(() => _layoutManager.Form.Height);
             }
 
             /// <summary>
@@ -503,7 +503,7 @@ namespace NAPS2.WinForms
             /// <returns>An object that provides an interface to describe bindings.</returns>
             public BindingSyntax RightToForm()
             {
-                return RightTo(() => layoutManager.Form.Width);
+                return RightTo(() => _layoutManager.Form.Width);
             }
 
             /// <summary>
@@ -521,7 +521,7 @@ namespace NAPS2.WinForms
             /// <returns>An object that provides an interface to describe bindings.</returns>
             public BindingSyntax BottomToForm()
             {
-                return BottomTo(() => layoutManager.Form.Height);
+                return BottomTo(() => _layoutManager.Form.Height);
             }
         }
     }

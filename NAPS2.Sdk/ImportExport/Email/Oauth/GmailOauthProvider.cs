@@ -10,34 +10,34 @@ namespace NAPS2.ImportExport.Email.Oauth
     // TODO: The config references should be pulled elsewhere so this can be included in the SDK
     public class GmailOauthProvider : OauthProvider
     {
-        private readonly ConfigScopes configScopes;
-        private readonly ConfigProvider<CommonConfig> configProvider;
+        private readonly ConfigScopes _configScopes;
+        private readonly ConfigProvider<CommonConfig> _configProvider;
 
-        private OauthClientCreds? creds;
+        private OauthClientCreds? _creds;
 
         public GmailOauthProvider(ConfigScopes configScopes, ConfigProvider<CommonConfig> configProvider)
         {
-            this.configScopes = configScopes;
-            this.configProvider = configProvider;
+            _configScopes = configScopes;
+            _configProvider = configProvider;
         }
 
         #region Authorization
 
-        public override OauthToken? Token => configProvider.Get(c => c.EmailSetup.GmailToken);
+        public override OauthToken? Token => _configProvider.Get(c => c.EmailSetup.GmailToken);
 
-        public override string? User => configProvider.Get(c => c.EmailSetup.GmailUser);
+        public override string? User => _configProvider.Get(c => c.EmailSetup.GmailUser);
 
         protected override OauthClientCreds ClientCreds
         {
             get
             {
-                if (creds == null)
+                if (_creds == null)
                 {
                     var credObj = JObject.Parse(Encoding.UTF8.GetString(NAPS2.ClientCreds.google_credentials));
                     var installed = credObj.Value<JObject>("installed");
-                    creds = new OauthClientCreds(installed?.Value<string>("client_id"), installed?.Value<string>("client_secret"));
+                    _creds = new OauthClientCreds(installed?.Value<string>("client_id"), installed?.Value<string>("client_secret"));
                 }
-                return creds;
+                return _creds;
             }
         }
 
@@ -49,14 +49,14 @@ namespace NAPS2.ImportExport.Email.Oauth
 
         protected override void SaveToken(OauthToken token, bool refresh)
         {
-            var emailSetup = configProvider.Get(c => c.EmailSetup);
+            var emailSetup = _configProvider.Get(c => c.EmailSetup);
             emailSetup.GmailToken = token;
             if (!refresh)
             {
                 emailSetup.GmailUser = GetEmailAddress();
                 emailSetup.ProviderType = EmailProviderType.Gmail;
             }
-            configScopes.User.Set(c => c.EmailSetup = emailSetup);
+            _configScopes.User.Set(c => c.EmailSetup = emailSetup);
         }
 
         #endregion

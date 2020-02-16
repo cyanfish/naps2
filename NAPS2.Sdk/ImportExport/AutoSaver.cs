@@ -20,33 +20,33 @@ namespace NAPS2.ImportExport
 {
     public class AutoSaver
     {
-        private readonly ConfigProvider<PdfSettings> pdfSettingsProvider;
-        private readonly ConfigProvider<ImageSettings> imageSettingsProvider;
-        private readonly OcrEngineManager ocrEngineManager;
-        private readonly OcrRequestQueue ocrRequestQueue;
-        private readonly ErrorOutput errorOutput;
-        private readonly DialogHelper dialogHelper;
-        private readonly OperationProgress operationProgress;
-        private readonly ISaveNotify? notify;
-        private readonly PdfExporter pdfExporter;
-        private readonly OverwritePrompt overwritePrompt;
-        private readonly BitmapRenderer bitmapRenderer;
-        private readonly ConfigProvider<CommonConfig> configProvider;
+        private readonly ConfigProvider<PdfSettings> _pdfSettingsProvider;
+        private readonly ConfigProvider<ImageSettings> _imageSettingsProvider;
+        private readonly OcrEngineManager _ocrEngineManager;
+        private readonly OcrRequestQueue _ocrRequestQueue;
+        private readonly ErrorOutput _errorOutput;
+        private readonly DialogHelper _dialogHelper;
+        private readonly OperationProgress _operationProgress;
+        private readonly ISaveNotify? _notify;
+        private readonly PdfExporter _pdfExporter;
+        private readonly OverwritePrompt _overwritePrompt;
+        private readonly BitmapRenderer _bitmapRenderer;
+        private readonly ConfigProvider<CommonConfig> _configProvider;
 
         public AutoSaver(ConfigProvider<PdfSettings> pdfSettingsProvider, ConfigProvider<ImageSettings> imageSettingsProvider, OcrEngineManager ocrEngineManager, OcrRequestQueue ocrRequestQueue, ErrorOutput errorOutput, DialogHelper dialogHelper, OperationProgress operationProgress, ISaveNotify notify, PdfExporter pdfExporter, OverwritePrompt overwritePrompt, BitmapRenderer bitmapRenderer, ConfigProvider<CommonConfig> configProvider)
         {
-            this.pdfSettingsProvider = pdfSettingsProvider;
-            this.imageSettingsProvider = imageSettingsProvider;
-            this.ocrEngineManager = ocrEngineManager;
-            this.ocrRequestQueue = ocrRequestQueue;
-            this.errorOutput = errorOutput;
-            this.dialogHelper = dialogHelper;
-            this.operationProgress = operationProgress;
-            this.notify = notify;
-            this.pdfExporter = pdfExporter;
-            this.overwritePrompt = overwritePrompt;
-            this.bitmapRenderer = bitmapRenderer;
-            this.configProvider = configProvider;
+            _pdfSettingsProvider = pdfSettingsProvider;
+            _imageSettingsProvider = imageSettingsProvider;
+            _ocrEngineManager = ocrEngineManager;
+            _ocrRequestQueue = ocrRequestQueue;
+            _errorOutput = errorOutput;
+            _dialogHelper = dialogHelper;
+            _operationProgress = operationProgress;
+            _notify = notify;
+            _pdfExporter = pdfExporter;
+            _overwritePrompt = overwritePrompt;
+            _bitmapRenderer = bitmapRenderer;
+            _configProvider = configProvider;
         }
 
         public ScannedImageSource Save(AutoSaveSettings settings, ScannedImageSource source)
@@ -125,18 +125,18 @@ namespace NAPS2.ImportExport
                     }
                 }
                 // TODO: Shouldn't this give duplicate notifications?
-                if (notify != null && scans.Count > 1 && ok)
+                if (_notify != null && scans.Count > 1 && ok)
                 {
                     // Can't just do images.Count because that includes patch codes
                     int imageCount = scans.SelectMany(x => x).Count();
-                    notify.ImagesSaved(imageCount, firstFileSaved);
+                    _notify.ImagesSaved(imageCount, firstFileSaved);
                 }
                 return ok;
             }
             catch (Exception ex)
             {
                 Log.ErrorException(MiscResources.AutoSaveError, ex);
-                errorOutput.DisplayError(MiscResources.AutoSaveError, ex);
+                _errorOutput.DisplayError(MiscResources.AutoSaveError, ex);
                 return false;
             }
         }
@@ -150,7 +150,7 @@ namespace NAPS2.ImportExport
             string subPath = placeholders.Substitute(settings.FilePath, true, i);
             if (settings.PromptForFilePath)
             {
-                if (dialogHelper.PromptToSavePdfOrImage(subPath, out string newPath))
+                if (_dialogHelper.PromptToSavePdfOrImage(subPath, out string newPath))
                 {
                     subPath = placeholders.Substitute(newPath, true, i);
                 }
@@ -162,30 +162,30 @@ namespace NAPS2.ImportExport
                 {
                     subPath = placeholders.Substitute(subPath, true, 0, 1);
                 }
-                var op = new SavePdfOperation(pdfExporter, overwritePrompt);
-                var ocrContext = new OcrContext(configProvider.DefaultOcrParams(), ocrEngineManager, ocrRequestQueue);
-                if (op.Start(subPath, placeholders, images, pdfSettingsProvider, ocrContext))
+                var op = new SavePdfOperation(_pdfExporter, _overwritePrompt);
+                var ocrContext = new OcrContext(_configProvider.DefaultOcrParams(), _ocrEngineManager, _ocrRequestQueue);
+                if (op.Start(subPath, placeholders, images, _pdfSettingsProvider, ocrContext))
                 {
-                    operationProgress.ShowProgress(op);
+                    _operationProgress.ShowProgress(op);
                 }
                 bool success = await op.Success;
                 if (success && doNotify)
                 {
-                    notify?.PdfSaved(subPath);
+                    _notify?.PdfSaved(subPath);
                 }
                 return (success, subPath);
             }
             else
             {
-                var op = new SaveImagesOperation(overwritePrompt, bitmapRenderer, new TiffHelper(bitmapRenderer));
-                if (op.Start(subPath, placeholders, images, imageSettingsProvider))
+                var op = new SaveImagesOperation(_overwritePrompt, _bitmapRenderer, new TiffHelper(_bitmapRenderer));
+                if (op.Start(subPath, placeholders, images, _imageSettingsProvider))
                 {
-                    operationProgress.ShowProgress(op);
+                    _operationProgress.ShowProgress(op);
                 }
                 bool success = await op.Success;
                 if (success && doNotify)
                 {
-                    notify?.ImagesSaved(images.Count, op.FirstFileSaved);
+                    _notify?.ImagesSaved(images.Count, op.FirstFileSaved);
                 }
                 return (success, subPath);
             }

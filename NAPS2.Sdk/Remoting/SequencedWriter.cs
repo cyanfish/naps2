@@ -5,19 +5,19 @@ namespace NAPS2.Remoting
 {
     public class SequencedWriter<T>
     {
-        private readonly IServerStreamWriter<T> serverStreamWriter;
-        private Task lastWriteTask = Task.CompletedTask;
+        private readonly IServerStreamWriter<T> _serverStreamWriter;
+        private Task _lastWriteTask = Task.CompletedTask;
 
         public SequencedWriter(IServerStreamWriter<T> serverStreamWriter)
         {
-            this.serverStreamWriter = serverStreamWriter;
+            _serverStreamWriter = serverStreamWriter;
         }
 
         public void Write(T item)
         {
             lock (this)
             {
-                lastWriteTask = lastWriteTask.ContinueWith(t => serverStreamWriter.WriteAsync(item)).Unwrap();
+                _lastWriteTask = _lastWriteTask.ContinueWith(t => _serverStreamWriter.WriteAsync(item)).Unwrap();
             }
         }
 
@@ -25,7 +25,7 @@ namespace NAPS2.Remoting
         {
             lock (this)
             {
-                return lastWriteTask;
+                return _lastWriteTask;
             }
         }
     }

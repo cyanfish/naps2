@@ -9,14 +9,14 @@ namespace NAPS2.WinForms
 {
     public partial class FImageSettings : FormBase
     {
-        private readonly DialogHelper dialogHelper;
-        private TransactionConfigScope<CommonConfig> userTransact;
-        private TransactionConfigScope<CommonConfig> runTransact;
-        private ConfigProvider<CommonConfig> transactProvider;
+        private readonly DialogHelper _dialogHelper;
+        private TransactionConfigScope<CommonConfig> _userTransact;
+        private TransactionConfigScope<CommonConfig> _runTransact;
+        private ConfigProvider<CommonConfig> _transactProvider;
 
         public FImageSettings(DialogHelper dialogHelper)
         {
-            this.dialogHelper = dialogHelper;
+            _dialogHelper = dialogHelper;
             InitializeComponent();
             AddEnumItems<TiffCompression>(cmbTiffCompr);
         }
@@ -32,21 +32,21 @@ namespace NAPS2.WinForms
                     .WidthToForm()
                 .Activate();
 
-            userTransact = ConfigScopes.User.BeginTransaction();
-            runTransact = ConfigScopes.Run.BeginTransaction();
-            transactProvider = ConfigProvider.Replace(ConfigScopes.User, userTransact).Replace(ConfigScopes.Run, runTransact);
+            _userTransact = ConfigScopes.User.BeginTransaction();
+            _runTransact = ConfigScopes.Run.BeginTransaction();
+            _transactProvider = ConfigProvider.Replace(ConfigScopes.User, _userTransact).Replace(ConfigScopes.Run, _runTransact);
             UpdateValues();
             UpdateEnabled();
         }
 
         private void UpdateValues()
         {
-            txtDefaultFilePath.Text = transactProvider.Get(c => c.ImageSettings.DefaultFileName);
-            cbSkipSavePrompt.Checked = transactProvider.Get(c => c.ImageSettings.SkipSavePrompt);
-            txtJpegQuality.Text = transactProvider.Get(c => c.ImageSettings.JpegQuality).ToString(CultureInfo.InvariantCulture);
-            cmbTiffCompr.SelectedIndex = (int)transactProvider.Get(c => c.ImageSettings.TiffCompression);
-            cbSinglePageTiff.Checked = transactProvider.Get(c => c.ImageSettings.SinglePageTiff);
-            cbRememberSettings.Checked = transactProvider.Get(c => c.RememberImageSettings);
+            txtDefaultFilePath.Text = _transactProvider.Get(c => c.ImageSettings.DefaultFileName);
+            cbSkipSavePrompt.Checked = _transactProvider.Get(c => c.ImageSettings.SkipSavePrompt);
+            txtJpegQuality.Text = _transactProvider.Get(c => c.ImageSettings.JpegQuality).ToString(CultureInfo.InvariantCulture);
+            cmbTiffCompr.SelectedIndex = (int)_transactProvider.Get(c => c.ImageSettings.TiffCompression);
+            cbSinglePageTiff.Checked = _transactProvider.Get(c => c.ImageSettings.SinglePageTiff);
+            cbRememberSettings.Checked = _transactProvider.Get(c => c.RememberImageSettings);
         }
 
         private void UpdateEnabled()
@@ -71,16 +71,16 @@ namespace NAPS2.WinForms
             };
 
             // Clear old run scope
-            runTransact.Set(c => c.ImageSettings = new ImageSettings());
+            _runTransact.Set(c => c.ImageSettings = new ImageSettings());
 
-            var scope = cbRememberSettings.Checked ? userTransact : runTransact;
+            var scope = cbRememberSettings.Checked ? _userTransact : _runTransact;
             scope.SetAll(new CommonConfig
             {
                 ImageSettings = imageSettings
             });
 
-            userTransact.Commit();
-            runTransact.Commit();
+            _userTransact.Commit();
+            _runTransact.Commit();
 
             Close();
         }
@@ -92,9 +92,9 @@ namespace NAPS2.WinForms
 
         private void btnRestoreDefaults_Click(object sender, EventArgs e)
         {
-            runTransact.Set(c => c.ImageSettings = new ImageSettings());
-            userTransact.Set(c => c.ImageSettings = new ImageSettings());
-            userTransact.Set(c => c.RememberImageSettings = false);
+            _runTransact.Set(c => c.ImageSettings = new ImageSettings());
+            _userTransact.Set(c => c.ImageSettings = new ImageSettings());
+            _userTransact.Set(c => c.RememberImageSettings = false);
             UpdateValues();
             UpdateEnabled();
         }
@@ -127,7 +127,7 @@ namespace NAPS2.WinForms
 
         private void btnChooseFolder_Click(object sender, EventArgs e)
         {
-            if (dialogHelper.PromptToSaveImage(txtDefaultFilePath.Text, out string savePath))
+            if (_dialogHelper.PromptToSaveImage(txtDefaultFilePath.Text, out string savePath))
             {
                 txtDefaultFilePath.Text = savePath;
             }

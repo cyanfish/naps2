@@ -14,22 +14,22 @@ namespace NAPS2.WinForms
         private const int PADDING_X = 25, PADDING_Y = 25;
         private const int SPACING_Y = 20;
 
-        private readonly ConfigProvider<CommonConfig> configProvider;
-        private readonly List<NotifyWidgetBase> slots = new List<NotifyWidgetBase>();
-        private FormBase parentForm;
+        private readonly ConfigProvider<CommonConfig> _configProvider;
+        private readonly List<NotifyWidgetBase> _slots = new List<NotifyWidgetBase>();
+        private FormBase _parentForm;
 
         public NotificationManager(ConfigProvider<CommonConfig> configProvider)
         {
-            this.configProvider = configProvider;
+            _configProvider = configProvider;
         }
 
         public FormBase ParentForm
         {
-            get => parentForm;
+            get => _parentForm;
             set
             {
-                parentForm = value;
-                parentForm.Resize += parentForm_Resize;
+                _parentForm = value;
+                _parentForm.Resize += parentForm_Resize;
             }
         }
 
@@ -67,8 +67,8 @@ namespace NAPS2.WinForms
 
         public void Rebuild()
         {
-            var old = slots.ToList();
-            slots.Clear();
+            var old = _slots.ToList();
+            _slots.Clear();
             for (int i = 0; i < old.Count; i++)
             {
                 if (old[i] != null)
@@ -80,7 +80,7 @@ namespace NAPS2.WinForms
 
         private void Show(NotifyWidgetBase n)
         {
-            if (configProvider.Get(c => c.DisableSaveNotifications) && n is NotifyWidget)
+            if (_configProvider.Get(c => c.DisableSaveNotifications) && n is NotifyWidget)
             {
                 return;
             }
@@ -98,45 +98,45 @@ namespace NAPS2.WinForms
 
         private void parentForm_Resize(object sender, EventArgs e)
         {
-            for (int i = 0; i < slots.Count; i++)
+            for (int i = 0; i < _slots.Count; i++)
             {
-                if (slots[i] != null)
+                if (_slots[i] != null)
                 {
-                    slots[i].Location = GetPosition(slots[i], i);
+                    _slots[i].Location = GetPosition(_slots[i], i);
                 }
             }
         }
 
         private void ClearSlot(NotifyWidgetBase n)
         {
-            var index = slots.IndexOf(n);
+            var index = _slots.IndexOf(n);
             if (index != -1)
             {
-                parentForm.Controls.Remove(n);
-                slots[index] = null;
+                _parentForm.Controls.Remove(n);
+                _slots[index] = null;
             }
         }
 
         private int FillNextSlot(NotifyWidgetBase n)
         {
-            var index = slots.IndexOf(null);
+            var index = _slots.IndexOf(null);
             if (index == -1)
             {
-                index = slots.Count;
-                slots.Add(n);
+                index = _slots.Count;
+                _slots.Add(n);
             }
             else
             {
-                slots[index] = n;
+                _slots[index] = n;
             }
-            parentForm.Controls.Add(n);
+            _parentForm.Controls.Add(n);
             return index;
         }
 
         private Point GetPosition(NotifyWidgetBase n, int slot)
         {
-            return new Point(parentForm.ClientSize.Width - n.Width - PADDING_X,
-                parentForm.ClientSize.Height - n.Height - PADDING_Y - (n.Height + SPACING_Y) * slot);
+            return new Point(_parentForm.ClientSize.Width - n.Width - PADDING_X,
+                _parentForm.ClientSize.Height - n.Height - PADDING_Y - (n.Height + SPACING_Y) * slot);
         }
     }
 }

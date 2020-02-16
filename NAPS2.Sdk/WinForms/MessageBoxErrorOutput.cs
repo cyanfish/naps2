@@ -7,11 +7,11 @@ namespace NAPS2.WinForms
 {
     public class MessageBoxErrorOutput : ErrorOutput
     {
-        private readonly DialogHelper dialogHelper;
+        private readonly DialogHelper _dialogHelper;
 
         public MessageBoxErrorOutput(DialogHelper dialogHelper)
         {
-            this.dialogHelper = dialogHelper;
+            _dialogHelper = dialogHelper;
         }
 
         public override void DisplayError(string errorMessage)

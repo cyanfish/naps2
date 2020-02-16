@@ -8,17 +8,17 @@ namespace NAPS2.ImportExport.Email.Oauth
 {
     public class GmailEmailProvider : MimeEmailProvider
     {
-        private readonly GmailOauthProvider gmailOauthProvider;
+        private readonly GmailOauthProvider _gmailOauthProvider;
 
         public GmailEmailProvider(GmailOauthProvider gmailOauthProvider)
         {
-            this.gmailOauthProvider = gmailOauthProvider;
+            _gmailOauthProvider = gmailOauthProvider;
         }
         
         protected override async Task SendMimeMessage(MimeMessage message, ProgressHandler progressCallback, CancellationToken cancelToken)
         {
-            var messageId = await gmailOauthProvider.UploadDraft(message.ToString(), progressCallback, cancelToken);
-            var userEmail = gmailOauthProvider.User;
+            var messageId = await _gmailOauthProvider.UploadDraft(message.ToString(), progressCallback, cancelToken);
+            var userEmail = _gmailOauthProvider.User;
             // Open the draft in the user's browser
             // Note: As of this writing, the direct url is bugged in the new gmail UI, and there is no workaround
             // https://issuetracker.google.com/issues/113127519

@@ -11,7 +11,7 @@ namespace NAPS2.Wia
         private const int MSG_END_STREAM = 2;
         private const int MSG_END_TRANSFER = 3;
 
-        private bool cancel;
+        private bool _cancel;
 
         protected internal WiaTransfer(WiaVersion version, IntPtr handle) : base(version, handle)
         {
@@ -39,7 +39,7 @@ namespace NAPS2.Wia
 
         public void Cancel()
         {
-            cancel = true;
+            _cancel = true;
         }
 
         private bool TransferStatusCallback(int msgType, int percent, ulong bytesTransferred, uint hresult, IStream stream)
@@ -51,7 +51,7 @@ namespace NAPS2.Wia
                     break;
                 case MSG_END_STREAM:
                     var wrappedStream = new NativeStreamWrapper(stream);
-                    if (cancel)
+                    if (_cancel)
                     {
                         wrappedStream.Dispose();
                     }
@@ -64,7 +64,7 @@ namespace NAPS2.Wia
                     TransferComplete?.Invoke(this, EventArgs.Empty);
                     break;
             }
-            return !cancel;
+            return !_cancel;
         }
 
         public class ProgressEventArgs : EventArgs

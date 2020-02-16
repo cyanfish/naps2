@@ -22,17 +22,17 @@ namespace NAPS2.Lib.Tests.Automation
 {
     public class CommandLineIntegrationTests : ContextualTexts
     {
-        private readonly ITestOutputHelper testOutputHelper;
+        private readonly ITestOutputHelper _testOutputHelper;
 
         public CommandLineIntegrationTests(ITestOutputHelper testOutputHelper)
         {
-            this.testOutputHelper = testOutputHelper;
+            _testOutputHelper = testOutputHelper;
         }
 
         private async Task RunCommand(AutomatedScanningOptions options, params Bitmap[] imagesToScan)
         {
             var scanDriverFactory = new ScanDriverFactoryBuilder().WithScannedImages(imagesToScan).Build();
-            var kernel = new StandardKernel(new CommonModule(), new ConsoleModule(), new TestModule(ImageContext, scanDriverFactory, testOutputHelper));
+            var kernel = new StandardKernel(new CommonModule(), new ConsoleModule(), new TestModule(ImageContext, scanDriverFactory, _testOutputHelper));
             var automatedScanning = kernel.Get<AutomatedScanning>(new ConstructorArgument("options", options));
             await automatedScanning.Execute();
         }
@@ -80,40 +80,40 @@ namespace NAPS2.Lib.Tests.Automation
 
         private class TestModule : NinjectModule
         {
-            private readonly ImageContext imageContext;
-            private readonly IScanDriverFactory scanDriverFactory;
-            private readonly ITestOutputHelper testOutputHelper;
+            private readonly ImageContext _imageContext;
+            private readonly IScanDriverFactory _scanDriverFactory;
+            private readonly ITestOutputHelper _testOutputHelper;
 
             public TestModule(ImageContext imageContext, IScanDriverFactory scanDriverFactory, ITestOutputHelper testOutputHelper)
             {
-                this.imageContext = imageContext;
-                this.scanDriverFactory = scanDriverFactory;
-                this.testOutputHelper = testOutputHelper;
+                _imageContext = imageContext;
+                _scanDriverFactory = scanDriverFactory;
+                _testOutputHelper = testOutputHelper;
             }
             
             public override void Load()
             {
-                Rebind<ImageContext>().ToConstant(imageContext);
+                Rebind<ImageContext>().ToConstant(_imageContext);
                 Rebind<OcrEngineManager>().ToConstant(new OcrEngineManager());
-                Rebind<IScanDriverFactory>().ToConstant(scanDriverFactory);
+                Rebind<IScanDriverFactory>().ToConstant(_scanDriverFactory);
                 Rebind<IScanBridgeFactory>().To<InProcScanBridgeFactory>();
-                Rebind<ConsoleOutput>().ToSelf().WithConstructorArgument("writer", new TestOutputTextWriter(testOutputHelper));
+                Rebind<ConsoleOutput>().ToSelf().WithConstructorArgument("writer", new TestOutputTextWriter(_testOutputHelper));
             }
         }
 
         private class TestOutputTextWriter : TextWriter
         {
-            readonly ITestOutputHelper output;
+            readonly ITestOutputHelper _output;
             
             public TestOutputTextWriter(ITestOutputHelper output)
             {
-                this.output = output;
+                _output = output;
             }
             public override Encoding Encoding => Encoding.UTF8;
 
-            public override void WriteLine(string message) => output.WriteLine(message);
+            public override void WriteLine(string message) => _output.WriteLine(message);
 
-            public override void WriteLine(string format, params object[] args) => output.WriteLine(format, args);
+            public override void WriteLine(string format, params object[] args) => _output.WriteLine(format, args);
         }
     }
 }

@@ -10,13 +10,13 @@ namespace NAPS2.ImportExport
 {
     public class ScannedImageImporter : IScannedImageImporter
     {
-        private readonly IScannedImageImporter pdfImporter;
-        private readonly IScannedImageImporter imageImporter;
+        private readonly IScannedImageImporter _pdfImporter;
+        private readonly IScannedImageImporter _imageImporter;
 
         public ScannedImageImporter(IPdfImporter pdfImporter, IImageImporter imageImporter)
         {
-            this.pdfImporter = pdfImporter;
-            this.imageImporter = imageImporter;
+            _pdfImporter = pdfImporter;
+            _imageImporter = imageImporter;
         }
 
         public ScannedImageSource Import(string filePath, ImportParams importParams, ProgressHandler progressCallback, CancellationToken cancelToken)
@@ -28,9 +28,9 @@ namespace NAPS2.ImportExport
             switch (Path.GetExtension(filePath).ToLowerInvariant())
             {
                 case ".pdf":
-                    return pdfImporter.Import(filePath, importParams, progressCallback, cancelToken);
+                    return _pdfImporter.Import(filePath, importParams, progressCallback, cancelToken);
                 default:
-                    return imageImporter.Import(filePath, importParams, progressCallback, cancelToken);
+                    return _imageImporter.Import(filePath, importParams, progressCallback, cancelToken);
             }
         }
     }

@@ -11,7 +11,7 @@ namespace NAPS2.Scan.Internal
     /// </summary>
     internal class InProcScanBridge : IScanBridge
     {
-        private readonly IRemoteScanController remoteScanController;
+        private readonly IRemoteScanController _remoteScanController;
 
         public InProcScanBridge()
           : this(new RemoteScanController())
@@ -20,13 +20,13 @@ namespace NAPS2.Scan.Internal
 
         public InProcScanBridge(IRemoteScanController remoteScanController)
         {
-            this.remoteScanController = remoteScanController;
+            _remoteScanController = remoteScanController;
         }
 
         public Task<List<ScanDevice>> GetDeviceList(ScanOptions options) =>
-            remoteScanController.GetDeviceList(options);
+            _remoteScanController.GetDeviceList(options);
 
         public Task Scan(ScanOptions options, CancellationToken cancelToken, IScanEvents scanEvents, Action<ScannedImage, PostProcessingContext> callback) =>
-            remoteScanController.Scan(options, cancelToken, scanEvents, callback);
+            _remoteScanController.Scan(options, cancelToken, scanEvents, callback);
     }
 }

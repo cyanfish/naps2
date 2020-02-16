@@ -15,12 +15,12 @@ namespace NAPS2.Serialization
             XmlSerializer.RegisterCustomSerializer(new Serializer());
         }
         
-        private string? value;
-        private string? valueEncrypted;
+        private string? _value;
+        private string? _valueEncrypted;
 
         public SecureString(string value)
         {
-            this.value = value;
+            _value = value;
         }
 
         // ReSharper disable once UnusedMember.Local
@@ -34,20 +34,20 @@ namespace NAPS2.Serialization
 
         public override string ToString()
         {
-            value ??= SecureStorage.Decrypt(valueEncrypted);
-            return value;
+            _value ??= SecureStorage.Decrypt(_valueEncrypted);
+            return _value;
         }
 
         private class Serializer : CustomXmlSerializer<SecureString>
         {
             protected override void Serialize(SecureString obj, XElement element)
             {
-                element.Value = obj.valueEncrypted ?? SecureStorage.Encrypt(obj.value);
+                element.Value = obj._valueEncrypted ?? SecureStorage.Encrypt(obj._value);
             }
 
             protected override SecureString Deserialize(XElement element)
             {
-                return new SecureString { valueEncrypted = element.Value };
+                return new SecureString { _valueEncrypted = element.Value };
             }
         }
     }

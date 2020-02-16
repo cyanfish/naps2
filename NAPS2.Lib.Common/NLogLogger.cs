@@ -9,7 +9,7 @@ namespace NAPS2
 {
     public class NLogLogger : ILogger
     {
-        private readonly Logger logger;
+        private readonly Logger _logger;
 
         public NLogLogger()
         {
@@ -25,22 +25,22 @@ namespace NAPS2
             var rule = new LoggingRule("*", LogLevel.Debug, target);
             config.LoggingRules.Add(rule);
             LogManager.Configuration = config;
-            logger = LogManager.GetLogger("NAPS2");
+            _logger = LogManager.GetLogger("NAPS2");
         }
 
         public void Error(string message)
         {
-            logger.Error(message);
+            _logger.Error(message);
         }
 
         public void ErrorException(string message, Exception exception)
         {
-            logger.Error(exception, message);
+            _logger.Error(exception, message);
         }
 
         public void FatalException(string message, Exception exception)
         {
-            logger.Fatal(exception, message);
+            _logger.Fatal(exception, message);
         }
     }
 }

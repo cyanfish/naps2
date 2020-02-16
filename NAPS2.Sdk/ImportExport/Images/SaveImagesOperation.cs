@@ -20,15 +20,15 @@ namespace NAPS2.ImportExport.Images
     // TODO: Avoid GDI dependency
     public class SaveImagesOperation : OperationBase
     {
-        private readonly OverwritePrompt overwritePrompt;
-        private readonly BitmapRenderer bitmapRenderer;
-        private readonly TiffHelper tiffHelper;
+        private readonly OverwritePrompt _overwritePrompt;
+        private readonly BitmapRenderer _bitmapRenderer;
+        private readonly TiffHelper _tiffHelper;
 
         public SaveImagesOperation(OverwritePrompt overwritePrompt, BitmapRenderer bitmapRenderer, TiffHelper tiffHelper)
         {
-            this.overwritePrompt = overwritePrompt;
-            this.bitmapRenderer = bitmapRenderer;
-            this.tiffHelper = tiffHelper;
+            _overwritePrompt = overwritePrompt;
+            _bitmapRenderer = bitmapRenderer;
+            _tiffHelper = tiffHelper;
 
             ProgressTitle = MiscResources.SaveImagesProgress;
             AllowCancel = true;
@@ -70,14 +70,14 @@ namespace NAPS2.ImportExport.Images
                     {
                         if (File.Exists(subFileName))
                         {
-                            if (overwritePrompt.ConfirmOverwrite(subFileName) != DialogResult.Yes)
+                            if (_overwritePrompt.ConfirmOverwrite(subFileName) != DialogResult.Yes)
                             {
                                 return false;
                             }
                         }
                         Status.StatusText = string.Format(MiscResources.SavingFormat, Path.GetFileName(subFileName));
                         FirstFileSaved = subFileName;
-                        return await tiffHelper.SaveMultipage(snapshots, subFileName, imageSettings.Get(c => c.TiffCompression), OnProgress, CancelToken);
+                        return await _tiffHelper.SaveMultipage(snapshots, subFileName, imageSettings.Get(c => c.TiffCompression), OnProgress, CancelToken);
                     }
 
                     int i = 0;
@@ -93,7 +93,7 @@ namespace NAPS2.ImportExport.Images
 
                         if (snapshots.Count == 1 && File.Exists(subFileName))
                         {
-                            var dialogResult = overwritePrompt.ConfirmOverwrite(subFileName);
+                            var dialogResult = _overwritePrompt.ConfirmOverwrite(subFileName);
                             if (dialogResult == DialogResult.No)
                             {
                                 continue;
@@ -165,7 +165,7 @@ namespace NAPS2.ImportExport.Images
             PathHelper.EnsureParentDirExists(path);
             if (Equals(format, ImageFormat.Tiff))
             {
-                await tiffHelper.SaveMultipage(new List<ScannedImage.Snapshot> { snapshot }, path, imageSettings.Get(c => c.TiffCompression), (i, j) => { }, CancellationToken.None);
+                await _tiffHelper.SaveMultipage(new List<ScannedImage.Snapshot> { snapshot }, path, imageSettings.Get(c => c.TiffCompression), (i, j) => { }, CancellationToken.None);
             }
             else if (Equals(format, ImageFormat.Jpeg))
             {
@@ -174,12 +174,12 @@ namespace NAPS2.ImportExport.Images
                 var encoderParams = new EncoderParameters(1);
                 encoderParams.Param[0] = new EncoderParameter(Encoder.Quality, quality);
                 // TODO: Something more generic
-                using Bitmap bitmap = await bitmapRenderer.Render(snapshot);
+                using Bitmap bitmap = await _bitmapRenderer.Render(snapshot);
                 bitmap.Save(path, encoder, encoderParams);
             }
             else
             {
-                using Bitmap bitmap = await bitmapRenderer.Render(snapshot);
+                using Bitmap bitmap = await _bitmapRenderer.Render(snapshot);
                 bitmap.Save(path, format);
             }
         }

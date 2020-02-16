@@ -7,11 +7,11 @@ namespace NAPS2.WinForms
 {
     public class WinFormsDialogHelper : DialogHelper
     {
-        private readonly ConfigScopes configScopes;
+        private readonly ConfigScopes _configScopes;
 
         public WinFormsDialogHelper(ConfigScopes configScopes)
         {
-            this.configScopes = configScopes;
+            _configScopes = configScopes;
         }
 
         public override bool PromptToSavePdfOrImage(string defaultPath, out string savePath)
@@ -75,7 +75,7 @@ namespace NAPS2.WinForms
                 FileName = Path.GetFileName(defaultPath),
                 InitialDirectory = GetDir(defaultPath)
             };
-            switch (configScopes.Provider.Get(c => c.LastImageExt).ToLowerInvariant())
+            switch (_configScopes.Provider.Get(c => c.LastImageExt).ToLowerInvariant())
             {
                 case "bmp":
                     sd.FilterIndex = 1;
@@ -103,7 +103,7 @@ namespace NAPS2.WinForms
             if (sd.ShowDialog() == DialogResult.OK)
             {
                 savePath = sd.FileName;
-                configScopes.User.Set(c => c.LastImageExt = (Path.GetExtension(sd.FileName) ?? "").Replace(".", ""));
+                _configScopes.User.Set(c => c.LastImageExt = (Path.GetExtension(sd.FileName) ?? "").Replace(".", ""));
                 return true;
             }
             savePath = null;

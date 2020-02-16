@@ -6,19 +6,19 @@ namespace NAPS2
 {
     public class NinjectFormFactory : IFormFactory
     {
-        private readonly IKernel kernel;
+        private readonly IKernel _kernel;
 
         public NinjectFormFactory(IKernel kernel)
         {
-            this.kernel = kernel;
+            _kernel = kernel;
         }
 
         public T Create<T>() where T : FormBase
         {
-            var form = kernel.Get<T>();
-            form.FormFactory = kernel.Get<IFormFactory>();
-            form.ConfigScopes = kernel.Get<ConfigScopes>();
-            form.ConfigProvider = kernel.Get<ScopeSetConfigProvider<CommonConfig>>();
+            var form = _kernel.Get<T>();
+            form.FormFactory = _kernel.Get<IFormFactory>();
+            form.ConfigScopes = _kernel.Get<ConfigScopes>();
+            form.ConfigProvider = _kernel.Get<ScopeSetConfigProvider<CommonConfig>>();
             return form;
         }
     }

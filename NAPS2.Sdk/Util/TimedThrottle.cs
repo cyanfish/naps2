@@ -5,15 +5,15 @@ namespace NAPS2.Util
 {
     public class TimedThrottle
     {
-        private readonly Action action;
-        private readonly TimeSpan interval;
-        private Timer timer;
-        private DateTime lastRun = DateTime.MinValue;
+        private readonly Action _action;
+        private readonly TimeSpan _interval;
+        private Timer _timer;
+        private DateTime _lastRun = DateTime.MinValue;
 
         public TimedThrottle(Action action, TimeSpan interval)
         {
-            this.action = action;
-            this.interval = interval;
+            _action = action;
+            _interval = interval;
         }
 
         public void RunAction(SynchronizationContext syncContext)
@@ -21,20 +21,20 @@ namespace NAPS2.Util
             bool doRunAction = false;
             lock (this)
             {
-                if (timer == null && lastRun < DateTime.Now - interval)
+                if (_timer == null && _lastRun < DateTime.Now - _interval)
                 {
                     doRunAction = true;
-                    lastRun = DateTime.Now;
+                    _lastRun = DateTime.Now;
                 }
-                else if (timer == null)
+                else if (_timer == null)
                 {
-                    timer = new Timer(Tick, syncContext, interval, TimeSpan.FromMilliseconds(-1));
+                    _timer = new Timer(Tick, syncContext, _interval, TimeSpan.FromMilliseconds(-1));
                 }
             }
 
             if (doRunAction)
             {
-                action();
+                _action();
             }
         }
 
@@ -43,12 +43,12 @@ namespace NAPS2.Util
             var syncContext = (SynchronizationContext) state;
             lock (this)
             {
-                timer?.Dispose();
-                timer = null;
-                lastRun = DateTime.Now;
+                _timer?.Dispose();
+                _timer = null;
+                _lastRun = DateTime.Now;
             }
             
-            syncContext.Post(_ => action(), null);
+            syncContext.Post(_ => _action(), null);
         }
     }
 }

@@ -13,14 +13,14 @@ namespace NAPS2.WinForms
 {
     partial class FAbout : FormBase
     {
-        private readonly UpdateChecker updateChecker;
+        private readonly UpdateChecker _updateChecker;
 
-        private bool hasCheckedForUpdates;
-        private UpdateInfo? update;
+        private bool _hasCheckedForUpdates;
+        private UpdateInfo? _update;
 
         public FAbout(UpdateChecker updateChecker)
         {
-            this.updateChecker = updateChecker;
+            _updateChecker = updateChecker;
 
             RestoreFormState = false;
             InitializeComponent();
@@ -60,7 +60,7 @@ namespace NAPS2.WinForms
         {
             if (cbCheckForUpdates.Checked)
             {
-                updateChecker.CheckForUpdates().ContinueWith(task =>
+                _updateChecker.CheckForUpdates().ContinueWith(task =>
                 {
                     if (task.IsFaulted)
                     {
@@ -74,8 +74,8 @@ namespace NAPS2.WinForms
                             LastUpdateCheckDate = DateTime.Now
                         });
                     }
-                    update = task.Result;
-                    hasCheckedForUpdates = true;
+                    _update = task.Result;
+                    _hasCheckedForUpdates = true;
                     SafeInvoke(UpdateControls);
                 });
             }
@@ -90,9 +90,9 @@ namespace NAPS2.WinForms
                 {
                     ConditionalControls.Show(lblUpdateStatus, margin);
                 }
-                if (hasCheckedForUpdates)
+                if (_hasCheckedForUpdates)
                 {
-                    if (update == null)
+                    if (_update == null)
                     {
                         lblUpdateStatus.Text = MiscResources.NoUpdates;
                         lblUpdateStatus.Visible = true;
@@ -100,7 +100,7 @@ namespace NAPS2.WinForms
                     }
                     else
                     {
-                        linkInstall.Text = string.Format(MiscResources.Install, update.Name);
+                        linkInstall.Text = string.Format(MiscResources.Install, _update.Name);
                         lblUpdateStatus.Visible = false;
                         linkInstall.Visible = true;
                     }
@@ -128,9 +128,9 @@ namespace NAPS2.WinForms
 
         private void linkInstall_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            if (update != null)
+            if (_update != null)
             {
-                updateChecker.StartUpdate(update);
+                _updateChecker.StartUpdate(_update);
             }
         }
 

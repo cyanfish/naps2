@@ -18,13 +18,13 @@ namespace NAPS2.Update
         private const string UPDATE_FILE_EXT = "exe";
 #endif
 
-        private readonly IOperationFactory operationFactory;
-        private readonly OperationProgress operationProgress;
+        private readonly IOperationFactory _operationFactory;
+        private readonly OperationProgress _operationProgress;
 
         public UpdateChecker(IOperationFactory operationFactory, OperationProgress operationProgress)
         {
-            this.operationFactory = operationFactory;
-            this.operationProgress = operationProgress;
+            _operationFactory = operationFactory;
+            _operationProgress = operationProgress;
         }
 
         public TimeSpan CheckInterval => TimeSpan.FromDays(7);
@@ -58,9 +58,9 @@ namespace NAPS2.Update
 
         public UpdateOperation StartUpdate(UpdateInfo update)
         {
-            var op = operationFactory.Create<UpdateOperation>();
+            var op = _operationFactory.Create<UpdateOperation>();
             op.Start(update);
-            operationProgress.ShowModalProgress(op);
+            _operationProgress.ShowModalProgress(op);
             return op;
         }
 

@@ -19,15 +19,15 @@ namespace NAPS2.Scan.Twain.Legacy
     {
         private const short COUNTRY_USA = 1;
         private const short LANGUAGE_USA = 13;
-        private readonly TwIdentity appid;
-        private readonly TwIdentity srcds;
-        private TwEvent evtmsg;
-        private IntPtr hwnd;
-        private WINMSG winmsg;
+        private readonly TwIdentity _appid;
+        private readonly TwIdentity _srcds;
+        private TwEvent _evtmsg;
+        private IntPtr _hwnd;
+        private WINMSG _winmsg;
 
         public Twain()
         {
-            appid = new TwIdentity
+            _appid = new TwIdentity
                 {
                     Id = IntPtr.Zero,
                     Version =
@@ -46,9 +46,9 @@ namespace NAPS2.Scan.Twain.Legacy
                     ProductName = "Hack"
                 };
 
-            srcds = new TwIdentity { Id = IntPtr.Zero };
+            _srcds = new TwIdentity { Id = IntPtr.Zero };
 
-            evtmsg.EventPtr = Marshal.AllocHGlobal(Marshal.SizeOf(winmsg));
+            _evtmsg.EventPtr = Marshal.AllocHGlobal(Marshal.SizeOf(_winmsg));
         }
 
         public static int ScreenBitDepth
@@ -65,24 +65,24 @@ namespace NAPS2.Scan.Twain.Legacy
 
         ~Twain()
         {
-            Marshal.FreeHGlobal(evtmsg.EventPtr);
+            Marshal.FreeHGlobal(_evtmsg.EventPtr);
         }
 
         public bool Init(IntPtr hwndp)
         {
             Finish();
-            TwReturnCode returnCode = DSMparent(appid, IntPtr.Zero, TwDG.Control, TwData.Parent, TwMessageCode.OpenDSM, ref hwndp);
+            TwReturnCode returnCode = DSMparent(_appid, IntPtr.Zero, TwDG.Control, TwData.Parent, TwMessageCode.OpenDSM, ref hwndp);
             if (returnCode == TwReturnCode.Success)
             {
-                returnCode = DSMident(appid, IntPtr.Zero, TwDG.Control, TwData.Identity, TwMessageCode.GetFirst, srcds);
+                returnCode = DSMident(_appid, IntPtr.Zero, TwDG.Control, TwData.Identity, TwMessageCode.GetFirst, _srcds);
                 if (returnCode == TwReturnCode.Success)
                 {
-                    hwnd = hwndp;
+                    _hwnd = hwndp;
                     return true;
                 }
                 else
                 {
-                    returnCode = DSMparent(appid, IntPtr.Zero, TwDG.Control, TwData.Parent, TwMessageCode.CloseDSM, ref hwndp);
+                    returnCode = DSMparent(_appid, IntPtr.Zero, TwDG.Control, TwData.Parent, TwMessageCode.CloseDSM, ref hwndp);
                     return false;
                 }
             }
@@ -93,19 +93,19 @@ namespace NAPS2.Scan.Twain.Legacy
         {
             TwReturnCode returnCode;
             CloseSrc();
-            if (appid.Id == IntPtr.Zero)
+            if (_appid.Id == IntPtr.Zero)
             {
-                Init(hwnd);
-                if (appid.Id == IntPtr.Zero)
+                Init(_hwnd);
+                if (_appid.Id == IntPtr.Zero)
                     return false;
             }
-            returnCode = DSMident(appid, IntPtr.Zero, TwDG.Control, TwData.Identity, TwMessageCode.GetFirst, srcds);
+            returnCode = DSMident(_appid, IntPtr.Zero, TwDG.Control, TwData.Identity, TwMessageCode.GetFirst, _srcds);
             return returnCode == TwReturnCode.Success;
         }
 
         public bool GetNext()
         {
-            TwReturnCode returnCode = DSMident(appid, IntPtr.Zero, TwDG.Control, TwData.Identity, TwMessageCode.GetNext, srcds);
+            TwReturnCode returnCode = DSMident(_appid, IntPtr.Zero, TwDG.Control, TwData.Identity, TwMessageCode.GetNext, _srcds);
             return returnCode == TwReturnCode.Success;
         }
 
@@ -113,27 +113,27 @@ namespace NAPS2.Scan.Twain.Legacy
         {
             TwReturnCode returnCode;
             CloseSrc();
-            if (appid.Id == IntPtr.Zero)
+            if (_appid.Id == IntPtr.Zero)
             {
-                Init(hwnd);
-                if (appid.Id == IntPtr.Zero)
+                Init(_hwnd);
+                if (_appid.Id == IntPtr.Zero)
                     return false;
             }
-            returnCode = DSMident(appid, IntPtr.Zero, TwDG.Control, TwData.Identity, TwMessageCode.UserSelect, srcds);
+            returnCode = DSMident(_appid, IntPtr.Zero, TwDG.Control, TwData.Identity, TwMessageCode.UserSelect, _srcds);
             return returnCode == TwReturnCode.Success;
         }
 
         public bool SelectByName(string name)
         {
-            if (srcds.ProductName == name)
+            if (_srcds.ProductName == name)
             {
                 return true;
             }
             var rc = TwReturnCode.Success;
             while (rc == TwReturnCode.Success)
             {
-                rc = DSMident(appid, IntPtr.Zero, TwDG.Control, TwData.Identity, TwMessageCode.GetNext, srcds);
-                if (srcds.ProductName == name)
+                rc = DSMident(_appid, IntPtr.Zero, TwDG.Control, TwData.Identity, TwMessageCode.GetNext, _srcds);
+                if (_srcds.ProductName == name)
                 {
                     return true;
                 }
@@ -141,19 +141,19 @@ namespace NAPS2.Scan.Twain.Legacy
             return false;
         }
 
-        public string GetCurrentName() => srcds.ProductName;
+        public string GetCurrentName() => _srcds.ProductName;
 
         public bool Acquire()
         {
             TwReturnCode returnCode;
             CloseSrc();
-            if (appid.Id == IntPtr.Zero)
+            if (_appid.Id == IntPtr.Zero)
             {
-                Init(hwnd);
-                if (appid.Id == IntPtr.Zero)
+                Init(_hwnd);
+                if (_appid.Id == IntPtr.Zero)
                     throw new InvalidOperationException("Init call falied");
             }
-            returnCode = DSMident(appid, IntPtr.Zero, TwDG.Control, TwData.Identity, TwMessageCode.OpenDS, srcds);
+            returnCode = DSMident(_appid, IntPtr.Zero, TwDG.Control, TwData.Identity, TwMessageCode.OpenDS, _srcds);
             if (returnCode != TwReturnCode.Success)
                 throw new InvalidOperationException("DSMident call falied");
 
@@ -161,9 +161,9 @@ namespace NAPS2.Scan.Twain.Legacy
             {
                 ShowUI = 1,
                 ModalUI = 1,
-                ParentHand = hwnd
+                ParentHand = _hwnd
             };
-            returnCode = DSuserif(appid, srcds, TwDG.Control, TwData.UserInterface, TwMessageCode.EnableDS, guif);
+            returnCode = DSuserif(_appid, _srcds, TwDG.Control, TwData.UserInterface, TwMessageCode.EnableDS, guif);
             if (returnCode != TwReturnCode.Success)
             {
                 CloseSrc();
@@ -179,7 +179,7 @@ namespace NAPS2.Scan.Twain.Legacy
         public ArrayList TransferPictures()
         {
             var pics = new ArrayList();
-            if (srcds.Id == IntPtr.Zero)
+            if (_srcds.Id == IntPtr.Zero)
                 return pics;
 
             TwReturnCode returnCode;
@@ -192,21 +192,21 @@ namespace NAPS2.Scan.Twain.Legacy
                 hbitmap = IntPtr.Zero;
 
                 var iinf = new TwImageInfo();
-                returnCode = DSiinf(appid, srcds, TwDG.Image, TwData.ImageInfo, TwMessageCode.Get, iinf);
+                returnCode = DSiinf(_appid, _srcds, TwDG.Image, TwData.ImageInfo, TwMessageCode.Get, iinf);
                 if (returnCode != TwReturnCode.Success)
                 {
                     CloseSrc();
                     return pics;
                 }
 
-                returnCode = DSixfer(appid, srcds, TwDG.Image, TwData.ImageNativeXfer, TwMessageCode.Get, ref hbitmap);
+                returnCode = DSixfer(_appid, _srcds, TwDG.Image, TwData.ImageNativeXfer, TwMessageCode.Get, ref hbitmap);
                 if (returnCode != TwReturnCode.XferDone)
                 {
                     CloseSrc();
                     return pics;
                 }
 
-                returnCode = DSpxfer(appid, srcds, TwDG.Control, TwData.PendingXfers, TwMessageCode.EndXfer, pxfr);
+                returnCode = DSpxfer(_appid, _srcds, TwDG.Control, TwData.PendingXfers, TwMessageCode.EndXfer, pxfr);
                 if (returnCode != TwReturnCode.Success)
                 {
                     CloseSrc();
@@ -217,37 +217,37 @@ namespace NAPS2.Scan.Twain.Legacy
             }
             while (pxfr.Count != 0);
 
-            returnCode = DSpxfer(appid, srcds, TwDG.Control, TwData.PendingXfers, TwMessageCode.Reset, pxfr);
+            returnCode = DSpxfer(_appid, _srcds, TwDG.Control, TwData.PendingXfers, TwMessageCode.Reset, pxfr);
             return pics;
         }
 
         public TwainCommand PassMessage(ref Message m)
         {
-            if (srcds.Id == IntPtr.Zero)
+            if (_srcds.Id == IntPtr.Zero)
                 return TwainCommand.Not;
 
             int pos = GetMessagePos();
 
-            winmsg.hwnd = m.HWnd;
-            winmsg.message = m.Msg;
-            winmsg.wParam = m.WParam;
-            winmsg.lParam = m.LParam;
-            winmsg.time = GetMessageTime();
-            winmsg.x = (short)pos;
-            winmsg.y = (short)(pos >> 16);
+            _winmsg.hwnd = m.HWnd;
+            _winmsg.message = m.Msg;
+            _winmsg.wParam = m.WParam;
+            _winmsg.lParam = m.LParam;
+            _winmsg.time = GetMessageTime();
+            _winmsg.x = (short)pos;
+            _winmsg.y = (short)(pos >> 16);
 
-            Marshal.StructureToPtr(winmsg, evtmsg.EventPtr, false);
-            evtmsg.Message = 0;
-            TwReturnCode returnCode = DSevent(appid, srcds, TwDG.Control, TwData.Event, TwMessageCode.ProcessEvent, ref evtmsg);
+            Marshal.StructureToPtr(_winmsg, _evtmsg.EventPtr, false);
+            _evtmsg.Message = 0;
+            TwReturnCode returnCode = DSevent(_appid, _srcds, TwDG.Control, TwData.Event, TwMessageCode.ProcessEvent, ref _evtmsg);
             if (returnCode == TwReturnCode.NotDSEvent)
                 return TwainCommand.Not;
-            if (evtmsg.Message == (short)TwMessageCode.XFerReady)
+            if (_evtmsg.Message == (short)TwMessageCode.XFerReady)
                 return TwainCommand.TransferReady;
-            if (evtmsg.Message == (short)TwMessageCode.CloseDSReq)
+            if (_evtmsg.Message == (short)TwMessageCode.CloseDSReq)
                 return TwainCommand.CloseRequest;
-            if (evtmsg.Message == (short)TwMessageCode.CloseDSOK)
+            if (_evtmsg.Message == (short)TwMessageCode.CloseDSOK)
                 return TwainCommand.CloseOk;
-            if (evtmsg.Message == (short)TwMessageCode.DeviceEvent)
+            if (_evtmsg.Message == (short)TwMessageCode.DeviceEvent)
                 return TwainCommand.DeviceEvent;
 
             return TwainCommand.Null;
@@ -256,11 +256,11 @@ namespace NAPS2.Scan.Twain.Legacy
         public void CloseSrc()
         {
             TwReturnCode returnCode;
-            if (srcds.Id != IntPtr.Zero)
+            if (_srcds.Id != IntPtr.Zero)
             {
                 var guif = new TwUserInterface();
-                returnCode = DSuserif(appid, srcds, TwDG.Control, TwData.UserInterface, TwMessageCode.DisableDS, guif);
-                returnCode = DSMident(appid, IntPtr.Zero, TwDG.Control, TwData.Identity, TwMessageCode.CloseDS, srcds);
+                returnCode = DSuserif(_appid, _srcds, TwDG.Control, TwData.UserInterface, TwMessageCode.DisableDS, guif);
+                returnCode = DSMident(_appid, IntPtr.Zero, TwDG.Control, TwData.Identity, TwMessageCode.CloseDS, _srcds);
             }
         }
 
@@ -268,9 +268,9 @@ namespace NAPS2.Scan.Twain.Legacy
         {
             TwReturnCode returnCode;
             CloseSrc();
-            if (appid.Id != IntPtr.Zero)
-                returnCode = DSMparent(appid, IntPtr.Zero, TwDG.Control, TwData.Parent, TwMessageCode.CloseDSM, ref hwnd);
-            appid.Id = IntPtr.Zero;
+            if (_appid.Id != IntPtr.Zero)
+                returnCode = DSMparent(_appid, IntPtr.Zero, TwDG.Control, TwData.Parent, TwMessageCode.CloseDSM, ref _hwnd);
+            _appid.Id = IntPtr.Zero;
         }
 
         // ------ DSM entry point DAT_ variants:

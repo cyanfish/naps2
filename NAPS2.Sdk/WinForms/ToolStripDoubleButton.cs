@@ -9,7 +9,7 @@ namespace NAPS2.WinForms
 {
     public class ToolStripDoubleButton : ToolStripButton
     {
-        private int currentButton = -1;
+        private int _currentButton = -1;
 
         public ToolStripDoubleButton()
         {
@@ -74,19 +74,19 @@ namespace NAPS2.WinForms
                 var oldParent = Parent;
                 Parent = null;
                 Height = Height / 2;
-                e.Graphics.TranslateTransform(0, currentButton == 1 ? Height : 0);
+                e.Graphics.TranslateTransform(0, _currentButton == 1 ? Height : 0);
                 renderer.DrawButtonBackground(new ToolStripItemRenderEventArgs(e.Graphics, this));
-                e.Graphics.TranslateTransform(0, currentButton == 1 ? -Height : 0);
+                e.Graphics.TranslateTransform(0, _currentButton == 1 ? -Height : 0);
                 Height = oldHeight;
                 Parent = oldParent;
             }
             else
             {
-                if (currentButton == 0)
+                if (_currentButton == 0)
                 {
                     e.Graphics.DrawRectangle(new Pen(Color.Black), 0, 0, Width - 1, Height / 2 - 1);
                 }
-                if (currentButton == 1)
+                if (_currentButton == 1)
                 {
                     e.Graphics.DrawRectangle(new Pen(Color.Black), 0, Height / 2, Width - 1, Height / 2 - 1);
                 }
@@ -136,9 +136,9 @@ namespace NAPS2.WinForms
         protected override void OnMouseMove(MouseEventArgs mea)
         {
             base.OnMouseMove(mea);
-            var oldCurrentButton = currentButton;
-            currentButton = mea.Y > (Height / 2) ? 1 : 0;
-            if (currentButton != oldCurrentButton)
+            var oldCurrentButton = _currentButton;
+            _currentButton = mea.Y > (Height / 2) ? 1 : 0;
+            if (_currentButton != oldCurrentButton)
             {
                 Invalidate();
             }
@@ -147,18 +147,18 @@ namespace NAPS2.WinForms
         protected override void OnMouseLeave(EventArgs e)
         {
             base.OnMouseLeave(e);
-            currentButton = -1;
+            _currentButton = -1;
         }
 
         protected override void OnClick(EventArgs e)
         {
             base.OnClick(e);
 
-            if (currentButton == 0)
+            if (_currentButton == 0)
             {
                 FirstClick?.Invoke(this, e);
             }
-            else if (currentButton == 1)
+            else if (_currentButton == 1)
             {
                 SecondClick?.Invoke(this, e);
             }

@@ -8,13 +8,13 @@ namespace NAPS2.WinForms
 {
     public class SelectableListView<T> : ISelectable<T>
     {
-        private readonly ListView listView;
-        private ListSelection<T> selection = ListSelection.Empty<T>();
-        private bool refreshing;
+        private readonly ListView _listView;
+        private ListSelection<T> _selection = ListSelection.Empty<T>();
+        private bool _refreshing;
 
         public SelectableListView(ListView listView)
         {
-            this.listView = listView;
+            _listView = listView;
             listView.SelectedIndexChanged += ListViewOnSelectedIndexChanged;
         }
 
@@ -22,28 +22,28 @@ namespace NAPS2.WinForms
 
         private void ListViewOnSelectedIndexChanged(object sender, EventArgs e)
         {
-            if (!refreshing)
+            if (!_refreshing)
             {
-                refreshing = true;
-                Selection = ListSelection.From(listView.SelectedItems.Cast<ListViewItem>().Select(x => (T) x.Tag));
-                refreshing = false;
+                _refreshing = true;
+                Selection = ListSelection.From(_listView.SelectedItems.Cast<ListViewItem>().Select(x => (T) x.Tag));
+                _refreshing = false;
             }
         }
 
         public ListSelection<T> Selection
         {
-            get => selection;
+            get => _selection;
             set
             {
-                selection = value ?? throw new ArgumentNullException(nameof(value));
-                if (!refreshing)
+                _selection = value ?? throw new ArgumentNullException(nameof(value));
+                if (!_refreshing)
                 {
-                    refreshing = true;
-                    for (int i = 0; i < listView.Items.Count; i++)
+                    _refreshing = true;
+                    for (int i = 0; i < _listView.Items.Count; i++)
                     {
-                        listView.Items[i].Selected = selection.Contains((T) listView.Items[i].Tag);
+                        _listView.Items[i].Selected = _selection.Contains((T) _listView.Items[i].Tag);
                     }
-                    refreshing = false;
+                    _refreshing = false;
                 }
                 SelectionChanged?.Invoke(this, EventArgs.Empty);
             }
@@ -51,18 +51,18 @@ namespace NAPS2.WinForms
 
         public void RefreshItems(IEnumerable<T> items, Func<T, string> labelFunc, Func<T, int> imageIndexFunc)
         {
-            refreshing = true;
-            listView.Items.Clear();
+            _refreshing = true;
+            _listView.Items.Clear();
             foreach (var item in items)
             {
-                var listViewItem = listView.Items.Add(labelFunc(item), imageIndexFunc(item));
+                var listViewItem = _listView.Items.Add(labelFunc(item), imageIndexFunc(item));
                 listViewItem.Tag = item;
             }
-            for (int i = 0; i < listView.Items.Count; i++)
+            for (int i = 0; i < _listView.Items.Count; i++)
             {
-                listView.Items[i].Selected = Selection.Contains((T) listView.Items[i].Tag);
+                _listView.Items[i].Selected = Selection.Contains((T) _listView.Items[i].Tag);
             }
-            refreshing = false;
+            _refreshing = false;
         }
     }
 }

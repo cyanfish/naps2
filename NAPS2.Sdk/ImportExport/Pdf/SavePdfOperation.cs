@@ -17,15 +17,15 @@ namespace NAPS2.ImportExport.Pdf
 {
     public class SavePdfOperation : OperationBase
     {
-        private readonly PdfExporter pdfExporter;
-        private readonly OverwritePrompt overwritePrompt;
-        private readonly IEmailProviderFactory? emailProviderFactory;
+        private readonly PdfExporter _pdfExporter;
+        private readonly OverwritePrompt _overwritePrompt;
+        private readonly IEmailProviderFactory? _emailProviderFactory;
 
         public SavePdfOperation(PdfExporter pdfExporter, OverwritePrompt overwritePrompt, IEmailProviderFactory? emailProviderFactory = null)
         {
-            this.pdfExporter = pdfExporter;
-            this.overwritePrompt = overwritePrompt;
-            this.emailProviderFactory = emailProviderFactory;
+            _pdfExporter = pdfExporter;
+            _overwritePrompt = overwritePrompt;
+            _emailProviderFactory = emailProviderFactory;
 
             AllowCancel = true;
             AllowBackground = true;
@@ -53,7 +53,7 @@ namespace NAPS2.ImportExport.Pdf
             }
             if (File.Exists(subFileName))
             {
-                if (overwritePrompt.ConfirmOverwrite(subFileName) != DialogResult.Yes)
+                if (_overwritePrompt.ConfirmOverwrite(subFileName) != DialogResult.Yes)
                 {
                     return false;
                 }
@@ -65,7 +65,7 @@ namespace NAPS2.ImportExport.Pdf
                 bool result = false;
                 try
                 {
-                    result = await pdfExporter.Export(subFileName, snapshots, pdfSettings, ocrContext, OnProgress, CancelToken);
+                    result = await _pdfExporter.Export(subFileName, snapshots, pdfSettings, ocrContext, OnProgress, CancelToken);
                 }
                 catch (UnauthorizedAccessException ex)
                 {
@@ -94,7 +94,7 @@ namespace NAPS2.ImportExport.Pdf
                     GC.Collect();
                 }
                 
-                if (result && email && emailMessage != null && emailProviderFactory != null)
+                if (result && email && emailMessage != null && _emailProviderFactory != null)
                 {
                     Status.StatusText = MiscResources.UploadingEmail;
                     Status.CurrentProgress = 0;
@@ -104,7 +104,7 @@ namespace NAPS2.ImportExport.Pdf
 
                     try
                     {
-                        result = await emailProviderFactory.Default.SendEmail(emailMessage, OnProgress, CancelToken);
+                        result = await _emailProviderFactory.Default.SendEmail(emailMessage, OnProgress, CancelToken);
                     }
                     catch (OperationCanceledException)
                     {

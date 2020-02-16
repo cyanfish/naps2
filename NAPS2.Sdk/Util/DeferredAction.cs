@@ -4,15 +4,15 @@ namespace NAPS2.Util
 {
     public class DeferredAction
     {
-        private readonly Action action;
-        private int counter;
+        private readonly Action _action;
+        private int _counter;
 
         public DeferredAction(Action action)
         {
-            this.action = action;
+            _action = action;
         }
 
-        public bool IsDeferred => counter > 0;
+        public bool IsDeferred => _counter > 0;
 
         public IDisposable Defer()
         {
@@ -21,30 +21,30 @@ namespace NAPS2.Util
 
         private class DeferSaveObject : IDisposable
         {
-            private readonly DeferredAction deferredAction;
+            private readonly DeferredAction _deferredAction;
 
-            private bool disposed;
+            private bool _disposed;
 
             public DeferSaveObject(DeferredAction deferredAction)
             {
-                this.deferredAction = deferredAction;
+                _deferredAction = deferredAction;
                 lock (deferredAction)
                 {
-                    deferredAction.counter += 1;
+                    deferredAction._counter += 1;
                 }
             }
 
             public void Dispose()
             {
-                lock (deferredAction)
+                lock (_deferredAction)
                 {
-                    if (disposed) return;
-                    disposed = true;
+                    if (_disposed) return;
+                    _disposed = true;
 
-                    deferredAction.counter -= 1;
-                    if (!deferredAction.IsDeferred)
+                    _deferredAction._counter -= 1;
+                    if (!_deferredAction.IsDeferred)
                     {
-                        deferredAction.action();
+                        _deferredAction._action();
                     }
                 }
             }

@@ -8,13 +8,13 @@ namespace NAPS2.Localization
 {
     public class LanguageContext
     {
-        private readonly string langCode;
+        private readonly string _langCode;
 
         public Dictionary<string, TranslatableString> Strings { get; } = new Dictionary<string, TranslatableString>();
 
         public LanguageContext(string langCode)
         {
-            this.langCode = langCode;
+            _langCode = langCode;
         }
 
         public void Load(string poFile)
@@ -95,7 +95,7 @@ namespace NAPS2.Localization
             doc.Descendants("metadata").Remove();
             doc.Descendants("assembly").Remove();
 
-            string savePath = file.FullName.Replace(".resx", $".{langCode}.resx");
+            string savePath = file.FullName.Replace(".resx", $".{_langCode}.resx");
             doc.Save(savePath);
         }
     }

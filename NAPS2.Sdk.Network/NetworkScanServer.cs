@@ -11,11 +11,11 @@ namespace NAPS2.Remoting.Network
 {
     public class NetworkScanServer : IDisposable
     {
-        private readonly ImageContext imageContext;
-        private readonly NetworkScanServerOptions options;
-        private readonly IRemoteScanController remoteScanController;
-        private readonly CancellationTokenSource cts = new CancellationTokenSource();
-        private Server? server;
+        private readonly ImageContext _imageContext;
+        private readonly NetworkScanServerOptions _options;
+        private readonly IRemoteScanController _remoteScanController;
+        private readonly CancellationTokenSource _cts = new CancellationTokenSource();
+        private Server? _server;
 
         public NetworkScanServer()
             : this(ImageContext.Default, new NetworkScanServerOptions(), new RemoteScanController())
@@ -34,34 +34,34 @@ namespace NAPS2.Remoting.Network
 
         internal NetworkScanServer(ImageContext imageContext, NetworkScanServerOptions options, IRemoteScanController remoteScanController)
         {
-            this.imageContext = imageContext;
-            this.options = options;
-            this.remoteScanController = remoteScanController;
+            _imageContext = imageContext;
+            _options = options;
+            _remoteScanController = remoteScanController;
         }
 
         public void Start()
         {
-            if (server != null)
+            if (_server != null)
             {
                 throw new InvalidOperationException("Already started");
             }
 
             // Start server
             // TODO: Secure
-            server = new Server
+            _server = new Server
             {
-                Services = { NetworkScanService.BindService(new NetworkScanServiceImpl(imageContext, remoteScanController)) },
-                Ports = { new ServerPort("0.0.0.0", options.Port ?? ServerPort.PickUnused, ServerCredentials.Insecure) }
+                Services = { NetworkScanService.BindService(new NetworkScanServiceImpl(_imageContext, _remoteScanController)) },
+                Ports = { new ServerPort("0.0.0.0", _options.Port ?? ServerPort.PickUnused, ServerCredentials.Insecure) }
             };
-            server.Start();
+            _server.Start();
 
             // Start discovery
-            if (options.AllowDiscovery)
+            if (_options.AllowDiscovery)
             {
-                int discoveryPort = options.DiscoveryPort ?? Discovery.DEFAULT_DISCOVERY_PORT;
-                int serverPort = server.Ports.Single().BoundPort;
-                string serverName = options.ServerName ?? Environment.MachineName;
-                Task.Run(() => Discovery.ListenForBroadcast(discoveryPort, serverPort, serverName, cts.Token));
+                int discoveryPort = _options.DiscoveryPort ?? Discovery.DEFAULT_DISCOVERY_PORT;
+                int serverPort = _server.Ports.Single().BoundPort;
+                string serverName = _options.ServerName ?? Environment.MachineName;
+                Task.Run(() => Discovery.ListenForBroadcast(discoveryPort, serverPort, serverName, _cts.Token));
             }
         }
 
@@ -72,7 +72,7 @@ namespace NAPS2.Remoting.Network
 
         public void Dispose()
         {
-            server?.ShutdownAsync().Wait();
+            _server?.ShutdownAsync().Wait();
         }
     }
 }

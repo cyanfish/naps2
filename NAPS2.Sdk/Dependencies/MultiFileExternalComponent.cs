@@ -5,14 +5,14 @@ namespace NAPS2.Dependencies
 {
     public class MultiFileExternalComponent : IExternalComponent
     {
-        private readonly string[] subPaths;
+        private readonly string[] _subPaths;
 
         public MultiFileExternalComponent(string id, string rootPath, string[] subPaths, DownloadInfo downloadInfo)
         {
             Id = id;
             RootPath = rootPath;
             DownloadInfo = downloadInfo;
-            this.subPaths = subPaths;
+            _subPaths = subPaths;
         }
 
         public string Id { get; }
@@ -21,7 +21,7 @@ namespace NAPS2.Dependencies
 
         public DownloadInfo DownloadInfo { get; }
 
-        public bool IsInstalled => subPaths.Any(sub => File.Exists(Path.Combine(RootPath, sub)));
+        public bool IsInstalled => _subPaths.Any(sub => File.Exists(Path.Combine(RootPath, sub)));
 
         public void Install(string sourcePath)
         {

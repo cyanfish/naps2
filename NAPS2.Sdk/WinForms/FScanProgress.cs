@@ -9,12 +9,12 @@ namespace NAPS2.WinForms
 {
     public partial class FScanProgress : FormBase
     {
-        private readonly CancellationTokenSource cts = new CancellationTokenSource();
-        private bool isComplete;
+        private readonly CancellationTokenSource _cts = new CancellationTokenSource();
+        private bool _isComplete;
 
         public FScanProgress()
         {
-            CancelToken = cts.Token;
+            CancelToken = _cts.Token;
 
             SaveFormState = false;
             RestoreFormState = false;
@@ -86,7 +86,7 @@ namespace NAPS2.WinForms
                 }
                 SafeInvoke(() =>
                 {
-                    isComplete = true;
+                    _isComplete = true;
                     DialogResult = CancelToken.IsCancellationRequested ? DialogResult.Cancel : DialogResult.OK;
                     Close();
                 });
@@ -95,13 +95,13 @@ namespace NAPS2.WinForms
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
-            cts.Cancel();
+            _cts.Cancel();
             btnCancel.Enabled = false;
         }
 
         private void FScanProgress_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (!isComplete)
+            if (!_isComplete)
             {
                 // Prevent simultaneous transfers by refusing to close until the transfer is complete
                 e.Cancel = true;

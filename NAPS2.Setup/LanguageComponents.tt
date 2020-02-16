@@ -6,7 +6,7 @@
 <Wix xmlns='http://schemas.microsoft.com/wix/2006/wi'>
   <Fragment Id='LanguageComponentsFragment'>
 <#
-    var setupDirPath = Path.GetDirectoryName(this.Host.TemplateFile);
+    var setupDirPath = Path.GetDirectoryName(Host.TemplateFile);
     var outputDirPath = Path.Combine(setupDirPath, @"..\NAPS2.Sdk\bin\InstallerMSI");
     var outputDir = new DirectoryInfo(outputDirPath);
 #>

@@ -14,25 +14,25 @@ namespace NAPS2.WinForms
 {
     public partial class FEditProfile : FormBase
     {
-        private readonly IScanPerformer scanPerformer;
-        private readonly ErrorOutput errorOutput;
-        private readonly ProfileNameTracker profileNameTracker;
+        private readonly IScanPerformer _scanPerformer;
+        private readonly ErrorOutput _errorOutput;
+        private readonly ProfileNameTracker _profileNameTracker;
 
-        private ScanProfile scanProfile;
-        private ScanDevice currentDevice;
-        private bool isDefault;
-        private bool useProxy;
+        private ScanProfile _scanProfile;
+        private ScanDevice _currentDevice;
+        private bool _isDefault;
+        private bool _useProxy;
 
-        private int iconID;
-        private bool result;
+        private int _iconId;
+        private bool _result;
 
-        private bool suppressChangeEvent;
+        private bool _suppressChangeEvent;
 
         public FEditProfile(IScanPerformer scanPerformer, ErrorOutput errorOutput, ProfileNameTracker profileNameTracker)
         {
-            this.scanPerformer = scanPerformer;
-            this.errorOutput = errorOutput;
-            this.profileNameTracker = profileNameTracker;
+            _scanPerformer = scanPerformer;
+            _errorOutput = errorOutput;
+            _profileNameTracker = profileNameTracker;
             InitializeComponent();
             btnNetwork.Left = btnChooseDevice.Right + 6;
             // TODO: Remove this to reenable
@@ -57,7 +57,7 @@ namespace NAPS2.WinForms
         protected override void OnLoad(object sender, EventArgs e)
         {
             // Don't trigger any onChange events
-            suppressChangeEvent = true;
+            _suppressChangeEvent = true;
 
             pctIcon.Image = ilProfileIcons.IconsList.Images[ScanProfile.IconID];
             txtName.Text = ScanProfile.DisplayName;
@@ -65,9 +65,9 @@ namespace NAPS2.WinForms
             {
                 CurrentDevice = ScanProfile.Device;
             }
-            isDefault = ScanProfile.IsDefault;
-            useProxy = ScanProfile.DriverName == DriverNames.PROXY;
-            iconID = ScanProfile.IconID;
+            _isDefault = ScanProfile.IsDefault;
+            _useProxy = ScanProfile.DriverName == DriverNames.PROXY;
+            _iconId = ScanProfile.IconID;
 
             cmbSource.SelectedIndex = (int)ScanProfile.PaperSource;
             cmbDepth.SelectedIndex = (int)ScanProfile.BitDepth;
@@ -82,13 +82,13 @@ namespace NAPS2.WinForms
             cbAutoSave.Checked = ScanProfile.EnableAutoSave;
 
             // The setter updates the driver selection checkboxes
-            DeviceDriverName = useProxy ? ScanProfile.ProxyDriverName : ScanProfile.DriverName;
+            DeviceDriverName = _useProxy ? ScanProfile.ProxyDriverName : ScanProfile.DriverName;
 
             rdbNative.Checked = ScanProfile.UseNativeUI;
             rdbConfig.Checked = !ScanProfile.UseNativeUI;
 
             // Start triggering onChange events again
-            suppressChangeEvent = false;
+            _suppressChangeEvent = false;
 
             UpdateEnabledControls();
 
@@ -173,12 +173,12 @@ namespace NAPS2.WinForms
             cmbPage.SelectedIndex = cmbPage.Items.Count - 2;
         }
 
-        public bool Result => result;
+        public bool Result => _result;
 
         public ScanProfile ScanProfile
         {
-            get => scanProfile;
-            set => scanProfile = value.Clone();
+            get => _scanProfile;
+            set => _scanProfile = value.Clone();
         }
 
         private string DeviceDriverName
@@ -209,10 +209,10 @@ namespace NAPS2.WinForms
 
         public ScanDevice CurrentDevice
         {
-            get => currentDevice;
+            get => _currentDevice;
             set
             {
-                currentDevice = value;
+                _currentDevice = value;
                 txtDevice.Text = (value == null ? "" : value.Name);
             }
         }
@@ -221,7 +221,7 @@ namespace NAPS2.WinForms
         {
             try
             {
-                ScanDevice device = await scanPerformer.PromptForDevice(ScanProfile, Handle);
+                ScanDevice device = await _scanPerformer.PromptForDevice(ScanProfile, Handle);
                 if (device != null)
                 {
                     if (string.IsNullOrEmpty(txtName.Text) ||
@@ -237,19 +237,19 @@ namespace NAPS2.WinForms
                 if (e is ScanDriverUnknownException)
                 {
                     Log.ErrorException(e.Message, e.InnerException);
-                    errorOutput.DisplayError(e.Message, e);
+                    _errorOutput.DisplayError(e.Message, e);
                 }
                 else
                 {
-                    errorOutput.DisplayError(e.Message);
+                    _errorOutput.DisplayError(e.Message);
                 }
             }
         }
 
         private async void btnChooseDevice_Click(object sender, EventArgs e)
         {
-            ScanProfile.DriverName = useProxy ? DriverNames.PROXY : DeviceDriverName;
-            ScanProfile.ProxyDriverName = useProxy ? DeviceDriverName : null;
+            ScanProfile.DriverName = _useProxy ? DriverNames.PROXY : DeviceDriverName;
+            ScanProfile.ProxyDriverName = _useProxy ? DeviceDriverName : null;
             await ChooseDevice();
         }
 
@@ -266,19 +266,19 @@ namespace NAPS2.WinForms
             var pageSize = (PageSizeListItem) cmbPage.SelectedItem;
             if (ScanProfile.DisplayName != null)
             {
-                profileNameTracker.RenamingProfile(ScanProfile.DisplayName, txtName.Text);
+                _profileNameTracker.RenamingProfile(ScanProfile.DisplayName, txtName.Text);
             }
-            scanProfile = new ScanProfile
+            _scanProfile = new ScanProfile
             {
                 Version = ScanProfile.CURRENT_VERSION,
 
                 Device = CurrentDevice,
-                IsDefault = isDefault,
-                DriverName = useProxy ? DriverNames.PROXY : DeviceDriverName,
+                IsDefault = _isDefault,
+                DriverName = _useProxy ? DriverNames.PROXY : DeviceDriverName,
                 ProxyConfig = ScanProfile.ProxyConfig,
-                ProxyDriverName = useProxy ? DeviceDriverName : null,
+                ProxyDriverName = _useProxy ? DeviceDriverName : null,
                 DisplayName = txtName.Text,
-                IconID = iconID,
+                IconID = _iconId,
                 MaxQuality = ScanProfile.MaxQuality,
                 UseNativeUI = rdbNative.Checked,
 
@@ -320,10 +320,10 @@ namespace NAPS2.WinForms
 
             if (txtName.Text == "")
             {
-                errorOutput.DisplayError(MiscResources.NameMissing);
+                _errorOutput.DisplayError(MiscResources.NameMissing);
                 return;
             }
-            result = true;
+            _result = true;
             SaveSettings();
             Close();
         }
@@ -345,11 +345,11 @@ namespace NAPS2.WinForms
 
         private void UpdateEnabledControls()
         {
-            if (!suppressChangeEvent)
+            if (!_suppressChangeEvent)
             {
-                suppressChangeEvent = true;
+                _suppressChangeEvent = true;
 
-                bool canUseNativeUi = DeviceDriverName != DriverNames.SANE && !useProxy;
+                bool canUseNativeUi = DeviceDriverName != DriverNames.SANE && !_useProxy;
                 bool locked = ScanProfile.IsLocked;
                 bool deviceLocked = ScanProfile.IsDeviceLocked;
                 bool settingsEnabled = !locked && (rdbConfig.Checked || !canUseNativeUi);
@@ -380,13 +380,13 @@ namespace NAPS2.WinForms
                 ConditionalControls.SetVisible(panelUI, canUseNativeUi, 20);
                 ConditionalControls.LockHeight(this);
 
-                suppressChangeEvent = false;
+                _suppressChangeEvent = false;
             }
         }
 
         private void rdDriver_CheckedChanged(object sender, EventArgs e)
         {
-            if (((RadioButton)sender).Checked && !suppressChangeEvent)
+            if (((RadioButton)sender).Checked && !_suppressChangeEvent)
             {
                 ScanProfile.Device = null;
                 CurrentDevice = null;
@@ -426,8 +426,8 @@ namespace NAPS2.WinForms
             txtContrast.Text = trContrast.Value.ToString("G");
         }
 
-        private int lastPageSizeIndex = -1;
-        private PageSizeListItem lastPageSizeItem = null;
+        private int _lastPageSizeIndex = -1;
+        private PageSizeListItem _lastPageSizeItem = null;
 
         private void cmbPage_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -435,9 +435,9 @@ namespace NAPS2.WinForms
             {
                 // "Custom..." selected
                 var form = FormFactory.Create<FPageSize>();
-                form.PageSizeDimens = lastPageSizeItem.Type == ScanPageSize.Custom
-                    ? lastPageSizeItem.CustomDimens
-                    : lastPageSizeItem.Type.PageDimensions();
+                form.PageSizeDimens = _lastPageSizeItem.Type == ScanPageSize.Custom
+                    ? _lastPageSizeItem.CustomDimens
+                    : _lastPageSizeItem.Type.PageDimensions();
                 if (form.ShowDialog() == DialogResult.OK)
                 {
                     UpdatePageSizeList();
@@ -445,11 +445,11 @@ namespace NAPS2.WinForms
                 }
                 else
                 {
-                    cmbPage.SelectedIndex = lastPageSizeIndex;
+                    cmbPage.SelectedIndex = _lastPageSizeIndex;
                 }
             }
-            lastPageSizeIndex = cmbPage.SelectedIndex;
-            lastPageSizeItem = (PageSizeListItem)cmbPage.SelectedItem;
+            _lastPageSizeIndex = cmbPage.SelectedIndex;
+            _lastPageSizeItem = (PageSizeListItem)cmbPage.SelectedItem;
         }
 
         private void linkAutoSaveSettings_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -475,7 +475,7 @@ namespace NAPS2.WinForms
 
         private void cbAutoSave_CheckedChanged(object sender, EventArgs e)
         {
-            if (!suppressChangeEvent)
+            if (!_suppressChangeEvent)
             {
                 if (cbAutoSave.Checked)
                 {

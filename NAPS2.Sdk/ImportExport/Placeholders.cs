@@ -76,11 +76,11 @@ namespace NAPS2.ImportExport
 
             private static readonly Regex NumberPlaceholderPattern = new Regex(@"\$\(n+\)");
 
-            private readonly DateTime? dateTimeOverride;
+            private readonly DateTime? _dateTimeOverride;
             
             public DefaultPlaceholders(DateTime? dateTimeOverride = null)
             {
-                this.dateTimeOverride = dateTimeOverride;
+                _dateTimeOverride = dateTimeOverride;
             }
 
             /// <summary>
@@ -98,7 +98,7 @@ namespace NAPS2.ImportExport
                     return null;
                 }
 
-                var dateTime = dateTimeOverride ?? DateTime.Now;
+                var dateTime = _dateTimeOverride ?? DateTime.Now;
                 // Start with environment variables
                 string result = Environment.ExpandEnvironmentVariables(filePath);
                 // Most placeholders don't need a special case

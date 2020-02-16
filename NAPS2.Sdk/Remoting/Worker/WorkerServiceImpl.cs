@@ -18,10 +18,10 @@ namespace NAPS2.Remoting.Worker
 {
     public class WorkerServiceImpl : WorkerService.WorkerServiceBase
     {
-        private readonly ImageContext imageContext;
-        private readonly IRemoteScanController remoteScanController;
-        private readonly ThumbnailRenderer thumbnailRenderer;
-        private readonly IMapiWrapper mapiWrapper;
+        private readonly ImageContext _imageContext;
+        private readonly IRemoteScanController _remoteScanController;
+        private readonly ThumbnailRenderer _thumbnailRenderer;
+        private readonly IMapiWrapper _mapiWrapper;
 
         public WorkerServiceImpl(ImageContext imageContext, ThumbnailRenderer thumbnailRenderer, IMapiWrapper mapiWrapper)
             : this(imageContext, new RemoteScanController(imageContext),
@@ -32,10 +32,10 @@ namespace NAPS2.Remoting.Worker
         internal WorkerServiceImpl(ImageContext imageContext, IRemoteScanController remoteScanController, ThumbnailRenderer thumbnailRenderer,
             IMapiWrapper mapiWrapper)
         {
-            this.imageContext = imageContext;
-            this.remoteScanController = remoteScanController;
-            this.thumbnailRenderer = thumbnailRenderer;
-            this.mapiWrapper = mapiWrapper;
+            _imageContext = imageContext;
+            _remoteScanController = remoteScanController;
+            _thumbnailRenderer = thumbnailRenderer;
+            _mapiWrapper = mapiWrapper;
         }
 
         public override Task<InitResponse> Init(InitRequest request, ServerCallContext context)
@@ -44,7 +44,7 @@ namespace NAPS2.Remoting.Worker
             {
                 if (!string.IsNullOrEmpty(request.RecoveryFolderPath))
                 {
-                    imageContext.UseFileStorage(request.RecoveryFolderPath);
+                    _imageContext.UseFileStorage(request.RecoveryFolderPath);
                 }
 
                 return Task.FromResult(new InitResponse());
@@ -91,7 +91,7 @@ namespace NAPS2.Remoting.Worker
             try
             {
                 var scanOptions = request.OptionsXml.FromXml<ScanOptions>();
-                var deviceList = await remoteScanController.GetDeviceList(scanOptions);
+                var deviceList = await _remoteScanController.GetDeviceList(scanOptions);
                 return new GetDeviceListResponse
                 {
                     DeviceListXml = deviceList.ToXml()
@@ -121,12 +121,12 @@ namespace NAPS2.Remoting.Worker
                         }
                     })
                 );
-                await remoteScanController.Scan(request.OptionsXml.FromXml<ScanOptions>(),
+                await _remoteScanController.Scan(request.OptionsXml.FromXml<ScanOptions>(),
                     context.CancellationToken, scanEvents,
                     (image, postProcessingContext) =>
                         sequencedWriter.Write(new ScanResponse
                         {
-                            Image = SerializedImageHelper.Serialize(imageContext, image,
+                            Image = SerializedImageHelper.Serialize(_imageContext, image,
                                 new SerializedImageHelper.SerializeOptions
                                 {
                                     TransferOwnership = true,
@@ -147,7 +147,7 @@ namespace NAPS2.Remoting.Worker
             try
             {
                 var emailMessage = request.EmailMessageXml.FromXml<EmailMessage>();
-                var returnCode = await mapiWrapper.SendEmail(emailMessage);
+                var returnCode = await _mapiWrapper.SendEmail(emailMessage);
                 return new SendMapiEmailResponse
                 {
                     ReturnCodeXml = returnCode.ToXml()
@@ -168,9 +168,9 @@ namespace NAPS2.Remoting.Worker
                     ShareFileStorage = true
                 };
                 using var image =
-                    SerializedImageHelper.Deserialize(imageContext, request.Image, deserializeOptions);
-                var thumbnail = await thumbnailRenderer.Render(image, request.Size);
-                var stream = imageContext
+                    SerializedImageHelper.Deserialize(_imageContext, request.Image, deserializeOptions);
+                var thumbnail = await _thumbnailRenderer.Render(image, request.Size);
+                var stream = _imageContext
                     .Convert<MemoryStreamStorage>(thumbnail, new StorageConvertParams {Lossless = true}).Stream;
                 return new RenderThumbnailResponse
                 {
@@ -187,9 +187,9 @@ namespace NAPS2.Remoting.Worker
         {
             try
             {
-                var renderer = new PdfiumPdfRenderer(imageContext);
+                var renderer = new PdfiumPdfRenderer(_imageContext);
                 using var image = renderer.Render(request.Path, request.Dpi).Single();
-                var stream = imageContext
+                var stream = _imageContext
                     .Convert<MemoryStreamStorage>(image, new StorageConvertParams {Lossless = true}).Stream;
                 return Task.FromResult(new RenderPdfResponse
                 {

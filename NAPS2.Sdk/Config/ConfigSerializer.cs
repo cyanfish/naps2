@@ -13,16 +13,16 @@ namespace NAPS2.Config
 {
     public class ConfigSerializer : VersionedSerializer<CommonConfig>
     {
-        private readonly ConfigReadMode mode;
+        private readonly ConfigReadMode _mode;
 
         public ConfigSerializer(ConfigReadMode mode)
         {
-            this.mode = mode;
+            _mode = mode;
         }
 
         protected override void InternalSerialize(Stream stream, CommonConfig obj)
         {
-            if (mode != ConfigReadMode.All)
+            if (_mode != ConfigReadMode.All)
             {
                 throw new NotSupportedException();
             }
@@ -33,12 +33,12 @@ namespace NAPS2.Config
         {
             if (GetVersion(doc) < 3)
             {
-                if (mode == ConfigReadMode.DefaultOnly)
+                if (_mode == ConfigReadMode.DefaultOnly)
                 {
                     var oldAppConfig = XmlDeserialize<AppConfigV0>(stream);
                     return AppConfigV0ToCommonConfigDefault(oldAppConfig);
                 }
-                if (mode == ConfigReadMode.LockedOnly)
+                if (_mode == ConfigReadMode.LockedOnly)
                 {
                     var oldAppConfig = XmlDeserialize<AppConfigV0>(stream);
                     return AppConfigV0ToCommonConfigLocked(oldAppConfig);
@@ -46,12 +46,12 @@ namespace NAPS2.Config
                 var oldUserConfig = XmlDeserialize<UserConfigV0>(stream);
                 return UserConfigV0ToCommonConfig(oldUserConfig);
             }
-            if (mode == ConfigReadMode.DefaultOnly)
+            if (_mode == ConfigReadMode.DefaultOnly)
             {
                 FilterProperties(doc.Root, "default", "default");
                 return DeserializeXDoc(doc);
             }
-            if (mode == ConfigReadMode.LockedOnly)
+            if (_mode == ConfigReadMode.LockedOnly)
             {
                 FilterProperties(doc.Root, "override", "default");
                 return DeserializeXDoc(doc);

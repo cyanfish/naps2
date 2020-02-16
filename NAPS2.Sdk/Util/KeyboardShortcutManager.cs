@@ -12,10 +12,10 @@ namespace NAPS2.Util
     /// </summary>
     public class KeyboardShortcutManager
     {
-        private readonly Dictionary<Keys, Action> dict = new Dictionary<Keys, Action>();
-        private readonly Dictionary<Keys, ToolStripMenuItem> itemDict = new Dictionary<Keys, ToolStripMenuItem>();
+        private readonly Dictionary<Keys, Action> _dict = new Dictionary<Keys, Action>();
+        private readonly Dictionary<Keys, ToolStripMenuItem> _itemDict = new Dictionary<Keys, ToolStripMenuItem>();
 
-        private readonly Dictionary<string, Keys> customMap = new Dictionary<string, Keys>
+        private readonly Dictionary<string, Keys> _customMap = new Dictionary<string, Keys>
         {
             { "ctrl", Keys.Control },
             { "del", Keys.Delete },
@@ -32,9 +32,9 @@ namespace NAPS2.Util
                     var keys = Keys.None;
                     foreach (var part in value.Split('+').Select(x => x.Trim().ToLowerInvariant()))
                     {
-                        if (customMap.ContainsKey(part))
+                        if (_customMap.ContainsKey(part))
                         {
-                            keys |= customMap[part];
+                            keys |= _customMap[part];
                         }
                         else
                         {
@@ -56,11 +56,11 @@ namespace NAPS2.Util
             var keys = Parse(value);
             if (keys != Keys.None)
             {
-                dict[keys] = action;
-                if (itemDict.ContainsKey(keys))
+                _dict[keys] = action;
+                if (_itemDict.ContainsKey(keys))
                 {
-                    itemDict[keys].ShortcutKeys = Keys.None;
-                    itemDict.Remove(keys);
+                    _itemDict[keys].ShortcutKeys = Keys.None;
+                    _itemDict.Remove(keys);
                 }
                 return true;
             }
@@ -76,16 +76,16 @@ namespace NAPS2.Util
                 {
                     item.ShortcutKeys = Keys.None;
                     item.ShortcutKeyDisplayString = TypeDescriptor.GetConverter(typeof(Keys)).ConvertToString(keys);
-                    itemDict[keys] = item;
-                    dict[keys] = action;
+                    _itemDict[keys] = item;
+                    _dict[keys] = action;
                 }
                 catch (Exception)
                 {
-                    dict[keys] = action;
-                    if (itemDict.ContainsKey(keys))
+                    _dict[keys] = action;
+                    if (_itemDict.ContainsKey(keys))
                     {
-                        itemDict[keys].ShortcutKeys = Keys.None;
-                        itemDict.Remove(keys);
+                        _itemDict[keys].ShortcutKeys = Keys.None;
+                        _itemDict.Remove(keys);
                     }
                 }
                 return true;
@@ -127,9 +127,9 @@ namespace NAPS2.Util
 
         public bool Perform(Keys keyData)
         {
-            if (dict.ContainsKey(keyData))
+            if (_dict.ContainsKey(keyData))
             {
-                dict[keyData]();
+                _dict[keyData]();
                 return true;
             }
             return false;

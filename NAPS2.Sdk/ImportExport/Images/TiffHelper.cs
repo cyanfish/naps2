@@ -14,11 +14,11 @@ namespace NAPS2.ImportExport.Images
 {
     public class TiffHelper
     {
-        private readonly BitmapRenderer bitmapRenderer;
+        private readonly BitmapRenderer _bitmapRenderer;
 
         public TiffHelper(BitmapRenderer bitmapRenderer)
         {
-            this.bitmapRenderer = bitmapRenderer;
+            _bitmapRenderer = bitmapRenderer;
         }
 
         public async Task<bool> SaveMultipage(List<ScannedImage.Snapshot> snapshots, string location, TiffCompression compression, ProgressHandler progressCallback, CancellationToken cancelToken)
@@ -40,7 +40,7 @@ namespace NAPS2.ImportExport.Images
                     var iparams = new EncoderParameters(1);
                     Encoder iparam = Encoder.Compression;
                     // TODO: More generic (?)
-                    using var bitmap = await bitmapRenderer.Render(snapshots[0]);
+                    using var bitmap = await _bitmapRenderer.Render(snapshots[0]);
                     ValidateBitmap(bitmap);
                     var iparamPara = new EncoderParameter(iparam, (long)GetEncoderValue(compression, bitmap));
                     iparams.Param[0] = iparamPara;
@@ -53,7 +53,7 @@ namespace NAPS2.ImportExport.Images
                     var compressionEncoder = Encoder.Compression;
 
                     File.Delete(location);
-                    using var bitmap0 = await bitmapRenderer.Render(snapshots[0]);
+                    using var bitmap0 = await _bitmapRenderer.Render(snapshots[0]);
                     ValidateBitmap(bitmap0);
                     encoderParams.Param[0] = new EncoderParameter(compressionEncoder, (long)GetEncoderValue(compression, bitmap0));
                     encoderParams.Param[1] = new EncoderParameter(saveEncoder, (long)EncoderValue.MultiFrame);
@@ -69,7 +69,7 @@ namespace NAPS2.ImportExport.Images
                             return false;
                         }
 
-                        using var bitmap = await bitmapRenderer.Render(snapshots[i]);
+                        using var bitmap = await _bitmapRenderer.Render(snapshots[i]);
                         ValidateBitmap(bitmap);
                         encoderParams.Param[0] = new EncoderParameter(compressionEncoder, (long)GetEncoderValue(compression, bitmap));
                         encoderParams.Param[1] = new EncoderParameter(saveEncoder, (long)EncoderValue.FrameDimensionPage);

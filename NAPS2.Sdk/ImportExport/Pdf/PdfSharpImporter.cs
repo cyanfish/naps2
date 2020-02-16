@@ -24,19 +24,19 @@ namespace NAPS2.ImportExport.Pdf
 {
     public class PdfSharpImporter : IPdfImporter
     {
-        private readonly ImageContext imageContext;
-        private readonly ErrorOutput errorOutput;
-        private readonly IPdfPasswordProvider pdfPasswordProvider;
-        private readonly ImageRenderer imageRenderer;
-        private readonly IComponentInstallPrompt componentInstallPrompt;
+        private readonly ImageContext _imageContext;
+        private readonly ErrorOutput _errorOutput;
+        private readonly IPdfPasswordProvider _pdfPasswordProvider;
+        private readonly ImageRenderer _imageRenderer;
+        private readonly IComponentInstallPrompt _componentInstallPrompt;
 
         public PdfSharpImporter(ImageContext imageContext, ErrorOutput errorOutput, IPdfPasswordProvider pdfPasswordProvider, ImageRenderer imageRenderer, IComponentInstallPrompt componentInstallPrompt)
         {
-            this.imageContext = imageContext;
-            this.errorOutput = errorOutput;
-            this.pdfPasswordProvider = pdfPasswordProvider;
-            this.imageRenderer = imageRenderer;
-            this.componentInstallPrompt = componentInstallPrompt;
+            _imageContext = imageContext;
+            _errorOutput = errorOutput;
+            _pdfPasswordProvider = pdfPasswordProvider;
+            _imageRenderer = imageRenderer;
+            _componentInstallPrompt = componentInstallPrompt;
         }
 
         public ScannedImageSource Import(string filePath, ImportParams importParams, ProgressHandler progressCallback, CancellationToken cancelToken)
@@ -56,7 +56,7 @@ namespace NAPS2.ImportExport.Pdf
                 {
                     PdfDocument document = PdfReader.Open(filePath, PdfDocumentOpenMode.Import, args =>
                     {
-                        if (!pdfPasswordProvider.ProvidePassword(Path.GetFileName(filePath), passwordAttempts++, out args.Password))
+                        if (!_pdfPasswordProvider.ProvidePassword(Path.GetFileName(filePath), passwordAttempts++, out args.Password))
                         {
                             args.Abort = true;
                             aborted = true;
@@ -66,7 +66,7 @@ namespace NAPS2.ImportExport.Pdf
                         && !document.SecuritySettings.HasOwnerPermissions
                         && !document.SecuritySettings.PermitExtractContent)
                     {
-                        errorOutput.DisplayError(string.Format(MiscResources.PdfNoPermissionToExtractContent, Path.GetFileName(filePath)));
+                        _errorOutput.DisplayError(string.Format(MiscResources.PdfNoPermissionToExtractContent, Path.GetFileName(filePath)));
                         sink.SetCompleted();
                     }
 
@@ -106,14 +106,14 @@ namespace NAPS2.ImportExport.Pdf
                 }
                 catch (ImageRenderException e)
                 {
-                    errorOutput.DisplayError(string.Format(MiscResources.ImportErrorNAPS2Pdf, Path.GetFileName(filePath)));
+                    _errorOutput.DisplayError(string.Format(MiscResources.ImportErrorNAPS2Pdf, Path.GetFileName(filePath)));
                     Log.ErrorException("Error importing PDF file.", e);
                 }
                 catch (Exception e)
                 {
                     if (!aborted)
                     {
-                        errorOutput.DisplayError(string.Format(MiscResources.ImportErrorCouldNot, Path.GetFileName(filePath)));
+                        _errorOutput.DisplayError(string.Format(MiscResources.ImportErrorCouldNot, Path.GetFileName(filePath)));
                         Log.ErrorException("Error importing PDF file.", e);
                     }
                 }
@@ -180,7 +180,7 @@ namespace NAPS2.ImportExport.Pdf
 
         private async Task<ScannedImage> ExportRawPdfPage(PdfPage page, ImportParams importParams)
         {
-            string pdfPath = imageContext.FileStorageManager.NextFilePath() + ".pdf";
+            string pdfPath = _imageContext.FileStorageManager.NextFilePath() + ".pdf";
             var document = new PdfDocument();
             document.Pages.Add(page);
             document.Save(pdfPath);
@@ -188,13 +188,13 @@ namespace NAPS2.ImportExport.Pdf
             // TODO: It would make sense to have in-memory PDFs be an option.
             // TODO: Really, ConvertToBacking should convert PdfStorage -> PdfFileStorage.
             // TODO: Then we wouldn't need a static FileStorageManager.
-            var image = imageContext.CreateScannedImage(new FileStorage(pdfPath));
+            var image = _imageContext.CreateScannedImage(new FileStorage(pdfPath));
             if (importParams.ThumbnailSize.HasValue || importParams.BarcodeDetectionOptions.DetectBarcodes)
             {
-                using var bitmap = await imageRenderer.Render(image);
+                using var bitmap = await _imageRenderer.Render(image);
                 if (importParams.ThumbnailSize.HasValue)
                 {
-                    image.SetThumbnail(imageContext.PerformTransform(bitmap, new ThumbnailTransform(importParams.ThumbnailSize.Value)));
+                    image.SetThumbnail(_imageContext.PerformTransform(bitmap, new ThumbnailTransform(importParams.ThumbnailSize.Value)));
                 }
                 image.BarcodeDetection = BarcodeDetection.Detect(bitmap, importParams.BarcodeDetectionOptions);
             }
@@ -205,12 +205,12 @@ namespace NAPS2.ImportExport.Pdf
         {
             // Fortunately JPEG has native support in PDF and exporting an image is just writing the stream to a file.
             using var memoryStream = new MemoryStream(imageBytes);
-            using var storage = imageContext.ImageFactory.Decode(memoryStream, ".jpg");
+            using var storage = _imageContext.ImageFactory.Decode(memoryStream, ".jpg");
             storage.SetResolution(storage.Width / (float)page.Width.Inch, storage.Height / (float)page.Height.Inch);
-            var image = imageContext.CreateScannedImage(storage, BitDepth.Color, false, -1);
+            var image = _imageContext.CreateScannedImage(storage, BitDepth.Color, false, -1);
             if (importParams.ThumbnailSize.HasValue)
             {
-                image.SetThumbnail(imageContext.PerformTransform(storage, new ThumbnailTransform(importParams.ThumbnailSize.Value)));
+                image.SetThumbnail(_imageContext.PerformTransform(storage, new ThumbnailTransform(importParams.ThumbnailSize.Value)));
             }
             image.BarcodeDetection = BarcodeDetection.Detect(storage, importParams.BarcodeDetectionOptions);
             return image;
@@ -229,12 +229,12 @@ namespace NAPS2.ImportExport.Pdf
             switch (bitsPerComponent)
             {
                 case 8:
-                    storage = imageContext.ImageFactory.FromDimensions(width, height, StoragePixelFormat.RGB24);
+                    storage = _imageContext.ImageFactory.FromDimensions(width, height, StoragePixelFormat.RGB24);
                     bitDepth = BitDepth.Color;
                     RgbToBitmapUnmanaged(storage, buffer);
                     break;
                 case 1:
-                    storage = imageContext.ImageFactory.FromDimensions(width, height, StoragePixelFormat.BW1);
+                    storage = _imageContext.ImageFactory.FromDimensions(width, height, StoragePixelFormat.BW1);
                     bitDepth = BitDepth.BlackAndWhite;
                     BlackAndWhiteToBitmapUnmanaged(storage, buffer);
                     break;
@@ -245,10 +245,10 @@ namespace NAPS2.ImportExport.Pdf
             using (storage)
             {
                 storage.SetResolution(storage.Width / (float)page.Width.Inch, storage.Height / (float)page.Height.Inch);
-                var image = imageContext.CreateScannedImage(storage, bitDepth, true, -1);
+                var image = _imageContext.CreateScannedImage(storage, bitDepth, true, -1);
                 if (importParams.ThumbnailSize.HasValue)
                 {
-                    image.SetThumbnail(imageContext.PerformTransform(storage, new ThumbnailTransform(importParams.ThumbnailSize.Value)));
+                    image.SetThumbnail(_imageContext.PerformTransform(storage, new ThumbnailTransform(importParams.ThumbnailSize.Value)));
                 }
                 image.BarcodeDetection = BarcodeDetection.Detect(storage, importParams.BarcodeDetectionOptions);
                 return image;
@@ -350,13 +350,13 @@ namespace NAPS2.ImportExport.Pdf
             Write(stream, TiffTrailer);
             stream.Seek(0, SeekOrigin.Begin);
 
-            using var storage = imageContext.ImageFactory.Decode(stream, ".tiff");
+            using var storage = _imageContext.ImageFactory.Decode(stream, ".tiff");
             storage.SetResolution(storage.Width / (float)page.Width.Inch, storage.Height / (float)page.Height.Inch);
 
-            var image = imageContext.CreateScannedImage(storage, BitDepth.BlackAndWhite, true, -1);
+            var image = _imageContext.CreateScannedImage(storage, BitDepth.BlackAndWhite, true, -1);
             if (importParams.ThumbnailSize.HasValue)
             {
-                image.SetThumbnail(imageContext.PerformTransform(storage, new ThumbnailTransform(importParams.ThumbnailSize.Value)));
+                image.SetThumbnail(_imageContext.PerformTransform(storage, new ThumbnailTransform(importParams.ThumbnailSize.Value)));
             }
             image.BarcodeDetection = BarcodeDetection.Detect(storage, importParams.BarcodeDetectionOptions);
             return image;

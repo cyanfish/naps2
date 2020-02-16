@@ -6,15 +6,15 @@ namespace NAPS2.WinForms
 {
     public partial class OperationProgressNotifyWidget : NotifyWidgetBase
     {
-        private readonly OperationProgress operationProgress;
-        private readonly IOperation op;
+        private readonly OperationProgress _operationProgress;
+        private readonly IOperation _op;
 
         public OperationProgressNotifyWidget(OperationProgress operationProgress, IOperation op)
         {
             InitializeComponent();
 
-            this.operationProgress = operationProgress;
-            this.op = op;
+            _operationProgress = operationProgress;
+            _op = op;
 
             cancelToolStripMenuItem.Visible = op.AllowCancel;
             op.StatusChanged += Op_StatusChanged;
@@ -23,13 +23,13 @@ namespace NAPS2.WinForms
 
         public override void ShowNotify() => DisplayProgress();
 
-        public override NotifyWidgetBase Clone() => new OperationProgressNotifyWidget(operationProgress, op);
+        public override NotifyWidgetBase Clone() => new OperationProgressNotifyWidget(_operationProgress, _op);
 
         private void DisplayProgress()
         {
             var lblNumberRight = lblNumber.Right;
-            WinFormsOperationProgress.RenderStatus(op, lblTitle, lblNumber, progressBar);
-            if (op.Status?.IndeterminateProgress != true)
+            WinFormsOperationProgress.RenderStatus(_op, lblTitle, lblNumber, progressBar);
+            if (_op.Status?.IndeterminateProgress != true)
             {
                 // Don't display the number if the progress bar is precise
                 // Otherwise, the widget will be too cluttered
@@ -43,8 +43,8 @@ namespace NAPS2.WinForms
 
         private void DoHideNotify()
         {
-            op.StatusChanged -= Op_StatusChanged;
-            op.Finished -= Op_Finished;
+            _op.StatusChanged -= Op_StatusChanged;
+            _op.Finished -= Op_Finished;
             InvokeHideNotify();
         }
 
@@ -60,7 +60,7 @@ namespace NAPS2.WinForms
 
         private void cancelToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            op.Cancel();
+            _op.Cancel();
             cancelToolStripMenuItem.Enabled = false;
         }
 
@@ -69,7 +69,7 @@ namespace NAPS2.WinForms
             if (e.Button == MouseButtons.Left)
             {
                 DoHideNotify();
-                operationProgress.ShowModalProgress(op);
+                _operationProgress.ShowModalProgress(_op);
             }
         }
     }

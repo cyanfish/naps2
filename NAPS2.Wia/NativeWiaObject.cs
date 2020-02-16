@@ -18,8 +18,8 @@ namespace NAPS2.Wia
             }
         }
 
-        private bool disposed;
-        private IntPtr handle;
+        private bool _disposed;
+        private IntPtr _handle;
 
         protected NativeWiaObject(WiaVersion version, IntPtr handle)
         {
@@ -40,16 +40,16 @@ namespace NAPS2.Wia
             get
             {
                 EnsureNotDisposed();
-                return handle;
+                return _handle;
             }
-            set => handle = value;
+            set => _handle = value;
         }
 
         public WiaVersion Version { get; }
 
         private void EnsureNotDisposed()
         {
-            if (disposed)
+            if (_disposed)
             {
                 throw new ObjectDisposedException(GetType().FullName);
             }
@@ -57,13 +57,13 @@ namespace NAPS2.Wia
 
         protected virtual void Dispose(bool disposing)
         {
-            if (!disposed)
+            if (!_disposed)
             {
                 if (Handle != IntPtr.Zero)
                 {
                     Marshal.Release(Handle);
                 }
-                disposed = true;
+                _disposed = true;
             }
         }
 

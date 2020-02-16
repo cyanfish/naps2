@@ -23,12 +23,12 @@ namespace NAPS2.Images.Storage
             set => _default = value ?? throw new ArgumentNullException(nameof(value));
         }
 
-        private readonly Dictionary<(Type, Type), (object, MethodInfo)> Transformers = new Dictionary<(Type, Type), (object, MethodInfo)>();
+        private readonly Dictionary<(Type, Type), (object, MethodInfo)> _transformers = new Dictionary<(Type, Type), (object, MethodInfo)>();
 
         protected ImageContext(Type imageType)
         {
             ImageType = imageType;
-            pdfRenderer = new PdfiumPdfRenderer(this);
+            _pdfRenderer = new PdfiumPdfRenderer(this);
         }
 
         /// <summary>
@@ -48,7 +48,7 @@ namespace NAPS2.Images.Storage
                     storageType.IsAssignableFrom(typeof(TImage)) &&
                     typeof(Transform).IsAssignableFrom(transformType))
                 {
-                    Transformers[(typeof(TImage), transformType)] = (transformerObj, method);
+                    _transformers[(typeof(TImage), transformType)] = (transformerObj, method);
                 }
             }
         }
@@ -64,7 +64,7 @@ namespace NAPS2.Images.Storage
         {
             try
             {
-                var (transformer, perform) = Transformers[(image.GetType(), transform.GetType())];
+                var (transformer, perform) = _transformers[(image.GetType(), transform.GetType())];
                 return (IImage)perform.Invoke(transformer, new object[] { image, transform });
             }
             catch (KeyNotFoundException)
@@ -83,7 +83,7 @@ namespace NAPS2.Images.Storage
 
         public void RegisterImageFactory<TImage>(IImageFactory factory) where TImage : IImage
         {
-            ImageFactories[typeof(TImage)] = factory ?? throw new ArgumentNullException(nameof(factory));
+            _imageFactories[typeof(TImage)] = factory ?? throw new ArgumentNullException(nameof(factory));
         }
         
         public Type ImageType { get; }
@@ -95,13 +95,13 @@ namespace NAPS2.Images.Storage
 
         public Type BackingStorageType { get; private set; } = typeof(IStorage);
 
-        public IImageFactory ImageFactory => ImageFactories.Get(ImageType) ?? throw new InvalidOperationException($"No factory has been registered for the image type {ImageType.FullName}.");
+        public IImageFactory ImageFactory => _imageFactories.Get(ImageType) ?? throw new InvalidOperationException($"No factory has been registered for the image type {ImageType.FullName}.");
 
-        private readonly Dictionary<Type, IImageFactory> ImageFactories = new Dictionary<Type, IImageFactory>();
+        private readonly Dictionary<Type, IImageFactory> _imageFactories = new Dictionary<Type, IImageFactory>();
 
         public IImageMetadataFactory ImageMetadataFactory { get; set; } = new StubImageMetadataFactory();
         
-        private readonly Dictionary<(Type, Type), (object, MethodInfo)> Converters = new Dictionary<(Type, Type), (object, MethodInfo)>();
+        private readonly Dictionary<(Type, Type), (object, MethodInfo)> _converters = new Dictionary<(Type, Type), (object, MethodInfo)>();
 
         public void RegisterConverters(object converterObj)
         {
@@ -116,7 +116,7 @@ namespace NAPS2.Images.Storage
                     typeof(IStorage).IsAssignableFrom(outputType) &&
                     paramsType == typeof(StorageConvertParams))
                 {
-                    Converters.Add((inputType, outputType), (converterObj, method));
+                    _converters.Add((inputType, outputType), (converterObj, method));
                 }
             }
         }
@@ -158,7 +158,7 @@ namespace NAPS2.Images.Storage
             // TODO: Dispose old storage? Consider ownership. Possibility: Clone/Dispose ref counts.
             try
             {
-                var (converter, convert) = Converters[(storage.GetType(), type)];
+                var (converter, convert) = _converters[(storage.GetType(), type)];
                 return (IStorage)convert.Invoke(converter, new object[] { storage, convertParams });
             }
             catch (KeyNotFoundException)
@@ -197,20 +197,20 @@ namespace NAPS2.Images.Storage
             return new ScannedImage(backingStorage, metadata);
         }
 
-        private FileStorageManager fileStorageManager = new FileStorageManager();
+        private FileStorageManager _fileStorageManager = new FileStorageManager();
 
         public FileStorageManager FileStorageManager
         {
-            get => fileStorageManager;
-            set => fileStorageManager = value ?? throw new ArgumentNullException(nameof(value));
+            get => _fileStorageManager;
+            set => _fileStorageManager = value ?? throw new ArgumentNullException(nameof(value));
         }
 
-        private IPdfRenderer pdfRenderer;
+        private IPdfRenderer _pdfRenderer;
 
         public IPdfRenderer PdfRenderer
         {
-            get => pdfRenderer;
-            set => pdfRenderer = value ?? throw new ArgumentNullException(nameof(value));
+            get => _pdfRenderer;
+            set => _pdfRenderer = value ?? throw new ArgumentNullException(nameof(value));
         }
 
         public ImageContext UseFileStorage(string folderPath)
@@ -242,7 +242,7 @@ namespace NAPS2.Images.Storage
         {
             if (disposing)
             {
-                fileStorageManager.Dispose();
+                _fileStorageManager.Dispose();
             }
         }
 

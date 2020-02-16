@@ -5,16 +5,16 @@ namespace NAPS2.Automation
 {
     public class ConsoleErrorOutput : ErrorOutput
     {
-        private readonly ConsoleOutput output;
+        private readonly ConsoleOutput _output;
 
         public ConsoleErrorOutput(ConsoleOutput output)
         {
-            this.output = output;
+            _output = output;
         }
 
         public override void DisplayError(string errorMessage)
         {
-            output.Writer.WriteLine(errorMessage);
+            _output.Writer.WriteLine(errorMessage);
         }
 
         public override void DisplayError(string errorMessage, string details)

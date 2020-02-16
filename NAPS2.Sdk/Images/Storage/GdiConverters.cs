@@ -9,11 +9,11 @@ namespace NAPS2.Images.Storage
 {
     public class GdiConverters
     {
-        private readonly ImageContext imageContext;
+        private readonly ImageContext _imageContext;
 
         public GdiConverters(ImageContext imageContext)
         {
-            this.imageContext = imageContext;
+            _imageContext = imageContext;
         }
         
         // TODO: I've gotten rid of most of the craziness. What remains is file/stream -> image and image -> file/stream.
@@ -33,7 +33,7 @@ namespace NAPS2.Images.Storage
             {
                 var tempPath = ScannedImageHelper.SaveSmallestBitmap(input.Bitmap, convertParams.BitDepth, convertParams.Lossless, convertParams.LossyQuality, out ImageFormat fileFormat);
                 string ext = Equals(fileFormat, ImageFormat.Png) ? ".png" : ".jpg";
-                var path = imageContext.FileStorageManager.NextFilePath() + ext;
+                var path = _imageContext.FileStorageManager.NextFilePath() + ext;
                 File.Move(tempPath, path);
                 return new FileStorage(path);
             }
@@ -46,7 +46,7 @@ namespace NAPS2.Images.Storage
             // Then we can have a PDF->Image converter that returns null if it's not a pdf file.
             if (IsPdfFile(input))
             {
-                return (GdiImage)imageContext.PdfRenderer.Render(input.FullPath, 300).Single();
+                return (GdiImage)_imageContext.PdfRenderer.Render(input.FullPath, 300).Single();
             }
             else
             {

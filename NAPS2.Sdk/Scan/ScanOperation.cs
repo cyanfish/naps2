@@ -6,7 +6,7 @@ namespace NAPS2.Scan
 {
     public class ScanOperation : OperationBase
     {
-        private int pageNumber = 1;
+        private int _pageNumber = 1;
 
         public ScanOperation(ScanDevice device, PaperSource paperSource)
         {
@@ -15,7 +15,7 @@ namespace NAPS2.Scan
             {
                 StatusText = paperSource == PaperSource.Flatbed
                     ? MiscResources.AcquiringData
-                    : string.Format(MiscResources.ScanProgressPage, pageNumber),
+                    : string.Format(MiscResources.ScanProgressPage, _pageNumber),
                 MaxProgress = 1000,
                 ProgressType = OperationProgressType.BarOnly
             };
@@ -34,8 +34,8 @@ namespace NAPS2.Scan
 
         public void NextPage(int newPageNumber)
         {
-            pageNumber = newPageNumber;
-            Status.StatusText = string.Format(MiscResources.ScanProgressPage, pageNumber);
+            _pageNumber = newPageNumber;
+            Status.StatusText = string.Format(MiscResources.ScanProgressPage, _pageNumber);
             InvokeStatusChanged();
         }
 

@@ -5,16 +5,16 @@ namespace NAPS2.Sdk.Tests.Mocks
 {
     internal class InProcScanBridgeFactory : IScanBridgeFactory
     {
-        private readonly InProcScanBridge inProcScanBridge;
+        private readonly InProcScanBridge _inProcScanBridge;
 
         public InProcScanBridgeFactory(InProcScanBridge inProcScanBridge)
         {
-            this.inProcScanBridge = inProcScanBridge;
+            _inProcScanBridge = inProcScanBridge;
         }
         
         public IScanBridge Create(ScanOptions options)
         {
-            return inProcScanBridge;
+            return _inProcScanBridge;
         }
     }
 }

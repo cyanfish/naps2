@@ -4,7 +4,7 @@ namespace NAPS2.Wia
 {
     public class WiaProperty
     {
-        private WiaPropertyAttributes? attributes;
+        private WiaPropertyAttributes? _attributes;
 
         protected internal WiaProperty(IntPtr storage, int id, string name, ushort type)
         {
@@ -59,7 +59,7 @@ namespace NAPS2.Wia
             }
         }
 
-        public WiaPropertyAttributes Attributes => attributes ?? (attributes = new WiaPropertyAttributes(Storage, Id));
+        public WiaPropertyAttributes Attributes => _attributes ?? (_attributes = new WiaPropertyAttributes(Storage, Id));
 
         public override string ToString() => Name;
 

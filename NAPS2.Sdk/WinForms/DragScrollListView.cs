@@ -9,9 +9,9 @@ namespace NAPS2.WinForms
     {
         // From http://stackoverflow.com/questions/660663/c-sharp-implementing-auto-scroll-in-a-listview-while-drag-dropping
 
-        private Timer tmrLVScroll;
+        private Timer _tmrLvScroll;
         private System.ComponentModel.IContainer components;
-        private int mintScrollDirection;
+        private int _mintScrollDirection;
 
         const int WM_VSCROLL = 277; // Vertical scroll
         const int SB_LINEUP = 0; // Scrolls one line up
@@ -20,9 +20,9 @@ namespace NAPS2.WinForms
         public DragScrollListView()
         {
             components = new System.ComponentModel.Container();
-            tmrLVScroll = new Timer(components);
+            _tmrLvScroll = new Timer(components);
             SuspendLayout();
-            tmrLVScroll.Tick += tmrLVScroll_Tick;
+            _tmrLvScroll.Tick += tmrLVScroll_Tick;
             DragOver += ListViewBase_DragOver;
             ResumeLayout(false);
         }
@@ -36,24 +36,24 @@ namespace NAPS2.WinForms
             if (position.Y <= EdgeSize)
             {
                 // getting close to top, ensure previous item is visible
-                mintScrollDirection = SB_LINEUP;
-                tmrLVScroll.Enabled = true;
+                _mintScrollDirection = SB_LINEUP;
+                _tmrLvScroll.Enabled = true;
             }
             else if (position.Y >= ClientSize.Height - EdgeSize)
             {
                 // getting close to bottom, ensure next item is visible
-                mintScrollDirection = SB_LINEDOWN;
-                tmrLVScroll.Enabled = true;
+                _mintScrollDirection = SB_LINEDOWN;
+                _tmrLvScroll.Enabled = true;
             }
             else
             {
-                tmrLVScroll.Enabled = false;
+                _tmrLvScroll.Enabled = false;
             }
         }
 
         private void tmrLVScroll_Tick(object sender, EventArgs e)
         {
-            Win32.SendMessage(Handle, WM_VSCROLL, (IntPtr)mintScrollDirection, IntPtr.Zero);
+            Win32.SendMessage(Handle, WM_VSCROLL, (IntPtr)_mintScrollDirection, IntPtr.Zero);
         }
     }
 }

@@ -5,23 +5,23 @@ namespace NAPS2.Scan
 {
     internal class ScanEvents : IScanEvents
     {
-        private readonly Action pageStartCallback;
-        private readonly Action<double> pageProgressCallback;
+        private readonly Action _pageStartCallback;
+        private readonly Action<double> _pageProgressCallback;
 
         public ScanEvents(Action pageStartCallback, Action<double> pageProgressCallback)
         {
-            this.pageStartCallback = pageStartCallback;
-            this.pageProgressCallback = pageProgressCallback;
+            _pageStartCallback = pageStartCallback;
+            _pageProgressCallback = pageProgressCallback;
         }
 
         public void PageStart()
         {
-            pageStartCallback();
+            _pageStartCallback();
         }
 
         public void PageProgress(double progress)
         {
-            pageProgressCallback(progress);
+            _pageProgressCallback(progress);
         }
     }
 }

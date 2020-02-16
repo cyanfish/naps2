@@ -19,14 +19,14 @@ namespace NAPS2.Ocr
             set => _default = value ?? throw new ArgumentNullException(nameof(value));
         }
 
-        private readonly List<IOcrEngine> engines;
+        private readonly List<IOcrEngine> _engines;
 
         /// <summary>
         /// Creates a new instance of OcrEngineManager that only looks for Tesseract on the system path.
         /// </summary>
         public OcrEngineManager()
         {
-            engines = new List<IOcrEngine>
+            _engines = new List<IOcrEngine>
             {
                 new TesseractSystemEngine()
             };
@@ -38,7 +38,7 @@ namespace NAPS2.Ocr
         /// <param name="orderedEngineList"></param>
         public OcrEngineManager(IEnumerable<IOcrEngine> orderedEngineList)
         {
-            engines = orderedEngineList.ToList();
+            _engines = orderedEngineList.ToList();
         }
 
         /// <summary>
@@ -47,7 +47,7 @@ namespace NAPS2.Ocr
         /// </summary>
         public OcrEngineManager(string basePath)
         {
-            engines = new List<IOcrEngine>
+            _engines = new List<IOcrEngine>
             {
                 new Tesseract400Beta4Engine(basePath),
                 new Tesseract304Engine(basePath),
@@ -57,30 +57,30 @@ namespace NAPS2.Ocr
             };
         }
 
-        public IEnumerable<IOcrEngine> Engines => engines;
+        public IEnumerable<IOcrEngine> Engines => _engines;
 
-        public bool IsReady => engines.Any(x => x.IsSupported && x.IsInstalled && x.InstalledLanguages.Any());
+        public bool IsReady => _engines.Any(x => x.IsSupported && x.IsInstalled && x.InstalledLanguages.Any());
 
         public bool IsNewestReady
         {
             get
             {
-                var latest = engines.FirstOrDefault(x => x.IsSupported);
+                var latest = _engines.FirstOrDefault(x => x.IsSupported);
                 if (latest == null) return false;
                 return latest.IsInstalled && latest.InstalledLanguages.Any();
             }
         }
 
-        public bool CanUpgrade => !IsNewestReady && engines.Any(x => x.IsInstalled);
+        public bool CanUpgrade => !IsNewestReady && _engines.Any(x => x.IsInstalled);
 
-        public bool MustUpgrade => !IsReady && engines.Any(x => x.IsInstalled);
+        public bool MustUpgrade => !IsReady && _engines.Any(x => x.IsInstalled);
 
-        public bool MustInstallPackage => engines.All(x => (!x.IsSupported || !x.CanInstall) && !x.IsInstalled);
+        public bool MustInstallPackage => _engines.All(x => (!x.IsSupported || !x.CanInstall) && !x.IsInstalled);
 
-        public IOcrEngine ActiveEngine => engines.FirstOrDefault(x => x.IsSupported && x.IsInstalled && x.InstalledLanguages.Any());
+        public IOcrEngine ActiveEngine => _engines.FirstOrDefault(x => x.IsSupported && x.IsInstalled && x.InstalledLanguages.Any());
 
-        public IOcrEngine InstalledEngine => engines.FirstOrDefault(x => x.IsInstalled && x.InstalledLanguages.Any());
+        public IOcrEngine InstalledEngine => _engines.FirstOrDefault(x => x.IsInstalled && x.InstalledLanguages.Any());
 
-        public IOcrEngine EngineToInstall => engines.FirstOrDefault(x => x.IsSupported && x.CanInstall);
+        public IOcrEngine EngineToInstall => _engines.FirstOrDefault(x => x.IsSupported && x.CanInstall);
     }
 }

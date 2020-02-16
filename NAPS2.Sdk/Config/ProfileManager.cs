@@ -11,24 +11,24 @@ namespace NAPS2.Config
 {
     public class ProfileManager : IProfileManager
     {
-        private readonly ISerializer<ProfileConfig> serializer = new ProfileSerializer();
-        private readonly FileConfigScope<ProfileConfig> userScope;
-        private readonly FileConfigScope<ProfileConfig> appScope;
-        private readonly bool userPathExisted;
-        private readonly bool lockSystemProfiles;
-        private readonly bool lockUnspecifiedDevices;
-        private readonly bool noUserProfiles;
+        private readonly ISerializer<ProfileConfig> _serializer = new ProfileSerializer();
+        private readonly FileConfigScope<ProfileConfig> _userScope;
+        private readonly FileConfigScope<ProfileConfig> _appScope;
+        private readonly bool _userPathExisted;
+        private readonly bool _lockSystemProfiles;
+        private readonly bool _lockUnspecifiedDevices;
+        private readonly bool _noUserProfiles;
 
-        private List<ScanProfile> profiles;
+        private List<ScanProfile> _profiles;
 
         public ProfileManager(string userPath, string systemPath, bool lockSystemProfiles, bool lockUnspecifiedDevices, bool noUserProfiles)
         {
-            userPathExisted = File.Exists(userPath);
-            userScope = ConfigScope.File(userPath, () => new ProfileConfig(), serializer, ConfigScopeMode.ReadWrite);
-            appScope = ConfigScope.File(systemPath, () => new ProfileConfig(), serializer, ConfigScopeMode.ReadOnly);
-            this.lockSystemProfiles = lockSystemProfiles;
-            this.lockUnspecifiedDevices = lockUnspecifiedDevices;
-            this.noUserProfiles = noUserProfiles;
+            _userPathExisted = File.Exists(userPath);
+            _userScope = ConfigScope.File(userPath, () => new ProfileConfig(), _serializer, ConfigScopeMode.ReadWrite);
+            _appScope = ConfigScope.File(systemPath, () => new ProfileConfig(), _serializer, ConfigScopeMode.ReadOnly);
+            _lockSystemProfiles = lockSystemProfiles;
+            _lockUnspecifiedDevices = lockUnspecifiedDevices;
+            _noUserProfiles = noUserProfiles;
         }
 
         public event EventHandler? ProfilesUpdated;
@@ -40,20 +40,20 @@ namespace NAPS2.Config
                 lock (this)
                 {
                     Load();
-                    return ImmutableList.CreateRange(profiles);
+                    return ImmutableList.CreateRange(_profiles);
                 }
             }
         }
 
         public void Mutate(ListMutation<ScanProfile> mutation, ISelectable<ScanProfile> selectable)
         {
-            mutation.Apply(profiles, selectable);
+            mutation.Apply(_profiles, selectable);
             Save();
         }
 
         public void Mutate(ListMutation<ScanProfile> mutation, ListSelection<ScanProfile> selection)
         {
-            mutation.Apply(profiles, ref selection);
+            mutation.Apply(_profiles, ref selection);
             Save();
         }
 
@@ -64,11 +64,11 @@ namespace NAPS2.Config
                 lock (this)
                 {
                     Load();
-                    if (profiles.Count == 1)
+                    if (_profiles.Count == 1)
                     {
-                        return profiles.First();
+                        return _profiles.First();
                     }
-                    return profiles.FirstOrDefault(x => x.IsDefault);
+                    return _profiles.FirstOrDefault(x => x.IsDefault);
                 }
             }
             set
@@ -76,7 +76,7 @@ namespace NAPS2.Config
                 lock (this)
                 {
                     Load();
-                    foreach (var profile in profiles)
+                    foreach (var profile in _profiles)
                     {
                         profile.IsDefault = false;
                     }
@@ -90,11 +90,11 @@ namespace NAPS2.Config
         {
             lock (this)
             {
-                if (profiles != null)
+                if (_profiles != null)
                 {
                     return;
                 }
-                profiles = GetProfiles();
+                _profiles = GetProfiles();
             }
         }
 
@@ -102,28 +102,28 @@ namespace NAPS2.Config
         {
             lock (this)
             {
-                userScope.Set(c => c.Profiles = ImmutableList.CreateRange(profiles));
+                _userScope.Set(c => c.Profiles = ImmutableList.CreateRange(_profiles));
             }
             ProfilesUpdated?.Invoke(this, EventArgs.Empty);
         }
 
         private List<ScanProfile> GetProfiles()
         {
-            var userProfiles = (userScope.Get(c => c.Profiles) ?? ImmutableList<ScanProfile>.Empty).ToList();
-            var systemProfiles = (appScope.Get(c => c.Profiles) ?? ImmutableList<ScanProfile>.Empty).ToList();
-            if (noUserProfiles && systemProfiles.Count > 0)
+            var userProfiles = (_userScope.Get(c => c.Profiles) ?? ImmutableList<ScanProfile>.Empty).ToList();
+            var systemProfiles = (_appScope.Get(c => c.Profiles) ?? ImmutableList<ScanProfile>.Empty).ToList();
+            if (_noUserProfiles && systemProfiles.Count > 0)
             {
                 // Configured by administrator to only use system profiles
                 // But the user might still be able to change devices
                 MergeUserProfilesIntoSystemProfiles(userProfiles, systemProfiles);
                 return systemProfiles;
             }
-            if (!userPathExisted)
+            if (!_userPathExisted)
             {
                 // Initialize with system profiles since it's a new user
                 return systemProfiles;
             }
-            if (!lockSystemProfiles)
+            if (!_lockSystemProfiles)
             {
                 // Ignore the system profiles since the user already has their own
                 return userProfiles;
@@ -145,7 +145,7 @@ namespace NAPS2.Config
             foreach (var systemProfile in systemProfiles)
             {
                 systemProfile.IsLocked = true;
-                systemProfile.IsDeviceLocked = (systemProfile.Device != null || lockUnspecifiedDevices);
+                systemProfile.IsDeviceLocked = (systemProfile.Device != null || _lockUnspecifiedDevices);
             }
 
             var systemProfileNames = new HashSet<string>(systemProfiles.Select(x => x.DisplayName));
@@ -177,11 +177,11 @@ namespace NAPS2.Config
 
         private class ProfileSerializer : ISerializer<ProfileConfig>
         {
-            private readonly XmlSerializer<ImmutableList<ScanProfile>> internalSerializer = new XmlSerializer<ImmutableList<ScanProfile>>();
+            private readonly XmlSerializer<ImmutableList<ScanProfile>> _internalSerializer = new XmlSerializer<ImmutableList<ScanProfile>>();
 
-            public void Serialize(Stream stream, ProfileConfig obj) => internalSerializer.Serialize(stream, obj.Profiles);
+            public void Serialize(Stream stream, ProfileConfig obj) => _internalSerializer.Serialize(stream, obj.Profiles);
 
-            public ProfileConfig Deserialize(Stream stream) => new ProfileConfig { Profiles = internalSerializer.Deserialize(stream) };
+            public ProfileConfig Deserialize(Stream stream) => new ProfileConfig { Profiles = _internalSerializer.Deserialize(stream) };
         }
     }
 }

@@ -6,7 +6,7 @@ namespace NAPS2.Images
 {
     public class Memento : IEquatable<Memento>, IDisposable
     {
-        private readonly List<ScannedImage.Snapshot> snapshots;
+        private readonly List<ScannedImage.Snapshot> _snapshots;
             
         public static readonly Memento Empty = new Memento(new List<ScannedImage.Snapshot>());
 
@@ -17,14 +17,14 @@ namespace NAPS2.Images
 
         public Memento(IEnumerable<ScannedImage.Snapshot> snapshots)
         {
-            this.snapshots = snapshots.ToList();
+            _snapshots = snapshots.ToList();
         }
 
         public bool Equals(Memento other)
         {
             if (ReferenceEquals(null, other)) return false;
             if (ReferenceEquals(this, other)) return true;
-            return snapshots.SequenceEqual(other.snapshots);
+            return _snapshots.SequenceEqual(other._snapshots);
         }
 
         public override bool Equals(object obj)
@@ -35,7 +35,7 @@ namespace NAPS2.Images
             return Equals((Memento) obj);
         }
 
-        public override int GetHashCode() => snapshots.GetHashCode();
+        public override int GetHashCode() => _snapshots.GetHashCode();
 
         public static bool operator ==(Memento left, Memento right) => Equals(left, right);
 
@@ -43,7 +43,7 @@ namespace NAPS2.Images
 
         public void Dispose()
         {
-            foreach (var snapshot in snapshots)
+            foreach (var snapshot in _snapshots)
             {
                 snapshot.Dispose();
             }

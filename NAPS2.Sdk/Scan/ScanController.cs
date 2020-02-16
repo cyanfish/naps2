@@ -9,9 +9,9 @@ namespace NAPS2.Scan
 {
     public class ScanController : IScanController
     {
-        private readonly ILocalPostProcessor localPostProcessor;
-        private readonly ScanOptionsValidator scanOptionsValidator;
-        private readonly IScanBridgeFactory scanBridgeFactory;
+        private readonly ILocalPostProcessor _localPostProcessor;
+        private readonly ScanOptionsValidator _scanOptionsValidator;
+        private readonly IScanBridgeFactory _scanBridgeFactory;
 
         public ScanController()
           : this(new LocalPostProcessor(), new ScanOptionsValidator(), new ScanBridgeFactory())
@@ -20,9 +20,9 @@ namespace NAPS2.Scan
 
         internal ScanController(ILocalPostProcessor localPostProcessor, ScanOptionsValidator scanOptionsValidator, IScanBridgeFactory scanBridgeFactory)
         {
-            this.localPostProcessor = localPostProcessor;
-            this.scanOptionsValidator = scanOptionsValidator;
-            this.scanBridgeFactory = scanBridgeFactory;
+            _localPostProcessor = localPostProcessor;
+            _scanOptionsValidator = scanOptionsValidator;
+            _scanBridgeFactory = scanBridgeFactory;
         }
 
         public Task<List<ScanDevice>> GetDeviceList() => GetDeviceList(new ScanOptions());
@@ -31,14 +31,14 @@ namespace NAPS2.Scan
 
         public async Task<List<ScanDevice>> GetDeviceList(ScanOptions options)
         {
-            options = scanOptionsValidator.ValidateAll(options);
-            var bridge = scanBridgeFactory.Create(options);
+            options = _scanOptionsValidator.ValidateAll(options);
+            var bridge = _scanBridgeFactory.Create(options);
             return await bridge.GetDeviceList(options);
         }
 
         public ScannedImageSource Scan(ScanOptions options, CancellationToken cancelToken = default)
         {
-            options = scanOptionsValidator.ValidateAll(options);
+            options = _scanOptionsValidator.ValidateAll(options);
             var sink = new ScannedImageSink();
             int pageNumber = 0;
 
@@ -54,11 +54,11 @@ namespace NAPS2.Scan
             {
                 try
                 {
-                    var bridge = scanBridgeFactory.Create(options);
+                    var bridge = _scanBridgeFactory.Create(options);
                     await bridge.Scan(options, cancelToken, new ScanEvents(PageStartCallback, PageProgressCallback),
                         (scannedImage, postProcessingContext) =>
                         {
-                            localPostProcessor.PostProcess(scannedImage, options, postProcessingContext);
+                            _localPostProcessor.PostProcess(scannedImage, options, postProcessingContext);
                             sink.PutImage(scannedImage);
                             PageEndCallback(scannedImage);
                         });

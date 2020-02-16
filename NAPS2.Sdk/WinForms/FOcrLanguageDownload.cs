@@ -9,17 +9,17 @@ namespace NAPS2.WinForms
 {
     public partial class FOcrLanguageDownload : FormBase
     {
-        private readonly OcrEngineManager ocrEngineManager;
-        private readonly IOcrEngine engineToInstall;
+        private readonly OcrEngineManager _ocrEngineManager;
+        private readonly IOcrEngine _engineToInstall;
 
         public FOcrLanguageDownload(OcrEngineManager ocrEngineManager)
         {
-            this.ocrEngineManager = ocrEngineManager;
-            engineToInstall = ocrEngineManager.EngineToInstall;
+            _ocrEngineManager = ocrEngineManager;
+            _engineToInstall = ocrEngineManager.EngineToInstall;
             InitializeComponent();
 
             var initialSelection = new HashSet<string>();
-            if (ocrEngineManager.InstalledEngine != null && ocrEngineManager.InstalledEngine != engineToInstall)
+            if (ocrEngineManager.InstalledEngine != null && ocrEngineManager.InstalledEngine != _engineToInstall)
             {
                 // Upgrading from an old version, so pre-select previously used languages
                 foreach (var lang in ocrEngineManager.InstalledEngine.LanguageComponents.Where(x => x.IsInstalled))
@@ -28,7 +28,7 @@ namespace NAPS2.WinForms
                 }
             }
 
-            if (!engineToInstall.InstalledLanguages.Any())
+            if (!_engineToInstall.InstalledLanguages.Any())
             {
                 // Fresh install, so pre-select English as a sensible default
                 initialSelection.Add("ocr-eng");
@@ -36,7 +36,7 @@ namespace NAPS2.WinForms
 
             // Populate the list of language options
             // Special case for English: sorted to the top of the list
-            var languageOptions = engineToInstall.NotInstalledLanguages
+            var languageOptions = _engineToInstall.NotInstalledLanguages
                 .OrderBy(x => x.Code == "eng" ? "AAA" : x.Name);
             foreach (var languageOption in languageOptions)
             {
@@ -67,16 +67,16 @@ namespace NAPS2.WinForms
         private void UpdateView()
         {
             var selectedLanguages = SelectedLanguages;
-            double downloadSize = engineToInstall.LanguageComponents.Where(x => selectedLanguages.Contains(x.Id)).Select(x => x.DownloadInfo.Size).Sum();
+            double downloadSize = _engineToInstall.LanguageComponents.Where(x => selectedLanguages.Contains(x.Id)).Select(x => x.DownloadInfo.Size).Sum();
 
-            if (!engineToInstall.IsInstalled)
+            if (!_engineToInstall.IsInstalled)
             {
-                downloadSize += engineToInstall.Component.DownloadInfo.Size;
+                downloadSize += _engineToInstall.Component.DownloadInfo.Size;
             }
 
             labelSizeEstimate.Text = string.Format(MiscResources.EstimatedDownloadSize, downloadSize.ToString("f1"));
 
-            btnDownload.Enabled = lvLanguages.Items.Cast<ListViewItem>().Any(x => x.Checked) || engineToInstall.InstalledLanguages.Any() && !engineToInstall.IsInstalled;
+            btnDownload.Enabled = lvLanguages.Items.Cast<ListViewItem>().Any(x => x.Checked) || _engineToInstall.InstalledLanguages.Any() && !_engineToInstall.IsInstalled;
         }
 
         private HashSet<string> SelectedLanguages
@@ -98,13 +98,13 @@ namespace NAPS2.WinForms
         {
             var progressForm = FormFactory.Create<FDownloadProgress>();
 
-            if (!engineToInstall.IsInstalled)
+            if (!_engineToInstall.IsInstalled)
             {
-                progressForm.QueueFile(engineToInstall.Component);
+                progressForm.QueueFile(_engineToInstall.Component);
             }
 
             var selectedLanguages = SelectedLanguages;
-            foreach (var langComponent in engineToInstall.LanguageComponents.Where(x => selectedLanguages.Contains(x.Id)))
+            foreach (var langComponent in _engineToInstall.LanguageComponents.Where(x => selectedLanguages.Contains(x.Id)))
             {
                 progressForm.QueueFile(langComponent);
             }

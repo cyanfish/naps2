@@ -33,14 +33,14 @@ namespace NAPS2.Images.Storage
     {
         public const string LOCK_FILE_NAME = ".lock";
 
-        private readonly ISerializer<RecoveryIndex> serializer = new XmlSerializer<RecoveryIndex>();
-        private readonly DirectoryInfo folder;
-        private readonly FileInfo folderLockFile;
-        private readonly Stream folderLock;
-        private readonly Dictionary<RecoverableImageMetadata, int> metadataDict = new Dictionary<RecoverableImageMetadata, int>();
+        private readonly ISerializer<RecoveryIndex> _serializer = new XmlSerializer<RecoveryIndex>();
+        private readonly DirectoryInfo _folder;
+        private readonly FileInfo _folderLockFile;
+        private readonly Stream _folderLock;
+        private readonly Dictionary<RecoverableImageMetadata, int> _metadataDict = new Dictionary<RecoverableImageMetadata, int>();
 
-        private int metadataOrdering;
-        private bool disposed;
+        private int _metadataOrdering;
+        private bool _disposed;
 
         public static RecoveryStorageManager CreateFolder(string recoveryFolderPath)
         {
@@ -49,10 +49,10 @@ namespace NAPS2.Images.Storage
 
         private RecoveryStorageManager(string recoveryFolderPath) : base(recoveryFolderPath)
         {
-            folder = new DirectoryInfo(RecoveryFolderPath);
-            folder.Create();
-            folderLockFile = new FileInfo(Path.Combine(RecoveryFolderPath, LOCK_FILE_NAME));
-            folderLock = folderLockFile.Open(FileMode.CreateNew, FileAccess.Write, FileShare.None);
+            _folder = new DirectoryInfo(RecoveryFolderPath);
+            _folder.Create();
+            _folderLockFile = new FileInfo(Path.Combine(RecoveryFolderPath, LOCK_FILE_NAME));
+            _folderLock = _folderLockFile.Open(FileMode.CreateNew, FileAccess.Write, FileShare.None);
         }
 
         public string RecoveryFolderPath => FolderPath;
@@ -61,9 +61,9 @@ namespace NAPS2.Images.Storage
         {
             lock (this)
             {
-                if (disposed) throw new ObjectDisposedException(nameof(RecoveryStorageManager));
+                if (_disposed) throw new ObjectDisposedException(nameof(RecoveryStorageManager));
                 var recoveryIndex = RecoveryIndex.Create();
-                var orderedMetadata = metadataDict.OrderBy(x => x.Key.Index).ThenBy(x => x.Value).Select(x => x.Key);
+                var orderedMetadata = _metadataDict.OrderBy(x => x.Key.Index).ThenBy(x => x.Value).Select(x => x.Key);
                 recoveryIndex.Images = orderedMetadata.Select(metadata => new RecoveryIndexImage
                 {
                     FileName = metadata.FileName,
@@ -71,7 +71,7 @@ namespace NAPS2.Images.Storage
                     HighQuality = metadata.Lossless,
                     TransformList = metadata.TransformList
                 }).ToList();
-                serializer.SerializeToFile(Path.Combine(RecoveryFolderPath, "index.xml"), recoveryIndex);
+                _serializer.SerializeToFile(Path.Combine(RecoveryFolderPath, "index.xml"), recoveryIndex);
             }
         }
 
@@ -83,7 +83,7 @@ namespace NAPS2.Images.Storage
             }
             lock (this)
             {
-                if (disposed) throw new ObjectDisposedException(nameof(RecoveryStorageManager));
+                if (_disposed) throw new ObjectDisposedException(nameof(RecoveryStorageManager));
                 return new RecoverableImageMetadata(this, Path.GetFileName(fileStorage.FullPath));
             }
         }
@@ -93,10 +93,10 @@ namespace NAPS2.Images.Storage
             if (!disposing) return;
             lock (this)
             {
-                folderLock.Close();
-                folderLockFile.Delete();
-                folder.Delete(true);
-                disposed = true;
+                _folderLock.Close();
+                _folderLockFile.Delete();
+                _folder.Delete(true);
+                _disposed = true;
             }
         }
 
@@ -104,7 +104,7 @@ namespace NAPS2.Images.Storage
         {
             lock (this)
             {
-                metadataDict.Add(metadata, metadataOrdering++);
+                _metadataDict.Add(metadata, _metadataOrdering++);
             }
         }
 
@@ -112,7 +112,7 @@ namespace NAPS2.Images.Storage
         {
             lock (this)
             {
-                metadataDict.Remove(metadata);
+                _metadataDict.Remove(metadata);
             }
         }
     }

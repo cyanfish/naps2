@@ -17,14 +17,14 @@ namespace NAPS2.Dependencies
 
         public static readonly PlatformSupport Linux = new PlatformSupport(() => Environment.OSVersion.Platform == PlatformID.Unix);
 
-        private readonly Func<bool> predicate;
+        private readonly Func<bool> _predicate;
 
         private PlatformSupport(Func<bool> predicate)
         {
-            this.predicate = predicate;
+            _predicate = predicate;
         }
 
-        public bool Validate() => predicate();
+        public bool Validate() => _predicate();
 
         public PlatformSupport And(params PlatformSupport[] platforms)
         {

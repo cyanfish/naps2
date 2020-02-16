@@ -9,9 +9,9 @@ namespace NAPS2.Ocr
 {
     public class TesseractSystemEngine : TesseractBaseEngine
     {
-        private bool isInstalled;
-        private DateTime? installCheckTime;
-        private List<Language>? installedLanguages;
+        private bool _isInstalled;
+        private DateTime? _installCheckTime;
+        private List<Language>? _installedLanguages;
 
         public TesseractSystemEngine()
         {
@@ -35,7 +35,7 @@ namespace NAPS2.Ocr
             get
             {
                 CheckIfInstalled();
-                return isInstalled;
+                return _isInstalled;
             }
         }
 
@@ -44,7 +44,7 @@ namespace NAPS2.Ocr
             get
             {
                 CheckIfInstalled();
-                return installedLanguages ?? Enumerable.Empty<Language>();
+                return _installedLanguages ?? Enumerable.Empty<Language>();
             }
         }
 
@@ -52,7 +52,7 @@ namespace NAPS2.Ocr
 
         private void CheckIfInstalled()
         {
-            if (IsSupported && (installCheckTime == null || installCheckTime < DateTime.Now - TimeSpan.FromSeconds(2)))
+            if (IsSupported && (_installCheckTime == null || _installCheckTime < DateTime.Now - TimeSpan.FromSeconds(2)))
             {
                 try
                 {
@@ -67,8 +67,8 @@ namespace NAPS2.Ocr
                     if (process != null && process.Id != 0)
                     {
                         var codes = process.StandardError.ReadToEnd().Split(new[] {'\r', '\n'}, StringSplitOptions.RemoveEmptyEntries).Where(x => x.Length == 3);
-                        installedLanguages = codes.Select(code => LanguageData.LanguageMap.Get($"ocr-{code}")).Where(lang => lang != null).ToList();
-                        isInstalled = true;
+                        _installedLanguages = codes.Select(code => LanguageData.LanguageMap.Get($"ocr-{code}")).Where(lang => lang != null).ToList();
+                        _isInstalled = true;
                         process.Kill();
                     }
                 }
@@ -76,7 +76,7 @@ namespace NAPS2.Ocr
                 {
                     // Component is not installed on the system path (or had an error)
                 }
-                installCheckTime = DateTime.Now;
+                _installCheckTime = DateTime.Now;
             }
         }
     }

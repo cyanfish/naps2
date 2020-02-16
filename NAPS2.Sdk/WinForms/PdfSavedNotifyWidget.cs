@@ -5,14 +5,14 @@ namespace NAPS2.WinForms
 {
     public class PdfSavedNotifyWidget : NotifyWidget
     {
-        private readonly string path;
+        private readonly string _path;
 
         public PdfSavedNotifyWidget(string path)
             : base(MiscResources.PdfSaved, Path.GetFileName(path), path, Path.GetDirectoryName(path))
         {
-            this.path = path;
+            _path = path;
         }
 
-        public override NotifyWidgetBase Clone() => new PdfSavedNotifyWidget(path);
+        public override NotifyWidgetBase Clone() => new PdfSavedNotifyWidget(_path);
     }
 }

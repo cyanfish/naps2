@@ -74,20 +74,20 @@ namespace NAPS2.Scan.Twain.Legacy
 
         private class TwainMessageFilter : IMessageFilter
         {
-            private readonly ImageContext imageContext;
-            private readonly ScanProfile settings;
-            private readonly Twain tw;
-            private readonly FTwainGui form;
+            private readonly ImageContext _imageContext;
+            private readonly ScanProfile _settings;
+            private readonly Twain _tw;
+            private readonly FTwainGui _form;
 
-            private bool activated;
-            private bool msgfilter;
+            private bool _activated;
+            private bool _msgfilter;
 
             public TwainMessageFilter(ImageContext imageContext, ScanProfile settings, Twain tw, FTwainGui form)
             {
-                this.imageContext = imageContext;
-                this.settings = settings;
-                this.tw = tw;
-                this.form = form;
+                _imageContext = imageContext;
+                _settings = settings;
+                _tw = tw;
+                _form = form;
                 Bitmaps = new List<ScannedImage>();
                 form.Activated += FTwainGui_Activated;
             }
@@ -96,7 +96,7 @@ namespace NAPS2.Scan.Twain.Legacy
 
             public bool PreFilterMessage(ref Message m)
             {
-                TwainCommand cmd = tw.PassMessage(ref m);
+                TwainCommand cmd = _tw.PassMessage(ref m);
                 if (cmd == TwainCommand.Not)
                     return false;
 
@@ -105,14 +105,14 @@ namespace NAPS2.Scan.Twain.Legacy
                     case TwainCommand.CloseRequest:
                         {
                             EndingScan();
-                            tw.CloseSrc();
-                            form.Close();
+                            _tw.CloseSrc();
+                            _form.Close();
                             break;
                         }
                     case TwainCommand.CloseOk:
                         {
                             EndingScan();
-                            tw.CloseSrc();
+                            _tw.CloseSrc();
                             break;
                         }
                     case TwainCommand.DeviceEvent:
@@ -121,17 +121,17 @@ namespace NAPS2.Scan.Twain.Legacy
                         }
                     case TwainCommand.TransferReady:
                         {
-                            ArrayList pics = tw.TransferPictures();
+                            ArrayList pics = _tw.TransferPictures();
                             EndingScan();
-                            tw.CloseSrc();
+                            _tw.CloseSrc();
                             foreach (IntPtr img in pics)
                             {
                                 int bitcount = 0;
 
                                 using Bitmap bmp = DibUtils.BitmapFromDib(img, out bitcount);
-                                Bitmaps.Add(imageContext.CreateScannedImage(new GdiImage(bmp), bitcount == 1 ? BitDepth.BlackAndWhite : BitDepth.Color, settings.MaxQuality, settings.Quality));
+                                Bitmaps.Add(_imageContext.CreateScannedImage(new GdiImage(bmp), bitcount == 1 ? BitDepth.BlackAndWhite : BitDepth.Color, _settings.MaxQuality, _settings.Quality));
                             }
-                            form.Close();
+                            _form.Close();
                             break;
                         }
                 }
@@ -140,39 +140,39 @@ namespace NAPS2.Scan.Twain.Legacy
             }
             private void EndingScan()
             {
-                if (msgfilter)
+                if (_msgfilter)
                 {
                     Application.RemoveMessageFilter(this);
-                    msgfilter = false;
-                    form.Enabled = true;
-                    form.Activate();
+                    _msgfilter = false;
+                    _form.Enabled = true;
+                    _form.Activate();
                 }
             }
 
             private void FTwainGui_Activated(object sender, EventArgs e)
             {
-                if (activated)
+                if (_activated)
                     return;
-                activated = true;
-                if (!msgfilter)
+                _activated = true;
+                if (!_msgfilter)
                 {
-                    form.Enabled = false;
-                    msgfilter = true;
+                    _form.Enabled = false;
+                    _msgfilter = true;
                     Application.AddMessageFilter(this);
                 }
                 try
                 {
-                    if (!tw.Acquire())
+                    if (!_tw.Acquire())
                     {
                         EndingScan();
-                        form.Close();
+                        _form.Close();
                     }
                 }
                 catch (Exception ex)
                 {
                     Log.ErrorException("An error occurred while interacting with TWAIN.", ex);
                     EndingScan();
-                    form.Close();
+                    _form.Close();
                 }
             }
         }

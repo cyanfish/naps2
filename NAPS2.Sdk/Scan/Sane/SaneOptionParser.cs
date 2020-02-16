@@ -18,64 +18,64 @@ namespace NAPS2.Scan.Sane
             { "us", SaneUnit.Microsecond }
         };
 
-        private StreamReader input;
-        private SaneOptionCollection options;
-        private SaneOption lastOption;
-        private OptionParseState state;
-        private string line;
+        private StreamReader _input;
+        private SaneOptionCollection _options;
+        private SaneOption _lastOption;
+        private OptionParseState _state;
+        private string _line;
 
         public SaneOptionCollection Parse(StreamReader streamReader)
         {
-            input = streamReader;
-            options = new SaneOptionCollection();
-            state = OptionParseState.NonDeviceOptions;
-            line = null;
+            _input = streamReader;
+            _options = new SaneOptionCollection();
+            _state = OptionParseState.NonDeviceOptions;
+            _line = null;
 
             NextLine();
-            while (line != null)
+            while (_line != null)
             {
-                switch (state)
+                switch (_state)
                 {
                     case OptionParseState.NonDeviceOptions:
-                        if (line.StartsWith("Options specific to device", StringComparison.InvariantCultureIgnoreCase))
+                        if (_line.StartsWith("Options specific to device", StringComparison.InvariantCultureIgnoreCase))
                         {
-                            state = OptionParseState.LookingForOption;
+                            _state = OptionParseState.LookingForOption;
                         }
                         NextLine();
                         break;
 
                     case OptionParseState.LookingForOption:
-                        if (line.StartsWith("    -", StringComparison.InvariantCultureIgnoreCase))
+                        if (_line.StartsWith("    -", StringComparison.InvariantCultureIgnoreCase))
                         {
                             ParseOption();
-                            state = OptionParseState.ReadingDescription;
+                            _state = OptionParseState.ReadingDescription;
                         }
                         NextLine();
                         break;
 
                     case OptionParseState.ReadingDescription:
-                        if (line.StartsWith("        ", StringComparison.InvariantCultureIgnoreCase))
+                        if (_line.StartsWith("        ", StringComparison.InvariantCultureIgnoreCase))
                         {
-                            string descLine = line.Substring(8).Trim();
-                            if (lastOption.Desc == null)
+                            string descLine = _line.Substring(8).Trim();
+                            if (_lastOption.Desc == null)
                             {
-                                lastOption.Desc = descLine;
+                                _lastOption.Desc = descLine;
                             }
                             else
                             {
-                                lastOption.Desc += " " + descLine;
+                                _lastOption.Desc += " " + descLine;
                             }
                             NextLine();
                         }
                         else
                         {
-                            state = OptionParseState.LookingForOption;
+                            _state = OptionParseState.LookingForOption;
                         }
                         break;
                 }
             }
 
-            return options;
+            return _options;
         }
 
         private void ParseOption()
@@ -87,11 +87,11 @@ namespace NAPS2.Scan.Sane
             };
             var optionValueList = new List<string>();
             var builder = new StringBuilder();
-            state = OptionParseState.ReadingName;
-            while (i < line.Length)
+            _state = OptionParseState.ReadingName;
+            while (i < _line.Length)
             {
-                char c = line[i];
-                switch (state)
+                char c = _line[i];
+                switch (_state)
                 {
                     case OptionParseState.ReadingName:
                         if (char.IsLetter(c) || c == '-')
@@ -107,12 +107,12 @@ namespace NAPS2.Scan.Sane
                         {
                             option.Type = SaneValueType.Bool;
                             i += 3;
-                            state = OptionParseState.ReadingBooleanValues;
+                            _state = OptionParseState.ReadingBooleanValues;
                         }
                         else if (c == ' ')
                         {
                             i += 1;
-                            state = OptionParseState.ReadingValues;
+                            _state = OptionParseState.ReadingValues;
                         }
                         else if (c == '\n')
                         {
@@ -162,7 +162,7 @@ namespace NAPS2.Scan.Sane
                                 }
                             }
                         }
-                        else if (line.Substring(i, 4) == ",...")
+                        else if (_line.Substring(i, 4) == ",...")
                         {
                             option.Type = SaneValueType.Group;
                             i += 3;
@@ -223,7 +223,7 @@ namespace NAPS2.Scan.Sane
                             {
                                 option.StringList = optionValueList;
                             }
-                            state = option.ConstraintType == SaneConstraintType.Range ? OptionParseState.LookingForQuant : OptionParseState.LookingForDefaultValue;
+                            _state = option.ConstraintType == SaneConstraintType.Range ? OptionParseState.LookingForQuant : OptionParseState.LookingForDefaultValue;
                         }
                         i += 1;
                         break;
@@ -236,7 +236,7 @@ namespace NAPS2.Scan.Sane
                         }
                         if (c == '[')
                         {
-                            state = OptionParseState.LookingForDefaultValue;
+                            _state = OptionParseState.LookingForDefaultValue;
                             break;
                         }
                         if (c == '\n')
@@ -244,12 +244,12 @@ namespace NAPS2.Scan.Sane
                             i += 1;
                             break;
                         }
-                        if (line.Substring(i, 13) != "(in steps of ")
+                        if (_line.Substring(i, 13) != "(in steps of ")
                         {
                             return;
                         }
                         i += 13;
-                        state = OptionParseState.ReadingQuant;
+                        _state = OptionParseState.ReadingQuant;
                         break;
 
                     case OptionParseState.ReadingQuant:
@@ -266,7 +266,7 @@ namespace NAPS2.Scan.Sane
                         builder.Clear();
                         option.Range.Quant = quant;
                         i += 1;
-                        state = OptionParseState.LookingForDefaultValue;
+                        _state = OptionParseState.LookingForDefaultValue;
                         break;
 
                     case OptionParseState.LookingForDefaultValue:
@@ -285,7 +285,7 @@ namespace NAPS2.Scan.Sane
                             return;
                         }
                         i += 1;
-                        state = OptionParseState.ReadingDefaultValue;
+                        _state = OptionParseState.ReadingDefaultValue;
                         break;
 
                     case OptionParseState.ReadingDefaultValue:
@@ -326,7 +326,7 @@ namespace NAPS2.Scan.Sane
                         }
 
                         i += 1;
-                        state = OptionParseState.Idle;
+                        _state = OptionParseState.Idle;
                         break;
 
                     case OptionParseState.Idle:
@@ -335,17 +335,17 @@ namespace NAPS2.Scan.Sane
                 }
             }
 
-            options.Add(option);
-            lastOption = option;
-            state = OptionParseState.ReadingDescription;
+            _options.Add(option);
+            _lastOption = option;
+            _state = OptionParseState.ReadingDescription;
         }
 
         private void NextLine()
         {
-            line = input.ReadLine();
-            if (line != null)
+            _line = _input.ReadLine();
+            if (_line != null)
             {
-                line = line.TrimEnd() + "\n";
+                _line = _line.TrimEnd() + "\n";
             }
         }
 

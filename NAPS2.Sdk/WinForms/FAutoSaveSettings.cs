@@ -8,13 +8,13 @@ namespace NAPS2.WinForms
 {
     public partial class FAutoSaveSettings : FormBase
     {
-        private readonly DialogHelper dialogHelper;
+        private readonly DialogHelper _dialogHelper;
 
-        private bool result;
+        private bool _result;
 
         public FAutoSaveSettings(DialogHelper dialogHelper)
         {
-            this.dialogHelper = dialogHelper;
+            _dialogHelper = dialogHelper;
             InitializeComponent();
         }
 
@@ -47,7 +47,7 @@ namespace NAPS2.WinForms
                 .Activate();
         }
 
-        public bool Result => result;
+        public bool Result => _result;
 
         public ScanProfile ScanProfile { get; set; }
 
@@ -71,7 +71,7 @@ namespace NAPS2.WinForms
                 txtFilePath.Focus();
                 return;
             }
-            result = true;
+            _result = true;
             SaveSettings();
             Close();
         }
@@ -83,7 +83,7 @@ namespace NAPS2.WinForms
 
         private void btnChooseFolder_Click(object sender, EventArgs e)
         {
-            if (dialogHelper.PromptToSavePdfOrImage(null, out string savePath))
+            if (_dialogHelper.PromptToSavePdfOrImage(null, out string savePath))
             {
                 txtFilePath.Text = savePath;
             }

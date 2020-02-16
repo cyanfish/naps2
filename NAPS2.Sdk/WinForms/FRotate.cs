@@ -17,8 +17,8 @@ namespace NAPS2.WinForms
         private const int MIN_LINE_DISTANCE = 50;
         private const float LINE_PEN_SIZE = 1;
 
-        private bool guideExists;
-        private Point guideStart, guideEnd;
+        private bool _guideExists;
+        private Point _guideStart, _guideEnd;
 
         public FRotate(ImageContext imageContext, BitmapRenderer bitmapRenderer)
             : base(imageContext, bitmapRenderer)
@@ -74,16 +74,16 @@ namespace NAPS2.WinForms
 
         private void pictureBox_MouseDown(object sender, MouseEventArgs e)
         {
-            guideExists = true;
-            guideStart = guideEnd = e.Location;
+            _guideExists = true;
+            _guideStart = _guideEnd = e.Location;
             pictureBox.Invalidate();
         }
 
         private void pictureBox_MouseUp(object sender, MouseEventArgs e)
         {
-            guideExists = false;
-            var dx = guideEnd.X - guideStart.X;
-            var dy = guideEnd.Y - guideStart.Y;
+            _guideExists = false;
+            var dx = _guideEnd.X - _guideStart.X;
+            var dy = _guideEnd.Y - _guideStart.Y;
             var distance = Math.Sqrt(dx * dx + dy * dy);
             if (distance > MIN_LINE_DISTANCE)
             {
@@ -114,17 +114,17 @@ namespace NAPS2.WinForms
 
         private void pictureBox_MouseMove(object sender, MouseEventArgs e)
         {
-            guideEnd = e.Location;
+            _guideEnd = e.Location;
             pictureBox.Invalidate();
         }
 
         private void pictureBox_Paint(object sender, PaintEventArgs e)
         {
-            if (guideExists)
+            if (_guideExists)
             {
                 var old = e.Graphics.SmoothingMode;
                 e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
-                e.Graphics.DrawLine(new Pen(Color.Black, LINE_PEN_SIZE), guideStart, guideEnd);
+                e.Graphics.DrawLine(new Pen(Color.Black, LINE_PEN_SIZE), _guideStart, _guideEnd);
                 e.Graphics.SmoothingMode = old;
             }
         }

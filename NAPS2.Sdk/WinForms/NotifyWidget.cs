@@ -6,13 +6,13 @@ namespace NAPS2.WinForms
 {
     public partial class NotifyWidget : NotifyWidgetBase
     {
-        private readonly string linkTarget;
-        private readonly string? folderTarget;
+        private readonly string _linkTarget;
+        private readonly string? _folderTarget;
 
         public NotifyWidget(string title, string linkLabel, string linkTarget, string? folderTarget)
         {
-            this.linkTarget = linkTarget;
-            this.folderTarget = folderTarget;
+            _linkTarget = linkTarget;
+            _folderTarget = folderTarget;
             InitializeComponent();
 
             lblTitle.Text = title;
@@ -75,7 +75,7 @@ namespace NAPS2.WinForms
                 Process.Start(new ProcessStartInfo
                 {
                     UseShellExecute = true,
-                    FileName = linkTarget,
+                    FileName = _linkTarget,
                     Verb = "open"
                 });
             }
@@ -86,7 +86,7 @@ namespace NAPS2.WinForms
             Process.Start(new ProcessStartInfo
             {
                 UseShellExecute = true,
-                FileName = folderTarget,
+                FileName = _folderTarget,
                 Verb = "open"
             });
         }

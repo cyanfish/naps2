@@ -8,29 +8,29 @@ namespace NAPS2.Images
     // TODO: Also maybe this should be called GdiRenderer. Or GdiBitmapRenderer.
     public class BitmapRenderer : IScannedImageRenderer<Bitmap>
     {
-        private readonly ImageContext imageContext;
-        private readonly IScannedImageRenderer<IImage> imageRenderer;
+        private readonly ImageContext _imageContext;
+        private readonly IScannedImageRenderer<IImage> _imageRenderer;
 
         public BitmapRenderer(ImageContext imageContext)
         {
-            this.imageContext = imageContext;
-            imageRenderer = new ImageRenderer(imageContext);
+            _imageContext = imageContext;
+            _imageRenderer = new ImageRenderer(imageContext);
         }
 
         public BitmapRenderer(ImageContext imageContext, IScannedImageRenderer<IImage> imageRenderer)
         {
-            this.imageContext = imageContext;
-            this.imageRenderer = imageRenderer;
+            _imageContext = imageContext;
+            _imageRenderer = imageRenderer;
         }
 
         public async Task<Bitmap> Render(ScannedImage image, int outputSize = 0)
         {
-            return imageContext.Convert<GdiImage>(await imageRenderer.Render(image, outputSize)).Bitmap;
+            return _imageContext.Convert<GdiImage>(await _imageRenderer.Render(image, outputSize)).Bitmap;
         }
 
         public async Task<Bitmap> Render(ScannedImage.Snapshot snapshot, int outputSize = 0)
         {
-            return imageContext.Convert<GdiImage>(await imageRenderer.Render(snapshot, outputSize)).Bitmap;
+            return _imageContext.Convert<GdiImage>(await _imageRenderer.Render(snapshot, outputSize)).Bitmap;
         }
     }
 }

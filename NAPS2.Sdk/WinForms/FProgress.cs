@@ -7,17 +7,17 @@ namespace NAPS2.WinForms
 {
     public partial class FProgress : FormBase
     {
-        private readonly ErrorOutput errorOutput;
-        private readonly OperationProgress operationProgress;
+        private readonly ErrorOutput _errorOutput;
+        private readonly OperationProgress _operationProgress;
 
-        private volatile bool loaded;
-        private volatile bool background;
-        private IOperation operation;
+        private volatile bool _loaded;
+        private volatile bool _background;
+        private IOperation _operation;
 
         public FProgress(ErrorOutput errorOutput, OperationProgress operationProgress)
         {
-            this.errorOutput = errorOutput;
-            this.operationProgress = operationProgress;
+            _errorOutput = errorOutput;
+            _operationProgress = operationProgress;
             InitializeComponent();
 
             RestoreFormState = false;
@@ -25,19 +25,19 @@ namespace NAPS2.WinForms
 
         public IOperation Operation
         {
-            get => operation;
+            get => _operation;
             set
             {
-                operation = value;
-                operation.StatusChanged += operation_StatusChanged;
-                operation.Finished += operation_Finished;
-                btnCancel.Visible = operation.AllowCancel;
+                _operation = value;
+                _operation.StatusChanged += operation_StatusChanged;
+                _operation.Finished += operation_Finished;
+                btnCancel.Visible = _operation.AllowCancel;
             }
         }
 
         void operation_StatusChanged(object sender, EventArgs e)
         {
-            if (loaded && !background)
+            if (_loaded && !_background)
             {
                 SafeInvoke(DisplayProgress);
             }
@@ -45,7 +45,7 @@ namespace NAPS2.WinForms
 
         void operation_Finished(object sender, EventArgs e)
         {
-            if (loaded && !background)
+            if (_loaded && !_background)
             {
                 SafeInvoke(Close);
             }
@@ -53,12 +53,12 @@ namespace NAPS2.WinForms
 
         protected override void OnLoad(object sender, EventArgs eventArgs)
         {
-            loaded = true;
-            Text = operation.ProgressTitle;
-            btnRunInBG.Visible = operation.AllowBackground;
+            _loaded = true;
+            Text = _operation.ProgressTitle;
+            btnRunInBG.Visible = _operation.AllowBackground;
 
             DisplayProgress();
-            if (operation.IsFinished)
+            if (_operation.IsFinished)
             {
                 Close();
             }
@@ -76,7 +76,7 @@ namespace NAPS2.WinForms
 
         private void FDownloadProgress_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (!operation.IsFinished && !background)
+            if (!_operation.IsFinished && !_background)
             {
                 TryCancelOp();
                 e.Cancel = true;
@@ -94,7 +94,7 @@ namespace NAPS2.WinForms
 
         private void btnRunInBG_Click(object sender, EventArgs e)
         {
-            background = true;
+            _background = true;
             Close();
         }
     }

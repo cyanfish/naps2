@@ -9,7 +9,7 @@ namespace NAPS2.Util
     /// <typeparam name="T"></typeparam>
     public abstract class UnmanagedBase<T> : IDisposable
     {
-        private bool disposed;
+        private bool _disposed;
 
         ~UnmanagedBase()
         {
@@ -38,7 +38,7 @@ namespace NAPS2.Util
         {
             get
             {
-                if (disposed)
+                if (_disposed)
                 {
                     throw new ObjectDisposedException("unmanaged");
                 }
@@ -48,12 +48,12 @@ namespace NAPS2.Util
 
         public void Dispose()
         {
-            if (Pointer != IntPtr.Zero && !disposed)
+            if (Pointer != IntPtr.Zero && !_disposed)
             {
                 DestroyStructures();
                 Marshal.FreeHGlobal(Pointer);
             }
-            disposed = true;
+            _disposed = true;
         }
 
         protected abstract T GetValue();

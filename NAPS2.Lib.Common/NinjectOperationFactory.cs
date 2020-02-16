@@ -6,19 +6,19 @@ namespace NAPS2
 {
     public class NinjectOperationFactory : IOperationFactory
     {
-        private readonly IKernel kernel;
-        private readonly ErrorOutput errorOutput;
+        private readonly IKernel _kernel;
+        private readonly ErrorOutput _errorOutput;
 
         public NinjectOperationFactory(IKernel kernel, ErrorOutput errorOutput)
         {
-            this.kernel = kernel;
-            this.errorOutput = errorOutput;
+            _kernel = kernel;
+            _errorOutput = errorOutput;
         }
 
         public T Create<T>() where T : IOperation
         {
-            var op = kernel.Get<T>();
-            op.Error += (sender, args) => errorOutput.DisplayError(args.ErrorMessage, args.Exception);
+            var op = _kernel.Get<T>();
+            op.Error += (sender, args) => _errorOutput.DisplayError(args.ErrorMessage, args.Exception);
             return op;
         }
     }

@@ -6,18 +6,18 @@ namespace NAPS2.WinForms
 {
     public class WinFormsComponentInstallPrompt : IComponentInstallPrompt
     {
-        private readonly IFormFactory formFactory;
+        private readonly IFormFactory _formFactory;
 
         public WinFormsComponentInstallPrompt(IFormFactory formFactory)
         {
-            this.formFactory = formFactory;
+            _formFactory = formFactory;
         }
 
         public bool PromptToInstall(ExternalComponent component, string promptText)
         {
             if (MessageBox.Show(promptText, MiscResources.DownloadNeeded, MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
-                var progressForm = formFactory.Create<FDownloadProgress>();
+                var progressForm = _formFactory.Create<FDownloadProgress>();
                 progressForm.QueueFile(component);
                 progressForm.ShowDialog();
             }

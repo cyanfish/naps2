@@ -19,27 +19,27 @@ namespace NAPS2.WinForms
 {
     public class WinFormsExportHelper
     {
-        private readonly ConfigProvider<PdfSettings> pdfSettingsProvider;
-        private readonly ConfigProvider<ImageSettings> imageSettingsProvider;
-        private readonly ConfigProvider<EmailSettings> emailSettingsProvider;
-        private readonly DialogHelper dialogHelper;
-        private readonly IOperationFactory operationFactory;
-        private readonly IFormFactory formFactory;
-        private readonly OperationProgress operationProgress;
-        private readonly ConfigScopes configScopes;
-        private readonly ScannedImageList scannedImageList;
+        private readonly ConfigProvider<PdfSettings> _pdfSettingsProvider;
+        private readonly ConfigProvider<ImageSettings> _imageSettingsProvider;
+        private readonly ConfigProvider<EmailSettings> _emailSettingsProvider;
+        private readonly DialogHelper _dialogHelper;
+        private readonly IOperationFactory _operationFactory;
+        private readonly IFormFactory _formFactory;
+        private readonly OperationProgress _operationProgress;
+        private readonly ConfigScopes _configScopes;
+        private readonly ScannedImageList _scannedImageList;
 
         public WinFormsExportHelper(ConfigProvider<PdfSettings> pdfSettingsProvider, ConfigProvider<ImageSettings> imageSettingsProvider, ConfigProvider<EmailSettings> emailSettingsProvider, DialogHelper dialogHelper, IOperationFactory operationFactory, IFormFactory formFactory, OperationProgress operationProgress, ConfigScopes configScopes, ScannedImageList scannedImageList)
         {
-            this.pdfSettingsProvider = pdfSettingsProvider;
-            this.imageSettingsProvider = imageSettingsProvider;
-            this.emailSettingsProvider = emailSettingsProvider;
-            this.dialogHelper = dialogHelper;
-            this.operationFactory = operationFactory;
-            this.formFactory = formFactory;
-            this.operationProgress = operationProgress;
-            this.configScopes = configScopes;
-            this.scannedImageList = scannedImageList;
+            _pdfSettingsProvider = pdfSettingsProvider;
+            _imageSettingsProvider = imageSettingsProvider;
+            _emailSettingsProvider = emailSettingsProvider;
+            _dialogHelper = dialogHelper;
+            _operationFactory = operationFactory;
+            _formFactory = formFactory;
+            _operationProgress = operationProgress;
+            _configScopes = configScopes;
+            _scannedImageList = scannedImageList;
         }
 
         public async Task<bool> SavePDF(List<ScannedImage> images, ISaveNotify notify)
@@ -48,24 +48,24 @@ namespace NAPS2.WinForms
             {
                 string savePath;
 
-                var defaultFileName = pdfSettingsProvider.Get(c => c.DefaultFileName);
-                if (pdfSettingsProvider.Get(c => c.SkipSavePrompt) && Path.IsPathRooted(defaultFileName))
+                var defaultFileName = _pdfSettingsProvider.Get(c => c.DefaultFileName);
+                if (_pdfSettingsProvider.Get(c => c.SkipSavePrompt) && Path.IsPathRooted(defaultFileName))
                 {
                     savePath = defaultFileName;
                 }
                 else
                 {
-                    if (!dialogHelper.PromptToSavePdf(defaultFileName, out savePath))
+                    if (!_dialogHelper.PromptToSavePdf(defaultFileName, out savePath))
                     {
                         return false;
                     }
                 }
 
                 var subSavePath = Placeholders.All.Substitute(savePath);
-                var state = scannedImageList.CurrentState;
+                var state = _scannedImageList.CurrentState;
                 if (await ExportPDF(subSavePath, images, false, null))
                 {
-                    scannedImageList.SavedState = state;
+                    _scannedImageList.SavedState = state;
                     notify?.PdfSaved(subSavePath);
                     return true;
                 }
@@ -75,11 +75,11 @@ namespace NAPS2.WinForms
 
         public async Task<bool> ExportPDF(string filename, List<ScannedImage> images, bool email, EmailMessage emailMessage)
         {
-            var op = operationFactory.Create<SavePdfOperation>();
+            var op = _operationFactory.Create<SavePdfOperation>();
 
-            if (op.Start(filename, Placeholders.All.WithDate(DateTime.Now), images, pdfSettingsProvider, new OcrContext(configScopes.Provider.DefaultOcrParams()), email, emailMessage))
+            if (op.Start(filename, Placeholders.All.WithDate(DateTime.Now), images, _pdfSettingsProvider, new OcrContext(_configScopes.Provider.DefaultOcrParams()), email, emailMessage))
             {
-                operationProgress.ShowProgress(op);
+                _operationProgress.ShowProgress(op);
             }
             return await op.Success;
         }
@@ -90,27 +90,27 @@ namespace NAPS2.WinForms
             {
                 string savePath;
 
-                if (imageSettingsProvider.Get(c => c.SkipSavePrompt) && Path.IsPathRooted(imageSettingsProvider.Get(c => c.DefaultFileName)))
+                if (_imageSettingsProvider.Get(c => c.SkipSavePrompt) && Path.IsPathRooted(_imageSettingsProvider.Get(c => c.DefaultFileName)))
                 {
-                    savePath = imageSettingsProvider.Get(c => c.DefaultFileName);
+                    savePath = _imageSettingsProvider.Get(c => c.DefaultFileName);
                 }
                 else
                 {
-                    if (!dialogHelper.PromptToSaveImage(imageSettingsProvider.Get(c => c.DefaultFileName), out savePath))
+                    if (!_dialogHelper.PromptToSaveImage(_imageSettingsProvider.Get(c => c.DefaultFileName), out savePath))
                     {
                         return false;
                     }
                 }
 
-                var op = operationFactory.Create<SaveImagesOperation>();
-                var state = scannedImageList.CurrentState;
-                if (op.Start(savePath, Placeholders.All.WithDate(DateTime.Now), images, imageSettingsProvider))
+                var op = _operationFactory.Create<SaveImagesOperation>();
+                var state = _scannedImageList.CurrentState;
+                if (op.Start(savePath, Placeholders.All.WithDate(DateTime.Now), images, _imageSettingsProvider))
                 {
-                    operationProgress.ShowProgress(op);
+                    _operationProgress.ShowProgress(op);
                 }
                 if (await op.Success)
                 {
-                    scannedImageList.SavedState = state;
+                    _scannedImageList.SavedState = state;
                     notify?.ImagesSaved(images.Count, op.FirstFileSaved);
                     return true;
                 }
@@ -125,10 +125,10 @@ namespace NAPS2.WinForms
                 return false;
             }
 
-            if (configScopes == null)
+            if (_configScopes == null)
             {
                 // First run; prompt for a 
-                var form = formFactory.Create<FEmailProvider>();
+                var form = _formFactory.Create<FEmailProvider>();
                 if (form.ShowDialog() != DialogResult.OK)
                 {
                     return false;
@@ -136,7 +136,7 @@ namespace NAPS2.WinForms
             }
 
             var invalidChars = new HashSet<char>(Path.GetInvalidFileNameChars());
-            var attachmentName = new string(emailSettingsProvider.Get(c => c.AttachmentName).Where(x => !invalidChars.Contains(x)).ToArray());
+            var attachmentName = new string(_emailSettingsProvider.Get(c => c.AttachmentName).Where(x => !invalidChars.Contains(x)).ToArray());
             if (string.IsNullOrEmpty(attachmentName))
             {
                 attachmentName = "Scan.pdf";
@@ -152,7 +152,7 @@ namespace NAPS2.WinForms
             try
             {
                 string targetPath = Path.Combine(tempFolder.FullName, attachmentName);
-                var state = scannedImageList.CurrentState;
+                var state = _scannedImageList.CurrentState;
 
                 var message = new EmailMessage
                 {
@@ -161,7 +161,7 @@ namespace NAPS2.WinForms
 
                 if (await ExportPDF(targetPath, images, true, message))
                 {
-                    scannedImageList.SavedState = state;
+                    _scannedImageList.SavedState = state;
                     return true;
                 }
             }

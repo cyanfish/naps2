@@ -8,21 +8,21 @@ namespace NAPS2.ImportExport.Email.Mapi
 {
     public class MapiWrapper : IMapiWrapper
     {
-        private readonly SystemEmailClients systemEmailClients;
-        private readonly ConfigProvider<EmailSetup> emailSetupProvider;
+        private readonly SystemEmailClients _systemEmailClients;
+        private readonly ConfigProvider<EmailSetup> _emailSetupProvider;
 
         public MapiWrapper(SystemEmailClients systemEmailClients, ConfigProvider<EmailSetup> emailSetupProvider)
         {
-            this.systemEmailClients = systemEmailClients;
-            this.emailSetupProvider = emailSetupProvider;
+            _systemEmailClients = systemEmailClients;
+            _emailSetupProvider = emailSetupProvider;
         }
 
         public bool CanLoadClient
         {
             get
             {
-                var clientName = emailSetupProvider.Get(c => c.SystemProviderName);
-                return systemEmailClients.GetLibrary(clientName) != IntPtr.Zero;
+                var clientName = _emailSetupProvider.Get(c => c.SystemProviderName);
+                return _systemEmailClients.GetLibrary(clientName) != IntPtr.Zero;
             }
         }
 
@@ -30,8 +30,8 @@ namespace NAPS2.ImportExport.Email.Mapi
         {
             return Task.Run(() =>
             {
-                var clientName = emailSetupProvider.Get(c => c.SystemProviderName);
-                var (mapiSendMail, mapiSendMailW) = systemEmailClients.GetDelegate(clientName, out bool unicode);
+                var clientName = _emailSetupProvider.Get(c => c.SystemProviderName);
+                var (mapiSendMail, mapiSendMailW) = _systemEmailClients.GetDelegate(clientName, out bool unicode);
 
                 // Determine the flags used to send the message
                 var flags = MapiSendMailFlags.None;

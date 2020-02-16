@@ -9,7 +9,7 @@ namespace NAPS2.Operation
     /// </summary>
     public abstract class OperationBase : IOperation
     {
-        private readonly CancellationTokenSource cts = new CancellationTokenSource();
+        private readonly CancellationTokenSource _cts = new CancellationTokenSource();
 
         public string? ProgressTitle { get; protected set; }
 
@@ -32,7 +32,7 @@ namespace NAPS2.Operation
 
         public virtual void Cancel()
         {
-            cts.Cancel();
+            _cts.Cancel();
         }
 
         public event EventHandler? StatusChanged;
@@ -43,7 +43,7 @@ namespace NAPS2.Operation
 
         protected OperationErrorEventArgs? LastError { get; private set; }
 
-        protected CancellationToken CancelToken => cts.Token;
+        protected CancellationToken CancelToken => _cts.Token;
 
         protected void RunAsync(Func<Task<bool>> action)
         {

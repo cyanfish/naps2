@@ -23,12 +23,12 @@ namespace NAPS2.Remoting.Worker
         [DllImport("kernel32.dll", SetLastError = true)]
         private static extern bool CloseHandle(IntPtr hObject);
 
-        private IntPtr handle;
-        private bool disposed;
+        private IntPtr _handle;
+        private bool _disposed;
 
         public Job()
         {
-            handle = CreateJobObject(IntPtr.Zero, null);
+            _handle = CreateJobObject(IntPtr.Zero, null);
 
             var info = new JOBOBJECT_BASIC_LIMIT_INFORMATION
             {
@@ -44,7 +44,7 @@ namespace NAPS2.Remoting.Worker
             IntPtr extendedInfoPtr = Marshal.AllocHGlobal(length);
             Marshal.StructureToPtr(extendedInfo, extendedInfoPtr, false);
 
-            if (!SetInformationJobObject(handle, JobObjectInfoType.ExtendedLimitInformation, extendedInfoPtr, (uint)length))
+            if (!SetInformationJobObject(_handle, JobObjectInfoType.ExtendedLimitInformation, extendedInfoPtr, (uint)length))
                 throw new Exception($"Unable to set information.  Error: {Marshal.GetLastWin32Error()}");
         }
 
@@ -56,24 +56,24 @@ namespace NAPS2.Remoting.Worker
 
         private void Dispose(bool disposing)
         {
-            if (disposed)
+            if (_disposed)
                 return;
 
             if (disposing) { }
 
             Close();
-            disposed = true;
+            _disposed = true;
         }
 
         public void Close()
         {
-            CloseHandle(handle);
-            handle = IntPtr.Zero;
+            CloseHandle(_handle);
+            _handle = IntPtr.Zero;
         }
 
         public bool AddProcess(IntPtr processHandle)
         {
-            return AssignProcessToJobObject(handle, processHandle);
+            return AssignProcessToJobObject(_handle, processHandle);
         }
 
         public bool AddProcess(int processId)

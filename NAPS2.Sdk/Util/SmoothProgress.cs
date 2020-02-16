@@ -10,18 +10,18 @@ namespace NAPS2.Util
         private const int INTERVAL = 16;
         private const int VELOCITY_SAMPLE_SIZE = 5;
 
-        private double inputPos;
-        private double outputPos;
+        private double _inputPos;
+        private double _outputPos;
 
-        private double inputVelocity;
-        private double timeToCompletion;
-        private double outputVelocity;
+        private double _inputVelocity;
+        private double _timeToCompletion;
+        private double _outputVelocity;
 
-        private Stopwatch stopwatch;
-        private Timer timer;
+        private Stopwatch _stopwatch;
+        private Timer _timer;
 
-        private LinkedList<double> previousInputPos;
-        private LinkedList<long> previousInputTimes;
+        private LinkedList<double> _previousInputPos;
+        private LinkedList<long> _previousInputTimes;
 
         public SmoothProgress()
         {
@@ -32,19 +32,19 @@ namespace NAPS2.Util
         {
             lock (this)
             {
-                inputPos = 0;
-                outputPos = 0;
+                _inputPos = 0;
+                _outputPos = 0;
                 InvokeOutputProgressChanged();
 
-                timer?.Dispose();
-                timer = null;
+                _timer?.Dispose();
+                _timer = null;
 
-                stopwatch = Stopwatch.StartNew();
+                _stopwatch = Stopwatch.StartNew();
 
-                previousInputPos = new LinkedList<double>();
-                previousInputPos.AddLast(0);
-                previousInputTimes = new LinkedList<long>();
-                previousInputTimes.AddLast(0);
+                _previousInputPos = new LinkedList<double>();
+                _previousInputPos.AddLast(0);
+                _previousInputTimes = new LinkedList<long>();
+                _previousInputTimes.AddLast(0);
             }
         }
 
@@ -52,32 +52,32 @@ namespace NAPS2.Util
         {
             lock (this)
             {
-                if (inputPos < value)
+                if (_inputPos < value)
                 {
-                    inputPos = value;
-                    previousInputPos.AddLast(inputPos);
-                    previousInputTimes.AddLast(stopwatch.ElapsedMilliseconds);
+                    _inputPos = value;
+                    _previousInputPos.AddLast(_inputPos);
+                    _previousInputTimes.AddLast(_stopwatch.ElapsedMilliseconds);
 
-                    var deltaPos = previousInputPos.Last.Value - SampleStart(previousInputPos);
-                    var deltaTime = previousInputTimes.Last.Value - SampleStart(previousInputTimes);
+                    var deltaPos = _previousInputPos.Last.Value - SampleStart(_previousInputPos);
+                    var deltaTime = _previousInputTimes.Last.Value - SampleStart(_previousInputTimes);
 
-                    if (deltaTime > 0 && inputPos < 1)
+                    if (deltaTime > 0 && _inputPos < 1)
                     {
-                        inputVelocity = deltaPos / deltaTime;
-                        timeToCompletion = (1 - inputPos) / inputVelocity;
-                        outputVelocity = (1 - outputPos) / timeToCompletion;
+                        _inputVelocity = deltaPos / deltaTime;
+                        _timeToCompletion = (1 - _inputPos) / _inputVelocity;
+                        _outputVelocity = (1 - _outputPos) / _timeToCompletion;
                     }
 
-                    if (inputPos >= 1)
+                    if (_inputPos >= 1)
                     {
-                        inputVelocity = 0;
-                        timeToCompletion = 0;
-                        outputVelocity = 1;
+                        _inputVelocity = 0;
+                        _timeToCompletion = 0;
+                        _outputVelocity = 1;
                     }
 
-                    if (timer == null)
+                    if (_timer == null)
                     {
-                        timer = new Timer(TimerTick, null, 0, INTERVAL);
+                        _timer = new Timer(TimerTick, null, 0, INTERVAL);
                     }
                 }
             }
@@ -104,21 +104,21 @@ namespace NAPS2.Util
 
         public void Dispose()
         {
-            timer?.Dispose();
+            _timer?.Dispose();
         }
 
         private void TimerTick(object state)
         {
             lock (this)
             {
-                outputPos = Math.Min(inputPos, outputPos + outputVelocity * INTERVAL);
+                _outputPos = Math.Min(_inputPos, _outputPos + _outputVelocity * INTERVAL);
             }
             InvokeOutputProgressChanged();
         }
 
         private void InvokeOutputProgressChanged()
         {
-            OutputProgressChanged?.Invoke(this, new ProgressChangeEventArgs(outputPos));
+            OutputProgressChanged?.Invoke(this, new ProgressChangeEventArgs(_outputPos));
         }
 
         public event ProgressChangeEventHandle OutputProgressChanged;

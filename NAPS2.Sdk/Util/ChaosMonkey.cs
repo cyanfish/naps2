@@ -9,12 +9,12 @@ namespace NAPS2.Util
     /// </summary>
     internal static class ChaosMonkey
     {
-        private static Lazy<Random> random = new Lazy<Random>();
+        private static Lazy<Random> _random = new Lazy<Random>();
 
         [Conditional("DEBUG")] 
         public static void MaybeError(double chance, Exception? exception = null)
         {
-            if (random.Value.NextDouble() < chance)
+            if (_random.Value.NextDouble() < chance)
             {
                 throw exception ?? new Exception("Randomly generated exception for testing");
             }
@@ -23,9 +23,9 @@ namespace NAPS2.Util
         [Conditional("DEBUG")] 
         public static void MaybeDelay(double chance, double durationInSeconds, double variationInSeconds = 0)
         {
-            if (random.Value.NextDouble() < chance)
+            if (_random.Value.NextDouble() < chance)
             {
-                double duration = durationInSeconds + variationInSeconds * (random.Value.NextDouble() * 2 - 1);
+                double duration = durationInSeconds + variationInSeconds * (_random.Value.NextDouble() * 2 - 1);
                 Thread.Sleep(TimeSpan.FromSeconds(duration));
             }
         }

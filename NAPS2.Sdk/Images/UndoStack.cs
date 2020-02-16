@@ -5,19 +5,19 @@ namespace NAPS2.Images
 {
     public class UndoStack : IDisposable
     {
-        private readonly int maxLength;
-        private readonly LinkedList<Memento> stack;
-        private LinkedListNode<Memento> current;
+        private readonly int _maxLength;
+        private readonly LinkedList<Memento> _stack;
+        private LinkedListNode<Memento> _current;
 
         public UndoStack(int maxLength)
         {
-            this.maxLength = maxLength;
-            stack = new LinkedList<Memento>();
-            stack.AddFirst(new Memento(new List<ScannedImage>()));
-            current = stack.First;
+            _maxLength = maxLength;
+            _stack = new LinkedList<Memento>();
+            _stack.AddFirst(new Memento(new List<ScannedImage>()));
+            _current = _stack.First;
         }
 
-        public Memento Current => current.Value;
+        public Memento Current => _current.Value;
 
         public bool Push(IEnumerable<ScannedImage> images)
         {
@@ -26,41 +26,41 @@ namespace NAPS2.Images
 
         public bool Push(Memento memento)
         {
-            if (stack.First.Value == memento)
+            if (_stack.First.Value == memento)
             {
                 return false;
             }
             ClearRedo();
-            stack.AddFirst(memento);
-            current = stack.First;
+            _stack.AddFirst(memento);
+            _current = _stack.First;
             Trim();
             return true;
         }
 
         private void Trim()
         {
-            while (stack.Count > maxLength && stack.Last != current)
+            while (_stack.Count > _maxLength && _stack.Last != _current)
             {
-                stack.Last.Value.Dispose();
-                stack.RemoveLast();
+                _stack.Last.Value.Dispose();
+                _stack.RemoveLast();
             }
         }
 
         public void ClearRedo()
         {
-            while (stack.First != current)
+            while (_stack.First != _current)
             {
-                stack.First.Value.Dispose();
-                stack.RemoveFirst();
+                _stack.First.Value.Dispose();
+                _stack.RemoveFirst();
             }
         }
 
         public void ClearUndo()
         {
-            while (stack.Last != current)
+            while (_stack.Last != _current)
             {
-                stack.Last.Value.Dispose();
-                stack.RemoveLast();
+                _stack.Last.Value.Dispose();
+                _stack.RemoveLast();
             }
         }
         
@@ -72,9 +72,9 @@ namespace NAPS2.Images
 
         public bool Undo()
         {
-            if (current.Next != null)
+            if (_current.Next != null)
             {
-                current = current.Next;
+                _current = _current.Next;
                 return true;
             }
             return false;
@@ -82,9 +82,9 @@ namespace NAPS2.Images
 
         public bool Redo()
         {
-            if (current.Previous != null)
+            if (_current.Previous != null)
             {
-                current = current.Previous;
+                _current = _current.Previous;
                 return true;
             }
             return false;
@@ -92,7 +92,7 @@ namespace NAPS2.Images
 
         public void Dispose()
         {
-            foreach (var memento in stack)
+            foreach (var memento in _stack)
             {
                 memento.Dispose();
             }

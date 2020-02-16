@@ -21,30 +21,30 @@ namespace NAPS2.Scan.Batch
 {
     public class BatchScanPerformer : IBatchScanPerformer
     {
-        private readonly IScanPerformer scanPerformer;
-        private readonly PdfExporter pdfExporter;
-        private readonly IOperationFactory operationFactory;
-        private readonly ConfigProvider<PdfSettings> pdfSettingsProvider;
-        private readonly OcrEngineManager ocrEngineManager;
-        private readonly IFormFactory formFactory;
-        private readonly ConfigProvider<CommonConfig> configProvider;
-        private readonly IProfileManager profileManager;
+        private readonly IScanPerformer _scanPerformer;
+        private readonly PdfExporter _pdfExporter;
+        private readonly IOperationFactory _operationFactory;
+        private readonly ConfigProvider<PdfSettings> _pdfSettingsProvider;
+        private readonly OcrEngineManager _ocrEngineManager;
+        private readonly IFormFactory _formFactory;
+        private readonly ConfigProvider<CommonConfig> _configProvider;
+        private readonly IProfileManager _profileManager;
 
         public BatchScanPerformer(IScanPerformer scanPerformer, PdfExporter pdfExporter, IOperationFactory operationFactory, ConfigProvider<PdfSettings> pdfSettingsProvider, OcrEngineManager ocrEngineManager, IFormFactory formFactory, ConfigProvider<CommonConfig> configProvider, IProfileManager profileManager)
         {
-            this.scanPerformer = scanPerformer;
-            this.pdfExporter = pdfExporter;
-            this.operationFactory = operationFactory;
-            this.pdfSettingsProvider = pdfSettingsProvider;
-            this.ocrEngineManager = ocrEngineManager;
-            this.formFactory = formFactory;
-            this.configProvider = configProvider;
-            this.profileManager = profileManager;
+            _scanPerformer = scanPerformer;
+            _pdfExporter = pdfExporter;
+            _operationFactory = operationFactory;
+            _pdfSettingsProvider = pdfSettingsProvider;
+            _ocrEngineManager = ocrEngineManager;
+            _formFactory = formFactory;
+            _configProvider = configProvider;
+            _profileManager = profileManager;
         }
 
         public async Task PerformBatchScan(ConfigProvider<BatchSettings> settings, FormBase batchForm, Action<ScannedImage> imageCallback, Action<string> progressCallback, CancellationToken cancelToken)
         {
-            var state = new BatchState(scanPerformer, pdfExporter, operationFactory, pdfSettingsProvider, ocrEngineManager, formFactory, configProvider, profileManager)
+            var state = new BatchState(_scanPerformer, _pdfExporter, _operationFactory, _pdfSettingsProvider, _ocrEngineManager, _formFactory, _configProvider, _profileManager)
             {
                 Settings = settings,
                 ProgressCallback = progressCallback,
@@ -57,30 +57,30 @@ namespace NAPS2.Scan.Batch
 
         private class BatchState
         {
-            private readonly IScanPerformer scanPerformer;
-            private readonly PdfExporter pdfExporter;
-            private readonly IOperationFactory operationFactory;
-            private readonly ConfigProvider<PdfSettings> pdfSettingsProvider;
-            private readonly OcrEngineManager ocrEngineManager;
-            private readonly IFormFactory formFactory;
-            private readonly ConfigProvider<CommonConfig> configProvider;
-            private readonly IProfileManager profileManager;
+            private readonly IScanPerformer _scanPerformer;
+            private readonly PdfExporter _pdfExporter;
+            private readonly IOperationFactory _operationFactory;
+            private readonly ConfigProvider<PdfSettings> _pdfSettingsProvider;
+            private readonly OcrEngineManager _ocrEngineManager;
+            private readonly IFormFactory _formFactory;
+            private readonly ConfigProvider<CommonConfig> _configProvider;
+            private readonly IProfileManager _profileManager;
 
-            private ScanProfile profile;
-            private ScanParams scanParams;
-            private List<List<ScannedImage>> scans;
+            private ScanProfile _profile;
+            private ScanParams _scanParams;
+            private List<List<ScannedImage>> _scans;
 
             public BatchState(IScanPerformer scanPerformer, PdfExporter pdfExporter, IOperationFactory operationFactory,
                 ConfigProvider<PdfSettings> pdfSettingsProvider, OcrEngineManager ocrEngineManager, IFormFactory formFactory, ConfigProvider<CommonConfig> configProvider, IProfileManager profileManager)
             {
-                this.scanPerformer = scanPerformer;
-                this.pdfExporter = pdfExporter;
-                this.operationFactory = operationFactory;
-                this.pdfSettingsProvider = pdfSettingsProvider;
-                this.ocrEngineManager = ocrEngineManager;
-                this.formFactory = formFactory;
-                this.configProvider = configProvider;
-                this.profileManager = profileManager;
+                _scanPerformer = scanPerformer;
+                _pdfExporter = pdfExporter;
+                _operationFactory = operationFactory;
+                _pdfSettingsProvider = pdfSettingsProvider;
+                _ocrEngineManager = ocrEngineManager;
+                _formFactory = formFactory;
+                _configProvider = configProvider;
+                _profileManager = profileManager;
             }
 
             public ConfigProvider<BatchSettings> Settings { get; set; }
@@ -95,18 +95,18 @@ namespace NAPS2.Scan.Batch
 
             public async Task Do()
             {
-                profile = profileManager.Profiles.First(x => x.DisplayName == Settings.Get(c => c.ProfileDisplayName));
-                scanParams = new ScanParams
+                _profile = _profileManager.Profiles.First(x => x.DisplayName == Settings.Get(c => c.ProfileDisplayName));
+                _scanParams = new ScanParams
                 {
                     DetectPatchT = Settings.Get(c => c.OutputType) == BatchOutputType.MultipleFiles && Settings.Get(c => c.SaveSeparator) == SaveSeparator.PatchT,
                     NoUI = true,
-                    NoAutoSave = configProvider.Get(c => c.DisableAutoSave),
+                    NoAutoSave = _configProvider.Get(c => c.DisableAutoSave),
                     DoOcr = Settings.Get(c => c.OutputType) == BatchOutputType.Load
-                        ? configProvider.Get(c => c.EnableOcr) && configProvider.Get(c => c.OcrAfterScanning) // User configured
-                        : configProvider.Get(c => c.EnableOcr) && GetSavePathExtension().ToLower() == ".pdf", // Fully automated
-                    OcrParams = configProvider.DefaultOcrParams(),
+                        ? _configProvider.Get(c => c.EnableOcr) && _configProvider.Get(c => c.OcrAfterScanning) // User configured
+                        : _configProvider.Get(c => c.EnableOcr) && GetSavePathExtension().ToLower() == ".pdf", // Fully automated
+                    OcrParams = _configProvider.DefaultOcrParams(),
                     OcrCancelToken = CancelToken,
-                    ThumbnailSize = configProvider.Get(c => c.ThumbnailSize)
+                    ThumbnailSize = _configProvider.Get(c => c.ThumbnailSize)
                 };
 
                 try
@@ -140,7 +140,7 @@ namespace NAPS2.Scan.Batch
             {
                 await Task.Run(async () =>
                 {
-                    scans = new List<List<ScannedImage>>();
+                    _scans = new List<List<ScannedImage>>();
 
                     if (Settings.Get(c => c.ScanType) == BatchScanType.Single)
                     {
@@ -198,7 +198,7 @@ namespace NAPS2.Scan.Batch
                 }
                 catch (OperationCanceledException)
                 {
-                    scans.Add(scan);
+                    _scans.Add(scan);
                     throw;
                 }
                 if (scan.Count == 0)
@@ -206,13 +206,13 @@ namespace NAPS2.Scan.Batch
                     // Presume cancelled
                     return false;
                 }
-                scans.Add(scan);
+                _scans.Add(scan);
                 return true;
             }
 
             private async Task DoScan(int scanNumber, List<ScannedImage> scan, int pageNumber)
             {
-                var source = await scanPerformer.PerformScan(profile, scanParams, BatchForm.SafeHandle(), CancelToken);
+                var source = await _scanPerformer.PerformScan(_profile, _scanParams, BatchForm.SafeHandle(), CancelToken);
                 await source.ForEach(image =>
                 {
                     scan.Add(image);
@@ -225,8 +225,8 @@ namespace NAPS2.Scan.Batch
 
             private bool PromptForNextScan()
             {
-                var promptForm = formFactory.Create<FBatchPrompt>();
-                promptForm.ScanNumber = scans.Count + 1;
+                var promptForm = _formFactory.Create<FBatchPrompt>();
+                promptForm.ScanNumber = _scans.Count + 1;
                 return promptForm.ShowDialog() == DialogResult.OK;
             }
 
@@ -235,7 +235,7 @@ namespace NAPS2.Scan.Batch
                 ProgressCallback(MiscResources.BatchStatusSaving);
 
                 var placeholders = Placeholders.All.WithDate(DateTime.Now);
-                var allImages = scans.SelectMany(x => x).ToList();
+                var allImages = _scans.SelectMany(x => x).ToList();
 
                 if (Settings.Get(c => c.OutputType) == BatchOutputType.Load)
                 {
@@ -255,7 +255,7 @@ namespace NAPS2.Scan.Batch
                 else if (Settings.Get(c => c.OutputType) == BatchOutputType.MultipleFiles)
                 {
                     int i = 0;
-                    foreach (var imageList in SaveSeparatorHelper.SeparateScans(scans, Settings.Get(c => c.SaveSeparator)))
+                    foreach (var imageList in SaveSeparatorHelper.SeparateScans(_scans, Settings.Get(c => c.SaveSeparator)))
                     {
                         await Save(placeholders, i++, imageList);
                         foreach (var img in imageList)
@@ -282,7 +282,7 @@ namespace NAPS2.Scan.Batch
                     var snapshots = images.Select(x => x.Preserve()).ToList();
                     try
                     {
-                        await pdfExporter.Export(subPath, snapshots, pdfSettingsProvider, new OcrContext(configProvider.DefaultOcrParams()), (j, k) => { }, CancelToken);
+                        await _pdfExporter.Export(subPath, snapshots, _pdfSettingsProvider, new OcrContext(_configProvider.DefaultOcrParams()), (j, k) => { }, CancelToken);
                     }
                     finally
                     {
@@ -291,8 +291,8 @@ namespace NAPS2.Scan.Batch
                 }
                 else
                 {
-                    var op = operationFactory.Create<SaveImagesOperation>();
-                    op.Start(subPath, placeholders, images, configProvider.Child(c => c.ImageSettings), true);
+                    var op = _operationFactory.Create<SaveImagesOperation>();
+                    op.Start(subPath, placeholders, images, _configProvider.Child(c => c.ImageSettings), true);
                     await op.Success;
                 }
             }

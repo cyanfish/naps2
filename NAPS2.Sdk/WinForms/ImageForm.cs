@@ -13,15 +13,15 @@ namespace NAPS2.WinForms
 {
     partial class ImageForm : FormBase
     {
-        private readonly ImageContext imageContext;
-        private readonly BitmapRenderer bitmapRenderer;
+        private readonly ImageContext _imageContext;
+        private readonly BitmapRenderer _bitmapRenderer;
 
         protected Bitmap workingImage, workingImage2;
-        private bool initComplete;
-        private bool previewOutOfDate;
-        private bool working;
-        private Timer previewTimer;
-        private bool closed;
+        private bool _initComplete;
+        private bool _previewOutOfDate;
+        private bool _working;
+        private Timer _previewTimer;
+        private bool _closed;
 
         private ImageForm()
         {
@@ -31,8 +31,8 @@ namespace NAPS2.WinForms
 
         protected ImageForm(ImageContext imageContext, BitmapRenderer bitmapRenderer)
         {
-            this.imageContext = imageContext;
-            this.bitmapRenderer = bitmapRenderer;
+            _imageContext = imageContext;
+            _bitmapRenderer = bitmapRenderer;
             InitializeComponent();
         }
 
@@ -56,7 +56,7 @@ namespace NAPS2.WinForms
                 if (!transform.IsNull)
                 {
                     // TODO: Maybe the working images etc. should be storage
-                    result = ((GdiImage)imageContext.PerformTransform(new GdiImage(result), transform)).Bitmap;
+                    result = ((GdiImage)_imageContext.PerformTransform(new GdiImage(result), transform)).Bitmap;
                 }
             }
             return result;
@@ -92,8 +92,8 @@ namespace NAPS2.WinForms
             Size = new Size(600, 600);
 
             var maxDimen = Screen.AllScreens.Max(s => Math.Max(s.WorkingArea.Height, s.WorkingArea.Width));
-            workingImage = await bitmapRenderer.Render(Image, maxDimen * 2);
-            if (closed)
+            workingImage = await _bitmapRenderer.Render(Image, maxDimen * 2);
+            if (_closed)
             {
                 workingImage?.Dispose();
                 return;
@@ -103,7 +103,7 @@ namespace NAPS2.WinForms
             InitTransform();
             lock (this)
             {
-                initComplete = true;
+                _initComplete = true;
             }
 
             UpdatePreviewBox();
@@ -111,15 +111,15 @@ namespace NAPS2.WinForms
 
         protected void UpdatePreviewBox()
         {
-            if (previewTimer == null)
+            if (_previewTimer == null)
             {
-                previewTimer = new Timer(_ =>
+                _previewTimer = new Timer(_ =>
                 {
                     lock (this)
                     {
-                        if (!initComplete || !IsHandleCreated || !previewOutOfDate || working) return;
-                        working = true;
-                        previewOutOfDate = false;
+                        if (!_initComplete || !IsHandleCreated || !_previewOutOfDate || _working) return;
+                        _working = true;
+                        _previewOutOfDate = false;
                     }
                     var bitmap = RenderPreview();
                     SafeInvoke(() =>
@@ -129,13 +129,13 @@ namespace NAPS2.WinForms
                     });
                     lock (this)
                     {
-                        working = false;
+                        _working = false;
                     }
                 }, null, 0, 100);
             }
             lock (this)
             {
-                previewOutOfDate = true;
+                _previewOutOfDate = true;
             }
         }
 
@@ -159,8 +159,8 @@ namespace NAPS2.WinForms
                         // Optimize thumbnail rendering for the first (or only) image since we already have it loaded into memory
                         if (img == Image)
                         {
-                            var transformed = imageContext.PerformAllTransforms(new GdiImage(workingImage).Clone(), Transforms);
-                            img.SetThumbnail(imageContext.PerformTransform(transformed, new ThumbnailTransform(ConfigProvider.Get(c => c.ThumbnailSize))));
+                            var transformed = _imageContext.PerformAllTransforms(new GdiImage(workingImage).Clone(), Transforms);
+                            img.SetThumbnail(_imageContext.PerformTransform(transformed, new ThumbnailTransform(ConfigProvider.Get(c => c.ThumbnailSize))));
                         }
                     }
                 }
@@ -180,8 +180,8 @@ namespace NAPS2.WinForms
             workingImage?.Dispose();
             workingImage2?.Dispose();
             PictureBox.Image?.Dispose();
-            previewTimer?.Dispose();
-            closed = true;
+            _previewTimer?.Dispose();
+            _closed = true;
         }
     }
 }

@@ -5,11 +5,11 @@ namespace NAPS2.Util
 {
     public static class ExceptionExtensions
     {
-        private static MethodInfo internalPreserveStackTrace;
+        private static MethodInfo _internalPreserveStackTrace;
 
         static ExceptionExtensions()
         {
-            internalPreserveStackTrace = typeof(Exception).GetMethod("InternalPreserveStackTrace", BindingFlags.Instance | BindingFlags.NonPublic);
+            _internalPreserveStackTrace = typeof(Exception).GetMethod("InternalPreserveStackTrace", BindingFlags.Instance | BindingFlags.NonPublic);
         }
 
         /// <summary>
@@ -19,9 +19,9 @@ namespace NAPS2.Util
         /// <param name="e"></param>
         public static void PreserveStackTrace(this Exception e)
         {
-            if (internalPreserveStackTrace != null)
+            if (_internalPreserveStackTrace != null)
             {
-                internalPreserveStackTrace.Invoke(e, new object[] { });
+                _internalPreserveStackTrace.Invoke(e, new object[] { });
             }
         }
     }

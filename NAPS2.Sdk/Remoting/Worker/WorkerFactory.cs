@@ -32,25 +32,25 @@ namespace NAPS2.Remoting.Worker
             Path.GetDirectoryName(Assembly.GetEntryAssembly().Location)
         };
 
-        private readonly ImageContext imageContext;
+        private readonly ImageContext _imageContext;
 
-        private string workerExePath;
-        private BlockingCollection<WorkerContext> workerQueue;
+        private string _workerExePath;
+        private BlockingCollection<WorkerContext> _workerQueue;
 
         public WorkerFactory(ImageContext imageContext)
         {
-            this.imageContext = imageContext;
+            _imageContext = imageContext;
         }
 
         private string WorkerExePath
         {
             get
             {
-                if (workerExePath == null)
+                if (_workerExePath == null)
                 {
                     foreach (var dir in SearchDirs)
                     {
-                        workerExePath = Path.Combine(dir, WORKER_EXE_NAME);
+                        _workerExePath = Path.Combine(dir, WORKER_EXE_NAME);
                         if (File.Exists(WorkerExePath))
                         {
                             break;
@@ -58,7 +58,7 @@ namespace NAPS2.Remoting.Worker
                     }
                 }
 
-                return workerExePath;
+                return _workerExePath;
             }
         }
 
@@ -112,14 +112,14 @@ namespace NAPS2.Remoting.Worker
             {
                 var proc = StartWorkerProcess();
                 var channel = new NamedPipeChannel(".", string.Format(PIPE_NAME_FORMAT, proc.Id));
-                workerQueue.Add(new WorkerContext(new WorkerServiceAdapter(channel), proc));
+                _workerQueue.Add(new WorkerContext(new WorkerServiceAdapter(channel), proc));
             });
         }
 
         private WorkerContext NextWorker()
         {
             StartWorkerService();
-            return workerQueue.Take();
+            return _workerQueue.Take();
         }
 
         public void Init()
@@ -129,16 +129,16 @@ namespace NAPS2.Remoting.Worker
                 return;
             }
 
-            if (workerQueue == null)
+            if (_workerQueue == null)
             {
-                workerQueue = new BlockingCollection<WorkerContext>();
+                _workerQueue = new BlockingCollection<WorkerContext>();
                 StartWorkerService();
             }
         }
 
         public WorkerContext Create()
         {
-            var rsm = imageContext.FileStorageManager as RecoveryStorageManager;
+            var rsm = _imageContext.FileStorageManager as RecoveryStorageManager;
             var worker = NextWorker();
             worker.Service.Init(rsm?.RecoveryFolderPath);
             return worker;

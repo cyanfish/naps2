@@ -5,30 +5,30 @@ namespace NAPS2.Util
 {
     public class EventThrottle<T>
     {
-        private readonly Action<T> eventCallback;
+        private readonly Action<T> _eventCallback;
 
-        private bool hasLastValue;
+        private bool _hasLastValue;
         [MaybeNull]
-        private T lastValue;
+        private T _lastValue;
 
         public EventThrottle(Action<T> eventCallback)
         {
-            this.eventCallback = eventCallback;
+            _eventCallback = eventCallback;
         }
 
         public void OnlyIfChanged(T value)
         {
-            if (!hasLastValue)
+            if (!_hasLastValue)
             {
-                lastValue = value;
-                hasLastValue = true;
-                eventCallback(value);
+                _lastValue = value;
+                _hasLastValue = true;
+                _eventCallback(value);
                 return;
             }
-            if (!Equals(value, lastValue))
+            if (!Equals(value, _lastValue))
             {
-                lastValue = value;
-                eventCallback(value);
+                _lastValue = value;
+                _eventCallback(value);
             }
         }
     }

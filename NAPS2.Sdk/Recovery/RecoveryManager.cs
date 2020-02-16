@@ -17,45 +17,45 @@ namespace NAPS2.Recovery
 {
     public class RecoveryManager
     {
-        private readonly ImageContext imageContext;
-        private readonly IFormFactory formFactory;
-        private readonly ImageRenderer imageRenderer;
-        private readonly OperationProgress operationProgress;
+        private readonly ImageContext _imageContext;
+        private readonly IFormFactory _formFactory;
+        private readonly ImageRenderer _imageRenderer;
+        private readonly OperationProgress _operationProgress;
 
         public RecoveryManager(ImageContext imageContext, IFormFactory formFactory, ImageRenderer imageRenderer, OperationProgress operationProgress)
         {
-            this.imageContext = imageContext;
-            this.formFactory = formFactory;
-            this.imageRenderer = imageRenderer;
-            this.operationProgress = operationProgress;
+            _imageContext = imageContext;
+            _formFactory = formFactory;
+            _imageRenderer = imageRenderer;
+            _operationProgress = operationProgress;
         }
 
         public void RecoverScannedImages(Action<ScannedImage> imageCallback, RecoveryParams recoveryParams)
         {
-            var op = new RecoveryOperation(imageContext, formFactory, imageRenderer);
+            var op = new RecoveryOperation(_imageContext, _formFactory, _imageRenderer);
             if (op.Start(imageCallback, recoveryParams))
             {
-                operationProgress.ShowProgress(op);
+                _operationProgress.ShowProgress(op);
             }
         }
 
         private class RecoveryOperation : OperationBase
         {
-            private readonly ImageContext imageContext;
-            private readonly IFormFactory formFactory;
-            private readonly ImageRenderer imageRenderer;
+            private readonly ImageContext _imageContext;
+            private readonly IFormFactory _formFactory;
+            private readonly ImageRenderer _imageRenderer;
 
-            private FileStream? lockFile;
-            private DirectoryInfo? folderToRecoverFrom;
-            private RecoveryIndex? recoveryIndex;
-            private int imageCount;
-            private DateTime scannedDateTime;
+            private FileStream? _lockFile;
+            private DirectoryInfo? _folderToRecoverFrom;
+            private RecoveryIndex? _recoveryIndex;
+            private int _imageCount;
+            private DateTime _scannedDateTime;
 
             public RecoveryOperation(ImageContext imageContext, IFormFactory formFactory, ImageRenderer imageRenderer)
             {
-                this.imageContext = imageContext;
-                this.formFactory = formFactory;
-                this.imageRenderer = imageRenderer;
+                _imageContext = imageContext;
+                _formFactory = formFactory;
+                _imageRenderer = imageRenderer;
 
                 ProgressTitle = MiscResources.ImportProgress;
                 AllowCancel = true;
@@ -69,18 +69,18 @@ namespace NAPS2.Recovery
                     StatusText = MiscResources.Recovering
                 };
 
-                folderToRecoverFrom = FindAndLockFolderToRecoverFrom();
-                if (folderToRecoverFrom == null)
+                _folderToRecoverFrom = FindAndLockFolderToRecoverFrom();
+                if (_folderToRecoverFrom == null)
                 {
                     return false;
                 }
                 try
                 {
                     var serializer = new XmlSerializer<RecoveryIndex>();
-                    recoveryIndex = serializer.DeserializeFromFile(Path.Combine(folderToRecoverFrom.FullName, "index.xml"));
-                    imageCount = recoveryIndex.Images.Count;
-                    scannedDateTime = folderToRecoverFrom.LastWriteTime;
-                    if (imageCount == 0)
+                    _recoveryIndex = serializer.DeserializeFromFile(Path.Combine(_folderToRecoverFrom.FullName, "index.xml"));
+                    _imageCount = _recoveryIndex.Images.Count;
+                    _scannedDateTime = _folderToRecoverFrom.LastWriteTime;
+                    if (_imageCount == 0)
                     {
                         // If there are no images, do nothing. Don't delete the folder in case the index was corrupted somehow.
                         ReleaseFolderLock();
@@ -127,29 +127,29 @@ namespace NAPS2.Recovery
 
             private async Task<bool> DoRecover(Action<ScannedImage> imageCallback, RecoveryParams recoveryParams)
             {
-                Status.MaxProgress = recoveryIndex.Images.Count;
+                Status.MaxProgress = _recoveryIndex.Images.Count;
                 InvokeStatusChanged();
 
-                foreach (RecoveryIndexImage indexImage in recoveryIndex.Images)
+                foreach (RecoveryIndexImage indexImage in _recoveryIndex.Images)
                 {
                     if (CancelToken.IsCancellationRequested)
                     {
                         return false;
                     }
 
-                    string imagePath = Path.Combine(folderToRecoverFrom.FullName, indexImage.FileName);
+                    string imagePath = Path.Combine(_folderToRecoverFrom.FullName, indexImage.FileName);
                     // TODO use UnownedFileStorage
                     ScannedImage scannedImage;
                     if (".pdf".Equals(Path.GetExtension(imagePath), StringComparison.InvariantCultureIgnoreCase))
                     {
-                        string newPath = imageContext.FileStorageManager.NextFilePath() + ".pdf";
+                        string newPath = _imageContext.FileStorageManager.NextFilePath() + ".pdf";
                         File.Copy(imagePath, newPath);
-                        scannedImage = imageContext.CreateScannedImage(new FileStorage(newPath));
+                        scannedImage = _imageContext.CreateScannedImage(new FileStorage(newPath));
                     }
                     else
                     {
-                        using var bitmap = imageContext.ImageFactory.Decode(imagePath);
-                        scannedImage = imageContext.CreateScannedImage(bitmap, indexImage.BitDepth.ToBitDepth(), indexImage.HighQuality, -1);
+                        using var bitmap = _imageContext.ImageFactory.Decode(imagePath);
+                        scannedImage = _imageContext.CreateScannedImage(bitmap, indexImage.BitDepth.ToBitDepth(), indexImage.HighQuality, -1);
                     }
                     foreach (var transform in indexImage.TransformList)
                     {
@@ -158,7 +158,7 @@ namespace NAPS2.Recovery
 
                     if (recoveryParams.ThumbnailSize.HasValue)
                     {
-                        scannedImage.SetThumbnail(imageContext.PerformTransform(await imageRenderer.Render(scannedImage), new ThumbnailTransform(recoveryParams.ThumbnailSize.Value)));
+                        scannedImage.SetThumbnail(_imageContext.PerformTransform(await _imageRenderer.Render(scannedImage), new ThumbnailTransform(recoveryParams.ThumbnailSize.Value)));
                     }
 
                     imageCallback(scannedImage);
@@ -171,8 +171,8 @@ namespace NAPS2.Recovery
 
             private DialogResult PromptToRecover()
             {
-                var recoveryPromptForm = formFactory.Create<FRecover>();
-                recoveryPromptForm.SetData(imageCount, scannedDateTime);
+                var recoveryPromptForm = _formFactory.Create<FRecover>();
+                recoveryPromptForm.SetData(_imageCount, _scannedDateTime);
                 return recoveryPromptForm.ShowDialog();
             }
 
@@ -180,7 +180,7 @@ namespace NAPS2.Recovery
             {
                 try
                 {
-                    folderToRecoverFrom.Delete(true);
+                    _folderToRecoverFrom.Delete(true);
                 }
                 catch (Exception ex)
                 {
@@ -200,10 +200,10 @@ namespace NAPS2.Recovery
             private void ReleaseFolderLock()
             {
                 // Unlock the recover folder
-                if (lockFile != null)
+                if (_lockFile != null)
                 {
-                    lockFile.Dispose();
-                    lockFile = null;
+                    _lockFile.Dispose();
+                    _lockFile = null;
                 }
             }
 
@@ -212,7 +212,7 @@ namespace NAPS2.Recovery
                 try
                 {
                     string lockFilePath = Path.Combine(recoveryFolder.FullName, RecoveryStorageManager.LOCK_FILE_NAME);
-                    lockFile = new FileStream(lockFilePath, FileMode.Open);
+                    _lockFile = new FileStream(lockFilePath, FileMode.Open);
                     return true;
                 }
                 catch (Exception)

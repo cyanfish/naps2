@@ -11,11 +11,11 @@ namespace NAPS2.ImportExport.Email.Oauth
 {
     public class OutlookWebEmailProvider : IEmailProvider
     {
-        private readonly OutlookWebOauthProvider outlookWebOauthProvider;
+        private readonly OutlookWebOauthProvider _outlookWebOauthProvider;
 
         public OutlookWebEmailProvider(OutlookWebOauthProvider outlookWebOauthProvider)
         {
-            this.outlookWebOauthProvider = outlookWebOauthProvider;
+            _outlookWebOauthProvider = outlookWebOauthProvider;
         }
 
         public async Task<bool> SendEmail(EmailMessage emailMessage, ProgressHandler progressCallback, CancellationToken cancelToken)
@@ -38,7 +38,7 @@ namespace NAPS2.ImportExport.Email.Oauth
                     { "ContentBytes", Convert.ToBase64String(File.ReadAllBytes(attachment.FilePath)) }
                 }))}
             };
-            var respUrl = await outlookWebOauthProvider.UploadDraft(messageObj.ToString(), progressCallback, cancelToken);
+            var respUrl = await _outlookWebOauthProvider.UploadDraft(messageObj.ToString(), progressCallback, cancelToken);
 
             // Open the draft in the user's browser
             Process.Start(respUrl + "&ispopout=0");

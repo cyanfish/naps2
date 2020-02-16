@@ -17,28 +17,28 @@ namespace NAPS2.Scan
 {
     internal class ScanPerformer : IScanPerformer
     {
-        private readonly IFormFactory formFactory;
-        private readonly ConfigProvider<CommonConfig> configProvider;
-        private readonly OperationProgress operationProgress;
-        private readonly AutoSaver autoSaver;
-        private readonly IProfileManager profileManager;
-        private readonly ErrorOutput errorOutput;
-        private readonly ILocalPostProcessor localPostProcessor;
-        private readonly ScanOptionsValidator scanOptionsValidator;
-        private readonly IScanBridgeFactory scanBridgeFactory;
+        private readonly IFormFactory _formFactory;
+        private readonly ConfigProvider<CommonConfig> _configProvider;
+        private readonly OperationProgress _operationProgress;
+        private readonly AutoSaver _autoSaver;
+        private readonly IProfileManager _profileManager;
+        private readonly ErrorOutput _errorOutput;
+        private readonly ILocalPostProcessor _localPostProcessor;
+        private readonly ScanOptionsValidator _scanOptionsValidator;
+        private readonly IScanBridgeFactory _scanBridgeFactory;
 
         public ScanPerformer(IFormFactory formFactory, ConfigProvider<CommonConfig> configProvider, OperationProgress operationProgress, AutoSaver autoSaver,
             IProfileManager profileManager, ErrorOutput errorOutput, ILocalPostProcessor localPostProcessor, ScanOptionsValidator scanOptionsValidator, IScanBridgeFactory scanBridgeFactory)
         {
-            this.formFactory = formFactory;
-            this.configProvider = configProvider;
-            this.operationProgress = operationProgress;
-            this.autoSaver = autoSaver;
-            this.profileManager = profileManager;
-            this.errorOutput = errorOutput;
-            this.localPostProcessor = localPostProcessor;
-            this.scanOptionsValidator = scanOptionsValidator;
-            this.scanBridgeFactory = scanBridgeFactory;
+            _formFactory = formFactory;
+            _configProvider = configProvider;
+            _operationProgress = operationProgress;
+            _autoSaver = autoSaver;
+            _profileManager = profileManager;
+            _errorOutput = errorOutput;
+            _localPostProcessor = localPostProcessor;
+            _scanOptionsValidator = scanOptionsValidator;
+            _scanBridgeFactory = scanBridgeFactory;
         }
 
         public async Task<ScanDevice> PromptForDevice(ScanProfile scanProfile, IntPtr dialogParent = default)
@@ -57,7 +57,7 @@ namespace NAPS2.Scan
                 return ScannedImageSource.Empty;
             }
 
-            var controller = new ScanController(localPostProcessor, scanOptionsValidator, scanBridgeFactory);
+            var controller = new ScanController(_localPostProcessor, _scanOptionsValidator, _scanBridgeFactory);
             // TODO: Consider how to handle operations with Twain (right now there are duplicate progress windows).
             var op = new ScanOperation(options.Device, options.PaperSource);
 
@@ -73,7 +73,7 @@ namespace NAPS2.Scan
 
             if (scanProfile.EnableAutoSave && scanProfile.AutoSaveSettings != null)
             {
-                source = autoSaver.Save(scanProfile.AutoSaveSettings, source);
+                source = _autoSaver.Save(scanProfile.AutoSaveSettings, source);
             }
             
             var sink = new ScannedImageSink();
@@ -101,16 +101,16 @@ namespace NAPS2.Scan
             if (!(error is ScanDriverException))
             {
                 Log.ErrorException(error.Message, error);
-                errorOutput?.DisplayError(error.Message, error);
+                _errorOutput?.DisplayError(error.Message, error);
             }
             else if (error is ScanDriverUnknownException)
             {
                 Log.ErrorException(error.Message, error.InnerException);
-                errorOutput?.DisplayError(error.Message, error);
+                _errorOutput?.DisplayError(error.Message, error);
             }
             else
             {
-                errorOutput?.DisplayError(error.Message);
+                _errorOutput?.DisplayError(error.Message);
             }
         }
 
@@ -126,11 +126,11 @@ namespace NAPS2.Scan
                 {
                     if (scanParams.Modal)
                     {
-                        operationProgress.ShowModalProgress(op);
+                        _operationProgress.ShowModalProgress(op);
                     }
                     else
                     {
-                        operationProgress.ShowBackgroundProgress(op);
+                        _operationProgress.ShowBackgroundProgress(op);
                     }
                 });
             });
@@ -236,10 +236,10 @@ namespace NAPS2.Scan
                 }
 
                 // Persist the device in the profile if configured to do so
-                if (configProvider.Get(c => c.AlwaysRememberDevice))
+                if (_configProvider.Get(c => c.AlwaysRememberDevice))
                 {
                     scanProfile.Device = options.Device;
-                    profileManager.Save();
+                    _profileManager.Save();
                 }
             }
             else
@@ -265,7 +265,7 @@ namespace NAPS2.Scan
             }
 
             // Other drivers do not, so use a generic dialog
-            var deviceForm = formFactory.Create<FSelectDevice>();
+            var deviceForm = _formFactory.Create<FSelectDevice>();
             deviceForm.DeviceList = await new ScanController().GetDeviceList(options);
             deviceForm.ShowDialog(new Win32Window(options.DialogParent));
             return deviceForm.SelectedDevice;

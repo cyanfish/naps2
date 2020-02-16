@@ -10,46 +10,46 @@ namespace NAPS2.Util
         private const int RTLD_LAZY = 1;
         private const int RTLD_GLOBAL = 8;
 
-        private readonly string basePath;
-        private readonly string win32Path;
-        private readonly string win64Path;
-        private readonly string linuxPath;
-        private readonly string osxPath;
+        private readonly string _basePath;
+        private readonly string _win32Path;
+        private readonly string _win64Path;
+        private readonly string _linuxPath;
+        private readonly string _osxPath;
 
-        private readonly Dictionary<Type, object> funcCache = new Dictionary<Type, object>();
-        private readonly Lazy<IntPtr> libraryHandle;
+        private readonly Dictionary<Type, object> _funcCache = new Dictionary<Type, object>();
+        private readonly Lazy<IntPtr> _libraryHandle;
 
         public NativeLibrary(string basePath, string win32Path, string win64Path, string linuxPath, string osxPath)
         {
-            this.basePath = basePath;
-            this.win32Path = win32Path;
-            this.win64Path = win64Path;
-            this.linuxPath = linuxPath;
-            this.osxPath = osxPath;
-            libraryHandle = new Lazy<IntPtr>(LoadLibrary);
+            _basePath = basePath;
+            _win32Path = win32Path;
+            _win64Path = win64Path;
+            _linuxPath = linuxPath;
+            _osxPath = osxPath;
+            _libraryHandle = new Lazy<IntPtr>(LoadLibrary);
         }
 
-        public IntPtr LibraryHandle => libraryHandle.Value;
+        public IntPtr LibraryHandle => _libraryHandle.Value;
 
         public T Load<T>()
         {
-            return (T)funcCache.Get(typeof(T), () => Marshal.GetDelegateForFunctionPointer<T>(LoadFunc<T>()));
+            return (T)_funcCache.Get(typeof(T), () => Marshal.GetDelegateForFunctionPointer<T>(LoadFunc<T>()));
         }
 
         private IntPtr LoadLibrary()
         {
             if (Environment.OSVersion.Platform == PlatformID.Win32NT)
             {
-                var path = Environment.Is64BitProcess ? win64Path : win32Path;
-                return Win32.LoadLibrary(Path.Combine(basePath, path));
+                var path = Environment.Is64BitProcess ? _win64Path : _win32Path;
+                return Win32.LoadLibrary(Path.Combine(_basePath, path));
             }
             if (Environment.OSVersion.Platform == PlatformID.Unix)
             {
-                return LinuxInterop.dlopen(Path.Combine(basePath, linuxPath), RTLD_LAZY | RTLD_GLOBAL);
+                return LinuxInterop.dlopen(Path.Combine(_basePath, _linuxPath), RTLD_LAZY | RTLD_GLOBAL);
             }
             if (Environment.OSVersion.Platform == PlatformID.MacOSX)
             {
-                return OsxInterop.dlopen(Path.Combine(basePath, osxPath), RTLD_LAZY | RTLD_GLOBAL);
+                return OsxInterop.dlopen(Path.Combine(_basePath, _osxPath), RTLD_LAZY | RTLD_GLOBAL);
             }
             return IntPtr.Zero;
         }

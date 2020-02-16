@@ -5,13 +5,13 @@ namespace NAPS2.ImportExport.Pdf
 {
     public class PdfSettings
     {
-        private PdfMetadata metadata;
-        private PdfEncryption encryption;
+        private PdfMetadata _metadata;
+        private PdfEncryption _encryption;
 
         public PdfSettings()
         {
-            metadata = new PdfMetadata();
-            encryption = new PdfEncryption();
+            _metadata = new PdfMetadata();
+            _encryption = new PdfEncryption();
         }
 
         public string? DefaultFileName { get; set; }
@@ -21,15 +21,15 @@ namespace NAPS2.ImportExport.Pdf
         [Child]
         public PdfMetadata Metadata
         {
-            get => metadata;
-            set => metadata = value ?? throw new ArgumentNullException(nameof(value));
+            get => _metadata;
+            set => _metadata = value ?? throw new ArgumentNullException(nameof(value));
         }
 
         [Child]
         public PdfEncryption Encryption
         {
-            get => encryption;
-            set => encryption = value ?? throw new ArgumentNullException(nameof(value));
+            get => _encryption;
+            set => _encryption = value ?? throw new ArgumentNullException(nameof(value));
         }
 
         public PdfCompat? Compat { get; set; }

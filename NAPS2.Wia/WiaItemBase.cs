@@ -6,7 +6,7 @@ namespace NAPS2.Wia
 {
     public class WiaItemBase : NativeWiaObject
     {
-        private WiaPropertyCollection? properties;
+        private WiaPropertyCollection? _properties;
 
         protected internal WiaItemBase(WiaVersion version, IntPtr handle) : base(version, handle)
         {
@@ -16,12 +16,12 @@ namespace NAPS2.Wia
         {
             get
             {
-                if (properties == null)
+                if (_properties == null)
                 {
                     WiaException.Check(NativeWiaMethods.GetItemPropertyStorage(Handle, out var propStorage));
-                    properties = new WiaPropertyCollection(Version, propStorage);
+                    _properties = new WiaPropertyCollection(Version, propStorage);
                 }
-                return properties;
+                return _properties;
             }
         }
 
@@ -44,7 +44,7 @@ namespace NAPS2.Wia
             base.Dispose(disposing);
             if (disposing)
             {
-                properties?.Dispose();
+                _properties?.Dispose();
             }
         }
     }

@@ -7,7 +7,7 @@ namespace NAPS2.Scan.Internal
 {
     internal class RemotePostProcessor : IRemotePostProcessor
     {
-        private readonly ImageContext imageContext;
+        private readonly ImageContext _imageContext;
 
         public RemotePostProcessor()
             : this(ImageContext.Default)
@@ -16,7 +16,7 @@ namespace NAPS2.Scan.Internal
 
         public RemotePostProcessor(ImageContext imageContext)
         {
-            this.imageContext = imageContext;
+            _imageContext = imageContext;
         }
 
         
@@ -45,7 +45,7 @@ namespace NAPS2.Scan.Internal
                 }
 
                 var bitDepth = options.UseNativeUI ? BitDepth.Color : options.BitDepth;
-                var scannedImage = imageContext.CreateScannedImage(image, bitDepth, options.MaxQuality, options.Quality);
+                var scannedImage = _imageContext.CreateScannedImage(image, bitDepth, options.MaxQuality, options.Quality);
                 DoRevertibleTransforms(scannedImage, image, options, postProcessingContext);
                 postProcessingContext.TempPath = SaveForBackgroundOcr(image, options);
                 return scannedImage;
@@ -57,7 +57,7 @@ namespace NAPS2.Scan.Internal
             if (!PlatformCompat.System.CanUseWin32 && options.BitDepth == BitDepth.BlackAndWhite)
             {
                 // TODO: Don't do this here, do it where BitmapHelper is used or something
-                original = imageContext.PerformTransform(original, new BlackWhiteTransform(-options.Brightness));
+                original = _imageContext.PerformTransform(original, new BlackWhiteTransform(-options.Brightness));
             }
 
             double scaleFactor = 1;
@@ -66,7 +66,7 @@ namespace NAPS2.Scan.Internal
                 scaleFactor = 1.0 / options.ScaleRatio;
             }
 
-            var scaled = imageContext.PerformTransform(original, new ScaleTransform(scaleFactor));
+            var scaled = _imageContext.PerformTransform(original, new ScaleTransform(scaleFactor));
 
             if (!options.UseNativeUI && (options.StretchToPageSize || options.CropToPageSize))
             {
@@ -82,7 +82,7 @@ namespace NAPS2.Scan.Internal
                 {
                     if (options.CropToPageSize)
                     {
-                        scaled = imageContext.PerformTransform(scaled, new CropTransform(
+                        scaled = _imageContext.PerformTransform(scaled, new CropTransform(
                             0,
                             (int) ((width - (float) options.PageSize.HeightInInches) * original.HorizontalResolution),
                             0,
@@ -99,7 +99,7 @@ namespace NAPS2.Scan.Internal
                 {
                     if (options.CropToPageSize)
                     {
-                        scaled = imageContext.PerformTransform(scaled, new CropTransform
+                        scaled = _imageContext.PerformTransform(scaled, new CropTransform
                         (
                             0,
                             (int) ((width - (float) options.PageSize.WidthInInches) * original.HorizontalResolution),
@@ -122,7 +122,7 @@ namespace NAPS2.Scan.Internal
         {
             if (options.ThumbnailSize.HasValue)
             {
-                scannedImage.SetThumbnail(imageContext.PerformTransform(image, new ThumbnailTransform(options.ThumbnailSize.Value)));
+                scannedImage.SetThumbnail(_imageContext.PerformTransform(image, new ThumbnailTransform(options.ThumbnailSize.Value)));
             }
             
             if (!options.UseNativeUI && options.BrightnessContrastAfterScan)
@@ -152,7 +152,7 @@ namespace NAPS2.Scan.Internal
         {
             if (options.DoOcr)
             {
-                var fileStorage = imageContext.Convert<FileStorage>(bitmap, new StorageConvertParams { Temporary = true });
+                var fileStorage = _imageContext.Convert<FileStorage>(bitmap, new StorageConvertParams { Temporary = true });
                 // TODO: Maybe return the storage rather than the path
                 return fileStorage.FullPath;
             }
@@ -172,9 +172,9 @@ namespace NAPS2.Scan.Internal
                 if (thumbnail != null)
                 {
                     // TODO: This should probably be done even without thumbnails, otherwise deskew/barcode might misfire
-                    image = imageContext.PerformTransform(image, transform);
+                    image = _imageContext.PerformTransform(image, transform);
                     // TODO: This can end up being redundant.
-                    scannedImage.SetThumbnail(imageContext.PerformTransform(image, new ThumbnailTransform(options.ThumbnailSize.Value)));
+                    scannedImage.SetThumbnail(_imageContext.PerformTransform(image, new ThumbnailTransform(options.ThumbnailSize.Value)));
                 }
             }
         }

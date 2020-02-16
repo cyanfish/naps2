@@ -8,11 +8,11 @@ namespace NAPS2
 {
     public class NinjectEmailProviderFactory : IEmailProviderFactory
     {
-        private readonly IKernel kernel;
+        private readonly IKernel _kernel;
 
         public NinjectEmailProviderFactory(IKernel kernel)
         {
-            this.kernel = kernel;
+            _kernel = kernel;
         }
 
         public IEmailProvider Create(EmailProviderType type)
@@ -20,11 +20,11 @@ namespace NAPS2
             switch (type)
             {
                 case EmailProviderType.Gmail:
-                    return kernel.Get<GmailEmailProvider>();
+                    return _kernel.Get<GmailEmailProvider>();
                 case EmailProviderType.OutlookWeb:
-                    return kernel.Get<OutlookWebEmailProvider>();
+                    return _kernel.Get<OutlookWebEmailProvider>();
                 default:
-                    return kernel.Get<MapiEmailProvider>();
+                    return _kernel.Get<MapiEmailProvider>();
             }
         }
 
@@ -32,7 +32,7 @@ namespace NAPS2
         {
             get
             {
-                var config = kernel.Get<ConfigProvider<CommonConfig>>();
+                var config = _kernel.Get<ConfigProvider<CommonConfig>>();
                 var providerType = config.Get(c => c.EmailSetup.ProviderType);
                 return Create(providerType);
             }

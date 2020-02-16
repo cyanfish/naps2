@@ -8,7 +8,7 @@ namespace NAPS2.Remoting.Network
 {
     public class NetworkScanClient
     {
-        private readonly NetworkScanClientOptions options;
+        private readonly NetworkScanClientOptions _options;
 
         public NetworkScanClient()
             : this(new NetworkScanClientOptions())
@@ -17,7 +17,7 @@ namespace NAPS2.Remoting.Network
         
         public NetworkScanClient(NetworkScanClientOptions options)
         {
-            this.options = options;
+            _options = options;
         }
         
         public async Task<IEnumerable<DiscoveredServer>> DiscoverServers(int timeout = 5000, CancellationToken cancellationToken = default)
@@ -33,7 +33,7 @@ namespace NAPS2.Remoting.Network
             timeoutCts.CancelAfter(timeout);
             var cts = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken, timeoutCts.Token);
             
-            var discoveryPort = options.DiscoveryPort ?? Discovery.DEFAULT_DISCOVERY_PORT;
+            var discoveryPort = _options.DiscoveryPort ?? Discovery.DEFAULT_DISCOVERY_PORT;
             await Discovery.SendBroadcast(discoveryPort, callback, timeout, cts.Token);
         }
     }

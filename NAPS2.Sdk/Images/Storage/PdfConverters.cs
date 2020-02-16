@@ -5,11 +5,11 @@ namespace NAPS2.Images.Storage
 {
     public class PdfConverters
     {
-        private readonly ImageContext imageContext;
+        private readonly ImageContext _imageContext;
 
         public PdfConverters(ImageContext imageContext)
         {
-            this.imageContext = imageContext;
+            _imageContext = imageContext;
         }
 
         [StorageConverter]
@@ -17,7 +17,7 @@ namespace NAPS2.Images.Storage
         {
             var path = convertParams.Temporary
                 ? Path.Combine(Paths.Temp, Path.GetRandomFileName())
-                : imageContext.FileStorageManager.NextFilePath() + ".pdf";
+                : _imageContext.FileStorageManager.NextFilePath() + ".pdf";
             input.Document.Save(path);
             return new FileStorage(path);
         }

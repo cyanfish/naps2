@@ -6,42 +6,42 @@ namespace NAPS2.WinForms
 {
     public class UserActions
     {
-        private readonly ImageContext imageContext;
-        private readonly ScannedImageList imageList;
+        private readonly ImageContext _imageContext;
+        private readonly ScannedImageList _imageList;
 
         public UserActions(ImageContext imageContext, ScannedImageList imageList)
         {
-            this.imageList = imageList;
-            this.imageContext = imageContext;
+            _imageList = imageList;
+            _imageContext = imageContext;
         }
         
-        public void MoveDown() => imageList.Mutate(new ImageListMutation.MoveDown());
+        public void MoveDown() => _imageList.Mutate(new ImageListMutation.MoveDown());
         
-        public void MoveUp() => imageList.Mutate(new ImageListMutation.MoveUp());
+        public void MoveUp() => _imageList.Mutate(new ImageListMutation.MoveUp());
 
-        public void MoveTo(int index) => imageList.Mutate(new ImageListMutation.MoveTo(index));
+        public void MoveTo(int index) => _imageList.Mutate(new ImageListMutation.MoveTo(index));
 
-        public void DeleteAll() => imageList.Mutate(new ImageListMutation.DeleteAll());
+        public void DeleteAll() => _imageList.Mutate(new ImageListMutation.DeleteAll());
         
-        public void DeleteSelected() => imageList.Mutate(new ImageListMutation.DeleteSelected());
+        public void DeleteSelected() => _imageList.Mutate(new ImageListMutation.DeleteSelected());
 
-        public void Interleave() => imageList.Mutate(new ImageListMutation.Interleave());
+        public void Interleave() => _imageList.Mutate(new ImageListMutation.Interleave());
 
-        public void Deinterleave() => imageList.Mutate(new ImageListMutation.Deinterleave());
+        public void Deinterleave() => _imageList.Mutate(new ImageListMutation.Deinterleave());
 
-        public void AltInterleave() => imageList.Mutate(new ImageListMutation.AltInterleave());
+        public void AltInterleave() => _imageList.Mutate(new ImageListMutation.AltInterleave());
 
-        public void AltDeinterleave() => imageList.Mutate(new ImageListMutation.AltDeinterleave());
+        public void AltDeinterleave() => _imageList.Mutate(new ImageListMutation.AltDeinterleave());
 
-        public void ReverseAll() => imageList.Mutate(new ImageListMutation.ReverseAll());
+        public void ReverseAll() => _imageList.Mutate(new ImageListMutation.ReverseAll());
 
-        public void ReverseSelected() => imageList.Mutate(new ImageListMutation.ReverseSelection());
+        public void ReverseSelected() => _imageList.Mutate(new ImageListMutation.ReverseSelection());
 
-        public async Task RotateLeft() => await imageList.MutateAsync(new ImageListMutation.RotateFlip(imageContext, 270));
+        public async Task RotateLeft() => await _imageList.MutateAsync(new ImageListMutation.RotateFlip(_imageContext, 270));
 
-        public async Task RotateRight() => await imageList.MutateAsync(new ImageListMutation.RotateFlip(imageContext, 90));
+        public async Task RotateRight() => await _imageList.MutateAsync(new ImageListMutation.RotateFlip(_imageContext, 90));
 
-        public async Task Flip() => await imageList.MutateAsync(new ImageListMutation.RotateFlip(imageContext, 180));
+        public async Task Flip() => await _imageList.MutateAsync(new ImageListMutation.RotateFlip(_imageContext, 180));
 
         public void Deskew()
         {
@@ -59,13 +59,13 @@ namespace NAPS2.WinForms
 //            }
         }
 
-        public async Task RotateFlip(double angle) => await imageList.MutateAsync(new ImageListMutation.RotateFlip(imageContext, angle));
+        public async Task RotateFlip(double angle) => await _imageList.MutateAsync(new ImageListMutation.RotateFlip(_imageContext, angle));
 
-        public void ResetTransforms() => imageList.Mutate(new ImageListMutation.ResetTransforms());
+        public void ResetTransforms() => _imageList.Mutate(new ImageListMutation.ResetTransforms());
 
         public void SelectAll()
         {
-            imageList.UpdateSelection(ListSelection.From(imageList.Images));
+            _imageList.UpdateSelection(ListSelection.From(_imageList.Images));
         }
     }
 }

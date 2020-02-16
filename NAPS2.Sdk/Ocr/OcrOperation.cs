@@ -8,11 +8,11 @@ namespace NAPS2.Ocr
 {
     public class OcrOperation : OperationBase
     {
-        private readonly List<Task> workerTasks;
+        private readonly List<Task> _workerTasks;
 
         public OcrOperation(List<Task> workerTasks)
         {
-            this.workerTasks = workerTasks;
+            _workerTasks = workerTasks;
             ProgressTitle = MiscResources.OcrProgress;
             AllowBackground = true;
             AllowCancel = true;
@@ -26,7 +26,7 @@ namespace NAPS2.Ocr
 
         public override void Wait(CancellationToken cancelToken)
         {
-            Task.WaitAll(workerTasks.ToArray(), cancelToken);
+            Task.WaitAll(_workerTasks.ToArray(), cancelToken);
         }
 
         public new CancellationToken CancelToken => base.CancelToken;

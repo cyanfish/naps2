@@ -9,24 +9,24 @@ namespace NAPS2.Remoting.Worker
     {
         private const int TICK_INTERVAL = 5000;
         
-        private readonly IWorkerFactory workerFactory;
-        private readonly Timer timer;
-        private List<PoolEntry> entries = new List<PoolEntry>();
+        private readonly IWorkerFactory _workerFactory;
+        private readonly Timer _timer;
+        private List<PoolEntry> _entries = new List<PoolEntry>();
 
         public WorkerPool(IWorkerFactory workerFactory)
         {
-            this.workerFactory = workerFactory;
-            timer = new Timer(Tick, null, 0, TICK_INTERVAL);
+            _workerFactory = workerFactory;
+            _timer = new Timer(Tick, null, 0, TICK_INTERVAL);
         }
 
         private void Tick(object state)
         {
             lock (this)
             {
-                var stillUsable = entries
+                var stillUsable = _entries
                     .Where(x => x.LastUsed > DateTime.Now - TimeSpan.FromMilliseconds(TICK_INTERVAL)).ToList();
-                var expired = entries.Except(stillUsable).ToList();
-                entries = stillUsable;
+                var expired = _entries.Except(stillUsable).ToList();
+                _entries = stillUsable;
                 foreach (var entry in expired)
                 {
                     entry.Worker.Dispose();
@@ -55,13 +55,13 @@ namespace NAPS2.Remoting.Worker
         {
             lock (this)
             {
-                if (entries.Count > 0)
+                if (_entries.Count > 0)
                 {
-                    var entry = entries[entries.Count - 1];
-                    entries.RemoveAt(entries.Count - 1);
+                    var entry = _entries[_entries.Count - 1];
+                    _entries.RemoveAt(_entries.Count - 1);
                     return entry.Worker;
                 }
-                return workerFactory.Create();
+                return _workerFactory.Create();
             }
         }
 
@@ -69,7 +69,7 @@ namespace NAPS2.Remoting.Worker
         {
             lock (this)
             {
-                entries.Add(new PoolEntry { Worker = workerContext, LastUsed = DateTime.Now });
+                _entries.Add(new PoolEntry { Worker = workerContext, LastUsed = DateTime.Now });
             }
         }
 
@@ -82,15 +82,15 @@ namespace NAPS2.Remoting.Worker
 
         public void Dispose()
         {
-            timer.Dispose();
+            _timer.Dispose();
             lock (this)
             {
-                foreach (var entry in entries)
+                foreach (var entry in _entries)
                 {
                     entry.Worker.Dispose();
                 }
 
-                entries.Clear();
+                _entries.Clear();
             }
         }
     }

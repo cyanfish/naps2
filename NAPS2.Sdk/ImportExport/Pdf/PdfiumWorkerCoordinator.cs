@@ -7,22 +7,22 @@ namespace NAPS2.ImportExport.Pdf
 {
     public class PdfiumWorkerCoordinator : IPdfRenderer
     {
-        private readonly ImageContext imageContext;
-        private readonly WorkerPool workerPool;
+        private readonly ImageContext _imageContext;
+        private readonly WorkerPool _workerPool;
 
         public PdfiumWorkerCoordinator(ImageContext imageContext, WorkerPool workerPool)
         {
-            this.imageContext = imageContext;
-            this.workerPool = workerPool;
+            _imageContext = imageContext;
+            _workerPool = workerPool;
         }
 
         public IEnumerable<IImage> Render(string path, float dpi)
         {
             // TODO: Only use worker on windows? Or what... 
-            var image = workerPool.Use(worker =>
+            var image = _workerPool.Use(worker =>
             {
                 var imageStream = new MemoryStream(worker.Service.RenderPdf(path, dpi));
-                return imageContext.ImageFactory.Decode(imageStream, "");
+                return _imageContext.ImageFactory.Decode(imageStream, "");
             });
             return new[] { image };
         }

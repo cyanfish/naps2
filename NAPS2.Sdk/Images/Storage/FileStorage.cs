@@ -5,7 +5,7 @@ namespace NAPS2.Images.Storage
 {
     public class FileStorage : IStorage
     {
-        private readonly bool shared;
+        private readonly bool _shared;
 
         public FileStorage(string fullPath) : this(fullPath, false)
         {
@@ -14,14 +14,14 @@ namespace NAPS2.Images.Storage
         public FileStorage(string fullPath, bool shared)
         {
             FullPath = fullPath ?? throw new ArgumentNullException(nameof(fullPath));
-            this.shared = shared;
+            _shared = shared;
         }
 
         public string FullPath { get; }
 
         public void Dispose()
         {
-            if (!shared)
+            if (!_shared)
             {
                 try
                 {

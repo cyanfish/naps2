@@ -9,19 +9,19 @@ namespace NAPS2.Config
 {
     public class StubProfileManager : IProfileManager
     {
-        private readonly List<ScanProfile> profiles = new List<ScanProfile>();
+        private readonly List<ScanProfile> _profiles = new List<ScanProfile>();
 
-        public ImmutableList<ScanProfile> Profiles => ImmutableList.CreateRange(profiles);
+        public ImmutableList<ScanProfile> Profiles => ImmutableList.CreateRange(_profiles);
 
         public void Mutate(ListMutation<ScanProfile> mutation, ISelectable<ScanProfile> selectable)
         {
-            mutation.Apply(profiles, selectable);
+            mutation.Apply(_profiles, selectable);
             Save();
         }
 
         public void Mutate(ListMutation<ScanProfile> mutation, ListSelection<ScanProfile> selection)
         {
-            mutation.Apply(profiles, ref selection);
+            mutation.Apply(_profiles, ref selection);
             Save();
         }
 

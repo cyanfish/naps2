@@ -40,11 +40,11 @@ namespace NAPS2.Scan.Internal
 #endif
         }
 
-        private readonly ImageContext imageContext;
+        private readonly ImageContext _imageContext;
 
         public TwainScanDriver(ImageContext imageContext)
         {
-            this.imageContext = imageContext;
+            _imageContext = imageContext;
         }
 
         public Task<List<ScanDevice>> GetDeviceList(ScanOptions options)
@@ -141,7 +141,7 @@ namespace NAPS2.Scan.Internal
                     Debug.WriteLine("NAPS2.TW - DataTransferred");
                     using var image = options.TwainOptions.TransferMode == TwainTransferMode.Memory
                         ? GetBitmapFromMemXFer(eventArgs.MemoryData, eventArgs.ImageInfo)
-                        : imageContext.ImageFactory.Decode(eventArgs.GetNativeImageStream(), ".bmp");
+                        : _imageContext.ImageFactory.Decode(eventArgs.GetNativeImageStream(), ".bmp");
                     callback(image);
                 }
                 catch (Exception ex)
@@ -291,7 +291,7 @@ namespace NAPS2.Scan.Internal
             var pixelFormat = bytesPerPixel == 0 ? StoragePixelFormat.BW1 : StoragePixelFormat.RGB24;
             int imageWidth = imageInfo.ImageWidth;
             int imageHeight = imageInfo.ImageLength;
-            var bitmap = imageContext.ImageFactory.FromDimensions(imageWidth, imageHeight, pixelFormat);
+            var bitmap = _imageContext.ImageFactory.FromDimensions(imageWidth, imageHeight, pixelFormat);
             var data = bitmap.Lock(LockMode.WriteOnly, out var scan0, out var stride);
             try
             {

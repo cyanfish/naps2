@@ -4,9 +4,9 @@ namespace NAPS2.Config
 {
     public class TransactionConfigScope<TConfig> : ConfigScope<TConfig>
     {
-        private readonly ConfigScope<TConfig> store;
-        private readonly Func<TConfig> factory;
-        private TConfig changes;
+        private readonly ConfigScope<TConfig> _store;
+        private readonly Func<TConfig> _factory;
+        private TConfig _changes;
 
         public TransactionConfigScope(ConfigScope<TConfig> store, Func<TConfig> factory) : base(ConfigScopeMode.ReadWrite)
         {
@@ -14,9 +14,9 @@ namespace NAPS2.Config
             {
                 throw new ArgumentException("A transaction can't be created for a ReadOnly scope.", nameof(store));
             }
-            this.store = store;
-            this.factory = factory;
-            changes = factory();
+            _store = store;
+            _factory = factory;
+            _changes = factory();
         }
 
         public bool HasChanges { get; private set; }
@@ -27,10 +27,10 @@ namespace NAPS2.Config
         {
             lock (this)
             {
-                lock (store)
+                lock (_store)
                 {
-                    store.SetAll(changes);
-                    changes = factory();
+                    _store.SetAll(_changes);
+                    _changes = _factory();
                 }
                 if (HasChanges)
                 {
@@ -42,17 +42,17 @@ namespace NAPS2.Config
 
         protected override T GetInternal<T>(Func<TConfig, T> func)
         {
-            var value = func(changes);
+            var value = func(_changes);
             if (value != null)
             {
                 return value;
             }
-            return store.Get(func);
+            return _store.Get(func);
         }
 
         protected override void SetInternal(Action<TConfig> func)
         {
-            func(changes);
+            func(_changes);
             if (!HasChanges)
             {
                 HasChanges = true;
@@ -62,7 +62,7 @@ namespace NAPS2.Config
 
         protected override void SetAllInternal(TConfig delta)
         {
-            ConfigCopier.Copy(delta, changes);
+            ConfigCopier.Copy(delta, _changes);
         }
     }
 }

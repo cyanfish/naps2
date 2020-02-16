@@ -9,11 +9,11 @@ namespace NAPS2.Logging
         private const string SOURCE_NAME = "NAPS2";
         private const string LOG_NAME = "Application";
 
-        private readonly ConfigProvider<CommonConfig> configProvider;
+        private readonly ConfigProvider<CommonConfig> _configProvider;
 
         public WindowsEventLogger(ConfigProvider<CommonConfig> configProvider)
         {
-            this.configProvider = configProvider;
+            _configProvider = configProvider;
         }
 
         public void CreateEventSource()
@@ -26,7 +26,7 @@ namespace NAPS2.Logging
 
         public void LogEvent(EventType eventType, EventParams eventParams)
         {
-            if (!configProvider.Get(c => c.EventLogging).HasFlag(eventType)) return;
+            if (!_configProvider.Get(c => c.EventLogging).HasFlag(eventType)) return;
             try
             {
                 EventLog.WriteEntry(SOURCE_NAME, eventParams.ToString(), EventLogEntryType.Information);
