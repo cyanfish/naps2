@@ -5,10 +5,17 @@ namespace NAPS2.Ocr
 {
     public class OcrResult
     {
-        public Rectangle PageBounds { get; set; }
+        public OcrResult(Rectangle pageBounds, IEnumerable<OcrResultElement> elements, bool rightToLeft)
+        {
+            PageBounds = pageBounds;
+            Elements = elements;
+            RightToLeft = rightToLeft;
+        }
 
-        public IEnumerable<OcrResultElement>? Elements { get; set; }
+        public Rectangle PageBounds { get; }
 
-        public bool RightToLeft { get; set; }
+        public IEnumerable<OcrResultElement> Elements { get; }
+
+        public bool RightToLeft { get; }
     }
 }

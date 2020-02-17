@@ -4,8 +4,14 @@ namespace NAPS2.Ocr
 {
     public class OcrResultElement
     {
-        public Rectangle Bounds { get; set; }
+        public OcrResultElement(string text, Rectangle bounds)
+        {
+            Text = text;
+            Bounds = bounds;
+        }
 
-        public string? Text { get; set; }
+        public string Text { get; }
+
+        public Rectangle Bounds { get; }
     }
 }

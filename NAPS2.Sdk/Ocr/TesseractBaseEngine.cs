@@ -57,7 +57,7 @@ namespace NAPS2.Ocr
                     Log.Error("Couldn't start OCR process.");
                     return null;
                 }
-                var timeout = (int)(ocrParams.TimeoutInSeconds * 1000);
+                var timeout = (int) (ocrParams.TimeoutInSeconds * 1000);
                 var stopwatch = Stopwatch.StartNew();
                 while (!tesseractProcess.WaitForExit(CHECK_INTERVAL))
                 {
@@ -94,17 +94,16 @@ namespace NAPS2.Ocr
                 }
 #endif
                 XDocument hocrDocument = XDocument.Load(tempHocrFilePathWithExt);
-                return new OcrResult
-                {
-                    PageBounds = hocrDocument.Descendants()
-                        .Where(x => x.Attributes("class").Any(y => y.Value == "ocr_page"))
-                        .Select(x => GetBounds(x.Attribute("title")))
-                        .First(),
-                    Elements = hocrDocument.Descendants()
-                        .Where(x => x.Attributes("class").Any(y => y.Value == "ocrx_word"))
-                        .Select(x => new OcrResultElement { Text = x.Value, Bounds = GetBounds(x.Attribute("title")) }),
-                    RightToLeft = InstalledLanguages.Where(x => x.Code == ocrParams.LanguageCode).Select(x => x.RTL).FirstOrDefault()
-                };
+                var pageBounds = hocrDocument.Descendants()
+                    .Where(x => x.Attributes("class").Any(y => y.Value == "ocr_page"))
+                    .Select(x => GetBounds(x.Attribute("title")))
+                    .First();
+                var elements = hocrDocument.Descendants()
+                    .Where(x => x.Attributes("class").Any(y => y.Value == "ocrx_word"))
+                    .Select(x => new OcrResultElement(x.Value, GetBounds(x.Attribute("title"))));
+                var rtl = InstalledLanguages.Where(x => x.Code == ocrParams.LanguageCode).Select(x => x.RTL)
+                    .FirstOrDefault();
+                return new OcrResult(pageBounds, elements, rtl);
             }
             catch (Exception e)
             {
@@ -170,9 +169,11 @@ namespace NAPS2.Ocr
 
         public virtual bool IsInstalled => Component.IsInstalled;
 
-        public virtual IEnumerable<Language> InstalledLanguages => LanguageComponents.Where(x => x.IsInstalled).Select(x => LanguageData.LanguageMap[x.Id]);
+        public virtual IEnumerable<Language> InstalledLanguages =>
+            LanguageComponents.Where(x => x.IsInstalled).Select(x => LanguageData.LanguageMap[x.Id]);
 
-        public virtual IEnumerable<Language> NotInstalledLanguages => LanguageComponents.Where(x => !x.IsInstalled).Select(x => LanguageData.LanguageMap[x.Id]);
+        public virtual IEnumerable<Language> NotInstalledLanguages =>
+            LanguageComponents.Where(x => !x.IsInstalled).Select(x => LanguageData.LanguageMap[x.Id]);
 
         protected string TesseractBasePath { get; set; }
 
