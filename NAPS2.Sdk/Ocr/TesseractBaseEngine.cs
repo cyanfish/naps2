@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Threading;
@@ -138,9 +137,9 @@ namespace NAPS2.Ocr
             }
         }
 
-        private Rectangle GetBounds(XAttribute titleAttr)
+        private (int x, int y, int w, int h) GetBounds(XAttribute titleAttr)
         {
-            var bounds = new Rectangle();
+            var bounds = (0, 0, 0, 0);
             if (titleAttr != null)
             {
                 foreach (var param in titleAttr.Value.Split(';'))
@@ -150,7 +149,7 @@ namespace NAPS2.Ocr
                     {
                         int x1 = int.Parse(parts[1]), y1 = int.Parse(parts[2]);
                         int x2 = int.Parse(parts[3]), y2 = int.Parse(parts[4]);
-                        bounds = new Rectangle(x1, y1, x2 - x1, y2 - y1);
+                        bounds = (x1, y1, x2 - x1, y2 - y1);
                     }
                 }
             }

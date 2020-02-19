@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Drawing;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -317,7 +316,7 @@ namespace NAPS2.ImportExport.Pdf
             {
                 if (string.IsNullOrEmpty(element.Text)) continue;
 
-                var adjustedBounds = AdjustBounds(element.Bounds, (float)page.Width / ocrResult.PageBounds.Width, (float)page.Height / ocrResult.PageBounds.Height);
+                var adjustedBounds = AdjustBounds(element.Bounds, (float)page.Width / ocrResult.PageBounds.w, (float)page.Height / ocrResult.PageBounds.h);
 #if DEBUG && DEBUGOCR
                     gfx.DrawRectangle(new XPen(XColor.FromArgb(255, 0, 0)), adjustedBounds);
 #endif
@@ -352,14 +351,14 @@ namespace NAPS2.ImportExport.Pdf
             {
                 img.Interpolate = false;
             }
-            Size realSize = GetRealSize(img);
-            page.Width = realSize.Width;
-            page.Height = realSize.Height;
+            var (realWidth, realHeight) = GetRealSize(img);
+            page.Width = realWidth;
+            page.Height = realHeight;
             using XGraphics gfx = XGraphics.FromPdfPage(page);
-            gfx.DrawImage(img, 0, 0, realSize.Width, realSize.Height);
+            gfx.DrawImage(img, 0, 0, realWidth, realHeight);
         }
 
-        private static Size GetRealSize(XImage img)
+        private static (int width, int height) GetRealSize(XImage img)
         {
             double hAdjust = 72 / img.HorizontalResolution;
             double vAdjust = 72 / img.VerticalResolution;
@@ -369,14 +368,11 @@ namespace NAPS2.ImportExport.Pdf
             }
             double realWidth = img.PixelWidth * hAdjust;
             double realHeight = img.PixelHeight * vAdjust;
-            return new Size((int)realWidth, (int)realHeight);
+            return ((int)realWidth, (int)realHeight);
         }
 
-        private static XRect AdjustBounds(Rectangle b, float hAdjust, float vAdjust)
-        {
-            var adjustedBounds = new XRect(b.X * hAdjust, b.Y * vAdjust, b.Width * hAdjust, b.Height * vAdjust);
-            return adjustedBounds;
-        }
+        private static XRect AdjustBounds((int x, int y, int w, int h) bounds, float hAdjust, float vAdjust) =>
+            new XRect(bounds.x * hAdjust, bounds.y * vAdjust, bounds.w * hAdjust, bounds.h * vAdjust);
 
         private static int CalculateFontSize(string text, XRect adjustedBounds, XGraphics gfx)
         {
