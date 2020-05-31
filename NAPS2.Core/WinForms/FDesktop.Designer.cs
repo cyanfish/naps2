@@ -71,6 +71,7 @@ namespace NAPS2.WinForms
             this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
             this.tsEmailSettings = new System.Windows.Forms.ToolStripMenuItem();
             this.tsPdfSettings2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsSendLN = new System.Windows.Forms.ToolStripButton();
             this.tsPrint = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.tsdImage = new System.Windows.Forms.ToolStripDropDownButton();
@@ -160,6 +161,7 @@ namespace NAPS2.WinForms
             this.thumbnailList1.AllowDrop = true;
             this.thumbnailList1.ContextMenuStrip = this.contextMenuStrip;
             resources.ApplyResources(this.thumbnailList1, "thumbnailList1");
+            this.thumbnailList1.HideSelection = false;
             this.thumbnailList1.Name = "thumbnailList1";
             this.thumbnailList1.ThumbnailRenderer = null;
             this.thumbnailList1.ThumbnailSize = new System.Drawing.Size(128, 128);
@@ -177,6 +179,7 @@ namespace NAPS2.WinForms
             // 
             // contextMenuStrip
             // 
+            this.contextMenuStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.contextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ctxView,
             this.ctxSeparator1,
@@ -242,6 +245,7 @@ namespace NAPS2.WinForms
             this.tsdSavePDF,
             this.tsdSaveImages,
             this.tsdEmailPDF,
+            this.tsSendLN,
             this.tsPrint,
             this.toolStripSeparator4,
             this.tsdImage,
@@ -427,6 +431,13 @@ namespace NAPS2.WinForms
             this.tsPdfSettings2.Name = "tsPdfSettings2";
             resources.ApplyResources(this.tsPdfSettings2, "tsPdfSettings2");
             this.tsPdfSettings2.Click += new System.EventHandler(this.tsPdfSettings2_Click);
+            // 
+            // tsSendLN
+            // 
+            resources.ApplyResources(this.tsSendLN, "tsSendLN");
+            this.tsSendLN.Name = "tsSendLN";
+            this.tsSendLN.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
+            this.tsSendLN.Click += new System.EventHandler(this.tsSendLn_Click);
             // 
             // tsPrint
             // 
@@ -779,6 +790,7 @@ namespace NAPS2.WinForms
         private System.Windows.Forms.ToolStripMenuItem tsSharpen;
         private System.Windows.Forms.ToolStripMenuItem tsHueSaturation;
         private System.Windows.Forms.ToolStripMenuItem tsBlackWhite;
+        private System.Windows.Forms.ToolStripButton tsSendLN;
     }
 }
 
