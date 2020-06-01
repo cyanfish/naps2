@@ -118,15 +118,6 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="contextMenuStrip.Size" type="System.Drawing.Size, System.Drawing">
-    <value>218, 136</value>
-  </data>
-  <data name="tStrip.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1602, 67</value>
-  </data>
-  <data name="tStrip.Text" xml:space="preserve">
-    <value>Главная панель инструментов</value>
-  </data>
   <data name="ctxView.Size" type="System.Drawing.Size, System.Drawing">
     <value>217, 24</value>
   </data>
@@ -163,11 +154,8 @@
   <data name="ctxDelete.Text" xml:space="preserve">
     <value>Удалить</value>
   </data>
-  <data name="tsScan.Size" type="System.Drawing.Size, System.Drawing">
-    <value>128, 64</value>
-  </data>
-  <data name="tsScan.Text" xml:space="preserve">
-    <value>&amp;Сканировать</value>
+  <data name="contextMenuStrip.Size" type="System.Drawing.Size, System.Drawing">
+    <value>218, 136</value>
   </data>
   <data name="tsNewProfile.Size" type="System.Drawing.Size, System.Drawing">
     <value>254, 26</value>
@@ -180,6 +168,12 @@
   </data>
   <data name="tsBatchScan.Text" xml:space="preserve">
     <value>&amp;Пакетное сканирование</value>
+  </data>
+  <data name="tsScan.Size" type="System.Drawing.Size, System.Drawing">
+    <value>128, 64</value>
+  </data>
+  <data name="tsScan.Text" xml:space="preserve">
+    <value>&amp;Сканировать</value>
   </data>
   <data name="tsProfiles.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -236,12 +230,6 @@
   <data name="tsImport.Text" xml:space="preserve">
     <value>&amp;Импорт</value>
   </data>
-  <data name="tsdSavePDF.Size" type="System.Drawing.Size, System.Drawing">
-    <value>132, 64</value>
-  </data>
-  <data name="tsdSavePDF.Text" xml:space="preserve">
-    <value>&amp;Сохранить PDF</value>
-  </data>
   <data name="tsSavePDFAll.Size" type="System.Drawing.Size, System.Drawing">
     <value>199, 26</value>
   </data>
@@ -263,11 +251,11 @@
   <data name="tsPDFSettings.Text" xml:space="preserve">
     <value>&amp;Настройки PDF</value>
   </data>
-  <data name="tsdSaveImages.Size" type="System.Drawing.Size, System.Drawing">
-    <value>202, 64</value>
+  <data name="tsdSavePDF.Size" type="System.Drawing.Size, System.Drawing">
+    <value>132, 64</value>
   </data>
-  <data name="tsdSaveImages.Text" xml:space="preserve">
-    <value>&amp;Сохранить изображения</value>
+  <data name="tsdSavePDF.Text" xml:space="preserve">
+    <value>&amp;Сохранить PDF</value>
   </data>
   <data name="tsSaveImagesAll.Size" type="System.Drawing.Size, System.Drawing">
     <value>259, 26</value>
@@ -290,11 +278,11 @@
   <data name="tsImageSettings.Text" xml:space="preserve">
     <value>&amp;Настройки изображения</value>
   </data>
-  <data name="tsdEmailPDF.Size" type="System.Drawing.Size, System.Drawing">
-    <value>186, 64</value>
+  <data name="tsdSaveImages.Size" type="System.Drawing.Size, System.Drawing">
+    <value>202, 64</value>
   </data>
-  <data name="tsdEmailPDF.Text" xml:space="preserve">
-    <value>&amp;Отправить PDF почтой</value>
+  <data name="tsdSaveImages.Text" xml:space="preserve">
+    <value>&amp;Сохранить изображения</value>
   </data>
   <data name="tsEmailPDFAll.Size" type="System.Drawing.Size, System.Drawing">
     <value>234, 26</value>
@@ -323,85 +311,91 @@
   <data name="tsPdfSettings2.Text" xml:space="preserve">
     <value>&amp;Настройки PDF</value>
   </data>
-  <data name="tsSendLn.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="tsdEmailPDF.Size" type="System.Drawing.Size, System.Drawing">
+    <value>186, 64</value>
+  </data>
+  <data name="tsdEmailPDF.Text" xml:space="preserve">
+    <value>&amp;Отправить PDF почтой</value>
+  </data>
+  <data name="tsSendLN.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         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
-        YQUAAAAJcEhZcwAAEnQAABJ0Ad5mH3gAAA+CSURBVGhDpVkJXJRlHp7h9EjT3Nxc7TSz2i6LPNcut0tz
-        s6xtNzu22qy2VLzxyFBJM00QUyRBRUXUMAUhEOTy4BQVBGZgLkAQRUVUVL7zv8//mxmdAdzf1Pb7Pb3v
-        973D8Dzv/xZdbW1tX7PZbAQCLBZLJjDWarXGAhOBFXgOBqYDkfjMu3iXaLPZnsdaBAzE+zrnd5zeO/mN
-        huQ59Rc3PbX/0q5XL13dPaK5JXG43LI7QLry86BLl3eNaG6OeTznzN7pttO/zpxgtVqOtP2O38tDxz9c
-        XV39JB4O4OAVrPHAB8BaYAZ/AT6zHPgC+xhgPJACjASK69KXDmpInC1d3jHS1npgAkmmuaSeWkRqfRAp
-        dZNJrZ1ISvWHpFjfItX8GqmmF0gqeYpa0+6my5t7V59Omn61Ln3RoP+XBwsJ4B8GXsaL3XhmtVHAJDwv
-        A4Kxn4U1HPgE+1j8onEW47G8xsint1xMfksRqkNJaVxP6pkwUhuWQchCorogUk9CSM1EUiFE1YSM0YSo
-        lcNINTxOiuF+kov7UMuuXtS05p5om/Fo6W/lgc+l4nmkDv/L5BvAuhvrP7BuxPo51lAgCOAvWIp3gdhH
-        YP1XTVZ4SfPOMS1CTSQp57eTcnYTUWMEhEBQw1JYI5jUutlEtZMg5FOi6veJLG9CyGgIeR5ChpJqfJSo
-        4n5Sy/9EyokeJBV2oksx3S+f3L/K5CkPrHFYx2FNYSHsi/F8A9hvxH4iVlY9HfslWNk352C/wmqqnHRq
-        69tHWw4FktyUQNT0M6nntpJ6NorUxh+JTq+ARUIgZAGEzCSl9ktY4xNSbe+SanmDyPwqhDwLEYNhkUcg
-        5D5SyvqQeuJWolJfUo570bUkb2rYNs5oNRtuzsNupUgWg30s9uN1vAHYF6McN8A/PBVgc84D+CZCrFXl
-        sxrWP1t8rWI5qU17HCJigY1wq0gih1spiA+qn0t0ciri4wsI+YjI+g5EvA4RL5Fa9QyEPEkEIaom5I+w
-        yC2klviQekwP6EjI8qIzUY9V2Iwl7XnAvYCVAIuJAD4BYlgIZwUOKD5gM3Jm4B+eAywGgq3myvn1a4fl
-        X6v6gZSmXURwJ7slNsISP0FIOCmnIfBUCIQ4rHFyEilwKwVupVrfhpAxRIgPpWo4hDwOizwIt7ob1vgD
-        qaVdiUq8NRHqUeCIjsQcL2pYN/C4xVR5g4fVOh9YArCYFQ43C4c3fcFC2FScFZh8EH8QK9/AYuwXYA2u
-        3jAm58qJb0g+D/LntgAxEBFNYl0YCamjSYwfROLhMSTXz4NbzYGIqSTZPiNx3xCc9ScxG4FtehEWeY6U
-        yiEklz+Ksz4kJfckOf82COlMKtyKhSgOIWqhjlr3e1H1xlH5Th7AQuxZTAj27GZLgVkQspxjhD9wU9h+
-        XZLWnPEBAnoDbj8aaxQsACucWUOt4f1JmYpfOgkEvoJLLO9HsvVLxMZX1Bp1H8nT9aTwGSB+243k0sEk
-        GwJIWNWNlBn2M3mKnoRIf1KO2YWoxTqiIrsQKtBRyy/eZEtalN0RN4bO+R8eprMiVsYK8cxK2Rfnm8sL
-        Vp/c/IIqn1mNjBQOYG1cpaVZsXw6STPh0yDjCjH+MRIq3ydpdgdnm+4k4dBAkme6v2dBwt7e192KIEIT
-        ko81V0eNG3qTtfTQGnBiy7CbzcOePYez2TLsZ7AQrpRcZMLZ5/CSXY1FLTFH/y3vqnEmstHy69DqBFKs
-        ZJpG8iz4tQshhhjzBEmWD0meh+Btcyb8CDc7AqvAGm3PxO1PwiKdiViIwyJqHvYQImbqyRo1qgAcWQTH
-        DIcBx3IoeE4C1nJB5LTLlZKjP8JxsNJcvG9WQ9zQawqKm3pqsQalARUbWUk5FUwKUqyw9Qk3MvJkuMmR
-        z0mu+ZDEnQ9pN+084/21rHdwAUNJCu3i9nPSZMRD8ccojv433IqtASHqYTvObPAVLQWJHLssgrMZX/zn
-        4MpF8wMO9kS8HI+VKyUXmUjsJxm3fFR2tWwiKvQcAG1HHQJZW+cAsyFkBopdIAlxT5E035/ERT1IyBxH
-        4hlUdOubpJjHkrD9fpLm+ZH0dVdq3fsiiQ2fIlMhdo72ITG0E4mBehJn+VNr8mgSqsfag9xFCFtDE3II
-        Vkn3ItOmfxrBjy0RDo5cZzayIbCP14H883iRgpUrJFdKTYwlctAFmVPoySloNQKBKdpeAyq2Uvsf4HMt
-        xcrV78IKE7BHUuAKbgEp88vIVM+RXAVXMo/AHtXc0B9C+qFu9AK6klLSg2TjAJIr+iLI9TdcCkHudCsW
-        oR6ERQ/oqGZtrxaruWo1W4JFYOUOgDuSV9giRXgYCWWpLIYtY9i94LPGRPRDNf+290o1SKXl75EQ3Z+k
-        iDtI2tQXPn0XybvvISkBSASyAki2oOhZ0BiaX9JEiOkPk7i2B9ysNynlAyDiLtSN20kp7UZish+JEd74
-        Pi+SN/mQtB2W29PFjkQ/Ug4jjmANYiEQoeboqGmbNxl/CZoGjlGOkNiN/cvAARbCbXQxiwG4mxxfuSvo
-        /JViELKhmNlwy7hpIeoeUuDLTn/XgGfZZRWi7oRLoZeqepbEPAS9I8UyxHCkXFRx9UR3ElI6IW3bz9p9
-        H8B7YRUsludntwiEKBAi7PMi487AJnDmTiSeLcEiuGvmrFXHYoAiHHB/n1gackeCwi0F3IQs44G3SFyN
-        9Oj4xTcDk5CPoGJXDsYNoxnEs+uZlNMDQjqTtKZ9tmsLYSqsZBhhd6sciM6GhbL0VL6kVyo4cn81FsiE
-        ZQIAY4eDlSH6L4piegVtBbpVbr0BMTuAJASn6kKuI0iZuHXjYyTHovVoe5bIPRXcKQzFr82ZK9gird/d
-        jTQ+TosNVROB9xBiinhYZbfiC3dc/M0Hq6qIfk3sHmoV3ITnB+6RTKOQz+Eu69Fy/3SLtophXduRkDJu
-        R1Cj6O3o2e5MSeyOVkQPi7gLYeJSaFeS191GYtRdJMQGUKslkMR8fBesQQ5rKJleZAvrchmX7dlgVRVx
-        l6oan4aLDLEPQZUwsYbhaPqGaf0St+Jihrv7MKT9sASCWtp1i0bQ9UxJRJygDZHXdSAkpxsylRcpuT4k
-        5yLYD2J/AAIcIlQURSUD7crqLgSeng1WlWv6yKrxzyD7qAPoVq/jMfs7THhiRh/N911JSft7kVp2O7IP
-        3MjlPUOGa3FTKEW7x4gmJBtCXOoGxwZbQxMCEWoGxO/3Jku4JsSzwapiTd9WteJekMUEZ3gAs8NA4EEH
-        HsA7pFJAzOjtJkQjlAEhmC+k5E5uZBly4q1aUyjF3GhfONudx3fUonG0RaBWRKKKb0UXkIrU67SGJoLh
-        Q+bQHiI4ejZYla68t16b3DCGquUoVhruxE0DKGj8rJShlqSjsLWxiIhgpxJfkvb5u71nyElwO1RvKdaP
-        BPycbYqOCgJ1lD9dRycW6si4VE8VIXo6EqSjXLwv/1ZHF+NZCCwIa1CaD5WF9jsLrp4NVoUrh1XKqLoq
-        Zmn1BOYFgBywP/fEaHorhPRwE8IWEbMgGpOetL+9ECkZZ6jazVt8qQhEj83X0dlN8P1UL5B0R0s8WpLl
-        esrDmFDDySHdB+996ejKp83g6tlgVRD5btqlTBApAUo7gTQGH+R/Dbwv5feoxOnw+bYWycGMcpx9vnO7
-        YJdT7qOLSXYLWENx0x0IaIsLsXoqQNvPn7+2x48KI97JBEfPBquKzM2bbTEwJ09tTpQwXN/h1tO6tBdy
-        ELM4x0FOeyHXEh6kIrgNk3Ile3E7JsFwPcm/onLDvRhV3+vp3Gb75y7v9KL8aex+3lSati6uI84spP1g
-        ZTaHFIV0r+dUqU1tN0GHQnIDtA5Wym4f7KYFXen419ij1XAVwRYyr4CLpUDQKr0GE57zQL4uwi6mPlJP
-        B6d6q6bS3DBw9HywKlr/vu0iMgXx6NkBtFvf5y5Ei5ECFFLEgZQFF3S8Z0hAPuLi/JYb1rgYp9dEVCEW
-        XMU5cSbafs4xxG7ISeDYutfZIp4PVoaC5NDyVSDjmNjaQrv1VHeyyiQMVkWvabO2lOl+dhaCC3nEdRB2
-        iuCA7kgEgwOes5eQaH+2wVIFCwdUg6fngxWwIufrAQmXMNBo8wHPCa7QyPq7xYHWARs+1mYJ6QA6XJez
-        GqRaTq1MqNkDEWwBPj86FxfneHcuBu42ozO3KB4PVlw5Aw3FWT8WhnRuUfLxC1kMwLetTW8AvxcXo5XA
-        bTOEsIdIqJ2gVWg5F8lgKc5YIM5MEMLEruyyxwTfdNFsneYuHaFgBiw4S0eXdtwQd3G7ng4F6lRw82yw
-        wjO7GaueVbxj3gnbRhQjntjagG9eRvUVNvai1j1/hYipJOejNXG0GRKqshDdk4Qdz5Bp/SCq/M5uAc5I
-        LISzF99yR2jaas9iThEMTsWHJuuugpdngxUQwwkAWI598KGwsVfOJyD14qZ5/HRCI+yA1ugdAlHukRzQ
-        WnD0S9JBf6qP9tIKIBNyiimAZThruZL9XziFzFUYPEAGZ88GK4faSIAzQ7Cp4lhY9tJB4qVkWAY37YQr
-        aTdoEx3SKTd9DFimJcFuhWt77KQ0MXA1djMO/LakO0L5YnzHND/+9y3PBiv+IOD2lyLj8dzI7MUPX21i
-        y7gQdoJHUSd5rdlzNnyOFlzN0FPJN+7FkMVw3HgipuVnewarOBhXwBfNF+64+N/+F6uqsiMxWUuHnj65
-        2efGjTtJu0IjD6KM652rNzXFeWu9k2sAa9lpGbITAt+V+PXzNG/UEW/tEorCnr/APMDp+mAFjs9g/R1/
-        sTKZYrMj3jtS/F1nuopfcP3WneSZOG5fccwPdqBtT8eKxs+KMbcI2YhrBFtESQJRVHQhwYvkZDxjz6uK
-        BlFJ8yc51Z8M3+ECZne7YCxICgK/1QCn3jiTyfR3cEvD/vf9xQprXEHSmtVJM+89ZQz3odZfYSFNAJN3
-        CgB5TYAd3IKr+3xhAR8yfe+lBfqpn5CZEr217CQnAXuxhwhelbROdDnel0rQX+XN6NJYkRHFjeIyiJgJ
-        rHeKATTLsBDP/2Jlt9L1gcZgKJuwLzooKXn+00rRt8hMMb4kpIAsBCgsALdKIM9QU/1ITUH/leJP4t7O
-        VLLIhw6jtnDN4IrNKbd5mz3F1q/TUxkH9lRkqWWDq6uK0pbg9vnffeeC5wpgspMH1m1Ax4MV4PFfivgC
-        8G5bRkL0D78sGZu6e+5wIWXmbULBIj8q/d6bDD/4kmGlL5Uu86XCJbcqOXN7GLOWjSo7vCEw4Xhm7IKj
-        a0dvL1w+REAgNzLx3GnerXkL+jYXhjyytyI9cgN+hwc8LDH/BdSfM7HMCdusAAAAAElFTkSuQmCC
+        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
 </value>
   </data>
-  <data name="tsSendLn.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="tsSendLN.Size" type="System.Drawing.Size, System.Drawing">
     <value>162, 64</value>
   </data>
-  <data name="tsSendLn.Text" xml:space="preserve">
+  <data name="tsSendLN.Text" xml:space="preserve">
     <value>Отправить в Лотус</value>
   </data>
-  <data name="tsSendLn.ToolTipText" xml:space="preserve">
+  <data name="tsSendLN.ToolTipText" xml:space="preserve">
     <value>Отправить в Lotus Notes</value>
   </data>
   <data name="tsPrint.Size" type="System.Drawing.Size, System.Drawing">
@@ -409,12 +403,6 @@
   </data>
   <data name="tsPrint.Text" xml:space="preserve">
     <value>&amp;Печать</value>
-  </data>
-  <data name="tsdImage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>131, 64</value>
-  </data>
-  <data name="tsdImage.Text" xml:space="preserve">
-    <value>&amp;Изображение</value>
   </data>
   <data name="tsView.Size" type="System.Drawing.Size, System.Drawing">
     <value>259, 26</value>
@@ -464,11 +452,11 @@
   <data name="tsReset.Text" xml:space="preserve">
     <value>&amp;Сброс</value>
   </data>
-  <data name="tsdRotate.Size" type="System.Drawing.Size, System.Drawing">
-    <value>108, 64</value>
+  <data name="tsdImage.Size" type="System.Drawing.Size, System.Drawing">
+    <value>131, 64</value>
   </data>
-  <data name="tsdRotate.Text" xml:space="preserve">
-    <value>&amp;Повернуть</value>
+  <data name="tsdImage.Text" xml:space="preserve">
+    <value>&amp;Изображение</value>
   </data>
   <data name="tsRotateLeft.Size" type="System.Drawing.Size, System.Drawing">
     <value>235, 26</value>
@@ -500,6 +488,12 @@
   <data name="tsCustomRotation.Text" xml:space="preserve">
     <value>&amp;Другой поворот</value>
   </data>
+  <data name="tsdRotate.Size" type="System.Drawing.Size, System.Drawing">
+    <value>108, 64</value>
+  </data>
+  <data name="tsdRotate.Text" xml:space="preserve">
+    <value>&amp;Повернуть</value>
+  </data>
   <data name="tsMove.FirstText" xml:space="preserve">
     <value>Выше</value>
   </data>
@@ -508,12 +502,6 @@
   </data>
   <data name="tsMove.Size" type="System.Drawing.Size, System.Drawing">
     <value>72, 48</value>
-  </data>
-  <data name="tsdReorder.Size" type="System.Drawing.Size, System.Drawing">
-    <value>165, 56</value>
-  </data>
-  <data name="tsdReorder.Text" xml:space="preserve">
-    <value>&amp;Изменить порядок</value>
   </data>
   <data name="tsInterleave.Size" type="System.Drawing.Size, System.Drawing">
     <value>379, 26</value>
@@ -545,12 +533,6 @@
   <data name="toolStripSeparator1.Size" type="System.Drawing.Size, System.Drawing">
     <value>376, 6</value>
   </data>
-  <data name="tsReverse.Size" type="System.Drawing.Size, System.Drawing">
-    <value>379, 26</value>
-  </data>
-  <data name="tsReverse.Text" xml:space="preserve">
-    <value>&amp;Обратить</value>
-  </data>
   <data name="tsReverseAll.Size" type="System.Drawing.Size, System.Drawing">
     <value>199, 26</value>
   </data>
@@ -562,6 +544,18 @@
   </data>
   <data name="tsReverseSelected.Text" xml:space="preserve">
     <value>&amp;Выбранные ({0})</value>
+  </data>
+  <data name="tsReverse.Size" type="System.Drawing.Size, System.Drawing">
+    <value>379, 26</value>
+  </data>
+  <data name="tsReverse.Text" xml:space="preserve">
+    <value>&amp;Обратить</value>
+  </data>
+  <data name="tsdReorder.Size" type="System.Drawing.Size, System.Drawing">
+    <value>165, 56</value>
+  </data>
+  <data name="tsdReorder.Text" xml:space="preserve">
+    <value>&amp;Изменить порядок</value>
   </data>
   <data name="tsDelete.Size" type="System.Drawing.Size, System.Drawing">
     <value>89, 56</value>
@@ -626,6 +620,12 @@
   </data>
   <data name="tsAbout.Text" xml:space="preserve">
     <value>&amp;О программе</value>
+  </data>
+  <data name="tStrip.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1602, 67</value>
+  </data>
+  <data name="tStrip.Text" xml:space="preserve">
+    <value>Главная панель инструментов</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
