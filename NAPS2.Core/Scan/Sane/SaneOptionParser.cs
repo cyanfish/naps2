@@ -33,6 +33,7 @@ namespace NAPS2.Scan.Sane
             line = null;
 
             NextLine();
+
             while (line != null)
             {
                 switch (state)
@@ -58,13 +59,16 @@ namespace NAPS2.Scan.Sane
                         if (line.StartsWith("        ", StringComparison.InvariantCultureIgnoreCase))
                         {
                             string descLine = line.Substring(8).Trim();
-                            if (lastOption.Desc == null)
+                            if (lastOption != null)
                             {
-                                lastOption.Desc = descLine;
-                            }
-                            else
-                            {
-                                lastOption.Desc += " " + descLine;
+                                if (lastOption.Desc == null)
+                                {
+                                    lastOption.Desc = descLine;
+                                }
+                                else
+                                {
+                                    lastOption.Desc += " " + descLine;
+                                }
                             }
                             NextLine();
                         }
@@ -346,6 +350,7 @@ namespace NAPS2.Scan.Sane
             line = input.ReadLine();
             if (line != null)
             {
+                Console.WriteLine($@"Option line: {line}");
                 line = line.TrimEnd() + "\n";
             }
         }
