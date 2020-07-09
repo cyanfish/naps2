@@ -4,4 +4,4 @@ packages/
 *.suo
 .vs/
 .idea/
-MigrationBackup
+MigrationBackup/
