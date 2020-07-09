@@ -106,15 +106,15 @@ namespace NAPS2.Util
         /// <typeparam name="TValue"></typeparam>
         /// <param name="dict"></param>
         /// <param name="key"></param>
-        /// <param name="defaultValue"></param>
+        /// <param name="Default"></param>
         /// <returns></returns>
-        public static TValue Get<TKey, TValue>(this Dictionary<TKey, TValue> dict, TKey key, TValue defaultValue)
+        public static TValue Get<TKey, TValue>(this Dictionary<TKey, TValue> dict, TKey key, TValue Default)
         {
             if (dict.ContainsKey(key))
             {
                 return dict[key];
             }
-            return defaultValue;
+            return Default;
         }
 
         /// <summary>
@@ -124,15 +124,15 @@ namespace NAPS2.Util
         /// <typeparam name="TValue"></typeparam>
         /// <param name="dict"></param>
         /// <param name="key"></param>
-        /// <param name="defaultValue"></param>
+        /// <param name="Default"></param>
         /// <returns></returns>
-        public static TValue Get<TKey, TValue>(this Dictionary<TKey, TValue> dict, TKey key, Func<TValue> defaultValue)
+        public static TValue Get<TKey, TValue>(this Dictionary<TKey, TValue> dict, TKey key, Func<TValue> Default)
         {
             if (dict.ContainsKey(key))
             {
                 return dict[key];
             }
-            return defaultValue();
+            return Default();
         }
 
         /// <summary>
@@ -142,13 +142,13 @@ namespace NAPS2.Util
         /// <typeparam name="TValue"></typeparam>
         /// <param name="dict"></param>
         /// <param name="key"></param>
-        /// <param name="defaultValue"></param>
+        /// <param name="Default"></param>
         /// <returns></returns>
-        public static TValue GetOrSet<TKey, TValue>(this Dictionary<TKey, TValue> dict, TKey key, TValue defaultValue)
+        public static TValue GetOrSet<TKey, TValue>(this Dictionary<TKey, TValue> dict, TKey key, TValue Default)
         {
             if (!dict.ContainsKey(key))
             {
-                dict[key] = defaultValue;
+                dict[key] = Default;
             }
             return dict[key];
         }
@@ -160,13 +160,13 @@ namespace NAPS2.Util
         /// <typeparam name="TValue"></typeparam>
         /// <param name="dict"></param>
         /// <param name="key"></param>
-        /// <param name="defaultValue"></param>
+        /// <param name="Default"></param>
         /// <returns></returns>
-        public static TValue GetOrSet<TKey, TValue>(this Dictionary<TKey, TValue> dict, TKey key, Func<TValue> defaultValue)
+        public static TValue GetOrSet<TKey, TValue>(this Dictionary<TKey, TValue> dict, TKey key, Func<TValue> Default)
         {
             if (!dict.ContainsKey(key))
             {
-                dict[key] = defaultValue();
+                dict[key] = Default();
             }
             return dict[key];
         }
