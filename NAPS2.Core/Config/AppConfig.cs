@@ -66,14 +66,14 @@ namespace NAPS2.Config
         public double OcrTimeoutInSeconds { get; set; }
 
         public OcrState OcrState { get; set; }
-        
+
         public string OcrDefaultLanguage { get; set; }
 
         public OcrMode OcrDefaultMode { get; set; }
 
         public bool OcrDefaultAfterScanning { get; set; }
 
-        public PdfCompat ForcePdfCompat { get; set; } 
+        public PdfCompat ForcePdfCompat { get; set; }
 
         public EventType EventLogging { get; set; }
 

@@ -135,7 +135,7 @@ namespace NAPS2.Scan.Images
         {
             lock (this)
             {
-                return (Bitmap) thumbnail?.Clone();
+                return (Bitmap)thumbnail?.Clone();
             }
         }
 

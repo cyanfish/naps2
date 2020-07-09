@@ -81,7 +81,7 @@ namespace NAPS2.Scan.Wia.Native
             [Out] out int step,
             [Out] out int numElems,
             [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 7), Out] out int[] elems);
-        
+
         [DllImport("NAPS2.WIA.dll")]
         public static extern uint StartTransfer1(IntPtr item, [Out] out IntPtr transfer);
 

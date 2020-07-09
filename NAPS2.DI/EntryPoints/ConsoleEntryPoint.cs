@@ -27,7 +27,7 @@ namespace NAPS2.DI.EntryPoints
             {
                 return;
             }
-            
+
             // Start a pending worker process
             WorkerManager.Init();
 

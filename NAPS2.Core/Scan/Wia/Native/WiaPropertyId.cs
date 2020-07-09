@@ -26,7 +26,7 @@ namespace NAPS2.Scan.Wia.Native
         public const int DIP_DEV_TYPE = 5;
         public const int DIP_DEV_NAME = 7;
         public const int DIP_WIA_VERSION = 14;
-        
+
         public const int DPS_HORIZONTAL_SHEET_FEED_SIZE = 3076;
         public const int DPS_VERTICAL_SHEET_FEED_SIZE = 3077;
         public const int DPS_HORIZONTAL_BED_SIZE = 3074;
@@ -35,7 +35,7 @@ namespace NAPS2.Scan.Wia.Native
         public const int DPS_DOCUMENT_HANDLING_STATUS = 3087;
         public const int DPS_DOCUMENT_HANDLING_SELECT = 3088;
         public const int DPS_PAGES = 3096;
-        
+
         public const int IPA_ITEM_NAME = 4098;
         public const int IPA_FULL_ITEM_NAME = 4099;
         public const int IPA_DATATYPE = 4103;

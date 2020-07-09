@@ -69,7 +69,7 @@ namespace NAPS2.Ocr
                     });
                     if (process != null && process.Id != 0)
                     {
-                        var codes = process.StandardError.ReadToEnd().Split(new[] {'\r', '\n'}, StringSplitOptions.RemoveEmptyEntries).Where(x => x.Length == 3);
+                        var codes = process.StandardError.ReadToEnd().Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries).Where(x => x.Length == 3);
                         installedLanguages = codes.Select(code => LanguageData.LanguageMap.Get($"ocr-{code}")).Where(lang => lang != null).ToList();
                         isInstalled = true;
                         process.Kill();

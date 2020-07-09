@@ -21,7 +21,8 @@ namespace NAPS2.Scan.Images.Transforms
             if (bitmap.PixelFormat == PixelFormat.Format24bppRgb)
             {
                 bytesPerPixel = 3;
-            } else if (bitmap.PixelFormat == PixelFormat.Format32bppArgb)
+            }
+            else if (bitmap.PixelFormat == PixelFormat.Format32bppArgb)
             {
                 bytesPerPixel = 4;
             }

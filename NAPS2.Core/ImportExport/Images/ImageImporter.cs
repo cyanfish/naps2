@@ -77,7 +77,7 @@ namespace NAPS2.ImportExport.Images
                     }
                     source.Done();
                 }
-                catch(Exception e)
+                catch (Exception e)
                 {
                     source.Error(e);
                 }

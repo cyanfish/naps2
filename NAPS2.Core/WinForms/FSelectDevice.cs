@@ -16,7 +16,7 @@ namespace NAPS2.WinForms
             CancelButton = btnCancel;
         }
 
-        public List<ScanDevice> DeviceList { get; set; } 
+        public List<ScanDevice> DeviceList { get; set; }
 
         public ScanDevice SelectedDevice { get; private set; }
 
@@ -53,7 +53,7 @@ namespace NAPS2.WinForms
                 return;
             }
             DialogResult = DialogResult.OK;
-            SelectedDevice = ((ScanDevice) listboxDevices.SelectedItem);
+            SelectedDevice = ((ScanDevice)listboxDevices.SelectedItem);
             Close();
         }
 

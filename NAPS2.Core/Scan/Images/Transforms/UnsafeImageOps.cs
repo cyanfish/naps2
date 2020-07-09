@@ -229,7 +229,7 @@ namespace NAPS2.Scan.Images.Transforms
                     {
                         byte* srcRow = (byte*)(srcData.Scan0 + srcStride * (y1 + y) + (x1 + 7) / 8);
                         byte* dstRow = (byte*)(dstData.Scan0 + dstStride * y);
-                        
+
                         for (int x = 0; x < bytesExceptLast; x++)
                         {
                             byte* srcPtr = srcRow + x;

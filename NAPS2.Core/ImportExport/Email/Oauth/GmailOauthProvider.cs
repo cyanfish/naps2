@@ -89,7 +89,7 @@ namespace NAPS2.ImportExport.Email.Oauth
                 new JObject
                 {
                     { "id", draftId }
-                }.ToString(), 
+                }.ToString(),
                 "application/json",
                 (current, max) => { },
                 CancellationToken.None);
@@ -98,7 +98,7 @@ namespace NAPS2.ImportExport.Email.Oauth
         public class DraftInfo
         {
             public string DraftId { get; set; }
-            
+
             public string MessageId { get; set; }
         }
 

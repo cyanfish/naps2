@@ -15,7 +15,7 @@ namespace NAPS2.Platform
         bool IsToolbarTextboxSupported { get; }
 
         bool SetImageListSizeOnImageCollection { get; }
-        
+
         bool UseSpaceInListViewItem { get; }
 
         bool RefreshListViewAfterChange { get; }

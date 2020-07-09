@@ -174,8 +174,8 @@ namespace NAPS2.Config
         private List<ScanProfile> ReadVeryOldProfiles(Stream configFileStream)
         {
             // For compatibility with profiles.xml from old versions, load OldScanSettings instead of ScanProfile (which is used exclusively now)
-            var deprecatedSerializer = new XmlSerializer(typeof (List<OldScanSettings>));
-            var profiles = (List<OldScanSettings>) deprecatedSerializer.Deserialize(configFileStream);
+            var deprecatedSerializer = new XmlSerializer(typeof(List<OldScanSettings>));
+            var profiles = (List<OldScanSettings>)deprecatedSerializer.Deserialize(configFileStream);
 
             // Okay, we've read the old version of profiles.txt. Since we're going to eventually change it to the new version, make a backup in case the user downgrades.
             File.Copy(primaryConfigPath, primaryConfigPath + ".bak", true);

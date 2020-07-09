@@ -536,7 +536,7 @@ namespace NAPS2.Automation
             }
 
             var pdfSettings = new PdfSettings { Metadata = metadata, Encryption = encryption, Compat = compat };
-            
+
             int scanIndex = 0;
             actualOutputPaths = new List<string>();
             foreach (var fileContents in scanList)

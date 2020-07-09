@@ -113,7 +113,7 @@ namespace NAPS2.Scan
             {
                 throw new InvalidOperationException("IScanDriver.ScanDevice must be specified before calling Scan().");
             }
-            
+
             var source = new ScannedImageSource.Concrete();
             Task.Factory.StartNew(async () =>
             {

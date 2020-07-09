@@ -219,7 +219,7 @@ namespace NAPS2.Ocr
                 while (true)
                 {
                     // Wait for a queued ocr request to become available
-                    WaitHandle.WaitAny(new[] {queueWaitHandle, cts.Token.WaitHandle});
+                    WaitHandle.WaitAny(new[] { queueWaitHandle, cts.Token.WaitHandle });
                     if (cts.IsCancellationRequested)
                     {
                         return;

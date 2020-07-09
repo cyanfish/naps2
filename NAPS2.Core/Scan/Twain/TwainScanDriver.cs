@@ -13,7 +13,7 @@ namespace NAPS2.Scan.Twain
     public class TwainScanDriver : ScanDriverBase
     {
         public const string DRIVER_NAME = "twain";
-        
+
         private readonly IWorkerServiceFactory workerServiceFactory;
         private readonly TwainWrapper twainWrapper;
         private readonly ScannedImageHelper scannedImageHelper;
@@ -29,9 +29,9 @@ namespace NAPS2.Scan.Twain
         public override string DriverName => DRIVER_NAME;
 
         public override bool IsSupported => PlatformCompat.System.IsTwainDriverSupported;
-        
+
         private bool UseWorker => !(ScanProfile.TwainImpl == TwainImpl.X64 && Environment.Is64BitProcess) && PlatformCompat.Runtime.UseWorker;
-        
+
         protected override List<ScanDevice> GetDeviceListInternal()
         {
             // Exclude WIA proxy devices since NAPS2 already supports WIA
@@ -43,7 +43,7 @@ namespace NAPS2.Scan.Twain
             var twainImpl = ScanProfile?.TwainImpl ?? TwainImpl.Default;
             if (UseWorker)
             {
-                using(var worker = workerServiceFactory.Create())
+                using (var worker = workerServiceFactory.Create())
                 {
                     return worker.Service.TwainGetDeviceList(twainImpl);
                 }

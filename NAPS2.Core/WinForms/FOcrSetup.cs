@@ -143,8 +143,8 @@ namespace NAPS2.WinForms
             if (appConfigManager.Config.OcrState == OcrState.UserConfig)
             {
                 UserConfigManager.Config.EnableOcr = checkBoxEnableOcr.Checked;
-                UserConfigManager.Config.OcrLanguageCode = (string) comboLanguages.SelectedValue;
-                UserConfigManager.Config.OcrMode = availableModes != null ? (OcrMode) comboOcrMode.SelectedItem : OcrMode.Default;
+                UserConfigManager.Config.OcrLanguageCode = (string)comboLanguages.SelectedValue;
+                UserConfigManager.Config.OcrMode = availableModes != null ? (OcrMode)comboOcrMode.SelectedItem : OcrMode.Default;
                 UserConfigManager.Config.OcrAfterScanning = checkBoxRunInBG.Checked;
                 UserConfigManager.Save();
             }

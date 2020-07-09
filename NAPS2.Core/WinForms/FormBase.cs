@@ -88,7 +88,7 @@ namespace NAPS2.WinForms
 
         public void Invoke(Action action)
         {
-            ((Control) this).Invoke(action);
+            ((Control)this).Invoke(action);
         }
 
         public T InvokeGet<T>(Func<T> func)

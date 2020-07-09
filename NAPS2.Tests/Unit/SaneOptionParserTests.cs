@@ -17,7 +17,7 @@ namespace NAPS2.Tests.Unit
             var parser = new SaneOptionParser();
             var options = parser.Parse(GetStreamReader(TEST_OUTPUT));
 
-            Assert.That(options.Keys, Is.EquivalentTo(new []
+            Assert.That(options.Keys, Is.EquivalentTo(new[]
             {
                 "--resolution",
                 "--mode",
@@ -36,7 +36,7 @@ namespace NAPS2.Tests.Unit
             }));
             Assert.That(options["--resolution"].WordList, Is.EquivalentTo(new double[] { 75, 150, 300, 600, 1200 }));
             Assert.That(options["--resolution"].Unit, Is.EqualTo(SaneUnit.Dpi));
-            Assert.That(options["--mode"].StringList, Is.EquivalentTo(new [] { "Color", "Gray", "Lineart" }));
+            Assert.That(options["--mode"].StringList, Is.EquivalentTo(new[] { "Color", "Gray", "Lineart" }));
             Assert.That(options["--mode"].Capabilities & SaneCapabilities.Automatic, Is.EqualTo(SaneCapabilities.Automatic));
             Assert.That(options["-x"].Type, Is.EqualTo(SaneValueType.Numeric));
             Assert.That(options["-x"].Range.Min, Is.EqualTo(0));

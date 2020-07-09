@@ -45,7 +45,7 @@ namespace NAPS2.WinForms
             txtDefaultFilePath.Text = imageSettings.DefaultFileName;
             cbSkipSavePrompt.Checked = imageSettings.SkipSavePrompt;
             txtJpegQuality.Text = imageSettings.JpegQuality.ToString(CultureInfo.InvariantCulture);
-            cmbTiffCompr.SelectedIndex = (int) imageSettings.TiffCompression;
+            cmbTiffCompr.SelectedIndex = (int)imageSettings.TiffCompression;
             cbSinglePageTiff.Checked = imageSettings.SinglePageTiff;
         }
 

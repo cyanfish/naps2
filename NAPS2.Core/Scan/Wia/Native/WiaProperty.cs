@@ -23,7 +23,7 @@ namespace NAPS2.Scan.Wia.Native
         public string Name { get; }
 
         public ushort Type { get; }
-        
+
         public object Value
         {
             get
@@ -45,7 +45,7 @@ namespace NAPS2.Scan.Wia.Native
                 uint hr;
                 if (Type == WiaPropertyType.I4)
                 {
-                    hr = NativeWiaMethods.SetPropertyInt(Storage, Id, (int) value);
+                    hr = NativeWiaMethods.SetPropertyInt(Storage, Id, (int)value);
                 }
                 else
                 {

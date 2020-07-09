@@ -151,7 +151,7 @@ namespace NAPS2.WinForms
             }
             else
             {
-                cmbPage.SelectedIndex = (int) ScanProfile.PageSize;
+                cmbPage.SelectedIndex = (int)ScanProfile.PageSize;
             }
         }
 
@@ -159,7 +159,7 @@ namespace NAPS2.WinForms
         {
             for (int i = 0; i < cmbPage.Items.Count; i++)
             {
-                var item = (PageSizeListItem) cmbPage.Items[i];
+                var item = (PageSizeListItem)cmbPage.Items[i];
                 if (item.Type == ScanPageSize.Custom && item.CustomName == name && item.CustomDimens == dimens)
                 {
                     cmbPage.SelectedIndex = i;
@@ -191,7 +191,7 @@ namespace NAPS2.WinForms
         private string DeviceDriverName
         {
             get => rdTWAIN.Checked ? TwainScanDriver.DRIVER_NAME
-                 : rdSANE.Checked  ? SaneScanDriver.DRIVER_NAME
+                 : rdSANE.Checked ? SaneScanDriver.DRIVER_NAME
                                    : WiaScanDriver.DRIVER_NAME;
             set
             {
@@ -273,7 +273,7 @@ namespace NAPS2.WinForms
                 }
                 return;
             }
-            var pageSize = (PageSizeListItem) cmbPage.SelectedItem;
+            var pageSize = (PageSizeListItem)cmbPage.SelectedItem;
             if (ScanProfile.DisplayName != null)
             {
                 profileNameTracker.RenamingProfile(ScanProfile.DisplayName, txtName.Text);

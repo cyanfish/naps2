@@ -72,17 +72,17 @@ namespace NAPS2.Scan.Images
             // "BitmapInfo" is an interop-struct which we define below.
             // In GDI terms, it's a BITMAPHEADERINFO followed by an array of two RGBQUADs
             var bmi = new BitmapInfo
-                {
-                    biSize = 40, // the size of the BITMAPHEADERINFO struct
-                    biWidth = w,
-                    biHeight = h,
-                    biPlanes = 1, // "planes" are confusing. We always use just 1. Read MSDN for more info.
-                    biBitCount = (short)bpp, // ie. 1bpp or 8bpp
-                    biCompression = BI_RGB, // ie. the pixels in our RGBQUAD table are stored as RGBs, not palette indexes
-                    biSizeImage = (uint)(((w + 7) & 0xFFFFFFF8) * h / 8),
-                    biXPelsPerMeter = 1000000, // not really important
-                    biYPelsPerMeter = 1000000 // not really important
-                };
+            {
+                biSize = 40, // the size of the BITMAPHEADERINFO struct
+                biWidth = w,
+                biHeight = h,
+                biPlanes = 1, // "planes" are confusing. We always use just 1. Read MSDN for more info.
+                biBitCount = (short)bpp, // ie. 1bpp or 8bpp
+                biCompression = BI_RGB, // ie. the pixels in our RGBQUAD table are stored as RGBs, not palette indexes
+                biSizeImage = (uint)(((w + 7) & 0xFFFFFFF8) * h / 8),
+                biXPelsPerMeter = 1000000, // not really important
+                biYPelsPerMeter = 1000000 // not really important
+            };
             // Now for the colour table.
             uint ncols = (uint)1 << bpp; // 2 colours for 1bpp; 256 colours for 8bpp
             bmi.biClrUsed = ncols;

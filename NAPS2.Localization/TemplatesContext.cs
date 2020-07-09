@@ -49,7 +49,7 @@ msgstr """"
                 }
                 if (!Strings.ContainsKey(original))
                 {
-                    Strings[original] = new TranslatableString { Original = original, Context = new List<string>()};
+                    Strings[original] = new TranslatableString { Original = original, Context = new List<string>() };
                 }
                 Strings[original].Context.Add($"{file.Name}${prop}$Message");
             }

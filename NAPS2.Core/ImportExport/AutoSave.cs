@@ -83,7 +83,7 @@ namespace NAPS2.ImportExport
                 return false;
             }
         }
-        
+
         private async Task<(bool, string)> SaveOneFile(AutoSaveSettings settings, DateTime now, int i, List<ScannedImage> images, ISaveNotify notify)
         {
             if (images.Count == 0)

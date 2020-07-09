@@ -33,7 +33,7 @@ namespace NAPS2.Automation
 
         [Option("importpassword", HelpText = "The password to use to import one or more encrypted PDF files.")]
         public string ImportPassword { get; set; }
-        
+
         [Option("progress", HelpText = "Display a graphical window for scanning progress.")]
         public bool Progress { get; set; }
 
@@ -182,7 +182,7 @@ namespace NAPS2.Automation
 
         [Option("tiffcomp", HelpText = "The compression to use for TIFF files. Possible values: auto, lzw, ccitt4, none")]
         public string TiffComp { get; set; }
-        
+
         #endregion
     }
 }

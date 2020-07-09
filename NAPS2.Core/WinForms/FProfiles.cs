@@ -264,7 +264,7 @@ namespace NAPS2.WinForms
         private void contextMenuStrip_Opening(object sender, System.ComponentModel.CancelEventArgs e)
         {
             var ido = Clipboard.GetDataObject();
-            var canPaste = ido != null && ido.GetDataPresent(typeof (DirectProfileTransfer).FullName);
+            var canPaste = ido != null && ido.GetDataPresent(typeof(DirectProfileTransfer).FullName);
             if (SelectedProfile == null)
             {
                 if (canPaste)

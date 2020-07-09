@@ -10,7 +10,7 @@ namespace NAPS2.Scan.Wia.Native
         protected internal WiaDevice(WiaVersion version, IntPtr handle) : base(version, handle)
         {
         }
-        
+
         public WiaItem PromptToConfigure(IntPtr parentWindowHandle)
         {
             if (Version == WiaVersion.Wia20)

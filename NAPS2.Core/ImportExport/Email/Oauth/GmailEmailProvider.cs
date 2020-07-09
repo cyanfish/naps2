@@ -20,7 +20,7 @@ namespace NAPS2.ImportExport.Email.Oauth
             this.userConfigManager = userConfigManager;
             this.gmailOauthProvider = gmailOauthProvider;
         }
-        
+
         protected override async Task SendMimeMessage(MimeMessage message, ProgressHandler progressCallback, CancellationToken cancelToken,
             bool autoSend)
         {

@@ -136,7 +136,7 @@ namespace NAPS2.WinForms
             }
         }
 
-#region Assembly Attribute Accessors
+        #region Assembly Attribute Accessors
 
         private static string GetAssemblyAttributeValue<T>(Func<T, string> selector)
         {
@@ -171,7 +171,7 @@ namespace NAPS2.WinForms
 
         public string AssemblyCompany => GetAssemblyAttributeValue<AssemblyCompanyAttribute>(x => x.Company);
 
-#endregion
+        #endregion
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {

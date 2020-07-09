@@ -26,7 +26,7 @@ namespace NAPS2.Scan.Images.Transforms
             }
 
             UnsafeImageOps.HueShift(bitmap, hueShiftAdjusted);
-            
+
             return bitmap;
         }
 

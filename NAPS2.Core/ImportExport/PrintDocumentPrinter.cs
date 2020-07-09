@@ -107,7 +107,7 @@ namespace NAPS2.ImportExport
                     };
                     printDocument.PrinterSettings = printerSettings;
                     printDocument.Print();
-                    
+
                     Log.Event(EventType.Print, new Event
                     {
                         Name = MiscResources.Print,

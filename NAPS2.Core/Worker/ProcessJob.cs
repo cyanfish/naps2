@@ -82,7 +82,7 @@ namespace NAPS2.Worker
         {
             return AddProcess(Process.GetProcessById(processId).Handle);
         }
-        
+
         [StructLayout(LayoutKind.Sequential)]
         private struct IO_COUNTERS
         {

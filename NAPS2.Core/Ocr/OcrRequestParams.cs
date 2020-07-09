@@ -35,7 +35,7 @@ namespace NAPS2.Ocr
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
             if (obj.GetType() != this.GetType()) return false;
-            return Equals((OcrRequestParams) obj);
+            return Equals((OcrRequestParams)obj);
         }
 
         public override int GetHashCode()

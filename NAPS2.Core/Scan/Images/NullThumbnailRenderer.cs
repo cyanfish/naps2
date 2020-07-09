@@ -13,7 +13,7 @@ namespace NAPS2.Scan.Images
             : base(userConfigManager, scannedImageRenderer)
         {
         }
-        
+
         public override Bitmap RenderThumbnail(Bitmap b, int size) => null;
     }
 }

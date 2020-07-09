@@ -16,7 +16,7 @@ namespace NAPS2.Scan.Wia.Native
             WiaException.Check(NativeWiaMethods.EnumerateProperties(Handle,
                 (id, name, type) => propertyDict.Add(id, new WiaProperty(Handle, id, name, type))));
         }
-        
+
         public WiaProperty this[int propId] => propertyDict.Get(propId);
 
         public IEnumerator<WiaProperty> GetEnumerator() => propertyDict.Values.GetEnumerator();

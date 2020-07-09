@@ -39,7 +39,7 @@ namespace NAPS2.ImportExport.Email.Mapi
         public async Task<bool> SendEmail(EmailMessage message, ProgressHandler progressCallback, CancellationToken cancelToken)
         {
             var configuredClientName = userConfigManager.Config.EmailSetup?.SystemProviderName;
-            
+
             MapiSendMailReturnCode EmailInProc(string clientName) => mapiWrapper.SendEmail(clientName, message);
             MapiSendMailReturnCode EmailByWorker(string clientName)
             {
@@ -54,7 +54,7 @@ namespace NAPS2.ImportExport.Email.Mapi
                 // It's difficult to get 32/64 bit right when using mapi32.dll:
                 // https://docs.microsoft.com/en-us/office/client-developer/outlook/mapi/building-mapi-applications-on-32-bit-and-64-bit-platforms
                 // Also some people have had issues with bad DLL paths (?), so we can fall back to mapi32.dll.
-                
+
                 var emailFuncs = new List<Func<MapiSendMailReturnCode>>();
                 if (configuredClientName != null)
                 {

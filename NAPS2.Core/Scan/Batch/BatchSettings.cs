@@ -20,7 +20,7 @@ namespace NAPS2.Scan.Batch
 
         public double ScanIntervalSeconds { get; set; }
 
-        public BatchOutputType OutputType { get; set;  }
+        public BatchOutputType OutputType { get; set; }
 
         public SaveSeparator SaveSeparator { get; set; }
 

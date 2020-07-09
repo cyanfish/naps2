@@ -33,7 +33,7 @@ namespace NAPS2.Ocr
 
         #region Tesseract 3.04 Language Data (auto-generated)
 
-        public static readonly TesseractLanguageData V304 = new TesseractLanguageData(new []
+        public static readonly TesseractLanguageData V304 = new TesseractLanguageData(new[]
         {
             new TesseractLanguage { Filename = "afr.traineddata.gz", Code = "afr", LangName = "Afrikaans", Size = 1.93, Sha1 = "a669186130bf1fc6c78226ac868c82b70a44c70b" },
             new TesseractLanguage { Filename = "amh.traineddata.gz", Code = "amh", LangName = "Amharic", Size = 1.03, Sha1 = "1153cbbac7306d42e72ca639ff3f36f45dcb15a2" },

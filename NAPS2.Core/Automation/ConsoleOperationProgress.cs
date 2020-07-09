@@ -36,7 +36,8 @@ namespace NAPS2.Automation
             op.Wait();
         }
 
-        public void ShowBackgroundProgress(IOperation op) {
+        public void ShowBackgroundProgress(IOperation op)
+        {
         }
 
         public List<IOperation> ActiveOperations => throw new InvalidOperationException();

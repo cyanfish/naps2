@@ -9,7 +9,7 @@ namespace NAPS2.Scan.Wia.Native
         public WiaPropertyAttributes(IntPtr storage, int id)
         {
             WiaException.Check(NativeWiaMethods.GetPropertyAttributes(storage, id, out int flags, out int min, out int nom, out int max, out int step, out _, out var elems));
-            Flags = (WiaPropertyFlags) flags;
+            Flags = (WiaPropertyFlags)flags;
             Min = min;
             Nom = nom;
             Max = max;

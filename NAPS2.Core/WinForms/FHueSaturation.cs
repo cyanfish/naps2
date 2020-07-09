@@ -24,7 +24,7 @@ namespace NAPS2.WinForms
         protected override IEnumerable<Transform> Transforms => new Transform[] { HueTransform, SaturationTransform };
 
         protected override PictureBox PictureBox => pictureBox;
-        
+
         protected override void ResetTransform()
         {
             HueTransform = new HueTransform();
@@ -41,7 +41,7 @@ namespace NAPS2.WinForms
             SaturationTransform.Saturation = tbSaturation.Value;
             UpdatePreviewBox();
         }
-        
+
         private void txtHue_TextChanged(object sender, EventArgs e)
         {
             if (int.TryParse(txtHue.Text, out int value))

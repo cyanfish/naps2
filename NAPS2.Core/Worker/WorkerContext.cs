@@ -23,7 +23,7 @@ namespace NAPS2.Worker
         {
             try
             {
-                ((IDisposable) Service)?.Dispose();
+                ((IDisposable)Service)?.Dispose();
             }
             catch (CommunicationObjectFaultedException)
             {

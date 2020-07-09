@@ -13,7 +13,7 @@ namespace NAPS2.Util
     {
         private static Lazy<Random> random = new Lazy<Random>();
 
-        [Conditional("DEBUG")] 
+        [Conditional("DEBUG")]
         public static void MaybeError(double chance, Exception exception = null)
         {
             if (random.Value.NextDouble() < chance)
@@ -29,7 +29,7 @@ namespace NAPS2.Util
             }
         }
 
-        [Conditional("DEBUG")] 
+        [Conditional("DEBUG")]
         public static void MaybeDelay(double chance, double durationInSeconds, double variationInSeconds = 0)
         {
             if (random.Value.NextDouble() < chance)

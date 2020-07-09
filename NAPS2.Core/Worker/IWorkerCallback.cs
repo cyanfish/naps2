@@ -12,7 +12,7 @@ namespace NAPS2.Worker
     {
         [OperationContract(IsOneWay = true)]
         void TwainImageReceived(RecoveryIndexImage image, byte[] thumbnail, string tempImageFilePath);
-        
+
         event Action<ScannedImage, string> ImageCallback;
     }
 }

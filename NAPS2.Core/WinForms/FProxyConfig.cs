@@ -20,7 +20,7 @@ namespace NAPS2.WinForms
         public ScanProxyConfig ProxyConfig { get; set; }
 
         public bool UseProxy { get; set; }
-        
+
         protected override void OnLoad(object sender, EventArgs eventArgs)
         {
             new LayoutManager(this)

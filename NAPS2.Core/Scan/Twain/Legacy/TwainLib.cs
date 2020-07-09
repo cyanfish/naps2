@@ -30,9 +30,9 @@ namespace NAPS2.Scan.Twain.Legacy
         public Twain()
         {
             appid = new TwIdentity
-                {
-                    Id = IntPtr.Zero,
-                    Version =
+            {
+                Id = IntPtr.Zero,
+                Version =
                         {
                             MajorNum = 1,
                             MinorNum = 1,
@@ -40,13 +40,13 @@ namespace NAPS2.Scan.Twain.Legacy
                             Country = COUNTRY_USA,
                             Info = "Hack 1"
                         },
-                    ProtocolMajor = TwProtocol.MAJOR,
-                    ProtocolMinor = TwProtocol.MINOR,
-                    SupportedGroups = (int)(TwDG.Image | TwDG.Control),
-                    Manufacturer = "NETMaster",
-                    ProductFamily = "Freeware",
-                    ProductName = "Hack"
-                };
+                ProtocolMajor = TwProtocol.MAJOR,
+                ProtocolMinor = TwProtocol.MINOR,
+                SupportedGroups = (int)(TwDG.Image | TwDG.Control),
+                Manufacturer = "NETMaster",
+                ProductFamily = "Freeware",
+                ProductName = "Hack"
+            };
 
             srcds = new TwIdentity { Id = IntPtr.Zero };
 

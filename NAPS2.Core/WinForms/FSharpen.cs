@@ -19,7 +19,7 @@ namespace NAPS2.WinForms
 
         public SharpenTransform SharpenTransform { get; private set; } = new SharpenTransform();
 
-        protected override IEnumerable<Transform> Transforms => new [] { SharpenTransform };
+        protected override IEnumerable<Transform> Transforms => new[] { SharpenTransform };
 
         protected override PictureBox PictureBox => pictureBox;
 
@@ -35,7 +35,7 @@ namespace NAPS2.WinForms
             SharpenTransform.Sharpness = tbSharpen.Value;
             UpdatePreviewBox();
         }
-        
+
         private void txtSharpen_TextChanged(object sender, EventArgs e)
         {
             if (int.TryParse(txtSharpen.Text, out int value))

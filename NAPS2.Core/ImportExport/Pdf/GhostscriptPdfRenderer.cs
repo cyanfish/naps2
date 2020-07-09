@@ -51,8 +51,8 @@ namespace NAPS2.ImportExport.Pdf
             using (var doc = PdfReader.Open(path, PdfDocumentOpenMode.InformationOnly))
             {
                 // Cap the resolution to 10k pixels in each dimension
-                dpi = Math.Min(dpi, (int) (10000 / doc.Pages[0].Height.Inch));
-                dpi = Math.Min(dpi, (int) (10000 / doc.Pages[0].Width.Inch));
+                dpi = Math.Min(dpi, (int)(10000 / doc.Pages[0].Height.Inch));
+                dpi = Math.Min(dpi, (int)(10000 / doc.Pages[0].Width.Inch));
             }
 
             using (var stream = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.Read))

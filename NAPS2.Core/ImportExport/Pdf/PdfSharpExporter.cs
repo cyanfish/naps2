@@ -256,7 +256,7 @@ namespace NAPS2.ImportExport.Pdf
                 }
                 DrawOcrTextOnPage(page, ocrTask.Result);
             }
-            
+
             return !cancelToken.IsCancellationRequested;
         }
 
@@ -387,7 +387,7 @@ namespace NAPS2.ImportExport.Pdf
             int adjustedFontSize = Math.Max(1, (int)Math.Floor(fontSizeGuess * adjustmentFactor));
             return adjustedFontSize;
         }
-        
+
         private class UnixFontResolver : IFontResolver
         {
             private byte[] fontData;

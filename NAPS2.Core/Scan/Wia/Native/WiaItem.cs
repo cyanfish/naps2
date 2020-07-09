@@ -9,7 +9,7 @@ namespace NAPS2.Scan.Wia.Native
         protected internal WiaItem(WiaVersion version, IntPtr handle) : base(version, handle)
         {
         }
-        
+
         public WiaTransfer StartTransfer()
         {
             WiaException.Check(Version == WiaVersion.Wia10

@@ -24,7 +24,7 @@ namespace NAPS2.WinForms
         protected override IEnumerable<Transform> Transforms => new Transform[] { BrightnessTransform, TrueContrastTransform };
 
         protected override PictureBox PictureBox => pictureBox;
-        
+
         protected override void ResetTransform()
         {
             BrightnessTransform = new BrightnessTransform();

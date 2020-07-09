@@ -21,7 +21,7 @@ namespace NAPS2.Util
             { "del", Keys.Delete },
             { "ins", Keys.Insert },
             { "break", Keys.Pause },
-        }; 
+        };
 
         public Keys Parse(string value)
         {
@@ -38,7 +38,7 @@ namespace NAPS2.Util
                         }
                         else
                         {
-                            keys |= (Keys) Enum.Parse(typeof (Keys), part, true);
+                            keys |= (Keys)Enum.Parse(typeof(Keys), part, true);
                         }
                     }
                     return keys;

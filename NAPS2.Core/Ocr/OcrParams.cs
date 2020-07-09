@@ -32,14 +32,14 @@ namespace NAPS2.Ocr
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
             if (obj.GetType() != this.GetType()) return false;
-            return Equals((OcrParams) obj);
+            return Equals((OcrParams)obj);
         }
 
         public override int GetHashCode()
         {
             unchecked
             {
-                return ((LanguageCode != null ? LanguageCode.GetHashCode() : 0) * 397) ^ (int) Mode;
+                return ((LanguageCode != null ? LanguageCode.GetHashCode() : 0) * 397) ^ (int)Mode;
             }
         }
 
