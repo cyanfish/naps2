@@ -90,15 +90,18 @@ namespace NAPS2.Scan.Sane
             {
                 Capabilities = SaneCapabilities.SoftSelect
             };
+            lastOption = null;
             var optionValueList = new List<string>();
             var builder = new StringBuilder();
             state = OptionParseState.ReadingName;
             while (i < line.Length)
             {
                 char c = line[i];
+                Console.WriteLine($@"Parsing character: {c}");
                 switch (state)
                 {
                     case OptionParseState.ReadingName:
+                        Console.WriteLine("ReadingName");
                         if (char.IsLetter(c) || c == '-')
                         {
                             builder.Append(c);
@@ -126,11 +129,13 @@ namespace NAPS2.Scan.Sane
                         }
                         else
                         {
+                            Console.WriteLine("return 1");
                             return;
                         }
                         break;
 
                     case OptionParseState.ReadingBooleanValues:
+                        Console.WriteLine("ReadingBooleanValues");
                         if (c == 'a')
                         {
                             option.Capabilities |= SaneCapabilities.Automatic;
@@ -147,6 +152,7 @@ namespace NAPS2.Scan.Sane
                         break;
 
                     case OptionParseState.ReadingValues:
+                        Console.WriteLine("ReadingValues");
                         if (char.IsLetterOrDigit(c) || c == '.' || c == '%')
                         {
                             builder.Append(c);
@@ -174,6 +180,7 @@ namespace NAPS2.Scan.Sane
                         }
                         else if (c != '|')
                         {
+                            Console.WriteLine("return 2");
                             return;
                         }
 
@@ -186,6 +193,7 @@ namespace NAPS2.Scan.Sane
                             var parts = optionValue.Split(new[] { ".." }, StringSplitOptions.None);
                             if (!decimal.TryParse(parts[0], out var min) || !decimal.TryParse(parts[1], out var max))
                             {
+                                Console.WriteLine("return 3");
                                 return;
                             }
                             if (option.Type == SaneValueType.None)
@@ -234,6 +242,7 @@ namespace NAPS2.Scan.Sane
                         break;
 
                     case OptionParseState.LookingForQuant:
+                        Console.WriteLine("LookingForQuant");
                         if (c == ' ')
                         {
                             i += 1;
@@ -251,6 +260,7 @@ namespace NAPS2.Scan.Sane
                         }
                         if (line.Substring(i, 13) != "(in steps of ")
                         {
+                            Console.WriteLine("return 4");
                             return;
                         }
                         i += 13;
@@ -258,6 +268,7 @@ namespace NAPS2.Scan.Sane
                         break;
 
                     case OptionParseState.ReadingQuant:
+                        Console.WriteLine("ReadingQuant");
                         if (c != ')')
                         {
                             builder.Append(c);
@@ -266,6 +277,7 @@ namespace NAPS2.Scan.Sane
                         }
                         if (!decimal.TryParse(builder.ToString(), out var quant))
                         {
+                            Console.WriteLine("return 5");
                             return;
                         }
                         builder.Clear();
@@ -275,6 +287,7 @@ namespace NAPS2.Scan.Sane
                         break;
 
                     case OptionParseState.LookingForDefaultValue:
+                        Console.WriteLine("LookingForDefaultValue");
                         if (c == ' ')
                         {
                             i += 1;
@@ -287,6 +300,7 @@ namespace NAPS2.Scan.Sane
                         }
                         if (c != '[')
                         {
+                            Console.WriteLine("return 6");
                             return;
                         }
                         i += 1;
@@ -294,6 +308,7 @@ namespace NAPS2.Scan.Sane
                         break;
 
                     case OptionParseState.ReadingDefaultValue:
+                        Console.WriteLine("ReadingDefaultValue");
                         if (c != ']')
                         {
                             builder.Append(c);
@@ -321,6 +336,7 @@ namespace NAPS2.Scan.Sane
                         {
                             if (!decimal.TryParse(current, out var currentNumeric))
                             {
+                                Console.WriteLine("return 7");
                                 return;
                             }
                             option.CurrentNumericValue = currentNumeric;
@@ -335,11 +351,20 @@ namespace NAPS2.Scan.Sane
                         break;
 
                     case OptionParseState.Idle:
+                        Console.WriteLine("Idle");
                         i += 1;
                         break;
                 }
             }
 
+            Console.WriteLine($@"Option Name: {option.Name}");
+            if (option.WordList != null) {
+                Console.WriteLine($@"Option WordList: " + string.Join(",", option.WordList));
+            }
+            if (option.StringList != null) {
+                Console.WriteLine($@"Option StringList: " + string.Join(",", option.StringList));
+            }
+            
             options.Add(option);
             lastOption = option;
             state = OptionParseState.ReadingDescription;
