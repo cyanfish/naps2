@@ -65,6 +65,7 @@ namespace NAPS2.WinForms
             this.groupCompat = new System.Windows.Forms.GroupBox();
             this.cmbCompat = new System.Windows.Forms.ComboBox();
             this.cbSinglePagePdf = new System.Windows.Forms.CheckBox();
+            this.cbShowFolder = new System.Windows.Forms.CheckBox();
             this.groupMetadata.SuspendLayout();
             this.groupProtection.SuspendLayout();
             this.groupCompat.SuspendLayout();
@@ -277,10 +278,18 @@ namespace NAPS2.WinForms
             this.cbSinglePagePdf.Name = "cbSinglePagePdf";
             this.cbSinglePagePdf.UseVisualStyleBackColor = true;
             // 
+            // cbShowFolder
+            // 
+            resources.ApplyResources(this.cbShowFolder, "cbShowFolder");
+            this.cbShowFolder.Name = "cbShowFolder";
+            this.cbShowFolder.UseVisualStyleBackColor = true;
+            this.cbShowFolder.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            // 
             // FPdfSettings
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.cbShowFolder);
             this.Controls.Add(this.cbSinglePagePdf);
             this.Controls.Add(this.groupCompat);
             this.Controls.Add(this.cbSkipSavePrompt);
@@ -340,5 +349,6 @@ namespace NAPS2.WinForms
         private System.Windows.Forms.GroupBox groupCompat;
         private System.Windows.Forms.ComboBox cmbCompat;
         private System.Windows.Forms.CheckBox cbSinglePagePdf;
+        private System.Windows.Forms.CheckBox cbShowFolder;
     }
 }
