@@ -271,7 +271,7 @@
   -->
   <Import Project="..\NAPS2\Setup\CommonTargets.targets" />
   <PropertyGroup>
-    <PostBuildEvent>
+    <PostBuildEvent Condition="'$(OS)' == 'Windows_NT'">
       call "$(MSBuildBinPath)\..\..\..\VC\Auxiliary\Build\vcvars32.bat" x86
       editbin /LARGEADDRESSAWARE "$(TargetPath)"</PostBuildEvent>
   </PropertyGroup>
