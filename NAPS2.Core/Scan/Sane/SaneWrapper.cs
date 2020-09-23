@@ -63,13 +63,11 @@ namespace NAPS2.Scan.Sane
                     var match = ProgressRegex.Match(args.Data);
                     if (match.Success)
                     {
-                        Console.WriteLine($@"Success output received: {args.Data}");
                         progressCallback?.Invoke((int)float.Parse(match.Groups[1].Value) * 10, maxProgress);
                     }
                     else
                     {
-                        Console.WriteLine($@"Error output received: {args.Data}");
-                        //errorOutput.Add(args.Data);
+                        errorOutput.Add(args.Data);
                     }
                 }
             };
