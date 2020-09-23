@@ -148,15 +148,17 @@ namespace NAPS2.Scan.Sane
                         break;
 
                     case OptionParseState.ReadingValues:
-                        if (char.IsLetterOrDigit(c) || c == '.' || c == '%')
+                        if (c != '|' && c != '[' && c != '\n')
                         {
                             builder.Append(c);
                             i += 1;
                             break;
                         }
-                        string optionValue = builder.ToString();
+                        string optionValue = builder.ToString().TrimEnd();
                         builder.Clear();
-                        if (c == ' ' || c == '\n')
+
+
+                        if (c == '|' || c == '[' || c == '\n')
                         {
                             foreach (var unitKvp in Units)
                             {
@@ -172,10 +174,6 @@ namespace NAPS2.Scan.Sane
                         {
                             option.Type = SaneValueType.Group;
                             i += 3;
-                        }
-                        else if (c != '|')
-                        {
-                            return;
                         }
 
                         if (optionValue == "auto")
@@ -219,7 +217,7 @@ namespace NAPS2.Scan.Sane
                             }
                         }
 
-                        if (c == ' ')
+                        if (c == '[')
                         {
                             if (option.ConstraintType == SaneConstraintType.WordList)
                             {
@@ -231,7 +229,11 @@ namespace NAPS2.Scan.Sane
                             }
                             state = option.ConstraintType == SaneConstraintType.Range ? OptionParseState.LookingForQuant : OptionParseState.LookingForDefaultValue;
                         }
-                        i += 1;
+
+                        if (c == '|')
+                        {
+                            i += 1;
+                        }
                         break;
 
                     case OptionParseState.LookingForQuant:
