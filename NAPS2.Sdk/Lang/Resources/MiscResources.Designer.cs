@@ -19,10 +19,10 @@ namespace NAPS2.Lang.Resources {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class MiscResources {
+    public class MiscResources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,7 +36,7 @@ namespace NAPS2.Lang.Resources {
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("NAPS2.Lang.Resources.MiscResources", typeof(MiscResources).Assembly);
@@ -51,7 +51,7 @@ namespace NAPS2.Lang.Resources {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -63,7 +63,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Acquiring data....
         /// </summary>
-        internal static string AcquiringData {
+        public static string AcquiringData {
             get {
                 return ResourceManager.GetString("AcquiringData", resourceCulture);
             }
@@ -72,7 +72,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Operation in Progress.
         /// </summary>
-        internal static string ActiveOperations {
+        public static string ActiveOperations {
             get {
                 return ResourceManager.GetString("ActiveOperations", resourceCulture);
             }
@@ -81,7 +81,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to All ({0}).
         /// </summary>
-        internal static string AllCount {
+        public static string AllCount {
             get {
                 return ResourceManager.GetString("AllCount", resourceCulture);
             }
@@ -90,7 +90,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to An error occurred when trying to authorize..
         /// </summary>
-        internal static string AuthError {
+        public static string AuthError {
             get {
                 return ResourceManager.GetString("AuthError", resourceCulture);
             }
@@ -99,7 +99,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Deskewing....
         /// </summary>
-        internal static string AutoDeskewing {
+        public static string AutoDeskewing {
             get {
                 return ResourceManager.GetString("AutoDeskewing", resourceCulture);
             }
@@ -108,7 +108,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Deskew Progress.
         /// </summary>
-        internal static string AutoDeskewProgress {
+        public static string AutoDeskewProgress {
             get {
                 return ResourceManager.GetString("AutoDeskewProgress", resourceCulture);
             }
@@ -117,7 +117,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to An error occurred when trying to auto save..
         /// </summary>
-        internal static string AutoSaveError {
+        public static string AutoSaveError {
             get {
                 return ResourceManager.GetString("AutoSaveError", resourceCulture);
             }
@@ -126,7 +126,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to An unknown error ocurred during the batch scan..
         /// </summary>
-        internal static string BatchError {
+        public static string BatchError {
             get {
                 return ResourceManager.GetString("BatchError", resourceCulture);
             }
@@ -135,7 +135,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Batch cancelled..
         /// </summary>
-        internal static string BatchStatusCancelled {
+        public static string BatchStatusCancelled {
             get {
                 return ResourceManager.GetString("BatchStatusCancelled", resourceCulture);
             }
@@ -144,7 +144,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Cancelling.....
         /// </summary>
-        internal static string BatchStatusCancelling {
+        public static string BatchStatusCancelling {
             get {
                 return ResourceManager.GetString("BatchStatusCancelling", resourceCulture);
             }
@@ -153,7 +153,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Batch completed successfully..
         /// </summary>
-        internal static string BatchStatusComplete {
+        public static string BatchStatusComplete {
             get {
                 return ResourceManager.GetString("BatchStatusComplete", resourceCulture);
             }
@@ -162,7 +162,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Batch scan stopped due to error..
         /// </summary>
-        internal static string BatchStatusError {
+        public static string BatchStatusError {
             get {
                 return ResourceManager.GetString("BatchStatusError", resourceCulture);
             }
@@ -171,7 +171,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Scanning page {0}....
         /// </summary>
-        internal static string BatchStatusPage {
+        public static string BatchStatusPage {
             get {
                 return ResourceManager.GetString("BatchStatusPage", resourceCulture);
             }
@@ -180,7 +180,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Saving batch results....
         /// </summary>
-        internal static string BatchStatusSaving {
+        public static string BatchStatusSaving {
             get {
                 return ResourceManager.GetString("BatchStatusSaving", resourceCulture);
             }
@@ -189,7 +189,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Scanning page {0} (scan {1})....
         /// </summary>
-        internal static string BatchStatusScanPage {
+        public static string BatchStatusScanPage {
             get {
                 return ResourceManager.GetString("BatchStatusScanPage", resourceCulture);
             }
@@ -198,7 +198,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Waiting for scan {0}....
         /// </summary>
-        internal static string BatchStatusWaitingForScan {
+        public static string BatchStatusWaitingForScan {
             get {
                 return ResourceManager.GetString("BatchStatusWaitingForScan", resourceCulture);
             }
@@ -207,7 +207,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Cancel.
         /// </summary>
-        internal static string Cancel {
+        public static string Cancel {
             get {
                 return ResourceManager.GetString("Cancel", resourceCulture);
             }
@@ -216,7 +216,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Cancel Batch.
         /// </summary>
-        internal static string CancelBatch {
+        public static string CancelBatch {
             get {
                 return ResourceManager.GetString("CancelBatch", resourceCulture);
             }
@@ -225,7 +225,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Checking....
         /// </summary>
-        internal static string CheckingForUpdates {
+        public static string CheckingForUpdates {
             get {
                 return ResourceManager.GetString("CheckingForUpdates", resourceCulture);
             }
@@ -234,7 +234,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Choose Profile.
         /// </summary>
-        internal static string ChooseProfile {
+        public static string ChooseProfile {
             get {
                 return ResourceManager.GetString("ChooseProfile", resourceCulture);
             }
@@ -243,7 +243,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Clear.
         /// </summary>
-        internal static string Clear {
+        public static string Clear {
             get {
                 return ResourceManager.GetString("Clear", resourceCulture);
             }
@@ -252,7 +252,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Close.
         /// </summary>
-        internal static string Close {
+        public static string Close {
             get {
                 return ResourceManager.GetString("Close", resourceCulture);
             }
@@ -261,7 +261,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Are you sure you want to cancel the batch scan?.
         /// </summary>
-        internal static string ConfirmCancelBatch {
+        public static string ConfirmCancelBatch {
             get {
                 return ResourceManager.GetString("ConfirmCancelBatch", resourceCulture);
             }
@@ -270,7 +270,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Are you sure you want to clear {0} item(s)?.
         /// </summary>
-        internal static string ConfirmClearItems {
+        public static string ConfirmClearItems {
             get {
                 return ResourceManager.GetString("ConfirmClearItems", resourceCulture);
             }
@@ -279,7 +279,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Are you sure you want to delete &quot;{0}&quot;?.
         /// </summary>
-        internal static string ConfirmDelete {
+        public static string ConfirmDelete {
             get {
                 return ResourceManager.GetString("ConfirmDelete", resourceCulture);
             }
@@ -288,7 +288,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Are you sure you want to delete {0} item(s)?.
         /// </summary>
-        internal static string ConfirmDeleteItems {
+        public static string ConfirmDeleteItems {
             get {
                 return ResourceManager.GetString("ConfirmDeleteItems", resourceCulture);
             }
@@ -297,7 +297,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Are you sure you want to delete {0} profiles?.
         /// </summary>
-        internal static string ConfirmDeleteMultipleProfiles {
+        public static string ConfirmDeleteMultipleProfiles {
             get {
                 return ResourceManager.GetString("ConfirmDeleteMultipleProfiles", resourceCulture);
             }
@@ -306,7 +306,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Are you sure you want to delete the profile {0}?.
         /// </summary>
-        internal static string ConfirmDeleteSingleProfile {
+        public static string ConfirmDeleteSingleProfile {
             get {
                 return ResourceManager.GetString("ConfirmDeleteSingleProfile", resourceCulture);
             }
@@ -315,7 +315,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to The file {0} already exists. Do you want to overwrite it?.
         /// </summary>
-        internal static string ConfirmOverwriteFile {
+        public static string ConfirmOverwriteFile {
             get {
                 return ResourceManager.GetString("ConfirmOverwriteFile", resourceCulture);
             }
@@ -324,7 +324,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Are you sure you want undo your changes to {0} image(s)?.
         /// </summary>
-        internal static string ConfirmResetImages {
+        public static string ConfirmResetImages {
             get {
                 return ResourceManager.GetString("ConfirmResetImages", resourceCulture);
             }
@@ -333,7 +333,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Copying....
         /// </summary>
-        internal static string Copying {
+        public static string Copying {
             get {
                 return ResourceManager.GetString("Copying", resourceCulture);
             }
@@ -342,7 +342,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Copy Progress.
         /// </summary>
-        internal static string CopyProgress {
+        public static string CopyProgress {
             get {
                 return ResourceManager.GetString("CopyProgress", resourceCulture);
             }
@@ -351,7 +351,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Custom ({0}x{1} {2}).
         /// </summary>
-        internal static string CustomPageSizeFormat {
+        public static string CustomPageSizeFormat {
             get {
                 return ResourceManager.GetString("CustomPageSizeFormat", resourceCulture);
             }
@@ -360,7 +360,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Delete.
         /// </summary>
-        internal static string Delete {
+        public static string Delete {
             get {
                 return ResourceManager.GetString("Delete", resourceCulture);
             }
@@ -369,7 +369,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to The selected scanner is busy..
         /// </summary>
-        internal static string DeviceBusy {
+        public static string DeviceBusy {
             get {
                 return ResourceManager.GetString("DeviceBusy", resourceCulture);
             }
@@ -378,7 +378,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to The scanner&apos;s cover is open..
         /// </summary>
-        internal static string DeviceCoverOpen {
+        public static string DeviceCoverOpen {
             get {
                 return ResourceManager.GetString("DeviceCoverOpen", resourceCulture);
             }
@@ -387,7 +387,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to The selected scanner could not be found..
         /// </summary>
-        internal static string DeviceNotFound {
+        public static string DeviceNotFound {
             get {
                 return ResourceManager.GetString("DeviceNotFound", resourceCulture);
             }
@@ -396,7 +396,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to The selected scanner is offline..
         /// </summary>
-        internal static string DeviceOffline {
+        public static string DeviceOffline {
             get {
                 return ResourceManager.GetString("DeviceOffline", resourceCulture);
             }
@@ -405,7 +405,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to The scanner has a paper jam..
         /// </summary>
-        internal static string DevicePaperJam {
+        public static string DevicePaperJam {
             get {
                 return ResourceManager.GetString("DevicePaperJam", resourceCulture);
             }
@@ -414,7 +414,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to The scanner is warming up..
         /// </summary>
-        internal static string DeviceWarmingUp {
+        public static string DeviceWarmingUp {
             get {
                 return ResourceManager.GetString("DeviceWarmingUp", resourceCulture);
             }
@@ -423,7 +423,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Donate.
         /// </summary>
-        internal static string Donate {
+        public static string Donate {
             get {
                 return ResourceManager.GetString("Donate", resourceCulture);
             }
@@ -432,7 +432,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to NAPS2 is completely free. Consider making a donation..
         /// </summary>
-        internal static string DonatePrompt {
+        public static string DonatePrompt {
             get {
                 return ResourceManager.GetString("DonatePrompt", resourceCulture);
             }
@@ -441,7 +441,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to You don&apos;t have permission to save files at this location..
         /// </summary>
-        internal static string DontHavePermission {
+        public static string DontHavePermission {
             get {
                 return ResourceManager.GetString("DontHavePermission", resourceCulture);
             }
@@ -450,7 +450,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Download Error.
         /// </summary>
-        internal static string DownloadError {
+        public static string DownloadError {
             get {
                 return ResourceManager.GetString("DownloadError", resourceCulture);
             }
@@ -459,7 +459,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Download Needed.
         /// </summary>
-        internal static string DownloadNeeded {
+        public static string DownloadNeeded {
             get {
                 return ResourceManager.GetString("DownloadNeeded", resourceCulture);
             }
@@ -468,7 +468,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to The selected driver is not supported on this system..
         /// </summary>
-        internal static string DriverNotSupported {
+        public static string DriverNotSupported {
             get {
                 return ResourceManager.GetString("DriverNotSupported", resourceCulture);
             }
@@ -477,7 +477,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to An error occurred while trying to send an email..
         /// </summary>
-        internal static string EmailError {
+        public static string EmailError {
             get {
                 return ResourceManager.GetString("EmailError", resourceCulture);
             }
@@ -486,7 +486,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Email PDF.
         /// </summary>
-        internal static string EmailPdf {
+        public static string EmailPdf {
             get {
                 return ResourceManager.GetString("EmailPdf", resourceCulture);
             }
@@ -495,7 +495,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Email PDF Progress.
         /// </summary>
-        internal static string EmailPdfProgress {
+        public static string EmailPdfProgress {
             get {
                 return ResourceManager.GetString("EmailPdfProgress", resourceCulture);
             }
@@ -504,7 +504,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Error.
         /// </summary>
-        internal static string Error {
+        public static string Error {
             get {
                 return ResourceManager.GetString("Error", resourceCulture);
             }
@@ -513,7 +513,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to An error occurred when trying to send the email..
         /// </summary>
-        internal static string ErrorEmailing {
+        public static string ErrorEmailing {
             get {
                 return ResourceManager.GetString("ErrorEmailing", resourceCulture);
             }
@@ -522,7 +522,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to An error occurred when trying to save the file..
         /// </summary>
-        internal static string ErrorSaving {
+        public static string ErrorSaving {
             get {
                 return ResourceManager.GetString("ErrorSaving", resourceCulture);
             }
@@ -531,7 +531,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Estimated download size: {0} MB.
         /// </summary>
-        internal static string EstimatedDownloadSize {
+        public static string EstimatedDownloadSize {
             get {
                 return ResourceManager.GetString("EstimatedDownloadSize", resourceCulture);
             }
@@ -540,7 +540,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to An operation is in progress. Are you sure you want to exit and cancel the operation?.
         /// </summary>
-        internal static string ExitWithActiveOperations {
+        public static string ExitWithActiveOperations {
             get {
                 return ResourceManager.GetString("ExitWithActiveOperations", resourceCulture);
             }
@@ -549,7 +549,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to You have unsaved changes. Are you sure you want to exit and discard those changes?.
         /// </summary>
-        internal static string ExitWithUnsavedChanges {
+        public static string ExitWithUnsavedChanges {
             get {
                 return ResourceManager.GetString("ExitWithUnsavedChanges", resourceCulture);
             }
@@ -558,7 +558,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to The file could not be overwritten because it is currently in use..
         /// </summary>
-        internal static string FileInUse {
+        public static string FileInUse {
             get {
                 return ResourceManager.GetString("FileInUse", resourceCulture);
             }
@@ -567,7 +567,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to One or more files could not be downloaded..
         /// </summary>
-        internal static string FilesCouldNotBeDownloaded {
+        public static string FilesCouldNotBeDownloaded {
             get {
                 return ResourceManager.GetString("FilesCouldNotBeDownloaded", resourceCulture);
             }
@@ -576,7 +576,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to {0} / {1} files.
         /// </summary>
-        internal static string FilesProgressFormat {
+        public static string FilesProgressFormat {
             get {
                 return ResourceManager.GetString("FilesProgressFormat", resourceCulture);
             }
@@ -585,7 +585,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to All Files.
         /// </summary>
-        internal static string FileTypeAllFiles {
+        public static string FileTypeAllFiles {
             get {
                 return ResourceManager.GetString("FileTypeAllFiles", resourceCulture);
             }
@@ -594,7 +594,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Bitmap Files (*.bmp).
         /// </summary>
-        internal static string FileTypeBmp {
+        public static string FileTypeBmp {
             get {
                 return ResourceManager.GetString("FileTypeBmp", resourceCulture);
             }
@@ -603,7 +603,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Enhanced Windows MetaFile (*.emf).
         /// </summary>
-        internal static string FileTypeEmf {
+        public static string FileTypeEmf {
             get {
                 return ResourceManager.GetString("FileTypeEmf", resourceCulture);
             }
@@ -612,7 +612,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Exchangeable Image File (*.exif).
         /// </summary>
-        internal static string FileTypeExif {
+        public static string FileTypeExif {
             get {
                 return ResourceManager.GetString("FileTypeExif", resourceCulture);
             }
@@ -621,7 +621,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to GIF File (*.gif).
         /// </summary>
-        internal static string FileTypeGif {
+        public static string FileTypeGif {
             get {
                 return ResourceManager.GetString("FileTypeGif", resourceCulture);
             }
@@ -630,7 +630,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Image Files.
         /// </summary>
-        internal static string FileTypeImageFiles {
+        public static string FileTypeImageFiles {
             get {
                 return ResourceManager.GetString("FileTypeImageFiles", resourceCulture);
             }
@@ -639,7 +639,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to JPEG File (*.jpg, *.jpeg).
         /// </summary>
-        internal static string FileTypeJpeg {
+        public static string FileTypeJpeg {
             get {
                 return ResourceManager.GetString("FileTypeJpeg", resourceCulture);
             }
@@ -648,7 +648,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to PDF Document (*.pdf).
         /// </summary>
-        internal static string FileTypePdf {
+        public static string FileTypePdf {
             get {
                 return ResourceManager.GetString("FileTypePdf", resourceCulture);
             }
@@ -657,7 +657,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to PNG File (*.png).
         /// </summary>
-        internal static string FileTypePng {
+        public static string FileTypePng {
             get {
                 return ResourceManager.GetString("FileTypePng", resourceCulture);
             }
@@ -666,7 +666,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to TIFF File (*.tiff, *.tif).
         /// </summary>
-        internal static string FileTypeTiff {
+        public static string FileTypeTiff {
             get {
                 return ResourceManager.GetString("FileTypeTiff", resourceCulture);
             }
@@ -675,7 +675,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Image saved..
         /// </summary>
-        internal static string ImageSaved {
+        public static string ImageSaved {
             get {
                 return ResourceManager.GetString("ImageSaved", resourceCulture);
             }
@@ -684,7 +684,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to {0} images saved..
         /// </summary>
-        internal static string ImagesSaved {
+        public static string ImagesSaved {
             get {
                 return ResourceManager.GetString("ImagesSaved", resourceCulture);
             }
@@ -693,7 +693,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to The file &apos;{0}&apos; could not be imported..
         /// </summary>
-        internal static string ImportErrorCouldNot {
+        public static string ImportErrorCouldNot {
             get {
                 return ResourceManager.GetString("ImportErrorCouldNot", resourceCulture);
             }
@@ -702,7 +702,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to The file &apos;{0}&apos; could not be imported. Only PDF files generated by NAPS2 can be imported..
         /// </summary>
-        internal static string ImportErrorNAPS2Pdf {
+        public static string ImportErrorNAPS2Pdf {
             get {
                 return ResourceManager.GetString("ImportErrorNAPS2Pdf", resourceCulture);
             }
@@ -711,7 +711,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Importing....
         /// </summary>
-        internal static string Importing {
+        public static string Importing {
             get {
                 return ResourceManager.GetString("Importing", resourceCulture);
             }
@@ -720,7 +720,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Importing {0}....
         /// </summary>
-        internal static string ImportingFormat {
+        public static string ImportingFormat {
             get {
                 return ResourceManager.GetString("ImportingFormat", resourceCulture);
             }
@@ -729,7 +729,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Import Progress.
         /// </summary>
-        internal static string ImportProgress {
+        public static string ImportProgress {
             get {
                 return ResourceManager.GetString("ImportProgress", resourceCulture);
             }
@@ -738,7 +738,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Install {0}.
         /// </summary>
-        internal static string Install {
+        public static string Install {
             get {
                 return ResourceManager.GetString("Install", resourceCulture);
             }
@@ -747,7 +747,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Installation Complete.
         /// </summary>
-        internal static string InstallComplete {
+        public static string InstallComplete {
             get {
                 return ResourceManager.GetString("InstallComplete", resourceCulture);
             }
@@ -756,7 +756,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Installation complete. Do you want to restart NAPS2 now?.
         /// </summary>
-        internal static string InstallCompletePromptRestart {
+        public static string InstallCompletePromptRestart {
             get {
                 return ResourceManager.GetString("InstallCompletePromptRestart", resourceCulture);
             }
@@ -765,7 +765,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Installation failed..
         /// </summary>
-        internal static string InstallFailed {
+        public static string InstallFailed {
             get {
                 return ResourceManager.GetString("InstallFailed", resourceCulture);
             }
@@ -774,7 +774,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Installation Failed.
         /// </summary>
-        internal static string InstallFailedTitle {
+        public static string InstallFailedTitle {
             get {
                 return ResourceManager.GetString("InstallFailedTitle", resourceCulture);
             }
@@ -783,7 +783,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Listening on port {0}.
         /// </summary>
-        internal static string ListeningOnPort {
+        public static string ListeningOnPort {
             get {
                 return ResourceManager.GetString("ListeningOnPort", resourceCulture);
             }
@@ -792,7 +792,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to {0} ({1}x{2} {3}).
         /// </summary>
-        internal static string NamedPageSizeFormat {
+        public static string NamedPageSizeFormat {
             get {
                 return ResourceManager.GetString("NamedPageSizeFormat", resourceCulture);
             }
@@ -801,7 +801,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Name missing..
         /// </summary>
-        internal static string NameMissing {
+        public static string NameMissing {
             get {
                 return ResourceManager.GetString("NameMissing", resourceCulture);
             }
@@ -810,7 +810,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to NAPS2.
         /// </summary>
-        internal static string NAPS2 {
+        public static string NAPS2 {
             get {
                 return ResourceManager.GetString("NAPS2", resourceCulture);
             }
@@ -819,7 +819,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to NAPS2 Server.
         /// </summary>
-        internal static string Naps2Server {
+        public static string Naps2Server {
             get {
                 return ResourceManager.GetString("Naps2Server", resourceCulture);
             }
@@ -828,7 +828,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to No device selected..
         /// </summary>
-        internal static string NoDeviceSelected {
+        public static string NoDeviceSelected {
             get {
                 return ResourceManager.GetString("NoDeviceSelected", resourceCulture);
             }
@@ -837,7 +837,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to No scanning device was found..
         /// </summary>
-        internal static string NoDevicesFound {
+        public static string NoDevicesFound {
             get {
                 return ResourceManager.GetString("NoDevicesFound", resourceCulture);
             }
@@ -846,7 +846,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to The selected scanner does not support using duplex. If your scanner is supposed to support duplex, try using a different driver..
         /// </summary>
-        internal static string NoDuplexSupport {
+        public static string NoDuplexSupport {
             get {
                 return ResourceManager.GetString("NoDuplexSupport", resourceCulture);
             }
@@ -855,7 +855,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to The selected scanner does not support using a feeder. If your scanner does have a feeder, try using a different driver..
         /// </summary>
-        internal static string NoFeederSupport {
+        public static string NoFeederSupport {
             get {
                 return ResourceManager.GetString("NoFeederSupport", resourceCulture);
             }
@@ -864,7 +864,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to No pages are in the feeder..
         /// </summary>
-        internal static string NoPagesInFeeder {
+        public static string NoPagesInFeeder {
             get {
                 return ResourceManager.GetString("NoPagesInFeeder", resourceCulture);
             }
@@ -873,7 +873,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to No updates available..
         /// </summary>
-        internal static string NoUpdates {
+        public static string NoUpdates {
             get {
                 return ResourceManager.GetString("NoUpdates", resourceCulture);
             }
@@ -882,7 +882,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to OCR Progress.
         /// </summary>
-        internal static string OcrProgress {
+        public static string OcrProgress {
             get {
                 return ResourceManager.GetString("OcrProgress", resourceCulture);
             }
@@ -891,7 +891,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to An update to OCR is available..
         /// </summary>
-        internal static string OcrUpdateAvailable {
+        public static string OcrUpdateAvailable {
             get {
                 return ResourceManager.GetString("OcrUpdateAvailable", resourceCulture);
             }
@@ -900,7 +900,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to of {0}.
         /// </summary>
-        internal static string OfN {
+        public static string OfN {
             get {
                 return ResourceManager.GetString("OfN", resourceCulture);
             }
@@ -909,7 +909,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Overwrite File.
         /// </summary>
-        internal static string OverwriteFile {
+        public static string OverwriteFile {
             get {
                 return ResourceManager.GetString("OverwriteFile", resourceCulture);
             }
@@ -918,7 +918,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to An additional component is needed to import this PDF file. Would you like to download it now?.
         /// </summary>
-        internal static string PdfImportComponentNeeded {
+        public static string PdfImportComponentNeeded {
             get {
                 return ResourceManager.GetString("PdfImportComponentNeeded", resourceCulture);
             }
@@ -927,7 +927,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to You do not have permission to copy content from the file &apos;{0}&apos;..
         /// </summary>
-        internal static string PdfNoPermissionToExtractContent {
+        public static string PdfNoPermissionToExtractContent {
             get {
                 return ResourceManager.GetString("PdfNoPermissionToExtractContent", resourceCulture);
             }
@@ -936,7 +936,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to PDF saved..
         /// </summary>
-        internal static string PdfSaved {
+        public static string PdfSaved {
             get {
                 return ResourceManager.GetString("PdfSaved", resourceCulture);
             }
@@ -945,7 +945,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to {0} of {1}.
         /// </summary>
-        internal static string PdfStatus {
+        public static string PdfStatus {
             get {
                 return ResourceManager.GetString("PdfStatus", resourceCulture);
             }
@@ -954,7 +954,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Print.
         /// </summary>
-        internal static string Print {
+        public static string Print {
             get {
                 return ResourceManager.GetString("Print", resourceCulture);
             }
@@ -963,7 +963,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to {0} / {1}.
         /// </summary>
-        internal static string ProgressFormat {
+        public static string ProgressFormat {
             get {
                 return ResourceManager.GetString("ProgressFormat", resourceCulture);
             }
@@ -972,7 +972,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Recovering....
         /// </summary>
-        internal static string Recovering {
+        public static string Recovering {
             get {
                 return ResourceManager.GetString("Recovering", resourceCulture);
             }
@@ -981,7 +981,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Recovery Progress.
         /// </summary>
-        internal static string RecoveryProgress {
+        public static string RecoveryProgress {
             get {
                 return ResourceManager.GetString("RecoveryProgress", resourceCulture);
             }
@@ -990,7 +990,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Reset Image.
         /// </summary>
-        internal static string ResetImage {
+        public static string ResetImage {
             get {
                 return ResourceManager.GetString("ResetImage", resourceCulture);
             }
@@ -999,7 +999,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Running OCR....
         /// </summary>
-        internal static string RunningOcr {
+        public static string RunningOcr {
             get {
                 return ResourceManager.GetString("RunningOcr", resourceCulture);
             }
@@ -1008,7 +1008,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to The SANE driver is not available. Make sure to install the required packages:.
         /// </summary>
-        internal static string SaneNotAvailable {
+        public static string SaneNotAvailable {
             get {
                 return ResourceManager.GetString("SaneNotAvailable", resourceCulture);
             }
@@ -1017,7 +1017,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Save Images.
         /// </summary>
-        internal static string SaveImages {
+        public static string SaveImages {
             get {
                 return ResourceManager.GetString("SaveImages", resourceCulture);
             }
@@ -1026,7 +1026,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Save Images Progress.
         /// </summary>
-        internal static string SaveImagesProgress {
+        public static string SaveImagesProgress {
             get {
                 return ResourceManager.GetString("SaveImagesProgress", resourceCulture);
             }
@@ -1035,7 +1035,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Save PDF.
         /// </summary>
-        internal static string SavePdf {
+        public static string SavePdf {
             get {
                 return ResourceManager.GetString("SavePdf", resourceCulture);
             }
@@ -1044,7 +1044,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Save PDF Progress.
         /// </summary>
-        internal static string SavePdfProgress {
+        public static string SavePdfProgress {
             get {
                 return ResourceManager.GetString("SavePdfProgress", resourceCulture);
             }
@@ -1053,7 +1053,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Saving {0}....
         /// </summary>
-        internal static string SavingFormat {
+        public static string SavingFormat {
             get {
                 return ResourceManager.GetString("SavingFormat", resourceCulture);
             }
@@ -1062,7 +1062,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Scan.
         /// </summary>
-        internal static string Scan {
+        public static string Scan {
             get {
                 return ResourceManager.GetString("Scan", resourceCulture);
             }
@@ -1071,7 +1071,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Scanned Image.
         /// </summary>
-        internal static string ScannedImage {
+        public static string ScannedImage {
             get {
                 return ResourceManager.GetString("ScannedImage", resourceCulture);
             }
@@ -1080,7 +1080,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Scanning page {0}.
         /// </summary>
-        internal static string ScanPageProgress {
+        public static string ScanPageProgress {
             get {
                 return ResourceManager.GetString("ScanPageProgress", resourceCulture);
             }
@@ -1089,7 +1089,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Scanning page {0}....
         /// </summary>
-        internal static string ScanProgressPage {
+        public static string ScanProgressPage {
             get {
                 return ResourceManager.GetString("ScanProgressPage", resourceCulture);
             }
@@ -1098,7 +1098,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Selected ({0}).
         /// </summary>
-        internal static string SelectedCount {
+        public static string SelectedCount {
             get {
                 return ResourceManager.GetString("SelectedCount", resourceCulture);
             }
@@ -1107,7 +1107,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Select a profile before clicking Scan..
         /// </summary>
-        internal static string SelectProfileBeforeScan {
+        public static string SelectProfileBeforeScan {
             get {
                 return ResourceManager.GetString("SelectProfileBeforeScan", resourceCulture);
             }
@@ -1116,7 +1116,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Server started.
         /// </summary>
-        internal static string ServerStarted {
+        public static string ServerStarted {
             get {
                 return ResourceManager.GetString("ServerStarted", resourceCulture);
             }
@@ -1125,7 +1125,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to {0} / {1} MB.
         /// </summary>
-        internal static string SizeProgress {
+        public static string SizeProgress {
             get {
                 return ResourceManager.GetString("SizeProgress", resourceCulture);
             }
@@ -1134,7 +1134,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to The OCR engine is not available. Make sure to install the required package:.
         /// </summary>
-        internal static string TesseractNotAvailable {
+        public static string TesseractNotAvailable {
             get {
                 return ResourceManager.GetString("TesseractNotAvailable", resourceCulture);
             }
@@ -1143,7 +1143,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to An error occurred with the scanning driver..
         /// </summary>
-        internal static string UnknownDriverError {
+        public static string UnknownDriverError {
             get {
                 return ResourceManager.GetString("UnknownDriverError", resourceCulture);
             }
@@ -1152,7 +1152,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Unsaved Changes.
         /// </summary>
-        internal static string UnsavedChanges {
+        public static string UnsavedChanges {
             get {
                 return ResourceManager.GetString("UnsavedChanges", resourceCulture);
             }
@@ -1161,16 +1161,25 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to An update is available..
         /// </summary>
-        internal static string UpdateAvailable {
+        public static string UpdateAvailable {
             get {
                 return ResourceManager.GetString("UpdateAvailable", resourceCulture);
             }
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Update checking is disabled..
+        /// </summary>
+        public static string UpdateCheckDisabled {
+            get {
+                return ResourceManager.GetString("UpdateCheckDisabled", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to An error occured when trying to install the update..
         /// </summary>
-        internal static string UpdateError {
+        public static string UpdateError {
             get {
                 return ResourceManager.GetString("UpdateError", resourceCulture);
             }
@@ -1179,7 +1188,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Update Progress.
         /// </summary>
-        internal static string UpdateProgress {
+        public static string UpdateProgress {
             get {
                 return ResourceManager.GetString("UpdateProgress", resourceCulture);
             }
@@ -1188,7 +1197,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Updating....
         /// </summary>
-        internal static string Updating {
+        public static string Updating {
             get {
                 return ResourceManager.GetString("Updating", resourceCulture);
             }
@@ -1197,7 +1206,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Uploading email....
         /// </summary>
-        internal static string UploadingEmail {
+        public static string UploadingEmail {
             get {
                 return ResourceManager.GetString("UploadingEmail", resourceCulture);
             }
@@ -1206,7 +1215,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Version {0}.
         /// </summary>
-        internal static string Version {
+        public static string Version {
             get {
                 return ResourceManager.GetString("Version", resourceCulture);
             }

@@ -13,6 +13,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using NAPS2.Config;
+using NAPS2.EtoForms.Ui;
 using NAPS2.ImportExport;
 using NAPS2.Lang;
 using NAPS2.Lang.Resources;
@@ -301,6 +302,9 @@ namespace NAPS2.WinForms
 
         private async void FDesktop_Shown(object sender, EventArgs e)
         {
+            // TODO: Start the Eto application in the entry point once all forms (or at least FDesktop?) are migrated
+            new Eto.Forms.Application(Eto.Platforms.WinForms).Attach();
+            
             UpdateToolbar();
 
             // Receive messages from other processes
@@ -865,7 +869,7 @@ namespace NAPS2.WinForms
 
         private void OpenAbout()
         {
-            FormFactory.Create<FAbout>().ShowDialog();
+            FormFactory.Create<AboutForm>().Show();
         }
 
         private void OpenSettings()

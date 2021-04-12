@@ -3,6 +3,7 @@ using System.Globalization;
 using System.Linq;
 using System.Windows.Forms;
 using NAPS2.Config;
+using NAPS2.EtoForms;
 using NAPS2.Remoting.Worker;
 using NAPS2.Scan;
 using NAPS2.Util;
@@ -10,7 +11,7 @@ using NAPS2.Util;
 namespace NAPS2.WinForms
 {
     // TODO: Remove ConfigScopes.User dependency from reusable forms
-    public class FormBase : Form, IInvoker
+    public class FormBase : Form, IInvoker, IFormBase
     {
         private bool _loaded;
         private FormState _formState;

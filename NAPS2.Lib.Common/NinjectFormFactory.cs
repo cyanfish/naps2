@@ -1,4 +1,5 @@
 ﻿using NAPS2.Config;
+using NAPS2.EtoForms;
 using NAPS2.WinForms;
 using Ninject;
 
@@ -13,7 +14,7 @@ namespace NAPS2
             _kernel = kernel;
         }
 
-        public T Create<T>() where T : FormBase
+        public T Create<T>() where T : IFormBase
         {
             var form = _kernel.Get<T>();
             form.FormFactory = _kernel.Get<IFormFactory>();
