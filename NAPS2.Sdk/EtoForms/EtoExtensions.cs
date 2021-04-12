@@ -28,11 +28,6 @@ namespace NAPS2.EtoForms
         public static void Add(this DynamicLayout layout, ControlWithLayoutAttributes control) =>
             control.AddTo(layout);
 
-        public static LinkButton AsLink(this string linkText, Action? onClick = null) =>
-            EtoHelpers.Link(linkText, onClick);
-
-        public static Label NoWrap(this string labelText) => EtoHelpers.NoWrap(labelText);
-
         public static Icon ToEtoIcon(this System.Drawing.Bitmap bitmap) => new Icon(1f, bitmap.ToEto());
 
         public static ControlWithLayoutAttributes Center(this Control control) =>
@@ -52,5 +47,21 @@ namespace NAPS2.EtoForms
             new ControlWithLayoutAttributes(control, yScale: true);
         public static ControlWithLayoutAttributes AutoSize(this ControlWithLayoutAttributes control) =>
             new ControlWithLayoutAttributes(control, autoSize: true);
+        
+        public static LayoutColumn Padding(this LayoutColumn column, Padding padding) =>
+            new LayoutColumn(column, padding: padding);
+        public static LayoutColumn Spacing(this LayoutColumn column, Size spacing) =>
+            new LayoutColumn(column, spacing: spacing);
+        public static LayoutColumn Spacing(this LayoutColumn column, int xSpacing, int ySpacing) =>
+            new LayoutColumn(column, spacing: new Size(xSpacing, ySpacing));
+        public static LayoutColumn XScale(this LayoutColumn column) =>
+            new LayoutColumn(column, xScale: true);
+        public static LayoutColumn YScale(this LayoutColumn column) =>
+            new LayoutColumn(column, yScale: true);
+        
+        public static LayoutRow YScale(this LayoutRow row) =>
+            new LayoutRow(row, yScale: true);
+        public static LayoutRow Aligned(this LayoutRow row) =>
+            new LayoutRow(row, aligned: true);
     }
 }

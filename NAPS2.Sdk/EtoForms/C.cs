@@ -5,7 +5,7 @@ using Eto.Forms;
 
 namespace NAPS2.EtoForms
 {
-    public static class EtoHelpers
+    public static class C
     {
         public static Label NoWrap(string text)
         {
@@ -16,6 +16,15 @@ namespace NAPS2.EtoForms
         {
             onClick ??= () => Process.Start(text);
             return new LinkButton
+            {
+                Text = text,
+                Command = new ActionCommand(onClick)
+            };
+        }
+
+        public static Button Button(string text, Action onClick)
+        {
+            return new Button
             {
                 Text = text,
                 Command = new ActionCommand(onClick)
@@ -37,5 +46,10 @@ namespace NAPS2.EtoForms
 
             public event EventHandler CanExecuteChanged;
         }
+
+        public static ControlWithLayoutAttributes ZeroSpace() =>
+            new ControlWithLayoutAttributes(null);
+
+        public static LayoutElement TextSpace() => NoWrap(" ");
     }
 }

@@ -1,7 +1,6 @@
 using System;
 using System.IO;
 using System.Reflection;
-using Eto.Drawing;
 using Eto.Forms;
 using Eto.WinForms;
 using NAPS2.Config;
@@ -43,30 +42,32 @@ namespace NAPS2.EtoForms.Ui
         {
             Title = UiStrings.AboutFormTitle;
             Icon = Icons.information_small.ToEtoIcon();
-            
-            // TODO: Use a helper to create a layout with some default padding
-            var layout = new DynamicLayout();
-            layout.BeginHorizontal();
-            layout.AddColumn(new ImageView { Image = Icons.scanner_large.ToEto() });
+
+            // TODO: Default padding
             // TODO: Tune the padding and spacing for aesthetics
-            layout.BeginVertical(new Padding(10), new Size(0, 2));
-            // TODO: Re-add donate button and OK button
-            layout.AddAll(
-                AssemblyProduct.NoWrap(),
-                string.Format(MiscResources.Version, AssemblyVersion).NoWrap(),
-                NAPS2_HOMEPAGE.AsLink(),
-                " ",
-                _checkForUpdates,
-                _updatePanel,
-                " ",
-                UiStrings.Copyright.NoWrap(),
-                " ",
-                UiStrings.IconsFrom.NoWrap(),
-                ICONS_HOMEPAGE.AsLink());
-            layout.EndVertical();
-            layout.EndHorizontal();
-            
-            Content = layout;
+            // TODO: Re-add donate button
+            Content = L.Row(
+                L.Column(new ImageView { Image = Icons.scanner_large.ToEto() }),
+                L.Column(
+                    C.NoWrap(AssemblyProduct),
+                    C.NoWrap(string.Format(MiscResources.Version, AssemblyVersion)),
+                    C.Link(NAPS2_HOMEPAGE),
+                    C.TextSpace(),
+                    _checkForUpdates,
+                    _updatePanel,
+                    C.TextSpace(),
+                    C.NoWrap(UiStrings.Copyright),
+                    C.TextSpace(),
+                    L.Row(
+                        L.Column(
+                            C.NoWrap(UiStrings.IconsFrom),
+                            C.Link(ICONS_HOMEPAGE)
+                        ).XScale(),
+                        C.Button(UiStrings.OK, Close)
+                    ),
+                    C.ZeroSpace()
+                )
+            );
         }
         
         private void DoUpdateCheck()
@@ -103,17 +104,17 @@ namespace NAPS2.EtoForms.Ui
         {
             if (_checkForUpdates.Checked != true)
             {
-                return EtoHelpers.NoWrap(MiscResources.UpdateCheckDisabled);
+                return C.NoWrap(MiscResources.UpdateCheckDisabled);
             }
             if (!_hasCheckedForUpdates)
             {
-                return EtoHelpers.NoWrap(MiscResources.CheckingForUpdates);
+                return C.NoWrap(MiscResources.CheckingForUpdates);
             }
             if (_update == null)
             {
-                return EtoHelpers.NoWrap(MiscResources.NoUpdates);
+                return C.NoWrap(MiscResources.NoUpdates);
             }
-            return EtoHelpers.Link(string.Format(MiscResources.Install, _update.Name),
+            return C.Link(string.Format(MiscResources.Install, _update.Name),
                 InstallLinkClicked);
         }
 

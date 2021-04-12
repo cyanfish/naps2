@@ -2,9 +2,9 @@ using Eto.Forms;
 
 namespace NAPS2.EtoForms
 {
-    public class ControlWithLayoutAttributes
+    public class ControlWithLayoutAttributes : LayoutElement
     {
-        public ControlWithLayoutAttributes(Control control)
+        public ControlWithLayoutAttributes(Control? control)
         {
             Control = control;
         }
@@ -18,23 +18,16 @@ namespace NAPS2.EtoForms
             AutoSize = autoSize ?? control.AutoSize;
         }
         
-        public static implicit operator ControlWithLayoutAttributes(Control control)
-        {
-            return new ControlWithLayoutAttributes(control);
-        }
-        
-        public static implicit operator ControlWithLayoutAttributes(string label)
-        {
-            return new ControlWithLayoutAttributes(new Label { Text = label });
-        }
-        
-        public Control Control { get; }
-        public bool Center { get; }
-        public bool XScale { get; }
-        public bool YScale { get; }
-        public bool AutoSize { get; }
+        public static implicit operator ControlWithLayoutAttributes(Control control) =>
+            new ControlWithLayoutAttributes(control);
 
-        public void AddTo(DynamicLayout layout)
+        private Control? Control { get; }
+        private bool Center { get; }
+        private bool XScale { get; }
+        private bool YScale { get; }
+        private bool AutoSize { get; }
+
+        public override void AddTo(DynamicLayout layout)
         {
             if (AutoSize)
             {
