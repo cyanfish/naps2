@@ -132,4 +132,7 @@
   <data name="OK" xml:space="preserve">
     <value>OK</value>
   </data>
+  <data name="Donate" xml:space="preserve">
+    <value>Donate</value>
+  </data>
 </root>

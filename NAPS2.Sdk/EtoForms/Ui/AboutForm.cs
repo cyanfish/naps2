@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 using System.IO;
 using System.Reflection;
 using Eto.Forms;
@@ -15,21 +16,30 @@ namespace NAPS2.EtoForms.Ui
     {
         private const string NAPS2_HOMEPAGE = "https://www.naps2.com";  
         private const string ICONS_HOMEPAGE = "https://www.fatcow.com/free-icons";
+        private const string DONATE_URL = "https://www.naps2.com/donate";
 
         private readonly UpdateChecker _updateChecker;
         private readonly ConfigScopes _configScopes;
         
+        private readonly Control _donateButton;
         private readonly CheckBox _checkForUpdates;
         private readonly Panel _updatePanel;
         
         private bool _hasCheckedForUpdates;
         private UpdateInfo? _update;
-    
+
         public AboutForm(UpdateChecker updateChecker, ConfigScopes configScopes)
         {
             _updateChecker = updateChecker;
             _configScopes = configScopes;
             
+            Title = UiStrings.AboutFormTitle;
+            Icon = Icons.information_small.ToEtoIcon();
+            
+            _donateButton = C.AccessibleImageButton(
+                Icons.btn_donate_LG.ToEto(),
+                UiStrings.Donate,
+                () => Process.Start(DONATE_URL));
             _checkForUpdates = new CheckBox { Text = UiStrings.CheckForUpdates };
             _checkForUpdates.CheckedChanged += CheckForUpdatesChanged;
             _updatePanel = new Panel();
@@ -40,18 +50,20 @@ namespace NAPS2.EtoForms.Ui
 
         private void BuildLayout()
         {
-            Title = UiStrings.AboutFormTitle;
-            Icon = Icons.information_small.ToEtoIcon();
-
             // TODO: Default padding
             // TODO: Tune the padding and spacing for aesthetics
-            // TODO: Re-add donate button
             Content = L.Row(
                 L.Column(new ImageView { Image = Icons.scanner_large.ToEto() }),
                 L.Column(
                     C.NoWrap(AssemblyProduct),
-                    C.NoWrap(string.Format(MiscResources.Version, AssemblyVersion)),
-                    C.Link(NAPS2_HOMEPAGE),
+                    L.Row(
+                        L.Column(
+                            C.NoWrap(string.Format(MiscResources.Version, AssemblyVersion)),
+                            C.Link(NAPS2_HOMEPAGE)
+                        ),
+                        _donateButton.Center(),
+                        C.ZeroSpace()
+                    ),
                     C.TextSpace(),
                     _checkForUpdates,
                     _updatePanel,
