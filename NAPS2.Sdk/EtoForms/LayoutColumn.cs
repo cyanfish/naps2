@@ -21,10 +21,10 @@ namespace NAPS2.EtoForms
             YScale = yScale ?? original.YScale;
         }
 
-        private Padding Padding { get; }
-        private Size Spacing { get; }
-        private bool XScale { get; }
-        private bool YScale { get; }
+        private Padding? Padding { get; }
+        private Size? Spacing { get; }
+        private bool? XScale { get; }
+        private bool? YScale { get; }
 
         public override void AddTo(DynamicLayout layout)
         {

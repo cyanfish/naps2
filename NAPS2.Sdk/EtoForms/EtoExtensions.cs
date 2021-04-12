@@ -38,6 +38,14 @@ namespace NAPS2.EtoForms
             new ControlWithLayoutAttributes(control, yScale: true);
         public static ControlWithLayoutAttributes AutoSize(this Control control) =>
             new ControlWithLayoutAttributes(control, autoSize: true);
+        public static ControlWithLayoutAttributes Padding(this Control control, Padding padding) =>
+            new ControlWithLayoutAttributes(control, padding: padding);
+        public static ControlWithLayoutAttributes Padding(this Control control, int all) =>
+            new ControlWithLayoutAttributes(control, padding: new Padding(all));
+        public static ControlWithLayoutAttributes Padding(this Control control, int left = 0, int top = 0, int right = 0, int bottom = 0) =>
+            new ControlWithLayoutAttributes(control, padding: new Padding(left, top, right, bottom));
+        public static ControlWithLayoutAttributes Spacing(this Control control, Size spacing) =>
+            new ControlWithLayoutAttributes(control, spacing: spacing);
         
         public static ControlWithLayoutAttributes Center(this ControlWithLayoutAttributes control) =>
             new ControlWithLayoutAttributes(control, center: true);
@@ -47,9 +55,21 @@ namespace NAPS2.EtoForms
             new ControlWithLayoutAttributes(control, yScale: true);
         public static ControlWithLayoutAttributes AutoSize(this ControlWithLayoutAttributes control) =>
             new ControlWithLayoutAttributes(control, autoSize: true);
+        public static ControlWithLayoutAttributes Padding(this ControlWithLayoutAttributes control, Padding padding) =>
+            new ControlWithLayoutAttributes(control, padding: padding);
+        public static ControlWithLayoutAttributes Padding(this ControlWithLayoutAttributes control, int all) =>
+            new ControlWithLayoutAttributes(control, padding: new Padding(all));
+        public static ControlWithLayoutAttributes Padding(this ControlWithLayoutAttributes control, int left = 0, int top = 0, int right = 0, int bottom = 0) =>
+            new ControlWithLayoutAttributes(control, padding: new Padding(left, top, right, bottom));
+        public static ControlWithLayoutAttributes Spacing(this ControlWithLayoutAttributes control, Size spacing) =>
+            new ControlWithLayoutAttributes(control, spacing: spacing);
         
         public static LayoutColumn Padding(this LayoutColumn column, Padding padding) =>
             new LayoutColumn(column, padding: padding);
+        public static LayoutColumn Padding(this LayoutColumn column, int all) =>
+            new LayoutColumn(column, padding: new Padding(all));
+        public static LayoutColumn Padding(this LayoutColumn column, int left = 0, int top = 0, int right = 0, int bottom = 0) =>
+            new LayoutColumn(column, padding: new Padding(left, top, right, bottom));
         public static LayoutColumn Spacing(this LayoutColumn column, Size spacing) =>
             new LayoutColumn(column, spacing: spacing);
         public static LayoutColumn Spacing(this LayoutColumn column, int xSpacing, int ySpacing) =>

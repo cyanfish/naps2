@@ -35,6 +35,7 @@ namespace NAPS2.EtoForms.Ui
             
             Title = UiStrings.AboutFormTitle;
             Icon = Icons.information_small.ToEtoIcon();
+            Resizable = false;
             
             _donateButton = C.AccessibleImageButton(
                 Icons.btn_donate_LG.ToEto(),
@@ -50,10 +51,8 @@ namespace NAPS2.EtoForms.Ui
 
         private void BuildLayout()
         {
-            // TODO: Default padding
-            // TODO: Tune the padding and spacing for aesthetics
             Content = L.Row(
-                L.Column(new ImageView { Image = Icons.scanner_large.ToEto() }),
+                L.Column(new ImageView { Image = Icons.scanner_large.ToEto() }).Padding(right: 4),
                 L.Column(
                     C.NoWrap(AssemblyProduct),
                     L.Row(
@@ -61,11 +60,13 @@ namespace NAPS2.EtoForms.Ui
                             C.NoWrap(string.Format(MiscResources.Version, AssemblyVersion)),
                             C.Link(NAPS2_HOMEPAGE)
                         ),
-                        _donateButton.Center(),
-                        C.ZeroSpace()
+                        L.Column(
+                            C.ZeroSpace().YScale(),
+                            _donateButton
+                        ).Padding(left: 10)
                     ),
                     C.TextSpace(),
-                    _checkForUpdates,
+                    _checkForUpdates.AutoSize().Padding(left: 4),
                     _updatePanel,
                     C.TextSpace(),
                     C.NoWrap(UiStrings.Copyright),
@@ -75,7 +76,10 @@ namespace NAPS2.EtoForms.Ui
                             C.NoWrap(UiStrings.IconsFrom),
                             C.Link(ICONS_HOMEPAGE)
                         ).XScale(),
-                        C.Button(UiStrings.OK, Close)
+                        L.Column(
+                            C.ZeroSpace().YScale(),
+                            C.Button(UiStrings.OK, Close)
+                        ).Padding(left: 20)
                     ),
                     C.ZeroSpace()
                 )
