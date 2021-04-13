@@ -869,7 +869,7 @@ namespace NAPS2.WinForms
 
         private void OpenAbout()
         {
-            FormFactory.Create<AboutForm>().Show();
+            FormFactory.Create<AboutForm>().ShowModal();
         }
 
         private void OpenSettings()

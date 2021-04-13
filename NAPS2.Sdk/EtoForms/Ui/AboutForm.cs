@@ -12,7 +12,7 @@ using NAPS2.Util;
 
 namespace NAPS2.EtoForms.Ui
 {
-    public class AboutForm : EtoFormBase
+    public class AboutForm : EtoDialogBase
     {
         private const string NAPS2_HOMEPAGE = "https://www.naps2.com";  
         private const string ICONS_HOMEPAGE = "https://www.fatcow.com/free-icons";
