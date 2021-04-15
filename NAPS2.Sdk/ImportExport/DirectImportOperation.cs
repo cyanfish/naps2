@@ -36,12 +36,10 @@ namespace NAPS2.ImportExport
             RunAsync(async () =>
             {
                 Exception? error = null;
-                foreach (var serializedImageBytes in data.SerializedImages)
+                foreach (var serializedImage in data.SerializedImages)
                 {
                     try
                     {
-                        var serializedImage = new SerializedImage();
-                        serializedImage.MergeFrom(serializedImageBytes);
                         ScannedImage img = SerializedImageHelper.Deserialize(_imageContext, serializedImage, new SerializedImageHelper.DeserializeOptions());
                         // TODO: Don't bother, here, in recovery, etc.
                         if (importParams.ThumbnailSize.HasValue)

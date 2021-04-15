@@ -40,11 +40,38 @@ namespace NAPS2.EtoForms
         /// <param name="onClick"></param>
         /// <returns></returns>
         public static Button Button(string text, Action onClick) =>
+            Button(text, new ActionCommand(onClick));
+
+        /// <summary>
+        /// Creates a button with the specified text and command.
+        /// </summary>
+        /// <param name="text"></param>
+        /// <param name="command"></param>
+        /// <returns></returns>
+        public static Button Button(string text, ICommand command) =>
             new Button
             {
                 Text = text,
-                Command = new ActionCommand(onClick)
+                Command = command
             };
+
+        public static Button Button(Command command) =>
+            Button(command.MenuText, command);
+
+        public static Button Button(Command command, ButtonImagePosition imagePosition)
+        {
+            var button = Button(command);
+            button.Image = command.Image;
+            button.ImagePosition = imagePosition;
+            return button;
+        }
+        public static Button Button(Command command, Image image, ButtonImagePosition imagePosition = default)
+        {
+            var button = Button(command);
+            button.Image = image;
+            button.ImagePosition = imagePosition;
+            return button;
+        }
 
         /// <summary>
         /// Creates a null placeholder for Eto layouts.
@@ -90,22 +117,6 @@ namespace NAPS2.EtoForms
             pix.Add(button, xOffset, yOffset);
             pix.Add(imageView, 0, 0);
             return pix;
-        }
-
-        private class ActionCommand : ICommand
-        {
-            private readonly Action _action;
-
-            public ActionCommand(Action action)
-            {
-                _action = action;
-            }
-
-            public bool CanExecute(object parameter) => true;
-
-            public void Execute(object parameter) => _action();
-
-            public event EventHandler CanExecuteChanged;
         }
     }
 }

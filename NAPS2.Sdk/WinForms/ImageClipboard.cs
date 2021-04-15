@@ -5,7 +5,8 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Forms;
+using Eto.Forms;
+using Eto.WinForms;
 using NAPS2.Images;
 using NAPS2.Images.Storage;
 using NAPS2.ImportExport;
@@ -39,44 +40,14 @@ namespace NAPS2.WinForms
             }
 
             // Fast path for copying within NAPS2
-            var ido = GetDataObject(imageList);
-            Clipboard.SetDataObject(ido);
+            TransferHelper.SaveImagesToClipboard(_imageContext, imageList);
 
             // Slow path for more full-featured copying
             if (includeBitmap)
             {
-                using (var firstBitmap = await _bitmapRenderer.Render(imageList[0]))
-                {
-                    ido.SetData(DataFormats.Bitmap, true, new Bitmap(firstBitmap));
-                    ido.SetData(DataFormats.Rtf, true, await RtfEncodeImages(firstBitmap, imageList));
-                }
-                Clipboard.SetDataObject(ido);
-            }
-        }
-
-        public IDataObject GetDataObject(IEnumerable<ScannedImage> imageList)
-        {
-            IDataObject ido = new DataObject();
-            ido.SetData(typeof(DirectImageTransfer), new DirectImageTransfer(_imageContext, imageList));
-            return ido;
-        }
-
-        public DirectImageTransfer Read()
-        {
-            var ido = Clipboard.GetDataObject();
-            if (ido != null && ido.GetDataPresent(typeof(DirectImageTransfer).FullName))
-            {
-                return (DirectImageTransfer)ido.GetData(typeof(DirectImageTransfer).FullName);
-            }
-            return null;
-        }
-
-        public bool CanRead
-        {
-            get
-            {
-                var ido = Clipboard.GetDataObject();
-                return ido != null && ido.GetDataPresent(typeof(DirectImageTransfer).FullName);
+                using var firstBitmap = await _bitmapRenderer.Render(imageList[0]);
+                Clipboard.Instance.Image = firstBitmap.ToEto();
+                Clipboard.Instance.SetString(await RtfEncodeImages(firstBitmap, imageList), "Rich Text Format");
             }
         }
 

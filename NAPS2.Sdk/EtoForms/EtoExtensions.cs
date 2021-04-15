@@ -83,5 +83,10 @@ namespace NAPS2.EtoForms
             new LayoutRow(row, yScale: true);
         public static LayoutRow Aligned(this LayoutRow row) =>
             new LayoutRow(row, aligned: true);
+
+        public static void AddItems(this ContextMenu contextMenu, params MenuItem[] menuItems)
+        {
+            contextMenu.Items.AddRange(menuItems);
+        }
     }
 }
