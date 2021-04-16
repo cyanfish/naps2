@@ -12,7 +12,7 @@ using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Google.Protobuf;
+using Eto.WinForms;
 using NAPS2.Config;
 using NAPS2.EtoForms.Ui;
 using NAPS2.ImportExport;
@@ -61,6 +61,7 @@ namespace NAPS2.WinForms
         private readonly UpdateChecker _updateChecker;
         private readonly IProfileManager _profileManager;
         private readonly ScannedImageList _imageList;
+        private readonly ImageTransfer _imageTransfer;
 
         #endregion
 
@@ -78,7 +79,7 @@ namespace NAPS2.WinForms
 
         #region Initialization and Culture
 
-        public FDesktop(ImageContext imageContext, StringWrapper stringWrapper, RecoveryManager recoveryManager, OcrEngineManager ocrEngineManager, IScanPerformer scanPerformer, IScannedImagePrinter scannedImagePrinter, StillImage stillImage, IOperationFactory operationFactory, KeyboardShortcutManager ksm, ThumbnailRenderer thumbnailRenderer, WinFormsExportHelper exportHelper, ImageClipboard imageClipboard, ImageRenderer imageRenderer, NotificationManager notify, CultureInitializer cultureInitializer, IWorkerFactory workerFactory, OperationProgress operationProgress, UpdateChecker updateChecker, IProfileManager profileManager, ScannedImageList imageList)
+        public FDesktop(ImageContext imageContext, StringWrapper stringWrapper, RecoveryManager recoveryManager, OcrEngineManager ocrEngineManager, IScanPerformer scanPerformer, IScannedImagePrinter scannedImagePrinter, StillImage stillImage, IOperationFactory operationFactory, KeyboardShortcutManager ksm, ThumbnailRenderer thumbnailRenderer, WinFormsExportHelper exportHelper, ImageClipboard imageClipboard, ImageRenderer imageRenderer, NotificationManager notify, CultureInitializer cultureInitializer, IWorkerFactory workerFactory, OperationProgress operationProgress, UpdateChecker updateChecker, IProfileManager profileManager, ScannedImageList imageList, ImageTransfer imageTransfer)
         {
             _imageContext = imageContext;
             _stringWrapper = stringWrapper;
@@ -100,6 +101,7 @@ namespace NAPS2.WinForms
             _updateChecker = updateChecker;
             _profileManager = profileManager;
             _imageList = imageList;
+            _imageTransfer = imageTransfer;
             _userActions = new UserActions(imageContext, imageList);
             InitializeComponent();
 
@@ -952,7 +954,7 @@ namespace NAPS2.WinForms
             return filesList;
         }
 
-        private void ImportDirect(DirectImageTransfer data, bool copy)
+        private void ImportDirect(ImageTransferData data, bool copy)
         {
             var op = _operationFactory.Create<DirectImportOperation>();
             if (op.Start(data, copy, ReceiveScannedImage(), new DirectImportParams { ThumbnailSize = ConfigProvider.Get(c => c.ThumbnailSize) }))
@@ -1436,7 +1438,7 @@ namespace NAPS2.WinForms
 
         private void contextMenuStrip_Opening(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            ctxPaste.Enabled = TransferHelper.ClipboardHasImages();
+            ctxPaste.Enabled = _imageTransfer.IsInClipboard();
             if (!_imageList.Images.Any() && !ctxPaste.Enabled)
             {
                 e.Cancel = true;
@@ -1457,9 +1459,9 @@ namespace NAPS2.WinForms
 
         private void ctxPaste_Click(object sender, EventArgs e)
         {
-            if (TransferHelper.ClipboardHasImages())
+            if (_imageTransfer.IsInClipboard())
             {
-                ImportDirect(TransferHelper.GetImagesFromClipboard(), true);
+                ImportDirect(_imageTransfer.GetFromClipboard(), true);
             }
         }
 
@@ -1637,7 +1639,7 @@ namespace NAPS2.WinForms
             if (SelectedIndices.Any())
             {
                 var ido = new DataObject();
-                ido.SetData(TransferHelper.ImageTypeName, TransferHelper.Images(_imageContext, SelectedImages).ToByteArray());
+                _imageTransfer.AddTo(ido.ToEto(), SelectedImages);
                 DoDragDrop(ido, DragDropEffects.Move | DragDropEffects.Copy);
             }
         }
@@ -1647,9 +1649,9 @@ namespace NAPS2.WinForms
             // Determine if drop data is compatible
             try
             {
-                if (e.Data.GetDataPresent(TransferHelper.ImageTypeName))
+                if (_imageTransfer.IsIn(e.Data.ToEto()))
                 {
-                    var data = DirectImageTransfer.Parser.ParseFrom((byte[]) e.Data.GetData(TransferHelper.ImageTypeName));
+                    var data = _imageTransfer.GetFrom(e.Data.ToEto());
                     e.Effect = data.ProcessId == Process.GetCurrentProcess().Id
                         ? DragDropEffects.Move
                         : DragDropEffects.Copy;
@@ -1668,9 +1670,9 @@ namespace NAPS2.WinForms
         private void thumbnailList1_DragDrop(object sender, DragEventArgs e)
         {
             // Receive drop data
-            if (e.Data.GetDataPresent(TransferHelper.ImageTypeName))
+            if (_imageTransfer.IsIn(e.Data.ToEto()))
             {
-                var data = DirectImageTransfer.Parser.ParseFrom((byte[]) e.Data.GetData(TransferHelper.ImageTypeName));
+                var data = _imageTransfer.GetFrom(e.Data.ToEto());
                 if (data.ProcessId == Process.GetCurrentProcess().Id)
                 {
                     DragMoveImages(e);

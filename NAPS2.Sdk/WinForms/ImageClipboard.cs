@@ -15,21 +15,20 @@ namespace NAPS2.WinForms
 {
     public class ImageClipboard
     {
-        private readonly ImageContext _imageContext;
         private readonly BitmapRenderer _bitmapRenderer;
+        private readonly ImageTransfer _imageTransfer;
 
         public ImageClipboard()
         {
-            _imageContext = ImageContext.Default;
             _bitmapRenderer = new BitmapRenderer(ImageContext.Default);
+            _imageTransfer = new ImageTransfer(ImageContext.Default);
         }
 
-        public ImageClipboard(ImageContext imageContext, BitmapRenderer bitmapRenderer)
+        public ImageClipboard(BitmapRenderer bitmapRenderer, ImageTransfer imageTransfer)
         {
-            _imageContext = imageContext;
             _bitmapRenderer = bitmapRenderer;
+            _imageTransfer = imageTransfer;
         }
-
 
         public async Task Write(IEnumerable<ScannedImage> images, bool includeBitmap)
         {
@@ -40,7 +39,7 @@ namespace NAPS2.WinForms
             }
 
             // Fast path for copying within NAPS2
-            TransferHelper.SaveImagesToClipboard(_imageContext, imageList);
+            _imageTransfer.SetClipboard(imageList);
 
             // Slow path for more full-featured copying
             if (includeBitmap)

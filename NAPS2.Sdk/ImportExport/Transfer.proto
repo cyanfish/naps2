@@ -4,12 +4,12 @@ package NAPS2.ImportExport;
 
 import "Serialization/SerializedImage.proto";
 
-message DirectImageTransfer {
+message ImageTransferData {
     int32 processId = 1;
     repeated NAPS2.Serialization.SerializedImage serializedImages = 2;
 }
 
-message DirectProfileTransfer {
+message ProfileTransferData {
     int32 processId = 1;
     string scanProfileXml = 2;
     bool locked = 3;

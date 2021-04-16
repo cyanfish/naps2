@@ -9,6 +9,7 @@ using NAPS2.Serialization;
 
 namespace NAPS2.Config
 {
+    // TODO: Fix cross-instance contention
     public class ProfileManager : IProfileManager
     {
         private readonly ISerializer<ProfileConfig> _serializer = new ProfileSerializer();

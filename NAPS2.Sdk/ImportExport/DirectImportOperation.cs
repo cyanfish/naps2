@@ -24,7 +24,7 @@ namespace NAPS2.ImportExport
             AllowBackground = true;
         }
 
-        public bool Start(DirectImageTransfer data, bool copy, Action<ScannedImage> imageCallback, DirectImportParams importParams)
+        public bool Start(ImageTransferData data, bool copy, Action<ScannedImage> imageCallback, DirectImportParams importParams)
         {
             ProgressTitle = copy ? MiscResources.CopyProgress : MiscResources.ImportProgress;
             Status = new OperationStatus

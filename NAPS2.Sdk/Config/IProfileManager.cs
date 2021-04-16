@@ -10,7 +10,7 @@ namespace NAPS2.Config
         ImmutableList<ScanProfile> Profiles { get; }
         void Mutate(ListMutation<ScanProfile> mutation, ISelectable<ScanProfile> selectable);
         void Mutate(ListMutation<ScanProfile> mutation, ListSelection<ScanProfile> selection);
-        ScanProfile DefaultProfile { get; set; }
+        ScanProfile? DefaultProfile { get; set; }
         void Load();
         void Save();
 

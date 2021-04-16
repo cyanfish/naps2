@@ -21,6 +21,7 @@ namespace NAPS2.EtoForms.Ui
         private readonly IScanPerformer _scanPerformer;
         private readonly ProfileNameTracker _profileNameTracker;
         private readonly IProfileManager _profileManager;
+        private readonly ProfileTransfer _profileTransfer;
 
         private readonly IListView<ScanProfile> _listView;
         
@@ -32,12 +33,13 @@ namespace NAPS2.EtoForms.Ui
         private readonly Command _copyCommand;
         private readonly Command _pasteCommand;
 
-        public ProfilesForm(ConfigProvider<CommonConfig> configProvider, IScanPerformer scanPerformer, ProfileNameTracker profileNameTracker, IProfileManager profileManager, IEtoPlatform etoPlatform, ProfileListViewBehavior profileListViewBehavior)
+        public ProfilesForm(ConfigProvider<CommonConfig> configProvider, IScanPerformer scanPerformer, ProfileNameTracker profileNameTracker, IProfileManager profileManager, IEtoPlatform etoPlatform, ProfileListViewBehavior profileListViewBehavior, ProfileTransfer profileTransfer)
         {
             _configProvider = configProvider;
             _scanPerformer = scanPerformer;
             _profileNameTracker = profileNameTracker;
             _profileManager = profileManager;
+            _profileTransfer = profileTransfer;
 
             Title = UiStrings.ProfilesFormTitle;
             Icon = Icons.blueprints_small.ToEtoIcon();
@@ -146,19 +148,9 @@ namespace NAPS2.EtoForms.Ui
                 ).Aligned());
         }
 
-        public Action<ScannedImage> ImageCallback { get; set; }
+        public Action<ScannedImage>? ImageCallback { get; set; }
 
-        private ScanProfile? SelectedProfile
-        {
-            get
-            {
-                if (_listView.Selection.Count == 1)
-                {
-                    return _listView.Selection.Single();
-                }
-                return null;
-            }
-        }
+        private ScanProfile? SelectedProfile => _listView.Selection.SingleOrDefault();
 
         private bool SelectionLocked
         {
@@ -201,9 +193,9 @@ namespace NAPS2.EtoForms.Ui
         private void Drop(object sender, DropEventArgs e)
         {
             // Receive drop data
-            if (e.Data.GetDataPresent(TransferHelper.ProfileTypeName))
+            if (_profileTransfer.IsIn(e.Data.ToEto()))
             {
-                var data = DirectProfileTransfer.Parser.ParseFrom((byte[])e.Data.GetData(TransferHelper.ProfileTypeName));
+                var data = _profileTransfer.GetFrom(e.Data.ToEto());
                 if (data.ProcessId == Process.GetCurrentProcess().Id)
                 {
                     if (data.Locked)
@@ -241,11 +233,15 @@ namespace NAPS2.EtoForms.Ui
             _editCommand.Enabled = SelectedProfile != null;
             _deleteCommand.Enabled = SelectedProfile != null && !SelectedProfile.IsLocked;
             _copyCommand.Enabled = SelectedProfile != null;
-            _pasteCommand.Enabled = TransferHelper.ClipboardHasProfile();
+            _pasteCommand.Enabled = _profileTransfer.IsInClipboard();
         }
 
         private async void DoScan()
         {
+            if (ImageCallback == null)
+            {
+                throw new InvalidOperationException("Image callback not specified");
+            }
             if (_profileManager.Profiles.Count == 0)
             {
                 var editSettingsForm = FormFactory.Create<FEditProfile>();
@@ -303,12 +299,9 @@ namespace NAPS2.EtoForms.Ui
 
         private void DoDelete()
         {
-            int selectedCount = _listView.Selection.Count;
-            if (selectedCount > 0 && !SelectionLocked)
+            if (SelectedProfile != null && !SelectionLocked)
             {
-                string message = selectedCount == 1
-                    ? string.Format(MiscResources.ConfirmDeleteSingleProfile, SelectedProfile.DisplayName)
-                    : string.Format(MiscResources.ConfirmDeleteMultipleProfiles, selectedCount);
+                string message = string.Format(MiscResources.ConfirmDeleteSingleProfile, SelectedProfile.DisplayName);
                 if (MessageBox.Show(message, MiscResources.Delete, MessageBoxButtons.YesNo, MessageBoxType.Warning) == DialogResult.Yes)
                 {
                     foreach (var profile in _listView.Selection)
@@ -330,7 +323,10 @@ namespace NAPS2.EtoForms.Ui
 
         private void DoCopy()
         {
-            TransferHelper.SaveProfileToClipboard(SelectedProfile);
+            if (SelectedProfile != null)
+            {
+                _profileTransfer.SetClipboard(SelectedProfile);
+            }
         }
 
         private void DoPaste()
@@ -339,10 +335,10 @@ namespace NAPS2.EtoForms.Ui
             {
                 return;
             }
-            if (TransferHelper.ClipboardHasProfile())
+            if (_profileTransfer.IsInClipboard())
             {
-                var transfer = TransferHelper.GetProfileFromClipboard();
-                var profile = transfer.ScanProfileXml.FromXml<ScanProfile>();
+                var data = _profileTransfer.GetFromClipboard();
+                var profile = data.ScanProfileXml.FromXml<ScanProfile>();
                 _profileManager.Mutate(new ListMutation<ScanProfile>.Append(profile), _listView);
             }
         }

@@ -13,8 +13,11 @@ namespace NAPS2.EtoForms
 {
     public class ProfileListViewBehavior : ListViewBehavior<ScanProfile>
     {
-        public ProfileListViewBehavior()
+        private ProfileTransfer _profileTransfer;
+
+        public ProfileListViewBehavior(ProfileTransfer profileTransfer)
         {
+            _profileTransfer = profileTransfer;
             MultiSelect = false;
             ShowLabels = true;
         }
@@ -42,7 +45,7 @@ namespace NAPS2.EtoForms
         {
             if (selection.Count > 0)
             {
-                TransferHelper.SaveProfileToDataObject(selection.First(), dataObject);
+                _profileTransfer.AddTo(dataObject, selection.Single());
             }
         }
 
@@ -51,9 +54,9 @@ namespace NAPS2.EtoForms
             // Determine if drop data is compatible
             try
             {
-                if (TransferHelper.HasProfile(dataObject))
+                if (_profileTransfer.IsIn(dataObject))
                 {
-                    var data = TransferHelper.GetProfileFromDataObject(dataObject);
+                    var data = _profileTransfer.GetFrom(dataObject);
                     return data.ProcessId == Process.GetCurrentProcess().Id
                         ? data.Locked
                             ? DragEffects.None

@@ -30,7 +30,7 @@ namespace NAPS2.Scan
             }
         }
 
-        public void DeletingProfile(string name)
+        public void DeletingProfile(string? name)
         {
             if (string.IsNullOrEmpty(name))
             {
