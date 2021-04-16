@@ -222,7 +222,7 @@ namespace NAPS2.Images
         {
             public override void Apply(List<T> list, ref ListSelection<T> selection)
             {
-                foreach (var item in list)
+                foreach (var item in selection)
                 {
                     (item as IDisposable)?.Dispose();
                 }
