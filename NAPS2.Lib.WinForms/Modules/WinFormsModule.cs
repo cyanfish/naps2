@@ -1,4 +1,5 @@
 ﻿using NAPS2.Dependencies;
+using NAPS2.EtoForms;
 using NAPS2.ImportExport.Pdf;
 using NAPS2.Operation;
 using NAPS2.Util;
@@ -17,6 +18,7 @@ namespace NAPS2.Modules
             Bind<OperationProgress>().To<WinFormsOperationProgress>().InSingletonScope();
             Bind<IComponentInstallPrompt>().To<WinFormsComponentInstallPrompt>();
             Bind<DialogHelper>().To<WinFormsDialogHelper>();
+            Bind<IEtoPlatform>().To<WinFormsEtoPlatform>();
         }
     }
 }

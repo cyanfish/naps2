@@ -6,6 +6,7 @@ using NAPS2.Util;
 
 namespace NAPS2.Images
 {
+    // TODO: Move this to another namespace
     public static class ListSelection
     {
         public static ListSelection<T> From<T>(IEnumerable<T> list)

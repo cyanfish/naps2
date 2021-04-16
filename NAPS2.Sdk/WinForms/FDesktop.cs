@@ -12,6 +12,7 @@ using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Google.Protobuf;
 using NAPS2.Config;
 using NAPS2.EtoForms.Ui;
 using NAPS2.ImportExport;
@@ -850,9 +851,9 @@ namespace NAPS2.WinForms
 
         private void ShowProfilesForm()
         {
-            var form = FormFactory.Create<FProfiles>();
+            var form = FormFactory.Create<ProfilesForm>();
             form.ImageCallback = ReceiveScannedImage();
-            form.ShowDialog();
+            form.ShowModal();
             UpdateScanButton();
         }
 
@@ -1435,7 +1436,7 @@ namespace NAPS2.WinForms
 
         private void contextMenuStrip_Opening(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            ctxPaste.Enabled = _imageClipboard.CanRead;
+            ctxPaste.Enabled = TransferHelper.ClipboardHasImages();
             if (!_imageList.Images.Any() && !ctxPaste.Enabled)
             {
                 e.Cancel = true;
@@ -1456,10 +1457,9 @@ namespace NAPS2.WinForms
 
         private void ctxPaste_Click(object sender, EventArgs e)
         {
-            var direct = _imageClipboard.Read();
-            if (direct != null)
+            if (TransferHelper.ClipboardHasImages())
             {
-                ImportDirect(direct, true);
+                ImportDirect(TransferHelper.GetImagesFromClipboard(), true);
             }
         }
 
@@ -1636,7 +1636,8 @@ namespace NAPS2.WinForms
             // Provide drag data
             if (SelectedIndices.Any())
             {
-                var ido = _imageClipboard.GetDataObject(SelectedImages);
+                var ido = new DataObject();
+                ido.SetData(TransferHelper.ImageTypeName, TransferHelper.Images(_imageContext, SelectedImages).ToByteArray());
                 DoDragDrop(ido, DragDropEffects.Move | DragDropEffects.Copy);
             }
         }
@@ -1646,10 +1647,10 @@ namespace NAPS2.WinForms
             // Determine if drop data is compatible
             try
             {
-                if (e.Data.GetDataPresent(typeof(DirectImageTransfer).FullName))
+                if (e.Data.GetDataPresent(TransferHelper.ImageTypeName))
                 {
-                    var data = (DirectImageTransfer)e.Data.GetData(typeof(DirectImageTransfer).FullName);
-                    e.Effect = data.ProcessID == Process.GetCurrentProcess().Id
+                    var data = DirectImageTransfer.Parser.ParseFrom((byte[]) e.Data.GetData(TransferHelper.ImageTypeName));
+                    e.Effect = data.ProcessId == Process.GetCurrentProcess().Id
                         ? DragDropEffects.Move
                         : DragDropEffects.Copy;
                 }
@@ -1667,10 +1668,10 @@ namespace NAPS2.WinForms
         private void thumbnailList1_DragDrop(object sender, DragEventArgs e)
         {
             // Receive drop data
-            if (e.Data.GetDataPresent(typeof(DirectImageTransfer).FullName))
+            if (e.Data.GetDataPresent(TransferHelper.ImageTypeName))
             {
-                var data = (DirectImageTransfer)e.Data.GetData(typeof(DirectImageTransfer).FullName);
-                if (data.ProcessID == Process.GetCurrentProcess().Id)
+                var data = DirectImageTransfer.Parser.ParseFrom((byte[]) e.Data.GetData(TransferHelper.ImageTypeName));
+                if (data.ProcessId == Process.GetCurrentProcess().Id)
                 {
                     DragMoveImages(e);
                 }

@@ -691,6 +691,16 @@ namespace NAPS2 {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap scanner_default {
+            get {
+                object obj = ResourceManager.GetObject("scanner_default", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
         /// </summary>
         internal static System.Drawing.Icon scanner_icon {
@@ -706,6 +716,26 @@ namespace NAPS2 {
         internal static System.Drawing.Bitmap scanner_large {
             get {
                 object obj = ResourceManager.GetObject("scanner_large", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap scanner_lock_default {
+            get {
+                object obj = ResourceManager.GetObject("scanner_lock_default", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap scanner_lock {
+            get {
+                object obj = ResourceManager.GetObject("scanner_lock", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
