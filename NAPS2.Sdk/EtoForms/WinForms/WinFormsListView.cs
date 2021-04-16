@@ -4,6 +4,7 @@ using System.Linq;
 using System.Windows.Forms;
 using Eto.WinForms;
 using NAPS2.Images;
+using NAPS2.Platform;
 
 namespace NAPS2.EtoForms.WinForms
 {
@@ -73,7 +74,7 @@ namespace NAPS2.EtoForms.WinForms
             foreach (var item in items)
             {
                 _view.LargeImageList.Images.Add(_behavior.GetImage(item).ToSD());
-                var listViewItem = _view.Items.Add(_behavior.GetLabel(item), _view.LargeImageList.Images.Count - 1);
+                var listViewItem = _view.Items.Add(GetLabel(item), _view.LargeImageList.Images.Count - 1);
                 listViewItem.Tag = item;
             }
             for (int i = 0; i < _view.Items.Count; i++)
@@ -100,6 +101,15 @@ namespace NAPS2.EtoForms.WinForms
                 }
                 SelectionChanged?.Invoke(this, EventArgs.Empty);
             }
+        }
+
+        private string GetLabel(T item)
+        {
+            if (!_behavior.ShowLabels)
+            {
+                return PlatformCompat.Runtime.UseSpaceInListViewItem ? " " : "";
+            }
+            return _behavior.GetLabel(item);
         }
 
         private void OnSelectedIndexChanged(object sender, EventArgs e)

@@ -1,6 +1,4 @@
-using NAPS2.EtoForms.WinForms;
-
-namespace NAPS2.EtoForms
+namespace NAPS2.EtoForms.WinForms
 {
     public class WinFormsEtoPlatform : IEtoPlatform
     {

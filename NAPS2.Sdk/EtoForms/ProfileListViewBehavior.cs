@@ -13,7 +13,7 @@ namespace NAPS2.EtoForms
 {
     public class ProfileListViewBehavior : ListViewBehavior<ScanProfile>
     {
-        private ProfileTransfer _profileTransfer;
+        private readonly ProfileTransfer _profileTransfer;
 
         public ProfileListViewBehavior(ProfileTransfer profileTransfer)
         {
