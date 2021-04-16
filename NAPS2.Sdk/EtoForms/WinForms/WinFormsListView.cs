@@ -37,7 +37,7 @@ namespace NAPS2.EtoForms.WinForms
         public Eto.Drawing.Size ImageSize
         {
             get => _view.LargeImageList.ImageSize.ToEto();
-            set => _view.LargeImageList.ImageSize = value.ToSD();
+            set => ListViewImageSizeHack.SetImageSize(_view.LargeImageList, value.ToSD());
         }
 
         public bool AllowDrag { get; set; }

@@ -2,8 +2,8 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Linq;
-using System.Reflection;
 using System.Windows.Forms;
+using NAPS2.EtoForms.WinForms;
 using NAPS2.Platform;
 using NAPS2.Images;
 using NAPS2.Images.Storage;
@@ -12,30 +12,6 @@ namespace NAPS2.WinForms
 {
     public partial class ThumbnailList : DragScrollListView
     {
-        private static readonly FieldInfo imageSizeField;
-        private static readonly MethodInfo performRecreateHandleMethod;
-
-        static ThumbnailList()
-        {
-            // Try to enable larger thumbnails via a reflection hack
-            if (PlatformCompat.Runtime.SetImageListSizeOnImageCollection)
-            {
-                imageSizeField = typeof(ImageList.ImageCollection).GetField("imageSize", BindingFlags.Instance | BindingFlags.NonPublic);
-                performRecreateHandleMethod = typeof(ImageList.ImageCollection).GetMethod("RecreateHandle", BindingFlags.Instance | BindingFlags.NonPublic);
-            }
-            else
-            {
-                imageSizeField = typeof(ImageList).GetField("imageSize", BindingFlags.Instance | BindingFlags.NonPublic);
-                performRecreateHandleMethod = typeof(ImageList).GetMethod("PerformRecreateHandle", BindingFlags.Instance | BindingFlags.NonPublic);
-            }
-
-            if (imageSizeField == null || performRecreateHandleMethod == null)
-            {
-                // No joy, just be happy enough with 256
-                ThumbnailSizes.MAX_SIZE = 256;
-            }
-        }
-
         private Bitmap _placeholder;
 
         public ThumbnailList()
@@ -50,27 +26,7 @@ namespace NAPS2.WinForms
         public Size ThumbnailSize
         {
             get => ilThumbnailList.ImageSize;
-            set
-            {
-                if (imageSizeField != null && performRecreateHandleMethod != null)
-                {
-                    // A simple hack to let the listview have larger thumbnails than 256x256
-                    if (PlatformCompat.Runtime.SetImageListSizeOnImageCollection)
-                    {
-                        imageSizeField.SetValue(ilThumbnailList.Images, value);
-                        performRecreateHandleMethod.Invoke(ilThumbnailList.Images, new object[] { });
-                    }
-                    else
-                    {
-                        imageSizeField.SetValue(ilThumbnailList, value);
-                        performRecreateHandleMethod.Invoke(ilThumbnailList, new object[] { "ImageSize" });
-                    }
-                }
-                else
-                {
-                    ilThumbnailList.ImageSize = value;
-                }
-            }
+            set => ListViewImageSizeHack.SetImageSize(ilThumbnailList, value);
         }
 
         private string ItemText => PlatformCompat.Runtime.UseSpaceInListViewItem ? " " : "";
