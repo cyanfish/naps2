@@ -7,7 +7,7 @@ using Eto.WinForms;
 using Eto.WinForms.Forms;
 using NAPS2.Config;
 using NAPS2.Images;
-using NAPS2.ImportExport;
+using NAPS2.ImportExport.Profiles;
 using NAPS2.Lang.Resources;
 using NAPS2.Scan;
 using NAPS2.Serialization;

@@ -2,7 +2,7 @@ using System.Diagnostics;
 using NAPS2.Scan;
 using NAPS2.Serialization;
 
-namespace NAPS2.ImportExport
+namespace NAPS2.ImportExport.Profiles
 {
     public class ProfileTransfer : TransferHelper<ScanProfile, ProfileTransferData>
     {

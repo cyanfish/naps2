@@ -3,10 +3,19 @@ using Google.Protobuf;
 
 namespace NAPS2.ImportExport
 {
+    /// <summary>
+    /// Generic helper for transferring data through copy/paste or drag/drop.
+    /// </summary>
+    /// <typeparam name="TInput">The domain type to be transferred.</typeparam>
+    /// <typeparam name="TData">The protobuf type representing the transferred data.</typeparam>
     public abstract class TransferHelper<TInput, TData> where TData : IMessage<TData>, new()
     {
         private readonly string _typeName = typeof(TData).FullName;
 
+        /// <summary>
+        /// Clears the clipboard and stores the serialized input.
+        /// </summary>
+        /// <param name="input"></param>
         public void SetClipboard(TInput input)
         {
             Clipboard.Instance.Clear();
@@ -34,6 +43,11 @@ namespace NAPS2.ImportExport
             return data;
         }
 
+        /// <summary>
+        /// Converts the domain type to the protobuf type for serialization.
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
         protected abstract TData AsData(TInput input);
     }
 }

@@ -9,7 +9,7 @@ using Eto.Forms;
 using Eto.WinForms;
 using NAPS2.Images;
 using NAPS2.Images.Storage;
-using NAPS2.ImportExport;
+using NAPS2.ImportExport.Images;
 
 namespace NAPS2.WinForms
 {
