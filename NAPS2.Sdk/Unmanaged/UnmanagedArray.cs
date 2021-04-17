@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
 
-namespace NAPS2.Util
+namespace NAPS2.Unmanaged
 {
     /// <summary>
     /// Class for implicitly converting arrays of structures to unmanaged objects addressed by IntPtr.

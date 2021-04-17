@@ -7,13 +7,14 @@ using System.Security.Principal;
 using System.Windows.Forms;
 using NAPS2.Config;
 using NAPS2.Logging;
+using NAPS2.Remoting;
 
-namespace NAPS2.Util
+namespace NAPS2.Platform.Windows
 {
     /// <summary>
     /// A class to help manage the lifecycle of the NAPS2 GUI.
     /// </summary>
-    public class Lifecycle
+    public class WindowsApplicationLifecycle
     {
         private readonly StillImage _sti;
         private readonly WindowsEventLogger _windowsEventLogger;
@@ -22,7 +23,7 @@ namespace NAPS2.Util
         private bool _shouldCreateEventSource;
         private int _returnCode;
 
-        public Lifecycle(StillImage sti, WindowsEventLogger windowsEventLogger, ConfigProvider<CommonConfig> configProvider)
+        public WindowsApplicationLifecycle(StillImage sti, WindowsEventLogger windowsEventLogger, ConfigProvider<CommonConfig> configProvider)
         {
             _sti = sti;
             _windowsEventLogger = windowsEventLogger;

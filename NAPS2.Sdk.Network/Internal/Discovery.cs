@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using NAPS2.Remoting.Network.Internal;
 using NAPS2.Util;
 
 namespace NAPS2.Remoting.Network.Internal

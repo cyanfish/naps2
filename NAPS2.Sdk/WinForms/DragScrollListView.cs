@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
-using NAPS2.Util;
+using NAPS2.Platform.Windows;
 
 namespace NAPS2.WinForms
 {

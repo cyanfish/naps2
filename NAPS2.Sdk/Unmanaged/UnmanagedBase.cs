@@ -1,7 +1,7 @@
 using System;
 using System.Runtime.InteropServices;
 
-namespace NAPS2.Util
+namespace NAPS2.Unmanaged
 {
     /// <summary>
     /// Base class for implicitly converting structures to unmanaged objects addressed by IntPtr.

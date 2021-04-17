@@ -3,7 +3,6 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
-using NAPS2.ImportExport.Pdf;
 
 namespace NAPS2.Images.Storage
 {

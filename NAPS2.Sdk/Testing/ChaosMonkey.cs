@@ -2,7 +2,7 @@
 using System.Diagnostics;
 using System.Threading;
 
-namespace NAPS2.Util
+namespace NAPS2.Testing
 {
     /// <summary>
     /// A debug helper that randomly causes delays or errors.

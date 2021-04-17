@@ -2,6 +2,7 @@
 
 namespace NAPS2.Util
 {
+    // TODO: Refactor to Eto and move to NAPS2.EtoForms (or something non-eto and non-winforms if I want operations in the Sdk...)
     /// <summary>
     /// A base class for objects that can prompt the user to overwrite an existing file.
     ///

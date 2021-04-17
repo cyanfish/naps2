@@ -1,5 +1,4 @@
-﻿using System;
-using NAPS2.Dependencies;
+﻿using NAPS2.Dependencies;
 using NAPS2.Lang.ConsoleResources;
 
 namespace NAPS2.Automation

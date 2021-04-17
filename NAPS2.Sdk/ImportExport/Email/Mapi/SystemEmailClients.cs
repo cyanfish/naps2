@@ -3,7 +3,7 @@ using System.Drawing;
 using System.Linq;
 using System.Runtime.InteropServices;
 using Microsoft.Win32;
-using NAPS2.Util;
+using NAPS2.Platform.Windows;
 
 namespace NAPS2.ImportExport.Email.Mapi
 {

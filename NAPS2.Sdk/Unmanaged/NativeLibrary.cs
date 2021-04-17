@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Runtime.InteropServices;
+using NAPS2.Platform.Windows;
+using NAPS2.Util;
 
-namespace NAPS2.Util
+namespace NAPS2.Unmanaged
 {
     public class NativeLibrary
     {

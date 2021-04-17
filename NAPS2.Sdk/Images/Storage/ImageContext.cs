@@ -5,6 +5,7 @@ using System.Reflection;
 using NAPS2.Images.Transforms;
 using NAPS2.ImportExport.Pdf;
 using NAPS2.Scan;
+using NAPS2.Testing;
 using NAPS2.Util;
 
 namespace NAPS2.Images.Storage

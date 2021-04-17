@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 
-namespace NAPS2.Util
+namespace NAPS2.Platform.Windows
 {
     /// <summary>
     /// Helper class for common Win32 methods called via P/Invoke.

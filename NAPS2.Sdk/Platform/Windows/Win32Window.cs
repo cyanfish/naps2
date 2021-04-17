@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 
-namespace NAPS2.Util
+namespace NAPS2.Platform.Windows
 {
     /// <summary>
     /// A trivial implementation of IWin32Window for use when serializing window handles cross-process.

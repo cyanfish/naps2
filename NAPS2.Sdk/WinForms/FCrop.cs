@@ -6,7 +6,6 @@ using System.Windows.Forms;
 using NAPS2.Images;
 using NAPS2.Images.Storage;
 using NAPS2.Images.Transforms;
-using NAPS2.Util;
 
 namespace NAPS2.WinForms
 {

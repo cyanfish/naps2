@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using NAPS2.Util;
+using NAPS2.Testing;
 
 namespace NAPS2.Operation
 {

@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Text.RegularExpressions;
 
-namespace NAPS2.Util
+namespace NAPS2.Testing
 {
     /// <summary>
     /// Provides facilities to detect unit testing and throw exceptions for bad testing practices.

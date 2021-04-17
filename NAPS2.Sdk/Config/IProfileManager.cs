@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Immutable;
-using NAPS2.Images;
 using NAPS2.Scan;
+using NAPS2.Util;
 
 namespace NAPS2.Config
 {

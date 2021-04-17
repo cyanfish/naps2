@@ -3,7 +3,7 @@ using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace NAPS2.Util
+namespace NAPS2.WinForms
 {
     /// <summary>
     /// Helpers for conditionally visible controls that use simple heuristics help maintain the visual appearance of forms.

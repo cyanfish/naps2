@@ -2,32 +2,23 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using NAPS2.Util;
 
-namespace NAPS2.Images
+namespace NAPS2.Util
 {
     // TODO: Move this to another namespace
     public static class ListSelection
     {
-        public static ListSelection<T> From<T>(IEnumerable<T> list)
-        {
-            return new ListSelection<T>(list);
-        }
+        public static ListSelection<T> From<T>(IEnumerable<T> list) =>
+            new(list);
 
-        public static ListSelection<T> Of<T>(params T[] items)
-        {
-            return new ListSelection<T>(items);
-        }
-        
-        public static ListSelection<T> FromSelectedIndices<T>(IList<T> list, IEnumerable<int> selectedIndices)
-        {
-            return new ListSelection<T>(list.ElementsAt(selectedIndices));
-        }
+        public static ListSelection<T> Of<T>(params T[] items) =>
+            new(items);
 
-        public static ListSelection<T> Empty<T>()
-        {
-            return new ListSelection<T>(Enumerable.Empty<T>());
-        }
+        public static ListSelection<T> FromSelectedIndices<T>(IList<T> list, IEnumerable<int> selectedIndices) =>
+            new(list.ElementsAt(selectedIndices));
+
+        public static ListSelection<T> Empty<T>() =>
+            new(Enumerable.Empty<T>());
     }
 
     public class ListSelection<T> : IEnumerable<T>, IEquatable<ListSelection<T>>
@@ -49,14 +40,14 @@ namespace NAPS2.Images
 
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
-        public bool Equals(ListSelection<T> other)
+        public bool Equals(ListSelection<T>? other)
         {
             if (ReferenceEquals(null, other)) return false;
             if (ReferenceEquals(this, other)) return true;
             return _internalSelection.SetEquals(other._internalSelection);
         }
 
-        public override bool Equals(object obj)
+        public override bool Equals(object? obj)
         {
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;

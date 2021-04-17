@@ -4,7 +4,6 @@ using System.Collections.Immutable;
 using System.IO;
 using System.Linq;
 using System.Xml.Linq;
-using NAPS2.Scan;
 using NAPS2.Serialization;
 using NAPS2.Util;
 using Xunit;

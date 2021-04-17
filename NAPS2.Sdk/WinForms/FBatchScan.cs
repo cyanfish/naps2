@@ -13,6 +13,7 @@ using NAPS2.Scan;
 using NAPS2.Scan.Batch;
 using NAPS2.Scan.Exceptions;
 using NAPS2.Images;
+using NAPS2.Threading;
 using NAPS2.Util;
 
 namespace NAPS2.WinForms

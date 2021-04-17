@@ -7,8 +7,8 @@ using Eto.WinForms;
 using NAPS2.Config;
 using NAPS2.Lang.Resources;
 using NAPS2.Logging;
+using NAPS2.Threading;
 using NAPS2.Update;
-using NAPS2.Util;
 
 namespace NAPS2.EtoForms.Ui
 {

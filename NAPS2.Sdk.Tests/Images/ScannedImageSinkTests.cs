@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Drawing;
 using System.Threading;
 using System.Threading.Tasks;
 using NAPS2.Images;
-using NAPS2.Images.Storage;
 using Xunit;
 
 namespace NAPS2.Sdk.Tests.Images

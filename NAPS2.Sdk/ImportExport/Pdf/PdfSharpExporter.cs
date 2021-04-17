@@ -12,6 +12,7 @@ using NAPS2.Ocr;
 using NAPS2.Platform;
 using NAPS2.Images;
 using NAPS2.Images.Storage;
+using NAPS2.Threading;
 using NAPS2.Util;
 using PdfSharp.Drawing;
 using PdfSharp.Drawing.Layout;

@@ -4,9 +4,8 @@ using System.Linq;
 using System.Windows.Forms;
 using NAPS2.Config;
 using NAPS2.EtoForms;
-using NAPS2.Remoting.Worker;
 using NAPS2.Scan;
-using NAPS2.Util;
+using NAPS2.Threading;
 
 namespace NAPS2.WinForms
 {

@@ -1,7 +1,7 @@
 using System;
 using System.Threading;
 
-namespace NAPS2.Util
+namespace NAPS2.Threading
 {
     public class TimedThrottle
     {

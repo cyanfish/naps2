@@ -11,6 +11,7 @@ using NAPS2.ImportExport.Profiles;
 using NAPS2.Lang.Resources;
 using NAPS2.Scan;
 using NAPS2.Serialization;
+using NAPS2.Util;
 using NAPS2.WinForms;
 
 namespace NAPS2.EtoForms.Ui

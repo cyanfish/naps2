@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
-using System.IO;
 using NAPS2.Config;
-using NAPS2.Images.Storage;
 using NAPS2.Logging;
 using NAPS2.Ocr;
 using NAPS2.Platform;

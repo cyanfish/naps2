@@ -3,7 +3,9 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using NAPS2.Logging;
 using NAPS2.Modules;
+using NAPS2.Platform.Windows;
 using NAPS2.Remoting.Worker;
+using NAPS2.Threading;
 using NAPS2.Util;
 using NAPS2.WinForms;
 using Ninject;
@@ -23,7 +25,7 @@ namespace NAPS2.EntryPoints
             Paths.ClearTemp();
 
             // Parse the command-line arguments and see if we're doing something other than displaying the main form
-            var lifecycle = kernel.Get<Lifecycle>();
+            var lifecycle = kernel.Get<WindowsApplicationLifecycle>();
             lifecycle.ParseArgs(args);
             lifecycle.ExitIfRedundant();
 

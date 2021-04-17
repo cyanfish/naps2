@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using NAPS2.Config;
-using NAPS2.Util;
+using NAPS2.Unmanaged;
 
 namespace NAPS2.ImportExport.Email.Mapi
 {
@@ -51,8 +51,8 @@ namespace NAPS2.ImportExport.Email.Mapi
 
         private static MapiSendMailReturnCode SendMail(SystemEmailClients.MapiSendMailDelegate mapiSendMail, EmailMessage message, MapiSendMailFlags flags)
         {
-            using var files = Unmanaged.CopyOf(GetFiles(message));
-            using var recips = Unmanaged.CopyOf(GetRecips(message));
+            using var files = UnmanagedTypes.CopyOf(GetFiles(message));
+            using var recips = UnmanagedTypes.CopyOf(GetRecips(message));
             // Create a MAPI structure for the entirety of the message
             var mapiMessage = new MapiMessage
             {
@@ -70,8 +70,8 @@ namespace NAPS2.ImportExport.Email.Mapi
 
         private static MapiSendMailReturnCode SendMailW(SystemEmailClients.MapiSendMailDelegateW mapiSendMailW, EmailMessage message, MapiSendMailFlags flags)
         {
-            using var files = Unmanaged.CopyOf(GetFilesW(message));
-            using var recips = Unmanaged.CopyOf(GetRecipsW(message));
+            using var files = UnmanagedTypes.CopyOf(GetFilesW(message));
+            using var recips = UnmanagedTypes.CopyOf(GetRecipsW(message));
             // Create a MAPI structure for the entirety of the message
             var mapiMessage = new MapiMessageW
             {

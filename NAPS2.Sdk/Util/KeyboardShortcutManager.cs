@@ -7,6 +7,7 @@ using NAPS2.Logging;
 
 namespace NAPS2.Util
 {
+    // TODO: Refactor to Eto and move to NAPS2.EtoForms
     /// <summary>
     /// A helper class to assign keyboard shortcuts to actions or WinForm buttons.
     /// </summary>

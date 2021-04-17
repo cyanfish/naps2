@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading;
 using NAPS2.Logging;
 
-namespace NAPS2.Util
+namespace NAPS2.Remoting
 {
     /// <summary>
     /// A class for simple inter-process communication between NAPS2 instances via named pipes.

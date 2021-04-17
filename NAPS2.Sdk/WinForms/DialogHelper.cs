@@ -1,7 +1,4 @@
-﻿using System;
-using NAPS2.Util;
-
-namespace NAPS2.WinForms
+﻿namespace NAPS2.WinForms
 {
     public abstract class DialogHelper
     {

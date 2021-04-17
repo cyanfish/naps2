@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
-using NAPS2.Images;
 using NAPS2.Scan;
+using NAPS2.Util;
 
 namespace NAPS2.Config
 {

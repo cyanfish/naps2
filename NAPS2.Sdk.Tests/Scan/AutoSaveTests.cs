@@ -1,23 +1,4 @@
-﻿using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
-using Moq;
-using NAPS2.Config;
-using NAPS2.Images;
-using NAPS2.ImportExport;
-using NAPS2.ImportExport.Images;
-using NAPS2.ImportExport.Pdf;
-using NAPS2.Ocr;
-using NAPS2.Operation;
-using NAPS2.Scan;
-using NAPS2.Sdk.Tests.Asserts;
-using NAPS2.Sdk.Tests.Mocks;
-using NAPS2.Util;
-using NAPS2.WinForms;
-using Xunit;
-
-namespace NAPS2.Sdk.Tests.Scan
+﻿namespace NAPS2.Sdk.Tests.Scan
 {
     public class AutoSaveTests : ContextualTexts
     {

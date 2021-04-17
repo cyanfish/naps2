@@ -1,9 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using NAPS2.Util;
 
-namespace NAPS2.Images
+namespace NAPS2.Util
 {
     public abstract class ListMutation<T>
     {
@@ -92,13 +91,13 @@ namespace NAPS2.Images
         {
             public override void Apply(List<T> list, ref ListSelection<T> selection)
             {
-                // Partition the image list in two
+                // Partition the list in two
                 int count = list.Count;
                 int split = (count + 1) / 2;
                 var p1 = list.Take(split).ToList();
                 var p2 = list.Skip(split).ToList();
 
-                // Rebuild the image list, taking alternating images from each the partitions
+                // Rebuild the list, taking alternating items from each the partitions
                 list.Clear();
                 for (int i = 0; i < count; ++i)
                 {
@@ -118,7 +117,7 @@ namespace NAPS2.Images
                 int split = (count + 1) / 2;
                 var copy = list.ToList();
 
-                // Rebuild the image list, even-indexed images first
+                // Rebuild the list, even-indexed items first
                 list.Clear();
                 for (int i = 0; i < split; ++i)
                 {
@@ -138,13 +137,13 @@ namespace NAPS2.Images
         {
             public override void Apply(List<T> list, ref ListSelection<T> selection)
             {
-                // Partition the image list in two
+                // Partition the list in two
                 int count = list.Count;
                 int split = (count + 1) / 2;
                 var p1 = list.Take(split).ToList();
                 var p2 = list.Skip(split).ToList();
 
-                // Rebuild the image list, taking alternating images from each the partitions (the latter in reverse order)
+                // Rebuild the list, taking alternating items from each the partitions (the latter in reverse order)
                 list.Clear();
                 for (int i = 0; i < count; ++i)
                 {
@@ -164,7 +163,7 @@ namespace NAPS2.Images
                 int split = (count + 1) / 2;
                 var copy = list.ToList();
 
-                // Rebuild the image list, even-indexed images first (odd-indexed images in reverse order)
+                // Rebuild the list, even-indexed items first (odd-indexed items in reverse order)
                 list.Clear();
                 for (int i = 0; i < split; ++i)
                 {
@@ -263,7 +262,7 @@ namespace NAPS2.Images
             {
                 // Default to the end of the list
                 int index = list.Count;
-                // Use the index after the last image from the same source (if it exists)
+                // Use the index after the last item from the same source (if it exists)
                 if (_predecessor != null)
                 {
                     int lastIndex = list.IndexOf(_predecessor);

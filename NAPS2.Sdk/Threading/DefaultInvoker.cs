@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace NAPS2.Util
+namespace NAPS2.Threading
 {
     /// <summary>
     /// A default implementation for synchronized access to the UI thread that assumes there is no privileged thread.

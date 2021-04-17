@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace NAPS2.Util
+namespace NAPS2.Threading
 {
     /// <summary>
     /// An interface for synchronized access to the UI thread.

@@ -5,8 +5,6 @@ using System.Linq;
 using System.Xml.Linq;
 using NAPS2.Config.ObsoleteTypes;
 using NAPS2.Scan;
-using NAPS2.Scan.Twain;
-using NAPS2.Scan.Wia;
 using NAPS2.Serialization;
 
 namespace NAPS2.Config

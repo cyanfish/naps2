@@ -2,7 +2,7 @@
 using System.Reflection;
 using Microsoft.Win32;
 
-namespace NAPS2.Util
+namespace NAPS2.Platform.Windows
 {
     /// <summary>
     /// A class to help with the Still Image API, which lets NAPS2 react to physical "Scan" button presses on the scanner.
