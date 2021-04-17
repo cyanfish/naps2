@@ -14,8 +14,9 @@ namespace NAPS2.Config
 
     public abstract class ConfigProvider<TConfig>
     {
+        // TODO: This may actually return null. Specifically the scope set provider with a default config shouldn't. But the current model can't represent that.
         [return: NotNull]
-        public T Get<T>(Func<TConfig, T> func) => GetInternal(func) ?? throw new InvalidOperationException("Config provider must not return null");
+        public T Get<T>(Func<TConfig, T> func) => GetInternal(func);
 
         public T Get<T>(Func<TConfig, T?> func) where T : struct => GetInternal(func) ?? default;
 
