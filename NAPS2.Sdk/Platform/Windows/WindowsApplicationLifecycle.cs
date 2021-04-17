@@ -18,16 +18,16 @@ namespace NAPS2.Platform.Windows
     {
         private readonly StillImage _sti;
         private readonly WindowsEventLogger _windowsEventLogger;
-        private readonly ConfigProvider<CommonConfig> _configProvider;
+        private readonly ScopedConfig _config;
 
         private bool _shouldCreateEventSource;
         private int _returnCode;
 
-        public WindowsApplicationLifecycle(StillImage sti, WindowsEventLogger windowsEventLogger, ConfigProvider<CommonConfig> configProvider)
+        public WindowsApplicationLifecycle(StillImage sti, WindowsEventLogger windowsEventLogger, ScopedConfig config)
         {
             _sti = sti;
             _windowsEventLogger = windowsEventLogger;
-            _configProvider = configProvider;
+            _config = config;
         }
 
         /// <summary>
@@ -175,7 +175,7 @@ namespace NAPS2.Platform.Windows
             }
 
             // Only start one instance if configured for SingleInstance
-            if (_configProvider.Get(c => c.SingleInstance))
+            if (_config.Get(c => c.SingleInstance))
             {
                 // See if there's another NAPS2 process running
                 foreach (var process in GetOtherNaps2Processes())

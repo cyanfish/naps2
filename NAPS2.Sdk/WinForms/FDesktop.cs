@@ -138,11 +138,11 @@ namespace NAPS2.WinForms
             }
             _imageList.ThumbnailRenderer = _thumbnailRenderer;
             thumbnailList1.ThumbnailRenderer = _thumbnailRenderer;
-            int thumbnailSize = ConfigProvider.Get(c => c.ThumbnailSize);
+            int thumbnailSize = Config.Get(c => c.ThumbnailSize);
             thumbnailList1.ThumbnailSize = new Size(thumbnailSize, thumbnailSize);
             SetThumbnailSpacing(thumbnailSize);
 
-            var hiddenButtons = ConfigProvider.Get(c => c.HiddenButtons);
+            var hiddenButtons = Config.Get(c => c.HiddenButtons);
             var buttonMap = new List<(ToolbarButtons, ToolStripItem)>
             {
                 (ToolbarButtons.Scan, tsScan),
@@ -289,7 +289,7 @@ namespace NAPS2.WinForms
         private void SetCulture(string cultureId)
         {
             SaveToolStripLocation();
-            ConfigScopes.User.Set(c => c.Culture = cultureId);
+            Config.User.Set(c => c.Culture = cultureId);
             _cultureInitializer.InitCulture();
 
             // Update localized values
@@ -336,14 +336,14 @@ namespace NAPS2.WinForms
             });
 
             // If configured (e.g. by a business), show a customizable message box on application startup.
-            if (!string.IsNullOrWhiteSpace(ConfigProvider.Get(c => c.StartupMessageText)))
+            if (!string.IsNullOrWhiteSpace(Config.Get(c => c.StartupMessageText)))
             {
-                MessageBox.Show(ConfigProvider.Get(c => c.StartupMessageText), ConfigProvider.Get(c => c.StartupMessageTitle), MessageBoxButtons.OK,
-                    ConfigProvider.Get(c => c.StartupMessageIcon));
+                MessageBox.Show(Config.Get(c => c.StartupMessageText), Config.Get(c => c.StartupMessageTitle), MessageBoxButtons.OK,
+                    Config.Get(c => c.StartupMessageIcon));
             }
 
             // Allow scanned images to be recovered in case of an unexpected close
-            _recoveryManager.RecoverScannedImages(ReceiveScannedImage(), new RecoveryParams { ThumbnailSize = ConfigProvider.Get(c => c.ThumbnailSize) });
+            _recoveryManager.RecoverScannedImages(ReceiveScannedImage(), new RecoveryParams { ThumbnailSize = Config.Get(c => c.ThumbnailSize) });
 
             new Thread(RenderThumbnails).Start();
 
@@ -351,20 +351,20 @@ namespace NAPS2.WinForms
             await RunStillImageEvents();
 
             // Show a donation prompt after a month of use
-            if (!ConfigProvider.Get(c => c.HasBeenRun))
+            if (!Config.Get(c => c.HasBeenRun))
             {
-                ConfigScopes.User.SetAll(new CommonConfig
+                Config.User.SetAll(new CommonConfig
                 {
                     HasBeenRun = true,
                     FirstRunDate = DateTime.Now
                 });
             }
 #if !INSTALLER_MSI
-            else if (!ConfigProvider.Get(c => c.HiddenButtons).HasFlag(ToolbarButtons.Donate) &&
-                !ConfigProvider.Get(c => c.HasBeenPromptedForDonation) &&
-                DateTime.Now - ConfigProvider.Get(c => c.FirstRunDate) > TimeSpan.FromDays(30))
+            else if (!Config.Get(c => c.HiddenButtons).HasFlag(ToolbarButtons.Donate) &&
+                !Config.Get(c => c.HasBeenPromptedForDonation) &&
+                DateTime.Now - Config.Get(c => c.FirstRunDate) > TimeSpan.FromDays(30))
             {
-                ConfigScopes.User.SetAll(new CommonConfig
+                Config.User.SetAll(new CommonConfig
                 {
                     HasBeenPromptedForDonation = true,
                     LastDonatePromptDate = DateTime.Now
@@ -372,9 +372,9 @@ namespace NAPS2.WinForms
                 _notify.DonatePrompt();
             }
 
-            if (ConfigProvider.Get(c => c.CheckForUpdates) &&
-                (!ConfigProvider.Get(c => c.HasCheckedForUpdates) ||
-                 ConfigProvider.Get(c => c.LastUpdateCheckDate) < DateTime.Now - _updateChecker.CheckInterval))
+            if (Config.Get(c => c.CheckForUpdates) &&
+                (!Config.Get(c => c.HasCheckedForUpdates) ||
+                 Config.Get(c => c.LastUpdateCheckDate) < DateTime.Now - _updateChecker.CheckInterval))
             {
                 _updateChecker.CheckForUpdates().ContinueWith(task =>
                 {
@@ -384,7 +384,7 @@ namespace NAPS2.WinForms
                     }
                     else
                     {
-                        ConfigScopes.User.SetAll(new CommonConfig
+                        Config.User.SetAll(new CommonConfig
                         {
                             HasCheckedForUpdates = true,
                             LastUpdateCheckDate = DateTime.Now
@@ -505,9 +505,9 @@ namespace NAPS2.WinForms
         private ScanParams DefaultScanParams() =>
             new ScanParams
             {
-                NoAutoSave = ConfigProvider.Get(c => c.DisableAutoSave),
-                DoOcr = ConfigProvider.Get(c => c.EnableOcr) && ConfigProvider.Get(c => c.OcrAfterScanning),
-                ThumbnailSize = ConfigProvider.Get(c => c.ThumbnailSize)
+                NoAutoSave = Config.Get(c => c.DisableAutoSave),
+                DoOcr = Config.Get(c => c.EnableOcr) && Config.Get(c => c.OcrAfterScanning),
+                ThumbnailSize = Config.Get(c => c.ThumbnailSize)
             };
 
         private async Task ScanWithDevice(string deviceID)
@@ -527,14 +527,14 @@ namespace NAPS2.WinForms
             }
             if (profile == null)
             {
-                if (ConfigProvider.Get(c => c.NoUserProfiles) && _profileManager.Profiles.Any(x => x.IsLocked))
+                if (Config.Get(c => c.NoUserProfiles) && _profileManager.Profiles.Any(x => x.IsLocked))
                 {
                     return;
                 }
 
                 // No profile for the device we're scanning with, so prompt to create one
                 var editSettingsForm = FormFactory.Create<FEditProfile>();
-                editSettingsForm.ScanProfile = ConfigProvider.Get(c => c.DefaultProfileSettings);
+                editSettingsForm.ScanProfile = Config.Get(c => c.DefaultProfileSettings);
                 try
                 {
                     // Populate the device field automatically (because we can do that!)
@@ -586,7 +586,7 @@ namespace NAPS2.WinForms
         private async Task ScanWithNewProfile()
         {
             var editSettingsForm = FormFactory.Create<FEditProfile>();
-            editSettingsForm.ScanProfile = ConfigProvider.Get(c => c.DefaultProfileSettings);
+            editSettingsForm.ScanProfile = Config.Get(c => c.DefaultProfileSettings);
             editSettingsForm.ShowDialog();
             if (!editSettingsForm.Result)
             {
@@ -736,9 +736,9 @@ namespace NAPS2.WinForms
             ctxSelectAll.Enabled = _imageList.Images.Any();
 
             // Other
-            btnZoomIn.Enabled = _imageList.Images.Any() && ConfigProvider.Get(c => c.ThumbnailSize) < ThumbnailSizes.MAX_SIZE;
-            btnZoomOut.Enabled = _imageList.Images.Any() && ConfigProvider.Get(c => c.ThumbnailSize) > ThumbnailSizes.MIN_SIZE;
-            tsNewProfile.Enabled = !(ConfigProvider.Get(c => c.NoUserProfiles) && _profileManager.Profiles.Any(x => x.IsLocked));
+            btnZoomIn.Enabled = _imageList.Images.Any() && Config.Get(c => c.ThumbnailSize) < ThumbnailSizes.MAX_SIZE;
+            btnZoomOut.Enabled = _imageList.Images.Any() && Config.Get(c => c.ThumbnailSize) > ThumbnailSizes.MIN_SIZE;
+            tsNewProfile.Enabled = !(Config.Get(c => c.NoUserProfiles) && _profileManager.Profiles.Any(x => x.IsLocked));
 
             if (PlatformCompat.Runtime.RefreshListViewAfterChange)
             {
@@ -792,12 +792,12 @@ namespace NAPS2.WinForms
 
         private void SaveToolStripLocation()
         {
-            ConfigScopes.User.Set(c => c.DesktopToolStripDock = tStrip.Parent.Dock);
+            Config.User.Set(c => c.DesktopToolStripDock = tStrip.Parent.Dock);
         }
 
         private void LoadToolStripLocation()
         {
-            var dock = ConfigProvider.Get(c => c.DesktopToolStripDock);
+            var dock = Config.Get(c => c.DesktopToolStripDock);
             if (dock != DockStyle.None)
             {
                 var panel = toolStripContainer1.Controls.OfType<ToolStripPanel>().FirstOrDefault(x => x.Dock == dock);
@@ -892,7 +892,7 @@ namespace NAPS2.WinForms
         {
             if (await _exportHelper.SavePDF(images, _notify))
             {
-                if (ConfigProvider.Get(c => c.DeleteAfterSaving))
+                if (Config.Get(c => c.DeleteAfterSaving))
                 {
                     SafeInvoke(() =>
                     {
@@ -906,7 +906,7 @@ namespace NAPS2.WinForms
         {
             if (await _exportHelper.SaveImages(images, _notify))
             {
-                if (ConfigProvider.Get(c => c.DeleteAfterSaving))
+                if (Config.Get(c => c.DeleteAfterSaving))
                 {
                     _imageList.Mutate(new ImageListMutation.DeleteSelected(), ListSelection.From(images));
                 }
@@ -944,7 +944,7 @@ namespace NAPS2.WinForms
         private void ImportFiles(IEnumerable<string> files)
         {
             var op = _operationFactory.Create<ImportOperation>();
-            if (op.Start(OrderFiles(files), ReceiveScannedImage(), new ImportParams { ThumbnailSize = ConfigProvider.Get(c => c.ThumbnailSize) }))
+            if (op.Start(OrderFiles(files), ReceiveScannedImage(), new ImportParams { ThumbnailSize = Config.Get(c => c.ThumbnailSize) }))
             {
                 _operationProgress.ShowProgress(op);
             }
@@ -961,7 +961,7 @@ namespace NAPS2.WinForms
         private void ImportDirect(ImageTransferData data, bool copy)
         {
             var op = _operationFactory.Create<DirectImportOperation>();
-            if (op.Start(data, copy, ReceiveScannedImage(), new DirectImportParams { ThumbnailSize = ConfigProvider.Get(c => c.ThumbnailSize) }))
+            if (op.Start(data, copy, ReceiveScannedImage(), new DirectImportParams { ThumbnailSize = Config.Get(c => c.ThumbnailSize) }))
             {
                 _operationProgress.ShowProgress(op);
             }
@@ -996,7 +996,7 @@ namespace NAPS2.WinForms
             // Configured
 
             // TODO: Granular
-            var ks = ConfigProvider.Get(c => c.KeyboardShortcuts);
+            var ks = Config.Get(c => c.KeyboardShortcuts);
 
             _ksm.Assign(ks.About, OpenAbout);
             _ksm.Assign(ks.BatchScan, tsBatchScan);
@@ -1057,7 +1057,7 @@ namespace NAPS2.WinForms
         private string? GetProfileShortcut(int i)
         {
             // TODO: Granular
-            var ks = ConfigProvider.Get(c => c.KeyboardShortcuts);
+            var ks = Config.Get(c => c.KeyboardShortcuts);
             switch (i)
             {
                 case 1:
@@ -1162,7 +1162,7 @@ namespace NAPS2.WinForms
 
         private void tsOcr_Click(object sender, EventArgs e)
         {
-            if (_ocrEngineManager.MustUpgrade && !ConfigProvider.Get(c => c.NoUpdatePrompt))
+            if (_ocrEngineManager.MustUpgrade && !Config.Get(c => c.NoUpdatePrompt))
             {
                 // Re-download a fixed version on Windows XP if needed
                 MessageBox.Show(MiscResources.OcrUpdateAvailable, "", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -1178,7 +1178,7 @@ namespace NAPS2.WinForms
             }
             else if (_ocrEngineManager.IsReady)
             {
-                if (_ocrEngineManager.CanUpgrade && !ConfigProvider.Get(c => c.NoUpdatePrompt))
+                if (_ocrEngineManager.CanUpgrade && !Config.Get(c => c.NoUpdatePrompt))
                 {
                     MessageBox.Show(MiscResources.OcrUpdateAvailable, "", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     FormFactory.Create<FOcrLanguageDownload>().ShowDialog();
@@ -1202,7 +1202,7 @@ namespace NAPS2.WinForms
 
         private void tsdSavePDF_ButtonClick(object sender, EventArgs e)
         {
-            var action = ConfigProvider.Get(c => c.SaveButtonDefaultAction);
+            var action = Config.Get(c => c.SaveButtonDefaultAction);
 
             if (action == SaveButtonDefaultAction.AlwaysPrompt
                 || action == SaveButtonDefaultAction.PromptIfSelected && SelectedIndices.Any())
@@ -1221,7 +1221,7 @@ namespace NAPS2.WinForms
 
         private void tsdSaveImages_ButtonClick(object sender, EventArgs e)
         {
-            var action = ConfigProvider.Get(c => c.SaveButtonDefaultAction);
+            var action = Config.Get(c => c.SaveButtonDefaultAction);
 
             if (action == SaveButtonDefaultAction.AlwaysPrompt
                 || action == SaveButtonDefaultAction.PromptIfSelected && SelectedIndices.Any())
@@ -1240,7 +1240,7 @@ namespace NAPS2.WinForms
 
         private void tsdEmailPDF_ButtonClick(object sender, EventArgs e)
         {
-            var action = ConfigProvider.Get(c => c.SaveButtonDefaultAction);
+            var action = Config.Get(c => c.SaveButtonDefaultAction);
 
             if (action == SaveButtonDefaultAction.AlwaysPrompt
                 || action == SaveButtonDefaultAction.PromptIfSelected && SelectedIndices.Any())
@@ -1477,10 +1477,10 @@ namespace NAPS2.WinForms
 
         private void StepThumbnailSize(double step)
         {
-            int thumbnailSize = ConfigProvider.Get(c => c.ThumbnailSize);
+            int thumbnailSize = Config.Get(c => c.ThumbnailSize);
             thumbnailSize = (int)ThumbnailSizes.StepNumberToSize(ThumbnailSizes.SizeToStepNumber(thumbnailSize) + step);
             thumbnailSize = Math.Max(Math.Min(thumbnailSize, ThumbnailSizes.MAX_SIZE), ThumbnailSizes.MIN_SIZE);
-            ConfigScopes.User.Set(c => c.ThumbnailSize = thumbnailSize);
+            Config.User.Set(c => c.ThumbnailSize = thumbnailSize);
             ResizeThumbnails(thumbnailSize);
         }
 

@@ -12,7 +12,7 @@ namespace NAPS2.WinForms
         private readonly DialogHelper _dialogHelper;
         private TransactionConfigScope<CommonConfig> _userTransact;
         private TransactionConfigScope<CommonConfig> _runTransact;
-        private ConfigProvider<CommonConfig> _transactProvider;
+        private ScopedConfig _transactionConfig;
 
         public FImageSettings(DialogHelper dialogHelper)
         {
@@ -32,21 +32,21 @@ namespace NAPS2.WinForms
                     .WidthToForm()
                 .Activate();
 
-            _userTransact = ConfigScopes.User.BeginTransaction();
-            _runTransact = ConfigScopes.Run.BeginTransaction();
-            _transactProvider = ConfigProvider.Replace(ConfigScopes.User, _userTransact).Replace(ConfigScopes.Run, _runTransact);
+            _userTransact = Config.User.BeginTransaction();
+            _runTransact = Config.Run.BeginTransaction();
+            _transactionConfig = Config.WithTransaction(_userTransact, _runTransact);
             UpdateValues();
             UpdateEnabled();
         }
 
         private void UpdateValues()
         {
-            txtDefaultFilePath.Text = _transactProvider.Get(c => c.ImageSettings.DefaultFileName);
-            cbSkipSavePrompt.Checked = _transactProvider.Get(c => c.ImageSettings.SkipSavePrompt);
-            txtJpegQuality.Text = _transactProvider.Get(c => c.ImageSettings.JpegQuality).ToString(CultureInfo.InvariantCulture);
-            cmbTiffCompr.SelectedIndex = (int)_transactProvider.Get(c => c.ImageSettings.TiffCompression);
-            cbSinglePageTiff.Checked = _transactProvider.Get(c => c.ImageSettings.SinglePageTiff);
-            cbRememberSettings.Checked = _transactProvider.Get(c => c.RememberImageSettings);
+            txtDefaultFilePath.Text = _transactionConfig.Get(c => c.ImageSettings.DefaultFileName);
+            cbSkipSavePrompt.Checked = _transactionConfig.Get(c => c.ImageSettings.SkipSavePrompt);
+            txtJpegQuality.Text = _transactionConfig.Get(c => c.ImageSettings.JpegQuality).ToString(CultureInfo.InvariantCulture);
+            cmbTiffCompr.SelectedIndex = (int)_transactionConfig.Get(c => c.ImageSettings.TiffCompression);
+            cbSinglePageTiff.Checked = _transactionConfig.Get(c => c.ImageSettings.SinglePageTiff);
+            cbRememberSettings.Checked = _transactionConfig.Get(c => c.RememberImageSettings);
         }
 
         private void UpdateEnabled()

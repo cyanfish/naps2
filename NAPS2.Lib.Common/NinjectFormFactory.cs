@@ -18,8 +18,7 @@ namespace NAPS2
         {
             var form = _kernel.Get<T>();
             form.FormFactory = _kernel.Get<IFormFactory>();
-            form.ConfigScopes = _kernel.Get<ConfigScopes>();
-            form.ConfigProvider = _kernel.Get<ScopeSetConfigProvider<CommonConfig>>();
+            form.Config = _kernel.Get<ScopedConfig>();
             return form;
         }
     }

@@ -6,19 +6,16 @@ namespace NAPS2.EtoForms
 {
     public abstract class EtoDialogBase : Dialog, IFormBase
     {
-        protected EtoDialogBase(ConfigScopes configScopes)
+        protected EtoDialogBase(ScopedConfig scopedConfig)
         {
-            ConfigScopes = configScopes;
-            ConfigProvider = configScopes.Provider;
-            FormStateController = new FormStateController(this, configScopes);
+            Config = scopedConfig;
+            FormStateController = new FormStateController(this, scopedConfig);
         }
 
         public FormStateController FormStateController { get; }
 
         public IFormFactory FormFactory { get; set; }
         
-        public ConfigScopes ConfigScopes { get; set; }
-        
-        public ScopeSetConfigProvider<CommonConfig> ConfigProvider { get; set; }
+        public ScopedConfig Config { get; set; }
     }
 }

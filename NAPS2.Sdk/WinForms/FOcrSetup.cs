@@ -47,10 +47,10 @@ namespace NAPS2.WinForms
             labelOcrMode.Visible = _availableModes != null;
             ConditionalControls.LockHeight(this);
 
-            checkBoxEnableOcr.Checked = ConfigProvider.Get(c => c.EnableOcr);
-            SetSelectedValue(comboLanguages, ConfigProvider.Get(c => c.OcrLanguageCode));
-            SetSelectedItem(comboOcrMode, ConfigProvider.Get(c => c.OcrMode));
-            checkBoxRunInBG.Checked = ConfigProvider.Get(c => c.OcrAfterScanning);
+            checkBoxEnableOcr.Checked = Config.Get(c => c.EnableOcr);
+            SetSelectedValue(comboLanguages, Config.Get(c => c.OcrLanguageCode));
+            SetSelectedItem(comboOcrMode, Config.Get(c => c.OcrMode));
+            checkBoxRunInBG.Checked = Config.Get(c => c.OcrAfterScanning);
 
             UpdateView();
         }
@@ -87,10 +87,10 @@ namespace NAPS2.WinForms
 
         private void UpdateView()
         {
-            bool canChangeEnabled = ConfigScopes.AppLocked.Get(c => c.EnableOcr) == null;
+            bool canChangeEnabled = Config.AppLocked.Get(c => c.EnableOcr) == null;
             bool canChangeLanguage = canChangeEnabled
-                                     || ConfigProvider.Get(c => c.EnableOcr)
-                                        && ConfigScopes.AppLocked.Get(c => c.OcrLanguageCode) == null;
+                                     || Config.Get(c => c.EnableOcr)
+                                        && Config.AppLocked.Get(c => c.OcrLanguageCode) == null;
             checkBoxEnableOcr.Enabled = canChangeEnabled;
             comboLanguages.Enabled = checkBoxEnableOcr.Checked && canChangeLanguage;
             linkGetLanguages.Enabled = canChangeLanguage;
@@ -120,9 +120,9 @@ namespace NAPS2.WinForms
 
         private void btnOK_Click(object sender, EventArgs e)
         {
-            if (ConfigScopes.AppLocked.Get(c => c.EnableOcr) == null)
+            if (Config.AppLocked.Get(c => c.EnableOcr) == null)
             {
-                ConfigScopes.User.SetAll(new CommonConfig
+                Config.User.SetAll(new CommonConfig
                 {
                     EnableOcr = checkBoxEnableOcr.Checked,
                     OcrLanguageCode = (string)comboLanguages.SelectedValue,

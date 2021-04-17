@@ -13,18 +13,18 @@ namespace NAPS2
     {
         public static void Initialize(IKernel kernel)
         {
-            var configProvider = kernel.Get<ConfigScopes>().Provider;
+            var config = kernel.Get<ScopedConfig>();
 
             Log.Logger = new NLogLogger();
             if (PlatformCompat.System.CanUseWin32)
             {
-                Log.EventLogger = new WindowsEventLogger(configProvider);
+                Log.EventLogger = new WindowsEventLogger(config);
             }
 #if DEBUG
             Debug.Listeners.Add(new NLogTraceListener());
 #endif
 
-            var customPath = configProvider.Get(c => c.ComponentsPath);
+            var customPath = config.Get(c => c.ComponentsPath);
             var basePath = string.IsNullOrWhiteSpace(customPath)
                 ? Paths.Components
                 : Environment.ExpandEnvironmentVariables(customPath);

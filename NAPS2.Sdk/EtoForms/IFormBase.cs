@@ -10,8 +10,6 @@ namespace NAPS2.EtoForms
         // TODO: Make these constructor injected, Eto requires things to be defined in the constructor so property injection is error-prone
         IFormFactory FormFactory { get; set; }
 
-        ConfigScopes ConfigScopes { get; set; }
-
-        ScopeSetConfigProvider<CommonConfig> ConfigProvider { get; set; }
+        ScopedConfig Config { get; set; }
     }
 }

@@ -31,12 +31,12 @@ namespace NAPS2.ImportExport.Pdf
             AllowBackground = true;
         }
 
-        public bool Start(string fileName, Placeholders placeholders, ICollection<ScannedImage> images, ConfigProvider<PdfSettings> pdfSettings, OcrContext ocrContext)
+        public bool Start(string fileName, Placeholders placeholders, ICollection<ScannedImage> images, IConfigProvider<PdfSettings> pdfSettings, OcrContext ocrContext)
         {
             return Start(fileName, placeholders, images, pdfSettings, ocrContext, false, null);
         }
 
-        public bool Start(string fileName, Placeholders placeholders, ICollection<ScannedImage> images, ConfigProvider<PdfSettings> pdfSettings, OcrContext ocrContext, bool email, EmailMessage? emailMessage)
+        public bool Start(string fileName, Placeholders placeholders, ICollection<ScannedImage> images, IConfigProvider<PdfSettings> pdfSettings, OcrContext ocrContext, bool email, EmailMessage? emailMessage)
         {
             ProgressTitle = email ? MiscResources.EmailPdfProgress : MiscResources.SavePdfProgress;
             var subFileName = placeholders.Substitute(fileName);

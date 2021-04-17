@@ -50,7 +50,7 @@ namespace NAPS2.ImportExport.Pdf
             _memoryStreamRenderer = memoryStreamRenderer;
         }
 
-        public override async Task<bool> Export(string path, ICollection<ScannedImage.Snapshot> snapshots, ConfigProvider<PdfSettings> settings, OcrContext? ocrContext = null, ProgressHandler? progressCallback = null, CancellationToken cancelToken = default)
+        public override async Task<bool> Export(string path, ICollection<ScannedImage.Snapshot> snapshots, IConfigProvider<PdfSettings> settings, OcrContext? ocrContext = null, ProgressHandler? progressCallback = null, CancellationToken cancelToken = default)
         {
             return await Task.Run(async () =>
             {

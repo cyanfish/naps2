@@ -4,20 +4,21 @@ namespace NAPS2.Config
 {
     public class TransactionConfigScope<TConfig> : ConfigScope<TConfig>
     {
-        private readonly ConfigScope<TConfig> _store;
         private readonly Func<TConfig> _factory;
         private TConfig _changes;
 
-        public TransactionConfigScope(ConfigScope<TConfig> store, Func<TConfig> factory) : base(ConfigScopeMode.ReadWrite)
+        public TransactionConfigScope(ConfigScope<TConfig> originalScope, Func<TConfig> factory) : base(ConfigScopeMode.ReadWrite)
         {
-            if (store.Mode == ConfigScopeMode.ReadOnly)
+            if (originalScope.Mode == ConfigScopeMode.ReadOnly)
             {
-                throw new ArgumentException("A transaction can't be created for a ReadOnly scope.", nameof(store));
+                throw new ArgumentException("A transaction can't be created for a ReadOnly scope.", nameof(originalScope));
             }
-            _store = store;
+            OriginalScope = originalScope;
             _factory = factory;
             _changes = factory();
         }
+
+        public ConfigScope<TConfig> OriginalScope { get; }
 
         public bool HasChanges { get; private set; }
 
@@ -27,9 +28,9 @@ namespace NAPS2.Config
         {
             lock (this)
             {
-                lock (_store)
+                lock (OriginalScope)
                 {
-                    _store.SetAll(_changes);
+                    OriginalScope.SetAll(_changes);
                     _changes = _factory();
                 }
                 if (HasChanges)
@@ -47,7 +48,7 @@ namespace NAPS2.Config
             {
                 return value;
             }
-            return _store.Get(func);
+            return OriginalScope.Get(func);
         }
 
         protected override void SetInternal(Action<TConfig> func)

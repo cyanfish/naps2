@@ -159,7 +159,7 @@ namespace NAPS2.WinForms
                         if (img == Image)
                         {
                             var transformed = _imageContext.PerformAllTransforms(new GdiImage(workingImage).Clone(), Transforms);
-                            img.SetThumbnail(_imageContext.PerformTransform(transformed, new ThumbnailTransform(ConfigProvider.Get(c => c.ThumbnailSize))));
+                            img.SetThumbnail(_imageContext.PerformTransform(transformed, new ThumbnailTransform(Config.Get(c => c.ThumbnailSize))));
                         }
                     }
                 }

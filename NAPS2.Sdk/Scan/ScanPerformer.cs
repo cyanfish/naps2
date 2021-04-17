@@ -20,7 +20,7 @@ namespace NAPS2.Scan
     internal class ScanPerformer : IScanPerformer
     {
         private readonly IFormFactory _formFactory;
-        private readonly ConfigProvider<CommonConfig> _configProvider;
+        private readonly ScopedConfig _config;
         private readonly OperationProgress _operationProgress;
         private readonly AutoSaver _autoSaver;
         private readonly IProfileManager _profileManager;
@@ -29,11 +29,11 @@ namespace NAPS2.Scan
         private readonly ScanOptionsValidator _scanOptionsValidator;
         private readonly IScanBridgeFactory _scanBridgeFactory;
 
-        public ScanPerformer(IFormFactory formFactory, ConfigProvider<CommonConfig> configProvider, OperationProgress operationProgress, AutoSaver autoSaver,
+        public ScanPerformer(IFormFactory formFactory, ScopedConfig config, OperationProgress operationProgress, AutoSaver autoSaver,
             IProfileManager profileManager, ErrorOutput errorOutput, ILocalPostProcessor localPostProcessor, ScanOptionsValidator scanOptionsValidator, IScanBridgeFactory scanBridgeFactory)
         {
             _formFactory = formFactory;
-            _configProvider = configProvider;
+            _config = config;
             _operationProgress = operationProgress;
             _autoSaver = autoSaver;
             _profileManager = profileManager;
@@ -238,7 +238,7 @@ namespace NAPS2.Scan
                 }
 
                 // Persist the device in the profile if configured to do so
-                if (_configProvider.Get(c => c.AlwaysRememberDevice))
+                if (_config.Get(c => c.AlwaysRememberDevice))
                 {
                     scanProfile.Device = options.Device;
                     _profileManager.Save();

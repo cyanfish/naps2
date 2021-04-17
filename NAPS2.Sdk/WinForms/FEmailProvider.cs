@@ -89,10 +89,10 @@ namespace NAPS2.WinForms
 
         private void ChooseSystem(string clientName)
         {
-            var emailSetup = ConfigProvider.Get(c => c.EmailSetup);
+            var emailSetup = Config.Get(c => c.EmailSetup);
             emailSetup.SystemProviderName = clientName == _defaultSystemClientName ? null : clientName;
             emailSetup.ProviderType = EmailProviderType.System;
-            ConfigScopes.User.Set(c => c.EmailSetup = emailSetup);
+            Config.User.Set(c => c.EmailSetup = emailSetup);
             DialogResult = DialogResult.OK;
             Close();
         }
@@ -128,7 +128,7 @@ namespace NAPS2.WinForms
 
         private EmailProviderWidget GetDefaultWidget()
         {
-            var emailSetup = ConfigProvider.Get(c => c.EmailSetup);
+            var emailSetup = Config.Get(c => c.EmailSetup);
             foreach (var widget in _providerWidgets)
             {
                 if (widget.ProviderType == emailSetup.ProviderType)

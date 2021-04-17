@@ -10,22 +10,20 @@ namespace NAPS2.ImportExport.Email.Oauth
     // TODO: The config references should be pulled elsewhere so this can be included in the SDK
     public class GmailOauthProvider : OauthProvider
     {
-        private readonly ConfigScopes _configScopes;
-        private readonly ConfigProvider<CommonConfig> _configProvider;
+        private readonly ScopedConfig _config;
 
         private OauthClientCreds? _creds;
 
-        public GmailOauthProvider(ConfigScopes configScopes, ConfigProvider<CommonConfig> configProvider)
+        public GmailOauthProvider(ScopedConfig config)
         {
-            _configScopes = configScopes;
-            _configProvider = configProvider;
+            _config = config;
         }
 
         #region Authorization
 
-        public override OauthToken? Token => _configProvider.Get(c => c.EmailSetup.GmailToken);
+        public override OauthToken? Token => _config.Get(c => c.EmailSetup.GmailToken);
 
-        public override string? User => _configProvider.Get(c => c.EmailSetup.GmailUser);
+        public override string? User => _config.Get(c => c.EmailSetup.GmailUser);
 
         protected override OauthClientCreds ClientCreds
         {
@@ -49,14 +47,14 @@ namespace NAPS2.ImportExport.Email.Oauth
 
         protected override void SaveToken(OauthToken token, bool refresh)
         {
-            var emailSetup = _configProvider.Get(c => c.EmailSetup);
+            var emailSetup = _config.Get(c => c.EmailSetup);
             emailSetup.GmailToken = token;
             if (!refresh)
             {
                 emailSetup.GmailUser = GetEmailAddress();
                 emailSetup.ProviderType = EmailProviderType.Gmail;
             }
-            _configScopes.User.Set(c => c.EmailSetup = emailSetup);
+            _config.User.Set(c => c.EmailSetup = emailSetup);
         }
 
         #endregion

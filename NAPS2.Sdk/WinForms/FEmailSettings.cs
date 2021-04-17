@@ -12,7 +12,7 @@ namespace NAPS2.WinForms
         private readonly SystemEmailClients _systemEmailClients;
         private TransactionConfigScope<CommonConfig> _userTransact;
         private TransactionConfigScope<CommonConfig> _runTransact;
-        private ConfigProvider<CommonConfig> _transactProvider;
+        private ScopedConfig _transactionConfig;
 
         public FEmailSettings(SystemEmailClients systemEmailClients)
         {
@@ -31,34 +31,34 @@ namespace NAPS2.WinForms
                     .WidthToForm()
                 .Activate();
 
-            _userTransact = ConfigScopes.User.BeginTransaction();
-            _runTransact = ConfigScopes.Run.BeginTransaction();
-            _transactProvider = ConfigProvider.Replace(ConfigScopes.User, _userTransact).Replace(ConfigScopes.Run, _runTransact);
+            _userTransact = Config.User.BeginTransaction();
+            _runTransact = Config.Run.BeginTransaction();
+            _transactionConfig = Config.WithTransaction(_userTransact, _runTransact);
             UpdateProvider();
             UpdateValues();
         }
 
         private void UpdateValues()
         {
-            txtAttachmentName.Text = _transactProvider.Get(c => c.EmailSettings.AttachmentName);
-            cbRememberSettings.Checked = _transactProvider.Get(c => c.RememberEmailSettings);
+            txtAttachmentName.Text = _transactionConfig.Get(c => c.EmailSettings.AttachmentName);
+            cbRememberSettings.Checked = _transactionConfig.Get(c => c.RememberEmailSettings);
         }
 
         private void UpdateProvider()
         {
-            switch (_transactProvider.Get(c => c.EmailSetup.ProviderType))
+            switch (_transactionConfig.Get(c => c.EmailSetup.ProviderType))
             {
                 case EmailProviderType.Gmail:
-                    lblProvider.Text = SettingsResources.EmailProviderType_Gmail + '\n' + _transactProvider.Get(c => c.EmailSetup.GmailUser);
+                    lblProvider.Text = SettingsResources.EmailProviderType_Gmail + '\n' + _transactionConfig.Get(c => c.EmailSetup.GmailUser);
                     break;
                 case EmailProviderType.OutlookWeb:
-                    lblProvider.Text = SettingsResources.EmailProviderType_OutlookWeb + '\n' + _transactProvider.Get(c => c.EmailSetup.OutlookWebToken);
+                    lblProvider.Text = SettingsResources.EmailProviderType_OutlookWeb + '\n' + _transactionConfig.Get(c => c.EmailSetup.OutlookWebToken);
                     break;
                 case EmailProviderType.CustomSmtp:
-                    lblProvider.Text = _transactProvider.Get(c => c.EmailSetup.SmtpHost) + '\n' + _transactProvider.Get(c => c.EmailSetup.SmtpUser);
+                    lblProvider.Text = _transactionConfig.Get(c => c.EmailSetup.SmtpHost) + '\n' + _transactionConfig.Get(c => c.EmailSetup.SmtpUser);
                     break;
                 case EmailProviderType.System:
-                    lblProvider.Text = _transactProvider.Get(c => c.EmailSetup.SystemProviderName) ?? _systemEmailClients.GetDefaultName();
+                    lblProvider.Text = _transactionConfig.Get(c => c.EmailSetup.SystemProviderName) ?? _systemEmailClients.GetDefaultName();
                     break;
                 default:
                     lblProvider.Text = SettingsResources.EmailProvider_NotSelected;

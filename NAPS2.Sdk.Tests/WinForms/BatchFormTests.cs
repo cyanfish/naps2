@@ -15,7 +15,7 @@ namespace NAPS2.Sdk.Tests.WinForms
         public void LoadUserConfig()
         {
             var ctx = CreateForm();
-            ctx.ConfigScopes.User.SetAll(new CommonConfig
+            ctx.Config.User.SetAll(new CommonConfig
             {
                 BatchSettings =
                 {
@@ -61,12 +61,11 @@ namespace NAPS2.Sdk.Tests.WinForms
                 Performer = new Mock<IBatchScanPerformer>(),
                 ErrorOutput = new Mock<ErrorOutput>(),
                 DialogHelper = new Mock<DialogHelper>(),
-                ConfigScopes = ConfigScopes.Stub()
+                Config = ScopedConfig.Stub()
             };
             ctx.Form = new FBatchScan(ctx.Performer.Object, ctx.ErrorOutput.Object, ctx.DialogHelper.Object, ProfileManager)
             {
-                ConfigScopes = ctx.ConfigScopes,
-                ConfigProvider = ctx.ConfigScopes.Provider
+                Config = ctx.Config
             };
             return ctx;
         }
@@ -79,7 +78,7 @@ namespace NAPS2.Sdk.Tests.WinForms
 
             public Mock<DialogHelper> DialogHelper { get; set; }
 
-            public ConfigScopes ConfigScopes { get; set; }
+            public ScopedConfig Config { get; set; }
 
             public FBatchScan Form { get; set; }
         }

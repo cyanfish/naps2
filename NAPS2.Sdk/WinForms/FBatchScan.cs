@@ -27,7 +27,7 @@ namespace NAPS2.WinForms
         private readonly DialogHelper _dialogHelper;
         private readonly IProfileManager _profileManager;
         private TransactionConfigScope<CommonConfig> _userTransact;
-        private ConfigProvider<CommonConfig> _transactProvider;
+        private ScopedConfig _transactionConfig;
 
         private bool _batchRunning;
         private CancellationTokenSource _cts = new CancellationTokenSource();
@@ -56,13 +56,13 @@ namespace NAPS2.WinForms
                     .RightToForm()
                 .Activate();
 
-            btnAddProfile.Enabled = !(ConfigProvider.Get(c => c.NoUserProfiles) && _profileManager.Profiles.Any(x => x.IsLocked));
+            btnAddProfile.Enabled = !(Config.Get(c => c.NoUserProfiles) && _profileManager.Profiles.Any(x => x.IsLocked));
 
             ConditionalControls.LockHeight(this);
 
             // TODO: Granular
-            _userTransact = ConfigScopes.User.BeginTransaction();
-            _transactProvider = ConfigProvider.Replace(ConfigScopes.User, _userTransact);
+            _userTransact = Config.User.BeginTransaction();
+            _transactionConfig = Config.WithTransaction(_userTransact);
             UpdateUIFromSettings();
         }
 
@@ -70,23 +70,23 @@ namespace NAPS2.WinForms
         {
             UpdateProfiles();
 
-            rdSingleScan.Checked = _transactProvider.Get(c => c.BatchSettings.ScanType) == BatchScanType.Single;
-            rdMultipleScansPrompt.Checked = _transactProvider.Get(c => c.BatchSettings.ScanType) == BatchScanType.MultipleWithPrompt;
-            rdMultipleScansDelay.Checked = _transactProvider.Get(c => c.BatchSettings.ScanType) == BatchScanType.MultipleWithDelay;
+            rdSingleScan.Checked = _transactionConfig.Get(c => c.BatchSettings.ScanType) == BatchScanType.Single;
+            rdMultipleScansPrompt.Checked = _transactionConfig.Get(c => c.BatchSettings.ScanType) == BatchScanType.MultipleWithPrompt;
+            rdMultipleScansDelay.Checked = _transactionConfig.Get(c => c.BatchSettings.ScanType) == BatchScanType.MultipleWithDelay;
 
             // TODO: Verify culture (+ vaildation ofc)
-            txtNumberOfScans.Text = _transactProvider.Get(c => c.BatchSettings.ScanCount).ToString(CultureInfo.CurrentCulture);
-            txtTimeBetweenScans.Text = _transactProvider.Get(c => c.BatchSettings.ScanIntervalSeconds).ToString(CultureInfo.CurrentCulture);
+            txtNumberOfScans.Text = _transactionConfig.Get(c => c.BatchSettings.ScanCount).ToString(CultureInfo.CurrentCulture);
+            txtTimeBetweenScans.Text = _transactionConfig.Get(c => c.BatchSettings.ScanIntervalSeconds).ToString(CultureInfo.CurrentCulture);
 
-            rdLoadIntoNaps2.Checked = _transactProvider.Get(c => c.BatchSettings.OutputType) == BatchOutputType.Load;
-            rdSaveToSingleFile.Checked = _transactProvider.Get(c => c.BatchSettings.OutputType) == BatchOutputType.SingleFile;
-            rdSaveToMultipleFiles.Checked = _transactProvider.Get(c => c.BatchSettings.OutputType) == BatchOutputType.MultipleFiles;
+            rdLoadIntoNaps2.Checked = _transactionConfig.Get(c => c.BatchSettings.OutputType) == BatchOutputType.Load;
+            rdSaveToSingleFile.Checked = _transactionConfig.Get(c => c.BatchSettings.OutputType) == BatchOutputType.SingleFile;
+            rdSaveToMultipleFiles.Checked = _transactionConfig.Get(c => c.BatchSettings.OutputType) == BatchOutputType.MultipleFiles;
 
-            rdFilePerScan.Checked = _transactProvider.Get(c => c.BatchSettings.SaveSeparator) == SaveSeparator.FilePerScan;
-            rdFilePerPage.Checked = _transactProvider.Get(c => c.BatchSettings.SaveSeparator) == SaveSeparator.FilePerPage;
-            rdSeparateByPatchT.Checked = _transactProvider.Get(c => c.BatchSettings.SaveSeparator) == SaveSeparator.PatchT;
+            rdFilePerScan.Checked = _transactionConfig.Get(c => c.BatchSettings.SaveSeparator) == SaveSeparator.FilePerScan;
+            rdFilePerPage.Checked = _transactionConfig.Get(c => c.BatchSettings.SaveSeparator) == SaveSeparator.FilePerPage;
+            rdSeparateByPatchT.Checked = _transactionConfig.Get(c => c.BatchSettings.SaveSeparator) == SaveSeparator.PatchT;
 
-            txtFilePath.Text = _transactProvider.Get(c => c.BatchSettings.SavePath);
+            txtFilePath.Text = _transactionConfig.Get(c => c.BatchSettings.SavePath);
         }
 
         private bool ValidateSettings()
@@ -132,7 +132,7 @@ namespace NAPS2.WinForms
                                         : SaveSeparator.FilePerPage);
 
             _userTransact.Set(c => c.BatchSettings.SavePath = txtFilePath.Text);
-            if (_transactProvider.Get(c => c.BatchSettings.OutputType) != BatchOutputType.Load && string.IsNullOrWhiteSpace(_transactProvider.Get(c => c.BatchSettings.SavePath)))
+            if (_transactionConfig.Get(c => c.BatchSettings.OutputType) != BatchOutputType.Load && string.IsNullOrWhiteSpace(_transactionConfig.Get(c => c.BatchSettings.SavePath)))
             {
                 ok = false;
                 txtFilePath.Focus();
@@ -145,10 +145,10 @@ namespace NAPS2.WinForms
         {
             comboProfile.Items.Clear();
             comboProfile.Items.AddRange(_profileManager.Profiles.Cast<object>().ToArray());
-            if (!string.IsNullOrEmpty(_transactProvider.Get(c => c.BatchSettings.ProfileDisplayName)) &&
-                _profileManager.Profiles.Any(x => x.DisplayName == _transactProvider.Get(c => c.BatchSettings.ProfileDisplayName)))
+            if (!string.IsNullOrEmpty(_transactionConfig.Get(c => c.BatchSettings.ProfileDisplayName)) &&
+                _profileManager.Profiles.Any(x => x.DisplayName == _transactionConfig.Get(c => c.BatchSettings.ProfileDisplayName)))
             {
-                comboProfile.Text = _transactProvider.Get(c => c.BatchSettings.ProfileDisplayName);
+                comboProfile.Text = _transactionConfig.Get(c => c.BatchSettings.ProfileDisplayName);
             }
             else if (_profileManager.DefaultProfile != null)
             {
@@ -226,10 +226,10 @@ namespace NAPS2.WinForms
 
         private void btnAddProfile_Click(object sender, EventArgs e)
         {
-            if (!(ConfigProvider.Get(c => c.NoUserProfiles) && _profileManager.Profiles.Any(x => x.IsLocked)))
+            if (!(Config.Get(c => c.NoUserProfiles) && _profileManager.Profiles.Any(x => x.IsLocked)))
             {
                 var fedit = FormFactory.Create<FEditProfile>();
-                fedit.ScanProfile = ConfigProvider.Get(c => c.DefaultProfileSettings);
+                fedit.ScanProfile = Config.Get(c => c.DefaultProfileSettings);
                 fedit.ShowDialog();
                 if (fedit.Result)
                 {
@@ -293,7 +293,7 @@ namespace NAPS2.WinForms
         {
             try
             {
-                await _batchScanPerformer.PerformBatchScan(ConfigProvider.Child(c => c.BatchSettings), this,
+                await _batchScanPerformer.PerformBatchScan(Config.Child(c => c.BatchSettings), this,
                     image => SafeInvoke(() => ImageCallback(image)), ProgressCallback, _cts.Token);
                 SafeInvoke(() =>
                 {

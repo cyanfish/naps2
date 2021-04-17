@@ -9,13 +9,11 @@ namespace NAPS2.Scan
     /// </summary>
     public class ProfileNameTracker
     {
-        private readonly ConfigProvider<CommonConfig> _configProvider;
-        private readonly ConfigScopes _configScopes;
+        private readonly ScopedConfig _config;
 
-        public ProfileNameTracker(ConfigProvider<CommonConfig> configProvider, ConfigScopes configScopes)
+        public ProfileNameTracker(ScopedConfig config)
         {
-            _configProvider = configProvider;
-            _configScopes = configScopes;
+            _config = config;
         }
 
         public void RenamingProfile(string oldName, string newName)
@@ -24,9 +22,9 @@ namespace NAPS2.Scan
             {
                 return;
             }
-            if (_configProvider.Get(c => c.BatchSettings.ProfileDisplayName) == oldName)
+            if (_config.Get(c => c.BatchSettings.ProfileDisplayName) == oldName)
             {
-                _configScopes.User.Set(c => c.BatchSettings.ProfileDisplayName = newName);
+                _config.User.Set(c => c.BatchSettings.ProfileDisplayName = newName);
             }
         }
 
@@ -36,9 +34,9 @@ namespace NAPS2.Scan
             {
                 return;
             }
-            if (_configProvider.Get(c => c.BatchSettings.ProfileDisplayName) == name)
+            if (_config.Get(c => c.BatchSettings.ProfileDisplayName) == name)
             {
-                _configScopes.User.Set(c => c.BatchSettings.ProfileDisplayName = "");
+                _config.User.Set(c => c.BatchSettings.ProfileDisplayName = "");
             }
         }
     }

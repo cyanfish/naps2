@@ -12,17 +12,15 @@ namespace NAPS2.WinForms
     {
         private readonly IFormFactory _formFactory;
         private readonly NotificationManager _notificationManager;
-        private readonly ConfigScopes _configScopes;
-        private readonly ConfigProvider<CommonConfig> _configProvider;
+        private readonly ScopedConfig _config;
 
         private readonly HashSet<IOperation> _activeOperations = new HashSet<IOperation>();
 
-        public WinFormsOperationProgress(IFormFactory formFactory, NotificationManager notificationManager, ConfigScopes configScopes, ConfigProvider<CommonConfig> configProvider)
+        public WinFormsOperationProgress(IFormFactory formFactory, NotificationManager notificationManager, ScopedConfig config)
         {
             _formFactory = formFactory;
             _notificationManager = notificationManager;
-            _configScopes = configScopes;
-            _configProvider = configProvider;
+            _config = config;
         }
 
         public override void Attach(IOperation op)
@@ -40,7 +38,7 @@ namespace NAPS2.WinForms
 
         public override void ShowProgress(IOperation op)
         {
-            if (_configProvider.Get(c => c.BackgroundOperations).Contains(op.GetType().Name))
+            if (_config.Get(c => c.BackgroundOperations).Contains(op.GetType().Name))
             {
                 ShowBackgroundProgress(op);
             }
@@ -54,9 +52,9 @@ namespace NAPS2.WinForms
         {
             Attach(op);
 
-            var bgOps = _configProvider.Get(c => c.BackgroundOperations) ?? ImmutableHashSet<string>.Empty;
+            var bgOps = _config.Get(c => c.BackgroundOperations) ?? ImmutableHashSet<string>.Empty;
             bgOps = bgOps.Remove(op.GetType().Name);
-            _configScopes.User.Set(c => c.BackgroundOperations = bgOps);
+            _config.User.Set(c => c.BackgroundOperations = bgOps);
 
             if (!op.IsFinished)
             {
@@ -75,9 +73,9 @@ namespace NAPS2.WinForms
         {
             Attach(op);
 
-            var bgOps = _configProvider.Get(c => c.BackgroundOperations) ?? ImmutableHashSet<string>.Empty;
+            var bgOps = _config.Get(c => c.BackgroundOperations) ?? ImmutableHashSet<string>.Empty;
             bgOps = bgOps.Add(op.GetType().Name);
-            _configScopes.User.Set(c => c.BackgroundOperations = bgOps);
+            _config.User.Set(c => c.BackgroundOperations = bgOps);
 
             if (!op.IsFinished)
             {

@@ -8,14 +8,14 @@ namespace NAPS2.EtoForms
     public class FormStateController
     {
         private readonly Window _window;
-        private readonly ConfigScopes _configScopes;
+        private readonly ScopedConfig _config;
         private FormState? _formState;
         private bool _loaded;
 
-        public FormStateController(Window window, ConfigScopes configScopes)
+        public FormStateController(Window window, ScopedConfig config)
         {
             _window = window;
-            _configScopes = configScopes;
+            _config = config;
             window.SizeChanged += OnResize;
             window.LocationChanged += OnMove;
             window.PreLoad += OnLoadInternal;
@@ -32,7 +32,7 @@ namespace NAPS2.EtoForms
         {
             if (RestoreFormState || SaveFormState)
             {
-                var formStates = _configScopes.Provider.Get(c => c.FormStates);
+                var formStates = _config.Get(c => c.FormStates);
                 _formState = formStates.SingleOrDefault(x => x.Name == FormName) ?? new FormState {Name = FormName};
             }
 
@@ -95,9 +95,9 @@ namespace NAPS2.EtoForms
         {
             if (SaveFormState && _formState != null)
             {
-                var formStates = _configScopes.Provider.Get(c => c.FormStates);
+                var formStates = _config.Get(c => c.FormStates);
                 formStates = formStates.RemoveAll(fs => fs.Name == FormName).Add(_formState);
-                _configScopes.User.Set(c => c.FormStates = formStates);
+                _config.User.Set(c => c.FormStates = formStates);
             }
         }
     }

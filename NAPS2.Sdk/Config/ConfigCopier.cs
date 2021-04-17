@@ -19,6 +19,7 @@ namespace NAPS2.Config
 
         private static void Copy(object src, object dst, Type t)
         {
+            // TODO: Not actually cached?
             (PropertyInfo, bool)[] GetPropData() => t.GetProperties()
                 .Select(x => (x, IsChildProp(x))).ToArray();
 

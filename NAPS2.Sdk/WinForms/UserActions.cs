@@ -53,7 +53,7 @@ namespace NAPS2.WinForms
 //            }
 //
 //            var op = operationFactory.Create<DeskewOperation>();
-//            if (op.Start(SelectedImages.ToList(), new DeskewParams { ThumbnailSize = ConfigProvider.Get(c => c.ThumbnailSize) }))
+//            if (op.Start(SelectedImages.ToList(), new DeskewParams { ThumbnailSize = Config.Get(c => c.ThumbnailSize) }))
 //            {
 //                operationProgress.ShowProgress(op);
 //                changeTracker.Made();

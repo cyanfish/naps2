@@ -9,9 +9,9 @@ namespace NAPS2.ImportExport.Email.Mapi
     public class MapiWrapper : IMapiWrapper
     {
         private readonly SystemEmailClients _systemEmailClients;
-        private readonly ConfigProvider<EmailSetup> _emailSetupProvider;
+        private readonly IConfigProvider<EmailSetup> _emailSetupProvider;
 
-        public MapiWrapper(SystemEmailClients systemEmailClients, ConfigProvider<EmailSetup> emailSetupProvider)
+        public MapiWrapper(SystemEmailClients systemEmailClients, IConfigProvider<EmailSetup> emailSetupProvider)
         {
             _systemEmailClients = systemEmailClients;
             _emailSetupProvider = emailSetupProvider;

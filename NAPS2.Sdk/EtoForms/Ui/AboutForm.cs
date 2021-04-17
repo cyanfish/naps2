@@ -18,7 +18,6 @@ namespace NAPS2.EtoForms.Ui
         private const string ICONS_HOMEPAGE = "https://www.fatcow.com/free-icons";
         private const string DONATE_URL = "https://www.naps2.com/donate";
 
-        private readonly ConfigScopes _configScopes;
         private readonly UpdateChecker _updateChecker;
         
         private readonly Control _donateButton;
@@ -28,10 +27,9 @@ namespace NAPS2.EtoForms.Ui
         private bool _hasCheckedForUpdates;
         private UpdateInfo? _update;
 
-        public AboutForm(ConfigScopes configScopes, UpdateChecker updateChecker)
-            : base(configScopes)
+        public AboutForm(ScopedConfig config, UpdateChecker updateChecker)
+            : base(config)
         {
-            _configScopes = configScopes;
             _updateChecker = updateChecker;
             
             Title = UiStrings.AboutFormTitle;
@@ -100,7 +98,7 @@ namespace NAPS2.EtoForms.Ui
                     }
                     else
                     {
-                        _configScopes.User.SetAll(new CommonConfig
+                        Config.User.SetAll(new CommonConfig
                         {
                             HasCheckedForUpdates = true,
                             LastUpdateCheckDate = DateTime.Now
@@ -146,7 +144,7 @@ namespace NAPS2.EtoForms.Ui
 
         private void CheckForUpdatesChanged(object sender, EventArgs e)
         {
-            _configScopes.User.Set(c => c.CheckForUpdates = _checkForUpdates.Checked);
+            Config.User.Set(c => c.CheckForUpdates = _checkForUpdates.Checked);
             UpdateControls();
             DoUpdateCheck();
         }

@@ -33,8 +33,8 @@ namespace NAPS2.EtoForms.Ui
         private readonly Command _copyCommand;
         private readonly Command _pasteCommand;
 
-        public ProfilesForm(ConfigScopes configScopes, IScanPerformer scanPerformer, ProfileNameTracker profileNameTracker, IProfileManager profileManager, IEtoPlatform etoPlatform, ProfileListViewBehavior profileListViewBehavior, ProfileTransfer profileTransfer)
-            : base(configScopes)
+        public ProfilesForm(ScopedConfig scopedConfig, IScanPerformer scanPerformer, ProfileNameTracker profileNameTracker, IProfileManager profileManager, IEtoPlatform etoPlatform, ProfileListViewBehavior profileListViewBehavior, ProfileTransfer profileTransfer)
+            : base(scopedConfig)
         {
             _scanPerformer = scanPerformer;
             _profileNameTracker = profileNameTracker;
@@ -159,7 +159,7 @@ namespace NAPS2.EtoForms.Ui
             get { return _listView.Selection.Any(x => x.IsLocked); }
         }
 
-        private bool NoUserProfiles => ConfigProvider.Get(c => c.NoUserProfiles) && _profileManager.Profiles.Any(x => x.IsLocked);
+        private bool NoUserProfiles => Config.Get(c => c.NoUserProfiles) && _profileManager.Profiles.Any(x => x.IsLocked);
 
         private void ProfilesUpdated(object sender, EventArgs e)
         {
@@ -224,9 +224,9 @@ namespace NAPS2.EtoForms.Ui
         private ScanParams DefaultScanParams() =>
             new ScanParams
             {
-                NoAutoSave = ConfigProvider.Get(c => c.DisableAutoSave),
-                DoOcr = ConfigProvider.Get(c => c.EnableOcr) && ConfigProvider.Get(c => c.OcrAfterScanning),
-                ThumbnailSize = ConfigProvider.Get(c => c.ThumbnailSize)
+                NoAutoSave = Config.Get(c => c.DisableAutoSave),
+                DoOcr = Config.Get(c => c.EnableOcr) && Config.Get(c => c.OcrAfterScanning),
+                ThumbnailSize = Config.Get(c => c.ThumbnailSize)
             };
 
         private void ContextMenuOpening(object sender, EventArgs e)
@@ -276,7 +276,7 @@ namespace NAPS2.EtoForms.Ui
         private void DoAdd()
         {
             var fedit = FormFactory.Create<FEditProfile>();
-            fedit.ScanProfile = ConfigProvider.Get(c => c.DefaultProfileSettings);
+            fedit.ScanProfile = Config.Get(c => c.DefaultProfileSettings);
             fedit.ShowDialog();
             if (fedit.Result)
             {

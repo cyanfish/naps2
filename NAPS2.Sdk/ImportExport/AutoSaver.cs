@@ -19,8 +19,8 @@ namespace NAPS2.ImportExport
 {
     public class AutoSaver
     {
-        private readonly ConfigProvider<PdfSettings> _pdfSettingsProvider;
-        private readonly ConfigProvider<ImageSettings> _imageSettingsProvider;
+        private readonly IConfigProvider<PdfSettings> _pdfSettingsProvider;
+        private readonly IConfigProvider<ImageSettings> _imageSettingsProvider;
         private readonly OcrEngineManager _ocrEngineManager;
         private readonly OcrRequestQueue _ocrRequestQueue;
         private readonly ErrorOutput _errorOutput;
@@ -30,9 +30,9 @@ namespace NAPS2.ImportExport
         private readonly PdfExporter _pdfExporter;
         private readonly OverwritePrompt _overwritePrompt;
         private readonly BitmapRenderer _bitmapRenderer;
-        private readonly ConfigProvider<CommonConfig> _configProvider;
+        private readonly ScopedConfig _config;
 
-        public AutoSaver(ConfigProvider<PdfSettings> pdfSettingsProvider, ConfigProvider<ImageSettings> imageSettingsProvider, OcrEngineManager ocrEngineManager, OcrRequestQueue ocrRequestQueue, ErrorOutput errorOutput, DialogHelper dialogHelper, OperationProgress operationProgress, ISaveNotify notify, PdfExporter pdfExporter, OverwritePrompt overwritePrompt, BitmapRenderer bitmapRenderer, ConfigProvider<CommonConfig> configProvider)
+        public AutoSaver(IConfigProvider<PdfSettings> pdfSettingsProvider, IConfigProvider<ImageSettings> imageSettingsProvider, OcrEngineManager ocrEngineManager, OcrRequestQueue ocrRequestQueue, ErrorOutput errorOutput, DialogHelper dialogHelper, OperationProgress operationProgress, ISaveNotify notify, PdfExporter pdfExporter, OverwritePrompt overwritePrompt, BitmapRenderer bitmapRenderer, ScopedConfig config)
         {
             _pdfSettingsProvider = pdfSettingsProvider;
             _imageSettingsProvider = imageSettingsProvider;
@@ -45,7 +45,7 @@ namespace NAPS2.ImportExport
             _pdfExporter = pdfExporter;
             _overwritePrompt = overwritePrompt;
             _bitmapRenderer = bitmapRenderer;
-            _configProvider = configProvider;
+            _config = config;
         }
 
         public ScannedImageSource Save(AutoSaveSettings settings, ScannedImageSource source)
@@ -162,7 +162,7 @@ namespace NAPS2.ImportExport
                     subPath = placeholders.Substitute(subPath, true, 0, 1);
                 }
                 var op = new SavePdfOperation(_pdfExporter, _overwritePrompt);
-                var ocrContext = new OcrContext(_configProvider.DefaultOcrParams(), _ocrEngineManager, _ocrRequestQueue);
+                var ocrContext = new OcrContext(_config.DefaultOcrParams(), _ocrEngineManager, _ocrRequestQueue);
                 if (op.Start(subPath, placeholders, images, _pdfSettingsProvider, ocrContext))
                 {
                     _operationProgress.ShowProgress(op);

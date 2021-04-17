@@ -32,7 +32,7 @@ namespace NAPS2
         {
             get
             {
-                var config = _kernel.Get<ConfigProvider<CommonConfig>>();
+                var config = _kernel.Get<ScopedConfig>();
                 var providerType = config.Get(c => c.EmailSetup.ProviderType);
                 return Create(providerType);
             }

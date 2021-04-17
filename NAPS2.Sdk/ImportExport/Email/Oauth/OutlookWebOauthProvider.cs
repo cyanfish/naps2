@@ -9,22 +9,20 @@ namespace NAPS2.ImportExport.Email.Oauth
 {
     public class OutlookWebOauthProvider : OauthProvider
     {
-        private readonly ConfigScopes _configScopes;
-        private readonly ConfigProvider<CommonConfig> _configProvider;
+        private readonly ScopedConfig _config;
 
         private OauthClientCreds? _creds;
 
-        public OutlookWebOauthProvider(ConfigScopes configScopes, ConfigProvider<CommonConfig> configProvider)
+        public OutlookWebOauthProvider(ScopedConfig config)
         {
-            _configScopes = configScopes;
-            _configProvider = configProvider;
+            _config = config;
         }
 
         #region Authorization
 
-        public override OauthToken? Token => _configProvider.Get(c => c.EmailSetup.OutlookWebToken);
+        public override OauthToken? Token => _config.Get(c => c.EmailSetup.OutlookWebToken);
 
-        public override string? User => _configProvider.Get(c => c.EmailSetup.OutlookWebUser);
+        public override string? User => _config.Get(c => c.EmailSetup.OutlookWebUser);
 
         protected override OauthClientCreds ClientCreds
         {
@@ -47,14 +45,14 @@ namespace NAPS2.ImportExport.Email.Oauth
 
         protected override void SaveToken(OauthToken token, bool refresh)
         {
-            var emailSetup = _configProvider.Get(c => c.EmailSetup);
+            var emailSetup = _config.Get(c => c.EmailSetup);
             emailSetup.OutlookWebToken = token;
             if (!refresh)
             {
                 emailSetup.OutlookWebUser = GetEmailAddress();
                 emailSetup.ProviderType = EmailProviderType.OutlookWeb;
             }
-            _configScopes.User.Set(c => c.EmailSetup = emailSetup);
+            _config.User.Set(c => c.EmailSetup = emailSetup);
         }
 
         #endregion

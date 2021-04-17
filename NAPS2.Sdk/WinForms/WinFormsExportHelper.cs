@@ -18,17 +18,17 @@ namespace NAPS2.WinForms
 {
     public class WinFormsExportHelper
     {
-        private readonly ConfigProvider<PdfSettings> _pdfSettingsProvider;
-        private readonly ConfigProvider<ImageSettings> _imageSettingsProvider;
-        private readonly ConfigProvider<EmailSettings> _emailSettingsProvider;
+        private readonly IConfigProvider<PdfSettings> _pdfSettingsProvider;
+        private readonly IConfigProvider<ImageSettings> _imageSettingsProvider;
+        private readonly IConfigProvider<EmailSettings> _emailSettingsProvider;
         private readonly DialogHelper _dialogHelper;
         private readonly IOperationFactory _operationFactory;
         private readonly IFormFactory _formFactory;
         private readonly OperationProgress _operationProgress;
-        private readonly ConfigScopes _configScopes;
+        private readonly ScopedConfig _config;
         private readonly ScannedImageList _scannedImageList;
 
-        public WinFormsExportHelper(ConfigProvider<PdfSettings> pdfSettingsProvider, ConfigProvider<ImageSettings> imageSettingsProvider, ConfigProvider<EmailSettings> emailSettingsProvider, DialogHelper dialogHelper, IOperationFactory operationFactory, IFormFactory formFactory, OperationProgress operationProgress, ConfigScopes configScopes, ScannedImageList scannedImageList)
+        public WinFormsExportHelper(IConfigProvider<PdfSettings> pdfSettingsProvider, IConfigProvider<ImageSettings> imageSettingsProvider, IConfigProvider<EmailSettings> emailSettingsProvider, DialogHelper dialogHelper, IOperationFactory operationFactory, IFormFactory formFactory, OperationProgress operationProgress, ScopedConfig config, ScannedImageList scannedImageList)
         {
             _pdfSettingsProvider = pdfSettingsProvider;
             _imageSettingsProvider = imageSettingsProvider;
@@ -37,7 +37,7 @@ namespace NAPS2.WinForms
             _operationFactory = operationFactory;
             _formFactory = formFactory;
             _operationProgress = operationProgress;
-            _configScopes = configScopes;
+            _config = config;
             _scannedImageList = scannedImageList;
         }
 
@@ -76,7 +76,7 @@ namespace NAPS2.WinForms
         {
             var op = _operationFactory.Create<SavePdfOperation>();
 
-            if (op.Start(filename, Placeholders.All.WithDate(DateTime.Now), images, _pdfSettingsProvider, new OcrContext(_configScopes.Provider.DefaultOcrParams()), email, emailMessage))
+            if (op.Start(filename, Placeholders.All.WithDate(DateTime.Now), images, _pdfSettingsProvider, new OcrContext(_config.DefaultOcrParams()), email, emailMessage))
             {
                 _operationProgress.ShowProgress(op);
             }
@@ -124,7 +124,7 @@ namespace NAPS2.WinForms
                 return false;
             }
 
-            if (_configScopes == null)
+            if (_config == null)
             {
                 // First run; prompt for a 
                 var form = _formFactory.Create<FEmailProvider>();

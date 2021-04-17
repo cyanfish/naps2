@@ -35,11 +35,11 @@ namespace NAPS2.Automation
         private readonly OcrEngineManager _ocrEngineManager;
         private readonly OcrRequestQueue _ocrRequestQueue;
         private readonly IFormFactory _formFactory;
-        private readonly ConfigScopes _configScopes;
+        private readonly ScopedConfig _config;
         private readonly TransactionConfigScope<CommonConfig> _userTransact;
-        private readonly ConfigProvider<CommonConfig> _configProvider;
-        private readonly ConfigProvider<PdfSettings> _pdfSettingsProvider;
-        private readonly ConfigProvider<ImageSettings> _imageSettingsProvider;
+        private readonly ScopedConfig _transactionConfig;
+        private readonly IConfigProvider<PdfSettings> _pdfSettingsProvider;
+        private readonly IConfigProvider<ImageSettings> _imageSettingsProvider;
         private readonly IProfileManager _profileManager;
 
         private readonly ConsoleOutput _output;
@@ -51,7 +51,7 @@ namespace NAPS2.Automation
         private List<string> _actualOutputPaths;
         private OcrParams _ocrParams;
 
-        public AutomatedScanning(ConsoleOutput output, AutomatedScanningOptions options, ImageContext imageContext, IScanPerformer scanPerformer, ErrorOutput errorOutput, IEmailProviderFactory emailProviderFactory, IScannedImageImporter scannedImageImporter, IOperationFactory operationFactory, OcrEngineManager ocrEngineManager, IFormFactory formFactory, ConfigScopes configScopes, IProfileManager profileManager, OcrRequestQueue ocrRequestQueue)
+        public AutomatedScanning(ConsoleOutput output, AutomatedScanningOptions options, ImageContext imageContext, IScanPerformer scanPerformer, ErrorOutput errorOutput, IEmailProviderFactory emailProviderFactory, IScannedImageImporter scannedImageImporter, IOperationFactory operationFactory, OcrEngineManager ocrEngineManager, IFormFactory formFactory, ScopedConfig config, IProfileManager profileManager, OcrRequestQueue ocrRequestQueue)
         {
             _output = output;
             _options = options;
@@ -63,14 +63,14 @@ namespace NAPS2.Automation
             _operationFactory = operationFactory;
             _ocrEngineManager = ocrEngineManager;
             _formFactory = formFactory;
-            _configScopes = configScopes;
+            _config = config;
             _profileManager = profileManager;
             _ocrRequestQueue = ocrRequestQueue;
 
-            _userTransact = configScopes.User.BeginTransaction();
-            _configProvider = configScopes.Provider.Replace(configScopes.User, _userTransact);
-            _pdfSettingsProvider = _configProvider.Child(c => c.PdfSettings);
-            _imageSettingsProvider = _configProvider.Child(c => c.ImageSettings);
+            _userTransact = config.User.BeginTransaction();
+            _transactionConfig = config.WithTransaction(_userTransact);
+            _pdfSettingsProvider = _transactionConfig.Child(c => c.PdfSettings);
+            _imageSettingsProvider = _transactionConfig.Child(c => c.ImageSettings);
         }
 
         public IEnumerable<ScannedImage> AllImages => _scanList.SelectMany(x => x);
@@ -168,14 +168,14 @@ namespace NAPS2.Automation
             }
             if (_options.DisableOcr)
             {
-                _configScopes.Run.Set(c => c.EnableOcr = false);
+                _config.Run.Set(c => c.EnableOcr = false);
             }
             else if (_options.EnableOcr || _options.OcrLang != null)
             {
-                _configScopes.Run.Set(c => c.EnableOcr = true);
+                _config.Run.Set(c => c.EnableOcr = true);
             }
-            _configScopes.Run.Set(c => c.OcrLanguageCode = _options.OcrLang);
-            _ocrParams = _configProvider.DefaultOcrParams();
+            _config.Run.Set(c => c.OcrLanguageCode = _options.OcrLang);
+            _ocrParams = _transactionConfig.DefaultOcrParams();
         }
 
         private void InstallComponents()
@@ -453,7 +453,7 @@ namespace NAPS2.Automation
         private async Task DoExportToImageFiles(string outputPath)
         {
             _userTransact.Set(c => c.ImageSettings = new ImageSettings());
-            _configScopes.Run.Set(c => c.ImageSettings = new ImageSettings
+            _config.Run.Set(c => c.ImageSettings = new ImageSettings
             {
                 JpegQuality = _options.JpegQuality,
                 TiffCompression = Enum.TryParse<TiffCompression>(_options.TiffComp, true, out var tc) ? tc : TiffCompression.Auto
@@ -503,7 +503,7 @@ namespace NAPS2.Automation
                     using Stream configFileStream = File.OpenRead(_options.EncryptConfig);
                     var serializer = new XmlSerializer(typeof(PdfEncryption));
                     var encryption = (PdfEncryption)serializer.Deserialize(configFileStream);
-                    _configScopes.Run.Set(c => c.PdfSettings.Encryption = encryption);
+                    _config.Run.Set(c => c.PdfSettings.Encryption = encryption);
                 }
                 catch (Exception ex)
                 {
@@ -533,7 +533,7 @@ namespace NAPS2.Automation
                     compat = PdfCompat.PdfA3U;
                 }
             }
-            _configScopes.Run.Set(c => c.PdfSettings.Compat = compat);
+            _config.Run.Set(c => c.PdfSettings.Compat = compat);
 
             int scanIndex = 0;
             _actualOutputPaths = new List<string>();
@@ -569,7 +569,7 @@ namespace NAPS2.Automation
         {
             OutputVerbose(ConsoleResources.BeginningScan);
 
-            bool autoSaveEnabled = !_configProvider.Get(c => c.DisableAutoSave) && profile.EnableAutoSave && profile.AutoSaveSettings != null;
+            bool autoSaveEnabled = !_transactionConfig.Get(c => c.DisableAutoSave) && profile.EnableAutoSave && profile.AutoSaveSettings != null;
             if (_options.AutoSave && !autoSaveEnabled)
             {
                 _errorOutput.DisplayError(ConsoleResources.AutoSaveNotEnabled);

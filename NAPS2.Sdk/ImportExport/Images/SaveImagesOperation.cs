@@ -45,7 +45,7 @@ namespace NAPS2.ImportExport.Images
         /// <param name="placeholders"></param>
         /// <param name="images">The collection of images to save.</param>
         /// <param name="batch"></param>
-        public bool Start(string fileName, Placeholders placeholders, List<ScannedImage> images, ConfigProvider<ImageSettings> imageSettings, bool batch = false)
+        public bool Start(string fileName, Placeholders placeholders, List<ScannedImage> images, IConfigProvider<ImageSettings> imageSettings, bool batch = false)
         {
             Status = new OperationStatus
             {
@@ -160,7 +160,7 @@ namespace NAPS2.ImportExport.Images
             return true;
         }
 
-        private async Task DoSaveImage(ScannedImage.Snapshot snapshot, string path, ImageFormat format, ConfigProvider<ImageSettings> imageSettings)
+        private async Task DoSaveImage(ScannedImage.Snapshot snapshot, string path, ImageFormat format, IConfigProvider<ImageSettings> imageSettings)
         {
             PathHelper.EnsureParentDirExists(path);
             if (Equals(format, ImageFormat.Tiff))

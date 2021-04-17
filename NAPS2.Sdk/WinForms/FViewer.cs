@@ -70,11 +70,11 @@ namespace NAPS2.WinForms
         protected override async void OnLoad(object sender, EventArgs e)
         {
             _tbPageCurrent.Visible = PlatformCompat.Runtime.IsToolbarTextboxSupported;
-            if (ConfigProvider.Get(c => c.HiddenButtons).HasFlag(ToolbarButtons.SavePdf))
+            if (Config.Get(c => c.HiddenButtons).HasFlag(ToolbarButtons.SavePdf))
             {
                 _toolStrip1.Items.Remove(_tsSavePdf);
             }
-            if (ConfigProvider.Get(c => c.HiddenButtons).HasFlag(ToolbarButtons.SaveImages))
+            if (Config.Get(c => c.HiddenButtons).HasFlag(ToolbarButtons.SaveImages))
             {
                 _toolStrip1.Items.Remove(_tsSaveImage);
             }
@@ -416,7 +416,7 @@ namespace NAPS2.WinForms
         private async void tsDeskew_Click(object sender, EventArgs e)
         {
             var op = _operationFactory.Create<DeskewOperation>();
-            if (op.Start(new[] { CurrentImage }, new DeskewParams { ThumbnailSize = ConfigProvider.Get(c => c.ThumbnailSize) }))
+            if (op.Start(new[] { CurrentImage }, new DeskewParams { ThumbnailSize = Config.Get(c => c.ThumbnailSize) }))
             {
                 _operationProgress.ShowProgress(op);
                 await UpdateImage();
@@ -513,7 +513,7 @@ namespace NAPS2.WinForms
         {
             if (await _exportHelper.SavePDF(new List<ScannedImage> { CurrentImage }, null))
             {
-                if (ConfigProvider.Get(c => c.DeleteAfterSaving))
+                if (Config.Get(c => c.DeleteAfterSaving))
                 {
                     await DeleteCurrentImage();
                 }
@@ -524,7 +524,7 @@ namespace NAPS2.WinForms
         {
             if (await _exportHelper.SaveImages(new List<ScannedImage> { CurrentImage }, null))
             {
-                if (ConfigProvider.Get(c => c.DeleteAfterSaving))
+                if (Config.Get(c => c.DeleteAfterSaving))
                 {
                     await DeleteCurrentImage();
                 }
@@ -587,7 +587,7 @@ namespace NAPS2.WinForms
             // Configured
 
             // TODO: Granular
-            var ks = ConfigProvider.Get(c => c.KeyboardShortcuts);
+            var ks = Config.Get(c => c.KeyboardShortcuts);
 
             _ksm.Assign(ks.Delete, _tsDelete);
             _ksm.Assign(ks.ImageBlackWhite, _tsBlackWhite);

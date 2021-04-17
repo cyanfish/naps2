@@ -15,13 +15,13 @@ namespace NAPS2.WinForms
         private const int PADDING_X = 25, PADDING_Y = 25;
         private const int SPACING_Y = 20;
 
-        private readonly ConfigProvider<CommonConfig> _configProvider;
+        private readonly ScopedConfig _config;
         private readonly List<NotifyWidgetBase> _slots = new List<NotifyWidgetBase>();
         private FormBase _parentForm;
 
-        public NotificationManager(ConfigProvider<CommonConfig> configProvider)
+        public NotificationManager(ScopedConfig config)
         {
-            _configProvider = configProvider;
+            _config = config;
         }
 
         public FormBase ParentForm
@@ -81,7 +81,7 @@ namespace NAPS2.WinForms
 
         private void Show(NotifyWidgetBase n)
         {
-            if (_configProvider.Get(c => c.DisableSaveNotifications) && n is NotifyWidget)
+            if (_config.Get(c => c.DisableSaveNotifications) && n is NotifyWidget)
             {
                 return;
             }

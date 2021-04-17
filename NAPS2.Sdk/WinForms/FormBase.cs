@@ -33,9 +33,7 @@ namespace NAPS2.WinForms
 
         public IFormFactory FormFactory { get; set; }
 
-        public ConfigScopes ConfigScopes { get; set; }
-
-        public ScopeSetConfigProvider<CommonConfig> ConfigProvider { get; set; }
+        public ScopedConfig Config { get; set; }
 
         protected bool RestoreFormState { get; set; }
 
@@ -138,7 +136,7 @@ namespace NAPS2.WinForms
 
             if (RestoreFormState || SaveFormState)
             {
-                var formStates = ConfigProvider.Get(c => c.FormStates);
+                var formStates = Config.Get(c => c.FormStates);
                 _formState = formStates.SingleOrDefault(x => x.Name == Name) ?? new FormState {Name = Name};
             }
 
@@ -197,9 +195,9 @@ namespace NAPS2.WinForms
         {
             if (SaveFormState && _formState != null)
             {
-                var formStates = ConfigProvider.Get(c => c.FormStates);
+                var formStates = Config.Get(c => c.FormStates);
                 formStates = formStates.RemoveAll(fs => fs.Name == Name).Add(_formState);
-                ConfigScopes.User.Set(c => c.FormStates = formStates);
+                Config.User.Set(c => c.FormStates = formStates);
             }
         }
 

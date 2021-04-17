@@ -24,7 +24,7 @@ namespace NAPS2.ImportExport.Pdf
             }
         }
         
-        public abstract Task<bool> Export(string path, ICollection<ScannedImage.Snapshot> snapshots, ConfigProvider<PdfSettings> settings,
+        public abstract Task<bool> Export(string path, ICollection<ScannedImage.Snapshot> snapshots, IConfigProvider<PdfSettings> settings,
             OcrContext? ocrContext = null, ProgressHandler? progressCallback = null, CancellationToken cancelToken = default);
     }
 }

@@ -173,7 +173,7 @@ namespace NAPS2.WinForms
 
         private void btnRestoreDefaults_Click(object sender, EventArgs e)
         {
-            UpdateValues(ConfigProvider.Get(c => c.DefaultProfileSettings));
+            UpdateValues(Config.Get(c => c.DefaultProfileSettings));
         }
     }
 }

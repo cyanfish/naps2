@@ -52,14 +52,12 @@ namespace NAPS2.Modules
             Bind<NetworkScanBridge>().ToSelf();
 
             // Config
-            var configScopes = new ConfigScopes(Path.Combine(Paths.Executable, "appsettings.xml"), Path.Combine(Paths.AppData, "config.xml"));
-            Bind<ConfigScopes>().ToConstant(configScopes);
-            Bind<ScopeSetConfigProvider<CommonConfig>>().ToMethod(ctx => ctx.Kernel.Get<ConfigScopes>().Provider);
-            Bind<ConfigProvider<CommonConfig>>().ToMethod(ctx => ctx.Kernel.Get<ConfigScopes>().Provider);
-            Bind<ConfigProvider<PdfSettings>>().ToMethod(ctx => ctx.Kernel.Get<ConfigProvider<CommonConfig>>().Child(c => c.PdfSettings));
-            Bind<ConfigProvider<ImageSettings>>().ToMethod(ctx => ctx.Kernel.Get<ConfigProvider<CommonConfig>>().Child(c => c.ImageSettings));
-            Bind<ConfigProvider<EmailSettings>>().ToMethod(ctx => ctx.Kernel.Get<ConfigProvider<CommonConfig>>().Child(c => c.EmailSettings));
-            Bind<ConfigProvider<EmailSetup>>().ToMethod(ctx => ctx.Kernel.Get<ConfigProvider<CommonConfig>>().Child(c => c.EmailSetup));
+            var config = new ScopedConfig(Path.Combine(Paths.Executable, "appsettings.xml"), Path.Combine(Paths.AppData, "config.xml"));
+            Bind<ScopedConfig>().ToConstant(config);
+            Bind<IConfigProvider<PdfSettings>>().ToMethod(ctx => ctx.Kernel.Get<ScopedConfig>().Child(c => c.PdfSettings));
+            Bind<IConfigProvider<ImageSettings>>().ToMethod(ctx => ctx.Kernel.Get<ScopedConfig>().Child(c => c.ImageSettings));
+            Bind<IConfigProvider<EmailSettings>>().ToMethod(ctx => ctx.Kernel.Get<ScopedConfig>().Child(c => c.EmailSettings));
+            Bind<IConfigProvider<EmailSetup>>().ToMethod(ctx => ctx.Kernel.Get<ScopedConfig>().Child(c => c.EmailSetup));
 
             // Host
             Bind<IWorkerFactory>().To<WorkerFactory>().InSingletonScope();
@@ -75,16 +73,15 @@ namespace NAPS2.Modules
             Bind<AutoSaver>().ToSelf();
             Bind<BitmapRenderer>().ToSelf();
             Bind<ImageContext>().To<GdiImageContext>().InSingletonScope();
-            
+
             Kernel.Get<ImageContext>().PdfRenderer = Kernel.Get<PdfiumWorkerCoordinator>();
 
-            var configProvider = Kernel.Get<ConfigScopes>().Provider;
             var profileManager = new ProfileManager(
                 Path.Combine(Paths.AppData, "profiles.xml"),
                 Path.Combine(Paths.Executable, "profiles.xml"),
-                configProvider.Get(c => c.LockSystemProfiles),
-                configProvider.Get(c => c.LockUnspecifiedDevices),
-                configProvider.Get(c => c.NoUserProfiles));
+                config.Get(c => c.LockSystemProfiles),
+                config.Get(c => c.LockUnspecifiedDevices),
+                config.Get(c => c.NoUserProfiles));
             Bind<IProfileManager>().ToConstant(profileManager);
 
             StaticConfiguration.Initialize(Kernel);
