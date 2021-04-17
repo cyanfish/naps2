@@ -18,7 +18,6 @@ namespace NAPS2.EtoForms.Ui
 {
     public class ProfilesForm : EtoDialogBase
     {
-        private readonly ConfigProvider<CommonConfig> _configProvider;
         private readonly IScanPerformer _scanPerformer;
         private readonly ProfileNameTracker _profileNameTracker;
         private readonly IProfileManager _profileManager;
@@ -34,9 +33,9 @@ namespace NAPS2.EtoForms.Ui
         private readonly Command _copyCommand;
         private readonly Command _pasteCommand;
 
-        public ProfilesForm(ConfigProvider<CommonConfig> configProvider, IScanPerformer scanPerformer, ProfileNameTracker profileNameTracker, IProfileManager profileManager, IEtoPlatform etoPlatform, ProfileListViewBehavior profileListViewBehavior, ProfileTransfer profileTransfer)
+        public ProfilesForm(ConfigScopes configScopes, IScanPerformer scanPerformer, ProfileNameTracker profileNameTracker, IProfileManager profileManager, IEtoPlatform etoPlatform, ProfileListViewBehavior profileListViewBehavior, ProfileTransfer profileTransfer)
+            : base(configScopes)
         {
-            _configProvider = configProvider;
             _scanPerformer = scanPerformer;
             _profileNameTracker = profileNameTracker;
             _profileManager = profileManager;
@@ -44,6 +43,8 @@ namespace NAPS2.EtoForms.Ui
 
             Title = UiStrings.ProfilesFormTitle;
             Icon = Icons.blueprints_small.ToEtoIcon();
+            Size = new Size(700, 200);
+            MinimumSize = new Size(600, 180);
             Resizable = true;
 
             switch (Handler)
@@ -158,7 +159,7 @@ namespace NAPS2.EtoForms.Ui
             get { return _listView.Selection.Any(x => x.IsLocked); }
         }
 
-        private bool NoUserProfiles => _configProvider.Get(c => c.NoUserProfiles) && _profileManager.Profiles.Any(x => x.IsLocked);
+        private bool NoUserProfiles => ConfigProvider.Get(c => c.NoUserProfiles) && _profileManager.Profiles.Any(x => x.IsLocked);
 
         private void ProfilesUpdated(object sender, EventArgs e)
         {

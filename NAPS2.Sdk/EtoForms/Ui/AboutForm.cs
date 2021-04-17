@@ -18,8 +18,8 @@ namespace NAPS2.EtoForms.Ui
         private const string ICONS_HOMEPAGE = "https://www.fatcow.com/free-icons";
         private const string DONATE_URL = "https://www.naps2.com/donate";
 
-        private readonly UpdateChecker _updateChecker;
         private readonly ConfigScopes _configScopes;
+        private readonly UpdateChecker _updateChecker;
         
         private readonly Control _donateButton;
         private readonly CheckBox _checkForUpdates;
@@ -28,14 +28,16 @@ namespace NAPS2.EtoForms.Ui
         private bool _hasCheckedForUpdates;
         private UpdateInfo? _update;
 
-        public AboutForm(UpdateChecker updateChecker, ConfigScopes configScopes)
+        public AboutForm(ConfigScopes configScopes, UpdateChecker updateChecker)
+            : base(configScopes)
         {
-            _updateChecker = updateChecker;
             _configScopes = configScopes;
+            _updateChecker = updateChecker;
             
             Title = UiStrings.AboutFormTitle;
             Icon = Icons.information_small.ToEtoIcon();
             Resizable = false;
+            FormStateController.RestoreFormState = false;
             
             _donateButton = C.AccessibleImageButton(
                 Icons.btn_donate_LG.ToEto(),

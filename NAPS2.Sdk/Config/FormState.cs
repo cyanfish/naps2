@@ -1,4 +1,4 @@
-using System.Drawing;
+using Eto.Drawing;
 
 namespace NAPS2.Config
 {

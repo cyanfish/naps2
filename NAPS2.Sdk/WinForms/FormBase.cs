@@ -2,6 +2,7 @@
 using System.Globalization;
 using System.Linq;
 using System.Windows.Forms;
+using Eto;
 using NAPS2.Config;
 using NAPS2.EtoForms;
 using NAPS2.Scan;
@@ -27,6 +28,8 @@ namespace NAPS2.WinForms
             Resize += OnResize;
             Move += OnMove;
         }
+
+        public FormStateController FormStateController => throw new NotSupportedException();
 
         public IFormFactory FormFactory { get; set; }
 
@@ -148,18 +151,18 @@ namespace NAPS2.WinForms
 
         protected void DoRestoreFormState()
         {
-            if (!_formState.Location.IsEmpty)
+            if (!_formState.Location.IsZero)
             {
-                if (Screen.AllScreens.Any(x => x.WorkingArea.Contains(_formState.Location)))
+                if (Screen.AllScreens.Any(x => x.WorkingArea.Contains(_formState.Location.ToSD())))
                 {
                     // Only move to the specified location if it's onscreen
                     // It might be offscreen if the user has disconnected a monitor
-                    Location = _formState.Location;
+                    Location = _formState.Location.ToSD();
                 }
             }
             if (!_formState.Size.IsEmpty)
             {
-                Size = _formState.Size;
+                Size = _formState.Size.ToSD();
             }
             if (_formState.Maximized)
             {
@@ -174,7 +177,7 @@ namespace NAPS2.WinForms
                 _formState.Maximized = (WindowState == FormWindowState.Maximized);
                 if (WindowState == FormWindowState.Normal)
                 {
-                    _formState.Size = Size;
+                    _formState.Size = Size.ToEto();
                 }
             }
         }
@@ -185,7 +188,7 @@ namespace NAPS2.WinForms
             {
                 if (WindowState == FormWindowState.Normal)
                 {
-                    _formState.Location = Location;
+                    _formState.Location = Location.ToEto();
                 }
             }
         }
