@@ -87,7 +87,7 @@ namespace NAPS2.Scan
 
         public string CustomPageSizeName { get; set; }
 
-        public PageDimensions CustomPageSize { get; set; }
+        public PageDimensions? CustomPageSize { get; set; }
 
         public ScanDpi Resolution { get; set; }
 

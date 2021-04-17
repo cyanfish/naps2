@@ -25,7 +25,7 @@ namespace NAPS2.Config
             Save();
         }
 
-        public ScanProfile DefaultProfile
+        public ScanProfile? DefaultProfile
         {
             get => Profiles.FirstOrDefault(x => x.IsDefault) ?? Profiles.FirstOrDefault();
             set
@@ -34,7 +34,10 @@ namespace NAPS2.Config
                 {
                     p.IsDefault = false;
                 }
-                value.IsDefault = true;
+                if (value != null)
+                {
+                    value.IsDefault = true;
+                }
                 Save();
             }
         }

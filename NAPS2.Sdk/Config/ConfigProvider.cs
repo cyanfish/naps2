@@ -15,7 +15,7 @@ namespace NAPS2.Config
     public abstract class ConfigProvider<TConfig>
     {
         [return: NotNull]
-        public T Get<T>(Func<TConfig, T> func) => GetInternal(func);
+        public T Get<T>(Func<TConfig, T> func) => GetInternal(func) ?? throw new InvalidOperationException("Config provider must not return null");
 
         public T Get<T>(Func<TConfig, T?> func) where T : struct => GetInternal(func) ?? default;
 

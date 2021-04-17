@@ -58,7 +58,7 @@ namespace NAPS2.Config
             Save();
         }
 
-        public ScanProfile DefaultProfile
+        public ScanProfile? DefaultProfile
         {
             get
             {

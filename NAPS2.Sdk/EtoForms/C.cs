@@ -23,7 +23,7 @@ namespace NAPS2.EtoForms
         /// <param name="text"></param>
         /// <param name="onClick"></param>
         /// <returns></returns>
-        public static LinkButton Link(string text, Action onClick = null)
+        public static LinkButton Link(string text, Action? onClick = null)
         {
             onClick ??= () => Process.Start(text);
             return new LinkButton

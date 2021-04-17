@@ -638,7 +638,7 @@ namespace NAPS2.WinForms
         /// <returns></returns>
         public Action<ScannedImage> ReceiveScannedImage()
         {
-            ScannedImage last = null;
+            ScannedImage? last = null;
             return scannedImage =>
             {
                 SafeInvoke(() =>

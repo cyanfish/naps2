@@ -22,8 +22,6 @@ namespace NAPS2.EtoForms
         
         bool AllowDrop { get; set; }
 
-        ListSelection<T> Selection { get; set; }
-
         void SetItems(IEnumerable<T> items);
     }
 }

@@ -250,9 +250,9 @@ namespace NAPS2.Util
         public class InsertAfter : ListMutation<T>
         {
             private readonly T _itemToInsert;
-            private readonly T _predecessor;
+            private readonly T? _predecessor;
 
-            public InsertAfter(T itemToInsert, T predecessor)
+            public InsertAfter(T itemToInsert, T? predecessor)
             {
                 _itemToInsert = itemToInsert;
                 _predecessor = predecessor;

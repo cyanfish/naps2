@@ -142,7 +142,7 @@ namespace NAPS2.Util
         /// <param name="dict"></param>
         /// <param name="key"></param>
         /// <returns></returns>
-        public static TValue Get<TKey, TValue>(this Dictionary<TKey, TValue> dict, TKey key)
+        public static TValue? Get<TKey, TValue>(this Dictionary<TKey, TValue> dict, TKey key)
         {
             if (dict.ContainsKey(key))
             {
