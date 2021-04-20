@@ -51,39 +51,41 @@ namespace NAPS2.EtoForms.Ui
 
         private void BuildLayout()
         {
-            Content = L.Row(
-                L.Column(new ImageView { Image = Icons.scanner_large.ToEto() }).Padding(right: 4),
-                L.Column(
-                    C.NoWrap(AssemblyProduct),
-                    L.Row(
-                        L.Column(
-                            C.NoWrap(string.Format(MiscResources.Version, AssemblyVersion)),
-                            C.Link(NAPS2_HOMEPAGE)
+            Content = L.Root(
+                L.Row(
+                    L.Column(new ImageView { Image = Icons.scanner_large.ToEto() }).Padding(right: 4),
+                    L.Column(
+                        C.NoWrap(AssemblyProduct),
+                        L.Row(
+                            L.Column(
+                                C.NoWrap(string.Format(MiscResources.Version, AssemblyVersion)),
+                                C.Link(NAPS2_HOMEPAGE)
+                            ),
+                            L.Column(
+                                C.ZeroSpace().YScale(),
+                                _donateButton
+                            ).Padding(left: 10)
                         ),
-                        L.Column(
-                            C.ZeroSpace().YScale(),
-                            _donateButton
-                        ).Padding(left: 10)
-                    ),
-                    C.TextSpace(),
-                    _checkForUpdates.AutoSize().Padding(left: 4),
-                    _updatePanel,
-                    C.TextSpace(),
-                    C.NoWrap(UiStrings.Copyright),
-                    C.TextSpace(),
-                    L.Row(
-                        L.Column(
-                            C.NoWrap(UiStrings.IconsFrom),
-                            C.Link(ICONS_HOMEPAGE)
-                        ).XScale(),
-                        L.Column(
-                            C.ZeroSpace().YScale(),
-                            C.Button(UiStrings.OK, Close)
-                        ).Padding(left: 20)
-                    ),
-                    C.ZeroSpace()
+                        C.TextSpace(),
+                        _checkForUpdates.AutoSize().Padding(left: 4),
+                        _updatePanel,
+                        C.TextSpace(),
+                        C.NoWrap(UiStrings.Copyright),
+                        C.TextSpace(),
+                        L.Row(
+                            L.Column(
+                                C.NoWrap(UiStrings.IconsFrom),
+                                C.Link(ICONS_HOMEPAGE)
+                            ).XScale(),
+                            L.Column(
+                                C.ZeroSpace().YScale(),
+                                C.Button(UiStrings.OK, Close)
+                            ).Padding(left: 20)
+                        ),
+                        C.ZeroSpace()
+                    )
                 )
-            );
+            ).DefaultSpacing(2);
         }
         
         private void DoUpdateCheck()
