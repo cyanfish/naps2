@@ -3,7 +3,7 @@ using NAPS2.Images.Storage;
 using NAPS2.Images.Transforms;
 using NAPS2.Lang.Resources;
 using NAPS2.Operation;
-using NAPS2.Util;
+using NAPS2.Threading;
 
 namespace NAPS2.Images
 {

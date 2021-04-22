@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace NAPS2.Util
+namespace NAPS2.Logging
 {
     /// <summary>
     /// A base interface for objects capable of displaying error output.

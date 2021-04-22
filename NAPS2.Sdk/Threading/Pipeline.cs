@@ -4,7 +4,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Threading.Tasks.Dataflow;
 
-namespace NAPS2.Util
+namespace NAPS2.Threading
 {
     /// <summary>
     /// A class to help with parallelization using a pipeline model, wrapping around the TPL Dataflow library.
