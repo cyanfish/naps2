@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using NAPS2.Images;
+using NAPS2.Images.Storage;
 
 namespace NAPS2.Scan.Internal
 {
@@ -15,6 +16,11 @@ namespace NAPS2.Scan.Internal
 
         public InProcScanBridge()
           : this(new RemoteScanController())
+        {
+        }
+
+        public InProcScanBridge(ImageContext imageContext)
+            : this(new RemoteScanController(imageContext))
         {
         }
 

@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Grpc.Core;
 using NAPS2.Images.Storage;
 using NAPS2.Remoting.Network.Internal;
+using NAPS2.Remoting.Worker;
 using NAPS2.Scan.Internal;
 
 namespace NAPS2.Remoting.Network
@@ -13,30 +14,30 @@ namespace NAPS2.Remoting.Network
     {
         private readonly ImageContext _imageContext;
         private readonly NetworkScanServerOptions _options;
-        private readonly IRemoteScanController _remoteScanController;
+        private readonly IScanBridgeFactory _scanBridgeFactory;
         private readonly CancellationTokenSource _cts = new CancellationTokenSource();
         private Server? _server;
 
         public NetworkScanServer()
-            : this(ImageContext.Default, new NetworkScanServerOptions(), new RemoteScanController())
+            : this(ImageContext.Default, new ScanBridgeFactory(ImageContext.Default, WorkerFactory.Default), new NetworkScanServerOptions())
         {
         }
 
         public NetworkScanServer(NetworkScanServerOptions options)
-            : this(ImageContext.Default, options, new RemoteScanController())
+            : this(ImageContext.Default, new ScanBridgeFactory(ImageContext.Default, WorkerFactory.Default), options)
         {
         }
 
-        public NetworkScanServer(ImageContext imageContext, NetworkScanServerOptions options)
-            : this(imageContext, options, new RemoteScanController(imageContext))
+        public NetworkScanServer(ImageContext imageContext, WorkerFactory workerFactory, NetworkScanServerOptions options)
+            : this(imageContext, new ScanBridgeFactory(imageContext, workerFactory), options)
         {
         }
 
-        internal NetworkScanServer(ImageContext imageContext, NetworkScanServerOptions options, IRemoteScanController remoteScanController)
+        internal NetworkScanServer(ImageContext imageContext, IScanBridgeFactory scanBridgeFactory, NetworkScanServerOptions options)
         {
             _imageContext = imageContext;
             _options = options;
-            _remoteScanController = remoteScanController;
+            _scanBridgeFactory = scanBridgeFactory;
         }
 
         public void Start()
@@ -50,7 +51,7 @@ namespace NAPS2.Remoting.Network
             // TODO: Secure
             _server = new Server
             {
-                Services = { NetworkScanService.BindService(new NetworkScanServiceImpl(_imageContext, _remoteScanController)) },
+                Services = { NetworkScanService.BindService(new NetworkScanServiceImpl(_imageContext, _scanBridgeFactory)) },
                 Ports = { new ServerPort("0.0.0.0", _options.Port ?? ServerPort.PickUnused, ServerCredentials.Insecure) }
             };
             _server.Start();

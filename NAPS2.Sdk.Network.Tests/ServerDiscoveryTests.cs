@@ -1,5 +1,6 @@
 using System.Threading.Tasks;
 using NAPS2.Images.Storage;
+using NAPS2.Remoting.Worker;
 using Xunit;
 
 namespace NAPS2.Remoting.Network.Tests
@@ -9,7 +10,7 @@ namespace NAPS2.Remoting.Network.Tests
         [Fact]
         public async Task ServerDiscovery()
         {
-            using var server = new NetworkScanServer(new GdiImageContext(), new NetworkScanServerOptions
+            using var server = CreateServer(new NetworkScanServerOptions
             {
                 ServerName = "NetworkScanTests.ServerDiscovery"
             });
@@ -22,7 +23,7 @@ namespace NAPS2.Remoting.Network.Tests
         [Fact]
         public async Task ServerDiscoveryCustomPort()
         {
-            using var server = new NetworkScanServer(new GdiImageContext(), new NetworkScanServerOptions
+            using var server = CreateServer(new NetworkScanServerOptions
             {
                 ServerName = "NetworkScanTests.ServerDiscoveryCustomPort",
                 DiscoveryPort = 33433
@@ -39,7 +40,7 @@ namespace NAPS2.Remoting.Network.Tests
         [Fact]
         public async Task ServerDiscoveryMismatchPort()
         {
-            using var server = new NetworkScanServer(new GdiImageContext(), new NetworkScanServerOptions
+            using var server = CreateServer(new NetworkScanServerOptions
             {
                 ServerName = "NetworkScanTests.ServerDiscoveryMismatchPort",
                 DiscoveryPort = 33444
@@ -56,7 +57,7 @@ namespace NAPS2.Remoting.Network.Tests
         [Fact]
         public async Task ServerDiscoveryOff()
         {
-            using var server = new NetworkScanServer(new GdiImageContext(), new NetworkScanServerOptions
+            using var server = CreateServer(new NetworkScanServerOptions
             {
                 ServerName = "NetworkScanTests.ServerDiscoveryOff",
                 AllowDiscovery = false
@@ -65,6 +66,12 @@ namespace NAPS2.Remoting.Network.Tests
             server.Start();
             var discovered = await client.DiscoverServers(100);
             Assert.DoesNotContain(discovered, x => x.Name == "NetworkScanTests.ServerDiscoveryOff");
+        }
+
+        private NetworkScanServer CreateServer(NetworkScanServerOptions options)
+        {
+            var imageContext = new GdiImageContext();
+            return new NetworkScanServer(imageContext, new WorkerFactory(imageContext), options);
         }
     }
 }

@@ -1,4 +1,6 @@
 ﻿using System;
+using NAPS2.Images.Storage;
+using NAPS2.Remoting.Worker;
 
 namespace NAPS2.Scan.Internal
 {
@@ -9,6 +11,14 @@ namespace NAPS2.Scan.Internal
         private readonly NetworkScanBridge _networkScanBridge;
 
         public ScanBridgeFactory() : this(new InProcScanBridge(), new WorkerScanBridge(), new NetworkScanBridge())
+        {
+        }
+
+        public ScanBridgeFactory(ImageContext imageContext, IWorkerFactory workerFactory) :
+            this(
+                new InProcScanBridge(imageContext),
+                new WorkerScanBridge(imageContext, workerFactory),
+                new NetworkScanBridge(imageContext))
         {
         }
 

@@ -12,12 +12,12 @@ namespace NAPS2.Remoting.Network.Internal
     internal class NetworkScanServiceImpl : NetworkScanService.NetworkScanServiceBase
     {
         private readonly ImageContext _imageContext;
-        private readonly IRemoteScanController _remoteScanController;
+        private readonly IScanBridgeFactory _scanBridgeFactory;
         
-        public NetworkScanServiceImpl(ImageContext imageContext, IRemoteScanController remoteScanController)
+        public NetworkScanServiceImpl(ImageContext imageContext, IScanBridgeFactory scanBridgeFactory)
         {
             _imageContext = imageContext;
-            _remoteScanController = remoteScanController;
+            _scanBridgeFactory = scanBridgeFactory;
         }
         
         public override Task<GetCapabilitiesResponse> GetCapabilities(GetCapabilitiesRequest request, ServerCallContext context)
@@ -82,7 +82,8 @@ namespace NAPS2.Remoting.Network.Internal
                 
                 var options = request.OptionsXml.FromXml<ScanOptions>();
                 options = ValidateOptions(options);
-                await _remoteScanController.Scan(options, context.CancellationToken, scanEvents, (image, _) =>
+                var bridge = _scanBridgeFactory.Create(options);
+                await bridge.Scan(options, context.CancellationToken, scanEvents, (image, _) =>
                 {
                     sequencedWriter.Write(new ScanResponse
                     {
@@ -115,6 +116,9 @@ namespace NAPS2.Remoting.Network.Internal
             
             // No OCR (note: this could be changed at some point)
             options.DoOcr = false;
+
+            // Avoid recursive network bridging
+            options.NetworkOptions = new NetworkOptions();
             
             return options;
         }
