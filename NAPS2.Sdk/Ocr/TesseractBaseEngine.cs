@@ -24,7 +24,7 @@ namespace NAPS2.Ocr
             return langCode.Split('+').All(code => InstalledLanguages.Any(x => x.Code == code));
         }
 
-        public OcrResult ProcessImage(string imagePath, OcrParams ocrParams, CancellationToken cancelToken)
+        public OcrResult? ProcessImage(string imagePath, OcrParams ocrParams, CancellationToken cancelToken)
         {
             string tempHocrFilePath = Path.Combine(Paths.Temp, Path.GetRandomFileName());
             string tempHocrFilePathWithExt = tempHocrFilePath + TesseractHocrExtension;

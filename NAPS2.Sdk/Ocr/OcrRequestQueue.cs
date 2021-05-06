@@ -14,14 +14,14 @@ namespace NAPS2.Ocr
 {
     public class OcrRequestQueue
     {
-        private static OcrRequestQueue _default;
+        private static OcrRequestQueue? _default;
 
         public static OcrRequestQueue Default
         {
             get
             {
                 TestingContext.NoStaticDefaults();
-                return _default ?? (_default = new OcrRequestQueue());
+                return _default ??= new OcrRequestQueue();
             }
             set => _default = value ?? throw new ArgumentNullException(nameof(value));
         }
@@ -55,12 +55,12 @@ namespace NAPS2.Ocr
             }
         }
 
-        public async Task<OcrResult?> QueueForeground(IOcrEngine ocrEngine, ScannedImage.Snapshot snapshot, string tempImageFilePath, OcrParams ocrParams, CancellationToken cancelToken)
+        public async Task<OcrResult?> QueueForeground(IOcrEngine? ocrEngine, ScannedImage.Snapshot snapshot, string tempImageFilePath, OcrParams ocrParams, CancellationToken cancelToken)
         {
             OcrRequest req;
             lock (this)
             {
-                ocrEngine = ocrEngine ?? _ocrEngineManager.ActiveEngine ?? throw new ArgumentException("No OCR engine available");
+                ocrEngine ??= _ocrEngineManager.ActiveEngine ?? throw new ArgumentException("No OCR engine available");
 
                 var reqParams = new OcrRequestParams(snapshot, ocrEngine, ocrParams);
                 req = _requestCache.GetOrSet(reqParams, () => new OcrRequest(reqParams));
@@ -174,7 +174,7 @@ namespace NAPS2.Ocr
             {
                 if (!req.IsProcessing)
                 {
-                    SafeDelete(req.TempImageFilePath);
+                    SafeDelete(req.TempImageFilePath ?? throw new InvalidOperationException());
                 }
                 if (req.Result == null)
                 {
@@ -239,7 +239,7 @@ namespace NAPS2.Ocr
                     }
 
                     // Get the next queued request
-                    OcrRequest next;
+                    OcrRequest? next;
                     string tempImageFilePath;
                     lock (this)
                     {
@@ -253,7 +253,7 @@ namespace NAPS2.Ocr
                         }
 
                         next.IsProcessing = true;
-                        tempImageFilePath = next.TempImageFilePath;
+                        tempImageFilePath = next.TempImageFilePath ?? throw new InvalidOperationException();
                     }
 
                     // Actually run OCR
@@ -313,7 +313,7 @@ namespace NAPS2.Ocr
             bool finished = false;
             lock (this)
             {
-                op = _currentOp;
+                op = _currentOp ?? throw new InvalidOperationException();
                 _currentOp.Status.CurrentProgress += 1;
                 if (_currentOp.Status.CurrentProgress == _currentOp.Status.MaxProgress)
                 {

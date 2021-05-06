@@ -4,6 +4,6 @@
     {
         public int PageNumber { get; set; }
 
-        public string TempPath { get; set; }
+        public string? TempPath { get; set; }
     }
 }

@@ -8,7 +8,7 @@ namespace NAPS2.Ocr
     {
         bool CanProcess(string langCode);
 
-        OcrResult ProcessImage(string imagePath, OcrParams ocrParams, CancellationToken cancelToken);
+        OcrResult? ProcessImage(string imagePath, OcrParams ocrParams, CancellationToken cancelToken);
 
         bool IsSupported { get; }
 

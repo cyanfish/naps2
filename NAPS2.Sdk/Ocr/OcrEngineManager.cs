@@ -77,10 +77,10 @@ namespace NAPS2.Ocr
 
         public bool MustInstallPackage => _engines.All(x => (!x.IsSupported || !x.CanInstall) && !x.IsInstalled);
 
-        public IOcrEngine ActiveEngine => _engines.FirstOrDefault(x => x.IsSupported && x.IsInstalled && x.InstalledLanguages.Any());
+        public IOcrEngine? ActiveEngine => _engines.FirstOrDefault(x => x.IsSupported && x.IsInstalled && x.InstalledLanguages.Any());
 
-        public IOcrEngine InstalledEngine => _engines.FirstOrDefault(x => x.IsInstalled && x.InstalledLanguages.Any());
+        public IOcrEngine? InstalledEngine => _engines.FirstOrDefault(x => x.IsInstalled && x.InstalledLanguages.Any());
 
-        public IOcrEngine EngineToInstall => _engines.FirstOrDefault(x => x.IsSupported && x.CanInstall);
+        public IOcrEngine? EngineToInstall => _engines.FirstOrDefault(x => x.IsSupported && x.CanInstall);
     }
 }
