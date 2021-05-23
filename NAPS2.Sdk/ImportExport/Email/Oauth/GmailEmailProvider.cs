@@ -20,10 +20,7 @@ namespace NAPS2.ImportExport.Email.Oauth
             var messageId = await _gmailOauthProvider.UploadDraft(message.ToString(), progressCallback, cancelToken);
             var userEmail = _gmailOauthProvider.User;
             // Open the draft in the user's browser
-            // Note: As of this writing, the direct url is bugged in the new gmail UI, and there is no workaround
-            // https://issuetracker.google.com/issues/113127519
-            // At least it directs to the drafts folder
-            Process.Start($"https://mail.google.com/mail/?authuser={userEmail}#drafts/{messageId}");
+            Process.Start($"https://mail.google.com/mail/?authuser={userEmail}#drafts?compose={messageId}");
         }
     }
 }
