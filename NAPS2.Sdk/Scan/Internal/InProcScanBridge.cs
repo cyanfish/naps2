@@ -29,6 +29,11 @@ namespace NAPS2.Scan.Internal
             _remoteScanController = remoteScanController;
         }
 
+        public InProcScanBridge(ImageContext imageContext, IRemoteScanController remoteScanController)
+        {
+            _remoteScanController = remoteScanController;
+        }
+
         public Task<List<ScanDevice>> GetDeviceList(ScanOptions options) =>
             _remoteScanController.GetDeviceList(options);
 
