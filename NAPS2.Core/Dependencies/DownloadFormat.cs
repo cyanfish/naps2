@@ -61,6 +61,13 @@ namespace NAPS2.Dependencies
 
             private static void Extract(string zipFilePath, string outDir)
             {
+                if(ZipConstants.DefaultCodePage == 1)
+                {
+                    // ZipFile ctor throws if code page is 1 (on multi-locale system)
+                    // see: icsharpcode/SharpZipLib#195
+                    ZipConstants.DefaultCodePage = 850;
+                }
+
                 using (var zip = new ZipFile(zipFilePath))
                 {
                     foreach (ZipEntry entry in zip)
