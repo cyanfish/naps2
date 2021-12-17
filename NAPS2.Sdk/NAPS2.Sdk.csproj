@@ -54,7 +54,7 @@
     <PackageReference Include="Eto.Forms" Version="2.5.10" />
     <PackageReference Include="Eto.Platform.Windows" Version="2.5.10" />
     <PackageReference Include="Grpc.Tools" Version="2.26.0" PrivateAssets="all" />
-    <PackageReference Include="GrpcDotNetNamedPipes" Version="1.0.2" />
+    <PackageReference Include="GrpcDotNetNamedPipes" Version="1.4.2" />
     <PackageReference Include="MimeKit" Version="1.22.0" />
     <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
     <PackageReference Include="Nullable" Version="1.2.0" />
