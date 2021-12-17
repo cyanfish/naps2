@@ -6,7 +6,7 @@ public class TimedThrottle
 {
     private readonly Action _action;
     private readonly TimeSpan _interval;
-    private Timer _timer;
+    private Timer? _timer;
     private DateTime _lastRun = DateTime.MinValue;
 
     public TimedThrottle(Action action, TimeSpan interval)
@@ -46,7 +46,7 @@ public class TimedThrottle
             _timer = null;
             _lastRun = DateTime.Now;
         }
-            
+
         syncContext.Post(_ => _action(), null);
     }
 }

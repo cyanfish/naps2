@@ -7,7 +7,7 @@ public static class RemotingHelper
 {
     public static void HandleErrors(Error error)
     {
-        if (!string.IsNullOrEmpty(error?.Type))
+        if (error != null && !string.IsNullOrEmpty(error.Type))
         {
             var exceptionType = Assembly.GetAssembly(typeof(ScanDriverException))
                 .GetTypes()

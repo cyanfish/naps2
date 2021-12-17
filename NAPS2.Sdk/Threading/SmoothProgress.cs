@@ -14,11 +14,11 @@ public class SmoothProgress : IDisposable
     private double _timeToCompletion;
     private double _outputVelocity;
 
-    private Stopwatch _stopwatch;
-    private Timer _timer;
+    private Stopwatch _stopwatch = null!;
+    private Timer? _timer;
 
-    private LinkedList<double> _previousInputPos;
-    private LinkedList<long> _previousInputTimes;
+    private LinkedList<double> _previousInputPos = null!;
+    private LinkedList<long> _previousInputTimes = null!;
 
     public SmoothProgress()
     {
@@ -118,7 +118,7 @@ public class SmoothProgress : IDisposable
         OutputProgressChanged?.Invoke(this, new ProgressChangeEventArgs(_outputPos));
     }
 
-    public event ProgressChangeEventHandle OutputProgressChanged;
+    public event ProgressChangeEventHandle? OutputProgressChanged;
 
     public delegate void ProgressChangeEventHandle(object sender, ProgressChangeEventArgs args);
 

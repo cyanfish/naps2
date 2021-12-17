@@ -18,17 +18,12 @@ public abstract class UnmanagedBase<T> : IDisposable
     /// <summary>
     /// Gets the size of the unmanaged structure in bytes. If the structure is null, this is zero.
     /// </summary>
-    public int Size { get; protected set; }
-
-    /// <summary>
-    /// Gets a value indicated whether the unmanaged structure is null.
-    /// </summary>
-    public bool IsNull => Pointer == IntPtr.Zero;
+    protected int Size { get; init; }
 
     /// <summary>
     /// Gets a pointer to the unmanaged structure. If the provided value was null, this is IntPtr.Zero.
     /// </summary>
-    public IntPtr Pointer { get; protected set; }
+    protected IntPtr Pointer { get; init; }
 
     /// <summary>
     /// Gets a managed copy of the unmanaged structure.

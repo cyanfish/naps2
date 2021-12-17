@@ -62,7 +62,7 @@ public class TesseractSystemEngine : TesseractBaseEngine
                 if (process != null && process.Id != 0)
                 {
                     var codes = process.StandardError.ReadToEnd().Split(new[] {'\r', '\n'}, StringSplitOptions.RemoveEmptyEntries).Where(x => x.Length == 3);
-                    _installedLanguages = codes.Select(code => LanguageData.LanguageMap.Get($"ocr-{code}")).Where(lang => lang != null).ToList();
+                    _installedLanguages = codes.Select(code => LanguageData.LanguageMap.Get($"ocr-{code}")).WhereNotNull().ToList();
                     _isInstalled = true;
                     process.Kill();
                 }

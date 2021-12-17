@@ -117,7 +117,7 @@ public class AutoSaver
             {
                 // Can't just do images.Count because that includes patch codes
                 int imageCount = scans.SelectMany(x => x).Count();
-                _notify.ImagesSaved(imageCount, firstFileSaved);
+                _notify.ImagesSaved(imageCount, firstFileSaved!);
             }
             return ok;
         }
@@ -128,8 +128,8 @@ public class AutoSaver
             return false;
         }
     }
-        
-    private async Task<(bool, string)> SaveOneFile(AutoSaveSettings settings, Placeholders placeholders, int i, List<ScannedImage> images, bool doNotify)
+
+    private async Task<(bool, string?)> SaveOneFile(AutoSaveSettings settings, Placeholders placeholders, int i, List<ScannedImage> images, bool doNotify)
     {
         if (images.Count == 0)
         {

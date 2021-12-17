@@ -11,19 +11,16 @@ public class UnmanagedArray<T> : UnmanagedBase<T[]>
     public UnmanagedArray(IEnumerable<T> array)
     {
         ElementSize = Marshal.SizeOf(typeof(T));
-        if (array != null)
+        var arrayVal = array as IList<T> ?? array.ToList();
+
+        Length = arrayVal.Count;
+        Size = ElementSize * Length;
+        Pointer = Marshal.AllocHGlobal(Size);
+
+        // Populate the contents of the unmanaged array
+        for (int i = 0; i < Length; ++i)
         {
-            var arrayVal = array as IList<T> ?? array.ToList();
-
-            Length = arrayVal.Count;
-            Size = ElementSize * Length;
-            Pointer = Marshal.AllocHGlobal(Size);
-
-            // Populate the contents of the unmanaged array
-            for (int i = 0; i < Length; ++i)
-            {
-                Marshal.StructureToPtr(arrayVal[i], this[i], false);
-            }
+            Marshal.StructureToPtr(arrayVal[i], this[i], false);
         }
     }
 

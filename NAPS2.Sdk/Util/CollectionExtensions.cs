@@ -218,4 +218,6 @@ public static class CollectionExtensions
         }
         return dict[key];
     }
+
+    public static IEnumerable<T> WhereNotNull<T>(this IEnumerable<T?> enumerable) => enumerable.Where(x => x != null)!;
 }
