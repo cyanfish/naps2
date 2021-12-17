@@ -3,47 +3,46 @@ using NAPS2.Images.Storage;
 using NAPS2.Images.Transforms;
 using NAPS2.Util;
 
-namespace NAPS2.Images
+namespace NAPS2.Images;
+
+public abstract class ImageListMutation : ListMutation<ScannedImage>
 {
-    public abstract class ImageListMutation : ListMutation<ScannedImage>
+    public class RotateFlip : ImageListMutation
     {
-        public class RotateFlip : ImageListMutation
+        private readonly ImageContext _imageContext;
+        private readonly double _angle;
+
+        public RotateFlip(ImageContext imageContext, double angle)
         {
-            private readonly ImageContext _imageContext;
-            private readonly double _angle;
+            _imageContext = imageContext;
+            _angle = angle;
+        }
 
-            public RotateFlip(ImageContext imageContext, double angle)
+        public override void Apply(List<ScannedImage> list, ref ListSelection<ScannedImage> selection)
+        {
+            foreach (ScannedImage img in selection)
             {
-                _imageContext = imageContext;
-                _angle = angle;
-            }
-
-            public override void Apply(List<ScannedImage> list, ref ListSelection<ScannedImage> selection)
-            {
-                foreach (ScannedImage img in selection)
+                lock (img)
                 {
-                    lock (img)
+                    var transform = new RotationTransform(_angle);
+                    img.AddTransform(transform);
+                    var thumb = img.GetThumbnail();
+                    if (thumb != null)
                     {
-                        var transform = new RotationTransform(_angle);
-                        img.AddTransform(transform);
-                        var thumb = img.GetThumbnail();
-                        if (thumb != null)
-                        {
-                            img.SetThumbnail(_imageContext.PerformTransform(thumb, transform));
-                        }
+                        img.SetThumbnail(_imageContext.PerformTransform(thumb, transform));
                     }
                 }
             }
         }
+    }
 
-        public class ResetTransforms : ListMutation<ScannedImage>
+    public class ResetTransforms : ListMutation<ScannedImage>
+    {
+        public override void Apply(List<ScannedImage> list, ref ListSelection<ScannedImage> selection)
         {
-            public override void Apply(List<ScannedImage> list, ref ListSelection<ScannedImage> selection)
+            foreach (ScannedImage img in selection)
             {
-                foreach (ScannedImage img in selection)
-                {
-                    img.ResetTransforms();
-                }
+                img.ResetTransforms();
             }
         }
     }

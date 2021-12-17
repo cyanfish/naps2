@@ -1,7 +1,6 @@
-﻿namespace NAPS2.ImportExport
+﻿namespace NAPS2.ImportExport;
+
+public class DirectImportParams
 {
-    public class DirectImportParams
-    {
-        public int? ThumbnailSize { get; set; }
-    }
+    public int? ThumbnailSize { get; set; }
 }

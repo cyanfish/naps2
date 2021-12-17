@@ -14,335 +14,334 @@ using NAPS2.Serialization;
 using NAPS2.Util;
 using NAPS2.WinForms;
 
-namespace NAPS2.EtoForms.Ui
+namespace NAPS2.EtoForms.Ui;
+
+public class ProfilesForm : EtoDialogBase
 {
-    public class ProfilesForm : EtoDialogBase
-    {
-        private readonly IScanPerformer _scanPerformer;
-        private readonly ProfileNameTracker _profileNameTracker;
-        private readonly IProfileManager _profileManager;
-        private readonly ProfileTransfer _profileTransfer;
+    private readonly IScanPerformer _scanPerformer;
+    private readonly ProfileNameTracker _profileNameTracker;
+    private readonly IProfileManager _profileManager;
+    private readonly ProfileTransfer _profileTransfer;
 
-        private readonly IListView<ScanProfile> _listView;
+    private readonly IListView<ScanProfile> _listView;
         
-        private readonly Command _scanCommand;
-        private readonly Command _addCommand;
-        private readonly Command _editCommand;
-        private readonly Command _deleteCommand;
-        private readonly Command _setDefaultCommand;
-        private readonly Command _copyCommand;
-        private readonly Command _pasteCommand;
+    private readonly Command _scanCommand;
+    private readonly Command _addCommand;
+    private readonly Command _editCommand;
+    private readonly Command _deleteCommand;
+    private readonly Command _setDefaultCommand;
+    private readonly Command _copyCommand;
+    private readonly Command _pasteCommand;
 
-        public ProfilesForm(ScopedConfig scopedConfig, IScanPerformer scanPerformer, ProfileNameTracker profileNameTracker, IProfileManager profileManager, IEtoPlatform etoPlatform, ProfileListViewBehavior profileListViewBehavior, ProfileTransfer profileTransfer)
-            : base(scopedConfig)
+    public ProfilesForm(ScopedConfig scopedConfig, IScanPerformer scanPerformer, ProfileNameTracker profileNameTracker, IProfileManager profileManager, IEtoPlatform etoPlatform, ProfileListViewBehavior profileListViewBehavior, ProfileTransfer profileTransfer)
+        : base(scopedConfig)
+    {
+        _scanPerformer = scanPerformer;
+        _profileNameTracker = profileNameTracker;
+        _profileManager = profileManager;
+        _profileTransfer = profileTransfer;
+
+        Title = UiStrings.ProfilesFormTitle;
+        Icon = Icons.blueprints_small.ToEtoIcon();
+        Size = new Size(700, 200);
+        MinimumSize = new Size(600, 180);
+        Resizable = true;
+
+        switch (Handler)
         {
-            _scanPerformer = scanPerformer;
-            _profileNameTracker = profileNameTracker;
-            _profileManager = profileManager;
-            _profileTransfer = profileTransfer;
+            case IWindowsControl windowsControl:
+                windowsControl.UseShellDropManager = false;
+                break;
+        }
 
-            Title = UiStrings.ProfilesFormTitle;
-            Icon = Icons.blueprints_small.ToEtoIcon();
-            Size = new Size(700, 200);
-            MinimumSize = new Size(600, 180);
-            Resizable = true;
+        _listView = etoPlatform.CreateListView(profileListViewBehavior);
+        _scanCommand = new ActionCommand(DoScan)
+        {
+            MenuText = UiStrings.Scan,
+            Image = Icons.control_play_blue_small.ToEto(),
+        };
+        _addCommand = new ActionCommand(DoAdd)
+        {
+            MenuText = UiStrings.Add,
+            Image = Icons.add_small.ToEto()
+        };
+        _editCommand = new ActionCommand(DoEdit)
+        {
+            MenuText = UiStrings.Edit,
+            Image = Icons.pencil_small.ToEto()
+        };
+        _deleteCommand = new ActionCommand(DoDelete)
+        {
+            MenuText = UiStrings.Delete,
+            Image = Icons.cross_small.ToEto(),
+            Shortcut = Keys.Delete
+        };
+        _setDefaultCommand = new ActionCommand(DoSetDefault)
+        {
+            MenuText = UiStrings.SetDefault,
+            Image = Icons.accept_small.ToEto()
+        };
+        _copyCommand = new ActionCommand(DoCopy)
+        {
+            MenuText = UiStrings.Copy,
+            Shortcut = Keys.Control | Keys.C
+        };
+        _pasteCommand = new ActionCommand(DoPaste)
+        {
+            MenuText = UiStrings.Paste,
+            Shortcut = Keys.Control | Keys.V
+        };
 
-            switch (Handler)
-            {
-                case IWindowsControl windowsControl:
-                    windowsControl.UseShellDropManager = false;
-                    break;
-            }
-
-            _listView = etoPlatform.CreateListView(profileListViewBehavior);
-            _scanCommand = new ActionCommand(DoScan)
-            {
-                MenuText = UiStrings.Scan,
-                Image = Icons.control_play_blue_small.ToEto(),
-            };
-            _addCommand = new ActionCommand(DoAdd)
-            {
-                MenuText = UiStrings.Add,
-                Image = Icons.add_small.ToEto()
-            };
-            _editCommand = new ActionCommand(DoEdit)
-            {
-                MenuText = UiStrings.Edit,
-                Image = Icons.pencil_small.ToEto()
-            };
-            _deleteCommand = new ActionCommand(DoDelete)
-            {
-                MenuText = UiStrings.Delete,
-                Image = Icons.cross_small.ToEto(),
-                Shortcut = Keys.Delete
-            };
-            _setDefaultCommand = new ActionCommand(DoSetDefault)
-            {
-                MenuText = UiStrings.SetDefault,
-                Image = Icons.accept_small.ToEto()
-            };
-            _copyCommand = new ActionCommand(DoCopy)
-            {
-                MenuText = UiStrings.Copy,
-                Shortcut = Keys.Control | Keys.C
-            };
-            _pasteCommand = new ActionCommand(DoPaste)
-            {
-                MenuText = UiStrings.Paste,
-                Shortcut = Keys.Control | Keys.V
-            };
-
-            _listView.ImageSize = new Size(48, 48);
-            _listView.AllowDrag = true;
-            _listView.AllowDrop = !NoUserProfiles;
-            _listView.ItemClicked += ItemClicked;
-            _listView.SelectionChanged += SelectionChanged;
-            _listView.Drop += Drop;
-            profileManager.ProfilesUpdated += ProfilesUpdated;
+        _listView.ImageSize = new Size(48, 48);
+        _listView.AllowDrag = true;
+        _listView.AllowDrop = !NoUserProfiles;
+        _listView.ItemClicked += ItemClicked;
+        _listView.SelectionChanged += SelectionChanged;
+        _listView.Drop += Drop;
+        profileManager.ProfilesUpdated += ProfilesUpdated;
             
-            _addCommand.Enabled = !NoUserProfiles;
-            _editCommand.Enabled = false;
-            _deleteCommand.Enabled = false;
-            ReloadProfiles();
-            var defaultProfile = _profileManager.Profiles.FirstOrDefault(x => x.IsDefault);
-            if (defaultProfile != null)
-            {
-                _listView.Selection = ListSelection.Of(defaultProfile);
-            }
+        _addCommand.Enabled = !NoUserProfiles;
+        _editCommand.Enabled = false;
+        _deleteCommand.Enabled = false;
+        ReloadProfiles();
+        var defaultProfile = _profileManager.Profiles.FirstOrDefault(x => x.IsDefault);
+        if (defaultProfile != null)
+        {
+            _listView.Selection = ListSelection.Of(defaultProfile);
+        }
 
-            ContextMenu = new ContextMenu();
+        ContextMenu = new ContextMenu();
+        ContextMenu.AddItems(
+            new ButtonMenuItem(_scanCommand),
+            new ButtonMenuItem(_editCommand),
+            new ButtonMenuItem(_setDefaultCommand),
+            new SeparatorMenuItem());
+        if (!NoUserProfiles)
+        {
             ContextMenu.AddItems(
-                new ButtonMenuItem(_scanCommand),
-                new ButtonMenuItem(_editCommand),
-                new ButtonMenuItem(_setDefaultCommand),
+                new ButtonMenuItem(_copyCommand),
+                new ButtonMenuItem(_pasteCommand),
                 new SeparatorMenuItem());
-            if (!NoUserProfiles)
-            {
-                ContextMenu.AddItems(
-                    new ButtonMenuItem(_copyCommand),
-                    new ButtonMenuItem(_pasteCommand),
-                    new SeparatorMenuItem());
-            }
-            ContextMenu.AddItems(
-                new ButtonMenuItem(_deleteCommand));
-            ContextMenu.Opening += ContextMenuOpening;
+        }
+        ContextMenu.AddItems(
+            new ButtonMenuItem(_deleteCommand));
+        ContextMenu.Opening += ContextMenuOpening;
             
-            BuildLayout();
-        }
+        BuildLayout();
+    }
 
-        private void BuildLayout()
-        {
-            Content = L.Column(
-                L.Row(
-                    _listView.Control.XScale(),
-                    C.Button(_scanCommand, Icons.control_play_blue.ToEto(), ButtonImagePosition.Above).AutoSize()
-                ).Aligned().YScale(),
-                L.Row(
-                    L.Column(
-                        L.Row(
-                            C.Button(_addCommand, ButtonImagePosition.Left),
-                            C.Button(_editCommand, ButtonImagePosition.Left),
-                            C.Button(_deleteCommand, ButtonImagePosition.Left),
-                            C.ZeroSpace()
-                        )
-                    ),
-                    C.Button(UiStrings.Done, Close)
-                ).Aligned());
-        }
+    private void BuildLayout()
+    {
+        Content = L.Column(
+            L.Row(
+                _listView.Control.XScale(),
+                C.Button(_scanCommand, Icons.control_play_blue.ToEto(), ButtonImagePosition.Above).AutoSize()
+            ).Aligned().YScale(),
+            L.Row(
+                L.Column(
+                    L.Row(
+                        C.Button(_addCommand, ButtonImagePosition.Left),
+                        C.Button(_editCommand, ButtonImagePosition.Left),
+                        C.Button(_deleteCommand, ButtonImagePosition.Left),
+                        C.ZeroSpace()
+                    )
+                ),
+                C.Button(UiStrings.Done, Close)
+            ).Aligned());
+    }
 
-        public Action<ScannedImage>? ImageCallback { get; set; }
+    public Action<ScannedImage>? ImageCallback { get; set; }
 
-        private ScanProfile? SelectedProfile => _listView.Selection.SingleOrDefault();
+    private ScanProfile? SelectedProfile => _listView.Selection.SingleOrDefault();
 
-        private bool SelectionLocked
-        {
-            get { return _listView.Selection.Any(x => x.IsLocked); }
-        }
+    private bool SelectionLocked
+    {
+        get { return _listView.Selection.Any(x => x.IsLocked); }
+    }
 
-        private bool NoUserProfiles => Config.Get(c => c.NoUserProfiles) && _profileManager.Profiles.Any(x => x.IsLocked);
+    private bool NoUserProfiles => Config.Get(c => c.NoUserProfiles) && _profileManager.Profiles.Any(x => x.IsLocked);
 
-        private void ProfilesUpdated(object sender, EventArgs e)
-        {
-            ReloadProfiles();
+    private void ProfilesUpdated(object sender, EventArgs e)
+    {
+        ReloadProfiles();
             
-            // If we only have one profile, make it the default
-            var profiles = _profileManager.Profiles;
-            if (profiles.Count == 1 && !profiles[0].IsDefault)
-            {
-                _profileManager.DefaultProfile = profiles.Single();
-            }
-        }
-
-        private void ReloadProfiles()
+        // If we only have one profile, make it the default
+        var profiles = _profileManager.Profiles;
+        if (profiles.Count == 1 && !profiles[0].IsDefault)
         {
-            _listView.SetItems(_profileManager.Profiles);
+            _profileManager.DefaultProfile = profiles.Single();
         }
+    }
 
-        private void SelectionChanged(object sender, EventArgs e)
+    private void ReloadProfiles()
+    {
+        _listView.SetItems(_profileManager.Profiles);
+    }
+
+    private void SelectionChanged(object sender, EventArgs e)
+    {
+        _editCommand.Enabled = _listView.Selection.Count == 1;
+        _deleteCommand.Enabled = _listView.Selection.Count > 0 && !SelectionLocked;
+    }
+
+    private void ItemClicked(object sender, EventArgs e)
+    {
+        if (SelectedProfile != null)
         {
-            _editCommand.Enabled = _listView.Selection.Count == 1;
-            _deleteCommand.Enabled = _listView.Selection.Count > 0 && !SelectionLocked;
+            DoScan();
         }
+    }
 
-        private void ItemClicked(object sender, EventArgs e)
+    private void Drop(object sender, DropEventArgs e)
+    {
+        // Receive drop data
+        if (_profileTransfer.IsIn(e.Data.ToEto()))
         {
-            if (SelectedProfile != null)
+            var data = _profileTransfer.GetFrom(e.Data.ToEto());
+            if (data.ProcessId == Process.GetCurrentProcess().Id)
             {
-                DoScan();
-            }
-        }
-
-        private void Drop(object sender, DropEventArgs e)
-        {
-            // Receive drop data
-            if (_profileTransfer.IsIn(e.Data.ToEto()))
-            {
-                var data = _profileTransfer.GetFrom(e.Data.ToEto());
-                if (data.ProcessId == Process.GetCurrentProcess().Id)
-                {
-                    if (data.Locked)
-                    {
-                        return;
-                    }
-                    int index = e.Position;
-                    while (index < _profileManager.Profiles.Count && _profileManager.Profiles[index].IsLocked)
-                    {
-                        index++;
-                    }
-                    _profileManager.Mutate(new ListMutation<ScanProfile>.MoveTo(index), _listView);
-                }
-                else
-                {
-                    if (!NoUserProfiles)
-                    {
-                        _profileManager.Mutate(new ListMutation<ScanProfile>.Append(data.ScanProfileXml.FromXml<ScanProfile>()), _listView);
-                    }
-                }
-            }
-        }
-
-        private ScanParams DefaultScanParams() =>
-            new ScanParams
-            {
-                NoAutoSave = Config.Get(c => c.DisableAutoSave),
-                DoOcr = Config.Get(c => c.EnableOcr) && Config.Get(c => c.OcrAfterScanning),
-                ThumbnailSize = Config.Get(c => c.ThumbnailSize)
-            };
-
-        private void ContextMenuOpening(object sender, EventArgs e)
-        {
-            _setDefaultCommand.Enabled = SelectedProfile != null && !SelectedProfile.IsDefault;
-            _editCommand.Enabled = SelectedProfile != null;
-            _deleteCommand.Enabled = SelectedProfile != null && !SelectedProfile.IsLocked;
-            _copyCommand.Enabled = SelectedProfile != null;
-            _pasteCommand.Enabled = _profileTransfer.IsInClipboard();
-        }
-
-        private async void DoScan()
-        {
-            if (ImageCallback == null)
-            {
-                throw new InvalidOperationException("Image callback not specified");
-            }
-            if (_profileManager.Profiles.Count == 0)
-            {
-                var editSettingsForm = FormFactory.Create<FEditProfile>();
-                editSettingsForm.ScanProfile = new ScanProfile
-                {
-                    Version = ScanProfile.CURRENT_VERSION
-                };
-                editSettingsForm.ShowDialog();
-                if (!editSettingsForm.Result)
+                if (data.Locked)
                 {
                     return;
                 }
-                _profileManager.Mutate(new ListMutation<ScanProfile>.Append(editSettingsForm.ScanProfile), ListSelection.Empty<ScanProfile>());
-                _profileManager.DefaultProfile = editSettingsForm.ScanProfile;
+                int index = e.Position;
+                while (index < _profileManager.Profiles.Count && _profileManager.Profiles[index].IsLocked)
+                {
+                    index++;
+                }
+                _profileManager.Mutate(new ListMutation<ScanProfile>.MoveTo(index), _listView);
             }
-            if (SelectedProfile == null)
+            else
             {
-                MessageBox.Show(MiscResources.SelectProfileBeforeScan, MiscResources.ChooseProfile, MessageBoxButtons.OK, MessageBoxType.Warning);
+                if (!NoUserProfiles)
+                {
+                    _profileManager.Mutate(new ListMutation<ScanProfile>.Append(data.ScanProfileXml.FromXml<ScanProfile>()), _listView);
+                }
+            }
+        }
+    }
+
+    private ScanParams DefaultScanParams() =>
+        new ScanParams
+        {
+            NoAutoSave = Config.Get(c => c.DisableAutoSave),
+            DoOcr = Config.Get(c => c.EnableOcr) && Config.Get(c => c.OcrAfterScanning),
+            ThumbnailSize = Config.Get(c => c.ThumbnailSize)
+        };
+
+    private void ContextMenuOpening(object sender, EventArgs e)
+    {
+        _setDefaultCommand.Enabled = SelectedProfile != null && !SelectedProfile.IsDefault;
+        _editCommand.Enabled = SelectedProfile != null;
+        _deleteCommand.Enabled = SelectedProfile != null && !SelectedProfile.IsLocked;
+        _copyCommand.Enabled = SelectedProfile != null;
+        _pasteCommand.Enabled = _profileTransfer.IsInClipboard();
+    }
+
+    private async void DoScan()
+    {
+        if (ImageCallback == null)
+        {
+            throw new InvalidOperationException("Image callback not specified");
+        }
+        if (_profileManager.Profiles.Count == 0)
+        {
+            var editSettingsForm = FormFactory.Create<FEditProfile>();
+            editSettingsForm.ScanProfile = new ScanProfile
+            {
+                Version = ScanProfile.CURRENT_VERSION
+            };
+            editSettingsForm.ShowDialog();
+            if (!editSettingsForm.Result)
+            {
                 return;
             }
-            if (_profileManager.DefaultProfile == null)
-            {
-                _profileManager.DefaultProfile = SelectedProfile;
-            }
-            var source = await _scanPerformer.PerformScan(SelectedProfile, DefaultScanParams(), this.ToNative().Handle);
-            await source.ForEach(ImageCallback);
-            this.ToNative().Activate();
+            _profileManager.Mutate(new ListMutation<ScanProfile>.Append(editSettingsForm.ScanProfile), ListSelection.Empty<ScanProfile>());
+            _profileManager.DefaultProfile = editSettingsForm.ScanProfile;
         }
+        if (SelectedProfile == null)
+        {
+            MessageBox.Show(MiscResources.SelectProfileBeforeScan, MiscResources.ChooseProfile, MessageBoxButtons.OK, MessageBoxType.Warning);
+            return;
+        }
+        if (_profileManager.DefaultProfile == null)
+        {
+            _profileManager.DefaultProfile = SelectedProfile;
+        }
+        var source = await _scanPerformer.PerformScan(SelectedProfile, DefaultScanParams(), this.ToNative().Handle);
+        await source.ForEach(ImageCallback);
+        this.ToNative().Activate();
+    }
 
-        private void DoAdd()
+    private void DoAdd()
+    {
+        var fedit = FormFactory.Create<FEditProfile>();
+        fedit.ScanProfile = Config.Get(c => c.DefaultProfileSettings);
+        fedit.ShowDialog();
+        if (fedit.Result)
+        {
+            _profileManager.Mutate(new ListMutation<ScanProfile>.Append(fedit.ScanProfile), _listView);
+        }
+    }
+
+    private void DoEdit()
+    {
+        var originalProfile = SelectedProfile;
+        if (originalProfile != null)
         {
             var fedit = FormFactory.Create<FEditProfile>();
-            fedit.ScanProfile = Config.Get(c => c.DefaultProfileSettings);
+            fedit.ScanProfile = originalProfile;
             fedit.ShowDialog();
             if (fedit.Result)
             {
-                _profileManager.Mutate(new ListMutation<ScanProfile>.Append(fedit.ScanProfile), _listView);
+                _profileManager.Mutate(new ListMutation<ScanProfile>.ReplaceWith(fedit.ScanProfile), _listView);
             }
         }
+    }
 
-        private void DoEdit()
+    private void DoDelete()
+    {
+        if (SelectedProfile != null && !SelectionLocked)
         {
-            var originalProfile = SelectedProfile;
-            if (originalProfile != null)
+            string message = string.Format(MiscResources.ConfirmDeleteSingleProfile, SelectedProfile.DisplayName);
+            if (MessageBox.Show(message, MiscResources.Delete, MessageBoxButtons.YesNo, MessageBoxType.Warning) == DialogResult.Yes)
             {
-                var fedit = FormFactory.Create<FEditProfile>();
-                fedit.ScanProfile = originalProfile;
-                fedit.ShowDialog();
-                if (fedit.Result)
+                foreach (var profile in _listView.Selection)
                 {
-                    _profileManager.Mutate(new ListMutation<ScanProfile>.ReplaceWith(fedit.ScanProfile), _listView);
+                    _profileNameTracker.DeletingProfile(profile.DisplayName);
                 }
+                _profileManager.Mutate(new ListMutation<ScanProfile>.DeleteSelected(), _listView);
             }
         }
+    }
 
-        private void DoDelete()
+    private void DoSetDefault()
+    {
+        if (SelectedProfile != null)
         {
-            if (SelectedProfile != null && !SelectionLocked)
-            {
-                string message = string.Format(MiscResources.ConfirmDeleteSingleProfile, SelectedProfile.DisplayName);
-                if (MessageBox.Show(message, MiscResources.Delete, MessageBoxButtons.YesNo, MessageBoxType.Warning) == DialogResult.Yes)
-                {
-                    foreach (var profile in _listView.Selection)
-                    {
-                        _profileNameTracker.DeletingProfile(profile.DisplayName);
-                    }
-                    _profileManager.Mutate(new ListMutation<ScanProfile>.DeleteSelected(), _listView);
-                }
-            }
+            _profileManager.DefaultProfile = SelectedProfile;
         }
+    }
 
-        private void DoSetDefault()
+    private void DoCopy()
+    {
+        if (SelectedProfile != null)
         {
-            if (SelectedProfile != null)
-            {
-                _profileManager.DefaultProfile = SelectedProfile;
-            }
+            _profileTransfer.SetClipboard(SelectedProfile);
         }
+    }
 
-        private void DoCopy()
+    private void DoPaste()
+    {
+        if (NoUserProfiles)
         {
-            if (SelectedProfile != null)
-            {
-                _profileTransfer.SetClipboard(SelectedProfile);
-            }
+            return;
         }
-
-        private void DoPaste()
+        if (_profileTransfer.IsInClipboard())
         {
-            if (NoUserProfiles)
-            {
-                return;
-            }
-            if (_profileTransfer.IsInClipboard())
-            {
-                var data = _profileTransfer.GetFromClipboard();
-                var profile = data.ScanProfileXml.FromXml<ScanProfile>();
-                _profileManager.Mutate(new ListMutation<ScanProfile>.Append(profile), _listView);
-            }
+            var data = _profileTransfer.GetFromClipboard();
+            var profile = data.ScanProfileXml.FromXml<ScanProfile>();
+            _profileManager.Mutate(new ListMutation<ScanProfile>.Append(profile), _listView);
         }
     }
 }

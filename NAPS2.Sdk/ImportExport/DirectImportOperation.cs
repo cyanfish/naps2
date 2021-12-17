@@ -8,65 +8,64 @@ using NAPS2.Images.Transforms;
 using NAPS2.ImportExport.Images;
 using NAPS2.Serialization;
 
-namespace NAPS2.ImportExport
+namespace NAPS2.ImportExport;
+
+public class DirectImportOperation : OperationBase
 {
-    public class DirectImportOperation : OperationBase
+    private readonly ImageContext _imageContext;
+    private readonly ImageRenderer _imageRenderer;
+
+    public DirectImportOperation(ImageContext imageContext, ImageRenderer imageRenderer)
     {
-        private readonly ImageContext _imageContext;
-        private readonly ImageRenderer _imageRenderer;
+        _imageContext = imageContext;
+        _imageRenderer = imageRenderer;
 
-        public DirectImportOperation(ImageContext imageContext, ImageRenderer imageRenderer)
+        AllowCancel = true;
+        AllowBackground = true;
+    }
+
+    public bool Start(ImageTransferData data, bool copy, Action<ScannedImage> imageCallback, DirectImportParams importParams)
+    {
+        ProgressTitle = copy ? MiscResources.CopyProgress : MiscResources.ImportProgress;
+        Status = new OperationStatus
         {
-            _imageContext = imageContext;
-            _imageRenderer = imageRenderer;
+            StatusText = copy ? MiscResources.Copying : MiscResources.Importing,
+            MaxProgress = data.SerializedImages.Count
+        };
 
-            AllowCancel = true;
-            AllowBackground = true;
-        }
-
-        public bool Start(ImageTransferData data, bool copy, Action<ScannedImage> imageCallback, DirectImportParams importParams)
+        RunAsync(async () =>
         {
-            ProgressTitle = copy ? MiscResources.CopyProgress : MiscResources.ImportProgress;
-            Status = new OperationStatus
+            Exception? error = null;
+            foreach (var serializedImage in data.SerializedImages)
             {
-                StatusText = copy ? MiscResources.Copying : MiscResources.Importing,
-                MaxProgress = data.SerializedImages.Count
-            };
-
-            RunAsync(async () =>
-            {
-                Exception? error = null;
-                foreach (var serializedImage in data.SerializedImages)
+                try
                 {
-                    try
+                    ScannedImage img = SerializedImageHelper.Deserialize(_imageContext, serializedImage, new SerializedImageHelper.DeserializeOptions());
+                    // TODO: Don't bother, here, in recovery, etc.
+                    if (importParams.ThumbnailSize.HasValue)
                     {
-                        ScannedImage img = SerializedImageHelper.Deserialize(_imageContext, serializedImage, new SerializedImageHelper.DeserializeOptions());
-                        // TODO: Don't bother, here, in recovery, etc.
-                        if (importParams.ThumbnailSize.HasValue)
-                        {
-                            img.SetThumbnail(_imageContext.PerformTransform(await _imageRenderer.Render(img), new ThumbnailTransform(importParams.ThumbnailSize.Value)));
-                        }
-                        imageCallback(img);
-
-                        Status.CurrentProgress++;
-                        InvokeStatusChanged();
-                        if (CancelToken.IsCancellationRequested)
-                        {
-                            break;
-                        }
+                        img.SetThumbnail(_imageContext.PerformTransform(await _imageRenderer.Render(img), new ThumbnailTransform(importParams.ThumbnailSize.Value)));
                     }
-                    catch (Exception ex)
+                    imageCallback(img);
+
+                    Status.CurrentProgress++;
+                    InvokeStatusChanged();
+                    if (CancelToken.IsCancellationRequested)
                     {
-                        error = ex;
+                        break;
                     }
                 }
-                if (error != null)
+                catch (Exception ex)
                 {
-                    Log.ErrorException(string.Format(MiscResources.ImportErrorCouldNot, "<data>"), error);
+                    error = ex;
                 }
-                return true;
-            });
+            }
+            if (error != null)
+            {
+                Log.ErrorException(string.Format(MiscResources.ImportErrorCouldNot, "<data>"), error);
+            }
             return true;
-        }
+        });
+        return true;
     }
 }

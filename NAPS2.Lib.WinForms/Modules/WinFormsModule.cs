@@ -8,19 +8,18 @@ using NAPS2.Util;
 using NAPS2.WinForms;
 using Ninject.Modules;
 
-namespace NAPS2.Modules
+namespace NAPS2.Modules;
+
+public class WinFormsModule : NinjectModule
 {
-    public class WinFormsModule : NinjectModule
+    public override void Load()
     {
-        public override void Load()
-        {
-            Bind<IPdfPasswordProvider>().To<WinFormsPdfPasswordProvider>();
-            Bind<ErrorOutput>().To<MessageBoxErrorOutput>();
-            Bind<OverwritePrompt>().To<WinFormsOverwritePrompt>();
-            Bind<OperationProgress>().To<WinFormsOperationProgress>().InSingletonScope();
-            Bind<IComponentInstallPrompt>().To<WinFormsComponentInstallPrompt>();
-            Bind<DialogHelper>().To<WinFormsDialogHelper>();
-            Bind<IEtoPlatform>().To<WinFormsEtoPlatform>();
-        }
+        Bind<IPdfPasswordProvider>().To<WinFormsPdfPasswordProvider>();
+        Bind<ErrorOutput>().To<MessageBoxErrorOutput>();
+        Bind<OverwritePrompt>().To<WinFormsOverwritePrompt>();
+        Bind<OperationProgress>().To<WinFormsOperationProgress>().InSingletonScope();
+        Bind<IComponentInstallPrompt>().To<WinFormsComponentInstallPrompt>();
+        Bind<DialogHelper>().To<WinFormsDialogHelper>();
+        Bind<IEtoPlatform>().To<WinFormsEtoPlatform>();
     }
 }

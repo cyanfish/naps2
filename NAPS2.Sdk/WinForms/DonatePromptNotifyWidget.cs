@@ -1,15 +1,14 @@
 ﻿using NAPS2.Lang.Resources;
 
-namespace NAPS2.WinForms
-{
-    public class DonatePromptNotifyWidget : NotifyWidget
-    {
-        public DonatePromptNotifyWidget()
-            : base(MiscResources.DonatePrompt, MiscResources.Donate, "https://www.naps2.com/donate", null)
-        {
-            hideTimer.Interval = 60 * 1000;
-        }
+namespace NAPS2.WinForms;
 
-        public override NotifyWidgetBase Clone() => new DonatePromptNotifyWidget();
+public class DonatePromptNotifyWidget : NotifyWidget
+{
+    public DonatePromptNotifyWidget()
+        : base(MiscResources.DonatePrompt, MiscResources.Donate, "https://www.naps2.com/donate", null)
+    {
+        hideTimer.Interval = 60 * 1000;
     }
+
+    public override NotifyWidgetBase Clone() => new DonatePromptNotifyWidget();
 }

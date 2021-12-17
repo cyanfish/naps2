@@ -1,7 +1,6 @@
-﻿namespace NAPS2.ImportExport.Email
+﻿namespace NAPS2.ImportExport.Email;
+
+public class EmailSettings
 {
-    public class EmailSettings
-    {
-        public string? AttachmentName { get; set; }
-    }
+    public string? AttachmentName { get; set; }
 }

@@ -1,19 +1,18 @@
 ﻿using System;
 using PdfSharp.Pdf;
 
-namespace NAPS2.Images.Storage
+namespace NAPS2.Images.Storage;
+
+public class PdfStorage : IStorage
 {
-    public class PdfStorage : IStorage
+    public PdfStorage(PdfDocument document)
     {
-        public PdfStorage(PdfDocument document)
-        {
-            Document = document ?? throw new ArgumentNullException(nameof(document));
-        }
+        Document = document ?? throw new ArgumentNullException(nameof(document));
+    }
 
-        public PdfDocument Document { get; }
+    public PdfDocument Document { get; }
 
-        public void Dispose()
-        {
-        }
+    public void Dispose()
+    {
     }
 }

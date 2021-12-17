@@ -1,11 +1,10 @@
-﻿namespace NAPS2.Images.Storage
+﻿namespace NAPS2.Images.Storage;
+
+public class StubImageMetadataFactory : IImageMetadataFactory
 {
-    public class StubImageMetadataFactory : IImageMetadataFactory
-    {
-        public IImageMetadata CreateMetadata(IStorage storage) => new StubImageMetadata();
+    public IImageMetadata CreateMetadata(IStorage storage) => new StubImageMetadata();
         
-        public void CommitAllMetadata()
-        {
-        }
+    public void CommitAllMetadata()
+    {
     }
 }

@@ -6,131 +6,130 @@ using NAPS2.Config;
 using NAPS2.Ocr;
 using NAPS2.Scan;
 
-namespace NAPS2.WinForms
+namespace NAPS2.WinForms;
+
+public partial class FOcrSetup : FormBase
 {
-    public partial class FOcrSetup : FormBase
+    private readonly OcrEngineManager _ocrEngineManager;
+    private readonly List<OcrMode> _availableModes;
+
+    public FOcrSetup(OcrEngineManager ocrEngineManager)
     {
-        private readonly OcrEngineManager _ocrEngineManager;
-        private readonly List<OcrMode> _availableModes;
+        _ocrEngineManager = ocrEngineManager;
+        InitializeComponent();
 
-        public FOcrSetup(OcrEngineManager ocrEngineManager)
+        comboOcrMode.Format += (sender, e) => e.Value = ((Enum)e.ListItem).Description();
+        _availableModes = ocrEngineManager.ActiveEngine?.SupportedModes?.ToList();
+        if (_availableModes != null)
         {
-            _ocrEngineManager = ocrEngineManager;
-            InitializeComponent();
-
-            comboOcrMode.Format += (sender, e) => e.Value = ((Enum)e.ListItem).Description();
-            _availableModes = ocrEngineManager.ActiveEngine?.SupportedModes?.ToList();
-            if (_availableModes != null)
+            foreach (var mode in _availableModes)
             {
-                foreach (var mode in _availableModes)
-                {
-                    comboOcrMode.Items.Add(mode);
-                }
+                comboOcrMode.Items.Add(mode);
             }
         }
+    }
 
-        protected override void OnLoad(object sender, EventArgs eventArgs)
+    protected override void OnLoad(object sender, EventArgs eventArgs)
+    {
+        new LayoutManager(this)
+            .Bind(btnCancel, btnOK)
+            .RightToForm()
+            .Bind(comboLanguages, comboOcrMode)
+            .WidthToForm()
+            .Activate();
+
+        LoadLanguages();
+        comboLanguages.DisplayMember = "Name";
+        comboLanguages.ValueMember = "Code";
+
+        ConditionalControls.UnlockHeight(this);
+        ConditionalControls.SetVisible(comboOcrMode, _availableModes != null, 8);
+        labelOcrMode.Visible = _availableModes != null;
+        ConditionalControls.LockHeight(this);
+
+        checkBoxEnableOcr.Checked = Config.Get(c => c.EnableOcr);
+        SetSelectedValue(comboLanguages, Config.Get(c => c.OcrLanguageCode));
+        SetSelectedItem(comboOcrMode, Config.Get(c => c.OcrMode));
+        checkBoxRunInBG.Checked = Config.Get(c => c.OcrAfterScanning);
+
+        UpdateView();
+    }
+
+    private void SetSelectedValue(ComboBox combo, object value)
+    {
+        combo.SelectedValue = value;
+        // ReSharper disable once ConvertIfStatementToNullCoalescingExpression
+        if (combo.SelectedValue == null && combo.Items.Count > 0)
         {
-            new LayoutManager(this)
-                .Bind(btnCancel, btnOK)
-                    .RightToForm()
-                .Bind(comboLanguages, comboOcrMode)
-                    .WidthToForm()
-                .Activate();
-
-            LoadLanguages();
-            comboLanguages.DisplayMember = "Name";
-            comboLanguages.ValueMember = "Code";
-
-            ConditionalControls.UnlockHeight(this);
-            ConditionalControls.SetVisible(comboOcrMode, _availableModes != null, 8);
-            labelOcrMode.Visible = _availableModes != null;
-            ConditionalControls.LockHeight(this);
-
-            checkBoxEnableOcr.Checked = Config.Get(c => c.EnableOcr);
-            SetSelectedValue(comboLanguages, Config.Get(c => c.OcrLanguageCode));
-            SetSelectedItem(comboOcrMode, Config.Get(c => c.OcrMode));
-            checkBoxRunInBG.Checked = Config.Get(c => c.OcrAfterScanning);
-
-            UpdateView();
+            combo.SelectedIndex = 0;
         }
+    }
 
-        private void SetSelectedValue(ComboBox combo, object value)
+    private void SetSelectedItem(ComboBox combo, object item)
+    {
+        combo.SelectedItem = item;
+        // ReSharper disable once ConvertIfStatementToNullCoalescingExpression
+        if (combo.SelectedItem == null && combo.Items.Count > 0)
         {
-            combo.SelectedValue = value;
-            // ReSharper disable once ConvertIfStatementToNullCoalescingExpression
-            if (combo.SelectedValue == null && combo.Items.Count > 0)
+            combo.SelectedIndex = 0;
+        }
+    }
+
+    private void LoadLanguages()
+    {
+        var languages = _ocrEngineManager.ActiveEngine?.InstalledLanguages
+            .OrderBy(x => x.Name)
+            .ToList();
+        comboLanguages.DataSource = languages;
+
+        linkGetLanguages.Visible = _ocrEngineManager.EngineToInstall != null;
+    }
+
+    private void UpdateView()
+    {
+        bool canChangeEnabled = Config.AppLocked.Get(c => c.EnableOcr) == null;
+        bool canChangeLanguage = canChangeEnabled
+                                 || Config.Get(c => c.EnableOcr)
+                                 && Config.AppLocked.Get(c => c.OcrLanguageCode) == null;
+        checkBoxEnableOcr.Enabled = canChangeEnabled;
+        comboLanguages.Enabled = checkBoxEnableOcr.Checked && canChangeLanguage;
+        linkGetLanguages.Enabled = canChangeLanguage;
+        label1.Enabled = canChangeLanguage;
+        btnOK.Enabled = canChangeEnabled || canChangeLanguage;
+        comboOcrMode.Enabled = checkBoxEnableOcr.Checked && canChangeEnabled;
+        checkBoxRunInBG.Enabled = checkBoxEnableOcr.Checked && canChangeEnabled;
+    }
+
+    private void checkBoxEnableOcr_CheckedChanged(object sender, EventArgs e)
+    {
+        UpdateView();
+    }
+
+    private void linkGetLanguages_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+    {
+        FormFactory.Create<FOcrLanguageDownload>().ShowDialog();
+        var selectedLang = comboLanguages.SelectedItem;
+        LoadLanguages();
+        comboLanguages.SelectedItem = selectedLang;
+    }
+
+    private void btnCancel_Click(object sender, EventArgs e)
+    {
+        Close();
+    }
+
+    private void btnOK_Click(object sender, EventArgs e)
+    {
+        if (Config.AppLocked.Get(c => c.EnableOcr) == null)
+        {
+            Config.User.SetAll(new CommonConfig
             {
-                combo.SelectedIndex = 0;
-            }
+                EnableOcr = checkBoxEnableOcr.Checked,
+                OcrLanguageCode = (string)comboLanguages.SelectedValue,
+                OcrMode = _availableModes != null ? (OcrMode)comboOcrMode.SelectedItem : OcrMode.Default,
+                OcrAfterScanning = checkBoxRunInBG.Checked
+            });
         }
-
-        private void SetSelectedItem(ComboBox combo, object item)
-        {
-            combo.SelectedItem = item;
-            // ReSharper disable once ConvertIfStatementToNullCoalescingExpression
-            if (combo.SelectedItem == null && combo.Items.Count > 0)
-            {
-                combo.SelectedIndex = 0;
-            }
-        }
-
-        private void LoadLanguages()
-        {
-            var languages = _ocrEngineManager.ActiveEngine?.InstalledLanguages
-                .OrderBy(x => x.Name)
-                .ToList();
-            comboLanguages.DataSource = languages;
-
-            linkGetLanguages.Visible = _ocrEngineManager.EngineToInstall != null;
-        }
-
-        private void UpdateView()
-        {
-            bool canChangeEnabled = Config.AppLocked.Get(c => c.EnableOcr) == null;
-            bool canChangeLanguage = canChangeEnabled
-                                     || Config.Get(c => c.EnableOcr)
-                                        && Config.AppLocked.Get(c => c.OcrLanguageCode) == null;
-            checkBoxEnableOcr.Enabled = canChangeEnabled;
-            comboLanguages.Enabled = checkBoxEnableOcr.Checked && canChangeLanguage;
-            linkGetLanguages.Enabled = canChangeLanguage;
-            label1.Enabled = canChangeLanguage;
-            btnOK.Enabled = canChangeEnabled || canChangeLanguage;
-            comboOcrMode.Enabled = checkBoxEnableOcr.Checked && canChangeEnabled;
-            checkBoxRunInBG.Enabled = checkBoxEnableOcr.Checked && canChangeEnabled;
-        }
-
-        private void checkBoxEnableOcr_CheckedChanged(object sender, EventArgs e)
-        {
-            UpdateView();
-        }
-
-        private void linkGetLanguages_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            FormFactory.Create<FOcrLanguageDownload>().ShowDialog();
-            var selectedLang = comboLanguages.SelectedItem;
-            LoadLanguages();
-            comboLanguages.SelectedItem = selectedLang;
-        }
-
-        private void btnCancel_Click(object sender, EventArgs e)
-        {
-            Close();
-        }
-
-        private void btnOK_Click(object sender, EventArgs e)
-        {
-            if (Config.AppLocked.Get(c => c.EnableOcr) == null)
-            {
-                Config.User.SetAll(new CommonConfig
-                {
-                    EnableOcr = checkBoxEnableOcr.Checked,
-                    OcrLanguageCode = (string)comboLanguages.SelectedValue,
-                    OcrMode = _availableModes != null ? (OcrMode)comboOcrMode.SelectedItem : OcrMode.Default,
-                    OcrAfterScanning = checkBoxRunInBG.Checked
-                });
-            }
-            Close();
-        }
+        Close();
     }
 }

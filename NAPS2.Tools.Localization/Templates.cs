@@ -1,15 +1,14 @@
 ﻿using System.IO;
 
-namespace NAPS2.Localization
+namespace NAPS2.Localization;
+
+public class Templates
 {
-    public class Templates
+    public static void Update()
     {
-        public static void Update()
-        {
-            var ctx = new TemplatesContext();
-            ctx.Load(Path.Combine(Paths.Root, @"NAPS2.Core\Lang\Resources"), false);
-            ctx.Load(Path.Combine(Paths.Root, @"NAPS2.Core\WinForms"), true);
-            ctx.Save(Path.Combine(Paths.Root, @"NAPS2.Core\Lang\po\templates.pot"));
-        }
+        var ctx = new TemplatesContext();
+        ctx.Load(Path.Combine(Paths.Root, @"NAPS2.Core\Lang\Resources"), false);
+        ctx.Load(Path.Combine(Paths.Root, @"NAPS2.Core\WinForms"), true);
+        ctx.Save(Path.Combine(Paths.Root, @"NAPS2.Core\Lang\po\templates.pot"));
     }
 }

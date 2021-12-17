@@ -1,43 +1,42 @@
 ﻿using NAPS2.Config;
 
-namespace NAPS2.Scan
+namespace NAPS2.Scan;
+
+/// <summary>
+/// A class used to help keep profile names consistent across forms.
+///
+/// TODO: This should probably be replaced by an event handler system.
+/// </summary>
+public class ProfileNameTracker
 {
-    /// <summary>
-    /// A class used to help keep profile names consistent across forms.
-    ///
-    /// TODO: This should probably be replaced by an event handler system.
-    /// </summary>
-    public class ProfileNameTracker
+    private readonly ScopedConfig _config;
+
+    public ProfileNameTracker(ScopedConfig config)
     {
-        private readonly ScopedConfig _config;
+        _config = config;
+    }
 
-        public ProfileNameTracker(ScopedConfig config)
+    public void RenamingProfile(string oldName, string newName)
+    {
+        if (string.IsNullOrEmpty(oldName))
         {
-            _config = config;
+            return;
         }
-
-        public void RenamingProfile(string oldName, string newName)
+        if (_config.Get(c => c.BatchSettings.ProfileDisplayName) == oldName)
         {
-            if (string.IsNullOrEmpty(oldName))
-            {
-                return;
-            }
-            if (_config.Get(c => c.BatchSettings.ProfileDisplayName) == oldName)
-            {
-                _config.User.Set(c => c.BatchSettings.ProfileDisplayName = newName);
-            }
+            _config.User.Set(c => c.BatchSettings.ProfileDisplayName = newName);
         }
+    }
 
-        public void DeletingProfile(string? name)
+    public void DeletingProfile(string? name)
+    {
+        if (string.IsNullOrEmpty(name))
         {
-            if (string.IsNullOrEmpty(name))
-            {
-                return;
-            }
-            if (_config.Get(c => c.BatchSettings.ProfileDisplayName) == name)
-            {
-                _config.User.Set(c => c.BatchSettings.ProfileDisplayName = "");
-            }
+            return;
+        }
+        if (_config.Get(c => c.BatchSettings.ProfileDisplayName) == name)
+        {
+            _config.User.Set(c => c.BatchSettings.ProfileDisplayName = "");
         }
     }
 }

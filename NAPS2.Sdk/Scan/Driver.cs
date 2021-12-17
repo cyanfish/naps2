@@ -1,10 +1,9 @@
-﻿namespace NAPS2.Scan
+﻿namespace NAPS2.Scan;
+
+public enum Driver
 {
-    public enum Driver
-    {
-        Default,
-        Wia,
-        Twain,
-        Sane
-    }
+    Default,
+    Wia,
+    Twain,
+    Sane
 }

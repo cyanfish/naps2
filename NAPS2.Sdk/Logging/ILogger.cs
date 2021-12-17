@@ -1,14 +1,13 @@
 ﻿using System;
 
-namespace NAPS2.Logging
+namespace NAPS2.Logging;
+
+/// <summary>
+/// A base interface for logging APIs. Used by the Log class.
+/// </summary>
+public interface ILogger
 {
-    /// <summary>
-    /// A base interface for logging APIs. Used by the Log class.
-    /// </summary>
-    public interface ILogger
-    {
-        void Error(string message);
-        void ErrorException(string message, Exception exception);
-        void FatalException(string message, Exception exception);
-    }
+    void Error(string message);
+    void ErrorException(string message, Exception exception);
+    void FatalException(string message, Exception exception);
 }

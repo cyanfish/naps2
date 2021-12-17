@@ -1,14 +1,13 @@
 ﻿using System;
 
-namespace NAPS2.Scan
-{
-    public class PageStartEventArgs : EventArgs
-    {
-        public PageStartEventArgs(int pageNumber)
-        {
-            PageNumber = pageNumber;
-        }
+namespace NAPS2.Scan;
 
-        public int PageNumber { get; }
+public class PageStartEventArgs : EventArgs
+{
+    public PageStartEventArgs(int pageNumber)
+    {
+        PageNumber = pageNumber;
     }
+
+    public int PageNumber { get; }
 }

@@ -1,8 +1,7 @@
 ﻿using System;
 
-namespace NAPS2.Config
+namespace NAPS2.Config;
+
+public class ChildAttribute : Attribute
 {
-    public class ChildAttribute : Attribute
-    {
-    }
 }

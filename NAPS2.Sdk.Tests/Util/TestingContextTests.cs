@@ -2,22 +2,21 @@
 using NAPS2.Testing;
 using Xunit;
 
-namespace NAPS2.Sdk.Tests.Util
+namespace NAPS2.Sdk.Tests.Util;
+
+public class TestingContextTests
 {
-    public class TestingContextTests
+    // We can't really check for testing == false, but we can check the rest...
+
+    [Fact]
+    public void IsTesting()
     {
-        // We can't really check for testing == false, but we can check the rest...
+        Assert.True(TestingContext.IsTesting);
+    }
 
-        [Fact]
-        public void IsTesting()
-        {
-            Assert.True(TestingContext.IsTesting);
-        }
-
-        [Fact]
-        public void NoStaticDefaults()
-        {
-            Assert.Throws<InvalidOperationException>(TestingContext.NoStaticDefaults);
-        }
+    [Fact]
+    public void NoStaticDefaults()
+    {
+        Assert.Throws<InvalidOperationException>(TestingContext.NoStaticDefaults);
     }
 }

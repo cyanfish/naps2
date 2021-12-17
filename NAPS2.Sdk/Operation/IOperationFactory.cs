@@ -1,7 +1,6 @@
-﻿namespace NAPS2.Operation
+﻿namespace NAPS2.Operation;
+
+public interface IOperationFactory
 {
-    public interface IOperationFactory
-    {
-        T Create<T>() where T : IOperation;
-    }
+    T Create<T>() where T : IOperation;
 }

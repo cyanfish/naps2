@@ -1,7 +1,6 @@
-﻿namespace NAPS2.Logging
+﻿namespace NAPS2.Logging;
+
+public interface IEventLogger
 {
-    public interface IEventLogger
-    {
-        void LogEvent(EventType eventType, EventParams eventParams);
-    }
+    void LogEvent(EventType eventType, EventParams eventParams);
 }

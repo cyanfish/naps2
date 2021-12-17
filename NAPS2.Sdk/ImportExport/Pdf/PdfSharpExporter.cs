@@ -21,395 +21,394 @@ using PdfSharp.Pdf;
 using PdfSharp.Pdf.IO;
 using PdfSharp.Pdf.Security;
 
-namespace NAPS2.ImportExport.Pdf
+namespace NAPS2.ImportExport.Pdf;
+
+public class PdfSharpExporter : PdfExporter
 {
-    public class PdfSharpExporter : PdfExporter
+    static PdfSharpExporter()
     {
-        static PdfSharpExporter()
+        if (PlatformCompat.System.UseUnixFontResolver)
         {
-            if (PlatformCompat.System.UseUnixFontResolver)
-            {
-                GlobalFontSettings.FontResolver = new UnixFontResolver();
-            }
+            GlobalFontSettings.FontResolver = new UnixFontResolver();
         }
+    }
         
-        private readonly MemoryStreamRenderer _memoryStreamRenderer;
+    private readonly MemoryStreamRenderer _memoryStreamRenderer;
 
-        public PdfSharpExporter()
-        {
-            _memoryStreamRenderer = new MemoryStreamRenderer(ImageContext.Default);
-        }
+    public PdfSharpExporter()
+    {
+        _memoryStreamRenderer = new MemoryStreamRenderer(ImageContext.Default);
+    }
 
-        public PdfSharpExporter(ImageContext imageContext)
-        {
-            _memoryStreamRenderer = new MemoryStreamRenderer(imageContext);
-        }
+    public PdfSharpExporter(ImageContext imageContext)
+    {
+        _memoryStreamRenderer = new MemoryStreamRenderer(imageContext);
+    }
 
-        public PdfSharpExporter(MemoryStreamRenderer memoryStreamRenderer)
-        {
-            _memoryStreamRenderer = memoryStreamRenderer;
-        }
+    public PdfSharpExporter(MemoryStreamRenderer memoryStreamRenderer)
+    {
+        _memoryStreamRenderer = memoryStreamRenderer;
+    }
 
-        public override async Task<bool> Export(string path, ICollection<ScannedImage.Snapshot> snapshots, IConfigProvider<PdfSettings> settings, OcrContext? ocrContext = null, ProgressHandler? progressCallback = null, CancellationToken cancelToken = default)
+    public override async Task<bool> Export(string path, ICollection<ScannedImage.Snapshot> snapshots, IConfigProvider<PdfSettings> settings, OcrContext? ocrContext = null, ProgressHandler? progressCallback = null, CancellationToken cancelToken = default)
+    {
+        return await Task.Run(async () =>
         {
-            return await Task.Run(async () =>
+            var compat = settings.Get(c => c.Compat);
+
+            var document = new PdfDocument();
+            document.Info.Author = settings.Get(c => c.Metadata.Author);
+            document.Info.Creator = settings.Get(c => c.Metadata.Creator);
+            document.Info.Keywords = settings.Get(c => c.Metadata.Keywords);
+            document.Info.Subject = settings.Get(c => c.Metadata.Subject);
+            document.Info.Title = settings.Get(c => c.Metadata.Title);
+
+            if (settings.Get(c => c.Encryption.EncryptPdf)
+                && (!string.IsNullOrEmpty(settings.Get(c => c.Encryption.OwnerPassword)) || !string.IsNullOrEmpty(settings.Get(c => c.Encryption.UserPassword))))
             {
-                var compat = settings.Get(c => c.Compat);
-
-                var document = new PdfDocument();
-                document.Info.Author = settings.Get(c => c.Metadata.Author);
-                document.Info.Creator = settings.Get(c => c.Metadata.Creator);
-                document.Info.Keywords = settings.Get(c => c.Metadata.Keywords);
-                document.Info.Subject = settings.Get(c => c.Metadata.Subject);
-                document.Info.Title = settings.Get(c => c.Metadata.Title);
-
-                if (settings.Get(c => c.Encryption.EncryptPdf)
-                    && (!string.IsNullOrEmpty(settings.Get(c => c.Encryption.OwnerPassword)) || !string.IsNullOrEmpty(settings.Get(c => c.Encryption.UserPassword))))
+                document.SecuritySettings.DocumentSecurityLevel = PdfDocumentSecurityLevel.Encrypted128Bit;
+                if (!string.IsNullOrEmpty(settings.Get(c => c.Encryption.OwnerPassword)))
                 {
-                    document.SecuritySettings.DocumentSecurityLevel = PdfDocumentSecurityLevel.Encrypted128Bit;
-                    if (!string.IsNullOrEmpty(settings.Get(c => c.Encryption.OwnerPassword)))
-                    {
-                        document.SecuritySettings.OwnerPassword = settings.Get(c => c.Encryption.OwnerPassword);
-                    }
-
-                    if (!string.IsNullOrEmpty(settings.Get(c => c.Encryption.UserPassword)))
-                    {
-                        document.SecuritySettings.UserPassword = settings.Get(c => c.Encryption.UserPassword);
-                    }
-
-                    document.SecuritySettings.PermitAccessibilityExtractContent = settings.Get(c => c.Encryption.AllowContentCopyingForAccessibility);
-                    document.SecuritySettings.PermitAnnotations = settings.Get(c => c.Encryption.AllowAnnotations);
-                    document.SecuritySettings.PermitAssembleDocument = settings.Get(c => c.Encryption.AllowDocumentAssembly);
-                    document.SecuritySettings.PermitExtractContent = settings.Get(c => c.Encryption.AllowContentCopying);
-                    document.SecuritySettings.PermitFormsFill = settings.Get(c => c.Encryption.AllowFormFilling);
-                    document.SecuritySettings.PermitFullQualityPrint = settings.Get(c => c.Encryption.AllowFullQualityPrinting);
-                    document.SecuritySettings.PermitModifyDocument = settings.Get(c => c.Encryption.AllowDocumentModification);
-                    document.SecuritySettings.PermitPrint = settings.Get(c => c.Encryption.AllowPrinting);
+                    document.SecuritySettings.OwnerPassword = settings.Get(c => c.Encryption.OwnerPassword);
                 }
 
-                IOcrEngine ocrEngine = null;
-                if (ocrContext?.Params?.LanguageCode != null)
+                if (!string.IsNullOrEmpty(settings.Get(c => c.Encryption.UserPassword)))
                 {
-                    var activeEngine = ocrContext.EngineManager.ActiveEngine;
-                    if (activeEngine == null)
-                    {
-                        Log.Error("Supported OCR engine not installed.", ocrContext.Params.LanguageCode);
-                    }
-                    else if (!activeEngine.CanProcess(ocrContext.Params.LanguageCode))
-                    {
-                        Log.Error("OCR files not available for '{0}'.", ocrContext.Params.LanguageCode);
-                    }
-                    else
-                    {
-                        ocrEngine = activeEngine;
-                    }
+                    document.SecuritySettings.UserPassword = settings.Get(c => c.Encryption.UserPassword);
                 }
 
-                bool result = ocrEngine != null
-                    ? await BuildDocumentWithOcr(progressCallback, cancelToken, document, compat, snapshots, ocrContext, ocrEngine)
-                    : await BuildDocumentWithoutOcr(progressCallback, cancelToken, document, compat, snapshots);
-                if (!result)
+                document.SecuritySettings.PermitAccessibilityExtractContent = settings.Get(c => c.Encryption.AllowContentCopyingForAccessibility);
+                document.SecuritySettings.PermitAnnotations = settings.Get(c => c.Encryption.AllowAnnotations);
+                document.SecuritySettings.PermitAssembleDocument = settings.Get(c => c.Encryption.AllowDocumentAssembly);
+                document.SecuritySettings.PermitExtractContent = settings.Get(c => c.Encryption.AllowContentCopying);
+                document.SecuritySettings.PermitFormsFill = settings.Get(c => c.Encryption.AllowFormFilling);
+                document.SecuritySettings.PermitFullQualityPrint = settings.Get(c => c.Encryption.AllowFullQualityPrinting);
+                document.SecuritySettings.PermitModifyDocument = settings.Get(c => c.Encryption.AllowDocumentModification);
+                document.SecuritySettings.PermitPrint = settings.Get(c => c.Encryption.AllowPrinting);
+            }
+
+            IOcrEngine ocrEngine = null;
+            if (ocrContext?.Params?.LanguageCode != null)
+            {
+                var activeEngine = ocrContext.EngineManager.ActiveEngine;
+                if (activeEngine == null)
+                {
+                    Log.Error("Supported OCR engine not installed.", ocrContext.Params.LanguageCode);
+                }
+                else if (!activeEngine.CanProcess(ocrContext.Params.LanguageCode))
+                {
+                    Log.Error("OCR files not available for '{0}'.", ocrContext.Params.LanguageCode);
+                }
+                else
+                {
+                    ocrEngine = activeEngine;
+                }
+            }
+
+            bool result = ocrEngine != null
+                ? await BuildDocumentWithOcr(progressCallback, cancelToken, document, compat, snapshots, ocrContext, ocrEngine)
+                : await BuildDocumentWithoutOcr(progressCallback, cancelToken, document, compat, snapshots);
+            if (!result)
+            {
+                return false;
+            }
+
+            var now = DateTime.Now;
+            document.Info.CreationDate = now;
+            document.Info.ModificationDate = now;
+            if (compat == PdfCompat.PdfA1B)
+            {
+                PdfAHelper.SetCidStream(document);
+                PdfAHelper.DisableTransparency(document);
+            }
+
+            if (compat != PdfCompat.Default)
+            {
+                PdfAHelper.SetColorProfile(document);
+                PdfAHelper.SetCidMap(document);
+                PdfAHelper.CreateXmpMetadata(document, compat);
+            }
+
+            PathHelper.EnsureParentDirExists(path);
+            document.Save(path);
+            return true;
+        });
+    }
+
+    private async Task<bool> BuildDocumentWithoutOcr(ProgressHandler? progressCallback, CancellationToken cancelToken, PdfDocument document, PdfCompat compat, ICollection<ScannedImage.Snapshot> snapshots)
+    {
+        int progress = 0;
+        progressCallback?.Invoke(progress, snapshots.Count);
+        foreach (var snapshot in snapshots)
+        {
+            if (snapshot.Source.BackingStorage is FileStorage fileStorage && IsPdfFile(fileStorage) && !snapshot.Metadata.TransformList.Any())
+            {
+                CopyPdfPageToDoc(document, fileStorage);
+            }
+            else
+            {
+                using Stream stream = await _memoryStreamRenderer.Render(snapshot);
+                using var img = XImage.FromStream(stream);
+                if (cancelToken.IsCancellationRequested)
                 {
                     return false;
                 }
 
-                var now = DateTime.Now;
-                document.Info.CreationDate = now;
-                document.Info.ModificationDate = now;
-                if (compat == PdfCompat.PdfA1B)
-                {
-                    PdfAHelper.SetCidStream(document);
-                    PdfAHelper.DisableTransparency(document);
-                }
-
-                if (compat != PdfCompat.Default)
-                {
-                    PdfAHelper.SetColorProfile(document);
-                    PdfAHelper.SetCidMap(document);
-                    PdfAHelper.CreateXmpMetadata(document, compat);
-                }
-
-                PathHelper.EnsureParentDirExists(path);
-                document.Save(path);
-                return true;
-            });
-        }
-
-        private async Task<bool> BuildDocumentWithoutOcr(ProgressHandler? progressCallback, CancellationToken cancelToken, PdfDocument document, PdfCompat compat, ICollection<ScannedImage.Snapshot> snapshots)
-        {
-            int progress = 0;
-            progressCallback?.Invoke(progress, snapshots.Count);
-            foreach (var snapshot in snapshots)
-            {
-                if (snapshot.Source.BackingStorage is FileStorage fileStorage && IsPdfFile(fileStorage) && !snapshot.Metadata.TransformList.Any())
-                {
-                    CopyPdfPageToDoc(document, fileStorage);
-                }
-                else
-                {
-                    using Stream stream = await _memoryStreamRenderer.Render(snapshot);
-                    using var img = XImage.FromStream(stream);
-                    if (cancelToken.IsCancellationRequested)
-                    {
-                        return false;
-                    }
-
-                    PdfPage page = document.AddPage();
-                    DrawImageOnPage(page, img, compat);
-                }
-                progress++;
-                progressCallback?.Invoke(progress, snapshots.Count);
+                PdfPage page = document.AddPage();
+                DrawImageOnPage(page, img, compat);
             }
-            return true;
-        }
-
-        private static bool IsPdfFile(FileStorage fileStorage) => Path.GetExtension(fileStorage.FullPath)?.Equals(".pdf", StringComparison.InvariantCultureIgnoreCase) ?? false;
-
-        private async Task<bool> BuildDocumentWithOcr(ProgressHandler? progressCallback, CancellationToken cancelToken, PdfDocument document, PdfCompat compat, ICollection<ScannedImage.Snapshot> snapshots, OcrContext ocrContext, IOcrEngine ocrEngine)
-        {
-            int progress = 0;
+            progress++;
             progressCallback?.Invoke(progress, snapshots.Count);
+        }
+        return true;
+    }
 
-            List<(PdfPage, Task<OcrResult>)> ocrPairs = new List<(PdfPage, Task<OcrResult>)>();
+    private static bool IsPdfFile(FileStorage fileStorage) => Path.GetExtension(fileStorage.FullPath)?.Equals(".pdf", StringComparison.InvariantCultureIgnoreCase) ?? false;
 
-            // Step 1: Create the pages, draw the images, and start OCR
-            foreach (var snapshot in snapshots)
+    private async Task<bool> BuildDocumentWithOcr(ProgressHandler? progressCallback, CancellationToken cancelToken, PdfDocument document, PdfCompat compat, ICollection<ScannedImage.Snapshot> snapshots, OcrContext ocrContext, IOcrEngine ocrEngine)
+    {
+        int progress = 0;
+        progressCallback?.Invoke(progress, snapshots.Count);
+
+        List<(PdfPage, Task<OcrResult>)> ocrPairs = new List<(PdfPage, Task<OcrResult>)>();
+
+        // Step 1: Create the pages, draw the images, and start OCR
+        foreach (var snapshot in snapshots)
+        {
+            if (cancelToken.IsCancellationRequested)
             {
-                if (cancelToken.IsCancellationRequested)
-                {
-                    break;
-                }
-
-                PdfPage page;
-                bool importedPdfPassThrough = false;
-
-                if (snapshot.Source.BackingStorage is FileStorage fileStorage && IsPdfFile(fileStorage) && !snapshot.Metadata.TransformList.Any())
-                {
-                    importedPdfPassThrough = true;
-                    page = CopyPdfPageToDoc(document, fileStorage);
-                    if (PageContainsText(page))
-                    {
-                        // Since this page already contains text, don't use OCR
-                        continue;
-                    }
-                }
-                else
-                {
-                    page = document.AddPage();
-                }
-
-                string tempImageFilePath = Path.Combine(Paths.Temp, Path.GetRandomFileName());
-
-                using (Stream stream = await _memoryStreamRenderer.Render(snapshot))
-                using (var img = XImage.FromStream(stream))
-                {
-                    if (cancelToken.IsCancellationRequested)
-                    {
-                        break;
-                    }
-
-                    if (!importedPdfPassThrough)
-                    {
-                        DrawImageOnPage(page, img, compat);
-                    }
-
-                    if (cancelToken.IsCancellationRequested)
-                    {
-                        break;
-                    }
-
-                    if (!ocrContext.RequestQueue.HasCachedResult(ocrEngine, snapshot, ocrContext.Params))
-                    {
-                        img.GdiImage.Save(tempImageFilePath);
-                    }
-                }
-
-                if (cancelToken.IsCancellationRequested)
-                {
-                    File.Delete(tempImageFilePath);
-                    break;
-                }
-
-                // Start OCR
-                var ocrTask = ocrContext.RequestQueue.QueueForeground(ocrEngine, snapshot, tempImageFilePath, ocrContext.Params, cancelToken);
-                ocrTask.ContinueWith(task =>
-                {
-                    // This is the best place to put progress reporting
-                    // Long-running OCR is done, and drawing text on the page (step 2) is very fast
-                    if (!cancelToken.IsCancellationRequested)
-                    {
-                        Interlocked.Increment(ref progress);
-                        progressCallback?.Invoke(progress, snapshots.Count);
-                    }
-                }, TaskContinuationOptions.ExecuteSynchronously).AssertNoAwait();
-                // Record the page and task for step 2
-                ocrPairs.Add((page, ocrTask));
+                break;
             }
 
-            // Step 2: Wait for all the OCR results, and draw the text on each page
-            foreach (var (page, ocrTask) in ocrPairs)
+            PdfPage page;
+            bool importedPdfPassThrough = false;
+
+            if (snapshot.Source.BackingStorage is FileStorage fileStorage && IsPdfFile(fileStorage) && !snapshot.Metadata.TransformList.Any())
             {
-                if (cancelToken.IsCancellationRequested)
+                importedPdfPassThrough = true;
+                page = CopyPdfPageToDoc(document, fileStorage);
+                if (PageContainsText(page))
                 {
-                    break;
-                }
-                if (ocrTask.Result == null)
-                {
+                    // Since this page already contains text, don't use OCR
                     continue;
                 }
-                DrawOcrTextOnPage(page, ocrTask.Result);
             }
-            
-            return !cancelToken.IsCancellationRequested;
-        }
-
-        private bool PageContainsText(PdfPage page)
-        {
-            var elements = page.Contents.Elements;
-            for (int i = 0; i < elements.Count; i++)
+            else
             {
-                string textAndFormatting = elements.GetDictionary(i).Stream.ToString();
-                var reader = new StringReader(textAndFormatting);
-                bool inTextBlock = false;
-                string line;
-                while ((line = reader.ReadLine()) != null)
+                page = document.AddPage();
+            }
+
+            string tempImageFilePath = Path.Combine(Paths.Temp, Path.GetRandomFileName());
+
+            using (Stream stream = await _memoryStreamRenderer.Render(snapshot))
+            using (var img = XImage.FromStream(stream))
+            {
+                if (cancelToken.IsCancellationRequested)
                 {
-                    if (line.EndsWith("BT", StringComparison.InvariantCulture))
-                    {
-                        inTextBlock = true;
-                    }
-                    else if (line.EndsWith("ET", StringComparison.InvariantCulture))
-                    {
-                        inTextBlock = false;
-                    }
-                    else if (inTextBlock &&
-                             (line.EndsWith("TJ", StringComparison.InvariantCulture) || line.EndsWith("Tj", StringComparison.InvariantCulture)
-                                                                                     || line.EndsWith("\"", StringComparison.InvariantCulture) ||
-                                                                                     line.EndsWith("'", StringComparison.InvariantCulture)))
-                    {
-                        // Text-showing operators
-                        return true;
-                    }
+                    break;
+                }
+
+                if (!importedPdfPassThrough)
+                {
+                    DrawImageOnPage(page, img, compat);
+                }
+
+                if (cancelToken.IsCancellationRequested)
+                {
+                    break;
+                }
+
+                if (!ocrContext.RequestQueue.HasCachedResult(ocrEngine, snapshot, ocrContext.Params))
+                {
+                    img.GdiImage.Save(tempImageFilePath);
                 }
             }
-            return false;
+
+            if (cancelToken.IsCancellationRequested)
+            {
+                File.Delete(tempImageFilePath);
+                break;
+            }
+
+            // Start OCR
+            var ocrTask = ocrContext.RequestQueue.QueueForeground(ocrEngine, snapshot, tempImageFilePath, ocrContext.Params, cancelToken);
+            ocrTask.ContinueWith(task =>
+            {
+                // This is the best place to put progress reporting
+                // Long-running OCR is done, and drawing text on the page (step 2) is very fast
+                if (!cancelToken.IsCancellationRequested)
+                {
+                    Interlocked.Increment(ref progress);
+                    progressCallback?.Invoke(progress, snapshots.Count);
+                }
+            }, TaskContinuationOptions.ExecuteSynchronously).AssertNoAwait();
+            // Record the page and task for step 2
+            ocrPairs.Add((page, ocrTask));
         }
 
-        private PdfPage CopyPdfPageToDoc(PdfDocument destDoc, FileStorage fileStorage)
+        // Step 2: Wait for all the OCR results, and draw the text on each page
+        foreach (var (page, ocrTask) in ocrPairs)
         {
-            // Pull the PDF content directly to maintain objects, dpi, etc.
-            PdfDocument sourceDoc = PdfReader.Open(fileStorage.FullPath, PdfDocumentOpenMode.Import);
-            PdfPage sourcePage = sourceDoc.Pages.Cast<PdfPage>().Single();
-            PdfPage destPage = destDoc.AddPage(sourcePage);
-            destPage.CustomValues["/NAPS2ImportedPage"] = new PdfCustomValue(new byte[] { 0xFF });
-            return destPage;
+            if (cancelToken.IsCancellationRequested)
+            {
+                break;
+            }
+            if (ocrTask.Result == null)
+            {
+                continue;
+            }
+            DrawOcrTextOnPage(page, ocrTask.Result);
         }
+            
+        return !cancelToken.IsCancellationRequested;
+    }
 
-        private static void DrawOcrTextOnPage(PdfPage page, OcrResult ocrResult)
+    private bool PageContainsText(PdfPage page)
+    {
+        var elements = page.Contents.Elements;
+        for (int i = 0; i < elements.Count; i++)
         {
+            string textAndFormatting = elements.GetDictionary(i).Stream.ToString();
+            var reader = new StringReader(textAndFormatting);
+            bool inTextBlock = false;
+            string line;
+            while ((line = reader.ReadLine()) != null)
+            {
+                if (line.EndsWith("BT", StringComparison.InvariantCulture))
+                {
+                    inTextBlock = true;
+                }
+                else if (line.EndsWith("ET", StringComparison.InvariantCulture))
+                {
+                    inTextBlock = false;
+                }
+                else if (inTextBlock &&
+                         (line.EndsWith("TJ", StringComparison.InvariantCulture) || line.EndsWith("Tj", StringComparison.InvariantCulture)
+                                                                                 || line.EndsWith("\"", StringComparison.InvariantCulture) ||
+                                                                                 line.EndsWith("'", StringComparison.InvariantCulture)))
+                {
+                    // Text-showing operators
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    private PdfPage CopyPdfPageToDoc(PdfDocument destDoc, FileStorage fileStorage)
+    {
+        // Pull the PDF content directly to maintain objects, dpi, etc.
+        PdfDocument sourceDoc = PdfReader.Open(fileStorage.FullPath, PdfDocumentOpenMode.Import);
+        PdfPage sourcePage = sourceDoc.Pages.Cast<PdfPage>().Single();
+        PdfPage destPage = destDoc.AddPage(sourcePage);
+        destPage.CustomValues["/NAPS2ImportedPage"] = new PdfCustomValue(new byte[] { 0xFF });
+        return destPage;
+    }
+
+    private static void DrawOcrTextOnPage(PdfPage page, OcrResult ocrResult)
+    {
 #if DEBUG && DEBUGOCR
             using XGraphics gfx = XGraphics.FromPdfPage(page, XGraphicsPdfPageOptions.Append);
 #else
-            using XGraphics gfx = XGraphics.FromPdfPage(page, XGraphicsPdfPageOptions.Prepend);
+        using XGraphics gfx = XGraphics.FromPdfPage(page, XGraphicsPdfPageOptions.Prepend);
 #endif
-            var tf = new XTextFormatter(gfx);
-            foreach (var element in ocrResult.Elements)
-            {
-                if (string.IsNullOrEmpty(element.Text)) continue;
+        var tf = new XTextFormatter(gfx);
+        foreach (var element in ocrResult.Elements)
+        {
+            if (string.IsNullOrEmpty(element.Text)) continue;
 
-                var adjustedBounds = AdjustBounds(element.Bounds, (float)page.Width / ocrResult.PageBounds.w, (float)page.Height / ocrResult.PageBounds.h);
+            var adjustedBounds = AdjustBounds(element.Bounds, (float)page.Width / ocrResult.PageBounds.w, (float)page.Height / ocrResult.PageBounds.h);
 #if DEBUG && DEBUGOCR
                     gfx.DrawRectangle(new XPen(XColor.FromArgb(255, 0, 0)), adjustedBounds);
 #endif
-                var adjustedFontSize = CalculateFontSize(element.Text, adjustedBounds, gfx);
-                // Special case to avoid accidentally recognizing big lines as dashes/underscores
-                if (adjustedFontSize > 100 && (element.Text == "-" || element.Text == "_")) continue;
-                var font = new XFont("Times New Roman", adjustedFontSize, XFontStyle.Regular,
-                    new XPdfFontOptions(PdfFontEncoding.Unicode));
-                var adjustedTextSize = gfx.MeasureString(element.Text, font);
-                var verticalOffset = (adjustedBounds.Height - adjustedTextSize.Height) / 2;
-                var horizontalOffset = (adjustedBounds.Width - adjustedTextSize.Width) / 2;
-                adjustedBounds.Offset((float)horizontalOffset, (float)verticalOffset);
-                tf.DrawString(ocrResult.RightToLeft ? ReverseText(element.Text) : element.Text, font, XBrushes.Transparent, adjustedBounds);
-            }
+            var adjustedFontSize = CalculateFontSize(element.Text, adjustedBounds, gfx);
+            // Special case to avoid accidentally recognizing big lines as dashes/underscores
+            if (adjustedFontSize > 100 && (element.Text == "-" || element.Text == "_")) continue;
+            var font = new XFont("Times New Roman", adjustedFontSize, XFontStyle.Regular,
+                new XPdfFontOptions(PdfFontEncoding.Unicode));
+            var adjustedTextSize = gfx.MeasureString(element.Text, font);
+            var verticalOffset = (adjustedBounds.Height - adjustedTextSize.Height) / 2;
+            var horizontalOffset = (adjustedBounds.Width - adjustedTextSize.Width) / 2;
+            adjustedBounds.Offset((float)horizontalOffset, (float)verticalOffset);
+            tf.DrawString(ocrResult.RightToLeft ? ReverseText(element.Text) : element.Text, font, XBrushes.Transparent, adjustedBounds);
         }
+    }
 
-        private static string ReverseText(string text)
+    private static string ReverseText(string text)
+    {
+        TextElementEnumerator enumerator = StringInfo.GetTextElementEnumerator(text);
+        List<string> elements = new List<string>();
+        while (enumerator.MoveNext())
         {
-            TextElementEnumerator enumerator = StringInfo.GetTextElementEnumerator(text);
-            List<string> elements = new List<string>();
-            while (enumerator.MoveNext())
-            {
-                elements.Add(enumerator.GetTextElement());
-            }
-            elements.Reverse();
-            return string.Concat(elements);
+            elements.Add(enumerator.GetTextElement());
         }
+        elements.Reverse();
+        return string.Concat(elements);
+    }
 
-        private static void DrawImageOnPage(PdfPage page, XImage img, PdfCompat compat)
+    private static void DrawImageOnPage(PdfPage page, XImage img, PdfCompat compat)
+    {
+        if (compat != PdfCompat.Default)
         {
-            if (compat != PdfCompat.Default)
-            {
-                img.Interpolate = false;
-            }
-            var (realWidth, realHeight) = GetRealSize(img);
-            page.Width = realWidth;
-            page.Height = realHeight;
-            using XGraphics gfx = XGraphics.FromPdfPage(page);
-            gfx.DrawImage(img, 0, 0, realWidth, realHeight);
+            img.Interpolate = false;
         }
+        var (realWidth, realHeight) = GetRealSize(img);
+        page.Width = realWidth;
+        page.Height = realHeight;
+        using XGraphics gfx = XGraphics.FromPdfPage(page);
+        gfx.DrawImage(img, 0, 0, realWidth, realHeight);
+    }
 
-        private static (int width, int height) GetRealSize(XImage img)
+    private static (int width, int height) GetRealSize(XImage img)
+    {
+        double hAdjust = 72 / img.HorizontalResolution;
+        double vAdjust = 72 / img.VerticalResolution;
+        if (double.IsInfinity(hAdjust) || double.IsInfinity(vAdjust))
         {
-            double hAdjust = 72 / img.HorizontalResolution;
-            double vAdjust = 72 / img.VerticalResolution;
-            if (double.IsInfinity(hAdjust) || double.IsInfinity(vAdjust))
-            {
-                hAdjust = vAdjust = 0.75;
-            }
-            double realWidth = img.PixelWidth * hAdjust;
-            double realHeight = img.PixelHeight * vAdjust;
-            return ((int)realWidth, (int)realHeight);
+            hAdjust = vAdjust = 0.75;
         }
+        double realWidth = img.PixelWidth * hAdjust;
+        double realHeight = img.PixelHeight * vAdjust;
+        return ((int)realWidth, (int)realHeight);
+    }
 
-        private static XRect AdjustBounds((int x, int y, int w, int h) bounds, float hAdjust, float vAdjust) =>
-            new XRect(bounds.x * hAdjust, bounds.y * vAdjust, bounds.w * hAdjust, bounds.h * vAdjust);
+    private static XRect AdjustBounds((int x, int y, int w, int h) bounds, float hAdjust, float vAdjust) =>
+        new XRect(bounds.x * hAdjust, bounds.y * vAdjust, bounds.w * hAdjust, bounds.h * vAdjust);
 
-        private static int CalculateFontSize(string text, XRect adjustedBounds, XGraphics gfx)
-        {
-            int fontSizeGuess = Math.Max(1, (int)(adjustedBounds.Height));
-            var measuredBoundsForGuess = gfx.MeasureString(text, new XFont("Times New Roman", fontSizeGuess, XFontStyle.Regular));
-            double adjustmentFactor = adjustedBounds.Width / measuredBoundsForGuess.Width;
-            int adjustedFontSize = Math.Max(1, (int)Math.Floor(fontSizeGuess * adjustmentFactor));
-            return adjustedFontSize;
-        }
+    private static int CalculateFontSize(string text, XRect adjustedBounds, XGraphics gfx)
+    {
+        int fontSizeGuess = Math.Max(1, (int)(adjustedBounds.Height));
+        var measuredBoundsForGuess = gfx.MeasureString(text, new XFont("Times New Roman", fontSizeGuess, XFontStyle.Regular));
+        double adjustmentFactor = adjustedBounds.Width / measuredBoundsForGuess.Width;
+        int adjustedFontSize = Math.Max(1, (int)Math.Floor(fontSizeGuess * adjustmentFactor));
+        return adjustedFontSize;
+    }
         
-        private class UnixFontResolver : IFontResolver
+    private class UnixFontResolver : IFontResolver
+    {
+        private byte[] _fontData;
+
+        public FontResolverInfo ResolveTypeface(string familyName, bool isBold, bool isItalic)
         {
-            private byte[] _fontData;
+            return new FontResolverInfo(familyName, isBold, isItalic);
+        }
 
-            public FontResolverInfo ResolveTypeface(string familyName, bool isBold, bool isItalic)
+        public byte[] GetFont(string faceName)
+        {
+            if (_fontData == null)
             {
-                return new FontResolverInfo(familyName, isBold, isItalic);
-            }
-
-            public byte[] GetFont(string faceName)
-            {
-                if (_fontData == null)
+                var proc = Process.Start(new ProcessStartInfo
                 {
-                    var proc = Process.Start(new ProcessStartInfo
-                    {
-                        FileName = "fc-list",
-                        RedirectStandardOutput = true,
-                        UseShellExecute = false
-                    });
-                    var fonts = proc.StandardOutput.ReadToEnd().Split('\n').Select(x => x.Split(':')[0]);
-                    // TODO: Maybe add more fonts here?
-                    var freeserif = fonts.First(f => f.EndsWith("FreeSerif.ttf", StringComparison.OrdinalIgnoreCase));
-                    _fontData = File.ReadAllBytes(freeserif);
-                }
-                return _fontData;
+                    FileName = "fc-list",
+                    RedirectStandardOutput = true,
+                    UseShellExecute = false
+                });
+                var fonts = proc.StandardOutput.ReadToEnd().Split('\n').Select(x => x.Split(':')[0]);
+                // TODO: Maybe add more fonts here?
+                var freeserif = fonts.First(f => f.EndsWith("FreeSerif.ttf", StringComparison.OrdinalIgnoreCase));
+                _fontData = File.ReadAllBytes(freeserif);
             }
+            return _fontData;
         }
     }
 }

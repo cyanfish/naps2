@@ -1,12 +1,11 @@
-namespace NAPS2.WinForms
+namespace NAPS2.WinForms;
+
+internal partial class FTwainGui : FormBase
 {
-    internal partial class FTwainGui : FormBase
+    public FTwainGui()
     {
-        public FTwainGui()
-        {
-            InitializeComponent();
-            SaveFormState = false;
-            RestoreFormState = false;
-        }
+        InitializeComponent();
+        SaveFormState = false;
+        RestoreFormState = false;
     }
 }

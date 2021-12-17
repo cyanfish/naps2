@@ -3,30 +3,29 @@ using NAPS2.Lang.ConsoleResources;
 using NAPS2.Logging;
 using NAPS2.Util;
 
-namespace NAPS2.Automation
+namespace NAPS2.Automation;
+
+public class ConsoleOverwritePrompt : OverwritePrompt
 {
-    public class ConsoleOverwritePrompt : OverwritePrompt
+    public static bool ForceOverwrite { get; set; }
+
+    private readonly ErrorOutput _errorOutput;
+
+    public ConsoleOverwritePrompt(ErrorOutput errorOutput)
     {
-        public static bool ForceOverwrite { get; set; }
+        _errorOutput = errorOutput;
+    }
 
-        private readonly ErrorOutput _errorOutput;
-
-        public ConsoleOverwritePrompt(ErrorOutput errorOutput)
+    public override DialogResult ConfirmOverwrite(string path)
+    {
+        if (ForceOverwrite)
         {
-            _errorOutput = errorOutput;
+            return DialogResult.Yes;
         }
-
-        public override DialogResult ConfirmOverwrite(string path)
+        else
         {
-            if (ForceOverwrite)
-            {
-                return DialogResult.Yes;
-            }
-            else
-            {
-                _errorOutput.DisplayError(string.Format(ConsoleResources.FileAlreadyExists, path));
-                return DialogResult.No;
-            }
+            _errorOutput.DisplayError(string.Format(ConsoleResources.FileAlreadyExists, path));
+            return DialogResult.No;
         }
     }
 }

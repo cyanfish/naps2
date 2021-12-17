@@ -1,11 +1,10 @@
 ﻿using System.Runtime.CompilerServices;
 
-namespace NAPS2.Config
+namespace NAPS2.Config;
+
+public class CommonAttribute : ConfigPropAttribute
 {
-    public class CommonAttribute : ConfigPropAttribute
+    public CommonAttribute([CallerLineNumber] int line = 0) : base(line)
     {
-        public CommonAttribute([CallerLineNumber] int line = 0) : base(line)
-        {
-        }
     }
 }

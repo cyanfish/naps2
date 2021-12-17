@@ -1,9 +1,8 @@
 ﻿using NAPS2.EtoForms;
 
-namespace NAPS2.WinForms
+namespace NAPS2.WinForms;
+
+public interface IFormFactory
 {
-    public interface IFormFactory
-    {
-        T Create<T>() where T : IFormBase;
-    }
+    T Create<T>() where T : IFormBase;
 }

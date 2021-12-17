@@ -1,69 +1,68 @@
 ﻿using System;
 
-namespace NAPS2.Config
+namespace NAPS2.Config;
+
+public class TransactionConfigScope<TConfig> : ConfigScope<TConfig>
 {
-    public class TransactionConfigScope<TConfig> : ConfigScope<TConfig>
+    private readonly Func<TConfig> _factory;
+    private TConfig _changes;
+
+    public TransactionConfigScope(ConfigScope<TConfig> originalScope, Func<TConfig> factory) : base(ConfigScopeMode.ReadWrite)
     {
-        private readonly Func<TConfig> _factory;
-        private TConfig _changes;
-
-        public TransactionConfigScope(ConfigScope<TConfig> originalScope, Func<TConfig> factory) : base(ConfigScopeMode.ReadWrite)
+        if (originalScope.Mode == ConfigScopeMode.ReadOnly)
         {
-            if (originalScope.Mode == ConfigScopeMode.ReadOnly)
-            {
-                throw new ArgumentException("A transaction can't be created for a ReadOnly scope.", nameof(originalScope));
-            }
-            OriginalScope = originalScope;
-            _factory = factory;
-            _changes = factory();
+            throw new ArgumentException("A transaction can't be created for a ReadOnly scope.", nameof(originalScope));
         }
+        OriginalScope = originalScope;
+        _factory = factory;
+        _changes = factory();
+    }
 
-        public ConfigScope<TConfig> OriginalScope { get; }
+    public ConfigScope<TConfig> OriginalScope { get; }
 
-        public bool HasChanges { get; private set; }
+    public bool HasChanges { get; private set; }
 
-        public event EventHandler? HasChangesChanged;
+    public event EventHandler? HasChangesChanged;
 
-        public void Commit()
+    public void Commit()
+    {
+        lock (this)
         {
-            lock (this)
+            lock (OriginalScope)
             {
-                lock (OriginalScope)
-                {
-                    OriginalScope.SetAll(_changes);
-                    _changes = _factory();
-                }
-                if (HasChanges)
-                {
-                    HasChanges = false;
-                    HasChangesChanged?.Invoke(this, EventArgs.Empty);
-                }
+                OriginalScope.SetAll(_changes);
+                _changes = _factory();
             }
-        }
-
-        protected override T GetInternal<T>(Func<TConfig, T> func)
-        {
-            var value = func(_changes);
-            if (value != null)
+            if (HasChanges)
             {
-                return value;
-            }
-            return OriginalScope.Get(func);
-        }
-
-        protected override void SetInternal(Action<TConfig> func)
-        {
-            func(_changes);
-            if (!HasChanges)
-            {
-                HasChanges = true;
+                HasChanges = false;
                 HasChangesChanged?.Invoke(this, EventArgs.Empty);
             }
         }
+    }
 
-        protected override void SetAllInternal(TConfig delta)
+    protected override T GetInternal<T>(Func<TConfig, T> func)
+    {
+        var value = func(_changes);
+        if (value != null)
         {
-            ConfigCopier.Copy(delta, _changes);
+            return value;
         }
+        return OriginalScope.Get(func);
+    }
+
+    protected override void SetInternal(Action<TConfig> func)
+    {
+        func(_changes);
+        if (!HasChanges)
+        {
+            HasChanges = true;
+            HasChangesChanged?.Invoke(this, EventArgs.Empty);
+        }
+    }
+
+    protected override void SetAllInternal(TConfig delta)
+    {
+        ConfigCopier.Copy(delta, _changes);
     }
 }

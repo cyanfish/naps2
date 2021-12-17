@@ -1,13 +1,12 @@
-﻿namespace NAPS2.Dependencies
+﻿namespace NAPS2.Dependencies;
+
+public interface IExternalComponent
 {
-    public interface IExternalComponent
-    {
-        DownloadInfo? DownloadInfo { get; }
+    DownloadInfo? DownloadInfo { get; }
 
-        string Id { get; }
+    string Id { get; }
 
-        bool IsInstalled { get; }
+    bool IsInstalled { get; }
 
-        void Install(string sourcePath);
-    }
+    void Install(string sourcePath);
 }

@@ -1,9 +1,8 @@
 ﻿using System;
 
-namespace NAPS2.Images.Storage
+namespace NAPS2.Images.Storage;
+
+[AttributeUsage(AttributeTargets.Method)]
+public class StorageConverterAttribute : Attribute
 {
-    [AttributeUsage(AttributeTargets.Method)]
-    public class StorageConverterAttribute : Attribute
-    {
-    }
 }

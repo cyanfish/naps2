@@ -1,18 +1,17 @@
-﻿namespace NAPS2.Ocr
+﻿namespace NAPS2.Ocr;
+
+public class Language
 {
-    public class Language
+    public Language(string code, string name, bool rtl)
     {
-        public Language(string code, string name, bool rtl)
-        {
-            Name = name;
-            Code = code;
-            RTL = rtl;
-        }
-
-        public string Code { get; }
-
-        public string Name { get; }
-
-        public bool RTL { get; }
+        Name = name;
+        Code = code;
+        RTL = rtl;
     }
+
+    public string Code { get; }
+
+    public string Name { get; }
+
+    public bool RTL { get; }
 }

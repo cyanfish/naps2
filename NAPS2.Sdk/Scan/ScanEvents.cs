@@ -1,27 +1,26 @@
 ﻿using System;
 using NAPS2.Scan.Internal;
 
-namespace NAPS2.Scan
+namespace NAPS2.Scan;
+
+internal class ScanEvents : IScanEvents
 {
-    internal class ScanEvents : IScanEvents
+    private readonly Action _pageStartCallback;
+    private readonly Action<double> _pageProgressCallback;
+
+    public ScanEvents(Action pageStartCallback, Action<double> pageProgressCallback)
     {
-        private readonly Action _pageStartCallback;
-        private readonly Action<double> _pageProgressCallback;
+        _pageStartCallback = pageStartCallback;
+        _pageProgressCallback = pageProgressCallback;
+    }
 
-        public ScanEvents(Action pageStartCallback, Action<double> pageProgressCallback)
-        {
-            _pageStartCallback = pageStartCallback;
-            _pageProgressCallback = pageProgressCallback;
-        }
+    public void PageStart()
+    {
+        _pageStartCallback();
+    }
 
-        public void PageStart()
-        {
-            _pageStartCallback();
-        }
-
-        public void PageProgress(double progress)
-        {
-            _pageProgressCallback(progress);
-        }
+    public void PageProgress(double progress)
+    {
+        _pageProgressCallback(progress);
     }
 }

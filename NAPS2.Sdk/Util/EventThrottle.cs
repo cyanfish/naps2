@@ -1,35 +1,34 @@
 ﻿using System;
 using System.Diagnostics.CodeAnalysis;
 
-namespace NAPS2.Util
+namespace NAPS2.Util;
+
+public class EventThrottle<T>
 {
-    public class EventThrottle<T>
+    private readonly Action<T> _eventCallback;
+
+    private bool _hasLastValue;
+    [MaybeNull]
+    private T _lastValue;
+
+    public EventThrottle(Action<T> eventCallback)
     {
-        private readonly Action<T> _eventCallback;
+        _eventCallback = eventCallback;
+    }
 
-        private bool _hasLastValue;
-        [MaybeNull]
-        private T _lastValue;
-
-        public EventThrottle(Action<T> eventCallback)
+    public void OnlyIfChanged(T value)
+    {
+        if (!_hasLastValue)
         {
-            _eventCallback = eventCallback;
+            _lastValue = value;
+            _hasLastValue = true;
+            _eventCallback(value);
+            return;
         }
-
-        public void OnlyIfChanged(T value)
+        if (!Equals(value, _lastValue))
         {
-            if (!_hasLastValue)
-            {
-                _lastValue = value;
-                _hasLastValue = true;
-                _eventCallback(value);
-                return;
-            }
-            if (!Equals(value, _lastValue))
-            {
-                _lastValue = value;
-                _eventCallback(value);
-            }
+            _lastValue = value;
+            _eventCallback(value);
         }
     }
 }

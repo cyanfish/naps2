@@ -1,7 +1,6 @@
-﻿namespace NAPS2.ImportExport.Pdf
+﻿namespace NAPS2.ImportExport.Pdf;
+
+public interface IPdfPasswordProvider
 {
-    public interface IPdfPasswordProvider
-    {
-        bool ProvidePassword(string fileName, int attemptCount, out string password);
-    }
+    bool ProvidePassword(string fileName, int attemptCount, out string password);
 }

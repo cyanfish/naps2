@@ -1,17 +1,16 @@
 ﻿using System;
 
-namespace NAPS2.Scan
+namespace NAPS2.Scan;
+
+public class PageProgressEventArgs : EventArgs
 {
-    public class PageProgressEventArgs : EventArgs
+    public PageProgressEventArgs(int pageNumber, double progress)
     {
-        public PageProgressEventArgs(int pageNumber, double progress)
-        {
-            PageNumber = pageNumber;
-            Progress = progress;
-        }
-
-        public int PageNumber { get; }
-
-        public double Progress { get; }
+        PageNumber = pageNumber;
+        Progress = progress;
     }
+
+    public int PageNumber { get; }
+
+    public double Progress { get; }
 }

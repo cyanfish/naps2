@@ -1,8 +1,7 @@
-﻿namespace NAPS2.Config
+﻿namespace NAPS2.Config;
+
+public enum ConfigScopeMode
 {
-    public enum ConfigScopeMode
-    {
-        ReadOnly,
-        ReadWrite
-    }
+    ReadOnly,
+    ReadWrite
 }

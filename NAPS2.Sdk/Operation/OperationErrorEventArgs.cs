@@ -1,20 +1,19 @@
 ﻿using System;
 
-namespace NAPS2.Operation
+namespace NAPS2.Operation;
+
+/// <summary>
+/// Arguments for the IOperation.Error event.
+/// </summary>
+public class OperationErrorEventArgs : EventArgs
 {
-    /// <summary>
-    /// Arguments for the IOperation.Error event.
-    /// </summary>
-    public class OperationErrorEventArgs : EventArgs
+    public OperationErrorEventArgs(string errorMessage, Exception exception)
     {
-        public OperationErrorEventArgs(string errorMessage, Exception exception)
-        {
-            ErrorMessage = errorMessage;
-            Exception = exception;
-        }
-
-        public string ErrorMessage { get; }
-
-        public Exception Exception { get; }
+        ErrorMessage = errorMessage;
+        Exception = exception;
     }
+
+    public string ErrorMessage { get; }
+
+    public Exception Exception { get; }
 }

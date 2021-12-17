@@ -2,52 +2,51 @@
 using System.IO;
 using System.IO.Compression;
 
-namespace NAPS2.Dependencies
+namespace NAPS2.Dependencies;
+
+public abstract class DownloadFormat
 {
-    public abstract class DownloadFormat
+    public static DownloadFormat Gzip = new GzipDownloadFormat();
+
+    public static DownloadFormat Zip = new ZipDownloadFormat();
+
+    public abstract string Prepare(string tempFilePath);
+
+    private class GzipDownloadFormat : DownloadFormat
     {
-        public static DownloadFormat Gzip = new GzipDownloadFormat();
-
-        public static DownloadFormat Zip = new ZipDownloadFormat();
-
-        public abstract string Prepare(string tempFilePath);
-
-        private class GzipDownloadFormat : DownloadFormat
+        public override string Prepare(string tempFilePath)
         {
-            public override string Prepare(string tempFilePath)
+            if (!tempFilePath.EndsWith(".gz", StringComparison.InvariantCultureIgnoreCase))
             {
-                if (!tempFilePath.EndsWith(".gz", StringComparison.InvariantCultureIgnoreCase))
-                {
-                    throw new ArgumentException();
-                }
-                var pathWithoutGz = tempFilePath.Substring(0, tempFilePath.Length - 3);
-                Extract(tempFilePath, pathWithoutGz);
-                return pathWithoutGz;
+                throw new ArgumentException();
             }
-
-            private static void Extract(string sourcePath, string destPath)
-            {
-                using FileStream inFile = new FileInfo(sourcePath).OpenRead();
-                using FileStream outFile = File.Create(destPath);
-                using GZipStream decompress = new GZipStream(inFile, CompressionMode.Decompress);
-                decompress.CopyTo(outFile);
-            }
+            var pathWithoutGz = tempFilePath.Substring(0, tempFilePath.Length - 3);
+            Extract(tempFilePath, pathWithoutGz);
+            return pathWithoutGz;
         }
 
-        private class ZipDownloadFormat : DownloadFormat
+        private static void Extract(string sourcePath, string destPath)
         {
-            public override string Prepare(string tempFilePath)
-            {
-                if (!tempFilePath.EndsWith(".zip", StringComparison.InvariantCultureIgnoreCase))
-                {
-                    throw new ArgumentException();
-                }
+            using FileStream inFile = new FileInfo(sourcePath).OpenRead();
+            using FileStream outFile = File.Create(destPath);
+            using GZipStream decompress = new GZipStream(inFile, CompressionMode.Decompress);
+            decompress.CopyTo(outFile);
+        }
+    }
 
-                var tempDir = Path.GetDirectoryName(tempFilePath) ?? throw new ArgumentNullException();
-                ZipFile.ExtractToDirectory(tempFilePath, tempDir);
-                File.Delete(tempFilePath);
-                return tempDir;
+    private class ZipDownloadFormat : DownloadFormat
+    {
+        public override string Prepare(string tempFilePath)
+        {
+            if (!tempFilePath.EndsWith(".zip", StringComparison.InvariantCultureIgnoreCase))
+            {
+                throw new ArgumentException();
             }
+
+            var tempDir = Path.GetDirectoryName(tempFilePath) ?? throw new ArgumentNullException();
+            ZipFile.ExtractToDirectory(tempFilePath, tempDir);
+            File.Delete(tempFilePath);
+            return tempDir;
         }
     }
 }

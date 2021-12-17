@@ -4,131 +4,130 @@ using System.Threading.Tasks;
 using NAPS2.Config;
 using NAPS2.Unmanaged;
 
-namespace NAPS2.ImportExport.Email.Mapi
+namespace NAPS2.ImportExport.Email.Mapi;
+
+public class MapiWrapper : IMapiWrapper
 {
-    public class MapiWrapper : IMapiWrapper
+    private readonly SystemEmailClients _systemEmailClients;
+    private readonly IConfigProvider<EmailSetup> _emailSetupProvider;
+
+    public MapiWrapper(SystemEmailClients systemEmailClients, IConfigProvider<EmailSetup> emailSetupProvider)
     {
-        private readonly SystemEmailClients _systemEmailClients;
-        private readonly IConfigProvider<EmailSetup> _emailSetupProvider;
+        _systemEmailClients = systemEmailClients;
+        _emailSetupProvider = emailSetupProvider;
+    }
 
-        public MapiWrapper(SystemEmailClients systemEmailClients, IConfigProvider<EmailSetup> emailSetupProvider)
+    public bool CanLoadClient
+    {
+        get
         {
-            _systemEmailClients = systemEmailClients;
-            _emailSetupProvider = emailSetupProvider;
+            var clientName = _emailSetupProvider.Get(c => c.SystemProviderName);
+            return _systemEmailClients.GetLibrary(clientName) != IntPtr.Zero;
         }
+    }
 
-        public bool CanLoadClient
+    public Task<MapiSendMailReturnCode> SendEmail(EmailMessage message)
+    {
+        return Task.Run(() =>
         {
-            get
+            var clientName = _emailSetupProvider.Get(c => c.SystemProviderName);
+            var (mapiSendMail, mapiSendMailW) = _systemEmailClients.GetDelegate(clientName, out bool unicode);
+
+            // Determine the flags used to send the message
+            var flags = MapiSendMailFlags.None;
+            if (!message.AutoSend)
             {
-                var clientName = _emailSetupProvider.Get(c => c.SystemProviderName);
-                return _systemEmailClients.GetLibrary(clientName) != IntPtr.Zero;
+                flags |= MapiSendMailFlags.Dialog;
             }
-        }
 
-        public Task<MapiSendMailReturnCode> SendEmail(EmailMessage message)
-        {
-            return Task.Run(() =>
+            if (!message.AutoSend || !message.SilentSend)
             {
-                var clientName = _emailSetupProvider.Get(c => c.SystemProviderName);
-                var (mapiSendMail, mapiSendMailW) = _systemEmailClients.GetDelegate(clientName, out bool unicode);
+                flags |= MapiSendMailFlags.LogonUI;
+            }
 
-                // Determine the flags used to send the message
-                var flags = MapiSendMailFlags.None;
-                if (!message.AutoSend)
-                {
-                    flags |= MapiSendMailFlags.Dialog;
-                }
+            return unicode ? SendMailW(mapiSendMailW, message, flags) : SendMail(mapiSendMail, message, flags);
+        });
+    }
 
-                if (!message.AutoSend || !message.SilentSend)
-                {
-                    flags |= MapiSendMailFlags.LogonUI;
-                }
-
-                return unicode ? SendMailW(mapiSendMailW, message, flags) : SendMail(mapiSendMail, message, flags);
-            });
-        }
-
-        private static MapiSendMailReturnCode SendMail(SystemEmailClients.MapiSendMailDelegate mapiSendMail, EmailMessage message, MapiSendMailFlags flags)
+    private static MapiSendMailReturnCode SendMail(SystemEmailClients.MapiSendMailDelegate mapiSendMail, EmailMessage message, MapiSendMailFlags flags)
+    {
+        using var files = UnmanagedTypes.CopyOf(GetFiles(message));
+        using var recips = UnmanagedTypes.CopyOf(GetRecips(message));
+        // Create a MAPI structure for the entirety of the message
+        var mapiMessage = new MapiMessage
         {
-            using var files = UnmanagedTypes.CopyOf(GetFiles(message));
-            using var recips = UnmanagedTypes.CopyOf(GetRecips(message));
-            // Create a MAPI structure for the entirety of the message
-            var mapiMessage = new MapiMessage
-            {
-                subject = message.Subject,
-                noteText = message.BodyText,
-                recips = recips,
-                recipCount = recips.Length,
-                files = files,
-                fileCount = files.Length
-            };
+            subject = message.Subject,
+            noteText = message.BodyText,
+            recips = recips,
+            recipCount = recips.Length,
+            files = files,
+            fileCount = files.Length
+        };
 
-            // Send the message
-            return mapiSendMail(IntPtr.Zero, IntPtr.Zero, mapiMessage, flags, 0);
-        }
+        // Send the message
+        return mapiSendMail(IntPtr.Zero, IntPtr.Zero, mapiMessage, flags, 0);
+    }
 
-        private static MapiSendMailReturnCode SendMailW(SystemEmailClients.MapiSendMailDelegateW mapiSendMailW, EmailMessage message, MapiSendMailFlags flags)
+    private static MapiSendMailReturnCode SendMailW(SystemEmailClients.MapiSendMailDelegateW mapiSendMailW, EmailMessage message, MapiSendMailFlags flags)
+    {
+        using var files = UnmanagedTypes.CopyOf(GetFilesW(message));
+        using var recips = UnmanagedTypes.CopyOf(GetRecipsW(message));
+        // Create a MAPI structure for the entirety of the message
+        var mapiMessage = new MapiMessageW
         {
-            using var files = UnmanagedTypes.CopyOf(GetFilesW(message));
-            using var recips = UnmanagedTypes.CopyOf(GetRecipsW(message));
-            // Create a MAPI structure for the entirety of the message
-            var mapiMessage = new MapiMessageW
-            {
-                subject = message.Subject,
-                noteText = message.BodyText,
-                recips = recips,
-                recipCount = recips.Length,
-                files = files,
-                fileCount = files.Length
-            };
+            subject = message.Subject,
+            noteText = message.BodyText,
+            recips = recips,
+            recipCount = recips.Length,
+            files = files,
+            fileCount = files.Length
+        };
 
-            // Send the message
-            return mapiSendMailW(IntPtr.Zero, IntPtr.Zero, mapiMessage, flags, 0);
-        }
+        // Send the message
+        return mapiSendMailW(IntPtr.Zero, IntPtr.Zero, mapiMessage, flags, 0);
+    }
 
-        private static MapiRecipDesc[] GetRecips(EmailMessage message)
+    private static MapiRecipDesc[] GetRecips(EmailMessage message)
+    {
+        return message.Recipients.Select(recipient => new MapiRecipDesc
         {
-            return message.Recipients.Select(recipient => new MapiRecipDesc
-            {
-                name = recipient.Name,
-                address = "SMTP:" + recipient.Address,
-                recipClass = recipient.Type == EmailRecipientType.Cc ? MapiRecipClass.Cc
-                    : recipient.Type == EmailRecipientType.Bcc ? MapiRecipClass.Bcc
-                    : MapiRecipClass.To
-            }).ToArray();
-        }
+            name = recipient.Name,
+            address = "SMTP:" + recipient.Address,
+            recipClass = recipient.Type == EmailRecipientType.Cc ? MapiRecipClass.Cc
+                : recipient.Type == EmailRecipientType.Bcc ? MapiRecipClass.Bcc
+                : MapiRecipClass.To
+        }).ToArray();
+    }
 
-        private static MapiRecipDescW[] GetRecipsW(EmailMessage message)
+    private static MapiRecipDescW[] GetRecipsW(EmailMessage message)
+    {
+        return message.Recipients.Select(recipient => new MapiRecipDescW
         {
-            return message.Recipients.Select(recipient => new MapiRecipDescW
-            {
-                name = recipient.Name,
-                address = "SMTP:" + recipient.Address,
-                recipClass = recipient.Type == EmailRecipientType.Cc ? MapiRecipClass.Cc
-                    : recipient.Type == EmailRecipientType.Bcc ? MapiRecipClass.Bcc
-                    : MapiRecipClass.To
-            }).ToArray();
-        }
+            name = recipient.Name,
+            address = "SMTP:" + recipient.Address,
+            recipClass = recipient.Type == EmailRecipientType.Cc ? MapiRecipClass.Cc
+                : recipient.Type == EmailRecipientType.Bcc ? MapiRecipClass.Bcc
+                : MapiRecipClass.To
+        }).ToArray();
+    }
 
-        private static MapiFileDesc[] GetFiles(EmailMessage message)
+    private static MapiFileDesc[] GetFiles(EmailMessage message)
+    {
+        return message.Attachments.Select(attachment => new MapiFileDesc
         {
-            return message.Attachments.Select(attachment => new MapiFileDesc
-            {
-                position = -1,
-                path = attachment.FilePath,
-                name = attachment.AttachmentName
-            }).ToArray();
-        }
+            position = -1,
+            path = attachment.FilePath,
+            name = attachment.AttachmentName
+        }).ToArray();
+    }
 
-        private static MapiFileDescW[] GetFilesW(EmailMessage message)
+    private static MapiFileDescW[] GetFilesW(EmailMessage message)
+    {
+        return message.Attachments.Select(attachment => new MapiFileDescW
         {
-            return message.Attachments.Select(attachment => new MapiFileDescW
-            {
-                position = -1,
-                path = attachment.FilePath,
-                name = attachment.AttachmentName
-            }).ToArray();
-        }
+            position = -1,
+            path = attachment.FilePath,
+            name = attachment.AttachmentName
+        }).ToArray();
     }
 }

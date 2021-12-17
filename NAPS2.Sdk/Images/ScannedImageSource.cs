@@ -2,56 +2,55 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace NAPS2.Images
+namespace NAPS2.Images;
+
+public abstract class ScannedImageSource
 {
-    public abstract class ScannedImageSource
+    public static ScannedImageSource Empty => new EmptySource();
+
+    public abstract Task<ScannedImage?> Next();
+
+    public async Task<List<ScannedImage>> ToList()
     {
-        public static ScannedImageSource Empty => new EmptySource();
-
-        public abstract Task<ScannedImage?> Next();
-
-        public async Task<List<ScannedImage>> ToList()
+        var list = new List<ScannedImage>();
+        try
         {
-            var list = new List<ScannedImage>();
-            try
+            await ForEach(image => list.Add(image));
+        }
+        catch (Exception)
+        {
+            // TODO: If we ever allow multiple enumeration, this will need to be rethought
+            foreach (var image in list)
             {
-                await ForEach(image => list.Add(image));
-            }
-            catch (Exception)
-            {
-                // TODO: If we ever allow multiple enumeration, this will need to be rethought
-                foreach (var image in list)
-                {
-                    image.Dispose();
-                }
-
-                throw;
+                image.Dispose();
             }
 
-            return list;
+            throw;
         }
 
-        public async Task ForEach(Action<ScannedImage> action)
-        {
-            ScannedImage? image;
-            while ((image = await Next()) != null)
-            {
-                action(image);
-            }
-        }
+        return list;
+    }
 
-        public async Task ForEach(Func<ScannedImage, Task> action)
+    public async Task ForEach(Action<ScannedImage> action)
+    {
+        ScannedImage? image;
+        while ((image = await Next()) != null)
         {
-            ScannedImage? image;
-            while ((image = await Next()) != null)
-            {
-                await action(image);
-            }
+            action(image);
         }
+    }
 
-        private class EmptySource : ScannedImageSource
+    public async Task ForEach(Func<ScannedImage, Task> action)
+    {
+        ScannedImage? image;
+        while ((image = await Next()) != null)
         {
-            public override Task<ScannedImage?> Next() => Task.FromResult<ScannedImage?>(null);
+            await action(image);
         }
+    }
+
+    private class EmptySource : ScannedImageSource
+    {
+        public override Task<ScannedImage?> Next() => Task.FromResult<ScannedImage?>(null);
     }
 }

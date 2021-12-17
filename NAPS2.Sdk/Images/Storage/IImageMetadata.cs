@@ -3,22 +3,21 @@ using System.Collections.Generic;
 using NAPS2.Images.Transforms;
 using NAPS2.Scan;
 
-namespace NAPS2.Images.Storage
+namespace NAPS2.Images.Storage;
+
+public interface IImageMetadata : IDisposable
 {
-    public interface IImageMetadata : IDisposable
-    {
-        List<Transform> TransformList { get; set; }
+    List<Transform> TransformList { get; set; }
 
-        int TransformState { get; set; }
+    int TransformState { get; set; }
 
-        int Index { get; set; }
+    int Index { get; set; }
 
-        BitDepth BitDepth { get; set; }
+    BitDepth BitDepth { get; set; }
 
-        bool Lossless { get; set; }
+    bool Lossless { get; set; }
 
-        void Commit();
+    void Commit();
 
-        IImageMetadata Clone();
-    }
+    IImageMetadata Clone();
 }

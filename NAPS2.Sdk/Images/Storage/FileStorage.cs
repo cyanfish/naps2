@@ -1,35 +1,34 @@
 ﻿using System;
 using System.IO;
 
-namespace NAPS2.Images.Storage
+namespace NAPS2.Images.Storage;
+
+public class FileStorage : IStorage
 {
-    public class FileStorage : IStorage
+    private readonly bool _shared;
+
+    public FileStorage(string fullPath) : this(fullPath, false)
     {
-        private readonly bool _shared;
+    }
 
-        public FileStorage(string fullPath) : this(fullPath, false)
+    public FileStorage(string fullPath, bool shared)
+    {
+        FullPath = fullPath ?? throw new ArgumentNullException(nameof(fullPath));
+        _shared = shared;
+    }
+
+    public string FullPath { get; }
+
+    public void Dispose()
+    {
+        if (!_shared)
         {
-        }
-
-        public FileStorage(string fullPath, bool shared)
-        {
-            FullPath = fullPath ?? throw new ArgumentNullException(nameof(fullPath));
-            _shared = shared;
-        }
-
-        public string FullPath { get; }
-
-        public void Dispose()
-        {
-            if (!_shared)
+            try
             {
-                try
-                {
-                    File.Delete(FullPath);
-                }
-                catch (IOException)
-                {
-                }
+                File.Delete(FullPath);
+            }
+            catch (IOException)
+            {
             }
         }
     }

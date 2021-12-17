@@ -5,52 +5,51 @@ using NAPS2.Images;
 using NAPS2.Images.Storage;
 using NAPS2.Images.Transforms;
 
-namespace NAPS2.WinForms
+namespace NAPS2.WinForms;
+
+partial class FBlackWhite : ImageForm
 {
-    partial class FBlackWhite : ImageForm
+    public FBlackWhite(ImageContext imageContext, BitmapRenderer bitmapRenderer)
+        : base(imageContext, bitmapRenderer)
     {
-        public FBlackWhite(ImageContext imageContext, BitmapRenderer bitmapRenderer)
-            : base(imageContext, bitmapRenderer)
+        InitializeComponent();
+        ActiveControl = txtThreshold;
+    }
+
+    public BlackWhiteTransform BlackWhiteTransform { get; private set; } = new BlackWhiteTransform();
+
+    protected override IEnumerable<Transform> Transforms => new[] { BlackWhiteTransform };
+
+    protected override PictureBox PictureBox => pictureBox;
+
+    protected override void ResetTransform()
+    {
+        BlackWhiteTransform = new BlackWhiteTransform();
+        tbThreshold.Value = 0;
+        txtThreshold.Text = tbThreshold.Value.ToString("G");
+    }
+
+    private void UpdateTransform()
+    {
+        BlackWhiteTransform = new BlackWhiteTransform(tbThreshold.Value);
+        UpdatePreviewBox();
+    }
+
+    private void txtBlackWhite_TextChanged(object sender, EventArgs e)
+    {
+        if (int.TryParse(txtThreshold.Text, out int value))
         {
-            InitializeComponent();
-            ActiveControl = txtThreshold;
-        }
-
-        public BlackWhiteTransform BlackWhiteTransform { get; private set; } = new BlackWhiteTransform();
-
-        protected override IEnumerable<Transform> Transforms => new[] { BlackWhiteTransform };
-
-        protected override PictureBox PictureBox => pictureBox;
-
-        protected override void ResetTransform()
-        {
-            BlackWhiteTransform = new BlackWhiteTransform();
-            tbThreshold.Value = 0;
-            txtThreshold.Text = tbThreshold.Value.ToString("G");
-        }
-
-        private void UpdateTransform()
-        {
-            BlackWhiteTransform = new BlackWhiteTransform(tbThreshold.Value);
-            UpdatePreviewBox();
-        }
-
-        private void txtBlackWhite_TextChanged(object sender, EventArgs e)
-        {
-            if (int.TryParse(txtThreshold.Text, out int value))
+            if (value >= tbThreshold.Minimum && value <= tbThreshold.Maximum)
             {
-                if (value >= tbThreshold.Minimum && value <= tbThreshold.Maximum)
-                {
-                    tbThreshold.Value = value;
-                }
+                tbThreshold.Value = value;
             }
-            UpdateTransform();
         }
+        UpdateTransform();
+    }
 
-        private void tbBlackWhite_Scroll(object sender, EventArgs e)
-        {
-            txtThreshold.Text = tbThreshold.Value.ToString("G");
-            UpdateTransform();
-        }
+    private void tbBlackWhite_Scroll(object sender, EventArgs e)
+    {
+        txtThreshold.Text = tbThreshold.Value.ToString("G");
+        UpdateTransform();
     }
 }

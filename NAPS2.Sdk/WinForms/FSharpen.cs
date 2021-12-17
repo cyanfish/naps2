@@ -5,52 +5,51 @@ using NAPS2.Images;
 using NAPS2.Images.Storage;
 using NAPS2.Images.Transforms;
 
-namespace NAPS2.WinForms
+namespace NAPS2.WinForms;
+
+partial class FSharpen : ImageForm
 {
-    partial class FSharpen : ImageForm
+    public FSharpen(ImageContext imageContext, BitmapRenderer bitmapRenderer)
+        : base(imageContext, bitmapRenderer)
     {
-        public FSharpen(ImageContext imageContext, BitmapRenderer bitmapRenderer)
-            : base(imageContext, bitmapRenderer)
-        {
-            InitializeComponent();
-            ActiveControl = txtSharpen;
-        }
+        InitializeComponent();
+        ActiveControl = txtSharpen;
+    }
 
-        public SharpenTransform SharpenTransform { get; private set; } = new SharpenTransform();
+    public SharpenTransform SharpenTransform { get; private set; } = new SharpenTransform();
 
-        protected override IEnumerable<Transform> Transforms => new [] { SharpenTransform };
+    protected override IEnumerable<Transform> Transforms => new [] { SharpenTransform };
 
-        protected override PictureBox PictureBox => pictureBox;
+    protected override PictureBox PictureBox => pictureBox;
 
-        protected override void ResetTransform()
-        {
-            SharpenTransform = new SharpenTransform();
-            tbSharpen.Value = 0;
-            txtSharpen.Text = tbSharpen.Value.ToString("G");
-        }
+    protected override void ResetTransform()
+    {
+        SharpenTransform = new SharpenTransform();
+        tbSharpen.Value = 0;
+        txtSharpen.Text = tbSharpen.Value.ToString("G");
+    }
 
-        private void UpdateTransform()
-        {
-            SharpenTransform = new SharpenTransform(tbSharpen.Value);
-            UpdatePreviewBox();
-        }
+    private void UpdateTransform()
+    {
+        SharpenTransform = new SharpenTransform(tbSharpen.Value);
+        UpdatePreviewBox();
+    }
         
-        private void txtSharpen_TextChanged(object sender, EventArgs e)
+    private void txtSharpen_TextChanged(object sender, EventArgs e)
+    {
+        if (int.TryParse(txtSharpen.Text, out int value))
         {
-            if (int.TryParse(txtSharpen.Text, out int value))
+            if (value >= tbSharpen.Minimum && value <= tbSharpen.Maximum)
             {
-                if (value >= tbSharpen.Minimum && value <= tbSharpen.Maximum)
-                {
-                    tbSharpen.Value = value;
-                }
+                tbSharpen.Value = value;
             }
-            UpdateTransform();
         }
+        UpdateTransform();
+    }
 
-        private void tbSharpen_Scroll(object sender, EventArgs e)
-        {
-            txtSharpen.Text = tbSharpen.Value.ToString("G");
-            UpdateTransform();
-        }
+    private void tbSharpen_Scroll(object sender, EventArgs e)
+    {
+        txtSharpen.Text = tbSharpen.Value.ToString("G");
+        UpdateTransform();
     }
 }

@@ -1,9 +1,8 @@
-﻿namespace NAPS2.ImportExport.Email
-{
-    public interface IEmailProviderFactory
-    {
-        IEmailProvider Create(EmailProviderType type);
+﻿namespace NAPS2.ImportExport.Email;
 
-        IEmailProvider Default { get; }
-    }
+public interface IEmailProviderFactory
+{
+    IEmailProvider Create(EmailProviderType type);
+
+    IEmailProvider Default { get; }
 }

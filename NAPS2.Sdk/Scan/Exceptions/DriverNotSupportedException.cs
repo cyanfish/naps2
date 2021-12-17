@@ -1,28 +1,27 @@
 using System;
 using NAPS2.Lang.Resources;
 
-namespace NAPS2.Scan.Exceptions
+namespace NAPS2.Scan.Exceptions;
+
+public class DriverNotSupportedException : ScanDriverException
 {
-    public class DriverNotSupportedException : ScanDriverException
+    public DriverNotSupportedException()
+        : base(MiscResources.DriverNotSupported)
     {
-        public DriverNotSupportedException()
-            : base(MiscResources.DriverNotSupported)
-        {
-        }
+    }
 
-        public DriverNotSupportedException(string message)
-            : base(message)
-        {
-        }
+    public DriverNotSupportedException(string message)
+        : base(message)
+    {
+    }
 
-        public DriverNotSupportedException(Exception innerException)
-            : base(MiscResources.DriverNotSupported, innerException)
-        {
-        }
+    public DriverNotSupportedException(Exception innerException)
+        : base(MiscResources.DriverNotSupported, innerException)
+    {
+    }
 
-        public DriverNotSupportedException(string message, Exception innerException)
-            : base(message, innerException)
-        {
-        }
+    public DriverNotSupportedException(string message, Exception innerException)
+        : base(message, innerException)
+    {
     }
 }

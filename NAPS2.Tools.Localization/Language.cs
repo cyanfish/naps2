@@ -1,15 +1,14 @@
 ﻿using System.IO;
 
-namespace NAPS2.Localization
+namespace NAPS2.Localization;
+
+public class Language
 {
-    public class Language
+    public static void Update(string langCode)
     {
-        public static void Update(string langCode)
-        {
-            var ctx = new LanguageContext(langCode);
-            ctx.Load(Path.Combine(Paths.Root, $@"NAPS2.Core\Lang\po\{langCode}.po"));
-            ctx.Translate(Path.Combine(Paths.Root, @"NAPS2.Core\Lang\Resources"), false);
-            ctx.Translate(Path.Combine(Paths.Root, @"NAPS2.Core\WinForms"), true);
-        }
+        var ctx = new LanguageContext(langCode);
+        ctx.Load(Path.Combine(Paths.Root, $@"NAPS2.Core\Lang\po\{langCode}.po"));
+        ctx.Translate(Path.Combine(Paths.Root, @"NAPS2.Core\Lang\Resources"), false);
+        ctx.Translate(Path.Combine(Paths.Root, @"NAPS2.Core\WinForms"), true);
     }
 }

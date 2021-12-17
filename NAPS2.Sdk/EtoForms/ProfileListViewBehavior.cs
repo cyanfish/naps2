@@ -9,66 +9,65 @@ using NAPS2.Logging;
 using NAPS2.Scan;
 using NAPS2.Util;
 
-namespace NAPS2.EtoForms
+namespace NAPS2.EtoForms;
+
+public class ProfileListViewBehavior : ListViewBehavior<ScanProfile>
 {
-    public class ProfileListViewBehavior : ListViewBehavior<ScanProfile>
+    private readonly ProfileTransfer _profileTransfer;
+
+    public ProfileListViewBehavior(ProfileTransfer profileTransfer)
     {
-        private readonly ProfileTransfer _profileTransfer;
+        _profileTransfer = profileTransfer;
+        MultiSelect = false;
+        ShowLabels = true;
+    }
 
-        public ProfileListViewBehavior(ProfileTransfer profileTransfer)
+    public override string GetLabel(ScanProfile item) => item.DisplayName ?? "";
+
+    public override Image GetImage(ScanProfile item)
+    {
+        if (item.IsDefault && item.IsLocked)
         {
-            _profileTransfer = profileTransfer;
-            MultiSelect = false;
-            ShowLabels = true;
+            return Icons.scanner_lock_default.ToEto();
         }
-
-        public override string GetLabel(ScanProfile item) => item.DisplayName ?? "";
-
-        public override Image GetImage(ScanProfile item)
+        if (item.IsDefault)
         {
-            if (item.IsDefault && item.IsLocked)
-            {
-                return Icons.scanner_lock_default.ToEto();
-            }
-            if (item.IsDefault)
-            {
-                return Icons.scanner_default.ToEto();
-            }
-            if (item.IsLocked)
-            {
-                return Icons.scanner_lock.ToEto();
-            }
-            return Icons.scanner_48.ToEto();
+            return Icons.scanner_default.ToEto();
         }
-
-        public override void SetDragData(ListSelection<ScanProfile> selection, IDataObject dataObject)
+        if (item.IsLocked)
         {
-            if (selection.Count > 0)
-            {
-                _profileTransfer.AddTo(dataObject, selection.Single());
-            }
+            return Icons.scanner_lock.ToEto();
         }
+        return Icons.scanner_48.ToEto();
+    }
 
-        public override DragEffects GetDropEffect(IDataObject dataObject)
+    public override void SetDragData(ListSelection<ScanProfile> selection, IDataObject dataObject)
+    {
+        if (selection.Count > 0)
         {
-            // Determine if drop data is compatible
-            try
-            {
-                if (_profileTransfer.IsIn(dataObject))
-                {
-                    var data = _profileTransfer.GetFrom(dataObject);
-                    return data.ProcessId == Process.GetCurrentProcess().Id
-                        ? data.Locked
-                            ? DragEffects.None
-                            : DragEffects.Move
-                        : DragEffects.Copy;
-                }
-            }
-            catch (Exception ex)
-            {
-                Log.ErrorException("Error receiving drag/drop", ex);
-            }
-            return DragEffects.None;
+            _profileTransfer.AddTo(dataObject, selection.Single());
         }
+    }
+
+    public override DragEffects GetDropEffect(IDataObject dataObject)
+    {
+        // Determine if drop data is compatible
+        try
+        {
+            if (_profileTransfer.IsIn(dataObject))
+            {
+                var data = _profileTransfer.GetFrom(dataObject);
+                return data.ProcessId == Process.GetCurrentProcess().Id
+                    ? data.Locked
+                        ? DragEffects.None
+                        : DragEffects.Move
+                    : DragEffects.Copy;
+            }
+        }
+        catch (Exception ex)
+        {
+            Log.ErrorException("Error receiving drag/drop", ex);
+        }
+        return DragEffects.None;
     }
 }

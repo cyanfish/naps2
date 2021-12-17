@@ -1,7 +1,6 @@
-﻿namespace NAPS2.Scan
+﻿namespace NAPS2.Scan;
+
+public class SaneOptions
 {
-    public class SaneOptions
-    {
-        public KeyValueScanOptions? KeyValueOptions { get; set; }
-    }
+    public KeyValueScanOptions? KeyValueOptions { get; set; }
 }

@@ -3,138 +3,137 @@ using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace NAPS2.WinForms
+namespace NAPS2.WinForms;
+
+/// <summary>
+/// Helpers for conditionally visible controls that use simple heuristics help maintain the visual appearance of forms.
+///
+/// For example, if a checkbox is hidden, the form will shrink and controls further down will be moved up to fill the empty space.
+/// </summary>
+public static class ConditionalControls
 {
-    /// <summary>
-    /// Helpers for conditionally visible controls that use simple heuristics help maintain the visual appearance of forms.
-    ///
-    /// For example, if a checkbox is hidden, the form will shrink and controls further down will be moved up to fill the empty space.
-    /// </summary>
-    public static class ConditionalControls
+    public static void SetVisible(Control control, bool visible, int margin = 0)
     {
-        public static void SetVisible(Control control, bool visible, int margin = 0)
+        if (visible)
         {
-            if (visible)
+            Show(control, margin);
+        }
+        else
+        {
+            Hide(control, margin);
+        }
+    }
+
+    public static void Hide(Control control, int margin = 0)
+    {
+        if (!control.Visible)
+        {
+            return;
+        }
+        var bottomAnchorControls = FindAndRemoveBottomAnchor(control.FindForm());
+        int height = control.Height + margin;
+        int bottom = LocationInForm(control).Y + control.Height;
+        foreach (var c in EnumerateParents(control))
+        {
+            c.Height -= height;
+        }
+        foreach (var c in EnumerateSiblingsAndUncles(control))
+        {
+            if (LocationInForm(c).Y >= bottom)
             {
-                Show(control, margin);
-            }
-            else
-            {
-                Hide(control, margin);
+                c.Top -= height;
             }
         }
+        control.Visible = false;
+        AddBottomAnchor(bottomAnchorControls);
+    }
 
-        public static void Hide(Control control, int margin = 0)
+    public static void Show(Control control, int margin = 0)
+    {
+        if (control.Visible)
         {
-            if (!control.Visible)
-            {
-                return;
-            }
-            var bottomAnchorControls = FindAndRemoveBottomAnchor(control.FindForm());
-            int height = control.Height + margin;
-            int bottom = LocationInForm(control).Y + control.Height;
-            foreach (var c in EnumerateParents(control))
-            {
-                c.Height -= height;
-            }
-            foreach (var c in EnumerateSiblingsAndUncles(control))
-            {
-                if (LocationInForm(c).Y >= bottom)
-                {
-                    c.Top -= height;
-                }
-            }
-            control.Visible = false;
-            AddBottomAnchor(bottomAnchorControls);
+            return;
         }
-
-        public static void Show(Control control, int margin = 0)
+        var bottomAnchorControls = FindAndRemoveBottomAnchor(control.FindForm());
+        int height = control.Height + margin;
+        int top = LocationInForm(control).Y;
+        foreach (var c in EnumerateParents(control))
         {
-            if (control.Visible)
-            {
-                return;
-            }
-            var bottomAnchorControls = FindAndRemoveBottomAnchor(control.FindForm());
-            int height = control.Height + margin;
-            int top = LocationInForm(control).Y;
-            foreach (var c in EnumerateParents(control))
-            {
-                c.Height += height;
-            }
-            foreach (var c in EnumerateSiblingsAndUncles(control))
-            {
-                if (LocationInForm(c).Y >= top)
-                {
-                    c.Top += height;
-                }
-            }
-            control.Visible = true;
-            AddBottomAnchor(bottomAnchorControls);
+            c.Height += height;
         }
-
-        public static void LockHeight(Form form)
+        foreach (var c in EnumerateSiblingsAndUncles(control))
         {
-            form.MaximumSize = new Size(int.MaxValue, form.Height);
-            form.MinimumSize = new Size(form.MinimumSize.Width, form.Height);
-        }
-
-        public static void UnlockHeight(Form form)
-        {
-            form.MaximumSize = new Size(0, 0);
-            form.MinimumSize = new Size(form.MinimumSize.Width, 0);
-        }
-
-        private static IEnumerable<Control> EnumerateParents(Control control)
-        {
-            for (var parent = control.Parent; parent != null; parent = parent.Parent)
+            if (LocationInForm(c).Y >= top)
             {
-                yield return parent;
+                c.Top += height;
             }
         }
+        control.Visible = true;
+        AddBottomAnchor(bottomAnchorControls);
+    }
 
-        private static IEnumerable<Control> EnumerateSiblingsAndUncles(Control control)
+    public static void LockHeight(Form form)
+    {
+        form.MaximumSize = new Size(int.MaxValue, form.Height);
+        form.MinimumSize = new Size(form.MinimumSize.Width, form.Height);
+    }
+
+    public static void UnlockHeight(Form form)
+    {
+        form.MaximumSize = new Size(0, 0);
+        form.MinimumSize = new Size(form.MinimumSize.Width, 0);
+    }
+
+    private static IEnumerable<Control> EnumerateParents(Control control)
+    {
+        for (var parent = control.Parent; parent != null; parent = parent.Parent)
         {
-            var parentsAndSelf = EnumerateParents(control).Concat(Enumerable.Repeat(control, 1));
-            return EnumerateParents(control).SelectMany(x => x.Controls.Cast<Control>()).Except(parentsAndSelf);
+            yield return parent;
         }
+    }
 
-        private static IEnumerable<Control> EnumerateDescendents(Control control)
-        {
-            var children = control.Controls.Cast<Control>().ToList();
-            return children.Concat(children.SelectMany(EnumerateDescendents));
-        }
+    private static IEnumerable<Control> EnumerateSiblingsAndUncles(Control control)
+    {
+        var parentsAndSelf = EnumerateParents(control).Concat(Enumerable.Repeat(control, 1));
+        return EnumerateParents(control).SelectMany(x => x.Controls.Cast<Control>()).Except(parentsAndSelf);
+    }
 
-        private static Point LocationInForm(Control control)
+    private static IEnumerable<Control> EnumerateDescendents(Control control)
+    {
+        var children = control.Controls.Cast<Control>().ToList();
+        return children.Concat(children.SelectMany(EnumerateDescendents));
+    }
+
+    private static Point LocationInForm(Control control)
+    {
+        var x = control.Location.X;
+        var y = control.Location.Y;
+        foreach (var parent in EnumerateParents(control))
         {
-            var x = control.Location.X;
-            var y = control.Location.Y;
-            foreach (var parent in EnumerateParents(control))
+            if (!(parent is Form))
             {
-                if (!(parent is Form))
-                {
-                    x += parent.Left;
-                    y += parent.Top;
-                }
+                x += parent.Left;
+                y += parent.Top;
             }
-            return new Point(x, y);
         }
+        return new Point(x, y);
+    }
 
-        private static List<(Control, AnchorStyles)> FindAndRemoveBottomAnchor(Form form)
+    private static List<(Control, AnchorStyles)> FindAndRemoveBottomAnchor(Form form)
+    {
+        var controls = EnumerateDescendents(form).Where(x => (x.Anchor & AnchorStyles.Bottom) == AnchorStyles.Bottom).Select(c => (c, c.Anchor)).ToList();
+        foreach (var (c, a) in controls)
         {
-            var controls = EnumerateDescendents(form).Where(x => (x.Anchor & AnchorStyles.Bottom) == AnchorStyles.Bottom).Select(c => (c, c.Anchor)).ToList();
-            foreach (var (c, a) in controls)
-            {
-                c.Anchor = a & ~AnchorStyles.Bottom | AnchorStyles.Top;
-            }
-            return controls;
+            c.Anchor = a & ~AnchorStyles.Bottom | AnchorStyles.Top;
         }
+        return controls;
+    }
 
-        private static void AddBottomAnchor(List<(Control, AnchorStyles)> controls)
+    private static void AddBottomAnchor(List<(Control, AnchorStyles)> controls)
+    {
+        foreach (var (c, a) in controls)
         {
-            foreach (var (c, a) in controls)
-            {
-                c.Anchor = a;
-            }
+            c.Anchor = a;
         }
     }
 }

@@ -1,7 +1,6 @@
-﻿namespace NAPS2.Scan.Internal
+﻿namespace NAPS2.Scan.Internal;
+
+internal interface IScanBridgeFactory
 {
-    internal interface IScanBridgeFactory
-    {
-        IScanBridge Create(ScanOptions options);
-    }
+    IScanBridge Create(ScanOptions options);
 }

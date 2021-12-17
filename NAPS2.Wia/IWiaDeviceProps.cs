@@ -1,7 +1,6 @@
-﻿namespace NAPS2.Wia
+﻿namespace NAPS2.Wia;
+
+public interface IWiaDeviceProps
 {
-    public interface IWiaDeviceProps
-    {
-        WiaPropertyCollection Properties { get; }
-    }
+    WiaPropertyCollection Properties { get; }
 }

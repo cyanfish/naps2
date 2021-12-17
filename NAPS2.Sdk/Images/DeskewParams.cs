@@ -1,7 +1,6 @@
-﻿namespace NAPS2.Images
+﻿namespace NAPS2.Images;
+
+public class DeskewParams
 {
-    public class DeskewParams
-    {
-        public int? ThumbnailSize { get; set; }
-    }
+    public int? ThumbnailSize { get; set; }
 }

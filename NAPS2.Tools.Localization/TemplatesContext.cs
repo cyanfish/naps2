@@ -4,11 +4,11 @@ using System.IO;
 using System.Linq;
 using System.Xml.Linq;
 
-namespace NAPS2.Localization
+namespace NAPS2.Localization;
+
+public class TemplatesContext
 {
-    public class TemplatesContext
-    {
-        private const string HEADER = @"msgid """"
+    private const string HEADER = @"msgid """"
 msgstr """"
 ""Project-Id-Version: PACKAGE VERSION\n""
 ""Report-Msgid-Bugs-To: \n""
@@ -23,53 +23,52 @@ msgstr """"
 ""X-Generator: Translate Toolkit 1.13.0\n""
 ""X-Poedit-SourceCharset: iso-8859-1\n""";
 
-        public Dictionary<string, TranslatableString> Strings { get; } = new Dictionary<string, TranslatableString>();
+    public Dictionary<string, TranslatableString> Strings { get; } = new Dictionary<string, TranslatableString>();
 
-        public void Load(string folder, bool winforms)
+    public void Load(string folder, bool winforms)
+    {
+        foreach (var file in new DirectoryInfo(folder).GetFiles("*.resx"))
         {
-            foreach (var file in new DirectoryInfo(folder).GetFiles("*.resx"))
+            if (file.Name.Count(x => x == '.') == 1)
             {
-                if (file.Name.Count(x => x == '.') == 1)
-                {
-                    LoadFile(file, winforms);
-                }
+                LoadFile(file, winforms);
             }
         }
+    }
 
-        private void LoadFile(FileInfo file, bool winforms)
+    private void LoadFile(FileInfo file, bool winforms)
+    {
+        var doc = XDocument.Load(file.FullName);
+        foreach (var item in doc.Root.Elements("data"))
         {
-            var doc = XDocument.Load(file.FullName);
-            foreach (var item in doc.Root.Elements("data"))
+            var prop = item.Attribute("name")?.Value;
+            var original = item.Element("value")?.Value;
+            if (prop == null || original == null || !Rules.IsTranslatable(winforms, prop, ref original, out _, out _))
             {
-                var prop = item.Attribute("name")?.Value;
-                var original = item.Element("value")?.Value;
-                if (prop == null || original == null || !Rules.IsTranslatable(winforms, prop, ref original, out _, out _))
-                {
-                    continue;
-                }
-                if (!Strings.ContainsKey(original))
-                {
-                    Strings[original] = new TranslatableString(original);
-                }
-                Strings[original].Context.Add($"{file.Name}${prop}$Message");
+                continue;
             }
+            if (!Strings.ContainsKey(original))
+            {
+                Strings[original] = new TranslatableString(original);
+            }
+            Strings[original].Context.Add($"{file.Name}${prop}$Message");
         }
+    }
 
-        public void Save(string path)
+    public void Save(string path)
+    {
+        using var writer = new StreamWriter(path);
+        writer.Write(HEADER);
+        writer.Write("\r\n\r\n");
+        foreach (var str in Strings.Values.OrderBy(x => x.Original, StringComparer.Ordinal))
         {
-            using var writer = new StreamWriter(path);
-            writer.Write(HEADER);
-            writer.Write("\r\n\r\n");
-            foreach (var str in Strings.Values.OrderBy(x => x.Original, StringComparer.Ordinal))
+            foreach (var context in str.Context.OrderBy(x => x))
             {
-                foreach (var context in str.Context.OrderBy(x => x))
-                {
-                    writer.Write($"#: {context}\r\n");
-                }
-                writer.Write($"msgid \"{str.Original.Replace("\"", "\\\"")}\"\r\n");
-                writer.Write($"msgstr \"\"\r\n");
-                writer.Write("\r\n");
+                writer.Write($"#: {context}\r\n");
             }
+            writer.Write($"msgid \"{str.Original.Replace("\"", "\\\"")}\"\r\n");
+            writer.Write($"msgstr \"\"\r\n");
+            writer.Write("\r\n");
         }
     }
 }

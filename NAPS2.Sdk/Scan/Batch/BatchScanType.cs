@@ -1,9 +1,8 @@
-﻿namespace NAPS2.Scan.Batch
+﻿namespace NAPS2.Scan.Batch;
+
+public enum BatchScanType
 {
-    public enum BatchScanType
-    {
-        Single,
-        MultipleWithPrompt,
-        MultipleWithDelay
-    }
+    Single,
+    MultipleWithPrompt,
+    MultipleWithDelay
 }

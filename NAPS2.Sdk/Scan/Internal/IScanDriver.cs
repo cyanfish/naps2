@@ -4,12 +4,11 @@ using System.Threading;
 using System.Threading.Tasks;
 using NAPS2.Images.Storage;
 
-namespace NAPS2.Scan.Internal
-{
-    internal interface IScanDriver
-    {
-        Task<List<ScanDevice>> GetDeviceList(ScanOptions options);
+namespace NAPS2.Scan.Internal;
 
-        Task Scan(ScanOptions options, CancellationToken cancelToken, IScanEvents scanEvents, Action<IImage> callback);
-    }
+internal interface IScanDriver
+{
+    Task<List<ScanDevice>> GetDeviceList(ScanOptions options);
+
+    Task Scan(ScanOptions options, CancellationToken cancelToken, IScanEvents scanEvents, Action<IImage> callback);
 }

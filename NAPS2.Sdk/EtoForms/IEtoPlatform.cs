@@ -1,7 +1,6 @@
-namespace NAPS2.EtoForms
+namespace NAPS2.EtoForms;
+
+public interface IEtoPlatform
 {
-    public interface IEtoPlatform
-    {
-        IListView<T> CreateListView<T>(ListViewBehavior<T> behavior);
-    }
+    IListView<T> CreateListView<T>(ListViewBehavior<T> behavior);
 }

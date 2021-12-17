@@ -1,11 +1,10 @@
-namespace NAPS2.ImportExport.Pdf
+namespace NAPS2.ImportExport.Pdf;
+
+public class PdfMetadata
 {
-    public class PdfMetadata
-    {
-        public string? Author { get; set; }
-        public string? Creator { get; set; }
-        public string? Keywords { get; set; }
-        public string? Subject { get; set; }
-        public string? Title { get; set; }
-    }
+    public string? Author { get; set; }
+    public string? Creator { get; set; }
+    public string? Keywords { get; set; }
+    public string? Subject { get; set; }
+    public string? Title { get; set; }
 }

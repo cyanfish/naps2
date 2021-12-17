@@ -1,9 +1,8 @@
-﻿namespace NAPS2.Scan
+﻿namespace NAPS2.Scan;
+
+public enum PaperSource
 {
-    public enum PaperSource
-    {
-        Flatbed,
-        Feeder,
-        Duplex
-    }
+    Flatbed,
+    Feeder,
+    Duplex
 }

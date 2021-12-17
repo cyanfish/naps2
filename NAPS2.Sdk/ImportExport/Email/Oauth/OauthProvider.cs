@@ -11,178 +11,177 @@ using NAPS2.Serialization;
 using NAPS2.Util;
 using Newtonsoft.Json.Linq;
 
-namespace NAPS2.ImportExport.Email.Oauth
+namespace NAPS2.ImportExport.Email.Oauth;
+
+public abstract class OauthProvider
 {
-    public abstract class OauthProvider
+    private static readonly int[] PortNumbers = { 50086, 53893, 58985, 49319, 50320 };
+
+    public abstract OauthToken? Token { get; }
+
+    public abstract string? User { get; }
+
+    public bool HasClientCreds => ClientCreds.ClientId != null;
+
+    protected abstract OauthClientCreds ClientCreds { get; }
+
+    protected abstract string CodeEndpoint { get; }
+
+    protected abstract string TokenEndpoint { get; }
+
+    protected abstract string Scope { get; }
+
+    public void AcquireToken(CancellationToken cancelToken)
     {
-        private static readonly int[] PortNumbers = { 50086, 53893, 58985, 49319, 50320 };
+        // Initialize state, port, and redirectUri
+        byte[] buffer = new byte[16];
+        SecureStorage.CryptoRandom.Value.GetBytes(buffer);
+        string state = string.Join("", buffer.Select(b => b.ToString("x")));
+        int port = GetUnusedPort();
+        var redirectUri = $"http://127.0.0.1:{port}/";
 
-        public abstract OauthToken? Token { get; }
+        // Listen on the redirect uri for the code
+        var listener = new HttpListener();
+        listener.Prefixes.Add(redirectUri);
+        listener.Start();
 
-        public abstract string? User { get; }
+        // Abort the listener if the user cancels
+        cancelToken.Register(() => listener.Abort());
+        cancelToken.ThrowIfCancellationRequested();
+        // TODO: Catch exception on abort
 
-        public bool HasClientCreds => ClientCreds.ClientId != null;
+        // Open the user interface (which will redirect to our localhost listener)
+        var url = $"{CodeEndpoint}?scope={Scope}&response_type=code&state={state}&redirect_uri={redirectUri}&client_id={ClientCreds.ClientId}";
+        Process.Start(url);
 
-        protected abstract OauthClientCreds ClientCreds { get; }
-
-        protected abstract string CodeEndpoint { get; }
-
-        protected abstract string TokenEndpoint { get; }
-
-        protected abstract string Scope { get; }
-
-        public void AcquireToken(CancellationToken cancelToken)
+        // Wait for the authorization code to be sent to the local socket
+        string code;
+        while (true)
         {
-            // Initialize state, port, and redirectUri
-            byte[] buffer = new byte[16];
-            SecureStorage.CryptoRandom.Value.GetBytes(buffer);
-            string state = string.Join("", buffer.Select(b => b.ToString("x")));
-            int port = GetUnusedPort();
-            var redirectUri = $"http://127.0.0.1:{port}/";
+            var ctx = listener.GetContext();
+            var queryString = ctx.Request.QueryString;
 
-            // Listen on the redirect uri for the code
-            var listener = new HttpListener();
-            listener.Prefixes.Add(redirectUri);
-            listener.Start();
+            string responseString = "<script>location.href = 'about:blank';</script>";
+            byte[] responseBytes = Encoding.UTF8.GetBytes(responseString);
+            var response = ctx.Response;
+            response.ContentLength64 = responseBytes.Length;
+            response.OutputStream.Write(responseBytes, 0, responseBytes.Length);
+            response.OutputStream.Close();
 
-            // Abort the listener if the user cancels
-            cancelToken.Register(() => listener.Abort());
-            cancelToken.ThrowIfCancellationRequested();
-            // TODO: Catch exception on abort
-
-            // Open the user interface (which will redirect to our localhost listener)
-            var url = $"{CodeEndpoint}?scope={Scope}&response_type=code&state={state}&redirect_uri={redirectUri}&client_id={ClientCreds.ClientId}";
-            Process.Start(url);
-
-            // Wait for the authorization code to be sent to the local socket
-            string code;
-            while (true)
+            // Validate the state (standard oauth2 security)
+            string requestState = queryString.Get("state");
+            if (requestState == state)
             {
-                var ctx = listener.GetContext();
-                var queryString = ctx.Request.QueryString;
-
-                string responseString = "<script>location.href = 'about:blank';</script>";
-                byte[] responseBytes = Encoding.UTF8.GetBytes(responseString);
-                var response = ctx.Response;
-                response.ContentLength64 = responseBytes.Length;
-                response.OutputStream.Write(responseBytes, 0, responseBytes.Length);
-                response.OutputStream.Close();
-
-                // Validate the state (standard oauth2 security)
-                string requestState = queryString.Get("state");
-                if (requestState == state)
-                {
-                    // Yay, we got an authorization code
-                    code = queryString.Get("code");
-                    break;
-                }
+                // Yay, we got an authorization code
+                code = queryString.Get("code");
+                break;
             }
-            listener.Stop();
-            cancelToken.ThrowIfCancellationRequested();
-
-            // Trade the code in for a token
-            var resp = Post(TokenEndpoint, new NameValueCollection
-            {
-                {"code", code},
-                {"client_id", ClientCreds.ClientId},
-                {"client_secret", ClientCreds.ClientSecret},
-                {"redirect_uri", redirectUri},
-                {"grant_type", "authorization_code"}
-            });
-            SaveToken(new OauthToken
-            {
-                AccessToken = resp.Value<string>("access_token"),
-                RefreshToken = resp.Value<string>("refresh_token"),
-                Expiry = DateTime.Now.AddSeconds(resp.Value<int>("expires_in"))
-            }, false);
         }
+        listener.Stop();
+        cancelToken.ThrowIfCancellationRequested();
 
-        public void RefreshToken()
+        // Trade the code in for a token
+        var resp = Post(TokenEndpoint, new NameValueCollection
         {
-            var resp = Post(TokenEndpoint, new NameValueCollection
-            {
-                {"refresh_token", Token.RefreshToken},
-                {"client_id", ClientCreds.ClientId},
-                {"client_secret", ClientCreds.ClientSecret},
-                {"grant_type", "refresh_token"}
-            });
-            // TODO: Handle failure
-            SaveToken(new OauthToken
-            {
-                AccessToken = resp.Value<string>("access_token"),
-                RefreshToken = Token.RefreshToken,
-                Expiry = DateTime.Now.AddSeconds(resp.Value<int>("expires_in"))
-            }, true);
-        }
+            {"code", code},
+            {"client_id", ClientCreds.ClientId},
+            {"client_secret", ClientCreds.ClientSecret},
+            {"redirect_uri", redirectUri},
+            {"grant_type", "authorization_code"}
+        });
+        SaveToken(new OauthToken
+        {
+            AccessToken = resp.Value<string>("access_token"),
+            RefreshToken = resp.Value<string>("refresh_token"),
+            Expiry = DateTime.Now.AddSeconds(resp.Value<int>("expires_in"))
+        }, false);
+    }
 
-        private static int GetUnusedPort()
+    public void RefreshToken()
+    {
+        var resp = Post(TokenEndpoint, new NameValueCollection
         {
-            foreach (var port in PortNumbers)
+            {"refresh_token", Token.RefreshToken},
+            {"client_id", ClientCreds.ClientId},
+            {"client_secret", ClientCreds.ClientSecret},
+            {"grant_type", "refresh_token"}
+        });
+        // TODO: Handle failure
+        SaveToken(new OauthToken
+        {
+            AccessToken = resp.Value<string>("access_token"),
+            RefreshToken = Token.RefreshToken,
+            Expiry = DateTime.Now.AddSeconds(resp.Value<int>("expires_in"))
+        }, true);
+    }
+
+    private static int GetUnusedPort()
+    {
+        foreach (var port in PortNumbers)
+        {
+            try
             {
-                try
-                {
-                    var listener = new TcpListener(IPAddress.Any, port);
-                    listener.Start();
-                    listener.Stop();
-                    return port;
-                }
-                catch (SocketException)
-                {
-                }
+                var listener = new TcpListener(IPAddress.Any, port);
+                listener.Start();
+                listener.Stop();
+                return port;
             }
-            throw new InvalidOperationException("No available port");
-        }
-
-        protected abstract void SaveToken(OauthToken token, bool refresh);
-
-        protected JObject Get(string url)
-        {
-            using var client = new WebClient();
-            string response = client.DownloadString(url);
-            return JObject.Parse(response);
-        }
-
-        protected JObject GetAuthorized(string url)
-        {
-            using var client = AuthorizedClient();
-            string response = client.DownloadString(url);
-            return JObject.Parse(response);
-        }
-
-        protected JObject Post(string url, NameValueCollection values)
-        {
-            using var client = new WebClient();
-            string response = Encoding.UTF8.GetString(client.UploadValues(url, "POST", values));
-            return JObject.Parse(response);
-        }
-
-        protected async Task<JObject> PostAuthorized(string url, string body, string contentType, ProgressHandler progressCallback,
-            CancellationToken cancelToken = default)
-        {
-            using var client = AuthorizedClient();
-            client.Headers.Add("Content-Type", contentType);
-            // TODO: Apparently upload progress doesn't work.
-            // It tracks progress to an internal buffer.
-            // https://stackoverflow.com/questions/8181114/uploading-http-progress-tracking
-            // Maybe using HttpClient would fix it.
-            //client.AddUploadProgressHandler(progressCallback);
-            string response = await client.UploadStringTaskAsync(url, "POST", body, cancelToken);
-            return JObject.Parse(response);
-        }
-
-        private WebClient AuthorizedClient()
-        {
-            var client = new WebClient();
-            var token = Token;
-            if (!string.IsNullOrEmpty(token.AccessToken))
+            catch (SocketException)
             {
-                if (token.Expiry < DateTime.Now + TimeSpan.FromMinutes(10))
-                {
-                    RefreshToken();
-                }
-                client.Headers.Add("Authorization", $"Bearer {token.AccessToken}");
             }
-            return client;
         }
+        throw new InvalidOperationException("No available port");
+    }
+
+    protected abstract void SaveToken(OauthToken token, bool refresh);
+
+    protected JObject Get(string url)
+    {
+        using var client = new WebClient();
+        string response = client.DownloadString(url);
+        return JObject.Parse(response);
+    }
+
+    protected JObject GetAuthorized(string url)
+    {
+        using var client = AuthorizedClient();
+        string response = client.DownloadString(url);
+        return JObject.Parse(response);
+    }
+
+    protected JObject Post(string url, NameValueCollection values)
+    {
+        using var client = new WebClient();
+        string response = Encoding.UTF8.GetString(client.UploadValues(url, "POST", values));
+        return JObject.Parse(response);
+    }
+
+    protected async Task<JObject> PostAuthorized(string url, string body, string contentType, ProgressHandler progressCallback,
+        CancellationToken cancelToken = default)
+    {
+        using var client = AuthorizedClient();
+        client.Headers.Add("Content-Type", contentType);
+        // TODO: Apparently upload progress doesn't work.
+        // It tracks progress to an internal buffer.
+        // https://stackoverflow.com/questions/8181114/uploading-http-progress-tracking
+        // Maybe using HttpClient would fix it.
+        //client.AddUploadProgressHandler(progressCallback);
+        string response = await client.UploadStringTaskAsync(url, "POST", body, cancelToken);
+        return JObject.Parse(response);
+    }
+
+    private WebClient AuthorizedClient()
+    {
+        var client = new WebClient();
+        var token = Token;
+        if (!string.IsNullOrEmpty(token.AccessToken))
+        {
+            if (token.Expiry < DateTime.Now + TimeSpan.FromMinutes(10))
+            {
+                RefreshToken();
+            }
+            client.Headers.Add("Authorization", $"Bearer {token.AccessToken}");
+        }
+        return client;
     }
 }

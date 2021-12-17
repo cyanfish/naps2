@@ -1,9 +1,8 @@
-﻿namespace NAPS2.ImportExport.Email
+﻿namespace NAPS2.ImportExport.Email;
+
+public enum EmailRecipientType
 {
-    public enum EmailRecipientType
-    {
-        To,
-        Cc,
-        Bcc
-    }
+    To,
+    Cc,
+    Bcc
 }

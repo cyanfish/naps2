@@ -1,23 +1,22 @@
-﻿namespace NAPS2.Platform
+﻿namespace NAPS2.Platform;
+
+public interface IRuntimeCompat
 {
-    public interface IRuntimeCompat
-    {
-        bool UseToolStripRenderHack { get; }
+    bool UseToolStripRenderHack { get; }
 
-        bool SetToolbarFont { get; }
+    bool SetToolbarFont { get; }
 
-        bool IsImagePaddingSupported { get; }
+    bool IsImagePaddingSupported { get; }
 
-        bool IsToolbarTextboxSupported { get; }
+    bool IsToolbarTextboxSupported { get; }
 
-        bool SetImageListSizeOnImageCollection { get; }
+    bool SetImageListSizeOnImageCollection { get; }
         
-        bool UseSpaceInListViewItem { get; }
+    bool UseSpaceInListViewItem { get; }
 
-        bool RefreshListViewAfterChange { get; }
+    bool RefreshListViewAfterChange { get; }
 
-        string? ExeRunner { get; }
+    string? ExeRunner { get; }
 
-        bool UseWorker { get; }
-    }
+    bool UseWorker { get; }
 }

@@ -1,51 +1,50 @@
 ﻿using System;
 
-namespace NAPS2.Util
+namespace NAPS2.Util;
+
+public class DeferredAction
 {
-    public class DeferredAction
+    private readonly Action _action;
+    private int _counter;
+
+    public DeferredAction(Action action)
     {
-        private readonly Action _action;
-        private int _counter;
+        _action = action;
+    }
 
-        public DeferredAction(Action action)
+    public bool IsDeferred => _counter > 0;
+
+    public IDisposable Defer()
+    {
+        return new DeferSaveObject(this);
+    }
+
+    private class DeferSaveObject : IDisposable
+    {
+        private readonly DeferredAction _deferredAction;
+
+        private bool _disposed;
+
+        public DeferSaveObject(DeferredAction deferredAction)
         {
-            _action = action;
-        }
-
-        public bool IsDeferred => _counter > 0;
-
-        public IDisposable Defer()
-        {
-            return new DeferSaveObject(this);
-        }
-
-        private class DeferSaveObject : IDisposable
-        {
-            private readonly DeferredAction _deferredAction;
-
-            private bool _disposed;
-
-            public DeferSaveObject(DeferredAction deferredAction)
+            _deferredAction = deferredAction;
+            lock (deferredAction)
             {
-                _deferredAction = deferredAction;
-                lock (deferredAction)
-                {
-                    deferredAction._counter += 1;
-                }
+                deferredAction._counter += 1;
             }
+        }
 
-            public void Dispose()
+        public void Dispose()
+        {
+            lock (_deferredAction)
             {
-                lock (_deferredAction)
-                {
-                    if (_disposed) return;
-                    _disposed = true;
+                if (_disposed) return;
+                _disposed = true;
 
-                    _deferredAction._counter -= 1;
-                    if (!_deferredAction.IsDeferred)
-                    {
-                        _deferredAction._action();
-                    }
+                _deferredAction._counter -= 1;
+                if (!_deferredAction.IsDeferred)
+                {
+                    _deferredAction._action();
                 }
             }
         }

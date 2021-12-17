@@ -1,9 +1,8 @@
-﻿namespace NAPS2.Scan.Batch
+﻿namespace NAPS2.Scan.Batch;
+
+public enum BatchOutputType
 {
-    public enum BatchOutputType
-    {
-        Load,
-        SingleFile,
-        MultipleFiles
-    }
+    Load,
+    SingleFile,
+    MultipleFiles
 }

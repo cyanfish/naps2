@@ -2,35 +2,34 @@
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace NAPS2.Operation
+namespace NAPS2.Operation;
+
+/// <summary>
+/// A representation of a long-running operation with progress reporting and cancellation.
+/// </summary>
+public interface IOperation
 {
-    /// <summary>
-    /// A representation of a long-running operation with progress reporting and cancellation.
-    /// </summary>
-    public interface IOperation
-    {
-        string? ProgressTitle { get; }
+    string? ProgressTitle { get; }
 
-        bool AllowCancel { get; }
+    bool AllowCancel { get; }
 
-        bool AllowBackground { get; }
+    bool AllowBackground { get; }
 
-        bool SkipExitPrompt { get; }
+    bool SkipExitPrompt { get; }
 
-        OperationStatus? Status { get; }
+    OperationStatus? Status { get; }
 
-        Task<bool>? Success { get; }
+    Task<bool>? Success { get; }
 
-        bool IsFinished { get; }
+    bool IsFinished { get; }
 
-        void Wait(CancellationToken cancelToken = default);
+    void Wait(CancellationToken cancelToken = default);
 
-        void Cancel();
+    void Cancel();
 
-        event EventHandler StatusChanged;
+    event EventHandler StatusChanged;
 
-        event EventHandler Finished;
+    event EventHandler Finished;
 
-        event EventHandler<OperationErrorEventArgs> Error;
-    }
+    event EventHandler<OperationErrorEventArgs> Error;
 }

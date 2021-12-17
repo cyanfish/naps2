@@ -2,57 +2,57 @@
 using NAPS2.Scan.Sane;
 using Xunit;
 
-namespace NAPS2.Sdk.Tests.Scan
+namespace NAPS2.Sdk.Tests.Scan;
+
+public class SaneOptionParserTests
 {
-    public class SaneOptionParserTests
+    [Fact]
+    public void Parse()
     {
-        [Fact]
-        public void Parse()
+        var parser = new SaneOptionParser();
+        var options = parser.Parse(GetStreamReader(TEST_OUTPUT));
+
+        Assert.Equal(options.Keys, new []
         {
-            var parser = new SaneOptionParser();
-            var options = parser.Parse(GetStreamReader(TEST_OUTPUT));
+            "--resolution",
+            "--mode",
+            "--source",
+            "--button-controlled",
+            "--custom-gamma",
+            "--gamma-table",
+            "--gamma",
+            "-l",
+            "-t",
+            "-x",
+            "-y",
+            "--button-update",
+            "--threshold",
+            "--threshold-curve"
+        });
+        Assert.Equal(options["--resolution"].WordList, new decimal[] { 75, 150, 300, 600, 1200 });
+        Assert.Equal(options["--resolution"].Unit, SaneUnit.Dpi);
+        Assert.Equal(options["--mode"].StringList, new [] { "Color", "Gray", "Lineart" });
+        Assert.Equal(options["--mode"].Capabilities & SaneCapabilities.Automatic, SaneCapabilities.Automatic);
+        Assert.Equal(options["-x"].Type, SaneValueType.Numeric);
+        Assert.Equal(options["-x"].Range.Min, 0);
+        Assert.Equal(options["-x"].Range.Max, decimal.Parse("216.069"));
+        Assert.Equal(options["-x"].CurrentNumericValue, decimal.Parse("216.069"));
+        Assert.Equal(options["--source"].Desc, "Selects the scan source (such as a document-feeder). Set source before mode and resolution. Resets mode and resolution to auto values.");
+        Assert.Equal(options["--gamma-table"].Type, SaneValueType.Group);
+        Assert.Equal(options["--button-update"].Type, SaneValueType.Button);
+    }
 
-            Assert.Equal(options.Keys, new []
-            {
-                "--resolution",
-                "--mode",
-                "--source",
-                "--button-controlled",
-                "--custom-gamma",
-                "--gamma-table",
-                "--gamma",
-                "-l",
-                "-t",
-                "-x",
-                "-y",
-                "--button-update",
-                "--threshold",
-                "--threshold-curve"
-            });
-            Assert.Equal(options["--resolution"].WordList, new decimal[] { 75, 150, 300, 600, 1200 });
-            Assert.Equal(options["--resolution"].Unit, SaneUnit.Dpi);
-            Assert.Equal(options["--mode"].StringList, new [] { "Color", "Gray", "Lineart" });
-            Assert.Equal(options["--mode"].Capabilities & SaneCapabilities.Automatic, SaneCapabilities.Automatic);
-            Assert.Equal(options["-x"].Type, SaneValueType.Numeric);
-            Assert.Equal(options["-x"].Range.Min, 0);
-            Assert.Equal(options["-x"].Range.Max, decimal.Parse("216.069"));
-            Assert.Equal(options["-x"].CurrentNumericValue, decimal.Parse("216.069"));
-            Assert.Equal(options["--source"].Desc, "Selects the scan source (such as a document-feeder). Set source before mode and resolution. Resets mode and resolution to auto values.");
-            Assert.Equal(options["--gamma-table"].Type, SaneValueType.Group);
-            Assert.Equal(options["--button-update"].Type, SaneValueType.Button);
-        }
+    private StreamReader GetStreamReader(string str)
+    {
+        var stream = new MemoryStream();
+        var writer = new StreamWriter(stream);
+        writer.Write(str);
+        writer.Flush();
+        stream.Seek(0, SeekOrigin.Begin);
+        return new StreamReader(stream);
+    }
 
-        private StreamReader GetStreamReader(string str)
-        {
-            var stream = new MemoryStream();
-            var writer = new StreamWriter(stream);
-            writer.Write(str);
-            writer.Flush();
-            stream.Seek(0, SeekOrigin.Begin);
-            return new StreamReader(stream);
-        }
-
-        private const string TEST_OUTPUT = @"Usage: scanimage [OPTION]...
+    private const string TEST_OUTPUT = @"Usage: scanimage [OPTION]...
 
 Start image acquisition on a scanner device and write image data to
 standard output.
@@ -131,5 +131,4 @@ Type ``scanimage --help -d DEVICE'' to get list of all options for DEVICE.
 List of available devices:
     pixma:23B30942
 ";
-    }
 }

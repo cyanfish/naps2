@@ -2,26 +2,25 @@
 using NAPS2.Dependencies;
 using NAPS2.Lang.Resources;
 
-namespace NAPS2.WinForms
+namespace NAPS2.WinForms;
+
+public class WinFormsComponentInstallPrompt : IComponentInstallPrompt
 {
-    public class WinFormsComponentInstallPrompt : IComponentInstallPrompt
+    private readonly IFormFactory _formFactory;
+
+    public WinFormsComponentInstallPrompt(IFormFactory formFactory)
     {
-        private readonly IFormFactory _formFactory;
+        _formFactory = formFactory;
+    }
 
-        public WinFormsComponentInstallPrompt(IFormFactory formFactory)
+    public bool PromptToInstall(ExternalComponent component, string promptText)
+    {
+        if (MessageBox.Show(promptText, MiscResources.DownloadNeeded, MessageBoxButtons.YesNo) == DialogResult.Yes)
         {
-            _formFactory = formFactory;
+            var progressForm = _formFactory.Create<FDownloadProgress>();
+            progressForm.QueueFile(component);
+            progressForm.ShowDialog();
         }
-
-        public bool PromptToInstall(ExternalComponent component, string promptText)
-        {
-            if (MessageBox.Show(promptText, MiscResources.DownloadNeeded, MessageBoxButtons.YesNo) == DialogResult.Yes)
-            {
-                var progressForm = _formFactory.Create<FDownloadProgress>();
-                progressForm.QueueFile(component);
-                progressForm.ShowDialog();
-            }
-            return component.IsInstalled;
-        }
+        return component.IsInstalled;
     }
 }

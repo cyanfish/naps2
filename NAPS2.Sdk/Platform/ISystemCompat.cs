@@ -1,17 +1,16 @@
-﻿namespace NAPS2.Platform
+﻿namespace NAPS2.Platform;
+
+public interface ISystemCompat
 {
-    public interface ISystemCompat
-    {
-        bool IsWiaDriverSupported { get; }
+    bool IsWiaDriverSupported { get; }
 
-        bool IsTwainDriverSupported { get; }
+    bool IsTwainDriverSupported { get; }
 
-        bool IsSaneDriverSupported { get; }
+    bool IsSaneDriverSupported { get; }
 
-        bool CanUseWin32 { get; }
+    bool CanUseWin32 { get; }
 
-        bool UseUnixFontResolver { get; }
+    bool UseUnixFontResolver { get; }
 
-        bool IsWia20Supported { get; }
-    }
+    bool IsWia20Supported { get; }
 }

@@ -2,41 +2,40 @@
 using System.Globalization;
 using System.IO;
 
-namespace NAPS2.Images.Storage
+namespace NAPS2.Images.Storage;
+
+public class FileStorageManager : IDisposable
 {
-    public class FileStorageManager : IDisposable
+    private readonly string _prefix = Path.GetRandomFileName();
+    private int _fileNumber;
+        
+    public FileStorageManager() : this(Paths.Temp)
     {
-        private readonly string _prefix = Path.GetRandomFileName();
-        private int _fileNumber;
+    }
+
+    public FileStorageManager(string folderPath)
+    {
+        FolderPath = folderPath;
+    }
+
+    protected string FolderPath { get; }
         
-        public FileStorageManager() : this(Paths.Temp)
+    public virtual string NextFilePath()
+    {
+        lock (this)
         {
+            string fileName = $"{_prefix}.{(++_fileNumber).ToString("D5", CultureInfo.InvariantCulture)}";
+            return Path.Combine(FolderPath, fileName);
         }
+    }
 
-        public FileStorageManager(string folderPath)
-        {
-            FolderPath = folderPath;
-        }
+    protected virtual void Dispose(bool disposing)
+    {
+    }
 
-        protected string FolderPath { get; }
-        
-        public virtual string NextFilePath()
-        {
-            lock (this)
-            {
-                string fileName = $"{_prefix}.{(++_fileNumber).ToString("D5", CultureInfo.InvariantCulture)}";
-                return Path.Combine(FolderPath, fileName);
-            }
-        }
-
-        protected virtual void Dispose(bool disposing)
-        {
-        }
-
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
+    public void Dispose()
+    {
+        Dispose(true);
+        GC.SuppressFinalize(this);
     }
 }

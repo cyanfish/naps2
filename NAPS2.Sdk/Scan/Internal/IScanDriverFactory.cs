@@ -1,7 +1,6 @@
-﻿namespace NAPS2.Scan.Internal
+﻿namespace NAPS2.Scan.Internal;
+
+internal interface IScanDriverFactory
 {
-    internal interface IScanDriverFactory
-    {
-        IScanDriver Create(ScanOptions options);
-    }
+    IScanDriver Create(ScanOptions options);
 }

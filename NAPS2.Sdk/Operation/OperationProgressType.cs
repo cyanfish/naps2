@@ -1,10 +1,9 @@
-﻿namespace NAPS2.Operation
+﻿namespace NAPS2.Operation;
+
+public enum OperationProgressType
 {
-    public enum OperationProgressType
-    {
-        Default,
-        None,
-        BarOnly,
-        MB
-    }
+    Default,
+    None,
+    BarOnly,
+    MB
 }

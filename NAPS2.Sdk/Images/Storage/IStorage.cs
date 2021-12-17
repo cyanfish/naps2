@@ -1,8 +1,7 @@
 ﻿using System;
 
-namespace NAPS2.Images.Storage
+namespace NAPS2.Images.Storage;
+
+public interface IStorage : IDisposable
 {
-    public interface IStorage : IDisposable
-    {
-    }
 }

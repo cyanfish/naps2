@@ -1,42 +1,41 @@
 using Eto.Forms;
 
-namespace NAPS2.EtoForms
+namespace NAPS2.EtoForms;
+
+public class LayoutRow : LayoutElement
 {
-    public class LayoutRow : LayoutElement
+    private readonly LayoutElement[] _children;
+
+    public LayoutRow(LayoutElement[] children)
     {
-        private readonly LayoutElement[] _children;
-
-        public LayoutRow(LayoutElement[] children)
-        {
-            _children = children;
-        }
+        _children = children;
+    }
         
-        public LayoutRow(LayoutRow original, bool? yScale = null, bool? aligned = null)
+    public LayoutRow(LayoutRow original, bool? yScale = null, bool? aligned = null)
+    {
+        _children = original._children;
+        YScale = yScale ?? original.YScale;
+        Aligned = aligned ?? original.Aligned;
+    }
+
+    private bool YScale { get; }
+    private bool Aligned { get; }
+
+    public override void AddTo(DynamicLayout layout)
+    {
+        if (!Aligned)
         {
-            _children = original._children;
-            YScale = yScale ?? original.YScale;
-            Aligned = aligned ?? original.Aligned;
+            layout.BeginVertical();
         }
-
-        private bool YScale { get; }
-        private bool Aligned { get; }
-
-        public override void AddTo(DynamicLayout layout)
+        layout.BeginHorizontal(yscale: YScale);
+        foreach (var child in _children)
         {
-            if (!Aligned)
-            {
-                layout.BeginVertical();
-            }
-            layout.BeginHorizontal(yscale: YScale);
-            foreach (var child in _children)
-            {
-                child.AddTo(layout);
-            }
-            layout.EndHorizontal();
-            if (!Aligned)
-            {
-                layout.EndVertical();
-            }
+            child.AddTo(layout);
+        }
+        layout.EndHorizontal();
+        if (!Aligned)
+        {
+            layout.EndVertical();
         }
     }
 }

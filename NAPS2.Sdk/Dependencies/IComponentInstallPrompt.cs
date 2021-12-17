@@ -1,7 +1,6 @@
-﻿namespace NAPS2.Dependencies
+﻿namespace NAPS2.Dependencies;
+
+public interface IComponentInstallPrompt
 {
-    public interface IComponentInstallPrompt
-    {
-        bool PromptToInstall(ExternalComponent component, string promptText);
-    }
+    bool PromptToInstall(ExternalComponent component, string promptText);
 }

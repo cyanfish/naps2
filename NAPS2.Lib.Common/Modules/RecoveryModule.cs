@@ -3,14 +3,13 @@ using NAPS2.Images.Storage;
 using Ninject;
 using Ninject.Modules;
 
-namespace NAPS2.Modules
+namespace NAPS2.Modules;
+
+public class RecoveryModule : NinjectModule
 {
-    public class RecoveryModule : NinjectModule
+    public override void Load()
     {
-        public override void Load()
-        {
-            string recoveryFolderPath = Path.Combine(Paths.Recovery, Path.GetRandomFileName());
-            Kernel.Get<ImageContext>().UseRecovery(recoveryFolderPath);
-        }
+        string recoveryFolderPath = Path.Combine(Paths.Recovery, Path.GetRandomFileName());
+        Kernel.Get<ImageContext>().UseRecovery(recoveryFolderPath);
     }
 }

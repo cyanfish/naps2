@@ -1,6 +1,5 @@
-﻿namespace NAPS2.ImportExport.Images
+﻿namespace NAPS2.ImportExport.Images;
+
+public interface IImageImporter : IScannedImageImporter
 {
-    public interface IImageImporter : IScannedImageImporter
-    {
-    }
 }

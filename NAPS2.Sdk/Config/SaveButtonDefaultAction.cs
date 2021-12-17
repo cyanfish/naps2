@@ -1,10 +1,9 @@
-﻿namespace NAPS2.Config
+﻿namespace NAPS2.Config;
+
+public enum SaveButtonDefaultAction
 {
-    public enum SaveButtonDefaultAction
-    {
-        SaveAll,
-        SaveSelected,
-        AlwaysPrompt,
-        PromptIfSelected
-    }
+    SaveAll,
+    SaveSelected,
+    AlwaysPrompt,
+    PromptIfSelected
 }

@@ -5,10 +5,9 @@ using NAPS2.Config;
 using NAPS2.Images;
 using NAPS2.WinForms;
 
-namespace NAPS2.Scan.Batch
+namespace NAPS2.Scan.Batch;
+
+public interface IBatchScanPerformer
 {
-    public interface IBatchScanPerformer
-    {
-        Task PerformBatchScan(IConfigProvider<BatchSettings> settings, FormBase batchForm, Action<ScannedImage> imageCallback, Action<string> progressCallback, CancellationToken cancelToken);
-    }
+    Task PerformBatchScan(IConfigProvider<BatchSettings> settings, FormBase batchForm, Action<ScannedImage> imageCallback, Action<string> progressCallback, CancellationToken cancelToken);
 }

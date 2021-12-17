@@ -1,9 +1,8 @@
-﻿namespace NAPS2.Config
+﻿namespace NAPS2.Config;
+
+public enum OcrState
 {
-    public enum OcrState
-    {
-        UserConfig,
-        Enabled,
-        Disabled
-    }
+    UserConfig,
+    Enabled,
+    Disabled
 }

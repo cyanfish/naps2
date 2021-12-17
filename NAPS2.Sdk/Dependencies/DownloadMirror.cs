@@ -1,21 +1,20 @@
-﻿namespace NAPS2.Dependencies
+﻿namespace NAPS2.Dependencies;
+
+public class DownloadMirror
 {
-    public class DownloadMirror
+    private readonly PlatformSupport _platformSupport;
+    private readonly string _urlFormat;
+
+    public DownloadMirror(PlatformSupport platformSupport, string urlFormat)
     {
-        private readonly PlatformSupport _platformSupport;
-        private readonly string _urlFormat;
+        _platformSupport = platformSupport;
+        _urlFormat = urlFormat;
+    }
 
-        public DownloadMirror(PlatformSupport platformSupport, string urlFormat)
-        {
-            _platformSupport = platformSupport;
-            _urlFormat = urlFormat;
-        }
+    public bool IsSupported => _platformSupport.Validate();
 
-        public bool IsSupported => _platformSupport.Validate();
-
-        public string Url(string subpath)
-        {
-            return string.Format(_urlFormat, subpath);
-        }
+    public string Url(string subpath)
+    {
+        return string.Format(_urlFormat, subpath);
     }
 }

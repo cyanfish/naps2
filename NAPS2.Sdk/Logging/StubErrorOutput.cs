@@ -1,19 +1,18 @@
 ﻿using System;
 
-namespace NAPS2.Logging
+namespace NAPS2.Logging;
+
+public class StubErrorOutput : ErrorOutput
 {
-    public class StubErrorOutput : ErrorOutput
+    public override void DisplayError(string errorMessage)
     {
-        public override void DisplayError(string errorMessage)
-        {
-        }
+    }
 
-        public override void DisplayError(string errorMessage, string details)
-        {
-        }
+    public override void DisplayError(string errorMessage, string details)
+    {
+    }
 
-        public override void DisplayError(string errorMessage, Exception exception)
-        {
-        }
+    public override void DisplayError(string errorMessage, Exception exception)
+    {
     }
 }

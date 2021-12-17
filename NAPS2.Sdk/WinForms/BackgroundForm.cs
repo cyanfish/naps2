@@ -1,27 +1,26 @@
 ﻿using System.Windows.Forms;
 
-namespace NAPS2.WinForms
-{
-    /// <summary>
-    /// A basic implementation of an invisible form.
-    /// </summary>
-    public class BackgroundForm : FormBase
-    {
-        public BackgroundForm()
-        {
-            ShowInTaskbar = false;
-            FormBorderStyle = FormBorderStyle.FixedToolWindow;
-            WindowState = FormWindowState.Minimized;
-        }
+namespace NAPS2.WinForms;
 
-        protected override void SetVisibleCore(bool value)
+/// <summary>
+/// A basic implementation of an invisible form.
+/// </summary>
+public class BackgroundForm : FormBase
+{
+    public BackgroundForm()
+    {
+        ShowInTaskbar = false;
+        FormBorderStyle = FormBorderStyle.FixedToolWindow;
+        WindowState = FormWindowState.Minimized;
+    }
+
+    protected override void SetVisibleCore(bool value)
+    {
+        if (!IsHandleCreated)
         {
-            if (!IsHandleCreated)
-            {
-                CreateHandle();
-                value = false;
-            }
-            base.SetVisibleCore(value);
+            CreateHandle();
+            value = false;
         }
+        base.SetVisibleCore(value);
     }
 }

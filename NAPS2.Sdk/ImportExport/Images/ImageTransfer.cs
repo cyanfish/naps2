@@ -5,26 +5,25 @@ using NAPS2.Images;
 using NAPS2.Images.Storage;
 using NAPS2.Serialization;
 
-namespace NAPS2.ImportExport.Images
+namespace NAPS2.ImportExport.Images;
+
+public class ImageTransfer : TransferHelper<IEnumerable<ScannedImage>, ImageTransferData>
 {
-    public class ImageTransfer : TransferHelper<IEnumerable<ScannedImage>, ImageTransferData>
+    private readonly ImageContext _imageContext;
+
+    public ImageTransfer(ImageContext imageContext)
     {
-        private readonly ImageContext _imageContext;
+        _imageContext = imageContext;
+    }
 
-        public ImageTransfer(ImageContext imageContext)
+    protected override ImageTransferData AsData(IEnumerable<ScannedImage> images)
+    {
+        var transfer = new ImageTransferData
         {
-            _imageContext = imageContext;
-        }
-
-        protected override ImageTransferData AsData(IEnumerable<ScannedImage> images)
-        {
-            var transfer = new ImageTransferData
-            {
-                ProcessId = Process.GetCurrentProcess().Id
-            };
-            var serializedImages = images.Select(x => SerializedImageHelper.Serialize(_imageContext, (ScannedImage) x, new SerializedImageHelper.SerializeOptions()));
-            transfer.SerializedImages.AddRange(serializedImages);
-            return transfer;
-        }
+            ProcessId = Process.GetCurrentProcess().Id
+        };
+        var serializedImages = images.Select(x => SerializedImageHelper.Serialize(_imageContext, (ScannedImage) x, new SerializedImageHelper.SerializeOptions()));
+        transfer.SerializedImages.AddRange(serializedImages);
+        return transfer;
     }
 }

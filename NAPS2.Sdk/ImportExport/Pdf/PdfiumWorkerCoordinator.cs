@@ -3,28 +3,27 @@ using System.IO;
 using NAPS2.Images.Storage;
 using NAPS2.Remoting.Worker;
 
-namespace NAPS2.ImportExport.Pdf
+namespace NAPS2.ImportExport.Pdf;
+
+public class PdfiumWorkerCoordinator : IPdfRenderer
 {
-    public class PdfiumWorkerCoordinator : IPdfRenderer
+    private readonly ImageContext _imageContext;
+    private readonly WorkerPool _workerPool;
+
+    public PdfiumWorkerCoordinator(ImageContext imageContext, WorkerPool workerPool)
     {
-        private readonly ImageContext _imageContext;
-        private readonly WorkerPool _workerPool;
+        _imageContext = imageContext;
+        _workerPool = workerPool;
+    }
 
-        public PdfiumWorkerCoordinator(ImageContext imageContext, WorkerPool workerPool)
+    public IEnumerable<IImage> Render(string path, float dpi)
+    {
+        // TODO: Only use worker on windows? Or what... 
+        var image = _workerPool.Use(worker =>
         {
-            _imageContext = imageContext;
-            _workerPool = workerPool;
-        }
-
-        public IEnumerable<IImage> Render(string path, float dpi)
-        {
-            // TODO: Only use worker on windows? Or what... 
-            var image = _workerPool.Use(worker =>
-            {
-                var imageStream = new MemoryStream(worker.Service.RenderPdf(path, dpi));
-                return _imageContext.ImageFactory.Decode(imageStream, "");
-            });
-            return new[] { image };
-        }
+            var imageStream = new MemoryStream(worker.Service.RenderPdf(path, dpi));
+            return _imageContext.ImageFactory.Decode(imageStream, "");
+        });
+        return new[] { image };
     }
 }

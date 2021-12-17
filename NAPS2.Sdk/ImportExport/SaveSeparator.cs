@@ -1,10 +1,9 @@
-﻿namespace NAPS2.ImportExport
+﻿namespace NAPS2.ImportExport;
+
+public enum SaveSeparator
 {
-    public enum SaveSeparator
-    {
-        None,
-        FilePerPage,
-        FilePerScan,
-        PatchT
-    }
+    None,
+    FilePerPage,
+    FilePerScan,
+    PatchT
 }

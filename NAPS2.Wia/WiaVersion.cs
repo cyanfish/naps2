@@ -1,9 +1,8 @@
-﻿namespace NAPS2.Wia
+﻿namespace NAPS2.Wia;
+
+public enum WiaVersion
 {
-    public enum WiaVersion
-    {
-        Default,
-        Wia10,
-        Wia20
-    }
+    Default,
+    Wia10,
+    Wia20
 }

@@ -1,22 +1,21 @@
 ﻿
 // ReSharper disable AutoPropertyCanBeMadeGetOnly.Local
 
-namespace NAPS2.Images.Transforms
+namespace NAPS2.Images.Transforms;
+
+public class ScaleTransform : Transform
 {
-    public class ScaleTransform : Transform
+    public ScaleTransform()
     {
-        public ScaleTransform()
-        {
-            ScaleFactor = 1.0;
-        }
-
-        public ScaleTransform(double scaleFactor)
-        {
-            ScaleFactor = scaleFactor;
-        }
-
-        public double ScaleFactor { get; private set; }
-
-        public override bool IsNull => ScaleFactor == 1;
+        ScaleFactor = 1.0;
     }
+
+    public ScaleTransform(double scaleFactor)
+    {
+        ScaleFactor = scaleFactor;
+    }
+
+    public double ScaleFactor { get; private set; }
+
+    public override bool IsNull => ScaleFactor == 1;
 }

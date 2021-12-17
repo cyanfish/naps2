@@ -1,9 +1,8 @@
-﻿namespace NAPS2.Images.Storage
+﻿namespace NAPS2.Images.Storage;
+
+public enum LockMode
 {
-    public enum LockMode
-    {
-        ReadWrite,
-        ReadOnly,
-        WriteOnly
-    }
+    ReadWrite,
+    ReadOnly,
+    WriteOnly
 }

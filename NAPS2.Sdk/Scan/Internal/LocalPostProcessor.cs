@@ -2,43 +2,42 @@
 using NAPS2.Ocr;
 using NAPS2.Threading;
 
-namespace NAPS2.Scan.Internal
+namespace NAPS2.Scan.Internal;
+
+internal class LocalPostProcessor : ILocalPostProcessor
 {
-    internal class LocalPostProcessor : ILocalPostProcessor
+    private readonly OcrRequestQueue _ocrRequestQueue;
+
+    public LocalPostProcessor()
+        : this(OcrRequestQueue.Default)
     {
-        private readonly OcrRequestQueue _ocrRequestQueue;
+    }
 
-        public LocalPostProcessor()
-            : this(OcrRequestQueue.Default)
+    public LocalPostProcessor(OcrRequestQueue ocrRequestQueue)
+    {
+        _ocrRequestQueue = ocrRequestQueue;
+    }
+
+    public void PostProcess(ScannedImage scannedImage, ScanOptions options, PostProcessingContext postProcessingContext)
+    {
+        if (postProcessingContext.TempPath != null)
         {
+            RunBackgroundOcr(scannedImage, options, postProcessingContext.TempPath);
         }
+    }
 
-        public LocalPostProcessor(OcrRequestQueue ocrRequestQueue)
+    private void RunBackgroundOcr(ScannedImage image, ScanOptions options, string tempPath)
+    {
+        if (options.DoOcr)
         {
-            _ocrRequestQueue = ocrRequestQueue;
-        }
-
-        public void PostProcess(ScannedImage scannedImage, ScanOptions options, PostProcessingContext postProcessingContext)
-        {
-            if (postProcessingContext.TempPath != null)
+            using var snapshot = image.Preserve();
+            if (!options.OcrInBackground)
             {
-                RunBackgroundOcr(scannedImage, options, postProcessingContext.TempPath);
+                _ocrRequestQueue.QueueForeground(null, snapshot, tempPath, options.OcrParams, options.OcrCancelToken).AssertNoAwait();
             }
-        }
-
-        private void RunBackgroundOcr(ScannedImage image, ScanOptions options, string tempPath)
-        {
-            if (options.DoOcr)
+            else
             {
-                using var snapshot = image.Preserve();
-                if (!options.OcrInBackground)
-                {
-                    _ocrRequestQueue.QueueForeground(null, snapshot, tempPath, options.OcrParams, options.OcrCancelToken).AssertNoAwait();
-                }
-                else
-                {
-                    _ocrRequestQueue.QueueBackground(snapshot, tempPath, options.OcrParams);
-                }
+                _ocrRequestQueue.QueueBackground(snapshot, tempPath, options.OcrParams);
             }
         }
     }

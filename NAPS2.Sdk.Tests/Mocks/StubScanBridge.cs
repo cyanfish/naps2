@@ -6,42 +6,41 @@ using NAPS2.Images;
 using NAPS2.Scan;
 using NAPS2.Scan.Internal;
 
-namespace NAPS2.Sdk.Tests.Mocks
+namespace NAPS2.Sdk.Tests.Mocks;
+
+internal class StubScanBridge : IScanBridge
 {
-    internal class StubScanBridge : IScanBridge
-    {
-        public List<ScanDevice> MockDevices { get; set; } = new List<ScanDevice>();
+    public List<ScanDevice> MockDevices { get; set; } = new List<ScanDevice>();
 
-        public List<ScannedImage> MockOutput { get; set; } = new List<ScannedImage>();
+    public List<ScannedImage> MockOutput { get; set; } = new List<ScannedImage>();
         
-        public Exception Error { get; set; }
+    public Exception Error { get; set; }
 
-        public Task<List<ScanDevice>> GetDeviceList(ScanOptions options)
+    public Task<List<ScanDevice>> GetDeviceList(ScanOptions options)
+    {
+        return Task.Run(() =>
         {
-            return Task.Run(() =>
+            if (Error != null)
             {
-                if (Error != null)
-                {
-                    throw Error;
-                }
+                throw Error;
+            }
 
-                return MockDevices;
-            });
-        }
+            return MockDevices;
+        });
+    }
 
-        public Task Scan(ScanOptions options, CancellationToken cancelToken, IScanEvents scanEvents, Action<ScannedImage, PostProcessingContext> callback)
+    public Task Scan(ScanOptions options, CancellationToken cancelToken, IScanEvents scanEvents, Action<ScannedImage, PostProcessingContext> callback)
+    {
+        return Task.Run(() =>
         {
-            return Task.Run(() =>
+            foreach (var img in MockOutput)
             {
-                foreach (var img in MockOutput)
-                {
-                    callback(img, new PostProcessingContext());
-                }
-                if (Error != null)
-                {
-                    throw Error;
-                }
-            });
-        }
+                callback(img, new PostProcessingContext());
+            }
+            if (Error != null)
+            {
+                throw Error;
+            }
+        });
     }
 }

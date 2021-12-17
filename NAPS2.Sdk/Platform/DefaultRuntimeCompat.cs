@@ -1,23 +1,22 @@
-﻿namespace NAPS2.Platform
+﻿namespace NAPS2.Platform;
+
+public class DefaultRuntimeCompat : IRuntimeCompat
 {
-    public class DefaultRuntimeCompat : IRuntimeCompat
-    {
-        public bool UseToolStripRenderHack => true;
+    public bool UseToolStripRenderHack => true;
 
-        public bool SetToolbarFont => false;
+    public bool SetToolbarFont => false;
 
-        public bool IsImagePaddingSupported => true;
+    public bool IsImagePaddingSupported => true;
 
-        public bool IsToolbarTextboxSupported => true;
+    public bool IsToolbarTextboxSupported => true;
 
-        public bool SetImageListSizeOnImageCollection => false;
+    public bool SetImageListSizeOnImageCollection => false;
 
-        public bool UseSpaceInListViewItem => false;
+    public bool UseSpaceInListViewItem => false;
 
-        public bool RefreshListViewAfterChange => false;
+    public bool RefreshListViewAfterChange => false;
 
-        public string? ExeRunner => null;
+    public string? ExeRunner => null;
 
-        public bool UseWorker => true;
-    }
+    public bool UseWorker => true;
 }

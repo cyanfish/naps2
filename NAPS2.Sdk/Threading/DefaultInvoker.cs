@@ -1,16 +1,15 @@
 ﻿using System;
 
-namespace NAPS2.Threading
+namespace NAPS2.Threading;
+
+/// <summary>
+/// A default implementation for synchronized access to the UI thread that assumes there is no privileged thread.
+/// </summary>
+public class DefaultInvoker : IInvoker
 {
-    /// <summary>
-    /// A default implementation for synchronized access to the UI thread that assumes there is no privileged thread.
-    /// </summary>
-    public class DefaultInvoker : IInvoker
-    {
-        public void Invoke(Action action) => action();
+    public void Invoke(Action action) => action();
 
-        public void SafeInvoke(Action action) => action();
+    public void SafeInvoke(Action action) => action();
 
-        public T InvokeGet<T>(Func<T> func) => func();
-    }
+    public T InvokeGet<T>(Func<T> func) => func();
 }

@@ -5,163 +5,162 @@ using System.Linq;
 using System.Windows.Forms;
 using NAPS2.Platform;
 
-namespace NAPS2.WinForms
+namespace NAPS2.WinForms;
+
+public class ToolStripDoubleButton : ToolStripButton
 {
-    public class ToolStripDoubleButton : ToolStripButton
+    private int _currentButton = -1;
+
+    public ToolStripDoubleButton()
     {
-        private int _currentButton = -1;
+    }
 
-        public ToolStripDoubleButton()
+    public event EventHandler FirstClick;
+    public event EventHandler SecondClick;
+
+    public Image FirstImage { get; set; }
+    public Image SecondImage { get; set; }
+
+    [Localizable(true)]
+    public string FirstText { get; set; }
+    [Localizable(true)]
+    public string SecondText { get; set; }
+
+    public int MaxTextWidth { get; set; }
+
+    public override Size GetPreferredSize(Size constrainingSize)
+    {
+        bool wrap = false;
+        var sumWidth = Padding.Left + Padding.Right
+                                    + Math.Max(FirstImage?.Width ?? 0, SecondImage?.Width ?? 0)
+                                    + Math.Max(MeasureTextWidth(FirstText, ref wrap), MeasureTextWidth(SecondText, ref wrap));
+        var sumHeight = Padding.Top + Padding.Bottom
+                                    + (FirstImage?.Height ?? 0) + (SecondImage?.Height ?? 0)
+                                    + 16 + (wrap ? 12 : 0);
+        return new Size(sumWidth, sumHeight);
+    }
+
+    private int MeasureTextWidth(string text, ref bool wrap)
+    {
+        using var g = Graphics.FromImage(new Bitmap(1, 1));
+        var width = (int)Math.Ceiling(g.MeasureString(text, Font).Width);
+        if (MaxTextWidth > 0 && width > MaxTextWidth)
         {
-        }
-
-        public event EventHandler FirstClick;
-        public event EventHandler SecondClick;
-
-        public Image FirstImage { get; set; }
-        public Image SecondImage { get; set; }
-
-        [Localizable(true)]
-        public string FirstText { get; set; }
-        [Localizable(true)]
-        public string SecondText { get; set; }
-
-        public int MaxTextWidth { get; set; }
-
-        public override Size GetPreferredSize(Size constrainingSize)
-        {
-            bool wrap = false;
-            var sumWidth = Padding.Left + Padding.Right
-                           + Math.Max(FirstImage?.Width ?? 0, SecondImage?.Width ?? 0)
-                           + Math.Max(MeasureTextWidth(FirstText, ref wrap), MeasureTextWidth(SecondText, ref wrap));
-            var sumHeight = Padding.Top + Padding.Bottom
-                            + (FirstImage?.Height ?? 0) + (SecondImage?.Height ?? 0)
-                            + 16 + (wrap ? 12 : 0);
-            return new Size(sumWidth, sumHeight);
-        }
-
-        private int MeasureTextWidth(string text, ref bool wrap)
-        {
-            using var g = Graphics.FromImage(new Bitmap(1, 1));
-            var width = (int)Math.Ceiling(g.MeasureString(text, Font).Width);
-            if (MaxTextWidth > 0 && width > MaxTextWidth)
+            var words = text.Split(' ');
+            for (int i = 1; i < words.Length; i++)
             {
-                var words = text.Split(' ');
-                for (int i = 1; i < words.Length; i++)
+                var left = string.Join(" ", words.Take(words.Length - i));
+                var right = string.Join(" ", words.Skip(words.Length - i));
+                var wrappedWidth = (int)Math.Ceiling(g.MeasureString(left + "\n" + right, Font).Width);
+                if (wrappedWidth < width)
                 {
-                    var left = string.Join(" ", words.Take(words.Length - i));
-                    var right = string.Join(" ", words.Skip(words.Length - i));
-                    var wrappedWidth = (int)Math.Ceiling(g.MeasureString(left + "\n" + right, Font).Width);
-                    if (wrappedWidth < width)
-                    {
-                        width = wrappedWidth;
-                        wrap = true;
-                    }
+                    width = wrappedWidth;
+                    wrap = true;
                 }
             }
-            return width;
+        }
+        return width;
+    }
+
+    protected override void OnPaint(PaintEventArgs e)
+    {
+        if (Owner == null)
+            return;
+        ToolStripRenderer renderer = ToolStripManager.Renderer;
+            
+        if (PlatformCompat.Runtime.UseToolStripRenderHack)
+        {
+            var oldHeight = Height;
+            var oldParent = Parent;
+            Parent = null;
+            Height = Height / 2;
+            e.Graphics.TranslateTransform(0, _currentButton == 1 ? Height : 0);
+            renderer.DrawButtonBackground(new ToolStripItemRenderEventArgs(e.Graphics, this));
+            e.Graphics.TranslateTransform(0, _currentButton == 1 ? -Height : 0);
+            Height = oldHeight;
+            Parent = oldParent;
+        }
+        else
+        {
+            if (_currentButton == 0)
+            {
+                e.Graphics.DrawRectangle(new Pen(Color.Black), 0, 0, Width - 1, Height / 2 - 1);
+            }
+            if (_currentButton == 1)
+            {
+                e.Graphics.DrawRectangle(new Pen(Color.Black), 0, Height / 2, Width - 1, Height / 2 - 1);
+            }
         }
 
-        protected override void OnPaint(PaintEventArgs e)
+        bool wrap = false;
+        int textWidth = Math.Max(MeasureTextWidth(FirstText, ref wrap), MeasureTextWidth(SecondText, ref wrap));
+        var flags = TextFormatFlags.Left | TextFormatFlags.VerticalCenter;
+        if (wrap)
         {
-            if (Owner == null)
-                return;
-            ToolStripRenderer renderer = ToolStripManager.Renderer;
-            
-            if (PlatformCompat.Runtime.UseToolStripRenderHack)
+            flags |= TextFormatFlags.WordBreak;
+        }
+
+        if (FirstImage != null && FirstText != null)
+        {
+            if (Enabled)
             {
-                var oldHeight = Height;
-                var oldParent = Parent;
-                Parent = null;
-                Height = Height / 2;
-                e.Graphics.TranslateTransform(0, _currentButton == 1 ? Height : 0);
-                renderer.DrawButtonBackground(new ToolStripItemRenderEventArgs(e.Graphics, this));
-                e.Graphics.TranslateTransform(0, _currentButton == 1 ? -Height : 0);
-                Height = oldHeight;
-                Parent = oldParent;
+                e.Graphics.DrawImage(FirstImage, new Point(Padding.Left, Height / 4 - FirstImage.Height / 2 + 1));
             }
             else
             {
-                if (_currentButton == 0)
-                {
-                    e.Graphics.DrawRectangle(new Pen(Color.Black), 0, 0, Width - 1, Height / 2 - 1);
-                }
-                if (_currentButton == 1)
-                {
-                    e.Graphics.DrawRectangle(new Pen(Color.Black), 0, Height / 2, Width - 1, Height / 2 - 1);
-                }
+                ControlPaint.DrawImageDisabled(e.Graphics, FirstImage, Padding.Left, Height / 4 - FirstImage.Height / 2 + 1, Color.Transparent);
             }
 
-            bool wrap = false;
-            int textWidth = Math.Max(MeasureTextWidth(FirstText, ref wrap), MeasureTextWidth(SecondText, ref wrap));
-            var flags = TextFormatFlags.Left | TextFormatFlags.VerticalCenter;
-            if (wrap)
-            {
-                flags |= TextFormatFlags.WordBreak;
-            }
-
-            if (FirstImage != null && FirstText != null)
-            {
-                if (Enabled)
-                {
-                    e.Graphics.DrawImage(FirstImage, new Point(Padding.Left, Height / 4 - FirstImage.Height / 2 + 1));
-                }
-                else
-                {
-                    ControlPaint.DrawImageDisabled(e.Graphics, FirstImage, Padding.Left, Height / 4 - FirstImage.Height / 2 + 1, Color.Transparent);
-                }
-
-                var textRectangle = new Rectangle(Padding.Left + FirstImage.Width, 0, textWidth, Height / 2);
-                renderer.DrawItemText(new ToolStripItemTextRenderEventArgs(e.Graphics, this, FirstText, textRectangle, ForeColor, Font, flags));
-            }
-
-            if (SecondImage != null && SecondText != null)
-            {
-                if (Enabled)
-                {
-                    e.Graphics.DrawImage(SecondImage, new Point(Padding.Left, Height * 3 / 4 - SecondImage.Height / 2));
-                }
-                else
-                {
-                    ControlPaint.DrawImageDisabled(e.Graphics, SecondImage, Padding.Left, Height * 3 / 4 - SecondImage.Height / 2, Color.Transparent);
-                }
-
-                var textRectangle = new Rectangle(Padding.Left + SecondImage.Width, Height / 2, textWidth, Height / 2);
-                renderer.DrawItemText(new ToolStripItemTextRenderEventArgs(e.Graphics, this, SecondText, textRectangle, ForeColor, Font, flags));
-            }
-
-            Image = null;
+            var textRectangle = new Rectangle(Padding.Left + FirstImage.Width, 0, textWidth, Height / 2);
+            renderer.DrawItemText(new ToolStripItemTextRenderEventArgs(e.Graphics, this, FirstText, textRectangle, ForeColor, Font, flags));
         }
 
-        protected override void OnMouseMove(MouseEventArgs mea)
+        if (SecondImage != null && SecondText != null)
         {
-            base.OnMouseMove(mea);
-            var oldCurrentButton = _currentButton;
-            _currentButton = mea.Y > (Height / 2) ? 1 : 0;
-            if (_currentButton != oldCurrentButton)
+            if (Enabled)
             {
-                Invalidate();
+                e.Graphics.DrawImage(SecondImage, new Point(Padding.Left, Height * 3 / 4 - SecondImage.Height / 2));
             }
+            else
+            {
+                ControlPaint.DrawImageDisabled(e.Graphics, SecondImage, Padding.Left, Height * 3 / 4 - SecondImage.Height / 2, Color.Transparent);
+            }
+
+            var textRectangle = new Rectangle(Padding.Left + SecondImage.Width, Height / 2, textWidth, Height / 2);
+            renderer.DrawItemText(new ToolStripItemTextRenderEventArgs(e.Graphics, this, SecondText, textRectangle, ForeColor, Font, flags));
         }
 
-        protected override void OnMouseLeave(EventArgs e)
+        Image = null;
+    }
+
+    protected override void OnMouseMove(MouseEventArgs mea)
+    {
+        base.OnMouseMove(mea);
+        var oldCurrentButton = _currentButton;
+        _currentButton = mea.Y > (Height / 2) ? 1 : 0;
+        if (_currentButton != oldCurrentButton)
         {
-            base.OnMouseLeave(e);
-            _currentButton = -1;
+            Invalidate();
         }
+    }
 
-        protected override void OnClick(EventArgs e)
+    protected override void OnMouseLeave(EventArgs e)
+    {
+        base.OnMouseLeave(e);
+        _currentButton = -1;
+    }
+
+    protected override void OnClick(EventArgs e)
+    {
+        base.OnClick(e);
+
+        if (_currentButton == 0)
         {
-            base.OnClick(e);
-
-            if (_currentButton == 0)
-            {
-                FirstClick?.Invoke(this, e);
-            }
-            else if (_currentButton == 1)
-            {
-                SecondClick?.Invoke(this, e);
-            }
+            FirstClick?.Invoke(this, e);
+        }
+        else if (_currentButton == 1)
+        {
+            SecondClick?.Invoke(this, e);
         }
     }
 }

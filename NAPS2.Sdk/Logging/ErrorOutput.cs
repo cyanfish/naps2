@@ -1,16 +1,15 @@
 ﻿using System;
 
-namespace NAPS2.Logging
+namespace NAPS2.Logging;
+
+/// <summary>
+/// A base interface for objects capable of displaying error output.
+/// </summary>
+public abstract class ErrorOutput
 {
-    /// <summary>
-    /// A base interface for objects capable of displaying error output.
-    /// </summary>
-    public abstract class ErrorOutput
-    {
-        public abstract void DisplayError(string errorMessage);
+    public abstract void DisplayError(string errorMessage);
 
-        public abstract void DisplayError(string errorMessage, string details);
+    public abstract void DisplayError(string errorMessage, string details);
 
-        public abstract void DisplayError(string errorMessage, Exception exception);
-    }
+    public abstract void DisplayError(string errorMessage, Exception exception);
 }

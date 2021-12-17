@@ -1,9 +1,8 @@
-﻿namespace NAPS2.Config
+﻿namespace NAPS2.Config;
+
+public enum ConfigReadMode
 {
-    public enum ConfigReadMode
-    {
-        All,
-        LockedOnly,
-        DefaultOnly
-    }
+    All,
+    LockedOnly,
+    DefaultOnly
 }

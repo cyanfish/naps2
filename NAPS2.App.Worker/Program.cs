@@ -1,18 +1,17 @@
 ﻿using System;
 using NAPS2.EntryPoints;
 
-namespace NAPS2.Worker
+namespace NAPS2.Worker;
+
+static class Program
 {
-    static class Program
+    /// <summary>
+    /// The NAPS2.Worker.exe main method.
+    /// </summary>
+    [STAThread]
+    static void Main(string[] args)
     {
-        /// <summary>
-        /// The NAPS2.Worker.exe main method.
-        /// </summary>
-        [STAThread]
-        static void Main(string[] args)
-        {
-            // Use reflection to avoid antivirus false positives (yes, really)
-            typeof(WorkerEntryPoint).GetMethod("Run").Invoke(null, new object[] { args });
-        }
+        // Use reflection to avoid antivirus false positives (yes, really)
+        typeof(WorkerEntryPoint).GetMethod("Run").Invoke(null, new object[] { args });
     }
 }

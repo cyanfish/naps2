@@ -1,18 +1,17 @@
-﻿namespace NAPS2.Operation
+﻿namespace NAPS2.Operation;
+
+/// <summary>
+/// A representation of the current status of an IOperation.
+/// </summary>
+public class OperationStatus
 {
-    /// <summary>
-    /// A representation of the current status of an IOperation.
-    /// </summary>
-    public class OperationStatus
-    {
-        public string? StatusText { get; set; }
+    public string? StatusText { get; set; }
 
-        public int CurrentProgress { get; set; }
+    public int CurrentProgress { get; set; }
 
-        public int MaxProgress { get; set; }
+    public int MaxProgress { get; set; }
 
-        public bool IndeterminateProgress { get; set; }
+    public bool IndeterminateProgress { get; set; }
 
-        public OperationProgressType ProgressType { get; set; }
-    }
+    public OperationProgressType ProgressType { get; set; }
 }

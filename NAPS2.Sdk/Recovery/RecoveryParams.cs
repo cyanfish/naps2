@@ -1,7 +1,6 @@
-﻿namespace NAPS2.Recovery
+﻿namespace NAPS2.Recovery;
+
+public class RecoveryParams
 {
-    public class RecoveryParams
-    {
-        public int? ThumbnailSize { get; set; }
-    }
+    public int? ThumbnailSize { get; set; }
 }

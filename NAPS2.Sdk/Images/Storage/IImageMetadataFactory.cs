@@ -1,9 +1,8 @@
-﻿namespace NAPS2.Images.Storage
+﻿namespace NAPS2.Images.Storage;
+
+public interface IImageMetadataFactory
 {
-    public interface IImageMetadataFactory
-    {
-        IImageMetadata CreateMetadata(IStorage storage);
+    IImageMetadata CreateMetadata(IStorage storage);
         
-        void CommitAllMetadata();
-    }
+    void CommitAllMetadata();
 }

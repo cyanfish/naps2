@@ -6,32 +6,31 @@ using NAPS2.ImportExport.Pdf;
 using NAPS2.Images;
 using NAPS2.Util;
 
-namespace NAPS2.ImportExport
+namespace NAPS2.ImportExport;
+
+public class ScannedImageImporter : IScannedImageImporter
 {
-    public class ScannedImageImporter : IScannedImageImporter
+    private readonly IScannedImageImporter _pdfImporter;
+    private readonly IScannedImageImporter _imageImporter;
+
+    public ScannedImageImporter(IPdfImporter pdfImporter, IImageImporter imageImporter)
     {
-        private readonly IScannedImageImporter _pdfImporter;
-        private readonly IScannedImageImporter _imageImporter;
+        _pdfImporter = pdfImporter;
+        _imageImporter = imageImporter;
+    }
 
-        public ScannedImageImporter(IPdfImporter pdfImporter, IImageImporter imageImporter)
+    public ScannedImageSource Import(string filePath, ImportParams importParams, ProgressHandler progressCallback, CancellationToken cancelToken)
+    {
+        if (filePath == null)
         {
-            _pdfImporter = pdfImporter;
-            _imageImporter = imageImporter;
+            throw new ArgumentNullException(nameof(filePath));
         }
-
-        public ScannedImageSource Import(string filePath, ImportParams importParams, ProgressHandler progressCallback, CancellationToken cancelToken)
+        switch (Path.GetExtension(filePath).ToLowerInvariant())
         {
-            if (filePath == null)
-            {
-                throw new ArgumentNullException(nameof(filePath));
-            }
-            switch (Path.GetExtension(filePath).ToLowerInvariant())
-            {
-                case ".pdf":
-                    return _pdfImporter.Import(filePath, importParams, progressCallback, cancelToken);
-                default:
-                    return _imageImporter.Import(filePath, importParams, progressCallback, cancelToken);
-            }
+            case ".pdf":
+                return _pdfImporter.Import(filePath, importParams, progressCallback, cancelToken);
+            default:
+                return _imageImporter.Import(filePath, importParams, progressCallback, cancelToken);
         }
     }
 }

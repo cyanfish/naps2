@@ -1,15 +1,14 @@
-﻿namespace NAPS2.ImportExport.Email.Oauth
+﻿namespace NAPS2.ImportExport.Email.Oauth;
+
+public class OauthClientCreds
 {
-    public class OauthClientCreds
+    public OauthClientCreds(string? clientId, string? clientSecret)
     {
-        public OauthClientCreds(string? clientId, string? clientSecret)
-        {
-            ClientId = clientId;
-            ClientSecret = clientSecret;
-        }
-
-        public string? ClientId { get; }
-
-        public string? ClientSecret { get; }
+        ClientId = clientId;
+        ClientSecret = clientSecret;
     }
+
+    public string? ClientId { get; }
+
+    public string? ClientSecret { get; }
 }

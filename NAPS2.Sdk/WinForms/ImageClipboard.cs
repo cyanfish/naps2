@@ -11,105 +11,104 @@ using NAPS2.Images;
 using NAPS2.Images.Storage;
 using NAPS2.ImportExport.Images;
 
-namespace NAPS2.WinForms
+namespace NAPS2.WinForms;
+
+public class ImageClipboard
 {
-    public class ImageClipboard
+    private readonly BitmapRenderer _bitmapRenderer;
+    private readonly ImageTransfer _imageTransfer;
+
+    public ImageClipboard()
     {
-        private readonly BitmapRenderer _bitmapRenderer;
-        private readonly ImageTransfer _imageTransfer;
+        _bitmapRenderer = new BitmapRenderer(ImageContext.Default);
+        _imageTransfer = new ImageTransfer(ImageContext.Default);
+    }
 
-        public ImageClipboard()
+    public ImageClipboard(BitmapRenderer bitmapRenderer, ImageTransfer imageTransfer)
+    {
+        _bitmapRenderer = bitmapRenderer;
+        _imageTransfer = imageTransfer;
+    }
+
+    public async Task Write(IEnumerable<ScannedImage> images, bool includeBitmap)
+    {
+        var imageList = images.ToList();
+        if (imageList.Count == 0)
         {
-            _bitmapRenderer = new BitmapRenderer(ImageContext.Default);
-            _imageTransfer = new ImageTransfer(ImageContext.Default);
+            return;
         }
 
-        public ImageClipboard(BitmapRenderer bitmapRenderer, ImageTransfer imageTransfer)
+        // Fast path for copying within NAPS2
+        _imageTransfer.SetClipboard(imageList);
+
+        // Slow path for more full-featured copying
+        if (includeBitmap)
         {
-            _bitmapRenderer = bitmapRenderer;
-            _imageTransfer = imageTransfer;
+            using var firstBitmap = await _bitmapRenderer.Render(imageList[0]);
+            Clipboard.Instance.Image = firstBitmap.ToEto();
+            Clipboard.Instance.SetString(await RtfEncodeImages(firstBitmap, imageList), "Rich Text Format");
         }
+    }
 
-        public async Task Write(IEnumerable<ScannedImage> images, bool includeBitmap)
+    private async Task<string> RtfEncodeImages(Bitmap firstBitmap, List<ScannedImage> images)
+    {
+        var sb = new StringBuilder();
+        sb.Append("{");
+        // TODO: Is this the right format?
+        if (!AppendRtfEncodedImage(firstBitmap, firstBitmap.RawFormat, sb, false))
         {
-            var imageList = images.ToList();
-            if (imageList.Count == 0)
-            {
-                return;
-            }
-
-            // Fast path for copying within NAPS2
-            _imageTransfer.SetClipboard(imageList);
-
-            // Slow path for more full-featured copying
-            if (includeBitmap)
-            {
-                using var firstBitmap = await _bitmapRenderer.Render(imageList[0]);
-                Clipboard.Instance.Image = firstBitmap.ToEto();
-                Clipboard.Instance.SetString(await RtfEncodeImages(firstBitmap, imageList), "Rich Text Format");
-            }
+            return null;
         }
-
-        private async Task<string> RtfEncodeImages(Bitmap firstBitmap, List<ScannedImage> images)
+        foreach (var img in images.Skip(1))
         {
-            var sb = new StringBuilder();
-            sb.Append("{");
+            using var bitmap = await _bitmapRenderer.Render(img);
             // TODO: Is this the right format?
-            if (!AppendRtfEncodedImage(firstBitmap, firstBitmap.RawFormat, sb, false))
+            if (!AppendRtfEncodedImage(bitmap, bitmap.RawFormat, sb, true))
             {
-                return null;
+                break;
             }
-            foreach (var img in images.Skip(1))
+        }
+        sb.Append("}");
+        return sb.ToString();
+    }
+
+    private static bool AppendRtfEncodedImage(Image image, ImageFormat format, StringBuilder sb, bool par)
+    {
+        const int maxRtfSize = 20 * 1000 * 1000;
+        using (var stream = new MemoryStream())
+        {
+            image.Save(stream, format);
+            if (sb.Length + stream.Length * 2 > maxRtfSize)
             {
-                using var bitmap = await _bitmapRenderer.Render(img);
-                // TODO: Is this the right format?
-                if (!AppendRtfEncodedImage(bitmap, bitmap.RawFormat, sb, true))
-                {
-                    break;
-                }
+                return false;
+            }
+
+            if (par)
+            {
+                sb.Append(@"\par");
+            }
+            sb.Append(@"{\pict\pngblip\picw");
+            sb.Append(image.Width);
+            sb.Append(@"\pich");
+            sb.Append(image.Height);
+            sb.Append(@"\picwgoa");
+            sb.Append(image.Width);
+            sb.Append(@"\pichgoa");
+            sb.Append(image.Height);
+            sb.Append(@"\hex ");
+            // Do a "low-level" conversion to save on memory by avoiding intermediate representations
+            stream.Seek(0, SeekOrigin.Begin);
+            int value;
+            while ((value = stream.ReadByte()) != -1)
+            {
+                int hi = value / 16, lo = value % 16;
+                sb.Append(GetHexChar(hi));
+                sb.Append(GetHexChar(lo));
             }
             sb.Append("}");
-            return sb.ToString();
         }
-
-        private static bool AppendRtfEncodedImage(Image image, ImageFormat format, StringBuilder sb, bool par)
-        {
-            const int maxRtfSize = 20 * 1000 * 1000;
-            using (var stream = new MemoryStream())
-            {
-                image.Save(stream, format);
-                if (sb.Length + stream.Length * 2 > maxRtfSize)
-                {
-                    return false;
-                }
-
-                if (par)
-                {
-                    sb.Append(@"\par");
-                }
-                sb.Append(@"{\pict\pngblip\picw");
-                sb.Append(image.Width);
-                sb.Append(@"\pich");
-                sb.Append(image.Height);
-                sb.Append(@"\picwgoa");
-                sb.Append(image.Width);
-                sb.Append(@"\pichgoa");
-                sb.Append(image.Height);
-                sb.Append(@"\hex ");
-                // Do a "low-level" conversion to save on memory by avoiding intermediate representations
-                stream.Seek(0, SeekOrigin.Begin);
-                int value;
-                while ((value = stream.ReadByte()) != -1)
-                {
-                    int hi = value / 16, lo = value % 16;
-                    sb.Append(GetHexChar(hi));
-                    sb.Append(GetHexChar(lo));
-                }
-                sb.Append("}");
-            }
-            return true;
-        }
-
-        private static char GetHexChar(int n) => (char)(n < 10 ? '0' + n : 'A' + (n - 10));
+        return true;
     }
+
+    private static char GetHexChar(int n) => (char)(n < 10 ? '0' + n : 'A' + (n - 10));
 }

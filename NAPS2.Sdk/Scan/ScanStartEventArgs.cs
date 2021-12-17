@@ -1,8 +1,7 @@
 ﻿using System;
 
-namespace NAPS2.Scan
+namespace NAPS2.Scan;
+
+public class ScanStartEventArgs : EventArgs
 {
-    public class ScanStartEventArgs : EventArgs
-    {
-    }
 }

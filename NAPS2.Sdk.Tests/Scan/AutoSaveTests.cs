@@ -1,8 +1,8 @@
-﻿namespace NAPS2.Sdk.Tests.Scan
+﻿namespace NAPS2.Sdk.Tests.Scan;
+
+public class AutoSaveTests : ContextualTexts
 {
-    public class AutoSaveTests : ContextualTexts
-    {
-        // TODO: Need to make ScanPerformer testable
+    // TODO: Need to make ScanPerformer testable
 //        [Fact]
 //        public async Task NoImages()
 //        {
@@ -157,5 +157,4 @@
 //                new BitmapRenderer(ImageContext),
 //                new StubConfigProvider<CommonConfig>(InternalDefaults.GetCommonConfig()));
 //        }
-    }
 }

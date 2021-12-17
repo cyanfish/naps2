@@ -3,95 +3,94 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 
-namespace NAPS2.Remoting.Worker
+namespace NAPS2.Remoting.Worker;
+
+public class WorkerPool : IDisposable
 {
-    public class WorkerPool : IDisposable
-    {
-        private const int TICK_INTERVAL = 5000;
+    private const int TICK_INTERVAL = 5000;
         
-        private readonly IWorkerFactory _workerFactory;
-        private readonly Timer _timer;
-        private List<PoolEntry> _entries = new List<PoolEntry>();
+    private readonly IWorkerFactory _workerFactory;
+    private readonly Timer _timer;
+    private List<PoolEntry> _entries = new List<PoolEntry>();
 
-        public WorkerPool(IWorkerFactory workerFactory)
-        {
-            _workerFactory = workerFactory;
-            _timer = new Timer(Tick, null, 0, TICK_INTERVAL);
-        }
+    public WorkerPool(IWorkerFactory workerFactory)
+    {
+        _workerFactory = workerFactory;
+        _timer = new Timer(Tick, null, 0, TICK_INTERVAL);
+    }
 
-        private void Tick(object state)
+    private void Tick(object state)
+    {
+        lock (this)
         {
-            lock (this)
+            var stillUsable = _entries
+                .Where(x => x.LastUsed > DateTime.Now - TimeSpan.FromMilliseconds(TICK_INTERVAL)).ToList();
+            var expired = _entries.Except(stillUsable).ToList();
+            _entries = stillUsable;
+            foreach (var entry in expired)
             {
-                var stillUsable = _entries
-                    .Where(x => x.LastUsed > DateTime.Now - TimeSpan.FromMilliseconds(TICK_INTERVAL)).ToList();
-                var expired = _entries.Except(stillUsable).ToList();
-                _entries = stillUsable;
-                foreach (var entry in expired)
-                {
-                    entry.Worker.Dispose();
-                }
+                entry.Worker.Dispose();
             }
         }
+    }
 
-        public T Use<T>(Func<WorkerContext, T> func)
+    public T Use<T>(Func<WorkerContext, T> func)
+    {
+        var worker = Take();
+        T result;
+        try
         {
-            var worker = Take();
-            T result;
-            try
-            {
-                result = func(worker);
-            }
-            catch (Exception)
-            {
-                worker.Dispose();
-                throw;
-            }
-            Return(worker);
-            return result;
+            result = func(worker);
         }
-
-        private WorkerContext Take()
+        catch (Exception)
         {
-            lock (this)
-            {
-                if (_entries.Count > 0)
-                {
-                    var entry = _entries[_entries.Count - 1];
-                    _entries.RemoveAt(_entries.Count - 1);
-                    return entry.Worker;
-                }
-                return _workerFactory.Create();
-            }
+            worker.Dispose();
+            throw;
         }
+        Return(worker);
+        return result;
+    }
 
-        private void Return(WorkerContext workerContext)
+    private WorkerContext Take()
+    {
+        lock (this)
         {
-            lock (this)
+            if (_entries.Count > 0)
             {
-                _entries.Add(new PoolEntry { Worker = workerContext, LastUsed = DateTime.Now });
+                var entry = _entries[_entries.Count - 1];
+                _entries.RemoveAt(_entries.Count - 1);
+                return entry.Worker;
             }
+            return _workerFactory.Create();
         }
+    }
 
-        private class PoolEntry
+    private void Return(WorkerContext workerContext)
+    {
+        lock (this)
         {
-            public WorkerContext Worker { get; set; }
+            _entries.Add(new PoolEntry { Worker = workerContext, LastUsed = DateTime.Now });
+        }
+    }
+
+    private class PoolEntry
+    {
+        public WorkerContext Worker { get; set; }
             
-            public DateTime LastUsed { get; set; }
-        }
+        public DateTime LastUsed { get; set; }
+    }
 
-        public void Dispose()
+    public void Dispose()
+    {
+        _timer.Dispose();
+        lock (this)
         {
-            _timer.Dispose();
-            lock (this)
+            foreach (var entry in _entries)
             {
-                foreach (var entry in _entries)
-                {
-                    entry.Worker.Dispose();
-                }
-
-                _entries.Clear();
+                entry.Worker.Dispose();
             }
+
+            _entries.Clear();
         }
     }
 }

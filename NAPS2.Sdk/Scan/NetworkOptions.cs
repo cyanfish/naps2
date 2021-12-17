@@ -1,9 +1,8 @@
-﻿namespace NAPS2.Scan
-{
-    public class NetworkOptions
-    {
-        public string? Ip { get; set; }
+﻿namespace NAPS2.Scan;
 
-        public int? Port { get; set; }
-    }
+public class NetworkOptions
+{
+    public string? Ip { get; set; }
+
+    public int? Port { get; set; }
 }

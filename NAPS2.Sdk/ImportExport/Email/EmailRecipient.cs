@@ -1,44 +1,43 @@
 ﻿using System.Collections.Generic;
 
-namespace NAPS2.ImportExport.Email
+namespace NAPS2.ImportExport.Email;
+
+public class EmailRecipient
 {
-    public class EmailRecipient
+    public static IEnumerable<EmailRecipient> FromText(EmailRecipientType recipType, string recipText)
     {
-        public static IEnumerable<EmailRecipient> FromText(EmailRecipientType recipType, string recipText)
+        if (string.IsNullOrWhiteSpace(recipText))
         {
-            if (string.IsNullOrWhiteSpace(recipText))
-            {
-                yield break;
-            }
-            foreach (string address in recipText.Split(','))
-            {
-                yield return new EmailRecipient
-                {
-                    Name = address.Trim(),
-                    Address = address.Trim(),
-                    Type = recipType
-                };
-            }
+            yield break;
         }
-
-        public EmailRecipient()
+        foreach (string address in recipText.Split(','))
         {
-            Name = "";
+            yield return new EmailRecipient
+            {
+                Name = address.Trim(),
+                Address = address.Trim(),
+                Type = recipType
+            };
         }
-
-        /// <summary>
-        /// Gets or sets the recipient's name. Can be empty but must not be null.
-        /// </summary>
-        public string Name { get; set; }
-
-        /// <summary>
-        /// Gets or sets the recipient's email address.
-        /// </summary>
-        public string? Address { get; set; }
-
-        /// <summary>
-        /// Gets or sets the type of recipient ("to", "cc", "bcc").
-        /// </summary>
-        public EmailRecipientType Type { get; set; }
     }
+
+    public EmailRecipient()
+    {
+        Name = "";
+    }
+
+    /// <summary>
+    /// Gets or sets the recipient's name. Can be empty but must not be null.
+    /// </summary>
+    public string Name { get; set; }
+
+    /// <summary>
+    /// Gets or sets the recipient's email address.
+    /// </summary>
+    public string? Address { get; set; }
+
+    /// <summary>
+    /// Gets or sets the type of recipient ("to", "cc", "bcc").
+    /// </summary>
+    public EmailRecipientType Type { get; set; }
 }

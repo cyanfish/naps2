@@ -1,32 +1,31 @@
 using System.Threading.Tasks;
 using Grpc.Core;
 
-namespace NAPS2.Remoting
+namespace NAPS2.Remoting;
+
+public class SequencedWriter<T>
 {
-    public class SequencedWriter<T>
+    private readonly IServerStreamWriter<T> _serverStreamWriter;
+    private Task _lastWriteTask = Task.CompletedTask;
+
+    public SequencedWriter(IServerStreamWriter<T> serverStreamWriter)
     {
-        private readonly IServerStreamWriter<T> _serverStreamWriter;
-        private Task _lastWriteTask = Task.CompletedTask;
+        _serverStreamWriter = serverStreamWriter;
+    }
 
-        public SequencedWriter(IServerStreamWriter<T> serverStreamWriter)
+    public void Write(T item)
+    {
+        lock (this)
         {
-            _serverStreamWriter = serverStreamWriter;
+            _lastWriteTask = _lastWriteTask.ContinueWith(t => _serverStreamWriter.WriteAsync(item)).Unwrap();
         }
+    }
 
-        public void Write(T item)
+    public Task WaitForCompletion()
+    {
+        lock (this)
         {
-            lock (this)
-            {
-                _lastWriteTask = _lastWriteTask.ContinueWith(t => _serverStreamWriter.WriteAsync(item)).Unwrap();
-            }
-        }
-
-        public Task WaitForCompletion()
-        {
-            lock (this)
-            {
-                return _lastWriteTask;
-            }
+            return _lastWriteTask;
         }
     }
 }
