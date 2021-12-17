@@ -1,9 +1,4 @@
-﻿using System;
-using System.IO;
-using System.Linq;
-using System.Xml.Linq;
-using NAPS2.Config;
-using Xunit;
+﻿using Xunit;
 
 namespace NAPS2.Sdk.Tests.Config;
 

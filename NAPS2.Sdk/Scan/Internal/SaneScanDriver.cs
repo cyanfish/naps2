@@ -1,19 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Globalization;
-using System.IO;
-using System.Linq;
+﻿using System.Globalization;
 using System.Reflection;
 using System.Text.RegularExpressions;
 using System.Threading;
-using System.Threading.Tasks;
-using NAPS2.Images.Storage;
-using NAPS2.Lang.Resources;
-using NAPS2.Logging;
 using NAPS2.Scan.Exceptions;
 using NAPS2.Scan.Sane;
-using NAPS2.Util;
 
 namespace NAPS2.Scan.Internal;
 

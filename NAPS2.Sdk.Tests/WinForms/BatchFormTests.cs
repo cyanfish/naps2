@@ -1,10 +1,7 @@
 ﻿using Moq;
-using NAPS2.Config;
 using NAPS2.ImportExport;
-using NAPS2.Logging;
 using NAPS2.Scan;
 using NAPS2.Scan.Batch;
-using NAPS2.Util;
 using NAPS2.WinForms;
 using Xunit;
 

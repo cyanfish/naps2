@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace NAPS2.Util;
+﻿namespace NAPS2.Util;
 
 public static class NumberExtensions
 {

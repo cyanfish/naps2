@@ -1,7 +1,4 @@
-﻿using System.IO;
-using System.Linq;
-
-namespace NAPS2.Dependencies;
+﻿namespace NAPS2.Dependencies;
 
 public class MultiFileExternalComponent : IExternalComponent
 {

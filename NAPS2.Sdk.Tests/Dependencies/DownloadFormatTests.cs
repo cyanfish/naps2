@@ -1,5 +1,4 @@
-﻿using System.IO;
-using NAPS2.Dependencies;
+﻿using NAPS2.Dependencies;
 using Xunit;
 
 namespace NAPS2.Sdk.Tests.Dependencies;

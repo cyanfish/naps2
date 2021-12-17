@@ -1,5 +1,3 @@
-using System;
-using System.Diagnostics;
 using System.Windows.Input;
 using Eto.Drawing;
 using Eto.Forms;

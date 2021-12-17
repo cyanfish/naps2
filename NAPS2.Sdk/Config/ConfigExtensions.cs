@@ -1,5 +1,4 @@
-﻿using System;
-using NAPS2.Ocr;
+﻿using NAPS2.Ocr;
 
 namespace NAPS2.Config;
 

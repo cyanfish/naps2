@@ -1,7 +1,4 @@
-﻿using System;
-using System.Xml.Linq;
-
-namespace NAPS2.Serialization;
+﻿namespace NAPS2.Serialization;
 
 public abstract class CustomXmlSerializer
 {

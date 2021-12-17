@@ -1,14 +1,7 @@
-using System;
 using System.Drawing;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using NAPS2.Lang.Resources;
-using NAPS2.Logging;
-using NAPS2.Platform;
 using NAPS2.Scan;
 using NAPS2.Scan.Exceptions;
-using NAPS2.Util;
 
 namespace NAPS2.WinForms;
 

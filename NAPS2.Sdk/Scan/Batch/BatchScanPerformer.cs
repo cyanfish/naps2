@@ -1,19 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
+﻿using System.Threading;
 using System.Windows.Forms;
-using NAPS2.Config;
 using NAPS2.ImportExport;
 using NAPS2.ImportExport.Images;
 using NAPS2.ImportExport.Pdf;
-using NAPS2.Lang.Resources;
 using NAPS2.Ocr;
-using NAPS2.Operation;
-using NAPS2.Images;
 using NAPS2.Platform.Windows;
 using NAPS2.WinForms;
 

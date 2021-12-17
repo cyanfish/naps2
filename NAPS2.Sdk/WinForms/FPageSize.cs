@@ -1,8 +1,5 @@
-﻿using System;
-using System.Globalization;
-using System.Linq;
+﻿using System.Globalization;
 using System.Windows.Forms;
-using NAPS2.Lang.Resources;
 using NAPS2.Scan;
 
 namespace NAPS2.WinForms;

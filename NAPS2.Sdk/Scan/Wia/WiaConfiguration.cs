@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace NAPS2.Scan.Wia;
+﻿namespace NAPS2.Scan.Wia;
 
 public class WiaConfiguration
 {

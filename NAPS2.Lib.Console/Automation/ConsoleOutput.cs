@@ -1,5 +1,3 @@
-using System.IO;
-
 namespace NAPS2.Automation;
 
 public class ConsoleOutput

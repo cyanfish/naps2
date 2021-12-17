@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace NAPS2.Config;
+﻿namespace NAPS2.Config;
 
 /// <summary>
 /// Represents the full NAPS2 configuration. Configuration sources are divided into several scopes:<br/>

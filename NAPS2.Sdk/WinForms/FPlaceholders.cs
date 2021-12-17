@@ -1,6 +1,4 @@
-﻿using System;
-using System.Linq;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
 using NAPS2.ImportExport;
 
 namespace NAPS2.WinForms;

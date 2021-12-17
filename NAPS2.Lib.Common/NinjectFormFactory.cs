@@ -1,5 +1,4 @@
-﻿using NAPS2.Config;
-using NAPS2.EtoForms;
+﻿using NAPS2.EtoForms;
 using NAPS2.WinForms;
 using Ninject;
 

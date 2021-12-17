@@ -1,7 +1,4 @@
-﻿using System;
-using NAPS2.Logging;
-
-namespace NAPS2.Automation;
+﻿namespace NAPS2.Automation;
 
 public class ConsoleErrorOutput : ErrorOutput
 {

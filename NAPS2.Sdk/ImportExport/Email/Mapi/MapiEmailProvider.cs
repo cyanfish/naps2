@@ -1,11 +1,5 @@
-using System;
 using System.Threading;
-using System.Threading.Tasks;
-using NAPS2.Lang.Resources;
-using NAPS2.Logging;
-using NAPS2.Platform;
 using NAPS2.Remoting.Worker;
-using NAPS2.Util;
 
 namespace NAPS2.ImportExport.Email.Mapi;
 

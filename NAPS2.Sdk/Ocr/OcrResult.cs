@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace NAPS2.Ocr;
+﻿namespace NAPS2.Ocr;
 
 public class OcrResult
 {

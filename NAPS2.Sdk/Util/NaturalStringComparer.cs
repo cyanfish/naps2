@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace NAPS2.Util;
+﻿namespace NAPS2.Util;
 
 public class NaturalStringComparer : IComparer<string>
 {

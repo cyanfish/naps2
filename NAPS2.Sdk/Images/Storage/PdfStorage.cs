@@ -1,5 +1,4 @@
-﻿using System;
-using PdfSharp.Pdf;
+﻿using PdfSharp.Pdf;
 
 namespace NAPS2.Images.Storage;
 

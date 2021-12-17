@@ -1,6 +1,4 @@
-﻿using System;
-using NAPS2.Logging;
-using NAPS2.Wia;
+﻿using NAPS2.Wia;
 
 namespace NAPS2.Scan.Wia;
 

@@ -1,6 +1,4 @@
-﻿using System.IO;
-
-namespace NAPS2.Serialization;
+﻿namespace NAPS2.Serialization;
 
 public interface ISerializer<T>
 {

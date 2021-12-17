@@ -1,7 +1,4 @@
-﻿using System;
-using System.Diagnostics;
-using System.IO;
-using System.Reflection;
+﻿using System.Reflection;
 
 namespace NAPS2.Portable;
 

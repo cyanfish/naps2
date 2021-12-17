@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using NAPS2.Scan;
-using NAPS2.Images;
+﻿using NAPS2.Scan;
 
 namespace NAPS2.ImportExport;
 

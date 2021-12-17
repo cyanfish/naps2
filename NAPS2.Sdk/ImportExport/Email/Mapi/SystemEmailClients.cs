@@ -1,6 +1,4 @@
-﻿using System;
-using System.Drawing;
-using System.Linq;
+﻿using System.Drawing;
 using System.Runtime.InteropServices;
 using Microsoft.Win32;
 using NAPS2.Platform.Windows;

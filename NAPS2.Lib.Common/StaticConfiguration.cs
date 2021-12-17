@@ -1,9 +1,4 @@
-﻿using System;
-using System.Diagnostics;
-using NAPS2.Config;
-using NAPS2.Logging;
-using NAPS2.Ocr;
-using NAPS2.Platform;
+﻿using NAPS2.Ocr;
 using Ninject;
 using NLog;
 

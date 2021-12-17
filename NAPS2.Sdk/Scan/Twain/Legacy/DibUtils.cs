@@ -1,7 +1,5 @@
-using System;
 using System.Drawing;
 using System.Runtime.InteropServices;
-using NAPS2.Util;
 
 namespace NAPS2.Scan.Twain.Legacy;
 

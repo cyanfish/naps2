@@ -1,9 +1,4 @@
-﻿using System;
-using System.Linq;
-using NAPS2.Images.Storage;
-using NAPS2.Images.Transforms;
-
-namespace NAPS2.Images;
+﻿namespace NAPS2.Images;
 
 public abstract class Deskewer
 {

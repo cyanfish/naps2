@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using NAPS2.Images.Transforms;
+﻿using System.Reflection;
 using NAPS2.ImportExport.Pdf;
 using NAPS2.Scan;
-using NAPS2.Testing;
-using NAPS2.Util;
 
 namespace NAPS2.Images.Storage;
 

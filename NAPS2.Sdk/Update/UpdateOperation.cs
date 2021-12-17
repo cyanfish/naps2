@@ -1,20 +1,11 @@
-﻿using System;
-using System.ComponentModel;
-using System.Diagnostics;
-using System.IO;
+﻿using System.ComponentModel;
 using System.IO.Compression;
-using System.Linq;
 using System.Net;
 using System.Reflection;
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading;
 using System.Windows.Forms;
-using NAPS2.Lang.Resources;
-using NAPS2.Logging;
-using NAPS2.Operation;
-using NAPS2.Images.Storage;
-using NAPS2.Util;
 using NAPS2.WinForms;
 
 namespace NAPS2.Update;

@@ -1,5 +1,4 @@
 ﻿using System.Windows.Forms;
-using NAPS2.Lang.Resources;
 using NAPS2.Update;
 
 namespace NAPS2.WinForms;

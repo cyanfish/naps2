@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-
-namespace NAPS2.Wia;
+﻿namespace NAPS2.Wia;
 
 public class WiaDeviceManager : NativeWiaObject
 {

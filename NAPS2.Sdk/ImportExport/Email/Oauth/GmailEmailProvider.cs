@@ -1,8 +1,5 @@
-﻿using System.Diagnostics;
-using System.Threading;
-using System.Threading.Tasks;
+﻿using System.Threading;
 using MimeKit;
-using NAPS2.Util;
 
 namespace NAPS2.ImportExport.Email.Oauth;
 

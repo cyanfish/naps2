@@ -1,9 +1,5 @@
-﻿using System;
-using System.IO;
-using System.Threading;
-using System.Threading.Tasks;
+﻿using System.Threading;
 using System.Windows.Forms;
-using NAPS2.Lang.Resources;
 
 namespace NAPS2.WinForms;
 

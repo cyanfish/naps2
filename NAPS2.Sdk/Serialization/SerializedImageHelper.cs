@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using Google.Protobuf;
-using NAPS2.Images;
-using NAPS2.Images.Storage;
-using NAPS2.Images.Transforms;
+﻿using Google.Protobuf;
 using NAPS2.Scan;
 
 namespace NAPS2.Serialization;

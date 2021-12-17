@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Drawing;
 using System.Drawing.Imaging;
-using System.Threading.Tasks;
-using NAPS2.Images.Storage;
-using NAPS2.Util;
 
 namespace NAPS2.Images.Transforms;
 

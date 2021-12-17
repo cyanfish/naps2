@@ -1,12 +1,8 @@
-﻿using System;
-using System.Globalization;
-using System.Linq;
+﻿using System.Globalization;
 using System.Windows.Forms;
 using Eto;
-using NAPS2.Config;
 using NAPS2.EtoForms;
 using NAPS2.Scan;
-using NAPS2.Threading;
 
 namespace NAPS2.WinForms;
 

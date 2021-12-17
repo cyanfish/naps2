@@ -1,12 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using System.Threading;
-using System.Xml.Linq;
+﻿using System.Threading;
 using NAPS2.Dependencies;
-using NAPS2.Logging;
 
 namespace NAPS2.Ocr;
 

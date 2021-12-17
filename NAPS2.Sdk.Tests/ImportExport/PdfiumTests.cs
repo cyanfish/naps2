@@ -1,7 +1,4 @@
-﻿using System.IO;
-using System.Linq;
-using NAPS2.Images.Storage;
-using NAPS2.ImportExport.Pdf;
+﻿using NAPS2.ImportExport.Pdf;
 using NAPS2.Sdk.Tests.Asserts;
 using Xunit;
 

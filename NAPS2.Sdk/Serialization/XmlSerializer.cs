@@ -1,17 +1,11 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections;
 using System.Collections.Immutable;
 using System.Globalization;
-using System.IO;
-using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Xml;
-using System.Xml.Linq;
 using System.Xml.Serialization;
-using NAPS2.Util;
 
 namespace NAPS2.Serialization;
 

@@ -1,6 +1,3 @@
-using System;
-using NAPS2.Lang.Resources;
-
 namespace NAPS2.Scan.Exceptions;
 
 public class NoDevicesFoundException : ScanDriverException

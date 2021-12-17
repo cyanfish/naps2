@@ -1,6 +1,4 @@
-﻿using System;
-using System.Runtime.InteropServices;
-using NAPS2.Images.Storage;
+﻿using System.Runtime.InteropServices;
 
 namespace NAPS2.Images;
 

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace NAPS2.Operation;
+﻿namespace NAPS2.Operation;
 
 /// <summary>
 /// Arguments for the IOperation.Error event.

@@ -1,6 +1,4 @@
-﻿using NAPS2.Logging;
-using NAPS2.Operation;
-using Ninject;
+﻿using Ninject;
 
 namespace NAPS2;
 

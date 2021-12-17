@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace NAPS2.Operation;
+﻿namespace NAPS2.Operation;
 
 public class StubOperationProgress : OperationProgress
 {

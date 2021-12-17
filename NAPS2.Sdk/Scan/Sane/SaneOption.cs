@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace NAPS2.Scan.Sane;
+﻿namespace NAPS2.Scan.Sane;
 
 public class SaneOption
 {

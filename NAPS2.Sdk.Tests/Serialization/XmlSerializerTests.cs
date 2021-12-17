@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.Immutable;
-using System.IO;
-using System.Linq;
-using System.Xml.Linq;
+﻿using System.Collections.Immutable;
 using NAPS2.Serialization;
-using NAPS2.Util;
 using Xunit;
 
 namespace NAPS2.Sdk.Tests.Serialization;

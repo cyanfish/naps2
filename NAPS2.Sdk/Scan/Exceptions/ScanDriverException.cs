@@ -1,5 +1,3 @@
-using System;
-
 namespace NAPS2.Scan.Exceptions;
 
 public abstract class ScanDriverException : Exception

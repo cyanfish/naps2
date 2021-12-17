@@ -1,6 +1,4 @@
 ﻿using System.Threading;
-using NAPS2.Images;
-using NAPS2.Util;
 
 namespace NAPS2.ImportExport;
 

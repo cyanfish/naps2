@@ -1,4 +1,3 @@
-using System;
 using System.Threading;
 
 namespace NAPS2.Threading;

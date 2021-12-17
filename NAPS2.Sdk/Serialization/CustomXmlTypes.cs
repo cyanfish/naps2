@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace NAPS2.Serialization;
+﻿namespace NAPS2.Serialization;
 
 public abstract class CustomXmlTypes
 {

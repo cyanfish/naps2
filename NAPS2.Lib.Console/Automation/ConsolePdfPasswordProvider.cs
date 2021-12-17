@@ -1,6 +1,5 @@
 ﻿using NAPS2.ImportExport.Pdf;
 using NAPS2.Lang.ConsoleResources;
-using NAPS2.Logging;
 
 namespace NAPS2.Automation;
 

@@ -1,6 +1,4 @@
-﻿using NAPS2.Lang.Resources;
-
-namespace NAPS2.WinForms;
+﻿namespace NAPS2.WinForms;
 
 public class DonatePromptNotifyWidget : NotifyWidget
 {

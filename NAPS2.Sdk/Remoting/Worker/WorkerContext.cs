@@ -1,8 +1,4 @@
-﻿using System;
-using System.Diagnostics;
-using NAPS2.Logging;
-
-namespace NAPS2.Remoting.Worker;
+﻿namespace NAPS2.Remoting.Worker;
 
 /// <summary>
 /// A class storing the objects the client needs to use a NAPS2.Worker.exe instance.

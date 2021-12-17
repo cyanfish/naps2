@@ -1,8 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
-using Grpc.Core;
-using NAPS2.Images.Storage;
-using NAPS2.Platform;
+﻿using Grpc.Core;
 using NAPS2.Scan;
 using NAPS2.Scan.Internal;
 using NAPS2.Serialization;

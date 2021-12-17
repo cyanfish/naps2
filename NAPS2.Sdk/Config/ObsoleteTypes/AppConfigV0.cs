@@ -1,7 +1,6 @@
 using System.Windows.Forms;
 using System.Xml.Serialization;
 using NAPS2.ImportExport.Pdf;
-using NAPS2.Logging;
 using NAPS2.Ocr;
 using NAPS2.Scan;
 

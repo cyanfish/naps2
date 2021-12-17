@@ -1,5 +1,4 @@
-﻿using System.IO;
-using NAPS2.Dependencies;
+﻿using NAPS2.Dependencies;
 
 namespace NAPS2.Ocr;
 

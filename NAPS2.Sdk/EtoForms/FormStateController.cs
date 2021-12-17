@@ -1,7 +1,4 @@
-using System;
-using System.Linq;
 using Eto.Forms;
-using NAPS2.Config;
 
 namespace NAPS2.EtoForms;
 

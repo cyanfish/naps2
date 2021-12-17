@@ -1,11 +1,4 @@
-﻿using System.Collections.Generic;
-using NAPS2.Images.Storage;
-using NAPS2.Images.Transforms;
-using NAPS2.Lang.Resources;
-using NAPS2.Operation;
-using NAPS2.Threading;
-
-namespace NAPS2.Images;
+﻿namespace NAPS2.Images;
 
 public class DeskewOperation : OperationBase
 {

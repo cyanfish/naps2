@@ -1,5 +1,3 @@
-using System;
-using System.Diagnostics;
 using System.Windows.Forms;
 using NAPS2.ImportExport;
 using NAPS2.Scan;

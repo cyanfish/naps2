@@ -1,6 +1,4 @@
-﻿using System;
-using System.IO;
-using NLog;
+﻿using NLog;
 using NLog.Config;
 using NLog.Targets;
 using ILogger = NAPS2.Logging.ILogger;

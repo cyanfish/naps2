@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Xml.Linq;
-
-namespace NAPS2.Localization;
+﻿namespace NAPS2.Localization;
 
 public class LanguageContext
 {

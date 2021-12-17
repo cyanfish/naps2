@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Windows.Forms;
-using NAPS2.Lang.Resources;
+﻿using System.Windows.Forms;
 using NAPS2.Ocr;
 
 namespace NAPS2.WinForms

@@ -1,11 +1,6 @@
-using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
 using System.Threading;
-using System.Threading.Tasks;
 using Moq;
-using NAPS2.Images.Storage;
 using NAPS2.Scan;
 using NAPS2.Scan.Internal;
 

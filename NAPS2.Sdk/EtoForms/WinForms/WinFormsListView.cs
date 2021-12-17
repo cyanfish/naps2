@@ -1,10 +1,5 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Windows.Forms;
 using Eto.WinForms;
-using NAPS2.Platform;
-using NAPS2.Util;
 
 namespace NAPS2.EtoForms.WinForms;
 

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using NAPS2.Util;
+﻿using System.Reflection;
 
 namespace NAPS2.Config;
 

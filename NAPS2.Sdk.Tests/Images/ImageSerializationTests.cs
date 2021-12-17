@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.IO;
-using NAPS2.Images.Storage;
-using NAPS2.Images.Transforms;
+﻿using System.Drawing;
 using NAPS2.Scan;
 using NAPS2.Serialization;
 using Xunit;

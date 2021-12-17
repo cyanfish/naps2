@@ -1,4 +1,3 @@
-using System.Threading.Tasks;
 using Grpc.Core;
 
 namespace NAPS2.Remoting;

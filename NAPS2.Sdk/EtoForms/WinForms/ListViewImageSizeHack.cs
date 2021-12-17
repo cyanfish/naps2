@@ -1,8 +1,6 @@
 using System.Drawing;
 using System.Reflection;
 using System.Windows.Forms;
-using NAPS2.Images;
-using NAPS2.Platform;
 
 namespace NAPS2.EtoForms.WinForms;
 

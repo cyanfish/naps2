@@ -1,13 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
-using NAPS2.Logging;
+﻿using System.Threading;
 using NAPS2.Scan;
-using NAPS2.Images;
-using NAPS2.Images.Storage;
-using NAPS2.Images.Transforms;
-using NAPS2.Util;
 
 namespace NAPS2.ImportExport.Images;
 

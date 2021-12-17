@@ -1,8 +1,3 @@
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using NAPS2.Images;
-using NAPS2.Images.Storage;
 using NAPS2.Serialization;
 
 namespace NAPS2.ImportExport.Images;

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Threading;
-using System.Threading.Tasks;
-using NAPS2.Config;
-using NAPS2.Images;
+﻿using System.Threading;
 using NAPS2.WinForms;
 
 namespace NAPS2.Scan.Batch;

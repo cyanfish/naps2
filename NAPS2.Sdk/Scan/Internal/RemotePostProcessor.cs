@@ -1,9 +1,4 @@
-﻿using NAPS2.Images;
-using NAPS2.Images.Storage;
-using NAPS2.Images.Transforms;
-using NAPS2.Platform;
-
-namespace NAPS2.Scan.Internal;
+﻿namespace NAPS2.Scan.Internal;
 
 internal class RemotePostProcessor : IRemotePostProcessor
 {

@@ -1,8 +1,5 @@
 ﻿using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
-using NAPS2.Config;
-using NAPS2.Util;
 using Newtonsoft.Json.Linq;
 
 namespace NAPS2.ImportExport.Email.Oauth;

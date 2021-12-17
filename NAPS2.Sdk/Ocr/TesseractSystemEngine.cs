@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using NAPS2.Dependencies;
-using NAPS2.Util;
+﻿using NAPS2.Dependencies;
 
 namespace NAPS2.Ocr;
 

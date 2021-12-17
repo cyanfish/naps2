@@ -1,10 +1,4 @@
-﻿using System;
-using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-using NAPS2.Util;
+﻿using System.Threading;
 using Newtonsoft.Json.Linq;
 
 namespace NAPS2.ImportExport.Email.Oauth;

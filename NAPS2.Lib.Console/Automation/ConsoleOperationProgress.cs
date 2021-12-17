@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using NAPS2.Operation;
-using NAPS2.WinForms;
+﻿using NAPS2.WinForms;
 
 namespace NAPS2.Automation;
 

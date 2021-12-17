@@ -1,10 +1,6 @@
-﻿using System;
-using System.IO;
-using System.Threading;
+﻿using System.Threading;
 using NAPS2.ImportExport.Images;
 using NAPS2.ImportExport.Pdf;
-using NAPS2.Images;
-using NAPS2.Util;
 
 namespace NAPS2.ImportExport;
 

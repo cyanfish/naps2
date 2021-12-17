@@ -1,7 +1,4 @@
-﻿using System;
-using System.IO;
-using NAPS2.Logging;
-using NAPS2.Serialization;
+﻿using NAPS2.Serialization;
 
 namespace NAPS2.Config;
 

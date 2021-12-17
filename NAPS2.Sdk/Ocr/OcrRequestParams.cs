@@ -1,7 +1,4 @@
-﻿using System;
-using NAPS2.Images;
-
-namespace NAPS2.Ocr;
+﻿namespace NAPS2.Ocr;
 
 public class OcrRequestParams : IEquatable<OcrRequestParams>
 {

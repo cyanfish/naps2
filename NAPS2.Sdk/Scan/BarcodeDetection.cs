@@ -1,6 +1,3 @@
-using System;
-using System.Collections.Generic;
-using NAPS2.Images.Storage;
 using ZXing;
 using ZXing.Common;
 

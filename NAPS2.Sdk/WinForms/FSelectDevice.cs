@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
 using NAPS2.Scan;
 
 namespace NAPS2.WinForms

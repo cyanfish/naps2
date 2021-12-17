@@ -1,6 +1,4 @@
-﻿using NAPS2.Config;
-
-namespace NAPS2.Scan;
+﻿namespace NAPS2.Scan;
 
 /// <summary>
 /// A class used to help keep profile names consistent across forms.

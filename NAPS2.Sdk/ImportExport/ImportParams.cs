@@ -1,5 +1,4 @@
 ﻿using NAPS2.Scan;
-using NAPS2.Util;
 
 namespace NAPS2.ImportExport;
 

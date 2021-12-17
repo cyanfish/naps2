@@ -1,15 +1,9 @@
-﻿using System;
-using System.Diagnostics;
-using System.Text;
+﻿using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using GrpcDotNetNamedPipes;
-using NAPS2.Images.Storage;
-using NAPS2.Logging;
 using NAPS2.Modules;
 using NAPS2.Remoting.Worker;
-using NAPS2.Threading;
 using NAPS2.WinForms;
 using Ninject;
 

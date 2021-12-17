@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Threading;
+﻿using System.Threading;
 using NAPS2.Dependencies;
 
 namespace NAPS2.Ocr;

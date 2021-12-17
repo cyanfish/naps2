@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using NAPS2.Testing;
-
-namespace NAPS2.Operation;
+﻿namespace NAPS2.Operation;
 
 /// <summary>
 /// A base class for objects capabable of displaying progress for an operation.

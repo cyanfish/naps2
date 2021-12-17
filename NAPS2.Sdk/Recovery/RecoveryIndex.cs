@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace NAPS2.Recovery;
+﻿namespace NAPS2.Recovery;
 
 public class RecoveryIndex
 {

@@ -1,6 +1,3 @@
-using System;
-using System.Diagnostics;
-
 namespace NAPS2.Logging;
 
 public class DebugLogger : ILogger

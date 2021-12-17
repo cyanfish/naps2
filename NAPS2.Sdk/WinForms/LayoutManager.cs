@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
+﻿using System.Linq.Expressions;
 using System.Windows.Forms;
-using NAPS2.Util;
 
 namespace NAPS2.WinForms;
 

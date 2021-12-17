@@ -1,6 +1,5 @@
 ﻿using System.Windows.Forms;
 using NAPS2.Dependencies;
-using NAPS2.Lang.Resources;
 
 namespace NAPS2.WinForms;
 

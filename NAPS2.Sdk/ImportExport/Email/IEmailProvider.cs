@@ -1,6 +1,4 @@
 using System.Threading;
-using System.Threading.Tasks;
-using NAPS2.Util;
 
 namespace NAPS2.ImportExport.Email;
 

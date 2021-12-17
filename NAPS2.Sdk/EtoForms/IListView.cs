@@ -1,8 +1,5 @@
-using System;
-using System.Collections.Generic;
 using Eto.Drawing;
 using Eto.Forms;
-using NAPS2.Util;
 
 namespace NAPS2.EtoForms;
 

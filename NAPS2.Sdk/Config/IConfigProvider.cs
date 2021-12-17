@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace NAPS2.Config;
+﻿namespace NAPS2.Config;
 
 /// <summary>
 /// Represents a source of configuration data. The source must be complete, i.e. it must never return null.

@@ -1,6 +1,4 @@
-﻿using System.Xml.Linq;
-
-namespace NAPS2.Serialization;
+﻿namespace NAPS2.Serialization;
 
 /// <summary>
 /// A class for strings that are encrypted when XML-serialized.

@@ -1,5 +1,3 @@
-using System.Threading.Tasks;
-using NAPS2.Images.Storage;
 using NAPS2.Remoting.Worker;
 using Xunit;
 

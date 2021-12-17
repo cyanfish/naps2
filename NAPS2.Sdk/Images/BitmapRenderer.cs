@@ -1,6 +1,4 @@
 ﻿using System.Drawing;
-using System.Threading.Tasks;
-using NAPS2.Images.Storage;
 
 namespace NAPS2.Images;
 

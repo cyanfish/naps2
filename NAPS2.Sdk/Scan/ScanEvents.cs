@@ -1,5 +1,4 @@
-﻿using System;
-using NAPS2.Scan.Internal;
+﻿using NAPS2.Scan.Internal;
 
 namespace NAPS2.Scan;
 

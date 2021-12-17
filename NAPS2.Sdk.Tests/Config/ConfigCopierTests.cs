@@ -1,5 +1,4 @@
-﻿using NAPS2.Config;
-using NAPS2.Scan;
+﻿using NAPS2.Scan;
 using Xunit;
 
 namespace NAPS2.Sdk.Tests.Config;

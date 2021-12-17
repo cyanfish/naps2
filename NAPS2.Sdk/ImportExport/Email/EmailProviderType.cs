@@ -1,5 +1,4 @@
-﻿using NAPS2.Lang.Resources;
-using NAPS2.Scan;
+﻿using NAPS2.Scan;
 
 namespace NAPS2.ImportExport.Email;
 

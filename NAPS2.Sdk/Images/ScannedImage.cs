@@ -1,6 +1,3 @@
-using System;
-using NAPS2.Images.Storage;
-using NAPS2.Images.Transforms;
 using NAPS2.Scan;
 using NAPS2.Serialization;
 

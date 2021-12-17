@@ -1,25 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
+﻿using System.Threading;
 using System.Xml.Serialization;
-using NAPS2.Config;
 using NAPS2.Dependencies;
 using NAPS2.ImportExport;
 using NAPS2.ImportExport.Email;
 using NAPS2.ImportExport.Images;
 using NAPS2.ImportExport.Pdf;
 using NAPS2.Lang.ConsoleResources;
-using NAPS2.Logging;
 using NAPS2.Ocr;
-using NAPS2.Operation;
 using NAPS2.Scan;
-using NAPS2.Images;
-using NAPS2.Images.Storage;
-using NAPS2.Util;
 using NAPS2.WinForms;
 
 namespace NAPS2.Automation;
@@ -289,7 +277,7 @@ public class AutomatedScanning
                 var importParams = new ImportParams
                 {
                     Slice = Slice.Parse(filePath, out string actualPath),
-                    BarcodeDetectionOptions = 
+                    BarcodeDetectionOptions =
                     {
                         DetectBarcodes = _options.SplitPatchT,
                         PatchTOnly = true

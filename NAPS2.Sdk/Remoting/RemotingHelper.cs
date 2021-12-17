@@ -1,8 +1,5 @@
-﻿using System;
-using System.Linq;
-using System.Reflection;
+﻿using System.Reflection;
 using NAPS2.Scan.Exceptions;
-using NAPS2.Util;
 
 namespace NAPS2.Remoting;
 

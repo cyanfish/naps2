@@ -1,5 +1,4 @@
-﻿using System;
-using NAPS2.Serialization;
+﻿using NAPS2.Serialization;
 
 namespace NAPS2.ImportExport.Email.Oauth;
 

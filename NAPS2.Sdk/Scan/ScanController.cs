@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
-using NAPS2.Images;
+﻿using System.Threading;
 using NAPS2.Scan.Internal;
 
 namespace NAPS2.Scan;

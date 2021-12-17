@@ -1,10 +1,6 @@
-using System;
 using NAPS2.Automation;
 using NAPS2.Dependencies;
 using NAPS2.ImportExport.Pdf;
-using NAPS2.Logging;
-using NAPS2.Operation;
-using NAPS2.Util;
 using NAPS2.WinForms;
 using Ninject.Modules;
 

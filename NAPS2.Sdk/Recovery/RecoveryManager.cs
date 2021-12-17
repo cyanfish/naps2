@@ -1,14 +1,4 @@
-﻿using System;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using NAPS2.Lang.Resources;
-using NAPS2.Logging;
-using NAPS2.Operation;
-using NAPS2.Images;
-using NAPS2.Images.Storage;
-using NAPS2.Images.Transforms;
+﻿using System.Windows.Forms;
 using NAPS2.Scan;
 using NAPS2.Serialization;
 using NAPS2.WinForms;

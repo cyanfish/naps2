@@ -1,4 +1,3 @@
-using NAPS2.Config;
 using NAPS2.WinForms;
 
 namespace NAPS2.EtoForms;

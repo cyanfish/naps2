@@ -1,17 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-using NAPS2.Images.Storage;
-using NAPS2.Logging;
+﻿using System.Threading;
 using NAPS2.Remoting.Worker;
 using NAPS2.Scan.Exceptions;
 using NAPS2.Scan.Wia;
 using NAPS2.Wia;
-using NAPS2.Util;
 
 namespace NAPS2.Scan.Internal;
 

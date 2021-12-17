@@ -1,12 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using NAPS2.Config;
-using NAPS2.Operation;
-using NAPS2.Threading;
+﻿using System.Drawing;
 using NAPS2.Update;
-using NAPS2.Util;
 
 namespace NAPS2.WinForms;
 

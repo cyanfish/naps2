@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using NAPS2.Dependencies;
+﻿using NAPS2.Dependencies;
 
 namespace NAPS2.Ocr;
 

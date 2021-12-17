@@ -1,5 +1,4 @@
-﻿using System;
-using PdfSharp.Pdf.IO;
+﻿using PdfSharp.Pdf.IO;
 using Xunit;
 
 namespace NAPS2.Sdk.Tests.Asserts;

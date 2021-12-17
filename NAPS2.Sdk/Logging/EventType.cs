@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace NAPS2.Logging;
+﻿namespace NAPS2.Logging;
 
 [Flags]
 public enum EventType

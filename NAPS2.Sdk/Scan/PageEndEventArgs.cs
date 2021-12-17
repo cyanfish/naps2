@@ -1,7 +1,4 @@
-﻿using System;
-using NAPS2.Images;
-
-namespace NAPS2.Scan;
+﻿namespace NAPS2.Scan;
 
 public class PageEndEventArgs : EventArgs
 {

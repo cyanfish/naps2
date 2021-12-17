@@ -1,6 +1,3 @@
-using System;
-using System.Collections.Generic;
-
 namespace NAPS2.Images;
 
 public class UndoStack : IDisposable

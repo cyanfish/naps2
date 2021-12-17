@@ -1,6 +1,4 @@
-﻿using System.IO;
-
-namespace NAPS2.Util;
+﻿namespace NAPS2.Util;
 
 public static class PathHelper
 {

@@ -1,5 +1,4 @@
-﻿using System.IO;
-using NAPS2.Scan.Sane;
+﻿using NAPS2.Scan.Sane;
 using Xunit;
 
 namespace NAPS2.Sdk.Tests.Scan;

@@ -1,14 +1,8 @@
-﻿using System.Collections.Generic;
-using System.Drawing;
+﻿using System.Drawing;
 using System.Drawing.Imaging;
-using System.IO;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using Eto.Forms;
 using Eto.WinForms;
-using NAPS2.Images;
-using NAPS2.Images.Storage;
 using NAPS2.ImportExport.Images;
 
 namespace NAPS2.WinForms;

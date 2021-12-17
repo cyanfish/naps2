@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Concurrent;
-using System.Diagnostics;
-using System.IO;
+﻿using System.Collections.Concurrent;
 using System.Reflection;
-using System.Threading.Tasks;
 using GrpcDotNetNamedPipes;
-using NAPS2.Images.Storage;
-using NAPS2.Platform;
 
 namespace NAPS2.Remoting.Worker;
 

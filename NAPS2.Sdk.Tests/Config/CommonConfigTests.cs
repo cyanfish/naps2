@@ -1,6 +1,4 @@
-﻿using System.Linq;
-using NAPS2.Config;
-using NAPS2.Serialization;
+﻿using NAPS2.Serialization;
 using Xunit;
 
 namespace NAPS2.Sdk.Tests.Config;

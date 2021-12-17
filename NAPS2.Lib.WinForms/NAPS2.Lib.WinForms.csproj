@@ -10,6 +10,7 @@
   </PropertyGroup>
 
   <Import Project="..\NAPS2.Setup\CommonTargets.targets" />
+  <Import Project="..\NAPS2.Setup\SdkUsers.targets" />
 
   <ItemGroup>
     <ProjectReference Include="..\NAPS2.Lib.Common\NAPS2.Lib.Common.csproj" />

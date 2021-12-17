@@ -1,13 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using NAPS2.Lang.Resources;
-using NAPS2.Logging;
-using NAPS2.Operation;
-using NAPS2.Images;
-using NAPS2.Util;
-
-namespace NAPS2.ImportExport;
+﻿namespace NAPS2.ImportExport;
 
 public class ImportOperation : OperationBase
 {

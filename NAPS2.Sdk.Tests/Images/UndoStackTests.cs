@@ -1,7 +1,3 @@
-using System.Collections.Generic;
-using System.Linq;
-using NAPS2.Images;
-using NAPS2.Images.Transforms;
 using Xunit;
 
 namespace NAPS2.Sdk.Tests.Images;

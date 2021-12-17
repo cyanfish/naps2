@@ -1,7 +1,4 @@
-﻿using System;
-using System.Linq;
-
-namespace NAPS2.Dependencies;
+﻿namespace NAPS2.Dependencies;
 
 public class PlatformSupport
 {

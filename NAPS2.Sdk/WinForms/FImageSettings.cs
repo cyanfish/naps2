@@ -1,8 +1,5 @@
-using System;
 using System.Globalization;
-using System.IO;
 using System.Windows.Forms;
-using NAPS2.Config;
 using NAPS2.ImportExport.Images;
 
 namespace NAPS2.WinForms;

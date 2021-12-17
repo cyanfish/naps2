@@ -1,5 +1,3 @@
-using System;
-using NAPS2.Util;
 using Xunit;
 
 namespace NAPS2.Sdk.Tests.Util;

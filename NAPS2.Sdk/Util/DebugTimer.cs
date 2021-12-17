@@ -1,7 +1,4 @@
-﻿using System;
-using System.Diagnostics;
-
-namespace NAPS2.Util;
+﻿namespace NAPS2.Util;
 
 public class DebugTimer : IDisposable
 {

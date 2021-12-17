@@ -1,4 +1,3 @@
-using NAPS2.Lang.Resources;
 using NAPS2.Scan;
 
 namespace NAPS2.ImportExport.Pdf;

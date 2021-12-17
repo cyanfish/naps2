@@ -1,6 +1,3 @@
-using System.Threading.Tasks;
-using NAPS2.Images;
-using NAPS2.Images.Storage;
 using NAPS2.ImportExport.Pdf;
 using NAPS2.Sdk.Tests.Asserts;
 using NAPS2.Sdk.Tests.Images;

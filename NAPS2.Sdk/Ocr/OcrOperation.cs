@@ -1,8 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
-using NAPS2.Lang.Resources;
-using NAPS2.Operation;
+﻿using System.Threading;
 
 namespace NAPS2.Ocr;
 

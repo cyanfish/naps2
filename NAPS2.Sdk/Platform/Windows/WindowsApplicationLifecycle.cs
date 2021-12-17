@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Reflection;
+﻿using System.Reflection;
 using System.Security.Principal;
 using System.Windows.Forms;
-using NAPS2.Config;
-using NAPS2.Logging;
 using NAPS2.Remoting;
 
 namespace NAPS2.Platform.Windows;

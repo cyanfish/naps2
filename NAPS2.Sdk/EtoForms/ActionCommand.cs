@@ -1,4 +1,3 @@
-using System;
 using Eto.Forms;
 
 namespace NAPS2.EtoForms;

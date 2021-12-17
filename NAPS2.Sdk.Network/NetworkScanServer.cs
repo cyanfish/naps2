@@ -1,9 +1,5 @@
-using System;
-using System.Linq;
 using System.Threading;
-using System.Threading.Tasks;
 using Grpc.Core;
-using NAPS2.Images.Storage;
 using NAPS2.Remoting.Network.Internal;
 using NAPS2.Remoting.Worker;
 using NAPS2.Scan.Internal;

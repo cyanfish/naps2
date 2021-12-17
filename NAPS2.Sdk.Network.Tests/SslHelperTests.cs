@@ -1,6 +1,4 @@
-using System.IO;
 using System.Security.Cryptography.X509Certificates;
-using NAPS2.Util;
 using Org.BouncyCastle.OpenSsl;
 using Xunit;
 

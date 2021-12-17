@@ -1,12 +1,7 @@
-using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
-using System.Linq;
 using System.Windows.Forms;
 using NAPS2.EtoForms.WinForms;
-using NAPS2.Platform;
-using NAPS2.Images;
-using NAPS2.Images.Storage;
 
 namespace NAPS2.WinForms
 {

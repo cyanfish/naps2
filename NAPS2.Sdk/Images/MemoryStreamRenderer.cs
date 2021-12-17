@@ -1,8 +1,4 @@
-﻿using System.IO;
-using System.Threading.Tasks;
-using NAPS2.Images.Storage;
-
-namespace NAPS2.Images;
+﻿namespace NAPS2.Images;
 
 public class MemoryStreamRenderer : IScannedImageRenderer<MemoryStream>
 {

@@ -1,6 +1,4 @@
-﻿using System.Threading.Tasks;
-
-namespace NAPS2.Threading;
+﻿namespace NAPS2.Threading;
 
 public static class TaskExtensions
 {

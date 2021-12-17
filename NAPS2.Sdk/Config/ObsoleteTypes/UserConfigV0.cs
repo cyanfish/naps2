@@ -1,8 +1,5 @@
-using System;
-using System.Collections.Generic;
 using System.Windows.Forms;
 using System.Xml.Serialization;
-using NAPS2.Images;
 using NAPS2.ImportExport.Email;
 using NAPS2.ImportExport.Images;
 using NAPS2.ImportExport.Pdf;

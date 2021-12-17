@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace NAPS2.Config;
+﻿namespace NAPS2.Config;
 
 public class ObjectConfigScope<TConfig> : ConfigScope<TConfig>
 {

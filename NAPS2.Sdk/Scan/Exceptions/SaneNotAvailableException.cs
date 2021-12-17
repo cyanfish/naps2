@@ -1,7 +1,4 @@
-﻿using System;
-using NAPS2.Lang.Resources;
-
-namespace NAPS2.Scan.Exceptions;
+﻿namespace NAPS2.Scan.Exceptions;
 
 public class SaneNotAvailableException : ScanDriverException
 {

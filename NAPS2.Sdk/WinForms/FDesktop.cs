@@ -1,39 +1,24 @@
 #region Usings
 
-using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Diagnostics;
 using System.Drawing;
 using System.Globalization;
-using System.IO;
-using System.Linq;
 using System.Reflection;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Eto.WinForms;
-using NAPS2.Config;
 using NAPS2.EtoForms.Ui;
 using NAPS2.ImportExport;
 using NAPS2.Lang;
-using NAPS2.Lang.Resources;
-using NAPS2.Logging;
 using NAPS2.Ocr;
-using NAPS2.Operation;
-using NAPS2.Platform;
 using NAPS2.Recovery;
 using NAPS2.Scan;
-using NAPS2.Images;
-using NAPS2.Images.Storage;
 using NAPS2.ImportExport.Images;
 using NAPS2.Platform.Windows;
 using NAPS2.Remoting;
 using NAPS2.Remoting.Worker;
-using NAPS2.Threading;
 using NAPS2.Wia;
 using NAPS2.Update;
-using NAPS2.Util;
 
 #endregion
 

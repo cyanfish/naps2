@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace NAPS2.Platform;
+﻿namespace NAPS2.Platform;
 
 public class PlatformCompat
 {

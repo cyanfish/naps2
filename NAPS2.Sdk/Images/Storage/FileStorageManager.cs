@@ -1,6 +1,4 @@
-﻿using System;
-using System.Globalization;
-using System.IO;
+﻿using System.Globalization;
 
 namespace NAPS2.Images.Storage;
 

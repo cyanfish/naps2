@@ -1,7 +1,4 @@
-﻿using System.IO;
-using NAPS2.Util;
-
-namespace NAPS2.Dependencies;
+﻿namespace NAPS2.Dependencies;
 
 public class ExternalComponent : IExternalComponent
 {

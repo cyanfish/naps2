@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace NAPS2.Ocr;
+﻿namespace NAPS2.Ocr;
 
 public class OcrParams : IEquatable<OcrParams>
 {

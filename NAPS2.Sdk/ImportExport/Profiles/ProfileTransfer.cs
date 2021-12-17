@@ -1,4 +1,3 @@
-using System.Diagnostics;
 using NAPS2.Scan;
 using NAPS2.Serialization;
 

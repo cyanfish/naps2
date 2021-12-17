@@ -1,5 +1,3 @@
-using System;
-using NAPS2.Lang.Resources;
 using NAPS2.Scan;
 using NAPS2.Wia;
 

@@ -1,10 +1,5 @@
-﻿using System;
-using System.Drawing;
-using System.IO;
+﻿using System.Drawing;
 using System.Threading;
-using NAPS2.Config;
-using NAPS2.Images;
-using NAPS2.Images.Storage;
 
 namespace NAPS2.Sdk.Tests;
 

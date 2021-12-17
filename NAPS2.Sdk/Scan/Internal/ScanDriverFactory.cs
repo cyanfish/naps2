@@ -1,7 +1,4 @@
-﻿using System;
-using NAPS2.Images.Storage;
-
-namespace NAPS2.Scan.Internal;
+﻿namespace NAPS2.Scan.Internal;
 
 internal class ScanDriverFactory : IScanDriverFactory
 {

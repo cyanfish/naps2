@@ -1,4 +1,3 @@
-using System;
 using NAPS2.EntryPoints;
 
 namespace NAPS2;

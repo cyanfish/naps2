@@ -1,7 +1,4 @@
-﻿using System.IO;
-using NAPS2.Lang.Resources;
-
-namespace NAPS2.WinForms;
+﻿namespace NAPS2.WinForms;
 
 public class PdfSavedNotifyWidget : NotifyWidget
 {

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace NAPS2.Wia;
+﻿namespace NAPS2.Wia;
 
 public class WiaProperty
 {

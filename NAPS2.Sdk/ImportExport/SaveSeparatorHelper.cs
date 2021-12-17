@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using NAPS2.Images;
-
-namespace NAPS2.ImportExport;
+﻿namespace NAPS2.ImportExport;
 
 public static class SaveSeparatorHelper
 {

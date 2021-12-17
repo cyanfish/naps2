@@ -1,9 +1,6 @@
 using System.Drawing;
-using System.IO;
 using System.Text;
-using System.Threading.Tasks;
 using NAPS2.Automation;
-using NAPS2.Images.Storage;
 using NAPS2.Modules;
 using NAPS2.Ocr;
 using NAPS2.Scan.Internal;
@@ -74,7 +71,7 @@ public class CommandLineIntegrationTests : ContextualTexts
         PdfAsserts.AssertPageCount(1, $"{FolderPath}/3.pdf");
         Assert.False(File.Exists($"{FolderPath}/4.pdf"));
     }
-        
+
     // TODO: Add tests for all options, as well as key combinations
 
     private class TestModule : NinjectModule
@@ -89,7 +86,7 @@ public class CommandLineIntegrationTests : ContextualTexts
             _scanDriverFactory = scanDriverFactory;
             _testOutputHelper = testOutputHelper;
         }
-            
+
         public override void Load()
         {
             Rebind<ImageContext>().ToConstant(_imageContext);
@@ -103,7 +100,7 @@ public class CommandLineIntegrationTests : ContextualTexts
     private class TestOutputTextWriter : TextWriter
     {
         readonly ITestOutputHelper _output;
-            
+
         public TestOutputTextWriter(ITestOutputHelper output)
         {
             _output = output;

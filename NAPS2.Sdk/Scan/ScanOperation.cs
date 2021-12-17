@@ -1,6 +1,4 @@
 ﻿using System.Threading;
-using NAPS2.Lang.Resources;
-using NAPS2.Operation;
 
 namespace NAPS2.Scan;
 

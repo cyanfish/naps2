@@ -1,18 +1,14 @@
-﻿using System;
-using System.Linq;
-using System.Net;
+﻿using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
-using NAPS2.Util;
 
 namespace NAPS2.Remoting.Network.Internal;
 
 internal static class Discovery
 {
     public const int DEFAULT_DISCOVERY_PORT = 33277;
-        
+
     private static readonly byte[] MagicBroadcastBytes = { 0x7f, 0x87, 0x00, 0x8b, 0x08, 0x87, 0x5d, 0xd3, 0x64, 0x1a };
     private static readonly byte[] MagicResponseBytes = { 0xf4, 0x38, 0xb9, 0xa3, 0xf7, 0x37, 0xaf, 0x35, 0x41, 0xc7 };
 
@@ -21,7 +17,7 @@ internal static class Discovery
     {
         var udpClient = new UdpClient(discoveryPort);
         using var cancelReg = cancellationToken.Register(() => udpClient.Dispose());
-            
+
         var fallback = new ExpFallback(100, 60 * 1000);
         while (true)
         {

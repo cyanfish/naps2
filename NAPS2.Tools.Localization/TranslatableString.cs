@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace NAPS2.Localization;
+﻿namespace NAPS2.Localization;
 
 public class TranslatableString
 {

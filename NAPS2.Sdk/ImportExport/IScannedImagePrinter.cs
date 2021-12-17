@@ -1,7 +1,4 @@
-using System.Collections.Generic;
 using System.Drawing.Printing;
-using System.Threading.Tasks;
-using NAPS2.Images;
 
 namespace NAPS2.ImportExport;
 

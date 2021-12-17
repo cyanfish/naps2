@@ -1,8 +1,3 @@
-using System.Threading.Tasks;
-using NAPS2.Images;
-using NAPS2.Images.Storage;
-using NAPS2.Util;
-
 namespace NAPS2.WinForms;
 
 public class UserActions

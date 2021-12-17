@@ -1,8 +1,4 @@
-﻿using System;
-using System.Linq;
-using System.Threading.Tasks;
-using NAPS2.Config;
-using NAPS2.Unmanaged;
+﻿using NAPS2.Unmanaged;
 
 namespace NAPS2.ImportExport.Email.Mapi;
 

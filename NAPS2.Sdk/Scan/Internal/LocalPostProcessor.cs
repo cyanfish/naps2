@@ -1,6 +1,4 @@
-﻿using NAPS2.Images;
-using NAPS2.Ocr;
-using NAPS2.Threading;
+﻿using NAPS2.Ocr;
 
 namespace NAPS2.Scan.Internal;
 

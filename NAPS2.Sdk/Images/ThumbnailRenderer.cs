@@ -1,7 +1,3 @@
-using System.Threading.Tasks;
-using NAPS2.Images.Storage;
-using NAPS2.Images.Transforms;
-
 namespace NAPS2.Images;
 
 public class ThumbnailRenderer : IScannedImageRenderer<IImage>

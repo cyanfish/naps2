@@ -1,8 +1,5 @@
-﻿using System;
-using System.Net;
+﻿using System.Net;
 using System.Reflection;
-using System.Threading.Tasks;
-using NAPS2.Operation;
 using Newtonsoft.Json.Linq;
 
 namespace NAPS2.Update;

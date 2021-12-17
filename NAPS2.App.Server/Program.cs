@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace NAPS2.Server;
+﻿namespace NAPS2.Server;
 
 static class Program
 {

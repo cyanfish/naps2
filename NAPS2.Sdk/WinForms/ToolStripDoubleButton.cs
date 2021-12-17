@@ -1,9 +1,6 @@
-﻿using System;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Drawing;
-using System.Linq;
 using System.Windows.Forms;
-using NAPS2.Platform;
 
 namespace NAPS2.WinForms;
 

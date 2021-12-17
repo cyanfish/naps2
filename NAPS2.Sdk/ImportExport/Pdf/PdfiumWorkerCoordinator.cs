@@ -1,6 +1,3 @@
-using System.Collections.Generic;
-using System.IO;
-using NAPS2.Images.Storage;
 using NAPS2.Remoting.Worker;
 
 namespace NAPS2.ImportExport.Pdf;

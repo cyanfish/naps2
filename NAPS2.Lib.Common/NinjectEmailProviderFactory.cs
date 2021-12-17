@@ -1,5 +1,4 @@
-﻿using NAPS2.Config;
-using NAPS2.ImportExport.Email;
+﻿using NAPS2.ImportExport.Email;
 using NAPS2.ImportExport.Email.Mapi;
 using NAPS2.ImportExport.Email.Oauth;
 using Ninject;

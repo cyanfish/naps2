@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Immutable;
+﻿using System.Collections.Immutable;
 using System.Windows.Forms;
 using NAPS2.ImportExport;
 using NAPS2.ImportExport.Email;
 using NAPS2.ImportExport.Email.Oauth;
 using NAPS2.ImportExport.Images;
 using NAPS2.ImportExport.Pdf;
-using NAPS2.Lang.Resources;
-using NAPS2.Logging;
 using NAPS2.Ocr;
 using NAPS2.Scan;
 using NAPS2.Scan.Batch;

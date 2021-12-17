@@ -1,6 +1,4 @@
-﻿using NAPS2.Images.Storage;
-using NAPS2.Operation;
-using NAPS2.Remoting.Worker;
+﻿using NAPS2.Remoting.Worker;
 using Ninject;
 using Ninject.Modules;
 

@@ -1,6 +1,4 @@
-﻿using System;
-using NAPS2.Images.Storage;
-using NAPS2.Remoting.Worker;
+﻿using NAPS2.Remoting.Worker;
 
 namespace NAPS2.Scan.Internal;
 

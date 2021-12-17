@@ -1,6 +1,4 @@
-﻿using System;
-using System.Diagnostics;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
 
 namespace NAPS2.WinForms;
 

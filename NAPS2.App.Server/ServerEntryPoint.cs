@@ -1,12 +1,7 @@
-﻿using System;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
+﻿using System.Threading;
 using System.Windows.Forms;
-using NAPS2.Logging;
 using NAPS2.Modules;
 using NAPS2.Remoting.Worker;
-using NAPS2.Threading;
 using NAPS2.WinForms;
 using Ninject;
 

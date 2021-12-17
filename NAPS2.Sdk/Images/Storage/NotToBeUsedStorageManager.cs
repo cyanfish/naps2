@@ -1,5 +1,3 @@
-using System;
-
 namespace NAPS2.Images.Storage;
 
 public class NotToBeUsedStorageManager : FileStorageManager

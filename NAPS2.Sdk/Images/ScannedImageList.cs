@@ -1,10 +1,4 @@
-using System;
-using System.Collections.Generic;
 using System.Threading;
-using System.Threading.Tasks;
-using NAPS2.Images.Storage;
-using NAPS2.Threading;
-using NAPS2.Util;
 
 namespace NAPS2.Images;
 

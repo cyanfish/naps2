@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using NAPS2.Images.Transforms;
-using NAPS2.Scan;
+﻿using NAPS2.Scan;
 
 namespace NAPS2.Images.Storage;
 

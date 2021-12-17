@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
+﻿using System.Drawing;
 using System.Windows.Forms;
 using NAPS2.ImportExport.Email;
 using NAPS2.ImportExport.Email.Mapi;

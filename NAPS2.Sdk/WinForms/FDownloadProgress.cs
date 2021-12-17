@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.IO;
+﻿using System.ComponentModel;
 using System.Net;
 using System.Security.Cryptography;
 using System.Windows.Forms;
 using NAPS2.Dependencies;
-using NAPS2.Lang.Resources;
-using NAPS2.Logging;
 
 namespace NAPS2.WinForms;
 

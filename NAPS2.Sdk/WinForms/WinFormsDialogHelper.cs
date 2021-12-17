@@ -1,7 +1,4 @@
-﻿using System.IO;
-using System.Windows.Forms;
-using NAPS2.Config;
-using NAPS2.Lang.Resources;
+﻿using System.Windows.Forms;
 
 namespace NAPS2.WinForms;
 

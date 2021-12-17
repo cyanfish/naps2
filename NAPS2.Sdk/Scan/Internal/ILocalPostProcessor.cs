@@ -1,6 +1,4 @@
-﻿using NAPS2.Images;
-
-namespace NAPS2.Scan.Internal;
+﻿namespace NAPS2.Scan.Internal;
 
 /// <summary>
 /// Performs local post-processing on an image just before it is returned from IScanController.

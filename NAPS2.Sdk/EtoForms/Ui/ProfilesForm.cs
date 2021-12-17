@@ -1,17 +1,10 @@
-using System;
-using System.Diagnostics;
-using System.Linq;
 using Eto.Drawing;
 using Eto.Forms;
 using Eto.WinForms;
 using Eto.WinForms.Forms;
-using NAPS2.Config;
-using NAPS2.Images;
 using NAPS2.ImportExport.Profiles;
-using NAPS2.Lang.Resources;
 using NAPS2.Scan;
 using NAPS2.Serialization;
-using NAPS2.Util;
 using NAPS2.WinForms;
 
 namespace NAPS2.EtoForms.Ui;

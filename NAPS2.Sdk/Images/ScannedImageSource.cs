@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-
-namespace NAPS2.Images;
+﻿namespace NAPS2.Images;
 
 public abstract class ScannedImageSource
 {

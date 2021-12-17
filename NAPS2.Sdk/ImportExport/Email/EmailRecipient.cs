@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace NAPS2.ImportExport.Email;
+﻿namespace NAPS2.ImportExport.Email;
 
 public class EmailRecipient
 {

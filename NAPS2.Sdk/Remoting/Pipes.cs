@@ -1,10 +1,6 @@
-﻿using System;
-using System.Diagnostics;
-using System.IO;
-using System.IO.Pipes;
+﻿using System.IO.Pipes;
 using System.Text;
 using System.Threading;
-using NAPS2.Logging;
 
 namespace NAPS2.Remoting;
 

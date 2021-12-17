@@ -1,8 +1,4 @@
-﻿using System.IO;
-using System.Linq;
-using System.Xml.Linq;
-
-namespace NAPS2.Serialization;
+﻿namespace NAPS2.Serialization;
 
 public abstract class VersionedSerializer<T> : ISerializer<T>
 {

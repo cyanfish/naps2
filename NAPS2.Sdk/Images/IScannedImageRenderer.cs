@@ -1,6 +1,4 @@
-﻿using System.Threading.Tasks;
-
-namespace NAPS2.Images;
+﻿namespace NAPS2.Images;
 
 public interface IScannedImageRenderer<TImage>
 {

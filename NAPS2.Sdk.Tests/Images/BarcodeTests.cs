@@ -1,4 +1,3 @@
-using NAPS2.Images.Storage;
 using NAPS2.Scan;
 using Xunit;
 

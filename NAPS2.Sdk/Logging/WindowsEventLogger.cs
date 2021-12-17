@@ -1,8 +1,4 @@
-﻿using System;
-using System.Diagnostics;
-using NAPS2.Config;
-
-namespace NAPS2.Logging;
+﻿namespace NAPS2.Logging;
 
 public class WindowsEventLogger : IEventLogger
 {

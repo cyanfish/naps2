@@ -1,8 +1,3 @@
-using System.Collections.Generic;
-using NAPS2.Images.Storage;
-using NAPS2.Images.Transforms;
-using NAPS2.Util;
-
 namespace NAPS2.Images;
 
 public abstract class ImageListMutation : ListMutation<ScannedImage>

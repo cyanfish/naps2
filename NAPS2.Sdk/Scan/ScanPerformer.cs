@@ -1,18 +1,9 @@
-﻿using System;
-using System.Threading;
-using System.Threading.Tasks;
-using NAPS2.Config;
-using NAPS2.Images;
+﻿using System.Threading;
 using NAPS2.ImportExport;
-using NAPS2.Lang.Resources;
-using NAPS2.Logging;
-using NAPS2.Operation;
 using NAPS2.Platform.Windows;
 using NAPS2.Scan.Exceptions;
 using NAPS2.Scan.Internal;
-using NAPS2.Threading;
 using NAPS2.Wia;
-using NAPS2.Util;
 using NAPS2.WinForms;
 
 namespace NAPS2.Scan;

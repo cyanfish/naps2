@@ -1,10 +1,5 @@
-﻿using System;
-using System.Linq;
-using System.Threading.Tasks;
-using Google.Protobuf;
+﻿using Google.Protobuf;
 using Grpc.Core;
-using NAPS2.Images;
-using NAPS2.Images.Storage;
 using NAPS2.ImportExport.Email;
 using NAPS2.ImportExport.Email.Mapi;
 using NAPS2.ImportExport.Pdf;

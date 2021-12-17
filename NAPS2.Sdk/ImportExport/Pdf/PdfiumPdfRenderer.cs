@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Reflection;
-using NAPS2.Images.Storage;
+﻿using System.Reflection;
 
 namespace NAPS2.ImportExport.Pdf;
 

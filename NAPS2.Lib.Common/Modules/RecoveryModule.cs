@@ -1,6 +1,4 @@
-﻿using System.IO;
-using NAPS2.Images.Storage;
-using Ninject;
+﻿using Ninject;
 using Ninject.Modules;
 
 namespace NAPS2.Modules;

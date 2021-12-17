@@ -1,7 +1,4 @@
-﻿using System;
-using System.IO;
-
-namespace NAPS2.Images.Storage;
+﻿namespace NAPS2.Images.Storage;
 
 public class FileStorage : IStorage
 {

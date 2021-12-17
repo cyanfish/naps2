@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace NAPS2.Localization;
+﻿namespace NAPS2.Localization;
 
 class Program
 {

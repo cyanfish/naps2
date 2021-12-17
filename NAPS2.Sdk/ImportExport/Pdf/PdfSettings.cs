@@ -1,6 +1,3 @@
-using System;
-using NAPS2.Config;
-
 namespace NAPS2.ImportExport.Pdf;
 
 public class PdfSettings
