@@ -293,7 +293,7 @@ internal class WiaScanDriver : IScanDriver
                         item.SafeSetProperty(WiaPropertyId.IPS_DOCUMENT_HANDLING_SELECT, WiaPropertyValue.FRONT_ONLY);
                         break;
                     case PaperSource.Duplex:
-                        item.SafeSetProperty(WiaPropertyId.IPS_DOCUMENT_HANDLING_SELECT, WiaPropertyValue.DUPLEX | WiaPropertyValue.FRONT_FIRST);
+                        item.SafeSetProperty(WiaPropertyId.IPS_DOCUMENT_HANDLING_SELECT, WiaPropertyValue.DUPLEX);
                         break;
                 }
             }
