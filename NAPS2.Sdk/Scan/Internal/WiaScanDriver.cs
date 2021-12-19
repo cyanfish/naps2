@@ -114,7 +114,7 @@ internal class WiaScanDriver : IScanDriver
             // WIA 2.0 doesn't support normal transfers with native UI.
             // Instead we need to have it write the scans to a set of files and load those.
 
-            var paths = deviceManager.PromptForImage(Options.DialogParent, device);
+            var paths = deviceManager.PromptForImage(device, Options.DialogParent);
 
             if (paths == null)
             {

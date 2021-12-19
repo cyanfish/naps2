@@ -85,8 +85,8 @@ Source: "..\..\NAPS2.Worker\bin\InstallerEXE\NAPS2.Worker.exe"; DestDir: "{app}"
 Source: "..\..\NAPS2.Worker\bin\InstallerEXE\NAPS2.Worker.exe.config"; DestDir: "{app}"; Flags: ignoreversion
 Source: "lib\64\twaindsm.dll"; DestDir: "{app}\lib\64"; Flags: ignoreversion
 Source: "lib\twaindsm.dll"; DestDir: "{sys}"; Flags: sharedfile
-Source: "lib\64\NAPS2.Wia.Native.dll"; DestDir: "{app}\lib\64"; Flags: ignoreversion
-Source: "lib\NAPS2.Wia.Native.dll"; DestDir: "{app}\lib"; Flags: ignoreversion
+Source: "..\bin\InstallerEXE\_win32\NAPS2.Wia.Native.dll"; DestDir: "{app}\lib\_win32"; Flags: ignoreversion
+Source: "..\bin\InstallerEXE\_win64\NAPS2.Wia.Native.dll"; DestDir: "{app}\lib\_win64"; Flags: ignoreversion
 
 ; Delete files from old locations in case of upgrade
 [InstallDelete]

@@ -101,17 +101,17 @@ function Publish-NAPS2-Standalone {
             cp $File.FullName $LibDir
         }
     }
-    foreach ($File in ("$SolutionRoot\NAPS2.App.WinForms\appsettings.xml", "lib\twaindsm.dll", "lib\NAPS2.Wia.Native.dll")) {
+    foreach ($File in ("$SolutionRoot\NAPS2.App.WinForms\appsettings.xml", "lib\twaindsm.dll")) {
         cp $File $LibDir
     }
 	$LibDir_win32 = $LibDir + "_win32\"
 	mkdir $LibDir_win32
-	foreach ($File in ("lib\win32\twaindsm.dll", "lib\win32\NAPS2.Wia.Native.dll")) {
+	foreach ($File in ("lib\win32\twaindsm.dll")) {
         cp $File $LibDir32
     }
 	$LibDir_win64 = $LibDir + "_win64\"
 	mkdir $LibDir_win64
-	foreach ($File in ("lib\win64\twaindsm.dll", "lib\win64\NAPS2.Wia.Native.dll")) {
+	foreach ($File in ("lib\win64\twaindsm.dll")) {
         cp $File $LibDir64
     }
 	cp "$SolutionRoot\LICENSE" ($AppDir + "license.txt")

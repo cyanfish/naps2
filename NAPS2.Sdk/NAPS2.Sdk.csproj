@@ -38,8 +38,6 @@
   </PropertyGroup>
   
   <ItemGroup>
-    <ProjectReference Include="..\NAPS2.Wia\NAPS2.Wia.csproj" />
-    
     <Reference Include="NTwain, Version=3.0.0.0, Culture=neutral, PublicKeyToken=f9f7e0c5169536c8, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\NAPS2.Setup\lib\NTwain.dll</HintPath>
@@ -56,6 +54,7 @@
     <PackageReference Include="Grpc.Tools" Version="2.26.0" PrivateAssets="all" />
     <PackageReference Include="GrpcDotNetNamedPipes" Version="1.4.2" />
     <PackageReference Include="MimeKit" Version="1.22.0" />
+    <PackageReference Include="NAPS2.Wia" Version="1.0.1" />
     <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
     <PackageReference Include="Nullable" Version="1.2.0" />
     <PackageReference Include="System.Collections.Immutable" Version="1.5.0" />
