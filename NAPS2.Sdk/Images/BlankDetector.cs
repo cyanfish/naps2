@@ -1,4 +1,5 @@
 ﻿using System.Runtime.InteropServices;
+using NAPS2.Images.Gdi;
 
 namespace NAPS2.Images;
 
@@ -13,7 +14,7 @@ public static class BlankDetector
 
     public static bool IsBlank(IImage image, int whiteThresholdNorm, int coverageThresholdNorm)
     {
-        if (image.PixelFormat == StoragePixelFormat.BW1)
+        if (image.PixelFormat == ImagePixelFormat.BW1)
         {
             // TODO: Make more generic
             if (!(image is GdiImage gdiImage))
@@ -23,7 +24,7 @@ public static class BlankDetector
             using var bitmap2 = BitmapHelper.CopyToBpp(gdiImage.Bitmap, 8);
             return IsBlankRGB(new GdiImage(bitmap2), whiteThresholdNorm, coverageThresholdNorm);
         }
-        if (image.PixelFormat != StoragePixelFormat.RGB24)
+        if (image.PixelFormat != ImagePixelFormat.RGB24)
         {
             return false;
         }

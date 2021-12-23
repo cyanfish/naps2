@@ -1,6 +1,6 @@
 namespace NAPS2.Images;
 
-public abstract class ImageListMutation : ListMutation<ScannedImage>
+public abstract class ImageListMutation : ListMutation<RenderableImage>
 {
     public class RotateFlip : ImageListMutation
     {
@@ -13,31 +13,33 @@ public abstract class ImageListMutation : ListMutation<ScannedImage>
             _angle = angle;
         }
 
-        public override void Apply(List<ScannedImage> list, ref ListSelection<ScannedImage> selection)
+        public override void Apply(List<RenderableImage> list, ref ListSelection<RenderableImage> selection)
         {
-            foreach (ScannedImage img in selection)
+            foreach (RenderableImage img in selection)
             {
                 lock (img)
                 {
                     var transform = new RotationTransform(_angle);
-                    img.AddTransform(transform);
-                    var thumb = img.GetThumbnail();
-                    if (thumb != null)
-                    {
-                        img.SetThumbnail(_imageContext.PerformTransform(thumb, transform));
-                    }
+                    // TODO: Propagate transforms
+                    // img.AddTransform(transform);
+                    // var thumb = img.GetThumbnail();
+                    // if (thumb != null)
+                    // {
+                    //     img.SetThumbnail(_imageContext.PerformTransform(thumb, transform));
+                    // }
                 }
             }
         }
     }
 
-    public class ResetTransforms : ListMutation<ScannedImage>
+    public class ResetTransforms : ListMutation<RenderableImage>
     {
-        public override void Apply(List<ScannedImage> list, ref ListSelection<ScannedImage> selection)
+        public override void Apply(List<RenderableImage> list, ref ListSelection<RenderableImage> selection)
         {
-            foreach (ScannedImage img in selection)
+            foreach (RenderableImage img in selection)
             {
-                img.ResetTransforms();
+                // TODO: Propagate transforms
+                // img.ResetTransforms();
             }
         }
     }

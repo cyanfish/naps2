@@ -9,8 +9,8 @@ public class ScanController : IScanController
     private readonly ScanOptionsValidator _scanOptionsValidator;
     private readonly IScanBridgeFactory _scanBridgeFactory;
 
-    public ScanController()
-        : this(new LocalPostProcessor(), new ScanOptionsValidator(), new ScanBridgeFactory())
+    public ScanController(ScanningContext scanningContext)
+        : this(new LocalPostProcessor(scanningContext), new ScanOptionsValidator(), new ScanBridgeFactory(scanningContext))
     {
     }
 
@@ -43,7 +43,7 @@ public class ScanController : IScanController
         void ScanErrorCallback(Exception ex) => ScanError?.Invoke(this, new ScanErrorEventArgs(ex));
         void PageStartCallback() => PageStart?.Invoke(this, new PageStartEventArgs(++pageNumber));
         void PageProgressCallback(double progress) => PageProgress?.Invoke(this, new PageProgressEventArgs(pageNumber, progress));
-        void PageEndCallback(ScannedImage image) => PageEnd?.Invoke(this, new PageEndEventArgs(pageNumber, image));
+        void PageEndCallback(RenderableImage image) => PageEnd?.Invoke(this, new PageEndEventArgs(pageNumber, image));
 
         ScanStartCallback();
         Task.Run(async () =>

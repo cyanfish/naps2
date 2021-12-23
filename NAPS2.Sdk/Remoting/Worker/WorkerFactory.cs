@@ -9,14 +9,6 @@ namespace NAPS2.Remoting.Worker;
 /// </summary>
 public class WorkerFactory : IWorkerFactory
 {
-    private static IWorkerFactory _default;
-
-    public static IWorkerFactory Default
-    {
-        get => _default ??= new WorkerFactory(ImageContext.Default);
-        set => _default = value ?? throw new ArgumentNullException(nameof(value));
-    }
-
     public const string WORKER_EXE_NAME = "NAPS2.Worker.exe";
     public const string PIPE_NAME_FORMAT = "NAPS2.Worker/{0}";
 
@@ -27,13 +19,16 @@ public class WorkerFactory : IWorkerFactory
     };
 
     private readonly ImageContext _imageContext;
+    private readonly FileStorageManager _fileStorageManager;
 
     private string _workerExePath;
     private BlockingCollection<WorkerContext> _workerQueue;
 
-    public WorkerFactory(ImageContext imageContext)
+    // TODO: Consider a better way than injecting FileStorageManager
+    public WorkerFactory(ImageContext imageContext, FileStorageManager fileStorageManager)
     {
         _imageContext = imageContext;
+        _fileStorageManager = fileStorageManager;
     }
 
     private string WorkerExePath
@@ -132,9 +127,8 @@ public class WorkerFactory : IWorkerFactory
 
     public WorkerContext Create()
     {
-        var rsm = _imageContext.FileStorageManager as RecoveryStorageManager;
         var worker = NextWorker();
-        worker.Service.Init(rsm?.RecoveryFolderPath);
+        worker.Service.Init(_fileStorageManager.FolderPath);
         return worker;
     }
 }

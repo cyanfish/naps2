@@ -1,5 +1,7 @@
 ﻿using System.Drawing;
+using NAPS2.Images.Gdi;
 using NAPS2.Scan;
+using ZXing.Rendering;
 
 namespace NAPS2.Sdk.Samples;
 
@@ -9,10 +11,10 @@ public class ScanToBitmapSample
     {
         // We configure scanned images to be stored in GDI+ format, which uses
         // System.Drawing.Bitmap internally.
-        ImageContext imageContext = new GdiImageContext();
+        ScanningContext scanningContext = new ScanningContext(new GdiImageContext());
 
         // To select a device and scan, you need a controller.
-        ScanController controller = new ScanController();
+        ScanController controller = new ScanController(scanningContext);
 
         // Configure scanning options. There are lots of options - look at the
         // doc for more info.
@@ -36,18 +38,13 @@ public class ScanToBitmapSample
         // receives the results of the scan.
         ScannedImageSource imageSource = controller.Scan(options);
 
-        // To change a ScannedImage object into a Bitmap object we need a renderer.
-        // Since our backing storage already uses a Bitmap, this is a fairly trivial operation.
-        // However, in other situations this abstracts away additional I/O or transforms.
-        BitmapRenderer renderer = new BitmapRenderer(imageContext);
-
         // ScannedImageSource has several different methods to help you consume images.
         // ForEach allows you to asynchronously process images as they arrive.
-        await imageSource.ForEach(async scannedImage =>
+        await imageSource.ForEach(async renderableImage =>
         {
             // Make sure ScannedImage and rendered images are disposed after use
-            using (scannedImage)
-            using (Bitmap bitmap = await renderer.Render(scannedImage))
+            using (renderableImage)
+            using (Bitmap bitmap = renderableImage.RenderToBitmap())
             {
                 // TODO: Do something with the bitmap
             }

@@ -31,7 +31,7 @@ public class ImageImporter : IImageImporter
                 int frameCount;
                 try
                 {
-                    toImport = _imageContext.ImageFactory.DecodeMultiple(filePath, out frameCount);
+                    toImport = _imageContext.LoadFrames(filePath, out frameCount);
                 }
                 catch (Exception e)
                 {
@@ -51,13 +51,15 @@ public class ImageImporter : IImageImporter
                             sink.SetCompleted();
                             return;
                         }
-                            
-                        var image = _imageContext.CreateScannedImage(frame, BitDepth.Color, frame.IsOriginalLossless, -1);
+
+                        bool lossless = frame.OriginalFileFormat is ImageFileFormat.Bmp or ImageFileFormat.Png;
+                        // TODO: This is a similar pattern as the Pdf importer, consider abstracting
+                        var image = new RenderableImage(frame, new ImageMetadata(BitDepth.Color, lossless), TransformState.Empty);
                         if (importParams.ThumbnailSize.HasValue)
                         {
-                            image.SetThumbnail(_imageContext.PerformTransform(frame, new ThumbnailTransform(importParams.ThumbnailSize.Value)));
+                            image.PostProcessingData.Thumbnail = _imageContext.PerformTransform(frame, new ThumbnailTransform(importParams.ThumbnailSize.Value));
                         }
-                        image.BarcodeDetection = BarcodeDetection.Detect(frame, importParams.BarcodeDetectionOptions);
+                        image.PostProcessingData.BarcodeDetection = BarcodeDetector.Detect(frame, importParams.BarcodeDetectionOptions);
 
                         sink.PutImage(image);
                     }

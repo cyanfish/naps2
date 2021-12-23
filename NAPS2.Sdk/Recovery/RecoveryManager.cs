@@ -1,4 +1,6 @@
-﻿using System.Windows.Forms;
+﻿using System.Collections.Immutable;
+using System.Windows.Forms;
+using NAPS2.Images.Gdi;
 using NAPS2.Scan;
 using NAPS2.Serialization;
 using NAPS2.WinForms;
@@ -7,22 +9,24 @@ namespace NAPS2.Recovery;
 
 public class RecoveryManager
 {
+    private const string LOCK_FILE_NAME = ".lock";
+
+    private readonly ScanningContext _scanningContext;
     private readonly ImageContext _imageContext;
     private readonly IFormFactory _formFactory;
-    private readonly ImageRenderer _imageRenderer;
     private readonly OperationProgress _operationProgress;
 
-    public RecoveryManager(ImageContext imageContext, IFormFactory formFactory, ImageRenderer imageRenderer, OperationProgress operationProgress)
+    public RecoveryManager(ScanningContext scanningContext, ImageContext imageContext, IFormFactory formFactory, OperationProgress operationProgress)
     {
+        _scanningContext = scanningContext;
         _imageContext = imageContext;
         _formFactory = formFactory;
-        _imageRenderer = imageRenderer;
         _operationProgress = operationProgress;
     }
 
-    public void RecoverScannedImages(Action<ScannedImage> imageCallback, RecoveryParams recoveryParams)
+    public void RecoverScannedImages(Action<RenderableImage> imageCallback, RecoveryParams recoveryParams)
     {
-        var op = new RecoveryOperation(_imageContext, _formFactory, _imageRenderer);
+        var op = new RecoveryOperation(_scanningContext, _imageContext, _formFactory);
         if (op.Start(imageCallback, recoveryParams))
         {
             _operationProgress.ShowProgress(op);
@@ -31,9 +35,9 @@ public class RecoveryManager
 
     private class RecoveryOperation : OperationBase
     {
+        private readonly ScanningContext _scanningContext;
         private readonly ImageContext _imageContext;
         private readonly IFormFactory _formFactory;
-        private readonly ImageRenderer _imageRenderer;
 
         private FileStream? _lockFile;
         private DirectoryInfo? _folderToRecoverFrom;
@@ -41,18 +45,18 @@ public class RecoveryManager
         private int _imageCount;
         private DateTime _scannedDateTime;
 
-        public RecoveryOperation(ImageContext imageContext, IFormFactory formFactory, ImageRenderer imageRenderer)
+        public RecoveryOperation(ScanningContext scanningContext, ImageContext imageContext, IFormFactory formFactory)
         {
+            _scanningContext = scanningContext;
             _imageContext = imageContext;
             _formFactory = formFactory;
-            _imageRenderer = imageRenderer;
 
             ProgressTitle = MiscResources.ImportProgress;
             AllowCancel = true;
             AllowBackground = true;
         }
 
-        public bool Start(Action<ScannedImage> imageCallback, RecoveryParams recoveryParams)
+        public bool Start(Action<RenderableImage> imageCallback, RecoveryParams recoveryParams)
         {
             Status = new OperationStatus
             {
@@ -115,7 +119,7 @@ public class RecoveryManager
             return false;
         }
 
-        private async Task<bool> DoRecover(Action<ScannedImage> imageCallback, RecoveryParams recoveryParams)
+        private async Task<bool> DoRecover(Action<RenderableImage> imageCallback, RecoveryParams recoveryParams)
         {
             Status.MaxProgress = _recoveryIndex.Images.Count;
             InvokeStatusChanged();
@@ -129,29 +133,27 @@ public class RecoveryManager
 
                 string imagePath = Path.Combine(_folderToRecoverFrom.FullName, indexImage.FileName);
                 // TODO use UnownedFileStorage
-                ScannedImage scannedImage;
+                var transformState = new TransformState(indexImage.TransformList.ToImmutableList());
+                RenderableImage renderableImage;
                 if (".pdf".Equals(Path.GetExtension(imagePath), StringComparison.InvariantCultureIgnoreCase))
                 {
-                    string newPath = _imageContext.FileStorageManager.NextFilePath() + ".pdf";
+                    string newPath = _scanningContext.FileStorageManager.NextFilePath() + ".pdf";
                     File.Copy(imagePath, newPath);
-                    scannedImage = _imageContext.CreateScannedImage(new FileStorage(newPath));
+                    // TODO: Some kind of factory for pdf renderable image creation and default settings
+                    renderableImage = new RenderableImage(new FileStorage(newPath), new ImageMetadata(BitDepth.Color, false), transformState);
                 }
                 else
                 {
-                    using var bitmap = _imageContext.ImageFactory.Decode(imagePath);
-                    scannedImage = _imageContext.CreateScannedImage(bitmap, indexImage.BitDepth.ToBitDepth(), indexImage.HighQuality, -1);
-                }
-                foreach (var transform in indexImage.TransformList)
-                {
-                    scannedImage.AddTransform(transform);
+                    using var image = _imageContext.Load(imagePath);
+                    renderableImage = new RenderableImage(image, new ImageMetadata(indexImage.BitDepth.ToBitDepth(), indexImage.HighQuality), transformState);
                 }
 
                 if (recoveryParams.ThumbnailSize.HasValue)
                 {
-                    scannedImage.SetThumbnail(_imageContext.PerformTransform(await _imageRenderer.Render(scannedImage), new ThumbnailTransform(recoveryParams.ThumbnailSize.Value)));
+                    renderableImage.PostProcessingData.Thumbnail = _imageContext.PerformTransform(renderableImage.RenderToImage(), new ThumbnailTransform(recoveryParams.ThumbnailSize.Value));
                 }
 
-                imageCallback(scannedImage);
+                imageCallback(renderableImage);
 
                 Status.CurrentProgress++;
                 InvokeStatusChanged();
@@ -201,7 +203,7 @@ public class RecoveryManager
         {
             try
             {
-                string lockFilePath = Path.Combine(recoveryFolder.FullName, RecoveryStorageManager.LOCK_FILE_NAME);
+                string lockFilePath = Path.Combine(recoveryFolder.FullName, LOCK_FILE_NAME);
                 _lockFile = new FileStream(lockFilePath, FileMode.Open);
                 return true;
             }

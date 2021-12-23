@@ -1,33 +1,32 @@
+using NAPS2.Images.Gdi;
+
 namespace NAPS2.Images;
 
-public class ThumbnailRenderer : IScannedImageRenderer<IImage>
+public class ThumbnailRenderer
 {
     private const int OVERSAMPLE = 3;
         
     private readonly ImageContext _imageContext;
-    private readonly IScannedImageRenderer<IImage> _imageRenderer;
 
     public ThumbnailRenderer(ImageContext imageContext)
     {
         _imageContext = imageContext;
-        _imageRenderer = new ImageRenderer(imageContext);
     }
 
-    public ThumbnailRenderer(ImageContext imageContext, IScannedImageRenderer<IImage> imageRenderer)
+    public IImage Render(RenderableImage renderableImage, int outputSize)
     {
-        _imageContext = imageContext;
-        _imageRenderer = imageRenderer;
-    }
-
-    public async Task<IImage> Render(ScannedImage image, int outputSize)
-    {
-        using var snapshot = image.Preserve();
-        return await Render(snapshot, outputSize);
-    }
-
-    public async Task<IImage> Render(ScannedImage.Snapshot snapshot, int outputSize)
-    {
-        using var bitmap = await _imageRenderer.Render(snapshot, snapshot.Metadata.TransformList.Count == 0 ? 0 : outputSize * OVERSAMPLE);
-        return _imageContext.PerformTransform(bitmap, new ThumbnailTransform(outputSize));
+        var image = renderableImage.RenderToImage();
+        var transformList = renderableImage.TransformState.Transforms;
+        if (!renderableImage.TransformState.IsEmpty)
+        {
+            // When we have additional transformations, performing them on a large original image may be quite slow.
+            // On the other hand, scaling the image to the thumbnail size first can result in transforms losing detail.
+            // As a middle ground we scale to an "oversampled" size first.
+            double oversampledSize = outputSize * OVERSAMPLE;
+            double scaleFactor = Math.Min(oversampledSize / image.Height, oversampledSize / image.Width);
+            transformList = transformList.Insert(0, new ScaleTransform(scaleFactor));
+        }
+        transformList = transformList.Add(new ThumbnailTransform(outputSize));
+        return _imageContext.PerformAllTransforms(image, transformList);
     }
 }

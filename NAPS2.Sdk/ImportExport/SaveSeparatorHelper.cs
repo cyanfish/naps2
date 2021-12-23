@@ -10,7 +10,7 @@ public static class SaveSeparatorHelper
     /// <param name="separator"></param>
     /// <param name="splitSize"></param>
     /// <returns></returns>
-    public static IEnumerable<List<ScannedImage>> SeparateScans(IEnumerable<IEnumerable<ScannedImage>> scans, SaveSeparator separator, int splitSize = 1)
+    public static IEnumerable<List<RenderableImage>> SeparateScans(IEnumerable<IEnumerable<RenderableImage>> scans, SaveSeparator separator, int splitSize = 1)
     {
         if (separator == SaveSeparator.FilePerScan)
         {
@@ -32,18 +32,18 @@ public static class SaveSeparatorHelper
         }
         else if (separator == SaveSeparator.PatchT)
         {
-            var images = new List<ScannedImage>();
+            var images = new List<RenderableImage>();
             foreach (var scan in scans)
             {
                 foreach (var image in scan)
                 {
-                    if (image.BarcodeDetection.IsPatchT)
+                    if (image.PostProcessingData.BarcodeDetection.IsPatchT)
                     {
                         image.Dispose();
                         if (images.Count > 0)
                         {
                             yield return images;
-                            images = new List<ScannedImage>();
+                            images = new List<RenderableImage>();
                         }
                     }
                     else

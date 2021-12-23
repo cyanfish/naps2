@@ -9,5 +9,5 @@ internal interface IScanBridge
 {
     Task<List<ScanDevice>> GetDeviceList(ScanOptions options);
 
-    Task Scan(ScanOptions options, CancellationToken cancelToken, IScanEvents scanEvents, Action<ScannedImage, PostProcessingContext> callback);
+    Task Scan(ScanOptions options, CancellationToken cancelToken, IScanEvents scanEvents, Action<RenderableImage, PostProcessingContext> callback);
 }

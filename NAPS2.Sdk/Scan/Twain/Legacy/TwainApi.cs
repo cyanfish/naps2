@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Drawing;
 using System.Windows.Forms;
+using NAPS2.Images.Gdi;
 using NAPS2.Scan.Exceptions;
 using NAPS2.WinForms;
 
@@ -47,7 +48,7 @@ internal static class TwainApi
         return result;
     }
 
-    public static void Scan(ImageContext imageContext, ScanProfile settings, ScanDevice device, IWin32Window pForm, ScannedImageSink sink)
+    public static void Scan(ScanningContext scanningContext, ScanProfile settings, ScanDevice device, IWin32Window pForm, ScannedImageSink sink)
     {
         var tw = new Twain();
         if (!tw.Init(pForm.Handle))
@@ -59,7 +60,7 @@ internal static class TwainApi
             throw new DeviceNotFoundException();
         }
         var form = new FTwainGui();
-        var mf = new TwainMessageFilter(imageContext, settings, tw, form);
+        var mf = new TwainMessageFilter(scanningContext, settings, tw, form);
         form.ShowDialog(pForm);
         foreach (var b in mf.Bitmaps)
         {
@@ -69,7 +70,7 @@ internal static class TwainApi
 
     private class TwainMessageFilter : IMessageFilter
     {
-        private readonly ImageContext _imageContext;
+        private readonly ScanningContext _scanningContext;
         private readonly ScanProfile _settings;
         private readonly Twain _tw;
         private readonly FTwainGui _form;
@@ -77,17 +78,17 @@ internal static class TwainApi
         private bool _activated;
         private bool _msgfilter;
 
-        public TwainMessageFilter(ImageContext imageContext, ScanProfile settings, Twain tw, FTwainGui form)
+        public TwainMessageFilter(ScanningContext scanningContext, ScanProfile settings, Twain tw, FTwainGui form)
         {
-            _imageContext = imageContext;
+            _scanningContext = scanningContext;
             _settings = settings;
             _tw = tw;
             _form = form;
-            Bitmaps = new List<ScannedImage>();
+            Bitmaps = new List<RenderableImage>();
             form.Activated += FTwainGui_Activated;
         }
 
-        public List<ScannedImage> Bitmaps { get; }
+        public List<RenderableImage> Bitmaps { get; }
 
         public bool PreFilterMessage(ref Message m)
         {
@@ -123,8 +124,9 @@ internal static class TwainApi
                     {
                         int bitcount = 0;
 
+                        // TODO: Clean this up a bit
                         using Bitmap bmp = DibUtils.BitmapFromDib(img, out bitcount);
-                        Bitmaps.Add(_imageContext.CreateScannedImage(new GdiImage(bmp), bitcount == 1 ? BitDepth.BlackAndWhite : BitDepth.Color, _settings.MaxQuality, _settings.Quality));
+                        Bitmaps.Add(_scanningContext.CreateRenderableImage(new GdiImage(bmp), bitcount == 1 ? BitDepth.BlackAndWhite : BitDepth.Color, _settings.MaxQuality, _settings.Quality, Enumerable.Empty<Transform>()));
                     }
                     _form.Close();
                     break;

@@ -13,11 +13,11 @@ public abstract class XmlSerializer
 {
     protected static readonly XNamespace Xsi = "http://www.w3.org/2001/XMLSchema-instance";
 
-    protected static readonly Dictionary<Type, CustomXmlSerializer> CustomSerializerCache = new Dictionary<Type, CustomXmlSerializer>();
+    protected static readonly Dictionary<Type, CustomXmlSerializer> CustomSerializerCache = new();
 
-    protected static readonly Dictionary<Type, List<CustomXmlTypes>> CustomTypesCache = new Dictionary<Type, List<CustomXmlTypes>>();
+    protected static readonly Dictionary<Type, List<CustomXmlTypes>> CustomTypesCache = new();
 
-    protected static readonly List<Type> ArrayLikeTypes = new List<Type>
+    protected static readonly List<Type> ArrayLikeTypes = new()
     {
         typeof(List<>),
         typeof(HashSet<>),
@@ -25,7 +25,7 @@ public abstract class XmlSerializer
         typeof(ImmutableHashSet<>),
     };
 
-    protected static readonly Dictionary<Type, XmlTypeInfo> TypeInfoCache = new Dictionary<Type, XmlTypeInfo>
+    protected static readonly Dictionary<Type, XmlTypeInfo> TypeInfoCache = new()
     {
         { typeof(char), new XmlTypeInfo { CustomSerializer = new CharSerializer() } },
         { typeof(string), new XmlTypeInfo { CustomSerializer = new StringSerializer() } },
@@ -49,6 +49,15 @@ public abstract class XmlSerializer
         { typeof(ImmutableHashSet<>), new XmlTypeInfo { CustomSerializer = new ImmutableHashSetSerializer() } },
         { typeof(DateTime), new XmlTypeInfo { CustomSerializer = new DateTimeSerializer() } },
         { typeof(Nullable<>), new XmlTypeInfo { CustomSerializer = new NullableSerializer() } },
+        {
+            typeof(Transform), new XmlTypeInfo
+            {
+                KnownTypes = new HashSet<Type>(Assembly
+                    .GetAssembly(typeof(Transform))
+                    .GetTypes()
+                    .Where(t => typeof(Transform).IsAssignableFrom(t)))
+            }
+        },
     };
 
     public static void RegisterCustomSerializer<T>(CustomXmlSerializer<T> customSerializer)
@@ -525,7 +534,8 @@ public abstract class XmlSerializer
         {
             var itemType = GetItemType(type);
             var list = CreateInstance(type, itemType);
-            var add = list.GetType().GetMethod("Add", BindingFlags.Public | BindingFlags.Instance) ?? throw new ArgumentException("Collection type has no Add method");
+            var add = list.GetType().GetMethod("Add", BindingFlags.Public | BindingFlags.Instance) ??
+                      throw new ArgumentException("Collection type has no Add method");
             if (add.ReturnType == list.GetType())
             {
                 // Handle immutable collections
@@ -538,7 +548,7 @@ public abstract class XmlSerializer
             {
                 foreach (var itemElement in element.Elements())
                 {
-                    add.Invoke(list, new[] {DeserializeInternal(itemElement, itemType)});
+                    add.Invoke(list, new[] { DeserializeInternal(itemElement, itemType) });
                 }
             }
 
@@ -552,7 +562,8 @@ public abstract class XmlSerializer
     {
         protected override object CreateInstance(Type type, Type itemType)
         {
-            var emptyField = typeof(ImmutableList<>).MakeGenericType(itemType).GetField("Empty", BindingFlags.Public | BindingFlags.Static) ?? throw new Exception("No Empty field on ImmutableList");
+            var emptyField = typeof(ImmutableList<>).MakeGenericType(itemType).GetField("Empty", BindingFlags.Public | BindingFlags.Static) ??
+                             throw new Exception("No Empty field on ImmutableList");
             return emptyField.GetValue(null);
         }
     }
@@ -561,7 +572,8 @@ public abstract class XmlSerializer
     {
         protected override object CreateInstance(Type type, Type itemType)
         {
-            var emptyField = typeof(ImmutableHashSet<>).MakeGenericType(itemType).GetField("Empty", BindingFlags.Public | BindingFlags.Static) ?? throw new Exception("No Empty field on ImmutableHashSet");
+            var emptyField = typeof(ImmutableHashSet<>).MakeGenericType(itemType).GetField("Empty", BindingFlags.Public | BindingFlags.Static) ??
+                             throw new Exception("No Empty field on ImmutableHashSet");
             return emptyField.GetValue(null);
         }
     }
@@ -643,7 +655,8 @@ public class XmlSerializer<T> : XmlSerializer, ISerializer<T>
     {
         if (doc.Root?.Name != GetElementNameForType(typeof(T)))
         {
-            throw new InvalidOperationException($"Could not map XML element <{doc.Root?.Name}> to {typeof(T).FullName}. Expected <{GetElementNameForType(typeof(T))}>.");
+            throw new InvalidOperationException(
+                $"Could not map XML element <{doc.Root?.Name}> to {typeof(T).FullName}. Expected <{GetElementNameForType(typeof(T))}>.");
         }
         return DeserializeFromXElement(doc.Root);
     }

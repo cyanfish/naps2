@@ -85,10 +85,3 @@ public enum HorizontalAlign
     Center,
     Left
 }
-
-public enum BitDepth
-{
-    Color,
-    Grayscale,
-    BlackAndWhite
-}

@@ -1,5 +1,6 @@
 ﻿using System.Globalization;
 using System.Threading;
+using NAPS2.Images.Gdi;
 using NAPS2.Ocr;
 using PdfSharp.Drawing;
 using PdfSharp.Drawing.Layout;
@@ -19,25 +20,12 @@ public class PdfSharpExporter : PdfExporter
             GlobalFontSettings.FontResolver = new UnixFontResolver();
         }
     }
-        
-    private readonly MemoryStreamRenderer _memoryStreamRenderer;
-
-    public PdfSharpExporter()
-    {
-        _memoryStreamRenderer = new MemoryStreamRenderer(ImageContext.Default);
-    }
 
     public PdfSharpExporter(ImageContext imageContext)
     {
-        _memoryStreamRenderer = new MemoryStreamRenderer(imageContext);
     }
 
-    public PdfSharpExporter(MemoryStreamRenderer memoryStreamRenderer)
-    {
-        _memoryStreamRenderer = memoryStreamRenderer;
-    }
-
-    public override async Task<bool> Export(string path, ICollection<ScannedImage.Snapshot> snapshots, IConfigProvider<PdfSettings> settings, OcrContext? ocrContext = null, ProgressHandler? progressCallback = null, CancellationToken cancelToken = default)
+    public override async Task<bool> Export(string path, ICollection<RenderableImage> images, IConfigProvider<PdfSettings> settings, OcrContext? ocrContext = null, ProgressHandler? progressCallback = null, CancellationToken cancelToken = default)
     {
         return await Task.Run(async () =>
         {
@@ -93,8 +81,8 @@ public class PdfSharpExporter : PdfExporter
             }
 
             bool result = ocrEngine != null
-                ? await BuildDocumentWithOcr(progressCallback, cancelToken, document, compat, snapshots, ocrContext, ocrEngine)
-                : await BuildDocumentWithoutOcr(progressCallback, cancelToken, document, compat, snapshots);
+                ? await BuildDocumentWithOcr(progressCallback, cancelToken, document, compat, images, ocrContext, ocrEngine)
+                : await BuildDocumentWithoutOcr(progressCallback, cancelToken, document, compat, images);
             if (!result)
             {
                 return false;
@@ -122,19 +110,23 @@ public class PdfSharpExporter : PdfExporter
         });
     }
 
-    private async Task<bool> BuildDocumentWithoutOcr(ProgressHandler? progressCallback, CancellationToken cancelToken, PdfDocument document, PdfCompat compat, ICollection<ScannedImage.Snapshot> snapshots)
+    private async Task<bool> BuildDocumentWithoutOcr(ProgressHandler? progressCallback, CancellationToken cancelToken, PdfDocument document, PdfCompat compat, ICollection<RenderableImage> images)
     {
         int progress = 0;
-        progressCallback?.Invoke(progress, snapshots.Count);
-        foreach (var snapshot in snapshots)
+        progressCallback?.Invoke(progress, images.Count);
+        foreach (var image in images)
         {
-            if (snapshot.Source.BackingStorage is FileStorage fileStorage && IsPdfFile(fileStorage) && !snapshot.Metadata.TransformList.Any())
+            // TODO: Maybe have a PdfFileStorage?
+            if (image.Storage is FileStorage fileStorage && IsPdfFile(fileStorage) && image.TransformState.IsEmpty)
             {
                 CopyPdfPageToDoc(document, fileStorage);
             }
             else
             {
-                using Stream stream = await _memoryStreamRenderer.Render(snapshot);
+                // TODO: Dedup from other method
+                var format = image.Metadata.Lossless ? ImageFileFormat.Png : ImageFileFormat.Jpeg;
+                using var renderedImage = image.RenderToImage();
+                using Stream stream = renderedImage.SaveToMemoryStream(format);
                 using var img = XImage.FromStream(stream);
                 if (cancelToken.IsCancellationRequested)
                 {
@@ -145,22 +137,22 @@ public class PdfSharpExporter : PdfExporter
                 DrawImageOnPage(page, img, compat);
             }
             progress++;
-            progressCallback?.Invoke(progress, snapshots.Count);
+            progressCallback?.Invoke(progress, images.Count);
         }
         return true;
     }
 
     private static bool IsPdfFile(FileStorage fileStorage) => Path.GetExtension(fileStorage.FullPath)?.Equals(".pdf", StringComparison.InvariantCultureIgnoreCase) ?? false;
 
-    private async Task<bool> BuildDocumentWithOcr(ProgressHandler? progressCallback, CancellationToken cancelToken, PdfDocument document, PdfCompat compat, ICollection<ScannedImage.Snapshot> snapshots, OcrContext ocrContext, IOcrEngine ocrEngine)
+    private async Task<bool> BuildDocumentWithOcr(ProgressHandler? progressCallback, CancellationToken cancelToken, PdfDocument document, PdfCompat compat, ICollection<RenderableImage> images, OcrContext ocrContext, IOcrEngine ocrEngine)
     {
         int progress = 0;
-        progressCallback?.Invoke(progress, snapshots.Count);
+        progressCallback?.Invoke(progress, images.Count);
 
         List<(PdfPage, Task<OcrResult>)> ocrPairs = new List<(PdfPage, Task<OcrResult>)>();
 
         // Step 1: Create the pages, draw the images, and start OCR
-        foreach (var snapshot in snapshots)
+        foreach (var image in images)
         {
             if (cancelToken.IsCancellationRequested)
             {
@@ -170,7 +162,8 @@ public class PdfSharpExporter : PdfExporter
             PdfPage page;
             bool importedPdfPassThrough = false;
 
-            if (snapshot.Source.BackingStorage is FileStorage fileStorage && IsPdfFile(fileStorage) && !snapshot.Metadata.TransformList.Any())
+            // TODO: Maybe have a PdfFileStorage?
+            if (image.Storage is FileStorage fileStorage && IsPdfFile(fileStorage) && image.TransformState.IsEmpty)
             {
                 importedPdfPassThrough = true;
                 page = CopyPdfPageToDoc(document, fileStorage);
@@ -187,8 +180,10 @@ public class PdfSharpExporter : PdfExporter
 
             string tempImageFilePath = Path.Combine(Paths.Temp, Path.GetRandomFileName());
 
-            using (Stream stream = await _memoryStreamRenderer.Render(snapshot))
-            using (var img = XImage.FromStream(stream))
+            var format = image.Metadata.Lossless ? ImageFileFormat.Png : ImageFileFormat.Jpeg;
+            using (var renderedImage = image.RenderToImage())
+            using (var stream = renderedImage.SaveToMemoryStream(format))
+            using (var pdfImage = XImage.FromStream(stream))
             {
                 if (cancelToken.IsCancellationRequested)
                 {
@@ -197,7 +192,7 @@ public class PdfSharpExporter : PdfExporter
 
                 if (!importedPdfPassThrough)
                 {
-                    DrawImageOnPage(page, img, compat);
+                    DrawImageOnPage(page, pdfImage, compat);
                 }
 
                 if (cancelToken.IsCancellationRequested)
@@ -205,9 +200,9 @@ public class PdfSharpExporter : PdfExporter
                     break;
                 }
 
-                if (!ocrContext.RequestQueue.HasCachedResult(ocrEngine, snapshot, ocrContext.Params))
+                if (!ocrContext.RequestQueue.HasCachedResult(ocrEngine, image, ocrContext.Params))
                 {
-                    img.GdiImage.Save(tempImageFilePath);
+                    pdfImage.GdiImage.Save(tempImageFilePath);
                 }
             }
 
@@ -218,7 +213,7 @@ public class PdfSharpExporter : PdfExporter
             }
 
             // Start OCR
-            var ocrTask = ocrContext.RequestQueue.QueueForeground(ocrEngine, snapshot, tempImageFilePath, ocrContext.Params, cancelToken);
+            var ocrTask = ocrContext.RequestQueue.QueueForeground(ocrEngine, image, tempImageFilePath, ocrContext.Params, cancelToken);
             ocrTask.ContinueWith(task =>
             {
                 // This is the best place to put progress reporting
@@ -226,7 +221,7 @@ public class PdfSharpExporter : PdfExporter
                 if (!cancelToken.IsCancellationRequested)
                 {
                     Interlocked.Increment(ref progress);
-                    progressCallback?.Invoke(progress, snapshots.Count);
+                    progressCallback?.Invoke(progress, images.Count);
                 }
             }, TaskContinuationOptions.ExecuteSynchronously).AssertNoAwait();
             // Record the page and task for step 2

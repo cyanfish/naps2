@@ -20,12 +20,12 @@ public class SavePdfOperation : OperationBase
         AllowBackground = true;
     }
 
-    public bool Start(string fileName, Placeholders placeholders, ICollection<ScannedImage> images, IConfigProvider<PdfSettings> pdfSettings, OcrContext ocrContext)
+    public bool Start(string fileName, Placeholders placeholders, ICollection<RenderableImage> images, IConfigProvider<PdfSettings> pdfSettings, OcrContext ocrContext)
     {
         return Start(fileName, placeholders, images, pdfSettings, ocrContext, false, null);
     }
 
-    public bool Start(string fileName, Placeholders placeholders, ICollection<ScannedImage> images, IConfigProvider<PdfSettings> pdfSettings, OcrContext ocrContext, bool email, EmailMessage? emailMessage)
+    public bool Start(string fileName, Placeholders placeholders, ICollection<RenderableImage> images, IConfigProvider<PdfSettings> pdfSettings, OcrContext ocrContext, bool email, EmailMessage? emailMessage)
     {
         ProgressTitle = email ? MiscResources.EmailPdfProgress : MiscResources.SavePdfProgress;
         var subFileName = placeholders.Substitute(fileName);
@@ -48,13 +48,12 @@ public class SavePdfOperation : OperationBase
             }
         }
 
-        var snapshots = images.Select(x => x.Preserve()).ToList();
         RunAsync(async () =>
         {
             bool result = false;
             try
             {
-                result = await _pdfExporter.Export(subFileName, snapshots, pdfSettings, ocrContext, OnProgress, CancelToken);
+                result = await _pdfExporter.Export(subFileName, images, pdfSettings, ocrContext, OnProgress, CancelToken);
             }
             catch (UnauthorizedAccessException ex)
             {
@@ -79,10 +78,14 @@ public class SavePdfOperation : OperationBase
             }
             finally
             {
-                snapshots.ForEach(s => s.Dispose());
+                // TODO: Here (and in every other operation that takes a list of images), clone the images on input and then dispose when finished
+                foreach (var image in images)
+                {
+                    image.Dispose();
+                }
                 GC.Collect();
             }
-                
+
             if (result && email && emailMessage != null && _emailProviderFactory != null)
             {
                 Status.StatusText = MiscResources.UploadingEmail;
@@ -116,7 +119,7 @@ public class SavePdfOperation : OperationBase
                     Log.Event(EventType.Email, new EventParams
                     {
                         Name = MiscResources.EmailPdf,
-                        Pages = snapshots.Count,
+                        Pages = images.Count,
                         FileFormat = ".pdf"
                     });
                 }
@@ -125,7 +128,7 @@ public class SavePdfOperation : OperationBase
                     Log.Event(EventType.SavePdf, new EventParams
                     {
                         Name = MiscResources.SavePdf,
-                        Pages = snapshots.Count,
+                        Pages = images.Count,
                         FileFormat = ".pdf"
                     });
                 }

@@ -16,7 +16,7 @@ public static class ImageAsserts
         var lock2 = second.Lock(LockMode.ReadOnly, out var scan02, out var stride2);
         try
         {
-            if (first.PixelFormat != StoragePixelFormat.RGB24)
+            if (first.PixelFormat != ImagePixelFormat.RGB24)
             {
                 throw new InvalidOperationException("Unsupported pixel format");
             }

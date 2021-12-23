@@ -1,6 +1,7 @@
 using System.ComponentModel;
 using System.Globalization;
 using System.Windows.Forms;
+using NAPS2.Images.Gdi;
 
 namespace NAPS2.WinForms
 {
@@ -33,16 +34,14 @@ namespace NAPS2.WinForms
         private ToolStripButton _tsHueSaturation;
         private ToolStripButton _tsBlackWhite;
         private ToolStripButton _tsSharpen;
-        private readonly BitmapRenderer _bitmapRenderer;
         private readonly KeyboardShortcutManager _ksm;
         private readonly OperationProgress _operationProgress;
         private readonly ImageContext _imageContext;
 
-        public FViewer(IOperationFactory operationFactory, WinFormsExportHelper exportHelper, BitmapRenderer bitmapRenderer, KeyboardShortcutManager ksm, OperationProgress operationProgress, ImageContext imageContext)
+        public FViewer(IOperationFactory operationFactory, WinFormsExportHelper exportHelper, KeyboardShortcutManager ksm, OperationProgress operationProgress, ImageContext imageContext)
         {
             _operationFactory = operationFactory;
             _exportHelper = exportHelper;
-            _bitmapRenderer = bitmapRenderer;
             _ksm = ksm;
             _operationProgress = operationProgress;
             _imageContext = imageContext;
@@ -54,7 +53,7 @@ namespace NAPS2.WinForms
         public Action DeleteCallback { get; set; }
         public Action<int> SelectCallback { get; set; }
 
-        private ScannedImage CurrentImage => ImageList.Images[ImageIndex];
+        private RenderableImage CurrentImage => ImageList.Images[ImageIndex];
 
         protected override async void OnLoad(object sender, EventArgs e)
         {
@@ -99,7 +98,7 @@ namespace NAPS2.WinForms
         {
             _tiffViewer1.Image?.Dispose();
             _tiffViewer1.Image = null;
-            _tiffViewer1.Image = await _bitmapRenderer.Render(CurrentImage);
+            _tiffViewer1.Image = CurrentImage.RenderToBitmap();
         }
 
         protected override void Dispose(bool disposing)
@@ -500,7 +499,7 @@ namespace NAPS2.WinForms
 
         private async void tsSavePDF_Click(object sender, EventArgs e)
         {
-            if (await _exportHelper.SavePDF(new List<ScannedImage> { CurrentImage }, null))
+            if (await _exportHelper.SavePDF(new List<RenderableImage> { CurrentImage }, null))
             {
                 if (Config.Get(c => c.DeleteAfterSaving))
                 {
@@ -511,7 +510,7 @@ namespace NAPS2.WinForms
 
         private async void tsSaveImage_Click(object sender, EventArgs e)
         {
-            if (await _exportHelper.SaveImages(new List<ScannedImage> { CurrentImage }, null))
+            if (await _exportHelper.SaveImages(new List<RenderableImage> { CurrentImage }, null))
             {
                 if (Config.Get(c => c.DeleteAfterSaving))
                 {

@@ -2,6 +2,7 @@
 using System.Drawing.Imaging;
 using System.Threading;
 using System.Windows.Forms;
+using NAPS2.Images.Gdi;
 
 namespace NAPS2.ImportExport.Images;
 
@@ -9,13 +10,11 @@ namespace NAPS2.ImportExport.Images;
 public class SaveImagesOperation : OperationBase
 {
     private readonly OverwritePrompt _overwritePrompt;
-    private readonly BitmapRenderer _bitmapRenderer;
     private readonly TiffHelper _tiffHelper;
 
-    public SaveImagesOperation(OverwritePrompt overwritePrompt, BitmapRenderer bitmapRenderer, TiffHelper tiffHelper)
+    public SaveImagesOperation(OverwritePrompt overwritePrompt, TiffHelper tiffHelper)
     {
         _overwritePrompt = overwritePrompt;
-        _bitmapRenderer = bitmapRenderer;
         _tiffHelper = tiffHelper;
 
         ProgressTitle = MiscResources.SaveImagesProgress;
@@ -33,14 +32,13 @@ public class SaveImagesOperation : OperationBase
     /// <param name="placeholders"></param>
     /// <param name="images">The collection of images to save.</param>
     /// <param name="batch"></param>
-    public bool Start(string fileName, Placeholders placeholders, List<ScannedImage> images, IConfigProvider<ImageSettings> imageSettings, bool batch = false)
+    public bool Start(string fileName, Placeholders placeholders, List<RenderableImage> images, IConfigProvider<ImageSettings> imageSettings, bool batch = false)
     {
         Status = new OperationStatus
         {
             MaxProgress = images.Count
         };
 
-        var snapshots = images.Select(x => x.Preserve()).ToList();
         RunAsync(async () =>
         {
             try
@@ -65,12 +63,12 @@ public class SaveImagesOperation : OperationBase
                     }
                     Status.StatusText = string.Format(MiscResources.SavingFormat, Path.GetFileName(subFileName));
                     FirstFileSaved = subFileName;
-                    return await _tiffHelper.SaveMultipage(snapshots, subFileName, imageSettings.Get(c => c.TiffCompression), OnProgress, CancelToken);
+                    return await _tiffHelper.SaveMultipage(images, subFileName, imageSettings.Get(c => c.TiffCompression), OnProgress, CancelToken);
                 }
 
                 int i = 0;
-                int digits = (int)Math.Floor(Math.Log10(snapshots.Count)) + 1;
-                foreach (ScannedImage.Snapshot snapshot in snapshots)
+                int digits = (int)Math.Floor(Math.Log10(images.Count)) + 1;
+                foreach (RenderableImage image in images)
                 {
                     if (CancelToken.IsCancellationRequested)
                     {
@@ -79,7 +77,7 @@ public class SaveImagesOperation : OperationBase
                     Status.CurrentProgress = i;
                     InvokeStatusChanged();
 
-                    if (snapshots.Count == 1 && File.Exists(subFileName))
+                    if (images.Count == 1 && File.Exists(subFileName))
                     {
                         var dialogResult = _overwritePrompt.ConfirmOverwrite(subFileName);
                         if (dialogResult == DialogResult.No)
@@ -91,11 +89,11 @@ public class SaveImagesOperation : OperationBase
                             return false;
                         }
                     }
-                    if (snapshots.Count == 1)
+                    if (images.Count == 1)
                     {
                         Status.StatusText = string.Format(MiscResources.SavingFormat, Path.GetFileName(subFileName));
                         InvokeStatusChanged();
-                        await DoSaveImage(snapshot, subFileName, format, imageSettings);
+                        await DoSaveImage(image, subFileName, format, imageSettings);
                         FirstFileSaved = subFileName;
                     }
                     else
@@ -104,7 +102,7 @@ public class SaveImagesOperation : OperationBase
                             digits);
                         Status.StatusText = string.Format(MiscResources.SavingFormat, Path.GetFileName(fileNameN));
                         InvokeStatusChanged();
-                        await DoSaveImage(snapshot, fileNameN, format, imageSettings);
+                        await DoSaveImage(image, fileNameN, format, imageSettings);
 
                         if (i == 0)
                         {
@@ -127,7 +125,7 @@ public class SaveImagesOperation : OperationBase
             }
             finally
             {
-                snapshots.ForEach(s => s.Dispose());
+                images.ForEach(s => s.Dispose());
                 GC.Collect();
             }
             return false;
@@ -139,7 +137,7 @@ public class SaveImagesOperation : OperationBase
                 Log.Event(EventType.SaveImages, new EventParams
                 {
                     Name = MiscResources.SaveImages,
-                    Pages = snapshots.Count,
+                    Pages = images.Count,
                     FileFormat = Path.GetExtension(fileName)
                 });
             }
@@ -148,12 +146,12 @@ public class SaveImagesOperation : OperationBase
         return true;
     }
 
-    private async Task DoSaveImage(ScannedImage.Snapshot snapshot, string path, ImageFormat format, IConfigProvider<ImageSettings> imageSettings)
+    private async Task DoSaveImage(RenderableImage image, string path, ImageFormat format, IConfigProvider<ImageSettings> imageSettings)
     {
         PathHelper.EnsureParentDirExists(path);
         if (Equals(format, ImageFormat.Tiff))
         {
-            await _tiffHelper.SaveMultipage(new List<ScannedImage.Snapshot> { snapshot }, path, imageSettings.Get(c => c.TiffCompression), (i, j) => { }, CancellationToken.None);
+            await _tiffHelper.SaveMultipage(new List<RenderableImage> { image }, path, imageSettings.Get(c => c.TiffCompression), (i, j) => { }, CancellationToken.None);
         }
         else if (Equals(format, ImageFormat.Jpeg))
         {
@@ -162,12 +160,12 @@ public class SaveImagesOperation : OperationBase
             var encoderParams = new EncoderParameters(1);
             encoderParams.Param[0] = new EncoderParameter(Encoder.Quality, quality);
             // TODO: Something more generic
-            using Bitmap bitmap = await _bitmapRenderer.Render(snapshot);
+            using Bitmap bitmap = image.RenderToBitmap();
             bitmap.Save(path, encoder, encoderParams);
         }
         else
         {
-            using Bitmap bitmap = await _bitmapRenderer.Render(snapshot);
+            using Bitmap bitmap = image.RenderToBitmap();
             bitmap.Save(path, format);
         }
     }

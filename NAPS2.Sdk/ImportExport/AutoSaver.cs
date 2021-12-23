@@ -18,10 +18,9 @@ public class AutoSaver
     private readonly ISaveNotify? _notify;
     private readonly PdfExporter _pdfExporter;
     private readonly OverwritePrompt _overwritePrompt;
-    private readonly BitmapRenderer _bitmapRenderer;
     private readonly ScopedConfig _config;
 
-    public AutoSaver(IConfigProvider<PdfSettings> pdfSettingsProvider, IConfigProvider<ImageSettings> imageSettingsProvider, OcrEngineManager ocrEngineManager, OcrRequestQueue ocrRequestQueue, ErrorOutput errorOutput, DialogHelper dialogHelper, OperationProgress operationProgress, ISaveNotify notify, PdfExporter pdfExporter, OverwritePrompt overwritePrompt, BitmapRenderer bitmapRenderer, ScopedConfig config)
+    public AutoSaver(IConfigProvider<PdfSettings> pdfSettingsProvider, IConfigProvider<ImageSettings> imageSettingsProvider, OcrEngineManager ocrEngineManager, OcrRequestQueue ocrRequestQueue, ErrorOutput errorOutput, DialogHelper dialogHelper, OperationProgress operationProgress, ISaveNotify notify, PdfExporter pdfExporter, OverwritePrompt overwritePrompt, ScopedConfig config)
     {
         _pdfSettingsProvider = pdfSettingsProvider;
         _imageSettingsProvider = imageSettingsProvider;
@@ -33,7 +32,6 @@ public class AutoSaver
         _notify = notify;
         _pdfExporter = pdfExporter;
         _overwritePrompt = overwritePrompt;
-        _bitmapRenderer = bitmapRenderer;
         _config = config;
     }
 
@@ -44,7 +42,7 @@ public class AutoSaver
         if (!settings.ClearImagesAfterSaving)
         {
             // Basic auto save, so keep track of images as we pipe them and try to auto save afterwards
-            var imageList = new List<ScannedImage>();
+            var imageList = new List<RenderableImage>();
             source.ForEach(img =>
             {
                 sink.PutImage(img);
@@ -72,7 +70,7 @@ public class AutoSaver
         {
             if (await InternalSave(settings, t.Result))
             {
-                foreach (ScannedImage img in t.Result)
+                foreach (RenderableImage img in t.Result)
                 {
                     img.Dispose();
                 }
@@ -80,7 +78,7 @@ public class AutoSaver
             else
             {
                 // Fallback in case auto save failed; pipe all the images back at once
-                foreach (ScannedImage img in t.Result)
+                foreach (RenderableImage img in t.Result)
                 {
                     sink.PutImage(img);
                 }
@@ -91,7 +89,7 @@ public class AutoSaver
         return sink.AsSource();
     }
 
-    private async Task<bool> InternalSave(AutoSaveSettings settings, List<ScannedImage> images)
+    private async Task<bool> InternalSave(AutoSaveSettings settings, List<RenderableImage> images)
     {
         try
         {
@@ -129,7 +127,7 @@ public class AutoSaver
         }
     }
 
-    private async Task<(bool, string?)> SaveOneFile(AutoSaveSettings settings, Placeholders placeholders, int i, List<ScannedImage> images, bool doNotify)
+    private async Task<(bool, string?)> SaveOneFile(AutoSaveSettings settings, Placeholders placeholders, int i, List<RenderableImage> images, bool doNotify)
     {
         if (images.Count == 0)
         {
@@ -165,7 +163,7 @@ public class AutoSaver
         }
         else
         {
-            var op = new SaveImagesOperation(_overwritePrompt, _bitmapRenderer, new TiffHelper(_bitmapRenderer));
+            var op = new SaveImagesOperation(_overwritePrompt, new TiffHelper());
             if (op.Start(subPath, placeholders, images, _imageSettingsProvider))
             {
                 _operationProgress.ShowProgress(op);

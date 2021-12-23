@@ -5,31 +5,23 @@ namespace NAPS2.Serialization;
 
 public static class SerializedImageHelper
 {
-    public static SerializedImage Serialize(ImageContext imageContext, ScannedImage image, SerializeOptions options) =>
-        Serialize(imageContext, image, image.Metadata, options);
-
-    public static SerializedImage Serialize(ImageContext imageContext, ScannedImage.Snapshot snapshot, SerializeOptions options) =>
-        Serialize(imageContext, snapshot.Source, snapshot.Metadata, options);
-
-    private static SerializedImage Serialize(ImageContext imageContext, ScannedImage image, IImageMetadata metadata, SerializeOptions options)
+    public static SerializedImage Serialize(ImageContext imageContext, RenderableImage image, SerializeOptions options)
     {
-        MemoryStream? thumbStream = null;
-        var thumb = image.GetThumbnail();
-        if (thumb != null && options.IncludeThumbnail)
+        if (options.RequireFileStorage && options.RequireMemoryStorage)
         {
-            thumbStream = imageContext.Convert<MemoryStreamStorage>(thumb, new StorageConvertParams { Lossless = true }).Stream;
+            throw new ArgumentException();
         }
-
-        var fileStorage = options.RequireMemoryStorage ? null : image.BackingStorage as FileStorage;
-        if (fileStorage == null && options.RequireFileStorage)
+        if (options.RequireFileStorage && image.Storage is not FileStorage)
         {
             throw new InvalidOperationException("FileStorage is required for serialization.");
         }
 
-        MemoryStream? imageStream = null;
-        if (fileStorage == null)
+        MemoryStream? thumbStream = null;
+        var thumb = image.PostProcessingData.Thumbnail;
+        if (thumb != null && options.IncludeThumbnail)
         {
-            imageStream = imageContext.Convert<MemoryStreamStorage>(image.BackingStorage, new StorageConvertParams()).Stream;
+            // TODO: Better format choice?
+            thumbStream = thumb.SaveToMemoryStream(ImageFileFormat.Png);
         }
 
         var result = new SerializedImage
@@ -37,25 +29,41 @@ public static class SerializedImageHelper
             TransferOwnership = options.TransferOwnership,
             Metadata = new SerializedImageMetadata
             {
-                TransformListXml = metadata.TransformList.ToXml(),
-                BitDepth = (SerializedImageMetadata.Types.BitDepth) metadata.BitDepth,
-                Lossless = metadata.Lossless
+                TransformListXml = image.TransformState.Transforms.ToXml(),
+                BitDepth = (SerializedImageMetadata.Types.BitDepth)image.Metadata.BitDepth,
+                Lossless = image.Metadata.Lossless
             },
             Thumbnail = thumbStream != null ? ByteString.FromStream(thumbStream) : ByteString.Empty,
             RenderedFilePath = options.RenderedFilePath ?? ""
         };
-        if (fileStorage != null)
+
+        switch (image.Storage)
         {
-            result.FilePath = fileStorage.FullPath;
-        }
-        else
-        {
-            result.FileContent = ByteString.FromStream(imageStream);
+            case FileStorage fileStorage:
+                if (options.RequireMemoryStorage)
+                {
+                    using var stream = File.OpenRead(fileStorage.FullPath);
+                    result.FileContent = ByteString.FromStream(stream);
+                }
+                else
+                {
+                    result.FilePath = fileStorage.FullPath;
+                }
+                break;
+            case MemoryStreamStorage memoryStreamStorage:
+                result.FileContent = ByteString.FromStream(memoryStreamStorage.Stream);
+                break;
+            case IImage imageStorage:
+                var fileFormat = imageStorage.OriginalFileFormat == ImageFileFormat.Unspecified
+                    ? ImageFileFormat.Jpeg
+                    : imageStorage.OriginalFileFormat;
+                result.FileContent = ByteString.FromStream(imageStorage.SaveToMemoryStream(fileFormat));
+                break;
         }
         return result;
     }
 
-    public static ScannedImage Deserialize(ImageContext imageContext, SerializedImage serializedImage, DeserializeOptions options)
+    public static RenderableImage Deserialize(ScanningContext scanningContext, SerializedImage serializedImage, DeserializeOptions options)
     {
         IStorage storage;
         if (!string.IsNullOrEmpty(serializedImage.FilePath))
@@ -71,7 +79,8 @@ public static class SerializedImageHelper
             else
             {
                 // Not transfering or sharing the file, so we need to make a copy
-                string newPath = imageContext.FileStorageManager.NextFilePath();
+                // TODO: Handle no file storage
+                string newPath = scanningContext.FileStorageManager.NextFilePath();
                 File.Copy(serializedImage.FilePath, newPath);
                 storage = new FileStorage(newPath);
             }
@@ -82,25 +91,19 @@ public static class SerializedImageHelper
             storage = new MemoryStreamStorage(memoryStream);
         }
 
-        var backingStorage = imageContext.ConvertToBacking(storage, new StorageConvertParams
-        {
-            Lossless = serializedImage.Metadata.Lossless,
-            BitDepth = (BitDepth) serializedImage.Metadata.BitDepth
-        });
-        var metadata = imageContext.ImageMetadataFactory.CreateMetadata(backingStorage);
-        metadata.TransformList = serializedImage.Metadata.TransformListXml.FromXml<List<Transform>>();
-        metadata.BitDepth = (BitDepth) serializedImage.Metadata.BitDepth;
-        metadata.Lossless = serializedImage.Metadata.Lossless;
-        metadata.Commit();
+        var renderableImage = scanningContext.CreateRenderableImage(
+            storage,
+            (BitDepth)serializedImage.Metadata.BitDepth,
+            serializedImage.Metadata.Lossless,
+            -1,
+            serializedImage.Metadata.TransformListXml.FromXml<List<Transform>>());
 
-        var scannedImage = imageContext.CreateScannedImage(backingStorage, metadata, new StorageConvertParams());
         var thumbnail = serializedImage.Thumbnail.ToByteArray();
         if (thumbnail.Length > 0)
         {
-            var thumbnailStorage = new MemoryStreamStorage(new MemoryStream(thumbnail));
-            scannedImage.SetThumbnail(imageContext.ConvertToImage(thumbnailStorage, new StorageConvertParams()));
+            renderableImage.PostProcessingData.Thumbnail = scanningContext.ImageContext.Load(new MemoryStream(thumbnail));
         }
-        return scannedImage;
+        return renderableImage;
     }
 
     public class SerializeOptions
@@ -113,7 +116,7 @@ public static class SerializedImageHelper
 
         public bool RequireMemoryStorage { get; set; }
 
-        public string RenderedFilePath { get; set; }
+        public string? RenderedFilePath { get; set; }
     }
 
     public class DeserializeOptions

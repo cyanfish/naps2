@@ -33,7 +33,7 @@ namespace NAPS2.WinForms
             RestoreFormState = false;
         }
 
-        public Action<ScannedImage> ImageCallback { get; set; }
+        public Action<RenderableImage> ImageCallback { get; set; }
 
         protected override void OnLoad(object sender, EventArgs eventArgs)
         {

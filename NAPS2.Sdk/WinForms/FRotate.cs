@@ -13,8 +13,8 @@ partial class FRotate : ImageForm
     private bool _guideExists;
     private Point _guideStart, _guideEnd;
 
-    public FRotate(ImageContext imageContext, BitmapRenderer bitmapRenderer)
-        : base(imageContext, bitmapRenderer)
+    public FRotate(ImageContext imageContext)
+        : base(imageContext)
     {
         InitializeComponent();
         txtAngle.Text += '\u00B0';

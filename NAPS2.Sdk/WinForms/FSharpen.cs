@@ -4,8 +4,8 @@ namespace NAPS2.WinForms;
 
 partial class FSharpen : ImageForm
 {
-    public FSharpen(ImageContext imageContext, BitmapRenderer bitmapRenderer)
-        : base(imageContext, bitmapRenderer)
+    public FSharpen(ImageContext imageContext)
+        : base(imageContext)
     {
         InitializeComponent();
         ActiveControl = txtSharpen;

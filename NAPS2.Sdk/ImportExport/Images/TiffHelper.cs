@@ -2,25 +2,19 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.Runtime.InteropServices;
 using System.Threading;
+using NAPS2.Images.Gdi;
 
 namespace NAPS2.ImportExport.Images;
 
 public class TiffHelper
 {
-    private readonly BitmapRenderer _bitmapRenderer;
-
-    public TiffHelper(BitmapRenderer bitmapRenderer)
-    {
-        _bitmapRenderer = bitmapRenderer;
-    }
-
-    public async Task<bool> SaveMultipage(List<ScannedImage.Snapshot> snapshots, string location, TiffCompression compression, ProgressHandler progressCallback, CancellationToken cancelToken)
+    public async Task<bool> SaveMultipage(List<RenderableImage> images, string location, TiffCompression compression, ProgressHandler progressCallback, CancellationToken cancelToken)
     {
         try
         {
             ImageCodecInfo codecInfo = GetCodecForString("TIFF");
 
-            progressCallback(0, snapshots.Count);
+            progressCallback(0, images.Count);
             if (cancelToken.IsCancellationRequested)
             {
                 return false;
@@ -28,33 +22,33 @@ public class TiffHelper
 
             PathHelper.EnsureParentDirExists(location);
 
-            if (snapshots.Count == 1)
+            if (images.Count == 1)
             {
                 var iparams = new EncoderParameters(1);
                 Encoder iparam = Encoder.Compression;
                 // TODO: More generic (?)
-                using var bitmap = await _bitmapRenderer.Render(snapshots[0]);
+                using var bitmap = images[0].RenderToBitmap();
                 ValidateBitmap(bitmap);
                 var iparamPara = new EncoderParameter(iparam, (long)GetEncoderValue(compression, bitmap));
                 iparams.Param[0] = iparamPara;
                 bitmap.Save(location, codecInfo, iparams);
             }
-            else if (snapshots.Count > 1)
+            else if (images.Count > 1)
             {
                 var encoderParams = new EncoderParameters(2);
                 var saveEncoder = Encoder.SaveFlag;
                 var compressionEncoder = Encoder.Compression;
 
                 File.Delete(location);
-                using var bitmap0 = await _bitmapRenderer.Render(snapshots[0]);
+                using var bitmap0 = images[0].RenderToBitmap();
                 ValidateBitmap(bitmap0);
                 encoderParams.Param[0] = new EncoderParameter(compressionEncoder, (long)GetEncoderValue(compression, bitmap0));
                 encoderParams.Param[1] = new EncoderParameter(saveEncoder, (long)EncoderValue.MultiFrame);
                 bitmap0.Save(location, codecInfo, encoderParams);
 
-                for (int i = 1; i < snapshots.Count; i++)
+                for (int i = 1; i < images.Count; i++)
                 {
-                    progressCallback(i, snapshots.Count);
+                    progressCallback(i, images.Count);
                     if (cancelToken.IsCancellationRequested)
                     {
                         bitmap0.Dispose();
@@ -62,7 +56,7 @@ public class TiffHelper
                         return false;
                     }
 
-                    using var bitmap = await _bitmapRenderer.Render(snapshots[i]);
+                    using var bitmap = images[i].RenderToBitmap();
                     ValidateBitmap(bitmap);
                     encoderParams.Param[0] = new EncoderParameter(compressionEncoder, (long)GetEncoderValue(compression, bitmap));
                     encoderParams.Param[1] = new EncoderParameter(saveEncoder, (long)EncoderValue.FrameDimensionPage);

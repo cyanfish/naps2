@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFrameworks>net461;netcoreapp2.1;netstandard2.0</TargetFrameworks>
+        <Nullable>enable</Nullable>
+        <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+        <RootNamespace>NAPS2.Images</RootNamespace>
+
+        <Title>NAPS2.Images</Title>
+        <Copyright>Copyright 2022 Ben Olden-Cooligan</Copyright>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="System.Collections.Immutable" Version="5.0.0" />
+        <PackageReference Include="System.ValueTuple" Version="4.3.1" />
+        <PackageReference Include="ZXing.Net" Version="0.16.4" />
+    </ItemGroup>
+
+    <Import Project="..\NAPS2.Setup\CommonTargets.targets" />
+    <Import Project="..\NAPS2.Setup\ImageUsers.targets" />
+</Project>

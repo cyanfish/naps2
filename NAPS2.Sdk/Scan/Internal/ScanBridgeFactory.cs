@@ -1,6 +1,4 @@
-﻿using NAPS2.Remoting.Worker;
-
-namespace NAPS2.Scan.Internal;
+﻿namespace NAPS2.Scan.Internal;
 
 internal class ScanBridgeFactory : IScanBridgeFactory
 {
@@ -8,15 +6,8 @@ internal class ScanBridgeFactory : IScanBridgeFactory
     private readonly WorkerScanBridge _workerScanBridge;
     private readonly NetworkScanBridge _networkScanBridge;
 
-    public ScanBridgeFactory() : this(new InProcScanBridge(), new WorkerScanBridge(), new NetworkScanBridge())
-    {
-    }
-
-    public ScanBridgeFactory(ImageContext imageContext, IWorkerFactory workerFactory) :
-        this(
-            new InProcScanBridge(imageContext),
-            new WorkerScanBridge(imageContext, workerFactory),
-            new NetworkScanBridge(imageContext))
+    public ScanBridgeFactory(ScanningContext scanningContext)
+        : this(new InProcScanBridge(scanningContext), new WorkerScanBridge(scanningContext), new NetworkScanBridge(scanningContext))
     {
     }
 
@@ -26,7 +17,6 @@ internal class ScanBridgeFactory : IScanBridgeFactory
         _workerScanBridge = workerScanBridge;
         _networkScanBridge = networkScanBridge;
     }
-
 
     public IScanBridge Create(ScanOptions options)
     {

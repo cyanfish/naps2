@@ -1,4 +1,5 @@
-﻿using NAPS2.ImportExport;
+﻿using NAPS2.Images.Gdi;
+using NAPS2.ImportExport;
 using NAPS2.ImportExport.Email;
 using NAPS2.ImportExport.Email.Mapi;
 using NAPS2.ImportExport.Images;
@@ -65,10 +66,9 @@ public class CommonModule : NinjectModule
         Bind<ScannedImageList>().ToSelf().InSingletonScope();
         Bind<StillImage>().ToSelf().InSingletonScope();
         Bind<AutoSaver>().ToSelf();
-        Bind<BitmapRenderer>().ToSelf();
         Bind<ImageContext>().To<GdiImageContext>().InSingletonScope();
 
-        Kernel.Get<ImageContext>().PdfRenderer = Kernel.Get<PdfiumWorkerCoordinator>();
+        //Kernel.Get<ImageContext>().PdfRenderer = Kernel.Get<PdfiumWorkerCoordinator>();
 
         var profileManager = new ProfileManager(
             Path.Combine(Paths.AppData, "profiles.xml"),

@@ -10,6 +10,7 @@ namespace NAPS2.Scan;
 
 internal class ScanPerformer : IScanPerformer
 {
+    private readonly ScanningContext _scanningContext;
     private readonly IFormFactory _formFactory;
     private readonly ScopedConfig _config;
     private readonly OperationProgress _operationProgress;
@@ -21,7 +22,7 @@ internal class ScanPerformer : IScanPerformer
     private readonly IScanBridgeFactory _scanBridgeFactory;
 
     public ScanPerformer(IFormFactory formFactory, ScopedConfig config, OperationProgress operationProgress, AutoSaver autoSaver,
-        IProfileManager profileManager, ErrorOutput errorOutput, ILocalPostProcessor localPostProcessor, ScanOptionsValidator scanOptionsValidator, IScanBridgeFactory scanBridgeFactory)
+        IProfileManager profileManager, ErrorOutput errorOutput, ILocalPostProcessor localPostProcessor, ScanOptionsValidator scanOptionsValidator, IScanBridgeFactory scanBridgeFactory, ScanningContext scanningContext)
     {
         _formFactory = formFactory;
         _config = config;
@@ -32,6 +33,7 @@ internal class ScanPerformer : IScanPerformer
         _localPostProcessor = localPostProcessor;
         _scanOptionsValidator = scanOptionsValidator;
         _scanBridgeFactory = scanBridgeFactory;
+        _scanningContext = scanningContext;
     }
 
     public async Task<ScanDevice> PromptForDevice(ScanProfile scanProfile, IntPtr dialogParent = default)
@@ -259,7 +261,7 @@ internal class ScanPerformer : IScanPerformer
 
         // Other drivers do not, so use a generic dialog
         var deviceForm = _formFactory.Create<FSelectDevice>();
-        deviceForm.DeviceList = await new ScanController().GetDeviceList(options);
+        deviceForm.DeviceList = await new ScanController(_scanningContext).GetDeviceList(options);
         deviceForm.ShowDialog(new Win32Window(options.DialogParent));
         return deviceForm.SelectedDevice;
     }

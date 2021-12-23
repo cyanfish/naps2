@@ -5,5 +5,5 @@
 /// </summary>
 internal interface ILocalPostProcessor
 {
-    void PostProcess(ScannedImage image, ScanOptions options, PostProcessingContext postProcessingContext);
+    void PostProcess(RenderableImage image, ScanOptions options, PostProcessingContext postProcessingContext);
 }

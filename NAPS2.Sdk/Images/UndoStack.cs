@@ -1,3 +1,5 @@
+using System.Collections.Immutable;
+
 namespace NAPS2.Images;
 
 public class UndoStack : IDisposable
@@ -10,15 +12,15 @@ public class UndoStack : IDisposable
     {
         _maxLength = maxLength;
         _stack = new LinkedList<Memento>();
-        _stack.AddFirst(new Memento(new List<ScannedImage>()));
+        _stack.AddFirst(Memento.Empty);
         _current = _stack.First;
     }
 
     public Memento Current => _current.Value;
 
-    public bool Push(IEnumerable<ScannedImage> images)
+    public bool Push(IEnumerable<RenderableImage> images)
     {
-        return Push(new Memento(images));
+        return Push(new Memento(images.ToImmutableList()));
     }
 
     public bool Push(Memento memento)

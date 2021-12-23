@@ -45,7 +45,7 @@ public class WorkerServiceAdapter
         return resp.DeviceListXml.FromXml<List<ScanDevice>>();
     }
 
-    public async Task Scan(ImageContext imageContext, ScanOptions options, CancellationToken cancelToken, IScanEvents scanEvents, Action<ScannedImage, string> imageCallback)
+    public async Task Scan(ScanningContext scanningContext, ScanOptions options, CancellationToken cancelToken, IScanEvents scanEvents, Action<RenderableImage, string> imageCallback)
     {
         var req = new ScanRequest
         {
@@ -66,8 +66,8 @@ public class WorkerServiceAdapter
             }
             if (resp.Image != null)
             {
-                var scannedImage = SerializedImageHelper.Deserialize(imageContext, resp.Image, new SerializedImageHelper.DeserializeOptions());
-                imageCallback?.Invoke(scannedImage, resp.Image.RenderedFilePath);
+                var renderableImage = SerializedImageHelper.Deserialize(scanningContext, resp.Image, new SerializedImageHelper.DeserializeOptions());
+                imageCallback?.Invoke(renderableImage, resp.Image.RenderedFilePath);
             }
         }
     }
@@ -80,11 +80,11 @@ public class WorkerServiceAdapter
         return resp.ReturnCodeXml.FromXml<MapiSendMailReturnCode>();
     }
 
-    public byte[] RenderThumbnail(ImageContext imageContext, ScannedImage.Snapshot snapshot, int size)
+    public byte[] RenderThumbnail(ImageContext imageContext, RenderableImage image, int size)
     {
         var req = new RenderThumbnailRequest
         {
-            Image = SerializedImageHelper.Serialize(imageContext, snapshot, new SerializedImageHelper.SerializeOptions
+            Image = SerializedImageHelper.Serialize(imageContext, image, new SerializedImageHelper.SerializeOptions
             {
                 RequireFileStorage = true
             }),

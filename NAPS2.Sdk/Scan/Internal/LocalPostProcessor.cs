@@ -4,38 +4,32 @@ namespace NAPS2.Scan.Internal;
 
 internal class LocalPostProcessor : ILocalPostProcessor
 {
-    private readonly OcrRequestQueue _ocrRequestQueue;
+    private readonly ScanningContext _scanningContext;
 
-    public LocalPostProcessor()
-        : this(OcrRequestQueue.Default)
+    public LocalPostProcessor(ScanningContext scanningContext)
     {
+        _scanningContext = scanningContext;
     }
 
-    public LocalPostProcessor(OcrRequestQueue ocrRequestQueue)
-    {
-        _ocrRequestQueue = ocrRequestQueue;
-    }
-
-    public void PostProcess(ScannedImage scannedImage, ScanOptions options, PostProcessingContext postProcessingContext)
+    public void PostProcess(RenderableImage image, ScanOptions options, PostProcessingContext postProcessingContext)
     {
         if (postProcessingContext.TempPath != null)
         {
-            RunBackgroundOcr(scannedImage, options, postProcessingContext.TempPath);
+            RunBackgroundOcr(image, options, postProcessingContext.TempPath);
         }
     }
 
-    private void RunBackgroundOcr(ScannedImage image, ScanOptions options, string tempPath)
+    private void RunBackgroundOcr(RenderableImage image, ScanOptions options, string tempPath)
     {
         if (options.DoOcr)
         {
-            using var snapshot = image.Preserve();
             if (!options.OcrInBackground)
             {
-                _ocrRequestQueue.QueueForeground(null, snapshot, tempPath, options.OcrParams, options.OcrCancelToken).AssertNoAwait();
+                _scanningContext.OcrRequestQueue.QueueForeground(null, image, tempPath, options.OcrParams, options.OcrCancelToken).AssertNoAwait();
             }
             else
             {
-                _ocrRequestQueue.QueueBackground(snapshot, tempPath, options.OcrParams);
+                _scanningContext.OcrRequestQueue.QueueBackground(image, tempPath, options.OcrParams);
             }
         }
     }

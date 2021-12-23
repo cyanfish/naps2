@@ -16,11 +16,11 @@ internal class SaneScanDriver : IScanDriver
 
     private static readonly Dictionary<string, SaneOptionCollection> SaneOptionCache = new Dictionary<string, SaneOptionCollection>();
 
-    private readonly ImageContext _imageContext;
+    private readonly ScanningContext _scanningContext;
 
-    public SaneScanDriver(ImageContext imageContext)
+    public SaneScanDriver(ScanningContext scanningContext)
     {
-        _imageContext = imageContext;
+        _scanningContext = scanningContext;
     }
 
     public Task<List<ScanDevice>> GetDeviceList(ScanOptions options)
@@ -342,7 +342,7 @@ internal class SaneScanDriver : IScanDriver
             return false;
         }
         using (stream)
-        using (var image = _imageContext.ImageFactory.Decode(stream, ".bmp"))
+        using (var image = _scanningContext.ImageContext.Load(stream))
         {
             callback(image);
             return true;

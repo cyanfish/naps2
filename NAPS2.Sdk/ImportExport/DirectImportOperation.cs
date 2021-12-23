@@ -1,23 +1,23 @@
-﻿using NAPS2.ImportExport.Images;
+﻿using NAPS2.Images.Gdi;
+using NAPS2.ImportExport.Images;
+using NAPS2.Scan;
 using NAPS2.Serialization;
 
 namespace NAPS2.ImportExport;
 
 public class DirectImportOperation : OperationBase
 {
-    private readonly ImageContext _imageContext;
-    private readonly ImageRenderer _imageRenderer;
+    private readonly ScanningContext _scanningContext;
 
-    public DirectImportOperation(ImageContext imageContext, ImageRenderer imageRenderer)
+    public DirectImportOperation(ScanningContext scanningContext)
     {
-        _imageContext = imageContext;
-        _imageRenderer = imageRenderer;
+        _scanningContext = scanningContext;
 
         AllowCancel = true;
         AllowBackground = true;
     }
 
-    public bool Start(ImageTransferData data, bool copy, Action<ScannedImage> imageCallback, DirectImportParams importParams)
+    public bool Start(ImageTransferData data, bool copy, Action<RenderableImage> imageCallback, DirectImportParams importParams)
     {
         ProgressTitle = copy ? MiscResources.CopyProgress : MiscResources.ImportProgress;
         Status = new OperationStatus
@@ -33,11 +33,11 @@ public class DirectImportOperation : OperationBase
             {
                 try
                 {
-                    ScannedImage img = SerializedImageHelper.Deserialize(_imageContext, serializedImage, new SerializedImageHelper.DeserializeOptions());
+                    RenderableImage img = SerializedImageHelper.Deserialize(_scanningContext, serializedImage, new SerializedImageHelper.DeserializeOptions());
                     // TODO: Don't bother, here, in recovery, etc.
                     if (importParams.ThumbnailSize.HasValue)
                     {
-                        img.SetThumbnail(_imageContext.PerformTransform(await _imageRenderer.Render(img), new ThumbnailTransform(importParams.ThumbnailSize.Value)));
+                        img.PostProcessingData.Thumbnail = _scanningContext.ImageContext.PerformTransform(img.RenderToImage(), new ThumbnailTransform(importParams.ThumbnailSize.Value));
                     }
                     imageCallback(img);
 

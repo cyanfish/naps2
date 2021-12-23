@@ -2,6 +2,7 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.Windows.Forms;
 using NAPS2.EtoForms.WinForms;
+using NAPS2.Images.Gdi;
 
 namespace NAPS2.WinForms
 {
@@ -30,7 +31,7 @@ namespace NAPS2.WinForms
 
         private ImageInfo GetImageInfo(int i) => (ImageInfo) Items[i].Tag;
 
-        public void UpdatedImages(List<ScannedImage> images, out bool orderingChanged)
+        public void UpdatedImages(List<RenderableImage> images, out bool orderingChanged)
         {
             lock (this)
             {
@@ -53,7 +54,7 @@ namespace NAPS2.WinForms
             Invalidate();
         }
 
-        private void UpdateChangedImages(List<ScannedImage> images, ref bool orderingChanged)
+        private void UpdateChangedImages(List<RenderableImage> images, ref bool orderingChanged)
         {
             for (int i = 0; i < ilThumbnailList.Images.Count; i++)
             {
@@ -62,7 +63,7 @@ namespace NAPS2.WinForms
                 {
                     orderingChanged = true;
                 }
-                if (imageInfo.Image != images[i] || imageInfo.TransformState != images[i].Metadata.TransformState)
+                if (imageInfo.Image != images[i] || imageInfo.TransformState != images[i].TransformState)
                 {
                     ilThumbnailList.Images[i] = GetThumbnail(images[i]);
                     Items[i].Tag = new ImageInfo(images[i]);
@@ -70,7 +71,7 @@ namespace NAPS2.WinForms
             }
         }
 
-        private void DeleteExcessImages(List<ScannedImage> images)
+        private void DeleteExcessImages(List<RenderableImage> images)
         {
             foreach (var oldImg in CurrentImages.Select(x => x.Image).Except(images))
             {
@@ -88,7 +89,7 @@ namespace NAPS2.WinForms
             }
         }
 
-        private void AddMissingImages(List<ScannedImage> images)
+        private void AddMissingImages(List<RenderableImage> images)
         {
             for (int i = ilThumbnailList.Images.Count; i < images.Count; i++)
             {
@@ -97,7 +98,7 @@ namespace NAPS2.WinForms
             }
         }
 
-        public void ReplaceThumbnail(int index, ScannedImage img)
+        public void ReplaceThumbnail(int index, RenderableImage img)
         {
             lock (this)
             {
@@ -112,7 +113,7 @@ namespace NAPS2.WinForms
             }
         }
 
-        public void RegenerateThumbnailList(List<ScannedImage> images)
+        public void RegenerateThumbnailList(List<RenderableImage> images)
         {
             lock (this)
             {
@@ -138,20 +139,22 @@ namespace NAPS2.WinForms
             }
         }
 
-        private Bitmap GetThumbnail(ScannedImage img)
+        private Bitmap GetThumbnail(RenderableImage img)
         {
             lock (this)
             {
-                var thumb = ((GdiImage)img.GetThumbnail())?.Bitmap;
-                if (thumb == null)
-                {
-                    return RenderPlaceholder();
-                }
-                if (img.IsThumbnailDirty)
-                {
-                    thumb = DrawHourglass(thumb);
-                }
-                return thumb;
+                // TODO: UiImage
+                return null;
+                // var thumb = ((GdiImage)img.GetThumbnail())?.Bitmap;
+                // if (thumb == null)
+                // {
+                //     return RenderPlaceholder();
+                // }
+                // if (img.IsThumbnailDirty)
+                // {
+                //     thumb = DrawHourglass(thumb);
+                // }
+                // return thumb;
             }
         }
 
@@ -196,15 +199,15 @@ namespace NAPS2.WinForms
 
         private class ImageInfo
         {
-            public ImageInfo(ScannedImage image)
+            public ImageInfo(RenderableImage image)
             {
                 Image = image;
-                TransformState = image.Metadata.TransformState;
+                TransformState = image.TransformState;
             }
 
-            public ScannedImage Image { get; set; }
+            public RenderableImage Image { get; set; }
             
-            public int TransformState { get; set; }
+            public TransformState TransformState { get; set; }
         }
     }
 }

@@ -19,7 +19,7 @@ public class PdfiumWorkerCoordinator : IPdfRenderer
         var image = _workerPool.Use(worker =>
         {
             var imageStream = new MemoryStream(worker.Service.RenderPdf(path, dpi));
-            return _imageContext.ImageFactory.Decode(imageStream, "");
+            return _imageContext.Load(imageStream);
         });
         return new[] { image };
     }

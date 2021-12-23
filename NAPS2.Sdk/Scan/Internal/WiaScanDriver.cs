@@ -8,18 +8,11 @@ namespace NAPS2.Scan.Internal;
 
 internal class WiaScanDriver : IScanDriver
 {
-    private readonly ImageContext _imageContext;
-    private readonly IWorkerFactory _workerFactory;
+    private readonly ScanningContext _scanningContext;
 
-    public WiaScanDriver(ImageContext imageContext)
-        : this(imageContext, WorkerFactory.Default)
+    public WiaScanDriver(ScanningContext scanningContext)
     {
-    }
-
-    public WiaScanDriver(ImageContext imageContext, IWorkerFactory workerFactory)
-    {
-        _imageContext = imageContext;
-        _workerFactory = workerFactory;
+        _scanningContext = scanningContext;
     }
 
     public Task<List<ScanDevice>> GetDeviceList(ScanOptions options)
@@ -41,7 +34,7 @@ internal class WiaScanDriver : IScanDriver
     {
         return Task.Run(() =>
         {
-            var context = new WiaScanContext(_imageContext, _workerFactory)
+            var context = new WiaScanContext(_scanningContext)
             {
                 Options = options,
                 ScanEvents = scanEvents,
@@ -73,13 +66,11 @@ internal class WiaScanDriver : IScanDriver
 
     private class WiaScanContext
     {
-        private readonly ImageContext _imageContext;
-        private readonly IWorkerFactory _workerFactory;
+        private readonly ScanningContext _scanningContext;
 
-        public WiaScanContext(ImageContext imageContext, IWorkerFactory workerFactory)
+        public WiaScanContext(ScanningContext scanningContext)
         {
-            _imageContext = imageContext;
-            _workerFactory = workerFactory;
+            _scanningContext = scanningContext;
         }
 
         public ScanOptions Options { get; set; }
@@ -126,7 +117,7 @@ internal class WiaScanDriver : IScanDriver
                 foreach (var path in paths)
                 {
                     using var stream = new FileStream(path, FileMode.Open);
-                    foreach (var image in _imageContext.ImageFactory.DecodeMultiple(stream, Path.GetExtension(path), out _))
+                    foreach (var image in _scanningContext.ImageContext.LoadFrames(stream, out _))
                     {
                         using (image)
                         {
@@ -172,7 +163,7 @@ internal class WiaScanDriver : IScanDriver
                 try
                 {
                     using (args.Stream)
-                    using (var image = _imageContext.ImageFactory.Decode(args.Stream, ".bmp"))
+                    using (var image = _scanningContext.ImageContext.Load(args.Stream))
                     {
                         Callback(image);
                     }
@@ -219,7 +210,7 @@ internal class WiaScanDriver : IScanDriver
                 if (useWorker)
                 {
                     WiaConfiguration config;
-                    using (var worker = _workerFactory.Create())
+                    using (var worker = _scanningContext.WorkerFactory.Create())
                     {
                         config = worker.Service.Wia10NativeUI(device.Id(), Options.DialogParent);
                     }

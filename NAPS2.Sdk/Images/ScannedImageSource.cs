@@ -4,11 +4,11 @@ public abstract class ScannedImageSource
 {
     public static ScannedImageSource Empty => new EmptySource();
 
-    public abstract Task<ScannedImage?> Next();
+    public abstract Task<RenderableImage?> Next();
 
-    public async Task<List<ScannedImage>> ToList()
+    public async Task<List<RenderableImage>> ToList()
     {
-        var list = new List<ScannedImage>();
+        var list = new List<RenderableImage>();
         try
         {
             await ForEach(image => list.Add(image));
@@ -27,18 +27,18 @@ public abstract class ScannedImageSource
         return list;
     }
 
-    public async Task ForEach(Action<ScannedImage> action)
+    public async Task ForEach(Action<RenderableImage> action)
     {
-        ScannedImage? image;
+        RenderableImage? image;
         while ((image = await Next()) != null)
         {
             action(image);
         }
     }
 
-    public async Task ForEach(Func<ScannedImage, Task> action)
+    public async Task ForEach(Func<RenderableImage, Task> action)
     {
-        ScannedImage? image;
+        RenderableImage? image;
         while ((image = await Next()) != null)
         {
             await action(image);
@@ -47,6 +47,6 @@ public abstract class ScannedImageSource
 
     private class EmptySource : ScannedImageSource
     {
-        public override Task<ScannedImage?> Next() => Task.FromResult<ScannedImage?>(null);
+        public override Task<RenderableImage?> Next() => Task.FromResult<RenderableImage?>(null);
     }
 }

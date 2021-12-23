@@ -2,11 +2,11 @@
 
 internal class ScanDriverFactory : IScanDriverFactory
 {
-    private readonly ImageContext _imageContext;
+    private readonly ScanningContext _scanningContext;
 
-    public ScanDriverFactory(ImageContext imageContext)
+    public ScanDriverFactory(ScanningContext scanningContext)
     {
-        _imageContext = imageContext;
+        _scanningContext = scanningContext;
     }
 
     public IScanDriver Create(ScanOptions options)
@@ -14,13 +14,13 @@ internal class ScanDriverFactory : IScanDriverFactory
         switch (options.Driver)
         {
             case Driver.Wia:
-                return new WiaScanDriver(_imageContext);
+                return new WiaScanDriver(_scanningContext);
             case Driver.Sane:
-                return new SaneScanDriver(_imageContext);
+                return new SaneScanDriver(_scanningContext);
             case Driver.Twain:
                 return options.TwainOptions.Adapter == TwainAdapter.Legacy
                     ? new LegacyTwainScanDriver()
-                    : (IScanDriver)new TwainScanDriver(_imageContext);
+                    : new TwainScanDriver(_scanningContext);
             default:
                 throw new InvalidOperationException("Unknown driver. Should never happen.");
         };

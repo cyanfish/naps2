@@ -13,24 +13,27 @@ namespace NAPS2.Remoting.Worker;
 
 public class WorkerServiceImpl : WorkerService.WorkerServiceBase
 {
+    private readonly ScanningContext _scanningContext;
     private readonly ImageContext _imageContext;
     private readonly IRemoteScanController _remoteScanController;
     private readonly ThumbnailRenderer _thumbnailRenderer;
     private readonly IMapiWrapper _mapiWrapper;
 
-    public WorkerServiceImpl(ImageContext imageContext, ThumbnailRenderer thumbnailRenderer, IMapiWrapper mapiWrapper)
-        : this(imageContext, new RemoteScanController(imageContext),
+    public WorkerServiceImpl(ScanningContext scanningContext, ImageContext imageContext, ThumbnailRenderer thumbnailRenderer, IMapiWrapper mapiWrapper)
+        : this(scanningContext, imageContext, new RemoteScanController(scanningContext),
             thumbnailRenderer, mapiWrapper)
     {
     }
 
-    internal WorkerServiceImpl(ImageContext imageContext, IRemoteScanController remoteScanController, ThumbnailRenderer thumbnailRenderer,
+    internal WorkerServiceImpl(ScanningContext scanningContext, ImageContext imageContext, IRemoteScanController remoteScanController, ThumbnailRenderer thumbnailRenderer,
         IMapiWrapper mapiWrapper)
     {
+        _scanningContext = scanningContext;
         _imageContext = imageContext;
         _remoteScanController = remoteScanController;
         _thumbnailRenderer = thumbnailRenderer;
         _mapiWrapper = mapiWrapper;
+        _scanningContext = scanningContext;
     }
 
     public override Task<InitResponse> Init(InitRequest request, ServerCallContext context)
@@ -39,7 +42,8 @@ public class WorkerServiceImpl : WorkerService.WorkerServiceBase
         {
             if (!string.IsNullOrEmpty(request.RecoveryFolderPath))
             {
-                _imageContext.UseFileStorage(request.RecoveryFolderPath);
+                // TODO: Rename "Recovery" folder path to something more generic
+                _scanningContext.FileStorageManager = new FileStorageManager(request.RecoveryFolderPath);
             }
 
             return Task.FromResult(new InitResponse());
@@ -163,10 +167,9 @@ public class WorkerServiceImpl : WorkerService.WorkerServiceBase
                 ShareFileStorage = true
             };
             using var image =
-                SerializedImageHelper.Deserialize(_imageContext, request.Image, deserializeOptions);
-            var thumbnail = await _thumbnailRenderer.Render(image, request.Size);
-            var stream = _imageContext
-                .Convert<MemoryStreamStorage>(thumbnail, new StorageConvertParams {Lossless = true}).Stream;
+                SerializedImageHelper.Deserialize(_scanningContext, request.Image, deserializeOptions);
+            var thumbnail = _thumbnailRenderer.Render(image, request.Size);
+            var stream = thumbnail.SaveToMemoryStream(ImageFileFormat.Png);
             return new RenderThumbnailResponse
             {
                 Thumbnail = ByteString.FromStream(stream)
@@ -184,8 +187,7 @@ public class WorkerServiceImpl : WorkerService.WorkerServiceBase
         {
             var renderer = new PdfiumPdfRenderer(_imageContext);
             using var image = renderer.Render(request.Path, request.Dpi).Single();
-            var stream = _imageContext
-                .Convert<MemoryStreamStorage>(image, new StorageConvertParams {Lossless = true}).Stream;
+            var stream = image.SaveToMemoryStream(ImageFileFormat.Png);
             return Task.FromResult(new RenderPdfResponse
             {
                 Image = ByteString.FromStream(stream)

@@ -2,7 +2,7 @@ using NAPS2.Serialization;
 
 namespace NAPS2.ImportExport.Images;
 
-public class ImageTransfer : TransferHelper<IEnumerable<ScannedImage>, ImageTransferData>
+public class ImageTransfer : TransferHelper<IEnumerable<RenderableImage>, ImageTransferData>
 {
     private readonly ImageContext _imageContext;
 
@@ -11,13 +11,13 @@ public class ImageTransfer : TransferHelper<IEnumerable<ScannedImage>, ImageTran
         _imageContext = imageContext;
     }
 
-    protected override ImageTransferData AsData(IEnumerable<ScannedImage> images)
+    protected override ImageTransferData AsData(IEnumerable<RenderableImage> images)
     {
         var transfer = new ImageTransferData
         {
             ProcessId = Process.GetCurrentProcess().Id
         };
-        var serializedImages = images.Select(x => SerializedImageHelper.Serialize(_imageContext, (ScannedImage) x, new SerializedImageHelper.SerializeOptions()));
+        var serializedImages = images.Select(x => SerializedImageHelper.Serialize(_imageContext, x, new SerializedImageHelper.SerializeOptions()));
         transfer.SerializedImages.AddRange(serializedImages);
         return transfer;
     }

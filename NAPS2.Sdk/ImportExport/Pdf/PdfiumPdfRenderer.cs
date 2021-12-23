@@ -49,7 +49,7 @@ public class PdfiumPdfRenderer : IPdfRenderer
                         int widthInPx = (int) Math.Round(widthInInches * dpi);
                         int heightInPx = (int) Math.Round(heightInInches * dpi);
 
-                        var bitmap = _imageContext.ImageFactory.FromDimensions(widthInPx, heightInPx, StoragePixelFormat.RGB24);
+                        var bitmap = _imageContext.Create(widthInPx, heightInPx, ImagePixelFormat.RGB24);
                         bitmap.SetResolution(dpi, dpi);
                         var bitmapData = bitmap.Lock(LockMode.ReadWrite, out var scan0, out var stride);
                         try

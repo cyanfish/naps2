@@ -7,19 +7,15 @@ namespace NAPS2.Scan.Internal;
 /// </summary>
 internal class NetworkScanBridge : IScanBridge
 {
-    private readonly ImageContext _imageContext;
+    private readonly ScanningContext _scanningContext;
 
-    public NetworkScanBridge() : this(ImageContext.Default)
+    public NetworkScanBridge(ScanningContext scanningContext)
     {
-    }
-
-    public NetworkScanBridge(ImageContext imageContext)
-    {
-        _imageContext = imageContext;
+        _scanningContext = scanningContext;
     }
 
     public Task<List<ScanDevice>> GetDeviceList(ScanOptions options) => throw new NotImplementedException();
 
     // TODO: On the network server, make sure to throttle progress events
-    public Task Scan(ScanOptions options, CancellationToken cancelToken, IScanEvents scanEvents, Action<ScannedImage, PostProcessingContext> callback) => throw new NotImplementedException();
+    public Task Scan(ScanOptions options, CancellationToken cancelToken, IScanEvents scanEvents, Action<RenderableImage, PostProcessingContext> callback) => throw new NotImplementedException();
 }

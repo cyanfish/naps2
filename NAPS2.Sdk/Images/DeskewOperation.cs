@@ -1,24 +1,20 @@
-﻿namespace NAPS2.Images;
+﻿using NAPS2.Images.Gdi;
+
+namespace NAPS2.Images;
 
 public class DeskewOperation : OperationBase
 {
     private readonly ImageContext _imageContext;
-    private readonly ImageRenderer _imageRenderer;
 
-    public DeskewOperation() : this(ImageContext.Default, new ImageRenderer(ImageContext.Default))
-    {
-    }
-
-    public DeskewOperation(ImageContext imageContext, ImageRenderer imageRenderer)
+    public DeskewOperation(ImageContext imageContext)
     {
         _imageContext = imageContext;
-        _imageRenderer = imageRenderer;
 
         AllowCancel = true;
         AllowBackground = true;
     }
 
-    public bool Start(ICollection<ScannedImage> images, DeskewParams deskewParams)
+    public bool Start(ICollection<RenderableImage> images, DeskewParams deskewParams)
     {
         ProgressTitle = MiscResources.AutoDeskewProgress;
         Status = new OperationStatus
@@ -31,24 +27,25 @@ public class DeskewOperation : OperationBase
         {
             return await Pipeline.For(images, CancelToken).RunParallel(async img =>
             {
-                var bitmap = await _imageRenderer.Render(img);
+                var image = img.RenderToImage();
                 try
                 {
                     CancelToken.ThrowIfCancellationRequested();
-                    var transform = Deskewer.GetDeskewTransform(bitmap);
+                    var transform = Deskewer.GetDeskewTransform(image);
                     CancelToken.ThrowIfCancellationRequested();
-                    bitmap = _imageContext.PerformTransform(bitmap, transform);
+                    image = _imageContext.PerformTransform(image, transform);
                     var thumbnail = deskewParams.ThumbnailSize.HasValue
-                        ? _imageContext.PerformTransform(bitmap, new ThumbnailTransform(deskewParams.ThumbnailSize.Value))
+                        ? _imageContext.PerformTransform(image, new ThumbnailTransform(deskewParams.ThumbnailSize.Value))
                         : null;
-                    lock (img)
-                    {
-                        img.AddTransform(transform);
-                        if (thumbnail != null)
-                        {
-                            img.SetThumbnail(thumbnail);
-                        }
-                    }
+                    // TODO: We need to propagate the transform changes outward somehow
+                    // lock (img)
+                    // {
+                    //     img.AddTransform(transform);
+                    //     if (thumbnail != null)
+                    //     {
+                    //         img.SetThumbnail(thumbnail);
+                    //     }
+                    // }
                     lock (this)
                     {
                         Status.CurrentProgress += 1;
@@ -57,7 +54,7 @@ public class DeskewOperation : OperationBase
                 }
                 finally
                 {
-                    bitmap.Dispose();
+                    image.Dispose();
                 }
             });
         });

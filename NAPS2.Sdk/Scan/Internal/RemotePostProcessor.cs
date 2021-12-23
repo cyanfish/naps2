@@ -2,16 +2,11 @@
 
 internal class RemotePostProcessor : IRemotePostProcessor
 {
-    private readonly ImageContext _imageContext;
+    private readonly ScanningContext _scanningContext;
 
-    public RemotePostProcessor()
-        : this(ImageContext.Default)
+    public RemotePostProcessor(ScanningContext scanningContext)
     {
-    }
-
-    public RemotePostProcessor(ImageContext imageContext)
-    {
-        _imageContext = imageContext;
+        _scanningContext = scanningContext;
     }
 
         
@@ -30,7 +25,7 @@ internal class RemotePostProcessor : IRemotePostProcessor
     //    return image;
     //}
 
-    public ScannedImage PostProcess(IImage image, ScanOptions options, PostProcessingContext postProcessingContext)
+    public RenderableImage PostProcess(IImage image, ScanOptions options, PostProcessingContext postProcessingContext)
     {
         using (image = DoInitialTransforms(image, options))
         {
@@ -40,9 +35,10 @@ internal class RemotePostProcessor : IRemotePostProcessor
             }
 
             var bitDepth = options.UseNativeUI ? BitDepth.Color : options.BitDepth;
-            var scannedImage = _imageContext.CreateScannedImage(image, bitDepth, options.MaxQuality, options.Quality);
+            var scannedImage = _scanningContext.CreateRenderableImage(image, bitDepth, options.MaxQuality, options.Quality, Enumerable.Empty<Transform>());
             DoRevertibleTransforms(scannedImage, image, options, postProcessingContext);
             postProcessingContext.TempPath = SaveForBackgroundOcr(image, options);
+            // TODO: We need to attach the thumbnail to the scanned image
             return scannedImage;
         }
     }
@@ -52,7 +48,7 @@ internal class RemotePostProcessor : IRemotePostProcessor
         if (!PlatformCompat.System.CanUseWin32 && options.BitDepth == BitDepth.BlackAndWhite)
         {
             // TODO: Don't do this here, do it where BitmapHelper is used or something
-            original = _imageContext.PerformTransform(original, new BlackWhiteTransform(-options.Brightness));
+            original = _scanningContext.ImageContext.PerformTransform(original, new BlackWhiteTransform(-options.Brightness));
         }
 
         double scaleFactor = 1;
@@ -61,7 +57,8 @@ internal class RemotePostProcessor : IRemotePostProcessor
             scaleFactor = 1.0 / options.ScaleRatio;
         }
 
-        var scaled = _imageContext.PerformTransform(original, new ScaleTransform(scaleFactor));
+        // TODO: Simplify performing transforms (can the image itself have it as a method?)
+        var scaled = _scanningContext.ImageContext.PerformTransform(original, new ScaleTransform(scaleFactor));
 
         if (!options.UseNativeUI && (options.StretchToPageSize || options.CropToPageSize))
         {
@@ -77,7 +74,7 @@ internal class RemotePostProcessor : IRemotePostProcessor
             {
                 if (options.CropToPageSize)
                 {
-                    scaled = _imageContext.PerformTransform(scaled, new CropTransform(
+                    scaled = _scanningContext.ImageContext.PerformTransform(scaled, new CropTransform(
                         0,
                         (int) ((width - (float) options.PageSize.HeightInInches) * original.HorizontalResolution),
                         0,
@@ -94,7 +91,7 @@ internal class RemotePostProcessor : IRemotePostProcessor
             {
                 if (options.CropToPageSize)
                 {
-                    scaled = _imageContext.PerformTransform(scaled, new CropTransform
+                    scaled = _scanningContext.ImageContext.PerformTransform(scaled, new CropTransform
                     (
                         0,
                         (int) ((width - (float) options.PageSize.WidthInInches) * original.HorizontalResolution),
@@ -113,64 +110,71 @@ internal class RemotePostProcessor : IRemotePostProcessor
     }
 
     // TODO: This is more than just transforms.
-    private void DoRevertibleTransforms(ScannedImage scannedImage, IImage image, ScanOptions options, PostProcessingContext postProcessingContext)
+    private void DoRevertibleTransforms(RenderableImage renderableImage, IImage image, ScanOptions options, PostProcessingContext postProcessingContext)
     {
+        var data = renderableImage.PostProcessingData;
         if (options.ThumbnailSize.HasValue)
         {
-            scannedImage.SetThumbnail(_imageContext.PerformTransform(image, new ThumbnailTransform(options.ThumbnailSize.Value)));
+            data.Thumbnail = _scanningContext.ImageContext.PerformTransform(image, new ThumbnailTransform(options.ThumbnailSize.Value));
         }
             
         if (!options.UseNativeUI && options.BrightnessContrastAfterScan)
         {
-            AddTransformAndUpdateThumbnail(scannedImage, ref image, new BrightnessTransform(options.Brightness), options);
-            AddTransformAndUpdateThumbnail(scannedImage, ref image, new TrueContrastTransform(options.Contrast), options);
+            renderableImage = AddTransformAndUpdateThumbnail(renderableImage, ref image, new BrightnessTransform(options.Brightness), options);
+            renderableImage = AddTransformAndUpdateThumbnail(renderableImage, ref image, new TrueContrastTransform(options.Contrast), options);
         }
 
         if (options.FlipDuplexedPages && postProcessingContext.PageNumber % 2 == 0)
         {
-            AddTransformAndUpdateThumbnail(scannedImage, ref image, new RotationTransform(180), options);
+            renderableImage = AddTransformAndUpdateThumbnail(renderableImage, ref image, new RotationTransform(180), options);
         }
 
         if (options.AutoDeskew)
         {
-            AddTransformAndUpdateThumbnail(scannedImage, ref image, Deskewer.GetDeskewTransform(image), options);
+            renderableImage = AddTransformAndUpdateThumbnail(renderableImage, ref image, Deskewer.GetDeskewTransform(image), options);
         }
 
-        if (!scannedImage.BarcodeDetection.IsBarcodePresent)
+        if (!data.BarcodeDetection.IsBarcodePresent)
         {
             // Even if barcode detection was attempted previously and failed, image adjustments may improve detection.
-            scannedImage.BarcodeDetection = BarcodeDetection.Detect(image, options.BarcodeDetectionOptions);
+            data.BarcodeDetection = BarcodeDetector.Detect(image, options.BarcodeDetectionOptions);
         }
     }
 
-    public string SaveForBackgroundOcr(IImage bitmap, ScanOptions options)
+    public string? SaveForBackgroundOcr(IImage bitmap, ScanOptions options)
     {
         if (options.DoOcr)
         {
-            var fileStorage = _imageContext.Convert<FileStorage>(bitmap, new StorageConvertParams { Temporary = true });
-            // TODO: Maybe return the storage rather than the path
-            return fileStorage.FullPath;
+            // TODO: If we use tesseract as a library, this is somethat that could potentially improve (i.e. not having to save to disk)
+            // But then again, that doesn't make as much sense on systems (i.e. linux) where tesseract would be provided as an external package
+            var path = Path.Combine(_scanningContext.TempFolderPath, Path.GetRandomFileName());
+            // TODO: Cleanup this call
+            var fullPath = _scanningContext.ImageContext.SaveSmallestFormat(bitmap, path, BitDepth.Color, false, -1, out _);
+            return fullPath;
         }
         return null;
     }
 
-    private void AddTransformAndUpdateThumbnail(ScannedImage scannedImage, ref IImage image, Transform transform, ScanOptions options)
+    private RenderableImage AddTransformAndUpdateThumbnail(RenderableImage renderableImage, ref IImage image, Transform transform, ScanOptions options)
     {
         if (transform.IsNull)
         {
-            return;
+            return renderableImage;
         }
-        scannedImage.AddTransform(transform);
+        RenderableImage transformed = renderableImage.WithTransform(transform);
         if (options.ThumbnailSize.HasValue)
         {
-            var thumbnail = scannedImage.GetThumbnail();
-            if (thumbnail != null)
-            {
-                // TODO: This should probably be done even without thumbnails, otherwise deskew/barcode might misfire
-                image = _imageContext.PerformTransform(image, transform);
-                // TODO: This can end up being redundant.
-                scannedImage.SetThumbnail(_imageContext.PerformTransform(image, new ThumbnailTransform(options.ThumbnailSize.Value)));
-            }
+            // TODO: We may want to do the transform on the original thumbnail, maybe situationally?
+            // TODO: Should probably dispose the original image & thumbnail
+            // TODO: This should probably be done even without thumbnails, otherwise deskew/barcode might misfire
+            // TODO: If we're doing a number of transforms, this is redundant...
+            // TODO: So basically we should probably do ONE thumbnail render, after all transforms are determined.
+            // TODO: BUT we should have some kind of fast path (not just used here) that moves the thumbnail transform up the transform stack
+            // TODO: as long as subsequent transforms are size agnostic (i.e. 90 deg rotation).
+            image = _scanningContext.ImageContext.PerformTransform(image, transform);
+            transformed.PostProcessingData.Thumbnail = _scanningContext.ImageContext.PerformTransform(image, new ThumbnailTransform(options.ThumbnailSize.Value));
         }
+        renderableImage.Dispose();
+        return transformed;
     }
 }

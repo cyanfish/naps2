@@ -9,13 +9,8 @@ internal class InProcScanBridge : IScanBridge
 {
     private readonly IRemoteScanController _remoteScanController;
 
-    public InProcScanBridge()
-        : this(new RemoteScanController())
-    {
-    }
-
-    public InProcScanBridge(ImageContext imageContext)
-        : this(new RemoteScanController(imageContext))
+    public InProcScanBridge(ScanningContext scanningContext)
+        : this(new RemoteScanController(scanningContext))
     {
     }
 
@@ -24,14 +19,9 @@ internal class InProcScanBridge : IScanBridge
         _remoteScanController = remoteScanController;
     }
 
-    public InProcScanBridge(ImageContext imageContext, IRemoteScanController remoteScanController)
-    {
-        _remoteScanController = remoteScanController;
-    }
-
     public Task<List<ScanDevice>> GetDeviceList(ScanOptions options) =>
         _remoteScanController.GetDeviceList(options);
 
-    public Task Scan(ScanOptions options, CancellationToken cancelToken, IScanEvents scanEvents, Action<ScannedImage, PostProcessingContext> callback) =>
+    public Task Scan(ScanOptions options, CancellationToken cancelToken, IScanEvents scanEvents, Action<RenderableImage, PostProcessingContext> callback) =>
         _remoteScanController.Scan(options, cancelToken, scanEvents, callback);
 }

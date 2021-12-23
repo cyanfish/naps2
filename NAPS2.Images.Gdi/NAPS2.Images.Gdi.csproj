@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFrameworks>net461;netcoreapp2.1;netstandard2.0</TargetFrameworks>
+        <Nullable>enable</Nullable>
+        <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+        <RootNamespace>NAPS2.Images.Gdi</RootNamespace>
+
+        <Title>NAPS2.Images.Gdi</Title>
+        <Copyright>Copyright 2022 Ben Olden-Cooligan</Copyright>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\NAPS2.Images\NAPS2.Images.csproj" />
+        <PackageReference Include="System.Drawing.Common" Version="5.0.3" />
+    </ItemGroup>
+
+    <Import Project="..\NAPS2.Setup\CommonTargets.targets" />
+    <Import Project="..\NAPS2.Setup\ImageUsers.targets" />
+
+</Project>

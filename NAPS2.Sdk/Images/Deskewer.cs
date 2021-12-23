@@ -1,4 +1,6 @@
-﻿namespace NAPS2.Images;
+﻿using NAPS2.Images.Gdi;
+
+namespace NAPS2.Images;
 
 public abstract class Deskewer
 {

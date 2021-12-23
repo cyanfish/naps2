@@ -1,6 +1,7 @@
 ﻿using System.Runtime.InteropServices;
 using System.Threading;
 using NAPS2.Dependencies;
+using NAPS2.Images.Gdi;
 using NAPS2.Scan;
 using PdfSharp.Pdf;
 using PdfSharp.Pdf.Advanced;
@@ -11,18 +12,18 @@ namespace NAPS2.ImportExport.Pdf;
 
 public class PdfSharpImporter : IPdfImporter
 {
+    private readonly ScanningContext _scanningContext;
     private readonly ImageContext _imageContext;
     private readonly ErrorOutput _errorOutput;
     private readonly IPdfPasswordProvider _pdfPasswordProvider;
-    private readonly ImageRenderer _imageRenderer;
     private readonly IComponentInstallPrompt _componentInstallPrompt;
 
-    public PdfSharpImporter(ImageContext imageContext, ErrorOutput errorOutput, IPdfPasswordProvider pdfPasswordProvider, ImageRenderer imageRenderer, IComponentInstallPrompt componentInstallPrompt)
+    public PdfSharpImporter(ScanningContext scanningContext, ImageContext imageContext, ErrorOutput errorOutput, IPdfPasswordProvider pdfPasswordProvider, IComponentInstallPrompt componentInstallPrompt)
     {
+        _scanningContext = scanningContext;
         _imageContext = imageContext;
         _errorOutput = errorOutput;
         _pdfPasswordProvider = pdfPasswordProvider;
-        _imageRenderer = imageRenderer;
         _componentInstallPrompt = componentInstallPrompt;
     }
 
@@ -112,7 +113,7 @@ public class PdfSharpImporter : IPdfImporter
         return sink.AsSource();
     }
 
-    private IEnumerable<ScannedImage> GetImagesFromPage(PdfPage page, ImportParams importParams)
+    private IEnumerable<RenderableImage> GetImagesFromPage(PdfPage page, ImportParams importParams)
     {
         // Get resources dictionary
         PdfDictionary resources = page.Elements.GetDictionary("/Resources");
@@ -150,7 +151,7 @@ public class PdfSharpImporter : IPdfImporter
         }
     }
 
-    private ScannedImage DecodeImage(string encoding, PdfPage page, PdfDictionary xObject, byte[] stream, ImportParams importParams)
+    private RenderableImage DecodeImage(string encoding, PdfPage page, PdfDictionary xObject, byte[] stream, ImportParams importParams)
     {
         switch (encoding)
         {
@@ -165,45 +166,44 @@ public class PdfSharpImporter : IPdfImporter
         }
     }
 
-    private async Task<ScannedImage> ExportRawPdfPage(PdfPage page, ImportParams importParams)
+    private async Task<RenderableImage> ExportRawPdfPage(PdfPage page, ImportParams importParams)
     {
-        string pdfPath = _imageContext.FileStorageManager.NextFilePath() + ".pdf";
+        // TODO: Handle no file storage (i.e. in-memory pdf storage)
+        string pdfPath = _scanningContext.FileStorageManager.NextFilePath() + ".pdf";
         var document = new PdfDocument();
         document.Pages.Add(page);
         document.Save(pdfPath);
 
-        // TODO: It would make sense to have in-memory PDFs be an option.
-        // TODO: Really, ConvertToBacking should convert PdfStorage -> PdfFileStorage.
-        // TODO: Then we wouldn't need a static FileStorageManager.
-        var image = _imageContext.CreateScannedImage(new FileStorage(pdfPath));
+        // TODO: Are we 100% sure we want RenderableImage to support PDFs? Need to implement that.
+        var image = new RenderableImage(new FileStorage(pdfPath), new ImageMetadata(BitDepth.Color, false), TransformState.Empty);
         if (importParams.ThumbnailSize.HasValue || importParams.BarcodeDetectionOptions.DetectBarcodes)
         {
-            using var bitmap = await _imageRenderer.Render(image);
+            using var bitmap = image.RenderToImage();
             if (importParams.ThumbnailSize.HasValue)
             {
-                image.SetThumbnail(_imageContext.PerformTransform(bitmap, new ThumbnailTransform(importParams.ThumbnailSize.Value)));
+                image.PostProcessingData.Thumbnail = _imageContext.PerformTransform(bitmap, new ThumbnailTransform(importParams.ThumbnailSize.Value));
             }
-            image.BarcodeDetection = BarcodeDetection.Detect(bitmap, importParams.BarcodeDetectionOptions);
+            image.PostProcessingData.BarcodeDetection = BarcodeDetector.Detect(bitmap, importParams.BarcodeDetectionOptions);
         }
         return image;
     }
 
-    private ScannedImage ExportJpegImage(PdfPage page, byte[] imageBytes, ImportParams importParams)
+    private RenderableImage ExportJpegImage(PdfPage page, byte[] imageBytes, ImportParams importParams)
     {
         // Fortunately JPEG has native support in PDF and exporting an image is just writing the stream to a file.
         using var memoryStream = new MemoryStream(imageBytes);
-        using var storage = _imageContext.ImageFactory.Decode(memoryStream, ".jpg");
+        using var storage = _imageContext.Load(memoryStream);
         storage.SetResolution(storage.Width / (float)page.Width.Inch, storage.Height / (float)page.Height.Inch);
-        var image = _imageContext.CreateScannedImage(storage, BitDepth.Color, false, -1);
+        var image = new RenderableImage(storage, new ImageMetadata(BitDepth.Color, false), TransformState.Empty);
         if (importParams.ThumbnailSize.HasValue)
         {
-            image.SetThumbnail(_imageContext.PerformTransform(storage, new ThumbnailTransform(importParams.ThumbnailSize.Value)));
+            image.PostProcessingData.Thumbnail = _imageContext.PerformTransform(storage, new ThumbnailTransform(importParams.ThumbnailSize.Value));
         }
-        image.BarcodeDetection = BarcodeDetection.Detect(storage, importParams.BarcodeDetectionOptions);
+        image.PostProcessingData.BarcodeDetection = BarcodeDetector.Detect(storage, importParams.BarcodeDetectionOptions);
         return image;
     }
 
-    private ScannedImage ExportAsPngImage(PdfPage page, PdfDictionary imageObject, ImportParams importParams)
+    private RenderableImage ExportAsPngImage(PdfPage page, PdfDictionary imageObject, ImportParams importParams)
     {
         int width = imageObject.Elements.GetInteger(PdfImage.Keys.Width);
         int height = imageObject.Elements.GetInteger(PdfImage.Keys.Height);
@@ -216,12 +216,12 @@ public class PdfSharpImporter : IPdfImporter
         switch (bitsPerComponent)
         {
             case 8:
-                storage = _imageContext.ImageFactory.FromDimensions(width, height, StoragePixelFormat.RGB24);
+                storage = _imageContext.Create(width, height, ImagePixelFormat.RGB24);
                 bitDepth = BitDepth.Color;
                 RgbToBitmapUnmanaged(storage, buffer);
                 break;
             case 1:
-                storage = _imageContext.ImageFactory.FromDimensions(width, height, StoragePixelFormat.BW1);
+                storage = _imageContext.Create(width, height, ImagePixelFormat.BW1);
                 bitDepth = BitDepth.BlackAndWhite;
                 BlackAndWhiteToBitmapUnmanaged(storage, buffer);
                 break;
@@ -232,12 +232,13 @@ public class PdfSharpImporter : IPdfImporter
         using (storage)
         {
             storage.SetResolution(storage.Width / (float)page.Width.Inch, storage.Height / (float)page.Height.Inch);
-            var image = _imageContext.CreateScannedImage(storage, bitDepth, true, -1);
+            // TODO: De-dup this code
+            var image = new RenderableImage(storage, new ImageMetadata(bitDepth, true), TransformState.Empty);
             if (importParams.ThumbnailSize.HasValue)
             {
-                image.SetThumbnail(_imageContext.PerformTransform(storage, new ThumbnailTransform(importParams.ThumbnailSize.Value)));
+                image.PostProcessingData.Thumbnail = _imageContext.PerformTransform(storage, new ThumbnailTransform(importParams.ThumbnailSize.Value));
             }
-            image.BarcodeDetection = BarcodeDetection.Detect(storage, importParams.BarcodeDetectionOptions);
+            image.PostProcessingData.BarcodeDetection = BarcodeDetector.Detect(storage, importParams.BarcodeDetectionOptions);
             return image;
         }
     }
@@ -301,7 +302,7 @@ public class PdfSharpImporter : IPdfImporter
     private static readonly byte[] TiffBeforeRealLen = { 0x03, 0x01, 0x03, 0x00, 0x01, 0x00, 0x00, 0x00, 0x04, 0x00, 0x00, 0x00, 0x11, 0x01, 0x04, 0x00, 0x01, 0x00, 0x00, 0x00, 0x10, 0x00, 0x00, 0x00, 0x15, 0x01, 0x03, 0x00, 0x01, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x17, 0x01, 0x04, 0x00, 0x01, 0x00, 0x00, 0x00 };
     private static readonly byte[] TiffTrailer = { 0x00, 0x00, 0x00, 0x00 };
 
-    private ScannedImage ExportG4(PdfPage page, PdfDictionary imageObject, byte[] imageBytes, ImportParams importParams)
+    private RenderableImage ExportG4(PdfPage page, PdfDictionary imageObject, byte[] imageBytes, ImportParams importParams)
     {
         int width = imageObject.Elements.GetInteger(PdfImage.Keys.Width);
         int height = imageObject.Elements.GetInteger(PdfImage.Keys.Height);
@@ -337,15 +338,16 @@ public class PdfSharpImporter : IPdfImporter
         Write(stream, TiffTrailer);
         stream.Seek(0, SeekOrigin.Begin);
 
-        using var storage = _imageContext.ImageFactory.Decode(stream, ".tiff");
+        // TODO: If we need a TIFF hint for loading, it should go here.
+        using var storage = _imageContext.Load(stream);
         storage.SetResolution(storage.Width / (float)page.Width.Inch, storage.Height / (float)page.Height.Inch);
 
-        var image = _imageContext.CreateScannedImage(storage, BitDepth.BlackAndWhite, true, -1);
+        var image = new RenderableImage(storage, new ImageMetadata(BitDepth.BlackAndWhite, true), TransformState.Empty);
         if (importParams.ThumbnailSize.HasValue)
         {
-            image.SetThumbnail(_imageContext.PerformTransform(storage, new ThumbnailTransform(importParams.ThumbnailSize.Value)));
+            image.PostProcessingData.Thumbnail = _imageContext.PerformTransform(storage, new ThumbnailTransform(importParams.ThumbnailSize.Value));
         }
-        image.BarcodeDetection = BarcodeDetection.Detect(storage, importParams.BarcodeDetectionOptions);
+        image.PostProcessingData.BarcodeDetection = BarcodeDetector.Detect(storage, importParams.BarcodeDetectionOptions);
         return image;
     }
 

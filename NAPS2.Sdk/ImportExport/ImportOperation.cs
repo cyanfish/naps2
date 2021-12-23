@@ -13,7 +13,7 @@ public class ImportOperation : OperationBase
         AllowBackground = true;
     }
 
-    public bool Start(List<string> filesToImport, Action<ScannedImage> imageCallback, ImportParams importParams)
+    public bool Start(List<string> filesToImport, Action<RenderableImage> imageCallback, ImportParams importParams)
     {
         bool oneFile = filesToImport.Count == 1;
         Status = new OperationStatus

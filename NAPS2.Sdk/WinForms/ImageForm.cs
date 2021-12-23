@@ -1,5 +1,6 @@
 using System.Drawing;
 using System.Windows.Forms;
+using NAPS2.Images.Gdi;
 using Timer = System.Threading.Timer;
 
 namespace NAPS2.WinForms
@@ -7,7 +8,6 @@ namespace NAPS2.WinForms
     partial class ImageForm : FormBase
     {
         private readonly ImageContext _imageContext;
-        private readonly BitmapRenderer _bitmapRenderer;
 
         protected Bitmap workingImage, workingImage2;
         private bool _initComplete;
@@ -22,16 +22,15 @@ namespace NAPS2.WinForms
             InitializeComponent();
         }
 
-        protected ImageForm(ImageContext imageContext, BitmapRenderer bitmapRenderer)
+        protected ImageForm(ImageContext imageContext)
         {
             _imageContext = imageContext;
-            _bitmapRenderer = bitmapRenderer;
             InitializeComponent();
         }
 
-        public ScannedImage Image { get; set; }
+        public RenderableImage Image { get; set; }
 
-        public List<ScannedImage> SelectedImages { get; set; }
+        public List<RenderableImage> SelectedImages { get; set; }
 
         protected virtual IEnumerable<Transform> Transforms => throw new NotImplementedException();
 
@@ -39,7 +38,7 @@ namespace NAPS2.WinForms
 
         private bool TransformMultiple => SelectedImages != null && checkboxApplyToSelected.Checked;
 
-        private IEnumerable<ScannedImage> ImagesToTransform => TransformMultiple ? SelectedImages : Enumerable.Repeat(Image, 1);
+        private IEnumerable<RenderableImage> ImagesToTransform => TransformMultiple ? SelectedImages : Enumerable.Repeat(Image, 1);
 
         protected virtual Bitmap RenderPreview()
         {
@@ -85,7 +84,8 @@ namespace NAPS2.WinForms
             Size = new Size(600, 600);
 
             var maxDimen = Screen.AllScreens.Max(s => Math.Max(s.WorkingArea.Height, s.WorkingArea.Width));
-            workingImage = await _bitmapRenderer.Render(Image, maxDimen * 2);
+            // TODO: Limit to maxDimen * 2
+            workingImage = Image.RenderToBitmap();
             if (_closed)
             {
                 workingImage?.Dispose();
@@ -147,13 +147,15 @@ namespace NAPS2.WinForms
                     {
                         foreach (var t in Transforms)
                         {
-                            img.AddTransform(t);
+                            // TODO: UiImage
+                            //img.AddTransform(t);
                         }
                         // Optimize thumbnail rendering for the first (or only) image since we already have it loaded into memory
                         if (img == Image)
                         {
                             var transformed = _imageContext.PerformAllTransforms(new GdiImage(workingImage).Clone(), Transforms);
-                            img.SetThumbnail(_imageContext.PerformTransform(transformed, new ThumbnailTransform(Config.Get(c => c.ThumbnailSize))));
+                            // TODO: UiImage
+                            // img.SetThumbnail(_imageContext.PerformTransform(transformed, new ThumbnailTransform(Config.Get(c => c.ThumbnailSize))));
                         }
                     }
                 }

@@ -32,7 +32,7 @@ public class BatchScanPerformer : IBatchScanPerformer
         _profileManager = profileManager;
     }
 
-    public async Task PerformBatchScan(IConfigProvider<BatchSettings> settings, FormBase batchForm, Action<ScannedImage> imageCallback, Action<string> progressCallback, CancellationToken cancelToken)
+    public async Task PerformBatchScan(IConfigProvider<BatchSettings> settings, FormBase batchForm, Action<RenderableImage> imageCallback, Action<string> progressCallback, CancellationToken cancelToken)
     {
         var state = new BatchState(_scanPerformer, _pdfExporter, _operationFactory, _pdfSettingsProvider, _ocrEngineManager, _formFactory, _config, _profileManager)
         {
@@ -58,7 +58,7 @@ public class BatchScanPerformer : IBatchScanPerformer
 
         private ScanProfile _profile;
         private ScanParams _scanParams;
-        private List<List<ScannedImage>> _scans;
+        private List<List<RenderableImage>> _scans;
 
         public BatchState(IScanPerformer scanPerformer, PdfExporter pdfExporter, IOperationFactory operationFactory,
             IConfigProvider<PdfSettings> pdfSettingsProvider, OcrEngineManager ocrEngineManager, IFormFactory formFactory, ScopedConfig config, IProfileManager profileManager)
@@ -81,7 +81,7 @@ public class BatchScanPerformer : IBatchScanPerformer
 
         public FormBase BatchForm { get; set; }
 
-        public Action<ScannedImage> LoadImageCallback { get; set; }
+        public Action<RenderableImage> LoadImageCallback { get; set; }
 
         public async Task Do()
         {
@@ -130,7 +130,7 @@ public class BatchScanPerformer : IBatchScanPerformer
         {
             await Task.Run(async () =>
             {
-                _scans = new List<List<ScannedImage>>();
+                _scans = new List<List<RenderableImage>>();
 
                 if (Settings.Get(c => c.ScanType) == BatchScanType.Single)
                 {
@@ -176,7 +176,7 @@ public class BatchScanPerformer : IBatchScanPerformer
 
         private async Task<bool> InputOneScan(int scanNumber)
         {
-            var scan = new List<ScannedImage>();
+            var scan = new List<RenderableImage>();
             int pageNumber = 1;
             ProgressCallback(scanNumber == -1
                 ? string.Format(MiscResources.BatchStatusPage, pageNumber++)
@@ -200,7 +200,7 @@ public class BatchScanPerformer : IBatchScanPerformer
             return true;
         }
 
-        private async Task DoScan(int scanNumber, List<ScannedImage> scan, int pageNumber)
+        private async Task DoScan(int scanNumber, List<RenderableImage> scan, int pageNumber)
         {
             var source = await _scanPerformer.PerformScan(_profile, _scanParams, BatchForm.SafeHandle(), CancelToken);
             await source.ForEach(image =>
@@ -256,7 +256,7 @@ public class BatchScanPerformer : IBatchScanPerformer
             }
         }
 
-        private async Task Save(Placeholders placeholders, int i, List<ScannedImage> images)
+        private async Task Save(Placeholders placeholders, int i, List<RenderableImage> images)
         {
             if (images.Count == 0)
             {
@@ -269,14 +269,17 @@ public class BatchScanPerformer : IBatchScanPerformer
                 {
                     subPath = placeholders.Substitute(subPath, true, 0, 1);
                 }
-                var snapshots = images.Select(x => x.Preserve()).ToList();
+                // TODO: Make copies of images and dispose
                 try
                 {
-                    await _pdfExporter.Export(subPath, snapshots, _pdfSettingsProvider, new OcrContext(_config.DefaultOcrParams()), (j, k) => { }, CancelToken);
+                    await _pdfExporter.Export(subPath, images, _pdfSettingsProvider, new OcrContext(_config.DefaultOcrParams()), (j, k) => { }, CancelToken);
                 }
                 finally
                 {
-                    snapshots.ForEach(s => s.Dispose());
+                    foreach (var image in images)
+                    {
+                        image.Dispose();
+                    }
                 }
             }
             else

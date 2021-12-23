@@ -1,21 +1,20 @@
 using System.Drawing;
 using System.Drawing.Printing;
 using System.Windows.Forms;
+using NAPS2.Images.Gdi;
 
 namespace NAPS2.ImportExport;
 
 public class PrintDocumentPrinter : IScannedImagePrinter
 {
     private readonly ImageContext _imageContext;
-    private readonly ImageRenderer _imageRenderer;
 
-    public PrintDocumentPrinter(ImageContext imageContext, ImageRenderer imageRenderer)
+    public PrintDocumentPrinter(ImageContext imageContext)
     {
         _imageContext = imageContext;
-        _imageRenderer = imageRenderer;
     }
 
-    public async Task<bool> PromptToPrint(List<ScannedImage> images, List<ScannedImage> selectedImages)
+    public async Task<bool> PromptToPrint(List<RenderableImage> images, List<RenderableImage> selectedImages)
     {
         if (!images.Any())
         {
@@ -40,9 +39,9 @@ public class PrintDocumentPrinter : IScannedImagePrinter
         return false;
     }
 
-    public async Task<bool> Print(PrinterSettings printerSettings, List<ScannedImage> images, List<ScannedImage> selectedImages)
+    public async Task<bool> Print(PrinterSettings printerSettings, List<RenderableImage> images, List<RenderableImage> selectedImages)
     {
-        List<ScannedImage> imagesToPrint;
+        List<RenderableImage> imagesToPrint;
         switch (printerSettings.PrintRange)
         {
             case PrintRange.AllPages:
@@ -57,7 +56,7 @@ public class PrintDocumentPrinter : IScannedImagePrinter
                 imagesToPrint = images.Skip(start).Take(length).ToList();
                 break;
             default:
-                imagesToPrint = new List<ScannedImage>();
+                imagesToPrint = new List<RenderableImage>();
                 break;
         }
         if (imagesToPrint.Count == 0)
@@ -65,7 +64,6 @@ public class PrintDocumentPrinter : IScannedImagePrinter
             return false;
         }
 
-        var snapshots = imagesToPrint.Select(x => x.Preserve()).ToList();
         return await Task.Run(() =>
         {
             try
@@ -74,7 +72,7 @@ public class PrintDocumentPrinter : IScannedImagePrinter
                 int i = 0;
                 printDocument.PrintPage += (sender, e) =>
                 {
-                    var image = Task.Run(() => _imageRenderer.Render(imagesToPrint[i])).Result;
+                    var image = imagesToPrint[i].RenderToImage();
                     try
                     {
                         var pb = e.PageBounds;
@@ -89,7 +87,7 @@ public class PrintDocumentPrinter : IScannedImagePrinter
                             ? new Rectangle(pb.Left, pb.Top, image.Width * pb.Height / image.Height, pb.Height)
                             : new Rectangle(pb.Left, pb.Top, pb.Width, image.Height * pb.Width / image.Width);
 
-                        e.Graphics.DrawImage(_imageContext.Convert<GdiImage>(image).Bitmap, rect);
+                        e.Graphics.DrawImage(image.AsBitmap(), rect);
                     }
                     finally
                     {
@@ -104,7 +102,7 @@ public class PrintDocumentPrinter : IScannedImagePrinter
                 Log.Event(EventType.Print, new EventParams
                 {
                     Name = MiscResources.Print,
-                    Pages = snapshots.Count,
+                    Pages = images.Count,
                     DeviceName = printDocument.PrinterSettings.PrinterName
                 });
 
@@ -112,7 +110,11 @@ public class PrintDocumentPrinter : IScannedImagePrinter
             }
             finally
             {
-                snapshots.ForEach(s => s.Dispose());
+                // TODO: Clone & dispose
+                foreach (var image in images)
+                {
+                    image.Dispose();
+                }
             }
         });
     }

@@ -36,23 +36,23 @@ public class OcrRequestQueue
         _operationProgress = operationProgress;
     }
 
-    public bool HasCachedResult(IOcrEngine ocrEngine, ScannedImage.Snapshot snapshot, OcrParams ocrParams)
+    public bool HasCachedResult(IOcrEngine ocrEngine, RenderableImage image, OcrParams ocrParams)
     {
-        var reqParams = new OcrRequestParams(snapshot, ocrEngine, ocrParams);
+        var reqParams = new OcrRequestParams(image, ocrEngine, ocrParams);
         lock (this)
         {
             return _requestCache.ContainsKey(reqParams) && _requestCache[reqParams].Result != null;
         }
     }
 
-    public async Task<OcrResult?> QueueForeground(IOcrEngine? ocrEngine, ScannedImage.Snapshot snapshot, string tempImageFilePath, OcrParams ocrParams, CancellationToken cancelToken)
+    public async Task<OcrResult?> QueueForeground(IOcrEngine? ocrEngine, RenderableImage image, string tempImageFilePath, OcrParams ocrParams, CancellationToken cancelToken)
     {
         OcrRequest req;
         lock (this)
         {
             ocrEngine ??= _ocrEngineManager.ActiveEngine ?? throw new ArgumentException("No OCR engine available");
 
-            var reqParams = new OcrRequestParams(snapshot, ocrEngine, ocrParams);
+            var reqParams = new OcrRequestParams(image, ocrEngine, ocrParams);
             req = _requestCache.GetOrSet(reqParams, () => new OcrRequest(reqParams));
             // Fast path for cached results
             if (req.Result != null)
@@ -100,7 +100,7 @@ public class OcrRequestQueue
         return req.Result;
     }
 
-    public void QueueBackground(ScannedImage.Snapshot snapshot, string tempImageFilePath, OcrParams ocrParams)
+    public void QueueBackground(RenderableImage image, string tempImageFilePath, OcrParams ocrParams)
     {
         OcrRequest req;
         CancellationTokenSource cts = new CancellationTokenSource();
@@ -109,7 +109,7 @@ public class OcrRequestQueue
             var ocrEngine = _ocrEngineManager.ActiveEngine;
             if (ocrEngine == null) return;
 
-            var reqParams = new OcrRequestParams(snapshot, ocrEngine, ocrParams);
+            var reqParams = new OcrRequestParams(image, ocrEngine, ocrParams);
             req = _requestCache.GetOrSet(reqParams, () => new OcrRequest(reqParams));
             // Fast path for cached results
             if (req.Result != null)
@@ -127,8 +127,9 @@ public class OcrRequestQueue
             }
             // Increment the reference count
             req.BackgroundCount += 1;
-            snapshot.Source.ThumbnailInvalidated += (sender, args) => cts.Cancel();
-            snapshot.Source.FullyDisposed += (sender, args) => cts.Cancel();
+            // TODO: Fix this somehow - add a dispose hook to RenderableImage?
+            // snapshot.Source.ThumbnailInvalidated += (sender, args) => cts.Cancel();
+            // snapshot.Source.FullyDisposed += (sender, args) => cts.Cancel();
             _queueWaitHandle.Release();
         }
         // If no worker threads are running, start them

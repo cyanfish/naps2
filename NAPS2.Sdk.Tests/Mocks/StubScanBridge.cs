@@ -6,9 +6,9 @@ namespace NAPS2.Sdk.Tests.Mocks;
 
 internal class StubScanBridge : IScanBridge
 {
-    public List<ScanDevice> MockDevices { get; set; } = new List<ScanDevice>();
+    public List<ScanDevice> MockDevices { get; set; } = new();
 
-    public List<ScannedImage> MockOutput { get; set; } = new List<ScannedImage>();
+    public List<RenderableImage> MockOutput { get; set; } = new();
         
     public Exception Error { get; set; }
 
@@ -25,7 +25,7 @@ internal class StubScanBridge : IScanBridge
         });
     }
 
-    public Task Scan(ScanOptions options, CancellationToken cancelToken, IScanEvents scanEvents, Action<ScannedImage, PostProcessingContext> callback)
+    public Task Scan(ScanOptions options, CancellationToken cancelToken, IScanEvents scanEvents, Action<RenderableImage, PostProcessingContext> callback)
     {
         return Task.Run(() =>
         {

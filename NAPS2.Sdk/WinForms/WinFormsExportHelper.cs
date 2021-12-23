@@ -32,7 +32,7 @@ public class WinFormsExportHelper
         _scannedImageList = scannedImageList;
     }
 
-    public async Task<bool> SavePDF(List<ScannedImage> images, ISaveNotify notify)
+    public async Task<bool> SavePDF(List<RenderableImage> images, ISaveNotify notify)
     {
         if (images.Any())
         {
@@ -63,7 +63,7 @@ public class WinFormsExportHelper
         return false;
     }
 
-    public async Task<bool> ExportPDF(string filename, List<ScannedImage> images, bool email, EmailMessage emailMessage)
+    public async Task<bool> ExportPDF(string filename, List<RenderableImage> images, bool email, EmailMessage emailMessage)
     {
         var op = _operationFactory.Create<SavePdfOperation>();
 
@@ -74,7 +74,7 @@ public class WinFormsExportHelper
         return await op.Success;
     }
 
-    public async Task<bool> SaveImages(List<ScannedImage> images, ISaveNotify notify)
+    public async Task<bool> SaveImages(List<RenderableImage> images, ISaveNotify notify)
     {
         if (images.Any())
         {
@@ -108,7 +108,7 @@ public class WinFormsExportHelper
         return false;
     }
 
-    public async Task<bool> EmailPDF(List<ScannedImage> images)
+    public async Task<bool> EmailPDF(List<RenderableImage> images)
     {
         if (!images.Any())
         {

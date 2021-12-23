@@ -1,18 +1,16 @@
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 
+    <Import Project="..\NAPS2.Setup\ImageUsers.targets" />
+
     <ItemGroup>
         <Using Include="NAPS2.Config" />
         <Using Include="NAPS2.Lang.Resources" />
         <Using Include="NAPS2.Logging" />
         <Using Include="NAPS2.Operation" />
-        <Using Include="NAPS2.Images" />
-        <Using Include="NAPS2.Images.Storage" />
-        <Using Include="NAPS2.Images.Transforms" />
         <Using Include="NAPS2.Platform" />
         <Using Include="NAPS2.Testing" />
         <Using Include="NAPS2.Threading" />
         <Using Include="NAPS2.Util" />
     </ItemGroup>
-
     
 </Project>

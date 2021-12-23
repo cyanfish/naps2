@@ -28,7 +28,8 @@ namespace NAPS2.WinForms
     {
         #region Dependencies
 
-        private static readonly MethodInfo ToolStripPanelSetStyle = typeof(ToolStripPanel).GetMethod("SetStyle", BindingFlags.Instance | BindingFlags.NonPublic);
+        private static readonly MethodInfo ToolStripPanelSetStyle =
+            typeof(ToolStripPanel).GetMethod("SetStyle", BindingFlags.Instance | BindingFlags.NonPublic);
 
         private readonly ImageContext _imageContext;
         private readonly StringWrapper _stringWrapper;
@@ -42,7 +43,6 @@ namespace NAPS2.WinForms
         private readonly ThumbnailRenderer _thumbnailRenderer;
         private readonly WinFormsExportHelper _exportHelper;
         private readonly ImageClipboard _imageClipboard;
-        private readonly ImageRenderer _imageRenderer;
         private readonly NotificationManager _notify;
         private readonly CultureInitializer _cultureInitializer;
         private readonly IWorkerFactory _workerFactory;
@@ -61,14 +61,18 @@ namespace NAPS2.WinForms
         private bool _closed = false;
         private LayoutManager _layoutManager;
         private bool _disableSelectedIndexChangedEvent;
-        
+
         public bool SkipRecoveryCleanup { get; set; }
 
         #endregion
 
         #region Initialization and Culture
 
-        public FDesktop(ImageContext imageContext, StringWrapper stringWrapper, RecoveryManager recoveryManager, OcrEngineManager ocrEngineManager, IScanPerformer scanPerformer, IScannedImagePrinter scannedImagePrinter, StillImage stillImage, IOperationFactory operationFactory, KeyboardShortcutManager ksm, ThumbnailRenderer thumbnailRenderer, WinFormsExportHelper exportHelper, ImageClipboard imageClipboard, ImageRenderer imageRenderer, NotificationManager notify, CultureInitializer cultureInitializer, IWorkerFactory workerFactory, OperationProgress operationProgress, UpdateChecker updateChecker, IProfileManager profileManager, ScannedImageList imageList, ImageTransfer imageTransfer)
+        public FDesktop(ImageContext imageContext, StringWrapper stringWrapper, RecoveryManager recoveryManager, OcrEngineManager ocrEngineManager,
+            IScanPerformer scanPerformer, IScannedImagePrinter scannedImagePrinter, StillImage stillImage, IOperationFactory operationFactory,
+            KeyboardShortcutManager ksm, ThumbnailRenderer thumbnailRenderer, WinFormsExportHelper exportHelper, ImageClipboard imageClipboard,
+            NotificationManager notify, CultureInitializer cultureInitializer, IWorkerFactory workerFactory, OperationProgress operationProgress,
+            UpdateChecker updateChecker, IProfileManager profileManager, ScannedImageList imageList, ImageTransfer imageTransfer)
         {
             _imageContext = imageContext;
             _stringWrapper = stringWrapper;
@@ -82,7 +86,6 @@ namespace NAPS2.WinForms
             _thumbnailRenderer = thumbnailRenderer;
             _exportHelper = exportHelper;
             _imageClipboard = imageClipboard;
-            _imageRenderer = imageRenderer;
             _notify = notify;
             _cultureInitializer = cultureInitializer;
             _workerFactory = workerFactory;
@@ -98,7 +101,7 @@ namespace NAPS2.WinForms
             Shown += FDesktop_Shown;
             FormClosing += FDesktop_FormClosing;
             Closed += FDesktop_Closed;
-            thumbnailList1.ItemSelectionChanged += (sender, args) => imageList.Selection = ListSelection.From(SelectedImages); 
+            thumbnailList1.ItemSelectionChanged += (sender, args) => imageList.Selection = ListSelection.From(SelectedImages);
             // TODO: Use a delta operation (using snapshot/memento logic) rather than added/updated/deleted
             imageList.ImagesUpdated += (sender, args) =>
             {
@@ -167,9 +170,9 @@ namespace NAPS2.WinForms
             btnZoomOut.Location = new Point(btnZoomOut.Location.X, thumbnailList1.Height - 33);
             btnZoomMouseCatcher.Location = new Point(btnZoomMouseCatcher.Location.X, thumbnailList1.Height - 33);
             _layoutManager = new LayoutManager(this)
-                   .Bind(btnZoomIn, btnZoomOut, btnZoomMouseCatcher)
-                       .BottomTo(() => thumbnailList1.Height)
-                   .Activate();
+                .Bind(btnZoomIn, btnZoomOut, btnZoomMouseCatcher)
+                .BottomTo(() => thumbnailList1.Height)
+                .Activate();
 
             thumbnailList1.MouseWheel += thumbnailList1_MouseWheel;
             thumbnailList1.SizeChanged += (sender, args) => _layoutManager.UpdateLayout();
@@ -296,7 +299,7 @@ namespace NAPS2.WinForms
         {
             // TODO: Start the Eto application in the entry point once all forms (or at least FDesktop?) are migrated
             new Eto.Forms.Application(Eto.Platforms.WinForms).Attach();
-            
+
             UpdateToolbar();
 
             // Receive messages from other processes
@@ -346,8 +349,8 @@ namespace NAPS2.WinForms
             }
 #if !INSTALLER_MSI
             else if (!Config.Get(c => c.HiddenButtons).HasFlag(ToolbarButtons.Donate) &&
-                !Config.Get(c => c.HasBeenPromptedForDonation) &&
-                DateTime.Now - Config.Get(c => c.FirstRunDate) > TimeSpan.FromDays(30))
+                     !Config.Get(c => c.HasBeenPromptedForDonation) &&
+                     DateTime.Now - Config.Get(c => c.FirstRunDate) > TimeSpan.FromDays(30))
             {
                 Config.User.SetAll(new CommonConfig
                 {
@@ -614,24 +617,25 @@ namespace NAPS2.WinForms
             }
         }
 
-        private IEnumerable<ScannedImage> SelectedImages => _imageList.Images.ElementsAt(SelectedIndices);
+        private IEnumerable<RenderableImage> SelectedImages => _imageList.Images.ElementsAt(SelectedIndices);
 
         /// <summary>
         /// Constructs a receiver for scanned images.
         /// This keeps images from the same source together, even if multiple sources are providing images at the same time.
         /// </summary>
         /// <returns></returns>
-        public Action<ScannedImage> ReceiveScannedImage()
+        public Action<RenderableImage> ReceiveScannedImage()
         {
-            ScannedImage? last = null;
+            RenderableImage? last = null;
             return scannedImage =>
             {
                 SafeInvoke(() =>
                 {
                     lock (_imageList)
                     {
-                        scannedImage.ThumbnailChanged += ImageThumbnailChanged;
-                        scannedImage.ThumbnailInvalidated += ImageThumbnailInvalidated;
+                        // TODO
+                        // scannedImage.ThumbnailChanged += ImageThumbnailChanged;
+                        // scannedImage.ThumbnailInvalidated += ImageThumbnailInvalidated;
                         _imageList.Mutate(new ImageListMutation.InsertAfter(scannedImage, last));
                         last = scannedImage;
                     }
@@ -659,7 +663,7 @@ namespace NAPS2.WinForms
         {
             SafeInvokeAsync(() =>
             {
-                var image = (ScannedImage)sender;
+                var image = (RenderableImage)sender;
                 lock (image)
                 {
                     lock (_imageList)
@@ -678,16 +682,17 @@ namespace NAPS2.WinForms
         {
             SafeInvokeAsync(() =>
             {
-                var image = (ScannedImage)sender;
+                var image = (RenderableImage)sender;
                 lock (image)
                 {
                     lock (_imageList)
                     {
                         int index = _imageList.Images.IndexOf(image);
-                        if (index != -1 && image.IsThumbnailDirty)
-                        {
-                            thumbnailList1.ReplaceThumbnail(index, image);
-                        }
+                        // TODO: UiImage
+                        // if (index != -1 && image.IsThumbnailDirty)
+                        // {
+                        //     thumbnailList1.ReplaceThumbnail(index, image);
+                        // }
                     }
                 }
                 _renderThumbnailsWaitHandle.Set();
@@ -802,7 +807,8 @@ namespace NAPS2.WinForms
         {
             if (_imageList.Images.Count > 0)
             {
-                if (MessageBox.Show(string.Format(MiscResources.ConfirmClearItems, _imageList.Images.Count), MiscResources.Clear, MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
+                if (MessageBox.Show(string.Format(MiscResources.ConfirmClearItems, _imageList.Images.Count), MiscResources.Clear, MessageBoxButtons.OKCancel,
+                        MessageBoxIcon.Question) == DialogResult.OK)
                 {
                     _userActions.DeleteAll();
                 }
@@ -813,7 +819,8 @@ namespace NAPS2.WinForms
         {
             if (SelectedIndices.Any())
             {
-                if (MessageBox.Show(string.Format(MiscResources.ConfirmDeleteItems, SelectedIndices.Count()), MiscResources.Delete, MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
+                if (MessageBox.Show(string.Format(MiscResources.ConfirmDeleteItems, SelectedIndices.Count()), MiscResources.Delete, MessageBoxButtons.OKCancel,
+                        MessageBoxIcon.Question) == DialogResult.OK)
                 {
                     _userActions.DeleteSelected();
                 }
@@ -852,7 +859,8 @@ namespace NAPS2.WinForms
         {
             if (SelectedIndices.Any())
             {
-                if (MessageBox.Show(string.Format(MiscResources.ConfirmResetImages, SelectedIndices.Count()), MiscResources.ResetImage, MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
+                if (MessageBox.Show(string.Format(MiscResources.ConfirmResetImages, SelectedIndices.Count()), MiscResources.ResetImage,
+                        MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
                 {
                     _userActions.ResetTransforms();
                 }
@@ -873,21 +881,18 @@ namespace NAPS2.WinForms
 
         #region Actions - Save/Email/Import
 
-        private async void SavePDF(List<ScannedImage> images)
+        private async void SavePDF(List<RenderableImage> images)
         {
             if (await _exportHelper.SavePDF(images, _notify))
             {
                 if (Config.Get(c => c.DeleteAfterSaving))
                 {
-                    SafeInvoke(() =>
-                    {
-                        _imageList.Mutate(new ImageListMutation.DeleteSelected(), ListSelection.From(images));
-                    });
+                    SafeInvoke(() => { _imageList.Mutate(new ImageListMutation.DeleteSelected(), ListSelection.From(images)); });
                 }
             }
         }
 
-        private async void SaveImages(List<ScannedImage> images)
+        private async void SaveImages(List<RenderableImage> images)
         {
             if (await _exportHelper.SaveImages(images, _notify))
             {
@@ -898,7 +903,7 @@ namespace NAPS2.WinForms
             }
         }
 
-        private async void EmailPDF(List<ScannedImage> images)
+        private async void EmailPDF(List<RenderableImage> images)
         {
             await _exportHelper.EmailPDF(images);
         }
@@ -1244,7 +1249,7 @@ namespace NAPS2.WinForms
 
         private async void tsPrint_Click(object sender, EventArgs e)
         {
-            var state = _imageList.CurrentState; 
+            var state = _imageList.CurrentState;
             if (await _scannedImagePrinter.PromptToPrint(_imageList.Images, SelectedImages.ToList()))
             {
                 _imageList.SavedState = state;
@@ -1503,7 +1508,8 @@ namespace NAPS2.WinForms
             const int MIN_PADDING = 6;
             const int MAX_PADDING = 66;
             // Linearly scale the padding with the thumbnail size
-            int padding = MIN_PADDING + (MAX_PADDING - MIN_PADDING) * (thumbnailSize - ThumbnailSizes.MIN_SIZE) / (ThumbnailSizes.MAX_SIZE - ThumbnailSizes.MIN_SIZE);
+            int padding = MIN_PADDING + (MAX_PADDING - MIN_PADDING) * (thumbnailSize - ThumbnailSizes.MIN_SIZE) /
+                (ThumbnailSizes.MAX_SIZE - ThumbnailSizes.MIN_SIZE);
             int spacing = thumbnailSize + padding * 2;
             SetListSpacing(thumbnailList1, spacing, spacing);
         }
@@ -1524,25 +1530,27 @@ namespace NAPS2.WinForms
             {
                 try
                 {
-                    ScannedImage next;
+                    RenderableImage next;
                     while ((next = GetNextThumbnailToRender()) != null)
                     {
                         if (!ThumbnailStillNeedsRendering(next))
                         {
                             continue;
                         }
-                        using (var snapshot = next.Preserve())
+                        using (var image = next.Copy())
                         {
                             var thumb = worker != null
-                                ? _imageContext.ImageFactory.Decode(new MemoryStream(worker.Service.RenderThumbnail(_imageContext, snapshot, thumbnailList1.ThumbnailSize.Height)), ".jpg")
-                                : _thumbnailRenderer.Render(snapshot, thumbnailList1.ThumbnailSize.Height).Result;
+                                ? _imageContext.Load(
+                                    new MemoryStream(worker.Service.RenderThumbnail(_imageContext, image, thumbnailList1.ThumbnailSize.Height)))
+                                : _thumbnailRenderer.Render(image, thumbnailList1.ThumbnailSize.Height);
 
                             if (!ThumbnailStillNeedsRendering(next))
                             {
                                 continue;
                             }
 
-                            next.SetThumbnail(thumb, snapshot.Metadata.TransformState);
+                            // TODO: UiImage
+                            // next.SetThumbnail(thumb, snapshot.Metadata.TransformState);
                         }
                         fallback.Reset();
                     }
@@ -1563,47 +1571,51 @@ namespace NAPS2.WinForms
             }
         }
 
-        private bool ThumbnailStillNeedsRendering(ScannedImage next)
+        private bool ThumbnailStillNeedsRendering(RenderableImage next)
         {
             lock (next)
             {
-                var thumb = next.GetThumbnail();
-                return thumb == null || next.IsThumbnailDirty || thumb.Width != thumbnailList1.ThumbnailSize.Width || thumb.Height != thumbnailList1.ThumbnailSize.Height;
+                // TODO: UiImage
+                return false;
+                // var thumb = next.GetThumbnail();
+                // return thumb == null || next.IsThumbnailDirty || thumb.Width != thumbnailList1.ThumbnailSize.Width ||
+                //        thumb.Height != thumbnailList1.ThumbnailSize.Height;
             }
         }
 
-        private ScannedImage GetNextThumbnailToRender()
+        private RenderableImage GetNextThumbnailToRender()
         {
-            List<ScannedImage> listCopy;
+            List<RenderableImage> listCopy;
             lock (_imageList)
             {
                 listCopy = _imageList.Images.ToList();
             }
-            // Look for images without thumbnails
-            foreach (var img in listCopy)
-            {
-                if (img.GetThumbnail() == null)
-                {
-                    return img;
-                }
-            }
-            // Look for images with dirty thumbnails
-            foreach (var img in listCopy)
-            {
-                if (img.IsThumbnailDirty)
-                {
-                    return img;
-                }
-            }
-            // Look for images with mis-sized thumbnails
-            foreach (var img in listCopy)
-            {
-                var thumb = img.GetThumbnail();
-                if (thumb == null || thumb.Width != thumbnailList1.ThumbnailSize.Width || thumb.Height != thumbnailList1.ThumbnailSize.Height)
-                {
-                    return img;
-                }
-            }
+            // TODO: UiImage
+            // // Look for images without thumbnails
+            // foreach (var img in listCopy)
+            // {
+            //     if (img.GetThumbnail() == null)
+            //     {
+            //         return img;
+            //     }
+            // }
+            // // Look for images with dirty thumbnails
+            // foreach (var img in listCopy)
+            // {
+            //     if (img.IsThumbnailDirty)
+            //     {
+            //         return img;
+            //     }
+            // }
+            // // Look for images with mis-sized thumbnails
+            // foreach (var img in listCopy)
+            // {
+            //     var thumb = img.GetThumbnail();
+            //     if (thumb == null || thumb.Width != thumbnailList1.ThumbnailSize.Width || thumb.Height != thumbnailList1.ThumbnailSize.Height)
+            //     {
+            //         return img;
+            //     }
+            // }
             // Nothing to render
             return null;
         }

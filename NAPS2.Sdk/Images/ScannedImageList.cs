@@ -1,3 +1,4 @@
+using System.Collections.Immutable;
 using System.Threading;
 
 namespace NAPS2.Images;
@@ -7,26 +8,26 @@ public class ScannedImageList
     private readonly ImageContext _imageContext;
     private readonly TimedThrottle _runUpdateEventsThrottle;
     private Memento _savedState = Memento.Empty;
-    private ListSelection<ScannedImage> _selection;
+    private ListSelection<RenderableImage> _selection;
 
     public ScannedImageList(ImageContext imageContext)
-        : this(imageContext, new List<ScannedImage>())
+        : this(imageContext, new List<RenderableImage>())
     {
     }
 
-    public ScannedImageList(ImageContext imageContext, List<ScannedImage> images)
+    public ScannedImageList(ImageContext imageContext, List<RenderableImage> images)
     {
         _imageContext = imageContext;
         _runUpdateEventsThrottle = new TimedThrottle(RunUpdateEvents, TimeSpan.FromMilliseconds(100));
         Images = images;
-        _selection = ListSelection.Empty<ScannedImage>();
+        _selection = ListSelection.Empty<RenderableImage>();
     }
 
     public ThumbnailRenderer? ThumbnailRenderer { get; set; }
 
-    public List<ScannedImage> Images { get; }
+    public List<RenderableImage> Images { get; }
 
-    public Memento CurrentState => new Memento(Images);
+    public Memento CurrentState => new Memento(Images.ToImmutableList());
 
     public Memento SavedState
     {
@@ -34,13 +35,13 @@ public class ScannedImageList
         set => _savedState = value ?? throw new ArgumentNullException(nameof(value));
     }
 
-    public ListSelection<ScannedImage> Selection
+    public ListSelection<RenderableImage> Selection
     {
         get => _selection;
         set => _selection = value ?? throw new ArgumentNullException(nameof(value));
     }
 
-    public void UpdateSelection(ListSelection<ScannedImage> newSelection)
+    public void UpdateSelection(ListSelection<RenderableImage> newSelection)
     {
         Selection = newSelection;
         ImagesUpdated?.Invoke(this, EventArgs.Empty);
@@ -48,19 +49,19 @@ public class ScannedImageList
 
     public event EventHandler? ImagesUpdated;
 
-    public void Mutate(ListMutation<ScannedImage> mutation, ListSelection<ScannedImage>? selectionToMutate = null)
+    public void Mutate(ListMutation<RenderableImage> mutation, ListSelection<RenderableImage>? selectionToMutate = null)
     {
         MutateInternal(mutation, selectionToMutate);
         _runUpdateEventsThrottle.RunAction(SynchronizationContext.Current);
     }
 
-    public async Task MutateAsync(ListMutation<ScannedImage> mutation, ListSelection<ScannedImage>? selectionToMutate = null)
+    public async Task MutateAsync(ListMutation<RenderableImage> mutation, ListSelection<RenderableImage>? selectionToMutate = null)
     {
         await Task.Run(() => MutateInternal(mutation, selectionToMutate));
         _runUpdateEventsThrottle.RunAction(SynchronizationContext.Current);
     }
 
-    private void MutateInternal(ListMutation<ScannedImage> mutation, ListSelection<ScannedImage>? selectionToMutate)
+    private void MutateInternal(ListMutation<RenderableImage> mutation, ListSelection<RenderableImage>? selectionToMutate)
     {
         if (!ReferenceEquals(selectionToMutate, null))
         {
@@ -83,7 +84,8 @@ public class ScannedImageList
         int i = 0;
         foreach (var image in Images)
         {
-            image.Metadata.Index = i++;
+            // TODO: Update index
+            // image.Metadata.Index = i++;
         }
         _imageContext.ImageMetadataFactory.CommitAllMetadata();
     }

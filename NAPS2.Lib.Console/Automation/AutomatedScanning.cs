@@ -32,7 +32,7 @@ public class AutomatedScanning
 
     private readonly ConsoleOutput _output;
     private readonly AutomatedScanningOptions _options;
-    private List<List<ScannedImage>> _scanList;
+    private List<List<RenderableImage>> _scanList;
     private int _pagesScanned;
     private int _totalPagesScanned;
     private Placeholders _placeholders;
@@ -61,7 +61,7 @@ public class AutomatedScanning
         _imageSettingsProvider = _transactionConfig.Child(c => c.ImageSettings);
     }
 
-    public IEnumerable<ScannedImage> AllImages => _scanList.SelectMany(x => x);
+    public IEnumerable<RenderableImage> AllImages => _scanList.SelectMany(x => x);
 
     private void OutputVerbose(string value, params object[] args)
     {
@@ -97,7 +97,7 @@ public class AutomatedScanning
                 return;
             }
 
-            _scanList = new List<List<ScannedImage>>();
+            _scanList = new List<List<RenderableImage>>();
 
             if (_options.ImportPath != null)
             {
@@ -577,7 +577,7 @@ public class AutomatedScanning
             }
             OutputVerbose(ConsoleResources.StartingScan, i, _options.Number);
             _pagesScanned = 0;
-            _scanList.Add(new List<ScannedImage>());
+            _scanList.Add(new List<RenderableImage>());
             var scanParams = new ScanParams
             {
                 NoUI = !_options.Progress,
@@ -617,7 +617,7 @@ public class AutomatedScanning
         return true;
     }
 
-    public void ReceiveScannedImage(ScannedImage scannedImage)
+    public void ReceiveScannedImage(RenderableImage scannedImage)
     {
         _scanList.Last().Add(scannedImage);
         _pagesScanned++;

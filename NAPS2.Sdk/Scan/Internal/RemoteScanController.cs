@@ -7,13 +7,8 @@ internal class RemoteScanController : IRemoteScanController
     private readonly IScanDriverFactory _scanDriverFactory;
     private readonly IRemotePostProcessor _remotePostProcessor;
 
-    public RemoteScanController()
-        : this(new ScanDriverFactory(ImageContext.Default), new RemotePostProcessor())
-    {
-    }
-
-    public RemoteScanController(ImageContext imageContext)
-        : this(new ScanDriverFactory(imageContext), new RemotePostProcessor(imageContext))
+    public RemoteScanController(ScanningContext scanningContext)
+        : this(new ScanDriverFactory(scanningContext), new RemotePostProcessor(scanningContext))
     {
     }
 
@@ -33,7 +28,7 @@ internal class RemoteScanController : IRemoteScanController
         return deviceList;
     }
 
-    public async Task Scan(ScanOptions options, CancellationToken cancelToken, IScanEvents scanEvents, Action<ScannedImage, PostProcessingContext> callback)
+    public async Task Scan(ScanOptions options, CancellationToken cancelToken, IScanEvents scanEvents, Action<RenderableImage, PostProcessingContext> callback)
     {
         var driver = _scanDriverFactory.Create(options);
         var progressThrottle = new EventThrottle<double>(scanEvents.PageProgress);

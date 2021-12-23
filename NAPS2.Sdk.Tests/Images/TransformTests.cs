@@ -291,7 +291,7 @@ public class TransformTests : ContextualTexts
         IImage expected = new GdiImage(TransformTestsData.color_image_bw);
 
         actual = ImageContext.PerformTransform(actual, new BlackWhiteTransform());
-        Assert.Equal(StoragePixelFormat.BW1, actual.PixelFormat);
+        Assert.Equal(ImagePixelFormat.BW1, actual.PixelFormat);
 
         actual = To24Bit(actual);
         ImageAsserts.Similar(expected, actual, GENERAL_RMSE_THRESHOLD);
@@ -304,7 +304,7 @@ public class TransformTests : ContextualTexts
         IImage expected = new GdiImage(TransformTestsData.color_image_bw_p300);
 
         actual = ImageContext.PerformTransform(actual, new BlackWhiteTransform(300));
-        Assert.Equal(StoragePixelFormat.BW1, actual.PixelFormat);
+        Assert.Equal(ImagePixelFormat.BW1, actual.PixelFormat);
 
         actual = To24Bit(actual);
         ImageAsserts.Similar(expected, actual, GENERAL_RMSE_THRESHOLD);

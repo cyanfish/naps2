@@ -5,19 +5,23 @@ namespace NAPS2.ImportExport.Pdf;
 
 public abstract class PdfExporter
 {
-    public async Task<bool> Export(string path, IEnumerable<ScannedImage> images, PdfSettings settings)
+    public async Task<bool> Export(string path, ICollection<RenderableImage> images, PdfSettings settings)
     {
-        var snapshots = images.Select(x => x.Preserve()).ToList();
         try
         {
-            return await Export(path, snapshots, new StubConfigProvider<PdfSettings>(settings));
+            return await Export(path, images, new StubConfigProvider<PdfSettings>(settings));
         }
         finally
         {
-            snapshots.ForEach(s => s.Dispose());
+            foreach (var image in images)
+            {
+                image.Dispose();
+            }
         }
     }
-        
-    public abstract Task<bool> Export(string path, ICollection<ScannedImage.Snapshot> snapshots, IConfigProvider<PdfSettings> settings,
+
+    // TODO: Unify lifetime management
+    // TODO: Also does it make sense to have some kind of custom renderable image collection that encapsulates whether it should dispose on completion?
+    public abstract Task<bool> Export(string path, ICollection<RenderableImage> images, IConfigProvider<PdfSettings> settings,
         OcrContext? ocrContext = null, ProgressHandler? progressCallback = null, CancellationToken cancelToken = default);
 }
