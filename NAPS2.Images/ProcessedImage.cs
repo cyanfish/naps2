@@ -10,7 +10,7 @@ namespace NAPS2.Images;
 /// reference with Clone() that will need to be disposed, and the underlying image storage will only be disposed once
 /// all related instances are disposed (or the parent ScanningContext is disposed).
 /// </summary>
-public class ProcessedImage : IDisposable
+public class ProcessedImage : IDisposable, IEquatable<ProcessedImage>
 {
     private readonly RefCount.Token _token;
 
@@ -75,9 +75,33 @@ public class ProcessedImage : IDisposable
     /// <returns></returns>
     public WeakReference GetWeakReference() => new WeakReference(this);
 
+    public override bool Equals(object obj)
+    {
+        if (ReferenceEquals(null, obj)) return false;
+        if (ReferenceEquals(this, obj)) return true;
+        if (obj.GetType() != this.GetType()) return false;
+        return Equals((ProcessedImage) obj);
+    }
+
+    public bool Equals(ProcessedImage? other)
+    {
+        if (ReferenceEquals(null, other)) return false;
+        if (ReferenceEquals(this, other)) return true;
+        // TODO: Should we also compare metadata? 
+        return Storage.Equals(other.Storage) && TransformState.Equals(other.TransformState);
+    }
+
+    public override int GetHashCode()
+    {
+        unchecked
+        {
+            return (Storage.GetHashCode() * 397) ^ TransformState.GetHashCode();
+        }
+    }
+
     public void Dispose()
     {
-        // TODO: Also dispose of postprocessingdata bitmap (?)
+        // TODO: Also dispose of postprocessingdata bitmap (?) - and add test
         _token.Dispose();
     }
 

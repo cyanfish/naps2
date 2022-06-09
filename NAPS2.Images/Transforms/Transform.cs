@@ -22,7 +22,7 @@ public abstract class Transform
                 return transformList.RemoveAt(transformList.Count - 1);
             }
 
-            return transformList.SetItem(transformList.Count - 1, transform.Simplify(last));
+            return transformList.SetItem(transformList.Count - 1, simplified);
         }
 
         return transformList.Add(transform);
