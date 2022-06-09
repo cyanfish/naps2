@@ -34,6 +34,9 @@ public record Memento(ImmutableList<ProcessedImage> Images) : IDisposable
 
     public void Dispose()
     {
-        Images.DisposeAll();
+        foreach (var image in Images)
+        {
+            image.Dispose();
+        }
     }
 }

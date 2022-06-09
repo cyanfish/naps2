@@ -32,7 +32,7 @@ public class SaveImagesOperation : OperationBase
     /// <param name="placeholders"></param>
     /// <param name="images">The collection of images to save.</param>
     /// <param name="batch"></param>
-    public bool Start(string fileName, Placeholders placeholders, List<ProcessedImage> images, IConfigProvider<ImageSettings> imageSettings, bool batch = false)
+    public bool Start(string fileName, Placeholders placeholders, IList<ProcessedImage> images, IConfigProvider<ImageSettings> imageSettings, bool batch = false)
     {
         Status = new OperationStatus
         {
@@ -122,11 +122,6 @@ public class SaveImagesOperation : OperationBase
             {
                 Log.ErrorException(MiscResources.ErrorSaving, ex);
                 InvokeError(MiscResources.ErrorSaving, ex);
-            }
-            finally
-            {
-                images.ForEach(s => s.Dispose());
-                GC.Collect();
             }
             return false;
         });

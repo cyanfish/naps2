@@ -1,4 +1,6 @@
-﻿namespace NAPS2.Util;
+﻿using System.Collections.Immutable;
+
+namespace NAPS2.Util;
 
 public static class CollectionExtensions
 {
@@ -221,11 +223,8 @@ public static class CollectionExtensions
 
     public static IEnumerable<T> WhereNotNull<T>(this IEnumerable<T?> enumerable) => enumerable.Where(x => x != null)!;
 
-    public static void DisposeAll<T>(this IEnumerable<T?> enumerable) where T : IDisposable
+    public static DisposableList<T> ToDisposableList<T>(this IEnumerable<T> enumerable) where T : IDisposable
     {
-        foreach(var obj in enumerable)
-        {
-            obj?.Dispose();
-        }
+        return new DisposableList<T>(enumerable.ToImmutableList());
     }
 }

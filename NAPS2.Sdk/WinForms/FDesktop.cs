@@ -884,59 +884,35 @@ namespace NAPS2.WinForms
 
         private async void SavePDF(List<UiImage> images)
         {
-            var imagesToSave = images.Select(x => x.GetClonedImage()).ToList();
-            try
+            using var imagesToSave = images.Select(x => x.GetClonedImage()).ToDisposableList();
+            if (await _exportHelper.SavePDF(imagesToSave.InnerList, _notify))
             {
-                if (await _exportHelper.SavePDF(imagesToSave, _notify))
+                if (Config.Get(c => c.DeleteAfterSaving))
                 {
-                    if (Config.Get(c => c.DeleteAfterSaving))
+                    SafeInvoke(() =>
                     {
-                        SafeInvoke(() =>
-                        {
-                            _imageList.Mutate(new ImageListMutation.DeleteSelected(), ListSelection.From(images));
-                        });
-                    }
+                        _imageList.Mutate(new ImageListMutation.DeleteSelected(), ListSelection.From(images));
+                    });
                 }
-            }
-            finally
-            {
-                // TODO: We probably want a disposable list wrapper (around an immutable list) instead of DisposeAll
-                imagesToSave.DisposeAll();
             }
         }
 
         private async void SaveImages(List<UiImage> images)
         {
-            var imagesToSave = images.Select(x => x.GetClonedImage()).ToList();
-            try
+            using var imagesToSave = images.Select(x => x.GetClonedImage()).ToDisposableList();
+            if (await _exportHelper.SaveImages(imagesToSave.InnerList, _notify))
             {
-                if (await _exportHelper.SaveImages(imagesToSave, _notify))
+                if (Config.Get(c => c.DeleteAfterSaving))
                 {
-                    if (Config.Get(c => c.DeleteAfterSaving))
-                    {
-                        _imageList.Mutate(new ImageListMutation.DeleteSelected(), ListSelection.From(images));
-                    }
+                    _imageList.Mutate(new ImageListMutation.DeleteSelected(), ListSelection.From(images));
                 }
-            }
-            finally
-            {
-                // TODO: We probably want a disposable list wrapper (around an immutable list) instead of DisposeAll
-                imagesToSave.DisposeAll();
             }
         }
 
         private async void EmailPDF(List<UiImage> images)
         {
-            var imagesToEmail = images.Select(x => x.GetClonedImage()).ToList();
-            try
-            {
-                await _exportHelper.EmailPDF(imagesToEmail);
-            }
-            finally
-            {
-                // TODO: We probably want a disposable list wrapper (around an immutable list) instead of DisposeAll
-                imagesToEmail.DisposeAll();
-            }
+            using var imagesToEmail = images.Select(x => x.GetClonedImage()).ToDisposableList();
+            await _exportHelper.EmailPDF(imagesToEmail.InnerList);
         }
 
         private void Import()
@@ -1281,19 +1257,11 @@ namespace NAPS2.WinForms
         private async void tsPrint_Click(object sender, EventArgs e)
         {
             var state = _imageList.CurrentState;
-            var allImages = _imageList.Images.Select(x => x.GetClonedImage()).ToList();
-            var selectedImages = SelectedImages.Select(x => x.GetClonedImage()).ToList();
-            try
+            using var allImages = _imageList.Images.Select(x => x.GetClonedImage()).ToDisposableList();
+            using var selectedImages = SelectedImages.Select(x => x.GetClonedImage()).ToDisposableList();
+            if (await _scannedImagePrinter.PromptToPrint(allImages.InnerList, selectedImages.InnerList))
             {
-                if (await _scannedImagePrinter.PromptToPrint(allImages, selectedImages))
-                {
-                    _imageList.SavedState = state;
-                }
-            }
-            finally
-            {
-                allImages.DisposeAll();
-                selectedImages.DisposeAll();
+                _imageList.SavedState = state;
             }
         }
 
@@ -1489,16 +1457,8 @@ namespace NAPS2.WinForms
 
         private async void ctxCopy_Click(object sender, EventArgs e)
         {
-            var imagesToCopy = SelectedImages.Select(x => x.GetClonedImage()).ToList();
-            try
-            {
-                await _imageClipboard.Write(imagesToCopy, true);
-            }
-            finally
-            {
-                // TODO: We probably want a disposable list wrapper (around an immutable list) instead of DisposeAll
-                imagesToCopy.DisposeAll();
-            }
+            using var imagesToCopy = SelectedImages.Select(x => x.GetClonedImage()).ToDisposableList();
+            await _imageClipboard.Write(imagesToCopy.InnerList, true);
         }
 
         private void ctxPaste_Click(object sender, EventArgs e)
@@ -1686,16 +1646,9 @@ namespace NAPS2.WinForms
             if (SelectedIndices.Any())
             {
                 var ido = new DataObject();
-                var selectedImages = SelectedImages.Select(x => x.GetClonedImage()).ToList();
-                try
-                {
-                    _imageTransfer.AddTo(ido.ToEto(), selectedImages);
-                    DoDragDrop(ido, DragDropEffects.Move | DragDropEffects.Copy);
-                }
-                finally
-                {
-                    selectedImages.DisposeAll();
-                }
+                using var selectedImages = SelectedImages.Select(x => x.GetClonedImage()).ToDisposableList();
+                _imageTransfer.AddTo(ido.ToEto(), selectedImages.InnerList);
+                DoDragDrop(ido, DragDropEffects.Move | DragDropEffects.Copy);
             }
         }
 

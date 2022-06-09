@@ -45,6 +45,9 @@ public class AutoSaver
             var imageList = new List<ProcessedImage>();
             source.ForEach(img =>
             {
+                // TODO: We should assume the returned sink may dispose what we give it, therefore we should make
+                // a clone before sending it out, and then dispose the clone when we're done with it
+                // TODO: We should add tests for this class
                 sink.PutImage(img);
                 imageList.Add(img);
             }).ContinueWith(async t =>
