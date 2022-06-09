@@ -1,6 +1,6 @@
 namespace NAPS2.Images;
 
-public abstract class ImageListMutation : ListMutation<ProcessedImage>
+public abstract class ImageListMutation : ListMutation<UiImage>
 {
     public class RotateFlip : ImageListMutation
     {
@@ -13,33 +13,31 @@ public abstract class ImageListMutation : ListMutation<ProcessedImage>
             _angle = angle;
         }
 
-        public override void Apply(List<ProcessedImage> list, ref ListSelection<ProcessedImage> selection)
+        public override void Apply(List<UiImage> list, ref ListSelection<UiImage> selection)
         {
-            foreach (ProcessedImage img in selection)
+            foreach (UiImage img in selection)
             {
                 lock (img)
                 {
                     var transform = new RotationTransform(_angle);
-                    // TODO: Propagate transforms
-                    // img.AddTransform(transform);
-                    // var thumb = img.GetThumbnail();
-                    // if (thumb != null)
-                    // {
-                    //     img.SetThumbnail(_imageContext.PerformTransform(thumb, transform));
-                    // }
+                    img.AddTransform(transform);
+                    var thumb = img.GetThumbnailClone();
+                    if (thumb != null)
+                    {
+                        img.SetThumbnail(_imageContext.PerformTransform(thumb, transform));
+                    }
                 }
             }
         }
     }
 
-    public class ResetTransforms : ListMutation<ProcessedImage>
+    public class ResetTransforms : ListMutation<UiImage>
     {
-        public override void Apply(List<ProcessedImage> list, ref ListSelection<ProcessedImage> selection)
+        public override void Apply(List<UiImage> list, ref ListSelection<UiImage> selection)
         {
-            foreach (ProcessedImage img in selection)
+            foreach (UiImage img in selection)
             {
-                // TODO: Propagate transforms
-                // img.ResetTransforms();
+                img.ResetTransforms();
             }
         }
     }

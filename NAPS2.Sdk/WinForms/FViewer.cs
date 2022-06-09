@@ -48,12 +48,12 @@ namespace NAPS2.WinForms
             InitializeComponent();
         }
 
-        public ScannedImageList ImageList { get; set; }
+        public UiImageList ImageList { get; set; }
         public int ImageIndex { get; set; }
         public Action DeleteCallback { get; set; }
         public Action<int> SelectCallback { get; set; }
 
-        private ProcessedImage CurrentImage => ImageList.Images[ImageIndex];
+        private UiImage CurrentImage => ImageList.Images[ImageIndex];
 
         protected override async void OnLoad(object sender, EventArgs e)
         {
@@ -98,7 +98,8 @@ namespace NAPS2.WinForms
         {
             _tiffViewer1.Image?.Dispose();
             _tiffViewer1.Image = null;
-            _tiffViewer1.Image = CurrentImage.RenderToBitmap();
+            using var imageToRender = CurrentImage.GetClonedImage();
+            _tiffViewer1.Image = imageToRender.RenderToBitmap();
         }
 
         protected override void Dispose(bool disposing)
@@ -499,7 +500,8 @@ namespace NAPS2.WinForms
 
         private async void tsSavePDF_Click(object sender, EventArgs e)
         {
-            if (await _exportHelper.SavePDF(new List<ProcessedImage> { CurrentImage }, null))
+            using var imageToSave = CurrentImage.GetClonedImage();
+            if (await _exportHelper.SavePDF(new List<ProcessedImage> { imageToSave }, null))
             {
                 if (Config.Get(c => c.DeleteAfterSaving))
                 {
@@ -510,7 +512,8 @@ namespace NAPS2.WinForms
 
         private async void tsSaveImage_Click(object sender, EventArgs e)
         {
-            if (await _exportHelper.SaveImages(new List<ProcessedImage> { CurrentImage }, null))
+            using var imageToSave = CurrentImage.GetClonedImage();
+            if (await _exportHelper.SaveImages(new List<ProcessedImage> { imageToSave }, null))
             {
                 if (Config.Get(c => c.DeleteAfterSaving))
                 {

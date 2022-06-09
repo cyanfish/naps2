@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System.Collections.Immutable;
+using System.Reflection;
 
 namespace NAPS2.Images.Storage;
 
@@ -61,8 +62,15 @@ public abstract class ImageContext : IDisposable
     /// <param name="image"></param>
     /// <param name="transforms"></param>
     /// <returns></returns>
-    // TODO: Also perform simplification here
-    public IMemoryImage PerformAllTransforms(IMemoryImage image, IEnumerable<Transform> transforms) => transforms.Aggregate(image, PerformTransform);
+    public IMemoryImage PerformAllTransforms(IMemoryImage image, IEnumerable<Transform> transforms)
+    {
+        var simplifiedTransforms = ImmutableList<Transform>.Empty;
+        foreach (var transform in transforms)
+        {
+            simplifiedTransforms = simplifiedTransforms.Add(transform);
+        }
+        return simplifiedTransforms.Aggregate(image, PerformTransform);
+    }
 
     public Type ImageType { get; }
 
@@ -72,46 +80,6 @@ public abstract class ImageContext : IDisposable
     }
 
     public Type BackingStorageType { get; private set; } = typeof(IImageStorage);
-
-    public IImageMetadataFactory ImageMetadataFactory { get; set; } = new StubImageMetadataFactory();
-
-    // public ScannedImage CreateScannedImage(IStorage storage)
-    // {
-    //     return CreateScannedImage(storage, new StorageConvertParams());
-    // }
-    //
-    // public ScannedImage CreateScannedImage(IStorage storage, StorageConvertParams convertParams)
-    // {
-    //     var backingStorage = ConvertToBacking(storage, convertParams);
-    //     var metadata = ImageMetadataFactory.CreateMetadata(backingStorage);
-    //     metadata.Commit();
-    //     return new ScannedImage(backingStorage, metadata);
-    // }
-    //
-    // public ScannedImage CreateScannedImage(IStorage storage, IImageMetadata metadata, StorageConvertParams convertParams)
-    // {
-    //     var backingStorage = ConvertToBacking(storage, convertParams);
-    //     return new ScannedImage(backingStorage, metadata);
-    // }
-    //
-    // public ScannedImage CreateScannedImage(IStorage storage, BitDepth bitDepth, bool highQuality, int quality)
-    // {
-    //     var convertParams = new StorageConvertParams { Lossless = highQuality, LossyQuality = quality, BitDepth = bitDepth };
-    //     var backingStorage = ConvertToBacking(storage, convertParams);
-    //     var metadata = ImageMetadataFactory.CreateMetadata(backingStorage);
-    //     metadata.BitDepth = bitDepth;
-    //     metadata.Lossless = highQuality;
-    //     metadata.Commit();
-    //     return new ScannedImage(backingStorage, metadata);
-    // }
-
-    // private FileStorageManager _fileStorageManager = new FileStorageManager();
-    //
-    // public FileStorageManager FileStorageManager
-    // {
-    //     get => _fileStorageManager;
-    //     set => _fileStorageManager = value ?? throw new ArgumentNullException(nameof(value));
-    // }
 
     // private IPdfRenderer _pdfRenderer;
     //

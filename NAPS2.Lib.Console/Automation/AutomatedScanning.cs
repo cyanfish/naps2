@@ -217,7 +217,7 @@ public class AutomatedScanning
 
         foreach (var scan in _scanList)
         {
-            var imageList = new ScannedImageList(_imageContext, scan);
+            var imageList = new UiImageList(_imageContext, scan.Select(x => new UiImage(x)).ToList());
 
             if (_options.AltDeinterleave)
             {

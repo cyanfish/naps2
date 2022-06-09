@@ -17,9 +17,9 @@ public class WinFormsExportHelper
     private readonly IFormFactory _formFactory;
     private readonly OperationProgress _operationProgress;
     private readonly ScopedConfig _config;
-    private readonly ScannedImageList _scannedImageList;
+    private readonly UiImageList _uiImageList;
 
-    public WinFormsExportHelper(IConfigProvider<PdfSettings> pdfSettingsProvider, IConfigProvider<ImageSettings> imageSettingsProvider, IConfigProvider<EmailSettings> emailSettingsProvider, DialogHelper dialogHelper, IOperationFactory operationFactory, IFormFactory formFactory, OperationProgress operationProgress, ScopedConfig config, ScannedImageList scannedImageList)
+    public WinFormsExportHelper(IConfigProvider<PdfSettings> pdfSettingsProvider, IConfigProvider<ImageSettings> imageSettingsProvider, IConfigProvider<EmailSettings> emailSettingsProvider, DialogHelper dialogHelper, IOperationFactory operationFactory, IFormFactory formFactory, OperationProgress operationProgress, ScopedConfig config, UiImageList uiImageList)
     {
         _pdfSettingsProvider = pdfSettingsProvider;
         _imageSettingsProvider = imageSettingsProvider;
@@ -29,7 +29,7 @@ public class WinFormsExportHelper
         _formFactory = formFactory;
         _operationProgress = operationProgress;
         _config = config;
-        _scannedImageList = scannedImageList;
+        _uiImageList = uiImageList;
     }
 
     public async Task<bool> SavePDF(List<ProcessedImage> images, ISaveNotify notify)
@@ -52,10 +52,10 @@ public class WinFormsExportHelper
             }
 
             var subSavePath = Placeholders.All.Substitute(savePath);
-            var state = _scannedImageList.CurrentState;
+            var state = _uiImageList.CurrentState;
             if (await ExportPDF(subSavePath, images, false, null))
             {
-                _scannedImageList.SavedState = state;
+                _uiImageList.SavedState = state;
                 notify?.PdfSaved(subSavePath);
                 return true;
             }
@@ -93,14 +93,14 @@ public class WinFormsExportHelper
             }
 
             var op = _operationFactory.Create<SaveImagesOperation>();
-            var state = _scannedImageList.CurrentState;
+            var state = _uiImageList.CurrentState;
             if (op.Start(savePath, Placeholders.All.WithDate(DateTime.Now), images, _imageSettingsProvider))
             {
                 _operationProgress.ShowProgress(op);
             }
             if (await op.Success)
             {
-                _scannedImageList.SavedState = state;
+                _uiImageList.SavedState = state;
                 notify?.ImagesSaved(images.Count, op.FirstFileSaved);
                 return true;
             }
@@ -142,7 +142,7 @@ public class WinFormsExportHelper
         try
         {
             string targetPath = Path.Combine(tempFolder.FullName, attachmentName);
-            var state = _scannedImageList.CurrentState;
+            var state = _uiImageList.CurrentState;
 
             var message = new EmailMessage
             {
@@ -151,7 +151,7 @@ public class WinFormsExportHelper
 
             if (await ExportPDF(targetPath, images, true, message))
             {
-                _scannedImageList.SavedState = state;
+                _uiImageList.SavedState = state;
                 return true;
             }
         }

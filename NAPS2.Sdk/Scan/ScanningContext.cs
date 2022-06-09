@@ -24,7 +24,7 @@ public class ScanningContext : IDisposable
 
     public OcrRequestQueue OcrRequestQueue { get; set; }
     
-    public ProcessedImage CreateRenderableImage(IImageStorage storage, BitDepth bitDepth, bool lossless, int quality, IEnumerable<Transform> transforms)
+    public ProcessedImage CreateProcessedImage(IImageStorage storage, BitDepth bitDepth, bool lossless, int quality, IEnumerable<Transform> transforms)
     {
         var convertedStorage = ConvertStorageIfNeeded(storage, bitDepth, lossless, quality);
         var metadata = new ImageMetadata(bitDepth, lossless);

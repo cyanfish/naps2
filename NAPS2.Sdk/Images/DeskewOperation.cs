@@ -14,7 +14,7 @@ public class DeskewOperation : OperationBase
         AllowBackground = true;
     }
 
-    public bool Start(ICollection<ProcessedImage> images, DeskewParams deskewParams)
+    public bool Start(ICollection<UiImage> images, DeskewParams deskewParams)
     {
         ProgressTitle = MiscResources.AutoDeskewProgress;
         Status = new OperationStatus
@@ -27,7 +27,8 @@ public class DeskewOperation : OperationBase
         {
             return await Pipeline.For(images, CancelToken).RunParallel(async img =>
             {
-                var image = img.RenderToImage();
+                using var processedImage = img.GetClonedImage();
+                var image = processedImage.RenderToImage();
                 try
                 {
                     CancelToken.ThrowIfCancellationRequested();
@@ -37,15 +38,14 @@ public class DeskewOperation : OperationBase
                     var thumbnail = deskewParams.ThumbnailSize.HasValue
                         ? _imageContext.PerformTransform(image, new ThumbnailTransform(deskewParams.ThumbnailSize.Value))
                         : null;
-                    // TODO: We need to propagate the transform changes outward somehow
-                    // lock (img)
-                    // {
-                    //     img.AddTransform(transform);
-                    //     if (thumbnail != null)
-                    //     {
-                    //         img.SetThumbnail(thumbnail);
-                    //     }
-                    // }
+                    lock (img)
+                    {
+                        img.AddTransform(transform);
+                        if (thumbnail != null)
+                        {
+                            img.SetThumbnail(thumbnail);
+                        }
+                    }
                     lock (this)
                     {
                         Status.CurrentProgress += 1;

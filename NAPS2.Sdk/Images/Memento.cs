@@ -8,10 +8,13 @@ namespace NAPS2.Images;
 ///
 /// Mementos are equal if their contents are equal. This allows no-ops to be identified so that you don't hit Ctrl+Z and
 /// have nothing happen.
+///
+/// When you create a memento with a list of ProcessedImage instances, the memento takes ownership of those instances.
+/// When the memento is disposed they are disposed.
 /// </summary>
 public record Memento(ImmutableList<ProcessedImage> Images) : IDisposable
 {
-    public static readonly Memento Empty = new Memento(ImmutableList.Create<ProcessedImage>());
+    public static readonly Memento Empty = new(ImmutableList.Create<ProcessedImage>());
 
     // TODO: Do we need to implement equality better at the RenderableImage level?
     public virtual bool Equals(Memento? other)
@@ -21,33 +24,16 @@ public record Memento(ImmutableList<ProcessedImage> Images) : IDisposable
             return false;
         }
 
-        if (other.Images.Count != Images.Count)
-        {
-            return false;
-        }
-
-        for (int i = 0; i < Images.Count; i++)
-        {
-            if (other.Images[i] != Images[i])
-            {
-                return false;
-            }
-        }
-
-        return true;
+        return ObjectHelpers.ListEquals(Images, other.Images);
     }
 
     public override int GetHashCode()
     {
-        return Images.Aggregate(0, (value, image) => (value * 397) ^ image.GetHashCode());
+        return ObjectHelpers.ListHashCode(Images);
     }
 
     public void Dispose()
     {
-        // TODO: We need to make ownership explicit here
-        foreach (var image in Images)
-        {
-            image.Dispose();
-        }
+        Images.DisposeAll();
     }
 }

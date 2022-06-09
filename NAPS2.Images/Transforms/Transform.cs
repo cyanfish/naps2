@@ -1,35 +1,31 @@
-﻿namespace NAPS2.Images.Transforms;
+﻿using System.Collections.Immutable;
+
+namespace NAPS2.Images.Transforms;
 
 public abstract class Transform
 {
     /// <summary>
     /// Appends the specified transform to the list, merging with the previous transform on the list if simplication is possible.
     /// </summary>
-    /// <param name="transformList"></param>
-    /// <param name="transform"></param>
-    public static void AddOrSimplify(IList<Transform> transformList, Transform transform)
+    public static ImmutableList<Transform> AddOrSimplify(ImmutableList<Transform> transformList, Transform transform)
     {
         if (transform.IsNull)
         {
-            return;
+            return transformList;
         }
         var last = transformList.LastOrDefault();
-        if (transform.CanSimplify(last))
+        if (last != null && transform.CanSimplify(last))
         {
             var simplified = transform.Simplify(last);
             if (simplified.IsNull)
             {
-                transformList.RemoveAt(transformList.Count - 1);
+                return transformList.RemoveAt(transformList.Count - 1);
             }
-            else
-            {
-                transformList[transformList.Count - 1] = transform.Simplify(last);
-            }
+
+            return transformList.SetItem(transformList.Count - 1, transform.Simplify(last));
         }
-        else
-        {
-            transformList.Add(transform);
-        }
+
+        return transformList.Add(transform);
     }
         
     /// <summary>

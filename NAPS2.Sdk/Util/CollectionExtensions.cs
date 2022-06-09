@@ -220,4 +220,12 @@ public static class CollectionExtensions
     }
 
     public static IEnumerable<T> WhereNotNull<T>(this IEnumerable<T?> enumerable) => enumerable.Where(x => x != null)!;
+
+    public static void DisposeAll<T>(this IEnumerable<T?> enumerable) where T : IDisposable
+    {
+        foreach(var obj in enumerable)
+        {
+            obj?.Dispose();
+        }
+    }
 }

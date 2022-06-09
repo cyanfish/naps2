@@ -1,86 +1,123 @@
 namespace NAPS2.Images;
 
-// TODO: Implement & use this class in the NAPS2 UI
+// TODO: We need to implement recovery here.
+// TODO: Write tests for this class
+/// <summary>
+/// A mutable container for an image in the NAPS2 UI that can be edited, has a thumbnail, etc.
+/// </summary>
 public class UiImage
 {
-    private ProcessedImage ProcessedImage { get; set; }
+    private ProcessedImage _processedImage;
+    private IMemoryImage? _thumbnail;
+    private TransformState? _thumbnailTransformState;
+    private bool _disposed;
+    
+    public UiImage(ProcessedImage image)
+    {
+        _processedImage = image;
+    }
 
+    /// <summary>
+    /// Gets a clone of the current underlying ProcessedImage that must be later disposed.
+    /// </summary>
+    /// <returns></returns>
+    public ProcessedImage GetClonedImage()
+    {
+        lock (this)
+        {
+            return _processedImage.Clone();
+        }
+    }
 
-
+    /// <summary>
+    /// Gets a weak reference of the current underlying ProcessedImage that doesn't need to be disposed.
+    /// </summary>
+    /// <returns></returns>
+    public ProcessedImage.WeakReference GetImageWeakReference()
+    {
+        lock (this)
+        {
+            return _processedImage.GetWeakReference();
+        }
+    }
+    
     public void Dispose()
     {
-        // lock (this)
-        // {
-        //     _disposed = true;
-        //     // TODO: Delete the recovery entry (if recovery is being used)
-        //     RenderableImage.Dispose();
-        //
-        //     if (_thumbnail != null)
-        //     {
-        //         _thumbnail.Dispose();
-        //         _thumbnail = null;
-        //     }
-        //
-        //     FullyDisposed?.Invoke(this, new EventArgs());
-        // }
+        lock (this)
+        {
+            _disposed = true;
+            _processedImage.Dispose();
+        
+            if (_thumbnail != null)
+            {
+                _thumbnail.Dispose();
+                _thumbnail = null;
+            }
+        
+            // TODO: This shouldn't be here, OCR cancellation needs to be figured out
+            FullyDisposed?.Invoke(this, EventArgs.Empty);
+        }
     }
 
     public void AddTransform(Transform transform)
     {
-        // if (transform.IsNull)
-        // {
-        //     return;
-        // }
-        // lock (this)
-        // {
-        //     // Also updates the recovery index since they reference the same list
-        //     Transform.AddOrSimplify(Metadata.TransformList, transform);
-        //     Metadata.TransformState++;
-        // }
-        // Metadata.Commit();
-        // ThumbnailInvalidated?.Invoke(this, new EventArgs());
+        if (transform.IsNull)
+        {
+            return;
+        }
+        lock (this)
+        {
+            var newImage = _processedImage.WithTransform(transform);
+            _processedImage.Dispose();
+            _processedImage = newImage;
+        }
+        ThumbnailInvalidated?.Invoke(this, EventArgs.Empty);
     }
 
     public void ResetTransforms()
     {
-        // lock (this)
-        // {
-        //     if (Metadata.TransformList.Count == 0)
-        //     {
-        //         return;
-        //     }
-        //     Metadata.TransformList.Clear();
-        //     Metadata.TransformState++;
-        // }
-        // Metadata.Commit();
-        // ThumbnailInvalidated?.Invoke(this, new EventArgs());
+        lock (this)
+        {
+            if (_processedImage.TransformState.IsEmpty)
+            {
+                return;
+            }
+            var newImage = _processedImage.WithNoTransforms();
+            _processedImage.Dispose();
+            _processedImage = newImage;
+        }
+        ThumbnailInvalidated?.Invoke(this, EventArgs.Empty);
     }
 
-    public IMemoryImage? GetThumbnail()
+    /// <summary>
+    /// Returns a clone of the thumbnail (if present) that must be disposed by the caller.
+    /// </summary>
+    /// <returns></returns>
+    public IMemoryImage? GetThumbnailClone()
     {
-        // lock (this)
-        // {
-        //     return _thumbnail?.Clone();
-        // }
-        return null;
+        lock (this)
+        {
+            return _thumbnail?.Clone();
+        }
     }
 
-    public void SetThumbnail(IMemoryImage image, int? state = null)
+    public void SetThumbnail(IMemoryImage image, TransformState transformState = null)
     {
-        // lock (this)
-        // {
-        //     _thumbnail?.Dispose();
-        //     _thumbnail = image;
-        //     _thumbnailState = state ?? Metadata.TransformState;
-        // }
-        // ThumbnailChanged?.Invoke(this, new EventArgs());
+        lock (this)
+        {
+            _thumbnail?.Dispose();
+            _thumbnail = image;
+            _thumbnailTransformState = transformState;
+        }
+        ThumbnailChanged?.Invoke(this, new EventArgs());
     }
 
-    public bool IsThumbnailDirty => false; // _thumbnailState != Metadata.TransformState;
+    public bool IsThumbnailDirty => _thumbnailTransformState != _processedImage.TransformState;
 
     public EventHandler? ThumbnailChanged;
 
     public EventHandler? ThumbnailInvalidated;
 
+    // TODO: Maybe delete depending on how we handle ocr cancellation
     public EventHandler? FullyDisposed;
 }

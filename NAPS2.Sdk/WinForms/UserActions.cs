@@ -3,9 +3,9 @@ namespace NAPS2.WinForms;
 public class UserActions
 {
     private readonly ImageContext _imageContext;
-    private readonly ScannedImageList _imageList;
+    private readonly UiImageList _imageList;
 
-    public UserActions(ImageContext imageContext, ScannedImageList imageList)
+    public UserActions(ImageContext imageContext, UiImageList imageList)
     {
         _imageList = imageList;
         _imageContext = imageContext;

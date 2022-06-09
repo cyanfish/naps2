@@ -28,9 +28,9 @@ namespace NAPS2.WinForms
             InitializeComponent();
         }
 
-        public ProcessedImage Image { get; set; }
+        public UiImage Image { get; set; }
 
-        public List<ProcessedImage> SelectedImages { get; set; }
+        public List<UiImage> SelectedImages { get; set; }
 
         protected virtual IEnumerable<Transform> Transforms => throw new NotImplementedException();
 
@@ -38,7 +38,7 @@ namespace NAPS2.WinForms
 
         private bool TransformMultiple => SelectedImages != null && checkboxApplyToSelected.Checked;
 
-        private IEnumerable<ProcessedImage> ImagesToTransform => TransformMultiple ? SelectedImages : Enumerable.Repeat(Image, 1);
+        private IEnumerable<UiImage> ImagesToTransform => TransformMultiple ? SelectedImages : Enumerable.Repeat(Image, 1);
 
         protected virtual Bitmap RenderPreview()
         {
@@ -85,7 +85,8 @@ namespace NAPS2.WinForms
 
             var maxDimen = Screen.AllScreens.Max(s => Math.Max(s.WorkingArea.Height, s.WorkingArea.Width));
             // TODO: Limit to maxDimen * 2
-            workingImage = Image.RenderToBitmap();
+            using var imageToRender = Image.GetClonedImage();
+            workingImage = imageToRender.RenderToBitmap();
             if (_closed)
             {
                 workingImage?.Dispose();
@@ -147,15 +148,13 @@ namespace NAPS2.WinForms
                     {
                         foreach (var t in Transforms)
                         {
-                            // TODO: UiImage
-                            //img.AddTransform(t);
+                            img.AddTransform(t);
                         }
                         // Optimize thumbnail rendering for the first (or only) image since we already have it loaded into memory
                         if (img == Image)
                         {
                             var transformed = _imageContext.PerformAllTransforms(new GdiImage(workingImage).Clone(), Transforms);
-                            // TODO: UiImage
-                            // img.SetThumbnail(_imageContext.PerformTransform(transformed, new ThumbnailTransform(Config.Get(c => c.ThumbnailSize))));
+                            img.SetThumbnail(_imageContext.PerformTransform(transformed, new ThumbnailTransform(Config.Get(c => c.ThumbnailSize))));
                         }
                     }
                 }

@@ -63,7 +63,7 @@ public class CommonModule : NinjectModule
         Bind<ISaveNotify>().ToMethod(ctx => ctx.Kernel.Get<NotificationManager>());
         Bind<IOperationFactory>().To<NinjectOperationFactory>();
         Bind<ILogger>().To<NLogLogger>().InSingletonScope();
-        Bind<ScannedImageList>().ToSelf().InSingletonScope();
+        Bind<UiImageList>().ToSelf().InSingletonScope();
         Bind<StillImage>().ToSelf().InSingletonScope();
         Bind<AutoSaver>().ToSelf();
         Bind<ImageContext>().To<GdiImageContext>().InSingletonScope();

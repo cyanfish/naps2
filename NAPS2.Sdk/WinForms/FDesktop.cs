@@ -49,7 +49,7 @@ namespace NAPS2.WinForms
         private readonly OperationProgress _operationProgress;
         private readonly UpdateChecker _updateChecker;
         private readonly IProfileManager _profileManager;
-        private readonly ScannedImageList _imageList;
+        private readonly UiImageList _imageList;
         private readonly ImageTransfer _imageTransfer;
 
         #endregion
@@ -72,7 +72,7 @@ namespace NAPS2.WinForms
             IScanPerformer scanPerformer, IScannedImagePrinter scannedImagePrinter, StillImage stillImage, IOperationFactory operationFactory,
             KeyboardShortcutManager ksm, ThumbnailRenderer thumbnailRenderer, WinFormsExportHelper exportHelper, ImageClipboard imageClipboard,
             NotificationManager notify, CultureInitializer cultureInitializer, IWorkerFactory workerFactory, OperationProgress operationProgress,
-            UpdateChecker updateChecker, IProfileManager profileManager, ScannedImageList imageList, ImageTransfer imageTransfer)
+            UpdateChecker updateChecker, IProfileManager profileManager, UiImageList imageList, ImageTransfer imageTransfer)
         {
             _imageContext = imageContext;
             _stringWrapper = stringWrapper;
@@ -617,7 +617,7 @@ namespace NAPS2.WinForms
             }
         }
 
-        private IEnumerable<ProcessedImage> SelectedImages => _imageList.Images.ElementsAt(SelectedIndices);
+        private IEnumerable<UiImage> SelectedImages => _imageList.Images.ElementsAt(SelectedIndices);
 
         /// <summary>
         /// Constructs a receiver for scanned images.
@@ -626,7 +626,7 @@ namespace NAPS2.WinForms
         /// <returns></returns>
         public Action<ProcessedImage> ReceiveScannedImage()
         {
-            ProcessedImage? last = null;
+            UiImage? last = null;
             return scannedImage =>
             {
                 SafeInvoke(() =>
@@ -636,8 +636,9 @@ namespace NAPS2.WinForms
                         // TODO
                         // scannedImage.ThumbnailChanged += ImageThumbnailChanged;
                         // scannedImage.ThumbnailInvalidated += ImageThumbnailInvalidated;
-                        _imageList.Mutate(new ImageListMutation.InsertAfter(scannedImage, last));
-                        last = scannedImage;
+                        var uiImage = new UiImage(scannedImage);
+                        _imageList.Mutate(new ImageListMutation.InsertAfter(uiImage, last));
+                        last = uiImage;
                     }
                 });
                 // Trigger thumbnail rendering just in case the received image is out of date
@@ -663,7 +664,7 @@ namespace NAPS2.WinForms
         {
             SafeInvokeAsync(() =>
             {
-                var image = (ProcessedImage)sender;
+                var image = (UiImage)sender;
                 lock (image)
                 {
                     lock (_imageList)
@@ -682,7 +683,7 @@ namespace NAPS2.WinForms
         {
             SafeInvokeAsync(() =>
             {
-                var image = (ProcessedImage)sender;
+                var image = (UiImage)sender;
                 lock (image)
                 {
                     lock (_imageList)
@@ -881,31 +882,61 @@ namespace NAPS2.WinForms
 
         #region Actions - Save/Email/Import
 
-        private async void SavePDF(List<ProcessedImage> images)
+        private async void SavePDF(List<UiImage> images)
         {
-            if (await _exportHelper.SavePDF(images, _notify))
+            var imagesToSave = images.Select(x => x.GetClonedImage()).ToList();
+            try
             {
-                if (Config.Get(c => c.DeleteAfterSaving))
+                if (await _exportHelper.SavePDF(imagesToSave, _notify))
                 {
-                    SafeInvoke(() => { _imageList.Mutate(new ImageListMutation.DeleteSelected(), ListSelection.From(images)); });
+                    if (Config.Get(c => c.DeleteAfterSaving))
+                    {
+                        SafeInvoke(() =>
+                        {
+                            _imageList.Mutate(new ImageListMutation.DeleteSelected(), ListSelection.From(images));
+                        });
+                    }
                 }
+            }
+            finally
+            {
+                // TODO: We probably want a disposable list wrapper (around an immutable list) instead of DisposeAll
+                imagesToSave.DisposeAll();
             }
         }
 
-        private async void SaveImages(List<ProcessedImage> images)
+        private async void SaveImages(List<UiImage> images)
         {
-            if (await _exportHelper.SaveImages(images, _notify))
+            var imagesToSave = images.Select(x => x.GetClonedImage()).ToList();
+            try
             {
-                if (Config.Get(c => c.DeleteAfterSaving))
+                if (await _exportHelper.SaveImages(imagesToSave, _notify))
                 {
-                    _imageList.Mutate(new ImageListMutation.DeleteSelected(), ListSelection.From(images));
+                    if (Config.Get(c => c.DeleteAfterSaving))
+                    {
+                        _imageList.Mutate(new ImageListMutation.DeleteSelected(), ListSelection.From(images));
+                    }
                 }
+            }
+            finally
+            {
+                // TODO: We probably want a disposable list wrapper (around an immutable list) instead of DisposeAll
+                imagesToSave.DisposeAll();
             }
         }
 
-        private async void EmailPDF(List<ProcessedImage> images)
+        private async void EmailPDF(List<UiImage> images)
         {
-            await _exportHelper.EmailPDF(images);
+            var imagesToEmail = images.Select(x => x.GetClonedImage()).ToList();
+            try
+            {
+                await _exportHelper.EmailPDF(imagesToEmail);
+            }
+            finally
+            {
+                // TODO: We probably want a disposable list wrapper (around an immutable list) instead of DisposeAll
+                imagesToEmail.DisposeAll();
+            }
         }
 
         private void Import()
@@ -1250,9 +1281,19 @@ namespace NAPS2.WinForms
         private async void tsPrint_Click(object sender, EventArgs e)
         {
             var state = _imageList.CurrentState;
-            if (await _scannedImagePrinter.PromptToPrint(_imageList.Images, SelectedImages.ToList()))
+            var allImages = _imageList.Images.Select(x => x.GetClonedImage()).ToList();
+            var selectedImages = SelectedImages.Select(x => x.GetClonedImage()).ToList();
+            try
             {
-                _imageList.SavedState = state;
+                if (await _scannedImagePrinter.PromptToPrint(allImages, selectedImages))
+                {
+                    _imageList.SavedState = state;
+                }
+            }
+            finally
+            {
+                allImages.DisposeAll();
+                selectedImages.DisposeAll();
             }
         }
 
@@ -1448,7 +1489,16 @@ namespace NAPS2.WinForms
 
         private async void ctxCopy_Click(object sender, EventArgs e)
         {
-            await _imageClipboard.Write(SelectedImages, true);
+            var imagesToCopy = SelectedImages.Select(x => x.GetClonedImage()).ToList();
+            try
+            {
+                await _imageClipboard.Write(imagesToCopy, true);
+            }
+            finally
+            {
+                // TODO: We probably want a disposable list wrapper (around an immutable list) instead of DisposeAll
+                imagesToCopy.DisposeAll();
+            }
         }
 
         private void ctxPaste_Click(object sender, EventArgs e)
@@ -1530,27 +1580,26 @@ namespace NAPS2.WinForms
             {
                 try
                 {
-                    ProcessedImage next;
+                    UiImage? next;
                     while ((next = GetNextThumbnailToRender()) != null)
                     {
                         if (!ThumbnailStillNeedsRendering(next))
                         {
                             continue;
                         }
-                        using (var image = next.Clone())
+                        using (var imageToRender = next.GetClonedImage())
                         {
                             var thumb = worker != null
                                 ? _imageContext.Load(
-                                    new MemoryStream(worker.Service.RenderThumbnail(_imageContext, image, thumbnailList1.ThumbnailSize.Height)))
-                                : _thumbnailRenderer.Render(image, thumbnailList1.ThumbnailSize.Height);
+                                    new MemoryStream(worker.Service.RenderThumbnail(_imageContext, imageToRender, thumbnailList1.ThumbnailSize.Height)))
+                                : _thumbnailRenderer.Render(imageToRender, thumbnailList1.ThumbnailSize.Height);
 
                             if (!ThumbnailStillNeedsRendering(next))
                             {
                                 continue;
                             }
 
-                            // TODO: UiImage
-                            // next.SetThumbnail(thumb, snapshot.Metadata.TransformState);
+                            next.SetThumbnail(thumb, imageToRender.TransformState);
                         }
                         fallback.Reset();
                     }
@@ -1571,51 +1620,48 @@ namespace NAPS2.WinForms
             }
         }
 
-        private bool ThumbnailStillNeedsRendering(ProcessedImage next)
+        private bool ThumbnailStillNeedsRendering(UiImage next)
         {
             lock (next)
             {
-                // TODO: UiImage
-                return false;
-                // var thumb = next.GetThumbnail();
-                // return thumb == null || next.IsThumbnailDirty || thumb.Width != thumbnailList1.ThumbnailSize.Width ||
-                //        thumb.Height != thumbnailList1.ThumbnailSize.Height;
+                var thumb = next.GetThumbnailClone();
+                return thumb == null || next.IsThumbnailDirty || thumb.Width != thumbnailList1.ThumbnailSize.Width ||
+                       thumb.Height != thumbnailList1.ThumbnailSize.Height;
             }
         }
 
-        private ProcessedImage GetNextThumbnailToRender()
+        private UiImage? GetNextThumbnailToRender()
         {
-            List<ProcessedImage> listCopy;
+            List<UiImage> listCopy;
             lock (_imageList)
             {
                 listCopy = _imageList.Images.ToList();
             }
-            // TODO: UiImage
-            // // Look for images without thumbnails
-            // foreach (var img in listCopy)
-            // {
-            //     if (img.GetThumbnail() == null)
-            //     {
-            //         return img;
-            //     }
-            // }
-            // // Look for images with dirty thumbnails
-            // foreach (var img in listCopy)
-            // {
-            //     if (img.IsThumbnailDirty)
-            //     {
-            //         return img;
-            //     }
-            // }
-            // // Look for images with mis-sized thumbnails
-            // foreach (var img in listCopy)
-            // {
-            //     var thumb = img.GetThumbnail();
-            //     if (thumb == null || thumb.Width != thumbnailList1.ThumbnailSize.Width || thumb.Height != thumbnailList1.ThumbnailSize.Height)
-            //     {
-            //         return img;
-            //     }
-            // }
+            // Look for images without thumbnails
+            foreach (var img in listCopy)
+            {
+                if (img.GetThumbnailClone() == null)
+                {
+                    return img;
+                }
+            }
+            // Look for images with dirty thumbnails
+            foreach (var img in listCopy)
+            {
+                if (img.IsThumbnailDirty)
+                {
+                    return img;
+                }
+            }
+            // Look for images with mis-sized thumbnails
+            foreach (var img in listCopy)
+            {
+                var thumb = img.GetThumbnailClone();
+                if (thumb == null || thumb.Width != thumbnailList1.ThumbnailSize.Width || thumb.Height != thumbnailList1.ThumbnailSize.Height)
+                {
+                    return img;
+                }
+            }
             // Nothing to render
             return null;
         }
@@ -1640,8 +1686,16 @@ namespace NAPS2.WinForms
             if (SelectedIndices.Any())
             {
                 var ido = new DataObject();
-                _imageTransfer.AddTo(ido.ToEto(), SelectedImages);
-                DoDragDrop(ido, DragDropEffects.Move | DragDropEffects.Copy);
+                var selectedImages = SelectedImages.Select(x => x.GetClonedImage()).ToList();
+                try
+                {
+                    _imageTransfer.AddTo(ido.ToEto(), selectedImages);
+                    DoDragDrop(ido, DragDropEffects.Move | DragDropEffects.Copy);
+                }
+                finally
+                {
+                    selectedImages.DisposeAll();
+                }
             }
         }
 

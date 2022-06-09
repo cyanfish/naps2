@@ -60,7 +60,7 @@ public class ImageSerializationTests : ContextualTexts
         new DirectoryInfo(destContext.FileStorageManager.FolderPath).Create();
         destContext.ImageContext.ConfigureBackingStorage<ImageFileStorage>();
 
-        using var sourceImage = sourceContext.CreateRenderableImage(
+        using var sourceImage = sourceContext.CreateProcessedImage(
             new GdiImage(new Bitmap(100, 100)),
             BitDepth.Grayscale, 
             true, 

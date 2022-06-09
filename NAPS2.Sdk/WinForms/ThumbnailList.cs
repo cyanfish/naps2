@@ -31,7 +31,7 @@ namespace NAPS2.WinForms
 
         private ImageInfo GetImageInfo(int i) => (ImageInfo) Items[i].Tag;
 
-        public void UpdatedImages(List<ProcessedImage> images, out bool orderingChanged)
+        public void UpdatedImages(List<UiImage> images, out bool orderingChanged)
         {
             lock (this)
             {
@@ -54,7 +54,7 @@ namespace NAPS2.WinForms
             Invalidate();
         }
 
-        private void UpdateChangedImages(List<ProcessedImage> images, ref bool orderingChanged)
+        private void UpdateChangedImages(List<UiImage> images, ref bool orderingChanged)
         {
             for (int i = 0; i < ilThumbnailList.Images.Count; i++)
             {
@@ -63,7 +63,9 @@ namespace NAPS2.WinForms
                 {
                     orderingChanged = true;
                 }
-                if (imageInfo.Image != images[i] || imageInfo.TransformState != images[i].TransformState)
+                // TODO: This class should probably use ProcessedImage directly for comparisons instead of ImageInfo
+                using var imageToCompare = images[i].GetClonedImage();
+                if (imageInfo.Image != images[i] || imageInfo.TransformState != imageToCompare.TransformState)
                 {
                     ilThumbnailList.Images[i] = GetThumbnail(images[i]);
                     Items[i].Tag = new ImageInfo(images[i]);
@@ -71,7 +73,7 @@ namespace NAPS2.WinForms
             }
         }
 
-        private void DeleteExcessImages(List<ProcessedImage> images)
+        private void DeleteExcessImages(List<UiImage> images)
         {
             foreach (var oldImg in CurrentImages.Select(x => x.Image).Except(images))
             {
@@ -89,7 +91,7 @@ namespace NAPS2.WinForms
             }
         }
 
-        private void AddMissingImages(List<ProcessedImage> images)
+        private void AddMissingImages(List<UiImage> images)
         {
             for (int i = ilThumbnailList.Images.Count; i < images.Count; i++)
             {
@@ -98,7 +100,7 @@ namespace NAPS2.WinForms
             }
         }
 
-        public void ReplaceThumbnail(int index, ProcessedImage img)
+        public void ReplaceThumbnail(int index, UiImage img)
         {
             lock (this)
             {
@@ -113,7 +115,7 @@ namespace NAPS2.WinForms
             }
         }
 
-        public void RegenerateThumbnailList(List<ProcessedImage> images)
+        public void RegenerateThumbnailList(List<UiImage> images)
         {
             lock (this)
             {
@@ -139,22 +141,20 @@ namespace NAPS2.WinForms
             }
         }
 
-        private Bitmap GetThumbnail(ProcessedImage img)
+        private Bitmap GetThumbnail(UiImage img)
         {
             lock (this)
             {
-                // TODO: UiImage
-                return null;
-                // var thumb = ((GdiImage)img.GetThumbnail())?.Bitmap;
-                // if (thumb == null)
-                // {
-                //     return RenderPlaceholder();
-                // }
-                // if (img.IsThumbnailDirty)
-                // {
-                //     thumb = DrawHourglass(thumb);
-                // }
-                // return thumb;
+                var thumb = ((GdiImage?)img.GetThumbnailClone())?.Bitmap;
+                if (thumb == null)
+                {
+                    return RenderPlaceholder();
+                }
+                if (img.IsThumbnailDirty)
+                {
+                    thumb = DrawHourglass(thumb);
+                }
+                return thumb;
             }
         }
 
@@ -199,13 +199,15 @@ namespace NAPS2.WinForms
 
         private class ImageInfo
         {
-            public ImageInfo(ProcessedImage image)
+            public ImageInfo(UiImage image)
             {
                 Image = image;
-                TransformState = image.TransformState;
+                // TODO: Just use ProcessedImage directly
+                using var processedImage = image.GetClonedImage();
+                TransformState = processedImage.TransformState;
             }
 
-            public ProcessedImage Image { get; set; }
+            public UiImage Image { get; set; }
             
             public TransformState TransformState { get; set; }
         }

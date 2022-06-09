@@ -91,7 +91,7 @@ public static class SerializedImageHelper
             storage = new MemoryStreamImageStorage(memoryStream);
         }
 
-        var renderableImage = scanningContext.CreateRenderableImage(
+        var renderableImage = scanningContext.CreateProcessedImage(
             storage,
             (BitDepth)serializedImage.Metadata.BitDepth,
             serializedImage.Metadata.Lossless,
