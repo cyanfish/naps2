@@ -1,3 +1,4 @@
+using System.Collections.Immutable;
 using Xunit;
 
 namespace NAPS2.Sdk.Tests.Images;
@@ -7,20 +8,20 @@ public class UndoStackTests : ContextualTexts
     [Fact]
     public void MementoComparison()
     {
-        var empty = Memento.Empty;
-        Assert.Equal(new Memento(new List<ScannedImage>()), empty);
+        var emptyList = ImmutableList<RenderableImage>.Empty;
+        
+        var emptyMemento = Memento.Empty;
+        Assert.Equal(new Memento(emptyList), emptyMemento);
 
         var image = CreateScannedImage();
-        var snapshot1 = new Memento(new[] { image.Preserve() });
-        Assert.NotEqual(empty, snapshot1);
-        Assert.Equal(new Memento(new[] { image }), snapshot1);
-        Assert.Equal(new Memento(new[] { image.Preserve() }), snapshot1);
+        var snapshot1 = new Memento(emptyList.Add(image));
+        Assert.NotEqual(emptyMemento, snapshot1);
+        Assert.Equal(new Memento(emptyList.Add(image)), snapshot1);
 
-        image.AddTransform(new BrightnessTransform(100));
-        var snapshot2 = new Memento(new[] { image.Preserve() });
+        var image2 = image.WithTransform(new BrightnessTransform(100));
+        var snapshot2 = new Memento(emptyList.Add(image2));
         Assert.NotEqual(snapshot1, snapshot2);
-        Assert.Equal(new Memento(new[] { image }), snapshot2);
-        Assert.Equal(new Memento(new[] { image.Preserve() }), snapshot2);
+        Assert.Equal(new Memento(emptyList.Add(image2)), snapshot2);
     }
 
     [Fact]
@@ -41,14 +42,16 @@ public class UndoStackTests : ContextualTexts
     [Fact]
     public void PushUndoRedoUndo()
     {
+        var emptyList = ImmutableList<RenderableImage>.Empty;
+
         var stack = new UndoStack(10);
         var image = CreateScannedImage();
         Assert.True(stack.Push(new[] { image }));
-        Assert.Equal(new Memento(new[] { image }), stack.Current);
+        Assert.Equal(new Memento(emptyList.Add(image)), stack.Current);
         Assert.True(stack.Undo());
         Assert.Equal(Memento.Empty, stack.Current);
         Assert.True(stack.Redo());
-        Assert.Equal(new Memento(new[] { image }), stack.Current);
+        Assert.Equal(new Memento(emptyList.Add(image)), stack.Current);
         Assert.True(stack.Undo());
         Assert.Equal(Memento.Empty, stack.Current);
     }
@@ -75,17 +78,17 @@ public class UndoStackTests : ContextualTexts
         {
             stack.Push(images.Take(i));
         }
-        Assert.Equal(new Memento(images.Take(10)), stack.Current);
+        Assert.Equal(new Memento(images.Take(10).ToImmutableList()), stack.Current);
         for (int i = 9; i >= 7; i--)
         {
             Assert.True(stack.Undo());
-            Assert.Equal(new Memento(images.Take(i)), stack.Current);
+            Assert.Equal(new Memento(images.Take(i).ToImmutableList()), stack.Current);
         }
         Assert.False(stack.Undo());
         for (int i = 8; i <= 10; i++)
         {
             Assert.True(stack.Redo());
-            Assert.Equal(new Memento(images.Take(i)), stack.Current);
+            Assert.Equal(new Memento(images.Take(i).ToImmutableList()), stack.Current);
         }
         Assert.False(stack.Redo());
     }
@@ -101,7 +104,7 @@ public class UndoStackTests : ContextualTexts
         }
         stack.ClearUndo();
         Assert.False(stack.Undo());
-        Assert.Equal(new Memento(images.Take(5)), stack.Current);
+        Assert.Equal(new Memento(images.Take(5).ToImmutableList()), stack.Current);
     }
 
     [Fact]
@@ -138,6 +141,6 @@ public class UndoStackTests : ContextualTexts
         stack.ClearBoth();
         Assert.False(stack.Undo());
         Assert.False(stack.Redo());
-        Assert.Equal(new Memento(images.Take(3)), stack.Current);
+        Assert.Equal(new Memento(images.Take(3).ToImmutableList()), stack.Current);
     }
 }

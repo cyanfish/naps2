@@ -5,7 +5,7 @@ namespace NAPS2.Serialization;
 
 public static class SerializedImageHelper
 {
-    public static SerializedImage Serialize(ImageContext imageContext, RenderableImage image, SerializeOptions options)
+    public static SerializedImage Serialize(RenderableImage image, SerializeOptions options)
     {
         if (options.RequireFileStorage && options.RequireMemoryStorage)
         {

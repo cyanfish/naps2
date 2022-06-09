@@ -1,5 +1,7 @@
 ﻿using System.Drawing;
 using System.Threading;
+using NAPS2.Images.Gdi;
+using NAPS2.Scan;
 
 namespace NAPS2.Sdk.Tests;
 
@@ -13,7 +15,8 @@ public class ContextualTexts : IDisposable
         Directory.CreateDirectory(tempPath);
 
         ProfileManager = new StubProfileManager();
-        ImageContext = new GdiImageContext
+        ImageContext = new GdiImageContext();
+        ScanningContext = new ScanningContext(ImageContext)
         {
             FileStorageManager = new FileStorageManager(tempPath)
         };
@@ -22,6 +25,8 @@ public class ContextualTexts : IDisposable
     public IProfileManager ProfileManager { get; }
 
     public ImageContext ImageContext { get; }
+    
+    public ScanningContext ScanningContext { get; }
 
     public string FolderPath { get; }
 
@@ -34,13 +39,17 @@ public class ContextualTexts : IDisposable
 
     public void UseRecovery()
     {
+        // TODO: Figure out recovery
         var recoveryFolderPath = Path.Combine(FolderPath, "recovery", Path.GetRandomFileName());
-        ImageContext.UseRecovery(recoveryFolderPath);
+        //ScanningContext.UseRecovery(recoveryFolderPath);
     }
 
-    public ScannedImage CreateScannedImage()
+    public RenderableImage CreateScannedImage()
     {
-        return ImageContext.CreateScannedImage(new GdiImage(new Bitmap(100, 100)));
+        return new RenderableImage(
+            new GdiImage(new Bitmap(100, 100)),
+            ImageMetadata.DefaultForTesting,
+            TransformState.Empty);
     }
 
     public virtual void Dispose()

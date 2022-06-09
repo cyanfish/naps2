@@ -1,4 +1,6 @@
-﻿using System.Drawing;
+﻿using System.Collections.Immutable;
+using System.Drawing;
+using NAPS2.Images.Gdi;
 using NAPS2.Scan;
 using NAPS2.Serialization;
 using Xunit;
@@ -48,34 +50,37 @@ public class ImageSerializationTests : ContextualTexts
     [Fact]
     public void SerializeImage()
     {
-        using var sourceContext = new GdiImageContext().UseRecovery(Path.Combine(FolderPath, "source"));
-        using var destContext = new GdiImageContext().UseRecovery(Path.Combine(FolderPath, "dest"));
+        // TODO: Rethink this initialization and recovery
+        using var sourceContext = new ScanningContext(new GdiImageContext());//.UseRecovery(Path.Combine(FolderPath, "source"));
+        sourceContext.FileStorageManager = new FileStorageManager(Path.Combine(FolderPath, "source"));
+        new DirectoryInfo(sourceContext.FileStorageManager.FolderPath).Create();
+        sourceContext.ImageContext.ConfigureBackingStorage<FileStorage>();
+        using var destContext = new ScanningContext(new GdiImageContext());//.UseRecovery(Path.Combine(FolderPath, "dest"));
+        destContext.FileStorageManager = new FileStorageManager(Path.Combine(FolderPath, "dest"));
+        new DirectoryInfo(destContext.FileStorageManager.FolderPath).Create();
+        destContext.ImageContext.ConfigureBackingStorage<FileStorage>();
 
-        using var sourceImage = sourceContext.CreateScannedImage(new GdiImage(new Bitmap(100, 100)));
-        var sourceFilePath = Assert.IsType<FileStorage>(sourceImage.BackingStorage).FullPath;
-        sourceImage.Metadata.TransformList.Add(new BrightnessTransform(100));
-        sourceImage.Metadata.Lossless = true;
-        sourceImage.Metadata.BitDepth = BitDepth.Grayscale;
-        sourceImage.Metadata.Index = 2;
-        sourceImage.Metadata.TransformState = 3;
-        sourceImage.Metadata.Commit();
+        using var sourceImage = sourceContext.CreateRenderableImage(
+            new GdiImage(new Bitmap(100, 100)),
+            BitDepth.Grayscale, 
+            true, 
+            75, 
+            new []{ new BrightnessTransform(100) });
+        var sourceFilePath = Assert.IsType<FileStorage>(sourceImage.Storage).FullPath;
 
-        var serializedImage = SerializedImageHelper.Serialize(sourceContext, sourceImage, new SerializedImageHelper.SerializeOptions());
+        var serializedImage = SerializedImageHelper.Serialize(sourceImage, new SerializedImageHelper.SerializeOptions());
         using var destImage = SerializedImageHelper.Deserialize(destContext, serializedImage, new SerializedImageHelper.DeserializeOptions());
-        var destFilePath = Assert.IsType<FileStorage>(destImage.BackingStorage).FullPath;
+        var destFilePath = Assert.IsType<FileStorage>(destImage.Storage).FullPath;
             
         // Backing file should be copied
         Assert.NotEqual(sourceFilePath, destFilePath);
         Assert.Equal(File.ReadAllBytes(sourceFilePath), File.ReadAllBytes(destFilePath));
         // Metadata should be (mostly) copied
-        Assert.Single(destImage.Metadata.TransformList);
-        Assert.Equal(100, Assert.IsType<BrightnessTransform>(destImage.Metadata.TransformList[0]).Brightness);
+        Assert.Single(destImage.TransformState.Transforms);
+        Assert.Equal(100, Assert.IsType<BrightnessTransform>(destImage.TransformState.Transforms[0]).Brightness);
         Assert.True(destImage.Metadata.Lossless);
         Assert.Equal(BitDepth.Grayscale, destImage.Metadata.BitDepth);
-        // Index and TransformState should not be serialized
-        Assert.Equal(0, destImage.Metadata.Index);
-        Assert.Equal(0, destImage.Metadata.TransformState);
     }
-        
+
     // TODO: Add tests for other serialization cases (recovery/file/memory, serialize/deserialize options)
 }

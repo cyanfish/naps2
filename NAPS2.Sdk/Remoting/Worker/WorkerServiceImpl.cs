@@ -14,22 +14,20 @@ namespace NAPS2.Remoting.Worker;
 public class WorkerServiceImpl : WorkerService.WorkerServiceBase
 {
     private readonly ScanningContext _scanningContext;
-    private readonly ImageContext _imageContext;
     private readonly IRemoteScanController _remoteScanController;
     private readonly ThumbnailRenderer _thumbnailRenderer;
     private readonly IMapiWrapper _mapiWrapper;
 
-    public WorkerServiceImpl(ScanningContext scanningContext, ImageContext imageContext, ThumbnailRenderer thumbnailRenderer, IMapiWrapper mapiWrapper)
-        : this(scanningContext, imageContext, new RemoteScanController(scanningContext),
+    public WorkerServiceImpl(ScanningContext scanningContext, ThumbnailRenderer thumbnailRenderer, IMapiWrapper mapiWrapper)
+        : this(scanningContext, new RemoteScanController(scanningContext),
             thumbnailRenderer, mapiWrapper)
     {
     }
 
-    internal WorkerServiceImpl(ScanningContext scanningContext, ImageContext imageContext, IRemoteScanController remoteScanController, ThumbnailRenderer thumbnailRenderer,
+    internal WorkerServiceImpl(ScanningContext scanningContext, IRemoteScanController remoteScanController, ThumbnailRenderer thumbnailRenderer,
         IMapiWrapper mapiWrapper)
     {
         _scanningContext = scanningContext;
-        _imageContext = imageContext;
         _remoteScanController = remoteScanController;
         _thumbnailRenderer = thumbnailRenderer;
         _mapiWrapper = mapiWrapper;
@@ -125,7 +123,7 @@ public class WorkerServiceImpl : WorkerService.WorkerServiceBase
                 (image, postProcessingContext) =>
                     sequencedWriter.Write(new ScanResponse
                     {
-                        Image = SerializedImageHelper.Serialize(_imageContext, image,
+                        Image = SerializedImageHelper.Serialize(image,
                             new SerializedImageHelper.SerializeOptions
                             {
                                 TransferOwnership = true,
@@ -185,7 +183,7 @@ public class WorkerServiceImpl : WorkerService.WorkerServiceBase
     {
         try
         {
-            var renderer = new PdfiumPdfRenderer(_imageContext);
+            var renderer = new PdfiumPdfRenderer(_scanningContext.ImageContext);
             using var image = renderer.Render(request.Path, request.Dpi).Single();
             var stream = image.SaveToMemoryStream(ImageFileFormat.Png);
             return Task.FromResult(new RenderPdfResponse

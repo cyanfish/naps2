@@ -69,12 +69,12 @@ public class ScanErrorHandling : ContextualTexts
     public async void Scan_LocalPostProcess()
     {
         var localPostProcessor = new Mock<ILocalPostProcessor>();
-        var bridge = new StubScanBridge { MockOutput = new List<ScannedImage> { CreateScannedImage() } };
+        var bridge = new StubScanBridge { MockOutput = new List<RenderableImage> { CreateScannedImage() } };
         var bridgeFactory = new Mock<IScanBridgeFactory>();
         var controller = new ScanController(localPostProcessor.Object, new ScanOptionsValidator(), bridgeFactory.Object);
             
         bridgeFactory.Setup(factory => factory.Create(It.IsAny<ScanOptions>())).Returns(bridge);
-        localPostProcessor.Setup(pp => pp.PostProcess(It.IsAny<ScannedImage>(), It.IsAny<ScanOptions>(), It.IsAny<PostProcessingContext>()))
+        localPostProcessor.Setup(pp => pp.PostProcess(It.IsAny<RenderableImage>(), It.IsAny<ScanOptions>(), It.IsAny<PostProcessingContext>()))
             .Throws<InvalidOperationException>();
         var source = controller.Scan(new ScanOptions());
         await Assert.ThrowsAsync<InvalidOperationException>(source.ToList);

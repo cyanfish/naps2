@@ -14,6 +14,12 @@
         <ProjectReference Include="..\NAPS2.Images\NAPS2.Images.csproj" />
         <PackageReference Include="System.Drawing.Common" Version="5.0.3" />
     </ItemGroup>
+    
+    <ItemGroup>
+        <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
+            <_Parameter1>NAPS2.Sdk.Tests</_Parameter1>
+        </AssemblyAttribute>
+    </ItemGroup>
 
     <Import Project="..\NAPS2.Setup\CommonTargets.targets" />
     <Import Project="..\NAPS2.Setup\ImageUsers.targets" />

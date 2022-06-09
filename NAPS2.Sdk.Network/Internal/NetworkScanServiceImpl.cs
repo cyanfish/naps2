@@ -39,7 +39,8 @@ internal class NetworkScanServiceImpl : NetworkScanService.NetworkScanServiceBas
     {
         try
         {
-            var controller = new ScanController();
+            var scanningContext = new ScanningContext(_imageContext);
+            var controller = new ScanController(scanningContext);
             var options = request.OptionsXml.FromXml<ScanOptions>();
             var devices = await controller.GetDeviceList(options);
             return new GetDeviceListResponse
@@ -83,7 +84,7 @@ internal class NetworkScanServiceImpl : NetworkScanService.NetworkScanServiceBas
             {
                 sequencedWriter.Write(new ScanResponse
                 {
-                    Image = SerializedImageHelper.Serialize(_imageContext, image, new SerializedImageHelper.SerializeOptions
+                    Image = SerializedImageHelper.Serialize(image, new SerializedImageHelper.SerializeOptions
                     {
                         RequireMemoryStorage = true
                     })

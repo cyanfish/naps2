@@ -1,37 +1,32 @@
 using System.Threading;
 using Grpc.Core;
 using NAPS2.Remoting.Network.Internal;
-using NAPS2.Remoting.Worker;
+using NAPS2.Scan;
 using NAPS2.Scan.Internal;
 
 namespace NAPS2.Remoting.Network;
 
 public class NetworkScanServer : IDisposable
 {
-    private readonly ImageContext _imageContext;
+    private readonly ScanningContext _scanningContext;
     private readonly NetworkScanServerOptions _options;
     private readonly IScanBridgeFactory _scanBridgeFactory;
-    private readonly CancellationTokenSource _cts = new CancellationTokenSource();
+    private readonly CancellationTokenSource _cts = new();
     private Server? _server;
 
-    public NetworkScanServer()
-        : this(ImageContext.Default, new ScanBridgeFactory(ImageContext.Default, WorkerFactory.Default), new NetworkScanServerOptions())
+    public NetworkScanServer(ScanningContext scanningContext)
+        : this(scanningContext, new NetworkScanServerOptions())
     {
     }
 
-    public NetworkScanServer(NetworkScanServerOptions options)
-        : this(ImageContext.Default, new ScanBridgeFactory(ImageContext.Default, WorkerFactory.Default), options)
+    public NetworkScanServer(ScanningContext scanningContext, NetworkScanServerOptions options)
+        : this(scanningContext, new ScanBridgeFactory(scanningContext), options)
     {
     }
 
-    public NetworkScanServer(ImageContext imageContext, WorkerFactory workerFactory, NetworkScanServerOptions options)
-        : this(imageContext, new ScanBridgeFactory(imageContext, workerFactory), options)
+    internal NetworkScanServer(ScanningContext scanningContext, IScanBridgeFactory scanBridgeFactory, NetworkScanServerOptions options)
     {
-    }
-
-    internal NetworkScanServer(ImageContext imageContext, IScanBridgeFactory scanBridgeFactory, NetworkScanServerOptions options)
-    {
-        _imageContext = imageContext;
+        _scanningContext = scanningContext;
         _options = options;
         _scanBridgeFactory = scanBridgeFactory;
     }
@@ -47,7 +42,7 @@ public class NetworkScanServer : IDisposable
         // TODO: Secure
         _server = new Server
         {
-            Services = { NetworkScanService.BindService(new NetworkScanServiceImpl(_imageContext, _scanBridgeFactory)) },
+            Services = { NetworkScanService.BindService(new NetworkScanServiceImpl(_scanningContext.ImageContext, _scanBridgeFactory)) },
             Ports = { new ServerPort("0.0.0.0", _options.Port ?? ServerPort.PickUnused, ServerCredentials.Insecure) }
         };
         _server.Start();

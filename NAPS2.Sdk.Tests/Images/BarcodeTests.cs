@@ -1,3 +1,4 @@
+using NAPS2.Images.Gdi;
 using NAPS2.Scan;
 using Xunit;
 
@@ -12,7 +13,7 @@ public class BarcodeTests
     public void DetectPatchT()
     {
         var image = new GdiImage(BarcodeTestsData.patcht);
-        var detection = BarcodeDetection.Detect(image, new BarcodeDetectionOptions
+        var detection = BarcodeDetector.Detect(image, new BarcodeDetectionOptions
         {
             DetectBarcodes = true,
             PatchTOnly = true
@@ -26,7 +27,7 @@ public class BarcodeTests
     public void DetectUpc()
     {
         var image = new GdiImage(BarcodeTestsData.image_upc_barcode);
-        var detection = BarcodeDetection.Detect(image, new BarcodeDetectionOptions
+        var detection = BarcodeDetector.Detect(image, new BarcodeDetectionOptions
         {
             DetectBarcodes = true,
             PatchTOnly = false
@@ -41,7 +42,7 @@ public class BarcodeTests
     public void DetectNothing()
     {
         var image = new GdiImage(BarcodeTestsData.color_image);
-        var detection = BarcodeDetection.Detect(image, new BarcodeDetectionOptions
+        var detection = BarcodeDetector.Detect(image, new BarcodeDetectionOptions
         {
             DetectBarcodes = true,
             PatchTOnly = false

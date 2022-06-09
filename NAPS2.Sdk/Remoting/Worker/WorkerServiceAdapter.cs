@@ -84,7 +84,7 @@ public class WorkerServiceAdapter
     {
         var req = new RenderThumbnailRequest
         {
-            Image = SerializedImageHelper.Serialize(imageContext, image, new SerializedImageHelper.SerializeOptions
+            Image = SerializedImageHelper.Serialize(image, new SerializedImageHelper.SerializeOptions
             {
                 RequireFileStorage = true
             }),

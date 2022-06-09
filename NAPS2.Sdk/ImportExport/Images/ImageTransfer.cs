@@ -17,7 +17,7 @@ public class ImageTransfer : TransferHelper<IEnumerable<RenderableImage>, ImageT
         {
             ProcessId = Process.GetCurrentProcess().Id
         };
-        var serializedImages = images.Select(x => SerializedImageHelper.Serialize(_imageContext, x, new SerializedImageHelper.SerializeOptions()));
+        var serializedImages = images.Select(x => SerializedImageHelper.Serialize(x, new SerializedImageHelper.SerializeOptions()));
         transfer.SerializedImages.AddRange(serializedImages);
         return transfer;
     }

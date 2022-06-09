@@ -1,6 +1,7 @@
 ﻿using System.Threading;
 using GrpcDotNetNamedPipes;
 using Moq;
+using NAPS2.Images.Gdi;
 using NAPS2.ImportExport.Email.Mapi;
 using NAPS2.Remoting.Worker;
 using NAPS2.Scan;
@@ -16,7 +17,7 @@ public class WorkerChannelTests : ContextualTexts
     {
         string pipeName = $"WorkerNamedPipeTests/{Guid.NewGuid()}";
         NamedPipeServer server = new NamedPipeServer(pipeName);
-        WorkerService.BindService(server.ServiceBinder, new WorkerServiceImpl(ImageContext, remoteScanController, thumbnailRenderer, mapiWrapper));
+        WorkerService.BindService(server.ServiceBinder, new WorkerServiceImpl(ScanningContext, remoteScanController, thumbnailRenderer, mapiWrapper));
         server.Start();
         var client = new WorkerServiceAdapter(new NamedPipeChannel(".", pipeName));
         return new Channel
@@ -43,7 +44,7 @@ public class WorkerChannelTests : ContextualTexts
     {
         using var channel = Start();
         channel.Client.Init(@"C:\Somewhere");
-        Assert.StartsWith(@"C:\Somewhere", ImageContext.FileStorageManager.NextFilePath());
+        Assert.StartsWith(@"C:\Somewhere", ScanningContext.FileStorageManager.NextFilePath());
     }
 
     [Fact]
@@ -96,7 +97,7 @@ public class WorkerChannelTests : ContextualTexts
     {
         var remoteScanController = new MockRemoteScanController
         {
-            Images = new List<ScannedImage>
+            Images = new List<RenderableImage>
             {
                 CreateScannedImage(),
                 CreateScannedImage()
@@ -104,8 +105,8 @@ public class WorkerChannelTests : ContextualTexts
         };
 
         using var channel = Start(remoteScanController);
-        var receivedImages = new List<ScannedImage>();
-        await channel.Client.Scan(ImageContext, new ScanOptions(),
+        var receivedImages = new List<RenderableImage>();
+        await channel.Client.Scan(ScanningContext, new ScanOptions(),
             CancellationToken.None, new ScanEvents(() => { }, _ => { }), 
             (img, path) => { receivedImages.Add(img); });
 
@@ -117,7 +118,7 @@ public class WorkerChannelTests : ContextualTexts
     {
         var remoteScanController = new MockRemoteScanController
         {
-            Images = new List<ScannedImage>
+            Images = new List<RenderableImage>
             {
                 CreateScannedImage(),
                 CreateScannedImage()
@@ -126,7 +127,7 @@ public class WorkerChannelTests : ContextualTexts
         };
         using var channel = Start(remoteScanController);
         var ex = await Assert.ThrowsAsync<DeviceException>(async () => await channel.Client.Scan(
-            ImageContext,
+            ScanningContext,
             new ScanOptions(),
             CancellationToken.None,
             new ScanEvents(() => { }, _ => { }), 
@@ -137,13 +138,13 @@ public class WorkerChannelTests : ContextualTexts
 
     private class MockRemoteScanController : IRemoteScanController
     {
-        public List<ScannedImage> Images { get; set; } = new List<ScannedImage>();
+        public List<RenderableImage> Images { get; set; } = new();
 
         public Exception Exception { get; set; }
 
         public Task<List<ScanDevice>> GetDeviceList(ScanOptions options) => throw new NotSupportedException();
 
-        public Task Scan(ScanOptions options, CancellationToken cancelToken, IScanEvents scanEvents, Action<ScannedImage, PostProcessingContext> callback)
+        public Task Scan(ScanOptions options, CancellationToken cancelToken, IScanEvents scanEvents, Action<RenderableImage, PostProcessingContext> callback)
         {
             return Task.Run(() =>
             {

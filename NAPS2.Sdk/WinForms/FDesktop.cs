@@ -1537,7 +1537,7 @@ namespace NAPS2.WinForms
                         {
                             continue;
                         }
-                        using (var image = next.Copy())
+                        using (var image = next.Clone())
                         {
                             var thumb = worker != null
                                 ? _imageContext.Load(

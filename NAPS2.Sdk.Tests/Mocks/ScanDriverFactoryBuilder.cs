@@ -1,6 +1,7 @@
 using System.Drawing;
 using System.Threading;
 using Moq;
+using NAPS2.Images.Gdi;
 using NAPS2.Scan;
 using NAPS2.Scan.Internal;
 

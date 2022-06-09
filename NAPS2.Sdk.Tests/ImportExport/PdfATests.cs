@@ -1,3 +1,4 @@
+using NAPS2.Images.Gdi;
 using NAPS2.ImportExport.Pdf;
 using NAPS2.Sdk.Tests.Asserts;
 using NAPS2.Sdk.Tests.Images;
@@ -21,7 +22,7 @@ public class PdfATests : ContextualTexts
 
         Parallel.ForEach(testCases, testCase =>
         {
-            using var image = new ScannedImage(new GdiImage(SharedData.color_image), new StubImageMetadata());
+            using var image = new RenderableImage(new GdiImage(SharedData.color_image), ImageMetadata.DefaultForTesting, TransformState.Empty);
             pdfExporter.Export(testCase.fileName, new[] { image }, new PdfSettings
             {
                 Compat = testCase.pdfCompat

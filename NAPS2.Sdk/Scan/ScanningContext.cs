@@ -4,8 +4,9 @@ using NAPS2.Remoting.Worker;
 
 namespace NAPS2.Scan;
 
-public class ScanningContext
+public class ScanningContext : IDisposable
 {
+    // TODO: Make sure properties are initialized by callers (or something equivalent)
     public ScanningContext(ImageContext imageContext)
     {
         ImageContext = imageContext;
@@ -22,7 +23,7 @@ public class ScanningContext
     public IWorkerFactory WorkerFactory { get; set; }
 
     public OcrRequestQueue OcrRequestQueue { get; set; }
-
+    
     public RenderableImage CreateRenderableImage(IStorage storage, BitDepth bitDepth, bool lossless, int quality, IEnumerable<Transform> transforms)
     {
         var convertedStorage = ConvertStorageIfNeeded(storage, bitDepth, lossless, quality);
@@ -68,5 +69,12 @@ public class ScanningContext
         var path = FileStorageManager.NextFilePath();
         var fullPath = ImageContext.SaveSmallestFormat(image, path, bitDepth, lossless, quality, out _);
         return new FileStorage(fullPath, false);
+    }
+
+    public void Dispose()
+    {
+        // TODO: Dispose images created via this scanning context
+        ImageContext.Dispose();
+        FileStorageManager?.Dispose();
     }
 }

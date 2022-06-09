@@ -1,4 +1,6 @@
+using NAPS2.Images.Gdi;
 using NAPS2.Remoting.Worker;
+using NAPS2.Scan;
 using Xunit;
 
 namespace NAPS2.Remoting.Network.Tests;
@@ -68,7 +70,7 @@ public class ServerDiscoveryTests
 
     private NetworkScanServer CreateServer(NetworkScanServerOptions options)
     {
-        var imageContext = new GdiImageContext();
-        return new NetworkScanServer(imageContext, new WorkerFactory(imageContext), options);
+        var scanningContext = new ScanningContext(new GdiImageContext());
+        return new NetworkScanServer(scanningContext, options);
     }
 }
