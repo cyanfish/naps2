@@ -44,9 +44,9 @@ public class ContextualTexts : IDisposable
         //ScanningContext.UseRecovery(recoveryFolderPath);
     }
 
-    public RenderableImage CreateScannedImage()
+    public ProcessedImage CreateScannedImage()
     {
-        return new RenderableImage(
+        return new ProcessedImage(
             new GdiImage(new Bitmap(100, 100)),
             ImageMetadata.DefaultForTesting,
             TransformState.Empty);

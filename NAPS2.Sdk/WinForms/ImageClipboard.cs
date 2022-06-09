@@ -22,7 +22,7 @@ public class ImageClipboard
         _imageTransfer = imageTransfer;
     }
 
-    public async Task Write(IEnumerable<RenderableImage> images, bool includeBitmap)
+    public async Task Write(IEnumerable<ProcessedImage> images, bool includeBitmap)
     {
         var imageList = images.ToList();
         if (imageList.Count == 0)
@@ -42,7 +42,7 @@ public class ImageClipboard
         }
     }
 
-    private async Task<string> RtfEncodeImages(Bitmap firstBitmap, List<RenderableImage> images)
+    private async Task<string> RtfEncodeImages(Bitmap firstBitmap, List<ProcessedImage> images)
     {
         var sb = new StringBuilder();
         sb.Append("{");

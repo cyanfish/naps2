@@ -17,5 +17,5 @@ internal class NetworkScanBridge : IScanBridge
     public Task<List<ScanDevice>> GetDeviceList(ScanOptions options) => throw new NotImplementedException();
 
     // TODO: On the network server, make sure to throttle progress events
-    public Task Scan(ScanOptions options, CancellationToken cancelToken, IScanEvents scanEvents, Action<RenderableImage, PostProcessingContext> callback) => throw new NotImplementedException();
+    public Task Scan(ScanOptions options, CancellationToken cancelToken, IScanEvents scanEvents, Action<ProcessedImage, PostProcessingContext> callback) => throw new NotImplementedException();
 }

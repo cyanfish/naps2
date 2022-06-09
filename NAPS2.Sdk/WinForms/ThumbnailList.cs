@@ -31,7 +31,7 @@ namespace NAPS2.WinForms
 
         private ImageInfo GetImageInfo(int i) => (ImageInfo) Items[i].Tag;
 
-        public void UpdatedImages(List<RenderableImage> images, out bool orderingChanged)
+        public void UpdatedImages(List<ProcessedImage> images, out bool orderingChanged)
         {
             lock (this)
             {
@@ -54,7 +54,7 @@ namespace NAPS2.WinForms
             Invalidate();
         }
 
-        private void UpdateChangedImages(List<RenderableImage> images, ref bool orderingChanged)
+        private void UpdateChangedImages(List<ProcessedImage> images, ref bool orderingChanged)
         {
             for (int i = 0; i < ilThumbnailList.Images.Count; i++)
             {
@@ -71,7 +71,7 @@ namespace NAPS2.WinForms
             }
         }
 
-        private void DeleteExcessImages(List<RenderableImage> images)
+        private void DeleteExcessImages(List<ProcessedImage> images)
         {
             foreach (var oldImg in CurrentImages.Select(x => x.Image).Except(images))
             {
@@ -89,7 +89,7 @@ namespace NAPS2.WinForms
             }
         }
 
-        private void AddMissingImages(List<RenderableImage> images)
+        private void AddMissingImages(List<ProcessedImage> images)
         {
             for (int i = ilThumbnailList.Images.Count; i < images.Count; i++)
             {
@@ -98,7 +98,7 @@ namespace NAPS2.WinForms
             }
         }
 
-        public void ReplaceThumbnail(int index, RenderableImage img)
+        public void ReplaceThumbnail(int index, ProcessedImage img)
         {
             lock (this)
             {
@@ -113,7 +113,7 @@ namespace NAPS2.WinForms
             }
         }
 
-        public void RegenerateThumbnailList(List<RenderableImage> images)
+        public void RegenerateThumbnailList(List<ProcessedImage> images)
         {
             lock (this)
             {
@@ -139,7 +139,7 @@ namespace NAPS2.WinForms
             }
         }
 
-        private Bitmap GetThumbnail(RenderableImage img)
+        private Bitmap GetThumbnail(ProcessedImage img)
         {
             lock (this)
             {
@@ -199,13 +199,13 @@ namespace NAPS2.WinForms
 
         private class ImageInfo
         {
-            public ImageInfo(RenderableImage image)
+            public ImageInfo(ProcessedImage image)
             {
                 Image = image;
                 TransformState = image.TransformState;
             }
 
-            public RenderableImage Image { get; set; }
+            public ProcessedImage Image { get; set; }
             
             public TransformState TransformState { get; set; }
         }

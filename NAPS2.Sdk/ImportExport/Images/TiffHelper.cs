@@ -8,7 +8,7 @@ namespace NAPS2.ImportExport.Images;
 
 public class TiffHelper
 {
-    public async Task<bool> SaveMultipage(List<RenderableImage> images, string location, TiffCompression compression, ProgressHandler progressCallback, CancellationToken cancelToken)
+    public async Task<bool> SaveMultipage(List<ProcessedImage> images, string location, TiffCompression compression, ProgressHandler progressCallback, CancellationToken cancelToken)
     {
         try
         {

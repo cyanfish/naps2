@@ -25,7 +25,7 @@ public class PdfSharpExporter : PdfExporter
     {
     }
 
-    public override async Task<bool> Export(string path, ICollection<RenderableImage> images, IConfigProvider<PdfSettings> settings, OcrContext? ocrContext = null, ProgressHandler? progressCallback = null, CancellationToken cancelToken = default)
+    public override async Task<bool> Export(string path, ICollection<ProcessedImage> images, IConfigProvider<PdfSettings> settings, OcrContext? ocrContext = null, ProgressHandler? progressCallback = null, CancellationToken cancelToken = default)
     {
         return await Task.Run(async () =>
         {
@@ -110,7 +110,7 @@ public class PdfSharpExporter : PdfExporter
         });
     }
 
-    private async Task<bool> BuildDocumentWithoutOcr(ProgressHandler? progressCallback, CancellationToken cancelToken, PdfDocument document, PdfCompat compat, ICollection<RenderableImage> images)
+    private async Task<bool> BuildDocumentWithoutOcr(ProgressHandler? progressCallback, CancellationToken cancelToken, PdfDocument document, PdfCompat compat, ICollection<ProcessedImage> images)
     {
         int progress = 0;
         progressCallback?.Invoke(progress, images.Count);
@@ -144,7 +144,7 @@ public class PdfSharpExporter : PdfExporter
 
     private static bool IsPdfFile(ImageFileStorage imageFileStorage) => Path.GetExtension(imageFileStorage.FullPath)?.Equals(".pdf", StringComparison.InvariantCultureIgnoreCase) ?? false;
 
-    private async Task<bool> BuildDocumentWithOcr(ProgressHandler? progressCallback, CancellationToken cancelToken, PdfDocument document, PdfCompat compat, ICollection<RenderableImage> images, OcrContext ocrContext, IOcrEngine ocrEngine)
+    private async Task<bool> BuildDocumentWithOcr(ProgressHandler? progressCallback, CancellationToken cancelToken, PdfDocument document, PdfCompat compat, ICollection<ProcessedImage> images, OcrContext ocrContext, IOcrEngine ocrEngine)
     {
         int progress = 0;
         progressCallback?.Invoke(progress, images.Count);

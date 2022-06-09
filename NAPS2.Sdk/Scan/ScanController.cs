@@ -43,7 +43,7 @@ public class ScanController : IScanController
         void ScanErrorCallback(Exception ex) => ScanError?.Invoke(this, new ScanErrorEventArgs(ex));
         void PageStartCallback() => PageStart?.Invoke(this, new PageStartEventArgs(++pageNumber));
         void PageProgressCallback(double progress) => PageProgress?.Invoke(this, new PageProgressEventArgs(pageNumber, progress));
-        void PageEndCallback(RenderableImage image) => PageEnd?.Invoke(this, new PageEndEventArgs(pageNumber, image));
+        void PageEndCallback(ProcessedImage image) => PageEnd?.Invoke(this, new PageEndEventArgs(pageNumber, image));
 
         ScanStartCallback();
         Task.Run(async () =>

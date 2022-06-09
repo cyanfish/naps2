@@ -14,7 +14,7 @@ public class PrintDocumentPrinter : IScannedImagePrinter
         _imageContext = imageContext;
     }
 
-    public async Task<bool> PromptToPrint(List<RenderableImage> images, List<RenderableImage> selectedImages)
+    public async Task<bool> PromptToPrint(List<ProcessedImage> images, List<ProcessedImage> selectedImages)
     {
         if (!images.Any())
         {
@@ -39,9 +39,9 @@ public class PrintDocumentPrinter : IScannedImagePrinter
         return false;
     }
 
-    public async Task<bool> Print(PrinterSettings printerSettings, List<RenderableImage> images, List<RenderableImage> selectedImages)
+    public async Task<bool> Print(PrinterSettings printerSettings, List<ProcessedImage> images, List<ProcessedImage> selectedImages)
     {
-        List<RenderableImage> imagesToPrint;
+        List<ProcessedImage> imagesToPrint;
         switch (printerSettings.PrintRange)
         {
             case PrintRange.AllPages:
@@ -56,7 +56,7 @@ public class PrintDocumentPrinter : IScannedImagePrinter
                 imagesToPrint = images.Skip(start).Take(length).ToList();
                 break;
             default:
-                imagesToPrint = new List<RenderableImage>();
+                imagesToPrint = new List<ProcessedImage>();
                 break;
         }
         if (imagesToPrint.Count == 0)

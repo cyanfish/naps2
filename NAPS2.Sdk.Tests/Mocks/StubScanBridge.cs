@@ -8,7 +8,7 @@ internal class StubScanBridge : IScanBridge
 {
     public List<ScanDevice> MockDevices { get; set; } = new();
 
-    public List<RenderableImage> MockOutput { get; set; } = new();
+    public List<ProcessedImage> MockOutput { get; set; } = new();
         
     public Exception Error { get; set; }
 
@@ -25,7 +25,7 @@ internal class StubScanBridge : IScanBridge
         });
     }
 
-    public Task Scan(ScanOptions options, CancellationToken cancelToken, IScanEvents scanEvents, Action<RenderableImage, PostProcessingContext> callback)
+    public Task Scan(ScanOptions options, CancellationToken cancelToken, IScanEvents scanEvents, Action<ProcessedImage, PostProcessingContext> callback)
     {
         return Task.Run(() =>
         {

@@ -11,7 +11,7 @@ internal class LocalPostProcessor : ILocalPostProcessor
         _scanningContext = scanningContext;
     }
 
-    public void PostProcess(RenderableImage image, ScanOptions options, PostProcessingContext postProcessingContext)
+    public void PostProcess(ProcessedImage image, ScanOptions options, PostProcessingContext postProcessingContext)
     {
         if (postProcessingContext.TempPath != null)
         {
@@ -19,7 +19,7 @@ internal class LocalPostProcessor : ILocalPostProcessor
         }
     }
 
-    private void RunBackgroundOcr(RenderableImage image, ScanOptions options, string tempPath)
+    private void RunBackgroundOcr(ProcessedImage image, ScanOptions options, string tempPath)
     {
         if (options.DoOcr)
         {

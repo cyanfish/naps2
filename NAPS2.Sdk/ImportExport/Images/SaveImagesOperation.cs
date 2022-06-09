@@ -32,7 +32,7 @@ public class SaveImagesOperation : OperationBase
     /// <param name="placeholders"></param>
     /// <param name="images">The collection of images to save.</param>
     /// <param name="batch"></param>
-    public bool Start(string fileName, Placeholders placeholders, List<RenderableImage> images, IConfigProvider<ImageSettings> imageSettings, bool batch = false)
+    public bool Start(string fileName, Placeholders placeholders, List<ProcessedImage> images, IConfigProvider<ImageSettings> imageSettings, bool batch = false)
     {
         Status = new OperationStatus
         {
@@ -68,7 +68,7 @@ public class SaveImagesOperation : OperationBase
 
                 int i = 0;
                 int digits = (int)Math.Floor(Math.Log10(images.Count)) + 1;
-                foreach (RenderableImage image in images)
+                foreach (ProcessedImage image in images)
                 {
                     if (CancelToken.IsCancellationRequested)
                     {
@@ -146,12 +146,12 @@ public class SaveImagesOperation : OperationBase
         return true;
     }
 
-    private async Task DoSaveImage(RenderableImage image, string path, ImageFormat format, IConfigProvider<ImageSettings> imageSettings)
+    private async Task DoSaveImage(ProcessedImage image, string path, ImageFormat format, IConfigProvider<ImageSettings> imageSettings)
     {
         PathHelper.EnsureParentDirExists(path);
         if (Equals(format, ImageFormat.Tiff))
         {
-            await _tiffHelper.SaveMultipage(new List<RenderableImage> { image }, path, imageSettings.Get(c => c.TiffCompression), (i, j) => { }, CancellationToken.None);
+            await _tiffHelper.SaveMultipage(new List<ProcessedImage> { image }, path, imageSettings.Get(c => c.TiffCompression), (i, j) => { }, CancellationToken.None);
         }
         else if (Equals(format, ImageFormat.Jpeg))
         {

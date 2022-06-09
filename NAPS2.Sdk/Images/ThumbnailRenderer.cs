@@ -13,11 +13,11 @@ public class ThumbnailRenderer
         _imageContext = imageContext;
     }
 
-    public IMemoryImage Render(RenderableImage renderableImage, int outputSize)
+    public IMemoryImage Render(ProcessedImage processedImage, int outputSize)
     {
-        var image = renderableImage.RenderToImage();
-        var transformList = renderableImage.TransformState.Transforms;
-        if (!renderableImage.TransformState.IsEmpty)
+        var image = processedImage.RenderToImage();
+        var transformList = processedImage.TransformState.Transforms;
+        if (!processedImage.TransformState.IsEmpty)
         {
             // When we have additional transformations, performing them on a large original image may be quite slow.
             // On the other hand, scaling the image to the thumbnail size first can result in transforms losing detail.

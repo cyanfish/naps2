@@ -42,7 +42,7 @@ public class GdiImageContext : ImageContext
         }
     }
 
-    public override IMemoryImage Render(RenderableImage renderableImage) => renderableImage.RenderToImage();
+    public override IMemoryImage Render(ProcessedImage processedImage) => processedImage.RenderToImage();
 
     public override IMemoryImage Create(int width, int height, ImagePixelFormat pixelFormat)
     {

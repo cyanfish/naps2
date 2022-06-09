@@ -24,11 +24,11 @@ public class ScanningContext : IDisposable
 
     public OcrRequestQueue OcrRequestQueue { get; set; }
     
-    public RenderableImage CreateRenderableImage(IImageStorage storage, BitDepth bitDepth, bool lossless, int quality, IEnumerable<Transform> transforms)
+    public ProcessedImage CreateRenderableImage(IImageStorage storage, BitDepth bitDepth, bool lossless, int quality, IEnumerable<Transform> transforms)
     {
         var convertedStorage = ConvertStorageIfNeeded(storage, bitDepth, lossless, quality);
         var metadata = new ImageMetadata(bitDepth, lossless);
-        return new RenderableImage(convertedStorage, metadata, new TransformState(transforms.ToImmutableList()));
+        return new ProcessedImage(convertedStorage, metadata, new TransformState(transforms.ToImmutableList()));
     }
 
     private IImageStorage ConvertStorageIfNeeded(IImageStorage storage, BitDepth bitDepth, bool lossless, int quality)

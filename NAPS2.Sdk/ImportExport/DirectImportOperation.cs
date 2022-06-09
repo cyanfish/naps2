@@ -17,7 +17,7 @@ public class DirectImportOperation : OperationBase
         AllowBackground = true;
     }
 
-    public bool Start(ImageTransferData data, bool copy, Action<RenderableImage> imageCallback, DirectImportParams importParams)
+    public bool Start(ImageTransferData data, bool copy, Action<ProcessedImage> imageCallback, DirectImportParams importParams)
     {
         ProgressTitle = copy ? MiscResources.CopyProgress : MiscResources.ImportProgress;
         Status = new OperationStatus
@@ -33,7 +33,7 @@ public class DirectImportOperation : OperationBase
             {
                 try
                 {
-                    RenderableImage img = SerializedImageHelper.Deserialize(_scanningContext, serializedImage, new SerializedImageHelper.DeserializeOptions());
+                    ProcessedImage img = SerializedImageHelper.Deserialize(_scanningContext, serializedImage, new SerializedImageHelper.DeserializeOptions());
                     // TODO: Don't bother, here, in recovery, etc.
                     if (importParams.ThumbnailSize.HasValue)
                     {

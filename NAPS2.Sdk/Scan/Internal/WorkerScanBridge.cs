@@ -21,7 +21,7 @@ internal class WorkerScanBridge : IScanBridge
         return await ctx.Service.GetDeviceList(options);
     }
 
-    public async Task Scan(ScanOptions options, CancellationToken cancelToken, IScanEvents scanEvents, Action<RenderableImage, PostProcessingContext> callback)
+    public async Task Scan(ScanOptions options, CancellationToken cancelToken, IScanEvents scanEvents, Action<ProcessedImage, PostProcessingContext> callback)
     {
         using var ctx = _scanningContext.WorkerFactory.Create();
         await ctx.Service.Scan(_scanningContext, options, cancelToken, scanEvents, (image, tempPath) =>

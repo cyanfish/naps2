@@ -30,7 +30,7 @@ public class FileStorageSample
         // excessive amount of memory, since it is all stored on disk until rendered.
         // This is just for illustration purposes; in real code you usually want to
         // process images as they come rather than waiting for the full scan.
-        List<RenderableImage> renderableImages = await controller.Scan(options).ToList();
+        List<ProcessedImage> renderableImages = await controller.Scan(options).ToList();
 
         try
         {

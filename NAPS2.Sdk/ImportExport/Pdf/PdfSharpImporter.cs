@@ -113,7 +113,7 @@ public class PdfSharpImporter : IPdfImporter
         return sink.AsSource();
     }
 
-    private IEnumerable<RenderableImage> GetImagesFromPage(PdfPage page, ImportParams importParams)
+    private IEnumerable<ProcessedImage> GetImagesFromPage(PdfPage page, ImportParams importParams)
     {
         // Get resources dictionary
         PdfDictionary resources = page.Elements.GetDictionary("/Resources");
@@ -151,7 +151,7 @@ public class PdfSharpImporter : IPdfImporter
         }
     }
 
-    private RenderableImage DecodeImage(string encoding, PdfPage page, PdfDictionary xObject, byte[] stream, ImportParams importParams)
+    private ProcessedImage DecodeImage(string encoding, PdfPage page, PdfDictionary xObject, byte[] stream, ImportParams importParams)
     {
         switch (encoding)
         {
@@ -166,7 +166,7 @@ public class PdfSharpImporter : IPdfImporter
         }
     }
 
-    private async Task<RenderableImage> ExportRawPdfPage(PdfPage page, ImportParams importParams)
+    private async Task<ProcessedImage> ExportRawPdfPage(PdfPage page, ImportParams importParams)
     {
         // TODO: Handle no file storage (i.e. in-memory pdf storage)
         string pdfPath = _scanningContext.FileStorageManager.NextFilePath() + ".pdf";
@@ -175,7 +175,7 @@ public class PdfSharpImporter : IPdfImporter
         document.Save(pdfPath);
 
         // TODO: Are we 100% sure we want RenderableImage to support PDFs? Need to implement that.
-        var image = new RenderableImage(new ImageFileStorage(pdfPath), new ImageMetadata(BitDepth.Color, false), TransformState.Empty);
+        var image = new ProcessedImage(new ImageFileStorage(pdfPath), new ImageMetadata(BitDepth.Color, false), TransformState.Empty);
         if (importParams.ThumbnailSize.HasValue || importParams.BarcodeDetectionOptions.DetectBarcodes)
         {
             using var bitmap = image.RenderToImage();
@@ -188,13 +188,13 @@ public class PdfSharpImporter : IPdfImporter
         return image;
     }
 
-    private RenderableImage ExportJpegImage(PdfPage page, byte[] imageBytes, ImportParams importParams)
+    private ProcessedImage ExportJpegImage(PdfPage page, byte[] imageBytes, ImportParams importParams)
     {
         // Fortunately JPEG has native support in PDF and exporting an image is just writing the stream to a file.
         using var memoryStream = new MemoryStream(imageBytes);
         using var storage = _imageContext.Load(memoryStream);
         storage.SetResolution(storage.Width / (float)page.Width.Inch, storage.Height / (float)page.Height.Inch);
-        var image = new RenderableImage(storage, new ImageMetadata(BitDepth.Color, false), TransformState.Empty);
+        var image = new ProcessedImage(storage, new ImageMetadata(BitDepth.Color, false), TransformState.Empty);
         if (importParams.ThumbnailSize.HasValue)
         {
             image.PostProcessingData.Thumbnail = _imageContext.PerformTransform(storage, new ThumbnailTransform(importParams.ThumbnailSize.Value));
@@ -203,7 +203,7 @@ public class PdfSharpImporter : IPdfImporter
         return image;
     }
 
-    private RenderableImage ExportAsPngImage(PdfPage page, PdfDictionary imageObject, ImportParams importParams)
+    private ProcessedImage ExportAsPngImage(PdfPage page, PdfDictionary imageObject, ImportParams importParams)
     {
         int width = imageObject.Elements.GetInteger(PdfImage.Keys.Width);
         int height = imageObject.Elements.GetInteger(PdfImage.Keys.Height);
@@ -233,7 +233,7 @@ public class PdfSharpImporter : IPdfImporter
         {
             storage.SetResolution(storage.Width / (float)page.Width.Inch, storage.Height / (float)page.Height.Inch);
             // TODO: De-dup this code
-            var image = new RenderableImage(storage, new ImageMetadata(bitDepth, true), TransformState.Empty);
+            var image = new ProcessedImage(storage, new ImageMetadata(bitDepth, true), TransformState.Empty);
             if (importParams.ThumbnailSize.HasValue)
             {
                 image.PostProcessingData.Thumbnail = _imageContext.PerformTransform(storage, new ThumbnailTransform(importParams.ThumbnailSize.Value));
@@ -302,7 +302,7 @@ public class PdfSharpImporter : IPdfImporter
     private static readonly byte[] TiffBeforeRealLen = { 0x03, 0x01, 0x03, 0x00, 0x01, 0x00, 0x00, 0x00, 0x04, 0x00, 0x00, 0x00, 0x11, 0x01, 0x04, 0x00, 0x01, 0x00, 0x00, 0x00, 0x10, 0x00, 0x00, 0x00, 0x15, 0x01, 0x03, 0x00, 0x01, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x17, 0x01, 0x04, 0x00, 0x01, 0x00, 0x00, 0x00 };
     private static readonly byte[] TiffTrailer = { 0x00, 0x00, 0x00, 0x00 };
 
-    private RenderableImage ExportG4(PdfPage page, PdfDictionary imageObject, byte[] imageBytes, ImportParams importParams)
+    private ProcessedImage ExportG4(PdfPage page, PdfDictionary imageObject, byte[] imageBytes, ImportParams importParams)
     {
         int width = imageObject.Elements.GetInteger(PdfImage.Keys.Width);
         int height = imageObject.Elements.GetInteger(PdfImage.Keys.Height);
@@ -342,7 +342,7 @@ public class PdfSharpImporter : IPdfImporter
         using var storage = _imageContext.Load(stream);
         storage.SetResolution(storage.Width / (float)page.Width.Inch, storage.Height / (float)page.Height.Inch);
 
-        var image = new RenderableImage(storage, new ImageMetadata(BitDepth.BlackAndWhite, true), TransformState.Empty);
+        var image = new ProcessedImage(storage, new ImageMetadata(BitDepth.BlackAndWhite, true), TransformState.Empty);
         if (importParams.ThumbnailSize.HasValue)
         {
             image.PostProcessingData.Thumbnail = _imageContext.PerformTransform(storage, new ThumbnailTransform(importParams.ThumbnailSize.Value));

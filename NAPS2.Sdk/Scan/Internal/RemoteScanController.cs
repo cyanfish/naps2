@@ -28,7 +28,7 @@ internal class RemoteScanController : IRemoteScanController
         return deviceList;
     }
 
-    public async Task Scan(ScanOptions options, CancellationToken cancelToken, IScanEvents scanEvents, Action<RenderableImage, PostProcessingContext> callback)
+    public async Task Scan(ScanOptions options, CancellationToken cancelToken, IScanEvents scanEvents, Action<ProcessedImage, PostProcessingContext> callback)
     {
         var driver = _scanDriverFactory.Create(options);
         var progressThrottle = new EventThrottle<double>(scanEvents.PageProgress);

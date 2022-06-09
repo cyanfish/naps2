@@ -14,7 +14,7 @@ public class DeskewOperation : OperationBase
         AllowBackground = true;
     }
 
-    public bool Start(ICollection<RenderableImage> images, DeskewParams deskewParams)
+    public bool Start(ICollection<ProcessedImage> images, DeskewParams deskewParams)
     {
         ProgressTitle = MiscResources.AutoDeskewProgress;
         Status = new OperationStatus

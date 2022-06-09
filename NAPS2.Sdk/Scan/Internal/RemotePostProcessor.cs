@@ -25,7 +25,7 @@ internal class RemotePostProcessor : IRemotePostProcessor
     //    return image;
     //}
 
-    public RenderableImage PostProcess(IMemoryImage image, ScanOptions options, PostProcessingContext postProcessingContext)
+    public ProcessedImage PostProcess(IMemoryImage image, ScanOptions options, PostProcessingContext postProcessingContext)
     {
         using (image = DoInitialTransforms(image, options))
         {
@@ -110,9 +110,9 @@ internal class RemotePostProcessor : IRemotePostProcessor
     }
 
     // TODO: This is more than just transforms.
-    private void DoRevertibleTransforms(RenderableImage renderableImage, IMemoryImage image, ScanOptions options, PostProcessingContext postProcessingContext)
+    private void DoRevertibleTransforms(ProcessedImage processedImage, IMemoryImage image, ScanOptions options, PostProcessingContext postProcessingContext)
     {
-        var data = renderableImage.PostProcessingData;
+        var data = processedImage.PostProcessingData;
         if (options.ThumbnailSize.HasValue)
         {
             data.Thumbnail = _scanningContext.ImageContext.PerformTransform(image, new ThumbnailTransform(options.ThumbnailSize.Value));
@@ -120,18 +120,18 @@ internal class RemotePostProcessor : IRemotePostProcessor
             
         if (!options.UseNativeUI && options.BrightnessContrastAfterScan)
         {
-            renderableImage = AddTransformAndUpdateThumbnail(renderableImage, ref image, new BrightnessTransform(options.Brightness), options);
-            renderableImage = AddTransformAndUpdateThumbnail(renderableImage, ref image, new TrueContrastTransform(options.Contrast), options);
+            processedImage = AddTransformAndUpdateThumbnail(processedImage, ref image, new BrightnessTransform(options.Brightness), options);
+            processedImage = AddTransformAndUpdateThumbnail(processedImage, ref image, new TrueContrastTransform(options.Contrast), options);
         }
 
         if (options.FlipDuplexedPages && postProcessingContext.PageNumber % 2 == 0)
         {
-            renderableImage = AddTransformAndUpdateThumbnail(renderableImage, ref image, new RotationTransform(180), options);
+            processedImage = AddTransformAndUpdateThumbnail(processedImage, ref image, new RotationTransform(180), options);
         }
 
         if (options.AutoDeskew)
         {
-            renderableImage = AddTransformAndUpdateThumbnail(renderableImage, ref image, Deskewer.GetDeskewTransform(image), options);
+            processedImage = AddTransformAndUpdateThumbnail(processedImage, ref image, Deskewer.GetDeskewTransform(image), options);
         }
 
         if (!data.BarcodeDetection.IsBarcodePresent)
@@ -155,13 +155,13 @@ internal class RemotePostProcessor : IRemotePostProcessor
         return null;
     }
 
-    private RenderableImage AddTransformAndUpdateThumbnail(RenderableImage renderableImage, ref IMemoryImage image, Transform transform, ScanOptions options)
+    private ProcessedImage AddTransformAndUpdateThumbnail(ProcessedImage processedImage, ref IMemoryImage image, Transform transform, ScanOptions options)
     {
         if (transform.IsNull)
         {
-            return renderableImage;
+            return processedImage;
         }
-        RenderableImage transformed = renderableImage.WithTransform(transform);
+        ProcessedImage transformed = processedImage.WithTransform(transform);
         if (options.ThumbnailSize.HasValue)
         {
             // TODO: We may want to do the transform on the original thumbnail, maybe situationally?
@@ -174,7 +174,7 @@ internal class RemotePostProcessor : IRemotePostProcessor
             image = _scanningContext.ImageContext.PerformTransform(image, transform);
             transformed.PostProcessingData.Thumbnail = _scanningContext.ImageContext.PerformTransform(image, new ThumbnailTransform(options.ThumbnailSize.Value));
         }
-        renderableImage.Dispose();
+        processedImage.Dispose();
         return transformed;
     }
 }

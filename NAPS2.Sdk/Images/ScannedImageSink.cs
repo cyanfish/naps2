@@ -2,9 +2,9 @@
 
 public class ScannedImageSink
 {
-    private static TaskCompletionSource<RenderableImage?> CreateTcs() => new(TaskCreationOptions.RunContinuationsAsynchronously);
+    private static TaskCompletionSource<ProcessedImage?> CreateTcs() => new(TaskCreationOptions.RunContinuationsAsynchronously);
 
-    private readonly List<TaskCompletionSource<RenderableImage?>> _images = new()
+    private readonly List<TaskCompletionSource<ProcessedImage?>> _images = new()
     {
         CreateTcs()
     };
@@ -55,7 +55,7 @@ public class ScannedImageSink
         }
     }
 
-    public virtual void PutImage(RenderableImage image)
+    public virtual void PutImage(ProcessedImage image)
     {
         lock (this)
         {
@@ -74,9 +74,9 @@ public class ScannedImageSink
             _sink = sink;
         }
 
-        public override async Task<RenderableImage?> Next()
+        public override async Task<ProcessedImage?> Next()
         {
-            TaskCompletionSource<RenderableImage?> tcs;
+            TaskCompletionSource<ProcessedImage?> tcs;
             lock (_sink)
             {
                 if (_imagesRead >= _sink._images.Count)

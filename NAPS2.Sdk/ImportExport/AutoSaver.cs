@@ -42,7 +42,7 @@ public class AutoSaver
         if (!settings.ClearImagesAfterSaving)
         {
             // Basic auto save, so keep track of images as we pipe them and try to auto save afterwards
-            var imageList = new List<RenderableImage>();
+            var imageList = new List<ProcessedImage>();
             source.ForEach(img =>
             {
                 sink.PutImage(img);
@@ -70,7 +70,7 @@ public class AutoSaver
         {
             if (await InternalSave(settings, t.Result))
             {
-                foreach (RenderableImage img in t.Result)
+                foreach (ProcessedImage img in t.Result)
                 {
                     img.Dispose();
                 }
@@ -78,7 +78,7 @@ public class AutoSaver
             else
             {
                 // Fallback in case auto save failed; pipe all the images back at once
-                foreach (RenderableImage img in t.Result)
+                foreach (ProcessedImage img in t.Result)
                 {
                     sink.PutImage(img);
                 }
@@ -89,7 +89,7 @@ public class AutoSaver
         return sink.AsSource();
     }
 
-    private async Task<bool> InternalSave(AutoSaveSettings settings, List<RenderableImage> images)
+    private async Task<bool> InternalSave(AutoSaveSettings settings, List<ProcessedImage> images)
     {
         try
         {
@@ -127,7 +127,7 @@ public class AutoSaver
         }
     }
 
-    private async Task<(bool, string?)> SaveOneFile(AutoSaveSettings settings, Placeholders placeholders, int i, List<RenderableImage> images, bool doNotify)
+    private async Task<(bool, string?)> SaveOneFile(AutoSaveSettings settings, Placeholders placeholders, int i, List<ProcessedImage> images, bool doNotify)
     {
         if (images.Count == 0)
         {

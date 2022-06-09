@@ -617,16 +617,16 @@ namespace NAPS2.WinForms
             }
         }
 
-        private IEnumerable<RenderableImage> SelectedImages => _imageList.Images.ElementsAt(SelectedIndices);
+        private IEnumerable<ProcessedImage> SelectedImages => _imageList.Images.ElementsAt(SelectedIndices);
 
         /// <summary>
         /// Constructs a receiver for scanned images.
         /// This keeps images from the same source together, even if multiple sources are providing images at the same time.
         /// </summary>
         /// <returns></returns>
-        public Action<RenderableImage> ReceiveScannedImage()
+        public Action<ProcessedImage> ReceiveScannedImage()
         {
-            RenderableImage? last = null;
+            ProcessedImage? last = null;
             return scannedImage =>
             {
                 SafeInvoke(() =>
@@ -663,7 +663,7 @@ namespace NAPS2.WinForms
         {
             SafeInvokeAsync(() =>
             {
-                var image = (RenderableImage)sender;
+                var image = (ProcessedImage)sender;
                 lock (image)
                 {
                     lock (_imageList)
@@ -682,7 +682,7 @@ namespace NAPS2.WinForms
         {
             SafeInvokeAsync(() =>
             {
-                var image = (RenderableImage)sender;
+                var image = (ProcessedImage)sender;
                 lock (image)
                 {
                     lock (_imageList)
@@ -881,7 +881,7 @@ namespace NAPS2.WinForms
 
         #region Actions - Save/Email/Import
 
-        private async void SavePDF(List<RenderableImage> images)
+        private async void SavePDF(List<ProcessedImage> images)
         {
             if (await _exportHelper.SavePDF(images, _notify))
             {
@@ -892,7 +892,7 @@ namespace NAPS2.WinForms
             }
         }
 
-        private async void SaveImages(List<RenderableImage> images)
+        private async void SaveImages(List<ProcessedImage> images)
         {
             if (await _exportHelper.SaveImages(images, _notify))
             {
@@ -903,7 +903,7 @@ namespace NAPS2.WinForms
             }
         }
 
-        private async void EmailPDF(List<RenderableImage> images)
+        private async void EmailPDF(List<ProcessedImage> images)
         {
             await _exportHelper.EmailPDF(images);
         }
@@ -1530,7 +1530,7 @@ namespace NAPS2.WinForms
             {
                 try
                 {
-                    RenderableImage next;
+                    ProcessedImage next;
                     while ((next = GetNextThumbnailToRender()) != null)
                     {
                         if (!ThumbnailStillNeedsRendering(next))
@@ -1571,7 +1571,7 @@ namespace NAPS2.WinForms
             }
         }
 
-        private bool ThumbnailStillNeedsRendering(RenderableImage next)
+        private bool ThumbnailStillNeedsRendering(ProcessedImage next)
         {
             lock (next)
             {
@@ -1583,9 +1583,9 @@ namespace NAPS2.WinForms
             }
         }
 
-        private RenderableImage GetNextThumbnailToRender()
+        private ProcessedImage GetNextThumbnailToRender()
         {
-            List<RenderableImage> listCopy;
+            List<ProcessedImage> listCopy;
             lock (_imageList)
             {
                 listCopy = _imageList.Images.ToList();

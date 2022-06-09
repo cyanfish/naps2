@@ -8,24 +8,24 @@ public class ScannedImageList
     private readonly ImageContext _imageContext;
     private readonly TimedThrottle _runUpdateEventsThrottle;
     private Memento _savedState = Memento.Empty;
-    private ListSelection<RenderableImage> _selection;
+    private ListSelection<ProcessedImage> _selection;
 
     public ScannedImageList(ImageContext imageContext)
-        : this(imageContext, new List<RenderableImage>())
+        : this(imageContext, new List<ProcessedImage>())
     {
     }
 
-    public ScannedImageList(ImageContext imageContext, List<RenderableImage> images)
+    public ScannedImageList(ImageContext imageContext, List<ProcessedImage> images)
     {
         _imageContext = imageContext;
         _runUpdateEventsThrottle = new TimedThrottle(RunUpdateEvents, TimeSpan.FromMilliseconds(100));
         Images = images;
-        _selection = ListSelection.Empty<RenderableImage>();
+        _selection = ListSelection.Empty<ProcessedImage>();
     }
 
     public ThumbnailRenderer? ThumbnailRenderer { get; set; }
 
-    public List<RenderableImage> Images { get; }
+    public List<ProcessedImage> Images { get; }
 
     public Memento CurrentState => new Memento(Images.ToImmutableList());
 
@@ -35,13 +35,13 @@ public class ScannedImageList
         set => _savedState = value ?? throw new ArgumentNullException(nameof(value));
     }
 
-    public ListSelection<RenderableImage> Selection
+    public ListSelection<ProcessedImage> Selection
     {
         get => _selection;
         set => _selection = value ?? throw new ArgumentNullException(nameof(value));
     }
 
-    public void UpdateSelection(ListSelection<RenderableImage> newSelection)
+    public void UpdateSelection(ListSelection<ProcessedImage> newSelection)
     {
         Selection = newSelection;
         ImagesUpdated?.Invoke(this, EventArgs.Empty);
@@ -49,19 +49,19 @@ public class ScannedImageList
 
     public event EventHandler? ImagesUpdated;
 
-    public void Mutate(ListMutation<RenderableImage> mutation, ListSelection<RenderableImage>? selectionToMutate = null)
+    public void Mutate(ListMutation<ProcessedImage> mutation, ListSelection<ProcessedImage>? selectionToMutate = null)
     {
         MutateInternal(mutation, selectionToMutate);
         _runUpdateEventsThrottle.RunAction(SynchronizationContext.Current);
     }
 
-    public async Task MutateAsync(ListMutation<RenderableImage> mutation, ListSelection<RenderableImage>? selectionToMutate = null)
+    public async Task MutateAsync(ListMutation<ProcessedImage> mutation, ListSelection<ProcessedImage>? selectionToMutate = null)
     {
         await Task.Run(() => MutateInternal(mutation, selectionToMutate));
         _runUpdateEventsThrottle.RunAction(SynchronizationContext.Current);
     }
 
-    private void MutateInternal(ListMutation<RenderableImage> mutation, ListSelection<RenderableImage>? selectionToMutate)
+    private void MutateInternal(ListMutation<ProcessedImage> mutation, ListSelection<ProcessedImage>? selectionToMutate)
     {
         if (!ReferenceEquals(selectionToMutate, null))
         {

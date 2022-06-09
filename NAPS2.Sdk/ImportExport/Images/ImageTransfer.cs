@@ -2,7 +2,7 @@ using NAPS2.Serialization;
 
 namespace NAPS2.ImportExport.Images;
 
-public class ImageTransfer : TransferHelper<IEnumerable<RenderableImage>, ImageTransferData>
+public class ImageTransfer : TransferHelper<IEnumerable<ProcessedImage>, ImageTransferData>
 {
     private readonly ImageContext _imageContext;
 
@@ -11,7 +11,7 @@ public class ImageTransfer : TransferHelper<IEnumerable<RenderableImage>, ImageT
         _imageContext = imageContext;
     }
 
-    protected override ImageTransferData AsData(IEnumerable<RenderableImage> images)
+    protected override ImageTransferData AsData(IEnumerable<ProcessedImage> images)
     {
         var transfer = new ImageTransferData
         {

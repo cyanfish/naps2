@@ -84,11 +84,11 @@ internal static class TwainApi
             _settings = settings;
             _tw = tw;
             _form = form;
-            Bitmaps = new List<RenderableImage>();
+            Bitmaps = new List<ProcessedImage>();
             form.Activated += FTwainGui_Activated;
         }
 
-        public List<RenderableImage> Bitmaps { get; }
+        public List<ProcessedImage> Bitmaps { get; }
 
         public bool PreFilterMessage(ref Message m)
         {

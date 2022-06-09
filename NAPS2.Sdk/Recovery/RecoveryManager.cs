@@ -24,7 +24,7 @@ public class RecoveryManager
         _operationProgress = operationProgress;
     }
 
-    public void RecoverScannedImages(Action<RenderableImage> imageCallback, RecoveryParams recoveryParams)
+    public void RecoverScannedImages(Action<ProcessedImage> imageCallback, RecoveryParams recoveryParams)
     {
         var op = new RecoveryOperation(_scanningContext, _imageContext, _formFactory);
         if (op.Start(imageCallback, recoveryParams))
@@ -56,7 +56,7 @@ public class RecoveryManager
             AllowBackground = true;
         }
 
-        public bool Start(Action<RenderableImage> imageCallback, RecoveryParams recoveryParams)
+        public bool Start(Action<ProcessedImage> imageCallback, RecoveryParams recoveryParams)
         {
             Status = new OperationStatus
             {
@@ -119,7 +119,7 @@ public class RecoveryManager
             return false;
         }
 
-        private async Task<bool> DoRecover(Action<RenderableImage> imageCallback, RecoveryParams recoveryParams)
+        private async Task<bool> DoRecover(Action<ProcessedImage> imageCallback, RecoveryParams recoveryParams)
         {
             Status.MaxProgress = _recoveryIndex.Images.Count;
             InvokeStatusChanged();
@@ -134,26 +134,26 @@ public class RecoveryManager
                 string imagePath = Path.Combine(_folderToRecoverFrom.FullName, indexImage.FileName);
                 // TODO use UnownedFileStorage
                 var transformState = new TransformState(indexImage.TransformList.ToImmutableList());
-                RenderableImage renderableImage;
+                ProcessedImage processedImage;
                 if (".pdf".Equals(Path.GetExtension(imagePath), StringComparison.InvariantCultureIgnoreCase))
                 {
                     string newPath = _scanningContext.FileStorageManager.NextFilePath() + ".pdf";
                     File.Copy(imagePath, newPath);
                     // TODO: Some kind of factory for pdf renderable image creation and default settings
-                    renderableImage = new RenderableImage(new ImageFileStorage(newPath), new ImageMetadata(BitDepth.Color, false), transformState);
+                    processedImage = new ProcessedImage(new ImageFileStorage(newPath), new ImageMetadata(BitDepth.Color, false), transformState);
                 }
                 else
                 {
                     using var image = _imageContext.Load(imagePath);
-                    renderableImage = new RenderableImage(image, new ImageMetadata(indexImage.BitDepth.ToBitDepth(), indexImage.HighQuality), transformState);
+                    processedImage = new ProcessedImage(image, new ImageMetadata(indexImage.BitDepth.ToBitDepth(), indexImage.HighQuality), transformState);
                 }
 
                 if (recoveryParams.ThumbnailSize.HasValue)
                 {
-                    renderableImage.PostProcessingData.Thumbnail = _imageContext.PerformTransform(renderableImage.RenderToImage(), new ThumbnailTransform(recoveryParams.ThumbnailSize.Value));
+                    processedImage.PostProcessingData.Thumbnail = _imageContext.PerformTransform(processedImage.RenderToImage(), new ThumbnailTransform(recoveryParams.ThumbnailSize.Value));
                 }
 
-                imageCallback(renderableImage);
+                imageCallback(processedImage);
 
                 Status.CurrentProgress++;
                 InvokeStatusChanged();

@@ -18,7 +18,7 @@ public class UndoStack : IDisposable
 
     public Memento Current => _current.Value;
 
-    public bool Push(IEnumerable<RenderableImage> images)
+    public bool Push(IEnumerable<ProcessedImage> images)
     {
         return Push(new Memento(images.ToImmutableList()));
     }

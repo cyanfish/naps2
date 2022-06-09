@@ -1,6 +1,6 @@
 namespace NAPS2.Images;
 
-public abstract class ImageListMutation : ListMutation<RenderableImage>
+public abstract class ImageListMutation : ListMutation<ProcessedImage>
 {
     public class RotateFlip : ImageListMutation
     {
@@ -13,9 +13,9 @@ public abstract class ImageListMutation : ListMutation<RenderableImage>
             _angle = angle;
         }
 
-        public override void Apply(List<RenderableImage> list, ref ListSelection<RenderableImage> selection)
+        public override void Apply(List<ProcessedImage> list, ref ListSelection<ProcessedImage> selection)
         {
-            foreach (RenderableImage img in selection)
+            foreach (ProcessedImage img in selection)
             {
                 lock (img)
                 {
@@ -32,11 +32,11 @@ public abstract class ImageListMutation : ListMutation<RenderableImage>
         }
     }
 
-    public class ResetTransforms : ListMutation<RenderableImage>
+    public class ResetTransforms : ListMutation<ProcessedImage>
     {
-        public override void Apply(List<RenderableImage> list, ref ListSelection<RenderableImage> selection)
+        public override void Apply(List<ProcessedImage> list, ref ListSelection<ProcessedImage> selection)
         {
-            foreach (RenderableImage img in selection)
+            foreach (ProcessedImage img in selection)
             {
                 // TODO: Propagate transforms
                 // img.ResetTransforms();

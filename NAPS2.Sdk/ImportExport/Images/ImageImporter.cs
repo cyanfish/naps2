@@ -54,7 +54,7 @@ public class ImageImporter : IImageImporter
 
                         bool lossless = frame.OriginalFileFormat is ImageFileFormat.Bmp or ImageFileFormat.Png;
                         // TODO: This is a similar pattern as the Pdf importer, consider abstracting
-                        var image = new RenderableImage(frame, new ImageMetadata(BitDepth.Color, lossless), TransformState.Empty);
+                        var image = new ProcessedImage(frame, new ImageMetadata(BitDepth.Color, lossless), TransformState.Empty);
                         if (importParams.ThumbnailSize.HasValue)
                         {
                             image.PostProcessingData.Thumbnail = _imageContext.PerformTransform(frame, new ThumbnailTransform(importParams.ThumbnailSize.Value));

@@ -8,7 +8,7 @@ public class UndoStackTests : ContextualTexts
     [Fact]
     public void MementoComparison()
     {
-        var emptyList = ImmutableList<RenderableImage>.Empty;
+        var emptyList = ImmutableList<ProcessedImage>.Empty;
         
         var emptyMemento = Memento.Empty;
         Assert.Equal(new Memento(emptyList), emptyMemento);
@@ -42,7 +42,7 @@ public class UndoStackTests : ContextualTexts
     [Fact]
     public void PushUndoRedoUndo()
     {
-        var emptyList = ImmutableList<RenderableImage>.Empty;
+        var emptyList = ImmutableList<ProcessedImage>.Empty;
 
         var stack = new UndoStack(10);
         var image = CreateScannedImage();

@@ -9,9 +9,9 @@ namespace NAPS2.Images;
 /// Mementos are equal if their contents are equal. This allows no-ops to be identified so that you don't hit Ctrl+Z and
 /// have nothing happen.
 /// </summary>
-public record Memento(ImmutableList<RenderableImage> Images) : IDisposable
+public record Memento(ImmutableList<ProcessedImage> Images) : IDisposable
 {
-    public static readonly Memento Empty = new Memento(ImmutableList.Create<RenderableImage>());
+    public static readonly Memento Empty = new Memento(ImmutableList.Create<ProcessedImage>());
 
     // TODO: Do we need to implement equality better at the RenderableImage level?
     public virtual bool Equals(Memento? other)

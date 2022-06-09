@@ -179,7 +179,7 @@ public abstract class ImageContext : IDisposable
     /// <returns></returns>
     public abstract IEnumerable<IMemoryImage> LoadFrames(string path, out int count);
 
-    public abstract IMemoryImage Render(RenderableImage renderableImage);
+    public abstract IMemoryImage Render(ProcessedImage processedImage);
 
     /// <summary>
     /// Creates a new empty image.

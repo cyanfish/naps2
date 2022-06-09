@@ -10,7 +10,7 @@ public static class SaveSeparatorHelper
     /// <param name="separator"></param>
     /// <param name="splitSize"></param>
     /// <returns></returns>
-    public static IEnumerable<List<RenderableImage>> SeparateScans(IEnumerable<IEnumerable<RenderableImage>> scans, SaveSeparator separator, int splitSize = 1)
+    public static IEnumerable<List<ProcessedImage>> SeparateScans(IEnumerable<IEnumerable<ProcessedImage>> scans, SaveSeparator separator, int splitSize = 1)
     {
         if (separator == SaveSeparator.FilePerScan)
         {
@@ -32,7 +32,7 @@ public static class SaveSeparatorHelper
         }
         else if (separator == SaveSeparator.PatchT)
         {
-            var images = new List<RenderableImage>();
+            var images = new List<ProcessedImage>();
             foreach (var scan in scans)
             {
                 foreach (var image in scan)
@@ -43,7 +43,7 @@ public static class SaveSeparatorHelper
                         if (images.Count > 0)
                         {
                             yield return images;
-                            images = new List<RenderableImage>();
+                            images = new List<ProcessedImage>();
                         }
                     }
                     else

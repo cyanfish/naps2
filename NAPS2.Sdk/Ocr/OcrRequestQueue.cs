@@ -36,7 +36,7 @@ public class OcrRequestQueue
         _operationProgress = operationProgress;
     }
 
-    public bool HasCachedResult(IOcrEngine ocrEngine, RenderableImage image, OcrParams ocrParams)
+    public bool HasCachedResult(IOcrEngine ocrEngine, ProcessedImage image, OcrParams ocrParams)
     {
         var reqParams = new OcrRequestParams(image, ocrEngine, ocrParams);
         lock (this)
@@ -45,7 +45,7 @@ public class OcrRequestQueue
         }
     }
 
-    public async Task<OcrResult?> QueueForeground(IOcrEngine? ocrEngine, RenderableImage image, string tempImageFilePath, OcrParams ocrParams, CancellationToken cancelToken)
+    public async Task<OcrResult?> QueueForeground(IOcrEngine? ocrEngine, ProcessedImage image, string tempImageFilePath, OcrParams ocrParams, CancellationToken cancelToken)
     {
         OcrRequest req;
         lock (this)
@@ -100,7 +100,7 @@ public class OcrRequestQueue
         return req.Result;
     }
 
-    public void QueueBackground(RenderableImage image, string tempImageFilePath, OcrParams ocrParams)
+    public void QueueBackground(ProcessedImage image, string tempImageFilePath, OcrParams ocrParams)
     {
         OcrRequest req;
         CancellationTokenSource cts = new CancellationTokenSource();

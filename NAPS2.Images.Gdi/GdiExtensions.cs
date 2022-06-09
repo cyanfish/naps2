@@ -5,15 +5,15 @@ namespace NAPS2.Images.Gdi;
 
 public static class GdiExtensions
 {
-    public static IMemoryImage RenderToImage(this RenderableImage renderableImage)
+    public static IMemoryImage RenderToImage(this ProcessedImage processedImage)
     {
-        return new GdiImage(renderableImage.RenderToBitmap());
+        return new GdiImage(processedImage.RenderToBitmap());
     }
 
-    public static Bitmap RenderToBitmap(this RenderableImage renderableImage)
+    public static Bitmap RenderToBitmap(this ProcessedImage processedImage)
     {
         // TODO: Need to take transforms into account
-        switch (renderableImage.Storage)
+        switch (processedImage.Storage)
         {
             // TODO: We probably want to support PDFs somehow (which presumably use fileStorage?)
             case ImageFileStorage fileStorage:
@@ -23,7 +23,7 @@ public static class GdiExtensions
             case GdiImage image:
                 return image.Clone().AsBitmap();
         }
-        throw new ArgumentException("Unsupported image storage: " + renderableImage.Storage);
+        throw new ArgumentException("Unsupported image storage: " + processedImage.Storage);
     }
 
     public static Bitmap AsBitmap(this IMemoryImage image)

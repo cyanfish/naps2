@@ -28,9 +28,9 @@ namespace NAPS2.WinForms
             InitializeComponent();
         }
 
-        public RenderableImage Image { get; set; }
+        public ProcessedImage Image { get; set; }
 
-        public List<RenderableImage> SelectedImages { get; set; }
+        public List<ProcessedImage> SelectedImages { get; set; }
 
         protected virtual IEnumerable<Transform> Transforms => throw new NotImplementedException();
 
@@ -38,7 +38,7 @@ namespace NAPS2.WinForms
 
         private bool TransformMultiple => SelectedImages != null && checkboxApplyToSelected.Checked;
 
-        private IEnumerable<RenderableImage> ImagesToTransform => TransformMultiple ? SelectedImages : Enumerable.Repeat(Image, 1);
+        private IEnumerable<ProcessedImage> ImagesToTransform => TransformMultiple ? SelectedImages : Enumerable.Repeat(Image, 1);
 
         protected virtual Bitmap RenderPreview()
         {

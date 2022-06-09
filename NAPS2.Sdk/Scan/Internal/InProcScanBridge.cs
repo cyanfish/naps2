@@ -22,6 +22,6 @@ internal class InProcScanBridge : IScanBridge
     public Task<List<ScanDevice>> GetDeviceList(ScanOptions options) =>
         _remoteScanController.GetDeviceList(options);
 
-    public Task Scan(ScanOptions options, CancellationToken cancelToken, IScanEvents scanEvents, Action<RenderableImage, PostProcessingContext> callback) =>
+    public Task Scan(ScanOptions options, CancellationToken cancelToken, IScanEvents scanEvents, Action<ProcessedImage, PostProcessingContext> callback) =>
         _remoteScanController.Scan(options, cancelToken, scanEvents, callback);
 }

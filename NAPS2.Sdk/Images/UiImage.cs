@@ -3,7 +3,7 @@ namespace NAPS2.Images;
 // TODO: Implement & use this class in the NAPS2 UI
 public class UiImage
 {
-    private RenderableImage RenderableImage { get; set; }
+    private ProcessedImage ProcessedImage { get; set; }
 
 
 

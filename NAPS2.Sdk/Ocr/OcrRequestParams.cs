@@ -1,3 +1,3 @@
 ﻿namespace NAPS2.Ocr;
 
-public record OcrRequestParams(RenderableImage RenderableImage, IOcrEngine Engine, OcrParams OcrParams);
+public record OcrRequestParams(ProcessedImage ProcessedImage, IOcrEngine Engine, OcrParams OcrParams);

@@ -97,7 +97,7 @@ public class WorkerChannelTests : ContextualTexts
     {
         var remoteScanController = new MockRemoteScanController
         {
-            Images = new List<RenderableImage>
+            Images = new List<ProcessedImage>
             {
                 CreateScannedImage(),
                 CreateScannedImage()
@@ -105,7 +105,7 @@ public class WorkerChannelTests : ContextualTexts
         };
 
         using var channel = Start(remoteScanController);
-        var receivedImages = new List<RenderableImage>();
+        var receivedImages = new List<ProcessedImage>();
         await channel.Client.Scan(ScanningContext, new ScanOptions(),
             CancellationToken.None, new ScanEvents(() => { }, _ => { }), 
             (img, path) => { receivedImages.Add(img); });
@@ -118,7 +118,7 @@ public class WorkerChannelTests : ContextualTexts
     {
         var remoteScanController = new MockRemoteScanController
         {
-            Images = new List<RenderableImage>
+            Images = new List<ProcessedImage>
             {
                 CreateScannedImage(),
                 CreateScannedImage()
@@ -138,13 +138,13 @@ public class WorkerChannelTests : ContextualTexts
 
     private class MockRemoteScanController : IRemoteScanController
     {
-        public List<RenderableImage> Images { get; set; } = new();
+        public List<ProcessedImage> Images { get; set; } = new();
 
         public Exception Exception { get; set; }
 
         public Task<List<ScanDevice>> GetDeviceList(ScanOptions options) => throw new NotSupportedException();
 
-        public Task Scan(ScanOptions options, CancellationToken cancelToken, IScanEvents scanEvents, Action<RenderableImage, PostProcessingContext> callback)
+        public Task Scan(ScanOptions options, CancellationToken cancelToken, IScanEvents scanEvents, Action<ProcessedImage, PostProcessingContext> callback)
         {
             return Task.Run(() =>
             {

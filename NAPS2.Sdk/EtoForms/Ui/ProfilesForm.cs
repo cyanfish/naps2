@@ -143,7 +143,7 @@ public class ProfilesForm : EtoDialogBase
             ).Aligned());
     }
 
-    public Action<RenderableImage>? ImageCallback { get; set; }
+    public Action<ProcessedImage>? ImageCallback { get; set; }
 
     private ScanProfile? SelectedProfile => _listView.Selection.SingleOrDefault();
 

@@ -2,7 +2,7 @@
 
 public class PageEndEventArgs : EventArgs
 {
-    public PageEndEventArgs(int pageNumber, RenderableImage image)
+    public PageEndEventArgs(int pageNumber, ProcessedImage image)
     {
         PageNumber = pageNumber;
         Image = image;
@@ -10,5 +10,5 @@ public class PageEndEventArgs : EventArgs
 
     public int PageNumber { get; }
 
-    public RenderableImage Image { get; set; }
+    public ProcessedImage Image { get; set; }
 }

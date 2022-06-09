@@ -32,7 +32,7 @@ public class BatchScanPerformer : IBatchScanPerformer
         _profileManager = profileManager;
     }
 
-    public async Task PerformBatchScan(IConfigProvider<BatchSettings> settings, FormBase batchForm, Action<RenderableImage> imageCallback, Action<string> progressCallback, CancellationToken cancelToken)
+    public async Task PerformBatchScan(IConfigProvider<BatchSettings> settings, FormBase batchForm, Action<ProcessedImage> imageCallback, Action<string> progressCallback, CancellationToken cancelToken)
     {
         var state = new BatchState(_scanPerformer, _pdfExporter, _operationFactory, _pdfSettingsProvider, _ocrEngineManager, _formFactory, _config, _profileManager)
         {
@@ -58,7 +58,7 @@ public class BatchScanPerformer : IBatchScanPerformer
 
         private ScanProfile _profile;
         private ScanParams _scanParams;
-        private List<List<RenderableImage>> _scans;
+        private List<List<ProcessedImage>> _scans;
 
         public BatchState(IScanPerformer scanPerformer, PdfExporter pdfExporter, IOperationFactory operationFactory,
             IConfigProvider<PdfSettings> pdfSettingsProvider, OcrEngineManager ocrEngineManager, IFormFactory formFactory, ScopedConfig config, IProfileManager profileManager)
@@ -81,7 +81,7 @@ public class BatchScanPerformer : IBatchScanPerformer
 
         public FormBase BatchForm { get; set; }
 
-        public Action<RenderableImage> LoadImageCallback { get; set; }
+        public Action<ProcessedImage> LoadImageCallback { get; set; }
 
         public async Task Do()
         {
@@ -130,7 +130,7 @@ public class BatchScanPerformer : IBatchScanPerformer
         {
             await Task.Run(async () =>
             {
-                _scans = new List<List<RenderableImage>>();
+                _scans = new List<List<ProcessedImage>>();
 
                 if (Settings.Get(c => c.ScanType) == BatchScanType.Single)
                 {
@@ -176,7 +176,7 @@ public class BatchScanPerformer : IBatchScanPerformer
 
         private async Task<bool> InputOneScan(int scanNumber)
         {
-            var scan = new List<RenderableImage>();
+            var scan = new List<ProcessedImage>();
             int pageNumber = 1;
             ProgressCallback(scanNumber == -1
                 ? string.Format(MiscResources.BatchStatusPage, pageNumber++)
@@ -200,7 +200,7 @@ public class BatchScanPerformer : IBatchScanPerformer
             return true;
         }
 
-        private async Task DoScan(int scanNumber, List<RenderableImage> scan, int pageNumber)
+        private async Task DoScan(int scanNumber, List<ProcessedImage> scan, int pageNumber)
         {
             var source = await _scanPerformer.PerformScan(_profile, _scanParams, BatchForm.SafeHandle(), CancelToken);
             await source.ForEach(image =>
@@ -256,7 +256,7 @@ public class BatchScanPerformer : IBatchScanPerformer
             }
         }
 
-        private async Task Save(Placeholders placeholders, int i, List<RenderableImage> images)
+        private async Task Save(Placeholders placeholders, int i, List<ProcessedImage> images)
         {
             if (images.Count == 0)
             {

@@ -45,7 +45,7 @@ public class WorkerServiceAdapter
         return resp.DeviceListXml.FromXml<List<ScanDevice>>();
     }
 
-    public async Task Scan(ScanningContext scanningContext, ScanOptions options, CancellationToken cancelToken, IScanEvents scanEvents, Action<RenderableImage, string> imageCallback)
+    public async Task Scan(ScanningContext scanningContext, ScanOptions options, CancellationToken cancelToken, IScanEvents scanEvents, Action<ProcessedImage, string> imageCallback)
     {
         var req = new ScanRequest
         {
@@ -80,7 +80,7 @@ public class WorkerServiceAdapter
         return resp.ReturnCodeXml.FromXml<MapiSendMailReturnCode>();
     }
 
-    public byte[] RenderThumbnail(ImageContext imageContext, RenderableImage image, int size)
+    public byte[] RenderThumbnail(ImageContext imageContext, ProcessedImage image, int size)
     {
         var req = new RenderThumbnailRequest
         {
