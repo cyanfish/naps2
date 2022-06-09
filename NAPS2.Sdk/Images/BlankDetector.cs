@@ -12,7 +12,7 @@ public static class BlankDetector
     private const double COVERAGE_THRESHOLD_MIN = 0.00;
     private const double COVERAGE_THRESHOLD_MAX = 0.01;
 
-    public static bool IsBlank(IImage image, int whiteThresholdNorm, int coverageThresholdNorm)
+    public static bool IsBlank(IMemoryImage image, int whiteThresholdNorm, int coverageThresholdNorm)
     {
         if (image.PixelFormat == ImagePixelFormat.BW1)
         {
@@ -31,7 +31,7 @@ public static class BlankDetector
         return IsBlankRGB(image, whiteThresholdNorm, coverageThresholdNorm);
     }
 
-    private static bool IsBlankRGB(IImage image, int whiteThresholdNorm, int coverageThresholdNorm)
+    private static bool IsBlankRGB(IMemoryImage image, int whiteThresholdNorm, int coverageThresholdNorm)
     {
         var whiteThreshold = (int)Math.Round(WHITE_THRESHOLD_MIN + (whiteThresholdNorm / 100.0) * (WHITE_THRESHOLD_MAX - WHITE_THRESHOLD_MIN));
         var coverageThreshold = COVERAGE_THRESHOLD_MIN + (coverageThresholdNorm / 100.0) * (COVERAGE_THRESHOLD_MAX - COVERAGE_THRESHOLD_MIN);

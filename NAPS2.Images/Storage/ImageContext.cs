@@ -17,7 +17,7 @@ public abstract class ImageContext : IDisposable
     /// for future use in Transform.Perform and Transform.PerformAll with the specified image type.
     /// </summary>
     /// <param name="transformerObj"></param>
-    public void RegisterTransformers<TImage>(object transformerObj) where TImage : IImage
+    public void RegisterTransformers<TImage>(object transformerObj) where TImage : IMemoryImage
     {
         foreach (var method in transformerObj.GetType().GetMethods().Where(x => x.GetCustomAttributes(typeof(TransformerAttribute), true).Any()))
         {
@@ -25,7 +25,7 @@ public abstract class ImageContext : IDisposable
             var storageType = methodParams[0].ParameterType;
             var transformType = methodParams[1].ParameterType;
             if (methodParams.Length == 2 &&
-                typeof(IImage).IsAssignableFrom(method.ReturnType) &&
+                typeof(IMemoryImage).IsAssignableFrom(method.ReturnType) &&
                 storageType.IsAssignableFrom(typeof(TImage)) &&
                 typeof(Transform).IsAssignableFrom(transformType))
             {
@@ -42,12 +42,12 @@ public abstract class ImageContext : IDisposable
     /// <param name="image"></param>
     /// <param name="transform"></param>
     /// <returns></returns>
-    public IImage PerformTransform(IImage image, Transform transform)
+    public IMemoryImage PerformTransform(IMemoryImage image, Transform transform)
     {
         try
         {
             var (transformer, perform) = _transformers[(image.GetType(), transform.GetType())];
-            return (IImage)perform.Invoke(transformer, new object[] { image, transform });
+            return (IMemoryImage)perform.Invoke(transformer, new object[] { image, transform });
         }
         catch (KeyNotFoundException)
         {
@@ -62,16 +62,16 @@ public abstract class ImageContext : IDisposable
     /// <param name="transforms"></param>
     /// <returns></returns>
     // TODO: Also perform simplification here
-    public IImage PerformAllTransforms(IImage image, IEnumerable<Transform> transforms) => transforms.Aggregate(image, PerformTransform);
+    public IMemoryImage PerformAllTransforms(IMemoryImage image, IEnumerable<Transform> transforms) => transforms.Aggregate(image, PerformTransform);
 
     public Type ImageType { get; }
 
-    public void ConfigureBackingStorage<TStorage>() where TStorage : IStorage
+    public void ConfigureBackingStorage<TStorage>() where TStorage : IImageStorage
     {
         BackingStorageType = typeof(TStorage);
     }
 
-    public Type BackingStorageType { get; private set; } = typeof(IStorage);
+    public Type BackingStorageType { get; private set; } = typeof(IImageStorage);
 
     public IImageMetadataFactory ImageMetadataFactory { get; set; } = new StubImageMetadataFactory();
 
@@ -151,7 +151,7 @@ public abstract class ImageContext : IDisposable
     /// </summary>
     /// <param name="path">The image path.</param>
     /// <returns></returns>
-    public abstract IImage Load(string path);
+    public abstract IMemoryImage Load(string path);
 
     // TODO: The original method had an extension/fileformat. Is that relevant?
     // Old doc: A file extension hinting at the image format. When possible, the contents of the stream should be used to definitively determine the image format.
@@ -160,7 +160,7 @@ public abstract class ImageContext : IDisposable
     /// </summary>
     /// <param name="stream">The image data, in a common format (JPEG, PNG, etc).</param>
     /// <returns></returns>
-    public abstract IImage Load(Stream stream);
+    public abstract IMemoryImage Load(Stream stream);
 
     // TODO: The original doc said that only the currently enumerated image is guaranteed to be valid. Is this still true?
     /// <summary>
@@ -169,7 +169,7 @@ public abstract class ImageContext : IDisposable
     /// <param name="stream">The image data, in a common format (JPEG, PNG, etc).</param>
     /// <param name="count">The number of returned images.</param>
     /// <returns></returns>
-    public abstract IEnumerable<IImage> LoadFrames(Stream stream, out int count);
+    public abstract IEnumerable<IMemoryImage> LoadFrames(Stream stream, out int count);
 
     /// <summary>
     /// Loads an image that may have multiple frames (e.g. a TIFF file) from the given file path.
@@ -177,9 +177,9 @@ public abstract class ImageContext : IDisposable
     /// <param name="path">The image path.</param>
     /// <param name="count">The number of returned images.</param>
     /// <returns></returns>
-    public abstract IEnumerable<IImage> LoadFrames(string path, out int count);
+    public abstract IEnumerable<IMemoryImage> LoadFrames(string path, out int count);
 
-    public abstract IImage Render(RenderableImage renderableImage);
+    public abstract IMemoryImage Render(RenderableImage renderableImage);
 
     /// <summary>
     /// Creates a new empty image.
@@ -188,7 +188,7 @@ public abstract class ImageContext : IDisposable
     /// <param name="height">The image height in pixels.</param>
     /// <param name="pixelFormat">The image's pixel format.</param>
     /// <returns></returns>
-    public abstract IImage Create(int width, int height, ImagePixelFormat pixelFormat);
+    public abstract IMemoryImage Create(int width, int height, ImagePixelFormat pixelFormat);
 
     protected virtual void Dispose(bool disposing)
     {
@@ -204,5 +204,5 @@ public abstract class ImageContext : IDisposable
         GC.SuppressFinalize(this);
     }
 
-    public abstract string SaveSmallestFormat(IImage image, string pathWithoutExtension, BitDepth bitDepth, bool highQuality, int quality, out ImageFileFormat imageFileFormat);
+    public abstract string SaveSmallestFormat(IMemoryImage image, string pathWithoutExtension, BitDepth bitDepth, bool highQuality, int quality, out ImageFileFormat imageFileFormat);
 }

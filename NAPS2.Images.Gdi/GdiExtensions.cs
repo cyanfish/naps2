@@ -5,7 +5,7 @@ namespace NAPS2.Images.Gdi;
 
 public static class GdiExtensions
 {
-    public static IImage RenderToImage(this RenderableImage renderableImage)
+    public static IMemoryImage RenderToImage(this RenderableImage renderableImage)
     {
         return new GdiImage(renderableImage.RenderToBitmap());
     }
@@ -16,9 +16,9 @@ public static class GdiExtensions
         switch (renderableImage.Storage)
         {
             // TODO: We probably want to support PDFs somehow (which presumably use fileStorage?)
-            case FileStorage fileStorage:
+            case ImageFileStorage fileStorage:
                 return new Bitmap(fileStorage.FullPath);
-            case MemoryStreamStorage memoryStreamStorage:
+            case MemoryStreamImageStorage memoryStreamStorage:
                 return new Bitmap(memoryStreamStorage.Stream);
             case GdiImage image:
                 return image.Clone().AsBitmap();
@@ -26,7 +26,7 @@ public static class GdiExtensions
         throw new ArgumentException("Unsupported image storage: " + renderableImage.Storage);
     }
 
-    public static Bitmap AsBitmap(this IImage image)
+    public static Bitmap AsBitmap(this IMemoryImage image)
     {
         var gdiImage = image as GdiImage ?? throw new ArgumentException("Expected a GdiImage", nameof(image));
         return gdiImage.Bitmap;

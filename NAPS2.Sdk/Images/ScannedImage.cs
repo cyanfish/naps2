@@ -5,20 +5,20 @@ namespace NAPS2.Images;
 
 public class ScannedImage : IDisposable
 {
-    private IImage? _thumbnail;
+    private IMemoryImage? _thumbnail;
     private int _thumbnailState;
 
     private BarcodeDetection _barcodeDetection = BarcodeDetection.NotAttempted;
     private bool _disposed;
     private int _snapshotCount;
 
-    public ScannedImage(IStorage backingStorage, IImageMetadata metadata)
+    public ScannedImage(IImageStorage backingStorage, IImageMetadata metadata)
     {
         BackingStorage = backingStorage;
         Metadata = metadata;
     }
 
-    public IStorage BackingStorage { get; }
+    public IImageStorage BackingStorage { get; }
 
     public IImageMetadata Metadata { get; }
 
@@ -82,7 +82,7 @@ public class ScannedImage : IDisposable
         ThumbnailInvalidated?.Invoke(this, new EventArgs());
     }
 
-    public IImage? GetThumbnail()
+    public IMemoryImage? GetThumbnail()
     {
         lock (this)
         {
@@ -90,7 +90,7 @@ public class ScannedImage : IDisposable
         }
     }
 
-    public void SetThumbnail(IImage image, int? state = null)
+    public void SetThumbnail(IMemoryImage image, int? state = null)
     {
         lock (this)
         {

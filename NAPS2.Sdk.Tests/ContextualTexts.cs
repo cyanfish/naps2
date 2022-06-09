@@ -34,7 +34,7 @@ public class ContextualTexts : IDisposable
 
     public void UseFileStorage()
     {
-        ImageContext.ConfigureBackingStorage<FileStorage>();
+        ImageContext.ConfigureBackingStorage<ImageFileStorage>();
     }
 
     public void UseRecovery()

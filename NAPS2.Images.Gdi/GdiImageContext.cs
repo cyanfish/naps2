@@ -12,25 +12,25 @@ public class GdiImageContext : ImageContext
         // RegisterConverters(new PdfConverters(this));
     }
 
-    public override IImage Load(string path) => new GdiImage(new Bitmap(path));
+    public override IMemoryImage Load(string path) => new GdiImage(new Bitmap(path));
 
-    public override IImage Load(Stream stream) => new GdiImage(new Bitmap(stream));
+    public override IMemoryImage Load(Stream stream) => new GdiImage(new Bitmap(stream));
 
-    public override IEnumerable<IImage> LoadFrames(Stream stream, out int count)
+    public override IEnumerable<IMemoryImage> LoadFrames(Stream stream, out int count)
     {
         var bitmap = new Bitmap(stream);
         count = bitmap.GetFrameCount(FrameDimension.Page);
         return EnumerateFrames(bitmap, count);
     }
 
-    public override IEnumerable<IImage> LoadFrames(string path, out int count)
+    public override IEnumerable<IMemoryImage> LoadFrames(string path, out int count)
     {
         var bitmap = new Bitmap(path);
         count = bitmap.GetFrameCount(FrameDimension.Page);
         return EnumerateFrames(bitmap, count);
     }
 
-    private IEnumerable<IImage> EnumerateFrames(Bitmap bitmap, int count)
+    private IEnumerable<IMemoryImage> EnumerateFrames(Bitmap bitmap, int count)
     {
         using (bitmap)
         {
@@ -42,9 +42,9 @@ public class GdiImageContext : ImageContext
         }
     }
 
-    public override IImage Render(RenderableImage renderableImage) => renderableImage.RenderToImage();
+    public override IMemoryImage Render(RenderableImage renderableImage) => renderableImage.RenderToImage();
 
-    public override IImage Create(int width, int height, ImagePixelFormat pixelFormat)
+    public override IMemoryImage Create(int width, int height, ImagePixelFormat pixelFormat)
     {
         var bitmap = new Bitmap(width, height, pixelFormat.AsPixelFormat());
         if (pixelFormat == ImagePixelFormat.BW1)
@@ -57,7 +57,7 @@ public class GdiImageContext : ImageContext
         return new GdiImage(bitmap);
     }
 
-    public override string SaveSmallestFormat(IImage image, string pathWithoutExtension, BitDepth bitDepth, bool highQuality, int quality, out ImageFileFormat imageFileFormat)
+    public override string SaveSmallestFormat(IMemoryImage image, string pathWithoutExtension, BitDepth bitDepth, bool highQuality, int quality, out ImageFileFormat imageFileFormat)
     {
         var result = ScannedImageHelper.SaveSmallestBitmap(image.AsBitmap(), pathWithoutExtension, bitDepth, highQuality, quality, out var imageFormat);
         imageFileFormat = imageFormat.AsImageFileFormat();

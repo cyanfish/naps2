@@ -5,7 +5,7 @@ public class RenderableImage : IDisposable
 {
     private readonly RefCount.Token _token;
 
-    internal RenderableImage(IStorage storage, ImageMetadata metadata, TransformState transformState, RefCount refCount)
+    internal RenderableImage(IImageStorage storage, ImageMetadata metadata, TransformState transformState, RefCount refCount)
     {
         Storage = storage;
         Metadata = metadata;
@@ -13,7 +13,7 @@ public class RenderableImage : IDisposable
         _token = refCount.NewToken();
     }
 
-    public RenderableImage(IStorage storage, ImageMetadata metadata, TransformState transformState)
+    public RenderableImage(IImageStorage storage, ImageMetadata metadata, TransformState transformState)
         : this(storage, metadata, transformState, new RefCount(storage))
     {
     }
@@ -21,7 +21,7 @@ public class RenderableImage : IDisposable
     // TODO: Make this an immutable record and include it in the constructor
     public PostProcessingData PostProcessingData { get; } = new();
 
-    public IStorage Storage { get; }
+    public IImageStorage Storage { get; }
 
     public ImageMetadata Metadata { get; }
 

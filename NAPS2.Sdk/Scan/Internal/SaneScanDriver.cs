@@ -44,7 +44,7 @@ internal class SaneScanDriver : IScanDriver
         });
     }
 
-    public Task Scan(ScanOptions options, CancellationToken cancelToken, IScanEvents scanEvents, Action<IImage> callback)
+    public Task Scan(ScanOptions options, CancellationToken cancelToken, IScanEvents scanEvents, Action<IMemoryImage> callback)
     {
         return Task.Run(() =>
         {
@@ -334,7 +334,7 @@ internal class SaneScanDriver : IScanDriver
         return keyValueOptions;
     }
 
-    private bool Transfer(Lazy<KeyValueScanOptions> keyValueOptions, ScanOptions options, CancellationToken cancelToken, IScanEvents scanEvents, Action<IImage> callback)
+    private bool Transfer(Lazy<KeyValueScanOptions> keyValueOptions, ScanOptions options, CancellationToken cancelToken, IScanEvents scanEvents, Action<IMemoryImage> callback)
     {
         Stream stream = ScanOne(options.Device.ID, keyValueOptions.Value, cancelToken, scanEvents);
         if (stream == null)

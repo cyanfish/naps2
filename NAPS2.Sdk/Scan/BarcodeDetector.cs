@@ -12,7 +12,7 @@ public static class BarcodeDetector
 {
     private static readonly BarcodeFormat PATCH_T_FORMAT = BarcodeFormat.CODE_39;
 
-    public static BarcodeDetection Detect(IImage image, BarcodeDetectionOptions options)
+    public static BarcodeDetection Detect(IMemoryImage image, BarcodeDetectionOptions options)
     {
         // TODO: Probably shouldn't have DetectBarcodes be in the options class? The call shouldn't happen at all.
         if (!options.DetectBarcodes)

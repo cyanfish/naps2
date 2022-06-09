@@ -24,30 +24,30 @@ public class ScanningContext : IDisposable
 
     public OcrRequestQueue OcrRequestQueue { get; set; }
     
-    public RenderableImage CreateRenderableImage(IStorage storage, BitDepth bitDepth, bool lossless, int quality, IEnumerable<Transform> transforms)
+    public RenderableImage CreateRenderableImage(IImageStorage storage, BitDepth bitDepth, bool lossless, int quality, IEnumerable<Transform> transforms)
     {
         var convertedStorage = ConvertStorageIfNeeded(storage, bitDepth, lossless, quality);
         var metadata = new ImageMetadata(bitDepth, lossless);
         return new RenderableImage(convertedStorage, metadata, new TransformState(transforms.ToImmutableList()));
     }
 
-    private IStorage ConvertStorageIfNeeded(IStorage storage, BitDepth bitDepth, bool lossless, int quality)
+    private IImageStorage ConvertStorageIfNeeded(IImageStorage storage, BitDepth bitDepth, bool lossless, int quality)
     {
         switch (storage)
         {
-            case IImage image:
+            case IMemoryImage image:
                 if (FileStorageManager == null)
                 {
                     return image.Clone();
                 }
                 return WriteImageToBackingFile(image, bitDepth, lossless, quality);
-            case FileStorage fileStorage:
+            case ImageFileStorage fileStorage:
                 if (FileStorageManager != null)
                 {
                     return fileStorage;
                 }
                 return ImageContext.Load(fileStorage.FullPath);
-            case MemoryStreamStorage memoryStreamStorage:
+            case MemoryStreamImageStorage memoryStreamStorage:
                 var loadedImage = ImageContext.Load(memoryStreamStorage.Stream);
                 if (FileStorageManager == null)
                 {
@@ -60,7 +60,7 @@ public class ScanningContext : IDisposable
         throw new ArgumentException();
     }
 
-    private IStorage WriteImageToBackingFile(IImage image, BitDepth bitDepth, bool lossless, int quality)
+    private IImageStorage WriteImageToBackingFile(IMemoryImage image, BitDepth bitDepth, bool lossless, int quality)
     {
         if (FileStorageManager == null)
         {
@@ -68,7 +68,7 @@ public class ScanningContext : IDisposable
         }
         var path = FileStorageManager.NextFilePath();
         var fullPath = ImageContext.SaveSmallestFormat(image, path, bitDepth, lossless, quality, out _);
-        return new FileStorage(fullPath, false);
+        return new ImageFileStorage(fullPath, false);
     }
 
     public void Dispose()

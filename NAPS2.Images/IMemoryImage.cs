@@ -1,6 +1,10 @@
 ﻿namespace NAPS2.Images;
 
-public interface IImage : IStorage
+/// <summary>
+/// A common interface to wrap around platform-specific implementations of an in-memory image
+/// (e.g. System.Drawing.Bitmap for Windows Forms).
+/// </summary>
+public interface IMemoryImage : IImageStorage
 {
     int Width { get; }
 
@@ -24,5 +28,5 @@ public interface IImage : IStorage
 
     void Save(Stream stream, ImageFileFormat imageFormat);
 
-    IImage Clone();
+    IMemoryImage Clone();
 }

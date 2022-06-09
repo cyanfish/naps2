@@ -27,7 +27,7 @@ public class ImageImporter : IImageImporter
                     return;
                 }
 
-                IEnumerable<IImage> toImport;
+                IEnumerable<IMemoryImage> toImport;
                 int frameCount;
                 try
                 {

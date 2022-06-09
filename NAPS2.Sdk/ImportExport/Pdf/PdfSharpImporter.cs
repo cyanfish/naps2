@@ -175,7 +175,7 @@ public class PdfSharpImporter : IPdfImporter
         document.Save(pdfPath);
 
         // TODO: Are we 100% sure we want RenderableImage to support PDFs? Need to implement that.
-        var image = new RenderableImage(new FileStorage(pdfPath), new ImageMetadata(BitDepth.Color, false), TransformState.Empty);
+        var image = new RenderableImage(new ImageFileStorage(pdfPath), new ImageMetadata(BitDepth.Color, false), TransformState.Empty);
         if (importParams.ThumbnailSize.HasValue || importParams.BarcodeDetectionOptions.DetectBarcodes)
         {
             using var bitmap = image.RenderToImage();
@@ -211,7 +211,7 @@ public class PdfSharpImporter : IPdfImporter
 
         var buffer = imageObject.Stream.UnfilteredValue;
 
-        IImage storage;
+        IMemoryImage storage;
         BitDepth bitDepth;
         switch (bitsPerComponent)
         {
@@ -243,7 +243,7 @@ public class PdfSharpImporter : IPdfImporter
         }
     }
 
-    private static void RgbToBitmapUnmanaged(IImage image, byte[] rgbBuffer)
+    private static void RgbToBitmapUnmanaged(IMemoryImage image, byte[] rgbBuffer)
     {
         var data = image.Lock(LockMode.WriteOnly, out var scan0, out var stride);
         int height = image.Height;
@@ -268,7 +268,7 @@ public class PdfSharpImporter : IPdfImporter
         }
     }
 
-    private static void BlackAndWhiteToBitmapUnmanaged(IImage image, byte[] bwBuffer)
+    private static void BlackAndWhiteToBitmapUnmanaged(IMemoryImage image, byte[] bwBuffer)
     {
         var data = image.Lock(LockMode.WriteOnly, out var scan0, out var stride);
         int height = image.Height;

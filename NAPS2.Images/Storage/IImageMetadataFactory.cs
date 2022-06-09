@@ -2,7 +2,7 @@
 
 public interface IImageMetadataFactory
 {
-    IImageMetadata CreateMetadata(IStorage storage);
+    IImageMetadata CreateMetadata(IImageStorage storage);
         
     void CommitAllMetadata();
 }

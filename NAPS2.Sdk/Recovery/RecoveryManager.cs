@@ -140,7 +140,7 @@ public class RecoveryManager
                     string newPath = _scanningContext.FileStorageManager.NextFilePath() + ".pdf";
                     File.Copy(imagePath, newPath);
                     // TODO: Some kind of factory for pdf renderable image creation and default settings
-                    renderableImage = new RenderableImage(new FileStorage(newPath), new ImageMetadata(BitDepth.Color, false), transformState);
+                    renderableImage = new RenderableImage(new ImageFileStorage(newPath), new ImageMetadata(BitDepth.Color, false), transformState);
                 }
                 else
                 {

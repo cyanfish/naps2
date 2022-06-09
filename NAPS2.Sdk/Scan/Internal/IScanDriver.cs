@@ -6,5 +6,5 @@ internal interface IScanDriver
 {
     Task<List<ScanDevice>> GetDeviceList(ScanOptions options);
 
-    Task Scan(ScanOptions options, CancellationToken cancelToken, IScanEvents scanEvents, Action<IImage> callback);
+    Task Scan(ScanOptions options, CancellationToken cancelToken, IScanEvents scanEvents, Action<IMemoryImage> callback);
 }

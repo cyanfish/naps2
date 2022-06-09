@@ -54,11 +54,11 @@ public class ImageSerializationTests : ContextualTexts
         using var sourceContext = new ScanningContext(new GdiImageContext());//.UseRecovery(Path.Combine(FolderPath, "source"));
         sourceContext.FileStorageManager = new FileStorageManager(Path.Combine(FolderPath, "source"));
         new DirectoryInfo(sourceContext.FileStorageManager.FolderPath).Create();
-        sourceContext.ImageContext.ConfigureBackingStorage<FileStorage>();
+        sourceContext.ImageContext.ConfigureBackingStorage<ImageFileStorage>();
         using var destContext = new ScanningContext(new GdiImageContext());//.UseRecovery(Path.Combine(FolderPath, "dest"));
         destContext.FileStorageManager = new FileStorageManager(Path.Combine(FolderPath, "dest"));
         new DirectoryInfo(destContext.FileStorageManager.FolderPath).Create();
-        destContext.ImageContext.ConfigureBackingStorage<FileStorage>();
+        destContext.ImageContext.ConfigureBackingStorage<ImageFileStorage>();
 
         using var sourceImage = sourceContext.CreateRenderableImage(
             new GdiImage(new Bitmap(100, 100)),
@@ -66,11 +66,11 @@ public class ImageSerializationTests : ContextualTexts
             true, 
             75, 
             new []{ new BrightnessTransform(100) });
-        var sourceFilePath = Assert.IsType<FileStorage>(sourceImage.Storage).FullPath;
+        var sourceFilePath = Assert.IsType<ImageFileStorage>(sourceImage.Storage).FullPath;
 
         var serializedImage = SerializedImageHelper.Serialize(sourceImage, new SerializedImageHelper.SerializeOptions());
         using var destImage = SerializedImageHelper.Deserialize(destContext, serializedImage, new SerializedImageHelper.DeserializeOptions());
-        var destFilePath = Assert.IsType<FileStorage>(destImage.Storage).FullPath;
+        var destFilePath = Assert.IsType<ImageFileStorage>(destImage.Storage).FullPath;
             
         // Backing file should be copied
         Assert.NotEqual(sourceFilePath, destFilePath);

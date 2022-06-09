@@ -4,7 +4,7 @@ namespace NAPS2.Sdk.Tests.Asserts;
 
 public static class ImageAsserts
 {
-    public static unsafe void Similar(IImage first, IImage second, double rmseThreshold)
+    public static unsafe void Similar(IMemoryImage first, IMemoryImage second, double rmseThreshold)
     {
         Assert.Equal(first.Width, second.Width);
         Assert.Equal(first.Height, second.Height);

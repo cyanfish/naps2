@@ -28,9 +28,9 @@ public abstract class Deskewer
     private const double CLUSTER_TARGET_SPREAD = 2.01;
     private const double IGNORE_EDGE_FRACTION = 0.01;
 
-    public static RotationTransform GetDeskewTransform(IImage image) => new RotationTransform(-GetSkewAngle(image));
+    public static RotationTransform GetDeskewTransform(IMemoryImage image) => new RotationTransform(-GetSkewAngle(image));
         
-    public static double GetSkewAngle(IImage image)
+    public static double GetSkewAngle(IMemoryImage image)
     {
         var bitArrays = UnsafeImageOps.ConvertToBitArrays(image);
 

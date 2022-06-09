@@ -11,7 +11,7 @@ public static class SerializedImageHelper
         {
             throw new ArgumentException();
         }
-        if (options.RequireFileStorage && image.Storage is not FileStorage)
+        if (options.RequireFileStorage && image.Storage is not ImageFileStorage)
         {
             throw new InvalidOperationException("FileStorage is required for serialization.");
         }
@@ -39,7 +39,7 @@ public static class SerializedImageHelper
 
         switch (image.Storage)
         {
-            case FileStorage fileStorage:
+            case ImageFileStorage fileStorage:
                 if (options.RequireMemoryStorage)
                 {
                     using var stream = File.OpenRead(fileStorage.FullPath);
@@ -50,10 +50,10 @@ public static class SerializedImageHelper
                     result.FilePath = fileStorage.FullPath;
                 }
                 break;
-            case MemoryStreamStorage memoryStreamStorage:
+            case MemoryStreamImageStorage memoryStreamStorage:
                 result.FileContent = ByteString.FromStream(memoryStreamStorage.Stream);
                 break;
-            case IImage imageStorage:
+            case IMemoryImage imageStorage:
                 var fileFormat = imageStorage.OriginalFileFormat == ImageFileFormat.Unspecified
                     ? ImageFileFormat.Jpeg
                     : imageStorage.OriginalFileFormat;
@@ -65,16 +65,16 @@ public static class SerializedImageHelper
 
     public static RenderableImage Deserialize(ScanningContext scanningContext, SerializedImage serializedImage, DeserializeOptions options)
     {
-        IStorage storage;
+        IImageStorage storage;
         if (!string.IsNullOrEmpty(serializedImage.FilePath))
         {
             if (serializedImage.TransferOwnership)
             {
-                storage = new FileStorage(serializedImage.FilePath);
+                storage = new ImageFileStorage(serializedImage.FilePath);
             }
             else if (options.ShareFileStorage)
             {
-                storage = new FileStorage(serializedImage.FilePath, true);
+                storage = new ImageFileStorage(serializedImage.FilePath, true);
             }
             else
             {
@@ -82,13 +82,13 @@ public static class SerializedImageHelper
                 // TODO: Handle no file storage
                 string newPath = scanningContext.FileStorageManager.NextFilePath();
                 File.Copy(serializedImage.FilePath, newPath);
-                storage = new FileStorage(newPath);
+                storage = new ImageFileStorage(newPath);
             }
         }
         else
         {
             var memoryStream = new MemoryStream(serializedImage.FileContent.ToByteArray());
-            storage = new MemoryStreamStorage(memoryStream);
+            storage = new MemoryStreamImageStorage(memoryStream);
         }
 
         var renderableImage = scanningContext.CreateRenderableImage(

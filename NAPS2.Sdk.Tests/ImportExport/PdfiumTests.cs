@@ -13,8 +13,8 @@ public class PdfiumTests : ContextualTexts
         var path = Path.Combine(FolderPath, "word.pdf");
         File.WriteAllBytes(path, PdfiumTestsData.word);
 
-        IImage expectedPage1 = new GdiImage(PdfiumTestsData.word_p1);
-        IImage expectedPage2 = new GdiImage(PdfiumTestsData.word_p2);
+        IMemoryImage expectedPage1 = new GdiImage(PdfiumTestsData.word_p1);
+        IMemoryImage expectedPage2 = new GdiImage(PdfiumTestsData.word_p2);
 
         var images = new PdfiumPdfRenderer(ImageContext).Render(path, 300).ToList();
 

@@ -30,7 +30,7 @@ internal class WiaScanDriver : IScanDriver
         });
     }
 
-    public Task Scan(ScanOptions options, CancellationToken cancelToken, IScanEvents scanEvents, Action<IImage> callback)
+    public Task Scan(ScanOptions options, CancellationToken cancelToken, IScanEvents scanEvents, Action<IMemoryImage> callback)
     {
         return Task.Run(() =>
         {
@@ -79,7 +79,7 @@ internal class WiaScanDriver : IScanDriver
 
         public IScanEvents ScanEvents { get; set; }
 
-        public Action<IImage> Callback { get; set; }
+        public Action<IMemoryImage> Callback { get; set; }
 
         public void Scan(WiaVersion wiaVersion)
         {

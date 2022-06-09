@@ -296,7 +296,7 @@ public static class UnsafeImageOps
         }
     }
 
-    private static int GetBytesPerPixel(IImage bitmap)
+    private static int GetBytesPerPixel(IMemoryImage bitmap)
     {
         if (bitmap.PixelFormat == ImagePixelFormat.ARGB32)
         {
@@ -369,7 +369,7 @@ public static class UnsafeImageOps
         return monoBitmap;
     }
 
-    public static unsafe BitArray[] ConvertToBitArrays(IImage bitmap)
+    public static unsafe BitArray[] ConvertToBitArrays(IMemoryImage bitmap)
     {
         bool bitPerPixel = bitmap.PixelFormat == ImagePixelFormat.BW1;
         int bytesPerPixel = bitPerPixel ? 0 : GetBytesPerPixel(bitmap);

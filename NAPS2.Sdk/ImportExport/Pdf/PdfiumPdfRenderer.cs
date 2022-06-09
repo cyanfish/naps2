@@ -23,7 +23,7 @@ public class PdfiumPdfRenderer : IPdfRenderer
         _imageContext = imageContext;
     }
 
-    public IEnumerable<IImage> Render(string path, float dpi)
+    public IEnumerable<IMemoryImage> Render(string path, float dpi)
     {
         var nativeLib = LazyNativeLib.Value;
             

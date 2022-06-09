@@ -25,7 +25,7 @@ internal class RemotePostProcessor : IRemotePostProcessor
     //    return image;
     //}
 
-    public RenderableImage PostProcess(IImage image, ScanOptions options, PostProcessingContext postProcessingContext)
+    public RenderableImage PostProcess(IMemoryImage image, ScanOptions options, PostProcessingContext postProcessingContext)
     {
         using (image = DoInitialTransforms(image, options))
         {
@@ -43,7 +43,7 @@ internal class RemotePostProcessor : IRemotePostProcessor
         }
     }
 
-    private IImage DoInitialTransforms(IImage original, ScanOptions options)
+    private IMemoryImage DoInitialTransforms(IMemoryImage original, ScanOptions options)
     {
         if (!PlatformCompat.System.CanUseWin32 && options.BitDepth == BitDepth.BlackAndWhite)
         {
@@ -110,7 +110,7 @@ internal class RemotePostProcessor : IRemotePostProcessor
     }
 
     // TODO: This is more than just transforms.
-    private void DoRevertibleTransforms(RenderableImage renderableImage, IImage image, ScanOptions options, PostProcessingContext postProcessingContext)
+    private void DoRevertibleTransforms(RenderableImage renderableImage, IMemoryImage image, ScanOptions options, PostProcessingContext postProcessingContext)
     {
         var data = renderableImage.PostProcessingData;
         if (options.ThumbnailSize.HasValue)
@@ -141,7 +141,7 @@ internal class RemotePostProcessor : IRemotePostProcessor
         }
     }
 
-    public string? SaveForBackgroundOcr(IImage bitmap, ScanOptions options)
+    public string? SaveForBackgroundOcr(IMemoryImage bitmap, ScanOptions options)
     {
         if (options.DoOcr)
         {
@@ -155,7 +155,7 @@ internal class RemotePostProcessor : IRemotePostProcessor
         return null;
     }
 
-    private RenderableImage AddTransformAndUpdateThumbnail(RenderableImage renderableImage, ref IImage image, Transform transform, ScanOptions options)
+    private RenderableImage AddTransformAndUpdateThumbnail(RenderableImage renderableImage, ref IMemoryImage image, Transform transform, ScanOptions options)
     {
         if (transform.IsNull)
         {

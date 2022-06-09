@@ -5,5 +5,5 @@
 /// </summary>
 internal interface IRemotePostProcessor
 {
-    RenderableImage PostProcess(IImage image, ScanOptions options, PostProcessingContext postProcessingContext);
+    RenderableImage PostProcess(IMemoryImage image, ScanOptions options, PostProcessingContext postProcessingContext);
 }

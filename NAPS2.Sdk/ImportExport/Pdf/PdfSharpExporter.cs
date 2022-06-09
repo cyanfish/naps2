@@ -117,7 +117,7 @@ public class PdfSharpExporter : PdfExporter
         foreach (var image in images)
         {
             // TODO: Maybe have a PdfFileStorage?
-            if (image.Storage is FileStorage fileStorage && IsPdfFile(fileStorage) && image.TransformState.IsEmpty)
+            if (image.Storage is ImageFileStorage fileStorage && IsPdfFile(fileStorage) && image.TransformState.IsEmpty)
             {
                 CopyPdfPageToDoc(document, fileStorage);
             }
@@ -142,7 +142,7 @@ public class PdfSharpExporter : PdfExporter
         return true;
     }
 
-    private static bool IsPdfFile(FileStorage fileStorage) => Path.GetExtension(fileStorage.FullPath)?.Equals(".pdf", StringComparison.InvariantCultureIgnoreCase) ?? false;
+    private static bool IsPdfFile(ImageFileStorage imageFileStorage) => Path.GetExtension(imageFileStorage.FullPath)?.Equals(".pdf", StringComparison.InvariantCultureIgnoreCase) ?? false;
 
     private async Task<bool> BuildDocumentWithOcr(ProgressHandler? progressCallback, CancellationToken cancelToken, PdfDocument document, PdfCompat compat, ICollection<RenderableImage> images, OcrContext ocrContext, IOcrEngine ocrEngine)
     {
@@ -163,7 +163,7 @@ public class PdfSharpExporter : PdfExporter
             bool importedPdfPassThrough = false;
 
             // TODO: Maybe have a PdfFileStorage?
-            if (image.Storage is FileStorage fileStorage && IsPdfFile(fileStorage) && image.TransformState.IsEmpty)
+            if (image.Storage is ImageFileStorage fileStorage && IsPdfFile(fileStorage) && image.TransformState.IsEmpty)
             {
                 importedPdfPassThrough = true;
                 page = CopyPdfPageToDoc(document, fileStorage);
@@ -277,10 +277,10 @@ public class PdfSharpExporter : PdfExporter
         return false;
     }
 
-    private PdfPage CopyPdfPageToDoc(PdfDocument destDoc, FileStorage fileStorage)
+    private PdfPage CopyPdfPageToDoc(PdfDocument destDoc, ImageFileStorage imageFileStorage)
     {
         // Pull the PDF content directly to maintain objects, dpi, etc.
-        PdfDocument sourceDoc = PdfReader.Open(fileStorage.FullPath, PdfDocumentOpenMode.Import);
+        PdfDocument sourceDoc = PdfReader.Open(imageFileStorage.FullPath, PdfDocumentOpenMode.Import);
         PdfPage sourcePage = sourceDoc.Pages.Cast<PdfPage>().Single();
         PdfPage destPage = destDoc.AddPage(sourcePage);
         destPage.CustomValues["/NAPS2ImportedPage"] = new PdfCustomValue(new byte[] { 0xFF });

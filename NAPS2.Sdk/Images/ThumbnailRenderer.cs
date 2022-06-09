@@ -13,7 +13,7 @@ public class ThumbnailRenderer
         _imageContext = imageContext;
     }
 
-    public IImage Render(RenderableImage renderableImage, int outputSize)
+    public IMemoryImage Render(RenderableImage renderableImage, int outputSize)
     {
         var image = renderableImage.RenderToImage();
         var transformList = renderableImage.TransformState.Transforms;

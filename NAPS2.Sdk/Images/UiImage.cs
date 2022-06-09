@@ -56,7 +56,7 @@ public class UiImage
         // ThumbnailInvalidated?.Invoke(this, new EventArgs());
     }
 
-    public IImage? GetThumbnail()
+    public IMemoryImage? GetThumbnail()
     {
         // lock (this)
         // {
@@ -65,7 +65,7 @@ public class UiImage
         return null;
     }
 
-    public void SetThumbnail(IImage image, int? state = null)
+    public void SetThumbnail(IMemoryImage image, int? state = null)
     {
         // lock (this)
         // {

@@ -3,7 +3,10 @@ using System.Drawing.Imaging;
 
 namespace NAPS2.Images.Gdi;
 
-public class GdiImage : IImage
+/// <summary>
+/// An implementation of IMemoryImage that wraps a GDI+ image (System.Drawing.Bitmap).
+/// </summary>
+public class GdiImage : IMemoryImage
 {
     public GdiImage(Bitmap bitmap)
     {
@@ -94,7 +97,7 @@ public class GdiImage : IImage
         Bitmap.Dispose();
     }
 
-    public IImage Clone()
+    public IMemoryImage Clone()
     {
         return new GdiImage((Bitmap)Bitmap.Clone());
     }

@@ -77,7 +77,7 @@ internal class TwainScanDriver : IScanDriver
         }
     }
 
-    public Task Scan(ScanOptions options, CancellationToken cancelToken, IScanEvents scanEvents, Action<IImage> callback)
+    public Task Scan(ScanOptions options, CancellationToken cancelToken, IScanEvents scanEvents, Action<IMemoryImage> callback)
     {
         return Task.Run(() =>
         {
@@ -101,7 +101,7 @@ internal class TwainScanDriver : IScanDriver
         });
     }
 
-    private void InternalScan(TwainDsm dsm, ScanOptions options, CancellationToken cancelToken, IScanEvents scanEvents, Action<IImage> callback)
+    private void InternalScan(TwainDsm dsm, ScanOptions options, CancellationToken cancelToken, IScanEvents scanEvents, Action<IMemoryImage> callback)
     {
         var dialogParent = options.DialogParent;
         if (dialogParent == IntPtr.Zero)
@@ -277,7 +277,7 @@ internal class TwainScanDriver : IScanDriver
         }
     }
 
-    private IImage GetBitmapFromMemXFer(byte[] memoryData, TWImageInfo imageInfo)
+    private IMemoryImage GetBitmapFromMemXFer(byte[] memoryData, TWImageInfo imageInfo)
     {
         int bytesPerPixel = memoryData.Length / (imageInfo.ImageWidth * imageInfo.ImageLength);
         var pixelFormat = bytesPerPixel == 0 ? ImagePixelFormat.BW1 : ImagePixelFormat.RGB24;

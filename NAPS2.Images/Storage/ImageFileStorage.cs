@@ -1,14 +1,14 @@
 ﻿namespace NAPS2.Images.Storage;
 
-public class FileStorage : IStorage
+public class ImageFileStorage : IImageStorage
 {
     private readonly bool _shared;
 
-    public FileStorage(string fullPath) : this(fullPath, false)
+    public ImageFileStorage(string fullPath) : this(fullPath, false)
     {
     }
 
-    public FileStorage(string fullPath, bool shared)
+    public ImageFileStorage(string fullPath, bool shared)
     {
         FullPath = fullPath ?? throw new ArgumentNullException(nameof(fullPath));
         _shared = shared;
