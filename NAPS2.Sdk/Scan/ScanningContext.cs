@@ -6,10 +6,18 @@ namespace NAPS2.Scan;
 
 public class ScanningContext : IDisposable
 {
+    private readonly ProcessedImageOwner _processedImageOwner = new();
+    
     // TODO: Make sure properties are initialized by callers (or something equivalent)
     public ScanningContext(ImageContext imageContext)
     {
         ImageContext = imageContext;
+    }
+
+    public ScanningContext(ImageContext imageContext, FileStorageManager fileStorageManager)
+    {
+        ImageContext = imageContext;
+        FileStorageManager = fileStorageManager;
     }
 
     // TODO: Figure out initialization etc.
@@ -28,7 +36,8 @@ public class ScanningContext : IDisposable
     {
         var convertedStorage = ConvertStorageIfNeeded(storage, bitDepth, lossless, quality);
         var metadata = new ImageMetadata(bitDepth, lossless);
-        return new ProcessedImage(convertedStorage, metadata, new TransformState(transforms.ToImmutableList()));
+        var image = new ProcessedImage(convertedStorage, metadata, new TransformState(transforms.ToImmutableList()), _processedImageOwner);
+        return image;
     }
 
     private IImageStorage ConvertStorageIfNeeded(IImageStorage storage, BitDepth bitDepth, bool lossless, int quality)
@@ -54,10 +63,11 @@ public class ScanningContext : IDisposable
                     return loadedImage;
                 }
                 return WriteImageToBackingFile(loadedImage, bitDepth, lossless, quality);
+            default:
+                // The only case that should hit this is a test with a mock
+                return storage;
         }
-        // TODO: Any other cases or issues here?
-        // TODO: Also it probably makes sense to abstract this based on the type of backend (filestorage/not)
-        throw new ArgumentException();
+        // TODO: It probably makes sense to abstract this based on the type of backend (filestorage/not)
     }
 
     private IImageStorage WriteImageToBackingFile(IMemoryImage image, BitDepth bitDepth, bool lossless, int quality)
@@ -73,8 +83,41 @@ public class ScanningContext : IDisposable
 
     public void Dispose()
     {
-        // TODO: Dispose images created via this scanning context
-        ImageContext.Dispose();
+        _processedImageOwner.Dispose();
         FileStorageManager?.Dispose();
+    }
+
+    private class ProcessedImageOwner : IProcessedImageOwner, IDisposable
+    {
+        private readonly HashSet<IDisposable> _disposables = new HashSet<IDisposable>();
+        
+        public void Register(IDisposable internalDisposable)
+        {
+            lock (this)
+            {
+                _disposables.Add(internalDisposable);
+            }
+        }
+
+        public void Unregister(IDisposable internalDisposable)
+        {
+            lock (this)
+            {
+                _disposables.Remove(internalDisposable);
+            }
+        }
+
+        public void Dispose()
+        {
+            IEnumerable<IDisposable> list;
+            lock (this)
+            {
+                list = _disposables.ToList();
+            }
+            foreach (var disposable in list)
+            {
+                disposable.Dispose();
+            }
+        }
     }
 }

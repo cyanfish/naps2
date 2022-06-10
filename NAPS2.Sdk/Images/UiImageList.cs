@@ -5,19 +5,19 @@ namespace NAPS2.Images;
 
 public class UiImageList
 {
-    private readonly ImageContext _imageContext;
+    private readonly RecoveryStorageManager _recoveryStorageManager;
     private readonly TimedThrottle _runUpdateEventsThrottle;
     private StateToken _savedState = new(ImmutableList<ProcessedImage.WeakReference>.Empty);
     private ListSelection<UiImage> _selection;
 
-    public UiImageList(ImageContext imageContext)
-        : this(imageContext, new List<UiImage>())
+    public UiImageList(RecoveryStorageManager recoveryStorageManager)
+        : this(recoveryStorageManager, new List<UiImage>())
     {
     }
 
-    public UiImageList(ImageContext imageContext, List<UiImage> images)
+    public UiImageList(RecoveryStorageManager recoveryStorageManager, List<UiImage> images)
     {
-        _imageContext = imageContext;
+        _recoveryStorageManager = recoveryStorageManager;
         _runUpdateEventsThrottle = new TimedThrottle(RunUpdateEvents, TimeSpan.FromMilliseconds(100));
         Images = images;
         _selection = ListSelection.Empty<UiImage>();
@@ -75,13 +75,8 @@ public class UiImageList
 
     private void RunUpdateEvents()
     {
-        UpdateImageMetadata();
+        _recoveryStorageManager.WriteIndex(Images);
         ImagesUpdated?.Invoke(this, EventArgs.Empty);
-    }
-
-    private void UpdateImageMetadata()
-    {
-        // TODO: Update RSM here I guess?
     }
 
     /// <summary>

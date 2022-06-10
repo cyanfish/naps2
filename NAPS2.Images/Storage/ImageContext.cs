@@ -3,7 +3,7 @@ using System.Reflection;
 
 namespace NAPS2.Images.Storage;
 
-public abstract class ImageContext : IDisposable
+public abstract class ImageContext
 {
     private readonly Dictionary<(Type, Type), (object, MethodInfo)> _transformers = new();
 
@@ -36,7 +36,7 @@ public abstract class ImageContext : IDisposable
     }
 
     // TODO: Describe ownership transfer
-    // TODO: Consider moving this to IImage
+    // TODO: Consider moving this to IMemoryImage
     /// <summary>
     /// Performs the specified transformation on the specified image using a compatible transformer.
     /// </summary>
@@ -74,44 +74,12 @@ public abstract class ImageContext : IDisposable
 
     public Type ImageType { get; }
 
-    public void ConfigureBackingStorage<TStorage>() where TStorage : IImageStorage
-    {
-        BackingStorageType = typeof(TStorage);
-    }
-
-    public Type BackingStorageType { get; private set; } = typeof(IImageStorage);
-
     // private IPdfRenderer _pdfRenderer;
     //
     // public IPdfRenderer PdfRenderer
     // {
     //     get => _pdfRenderer;
     //     set => _pdfRenderer = value ?? throw new ArgumentNullException(nameof(value));
-    // }
-
-    // public ImageContext UseFileStorage(string folderPath)
-    // {
-    //     FileStorageManager = new FileStorageManager(folderPath);
-    //     ImageMetadataFactory = new StubImageMetadataFactory();
-    //     ConfigureBackingStorage<FileStorage>();
-    //     return this;
-    // }
-    //
-    // public ImageContext UseFileStorage(FileStorageManager manager)
-    // {
-    //     FileStorageManager = manager;
-    //     ImageMetadataFactory = new StubImageMetadataFactory();
-    //     ConfigureBackingStorage<FileStorage>();
-    //     return this;
-    // }
-    //
-    // public ImageContext UseRecovery(string recoveryFolderPath)
-    // {
-    //     var rsm = RecoveryStorageManager.CreateFolder(recoveryFolderPath);
-    //     FileStorageManager = rsm;
-    //     ImageMetadataFactory = rsm;
-    //     ConfigureBackingStorage<FileStorage>();
-    //     return this;
     // }
 
     /// <summary>
@@ -157,20 +125,6 @@ public abstract class ImageContext : IDisposable
     /// <param name="pixelFormat">The image's pixel format.</param>
     /// <returns></returns>
     public abstract IMemoryImage Create(int width, int height, ImagePixelFormat pixelFormat);
-
-    protected virtual void Dispose(bool disposing)
-    {
-        if (disposing)
-        {
-            // _fileStorageManager.Dispose();
-        }
-    }
-
-    public void Dispose()
-    {
-        Dispose(true);
-        GC.SuppressFinalize(this);
-    }
 
     public abstract string SaveSmallestFormat(IMemoryImage image, string pathWithoutExtension, BitDepth bitDepth, bool highQuality, int quality, out ImageFileFormat imageFileFormat);
 }

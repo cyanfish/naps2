@@ -28,7 +28,7 @@ public class CommandLineIntegrationTests : ContextualTexts
     private async Task RunCommand(AutomatedScanningOptions options, params Bitmap[] imagesToScan)
     {
         var scanDriverFactory = new ScanDriverFactoryBuilder().WithScannedImages(imagesToScan).Build();
-        var kernel = new StandardKernel(new CommonModule(), new ConsoleModule(), new TestModule(ImageContext, scanDriverFactory, _testOutputHelper));
+        var kernel = new StandardKernel(new CommonModule(), new ConsoleModule(), new TestModule(ImageContext, scanDriverFactory, _testOutputHelper, FolderPath));
         var automatedScanning = kernel.Get<AutomatedScanning>(new ConstructorArgument("options", options));
         await automatedScanning.Execute();
     }
@@ -45,6 +45,7 @@ public class CommandLineIntegrationTests : ContextualTexts
             },
             BarcodeTestsData.color_image);
         PdfAsserts.AssertPageCount(1, $"{FolderPath}/test.pdf");
+        AssertRecoveryCleanedUp();
     }
 
     [Fact]
@@ -70,6 +71,12 @@ public class CommandLineIntegrationTests : ContextualTexts
         PdfAsserts.AssertPageCount(1, $"{FolderPath}/2.pdf");
         PdfAsserts.AssertPageCount(1, $"{FolderPath}/3.pdf");
         Assert.False(File.Exists($"{FolderPath}/4.pdf"));
+        AssertRecoveryCleanedUp();
+    }
+
+    private void AssertRecoveryCleanedUp()
+    {
+        Assert.False(new DirectoryInfo($"{FolderPath}/recovery").Exists);
     }
 
     // TODO: Add tests for all options, as well as key combinations
@@ -79,12 +86,15 @@ public class CommandLineIntegrationTests : ContextualTexts
         private readonly ImageContext _imageContext;
         private readonly IScanDriverFactory _scanDriverFactory;
         private readonly ITestOutputHelper _testOutputHelper;
+        private readonly string _folderPath;
 
-        public TestModule(ImageContext imageContext, IScanDriverFactory scanDriverFactory, ITestOutputHelper testOutputHelper)
+        public TestModule(ImageContext imageContext, IScanDriverFactory scanDriverFactory,
+            ITestOutputHelper testOutputHelper, string folderPath)
         {
             _imageContext = imageContext;
             _scanDriverFactory = scanDriverFactory;
             _testOutputHelper = testOutputHelper;
+            _folderPath = folderPath;
         }
 
         public override void Load()
@@ -94,6 +104,12 @@ public class CommandLineIntegrationTests : ContextualTexts
             Rebind<IScanDriverFactory>().ToConstant(_scanDriverFactory);
             Rebind<IScanBridgeFactory>().To<InProcScanBridgeFactory>();
             Rebind<ConsoleOutput>().ToSelf().WithConstructorArgument("writer", new TestOutputTextWriter(_testOutputHelper));
+            
+            string recoveryFolderPath = Path.Combine(_folderPath, "recovery");
+            var recoveryStorageManager = RecoveryStorageManager.CreateFolder(recoveryFolderPath);
+            var fileStorageManager = new FileStorageManager(recoveryFolderPath);
+            Kernel.Bind<RecoveryStorageManager>().ToConstant(recoveryStorageManager);
+            Kernel.Bind<FileStorageManager>().ToConstant(fileStorageManager);
         }
     }
 

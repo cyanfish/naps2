@@ -8,8 +8,10 @@ public class RecoveryModule : NinjectModule
 {
     public override void Load()
     {
-        // TODO: We still need to handle recovery metadata
         string recoveryFolderPath = Path.Combine(Paths.Recovery, Path.GetRandomFileName());
-        Kernel.Get<ScanningContext>().FileStorageManager = new FileStorageManager(recoveryFolderPath);
+        var recoveryStorageManager = RecoveryStorageManager.CreateFolder(recoveryFolderPath);
+        var fileStorageManager = new FileStorageManager(recoveryFolderPath);
+        Kernel.Bind<RecoveryStorageManager>().ToConstant(recoveryStorageManager);
+        Kernel.Bind<FileStorageManager>().ToConstant(fileStorageManager);
     }
 }

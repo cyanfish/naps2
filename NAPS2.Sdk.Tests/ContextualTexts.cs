@@ -11,15 +11,10 @@ public class ContextualTexts : IDisposable
     {
         FolderPath = $"naps2_test_temp/{Path.GetRandomFileName()}";
         Folder = Directory.CreateDirectory(FolderPath);
-        var tempPath = Path.Combine(FolderPath, "temp");
-        Directory.CreateDirectory(tempPath);
 
         ProfileManager = new StubProfileManager();
         ImageContext = new GdiImageContext();
-        ScanningContext = new ScanningContext(ImageContext)
-        {
-            FileStorageManager = new FileStorageManager(tempPath)
-        };
+        ScanningContext = new ScanningContext(ImageContext);
     }
 
     public IProfileManager ProfileManager { get; }
@@ -32,18 +27,6 @@ public class ContextualTexts : IDisposable
 
     public DirectoryInfo Folder { get; }
 
-    public void UseFileStorage()
-    {
-        ImageContext.ConfigureBackingStorage<ImageFileStorage>();
-    }
-
-    public void UseRecovery()
-    {
-        // TODO: Figure out recovery
-        var recoveryFolderPath = Path.Combine(FolderPath, "recovery", Path.GetRandomFileName());
-        //ScanningContext.UseRecovery(recoveryFolderPath);
-    }
-
     public ProcessedImage CreateScannedImage()
     {
         return new ProcessedImage(
@@ -54,7 +37,7 @@ public class ContextualTexts : IDisposable
 
     public virtual void Dispose()
     {
-        ImageContext.Dispose();
+        ScanningContext.Dispose();
         try
         {
             Directory.Delete(FolderPath, true);

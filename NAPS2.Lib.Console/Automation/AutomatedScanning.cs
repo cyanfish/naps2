@@ -29,6 +29,8 @@ public class AutomatedScanning
     private readonly IConfigProvider<PdfSettings> _pdfSettingsProvider;
     private readonly IConfigProvider<ImageSettings> _imageSettingsProvider;
     private readonly IProfileManager _profileManager;
+    private readonly RecoveryStorageManager _recoveryStorageManager;
+    private readonly ScanningContext _scanningContext;
 
     private readonly ConsoleOutput _output;
     private readonly AutomatedScanningOptions _options;
@@ -39,7 +41,7 @@ public class AutomatedScanning
     private List<string> _actualOutputPaths;
     private OcrParams _ocrParams;
 
-    public AutomatedScanning(ConsoleOutput output, AutomatedScanningOptions options, ImageContext imageContext, IScanPerformer scanPerformer, ErrorOutput errorOutput, IEmailProviderFactory emailProviderFactory, IScannedImageImporter scannedImageImporter, IOperationFactory operationFactory, OcrEngineManager ocrEngineManager, IFormFactory formFactory, ScopedConfig config, IProfileManager profileManager, OcrRequestQueue ocrRequestQueue)
+    public AutomatedScanning(ConsoleOutput output, AutomatedScanningOptions options, ImageContext imageContext, IScanPerformer scanPerformer, ErrorOutput errorOutput, IEmailProviderFactory emailProviderFactory, IScannedImageImporter scannedImageImporter, IOperationFactory operationFactory, OcrEngineManager ocrEngineManager, IFormFactory formFactory, ScopedConfig config, IProfileManager profileManager, OcrRequestQueue ocrRequestQueue, RecoveryStorageManager recoveryStorageManager, ScanningContext scanningContext)
     {
         _output = output;
         _options = options;
@@ -54,6 +56,8 @@ public class AutomatedScanning
         _config = config;
         _profileManager = profileManager;
         _ocrRequestQueue = ocrRequestQueue;
+        _recoveryStorageManager = recoveryStorageManager;
+        _scanningContext = scanningContext;
 
         _userTransact = config.User.BeginTransaction();
         _transactionConfig = config.WithTransaction(_userTransact);
@@ -128,10 +132,8 @@ public class AutomatedScanning
                 await EmailScannedImages();
             }
 
-            foreach (var image in AllImages)
-            {
-                image.Dispose();
-            }
+            _scanningContext.Dispose();
+            _recoveryStorageManager.Dispose();
         }
         catch (Exception ex)
         {
@@ -217,7 +219,7 @@ public class AutomatedScanning
 
         foreach (var scan in _scanList)
         {
-            var imageList = new UiImageList(_imageContext, scan.Select(x => new UiImage(x)).ToList());
+            var imageList = new UiImageList(_recoveryStorageManager, scan.Select(x => new UiImage(x)).ToList());
 
             if (_options.AltDeinterleave)
             {

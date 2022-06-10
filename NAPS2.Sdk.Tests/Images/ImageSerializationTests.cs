@@ -51,14 +51,10 @@ public class ImageSerializationTests : ContextualTexts
     public void SerializeImage()
     {
         // TODO: Rethink this initialization and recovery
-        using var sourceContext = new ScanningContext(new GdiImageContext());//.UseRecovery(Path.Combine(FolderPath, "source"));
-        sourceContext.FileStorageManager = new FileStorageManager(Path.Combine(FolderPath, "source"));
-        new DirectoryInfo(sourceContext.FileStorageManager.FolderPath).Create();
-        sourceContext.ImageContext.ConfigureBackingStorage<ImageFileStorage>();
-        using var destContext = new ScanningContext(new GdiImageContext());//.UseRecovery(Path.Combine(FolderPath, "dest"));
-        destContext.FileStorageManager = new FileStorageManager(Path.Combine(FolderPath, "dest"));
-        new DirectoryInfo(destContext.FileStorageManager.FolderPath).Create();
-        destContext.ImageContext.ConfigureBackingStorage<ImageFileStorage>();
+        using var sourceContext = new ScanningContext(new GdiImageContext(),
+            FileStorageManager.CreateFolder(Path.Combine(FolderPath, "source")));
+        using var destContext = new ScanningContext(new GdiImageContext(),
+            FileStorageManager.CreateFolder(Path.Combine(FolderPath, "dest")));
 
         using var sourceImage = sourceContext.CreateProcessedImage(
             new GdiImage(new Bitmap(100, 100)),

@@ -51,6 +51,8 @@ namespace NAPS2.WinForms
         private readonly IProfileManager _profileManager;
         private readonly UiImageList _imageList;
         private readonly ImageTransfer _imageTransfer;
+        private readonly RecoveryStorageManager _recoveryStorageManager;
+        private readonly ScanningContext _scanningContext;
 
         #endregion
 
@@ -72,7 +74,8 @@ namespace NAPS2.WinForms
             IScanPerformer scanPerformer, IScannedImagePrinter scannedImagePrinter, StillImage stillImage, IOperationFactory operationFactory,
             KeyboardShortcutManager ksm, ThumbnailRenderer thumbnailRenderer, WinFormsExportHelper exportHelper, ImageClipboard imageClipboard,
             NotificationManager notify, CultureInitializer cultureInitializer, IWorkerFactory workerFactory, OperationProgress operationProgress,
-            UpdateChecker updateChecker, IProfileManager profileManager, UiImageList imageList, ImageTransfer imageTransfer)
+            UpdateChecker updateChecker, IProfileManager profileManager, UiImageList imageList, ImageTransfer imageTransfer,
+            RecoveryStorageManager recoveryStorageManager, ScanningContext scanningContext)
         {
             _imageContext = imageContext;
             _stringWrapper = stringWrapper;
@@ -94,6 +97,8 @@ namespace NAPS2.WinForms
             _profileManager = profileManager;
             _imageList = imageList;
             _imageTransfer = imageTransfer;
+            _recoveryStorageManager = recoveryStorageManager;
+            _scanningContext = scanningContext;
             _userActions = new UserActions(imageContext, imageList);
             InitializeComponent();
 
@@ -467,11 +472,12 @@ namespace NAPS2.WinForms
             {
                 try
                 {
-                    _imageContext.Dispose();
+                    _scanningContext.Dispose();
+                    _recoveryStorageManager.Dispose();
                 }
                 catch (Exception ex)
                 {
-                    Log.ErrorException("ImageContext.Dispose failed", ex);
+                    Log.ErrorException("Recovery cleanup failed", ex);
                 }
             }
             _closed = true;
@@ -633,10 +639,9 @@ namespace NAPS2.WinForms
                 {
                     lock (_imageList)
                     {
-                        // TODO
-                        // scannedImage.ThumbnailChanged += ImageThumbnailChanged;
-                        // scannedImage.ThumbnailInvalidated += ImageThumbnailInvalidated;
                         var uiImage = new UiImage(scannedImage);
+                        uiImage.ThumbnailChanged += ImageThumbnailChanged;
+                        uiImage.ThumbnailInvalidated += ImageThumbnailInvalidated;
                         _imageList.Mutate(new ImageListMutation.InsertAfter(uiImage, last));
                         last = uiImage;
                     }
@@ -672,6 +677,7 @@ namespace NAPS2.WinForms
                         int index = _imageList.Images.IndexOf(image);
                         if (index != -1)
                         {
+                            // Update the displayed thumbnail
                             thumbnailList1.ReplaceThumbnail(index, image);
                         }
                     }
@@ -689,11 +695,11 @@ namespace NAPS2.WinForms
                     lock (_imageList)
                     {
                         int index = _imageList.Images.IndexOf(image);
-                        // TODO: UiImage
-                        // if (index != -1 && image.IsThumbnailDirty)
-                        // {
-                        //     thumbnailList1.ReplaceThumbnail(index, image);
-                        // }
+                        if (index != -1 && image.IsThumbnailDirty)
+                        {
+                            // Update the displayed thumbnail with an hourglass placeholder until it's re-rendered 
+                            thumbnailList1.ReplaceThumbnail(index, image);
+                        }
                     }
                 }
                 _renderThumbnailsWaitHandle.Set();

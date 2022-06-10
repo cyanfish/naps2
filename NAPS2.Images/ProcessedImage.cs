@@ -13,6 +13,7 @@ namespace NAPS2.Images;
 public class ProcessedImage : IDisposable, IEquatable<ProcessedImage>
 {
     private readonly RefCount.Token _token;
+    private bool _disposed;
 
     internal ProcessedImage(IImageStorage storage, ImageMetadata metadata, TransformState transformState,
         RefCount refCount)
@@ -23,9 +24,15 @@ public class ProcessedImage : IDisposable, IEquatable<ProcessedImage>
         _token = refCount.NewToken();
     }
 
-    public ProcessedImage(IImageStorage storage, ImageMetadata metadata, TransformState transformState)
-        : this(storage, metadata, transformState, new RefCount(storage))
+    public ProcessedImage(IImageStorage storage, ImageMetadata metadata, TransformState transformState,
+        IProcessedImageOwner? owner = null)
     {
+        Storage = storage;
+        Metadata = metadata;
+        TransformState = transformState;
+        var internalDisposer = new InternalDisposer(this, owner);
+        var refCount = new RefCount(internalDisposer);
+        _token = refCount.NewToken();
     }
 
     // TODO: Make this an immutable record and include it in the constructor
@@ -66,7 +73,18 @@ public class ProcessedImage : IDisposable, IEquatable<ProcessedImage>
     /// to be disposed before the underlying image storage is disposed.
     /// </summary>
     /// <returns></returns>
-    public ProcessedImage Clone() => new(Storage, Metadata, TransformState, _token.RefCount);
+    public ProcessedImage Clone()
+    {
+        lock (this)
+        {
+            if (_disposed)
+            {
+                throw new ObjectDisposedException(nameof(ProcessedImage));
+            }
+
+            return new(Storage, Metadata, TransformState, _token.RefCount);
+        }
+    }
 
     /// <summary>
     /// Creates a WeakReference wrapper for the current instance that doesn't have any effect on the instance's
@@ -101,8 +119,38 @@ public class ProcessedImage : IDisposable, IEquatable<ProcessedImage>
 
     public void Dispose()
     {
-        // TODO: Also dispose of postprocessingdata bitmap (?) - and add test
-        _token.Dispose();
+        lock (this)
+        {
+            _token.Dispose();
+            _disposed = true;
+        }
+    }
+
+    private class InternalDisposer : IDisposable
+    {
+        private readonly ProcessedImage _processedImage;
+        private bool _disposed;
+
+        public InternalDisposer(ProcessedImage processedImage, IProcessedImageOwner? owner)
+        {
+            _processedImage = processedImage;
+            owner?.Register(this);
+        }
+
+        public void Dispose()
+        {
+            lock (this)
+            {
+                if (_disposed)
+                {
+                    return;
+                }
+                _disposed = true;
+            }
+
+            _processedImage.Storage.Dispose();
+            _processedImage.PostProcessingData.Thumbnail?.Dispose();
+        }
     }
 
     public record WeakReference(ProcessedImage ProcessedImage);

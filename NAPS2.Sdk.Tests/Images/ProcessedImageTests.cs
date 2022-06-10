@@ -149,4 +149,19 @@ public class ProcessedImageTests : ContextualTexts
         image4.Dispose();
         storageMock.Verify(storage => storage.Dispose());
     }
+
+    [Fact]
+    public void CloneAfterDisposed()
+    {
+        var storageMock = new Mock<IImageStorage>();
+        var metadata = new ImageMetadata(BitDepth.Color, false);
+        var transformState = TransformState.Empty;
+        
+        var image = new ProcessedImage(storageMock.Object, metadata, transformState);
+        
+        image.Dispose();
+        storageMock.Verify(storage => storage.Dispose());
+
+        Assert.Throws<ObjectDisposedException>(() => image.Clone());
+    }
 }

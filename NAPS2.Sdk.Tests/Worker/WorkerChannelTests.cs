@@ -75,21 +75,13 @@ public class WorkerChannelTests : ContextualTexts
     [Fact]
     public async Task ScanWithMemoryStorage()
     {
-        ImageContext.ConfigureBackingStorage<GdiImage>();
         await ScanInternalTest();
     }
 
     [Fact]
     public async Task ScanWithFileStorage()
     {
-        UseFileStorage();
-        await ScanInternalTest();
-    }
-
-    [Fact]
-    public async Task ScanWithRecovery()
-    {
-        UseRecovery();
+        ScanningContext.FileStorageManager = FileStorageManager.CreateFolder(Path.Combine(FolderPath, "recovery"));
         await ScanInternalTest();
     }
 

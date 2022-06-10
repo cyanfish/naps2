@@ -10,11 +10,11 @@ internal class InProcScanBridge : IScanBridge
     private readonly IRemoteScanController _remoteScanController;
 
     public InProcScanBridge(ScanningContext scanningContext)
-        : this(new RemoteScanController(scanningContext))
+        : this(scanningContext, new RemoteScanController(scanningContext))
     {
     }
 
-    public InProcScanBridge(IRemoteScanController remoteScanController)
+    public InProcScanBridge(ScanningContext scanningContext, IRemoteScanController remoteScanController)
     {
         _remoteScanController = remoteScanController;
     }

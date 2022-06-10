@@ -7,6 +7,12 @@ public class FileStorageManager : IDisposable
     private readonly string _prefix = Path.GetRandomFileName();
     private int _fileNumber;
 
+    public static FileStorageManager CreateFolder(string folderPath)
+    {
+        new DirectoryInfo(folderPath).Create();
+        return new FileStorageManager(folderPath);
+    }
+
     public FileStorageManager(string folderPath)
     {
         FolderPath = folderPath;
