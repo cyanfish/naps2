@@ -13,8 +13,8 @@ public class ScanningContextTests : ContextualTexts
         var context = new ScanningContext(new GdiImageContext());
         var storage1 = new Mock<IImageStorage>();
         var storage2 = new Mock<IImageStorage>();
-        var image1 = context.CreateProcessedImage(storage1.Object, BitDepth.Color, false, 75, Enumerable.Empty<Transform>());
-        var image2 = context.CreateProcessedImage(storage2.Object, BitDepth.Color, false, 75, Enumerable.Empty<Transform>());
+        var image1 = context.CreateProcessedImage(storage1.Object);
+        var image2 = context.CreateProcessedImage(storage2.Object);
         
         storage1.VerifyNoOtherCalls();
         image1.Dispose();
@@ -30,8 +30,8 @@ public class ScanningContextTests : ContextualTexts
         var context = new ScanningContext(new GdiImageContext());
         var storage1 = new Mock<IImageStorage>();
         var storage2 = new Mock<IImageStorage>();
-        context.CreateProcessedImage(storage1.Object, BitDepth.Color, false, 75, Enumerable.Empty<Transform>());
-        context.CreateProcessedImage(storage2.Object, BitDepth.Color, false, 75, Enumerable.Empty<Transform>());
+        context.CreateProcessedImage(storage1.Object);
+        context.CreateProcessedImage(storage2.Object);
         
         storage1.VerifyNoOtherCalls();
         storage2.VerifyNoOtherCalls();

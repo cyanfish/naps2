@@ -1,4 +1,5 @@
 using System.Collections.Immutable;
+using System.Windows.Forms;
 using NAPS2.Ocr;
 using NAPS2.Remoting.Worker;
 
@@ -32,11 +33,26 @@ public class ScanningContext : IDisposable
 
     public OcrRequestQueue OcrRequestQueue { get; set; }
     
+    public ProcessedImage CreateProcessedImage(IImageStorage storage)
+    {
+        return CreateProcessedImage(storage, Enumerable.Empty<Transform>());
+    }
+    
+    public ProcessedImage CreateProcessedImage(IImageStorage storage, IEnumerable<Transform> transforms)
+    {
+        return CreateProcessedImage(storage, BitDepth.Color, false, -1, transforms);
+    }
+
     public ProcessedImage CreateProcessedImage(IImageStorage storage, BitDepth bitDepth, bool lossless, int quality, IEnumerable<Transform> transforms)
     {
         var convertedStorage = ConvertStorageIfNeeded(storage, bitDepth, lossless, quality);
         var metadata = new ImageMetadata(bitDepth, lossless);
-        var image = new ProcessedImage(convertedStorage, metadata, new TransformState(transforms.ToImmutableList()), _processedImageOwner);
+        var image = new ProcessedImage(
+            convertedStorage,
+            metadata,
+            new PostProcessingData(),
+            new TransformState(transforms.ToImmutableList()),
+            _processedImageOwner);
         return image;
     }
 

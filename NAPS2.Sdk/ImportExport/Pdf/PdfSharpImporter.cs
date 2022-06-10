@@ -2,6 +2,7 @@
 using System.Threading;
 using NAPS2.Dependencies;
 using NAPS2.Images.Gdi;
+using NAPS2.ImportExport.Images;
 using NAPS2.Scan;
 using PdfSharp.Pdf;
 using PdfSharp.Pdf.Advanced;
@@ -17,17 +18,22 @@ public class PdfSharpImporter : IPdfImporter
     private readonly ErrorOutput _errorOutput;
     private readonly IPdfPasswordProvider _pdfPasswordProvider;
     private readonly IComponentInstallPrompt _componentInstallPrompt;
+    private readonly ImportPostProcessor _importPostProcessor;
 
-    public PdfSharpImporter(ScanningContext scanningContext, ImageContext imageContext, ErrorOutput errorOutput, IPdfPasswordProvider pdfPasswordProvider, IComponentInstallPrompt componentInstallPrompt)
+    public PdfSharpImporter(ScanningContext scanningContext, ImageContext imageContext, ErrorOutput errorOutput,
+        IPdfPasswordProvider pdfPasswordProvider, IComponentInstallPrompt componentInstallPrompt,
+        ImportPostProcessor importPostProcessor)
     {
         _scanningContext = scanningContext;
         _imageContext = imageContext;
         _errorOutput = errorOutput;
         _pdfPasswordProvider = pdfPasswordProvider;
         _componentInstallPrompt = componentInstallPrompt;
+        _importPostProcessor = importPostProcessor;
     }
 
-    public ScannedImageSource Import(string filePath, ImportParams importParams, ProgressHandler progressCallback, CancellationToken cancelToken)
+    public ScannedImageSource Import(string filePath, ImportParams importParams, ProgressHandler progressCallback,
+        CancellationToken cancelToken)
     {
         var sink = new ScannedImageSink();
         Task.Run(async () =>
@@ -44,7 +50,8 @@ public class PdfSharpImporter : IPdfImporter
             {
                 PdfDocument document = PdfReader.Open(filePath, PdfDocumentOpenMode.Import, args =>
                 {
-                    if (!_pdfPasswordProvider.ProvidePassword(Path.GetFileName(filePath), passwordAttempts++, out args.Password))
+                    if (!_pdfPasswordProvider.ProvidePassword(Path.GetFileName(filePath), passwordAttempts++,
+                            out args.Password))
                     {
                         args.Abort = true;
                         aborted = true;
@@ -54,7 +61,8 @@ public class PdfSharpImporter : IPdfImporter
                     && !document.SecuritySettings.HasOwnerPermissions
                     && !document.SecuritySettings.PermitExtractContent)
                 {
-                    _errorOutput.DisplayError(string.Format(MiscResources.PdfNoPermissionToExtractContent, Path.GetFileName(filePath)));
+                    _errorOutput.DisplayError(string.Format(MiscResources.PdfNoPermissionToExtractContent,
+                        Path.GetFileName(filePath)));
                     sink.SetCompleted();
                 }
 
@@ -81,8 +89,9 @@ public class PdfSharpImporter : IPdfImporter
                             var (page, isImportedPage) = tuple;
                             if (isImportedPage)
                             {
-                                return new[] { await ExportRawPdfPage(page, importParams) };
+                                return new[] {await ExportRawPdfPage(page, importParams)};
                             }
+
                             return GetImagesFromPage(page, importParams);
                         })
                         .Run(image =>
@@ -101,7 +110,8 @@ public class PdfSharpImporter : IPdfImporter
             {
                 if (!aborted)
                 {
-                    _errorOutput.DisplayError(string.Format(MiscResources.ImportErrorCouldNot, Path.GetFileName(filePath)));
+                    _errorOutput.DisplayError(string.Format(MiscResources.ImportErrorCouldNot,
+                        Path.GetFileName(filePath)));
                     Log.ErrorException("Error importing PDF file.", e);
                 }
             }
@@ -123,11 +133,13 @@ public class PdfSharpImporter : IPdfImporter
         {
             yield break;
         }
+
         // Iterate references to external objects
         foreach (PdfItem item in xObjects.Elements.Values)
         {
             // Is external object an image?
-            if ((item as PdfReference)?.Value is PdfDictionary xObject && xObject.Elements.GetString("/Subtype") == "/Image")
+            if ((item as PdfReference)?.Value is PdfDictionary xObject &&
+                xObject.Elements.GetString("/Subtype") == "/Image")
             {
                 // Support multiple filter schemes
                 var element = xObject.Elements.Single(x => x.Key == "/Filter");
@@ -136,7 +148,8 @@ public class PdfSharpImporter : IPdfImporter
                     string[] arrayElements = elementAsArray.Elements.Select(x => x.ToString()).ToArray();
                     if (arrayElements.Length == 2)
                     {
-                        yield return DecodeImage(arrayElements[1], page, xObject, Filtering.Decode(xObject.Stream.Value, arrayElements[0]), importParams);
+                        yield return DecodeImage(arrayElements[1], page, xObject,
+                            Filtering.Decode(xObject.Stream.Value, arrayElements[0]), importParams);
                     }
                 }
                 else if (element.Value is PdfName elementAsName)
@@ -151,7 +164,8 @@ public class PdfSharpImporter : IPdfImporter
         }
     }
 
-    private ProcessedImage DecodeImage(string encoding, PdfPage page, PdfDictionary xObject, byte[] stream, ImportParams importParams)
+    private ProcessedImage DecodeImage(string encoding, PdfPage page, PdfDictionary xObject, byte[] stream,
+        ImportParams importParams)
     {
         switch (encoding)
         {
@@ -174,18 +188,18 @@ public class PdfSharpImporter : IPdfImporter
         document.Pages.Add(page);
         document.Save(pdfPath);
 
-        // TODO: Are we 100% sure we want RenderableImage to support PDFs? Need to implement that.
-        var image = new ProcessedImage(new ImageFileStorage(pdfPath), new ImageMetadata(BitDepth.Color, false), TransformState.Empty);
-        if (importParams.ThumbnailSize.HasValue || importParams.BarcodeDetectionOptions.DetectBarcodes)
-        {
-            using var bitmap = image.RenderToImage();
-            if (importParams.ThumbnailSize.HasValue)
-            {
-                image.PostProcessingData.Thumbnail = _imageContext.PerformTransform(bitmap, new ThumbnailTransform(importParams.ThumbnailSize.Value));
-            }
-            image.PostProcessingData.BarcodeDetection = BarcodeDetector.Detect(bitmap, importParams.BarcodeDetectionOptions);
-        }
-        return image;
+        // TODO: Are we 100% sure we want ProcessedImage to support PDFs? Need to implement that.
+        var image = new ProcessedImage(
+            new ImageFileStorage(pdfPath),
+            new ImageMetadata(BitDepth.Color, false),
+            new PostProcessingData(),
+            TransformState.Empty);
+        return _importPostProcessor.AddPostProcessingData(
+            image,
+            image.RenderToImage(),
+            importParams.ThumbnailSize,
+            importParams.BarcodeDetectionOptions,
+            true);
     }
 
     private ProcessedImage ExportJpegImage(PdfPage page, byte[] imageBytes, ImportParams importParams)
@@ -193,14 +207,18 @@ public class PdfSharpImporter : IPdfImporter
         // Fortunately JPEG has native support in PDF and exporting an image is just writing the stream to a file.
         using var memoryStream = new MemoryStream(imageBytes);
         using var storage = _imageContext.Load(memoryStream);
-        storage.SetResolution(storage.Width / (float)page.Width.Inch, storage.Height / (float)page.Height.Inch);
-        var image = new ProcessedImage(storage, new ImageMetadata(BitDepth.Color, false), TransformState.Empty);
-        if (importParams.ThumbnailSize.HasValue)
-        {
-            image.PostProcessingData.Thumbnail = _imageContext.PerformTransform(storage, new ThumbnailTransform(importParams.ThumbnailSize.Value));
-        }
-        image.PostProcessingData.BarcodeDetection = BarcodeDetector.Detect(storage, importParams.BarcodeDetectionOptions);
-        return image;
+        storage.SetResolution(storage.Width / (float) page.Width.Inch, storage.Height / (float) page.Height.Inch);
+        var image = new ProcessedImage(
+            storage,
+            new ImageMetadata(BitDepth.Color, false),
+            new PostProcessingData(),
+            TransformState.Empty);
+        return _importPostProcessor.AddPostProcessingData(
+            image,
+            storage,
+            importParams.ThumbnailSize,
+            importParams.BarcodeDetectionOptions,
+            true);
     }
 
     private ProcessedImage ExportAsPngImage(PdfPage page, PdfDictionary imageObject, ImportParams importParams)
@@ -231,15 +249,15 @@ public class PdfSharpImporter : IPdfImporter
 
         using (storage)
         {
-            storage.SetResolution(storage.Width / (float)page.Width.Inch, storage.Height / (float)page.Height.Inch);
-            // TODO: De-dup this code
-            var image = new ProcessedImage(storage, new ImageMetadata(bitDepth, true), TransformState.Empty);
-            if (importParams.ThumbnailSize.HasValue)
-            {
-                image.PostProcessingData.Thumbnail = _imageContext.PerformTransform(storage, new ThumbnailTransform(importParams.ThumbnailSize.Value));
-            }
-            image.PostProcessingData.BarcodeDetection = BarcodeDetector.Detect(storage, importParams.BarcodeDetectionOptions);
-            return image;
+            storage.SetResolution(storage.Width / (float) page.Width.Inch, storage.Height / (float) page.Height.Inch);
+            // TODO: This should probably use CreateProcessedImage to convert the storage? And also make a copy/clone if needed
+            var image = new ProcessedImage(storage, new ImageMetadata(bitDepth, true), new PostProcessingData(), TransformState.Empty);
+            return _importPostProcessor.AddPostProcessingData(
+                image,
+                storage,
+                importParams.ThumbnailSize,
+                importParams.BarcodeDetectionOptions,
+                true);
         }
     }
 
@@ -294,15 +312,23 @@ public class PdfSharpImporter : IPdfImporter
     // Sample full tiff          LEN-------------------                                                  DATA------------------                                                              WIDTH-----------------                                                  HEIGHT----------------                                                  BITS PER COMP---------                                                                                                                                                                                                                                                                          REALLEN---------------
     // { 0x49, 0x49, 0x2A, 0x00, 0x14, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x99, 0x99, 0x99, 0x99, 0x07, 0x00, 0x00, 0x01, 0x03, 0x00, 0x01, 0x00, 0x00, 0x00, 0x77, 0x77, 0x00, 0x00, 0x01, 0x01, 0x03, 0x00, 0x01, 0x00, 0x00, 0x00, 0x88, 0x88, 0x00, 0x00, 0x02, 0x01, 0x03, 0x00, 0x01, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x03, 0x01, 0x03, 0x00, 0x01, 0x00, 0x00, 0x00, 0x04, 0x00, 0x00, 0x00, 0x11, 0x01, 0x04, 0x00, 0x01, 0x00, 0x00, 0x00, 0x10, 0x00, 0x00, 0x00, 0x15, 0x01, 0x03, 0x00, 0x01, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x17, 0x01, 0x04, 0x00, 0x01, 0x00, 0x00, 0x00, 0x04, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 };
 
-    private static readonly byte[] TiffBeforeDataLen = { 0x49, 0x49, 0x2A, 0x00 };
-    private static readonly byte[] TiffBeforeData = { 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 };
-    private static readonly byte[] TiffBeforeWidth = { 0x07, 0x00, 0x00, 0x01, 0x03, 0x00, 0x01, 0x00, 0x00, 0x00 };
-    private static readonly byte[] TiffBeforeHeight = { 0x01, 0x01, 0x03, 0x00, 0x01, 0x00, 0x00, 0x00 };
-    private static readonly byte[] TiffBeforeBits = { 0x02, 0x01, 0x03, 0x00, 0x01, 0x00, 0x00, 0x00 };
-    private static readonly byte[] TiffBeforeRealLen = { 0x03, 0x01, 0x03, 0x00, 0x01, 0x00, 0x00, 0x00, 0x04, 0x00, 0x00, 0x00, 0x11, 0x01, 0x04, 0x00, 0x01, 0x00, 0x00, 0x00, 0x10, 0x00, 0x00, 0x00, 0x15, 0x01, 0x03, 0x00, 0x01, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x17, 0x01, 0x04, 0x00, 0x01, 0x00, 0x00, 0x00 };
-    private static readonly byte[] TiffTrailer = { 0x00, 0x00, 0x00, 0x00 };
+    private static readonly byte[] TiffBeforeDataLen = {0x49, 0x49, 0x2A, 0x00};
+    private static readonly byte[] TiffBeforeData = {0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
+    private static readonly byte[] TiffBeforeWidth = {0x07, 0x00, 0x00, 0x01, 0x03, 0x00, 0x01, 0x00, 0x00, 0x00};
+    private static readonly byte[] TiffBeforeHeight = {0x01, 0x01, 0x03, 0x00, 0x01, 0x00, 0x00, 0x00};
+    private static readonly byte[] TiffBeforeBits = {0x02, 0x01, 0x03, 0x00, 0x01, 0x00, 0x00, 0x00};
 
-    private ProcessedImage ExportG4(PdfPage page, PdfDictionary imageObject, byte[] imageBytes, ImportParams importParams)
+    private static readonly byte[] TiffBeforeRealLen =
+    {
+        0x03, 0x01, 0x03, 0x00, 0x01, 0x00, 0x00, 0x00, 0x04, 0x00, 0x00, 0x00, 0x11, 0x01, 0x04, 0x00, 0x01, 0x00,
+        0x00, 0x00, 0x10, 0x00, 0x00, 0x00, 0x15, 0x01, 0x03, 0x00, 0x01, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00,
+        0x17, 0x01, 0x04, 0x00, 0x01, 0x00, 0x00, 0x00
+    };
+
+    private static readonly byte[] TiffTrailer = {0x00, 0x00, 0x00, 0x00};
+
+    private ProcessedImage ExportG4(PdfPage page, PdfDictionary imageObject, byte[] imageBytes,
+        ImportParams importParams)
     {
         int width = imageObject.Elements.GetInteger(PdfImage.Keys.Width);
         int height = imageObject.Elements.GetInteger(PdfImage.Keys.Height);
@@ -321,12 +347,14 @@ public class PdfSharpImporter : IPdfImporter
         {
             Write(stream, imageBytes.Length + 0x10);
         }
+
         Write(stream, TiffBeforeData);
         Write(stream, imageBytes);
         if (imageBytes.Length % 2 == 1)
         {
-            Write(stream, new byte[] { 0x00 });
+            Write(stream, new byte[] {0x00});
         }
+
         Write(stream, TiffBeforeWidth);
         Write(stream, width);
         Write(stream, TiffBeforeHeight);
@@ -340,15 +368,20 @@ public class PdfSharpImporter : IPdfImporter
 
         // TODO: If we need a TIFF hint for loading, it should go here.
         using var storage = _imageContext.Load(stream);
-        storage.SetResolution(storage.Width / (float)page.Width.Inch, storage.Height / (float)page.Height.Inch);
+        storage.SetResolution(storage.Width / (float) page.Width.Inch, storage.Height / (float) page.Height.Inch);
 
-        var image = new ProcessedImage(storage, new ImageMetadata(BitDepth.BlackAndWhite, true), TransformState.Empty);
-        if (importParams.ThumbnailSize.HasValue)
-        {
-            image.PostProcessingData.Thumbnail = _imageContext.PerformTransform(storage, new ThumbnailTransform(importParams.ThumbnailSize.Value));
-        }
-        image.PostProcessingData.BarcodeDetection = BarcodeDetector.Detect(storage, importParams.BarcodeDetectionOptions);
-        return image;
+        // TODO: Use CreateProcessedImage?
+        var image = new ProcessedImage(
+            storage,
+            new ImageMetadata(BitDepth.BlackAndWhite, true),
+            new PostProcessingData(),
+            TransformState.Empty);
+        return _importPostProcessor.AddPostProcessingData(
+            image,
+            storage,
+            importParams.ThumbnailSize,
+            importParams.BarcodeDetectionOptions,
+            true);
     }
 
     private void Write(MemoryStream stream, byte[] bytes)
@@ -363,6 +396,7 @@ public class PdfSharpImporter : IPdfImporter
         {
             Array.Reverse(bytes);
         }
+
         Debug.Assert(bytes.Length == 4);
         stream.Write(bytes, 0, bytes.Length);
     }

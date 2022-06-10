@@ -58,9 +58,9 @@ public class ImageSerializationTests : ContextualTexts
 
         using var sourceImage = sourceContext.CreateProcessedImage(
             new GdiImage(new Bitmap(100, 100)),
-            BitDepth.Grayscale, 
-            true, 
-            75, 
+            BitDepth.Grayscale,
+            true,
+            -1,
             new []{ new BrightnessTransform(100) });
         var sourceFilePath = Assert.IsType<ImageFileStorage>(sourceImage.Storage).FullPath;
 

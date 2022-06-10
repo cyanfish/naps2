@@ -91,7 +91,7 @@ public static class SerializedImageHelper
             storage = new MemoryStreamImageStorage(memoryStream);
         }
 
-        var renderableImage = scanningContext.CreateProcessedImage(
+        var processedImage = scanningContext.CreateProcessedImage(
             storage,
             (BitDepth)serializedImage.Metadata.BitDepth,
             serializedImage.Metadata.Lossless,
@@ -101,9 +101,12 @@ public static class SerializedImageHelper
         var thumbnail = serializedImage.Thumbnail.ToByteArray();
         if (thumbnail.Length > 0)
         {
-            renderableImage.PostProcessingData.Thumbnail = scanningContext.ImageContext.Load(new MemoryStream(thumbnail));
+            processedImage = processedImage.WithPostProcessingData(new PostProcessingData
+            {
+                Thumbnail = scanningContext.ImageContext.Load(new MemoryStream(thumbnail))
+            }, true);
         }
-        return renderableImage;
+        return processedImage;
     }
 
     public class SerializeOptions

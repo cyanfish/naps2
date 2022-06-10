@@ -1,6 +1,7 @@
 ﻿using System.Collections.Immutable;
 using System.Windows.Forms;
 using NAPS2.Images.Gdi;
+using NAPS2.ImportExport.Images;
 using NAPS2.Scan;
 using NAPS2.Serialization;
 using NAPS2.WinForms;
@@ -14,19 +15,21 @@ public class RecoveryManager
     private readonly ScanningContext _scanningContext;
     private readonly ImageContext _imageContext;
     private readonly IFormFactory _formFactory;
+    private readonly ImportPostProcessor _importPostProcessor;
     private readonly OperationProgress _operationProgress;
 
-    public RecoveryManager(ScanningContext scanningContext, ImageContext imageContext, IFormFactory formFactory, OperationProgress operationProgress)
+    public RecoveryManager(ScanningContext scanningContext, ImageContext imageContext, IFormFactory formFactory, OperationProgress operationProgress, ImportPostProcessor importPostProcessor)
     {
         _scanningContext = scanningContext;
         _imageContext = imageContext;
         _formFactory = formFactory;
         _operationProgress = operationProgress;
+        _importPostProcessor = importPostProcessor;
     }
 
     public void RecoverScannedImages(Action<ProcessedImage> imageCallback, RecoveryParams recoveryParams)
     {
-        var op = new RecoveryOperation(_scanningContext, _imageContext, _formFactory);
+        var op = new RecoveryOperation(_scanningContext, _imageContext, _formFactory, _importPostProcessor);
         if (op.Start(imageCallback, recoveryParams))
         {
             _operationProgress.ShowProgress(op);
@@ -38,6 +41,7 @@ public class RecoveryManager
         private readonly ScanningContext _scanningContext;
         private readonly ImageContext _imageContext;
         private readonly IFormFactory _formFactory;
+        private readonly ImportPostProcessor _importPostProcessor;
 
         private FileStream? _lockFile;
         private DirectoryInfo? _folderToRecoverFrom;
@@ -45,11 +49,13 @@ public class RecoveryManager
         private int _imageCount;
         private DateTime _scannedDateTime;
 
-        public RecoveryOperation(ScanningContext scanningContext, ImageContext imageContext, IFormFactory formFactory)
+        public RecoveryOperation(ScanningContext scanningContext, ImageContext imageContext, IFormFactory formFactory,
+            ImportPostProcessor importPostProcessor)
         {
             _scanningContext = scanningContext;
             _imageContext = imageContext;
             _formFactory = formFactory;
+            _importPostProcessor = importPostProcessor;
 
             ProgressTitle = MiscResources.ImportProgress;
             AllowCancel = true;
@@ -134,24 +140,34 @@ public class RecoveryManager
                 string imagePath = Path.Combine(_folderToRecoverFrom.FullName, indexImage.FileName);
                 // TODO use UnownedFileStorage
                 var transformState = new TransformState(indexImage.TransformList.ToImmutableList());
+
                 ProcessedImage processedImage;
                 if (".pdf".Equals(Path.GetExtension(imagePath), StringComparison.InvariantCultureIgnoreCase))
                 {
                     string newPath = _scanningContext.FileStorageManager.NextFilePath() + ".pdf";
                     File.Copy(imagePath, newPath);
-                    // TODO: Some kind of factory for pdf renderable image creation and default settings
-                    processedImage = new ProcessedImage(new ImageFileStorage(newPath), new ImageMetadata(BitDepth.Color, false), transformState);
+                    // TODO: Use CreateProcessedImage
+                    processedImage = new ProcessedImage(
+                        new ImageFileStorage(newPath),
+                        new ImageMetadata(BitDepth.Color, false),
+                        new PostProcessingData(),
+                        transformState);
                 }
                 else
                 {
                     using var image = _imageContext.Load(imagePath);
-                    processedImage = new ProcessedImage(image, new ImageMetadata(indexImage.BitDepth.ToBitDepth(), indexImage.HighQuality), transformState);
+                    processedImage = new ProcessedImage(
+                        image,
+                        new ImageMetadata(indexImage.BitDepth.ToBitDepth(), indexImage.HighQuality),
+                        new PostProcessingData(),
+                        transformState);
                 }
 
-                if (recoveryParams.ThumbnailSize.HasValue)
-                {
-                    processedImage.PostProcessingData.Thumbnail = _imageContext.PerformTransform(processedImage.RenderToImage(), new ThumbnailTransform(recoveryParams.ThumbnailSize.Value));
-                }
+                processedImage = _importPostProcessor.AddPostProcessingData(processedImage,
+                    processedImage.RenderToImage(),
+                    recoveryParams.ThumbnailSize,
+                    new BarcodeDetectionOptions(),
+                    true);
 
                 imageCallback(processedImage);
 

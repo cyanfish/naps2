@@ -127,7 +127,14 @@ public class OcrRequestQueue
             }
             // Increment the reference count
             req.BackgroundCount += 1;
-            // TODO: Fix this somehow - add a dispose hook to RenderableImage?
+            
+            // TODO: We need to replace this. To do that, we need two conceptual steps:
+            // 1. Associate the ProcessedImage instance with a UiImage
+            // 2. Hook into deletion or transformation of the UiImage to cts.Cancel
+            // TODO: We might be able to provide a hook as a return value here (or directly in the image variable)
+            // that's stored in the ProcessedImage PostProcessingData. We would need to be careful if we still want to
+            // have PostProcessingData be immutable...
+
             // snapshot.Source.ThumbnailInvalidated += (sender, args) => cts.Cancel();
             // snapshot.Source.FullyDisposed += (sender, args) => cts.Cancel();
             _queueWaitHandle.Release();

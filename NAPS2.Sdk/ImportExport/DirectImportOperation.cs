@@ -35,9 +35,13 @@ public class DirectImportOperation : OperationBase
                 {
                     ProcessedImage img = SerializedImageHelper.Deserialize(_scanningContext, serializedImage, new SerializedImageHelper.DeserializeOptions());
                     // TODO: Don't bother, here, in recovery, etc.
-                    if (importParams.ThumbnailSize.HasValue)
+                    if (img.PostProcessingData.Thumbnail == null && importParams.ThumbnailSize.HasValue)
                     {
-                        img.PostProcessingData.Thumbnail = _scanningContext.ImageContext.PerformTransform(img.RenderToImage(), new ThumbnailTransform(importParams.ThumbnailSize.Value));
+                        img = img.WithPostProcessingData(img.PostProcessingData with
+                        {
+                            Thumbnail = _scanningContext.ImageContext.PerformTransform(img.RenderToImage(),
+                                new ThumbnailTransform(importParams.ThumbnailSize.Value))
+                        }, true);
                     }
                     imageCallback(img);
 

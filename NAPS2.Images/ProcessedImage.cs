@@ -15,32 +15,33 @@ public class ProcessedImage : IDisposable, IEquatable<ProcessedImage>
     private readonly RefCount.Token _token;
     private bool _disposed;
 
-    internal ProcessedImage(IImageStorage storage, ImageMetadata metadata, TransformState transformState,
-        RefCount refCount)
+    internal ProcessedImage(IImageStorage storage, ImageMetadata metadata, PostProcessingData postProcessingData,
+        TransformState transformState, RefCount refCount)
     {
         Storage = storage;
         Metadata = metadata;
+        PostProcessingData = postProcessingData;
         TransformState = transformState;
         _token = refCount.NewToken();
     }
 
-    public ProcessedImage(IImageStorage storage, ImageMetadata metadata, TransformState transformState,
-        IProcessedImageOwner? owner = null)
+    public ProcessedImage(IImageStorage storage, ImageMetadata metadata, PostProcessingData postProcessingData,
+        TransformState transformState, IProcessedImageOwner? owner = null)
     {
         Storage = storage;
         Metadata = metadata;
+        PostProcessingData = postProcessingData;
         TransformState = transformState;
         var internalDisposer = new InternalDisposer(this, owner);
         var refCount = new RefCount(internalDisposer);
         _token = refCount.NewToken();
     }
 
-    // TODO: Make this an immutable record and include it in the constructor
-    public PostProcessingData PostProcessingData { get; } = new();
-
     public IImageStorage Storage { get; }
 
     public ImageMetadata Metadata { get; }
+
+    public PostProcessingData PostProcessingData { get; }
 
     public TransformState TransformState { get; }
 
@@ -51,11 +52,16 @@ public class ProcessedImage : IDisposable, IEquatable<ProcessedImage>
     /// </summary>
     /// <param name="transform"></param>
     /// <returns></returns>
-    public ProcessedImage WithTransform(Transform transform)
+    public ProcessedImage WithTransform(Transform transform, bool disposeSelf = false)
     {
         // TODO: Should metadata update for some transforms?
         var newTransformState = TransformState.AddOrSimplify(transform);
-        return new ProcessedImage(Storage, Metadata, newTransformState, _token.RefCount);
+        var result = new ProcessedImage(Storage, Metadata, PostProcessingData, newTransformState, _token.RefCount);
+        if (disposeSelf)
+        {
+            Dispose();
+        }
+        return result;
     }
 
     /// <summary>
@@ -65,7 +71,17 @@ public class ProcessedImage : IDisposable, IEquatable<ProcessedImage>
     /// <returns></returns>
     public ProcessedImage WithNoTransforms()
     {
-        return new ProcessedImage(Storage, Metadata, TransformState.Empty, _token.RefCount);
+        return new ProcessedImage(Storage, Metadata, PostProcessingData, TransformState.Empty, _token.RefCount);
+    }
+
+    public ProcessedImage WithPostProcessingData(PostProcessingData postProcessingData, bool disposeSelf = false)
+    {
+        var result = new ProcessedImage(Storage, Metadata, postProcessingData, TransformState, _token.RefCount);
+        if (disposeSelf)
+        {
+            Dispose();
+        }
+        return result;
     }
 
     /// <summary>
@@ -82,7 +98,7 @@ public class ProcessedImage : IDisposable, IEquatable<ProcessedImage>
                 throw new ObjectDisposedException(nameof(ProcessedImage));
             }
 
-            return new(Storage, Metadata, TransformState, _token.RefCount);
+            return new(Storage, Metadata, PostProcessingData, TransformState, _token.RefCount);
         }
     }
 

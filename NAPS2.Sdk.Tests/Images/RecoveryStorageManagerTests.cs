@@ -79,7 +79,7 @@ public class RecoveryStorageManagerTests : ContextualTexts
                 new GdiImage(new Bitmap(100, 100)),
                 BitDepth.Grayscale,
                 true,
-                75,
+                -1,
                 Enumerable.Empty<Transform>()));
 
         _recoveryStorageManager.WriteIndex(new[] {image1});
@@ -94,9 +94,6 @@ public class RecoveryStorageManagerTests : ContextualTexts
         var image1 = new UiImage(
             ScanningContext.CreateProcessedImage(
                 new GdiImage(new Bitmap(100, 100)),
-                BitDepth.Grayscale,
-                true,
-                75,
                 new[] {new BrightnessTransform(100)}));
 
         _recoveryStorageManager.WriteIndex(new[] {image1});

@@ -36,7 +36,7 @@ internal class RemotePostProcessor : IRemotePostProcessor
 
             var bitDepth = options.UseNativeUI ? BitDepth.Color : options.BitDepth;
             var scannedImage = _scanningContext.CreateProcessedImage(image, bitDepth, options.MaxQuality, options.Quality, Enumerable.Empty<Transform>());
-            DoRevertibleTransforms(scannedImage, image, options, postProcessingContext);
+            scannedImage = DoRevertibleTransforms(scannedImage, image, options, postProcessingContext);
             postProcessingContext.TempPath = SaveForBackgroundOcr(image, options);
             // TODO: We need to attach the thumbnail to the scanned image
             return scannedImage;
@@ -110,12 +110,12 @@ internal class RemotePostProcessor : IRemotePostProcessor
     }
 
     // TODO: This is more than just transforms.
-    private void DoRevertibleTransforms(ProcessedImage processedImage, IMemoryImage image, ScanOptions options, PostProcessingContext postProcessingContext)
+    private ProcessedImage DoRevertibleTransforms(ProcessedImage processedImage, IMemoryImage image, ScanOptions options, PostProcessingContext postProcessingContext)
     {
         var data = processedImage.PostProcessingData;
         if (options.ThumbnailSize.HasValue)
         {
-            data.Thumbnail = _scanningContext.ImageContext.PerformTransform(image, new ThumbnailTransform(options.ThumbnailSize.Value));
+            data = data with { Thumbnail = _scanningContext.ImageContext.PerformTransform(image, new ThumbnailTransform(options.ThumbnailSize.Value)) };
         }
             
         if (!options.UseNativeUI && options.BrightnessContrastAfterScan)
@@ -137,8 +137,9 @@ internal class RemotePostProcessor : IRemotePostProcessor
         if (!data.BarcodeDetection.IsBarcodePresent)
         {
             // Even if barcode detection was attempted previously and failed, image adjustments may improve detection.
-            data.BarcodeDetection = BarcodeDetector.Detect(image, options.BarcodeDetectionOptions);
+            data = data with { BarcodeDetection = BarcodeDetector.Detect(image, options.BarcodeDetectionOptions) };
         }
+        return processedImage.WithPostProcessingData(data, true);
     }
 
     public string? SaveForBackgroundOcr(IMemoryImage bitmap, ScanOptions options)
@@ -161,7 +162,7 @@ internal class RemotePostProcessor : IRemotePostProcessor
         {
             return processedImage;
         }
-        ProcessedImage transformed = processedImage.WithTransform(transform);
+        ProcessedImage transformed = processedImage.WithTransform(transform, true);
         if (options.ThumbnailSize.HasValue)
         {
             // TODO: We may want to do the transform on the original thumbnail, maybe situationally?
@@ -172,9 +173,12 @@ internal class RemotePostProcessor : IRemotePostProcessor
             // TODO: BUT we should have some kind of fast path (not just used here) that moves the thumbnail transform up the transform stack
             // TODO: as long as subsequent transforms are size agnostic (i.e. 90 deg rotation).
             image = _scanningContext.ImageContext.PerformTransform(image, transform);
-            transformed.PostProcessingData.Thumbnail = _scanningContext.ImageContext.PerformTransform(image, new ThumbnailTransform(options.ThumbnailSize.Value));
+            transformed = transformed.WithPostProcessingData(
+                transformed.PostProcessingData with
+                {
+                    Thumbnail = _scanningContext.ImageContext.PerformTransform(image, new ThumbnailTransform(options.ThumbnailSize.Value))
+                }, true);
         }
-        processedImage.Dispose();
         return transformed;
     }
 }

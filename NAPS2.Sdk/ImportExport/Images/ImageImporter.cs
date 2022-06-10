@@ -6,12 +6,12 @@ namespace NAPS2.ImportExport.Images;
 public class ImageImporter : IImageImporter
 {
     private readonly ImageContext _imageContext;
-    private readonly ThumbnailRenderer _thumbnailRenderer;
+    private readonly ImportPostProcessor _importPostProcessor;
 
-    public ImageImporter(ImageContext imageContext, ThumbnailRenderer thumbnailRenderer)
+    public ImageImporter(ImageContext imageContext, ImportPostProcessor importPostProcessor)
     {
         _imageContext = imageContext;
-        _thumbnailRenderer = thumbnailRenderer;
+        _importPostProcessor = importPostProcessor;
     }
 
     public ScannedImageSource Import(string filePath, ImportParams importParams, ProgressHandler progressCallback, CancellationToken cancelToken)
@@ -53,13 +53,18 @@ public class ImageImporter : IImageImporter
                         }
 
                         bool lossless = frame.OriginalFileFormat is ImageFileFormat.Bmp or ImageFileFormat.Png;
-                        // TODO: This is a similar pattern as the Pdf importer, consider abstracting
-                        var image = new ProcessedImage(frame, new ImageMetadata(BitDepth.Color, lossless), TransformState.Empty);
-                        if (importParams.ThumbnailSize.HasValue)
-                        {
-                            image.PostProcessingData.Thumbnail = _imageContext.PerformTransform(frame, new ThumbnailTransform(importParams.ThumbnailSize.Value));
-                        }
-                        image.PostProcessingData.BarcodeDetection = BarcodeDetector.Detect(frame, importParams.BarcodeDetectionOptions);
+                        // TODO: Use CreateProcessedImage
+                        var image = new ProcessedImage(
+                            frame,
+                            new ImageMetadata(BitDepth.Color, lossless),
+                            new PostProcessingData(),
+                            TransformState.Empty);
+                        image = _importPostProcessor.AddPostProcessingData(
+                            image,
+                            frame,
+                            importParams.ThumbnailSize,
+                            importParams.BarcodeDetectionOptions,
+                            true);
 
                         sink.PutImage(image);
                     }
