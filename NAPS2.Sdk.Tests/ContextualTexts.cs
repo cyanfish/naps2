@@ -29,10 +29,12 @@ public class ContextualTexts : IDisposable
 
     public ProcessedImage CreateScannedImage()
     {
-        return new ProcessedImage(
+        return ScanningContext.CreateProcessedImage(
             new GdiImage(new Bitmap(100, 100)),
-            ImageMetadata.DefaultForTesting,
-            TransformState.Empty);
+            BitDepth.Color, 
+            false,
+            75,
+            Enumerable.Empty<Transform>());
     }
 
     public virtual void Dispose()

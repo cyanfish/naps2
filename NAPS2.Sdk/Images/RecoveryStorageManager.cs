@@ -80,6 +80,7 @@ public class RecoveryStorageManager : IDisposable
     {
         lock (this)
         {
+            if (_disposed) return;
             _folderLock.Close();
             _folderLockFile.Delete();
             _folder.Delete(true);
