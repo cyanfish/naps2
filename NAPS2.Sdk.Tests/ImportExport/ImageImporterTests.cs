@@ -1,4 +1,5 @@
 using System.Threading;
+using Moq;
 using NAPS2.Images.Gdi;
 using NAPS2.ImportExport;
 using NAPS2.ImportExport.Images;
@@ -109,6 +110,48 @@ public class ImageImporterTests : ContextualTexts
     {
         var fileStorage = Assert.IsType<ImageFileStorage>(storage);
         Assert.False(File.Exists(fileStorage.FullPath));
+    }
+    
+    [Fact]
+    public async Task SingleFrameProgress()
+    {
+        var filePath = Path.Combine(FolderPath, "image.jpg");
+        ImageImporterTestsData.color_image.Save(filePath);
+
+        var progressMock = new Mock<ProgressHandler>();
+        
+        var source = _imageImporter.Import(filePath, new ImportParams(), progressMock.Object, CancellationToken.None);
+        
+        progressMock.VerifyNoOtherCalls();
+        await source.ToList();
+        progressMock.Verify(x => x(0, 1));
+        progressMock.Verify(x => x(1, 1));
+        progressMock.VerifyNoOtherCalls();
+    }
+    
+    [Fact]
+    public async Task MultiFrameProgress()
+    {
+        var filePath = Path.Combine(FolderPath, "image.tiff");
+        File.WriteAllBytes(filePath, ImageImporterTestsData.color_image_set);
+
+        var progressMock = new Mock<ProgressHandler>();
+        
+        var source = _imageImporter.Import(filePath, new ImportParams(), progressMock.Object, CancellationToken.None);
+        
+        progressMock.VerifyNoOtherCalls();
+        Assert.NotNull(await source.Next());
+        progressMock.Verify(x => x(0, 3));
+        progressMock.Verify(x => x(1, 3));
+        progressMock.VerifyNoOtherCalls();
+        Assert.NotNull(await source.Next());
+        progressMock.Verify(x => x(2, 3));
+        progressMock.VerifyNoOtherCalls();
+        Assert.NotNull(await source.Next());
+        progressMock.Verify(x => x(3, 3));
+        progressMock.VerifyNoOtherCalls();
+        Assert.Null(await source.Next());
+        progressMock.VerifyNoOtherCalls();
     }
     
     [Fact]

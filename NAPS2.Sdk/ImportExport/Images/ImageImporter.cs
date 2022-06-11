@@ -41,13 +41,14 @@ public class ImageImporter : IImageImporter
                     // Handle and notify the user outside the method so that errors importing multiple files can be aggregated
                     throw;
                 }
+                
+                progressCallback(0, frameCount);
 
+                int i = 0;
                 foreach (var frame in toImport)
                 {
                     using (frame)
                     {
-                        int i = 0;
-                        progressCallback(i++, frameCount);
                         if (cancelToken.IsCancellationRequested)
                         {
                             sink.SetCompleted();
@@ -68,10 +69,9 @@ public class ImageImporter : IImageImporter
                             importParams.BarcodeDetectionOptions,
                             true);
 
+                        progressCallback(++i, frameCount);
                         sink.PutImage(image);
                     }
-
-                    progressCallback(frameCount, frameCount);
                 }
 
                 sink.SetCompleted();
