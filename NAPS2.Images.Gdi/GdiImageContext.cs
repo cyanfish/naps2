@@ -12,7 +12,7 @@ public class GdiImageContext : ImageContext
         // RegisterConverters(new PdfConverters(this));
     }
 
-    public override IMemoryImage Load(string path) => new GdiImage(new Bitmap(path));
+    public override IMemoryImage Load(string path) => new GdiImage(LoadBitmapWithExceptionHandling(path));
 
     public override IMemoryImage Load(Stream stream) => new GdiImage(new Bitmap(stream));
 
@@ -25,9 +25,25 @@ public class GdiImageContext : ImageContext
 
     public override IEnumerable<IMemoryImage> LoadFrames(string path, out int count)
     {
-        var bitmap = new Bitmap(path);
+        var bitmap = LoadBitmapWithExceptionHandling(path);
         count = bitmap.GetFrameCount(FrameDimension.Page);
         return EnumerateFrames(bitmap, count);
+    }
+
+    private static Bitmap LoadBitmapWithExceptionHandling(string path)
+    {
+        try
+        {
+            return new Bitmap(path);
+        }
+        catch (ArgumentException)
+        {
+            if (!File.Exists(path))
+            {
+                throw new FileNotFoundException($"Could not find image file '{path}'.");
+            }
+            throw new IOException($"Error reading image file '{path}'.");
+        }
     }
 
     private IEnumerable<IMemoryImage> EnumerateFrames(Bitmap bitmap, int count)

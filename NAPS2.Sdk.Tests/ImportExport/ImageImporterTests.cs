@@ -3,6 +3,7 @@ using Moq;
 using NAPS2.Images.Gdi;
 using NAPS2.ImportExport;
 using NAPS2.ImportExport.Images;
+using NAPS2.Scan;
 using NAPS2.Sdk.Tests.Asserts;
 using Xunit;
 
@@ -97,19 +98,19 @@ public class ImageImporterTests : ContextualTexts
         result[2].Dispose();
         AssertRecoveryStorageCleanedUp(result[2].Storage);
     }
-
-    private void AssertUsesRecoveryStorage(IImageStorage storage, string expectedFileName)
+    
+    [Fact]
+    public async Task ImportWithThumbnailGeneration()
     {
-        var fileStorage = Assert.IsType<ImageFileStorage>(storage);
-        Assert.EndsWith(expectedFileName, fileStorage.FullPath);
-        Assert.True(File.Exists(fileStorage.FullPath));
-        Assert.Equal(Path.Combine(FolderPath, "recovery"), Path.GetDirectoryName(fileStorage.FullPath));
-    }
+        var filePath = Path.Combine(FolderPath, "image.jpg");
+        ImageImporterTestsData.color_image.Save(filePath);
+        
+        var source = _imageImporter.Import(filePath, new ImportParams { ThumbnailSize = 256 }, (current, max) => { }, CancellationToken.None);
+        var result = await source.ToList();
 
-    private void AssertRecoveryStorageCleanedUp(IImageStorage storage)
-    {
-        var fileStorage = Assert.IsType<ImageFileStorage>(storage);
-        Assert.False(File.Exists(fileStorage.FullPath));
+        Assert.Single(result);
+        Assert.NotNull(result[0].PostProcessingData.Thumbnail);
+        Assert.Equal(256, result[0].PostProcessingData.Thumbnail.Width);
     }
     
     [Fact]
@@ -136,7 +137,6 @@ public class ImageImporterTests : ContextualTexts
         File.WriteAllBytes(filePath, ImageImporterTestsData.color_image_set);
 
         var progressMock = new Mock<ProgressHandler>();
-        
         var source = _imageImporter.Import(filePath, new ImportParams(), progressMock.Object, CancellationToken.None);
         
         progressMock.VerifyNoOtherCalls();
@@ -155,19 +155,86 @@ public class ImageImporterTests : ContextualTexts
     }
     
     [Fact]
-    public async Task ImportWithThumbnailGeneration()
+    public async Task SingleFrameCancellation()
     {
         var filePath = Path.Combine(FolderPath, "image.jpg");
         ImageImporterTestsData.color_image.Save(filePath);
+
+        var cts = new CancellationTokenSource();
+        var source = _imageImporter.Import(filePath, new ImportParams(), (current, max) => { }, cts.Token);
         
-        var source = _imageImporter.Import(filePath, new ImportParams { ThumbnailSize = 256 }, (current, max) => { }, CancellationToken.None);
+        cts.Cancel();
+        Assert.Null(await source.Next());
+    }
+    
+    [Fact]
+    public async Task MultiFrameCancellation()
+    {
+        var filePath = Path.Combine(FolderPath, "image.tiff");
+        File.WriteAllBytes(filePath, ImageImporterTestsData.color_image_set);
+
+        var cts = new CancellationTokenSource();
+        var source = _imageImporter.Import(filePath, new ImportParams(), (current, max) => { }, cts.Token);
+        
+        Assert.NotNull(await source.Next());
+        Assert.NotNull(await source.Next());
+        cts.Cancel();
+        Assert.Null(await source.Next());
+    }
+
+    private void AssertUsesRecoveryStorage(IImageStorage storage, string expectedFileName)
+    {
+        var fileStorage = Assert.IsType<ImageFileStorage>(storage);
+        Assert.EndsWith(expectedFileName, fileStorage.FullPath);
+        Assert.True(File.Exists(fileStorage.FullPath));
+        Assert.Equal(Path.Combine(FolderPath, "recovery"), Path.GetDirectoryName(fileStorage.FullPath));
+    }
+
+    private void AssertRecoveryStorageCleanedUp(IImageStorage storage)
+    {
+        var fileStorage = Assert.IsType<ImageFileStorage>(storage);
+        Assert.False(File.Exists(fileStorage.FullPath));
+    }
+    
+    [Fact]
+    public async Task ImportMissingFile()
+    {
+        var filePath = Path.Combine(FolderPath, "missing.png");
+        var source = _imageImporter.Import(filePath, new ImportParams(), (current, max) => { }, CancellationToken.None);
+
+        var ex = await Assert.ThrowsAsync<FileNotFoundException>(async () => await source.ToList());
+        Assert.Contains("Could not find image file", ex.Message);
+    }
+
+    [Fact]
+    public async Task ImportInUseFile()
+    {
+        var filePath = Path.Combine(FolderPath, "image.png");
+        ImageImporterTestsData.color_image.Save(filePath);
+        using var stream = File.OpenWrite(filePath);
+        var source = _imageImporter.Import(filePath, new ImportParams(), (current, max) => { }, CancellationToken.None);
+
+        var ex = await Assert.ThrowsAsync<IOException>(async () => await source.ToList());
+        Assert.Contains("Error reading image file", ex.Message);
+    }
+    
+    [Fact]
+    public async Task ImportWithBarcodeDetection()
+    {
+        var filePath = Path.Combine(FolderPath, "image.jpg");
+        ImageImporterTestsData.patcht.Save(filePath);
+
+        var importParams = new ImportParams
+        {
+            BarcodeDetectionOptions = new BarcodeDetectionOptions { DetectBarcodes = true }
+        };
+        var source = _imageImporter.Import(filePath, importParams, (current, max) => { }, CancellationToken.None);
         var result = await source.ToList();
 
         Assert.Single(result);
-        Assert.NotNull(result[0].PostProcessingData.Thumbnail);
-        Assert.Equal(256, result[0].PostProcessingData.Thumbnail.Width);
+        Assert.True(result[0].PostProcessingData.BarcodeDetection.IsAttempted);
+        Assert.True(result[0].PostProcessingData.BarcodeDetection.IsBarcodePresent);
+        Assert.True(result[0].PostProcessingData.BarcodeDetection.IsPatchT);
+        Assert.Equal("PATCHT", result[0].PostProcessingData.BarcodeDetection.DetectionResult?.Text);
     }
-    
-    // TODO: Test barcode detection, progress callbacks (for tiff mainly?), cancellation, etc.
-    // TODO: Maybe add image asserts?
 }
