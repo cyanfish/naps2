@@ -5,11 +5,13 @@ namespace NAPS2.ImportExport.Images;
 
 public class ImageImporter : IImageImporter
 {
+    private readonly ScanningContext _scanningContext;
     private readonly ImageContext _imageContext;
     private readonly ImportPostProcessor _importPostProcessor;
 
-    public ImageImporter(ImageContext imageContext, ImportPostProcessor importPostProcessor)
+    public ImageImporter(ScanningContext scanningContext, ImageContext imageContext, ImportPostProcessor importPostProcessor)
     {
+        _scanningContext = scanningContext;
         _imageContext = imageContext;
         _importPostProcessor = importPostProcessor;
     }
@@ -53,12 +55,12 @@ public class ImageImporter : IImageImporter
                         }
 
                         bool lossless = frame.OriginalFileFormat is ImageFileFormat.Bmp or ImageFileFormat.Png;
-                        // TODO: Use CreateProcessedImage
-                        var image = new ProcessedImage(
+                        var image = _scanningContext.CreateProcessedImage(
                             frame,
-                            new ImageMetadata(BitDepth.Color, lossless),
-                            new PostProcessingData(),
-                            TransformState.Empty);
+                            BitDepth.Color,
+                            lossless,
+                            -1,
+                            Enumerable.Empty<Transform>());
                         image = _importPostProcessor.AddPostProcessingData(
                             image,
                             frame,

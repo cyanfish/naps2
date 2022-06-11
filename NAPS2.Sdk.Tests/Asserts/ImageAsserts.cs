@@ -4,6 +4,12 @@ namespace NAPS2.Sdk.Tests.Asserts;
 
 public static class ImageAsserts
 {
+    // JPEG artifacts seem to consistently create a RMSE of about 2.5.
+    // TODO: Use PNG or some other way to do a precise comparison.
+    public const double GENERAL_RMSE_THRESHOLD = 3.5;
+
+    public const double NULL_RMSE_THRESHOLD = 0.5;
+
     public static unsafe void Similar(IMemoryImage first, IMemoryImage second, double rmseThreshold)
     {
         Assert.Equal(first.Width, second.Width);

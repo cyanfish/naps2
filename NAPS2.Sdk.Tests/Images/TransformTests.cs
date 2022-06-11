@@ -6,12 +6,6 @@ namespace NAPS2.Sdk.Tests.Images;
 
 public class TransformTests : ContextualTexts
 {
-    // JPEG artifacts seem to consistently create a RMSE of about 2.5.
-    // TODO: Use PNG or some other way to do a precise comparison.
-    private const double GENERAL_RMSE_THRESHOLD = 3.5;
-
-    private const double NULL_RMSE_THRESHOLD = 0.5;
-
     // TODO: Test handling of other pixel formats
     // ARGB32 -> should work (ignoring alpha channel)
     // BW1 -> should work where applicable
@@ -26,7 +20,7 @@ public class TransformTests : ContextualTexts
 
         actual = ImageContext.PerformTransform(actual, new BrightnessTransform());
 
-        ImageAsserts.Similar(expected, actual, NULL_RMSE_THRESHOLD);
+        ImageAsserts.Similar(expected, actual, ImageAsserts.NULL_RMSE_THRESHOLD);
     }
 
     [Fact]
@@ -37,7 +31,7 @@ public class TransformTests : ContextualTexts
 
         actual = ImageContext.PerformTransform(actual, new BrightnessTransform(300));
 
-        ImageAsserts.Similar(expected, actual, GENERAL_RMSE_THRESHOLD);
+        ImageAsserts.Similar(expected, actual, ImageAsserts.GENERAL_RMSE_THRESHOLD);
     }
 
     [Fact]
@@ -48,7 +42,7 @@ public class TransformTests : ContextualTexts
 
         actual = ImageContext.PerformTransform(actual, new BrightnessTransform(-300));
 
-        ImageAsserts.Similar(expected, actual, GENERAL_RMSE_THRESHOLD);
+        ImageAsserts.Similar(expected, actual, ImageAsserts.GENERAL_RMSE_THRESHOLD);
     }
 
     [Fact]
@@ -59,7 +53,7 @@ public class TransformTests : ContextualTexts
 
         actual = ImageContext.PerformTransform(actual, new TrueContrastTransform());
 
-        ImageAsserts.Similar(expected, actual, NULL_RMSE_THRESHOLD);
+        ImageAsserts.Similar(expected, actual, ImageAsserts.NULL_RMSE_THRESHOLD);
     }
 
     [Fact]
@@ -70,7 +64,7 @@ public class TransformTests : ContextualTexts
 
         actual = ImageContext.PerformTransform(actual, new TrueContrastTransform(300));
 
-        ImageAsserts.Similar(expected, actual, GENERAL_RMSE_THRESHOLD);
+        ImageAsserts.Similar(expected, actual, ImageAsserts.GENERAL_RMSE_THRESHOLD);
     }
 
     [Fact]
@@ -81,7 +75,7 @@ public class TransformTests : ContextualTexts
 
         actual = ImageContext.PerformTransform(actual, new TrueContrastTransform(-300));
 
-        ImageAsserts.Similar(expected, actual, GENERAL_RMSE_THRESHOLD);
+        ImageAsserts.Similar(expected, actual, ImageAsserts.GENERAL_RMSE_THRESHOLD);
     }
 
     [Fact]
@@ -92,7 +86,7 @@ public class TransformTests : ContextualTexts
 
         actual = ImageContext.PerformTransform(actual, new HueTransform());
 
-        ImageAsserts.Similar(expected, actual, NULL_RMSE_THRESHOLD);
+        ImageAsserts.Similar(expected, actual, ImageAsserts.NULL_RMSE_THRESHOLD);
     }
 
     [Fact]
@@ -103,7 +97,7 @@ public class TransformTests : ContextualTexts
 
         actual = ImageContext.PerformTransform(actual, new HueTransform(300));
 
-        ImageAsserts.Similar(expected, actual, GENERAL_RMSE_THRESHOLD);
+        ImageAsserts.Similar(expected, actual, ImageAsserts.GENERAL_RMSE_THRESHOLD);
     }
 
     [Fact]
@@ -114,7 +108,7 @@ public class TransformTests : ContextualTexts
 
         actual = ImageContext.PerformTransform(actual, new HueTransform(-300));
 
-        ImageAsserts.Similar(expected, actual, GENERAL_RMSE_THRESHOLD);
+        ImageAsserts.Similar(expected, actual, ImageAsserts.GENERAL_RMSE_THRESHOLD);
     }
 
     [Fact]
@@ -125,7 +119,7 @@ public class TransformTests : ContextualTexts
 
         actual = ImageContext.PerformTransform(actual, new SaturationTransform());
 
-        ImageAsserts.Similar(expected, actual, NULL_RMSE_THRESHOLD);
+        ImageAsserts.Similar(expected, actual, ImageAsserts.NULL_RMSE_THRESHOLD);
     }
 
     [Fact]
@@ -136,7 +130,7 @@ public class TransformTests : ContextualTexts
 
         actual = ImageContext.PerformTransform(actual, new SaturationTransform(300));
 
-        ImageAsserts.Similar(expected, actual, GENERAL_RMSE_THRESHOLD);
+        ImageAsserts.Similar(expected, actual, ImageAsserts.GENERAL_RMSE_THRESHOLD);
     }
 
     [Fact]
@@ -147,7 +141,7 @@ public class TransformTests : ContextualTexts
 
         actual = ImageContext.PerformTransform(actual, new SaturationTransform(-300));
 
-        ImageAsserts.Similar(expected, actual, GENERAL_RMSE_THRESHOLD);
+        ImageAsserts.Similar(expected, actual, ImageAsserts.GENERAL_RMSE_THRESHOLD);
     }
 
     [Fact]
@@ -158,7 +152,7 @@ public class TransformTests : ContextualTexts
 
         actual = ImageContext.PerformTransform(actual, new SharpenTransform());
 
-        ImageAsserts.Similar(expected, actual, NULL_RMSE_THRESHOLD);
+        ImageAsserts.Similar(expected, actual, ImageAsserts.NULL_RMSE_THRESHOLD);
     }
 
     [Fact]
@@ -169,7 +163,7 @@ public class TransformTests : ContextualTexts
 
         actual = ImageContext.PerformTransform(actual, new SharpenTransform(1000));
 
-        ImageAsserts.Similar(expected, actual, GENERAL_RMSE_THRESHOLD);
+        ImageAsserts.Similar(expected, actual, ImageAsserts.GENERAL_RMSE_THRESHOLD);
     }
 
     [Fact]
@@ -180,7 +174,7 @@ public class TransformTests : ContextualTexts
 
         actual = ImageContext.PerformTransform(actual, new SharpenTransform(-1000));
 
-        ImageAsserts.Similar(expected, actual, GENERAL_RMSE_THRESHOLD);
+        ImageAsserts.Similar(expected, actual, ImageAsserts.GENERAL_RMSE_THRESHOLD);
     }
 
     [Fact]
@@ -191,7 +185,7 @@ public class TransformTests : ContextualTexts
 
         actual = ImageContext.PerformTransform(actual, new RotationTransform());
 
-        ImageAsserts.Similar(expected, actual, NULL_RMSE_THRESHOLD);
+        ImageAsserts.Similar(expected, actual, ImageAsserts.NULL_RMSE_THRESHOLD);
     }
 
     [Fact]
@@ -202,7 +196,7 @@ public class TransformTests : ContextualTexts
 
         actual = ImageContext.PerformTransform(actual, new RotationTransform(90));
 
-        ImageAsserts.Similar(expected, actual, GENERAL_RMSE_THRESHOLD);
+        ImageAsserts.Similar(expected, actual, ImageAsserts.GENERAL_RMSE_THRESHOLD);
     }
 
     [Fact]
@@ -213,7 +207,7 @@ public class TransformTests : ContextualTexts
 
         actual = ImageContext.PerformTransform(actual, new RotationTransform(46));
 
-        ImageAsserts.Similar(expected, actual, GENERAL_RMSE_THRESHOLD);
+        ImageAsserts.Similar(expected, actual, ImageAsserts.GENERAL_RMSE_THRESHOLD);
     }
 
     [Fact]
@@ -224,7 +218,7 @@ public class TransformTests : ContextualTexts
 
         actual = ImageContext.PerformTransform(actual, new RotationTransform(-45));
 
-        ImageAsserts.Similar(expected, actual, GENERAL_RMSE_THRESHOLD);
+        ImageAsserts.Similar(expected, actual, ImageAsserts.GENERAL_RMSE_THRESHOLD);
     }
 
     [Fact]
@@ -238,7 +232,7 @@ public class TransformTests : ContextualTexts
         actual2 = ImageContext.PerformTransform(actual2, new RotationTransform(-180));
 
         ImageAsserts.Similar(actual2, actual, 0);
-        ImageAsserts.Similar(expected, actual, GENERAL_RMSE_THRESHOLD);
+        ImageAsserts.Similar(expected, actual, ImageAsserts.GENERAL_RMSE_THRESHOLD);
     }
 
     [Fact]
@@ -249,7 +243,7 @@ public class TransformTests : ContextualTexts
 
         actual = ImageContext.PerformTransform(actual, new CropTransform());
 
-        ImageAsserts.Similar(expected, actual, NULL_RMSE_THRESHOLD);
+        ImageAsserts.Similar(expected, actual, ImageAsserts.NULL_RMSE_THRESHOLD);
     }
 
     [Fact]
@@ -260,7 +254,7 @@ public class TransformTests : ContextualTexts
 
         actual = ImageContext.PerformTransform(actual, new CropTransform(10, 20, 15, 5));
 
-        ImageAsserts.Similar(expected, actual, GENERAL_RMSE_THRESHOLD);
+        ImageAsserts.Similar(expected, actual, ImageAsserts.GENERAL_RMSE_THRESHOLD);
     }
 
     [Fact]
@@ -271,7 +265,7 @@ public class TransformTests : ContextualTexts
 
         actual = ImageContext.PerformTransform(actual, new CropTransform(10, 20, 15, 5, actual.Width, actual.Height));
 
-        ImageAsserts.Similar(expected, actual, GENERAL_RMSE_THRESHOLD);
+        ImageAsserts.Similar(expected, actual, ImageAsserts.GENERAL_RMSE_THRESHOLD);
     }
 
     [Fact]
@@ -282,7 +276,7 @@ public class TransformTests : ContextualTexts
 
         actual = ImageContext.PerformTransform(actual, new CropTransform(20, 40, 30, 10, actual.Width * 2, actual.Height * 2));
 
-        ImageAsserts.Similar(expected, actual, GENERAL_RMSE_THRESHOLD);
+        ImageAsserts.Similar(expected, actual, ImageAsserts.GENERAL_RMSE_THRESHOLD);
     }
         
     [Fact]
@@ -295,7 +289,7 @@ public class TransformTests : ContextualTexts
         Assert.Equal(ImagePixelFormat.BW1, actual.PixelFormat);
 
         actual = To24Bit(actual);
-        ImageAsserts.Similar(expected, actual, GENERAL_RMSE_THRESHOLD);
+        ImageAsserts.Similar(expected, actual, ImageAsserts.GENERAL_RMSE_THRESHOLD);
     }
 
     [Fact]
@@ -308,7 +302,7 @@ public class TransformTests : ContextualTexts
         Assert.Equal(ImagePixelFormat.BW1, actual.PixelFormat);
 
         actual = To24Bit(actual);
-        ImageAsserts.Similar(expected, actual, GENERAL_RMSE_THRESHOLD);
+        ImageAsserts.Similar(expected, actual, ImageAsserts.GENERAL_RMSE_THRESHOLD);
     }
 
     private static IMemoryImage To24Bit(IMemoryImage actual)

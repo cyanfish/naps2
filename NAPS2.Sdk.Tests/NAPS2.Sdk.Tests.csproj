@@ -33,4 +33,19 @@
     </AssemblyAttribute>
   </ItemGroup>
   
+  <ItemGroup>
+    <EmbeddedResource Update="ImportExport\ImageImporterTestsData.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ImageImporterTestsData.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  
+  <ItemGroup>
+    <Compile Update="ImportExport\ImageImporterTestsData.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ImageImporterTestsData.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  
 </Project>

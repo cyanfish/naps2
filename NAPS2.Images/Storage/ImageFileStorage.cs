@@ -26,6 +26,7 @@ public class ImageFileStorage : IImageStorage
             }
             catch (IOException)
             {
+                // TODO: Log this
             }
         }
     }

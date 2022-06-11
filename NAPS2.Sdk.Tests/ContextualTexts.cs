@@ -9,7 +9,7 @@ public class ContextualTexts : IDisposable
 {
     public ContextualTexts()
     {
-        FolderPath = $"naps2_test_temp/{Path.GetRandomFileName()}";
+        FolderPath = Path.Combine("naps2_test_temp", Path.GetRandomFileName());
         Folder = Directory.CreateDirectory(FolderPath);
 
         ProfileManager = new StubProfileManager();
