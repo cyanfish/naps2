@@ -77,7 +77,6 @@ public class ImageImporterTests : ContextualTexts
         AssertUsesRecoveryStorage(result[0].Storage, "00001.jpg");
         Assert.False(result[0].Metadata.Lossless);
         Assert.Equal(BitDepth.Color, result[0].Metadata.BitDepth);
-        // TODO: This is failing because the rendered bitmap is loaded from the filesystem and so it can't be deleted out from underneath. I don't yet know the correct way to handle this.
         ImageAsserts.Similar(
             new GdiImage(ImageImporterTestsData.color_image),
             result[0].RenderToImage(),

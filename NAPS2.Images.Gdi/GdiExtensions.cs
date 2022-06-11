@@ -17,7 +17,13 @@ public static class GdiExtensions
         {
             // TODO: We probably want to support PDFs somehow (which presumably use fileStorage?)
             case ImageFileStorage fileStorage:
-                return new Bitmap(fileStorage.FullPath);
+                // Rather than creating a bitmap from the file directly, instead we read it into memory first.
+                // This ensures we don't accidentally keep a lock on the storage file, which would cause an error if we
+                // try to delete it before the bitmap is disposed.
+                // This is less efficient in the case where the bitmap is guaranteed to be disposed quickly, but for now
+                // that seems like a reasonable tradeoff to avoid a whole class of hard-to-diagnose errors.
+                var stream = new MemoryStream(File.ReadAllBytes(fileStorage.FullPath));
+                return new Bitmap(stream);
             case MemoryStreamImageStorage memoryStreamStorage:
                 return new Bitmap(memoryStreamStorage.Stream);
             case GdiImage image:
