@@ -45,18 +45,20 @@ public class OcrRequestQueue
         }
     }
 
-    public async Task<OcrResult?> QueueForeground(IOcrEngine? ocrEngine, ProcessedImage image, string tempImageFilePath, OcrParams ocrParams, CancellationToken cancelToken)
+    public async Task<OcrResult?> Enqueue(IOcrEngine? ocrEngine, ProcessedImage image, string tempImageFilePath, OcrParams ocrParams, OcrPriority priority, CancellationToken cancelToken)
     {
         OcrRequest req;
         lock (this)
         {
-            ocrEngine ??= _ocrEngineManager.ActiveEngine ?? throw new ArgumentException("No OCR engine available");
+            // TODO: Remove the dependency on OcrEngineManager, and maybe delete this exception too
+            ocrEngine ??= _ocrEngineManager.ActiveEngine ?? throw new OcrEngineNotAvailableException();
 
             var reqParams = new OcrRequestParams(image, ocrEngine, ocrParams);
             req = _requestCache.GetOrSet(reqParams, () => new OcrRequest(reqParams));
             // Fast path for cached results
             if (req.Result != null)
             {
+                // TODO: We didn't do this in background ocr before, is there any problem with this?
                 SafeDelete(tempImageFilePath);
                 return req.Result;
             }
@@ -69,113 +71,55 @@ public class OcrRequestQueue
             {
                 SafeDelete(tempImageFilePath);
             }
-            // Increment the reference count
-            req.ForegroundCount += 1;
+            req.PriorityRefCount[priority] += 1;
             _queueWaitHandle.Release();
         }
         // If no worker threads are running, start them
         EnsureWorkerThreads();
+        // TODO: StartingOne + op.CancelToken.WaitHandle + FinishedOne are background only, need to figure out how
+        // to handle this generically
+        // TODO: Maybe add events to this class? OcrRequestQueued, OcrRequestCompleted, OcrRequestEventArgs(Priority, Cancel())
+        var op = StartingOne();
         // Wait for completion or cancellation
         await Task.Run(() =>
         {
             try
             {
-                WaitHandle.WaitAny(new[] { req.WaitHandle, cancelToken.WaitHandle });
+                WaitHandle.WaitAny(new[] { req.WaitHandle, cancelToken.WaitHandle, op.CancelToken.WaitHandle });
             }
             catch (Exception e)
             {
-                Log.ErrorException("Error in OcrRequestQueue.QueueForeground response task", e);
+                Log.ErrorException("Error in OcrRequestQueue.Enqueue response task", e);
             }
         });
         lock (this)
         {
-            // Decrement the reference count
-            req.ForegroundCount -= 1;
+            req.PriorityRefCount[priority] -= 1;
             // If all requestors have cancelled and there's no result to cache, delete the request
-            DestroyRequest(req);
+            MaybeGarbageCollectRequest(req);
         }
+        FinishedOne();
         // If no requests are pending, stop the worker threads
         EnsureWorkerThreads();
         // May return null if cancelled
         return req.Result;
     }
 
-    public void QueueBackground(ProcessedImage image, string tempImageFilePath, OcrParams ocrParams)
+    private void MaybeGarbageCollectRequest(OcrRequest req)
     {
-        OcrRequest req;
-        CancellationTokenSource cts = new CancellationTokenSource();
-        lock (this)
+        if (!req.HasLiveReference)
         {
-            var ocrEngine = _ocrEngineManager.ActiveEngine;
-            if (ocrEngine == null) return;
-
-            var reqParams = new OcrRequestParams(image, ocrEngine, ocrParams);
-            req = _requestCache.GetOrSet(reqParams, () => new OcrRequest(reqParams));
-            // Fast path for cached results
-            if (req.Result != null)
-            {
-                return;
-            }
-            // Manage ownership of the provided temp file
-            if (req.TempImageFilePath == null)
-            {
-                req.TempImageFilePath = tempImageFilePath;
-            }
-            else
-            {
-                SafeDelete(tempImageFilePath);
-            }
-            // Increment the reference count
-            req.BackgroundCount += 1;
-            
-            // TODO: We need to replace this. To do that, we need two conceptual steps:
-            // 1. Associate the ProcessedImage instance with a UiImage
-            // 2. Hook into deletion or transformation of the UiImage to cts.Cancel
-            // TODO: We might be able to provide a hook as a return value here (or directly in the image variable)
-            // that's stored in the ProcessedImage PostProcessingData. We would need to be careful if we still want to
-            // have PostProcessingData be immutable...
-
-            // snapshot.Source.ThumbnailInvalidated += (sender, args) => cts.Cancel();
-            // snapshot.Source.FullyDisposed += (sender, args) => cts.Cancel();
-            _queueWaitHandle.Release();
-        }
-        // If no worker threads are running, start them
-        EnsureWorkerThreads();
-        var op = StartingOne();
-        Task.Run(() =>
-        {
-            try
-            {
-                WaitHandle.WaitAny(new[] { req.WaitHandle, cts.Token.WaitHandle, op.CancelToken.WaitHandle });
-                lock (this)
-                {
-                    // Decrement the reference count
-                    req.BackgroundCount -= 1;
-                    // If all requestors have cancelled and there's no result to cache, delete the request
-                    DestroyRequest(req);
-                }
-
-                FinishedOne();
-                // If no requests are pending, stop the worker threads
-                EnsureWorkerThreads();
-            }
-            catch (Exception e)
-            {
-                Log.ErrorException("Error in OcrRequestQueue.QueueBackground response task", e);
-            }
-        });
-    }
-
-    private void DestroyRequest(OcrRequest req)
-    {
-        if (req.ForegroundCount + req.BackgroundCount == 0)
-        {
+            // If the OCR engine is already processing this request, then it will clean up the temp file when it's
+            // done anyway.
+            // TODO: There's still a race case where we delete it here just before processing starts. Can we handle
+            // that or simplify if handling isn't necessary?
             if (!req.IsProcessing)
             {
                 SafeDelete(req.TempImageFilePath ?? throw new InvalidOperationException());
             }
             if (req.Result == null)
             {
+                // TODO: What does this do? Is it needed?
                 req.CancelSource.Cancel();
                 if (_requestCache.Get(req.Params) == req) _requestCache.Remove(req.Params);
             }
@@ -206,7 +150,7 @@ public class OcrRequestQueue
     {
         lock (this)
         {
-            bool hasPending = _requestCache.Values.Any(x => x.ForegroundCount + x.BackgroundCount > 0);
+            bool hasPending = _requestCache.Values.Any(x => x.HasLiveReference);
             if (_workerTasks.Count == 0 && hasPending)
             {
                 for (int i = 0; i < Environment.ProcessorCount; i++)
@@ -242,9 +186,9 @@ public class OcrRequestQueue
                 lock (this)
                 {
                     next = _requestCache.Values
-                        .OrderByDescending(x => x.ForegroundCount)
-                        .ThenByDescending(x => x.BackgroundCount)
-                        .FirstOrDefault(x => x.BackgroundCount + x.ForegroundCount > 0 && !x.IsProcessing && x.Result == null);
+                        .OrderByDescending(x => x.PriorityRefCount[OcrPriority.Foreground])
+                        .ThenByDescending(x => x.PriorityRefCount[OcrPriority.Background])
+                        .FirstOrDefault(x => x.HasLiveReference && !x.IsProcessing && x.Result == null);
                     if (next == null)
                     {
                         continue;

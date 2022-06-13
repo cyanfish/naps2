@@ -61,6 +61,7 @@ public class ProcessedImage : IDisposable, IEquatable<ProcessedImage>
         {
             Dispose();
         }
+
         return result;
     }
 
@@ -74,13 +75,14 @@ public class ProcessedImage : IDisposable, IEquatable<ProcessedImage>
         return new ProcessedImage(Storage, Metadata, PostProcessingData, TransformState.Empty, _token.RefCount);
     }
 
-    public ProcessedImage WithPostProcessingData(PostProcessingData postProcessingData, bool disposeSelf = false)
+    public ProcessedImage WithPostProcessingData(PostProcessingData postProcessingData, bool disposeSelf)
     {
         var result = new ProcessedImage(Storage, Metadata, postProcessingData, TransformState, _token.RefCount);
         if (disposeSelf)
         {
             Dispose();
         }
+
         return result;
     }
 
@@ -107,7 +109,7 @@ public class ProcessedImage : IDisposable, IEquatable<ProcessedImage>
     /// lifetime.
     /// </summary>
     /// <returns></returns>
-    public WeakReference GetWeakReference() => new WeakReference(this);
+    public WeakReference GetWeakReference() => new(this);
 
     public override bool Equals(object obj)
     {
@@ -161,6 +163,7 @@ public class ProcessedImage : IDisposable, IEquatable<ProcessedImage>
                 {
                     return;
                 }
+
                 _disposed = true;
             }
 
@@ -169,5 +172,13 @@ public class ProcessedImage : IDisposable, IEquatable<ProcessedImage>
         }
     }
 
+    /// <summary>
+    /// A class functionally equivalent to a ProcessedImage reference, but that makes explicit the intention not to
+    /// have ownership over or prevent disposal of the image.
+    /// </summary>
+    /// <param name="ProcessedImage">
+    /// The reference. Users should prefer not to directly access this unless it is understood that it may be disposed
+    /// at any moment.
+    /// </param>
     public record WeakReference(ProcessedImage ProcessedImage);
 }

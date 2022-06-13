@@ -64,19 +64,6 @@ public class ScanOptions
     public bool AutoDeskew { get; set; }
 
     public bool FlipDuplexedPages { get; set; }
-
-    public bool DoOcr { get; set; }
-
-    public OcrParams OcrParams { get; set; }
-
-    // TODO: Do we need this? Can we generalize it?
-    // TODO: Also find a better name. Background = should cancel if the image is invalidated.
-    // TODO: Also try and get some tests going for OcrRequestQueue, that class is fragile.
-    public bool OcrInBackground { get; set; }
-
-    // TODO: Get rid of this (and on ScanParams). Rather than OcrInBackground and OcrCancelToken we should have
-    // TODO: some kind of event trigger when a scanned image is available and start OCR there.
-    public CancellationToken OcrCancelToken { get; set; }
 }
 
 public enum HorizontalAlign

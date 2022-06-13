@@ -18,15 +18,10 @@ public class ImportPostProcessor
             ? _imageContext.PerformTransform(rendered, new ThumbnailTransform(thumbnailSize.Value))
             : null;
         var barcodeDetection = BarcodeDetector.Detect(rendered, barcodeDetectionOptions);
-        var result = image.WithPostProcessingData(image.PostProcessingData with
+        return image.WithPostProcessingData(image.PostProcessingData with
         {
             Thumbnail = thumbnail,
             BarcodeDetection = barcodeDetection
-        });
-        if (disposeOriginalImage)
-        {
-            image.Dispose();
-        }
-        return result;
+        }, disposeOriginalImage);
     }
 }

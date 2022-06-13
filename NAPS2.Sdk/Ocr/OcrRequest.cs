@@ -2,7 +2,7 @@
 
 namespace NAPS2.Ocr;
 
-public class OcrRequest
+internal class OcrRequest
 {
     public OcrRequest(OcrRequestParams reqParams)
     {
@@ -21,7 +21,12 @@ public class OcrRequest
 
     public OcrResult? Result { get; set; }
 
-    public int ForegroundCount { get; set; }
+    public Dictionary<OcrPriority, int> PriorityRefCount { get; } = new()
+    {
+        {OcrPriority.Foreground, 0},
+        {OcrPriority.Background, 0}
+    };
 
-    public int BackgroundCount { get; set; }
+    public bool HasLiveReference =>
+        PriorityRefCount[OcrPriority.Foreground] > 0 || PriorityRefCount[OcrPriority.Background] > 0;
 }

@@ -110,9 +110,6 @@ internal class NetworkScanServiceImpl : NetworkScanService.NetworkScanServiceBas
         {
             options.TwainOptions.Adapter = TwainAdapter.NTwain;
         }
-            
-        // No OCR (note: this could be changed at some point)
-        options.DoOcr = false;
 
         // Avoid recursive network bridging
         options.NetworkOptions = new NetworkOptions();

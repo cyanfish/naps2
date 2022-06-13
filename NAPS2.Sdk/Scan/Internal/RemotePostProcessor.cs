@@ -27,19 +27,27 @@ internal class RemotePostProcessor : IRemotePostProcessor
 
     public ProcessedImage PostProcess(IMemoryImage image, ScanOptions options, PostProcessingContext postProcessingContext)
     {
-        using (image = DoInitialTransforms(image, options))
+        image = DoInitialTransforms(image, options);
+        try
         {
-            if (options.ExcludeBlankPages && BlankDetector.IsBlank(image, options.BlankPageWhiteThreshold, options.BlankPageCoverageThreshold))
+            if (options.ExcludeBlankPages && BlankDetector.IsBlank(image, options.BlankPageWhiteThreshold,
+                    options.BlankPageCoverageThreshold))
             {
                 return null;
             }
 
             var bitDepth = options.UseNativeUI ? BitDepth.Color : options.BitDepth;
-            var scannedImage = _scanningContext.CreateProcessedImage(image, bitDepth, options.MaxQuality, options.Quality, Enumerable.Empty<Transform>());
-            scannedImage = DoRevertibleTransforms(scannedImage, image, options, postProcessingContext);
+            var scannedImage = _scanningContext.CreateProcessedImage(image, bitDepth, options.MaxQuality,
+                options.Quality, Enumerable.Empty<Transform>());
+            DoRevertibleTransforms(ref scannedImage, ref image, options, postProcessingContext);
             postProcessingContext.TempPath = SaveForBackgroundOcr(image, options);
             // TODO: We need to attach the thumbnail to the scanned image
             return scannedImage;
+        }
+        finally
+        {
+            // Can't use "using" as the image reference could change
+            image.Dispose();
         }
     }
 
@@ -110,7 +118,7 @@ internal class RemotePostProcessor : IRemotePostProcessor
     }
 
     // TODO: This is more than just transforms.
-    private ProcessedImage DoRevertibleTransforms(ProcessedImage processedImage, IMemoryImage image, ScanOptions options, PostProcessingContext postProcessingContext)
+    private void DoRevertibleTransforms(ref ProcessedImage processedImage, ref IMemoryImage image, ScanOptions options, PostProcessingContext postProcessingContext)
     {
         var data = processedImage.PostProcessingData;
         if (options.ThumbnailSize.HasValue)
@@ -139,20 +147,22 @@ internal class RemotePostProcessor : IRemotePostProcessor
             // Even if barcode detection was attempted previously and failed, image adjustments may improve detection.
             data = data with { BarcodeDetection = BarcodeDetector.Detect(image, options.BarcodeDetectionOptions) };
         }
-        return processedImage.WithPostProcessingData(data, true);
+        processedImage = processedImage.WithPostProcessingData(data, true);
     }
 
     public string? SaveForBackgroundOcr(IMemoryImage bitmap, ScanOptions options)
     {
-        if (options.DoOcr)
-        {
-            // TODO: If we use tesseract as a library, this is somethat that could potentially improve (i.e. not having to save to disk)
-            // But then again, that doesn't make as much sense on systems (i.e. linux) where tesseract would be provided as an external package
-            var path = Path.Combine(_scanningContext.TempFolderPath, Path.GetRandomFileName());
-            // TODO: Cleanup this call
-            var fullPath = _scanningContext.ImageContext.SaveSmallestFormat(bitmap, path, BitDepth.Color, false, -1, out _);
-            return fullPath;
-        }
+        // TODO: How do we do this with an OcrController model?
+        // TODO: How do we do this with an actual remote scanner?
+        // if (options.DoOcr)
+        // {
+        //     // TODO: If we use tesseract as a library, this is somethat that could potentially improve (i.e. not having to save to disk)
+        //     // But then again, that doesn't make as much sense on systems (i.e. linux) where tesseract would be provided as an external package
+        //     var path = Path.Combine(_scanningContext.TempFolderPath, Path.GetRandomFileName());
+        //     // TODO: Cleanup this call
+        //     var fullPath = _scanningContext.ImageContext.SaveSmallestFormat(bitmap, path, BitDepth.Color, false, -1, out _);
+        //     return fullPath;
+        // }
         return null;
     }
 

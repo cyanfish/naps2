@@ -4,33 +4,24 @@ namespace NAPS2.Scan.Internal;
 
 internal class LocalPostProcessor : ILocalPostProcessor
 {
-    private readonly ScanningContext _scanningContext;
+    private readonly OcrController _ocrController;
 
-    public LocalPostProcessor(ScanningContext scanningContext)
+    public LocalPostProcessor(OcrController ocrController)
     {
-        _scanningContext = scanningContext;
+        _ocrController = ocrController;
     }
 
-    public void PostProcess(ProcessedImage image, ScanOptions options, PostProcessingContext postProcessingContext)
+    public ProcessedImage PostProcess(ProcessedImage image, ScanOptions options, PostProcessingContext postProcessingContext)
     {
         if (postProcessingContext.TempPath != null)
         {
-            RunBackgroundOcr(image, options, postProcessingContext.TempPath);
+            RunBackgroundOcr(ref image, options, postProcessingContext.TempPath);
         }
+        return image;
     }
 
-    private void RunBackgroundOcr(ProcessedImage image, ScanOptions options, string tempPath)
-    {
-        if (options.DoOcr)
-        {
-            if (!options.OcrInBackground)
-            {
-                _scanningContext.OcrRequestQueue.QueueForeground(null, image, tempPath, options.OcrParams, options.OcrCancelToken).AssertNoAwait();
-            }
-            else
-            {
-                _scanningContext.OcrRequestQueue.QueueBackground(image, tempPath, options.OcrParams);
-            }
-        }
+    private void RunBackgroundOcr(ref ProcessedImage image, ScanOptions options, string tempPath)
+    { 
+        _ocrController.Start(ref image, tempPath).AssertNoAwait();
     }
 }

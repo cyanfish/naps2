@@ -213,7 +213,8 @@ public class PdfSharpExporter : PdfExporter
             }
 
             // Start OCR
-            var ocrTask = ocrContext.RequestQueue.QueueForeground(ocrEngine, image, tempImageFilePath, ocrContext.Params, cancelToken);
+            var ocrTask = ocrContext.RequestQueue.Enqueue(
+                ocrEngine, image, tempImageFilePath, ocrContext.Params, OcrPriority.Foreground, cancelToken);
             ocrTask.ContinueWith(task =>
             {
                 // This is the best place to put progress reporting

@@ -1,5 +1,6 @@
 ﻿using System.Threading;
 using NAPS2.ImportExport;
+using NAPS2.Ocr;
 using NAPS2.Platform.Windows;
 using NAPS2.Scan.Exceptions;
 using NAPS2.Scan.Internal;
@@ -17,12 +18,14 @@ internal class ScanPerformer : IScanPerformer
     private readonly AutoSaver _autoSaver;
     private readonly IProfileManager _profileManager;
     private readonly ErrorOutput _errorOutput;
-    private readonly ILocalPostProcessor _localPostProcessor;
     private readonly ScanOptionsValidator _scanOptionsValidator;
     private readonly IScanBridgeFactory _scanBridgeFactory;
+    private readonly OcrEngineManager _ocrEngineManager;
 
-    public ScanPerformer(IFormFactory formFactory, ScopedConfig config, OperationProgress operationProgress, AutoSaver autoSaver,
-        IProfileManager profileManager, ErrorOutput errorOutput, ILocalPostProcessor localPostProcessor, ScanOptionsValidator scanOptionsValidator, IScanBridgeFactory scanBridgeFactory, ScanningContext scanningContext)
+    public ScanPerformer(IFormFactory formFactory, ScopedConfig config, OperationProgress operationProgress,
+        AutoSaver autoSaver, IProfileManager profileManager, ErrorOutput errorOutput,
+        ScanOptionsValidator scanOptionsValidator, IScanBridgeFactory scanBridgeFactory,
+        ScanningContext scanningContext, OcrEngineManager ocrEngineManager)
     {
         _formFactory = formFactory;
         _config = config;
@@ -30,10 +33,10 @@ internal class ScanPerformer : IScanPerformer
         _autoSaver = autoSaver;
         _profileManager = profileManager;
         _errorOutput = errorOutput;
-        _localPostProcessor = localPostProcessor;
         _scanOptionsValidator = scanOptionsValidator;
         _scanBridgeFactory = scanBridgeFactory;
         _scanningContext = scanningContext;
+        _ocrEngineManager = ocrEngineManager;
     }
 
     public async Task<ScanDevice> PromptForDevice(ScanProfile scanProfile, IntPtr dialogParent = default)
@@ -42,8 +45,8 @@ internal class ScanPerformer : IScanPerformer
         return await PromptForDevice(options);
     }
 
-    public async Task<ScannedImageSource> PerformScan(ScanProfile scanProfile, ScanParams scanParams, IntPtr dialogParent = default,
-        CancellationToken cancelToken = default)
+    public async Task<ScannedImageSource> PerformScan(ScanProfile scanProfile, ScanParams scanParams,
+        IntPtr dialogParent = default, CancellationToken cancelToken = default)
     {
         var options = BuildOptions(scanProfile, scanParams, dialogParent);
         if (!await PopulateDevice(scanProfile, options))
@@ -52,7 +55,8 @@ internal class ScanPerformer : IScanPerformer
             return ScannedImageSource.Empty;
         }
 
-        var controller = new ScanController(_localPostProcessor, _scanOptionsValidator, _scanBridgeFactory);
+        var localPostProcessor = new LocalPostProcessor(ConfigureOcrController(scanParams));
+        var controller = new ScanController(localPostProcessor, _scanOptionsValidator, _scanBridgeFactory);
         // TODO: Consider how to handle operations with Twain (right now there are duplicate progress windows).
         var op = new ScanOperation(options.Device, options.PaperSource);
 
@@ -70,7 +74,7 @@ internal class ScanPerformer : IScanPerformer
         {
             source = _autoSaver.Save(scanProfile.AutoSaveSettings, source);
         }
-            
+
         var sink = new ScannedImageSink();
         source.ForEach(img => sink.PutImage(img)).ContinueWith(t =>
         {
@@ -86,9 +90,35 @@ internal class ScanPerformer : IScanPerformer
                     BitDepth = scanProfile.BitDepth.Description()
                 });
             }
+
             sink.SetCompleted();
         }).AssertNoAwait();
         return sink.AsSource();
+    }
+
+    private OcrController ConfigureOcrController(ScanParams scanParams)
+    {
+        OcrController ocrController = new OcrController(_scanningContext);
+        if (scanParams.DoOcr)
+        {
+            ocrController.Engine = _ocrEngineManager.ActiveEngine;
+            if (ocrController.Engine == null)
+            {
+                Log.Error("OCR is enabled but no OCR engine is available.");
+            }
+            else
+            {
+                ocrController.EnableOcr = true;
+                ocrController.LanguageCode = scanParams.OcrParams.LanguageCode;
+                ocrController.Mode = scanParams.OcrParams.Mode;
+                ocrController.TimeoutInSeconds = scanParams.OcrParams.TimeoutInSeconds;
+                // TODO: Make DoOcr mean just foreground OCR again, and check the config here to enable background ocr 
+                ocrController.Priority = OcrPriority.Foreground;
+                scanParams.OcrCancelToken.Register(() => ocrController.CancelAll());
+            }
+        }
+
+        return ocrController;
     }
 
     private void HandleError(Exception error)
@@ -115,6 +145,7 @@ internal class ScanPerformer : IScanPerformer
         {
             return;
         }
+
         Task.Run(() =>
         {
             Invoker.Current.SafeInvoke(() =>
@@ -137,7 +168,8 @@ internal class ScanPerformer : IScanPerformer
         controller.PageStart += (sender, args) => smoothProgress.Reset();
         controller.PageProgress += (sender, args) => smoothProgress.InputProgressChanged(args.Progress);
         controller.ScanEnd += (senders, args) => smoothProgress.Reset();
-        smoothProgress.OutputProgressChanged += (sender, args) => op.Progress((int) Math.Round(args.Value * 1000), 1000);
+        smoothProgress.OutputProgressChanged +=
+            (sender, args) => op.Progress((int) Math.Round(args.Value * 1000), 1000);
     }
 
     private ScanOptions BuildOptions(ScanProfile scanProfile, ScanParams scanParams, IntPtr dialogParent)
@@ -156,10 +188,14 @@ internal class ScanPerformer : IScanPerformer
             TwainOptions =
             {
                 Adapter = scanProfile.TwainImpl == TwainImpl.Legacy ? TwainAdapter.Legacy : TwainAdapter.NTwain,
-                Dsm = scanProfile.TwainImpl == TwainImpl.X64 ? TwainDsm.NewX64
-                    : scanProfile.TwainImpl == TwainImpl.OldDsm || scanProfile.TwainImpl == TwainImpl.Legacy ? TwainDsm.Old
-                    : TwainDsm.New,
-                TransferMode = scanProfile.TwainImpl == TwainImpl.MemXfer ? TwainTransferMode.Memory : TwainTransferMode.Native,
+                Dsm = scanProfile.TwainImpl == TwainImpl.X64
+                    ? TwainDsm.NewX64
+                    : scanProfile.TwainImpl == TwainImpl.OldDsm || scanProfile.TwainImpl == TwainImpl.Legacy
+                        ? TwainDsm.Old
+                        : TwainDsm.New,
+                TransferMode = scanProfile.TwainImpl == TwainImpl.MemXfer
+                    ? TwainTransferMode.Memory
+                    : TwainTransferMode.Native,
                 IncludeWiaDevices = false
             },
             SaneOptions =
@@ -175,7 +211,8 @@ internal class ScanPerformer : IScanPerformer
             },
             BarcodeDetectionOptions =
             {
-                DetectBarcodes = scanParams.DetectPatchT || scanProfile.AutoSaveSettings?.Separator == SaveSeparator.PatchT,
+                DetectBarcodes = scanParams.DetectPatchT ||
+                                 scanProfile.AutoSaveSettings?.Separator == SaveSeparator.PatchT,
                 PatchTOnly = true
             },
             Brightness = scanProfile.Brightness,
@@ -186,9 +223,7 @@ internal class ScanPerformer : IScanPerformer
             AutoDeskew = scanProfile.AutoDeskew,
             BitDepth = scanProfile.BitDepth.ToBitDepth(),
             DialogParent = dialogParent,
-            DoOcr = scanParams.DoOcr,
             MaxQuality = scanProfile.MaxQuality,
-            OcrParams = scanParams.OcrParams,
             PageAlign = scanProfile.PageAlign.ToHorizontalAlign(),
             PaperSource = scanProfile.PaperSource.ToPaperSource(),
             ScaleRatio = scanProfile.AfterScanScale.ToIntScaleFactor(),
@@ -196,8 +231,6 @@ internal class ScanPerformer : IScanPerformer
             ExcludeBlankPages = scanProfile.ExcludeBlankPages,
             FlipDuplexedPages = scanProfile.FlipDuplexedPages,
             NoUI = scanParams.NoUI,
-            OcrCancelToken = scanParams.OcrCancelToken,
-            OcrInBackground = true, // TODO
             BlankPageCoverageThreshold = scanProfile.BlankPageCoverageThreshold,
             BlankPageWhiteThreshold = scanProfile.BlankPageWhiteThreshold,
             BrightnessContrastAfterScan = scanProfile.BrightnessContrastAfterScan,
@@ -241,6 +274,7 @@ internal class ScanPerformer : IScanPerformer
         {
             options.Device = scanProfile.Device;
         }
+
         return true;
     }
 

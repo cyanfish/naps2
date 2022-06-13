@@ -1,4 +1,5 @@
 ﻿using System.Threading;
+using NAPS2.Ocr;
 using NAPS2.Scan.Internal;
 
 namespace NAPS2.Scan;
@@ -10,7 +11,12 @@ public class ScanController : IScanController
     private readonly IScanBridgeFactory _scanBridgeFactory;
 
     public ScanController(ScanningContext scanningContext)
-        : this(new LocalPostProcessor(scanningContext), new ScanOptionsValidator(), new ScanBridgeFactory(scanningContext))
+        : this(new LocalPostProcessor(new OcrController(scanningContext)), new ScanOptionsValidator(), new ScanBridgeFactory(scanningContext))
+    {
+    }
+
+    public ScanController(ScanningContext scanningContext, OcrController ocrController)
+        : this(new LocalPostProcessor(ocrController), new ScanOptionsValidator(), new ScanBridgeFactory(scanningContext))
     {
     }
 
@@ -54,7 +60,7 @@ public class ScanController : IScanController
                 await bridge.Scan(options, cancelToken, new ScanEvents(PageStartCallback, PageProgressCallback),
                     (scannedImage, postProcessingContext) =>
                     {
-                        _localPostProcessor.PostProcess(scannedImage, options, postProcessingContext);
+                        scannedImage = _localPostProcessor.PostProcess(scannedImage, options, postProcessingContext);
                         sink.PutImage(scannedImage);
                         PageEndCallback(scannedImage);
                     });
