@@ -21,18 +21,16 @@ public class OcrRequestQueue
     private List<Task> _workerTasks = new List<Task>();
     private CancellationTokenSource _workerCts = new CancellationTokenSource();
 
-    private readonly OcrEngineManager _ocrEngineManager;
     private readonly OperationProgress _operationProgress;
 
     private OcrOperation? _currentOp;
 
-    public OcrRequestQueue() : this(OcrEngineManager.Default, OperationProgress.Default)
+    public OcrRequestQueue() : this(OperationProgress.Default)
     {
     }
 
-    public OcrRequestQueue(OcrEngineManager ocrEngineManager, OperationProgress operationProgress)
+    public OcrRequestQueue(OperationProgress operationProgress)
     {
-        _ocrEngineManager = ocrEngineManager;
         _operationProgress = operationProgress;
     }
 
@@ -45,14 +43,11 @@ public class OcrRequestQueue
         }
     }
 
-    public async Task<OcrResult?> Enqueue(IOcrEngine? ocrEngine, ProcessedImage image, string tempImageFilePath, OcrParams ocrParams, OcrPriority priority, CancellationToken cancelToken)
+    public async Task<OcrResult?> Enqueue(IOcrEngine ocrEngine, ProcessedImage image, string tempImageFilePath, OcrParams ocrParams, OcrPriority priority, CancellationToken cancelToken)
     {
         OcrRequest req;
         lock (this)
         {
-            // TODO: Remove the dependency on OcrEngineManager, and maybe delete this exception too
-            ocrEngine ??= _ocrEngineManager.ActiveEngine ?? throw new OcrEngineNotAvailableException();
-
             var reqParams = new OcrRequestParams(image, ocrEngine, ocrParams);
             req = _requestCache.GetOrSet(reqParams, () => new OcrRequest(reqParams));
             // Fast path for cached results
@@ -223,6 +218,8 @@ public class OcrRequestQueue
         }
         catch (Exception e)
         {
+            // TODO: We need to handle an error in engine processing better, with this the request may never resolve if there's a persistent error
+            // TODO: Plus tests for transient and persistent errors
             Log.ErrorException("Error in OcrRequestQueue.RunWorkerTask", e);
         }
     }

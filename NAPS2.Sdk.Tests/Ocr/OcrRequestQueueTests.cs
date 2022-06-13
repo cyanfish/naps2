@@ -10,19 +10,13 @@ public class OcrRequestQueueTests : ContextualTexts
 {
     private readonly OcrRequestQueue _ocrRequestQueue;
     private readonly Mock<IOcrEngine> _mockEngine;
-    private readonly OcrEngineManager _mockEngineManager;
     private readonly Mock<OperationProgress> _mockOperationProgress;
 
     public OcrRequestQueueTests()
     {
         _mockEngine = new Mock<IOcrEngine>(MockBehavior.Strict);
-        _mockEngineManager = new OcrEngineManager(new[] {_mockEngine.Object});
         _mockOperationProgress = new Mock<OperationProgress>();
-        _ocrRequestQueue = new OcrRequestQueue(_mockEngineManager, _mockOperationProgress.Object);
-        _mockEngine.Setup(x => x.IsSupported).Returns(true);
-        _mockEngine.Setup(x => x.IsInstalled).Returns(true);
-        _mockEngine.Setup(x => x.InstalledLanguages)
-            .Returns(new List<Language> {new("eng", "English", false)});
+        _ocrRequestQueue = new OcrRequestQueue(_mockOperationProgress.Object);
     }
 
     [Fact]
@@ -37,7 +31,7 @@ public class OcrRequestQueueTests : ContextualTexts
 
         var ocrResult =
             await _ocrRequestQueue.Enqueue(
-                null,
+                _mockEngine.Object,
                 image,
                 tempPath,
                 ocrParams,
