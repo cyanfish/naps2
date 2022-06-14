@@ -19,15 +19,22 @@ public class OcrController
 
     public IOcrEngine? Engine { get; set; }
 
-    public string? LanguageCode { get; set; }
-
-    public OcrMode Mode { get; set; }
-
-    public double TimeoutInSeconds { get; set; }
+    public OcrParams OcrParams { get; set; } = new(null, OcrMode.Default, 0);
 
     public bool AttachPerImageCancellation { get; set; }
 
     public OcrPriority Priority { get; set; }
+
+    /// <summary>
+    /// Fired when an individual OCR operation (i.e. one page) is started on this controller.
+    /// </summary>
+    public event EventHandler<OcrEventArgs>? OcrStarted;
+
+    /// <summary>
+    /// Fired when an individual OCR operation (i.e. one page) that was started on this controller finishes
+    /// (successfully or unsuccessfully).
+    /// </summary>
+    public event EventHandler<OcrEventArgs>? OcrCompleted;
 
     public Task<OcrResult?> Start(ref ProcessedImage image, string tempImageFilePath)
     {
@@ -39,11 +46,11 @@ public class OcrController
         {
             throw new InvalidOperationException("OCR is enabled but no OCR engine is specified.");
         }
-        if (LanguageCode == null)
+        if (OcrParams.LanguageCode == null)
         {
             throw new InvalidOperationException("OCR is enabled but no language code is specified.");
         }
-        if (!Engine.CanProcess(LanguageCode))
+        if (!Engine.CanProcess(OcrParams.LanguageCode))
         {
             throw new InvalidOperationException("OCR is enabled but the engine can't handle the specified language.");
         }
@@ -55,14 +62,20 @@ public class OcrController
         {
             image = image.WithPostProcessingData(image.PostProcessingData with { OcrCts = cts }, true);
         }
-        
-        return _scanningContext.OcrRequestQueue.Enqueue(
+
+        var task = _scanningContext.OcrRequestQueue.Enqueue(
             Engine,
             image,
             tempImageFilePath,
-            new OcrParams(LanguageCode, Mode, TimeoutInSeconds),
+            OcrParams,
             Priority,
             cts.Token);
+
+        var eventArgs = new OcrEventArgs(task);
+        OcrStarted?.Invoke(this, eventArgs);
+        task.ContinueWith(t => OcrCompleted?.Invoke(this, eventArgs));
+
+        return task;
     }
 
     public void CancelAll()

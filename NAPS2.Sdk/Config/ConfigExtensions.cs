@@ -8,7 +8,7 @@ public static class ConfigExtensions
     {
         if (!config.Get(c => c.EnableOcr))
         {
-            return new OcrParams();
+            return new OcrParams(null, OcrMode.Default, 0);
         }
         return new OcrParams(
             config.Get(c => c.OcrLanguageCode),

@@ -109,9 +109,7 @@ internal class ScanPerformer : IScanPerformer
             else
             {
                 ocrController.EnableOcr = true;
-                ocrController.LanguageCode = scanParams.OcrParams.LanguageCode;
-                ocrController.Mode = scanParams.OcrParams.Mode;
-                ocrController.TimeoutInSeconds = scanParams.OcrParams.TimeoutInSeconds;
+                ocrController.OcrParams = scanParams.OcrParams;
                 // TODO: Make DoOcr mean just foreground OCR again, and check the config here to enable background ocr 
                 ocrController.Priority = OcrPriority.Foreground;
                 scanParams.OcrCancelToken.Register(() => ocrController.CancelAll());

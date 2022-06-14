@@ -23,8 +23,6 @@ public class OcrRequestQueue
 
     private readonly OperationProgress _operationProgress;
 
-    private OcrOperation? _currentOp;
-
     public OcrRequestQueue() : this(OperationProgress.Default)
     {
     }
@@ -71,16 +69,12 @@ public class OcrRequestQueue
         }
         // If no worker threads are running, start them
         EnsureWorkerThreads();
-        // TODO: StartingOne + op.CancelToken.WaitHandle + FinishedOne are background only, need to figure out how
-        // to handle this generically
-        // TODO: Maybe add events to this class? OcrRequestQueued, OcrRequestCompleted, OcrRequestEventArgs(Priority, Cancel())
-        var op = StartingOne();
         // Wait for completion or cancellation
         await Task.Run(() =>
         {
             try
             {
-                WaitHandle.WaitAny(new[] { req.WaitHandle, cancelToken.WaitHandle, op.CancelToken.WaitHandle });
+                WaitHandle.WaitAny(new[] { req.WaitHandle, cancelToken.WaitHandle });
             }
             catch (Exception e)
             {
@@ -93,7 +87,6 @@ public class OcrRequestQueue
             // If all requestors have cancelled and there's no result to cache, delete the request
             MaybeGarbageCollectRequest(req);
         }
-        FinishedOne();
         // If no requests are pending, stop the worker threads
         EnsureWorkerThreads();
         // May return null if cancelled
@@ -221,49 +214,6 @@ public class OcrRequestQueue
             // TODO: We need to handle an error in engine processing better, with this the request may never resolve if there's a persistent error
             // TODO: Plus tests for transient and persistent errors
             Log.ErrorException("Error in OcrRequestQueue.RunWorkerTask", e);
-        }
-    }
-
-    private OcrOperation StartingOne()
-    {
-        OcrOperation op;
-        bool started = false;
-        lock (this)
-        {
-            if (_currentOp == null)
-            {
-                _currentOp = new OcrOperation(_workerTasks);
-                started = true;
-            }
-            op = _currentOp;
-            op.Status.MaxProgress += 1;
-        }
-        op.InvokeStatusChanged();
-        if (started)
-        {
-            _operationProgress.ShowBackgroundProgress(op);
-        }
-        return op;
-    }
-
-    private void FinishedOne()
-    {
-        OcrOperation op;
-        bool finished = false;
-        lock (this)
-        {
-            op = _currentOp ?? throw new InvalidOperationException();
-            _currentOp.Status.CurrentProgress += 1;
-            if (_currentOp.Status.CurrentProgress == _currentOp.Status.MaxProgress)
-            {
-                _currentOp = null;
-                finished = true;
-            }
-        }
-        op.InvokeStatusChanged();
-        if (finished)
-        {
-            op.InvokeFinished();
         }
     }
 }
