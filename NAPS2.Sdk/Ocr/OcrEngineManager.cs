@@ -1,6 +1,8 @@
-﻿namespace NAPS2.Ocr;
+﻿using NAPS2.Scan;
 
-public class OcrEngineManager
+namespace NAPS2.Ocr;
+
+public class OcrEngineManager : IOcrEngineProvider
 {
     private static OcrEngineManager _default = new OcrEngineManager();
 

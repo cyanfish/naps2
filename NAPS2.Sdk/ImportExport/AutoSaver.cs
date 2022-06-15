@@ -10,8 +10,6 @@ public class AutoSaver
 {
     private readonly IConfigProvider<PdfSettings> _pdfSettingsProvider;
     private readonly IConfigProvider<ImageSettings> _imageSettingsProvider;
-    private readonly OcrEngineManager _ocrEngineManager;
-    private readonly OcrRequestQueue _ocrRequestQueue;
     private readonly ErrorOutput _errorOutput;
     private readonly DialogHelper _dialogHelper;
     private readonly OperationProgress _operationProgress;
@@ -24,8 +22,6 @@ public class AutoSaver
     {
         _pdfSettingsProvider = pdfSettingsProvider;
         _imageSettingsProvider = imageSettingsProvider;
-        _ocrEngineManager = ocrEngineManager;
-        _ocrRequestQueue = ocrRequestQueue;
         _errorOutput = errorOutput;
         _dialogHelper = dialogHelper;
         _operationProgress = operationProgress;
@@ -152,8 +148,7 @@ public class AutoSaver
                 subPath = placeholders.Substitute(subPath, true, 0, 1);
             }
             var op = new SavePdfOperation(_pdfExporter, _overwritePrompt);
-            var ocrContext = new OcrContext(_config.DefaultOcrParams(), _ocrEngineManager, _ocrRequestQueue);
-            if (op.Start(subPath, placeholders, images, _pdfSettingsProvider, ocrContext))
+            if (op.Start(subPath, placeholders, images, _pdfSettingsProvider, _config.DefaultOcrParams()))
             {
                 _operationProgress.ShowProgress(op);
             }

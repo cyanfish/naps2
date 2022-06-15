@@ -21,7 +21,6 @@ public class AutomatedScanning
     private readonly IScannedImageImporter _scannedImageImporter;
     private readonly IOperationFactory _operationFactory;
     private readonly OcrEngineManager _ocrEngineManager;
-    private readonly OcrRequestQueue _ocrRequestQueue;
     private readonly IFormFactory _formFactory;
     private readonly ScopedConfig _config;
     private readonly TransactionConfigScope<CommonConfig> _userTransact;
@@ -41,7 +40,11 @@ public class AutomatedScanning
     private List<string> _actualOutputPaths;
     private OcrParams _ocrParams;
 
-    public AutomatedScanning(ConsoleOutput output, AutomatedScanningOptions options, ImageContext imageContext, IScanPerformer scanPerformer, ErrorOutput errorOutput, IEmailProviderFactory emailProviderFactory, IScannedImageImporter scannedImageImporter, IOperationFactory operationFactory, OcrEngineManager ocrEngineManager, IFormFactory formFactory, ScopedConfig config, IProfileManager profileManager, OcrRequestQueue ocrRequestQueue, RecoveryStorageManager recoveryStorageManager, ScanningContext scanningContext)
+    public AutomatedScanning(ConsoleOutput output, AutomatedScanningOptions options, ImageContext imageContext,
+        IScanPerformer scanPerformer, ErrorOutput errorOutput, IEmailProviderFactory emailProviderFactory,
+        IScannedImageImporter scannedImageImporter, IOperationFactory operationFactory,
+        OcrEngineManager ocrEngineManager, IFormFactory formFactory, ScopedConfig config,
+        IProfileManager profileManager, RecoveryStorageManager recoveryStorageManager, ScanningContext scanningContext)
     {
         _output = output;
         _options = options;
@@ -55,7 +58,6 @@ public class AutomatedScanning
         _formFactory = formFactory;
         _config = config;
         _profileManager = profileManager;
-        _ocrRequestQueue = ocrRequestQueue;
         _recoveryStorageManager = recoveryStorageManager;
         _scanningContext = scanningContext;
 
@@ -193,7 +195,8 @@ public class AutomatedScanning
         // Using a form here is not ideal (since this is supposed to be a console app), but good enough for now
         // Especially considering wia/twain often show forms anyway
         var progressForm = _formFactory.Create<FDownloadProgress>();
-        if (toInstall.Id.StartsWith("ocr-", StringComparison.InvariantCulture) && componentDict.TryGetValue("ocr", out var ocrExe) && !ocrExe.IsInstalled)
+        if (toInstall.Id.StartsWith("ocr-", StringComparison.InvariantCulture) &&
+            componentDict.TryGetValue("ocr", out var ocrExe) && !ocrExe.IsInstalled)
         {
             progressForm.QueueFile(ocrExe);
             if (_options.Verbose)
@@ -215,7 +218,8 @@ public class AutomatedScanning
             : _options.SplitScans ? SaveSeparator.FilePerScan
             : _options.SplitSize > 0 || _options.Split ? SaveSeparator.FilePerPage
             : SaveSeparator.None;
-        _scanList = SaveSeparatorHelper.SeparateScans(_scanList, sep, _options.SplitSize).Where(x => x.Count > 0).ToList();
+        _scanList = SaveSeparatorHelper.SeparateScans(_scanList, sep, _options.SplitSize).Where(x => x.Count > 0)
+            .ToList();
 
         foreach (var scan in _scanList)
         {
@@ -285,7 +289,8 @@ public class AutomatedScanning
                         PatchTOnly = true
                     }
                 };
-                var images = await _scannedImageImporter.Import(actualPath, importParams, (j, k) => { }, CancellationToken.None).ToList();
+                var images = await _scannedImageImporter
+                    .Import(actualPath, importParams, (j, k) => { }, CancellationToken.None).ToList();
                 _scanList.Add(images);
             }
             catch (Exception ex)
@@ -332,11 +337,12 @@ public class AutomatedScanning
                 {
                     // The scan has already been exported to PDF, so use that file
                     OutputVerbose(ConsoleResources.AttachingExportedPDF);
-                    int digits = (int)Math.Floor(Math.Log10(_scanList.Count)) + 1;
+                    int digits = (int) Math.Floor(Math.Log10(_scanList.Count)) + 1;
                     int i = 0;
                     foreach (var path in _actualOutputPaths)
                     {
-                        string attachmentName = _placeholders.Substitute(_options.EmailFileName, false, i++, _scanList.Count > 1 ? digits : 0);
+                        string attachmentName = _placeholders.Substitute(_options.EmailFileName, false, i++,
+                            _scanList.Count > 1 ? digits : 0);
                         message.Attachments.Add(new EmailAttachment(path, attachmentName));
                     }
                 }
@@ -392,7 +398,8 @@ public class AutomatedScanning
     public bool ValidateOptions()
     {
         // Most validation is done by the CommandLineParser library, but some constraints that can't be represented by that API need to be checked here
-        if (_options.OutputPath == null && _options.EmailFileName == null && _options.Install == null && !_options.AutoSave)
+        if (_options.OutputPath == null && _options.EmailFileName == null && _options.Install == null &&
+            !_options.AutoSave)
         {
             _errorOutput.DisplayError(ConsoleResources.OutputOrEmailRequired);
             return false;
@@ -446,7 +453,9 @@ public class AutomatedScanning
         _config.Run.Set(c => c.ImageSettings = new ImageSettings
         {
             JpegQuality = _options.JpegQuality,
-            TiffCompression = Enum.TryParse<TiffCompression>(_options.TiffComp, true, out var tc) ? tc : TiffCompression.Auto
+            TiffCompression = Enum.TryParse<TiffCompression>(_options.TiffComp, true, out var tc)
+                ? tc
+                : TiffCompression.Auto
         });
 
         foreach (var scan in _scanList)
@@ -492,7 +501,7 @@ public class AutomatedScanning
             {
                 using Stream configFileStream = File.OpenRead(_options.EncryptConfig);
                 var serializer = new XmlSerializer(typeof(PdfEncryption));
-                var encryption = (PdfEncryption)serializer.Deserialize(configFileStream);
+                var encryption = (PdfEncryption) serializer.Deserialize(configFileStream);
                 _config.Run.Set(c => c.PdfSettings.Encryption = encryption);
             }
             catch (Exception ex)
@@ -539,9 +548,9 @@ public class AutomatedScanning
                     i = op.Status.CurrentProgress;
                 }
             };
-            int digits = (int)Math.Floor(Math.Log10(_scanList.Count)) + 1;
+            int digits = (int) Math.Floor(Math.Log10(_scanList.Count)) + 1;
             string actualPath = _placeholders.Substitute(path, true, scanIndex++, _scanList.Count > 1 ? digits : 0);
-            op.Start(actualPath, _placeholders, fileContents, _pdfSettingsProvider, new OcrContext(_ocrParams, _ocrEngineManager, _ocrRequestQueue), email, null);
+            op.Start(actualPath, _placeholders, fileContents, _pdfSettingsProvider, _ocrParams, email, null);
             if (!await op.Success)
             {
                 return false;
@@ -559,7 +568,8 @@ public class AutomatedScanning
     {
         OutputVerbose(ConsoleResources.BeginningScan);
 
-        bool autoSaveEnabled = !_transactionConfig.Get(c => c.DisableAutoSave) && profile.EnableAutoSave && profile.AutoSaveSettings != null;
+        bool autoSaveEnabled = !_transactionConfig.Get(c => c.DisableAutoSave) && profile.EnableAutoSave &&
+                               profile.AutoSaveSettings != null;
         if (_options.AutoSave && !autoSaveEnabled)
         {
             _errorOutput.DisplayError(ConsoleResources.AutoSaveNotEnabled);
@@ -607,7 +617,8 @@ public class AutomatedScanning
             {
                 // Use the profile with the specified name (try case-sensitive first, then case-insensitive)
                 profile = _profileManager.Profiles.FirstOrDefault(x => x.DisplayName == _options.ProfileName) ??
-                          _profileManager.Profiles.First(x => x.DisplayName.ToLower() == _options.ProfileName.ToLower());
+                          _profileManager.Profiles.First(x =>
+                              x.DisplayName.ToLower() == _options.ProfileName.ToLower());
             }
         }
         catch (InvalidOperationException)

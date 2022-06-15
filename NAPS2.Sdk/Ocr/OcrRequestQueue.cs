@@ -70,17 +70,7 @@ public class OcrRequestQueue
         // If no worker threads are running, start them
         EnsureWorkerThreads();
         // Wait for completion or cancellation
-        await Task.Run(() =>
-        {
-            try
-            {
-                WaitHandle.WaitAny(new[] { req.WaitHandle, cancelToken.WaitHandle });
-            }
-            catch (Exception e)
-            {
-                Log.ErrorException("Error in OcrRequestQueue.Enqueue response task", e);
-            }
-        });
+        await Task.Run(() => WaitHandle.WaitAny(new[] { req.WaitHandle, cancelToken.WaitHandle }));
         lock (this)
         {
             req.PriorityRefCount[priority] -= 1;
@@ -187,7 +177,16 @@ public class OcrRequestQueue
                 }
 
                 // Actually run OCR
-                var result = next.Params.Engine.ProcessImage(tempImageFilePath, next.Params.OcrParams, next.CancelSource.Token);
+                OcrResult? result = null;
+                try
+                {
+                    result = next.Params.Engine.ProcessImage(
+                        tempImageFilePath, next.Params.OcrParams, next.CancelSource.Token);
+                }
+                catch (Exception e)
+                {
+                    Log.ErrorException("Error in OcrEngine.ProcessImage", e);
+                }
                 // Update the request
                 lock (this)
                 {
@@ -211,8 +210,6 @@ public class OcrRequestQueue
         }
         catch (Exception e)
         {
-            // TODO: We need to handle an error in engine processing better, with this the request may never resolve if there's a persistent error
-            // TODO: Plus tests for transient and persistent errors
             Log.ErrorException("Error in OcrRequestQueue.RunWorkerTask", e);
         }
     }

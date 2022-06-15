@@ -2,6 +2,7 @@
 using System.Threading;
 using NAPS2.Images.Gdi;
 using NAPS2.Ocr;
+using NAPS2.Scan;
 using PdfSharp.Drawing;
 using PdfSharp.Drawing.Layout;
 using PdfSharp.Fonts;
@@ -13,6 +14,8 @@ namespace NAPS2.ImportExport.Pdf;
 
 public class PdfSharpExporter : PdfExporter
 {
+    private readonly ScanningContext _scanningContext;
+
     static PdfSharpExporter()
     {
         if (PlatformCompat.System.UseUnixFontResolver)
@@ -21,11 +24,12 @@ public class PdfSharpExporter : PdfExporter
         }
     }
 
-    public PdfSharpExporter(ImageContext imageContext)
+    public PdfSharpExporter(ScanningContext scanningContext)
     {
+        _scanningContext = scanningContext;
     }
 
-    public override async Task<bool> Export(string path, ICollection<ProcessedImage> images, IConfigProvider<PdfSettings> settings, OcrContext? ocrContext = null, ProgressHandler? progressCallback = null, CancellationToken cancelToken = default)
+    public override async Task<bool> Export(string path, ICollection<ProcessedImage> images, IConfigProvider<PdfSettings> settings, OcrParams? ocrParams = null, ProgressHandler? progressCallback = null, CancellationToken cancelToken = default)
     {
         return await Task.Run(async () =>
         {
@@ -63,16 +67,16 @@ public class PdfSharpExporter : PdfExporter
             }
 
             IOcrEngine ocrEngine = null;
-            if (ocrContext?.Params?.LanguageCode != null)
+            if (ocrParams?.LanguageCode != null)
             {
-                var activeEngine = ocrContext.EngineManager.ActiveEngine;
+                var activeEngine = _scanningContext.OcrEngineProvider.ActiveEngine;
                 if (activeEngine == null)
                 {
-                    Log.Error("Supported OCR engine not installed.", ocrContext.Params.LanguageCode);
+                    Log.Error("Supported OCR engine not installed.", ocrParams.LanguageCode);
                 }
-                else if (!activeEngine.CanProcess(ocrContext.Params.LanguageCode))
+                else if (!activeEngine.CanProcess(ocrParams.LanguageCode))
                 {
-                    Log.Error("OCR files not available for '{0}'.", ocrContext.Params.LanguageCode);
+                    Log.Error("OCR files not available for '{0}'.", ocrParams.LanguageCode);
                 }
                 else
                 {
@@ -81,7 +85,7 @@ public class PdfSharpExporter : PdfExporter
             }
 
             bool result = ocrEngine != null
-                ? await BuildDocumentWithOcr(progressCallback, cancelToken, document, compat, images, ocrContext, ocrEngine)
+                ? await BuildDocumentWithOcr(progressCallback, cancelToken, document, compat, images, ocrParams, ocrEngine)
                 : await BuildDocumentWithoutOcr(progressCallback, cancelToken, document, compat, images);
             if (!result)
             {
@@ -144,7 +148,7 @@ public class PdfSharpExporter : PdfExporter
 
     private static bool IsPdfFile(ImageFileStorage imageFileStorage) => Path.GetExtension(imageFileStorage.FullPath)?.Equals(".pdf", StringComparison.InvariantCultureIgnoreCase) ?? false;
 
-    private async Task<bool> BuildDocumentWithOcr(ProgressHandler? progressCallback, CancellationToken cancelToken, PdfDocument document, PdfCompat compat, ICollection<ProcessedImage> images, OcrContext ocrContext, IOcrEngine ocrEngine)
+    private async Task<bool> BuildDocumentWithOcr(ProgressHandler? progressCallback, CancellationToken cancelToken, PdfDocument document, PdfCompat compat, ICollection<ProcessedImage> images, OcrParams ocrParams, IOcrEngine ocrEngine)
     {
         int progress = 0;
         progressCallback?.Invoke(progress, images.Count);
@@ -200,7 +204,7 @@ public class PdfSharpExporter : PdfExporter
                     break;
                 }
 
-                if (!ocrContext.RequestQueue.HasCachedResult(ocrEngine, image, ocrContext.Params))
+                if (!_scanningContext.OcrRequestQueue.HasCachedResult(ocrEngine, image, ocrParams))
                 {
                     pdfImage.GdiImage.Save(tempImageFilePath);
                 }
@@ -213,8 +217,8 @@ public class PdfSharpExporter : PdfExporter
             }
 
             // Start OCR
-            var ocrTask = ocrContext.RequestQueue.Enqueue(
-                ocrEngine, image, tempImageFilePath, ocrContext.Params, OcrPriority.Foreground, cancelToken);
+            var ocrTask = _scanningContext.OcrRequestQueue.Enqueue(
+                ocrEngine, image, tempImageFilePath, ocrParams, OcrPriority.Foreground, cancelToken);
             ocrTask.ContinueWith(task =>
             {
                 // This is the best place to put progress reporting

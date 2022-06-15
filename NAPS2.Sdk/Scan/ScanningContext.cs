@@ -32,6 +32,8 @@ public class ScanningContext : IDisposable
     public IWorkerFactory WorkerFactory { get; set; }
 
     public OcrRequestQueue OcrRequestQueue { get; set; }
+
+    public IOcrEngineProvider OcrEngineProvider { get; set; }
     
     public ProcessedImage CreateProcessedImage(IImageStorage storage)
     {

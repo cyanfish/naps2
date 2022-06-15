@@ -272,7 +272,7 @@ public class BatchScanPerformer : IBatchScanPerformer
                 // TODO: Make copies of images and dispose
                 try
                 {
-                    await _pdfExporter.Export(subPath, images, _pdfSettingsProvider, new OcrContext(_config.DefaultOcrParams()), (j, k) => { }, CancelToken);
+                    await _pdfExporter.Export(subPath, images, _pdfSettingsProvider, _config.DefaultOcrParams(), (j, k) => { }, CancelToken);
                 }
                 finally
                 {

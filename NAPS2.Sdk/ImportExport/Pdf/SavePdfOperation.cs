@@ -20,12 +20,12 @@ public class SavePdfOperation : OperationBase
         AllowBackground = true;
     }
 
-    public bool Start(string fileName, Placeholders placeholders, ICollection<ProcessedImage> images, IConfigProvider<PdfSettings> pdfSettings, OcrContext ocrContext)
+    public bool Start(string fileName, Placeholders placeholders, ICollection<ProcessedImage> images, IConfigProvider<PdfSettings> pdfSettings, OcrParams ocrParams)
     {
-        return Start(fileName, placeholders, images, pdfSettings, ocrContext, false, null);
+        return Start(fileName, placeholders, images, pdfSettings, ocrParams, false, null);
     }
 
-    public bool Start(string fileName, Placeholders placeholders, ICollection<ProcessedImage> images, IConfigProvider<PdfSettings> pdfSettings, OcrContext ocrContext, bool email, EmailMessage? emailMessage)
+    public bool Start(string fileName, Placeholders placeholders, ICollection<ProcessedImage> images, IConfigProvider<PdfSettings> pdfSettings, OcrParams ocrParams, bool email, EmailMessage? emailMessage)
     {
         ProgressTitle = email ? MiscResources.EmailPdfProgress : MiscResources.SavePdfProgress;
         var subFileName = placeholders.Substitute(fileName);
@@ -53,7 +53,7 @@ public class SavePdfOperation : OperationBase
             bool result = false;
             try
             {
-                result = await _pdfExporter.Export(subFileName, images, pdfSettings, ocrContext, OnProgress, CancelToken);
+                result = await _pdfExporter.Export(subFileName, images, pdfSettings, ocrParams, OnProgress, CancelToken);
             }
             catch (UnauthorizedAccessException ex)
             {

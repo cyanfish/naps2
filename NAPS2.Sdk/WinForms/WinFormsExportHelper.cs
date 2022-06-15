@@ -67,7 +67,7 @@ public class WinFormsExportHelper
     {
         var op = _operationFactory.Create<SavePdfOperation>();
 
-        if (op.Start(filename, Placeholders.All.WithDate(DateTime.Now), images, _pdfSettingsProvider, new OcrContext(_config.DefaultOcrParams()), email, emailMessage))
+        if (op.Start(filename, Placeholders.All.WithDate(DateTime.Now), images, _pdfSettingsProvider, _config.DefaultOcrParams(), email, emailMessage))
         {
             _operationProgress.ShowProgress(op);
         }
