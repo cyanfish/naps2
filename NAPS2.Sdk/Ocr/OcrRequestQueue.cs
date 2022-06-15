@@ -43,6 +43,10 @@ public class OcrRequestQueue
 
     public async Task<OcrResult?> Enqueue(IOcrEngine ocrEngine, ProcessedImage image, string tempImageFilePath, OcrParams ocrParams, OcrPriority priority, CancellationToken cancelToken)
     {
+        if (cancelToken.IsCancellationRequested)
+        {
+            return null;
+        }
         OcrRequest req;
         lock (this)
         {
@@ -180,8 +184,11 @@ public class OcrRequestQueue
                 OcrResult? result = null;
                 try
                 {
-                    result = next.Params.Engine.ProcessImage(
-                        tempImageFilePath, next.Params.OcrParams, next.CancelSource.Token);
+                    if (!next.CancelSource.IsCancellationRequested)
+                    {
+                        result = next.Params.Engine.ProcessImage(
+                            tempImageFilePath, next.Params.OcrParams, next.CancelSource.Token);
+                    }
                 }
                 catch (Exception e)
                 {

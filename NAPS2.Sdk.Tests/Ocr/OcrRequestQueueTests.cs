@@ -11,111 +11,80 @@ public class OcrRequestQueueTests : ContextualTexts
     private readonly OcrRequestQueue _ocrRequestQueue;
     private readonly Mock<IOcrEngine> _mockEngine;
     private readonly Mock<OperationProgress> _mockOperationProgress;
+    private readonly ProcessedImage _image;
+    private readonly string _tempPath;
+    private readonly OcrParams _ocrParams;
+    private readonly OcrResult _expectedResult;
 
     public OcrRequestQueueTests()
     {
         _mockEngine = new Mock<IOcrEngine>(MockBehavior.Strict);
         _mockOperationProgress = new Mock<OperationProgress>();
         _ocrRequestQueue = new OcrRequestQueue(_mockOperationProgress.Object);
+
+        _image = CreateScannedImage();
+        _tempPath = CreateTempFile();
+        _ocrParams = CreateOcrParams();
+        _expectedResult = CreateOcrResult();
     }
 
     [Fact]
     public async Task Enqueue()
     {
-        var image = CreateScannedImage();
-        var tempPath = CreateTempFile();
-        var ocrParams = CreateOcrParams();
-        var expectedResult = CreateOcrResult();
-        _mockEngine.Setup(x => x.ProcessImage(tempPath, ocrParams, It.IsAny<CancellationToken>())).Returns(expectedResult);
+        _mockEngine.Setup(x => x.ProcessImage(_tempPath, _ocrParams, It.IsAny<CancellationToken>()))
+            .Returns(_expectedResult);
 
-        var ocrResult =
-            await _ocrRequestQueue.Enqueue(
-                _mockEngine.Object,
-                image,
-                tempPath,
-                ocrParams,
-                OcrPriority.Foreground,
-                CancellationToken.None);
+        var ocrResult = await DoEnqueueForeground(_image, _tempPath, _ocrParams);
 
-        Assert.Equal(expectedResult, ocrResult);
-        Assert.False(File.Exists(tempPath));
+        Assert.Equal(_expectedResult, ocrResult);
+        Assert.False(File.Exists(_tempPath));
     }
 
     [Fact]
     public async Task EnqueueTwiceReturnsCached()
     {
-        var image = CreateScannedImage();
         var tempPath1 = CreateTempFile();
         var tempPath2 = CreateTempFile();
-        var ocrParams = CreateOcrParams();
-        var expectedResult = CreateOcrResult();
-        _mockEngine.Setup(x => x.ProcessImage(tempPath1, ocrParams, It.IsAny<CancellationToken>())).Returns(expectedResult);
+        _mockEngine.Setup(x => x.ProcessImage(tempPath1, _ocrParams, It.IsAny<CancellationToken>()))
+            .Returns(_expectedResult);
 
-        await _ocrRequestQueue.Enqueue(
-                _mockEngine.Object,
-                image,
-                tempPath1,
-                ocrParams,
-                OcrPriority.Foreground,
-                CancellationToken.None);
+        await DoEnqueueForeground(_image, tempPath1, _ocrParams);
         Assert.False(File.Exists(tempPath1));
 
-        var ocrResult2Task =
-            _ocrRequestQueue.Enqueue(
-                _mockEngine.Object,
-                image,
-                tempPath2,
-                ocrParams,
-                OcrPriority.Foreground,
-                CancellationToken.None);
+        var ocrResult2Task = DoEnqueueForeground(_image, tempPath2, _ocrParams);
         // Verify synchronous return for cache
         Assert.True(ocrResult2Task.IsCompleted);
 
         var ocrResult2 = await ocrResult2Task;
-        Assert.Equal(expectedResult, ocrResult2);
+        Assert.Equal(_expectedResult, ocrResult2);
         Assert.False(File.Exists(tempPath2));
 
         // Verify only a single engine call
-        _mockEngine.Verify(x => x.ProcessImage(tempPath1, ocrParams, It.IsAny<CancellationToken>()));
+        _mockEngine.Verify(x => x.ProcessImage(tempPath1, _ocrParams, It.IsAny<CancellationToken>()));
         _mockEngine.VerifyNoOtherCalls();
     }
 
     [Fact]
     public async Task EnqueueSimultaneous()
     {
-        var image = CreateScannedImage();
         var tempPath1 = CreateTempFile();
         var tempPath2 = CreateTempFile();
-        var ocrParams = CreateOcrParams();
-        var expectedResult = CreateOcrResult();
-        _mockEngine.Setup(x => x.ProcessImage(tempPath1, ocrParams, It.IsAny<CancellationToken>())).Returns(expectedResult);
+        _mockEngine.Setup(x => x.ProcessImage(tempPath1, _ocrParams, It.IsAny<CancellationToken>()))
+            .Returns(_expectedResult);
 
-        var ocrResult1Task = _ocrRequestQueue.Enqueue(
-            _mockEngine.Object,
-            image,
-            tempPath1,
-            ocrParams,
-            OcrPriority.Foreground,
-            CancellationToken.None);
+        var ocrResult1Task = DoEnqueueForeground(_image, tempPath1, _ocrParams);
 
-        var ocrResult2Task =
-            _ocrRequestQueue.Enqueue(
-                _mockEngine.Object,
-                image,
-                tempPath2,
-                ocrParams,
-                OcrPriority.Foreground,
-                CancellationToken.None);
+        var ocrResult2Task = DoEnqueueForeground(_image, tempPath2, _ocrParams);
 
         var ocrResult1 = await ocrResult1Task;
         var ocrResult2 = await ocrResult2Task;
-        Assert.Equal(expectedResult, ocrResult1);
-        Assert.Equal(expectedResult, ocrResult2);
+        Assert.Equal(_expectedResult, ocrResult1);
+        Assert.Equal(_expectedResult, ocrResult2);
         Assert.False(File.Exists(tempPath1));
         Assert.False(File.Exists(tempPath2));
 
         // Verify only a single engine call
-        _mockEngine.Verify(x => x.ProcessImage(tempPath1, ocrParams, It.IsAny<CancellationToken>()));
+        _mockEngine.Verify(x => x.ProcessImage(tempPath1, _ocrParams, It.IsAny<CancellationToken>()));
         _mockEngine.VerifyNoOtherCalls();
     }
 
@@ -124,46 +93,33 @@ public class OcrRequestQueueTests : ContextualTexts
     {
         var image1 = CreateScannedImage();
         var tempPath1 = CreateTempFile();
-        var ocrParams1 = CreateOcrParams();
         var expectedResult1 = CreateOcrResult();
-        _mockEngine.Setup(x => x.ProcessImage(tempPath1, ocrParams1, It.IsAny<CancellationToken>())).Returns(expectedResult1);
-        
+        _mockEngine.Setup(x => x.ProcessImage(tempPath1, _ocrParams, It.IsAny<CancellationToken>()))
+            .Returns(expectedResult1);
+
         var image2 = CreateScannedImage();
         var tempPath2 = CreateTempFile();
-        var ocrParams2 = CreateOcrParams();
         var expectedResult2 = CreateOcrResult();
-        _mockEngine.Setup(x => x.ProcessImage(tempPath2, ocrParams2, It.IsAny<CancellationToken>())).Returns(expectedResult2);
+        _mockEngine.Setup(x => x.ProcessImage(tempPath2, _ocrParams, It.IsAny<CancellationToken>()))
+            .Returns(expectedResult2);
 
-        var ocrResult1 = await _ocrRequestQueue.Enqueue(
-            _mockEngine.Object,
-            image1,
-            tempPath1,
-            ocrParams1,
-            OcrPriority.Foreground,
-            CancellationToken.None);
+        var ocrResult1 = await DoEnqueueForeground(image1, tempPath1, _ocrParams);
         Assert.Equal(expectedResult1, ocrResult1);
         Assert.False(File.Exists(tempPath1));
 
-        var ocrResult2 = await _ocrRequestQueue.Enqueue(
-                _mockEngine.Object,
-                image2,
-                tempPath2,
-                ocrParams2,
-                OcrPriority.Foreground,
-                CancellationToken.None);
+        var ocrResult2 = await DoEnqueueForeground(image2, tempPath2, _ocrParams);
         Assert.Equal(expectedResult2, ocrResult2);
         Assert.False(File.Exists(tempPath2));
 
         // Verify two engine calls
-        _mockEngine.Verify(x => x.ProcessImage(tempPath1, ocrParams1, It.IsAny<CancellationToken>()));
-        _mockEngine.Verify(x => x.ProcessImage(tempPath2, ocrParams2, It.IsAny<CancellationToken>()));
+        _mockEngine.Verify(x => x.ProcessImage(tempPath1, _ocrParams, It.IsAny<CancellationToken>()));
+        _mockEngine.Verify(x => x.ProcessImage(tempPath2, _ocrParams, It.IsAny<CancellationToken>()));
         _mockEngine.VerifyNoOtherCalls();
     }
 
     [Fact]
     public async Task EnqueueWithDifferentParamsReturnsDifferentResult()
     {
-        var image = CreateScannedImage();
         var ocrParams1 = new OcrParams("eng", OcrMode.Fast, 10);
         var ocrParams2 = new OcrParams("fra", OcrMode.Fast, 10);
         var ocrParams3 = new OcrParams("eng", OcrMode.Best, 10);
@@ -181,24 +137,13 @@ public class OcrRequestQueueTests : ContextualTexts
         _mockEngine.Setup(x => x.ProcessImage(It.IsAny<string>(), ocrParams4, It.IsAny<CancellationToken>()))
             .Returns(expectedResult4);
 
-        Task<OcrResult?> DoEnqueue(OcrParams ocrParams)
-        {
-            return _ocrRequestQueue.Enqueue(
-                _mockEngine.Object,
-                image,
-                CreateTempFile(),
-                ocrParams,
-                OcrPriority.Foreground,
-                CancellationToken.None);
-        }
-        
-        var ocrResult1 = await DoEnqueue(ocrParams1);
+        var ocrResult1 = await DoEnqueueForeground(_image, CreateTempFile(), ocrParams1);
         Assert.Equal(expectedResult1, ocrResult1);
-        var ocrResult2 = await DoEnqueue(ocrParams2);
+        var ocrResult2 = await DoEnqueueForeground(_image, CreateTempFile(), ocrParams2);
         Assert.Equal(expectedResult2, ocrResult2);
-        var ocrResult3 = await DoEnqueue(ocrParams3);
+        var ocrResult3 = await DoEnqueueForeground(_image, CreateTempFile(), ocrParams3);
         Assert.Equal(expectedResult3, ocrResult3);
-        var ocrResult4 = await DoEnqueue(ocrParams4);
+        var ocrResult4 = await DoEnqueueForeground(_image, CreateTempFile(), ocrParams4);
         Assert.Equal(expectedResult4, ocrResult4);
 
         // Verify distinct engine calls
@@ -212,58 +157,84 @@ public class OcrRequestQueueTests : ContextualTexts
     [Fact]
     public async Task EnqueueWithEngineError()
     {
-        var image = CreateScannedImage();
-        var tempPath = CreateTempFile();
-        var ocrParams = CreateOcrParams();
-        _mockEngine.Setup(x => x.ProcessImage(tempPath, ocrParams, It.IsAny<CancellationToken>())).Throws<Exception>();
+        _mockEngine.Setup(x => x.ProcessImage(_tempPath, _ocrParams, It.IsAny<CancellationToken>()))
+            .Throws<Exception>();
 
-        var ocrResult =
-            await _ocrRequestQueue.Enqueue(
-                _mockEngine.Object,
-                image,
-                tempPath,
-                ocrParams,
-                OcrPriority.Foreground,
-                CancellationToken.None);
+        var ocrResult = await DoEnqueueForeground(_image, _tempPath, _ocrParams);
 
         Assert.Null(ocrResult);
-        _mockEngine.Verify(x => x.ProcessImage(tempPath, ocrParams, It.IsAny<CancellationToken>()));
+        _mockEngine.Verify(x => x.ProcessImage(_tempPath, _ocrParams, It.IsAny<CancellationToken>()));
         _mockEngine.VerifyNoOtherCalls();
     }
 
     [Fact]
     public async Task EnqueueTwiceWithTransientEngineError()
     {
-        var image = CreateScannedImage();
         var tempPath1 = CreateTempFile();
         var tempPath2 = CreateTempFile();
-        var ocrParams = CreateOcrParams();
-        var expectedResult = CreateOcrResult();
-        _mockEngine.Setup(x => x.ProcessImage(tempPath1, ocrParams, It.IsAny<CancellationToken>())).Throws<Exception>();
-        _mockEngine.Setup(x => x.ProcessImage(tempPath2, ocrParams, It.IsAny<CancellationToken>())).Returns(expectedResult);
+        _mockEngine.Setup(x => x.ProcessImage(tempPath1, _ocrParams, It.IsAny<CancellationToken>()))
+            .Throws<Exception>();
+        _mockEngine.Setup(x => x.ProcessImage(tempPath2, _ocrParams, It.IsAny<CancellationToken>()))
+            .Returns(_expectedResult);
 
-        var ocrResult1 =
-            await _ocrRequestQueue.Enqueue(
-                _mockEngine.Object,
-                image,
-                tempPath1,
-                ocrParams,
-                OcrPriority.Foreground,
-                CancellationToken.None);
-
-        var ocrResult2 =
-            await _ocrRequestQueue.Enqueue(
-                _mockEngine.Object,
-                image,
-                tempPath2,
-                ocrParams,
-                OcrPriority.Foreground,
-                CancellationToken.None);
+        var ocrResult1 = await DoEnqueueForeground(_image, tempPath1, _ocrParams);
+        var ocrResult2 = await DoEnqueueForeground(_image, tempPath2, _ocrParams);
 
         Assert.Null(ocrResult1);
-        Assert.Equal(expectedResult, ocrResult2);
-        _mockEngine.Verify(x => x.ProcessImage(tempPath1, ocrParams, It.IsAny<CancellationToken>()));
-        _mockEngine.Verify(x => x.ProcessImage(tempPath2, ocrParams, It.IsAny<CancellationToken>()));
+        Assert.Equal(_expectedResult, ocrResult2);
+        _mockEngine.Verify(x => x.ProcessImage(tempPath1, _ocrParams, It.IsAny<CancellationToken>()));
+        _mockEngine.Verify(x => x.ProcessImage(tempPath2, _ocrParams, It.IsAny<CancellationToken>()));
+        _mockEngine.VerifyNoOtherCalls();
+    }
+
+    [Fact]
+    public async Task ImmediateCancel()
+    {
+        var cts = new CancellationTokenSource();
+        cts.Cancel();
+
+        var ocrResult = await DoEnqueueForeground(_image, _tempPath, _ocrParams, cts.Token);
+
+        Assert.Null(ocrResult);
+        _mockEngine.VerifyNoOtherCalls();
+    }
+
+    [Fact]
+    public async Task CancelAfterCall()
+    {
+        var cts = new CancellationTokenSource();
+
+        var ocrResultTask = DoEnqueueForeground(_image, _tempPath, _ocrParams, cts.Token);
+        cts.Cancel();
+        var ocrResult = await ocrResultTask;
+
+        Assert.Null(ocrResult);
+        _mockEngine.VerifyNoOtherCalls();
+    }
+
+    [Fact]
+    public async Task CancelDuringEngine()
+    {
+        var cancelledAtEngineStart = false;
+        var cancelledAtEngineEnd = false;
+        var cts = new CancellationTokenSource();
+        _mockEngine.Setup(x => x.ProcessImage(_tempPath, _ocrParams, It.IsAny<CancellationToken>())).Returns(
+            new InvocationFunc(invocation =>
+            {
+                var cancelToken = (CancellationToken) invocation.Arguments[2];
+                cancelledAtEngineStart = cancelToken.IsCancellationRequested;
+                Thread.Sleep(100);
+                cancelledAtEngineEnd = cancelToken.IsCancellationRequested;
+                return null;
+            }));
+
+        cts.CancelAfter(50);
+        var ocrResult = await DoEnqueueForeground(_image, _tempPath, _ocrParams, cts.Token);
+
+        Assert.Null(ocrResult);
+        Assert.False(cancelledAtEngineStart);
+        Assert.True(cancelledAtEngineEnd);
+        _mockEngine.Verify(x => x.ProcessImage(_tempPath, _ocrParams, It.IsAny<CancellationToken>()));
         _mockEngine.VerifyNoOtherCalls();
     }
 
@@ -283,6 +254,18 @@ public class OcrRequestQueueTests : ContextualTexts
     private static OcrParams CreateOcrParams()
     {
         return new OcrParams("eng", OcrMode.Fast, 10);
+    }
+
+    private Task<OcrResult?> DoEnqueueForeground(ProcessedImage image, string tempPath, OcrParams ocrParams,
+        CancellationToken cancellationToken = default)
+    {
+        return _ocrRequestQueue.Enqueue(
+            _mockEngine.Object,
+            image,
+            tempPath,
+            ocrParams,
+            OcrPriority.Foreground,
+            cancellationToken);
     }
 
     // TODO: Tests to add:
