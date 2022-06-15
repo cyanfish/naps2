@@ -17,8 +17,10 @@ public class AutoSaver
     private readonly PdfExporter _pdfExporter;
     private readonly OverwritePrompt _overwritePrompt;
     private readonly ScopedConfig _config;
+    private readonly TiffHelper _tiffHelper;
+    private readonly ImageContext _imageContext;
 
-    public AutoSaver(IConfigProvider<PdfSettings> pdfSettingsProvider, IConfigProvider<ImageSettings> imageSettingsProvider, OcrEngineManager ocrEngineManager, OcrRequestQueue ocrRequestQueue, ErrorOutput errorOutput, DialogHelper dialogHelper, OperationProgress operationProgress, ISaveNotify notify, PdfExporter pdfExporter, OverwritePrompt overwritePrompt, ScopedConfig config)
+    public AutoSaver(IConfigProvider<PdfSettings> pdfSettingsProvider, IConfigProvider<ImageSettings> imageSettingsProvider, OcrEngineManager ocrEngineManager, OcrRequestQueue ocrRequestQueue, ErrorOutput errorOutput, DialogHelper dialogHelper, OperationProgress operationProgress, ISaveNotify notify, PdfExporter pdfExporter, OverwritePrompt overwritePrompt, ScopedConfig config, TiffHelper tiffHelper, ImageContext imageContext)
     {
         _pdfSettingsProvider = pdfSettingsProvider;
         _imageSettingsProvider = imageSettingsProvider;
@@ -29,6 +31,8 @@ public class AutoSaver
         _pdfExporter = pdfExporter;
         _overwritePrompt = overwritePrompt;
         _config = config;
+        _tiffHelper = tiffHelper;
+        _imageContext = imageContext;
     }
 
     public ScannedImageSource Save(AutoSaveSettings settings, ScannedImageSource source)
@@ -161,7 +165,7 @@ public class AutoSaver
         }
         else
         {
-            var op = new SaveImagesOperation(_overwritePrompt, new TiffHelper());
+            var op = new SaveImagesOperation(_imageContext, _overwritePrompt, _tiffHelper);
             if (op.Start(subPath, placeholders, images, _imageSettingsProvider))
             {
                 _operationProgress.ShowProgress(op);

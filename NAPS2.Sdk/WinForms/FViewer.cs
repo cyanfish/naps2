@@ -99,7 +99,8 @@ namespace NAPS2.WinForms
             _tiffViewer1.Image?.Dispose();
             _tiffViewer1.Image = null;
             using var imageToRender = CurrentImage.GetClonedImage();
-            _tiffViewer1.Image = imageToRender.RenderToBitmap();
+            // TODO: Should we avoid this cast somehow? Inject the GDI context directly? (Ctrl+Shift+F similar too)
+            _tiffViewer1.Image = ((GdiImageContext)_imageContext).RenderToBitmap(imageToRender);
         }
 
         protected override void Dispose(bool disposing)

@@ -72,7 +72,7 @@ public class PrintDocumentPrinter : IScannedImagePrinter
                 int i = 0;
                 printDocument.PrintPage += (sender, e) =>
                 {
-                    var image = imagesToPrint[i].RenderToImage();
+                    var image = _imageContext.Render(imagesToPrint[i]);
                     try
                     {
                         var pb = e.PageBounds;

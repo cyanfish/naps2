@@ -10,15 +10,17 @@ namespace NAPS2.WinForms;
 
 public class ImageClipboard
 {
+    private readonly ImageContext _imageContext;
     private readonly ImageTransfer _imageTransfer;
 
     public ImageClipboard(ImageContext imageContext)
+        : this(imageContext, new ImageTransfer(imageContext))
     {
-        _imageTransfer = new ImageTransfer(imageContext);
     }
 
-    public ImageClipboard(ImageTransfer imageTransfer)
+    public ImageClipboard(ImageContext imageContext, ImageTransfer imageTransfer)
     {
+        _imageContext = imageContext;
         _imageTransfer = imageTransfer;
     }
 
@@ -36,7 +38,8 @@ public class ImageClipboard
         // Slow path for more full-featured copying
         if (includeBitmap)
         {
-            using var firstBitmap = imageList[0].RenderToBitmap();
+            // TODO: More generic?
+            using var firstBitmap = ((GdiImageContext)_imageContext).RenderToBitmap(imageList[0]);
             Clipboard.Instance.Image = firstBitmap.ToEto();
             Clipboard.Instance.SetString(await RtfEncodeImages(firstBitmap, imageList), "Rich Text Format");
         }
@@ -53,7 +56,7 @@ public class ImageClipboard
         }
         foreach (var img in images.Skip(1))
         {
-            using var bitmap = img.RenderToBitmap();
+            using var bitmap = ((GdiImageContext)_imageContext).RenderToBitmap(img);
             // TODO: Is this the right format?
             if (!AppendRtfEncodedImage(bitmap, bitmap.RawFormat, sb, true))
             {

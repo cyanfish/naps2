@@ -11,7 +11,8 @@ public class ScanToBitmapSample
     {
         // We configure scanned images to be stored in GDI+ format, which uses
         // System.Drawing.Bitmap internally.
-        ScanningContext scanningContext = new ScanningContext(new GdiImageContext());
+        GdiImageContext imageContext = new GdiImageContext();
+        ScanningContext scanningContext = new ScanningContext(imageContext);
 
         // To select a device and scan, you need a controller.
         ScanController controller = new ScanController(scanningContext);
@@ -40,11 +41,11 @@ public class ScanToBitmapSample
 
         // ScannedImageSource has several different methods to help you consume images.
         // ForEach allows you to asynchronously process images as they arrive.
-        await imageSource.ForEach(async renderableImage =>
+        await imageSource.ForEach(async processedImage =>
         {
             // Make sure ScannedImage and rendered images are disposed after use
-            using (renderableImage)
-            using (Bitmap bitmap = renderableImage.RenderToBitmap())
+            using (processedImage)
+            using (Bitmap bitmap = imageContext.RenderToBitmap(processedImage))
             {
                 // TODO: Do something with the bitmap
             }

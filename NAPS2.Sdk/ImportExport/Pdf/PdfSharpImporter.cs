@@ -196,7 +196,7 @@ public class PdfSharpImporter : IPdfImporter
             TransformState.Empty);
         return _importPostProcessor.AddPostProcessingData(
             image,
-            image.RenderToImage(),
+            _imageContext.Render(image),
             importParams.ThumbnailSize,
             importParams.BarcodeDetectionOptions,
             true);

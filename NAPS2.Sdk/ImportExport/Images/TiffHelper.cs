@@ -8,6 +8,13 @@ namespace NAPS2.ImportExport.Images;
 
 public class TiffHelper
 {
+    private readonly ImageContext _imageContext;
+
+    public TiffHelper(ImageContext imageContext)
+    {
+        _imageContext = imageContext;
+    }
+
     public async Task<bool> SaveMultipage(IList<ProcessedImage> images, string location, TiffCompression compression, ProgressHandler progressCallback, CancellationToken cancelToken)
     {
         try
@@ -27,7 +34,7 @@ public class TiffHelper
                 var iparams = new EncoderParameters(1);
                 Encoder iparam = Encoder.Compression;
                 // TODO: More generic (?)
-                using var bitmap = images[0].RenderToBitmap();
+                using var bitmap = ((GdiImageContext)_imageContext).RenderToBitmap(images[0]);
                 ValidateBitmap(bitmap);
                 var iparamPara = new EncoderParameter(iparam, (long)GetEncoderValue(compression, bitmap));
                 iparams.Param[0] = iparamPara;
@@ -40,7 +47,7 @@ public class TiffHelper
                 var compressionEncoder = Encoder.Compression;
 
                 File.Delete(location);
-                using var bitmap0 = images[0].RenderToBitmap();
+                using var bitmap0 = ((GdiImageContext)_imageContext).RenderToBitmap(images[0]);
                 ValidateBitmap(bitmap0);
                 encoderParams.Param[0] = new EncoderParameter(compressionEncoder, (long)GetEncoderValue(compression, bitmap0));
                 encoderParams.Param[1] = new EncoderParameter(saveEncoder, (long)EncoderValue.MultiFrame);
@@ -56,7 +63,7 @@ public class TiffHelper
                         return false;
                     }
 
-                    using var bitmap = images[i].RenderToBitmap();
+                    using var bitmap = ((GdiImageContext)_imageContext).RenderToBitmap(images[i]);
                     ValidateBitmap(bitmap);
                     encoderParams.Param[0] = new EncoderParameter(compressionEncoder, (long)GetEncoderValue(compression, bitmap));
                     encoderParams.Param[1] = new EncoderParameter(saveEncoder, (long)EncoderValue.FrameDimensionPage);

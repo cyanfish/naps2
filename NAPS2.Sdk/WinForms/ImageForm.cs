@@ -86,7 +86,8 @@ namespace NAPS2.WinForms
             var maxDimen = Screen.AllScreens.Max(s => Math.Max(s.WorkingArea.Height, s.WorkingArea.Width));
             // TODO: Limit to maxDimen * 2
             using var imageToRender = Image.GetClonedImage();
-            workingImage = imageToRender.RenderToBitmap();
+            // TODO: More generic or avoid the cast somehow? In general how do we integrate with eto?
+            workingImage = ((GdiImageContext)_imageContext).RenderToBitmap(imageToRender);
             if (_closed)
             {
                 workingImage?.Dispose();

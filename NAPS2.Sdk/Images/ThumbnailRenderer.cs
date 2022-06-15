@@ -15,7 +15,7 @@ public class ThumbnailRenderer
 
     public IMemoryImage Render(ProcessedImage processedImage, int outputSize)
     {
-        var image = processedImage.RenderToImage();
+        var image = _imageContext.Render(processedImage);
         var transformList = processedImage.TransformState.Transforms;
         if (!processedImage.TransformState.IsEmpty)
         {

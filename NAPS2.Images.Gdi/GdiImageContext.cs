@@ -58,7 +58,32 @@ public class GdiImageContext : ImageContext
         }
     }
 
-    public override IMemoryImage Render(ProcessedImage processedImage) => processedImage.RenderToImage();
+    public override IMemoryImage Render(ProcessedImage processedImage)
+    {
+        return new GdiImage(RenderToBitmap(processedImage));
+    }
+
+    public Bitmap RenderToBitmap(ProcessedImage processedImage)
+    {
+        // TODO: Need to take transforms into account
+        switch (processedImage.Storage)
+        {
+            // TODO: We probably want to support PDFs somehow (which presumably use fileStorage?)
+            case ImageFileStorage fileStorage:
+                // Rather than creating a bitmap from the file directly, instead we read it into memory first.
+                // This ensures we don't accidentally keep a lock on the storage file, which would cause an error if we
+                // try to delete it before the bitmap is disposed.
+                // This is less efficient in the case where the bitmap is guaranteed to be disposed quickly, but for now
+                // that seems like a reasonable tradeoff to avoid a whole class of hard-to-diagnose errors.
+                var stream = new MemoryStream(File.ReadAllBytes(fileStorage.FullPath));
+                return new Bitmap(stream);
+            case MemoryStreamImageStorage memoryStreamStorage:
+                return new Bitmap(memoryStreamStorage.Stream);
+            case GdiImage image:
+                return image.Clone().AsBitmap();
+        }
+        throw new ArgumentException("Unsupported image storage: " + processedImage.Storage);
+    }
 
     public override IMemoryImage Create(int width, int height, ImagePixelFormat pixelFormat)
     {

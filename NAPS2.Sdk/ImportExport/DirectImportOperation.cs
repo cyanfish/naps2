@@ -37,10 +37,12 @@ public class DirectImportOperation : OperationBase
                     // TODO: Don't bother, here, in recovery, etc.
                     if (img.PostProcessingData.Thumbnail == null && importParams.ThumbnailSize.HasValue)
                     {
+                        var renderedImage = _scanningContext.ImageContext.Render(img);
+                        var thumbnail = _scanningContext.ImageContext.PerformTransform(renderedImage,
+                            new ThumbnailTransform(importParams.ThumbnailSize.Value));
                         img = img.WithPostProcessingData(img.PostProcessingData with
                         {
-                            Thumbnail = _scanningContext.ImageContext.PerformTransform(img.RenderToImage(),
-                                new ThumbnailTransform(importParams.ThumbnailSize.Value))
+                            Thumbnail = thumbnail
                         }, true);
                     }
                     imageCallback(img);

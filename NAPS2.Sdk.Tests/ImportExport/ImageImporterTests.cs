@@ -81,7 +81,7 @@ public class ImageImporterTests : ContextualTexts
         Assert.Equal(BitDepth.Color, result[0].Metadata.BitDepth);
         ImageAsserts.Similar(
             new GdiImage(ImageImporterTestsData.color_image),
-            result[0].RenderToImage(),
+            ImageContext.Render(result[0]),
             ImageAsserts.GENERAL_RMSE_THRESHOLD);
         
         AssertUsesRecoveryStorage(result[2].Storage, "00003.jpg");
@@ -89,7 +89,7 @@ public class ImageImporterTests : ContextualTexts
         Assert.Equal(BitDepth.Color, result[2].Metadata.BitDepth);
         ImageAsserts.Similar(
             new GdiImage(ImageImporterTestsData.stock_cat),
-            result[2].RenderToImage(),
+            ImageContext.Render(result[2]),
             ImageAsserts.GENERAL_RMSE_THRESHOLD);
         
         result[0].Dispose();

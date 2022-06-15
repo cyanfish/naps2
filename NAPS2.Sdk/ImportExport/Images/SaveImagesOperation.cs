@@ -9,11 +9,13 @@ namespace NAPS2.ImportExport.Images;
 // TODO: Avoid GDI dependency
 public class SaveImagesOperation : OperationBase
 {
+    private readonly ImageContext _imageContext;
     private readonly OverwritePrompt _overwritePrompt;
     private readonly TiffHelper _tiffHelper;
 
-    public SaveImagesOperation(OverwritePrompt overwritePrompt, TiffHelper tiffHelper)
+    public SaveImagesOperation(ImageContext imageContext, OverwritePrompt overwritePrompt, TiffHelper tiffHelper)
     {
+        _imageContext = imageContext;
         _overwritePrompt = overwritePrompt;
         _tiffHelper = tiffHelper;
 
@@ -155,12 +157,12 @@ public class SaveImagesOperation : OperationBase
             var encoderParams = new EncoderParameters(1);
             encoderParams.Param[0] = new EncoderParameter(Encoder.Quality, quality);
             // TODO: Something more generic
-            using Bitmap bitmap = image.RenderToBitmap();
+            using Bitmap bitmap = ((GdiImageContext)_imageContext).RenderToBitmap(image);
             bitmap.Save(path, encoder, encoderParams);
         }
         else
         {
-            using Bitmap bitmap = image.RenderToBitmap();
+            using Bitmap bitmap = ((GdiImageContext)_imageContext).RenderToBitmap(image);;
             bitmap.Save(path, format);
         }
     }

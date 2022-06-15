@@ -164,7 +164,7 @@ public class RecoveryManager
                 }
 
                 processedImage = _importPostProcessor.AddPostProcessingData(processedImage,
-                    processedImage.RenderToImage(),
+                     _imageContext.Render(processedImage),
                     recoveryParams.ThumbnailSize,
                     new BarcodeDetectionOptions(),
                     true);

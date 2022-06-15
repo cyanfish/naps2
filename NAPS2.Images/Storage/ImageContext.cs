@@ -5,6 +5,9 @@ namespace NAPS2.Images.Storage;
 
 public abstract class ImageContext
 {
+    // TODO: Ideally this class should be fully stateless. Maybe a protected virtual method to provide transformers.
+    // TODO: Using lazy static state if needed.
+    // TODO: Although we may need an IPdfRenderer...
     private readonly Dictionary<(Type, Type), (object, MethodInfo)> _transformers = new();
 
     protected ImageContext(Type imageType)
