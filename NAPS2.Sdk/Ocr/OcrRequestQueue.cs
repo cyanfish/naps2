@@ -45,18 +45,20 @@ public class OcrRequestQueue
         OcrParams ocrParams, OcrPriority priority, CancellationToken cancelToken)
     {
         OcrRequest req;
+        bool alreadyCompleted;
         lock (this)
         {
             var reqParams = new OcrRequestParams(image, ocrEngine, ocrParams);
-            req = _requestCache.GetOrSet(reqParams, () => new OcrRequest(reqParams));
+            req = _requestCache.GetOrSet(reqParams, () => new OcrRequest(reqParams, this));
             if (req.State is OcrRequestState.Canceled or OcrRequestState.Error)
             {
                 // Retry with a new request
-                req = _requestCache[reqParams] = new OcrRequest(reqParams);
+                req = _requestCache[reqParams] = new OcrRequest(reqParams, this);
             }
             req.AddReference(tempImageFilePath, priority, cancelToken);
+            alreadyCompleted = req.State == OcrRequestState.Completed;
         }
-        if (req.State == OcrRequestState.Completed)
+        if (alreadyCompleted)
         {
             return await req.CompletedTask;
         }

@@ -4,13 +4,15 @@ namespace NAPS2.Ocr;
 
 internal class OcrRequest
 {
+    private readonly OcrRequestQueue _ocrRequestQueue;
     private readonly TaskCompletionSource<OcrResult?> _tcs = new();
     private readonly CancellationTokenSource _requestCts = new();
     private string? _tempImageFilePath;
     private int _activeReferences = 0;
 
-    public OcrRequest(OcrRequestParams reqParams)
+    public OcrRequest(OcrRequestParams reqParams, OcrRequestQueue ocrRequestQueue)
     {
+        _ocrRequestQueue = ocrRequestQueue;
         Params = reqParams;
     }
 
@@ -20,7 +22,7 @@ internal class OcrRequest
     {
         var referencePriority = priority == OcrPriority.Foreground ? 100 : 1;
         bool referenceAdded = false;
-        lock (this)
+        lock (_ocrRequestQueue)
         {
             if (_tempImageFilePath != null)
             {
@@ -47,7 +49,7 @@ internal class OcrRequest
     private void RemoveReference(int referencePriority)
     {
         bool requestCanceled = false;
-        lock (this)
+        lock (_ocrRequestQueue)
         {
             RequestPriority -= referencePriority;
             _activeReferences -= 1;
@@ -73,7 +75,7 @@ internal class OcrRequest
 
     public void MoveToProcessingState()
     {
-        lock (this)
+        lock (_ocrRequestQueue)
         {
             if (State != OcrRequestState.Pending)
             {
@@ -85,7 +87,7 @@ internal class OcrRequest
 
     public async Task Process()
     {
-        lock (this)
+        lock (_ocrRequestQueue)
         {
             if (State != OcrRequestState.Processing)
             {
@@ -102,7 +104,7 @@ internal class OcrRequest
             Log.ErrorException("Error in OcrEngine.ProcessImage", e);
         }
         SafeDelete(_tempImageFilePath!);
-        lock (this)
+        lock (_ocrRequestQueue)
         {
             State = result != null ? OcrRequestState.Completed : OcrRequestState.Error;
         }
