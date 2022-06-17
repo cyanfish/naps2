@@ -202,26 +202,29 @@ public class OcrRequestQueueTests : ContextualTexts
     }
 
     [Fact]
-    public async Task CancelDuringEngine()
+    public async Task CancelDuringProcessing()
     {
+        Task<OcrResult> mockEngineTask = null;
         var cancelledAtEngineStart = false;
         var cancelledAtEngineEnd = false;
         var cts = new CancellationTokenSource();
         _mockEngine.Setup(x => x.ProcessImage(_tempPath, _ocrParams, It.IsAny<CancellationToken>())).Returns(
             new InvocationFunc(invocation =>
             {
-                return Task.Run(async () =>
+                mockEngineTask = Task.Run(async () =>
                 {
                     var cancelToken = (CancellationToken) invocation.Arguments[2];
                     cancelledAtEngineStart = cancelToken.IsCancellationRequested;
-                    await Task.Delay(1000);
+                    await Task.Delay(100);
                     cancelledAtEngineEnd = cancelToken.IsCancellationRequested;
-                    return (OcrResult?) null;
+                    return (OcrResult) null;
                 });
+                return mockEngineTask;
             }));
 
-        cts.CancelAfter(500);
+        cts.CancelAfter(50);
         var ocrResult = await DoEnqueueForeground(_image, _tempPath, _ocrParams, cts.Token);
+        await mockEngineTask;
 
         Assert.Null(ocrResult);
         Assert.False(cancelledAtEngineStart);
