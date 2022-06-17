@@ -17,7 +17,7 @@ public abstract class TesseractBaseEngine : IOcrEngine
         return langCode.Split('+').All(code => InstalledLanguages.Any(x => x.Code == code));
     }
 
-    public OcrResult? ProcessImage(string imagePath, OcrParams ocrParams, CancellationToken cancelToken)
+    public async Task<OcrResult?> ProcessImage(string imagePath, OcrParams ocrParams, CancellationToken cancelToken)
     {
         string tempHocrFilePath = Path.Combine(Paths.Temp, Path.GetRandomFileName());
         string tempHocrFilePathWithExt = tempHocrFilePath + TesseractHocrExtension;
@@ -51,8 +51,22 @@ public abstract class TesseractBaseEngine : IOcrEngine
             }
             var timeout = (int) (ocrParams.TimeoutInSeconds * 1000);
             var stopwatch = Stopwatch.StartNew();
-            while (!tesseractProcess.WaitForExit(CHECK_INTERVAL))
+            // TODO: Need tests for this clas
+            // TODO: Generalize
+            var tcs = new TaskCompletionSource<object?>();
+            tesseractProcess.Exited += (_, _) => tcs.SetResult(null);
+            if (tesseractProcess.HasExited)
             {
+                tcs.SetResult(null);
+            }
+            while (true)
+            {
+                // TODO: Clean up (i.e. use timeout/cancellation instead of interval checking)
+                await Task.WhenAny(tcs.Task, Task.Delay(100));
+                if (tesseractProcess.HasExited)
+                {
+                    break;
+                }
                 if (timeout != 0 && stopwatch.ElapsedMilliseconds >= timeout || cancelToken.IsCancellationRequested)
                 {
                     if (stopwatch.ElapsedMilliseconds >= timeout)

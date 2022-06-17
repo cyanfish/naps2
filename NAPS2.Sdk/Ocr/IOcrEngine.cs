@@ -7,7 +7,7 @@ public interface IOcrEngine
 {
     bool CanProcess(string langCode);
 
-    OcrResult? ProcessImage(string imagePath, OcrParams ocrParams, CancellationToken cancelToken);
+    Task<OcrResult?> ProcessImage(string imagePath, OcrParams ocrParams, CancellationToken cancelToken);
 
     bool IsSupported { get; }
 
