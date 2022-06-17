@@ -1,5 +1,8 @@
 ﻿namespace NAPS2.Ocr;
 
+/// <summary>
+/// The result of an OCR request. Contains a set of elements that represent text segments. 
+/// </summary>
 public class OcrResult
 {
     public OcrResult((int x, int y, int w, int h) pageBounds, IEnumerable<OcrResultElement> elements, bool rightToLeft)

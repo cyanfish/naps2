@@ -10,7 +10,6 @@ public class OcrRequestQueueTests : ContextualTexts
 {
     private readonly OcrRequestQueue _ocrRequestQueue;
     private readonly Mock<IOcrEngine> _mockEngine;
-    private readonly Mock<OperationProgress> _mockOperationProgress;
     private readonly ProcessedImage _image;
     private readonly string _tempPath;
     private readonly OcrParams _ocrParams;
@@ -20,8 +19,10 @@ public class OcrRequestQueueTests : ContextualTexts
     public OcrRequestQueueTests()
     {
         _mockEngine = new Mock<IOcrEngine>(MockBehavior.Strict);
-        _mockOperationProgress = new Mock<OperationProgress>();
-        _ocrRequestQueue = new OcrRequestQueue(_mockOperationProgress.Object);
+        _ocrRequestQueue = new OcrRequestQueue
+        {
+            WorkerCount = 4
+        };
 
         _image = CreateScannedImage();
         _tempPath = CreateTempFile();
@@ -233,6 +234,43 @@ public class OcrRequestQueueTests : ContextualTexts
         _mockEngine.VerifyNoOtherCalls();
     }
 
+    [Fact]
+    public async Task ForegroundPrioritized()
+    {
+        _mockEngine.Setup(x => x.ProcessImage(_tempPath, _ocrParams, It.IsAny<CancellationToken>()))
+            .Returns(_expectedResultTask);
+
+        var foregroundTasks = EnqueueMany(OcrPriority.Foreground, 8);
+        var backgroundTasks = EnqueueMany(OcrPriority.Background, 8);
+        foregroundTasks.AddRange(EnqueueMany(OcrPriority.Foreground, 8));
+        backgroundTasks.AddRange(EnqueueMany(OcrPriority.Background, 8));
+
+        await Task.WhenAny(backgroundTasks);
+
+        int foregroundCompletedCount = foregroundTasks.Count(x => x.IsCompleted);
+        // With 4 worker tasks and 16 foreground tasks, at least 13 should be completed before moving to background tasks
+        Assert.InRange(foregroundCompletedCount, 13, 16);
+    }
+
+    [Fact]
+    public async Task StressTest()
+    {
+        _mockEngine.Setup(x => x.ProcessImage(It.IsAny<string>(), _ocrParams, It.IsAny<CancellationToken>()))
+            .Returns(_expectedResultTask);
+
+        var tasks = EnqueueMany(OcrPriority.Foreground, 1000);
+        await Task.Delay(500);
+        
+        int completedCount = tasks.Count(x => x.IsCompleted);
+        Assert.Equal(1000, completedCount);
+    }
+
+    private List<Task<OcrResult>> EnqueueMany(OcrPriority priority, int count)
+    {
+        return Enumerable.Range(0, count)
+            .Select(x => DoEnqueue(priority, CreateScannedImage(), CreateTempFile(), _ocrParams)).ToList();
+    }
+
     private string CreateTempFile()
     {
         var path = Path.Combine(FolderPath, $"tempocr{Guid.NewGuid()}.jpg");
@@ -251,7 +289,13 @@ public class OcrRequestQueueTests : ContextualTexts
         return new OcrParams("eng", OcrMode.Fast, 10);
     }
 
-    private Task<OcrResult?> DoEnqueueForeground(ProcessedImage image, string tempPath, OcrParams ocrParams,
+    private Task<OcrResult> DoEnqueueForeground(ProcessedImage image, string tempPath, OcrParams ocrParams,
+        CancellationToken cancellationToken = default)
+    {
+        return DoEnqueue(OcrPriority.Foreground, image, tempPath, ocrParams, cancellationToken);
+    }
+
+    private Task<OcrResult> DoEnqueue(OcrPriority priority, ProcessedImage image, string tempPath, OcrParams ocrParams,
         CancellationToken cancellationToken = default)
     {
         return _ocrRequestQueue.Enqueue(
@@ -259,16 +303,7 @@ public class OcrRequestQueueTests : ContextualTexts
             image,
             tempPath,
             ocrParams,
-            OcrPriority.Foreground,
+            priority,
             cancellationToken);
     }
-
-    // TODO: Tests to add:
-    // - Unsupported language code
-    // - Many parallel tasks (more than worker threads - also # of worker threads should be configurable by the test)
-    // - Can I break things by overloading task parallelization? I honestly don't remember why this is supposed to work...
-    // - Priority (background vs foreground)
-    // - Maybe we can parameterize some tests for background/foreground? Or maybe not necessary, priority tests are
-    // probably enough.
-    // - Cancellation
 }

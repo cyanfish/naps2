@@ -2,6 +2,9 @@
 
 namespace NAPS2.Ocr;
 
+/// <summary>
+/// State and processing logic for OCR requests that go through OcrRequestQueue.
+/// </summary>
 internal class OcrRequest
 {
     private readonly OcrRequestQueue _ocrRequestQueue;

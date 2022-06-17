@@ -2,36 +2,27 @@
 
 namespace NAPS2.Ocr;
 
+/// <summary>
+/// Allows OCR requests to be queued and prioritized. Results are cached so that requests with the same set of
+/// parameters (image, engine, language code, etc.) don't do duplicate work.
+/// </summary>
 public class OcrRequestQueue
 {
-    private static OcrRequestQueue? _default;
-
-    public static OcrRequestQueue Default
-    {
-        get
-        {
-            TestingContext.NoStaticDefaults();
-            return _default ??= new OcrRequestQueue();
-        }
-        set => _default = value ?? throw new ArgumentNullException(nameof(value));
-    }
-
     private readonly Dictionary<OcrRequestParams, OcrRequest> _requestCache = new();
     private Semaphore _queueWaitHandle = new(0, int.MaxValue);
     private List<Task> _workerTasks = new();
     private CancellationTokenSource _workerCts = new();
 
-    private readonly OperationProgress _operationProgress;
+    /// <summary>
+    /// Gets or sets the number of queue workers, which determines the maximum number of OCR requests that can process
+    /// in parallel.
+    /// </summary>
+    public int WorkerCount { get; init; } = Environment.ProcessorCount;
 
-    public OcrRequestQueue() : this(OperationProgress.Default)
-    {
-    }
-
-    public OcrRequestQueue(OperationProgress operationProgress)
-    {
-        _operationProgress = operationProgress;
-    }
-
+    /// <summary>
+    /// Returns true if a previous queued request with the provided parameters has already completed and produced a
+    /// result.
+    /// </summary>
     public bool HasCachedResult(IOcrEngine ocrEngine, ProcessedImage image, OcrParams ocrParams)
     {
         var reqParams = new OcrRequestParams(image, ocrEngine, ocrParams);
@@ -41,11 +32,22 @@ public class OcrRequestQueue
         }
     }
 
+    /// <summary>
+    /// Adds a new OCR request to the queue. Before calling this method, the image should be saved to disk and the file
+    /// path specified as "tempImageFilePath". The file will automatically be deleted once it is no longer needed for
+    /// the OCR request.
+    /// </summary>
+    /// <param name="ocrEngine">The engine to run.</param>
+    /// <param name="image">The image to OCR.</param>
+    /// <param name="tempImageFilePath">The on-disk image file path.</param>
+    /// <param name="ocrParams">The OCR config parameters.</param>
+    /// <param name="priority">The priority of the request.</param>
+    /// <param name="cancelToken">A cancellation token.</param>
+    /// <returns>The result of the OCR operation, or null if an error occurred (e.g. engine misconfigured).</returns>
     public async Task<OcrResult?> Enqueue(IOcrEngine ocrEngine, ProcessedImage image, string tempImageFilePath,
         OcrParams ocrParams, OcrPriority priority, CancellationToken cancelToken)
     {
         OcrRequest req;
-        bool alreadyCompleted;
         lock (this)
         {
             var reqParams = new OcrRequestParams(image, ocrEngine, ocrParams);
@@ -56,11 +58,6 @@ public class OcrRequestQueue
                 req = _requestCache[reqParams] = new OcrRequest(reqParams, this);
             }
             req.AddReference(tempImageFilePath, priority, cancelToken);
-            alreadyCompleted = req.State == OcrRequestState.Completed;
-        }
-        if (alreadyCompleted)
-        {
-            return await req.CompletedTask;
         }
         // Signal the worker tasks that a request may be ready
         _queueWaitHandle.Release();
@@ -75,16 +72,14 @@ public class OcrRequestQueue
 
     private void EnsureWorkerThreads()
     {
-        // TODO: Maybe it makes sense to have a single dispatcher that creates subtasks for dequeued requests (with a
-        // TODO: semaphore to limit concurrency) rather than worker threads/tasks
         lock (this)
         {
             bool hasPending = _requestCache.Values.Any(x => x.State == OcrRequestState.Pending);
             if (_workerTasks.Count == 0 && hasPending)
             {
-                for (int i = 0; i < Environment.ProcessorCount; i++)
+                for (int i = 0; i < WorkerCount; i++)
                 {
-                    _workerTasks.Add(Task.Run(() => RunWorkerTask(_workerCts)));
+                    _workerTasks.Add(Task.Run(() => RunWorkerTask(_workerCts, _queueWaitHandle)));
                 }
             }
             if (_workerTasks.Count > 0 && !hasPending)
@@ -97,14 +92,14 @@ public class OcrRequestQueue
         }
     }
 
-    private async Task RunWorkerTask(CancellationTokenSource cts)
+    private async Task RunWorkerTask(CancellationTokenSource cts, WaitHandle queueWaitHandle)
     {
         try
         {
             while (true)
             {
                 // Wait for a queued ocr request to become available
-                await Task.WhenAny(_queueWaitHandle.WaitOneAsync(), cts.Token.WaitHandle.WaitOneAsync());
+                await Task.WhenAny(queueWaitHandle.WaitOneAsync(), cts.Token.WaitHandle.WaitOneAsync());
                 if (cts.IsCancellationRequested)
                 {
                     return;
