@@ -235,6 +235,52 @@ public class OcrRequestQueueTests : ContextualTexts
     }
 
     [Fact]
+    public async Task CancelOnceWithTwoReferences()
+    {
+        var tempPath1 = CreateTempFile();
+        var tempPath2 = CreateTempFile();
+        _mockEngine.Setup(x => x.ProcessImage(tempPath1, _ocrParams, It.IsAny<CancellationToken>()))
+            .Returns(() => Task.Run(async () =>
+            {
+                await Task.Delay(100);
+                return _expectedResult;
+            }));
+        // Delay the workers so we can cancel before processing starts
+        _ocrRequestQueue.WorkerAddedLatency = 50;
+
+        var cts = new CancellationTokenSource();
+        var ocrResult1Task = DoEnqueueForeground(_image, tempPath1, _ocrParams, cts.Token);
+        var ocrResult2Task = DoEnqueueForeground(_image, tempPath2, _ocrParams);
+        cts.Cancel();
+        
+        var ocrResult1 = await ocrResult1Task;
+        var ocrResult2 = await ocrResult2Task;
+        Assert.Null(ocrResult1);
+        Assert.Equal(_expectedResult, ocrResult2);
+        _mockEngine.Verify(x => x.ProcessImage(tempPath1, _ocrParams, It.IsAny<CancellationToken>()));
+        _mockEngine.VerifyNoOtherCalls();
+    }
+
+    [Fact]
+    public async Task CancelTwiceWithTwoReferences()
+    {
+        // Delay the workers so we can cancel before processing starts
+        _ocrRequestQueue.WorkerAddedLatency = 50;
+
+        var cts = new CancellationTokenSource();
+        var ocrResult1Task = DoEnqueueForeground(_image, _tempPath, _ocrParams, cts.Token);
+        var ocrResult2Task = DoEnqueueForeground(_image, _tempPath, _ocrParams, cts.Token);
+        cts.Cancel();
+        
+        var ocrResult1 = await ocrResult1Task;
+        var ocrResult2 = await ocrResult2Task;
+        Assert.Null(ocrResult1);
+        Assert.Null(ocrResult2);
+        await Task.Delay(100);
+        _mockEngine.VerifyNoOtherCalls();
+    }
+
+    [Fact]
     public async Task ForegroundPrioritized()
     {
         _mockEngine.Setup(x => x.ProcessImage(_tempPath, _ocrParams, It.IsAny<CancellationToken>()))
@@ -263,6 +309,47 @@ public class OcrRequestQueueTests : ContextualTexts
         
         int completedCount = tasks.Count(x => x.IsCompleted);
         Assert.Equal(1000, completedCount);
+    }
+    
+    [Fact]
+    public async Task HasCachedResult()
+    {
+        _mockEngine.Setup(x => x.ProcessImage(_tempPath, _ocrParams, It.IsAny<CancellationToken>()))
+            .Returns(_expectedResultTask);
+
+        await DoEnqueueForeground(_image, _tempPath, _ocrParams);
+
+        var ocrParams2 = new OcrParams("fra", OcrMode.Fast, 10);
+        
+        Assert.True(_ocrRequestQueue.HasCachedResult(_mockEngine.Object, _image, _ocrParams));
+        Assert.False(_ocrRequestQueue.HasCachedResult(_mockEngine.Object, _image, ocrParams2));
+        Assert.False(_ocrRequestQueue.HasCachedResult(_mockEngine.Object, CreateScannedImage(), _ocrParams));
+        Assert.False(_ocrRequestQueue.HasCachedResult(new Mock<IOcrEngine>().Object, _image, _ocrParams));
+    }
+    
+    [Fact]
+    public async Task HasCachedResult_WhileProcessing()
+    {
+        _mockEngine.Setup(x => x.ProcessImage(_tempPath, _ocrParams, It.IsAny<CancellationToken>()))
+            .Returns(_expectedResultTask);
+
+        _ocrRequestQueue.WorkerAddedLatency = 50;
+        DoEnqueueForeground(_image, _tempPath, _ocrParams).AssertNoAwait();
+
+        Assert.False(_ocrRequestQueue.HasCachedResult(_mockEngine.Object, _image, _ocrParams));
+        await Task.Delay(100);
+        Assert.True(_ocrRequestQueue.HasCachedResult(_mockEngine.Object, _image, _ocrParams));
+    }
+    
+    [Fact]
+    public async Task HasCachedResult_WithError()
+    {
+        _mockEngine.Setup(x => x.ProcessImage(_tempPath, _ocrParams, It.IsAny<CancellationToken>()))
+            .Throws<Exception>();
+
+        await DoEnqueueForeground(_image, _tempPath, _ocrParams);
+
+        Assert.False(_ocrRequestQueue.HasCachedResult(_mockEngine.Object, _image, _ocrParams));
     }
 
     private List<Task<OcrResult>> EnqueueMany(OcrPriority priority, int count)

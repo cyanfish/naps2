@@ -2,6 +2,7 @@
 
 namespace NAPS2.Ocr;
 
+// TODO: Might need to use configureawait(false) everywhere, or at least on non-worker threads...
 /// <summary>
 /// Allows OCR requests to be queued and prioritized. Results are cached so that requests with the same set of
 /// parameters (image, engine, language code, etc.) don't do duplicate work.
@@ -18,6 +19,11 @@ public class OcrRequestQueue
     /// in parallel.
     /// </summary>
     public int WorkerCount { get; init; } = Environment.ProcessorCount;
+    
+    /// <summary>
+    /// For testing. Adds a delay to the worker tasks to process requests.
+    /// </summary>
+    public int WorkerAddedLatency { get; set; }
 
     /// <summary>
     /// Returns true if a previous queued request with the provided parameters has already completed and produced a
@@ -63,11 +69,11 @@ public class OcrRequestQueue
         _queueWaitHandle.Release();
         // If no worker threads are running, start them
         EnsureWorkerThreads();
-        var result = await req.CompletedTask;
+        await Task.WhenAny(req.CompletedTask, cancelToken.WaitHandle.WaitOneAsync());
         // If no requests are pending, stop the worker threads
         EnsureWorkerThreads();
-        // May return null if cancelled
-        return result;
+        // Return null if canceled
+        return req.CompletedTask.IsCompleted ? req.CompletedTask.Result : null;
     }
 
     private void EnsureWorkerThreads()
@@ -96,6 +102,10 @@ public class OcrRequestQueue
     {
         try
         {
+            if (WorkerAddedLatency > 0)
+            {
+                await Task.Delay(WorkerAddedLatency);
+            }
             while (true)
             {
                 // Wait for a queued ocr request to become available
