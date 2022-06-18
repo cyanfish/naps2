@@ -5,26 +5,16 @@ namespace NAPS2.WinForms
 {
     public partial class FOcrLanguageDownload : FormBase
     {
-        private readonly OcrEngineManager _ocrEngineManager;
-        private readonly IOcrEngine _engineToInstall;
+        private readonly TesseractLanguageManager _tesseractLanguageManager;
 
-        public FOcrLanguageDownload(OcrEngineManager ocrEngineManager)
+        public FOcrLanguageDownload(TesseractLanguageManager tesseractLanguageManager)
         {
-            _ocrEngineManager = ocrEngineManager;
-            _engineToInstall = ocrEngineManager.EngineToInstall;
+            _tesseractLanguageManager = tesseractLanguageManager;
             InitializeComponent();
 
             var initialSelection = new HashSet<string>();
-            if (ocrEngineManager.InstalledEngine != null && ocrEngineManager.InstalledEngine != _engineToInstall)
-            {
-                // Upgrading from an old version, so pre-select previously used languages
-                foreach (var lang in ocrEngineManager.InstalledEngine.LanguageComponents.Where(x => x.IsInstalled))
-                {
-                    initialSelection.Add(lang.Id);
-                }
-            }
-
-            if (!_engineToInstall.InstalledLanguages.Any())
+            // TODO: We used to select old installed languages here, maybe we could do it again if we get new lang data 
+            if (!_tesseractLanguageManager.InstalledLanguages.Any())
             {
                 // Fresh install, so pre-select English as a sensible default
                 initialSelection.Add("ocr-eng");
@@ -32,7 +22,7 @@ namespace NAPS2.WinForms
 
             // Populate the list of language options
             // Special case for English: sorted to the top of the list
-            var languageOptions = _engineToInstall.NotInstalledLanguages
+            var languageOptions = _tesseractLanguageManager.NotInstalledLanguages
                 .OrderBy(x => x.Code == "eng" ? "AAA" : x.Name);
             foreach (var languageOption in languageOptions)
             {
@@ -63,16 +53,11 @@ namespace NAPS2.WinForms
         private void UpdateView()
         {
             var selectedLanguages = SelectedLanguages;
-            double downloadSize = _engineToInstall.LanguageComponents.Where(x => selectedLanguages.Contains(x.Id)).Select(x => x.DownloadInfo.Size).Sum();
-
-            if (!_engineToInstall.IsInstalled)
-            {
-                downloadSize += _engineToInstall.Component.DownloadInfo.Size;
-            }
+            double downloadSize = _tesseractLanguageManager.LanguageComponents.Where(x => selectedLanguages.Contains(x.Id)).Select(x => x.DownloadInfo.Size).Sum();
 
             labelSizeEstimate.Text = string.Format(MiscResources.EstimatedDownloadSize, downloadSize.ToString("f1"));
 
-            btnDownload.Enabled = lvLanguages.Items.Cast<ListViewItem>().Any(x => x.Checked) || _engineToInstall.InstalledLanguages.Any() && !_engineToInstall.IsInstalled;
+            btnDownload.Enabled = lvLanguages.Items.Cast<ListViewItem>().Any(x => x.Checked);
         }
 
         private HashSet<string> SelectedLanguages
@@ -94,13 +79,8 @@ namespace NAPS2.WinForms
         {
             var progressForm = FormFactory.Create<FDownloadProgress>();
 
-            if (!_engineToInstall.IsInstalled)
-            {
-                progressForm.QueueFile(_engineToInstall.Component);
-            }
-
             var selectedLanguages = SelectedLanguages;
-            foreach (var langComponent in _engineToInstall.LanguageComponents.Where(x => selectedLanguages.Contains(x.Id)))
+            foreach (var langComponent in _tesseractLanguageManager.LanguageComponents.Where(x => selectedLanguages.Contains(x.Id)))
             {
                 progressForm.QueueFile(langComponent);
             }

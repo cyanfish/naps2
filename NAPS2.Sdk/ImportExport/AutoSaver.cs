@@ -20,7 +20,7 @@ public class AutoSaver
     private readonly TiffHelper _tiffHelper;
     private readonly ImageContext _imageContext;
 
-    public AutoSaver(IConfigProvider<PdfSettings> pdfSettingsProvider, IConfigProvider<ImageSettings> imageSettingsProvider, OcrEngineManager ocrEngineManager, OcrRequestQueue ocrRequestQueue, ErrorOutput errorOutput, DialogHelper dialogHelper, OperationProgress operationProgress, ISaveNotify notify, PdfExporter pdfExporter, OverwritePrompt overwritePrompt, ScopedConfig config, TiffHelper tiffHelper, ImageContext imageContext)
+    public AutoSaver(IConfigProvider<PdfSettings> pdfSettingsProvider, IConfigProvider<ImageSettings> imageSettingsProvider, ErrorOutput errorOutput, DialogHelper dialogHelper, OperationProgress operationProgress, ISaveNotify notify, PdfExporter pdfExporter, OverwritePrompt overwritePrompt, ScopedConfig config, TiffHelper tiffHelper, ImageContext imageContext)
     {
         _pdfSettingsProvider = pdfSettingsProvider;
         _imageSettingsProvider = imageSettingsProvider;

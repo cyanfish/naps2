@@ -20,7 +20,7 @@ public class AutomatedScanning
     private readonly ErrorOutput _errorOutput;
     private readonly IScannedImageImporter _scannedImageImporter;
     private readonly IOperationFactory _operationFactory;
-    private readonly OcrEngineManager _ocrEngineManager;
+    private readonly TesseractLanguageManager _tesseractLanguageManager;
     private readonly IFormFactory _formFactory;
     private readonly ScopedConfig _config;
     private readonly TransactionConfigScope<CommonConfig> _userTransact;
@@ -43,7 +43,7 @@ public class AutomatedScanning
     public AutomatedScanning(ConsoleOutput output, AutomatedScanningOptions options, ImageContext imageContext,
         IScanPerformer scanPerformer, ErrorOutput errorOutput, IEmailProviderFactory emailProviderFactory,
         IScannedImageImporter scannedImageImporter, IOperationFactory operationFactory,
-        OcrEngineManager ocrEngineManager, IFormFactory formFactory, ScopedConfig config,
+        TesseractLanguageManager tesseractLanguageManager, IFormFactory formFactory, ScopedConfig config,
         IProfileManager profileManager, RecoveryStorageManager recoveryStorageManager, ScanningContext scanningContext)
     {
         _output = output;
@@ -54,7 +54,7 @@ public class AutomatedScanning
         _emailProviderFactory = emailProviderFactory;
         _scannedImageImporter = scannedImageImporter;
         _operationFactory = operationFactory;
-        _ocrEngineManager = ocrEngineManager;
+        _tesseractLanguageManager = tesseractLanguageManager;
         _formFactory = formFactory;
         _config = config;
         _profileManager = profileManager;
@@ -173,12 +173,7 @@ public class AutomatedScanning
     private void InstallComponents()
     {
         var availableComponents = new List<IExternalComponent>();
-        var ocrEngine = _ocrEngineManager.EngineToInstall;
-        if (ocrEngine != null)
-        {
-            availableComponents.Add(ocrEngine.Component);
-            availableComponents.AddRange(ocrEngine.LanguageComponents);
-        }
+        availableComponents.AddRange(_tesseractLanguageManager.LanguageComponents);
 
         var componentDict = availableComponents.ToDictionary(x => x.Id.ToLowerInvariant());
         var installId = _options.Install.ToLowerInvariant();

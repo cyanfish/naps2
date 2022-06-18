@@ -19,11 +19,10 @@ public static class StaticConfiguration
         Debug.Listeners.Add(new NLogTraceListener());
 #endif
 
+        // TODO: Initialize TesseractLanguageManager here?
         var customPath = config.Get(c => c.ComponentsPath);
         var basePath = string.IsNullOrWhiteSpace(customPath)
             ? Paths.Components
             : Environment.ExpandEnvironmentVariables(customPath);
-
-        OcrEngineManager.Default = new OcrEngineManager(basePath);
     }
 }

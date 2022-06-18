@@ -50,10 +50,6 @@ public class OcrController
         {
             throw new InvalidOperationException("OCR is enabled but no language code is specified.");
         }
-        if (!Engine.CanProcess(OcrParams.LanguageCode))
-        {
-            throw new InvalidOperationException("OCR is enabled but the engine can't handle the specified language.");
-        }
 
         CancellationTokenSource cts = new CancellationTokenSource();
         _cancellationTokenSources.Add(image.GetWeakReference(), cts);

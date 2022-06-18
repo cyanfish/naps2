@@ -1,45 +1,39 @@
-﻿using System.Threading;
-using NAPS2.Dependencies;
+using System.Threading;
 
 namespace NAPS2.Ocr;
 
-public abstract class TesseractBaseEngine : IOcrEngine
+public class TesseractOcrEngine : IOcrEngine
 {
-    private const int CHECK_INTERVAL = 500;
+    private readonly string _exePath;
+    private readonly string? _languageDataBasePath;
 
-    public bool CanProcess(string langCode)
+    public TesseractOcrEngine(string exePath, string? languageDataBasePath)
     {
-        if (string.IsNullOrEmpty(langCode) || !IsInstalled || !IsSupported)
-        {
-            return false;
-        }
-        // Support multiple specified languages (e.g. "eng+fra")
-        return langCode.Split('+').All(code => InstalledLanguages.Any(x => x.Code == code));
+        _exePath = exePath;
+        _languageDataBasePath = languageDataBasePath;
     }
-
+    
     public async Task<OcrResult?> ProcessImage(string imagePath, OcrParams ocrParams, CancellationToken cancelToken)
     {
         string tempHocrFilePath = Path.Combine(Paths.Temp, Path.GetRandomFileName());
-        string tempHocrFilePathWithExt = tempHocrFilePath + TesseractHocrExtension;
+        string tempHocrFilePathWithExt = tempHocrFilePath + ".hocr";
         try
         {
-            var runInfo = TesseractRunInfo(ocrParams);
             var startInfo = new ProcessStartInfo
             {
-                FileName = Path.Combine(TesseractBasePath, TesseractExePath),
-                Arguments = $"\"{imagePath}\" \"{tempHocrFilePath}\" -l {ocrParams.LanguageCode} {runInfo.Arguments} hocr",
+                FileName = _exePath,
+                Arguments = $"\"{imagePath}\" \"{tempHocrFilePath}\" -l {ocrParams.LanguageCode} hocr",
                 UseShellExecute = false,
                 CreateNoWindow = true,
                 RedirectStandardOutput = true,
                 RedirectStandardError = true
             };
-            if (runInfo.PrefixPath != null)
+            if (_languageDataBasePath != null)
             {
-                startInfo.EnvironmentVariables["TESSDATA_PREFIX"] = Path.Combine(TesseractBasePath, runInfo.PrefixPath);
-            }
-            if (runInfo.DataPath != null)
-            {
-                var tessdata = new DirectoryInfo(Path.Combine(TesseractBasePath, runInfo.DataPath));
+                string subfolder = ocrParams.Mode == OcrMode.Best ? "best" : "fast";
+                string languageDataPath = Path.Combine(_languageDataBasePath, subfolder);
+                startInfo.EnvironmentVariables["TESSDATA_PREFIX"] = languageDataPath;
+                var tessdata = new DirectoryInfo(languageDataPath);
                 EnsureHocrConfigExists(tessdata);
             }
             var tesseractProcess = Process.Start(startInfo);
@@ -107,8 +101,10 @@ public abstract class TesseractBaseEngine : IOcrEngine
             var elements = hocrDocument.Descendants()
                 .Where(x => x.Attributes("class").Any(y => y.Value == "ocrx_word"))
                 .Select(x => new OcrResultElement(x.Value, GetBounds(x.Attribute("title"))));
-            var rtl = InstalledLanguages.Where(x => x.Code == ocrParams.LanguageCode).Select(x => x.RTL)
-                .FirstOrDefault();
+            var rtl = false;
+            // TODO: Can we detect rtl from the hocr file?
+            // var rtl = _data.InstalledLanguages.Where(x => x.Code == ocrParams.LanguageCode).Select(x => x.RTL)
+            //     .FirstOrDefault();
             return new OcrResult(pageBounds, elements, rtl);
         }
         catch (Exception e)
@@ -162,51 +158,32 @@ public abstract class TesseractBaseEngine : IOcrEngine
         }
         return bounds;
     }
-
-    public bool CanInstall { get; protected set; }
-
-    public IEnumerable<OcrMode> SupportedModes { get; protected set; }
-
-    public IExternalComponent Component { get; protected set; }
-
-    public IEnumerable<IExternalComponent> LanguageComponents { get; protected set; }
-
-    public virtual bool IsSupported => PlatformSupport.Validate();
-
-    public virtual bool IsInstalled => Component.IsInstalled;
-
-    public virtual IEnumerable<Language> InstalledLanguages =>
-        LanguageComponents.Where(x => x.IsInstalled).Select(x => LanguageData.LanguageMap[x.Id]);
-
-    public virtual IEnumerable<Language> NotInstalledLanguages =>
-        LanguageComponents.Where(x => !x.IsInstalled).Select(x => LanguageData.LanguageMap[x.Id]);
-
-    protected string TesseractBasePath { get; set; }
-
-    protected string TesseractExePath { get; set; }
-
-    protected string TesseractHocrExtension { get; set; } = ".hocr";
-
-    protected DownloadInfo DownloadInfo { get; set; }
-
-    protected PlatformSupport PlatformSupport { get; set; }
-
-    protected TesseractLanguageData LanguageData { get; set; }
-
-    protected virtual RunInfo TesseractRunInfo(OcrParams ocrParams) => new RunInfo
-    {
-        Arguments = "",
-        DataPath = "tessdata",
-        PrefixPath = ""
-    };
-
-
-    protected class RunInfo
-    {
-        public string Arguments { get; set; }
-
-        public string? PrefixPath { get; set; }
-
-        public string? DataPath { get; set; }
-    }
+    
+    
+    // TODO: For local engine (where we need to manually direct to the language data)
+    // public override TesseractRunInfo TesseractRunInfo(OcrParams ocrParams)
+    // {
+    //     OcrMode mode = ocrParams.Mode;
+    //     string folder = mode == OcrMode.Fast || mode == OcrMode.Default ? "fast" : "best";
+    //     if (ocrParams.LanguageCode.Split('+').All(code => !File.Exists(Path.Combine(TesseractBasePath, folder, $"{code.ToLowerInvariant()}.traineddata"))))
+    //     {
+    //         // Use the other source if the selected one doesn't exist
+    //         folder = folder == "fast" ? "best" : "fast";
+    //         mode = folder == "fast" ? OcrMode.Fast : OcrMode.Best;
+    //     }
+    //
+    //     return new()
+    //     {
+    //         Arguments = mode == OcrMode.Best ? "--oem 1" : mode == OcrMode.Legacy ? "--oem 0" : "",
+    //         DataPath = folder,
+    //         PrefixPath = folder
+    //     };
+    
+    // TODO: For system engine (where the language data is externally managed)
+    // public override TesseractRunInfo TesseractRunInfo(OcrParams ocrParams) => new()
+    // {
+    //     Arguments = "",
+    //     DataPath = null,
+    //     PrefixPath = null
+    // };
 }

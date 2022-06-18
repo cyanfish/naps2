@@ -20,12 +20,12 @@ internal class ScanPerformer : IScanPerformer
     private readonly ErrorOutput _errorOutput;
     private readonly ScanOptionsValidator _scanOptionsValidator;
     private readonly IScanBridgeFactory _scanBridgeFactory;
-    private readonly OcrEngineManager _ocrEngineManager;
+    private readonly IOcrEngine _ocrEngine;
 
     public ScanPerformer(IFormFactory formFactory, ScopedConfig config, OperationProgress operationProgress,
         AutoSaver autoSaver, IProfileManager profileManager, ErrorOutput errorOutput,
         ScanOptionsValidator scanOptionsValidator, IScanBridgeFactory scanBridgeFactory,
-        ScanningContext scanningContext, OcrEngineManager ocrEngineManager)
+        ScanningContext scanningContext, IOcrEngine ocrEngine)
     {
         _formFactory = formFactory;
         _config = config;
@@ -36,7 +36,7 @@ internal class ScanPerformer : IScanPerformer
         _scanOptionsValidator = scanOptionsValidator;
         _scanBridgeFactory = scanBridgeFactory;
         _scanningContext = scanningContext;
-        _ocrEngineManager = ocrEngineManager;
+        _ocrEngine = ocrEngine;
     }
 
     public async Task<ScanDevice> PromptForDevice(ScanProfile scanProfile, IntPtr dialogParent = default)
@@ -101,7 +101,7 @@ internal class ScanPerformer : IScanPerformer
         OcrController ocrController = new OcrController(_scanningContext);
         if (scanParams.DoOcr)
         {
-            ocrController.Engine = _ocrEngineManager.ActiveEngine;
+            ocrController.Engine = _ocrEngine;
             if (ocrController.Engine == null)
             {
                 Log.Error("OCR is enabled but no OCR engine is available.");

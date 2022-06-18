@@ -38,6 +38,10 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>ImageImporterTestsData.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Update="Ocr\TesseractResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>TesseractResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   
   <ItemGroup>
@@ -46,6 +50,20 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>ImageImporterTestsData.resx</DependentUpon>
     </Compile>
+    <Compile Update="Ocr\TesseractResources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>TesseractTestResources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  
+  <ItemGroup>
+    <None Update="Resources\tesseract-5.1.0-x64.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\eng.traineddata">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   
 </Project>

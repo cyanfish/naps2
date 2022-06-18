@@ -15,18 +15,16 @@ public class BatchScanPerformer : IBatchScanPerformer
     private readonly PdfExporter _pdfExporter;
     private readonly IOperationFactory _operationFactory;
     private readonly IConfigProvider<PdfSettings> _pdfSettingsProvider;
-    private readonly OcrEngineManager _ocrEngineManager;
     private readonly IFormFactory _formFactory;
     private readonly ScopedConfig _config;
     private readonly IProfileManager _profileManager;
 
-    public BatchScanPerformer(IScanPerformer scanPerformer, PdfExporter pdfExporter, IOperationFactory operationFactory, IConfigProvider<PdfSettings> pdfSettingsProvider, OcrEngineManager ocrEngineManager, IFormFactory formFactory, ScopedConfig config, IProfileManager profileManager)
+    public BatchScanPerformer(IScanPerformer scanPerformer, PdfExporter pdfExporter, IOperationFactory operationFactory, IConfigProvider<PdfSettings> pdfSettingsProvider, IFormFactory formFactory, ScopedConfig config, IProfileManager profileManager)
     {
         _scanPerformer = scanPerformer;
         _pdfExporter = pdfExporter;
         _operationFactory = operationFactory;
         _pdfSettingsProvider = pdfSettingsProvider;
-        _ocrEngineManager = ocrEngineManager;
         _formFactory = formFactory;
         _config = config;
         _profileManager = profileManager;
@@ -34,7 +32,7 @@ public class BatchScanPerformer : IBatchScanPerformer
 
     public async Task PerformBatchScan(IConfigProvider<BatchSettings> settings, FormBase batchForm, Action<ProcessedImage> imageCallback, Action<string> progressCallback, CancellationToken cancelToken)
     {
-        var state = new BatchState(_scanPerformer, _pdfExporter, _operationFactory, _pdfSettingsProvider, _ocrEngineManager, _formFactory, _config, _profileManager)
+        var state = new BatchState(_scanPerformer, _pdfExporter, _operationFactory, _pdfSettingsProvider, _formFactory, _config, _profileManager)
         {
             Settings = settings,
             ProgressCallback = progressCallback,
@@ -51,7 +49,6 @@ public class BatchScanPerformer : IBatchScanPerformer
         private readonly PdfExporter _pdfExporter;
         private readonly IOperationFactory _operationFactory;
         private readonly IConfigProvider<PdfSettings> _pdfSettingsProvider;
-        private readonly OcrEngineManager _ocrEngineManager;
         private readonly IFormFactory _formFactory;
         private readonly ScopedConfig _config;
         private readonly IProfileManager _profileManager;
@@ -61,13 +58,12 @@ public class BatchScanPerformer : IBatchScanPerformer
         private List<List<ProcessedImage>> _scans;
 
         public BatchState(IScanPerformer scanPerformer, PdfExporter pdfExporter, IOperationFactory operationFactory,
-            IConfigProvider<PdfSettings> pdfSettingsProvider, OcrEngineManager ocrEngineManager, IFormFactory formFactory, ScopedConfig config, IProfileManager profileManager)
+            IConfigProvider<PdfSettings> pdfSettingsProvider, IFormFactory formFactory, ScopedConfig config, IProfileManager profileManager)
         {
             _scanPerformer = scanPerformer;
             _pdfExporter = pdfExporter;
             _operationFactory = operationFactory;
             _pdfSettingsProvider = pdfSettingsProvider;
-            _ocrEngineManager = ocrEngineManager;
             _formFactory = formFactory;
             _config = config;
             _profileManager = profileManager;

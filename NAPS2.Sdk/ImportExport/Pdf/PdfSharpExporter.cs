@@ -74,10 +74,6 @@ public class PdfSharpExporter : PdfExporter
                 {
                     Log.Error("Supported OCR engine not installed.", ocrParams.LanguageCode);
                 }
-                else if (!activeEngine.CanProcess(ocrParams.LanguageCode))
-                {
-                    Log.Error("OCR files not available for '{0}'.", ocrParams.LanguageCode);
-                }
                 else
                 {
                     ocrEngine = activeEngine;

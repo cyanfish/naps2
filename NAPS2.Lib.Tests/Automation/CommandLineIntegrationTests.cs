@@ -100,7 +100,7 @@ public class CommandLineIntegrationTests : ContextualTexts
         public override void Load()
         {
             Rebind<ImageContext>().ToConstant(_imageContext);
-            Rebind<OcrEngineManager>().ToConstant(new OcrEngineManager());
+            // TODO: Bind TesseractLanguageManager
             Rebind<IScanDriverFactory>().ToConstant(_scanDriverFactory);
             Rebind<IScanBridgeFactory>().To<InProcScanBridgeFactory>();
             Rebind<ConsoleOutput>().ToSelf().WithConstructorArgument("writer", new TestOutputTextWriter(_testOutputHelper));

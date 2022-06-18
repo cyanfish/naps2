@@ -6,22 +6,18 @@ namespace NAPS2.WinForms;
 
 public partial class FOcrSetup : FormBase
 {
-    private readonly OcrEngineManager _ocrEngineManager;
-    private readonly List<OcrMode> _availableModes;
+    private readonly TesseractLanguageManager _tesseractLanguageManager;
+    private readonly List<OcrMode> _availableModes = new() { OcrMode.Fast, OcrMode.Best };
 
-    public FOcrSetup(OcrEngineManager ocrEngineManager)
+    public FOcrSetup(TesseractLanguageManager tesseractLanguageManager)
     {
-        _ocrEngineManager = ocrEngineManager;
+        _tesseractLanguageManager = tesseractLanguageManager;
         InitializeComponent();
 
         comboOcrMode.Format += (sender, e) => e.Value = ((Enum)e.ListItem).Description();
-        _availableModes = ocrEngineManager.ActiveEngine?.SupportedModes?.ToList();
-        if (_availableModes != null)
+        foreach (var mode in _availableModes)
         {
-            foreach (var mode in _availableModes)
-            {
-                comboOcrMode.Items.Add(mode);
-            }
+            comboOcrMode.Items.Add(mode);
         }
     }
 
@@ -37,11 +33,6 @@ public partial class FOcrSetup : FormBase
         LoadLanguages();
         comboLanguages.DisplayMember = "Name";
         comboLanguages.ValueMember = "Code";
-
-        ConditionalControls.UnlockHeight(this);
-        ConditionalControls.SetVisible(comboOcrMode, _availableModes != null, 8);
-        labelOcrMode.Visible = _availableModes != null;
-        ConditionalControls.LockHeight(this);
 
         checkBoxEnableOcr.Checked = Config.Get(c => c.EnableOcr);
         SetSelectedValue(comboLanguages, Config.Get(c => c.OcrLanguageCode));
@@ -73,12 +64,10 @@ public partial class FOcrSetup : FormBase
 
     private void LoadLanguages()
     {
-        var languages = _ocrEngineManager.ActiveEngine?.InstalledLanguages
+        var languages = _tesseractLanguageManager.InstalledLanguages
             .OrderBy(x => x.Name)
             .ToList();
         comboLanguages.DataSource = languages;
-
-        linkGetLanguages.Visible = _ocrEngineManager.EngineToInstall != null;
     }
 
     private void UpdateView()

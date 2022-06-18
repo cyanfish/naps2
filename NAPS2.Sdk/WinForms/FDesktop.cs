@@ -34,7 +34,7 @@ namespace NAPS2.WinForms
         private readonly ImageContext _imageContext;
         private readonly StringWrapper _stringWrapper;
         private readonly RecoveryManager _recoveryManager;
-        private readonly OcrEngineManager _ocrEngineManager;
+        private readonly TesseractLanguageManager _tesseractLanguageManager;
         private readonly IScanPerformer _scanPerformer;
         private readonly IScannedImagePrinter _scannedImagePrinter;
         private readonly StillImage _stillImage;
@@ -70,7 +70,7 @@ namespace NAPS2.WinForms
 
         #region Initialization and Culture
 
-        public FDesktop(ImageContext imageContext, StringWrapper stringWrapper, RecoveryManager recoveryManager, OcrEngineManager ocrEngineManager,
+        public FDesktop(ImageContext imageContext, StringWrapper stringWrapper, RecoveryManager recoveryManager, TesseractLanguageManager tesseractLanguageManager,
             IScanPerformer scanPerformer, IScannedImagePrinter scannedImagePrinter, StillImage stillImage, IOperationFactory operationFactory,
             KeyboardShortcutManager ksm, ThumbnailRenderer thumbnailRenderer, WinFormsExportHelper exportHelper, ImageClipboard imageClipboard,
             NotificationManager notify, CultureInitializer cultureInitializer, IWorkerFactory workerFactory, OperationProgress operationProgress,
@@ -80,7 +80,7 @@ namespace NAPS2.WinForms
             _imageContext = imageContext;
             _stringWrapper = stringWrapper;
             _recoveryManager = recoveryManager;
-            _ocrEngineManager = ocrEngineManager;
+            _tesseractLanguageManager = tesseractLanguageManager;
             _scanPerformer = scanPerformer;
             _scannedImagePrinter = scannedImagePrinter;
             _stillImage = stillImage;
@@ -1165,33 +1165,14 @@ namespace NAPS2.WinForms
 
         private void tsOcr_Click(object sender, EventArgs e)
         {
-            if (_ocrEngineManager.MustUpgrade && !Config.Get(c => c.NoUpdatePrompt))
+            if (_tesseractLanguageManager.InstalledLanguages.Any())
             {
-                // Re-download a fixed version on Windows XP if needed
-                MessageBox.Show(MiscResources.OcrUpdateAvailable, "", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                var progressForm = FormFactory.Create<FDownloadProgress>();
-                progressForm.QueueFile(_ocrEngineManager.EngineToInstall.Component);
-                progressForm.ShowDialog();
-            }
-
-            if (_ocrEngineManager.MustInstallPackage)
-            {
-                const string packages = "\ntesseract-ocr";
-                MessageBox.Show(MiscResources.TesseractNotAvailable + packages, MiscResources.Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            else if (_ocrEngineManager.IsReady)
-            {
-                if (_ocrEngineManager.CanUpgrade && !Config.Get(c => c.NoUpdatePrompt))
-                {
-                    MessageBox.Show(MiscResources.OcrUpdateAvailable, "", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    FormFactory.Create<FOcrLanguageDownload>().ShowDialog();
-                }
                 FormFactory.Create<FOcrSetup>().ShowDialog();
             }
             else
             {
                 FormFactory.Create<FOcrLanguageDownload>().ShowDialog();
-                if (_ocrEngineManager.IsReady)
+                if (_tesseractLanguageManager.InstalledLanguages.Any())
                 {
                     FormFactory.Create<FOcrSetup>().ShowDialog();
                 }

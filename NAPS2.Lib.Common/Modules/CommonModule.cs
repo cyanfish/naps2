@@ -31,7 +31,7 @@ public class CommonModule : NinjectModule
         Bind<IScannedImagePrinter>().To<PrintDocumentPrinter>();
         Bind<IEmailProviderFactory>().To<NinjectEmailProviderFactory>();
         Bind<IMapiWrapper>().To<MapiWrapper>();
-        Bind<OcrEngineManager>().ToMethod(ctx => OcrEngineManager.Default);
+        // TODO: Bind TesseractLanguageManager
         Bind<OcrRequestQueue>().ToSelf().InSingletonScope();
 
         // Scan
