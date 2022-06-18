@@ -1,6 +1,4 @@
-﻿using System.Reflection;
-
-namespace NAPS2.ImportExport.Pdf;
+﻿namespace NAPS2.ImportExport.Pdf;
 
 public class PdfiumPdfRenderer : IPdfRenderer
 {
@@ -19,8 +17,6 @@ public class PdfiumPdfRenderer : IPdfRenderer
         var nativeLib = PdfiumNativeLibrary.LazyInstance.Value;
 
         // Pdfium is not thread-safe
-        // TODO: Can we/does it make sense to load a separate library instance to avoid this lock? And the need to
-        // TODO: render in a worker process?
         lock (nativeLib)
         {
             var doc = nativeLib.FPDF_LoadDocument(path, null);
