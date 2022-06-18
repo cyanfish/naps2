@@ -100,12 +100,15 @@ public class TesseractOcrEngine : IOcrEngine
                 .First();
             var elements = hocrDocument.Descendants()
                 .Where(x => x.Attributes("class").Any(y => y.Value == "ocrx_word"))
-                .Select(x => new OcrResultElement(x.Value, GetBounds(x.Attribute("title"))));
-            var rtl = false;
-            // TODO: Can we detect rtl from the hocr file?
-            // var rtl = _data.InstalledLanguages.Where(x => x.Code == ocrParams.LanguageCode).Select(x => x.RTL)
-            //     .FirstOrDefault();
-            return new OcrResult(pageBounds, elements, rtl);
+                .Select(x =>
+                {
+                    var text = x.Value;
+                    var lang = GetNearestAncestorAttribute(x, "lang") ?? "";
+                    var rtl = GetNearestAncestorAttribute(x, "dir") == "rtl";
+                    var bounds = GetBounds(x.Attribute("title"));
+                    return new OcrResultElement(text, lang, rtl, bounds);
+                });
+            return new OcrResult(pageBounds, elements);
         }
         catch (Exception e)
         {
@@ -125,6 +128,12 @@ public class TesseractOcrEngine : IOcrEngine
         }
     }
 
+    private static string? GetNearestAncestorAttribute(XElement x, string attributeName)
+    {
+        var ancestor = x.AncestorsAndSelf().FirstOrDefault(x => x.Attribute(attributeName) != null);
+        return ancestor?.Attribute(attributeName)?.Value;
+    }
+
     private void EnsureHocrConfigExists(DirectoryInfo tessdata)
     {
         var configDir = new DirectoryInfo(Path.Combine(tessdata.FullName, "configs"));
@@ -140,7 +149,7 @@ public class TesseractOcrEngine : IOcrEngine
         }
     }
 
-    private (int x, int y, int w, int h) GetBounds(XAttribute titleAttr)
+    private (int x, int y, int w, int h) GetBounds(XAttribute? titleAttr)
     {
         var bounds = (0, 0, 0, 0);
         if (titleAttr != null)

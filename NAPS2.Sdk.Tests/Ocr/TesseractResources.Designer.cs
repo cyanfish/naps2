@@ -73,9 +73,29 @@ namespace NAPS2.Sdk.Tests.Ocr {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
+        internal static byte[] heb_traineddata {
+            get {
+                object obj = ResourceManager.GetObject("heb_traineddata", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
         internal static byte[] ocr_test {
             get {
                 object obj = ResourceManager.GetObject("ocr_test", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] ocr_test_hebrew {
+            get {
+                object obj = ResourceManager.GetObject("ocr_test_hebrew", resourceCulture);
                 return ((byte[])(obj));
             }
         }

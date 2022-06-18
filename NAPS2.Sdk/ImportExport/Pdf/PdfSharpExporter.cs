@@ -313,7 +313,7 @@ public class PdfSharpExporter : PdfExporter
             var verticalOffset = (adjustedBounds.Height - adjustedTextSize.Height) / 2;
             var horizontalOffset = (adjustedBounds.Width - adjustedTextSize.Width) / 2;
             adjustedBounds.Offset((float)horizontalOffset, (float)verticalOffset);
-            tf.DrawString(ocrResult.RightToLeft ? ReverseText(element.Text) : element.Text, font, XBrushes.Transparent, adjustedBounds);
+            tf.DrawString(element.RightToLeft ? ReverseText(element.Text) : element.Text, font, XBrushes.Transparent, adjustedBounds);
         }
     }
 

@@ -124,7 +124,13 @@
     <data name="eng_traineddata" type="System.Resources.ResXFileRef, System.Windows.Forms">
         <value>..\Resources\eng.traineddata;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </data>
+    <data name="heb_traineddata" type="System.Resources.ResXFileRef, System.Windows.Forms">
+        <value>..\Resources\heb.traineddata;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </data>
     <data name="ocr_test" type="System.Resources.ResXFileRef, System.Windows.Forms">
         <value>..\Resources\ocr_test.jpg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </data>
+    <data name="ocr_test_hebrew" type="System.Resources.ResXFileRef, System.Windows.Forms">
+        <value>..\Resources\ocr_test_hebrew.jpg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </data>
 </root>
