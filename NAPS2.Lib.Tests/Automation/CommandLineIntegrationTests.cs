@@ -74,6 +74,22 @@ public class CommandLineIntegrationTests : ContextualTexts
         AssertRecoveryCleanedUp();
     }
 
+    [Fact]
+    public async Task ScanWithOcr()
+    {
+        await RunCommand(
+            new AutomatedScanningOptions
+            {
+                Number = 1,
+                OutputPath = $"{FolderPath}/test.pdf",
+                Verbose = true,
+                OcrLang = "eng"
+            },
+            SharedData.ocr_test);
+        PdfAsserts.AssertContainsText("ADVERTISEMENT.", $"{FolderPath}/test.pdf");
+        AssertRecoveryCleanedUp();
+    }
+
     private void AssertRecoveryCleanedUp()
     {
         Assert.False(new DirectoryInfo($"{FolderPath}/recovery").Exists);

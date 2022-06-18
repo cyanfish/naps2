@@ -21,6 +21,13 @@ public class ScanningContext : IDisposable
         FileStorageManager = fileStorageManager;
     }
 
+    public ScanningContext(ImageContext imageContext, FileStorageManager fileStorageManager, IOcrEngine ocrEngine)
+    {
+        ImageContext = imageContext;
+        FileStorageManager = fileStorageManager;
+        OcrEngine = ocrEngine;
+    }
+
     // TODO: Figure out initialization etc.
     public ImageContext ImageContext { get; }
 
@@ -31,9 +38,9 @@ public class ScanningContext : IDisposable
 
     public IWorkerFactory WorkerFactory { get; set; }
 
-    public OcrRequestQueue OcrRequestQueue { get; set; }
+    public OcrRequestQueue OcrRequestQueue { get; } = new();
 
-    public IOcrEngineProvider OcrEngineProvider { get; set; }
+    public IOcrEngine? OcrEngine { get; set; }
     
     public ProcessedImage CreateProcessedImage(IImageStorage storage)
     {

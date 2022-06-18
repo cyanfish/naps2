@@ -69,7 +69,7 @@ public class PdfSharpExporter : PdfExporter
             IOcrEngine ocrEngine = null;
             if (ocrParams?.LanguageCode != null)
             {
-                var activeEngine = _scanningContext.OcrEngineProvider.ActiveEngine;
+                var activeEngine = _scanningContext.OcrEngine;
                 if (activeEngine == null)
                 {
                     Log.Error("Supported OCR engine not installed.", ocrParams.LanguageCode);

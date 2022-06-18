@@ -1,4 +1,5 @@
-﻿using PdfSharp.Pdf.IO;
+﻿using NAPS2.ImportExport.Pdf;
+using PdfSharp.Pdf.IO;
 using Xunit;
 
 namespace NAPS2.Sdk.Tests.Asserts;
@@ -20,5 +21,18 @@ public static class PdfAsserts
         var report = LazyPdfAValidator.Value.ValidateWithDetailedReport(filePath);
         Assert.True(report.Jobs.Job.ValidationReport.IsCompliant);
         Assert.StartsWith($"{profile} ", report.Jobs.Job.ValidationReport.ProfileName);
+    }
+
+    public static void AssertContainsText(string text, string filePath)
+    {
+        bool containsText = false;
+        foreach (var pageText in new PdfiumPdfReader().ReadTextByPage(filePath))
+        {
+            if (pageText.Contains(text))
+            {
+                containsText = true;
+            }
+        }
+        Assert.True(containsText);
     }
 }

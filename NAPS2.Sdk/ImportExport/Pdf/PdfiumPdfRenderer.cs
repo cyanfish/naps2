@@ -7,16 +7,6 @@ public class PdfiumPdfRenderer : IPdfRenderer
     private const int RENDER_FLAGS = PdfiumNativeLibrary.FPDF_PRINTING;
     private const uint COLOR_WHITE = uint.MaxValue;
 
-    private static readonly Lazy<PdfiumNativeLibrary> LazyNativeLib = new(() =>
-    {
-        var assemblyLocation = Assembly.GetExecutingAssembly().Location;
-        var assemblyFolder = Path.GetDirectoryName(assemblyLocation);
-        var libraryPath = Path.Combine(assemblyFolder, PlatformCompat.System.PdfiumLibraryPath);
-        var nativeLib = new PdfiumNativeLibrary(libraryPath);
-        nativeLib.FPDF_InitLibrary();
-        return nativeLib;
-    });
-
     private readonly ImageContext _imageContext;
 
     public PdfiumPdfRenderer(ImageContext imageContext)
@@ -26,9 +16,11 @@ public class PdfiumPdfRenderer : IPdfRenderer
 
     public IEnumerable<IMemoryImage> Render(string path, float dpi)
     {
-        var nativeLib = LazyNativeLib.Value;
-            
+        var nativeLib = PdfiumNativeLibrary.LazyInstance.Value;
+
         // Pdfium is not thread-safe
+        // TODO: Can we/does it make sense to load a separate library instance to avoid this lock? And the need to
+        // TODO: render in a worker process?
         lock (nativeLib)
         {
             var doc = nativeLib.FPDF_LoadDocument(path, null);
@@ -55,11 +47,13 @@ public class PdfiumPdfRenderer : IPdfRenderer
                         var bitmapData = bitmap.Lock(LockMode.ReadWrite, out var scan0, out var stride);
                         try
                         {
-                            var pdfiumBitmap = nativeLib.FPDFBitmap_CreateEx(widthInPx, heightInPx, PdfiumNativeLibrary.FPDFBitmap_BGR, scan0, stride);
+                            var pdfiumBitmap = nativeLib.FPDFBitmap_CreateEx(widthInPx, heightInPx,
+                                PdfiumNativeLibrary.FPDFBitmap_BGR, scan0, stride);
                             try
                             {
                                 nativeLib.FPDFBitmap_FillRect(pdfiumBitmap, 0, 0, widthInPx, heightInPx, COLOR_WHITE);
-                                nativeLib.FPDF_RenderPageBitmap(pdfiumBitmap, page, 0, 0, widthInPx, heightInPx, 0, RENDER_FLAGS);
+                                nativeLib.FPDF_RenderPageBitmap(pdfiumBitmap, page, 0, 0, widthInPx, heightInPx, 0,
+                                    RENDER_FLAGS);
                                 yield return bitmap;
                             }
                             finally

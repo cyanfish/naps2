@@ -79,5 +79,15 @@ namespace NAPS2.Sdk.Tests.Images {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap ocr_test {
+            get {
+                object obj = ResourceManager.GetObject("ocr_test", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
     }
 }
