@@ -14,7 +14,7 @@ public class OcrRequestQueueTests : ContextualTexts
     private readonly string _tempPath;
     private readonly OcrParams _ocrParams;
     private readonly OcrResult _expectedResult;
-    private readonly Task<OcrResult?> _expectedResultTask;
+    private readonly Task<OcrResult> _expectedResultTask;
 
     public OcrRequestQueueTests()
     {

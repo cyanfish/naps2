@@ -1,4 +1,5 @@
-﻿using NAPS2.Images.Gdi;
+﻿using System.Reflection;
+using NAPS2.Images.Gdi;
 using NAPS2.ImportExport;
 using NAPS2.ImportExport.Email;
 using NAPS2.ImportExport.Email.Mapi;
@@ -31,7 +32,6 @@ public class CommonModule : NinjectModule
         Bind<IScannedImagePrinter>().To<PrintDocumentPrinter>();
         Bind<IEmailProviderFactory>().To<NinjectEmailProviderFactory>();
         Bind<IMapiWrapper>().To<MapiWrapper>();
-        // TODO: Bind TesseractLanguageManager
         Bind<OcrRequestQueue>().ToSelf().InSingletonScope();
 
         // Scan
@@ -79,6 +79,17 @@ public class CommonModule : NinjectModule
             config.Get(c => c.NoUserProfiles));
         Bind<IProfileManager>().ToConstant(profileManager);
 
-        StaticConfiguration.Initialize(Kernel);
+        var customComponentsPath = config.Get(c => c.ComponentsPath);
+        var componentsPath = string.IsNullOrWhiteSpace(customComponentsPath)
+            ? Paths.Components
+            : Environment.ExpandEnvironmentVariables(customComponentsPath);
+        var tesseractLanguageManager = new TesseractLanguageManager(componentsPath);
+        var naps2Folder = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+        // TODO: Linux/mac. Also maybe generalize this (see also PdfiumNativeLibrary).
+        var tesseractPath =
+            Path.Combine(naps2Folder!, Environment.Is64BitProcess ? "_win64" : "_win32", "tesseract.exe");
+        var tesseractOcrEngine = new TesseractOcrEngine(tesseractPath, tesseractLanguageManager.TessdataBasePath);
+        Bind<TesseractLanguageManager>().ToConstant(tesseractLanguageManager);
+        Bind<IOcrEngine>().ToConstant(tesseractOcrEngine);
     }
 }

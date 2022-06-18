@@ -43,13 +43,17 @@ public class TesseractOcrEngineTests : ContextualTexts
     {
         var result = await _engine.ProcessImage(_testImagePath, new OcrParams("eng", OcrMode.Fast, 0), CancellationToken.None);
         Assert.NotNull(result);
-        Assert.NotEqual(0, result.Elements.Count);
+        Assert.NotEmpty(result.Elements);
         foreach (var element in result.Elements)
         {
             Assert.Equal("eng", element.LanguageCode);
             Assert.False(element.RightToLeft);
         }
         Assert.Equal("ADVERTISEMENT.", result.Elements[0].Text);
+        Assert.InRange(result.Elements[0].Bounds.x, 139, 149);
+        Assert.InRange(result.Elements[0].Bounds.y, 26, 36);
+        Assert.InRange(result.Elements[0].Bounds.w, 237, 247);
+        Assert.InRange(result.Elements[0].Bounds.h, 17, 27);
     }
 
     [Fact]
@@ -57,7 +61,7 @@ public class TesseractOcrEngineTests : ContextualTexts
     {
         var result = await _engine.ProcessImage(_testImagePathHebrew, new OcrParams("heb", OcrMode.Fast, 0), CancellationToken.None);
         Assert.NotNull(result);
-        Assert.NotEqual(0, result.Elements.Count);
+        Assert.NotEmpty(result.Elements);
         foreach (var element in result.Elements)
         {
             Assert.Equal("heb", element.LanguageCode);

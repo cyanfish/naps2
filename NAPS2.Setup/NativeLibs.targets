@@ -20,5 +20,16 @@
             <Link>lib\osx\libpdfium.dylib</Link>
             <TargetPath>_osx\libpdfium.dylib</TargetPath>
         </ContentWithTargetPath>
+
+        <ContentWithTargetPath Include="..\NAPS2.Setup\lib\win64\tesseract.exe">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+            <Link>lib\win64\tesseract.exe</Link>
+            <TargetPath>_win64\tesseract.exe</TargetPath>
+        </ContentWithTargetPath>
+        <ContentWithTargetPath Include="..\NAPS2.Setup\lib\win32\tesseract.exe">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+            <Link>lib\win32\tesseract.exe</Link>
+            <TargetPath>_win32\tesseract.exe</TargetPath>
+        </ContentWithTargetPath>
     </ItemGroup>
 </Project>
