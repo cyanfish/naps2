@@ -1,3 +1,4 @@
+using System.Collections.Immutable;
 using System.Threading;
 
 namespace NAPS2.Ocr;
@@ -43,42 +44,36 @@ public class TesseractOcrEngine : IOcrEngine
                 Log.Error("Couldn't start OCR process.");
                 return null;
             }
+
+            var waitTasks = new List<Task>
+            {
+                tesseractProcess.WaitForExitAsync(),
+                cancelToken.WaitHandle.WaitOneAsync()
+            };
             var timeout = (int) (ocrParams.TimeoutInSeconds * 1000);
-            var stopwatch = Stopwatch.StartNew();
-            // TODO: Need tests for this clas
-            // TODO: Generalize
-            var tcs = new TaskCompletionSource<object?>();
-            tesseractProcess.Exited += (_, _) => tcs.SetResult(null);
-            if (tesseractProcess.HasExited)
+            if (timeout > 0)
             {
-                tcs.SetResult(null);
+                waitTasks.Add(Task.Delay(timeout));
             }
-            while (true)
+            await Task.WhenAny(waitTasks);
+
+            if (!tesseractProcess.HasExited)
             {
-                // TODO: Clean up (i.e. use timeout/cancellation instead of interval checking)
-                await Task.WhenAny(tcs.Task, Task.Delay(100));
-                if (tesseractProcess.HasExited)
+                if (!cancelToken.IsCancellationRequested)
                 {
-                    break;
+                    Log.Error("OCR process timed out.");
                 }
-                if (timeout != 0 && stopwatch.ElapsedMilliseconds >= timeout || cancelToken.IsCancellationRequested)
+                try
                 {
-                    if (stopwatch.ElapsedMilliseconds >= timeout)
-                    {
-                        Log.Error("OCR process timed out.");
-                    }
-                    try
-                    {
-                        tesseractProcess.Kill();
-                        // Wait a bit to give the process time to release its file handles
-                        Thread.Sleep(200);
-                    }
-                    catch (Exception e)
-                    {
-                        Log.ErrorException("Error killing OCR process", e);
-                    }
-                    return null;
+                    tesseractProcess.Kill();
+                    // Wait a bit to give the process time to release its file handles
+                    Thread.Sleep(200);
                 }
+                catch (Exception e)
+                {
+                    Log.ErrorException("Error killing OCR process", e);
+                }
+                return null;
             }
 #if DEBUG && DEBUGTESS
                 Debug.WriteLine("Tesseract stopwatch: " + stopwatch.ElapsedMilliseconds);
@@ -107,7 +102,7 @@ public class TesseractOcrEngine : IOcrEngine
                     var rtl = GetNearestAncestorAttribute(x, "dir") == "rtl";
                     var bounds = GetBounds(x.Attribute("title"));
                     return new OcrResultElement(text, lang, rtl, bounds);
-                });
+                }).ToImmutableList();
             return new OcrResult(pageBounds, elements);
         }
         catch (Exception e)

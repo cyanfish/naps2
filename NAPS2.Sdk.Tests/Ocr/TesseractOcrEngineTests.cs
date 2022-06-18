@@ -12,12 +12,14 @@ public class TesseractOcrEngineTests : ContextualTexts
 
     public TesseractOcrEngineTests()
     {
-        var tessdataPath = Path.Combine(FolderPath, "fast");
-        Directory.CreateDirectory(tessdataPath);
+        var best = Path.Combine(FolderPath, "best");
+        Directory.CreateDirectory(best);
+        var fast = Path.Combine(FolderPath, "fast");
+        Directory.CreateDirectory(fast);
         
         var exePath = CopyResourceToFile(TesseractResources.tesseract_x64, "tesseract.exe");
-        CopyResourceToFile(TesseractResources.eng_traineddata, tessdataPath, "eng.traineddata");
-        CopyResourceToFile(TesseractResources.heb_traineddata, tessdataPath, "heb.traineddata");
+        CopyResourceToFile(TesseractResources.eng_traineddata, fast, "eng.traineddata");
+        CopyResourceToFile(TesseractResources.heb_traineddata, fast, "heb.traineddata");
         _testImagePath = CopyResourceToFile(TesseractResources.ocr_test, "ocr_test.jpg");
         _testImagePathHebrew = CopyResourceToFile(TesseractResources.ocr_test_hebrew, "ocr_test_hebrew.jpg");
 
@@ -37,26 +39,77 @@ public class TesseractOcrEngineTests : ContextualTexts
     }
 
     [Fact]
-    public async Task RunTesseract()
+    public async Task ProcessEnglishImage()
     {
         var result = await _engine.ProcessImage(_testImagePath, new OcrParams("eng", OcrMode.Fast, 0), CancellationToken.None);
         Assert.NotNull(result);
+        Assert.NotEqual(0, result.Elements.Count);
         foreach (var element in result.Elements)
         {
             Assert.Equal("eng", element.LanguageCode);
             Assert.False(element.RightToLeft);
         }
+        Assert.Equal("ADVERTISEMENT.", result.Elements[0].Text);
     }
 
     [Fact]
-    public async Task RunTesseractHebrew()
+    public async Task ProcessHebrewImage()
     {
         var result = await _engine.ProcessImage(_testImagePathHebrew, new OcrParams("heb", OcrMode.Fast, 0), CancellationToken.None);
         Assert.NotNull(result);
+        Assert.NotEqual(0, result.Elements.Count);
         foreach (var element in result.Elements)
         {
             Assert.Equal("heb", element.LanguageCode);
             Assert.True(element.RightToLeft);
         }
-    } 
+        Assert.Equal("הקדמת", result.Elements[0].Text);
+    }
+
+    [Fact]
+    public async Task ImmediateCancel()
+    {
+        CancellationTokenSource cts = new CancellationTokenSource();
+        cts.Cancel();
+        var result = await _engine.ProcessImage(_testImagePath, new OcrParams("eng", OcrMode.Fast, 0), cts.Token);
+        Assert.Null(result);
+    }
+
+    [Fact]
+    public async Task CancelWhileProcessing()
+    {
+        CancellationTokenSource cts = new CancellationTokenSource();
+        cts.CancelAfter(50);
+        var result = await _engine.ProcessImage(_testImagePath, new OcrParams("eng", OcrMode.Fast, 0), cts.Token);
+        Assert.Null(result);
+    }
+
+    [Fact]
+    public async Task Timeout()
+    {
+        var timeout = 0.1;
+        var result = await _engine.ProcessImage(_testImagePath, new OcrParams("eng", OcrMode.Fast, timeout), CancellationToken.None);
+        Assert.Null(result);
+    }
+
+    [Fact]
+    public async Task NoTimeout()
+    {
+        var timeout = 10;
+        var result = await _engine.ProcessImage(_testImagePath, new OcrParams("eng", OcrMode.Fast, timeout), CancellationToken.None);
+        Assert.NotNull(result);
+    }
+
+    [Fact]
+    public async Task Mode()
+    {
+        CopyResourceToFile(TesseractResources.eng_traineddata, Path.Combine(FolderPath, "best"), "eng.traineddata");
+        // Bad data for unused mode
+        CopyResourceToFile(TesseractResources.heb_traineddata, Path.Combine(FolderPath, "fast"), "eng.traineddata");
+
+        var mode = OcrMode.Best;
+        var result = await _engine.ProcessImage(_testImagePath, new OcrParams("eng", mode, 0), CancellationToken.None);
+        Assert.NotNull(result);
+        Assert.Equal("ADVERTISEMENT.", result.Elements[0].Text);
+    }
 }

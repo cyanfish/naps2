@@ -1,4 +1,5 @@
 ﻿using System.Threading;
+using NAPS2.Scan.Internal;
 
 namespace NAPS2.Threading;
 
@@ -32,5 +33,17 @@ public static class TaskExtensions
         var t = tcs.Task;
         t.ContinueWith(_ => rwh.Unregister(null));
         return t;
+    }
+
+    public static Task WaitForExitAsync(this Process process)
+    {
+        var tcs = new TaskCompletionSource<bool>();
+        process.EnableRaisingEvents = true;
+        process.Exited += (_, _) => tcs.TrySetResult(true);
+        if (process.HasExited)
+        {
+            tcs.TrySetResult(true);
+        }
+        return tcs.Task;
     }
 }
