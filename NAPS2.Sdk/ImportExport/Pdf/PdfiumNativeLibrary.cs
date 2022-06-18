@@ -13,8 +13,8 @@ public class PdfiumNativeLibrary : NativeLibrary
     public const int FPDF_PRINTING = 0x800;
     public const int FPDF_REVERSE_BYTE_ORDER = 0x10;
 
-    public PdfiumNativeLibrary(string basePath, string win32Path, string win64Path, string linuxPath, string osxPath)
-        : base(basePath, win32Path, win64Path, linuxPath, osxPath)
+    public PdfiumNativeLibrary(string libraryPath)
+        : base(libraryPath)
     {
     }
 

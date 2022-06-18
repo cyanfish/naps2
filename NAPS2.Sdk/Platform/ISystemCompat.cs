@@ -13,4 +13,10 @@ public interface ISystemCompat
     bool UseUnixFontResolver { get; }
 
     bool IsWia20Supported { get; }
+
+    string PdfiumLibraryPath { get; }
+
+    IntPtr LoadLibrary(string path);
+
+    IntPtr LoadSymbol(IntPtr libraryHandle, string symbol);
 }

@@ -1,8 +1,9 @@
 ﻿using NAPS2.Dependencies;
+using NAPS2.Platform.Windows;
 
 namespace NAPS2.Platform;
 
-public class WindowsSystemCompat : ISystemCompat
+public abstract class WindowsSystemCompat : ISystemCompat
 {
     public bool IsWiaDriverSupported => true;
 
@@ -15,4 +16,10 @@ public class WindowsSystemCompat : ISystemCompat
     public bool CanUseWin32 => true;
 
     public bool UseUnixFontResolver => false;
+
+    public abstract string PdfiumLibraryPath { get; }
+
+    public IntPtr LoadLibrary(string path) => Win32.LoadLibrary(path);
+
+    public abstract IntPtr LoadSymbol(IntPtr libraryHandle, string symbol);
 }

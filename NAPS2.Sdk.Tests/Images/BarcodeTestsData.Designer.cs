@@ -63,29 +63,9 @@ namespace NAPS2.Sdk.Tests.Images {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap color_image {
-            get {
-                object obj = ResourceManager.GetObject("color_image", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         public static System.Drawing.Bitmap image_upc_barcode {
             get {
                 object obj = ResourceManager.GetObject("image_upc_barcode", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        public static System.Drawing.Bitmap patcht {
-            get {
-                object obj = ResourceManager.GetObject("patcht", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

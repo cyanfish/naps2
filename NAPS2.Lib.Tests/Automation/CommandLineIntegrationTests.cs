@@ -43,7 +43,7 @@ public class CommandLineIntegrationTests : ContextualTexts
                 OutputPath = $"{FolderPath}/test.pdf",
                 Verbose = true
             },
-            BarcodeTestsData.color_image);
+            SharedData.color_image);
         PdfAsserts.AssertPageCount(1, $"{FolderPath}/test.pdf");
         AssertRecoveryCleanedUp();
     }
@@ -100,7 +100,7 @@ public class CommandLineIntegrationTests : ContextualTexts
         public override void Load()
         {
             Rebind<ImageContext>().ToConstant(_imageContext);
-            // TODO: Bind TesseractLanguageManager
+            // TODO: Bind TesseractLanguageManager or at least the language data path
             Rebind<IScanDriverFactory>().ToConstant(_scanDriverFactory);
             Rebind<IScanBridgeFactory>().To<InProcScanBridgeFactory>();
             Rebind<ConsoleOutput>().ToSelf().WithConstructorArgument("writer", new TestOutputTextWriter(_testOutputHelper));

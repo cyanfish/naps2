@@ -18,11 +18,19 @@ public class PlatformCompat
 
         if (Environment.OSVersion.Platform == PlatformID.Win32NT)
         {
-            _systemCompat = new WindowsSystemCompat();
+            _systemCompat = Environment.Is64BitProcess ? new Windows64SystemCompat() : new Windows32SystemCompat();
+        }
+        else if (Environment.OSVersion.Platform == PlatformID.Unix)
+        {
+            _systemCompat = new LinuxSystemCompat();
+        }
+        else if (Environment.OSVersion.Platform == PlatformID.MacOSX)
+        {
+            _systemCompat = new MacSystemCompat();
         }
         else
         {
-            _systemCompat = new LinuxSystemCompat();
+            throw new InvalidOperationException("Unsupported platform");
         }
     }
 

@@ -7,11 +7,12 @@ public class PdfiumPdfRenderer : IPdfRenderer
     private const int RENDER_FLAGS = PdfiumNativeLibrary.FPDF_PRINTING;
     private const uint COLOR_WHITE = uint.MaxValue;
 
-    private static readonly Lazy<PdfiumNativeLibrary> LazyNativeLib = new Lazy<PdfiumNativeLibrary>(() =>
+    private static readonly Lazy<PdfiumNativeLibrary> LazyNativeLib = new(() =>
     {
         var assemblyLocation = Assembly.GetExecutingAssembly().Location;
-        var assemblyFolder = System.IO.Path.GetDirectoryName(assemblyLocation);
-        var nativeLib = new PdfiumNativeLibrary(assemblyFolder, "_win32/pdfium.dll", "_win64/pdfium.dll", "_linux/libpdfium.so", "_osx/libpdfium.dylib");
+        var assemblyFolder = Path.GetDirectoryName(assemblyLocation);
+        var libraryPath = Path.Combine(assemblyFolder, PlatformCompat.System.PdfiumLibraryPath);
+        var nativeLib = new PdfiumNativeLibrary(libraryPath);
         nativeLib.FPDF_InitLibrary();
         return nativeLib;
     });
