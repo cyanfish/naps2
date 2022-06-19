@@ -16,7 +16,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\NAPS2.Sdk\NAPS2.Sdk.csproj" />
-    <Reference Include="System.Windows.Forms" />
     <PackageReference Include="Ninject" Version="3.3.6" />
     <PackageReference Include="NLog" Version="4.5.8" />
   </ItemGroup>

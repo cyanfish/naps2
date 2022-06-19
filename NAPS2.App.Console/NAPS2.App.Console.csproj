@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk.Windows">
 
   <PropertyGroup>
     <TargetFrameworks>net6-windows;net461</TargetFrameworks>
@@ -6,6 +6,9 @@
     <LargeAddressAware>true</LargeAddressAware>
     <RootNamespace>NAPS2.Console</RootNamespace>
     <AssemblyName>NAPS2.Console</AssemblyName>
+    
+    <!-- TODO: Eventually remove this, probably -->
+    <UseWindowsForms>true</UseWindowsForms>
     
     <Title>NAPS2 (Not Another PDF Scanner 2)</Title>
     <Product>NAPS2 (Not Another PDF Scanner 2)</Product>
