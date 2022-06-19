@@ -2,7 +2,7 @@
 
 namespace NAPS2.Automation;
 
-public class AutomatedScanningOptions : CommandLineOptions
+public class AutomatedScanningOptions
 {
     #region General Options
 
@@ -38,10 +38,10 @@ public class AutomatedScanningOptions : CommandLineOptions
                                        " If not specified, no output is displayed if the scan is successful.")]
     public bool Verbose { get; set; }
 
-    [Option('n', "number", DefaultValue = 1, HelpText = "The number of scans to perform.")]
+    [Option('n', "number", Default = 1, HelpText = "The number of scans to perform.")]
     public int Number { get; set; }
 
-    [Option('d', "delay", DefaultValue = 0, HelpText = "The delay (in milliseconds) between each scan.")]
+    [Option('d', "delay", Default = 0, HelpText = "The delay (in milliseconds) between each scan.")]
     public int Delay { get; set; }
 
     [Option('f', "force", HelpText = "Overwrite existing files." +
@@ -174,7 +174,7 @@ public class AutomatedScanningOptions : CommandLineOptions
 
     #region Image Options
 
-    [Option("jpegquality", DefaultValue = 75, HelpText = "The quality of saved JPEG files (0-100, default 75).")]
+    [Option("jpegquality", Default = 75, HelpText = "The quality of saved JPEG files (0-100, default 75).")]
     public int JpegQuality { get; set; }
 
     [Option("tiffcomp", HelpText = "The compression to use for TIFF files. Possible values: auto, lzw, ccitt4, none")]

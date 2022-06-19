@@ -1,4 +1,5 @@
-﻿using NAPS2.Automation;
+﻿using CommandLine;
+using NAPS2.Automation;
 using NAPS2.Modules;
 using NAPS2.Remoting.Worker;
 using Ninject;
@@ -19,12 +20,12 @@ public static class ConsoleEntryPoint
         Paths.ClearTemp();
 
         // Parse the command-line arguments (and display help text if appropriate)
-        var options = new AutomatedScanningOptions();
-        if (!CommandLine.Parser.Default.ParseArguments(args, options))
+        var options = Parser.Default.ParseArguments<AutomatedScanningOptions>(args).Value;
+        if (options == null)
         {
             return;
         }
-            
+
         // Start a pending worker process
         kernel.Get<IWorkerFactory>().Init();
 

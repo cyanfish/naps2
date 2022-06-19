@@ -6,24 +6,30 @@ using Org.BouncyCastle.Math;
 using Org.BouncyCastle.Security;
 using Org.BouncyCastle.X509;
 
-namespace NAPS2.Util;
+namespace NAPS2.Remoting.Network.Internal;
 
 public static class SslHelper
 {
-    private static readonly SecureRandom Random = new SecureRandom();
+    private static readonly SecureRandom Random = new();
 
-    private static readonly Lazy<RsaKeyPairGenerator> RsaKeyPairGenerator = new Lazy<RsaKeyPairGenerator>(() =>
+    private static readonly Lazy<RsaKeyPairGenerator> RsaKeyPairGenerator = new(() =>
     {
         var gen = new RsaKeyPairGenerator();
         gen.Init(new KeyGenerationParameters(Random, 2048));
         return gen;
     });
 
-    public static (string cert, string privateKey) GenerateRootCertificate()
+    public static string GeneratePublicKeyString()
     {
         var keyPair = RsaKeyPairGenerator.Value.GenerateKeyPair();
-        return (GetPemString(GenerateCert(keyPair)), GetPemString(keyPair.Private));
+        return GetPemString(GenerateCert(keyPair));
     }
+    
+    // public static (string cert, string privateKey) GenerateRootCertificate()
+    // {
+    //     var keyPair = RsaKeyPairGenerator.Value.GenerateKeyPair();
+    //     return (GetPemString(GenerateCert(keyPair)), GetPemString(keyPair.Private));
+    // }
 
     //public static (string cert, string privateKey) GenerateCertificateChain(string rootCert, string rootPrivateKey)
     //{

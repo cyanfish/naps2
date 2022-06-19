@@ -1,4 +1,5 @@
 using System.Security.Cryptography.X509Certificates;
+using NAPS2.Remoting.Network.Internal;
 using Org.BouncyCastle.OpenSsl;
 using Xunit;
 
@@ -9,7 +10,7 @@ public class SslHelperTests
     [Fact]
     public void GenerateRootCertificate()
     {
-        var (cert, privateKey) = SslHelper.GenerateRootCertificate();
+        var cert = SslHelper.GeneratePublicKeyString();
 
         var reader = new PemReader(new StringReader(cert));
         var obj = reader.ReadPemObject();

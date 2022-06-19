@@ -15,10 +15,6 @@
       <HintPath>..\NAPS2.Setup\lib\PdfSharp.dll</HintPath>
     </Reference>
   
-    <Reference Include="System.Windows.Forms" />
-  
-    <ProjectReference Include="..\NAPS2.Sdk.Network\NAPS2.Sdk.Network.csproj" />
-  
     <ProjectReference Include="..\NAPS2.Sdk\NAPS2.Sdk.csproj" />
   
     <PackageReference Include="Moq" Version="4.18.1" />
