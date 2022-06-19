@@ -10,10 +10,10 @@ namespace NAPS2.ImportExport.Images;
 public class SaveImagesOperation : OperationBase
 {
     private readonly ImageContext _imageContext;
-    private readonly OverwritePrompt _overwritePrompt;
+    private readonly IOverwritePrompt _overwritePrompt;
     private readonly TiffHelper _tiffHelper;
 
-    public SaveImagesOperation(ImageContext imageContext, OverwritePrompt overwritePrompt, TiffHelper tiffHelper)
+    public SaveImagesOperation(ImageContext imageContext, IOverwritePrompt overwritePrompt, TiffHelper tiffHelper)
     {
         _imageContext = imageContext;
         _overwritePrompt = overwritePrompt;

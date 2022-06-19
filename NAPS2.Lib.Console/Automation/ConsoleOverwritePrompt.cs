@@ -3,7 +3,7 @@ using NAPS2.Lang.ConsoleResources;
 
 namespace NAPS2.Automation;
 
-public class ConsoleOverwritePrompt : OverwritePrompt
+public class ConsoleOverwritePrompt : IOverwritePrompt
 {
     public static bool ForceOverwrite { get; set; }
 
@@ -14,7 +14,7 @@ public class ConsoleOverwritePrompt : OverwritePrompt
         _errorOutput = errorOutput;
     }
 
-    public override OverwriteResponse ConfirmOverwrite(string path)
+    public OverwriteResponse ConfirmOverwrite(string path)
     {
         if (ForceOverwrite)
         {

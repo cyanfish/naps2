@@ -15,12 +15,12 @@ public class AutoSaver
     private readonly OperationProgress _operationProgress;
     private readonly ISaveNotify _notify;
     private readonly PdfExporter _pdfExporter;
-    private readonly OverwritePrompt _overwritePrompt;
+    private readonly IOverwritePrompt _overwritePrompt;
     private readonly ScopedConfig _config;
     private readonly TiffHelper _tiffHelper;
     private readonly ImageContext _imageContext;
 
-    public AutoSaver(IConfigProvider<PdfSettings> pdfSettingsProvider, IConfigProvider<ImageSettings> imageSettingsProvider, ErrorOutput errorOutput, DialogHelper dialogHelper, OperationProgress operationProgress, ISaveNotify notify, PdfExporter pdfExporter, OverwritePrompt overwritePrompt, ScopedConfig config, TiffHelper tiffHelper, ImageContext imageContext)
+    public AutoSaver(IConfigProvider<PdfSettings> pdfSettingsProvider, IConfigProvider<ImageSettings> imageSettingsProvider, ErrorOutput errorOutput, DialogHelper dialogHelper, OperationProgress operationProgress, ISaveNotify notify, PdfExporter pdfExporter, IOverwritePrompt overwritePrompt, ScopedConfig config, TiffHelper tiffHelper, ImageContext imageContext)
     {
         _pdfSettingsProvider = pdfSettingsProvider;
         _imageSettingsProvider = imageSettingsProvider;

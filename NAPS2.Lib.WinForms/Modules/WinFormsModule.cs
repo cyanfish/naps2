@@ -18,7 +18,7 @@ public class WinFormsModule : NinjectModule
         Bind<IBatchScanPerformer>().To<BatchScanPerformer>();
         Bind<IPdfPasswordProvider>().To<WinFormsPdfPasswordProvider>();
         Bind<ErrorOutput>().To<MessageBoxErrorOutput>();
-        Bind<OverwritePrompt>().To<WinFormsOverwritePrompt>();
+        Bind<IOverwritePrompt>().To<WinFormsOverwritePrompt>();
         Bind<OperationProgress>().To<WinFormsOperationProgress>().InSingletonScope();
         Bind<IComponentInstallPrompt>().To<WinFormsComponentInstallPrompt>();
         Bind<DialogHelper>().To<WinFormsDialogHelper>();

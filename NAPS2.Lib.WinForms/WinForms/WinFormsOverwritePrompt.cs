@@ -2,9 +2,9 @@
 
 namespace NAPS2.WinForms;
 
-public class WinFormsOverwritePrompt : OverwritePrompt
+public class WinFormsOverwritePrompt : IOverwritePrompt
 {
-    public override OverwriteResponse ConfirmOverwrite(string path)
+    public OverwriteResponse ConfirmOverwrite(string path)
     {
         string fileName = Path.GetFileName(path);
         var dialogResult = MessageBox.Show(string.Format(MiscResources.ConfirmOverwriteFile, fileName),

@@ -13,7 +13,7 @@ public class ConsoleModule : NinjectModule
     {
         Bind<IPdfPasswordProvider>().To<ConsolePdfPasswordProvider>();
         Bind<ErrorOutput>().To<ConsoleErrorOutput>();
-        Bind<OverwritePrompt>().To<ConsoleOverwritePrompt>();
+        Bind<IOverwritePrompt>().To<ConsoleOverwritePrompt>();
         Bind<OperationProgress>().To<ConsoleOperationProgress>();
         Bind<IComponentInstallPrompt>().To<ConsoleComponentInstallPrompt>();
         Bind<DialogHelper>().To<WinFormsDialogHelper>(); // TODO: We don't really want this, but it is an explicit option, so it's okay for now...

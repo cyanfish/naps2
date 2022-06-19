@@ -1,6 +1,6 @@
 ﻿namespace NAPS2.Util;
 
-public class StubOverwritePrompt : OverwritePrompt
+public class StubOverwritePrompt : IOverwritePrompt
 {
-    public override OverwriteResponse ConfirmOverwrite(string path) => OverwriteResponse.No;
+    public OverwriteResponse ConfirmOverwrite(string path) => OverwriteResponse.No;
 }
