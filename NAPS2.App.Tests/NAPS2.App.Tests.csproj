@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFrameworks>net6-windows;net462</TargetFrameworks>
+        <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+        <ResolveAssemblyWarnOrErrorOnTargetArchitectureMismatch>None</ResolveAssemblyWarnOrErrorOnTargetArchitectureMismatch>
+    </PropertyGroup>
+
+    <Import Project="..\NAPS2.Setup\CommonTargets.targets" />
+    <Import Project="..\NAPS2.Setup\NativeLibs.targets" />
+    <Import Project="..\NAPS2.Setup\LibUsers.targets" />
+
+    <ItemGroup>
+        <ProjectReference Include="..\NAPS2.Lib.Tests\NAPS2.Lib.Tests.csproj" />
+
+        <ProjectReference Include="..\NAPS2.App.Console\NAPS2.App.Console.csproj" />
+        <ProjectReference Include="..\NAPS2.App.PortableLauncher\NAPS2.App.PortableLauncher.csproj" />
+        <ProjectReference Include="..\NAPS2.App.Server\NAPS2.App.Server.csproj" />
+        <ProjectReference Include="..\NAPS2.App.WinForms\NAPS2.App.WinForms.csproj" />
+        <ProjectReference Include="..\NAPS2.App.Worker\NAPS2.App.Worker.csproj" />
+
+        <PackageReference Include="Moq" Version="4.18.1" />
+        <PackageReference Include="xunit" Version="2.4.1" />
+        <PackageReference Include="xunit.runner.visualstudio" Version="2.4.1" />
+    </ItemGroup>
+
+</Project>
