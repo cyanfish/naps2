@@ -10,7 +10,35 @@ public class FormState
 
     public bool Maximized { get; set; }
 
-    public record FormLocation(int X, int Y);
+    public class FormLocation
+    {
+        public FormLocation()
+        {
+        }
 
-    public record FormSize(int Width, int Height);
+        public FormLocation(int x, int y)
+        {
+            X = x;
+            Y = y;
+        }
+        
+        public int X { get; set; }
+        public int Y { get; set; }
+    }
+    
+    public class FormSize
+    {
+        public FormSize()
+        {
+        }
+        
+        public FormSize(int width, int height)
+        {
+            Width = width;
+            Height = height;
+        }
+        
+        public int Width { get; set; }
+        public int Height { get; set; }
+    }
 }

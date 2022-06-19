@@ -136,12 +136,7 @@ public class CommandLineIntegrationTests : ContextualTexts
             Rebind<IScanBridgeFactory>().To<InProcScanBridgeFactory>();
             Rebind<ConsoleOutput>().ToSelf()
                 .WithConstructorArgument("writer", new TestOutputTextWriter(_testOutputHelper));
-            Rebind<ScopedConfig>().ToMethod(_ =>
-            {
-                var appConfigPath = Path.Combine(_folderPath, "appsettings.xml");
-                var userConfigPath = Path.Combine(_folderPath, "config.xml");
-                return new ScopedConfig(appConfigPath, userConfigPath);
-            }).InSingletonScope();
+            Rebind<ScopedConfig>().ToConstant(ScopedConfig.Stub());
             Rebind<IProfileManager>().ToMethod(_ =>
             {
                 var userPath = Path.Combine(_folderPath, "profiles.xml");
