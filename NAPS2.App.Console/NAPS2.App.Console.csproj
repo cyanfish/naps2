@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Windows">
 
   <PropertyGroup>
-    <TargetFrameworks>net6-windows;net461</TargetFrameworks>
+    <TargetFrameworks>net6-windows;net462</TargetFrameworks>
     <OutputType>Exe</OutputType>
     <LargeAddressAware>true</LargeAddressAware>
     <RootNamespace>NAPS2.Console</RootNamespace>

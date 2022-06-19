@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net6;net461</TargetFrameworks>
+    <TargetFrameworks>net6;net462</TargetFrameworks>
     <Nullable>enable</Nullable>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <RootNamespace>NAPS2</RootNamespace>
@@ -62,7 +62,7 @@
     <PackageReference Include="System.Threading.Tasks.Dataflow" Version="4.11.0" />
     <PackageReference Include="System.ValueTuple" Version="4.3.1" />
     <PackageReference Include="ZXing.Net" Version="0.16.8" />
-    <PackageReference Include="ZXing.Net.Bindings.Windows.Compatibility" Version="0.16.10" Condition="'$(TargetFramework)' != 'net461'" />
+    <PackageReference Include="ZXing.Net.Bindings.Windows.Compatibility" Version="0.16.10" Condition="'$(TargetFramework)' != 'net462'" />
   </ItemGroup>
   
   <ItemGroup>
