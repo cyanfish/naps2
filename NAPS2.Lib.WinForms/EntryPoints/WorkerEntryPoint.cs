@@ -25,7 +25,7 @@ public static class WorkerEntryPoint
 #endif
 
             // Initialize Ninject (the DI framework)
-            var kernel = new StandardKernel(new CommonModule(), new WinFormsModule(), new StaticDefaultsModule());
+            var kernel = new StandardKernel(new CommonModule(), new WinFormsModule(), new PathsModule());
             // Verify that the recovery is always initialized by the parent process before creating images
             // TODO: Replace this with something maybe
             // kernel.Get<ImageContext>().UseFileStorage(new NotToBeUsedStorageManager());

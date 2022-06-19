@@ -16,7 +16,7 @@ public static class WinFormsEntryPoint
     public static void Run(string[] args)
     {
         // Initialize Ninject (the DI framework)
-        var kernel = new StandardKernel(new CommonModule(), new WinFormsModule(), new StaticDefaultsModule(), new RecoveryModule());
+        var kernel = new StandardKernel(new CommonModule(), new WinFormsModule(), new PathsModule(), new RecoveryModule());
 
         Paths.ClearTemp();
 

@@ -1,4 +1,5 @@
-﻿using System.Globalization;
+﻿using System.Drawing;
+using System.Globalization;
 using System.Windows.Forms;
 using Eto;
 using NAPS2.EtoForms;
@@ -145,18 +146,20 @@ public class FormBase : Form, IInvoker, IFormBase
 
     protected void DoRestoreFormState()
     {
-        if (!_formState.Location.IsZero)
+        var location = new Point(_formState.Location.X, _formState.Location.Y);
+        var size = new Size(_formState.Size.Width, _formState.Size.Height);
+        if (!location.IsEmpty)
         {
-            if (Screen.AllScreens.Any(x => x.WorkingArea.Contains(_formState.Location.ToSD())))
+            if (Screen.AllScreens.Any(x => x.WorkingArea.Contains(location)))
             {
                 // Only move to the specified location if it's onscreen
                 // It might be offscreen if the user has disconnected a monitor
-                Location = _formState.Location.ToSD();
+                Location = location;
             }
         }
-        if (!_formState.Size.IsEmpty)
+        if (!size.IsEmpty)
         {
-            Size = _formState.Size.ToSD();
+            Size = size;
         }
         if (_formState.Maximized)
         {
@@ -171,7 +174,7 @@ public class FormBase : Form, IInvoker, IFormBase
             _formState.Maximized = (WindowState == FormWindowState.Maximized);
             if (WindowState == FormWindowState.Normal)
             {
-                _formState.Size = Size.ToEto();
+                _formState.Size = new FormState.FormSize(Size.Width, Size.Height);
             }
         }
     }
@@ -182,7 +185,7 @@ public class FormBase : Form, IInvoker, IFormBase
         {
             if (WindowState == FormWindowState.Normal)
             {
-                _formState.Location = Location.ToEto();
+                _formState.Location = new FormState.FormLocation(Location.X, Location.Y);
             }
         }
     }

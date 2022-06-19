@@ -58,7 +58,7 @@ public class SaveImagesOperation : OperationBase
                 {
                     if (File.Exists(subFileName))
                     {
-                        if (_overwritePrompt.ConfirmOverwrite(subFileName) != DialogResult.Yes)
+                        if (_overwritePrompt.ConfirmOverwrite(subFileName) != OverwriteResponse.Yes)
                         {
                             return false;
                         }
@@ -81,12 +81,12 @@ public class SaveImagesOperation : OperationBase
 
                     if (images.Count == 1 && File.Exists(subFileName))
                     {
-                        var dialogResult = _overwritePrompt.ConfirmOverwrite(subFileName);
-                        if (dialogResult == DialogResult.No)
+                        var overwriteResponse = _overwritePrompt.ConfirmOverwrite(subFileName);
+                        if (overwriteResponse == OverwriteResponse.No)
                         {
                             continue;
                         }
-                        if (dialogResult == DialogResult.Cancel)
+                        if (overwriteResponse == OverwriteResponse.Abort)
                         {
                             return false;
                         }

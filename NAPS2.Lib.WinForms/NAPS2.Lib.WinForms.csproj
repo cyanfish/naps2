@@ -19,6 +19,8 @@
     </Reference>
     <ProjectReference Include="..\NAPS2.Lib.Common\NAPS2.Lib.Common.csproj" />
     <Reference Include="System.Windows.Forms" />
+    <PackageReference Include="Eto.Forms" Version="2.5.10" />
+    <PackageReference Include="Eto.Platform.Windows" Version="2.5.10" />
   </ItemGroup>
 
   <ItemGroup>

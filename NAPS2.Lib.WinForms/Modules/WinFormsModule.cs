@@ -1,6 +1,7 @@
 ﻿using NAPS2.Dependencies;
 using NAPS2.EtoForms;
 using NAPS2.EtoForms.WinForms;
+using NAPS2.ImportExport;
 using NAPS2.ImportExport.Pdf;
 using NAPS2.Scan.Batch;
 using NAPS2.WinForms;
@@ -23,5 +24,6 @@ public class WinFormsModule : NinjectModule
         Bind<IEtoPlatform>().To<WinFormsEtoPlatform>();
         Bind<NotificationManager>().ToSelf().InSingletonScope();
         Bind<ISaveNotify>().ToMethod(ctx => ctx.Kernel.Get<NotificationManager>());
+        Bind<IScannedImagePrinter>().To<PrintDocumentPrinter>();
     }
 }

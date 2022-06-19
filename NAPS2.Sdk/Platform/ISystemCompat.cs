@@ -14,6 +14,10 @@ public interface ISystemCompat
 
     bool IsWia20Supported { get; }
 
+    bool UseSystemTesseract { get; }
+
+    string? TesseractExecutablePath { get; }
+
     string PdfiumLibraryPath { get; }
 
     IntPtr LoadLibrary(string path);

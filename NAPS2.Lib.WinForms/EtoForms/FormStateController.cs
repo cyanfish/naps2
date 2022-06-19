@@ -1,3 +1,4 @@
+using Eto.Drawing;
 using Eto.Forms;
 
 namespace NAPS2.EtoForms;
@@ -46,18 +47,20 @@ public class FormStateController : IFormStateController
         {
             throw new InvalidOperationException();
         }
-        if (!_formState.Location.IsZero)
+        var location = new Point(_formState.Location.X, _formState.Location.Y);
+        var size = new Size(_formState.Size.Width, _formState.Size.Height);
+        if (!location.IsZero)
         {
-            if (Screen.Screens.Any(x => x.WorkingArea.Contains(_formState.Location)))
+            if (Screen.Screens.Any(x => x.WorkingArea.Contains(location)))
             {
                 // Only move to the specified location if it's onscreen
                 // It might be offscreen if the user has disconnected a monitor
-                _window.Location = _formState.Location;
+                _window.Location = location;
             }
         }
-        if (!_formState.Size.IsEmpty)
+        if (!size.IsEmpty)
         {
-            _window.Size = _formState.Size;
+            _window.Size = size;
         }
         if (_formState.Maximized)
         {
@@ -72,7 +75,7 @@ public class FormStateController : IFormStateController
             _formState.Maximized = (_window.WindowState == WindowState.Maximized);
             if (_window.WindowState == WindowState.Normal)
             {
-                _formState.Size = _window.Size;
+                _formState.Size = new FormState.FormSize(_window.Size.Width, _window.Size.Height);
             }
         }
     }
@@ -83,7 +86,7 @@ public class FormStateController : IFormStateController
         {
             if (_window.WindowState == WindowState.Normal)
             {
-                _formState.Location = _window.Location;
+                _formState.Location = new FormState.FormLocation(_window.Location.X, _window.Location.Y);
             }
         }
     }

@@ -14,16 +14,16 @@ public class ConsoleOverwritePrompt : OverwritePrompt
         _errorOutput = errorOutput;
     }
 
-    public override DialogResult ConfirmOverwrite(string path)
+    public override OverwriteResponse ConfirmOverwrite(string path)
     {
         if (ForceOverwrite)
         {
-            return DialogResult.Yes;
+            return OverwriteResponse.Yes;
         }
         else
         {
             _errorOutput.DisplayError(string.Format(ConsoleResources.FileAlreadyExists, path));
-            return DialogResult.No;
+            return OverwriteResponse.No;
         }
     }
 }

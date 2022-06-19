@@ -45,7 +45,7 @@ public class SavePdfOperation : OperationBase
         }
         if (File.Exists(subFileName))
         {
-            if (_overwritePrompt.ConfirmOverwrite(subFileName) != DialogResult.Yes)
+            if (_overwritePrompt.ConfirmOverwrite(subFileName) != OverwriteResponse.Yes)
             {
                 return false;
             }

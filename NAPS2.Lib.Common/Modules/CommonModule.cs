@@ -29,7 +29,6 @@ public class CommonModule : NinjectModule
 
         // Export
         Bind<PdfExporter>().To<PdfSharpExporter>();
-        Bind<IScannedImagePrinter>().To<PrintDocumentPrinter>();
         Bind<IEmailProviderFactory>().To<NinjectEmailProviderFactory>();
         Bind<IMapiWrapper>().To<MapiWrapper>();
         Bind<OcrRequestQueue>().ToSelf().InSingletonScope();
@@ -46,11 +45,14 @@ public class CommonModule : NinjectModule
         Bind<NetworkScanBridge>().ToSelf();
 
         // Config
-        var config = new ScopedConfig(Path.Combine(Paths.Executable, "appsettings.xml"), Path.Combine(Paths.AppData, "config.xml"));
-        Bind<ScopedConfig>().ToConstant(config);
+        Bind<ScopedConfig>().ToMethod(_ =>
+            new ScopedConfig(Path.Combine(Paths.Executable, "appsettings.xml"),
+                Path.Combine(Paths.AppData, "config.xml"))).InSingletonScope();
         Bind<IConfigProvider<PdfSettings>>().ToMethod(ctx => ctx.Kernel.Get<ScopedConfig>().Child(c => c.PdfSettings));
-        Bind<IConfigProvider<ImageSettings>>().ToMethod(ctx => ctx.Kernel.Get<ScopedConfig>().Child(c => c.ImageSettings));
-        Bind<IConfigProvider<EmailSettings>>().ToMethod(ctx => ctx.Kernel.Get<ScopedConfig>().Child(c => c.EmailSettings));
+        Bind<IConfigProvider<ImageSettings>>()
+            .ToMethod(ctx => ctx.Kernel.Get<ScopedConfig>().Child(c => c.ImageSettings));
+        Bind<IConfigProvider<EmailSettings>>()
+            .ToMethod(ctx => ctx.Kernel.Get<ScopedConfig>().Child(c => c.EmailSettings));
         Bind<IConfigProvider<EmailSetup>>().ToMethod(ctx => ctx.Kernel.Get<ScopedConfig>().Child(c => c.EmailSetup));
 
         // Host
@@ -68,25 +70,35 @@ public class CommonModule : NinjectModule
 
         //Kernel.Get<ImageContext>().PdfRenderer = Kernel.Get<PdfiumWorkerCoordinator>();
 
-        var profileManager = new ProfileManager(
-            Path.Combine(Paths.AppData, "profiles.xml"),
-            Path.Combine(Paths.Executable, "profiles.xml"),
-            config.Get(c => c.LockSystemProfiles),
-            config.Get(c => c.LockUnspecifiedDevices),
-            config.Get(c => c.NoUserProfiles));
-        Bind<IProfileManager>().ToConstant(profileManager);
+        Bind<IProfileManager>().ToMethod(ctx =>
+        {
+            var config = ctx.Kernel.Get<ScopedConfig>();
+            return new ProfileManager(
+                Path.Combine(Paths.AppData, "profiles.xml"),
+                Path.Combine(Assembly.GetEntryAssembly().Location, "profiles.xml"),
+                config.Get(c => c.LockSystemProfiles),
+                config.Get(c => c.LockUnspecifiedDevices),
+                config.Get(c => c.NoUserProfiles));
+        }).InSingletonScope();
 
-        var customComponentsPath = config.Get(c => c.ComponentsPath);
-        var componentsPath = string.IsNullOrWhiteSpace(customComponentsPath)
-            ? Paths.Components
-            : Environment.ExpandEnvironmentVariables(customComponentsPath);
-        var tesseractLanguageManager = new TesseractLanguageManager(componentsPath);
-        var naps2Folder = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-        // TODO: Linux/mac. Also maybe generalize this (see also PdfiumNativeLibrary).
-        var tesseractPath =
-            Path.Combine(naps2Folder!, Environment.Is64BitProcess ? "_win64" : "_win32", "tesseract.exe");
-        var tesseractOcrEngine = new TesseractOcrEngine(tesseractPath, tesseractLanguageManager.TessdataBasePath);
-        Bind<TesseractLanguageManager>().ToConstant(tesseractLanguageManager);
-        Bind<IOcrEngine>().ToConstant(tesseractOcrEngine);
+        Bind<TesseractLanguageManager>().ToMethod(ctx =>
+        {
+            var config = ctx.Kernel.Get<ScopedConfig>();
+            var customComponentsPath = config.Get(c => c.ComponentsPath);
+            var componentsPath = string.IsNullOrWhiteSpace(customComponentsPath)
+                ? Paths.Components
+                : Environment.ExpandEnvironmentVariables(customComponentsPath);
+            return new TesseractLanguageManager(componentsPath);
+        }).InSingletonScope();
+        Bind<IOcrEngine>().ToMethod(ctx =>
+        {
+            var tesseractPath = PlatformCompat.System.UseSystemTesseract
+                ? "tesseract"
+                : Path.Combine(Paths.Executable, PlatformCompat.System.TesseractExecutablePath!);
+            return new TesseractOcrEngine(
+                tesseractPath,
+                ctx.Kernel.Get<TesseractLanguageManager>().TessdataBasePath,
+                Paths.Temp);
+        }).InSingletonScope();
     }
 }

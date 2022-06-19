@@ -43,12 +43,14 @@ public class ProfileManager : IProfileManager
 
     public void Mutate(ListMutation<ScanProfile> mutation, ISelectable<ScanProfile> selectable)
     {
+        Load();
         mutation.Apply(_profiles, selectable);
         Save();
     }
 
     public void Mutate(ListMutation<ScanProfile> mutation, ListSelection<ScanProfile> selection)
     {
+        Load();
         mutation.Apply(_profiles, ref selection);
         Save();
     }
@@ -77,8 +79,8 @@ public class ProfileManager : IProfileManager
                     profile.IsDefault = false;
                 }
                 value.IsDefault = true;
-                Save();
             }
+            Save();
         }
     }
 

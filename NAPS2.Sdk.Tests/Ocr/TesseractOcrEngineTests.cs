@@ -17,25 +17,13 @@ public class TesseractOcrEngineTests : ContextualTexts
         var fast = Path.Combine(FolderPath, "fast");
         Directory.CreateDirectory(fast);
         
-        var exePath = CopyResourceToFile(TesseractResources.tesseract_x64, "tesseract.exe");
+        var tesseractPath = CopyResourceToFile(TesseractResources.tesseract_x64, FolderPath, "tesseract.exe");
         CopyResourceToFile(TesseractResources.eng_traineddata, fast, "eng.traineddata");
         CopyResourceToFile(TesseractResources.heb_traineddata, fast, "heb.traineddata");
         _testImagePath = CopyResourceToFile(TesseractResources.ocr_test, "ocr_test.jpg");
         _testImagePathHebrew = CopyResourceToFile(TesseractResources.ocr_test_hebrew, "ocr_test_hebrew.jpg");
 
-        _engine = new TesseractOcrEngine(exePath, FolderPath);
-    }
-
-    private string CopyResourceToFile(byte[] resource, string folder, string fileName)
-    {
-        string path = Path.Combine(folder, fileName);
-        File.WriteAllBytes(path, resource);
-        return path;
-    }
-
-    private string CopyResourceToFile(byte[] resource, string fileName)
-    {
-        return CopyResourceToFile(resource, FolderPath, fileName);
+        _engine = new TesseractOcrEngine(tesseractPath, FolderPath, FolderPath);
     }
 
     [Fact]

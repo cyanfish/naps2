@@ -1,6 +1,5 @@
 ﻿using System.Globalization;
 using System.Threading;
-using NAPS2.Images.Gdi;
 using NAPS2.Ocr;
 using NAPS2.Scan;
 using PdfSharp.Drawing;
@@ -193,7 +192,7 @@ public class PdfSharpExporter : PdfExporter
                 page = document.AddPage();
             }
 
-            string tempImageFilePath = Path.Combine(Paths.Temp, Path.GetRandomFileName());
+            string tempImageFilePath = Path.Combine(_scanningContext.TempFolderPath, Path.GetRandomFileName());
 
             var format = image.Metadata.Lossless ? ImageFileFormat.Png : ImageFileFormat.Jpeg;
             using (var renderedImage = _scanningContext.ImageContext.Render(image))

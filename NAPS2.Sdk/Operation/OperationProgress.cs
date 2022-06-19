@@ -5,18 +5,6 @@
 /// </summary>
 public abstract class OperationProgress
 {
-    private static OperationProgress _default = new StubOperationProgress();
-
-    public static OperationProgress Default
-    {
-        get
-        {
-            TestingContext.NoStaticDefaults();
-            return _default;
-        }
-        set => _default = value ?? throw new ArgumentNullException(nameof(value));
-    }
-
     public abstract void Attach(IOperation op);
 
     public abstract void ShowProgress(IOperation op);

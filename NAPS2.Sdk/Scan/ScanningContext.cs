@@ -1,5 +1,4 @@
 using System.Collections.Immutable;
-using System.Windows.Forms;
 using NAPS2.Ocr;
 using NAPS2.Remoting.Worker;
 
@@ -33,8 +32,7 @@ public class ScanningContext : IDisposable
 
     public FileStorageManager? FileStorageManager { get; set; }
 
-    // TODO: Rethink how this works.
-    public string TempFolderPath { get; set; }
+    public string TempFolderPath { get; set; } = Path.GetTempPath();
 
     public IWorkerFactory WorkerFactory { get; set; }
 

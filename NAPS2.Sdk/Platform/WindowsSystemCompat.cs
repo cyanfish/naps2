@@ -17,6 +17,10 @@ public abstract class WindowsSystemCompat : ISystemCompat
 
     public bool UseUnixFontResolver => false;
 
+    public bool UseSystemTesseract => false;
+
+    public abstract string? TesseractExecutablePath { get; }
+
     public abstract string PdfiumLibraryPath { get; }
 
     public IntPtr LoadLibrary(string path) => Win32.LoadLibrary(path);

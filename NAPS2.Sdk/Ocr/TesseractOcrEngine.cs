@@ -5,24 +5,26 @@ namespace NAPS2.Ocr;
 
 public class TesseractOcrEngine : IOcrEngine
 {
-    private readonly string _exePath;
+    private readonly string _tesseractPath;
     private readonly string? _languageDataBasePath;
+    private readonly string _tempFolder;
 
-    public TesseractOcrEngine(string exePath, string? languageDataBasePath)
+    public TesseractOcrEngine(string tesseractPath, string? languageDataBasePath, string tempFolder)
     {
-        _exePath = exePath;
+        _tesseractPath = tesseractPath;
         _languageDataBasePath = languageDataBasePath;
+        _tempFolder = tempFolder;
     }
     
     public async Task<OcrResult?> ProcessImage(string imagePath, OcrParams ocrParams, CancellationToken cancelToken)
     {
-        string tempHocrFilePath = Path.Combine(Paths.Temp, Path.GetRandomFileName());
+        string tempHocrFilePath = Path.Combine(_tempFolder, Path.GetRandomFileName());
         string tempHocrFilePathWithExt = tempHocrFilePath + ".hocr";
         try
         {
             var startInfo = new ProcessStartInfo
             {
-                FileName = _exePath,
+                FileName = _tesseractPath,
                 Arguments = $"\"{imagePath}\" \"{tempHocrFilePath}\" -l {ocrParams.LanguageCode} hocr",
                 UseShellExecute = false,
                 CreateNoWindow = true,

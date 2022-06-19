@@ -1,13 +1,16 @@
 using System.Drawing;
+using System.Reflection;
 using System.Text;
 using NAPS2.Automation;
 using NAPS2.Modules;
 using NAPS2.Ocr;
+using NAPS2.Scan;
 using NAPS2.Scan.Internal;
 using NAPS2.Sdk.Tests;
 using NAPS2.Sdk.Tests.Asserts;
 using NAPS2.Sdk.Tests.Images;
 using NAPS2.Sdk.Tests.Mocks;
+using NAPS2.Sdk.Tests.Ocr;
 using Ninject;
 using Ninject.Modules;
 using Ninject.Parameters;
@@ -28,7 +31,8 @@ public class CommandLineIntegrationTests : ContextualTexts
     private async Task RunCommand(AutomatedScanningOptions options, params Bitmap[] imagesToScan)
     {
         var scanDriverFactory = new ScanDriverFactoryBuilder().WithScannedImages(imagesToScan).Build();
-        var kernel = new StandardKernel(new CommonModule(), new ConsoleModule(), new TestModule(ImageContext, scanDriverFactory, _testOutputHelper, FolderPath));
+        var kernel = new StandardKernel(new CommonModule(), new ConsoleModule(),
+            new TestModule(ScanningContext, ImageContext, scanDriverFactory, _testOutputHelper, FolderPath));
         var automatedScanning = kernel.Get<AutomatedScanning>(new ConstructorArgument("options", options));
         await automatedScanning.Execute();
     }
@@ -36,15 +40,17 @@ public class CommandLineIntegrationTests : ContextualTexts
     [Fact]
     public async Task ScanSanity()
     {
+        var path = $"{FolderPath}/test.pdf";
         await RunCommand(
             new AutomatedScanningOptions
             {
                 Number = 1,
-                OutputPath = $"{FolderPath}/test.pdf",
+                OutputPath = path,
                 Verbose = true
             },
             SharedData.color_image);
-        PdfAsserts.AssertPageCount(1, $"{FolderPath}/test.pdf");
+        Assert.True(File.Exists(path));
+        PdfAsserts.AssertPageCount(1, path);
         AssertRecoveryCleanedUp();
     }
 
@@ -77,16 +83,23 @@ public class CommandLineIntegrationTests : ContextualTexts
     [Fact]
     public async Task ScanWithOcr()
     {
+        var fast = Path.Combine(FolderPath, "fast");
+        Directory.CreateDirectory(fast);
+        CopyResourceToFile(TesseractResources.tesseract_x64, FolderPath, "tesseract.exe");
+        CopyResourceToFile(TesseractResources.eng_traineddata, fast, "eng.traineddata");
+
+        var path = $"{FolderPath}/test.pdf";
         await RunCommand(
             new AutomatedScanningOptions
             {
                 Number = 1,
-                OutputPath = $"{FolderPath}/test.pdf",
+                OutputPath = path,
                 Verbose = true,
                 OcrLang = "eng"
             },
             SharedData.ocr_test);
-        PdfAsserts.AssertContainsText("ADVERTISEMENT.", $"{FolderPath}/test.pdf");
+        Assert.True(File.Exists(path));
+        PdfAsserts.AssertContainsText("ADVERTISEMENT.", path);
         AssertRecoveryCleanedUp();
     }
 
@@ -99,14 +112,17 @@ public class CommandLineIntegrationTests : ContextualTexts
 
     private class TestModule : NinjectModule
     {
+        private readonly ScanningContext _scanningContext;
         private readonly ImageContext _imageContext;
         private readonly IScanDriverFactory _scanDriverFactory;
         private readonly ITestOutputHelper _testOutputHelper;
         private readonly string _folderPath;
 
-        public TestModule(ImageContext imageContext, IScanDriverFactory scanDriverFactory,
+        public TestModule(ScanningContext scanningContext, ImageContext imageContext,
+            IScanDriverFactory scanDriverFactory,
             ITestOutputHelper testOutputHelper, string folderPath)
         {
+            _scanningContext = scanningContext;
             _imageContext = imageContext;
             _scanDriverFactory = scanDriverFactory;
             _testOutputHelper = testOutputHelper;
@@ -116,16 +132,49 @@ public class CommandLineIntegrationTests : ContextualTexts
         public override void Load()
         {
             Rebind<ImageContext>().ToConstant(_imageContext);
-            // TODO: Bind TesseractLanguageManager or at least the language data path
             Rebind<IScanDriverFactory>().ToConstant(_scanDriverFactory);
             Rebind<IScanBridgeFactory>().To<InProcScanBridgeFactory>();
-            Rebind<ConsoleOutput>().ToSelf().WithConstructorArgument("writer", new TestOutputTextWriter(_testOutputHelper));
-            
+            Rebind<ConsoleOutput>().ToSelf()
+                .WithConstructorArgument("writer", new TestOutputTextWriter(_testOutputHelper));
+            Rebind<ScopedConfig>().ToMethod(_ =>
+            {
+                var appConfigPath = Path.Combine(_folderPath, "appsettings.xml");
+                var userConfigPath = Path.Combine(_folderPath, "config.xml");
+                return new ScopedConfig(appConfigPath, userConfigPath);
+            }).InSingletonScope();
+            Rebind<IProfileManager>().ToMethod(_ =>
+            {
+                var userPath = Path.Combine(_folderPath, "profiles.xml");
+                var systemPath = Path.Combine(_folderPath, "sysprofiles.xml");
+                var profileManager = new ProfileManager(userPath, systemPath, false, false, false);
+                var defaultProfile = new ScanProfile
+                {
+                    IsDefault = true,
+                    Device = new ScanDevice("001", "Some Scanner")
+                };
+                profileManager.Mutate(
+                    new ListMutation<ScanProfile>.Append(defaultProfile),
+                    new Selectable<ScanProfile>());
+                return profileManager;
+            }).InSingletonScope();
+            Rebind<TesseractLanguageManager>().ToMethod(_ =>
+            {
+                var componentsPath = Path.Combine(_folderPath, "components");
+                Directory.CreateDirectory(componentsPath);
+                return new TesseractLanguageManager(componentsPath);
+            }).InSingletonScope();
+            Rebind<IOcrEngine>().ToMethod(ctx => new TesseractOcrEngine(
+                Path.Combine(_folderPath, "tesseract.exe"),
+                _folderPath,
+                _folderPath)).InSingletonScope();
+
             string recoveryFolderPath = Path.Combine(_folderPath, "recovery");
             var recoveryStorageManager = RecoveryStorageManager.CreateFolder(recoveryFolderPath);
             var fileStorageManager = new FileStorageManager(recoveryFolderPath);
             Kernel.Bind<RecoveryStorageManager>().ToConstant(recoveryStorageManager);
             Kernel.Bind<FileStorageManager>().ToConstant(fileStorageManager);
+
+            Kernel.Get<ScanningContext>().TempFolderPath = _scanningContext.TempFolderPath;
         }
     }
 
@@ -137,6 +186,7 @@ public class CommandLineIntegrationTests : ContextualTexts
         {
             _output = output;
         }
+
         public override Encoding Encoding => Encoding.UTF8;
 
         public override void WriteLine(string message) => _output.WriteLine(message);

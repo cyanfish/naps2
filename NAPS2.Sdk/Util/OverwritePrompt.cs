@@ -1,6 +1,4 @@
-﻿using System.Windows.Forms;
-
-namespace NAPS2.Util;
+﻿namespace NAPS2.Util;
 
 // TODO: Refactor to Eto and move to NAPS2.EtoForms (or something non-eto and non-winforms if I want operations in the Sdk...)
 /// <summary>
@@ -17,5 +15,5 @@ public abstract class OverwritePrompt
     /// </summary>
     /// <param name="path">The path of the file to overwrite.</param>
     /// <returns>Yes, No, or Cancel.</returns>
-    public abstract DialogResult ConfirmOverwrite(string path);
+    public abstract OverwriteResponse ConfirmOverwrite(string path);
 }

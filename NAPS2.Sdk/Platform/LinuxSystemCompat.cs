@@ -19,6 +19,10 @@ public class LinuxSystemCompat : ISystemCompat
 
     public bool UseUnixFontResolver => true;
 
+    public bool UseSystemTesseract => true;
+
+    public string? TesseractExecutablePath => null;
+
     public string PdfiumLibraryPath => "_linux/libpdfium.so";
     
     public IntPtr LoadLibrary(string path) => LinuxInterop.dlopen(path, RTLD_LAZY | RTLD_GLOBAL);

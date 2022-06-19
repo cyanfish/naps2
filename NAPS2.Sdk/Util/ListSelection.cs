@@ -64,7 +64,7 @@ public interface ISelectable<T>
     ListSelection<T> Selection { get; set; }
 }
     
-public class Selectable<T>
+public class Selectable<T> : ISelectable<T>
 {
     private ListSelection<T> _selection = ListSelection.Empty<T>();
 

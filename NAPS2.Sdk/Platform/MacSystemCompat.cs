@@ -19,6 +19,10 @@ public class MacSystemCompat : ISystemCompat
 
     public bool UseUnixFontResolver => true;
 
+    public bool UseSystemTesseract => true;
+
+    public string? TesseractExecutablePath => null;
+
     public string PdfiumLibraryPath => "_osx/libpdfium.dylib";
 
     public IntPtr LoadLibrary(string path) => OsxInterop.dlopen(path, RTLD_LAZY | RTLD_GLOBAL);

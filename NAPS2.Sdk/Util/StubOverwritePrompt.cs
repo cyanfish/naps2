@@ -1,8 +1,6 @@
-﻿using System.Windows.Forms;
-
-namespace NAPS2.Util;
+﻿namespace NAPS2.Util;
 
 public class StubOverwritePrompt : OverwritePrompt
 {
-    public override DialogResult ConfirmOverwrite(string path) => DialogResult.No;
+    public override OverwriteResponse ConfirmOverwrite(string path) => OverwriteResponse.No;
 }
