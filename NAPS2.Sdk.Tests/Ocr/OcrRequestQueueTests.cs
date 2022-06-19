@@ -285,6 +285,7 @@ public class OcrRequestQueueTests : ContextualTexts
     {
         _mockEngine.Setup(x => x.ProcessImage(_tempPath, _ocrParams, It.IsAny<CancellationToken>()))
             .Returns(_expectedResultTask);
+        _ocrRequestQueue.WorkerAddedLatency = 50;
 
         var foregroundTasks = EnqueueMany(OcrPriority.Foreground, 8);
         var backgroundTasks = EnqueueMany(OcrPriority.Background, 8);
@@ -296,6 +297,8 @@ public class OcrRequestQueueTests : ContextualTexts
         int foregroundCompletedCount = foregroundTasks.Count(x => x.IsCompleted);
         // With 4 worker tasks and 16 foreground tasks, at least 13 should be completed before moving to background tasks
         Assert.InRange(foregroundCompletedCount, 13, 16);
+        await Task.WhenAll(backgroundTasks);
+        await Task.WhenAll(foregroundTasks);
     }
 
     [Fact]
