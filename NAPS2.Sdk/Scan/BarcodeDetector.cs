@@ -1,6 +1,9 @@
 using NAPS2.Images.Gdi;
 using ZXing;
 using ZXing.Common;
+#if !NETFRAMEWORK
+using ZXing.Windows.Compatibility;
+#endif
 
 namespace NAPS2.Scan;
 
@@ -30,6 +33,7 @@ public static class BarcodeDetector
             TryHarder = true,
             PossibleFormats = options.PatchTOnly ? new List<BarcodeFormat> { PATCH_T_FORMAT } : null
         };
+        // TODO: Needs to be non-windows-specific
         var reader = new BarcodeReader { Options = zxingOptions };
         return new BarcodeDetection(true, reader.Decode(gdiImage.Bitmap));
     }

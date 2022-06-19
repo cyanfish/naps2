@@ -1,8 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net461</TargetFramework>
+    <TargetFrameworks>net6-windows;net461</TargetFrameworks>
     <Nullable>enable</Nullable>
+    <UseWindowsForms>true</UseWindowsForms>
     <RootNamespace>NAPS2</RootNamespace>
 
     <Title>NAPS2 (Not Another PDF Scanner 2)</Title>
@@ -16,7 +17,7 @@
   <ItemGroup>
     <ProjectReference Include="..\NAPS2.Sdk\NAPS2.Sdk.csproj" />
     <Reference Include="System.Windows.Forms" />
-    <PackageReference Include="Ninject" Version="3.2.2" />
+    <PackageReference Include="Ninject" Version="3.3.6" />
     <PackageReference Include="NLog" Version="4.5.8" />
   </ItemGroup>
   

@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net461</TargetFramework>
+    <TargetFrameworks>net6-windows;net461</TargetFrameworks>
     <RootNamespace>NAPS2</RootNamespace>
 
     <Title>NAPS2 (Not Another PDF Scanner 2)</Title>

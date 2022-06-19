@@ -4,7 +4,7 @@ namespace NAPS2.Util;
 
 public static class CollectionExtensions
 {
-#if !NETCOREAPP3_0 && !NET471_OR_GREATER
+#if !NETCOREAPP3_0_OR_GREATER && !NET471_OR_GREATER
     /// <summary>
     /// Appends the given item to the end of the enumerable.
     /// </summary>

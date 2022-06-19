@@ -1,4 +1,5 @@
 ﻿using System.Globalization;
+using System.Text;
 using System.Threading;
 using NAPS2.Ocr;
 using NAPS2.Scan;
@@ -21,6 +22,7 @@ public class PdfSharpExporter : PdfExporter
         {
             GlobalFontSettings.FontResolver = new UnixFontResolver();
         }
+        Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
     }
 
     public PdfSharpExporter(ScanningContext scanningContext)

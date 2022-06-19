@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net461</TargetFramework>
+    <TargetFrameworks>net6-windows;net461</TargetFrameworks>
     <Nullable>enable</Nullable>
     <RootNamespace>NAPS2</RootNamespace>
 

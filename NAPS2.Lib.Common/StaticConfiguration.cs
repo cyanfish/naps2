@@ -16,7 +16,7 @@ public static class StaticConfiguration
             Log.EventLogger = new WindowsEventLogger(config);
         }
 #if DEBUG
-        Debug.Listeners.Add(new NLogTraceListener());
+        Trace.Listeners.Add(new NLogTraceListener());
 #endif
     }
 }

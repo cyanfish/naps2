@@ -1,12 +1,11 @@
 ﻿using System.Reflection;
 using System.Runtime.InteropServices;
-using NAPS2.Unmanaged;
 
 // ReSharper disable InconsistentNaming
 
 namespace NAPS2.ImportExport.Pdf;
 
-public class PdfiumNativeLibrary : NativeLibrary
+public class PdfiumNativeLibrary : Unmanaged.NativeLibrary
 {
     // TODO: Consider using Pdfium as a full replacement for PdfSharp.
     // The benefits would be more import compatibility + a solution to PdfSharp xplat. But there may be some
