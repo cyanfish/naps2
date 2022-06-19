@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.Windows">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFrameworks>net6-windows;net462</TargetFrameworks>
@@ -7,12 +7,15 @@
     <RootNamespace>NAPS2.Console</RootNamespace>
     <AssemblyName>NAPS2.Console</AssemblyName>
     
-    <!-- TODO: Eventually remove this, probably -->
-    <UseWindowsForms>true</UseWindowsForms>
-    
     <Title>NAPS2 (Not Another PDF Scanner 2)</Title>
     <Product>NAPS2 (Not Another PDF Scanner 2)</Product>
     <Copyright>Copyright 2009, 2012-2020 NAPS2 Contributors; Icons from http://www.fatcow.com/free-icons</Copyright>
+
+    <!--
+    We reference the 32-bit worker directly so the EXE is included in the output.
+    TODO: Is there a better way to do this?
+    -->
+    <ResolveAssemblyWarnOrErrorOnTargetArchitectureMismatch>None</ResolveAssemblyWarnOrErrorOnTargetArchitectureMismatch>
   </PropertyGroup>
 
   <Import Project="..\NAPS2.Setup\CommonTargets.targets" />
@@ -21,7 +24,6 @@
   
   <ItemGroup>
     <PackageReference Include="NAPS2.Wia" Version="1.0.1" />
-    <Reference Include="System.Windows.Forms" />
     <ProjectReference Include="..\NAPS2.App.Worker\NAPS2.App.Worker.csproj" />
     <ProjectReference Include="..\NAPS2.Lib.Console\NAPS2.Lib.Console.csproj" />
     <PackageReference Include="LargeAddressAware" Version="1.0.3" />

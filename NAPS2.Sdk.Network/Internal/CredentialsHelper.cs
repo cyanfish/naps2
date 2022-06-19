@@ -1,6 +1,6 @@
 using Grpc.Core;
 
-namespace NAPS2.Remoting.Network;
+namespace NAPS2.Remoting.Network.Internal;
 
 public static class CredentialsHelper
 {

@@ -102,8 +102,8 @@ public static class C
     /// <returns></returns>
     public static Control AccessibleImageButton(Image image, string text, Action onClick, int xOffset = 0, int yOffset = 0)
     {
-        var imageView = new ImageView { Image = image, Cursor = Cursors.Pointer, };
-        imageView.MouseDown += (sender, args) => onClick();
+        var imageView = new ImageView { Image = image, Cursor = Eto.Forms.Cursors.Pointer };
+        imageView.MouseDown += (_, _) => onClick();
         var button = new Button
         {
             Text = text,

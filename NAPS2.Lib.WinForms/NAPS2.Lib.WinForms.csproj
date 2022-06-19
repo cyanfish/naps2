@@ -5,6 +5,8 @@
     <Nullable>enable</Nullable>
     <RootNamespace>NAPS2</RootNamespace>
 
+    <UseWindowsForms>true</UseWindowsForms>
+
     <Title>NAPS2 (Not Another PDF Scanner 2)</Title>
     <Product>NAPS2 (Not Another PDF Scanner 2)</Product>
     <Copyright>Copyright 2009, 2012-2020 NAPS2 Contributors; Icons from http://www.fatcow.com/free-icons</Copyright>
@@ -19,9 +21,8 @@
       <HintPath>..\NAPS2.Setup\lib\NTwain.dll</HintPath>
     </Reference>
     <ProjectReference Include="..\NAPS2.Lib.Common\NAPS2.Lib.Common.csproj" />
-    <Reference Include="System.Windows.Forms" />
-    <PackageReference Include="Eto.Forms" Version="2.5.10" />
-    <PackageReference Include="Eto.Platform.Windows" Version="2.5.10" />
+    <PackageReference Include="Eto.Forms" Version="2.7.0" />
+    <PackageReference Include="Eto.Platform.Windows" Version="2.7.0" />
   </ItemGroup>
 
   <ItemGroup>

@@ -17,7 +17,6 @@
     <ProjectReference Include="..\NAPS2.Lib.Common\NAPS2.Lib.Common.csproj" />
     <!-- TODO: Do we want to remove this reference? -->
     <ProjectReference Include="..\NAPS2.Lib.WinForms\NAPS2.Lib.WinForms.csproj" />
-    <Reference Include="System.Windows.Forms" />
     <PackageReference Include="CommandLineParser" Version="2.9.1" />
   </ItemGroup>
 

@@ -10,8 +10,6 @@
     <Import Project="..\NAPS2.Setup\LibUsers.targets" />
 
     <ItemGroup>
-        <Reference Include="System.Windows.Forms" />
-
         <ProjectReference Include="..\NAPS2.Sdk.Tests\NAPS2.Sdk.Tests.csproj" />
         <ProjectReference Include="..\NAPS2.Lib.WinForms\NAPS2.Lib.WinForms.csproj" />
         <ProjectReference Include="..\NAPS2.Lib.Console\NAPS2.Lib.Console.csproj" />

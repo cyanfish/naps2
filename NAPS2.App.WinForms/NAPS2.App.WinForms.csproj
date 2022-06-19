@@ -1,6 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
+    <!-- TODO: We get a worker error when running on net6 -->
     <TargetFrameworks>net6-windows;net462</TargetFrameworks>
     <OutputType>Exe</OutputType>
     <LargeAddressAware>true</LargeAddressAware>
@@ -16,6 +17,12 @@
     <Title>NAPS2 (Not Another PDF Scanner 2)</Title>
     <Product>NAPS2 (Not Another PDF Scanner 2)</Product>
     <Copyright>Copyright 2009, 2012-2020 NAPS2 Contributors; Icons from http://www.fatcow.com/free-icons</Copyright>
+
+    <!--
+    We reference the 32-bit worker directly so the EXE is included in the output.
+    TODO: Is there a better way to do this?
+    -->
+    <ResolveAssemblyWarnOrErrorOnTargetArchitectureMismatch>None</ResolveAssemblyWarnOrErrorOnTargetArchitectureMismatch>
   </PropertyGroup>
 
   <Import Project="..\NAPS2.Setup\CommonTargets.targets" />

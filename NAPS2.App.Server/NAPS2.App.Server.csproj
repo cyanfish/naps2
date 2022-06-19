@@ -6,10 +6,18 @@
     <LargeAddressAware>true</LargeAddressAware>
     <RootNamespace>NAPS2.Server</RootNamespace>
     <AssemblyName>NAPS2.Server</AssemblyName>
+    
+    <UseWindowsForms>true</UseWindowsForms>
 
     <Title>NAPS2 (Not Another PDF Scanner 2)</Title>
     <Product>NAPS2 (Not Another PDF Scanner 2)</Product>
     <Copyright>Copyright 2009, 2012-2020 NAPS2 Contributors; Icons from http://www.fatcow.com/free-icons</Copyright>
+    
+    <!--
+    We reference the 32-bit worker directly so the EXE is included in the output.
+    TODO: Is there a better way to do this?
+    -->
+    <ResolveAssemblyWarnOrErrorOnTargetArchitectureMismatch>None</ResolveAssemblyWarnOrErrorOnTargetArchitectureMismatch>
   </PropertyGroup>
 
   <Import Project="..\NAPS2.Setup\CommonTargets.targets" />
@@ -22,8 +30,6 @@
     <ProjectReference Include="..\NAPS2.Lib.WinForms\NAPS2.Lib.WinForms.csproj" />
     <ProjectReference Include="..\NAPS2.Sdk.Network\NAPS2.Sdk.Network.csproj" />
     <PackageReference Include="LargeAddressAware" Version="1.0.3" />
-    
-    <Reference Include="System.Windows.Forms" />
   </ItemGroup>
 
 </Project>
