@@ -36,7 +36,6 @@ public class CommonModule : NinjectModule
 
         // Scan
         Bind<IScanPerformer>().To<ScanPerformer>();
-        Bind<IBatchScanPerformer>().To<BatchScanPerformer>();
         Bind<ILocalPostProcessor>().To<LocalPostProcessor>();
         Bind<IRemotePostProcessor>().To<RemotePostProcessor>();
         Bind<IScanBridgeFactory>().To<ScanBridgeFactory>();
@@ -59,8 +58,6 @@ public class CommonModule : NinjectModule
 
         // Misc
         Bind<IFormFactory>().To<NinjectFormFactory>();
-        Bind<NotificationManager>().ToSelf().InSingletonScope();
-        Bind<ISaveNotify>().ToMethod(ctx => ctx.Kernel.Get<NotificationManager>());
         Bind<IOperationFactory>().To<NinjectOperationFactory>();
         Bind<ILogger>().To<NLogLogger>().InSingletonScope();
         Bind<UiImageList>().ToSelf().InSingletonScope();

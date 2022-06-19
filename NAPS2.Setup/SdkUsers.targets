@@ -3,7 +3,6 @@
     <Import Project="..\NAPS2.Setup\ImageUsers.targets" />
 
     <ItemGroup>
-        <Using Include="NAPS2.Config" />
         <Using Include="NAPS2.Lang.Resources" />
         <Using Include="NAPS2.Logging" />
         <Using Include="NAPS2.Operation" />

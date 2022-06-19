@@ -12,12 +12,9 @@ public class ContextualTexts : IDisposable
         FolderPath = Path.Combine("naps2_test_temp", Path.GetRandomFileName());
         Folder = Directory.CreateDirectory(FolderPath);
 
-        ProfileManager = new StubProfileManager();
         ImageContext = new GdiImageContext();
         ScanningContext = new ScanningContext(ImageContext);
     }
-
-    public IProfileManager ProfileManager { get; }
 
     public ImageContext ImageContext { get; }
     

@@ -63,7 +63,8 @@ message PageStartEvent {
 }
 
 message SendMapiEmailRequest {
-	string emailMessageXml = 1;
+    string clientName = 1;
+	string emailMessageXml = 2;
 }
 
 message SendMapiEmailResponse {

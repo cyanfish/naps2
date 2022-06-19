@@ -23,7 +23,7 @@ public class PdfATests : ContextualTexts
         Parallel.ForEach(testCases, testCase =>
         {
             using var image = CreateScannedImage();
-            pdfExporter.Export(testCase.fileName, new[] { image }, new PdfSettings
+            pdfExporter.Export(testCase.fileName, new[] { image }, new PdfExportParams
             {
                 Compat = testCase.pdfCompat
             }).Wait();

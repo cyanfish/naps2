@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net461</TargetFramework>
+    <Nullable>enable</Nullable>
     <RootNamespace>NAPS2</RootNamespace>
 
     <Title>NAPS2 (Not Another PDF Scanner 2)</Title>
@@ -10,13 +11,19 @@
   </PropertyGroup>
 
   <Import Project="..\NAPS2.Setup\CommonTargets.targets" />
-  <Import Project="..\NAPS2.Setup\SdkUsers.targets" />
+  <Import Project="..\NAPS2.Setup\LibUsers.targets" />
 
   <ItemGroup>
     <ProjectReference Include="..\NAPS2.Sdk\NAPS2.Sdk.csproj" />
     <Reference Include="System.Windows.Forms" />
     <PackageReference Include="Ninject" Version="3.2.2" />
     <PackageReference Include="NLog" Version="4.5.8" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
+      <_Parameter1>NAPS2.Lib.Tests</_Parameter1>
+    </AssemblyAttribute>
   </ItemGroup>
   
 </Project>

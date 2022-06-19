@@ -2,7 +2,7 @@
 
 public interface IMapiWrapper
 {
-    bool CanLoadClient { get; }
+    bool CanLoadClient(string clientName);
 
-    Task<MapiSendMailReturnCode> SendEmail(EmailMessage message);
+    Task<MapiSendMailReturnCode> SendEmail(string clientName, EmailMessage message);
 }

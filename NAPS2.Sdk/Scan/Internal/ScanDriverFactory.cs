@@ -17,10 +17,11 @@ internal class ScanDriverFactory : IScanDriverFactory
                 return new WiaScanDriver(_scanningContext);
             case Driver.Sane:
                 return new SaneScanDriver(_scanningContext);
-            case Driver.Twain:
-                return options.TwainOptions.Adapter == TwainAdapter.Legacy
-                    ? new LegacyTwainScanDriver()
-                    : new TwainScanDriver(_scanningContext);
+            // TODO: Make Twain SDK-compatible
+            // case Driver.Twain:
+            //     return options.TwainOptions.Adapter == TwainAdapter.Legacy
+            //         ? new LegacyTwainScanDriver()
+            //         : new TwainScanDriver(_scanningContext);
             default:
                 throw new InvalidOperationException("Unknown driver. Should never happen.");
         };

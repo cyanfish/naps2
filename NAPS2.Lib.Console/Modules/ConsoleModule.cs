@@ -17,5 +17,6 @@ public class ConsoleModule : NinjectModule
         Bind<IComponentInstallPrompt>().To<ConsoleComponentInstallPrompt>();
         Bind<DialogHelper>().To<WinFormsDialogHelper>(); // TODO: We don't really want this, but it is an explicit option, so it's okay for now...
         Bind<ConsoleOutput>().ToSelf().WithConstructorArgument("writer", Console.Out);
+        Bind<ISaveNotify>().To<SaveNotifyStub>();
     }
 }

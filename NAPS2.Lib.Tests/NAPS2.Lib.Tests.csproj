@@ -7,7 +7,7 @@
 
     <Import Project="..\NAPS2.Setup\CommonTargets.targets" />
     <Import Project="..\NAPS2.Setup\NativeLibs.targets" />
-    <Import Project="..\NAPS2.Setup\SdkUsers.targets" />
+    <Import Project="..\NAPS2.Setup\LibUsers.targets" />
 
     <ItemGroup>
         <Reference Include="System.Windows.Forms" />

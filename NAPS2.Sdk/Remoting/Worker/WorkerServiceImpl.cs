@@ -144,7 +144,7 @@ public class WorkerServiceImpl : WorkerService.WorkerServiceBase
         try
         {
             var emailMessage = request.EmailMessageXml.FromXml<EmailMessage>();
-            var returnCode = await _mapiWrapper.SendEmail(emailMessage);
+            var returnCode = await _mapiWrapper.SendEmail(request.ClientName, emailMessage);
             return new SendMapiEmailResponse
             {
                 ReturnCodeXml = returnCode.ToXml()

@@ -23,7 +23,7 @@ public class SystemEmailClients
         {
             using var clientKey = Registry.LocalMachine.OpenSubKey($@"SOFTWARE\Clients\Mail\{clientName}");
             return clientKey?.GetValue("DllPath") != null;
-        }).ToArray() ?? new string[0];
+        }).ToArray() ?? Array.Empty<string>();
     }
 
     public Image? GetIcon(string clientName)
@@ -39,13 +39,13 @@ public class SystemEmailClients
         return icon?.ToBitmap();
     }
 
-    internal IntPtr GetLibrary(string clientName)
+    internal IntPtr GetLibrary(string? clientName)
     {
         var dllPath = GetDllPath(clientName);
         return Win32.LoadLibrary(dllPath);
     }
 
-    internal (MapiSendMailDelegate?, MapiSendMailDelegateW?) GetDelegate(string clientName, out bool unicode)
+    internal (MapiSendMailDelegate?, MapiSendMailDelegateW?) GetDelegate(string? clientName, out bool unicode)
     {
         var dllPath = GetDllPath(clientName);
         var module = Win32.LoadLibrary(dllPath);
@@ -68,7 +68,7 @@ public class SystemEmailClients
         throw new Exception($"Could not find an entry point in dll for email: {dllPath}");
     }
 
-    private static string GetDllPath(string clientName)
+    private static string GetDllPath(string? clientName)
     {
         if (clientName == null)
         {

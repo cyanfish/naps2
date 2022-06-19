@@ -29,41 +29,51 @@ public class PdfSharpExporter : PdfExporter
         _scanningContext = scanningContext;
     }
 
-    public override async Task<bool> Export(string path, ICollection<ProcessedImage> images, IConfigProvider<PdfSettings> settings, OcrParams? ocrParams = null, ProgressHandler? progressCallback = null, CancellationToken cancelToken = default)
+    public override async Task<bool> Export(string path, ICollection<ProcessedImage> images,
+        PdfExportParams exportParams, OcrParams? ocrParams = null, ProgressHandler? progressCallback = null,
+        CancellationToken cancelToken = default)
     {
         return await Task.Run(async () =>
         {
-            var compat = settings.Get(c => c.Compat);
+            // TODO: Non-nullable input?
+            var compat = exportParams.Compat ?? PdfCompat.Default;
 
             var document = new PdfDocument();
-            document.Info.Author = settings.Get(c => c.Metadata.Author);
-            document.Info.Creator = settings.Get(c => c.Metadata.Creator);
-            document.Info.Keywords = settings.Get(c => c.Metadata.Keywords);
-            document.Info.Subject = settings.Get(c => c.Metadata.Subject);
-            document.Info.Title = settings.Get(c => c.Metadata.Title);
+            // TODO: Defaults for API use
+            document.Info.Author = exportParams.Metadata?.Author;
+            document.Info.Creator = exportParams.Metadata?.Creator;
+            document.Info.Keywords = exportParams.Metadata?.Keywords;
+            document.Info.Subject = exportParams.Metadata?.Subject;
+            document.Info.Title = exportParams.Metadata?.Title;
 
-            if (settings.Get(c => c.Encryption.EncryptPdf)
-                && (!string.IsNullOrEmpty(settings.Get(c => c.Encryption.OwnerPassword)) || !string.IsNullOrEmpty(settings.Get(c => c.Encryption.UserPassword))))
+            if (exportParams.Encryption?.EncryptPdf == true
+                && (!string.IsNullOrEmpty(exportParams.Encryption.OwnerPassword) ||
+                    !string.IsNullOrEmpty(exportParams.Encryption.UserPassword)))
             {
                 document.SecuritySettings.DocumentSecurityLevel = PdfDocumentSecurityLevel.Encrypted128Bit;
-                if (!string.IsNullOrEmpty(settings.Get(c => c.Encryption.OwnerPassword)))
+                if (!string.IsNullOrEmpty(exportParams.Encryption.OwnerPassword))
                 {
-                    document.SecuritySettings.OwnerPassword = settings.Get(c => c.Encryption.OwnerPassword);
+                    document.SecuritySettings.OwnerPassword = exportParams.Encryption.OwnerPassword;
                 }
 
-                if (!string.IsNullOrEmpty(settings.Get(c => c.Encryption.UserPassword)))
+                if (!string.IsNullOrEmpty(exportParams.Encryption.UserPassword))
                 {
-                    document.SecuritySettings.UserPassword = settings.Get(c => c.Encryption.UserPassword);
+                    document.SecuritySettings.UserPassword = exportParams.Encryption.UserPassword;
                 }
 
-                document.SecuritySettings.PermitAccessibilityExtractContent = settings.Get(c => c.Encryption.AllowContentCopyingForAccessibility);
-                document.SecuritySettings.PermitAnnotations = settings.Get(c => c.Encryption.AllowAnnotations);
-                document.SecuritySettings.PermitAssembleDocument = settings.Get(c => c.Encryption.AllowDocumentAssembly);
-                document.SecuritySettings.PermitExtractContent = settings.Get(c => c.Encryption.AllowContentCopying);
-                document.SecuritySettings.PermitFormsFill = settings.Get(c => c.Encryption.AllowFormFilling);
-                document.SecuritySettings.PermitFullQualityPrint = settings.Get(c => c.Encryption.AllowFullQualityPrinting);
-                document.SecuritySettings.PermitModifyDocument = settings.Get(c => c.Encryption.AllowDocumentModification);
-                document.SecuritySettings.PermitPrint = settings.Get(c => c.Encryption.AllowPrinting);
+                // TODO: Maybe have a non-nullable record for this
+                document.SecuritySettings.PermitAccessibilityExtractContent =
+                    exportParams.Encryption.AllowContentCopyingForAccessibility ?? true;
+                document.SecuritySettings.PermitAnnotations = exportParams.Encryption.AllowAnnotations ?? true;
+                document.SecuritySettings.PermitAssembleDocument =
+                    exportParams.Encryption.AllowDocumentAssembly ?? true;
+                document.SecuritySettings.PermitExtractContent = exportParams.Encryption.AllowContentCopying ?? true;
+                document.SecuritySettings.PermitFormsFill = exportParams.Encryption.AllowFormFilling ?? true;
+                document.SecuritySettings.PermitFullQualityPrint =
+                    exportParams.Encryption.AllowFullQualityPrinting ?? true;
+                document.SecuritySettings.PermitModifyDocument =
+                    exportParams.Encryption.AllowDocumentModification ?? true;
+                document.SecuritySettings.PermitPrint = exportParams.Encryption.AllowPrinting ?? true;
             }
 
             IOcrEngine ocrEngine = null;
@@ -81,7 +91,8 @@ public class PdfSharpExporter : PdfExporter
             }
 
             bool result = ocrEngine != null
-                ? await BuildDocumentWithOcr(progressCallback, cancelToken, document, compat, images, ocrParams, ocrEngine)
+                ? await BuildDocumentWithOcr(progressCallback, cancelToken, document, compat, images, ocrParams,
+                    ocrEngine)
                 : await BuildDocumentWithoutOcr(progressCallback, cancelToken, document, compat, images);
             if (!result)
             {
@@ -110,7 +121,8 @@ public class PdfSharpExporter : PdfExporter
         });
     }
 
-    private async Task<bool> BuildDocumentWithoutOcr(ProgressHandler? progressCallback, CancellationToken cancelToken, PdfDocument document, PdfCompat compat, ICollection<ProcessedImage> images)
+    private async Task<bool> BuildDocumentWithoutOcr(ProgressHandler? progressCallback, CancellationToken cancelToken,
+        PdfDocument document, PdfCompat compat, ICollection<ProcessedImage> images)
     {
         int progress = 0;
         progressCallback?.Invoke(progress, images.Count);
@@ -142,9 +154,12 @@ public class PdfSharpExporter : PdfExporter
         return true;
     }
 
-    private static bool IsPdfFile(ImageFileStorage imageFileStorage) => Path.GetExtension(imageFileStorage.FullPath)?.Equals(".pdf", StringComparison.InvariantCultureIgnoreCase) ?? false;
+    private static bool IsPdfFile(ImageFileStorage imageFileStorage) => Path.GetExtension(imageFileStorage.FullPath)
+        ?.Equals(".pdf", StringComparison.InvariantCultureIgnoreCase) ?? false;
 
-    private async Task<bool> BuildDocumentWithOcr(ProgressHandler? progressCallback, CancellationToken cancelToken, PdfDocument document, PdfCompat compat, ICollection<ProcessedImage> images, OcrParams ocrParams, IOcrEngine ocrEngine)
+    private async Task<bool> BuildDocumentWithOcr(ProgressHandler? progressCallback, CancellationToken cancelToken,
+        PdfDocument document, PdfCompat compat, ICollection<ProcessedImage> images, OcrParams ocrParams,
+        IOcrEngine ocrEngine)
     {
         int progress = 0;
         progressCallback?.Invoke(progress, images.Count);
@@ -242,7 +257,7 @@ public class PdfSharpExporter : PdfExporter
             }
             DrawOcrTextOnPage(page, ocrTask.Result);
         }
-            
+
         return !cancelToken.IsCancellationRequested;
     }
 
@@ -266,9 +281,10 @@ public class PdfSharpExporter : PdfExporter
                     inTextBlock = false;
                 }
                 else if (inTextBlock &&
-                         (line.EndsWith("TJ", StringComparison.InvariantCulture) || line.EndsWith("Tj", StringComparison.InvariantCulture)
-                                                                                 || line.EndsWith("\"", StringComparison.InvariantCulture) ||
-                                                                                 line.EndsWith("'", StringComparison.InvariantCulture)))
+                         (line.EndsWith("TJ", StringComparison.InvariantCulture) ||
+                          line.EndsWith("Tj", StringComparison.InvariantCulture)
+                          || line.EndsWith("\"", StringComparison.InvariantCulture) ||
+                          line.EndsWith("'", StringComparison.InvariantCulture)))
                 {
                     // Text-showing operators
                     return true;
@@ -300,7 +316,8 @@ public class PdfSharpExporter : PdfExporter
         {
             if (string.IsNullOrEmpty(element.Text)) continue;
 
-            var adjustedBounds = AdjustBounds(element.Bounds, (float)page.Width / ocrResult.PageBounds.w, (float)page.Height / ocrResult.PageBounds.h);
+            var adjustedBounds = AdjustBounds(element.Bounds, (float) page.Width / ocrResult.PageBounds.w,
+                (float) page.Height / ocrResult.PageBounds.h);
 #if DEBUG && DEBUGOCR
                     gfx.DrawRectangle(new XPen(XColor.FromArgb(255, 0, 0)), adjustedBounds);
 #endif
@@ -312,8 +329,9 @@ public class PdfSharpExporter : PdfExporter
             var adjustedTextSize = gfx.MeasureString(element.Text, font);
             var verticalOffset = (adjustedBounds.Height - adjustedTextSize.Height) / 2;
             var horizontalOffset = (adjustedBounds.Width - adjustedTextSize.Width) / 2;
-            adjustedBounds.Offset((float)horizontalOffset, (float)verticalOffset);
-            tf.DrawString(element.RightToLeft ? ReverseText(element.Text) : element.Text, font, XBrushes.Transparent, adjustedBounds);
+            adjustedBounds.Offset((float) horizontalOffset, (float) verticalOffset);
+            tf.DrawString(element.RightToLeft ? ReverseText(element.Text) : element.Text, font, XBrushes.Transparent,
+                adjustedBounds);
         }
     }
 
@@ -352,7 +370,7 @@ public class PdfSharpExporter : PdfExporter
         }
         double realWidth = img.PixelWidth * hAdjust;
         double realHeight = img.PixelHeight * vAdjust;
-        return ((int)realWidth, (int)realHeight);
+        return ((int) realWidth, (int) realHeight);
     }
 
     private static XRect AdjustBounds((int x, int y, int w, int h) bounds, float hAdjust, float vAdjust) =>
@@ -360,13 +378,14 @@ public class PdfSharpExporter : PdfExporter
 
     private static int CalculateFontSize(string text, XRect adjustedBounds, XGraphics gfx)
     {
-        int fontSizeGuess = Math.Max(1, (int)(adjustedBounds.Height));
-        var measuredBoundsForGuess = gfx.MeasureString(text, new XFont("Times New Roman", fontSizeGuess, XFontStyle.Regular));
+        int fontSizeGuess = Math.Max(1, (int) (adjustedBounds.Height));
+        var measuredBoundsForGuess =
+            gfx.MeasureString(text, new XFont("Times New Roman", fontSizeGuess, XFontStyle.Regular));
         double adjustmentFactor = adjustedBounds.Width / measuredBoundsForGuess.Width;
-        int adjustedFontSize = Math.Max(1, (int)Math.Floor(fontSizeGuess * adjustmentFactor));
+        int adjustedFontSize = Math.Max(1, (int) Math.Floor(fontSizeGuess * adjustmentFactor));
         return adjustedFontSize;
     }
-        
+
     private class UnixFontResolver : IFontResolver
     {
         private byte[] _fontData;

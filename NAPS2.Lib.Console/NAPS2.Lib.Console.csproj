@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net461</TargetFramework>
+    <Nullable>enable</Nullable>
     <RootNamespace>NAPS2</RootNamespace>
 
     <Title>NAPS2 (Not Another PDF Scanner 2)</Title>
@@ -10,10 +11,12 @@
   </PropertyGroup>
 
   <Import Project="..\NAPS2.Setup\CommonTargets.targets" />
-  <Import Project="..\NAPS2.Setup\SdkUsers.targets" />
+  <Import Project="..\NAPS2.Setup\LibUsers.targets" />
 
   <ItemGroup>
     <ProjectReference Include="..\NAPS2.Lib.Common\NAPS2.Lib.Common.csproj" />
+    <!-- TODO: Do we want to remove this reference? -->
+    <ProjectReference Include="..\NAPS2.Lib.WinForms\NAPS2.Lib.WinForms.csproj" />
     <Reference Include="System.Windows.Forms" />
   </ItemGroup>
 
