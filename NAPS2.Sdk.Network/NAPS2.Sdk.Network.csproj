@@ -16,7 +16,7 @@
   <ItemGroup>
     <ProjectReference Include="..\NAPS2.Sdk\NAPS2.Sdk.csproj" />
 
-    <PackageReference Include="BouncyCastle" Version="1.8.4" />
+    <PackageReference Include="BouncyCastle.NetCore" Version="1.9.0" />
     <PackageReference Include="Grpc.Core" Version="2.26.0" />
     <PackageReference Include="Grpc.Tools" Version="2.26.0" />
   </ItemGroup>

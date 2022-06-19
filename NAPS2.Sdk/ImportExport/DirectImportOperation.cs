@@ -26,7 +26,7 @@ public class DirectImportOperation : OperationBase
             MaxProgress = data.SerializedImages.Count
         };
 
-        RunAsync(async () =>
+        RunAsync(() =>
         {
             Exception? error = null;
             foreach (var serializedImage in data.SerializedImages)

@@ -86,7 +86,7 @@ public abstract class XmlSerializer
         }
     }
 
-    protected static XElement SerializeInternal(object obj, XElement element, Type type)
+    protected static XElement SerializeInternal(object? obj, XElement element, Type type)
     {
         if (obj == null)
         {
@@ -107,7 +107,7 @@ public abstract class XmlSerializer
         }
         else
         {
-            foreach (var propInfo in typeInfo.Properties)
+            foreach (var propInfo in typeInfo.Properties!)
             {
                 var child = SerializeInternal(propInfo.Property.GetValue(obj), new XElement(propInfo.Property.Name), propInfo.Property.PropertyType);
                 element.Add(child);
@@ -117,7 +117,7 @@ public abstract class XmlSerializer
         return element;
     }
 
-    protected static object DeserializeInternal(XElement element, Type type)
+    protected static object? DeserializeInternal(XElement element, Type type)
     {
         if (element.Attribute(Xsi + "nil")?.Value == "true")
         {
@@ -153,7 +153,7 @@ public abstract class XmlSerializer
         return obj;
     }
 
-    protected static Type FindType(Type baseType, string actualTypeName)
+    protected static Type? FindType(Type baseType, string actualTypeName)
     {
         lock (TypeInfoCache)
         {
@@ -171,7 +171,7 @@ public abstract class XmlSerializer
         }
         if (type.IsArray)
         {
-            return "ArrayOf" + GetElementNameForType(type.GetElementType());
+            return "ArrayOf" + GetElementNameForType(type.GetElementType()!);
         }
         if (type.IsGenericType)
         {
@@ -202,10 +202,7 @@ public abstract class XmlSerializer
                     .ToArray();
                 var typeInfo = new XmlTypeInfo
                 {
-                    Properties = props.Select(x => new XmlPropertyInfo
-                    {
-                        Property = x
-                    }).ToArray(),
+                    Properties = props.Select(x => new XmlPropertyInfo(x)).ToArray(),
                     CustomSerializer = GetCustomSerializer(type)
                 };
 
@@ -249,7 +246,7 @@ public abstract class XmlSerializer
         }
     }
 
-    protected static CustomXmlSerializer GetCustomSerializer(Type type)
+    protected static CustomXmlSerializer? GetCustomSerializer(Type type)
     {
         lock (TypeInfoCache)
         {
@@ -259,17 +256,14 @@ public abstract class XmlSerializer
 
     protected class XmlTypeInfo
     {
-        public XmlPropertyInfo[] Properties { get; set; }
+        public XmlPropertyInfo[]? Properties { get; set; }
 
-        public CustomXmlSerializer CustomSerializer { get; set; }
+        public CustomXmlSerializer? CustomSerializer { get; set; }
 
-        public HashSet<Type> KnownTypes { get; set; }
+        public HashSet<Type>? KnownTypes { get; set; }
     }
 
-    protected class XmlPropertyInfo
-    {
-        public PropertyInfo Property { get; set; }
-    }
+    protected record XmlPropertyInfo(PropertyInfo Property);
 
     protected class CharSerializer : CustomXmlSerializer<char>
     {
@@ -593,22 +587,22 @@ public abstract class XmlSerializer
 
     protected class NullableSerializer : CustomXmlSerializer
     {
-        public override void SerializeObject(object obj, XElement element, Type type)
+        public override void SerializeObject(object? obj, XElement element, Type type)
         {
-            SerializeInternal(obj, element, Nullable.GetUnderlyingType(type));
+            SerializeInternal(obj, element, Nullable.GetUnderlyingType(type)!);
         }
 
-        public override object DeserializeObject(XElement element, Type type)
+        public override object? DeserializeObject(XElement element, Type type)
         {
-            return DeserializeInternal(element, Nullable.GetUnderlyingType(type));
+            return DeserializeInternal(element, Nullable.GetUnderlyingType(type)!);
         }
     }
 
     protected class EnumSerializer : CustomXmlSerializer
     {
-        public override void SerializeObject(object obj, XElement element, Type type)
+        public override void SerializeObject(object? obj, XElement element, Type type)
         {
-            element.Value = obj.ToString();
+            element.Value = obj!.ToString();
         }
 
         public override object DeserializeObject(XElement element, Type type)
@@ -646,12 +640,12 @@ public class XmlSerializer<T> : XmlSerializer, ISerializer<T>
         return SerializeInternal(obj, element, typeof(T));
     }
 
-    public T Deserialize(Stream stream)
+    public T? Deserialize(Stream stream)
     {
         return DeserializeFromXDocument(XDocument.Load(stream));
     }
 
-    public T DeserializeFromXDocument(XDocument doc)
+    public T? DeserializeFromXDocument(XDocument doc)
     {
         if (doc.Root?.Name != GetElementNameForType(typeof(T)))
         {
@@ -661,8 +655,8 @@ public class XmlSerializer<T> : XmlSerializer, ISerializer<T>
         return DeserializeFromXElement(doc.Root);
     }
 
-    public T DeserializeFromXElement(XElement element)
+    public T? DeserializeFromXElement(XElement element)
     {
-        return (T)DeserializeInternal(element, typeof(T));
+        return (T?)DeserializeInternal(element, typeof(T));
     }
 }

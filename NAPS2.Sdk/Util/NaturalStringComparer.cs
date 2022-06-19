@@ -2,7 +2,7 @@
 
 public class NaturalStringComparer : IComparer<string>
 {
-    public int Compare(string x, string y)
+    public int Compare(string? x, string? y)
     {
         if (x == null || y == null)
         {

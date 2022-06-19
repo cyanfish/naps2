@@ -12,7 +12,7 @@ namespace NAPS2.Serialization;
 /// </summary>
 public static class SecureStorage
 {
-    public static Lazy<RNGCryptoServiceProvider> CryptoRandom { get; } = new Lazy<RNGCryptoServiceProvider>();
+    public static Lazy<RandomNumberGenerator> CryptoRandom { get; } = new(RandomNumberGenerator.Create);
 
     [return: NotNullIfNotNull("plainText")]
     public static string? Encrypt(string plaintext)

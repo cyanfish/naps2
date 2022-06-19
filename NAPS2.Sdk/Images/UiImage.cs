@@ -45,6 +45,10 @@ public class UiImage
     {
         lock (this)
         {
+            if (_disposed)
+            {
+                return;
+            }
             _disposed = true;
             _processedImage.Dispose();
         
@@ -101,7 +105,7 @@ public class UiImage
         }
     }
 
-    public void SetThumbnail(IMemoryImage image, TransformState transformState = null)
+    public void SetThumbnail(IMemoryImage image, TransformState? transformState = null)
     {
         lock (this)
         {
@@ -109,7 +113,7 @@ public class UiImage
             _thumbnail = image;
             _thumbnailTransformState = transformState;
         }
-        ThumbnailChanged?.Invoke(this, new EventArgs());
+        ThumbnailChanged?.Invoke(this, EventArgs.Empty);
     }
 
     public bool IsThumbnailDirty => _thumbnailTransformState != _processedImage.TransformState;

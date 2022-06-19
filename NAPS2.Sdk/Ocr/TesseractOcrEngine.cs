@@ -165,31 +165,34 @@ public class TesseractOcrEngine : IOcrEngine
         return bounds;
     }
     
-    
-    // TODO: For local engine (where we need to manually direct to the language data)
-    // public override TesseractRunInfo TesseractRunInfo(OcrParams ocrParams)
-    // {
-    //     OcrMode mode = ocrParams.Mode;
-    //     string folder = mode == OcrMode.Fast || mode == OcrMode.Default ? "fast" : "best";
-    //     if (ocrParams.LanguageCode.Split('+').All(code => !File.Exists(Path.Combine(TesseractBasePath, folder, $"{code.ToLowerInvariant()}.traineddata"))))
-    //     {
-    //         // Use the other source if the selected one doesn't exist
-    //         folder = folder == "fast" ? "best" : "fast";
-    //         mode = folder == "fast" ? OcrMode.Fast : OcrMode.Best;
-    //     }
-    //
-    //     return new()
-    //     {
-    //         Arguments = mode == OcrMode.Best ? "--oem 1" : mode == OcrMode.Legacy ? "--oem 0" : "",
-    //         DataPath = folder,
-    //         PrefixPath = folder
-    //     };
-    
-    // TODO: For system engine (where the language data is externally managed)
-    // public override TesseractRunInfo TesseractRunInfo(OcrParams ocrParams) => new()
-    // {
-    //     Arguments = "",
-    //     DataPath = null,
-    //     PrefixPath = null
-    // };
+    // TODO: Consider adding back CanProcess, or otherwise using this code to get the languages from a system engine
+//     private void CheckIfInstalled()
+//     {
+//         if (IsSupported && (_installCheckTime == null || _installCheckTime < DateTime.Now - TimeSpan.FromSeconds(2)))
+//         {
+//             try
+//             {
+//                 var process = Process.Start(new ProcessStartInfo
+//                 {
+//                     FileName = TesseractExePath,
+//                     Arguments = "--list-langs",
+//                     UseShellExecute = false,
+//                     RedirectStandardOutput = true,
+//                     RedirectStandardError = true
+//                 });
+//                 if (process != null && process.Id != 0)
+//                 {
+//                     var codes = process.StandardError.ReadToEnd().Split(new[] {'\r', '\n'}, StringSplitOptions.RemoveEmptyEntries).Where(x => x.Length == 3);
+//                     _installedLanguages = codes.Select(code => LanguageData.LanguageMap.Get($"ocr-{code}")).WhereNotNull().ToList();
+//                     _isInstalled = true;
+//                     process.Kill();
+//                 }
+//             }
+//             catch (Exception)
+//             {
+//                 // Component is not installed on the system path (or had an error)
+//             }
+//             _installCheckTime = DateTime.Now;
+//         }
+//     }
 }

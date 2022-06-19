@@ -2,7 +2,7 @@
 
 public interface ISerializer<T>
 {
-    void Serialize(Stream stream, T obj);
+    void Serialize(Stream stream, T? obj);
 
-    T Deserialize(Stream stream);
+    T? Deserialize(Stream stream);
 }

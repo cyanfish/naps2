@@ -120,7 +120,8 @@ public static class CollectionExtensions
     /// <param name="dict"></param>
     /// <param name="key"></param>
     /// <param name="values"></param>
-    public static void AddMulti<TKey, TValue>(this Dictionary<TKey, HashSet<TValue>> dict, TKey key, IEnumerable<TValue> values)
+    public static void AddMulti<TKey, TValue>(this Dictionary<TKey, HashSet<TValue>> dict, TKey key,
+        IEnumerable<TValue> values) where TKey : notnull
     {
         if (!dict.ContainsKey(key))
         {
@@ -140,7 +141,7 @@ public static class CollectionExtensions
     /// <param name="dict"></param>
     /// <param name="key"></param>
     /// <returns></returns>
-    public static TValue? Get<TKey, TValue>(this Dictionary<TKey, TValue> dict, TKey key)
+    public static TValue? Get<TKey, TValue>(this Dictionary<TKey, TValue> dict, TKey key) where TKey : notnull
     {
         if (dict.ContainsKey(key))
         {

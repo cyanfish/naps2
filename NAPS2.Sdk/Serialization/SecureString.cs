@@ -26,13 +26,13 @@ public class SecureString
     {
     }
 
-    public static implicit operator SecureString(string s) => new SecureString(s);
+    public static implicit operator SecureString(string s) => new(s);
 
     public static implicit operator string(SecureString s) => s.ToString();
 
     public override string ToString()
     {
-        _value ??= SecureStorage.Decrypt(_valueEncrypted);
+        _value ??= SecureStorage.Decrypt(_valueEncrypted!);
         return _value;
     }
 
@@ -40,7 +40,7 @@ public class SecureString
     {
         protected override void Serialize(SecureString obj, XElement element)
         {
-            element.Value = obj._valueEncrypted ?? SecureStorage.Encrypt(obj._value);
+            element.Value = obj._valueEncrypted ?? SecureStorage.Encrypt(obj._value!);
         }
 
         protected override SecureString Deserialize(XElement element)

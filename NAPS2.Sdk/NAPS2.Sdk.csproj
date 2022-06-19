@@ -46,7 +46,7 @@
       <HintPath>..\NAPS2.Setup\lib\PdfSharp.dll</HintPath>
     </Reference>
     
-    <PackageReference Include="BouncyCastle" Version="1.8.4" />
+    <PackageReference Include="BouncyCastle.NetCore" Version="1.9.0" />
     <PackageReference Include="Grpc.Tools" Version="2.26.0" PrivateAssets="all" />
     <PackageReference Include="GrpcDotNetNamedPipes" Version="1.4.2" />
     <PackageReference Include="Microsoft.Bcl.AsyncInterfaces" Version="6.0.0" />

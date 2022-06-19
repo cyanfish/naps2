@@ -492,7 +492,7 @@ namespace NAPS2.WinForms
         {
             if (_stillImage.ShouldScan)
             {
-                await ScanWithDevice(_stillImage.DeviceID);
+                await ScanWithDevice(_stillImage.DeviceID!);
             }
         }
 

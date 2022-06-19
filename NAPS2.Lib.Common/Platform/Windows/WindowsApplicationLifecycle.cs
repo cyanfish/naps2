@@ -160,7 +160,7 @@ public class WindowsApplicationLifecycle
             {
                 // Another instance of NAPS2 is running, so send it the "Scan" signal
                 ActivateProcess(process);
-                if (Pipes.SendMessage(process, Pipes.MSG_SCAN_WITH_DEVICE + _sti.DeviceID))
+                if (Pipes.SendMessage(process, Pipes.MSG_SCAN_WITH_DEVICE + _sti.DeviceID!))
                 {
                     // Successful, so this instance can be closed before showing any UI
                     Environment.Exit(0);

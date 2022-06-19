@@ -91,5 +91,5 @@ public class StillImage
 
     public bool ShouldUnregister { get; private set; }
 
-    public string DeviceID { get; set; }
+    public string? DeviceID { get; set; }
 }
