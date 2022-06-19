@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFrameworks>net6;net462</TargetFrameworks>
-    <OutputType>Exe</OutputType>
+    <OutputType>WinExe</OutputType>
     <RootNamespace>NAPS2.Portable</RootNamespace>
     <AssemblyName>NAPS2.Portable</AssemblyName>
 

@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFrameworks>net6-windows;net462</TargetFrameworks>
-    <OutputType>Exe</OutputType>
+    <OutputType>WinExe</OutputType>
     <LargeAddressAware>true</LargeAddressAware>
     <RootNamespace>NAPS2.Worker</RootNamespace>
     <AssemblyName>NAPS2.Worker</AssemblyName>

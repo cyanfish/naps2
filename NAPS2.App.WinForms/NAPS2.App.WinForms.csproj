@@ -3,11 +3,11 @@
   <PropertyGroup>
     <!-- TODO: We get a worker error when running on net6 -->
     <TargetFrameworks>net6-windows;net462</TargetFrameworks>
-    <OutputType>Exe</OutputType>
+    <OutputType>WinExe</OutputType>
     <LargeAddressAware>true</LargeAddressAware>
     <RootNamespace>NAPS2</RootNamespace>
     <AssemblyName>NAPS2</AssemblyName>
-    
+
 <!--    <PublishSingleFile>true</PublishSingleFile>-->
 <!--    <SelfContained>true</SelfContained>-->
 <!--    <RuntimeIdentifier>win-x64</RuntimeIdentifier>-->
