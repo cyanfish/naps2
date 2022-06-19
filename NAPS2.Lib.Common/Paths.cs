@@ -1,10 +1,10 @@
-﻿using System.Reflection;
+﻿using System.Windows.Forms;
 
 namespace NAPS2;
 
 public static class Paths
 {
-    private static readonly string ExecutablePath = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
+    private static readonly string ExecutablePath = Application.StartupPath;
 
 #if STANDALONE
         private static readonly string AppDataPath = Path.Combine(ExecutablePath, "..", "Data");

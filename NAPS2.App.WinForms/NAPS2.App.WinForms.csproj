@@ -6,6 +6,12 @@
     <LargeAddressAware>true</LargeAddressAware>
     <RootNamespace>NAPS2</RootNamespace>
     <AssemblyName>NAPS2</AssemblyName>
+    
+<!--    <PublishSingleFile>true</PublishSingleFile>-->
+<!--    <SelfContained>true</SelfContained>-->
+<!--    <RuntimeIdentifier>win-x64</RuntimeIdentifier>-->
+<!--    <ValidateExecutableReferencesMatchSelfContained>false</ValidateExecutableReferencesMatchSelfContained>-->
+<!--    <PublishTrimmed>true</PublishTrimmed>-->
 
     <Title>NAPS2 (Not Another PDF Scanner 2)</Title>
     <Product>NAPS2 (Not Another PDF Scanner 2)</Product>
