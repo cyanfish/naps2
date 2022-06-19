@@ -1,18 +1,16 @@
 ﻿using System.Threading;
 using NAPS2.ImportExport;
 using NAPS2.Ocr;
-using NAPS2.Platform.Windows;
 using NAPS2.Scan.Exceptions;
 using NAPS2.Scan.Internal;
 using NAPS2.Wia;
-using NAPS2.WinForms;
 
 namespace NAPS2.Scan;
 
 internal class ScanPerformer : IScanPerformer
 {
     private readonly ScanningContext _scanningContext;
-    private readonly IFormFactory _formFactory;
+    private readonly IDevicePrompt _devicePrompt;
     private readonly ScopedConfig _config;
     private readonly OperationProgress _operationProgress;
     private readonly AutoSaver _autoSaver;
@@ -22,12 +20,12 @@ internal class ScanPerformer : IScanPerformer
     private readonly IScanBridgeFactory _scanBridgeFactory;
     private readonly IOcrEngine _ocrEngine;
 
-    public ScanPerformer(IFormFactory formFactory, ScopedConfig config, OperationProgress operationProgress,
+    public ScanPerformer(IDevicePrompt devicePrompt, ScopedConfig config, OperationProgress operationProgress,
         AutoSaver autoSaver, IProfileManager profileManager, ErrorOutput errorOutput,
         ScanOptionsValidator scanOptionsValidator, IScanBridgeFactory scanBridgeFactory,
         ScanningContext scanningContext, IOcrEngine ocrEngine)
     {
-        _formFactory = formFactory;
+        _devicePrompt = devicePrompt;
         _config = config;
         _operationProgress = operationProgress;
         _autoSaver = autoSaver;
@@ -49,6 +47,9 @@ internal class ScanPerformer : IScanPerformer
         IntPtr dialogParent = default, CancellationToken cancelToken = default)
     {
         var options = BuildOptions(scanProfile, scanParams, dialogParent);
+        // Make sure we get a real driver value (not just "Default")
+        options = _scanOptionsValidator.ValidateAll(options);
+
         if (!await PopulateDevice(scanProfile, options))
         {
             // User cancelled out of a dialog
@@ -57,8 +58,7 @@ internal class ScanPerformer : IScanPerformer
 
         var localPostProcessor = new LocalPostProcessor(ConfigureOcrController(scanParams));
         var controller = new ScanController(localPostProcessor, _scanOptionsValidator, _scanBridgeFactory);
-        // TODO: Consider how to handle operations with Twain (right now there are duplicate progress windows).
-        var op = new ScanOperation(options.Device, options.PaperSource);
+        var op = new ScanOperation(options.Device, options.PaperSource, options.Driver);
 
         controller.PageStart += (sender, args) => op.NextPage(args.PageNumber);
         controller.ScanEnd += (sender, args) => op.Completed();
@@ -195,6 +195,7 @@ internal class ScanPerformer : IScanPerformer
                     ? TwainTransferMode.Memory
                     : TwainTransferMode.Native,
                 IncludeWiaDevices = false
+                // TODO: Consider adding a user option for TwainOptions.ShowProgress instead of our progress window
             },
             SaneOptions =
             {
@@ -216,7 +217,6 @@ internal class ScanPerformer : IScanPerformer
             Brightness = scanProfile.Brightness,
             Contrast = scanProfile.Contrast,
             Dpi = scanProfile.Resolution.ToIntDpi(),
-            Modal = scanParams.Modal,
             Quality = scanProfile.Quality,
             AutoDeskew = scanProfile.AutoDeskew,
             BitDepth = scanProfile.BitDepth.ToBitDepth(),
@@ -228,7 +228,6 @@ internal class ScanPerformer : IScanPerformer
             ThumbnailSize = scanParams.ThumbnailSize,
             ExcludeBlankPages = scanProfile.ExcludeBlankPages,
             FlipDuplexedPages = scanProfile.FlipDuplexedPages,
-            NoUI = scanParams.NoUI,
             BlankPageCoverageThreshold = scanProfile.BlankPageCoverageThreshold,
             BlankPageWhiteThreshold = scanProfile.BlankPageWhiteThreshold,
             BrightnessContrastAfterScan = scanProfile.BrightnessContrastAfterScan,
@@ -278,6 +277,7 @@ internal class ScanPerformer : IScanPerformer
 
     private async Task<ScanDevice> PromptForDevice(ScanOptions options)
     {
+        // TODO: Not sure how best to handle this for console
         if (options.Driver == Driver.Wia)
         {
             // WIA has a nice built-in device selection dialog, so use it
@@ -291,12 +291,8 @@ internal class ScanPerformer : IScanPerformer
             return new ScanDevice(wiaDevice.Id(), wiaDevice.Name());
         }
 
-        // TODO: Figure out whether the console should allow UI, and then fix this appropriately.
-        // // Other drivers do not, so use a generic dialog
-        // var deviceForm = _formFactory.Create<FSelectDevice>();
-        // deviceForm.DeviceList = await new ScanController(_scanningContext).GetDeviceList(options);
-        // deviceForm.ShowDialog(new Win32Window(options.DialogParent));
-        // return deviceForm.SelectedDevice;
-        return null;
+        // Other drivers do not, so use a generic dialog
+        var deviceList = await new ScanController(_scanningContext).GetDeviceList(options);
+        return _devicePrompt.PromptForDevice(deviceList, options.DialogParent);
     }
 }

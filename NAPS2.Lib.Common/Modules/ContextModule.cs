@@ -1,14 +1,17 @@
-﻿using NAPS2.Ocr;
+﻿using NAPS2.Scan;
 using Ninject;
+using Ninject.Modules;
 using NLog;
 
-namespace NAPS2;
+namespace NAPS2.Modules;
 
-public static class StaticConfiguration
+public class ContextModule : NinjectModule
 {
-    public static void Initialize(IKernel kernel)
+    public override void Load()
     {
-        var config = kernel.Get<ScopedConfig>();
+        Kernel.Get<ScanningContext>().TempFolderPath = Paths.Temp;
+
+        var config = Kernel.Get<ScopedConfig>();
 
         Log.Logger = new NLogLogger();
         if (PlatformCompat.System.CanUseWin32)

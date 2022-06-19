@@ -14,7 +14,7 @@ public static class ConsoleEntryPoint
     public static void Run(string[] args)
     {
         // Initialize Ninject (the DI framework)
-        var kernel = new StandardKernel(new CommonModule(), new ConsoleModule(), new PathsModule(), new RecoveryModule());
+        var kernel = new StandardKernel(new CommonModule(), new ConsoleModule(), new RecoveryModule(), new ContextModule());
 
         Paths.ClearTemp();
 

@@ -6,7 +6,7 @@ public class ScanOperation : OperationBase
 {
     private int _pageNumber = 1;
 
-    public ScanOperation(ScanDevice device, PaperSource paperSource)
+    public ScanOperation(ScanDevice device, PaperSource paperSource, Driver driver)
     {
         ProgressTitle = device.Name;
         Status = new OperationStatus
@@ -15,7 +15,8 @@ public class ScanOperation : OperationBase
                 ? MiscResources.AcquiringData
                 : string.Format(MiscResources.ScanProgressPage, _pageNumber),
             MaxProgress = 1000,
-            ProgressType = OperationProgressType.BarOnly
+            ProgressType = OperationProgressType.BarOnly,
+            IndeterminateProgress = driver == Driver.Twain
         };
         AllowBackground = true;
         AllowCancel = true;

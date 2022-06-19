@@ -1,6 +1,7 @@
 using NAPS2.Automation;
 using NAPS2.Dependencies;
 using NAPS2.ImportExport.Pdf;
+using NAPS2.Scan;
 using NAPS2.WinForms;
 using Ninject.Modules;
 
@@ -18,5 +19,6 @@ public class ConsoleModule : NinjectModule
         Bind<DialogHelper>().To<WinFormsDialogHelper>(); // TODO: We don't really want this, but it is an explicit option, so it's okay for now...
         Bind<ConsoleOutput>().ToSelf().WithConstructorArgument("writer", Console.Out);
         Bind<ISaveNotify>().To<SaveNotifyStub>();
+        Bind<IDevicePrompt>().To<ConsoleDevicePrompt>();
     }
 }

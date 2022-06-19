@@ -23,10 +23,9 @@ public class FileStorageSample
         var options = new ScanOptions
         {
             Device = device,
-            Dpi = 300,
-            NoUI = true
+            Dpi = 300
         };
-            
+
         // We can wait for the entire scan to complete and not worry about using an
         // excessive amount of memory, since it is all stored on disk until rendered.
         // This is just for illustration purposes; in real code you usually want to

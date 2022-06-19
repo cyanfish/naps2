@@ -1,6 +1,7 @@
 ﻿using System.Collections.Concurrent;
 using System.Reflection;
 using GrpcDotNetNamedPipes;
+using NAPS2.Scan;
 
 namespace NAPS2.Remoting.Worker;
 
@@ -18,16 +19,13 @@ public class WorkerFactory : IWorkerFactory
         Path.GetDirectoryName(Assembly.GetEntryAssembly().Location)
     };
 
-    private readonly ImageContext _imageContext;
     private readonly FileStorageManager _fileStorageManager;
 
-    private string _workerExePath;
-    private BlockingCollection<WorkerContext> _workerQueue;
+    private string? _workerExePath;
+    private BlockingCollection<WorkerContext>? _workerQueue;
 
-    // TODO: Consider a better way than injecting FileStorageManager
-    public WorkerFactory(ImageContext imageContext, FileStorageManager fileStorageManager)
+    public WorkerFactory(FileStorageManager fileStorageManager)
     {
-        _imageContext = imageContext;
         _fileStorageManager = fileStorageManager;
     }
 
@@ -40,14 +38,14 @@ public class WorkerFactory : IWorkerFactory
                 foreach (var dir in SearchDirs)
                 {
                     _workerExePath = Path.Combine(dir, WORKER_EXE_NAME);
-                    if (File.Exists(WorkerExePath))
+                    if (File.Exists(_workerExePath))
                     {
                         break;
                     }
                 }
             }
 
-            return _workerExePath;
+            return _workerExePath!;
         }
     }
 

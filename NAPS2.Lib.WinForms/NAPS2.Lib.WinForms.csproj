@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFrameworks>net6-windows;net461</TargetFrameworks>
+    <Nullable>enable</Nullable>
     <RootNamespace>NAPS2</RootNamespace>
 
     <Title>NAPS2 (Not Another PDF Scanner 2)</Title>
@@ -383,6 +384,10 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
 
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Scan\Internal" />
   </ItemGroup>
 
 </Project>

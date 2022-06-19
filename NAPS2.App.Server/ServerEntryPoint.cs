@@ -19,7 +19,7 @@ public static class ServerEntryPoint
         try
         {
             // Initialize Ninject (the DI framework)
-            var kernel = new StandardKernel(new CommonModule(), new WinFormsModule(), new PathsModule(), new RecoveryModule());
+            var kernel = new StandardKernel(new CommonModule(), new WinFormsModule(), new RecoveryModule(), new ContextModule());
 
             // Start a pending worker process
             kernel.Get<IWorkerFactory>().Init();

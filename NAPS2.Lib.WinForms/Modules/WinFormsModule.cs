@@ -3,6 +3,7 @@ using NAPS2.EtoForms;
 using NAPS2.EtoForms.WinForms;
 using NAPS2.ImportExport;
 using NAPS2.ImportExport.Pdf;
+using NAPS2.Scan;
 using NAPS2.Scan.Batch;
 using NAPS2.WinForms;
 using Ninject;
@@ -25,5 +26,6 @@ public class WinFormsModule : NinjectModule
         Bind<NotificationManager>().ToSelf().InSingletonScope();
         Bind<ISaveNotify>().ToMethod(ctx => ctx.Kernel.Get<NotificationManager>());
         Bind<IScannedImagePrinter>().To<PrintDocumentPrinter>();
+        Bind<IDevicePrompt>().To<WinFormsDevicePrompt>();
     }
 }

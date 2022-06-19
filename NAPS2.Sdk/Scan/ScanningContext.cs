@@ -7,7 +7,7 @@ namespace NAPS2.Scan;
 public class ScanningContext : IDisposable
 {
     private readonly ProcessedImageOwner _processedImageOwner = new();
-    
+
     // TODO: Make sure properties are initialized by callers (or something equivalent)
     public ScanningContext(ImageContext imageContext)
     {
@@ -20,11 +20,13 @@ public class ScanningContext : IDisposable
         FileStorageManager = fileStorageManager;
     }
 
-    public ScanningContext(ImageContext imageContext, FileStorageManager fileStorageManager, IOcrEngine ocrEngine)
+    public ScanningContext(ImageContext imageContext, FileStorageManager fileStorageManager, IOcrEngine ocrEngine,
+        IWorkerFactory workerFactory)
     {
         ImageContext = imageContext;
         FileStorageManager = fileStorageManager;
         OcrEngine = ocrEngine;
+        WorkerFactory = workerFactory;
     }
 
     // TODO: Figure out initialization etc.
@@ -39,18 +41,19 @@ public class ScanningContext : IDisposable
     public OcrRequestQueue OcrRequestQueue { get; } = new();
 
     public IOcrEngine? OcrEngine { get; set; }
-    
+
     public ProcessedImage CreateProcessedImage(IImageStorage storage)
     {
         return CreateProcessedImage(storage, Enumerable.Empty<Transform>());
     }
-    
+
     public ProcessedImage CreateProcessedImage(IImageStorage storage, IEnumerable<Transform> transforms)
     {
         return CreateProcessedImage(storage, BitDepth.Color, false, -1, transforms);
     }
 
-    public ProcessedImage CreateProcessedImage(IImageStorage storage, BitDepth bitDepth, bool lossless, int quality, IEnumerable<Transform> transforms)
+    public ProcessedImage CreateProcessedImage(IImageStorage storage, BitDepth bitDepth, bool lossless, int quality,
+        IEnumerable<Transform> transforms)
     {
         var convertedStorage = ConvertStorageIfNeeded(storage, bitDepth, lossless, quality);
         var metadata = new ImageMetadata(bitDepth, lossless);
@@ -113,7 +116,7 @@ public class ScanningContext : IDisposable
     private class ProcessedImageOwner : IProcessedImageOwner, IDisposable
     {
         private readonly HashSet<IDisposable> _disposables = new HashSet<IDisposable>();
-        
+
         public void Register(IDisposable internalDisposable)
         {
             lock (this)

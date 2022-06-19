@@ -21,8 +21,7 @@ public class ScanToBitmapSample
         // doc for more info.
         ScanOptions options = new ScanOptions
         {
-            Dpi = 300,
-            NoUI = true
+            Dpi = 300
         };
 
         // Different drivers are supported on different operating systems: Windows supports

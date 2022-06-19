@@ -1,10 +1,8 @@
 ﻿using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Threading;
-using System.Windows.Forms;
 using NAPS2.Platform.Windows;
 using NAPS2.Scan.Exceptions;
-using NAPS2.WinForms;
 using NTwain;
 using NTwain.Data;
 
@@ -103,15 +101,8 @@ internal class TwainScanDriver : IScanDriver
 
     private void InternalScan(TwainDsm dsm, ScanOptions options, CancellationToken cancelToken, IScanEvents scanEvents, Action<IMemoryImage> callback)
     {
-        var dialogParent = options.DialogParent;
-        if (dialogParent == IntPtr.Zero)
-        {
-            dialogParent = new BackgroundForm().Handle;
-        }
-
         PlatformInfo.Current.PreferNewDSM = dsm != TwainDsm.Old;
         var session = new TwainSession(TwainAppId);
-        var twainForm = Invoker.Current.InvokeGet(() => options.NoUI ? null : new FTwainGui());
         Exception error = null;
         bool cancel = false;
         DataSource ds = null;
@@ -172,18 +163,14 @@ internal class TwainScanDriver : IScanDriver
         void StopTwain()
         {
             waitHandle.Set();
-            if (!options.NoUI)
-            {
-                Invoker.Current.Invoke(() => twainForm.Close());
-            }
         }
 
         void InitTwain()
         {
             try
             {
-                var windowHandle = (Invoker.Current as Form)?.Handle;
-                ReturnCode rc = windowHandle != null ? session.Open(new WindowsFormsMessageLoopHook(windowHandle.Value)) : session.Open();
+                var windowHandle = options.DialogParent;
+                ReturnCode rc = windowHandle != IntPtr.Zero ? session.Open(new WindowsFormsMessageLoopHook(windowHandle)) : session.Open();
                 if (rc != ReturnCode.Success)
                 {
                     Debug.WriteLine("NAPS2.TW - Could not open session - {0}", rc);
@@ -206,7 +193,7 @@ internal class TwainScanDriver : IScanDriver
                 ConfigureDS(ds, options);
                 var ui = options.UseNativeUI ? SourceEnableMode.ShowUI : SourceEnableMode.NoUI;
                 Debug.WriteLine("NAPS2.TW - Enabling DS");
-                rc = options.NoUI ? ds.Enable(ui, true, windowHandle ?? IntPtr.Zero) : ds.Enable(ui, true, twainForm.Handle);
+                rc = ds.Enable(ui, true, windowHandle);
                 Debug.WriteLine("NAPS2.TW - Enable finished");
                 if (rc != ReturnCode.Success)
                 {
@@ -231,27 +218,8 @@ internal class TwainScanDriver : IScanDriver
             }
         }
 
-        if (!options.NoUI)
-        {
-            twainForm.Shown += (sender, eventArgs) => { InitTwain(); };
-            twainForm.Closed += (sender, args) => waitHandle.Set();
-        }
-
-        if (options.NoUI)
-        {
-            Debug.WriteLine("NAPS2.TW - Init with no form");
-            Invoker.Current.Invoke(InitTwain);
-        }
-        else if (!options.Modal)
-        {
-            Debug.WriteLine("NAPS2.TW - Init with non-modal form");
-            Invoker.Current.Invoke(() => twainForm.Show(new Win32Window(dialogParent)));
-        }
-        else
-        {
-            Debug.WriteLine("NAPS2.TW - Init with modal form");
-            Invoker.Current.Invoke(() => twainForm.ShowDialog(new Win32Window(dialogParent)));
-        }
+        Debug.WriteLine("NAPS2.TW - Init");
+        Invoker.Current.Invoke(InitTwain);
         waitHandle.WaitOne();
         Debug.WriteLine("NAPS2.TW - Operation complete");
 
@@ -340,8 +308,8 @@ internal class TwainScanDriver : IScanDriver
             ds.Capabilities.ICapXferMech.SetValue(XferMech.Memory);
         }
 
-        // Hide UI for console
-        if (options.NoUI)
+        // Progress UI
+        if (!options.TwainOptions.ShowProgress)
         {
             ds.Capabilities.CapIndicators.SetValue(BoolType.False);
         }

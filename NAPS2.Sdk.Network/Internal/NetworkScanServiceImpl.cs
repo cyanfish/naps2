@@ -105,7 +105,6 @@ internal class NetworkScanServiceImpl : NetworkScanService.NetworkScanServiceBas
     {
         // No GUI support
         options.UseNativeUI = false;
-        options.NoUI = true;
         if (options.TwainOptions.Adapter == TwainAdapter.Legacy)
         {
             options.TwainOptions.Adapter = TwainAdapter.NTwain;

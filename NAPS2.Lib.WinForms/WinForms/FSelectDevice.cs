@@ -16,7 +16,7 @@ namespace NAPS2.WinForms
 
         public List<ScanDevice> DeviceList { get; set; } 
 
-        public ScanDevice SelectedDevice { get; private set; }
+        public ScanDevice? SelectedDevice { get; private set; }
 
         protected override void OnLoad(object sender, EventArgs eventArgs)
         {

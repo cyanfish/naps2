@@ -1,8 +1,6 @@
-﻿using System.Threading;
-using NAPS2.Ocr;
+﻿namespace NAPS2.Scan;
 
-namespace NAPS2.Scan;
-
+// TODO: We can probably make this an immutable record
 public class ScanOptions
 {
     public Driver Driver { get; set; }
@@ -40,10 +38,6 @@ public class ScanOptions
     public bool UseNativeUI { get; set; }
 
     public IntPtr DialogParent { get; set; }
-
-    public bool NoUI { get; set; }
-
-    public bool Modal { get; set; }
 
     public bool StretchToPageSize { get; set; }
 
