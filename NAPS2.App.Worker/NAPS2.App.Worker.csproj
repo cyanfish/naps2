@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net6-windows;net462</TargetFrameworks>
+    <TargetFrameworks>net5-windows;net462</TargetFrameworks>
     <OutputType>WinExe</OutputType>
     <LargeAddressAware>true</LargeAddressAware>
     <RootNamespace>NAPS2.Worker</RootNamespace>

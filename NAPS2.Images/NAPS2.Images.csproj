@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFrameworks>net6;net462;netcoreapp2.1;netstandard2.0</TargetFrameworks>
+        <TargetFrameworks>net5;net462;netcoreapp2.1;netstandard2.0</TargetFrameworks>
         <Nullable>enable</Nullable>
         <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
         <RootNamespace>NAPS2.Images</RootNamespace>

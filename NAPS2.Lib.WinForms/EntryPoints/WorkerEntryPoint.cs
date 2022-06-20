@@ -26,7 +26,6 @@ public static class WorkerEntryPoint
 
             // Initialize Ninject (the DI framework)
             var kernel = new StandardKernel(new CommonModule(), new WinFormsModule(), new ContextModule());
-            // Verify that the recovery is always initialized by the parent process before creating images
 
             // Expect a single argument, the parent process id
             if (args.Length != 1 || !int.TryParse(args[0], out int procId) || !IsProcessRunning(procId))
