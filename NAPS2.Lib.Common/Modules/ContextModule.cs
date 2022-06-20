@@ -10,6 +10,7 @@ public class ContextModule : NinjectModule
     public override void Load()
     {
         Kernel.Get<ScanningContext>().TempFolderPath = Paths.Temp;
+        Kernel.Get<ScanningContext>().RecoveryPath = Paths.Recovery;
 
         var config = Kernel.Get<ScopedConfig>();
 

@@ -76,6 +76,11 @@ public class RecoveryStorageManager : IDisposable
         }
     }
 
+    public void ReleaseLockForTesting()
+    {
+        _folderLock.Close();
+    }
+
     public void Dispose()
     {
         lock (this)

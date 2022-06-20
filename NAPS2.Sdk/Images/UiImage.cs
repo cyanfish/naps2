@@ -5,7 +5,7 @@ namespace NAPS2.Images;
 /// <summary>
 /// A mutable container for an image in the NAPS2 UI that can be edited, has a thumbnail, etc.
 /// </summary>
-public class UiImage
+public class UiImage : IDisposable
 {
     private ProcessedImage _processedImage;
     private IMemoryImage? _thumbnail;

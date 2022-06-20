@@ -7,6 +7,7 @@ using NAPS2.ImportExport.Images;
 using NAPS2.ImportExport.Pdf;
 using NAPS2.Ocr;
 using NAPS2.Platform.Windows;
+using NAPS2.Recovery;
 using NAPS2.Remoting.Worker;
 using NAPS2.Scan;
 using NAPS2.Scan.Batch;
@@ -26,6 +27,7 @@ public class CommonModule : NinjectModule
         Bind<IScannedImageImporter>().To<ScannedImageImporter>();
         Bind<IPdfImporter>().To<PdfSharpImporter>();
         Bind<IImageImporter>().To<ImageImporter>();
+        Bind<RecoveryManager>().ToSelf();
 
         // Export
         Bind<PdfExporter>().To<PdfSharpExporter>();

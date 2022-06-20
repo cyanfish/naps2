@@ -334,9 +334,13 @@ namespace NAPS2.WinForms
                 MessageBox.Show(Config.Get(c => c.StartupMessageText), Config.Get(c => c.StartupMessageTitle), MessageBoxButtons.OK,
                     Config.Get(c => c.StartupMessageIcon));
             }
-
+            
             // Allow scanned images to be recovered in case of an unexpected close
-            _recoveryManager.RecoverScannedImages(ReceiveScannedImage(), new RecoveryParams { ThumbnailSize = Config.Get(c => c.ThumbnailSize) });
+            var op = _operationFactory.Create<RecoveryOperation>();
+            if (op.Start(ReceiveScannedImage(), new RecoveryParams { ThumbnailSize = Config.Get(c => c.ThumbnailSize) }))
+            {
+                _operationProgress.ShowProgress(op);
+            }
 
             new Thread(RenderThumbnails).Start();
 

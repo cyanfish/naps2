@@ -36,6 +36,8 @@ public class ScanningContext : IDisposable
 
     public string TempFolderPath { get; set; } = Path.GetTempPath();
 
+    public string? RecoveryPath { get; set; }
+
     public IWorkerFactory WorkerFactory { get; set; }
 
     public OcrRequestQueue OcrRequestQueue { get; } = new();
