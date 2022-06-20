@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace NAPS2.Sdk.Tests.Images {
+namespace NAPS2.Sdk.Tests {
     using System;
     
     

@@ -79,22 +79,14 @@ public class RecoverableFolder : IDisposable
             }
 
             string imagePath = Path.Combine(_directory.FullName, indexImage.FileName!);
+            var ext = Path.GetExtension(imagePath);
+            string newPath = _scanningContext.FileStorageManager!.NextFilePath() + ext;
 
-            if (".pdf".Equals(Path.GetExtension(imagePath), StringComparison.InvariantCultureIgnoreCase))
-            {
-                string newPath = _scanningContext.FileStorageManager!.NextFilePath() + ".pdf";
-                File.Copy(imagePath, newPath);
-                var storage = new ImageFileStorage(newPath);
-                var recoveredImage = CreateRecoveredImage(recoveryParams, storage, indexImage);
-                imageCallback(recoveredImage);
-            }
-            else
-            {
-                // TODO: Why not do a file copy here too?
-                using var storage = _scanningContext.ImageContext.Load(imagePath);
-                var recoveredImage = CreateRecoveredImage(recoveryParams, storage, indexImage);
-                imageCallback(recoveredImage);
-            }
+            File.Copy(imagePath, newPath);
+
+            var storage = new ImageFileStorage(newPath);
+            var recoveredImage = CreateRecoveredImage(recoveryParams, storage, indexImage);
+            imageCallback(recoveredImage);
 
             currentProgress++;
             progressCallback(currentProgress, totalProgress);

@@ -1,5 +1,4 @@
 using System.Drawing;
-using System.Reflection;
 using System.Text;
 using NAPS2.Automation;
 using NAPS2.Modules;
@@ -8,7 +7,6 @@ using NAPS2.Scan;
 using NAPS2.Scan.Internal;
 using NAPS2.Sdk.Tests;
 using NAPS2.Sdk.Tests.Asserts;
-using NAPS2.Sdk.Tests.Images;
 using NAPS2.Sdk.Tests.Mocks;
 using NAPS2.Sdk.Tests.Ocr;
 using Ninject;

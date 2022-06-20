@@ -1,9 +1,9 @@
-using System.Drawing;
 using System.Threading;
 using Moq;
 using NAPS2.Images.Gdi;
 using NAPS2.Recovery;
 using NAPS2.Scan;
+using NAPS2.Sdk.Tests.Asserts;
 using Xunit;
 
 namespace NAPS2.Sdk.Tests.Recovery;
@@ -22,14 +22,14 @@ public class RecoveryManagerTests : ContextualTexts
     }
 
     [Fact]
-    public void EmptyRecovery()
+    public void NoFoldersAvailable()
     {
         var folder = _recoveryManager.GetLatestRecoverableFolder();
         Assert.Null(folder);
     }
 
     [Fact]
-    public void NoImages()
+    public void FolderWithNoImages()
     {
         string recovery1 = Path.Combine(_recoveryBasePath, Path.GetRandomFileName());
         CreateFolderToRecoverFrom(recovery1, 0);
@@ -39,7 +39,7 @@ public class RecoveryManagerTests : ContextualTexts
     }
 
     [Fact]
-    public void Locking()
+    public void FolderLocking()
     {
         string recovery1 = Path.Combine(_recoveryBasePath, Path.GetRandomFileName());
         CreateFolderToRecoverFrom(recovery1, 1);
@@ -56,7 +56,7 @@ public class RecoveryManagerTests : ContextualTexts
     }
 
     [Fact]
-    public void FindRecoveryFolder()
+    public void FindSingleFolder()
     {
         string recovery1 = Path.Combine(_recoveryBasePath, Path.GetRandomFileName());
         CreateFolderToRecoverFrom(recovery1, 1);
@@ -68,7 +68,7 @@ public class RecoveryManagerTests : ContextualTexts
     }
 
     [Fact]
-    public void DeleteRecoveryFolder()
+    public void DeleteFolder()
     {
         string recovery1 = Path.Combine(_recoveryBasePath, Path.GetRandomFileName());
         CreateFolderToRecoverFrom(recovery1, 1);
@@ -84,20 +84,59 @@ public class RecoveryManagerTests : ContextualTexts
     public void Recover()
     {
         string recovery1 = Path.Combine(_recoveryBasePath, Path.GetRandomFileName());
-        CreateFolderToRecoverFrom(recovery1, 1);
+        CreateFolderToRecoverFrom(recovery1, 2);
 
-        var mockImageCallback = new Mock<Action<ProcessedImage>>();
+        var images = new List<ProcessedImage>();
+        void ImageCallback(ProcessedImage img) => images.Add(img);
         var mockProgressCallback = new Mock<ProgressHandler>();
 
         using var folder = _recoveryManager.GetLatestRecoverableFolder();
         Assert.NotNull(folder);
-        var result = folder.TryRecover(mockImageCallback.Object, new RecoveryParams(), mockProgressCallback.Object,
+        var result = folder.TryRecover(ImageCallback, new RecoveryParams(), mockProgressCallback.Object,
             CancellationToken.None);
         Assert.True(result);
-        // TODO: More asserts
+
+        Assert.Equal(2, images.Count);
+        var expectedImage = new GdiImage(SharedData.color_image);
+        var actualImage = ImageContext.Render(images[0]);
+        ImageAsserts.Similar(expectedImage, actualImage, ImageAsserts.GENERAL_RMSE_THRESHOLD);
+
+        mockProgressCallback.Verify(callback => callback(0, 2));
+        mockProgressCallback.Verify(callback => callback(1, 2));
+        mockProgressCallback.Verify(callback => callback(2, 2));
+        mockProgressCallback.VerifyNoOtherCalls();
     }
 
-    // TODO: Cancellation tests. Pdf storage tests. Plus whatever else I think of.
+    [Fact]
+    public void CancelRecover()
+    {
+        string recovery1 = Path.Combine(_recoveryBasePath, Path.GetRandomFileName());
+        CreateFolderToRecoverFrom(recovery1, 2);
+
+        var mockImageCallback = new Mock<Action<ProcessedImage>>();
+        CancellationTokenSource cts = new CancellationTokenSource();
+
+        void ProgressCallback(int current, int total)
+        {
+            // Cancel after the first image is recovered
+            if (current == 1) cts.Cancel();
+        }
+
+        using var folder = _recoveryManager.GetLatestRecoverableFolder();
+        Assert.NotNull(folder);
+
+        var result = folder.TryRecover(mockImageCallback.Object, new RecoveryParams(), ProgressCallback,
+            cts.Token);
+        Assert.False(result);
+        Assert.True(Directory.Exists(recovery1));
+        mockImageCallback.Verify(callback => callback(It.IsAny<ProcessedImage>()));
+        mockImageCallback.VerifyNoOtherCalls();
+
+        // After a cancelled recovery, we should be able to recover from the same folder again
+        folder.Dispose();
+        using var folder2 = _recoveryManager.GetLatestRecoverableFolder();
+        Assert.NotNull(folder2);
+    }
 
     private void CreateFolderToRecoverFrom(string folderPath, int imageCount)
     {
@@ -111,6 +150,6 @@ public class RecoveryManagerTests : ContextualTexts
 
     private ProcessedImage CreateRecoveryImage(ScanningContext recoveryContext)
     {
-        return recoveryContext.CreateProcessedImage(new GdiImage(new Bitmap(100, 100)));
+        return recoveryContext.CreateProcessedImage(new GdiImage(SharedData.color_image));
     }
 }
