@@ -1,7 +1,6 @@
-using NAPS2.Images.Gdi;
-
 namespace NAPS2.Images;
 
+// TODO: Use this in more places, i.e. ImportPostProcessor
 public class ThumbnailRenderer
 {
     private const int OVERSAMPLE = 3;

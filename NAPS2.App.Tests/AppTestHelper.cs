@@ -56,7 +56,7 @@ public static class AppTestHelper
     {
         var startTime = DateTime.Now;
         while ((process.MainWindowHandle == IntPtr.Zero || !IsWindowVisible(process.MainWindowHandle)) &&
-               DateTime.Now - startTime < TimeSpan.FromSeconds(2))
+               DateTime.Now - startTime < TimeSpan.FromSeconds(5))
         {
             Thread.Sleep(100);
             process.WaitForInputIdle();

@@ -11,17 +11,36 @@ public class ImportPostProcessor
         _imageContext = imageContext;
     }
 
-    public ProcessedImage AddPostProcessingData(ProcessedImage image, IMemoryImage rendered, int? thumbnailSize,
+    public ProcessedImage AddPostProcessingData(ProcessedImage image, IMemoryImage? rendered, int? thumbnailSize,
         BarcodeDetectionOptions barcodeDetectionOptions, bool disposeOriginalImage)
     {
-        var thumbnail = thumbnailSize.HasValue
-            ? _imageContext.PerformTransform(rendered, new ThumbnailTransform(thumbnailSize.Value))
-            : null;
-        var barcodeDetection = BarcodeDetector.Detect(rendered, barcodeDetectionOptions);
-        return image.WithPostProcessingData(image.PostProcessingData with
+        if (!thumbnailSize.HasValue && !barcodeDetectionOptions.DetectBarcodes)
         {
-            Thumbnail = thumbnail,
-            BarcodeDetection = barcodeDetection
-        }, disposeOriginalImage);
+            // This is a bit weird, but technically "disposeOriginalImage" doesn't mean we're actually disposing it,
+            // just that the caller releases ownership of it (and takes ownership of the return value).
+            return disposeOriginalImage ? image : image.Clone();
+        }
+
+        var disposeRendered = rendered == null;
+        rendered ??= _imageContext.Render(image);
+        try
+        {
+            var thumbnail = thumbnailSize.HasValue
+                ? _imageContext.PerformTransform(rendered, new ThumbnailTransform(thumbnailSize.Value))
+                : null;
+            var barcodeDetection = BarcodeDetector.Detect(rendered, barcodeDetectionOptions);
+            return image.WithPostProcessingData(image.PostProcessingData with
+            {
+                Thumbnail = thumbnail,
+                BarcodeDetection = barcodeDetection
+            }, disposeOriginalImage);
+        }
+        finally
+        {
+            if (disposeRendered)
+            {
+                rendered.Dispose();
+            }
+        }
     }
 }

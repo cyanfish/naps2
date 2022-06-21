@@ -16,6 +16,8 @@ public static class SerializedImageHelper
             throw new InvalidOperationException("FileStorage is required for serialization.");
         }
 
+        // TODO: What if there are transforms? Does it make sense to include the thumbnail from the postprocessing data
+        // TODO: only, or can we somehow serialize the thumbnail from UiImage?
         MemoryStream? thumbStream = null;
         var thumb = image.PostProcessingData.Thumbnail;
         if (thumb != null && options.IncludeThumbnail)

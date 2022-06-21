@@ -274,11 +274,12 @@ public class TransformTests : ContextualTexts
         IMemoryImage actual = new GdiImage(TransformTestsData.color_image);
         IMemoryImage expected = new GdiImage(TransformTestsData.color_image_c_5_10_15_20);
 
-        actual = ImageContext.PerformTransform(actual, new CropTransform(20, 40, 30, 10, actual.Width * 2, actual.Height * 2));
+        actual = ImageContext.PerformTransform(actual,
+            new CropTransform(20, 40, 30, 10, actual.Width * 2, actual.Height * 2));
 
         ImageAsserts.Similar(expected, actual, ImageAsserts.GENERAL_RMSE_THRESHOLD);
     }
-        
+
     [Fact]
     public void BlackWhite()
     {
@@ -302,6 +303,17 @@ public class TransformTests : ContextualTexts
         Assert.Equal(ImagePixelFormat.BW1, actual.PixelFormat);
 
         actual = To24Bit(actual);
+        ImageAsserts.Similar(expected, actual, ImageAsserts.GENERAL_RMSE_THRESHOLD);
+    }
+
+    [Fact]
+    public void Thumbnail()
+    {
+        IMemoryImage actual = new GdiImage(TransformTestsData.color_image);
+        IMemoryImage expected = new GdiImage(TransformTestsData.color_image_thumb_256);
+
+        actual = ImageContext.PerformTransform(actual, new ThumbnailTransform(256));
+
         ImageAsserts.Similar(expected, actual, ImageAsserts.GENERAL_RMSE_THRESHOLD);
     }
 

@@ -147,6 +147,8 @@ public class RecoveryManagerTests : ContextualTexts
         rsm1.WriteIndex(images);
         rsm1.ReleaseLockForTesting();
     }
+    
+    // TODO: Add tests for recovery params (i.e. thumbnail)
 
     private ProcessedImage CreateRecoveryImage(ScanningContext recoveryContext)
     {

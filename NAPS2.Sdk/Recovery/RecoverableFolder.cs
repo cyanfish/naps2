@@ -104,7 +104,7 @@ public class RecoverableFolder : IDisposable
 
         // TODO: Make this take a lazy rendered image or something
         processedImage = _importPostProcessor.AddPostProcessingData(processedImage,
-            _scanningContext.ImageContext.Render(processedImage),
+            null,
             recoveryParams.ThumbnailSize,
             new BarcodeDetectionOptions(),
             true);

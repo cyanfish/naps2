@@ -62,4 +62,30 @@ public class ContextualTexts : IDisposable
             }
         }
     }
+
+    public bool IsDisposed(ProcessedImage image)
+    {
+        try
+        {
+            using var image2 = image.Clone();
+            return false;
+        }
+        catch (ObjectDisposedException)
+        {
+            return true;
+        }
+    }
+
+    public bool IsDisposed(GdiImage image)
+    {
+        try
+        {
+            using var image2 = image.Clone();
+            return false;
+        }
+        catch (Exception)
+        {
+            return true;
+        }
+    }
 }

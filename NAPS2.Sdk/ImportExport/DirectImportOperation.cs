@@ -1,5 +1,4 @@
-﻿using NAPS2.Images.Gdi;
-using NAPS2.ImportExport.Images;
+﻿using NAPS2.ImportExport.Images;
 using NAPS2.Scan;
 using NAPS2.Serialization;
 
@@ -8,10 +7,12 @@ namespace NAPS2.ImportExport;
 public class DirectImportOperation : OperationBase
 {
     private readonly ScanningContext _scanningContext;
+    private readonly ImportPostProcessor _importPostProcessor;
 
-    public DirectImportOperation(ScanningContext scanningContext)
+    public DirectImportOperation(ScanningContext scanningContext, ImportPostProcessor importPostProcessor)
     {
         _scanningContext = scanningContext;
+        _importPostProcessor = importPostProcessor;
 
         AllowCancel = true;
         AllowBackground = true;
@@ -34,17 +35,13 @@ public class DirectImportOperation : OperationBase
                 try
                 {
                     ProcessedImage img = SerializedImageHelper.Deserialize(_scanningContext, serializedImage, new SerializedImageHelper.DeserializeOptions());
-                    // TODO: Don't bother, here, in recovery, etc.
-                    if (img.PostProcessingData.Thumbnail == null && importParams.ThumbnailSize.HasValue)
-                    {
-                        var renderedImage = _scanningContext.ImageContext.Render(img);
-                        var thumbnail = _scanningContext.ImageContext.PerformTransform(renderedImage,
-                            new ThumbnailTransform(importParams.ThumbnailSize.Value));
-                        img = img.WithPostProcessingData(img.PostProcessingData with
-                        {
-                            Thumbnail = thumbnail
-                        }, true);
-                    }
+                    var thumbnailSize = img.PostProcessingData.Thumbnail == null ? importParams.ThumbnailSize : null;
+                    img = _importPostProcessor.AddPostProcessingData(
+                        img,
+                        null,
+                        thumbnailSize,
+                        new BarcodeDetectionOptions(),
+                        true);
                     imageCallback(img);
 
                     Status.CurrentProgress++;
