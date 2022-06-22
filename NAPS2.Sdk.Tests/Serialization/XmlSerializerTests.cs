@@ -25,7 +25,7 @@ public class XmlSerializerTests
         Assert.Equal("42", intEl.Value);
 
         var copy = serializer.DeserializeFromXDocument(doc);
-        Assert.Equal("Hello world", copy.Str);
+        Assert.Equal("Hello world", copy!.Str);
         Assert.Equal(42, copy.Int);
     }
 
@@ -43,7 +43,24 @@ public class XmlSerializerTests
         Assert.Equal("Hello", strEl.Value);
 
         var copy = serializer.DeserializeFromXDocument(doc);
-        Assert.Equal("Hello", copy.Str);
+        Assert.Equal("Hello", copy!.Str);
+    }
+
+    [Fact]
+    public void SerializeRecord()
+    {
+        var original = new Record { Str = "Hello" };
+        var serializer = new XmlSerializer<Record>();
+        var doc = serializer.SerializeToXDocument(original);
+        Assert.NotNull(doc.Root);
+        Assert.Equal("Record", doc.Root.Name);
+        Assert.Single(doc.Root.Elements());
+        var strEl = doc.Root.Element("Str");
+        Assert.NotNull(strEl);
+        Assert.Equal("Hello", strEl.Value);
+
+        var copy = serializer.DeserializeFromXDocument(doc);
+        Assert.Equal("Hello", copy!.Str);
     }
 
     [Fact]
@@ -140,7 +157,7 @@ public class XmlSerializerTests
         }
 
         var copy = serializer.DeserializeFromXDocument(doc);
-        Assert.Equal(2, copy.Count());
+        Assert.Equal(2, copy!.Count());
         if (unordered)
         {
             Assert.Contains(copy, x => x.Str == "Hello");
@@ -273,5 +290,10 @@ public class XmlSerializerTests
         }
 
         public string Str { get; private set; }
+    }
+
+    public record Record
+    {
+        public string Str { get; init; }
     }
 }

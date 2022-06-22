@@ -2,6 +2,7 @@
 
 namespace NAPS2.Config;
 
+// TODO: Is this (and child attributes) needed anymore? Can we make use of it somehow?
 public abstract class ConfigPropAttribute : XmlElementAttribute
 {
     protected ConfigPropAttribute(int line)
