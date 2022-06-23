@@ -18,24 +18,6 @@ public abstract class VersionedSerializer<T> : ISerializer<T>
 
     protected abstract T InternalDeserialize(Stream stream, XDocument doc);
 
-    protected void XmlSerialize(Stream stream, T obj)
-    {
-        var xmlSerializer = new XmlSerializer<T>();
-        xmlSerializer.Serialize(stream, obj);
-    }
-
-    protected T XmlDeserialize(Stream stream)
-    {
-        var xmlSerializer = new XmlSerializer<T>();
-        return xmlSerializer.Deserialize(stream);
-    }
-
-    protected T2 XmlDeserialize<T2>(Stream stream)
-    {
-        var xmlSerializer = new XmlSerializer<T2>();
-        return xmlSerializer.Deserialize(stream);
-    }
-
     protected int GetVersion(XDocument doc)
     {
         var versionElement = doc.Root?.Descendants("Version").FirstOrDefault();

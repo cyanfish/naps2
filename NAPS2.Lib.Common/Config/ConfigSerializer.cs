@@ -7,8 +7,9 @@ using NAPS2.Serialization;
 
 namespace NAPS2.Config;
 
-public class ConfigSerializer : VersionedSerializer<CommonConfig>
+public class ConfigSerializer : VersionedSerializer<ConfigStorage<CommonConfig>>
 {
+    private readonly ConfigStorageSerializer<CommonConfig> _storageSerializer = new();
     private readonly ConfigReadMode _mode;
 
     public ConfigSerializer(ConfigReadMode mode)
@@ -16,30 +17,31 @@ public class ConfigSerializer : VersionedSerializer<CommonConfig>
         _mode = mode;
     }
 
-    protected override void InternalSerialize(Stream stream, CommonConfig obj)
+    protected override void InternalSerialize(Stream stream, ConfigStorage<CommonConfig> obj)
     {
         if (_mode != ConfigReadMode.All)
         {
             throw new NotSupportedException();
         }
-        XmlSerialize(stream, obj);
+        obj.Set(c => c.Version, CommonConfig.CURRENT_VERSION);
+        _storageSerializer.Serialize(stream, obj);
     }
 
-    protected override CommonConfig InternalDeserialize(Stream stream, XDocument doc)
+    protected override ConfigStorage<CommonConfig> InternalDeserialize(Stream stream, XDocument doc)
     {
         if (GetVersion(doc) < 3)
         {
             if (_mode == ConfigReadMode.DefaultOnly)
             {
-                var oldAppConfig = XmlDeserialize<AppConfigV0>(stream);
+                var oldAppConfig = new XmlSerializer<AppConfigV0>().Deserialize(stream);
                 return AppConfigV0ToCommonConfigDefault(oldAppConfig);
             }
             if (_mode == ConfigReadMode.LockedOnly)
             {
-                var oldAppConfig = XmlDeserialize<AppConfigV0>(stream);
+                var oldAppConfig = new XmlSerializer<AppConfigV0>().Deserialize(stream);
                 return AppConfigV0ToCommonConfigLocked(oldAppConfig);
             }
-            var oldUserConfig = XmlDeserialize<UserConfigV0>(stream);
+            var oldUserConfig = new XmlSerializer<UserConfigV0>().Deserialize(stream);
             return UserConfigV0ToCommonConfig(oldUserConfig);
         }
         if (_mode == ConfigReadMode.DefaultOnly)
@@ -52,15 +54,15 @@ public class ConfigSerializer : VersionedSerializer<CommonConfig>
             FilterProperties(doc.Root, "override", "default");
             return DeserializeXDoc(doc);
         }
-        return XmlDeserialize(stream);
+        return _storageSerializer.Deserialize(stream);
     }
 
-    private CommonConfig DeserializeXDoc(XDocument doc)
+    private ConfigStorage<CommonConfig> DeserializeXDoc(XDocument doc)
     {
         var filteredStream = new MemoryStream();
         doc.WriteTo(new XmlTextWriter(filteredStream, Encoding.UTF8));
         filteredStream.Seek(0, SeekOrigin.Begin);
-        return XmlDeserialize(filteredStream);
+        return _storageSerializer.Deserialize(filteredStream);
     }
 
     private void FilterProperties(XElement node, string target, string current)
@@ -79,8 +81,8 @@ public class ConfigSerializer : VersionedSerializer<CommonConfig>
         }
     }
 
-    private CommonConfig AppConfigV0ToCommonConfigDefault(AppConfigV0 c) =>
-        new CommonConfig
+    private ConfigStorage<CommonConfig> AppConfigV0ToCommonConfigDefault(AppConfigV0 c) =>
+        new(new CommonConfig
         {
             // Could maybe move the app-only properties to Locked scope, but it really shouldn't matter
             Version = CommonConfig.CURRENT_VERSION,
@@ -108,20 +110,25 @@ public class ConfigSerializer : VersionedSerializer<CommonConfig>
             OcrAfterScanning = c.OcrDefaultAfterScanning,
             EventLogging = c.EventLogging,
             KeyboardShortcuts = c.KeyboardShortcuts ?? new KeyboardShortcuts()
-        };
+        });
 
-    private CommonConfig AppConfigV0ToCommonConfigLocked(AppConfigV0 c) =>
-        // TODO: Need to propagate presence to the config
-        new CommonConfig
+    private ConfigStorage<CommonConfig> AppConfigV0ToCommonConfigLocked(AppConfigV0 c)
+    {
+        var storage = new ConfigStorage<CommonConfig>();
+        if (c.OcrState == OcrState.Enabled)
         {
-            EnableOcr = c.OcrState == OcrState.Enabled ? true
-                : c.OcrState == OcrState.Disabled ? false
-                : false, 
-            PdfSettings =
-            {
-                Compat = c.ForcePdfCompat != PdfCompat.Default ? c.ForcePdfCompat : PdfCompat.Default
-            }
-        };
+            storage.Set(c => c.EnableOcr, true);            
+        }
+        if (c.OcrState == OcrState.Disabled)
+        {
+            storage.Set(c => c.EnableOcr, false);            
+        }
+        if (c.ForcePdfCompat != PdfCompat.Default)
+        {
+            storage.Set(c => c.PdfSettings.Compat, c.ForcePdfCompat);            
+        }
+        return storage;
+    }
 
     private ToolbarButtons GetHiddenButtonFlags(AppConfigV0 c)
     {
@@ -136,8 +143,8 @@ public class ConfigSerializer : VersionedSerializer<CommonConfig>
         return flags;
     }
 
-    private static CommonConfig UserConfigV0ToCommonConfig(UserConfigV0 c) =>
-        new CommonConfig
+    private static ConfigStorage<CommonConfig> UserConfigV0ToCommonConfig(UserConfigV0 c) =>
+        new(new CommonConfig
         {
             Version = CommonConfig.CURRENT_VERSION,
             Culture = c.Culture,
@@ -162,5 +169,5 @@ public class ConfigSerializer : VersionedSerializer<CommonConfig>
             KeyboardShortcuts = c.KeyboardShortcuts,
             CustomPageSizePresets = ImmutableList.CreateRange(c.CustomPageSizePresets),
             SavedProxies = ImmutableList.CreateRange(c.SavedProxies)
-        };
+        });
 }

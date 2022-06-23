@@ -66,6 +66,31 @@ public class MemoryConfigScopeTests
     }
 
     [Fact]
+    public void SetRootSetsAll()
+    {
+        var scope = new MemoryConfigScope<TestConfig>();
+        scope.Set(c => c, new TestConfig
+        {
+            UserName = "blah",
+            Sub = new SubConfig
+            {
+                X = 2,
+                Y = 3,
+                SubSub = new SubSubConfig { Val = null }
+            }
+        });
+
+        Assert.True(scope.TryGet(c => c.UserName, out var userName));
+        Assert.Equal("blah", userName);
+        Assert.True(scope.TryGet(c => c.Sub.X, out var x));
+        Assert.Equal(2, x);
+        Assert.True(scope.TryGet(c => c.Sub.Y, out var y));
+        Assert.Equal(3, y);
+        Assert.True(scope.TryGet(c => c.Sub.SubSub.Val, out var val));
+        Assert.Null(val);
+    }
+
+    [Fact]
     public void GetReturnsFalseAfterRemove()
     {
         var scope = new MemoryConfigScope<TestConfig>();

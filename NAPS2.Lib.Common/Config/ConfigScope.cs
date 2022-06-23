@@ -7,7 +7,7 @@ public static class ConfigScope
 {
     public static MemoryConfigScope<T> Memory<T>() => new();
 
-    public static FileConfigScope<T> File<T>(string filePath, ISerializer<T> serializer, ConfigScopeMode mode) =>
+    public static FileConfigScope<T> File<T>(string filePath, ISerializer<ConfigStorage<T>> serializer, ConfigScopeMode mode) =>
         new(filePath, serializer, mode);
 
     public static DefaultsConfigScope<T> Defaults<T>(T defaults) => new(defaults);

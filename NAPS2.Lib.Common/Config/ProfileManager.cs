@@ -7,7 +7,8 @@ namespace NAPS2.Config;
 // TODO: Fix cross-instance contention
 public class ProfileManager : IProfileManager
 {
-    private readonly ISerializer<ProfileConfig> _serializer = new ProfileSerializer();
+    // TODO: Use ProfileSerializer
+    private readonly ConfigStorageSerializer<ProfileConfig> _serializer = new();
     private readonly FileConfigScope<ProfileConfig> _userScope;
     private readonly FileConfigScope<ProfileConfig> _appScope;
     private readonly bool _userPathExisted;
@@ -171,14 +172,5 @@ public class ProfileManager : IProfileManager
     private class ProfileConfig
     {
         public ImmutableList<ScanProfile> Profiles { get; set; }
-    }
-
-    private class ProfileSerializer : ISerializer<ProfileConfig>
-    {
-        private readonly XmlSerializer<ImmutableList<ScanProfile>> _internalSerializer = new XmlSerializer<ImmutableList<ScanProfile>>();
-
-        public void Serialize(Stream stream, ProfileConfig obj) => _internalSerializer.Serialize(stream, obj.Profiles);
-
-        public ProfileConfig Deserialize(Stream stream) => new ProfileConfig { Profiles = _internalSerializer.Deserialize(stream) };
     }
 }

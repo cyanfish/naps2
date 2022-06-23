@@ -12,15 +12,6 @@ public class ConfigScopeTests : ContextualTexts
         AssertPropNullOrNotNull(config, false, "");
     }
 
-    [Fact]
-    public void NewConfigNullProps()
-    {
-        var config = new CommonConfig();
-        Assert.NotNull(config.Version);
-        config.Version = null;
-        AssertPropNullOrNotNull(config, true, "");
-    }
-
     private static void AssertPropNullOrNotNull(object config, bool shouldBeNull, string path)
     {
         Assert.True(config != null, path);
@@ -120,7 +111,12 @@ public class ConfigScopeTests : ContextualTexts
         if (value == null) throw new ArgumentNullException(nameof(value));
         stream.Seek(0, SeekOrigin.Begin);
         var doc = XDocument.Load(stream);
-        var tag = doc.Descendants(tagName).Single();
+        var tag = doc.Descendants(tagName).SingleOrDefault();
+        if (tag == null)
+        {
+            tag = new XElement(tagName);
+            doc.Root!.Add(tag);
+        }
         tag.RemoveAttributes(); // Remove xsi:nil
         tag.Value = value;
         stream.Seek(0, SeekOrigin.Begin);

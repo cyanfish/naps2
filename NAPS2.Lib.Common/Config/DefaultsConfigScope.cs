@@ -8,9 +8,8 @@ public class DefaultsConfigScope<TConfig> : ConfigScope<TConfig>
 
     public DefaultsConfigScope(TConfig defaults) : base(ConfigScopeMode.ReadOnly)
     {
-        _storage = new();
-        // TODO
-        //_storage = new(defaults);
+        _storage = new ConfigStorage<TConfig>();
+        _storage.Set(c => c, defaults);
     }
 
     protected override bool TryGetInternal<T>(Expression<Func<TConfig, T>> accessor, out T value)
