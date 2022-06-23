@@ -13,7 +13,7 @@ public class PdfSettings
 
     public string? DefaultFileName { get; set; }
 
-    public bool? SkipSavePrompt { get; set; }
+    public bool SkipSavePrompt { get; set; }
 
     [Child]
     public PdfMetadata Metadata
@@ -29,5 +29,5 @@ public class PdfSettings
         set => _encryption = value ?? throw new ArgumentNullException(nameof(value));
     }
 
-    public PdfCompat? Compat { get; set; }
+    public PdfCompat Compat { get; set; }
 }

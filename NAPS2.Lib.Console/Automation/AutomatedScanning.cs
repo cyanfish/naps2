@@ -25,8 +25,6 @@ public class AutomatedScanning
     private readonly ScopedConfig _config;
     private readonly TransactionConfigScope<CommonConfig> _userTransact;
     private readonly ScopedConfig _transactionConfig;
-    private readonly IConfigProvider<PdfSettings> _pdfSettingsProvider;
-    private readonly IConfigProvider<ImageSettings> _imageSettingsProvider;
     private readonly IProfileManager _profileManager;
     private readonly RecoveryStorageManager _recoveryStorageManager;
     private readonly ScanningContext _scanningContext;
@@ -62,9 +60,9 @@ public class AutomatedScanning
         _scanningContext = scanningContext;
 
         _userTransact = config.User.BeginTransaction();
+        // TODO: Rename/document (and test) this, as its purpose is really to sub out a config
+        // TODO: And why do we do that? Isn't that what run scope is for?
         _transactionConfig = config.WithTransaction(_userTransact);
-        _pdfSettingsProvider = _transactionConfig.Child(c => c.PdfSettings);
-        _imageSettingsProvider = _transactionConfig.Child(c => c.ImageSettings);
     }
 
     public IEnumerable<ProcessedImage> AllImages => _scanList.SelectMany(x => x);
@@ -160,13 +158,13 @@ public class AutomatedScanning
         }
         if (_options.DisableOcr)
         {
-            _config.Run.Set(c => c.EnableOcr = false);
+            _config.Run.Set(c => c.EnableOcr, false);
         }
-        else if (_options.EnableOcr || _options.OcrLang != null)
+        else if (_options.EnableOcr || !string.IsNullOrEmpty(_options.OcrLang))
         {
-            _config.Run.Set(c => c.EnableOcr = true);
+            _config.Run.Set(c => c.EnableOcr, true);
         }
-        _config.Run.Set(c => c.OcrLanguageCode = _options.OcrLang);
+        _config.Run.Set(c => c.OcrLanguageCode, _options.OcrLang);
         _ocrParams = _transactionConfig.DefaultOcrParams();
     }
 
@@ -444,8 +442,9 @@ public class AutomatedScanning
 
     private async Task DoExportToImageFiles(string outputPath)
     {
-        _userTransact.Set(c => c.ImageSettings = new ImageSettings());
-        _config.Run.Set(c => c.ImageSettings = new ImageSettings
+        // TODO: Fix this
+        _userTransact.Set(c => c.ImageSettings, new ImageSettings());
+        _config.Run.Set(c => c.ImageSettings, new ImageSettings
         {
             JpegQuality = _options.JpegQuality,
             TiffCompression = Enum.TryParse<TiffCompression>(_options.TiffComp, true, out var tc)
@@ -465,7 +464,7 @@ public class AutomatedScanning
                     i = op.Status.CurrentProgress;
                 }
             };
-            op.Start(outputPath, _placeholders, scan, _imageSettingsProvider);
+            op.Start(outputPath, _placeholders, scan, _transactionConfig.Get(c => c.ImageSettings));
             await op.Success;
         }
     }
@@ -477,27 +476,28 @@ public class AutomatedScanning
 
     private async Task<bool> DoExportToPdf(string path, bool email)
     {
-        var savedMetadata = _userTransact.Get(c => c.PdfSettings.Metadata);
-        var savedEncryptConfig = _userTransact.Get(c => c.PdfSettings.Encryption);
+        // TODO: Fix this
+        // var savedMetadata = _userTransact.Get(c => c.PdfSettings.Metadata);
+        // var savedEncryptConfig = _userTransact.Get(c => c.PdfSettings.Encryption);
+        //
+        // _userTransact.Set(c => c.PdfSettings = new PdfSettings());
+        // if (_options.UseSavedMetadata)
+        // {
+        //     _userTransact.Set(c => c.PdfSettings.Metadata = savedMetadata);
+        // }
+        // if (_options.UseSavedEncryptConfig)
+        // {
+        //     _userTransact.Set(c => c.PdfSettings.Encryption = savedEncryptConfig);
+        // }
 
-        _userTransact.Set(c => c.PdfSettings = new PdfSettings());
-        if (_options.UseSavedMetadata)
-        {
-            _userTransact.Set(c => c.PdfSettings.Metadata = savedMetadata);
-        }
-        if (_options.UseSavedEncryptConfig)
-        {
-            _userTransact.Set(c => c.PdfSettings.Encryption = savedEncryptConfig);
-        }
-
-        if (_options.EncryptConfig != null)
+        if (!string.IsNullOrEmpty(_options.EncryptConfig))
         {
             try
             {
-                using Stream configFileStream = File.OpenRead(_options.EncryptConfig);
+                using Stream configFileStream = File.OpenRead(_options.EncryptConfig!);
                 var serializer = new XmlSerializer(typeof(PdfEncryption));
                 var encryption = (PdfEncryption) serializer.Deserialize(configFileStream);
-                _config.Run.Set(c => c.PdfSettings.Encryption = encryption);
+                _config.Run.Set(c => c.PdfSettings.Encryption, encryption);
             }
             catch (Exception ex)
             {
@@ -507,9 +507,9 @@ public class AutomatedScanning
         }
 
         var compat = PdfCompat.Default;
-        if (_options.PdfCompat != null)
+        if (!string.IsNullOrEmpty(_options.PdfCompat))
         {
-            var t = _options.PdfCompat.Replace(" ", "").Replace("-", "");
+            var t = _options.PdfCompat!.Replace(" ", "").Replace("-", "");
             if (t.EndsWith("a1b", StringComparison.InvariantCultureIgnoreCase))
             {
                 compat = PdfCompat.PdfA1B;
@@ -527,7 +527,7 @@ public class AutomatedScanning
                 compat = PdfCompat.PdfA3U;
             }
         }
-        _config.Run.Set(c => c.PdfSettings.Compat = compat);
+        _config.Run.Set(c => c.PdfSettings.Compat, compat);
 
         int scanIndex = 0;
         _actualOutputPaths = new List<string>();
@@ -545,7 +545,7 @@ public class AutomatedScanning
             };
             int digits = (int) Math.Floor(Math.Log10(_scanList.Count)) + 1;
             string actualPath = _placeholders.Substitute(path, true, scanIndex++, _scanList.Count > 1 ? digits : 0);
-            op.Start(actualPath, _placeholders, fileContents, _pdfSettingsProvider, _ocrParams, email, null);
+            op.Start(actualPath, _placeholders, fileContents, _config.Get(c => c.PdfSettings), _ocrParams, email, null);
             if (!await op.Success)
             {
                 return false;

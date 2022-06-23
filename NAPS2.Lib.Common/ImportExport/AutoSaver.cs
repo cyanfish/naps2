@@ -8,8 +8,6 @@ namespace NAPS2.ImportExport;
 
 public class AutoSaver
 {
-    private readonly IConfigProvider<PdfSettings> _pdfSettingsProvider;
-    private readonly IConfigProvider<ImageSettings> _imageSettingsProvider;
     private readonly ErrorOutput _errorOutput;
     private readonly DialogHelper _dialogHelper;
     private readonly OperationProgress _operationProgress;
@@ -20,10 +18,10 @@ public class AutoSaver
     private readonly TiffHelper _tiffHelper;
     private readonly ImageContext _imageContext;
 
-    public AutoSaver(IConfigProvider<PdfSettings> pdfSettingsProvider, IConfigProvider<ImageSettings> imageSettingsProvider, ErrorOutput errorOutput, DialogHelper dialogHelper, OperationProgress operationProgress, ISaveNotify notify, PdfExporter pdfExporter, IOverwritePrompt overwritePrompt, ScopedConfig config, TiffHelper tiffHelper, ImageContext imageContext)
+    public AutoSaver(ErrorOutput errorOutput, DialogHelper dialogHelper,
+        OperationProgress operationProgress, ISaveNotify notify, PdfExporter pdfExporter,
+        IOverwritePrompt overwritePrompt, ScopedConfig config, TiffHelper tiffHelper, ImageContext imageContext)
     {
-        _pdfSettingsProvider = pdfSettingsProvider;
-        _imageSettingsProvider = imageSettingsProvider;
         _errorOutput = errorOutput;
         _dialogHelper = dialogHelper;
         _operationProgress = operationProgress;
@@ -103,7 +101,8 @@ public class AutoSaver
             var scans = SaveSeparatorHelper.SeparateScans(new[] { images }, settings.Separator).ToList();
             foreach (var imageList in scans)
             {
-                (bool success, string filePath) = await SaveOneFile(settings, placeholders, i++, imageList, scans.Count == 1);
+                (bool success, string filePath) =
+                    await SaveOneFile(settings, placeholders, i++, imageList, scans.Count == 1);
                 if (!success)
                 {
                     ok = false;
@@ -130,7 +129,8 @@ public class AutoSaver
         }
     }
 
-    private async Task<(bool, string?)> SaveOneFile(AutoSaveSettings settings, Placeholders placeholders, int i, List<ProcessedImage> images, bool doNotify)
+    private async Task<(bool, string?)> SaveOneFile(AutoSaveSettings settings, Placeholders placeholders, int i,
+        List<ProcessedImage> images, bool doNotify)
     {
         if (images.Count == 0)
         {
@@ -152,7 +152,7 @@ public class AutoSaver
                 subPath = placeholders.Substitute(subPath, true, 0, 1);
             }
             var op = new SavePdfOperation(_pdfExporter, _overwritePrompt);
-            if (op.Start(subPath, placeholders, images, _pdfSettingsProvider, _config.DefaultOcrParams()))
+            if (op.Start(subPath, placeholders, images, _config.Get(c => c.PdfSettings), _config.DefaultOcrParams()))
             {
                 _operationProgress.ShowProgress(op);
             }
@@ -166,7 +166,7 @@ public class AutoSaver
         else
         {
             var op = new SaveImagesOperation(_imageContext, _overwritePrompt, _tiffHelper);
-            if (op.Start(subPath, placeholders, images, _imageSettingsProvider))
+            if (op.Start(subPath, placeholders, images, _config.Get(c => c.ImageSettings)))
             {
                 _operationProgress.ShowProgress(op);
             }

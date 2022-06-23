@@ -34,7 +34,7 @@ public class SaveImagesOperation : OperationBase
     /// <param name="placeholders"></param>
     /// <param name="images">The collection of images to save.</param>
     /// <param name="batch"></param>
-    public bool Start(string fileName, Placeholders placeholders, IList<ProcessedImage> images, IConfigProvider<ImageSettings> imageSettings, bool batch = false)
+    public bool Start(string fileName, Placeholders placeholders, IList<ProcessedImage> images, ImageSettings imageSettings, bool batch = false)
     {
         Status = new OperationStatus
         {
@@ -54,7 +54,7 @@ public class SaveImagesOperation : OperationBase
                 }
                 ImageFormat format = GetImageFormat(subFileName);
 
-                if (Equals(format, ImageFormat.Tiff) && !imageSettings.Get(c => c.SinglePageTiff))
+                if (Equals(format, ImageFormat.Tiff) && !imageSettings.SinglePageTiff)
                 {
                     if (File.Exists(subFileName))
                     {
@@ -65,7 +65,7 @@ public class SaveImagesOperation : OperationBase
                     }
                     Status.StatusText = string.Format(MiscResources.SavingFormat, Path.GetFileName(subFileName));
                     FirstFileSaved = subFileName;
-                    return await _tiffHelper.SaveMultipage(images, subFileName, imageSettings.Get(c => c.TiffCompression), OnProgress, CancelToken);
+                    return await _tiffHelper.SaveMultipage(images, subFileName, imageSettings.TiffCompression, OnProgress, CancelToken);
                 }
 
                 int i = 0;
@@ -143,16 +143,16 @@ public class SaveImagesOperation : OperationBase
         return true;
     }
 
-    private async Task DoSaveImage(ProcessedImage image, string path, ImageFormat format, IConfigProvider<ImageSettings> imageSettings)
+    private async Task DoSaveImage(ProcessedImage image, string path, ImageFormat format, ImageSettings imageSettings)
     {
         PathHelper.EnsureParentDirExists(path);
         if (Equals(format, ImageFormat.Tiff))
         {
-            await _tiffHelper.SaveMultipage(new List<ProcessedImage> { image }, path, imageSettings.Get(c => c.TiffCompression), (i, j) => { }, CancellationToken.None);
+            await _tiffHelper.SaveMultipage(new List<ProcessedImage> { image }, path, imageSettings.TiffCompression, (i, j) => { }, CancellationToken.None);
         }
         else if (Equals(format, ImageFormat.Jpeg))
         {
-            var quality = imageSettings.Get(c => c.JpegQuality).Clamp(0, 100);
+            var quality = imageSettings.JpegQuality.Clamp(0, 100);
             var encoder = ImageCodecInfo.GetImageEncoders().First(x => x.FormatID == ImageFormat.Jpeg.Guid);
             var encoderParams = new EncoderParameters(1);
             encoderParams.Param[0] = new EncoderParameter(Encoder.Quality, quality);

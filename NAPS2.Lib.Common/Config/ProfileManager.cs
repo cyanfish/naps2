@@ -20,8 +20,8 @@ public class ProfileManager : IProfileManager
     public ProfileManager(string userPath, string systemPath, bool lockSystemProfiles, bool lockUnspecifiedDevices, bool noUserProfiles)
     {
         _userPathExisted = File.Exists(userPath);
-        _userScope = ConfigScope.File(userPath, () => new ProfileConfig(), _serializer, ConfigScopeMode.ReadWrite);
-        _appScope = ConfigScope.File(systemPath, () => new ProfileConfig(), _serializer, ConfigScopeMode.ReadOnly);
+        _userScope = ConfigScope.File(userPath, _serializer, ConfigScopeMode.ReadWrite);
+        _appScope = ConfigScope.File(systemPath, _serializer, ConfigScopeMode.ReadOnly);
         _lockSystemProfiles = lockSystemProfiles;
         _lockUnspecifiedDevices = lockUnspecifiedDevices;
         _noUserProfiles = noUserProfiles;
@@ -100,15 +100,15 @@ public class ProfileManager : IProfileManager
     {
         lock (this)
         {
-            _userScope.Set(c => c.Profiles = ImmutableList.CreateRange(_profiles));
+            _userScope.Set(c => c.Profiles, ImmutableList.CreateRange(_profiles));
         }
         ProfilesUpdated?.Invoke(this, EventArgs.Empty);
     }
 
     private List<ScanProfile> GetProfiles()
     {
-        var userProfiles = (_userScope.Get(c => c.Profiles) ?? ImmutableList<ScanProfile>.Empty).ToList();
-        var systemProfiles = (_appScope.Get(c => c.Profiles) ?? ImmutableList<ScanProfile>.Empty).ToList();
+        var userProfiles = _userScope.GetOr(c => c.Profiles, ImmutableList<ScanProfile>.Empty).ToList();
+        var systemProfiles = _appScope.GetOr(c => c.Profiles,ImmutableList<ScanProfile>.Empty).ToList();
         if (_noUserProfiles && systemProfiles.Count > 0)
         {
             // Configured by administrator to only use system profiles

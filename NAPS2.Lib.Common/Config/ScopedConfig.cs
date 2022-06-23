@@ -1,4 +1,6 @@
-﻿namespace NAPS2.Config;
+﻿using System.Linq.Expressions;
+
+namespace NAPS2.Config;
 
 /// <summary>
 /// Represents the full NAPS2 configuration. Configuration sources are divided into several scopes:<br/>
@@ -31,25 +33,25 @@
 // TODO: We would also need to get rid of SetAll, and consider on a case-by-case basis how to handle them.
 // 
 // TODO: And we definitely want some good tests for this.
-public class ScopedConfig : IConfigProvider<CommonConfig>
+public class ScopedConfig
 {
     public static ScopedConfig Stub() =>
-        new ScopedConfig(
-            ConfigScope.Object(new CommonConfig()),
-            ConfigScope.Object(new CommonConfig()),
-            ConfigScope.Object(new CommonConfig()),
-            ConfigScope.Object(new CommonConfig()),
-            ConfigScope.Object(InternalDefaults.GetCommonConfig()));
+        new(
+            ConfigScope.Memory<CommonConfig>(),
+            ConfigScope.Memory<CommonConfig>(),
+            ConfigScope.Memory<CommonConfig>(),
+            ConfigScope.Memory<CommonConfig>(),
+            ConfigScope.Defaults(InternalDefaults.GetCommonConfig()));
 
     private readonly ConfigScope<CommonConfig>[] _scopes;
 
     public ScopedConfig(string appConfigPath, string userConfigPath)
     {
-        AppLocked = ConfigScope.File(appConfigPath, CommonConfig.Create, new ConfigSerializer(ConfigReadMode.LockedOnly), ConfigScopeMode.ReadOnly);
-        Run = ConfigScope.Object(new CommonConfig(), ConfigScopeMode.ReadWrite);
-        User = ConfigScope.File(userConfigPath, CommonConfig.Create, new ConfigSerializer(ConfigReadMode.All), ConfigScopeMode.ReadWrite);
-        AppDefault = ConfigScope.File(appConfigPath, CommonConfig.Create, new ConfigSerializer(ConfigReadMode.DefaultOnly), ConfigScopeMode.ReadOnly);
-        InternalDefault = ConfigScope.Object(InternalDefaults.GetCommonConfig(), ConfigScopeMode.ReadOnly);
+        AppLocked = ConfigScope.File(appConfigPath, new ConfigSerializer(ConfigReadMode.LockedOnly), ConfigScopeMode.ReadOnly);
+        Run = ConfigScope.Memory<CommonConfig>();
+        User = ConfigScope.File(userConfigPath, new ConfigSerializer(ConfigReadMode.All), ConfigScopeMode.ReadWrite);
+        AppDefault = ConfigScope.File(appConfigPath, new ConfigSerializer(ConfigReadMode.DefaultOnly), ConfigScopeMode.ReadOnly);
+        InternalDefault = ConfigScope.Defaults(InternalDefaults.GetCommonConfig());
 
         _scopes = new[] { AppLocked, Run, User, AppDefault, InternalDefault };
     }
@@ -66,26 +68,11 @@ public class ScopedConfig : IConfigProvider<CommonConfig>
         _scopes = new[] { AppLocked, Run, User, AppDefault, InternalDefault };
     }
 
-    public T Get<T>(Func<CommonConfig, T?> func) where T : struct
+    public T Get<T>(Expression<Func<CommonConfig, T>> accessor)
     {
         foreach (var scope in _scopes)
         {
-            var nullable = scope.Get(func);
-            if (nullable.HasValue)
-            {
-                return nullable.Value;
-            }
-        }
-        // This shouldn't happen - the last config scope should always define a default value for every property.
-        throw new Exception("Config value not defined.");
-    }
-
-    public T Get<T>(Func<CommonConfig, T?> func) where T : class
-    {
-        foreach (var scope in _scopes)
-        {
-            var value = scope.Get(func);
-            if (value != null)
+            if (scope.TryGet(accessor, out var value))
             {
                 return value;
             }

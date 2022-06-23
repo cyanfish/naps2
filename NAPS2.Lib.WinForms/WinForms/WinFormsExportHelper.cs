@@ -3,15 +3,11 @@ using NAPS2.ImportExport;
 using NAPS2.ImportExport.Email;
 using NAPS2.ImportExport.Images;
 using NAPS2.ImportExport.Pdf;
-using NAPS2.Ocr;
 
 namespace NAPS2.WinForms;
 
 public class WinFormsExportHelper
 {
-    private readonly IConfigProvider<PdfSettings> _pdfSettingsProvider;
-    private readonly IConfigProvider<ImageSettings> _imageSettingsProvider;
-    private readonly IConfigProvider<EmailSettings> _emailSettingsProvider;
     private readonly DialogHelper _dialogHelper;
     private readonly IOperationFactory _operationFactory;
     private readonly IFormFactory _formFactory;
@@ -19,11 +15,8 @@ public class WinFormsExportHelper
     private readonly ScopedConfig _config;
     private readonly UiImageList _uiImageList;
 
-    public WinFormsExportHelper(IConfigProvider<PdfSettings> pdfSettingsProvider, IConfigProvider<ImageSettings> imageSettingsProvider, IConfigProvider<EmailSettings> emailSettingsProvider, DialogHelper dialogHelper, IOperationFactory operationFactory, IFormFactory formFactory, OperationProgress operationProgress, ScopedConfig config, UiImageList uiImageList)
+    public WinFormsExportHelper(DialogHelper dialogHelper, IOperationFactory operationFactory, IFormFactory formFactory, OperationProgress operationProgress, ScopedConfig config, UiImageList uiImageList)
     {
-        _pdfSettingsProvider = pdfSettingsProvider;
-        _imageSettingsProvider = imageSettingsProvider;
-        _emailSettingsProvider = emailSettingsProvider;
         _dialogHelper = dialogHelper;
         _operationFactory = operationFactory;
         _formFactory = formFactory;
@@ -38,8 +31,8 @@ public class WinFormsExportHelper
         {
             string savePath;
 
-            var defaultFileName = _pdfSettingsProvider.Get(c => c.DefaultFileName);
-            if (_pdfSettingsProvider.Get(c => c.SkipSavePrompt) && Path.IsPathRooted(defaultFileName))
+            var defaultFileName = _config.Get(c => c.PdfSettings.DefaultFileName);
+            if (_config.Get(c => c.PdfSettings.SkipSavePrompt) && Path.IsPathRooted(defaultFileName))
             {
                 savePath = defaultFileName;
             }
@@ -67,7 +60,7 @@ public class WinFormsExportHelper
     {
         var op = _operationFactory.Create<SavePdfOperation>();
 
-        if (op.Start(filename, Placeholders.All.WithDate(DateTime.Now), images, _pdfSettingsProvider, _config.DefaultOcrParams(), email, emailMessage))
+        if (op.Start(filename, Placeholders.All.WithDate(DateTime.Now), images, _config.Get(c => c.PdfSettings), _config.DefaultOcrParams(), email, emailMessage))
         {
             _operationProgress.ShowProgress(op);
         }
@@ -80,13 +73,14 @@ public class WinFormsExportHelper
         {
             string savePath;
 
-            if (_imageSettingsProvider.Get(c => c.SkipSavePrompt) && Path.IsPathRooted(_imageSettingsProvider.Get(c => c.DefaultFileName)))
+            if (_config.Get(c => c.ImageSettings.SkipSavePrompt) && Path.IsPathRooted(_config.Get(c => c.ImageSettings.DefaultFileName)))
             {
-                savePath = _imageSettingsProvider.Get(c => c.DefaultFileName);
+                savePath = _config.Get(c => c.ImageSettings.DefaultFileName)!;
             }
             else
             {
-                if (!_dialogHelper.PromptToSaveImage(_imageSettingsProvider.Get(c => c.DefaultFileName), out savePath))
+                // TODO: Can this setting be null?
+                if (!_dialogHelper.PromptToSaveImage(_config.Get(c => c.ImageSettings.DefaultFileName), out savePath))
                 {
                     return false;
                 }
@@ -94,7 +88,7 @@ public class WinFormsExportHelper
 
             var op = _operationFactory.Create<SaveImagesOperation>();
             var state = _uiImageList.CurrentState;
-            if (op.Start(savePath, Placeholders.All.WithDate(DateTime.Now), images, _imageSettingsProvider))
+            if (op.Start(savePath, Placeholders.All.WithDate(DateTime.Now), images, _config.Get(c => c.ImageSettings)))
             {
                 _operationProgress.ShowProgress(op);
             }
@@ -115,6 +109,7 @@ public class WinFormsExportHelper
             return false;
         }
 
+        // TODO: What?
         if (_config == null)
         {
             // First run; prompt for a 
@@ -126,7 +121,7 @@ public class WinFormsExportHelper
         }
 
         var invalidChars = new HashSet<char>(Path.GetInvalidFileNameChars());
-        var attachmentName = new string(_emailSettingsProvider.Get(c => c.AttachmentName).Where(x => !invalidChars.Contains(x)).ToArray());
+        var attachmentName = new string(_config.Get(c => c.EmailSettings.AttachmentName).Where(x => !invalidChars.Contains(x)).ToArray());
         if (string.IsNullOrEmpty(attachmentName))
         {
             attachmentName = "Scan.pdf";

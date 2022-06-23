@@ -196,7 +196,7 @@ public class FormBase : Form, IInvoker, IFormBase
         {
             var formStates = Config.Get(c => c.FormStates);
             formStates = formStates.RemoveAll(fs => fs.Name == Name).Add(_formState);
-            Config.User.Set(c => c.FormStates = formStates);
+            Config.User.Set(c => c.FormStates, formStates);
         }
     }
 

@@ -36,8 +36,7 @@ public class PdfSharpExporter : PdfExporter
     {
         return await Task.Run(async () =>
         {
-            // TODO: Non-nullable input?
-            var compat = exportParams.Compat ?? PdfCompat.Default;
+            var compat = exportParams.Compat;
 
             var document = new PdfDocument();
             // TODO: Defaults for API use
@@ -62,19 +61,18 @@ public class PdfSharpExporter : PdfExporter
                     document.SecuritySettings.UserPassword = exportParams.Encryption.UserPassword;
                 }
 
-                // TODO: Maybe have a non-nullable record for this
                 document.SecuritySettings.PermitAccessibilityExtractContent =
-                    exportParams.Encryption.AllowContentCopyingForAccessibility ?? true;
-                document.SecuritySettings.PermitAnnotations = exportParams.Encryption.AllowAnnotations ?? true;
+                    exportParams.Encryption.AllowContentCopyingForAccessibility;
+                document.SecuritySettings.PermitAnnotations = exportParams.Encryption.AllowAnnotations;
                 document.SecuritySettings.PermitAssembleDocument =
-                    exportParams.Encryption.AllowDocumentAssembly ?? true;
-                document.SecuritySettings.PermitExtractContent = exportParams.Encryption.AllowContentCopying ?? true;
-                document.SecuritySettings.PermitFormsFill = exportParams.Encryption.AllowFormFilling ?? true;
+                    exportParams.Encryption.AllowDocumentAssembly;
+                document.SecuritySettings.PermitExtractContent = exportParams.Encryption.AllowContentCopying;
+                document.SecuritySettings.PermitFormsFill = exportParams.Encryption.AllowFormFilling;
                 document.SecuritySettings.PermitFullQualityPrint =
-                    exportParams.Encryption.AllowFullQualityPrinting ?? true;
+                    exportParams.Encryption.AllowFullQualityPrinting;
                 document.SecuritySettings.PermitModifyDocument =
-                    exportParams.Encryption.AllowDocumentModification ?? true;
-                document.SecuritySettings.PermitPrint = exportParams.Encryption.AllowPrinting ?? true;
+                    exportParams.Encryption.AllowDocumentModification;
+                document.SecuritySettings.PermitPrint = exportParams.Encryption.AllowPrinting;
             }
 
             IOcrEngine ocrEngine = null;

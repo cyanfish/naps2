@@ -16,9 +16,5 @@ public static class ConfigExtensions
             config.Get(c => c.OcrTimeoutInSeconds));
     }
 
-    public static TransactionConfigScope<T> BeginTransaction<T>(this ConfigScope<T> scope) where T : new() => 
-        new TransactionConfigScope<T>(scope, () => new T());
-
-    public static IConfigProvider<T> Child<TParent, T>(this IConfigProvider<TParent> parentProvider, Func<TParent, T> childSelector) =>
-        new ChildConfigProvider<TParent,T>(parentProvider, childSelector);
+    public static TransactionConfigScope<T> BeginTransaction<T>(this ConfigScope<T> scope) => new(scope);
 }

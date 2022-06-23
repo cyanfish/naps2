@@ -14,29 +14,26 @@ public class BatchScanPerformer : IBatchScanPerformer
     private readonly IScanPerformer _scanPerformer;
     private readonly PdfExporter _pdfExporter;
     private readonly IOperationFactory _operationFactory;
-    private readonly IConfigProvider<PdfSettings> _pdfSettingsProvider;
     private readonly IFormFactory _formFactory;
     private readonly ScopedConfig _config;
     private readonly IProfileManager _profileManager;
 
     public BatchScanPerformer(IScanPerformer scanPerformer, PdfExporter pdfExporter, IOperationFactory operationFactory,
-        IConfigProvider<PdfSettings> pdfSettingsProvider, IFormFactory formFactory, ScopedConfig config,
-        IProfileManager profileManager)
+        IFormFactory formFactory, ScopedConfig config, IProfileManager profileManager)
     {
         _scanPerformer = scanPerformer;
         _pdfExporter = pdfExporter;
         _operationFactory = operationFactory;
-        _pdfSettingsProvider = pdfSettingsProvider;
         _formFactory = formFactory;
         _config = config;
         _profileManager = profileManager;
     }
 
-    public async Task PerformBatchScan(IConfigProvider<BatchSettings> settings, FormBase batchForm,
+    public async Task PerformBatchScan(BatchSettings settings, FormBase batchForm,
         Action<ProcessedImage> imageCallback, Action<string> progressCallback, CancellationToken cancelToken)
     {
-        var state = new BatchState(_scanPerformer, _pdfExporter, _operationFactory, _pdfSettingsProvider, _formFactory,
-            _config, _profileManager)
+        var state = new BatchState(_scanPerformer, _pdfExporter, _operationFactory, _formFactory, _config,
+            _profileManager)
         {
             Settings = settings,
             ProgressCallback = progressCallback,
@@ -52,7 +49,6 @@ public class BatchScanPerformer : IBatchScanPerformer
         private readonly IScanPerformer _scanPerformer;
         private readonly PdfExporter _pdfExporter;
         private readonly IOperationFactory _operationFactory;
-        private readonly IConfigProvider<PdfSettings> _pdfSettingsProvider;
         private readonly IFormFactory _formFactory;
         private readonly ScopedConfig _config;
         private readonly IProfileManager _profileManager;
@@ -62,19 +58,17 @@ public class BatchScanPerformer : IBatchScanPerformer
         private List<List<ProcessedImage>> _scans;
 
         public BatchState(IScanPerformer scanPerformer, PdfExporter pdfExporter, IOperationFactory operationFactory,
-            IConfigProvider<PdfSettings> pdfSettingsProvider, IFormFactory formFactory, ScopedConfig config,
-            IProfileManager profileManager)
+            IFormFactory formFactory, ScopedConfig config, IProfileManager profileManager)
         {
             _scanPerformer = scanPerformer;
             _pdfExporter = pdfExporter;
             _operationFactory = operationFactory;
-            _pdfSettingsProvider = pdfSettingsProvider;
             _formFactory = formFactory;
             _config = config;
             _profileManager = profileManager;
         }
 
-        public IConfigProvider<BatchSettings> Settings { get; set; }
+        public BatchSettings Settings { get; set; }
 
         public Action<string> ProgressCallback { get; set; }
 
@@ -86,14 +80,14 @@ public class BatchScanPerformer : IBatchScanPerformer
 
         public async Task Do()
         {
-            _profile = _profileManager.Profiles.First(x => x.DisplayName == Settings.Get(c => c.ProfileDisplayName));
+            _profile = _profileManager.Profiles.First(x => x.DisplayName == Settings.ProfileDisplayName);
             _scanParams = new ScanParams
             {
-                DetectPatchT = Settings.Get(c => c.OutputType) == BatchOutputType.MultipleFiles &&
-                               Settings.Get(c => c.SaveSeparator) == SaveSeparator.PatchT,
+                DetectPatchT = Settings.OutputType == BatchOutputType.MultipleFiles &&
+                               Settings.SaveSeparator == SaveSeparator.PatchT,
                 NoUI = true,
                 NoAutoSave = _config.Get(c => c.DisableAutoSave),
-                DoOcr = Settings.Get(c => c.OutputType) == BatchOutputType.Load
+                DoOcr = Settings.OutputType == BatchOutputType.Load
                     ? _config.Get(c => c.EnableOcr) && _config.Get(c => c.OcrAfterScanning) // User configured
                     : _config.Get(c => c.EnableOcr) && GetSavePathExtension().ToLower() == ".pdf", // Fully automated
                 OcrParams = _config.DefaultOcrParams(),
@@ -134,18 +128,18 @@ public class BatchScanPerformer : IBatchScanPerformer
             {
                 _scans = new List<List<ProcessedImage>>();
 
-                if (Settings.Get(c => c.ScanType) == BatchScanType.Single)
+                if (Settings.ScanType == BatchScanType.Single)
                 {
                     await InputOneScan(-1);
                 }
-                else if (Settings.Get(c => c.ScanType) == BatchScanType.MultipleWithDelay)
+                else if (Settings.ScanType == BatchScanType.MultipleWithDelay)
                 {
-                    for (int i = 0; i < Settings.Get(c => c.ScanCount); i++)
+                    for (int i = 0; i < Settings.ScanCount; i++)
                     {
                         ProgressCallback(string.Format(MiscResources.BatchStatusWaitingForScan, i + 1));
                         if (i != 0)
                         {
-                            ThreadSleepWithCancel(TimeSpan.FromSeconds(Settings.Get(c => c.ScanIntervalSeconds)),
+                            ThreadSleepWithCancel(TimeSpan.FromSeconds(Settings.ScanIntervalSeconds),
                                 CancelToken);
                             CancelToken.ThrowIfCancellationRequested();
                         }
@@ -156,7 +150,7 @@ public class BatchScanPerformer : IBatchScanPerformer
                         }
                     }
                 }
-                else if (Settings.Get(c => c.ScanType) == BatchScanType.MultipleWithPrompt)
+                else if (Settings.ScanType == BatchScanType.MultipleWithPrompt)
                 {
                     int i = 0;
                     do
@@ -230,14 +224,14 @@ public class BatchScanPerformer : IBatchScanPerformer
             var placeholders = Placeholders.All.WithDate(DateTime.Now);
             var allImages = _scans.SelectMany(x => x).ToList();
 
-            if (Settings.Get(c => c.OutputType) == BatchOutputType.Load)
+            if (Settings.OutputType == BatchOutputType.Load)
             {
                 foreach (var image in allImages)
                 {
                     LoadImageCallback(image);
                 }
             }
-            else if (Settings.Get(c => c.OutputType) == BatchOutputType.SingleFile)
+            else if (Settings.OutputType == BatchOutputType.SingleFile)
             {
                 await Save(placeholders, 0, allImages);
                 foreach (var img in allImages)
@@ -245,10 +239,10 @@ public class BatchScanPerformer : IBatchScanPerformer
                     img.Dispose();
                 }
             }
-            else if (Settings.Get(c => c.OutputType) == BatchOutputType.MultipleFiles)
+            else if (Settings.OutputType == BatchOutputType.MultipleFiles)
             {
                 int i = 0;
-                foreach (var imageList in SaveSeparatorHelper.SeparateScans(_scans, Settings.Get(c => c.SaveSeparator)))
+                foreach (var imageList in SaveSeparatorHelper.SeparateScans(_scans, Settings.SaveSeparator))
                 {
                     await Save(placeholders, i++, imageList);
                     foreach (var img in imageList)
@@ -265,7 +259,7 @@ public class BatchScanPerformer : IBatchScanPerformer
             {
                 return;
             }
-            var subPath = placeholders.Substitute(Settings.Get(c => c.SavePath), true, i);
+            var subPath = placeholders.Substitute(Settings.SavePath, true, i);
             if (GetSavePathExtension().ToLower() == ".pdf")
             {
                 if (File.Exists(subPath))
@@ -276,8 +270,10 @@ public class BatchScanPerformer : IBatchScanPerformer
                 try
                 {
                     // TODO: This is broken due to not accessing the child fields directly
-                    var exportParams = new PdfExportParams(_pdfSettingsProvider.Get(c => c.Metadata),
-                        _pdfSettingsProvider.Get(c => c.Encryption), _pdfSettingsProvider.Get(c => c.Compat));
+                    var exportParams = new PdfExportParams(
+                        _config.Get(c => c.PdfSettings.Metadata),
+                        _config.Get(c => c.PdfSettings.Encryption),
+                        _config.Get(c => c.PdfSettings.Compat));
                     await _pdfExporter.Export(subPath, images, exportParams, _config.DefaultOcrParams(),
                         (j, k) => { }, CancelToken);
                 }
@@ -292,18 +288,18 @@ public class BatchScanPerformer : IBatchScanPerformer
             else
             {
                 var op = _operationFactory.Create<SaveImagesOperation>();
-                op.Start(subPath, placeholders, images, _config.Child(c => c.ImageSettings), true);
+                op.Start(subPath, placeholders, images, _config.Get(c => c.ImageSettings), true);
                 await op.Success;
             }
         }
 
         private string GetSavePathExtension()
         {
-            if (string.IsNullOrEmpty(Settings.Get(c => c.SavePath)))
+            if (string.IsNullOrEmpty(Settings.SavePath))
             {
                 throw new ArgumentException();
             }
-            string extension = Path.GetExtension(Settings.Get(c => c.SavePath));
+            string extension = Path.GetExtension(Settings.SavePath);
             Debug.Assert(extension != null);
             return extension;
         }

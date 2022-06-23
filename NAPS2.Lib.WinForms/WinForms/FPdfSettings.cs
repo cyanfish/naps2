@@ -67,7 +67,7 @@ public partial class FPdfSettings : FormBase
             lblUserPassword.Enabled = lblOwnerPassword.Enabled = encrypt;
         clbPerms.Enabled = encrypt;
 
-        cmbCompat.Enabled = Config.AppLocked.Get(c => c.PdfSettings.Compat) == null;
+        cmbCompat.Enabled = !Config.AppLocked.TryGet(c => c.PdfSettings.Compat, out _);
     }
 
     private void btnOK_Click(object sender, EventArgs e)
@@ -100,14 +100,9 @@ public partial class FPdfSettings : FormBase
             Compat = (PdfCompat)cmbCompat.SelectedIndex
         };
 
-        // Clear old run scope
-        _runTransact.Set(c => c.PdfSettings = new PdfSettings());
-
+        _runTransact.Remove(c => c.PdfSettings);
         var scope = cbRememberSettings.Checked ? _userTransact : _runTransact;
-        scope.SetAll(new CommonConfig
-        {
-            PdfSettings = pdfSettings
-        });
+        scope.Set(c => c.PdfSettings, pdfSettings);
 
         _userTransact.Commit();
         _runTransact.Commit();
@@ -122,9 +117,9 @@ public partial class FPdfSettings : FormBase
 
     private void btnRestoreDefaults_Click(object sender, EventArgs e)
     {
-        _runTransact.Set(c => c.PdfSettings = new PdfSettings());
-        _userTransact.Set(c => c.PdfSettings = new PdfSettings());
-        _userTransact.Set(c => c.RememberPdfSettings = false);
+        _runTransact.Remove(c => c.PdfSettings);
+        _userTransact.Remove(c => c.PdfSettings);
+        _userTransact.Set(c => c.RememberPdfSettings, false);
         UpdateValues();
         UpdateEnabled();
     }

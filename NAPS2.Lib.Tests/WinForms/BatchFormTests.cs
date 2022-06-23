@@ -15,10 +15,7 @@ public class BatchFormTests : ContextualTexts
     public void LoadUserConfig()
     {
         var ctx = CreateForm();
-        ctx.Config.User.SetAll(new CommonConfig
-        {
-            BatchSettings =
-            {
+        ctx.Config.User.Set(c => c.BatchSettings, new BatchSettings {
                 OutputType = BatchOutputType.MultipleFiles,
                 SaveSeparator = SaveSeparator.PatchT,
                 ScanType = BatchScanType.MultipleWithDelay,
@@ -26,7 +23,6 @@ public class BatchFormTests : ContextualTexts
                 ScanIntervalSeconds = 2.3,
                 ScanCount = 2,
                 ProfileDisplayName = "test_name"
-            }
         });
         _profileManager.Mutate(new ListMutation<ScanProfile>.Append(new ScanProfile
         {

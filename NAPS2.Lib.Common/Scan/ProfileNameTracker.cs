@@ -22,7 +22,7 @@ public class ProfileNameTracker
         }
         if (_config.Get(c => c.BatchSettings.ProfileDisplayName) == oldName)
         {
-            _config.User.Set(c => c.BatchSettings.ProfileDisplayName = newName);
+            _config.User.Set(c => c.BatchSettings.ProfileDisplayName, newName);
         }
     }
 
@@ -34,7 +34,7 @@ public class ProfileNameTracker
         }
         if (_config.Get(c => c.BatchSettings.ProfileDisplayName) == name)
         {
-            _config.User.Set(c => c.BatchSettings.ProfileDisplayName = "");
+            _config.User.Set(c => c.BatchSettings.ProfileDisplayName,  "");
         }
     }
 }

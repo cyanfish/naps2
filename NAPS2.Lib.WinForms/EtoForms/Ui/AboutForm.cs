@@ -93,11 +93,10 @@ public class AboutForm : EtoDialogBase
                 }
                 else
                 {
-                    Config.User.SetAll(new CommonConfig
-                    {
-                        HasCheckedForUpdates = true,
-                        LastUpdateCheckDate = DateTime.Now
-                    });
+                    var transact = Config.User.BeginTransaction();
+                    transact.Set(c => c.HasCheckedForUpdates, true);
+                    transact.Set(c => c.LastUpdateCheckDate, DateTime.Now);
+                    transact.Commit();
                 }
                 _update = task.Result;
                 _hasCheckedForUpdates = true;
@@ -139,7 +138,7 @@ public class AboutForm : EtoDialogBase
 
     private void CheckForUpdatesChanged(object sender, EventArgs e)
     {
-        Config.User.Set(c => c.CheckForUpdates = _checkForUpdates.Checked);
+        Config.User.Set(c => c.CheckForUpdates, _checkForUpdates.Checked);
         UpdateControls();
         DoUpdateCheck();
     }

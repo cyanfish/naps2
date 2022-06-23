@@ -282,7 +282,7 @@ namespace NAPS2.WinForms
         private void SetCulture(string cultureId)
         {
             SaveToolStripLocation();
-            Config.User.Set(c => c.Culture = cultureId);
+            Config.User.Set(c => c.Culture, cultureId);
             _cultureInitializer.InitCulture();
 
             // Update localized values
@@ -350,22 +350,20 @@ namespace NAPS2.WinForms
             // Show a donation prompt after a month of use
             if (!Config.Get(c => c.HasBeenRun))
             {
-                Config.User.SetAll(new CommonConfig
-                {
-                    HasBeenRun = true,
-                    FirstRunDate = DateTime.Now
-                });
+                var transact = Config.User.BeginTransaction();
+                transact.Set(c => c.HasBeenRun, true);
+                transact.Set(c => c.FirstRunDate, DateTime.Now);
+                transact.Commit();
             }
 #if !INSTALLER_MSI
             else if (!Config.Get(c => c.HiddenButtons).HasFlag(ToolbarButtons.Donate) &&
                      !Config.Get(c => c.HasBeenPromptedForDonation) &&
                      DateTime.Now - Config.Get(c => c.FirstRunDate) > TimeSpan.FromDays(30))
             {
-                Config.User.SetAll(new CommonConfig
-                {
-                    HasBeenPromptedForDonation = true,
-                    LastDonatePromptDate = DateTime.Now
-                });
+                var transact = Config.User.BeginTransaction();
+                transact.Set(c => c.HasBeenPromptedForDonation, true);
+                transact.Set(c => c.LastDonatePromptDate, DateTime.Now);
+                transact.Commit();
                 _notify.DonatePrompt();
             }
 
@@ -381,11 +379,10 @@ namespace NAPS2.WinForms
                     }
                     else
                     {
-                        Config.User.SetAll(new CommonConfig
-                        {
-                            HasCheckedForUpdates = true,
-                            LastUpdateCheckDate = DateTime.Now
-                        });
+                        var transact = Config.User.BeginTransaction();
+                        transact.Set(c => c.HasCheckedForUpdates, true);
+                        transact.Set(c => c.LastUpdateCheckDate, DateTime.Now);
+                        transact.Commit();
                     }
                     var update = task.Result;
                     if (update != null)
@@ -793,7 +790,7 @@ namespace NAPS2.WinForms
 
         private void SaveToolStripLocation()
         {
-            Config.User.Set(c => c.DesktopToolStripDock = tStrip.Parent.Dock);
+            Config.User.Set(c => c.DesktopToolStripDock, tStrip.Parent.Dock);
         }
 
         private void LoadToolStripLocation()
@@ -1471,7 +1468,7 @@ namespace NAPS2.WinForms
             int thumbnailSize = Config.Get(c => c.ThumbnailSize);
             thumbnailSize = (int)ThumbnailSizes.StepNumberToSize(ThumbnailSizes.SizeToStepNumber(thumbnailSize) + step);
             thumbnailSize = Math.Max(Math.Min(thumbnailSize, ThumbnailSizes.MAX_SIZE), ThumbnailSizes.MIN_SIZE);
-            Config.User.Set(c => c.ThumbnailSize = thumbnailSize);
+            Config.User.Set(c => c.ThumbnailSize, thumbnailSize);
             ResizeThumbnails(thumbnailSize);
         }
 

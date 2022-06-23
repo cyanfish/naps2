@@ -97,7 +97,7 @@ public class FormStateController : IFormStateController
         {
             var formStates = _config.Get(c => c.FormStates);
             formStates = formStates.RemoveAll(fs => fs.Name == FormName).Add(_formState);
-            _config.User.Set(c => c.FormStates = formStates);
+            _config.User.Set(c => c.FormStates, formStates);
         }
     }
 }

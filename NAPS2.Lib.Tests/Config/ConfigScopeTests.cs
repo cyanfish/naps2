@@ -6,26 +6,6 @@ namespace NAPS2.Lib.Tests.Config;
 public class ConfigScopeTests : ContextualTexts
 {
     [Fact]
-    public void StubProvider()
-    {
-        var provider = new StubConfigProvider<CommonConfig>(new CommonConfig
-        {
-            Culture = "fr",
-            CheckForUpdates = true,
-            PdfSettings =
-            {
-                DefaultFileName = "name"
-            }
-        });
-        Assert.Equal("fr", provider.Get(c => c.Culture));
-        Assert.True(provider.Get(c => c.CheckForUpdates));
-        Assert.Equal("name", provider.Get(c => c.PdfSettings.DefaultFileName));
-
-        Assert.Null(provider.Get(c => c.ComponentsPath));
-        Assert.False(provider.Get(c => c.DisableAutoSave));
-    }
-
-    [Fact]
     public void InternalDefaultsNotNullProps()
     {
         var config = InternalDefaults.GetCommonConfig();
@@ -70,47 +50,47 @@ public class ConfigScopeTests : ContextualTexts
     public void FileScope()
     {
         var configPath = Path.Combine(FolderPath, "config.xml");
-        var scope = new FileConfigScope<CommonConfig>(configPath, CommonConfig.Create, new ConfigSerializer(ConfigReadMode.All), ConfigScopeMode.ReadWrite);
+        var scope = new FileConfigScope<CommonConfig>(configPath, new ConfigSerializer(ConfigReadMode.All), ConfigScopeMode.ReadWrite);
             
         // Nothing should be created yet
         Assert.False(File.Exists(configPath));
 
         // Reading should get the default value
-        Assert.Null(scope.Get(c => c.Culture));
+        Assert.False(scope.TryGet(c => c.Culture, out _));
 
         // Writing should save to the file
-        scope.Set(c => c.Culture = "fr");
+        scope.Set(c => c.Culture, "fr");
         Assert.True(File.Exists(configPath));
         var doc = XDocument.Load(configPath);
         var docValue = doc.Descendants("Culture").Single().Value;
         Assert.Equal("fr", docValue);
 
         // Reading should read back the value
-        Assert.Equal("fr", scope.Get(c => c.Culture));
+        Assert.Equal("fr", scope.GetOrDefault(c => c.Culture));
 
         // Setting a different value shouldn't affect the first
-        scope.Set(c => c.CheckForUpdates = true);
-        Assert.True(scope.Get(c => c.CheckForUpdates));
-        Assert.Equal("fr", scope.Get(c => c.Culture));
+        scope.Set(c => c.CheckForUpdates, true);
+        Assert.True(scope.GetOrDefault(c => c.CheckForUpdates));
+        Assert.Equal("fr", scope.GetOrDefault(c => c.Culture));
 
         // Lock the file
         using (var stream = new FileStream(configPath, FileMode.Open, FileAccess.ReadWrite, FileShare.None))
         {
             // If changes can't be persisted, they should still be saved in memory
-            scope.Set(c => c.Culture = "de");
-            scope.Set(c => c.ThumbnailSize = 64);
-            Assert.Equal("de", scope.Get(c => c.Culture));
-            Assert.Equal(64, scope.Get(c => c.ThumbnailSize));
-            Assert.True(scope.Get(c => c.CheckForUpdates));
+            scope.Set(c => c.Culture, "de");
+            scope.Set(c => c.ThumbnailSize, 64);
+            Assert.Equal("de", scope.GetOrDefault(c => c.Culture));
+            Assert.Equal(64, scope.GetOrDefault(c => c.ThumbnailSize));
+            Assert.True(scope.GetOrDefault(c => c.CheckForUpdates));
 
             // Now directly modify the file
-            Assert.Null(scope.Get(c => c.DisableAutoSave));
+            Assert.False(scope.TryGet(c => c.DisableAutoSave, out _));
             DirectSetValue(stream, "DisableAutoSave", "true");
-            Assert.Null(scope.Get(c => c.DisableAutoSave));
+            Assert.False(scope.TryGet(c => c.DisableAutoSave, out _));
         }
 
         // Now that the file is unlocked, it should read the correct value
-        Assert.True(scope.Get(c => c.DisableAutoSave));
+        Assert.True(scope.GetOrDefault(c => c.DisableAutoSave));
 
         // Lock again
         using (var stream = new FileStream(configPath, FileMode.Open, FileAccess.ReadWrite, FileShare.None))
@@ -119,14 +99,14 @@ public class ConfigScopeTests : ContextualTexts
             doc = XDocument.Load(stream);
             docValue = doc.Descendants("Culture").Single().Value;
             Assert.Equal("fr", docValue);
-            Assert.Equal("de", scope.Get(c => c.Culture));
+            Assert.Equal("de", scope.GetOrDefault(c => c.Culture));
 
             // Directly modify the file again
             DirectSetValue(stream, "ComponentsPath", "test_path");
         }
 
         // Now saving anything should persist all our changes without affecting the concurrent changes
-        scope.Set(c => c.NoUserProfiles = false);
+        scope.Set(c => c.NoUserProfiles, false);
         doc = XDocument.Load(configPath);
         Assert.Equal("de", doc.Descendants("Culture").Single().Value);
         Assert.Equal("64", doc.Descendants("ThumbnailSize").Single().Value);

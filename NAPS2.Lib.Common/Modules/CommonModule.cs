@@ -50,12 +50,6 @@ public class CommonModule : NinjectModule
         Bind<ScopedConfig>().ToMethod(_ =>
             new ScopedConfig(Path.Combine(Paths.Executable, "appsettings.xml"),
                 Path.Combine(Paths.AppData, "config.xml"))).InSingletonScope();
-        Bind<IConfigProvider<PdfSettings>>().ToMethod(ctx => ctx.Kernel.Get<ScopedConfig>().Child(c => c.PdfSettings));
-        Bind<IConfigProvider<ImageSettings>>()
-            .ToMethod(ctx => ctx.Kernel.Get<ScopedConfig>().Child(c => c.ImageSettings));
-        Bind<IConfigProvider<EmailSettings>>()
-            .ToMethod(ctx => ctx.Kernel.Get<ScopedConfig>().Child(c => c.EmailSettings));
-        Bind<IConfigProvider<EmailSetup>>().ToMethod(ctx => ctx.Kernel.Get<ScopedConfig>().Child(c => c.EmailSetup));
 
         // Host
         Bind<IWorkerFactory>().To<WorkerFactory>().InSingletonScope();

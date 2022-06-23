@@ -67,14 +67,10 @@ public partial class FImageSettings : FormBase
             SinglePageTiff = cbSinglePageTiff.Checked
         };
 
-        // Clear old run scope
-        _runTransact.Set(c => c.ImageSettings = new ImageSettings());
+        _runTransact.Remove(c => c.ImageSettings);
 
         var scope = cbRememberSettings.Checked ? _userTransact : _runTransact;
-        scope.SetAll(new CommonConfig
-        {
-            ImageSettings = imageSettings
-        });
+        scope.Set(c => c.ImageSettings, imageSettings);
 
         _userTransact.Commit();
         _runTransact.Commit();
@@ -89,9 +85,9 @@ public partial class FImageSettings : FormBase
 
     private void btnRestoreDefaults_Click(object sender, EventArgs e)
     {
-        _runTransact.Set(c => c.ImageSettings = new ImageSettings());
-        _userTransact.Set(c => c.ImageSettings = new ImageSettings());
-        _userTransact.Set(c => c.RememberImageSettings = false);
+        _runTransact.Remove(c => c.ImageSettings);
+        _userTransact.Remove(c => c.ImageSettings);
+        _userTransact.Set(c => c.RememberImageSettings, false);
         UpdateValues();
         UpdateEnabled();
     }

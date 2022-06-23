@@ -49,7 +49,7 @@ public class WinFormsOperationProgress : OperationProgress
 
         var bgOps = _config.Get(c => c.BackgroundOperations) ?? ImmutableHashSet<string>.Empty;
         bgOps = bgOps.Remove(op.GetType().Name);
-        _config.User.Set(c => c.BackgroundOperations = bgOps);
+        _config.User.Set(c => c.BackgroundOperations, bgOps);
 
         if (!op.IsFinished)
         {
@@ -70,7 +70,7 @@ public class WinFormsOperationProgress : OperationProgress
 
         var bgOps = _config.Get(c => c.BackgroundOperations) ?? ImmutableHashSet<string>.Empty;
         bgOps = bgOps.Add(op.GetType().Name);
-        _config.User.Set(c => c.BackgroundOperations = bgOps);
+        _config.User.Set(c => c.BackgroundOperations, bgOps);
 
         if (!op.IsFinished)
         {

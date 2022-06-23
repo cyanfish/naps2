@@ -4,7 +4,7 @@ namespace NAPS2.ImportExport.Email;
 
 public class EmailSetup
 {
-    public EmailProviderType? ProviderType { get; set; }
+    public EmailProviderType ProviderType { get; set; }
 
     public string? SystemProviderName { get; set; }
 

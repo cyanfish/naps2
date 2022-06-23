@@ -34,7 +34,7 @@ public class UserConfigV0
 
     public OcrMode OcrMode { get; set; }
 
-    public bool? OcrAfterScanning { get; set; }
+    public bool OcrAfterScanning { get; set; }
 
     public string? LastImageExt { get; set; }
 

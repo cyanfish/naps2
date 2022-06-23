@@ -112,7 +112,7 @@ public partial class FPageSize : FormBase
                 Name = PageSizeName,
                 Dimens = PageSizeDimens
             });
-            Config.User.Set(c => c.CustomPageSizePresets = presets);
+            Config.User.Set(c => c.CustomPageSizePresets, presets);
         }
         DialogResult = DialogResult.OK;
         Close();
@@ -124,7 +124,7 @@ public partial class FPageSize : FormBase
         {
             var presets = Config.Get(c => c.CustomPageSizePresets);
             presets = presets.RemoveAll(x => x.Name == comboName.Text);
-            Config.User.Set(c => c.CustomPageSizePresets = presets);
+            Config.User.Set(c => c.CustomPageSizePresets, presets);
 
             UpdateDropdown();
             comboName.Text = "";

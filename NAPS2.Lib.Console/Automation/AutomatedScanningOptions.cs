@@ -106,13 +106,13 @@ public class AutomatedScanningOptions
     public bool UseSavedMetadata { get; set; }
 
     [Option("encryptconfig", HelpText = "The name and path of an XML file to configure encryption for the generated PDF.")]
-    public string EncryptConfig { get; set; }
+    public string? EncryptConfig { get; set; }
 
     [Option("usesavedencryptconfig", HelpText = "Use the encryption configured in the GUI, if any, for the generated PDF.")]
     public bool UseSavedEncryptConfig { get; set; }
 
     [Option("pdfcompat", HelpText = "The standard to use for the generated PDF. Possible values: default, A1-b, A2-b, A3-b, A3-u")]
-    public string PdfCompat { get; set; }
+    public string? PdfCompat { get; set; }
 
     #endregion
 
@@ -125,7 +125,7 @@ public class AutomatedScanningOptions
     public bool DisableOcr { get; set; }
 
     [Option("ocrlang", HelpText = "The three-letter code for the language used for OCR (e.g. 'eng' for English, 'fra' for French, etc.). Implies --enableocr.")]
-    public string OcrLang { get; set; }
+    public string? OcrLang { get; set; }
 
     #endregion
 

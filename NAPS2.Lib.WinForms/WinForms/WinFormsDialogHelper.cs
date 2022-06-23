@@ -100,7 +100,7 @@ public class WinFormsDialogHelper : DialogHelper
         if (sd.ShowDialog() == DialogResult.OK)
         {
             savePath = sd.FileName;
-            _config.User.Set(c => c.LastImageExt = (Path.GetExtension(sd.FileName) ?? "").Replace(".", ""));
+            _config.User.Set(c => c.LastImageExt, (Path.GetExtension(sd.FileName) ?? "").Replace(".", ""));
             return true;
         }
         savePath = null;

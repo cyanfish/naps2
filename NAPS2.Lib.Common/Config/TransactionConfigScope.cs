@@ -1,19 +1,18 @@
-﻿namespace NAPS2.Config;
+﻿using System.Linq.Expressions;
+
+namespace NAPS2.Config;
 
 public class TransactionConfigScope<TConfig> : ConfigScope<TConfig>
 {
-    private readonly Func<TConfig> _factory;
-    private TConfig _changes;
+    private ConfigStorage<TConfig> _changes = new();
 
-    public TransactionConfigScope(ConfigScope<TConfig> originalScope, Func<TConfig> factory) : base(ConfigScopeMode.ReadWrite)
+    public TransactionConfigScope(ConfigScope<TConfig> originalScope) : base(ConfigScopeMode.ReadWrite)
     {
         if (originalScope.Mode == ConfigScopeMode.ReadOnly)
         {
             throw new ArgumentException("A transaction can't be created for a ReadOnly scope.", nameof(originalScope));
         }
         OriginalScope = originalScope;
-        _factory = factory;
-        _changes = factory();
     }
 
     public ConfigScope<TConfig> OriginalScope { get; }
@@ -28,8 +27,8 @@ public class TransactionConfigScope<TConfig> : ConfigScope<TConfig>
         {
             lock (OriginalScope)
             {
-                OriginalScope.SetAll(_changes);
-                _changes = _factory();
+                OriginalScope.CopyFrom(_changes);
+                _changes = new();
             }
             if (HasChanges)
             {
@@ -39,28 +38,39 @@ public class TransactionConfigScope<TConfig> : ConfigScope<TConfig>
         }
     }
 
-    protected override T GetInternal<T>(Func<TConfig, T> func)
+    protected override bool TryGetInternal<T>(Expression<Func<TConfig, T>> accessor, out T value)
     {
-        var value = func(_changes);
-        if (value != null)
+        if (_changes.TryGet(accessor, out value))
         {
-            return value;
+            return true;
         }
-        return OriginalScope.Get(func);
+        return OriginalScope.TryGet(accessor, out value);
     }
 
-    protected override void SetInternal(Action<TConfig> func)
+    protected override void SetInternal<T>(Expression<Func<TConfig, T>> accessor, T value)
     {
-        func(_changes);
+        _changes.Set(accessor, value);
+        ChangesMade();
+    }
+
+    protected override void RemoveInternal<T>(Expression<Func<TConfig, T>> accessor)
+    {
+        _changes.Remove(accessor);
+        ChangesMade();
+    }
+
+    protected override void CopyFromInternal(ConfigStorage<TConfig> source)
+    {
+        _changes.CopyFrom(source);
+        ChangesMade();
+    }
+
+    private void ChangesMade()
+    {
         if (!HasChanges)
         {
             HasChanges = true;
             HasChangesChanged?.Invoke(this, EventArgs.Empty);
         }
-    }
-
-    protected override void SetAllInternal(TConfig delta)
-    {
-        ConfigCopier.Copy(delta, _changes);
     }
 }

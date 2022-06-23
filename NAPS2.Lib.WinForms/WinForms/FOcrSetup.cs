@@ -72,10 +72,10 @@ public partial class FOcrSetup : FormBase
 
     private void UpdateView()
     {
-        bool canChangeEnabled = Config.AppLocked.Get(c => c.EnableOcr) == null;
+        bool canChangeEnabled = !Config.AppLocked.TryGet(c => c.EnableOcr, out _);
         bool canChangeLanguage = canChangeEnabled
                                  || Config.Get(c => c.EnableOcr)
-                                 && Config.AppLocked.Get(c => c.OcrLanguageCode) == null;
+                                 && !Config.AppLocked.TryGet(c => c.OcrLanguageCode, out _);
         checkBoxEnableOcr.Enabled = canChangeEnabled;
         comboLanguages.Enabled = checkBoxEnableOcr.Checked && canChangeLanguage;
         linkGetLanguages.Enabled = canChangeLanguage;
@@ -105,15 +105,14 @@ public partial class FOcrSetup : FormBase
 
     private void btnOK_Click(object sender, EventArgs e)
     {
-        if (Config.AppLocked.Get(c => c.EnableOcr) == null)
+        if (!Config.AppLocked.TryGet(c => c.EnableOcr, out _))
         {
-            Config.User.SetAll(new CommonConfig
-            {
-                EnableOcr = checkBoxEnableOcr.Checked,
-                OcrLanguageCode = (string)comboLanguages.SelectedValue,
-                OcrMode = _availableModes != null ? (OcrMode)comboOcrMode.SelectedItem : OcrMode.Default,
-                OcrAfterScanning = checkBoxRunInBG.Checked
-            });
+            var transact = Config.User.BeginTransaction();
+            transact.Set(c => c.EnableOcr, checkBoxEnableOcr.Checked);
+            transact.Set(c => c.OcrLanguageCode, (string)comboLanguages.SelectedValue);
+            transact.Set(c => c.OcrMode, (OcrMode) comboOcrMode.SelectedItem);
+            transact.Set(c => c.OcrAfterScanning, checkBoxRunInBG.Checked);
+            transact.Commit();
         }
         Close();
     }

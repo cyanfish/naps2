@@ -9,6 +9,7 @@ using NAPS2.Scan.Batch;
 
 namespace NAPS2.Config;
 
+// TODO: Remove all unnecessary nullables
 public class CommonConfig
 {
     public const int CURRENT_VERSION = 3;
@@ -40,118 +41,118 @@ public class CommonConfig
     public string? StartupMessageText { get; set; }
 
     [App]
-    public MessageBoxIcon? StartupMessageIcon { get; set; }
+    public MessageBoxIcon StartupMessageIcon { get; set; }
 
     [Common]
-    public SaveButtonDefaultAction? SaveButtonDefaultAction { get; set; }
+    public SaveButtonDefaultAction SaveButtonDefaultAction { get; set; }
 
     [Common]
-    public ToolbarButtons? HiddenButtons { get; set; }
+    public ToolbarButtons HiddenButtons { get; set; }
 
     [App]
-    public bool? DisableAutoSave { get; set; }
+    public bool DisableAutoSave { get; set; }
 
     [App]
-    public bool? LockSystemProfiles { get; set; }
+    public bool LockSystemProfiles { get; set; }
 
     [App]
-    public bool? LockUnspecifiedDevices { get; set; }
+    public bool LockUnspecifiedDevices { get; set; }
 
     [App]
-    public bool? NoUserProfiles { get; set; }
+    public bool NoUserProfiles { get; set; }
 
     [Common]
-    public bool? AlwaysRememberDevice { get; set; }
+    public bool AlwaysRememberDevice { get; set; }
 
     [App]
-    public bool? DisableGenericPdfImport { get; set; }
+    public bool DisableGenericPdfImport { get; set; }
 
     [Common]
-    public bool? NoUpdatePrompt { get; set; }
+    public bool NoUpdatePrompt { get; set; }
 
     [Common]
-    public bool? CheckForUpdates { get; set; }
+    public bool CheckForUpdates { get; set; }
 
     [User]
-    public bool? HasCheckedForUpdates { get; set; }
+    public bool HasCheckedForUpdates { get; set; }
 
     [User]
     public DateTime? LastUpdateCheckDate { get; set; }
 
     [User]
-    public bool? HasBeenRun { get; set; }
+    public bool HasBeenRun { get; set; }
 
     [User]
     public DateTime? FirstRunDate { get; set; }
 
     [User]
-    public bool? HasBeenPromptedForDonation { get; set; }
+    public bool HasBeenPromptedForDonation { get; set; }
 
     [User]
     public DateTime? LastDonatePromptDate { get; set; }
 
     [Common]
-    public bool? DeleteAfterSaving { get; set; }
+    public bool DeleteAfterSaving { get; set; }
 
     [Common]
-    public bool? DisableSaveNotifications { get; set; }
+    public bool DisableSaveNotifications { get; set; }
 
     [Common]
-    public bool? DisableExitConfirmation { get; set; }
+    public bool DisableExitConfirmation { get; set; }
 
     [Common]
-    public bool? SingleInstance { get; set; }
+    public bool SingleInstance { get; set; }
 
     [App]
     public string? ComponentsPath { get; set; }
 
     [Common]
-    public double? OcrTimeoutInSeconds { get; set; }
+    public double OcrTimeoutInSeconds { get; set; }
 
     [Common]
-    public bool? EnableOcr { get; set; }
+    public bool EnableOcr { get; set; }
 
     [Common]
     public string? OcrLanguageCode { get; set; }
 
     [Common]
-    public OcrMode? OcrMode { get; set; }
+    public OcrMode OcrMode { get; set; }
 
     [Common]
-    public bool? OcrAfterScanning { get; set; }
+    public bool OcrAfterScanning { get; set; }
 
     [User]
     public string? LastImageExt { get; set; }
 
     [Common]
-    public int? ThumbnailSize { get; set; }
+    public int ThumbnailSize { get; set; }
 
     [Common]
-    public DockStyle? DesktopToolStripDock { get; set; }
+    public DockStyle DesktopToolStripDock { get; set; }
 
     [App]
-    public EventType? EventLogging { get; set; }
+    public EventType EventLogging { get; set; }
 
     [Child]
     [Common]
     public PdfSettings PdfSettings { get; set; } = new PdfSettings();
 
     [User]
-    public bool? RememberPdfSettings { get; set; }
+    public bool RememberPdfSettings { get; set; }
 
     [Child]
     [Common]
     public ImageSettings ImageSettings { get; set; } = new ImageSettings();
 
     [User]
-    public bool? RememberImageSettings { get; set; }
+    public bool RememberImageSettings { get; set; }
 
     [Child]
     [Common]
     public EmailSettings EmailSettings { get; set; } = new EmailSettings();
 
     [User]
-    public bool? RememberEmailSettings { get; set; }
+    public bool RememberEmailSettings { get; set; }
 
     [Child]
     [Common]

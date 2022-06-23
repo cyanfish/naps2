@@ -51,7 +51,7 @@ public class GmailOauthProvider : OauthProvider
             emailSetup.GmailUser = GetEmailAddress();
             emailSetup.ProviderType = EmailProviderType.Gmail;
         }
-        _config.User.Set(c => c.EmailSetup = emailSetup);
+        _config.User.Set(c => c.EmailSetup, emailSetup);
     }
 
     #endregion

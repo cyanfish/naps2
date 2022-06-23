@@ -5,16 +5,14 @@ namespace NAPS2.ImportExport.Email.Mapi;
 
 public class MapiEmailProvider : IEmailProvider
 {
-    private readonly IWorkerFactory _workerFactory;
     private readonly MapiDispatcher _mapiDispatcher;
-    private readonly IConfigProvider<EmailSetup> _emailSetupProvider;
+    private readonly ScopedConfig _config;
     private readonly ErrorOutput _errorOutput;
 
-    public MapiEmailProvider(IWorkerFactory workerFactory, MapiDispatcher mapiDispatcher, IConfigProvider<EmailSetup> emailSetupProvider, ErrorOutput errorOutput)
+    public MapiEmailProvider(MapiDispatcher mapiDispatcher, ScopedConfig config, ErrorOutput errorOutput)
     {
-        _workerFactory = workerFactory;
         _mapiDispatcher = mapiDispatcher;
-        _emailSetupProvider = emailSetupProvider;
+        _config = config;
         _errorOutput = errorOutput;
     }
 
@@ -31,7 +29,7 @@ public class MapiEmailProvider : IEmailProvider
     {
         return Task.Run(async () =>
         {
-            var clientName = _emailSetupProvider.Get(c => c.SystemProviderName);
+            var clientName = _config.Get(c => c.EmailSetup.SystemProviderName);
             MapiSendMailReturnCode returnCode = await _mapiDispatcher.SendEmail(clientName, message);
 
             // Process the result

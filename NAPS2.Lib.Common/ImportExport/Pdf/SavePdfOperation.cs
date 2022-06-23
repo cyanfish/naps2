@@ -22,13 +22,13 @@ public class SavePdfOperation : OperationBase
     }
 
     public bool Start(string fileName, Placeholders placeholders, ICollection<ProcessedImage> images,
-        IConfigProvider<PdfSettings> pdfSettings, OcrParams ocrParams)
+        PdfSettings pdfSettings, OcrParams ocrParams)
     {
         return Start(fileName, placeholders, images, pdfSettings, ocrParams, false, null);
     }
 
     public bool Start(string fileName, Placeholders placeholders, ICollection<ProcessedImage> images,
-        IConfigProvider<PdfSettings> pdfSettings, OcrParams ocrParams, bool email, EmailMessage? emailMessage)
+        PdfSettings pdfSettings, OcrParams ocrParams, bool email, EmailMessage? emailMessage)
     {
         ProgressTitle = email ? MiscResources.EmailPdfProgress : MiscResources.SavePdfProgress;
         var subFileName = placeholders.Substitute(fileName);
@@ -58,8 +58,8 @@ public class SavePdfOperation : OperationBase
             {
                 // TODO: I forget this actually won't work, as we need to access the metadata/encryption subpart.
                 result = await _pdfExporter.Export(subFileName, images,
-                    new PdfExportParams(pdfSettings.Get(c => c.Metadata), pdfSettings.Get(c => c.Encryption),
-                        pdfSettings.Get(c => c.Compat)), ocrParams, OnProgress, CancelToken);
+                    new PdfExportParams(pdfSettings.Metadata, pdfSettings.Encryption,
+                        pdfSettings.Compat), ocrParams, OnProgress, CancelToken);
             }
             catch (UnauthorizedAccessException ex)
             {

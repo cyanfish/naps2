@@ -70,14 +70,9 @@ public partial class FEmailSettings : FormBase
             AttachmentName = txtAttachmentName.Text
         };
 
-        // Clear old run scope
-        _runTransact.Set(c => c.EmailSettings = new EmailSettings());
-
+        _runTransact.Remove(c => c.EmailSettings);
         var scope = cbRememberSettings.Checked ? _userTransact : _runTransact;
-        scope.SetAll(new CommonConfig
-        {
-            EmailSettings = emailSettings
-        });
+        scope.Set(c => c.EmailSettings, emailSettings);
 
         _userTransact.Commit();
         _runTransact.Commit();
@@ -92,9 +87,9 @@ public partial class FEmailSettings : FormBase
 
     private void btnRestoreDefaults_Click(object sender, EventArgs e)
     {
-        _runTransact.Set(c => c.EmailSettings = new EmailSettings());
-        _userTransact.Set(c => c.EmailSettings = new EmailSettings());
-        _userTransact.Set(c => c.RememberEmailSettings = false);
+        _runTransact.Remove(c => c.EmailSettings);
+        _userTransact.Remove(c => c.EmailSettings);
+        _userTransact.Set(c => c.RememberEmailSettings, false);
         UpdateValues();
     }
 

@@ -49,7 +49,7 @@ public class OutlookWebOauthProvider : OauthProvider
             emailSetup.OutlookWebUser = GetEmailAddress();
             emailSetup.ProviderType = EmailProviderType.OutlookWeb;
         }
-        _config.User.Set(c => c.EmailSetup = emailSetup);
+        _config.User.Set(c => c.EmailSetup, emailSetup);
     }
 
     #endregion

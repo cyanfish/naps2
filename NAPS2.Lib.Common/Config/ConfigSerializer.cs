@@ -111,18 +111,19 @@ public class ConfigSerializer : VersionedSerializer<CommonConfig>
         };
 
     private CommonConfig AppConfigV0ToCommonConfigLocked(AppConfigV0 c) =>
+        // TODO: Need to propagate presence to the config
         new CommonConfig
         {
             EnableOcr = c.OcrState == OcrState.Enabled ? true
                 : c.OcrState == OcrState.Disabled ? false
-                : (bool?)null,
+                : false, 
             PdfSettings =
             {
-                Compat = c.ForcePdfCompat != PdfCompat.Default ? c.ForcePdfCompat : (PdfCompat?)null
+                Compat = c.ForcePdfCompat != PdfCompat.Default ? c.ForcePdfCompat : PdfCompat.Default
             }
         };
 
-    private ToolbarButtons? GetHiddenButtonFlags(AppConfigV0 c)
+    private ToolbarButtons GetHiddenButtonFlags(AppConfigV0 c)
     {
         var flags = ToolbarButtons.None;
         if (c.HideOcrButton) flags |= ToolbarButtons.Ocr;

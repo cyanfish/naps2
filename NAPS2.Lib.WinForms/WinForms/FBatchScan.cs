@@ -83,14 +83,14 @@ namespace NAPS2.WinForms
         {
             bool ok = true;
 
-            _userTransact.Set(c => c.BatchSettings.ProfileDisplayName = comboProfile.Text);
+            _userTransact.Set(c => c.BatchSettings.ProfileDisplayName, comboProfile.Text);
             if (comboProfile.SelectedIndex == -1)
             {
                 ok = false;
                 comboProfile.Focus();
             }
 
-            _userTransact.Set(c => c.BatchSettings.ScanType = rdMultipleScansPrompt.Checked ? BatchScanType.MultipleWithPrompt
+            _userTransact.Set(c => c.BatchSettings.ScanType, rdMultipleScansPrompt.Checked ? BatchScanType.MultipleWithPrompt
                                    : rdMultipleScansDelay.Checked ? BatchScanType.MultipleWithDelay
                                    : BatchScanType.Single);
 
@@ -102,7 +102,7 @@ namespace NAPS2.WinForms
                     scanCount = 0;
                     txtNumberOfScans.Focus();
                 }
-                _userTransact.Set(c => c.BatchSettings.ScanCount = scanCount);
+                _userTransact.Set(c => c.BatchSettings.ScanCount, scanCount);
 
                 if (!double.TryParse(txtTimeBetweenScans.Text, out double scanInterval) || scanInterval < 0)
                 {
@@ -110,18 +110,18 @@ namespace NAPS2.WinForms
                     scanInterval = 0;
                     txtTimeBetweenScans.Focus();
                 }
-                _userTransact.Set(c => c.BatchSettings.ScanIntervalSeconds = scanInterval);
+                _userTransact.Set(c => c.BatchSettings.ScanIntervalSeconds, scanInterval);
             }
 
-            _userTransact.Set(c => c.BatchSettings.OutputType = rdSaveToSingleFile.Checked ? BatchOutputType.SingleFile
+            _userTransact.Set(c => c.BatchSettings.OutputType, rdSaveToSingleFile.Checked ? BatchOutputType.SingleFile
                                      : rdSaveToMultipleFiles.Checked ? BatchOutputType.MultipleFiles
                                      : BatchOutputType.Load);
 
-            _userTransact.Set(c => c.BatchSettings.SaveSeparator = rdFilePerScan.Checked ? SaveSeparator.FilePerScan
+            _userTransact.Set(c => c.BatchSettings.SaveSeparator, rdFilePerScan.Checked ? SaveSeparator.FilePerScan
                                         : rdSeparateByPatchT.Checked ? SaveSeparator.PatchT
                                         : SaveSeparator.FilePerPage);
 
-            _userTransact.Set(c => c.BatchSettings.SavePath = txtFilePath.Text);
+            _userTransact.Set(c => c.BatchSettings.SavePath, txtFilePath.Text);
             if (_transactionConfig.Get(c => c.BatchSettings.OutputType) != BatchOutputType.Load && string.IsNullOrWhiteSpace(_transactionConfig.Get(c => c.BatchSettings.SavePath)))
             {
                 ok = false;
@@ -208,7 +208,7 @@ namespace NAPS2.WinForms
                 if (fedit.Result)
                 {
                     _profileManager.Mutate(new ListMutation<ScanProfile>.ReplaceWith(fedit.ScanProfile), ListSelection.Of(originalProfile));
-                    _userTransact.Set(c => c.BatchSettings.ProfileDisplayName = fedit.ScanProfile.DisplayName);
+                    _userTransact.Set(c => c.BatchSettings.ProfileDisplayName, fedit.ScanProfile.DisplayName);
                     UpdateProfiles();
                 }
             }
@@ -224,7 +224,7 @@ namespace NAPS2.WinForms
                 if (fedit.Result)
                 {
                     _profileManager.Mutate(new ListMutation<ScanProfile>.Append(fedit.ScanProfile), ListSelection.Empty<ScanProfile>());
-                    _userTransact.Set(c => c.BatchSettings.ProfileDisplayName = fedit.ScanProfile.DisplayName);
+                    _userTransact.Set(c => c.BatchSettings.ProfileDisplayName, fedit.ScanProfile.DisplayName);
                     UpdateProfiles();
                 }
             }
@@ -283,7 +283,7 @@ namespace NAPS2.WinForms
         {
             try
             {
-                await _batchScanPerformer.PerformBatchScan(Config.Child(c => c.BatchSettings), this,
+                await _batchScanPerformer.PerformBatchScan(Config.Get(c => c.BatchSettings), this,
                     image => SafeInvoke(() => ImageCallback(image)), ProgressCallback, _cts.Token);
                 SafeInvoke(() =>
                 {

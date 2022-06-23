@@ -1,17 +1,16 @@
-﻿using NAPS2.Serialization;
+﻿using System.Linq.Expressions;
+using NAPS2.Serialization;
 
 namespace NAPS2.Config;
 
 public static class ConfigScope
 {
-    public static ObjectConfigScope<T> Object<T>(T value) =>
-        new ObjectConfigScope<T>(value, ConfigScopeMode.ReadWrite);
+    public static MemoryConfigScope<T> Memory<T>() => new();
 
-    public static ObjectConfigScope<T> Object<T>(T value, ConfigScopeMode mode) =>
-        new ObjectConfigScope<T>(value, mode);
+    public static FileConfigScope<T> File<T>(string filePath, ISerializer<T> serializer, ConfigScopeMode mode) =>
+        new(filePath, serializer, mode);
 
-    public static FileConfigScope<T> File<T>(string filePath, Func<T> factory, ISerializer<T> serializer, ConfigScopeMode mode) =>
-        new FileConfigScope<T>(filePath, factory, serializer, mode);
+    public static DefaultsConfigScope<T> Defaults<T>(T defaults) => new(defaults);
 }
 
 public abstract class ConfigScope<TConfig>
@@ -23,27 +22,22 @@ public abstract class ConfigScope<TConfig>
 
     public ConfigScopeMode Mode { get; }
 
-    public T Get<T>(Func<TConfig, T> func)
+    public bool TryGet<T>(Expression<Func<TConfig, T>> accessor, out T value)
     {
         lock (this)
         {
-            return GetInternal(func);
+            return TryGetInternal(accessor, out value);
         }
     }
-
-    public void Set(Action<TConfig> func)
+    
+    public T GetOr<T>(Expression<Func<TConfig, T>> accessor, T orValue)
     {
-        if (Mode == ConfigScopeMode.ReadOnly)
-        {
-            throw new NotSupportedException("This config scope is in ReadOnly mode.");
-        }
-        lock (this)
-        {
-            SetInternal(func);
-        }
+        return TryGetInternal(accessor, out var value) ? value : orValue;
     }
+    
+    public T GetOrDefault<T>(Expression<Func<TConfig, T>> accessor) => GetOr(accessor, default);
 
-    public void SetAll(TConfig changes)
+    public void Set<T>(Expression<Func<TConfig, T>> accessor, T value)
     {
         if (Mode == ConfigScopeMode.ReadOnly)
         {
@@ -51,13 +45,39 @@ public abstract class ConfigScope<TConfig>
         }
         lock (this)
         {
-            SetAllInternal(changes);
+            SetInternal(accessor, value);
         }
     }
 
-    protected abstract T GetInternal<T>(Func<TConfig, T> func);
+    public void Remove<T>(Expression<Func<TConfig, T>> accessor)
+    {
+        if (Mode == ConfigScopeMode.ReadOnly)
+        {
+            throw new NotSupportedException("This config scope is in ReadOnly mode.");
+        }
+        lock (this)
+        {
+            RemoveInternal(accessor);
+        }
+    }
 
-    protected abstract void SetInternal(Action<TConfig> func);
+    public void CopyFrom(ConfigStorage<TConfig> source)
+    {
+        if (Mode == ConfigScopeMode.ReadOnly)
+        {
+            throw new NotSupportedException("This config scope is in ReadOnly mode.");
+        }
+        lock (this)
+        {
+            CopyFromInternal(source);
+        }
+    }
 
-    protected abstract void SetAllInternal(TConfig delta);
+    protected abstract bool TryGetInternal<T>(Expression<Func<TConfig, T>> accessor, out T value);
+
+    protected abstract void SetInternal<T>(Expression<Func<TConfig, T>> accessor, T value);
+
+    protected abstract void RemoveInternal<T>(Expression<Func<TConfig, T>> accessor);
+
+    protected abstract void CopyFromInternal(ConfigStorage<TConfig> source);
 }
