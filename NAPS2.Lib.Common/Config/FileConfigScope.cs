@@ -16,16 +16,16 @@ public class FileConfigScope<TConfig> : ConfigScope<TConfig>
         _serializer = serializer;
     }
 
-    protected override bool TryGetInternal<T>(Expression<Func<TConfig, T>> accessor, out T value)
+    protected override bool TryGetInternal(ConfigLookup lookup, out object? value)
     {
         // TODO: Use FileSystemWatcher to determine if we actually
         // TODO: need to read from disk. Also to create change events.
         ReadHandshake();
-        if (_changes.TryGet(accessor, out value))
+        if (_changes.TryGet(lookup, out value))
         {
             return true;
         }
-        if (_cache.TryGet(accessor, out value))
+        if (_cache.TryGet(lookup, out value))
         {
             return true;
         }

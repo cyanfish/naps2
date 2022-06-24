@@ -1,5 +1,4 @@
 using System.Linq.Expressions;
-using System.Reflection;
 using NAPS2.Serialization;
 
 namespace NAPS2.Config;
@@ -19,9 +18,16 @@ public class ConfigStorage<TConfig>
 
     public bool TryGet<T>(Expression<Func<TConfig, T>> accessor, out T value)
     {
+        var result = TryGet(ConfigLookup.ExpandExpression(accessor), out var obj);
+        value = (T) obj;
+        return result;
+    }
+    
+    public bool TryGet(ConfigLookup lookup, out object? value)
+    {
         lock (this)
         {
-            var node = GetNode(accessor);
+            var node = GetNode(lookup);
             if (!node.IsLeaf)
             {
                 throw new ArgumentException("You can't access a child config directly on a ConfigScope");
@@ -31,7 +37,7 @@ public class ConfigStorage<TConfig>
                 value = default!;
                 return false;
             }
-            value = (T) node.Value!;
+            value = node.Value!;
             return true;
         }
     }
@@ -40,7 +46,7 @@ public class ConfigStorage<TConfig>
     {
         lock (this)
         {
-            var node = GetNode(accessor)!;
+            var node = GetNode(ConfigLookup.ExpandExpression(accessor));
             CopyObjectToNode(value, node);
         }
     }
@@ -49,7 +55,7 @@ public class ConfigStorage<TConfig>
     {
         lock (this)
         {
-            var node = GetNode(accessor);
+            var node = GetNode(ConfigLookup.ExpandExpression(accessor));
             if (node.IsRoot)
             {
                 node.Children.Clear();
@@ -61,10 +67,9 @@ public class ConfigStorage<TConfig>
         }
     }
 
-    private StorageNode GetNode<T>(Expression<Func<TConfig, T>> accessor)
+    private StorageNode GetNode(ConfigLookup lookup)
     {
-        var (lookup, _) = ExpandExpression(accessor);
-        return GetNodeRecursive(_root, lookup);
+        return GetNodeRecursive(_root, lookup.Head);
     }
 
     public void CopyFrom(ConfigStorage<TConfig> source)
@@ -80,45 +85,21 @@ public class ConfigStorage<TConfig>
         }
     }
 
-    private StorageNode GetNodeRecursive(StorageNode node, LookupNode? lookup)
+    private StorageNode GetNodeRecursive(StorageNode node, ConfigLookup.Node lookup)
     {
-        if (lookup == null)
+        var nextLookup = lookup.Next;
+        if (nextLookup == null)
         {
             return node;
         }
-        var nextNode = node.Children.GetOrSet(lookup.Key, () => new StorageNode
+        var nextNode = node.Children.GetOrSet(nextLookup.Key, () => new StorageNode
         {
-            Key = lookup.Key,
+            Key = nextLookup.Key,
             Parent = node,
-            IsLeaf = !lookup.IsChildConfig,
-            ValueType = lookup.ValueType
+            IsLeaf = nextLookup.IsLeaf,
+            ValueType = nextLookup.Type
         });
-        return GetNodeRecursive(nextNode, lookup.Next);
-    }
-
-    private (LookupNode? head, LookupNode? tail) ExpandExpression(Expression expression)
-    {
-        switch (expression)
-        {
-            case LambdaExpression lambdaExpression:
-                return ExpandExpression(lambdaExpression.Body);
-            case MemberExpression memberExpression:
-                var propInfo = memberExpression.Member as PropertyInfo ?? throw new ArgumentException();
-                var key = propInfo.Name;
-                var isChildConfig = IsChildProp(propInfo);
-                var node = new LookupNode(key, isChildConfig, propInfo.PropertyType);
-                var (head, tail) = ExpandExpression(memberExpression.Expression!);
-                if (tail == null)
-                {
-                    return (node, node);
-                }
-                tail.Next = node;
-                return (head, node);
-            case ParameterExpression:
-                return (null, null);
-            default:
-                throw new ArgumentException();
-        }
+        return GetNodeRecursive(nextNode, nextLookup);
     }
 
     private void CopyNodeToNode(StorageNode src, StorageNode dst)
@@ -161,28 +142,18 @@ public class ConfigStorage<TConfig>
         }
 
         // TODO: We should probably detect and throw an exception for cycles rather than stack overflowing
-        // TODO: Consider adding a non-generic class that statically stores this cache
-        var propData = node.ValueType
-            .GetProperties()
-            .Select(x => (x, IsChildProp(x)))
-            .ToArray();
-        foreach (var (prop, isChild) in propData)
+        foreach (var propData in ConfigLookup.GetPropertyData(node.ValueType))
         {
-            var childObj = prop.GetValue(obj);
-            var childNode = node.Children.GetOrSet(prop.Name, () => new StorageNode
+            var childObj = propData.PropertyInfo.GetValue(obj);
+            var childNode = node.Children.GetOrSet(propData.Name, () => new StorageNode
             {
-                Key = prop.Name,
+                Key = propData.Name,
                 Parent = node,
-                ValueType = prop.PropertyType,
-                IsLeaf = !isChild
+                ValueType = propData.Type,
+                IsLeaf = !propData.IsChild
             });
             CopyObjectToNode(childObj, childNode);
         }
-    }
-
-    private static bool IsChildProp(MemberInfo x)
-    {
-        return x.GetCustomAttributes().Any(y => y is ChildAttribute);
     }
 
     private void CopyNodeToXElement(StorageNode src, XElement dst, UntypedXmlSerializer serializer)
@@ -206,26 +177,22 @@ public class ConfigStorage<TConfig>
 
     private void CopyXElementToNode(XElement src, StorageNode dst, UntypedXmlSerializer serializer)
     {
-        // TODO: Definitely want to clean this up and probably cache.
-        var propData = dst.ValueType
-            .GetProperties()
-            .Select(x => (x, IsChildProp(x)))
-            .ToDictionary(x => x.x.Name);
+        var propDataDict = ConfigLookup.GetPropertyData(dst.ValueType).ToDictionary(x => x.Name);
         foreach (var childElement in src.Elements())
         {
             // TODO: Handle errors
-            var propD = propData[childElement.Name.ToString()];
-            var prop = propD.x;
-            var childNode = dst.Children.GetOrSet(prop.Name, () => new StorageNode
+            var propData = propDataDict[childElement.Name.ToString()];
+            var childNode = dst.Children.GetOrSet(propData.Name, () => new StorageNode
             {
-                Key = prop.Name,
+                Key = propData.Name,
                 Parent = dst,
-                ValueType = prop.PropertyType,
-                IsLeaf = !propD.Item2
+                ValueType = propData.Type,
+                IsLeaf = !propData.IsChild
             });
             if (childNode.IsLeaf)
             {
-                childNode.Value = serializer.DeserializeFromXElement(childNode.ValueType, childElement);
+                var value = serializer.DeserializeFromXElement(childNode.ValueType, childElement);
+                childNode.Value = value;
                 childNode.HasValue = true;
                 continue;
             }
@@ -267,10 +234,5 @@ public class ConfigStorage<TConfig>
         public StorageNode? Parent { get; init; }
 
         public Dictionary<string, StorageNode> Children { get; } = new();
-    }
-
-    private record LookupNode(string Key, bool IsChildConfig, Type ValueType)
-    {
-        public LookupNode? Next { get; set; }
     }
 }

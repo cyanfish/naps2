@@ -24,15 +24,22 @@ public abstract class ConfigScope<TConfig>
 
     public bool TryGet<T>(Expression<Func<TConfig, T>> accessor, out T value)
     {
+        var result = TryGet(ConfigLookup.ExpandExpression(accessor), out var obj);
+        value = result ? (T) obj! : default!;
+        return result;
+    }
+
+    public bool TryGet(ConfigLookup lookup, out object? value)
+    {
         lock (this)
         {
-            return TryGetInternal(accessor, out value);
+            return TryGetInternal(lookup, out value);
         }
     }
     
     public T GetOr<T>(Expression<Func<TConfig, T>> accessor, T orValue)
     {
-        return TryGetInternal(accessor, out var value) ? value : orValue;
+        return TryGet(accessor, out var value) ? value : orValue;
     }
     
     public T GetOrDefault<T>(Expression<Func<TConfig, T>> accessor) => GetOr(accessor, default);
@@ -73,8 +80,9 @@ public abstract class ConfigScope<TConfig>
         }
     }
 
-    protected abstract bool TryGetInternal<T>(Expression<Func<TConfig, T>> accessor, out T value);
+    protected abstract bool TryGetInternal(ConfigLookup accessor, out object? value);
 
+    // TODO: Maybe use ConfigLookup for consistency
     protected abstract void SetInternal<T>(Expression<Func<TConfig, T>> accessor, T value);
 
     protected abstract void RemoveInternal<T>(Expression<Func<TConfig, T>> accessor);

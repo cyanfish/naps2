@@ -1,4 +1,3 @@
-using NAPS2.EtoForms;
 using Xunit;
 
 namespace NAPS2.Lib.Tests.Config;

@@ -38,13 +38,13 @@ public class TransactionConfigScope<TConfig> : ConfigScope<TConfig>
         }
     }
 
-    protected override bool TryGetInternal<T>(Expression<Func<TConfig, T>> accessor, out T value)
+    protected override bool TryGetInternal(ConfigLookup lookup, out object? value)
     {
-        if (_changes.TryGet(accessor, out value))
+        if (_changes.TryGet(lookup, out value))
         {
             return true;
         }
-        return OriginalScope.TryGet(accessor, out value);
+        return OriginalScope.TryGet(lookup, out value);
     }
 
     protected override void SetInternal<T>(Expression<Func<TConfig, T>> accessor, T value)

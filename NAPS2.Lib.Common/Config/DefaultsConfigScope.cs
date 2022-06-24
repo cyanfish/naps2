@@ -12,9 +12,9 @@ public class DefaultsConfigScope<TConfig> : ConfigScope<TConfig>
         _storage.Set(c => c, defaults);
     }
 
-    protected override bool TryGetInternal<T>(Expression<Func<TConfig, T>> accessor, out T value)
+    protected override bool TryGetInternal(ConfigLookup lookup, out object? value)
     {
-        return _storage.TryGet(accessor, out value);
+        return _storage.TryGet(lookup, out value);
     }
 
     protected override void SetInternal<T>(Expression<Func<TConfig, T>> accessor, T value) =>
