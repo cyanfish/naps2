@@ -34,7 +34,6 @@ public class FileConfigScope<TConfig> : ConfigScope<TConfig>
 
     protected override void SetInternal<T>(Expression<Func<TConfig, T>> accessor, T value)
     {
-        // TODO: As we got rid of SetAll, replace it with something that allows multiple writes before flushing to disk
         _changes.Set(accessor, value);
         WriteHandshake();
     }

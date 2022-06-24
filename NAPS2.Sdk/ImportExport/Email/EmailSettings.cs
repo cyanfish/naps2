@@ -1,6 +1,6 @@
 ﻿namespace NAPS2.ImportExport.Email;
 
-public class EmailSettings
+public record EmailSettings
 {
-    public string? AttachmentName { get; set; }
+    public string AttachmentName { get; init; } = "Scan.pdf";
 }

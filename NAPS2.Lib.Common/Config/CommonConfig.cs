@@ -167,10 +167,6 @@ public class CommonConfig
     [Common]
     public KeyboardShortcuts KeyboardShortcuts { get; set; } = new KeyboardShortcuts();
 
-    [Config]
-    [Common]
-    public SslSetup SslSetup { get; set; } = new SslSetup();
-
     [Common]
     public ScanProfile? DefaultProfileSettings { get; set; }
 }

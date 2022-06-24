@@ -1,16 +1,16 @@
 namespace NAPS2.ImportExport.Pdf;
 
-public class PdfEncryption
+public record PdfEncryption
 {
-    public bool EncryptPdf { get; set; }
-    public string? UserPassword { get; set; }
-    public string? OwnerPassword { get; set; }
-    public bool AllowContentCopyingForAccessibility { get; set; } = true;
-    public bool AllowAnnotations { get; set; } = true;
-    public bool AllowDocumentAssembly { get; set; } = true;
-    public bool AllowContentCopying { get; set; } = true;
-    public bool AllowFormFilling { get; set; } = true;
-    public bool AllowFullQualityPrinting { get; set; } = true;
-    public bool AllowDocumentModification { get; set; } = true;
-    public bool AllowPrinting { get; set; } = true;
+    public bool EncryptPdf { get; init; }
+    public string? UserPassword { get; init; }
+    public string? OwnerPassword { get; init; }
+    public bool AllowContentCopyingForAccessibility { get; init; } = true;
+    public bool AllowAnnotations { get; init; } = true;
+    public bool AllowDocumentAssembly { get; init; } = true;
+    public bool AllowContentCopying { get; init; } = true;
+    public bool AllowFormFilling { get; init; } = true;
+    public bool AllowFullQualityPrinting { get; init; } = true;
+    public bool AllowDocumentModification { get; init; } = true;
+    public bool AllowPrinting { get; init; } = true;
 }

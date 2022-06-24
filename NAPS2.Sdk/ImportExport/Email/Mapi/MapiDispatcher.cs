@@ -26,7 +26,7 @@ public class MapiDispatcher
     /// <param name="clientName">The MAPI client name.</param>
     /// <param name="message">The object describing the email message.</param>
     /// <returns>The MAPI return code.</returns>
-    public async Task<MapiSendMailReturnCode> SendEmail(string clientName, EmailMessage message)
+    public async Task<MapiSendMailReturnCode> SendEmail(string? clientName, EmailMessage message)
     {
         if (UseWorker && !_mapiWrapper.CanLoadClient(clientName))
         {

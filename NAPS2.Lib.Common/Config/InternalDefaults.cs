@@ -180,11 +180,6 @@ public static class InternalDefaults
                 ZoomIn = "Ctrl+Oemplus",
                 ZoomOut = "Ctrl+OemMinus"
             },
-            SslSetup = new SslSetup
-            {
-                WorkerCert = "",
-                WorkerPrivateKey = ""
-            },
             DefaultProfileSettings = new ScanProfile { Version = ScanProfile.CURRENT_VERSION }
         };
 }

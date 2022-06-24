@@ -76,14 +76,14 @@ public partial class FPdfSettings : FormBase
         {
             DefaultFileName = txtDefaultFilePath.Text,
             SkipSavePrompt = cbSkipSavePrompt.Checked,
-            Metadata =
+            Metadata = new PdfMetadata
             {
                 Title = txtTitle.Text,
                 Author = txtAuthor.Text,
                 Subject = txtSubject.Text,
                 Keywords = txtKeywords.Text
             },
-            Encryption =
+            Encryption = new PdfEncryption
             {
                 EncryptPdf = cbEncryptPdf.Checked,
                 OwnerPassword = txtOwnerPassword.Text,

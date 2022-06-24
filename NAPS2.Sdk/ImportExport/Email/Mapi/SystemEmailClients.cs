@@ -70,7 +70,7 @@ public class SystemEmailClients
 
     private static string GetDllPath(string? clientName)
     {
-        if (clientName == null)
+        if (string.IsNullOrEmpty(clientName))
         {
             return DEFAULT_MAPI_DLL;
         }

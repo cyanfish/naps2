@@ -72,7 +72,7 @@ public class WorkerServiceAdapter
         }
     }
 
-    public async Task<MapiSendMailReturnCode> SendMapiEmail(string clientName, EmailMessage message)
+    public async Task<MapiSendMailReturnCode> SendMapiEmail(string? clientName, EmailMessage message)
     {
         var req = new SendMapiEmailRequest { ClientName = clientName, EmailMessageXml = message.ToXml() };
         var resp = await _client.SendMapiEmailAsync(req);
