@@ -2,6 +2,17 @@
 
 namespace NAPS2.Config;
 
+/// <summary>
+/// Represents a transaction wrapping an underlying ConfigScope. Writes are only flushed to the underlying scope when
+/// Commit() is called.
+///
+/// This has several uses:
+/// - Ensure changes to multiple config properties are atomic
+/// - Reduce filesystem writes when multiple properties are changed and the underlying scope is a FileConfigScope
+/// - Maintain a tentative set of changes (as in a Settings window that has an Apply button)
+///
+/// To create a TransactionConfigScope, use the ConfigScope.BeginTransaction() extension method.  
+/// </summary>
 public class TransactionConfigScope<TConfig> : ConfigScope<TConfig>
 {
     private ConfigStorage<TConfig> _changes = new();
@@ -17,10 +28,23 @@ public class TransactionConfigScope<TConfig> : ConfigScope<TConfig>
 
     public ConfigScope<TConfig> OriginalScope { get; }
 
+    /// <summary>
+    /// Whether or not the transaction has uncommitted changes.
+    /// 
+    /// This can be used in a settings dialog to determine whether the "Apply" button should be enabled.
+    /// </summary>
     public bool HasChanges { get; private set; }
 
+    /// <summary>
+    /// Fired when the value of HasChanges changes.
+    ///
+    /// This can be used in a settings dialog to trigger recalculation of whether the "Apply" button should be enabled. 
+    /// </summary>e
     public event EventHandler? HasChangesChanged;
 
+    /// <summary>
+    /// Flushes all changes to the underlying scope.
+    /// </summary>
     public void Commit()
     {
         lock (this)
@@ -30,11 +54,19 @@ public class TransactionConfigScope<TConfig> : ConfigScope<TConfig>
                 OriginalScope.CopyFrom(_changes);
                 _changes = new();
             }
-            if (HasChanges)
-            {
-                HasChanges = false;
-                HasChangesChanged?.Invoke(this, EventArgs.Empty);
-            }
+            ChangesFlushed();
+        }
+    }
+
+    /// <summary>
+    /// Resets all changes that haven't been committed.
+    /// </summary>
+    public void Rollback()
+    {
+        lock (this)
+        {
+            _changes = new();
+            ChangesFlushed();
         }
     }
 
@@ -70,6 +102,15 @@ public class TransactionConfigScope<TConfig> : ConfigScope<TConfig>
         if (!HasChanges)
         {
             HasChanges = true;
+            HasChangesChanged?.Invoke(this, EventArgs.Empty);
+        }
+    }
+
+    private void ChangesFlushed()
+    {
+        if (HasChanges)
+        {
+            HasChanges = false;
             HasChangesChanged?.Invoke(this, EventArgs.Empty);
         }
     }
