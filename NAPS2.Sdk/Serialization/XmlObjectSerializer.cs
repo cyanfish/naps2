@@ -2,6 +2,11 @@ namespace NAPS2.Serialization;
 
 public class UntypedXmlSerializer : XmlSerializer
 {
+    public string GetDefaultElementName(Type type)
+    {
+        return GetElementNameForType(type);
+    }
+
     public XElement SerializeToXElement(Type type, object? obj, string elementName)
     {
         return SerializeInternal(obj, new XElement(elementName), type);

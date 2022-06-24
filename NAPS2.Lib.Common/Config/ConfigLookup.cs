@@ -13,7 +13,7 @@ public class ConfigLookup
             return PropertyDataCache.GetOrSet(type, () =>
                 type
                     .GetProperties()
-                    .Select(x => new PropertyData(x.Name, x.PropertyType, IsChildProp(x), x))
+                    .Select(x => new PropertyData(x.Name, x.PropertyType, IsNestedConfigProp(x), x))
                     .ToImmutableList());
         }
     }
@@ -27,17 +27,27 @@ public class ConfigLookup
             case MemberExpression memberExpression:
                 var propInfo = memberExpression.Member as PropertyInfo ?? throw new ArgumentException();
                 var key = propInfo.Name;
-                var isLeaf = !IsChildProp(propInfo);
+                var isLeaf = !IsNestedConfigProp(propInfo);
                 var node = new Node(key, isLeaf, propInfo.PropertyType);
                 var nestedLookup = ExpandExpression(memberExpression.Expression!);
+                VerifyNotLeaf(nestedLookup.Tail);
                 nestedLookup.Tail.Next = node;
                 return new ConfigLookup(nestedLookup.Head, node);
             case ParameterExpression parameterExpression:
-                // TODO: Allow the root to be a leaf in some cases?
-                var rootNode = new Node("c", false, parameterExpression.Type);
+                var rootType = parameterExpression.Type;
+                var rootNode = new Node("c", !HasConfigAttribute(rootType), rootType);
                 return new ConfigLookup(rootNode, rootNode);
             default:
                 throw new ArgumentException();
+        }
+    }
+
+    private static void VerifyNotLeaf(Node node)
+    {
+        if (node.IsLeaf)
+        {
+            throw new ArgumentException(
+                "Attempting to query a property of a config type that doesn't have a [Config] attribute.");
         }
     }
 
@@ -46,9 +56,9 @@ public class ConfigLookup
         Head = head;
         Tail = tail;
     }
-    
+
     public Node Head { get; }
-    
+
     public Node Tail { get; }
 
     public override string ToString()
@@ -56,9 +66,14 @@ public class ConfigLookup
         return Head.ToString();
     }
 
-    private static bool IsChildProp(MemberInfo x)
+    private static bool IsNestedConfigProp(PropertyInfo prop)
     {
-        return x.GetCustomAttributes().Any(y => y is ChildAttribute);
+        return HasConfigAttribute(prop) || HasConfigAttribute(prop.PropertyType);
+    }
+
+    public static bool HasConfigAttribute(MemberInfo member)
+    {
+        return member.GetCustomAttributes().Any(x => x is ConfigAttribute);
     }
 
     // TODO: Make these internal?
@@ -85,12 +100,13 @@ public class ConfigLookup
         }
     }
 
-    public record PropertyData(string Name, Type Type, bool IsChild, PropertyInfo PropertyInfo);
+    public record PropertyData(string Name, Type Type, bool IsNestedConfig, PropertyInfo PropertyInfo);
 
     public ConfigLookup Append(PropertyData prop)
     {
-        var next = new Node(prop.Name, !prop.IsChild, prop.Type);
+        var next = new Node(prop.Name, !prop.IsNestedConfig, prop.Type);
         var head = Head.Copy(out var tail);
+        VerifyNotLeaf(tail);
         tail.Next = next;
         return new ConfigLookup(head, next);
     }

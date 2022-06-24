@@ -7,11 +7,10 @@ namespace NAPS2.Config;
 // TODO: Fix cross-instance contention
 public class ProfileManager : IProfileManager
 {
-    // TODO: Use ProfileSerializer
-    private readonly ConfigStorageSerializer<ProfileConfig> _serializer = new();
-    private readonly FileConfigScope<ProfileConfig> _userScope;
-    private readonly FileConfigScope<ProfileConfig> _appScope;
-    private readonly bool _userPathExisted;
+    private readonly ProfileSerializer _serializer = new();
+    private readonly FileConfigScope<ImmutableList<ScanProfile>> _userScope;
+    private readonly FileConfigScope<ImmutableList<ScanProfile>> _appScope;
+    private readonly string _userPath;
     private readonly bool _lockSystemProfiles;
     private readonly bool _lockUnspecifiedDevices;
     private readonly bool _noUserProfiles;
@@ -20,9 +19,9 @@ public class ProfileManager : IProfileManager
 
     public ProfileManager(string userPath, string systemPath, bool lockSystemProfiles, bool lockUnspecifiedDevices, bool noUserProfiles)
     {
-        _userPathExisted = File.Exists(userPath);
         _userScope = ConfigScope.File(userPath, _serializer, ConfigScopeMode.ReadWrite);
         _appScope = ConfigScope.File(systemPath, _serializer, ConfigScopeMode.ReadOnly);
+        _userPath = userPath;
         _lockSystemProfiles = lockSystemProfiles;
         _lockUnspecifiedDevices = lockUnspecifiedDevices;
         _noUserProfiles = noUserProfiles;
@@ -99,17 +98,19 @@ public class ProfileManager : IProfileManager
 
     public void Save()
     {
+        Load();
         lock (this)
         {
-            _userScope.Set(c => c.Profiles, ImmutableList.CreateRange(_profiles));
+            _userScope.Set(c => c, ImmutableList.CreateRange(_profiles));
         }
         ProfilesUpdated?.Invoke(this, EventArgs.Empty);
     }
 
     private List<ScanProfile> GetProfiles()
     {
-        var userProfiles = _userScope.GetOr(c => c.Profiles, ImmutableList<ScanProfile>.Empty).ToList();
-        var systemProfiles = _appScope.GetOr(c => c.Profiles,ImmutableList<ScanProfile>.Empty).ToList();
+        bool userPathExisted = File.Exists(_userPath);
+        var userProfiles = _userScope.GetOr(c => c, ImmutableList<ScanProfile>.Empty).ToList();
+        var systemProfiles = _appScope.GetOr(c => c,ImmutableList<ScanProfile>.Empty).ToList();
         if (_noUserProfiles && systemProfiles.Count > 0)
         {
             // Configured by administrator to only use system profiles
@@ -117,7 +118,7 @@ public class ProfileManager : IProfileManager
             MergeUserProfilesIntoSystemProfiles(userProfiles, systemProfiles);
             return systemProfiles;
         }
-        if (!_userPathExisted)
+        if (!userPathExisted)
         {
             // Initialize with system profiles since it's a new user
             return systemProfiles;
@@ -167,10 +168,5 @@ public class ProfileManager : IProfileManager
                 systemProfileNames.Remove(profile.DisplayName);
             }
         }
-    }
-
-    private class ProfileConfig
-    {
-        public ImmutableList<ScanProfile> Profiles { get; set; }
     }
 }

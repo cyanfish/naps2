@@ -14,6 +14,13 @@ public class ScopedConfigTests
     }
 
     [Fact]
+    public void GetNonConfigPropertyThrows()
+    {
+        var ex = Assert.Throws<ArgumentException>(() => _config.Get(c => c.Culture.Length));
+        Assert.Contains("[Config]", ex.Message);
+    }
+
+    [Fact]
     public void ScopePriority()
     {
         Assert.Equal("en", _config.Get(c => c.Culture));

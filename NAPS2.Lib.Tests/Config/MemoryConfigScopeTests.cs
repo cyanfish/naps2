@@ -160,11 +160,12 @@ public class MemoryConfigScopeTests
         Assert.True(scope.TryGet(c => c.Sub.SubSub.Val, out _));
     }
 
+    [Config]
     public class TestConfig
     {
         public string UserName { get; set; }
 
-        [Child]
+        [Config]
         public SubConfig Sub { get; set; } = new();
     }
 
@@ -174,10 +175,10 @@ public class MemoryConfigScopeTests
 
         public int? Y { get; init; }
 
-        [Child]
         public SubSubConfig SubSub { get; set; }
     }
 
+    [Config]
     public record SubSubConfig
     {
         public string Val { get; init; }

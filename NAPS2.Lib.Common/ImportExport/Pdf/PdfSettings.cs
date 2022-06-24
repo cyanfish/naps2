@@ -15,14 +15,14 @@ public class PdfSettings
 
     public bool SkipSavePrompt { get; set; }
 
-    [Child]
+    [Config]
     public PdfMetadata Metadata
     {
         get => _metadata;
         set => _metadata = value ?? throw new ArgumentNullException(nameof(value));
     }
 
-    [Child]
+    [Config]
     public PdfEncryption Encryption
     {
         get => _encryption;

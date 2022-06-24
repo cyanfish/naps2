@@ -81,7 +81,7 @@ public class ScopedConfig
         foreach (var prop in ConfigLookup.GetPropertyData(lookup.Tail.Type))
         {
             var subLookup = lookup.Append(prop); 
-            if (prop.IsChild)
+            if (prop.IsNestedConfig)
             {
                 FillObject(prop.PropertyInfo.GetValue(obj), subLookup);
             }

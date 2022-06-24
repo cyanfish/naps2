@@ -5,7 +5,12 @@ namespace NAPS2.Config;
 
 public class ConfigStorage<TConfig>
 {
-    private readonly StorageNode _root = new() { IsRoot = true, ValueType = typeof(TConfig) };
+    private readonly StorageNode _root = new()
+    {
+        IsRoot = true,
+        ValueType = typeof(TConfig),
+        IsLeaf = !ConfigLookup.HasConfigAttribute(typeof(TConfig))
+    };
 
     public ConfigStorage()
     {
@@ -138,7 +143,7 @@ public class ConfigStorage<TConfig>
         }
         if (obj == null)
         {
-            throw new ArgumentException("A [Child] config can't be set to null");
+            throw new ArgumentException("A config can't be set to null");
         }
 
         // TODO: We should probably detect and throw an exception for cycles rather than stack overflowing
@@ -150,7 +155,7 @@ public class ConfigStorage<TConfig>
                 Key = propData.Name,
                 Parent = node,
                 ValueType = propData.Type,
-                IsLeaf = !propData.IsChild
+                IsLeaf = !propData.IsNestedConfig
             });
             CopyObjectToNode(childObj, childNode);
         }
@@ -158,17 +163,21 @@ public class ConfigStorage<TConfig>
 
     private void CopyNodeToXElement(StorageNode src, XElement dst, UntypedXmlSerializer serializer)
     {
+        if (src.IsLeaf)
+        {
+            if (src.HasValue)
+            {
+                serializer.SerializeToXElement(src.ValueType, src.Value, dst);
+            }
+            else
+            {
+                dst.Remove();
+            }
+            return;
+        }
         foreach (var childNodeKvp in src.Children)
         {
             var childNode = childNodeKvp.Value;
-            if (childNode.IsLeaf)
-            {
-                if (childNode.HasValue)
-                {
-                    dst.Add(serializer.SerializeToXElement(childNode.ValueType, childNode.Value, childNode.Key));
-                }
-                continue;
-            }
             var childElement = new XElement(childNode.Key);
             dst.Add(childElement);
             CopyNodeToXElement(childNode, childElement, serializer);
@@ -177,6 +186,13 @@ public class ConfigStorage<TConfig>
 
     private void CopyXElementToNode(XElement src, StorageNode dst, UntypedXmlSerializer serializer)
     {
+        if (dst.IsLeaf)
+        {
+            var value = serializer.DeserializeFromXElement(dst.ValueType, src);
+            dst.Value = value;
+            dst.HasValue = true;
+            return;
+        }
         var propDataDict = ConfigLookup.GetPropertyData(dst.ValueType).ToDictionary(x => x.Name);
         foreach (var childElement in src.Elements())
         {
@@ -187,15 +203,8 @@ public class ConfigStorage<TConfig>
                 Key = propData.Name,
                 Parent = dst,
                 ValueType = propData.Type,
-                IsLeaf = !propData.IsChild
+                IsLeaf = !propData.IsNestedConfig
             });
-            if (childNode.IsLeaf)
-            {
-                var value = serializer.DeserializeFromXElement(childNode.ValueType, childElement);
-                childNode.Value = value;
-                childNode.HasValue = true;
-                continue;
-            }
             CopyXElementToNode(childElement, childNode, serializer);
         }
     }
@@ -204,8 +213,15 @@ public class ConfigStorage<TConfig>
     {
         lock (this)
         {
-            doc.Add(new XElement(typeof(TConfig).Name));
-            CopyNodeToXElement(_root, doc.Root!, new UntypedXmlSerializer());
+            if (_root.IsLeaf && !_root.HasValue)
+            {
+                // A valid XML doc needs a root node so this case makes no sense
+                throw new InvalidOperationException("When serializing a plain object, a value must be specified");
+            }
+            var serializer = new UntypedXmlSerializer();
+            var rootName = serializer.GetDefaultElementName(typeof(TConfig));
+            doc.Add(new XElement(rootName));
+            CopyNodeToXElement(_root, doc.Root!, serializer);
         }
     }
 

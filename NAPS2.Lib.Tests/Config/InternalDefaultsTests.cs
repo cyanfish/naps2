@@ -18,7 +18,7 @@ public class InternalDefaultsTests
         foreach (var prop in config.GetType().GetProperties())
         {
             var value = prop.GetValue(config);
-            if (prop.CustomAttributes.Any(x => typeof(ChildAttribute).IsAssignableFrom(x.AttributeType)))
+            if (ConfigLookup.HasConfigAttribute(prop))
             {
                 // Child, so recurse
                 AssertPropNullOrNotNull(value, shouldBeNull, $"{path}{prop.Name}.");

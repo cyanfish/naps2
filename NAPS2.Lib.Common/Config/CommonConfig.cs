@@ -10,6 +10,7 @@ using NAPS2.Scan.Batch;
 namespace NAPS2.Config;
 
 // TODO: Remove all unnecessary nullables
+[Config]
 public class CommonConfig
 {
     public const int CURRENT_VERSION = 3;
@@ -133,40 +134,40 @@ public class CommonConfig
     [App]
     public EventType EventLogging { get; set; }
 
-    [Child]
+    [Config]
     [Common]
     public PdfSettings PdfSettings { get; set; } = new PdfSettings();
 
     [User]
     public bool RememberPdfSettings { get; set; }
 
-    [Child]
+    [Config]
     [Common]
     public ImageSettings ImageSettings { get; set; } = new ImageSettings();
 
     [User]
     public bool RememberImageSettings { get; set; }
 
-    [Child]
+    [Config]
     [Common]
     public EmailSettings EmailSettings { get; set; } = new EmailSettings();
 
     [User]
     public bool RememberEmailSettings { get; set; }
 
-    [Child]
+    [Config]
     [Common]
     public EmailSetup EmailSetup { get; set; } = new EmailSetup();
 
-    [Child]
+    [Config]
     [Common]
     public BatchSettings BatchSettings { get; set; } = new BatchSettings();
 
-    [Child]
+    [Config]
     [Common]
     public KeyboardShortcuts KeyboardShortcuts { get; set; } = new KeyboardShortcuts();
 
-    [Child]
+    [Config]
     [Common]
     public SslSetup SslSetup { get; set; } = new SslSetup();
 
