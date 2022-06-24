@@ -1,7 +1,8 @@
-﻿using NAPS2.Sdk.Tests;
+﻿using NAPS2.Config.Model;
+using NAPS2.Sdk.Tests;
 using Xunit;
 
-namespace NAPS2.Lib.Tests.Config;
+namespace NAPS2.Lib.Tests.Config.Model;
 
 public class FileConfigScopeTests : ContextualTexts
 {

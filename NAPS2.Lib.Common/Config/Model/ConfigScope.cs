@@ -1,7 +1,7 @@
 ﻿using System.Linq.Expressions;
 using NAPS2.Serialization;
 
-namespace NAPS2.Config;
+namespace NAPS2.Config.Model;
 
 public static class ConfigScope
 {
@@ -79,6 +79,11 @@ public abstract class ConfigScope<TConfig>
             CopyFromInternal(source);
         }
     }
+
+    /// <summary>
+    /// Creates a transaction wrapping the provided scope. See TransactionConfigScope for more documentation.
+    /// </summary>
+    public TransactionConfigScope<TConfig> BeginTransaction() => new(this);
 
     protected abstract bool TryGetInternal(ConfigLookup accessor, out object? value);
 

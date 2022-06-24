@@ -1,4 +1,4 @@
-﻿namespace NAPS2.Config;
+﻿namespace NAPS2.Config.Model;
 
 public enum ConfigScopeMode
 {

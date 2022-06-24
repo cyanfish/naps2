@@ -1,4 +1,5 @@
 using System.Windows.Forms;
+using NAPS2.Config.Model;
 using NAPS2.ImportExport.Email;
 using NAPS2.ImportExport.Email.Mapi;
 

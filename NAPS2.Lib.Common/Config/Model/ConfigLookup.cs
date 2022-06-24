@@ -2,6 +2,8 @@ using System.Collections.Immutable;
 using System.Linq.Expressions;
 using System.Reflection;
 
+namespace NAPS2.Config.Model;
+
 public class ConfigLookup
 {
     private static readonly Dictionary<Type, ImmutableList<PropertyData>> PropertyDataCache = new();

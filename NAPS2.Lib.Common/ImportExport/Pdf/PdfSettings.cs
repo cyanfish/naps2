@@ -1,3 +1,5 @@
+using NAPS2.Config.Model;
+
 namespace NAPS2.ImportExport.Pdf;
 
 public class PdfSettings

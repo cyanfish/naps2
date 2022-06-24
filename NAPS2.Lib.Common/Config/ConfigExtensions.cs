@@ -15,9 +15,4 @@ public static class ConfigExtensions
             config.Get(c => c.OcrMode),
             config.Get(c => c.OcrTimeoutInSeconds));
     }
-
-    /// <summary>
-    /// Creates a transaction wrapping the provided scope. See TransactionConfigScope for more documentation.
-    /// </summary>
-    public static TransactionConfigScope<T> BeginTransaction<T>(this ConfigScope<T> scope) => new(scope);
 }

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Immutable;
 using System.Text;
 using System.Xml;
+using NAPS2.Config.Model;
 using NAPS2.Config.ObsoleteTypes;
 using NAPS2.ImportExport.Pdf;
 using NAPS2.Serialization;

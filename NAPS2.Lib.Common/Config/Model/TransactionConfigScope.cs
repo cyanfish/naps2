@@ -1,6 +1,6 @@
 ﻿using System.Linq.Expressions;
 
-namespace NAPS2.Config;
+namespace NAPS2.Config.Model;
 
 /// <summary>
 /// Represents a transaction wrapping an underlying ConfigScope. Writes are only flushed to the underlying scope when

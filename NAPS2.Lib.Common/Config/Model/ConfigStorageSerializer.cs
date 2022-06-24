@@ -1,6 +1,6 @@
 ﻿using NAPS2.Serialization;
 
-namespace NAPS2.Config;
+namespace NAPS2.Config.Model;
 
 public class ConfigStorageSerializer<TConfig> : ISerializer<ConfigStorage<TConfig>>
 {

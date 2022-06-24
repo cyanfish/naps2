@@ -16,9 +16,9 @@ public class UserConfigV0
 
     public string? Culture { get; set; }
 
-    public List<FormState> FormStates { get; set; } = new List<FormState>();
+    public List<FormState> FormStates { get; set; } = new();
 
-    public HashSet<string> BackgroundOperations { get; set; } = new HashSet<string>();
+    public HashSet<string> BackgroundOperations { get; set; } = new();
 
     public bool CheckForUpdates { get; set; }
 
@@ -38,13 +38,13 @@ public class UserConfigV0
 
     public string? LastImageExt { get; set; }
 
-    public PdfSettings PdfSettings { get; set; } = new PdfSettings();
+    public PdfSettings PdfSettings { get; set; } = new();
 
-    public ImageSettings ImageSettings { get; set; } = new ImageSettings();
+    public ImageSettings ImageSettings { get; set; } = new();
 
-    public EmailSettings EmailSettings { get; set; } = new EmailSettings();
+    public EmailSettings EmailSettings { get; set; } = new();
 
-    public EmailSetup EmailSetup { get; set; } = new EmailSetup();
+    public EmailSetup EmailSetup { get; set; } = new();
 
     public int ThumbnailSize { get; set; } = ThumbnailSizes.DEFAULT_SIZE;
 
@@ -52,9 +52,9 @@ public class UserConfigV0
 
     public DockStyle DesktopToolStripDock { get; set; }
 
-    public KeyboardShortcuts KeyboardShortcuts { get; set; } = new KeyboardShortcuts();
+    public KeyboardShortcuts KeyboardShortcuts { get; set; } = new();
 
-    public List<NamedPageSize> CustomPageSizePresets { get; set; } = new List<NamedPageSize>();
+    public List<NamedPageSize> CustomPageSizePresets { get; set; } = new();
 
-    public List<ScanProxyConfig> SavedProxies { get; set; } = new List<ScanProxyConfig>();
+    public List<ScanProxyConfig> SavedProxies { get; set; } = new();
 }

@@ -1,4 +1,5 @@
 ﻿using System.Linq.Expressions;
+using NAPS2.Config.Model;
 
 namespace NAPS2.Config;
 

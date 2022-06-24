@@ -1,5 +1,6 @@
 ﻿using System.Collections.Immutable;
 using System.Windows.Forms;
+using NAPS2.Config.Model;
 using NAPS2.ImportExport.Email;
 using NAPS2.ImportExport.Images;
 using NAPS2.ImportExport.Pdf;
@@ -14,8 +15,6 @@ namespace NAPS2.Config;
 public class CommonConfig
 {
     public const int CURRENT_VERSION = 3;
-
-    public static CommonConfig Create() => new CommonConfig();
 
     [Common]
     public int? Version { get; set; } = CURRENT_VERSION;
@@ -136,36 +135,36 @@ public class CommonConfig
 
     [Config]
     [Common]
-    public PdfSettings PdfSettings { get; set; } = new PdfSettings();
+    public PdfSettings PdfSettings { get; set; } = new();
 
     [User]
     public bool RememberPdfSettings { get; set; }
 
     [Config]
     [Common]
-    public ImageSettings ImageSettings { get; set; } = new ImageSettings();
+    public ImageSettings ImageSettings { get; set; } = new();
 
     [User]
     public bool RememberImageSettings { get; set; }
 
     [Config]
     [Common]
-    public EmailSettings EmailSettings { get; set; } = new EmailSettings();
+    public EmailSettings EmailSettings { get; set; } = new();
 
     [User]
     public bool RememberEmailSettings { get; set; }
 
     [Config]
     [Common]
-    public EmailSetup EmailSetup { get; set; } = new EmailSetup();
+    public EmailSetup EmailSetup { get; set; } = new();
 
     [Config]
     [Common]
-    public BatchSettings BatchSettings { get; set; } = new BatchSettings();
+    public BatchSettings BatchSettings { get; set; } = new();
 
     [Config]
     [Common]
-    public KeyboardShortcuts KeyboardShortcuts { get; set; } = new KeyboardShortcuts();
+    public KeyboardShortcuts KeyboardShortcuts { get; set; } = new();
 
     [Common]
     public ScanProfile? DefaultProfileSettings { get; set; }

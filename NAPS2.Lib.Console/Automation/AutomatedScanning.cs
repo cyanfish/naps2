@@ -1,5 +1,6 @@
 ﻿using System.Threading;
 using System.Xml.Serialization;
+using NAPS2.Config.Model;
 using NAPS2.Dependencies;
 using NAPS2.ImportExport;
 using NAPS2.ImportExport.Email;

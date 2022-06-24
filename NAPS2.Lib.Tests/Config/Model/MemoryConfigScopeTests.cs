@@ -1,6 +1,7 @@
+using NAPS2.Config.Model;
 using Xunit;
 
-namespace NAPS2.Lib.Tests.Config;
+namespace NAPS2.Lib.Tests.Config.Model;
 
 public class MemoryConfigScopeTests
 {

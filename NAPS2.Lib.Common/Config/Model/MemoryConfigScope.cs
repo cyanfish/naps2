@@ -1,6 +1,6 @@
 ﻿using System.Linq.Expressions;
 
-namespace NAPS2.Config;
+namespace NAPS2.Config.Model;
 
 public class MemoryConfigScope<TConfig> : ConfigScope<TConfig>
 {
