@@ -1,4 +1,6 @@
-﻿using NAPS2.Sdk.Tests;
+﻿using System.Reflection;
+using System.Xml.Serialization;
+using NAPS2.Sdk.Tests;
 using NAPS2.Serialization;
 using Xunit;
 
@@ -13,7 +15,6 @@ public class CommonConfigTests : ContextualTexts
         config.FormStates = config.FormStates.Add(new FormState { Name = "Test" });
         config.BackgroundOperations = config.BackgroundOperations.Add("abc");
 
-
         var xml = config.ToXml();
         var config2 = xml.FromXml<CommonConfig>();
 
@@ -24,12 +25,13 @@ public class CommonConfigTests : ContextualTexts
     }
 
     [Fact]
-    public void NoNulls()
+    public void AllHaveOrderMetadata()
     {
-        var config = InternalDefaults.GetCommonConfig();
         foreach (var prop in typeof(CommonConfig).GetProperties())
         {
-            Assert.NotNull(prop.GetValue(config));
+            var attribute = prop.GetCustomAttributes<XmlElementAttribute>().FirstOrDefault();
+            Assert.NotNull(attribute);
+            Assert.InRange(attribute.Order, 1, int.MaxValue);
         }
     }
 }

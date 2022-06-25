@@ -199,6 +199,7 @@ public abstract class XmlSerializer
                 RuntimeHelpers.RunClassConstructor(type.TypeHandle);
                 var props = type.GetProperties(BindingFlags.Instance | BindingFlags.Public)
                     .Where(x => x.GetMethod != null && x.SetMethod != null && !x.GetCustomAttributes(typeof(XmlIgnoreAttribute)).Any())
+                    .OrderBy(GetPropertyOrder)
                     .ToArray();
                 var typeInfo = new XmlTypeInfo
                 {
@@ -236,6 +237,11 @@ public abstract class XmlSerializer
                 return typeInfo;
             });
         }
+    }
+
+    private static int GetPropertyOrder(PropertyInfo prop)
+    {
+        return prop.GetCustomAttributes<XmlElementAttribute>().FirstOrDefault()?.Order ?? int.MaxValue;
     }
 
     protected static IEnumerable<Type> GetKnownTypes(Type type)

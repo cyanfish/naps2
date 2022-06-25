@@ -2,19 +2,17 @@
 
 namespace NAPS2.Config;
 
-// TODO: Is this (and child attributes) needed anymore? Can we make use of it somehow?
+/// <summary>
+/// Adds ordering metadata to config properties to ensure the XML output order is the same as the source code order.
+/// </summary>
 public abstract class ConfigPropAttribute : XmlElementAttribute
 {
     protected ConfigPropAttribute(int line)
     {
-        // Ideally we would use XmlElementAttribute.Order so the generated XML files have a nice ordering.
-        // However, that can break deserialization in case the order changes (e.g. new properties).
-        // So we have to be satisfied with this, which can at least be used to generate appsettings.xml.
-        ConfigOrdering = line;
-        // Setting nullable ensures all properties are included in the output. Otherwise there is an
-        // inconsistency between reference types and nullable value types.
-        IsNullable = true;
+        // This only works because NAPS2.Serialization.XmlSerializer works differently than the .NET serializer.
+        // With .NET this would break deserialization as it enforces the input is in the correct order, which would
+        // change as we add new properties.
+        Order = line;
+        // With .NET we would also need to set IsNullable to true to ensure all nulls are included in the output.
     }
-
-    public int ConfigOrdering { get; set; }
 }

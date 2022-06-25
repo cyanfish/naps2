@@ -1,6 +1,7 @@
 ﻿using System.Collections.Immutable;
 using NAPS2.Serialization;
 using Xunit;
+using XmlElementAttribute = System.Xml.Serialization.XmlElementAttribute;
 
 namespace NAPS2.Sdk.Tests.Serialization;
 
@@ -105,6 +106,20 @@ public class XmlSerializerTests
 
         var copy = serializer.DeserializeFromXDocument(doc);
         Assert.Null(copy.Str);
+    }
+
+    [Fact]
+    public void SerializeOrdered()
+    {
+        var original = new OrderedProps();
+        var serializer = new XmlSerializer<OrderedProps>();
+        var doc = serializer.SerializeToXDocument(original);
+
+        var elements = doc.Root!.Elements().ToList();
+        Assert.Equal("A", elements[0].Name);
+        Assert.Equal("C", elements[1].Name);
+        Assert.Equal("D", elements[2].Name);
+        Assert.Equal("B", elements[3].Name);
     }
 
     [Fact]
@@ -295,5 +310,20 @@ public class XmlSerializerTests
     public record Record
     {
         public string Str { get; init; }
+    }
+
+    public class OrderedProps
+    {
+        [XmlElement(Order = 1)]
+        public string A { get; set; }
+        
+        [XmlElement(Order = 4)]
+        public string B { get; set; }
+        
+        [XmlElement(Order = 2)]
+        public string C { get; set; }
+
+        [XmlElement(Order = 3)]
+        public string D { get; set; }
     }
 }

@@ -22,6 +22,24 @@ public static class CollectionExtensions
     }
 #endif
 
+#if !NET6_0_OR_GREATER
+    /// <summary>
+    /// Returns the first element of a sequence, or a specified default value if the sequence contains no elements.
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="enumerable"></param>
+    /// <param name="item"></param>
+    /// <returns></returns>
+    public static T FirstOrDefault<T>(this IEnumerable<T> enumerable, T defaultValue)
+    {
+        foreach (var obj in enumerable)
+        {
+            return obj;
+        }
+        return defaultValue;
+    }
+#endif
+
     /// <summary>
     /// Prepends the given item to the start of the enumerable.
     /// </summary>
