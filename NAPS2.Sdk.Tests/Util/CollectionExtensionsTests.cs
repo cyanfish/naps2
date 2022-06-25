@@ -12,6 +12,6 @@ public class CollectionExtensionsTests
         Assert.Equal(new[] { 4, 3, 2, 1, 0 }, array.IndiciesOf(new[] { 'e', 'd', 'c', 'b', 'a' }));
         Assert.Equal(new[] { 0, 4, 1 }, array.IndiciesOf(new[] { 'a', 'e', 'b' }));
         Assert.Equal(new int[] { }, array.IndiciesOf(new char[] { }));
-        Assert.Throws<ArgumentException>(() => array.IndiciesOf(new [] { 'f' }));
+        Assert.Equal(new[] { -1 }, array.IndiciesOf(new[] { 'f' }));
     }
 }

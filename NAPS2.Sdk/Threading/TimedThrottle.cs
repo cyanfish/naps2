@@ -33,20 +33,23 @@ public class TimedThrottle
 
         if (doRunAction)
         {
-            _action();
+            RunActionOnSyncContext(syncContext);
         }
     }
 
     private void Tick(object state)
     {
-        var syncContext = (SynchronizationContext?) state;
         lock (this)
         {
             _timer?.Dispose();
             _timer = null;
             _lastRun = DateTime.Now;
         }
+        RunActionOnSyncContext((SynchronizationContext?) state);
+    }
 
+    private void RunActionOnSyncContext(SynchronizationContext? syncContext)
+    {
         if (syncContext != null)
         {
             syncContext.Post(_ => _action(), null);

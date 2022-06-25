@@ -103,14 +103,7 @@ public static class CollectionExtensions
     {
         int i = 0;
         var elementDict = list.ToDictionary(element => element, element => i++);
-        try
-        {
-            return elements.Select(x => elementDict[x]).ToList();
-        }
-        catch (KeyNotFoundException)
-        {
-            throw new ArgumentException("Not all elements present in list", nameof(elements));
-        }
+        return elements.Select(x => elementDict.Get(x, -1)).ToList();
     }
 
     /// <summary>

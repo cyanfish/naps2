@@ -1,6 +1,5 @@
 namespace NAPS2.Images;
 
-// TODO: We need to implement recovery here.
 // TODO: Write tests for this class
 /// <summary>
 /// A mutable container for an image in the NAPS2 UI that can be edited, has a thumbnail, etc.
@@ -130,4 +129,12 @@ public class UiImage : IDisposable
 
     // TODO: Maybe delete depending on how we handle ocr cancellation
     public EventHandler? FullyDisposed;
+
+    public ImageRenderState GetImageRenderState()
+    {
+        lock (this)
+        {
+            return new ImageRenderState(_processedImage.GetWeakReference(), _thumbnailTransformState, _thumbnail, this);
+        }
+    }
 }

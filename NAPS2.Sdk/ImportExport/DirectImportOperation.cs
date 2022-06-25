@@ -36,6 +36,11 @@ public class DirectImportOperation : OperationBase
                 {
                     ProcessedImage img = SerializedImageHelper.Deserialize(_scanningContext, serializedImage, new SerializedImageHelper.DeserializeOptions());
                     var thumbnailSize = img.PostProcessingData.Thumbnail == null ? importParams.ThumbnailSize : null;
+                    // TODO: Maybe we can use a Pipeline to offload thumbnail rendering?
+                    // TODO: And actually we should be using the worker service here...
+                    // TODO: Or maybe somehow we can just leverage the FDesktop renderer
+                    // TODO: And also we should try and refactor as much logic out of FDesktop etc to make it testable
+                    // TODO: Also consider if multiple workers (e.g. 4 in parallel) here and elsewhere is a good idea to optimize rendering
                     img = _importPostProcessor.AddPostProcessingData(
                         img,
                         null,

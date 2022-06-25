@@ -2,6 +2,7 @@ namespace NAPS2.Images;
 
 public abstract class ImageListMutation : ListMutation<UiImage>
 {
+    // TODO: Is there a better way to handle updating this thumbnail?
     public class RotateFlip : ImageListMutation
     {
         private readonly ImageContext _imageContext;

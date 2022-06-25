@@ -25,6 +25,7 @@ public class UiImageList
 
     public ThumbnailRenderer? ThumbnailRenderer { get; set; }
 
+    // TODO: Make this immutable?
     public List<UiImage> Images { get; }
 
     public StateToken CurrentState => new(Images.Select(x => x.GetImageWeakReference()).ToImmutableList());
@@ -35,19 +36,24 @@ public class UiImageList
         set => _savedState = value ?? throw new ArgumentNullException(nameof(value));
     }
 
+    // TODO: We should make this selection maintain insertion order, or otherwise guarantee that for things like FDesktop.SavePDF we actually get the images in the right order
     public ListSelection<UiImage> Selection
     {
         get => _selection;
-        set => _selection = value ?? throw new ArgumentNullException(nameof(value));
+        private set => _selection = value ?? throw new ArgumentNullException(nameof(value));
     }
+
+    public event EventHandler? ImagesUpdated;
+
+    public event EventHandler? ImagesThumbnailChanged;
+
+    public event EventHandler? ImagesThumbnailInvalidated;
 
     public void UpdateSelection(ListSelection<UiImage> newSelection)
     {
         Selection = newSelection;
         ImagesUpdated?.Invoke(this, EventArgs.Empty);
     }
-
-    public event EventHandler? ImagesUpdated;
 
     public void Mutate(ListMutation<UiImage> mutation, ListSelection<UiImage>? selectionToMutate = null)
     {
@@ -63,20 +69,70 @@ public class UiImageList
 
     private void MutateInternal(ListMutation<UiImage> mutation, ListSelection<UiImage>? selectionToMutate)
     {
-        if (!ReferenceEquals(selectionToMutate, null))
+        lock (this)
         {
-            mutation.Apply(Images, ref selectionToMutate);
+            var currentSelection = _selection;
+            var before = new HashSet<UiImage>(Images);
+            if (!ReferenceEquals(selectionToMutate, null))
+            {
+                mutation.Apply(Images, ref selectionToMutate);
+            }
+            else
+            {
+                mutation.Apply(Images, ref currentSelection);
+            }
+            var after = new HashSet<UiImage>(Images);
+
+            foreach (var added in after.Except(before))
+            {
+                added.ThumbnailChanged += ImageThumbnailChanged;
+                added.ThumbnailInvalidated += ImageThumbnailInvalidated;
+            }
+            foreach (var removed in before.Except(after))
+            {
+                removed.ThumbnailChanged -= ImageThumbnailChanged;
+                removed.ThumbnailInvalidated -= ImageThumbnailInvalidated;
+                removed.Dispose();
+            }
+
+            if (currentSelection != _selection)
+            {
+                UpdateSelectionOnUiThread(currentSelection);
+            }
+        }
+        ImagesUpdated?.Invoke(this, EventArgs.Empty);
+    }
+
+    private void UpdateSelectionOnUiThread(ListSelection<UiImage> currentSelection)
+    {
+        var syncContext = SynchronizationContext.Current;
+        if (syncContext != null)
+        {
+            syncContext.Post(_ => _selection = currentSelection, null);
         }
         else
         {
-            mutation.Apply(Images, ref _selection);
+            _selection = currentSelection;
         }
+    }
+
+    private void ImageThumbnailChanged(object? sender, EventArgs args)
+    {
+        ImagesThumbnailChanged?.Invoke(this, EventArgs.Empty);
+    }
+
+    private void ImageThumbnailInvalidated(object? sender, EventArgs args)
+    {
+        ImagesThumbnailInvalidated?.Invoke(this, EventArgs.Empty);
     }
 
     private void RunUpdateEvents()
     {
-        _recoveryStorageManager.WriteIndex(Images);
-        ImagesUpdated?.Invoke(this, EventArgs.Empty);
+        // TODO: Maybe move this out of this class to an event handler?
+        lock (this)
+        {
+            _recoveryStorageManager.WriteIndex(Images);
+        }
     }
 
     /// <summary>

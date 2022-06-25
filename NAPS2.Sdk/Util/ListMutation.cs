@@ -21,6 +21,8 @@ public abstract class ListMutation<T>
             int upperBound = list.Count - 1;
             foreach (int i in selection.ToSelectedIndices(list).Reverse())
             {
+                // TODO: How do we want to handle this in mutations? Is it a real error case?
+                if (i == -1) break;
                 if (i != upperBound--)
                 {
                     var item = list[i];
@@ -38,6 +40,7 @@ public abstract class ListMutation<T>
             int lowerBound = 0;
             foreach (int i in selection.ToSelectedIndices(list))
             {
+                if (i == -1) break;
                 if (i != lowerBound++)
                 {
                     var item = list[i];
@@ -60,8 +63,8 @@ public abstract class ListMutation<T>
         public override void Apply(List<T> list, ref ListSelection<T> selection)
         {
             var indexList = selection.ToSelectedIndices(list).ToList();
-            var bottom = indexList.Where(x => x < _destinationIndex).OrderByDescending(x => x).ToList();
-            var top = indexList.Where(x => x >= _destinationIndex).OrderBy(x => x).ToList();
+            var bottom = indexList.Where(x => x != -1 && x < _destinationIndex).OrderByDescending(x => x).ToList();
+            var top = indexList.Where(x =>  x != -1 &&x >= _destinationIndex).OrderBy(x => x).ToList();
 
             int offset = 1;
             foreach (int i in bottom)
@@ -187,7 +190,7 @@ public abstract class ListMutation<T>
     {
         public override void Apply(List<T> list, ref ListSelection<T> selection)
         {
-            var indexList = selection.ToSelectedIndices(list).ToList();
+            var indexList = selection.ToSelectedIndices(list).Where(x => x != -1).ToList();
             int pairCount = indexList.Count / 2;
 
             // Swap pairs in the selection, excluding the middle element (if the total count is odd)

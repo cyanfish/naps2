@@ -2,6 +2,7 @@ using System.Collections.Immutable;
 
 namespace NAPS2.Images;
 
+// TODO: Actually implement undo in the UI
 public class UndoStack : IDisposable
 {
     private readonly int _maxLength;
