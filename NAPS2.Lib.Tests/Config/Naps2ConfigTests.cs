@@ -2,9 +2,9 @@ using Xunit;
 
 namespace NAPS2.Lib.Tests.Config;
 
-public class ScopedConfigTests
+public class Naps2ConfigTests
 {
-    private readonly ScopedConfig _config = ScopedConfig.Stub(); 
+    private readonly Naps2Config _config = Naps2Config.Stub(); 
     
     [Fact]
     public void StartsWithInternalDefaults()

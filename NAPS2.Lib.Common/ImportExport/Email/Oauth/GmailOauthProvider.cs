@@ -7,11 +7,11 @@ namespace NAPS2.ImportExport.Email.Oauth;
 // TODO: The config references should be pulled elsewhere so this can be included in the SDK
 public class GmailOauthProvider : OauthProvider
 {
-    private readonly ScopedConfig _config;
+    private readonly Naps2Config _config;
 
     private OauthClientCreds? _creds;
 
-    public GmailOauthProvider(ScopedConfig config)
+    public GmailOauthProvider(Naps2Config config)
     {
         _config = config;
     }

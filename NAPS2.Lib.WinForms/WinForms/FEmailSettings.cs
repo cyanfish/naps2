@@ -10,7 +10,7 @@ public partial class FEmailSettings : FormBase
     private readonly SystemEmailClients _systemEmailClients;
     private TransactionConfigScope<CommonConfig> _userTransact;
     private TransactionConfigScope<CommonConfig> _runTransact;
-    private ScopedConfig _transactionConfig;
+    private Naps2Config _transactionConfig;
 
     public FEmailSettings(SystemEmailClients systemEmailClients)
     {

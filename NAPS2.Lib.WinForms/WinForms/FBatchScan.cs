@@ -18,7 +18,7 @@ namespace NAPS2.WinForms
         private readonly DialogHelper _dialogHelper;
         private readonly IProfileManager _profileManager;
         private TransactionConfigScope<CommonConfig> _userTransact;
-        private ScopedConfig _transactionConfig;
+        private Naps2Config _transactionConfig;
 
         private bool _batchRunning;
         private CancellationTokenSource _cts = new CancellationTokenSource();

@@ -11,6 +11,7 @@ using NAPS2.Scan.Batch;
 namespace NAPS2.Config;
 
 // TODO: Remove all unnecessary nullables
+// TODO: Maybe have this serialize with the root node named as AppConfig/UserConfig somehow?
 [Config]
 public class CommonConfig
 {
@@ -23,10 +24,10 @@ public class CommonConfig
     public string? Culture { get; set; }
 
     [User]
-    public ImmutableList<FormState>? FormStates { get; set; }
+    public ImmutableList<FormState> FormStates { get; set; } = ImmutableList<FormState>.Empty;
 
     [User]
-    public ImmutableHashSet<string>? BackgroundOperations { get; set; }
+    public ImmutableHashSet<string> BackgroundOperations { get; set; } = ImmutableHashSet<string>.Empty;
 
     [Common]
     public ImmutableList<NamedPageSize>? CustomPageSizePresets { get; set; }

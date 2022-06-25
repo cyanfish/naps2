@@ -6,11 +6,11 @@ namespace NAPS2.EtoForms;
 public class FormStateController : IFormStateController
 {
     private readonly Window _window;
-    private readonly ScopedConfig _config;
+    private readonly Naps2Config _config;
     private FormState? _formState;
     private bool _loaded;
 
-    public FormStateController(Window window, ScopedConfig config)
+    public FormStateController(Window window, Naps2Config config)
     {
         _window = window;
         _config = config;

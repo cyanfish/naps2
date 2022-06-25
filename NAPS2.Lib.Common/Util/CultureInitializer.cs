@@ -7,9 +7,9 @@ namespace NAPS2.Util;
 /// </summary>
 public class CultureInitializer
 {
-    private readonly ScopedConfig _config;
+    private readonly Naps2Config _config;
 
-    public CultureInitializer(ScopedConfig config)
+    public CultureInitializer(Naps2Config config)
     {
         _config = config;
     }

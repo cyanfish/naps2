@@ -23,9 +23,9 @@ public class AutomatedScanning
     private readonly IOperationFactory _operationFactory;
     private readonly TesseractLanguageManager _tesseractLanguageManager;
     private readonly IFormFactory _formFactory;
-    private readonly ScopedConfig _config;
+    private readonly Naps2Config _config;
     private readonly TransactionConfigScope<CommonConfig> _userTransact;
-    private readonly ScopedConfig _transactionConfig;
+    private readonly Naps2Config _transactionConfig;
     private readonly IProfileManager _profileManager;
     private readonly RecoveryStorageManager _recoveryStorageManager;
     private readonly ScanningContext _scanningContext;
@@ -42,7 +42,7 @@ public class AutomatedScanning
     public AutomatedScanning(ConsoleOutput output, AutomatedScanningOptions options, ImageContext imageContext,
         IScanPerformer scanPerformer, ErrorOutput errorOutput, IEmailProviderFactory emailProviderFactory,
         IScannedImageImporter scannedImageImporter, IOperationFactory operationFactory,
-        TesseractLanguageManager tesseractLanguageManager, IFormFactory formFactory, ScopedConfig config,
+        TesseractLanguageManager tesseractLanguageManager, IFormFactory formFactory, Naps2Config config,
         IProfileManager profileManager, RecoveryStorageManager recoveryStorageManager, ScanningContext scanningContext)
     {
         _output = output;

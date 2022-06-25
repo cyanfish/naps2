@@ -134,7 +134,7 @@ public class CommandLineIntegrationTests : ContextualTexts
             Rebind<IScanBridgeFactory>().To<InProcScanBridgeFactory>();
             Rebind<ConsoleOutput>().ToSelf()
                 .WithConstructorArgument("writer", new TestOutputTextWriter(_testOutputHelper));
-            Rebind<ScopedConfig>().ToConstant(ScopedConfig.Stub());
+            Rebind<Naps2Config>().ToConstant(Naps2Config.Stub());
             Rebind<IProfileManager>().ToMethod(_ =>
             {
                 var userPath = Path.Combine(_folderPath, "profiles.xml");

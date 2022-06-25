@@ -57,7 +57,7 @@ public class BatchFormTests : ContextualTexts
             Performer = new Mock<IBatchScanPerformer>(),
             ErrorOutput = new Mock<ErrorOutput>(),
             DialogHelper = new Mock<DialogHelper>(),
-            Config = ScopedConfig.Stub()
+            Config = Naps2Config.Stub()
         };
         ctx.Form = new FBatchScan(ctx.Performer.Object, ctx.ErrorOutput.Object, ctx.DialogHelper.Object, _profileManager)
         {
@@ -74,7 +74,7 @@ public class BatchFormTests : ContextualTexts
 
         public Mock<DialogHelper> DialogHelper { get; set; }
 
-        public ScopedConfig Config { get; set; }
+        public Naps2Config Config { get; set; }
 
         public FBatchScan Form { get; set; }
     }

@@ -11,7 +11,7 @@ internal class ScanPerformer : IScanPerformer
 {
     private readonly ScanningContext _scanningContext;
     private readonly IDevicePrompt _devicePrompt;
-    private readonly ScopedConfig _config;
+    private readonly Naps2Config _config;
     private readonly OperationProgress _operationProgress;
     private readonly AutoSaver _autoSaver;
     private readonly IProfileManager _profileManager;
@@ -20,7 +20,7 @@ internal class ScanPerformer : IScanPerformer
     private readonly IScanBridgeFactory _scanBridgeFactory;
     private readonly IOcrEngine _ocrEngine;
 
-    public ScanPerformer(IDevicePrompt devicePrompt, ScopedConfig config, OperationProgress operationProgress,
+    public ScanPerformer(IDevicePrompt devicePrompt, Naps2Config config, OperationProgress operationProgress,
         AutoSaver autoSaver, IProfileManager profileManager, ErrorOutput errorOutput,
         ScanOptionsValidator scanOptionsValidator, IScanBridgeFactory scanBridgeFactory,
         ScanningContext scanningContext, IOcrEngine ocrEngine)

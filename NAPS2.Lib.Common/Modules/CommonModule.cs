@@ -47,8 +47,8 @@ public class CommonModule : NinjectModule
         Bind<NetworkScanBridge>().ToSelf();
 
         // Config
-        Bind<ScopedConfig>().ToMethod(_ =>
-            new ScopedConfig(Path.Combine(Paths.Executable, "appsettings.xml"),
+        Bind<Naps2Config>().ToMethod(_ =>
+            new Naps2Config(Path.Combine(Paths.Executable, "appsettings.xml"),
                 Path.Combine(Paths.AppData, "config.xml"))).InSingletonScope();
 
         // Host
@@ -68,7 +68,7 @@ public class CommonModule : NinjectModule
 
         Bind<IProfileManager>().ToMethod(ctx =>
         {
-            var config = ctx.Kernel.Get<ScopedConfig>();
+            var config = ctx.Kernel.Get<Naps2Config>();
             return new ProfileManager(
                 Path.Combine(Paths.AppData, "profiles.xml"),
                 Path.Combine(Assembly.GetEntryAssembly().Location, "profiles.xml"),
@@ -79,7 +79,7 @@ public class CommonModule : NinjectModule
 
         Bind<TesseractLanguageManager>().ToMethod(ctx =>
         {
-            var config = ctx.Kernel.Get<ScopedConfig>();
+            var config = ctx.Kernel.Get<Naps2Config>();
             var customComponentsPath = config.Get(c => c.ComponentsPath);
             var componentsPath = string.IsNullOrWhiteSpace(customComponentsPath)
                 ? Paths.Components

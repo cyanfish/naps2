@@ -31,7 +31,7 @@ public class NinjectEmailProviderFactory : IEmailProviderFactory
     {
         get
         {
-            var config = _kernel.Get<ScopedConfig>();
+            var config = _kernel.Get<Naps2Config>();
             var providerType = config.Get(c => c.EmailSetup.ProviderType);
             return Create(providerType);
         }

@@ -20,7 +20,7 @@ public class AboutForm : EtoDialogBase
     private bool _hasCheckedForUpdates;
     private UpdateInfo? _update;
 
-    public AboutForm(ScopedConfig config, UpdateChecker updateChecker)
+    public AboutForm(Naps2Config config, UpdateChecker updateChecker)
         : base(config)
     {
         _updateChecker = updateChecker;

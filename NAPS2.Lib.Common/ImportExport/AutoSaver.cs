@@ -14,13 +14,13 @@ public class AutoSaver
     private readonly ISaveNotify _notify;
     private readonly PdfExporter _pdfExporter;
     private readonly IOverwritePrompt _overwritePrompt;
-    private readonly ScopedConfig _config;
+    private readonly Naps2Config _config;
     private readonly TiffHelper _tiffHelper;
     private readonly ImageContext _imageContext;
 
     public AutoSaver(ErrorOutput errorOutput, DialogHelper dialogHelper,
         OperationProgress operationProgress, ISaveNotify notify, PdfExporter pdfExporter,
-        IOverwritePrompt overwritePrompt, ScopedConfig config, TiffHelper tiffHelper, ImageContext imageContext)
+        IOverwritePrompt overwritePrompt, Naps2Config config, TiffHelper tiffHelper, ImageContext imageContext)
     {
         _errorOutput = errorOutput;
         _dialogHelper = dialogHelper;

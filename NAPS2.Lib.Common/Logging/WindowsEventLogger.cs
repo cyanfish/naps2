@@ -5,9 +5,9 @@ public class WindowsEventLogger : IEventLogger
     private const string SOURCE_NAME = "NAPS2";
     private const string LOG_NAME = "Application";
 
-    private readonly ScopedConfig _config;
+    private readonly Naps2Config _config;
 
-    public WindowsEventLogger(ScopedConfig config)
+    public WindowsEventLogger(Naps2Config config)
     {
         _config = config;
     }

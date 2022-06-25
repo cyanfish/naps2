@@ -9,5 +9,5 @@ public interface IFormBase
     // TODO: Make these constructor injected, Eto requires things to be defined in the constructor so property injection is error-prone
     IFormFactory FormFactory { get; set; }
 
-    ScopedConfig Config { get; set; }
+    Naps2Config Config { get; set; }
 }

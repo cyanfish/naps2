@@ -4,9 +4,9 @@ namespace NAPS2.WinForms;
 
 public class WinFormsDialogHelper : DialogHelper
 {
-    private readonly ScopedConfig _config;
+    private readonly Naps2Config _config;
 
-    public WinFormsDialogHelper(ScopedConfig config)
+    public WinFormsDialogHelper(Naps2Config config)
     {
         _config = config;
     }

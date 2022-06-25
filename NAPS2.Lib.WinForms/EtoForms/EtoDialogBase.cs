@@ -5,15 +5,15 @@ namespace NAPS2.EtoForms;
 
 public abstract class EtoDialogBase : Dialog, IFormBase
 {
-    protected EtoDialogBase(ScopedConfig scopedConfig)
+    protected EtoDialogBase(Naps2Config config)
     {
-        Config = scopedConfig;
-        FormStateController = new FormStateController(this, scopedConfig);
+        Config = config;
+        FormStateController = new FormStateController(this, config);
     }
 
     public IFormStateController FormStateController { get; }
 
     public IFormFactory FormFactory { get; set; }
         
-    public ScopedConfig Config { get; set; }
+    public Naps2Config Config { get; set; }
 }

@@ -1,5 +1,4 @@
-﻿using System.Linq.Expressions;
-using NAPS2.Config.Model;
+﻿using NAPS2.Config.Model;
 
 namespace NAPS2.Config;
 
@@ -14,11 +13,11 @@ namespace NAPS2.Config;
 /// Getting a config value will automatically enumerate the scopes in order and return the first value.
 /// Setting a config value must be done on one of the writable scopes (Run or User).
 ///
-/// A ScopedConfig object can also represent a transaction, where the Run or User scopes contain uncommitted values.
+/// A Naps2Config object can also represent a transaction, where the Run or User scopes contain uncommitted values.
 /// </summary>
-public class ScopedConfig
+public class Naps2Config : ScopedConfig
 {
-    public static ScopedConfig Stub() =>
+    public static Naps2Config Stub() =>
         new(
             ConfigScope.Memory<CommonConfig>(),
             ConfigScope.Memory<CommonConfig>(),
@@ -26,20 +25,21 @@ public class ScopedConfig
             ConfigScope.Memory<CommonConfig>(),
             ConfigScope.Defaults(InternalDefaults.GetCommonConfig()));
 
-    private readonly ConfigScope<CommonConfig>[] _scopes;
-
-    public ScopedConfig(string appConfigPath, string userConfigPath)
+    public Naps2Config(string appConfigPath, string userConfigPath)
     {
-        AppLocked = ConfigScope.File(appConfigPath, new ConfigSerializer(ConfigReadMode.LockedOnly), ConfigScopeMode.ReadOnly);
+        AppLocked = ConfigScope.File(appConfigPath, new ConfigSerializer(ConfigReadMode.LockedOnly),
+            ConfigScopeMode.ReadOnly);
         Run = ConfigScope.Memory<CommonConfig>();
         User = ConfigScope.File(userConfigPath, new ConfigSerializer(ConfigReadMode.All), ConfigScopeMode.ReadWrite);
-        AppDefault = ConfigScope.File(appConfigPath, new ConfigSerializer(ConfigReadMode.DefaultOnly), ConfigScopeMode.ReadOnly);
+        AppDefault = ConfigScope.File(appConfigPath, new ConfigSerializer(ConfigReadMode.DefaultOnly),
+            ConfigScopeMode.ReadOnly);
         InternalDefault = ConfigScope.Defaults(InternalDefaults.GetCommonConfig());
 
-        _scopes = new[] { AppLocked, Run, User, AppDefault, InternalDefault };
+        Scopes = new[] { AppLocked, Run, User, AppDefault, InternalDefault };
     }
 
-    public ScopedConfig(ConfigScope<CommonConfig> appLocked, ConfigScope<CommonConfig> run, ConfigScope<CommonConfig> user,
+    public Naps2Config(ConfigScope<CommonConfig> appLocked, ConfigScope<CommonConfig> run,
+        ConfigScope<CommonConfig> user,
         ConfigScope<CommonConfig> appDefault, ConfigScope<CommonConfig> internalDefault)
     {
         AppLocked = appLocked;
@@ -48,52 +48,11 @@ public class ScopedConfig
         AppDefault = appDefault;
         InternalDefault = internalDefault;
 
-        _scopes = new[] { AppLocked, Run, User, AppDefault, InternalDefault };
+        Scopes = new[] { AppLocked, Run, User, AppDefault, InternalDefault };
     }
 
-    public T Get<T>(Expression<Func<CommonConfig, T>> accessor)
-    {
-        var lookup = ConfigLookup.ExpandExpression(accessor);
-        return (T) Get(lookup);
-    }
-
-    private object? Get(ConfigLookup lookup)
-    {
-        if (!lookup.Tail.IsLeaf)
-        {
-            var obj = Activator.CreateInstance(lookup.Tail.Type);
-            FillObject(obj, lookup);
-            return obj;
-            
-        }
-        foreach (var scope in _scopes)
-        {
-            if (scope.TryGet(lookup, out var value))
-            {
-                return value;
-            }
-        }
-        // This shouldn't happen - the last config scope should always define a default value for every property.
-        throw new Exception("Config value not defined.");
-    }
-
-    private void FillObject(object? obj, ConfigLookup lookup)
-    {
-        foreach (var prop in ConfigLookup.GetPropertyData(lookup.Tail.Type))
-        {
-            var subLookup = lookup.Append(prop); 
-            if (prop.IsNestedConfig)
-            {
-                FillObject(prop.PropertyInfo.GetValue(obj), subLookup);
-            }
-            else
-            {
-                prop.PropertyInfo.SetValue(obj, Get(subLookup));
-            }
-        }
-    }
-
-    public ScopedConfig WithTransaction(params TransactionConfigScope<CommonConfig>[] transactions)
+    // TODO: Maybe generalize this somehow
+    public Naps2Config WithTransaction(params TransactionConfigScope<CommonConfig>[] transactions)
     {
         var userScope = User;
         var runScope = Run;
@@ -112,7 +71,7 @@ public class ScopedConfig
                 throw new ArgumentException("Unsupported transaction scope");
             }
         }
-        return new ScopedConfig(AppLocked, runScope, userScope, AppDefault, InternalDefault);
+        return new Naps2Config(AppLocked, runScope, userScope, AppDefault, InternalDefault);
     }
 
     public ConfigScope<CommonConfig> AppLocked { get; }

@@ -6,10 +6,10 @@ namespace NAPS2.ImportExport.Email.Mapi;
 public class MapiEmailProvider : IEmailProvider
 {
     private readonly MapiDispatcher _mapiDispatcher;
-    private readonly ScopedConfig _config;
+    private readonly Naps2Config _config;
     private readonly ErrorOutput _errorOutput;
 
-    public MapiEmailProvider(MapiDispatcher mapiDispatcher, ScopedConfig config, ErrorOutput errorOutput)
+    public MapiEmailProvider(MapiDispatcher mapiDispatcher, Naps2Config config, ErrorOutput errorOutput)
     {
         _mapiDispatcher = mapiDispatcher;
         _config = config;

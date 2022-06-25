@@ -17,7 +17,7 @@ public class NinjectFormFactory : IFormFactory
     {
         var form = _kernel.Get<T>();
         form.FormFactory = _kernel.Get<IFormFactory>();
-        form.Config = _kernel.Get<ScopedConfig>();
+        form.Config = _kernel.Get<Naps2Config>();
         return form;
     }
 }

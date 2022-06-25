@@ -26,8 +26,8 @@ public class ProfilesForm : EtoDialogBase
     private readonly Command _copyCommand;
     private readonly Command _pasteCommand;
 
-    public ProfilesForm(ScopedConfig scopedConfig, IScanPerformer scanPerformer, ProfileNameTracker profileNameTracker, IProfileManager profileManager, IEtoPlatform etoPlatform, ProfileListViewBehavior profileListViewBehavior, ProfileTransfer profileTransfer)
-        : base(scopedConfig)
+    public ProfilesForm(Naps2Config config, IScanPerformer scanPerformer, ProfileNameTracker profileNameTracker, IProfileManager profileManager, IEtoPlatform etoPlatform, ProfileListViewBehavior profileListViewBehavior, ProfileTransfer profileTransfer)
+        : base(config)
     {
         _scanPerformer = scanPerformer;
         _profileNameTracker = profileNameTracker;

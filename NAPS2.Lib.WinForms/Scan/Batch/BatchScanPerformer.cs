@@ -15,11 +15,11 @@ public class BatchScanPerformer : IBatchScanPerformer
     private readonly PdfExporter _pdfExporter;
     private readonly IOperationFactory _operationFactory;
     private readonly IFormFactory _formFactory;
-    private readonly ScopedConfig _config;
+    private readonly Naps2Config _config;
     private readonly IProfileManager _profileManager;
 
     public BatchScanPerformer(IScanPerformer scanPerformer, PdfExporter pdfExporter, IOperationFactory operationFactory,
-        IFormFactory formFactory, ScopedConfig config, IProfileManager profileManager)
+        IFormFactory formFactory, Naps2Config config, IProfileManager profileManager)
     {
         _scanPerformer = scanPerformer;
         _pdfExporter = pdfExporter;
@@ -50,7 +50,7 @@ public class BatchScanPerformer : IBatchScanPerformer
         private readonly PdfExporter _pdfExporter;
         private readonly IOperationFactory _operationFactory;
         private readonly IFormFactory _formFactory;
-        private readonly ScopedConfig _config;
+        private readonly Naps2Config _config;
         private readonly IProfileManager _profileManager;
 
         private ScanProfile _profile;
@@ -58,7 +58,7 @@ public class BatchScanPerformer : IBatchScanPerformer
         private List<List<ProcessedImage>> _scans;
 
         public BatchState(IScanPerformer scanPerformer, PdfExporter pdfExporter, IOperationFactory operationFactory,
-            IFormFactory formFactory, ScopedConfig config, IProfileManager profileManager)
+            IFormFactory formFactory, Naps2Config config, IProfileManager profileManager)
         {
             _scanPerformer = scanPerformer;
             _pdfExporter = pdfExporter;

@@ -4,7 +4,7 @@ namespace NAPS2.Config;
 
 public static class ConfigExtensions
 {
-    public static OcrParams DefaultOcrParams(this ScopedConfig config)
+    public static OcrParams DefaultOcrParams(this Naps2Config config)
     {
         if (!config.Get(c => c.EnableOcr))
         {

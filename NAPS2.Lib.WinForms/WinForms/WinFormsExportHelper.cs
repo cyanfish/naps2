@@ -12,10 +12,10 @@ public class WinFormsExportHelper
     private readonly IOperationFactory _operationFactory;
     private readonly IFormFactory _formFactory;
     private readonly OperationProgress _operationProgress;
-    private readonly ScopedConfig _config;
+    private readonly Naps2Config _config;
     private readonly UiImageList _uiImageList;
 
-    public WinFormsExportHelper(DialogHelper dialogHelper, IOperationFactory operationFactory, IFormFactory formFactory, OperationProgress operationProgress, ScopedConfig config, UiImageList uiImageList)
+    public WinFormsExportHelper(DialogHelper dialogHelper, IOperationFactory operationFactory, IFormFactory formFactory, OperationProgress operationProgress, Naps2Config config, UiImageList uiImageList)
     {
         _dialogHelper = dialogHelper;
         _operationFactory = operationFactory;

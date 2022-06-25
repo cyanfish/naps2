@@ -19,7 +19,6 @@ public class MemoryConfigScopeTests
     public void GetChildConfigThrows()
     {
         // Accessing a child config directly on the scope should fail
-        // TODO: This should however be implemented on ScopedConfig by enumerating all descendents and getting their values
         var scope = new MemoryConfigScope<TestConfig>();
         Assert.Throws<ArgumentException>(() => scope.TryGet(c => c.Sub, out _));
     }

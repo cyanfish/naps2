@@ -7,9 +7,9 @@
 /// </summary>
 public class ProfileNameTracker
 {
-    private readonly ScopedConfig _config;
+    private readonly Naps2Config _config;
 
-    public ProfileNameTracker(ScopedConfig config)
+    public ProfileNameTracker(Naps2Config config)
     {
         _config = config;
     }

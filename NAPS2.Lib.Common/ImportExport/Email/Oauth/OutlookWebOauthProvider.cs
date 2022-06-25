@@ -6,11 +6,11 @@ namespace NAPS2.ImportExport.Email.Oauth;
 
 public class OutlookWebOauthProvider : OauthProvider
 {
-    private readonly ScopedConfig _config;
+    private readonly Naps2Config _config;
 
     private OauthClientCreds? _creds;
 
-    public OutlookWebOauthProvider(ScopedConfig config)
+    public OutlookWebOauthProvider(Naps2Config config)
     {
         _config = config;
     }

@@ -12,12 +12,12 @@ public class WindowsApplicationLifecycle
 {
     private readonly StillImage _sti;
     private readonly WindowsEventLogger _windowsEventLogger;
-    private readonly ScopedConfig _config;
+    private readonly Naps2Config _config;
 
     private bool _shouldCreateEventSource;
     private int _returnCode;
 
-    public WindowsApplicationLifecycle(StillImage sti, WindowsEventLogger windowsEventLogger, ScopedConfig config)
+    public WindowsApplicationLifecycle(StillImage sti, WindowsEventLogger windowsEventLogger, Naps2Config config)
     {
         _sti = sti;
         _windowsEventLogger = windowsEventLogger;

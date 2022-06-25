@@ -30,7 +30,7 @@ public class FormBase : Form, IInvoker, IFormBase
 
     public IFormFactory FormFactory { get; set; }
 
-    public ScopedConfig Config { get; set; }
+    public Naps2Config Config { get; set; }
 
     protected bool RestoreFormState { get; set; }
 

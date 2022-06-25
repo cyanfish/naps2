@@ -7,11 +7,11 @@ public class WinFormsOperationProgress : OperationProgress
 {
     private readonly IFormFactory _formFactory;
     private readonly NotificationManager _notificationManager;
-    private readonly ScopedConfig _config;
+    private readonly Naps2Config _config;
 
     private readonly HashSet<IOperation> _activeOperations = new HashSet<IOperation>();
 
-    public WinFormsOperationProgress(IFormFactory formFactory, NotificationManager notificationManager, ScopedConfig config)
+    public WinFormsOperationProgress(IFormFactory formFactory, NotificationManager notificationManager, Naps2Config config)
     {
         _formFactory = formFactory;
         _notificationManager = notificationManager;

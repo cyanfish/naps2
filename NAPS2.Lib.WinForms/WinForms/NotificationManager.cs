@@ -8,11 +8,11 @@ public class NotificationManager : ISaveNotify
     private const int PADDING_X = 25, PADDING_Y = 25;
     private const int SPACING_Y = 20;
 
-    private readonly ScopedConfig _config;
+    private readonly Naps2Config _config;
     private readonly List<NotifyWidgetBase> _slots = new List<NotifyWidgetBase>();
     private FormBase _parentForm;
 
-    public NotificationManager(ScopedConfig config)
+    public NotificationManager(Naps2Config config)
     {
         _config = config;
     }

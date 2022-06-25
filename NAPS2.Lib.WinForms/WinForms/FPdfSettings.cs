@@ -9,7 +9,7 @@ public partial class FPdfSettings : FormBase
     private readonly DialogHelper _dialogHelper;
     private TransactionConfigScope<CommonConfig> _userTransact;
     private TransactionConfigScope<CommonConfig> _runTransact;
-    private ScopedConfig _transactionConfig;
+    private Naps2Config _transactionConfig;
 
     public FPdfSettings(DialogHelper dialogHelper)
     {
