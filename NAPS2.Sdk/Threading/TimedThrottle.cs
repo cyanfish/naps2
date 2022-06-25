@@ -15,7 +15,7 @@ public class TimedThrottle
         _interval = interval;
     }
 
-    public void RunAction(SynchronizationContext syncContext)
+    public void RunAction(SynchronizationContext? syncContext)
     {
         bool doRunAction = false;
         lock (this)
@@ -39,7 +39,7 @@ public class TimedThrottle
 
     private void Tick(object state)
     {
-        var syncContext = (SynchronizationContext) state;
+        var syncContext = (SynchronizationContext?) state;
         lock (this)
         {
             _timer?.Dispose();
@@ -47,6 +47,13 @@ public class TimedThrottle
             _lastRun = DateTime.Now;
         }
 
-        syncContext.Post(_ => _action(), null);
+        if (syncContext != null)
+        {
+            syncContext.Post(_ => _action(), null);
+        }
+        else
+        {
+            _action();
+        }
     }
 }

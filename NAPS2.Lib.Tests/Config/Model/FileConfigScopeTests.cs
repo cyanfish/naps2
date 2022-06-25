@@ -1,4 +1,5 @@
-﻿using NAPS2.Config.Model;
+﻿using System.Threading;
+using NAPS2.Config.Model;
 using NAPS2.Sdk.Tests;
 using Xunit;
 
@@ -53,6 +54,7 @@ public class FileConfigScopeTests : ContextualTexts
             Assert.False(scope.TryGet(c => c.DisableAutoSave, out _));
         }
 
+        Thread.Sleep(100);
         // Now that the file is unlocked, it should read the correct value
         Assert.True(scope.GetOrDefault(c => c.DisableAutoSave));
 

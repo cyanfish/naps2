@@ -1,26 +1,31 @@
 ﻿using System.Linq.Expressions;
+using System.Threading;
 using NAPS2.Serialization;
 
 namespace NAPS2.Config.Model;
 
 public class FileConfigScope<TConfig> : ConfigScope<TConfig>
 {
+    private static readonly TimeSpan READ_INTERVAL = TimeSpan.FromMilliseconds(100); 
+    
     private readonly string _filePath;
     private readonly ISerializer<ConfigStorage<TConfig>> _serializer;
     private ConfigStorage<TConfig> _cache = new();
     private ConfigStorage<TConfig> _changes = new();
+    private readonly TimedThrottle _readHandshakeThrottle;
 
     public FileConfigScope(string filePath, ISerializer<ConfigStorage<TConfig>> serializer, ConfigScopeMode mode) : base(mode)
     {
         _filePath = filePath;
         _serializer = serializer;
+        _readHandshakeThrottle = new TimedThrottle(ReadHandshake, READ_INTERVAL);
     }
 
     protected override bool TryGetInternal(ConfigLookup lookup, out object? value)
     {
         // TODO: Use FileSystemWatcher to determine if we actually
         // TODO: need to read from disk. Also to create change events.
-        ReadHandshake();
+        _readHandshakeThrottle.RunAction(SynchronizationContext.Current);
         if (_changes.TryGet(lookup, out value))
         {
             return true;
@@ -52,18 +57,21 @@ public class FileConfigScope<TConfig> : ConfigScope<TConfig>
 
     private void ReadHandshake()
     {
-        // TODO: Retry
-        try
+        lock (this)
         {
-            using var stream = new FileStream(_filePath, FileMode.Open, FileAccess.Read, FileShare.Read);
-            _cache = _serializer.Deserialize(stream) ?? throw new InvalidOperationException();
-        }
-        catch (FileNotFoundException)
-        {
-        }
-        catch (IOException ex)
-        {
-            Log.ErrorException($"Error reading {_filePath}", ex);
+            // TODO: Retry
+            try
+            {
+                using var stream = new FileStream(_filePath, FileMode.Open, FileAccess.Read, FileShare.Read);
+                _cache = _serializer.Deserialize(stream) ?? throw new InvalidOperationException();
+            }
+            catch (FileNotFoundException)
+            {
+            }
+            catch (IOException ex)
+            {
+                Log.ErrorException($"Error reading {_filePath}", ex);
+            }
         }
     }
 
