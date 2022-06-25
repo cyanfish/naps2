@@ -2,11 +2,11 @@ using System.Linq.Expressions;
 
 namespace NAPS2.Config.Model;
 
-public abstract class ScopedConfig
+public abstract class ScopedConfig<TConfig>
 {
-    protected ConfigScope<CommonConfig>[] Scopes { get; init; }
+    protected ConfigScope<TConfig>[] Scopes { get; init; }
 
-    public T Get<T>(Expression<Func<CommonConfig, T>> accessor)
+    public T Get<T>(Expression<Func<TConfig, T>> accessor)
     {
         var lookup = ConfigLookup.ExpandExpression(accessor);
         return (T) Get(lookup);

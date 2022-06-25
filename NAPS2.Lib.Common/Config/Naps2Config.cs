@@ -15,7 +15,7 @@ namespace NAPS2.Config;
 ///
 /// A Naps2Config object can also represent a transaction, where the Run or User scopes contain uncommitted values.
 /// </summary>
-public class Naps2Config : ScopedConfig
+public class Naps2Config : ScopedConfig<CommonConfig>
 {
     public static Naps2Config Stub() =>
         new(
