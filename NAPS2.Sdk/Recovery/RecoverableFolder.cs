@@ -82,7 +82,19 @@ public class RecoverableFolder : IDisposable
             var ext = Path.GetExtension(imagePath);
             string newPath = _scanningContext.FileStorageManager!.NextFilePath() + ext;
 
-            File.Copy(imagePath, newPath);
+            try
+            {
+                File.Copy(imagePath, newPath);
+            }
+            catch (Exception e)
+            {
+                // TODO: Should we treat FileNotFound differently than other exceptions? i.e. continue on FNF, abort otherwise
+                Log.ErrorException("Could not recover image", e);
+                
+                currentProgress++;
+                progressCallback(currentProgress, totalProgress);
+                continue;
+            }
 
             var storage = new ImageFileStorage(newPath);
             var recoveredImage = CreateRecoveredImage(recoveryParams, storage, indexImage);

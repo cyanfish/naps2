@@ -138,14 +138,43 @@ public class RecoveryManagerTests : ContextualTexts
         Assert.NotNull(folder2);
     }
 
-    private void CreateFolderToRecoverFrom(string folderPath, int imageCount)
+    [Fact]
+    public void RecoverWithMissingFile()
+    {
+        string recovery1 = Path.Combine(_recoveryBasePath, Path.GetRandomFileName());
+        var uiImages = CreateFolderToRecoverFrom(recovery1, 2);
+        File.Delete(((ImageFileStorage) uiImages[0].GetImageWeakReference().ProcessedImage.Storage).FullPath);
+
+        var images = new List<ProcessedImage>();
+        void ImageCallback(ProcessedImage img) => images.Add(img);
+        var mockProgressCallback = new Mock<ProgressHandler>();
+
+        using var folder = _recoveryManager.GetLatestRecoverableFolder();
+        Assert.NotNull(folder);
+        var result = folder.TryRecover(ImageCallback, new RecoveryParams(), mockProgressCallback.Object,
+            CancellationToken.None);
+        Assert.True(result);
+
+        Assert.Single(images);
+        var expectedImage = new GdiImage(SharedData.color_image);
+        var actualImage = ImageContext.Render(images[0]);
+        ImageAsserts.Similar(expectedImage, actualImage, ImageAsserts.GENERAL_RMSE_THRESHOLD);
+
+        mockProgressCallback.Verify(callback => callback(0, 2));
+        mockProgressCallback.Verify(callback => callback(1, 2));
+        mockProgressCallback.Verify(callback => callback(2, 2));
+        mockProgressCallback.VerifyNoOtherCalls();
+    }
+
+    private List<UiImage> CreateFolderToRecoverFrom(string folderPath, int imageCount)
     {
         var rsm1 = RecoveryStorageManager.CreateFolder(folderPath);
         var recoveryContext = new ScanningContext(new GdiImageContext(), new FileStorageManager(folderPath));
         var images = Enumerable.Range(0, imageCount).Select(x => new UiImage(CreateRecoveryImage(recoveryContext)))
-            .ToArray();
+            .ToList();
         rsm1.WriteIndex(images);
         rsm1.ReleaseLockForTesting();
+        return images;
     }
     
     // TODO: Add tests for recovery params (i.e. thumbnail)
