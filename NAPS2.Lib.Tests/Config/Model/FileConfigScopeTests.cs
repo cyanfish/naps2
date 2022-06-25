@@ -11,7 +11,7 @@ public class FileConfigScopeTests : ContextualTexts
     public void FileScope()
     {
         var configPath = Path.Combine(FolderPath, "config.xml");
-        var scope = new FileConfigScope<CommonConfig>(configPath, new ConfigSerializer(ConfigReadMode.All), ConfigScopeMode.ReadWrite);
+        var scope = new FileConfigScope<CommonConfig>(configPath, new ConfigSerializer(ConfigReadMode.All, ConfigRootName.UserConfig), ConfigScopeMode.ReadWrite);
             
         // Nothing should be created yet
         Assert.False(File.Exists(configPath));
@@ -22,7 +22,10 @@ public class FileConfigScopeTests : ContextualTexts
         // Writing should save to the file
         scope.Set(c => c.Culture, "fr");
         Assert.True(File.Exists(configPath));
+
         var doc = XDocument.Load(configPath);
+        Assert.Equal("UserConfig", doc.Root?.Name);
+        
         var docValue = doc.Descendants("Culture").Single().Value;
         Assert.Equal("fr", docValue);
 

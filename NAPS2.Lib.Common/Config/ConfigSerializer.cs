@@ -12,10 +12,12 @@ public class ConfigSerializer : VersionedSerializer<ConfigStorage<CommonConfig>>
 {
     private readonly ConfigStorageSerializer<CommonConfig> _storageSerializer = new();
     private readonly ConfigReadMode _mode;
+    private readonly ConfigRootName _rootName;
 
-    public ConfigSerializer(ConfigReadMode mode)
+    public ConfigSerializer(ConfigReadMode mode, ConfigRootName rootName)
     {
         _mode = mode;
+        _rootName = rootName;
     }
 
     protected override void InternalSerialize(Stream stream, ConfigStorage<CommonConfig> obj)
@@ -25,7 +27,7 @@ public class ConfigSerializer : VersionedSerializer<ConfigStorage<CommonConfig>>
             throw new NotSupportedException();
         }
         obj.Set(c => c.Version, CommonConfig.CURRENT_VERSION);
-        _storageSerializer.Serialize(stream, obj);
+        _storageSerializer.Serialize(stream, obj, _rootName.ToString());
     }
 
     protected override ConfigStorage<CommonConfig> InternalDeserialize(Stream stream, XDocument doc)

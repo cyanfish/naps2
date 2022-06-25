@@ -209,7 +209,7 @@ public class ConfigStorage<TConfig>
         }
     }
 
-    public void SerializeTo(XDocument doc)
+    public void SerializeTo(XDocument doc, string? customRootElementName)
     {
         lock (this)
         {
@@ -219,8 +219,8 @@ public class ConfigStorage<TConfig>
                 throw new InvalidOperationException("When serializing a plain object, a value must be specified");
             }
             var serializer = new UntypedXmlSerializer();
-            var rootName = serializer.GetDefaultElementName(typeof(TConfig));
-            doc.Add(new XElement(rootName));
+            var rootElementName = customRootElementName ?? serializer.GetDefaultElementName(typeof(TConfig));
+            doc.Add(new XElement(rootElementName));
             CopyNodeToXElement(_root, doc.Root!, serializer);
         }
     }

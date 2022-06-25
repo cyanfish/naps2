@@ -6,9 +6,14 @@ public class ConfigStorageSerializer<TConfig> : ISerializer<ConfigStorage<TConfi
 {
     public void Serialize(Stream stream, ConfigStorage<TConfig>? obj)
     {
+        Serialize(stream, obj, null);
+    }
+
+    public void Serialize(Stream stream, ConfigStorage<TConfig>? obj, string? customRootElementName)
+    {
         if (obj == null) throw new ArgumentNullException(nameof(obj));
         var doc = new XDocument();
-        obj.SerializeTo(doc);
+        obj.SerializeTo(doc, customRootElementName);
         doc.Save(stream);
     }
 
