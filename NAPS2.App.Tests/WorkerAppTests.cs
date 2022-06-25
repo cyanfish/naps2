@@ -10,7 +10,7 @@ public class WorkerAppTests : ContextualTexts
     [Fact]
     public void CreatesPipeServer()
     {
-        var process = AppTestHelper.StartProcess("NAPS2.Worker.exe", Process.GetCurrentProcess().Id.ToString());
+        var process = AppTestHelper.StartProcess("NAPS2.Worker.exe", FolderPath, Process.GetCurrentProcess().Id.ToString());
         try
         {
             Assert.Equal("ready", process.StandardOutput.ReadLine());

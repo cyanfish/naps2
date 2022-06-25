@@ -7,24 +7,24 @@ namespace NAPS2.App.Tests;
 
 public static class AppTestHelper
 {
-    public static Process StartGuiProcess(string exeName, string args = null)
+    public static Process StartGuiProcess(string exeName, string appData, string args = null)
     {
-        // TODO: Environment variables?
         var dir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-        var process = Process.Start(new ProcessStartInfo
+        var startInfo = new ProcessStartInfo
         {
             FileName = Path.Combine(dir, exeName),
             Arguments = args ?? "",
-            UseShellExecute = true
-        });
+            UseShellExecute = false
+        };
+        startInfo.EnvironmentVariables["APPDATA"] = appData;
+        var process = Process.Start(startInfo);
         return process;
     }
 
-    public static Process StartProcess(string exeName, string args = null)
+    public static Process StartProcess(string exeName, string appData, string args = null)
     {
-        // TODO: Environment variables?
         var dir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-        var process = Process.Start(new ProcessStartInfo
+        var startInfo = new ProcessStartInfo
         {
             FileName = Path.Combine(dir, exeName),
             Arguments = args ?? "",
@@ -32,7 +32,9 @@ public static class AppTestHelper
             RedirectStandardOutput = true,
             RedirectStandardError = true,
             UseShellExecute = false
-        });
+        };
+        startInfo.EnvironmentVariables["APPDATA"] = appData;
+        var process = Process.Start(startInfo);
         return process;
     }
 
