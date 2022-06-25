@@ -15,6 +15,12 @@ public class UiImage : IDisposable
     public UiImage(ProcessedImage image)
     {
         _processedImage = image;
+        // TODO: The thumbnail might include some revertible transforms, maybe we include thumbnailtransformstate in postprocessingdata?
+        if (_processedImage.TransformState.IsEmpty && _processedImage.PostProcessingData.Thumbnail != null)
+        {
+            _thumbnail = _processedImage.PostProcessingData.Thumbnail;
+            _thumbnailTransformState = _processedImage.TransformState;
+        }
     }
 
     /// <summary>
