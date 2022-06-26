@@ -25,6 +25,8 @@ public class FileConfigScope<TConfig> : ConfigScope<TConfig>
     {
         // TODO: Use FileSystemWatcher to determine if we actually
         // TODO: need to read from disk. Also to create change events.
+        // The sync context needs to be null so that the first time we read it happens synchronously
+        // (and there's no reason we can't run the handshake on an arbitrary thread)
         _readHandshakeThrottle.RunAction(null);
         if (_changes.TryGet(lookup, out value))
         {
