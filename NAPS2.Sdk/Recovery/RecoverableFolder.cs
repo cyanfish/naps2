@@ -30,6 +30,7 @@ public class RecoverableFolder : IDisposable
             ImageCount = _recoveryIndex.Images.Count;
             ScannedDateTime = directory.LastWriteTime;
             // TODO: Consider auto-delete in this case
+            // TODO: Also in the case where you have a lock file but no index is written (especially if no images are present)
             if (ImageCount == 0) throw new ArgumentException("No images to recover in this folder");
         }
         catch (Exception)

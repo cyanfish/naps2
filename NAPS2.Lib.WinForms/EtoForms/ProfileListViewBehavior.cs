@@ -15,11 +15,12 @@ public class ProfileListViewBehavior : ListViewBehavior<ScanProfile>
         _profileTransfer = profileTransfer;
         MultiSelect = false;
         ShowLabels = true;
+        ScrollOnDrag = false;
     }
 
     public override string GetLabel(ScanProfile item) => item.DisplayName ?? "";
 
-    public override Image GetImage(ScanProfile item)
+    public override Image GetImage(ScanProfile item, int imageSize)
     {
         if (item.IsDefault && item.IsLocked)
         {

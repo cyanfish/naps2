@@ -10,9 +10,13 @@ public abstract class ListViewBehavior<T>
         
     public bool ShowLabels { get; protected set; }
 
+    public bool ScrollOnDrag { get; protected set; }
+
+    public bool UseHandCursor { get; protected set; }
+
     public virtual string GetLabel(T item) => throw new NotSupportedException();
 
-    public abstract Image GetImage(T item);
+    public abstract Image GetImage(T item, int imageSize);
 
     public virtual void SetDragData(ListSelection<T> selection, IDataObject dataObject) => throw new NotSupportedException();
 

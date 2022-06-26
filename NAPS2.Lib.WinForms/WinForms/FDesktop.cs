@@ -1,10 +1,10 @@
 #region Usings
 
 using System.Drawing;
-using System.Reflection;
 using System.Threading;
 using System.Windows.Forms;
 using Eto.WinForms;
+using NAPS2.EtoForms;
 using NAPS2.EtoForms.Ui;
 using NAPS2.EtoForms.WinForms;
 using NAPS2.ImportExport;
@@ -21,12 +21,11 @@ using NAPS2.Update;
 
 namespace NAPS2.WinForms
 {
+    // TODO: Add a DesktopController class with all the non-UI logic in this class
+    // TODO: Possibly as an evolution of the UserActions class
     public partial class FDesktop : FormBase
     {
         #region Dependencies
-
-        private static readonly MethodInfo ToolStripPanelSetStyle =
-            typeof(ToolStripPanel).GetMethod("SetStyle", BindingFlags.Instance | BindingFlags.NonPublic);
 
         private readonly ToolbarFormatter _toolbarFormatter;
         private readonly TesseractLanguageManager _tesseractLanguageManager;
@@ -48,6 +47,9 @@ namespace NAPS2.WinForms
         private readonly RecoveryStorageManager _recoveryStorageManager;
         private readonly ScanningContext _scanningContext;
         private readonly ThumbnailRenderQueue _thumbnailRenderQueue;
+        private readonly UiThumbnailProvider _thumbnailProvider;
+        private WinFormsListView<UiImage> _listView;
+        private ImageListSyncer? _imageListSyncer;
 
         #endregion
 
@@ -75,7 +77,7 @@ namespace NAPS2.WinForms
             UpdateChecker updateChecker, IProfileManager profileManager, UiImageList imageList,
             ImageTransfer imageTransfer,
             RecoveryStorageManager recoveryStorageManager, ScanningContext scanningContext,
-            ThumbnailRenderQueue thumbnailRenderQueue)
+            ThumbnailRenderQueue thumbnailRenderQueue, UiThumbnailProvider thumbnailProvider)
         {
             _toolbarFormatter = toolbarFormatter;
             _tesseractLanguageManager = tesseractLanguageManager;
@@ -97,6 +99,7 @@ namespace NAPS2.WinForms
             _recoveryStorageManager = recoveryStorageManager;
             _scanningContext = scanningContext;
             _thumbnailRenderQueue = thumbnailRenderQueue;
+            _thumbnailProvider = thumbnailProvider;
             _userActions = new UserActions(_scanningContext.ImageContext, imageList);
             InitializeComponent();
 
@@ -104,8 +107,14 @@ namespace NAPS2.WinForms
             Shown += FDesktop_Shown;
             FormClosing += FDesktop_FormClosing;
             Closed += FDesktop_Closed;
-            thumbnailList1.Initialize(imageList);
-            imageList.ImagesUpdated += (_, _) => UpdateToolbar();
+            imageList.ImagesUpdated += (_, _) =>
+            {
+                SafeInvoke(() =>
+                {
+                    UpdateToolbar();
+                    _listView!.Selection = _imageList.Selection;
+                });
+            };
         }
 
         protected override void OnLoad(object sender, EventArgs args) => PostInitializeComponent();
@@ -117,13 +126,34 @@ namespace NAPS2.WinForms
         /// </summary>
         private void PostInitializeComponent()
         {
+            // TODO: Migrate the whole FDesktop to Eto
+            // For now, as a partial migration, we're using our Eto ListView abstraction directly. 
+            _listView = new WinFormsListView<UiImage>(new ImageListViewBehavior(_thumbnailProvider, _imageTransfer))
+            {
+                AllowDrag = true,
+                AllowDrop = true
+            };
+            _listView.Selection = _imageList.Selection;
+            _listView.ItemClicked += ListViewItemClicked;
+            _listView.Drop += ListViewDrop;
+            _listView.SelectionChanged += ListViewSelectionChanged;
+            _listView.NativeControl.TabIndex = 7;
+            _listView.NativeControl.Dock = DockStyle.Fill;
+            _listView.NativeControl.ContextMenuStrip = contextMenuStrip;
+            _listView.NativeControl.KeyDown += ListViewKeyDown;
+            _listView.NativeControl.MouseWheel += ListViewMouseWheel;
+            toolStripContainer1.ContentPanel.Controls.Add(_listView.NativeControl);
+            _imageListSyncer?.Dispose();
+            _imageListSyncer = new ImageListSyncer(_imageList, _listView.ApplyDiffs, SynchronizationContext.Current);
+
             foreach (var panel in toolStripContainer1.Controls.OfType<ToolStripPanel>())
             {
-                ToolStripPanelSetStyle.Invoke(panel, new object[] { ControlStyles.Selectable, true });
+                // Allow tabbing through the toolbar for accessibility
+                WinFormsHacks.SetControlStyle(panel, ControlStyles.Selectable, true);
             }
             _imageList.ThumbnailRenderer = _thumbnailRenderer;
             int thumbnailSize = Config.Get(c => c.ThumbnailSize);
-            thumbnailList1.ThumbnailSize = thumbnailSize;
+            _listView.ImageSize = thumbnailSize;
             SetThumbnailSpacing(thumbnailSize);
 
             var hiddenButtons = Config.Get(c => c.HiddenButtons);
@@ -161,16 +191,17 @@ namespace NAPS2.WinForms
             UpdateScanButton();
 
             _layoutManager?.Deactivate();
-            btnZoomIn.Location = new Point(btnZoomIn.Location.X, thumbnailList1.Height - 33);
-            btnZoomOut.Location = new Point(btnZoomOut.Location.X, thumbnailList1.Height - 33);
-            btnZoomMouseCatcher.Location = new Point(btnZoomMouseCatcher.Location.X, thumbnailList1.Height - 33);
+            btnZoomIn.Location = new Point(btnZoomIn.Location.X, _listView.NativeControl.Height - 33);
+            btnZoomOut.Location = new Point(btnZoomOut.Location.X, _listView.NativeControl.Height - 33);
+            btnZoomMouseCatcher.Location = new Point(btnZoomMouseCatcher.Location.X, _listView.NativeControl.Height - 33);
             _layoutManager = new LayoutManager(this)
                 .Bind(btnZoomIn, btnZoomOut, btnZoomMouseCatcher)
-                .BottomTo(() => thumbnailList1.Height)
+                .BottomTo(() => _listView.NativeControl.Height)
                 .Activate();
-
-            thumbnailList1.MouseWheel += thumbnailList1_MouseWheel;
-            thumbnailList1.SizeChanged += (sender, args) => _layoutManager.UpdateLayout();
+            _listView.NativeControl.SizeChanged += (_, _) => _layoutManager.UpdateLayout();
+            
+            _imageListSyncer.SyncNow();
+            _listView.NativeControl.Focus();
         }
 
         private void AfterLayout()
@@ -576,8 +607,10 @@ namespace NAPS2.WinForms
 
             if (PlatformCompat.Runtime.RefreshListViewAfterChange)
             {
-                thumbnailList1.Size = new Size(thumbnailList1.Width - 1, thumbnailList1.Height - 1);
-                thumbnailList1.Size = new Size(thumbnailList1.Width + 1, thumbnailList1.Height + 1);
+                // TODO: Eventually, once we have a native linux UI, we can get rid of mono hacks
+                // TODO: But in the meantime we should verify mono behavior
+                _listView.NativeControl.Size = new Size(_listView.NativeControl.Width - 1, _listView.NativeControl.Height - 1);
+                _listView.NativeControl.Size = new Size(_listView.NativeControl.Width + 1, _listView.NativeControl.Height + 1);
             }
         }
 
@@ -688,7 +721,7 @@ namespace NAPS2.WinForms
                     {
                         // TODO: Fix this
                         // SelectedIndices = new[] { i };
-                        thumbnailList1.Items[i].EnsureVisible();
+                        //thumbnailList1.Items[i].EnsureVisible();
                     }
                 };
                 viewer.ShowDialog();
@@ -937,12 +970,12 @@ namespace NAPS2.WinForms
             return null;
         }
 
-        private void thumbnailList1_KeyDown(object sender, KeyEventArgs e)
+        private void ListViewKeyDown(object? sender, KeyEventArgs e)
         {
             e.Handled = _ksm.Perform(e.KeyData);
         }
 
-        private void thumbnailList1_MouseWheel(object sender, MouseEventArgs e)
+        private void ListViewMouseWheel(object? sender, MouseEventArgs e)
         {
             if (ModifierKeys.HasFlag(Keys.Control))
             {
@@ -953,13 +986,6 @@ namespace NAPS2.WinForms
         #endregion
 
         #region Event Handlers - Misc
-
-        private void thumbnailList1_ItemActivate(object sender, EventArgs e) => PreviewImage();
-
-        private void thumbnailList1_MouseMove(object sender, MouseEventArgs e) =>
-            Cursor = thumbnailList1.GetItemAt(e.X, e.Y) == null ? Cursors.Default : Cursors.Hand;
-
-        private void thumbnailList1_MouseLeave(object sender, EventArgs e) => Cursor = Cursors.Default;
 
         private void tStrip_ParentChanged(object sender, EventArgs e) => _toolbarFormatter.RelayoutToolbar(tStrip);
 
@@ -1203,18 +1229,15 @@ namespace NAPS2.WinForms
                 // TODO: This is wrong?
                 return;
             }
-            if (thumbnailList1.ThumbnailSize == thumbnailSize)
+            if (_listView.ImageSize == thumbnailSize)
             {
                 // Same size so no resizing needed
                 return;
             }
 
             // Adjust the visible thumbnail display with the new size
-            lock (thumbnailList1)
-            {
-                thumbnailList1.ThumbnailSize = thumbnailSize;
-                thumbnailList1.RegenerateThumbnailList(_imageList.Images);
-            }
+            _listView.ImageSize = thumbnailSize;
+            _listView.RegenerateImages();
 
             SetThumbnailSpacing(thumbnailSize);
             UpdateToolbar(); // TODO: Do we need this?
@@ -1226,14 +1249,14 @@ namespace NAPS2.WinForms
 
         private void SetThumbnailSpacing(int thumbnailSize)
         {
-            thumbnailList1.Padding = new Padding(0, 20, 0, 0);
+            _listView.NativeControl.Padding = new Padding(0, 20, 0, 0);
             const int MIN_PADDING = 6;
             const int MAX_PADDING = 66;
             // Linearly scale the padding with the thumbnail size
             int padding = MIN_PADDING + (MAX_PADDING - MIN_PADDING) * (thumbnailSize - ThumbnailSizes.MIN_SIZE) /
                 (ThumbnailSizes.MAX_SIZE - ThumbnailSizes.MIN_SIZE);
             int spacing = thumbnailSize + padding * 2;
-            ListViewNative.SetListSpacing(thumbnailList1, spacing, spacing);
+            WinFormsHacks.SetListSpacing(_listView.NativeControl, spacing, spacing);
         }
 
         private void btnZoomOut_Click(object sender, EventArgs e) => StepThumbnailSize(-1);
@@ -1243,133 +1266,45 @@ namespace NAPS2.WinForms
 
         #region Drag/Drop
 
-        // TODO: Get rid of shared drag/drop code by using WinFormsListView instead of ThumbnailList
-        private void thumbnailList1_ItemDrag(object sender, ItemDragEventArgs e)
+        private void ListViewItemClicked(object? sender, EventArgs e) => PreviewImage();
+
+        private void ListViewSelectionChanged(object? sender, EventArgs e)
         {
-            // Provide drag data
-            var selection = _imageList.Selection.ToList();
-            if (selection.Any())
-            {
-                var ido = new DataObject();
-                using var selectedImages = selection.Select(x => x.GetClonedImage()).ToDisposableList();
-                _imageTransfer.AddTo(ido.ToEto(), selectedImages.InnerList);
-                DoDragDrop(ido, DragDropEffects.Move | DragDropEffects.Copy);
-            }
+            _imageList.UpdateSelection(_listView.Selection);
+            UpdateToolbar();
         }
 
-        private void thumbnailList1_DragEnter(object sender, DragEventArgs e)
+        private void ListViewDrop(object? sender, DropEventArgs args)
         {
-            // Determine if drop data is compatible
-            try
+            if (_imageTransfer.IsIn(args.Data.ToEto()))
             {
-                if (_imageTransfer.IsIn(e.Data.ToEto()))
-                {
-                    var data = _imageTransfer.GetFrom(e.Data.ToEto());
-                    e.Effect = data.ProcessId == Process.GetCurrentProcess().Id
-                        ? DragDropEffects.Move
-                        : DragDropEffects.Copy;
-                }
-                else if (e.Data.GetDataPresent(DataFormats.FileDrop))
-                {
-                    e.Effect = DragDropEffects.Copy;
-                }
-            }
-            catch (Exception ex)
-            {
-                Log.ErrorException("Error receiving drag/drop", ex);
-            }
-        }
-
-        private void thumbnailList1_DragDrop(object sender, DragEventArgs e)
-        {
-            // Receive drop data
-            if (_imageTransfer.IsIn(e.Data.ToEto()))
-            {
-                var data = _imageTransfer.GetFrom(e.Data.ToEto());
+                var data = _imageTransfer.GetFrom(args.Data.ToEto());
                 if (data.ProcessId == Process.GetCurrentProcess().Id)
                 {
-                    DragMoveImages(e);
+                    DragMoveImages(args.Position);
                 }
                 else
                 {
                     ImportDirect(data, false);
                 }
             }
-            else if (e.Data.GetDataPresent(DataFormats.FileDrop))
+            else if (args.Data.GetDataPresent(DataFormats.FileDrop))
             {
-                var data = (string[]) e.Data.GetData(DataFormats.FileDrop);
+                var data = (string[]) args.Data.GetData(DataFormats.FileDrop);
                 ImportFiles(data);
             }
-            thumbnailList1.InsertionMark.Index = -1;
         }
 
-        private void thumbnailList1_DragLeave(object sender, EventArgs e)
-        {
-            thumbnailList1.InsertionMark.Index = -1;
-        }
-
-        private void DragMoveImages(DragEventArgs e)
+        private void DragMoveImages(int position)
         {
             if (!_imageList.Selection.Any())
             {
                 return;
             }
-            int index = GetDragIndex(e);
-            if (index != -1)
+            if (position != -1)
             {
-                _userActions.MoveTo(index);
+                _userActions.MoveTo(position);
             }
-        }
-
-        private void thumbnailList1_DragOver(object sender, DragEventArgs e)
-        {
-            if (e.Effect == DragDropEffects.Move)
-            {
-                var index = GetDragIndex(e);
-                if (index == _imageList.Images.Count)
-                {
-                    thumbnailList1.InsertionMark.Index = index - 1;
-                    thumbnailList1.InsertionMark.AppearsAfterItem = true;
-                }
-                else
-                {
-                    thumbnailList1.InsertionMark.Index = index;
-                    thumbnailList1.InsertionMark.AppearsAfterItem = false;
-                }
-            }
-        }
-
-        private int GetDragIndex(DragEventArgs e)
-        {
-            Point cp = thumbnailList1.PointToClient(new Point(e.X, e.Y));
-            ListViewItem dragToItem = thumbnailList1.GetItemAt(cp.X, cp.Y);
-            if (dragToItem == null)
-            {
-                var items = thumbnailList1.Items.Cast<ListViewItem>().ToList();
-                var minY = items.Select(x => x.Bounds.Top).Min();
-                var maxY = items.Select(x => x.Bounds.Bottom).Max();
-                if (cp.Y < minY)
-                {
-                    cp.Y = minY;
-                }
-                if (cp.Y > maxY)
-                {
-                    cp.Y = maxY;
-                }
-                var row = items.Where(x => x.Bounds.Top <= cp.Y && x.Bounds.Bottom >= cp.Y).OrderBy(x => x.Bounds.X)
-                    .ToList();
-                dragToItem = row.FirstOrDefault(x => x.Bounds.Right >= cp.X) ?? row.LastOrDefault();
-            }
-            if (dragToItem == null)
-            {
-                return -1;
-            }
-            int dragToIndex = dragToItem.ImageIndex;
-            if (cp.X > (dragToItem.Bounds.X + dragToItem.Bounds.Width / 2))
-            {
-                dragToIndex++;
-            }
-            return dragToIndex;
         }
 
         #endregion

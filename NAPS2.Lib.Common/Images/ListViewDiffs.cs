@@ -2,7 +2,7 @@ using System.Collections.Immutable;
 
 namespace NAPS2.Images;
 
-public record ImageListDiffs
+public record ListViewDiffs<T>
 {
     // TODO: It might make sense to rework the diff model to allow images to be reused, it depends on how the list perf works
     // TODO: The old model was:
@@ -20,9 +20,9 @@ public record ImageListDiffs
 
     public bool HasAnyDiff => AppendOperations.Any() || ReplaceOperations.Any() || TrimOperations.Any();
 
-    public record AppendOperation(ImageRenderState Image);
+    public record AppendOperation(T Item);
 
-    public record ReplaceOperation(int Index, ImageRenderState Image);
+    public record ReplaceOperation(int Index, T Item);
 
     public record TrimOperation(int Count);
 }

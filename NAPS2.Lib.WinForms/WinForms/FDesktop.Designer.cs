@@ -38,7 +38,6 @@ namespace NAPS2.WinForms
             this.btnZoomIn = new System.Windows.Forms.Button();
             this.btnZoomOut = new System.Windows.Forms.Button();
             this.btnZoomMouseCatcher = new System.Windows.Forms.Button();
-            this.thumbnailList1 = new NAPS2.WinForms.ThumbnailList();
             this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.ctxView = new System.Windows.Forms.ToolStripMenuItem();
             this.ctxSeparator1 = new System.Windows.Forms.ToolStripSeparator();
@@ -121,7 +120,6 @@ namespace NAPS2.WinForms
             this.toolStripContainer1.ContentPanel.Controls.Add(this.btnZoomIn);
             this.toolStripContainer1.ContentPanel.Controls.Add(this.btnZoomOut);
             this.toolStripContainer1.ContentPanel.Controls.Add(this.btnZoomMouseCatcher);
-            this.toolStripContainer1.ContentPanel.Controls.Add(this.thumbnailList1);
             resources.ApplyResources(this.toolStripContainer1.ContentPanel, "toolStripContainer1.ContentPanel");
             resources.ApplyResources(this.toolStripContainer1, "toolStripContainer1");
             this.toolStripContainer1.Name = "toolStripContainer1";
@@ -154,24 +152,6 @@ namespace NAPS2.WinForms
             resources.ApplyResources(this.btnZoomMouseCatcher, "btnZoomMouseCatcher");
             this.btnZoomMouseCatcher.Name = "btnZoomMouseCatcher";
             this.btnZoomMouseCatcher.UseVisualStyleBackColor = false;
-            // 
-            // thumbnailList1
-            // 
-            this.thumbnailList1.AllowDrop = true;
-            this.thumbnailList1.ContextMenuStrip = this.contextMenuStrip;
-            resources.ApplyResources(this.thumbnailList1, "thumbnailList1");
-            this.thumbnailList1.Name = "thumbnailList1";
-            this.thumbnailList1.ThumbnailSize = 128;
-            this.thumbnailList1.UseCompatibleStateImageBehavior = false;
-            this.thumbnailList1.ItemActivate += new System.EventHandler(this.thumbnailList1_ItemActivate);
-            this.thumbnailList1.ItemDrag += new System.Windows.Forms.ItemDragEventHandler(this.thumbnailList1_ItemDrag);
-            this.thumbnailList1.DragDrop += new System.Windows.Forms.DragEventHandler(this.thumbnailList1_DragDrop);
-            this.thumbnailList1.DragEnter += new System.Windows.Forms.DragEventHandler(this.thumbnailList1_DragEnter);
-            this.thumbnailList1.DragOver += new System.Windows.Forms.DragEventHandler(this.thumbnailList1_DragOver);
-            this.thumbnailList1.DragLeave += new System.EventHandler(this.thumbnailList1_DragLeave);
-            this.thumbnailList1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.thumbnailList1_KeyDown);
-            this.thumbnailList1.MouseLeave += new System.EventHandler(this.thumbnailList1_MouseLeave);
-            this.thumbnailList1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.thumbnailList1_MouseMove);
             // 
             // contextMenuStrip
             // 
@@ -713,7 +693,6 @@ namespace NAPS2.WinForms
         private System.Windows.Forms.ToolStrip tStrip;
         private System.Windows.Forms.ToolStripSplitButton tsScan;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
-        private ThumbnailList thumbnailList1;
         private System.Windows.Forms.ToolStripContainer toolStripContainer1;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
         private ToolStripDoubleButton tsMove;

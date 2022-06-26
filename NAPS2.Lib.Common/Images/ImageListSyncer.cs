@@ -8,22 +8,24 @@ namespace NAPS2.Images;
 public class ImageListSyncer
 {
     private static readonly TimeSpan SYNC_INTERVAL = TimeSpan.FromMilliseconds(100);
-    
+
     private readonly UiImageList _imageList;
-    private readonly Action<ImageListDiffs> _diffCallback;
+    private readonly Action<ListViewDiffs<UiImage>> _diffCallback;
     private readonly SynchronizationContext _syncContext;
     private readonly TimedThrottle _syncThrottle;
     private readonly ImageListDiffer _differ;
     private bool _disposed;
 
-    public ImageListSyncer(UiImageList imageList, Action<ImageListDiffs> diffCallback, SynchronizationContext syncContext)
+    public ImageListSyncer(UiImageList imageList, Action<ListViewDiffs<UiImage>> diffCallback,
+        SynchronizationContext syncContext)
     {
         _imageList = imageList;
         _diffCallback = diffCallback;
         _syncContext = syncContext;
         _imageList.ImagesUpdated += ImagesUpdated;
+        _imageList.ImagesThumbnailChanged += ImagesUpdated;
         _imageList.ImagesThumbnailInvalidated += ImagesUpdated;
-        _syncThrottle = new TimedThrottle(Sync, SYNC_INTERVAL);
+        _syncThrottle = new TimedThrottle(SyncNow, SYNC_INTERVAL);
         _differ = new ImageListDiffer(_imageList);
     }
 
@@ -32,7 +34,8 @@ public class ImageListSyncer
         _syncThrottle.RunAction(_syncContext);
     }
 
-    private void Sync()
+    // TODO: This is public as we might need to flush immediately after construction. Is there a better way to do that?
+    public void SyncNow()
     {
         var diffs = _differ.GetAndFlushDiffs();
         if (diffs.HasAnyDiff)
@@ -48,7 +51,8 @@ public class ImageListSyncer
             if (_disposed) return;
             _disposed = true;
             _imageList.ImagesUpdated -= ImagesUpdated;
+            _imageList.ImagesThumbnailChanged -= ImagesUpdated;
+            _imageList.ImagesThumbnailInvalidated -= ImagesUpdated;
         }
     }
-    
 }

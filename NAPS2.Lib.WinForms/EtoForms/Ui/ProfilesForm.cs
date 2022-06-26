@@ -85,7 +85,7 @@ public class ProfilesForm : EtoDialogBase
             Shortcut = Keys.Control | Keys.V
         };
 
-        _listView.ImageSize = new Size(48, 48);
+        _listView.ImageSize = 48;
         _listView.AllowDrag = true;
         _listView.AllowDrop = !NoUserProfiles;
         _listView.ItemClicked += ItemClicked;

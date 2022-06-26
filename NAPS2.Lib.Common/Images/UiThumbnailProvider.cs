@@ -14,7 +14,7 @@ public class UiThumbnailProvider
 
     public Bitmap GetThumbnail(UiImage img, int thumbnailSize)
     {
-        lock (this)
+        lock (img)
         {
             var thumb = ((GdiImage?) img.GetThumbnailClone())?.Bitmap;
             if (thumb == null)

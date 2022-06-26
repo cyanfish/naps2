@@ -1,5 +1,6 @@
 ﻿namespace NAPS2.Images;
 
+// TODO: Add a method or something for IAsyncEnumerable, conditionally compiling for .NET 5+
 public abstract class ScannedImageSource
 {
     public static ScannedImageSource Empty => new EmptySource();

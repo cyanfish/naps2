@@ -11,7 +11,7 @@ public class ThumbnailRenderQueue : IDisposable
     private readonly ThumbnailRenderer _thumbnailRenderer;
     private readonly AutoResetEvent _renderThumbnailsWaitHandle = new(false);
     private int _thumbnailSize;
-    private UiImageList _imageList;
+    private UiImageList? _imageList;
     private bool _started;
     private bool _disposed;
 
@@ -34,6 +34,7 @@ public class ThumbnailRenderQueue : IDisposable
     {
         lock (this)
         {
+            if (_disposed) throw new ObjectDisposedException(nameof(ThumbnailRenderQueue));
             if (_started) throw new InvalidOperationException();
             _imageList = imageList;
             _started = true;
@@ -174,11 +175,14 @@ public class ThumbnailRenderQueue : IDisposable
         {
             if (_disposed) return;
             _disposed = true;
-        }
-        lock (_imageList)
-        {
-            _imageList.ImagesUpdated -= ImageListUpdated;
-            _imageList.ImagesThumbnailInvalidated -= ImageListUpdated;
+            if (_imageList != null)
+            {
+                lock (_imageList)
+                {
+                    _imageList.ImagesUpdated -= ImageListUpdated;
+                    _imageList.ImagesThumbnailInvalidated -= ImageListUpdated;
+                }
+            }
         }
     }
 }
