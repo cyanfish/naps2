@@ -1,15 +1,13 @@
 #region Usings
 
-using System.Collections;
 using System.Drawing;
-using System.Globalization;
 using System.Reflection;
 using System.Threading;
 using System.Windows.Forms;
 using Eto.WinForms;
 using NAPS2.EtoForms.Ui;
+using NAPS2.EtoForms.WinForms;
 using NAPS2.ImportExport;
-using NAPS2.Lang;
 using NAPS2.Ocr;
 using NAPS2.Recovery;
 using NAPS2.Scan;
@@ -1235,31 +1233,17 @@ namespace NAPS2.WinForms
             int padding = MIN_PADDING + (MAX_PADDING - MIN_PADDING) * (thumbnailSize - ThumbnailSizes.MIN_SIZE) /
                 (ThumbnailSizes.MAX_SIZE - ThumbnailSizes.MIN_SIZE);
             int spacing = thumbnailSize + padding * 2;
-            SetListSpacing(thumbnailList1, spacing, spacing);
+            ListViewNative.SetListSpacing(thumbnailList1, spacing, spacing);
         }
 
-        private void SetListSpacing(ListView list, int hspacing, int vspacing)
-        {
-            const int LVM_FIRST = 0x1000;
-            const int LVM_SETICONSPACING = LVM_FIRST + 53;
-            Win32.SendMessage(list.Handle, LVM_SETICONSPACING, IntPtr.Zero,
-                (IntPtr) (int) (((ushort) hspacing) | (uint) (vspacing << 16)));
-        }
-
-        private void btnZoomOut_Click(object sender, EventArgs e)
-        {
-            StepThumbnailSize(-1);
-        }
-
-        private void btnZoomIn_Click(object sender, EventArgs e)
-        {
-            StepThumbnailSize(1);
-        }
+        private void btnZoomOut_Click(object sender, EventArgs e) => StepThumbnailSize(-1);
+        private void btnZoomIn_Click(object sender, EventArgs e) => StepThumbnailSize(1);
 
         #endregion
 
         #region Drag/Drop
 
+        // TODO: Get rid of shared drag/drop code by using WinFormsListView instead of ThumbnailList
         private void thumbnailList1_ItemDrag(object sender, ItemDragEventArgs e)
         {
             // Provide drag data
