@@ -14,6 +14,7 @@ public class UpdateOperation : OperationBase
 {
     private readonly ImageContext _imageContext;
     private readonly ErrorOutput _errorOutput;
+    private readonly DesktopController _desktopController;
 
     private readonly ManualResetEvent _waitHandle = new ManualResetEvent(false);
     private WebClient? _client;
@@ -34,10 +35,11 @@ public class UpdateOperation : OperationBase
         }
     }
 
-    public UpdateOperation(ImageContext imageContext, ErrorOutput errorOutput)
+    public UpdateOperation(ImageContext imageContext, ErrorOutput errorOutput, DesktopController desktopController)
     {
         _imageContext = imageContext;
         _errorOutput = errorOutput;
+        _desktopController = desktopController;
 
         ProgressTitle = MiscResources.UpdateProgress;
         AllowBackground = true;
@@ -117,11 +119,10 @@ public class UpdateOperation : OperationBase
             InvokeFinished();
             _waitHandle.Set();
         }
-        // TODO: Simplify
         var desktop = Application.OpenForms.OfType<FDesktop>().FirstOrDefault();
         if (desktop != null)
         {
-            desktop.SkipRecoveryCleanup = true;
+            _desktopController.SkipRecoveryCleanup = true;
             desktop.Close();
         }
     }

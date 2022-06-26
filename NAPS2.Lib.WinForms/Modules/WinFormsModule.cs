@@ -27,5 +27,6 @@ public class WinFormsModule : NinjectModule
         Bind<ISaveNotify>().ToMethod(ctx => ctx.Kernel.Get<NotificationManager>());
         Bind<IScannedImagePrinter>().To<PrintDocumentPrinter>();
         Bind<IDevicePrompt>().To<WinFormsDevicePrompt>();
+        Bind<DesktopController>().ToSelf().InSingletonScope();
     }
 }

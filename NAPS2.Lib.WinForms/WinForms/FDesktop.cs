@@ -5,102 +5,68 @@ using System.Threading;
 using System.Windows.Forms;
 using Eto.WinForms;
 using NAPS2.EtoForms;
-using NAPS2.EtoForms.Ui;
 using NAPS2.EtoForms.WinForms;
 using NAPS2.ImportExport;
 using NAPS2.Ocr;
-using NAPS2.Recovery;
-using NAPS2.Scan;
 using NAPS2.ImportExport.Images;
-using NAPS2.Platform.Windows;
-using NAPS2.Remoting;
-using NAPS2.Wia;
-using NAPS2.Update;
 
 #endregion
 
 namespace NAPS2.WinForms
 {
-    // TODO: Add a DesktopController class with all the non-UI logic in this class
-    // TODO: Possibly as an evolution of the UserActions class
     public partial class FDesktop : FormBase
     {
-        #region Dependencies
-
         private readonly ToolbarFormatter _toolbarFormatter;
         private readonly TesseractLanguageManager _tesseractLanguageManager;
-        private readonly IScanPerformer _scanPerformer;
         private readonly IScannedImagePrinter _scannedImagePrinter;
-        private readonly StillImage _stillImage;
-        private readonly IOperationFactory _operationFactory;
         private readonly KeyboardShortcutManager _ksm;
         private readonly ThumbnailRenderer _thumbnailRenderer;
-        private readonly WinFormsExportHelper _exportHelper;
-        private readonly ImageClipboard _imageClipboard;
         private readonly NotificationManager _notify;
         private readonly CultureHelper _cultureHelper;
-        private readonly OperationProgress _operationProgress;
-        private readonly UpdateChecker _updateChecker;
         private readonly IProfileManager _profileManager;
         private readonly UiImageList _imageList;
         private readonly ImageTransfer _imageTransfer;
-        private readonly RecoveryStorageManager _recoveryStorageManager;
-        private readonly ScanningContext _scanningContext;
         private readonly ThumbnailRenderQueue _thumbnailRenderQueue;
         private readonly UiThumbnailProvider _thumbnailProvider;
+        private readonly DesktopController _desktopController;
+        private readonly UserActions _userActions;
+
         private WinFormsListView<UiImage> _listView;
         private ImageListSyncer? _imageListSyncer;
-
-        #endregion
-
-        #region State Fields
-
-        private readonly UserActions _userActions;
-        private bool _closed = false;
         private LayoutManager _layoutManager;
-        private bool _disableSelectedIndexChangedEvent;
-
-        public bool SkipRecoveryCleanup { get; set; }
-
-        #endregion
 
         #region Initialization and Culture
 
-        public FDesktop(ToolbarFormatter toolbarFormatter,
+        public FDesktop(
+            ToolbarFormatter toolbarFormatter,
             TesseractLanguageManager tesseractLanguageManager,
-            IScanPerformer scanPerformer, IScannedImagePrinter scannedImagePrinter, StillImage stillImage,
-            IOperationFactory operationFactory,
-            KeyboardShortcutManager ksm, ThumbnailRenderer thumbnailRenderer, WinFormsExportHelper exportHelper,
-            ImageClipboard imageClipboard,
-            NotificationManager notify, CultureHelper cultureHelper,
-            OperationProgress operationProgress,
-            UpdateChecker updateChecker, IProfileManager profileManager, UiImageList imageList,
+            IScannedImagePrinter scannedImagePrinter,
+            KeyboardShortcutManager ksm,
+            ThumbnailRenderer thumbnailRenderer,
+            NotificationManager notify,
+            CultureHelper cultureHelper,
+            IProfileManager profileManager,
+            UiImageList imageList,
             ImageTransfer imageTransfer,
-            RecoveryStorageManager recoveryStorageManager, ScanningContext scanningContext,
-            ThumbnailRenderQueue thumbnailRenderQueue, UiThumbnailProvider thumbnailProvider)
+            ThumbnailRenderQueue thumbnailRenderQueue,
+            UiThumbnailProvider thumbnailProvider,
+            DesktopController desktopController,
+            UserActions userActions)
         {
             _toolbarFormatter = toolbarFormatter;
             _tesseractLanguageManager = tesseractLanguageManager;
-            _scanPerformer = scanPerformer;
             _scannedImagePrinter = scannedImagePrinter;
-            _stillImage = stillImage;
-            _operationFactory = operationFactory;
             _ksm = ksm;
             _thumbnailRenderer = thumbnailRenderer;
-            _exportHelper = exportHelper;
-            _imageClipboard = imageClipboard;
             _notify = notify;
             _cultureHelper = cultureHelper;
-            _operationProgress = operationProgress;
-            _updateChecker = updateChecker;
             _profileManager = profileManager;
             _imageList = imageList;
             _imageTransfer = imageTransfer;
-            _recoveryStorageManager = recoveryStorageManager;
-            _scanningContext = scanningContext;
             _thumbnailRenderQueue = thumbnailRenderQueue;
             _thumbnailProvider = thumbnailProvider;
-            _userActions = new UserActions(_scanningContext.ImageContext, imageList);
+            _desktopController = desktopController;
+            _userActions = userActions;
             InitializeComponent();
 
             notify.ParentForm = this;
@@ -193,13 +159,14 @@ namespace NAPS2.WinForms
             _layoutManager?.Deactivate();
             btnZoomIn.Location = new Point(btnZoomIn.Location.X, _listView.NativeControl.Height - 33);
             btnZoomOut.Location = new Point(btnZoomOut.Location.X, _listView.NativeControl.Height - 33);
-            btnZoomMouseCatcher.Location = new Point(btnZoomMouseCatcher.Location.X, _listView.NativeControl.Height - 33);
+            btnZoomMouseCatcher.Location =
+                new Point(btnZoomMouseCatcher.Location.X, _listView.NativeControl.Height - 33);
             _layoutManager = new LayoutManager(this)
                 .Bind(btnZoomIn, btnZoomOut, btnZoomMouseCatcher)
                 .BottomTo(() => _listView.NativeControl.Height)
                 .Activate();
             _listView.NativeControl.SizeChanged += (_, _) => _layoutManager.UpdateLayout();
-            
+
             _imageListSyncer.SyncNow();
             _listView.NativeControl.Focus();
         }
@@ -245,95 +212,10 @@ namespace NAPS2.WinForms
             new Eto.Forms.Application(Eto.Platforms.WinForms).Attach();
 
             UpdateToolbar();
-
-            // Receive messages from other processes
-            Pipes.StartServer(msg =>
-            {
-                if (msg.StartsWith(Pipes.MSG_SCAN_WITH_DEVICE, StringComparison.InvariantCulture))
-                {
-                    SafeInvoke(async () => await ScanWithDevice(msg.Substring(Pipes.MSG_SCAN_WITH_DEVICE.Length)));
-                }
-                if (msg.Equals(Pipes.MSG_ACTIVATE))
-                {
-                    SafeInvoke(() =>
-                    {
-                        var form = Application.OpenForms.Cast<Form>().Last();
-                        if (form.WindowState == FormWindowState.Minimized)
-                        {
-                            Win32.ShowWindow(form.Handle, Win32.ShowWindowCommands.Restore);
-                        }
-                        form.Activate();
-                    });
-                }
-            });
-
-            // If configured (e.g. by a business), show a customizable message box on application startup.
-            if (!string.IsNullOrWhiteSpace(Config.Get(c => c.StartupMessageText)))
-            {
-                MessageBox.Show(Config.Get(c => c.StartupMessageText), Config.Get(c => c.StartupMessageTitle),
-                    MessageBoxButtons.OK,
-                    Config.Get(c => c.StartupMessageIcon));
-            }
-
-            // Allow scanned images to be recovered in case of an unexpected close
-            var op = _operationFactory.Create<RecoveryOperation>();
-            if (op.Start(ReceiveScannedImage(),
-                    new RecoveryParams { ThumbnailSize = Config.Get(c => c.ThumbnailSize) }))
-            {
-                _operationProgress.ShowProgress(op);
-            }
-
-            _thumbnailRenderQueue.SetThumbnailSize(Config.Get(c => c.ThumbnailSize));
-            _thumbnailRenderQueue.StartRendering(_imageList);
-
-            // If NAPS2 was started by the scanner button, do the appropriate actions automatically
-            await RunStillImageEvents();
-
-            // Show a donation prompt after a month of use
-            if (!Config.Get(c => c.HasBeenRun))
-            {
-                var transact = Config.User.BeginTransaction();
-                transact.Set(c => c.HasBeenRun, true);
-                transact.Set(c => c.FirstRunDate, DateTime.Now);
-                transact.Commit();
-            }
-#if !INSTALLER_MSI
-            else if (!Config.Get(c => c.HiddenButtons).HasFlag(ToolbarButtons.Donate) &&
-                     !Config.Get(c => c.HasBeenPromptedForDonation) &&
-                     DateTime.Now - Config.Get(c => c.FirstRunDate) > TimeSpan.FromDays(30))
-            {
-                var transact = Config.User.BeginTransaction();
-                transact.Set(c => c.HasBeenPromptedForDonation, true);
-                transact.Set(c => c.LastDonatePromptDate, DateTime.Now);
-                transact.Commit();
-                _notify.DonatePrompt();
-            }
-
-            if (Config.Get(c => c.CheckForUpdates) &&
-                (!Config.Get(c => c.HasCheckedForUpdates) ||
-                 Config.Get(c => c.LastUpdateCheckDate) < DateTime.Now - _updateChecker.CheckInterval))
-            {
-                _updateChecker.CheckForUpdates().ContinueWith(task =>
-                {
-                    if (task.IsFaulted)
-                    {
-                        Log.ErrorException("Error checking for updates", task.Exception);
-                    }
-                    else
-                    {
-                        var transact = Config.User.BeginTransaction();
-                        transact.Set(c => c.HasCheckedForUpdates, true);
-                        transact.Set(c => c.LastUpdateCheckDate, DateTime.Now);
-                        transact.Commit();
-                    }
-                    var update = task.Result;
-                    if (update != null)
-                    {
-                        SafeInvoke(() => _notify.UpdateAvailable(_updateChecker, update));
-                    }
-                }).AssertNoAwait();
-            }
-#endif
+            _desktopController.Form = this;
+            _desktopController.SafeInvoke = SafeInvoke;
+            _desktopController.UpdateScanButton = UpdateScanButton;
+            await _desktopController.Initialize();
         }
 
         #endregion
@@ -342,232 +224,16 @@ namespace NAPS2.WinForms
 
         private void FDesktop_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (_closed) return;
-
-            if (_operationProgress.ActiveOperations.Any())
+            if (!_desktopController.PrepareForClosing(e.CloseReason == CloseReason.UserClosing))
             {
-                if (e.CloseReason == CloseReason.UserClosing)
-                {
-                    if (_operationProgress.ActiveOperations.Any(x => !x.SkipExitPrompt))
-                    {
-                        var result = MessageBox.Show(MiscResources.ExitWithActiveOperations,
-                            MiscResources.ActiveOperations,
-                            MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2);
-                        if (result != DialogResult.Yes)
-                        {
-                            e.Cancel = true;
-                        }
-                    }
-                }
-                else
-                {
-                    SkipRecoveryCleanup = true;
-                }
-            }
-            else if (_imageList.Images.Any() && _imageList.SavedState != _imageList.CurrentState)
-            {
-                if (e.CloseReason == CloseReason.UserClosing && !SkipRecoveryCleanup)
-                {
-                    var result = MessageBox.Show(MiscResources.ExitWithUnsavedChanges, MiscResources.UnsavedChanges,
-                        MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2);
-                    if (result == DialogResult.Yes)
-                    {
-                        _imageList.SavedState = _imageList.CurrentState;
-                    }
-                    else
-                    {
-                        e.Cancel = true;
-                    }
-                }
-                else
-                {
-                    SkipRecoveryCleanup = true;
-                }
-            }
-
-            if (!e.Cancel && _operationProgress.ActiveOperations.Any())
-            {
-                _operationProgress.ActiveOperations.ForEach(op => op.Cancel());
                 e.Cancel = true;
-                Hide();
-                ShowInTaskbar = false;
-                Task.Run(() =>
-                {
-                    var timeoutCts = new CancellationTokenSource();
-                    timeoutCts.CancelAfter(TimeSpan.FromSeconds(60));
-                    try
-                    {
-                        _operationProgress.ActiveOperations.ForEach(op => op.Wait(timeoutCts.Token));
-                    }
-                    catch (OperationCanceledException)
-                    {
-                    }
-                    _closed = true;
-                    SafeInvoke(Close);
-                });
             }
         }
 
         private void FDesktop_Closed(object sender, EventArgs e)
         {
             SaveToolStripLocation();
-            Pipes.KillServer();
-            if (!SkipRecoveryCleanup)
-            {
-                try
-                {
-                    // TODO: Figure out and fix undisposed processed images
-                    _scanningContext.Dispose();
-                    _recoveryStorageManager.Dispose();
-                }
-                catch (Exception ex)
-                {
-                    Log.ErrorException("Recovery cleanup failed", ex);
-                }
-            }
-            _closed = true;
-            _thumbnailRenderQueue.Dispose();
-        }
-
-        #endregion
-
-        #region Scanning and Still Image
-
-        private async Task RunStillImageEvents()
-        {
-            if (_stillImage.ShouldScan)
-            {
-                await ScanWithDevice(_stillImage.DeviceID!);
-            }
-        }
-
-        private ScanParams DefaultScanParams() =>
-            new ScanParams
-            {
-                NoAutoSave = Config.Get(c => c.DisableAutoSave),
-                DoOcr = Config.Get(c => c.EnableOcr) && Config.Get(c => c.OcrAfterScanning),
-                ThumbnailSize = Config.Get(c => c.ThumbnailSize)
-            };
-
-        private async Task ScanWithDevice(string deviceID)
-        {
-            Activate();
-            ScanProfile profile;
-            if (_profileManager.DefaultProfile?.Device?.ID == deviceID)
-            {
-                // Try to use the default profile if it has the right device
-                profile = _profileManager.DefaultProfile;
-            }
-            else
-            {
-                // Otherwise just pick any old profile with the right device
-                // Not sure if this is the best way to do it, but it's hard to prioritize profiles
-                profile = _profileManager.Profiles.FirstOrDefault(x => x.Device != null && x.Device.ID == deviceID);
-            }
-            if (profile == null)
-            {
-                if (Config.Get(c => c.NoUserProfiles) && _profileManager.Profiles.Any(x => x.IsLocked))
-                {
-                    return;
-                }
-
-                // No profile for the device we're scanning with, so prompt to create one
-                var editSettingsForm = FormFactory.Create<FEditProfile>();
-                editSettingsForm.ScanProfile = Config.Get(c => c.DefaultProfileSettings);
-                try
-                {
-                    // Populate the device field automatically (because we can do that!)
-                    using var deviceManager = new WiaDeviceManager();
-                    using var device = deviceManager.FindDevice(deviceID);
-                    editSettingsForm.CurrentDevice = new ScanDevice(deviceID, device.Name());
-                }
-                catch (WiaException)
-                {
-                }
-                editSettingsForm.ShowDialog();
-                if (!editSettingsForm.Result)
-                {
-                    return;
-                }
-                profile = editSettingsForm.ScanProfile;
-                _profileManager.Mutate(new ListMutation<ScanProfile>.Append(profile),
-                    ListSelection.Empty<ScanProfile>());
-                _profileManager.DefaultProfile = profile;
-
-                UpdateScanButton();
-            }
-            if (profile != null)
-            {
-                // We got a profile, yay, so we can actually do the scan now
-                var source = await _scanPerformer.PerformScan(profile, DefaultScanParams(), Handle);
-                await source.ForEach(ReceiveScannedImage());
-                Activate();
-            }
-        }
-
-        private async Task ScanDefault()
-        {
-            if (_profileManager.DefaultProfile != null)
-            {
-                var source =
-                    await _scanPerformer.PerformScan(_profileManager.DefaultProfile, DefaultScanParams(), Handle);
-                await source.ForEach(ReceiveScannedImage());
-                Activate();
-            }
-            else if (_profileManager.Profiles.Count == 0)
-            {
-                await ScanWithNewProfile();
-            }
-            else
-            {
-                ShowProfilesForm();
-            }
-        }
-
-        private async Task ScanWithNewProfile()
-        {
-            var editSettingsForm = FormFactory.Create<FEditProfile>();
-            editSettingsForm.ScanProfile = Config.Get(c => c.DefaultProfileSettings);
-            editSettingsForm.ShowDialog();
-            if (!editSettingsForm.Result)
-            {
-                return;
-            }
-            _profileManager.Mutate(new ListMutation<ScanProfile>.Append(editSettingsForm.ScanProfile),
-                ListSelection.Empty<ScanProfile>());
-            _profileManager.DefaultProfile = editSettingsForm.ScanProfile;
-
-            UpdateScanButton();
-
-            var source = await _scanPerformer.PerformScan(editSettingsForm.ScanProfile, DefaultScanParams(), Handle);
-            await source.ForEach(ReceiveScannedImage());
-            Activate();
-        }
-
-        #endregion
-
-        #region Images and Thumbnails
-
-        /// <summary>
-        /// Constructs a receiver for scanned images.
-        /// This keeps images from the same source together, even if multiple sources are providing images at the same time.
-        /// </summary>
-        /// <returns></returns>
-        public Action<ProcessedImage> ReceiveScannedImage()
-        {
-            UiImage? last = null;
-            return scannedImage =>
-            {
-                SafeInvoke(() =>
-                {
-                    lock (_imageList)
-                    {
-                        var uiImage = new UiImage(scannedImage);
-                        _imageList.Mutate(new ImageListMutation.InsertAfter(uiImage, last));
-                        last = uiImage;
-                    }
-                });
-            };
+            _desktopController.Cleanup();
         }
 
         #endregion
@@ -609,8 +275,10 @@ namespace NAPS2.WinForms
             {
                 // TODO: Eventually, once we have a native linux UI, we can get rid of mono hacks
                 // TODO: But in the meantime we should verify mono behavior
-                _listView.NativeControl.Size = new Size(_listView.NativeControl.Width - 1, _listView.NativeControl.Height - 1);
-                _listView.NativeControl.Size = new Size(_listView.NativeControl.Width + 1, _listView.NativeControl.Height + 1);
+                _listView.NativeControl.Size =
+                    new Size(_listView.NativeControl.Width - 1, _listView.NativeControl.Height - 1);
+                _listView.NativeControl.Size =
+                    new Size(_listView.NativeControl.Width + 1, _listView.NativeControl.Height + 1);
             }
         }
 
@@ -636,16 +304,7 @@ namespace NAPS2.WinForms
                     ImageScaling = ToolStripItemImageScaling.None
                 };
                 AssignProfileShortcut(i, item);
-                item.Click += async (sender, args) =>
-                {
-                    _profileManager.DefaultProfile = profile;
-
-                    UpdateScanButton();
-
-                    var source = await _scanPerformer.PerformScan(profile, DefaultScanParams(), Handle);
-                    await source.ForEach(ReceiveScannedImage());
-                    Activate();
-                };
+                item.Click += async (_, _) => await _desktopController.ScanWithProfile(profile);
                 tsScan.DropDownItems.Insert(tsScan.DropDownItems.Count - staticButtonCount, item);
 
                 i++;
@@ -678,179 +337,6 @@ namespace NAPS2.WinForms
 
         #endregion
 
-        #region Actions
-
-        private void Clear()
-        {
-            if (_imageList.Images.Count > 0)
-            {
-                if (MessageBox.Show(string.Format(MiscResources.ConfirmClearItems, _imageList.Images.Count),
-                        MiscResources.Clear, MessageBoxButtons.OKCancel,
-                        MessageBoxIcon.Question) == DialogResult.OK)
-                {
-                    _userActions.DeleteAll();
-                }
-            }
-        }
-
-        private void Delete()
-        {
-            if (_imageList.Selection.Any())
-            {
-                if (MessageBox.Show(string.Format(MiscResources.ConfirmDeleteItems, _imageList.Selection.Count),
-                        MiscResources.Delete, MessageBoxButtons.OKCancel,
-                        MessageBoxIcon.Question) == DialogResult.OK)
-                {
-                    _userActions.DeleteSelected();
-                }
-            }
-        }
-
-        private void PreviewImage()
-        {
-            if (_imageList.Selection.Any())
-            {
-                using var viewer = FormFactory.Create<FViewer>();
-                viewer.ImageList = _imageList;
-                // TODO: Fix this 
-                // viewer.ImageIndex = SelectedIndices.First();
-                // viewer.DeleteCallback = UpdateThumbnails;
-                viewer.SelectCallback = i =>
-                {
-                    if (_imageList.Selection.Count <= 1)
-                    {
-                        // TODO: Fix this
-                        // SelectedIndices = new[] { i };
-                        //thumbnailList1.Items[i].EnsureVisible();
-                    }
-                };
-                viewer.ShowDialog();
-            }
-        }
-
-        private void ShowProfilesForm()
-        {
-            var form = FormFactory.Create<ProfilesForm>();
-            form.ImageCallback = ReceiveScannedImage();
-            form.ShowModal();
-            UpdateScanButton();
-        }
-
-        private void ResetImage()
-        {
-            if (_imageList.Selection.Any())
-            {
-                if (MessageBox.Show(string.Format(MiscResources.ConfirmResetImages, _imageList.Selection.Count),
-                        MiscResources.ResetImage,
-                        MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
-                {
-                    _userActions.ResetTransforms();
-                }
-            }
-        }
-
-        private void OpenAbout()
-        {
-            _toolbarFormatter.RelayoutToolbar(tStrip);
-            FormFactory.Create<AboutForm>().ShowModal();
-        }
-
-        private void OpenSettings()
-        {
-            // FormFactory.Create<FSettings>().ShowDialog();
-        }
-
-        #endregion
-
-        #region Actions - Save/Email/Import
-
-        private async void SavePDF(List<UiImage> images)
-        {
-            using var imagesToSave = images.Select(x => x.GetClonedImage()).ToDisposableList();
-            if (await _exportHelper.SavePDF(imagesToSave.InnerList, _notify))
-            {
-                if (Config.Get(c => c.DeleteAfterSaving))
-                {
-                    SafeInvoke(() =>
-                    {
-                        _imageList.Mutate(new ImageListMutation.DeleteSelected(), ListSelection.From(images));
-                    });
-                }
-            }
-        }
-
-        private async void SaveImages(List<UiImage> images)
-        {
-            using var imagesToSave = images.Select(x => x.GetClonedImage()).ToDisposableList();
-            if (await _exportHelper.SaveImages(imagesToSave.InnerList, _notify))
-            {
-                if (Config.Get(c => c.DeleteAfterSaving))
-                {
-                    _imageList.Mutate(new ImageListMutation.DeleteSelected(), ListSelection.From(images));
-                }
-            }
-        }
-
-        private async void EmailPDF(List<UiImage> images)
-        {
-            using var imagesToEmail = images.Select(x => x.GetClonedImage()).ToDisposableList();
-            await _exportHelper.EmailPDF(imagesToEmail.InnerList);
-        }
-
-        private void Import()
-        {
-            var ofd = new OpenFileDialog
-            {
-                Multiselect = true,
-                CheckFileExists = true,
-                Filter = MiscResources.FileTypeAllFiles + @"|*.*|" +
-                         MiscResources.FileTypePdf + @"|*.pdf|" +
-                         MiscResources.FileTypeImageFiles +
-                         @"|*.bmp;*.emf;*.exif;*.gif;*.jpg;*.jpeg;*.png;*.tiff;*.tif|" +
-                         MiscResources.FileTypeBmp + @"|*.bmp|" +
-                         MiscResources.FileTypeEmf + @"|*.emf|" +
-                         MiscResources.FileTypeExif + @"|*.exif|" +
-                         MiscResources.FileTypeGif + @"|*.gif|" +
-                         MiscResources.FileTypeJpeg + @"|*.jpg;*.jpeg|" +
-                         MiscResources.FileTypePng + @"|*.png|" +
-                         MiscResources.FileTypeTiff + @"|*.tiff;*.tif"
-            };
-            if (ofd.ShowDialog() == DialogResult.OK)
-            {
-                ImportFiles(ofd.FileNames);
-            }
-        }
-
-        private void ImportFiles(IEnumerable<string> files)
-        {
-            var op = _operationFactory.Create<ImportOperation>();
-            if (op.Start(OrderFiles(files), ReceiveScannedImage(),
-                    new ImportParams { ThumbnailSize = Config.Get(c => c.ThumbnailSize) }))
-            {
-                _operationProgress.ShowProgress(op);
-            }
-        }
-
-        private List<string> OrderFiles(IEnumerable<string> files)
-        {
-            // Custom ordering to account for numbers so that e.g. "10" comes after "2"
-            var filesList = files.ToList();
-            filesList.Sort(new NaturalStringComparer());
-            return filesList;
-        }
-
-        private void ImportDirect(ImageTransferData data, bool copy)
-        {
-            var op = _operationFactory.Create<DirectImportOperation>();
-            if (op.Start(data, copy, ReceiveScannedImage(),
-                    new DirectImportParams { ThumbnailSize = Config.Get(c => c.ThumbnailSize) }))
-            {
-                _operationProgress.ShowProgress(op);
-            }
-        }
-
-        #endregion
-
         #region Keyboard Shortcuts
 
         private void AssignKeyboardShortcuts()
@@ -867,7 +353,7 @@ namespace NAPS2.WinForms
             _ksm.Assign("Ctrl+Down", _userActions.MoveDown);
             _ksm.Assign("Ctrl+Right", _userActions.MoveDown);
             _ksm.Assign("Ctrl+Shift+Del", tsClear);
-            _ksm.Assign("F1", OpenAbout);
+            _ksm.Assign("F1", _desktopController.OpenAbout);
             _ksm.Assign("Ctrl+OemMinus", btnZoomOut);
             _ksm.Assign("Ctrl+Oemplus", btnZoomIn);
             _ksm.Assign("Del", ctxDelete);
@@ -877,10 +363,9 @@ namespace NAPS2.WinForms
 
             // Configured
 
-            // TODO: Granular
             var ks = Config.Get(c => c.KeyboardShortcuts);
 
-            _ksm.Assign(ks.About, OpenAbout);
+            _ksm.Assign(ks.About, _desktopController.OpenAbout);
             _ksm.Assign(ks.BatchScan, tsBatchScan);
             _ksm.Assign(ks.Clear, tsClear);
             _ksm.Assign(ks.Delete, tsDelete);
@@ -902,7 +387,7 @@ namespace NAPS2.WinForms
             _ksm.Assign(ks.NewProfile, tsNewProfile);
             _ksm.Assign(ks.Ocr, tsOcr);
             _ksm.Assign(ks.Print, tsPrint);
-            _ksm.Assign(ks.Profiles, ShowProfilesForm);
+            _ksm.Assign(ks.Profiles, tsProfiles);
 
             _ksm.Assign(ks.ReorderAltDeinterleave, tsAltDeinterleave);
             _ksm.Assign(ks.ReorderAltInterleave, tsAltInterleave);
@@ -993,19 +478,13 @@ namespace NAPS2.WinForms
 
         #region Event Handlers - Toolbar
 
-        private async void tsScan_ButtonClick(object sender, EventArgs e) => await ScanDefault();
+        private async void tsScan_ButtonClick(object sender, EventArgs e) => await _desktopController.ScanDefault();
 
-        private async void tsNewProfile_Click(object sender, EventArgs e) => await ScanWithNewProfile();
+        private async void tsNewProfile_Click(object sender, EventArgs e) => await _desktopController.ScanWithNewProfile();
 
-        private void tsBatchScan_Click(object sender, EventArgs e)
-        {
-            var form = FormFactory.Create<FBatchScan>();
-            form.ImageCallback = ReceiveScannedImage();
-            form.ShowDialog();
-            UpdateScanButton();
-        }
+        private void tsBatchScan_Click(object sender, EventArgs e) => _desktopController.ShowBatchScanForm();
 
-        private void tsProfiles_Click(object sender, EventArgs e) => ShowProfilesForm();
+        private void tsProfiles_Click(object sender, EventArgs e) => _desktopController.ShowProfilesForm();
 
         private void tsOcr_Click(object sender, EventArgs e)
         {
@@ -1023,9 +502,9 @@ namespace NAPS2.WinForms
             }
         }
 
-        private void tsImport_Click(object sender, EventArgs e) => Import();
+        private void tsImport_Click(object sender, EventArgs e) => _desktopController.Import();
 
-        private void tsdSavePDF_ButtonClick(object sender, EventArgs e)
+        private async void tsdSavePDF_ButtonClick(object sender, EventArgs e)
         {
             var action = Config.Get(c => c.SaveButtonDefaultAction);
 
@@ -1036,15 +515,15 @@ namespace NAPS2.WinForms
             }
             else if (action == SaveButtonDefaultAction.SaveSelected && _imageList.Selection.Any())
             {
-                SavePDF(_imageList.Selection.ToList());
+                await _desktopController.SavePDF(_imageList.Selection.ToList());
             }
             else
             {
-                SavePDF(_imageList.Images);
+                await _desktopController.SavePDF(_imageList.Images);
             }
         }
 
-        private void tsdSaveImages_ButtonClick(object sender, EventArgs e)
+        private async void tsdSaveImages_ButtonClick(object sender, EventArgs e)
         {
             var action = Config.Get(c => c.SaveButtonDefaultAction);
 
@@ -1055,15 +534,15 @@ namespace NAPS2.WinForms
             }
             else if (action == SaveButtonDefaultAction.SaveSelected && _imageList.Selection.Any())
             {
-                SaveImages(_imageList.Selection.ToList());
+                await _desktopController.SaveImages(_imageList.Selection.ToList());
             }
             else
             {
-                SaveImages(_imageList.Images);
+                await _desktopController.SaveImages(_imageList.Images);
             }
         }
 
-        private void tsdEmailPDF_ButtonClick(object sender, EventArgs e)
+        private async void tsdEmailPDF_ButtonClick(object sender, EventArgs e)
         {
             var action = Config.Get(c => c.SaveButtonDefaultAction);
 
@@ -1074,11 +553,11 @@ namespace NAPS2.WinForms
             }
             else if (action == SaveButtonDefaultAction.SaveSelected && _imageList.Selection.Any())
             {
-                EmailPDF(_imageList.Selection.ToList());
+                await _desktopController.EmailPDF(_imageList.Selection.ToList());
             }
             else
             {
-                EmailPDF(_imageList.Images);
+                await _desktopController.EmailPDF(_imageList.Images);
             }
         }
 
@@ -1097,32 +576,32 @@ namespace NAPS2.WinForms
 
         private void tsMove_SecondClick(object sender, EventArgs e) => _userActions.MoveDown();
 
-        private void tsDelete_Click(object sender, EventArgs e) => Delete();
+        private void tsDelete_Click(object sender, EventArgs e) => _desktopController.Delete();
 
-        private void tsClear_Click(object sender, EventArgs e) => Clear();
+        private void tsClear_Click(object sender, EventArgs e) => _desktopController.Clear();
 
-        private void tsAbout_Click(object sender, EventArgs e) => OpenAbout();
+        private void tsAbout_Click(object sender, EventArgs e) => _desktopController.OpenAbout();
 
-        private void tsSettings_Click(object sender, EventArgs e) => OpenSettings();
+        private void tsSettings_Click(object sender, EventArgs e) => _desktopController.OpenSettings();
 
         #endregion
 
         #region Event Handlers - Save/Email Menus
 
-        private void tsSavePDFAll_Click(object sender, EventArgs e) => SavePDF(_imageList.Images);
-        private void tsSavePDFSelected_Click(object sender, EventArgs e) => SavePDF(_imageList.Selection.ToList());
-        private void tsPDFSettings_Click(object sender, EventArgs e) => FormFactory.Create<FPdfSettings>().ShowDialog();
+        private async void tsSavePDFAll_Click(object sender, EventArgs e) => await _desktopController.SavePDF(_imageList.Images);
+        private async void tsSavePDFSelected_Click(object sender, EventArgs e) => await _desktopController.SavePDF(_imageList.Selection.ToList());
+        private async void tsPDFSettings_Click(object sender, EventArgs e) => FormFactory.Create<FPdfSettings>().ShowDialog();
 
-        private void tsSaveImagesAll_Click(object sender, EventArgs e) => SaveImages(_imageList.Images);
+        private async void tsSaveImagesAll_Click(object sender, EventArgs e) => await _desktopController.SaveImages(_imageList.Images);
 
-        private void tsSaveImagesSelected_Click(object sender, EventArgs e) =>
-            SaveImages(_imageList.Selection.ToList());
+        private async void tsSaveImagesSelected_Click(object sender, EventArgs e) =>
+            await _desktopController.SaveImages(_imageList.Selection.ToList());
 
         private void tsImageSettings_Click(object sender, EventArgs e) =>
             FormFactory.Create<FImageSettings>().ShowDialog();
 
-        private void tsEmailPDFAll_Click(object sender, EventArgs e) => EmailPDF(_imageList.Images);
-        private void tsEmailPDFSelected_Click(object sender, EventArgs e) => EmailPDF(_imageList.Selection.ToList());
+        private async void tsEmailPDFAll_Click(object sender, EventArgs e) => await _desktopController.EmailPDF(_imageList.Images);
+        private async void tsEmailPDFSelected_Click(object sender, EventArgs e) => await _desktopController.EmailPDF(_imageList.Selection.ToList());
 
         private void tsPdfSettings2_Click(object sender, EventArgs e) =>
             FormFactory.Create<FPdfSettings>().ShowDialog();
@@ -1134,7 +613,7 @@ namespace NAPS2.WinForms
 
         #region Event Handlers - Image Menu
 
-        private void tsView_Click(object sender, EventArgs e) => PreviewImage();
+        private void tsView_Click(object sender, EventArgs e) => _desktopController.PreviewImage();
 
         private void ShowImageForm<T>() where T : ImageForm
         {
@@ -1153,7 +632,7 @@ namespace NAPS2.WinForms
         private void tsHueSaturation_Click(object sender, EventArgs e) => ShowImageForm<FHueSaturation>();
         private void tsBlackWhite_Click(object sender, EventArgs e) => ShowImageForm<FBlackWhite>();
         private void tsSharpen_Click(object sender, EventArgs e) => ShowImageForm<FSharpen>();
-        private void tsReset_Click(object sender, EventArgs e) => ResetImage();
+        private void tsReset_Click(object sender, EventArgs e) => _desktopController.ResetImage();
 
         #endregion
 
@@ -1190,22 +669,12 @@ namespace NAPS2.WinForms
         }
 
         private void ctxSelectAll_Click(object sender, EventArgs e) => _userActions.SelectAll();
-        private void ctxView_Click(object sender, EventArgs e) => PreviewImage();
-        private void ctxDelete_Click(object sender, EventArgs e) => Delete();
+        private void ctxView_Click(object sender, EventArgs e) => _desktopController.PreviewImage();
+        private void ctxDelete_Click(object sender, EventArgs e) => _desktopController.Delete();
 
-        private async void ctxCopy_Click(object sender, EventArgs e)
-        {
-            using var imagesToCopy = _imageList.Selection.Select(x => x.GetClonedImage()).ToDisposableList();
-            await _imageClipboard.Write(imagesToCopy.InnerList, true);
-        }
+        private async void ctxCopy_Click(object sender, EventArgs e) => await _desktopController.Copy();
 
-        private void ctxPaste_Click(object sender, EventArgs e)
-        {
-            if (_imageTransfer.IsInClipboard())
-            {
-                ImportDirect(_imageTransfer.GetFromClipboard(), true);
-            }
-        }
+        private void ctxPaste_Click(object sender, EventArgs e) => _desktopController.Paste();
 
         #endregion
 
@@ -1266,7 +735,7 @@ namespace NAPS2.WinForms
 
         #region Drag/Drop
 
-        private void ListViewItemClicked(object? sender, EventArgs e) => PreviewImage();
+        private void ListViewItemClicked(object? sender, EventArgs e) => _desktopController.PreviewImage();
 
         private void ListViewSelectionChanged(object? sender, EventArgs e)
         {
@@ -1285,13 +754,13 @@ namespace NAPS2.WinForms
                 }
                 else
                 {
-                    ImportDirect(data, false);
+                    _desktopController.ImportDirect(data, false);
                 }
             }
             else if (args.Data.GetDataPresent(DataFormats.FileDrop))
             {
                 var data = (string[]) args.Data.GetData(DataFormats.FileDrop);
-                ImportFiles(data);
+                _desktopController.ImportFiles(data);
             }
         }
 
