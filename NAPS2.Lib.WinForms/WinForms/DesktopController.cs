@@ -29,7 +29,7 @@ public class DesktopController
     private readonly NotificationManager _notify;
     private readonly ImageTransfer _imageTransfer;
     private readonly ImageClipboard _imageClipboard;
-    private readonly UserActions _userActions;
+    private readonly ImageListActions _imageListActions;
     private readonly WinFormsExportHelper _exportHelper;
 
     private bool _closed;
@@ -39,7 +39,7 @@ public class DesktopController
         OperationProgress operationProgress, Naps2Config config, IOperationFactory operationFactory,
         StillImage stillImage, IFormFactory formFactory, IProfileManager profileManager, IScanPerformer scanPerformer,
         UpdateChecker updateChecker, NotificationManager notify, ImageTransfer imageTransfer,
-        ImageClipboard imageClipboard, UserActions userActions, WinFormsExportHelper exportHelper)
+        ImageClipboard imageClipboard, ImageListActions imageListActions, WinFormsExportHelper exportHelper)
     {
         _scanningContext = scanningContext;
         _imageList = imageList;
@@ -56,7 +56,7 @@ public class DesktopController
         _notify = notify;
         _imageTransfer = imageTransfer;
         _imageClipboard = imageClipboard;
-        _userActions = userActions;
+        _imageListActions = imageListActions;
         _exportHelper = exportHelper;
     }
 
@@ -490,7 +490,7 @@ public class DesktopController
                     MiscResources.Clear, MessageBoxButtons.OKCancel,
                     MessageBoxIcon.Question) == DialogResult.OK)
             {
-                _userActions.DeleteAll();
+                _imageListActions.DeleteAll();
             }
         }
     }
@@ -503,7 +503,7 @@ public class DesktopController
                     MiscResources.Delete, MessageBoxButtons.OKCancel,
                     MessageBoxIcon.Question) == DialogResult.OK)
             {
-                _userActions.DeleteSelected();
+                _imageListActions.DeleteSelected();
             }
         }
     }
@@ -538,7 +538,7 @@ public class DesktopController
                     MiscResources.ResetImage,
                     MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
             {
-                _userActions.ResetTransforms();
+                _imageListActions.ResetTransforms();
             }
         }
     }

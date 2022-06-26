@@ -29,7 +29,7 @@ namespace NAPS2.WinForms
         private readonly ThumbnailRenderQueue _thumbnailRenderQueue;
         private readonly UiThumbnailProvider _thumbnailProvider;
         private readonly DesktopController _desktopController;
-        private readonly UserActions _userActions;
+        private readonly ImageListActions _imageListActions;
 
         private WinFormsListView<UiImage> _listView;
         private ImageListSyncer? _imageListSyncer;
@@ -51,7 +51,7 @@ namespace NAPS2.WinForms
             ThumbnailRenderQueue thumbnailRenderQueue,
             UiThumbnailProvider thumbnailProvider,
             DesktopController desktopController,
-            UserActions userActions)
+            ImageListActions imageListActions)
         {
             _toolbarFormatter = toolbarFormatter;
             _tesseractLanguageManager = tesseractLanguageManager;
@@ -66,7 +66,7 @@ namespace NAPS2.WinForms
             _thumbnailRenderQueue = thumbnailRenderQueue;
             _thumbnailProvider = thumbnailProvider;
             _desktopController = desktopController;
-            _userActions = userActions;
+            _imageListActions = imageListActions;
             InitializeComponent();
 
             notify.ParentForm = this;
@@ -348,10 +348,10 @@ namespace NAPS2.WinForms
             _ksm.Assign("Ctrl+O", tsImport);
             _ksm.Assign("Ctrl+S", tsdSavePDF);
             _ksm.Assign("Ctrl+P", tsPrint);
-            _ksm.Assign("Ctrl+Up", _userActions.MoveUp);
-            _ksm.Assign("Ctrl+Left", _userActions.MoveUp);
-            _ksm.Assign("Ctrl+Down", _userActions.MoveDown);
-            _ksm.Assign("Ctrl+Right", _userActions.MoveDown);
+            _ksm.Assign("Ctrl+Up", _imageListActions.MoveUp);
+            _ksm.Assign("Ctrl+Left", _imageListActions.MoveUp);
+            _ksm.Assign("Ctrl+Down", _imageListActions.MoveDown);
+            _ksm.Assign("Ctrl+Right", _imageListActions.MoveDown);
             _ksm.Assign("Ctrl+Shift+Del", tsClear);
             _ksm.Assign("F1", _desktopController.OpenAbout);
             _ksm.Assign("Ctrl+OemMinus", btnZoomOut);
@@ -382,8 +382,8 @@ namespace NAPS2.WinForms
             _ksm.Assign(ks.ImageReset, tsReset);
             _ksm.Assign(ks.ImageView, tsView);
             _ksm.Assign(ks.Import, tsImport);
-            _ksm.Assign(ks.MoveDown, _userActions.MoveDown);
-            _ksm.Assign(ks.MoveUp, _userActions.MoveUp);
+            _ksm.Assign(ks.MoveDown, _imageListActions.MoveDown);
+            _ksm.Assign(ks.MoveUp, _imageListActions.MoveUp);
             _ksm.Assign(ks.NewProfile, tsNewProfile);
             _ksm.Assign(ks.Ocr, tsOcr);
             _ksm.Assign(ks.Print, tsPrint);
@@ -572,9 +572,9 @@ namespace NAPS2.WinForms
             }
         }
 
-        private void tsMove_FirstClick(object sender, EventArgs e) => _userActions.MoveUp();
+        private void tsMove_FirstClick(object sender, EventArgs e) => _imageListActions.MoveUp();
 
-        private void tsMove_SecondClick(object sender, EventArgs e) => _userActions.MoveDown();
+        private void tsMove_SecondClick(object sender, EventArgs e) => _imageListActions.MoveDown();
 
         private void tsDelete_Click(object sender, EventArgs e) => _desktopController.Delete();
 
@@ -638,22 +638,22 @@ namespace NAPS2.WinForms
 
         #region Event Handlers - Rotate Menu
 
-        private async void tsRotateLeft_Click(object sender, EventArgs e) => await _userActions.RotateLeft();
-        private async void tsRotateRight_Click(object sender, EventArgs e) => await _userActions.RotateRight();
-        private async void tsFlip_Click(object sender, EventArgs e) => await _userActions.Flip();
-        private void tsDeskew_Click(object sender, EventArgs e) => _userActions.Deskew();
+        private async void tsRotateLeft_Click(object sender, EventArgs e) => await _imageListActions.RotateLeft();
+        private async void tsRotateRight_Click(object sender, EventArgs e) => await _imageListActions.RotateRight();
+        private async void tsFlip_Click(object sender, EventArgs e) => await _imageListActions.Flip();
+        private void tsDeskew_Click(object sender, EventArgs e) => _imageListActions.Deskew();
         private void tsCustomRotation_Click(object sender, EventArgs e) => ShowImageForm<FRotate>();
 
         #endregion
 
         #region Event Handlers - Reorder Menu
 
-        private void tsInterleave_Click(object sender, EventArgs e) => _userActions.Interleave();
-        private void tsDeinterleave_Click(object sender, EventArgs e) => _userActions.Deinterleave();
-        private void tsAltInterleave_Click(object sender, EventArgs e) => _userActions.AltInterleave();
-        private void tsAltDeinterleave_Click(object sender, EventArgs e) => _userActions.AltDeinterleave();
-        private void tsReverseAll_Click(object sender, EventArgs e) => _userActions.ReverseAll();
-        private void tsReverseSelected_Click(object sender, EventArgs e) => _userActions.ReverseSelected();
+        private void tsInterleave_Click(object sender, EventArgs e) => _imageListActions.Interleave();
+        private void tsDeinterleave_Click(object sender, EventArgs e) => _imageListActions.Deinterleave();
+        private void tsAltInterleave_Click(object sender, EventArgs e) => _imageListActions.AltInterleave();
+        private void tsAltDeinterleave_Click(object sender, EventArgs e) => _imageListActions.AltDeinterleave();
+        private void tsReverseAll_Click(object sender, EventArgs e) => _imageListActions.ReverseAll();
+        private void tsReverseSelected_Click(object sender, EventArgs e) => _imageListActions.ReverseSelected();
 
         #endregion
 
@@ -668,7 +668,7 @@ namespace NAPS2.WinForms
             }
         }
 
-        private void ctxSelectAll_Click(object sender, EventArgs e) => _userActions.SelectAll();
+        private void ctxSelectAll_Click(object sender, EventArgs e) => _imageListActions.SelectAll();
         private void ctxView_Click(object sender, EventArgs e) => _desktopController.PreviewImage();
         private void ctxDelete_Click(object sender, EventArgs e) => _desktopController.Delete();
 
@@ -772,7 +772,7 @@ namespace NAPS2.WinForms
             }
             if (position != -1)
             {
-                _userActions.MoveTo(position);
+                _imageListActions.MoveTo(position);
             }
         }
 
