@@ -121,11 +121,15 @@ public class FormBase : Form, IInvoker, IFormBase
     {
     }
 
+    protected virtual void AfterLoad(object sender, EventArgs eventArgs)
+    {
+    }
+
     #region Event Handlers
 
     private void OnLoadInternal(object sender, EventArgs eventArgs)
     {
-        OnLoad(sender, eventArgs);
+        OnLoad(this, EventArgs.Empty);
         if (DesignMode)
         {
             RestoreFormState = SaveFormState = false;
@@ -142,6 +146,7 @@ public class FormBase : Form, IInvoker, IFormBase
             DoRestoreFormState();
         }
         _loaded = true;
+        AfterLoad(this, EventArgs.Empty);
     }
 
     protected void DoRestoreFormState()

@@ -255,7 +255,7 @@ namespace NAPS2.WinForms
             this.tStrip.Name = "tStrip";
             this.tStrip.ShowItemToolTips = false;
             this.tStrip.TabStop = true;
-            this.tStrip.DockChanged += new System.EventHandler(this.tStrip_DockChanged);
+            this.tStrip.ParentChanged += new System.EventHandler(this.tStrip_ParentChanged);
             // 
             // tsScan
             // 

@@ -29,7 +29,7 @@ public static class WinFormsEntryPoint
         kernel.Get<IWorkerFactory>().Init();
 
         // Set up basic application configuration
-        kernel.Get<CultureInitializer>().InitCulture();
+        kernel.Get<CultureHelper>().SetCulturesFromConfig();
         Application.EnableVisualStyles();
         Application.SetCompatibleTextRenderingDefault(false);
         Application.ThreadException += UnhandledException;

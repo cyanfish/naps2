@@ -30,7 +30,7 @@ namespace NAPS2.WinForms
         private static readonly MethodInfo ToolStripPanelSetStyle =
             typeof(ToolStripPanel).GetMethod("SetStyle", BindingFlags.Instance | BindingFlags.NonPublic);
 
-        private readonly StringWrapper _stringWrapper;
+        private readonly ToolbarFormatter _toolbarFormatter;
         private readonly TesseractLanguageManager _tesseractLanguageManager;
         private readonly IScanPerformer _scanPerformer;
         private readonly IScannedImagePrinter _scannedImagePrinter;
@@ -41,7 +41,7 @@ namespace NAPS2.WinForms
         private readonly WinFormsExportHelper _exportHelper;
         private readonly ImageClipboard _imageClipboard;
         private readonly NotificationManager _notify;
-        private readonly CultureInitializer _cultureInitializer;
+        private readonly CultureHelper _cultureHelper;
         private readonly OperationProgress _operationProgress;
         private readonly UpdateChecker _updateChecker;
         private readonly IProfileManager _profileManager;
@@ -66,20 +66,20 @@ namespace NAPS2.WinForms
 
         #region Initialization and Culture
 
-        public FDesktop(StringWrapper stringWrapper,
+        public FDesktop(ToolbarFormatter toolbarFormatter,
             TesseractLanguageManager tesseractLanguageManager,
             IScanPerformer scanPerformer, IScannedImagePrinter scannedImagePrinter, StillImage stillImage,
             IOperationFactory operationFactory,
             KeyboardShortcutManager ksm, ThumbnailRenderer thumbnailRenderer, WinFormsExportHelper exportHelper,
             ImageClipboard imageClipboard,
-            NotificationManager notify, CultureInitializer cultureInitializer,
+            NotificationManager notify, CultureHelper cultureHelper,
             OperationProgress operationProgress,
             UpdateChecker updateChecker, IProfileManager profileManager, UiImageList imageList,
             ImageTransfer imageTransfer,
             RecoveryStorageManager recoveryStorageManager, ScanningContext scanningContext,
             ThumbnailRenderQueue thumbnailRenderQueue)
         {
-            _stringWrapper = stringWrapper;
+            _toolbarFormatter = toolbarFormatter;
             _tesseractLanguageManager = tesseractLanguageManager;
             _scanPerformer = scanPerformer;
             _scannedImagePrinter = scannedImagePrinter;
@@ -90,7 +90,7 @@ namespace NAPS2.WinForms
             _exportHelper = exportHelper;
             _imageClipboard = imageClipboard;
             _notify = notify;
-            _cultureInitializer = cultureInitializer;
+            _cultureHelper = cultureHelper;
             _operationProgress = operationProgress;
             _updateChecker = updateChecker;
             _profileManager = profileManager;
@@ -110,10 +110,9 @@ namespace NAPS2.WinForms
             imageList.ImagesUpdated += (_, _) => UpdateToolbar();
         }
 
-        protected override void OnLoad(object sender, EventArgs eventArgs)
-        {
-            PostInitializeComponent();
-        }
+        protected override void OnLoad(object sender, EventArgs args) => PostInitializeComponent();
+
+        protected override void AfterLoad(object sender, EventArgs args) => AfterLayout();
 
         /// <summary>
         /// Runs when the form is first loaded and every time the language is changed.
@@ -159,7 +158,6 @@ namespace NAPS2.WinForms
             }
 
             LoadToolStripLocation();
-            RelayoutToolbar();
             InitLanguageDropdown();
             AssignKeyboardShortcuts();
             UpdateScanButton();
@@ -177,99 +175,17 @@ namespace NAPS2.WinForms
             thumbnailList1.SizeChanged += (sender, args) => _layoutManager.UpdateLayout();
         }
 
+        private void AfterLayout()
+        {
+            _toolbarFormatter.RelayoutToolbar(tStrip);
+        }
+
         private void InitLanguageDropdown()
         {
-            // Read a list of languages from the Languages.resx file
-            var resourceManager = LanguageNames.ResourceManager;
-            var resourceSet = resourceManager.GetResourceSet(CultureInfo.InvariantCulture, true, true);
-            foreach (DictionaryEntry entry in resourceSet.Cast<DictionaryEntry>().OrderBy(x => x.Value))
+            foreach (var (langCode, langName) in _cultureHelper.GetAvailableCultures())
             {
-                var langCode = ((string) entry.Key).Replace("_", "-");
-                var langName = (string) entry.Value;
-
-                // Only include those languages for which localized resources exist
-                string localizedResourcesPath =
-                    Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) ?? "", langCode,
-                        "NAPS2.Core.resources.dll");
-                if (langCode == "en" || File.Exists(localizedResourcesPath))
-                {
-                    var button = new ToolStripMenuItem(langName, null, (sender, args) => SetCulture(langCode));
-                    toolStripDropDownButton1.DropDownItems.Add(button);
-                }
-            }
-        }
-
-        private void RelayoutToolbar()
-        {
-            // Resize and wrap text as necessary
-            using (var g = CreateGraphics())
-            {
-                foreach (var btn in tStrip.Items.OfType<ToolStripItem>())
-                {
-                    if (PlatformCompat.Runtime.SetToolbarFont)
-                    {
-                        btn.Font = new Font("Segoe UI", 9);
-                    }
-                    btn.Text = _stringWrapper.Wrap(btn.Text ?? "", 80, g, btn.Font);
-                }
-            }
-            ResetToolbarMargin();
-            // Recalculate visibility for the below check
-            Application.DoEvents();
-            // Check if toolbar buttons are overflowing
-            if (tStrip.Items.OfType<ToolStripItem>().Any(btn => !btn.Visible)
-                && (tStrip.Parent.Dock == DockStyle.Top || tStrip.Parent.Dock == DockStyle.Bottom))
-            {
-                ShrinkToolbarMargin();
-            }
-        }
-
-        private void ResetToolbarMargin()
-        {
-            foreach (var btn in tStrip.Items.OfType<ToolStripItem>())
-            {
-                if (btn is ToolStripSplitButton)
-                {
-                    if (tStrip.Parent.Dock == DockStyle.Left || tStrip.Parent.Dock == DockStyle.Right)
-                    {
-                        btn.Margin = new Padding(10, 1, 5, 2);
-                    }
-                    else
-                    {
-                        btn.Margin = new Padding(5, 1, 5, 2);
-                    }
-                }
-                else if (btn is ToolStripDoubleButton)
-                {
-                    btn.Padding = new Padding(5, 0, 5, 0);
-                }
-                else if (tStrip.Parent.Dock == DockStyle.Left || tStrip.Parent.Dock == DockStyle.Right)
-                {
-                    btn.Margin = new Padding(0, 1, 5, 2);
-                }
-                else
-                {
-                    btn.Padding = new Padding(10, 0, 10, 0);
-                }
-            }
-        }
-
-        private void ShrinkToolbarMargin()
-        {
-            foreach (var btn in tStrip.Items.OfType<ToolStripItem>())
-            {
-                if (btn is ToolStripSplitButton)
-                {
-                    btn.Margin = new Padding(0, 1, 0, 2);
-                }
-                else if (btn is ToolStripDoubleButton)
-                {
-                    btn.Padding = new Padding(0, 0, 0, 0);
-                }
-                else
-                {
-                    btn.Padding = new Padding(5, 0, 5, 0);
-                }
+                var button = new ToolStripMenuItem(langName, null, (_, _) => SetCulture(langCode));
+                toolStripDropDownButton1.DropDownItems.Add(button);
             }
         }
 
@@ -277,7 +193,7 @@ namespace NAPS2.WinForms
         {
             SaveToolStripLocation();
             Config.User.Set(c => c.Culture, cultureId);
-            _cultureInitializer.InitCulture();
+            _cultureHelper.SetCulturesFromConfig();
 
             // Update localized values
             // Since all forms are opened modally and this is the root form, it should be the only one that needs to be updated live
@@ -286,6 +202,7 @@ namespace NAPS2.WinForms
             UpdateRTL();
             InitializeComponent();
             PostInitializeComponent();
+            AfterLayout();
             _notify.Rebuild();
             Focus();
             WindowState = FormWindowState.Normal;
@@ -801,7 +718,11 @@ namespace NAPS2.WinForms
             }
         }
 
-        private void OpenAbout() => FormFactory.Create<AboutForm>().ShowModal();
+        private void OpenAbout()
+        {
+            _toolbarFormatter.RelayoutToolbar(tStrip);
+            FormFactory.Create<AboutForm>().ShowModal();
+        }
 
         private void OpenSettings()
         {
@@ -1042,7 +963,7 @@ namespace NAPS2.WinForms
 
         private void thumbnailList1_MouseLeave(object sender, EventArgs e) => Cursor = Cursors.Default;
 
-        private void tStrip_DockChanged(object sender, EventArgs e) => RelayoutToolbar();
+        private void tStrip_ParentChanged(object sender, EventArgs e) => _toolbarFormatter.RelayoutToolbar(tStrip);
 
         #endregion
 
