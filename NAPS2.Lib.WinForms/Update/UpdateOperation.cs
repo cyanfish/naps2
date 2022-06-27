@@ -12,9 +12,9 @@ namespace NAPS2.Update;
 
 public class UpdateOperation : OperationBase
 {
-    private readonly ImageContext _imageContext;
     private readonly ErrorOutput _errorOutput;
     private readonly DesktopController _desktopController;
+    private readonly DesktopFormProvider _desktopFormProvider;
 
     private readonly ManualResetEvent _waitHandle = new ManualResetEvent(false);
     private WebClient? _client;
@@ -35,11 +35,12 @@ public class UpdateOperation : OperationBase
         }
     }
 
-    public UpdateOperation(ImageContext imageContext, ErrorOutput errorOutput, DesktopController desktopController)
+    public UpdateOperation(ErrorOutput errorOutput, DesktopController desktopController,
+        DesktopFormProvider desktopFormProvider)
     {
-        _imageContext = imageContext;
         _errorOutput = errorOutput;
         _desktopController = desktopController;
+        _desktopFormProvider = desktopFormProvider;
 
         ProgressTitle = MiscResources.UpdateProgress;
         AllowBackground = true;
@@ -56,7 +57,8 @@ public class UpdateOperation : OperationBase
         _update = updateInfo;
         _tempFolder = Path.Combine(Paths.Temp, Path.GetRandomFileName());
         Directory.CreateDirectory(_tempFolder);
-        _tempPath = Path.Combine(_tempFolder, updateInfo.DownloadUrl.Substring(updateInfo.DownloadUrl.LastIndexOf('/') + 1));
+        _tempPath = Path.Combine(_tempFolder,
+            updateInfo.DownloadUrl.Substring(updateInfo.DownloadUrl.LastIndexOf('/') + 1));
 
         _client = new WebClient();
         _client.DownloadProgressChanged += DownloadProgress;
@@ -119,12 +121,8 @@ public class UpdateOperation : OperationBase
             InvokeFinished();
             _waitHandle.Set();
         }
-        var desktop = Application.OpenForms.OfType<FDesktop>().FirstOrDefault();
-        if (desktop != null)
-        {
-            _desktopController.SkipRecoveryCleanup = true;
-            desktop.Close();
-        }
+        _desktopController.SkipRecoveryCleanup = true;
+        _desktopFormProvider.DesktopForm.Close();
     }
 
     private void InstallExe()
@@ -181,14 +179,14 @@ public class UpdateOperation : OperationBase
     private bool VerifySignature()
     {
         var cert = new X509Certificate2(ClientCreds.naps2_public);
-        var csp = (RSACryptoServiceProvider)cert.PublicKey.Key;
+        var csp = (RSACryptoServiceProvider) cert.PublicKey.Key;
         return csp.VerifyHash(_update.Sha1, CryptoConfig.MapNameToOID("SHA1"), _update.Signature);
     }
 
     private void DownloadProgress(object sender, DownloadProgressChangedEventArgs e)
     {
-        Status.CurrentProgress = (int)e.BytesReceived;
-        Status.MaxProgress = (int)e.TotalBytesToReceive;
+        Status.CurrentProgress = (int) e.BytesReceived;
+        Status.MaxProgress = (int) e.TotalBytesToReceive;
         InvokeStatusChanged();
     }
 }

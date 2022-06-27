@@ -1,5 +1,6 @@
 ﻿namespace NAPS2.Threading;
 
+// TODO: Can we get rid of this static context?
 /// <summary>
 /// Synchronized access to the UI thread.
 /// </summary>

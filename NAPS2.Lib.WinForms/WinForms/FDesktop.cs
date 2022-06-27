@@ -29,7 +29,10 @@ namespace NAPS2.WinForms
         private readonly ThumbnailRenderQueue _thumbnailRenderQueue;
         private readonly UiThumbnailProvider _thumbnailProvider;
         private readonly DesktopController _desktopController;
+        private readonly DesktopScanController _desktopScanController;
         private readonly ImageListActions _imageListActions;
+        private readonly DesktopFormProvider _desktopFormProvider;
+        private readonly DesktopSubFormController _desktopSubFormController;
 
         private WinFormsListView<UiImage> _listView;
         private ImageListSyncer? _imageListSyncer;
@@ -51,7 +54,9 @@ namespace NAPS2.WinForms
             ThumbnailRenderQueue thumbnailRenderQueue,
             UiThumbnailProvider thumbnailProvider,
             DesktopController desktopController,
-            ImageListActions imageListActions)
+            DesktopScanController desktopScanController,
+            ImageListActions imageListActions,
+            DesktopFormProvider desktopFormProvider, DesktopSubFormController desktopSubFormController)
         {
             _toolbarFormatter = toolbarFormatter;
             _tesseractLanguageManager = tesseractLanguageManager;
@@ -66,7 +71,10 @@ namespace NAPS2.WinForms
             _thumbnailRenderQueue = thumbnailRenderQueue;
             _thumbnailProvider = thumbnailProvider;
             _desktopController = desktopController;
+            _desktopScanController = desktopScanController;
             _imageListActions = imageListActions;
+            _desktopFormProvider = desktopFormProvider;
+            _desktopSubFormController = desktopSubFormController;
             InitializeComponent();
 
             notify.ParentForm = this;
@@ -82,6 +90,7 @@ namespace NAPS2.WinForms
                 });
             };
             _profileManager.ProfilesUpdated += (_, _) => UpdateScanButton();
+            _desktopFormProvider.DesktopForm = this;
         }
 
         protected override void OnLoad(object sender, EventArgs args) => PostInitializeComponent();
@@ -213,8 +222,6 @@ namespace NAPS2.WinForms
             new Eto.Forms.Application(Eto.Platforms.WinForms).Attach();
 
             UpdateToolbar();
-            _desktopController.Form = this;
-            _desktopController.SafeInvoke = SafeInvoke;
             await _desktopController.Initialize();
         }
 
@@ -304,7 +311,7 @@ namespace NAPS2.WinForms
                     ImageScaling = ToolStripItemImageScaling.None
                 };
                 AssignProfileShortcut(i, item);
-                item.Click += async (_, _) => await _desktopController.ScanWithProfile(profile);
+                item.Click += async (_, _) => await _desktopScanController.ScanWithProfile(profile);
                 tsScan.DropDownItems.Insert(tsScan.DropDownItems.Count - staticButtonCount, item);
 
                 i++;
@@ -353,7 +360,7 @@ namespace NAPS2.WinForms
             _ksm.Assign("Ctrl+Down", _imageListActions.MoveDown);
             _ksm.Assign("Ctrl+Right", _imageListActions.MoveDown);
             _ksm.Assign("Ctrl+Shift+Del", tsClear);
-            _ksm.Assign("F1", _desktopController.OpenAbout);
+            _ksm.Assign("F1", _desktopSubFormController.ShowAboutForm);
             _ksm.Assign("Ctrl+OemMinus", btnZoomOut);
             _ksm.Assign("Ctrl+Oemplus", btnZoomIn);
             _ksm.Assign("Del", ctxDelete);
@@ -365,7 +372,7 @@ namespace NAPS2.WinForms
 
             var ks = Config.Get(c => c.KeyboardShortcuts);
 
-            _ksm.Assign(ks.About, _desktopController.OpenAbout);
+            _ksm.Assign(ks.About, _desktopSubFormController.ShowAboutForm);
             _ksm.Assign(ks.BatchScan, tsBatchScan);
             _ksm.Assign(ks.Clear, tsClear);
             _ksm.Assign(ks.Delete, tsDelete);
@@ -478,13 +485,13 @@ namespace NAPS2.WinForms
 
         #region Event Handlers - Toolbar
 
-        private async void tsScan_ButtonClick(object sender, EventArgs e) => await _desktopController.ScanDefault();
+        private async void tsScan_ButtonClick(object sender, EventArgs e) => await _desktopScanController.ScanDefault();
 
-        private async void tsNewProfile_Click(object sender, EventArgs e) => await _desktopController.ScanWithNewProfile();
+        private async void tsNewProfile_Click(object sender, EventArgs e) =>
+            await _desktopScanController.ScanWithNewProfile();
 
-        private void tsBatchScan_Click(object sender, EventArgs e) => _desktopController.ShowBatchScanForm();
-
-        private void tsProfiles_Click(object sender, EventArgs e) => _desktopController.ShowProfilesForm();
+        private void tsBatchScan_Click(object sender, EventArgs e) => _desktopSubFormController.ShowBatchScanForm();
+        private void tsProfiles_Click(object sender, EventArgs e) => _desktopSubFormController.ShowProfilesForm();
 
         private void tsOcr_Click(object sender, EventArgs e)
         {
@@ -580,19 +587,25 @@ namespace NAPS2.WinForms
 
         private void tsClear_Click(object sender, EventArgs e) => _desktopController.Clear();
 
-        private void tsAbout_Click(object sender, EventArgs e) => _desktopController.OpenAbout();
+        private void tsAbout_Click(object sender, EventArgs e) => _desktopSubFormController.ShowAboutForm();
 
-        private void tsSettings_Click(object sender, EventArgs e) => _desktopController.OpenSettings();
+        private void tsSettings_Click(object sender, EventArgs e) => _desktopSubFormController.ShowSettingsForm();
 
         #endregion
 
         #region Event Handlers - Save/Email Menus
 
-        private async void tsSavePDFAll_Click(object sender, EventArgs e) => await _desktopController.SavePDF(_imageList.Images);
-        private async void tsSavePDFSelected_Click(object sender, EventArgs e) => await _desktopController.SavePDF(_imageList.Selection.ToList());
-        private async void tsPDFSettings_Click(object sender, EventArgs e) => FormFactory.Create<FPdfSettings>().ShowDialog();
+        private async void tsSavePDFAll_Click(object sender, EventArgs e) =>
+            await _desktopController.SavePDF(_imageList.Images);
 
-        private async void tsSaveImagesAll_Click(object sender, EventArgs e) => await _desktopController.SaveImages(_imageList.Images);
+        private async void tsSavePDFSelected_Click(object sender, EventArgs e) =>
+            await _desktopController.SavePDF(_imageList.Selection.ToList());
+
+        private async void tsPDFSettings_Click(object sender, EventArgs e) =>
+            FormFactory.Create<FPdfSettings>().ShowDialog();
+
+        private async void tsSaveImagesAll_Click(object sender, EventArgs e) =>
+            await _desktopController.SaveImages(_imageList.Images);
 
         private async void tsSaveImagesSelected_Click(object sender, EventArgs e) =>
             await _desktopController.SaveImages(_imageList.Selection.ToList());
@@ -600,8 +613,11 @@ namespace NAPS2.WinForms
         private void tsImageSettings_Click(object sender, EventArgs e) =>
             FormFactory.Create<FImageSettings>().ShowDialog();
 
-        private async void tsEmailPDFAll_Click(object sender, EventArgs e) => await _desktopController.EmailPDF(_imageList.Images);
-        private async void tsEmailPDFSelected_Click(object sender, EventArgs e) => await _desktopController.EmailPDF(_imageList.Selection.ToList());
+        private async void tsEmailPDFAll_Click(object sender, EventArgs e) =>
+            await _desktopController.EmailPDF(_imageList.Images);
+
+        private async void tsEmailPDFSelected_Click(object sender, EventArgs e) =>
+            await _desktopController.EmailPDF(_imageList.Selection.ToList());
 
         private void tsPdfSettings2_Click(object sender, EventArgs e) =>
             FormFactory.Create<FPdfSettings>().ShowDialog();
@@ -613,25 +629,19 @@ namespace NAPS2.WinForms
 
         #region Event Handlers - Image Menu
 
-        private void tsView_Click(object sender, EventArgs e) => _desktopController.PreviewImage();
+        private void tsView_Click(object sender, EventArgs e) => _desktopSubFormController.ShowViewerForm();
+        private void tsCrop_Click(object sender, EventArgs e) => _desktopSubFormController.ShowImageForm<FCrop>();
 
-        private void ShowImageForm<T>() where T : ImageForm
-        {
-            var selection = _imageList.Selection.ToList();
-            if (selection.Any())
-            {
-                var form = FormFactory.Create<T>();
-                form.Image = selection.First();
-                form.SelectedImages = selection.ToList();
-                form.ShowDialog();
-            }
-        }
+        private void tsBrightnessContrast_Click(object sender, EventArgs e) =>
+            _desktopSubFormController.ShowImageForm<FBrightnessContrast>();
 
-        private void tsCrop_Click(object sender, EventArgs e) => ShowImageForm<FCrop>();
-        private void tsBrightnessContrast_Click(object sender, EventArgs e) => ShowImageForm<FBrightnessContrast>();
-        private void tsHueSaturation_Click(object sender, EventArgs e) => ShowImageForm<FHueSaturation>();
-        private void tsBlackWhite_Click(object sender, EventArgs e) => ShowImageForm<FBlackWhite>();
-        private void tsSharpen_Click(object sender, EventArgs e) => ShowImageForm<FSharpen>();
+        private void tsHueSaturation_Click(object sender, EventArgs e) =>
+            _desktopSubFormController.ShowImageForm<FHueSaturation>();
+
+        private void tsBlackWhite_Click(object sender, EventArgs e) =>
+            _desktopSubFormController.ShowImageForm<FBlackWhite>();
+
+        private void tsSharpen_Click(object sender, EventArgs e) => _desktopSubFormController.ShowImageForm<FSharpen>();
         private void tsReset_Click(object sender, EventArgs e) => _desktopController.ResetImage();
 
         #endregion
@@ -642,7 +652,7 @@ namespace NAPS2.WinForms
         private async void tsRotateRight_Click(object sender, EventArgs e) => await _imageListActions.RotateRight();
         private async void tsFlip_Click(object sender, EventArgs e) => await _imageListActions.Flip();
         private void tsDeskew_Click(object sender, EventArgs e) => _imageListActions.Deskew();
-        private void tsCustomRotation_Click(object sender, EventArgs e) => ShowImageForm<FRotate>();
+        private void tsCustomRotation_Click(object sender, EventArgs e) => _desktopSubFormController.ShowImageForm<FRotate>();
 
         #endregion
 
@@ -669,7 +679,7 @@ namespace NAPS2.WinForms
         }
 
         private void ctxSelectAll_Click(object sender, EventArgs e) => _imageListActions.SelectAll();
-        private void ctxView_Click(object sender, EventArgs e) => _desktopController.PreviewImage();
+        private void ctxView_Click(object sender, EventArgs e) => _desktopSubFormController.ShowViewerForm();
         private void ctxDelete_Click(object sender, EventArgs e) => _desktopController.Delete();
 
         private async void ctxCopy_Click(object sender, EventArgs e) => await _desktopController.Copy();
@@ -735,7 +745,7 @@ namespace NAPS2.WinForms
 
         #region Drag/Drop
 
-        private void ListViewItemClicked(object? sender, EventArgs e) => _desktopController.PreviewImage();
+        private void ListViewItemClicked(object? sender, EventArgs e) => _desktopSubFormController.ShowViewerForm();
 
         private void ListViewSelectionChanged(object? sender, EventArgs e)
         {

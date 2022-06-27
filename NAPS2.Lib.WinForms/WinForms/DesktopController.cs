@@ -1,6 +1,5 @@
 using System.Threading;
 using System.Windows.Forms;
-using NAPS2.EtoForms.Ui;
 using NAPS2.ImportExport;
 using NAPS2.ImportExport.Images;
 using NAPS2.Platform.Windows;
@@ -8,7 +7,6 @@ using NAPS2.Recovery;
 using NAPS2.Remoting;
 using NAPS2.Scan;
 using NAPS2.Update;
-using NAPS2.Wia;
 
 namespace NAPS2.WinForms;
 
@@ -28,24 +26,26 @@ public class DesktopController
     private readonly Naps2Config _config;
     private readonly IOperationFactory _operationFactory;
     private readonly StillImage _stillImage;
-    private readonly IFormFactory _formFactory;
-    private readonly IProfileManager _profileManager;
-    private readonly IScanPerformer _scanPerformer;
     private readonly UpdateChecker _updateChecker;
     private readonly NotificationManager _notify;
     private readonly ImageTransfer _imageTransfer;
     private readonly ImageClipboard _imageClipboard;
     private readonly ImageListActions _imageListActions;
     private readonly WinFormsExportHelper _exportHelper;
+    private readonly DesktopImagesController _desktopImagesController;
+    private readonly DesktopScanController _desktopScanController;
+    private readonly DesktopFormProvider _desktopFormProvider;
 
     private bool _closed;
 
     public DesktopController(ScanningContext scanningContext, UiImageList imageList,
         RecoveryStorageManager recoveryStorageManager, ThumbnailRenderQueue thumbnailRenderQueue,
         OperationProgress operationProgress, Naps2Config config, IOperationFactory operationFactory,
-        StillImage stillImage, IFormFactory formFactory, IProfileManager profileManager, IScanPerformer scanPerformer,
+        StillImage stillImage,
         UpdateChecker updateChecker, NotificationManager notify, ImageTransfer imageTransfer,
-        ImageClipboard imageClipboard, ImageListActions imageListActions, WinFormsExportHelper exportHelper)
+        ImageClipboard imageClipboard, ImageListActions imageListActions, WinFormsExportHelper exportHelper,
+        DesktopImagesController desktopImagesController, DesktopScanController desktopScanController,
+        DesktopFormProvider desktopFormProvider)
     {
         _scanningContext = scanningContext;
         _imageList = imageList;
@@ -55,20 +55,16 @@ public class DesktopController
         _config = config;
         _operationFactory = operationFactory;
         _stillImage = stillImage;
-        _formFactory = formFactory;
-        _profileManager = profileManager;
-        _scanPerformer = scanPerformer;
         _updateChecker = updateChecker;
         _notify = notify;
         _imageTransfer = imageTransfer;
         _imageClipboard = imageClipboard;
         _imageListActions = imageListActions;
         _exportHelper = exportHelper;
+        _desktopImagesController = desktopImagesController;
+        _desktopScanController = desktopScanController;
+        _desktopFormProvider = desktopFormProvider;
     }
-
-    public Form Form { get; set; }
-
-    public Action<Action> SafeInvoke { get; set; }
 
     public bool SkipRecoveryCleanup { get; set; }
 
@@ -124,7 +120,7 @@ public class DesktopController
                 var update = task.Result;
                 if (update != null)
                 {
-                    SafeInvoke(() => _notify.UpdateAvailable(_updateChecker, update));
+                    _notify.UpdateAvailable(_updateChecker, update);
                 }
             }).AssertNoAwait();
         }
@@ -147,7 +143,7 @@ public class DesktopController
         // If NAPS2 was started by the scanner button, do the appropriate actions automatically
         if (_stillImage.ShouldScan)
         {
-            await ScanWithDevice(_stillImage.DeviceID!);
+            await _desktopScanController.ScanWithDevice(_stillImage.DeviceID!);
         }
     }
 
@@ -216,8 +212,8 @@ public class DesktopController
         if (_operationProgress.ActiveOperations.Any())
         {
             _operationProgress.ActiveOperations.ForEach(op => op.Cancel());
-            Form.Hide();
-            Form.ShowInTaskbar = false;
+            _desktopFormProvider.DesktopForm.Hide();
+            _desktopFormProvider.DesktopForm.ShowInTaskbar = false;
             Task.Run(() =>
             {
                 var timeoutCts = new CancellationTokenSource();
@@ -230,7 +226,7 @@ public class DesktopController
                 {
                 }
                 _closed = true;
-                SafeInvoke(Form.Close);
+                _desktopFormProvider.DesktopForm.SafeInvoke(_desktopFormProvider.DesktopForm.Close);
             });
             return false;
         }
@@ -245,18 +241,19 @@ public class DesktopController
         {
             if (msg.StartsWith(Pipes.MSG_SCAN_WITH_DEVICE, StringComparison.InvariantCulture))
             {
-                SafeInvoke(async () => await ScanWithDevice(msg.Substring(Pipes.MSG_SCAN_WITH_DEVICE.Length)));
+                _desktopFormProvider.DesktopForm.SafeInvoke(async () =>
+                    await _desktopScanController.ScanWithDevice(msg.Substring(Pipes.MSG_SCAN_WITH_DEVICE.Length)));
             }
             if (msg.Equals(Pipes.MSG_ACTIVATE))
             {
-                SafeInvoke(() =>
+                _desktopFormProvider.DesktopForm.SafeInvoke(() =>
                 {
-                    var form = Application.OpenForms.Cast<Form>().Last();
-                    if (form.WindowState == FormWindowState.Minimized)
+                    var formOnTop = Application.OpenForms.Cast<Form>().Last();
+                    if (formOnTop.WindowState == FormWindowState.Minimized)
                     {
-                        Win32.ShowWindow(form.Handle, Win32.ShowWindowCommands.Restore);
+                        Win32.ShowWindow(formOnTop.Handle, Win32.ShowWindowCommands.Restore);
                     }
-                    form.Activate();
+                    formOnTop.Activate();
                 });
             }
         });
@@ -277,7 +274,7 @@ public class DesktopController
     {
         // Allow scanned images to be recovered in case of an unexpected close
         var op = _operationFactory.Create<RecoveryOperation>();
-        if (op.Start(ReceiveScannedImage(),
+        if (op.Start(_desktopImagesController.ReceiveScannedImage(),
                 new RecoveryParams { ThumbnailSize = _config.Get(c => c.ThumbnailSize) }))
         {
             _operationProgress.ShowProgress(op);
@@ -290,145 +287,10 @@ public class DesktopController
         _thumbnailRenderQueue.StartRendering(_imageList);
     }
 
-    private ScanParams DefaultScanParams() =>
-        new ScanParams
-        {
-            NoAutoSave = _config.Get(c => c.DisableAutoSave),
-            DoOcr = _config.Get(c => c.EnableOcr) && _config.Get(c => c.OcrAfterScanning),
-            ThumbnailSize = _config.Get(c => c.ThumbnailSize)
-        };
-
-    private async Task ScanWithDevice(string deviceID)
-    {
-        Form.Activate();
-        ScanProfile profile;
-        if (_profileManager.DefaultProfile?.Device?.ID == deviceID)
-        {
-            // Try to use the default profile if it has the right device
-            profile = _profileManager.DefaultProfile;
-        }
-        else
-        {
-            // Otherwise just pick any old profile with the right device
-            // Not sure if this is the best way to do it, but it's hard to prioritize profiles
-            profile = _profileManager.Profiles.FirstOrDefault(x => x.Device != null && x.Device.ID == deviceID);
-        }
-        if (profile == null)
-        {
-            if (_config.Get(c => c.NoUserProfiles) && _profileManager.Profiles.Any(x => x.IsLocked))
-            {
-                return;
-            }
-
-            // No profile for the device we're scanning with, so prompt to create one
-            var editSettingsForm = _formFactory.Create<FEditProfile>();
-            editSettingsForm.ScanProfile = _config.Get(c => c.DefaultProfileSettings);
-            try
-            {
-                // Populate the device field automatically (because we can do that!)
-                using var deviceManager = new WiaDeviceManager();
-                using var device = deviceManager.FindDevice(deviceID);
-                editSettingsForm.CurrentDevice = new ScanDevice(deviceID, device.Name());
-            }
-            catch (WiaException)
-            {
-            }
-            editSettingsForm.ShowDialog();
-            if (!editSettingsForm.Result)
-            {
-                return;
-            }
-            profile = editSettingsForm.ScanProfile;
-            _profileManager.Mutate(new ListMutation<ScanProfile>.Append(profile),
-                ListSelection.Empty<ScanProfile>());
-            _profileManager.DefaultProfile = profile;
-        }
-        if (profile != null)
-        {
-            // We got a profile, yay, so we can actually do the scan now
-            var source = await _scanPerformer.PerformScan(profile, DefaultScanParams(), Form.Handle);
-            await source.ForEach(ReceiveScannedImage());
-            Form.Activate();
-        }
-    }
-
-    public async Task ScanDefault()
-    {
-        if (_profileManager.DefaultProfile != null)
-        {
-            var source =
-                await _scanPerformer.PerformScan(_profileManager.DefaultProfile, DefaultScanParams(), Form.Handle);
-            await source.ForEach(ReceiveScannedImage());
-            Form.Activate();
-        }
-        else if (_profileManager.Profiles.Count == 0)
-        {
-            await ScanWithNewProfile();
-        }
-        else
-        {
-            ShowProfilesForm();
-        }
-    }
-
-    public async Task ScanWithNewProfile()
-    {
-        var editSettingsForm = _formFactory.Create<FEditProfile>();
-        editSettingsForm.ScanProfile = _config.Get(c => c.DefaultProfileSettings);
-        editSettingsForm.ShowDialog();
-        if (!editSettingsForm.Result)
-        {
-            return;
-        }
-        _profileManager.Mutate(new ListMutation<ScanProfile>.Append(editSettingsForm.ScanProfile),
-            ListSelection.Empty<ScanProfile>());
-        _profileManager.DefaultProfile = editSettingsForm.ScanProfile;
-
-        var source = await _scanPerformer.PerformScan(editSettingsForm.ScanProfile, DefaultScanParams(), Form.Handle);
-        await source.ForEach(ReceiveScannedImage());
-        Form.Activate();
-    }
-
-    /// <summary>
-    /// Constructs a receiver for scanned images.
-    /// This keeps images from the same source together, even if multiple sources are providing images at the same time.
-    /// </summary>
-    /// <returns></returns>
-    private Action<ProcessedImage> ReceiveScannedImage()
-    {
-        UiImage? last = null;
-        return scannedImage =>
-        {
-            SafeInvoke(() =>
-            {
-                lock (_imageList)
-                {
-                    var uiImage = new UiImage(scannedImage);
-                    _imageList.Mutate(new ImageListMutation.InsertAfter(uiImage, last));
-                    last = uiImage;
-                }
-            });
-        };
-    }
-
-    public void ShowProfilesForm()
-    {
-        var form = _formFactory.Create<ProfilesForm>();
-        form.ImageCallback = ReceiveScannedImage();
-        form.ShowModal();
-    }
-
-    public void ShowBatchScanForm()
-    {
-        var form = _formFactory.Create<FBatchScan>();
-        form.ImageCallback = ReceiveScannedImage();
-        form.ShowDialog();
-    }
-
     public void ImportFiles(IEnumerable<string> files)
     {
         var op = _operationFactory.Create<ImportOperation>();
-        if (op.Start(OrderFiles(files), ReceiveScannedImage(),
+        if (op.Start(OrderFiles(files), _desktopImagesController.ReceiveScannedImage(),
                 new ImportParams { ThumbnailSize = _config.Get(c => c.ThumbnailSize) }))
         {
             _operationProgress.ShowProgress(op);
@@ -446,20 +308,11 @@ public class DesktopController
     public void ImportDirect(ImageTransferData data, bool copy)
     {
         var op = _operationFactory.Create<DirectImportOperation>();
-        if (op.Start(data, copy, ReceiveScannedImage(),
+        if (op.Start(data, copy, _desktopImagesController.ReceiveScannedImage(),
                 new DirectImportParams { ThumbnailSize = _config.Get(c => c.ThumbnailSize) }))
         {
             _operationProgress.ShowProgress(op);
         }
-    }
-
-    public async Task ScanWithProfile(ScanProfile profile)
-    {
-        _profileManager.DefaultProfile = profile;
-
-        var source = await _scanPerformer.PerformScan(profile, DefaultScanParams(), Form.Handle);
-        await source.ForEach(ReceiveScannedImage());
-        Form.Activate();
     }
 
     public void Paste()
@@ -503,28 +356,6 @@ public class DesktopController
         }
     }
 
-    public void PreviewImage()
-    {
-        if (_imageList.Selection.Any())
-        {
-            using var viewer = _formFactory.Create<FViewer>();
-            viewer.ImageList = _imageList;
-            // TODO: Fix this 
-            // viewer.ImageIndex = SelectedIndices.First();
-            // viewer.DeleteCallback = UpdateThumbnails;
-            viewer.SelectCallback = i =>
-            {
-                if (_imageList.Selection.Count <= 1)
-                {
-                    // TODO: Fix this
-                    // SelectedIndices = new[] { i };
-                    //thumbnailList1.Items[i].EnsureVisible();
-                }
-            };
-            viewer.ShowDialog();
-        }
-    }
-
     public void ResetImage()
     {
         if (_imageList.Selection.Any())
@@ -538,16 +369,6 @@ public class DesktopController
         }
     }
 
-    public void OpenAbout()
-    {
-        _formFactory.Create<AboutForm>().ShowModal();
-    }
-
-    public void OpenSettings()
-    {
-        // FormFactory.Create<FSettings>().ShowDialog();
-    }
-
     public async Task SavePDF(List<UiImage> images)
     {
         using var imagesToSave = images.Select(x => x.GetClonedImage()).ToDisposableList();
@@ -555,10 +376,7 @@ public class DesktopController
         {
             if (_config.Get(c => c.DeleteAfterSaving))
             {
-                SafeInvoke(() =>
-                {
-                    _imageList.Mutate(new ImageListMutation.DeleteSelected(), ListSelection.From(images));
-                });
+                _imageList.Mutate(new ImageListMutation.DeleteSelected(), ListSelection.From(images));
             }
         }
     }
@@ -587,6 +405,7 @@ public class DesktopController
         {
             Multiselect = true,
             CheckFileExists = true,
+            // TODO: Move filter logic somewhere common
             Filter = MiscResources.FileTypeAllFiles + @"|*.*|" +
                      MiscResources.FileTypePdf + @"|*.pdf|" +
                      MiscResources.FileTypeImageFiles +

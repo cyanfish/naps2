@@ -5,7 +5,7 @@ using Timer = System.Threading.Timer;
 
 namespace NAPS2.WinForms
 {
-    partial class ImageForm : FormBase
+    public partial class ImageForm : FormBase
     {
         private readonly ImageContext _imageContext;
 

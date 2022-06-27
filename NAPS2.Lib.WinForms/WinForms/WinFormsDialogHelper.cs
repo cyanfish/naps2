@@ -17,6 +17,7 @@ public class WinFormsDialogHelper : DialogHelper
         {
             OverwritePrompt = false,
             AddExtension = true,
+            // TODO: Move filter logic somewhere common
             Filter = MiscResources.FileTypePdf + @"|*.pdf|" +
                      MiscResources.FileTypeBmp + @"|*.bmp|" +
                      MiscResources.FileTypeEmf + @"|*.emf|" +
@@ -62,6 +63,7 @@ public class WinFormsDialogHelper : DialogHelper
         {
             OverwritePrompt = false,
             AddExtension = true,
+            // TODO: Move filter logic somewhere common
             Filter = MiscResources.FileTypeBmp + @"|*.bmp|" +
                      MiscResources.FileTypeEmf + @"|*.emf|" +
                      MiscResources.FileTypeExif + @"|*.exif|" +
