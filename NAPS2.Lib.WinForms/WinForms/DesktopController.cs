@@ -12,6 +12,12 @@ using NAPS2.Wia;
 
 namespace NAPS2.WinForms;
 
+// TODO: We undoubtedly want to decompose this file even further.
+// We almost certainly want a DesktopScanController for the scanning-related logic.
+// We could have a DesktopPipesController that depends on DesktopScanController.
+// Specifically each line in Initialize might make sense as a sub-controller.
+// We also need to think about how to pass the Form instance around as needed. (e.g. to Activate it). Maybe this should be something injectable, and could also be used by UpdateOperation instead of searching through open forms.
+// i.e. (I)DesktopFormProvider
 public class DesktopController
 {
     private readonly ScanningContext _scanningContext;
@@ -63,9 +69,6 @@ public class DesktopController
     public Form Form { get; set; }
 
     public Action<Action> SafeInvoke { get; set; }
-
-    // TODO: Replace this with change events on ProfileManager
-    public Action UpdateScanButton { get; set; }
 
     public bool SkipRecoveryCleanup { get; set; }
 
@@ -339,8 +342,6 @@ public class DesktopController
             _profileManager.Mutate(new ListMutation<ScanProfile>.Append(profile),
                 ListSelection.Empty<ScanProfile>());
             _profileManager.DefaultProfile = profile;
-
-            UpdateScanButton();
         }
         if (profile != null)
         {
@@ -383,8 +384,6 @@ public class DesktopController
             ListSelection.Empty<ScanProfile>());
         _profileManager.DefaultProfile = editSettingsForm.ScanProfile;
 
-        UpdateScanButton();
-
         var source = await _scanPerformer.PerformScan(editSettingsForm.ScanProfile, DefaultScanParams(), Form.Handle);
         await source.ForEach(ReceiveScannedImage());
         Form.Activate();
@@ -417,7 +416,6 @@ public class DesktopController
         var form = _formFactory.Create<ProfilesForm>();
         form.ImageCallback = ReceiveScannedImage();
         form.ShowModal();
-        UpdateScanButton();
     }
 
     public void ShowBatchScanForm()
@@ -425,7 +423,6 @@ public class DesktopController
         var form = _formFactory.Create<FBatchScan>();
         form.ImageCallback = ReceiveScannedImage();
         form.ShowDialog();
-        UpdateScanButton();
     }
 
     public void ImportFiles(IEnumerable<string> files)
@@ -459,8 +456,6 @@ public class DesktopController
     public async Task ScanWithProfile(ScanProfile profile)
     {
         _profileManager.DefaultProfile = profile;
-
-        UpdateScanButton();
 
         var source = await _scanPerformer.PerformScan(profile, DefaultScanParams(), Form.Handle);
         await source.ForEach(ReceiveScannedImage());

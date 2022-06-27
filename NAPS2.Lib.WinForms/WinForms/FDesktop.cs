@@ -81,6 +81,7 @@ namespace NAPS2.WinForms
                     _listView!.Selection = _imageList.Selection;
                 });
             };
+            _profileManager.ProfilesUpdated += (_, _) => UpdateScanButton();
         }
 
         protected override void OnLoad(object sender, EventArgs args) => PostInitializeComponent();
@@ -214,7 +215,6 @@ namespace NAPS2.WinForms
             UpdateToolbar();
             _desktopController.Form = this;
             _desktopController.SafeInvoke = SafeInvoke;
-            _desktopController.UpdateScanButton = UpdateScanButton;
             await _desktopController.Initialize();
         }
 
