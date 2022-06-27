@@ -3,7 +3,7 @@ using NAPS2.Update;
 
 namespace NAPS2.WinForms;
 
-public class NotificationManager : ISaveNotify
+public class NotificationManager : INotificationManager
 {
     private const int PADDING_X = 25, PADDING_Y = 25;
     private const int SPACING_Y = 20;
@@ -54,7 +54,7 @@ public class NotificationManager : ISaveNotify
         Show(new OperationProgressNotifyWidget(opModalProgress, op));
     }
 
-    public void UpdateAvailable(UpdateChecker updateChecker, UpdateInfo update)
+    public void UpdateAvailable(IUpdateChecker updateChecker, UpdateInfo update)
     {
         Show(new UpdateAvailableNotifyWidget(updateChecker, update));
     }

@@ -6,12 +6,12 @@ namespace NAPS2.WinForms;
 public class WinFormsOperationProgress : OperationProgress
 {
     private readonly IFormFactory _formFactory;
-    private readonly NotificationManager _notificationManager;
+    private readonly INotificationManager _notificationManager;
     private readonly Naps2Config _config;
 
     private readonly HashSet<IOperation> _activeOperations = new HashSet<IOperation>();
 
-    public WinFormsOperationProgress(IFormFactory formFactory, NotificationManager notificationManager, Naps2Config config)
+    public WinFormsOperationProgress(IFormFactory formFactory, INotificationManager notificationManager, Naps2Config config)
     {
         _formFactory = formFactory;
         _notificationManager = notificationManager;

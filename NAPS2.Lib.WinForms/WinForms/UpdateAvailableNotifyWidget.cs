@@ -5,10 +5,10 @@ namespace NAPS2.WinForms;
 
 public class UpdateAvailableNotifyWidget : NotifyWidget
 {
-    private readonly UpdateChecker _updateChecker;
+    private readonly IUpdateChecker _updateChecker;
     private readonly UpdateInfo _update;
 
-    public UpdateAvailableNotifyWidget(UpdateChecker updateChecker, UpdateInfo update)
+    public UpdateAvailableNotifyWidget(IUpdateChecker updateChecker, UpdateInfo update)
         : base(MiscResources.UpdateAvailable, string.Format(MiscResources.Install, update.Name), null, null)
     {
         _updateChecker = updateChecker;

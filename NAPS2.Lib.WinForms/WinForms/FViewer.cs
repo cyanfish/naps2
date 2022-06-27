@@ -30,7 +30,7 @@ namespace NAPS2.WinForms
         private ToolStripSeparator _toolStripSeparator2;
         private ToolStripButton _tsSaveImage;
         private readonly IOperationFactory _operationFactory;
-        private readonly WinFormsExportHelper _exportHelper;
+        private readonly IWinFormsExportHelper _exportHelper;
         private ToolStripButton _tsHueSaturation;
         private ToolStripButton _tsBlackWhite;
         private ToolStripButton _tsSharpen;
@@ -38,7 +38,7 @@ namespace NAPS2.WinForms
         private readonly OperationProgress _operationProgress;
         private readonly ImageContext _imageContext;
 
-        public FViewer(IOperationFactory operationFactory, WinFormsExportHelper exportHelper, KeyboardShortcutManager ksm, OperationProgress operationProgress, ImageContext imageContext)
+        public FViewer(IOperationFactory operationFactory, IWinFormsExportHelper exportHelper, KeyboardShortcutManager ksm, OperationProgress operationProgress, ImageContext imageContext)
         {
             _operationFactory = operationFactory;
             _exportHelper = exportHelper;

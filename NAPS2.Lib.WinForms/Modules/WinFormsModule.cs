@@ -5,6 +5,7 @@ using NAPS2.ImportExport;
 using NAPS2.ImportExport.Pdf;
 using NAPS2.Scan;
 using NAPS2.Scan.Batch;
+using NAPS2.Update;
 using NAPS2.WinForms;
 using Ninject;
 using Ninject.Modules;
@@ -23,10 +24,13 @@ public class WinFormsModule : NinjectModule
         Bind<IComponentInstallPrompt>().To<WinFormsComponentInstallPrompt>();
         Bind<DialogHelper>().To<WinFormsDialogHelper>();
         Bind<IEtoPlatform>().To<WinFormsEtoPlatform>();
-        Bind<NotificationManager>().ToSelf().InSingletonScope();
-        Bind<ISaveNotify>().ToMethod(ctx => ctx.Kernel.Get<NotificationManager>());
+        Bind<INotificationManager>().To<NotificationManager>().InSingletonScope();
+        Bind<ISaveNotify>().ToMethod(ctx => ctx.Kernel.Get<INotificationManager>());
         Bind<IScannedImagePrinter>().To<PrintDocumentPrinter>();
         Bind<IDevicePrompt>().To<WinFormsDevicePrompt>();
         Bind<DesktopController>().ToSelf().InSingletonScope();
+        Bind<IUpdateChecker>().To<UpdateChecker>();
+        Bind<IWinFormsExportHelper>().To<WinFormsExportHelper>();
+        Bind<IDesktopScanController>().To<DesktopScanController>();
     }
 }

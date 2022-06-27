@@ -3,7 +3,7 @@ using NAPS2.Wia;
 
 namespace NAPS2.WinForms;
 
-public class DesktopScanController
+public class DesktopScanController : IDesktopScanController
 {
     private readonly Naps2Config _config;
     private readonly IProfileManager _profileManager;

@@ -4,7 +4,7 @@ using Newtonsoft.Json.Linq;
 
 namespace NAPS2.Update;
 
-public class UpdateChecker
+public class UpdateChecker : IUpdateChecker
 {
     private const string UPDATE_CHECK_ENDPOINT = "https://www.naps2.com/api/v1/update";
 #if STANDALONE

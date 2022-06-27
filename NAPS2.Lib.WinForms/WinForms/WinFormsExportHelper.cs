@@ -7,7 +7,7 @@ using NAPS2.ImportExport.Pdf;
 namespace NAPS2.WinForms;
 
 // TODO: Rename this ImageExportController or something
-public class WinFormsExportHelper
+public class WinFormsExportHelper : IWinFormsExportHelper
 {
     private readonly DialogHelper _dialogHelper;
     private readonly IOperationFactory _operationFactory;

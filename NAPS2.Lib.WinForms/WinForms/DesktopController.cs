@@ -26,14 +26,14 @@ public class DesktopController
     private readonly Naps2Config _config;
     private readonly IOperationFactory _operationFactory;
     private readonly StillImage _stillImage;
-    private readonly UpdateChecker _updateChecker;
-    private readonly NotificationManager _notify;
+    private readonly IUpdateChecker _updateChecker;
+    private readonly INotificationManager _notify;
     private readonly ImageTransfer _imageTransfer;
     private readonly ImageClipboard _imageClipboard;
     private readonly ImageListActions _imageListActions;
-    private readonly WinFormsExportHelper _exportHelper;
+    private readonly IWinFormsExportHelper _exportHelper;
     private readonly DesktopImagesController _desktopImagesController;
-    private readonly DesktopScanController _desktopScanController;
+    private readonly IDesktopScanController _desktopScanController;
     private readonly DesktopFormProvider _desktopFormProvider;
 
     private bool _closed;
@@ -42,9 +42,9 @@ public class DesktopController
         RecoveryStorageManager recoveryStorageManager, ThumbnailRenderQueue thumbnailRenderQueue,
         OperationProgress operationProgress, Naps2Config config, IOperationFactory operationFactory,
         StillImage stillImage,
-        UpdateChecker updateChecker, NotificationManager notify, ImageTransfer imageTransfer,
-        ImageClipboard imageClipboard, ImageListActions imageListActions, WinFormsExportHelper exportHelper,
-        DesktopImagesController desktopImagesController, DesktopScanController desktopScanController,
+        IUpdateChecker updateChecker, INotificationManager notify, ImageTransfer imageTransfer,
+        ImageClipboard imageClipboard, ImageListActions imageListActions, IWinFormsExportHelper exportHelper,
+        DesktopImagesController desktopImagesController, IDesktopScanController desktopScanController,
         DesktopFormProvider desktopFormProvider)
     {
         _scanningContext = scanningContext;

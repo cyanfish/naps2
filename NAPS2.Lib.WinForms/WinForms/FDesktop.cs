@@ -21,7 +21,7 @@ namespace NAPS2.WinForms
         private readonly IScannedImagePrinter _scannedImagePrinter;
         private readonly KeyboardShortcutManager _ksm;
         private readonly ThumbnailRenderer _thumbnailRenderer;
-        private readonly NotificationManager _notify;
+        private readonly INotificationManager _notify;
         private readonly CultureHelper _cultureHelper;
         private readonly IProfileManager _profileManager;
         private readonly UiImageList _imageList;
@@ -29,7 +29,7 @@ namespace NAPS2.WinForms
         private readonly ThumbnailRenderQueue _thumbnailRenderQueue;
         private readonly UiThumbnailProvider _thumbnailProvider;
         private readonly DesktopController _desktopController;
-        private readonly DesktopScanController _desktopScanController;
+        private readonly IDesktopScanController _desktopScanController;
         private readonly ImageListActions _imageListActions;
         private readonly DesktopFormProvider _desktopFormProvider;
         private readonly DesktopSubFormController _desktopSubFormController;
@@ -46,7 +46,7 @@ namespace NAPS2.WinForms
             IScannedImagePrinter scannedImagePrinter,
             KeyboardShortcutManager ksm,
             ThumbnailRenderer thumbnailRenderer,
-            NotificationManager notify,
+            INotificationManager notify,
             CultureHelper cultureHelper,
             IProfileManager profileManager,
             UiImageList imageList,
@@ -54,7 +54,7 @@ namespace NAPS2.WinForms
             ThumbnailRenderQueue thumbnailRenderQueue,
             UiThumbnailProvider thumbnailProvider,
             DesktopController desktopController,
-            DesktopScanController desktopScanController,
+            IDesktopScanController desktopScanController,
             ImageListActions imageListActions,
             DesktopFormProvider desktopFormProvider, DesktopSubFormController desktopSubFormController)
         {

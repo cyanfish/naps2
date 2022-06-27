@@ -61,8 +61,9 @@ public class ThumbnailRenderQueue : IDisposable
     private void RenderThumbnails()
     {
         // TODO: Make this run as async?
+        // TODO: Verify WorkerFactory is not null? Or handle this better for tests?
         bool useWorker = PlatformCompat.Runtime.UseWorker;
-        var worker = useWorker ? _scanningContext.WorkerFactory.Create() : null;
+        var worker = useWorker ? _scanningContext.WorkerFactory?.Create() : null;
         var fallback = new ExpFallback(100, 60 * 1000);
         while (true)
         {

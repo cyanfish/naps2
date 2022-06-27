@@ -23,6 +23,7 @@ public class UiImageList
         _selection = ListSelection.Empty<UiImage>();
     }
 
+    // TODO: Can we inject this?
     public ThumbnailRenderer? ThumbnailRenderer { get; set; }
 
     // TODO: Make this immutable?
@@ -105,6 +106,7 @@ public class UiImageList
 
     private void UpdateSelectionOnUiThread(ListSelection<UiImage> currentSelection)
     {
+        // TODO: This won't work right as SyncContext.Current is only set on the UI thread anyway
         var syncContext = SynchronizationContext.Current;
         if (syncContext != null)
         {

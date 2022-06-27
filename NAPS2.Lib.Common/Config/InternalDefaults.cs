@@ -38,7 +38,7 @@ public static class InternalDefaults
             HasCheckedForUpdates = false,
             LastUpdateCheckDate = DateTime.MinValue,
             HasBeenRun = false,
-            FirstRunDate = DateTime.MinValue,
+            FirstRunDate = null,
             HasBeenPromptedForDonation = false,
             LastDonatePromptDate = DateTime.MinValue,
             DeleteAfterSaving = false,

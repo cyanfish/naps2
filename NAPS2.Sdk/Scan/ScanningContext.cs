@@ -38,7 +38,7 @@ public class ScanningContext : IDisposable
 
     public string? RecoveryPath { get; set; }
 
-    public IWorkerFactory WorkerFactory { get; set; }
+    public IWorkerFactory? WorkerFactory { get; set; }
 
     public OcrRequestQueue OcrRequestQueue { get; } = new();
 
