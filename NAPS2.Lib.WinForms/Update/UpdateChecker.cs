@@ -6,6 +6,8 @@ namespace NAPS2.Update;
 
 public class UpdateChecker : IUpdateChecker
 {
+    public static readonly TimeSpan CheckInterval = TimeSpan.FromDays(7);
+
     private const string UPDATE_CHECK_ENDPOINT = "https://www.naps2.com/api/v1/update";
 #if STANDALONE
         private const string UPDATE_FILE_EXT = "zip";
@@ -24,9 +26,7 @@ public class UpdateChecker : IUpdateChecker
         _operationProgress = operationProgress;
     }
 
-    public TimeSpan CheckInterval => TimeSpan.FromDays(7);
-
-    public async Task<UpdateInfo> CheckForUpdates()
+    public async Task<UpdateInfo?> CheckForUpdates()
     {
         var json = await GetJson(UPDATE_CHECK_ENDPOINT);
         var currentVersion = Assembly.GetExecutingAssembly().GetName().Version;

@@ -64,7 +64,7 @@ public class RecoveryManagerTests : ContextualTexts
         using var folder = _recoveryManager.GetLatestRecoverableFolder();
         Assert.NotNull(folder);
         Assert.Equal(1, folder.ImageCount);
-        Assert.InRange(folder.ScannedDateTime, DateTime.Now - TimeSpan.FromMilliseconds(100), DateTime.Now);
+        DateAsserts.Recent(TimeSpan.FromMilliseconds(100), folder.ScannedDateTime);
     }
 
     [Fact]

@@ -132,6 +132,7 @@ namespace NAPS2.WinForms
             _listView.ImageSize = thumbnailSize;
             SetThumbnailSpacing(thumbnailSize);
 
+            // TODO: Verify that hidden buttons can't be accessed via keyboard shortcut
             var hiddenButtons = Config.Get(c => c.HiddenButtons);
             var buttonMap = new List<(ToolbarButtons, ToolStripItem)>
             {

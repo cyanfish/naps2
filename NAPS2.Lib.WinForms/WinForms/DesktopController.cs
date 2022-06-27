@@ -101,8 +101,9 @@ public class DesktopController
     {
 #if !INSTALLER_MSI
         if (_config.Get(c => c.CheckForUpdates) &&
+            !_config.Get(c => c.NoUpdatePrompt) &&
             (!_config.Get(c => c.HasCheckedForUpdates) ||
-             _config.Get(c => c.LastUpdateCheckDate) < DateTime.Now - _updateChecker.CheckInterval))
+             _config.Get(c => c.LastUpdateCheckDate) < DateTime.Now - UpdateChecker.CheckInterval))
         {
             _updateChecker.CheckForUpdates().ContinueWith(task =>
             {

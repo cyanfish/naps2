@@ -5,6 +5,7 @@ using NAPS2.Remoting;
 
 namespace NAPS2.Platform.Windows;
 
+// TODO: Can we add tests for this somehow?
 /// <summary>
 /// A class to help manage the lifecycle of the NAPS2 GUI.
 /// </summary>
