@@ -15,6 +15,7 @@ public class WinFormsAppTests : ContextualTexts
             Assert.Equal("Not Another PDF Scanner 2", process.MainWindowTitle);
             Assert.True(process.CloseMainWindow());
             Assert.True(process.WaitForExit(1000));
+            AppTestHelper.AssertNoErrorLog(FolderPath);
         }
         finally
         {

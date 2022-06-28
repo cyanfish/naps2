@@ -17,6 +17,7 @@ public class WorkerAppTests : ContextualTexts
             string pipeName = $"NAPS2.Worker/{process.Id}";
             var client = new WorkerServiceAdapter(new NamedPipeChannel(".", pipeName));
             client.Init(FolderPath);
+            AppTestHelper.AssertNoErrorLog(FolderPath);
         }
         finally
         {

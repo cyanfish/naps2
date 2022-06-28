@@ -66,4 +66,10 @@ public static class AppTestHelper
         Assert.NotEqual(IntPtr.Zero, process.MainWindowHandle);
         Assert.True(IsWindowVisible(process.MainWindowHandle));
     }
+
+    public static void AssertNoErrorLog(string appData)
+    {
+        var path = Path.Combine(appData, "NAPS2", "errorlog.txt");
+        Assert.False(File.Exists(path));
+    }
 }
