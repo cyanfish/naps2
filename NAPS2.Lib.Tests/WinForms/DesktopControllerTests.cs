@@ -37,7 +37,7 @@ public class DesktopControllerTests : ContextualTexts
         ScanningContext.RecoveryPath = Path.Combine(FolderPath, "recovery");
         ScanningContext.FileStorageManager = new FileStorageManager(ScanningContext.RecoveryPath);
         _recoveryStorageManager = RecoveryStorageManager.CreateFolder(ScanningContext.RecoveryPath);
-        _imageList = new UiImageList(_recoveryStorageManager);
+        _imageList = new UiImageList();
         _thumbnailRenderQueue = new ThumbnailRenderQueue(ScanningContext, new ThumbnailRenderer(ImageContext));
         _operationProgress = new Mock<OperationProgress>();
         _config = Naps2Config.Stub();
@@ -154,7 +154,7 @@ public class DesktopControllerTests : ContextualTexts
     public async Task Initialize_WithUpdateChecksDisabled_DoesntCheckForUpdate()
     {
         await _desktopController.Initialize();
-        await Task.Delay(10);
+        await Task.Delay(50);
         
         Assert.False(_config.Get(c => c.HasCheckedForUpdates));
         Assert.Null(_config.Get(c => c.LastUpdateCheckDate));
@@ -167,7 +167,7 @@ public class DesktopControllerTests : ContextualTexts
         _config.User.Set(c => c.CheckForUpdates, true);
         
         await _desktopController.Initialize();
-        await Task.Delay(10);
+        await Task.Delay(50);
 
         Assert.True(_config.Get(c => c.HasCheckedForUpdates));
         DateAsserts.Recent(TimeSpan.FromMilliseconds(100), _config.Get(c => c.LastUpdateCheckDate));
@@ -185,7 +185,7 @@ public class DesktopControllerTests : ContextualTexts
         _updateChecker.Setup(x => x.CheckForUpdates()).ReturnsAsync(mockUpdateInfo);
         
         await _desktopController.Initialize();
-        await Task.Delay(10);
+        await Task.Delay(50);
 
         Assert.True(_config.Get(c => c.HasCheckedForUpdates));
         DateAsserts.Recent(TimeSpan.FromMilliseconds(100), _config.Get(c => c.LastUpdateCheckDate));
@@ -202,7 +202,7 @@ public class DesktopControllerTests : ContextualTexts
         _config.User.Set(c => c.CheckForUpdates, true);
 
         await _desktopController.Initialize();
-        await Task.Delay(10);
+        await Task.Delay(50);
 
         Assert.False(_config.Get(c => c.HasCheckedForUpdates));
         Assert.Null(_config.Get(c => c.LastUpdateCheckDate));
@@ -219,7 +219,7 @@ public class DesktopControllerTests : ContextualTexts
         _config.User.Set(c => c.LastUpdateCheckDate, updateCheckDate);
         
         await _desktopController.Initialize();
-        await Task.Delay(10);
+        await Task.Delay(50);
 
         Assert.True(_config.Get(c => c.HasCheckedForUpdates));
         Assert.Equal(updateCheckDate, _config.Get(c => c.LastUpdateCheckDate));
@@ -239,7 +239,7 @@ public class DesktopControllerTests : ContextualTexts
         _updateChecker.Setup(x => x.CheckForUpdates()).ReturnsAsync(mockUpdateInfo);
         
         await _desktopController.Initialize();
-        await Task.Delay(10);
+        await Task.Delay(50);
 
         Assert.True(_config.Get(c => c.HasCheckedForUpdates));
         DateAsserts.Recent(TimeSpan.FromMilliseconds(100), _config.Get(c => c.LastUpdateCheckDate));

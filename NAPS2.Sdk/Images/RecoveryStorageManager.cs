@@ -22,11 +22,14 @@ namespace NAPS2.Images;
 public class RecoveryStorageManager : IDisposable
 {
     public const string LOCK_FILE_NAME = ".lock";
+    private static readonly TimeSpan WriteThrottleInterval = TimeSpan.FromMilliseconds(100);
 
     private readonly ISerializer<RecoveryIndex> _serializer = new XmlSerializer<RecoveryIndex>();
     private readonly DirectoryInfo _folder;
     private readonly FileInfo _folderLockFile;
     private readonly Stream _folderLock;
+    private readonly TimedThrottle _writeThrottle;
+    private UiImageList _imageList;
 
     private bool _disposed;
 
@@ -42,10 +45,38 @@ public class RecoveryStorageManager : IDisposable
         _folder.Create();
         _folderLockFile = new FileInfo(Path.Combine(RecoveryFolderPath, LOCK_FILE_NAME));
         _folderLock = _folderLockFile.Open(FileMode.CreateNew, FileAccess.Write, FileShare.None);
+        _writeThrottle = new TimedThrottle(WriteIndexFromImageList, WriteThrottleInterval);
     }
 
     public string RecoveryFolderPath { get; }
 
+    // TODO: Maybe just make UiImageList part of the constructor?
+    public void RegisterForChanges(UiImageList imageList)
+    {
+        lock (this)
+        {
+            if (_disposed) throw new ObjectDisposedException(nameof(RecoveryStorageManager));
+            if (_imageList != null) throw new InvalidOperationException();
+            _imageList = imageList;
+            imageList.ImagesUpdated += ImageListUpdated;
+        }
+    }
+
+    private void ImageListUpdated(object? sender, EventArgs args)
+    {
+        _writeThrottle.RunAction(null);
+    }
+
+    private void WriteIndexFromImageList()
+    {
+        List<UiImage> images;
+        lock (_imageList)
+        {
+            images = _imageList.Images.ToList();
+        }
+        WriteIndex(images);
+    }
+    
     public void WriteIndex(IEnumerable<UiImage> images)
     {
         lock (this)
@@ -82,6 +113,10 @@ public class RecoveryStorageManager : IDisposable
             _folderLock.Close();
             _folderLockFile.Delete();
             _folder.Delete(true);
+            if (_imageList != null)
+            {
+                _imageList.ImagesUpdated -= ImageListUpdated;
+            }
             _disposed = true;
         }
     }

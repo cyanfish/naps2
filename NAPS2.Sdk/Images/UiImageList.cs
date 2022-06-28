@@ -5,20 +5,15 @@ namespace NAPS2.Images;
 
 public class UiImageList
 {
-    private readonly RecoveryStorageManager _recoveryStorageManager;
-    private readonly TimedThrottle _runUpdateEventsThrottle;
     private StateToken _savedState = new(ImmutableList<ProcessedImage.WeakReference>.Empty);
     private ListSelection<UiImage> _selection;
 
-    public UiImageList(RecoveryStorageManager recoveryStorageManager)
-        : this(recoveryStorageManager, new List<UiImage>())
+    public UiImageList() : this(new List<UiImage>())
     {
     }
 
-    public UiImageList(RecoveryStorageManager recoveryStorageManager, List<UiImage> images)
+    public UiImageList(List<UiImage> images)
     {
-        _recoveryStorageManager = recoveryStorageManager;
-        _runUpdateEventsThrottle = new TimedThrottle(RunUpdateEvents, TimeSpan.FromMilliseconds(100));
         Images = images;
         _selection = ListSelection.Empty<UiImage>();
     }
@@ -44,6 +39,8 @@ public class UiImageList
         private set => _selection = value ?? throw new ArgumentNullException(nameof(value));
     }
 
+    public event EventHandler? SelectionChanged;
+
     public event EventHandler? ImagesUpdated;
 
     public event EventHandler? ImagesThumbnailChanged;
@@ -53,19 +50,17 @@ public class UiImageList
     public void UpdateSelection(ListSelection<UiImage> newSelection)
     {
         Selection = newSelection;
-        ImagesUpdated?.Invoke(this, EventArgs.Empty);
+        SelectionChanged?.Invoke(this, EventArgs.Empty);
     }
 
     public void Mutate(ListMutation<UiImage> mutation, ListSelection<UiImage>? selectionToMutate = null)
     {
         MutateInternal(mutation, selectionToMutate);
-        _runUpdateEventsThrottle.RunAction(SynchronizationContext.Current);
     }
 
     public async Task MutateAsync(ListMutation<UiImage> mutation, ListSelection<UiImage>? selectionToMutate = null)
     {
         await Task.Run(() => MutateInternal(mutation, selectionToMutate));
-        _runUpdateEventsThrottle.RunAction(SynchronizationContext.Current);
     }
 
     private void MutateInternal(ListMutation<UiImage> mutation, ListSelection<UiImage>? selectionToMutate)
@@ -110,11 +105,11 @@ public class UiImageList
         var syncContext = SynchronizationContext.Current;
         if (syncContext != null)
         {
-            syncContext.Post(_ => _selection = currentSelection, null);
+            syncContext.Post(_ => UpdateSelection(currentSelection), null);
         }
         else
         {
-            _selection = currentSelection;
+            UpdateSelection(currentSelection);
         }
     }
 
@@ -126,15 +121,6 @@ public class UiImageList
     private void ImageThumbnailInvalidated(object? sender, EventArgs args)
     {
         ImagesThumbnailInvalidated?.Invoke(this, EventArgs.Empty);
-    }
-
-    private void RunUpdateEvents()
-    {
-        // TODO: Maybe move this out of this class to an event handler?
-        lock (this)
-        {
-            _recoveryStorageManager.WriteIndex(Images);
-        }
     }
 
     /// <summary>

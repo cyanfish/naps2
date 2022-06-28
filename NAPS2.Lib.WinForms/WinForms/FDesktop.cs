@@ -81,7 +81,7 @@ namespace NAPS2.WinForms
             Shown += FDesktop_Shown;
             FormClosing += FDesktop_FormClosing;
             Closed += FDesktop_Closed;
-            imageList.ImagesUpdated += (_, _) =>
+            imageList.SelectionChanged += (_, _) =>
             {
                 SafeInvoke(() =>
                 {
@@ -89,6 +89,7 @@ namespace NAPS2.WinForms
                     _listView!.Selection = _imageList.Selection;
                 });
             };
+            imageList.ImagesUpdated += (_, _) => SafeInvoke(UpdateToolbar);
             _profileManager.ProfilesUpdated += (_, _) => UpdateScanButton();
             _desktopFormProvider.DesktopForm = this;
         }

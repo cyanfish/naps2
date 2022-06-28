@@ -5,17 +5,13 @@ namespace NAPS2.Lib.Tests.Images;
 
 public class ThumbnailRenderQueueTests : ContextualTexts
 {
-    private readonly RecoveryStorageManager _recoveryStorageManager;
     private readonly UiImageList _uiImageList;
-    private readonly ThumbnailRenderer _thumbnailRenderer;
     private readonly ThumbnailRenderQueue _thumbnailRenderQueue;
 
     public ThumbnailRenderQueueTests()
     {
-        _recoveryStorageManager = RecoveryStorageManager.CreateFolder(Path.Combine(FolderPath, "recovery"));
-        _uiImageList = new UiImageList(_recoveryStorageManager);
-        _thumbnailRenderer = new ThumbnailRenderer(ImageContext);
-        _thumbnailRenderQueue = new ThumbnailRenderQueue(ScanningContext, _thumbnailRenderer);
+        _uiImageList = new UiImageList();
+        _thumbnailRenderQueue = new ThumbnailRenderQueue(ScanningContext, new ThumbnailRenderer(ImageContext));
     }
 
     public override void Dispose()
@@ -47,7 +43,7 @@ public class ThumbnailRenderQueueTests : ContextualTexts
     }
 
     [Fact]
-    public async Task StartRendering_WithThumbnailNeeded_Renders()
+    public void StartRendering_WithThumbnailNeeded_Renders()
     {
         AppendToImageList(CreateScannedImage());
         Assert.Null(_uiImageList.Images[0].GetThumbnailClone());
@@ -55,7 +51,7 @@ public class ThumbnailRenderQueueTests : ContextualTexts
         
         _thumbnailRenderQueue.SetThumbnailSize(128);
         _thumbnailRenderQueue.StartRendering(_uiImageList);
-        await Task.Delay(200);
+        _thumbnailRenderQueue.WaitForRendering();
         
         Assert.NotNull(_uiImageList.Images[0].GetThumbnailClone());
         Assert.False(_uiImageList.Images[0].IsThumbnailDirty);

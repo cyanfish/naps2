@@ -217,7 +217,8 @@ public class AutomatedScanning
 
         foreach (var scan in _scanList)
         {
-            var imageList = new UiImageList(_recoveryStorageManager, scan.Select(x => new UiImage(x)).ToList());
+            // TODO: The result doesn't get propagated back, i.e. this does nothing 
+            var imageList = new UiImageList(scan.Select(x => new UiImage(x)).ToList());
 
             if (_options.AltDeinterleave)
             {

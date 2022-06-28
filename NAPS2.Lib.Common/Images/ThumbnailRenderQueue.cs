@@ -10,6 +10,7 @@ public class ThumbnailRenderQueue : IDisposable
     private readonly ScanningContext _scanningContext;
     private readonly ThumbnailRenderer _thumbnailRenderer;
     private readonly AutoResetEvent _renderThumbnailsWaitHandle = new(false);
+    private readonly ManualResetEvent _renderThumbnailsCompleteHandle = new(false);
     private int _thumbnailSize;
     private UiImageList? _imageList;
     private bool _started;
@@ -28,7 +29,7 @@ public class ThumbnailRenderQueue : IDisposable
         {
             _thumbnailSize = thumbnailSize;
         }
-        _renderThumbnailsWaitHandle.Set();
+        BumpRenderThread();
     }
 
     public void StartRendering(UiImageList imageList)
@@ -51,7 +52,22 @@ public class ThumbnailRenderQueue : IDisposable
 
     private void ImageListUpdated(object? sender, EventArgs args)
     {
+        BumpRenderThread();
+    }
+
+    private void BumpRenderThread()
+    {
+        _renderThumbnailsCompleteHandle.Reset();
         _renderThumbnailsWaitHandle.Set();
+    }
+
+    /// <summary>
+    /// For testing. Waits for pending renders to complete.
+    /// </summary>
+    public void WaitForRendering()
+    {
+        // TODO: Could also check GetNextThumbnailToRender in a loop (though that has some locking issues)
+        _renderThumbnailsCompleteHandle.WaitOne();
     }
 
     private void RenderThumbnails()
@@ -107,6 +123,7 @@ public class ThumbnailRenderQueue : IDisposable
                 fallback.Increase();
                 continue;
             }
+            _renderThumbnailsCompleteHandle.Set();
             _renderThumbnailsWaitHandle.WaitOne();
         }
     }
@@ -172,7 +189,7 @@ public class ThumbnailRenderQueue : IDisposable
         {
             if (_disposed) return;
             _disposed = true;
-            _renderThumbnailsWaitHandle.Set();
+            BumpRenderThread();
             if (_imageList != null)
             {
                 lock (_imageList)
