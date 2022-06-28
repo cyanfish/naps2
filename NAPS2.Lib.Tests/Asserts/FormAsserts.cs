@@ -1,7 +1,7 @@
 ﻿using System.Windows.Forms;
 using Xunit;
 
-namespace NAPS2.Sdk.Tests.Asserts;
+namespace NAPS2.Lib.Tests.Asserts;
 
 public static class FormAsserts
 {

@@ -23,6 +23,7 @@ public class ThumbnailRenderQueue : IDisposable
 
     public void SetThumbnailSize(int thumbnailSize)
     {
+        if (thumbnailSize <= 0) throw new ArgumentException();
         lock (this)
         {
             _thumbnailSize = thumbnailSize;
@@ -36,6 +37,7 @@ public class ThumbnailRenderQueue : IDisposable
         {
             if (_disposed) throw new ObjectDisposedException(nameof(ThumbnailRenderQueue));
             if (_started) throw new InvalidOperationException();
+            if (_thumbnailSize == 0) throw new InvalidOperationException();
             _imageList = imageList;
             _started = true;
         }
@@ -45,12 +47,6 @@ public class ThumbnailRenderQueue : IDisposable
             _imageList.ImagesThumbnailInvalidated += ImageListUpdated;
         }
         new Thread(RenderThumbnails).Start();
-    }
-
-    // TODO: Maybe try and avoid the need for explicit bumps
-    public void Bump()
-    {
-        _renderThumbnailsWaitHandle.Set();
     }
 
     private void ImageListUpdated(object? sender, EventArgs args)
@@ -176,6 +172,7 @@ public class ThumbnailRenderQueue : IDisposable
         {
             if (_disposed) return;
             _disposed = true;
+            _renderThumbnailsWaitHandle.Set();
             if (_imageList != null)
             {
                 lock (_imageList)

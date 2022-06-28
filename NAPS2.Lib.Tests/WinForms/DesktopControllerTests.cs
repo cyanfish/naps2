@@ -2,12 +2,13 @@ using Moq;
 using NAPS2.ImportExport.Images;
 using NAPS2.Platform.Windows;
 using NAPS2.Recovery;
+using NAPS2.Sdk.Tests;
 using NAPS2.Sdk.Tests.Asserts;
 using NAPS2.Update;
 using NAPS2.WinForms;
 using Xunit;
 
-namespace NAPS2.Sdk.Tests.WinForms;
+namespace NAPS2.Lib.Tests.WinForms;
 
 public class DesktopControllerTests : ContextualTexts
 {

@@ -242,7 +242,7 @@ public class OcrRequestQueueTests : ContextualTexts
         _mockEngine.Setup(x => x.ProcessImage(tempPath1, _ocrParams, It.IsAny<CancellationToken>()))
             .Returns(() => Task.Run(async () =>
             {
-                await Task.Delay(100);
+                await Task.Delay(200);
                 return _expectedResult;
             }));
         // Delay the workers so we can cancel before processing starts
@@ -276,7 +276,7 @@ public class OcrRequestQueueTests : ContextualTexts
         var ocrResult2 = await ocrResult2Task;
         Assert.Null(ocrResult1);
         Assert.Null(ocrResult2);
-        await Task.Delay(100);
+        await Task.Delay(200);
         _mockEngine.VerifyNoOtherCalls();
     }
 
@@ -308,7 +308,7 @@ public class OcrRequestQueueTests : ContextualTexts
             .Returns(_expectedResultTask);
 
         var tasks = EnqueueMany(OcrPriority.Foreground, 1000);
-        await Task.Delay(500);
+        await Task.Delay(1000);
         
         int completedCount = tasks.Count(x => x.IsCompleted);
         Assert.Equal(1000, completedCount);
@@ -340,7 +340,7 @@ public class OcrRequestQueueTests : ContextualTexts
         DoEnqueueForeground(_image, _tempPath, _ocrParams).AssertNoAwait();
 
         Assert.False(_ocrRequestQueue.HasCachedResult(_mockEngine.Object, _image, _ocrParams));
-        await Task.Delay(100);
+        await Task.Delay(200);
         Assert.True(_ocrRequestQueue.HasCachedResult(_mockEngine.Object, _image, _ocrParams));
     }
     

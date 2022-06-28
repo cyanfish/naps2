@@ -54,7 +54,7 @@ public class FileConfigScopeTests : ContextualTexts
             Assert.False(scope.TryGet(c => c.DisableAutoSave, out _));
         }
 
-        Thread.Sleep(100);
+        Thread.Sleep(200);
         // Now that the file is unlocked, it should read the correct value
         Assert.True(scope.GetOrDefault(c => c.DisableAutoSave));
 

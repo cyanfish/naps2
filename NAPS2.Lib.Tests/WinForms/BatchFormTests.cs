@@ -2,10 +2,11 @@
 using NAPS2.ImportExport;
 using NAPS2.Scan;
 using NAPS2.Scan.Batch;
+using NAPS2.Sdk.Tests;
 using NAPS2.WinForms;
 using Xunit;
 
-namespace NAPS2.Sdk.Tests.WinForms;
+namespace NAPS2.Lib.Tests.WinForms;
 
 public class BatchFormTests : ContextualTexts
 {
