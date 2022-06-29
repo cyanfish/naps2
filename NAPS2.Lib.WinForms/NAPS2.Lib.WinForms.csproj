@@ -16,10 +16,7 @@
   <Import Project="..\NAPS2.Setup\LibUsers.targets" />
 
   <ItemGroup>
-    <Reference Include="NTwain, Version=3.0.0.0, Culture=neutral, PublicKeyToken=f9f7e0c5169536c8, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\NAPS2.Setup\lib\NTwain.dll</HintPath>
-    </Reference>
+    <PackageReference Include="NTwain" Version="3.7.1" />
     <ProjectReference Include="..\NAPS2.Lib.Common\NAPS2.Lib.Common.csproj" />
     <PackageReference Include="Eto.Forms" Version="2.7.0" />
     <PackageReference Include="Eto.Platform.Windows" Version="2.7.0" />

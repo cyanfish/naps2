@@ -4,6 +4,7 @@ using NAPS2.ImportExport.Email;
 using NAPS2.ImportExport.Email.Mapi;
 using NAPS2.Scan;
 using NAPS2.Scan.Internal;
+using NAPS2.Scan.Internal.Twain;
 using NAPS2.Scan.Wia;
 using NAPS2.Serialization;
 
@@ -30,7 +31,7 @@ public class WorkerServiceAdapter
         var req = new Wia10NativeUiRequest
         {
             DeviceId = scanDevice,
-            Hwnd = (ulong)hwnd
+            Hwnd = (ulong) hwnd
         };
         var resp = _client.Wia10NativeUi(req);
         RemotingHelper.HandleErrors(resp.Error);
@@ -45,7 +46,8 @@ public class WorkerServiceAdapter
         return resp.DeviceListXml.FromXml<List<ScanDevice>>();
     }
 
-    public async Task Scan(ScanningContext scanningContext, ScanOptions options, CancellationToken cancelToken, IScanEvents scanEvents, Action<ProcessedImage, string> imageCallback)
+    public async Task Scan(ScanningContext scanningContext, ScanOptions options, CancellationToken cancelToken,
+        IScanEvents scanEvents, Action<ProcessedImage, string> imageCallback)
     {
         var req = new ScanRequest
         {
@@ -66,7 +68,8 @@ public class WorkerServiceAdapter
             }
             if (resp.Image != null)
             {
-                var renderableImage = SerializedImageHelper.Deserialize(scanningContext, resp.Image, new SerializedImageHelper.DeserializeOptions());
+                var renderableImage = SerializedImageHelper.Deserialize(scanningContext, resp.Image,
+                    new SerializedImageHelper.DeserializeOptions());
                 imageCallback?.Invoke(renderableImage, resp.Image.RenderedFilePath);
             }
         }
@@ -110,5 +113,31 @@ public class WorkerServiceAdapter
     public void StopWorker()
     {
         _client.StopWorkerAsync(new StopWorkerRequest());
+    }
+
+    public async Task TwainScan(ScanOptions options, CancellationToken cancelToken, ITwainEvents twainEvents)
+    {
+        var req = new TwainScanRequest
+        {
+            OptionsXml = options.ToXml()
+        };
+        var streamingCall = _client.TwainScan(req, cancellationToken: cancelToken);
+        while (await streamingCall.ResponseStream.MoveNext())
+        {
+            var resp = streamingCall.ResponseStream.Current;
+            RemotingHelper.HandleErrors(resp.Error);
+            if (resp.PageStart != null)
+            {
+                twainEvents.PageStart(resp.PageStart);
+            }
+            if (resp.NativeImage != null)
+            {
+                twainEvents.NativeImageTransferred(resp.NativeImage);
+            }
+            if (resp.MemoryBuffer != null)
+            {
+                twainEvents.MemoryBufferTransferred(resp.MemoryBuffer);
+            }
+        }
     }
 }

@@ -4,6 +4,7 @@ using System.Windows.Forms;
 namespace NAPS2.Util;
 
 // TODO: Refactor to Eto and move to NAPS2.EtoForms
+// TODO: Most dialogs should close on Escape being pressed
 /// <summary>
 /// A helper class to assign keyboard shortcuts to actions or WinForm buttons.
 /// </summary>

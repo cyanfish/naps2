@@ -12,6 +12,7 @@ service WorkerService {
 	rpc RenderThumbnail (RenderThumbnailRequest) returns (RenderThumbnailResponse) {}
 	rpc RenderPdf (RenderPdfRequest) returns (RenderPdfResponse) {}
 	rpc Scan (ScanRequest) returns (stream ScanResponse) {}
+	rpc TwainScan (TwainScanRequest) returns (stream TwainScanResponse) {}
 	rpc GetDeviceList (GetDeviceListRequest) returns (GetDeviceListResponse) {}
 	rpc StopWorker (StopWorkerRequest) returns (StopWorkerResponse) {}
 }
@@ -97,4 +98,49 @@ message StopWorkerRequest {
 }
 
 message StopWorkerResponse {
+}
+
+message TwainScanRequest {
+	string optionsXml = 1;
+}
+
+message TwainScanResponse {
+	oneof event {
+		NAPS2.Remoting.Error error = 1;
+		TwainPageStart pageStart = 2;
+		TwainNativeImage nativeImage = 3;
+		TwainMemoryBuffer memoryBuffer = 4;
+		TwainScanComplete scanComplete = 5;
+	}
+}
+
+message TwainPageStart {
+	TwainImageData imageData = 1;
+}
+
+message TwainImageData {
+	int32 width = 1;
+	int32 height = 2;
+	int32 bitsPerPixel = 3;
+	int32 samplesPerPixel = 4;
+	repeated int32 bitsPerSample = 5;
+	int32 pixelType = 6;
+	double xRes = 7;
+	double yRes = 8;
+}
+
+message TwainNativeImage {
+	bytes buffer = 1;
+}
+
+message TwainMemoryBuffer {
+	bytes buffer = 1;
+	int32 rows = 2;
+	int32 columns = 3;
+	int32 xOffset = 4;
+	int32 yOffset = 5;
+	int32 bytesPerRow = 6;
+}
+
+message TwainScanComplete {
 }

@@ -1,6 +1,6 @@
 ﻿using System.Threading;
 
-namespace NAPS2.Scan.Internal;
+namespace NAPS2.Scan.Internal.Twain;
 
 internal class LegacyTwainScanDriver : IScanDriver
 {

@@ -1,4 +1,6 @@
-﻿namespace NAPS2.Scan.Internal;
+﻿using NAPS2.Scan.Internal.Twain;
+
+namespace NAPS2.Scan.Internal;
 
 internal class ScanDriverFactory : IScanDriverFactory
 {
