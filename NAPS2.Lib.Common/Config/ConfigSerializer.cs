@@ -147,7 +147,7 @@ public class ConfigSerializer : VersionedSerializer<ConfigStorage<CommonConfig>>
     }
 
     private static ConfigStorage<CommonConfig> UserConfigV0ToCommonConfig(UserConfigV0 c) =>
-        new(new CommonConfig
+        new(new CommonConfig // TODO: We don't want new config fields to be considered specified 
         {
             Version = CommonConfig.CURRENT_VERSION,
             Culture = c.Culture,
@@ -167,7 +167,7 @@ public class ConfigSerializer : VersionedSerializer<ConfigStorage<CommonConfig>>
             EmailSettings = c.EmailSettings,
             EmailSetup = c.EmailSetup,
             ThumbnailSize = c.ThumbnailSize,
-            BatchSettings = c.LastBatchSettings,
+            BatchSettings = c.LastBatchSettings ?? new(), // TODO: This is broken
             DesktopToolStripDock = c.DesktopToolStripDock,
             KeyboardShortcuts = c.KeyboardShortcuts,
             CustomPageSizePresets = ImmutableList.CreateRange(c.CustomPageSizePresets),

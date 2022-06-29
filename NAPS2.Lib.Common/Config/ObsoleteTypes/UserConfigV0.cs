@@ -48,7 +48,7 @@ public class UserConfigV0
 
     public int ThumbnailSize { get; set; } = ThumbnailSizes.DEFAULT_SIZE;
 
-    public BatchSettings? LastBatchSettings { get; set; }
+    public BatchSettings? LastBatchSettings { get; set; } // TODO: Handle this being null.
 
     public DockStyle DesktopToolStripDock { get; set; }
 
