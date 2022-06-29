@@ -15,7 +15,7 @@ public class NLogLogger : ILogger
         var target = new FileTarget
         {
             FileName = Path.Combine(Paths.AppData, "errorlog.txt"),
-            Layout = "${longdate} ${message} ${exception:format=tostring}",
+            Layout = "${longdate} ${processid} ${message} ${exception:format=tostring}",
             ArchiveAboveSize = 100000,
             MaxArchiveFiles = 5
         };
