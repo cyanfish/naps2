@@ -5,6 +5,11 @@
 /// </summary>
 public class WorkerContext : IDisposable
 {
+    /// <summary>
+    /// Timeout after attempting to normally stop a worker before it is killed.
+    /// </summary>
+    private static readonly TimeSpan WorkerStopTimeout = TimeSpan.FromSeconds(60);
+
     public WorkerContext(WorkerServiceAdapter service, Process process)
     {
         Service = service;
@@ -19,11 +24,25 @@ public class WorkerContext : IDisposable
     {
         try
         {
-            Process.Kill();
+            Service.StopWorker();
+            Task.Delay(WorkerStopTimeout).ContinueWith(t =>
+            {
+                try
+                {
+                    if (!Process.HasExited)
+                    {
+                        Process.Kill();
+                    }
+                }
+                catch (Exception e)
+                {
+                    Log.ErrorException("Error killing worker", e);
+                }
+            });
         }
         catch (Exception e)
         {
-            Log.ErrorException("Error cleaning up worker", e);
+            Log.ErrorException("Error stopping worker", e);
         }
     }
 }

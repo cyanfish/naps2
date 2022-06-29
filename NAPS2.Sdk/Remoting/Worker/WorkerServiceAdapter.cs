@@ -106,4 +106,9 @@ public class WorkerServiceAdapter
         RemotingHelper.HandleErrors(resp.Error);
         return resp.Image.ToByteArray();
     }
+
+    public void StopWorker()
+    {
+        _client.StopWorkerAsync(new StopWorkerRequest());
+    }
 }

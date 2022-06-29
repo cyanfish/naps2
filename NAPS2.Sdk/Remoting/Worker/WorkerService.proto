@@ -13,6 +13,7 @@ service WorkerService {
 	rpc RenderPdf (RenderPdfRequest) returns (RenderPdfResponse) {}
 	rpc Scan (ScanRequest) returns (stream ScanResponse) {}
 	rpc GetDeviceList (GetDeviceListRequest) returns (GetDeviceListResponse) {}
+	rpc StopWorker (StopWorkerRequest) returns (StopWorkerResponse) {}
 }
 
 message InitRequest {
@@ -90,4 +91,10 @@ message RenderPdfRequest {
 message RenderPdfResponse {
 	NAPS2.Remoting.Error error = 1;
 	bytes image = 2;
+}
+
+message StopWorkerRequest {
+}
+
+message StopWorkerResponse {
 }

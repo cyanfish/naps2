@@ -46,7 +46,9 @@ public static class WorkerEntryPoint
 
             // Connect to the main NAPS2 process and listen for assigned work
             var server = new NamedPipeServer(string.Format(WorkerFactory.PIPE_NAME_FORMAT, Process.GetCurrentProcess().Id));
-            WorkerService.BindService(server.ServiceBinder, kernel.Get<WorkerServiceImpl>());
+            var serviceImpl = kernel.Get<WorkerServiceImpl>();
+            serviceImpl.OnStop += (_, _) => form.Close();
+            WorkerService.BindService(server.ServiceBinder, serviceImpl);
             server.Start();
             try
             {

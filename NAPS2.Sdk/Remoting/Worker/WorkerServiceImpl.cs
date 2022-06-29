@@ -1,4 +1,5 @@
-﻿using Google.Protobuf;
+﻿using System.Threading;
+using Google.Protobuf;
 using Grpc.Core;
 using NAPS2.ImportExport.Email;
 using NAPS2.ImportExport.Email.Mapi;
@@ -18,6 +19,9 @@ public class WorkerServiceImpl : WorkerService.WorkerServiceBase
     private readonly ThumbnailRenderer _thumbnailRenderer;
     private readonly IMapiWrapper _mapiWrapper;
 
+    private readonly AutoResetEvent _ongoingCallFinished = new(false);
+    private int _ongoingCallCount;
+
     public WorkerServiceImpl(ScanningContext scanningContext, ThumbnailRenderer thumbnailRenderer, IMapiWrapper mapiWrapper)
         : this(scanningContext, new RemoteScanController(scanningContext),
             thumbnailRenderer, mapiWrapper)
@@ -36,6 +40,7 @@ public class WorkerServiceImpl : WorkerService.WorkerServiceBase
 
     public override Task<InitResponse> Init(InitRequest request, ServerCallContext context)
     {
+        using var callRef = StartCall();
         try
         {
             if (!string.IsNullOrEmpty(request.RecoveryFolderPath))
@@ -54,6 +59,7 @@ public class WorkerServiceImpl : WorkerService.WorkerServiceBase
 
     public override Task<Wia10NativeUiResponse> Wia10NativeUi(Wia10NativeUiRequest request, ServerCallContext context)
     {
+        using var callRef = StartCall();
         try
         {
             try
@@ -85,6 +91,7 @@ public class WorkerServiceImpl : WorkerService.WorkerServiceBase
 
     public override async Task<GetDeviceListResponse> GetDeviceList(GetDeviceListRequest request, ServerCallContext context)
     {
+        using var callRef = StartCall();
         try
         {
             var scanOptions = request.OptionsXml.FromXml<ScanOptions>();
@@ -102,6 +109,8 @@ public class WorkerServiceImpl : WorkerService.WorkerServiceBase
 
     public override async Task Scan(ScanRequest request, IServerStreamWriter<ScanResponse> responseStream, ServerCallContext context)
     {
+        using var callRef = StartCall();
+        Log.Error("Scan start");
         var sequencedWriter = new SequencedWriter<ScanResponse>(responseStream);
         try
         {
@@ -141,6 +150,7 @@ public class WorkerServiceImpl : WorkerService.WorkerServiceBase
 
     public override async Task<SendMapiEmailResponse> SendMapiEmail(SendMapiEmailRequest request, ServerCallContext context)
     {
+        using var callRef = StartCall();
         try
         {
             var emailMessage = request.EmailMessageXml.FromXml<EmailMessage>();
@@ -158,6 +168,7 @@ public class WorkerServiceImpl : WorkerService.WorkerServiceBase
 
     public override async Task<RenderThumbnailResponse> RenderThumbnail(RenderThumbnailRequest request, ServerCallContext context)
     {
+        using var callRef = StartCall();
         try
         {
             var deserializeOptions = new SerializedImageHelper.DeserializeOptions
@@ -181,6 +192,7 @@ public class WorkerServiceImpl : WorkerService.WorkerServiceBase
 
     public override Task<RenderPdfResponse> RenderPdf(RenderPdfRequest request, ServerCallContext context)
     {
+        using var callRef = StartCall();
         try
         {
             var renderer = new PdfiumPdfRenderer(_scanningContext.ImageContext);
@@ -194,6 +206,53 @@ public class WorkerServiceImpl : WorkerService.WorkerServiceBase
         catch (Exception e)
         {
             return Task.FromResult(new RenderPdfResponse { Error = RemotingHelper.ToError(e) });
+        }
+    }
+
+    public override Task<StopWorkerResponse> StopWorker(StopWorkerRequest request, ServerCallContext context)
+    {
+        Task.Run(async () =>
+        {
+            while (true)
+            {
+                lock (this)
+                {
+                    if (_ongoingCallCount <= 0)
+                    {
+                        OnStop?.Invoke(this, EventArgs.Empty);
+                        return;
+                    }
+                }
+                await _ongoingCallFinished.WaitOneAsync();
+            }
+        }).AssertNoAwait();
+        return Task.FromResult(new StopWorkerResponse());
+    }
+
+    public event EventHandler? OnStop;
+
+    private CallReference StartCall() => new(this);
+
+    private class CallReference : IDisposable
+    {
+        private readonly WorkerServiceImpl _owner;
+
+        public CallReference(WorkerServiceImpl owner)
+        {
+            _owner = owner;
+            lock (owner)
+            {
+                owner._ongoingCallCount++;
+            }
+        }
+
+        public void Dispose()
+        {
+            lock (_owner)
+            {
+                _owner._ongoingCallCount--;
+                _owner._ongoingCallFinished.Set();
+            }
         }
     }
 }
