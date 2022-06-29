@@ -1,5 +1,5 @@
 ﻿using System.Threading;
-using NAPS2.Remoting.Worker;
+using Grpc.Core;
 
 namespace NAPS2.Scan.Internal;
 
@@ -24,9 +24,17 @@ internal class WorkerScanBridge : IScanBridge
     public async Task Scan(ScanOptions options, CancellationToken cancelToken, IScanEvents scanEvents, Action<ProcessedImage, PostProcessingContext> callback)
     {
         using var ctx = _scanningContext.WorkerFactory.Create();
-        await ctx.Service.Scan(_scanningContext, options, cancelToken, scanEvents, (image, tempPath) =>
+        try
         {
-            callback(image, new PostProcessingContext { TempPath = tempPath });
-        });
+            await ctx.Service.Scan(_scanningContext, options, cancelToken, scanEvents,
+                (image, tempPath) => { callback(image, new PostProcessingContext { TempPath = tempPath }); });
+        }
+        catch (RpcException ex)
+        {
+            if (ex.Status.StatusCode != StatusCode.Cancelled)
+            {
+                throw;
+            }
+        }
     }
 }
