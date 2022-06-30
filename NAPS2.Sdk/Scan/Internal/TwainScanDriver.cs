@@ -135,6 +135,7 @@ internal class TwainScanDriver : IScanDriver
             var pixelFormat = _currentImageData.BitsPerPixel == 1 ? ImagePixelFormat.BW1 : ImagePixelFormat.RGB24;
             _currentMemoryImage ??= _scanningContext.ImageContext.Create(
                 _currentImageData.Width, _currentImageData.Height, pixelFormat);
+            _currentMemoryImage.SetResolution((float) _currentImageData.XRes, (float) _currentImageData.YRes);
 
             _transferredPixels += memoryBuffer.Columns * (long) memoryBuffer.Rows;
             _scanEvents.PageProgress(_transferredPixels / (double) _totalPixels);
