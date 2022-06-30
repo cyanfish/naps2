@@ -132,19 +132,14 @@ internal class TwainScanDriver : IScanDriver
                 throw new InvalidOperationException();
             }
 
-            // TODO: Verify samples etc.
-            // TODO: Also support grayscale
-            var pixelFormat = _currentImageData.BitsPerPixel == 1 ? ImagePixelFormat.BW1 :
-                _currentImageData.BitsPerPixel == 24 ? ImagePixelFormat.RGB24 :
-                throw new InvalidOperationException($"Unsupported bits per pixel: {_currentImageData.BitsPerPixel}");
+            var pixelFormat = _currentImageData.BitsPerPixel == 1 ? ImagePixelFormat.BW1 : ImagePixelFormat.RGB24;
             _currentMemoryImage ??= _scanningContext.ImageContext.Create(
                 _currentImageData.Width, _currentImageData.Height, pixelFormat);
 
             _transferredPixels += memoryBuffer.Columns * (long) memoryBuffer.Rows;
             _scanEvents.PageProgress(_transferredPixels / (double) _totalPixels);
 
-            var bufferReader = new TwainMemoryBufferReader();
-            bufferReader.ReadBuffer(memoryBuffer, pixelFormat, _currentMemoryImage);
+            TwainMemoryBufferReader.CopyBufferToImage(memoryBuffer, _currentImageData, _currentMemoryImage);
 
             if (_transferredPixels == _totalPixels)
             {

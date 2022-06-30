@@ -1,42 +1,91 @@
 using NAPS2.Remoting.Worker;
+using NTwain.Data;
 
 namespace NAPS2.Scan.Internal.Twain;
 
-public class TwainMemoryBufferReader
+public static class TwainMemoryBufferReader
 {
-    public unsafe void ReadBuffer(TwainMemoryBuffer memoryBuffer, ImagePixelFormat pixelFormat, IMemoryImage outputImage)
+    public static unsafe void CopyBufferToImage(TwainMemoryBuffer memoryBuffer, TwainImageData imageData,
+        IMemoryImage outputImage)
     {
         var data = outputImage.Lock(LockMode.WriteOnly, out var scan0, out var dstBytesPerRow);
         try
         {
             byte[] source = memoryBuffer.Buffer.ToByteArray();
-            if (pixelFormat == ImagePixelFormat.BW1)
+            if (memoryBuffer.BytesPerRow < memoryBuffer.Columns * (imageData.BitsPerPixel / 8.0) ||
+                source.Length < memoryBuffer.BytesPerRow * memoryBuffer.Rows ||
+                memoryBuffer.XOffset < 0 ||
+                memoryBuffer.YOffset < 0)
             {
-                // TODO: Handle BW1 and also grayscale
-                // // No 8-bit greyscale format, so we have to transform into 24-bit
-                // int rowWidth = stride;
-                // int originalRowWidth = source.Length / imageHeight;
-                // byte[] source2 = new byte[rowWidth * imageHeight];
-                // for (int row = 0; row < imageHeight; row++)
-                // {
-                //     for (int col = 0; col < imageWidth; col++)
-                //     {
-                //         source2[row * rowWidth + col * 3] = source[row * originalRowWidth + col];
-                //         source2[row * rowWidth + col * 3 + 1] = source[row * originalRowWidth + col];
-                //         source2[row * rowWidth + col * 3 + 2] = source[row * originalRowWidth + col];
-                //     }
-                // }
-                // source = source2;
+                throw new ArgumentException(
+                    $"Invalid buffer parameters: {memoryBuffer.BytesPerRow} {memoryBuffer.Columns} {memoryBuffer.Rows} {source.Length} {memoryBuffer.XOffset} {memoryBuffer.YOffset}");
             }
-            else if (pixelFormat == ImagePixelFormat.RGB24)
+
+            var srcBytesPerRow = memoryBuffer.BytesPerRow;
+            byte* dstPtr = (byte*) scan0.ToPointer();
+
+            if (imageData.BitsPerPixel == 1)
             {
-                if (memoryBuffer.BytesPerRow < memoryBuffer.Columns * 3 || source.Length < memoryBuffer.BytesPerRow * memoryBuffer.Rows)
+                // Black & white
+                if (imageData.PixelType != (int) PixelType.BlackWhite || imageData.SamplesPerPixel != 1 ||
+                    imageData.BitsPerSample.Count < 1 || imageData.BitsPerSample[0] != 1)
                 {
-                    throw new ArgumentException();
+                    ThrowForUnsupportedPixelType(imageData);
                 }
-                var srcBytesPerRow = memoryBuffer.BytesPerRow;
-                var bytesPerPixel = 3;
-                byte* dstPtr = (byte*) scan0.ToPointer();
+                if (memoryBuffer.XOffset % 8 != 0)
+                {
+                    throw new ArgumentException("Unaligned offset for 1bpp image");
+                }
+                fixed (byte* srcPtr = &source[0])
+                {
+                    for (int dy = 0; dy < memoryBuffer.Rows; dy++)
+                    {
+                        for (int dx = 0; dx < memoryBuffer.Columns / 8; dx++)
+                        {
+                            int x = memoryBuffer.XOffset + dx;
+                            int y = memoryBuffer.YOffset + dy;
+                            // Copy 8 bits at a time
+                            *(dstPtr + y * dstBytesPerRow + x) = *(srcPtr + dy * srcBytesPerRow + dx);
+                        }
+                    }
+                }
+            }
+            else if (imageData.BitsPerPixel == 8)
+            {
+                // Grayscale
+                if (imageData.PixelType != (int) PixelType.Gray || imageData.SamplesPerPixel != 1 ||
+                    imageData.BitsPerSample.Count < 1 || imageData.BitsPerSample[0] != 8)
+                {
+                    ThrowForUnsupportedPixelType(imageData);
+                }
+                fixed (byte* srcPtr = &source[0])
+                {
+                    for (int dy = 0; dy < memoryBuffer.Rows; dy++)
+                    {
+                        for (int dx = 0; dx < memoryBuffer.Columns; dx++)
+                        {
+                            int x = memoryBuffer.XOffset + dx;
+                            int y = memoryBuffer.YOffset + dy;
+                            // No 8-bit greyscale format, so we have to transform into 24-bit RGB
+                            // R
+                            *(dstPtr + y * dstBytesPerRow + x * 3) = *(srcPtr + dy * srcBytesPerRow + dx);
+                            // G
+                            *(dstPtr + y * dstBytesPerRow + x * 3 + 1) = *(srcPtr + dy * srcBytesPerRow + dx);
+                            // B
+                            *(dstPtr + y * dstBytesPerRow + x * 3 + 2) = *(srcPtr + dy * srcBytesPerRow + dx);
+                        }
+                    }
+                }
+            }
+            else if (imageData.BitsPerPixel == 24)
+            {
+                // Color
+                if (imageData.PixelType != (int) PixelType.RGB || imageData.SamplesPerPixel != 3 ||
+                    imageData.BitsPerSample.Count < 3 || imageData.BitsPerSample[0] != 8 ||
+                    imageData.BitsPerSample[1] != 8 || imageData.BitsPerSample[2] != 8)
+                {
+                    ThrowForUnsupportedPixelType(imageData);
+                }
                 fixed (byte* srcPtr = &source[0])
                 {
                     for (int dy = 0; dy < memoryBuffer.Rows; dy++)
@@ -47,21 +96,21 @@ public class TwainMemoryBufferReader
                             int y = memoryBuffer.YOffset + dy;
                             // Colors are provided as BGR, they need to be swapped to RGB
                             // R
-                            *(dstPtr + y * dstBytesPerRow + x * bytesPerPixel) =
-                                *(srcPtr + dy * srcBytesPerRow + dx * bytesPerPixel + 2);
+                            *(dstPtr + y * dstBytesPerRow + x * 3) =
+                                *(srcPtr + dy * srcBytesPerRow + dx * 3 + 2);
                             // G
-                            *(dstPtr + y * dstBytesPerRow + x * bytesPerPixel + 1) =
-                                *(srcPtr + dy * srcBytesPerRow + dx * bytesPerPixel + 1);
+                            *(dstPtr + y * dstBytesPerRow + x * 3 + 1) =
+                                *(srcPtr + dy * srcBytesPerRow + dx * 3 + 1);
                             // B
-                            *(dstPtr + y * dstBytesPerRow + x * bytesPerPixel + 2) =
-                                *(srcPtr + dy * srcBytesPerRow + dx * bytesPerPixel);
+                            *(dstPtr + y * dstBytesPerRow + x * 3 + 2) =
+                                *(srcPtr + dy * srcBytesPerRow + dx * 3);
                         }
                     }
                 }
             }
             else
             {
-                throw new ArgumentException();
+                ThrowForUnsupportedPixelType(imageData);
             }
         }
         finally
@@ -70,4 +119,9 @@ public class TwainMemoryBufferReader
         }
     }
 
+    private static void ThrowForUnsupportedPixelType(TwainImageData imageData)
+    {
+        throw new ArgumentException(
+            $"Unsupported pixel type: {imageData.BitsPerPixel} {imageData.PixelType} {imageData.SamplesPerPixel} {string.Join(",", imageData.BitsPerSample)}");
+    }
 }
