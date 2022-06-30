@@ -92,11 +92,17 @@ internal class TwainSessionRunner
         Debug.WriteLine("NAPS2.TW - Finishing with cancellation");
         if (_session.State != 5)
         {
+            // If we're in state 6 or 7, this will abort the ongoing transfer via ForceStepDown.
+            // If we're in state 4 or lower, then we're not transferring and this will just clean up the source/session.  
             UnloadTwain();
             _tcs.TrySetResult(false);            
         }
         else
         {
+            // If we're in state 5, we can just wait for the TransferReady event and "naturally" cancel the transfer.
+            // (Or if we're in state 5 in the process of finishing all transfers, then we don't need to cancel anyway.)
+            // This will result in FinishWithCompletion being called when the source disables itself.
+            // The alternative of calling ForceStepDown from state 5 seems to produce an error message from the scanner.
             Debug.WriteLine("NAPS2.TW - Will cancel via TransferReady");
         }
     }
@@ -104,6 +110,9 @@ internal class TwainSessionRunner
     private void FinishWithError(Exception ex)
     {
         Debug.WriteLine("NAPS2.TW - Finishing with error");
+        // If we're in state 5 or higher, we'll call ForceStepDown, which could potentially produce additional errors,
+        // but what alternative is there?
+        // If we're in state 4 or lower, this will just clean up the source/session.
         UnloadTwain();
         _tcs.TrySetException(ex);
     }
@@ -111,6 +120,7 @@ internal class TwainSessionRunner
     private void FinishWithCompletion()
     {
         Debug.WriteLine("NAPS2.TW - Finishing with completion");
+        // At this point we should be in state 4 and this will clean up the source/session.
         UnloadTwain();
         _tcs.TrySetResult(true);
     }
@@ -119,14 +129,19 @@ internal class TwainSessionRunner
     {
         if (_session.State > 4)
         {
+            // If a transfer is initialized or in progress, this will abort it and also clean up the source/session.
             _session.ForceStepDown(2);
             return;
         }
+        // If a transfer isn't in progress, we just clean up the source/session as needed.
         if (_session.State == 4)
         {
             _source!.Close();
         }
-        _session.Close();
+        if (_session.State >= 3)
+        {
+            _session.Close();
+        }
     }
 
     private void StateChanged(object? sender, EventArgs e)
