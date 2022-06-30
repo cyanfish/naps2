@@ -13,6 +13,7 @@ public class SmoothProgress : IDisposable
     private double _inputVelocity;
     private double _timeToCompletion;
     private double _outputVelocity;
+    private long _outputLastUpdated;
 
     private Stopwatch _stopwatch = null!;
     private Timer? _timer;
@@ -74,6 +75,7 @@ public class SmoothProgress : IDisposable
 
                 if (_timer == null)
                 {
+                    _outputLastUpdated = _stopwatch.ElapsedMilliseconds;
                     _timer = new Timer(TimerTick, null, 0, INTERVAL);
                 }
             }
@@ -108,7 +110,14 @@ public class SmoothProgress : IDisposable
     {
         lock (this)
         {
-            _outputPos = Math.Min(_inputPos, _outputPos + _outputVelocity * INTERVAL);
+            var previousUpdateTime = _outputLastUpdated;
+            _outputLastUpdated = _stopwatch.ElapsedMilliseconds;
+            var interval = _outputLastUpdated - previousUpdateTime;
+            if (interval <= 0)
+            {
+                interval = INTERVAL;
+            }
+            _outputPos = Math.Min(1.0, _outputPos + _outputVelocity * interval);
         }
         InvokeOutputProgressChanged();
     }
