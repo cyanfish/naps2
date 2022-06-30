@@ -15,6 +15,7 @@ internal class TwainSessionRunner
     private readonly ITwainEvents _twainEvents;
     private readonly TwainSession _session;
     private readonly TaskCompletionSource<bool> _tcs;
+    private DataSource? _source;
 
     public TwainSessionRunner(TwainDsm dsm, ScanOptions options, CancellationToken cancelToken,
         ITwainEvents twainEvents)
@@ -54,25 +55,25 @@ internal class TwainSessionRunner
             }
             
             Debug.WriteLine("NAPS2.TW - Finding source");
-            var source = _session.FirstOrDefault(x => x.Name == _options.Device.ID);
-            if (source == null)
+            _source = _session.FirstOrDefault(x => x.Name == _options.Device.ID);
+            if (_source == null)
             {
                 throw new DeviceNotFoundException();
             }
             
             Debug.WriteLine("NAPS2.TW - Opening source");
-            rc = source.Open();
+            rc = _source.Open();
             if (rc != ReturnCode.Success)
             {
                 throw new Exception($"TWAIN source open error: {rc}");
             }
             
             Debug.WriteLine("NAPS2.TW - Configuring source");
-            ConfigureSource(source);
+            ConfigureSource(_source);
             
             Debug.WriteLine("NAPS2.TW - Enabling source");
             var ui = _options.UseNativeUI ? SourceEnableMode.ShowUI : SourceEnableMode.NoUI;
-            rc = source.Enable(ui, true, _options.DialogParent);
+            rc = _source.Enable(ui, true, _options.DialogParent);
             if (rc != ReturnCode.Success)
             {
                 throw new Exception($"TWAIN source enable error: {rc}");
@@ -89,28 +90,48 @@ internal class TwainSessionRunner
     private void FinishWithCancellation()
     {
         Debug.WriteLine("NAPS2.TW - Finishing with cancellation");
-        _tcs.TrySetCanceled();
-        _session.ForceStepDown(2);
+        if (_session.State != 5)
+        {
+            UnloadTwain();
+            _tcs.TrySetResult(false);            
+        }
+        else
+        {
+            Debug.WriteLine("NAPS2.TW - Will cancel via TransferReady");
+        }
     }
 
     private void FinishWithError(Exception ex)
     {
         Debug.WriteLine("NAPS2.TW - Finishing with error");
+        UnloadTwain();
         _tcs.TrySetException(ex);
-        _session.ForceStepDown(2);
     }
 
     private void FinishWithCompletion()
     {
         Debug.WriteLine("NAPS2.TW - Finishing with completion");
+        UnloadTwain();
         _tcs.TrySetResult(true);
-        _session.ForceStepDown(2);
+    }
+
+    private void UnloadTwain()
+    {
+        if (_session.State > 4)
+        {
+            _session.ForceStepDown(2);
+            return;
+        }
+        if (_session.State == 4)
+        {
+            _source!.Close();
+        }
+        _session.Close();
     }
 
     private void StateChanged(object? sender, EventArgs e)
     {
         Debug.WriteLine($"NAPS2.TW - StateChanged (to {_session.State})");
-        // TODO: Handle this?
     }
 
     private void SourceDisabled(object? sender, EventArgs e)
