@@ -110,7 +110,6 @@ message TwainScanResponse {
 		TwainPageStart pageStart = 2;
 		TwainNativeImage nativeImage = 3;
 		TwainMemoryBuffer memoryBuffer = 4;
-		TwainScanComplete scanComplete = 5;
 	}
 }
 
@@ -140,7 +139,4 @@ message TwainMemoryBuffer {
 	int32 xOffset = 4;
 	int32 yOffset = 5;
 	int32 bytesPerRow = 6;
-}
-
-message TwainScanComplete {
 }

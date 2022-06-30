@@ -3,7 +3,7 @@
 internal class ScanBridgeFactory : IScanBridgeFactory
 {
     private readonly InProcScanBridge _inProcScanBridge;
-    private readonly WorkerScanBridge _workerScanBridge;
+    private readonly WorkerScanBridge _workerScanBridge; // TODO: remove
     private readonly NetworkScanBridge _networkScanBridge;
 
     public ScanBridgeFactory(ScanningContext scanningContext)
@@ -26,11 +26,6 @@ internal class ScanBridgeFactory : IScanBridgeFactory
         {
             // The physical scanner is connected to a different computer, so we connect to a NAPS2 server process over the network
             return _networkScanBridge;
-        }
-        if (options.Driver == Driver.Twain && options.TwainOptions.Dsm != TwainDsm.NewX64 && Environment.Is64BitProcess)
-        {
-            // 32-bit twain can only be used by a 32-bit process, so we use a separate worker process
-            return _workerScanBridge;
         }
         return _inProcScanBridge;
     }

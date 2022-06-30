@@ -24,17 +24,7 @@ internal class WorkerScanBridge : IScanBridge
     public async Task Scan(ScanOptions options, CancellationToken cancelToken, IScanEvents scanEvents, Action<ProcessedImage, PostProcessingContext> callback)
     {
         using var ctx = _scanningContext.WorkerFactory.Create();
-        try
-        {
-            await ctx.Service.Scan(_scanningContext, options, cancelToken, scanEvents,
-                (image, tempPath) => { callback(image, new PostProcessingContext { TempPath = tempPath }); });
-        }
-        catch (RpcException ex)
-        {
-            if (ex.Status.StatusCode != StatusCode.Cancelled)
-            {
-                throw;
-            }
-        }
+        await ctx.Service.Scan(_scanningContext, options, cancelToken, scanEvents,
+            (image, tempPath) => { callback(image, new PostProcessingContext { TempPath = tempPath }); });
     }
 }

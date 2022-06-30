@@ -53,24 +53,34 @@ public class WorkerServiceAdapter
         {
             OptionsXml = options.ToXml()
         };
-        var streamingCall = _client.Scan(req, cancellationToken: cancelToken);
-        while (await streamingCall.ResponseStream.MoveNext())
+        try
         {
-            var resp = streamingCall.ResponseStream.Current;
-            RemotingHelper.HandleErrors(resp.Error);
-            if (resp.PageStart != null)
+            var streamingCall = _client.Scan(req, cancellationToken: cancelToken);
+            while (await streamingCall.ResponseStream.MoveNext())
             {
-                scanEvents.PageStart();
+                var resp = streamingCall.ResponseStream.Current;
+                RemotingHelper.HandleErrors(resp.Error);
+                if (resp.PageStart != null)
+                {
+                    scanEvents.PageStart();
+                }
+                if (resp.Progress != null)
+                {
+                    scanEvents.PageProgress(resp.Progress.Value);
+                }
+                if (resp.Image != null)
+                {
+                    var renderableImage = SerializedImageHelper.Deserialize(scanningContext, resp.Image,
+                        new SerializedImageHelper.DeserializeOptions());
+                    imageCallback?.Invoke(renderableImage, resp.Image.RenderedFilePath);
+                }
             }
-            if (resp.Progress != null)
+        }
+        catch (RpcException ex)
+        {
+            if (ex.Status.StatusCode != StatusCode.Cancelled)
             {
-                scanEvents.PageProgress(resp.Progress.Value);
-            }
-            if (resp.Image != null)
-            {
-                var renderableImage = SerializedImageHelper.Deserialize(scanningContext, resp.Image,
-                    new SerializedImageHelper.DeserializeOptions());
-                imageCallback?.Invoke(renderableImage, resp.Image.RenderedFilePath);
+                throw;
             }
         }
     }
@@ -121,22 +131,32 @@ public class WorkerServiceAdapter
         {
             OptionsXml = options.ToXml()
         };
-        var streamingCall = _client.TwainScan(req, cancellationToken: cancelToken);
-        while (await streamingCall.ResponseStream.MoveNext())
+        try
         {
-            var resp = streamingCall.ResponseStream.Current;
-            RemotingHelper.HandleErrors(resp.Error);
-            if (resp.PageStart != null)
+            var streamingCall = _client.TwainScan(req, cancellationToken: cancelToken);
+            while (await streamingCall.ResponseStream.MoveNext())
             {
-                twainEvents.PageStart(resp.PageStart);
+                var resp = streamingCall.ResponseStream.Current;
+                RemotingHelper.HandleErrors(resp.Error);
+                if (resp.PageStart != null)
+                {
+                    twainEvents.PageStart(resp.PageStart);
+                }
+                if (resp.NativeImage != null)
+                {
+                    twainEvents.NativeImageTransferred(resp.NativeImage);
+                }
+                if (resp.MemoryBuffer != null)
+                {
+                    twainEvents.MemoryBufferTransferred(resp.MemoryBuffer);
+                }
             }
-            if (resp.NativeImage != null)
+        }
+        catch (RpcException ex)
+        {
+            if (ex.Status.StatusCode != StatusCode.Cancelled)
             {
-                twainEvents.NativeImageTransferred(resp.NativeImage);
-            }
-            if (resp.MemoryBuffer != null)
-            {
-                twainEvents.MemoryBufferTransferred(resp.MemoryBuffer);
+                throw;
             }
         }
     }

@@ -6,6 +6,7 @@ using NAPS2.ImportExport.Email.Mapi;
 using NAPS2.ImportExport.Pdf;
 using NAPS2.Scan;
 using NAPS2.Scan.Internal;
+using NAPS2.Scan.Internal.Twain;
 using NAPS2.Scan.Wia;
 using NAPS2.Wia;
 using NAPS2.Serialization;
@@ -22,13 +23,15 @@ public class WorkerServiceImpl : WorkerService.WorkerServiceBase
     private readonly AutoResetEvent _ongoingCallFinished = new(false);
     private int _ongoingCallCount;
 
-    public WorkerServiceImpl(ScanningContext scanningContext, ThumbnailRenderer thumbnailRenderer, IMapiWrapper mapiWrapper)
+    public WorkerServiceImpl(ScanningContext scanningContext, ThumbnailRenderer thumbnailRenderer,
+        IMapiWrapper mapiWrapper)
         : this(scanningContext, new RemoteScanController(scanningContext),
             thumbnailRenderer, mapiWrapper)
     {
     }
 
-    internal WorkerServiceImpl(ScanningContext scanningContext, IRemoteScanController remoteScanController, ThumbnailRenderer thumbnailRenderer,
+    internal WorkerServiceImpl(ScanningContext scanningContext, IRemoteScanController remoteScanController,
+        ThumbnailRenderer thumbnailRenderer,
         IMapiWrapper mapiWrapper)
     {
         _scanningContext = scanningContext;
@@ -89,7 +92,8 @@ public class WorkerServiceImpl : WorkerService.WorkerServiceBase
         }
     }
 
-    public override async Task<GetDeviceListResponse> GetDeviceList(GetDeviceListRequest request, ServerCallContext context)
+    public override async Task<GetDeviceListResponse> GetDeviceList(GetDeviceListRequest request,
+        ServerCallContext context)
     {
         using var callRef = StartCall();
         try
@@ -107,10 +111,10 @@ public class WorkerServiceImpl : WorkerService.WorkerServiceBase
         }
     }
 
-    public override async Task Scan(ScanRequest request, IServerStreamWriter<ScanResponse> responseStream, ServerCallContext context)
+    public override async Task Scan(ScanRequest request, IServerStreamWriter<ScanResponse> responseStream,
+        ServerCallContext context)
     {
         using var callRef = StartCall();
-        Log.Error("Scan start");
         var sequencedWriter = new SequencedWriter<ScanResponse>(responseStream);
         try
         {
@@ -148,7 +152,8 @@ public class WorkerServiceImpl : WorkerService.WorkerServiceBase
         await sequencedWriter.WaitForCompletion();
     }
 
-    public override async Task<SendMapiEmailResponse> SendMapiEmail(SendMapiEmailRequest request, ServerCallContext context)
+    public override async Task<SendMapiEmailResponse> SendMapiEmail(SendMapiEmailRequest request,
+        ServerCallContext context)
     {
         using var callRef = StartCall();
         try
@@ -166,7 +171,8 @@ public class WorkerServiceImpl : WorkerService.WorkerServiceBase
         }
     }
 
-    public override async Task<RenderThumbnailResponse> RenderThumbnail(RenderThumbnailRequest request, ServerCallContext context)
+    public override async Task<RenderThumbnailResponse> RenderThumbnail(RenderThumbnailRequest request,
+        ServerCallContext context)
     {
         using var callRef = StartCall();
         try
@@ -227,6 +233,38 @@ public class WorkerServiceImpl : WorkerService.WorkerServiceBase
             }
         }).AssertNoAwait();
         return Task.FromResult(new StopWorkerResponse());
+    }
+
+    public override async Task TwainScan(TwainScanRequest request,
+        IServerStreamWriter<TwainScanResponse> responseStream, ServerCallContext context)
+    {
+        using var callRef = StartCall();
+        var sequencedWriter = new SequencedWriter<TwainScanResponse>(responseStream);
+        try
+        {
+            var twainEvents = new TwainEvents(
+                pageStart => sequencedWriter.Write(new TwainScanResponse
+                {
+                    PageStart = pageStart
+                }),
+                nativeImage => sequencedWriter.Write(new TwainScanResponse
+                {
+                    NativeImage = nativeImage
+                }),
+                memoryBuffer => sequencedWriter.Write(new TwainScanResponse
+                {
+                    MemoryBuffer = memoryBuffer
+                })
+            );
+            var twainController = new LocalTwainController();
+            var options = request.OptionsXml.FromXml<ScanOptions>();
+            await twainController.StartScan(options, twainEvents, context.CancellationToken);
+        }
+        catch (Exception e)
+        {
+            sequencedWriter.Write(new TwainScanResponse { Error = RemotingHelper.ToError(e) });
+        }
+        await sequencedWriter.WaitForCompletion();
     }
 
     public event EventHandler? OnStop;
