@@ -51,7 +51,7 @@ internal class TwainSessionRunner
                 : _session.Open(); 
             if (rc != ReturnCode.Success)
             {
-                throw new Exception($"TWAIN session open error: {rc}");
+                throw new DeviceException($"TWAIN session open error: {rc}");
             }
             
             Debug.WriteLine("NAPS2.TW - Finding source");
@@ -65,7 +65,7 @@ internal class TwainSessionRunner
             rc = _source.Open();
             if (rc != ReturnCode.Success)
             {
-                throw new Exception($"TWAIN source open error: {rc}");
+                throw GetExceptionForStatus(_session.GetStatus());
             }
             
             Debug.WriteLine("NAPS2.TW - Configuring source");
@@ -76,7 +76,7 @@ internal class TwainSessionRunner
             rc = _source.Enable(ui, true, _options.DialogParent);
             if (rc != ReturnCode.Success)
             {
-                throw new Exception($"TWAIN source enable error: {rc}");
+                throw GetExceptionForStatus(_source.GetStatus());
             }
 
             _cancelToken.Register(FinishWithCancellation);
@@ -158,7 +158,26 @@ internal class TwainSessionRunner
     private void TransferError(object? sender, TransferErrorEventArgs e)
     {
         Debug.WriteLine("NAPS2.TW - TransferError");
-        FinishWithError(e.Exception ?? new Exception($"TWAIN transfer error: {e.ReturnCode}"));
+        FinishWithError(e.Exception ?? GetExceptionForStatus(e.SourceStatus));
+    }
+
+    private Exception GetExceptionForStatus(TWStatus status)
+    {
+        switch (status.ConditionCode)
+        {
+            case ConditionCode.OperationError:
+                // This means the scanner has already shown the user an error message, so we don't need to show another.
+                // TODO: The spec says that if CAP_INDICATORS is false with NO_UI, we should still display the error to
+                // the user, but with my test scanners that seems unnecessary so for now I'm not showing the error
+                // regardless.
+                return new AlreadyHandledDriverException();
+            case ConditionCode.PaperJam:
+                return new DeviceException(MiscResources.DevicePaperJam);
+            case ConditionCode.CheckDeviceOnline:
+                return new DeviceException(MiscResources.DeviceOffline);
+            default:
+                return new DeviceException($"TWAIN error: {status.ConditionCode}");
+        }
     }
 
     private void DataTransferred(object? sender, DataTransferredEventArgs e)
