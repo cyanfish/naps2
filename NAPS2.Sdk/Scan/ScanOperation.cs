@@ -6,17 +6,17 @@ public class ScanOperation : OperationBase
 {
     private int _pageNumber = 1;
 
-    public ScanOperation(ScanDevice device, PaperSource paperSource, Driver driver)
+    public ScanOperation(ScanOptions options)
     {
-        ProgressTitle = device.Name;
+        ProgressTitle = options.Device.Name;
         Status = new OperationStatus
         {
-            StatusText = paperSource == PaperSource.Flatbed
+            StatusText = options.PaperSource == PaperSource.Flatbed
                 ? MiscResources.AcquiringData
                 : string.Format(MiscResources.ScanProgressPage, _pageNumber),
             MaxProgress = 1000,
             ProgressType = OperationProgressType.BarOnly,
-            IndeterminateProgress = driver == Driver.Twain
+            IndeterminateProgress = options.Driver == Driver.Twain && options.TwainOptions.TransferMode != TwainTransferMode.Memory
         };
         AllowBackground = true;
         AllowCancel = true;

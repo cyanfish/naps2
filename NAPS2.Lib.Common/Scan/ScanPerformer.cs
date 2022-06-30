@@ -58,7 +58,7 @@ internal class ScanPerformer : IScanPerformer
 
         var localPostProcessor = new LocalPostProcessor(ConfigureOcrController(scanParams));
         var controller = new ScanController(localPostProcessor, _scanOptionsValidator, _scanBridgeFactory);
-        var op = new ScanOperation(options.Device, options.PaperSource, options.Driver);
+        var op = new ScanOperation(options);
 
         controller.PageStart += (sender, args) => op.NextPage(args.PageNumber);
         controller.ScanEnd += (sender, args) => op.Completed();
@@ -131,7 +131,7 @@ internal class ScanPerformer : IScanPerformer
             Log.ErrorException(error.Message, error.InnerException);
             _errorOutput?.DisplayError(error.Message, error);
         }
-        else
+        else if (error is not AlreadyHandledDriverException)
         {
             _errorOutput?.DisplayError(error.Message);
         }
