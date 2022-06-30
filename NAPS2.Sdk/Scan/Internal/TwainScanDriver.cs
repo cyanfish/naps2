@@ -75,10 +75,11 @@ internal class TwainScanDriver : IScanDriver
         }
     }
 
-    public async Task Scan(ScanOptions options, CancellationToken cancelToken, IScanEvents scanEvents, Action<IMemoryImage> callback)
+    public async Task Scan(ScanOptions options, CancellationToken cancelToken, IScanEvents scanEvents,
+        Action<IMemoryImage> callback)
     {
         var controller = GetTwainController(options);
-        var state = new TwainState(_scanningContext, scanEvents, callback);
+        using var state = new TwainState(_scanningContext, scanEvents, callback);
         await controller.StartScan(options, state, cancelToken);
     }
 
@@ -91,13 +92,13 @@ internal class TwainScanDriver : IScanDriver
         return new LocalTwainController();
     }
 
-    private class TwainState : ITwainEvents
+    private class TwainState : ITwainEvents, IDisposable
     {
         private readonly ScanningContext _scanningContext;
         private readonly IScanEvents _scanEvents;
         private readonly Action<IMemoryImage> _callback;
         private TwainImageData? _currentImageData;
-        private MemoryStream? _currentImageBuffer;
+        private IMemoryImage? _currentMemoryImage;
         private long _transferredPixels;
         private long _totalPixels;
 
@@ -111,7 +112,8 @@ internal class TwainScanDriver : IScanDriver
         public void PageStart(TwainPageStart pageStart)
         {
             _currentImageData = pageStart.ImageData;
-            _currentImageBuffer = new MemoryStream();
+            _currentMemoryImage?.Dispose();
+            _currentMemoryImage = null;
             _transferredPixels = 0;
             _totalPixels = _currentImageData == null ? 0 : _currentImageData.Width * (long) _currentImageData.Height;
             _scanEvents.PageStart();
@@ -125,23 +127,36 @@ internal class TwainScanDriver : IScanDriver
 
         public void MemoryBufferTransferred(TwainMemoryBuffer memoryBuffer)
         {
-            if (_currentImageData == null || _currentImageBuffer == null)
+            if (_currentImageData == null)
             {
                 throw new InvalidOperationException();
             }
+
+            // TODO: Verify samples etc.
+            // TODO: Also support grayscale
+            var pixelFormat = _currentImageData.BitsPerPixel == 1 ? ImagePixelFormat.BW1 :
+                _currentImageData.BitsPerPixel == 24 ? ImagePixelFormat.RGB24 :
+                throw new InvalidOperationException($"Unsupported bits per pixel: {_currentImageData.BitsPerPixel}");
+            _currentMemoryImage ??= _scanningContext.ImageContext.Create(
+                _currentImageData.Width, _currentImageData.Height, pixelFormat);
+
             _transferredPixels += memoryBuffer.Columns * (long) memoryBuffer.Rows;
             _scanEvents.PageProgress(_transferredPixels / (double) _totalPixels);
-            // TODO: Use Span on netcore?
-            var buffer = memoryBuffer.Buffer.ToByteArray();
-            // TODO: This doesn't handle tiles
-            _currentImageBuffer.Write(buffer, 0, buffer.Length);
+
+            var bufferReader = new TwainMemoryBufferReader();
+            bufferReader.ReadBuffer(memoryBuffer, pixelFormat, _currentMemoryImage);
+
             if (_transferredPixels == _totalPixels)
             {
                 // TODO: Throw an error if there's a pixel mismatch, i.e. we go to the next page / finish with too few, or have too many
-                var bufferReader = new TwainMemoryBufferReader(_scanningContext);
-                var image = bufferReader.ReadBuffer(_currentImageBuffer, _currentImageData);
-                _callback(image);
+                _callback(_currentMemoryImage);
+                _currentMemoryImage = null;
             }
+        }
+
+        public void Dispose()
+        {
+            _currentMemoryImage?.Dispose();
         }
     }
 }
