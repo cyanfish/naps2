@@ -7,17 +7,21 @@ using NAPS2.Remoting.Worker;
 using NAPS2.Scan;
 using NAPS2.Scan.Exceptions;
 using NAPS2.Scan.Internal;
+using NAPS2.Scan.Internal.Twain;
 using Xunit;
 
 namespace NAPS2.Sdk.Tests.Worker;
 
 public class WorkerChannelTests : ContextualTexts
 {
-    private Channel Start(IRemoteScanController remoteScanController = null, ThumbnailRenderer thumbnailRenderer = null, IMapiWrapper mapiWrapper = null)
+    private Channel Start(IRemoteScanController remoteScanController = null, ThumbnailRenderer thumbnailRenderer = null,
+        IMapiWrapper mapiWrapper = null, ITwainController twainController = null)
     {
         string pipeName = $"WorkerNamedPipeTests/{Guid.NewGuid()}";
         NamedPipeServer server = new NamedPipeServer(pipeName);
-        WorkerService.BindService(server.ServiceBinder, new WorkerServiceImpl(ScanningContext, remoteScanController, thumbnailRenderer, mapiWrapper));
+        WorkerService.BindService(server.ServiceBinder,
+            new WorkerServiceImpl(ScanningContext, remoteScanController, thumbnailRenderer, mapiWrapper,
+                twainController));
         server.Start();
         var client = new WorkerServiceAdapter(new NamedPipeChannel(".", pipeName));
         return new Channel
@@ -25,7 +29,6 @@ public class WorkerChannelTests : ContextualTexts
             Server = server,
             Client = client
         };
-
     }
 
     // TODO: Move this to a client/server test
@@ -99,7 +102,7 @@ public class WorkerChannelTests : ContextualTexts
         using var channel = Start(remoteScanController);
         var receivedImages = new List<ProcessedImage>();
         await channel.Client.Scan(ScanningContext, new ScanOptions(),
-            CancellationToken.None, new ScanEvents(() => { }, _ => { }), 
+            CancellationToken.None, new ScanEvents(() => { }, _ => { }),
             (img, path) => { receivedImages.Add(img); });
 
         Assert.Equal(2, receivedImages.Count);
@@ -122,10 +125,38 @@ public class WorkerChannelTests : ContextualTexts
             ScanningContext,
             new ScanOptions(),
             CancellationToken.None,
-            new ScanEvents(() => { }, _ => { }), 
+            new ScanEvents(() => { }, _ => { }),
             (img, path) => { }));
         Assert.Contains(nameof(MockRemoteScanController), ex.StackTrace);
         Assert.Contains("Test error", ex.Message);
+    }
+
+    [Fact]
+    public async Task TwainScan()
+    {
+        var twainEvents = new Mock<ITwainEvents>();
+        var twainController = new Mock<ITwainController>();
+
+        twainController.Setup(x =>
+            x.StartScan(It.IsAny<ScanOptions>(), It.IsAny<TwainEvents>(), It.IsAny<CancellationToken>())).Returns(
+            new InvocationFunc(ctx =>
+            {
+                var serverTwainEvents = (ITwainEvents) ctx.Arguments[1];
+                serverTwainEvents.PageStart(new TwainPageStart());
+                serverTwainEvents.MemoryBufferTransferred(new TwainMemoryBuffer());
+                serverTwainEvents.PageStart(new TwainPageStart());
+                serverTwainEvents.NativeImageTransferred(new TwainNativeImage());
+                return Task.CompletedTask;
+            }));
+
+        using var channel = Start(twainController: twainController.Object);
+        await channel.Client.TwainScan(new ScanOptions(), CancellationToken.None, twainEvents.Object);
+        
+        twainEvents.Verify(x => x.PageStart(It.IsAny<TwainPageStart>()));
+        twainEvents.Verify(x => x.MemoryBufferTransferred(It.IsAny<TwainMemoryBuffer>()));
+        twainEvents.Verify(x => x.PageStart(It.IsAny<TwainPageStart>()));
+        twainEvents.Verify(x => x.NativeImageTransferred(It.IsAny<TwainNativeImage>()));
+        twainEvents.VerifyNoOtherCalls();
     }
 
     private class MockRemoteScanController : IRemoteScanController
@@ -136,7 +167,8 @@ public class WorkerChannelTests : ContextualTexts
 
         public Task<List<ScanDevice>> GetDeviceList(ScanOptions options) => throw new NotSupportedException();
 
-        public Task Scan(ScanOptions options, CancellationToken cancelToken, IScanEvents scanEvents, Action<ProcessedImage, PostProcessingContext> callback)
+        public Task Scan(ScanOptions options, CancellationToken cancelToken, IScanEvents scanEvents,
+            Action<ProcessedImage, PostProcessingContext> callback)
         {
             return Task.Run(() =>
             {
@@ -155,7 +187,7 @@ public class WorkerChannelTests : ContextualTexts
 
     private class Channel : IDisposable
     {
-        public NamedPipeServer  Server { get; set; }
+        public NamedPipeServer Server { get; set; }
 
         public WorkerServiceAdapter Client { get; set; }
 

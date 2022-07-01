@@ -19,25 +19,27 @@ public class WorkerServiceImpl : WorkerService.WorkerServiceBase
     private readonly IRemoteScanController _remoteScanController;
     private readonly ThumbnailRenderer _thumbnailRenderer;
     private readonly IMapiWrapper _mapiWrapper;
+    private readonly ITwainController _twainController;
 
     private readonly AutoResetEvent _ongoingCallFinished = new(false);
     private int _ongoingCallCount;
 
     public WorkerServiceImpl(ScanningContext scanningContext, ThumbnailRenderer thumbnailRenderer,
-        IMapiWrapper mapiWrapper)
+        IMapiWrapper mapiWrapper, ITwainController twainController)
         : this(scanningContext, new RemoteScanController(scanningContext),
-            thumbnailRenderer, mapiWrapper)
+            thumbnailRenderer, mapiWrapper, twainController)
     {
     }
 
     internal WorkerServiceImpl(ScanningContext scanningContext, IRemoteScanController remoteScanController,
         ThumbnailRenderer thumbnailRenderer,
-        IMapiWrapper mapiWrapper)
+        IMapiWrapper mapiWrapper, ITwainController twainController)
     {
         _scanningContext = scanningContext;
         _remoteScanController = remoteScanController;
         _thumbnailRenderer = thumbnailRenderer;
         _mapiWrapper = mapiWrapper;
+        _twainController = twainController;
         _scanningContext = scanningContext;
     }
 
@@ -256,9 +258,8 @@ public class WorkerServiceImpl : WorkerService.WorkerServiceBase
                     MemoryBuffer = memoryBuffer
                 })
             );
-            var twainController = new LocalTwainController();
             var options = request.OptionsXml.FromXml<ScanOptions>();
-            await twainController.StartScan(options, twainEvents, context.CancellationToken);
+            await _twainController.StartScan(options, twainEvents, context.CancellationToken);
         }
         catch (Exception e)
         {

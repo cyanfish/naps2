@@ -25,7 +25,8 @@ public static class WorkerEntryPoint
 #endif
 
             // Initialize Ninject (the DI framework)
-            var kernel = new StandardKernel(new CommonModule(), new WinFormsModule(), new ContextModule());
+            var kernel = new StandardKernel(new CommonModule(), new WinFormsModule(), new WorkerModule(),
+                new ContextModule());
 
             // Expect a single argument, the parent process id
             if (args.Length != 1 || !int.TryParse(args[0], out int procId) || !IsProcessRunning(procId))
@@ -45,7 +46,8 @@ public static class WorkerEntryPoint
             Invoker.Current = form;
 
             // Connect to the main NAPS2 process and listen for assigned work
-            var server = new NamedPipeServer(string.Format(WorkerFactory.PIPE_NAME_FORMAT, Process.GetCurrentProcess().Id));
+            var server =
+                new NamedPipeServer(string.Format(WorkerFactory.PIPE_NAME_FORMAT, Process.GetCurrentProcess().Id));
             var serviceImpl = kernel.Get<WorkerServiceImpl>();
             serviceImpl.OnStop += (_, _) => form.Close();
             WorkerService.BindService(server.ServiceBinder, serviceImpl);
