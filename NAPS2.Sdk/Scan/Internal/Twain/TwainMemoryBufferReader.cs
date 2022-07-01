@@ -18,7 +18,9 @@ public static class TwainMemoryBufferReader
             if (memoryBuffer.BytesPerRow < memoryBuffer.Columns * (imageData.BitsPerPixel / 8.0) ||
                 source.Length < memoryBuffer.BytesPerRow * memoryBuffer.Rows ||
                 memoryBuffer.XOffset < 0 ||
-                memoryBuffer.YOffset < 0)
+                memoryBuffer.YOffset < 0 ||
+                memoryBuffer.XOffset + memoryBuffer.Columns > imageData.Width ||
+                memoryBuffer.YOffset + memoryBuffer.Rows > imageData.Height)
             {
                 throw new ArgumentException(
                     $"Invalid buffer parameters: {memoryBuffer.BytesPerRow} {memoryBuffer.Columns} {memoryBuffer.Rows} {source.Length} {memoryBuffer.XOffset} {memoryBuffer.YOffset}");
@@ -30,6 +32,7 @@ public static class TwainMemoryBufferReader
             if (imageData.BitsPerPixel == 1)
             {
                 // Black & white
+                if (outputImage.PixelFormat != ImagePixelFormat.BW1) throw new ArgumentException();
                 if (imageData.PixelType != (int) PixelType.BlackWhite || imageData.SamplesPerPixel != 1 ||
                     imageData.BitsPerSample.Count < 1 || imageData.BitsPerSample[0] != 1)
                 {
@@ -45,7 +48,7 @@ public static class TwainMemoryBufferReader
                     {
                         for (int dx = 0; dx < (memoryBuffer.Columns + 7) / 8; dx++)
                         {
-                            int x = memoryBuffer.XOffset + dx;
+                            int x = memoryBuffer.XOffset / 8 + dx;
                             int y = memoryBuffer.YOffset + dy;
                             // Copy 8 bits at a time
                             *(dstPtr + y * dstBytesPerRow + x) = *(srcPtr + dy * srcBytesPerRow + dx);
@@ -56,6 +59,7 @@ public static class TwainMemoryBufferReader
             else if (imageData.BitsPerPixel == 8)
             {
                 // Grayscale
+                if (outputImage.PixelFormat != ImagePixelFormat.RGB24) throw new ArgumentException();
                 if (imageData.PixelType != (int) PixelType.Gray || imageData.SamplesPerPixel != 1 ||
                     imageData.BitsPerSample.Count < 1 || imageData.BitsPerSample[0] != 8)
                 {
@@ -83,6 +87,7 @@ public static class TwainMemoryBufferReader
             else if (imageData.BitsPerPixel == 24)
             {
                 // Color
+                if (outputImage.PixelFormat != ImagePixelFormat.RGB24) throw new ArgumentException();
                 if (imageData.PixelType != (int) PixelType.RGB || imageData.SamplesPerPixel != 3 ||
                     imageData.BitsPerSample.Count < 3 || imageData.BitsPerSample[0] != 8 ||
                     imageData.BitsPerSample[1] != 8 || imageData.BitsPerSample[2] != 8)
