@@ -50,7 +50,7 @@ public class GdiImage : IMemoryImage
         var bitmapData = Bitmap.LockBits(new Rectangle(0, 0, Bitmap.Width, Bitmap.Height), GetGdiLockMode(lockMode), Bitmap.PixelFormat);
         scan0 = bitmapData.Scan0;
         stride = Math.Abs(bitmapData.Stride);
-        return new GdiImageLockState(bitmapData);
+        return new GdiImageLockState(Bitmap, bitmapData);
     }
 
     private ImageLockMode GetGdiLockMode(LockMode lockMode)
@@ -64,11 +64,6 @@ public class GdiImage : IMemoryImage
             default:
                 return ImageLockMode.ReadWrite;
         }
-    }
-
-    public void Unlock(ImageLockState state)
-    {
-        Bitmap.UnlockBits(state.AsBitmapData());
     }
 
     public void Save(string path, ImageFileFormat imageFileFormat = ImageFileFormat.Unspecified)

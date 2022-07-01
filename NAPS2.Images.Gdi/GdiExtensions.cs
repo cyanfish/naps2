@@ -11,13 +11,6 @@ public static class GdiExtensions
         return gdiImage.Bitmap;
     }
 
-    public static BitmapData AsBitmapData(this ImageLockState lockState)
-    {
-        var gdiLockState = lockState as GdiImageLockState ??
-                           throw new ArgumentException("Expected a GdiImageLockState", nameof(lockState));
-        return gdiLockState.BitmapData;
-    }
-
     public static ImageFormat AsImageFormat(this ImageFileFormat imageFileFormat)
     {
         switch (imageFileFormat)

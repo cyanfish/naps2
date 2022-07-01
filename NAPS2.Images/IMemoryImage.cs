@@ -22,8 +22,6 @@ public interface IMemoryImage : IImageStorage
 
     ImageLockState Lock(LockMode lockMode, out IntPtr scan0, out int stride);
 
-    void Unlock(ImageLockState state);
-
     void Save(string path, ImageFileFormat imageFormat = ImageFileFormat.Unspecified);
 
     void Save(Stream stream, ImageFileFormat imageFormat);

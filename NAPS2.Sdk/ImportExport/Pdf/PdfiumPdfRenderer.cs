@@ -40,26 +40,19 @@ public class PdfiumPdfRenderer : IPdfRenderer
 
                         var bitmap = _imageContext.Create(widthInPx, heightInPx, ImagePixelFormat.RGB24);
                         bitmap.SetResolution(dpi, dpi);
-                        var bitmapData = bitmap.Lock(LockMode.ReadWrite, out var scan0, out var stride);
+                        using var bitmapData = bitmap.Lock(LockMode.ReadWrite, out var scan0, out var stride);
+                        var pdfiumBitmap = nativeLib.FPDFBitmap_CreateEx(widthInPx, heightInPx,
+                            PdfiumNativeLibrary.FPDFBitmap_BGR, scan0, stride);
                         try
                         {
-                            var pdfiumBitmap = nativeLib.FPDFBitmap_CreateEx(widthInPx, heightInPx,
-                                PdfiumNativeLibrary.FPDFBitmap_BGR, scan0, stride);
-                            try
-                            {
-                                nativeLib.FPDFBitmap_FillRect(pdfiumBitmap, 0, 0, widthInPx, heightInPx, COLOR_WHITE);
-                                nativeLib.FPDF_RenderPageBitmap(pdfiumBitmap, page, 0, 0, widthInPx, heightInPx, 0,
-                                    RENDER_FLAGS);
-                                yield return bitmap;
-                            }
-                            finally
-                            {
-                                nativeLib.FPDFBitmap_Destroy(pdfiumBitmap);
-                            }
+                            nativeLib.FPDFBitmap_FillRect(pdfiumBitmap, 0, 0, widthInPx, heightInPx, COLOR_WHITE);
+                            nativeLib.FPDF_RenderPageBitmap(pdfiumBitmap, page, 0, 0, widthInPx, heightInPx, 0,
+                                RENDER_FLAGS);
+                            yield return bitmap;
                         }
                         finally
                         {
-                            bitmap.Unlock(bitmapData);
+                            nativeLib.FPDFBitmap_Destroy(pdfiumBitmap);
                         }
                     }
                     finally

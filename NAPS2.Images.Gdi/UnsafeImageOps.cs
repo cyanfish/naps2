@@ -5,6 +5,7 @@ using System.Drawing.Imaging;
 namespace NAPS2.Images.Gdi;
 
 // TODO: Make internal?
+// TODO: Use IMemoryImage where possible
 public static class UnsafeImageOps
 {
     public static unsafe void ChangeBrightness(Bitmap bitmap, float brightnessAdjusted)
@@ -374,7 +375,7 @@ public static class UnsafeImageOps
         bool bitPerPixel = bitmap.PixelFormat == ImagePixelFormat.BW1;
         int bytesPerPixel = bitPerPixel ? 0 : GetBytesPerPixel(bitmap);
 
-        var bitmapData = bitmap.Lock(LockMode.ReadOnly, out var scan0, out var stride);
+        using var bitmapData = bitmap.Lock(LockMode.ReadOnly, out var scan0, out var stride);
         byte* data = (byte*)scan0;
         int h = bitmap.Height;
         int w = bitmap.Width;
@@ -428,8 +429,6 @@ public static class UnsafeImageOps
                 }
             });
         }
-
-        bitmap.Unlock(bitmapData);
 
         return bitArrays;
     }

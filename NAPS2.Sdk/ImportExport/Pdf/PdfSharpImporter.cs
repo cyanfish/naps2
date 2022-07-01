@@ -263,49 +263,35 @@ public class PdfSharpImporter : IPdfImporter
 
     private static void RgbToBitmapUnmanaged(IMemoryImage image, byte[] rgbBuffer)
     {
-        var data = image.Lock(LockMode.WriteOnly, out var scan0, out var stride);
+        using var data = image.Lock(LockMode.WriteOnly, out var scan0, out var stride);
         int height = image.Height;
         int width = image.Width;
-        try
+        for (int y = 0; y < height; y++)
         {
-            for (int y = 0; y < height; y++)
+            for (int x = 0; x < width; x++)
             {
-                for (int x = 0; x < width; x++)
-                {
-                    IntPtr pixelData = scan0 + y * stride + x * 3;
-                    int bufferIndex = (y * width + x) * 3;
-                    Marshal.WriteByte(pixelData, rgbBuffer[bufferIndex + 2]);
-                    Marshal.WriteByte(pixelData + 1, rgbBuffer[bufferIndex + 1]);
-                    Marshal.WriteByte(pixelData + 2, rgbBuffer[bufferIndex]);
-                }
+                IntPtr pixelData = scan0 + y * stride + x * 3;
+                int bufferIndex = (y * width + x) * 3;
+                Marshal.WriteByte(pixelData, rgbBuffer[bufferIndex + 2]);
+                Marshal.WriteByte(pixelData + 1, rgbBuffer[bufferIndex + 1]);
+                Marshal.WriteByte(pixelData + 2, rgbBuffer[bufferIndex]);
             }
-        }
-        finally
-        {
-            image.Unlock(data);
         }
     }
 
     private static void BlackAndWhiteToBitmapUnmanaged(IMemoryImage image, byte[] bwBuffer)
     {
-        var data = image.Lock(LockMode.WriteOnly, out var scan0, out var stride);
+        using var data = image.Lock(LockMode.WriteOnly, out var scan0, out var stride);
         int height = image.Height;
         int width = image.Width;
-        try
+        int bytesPerRow = (width - 1) / 8 + 1;
+        for (int y = 0; y < height; y++)
         {
-            int bytesPerRow = (width - 1) / 8 + 1;
-            for (int y = 0; y < height; y++)
+            for (int x = 0; x < bytesPerRow; x++)
             {
-                for (int x = 0; x < bytesPerRow; x++)
-                {
-                    IntPtr pixelData = scan0 + y * stride + x;
-                    Marshal.WriteByte(pixelData, bwBuffer[y * bytesPerRow + x]);
-                }
+                IntPtr pixelData = scan0 + y * stride + x;
+                Marshal.WriteByte(pixelData, bwBuffer[y * bytesPerRow + x]);
             }
-        }
-        finally
-        {
-            image.Unlock(data);
         }
     }
 

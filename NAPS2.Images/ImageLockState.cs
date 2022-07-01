@@ -1,3 +1,6 @@
 namespace NAPS2.Images;
 
-public record ImageLockState;
+public abstract class ImageLockState : IDisposable
+{
+    public abstract void Dispose();
+}
