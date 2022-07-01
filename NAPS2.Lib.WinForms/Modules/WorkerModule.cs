@@ -7,6 +7,6 @@ public class WorkerModule : NinjectModule
 {
     public override void Load()
     {
-        Bind<ITwainController>().To<LocalTwainController>();
+        Bind<ITwainSessionController>().To<LocalTwainSessionController>();
     }
 }

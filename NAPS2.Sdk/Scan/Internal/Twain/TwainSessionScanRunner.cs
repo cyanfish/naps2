@@ -7,7 +7,12 @@ using NTwain.Data;
 
 namespace NAPS2.Scan.Internal.Twain;
 
-internal class TwainSessionRunner
+/// <summary>
+/// Interfaces with the native NTwain TwainSession to perform an actual scan. The raw scanned data is propagated via the
+/// ITwainEvents interface. This logic involves quite a bit of complicated state management related to the Twain spec.
+/// https://twain.org/wp-content/uploads/2015/05/TWAIN-2.3-Specification.pdf
+/// </summary>
+internal class TwainSessionScanRunner
 {
     private readonly TwainDsm _dsm;
     private readonly ScanOptions _options;
@@ -17,7 +22,7 @@ internal class TwainSessionRunner
     private readonly TaskCompletionSource<bool> _tcs;
     private DataSource? _source;
 
-    public TwainSessionRunner(TwainDsm dsm, ScanOptions options, CancellationToken cancelToken,
+    public TwainSessionScanRunner(TwainDsm dsm, ScanOptions options, CancellationToken cancelToken,
         ITwainEvents twainEvents)
     {
         _dsm = dsm;
@@ -48,29 +53,29 @@ internal class TwainSessionRunner
             Debug.WriteLine("NAPS2.TW - Opening session");
             var rc = _options.DialogParent != IntPtr.Zero
                 ? _session.Open(new WindowsFormsMessageLoopHook(_options.DialogParent))
-                : _session.Open(); 
+                : _session.Open();
             if (rc != ReturnCode.Success)
             {
                 throw new DeviceException($"TWAIN session open error: {rc}");
             }
-            
+
             Debug.WriteLine("NAPS2.TW - Finding source");
             _source = _session.FirstOrDefault(x => x.Name == _options.Device.ID);
             if (_source == null)
             {
                 throw new DeviceNotFoundException();
             }
-            
+
             Debug.WriteLine("NAPS2.TW - Opening source");
             rc = _source.Open();
             if (rc != ReturnCode.Success)
             {
                 throw GetExceptionForStatus(_session.GetStatus());
             }
-            
+
             Debug.WriteLine("NAPS2.TW - Configuring source");
             ConfigureSource(_source);
-            
+
             Debug.WriteLine("NAPS2.TW - Enabling source");
             var ui = _options.UseNativeUI ? SourceEnableMode.ShowUI : SourceEnableMode.NoUI;
             rc = _source.Enable(ui, true, _options.DialogParent);
@@ -95,7 +100,7 @@ internal class TwainSessionRunner
             // If we're in state 6 or 7, this will abort the ongoing transfer via ForceStepDown.
             // If we're in state 4 or lower, then we're not transferring and this will just clean up the source/session.  
             UnloadTwain();
-            _tcs.TrySetResult(false);            
+            _tcs.TrySetResult(false);
         }
         else
         {

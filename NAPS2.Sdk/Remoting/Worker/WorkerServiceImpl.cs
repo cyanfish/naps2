@@ -19,27 +19,27 @@ public class WorkerServiceImpl : WorkerService.WorkerServiceBase
     private readonly IRemoteScanController _remoteScanController;
     private readonly ThumbnailRenderer _thumbnailRenderer;
     private readonly IMapiWrapper _mapiWrapper;
-    private readonly ITwainController _twainController;
+    private readonly ITwainSessionController _twainSessionController;
 
     private readonly AutoResetEvent _ongoingCallFinished = new(false);
     private int _ongoingCallCount;
 
     public WorkerServiceImpl(ScanningContext scanningContext, ThumbnailRenderer thumbnailRenderer,
-        IMapiWrapper mapiWrapper, ITwainController twainController)
+        IMapiWrapper mapiWrapper, ITwainSessionController twainSessionController)
         : this(scanningContext, new RemoteScanController(scanningContext),
-            thumbnailRenderer, mapiWrapper, twainController)
+            thumbnailRenderer, mapiWrapper, twainSessionController)
     {
     }
 
     internal WorkerServiceImpl(ScanningContext scanningContext, IRemoteScanController remoteScanController,
         ThumbnailRenderer thumbnailRenderer,
-        IMapiWrapper mapiWrapper, ITwainController twainController)
+        IMapiWrapper mapiWrapper, ITwainSessionController twainSessionController)
     {
         _scanningContext = scanningContext;
         _remoteScanController = remoteScanController;
         _thumbnailRenderer = thumbnailRenderer;
         _mapiWrapper = mapiWrapper;
-        _twainController = twainController;
+        _twainSessionController = twainSessionController;
         _scanningContext = scanningContext;
     }
 
@@ -259,7 +259,7 @@ public class WorkerServiceImpl : WorkerService.WorkerServiceBase
                 })
             );
             var options = request.OptionsXml.FromXml<ScanOptions>();
-            await _twainController.StartScan(options, twainEvents, context.CancellationToken);
+            await _twainSessionController.StartScan(options, twainEvents, context.CancellationToken);
         }
         catch (Exception e)
         {

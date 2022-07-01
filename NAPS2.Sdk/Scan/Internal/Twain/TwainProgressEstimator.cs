@@ -1,5 +1,15 @@
 namespace NAPS2.Scan.Internal.Twain;
 
+/// <summary>
+/// As Twain doesn't provide real progress data, this class maintains a static cache of past scan timing to estimate
+/// how long future page scans will take in order to give a useful progress bar.
+///
+/// For Twain memory buffer scans we do get some progress in the form of the number of pixels transferred, and that is
+/// incorporated into the calculations.
+///
+/// The mathematical model used is that there is some fixed overhead time at the start of the scan, then a fixed bitrate
+/// to transfer all the pixels.  
+/// </summary>
 internal class TwainProgressEstimator
 {
     private readonly IScanEvents _scanEvents;
