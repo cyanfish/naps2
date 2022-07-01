@@ -2,7 +2,7 @@
 
 namespace NAPS2.Scan;
 
-public class PageSize
+public record PageSize
 {
     public static PageSize Letter = new PageSize("8.5", "11", PageSizeUnit.Inch);
 
