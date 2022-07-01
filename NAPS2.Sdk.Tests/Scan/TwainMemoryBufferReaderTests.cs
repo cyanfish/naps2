@@ -33,6 +33,7 @@ public class TwainMemoryBufferReaderTests
         };
         var imageData = CreateColorImageData(2, 2);
         var image = Create24BitImage(2, 2);
+
         TwainMemoryBufferReader.CopyBufferToImage(buffer, imageData, image);
 
         ImageAsserts.PixelColors(image, new()
@@ -60,6 +61,7 @@ public class TwainMemoryBufferReaderTests
         };
         var imageData = CreateGrayscaleImageData(2, 2);
         var image = Create24BitImage(2, 2);
+
         TwainMemoryBufferReader.CopyBufferToImage(buffer, imageData, image);
 
         ImageAsserts.PixelColors(image, new()
@@ -87,6 +89,7 @@ public class TwainMemoryBufferReaderTests
         };
         var imageData = CreateBlackWhiteImageData(2, 2);
         var image = Create1BitImage(2, 2);
+
         TwainMemoryBufferReader.CopyBufferToImage(buffer, imageData, image);
 
         ImageAsserts.PixelColors(image, new()

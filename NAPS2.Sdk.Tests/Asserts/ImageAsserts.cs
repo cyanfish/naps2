@@ -1,4 +1,8 @@
-﻿using Xunit;
+﻿using System.Collections;
+using System.Drawing;
+using NAPS2.Images.Gdi;
+using Xunit;
+using Xunit.Sdk;
 
 namespace NAPS2.Sdk.Tests.Asserts;
 
@@ -75,6 +79,47 @@ public static class ImageAsserts
         {
             first.Unlock(lock1);
             second.Unlock(lock2);
+        }
+    }
+
+    public static void PixelColors(IMemoryImage image, PixelColorData colorData)
+    {
+        var bitmap = ((GdiImage) image).Bitmap;
+        foreach (var data in colorData)
+        {
+            var (x, y) = data.Item1;
+            var (r, g, b) = data.Item2;
+            var color = bitmap.GetPixel(x, y);
+            var expected = Color.FromArgb(r, g, b);
+            if (color != expected)
+            {
+                throw new AssertActualExpectedException(expected, color, $"Mismatched color at ({x}, {y})");
+            }
+        }
+    }
+
+    public class PixelColorData : IEnumerable<((int x, int y), (int r, int g, int b))>
+    {
+        private readonly List<((int x, int y), (int r, int g, int b))> _colors = new();
+
+        public void Add((int x, int y) pos, (int r, int g, int b) color)
+        {
+            _colors.Add((pos, color));
+        }
+
+        public void Add((int x, int y) pos, Color color)
+        {
+            _colors.Add((pos, (color.R, color.G, color.B)));
+        }
+
+        public IEnumerator<((int x, int y), (int r, int g, int b))> GetEnumerator()
+        {
+            return _colors.GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
         }
     }
 }
