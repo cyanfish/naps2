@@ -40,7 +40,7 @@ public static class TwainMemoryBufferReader
                 {
                     for (int dy = 0; dy < memoryBuffer.Rows; dy++)
                     {
-                        for (int dx = 0; dx < memoryBuffer.Columns / 8; dx++)
+                        for (int dx = 0; dx < (memoryBuffer.Columns + 7) / 8; dx++)
                         {
                             int x = memoryBuffer.XOffset + dx;
                             int y = memoryBuffer.YOffset + dy;
