@@ -7,6 +7,7 @@ public class GdiImageLockState : ImageLockState
 {
     private readonly Bitmap _bitmap;
     private readonly BitmapData _bitmapData;
+    private bool _disposed;
 
     public GdiImageLockState(Bitmap bitmap, BitmapData bitmapData)
     {
@@ -16,6 +17,11 @@ public class GdiImageLockState : ImageLockState
 
     public override void Dispose()
     {
+        lock (this)
+        {
+            if (_disposed) return;
+            _disposed = true;
+        }
         _bitmap.UnlockBits(_bitmapData);
     }
 }
