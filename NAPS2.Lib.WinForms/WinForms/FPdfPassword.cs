@@ -1,37 +1,36 @@
 ﻿using System.Windows.Forms;
 
-namespace NAPS2.WinForms
+namespace NAPS2.WinForms;
+
+public partial class FPdfPassword : FormBase
 {
-    public partial class FPdfPassword : FormBase
+    public FPdfPassword()
     {
-        public FPdfPassword()
-        {
-            RestoreFormState = false;
-            InitializeComponent();
-            AcceptButton = btnOK;
-            CancelButton = btnCancel;
-        }
+        RestoreFormState = false;
+        InitializeComponent();
+        AcceptButton = btnOK;
+        CancelButton = btnCancel;
+    }
 
-        public string FileName { get; set; }
+    public string FileName { get; set; }
 
-        public string Password { get; private set; }
+    public string Password { get; private set; }
 
-        protected override void OnLoad(object sender, EventArgs eventArgs)
-        {
-            lblPrompt.Text = string.Format(lblPrompt.Text, FileName);
-        }
+    protected override void OnLoad(object sender, EventArgs eventArgs)
+    {
+        lblPrompt.Text = string.Format(lblPrompt.Text, FileName);
+    }
 
-        private void btnOK_Click(object sender, EventArgs e)
-        {
-            Password = txtPassword.Text;
-            DialogResult = DialogResult.OK;
-            Close();
-        }
+    private void btnOK_Click(object sender, EventArgs e)
+    {
+        Password = txtPassword.Text;
+        DialogResult = DialogResult.OK;
+        Close();
+    }
 
-        private void btnCancel_Click(object sender, EventArgs e)
-        {
-            DialogResult = DialogResult.Cancel;
-            Close();
-        }
+    private void btnCancel_Click(object sender, EventArgs e)
+    {
+        DialogResult = DialogResult.Cancel;
+        Close();
     }
 }

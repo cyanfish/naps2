@@ -1,19 +1,18 @@
 using System.ComponentModel;
 
-namespace NAPS2.WinForms
+namespace NAPS2.WinForms;
+
+public partial class ILProfileIcons : Component
 {
-    public partial class ILProfileIcons : Component
+    public ILProfileIcons()
     {
-        public ILProfileIcons()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
+    }
 
-        public ILProfileIcons(IContainer container)
-        {
-            container.Add(this);
+    public ILProfileIcons(IContainer container)
+    {
+        container.Add(this);
 
-            InitializeComponent();
-        }
+        InitializeComponent();
     }
 }
