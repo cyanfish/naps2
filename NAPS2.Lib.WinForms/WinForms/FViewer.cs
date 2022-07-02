@@ -36,24 +36,57 @@ namespace NAPS2.WinForms
         private ToolStripButton _tsSharpen;
         private readonly KeyboardShortcutManager _ksm;
         private readonly OperationProgress _operationProgress;
-        private readonly ImageContext _imageContext;
+        private readonly GdiImageContext _imageContext;
+        private readonly UiImageList _imageList;
+        private readonly INotificationManager _notificationManager;
 
-        public FViewer(IOperationFactory operationFactory, IWinFormsExportHelper exportHelper, KeyboardShortcutManager ksm, OperationProgress operationProgress, ImageContext imageContext)
+        private UiImage? _currentImage;
+
+        public FViewer(IOperationFactory operationFactory, IWinFormsExportHelper exportHelper,
+            KeyboardShortcutManager ksm, OperationProgress operationProgress, GdiImageContext imageContext,
+            UiImageList imageList, INotificationManager notificationManager)
         {
             _operationFactory = operationFactory;
             _exportHelper = exportHelper;
             _ksm = ksm;
             _operationProgress = operationProgress;
             _imageContext = imageContext;
+            _imageList = imageList;
+            _notificationManager = notificationManager;
             InitializeComponent();
         }
 
-        public UiImageList ImageList { get; set; }
-        public int ImageIndex { get; set; }
-        public Action DeleteCallback { get; set; }
-        public Action<int> SelectCallback { get; set; }
+        public UiImage CurrentImage
+        {
+            get => _currentImage ?? throw new InvalidOperationException();
+            set
+            {
+                if (_currentImage != null)
+                {
+                    _currentImage.ThumbnailInvalidated -= ImageThumbnailInvalidated;
+                }
+                _currentImage = value;
+                _currentImage.ThumbnailInvalidated += ImageThumbnailInvalidated;
+            }
+        }
 
-        private UiImage CurrentImage => ImageList.Images[ImageIndex];
+        private void ImageThumbnailInvalidated(object? sender, EventArgs e)
+        {
+            SafeInvokeAsync(() => UpdateImage().AssertNoAwait());
+        }
+
+        private int ImageIndex
+        {
+            get
+            {
+                var index = _imageList.Images.IndexOf(CurrentImage);
+                if (index == -1)
+                {
+                    index = 0;
+                }
+                return index;
+            }
+        }
 
         protected override async void OnLoad(object sender, EventArgs e)
         {
@@ -74,20 +107,23 @@ namespace NAPS2.WinForms
 
         private async Task GoTo(int index)
         {
-            if (index == ImageIndex || index < 0 || index >= ImageList.Images.Count)
+            lock (_imageList)
             {
-                return;
+                if (index == ImageIndex || index < 0 || index >= _imageList.Images.Count)
+                {
+                    return;
+                }
+                CurrentImage = _imageList.Images[index];
+                _imageList.UpdateSelection(ListSelection.Of(CurrentImage));
             }
-            ImageIndex = index;
             UpdatePage();
-            SelectCallback(index);
             await UpdateImage();
         }
 
         private void UpdatePage()
         {
             _tbPageCurrent.Text = (ImageIndex + 1).ToString(CultureInfo.CurrentCulture);
-            _lblPageTotal.Text = string.Format(MiscResources.OfN, ImageList.Images.Count);
+            _lblPageTotal.Text = string.Format(MiscResources.OfN, _imageList.Images.Count);
             if (!PlatformCompat.Runtime.IsToolbarTextboxSupported)
             {
                 _lblPageTotal.Text = _tbPageCurrent.Text + ' ' + _lblPageTotal.Text;
@@ -99,8 +135,8 @@ namespace NAPS2.WinForms
             _tiffViewer1.Image?.Dispose();
             _tiffViewer1.Image = null;
             using var imageToRender = CurrentImage.GetClonedImage();
-            // TODO: Should we avoid this cast somehow? Inject the GDI context directly? (Ctrl+Shift+F similar too)
-            _tiffViewer1.Image = ((GdiImageContext)_imageContext).RenderToBitmap(imageToRender);
+            var rendered = _imageContext.RenderToBitmap(imageToRender);
+            _tiffViewer1.Image = rendered;
         }
 
         protected override void Dispose(bool disposing)
@@ -115,13 +151,15 @@ namespace NAPS2.WinForms
         }
 
         #region Windows Form Designer generated code
+
         /// <summary>
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FViewer));
+            System.ComponentModel.ComponentResourceManager resources =
+                new System.ComponentModel.ComponentResourceManager(typeof(FViewer));
             this._toolStripContainer1 = new System.Windows.Forms.ToolStripContainer();
             this._tiffViewer1 = new NAPS2.WinForms.TiffViewerCtl();
             this._toolStrip1 = new System.Windows.Forms.ToolStrip();
@@ -176,23 +214,25 @@ namespace NAPS2.WinForms
             // toolStrip1
             // 
             resources.ApplyResources(this._toolStrip1, "_toolStrip1");
-            this._toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this._tbPageCurrent,
-            this._lblPageTotal,
-            this._tsPrev,
-            this._tsNext,
-            this._toolStripSeparator1,
-            this._tsdRotate,
-            this._tsCrop,
-            this._tsBrightnessContrast,
-            this._tsHueSaturation,
-            this._tsBlackWhite,
-            this._tsSharpen,
-            this._toolStripSeparator3,
-            this._tsSavePdf,
-            this._tsSaveImage,
-            this._toolStripSeparator2,
-            this._tsDelete});
+            this._toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[]
+            {
+                this._tbPageCurrent,
+                this._lblPageTotal,
+                this._tsPrev,
+                this._tsNext,
+                this._toolStripSeparator1,
+                this._tsdRotate,
+                this._tsCrop,
+                this._tsBrightnessContrast,
+                this._tsHueSaturation,
+                this._tsBlackWhite,
+                this._tsSharpen,
+                this._toolStripSeparator3,
+                this._tsSavePdf,
+                this._tsSaveImage,
+                this._toolStripSeparator2,
+                this._tsDelete
+            });
             this._toolStrip1.Name = "_toolStrip1";
             // 
             // tbPageCurrent
@@ -231,12 +271,14 @@ namespace NAPS2.WinForms
             // tsdRotate
             // 
             this._tsdRotate.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this._tsdRotate.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this._tsRotateLeft,
-            this._tsRotateRight,
-            this._tsFlip,
-            this._tsDeskew,
-            this._tsCustomRotation});
+            this._tsdRotate.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[]
+            {
+                this._tsRotateLeft,
+                this._tsRotateRight,
+                this._tsFlip,
+                this._tsDeskew,
+                this._tsCustomRotation
+            });
             this._tsdRotate.Image = global::NAPS2.Icons.arrow_rotate_anticlockwise_small;
             resources.ApplyResources(this._tsdRotate, "_tsdRotate");
             this._tsdRotate.Name = "_tsdRotate";
@@ -363,8 +405,8 @@ namespace NAPS2.WinForms
             this._toolStrip1.ResumeLayout(false);
             this._toolStrip1.PerformLayout();
             this.ResumeLayout(false);
-
         }
+
         #endregion
 
         private async void tbPageCurrent_TextChanged(object sender, EventArgs e)
@@ -387,20 +429,20 @@ namespace NAPS2.WinForms
 
         private async void tsRotateLeft_Click(object sender, EventArgs e)
         {
-            await ImageList.MutateAsync(new ImageListMutation.RotateFlip(_imageContext, 270), ListSelection.Of(CurrentImage));
-            await UpdateImage();
+            await _imageList.MutateAsync(new ImageListMutation.RotateFlip(_imageContext, 270),
+                ListSelection.Of(CurrentImage));
         }
 
         private async void tsRotateRight_Click(object sender, EventArgs e)
         {
-            await ImageList.MutateAsync(new ImageListMutation.RotateFlip(_imageContext, 90), ListSelection.Of(CurrentImage));
-            await UpdateImage();
+            await _imageList.MutateAsync(new ImageListMutation.RotateFlip(_imageContext, 90),
+                ListSelection.Of(CurrentImage));
         }
 
         private async void tsFlip_Click(object sender, EventArgs e)
         {
-            await ImageList.MutateAsync(new ImageListMutation.RotateFlip(_imageContext, 180), ListSelection.Of(CurrentImage));
-            await UpdateImage();
+            await _imageList.MutateAsync(new ImageListMutation.RotateFlip(_imageContext, 180),
+                ListSelection.Of(CurrentImage));
         }
 
         private async void tsDeskew_Click(object sender, EventArgs e)
@@ -409,7 +451,6 @@ namespace NAPS2.WinForms
             if (op.Start(new[] { CurrentImage }, new DeskewParams { ThumbnailSize = Config.Get(c => c.ThumbnailSize) }))
             {
                 _operationProgress.ShowProgress(op);
-                await UpdateImage();
             }
         }
 
@@ -417,8 +458,6 @@ namespace NAPS2.WinForms
         {
             var form = FormFactory.Create<FRotate>();
             form.Image = CurrentImage;
-            form.ShowDialog();
-            await UpdateImage();
         }
 
         private async void tsCrop_Click(object sender, EventArgs e)
@@ -426,7 +465,6 @@ namespace NAPS2.WinForms
             var form = FormFactory.Create<FCrop>();
             form.Image = CurrentImage;
             form.ShowDialog();
-            await UpdateImage();
         }
 
         private async void tsBrightnessContrast_Click(object sender, EventArgs e)
@@ -434,7 +472,6 @@ namespace NAPS2.WinForms
             var form = FormFactory.Create<FBrightnessContrast>();
             form.Image = CurrentImage;
             form.ShowDialog();
-            await UpdateImage();
         }
 
         private async void tsHueSaturation_Click(object sender, EventArgs e)
@@ -442,7 +479,6 @@ namespace NAPS2.WinForms
             var form = FormFactory.Create<FHueSaturation>();
             form.Image = CurrentImage;
             form.ShowDialog();
-            await UpdateImage();
         }
 
         private async void tsBlackWhite_Click(object sender, EventArgs e)
@@ -450,7 +486,6 @@ namespace NAPS2.WinForms
             var form = FormFactory.Create<FBlackWhite>();
             form.Image = CurrentImage;
             form.ShowDialog();
-            await UpdateImage();
         }
 
         private async void tsSharpen_Click(object sender, EventArgs e)
@@ -458,12 +493,12 @@ namespace NAPS2.WinForms
             var form = FormFactory.Create<FSharpen>();
             form.Image = CurrentImage;
             form.ShowDialog();
-            await UpdateImage();
         }
 
         private async void tsDelete_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show(string.Format(MiscResources.ConfirmDeleteItems, 1), MiscResources.Delete, MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
+            if (MessageBox.Show(string.Format(MiscResources.ConfirmDeleteItems, 1), MiscResources.Delete,
+                    MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
             {
                 await DeleteCurrentImage();
             }
@@ -471,38 +506,44 @@ namespace NAPS2.WinForms
 
         private async Task DeleteCurrentImage()
         {
+            // TODO: Are the file access issues still a thing?
             // Need to dispose the bitmap first to avoid file access issues
             _tiffViewer1.Image?.Dispose();
-            // Actually delete the image
-            CurrentImage.Dispose();
-            ImageList.Images.RemoveAt(ImageIndex);
-            // Update FDesktop in the background
-            DeleteCallback();
 
-            if (ImageList.Images.Any())
+            var lastIndex = ImageIndex;
+            await _imageList.MutateAsync(new ImageListMutation.DeleteSelected(),
+                ListSelection.Of(CurrentImage));
+
+            bool shouldClose = false;
+            lock (_imageList)
             {
-                // Update the GUI for the newly displayed image
-                if (ImageIndex >= ImageList.Images.Count)
+                if (_imageList.Images.Any())
                 {
-                    await GoTo(ImageList.Images.Count - 1);
+                    // Update the GUI for the newly displayed image
+                    var nextIndex = lastIndex >= _imageList.Images.Count ? _imageList.Images.Count - 1 : lastIndex;
+                    CurrentImage = _imageList.Images[nextIndex];
                 }
                 else
                 {
-                    await UpdateImage();
+                    shouldClose = true;
                 }
-                _lblPageTotal.Text = string.Format(MiscResources.OfN, ImageList.Images.Count);
             }
-            else
+            if (shouldClose)
             {
                 // No images left to display, so no point keeping the form open
                 Close();
+            }
+            else
+            {
+                UpdatePage();
+                await UpdateImage();
             }
         }
 
         private async void tsSavePDF_Click(object sender, EventArgs e)
         {
             using var imageToSave = CurrentImage.GetClonedImage();
-            if (await _exportHelper.SavePDF(new List<ProcessedImage> { imageToSave }, null))
+            if (await _exportHelper.SavePDF(new List<ProcessedImage> { imageToSave }, _notificationManager))
             {
                 if (Config.Get(c => c.DeleteAfterSaving))
                 {
@@ -514,7 +555,7 @@ namespace NAPS2.WinForms
         private async void tsSaveImage_Click(object sender, EventArgs e)
         {
             using var imageToSave = CurrentImage.GetClonedImage();
-            if (await _exportHelper.SaveImages(new List<ProcessedImage> { imageToSave }, null))
+            if (await _exportHelper.SaveImages(new List<ProcessedImage> { imageToSave }, _notificationManager))
             {
                 if (Config.Get(c => c.DeleteAfterSaving))
                 {

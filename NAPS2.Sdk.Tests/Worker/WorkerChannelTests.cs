@@ -106,6 +106,7 @@ public class WorkerChannelTests : ContextualTexts
             (img, path) => { receivedImages.Add(img); });
 
         Assert.Equal(2, receivedImages.Count);
+        // TODO: Verify that thumbnails are set correctly (with and without revertible transforms)
     }
 
     [Fact]

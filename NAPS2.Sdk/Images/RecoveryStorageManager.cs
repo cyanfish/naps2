@@ -59,6 +59,7 @@ public class RecoveryStorageManager : IDisposable
             if (_imageList != null) throw new InvalidOperationException();
             _imageList = imageList;
             imageList.ImagesUpdated += ImageListUpdated;
+            imageList.ImagesThumbnailInvalidated += ImageListUpdated;
         }
     }
 
@@ -116,6 +117,7 @@ public class RecoveryStorageManager : IDisposable
             if (_imageList != null)
             {
                 _imageList.ImagesUpdated -= ImageListUpdated;
+                _imageList.ImagesThumbnailInvalidated -= ImageListUpdated;
             }
             _disposed = true;
         }

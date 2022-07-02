@@ -12,7 +12,7 @@ public class ProcessedImageTests : ContextualTexts
     public void Construct()
     {
         var storage = new GdiImage(new Bitmap(100, 100));
-        
+
         var metadata1 = new ImageMetadata(BitDepth.Color, false);
         var postProcessingData1 = new PostProcessingData();
         var transformState1 = TransformState.Empty;
@@ -21,7 +21,7 @@ public class ProcessedImageTests : ContextualTexts
         Assert.Equal(BitDepth.Color, image1.Metadata.BitDepth);
         Assert.False(image1.Metadata.Lossless);
         Assert.True(image1.TransformState.IsEmpty);
-        
+
         var metadata2 = new ImageMetadata(BitDepth.BlackAndWhite, true);
         var postProcessingData2 = new PostProcessingData();
         var transformState2 = new TransformState(ImmutableList<Transform>.Empty.Add(new CropTransform(0, 50, 0, 50)));
@@ -36,7 +36,7 @@ public class ProcessedImageTests : ContextualTexts
         Assert.Equal(50, cropTransform.Right);
         Assert.Equal(50, cropTransform.Bottom);
     }
-    
+
     [Fact]
     public void StorageDisposed()
     {
@@ -45,30 +45,33 @@ public class ProcessedImageTests : ContextualTexts
 
         var image = new ProcessedImage(storageMock.Object, metadata, new PostProcessingData(), TransformState.Empty);
         image.Dispose();
-        
+
         storageMock.Verify(storage => storage.Dispose());
     }
-    
+
     [Fact]
     public void StorageDisposedOnlyAfterAllClonesDisposed()
     {
         var storageMock = new Mock<IImageStorage>();
         var metadata = new ImageMetadata(BitDepth.Color, false);
-        
+
         var image = new ProcessedImage(storageMock.Object, metadata, new PostProcessingData(), TransformState.Empty);
         var image2 = image.Clone();
         var image3 = image.Clone();
         var image4 = image2.Clone();
-        
+
         image.Dispose();
         storageMock.VerifyNoOtherCalls();
-        
+
         image2.Dispose();
         storageMock.VerifyNoOtherCalls();
-        
+
+        // Check extra calls on a single reference don't have an effect
+        image3.Dispose();
+        image3.Dispose();
         image3.Dispose();
         storageMock.VerifyNoOtherCalls();
-        
+
         image4.Dispose();
         storageMock.Verify(storage => storage.Dispose());
     }
@@ -80,7 +83,7 @@ public class ProcessedImageTests : ContextualTexts
         var metadata = new ImageMetadata(BitDepth.Color, false);
 
         var image = new ProcessedImage(storageMock.Object, metadata, new PostProcessingData(), TransformState.Empty);
-        
+
         // 90deg transform 
         var image2 = image.WithTransform(new RotationTransform(90));
         Assert.Single(image2.TransformState.Transforms);
@@ -95,13 +98,13 @@ public class ProcessedImageTests : ContextualTexts
         Assert.Equal(180, transform2.Angle);
         Assert.NotEqual(image, image3);
         Assert.NotEqual(image2, image3);
-        
+
         // Another 180deg transform should simplify to 360deg and remove the whole transform
         var image4 = image3.WithTransform(new RotationTransform(180));
         Assert.True(image4.TransformState.IsEmpty);
         // Equality should match the original image
         Assert.Equal(image, image4);
-        
+
         image.Dispose();
         image2.Dispose();
         image3.Dispose();
@@ -115,16 +118,16 @@ public class ProcessedImageTests : ContextualTexts
     {
         var storageMock = new Mock<IImageStorage>();
         var metadata = new ImageMetadata(BitDepth.Color, false);
-        
+
         var image = new ProcessedImage(storageMock.Object, metadata, new PostProcessingData(), TransformState.Empty);
-        
+
         // 90deg transform 
         var image2 = image.WithTransform(new RotationTransform(90));
         Assert.Single(image2.TransformState.Transforms);
         var transform = Assert.IsType<RotationTransform>(image2.TransformState.Transforms[0]);
         Assert.Equal(90, transform.Angle);
         Assert.NotEqual(image, image2);
-        
+
         // Brightness transform
         var image3 = image2.WithTransform(new BrightnessTransform(100));
         Assert.Equal(2, image3.TransformState.Transforms.Count);
@@ -133,7 +136,7 @@ public class ProcessedImageTests : ContextualTexts
         var transform2 = Assert.IsType<BrightnessTransform>(image3.TransformState.Transforms[1]);
         Assert.Equal(100, transform2.Brightness);
         Assert.NotEqual(image, image3);
-        
+
         // Remove all transforms
         var image4 = image3.WithNoTransforms();
         Assert.True(image4.TransformState.IsEmpty);
@@ -153,9 +156,9 @@ public class ProcessedImageTests : ContextualTexts
     {
         var storageMock = new Mock<IImageStorage>();
         var metadata = new ImageMetadata(BitDepth.Color, false);
-        
+
         var image = new ProcessedImage(storageMock.Object, metadata, new PostProcessingData(), TransformState.Empty);
-        
+
         image.Dispose();
         storageMock.Verify(storage => storage.Dispose());
 

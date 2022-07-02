@@ -44,22 +44,11 @@ public class DesktopSubFormController
 
     public void ShowViewerForm()
     {
-        if (_imageList.Selection.Any())
+        var selected = _imageList.Selection.FirstOrDefault();
+        if (selected != null)
         {
             using var viewer = _formFactory.Create<FViewer>();
-            viewer.ImageList = _imageList;
-            // TODO: Fix this 
-            // viewer.ImageIndex = SelectedIndices.First();
-            // viewer.DeleteCallback = UpdateThumbnails;
-            viewer.SelectCallback = i =>
-            {
-                if (_imageList.Selection.Count <= 1)
-                {
-                    // TODO: Fix this
-                    // SelectedIndices = new[] { i };
-                    //thumbnailList1.Items[i].EnsureVisible();
-                }
-            };
+            viewer.CurrentImage = selected;
             viewer.ShowDialog();
         }
     }

@@ -62,6 +62,7 @@ public class CommonModule : NinjectModule
         Bind<StillImage>().ToSelf().InSingletonScope();
         Bind<AutoSaver>().ToSelf();
         Bind<ImageContext>().To<GdiImageContext>().InSingletonScope();
+        Bind<GdiImageContext>().ToSelf().InSingletonScope();
         Bind<ScanningContext>().ToSelf().InSingletonScope();
 
         //Kernel.Get<ImageContext>().PdfRenderer = Kernel.Get<PdfiumWorkerCoordinator>();

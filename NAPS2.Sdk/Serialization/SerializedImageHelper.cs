@@ -3,6 +3,7 @@ using NAPS2.Scan;
 
 namespace NAPS2.Serialization;
 
+// TODO: Add tests for this class
 public static class SerializedImageHelper
 {
     public static SerializedImage Serialize(ProcessedImage image, SerializeOptions options)
@@ -20,7 +21,8 @@ public static class SerializedImageHelper
         // TODO: only, or can we somehow serialize the thumbnail from UiImage?
         MemoryStream? thumbStream = null;
         var thumb = image.PostProcessingData.Thumbnail;
-        if (thumb != null && options.IncludeThumbnail)
+        if (thumb != null && options.IncludeThumbnail &&
+            image.PostProcessingData.ThumbnailTransformState == image.TransformState)
         {
             // TODO: Better format choice?
             thumbStream = thumb.SaveToMemoryStream(ImageFileFormat.Png);
@@ -32,7 +34,7 @@ public static class SerializedImageHelper
             Metadata = new SerializedImageMetadata
             {
                 TransformListXml = image.TransformState.Transforms.ToXml(),
-                BitDepth = (SerializedImageMetadata.Types.BitDepth)image.Metadata.BitDepth,
+                BitDepth = (SerializedImageMetadata.Types.BitDepth) image.Metadata.BitDepth,
                 Lossless = image.Metadata.Lossless
             },
             Thumbnail = thumbStream != null ? ByteString.FromStream(thumbStream) : ByteString.Empty,
@@ -65,7 +67,8 @@ public static class SerializedImageHelper
         return result;
     }
 
-    public static ProcessedImage Deserialize(ScanningContext scanningContext, SerializedImage serializedImage, DeserializeOptions options)
+    public static ProcessedImage Deserialize(ScanningContext scanningContext, SerializedImage serializedImage,
+        DeserializeOptions options)
     {
         IImageStorage storage;
         if (!string.IsNullOrEmpty(serializedImage.FilePath))
@@ -95,7 +98,7 @@ public static class SerializedImageHelper
 
         var processedImage = scanningContext.CreateProcessedImage(
             storage,
-            (BitDepth)serializedImage.Metadata.BitDepth,
+            (BitDepth) serializedImage.Metadata.BitDepth,
             serializedImage.Metadata.Lossless,
             -1,
             serializedImage.Metadata.TransformListXml.FromXml<List<Transform>>());
@@ -105,7 +108,8 @@ public static class SerializedImageHelper
         {
             processedImage = processedImage.WithPostProcessingData(new PostProcessingData
             {
-                Thumbnail = scanningContext.ImageContext.Load(new MemoryStream(thumbnail))
+                Thumbnail = scanningContext.ImageContext.Load(new MemoryStream(thumbnail)),
+                ThumbnailTransformState = processedImage.TransformState
             }, true);
         }
         return processedImage;

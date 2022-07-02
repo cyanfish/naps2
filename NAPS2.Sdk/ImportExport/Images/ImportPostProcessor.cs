@@ -32,6 +32,7 @@ public class ImportPostProcessor
             return image.WithPostProcessingData(image.PostProcessingData with
             {
                 Thumbnail = thumbnail,
+                ThumbnailTransformState = image.TransformState,
                 BarcodeDetection = barcodeDetection
             }, disposeOriginalImage);
         }

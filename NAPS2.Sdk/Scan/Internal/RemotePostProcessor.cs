@@ -1,5 +1,6 @@
 ﻿namespace NAPS2.Scan.Internal;
 
+// TODO: Add tests for this class
 internal class RemotePostProcessor : IRemotePostProcessor
 {
     private readonly ScanningContext _scanningContext;
@@ -147,6 +148,7 @@ internal class RemotePostProcessor : IRemotePostProcessor
             // Even if barcode detection was attempted previously and failed, image adjustments may improve detection.
             data = data with { BarcodeDetection = BarcodeDetector.Detect(image, options.BarcodeDetectionOptions) };
         }
+        data = data with { ThumbnailTransformState = processedImage.TransformState };
         processedImage = processedImage.WithPostProcessingData(data, true);
     }
 

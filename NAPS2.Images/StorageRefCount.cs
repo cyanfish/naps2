@@ -15,6 +15,8 @@ public class RefCount
 
     public class Token : IDisposable
     {
+        private bool _tokenDisposed;
+        
         public Token(RefCount refCount)
         {
             if (refCount._disposed)
@@ -35,15 +37,19 @@ public class RefCount
             bool disposing = false;
             lock (this)
             {
-                if (RefCount._disposed)
+                if (_tokenDisposed)
                 {
                     return;
                 }
-                RefCount._count--;
-                if (RefCount._count <= 0)
+                lock (RefCount)
                 {
-                    disposing = true;
-                    RefCount._disposed = true;
+                    _tokenDisposed = true;
+                    RefCount._count--;
+                    if (RefCount._count <= 0)
+                    {
+                        disposing = true;
+                        RefCount._disposed = true;
+                    }
                 }
             }
             if (disposing)

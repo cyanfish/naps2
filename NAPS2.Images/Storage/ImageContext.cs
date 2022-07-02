@@ -32,6 +32,7 @@ public abstract class ImageContext
         var simplifiedTransforms = ImmutableList<Transform>.Empty;
         foreach (var transform in transforms)
         {
+            // TODO: Simplify
             simplifiedTransforms = simplifiedTransforms.Add(transform);
         }
         return simplifiedTransforms.Aggregate(image, PerformTransform);
@@ -80,7 +81,13 @@ public abstract class ImageContext
     /// <returns></returns>
     public abstract IEnumerable<IMemoryImage> LoadFrames(string path, out int count);
 
-    public abstract IMemoryImage Render(ProcessedImage processedImage);
+    public IMemoryImage Render(ProcessedImage processedImage)
+    {
+        var bitmap = RenderFromStorage(processedImage.Storage);
+        return PerformAllTransforms(bitmap, processedImage.TransformState.Transforms);
+    }
+
+    public abstract IMemoryImage RenderFromStorage(IImageStorage storage);
 
     /// <summary>
     /// Creates a new empty image.
@@ -91,5 +98,6 @@ public abstract class ImageContext
     /// <returns></returns>
     public abstract IMemoryImage Create(int width, int height, ImagePixelFormat pixelFormat);
 
-    public abstract string SaveSmallestFormat(IMemoryImage image, string pathWithoutExtension, BitDepth bitDepth, bool highQuality, int quality, out ImageFileFormat imageFileFormat);
+    public abstract string SaveSmallestFormat(IMemoryImage image, string pathWithoutExtension, BitDepth bitDepth,
+        bool highQuality, int quality, out ImageFileFormat imageFileFormat);
 }
