@@ -1,29 +1,22 @@
-﻿using System.Drawing;
+using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.Runtime.InteropServices;
 
 namespace NAPS2.Images.Gdi;
 
-public class GdiTransformers
+public class GdiImageTransformer : AbstractImageTransformer<GdiImage>
 {
-    [Transformer]
-    public GdiImage PerformTransform(GdiImage image, BrightnessTransform transform)
+    public GdiImageTransformer(ImageContext imageContext) : base(imageContext)
     {
-        var bitmap = image.Bitmap;
-        float brightnessAdjusted = transform.Brightness / 1000f;
-        EnsurePixelFormat(ref bitmap);
-        UnsafeImageOps.ChangeBrightness(bitmap, brightnessAdjusted);
-        return new GdiImage(bitmap);
     }
 
-    [Transformer]
-    public GdiImage PerformTransform(GdiImage image, ContrastTransform transform)
+    protected override GdiImage PerformTransform(GdiImage image, ContrastTransform transform)
     {
         float contrastAdjusted = transform.Contrast / 1000f + 1.0f;
 
+        EnsurePixelFormat(ref image);
         var bitmap = image.Bitmap;
-        EnsurePixelFormat(ref bitmap);
         using (var g = Graphics.FromImage(bitmap))
         {
             var attrs = new ImageAttributes();
@@ -45,48 +38,13 @@ public class GdiTransformers
         return image;
     }
 
-    [Transformer]
-    public GdiImage PerformTransform(GdiImage image, TrueContrastTransform transform)
-    {
-        // convert +/-1000 input range to a logarithmic scaled multiplier
-        float contrastAdjusted = (float)Math.Pow(2.718281f, transform.Contrast / 500.0f);
-        // see http://docs.rainmeter.net/tips/colormatrix-guide/ for offset & matrix calculation
-        float offset = (1.0f - contrastAdjusted) / 2.0f;
 
-        var bitmap = image.Bitmap;
-        EnsurePixelFormat(ref bitmap);
-        UnsafeImageOps.ChangeContrast(bitmap, contrastAdjusted, offset);
-        // TODO: Actually need to create a new storage. Change signature of EnsurePixelFormat.
-        return image;
-    }
-
-    [Transformer]
-    public GdiImage PerformTransform(GdiImage image, HueTransform transform)
-    {
-        if (image.PixelFormat != ImagePixelFormat.RGB24 && image.PixelFormat != ImagePixelFormat.ARGB32)
-        {
-            // No need to handle 1bpp since hue shifts are null transforms
-            return image;
-        }
-
-        float hueShiftAdjusted = transform.HueShift / 2000f * 360;
-        if (hueShiftAdjusted < 0)
-        {
-            hueShiftAdjusted += 360;
-        }
-
-        UnsafeImageOps.HueShift(image.Bitmap, hueShiftAdjusted);
-
-        return image;
-    }
-
-    [Transformer]
-    public GdiImage PerformTransform(GdiImage image, SaturationTransform transform)
+    protected override GdiImage PerformTransform(GdiImage image, SaturationTransform transform)
     {
         double saturationAdjusted = transform.Saturation / 1000.0 + 1;
 
+        EnsurePixelFormat(ref image);
         var bitmap = image.Bitmap;
-        EnsurePixelFormat(ref bitmap);
         int bytesPerPixel;
         if (bitmap.PixelFormat == PixelFormat.Format24bppRgb)
         {
@@ -128,13 +86,13 @@ public class GdiTransformers
         return image;
     }
 
-    [Transformer]
-    public GdiImage PerformTransform(GdiImage image, SharpenTransform transform)
+
+    protected override GdiImage PerformTransform(GdiImage image, SharpenTransform transform)
     {
         double sharpnessAdjusted = transform.Sharpness / 1000.0;
 
+        EnsurePixelFormat(ref image);
         var bitmap = image.Bitmap;
-        EnsurePixelFormat(ref bitmap);
         int bytesPerPixel;
         if (bitmap.PixelFormat == PixelFormat.Format24bppRgb)
         {
@@ -239,10 +197,8 @@ public class GdiTransformers
         return image;
     }
 
-    [Transformer]
-    public GdiImage PerformTransform(GdiImage image, RotationTransform transform)
+    protected override GdiImage PerformTransform(GdiImage image, RotationTransform transform)
     {
-
         if (Math.Abs(transform.Angle - 0.0) < RotationTransform.TOLERANCE)
         {
             return image;
@@ -281,13 +237,13 @@ public class GdiTransformers
             g.TranslateTransform(-image.Width / 2.0f, -image.Height / 2.0f);
             g.DrawImage(image.Bitmap, new Rectangle(0, 0, image.Width, image.Height));
         }
-        OptimizePixelFormat(image.Bitmap, ref result);
+        var resultImage = new GdiImage(result);
+        OptimizePixelFormat(image, ref resultImage);
         image.Dispose();
-        return new GdiImage(result);
+        return resultImage;
     }
 
-    [Transformer]
-    public GdiImage PerformTransform(GdiImage image, CropTransform transform)
+    protected override GdiImage PerformTransform(GdiImage image, CropTransform transform)
     {
         double xScale = image.Width / (double)(transform.OriginalWidth ?? image.Width),
             yScale = image.Height / (double)(transform.OriginalHeight ?? image.Height);
@@ -298,19 +254,19 @@ public class GdiTransformers
         int height = Math.Max(image.Height - (int)Math.Round((transform.Top + transform.Bottom) * yScale), 1);
 
         var result = new Bitmap(width, height, image.Bitmap.PixelFormat);
+        var resultImage = new GdiImage(result);
         result.SafeSetResolution(image.HorizontalResolution, image.VerticalResolution);
         if (image.Bitmap.PixelFormat == PixelFormat.Format1bppIndexed)
         {
             result.Palette.Entries[0] = image.Bitmap.Palette.Entries[0];
             result.Palette.Entries[1] = image.Bitmap.Palette.Entries[1];
         }
-        UnsafeImageOps.RowWiseCopy(image.Bitmap, result, x, y, width, height);
+        UnsafeImageOps.RowWiseCopy(image, resultImage, x, y, width, height);
         image.Dispose();
-        return new GdiImage(result);
+        return resultImage;
     }
 
-    [Transformer]
-    public GdiImage PerformTransform(GdiImage image, ScaleTransform transform)
+    protected override GdiImage PerformTransform(GdiImage image, ScaleTransform transform)
     {
         int realWidth = (int)Math.Round(image.Width * transform.ScaleFactor);
         int realHeight = (int)Math.Round(image.Height * transform.ScaleFactor);
@@ -326,28 +282,7 @@ public class GdiTransformers
         return new GdiImage(result);
     }
 
-    [Transformer]
-    public GdiImage PerformTransform(GdiImage image, BlackWhiteTransform transform)
-    {
-        if (image.PixelFormat != ImagePixelFormat.RGB24 && image.PixelFormat != ImagePixelFormat.ARGB32)
-        {
-            return image;
-        }
-
-        var monoBitmap = UnsafeImageOps.ConvertTo1Bpp(image.Bitmap, transform.Threshold);
-        image.Dispose();
-
-        return new GdiImage(monoBitmap);
-    }
-
-    /// <summary>
-    /// Gets a bitmap resized to fit within a thumbnail rectangle, including a border around the picture.
-    /// </summary>
-    /// <param name="image">The bitmap to resize.</param>
-    /// <param name="transform">The maximum width and height of the thumbnail.</param>
-    /// <returns>The thumbnail bitmap.</returns>
-    [Transformer]
-    public GdiImage PerformTransform(GdiImage image, ThumbnailTransform transform)
+    protected override GdiImage PerformTransform(GdiImage image, ThumbnailTransform transform)
     {
         var result = new Bitmap(transform.Size, transform.Size);
         using (Graphics g = Graphics.FromImage(result))
@@ -390,38 +325,29 @@ public class GdiTransformers
         return new GdiImage(result);
     }
 
-    /// <summary>
-    /// If the provided bitmap is 1-bit (black and white), replace it with a 24-bit bitmap so that image transforms will work. If the bitmap is replaced, the original is disposed.
-    /// </summary>
-    /// <param name="bitmap">The bitmap that may be replaced.</param>
-    protected internal static void EnsurePixelFormat(ref Bitmap bitmap)
+    public override void EnsurePixelFormat(ref GdiImage image)
     {
-        if (bitmap.PixelFormat == PixelFormat.Format1bppIndexed)
+        if (image.PixelFormat == ImagePixelFormat.BW1)
         {
             // Copy B&W over to grayscale
-            var bitmap2 = new Bitmap(bitmap.Width, bitmap.Height, PixelFormat.Format24bppRgb);
-            bitmap2.SafeSetResolution(bitmap.HorizontalResolution, bitmap.VerticalResolution);
+            var bitmap2 = new Bitmap(image.Width, image.Height, PixelFormat.Format24bppRgb);
+            bitmap2.SafeSetResolution(image.HorizontalResolution, image.VerticalResolution);
             using (var g = Graphics.FromImage(bitmap2))
             {
-                g.DrawImage(bitmap, 0, 0);
+                g.DrawImage(image.Bitmap, 0, 0);
             }
-            bitmap.Dispose();
-            bitmap = bitmap2;
+            image.Dispose();
+            image = new GdiImage(bitmap2);
         }
     }
 
-    /// <summary>
-    /// If the original bitmap is 1-bit (black and white), optimize the result by making it 1-bit too.
-    /// </summary>
-    /// <param name="original">The original bitmap that is used to determine whether the result should be black and white.</param>
-    /// <param name="result">The result that may be replaced.</param>
-    protected static void OptimizePixelFormat(Bitmap original, ref Bitmap result)
+    protected override void OptimizePixelFormat(GdiImage original, ref GdiImage result)
     {
-        if (original.PixelFormat == PixelFormat.Format1bppIndexed)
+        if (original.PixelFormat == ImagePixelFormat.BW1)
         {
-            var bitmap2 = (Bitmap)BitmapHelper.CopyToBpp(result, 1).Clone();
+            var bitmap2 = (Bitmap)BitmapHelper.CopyToBpp(result.Bitmap, 1).Clone();
             result.Dispose();
-            result = bitmap2;
+            result = new GdiImage(bitmap2);
         }
     }
 }

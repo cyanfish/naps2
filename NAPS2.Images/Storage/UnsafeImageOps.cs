@@ -1,25 +1,22 @@
 ﻿using System.Collections;
-using System.Drawing;
-using System.Drawing.Imaging;
 
-namespace NAPS2.Images.Gdi;
+namespace NAPS2.Images.Storage;
 
 // TODO: Make internal?
 // TODO: Use IMemoryImage where possible
 public static class UnsafeImageOps
 {
-    public static unsafe void ChangeBrightness(Bitmap bitmap, float brightnessAdjusted)
+    public static unsafe void ChangeBrightness(IMemoryImage bitmap, float brightnessAdjusted)
     {
         int bytesPerPixel = GetBytesPerPixel(bitmap);
 
-        var bitmapData = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height), ImageLockMode.ReadWrite, bitmap.PixelFormat);
-        int stride = Math.Abs(bitmapData.Stride);
-        int h = bitmapData.Height;
-        int w = bitmapData.Width;
+        using var lockState = bitmap.Lock(LockMode.ReadWrite, out var scan0, out var stride);
+        int h = bitmap.Height;
+        int w = bitmap.Width;
 
         brightnessAdjusted *= 255;
 
-        byte* data = (byte*)bitmapData.Scan0;
+        byte* data = (byte*)scan0;
         PartitionRows(h, (start, end) =>
         {
             for (int y = start; y < end; y++)
@@ -46,22 +43,19 @@ public static class UnsafeImageOps
                 }
             }
         });
-
-        bitmap.UnlockBits(bitmapData);
     }
 
-    public static unsafe void ChangeContrast(Bitmap bitmap, float contrastAdjusted, float offset)
+    public static unsafe void ChangeContrast(IMemoryImage bitmap, float contrastAdjusted, float offset)
     {
         int bytesPerPixel = GetBytesPerPixel(bitmap);
 
-        var bitmapData = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height), ImageLockMode.ReadWrite, bitmap.PixelFormat);
-        int stride = Math.Abs(bitmapData.Stride);
-        int h = bitmapData.Height;
-        int w = bitmapData.Width;
+        using var lockState = bitmap.Lock(LockMode.ReadWrite, out var scan0, out var stride);
+        int h = bitmap.Height;
+        int w = bitmap.Width;
 
         offset *= 255;
 
-        byte* data = (byte*)bitmapData.Scan0;
+        byte* data = (byte*)scan0;
         PartitionRows(h, (start, end) =>
         {
             for (int y = start; y < end; y++)
@@ -88,22 +82,19 @@ public static class UnsafeImageOps
                 }
             }
         });
-
-        bitmap.UnlockBits(bitmapData);
     }
 
-    public static unsafe void HueShift(Bitmap bitmap, float hueShift)
+    public static unsafe void HueShift(IMemoryImage bitmap, float hueShift)
     {
         int bytesPerPixel = GetBytesPerPixel(bitmap);
 
         hueShift /= 60;
 
-        var bitmapData = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height), ImageLockMode.ReadWrite, bitmap.PixelFormat);
-        int stride = Math.Abs(bitmapData.Stride);
-        int h = bitmapData.Height;
-        int w = bitmapData.Width;
+        using var lockState = bitmap.Lock(LockMode.ReadWrite, out var scan0, out var stride);
+        int h = bitmap.Height;
+        int w = bitmap.Width;
 
-        byte* data = (byte*)bitmapData.Scan0;
+        byte* data = (byte*)scan0;
         PartitionRows(h, (start, end) =>
         {
             for (int y = start; y < end; y++)
@@ -195,20 +186,15 @@ public static class UnsafeImageOps
                 }
             }
         });
-
-        bitmap.UnlockBits(bitmapData);
     }
 
-    public static unsafe void RowWiseCopy(Bitmap src, Bitmap dst, int x1, int y1, int w, int h)
+    public static unsafe void RowWiseCopy(IMemoryImage src, IMemoryImage dst, int x1, int y1, int w, int h)
     {
-        bool bitPerPixel = src.PixelFormat == PixelFormat.Format1bppIndexed;
+        bool bitPerPixel = src.PixelFormat == ImagePixelFormat.BW1;
         int bytesPerPixel = bitPerPixel ? 0 : GetBytesPerPixel(src);
 
-        var srcData = src.LockBits(new Rectangle(0, 0, src.Width, src.Height), ImageLockMode.ReadWrite, src.PixelFormat);
-        int srcStride = Math.Abs(srcData.Stride);
-
-        var dstData = dst.LockBits(new Rectangle(0, 0, dst.Width, dst.Height), ImageLockMode.ReadWrite, dst.PixelFormat);
-        int dstStride = Math.Abs(dstData.Stride);
+        using var srcLockState = src.Lock(LockMode.ReadWrite, out var srcScan0, out var srcStride);
+        using var dstLockState = dst.Lock(LockMode.ReadWrite, out var dstScan0, out var dstStride);
 
         if (bitPerPixel)
         {
@@ -223,8 +209,8 @@ public static class UnsafeImageOps
             {
                 for (int y = start; y < end; y++)
                 {
-                    byte* srcRow = (byte*)(srcData.Scan0 + srcStride * (y1 + y) + (x1 + 7) / 8);
-                    byte* dstRow = (byte*)(dstData.Scan0 + dstStride * y);
+                    byte* srcRow = (byte*)(srcScan0 + srcStride * (y1 + y) + (x1 + 7) / 8);
+                    byte* dstRow = (byte*)(dstScan0 + dstStride * y);
 
                     for (int x = 0; x < bytesExceptLast; x++)
                     {
@@ -257,8 +243,8 @@ public static class UnsafeImageOps
             {
                 for (int y = start; y < end; y++)
                 {
-                    byte* srcPtrB = (byte*)(srcData.Scan0 + srcStride * (y1 + y) + x1 * bytesPerPixel);
-                    byte* dstPtrB = (byte*)(dstData.Scan0 + dstStride * y);
+                    byte* srcPtrB = (byte*)(srcScan0 + srcStride * (y1 + y) + x1 * bytesPerPixel);
+                    byte* dstPtrB = (byte*)(dstScan0 + dstStride * y);
                     long* srcPtrL = (long*)srcPtrB;
                     long* dstPtrL = (long*)dstPtrB;
                     var len = w * bytesPerPixel;
@@ -275,25 +261,6 @@ public static class UnsafeImageOps
                     }
                 }
             });
-        }
-
-        src.UnlockBits(srcData);
-        dst.UnlockBits(dstData);
-    }
-
-    private static int GetBytesPerPixel(Bitmap bitmap)
-    {
-        if (bitmap.PixelFormat == PixelFormat.Format32bppArgb)
-        {
-            return 4;
-        }
-        else if (bitmap.PixelFormat == PixelFormat.Format24bppRgb)
-        {
-            return 3;
-        }
-        else
-        {
-            throw new ArgumentException("Unsupported pixel format: " + bitmap.PixelFormat);
         }
     }
 
@@ -313,25 +280,19 @@ public static class UnsafeImageOps
         }
     }
 
-    public static unsafe Bitmap ConvertTo1Bpp(Bitmap bitmap, int threshold)
+    public static unsafe IMemoryImage ConvertTo1Bpp(IMemoryImage bitmap, int threshold, ImageContext imageContext)
     {
         int thresholdAdjusted = (threshold + 1000) * 255 / 2;
         int bytesPerPixel = GetBytesPerPixel(bitmap);
 
-        var bitmapData = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height), ImageLockMode.ReadOnly, bitmap.PixelFormat);
-        var stride = Math.Abs(bitmapData.Stride);
-        byte* data = (byte*)bitmapData.Scan0;
-        int h = bitmapData.Height;
-        int w = bitmapData.Width;
+        using var lockState = bitmap.Lock(LockMode.ReadOnly, out var scan0, out var stride);
+        byte* data = (byte*)scan0;
+        int h = bitmap.Height;
+        int w = bitmap.Width;
 
-        var monoBitmap = new Bitmap(bitmap.Width, bitmap.Height, PixelFormat.Format1bppIndexed);
-        var p = monoBitmap.Palette;
-        p.Entries[0] = Color.Black;
-        p.Entries[1] = Color.White;
-        monoBitmap.Palette = p;
-        var monoBitmapData = monoBitmap.LockBits(new Rectangle(0, 0, monoBitmap.Width, monoBitmap.Height), ImageLockMode.WriteOnly, monoBitmap.PixelFormat);
-        var monoStride = Math.Abs(monoBitmapData.Stride);
-        byte* monoData = (byte*)monoBitmapData.Scan0;
+        var monoBitmap = imageContext.Create(bitmap.Width, bitmap.Height, ImagePixelFormat.BW1);
+        using var monoBitmapLockState = monoBitmap.Lock(LockMode.WriteOnly, out var monoScan0, out var monoStride);
+        byte* monoData = (byte*)monoScan0;
 
         PartitionRows(h, (start, end) =>
         {
@@ -350,6 +311,7 @@ public static class UnsafeImageOps
                             byte r = *pixel;
                             byte g = *(pixel + 1);
                             byte b = *(pixel + 2);
+                            // TODO: Are R/G/B correct or is this inverted?
                             // Use standard values for grayscale conversion to weight the RGB values
                             int luma = r * 299 + g * 587 + b * 114;
                             if (luma >= thresholdAdjusted)
@@ -363,9 +325,7 @@ public static class UnsafeImageOps
             }
         });
 
-        bitmap.UnlockBits(bitmapData);
-        monoBitmap.UnlockBits(monoBitmapData);
-        monoBitmap.SafeSetResolution(bitmap.HorizontalResolution, bitmap.VerticalResolution);
+        monoBitmap.SetResolution(bitmap.HorizontalResolution, bitmap.VerticalResolution);
 
         return monoBitmap;
     }

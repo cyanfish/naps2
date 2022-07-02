@@ -5,11 +5,17 @@ namespace NAPS2.Images.Gdi;
 
 public class GdiImageContext : ImageContext
 {
+    private readonly GdiImageTransformer _imageTransformer;
+    
     public GdiImageContext() : base(typeof(GdiImage))
     {
-        RegisterTransformers<GdiImage>(new GdiTransformers());
-        // TODO: Not sure where to do these
-        // RegisterConverters(new PdfConverters(this));
+        _imageTransformer = new GdiImageTransformer(this);
+    }
+
+    public override IMemoryImage PerformTransform(IMemoryImage image, Transform transform)
+    {
+        var gdiImage = image as GdiImage ?? throw new ArgumentException("Expected GdiImage object");
+        return _imageTransformer.Apply(gdiImage, transform);
     }
 
     public override IMemoryImage Load(string path) => new GdiImage(LoadBitmapWithExceptionHandling(path));

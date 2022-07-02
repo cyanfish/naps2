@@ -317,13 +317,12 @@ public class TransformTests : ContextualTexts
         ImageAsserts.Similar(expected, actual, ImageAsserts.GENERAL_RMSE_THRESHOLD);
     }
 
-    private static IMemoryImage To24Bit(IMemoryImage actual)
+    private IMemoryImage To24Bit(IMemoryImage actual)
     {
         // Convert to 24-bit for comparison
         // TODO: Maybe have a Color24BitTransform or something to be more reusable
-        var bitmap = ((GdiImage) actual).Bitmap;
-        GdiTransformers.EnsurePixelFormat(ref bitmap);
-        actual = new GdiImage(bitmap);
-        return actual;
+        var gdiImage = (GdiImage) actual;
+        new GdiImageTransformer(ImageContext).EnsurePixelFormat(ref gdiImage);
+        return gdiImage;
     }
 }

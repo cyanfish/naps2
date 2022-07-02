@@ -5,59 +5,21 @@ namespace NAPS2.Images.Storage;
 
 public abstract class ImageContext
 {
-    // TODO: Ideally this class should be fully stateless. Maybe a protected virtual method to provide transformers.
-    // TODO: Using lazy static state if needed.
-    // TODO: Although we may need an IPdfRenderer...
-    private readonly Dictionary<(Type, Type), (object, MethodInfo)> _transformers = new();
+    // TODO: We may need an IPdfRenderer...
 
     protected ImageContext(Type imageType)
     {
         ImageType = imageType;
-        // _pdfRenderer = new PdfiumPdfRenderer(this);
-    }
-
-    /// <summary>
-    /// Enumerates all methods on transformerObj that have a TransformerAttribute and registers them
-    /// for future use in Transform.Perform and Transform.PerformAll with the specified image type.
-    /// </summary>
-    /// <param name="transformerObj"></param>
-    public void RegisterTransformers<TImage>(object transformerObj) where TImage : IMemoryImage
-    {
-        foreach (var method in transformerObj.GetType().GetMethods().Where(x => x.GetCustomAttributes(typeof(TransformerAttribute), true).Any()))
-        {
-            var methodParams = method.GetParameters();
-            var storageType = methodParams[0].ParameterType;
-            var transformType = methodParams[1].ParameterType;
-            if (methodParams.Length == 2 &&
-                typeof(IMemoryImage).IsAssignableFrom(method.ReturnType) &&
-                storageType.IsAssignableFrom(typeof(TImage)) &&
-                typeof(Transform).IsAssignableFrom(transformType))
-            {
-                _transformers[(typeof(TImage), transformType)] = (transformerObj, method);
-            }
-        }
     }
 
     // TODO: Describe ownership transfer
-    // TODO: Consider moving this to IMemoryImage
     /// <summary>
     /// Performs the specified transformation on the specified image using a compatible transformer.
     /// </summary>
     /// <param name="image"></param>
     /// <param name="transform"></param>
     /// <returns></returns>
-    public IMemoryImage PerformTransform(IMemoryImage image, Transform transform)
-    {
-        try
-        {
-            var (transformer, perform) = _transformers[(image.GetType(), transform.GetType())];
-            return (IMemoryImage)perform.Invoke(transformer, new object[] { image, transform });
-        }
-        catch (KeyNotFoundException)
-        {
-            throw new ArgumentException($"No transformer exists for {image.GetType().Name} and {transform.GetType().Name}");
-        }
-    }
+    public abstract IMemoryImage PerformTransform(IMemoryImage image, Transform transform);
 
     /// <summary>
     /// Performs the specified transformations on the specified image using a compatible transformer.
