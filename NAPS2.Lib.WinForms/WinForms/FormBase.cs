@@ -1,7 +1,6 @@
 ﻿using System.Drawing;
 using System.Globalization;
 using System.Windows.Forms;
-using Eto;
 using NAPS2.EtoForms;
 using NAPS2.Scan;
 

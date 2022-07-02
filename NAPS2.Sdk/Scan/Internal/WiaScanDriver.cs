@@ -1,5 +1,4 @@
 ﻿using System.Threading;
-using NAPS2.Remoting.Worker;
 using NAPS2.Scan.Exceptions;
 using NAPS2.Scan.Wia;
 using NAPS2.Wia;

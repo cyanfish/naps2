@@ -1,5 +1,4 @@
 using NAPS2.Images.Gdi;
-using NAPS2.Remoting.Worker;
 using NAPS2.Scan;
 using Xunit;
 

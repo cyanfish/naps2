@@ -5,7 +5,6 @@ using System.Reflection;
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading;
-using System.Windows.Forms;
 using NAPS2.WinForms;
 
 namespace NAPS2.Update;

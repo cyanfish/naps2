@@ -1,7 +1,6 @@
 ﻿using System.Collections.Concurrent;
 using System.Reflection;
 using GrpcDotNetNamedPipes;
-using NAPS2.Scan;
 
 namespace NAPS2.Remoting.Worker;
 

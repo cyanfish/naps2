@@ -1,7 +1,6 @@
 ﻿using System.Drawing;
 using NAPS2.Images.Gdi;
 using NAPS2.Scan;
-using ZXing.Rendering;
 
 namespace NAPS2.Sdk.Samples;
 

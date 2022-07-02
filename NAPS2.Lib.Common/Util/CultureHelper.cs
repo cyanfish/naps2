@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Globalization;
 using System.Reflection;
-using System.Windows.Forms;
 using NAPS2.Lang;
 
 namespace NAPS2.Util;

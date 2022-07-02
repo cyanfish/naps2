@@ -1,5 +1,4 @@
 using ZXing;
-using ZXing.Common;
 
 namespace NAPS2.Images;
 

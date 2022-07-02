@@ -1,5 +1,4 @@
 ﻿using System.Threading;
-using Grpc.Core;
 
 namespace NAPS2.Scan.Internal;
 

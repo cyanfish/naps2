@@ -1,5 +1,4 @@
-﻿using System.Runtime.Serialization;
-using System.Threading;
+﻿using System.Threading;
 using NAPS2.Ocr;
 
 namespace NAPS2.Scan;

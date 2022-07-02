@@ -1,5 +1,4 @@
-﻿using System.Windows.Forms;
-using NAPS2.Lang.ConsoleResources;
+﻿using NAPS2.Lang.ConsoleResources;
 
 namespace NAPS2.Automation;
 

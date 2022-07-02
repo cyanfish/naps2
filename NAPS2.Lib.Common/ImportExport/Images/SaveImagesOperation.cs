@@ -1,7 +1,6 @@
 ﻿using System.Drawing;
 using System.Drawing.Imaging;
 using System.Threading;
-using System.Windows.Forms;
 using NAPS2.Images.Gdi;
 
 namespace NAPS2.ImportExport.Images;

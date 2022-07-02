@@ -1,5 +1,4 @@
-﻿using System.Windows.Forms;
-using NAPS2.ImportExport.Email;
+﻿using NAPS2.ImportExport.Email;
 using NAPS2.Ocr;
 
 namespace NAPS2.ImportExport.Pdf;

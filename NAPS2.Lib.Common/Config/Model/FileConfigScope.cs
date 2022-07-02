@@ -1,5 +1,4 @@
 ﻿using System.Linq.Expressions;
-using System.Threading;
 using NAPS2.Serialization;
 
 namespace NAPS2.Config.Model;

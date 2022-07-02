@@ -12,7 +12,6 @@ using NAPS2.Sdk.Tests.Mocks;
 using NAPS2.Sdk.Tests.Ocr;
 using Ninject;
 using Ninject.Modules;
-using Ninject.Parameters;
 using Xunit;
 using Xunit.Abstractions;
 

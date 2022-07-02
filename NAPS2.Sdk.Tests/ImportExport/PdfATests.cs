@@ -1,7 +1,5 @@
-using NAPS2.Images.Gdi;
 using NAPS2.ImportExport.Pdf;
 using NAPS2.Sdk.Tests.Asserts;
-using NAPS2.Sdk.Tests.Images;
 using Xunit;
 
 namespace NAPS2.Sdk.Tests.ImportExport;

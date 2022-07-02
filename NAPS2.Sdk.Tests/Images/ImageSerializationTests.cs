@@ -1,5 +1,4 @@
-﻿using System.Collections.Immutable;
-using System.Drawing;
+﻿using System.Drawing;
 using NAPS2.Images.Gdi;
 using NAPS2.Scan;
 using NAPS2.Serialization;

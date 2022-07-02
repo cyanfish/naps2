@@ -1,7 +1,6 @@
 ﻿using System.Runtime.InteropServices;
 using System.Threading;
 using NAPS2.Dependencies;
-using NAPS2.Images.Gdi;
 using NAPS2.ImportExport.Images;
 using NAPS2.Scan;
 using PdfSharp.Pdf;
