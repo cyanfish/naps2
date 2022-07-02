@@ -1,7 +1,6 @@
 ﻿using System.Drawing;
 using NAPS2.Images.Gdi;
 using NAPS2.Scan;
-using ZXing.Rendering;
 
 namespace NAPS2.Sdk.Samples;
 
@@ -40,7 +39,7 @@ public class ScanToBitmapSample
 
         // ScannedImageSource has several different methods to help you consume images.
         // ForEach allows you to asynchronously process images as they arrive.
-        await imageSource.ForEach(async processedImage =>
+        await imageSource.ForEach(processedImage =>
         {
             // Make sure ScannedImage and rendered images are disposed after use
             using (processedImage)

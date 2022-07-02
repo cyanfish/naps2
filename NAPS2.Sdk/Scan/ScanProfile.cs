@@ -281,50 +281,12 @@ public enum ScanPageSize
 /// <summary>
 /// Configuration for a particular page size.
 /// </summary>
-[Serializable]
-public class PageDimensions
-{
-    public decimal Width { get; set; }
-
-    public decimal Height { get; set; }
-
-    public PageSizeUnit Unit { get; set; }
-
-    public override bool Equals(Object obj)
-    {
-        return obj is PageDimensions pageDimens && this == pageDimens;
-    }
-
-    public override int GetHashCode()
-    {
-        return Width.GetHashCode() ^ Height.GetHashCode() ^ Unit.GetHashCode();
-    }
-
-    public static bool operator ==(PageDimensions x, PageDimensions y)
-    {
-        if (ReferenceEquals(x, y))
-        {
-            return true;
-        }
-        if (ReferenceEquals(x, null) || ReferenceEquals(y, null))
-        {
-            return false;
-        }
-        return x.Width == y.Width && x.Height == y.Height && x.Unit == y.Unit;
-    }
-
-    public static bool operator !=(PageDimensions x, PageDimensions y) => !(x == y);
-}
+public record PageDimensions(decimal Width, decimal Height, PageSizeUnit Unit);
 
 /// <summary>
 /// Configuration for a user-created custom page size.
 /// </summary>
-public class NamedPageSize
-{
-    public string Name { get; set; }
-
-    public PageDimensions Dimens { get; set; }
-}
+public record NamedPageSize(string Name, PageDimensions Dimens);
 
 /// <summary>
 /// Helper attribute used to assign physical dimensions to the ScanPageSize enum.
@@ -333,12 +295,11 @@ public class PageDimensionsAttribute : Attribute
 {
     public PageDimensionsAttribute(string width, string height, PageSizeUnit unit)
     {
-        PageDimensions = new PageDimensions
-        {
-            Width = decimal.Parse(width, CultureInfo.InvariantCulture),
-            Height = decimal.Parse(height, CultureInfo.InvariantCulture),
-            Unit = unit
-        };
+        PageDimensions = new PageDimensions(
+            decimal.Parse(width, CultureInfo.InvariantCulture),
+            decimal.Parse(height, CultureInfo.InvariantCulture),
+            unit
+        );
     }
 
     public PageDimensions PageDimensions { get; }

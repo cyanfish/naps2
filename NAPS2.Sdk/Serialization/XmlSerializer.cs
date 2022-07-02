@@ -53,14 +53,14 @@ public abstract class XmlSerializer
             typeof(Transform), new XmlTypeInfo
             {
                 KnownTypes = new HashSet<Type>(Assembly
-                    .GetAssembly(typeof(Transform))
+                    .GetAssembly(typeof(Transform))!
                     .GetTypes()
                     .Where(t => typeof(Transform).IsAssignableFrom(t)))
             }
         },
     };
 
-    public static void RegisterCustomSerializer<T>(CustomXmlSerializer<T> customSerializer)
+    public static void RegisterCustomSerializer<T>(CustomXmlSerializer<T> customSerializer) where T : notnull
     {
         RegisterCustomSerializer(typeof(T), customSerializer);
     }
@@ -123,7 +123,11 @@ public abstract class XmlSerializer
         {
             return null;
         }
+        return DeserializeInternalNonNull(element, type);
+    }
 
+    protected static object DeserializeInternalNonNull(XElement element, Type type)
+    {
         var actualTypeName = element.Attribute(Xsi + "type")?.Value;
         var actualType = type;
         if (actualTypeName != null)
@@ -139,8 +143,8 @@ public abstract class XmlSerializer
         {
             return typeInfo.CustomSerializer.DeserializeObject(element, actualType);
         }
-        var obj = Activator.CreateInstance(actualType, true);
-        foreach (var propInfo in typeInfo.Properties)
+        var obj = Activator.CreateInstance(actualType, true)!;
+        foreach (var propInfo in typeInfo.Properties!)
         {
             // TODO: Detect unmapped elements
             var child = element.Element(propInfo.Property.Name);
@@ -157,7 +161,7 @@ public abstract class XmlSerializer
     {
         lock (TypeInfoCache)
         {
-            return GetTypeInfo(baseType).KnownTypes?.SingleOrDefault(x => GetElementNameForType(x) == actualTypeName);
+            return GetTypeInfo(baseType).KnownTypes.SingleOrDefault(x => GetElementNameForType(x) == actualTypeName);
         }
     }
 
@@ -228,9 +232,8 @@ public abstract class XmlSerializer
                 {
                     typeInfo.KnownTypes = props
                         .Select(x => GetTypeInfo(x.PropertyType).KnownTypes)
-                        .Where(x => x != null)
                         .Append(GetKnownTypes(type))
-                        .Append(type.GetCustomAttributes(typeof(XmlIncludeAttribute)).Cast<XmlIncludeAttribute>().Select(x => x.Type))
+                        .Append(type.GetCustomAttributes<XmlIncludeAttribute>().Select(x => x.Type).WhereNotNull())
                         .Aggregate(new HashSet<Type>(), (x, y) => new HashSet<Type>(x.Union(y)));
                 }
 
@@ -266,7 +269,7 @@ public abstract class XmlSerializer
 
         public CustomXmlSerializer? CustomSerializer { get; set; }
 
-        public HashSet<Type>? KnownTypes { get; set; }
+        public HashSet<Type> KnownTypes { get; set; } = new();
     }
 
     protected record XmlPropertyInfo(PropertyInfo Property);
@@ -541,7 +544,7 @@ public abstract class XmlSerializer
                 // Handle immutable collections
                 foreach (var itemElement in element.Elements())
                 {
-                    list = add.Invoke(list, new[] { DeserializeInternal(itemElement, itemType) });
+                    list = add.Invoke(list, new[] { DeserializeInternal(itemElement, itemType) })!;
                 }
             }
             else
@@ -555,7 +558,7 @@ public abstract class XmlSerializer
             return list;
         }
 
-        protected virtual object CreateInstance(Type type, Type itemType) => Activator.CreateInstance(type, true);
+        protected virtual object CreateInstance(Type type, Type itemType) => Activator.CreateInstance(type, true)!;
     }
 
     protected class ImmutableListSerializer : CollectionSerializer
@@ -564,7 +567,7 @@ public abstract class XmlSerializer
         {
             var emptyField = typeof(ImmutableList<>).MakeGenericType(itemType).GetField("Empty", BindingFlags.Public | BindingFlags.Static) ??
                              throw new Exception("No Empty field on ImmutableList");
-            return emptyField.GetValue(null);
+            return emptyField.GetValue(null)!;
         }
     }
 
@@ -574,7 +577,7 @@ public abstract class XmlSerializer
         {
             var emptyField = typeof(ImmutableHashSet<>).MakeGenericType(itemType).GetField("Empty", BindingFlags.Public | BindingFlags.Static) ??
                              throw new Exception("No Empty field on ImmutableHashSet");
-            return emptyField.GetValue(null);
+            return emptyField.GetValue(null)!;
         }
     }
 
@@ -593,14 +596,14 @@ public abstract class XmlSerializer
 
     protected class NullableSerializer : CustomXmlSerializer
     {
-        public override void SerializeObject(object? obj, XElement element, Type type)
+        public override void SerializeObject(object obj, XElement element, Type type)
         {
             SerializeInternal(obj, element, Nullable.GetUnderlyingType(type)!);
         }
 
-        public override object? DeserializeObject(XElement element, Type type)
+        public override object DeserializeObject(XElement element, Type type)
         {
-            return DeserializeInternal(element, Nullable.GetUnderlyingType(type)!);
+            return DeserializeInternalNonNull(element, Nullable.GetUnderlyingType(type)!);
         }
     }
 
@@ -608,7 +611,7 @@ public abstract class XmlSerializer
     {
         public override void SerializeObject(object? obj, XElement element, Type type)
         {
-            element.Value = obj!.ToString();
+            element.Value = obj!.ToString()!;
         }
 
         public override object DeserializeObject(XElement element, Type type)
@@ -620,14 +623,14 @@ public abstract class XmlSerializer
 
 public class XmlSerializer<T> : XmlSerializer, ISerializer<T>
 {
-    public void Serialize(Stream stream, T obj)
+    public void Serialize(Stream stream, T? obj)
     {
         using var writer = new XmlTextWriter(new StreamWriter(stream, new UTF8Encoding(false), 1024, true)) { Formatting = Formatting.Indented };
         SerializeToXDocument(obj).Save(writer);
         writer.Dispose();
     }
 
-    public XDocument SerializeToXDocument(T obj)
+    public XDocument SerializeToXDocument(T? obj)
     {
         var doc = new XDocument();
         var root = SerializeToXElement(obj, GetElementNameForType(typeof(T)));
@@ -636,12 +639,12 @@ public class XmlSerializer<T> : XmlSerializer, ISerializer<T>
         return doc;
     }
 
-    public XElement SerializeToXElement(T obj, string elementName)
+    public XElement SerializeToXElement(T? obj, string elementName)
     {
         return SerializeInternal(obj, new XElement(elementName), typeof(T));
     }
 
-    public XElement SerializeToXElement(T obj, XElement element)
+    public XElement SerializeToXElement(T? obj, XElement element)
     {
         return SerializeInternal(obj, element, typeof(T));
     }

@@ -96,22 +96,13 @@ public partial class FPageSize : FormBase
             return;
         }
         PageSizeName = null;
-        PageSizeDimens = new PageDimensions
-        {
-            Width = width,
-            Height = height,
-            Unit = (PageSizeUnit)comboUnit.SelectedIndex
-        };
+        PageSizeDimens = new PageDimensions(width, height, (PageSizeUnit) comboUnit.SelectedIndex);
         if (!string.IsNullOrWhiteSpace(comboName.Text))
         {
             PageSizeName = comboName.Text;
             var presets = Config.Get(c => c.CustomPageSizePresets);
             presets = presets.RemoveAll(x => x.Name == PageSizeName);
-            presets = presets.Add(new NamedPageSize
-            {
-                Name = PageSizeName,
-                Dimens = PageSizeDimens
-            });
+            presets = presets.Add(new NamedPageSize(PageSizeName, PageSizeDimens));
             Config.User.Set(c => c.CustomPageSizePresets, presets);
         }
         DialogResult = DialogResult.OK;

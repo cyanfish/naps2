@@ -40,7 +40,7 @@ public class SecureString
     {
         protected override void Serialize(SecureString obj, XElement element)
         {
-            element.Value = obj._valueEncrypted ?? SecureStorage.Encrypt(obj._value!);
+            element.Value = obj._valueEncrypted ?? SecureStorage.Encrypt(obj._value!)!;
         }
 
         protected override SecureString Deserialize(XElement element)

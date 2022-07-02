@@ -1,5 +1,4 @@
 ﻿using System.Collections.Immutable;
-using System.Reflection;
 
 namespace NAPS2.Images.Storage;
 
