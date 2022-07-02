@@ -2,11 +2,11 @@
 
 public class SaneOption
 {
-    public string Name { get; set; }
+    public string? Name { get; set; }
 
-    public string Title { get; set; }
+    public string? Title { get; set; }
 
-    public string Desc { get; set; }
+    public string? Desc { get; set; }
 
     public SaneValueType Type { get; set; }
 
@@ -18,15 +18,15 @@ public class SaneOption
 
     public SaneConstraintType ConstraintType { get; set; }
 
-    public List<string> StringList { get; set; }
+    public List<string>? StringList { get; set; }
 
-    public List<decimal> WordList { get; set; }
+    public List<decimal>? WordList { get; set; }
 
-    public SaneRange Range { get; set; }
+    public SaneRange? Range { get; set; }
 
     public decimal CurrentNumericValue { get; set; }
 
-    public string CurrentStringValue { get; set; }
+    public string? CurrentStringValue { get; set; }
 }
 
 public enum SaneValueType

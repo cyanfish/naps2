@@ -8,7 +8,7 @@ public class WorkerPool : IDisposable
         
     private readonly IWorkerFactory _workerFactory;
     private readonly Timer _timer;
-    private List<PoolEntry> _entries = new List<PoolEntry>();
+    private List<PoolEntry> _entries = new();
 
     public WorkerPool(IWorkerFactory workerFactory)
     {
@@ -16,7 +16,7 @@ public class WorkerPool : IDisposable
         _timer = new Timer(Tick, null, 0, TICK_INTERVAL);
     }
 
-    private void Tick(object state)
+    private void Tick(object? state)
     {
         lock (this)
         {
@@ -66,16 +66,11 @@ public class WorkerPool : IDisposable
     {
         lock (this)
         {
-            _entries.Add(new PoolEntry { Worker = workerContext, LastUsed = DateTime.Now });
+            _entries.Add(new PoolEntry(workerContext, DateTime.Now));
         }
     }
 
-    private class PoolEntry
-    {
-        public WorkerContext Worker { get; set; }
-            
-        public DateTime LastUsed { get; set; }
-    }
+    private record PoolEntry(WorkerContext Worker, DateTime LastUsed);
 
     public void Dispose()
     {

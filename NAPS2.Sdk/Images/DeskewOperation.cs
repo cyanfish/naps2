@@ -25,7 +25,7 @@ public class DeskewOperation : OperationBase
 
         RunAsync(async () =>
         {
-            return await Pipeline.For(images, CancelToken).RunParallel(async img =>
+            return await Pipeline.For(images, CancelToken).RunParallel(img =>
             {
                 using var processedImage = img.GetClonedImage();
                 var image = _imageContext.Render(processedImage);

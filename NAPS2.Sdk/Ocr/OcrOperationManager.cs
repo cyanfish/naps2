@@ -34,7 +34,7 @@ public class OcrOperationManager
         controller.OcrCompleted += OcrCompleted;
     }
 
-    private void OcrStarted(object sender, OcrEventArgs e)
+    private void OcrStarted(object? sender, OcrEventArgs e)
     {
         OcrOperation op;
         bool newOp = false;
@@ -70,7 +70,7 @@ public class OcrOperationManager
         }
     }
 
-    private void OcrCompleted(object sender, OcrEventArgs e)
+    private void OcrCompleted(object? sender, OcrEventArgs e)
     {
         OcrOperation op;
         bool finished = false;

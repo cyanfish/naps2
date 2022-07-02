@@ -14,7 +14,7 @@ public class MapiDispatcher
         : this(scanningContext, new MapiWrapper(new SystemEmailClients()))
     {
     }
-    
+
     public MapiDispatcher(ScanningContext scanningContext, IMapiWrapper mapiWrapper)
     {
         _scanningContext = scanningContext;
@@ -36,6 +36,11 @@ public class MapiDispatcher
 #endif
         if (UseWorker && !_mapiWrapper.CanLoadClient(clientName))
         {
+            if (_scanningContext.WorkerFactory == null)
+            {
+                throw new InvalidOperationException(
+                    "ScanningContext.WorkerFactory must be set to use MAPI from a 64-bit process.");
+            }
             using var worker = _scanningContext.WorkerFactory.Create();
             return await worker.Service.SendMapiEmail(clientName, message);
         }

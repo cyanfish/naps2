@@ -18,6 +18,8 @@ public class ScanOptionsSerializationTests
         var doc = serializer.SerializeToXDocument(original);
 
         var copy = serializer.DeserializeFromXDocument(doc);
+        Assert.NotNull(copy);
+        Assert.NotNull(copy.PageSize);
         Assert.Equal(8.5m, copy.PageSize.Width);
         Assert.Equal(11m, copy.PageSize.Height);
         Assert.Equal(PageSizeUnit.Inch, copy.PageSize.Unit);

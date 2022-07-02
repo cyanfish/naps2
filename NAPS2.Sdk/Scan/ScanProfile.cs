@@ -1,5 +1,6 @@
 using System.ComponentModel;
 using System.Globalization;
+using System.Reflection;
 using System.Xml.Serialization;
 using NAPS2.ImportExport;
 using NAPS2.Wia;
@@ -127,15 +128,7 @@ public class ScanProfile
     public KeyValueScanOptions KeyValueOptions { get; set; }
 }
 
-[Serializable]
-public class ScanProxyConfig
-{
-    public string Name { get; set; }
-
-    public string Ip { get; set; }
-
-    public int? Port { get; set; }
-}
+public record ScanProxyConfig(string Name, string Ip, int? Port);
 
 /// <summary>
 /// User configuration for the Auto Save feature, which saves to a file immediately after scanning.
@@ -393,10 +386,10 @@ public static class ScanEnumExtensions
         return (int)(HeightInInches(pageDimensions) * 1000);
     }
 
-    public static PageDimensions PageDimensions(this Enum enumValue)
+    public static PageDimensions? PageDimensions(this Enum enumValue)
     {
-        object[] attrs = enumValue.GetType().GetField(enumValue.ToString()).GetCustomAttributes(typeof(PageDimensionsAttribute), false);
-        return attrs.Cast<PageDimensionsAttribute>().Select(x => x.PageDimensions).SingleOrDefault();
+        var attrs = enumValue.GetType().GetField(enumValue.ToString())!.GetCustomAttributes<PageDimensionsAttribute>();
+        return attrs.Select(x => x.PageDimensions).SingleOrDefault();
     }
 
     public static int ToIntDpi(this ScanDpi enumValue)

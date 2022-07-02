@@ -26,7 +26,7 @@ public class WorkerServiceAdapter
         RemotingHelper.HandleErrors(resp.Error);
     }
 
-    public WiaConfiguration Wia10NativeUI(string scanDevice, IntPtr hwnd)
+    public WiaConfiguration? Wia10NativeUI(string scanDevice, IntPtr hwnd)
     {
         var req = new Wia10NativeUiRequest
         {
@@ -35,6 +35,10 @@ public class WorkerServiceAdapter
         };
         var resp = _client.Wia10NativeUi(req);
         RemotingHelper.HandleErrors(resp.Error);
+        if (string.IsNullOrEmpty(resp.WiaConfigurationXml))
+        {
+            return null;
+        }
         return resp.WiaConfigurationXml.FromXml<WiaConfiguration>();
     }
 

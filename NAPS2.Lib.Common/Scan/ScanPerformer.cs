@@ -238,7 +238,7 @@ internal class ScanPerformer : IScanPerformer
             PageSize = null, // Set after
         };
 
-        PageDimensions pageDimensions = scanProfile.PageSize.PageDimensions() ?? scanProfile.CustomPageSize;
+        var pageDimensions = scanProfile.PageSize.PageDimensions() ?? scanProfile.CustomPageSize;
         if (pageDimensions == null)
         {
             throw new ArgumentException("No page size specified");

@@ -13,10 +13,10 @@ public class WorkerFactory : IWorkerFactory
     public const string WORKER_EXE_NAME = "NAPS2.Worker.exe";
     public const string PIPE_NAME_FORMAT = "NAPS2.Worker/{0}";
 
-    public static string[] SearchDirs => new[]
+    public static string?[] SearchDirs => new[]
     {
         Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location),
-        Path.GetDirectoryName(Assembly.GetEntryAssembly().Location)
+        Path.GetDirectoryName(Assembly.GetEntryAssembly()?.Location)
     };
 
     private readonly FileStorageManager _fileStorageManager;
@@ -35,7 +35,7 @@ public class WorkerFactory : IWorkerFactory
         {
             if (_workerExePath == null)
             {
-                foreach (var dir in SearchDirs)
+                foreach (var dir in SearchDirs.WhereNotNull())
                 {
                     _workerExePath = Path.Combine(dir, WORKER_EXE_NAME);
                     if (File.Exists(_workerExePath))
@@ -99,14 +99,14 @@ public class WorkerFactory : IWorkerFactory
         {
             var proc = StartWorkerProcess();
             var channel = new NamedPipeChannel(".", string.Format(PIPE_NAME_FORMAT, proc.Id));
-            _workerQueue.Add(new WorkerContext(new WorkerServiceAdapter(channel), proc));
+            _workerQueue!.Add(new WorkerContext(new WorkerServiceAdapter(channel), proc));
         });
     }
 
     private WorkerContext NextWorker()
     {
         StartWorkerService();
-        return _workerQueue.Take();
+        return _workerQueue!.Take();
     }
 
     public void Init()
@@ -125,6 +125,10 @@ public class WorkerFactory : IWorkerFactory
 
     public WorkerContext Create()
     {
+        if (_workerQueue == null)
+        {
+            throw new InvalidOperationException("WorkerFactory has not been initialized");
+        }
         var worker = NextWorker();
         worker.Service.Init(_fileStorageManager.FolderPath);
         return worker;

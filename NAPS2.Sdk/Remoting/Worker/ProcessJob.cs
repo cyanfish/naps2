@@ -10,7 +10,7 @@ namespace NAPS2.Remoting.Worker;
 public class Job : IDisposable
 {
     [DllImport("kernel32.dll", CharSet = CharSet.Unicode)]
-    private static extern IntPtr CreateJobObject(IntPtr a, string lpName);
+    private static extern IntPtr CreateJobObject(IntPtr a, string? lpName);
 
     [DllImport("kernel32.dll", SetLastError = true)]
     private static extern bool SetInformationJobObject(IntPtr hJob, JobObjectInfoType infoType, IntPtr lpJobObjectInfo, UInt32 cbJobObjectInfoLength);

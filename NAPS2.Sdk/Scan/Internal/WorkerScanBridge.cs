@@ -17,12 +17,21 @@ internal class WorkerScanBridge : IScanBridge
 
     public async Task<List<ScanDevice>> GetDeviceList(ScanOptions options)
     {
+        if (_scanningContext.WorkerFactory == null)
+        {
+            throw new InvalidOperationException("ScanningContext.WorkerFactory must be set to scan with a worker");
+        }
         using var ctx = _scanningContext.WorkerFactory.Create();
         return await ctx.Service.GetDeviceList(options);
     }
 
-    public async Task Scan(ScanOptions options, CancellationToken cancelToken, IScanEvents scanEvents, Action<ProcessedImage, PostProcessingContext> callback)
+    public async Task Scan(ScanOptions options, CancellationToken cancelToken, IScanEvents scanEvents,
+        Action<ProcessedImage, PostProcessingContext> callback)
     {
+        if (_scanningContext.WorkerFactory == null)
+        {
+            throw new InvalidOperationException("ScanningContext.WorkerFactory must be set to scan with a worker");
+        }
         using var ctx = _scanningContext.WorkerFactory.Create();
         await ctx.Service.Scan(_scanningContext, options, cancelToken, scanEvents,
             (image, tempPath) => { callback(image, new PostProcessingContext { TempPath = tempPath }); });

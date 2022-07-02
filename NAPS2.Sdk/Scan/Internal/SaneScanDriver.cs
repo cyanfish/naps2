@@ -299,7 +299,7 @@ internal class SaneScanDriver : IScanDriver
             ChooseNumericOption("--threshold", (-options.Brightness + 1000) / 20m);
         }
 
-        var width = options.PageSize.WidthInMm;
+        var width = options.PageSize!.WidthInMm;
         var height = options.PageSize.HeightInMm;
         ChooseNumericOption("-x", width);
         ChooseNumericOption("-y", height);

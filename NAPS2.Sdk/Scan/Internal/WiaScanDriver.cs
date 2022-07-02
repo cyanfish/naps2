@@ -30,17 +30,12 @@ internal class WiaScanDriver : IScanDriver
         });
     }
 
-    public Task Scan(ScanOptions options, CancellationToken cancelToken, IScanEvents scanEvents, Action<IMemoryImage> callback)
+    public Task Scan(ScanOptions options, CancellationToken cancelToken, IScanEvents scanEvents,
+        Action<IMemoryImage> callback)
     {
         return Task.Run(() =>
         {
-            var context = new WiaScanContext(_scanningContext)
-            {
-                Options = options,
-                ScanEvents = scanEvents,
-                CancelToken = cancelToken,
-                Callback = callback
-            };
+            var context = new WiaScanContext(_scanningContext, options, cancelToken, scanEvents, callback);
             try
             {
                 try
@@ -67,25 +62,25 @@ internal class WiaScanDriver : IScanDriver
     private class WiaScanContext
     {
         private readonly ScanningContext _scanningContext;
+        private readonly ScanOptions _options;
+        private readonly CancellationToken _cancelToken;
+        private readonly IScanEvents _scanEvents;
+        private readonly Action<IMemoryImage> _callback;
 
-        public WiaScanContext(ScanningContext scanningContext)
+        public WiaScanContext(ScanningContext scanningContext, ScanOptions options, CancellationToken cancelToken, IScanEvents scanEvents, Action<IMemoryImage> callback)
         {
             _scanningContext = scanningContext;
+            _options = options;
+            _cancelToken = cancelToken;
+            _scanEvents = scanEvents;
+            _callback = callback;
         }
-
-        public ScanOptions Options { get; set; }
-
-        public CancellationToken CancelToken { get; set; }
-
-        public IScanEvents ScanEvents { get; set; }
-
-        public Action<IMemoryImage> Callback { get; set; }
 
         public void Scan(WiaVersion wiaVersion)
         {
             using var deviceManager = new WiaDeviceManager(wiaVersion);
-            using var device = deviceManager.FindDevice(Options.Device.ID);
-            if (device.Version == WiaVersion.Wia20 && Options.UseNativeUI)
+            using var device = deviceManager.FindDevice(_options.Device.ID);
+            if (device.Version == WiaVersion.Wia20 && _options.UseNativeUI)
             {
                 DoWia20NativeTransfer(deviceManager, device);
                 return;
@@ -105,7 +100,7 @@ internal class WiaScanDriver : IScanDriver
             // WIA 2.0 doesn't support normal transfers with native UI.
             // Instead we need to have it write the scans to a set of files and load those.
 
-            var paths = deviceManager.PromptForImage(device, Options.DialogParent);
+            var paths = deviceManager.PromptForImage(device, _options.DialogParent);
 
             if (paths == null)
             {
@@ -122,7 +117,7 @@ internal class WiaScanDriver : IScanDriver
                         using (image)
                         {
                             // TODO: Might still need to do some work on ownership for in-memory ScannedImage storage
-                            Callback(image);
+                            _callback(image);
                         }
                     }
                 }
@@ -145,11 +140,11 @@ internal class WiaScanDriver : IScanDriver
 
         private void DoTransfer(WiaDevice device, WiaItem item)
         {
-            if (Options.PaperSource != PaperSource.Flatbed && !device.SupportsFeeder())
+            if (_options.PaperSource != PaperSource.Flatbed && !device.SupportsFeeder())
             {
                 throw new NoFeederSupportException();
             }
-            if (Options.PaperSource == PaperSource.Duplex && !device.SupportsDuplex())
+            if (_options.PaperSource == PaperSource.Duplex && !device.SupportsDuplex())
             {
                 throw new NoDuplexSupportException();
             }
@@ -165,7 +160,7 @@ internal class WiaScanDriver : IScanDriver
                     using (args.Stream)
                     using (var image = _scanningContext.ImageContext.Load(args.Stream))
                     {
-                        Callback(image);
+                        _callback(image);
                     }
                 }
                 catch (Exception e)
@@ -174,20 +169,20 @@ internal class WiaScanDriver : IScanDriver
                     scanException = e;
                 }
             };
-            transfer.Progress += (sender, args) => ScanEvents.PageProgress(args.Percent / 100.0);
-            using (CancelToken.Register(transfer.Cancel))
+            transfer.Progress += (sender, args) => _scanEvents.PageProgress(args.Percent / 100.0);
+            using (_cancelToken.Register(transfer.Cancel))
             {
-                ScanEvents.PageStart();
+                _scanEvents.PageStart();
                 transfer.Download();
 
-                if (device.Version == WiaVersion.Wia10 && Options.PaperSource != PaperSource.Flatbed)
+                if (device.Version == WiaVersion.Wia10 && _options.PaperSource != PaperSource.Flatbed)
                 {
                     // For WIA 1.0 feeder scans, we need to repeatedly call Download until WIA_ERROR_PAPER_EMPTY is received.
                     try
                     {
-                        while (!CancelToken.IsCancellationRequested && scanException == null)
+                        while (!_cancelToken.IsCancellationRequested && scanException == null)
                         {
-                            ScanEvents.PageStart();
+                            _scanEvents.PageStart();
                             transfer.Download();
                         }
                     }
@@ -202,17 +197,26 @@ internal class WiaScanDriver : IScanDriver
             }
         }
 
-        private WiaItem GetItem(WiaDevice device)
+        private WiaItem? GetItem(WiaDevice device)
         {
-            if (Options.UseNativeUI)
+            if (_options.UseNativeUI)
             {
                 bool useWorker = Environment.Is64BitProcess && device.Version == WiaVersion.Wia10;
                 if (useWorker)
                 {
-                    WiaConfiguration config;
+                    if (_scanningContext.WorkerFactory == null)
+                    {
+                        throw new InvalidOperationException(
+                            "ScanningContext.WorkerFactory must be set to use WIA 1.0 Native UI from a 64-bit process");
+                    }
+                    WiaConfiguration? config;
                     using (var worker = _scanningContext.WorkerFactory.Create())
                     {
-                        config = worker.Service.Wia10NativeUI(device.Id(), Options.DialogParent);
+                        config = worker.Service.Wia10NativeUI(device.Id(), _options.DialogParent);
+                    }
+                    if (config == null)
+                    {
+                        return null;
                     }
                     var item = device.FindSubItem(config.ItemName);
                     device.Properties.DeserializeEditable(device.Properties.Delta(config.DeviceProps));
@@ -221,7 +225,7 @@ internal class WiaScanDriver : IScanDriver
                 }
                 else
                 {
-                    return device.PromptToConfigure(Options.DialogParent);
+                    return device.PromptToConfigure(_options.DialogParent);
                 }
             }
             else if (device.Version == WiaVersion.Wia10)
@@ -237,19 +241,19 @@ internal class WiaScanDriver : IScanDriver
                 // The "Feeder" child may also have a pair of children (for front/back sides with duplex)
                 // https://docs.microsoft.com/en-us/windows-hardware/drivers/image/simple-duplex-capable-document-feeder
                 var items = device.GetSubItems();
-                var preferredItemName = Options.PaperSource == PaperSource.Flatbed ? "Flatbed" : "Feeder";
+                var preferredItemName = _options.PaperSource == PaperSource.Flatbed ? "Flatbed" : "Feeder";
                 return items.FirstOrDefault(x => x.Name() == preferredItemName) ?? items.First();
             }
         }
 
         private void ConfigureProps(WiaDevice device, WiaItem item)
         {
-            if (Options.UseNativeUI)
+            if (_options.UseNativeUI)
             {
                 return;
             }
 
-            if (Options.PaperSource != PaperSource.Flatbed)
+            if (_options.PaperSource != PaperSource.Flatbed)
             {
                 if (device.Version == WiaVersion.Wia10)
                 {
@@ -263,7 +267,7 @@ internal class WiaScanDriver : IScanDriver
 
             if (device.Version == WiaVersion.Wia10)
             {
-                switch (Options.PaperSource)
+                switch (_options.PaperSource)
                 {
                     case PaperSource.Flatbed:
                         device.SafeSetProperty(WiaPropertyId.DPS_DOCUMENT_HANDLING_SELECT, WiaPropertyValue.FLATBED);
@@ -272,13 +276,14 @@ internal class WiaScanDriver : IScanDriver
                         device.SafeSetProperty(WiaPropertyId.DPS_DOCUMENT_HANDLING_SELECT, WiaPropertyValue.FEEDER);
                         break;
                     case PaperSource.Duplex:
-                        device.SafeSetProperty(WiaPropertyId.DPS_DOCUMENT_HANDLING_SELECT, WiaPropertyValue.FEEDER | WiaPropertyValue.DUPLEX);
+                        device.SafeSetProperty(WiaPropertyId.DPS_DOCUMENT_HANDLING_SELECT,
+                            WiaPropertyValue.FEEDER | WiaPropertyValue.DUPLEX);
                         break;
                 }
             }
             else
             {
-                switch (Options.PaperSource)
+                switch (_options.PaperSource)
                 {
                     case PaperSource.Feeder:
                         item.SafeSetProperty(WiaPropertyId.IPS_DOCUMENT_HANDLING_SELECT, WiaPropertyValue.FRONT_ONLY);
@@ -289,7 +294,7 @@ internal class WiaScanDriver : IScanDriver
                 }
             }
 
-            switch (Options.BitDepth)
+            switch (_options.BitDepth)
             {
                 case BitDepth.Grayscale:
                     item.SafeSetProperty(WiaPropertyId.IPA_DATATYPE, 2);
@@ -302,45 +307,45 @@ internal class WiaScanDriver : IScanDriver
                     break;
             }
 
-            int xRes = Options.Dpi;
-            int yRes = Options.Dpi;
+            int xRes = _options.Dpi;
+            int yRes = _options.Dpi;
             item.SafeSetPropertyClosest(WiaPropertyId.IPS_XRES, ref xRes);
             item.SafeSetPropertyClosest(WiaPropertyId.IPS_YRES, ref yRes);
 
-            int pageWidth = Options.PageSize.WidthInThousandthsOfAnInch * xRes / 1000;
-            int pageHeight = Options.PageSize.HeightInThousandthsOfAnInch * yRes / 1000;
+            int pageWidth = _options.PageSize!.WidthInThousandthsOfAnInch * xRes / 1000;
+            int pageHeight = _options.PageSize.HeightInThousandthsOfAnInch * yRes / 1000;
 
             int horizontalSize, verticalSize;
             if (device.Version == WiaVersion.Wia10)
             {
                 horizontalSize =
-                    (int)device.Properties[Options.PaperSource == PaperSource.Flatbed
+                    (int) device.Properties[_options.PaperSource == PaperSource.Flatbed
                         ? WiaPropertyId.DPS_HORIZONTAL_BED_SIZE
                         : WiaPropertyId.DPS_HORIZONTAL_SHEET_FEED_SIZE].Value;
                 verticalSize =
-                    (int)device.Properties[Options.PaperSource == PaperSource.Flatbed
+                    (int) device.Properties[_options.PaperSource == PaperSource.Flatbed
                         ? WiaPropertyId.DPS_VERTICAL_BED_SIZE
                         : WiaPropertyId.DPS_VERTICAL_SHEET_FEED_SIZE].Value;
             }
             else
             {
-                horizontalSize = (int)item.Properties[WiaPropertyId.IPS_MAX_HORIZONTAL_SIZE].Value;
-                verticalSize = (int)item.Properties[WiaPropertyId.IPS_MAX_VERTICAL_SIZE].Value;
+                horizontalSize = (int) item.Properties[WiaPropertyId.IPS_MAX_HORIZONTAL_SIZE].Value;
+                verticalSize = (int) item.Properties[WiaPropertyId.IPS_MAX_VERTICAL_SIZE].Value;
             }
 
             int pagemaxwidth = horizontalSize * xRes / 1000;
             int pagemaxheight = verticalSize * yRes / 1000;
 
             int horizontalPos = 0;
-            if (Options.PageAlign == HorizontalAlign.Center)
+            if (_options.PageAlign == HorizontalAlign.Center)
                 horizontalPos = (pagemaxwidth - pageWidth) / 2;
-            else if (Options.PageAlign == HorizontalAlign.Left)
+            else if (_options.PageAlign == HorizontalAlign.Left)
                 horizontalPos = (pagemaxwidth - pageWidth);
 
             pageWidth = pageWidth < pagemaxwidth ? pageWidth : pagemaxwidth;
             pageHeight = pageHeight < pagemaxheight ? pageHeight : pagemaxheight;
 
-            if (Options.WiaOptions.OffsetWidth)
+            if (_options.WiaOptions.OffsetWidth)
             {
                 item.SafeSetProperty(WiaPropertyId.IPS_XEXTENT, pageWidth + horizontalPos);
                 item.SafeSetProperty(WiaPropertyId.IPS_XPOS, horizontalPos);
@@ -352,10 +357,10 @@ internal class WiaScanDriver : IScanDriver
             }
             item.SafeSetProperty(WiaPropertyId.IPS_YEXTENT, pageHeight);
 
-            if (!Options.BrightnessContrastAfterScan)
+            if (!_options.BrightnessContrastAfterScan)
             {
-                item.SafeSetPropertyRange(WiaPropertyId.IPS_CONTRAST, Options.Contrast, -1000, 1000);
-                item.SafeSetPropertyRange(WiaPropertyId.IPS_BRIGHTNESS, Options.Brightness, -1000, 1000);
+                item.SafeSetPropertyRange(WiaPropertyId.IPS_CONTRAST, _options.Contrast, -1000, 1000);
+                item.SafeSetPropertyRange(WiaPropertyId.IPS_BRIGHTNESS, _options.Brightness, -1000, 1000);
             }
         }
     }

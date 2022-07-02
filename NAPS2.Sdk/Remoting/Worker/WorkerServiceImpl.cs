@@ -72,15 +72,15 @@ public class WorkerServiceImpl : WorkerService.WorkerServiceBase
                 using var deviceManager = new WiaDeviceManager(WiaVersion.Wia10);
                 using var device = deviceManager.FindDevice(request.DeviceId);
                 var item = device.PromptToConfigure((IntPtr) request.Hwnd);
-                return Task.FromResult(new Wia10NativeUiResponse
+                var response = new Wia10NativeUiResponse();
+                if (item != null)
                 {
-                    WiaConfigurationXml = new WiaConfiguration
-                    {
-                        DeviceProps = device.Properties.SerializeEditable(),
-                        ItemProps = item.Properties.SerializeEditable(),
-                        ItemName = item.Name()
-                    }.ToXml()
-                });
+                    response.WiaConfigurationXml = new WiaConfiguration(
+                        device.Properties.SerializeEditable(),
+                        item.Properties.SerializeEditable(),
+                        item.Name()).ToXml();
+                }
+                return Task.FromResult(response);
             }
             catch (WiaException e)
             {

@@ -18,7 +18,8 @@ public class RemoteTwainSessionController : ITwainSessionController
     {
         if (_scanningContext.WorkerFactory == null)
         {
-            throw new InvalidOperationException();
+            throw new InvalidOperationException(
+                "ScanningContext.WorkerFactory must be set to use TWAIN from a 64-bit process.");
         }
         using var workerContext = _scanningContext.WorkerFactory.Create();
         return await workerContext.Service.GetDeviceList(options);
@@ -28,7 +29,8 @@ public class RemoteTwainSessionController : ITwainSessionController
     {
         if (_scanningContext.WorkerFactory == null)
         {
-            throw new InvalidOperationException();
+            throw new InvalidOperationException(
+                "ScanningContext.WorkerFactory must be set to use TWAIN from a 64-bit process.");
         }
         using var workerContext = _scanningContext.WorkerFactory.Create();
         await workerContext.Service.TwainScan(options, cancelToken, twainEvents);

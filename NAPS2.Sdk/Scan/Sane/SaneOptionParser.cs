@@ -14,11 +14,11 @@ public class SaneOptionParser
         { "us", SaneUnit.Microsecond }
     };
 
-    private StreamReader _input;
-    private SaneOptionCollection _options;
-    private SaneOption _lastOption;
+    private StreamReader? _input;
+    private SaneOptionCollection? _options;
+    private SaneOption? _lastOption;
     private OptionParseState _state;
-    private string _line;
+    private string? _line;
 
     public SaneOptionCollection Parse(StreamReader streamReader)
     {
@@ -52,6 +52,11 @@ public class SaneOptionParser
                 case OptionParseState.ReadingDescription:
                     if (_line.StartsWith("        ", StringComparison.InvariantCultureIgnoreCase))
                     {
+                        if (_lastOption == null)
+                        {
+                            // TODO: Seems like this case is possible to hit, should avoid
+                            throw new InvalidOperationException("Couldn't read option");
+                        }
                         string descLine = _line.Substring(8).Trim();
                         if (_lastOption.Desc == null)
                         {
@@ -84,7 +89,7 @@ public class SaneOptionParser
         var optionValueList = new List<string>();
         var builder = new StringBuilder();
         _state = OptionParseState.ReadingName;
-        while (i < _line.Length)
+        while (i < _line!.Length)
         {
             char c = _line[i];
             switch (_state)
@@ -260,7 +265,7 @@ public class SaneOptionParser
                         return;
                     }
                     builder.Clear();
-                    option.Range.Quant = quant;
+                    option.Range!.Quant = quant;
                     i += 1;
                     _state = OptionParseState.LookingForDefaultValue;
                     break;
@@ -331,14 +336,14 @@ public class SaneOptionParser
             }
         }
 
-        _options.Add(option);
+        _options!.Add(option);
         _lastOption = option;
         _state = OptionParseState.ReadingDescription;
     }
 
     private void NextLine()
     {
-        _line = _input.ReadLine();
+        _line = _input!.ReadLine();
         if (_line != null)
         {
             _line = _line.TrimEnd() + "\n";

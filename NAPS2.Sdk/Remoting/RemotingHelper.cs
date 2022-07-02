@@ -9,12 +9,12 @@ public static class RemotingHelper
     {
         if (error != null && !string.IsNullOrEmpty(error.Type))
         {
-            var exceptionType = Assembly.GetAssembly(typeof(ScanDriverException))
+            var exceptionType = Assembly.GetAssembly(typeof(ScanDriverException))!
                 .GetTypes()
                 .FirstOrDefault(x => x.FullName == error.Type);
             if (exceptionType != null)
             {
-                var exception = (Exception)Activator.CreateInstance(exceptionType);
+                var exception = (Exception)Activator.CreateInstance(exceptionType)!;
                 var messageField = typeof(Exception).GetField("_message", BindingFlags.NonPublic | BindingFlags.Instance);
                 var stackTraceField = typeof(Exception).GetField("_stackTraceString", BindingFlags.NonPublic | BindingFlags.Instance);
                 messageField?.SetValue(exception, error.Message);
@@ -27,7 +27,7 @@ public static class RemotingHelper
     }
 
     public static Error ToError(Exception e) =>
-        new Error
+        new()
         {
             Type = e.GetType().FullName,
             Message = e.Message,

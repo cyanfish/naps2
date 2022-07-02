@@ -5,7 +5,7 @@ public class ScanOptions
 {
     public Driver Driver { get; set; }
 
-    public ScanDevice Device { get; set; }
+    public ScanDevice? Device { get; set; }
 
     public PaperSource PaperSource { get; set; }
 
@@ -13,21 +13,21 @@ public class ScanOptions
 
     public int ScaleRatio { get; set; }
 
-    public PageSize PageSize { get; set; }
+    public PageSize? PageSize { get; set; }
 
     public int Brightness { get; set; }
 
     public int Contrast { get; set; }
 
-    public NetworkOptions NetworkOptions { get; set; } = new NetworkOptions();
+    public NetworkOptions NetworkOptions { get; set; } = new();
 
-    public WiaOptions WiaOptions { get; set; } = new WiaOptions();
+    public WiaOptions WiaOptions { get; set; } = new();
 
-    public TwainOptions TwainOptions { get; set; } = new TwainOptions();
+    public TwainOptions TwainOptions { get; set; } = new();
 
-    public SaneOptions SaneOptions { get; set; } = new SaneOptions();
+    public SaneOptions SaneOptions { get; set; } = new();
 
-    public BarcodeDetectionOptions BarcodeDetectionOptions { get; set; } = new BarcodeDetectionOptions();
+    public BarcodeDetectionOptions BarcodeDetectionOptions { get; set; } = new();
 
     public BitDepth BitDepth { get; set; }
 
