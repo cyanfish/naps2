@@ -5,6 +5,9 @@ using NAPS2.Platform.Windows;
 
 namespace NAPS2.ImportExport.Email.Mapi;
 
+#if NET5_0_OR_GREATER
+[System.Runtime.Versioning.SupportedOSPlatform("windows7.0")]
+#endif
 public class SystemEmailClients
 {
     private const string DEFAULT_MAPI_DLL = "mapi32.dll";
@@ -29,7 +32,7 @@ public class SystemEmailClients
     public Image? GetIcon(string clientName)
     {
         using var command = Registry.LocalMachine.OpenSubKey($@"SOFTWARE\Clients\Mail\{clientName}\shell\open\command", false);
-        string commandText = command?.GetValue(null).ToString() ?? "";
+        string commandText = command?.GetValue(null)?.ToString() ?? "";
         if (!commandText.StartsWith("\"", StringComparison.InvariantCulture))
         {
             return null;

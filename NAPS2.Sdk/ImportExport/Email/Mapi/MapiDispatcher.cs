@@ -7,6 +7,9 @@ public class MapiDispatcher
     private readonly ScanningContext _scanningContext;
     private readonly IMapiWrapper _mapiWrapper;
 
+#if NET5_0_OR_GREATER
+    [System.Runtime.Versioning.SupportedOSPlatform("windows7.0")]
+#endif
     public MapiDispatcher(ScanningContext scanningContext)
         : this(scanningContext, new MapiWrapper(new SystemEmailClients()))
     {
@@ -28,6 +31,9 @@ public class MapiDispatcher
     /// <returns>The MAPI return code.</returns>
     public async Task<MapiSendMailReturnCode> SendEmail(string? clientName, EmailMessage message)
     {
+#if NET5_0_OR_GREATER
+        if (!OperatingSystem.IsWindowsVersionAtLeast(7)) throw new InvalidOperationException("Windows-only");
+#endif
         if (UseWorker && !_mapiWrapper.CanLoadClient(clientName))
         {
             using var worker = _scanningContext.WorkerFactory.Create();

@@ -38,11 +38,12 @@
   </PropertyGroup>
   
   <ItemGroup>
+    <PackageReference Include="ZXing.Net.Bindings.Windows.Compatibility" Version="0.16.7" />
     <Reference Include="PdfSharp">
       <HintPath>..\NAPS2.Setup\lib\PdfSharp.dll</HintPath>
     </Reference>
     
-    <PackageReference Include="Grpc.Tools" Version="2.47.0" PrivateAssets="all" />
+    <PackageReference Include="Grpc.Tools" Version="2.26.0" PrivateAssets="all" />
     <PackageReference Include="GrpcDotNetNamedPipes" Version="1.4.4" />
     <PackageReference Include="Microsoft.Bcl.AsyncInterfaces" Version="6.0.0" />
     <PackageReference Include="Microsoft.Win32.Registry" Version="5.0.0" />
@@ -51,14 +52,15 @@
     <!-- TODO: Does this actually work if we build a net5 framework-dependent app and try to use Twain? -->
     <PackageReference Include="NTwain" Version="3.7.1" NoWarn="NU1701" />
     <PackageReference Include="Nullable" Version="1.2.0" />
-    <PackageReference Include="System.Drawing.Common" Version="6.0.0" />
+    <!-- We're deliberately using an older version of System.Drawing.Common to include cross-platform support. -->
+    <!-- TODO: Eventually we will get rid of this dependency on non-windows and will be able to upgrade. -->
+    <PackageReference Include="System.Drawing.Common" Version="5.0.3" />
     <PackageReference Include="System.Collections.Immutable" Version="6.0.0" />
     <PackageReference Include="System.Resources.Extensions" Version="6.0.0" />
     <PackageReference Include="System.Security.Cryptography.ProtectedData" Version="6.0.0" />
     <PackageReference Include="System.Text.Encoding.CodePages" Version="6.0.0" />
     <PackageReference Include="System.Threading.Tasks.Dataflow" Version="6.0.0" />
     <PackageReference Include="ZXing.Net" Version="0.16.8" />
-    <PackageReference Include="ZXing.Net.Bindings.Windows.Compatibility" Version="0.16.10" Condition="'$(TargetFramework)' != 'net462'" />
   </ItemGroup>
   
   <ItemGroup>

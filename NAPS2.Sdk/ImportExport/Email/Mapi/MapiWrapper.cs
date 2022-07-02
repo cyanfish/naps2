@@ -2,6 +2,9 @@
 
 namespace NAPS2.ImportExport.Email.Mapi;
 
+#if NET5_0_OR_GREATER
+[System.Runtime.Versioning.SupportedOSPlatform("windows7.0")]
+#endif
 public class MapiWrapper : IMapiWrapper
 {
     private readonly SystemEmailClients _systemEmailClients;

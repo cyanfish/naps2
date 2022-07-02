@@ -1,5 +1,4 @@
 using System.Threading;
-using NAPS2.Remoting.Worker;
 
 namespace NAPS2.ImportExport.Email.Mapi;
 
@@ -16,8 +15,6 @@ public class MapiEmailProvider : IEmailProvider
         _errorOutput = errorOutput;
     }
 
-    private bool UseWorker => Environment.Is64BitProcess && PlatformCompat.Runtime.UseWorker;
-
     /// <summary>
     /// Sends an email described by the given message object.
     /// </summary>
@@ -27,6 +24,9 @@ public class MapiEmailProvider : IEmailProvider
     /// <returns>Returns true if the message was sent, false if the user aborted.</returns>
     public Task<bool> SendEmail(EmailMessage message, ProgressHandler progressCallback, CancellationToken cancelToken)
     {
+#if NET5_0_OR_GREATER
+        if (!OperatingSystem.IsWindowsVersionAtLeast(7)) throw new InvalidOperationException("Windows-only");
+#endif
         return Task.Run(async () =>
         {
             var clientName = _config.Get(c => c.EmailSetup.SystemProviderName);

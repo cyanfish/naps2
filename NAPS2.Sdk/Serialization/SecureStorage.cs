@@ -14,23 +14,36 @@ public static class SecureStorage
 {
     public static Lazy<RandomNumberGenerator> CryptoRandom { get; } = new(RandomNumberGenerator.Create);
 
-    [return: NotNullIfNotNull("plainText")]
+    [return: NotNullIfNotNull("plaintext")]
     public static string? Encrypt(string plaintext)
     {
+#if STANDALONE
+        return plaintext;
+#else
+#if NET5_0_OR_GREATER
+        if (!OperatingSystem.IsWindowsVersionAtLeast(7)) return plaintext;
+#endif
         if (plaintext == null)
         {
             return null;
         }
         byte[] salt = new byte[8];
         CryptoRandom.Value.GetBytes(salt);
-        // TODO: This won't work for portable...
-        byte[] ciphertext = ProtectedData.Protect(Encoding.UTF8.GetBytes(plaintext), salt, DataProtectionScope.CurrentUser);
+        var encoded = Encoding.UTF8.GetBytes(plaintext);
+        byte[] ciphertext = ProtectedData.Protect(encoded, salt, DataProtectionScope.CurrentUser);
         return $"encrypted-{Convert.ToBase64String(salt)}-{Convert.ToBase64String(ciphertext)}";
+#endif
     }
 
     [return: NotNullIfNotNull("coded")]
     public static string? Decrypt(string coded)
     {
+#if STANDALONE
+        return coded;
+#else
+#if NET5_0_OR_GREATER
+        if (!OperatingSystem.IsWindowsVersionAtLeast(7)) return coded;
+#endif
         if (coded == null)
         {
             return null;
@@ -43,7 +56,9 @@ public static class SecureStorage
         }
         byte[] salt = Convert.FromBase64String(parts[1]);
         byte[] ciphertext = Convert.FromBase64String(parts[2]);
-        string plaintext = Encoding.UTF8.GetString(ProtectedData.Unprotect(ciphertext, salt, DataProtectionScope.CurrentUser));
+        byte[] decrypted = ProtectedData.Unprotect(ciphertext, salt, DataProtectionScope.CurrentUser);
+        string plaintext = Encoding.UTF8.GetString(decrypted);
         return plaintext;
+#endif
     }
 }
