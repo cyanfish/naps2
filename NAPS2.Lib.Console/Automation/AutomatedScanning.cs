@@ -8,6 +8,7 @@ using NAPS2.ImportExport.Images;
 using NAPS2.ImportExport.Pdf;
 using NAPS2.Lang.ConsoleResources;
 using NAPS2.Ocr;
+using NAPS2.Recovery;
 using NAPS2.Scan;
 using NAPS2.WinForms;
 
@@ -590,7 +591,6 @@ public class AutomatedScanning
                 NoUI = !_options.Progress,
                 NoAutoSave = !_options.AutoSave || !autoSaveEnabled,
                 DetectPatchT = _options.SplitPatchT,
-                DoOcr = _ocrParams?.LanguageCode != null,
                 OcrParams = _ocrParams
             };
             var source = await _scanPerformer.PerformScan(profile, scanParams);

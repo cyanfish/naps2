@@ -14,7 +14,7 @@ public class KeyValueScanOptions : Dictionary<string, string>
     {
         XmlSerializer.RegisterCustomSerializer(new Serializer());
     }
-        
+
     public KeyValueScanOptions()
     {
     }
@@ -40,7 +40,9 @@ public class KeyValueScanOptions : Dictionary<string, string>
             var obj = new KeyValueScanOptions();
             foreach (var itemElement in element.Elements())
             {
-                obj.Add(itemElement.Attribute("name").Value, itemElement.Value);
+                var name = itemElement.Attribute("name")?.Value ??
+                           throw new InvalidOperationException("Could not read option name");
+                obj.Add(name, itemElement.Value);
             }
             return obj;
         }

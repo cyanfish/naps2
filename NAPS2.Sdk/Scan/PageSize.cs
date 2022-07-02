@@ -4,19 +4,19 @@ namespace NAPS2.Scan;
 
 public record PageSize
 {
-    public static PageSize Letter = new PageSize("8.5", "11", PageSizeUnit.Inch);
+    public static PageSize Letter = new("8.5", "11", PageSizeUnit.Inch);
 
-    public static PageSize Legal = new PageSize("8.5", "14", PageSizeUnit.Inch);
+    public static PageSize Legal = new("8.5", "14", PageSizeUnit.Inch);
 
-    public static PageSize A5 = new PageSize("148", "210", PageSizeUnit.Millimetre);
+    public static PageSize A5 = new("148", "210", PageSizeUnit.Millimetre);
 
-    public static PageSize A4 = new PageSize("210", "297", PageSizeUnit.Millimetre);
+    public static PageSize A4 = new("210", "297", PageSizeUnit.Millimetre);
 
-    public static PageSize A3 = new PageSize("297", "420", PageSizeUnit.Millimetre);
+    public static PageSize A3 = new("297", "420", PageSizeUnit.Millimetre);
 
-    public static PageSize B5 = new PageSize("176", "250", PageSizeUnit.Millimetre);
+    public static PageSize B5 = new("176", "250", PageSizeUnit.Millimetre);
 
-    public static PageSize B4 = new PageSize("250", "353", PageSizeUnit.Millimetre);
+    public static PageSize B4 = new("250", "353", PageSizeUnit.Millimetre);
 
     protected PageSize()
     {

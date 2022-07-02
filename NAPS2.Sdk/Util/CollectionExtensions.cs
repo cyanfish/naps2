@@ -28,7 +28,7 @@ public static class CollectionExtensions
     /// </summary>
     /// <typeparam name="T"></typeparam>
     /// <param name="enumerable"></param>
-    /// <param name="item"></param>
+    /// <param name="defaultValue"></param>
     /// <returns></returns>
     public static T FirstOrDefault<T>(this IEnumerable<T> enumerable, T defaultValue)
     {
@@ -61,7 +61,7 @@ public static class CollectionExtensions
     /// </summary>
     /// <param name="list"></param>
     /// <param name="elements"></param>
-    public static void RemoveAll<T>(this List<T> list, IEnumerable<T> elements)
+    public static void RemoveAll<T>(this List<T> list, IEnumerable<T> elements) where T : notnull
     {
         list.RemoveAllAt(list.IndiciesOf(elements));
     }
@@ -99,10 +99,10 @@ public static class CollectionExtensions
     /// <param name="list"></param>
     /// <param name="elements"></param>
     /// <returns></returns>
-    public static IEnumerable<int> IndiciesOf<T>(this IList<T> list, IEnumerable<T> elements)
+    public static IEnumerable<int> IndiciesOf<T>(this IList<T> list, IEnumerable<T> elements) where T : notnull
     {
         int i = 0;
-        var elementDict = list.ToDictionary(element => element, element => i++);
+        var elementDict = list.ToDictionary(element => element, _ => i++);
         return elements.Select(x => elementDict.Get(x, -1)).ToList();
     }
 

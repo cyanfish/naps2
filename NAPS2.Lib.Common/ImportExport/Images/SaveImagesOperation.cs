@@ -41,7 +41,7 @@ public class SaveImagesOperation : OperationBase
             MaxProgress = images.Count
         };
 
-        RunAsync(async () =>
+        RunAsync(() =>
         {
             try
             {
@@ -65,7 +65,7 @@ public class SaveImagesOperation : OperationBase
                     }
                     Status.StatusText = string.Format(MiscResources.SavingFormat, Path.GetFileName(subFileName));
                     FirstFileSaved = subFileName;
-                    return await _tiffHelper.SaveMultipage(images, subFileName, imageSettings.TiffCompression, OnProgress, CancelToken);
+                    return _tiffHelper.SaveMultipage(images, subFileName, imageSettings.TiffCompression, OnProgress, CancelToken);
                 }
 
                 int i = 0;
@@ -95,7 +95,7 @@ public class SaveImagesOperation : OperationBase
                     {
                         Status.StatusText = string.Format(MiscResources.SavingFormat, Path.GetFileName(subFileName));
                         InvokeStatusChanged();
-                        await DoSaveImage(image, subFileName, format, imageSettings);
+                        DoSaveImage(image, subFileName, format, imageSettings);
                         FirstFileSaved = subFileName;
                     }
                     else
@@ -104,7 +104,7 @@ public class SaveImagesOperation : OperationBase
                             digits);
                         Status.StatusText = string.Format(MiscResources.SavingFormat, Path.GetFileName(fileNameN));
                         InvokeStatusChanged();
-                        await DoSaveImage(image, fileNameN, format, imageSettings);
+                        DoSaveImage(image, fileNameN, format, imageSettings);
 
                         if (i == 0)
                         {
@@ -127,7 +127,7 @@ public class SaveImagesOperation : OperationBase
             }
             return false;
         });
-        Success.ContinueWith(task =>
+        Success!.ContinueWith(task =>
         {
             if (task.Result)
             {
@@ -143,12 +143,12 @@ public class SaveImagesOperation : OperationBase
         return true;
     }
 
-    private async Task DoSaveImage(ProcessedImage image, string path, ImageFormat format, ImageSettings imageSettings)
+    private void DoSaveImage(ProcessedImage image, string path, ImageFormat format, ImageSettings imageSettings)
     {
         PathHelper.EnsureParentDirExists(path);
         if (Equals(format, ImageFormat.Tiff))
         {
-            await _tiffHelper.SaveMultipage(new List<ProcessedImage> { image }, path, imageSettings.TiffCompression, (i, j) => { }, CancellationToken.None);
+            _tiffHelper.SaveMultipage(new List<ProcessedImage> { image }, path, imageSettings.TiffCompression, (i, j) => { }, CancellationToken.None);
         }
         else if (Equals(format, ImageFormat.Jpeg))
         {
@@ -170,7 +170,6 @@ public class SaveImagesOperation : OperationBase
     private static ImageFormat GetImageFormat(string fileName)
     {
         string extension = Path.GetExtension(fileName);
-        Debug.Assert(extension != null);
         switch (extension.ToLower())
         {
             case ".bmp":

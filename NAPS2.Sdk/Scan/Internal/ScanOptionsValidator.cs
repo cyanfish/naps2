@@ -4,7 +4,7 @@ namespace NAPS2.Scan.Internal;
 
 public class ScanOptionsValidator
 {
-    public ScanOptions ValidateAll(ScanOptions options)
+    public ScanOptions ValidateAll(ScanOptions options, bool requireDevice)
     {
         // Easy deep copy. Ideally we'd do this in a more efficient way.
         options = options.ToXml().FromXml<ScanOptions>();
@@ -13,6 +13,14 @@ public class ScanOptionsValidator
         if (options.Driver == Driver.Sane)
         {
             options.UseNativeUI = false;
+        }
+
+        if (requireDevice)
+        {
+            if (string.IsNullOrEmpty(options.Device?.ID))
+            {
+                throw new ArgumentException("ScanOptions.Device.ID must be specified");
+            }
         }
 
         if (options.PageSize == null)

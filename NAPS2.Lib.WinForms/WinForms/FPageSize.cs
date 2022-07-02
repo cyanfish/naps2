@@ -12,7 +12,7 @@ public partial class FPageSize : FormBase
     {
         InitializeComponent();
 
-        AddEnumItems<PageSizeUnit>(comboUnit);
+        AddEnumItems<LocalizedPageSizeUnit>(comboUnit);
     }
 
     public string PageSizeName { get; set; }
@@ -96,7 +96,7 @@ public partial class FPageSize : FormBase
             return;
         }
         PageSizeName = null;
-        PageSizeDimens = new PageDimensions(width, height, (PageSizeUnit) comboUnit.SelectedIndex);
+        PageSizeDimens = new PageDimensions(width, height, (LocalizedPageSizeUnit) comboUnit.SelectedIndex);
         if (!string.IsNullOrWhiteSpace(comboName.Text))
         {
             PageSizeName = comboName.Text;

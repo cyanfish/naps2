@@ -22,11 +22,7 @@ public class ScanParams
 
     public bool SkipPostProcessing { get; set; }
 
-    public bool DoOcr { get; set; }
+    public OcrParams? OcrParams { get; set; }
 
-    [IgnoreDataMember]
-    public OcrParams OcrParams { get; set; }
-
-    [IgnoreDataMember]
     public CancellationToken OcrCancelToken { get; set; }
 }

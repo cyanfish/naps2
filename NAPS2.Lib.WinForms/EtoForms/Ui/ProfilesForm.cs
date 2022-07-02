@@ -215,10 +215,10 @@ public class ProfilesForm : EtoDialogBase
     }
 
     private ScanParams DefaultScanParams() =>
-        new ScanParams
+        new()
         {
             NoAutoSave = Config.Get(c => c.DisableAutoSave),
-            DoOcr = Config.Get(c => c.EnableOcr) && Config.Get(c => c.OcrAfterScanning),
+            OcrParams = Config.OcrAfterScanningParams(),
             ThumbnailSize = Config.Get(c => c.ThumbnailSize)
         };
 

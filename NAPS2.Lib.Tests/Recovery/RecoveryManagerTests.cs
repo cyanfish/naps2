@@ -3,10 +3,11 @@ using Moq;
 using NAPS2.Images.Gdi;
 using NAPS2.Recovery;
 using NAPS2.Scan;
+using NAPS2.Sdk.Tests;
 using NAPS2.Sdk.Tests.Asserts;
 using Xunit;
 
-namespace NAPS2.Sdk.Tests.Recovery;
+namespace NAPS2.Lib.Tests.Recovery;
 
 public class RecoveryManagerTests : ContextualTexts
 {

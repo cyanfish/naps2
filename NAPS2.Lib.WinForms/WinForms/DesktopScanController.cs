@@ -30,7 +30,7 @@ public class DesktopScanController : IDesktopScanController
         new()
         {
             NoAutoSave = _config.Get(c => c.DisableAutoSave),
-            DoOcr = _config.Get(c => c.EnableOcr) && _config.Get(c => c.OcrAfterScanning),
+            OcrParams = _config.OcrAfterScanningParams(),
             ThumbnailSize = _config.Get(c => c.ThumbnailSize)
         };
 

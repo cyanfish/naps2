@@ -3,6 +3,7 @@ using System.Text;
 using NAPS2.Automation;
 using NAPS2.Modules;
 using NAPS2.Ocr;
+using NAPS2.Recovery;
 using NAPS2.Scan;
 using NAPS2.Scan.Internal;
 using NAPS2.Sdk.Tests;

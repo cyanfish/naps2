@@ -51,15 +51,14 @@ public partial class FAutoSaveSettings : FormBase
 
     private void SaveSettings()
     {
-        ScanProfile.AutoSaveSettings = new AutoSaveSettings
-        {
-            FilePath = txtFilePath.Text,
-            PromptForFilePath = cbPromptForFilePath.Checked,
-            ClearImagesAfterSaving = cbClearAfterSave.Checked,
-            Separator = rdFilePerScan.Checked ? SaveSeparator.FilePerScan
-                : rdSeparateByPatchT.Checked ? SaveSeparator.PatchT
-                : SaveSeparator.FilePerPage
-        };
+        var separator = rdFilePerScan.Checked ? SaveSeparator.FilePerScan
+            : rdSeparateByPatchT.Checked ? SaveSeparator.PatchT
+            : SaveSeparator.FilePerPage;
+        ScanProfile.AutoSaveSettings = new AutoSaveSettings(
+            txtFilePath.Text,
+            cbPromptForFilePath.Checked,
+            cbClearAfterSave.Checked,
+            separator);
     }
 
     private void btnOK_Click(object sender, EventArgs e)

@@ -12,9 +12,9 @@ internal class SaneScanDriver : IScanDriver
     private const string SCANIMAGE = "scanimage";
     private const int SIGINT = 2;
     private const int SIGTERM = 15;
-    private static readonly Regex ProgressRegex = new Regex(@"^Progress: (\d+(\.\d+)?)%");
+    private static readonly Regex ProgressRegex = new(@"^Progress: (\d+(\.\d+)?)%");
 
-    private static readonly Dictionary<string, SaneOptionCollection> SaneOptionCache = new Dictionary<string, SaneOptionCollection>();
+    private static readonly Dictionary<string, SaneOptionCollection> SaneOptionCache = new();
 
     private readonly ScanningContext _scanningContext;
 
@@ -30,7 +30,7 @@ internal class SaneScanDriver : IScanDriver
             var deviceList = new List<ScanDevice>();
             var proc = StartProcess(SCANIMAGE, @"--formatted-device-list=%d|%m%n");
 
-            string line;
+            string? line;
             while ((line = proc.StandardOutput.ReadLine()?.Trim()) != null)
             {
                 string[] parts = line.Split('|');
@@ -70,10 +70,10 @@ internal class SaneScanDriver : IScanDriver
         });
     }
 
-    private Stream ScanOne(string deviceId, KeyValueScanOptions options, CancellationToken cancelToken, IScanEvents scanEvents)
+    private Stream? ScanOne(string deviceId, KeyValueScanOptions options, CancellationToken cancelToken, IScanEvents scanEvents)
     {
         // Start the scanning process
-        var profileOptions = options == null ? "" : string.Join("", options.Select(kvp => $@" {kvp.Key} ""{kvp.Value.Replace("\"", "\\\"")}"""));
+        var profileOptions = string.Join("", options.Select(kvp => $@" {kvp.Key} ""{kvp.Value.Replace("\"", "\\\"")}"""));
         var allOptions = $@"--device-name=""{deviceId}"" --format=tiff --progress{profileOptions}";
         var proc = StartProcess(SCANIMAGE, allOptions);
 
@@ -203,7 +203,7 @@ internal class SaneScanDriver : IScanDriver
 
     private KeyValueScanOptions GetKeyValueOptions(ScanOptions options)
     {
-        var availableOptions = SaneOptionCache.GetOrSet(options.Device.ID, () => GetAvailableOptions(options.Device.ID));
+        var availableOptions = SaneOptionCache.GetOrSet(options.Device!.ID!, () => GetAvailableOptions(options.Device!.ID!));
         var keyValueOptions = new KeyValueScanOptions(options.SaneOptions.KeyValueOptions ?? new KeyValueScanOptions());
 
         bool ChooseStringOption(string name, Func<string, bool> match)
@@ -232,7 +232,7 @@ internal class SaneScanDriver : IScanDriver
             }
             else if (opt?.ConstraintType == SaneConstraintType.Range)
             {
-                if (value < opt.Range.Min)
+                if (value < opt.Range!.Min)
                 {
                     value = opt.Range.Min;
                 }
@@ -336,7 +336,7 @@ internal class SaneScanDriver : IScanDriver
 
     private bool Transfer(Lazy<KeyValueScanOptions> keyValueOptions, ScanOptions options, CancellationToken cancelToken, IScanEvents scanEvents, Action<IMemoryImage> callback)
     {
-        Stream stream = ScanOne(options.Device.ID, keyValueOptions.Value, cancelToken, scanEvents);
+        var stream = ScanOne(options.Device!.ID!, keyValueOptions.Value, cancelToken, scanEvents);
         if (stream == null)
         {
             return false;

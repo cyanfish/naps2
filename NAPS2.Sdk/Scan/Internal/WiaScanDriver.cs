@@ -79,7 +79,7 @@ internal class WiaScanDriver : IScanDriver
         public void Scan(WiaVersion wiaVersion)
         {
             using var deviceManager = new WiaDeviceManager(wiaVersion);
-            using var device = deviceManager.FindDevice(_options.Device.ID);
+            using var device = deviceManager.FindDevice(_options.Device!.ID!);
             if (device.Version == WiaVersion.Wia20 && _options.UseNativeUI)
             {
                 DoWia20NativeTransfer(deviceManager, device);
@@ -152,7 +152,7 @@ internal class WiaScanDriver : IScanDriver
             ConfigureProps(device, item);
 
             using var transfer = item.StartTransfer();
-            Exception scanException = null;
+            Exception? scanException = null;
             transfer.PageScanned += (sender, args) =>
             {
                 try

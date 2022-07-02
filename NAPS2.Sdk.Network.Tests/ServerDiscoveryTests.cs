@@ -16,6 +16,7 @@ public class ServerDiscoveryTests
         });
         var client = new NetworkScanClient();
         await server.Start();
+        await Task.Delay(100);
         var discovered = await client.DiscoverServers(100);
         Assert.Contains(discovered, x => x.Name == "NetworkScanTests.ServerDiscovery");
     }
@@ -33,6 +34,7 @@ public class ServerDiscoveryTests
             DiscoveryPort = 33433
         });
         await server.Start();
+        await Task.Delay(100);
         var discovered = await client.DiscoverServers(100);
         Assert.Contains(discovered, x => x.Name == "NetworkScanTests.ServerDiscoveryCustomPort");
     }
@@ -50,6 +52,7 @@ public class ServerDiscoveryTests
             DiscoveryPort = 33555
         });
         await server.Start();
+        await Task.Delay(100);
         var discovered = await client.DiscoverServers(100);
         Assert.DoesNotContain(discovered, x => x.Name == "NetworkScanTests.ServerDiscoveryMismatchPort");
     }
@@ -64,6 +67,7 @@ public class ServerDiscoveryTests
         });
         var client = new NetworkScanClient();
         await server.Start();
+        await Task.Delay(100);
         var discovered = await client.DiscoverServers(100);
         Assert.DoesNotContain(discovered, x => x.Name == "NetworkScanTests.ServerDiscoveryOff");
     }

@@ -1,8 +1,7 @@
-﻿using NAPS2.Recovery;
-using NAPS2.Scan;
+﻿using NAPS2.Scan;
 using NAPS2.Serialization;
 
-namespace NAPS2.Images;
+namespace NAPS2.Recovery;
 
 /// <summary>
 /// Manages the lifetime of a recovery folder.

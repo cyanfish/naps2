@@ -34,7 +34,7 @@ public class PdfSharpExporter : PdfExporter
         PdfExportParams exportParams, OcrParams? ocrParams = null, ProgressHandler? progressCallback = null,
         CancellationToken cancelToken = default)
     {
-        return await Task.Run(async () =>
+        return await Task.Run(() =>
         {
             var compat = exportParams.Compat;
 
@@ -75,7 +75,7 @@ public class PdfSharpExporter : PdfExporter
                 document.SecuritySettings.PermitPrint = exportParams.Encryption.AllowPrinting;
             }
 
-            IOcrEngine ocrEngine = null;
+            IOcrEngine? ocrEngine = null;
             if (ocrParams?.LanguageCode != null)
             {
                 var activeEngine = _scanningContext.OcrEngine;
@@ -90,9 +90,9 @@ public class PdfSharpExporter : PdfExporter
             }
 
             bool result = ocrEngine != null
-                ? await BuildDocumentWithOcr(progressCallback, cancelToken, document, compat, images, ocrParams,
+                ? BuildDocumentWithOcr(progressCallback, cancelToken, document, compat, images, ocrParams!,
                     ocrEngine)
-                : await BuildDocumentWithoutOcr(progressCallback, cancelToken, document, compat, images);
+                : BuildDocumentWithoutOcr(progressCallback, cancelToken, document, compat, images);
             if (!result)
             {
                 return false;
@@ -120,7 +120,7 @@ public class PdfSharpExporter : PdfExporter
         });
     }
 
-    private async Task<bool> BuildDocumentWithoutOcr(ProgressHandler? progressCallback, CancellationToken cancelToken,
+    private bool BuildDocumentWithoutOcr(ProgressHandler? progressCallback, CancellationToken cancelToken,
         PdfDocument document, PdfCompat compat, ICollection<ProcessedImage> images)
     {
         int progress = 0;
@@ -156,14 +156,14 @@ public class PdfSharpExporter : PdfExporter
     private static bool IsPdfFile(ImageFileStorage imageFileStorage) => Path.GetExtension(imageFileStorage.FullPath)
         ?.Equals(".pdf", StringComparison.InvariantCultureIgnoreCase) ?? false;
 
-    private async Task<bool> BuildDocumentWithOcr(ProgressHandler? progressCallback, CancellationToken cancelToken,
+    private bool BuildDocumentWithOcr(ProgressHandler? progressCallback, CancellationToken cancelToken,
         PdfDocument document, PdfCompat compat, ICollection<ProcessedImage> images, OcrParams ocrParams,
         IOcrEngine ocrEngine)
     {
         int progress = 0;
         progressCallback?.Invoke(progress, images.Count);
 
-        List<(PdfPage, Task<OcrResult>)> ocrPairs = new List<(PdfPage, Task<OcrResult>)>();
+        List<(PdfPage, Task<OcrResult?>)> ocrPairs = new();
 
         // Step 1: Create the pages, draw the images, and start OCR
         foreach (var image in images)
@@ -229,7 +229,7 @@ public class PdfSharpExporter : PdfExporter
             // Start OCR
             var ocrTask = _scanningContext.OcrRequestQueue.Enqueue(
                 ocrEngine, image, tempImageFilePath, ocrParams, OcrPriority.Foreground, cancelToken);
-            ocrTask.ContinueWith(task =>
+            ocrTask.ContinueWith(_ =>
             {
                 // This is the best place to put progress reporting
                 // Long-running OCR is done, and drawing text on the page (step 2) is very fast
@@ -268,7 +268,7 @@ public class PdfSharpExporter : PdfExporter
             string textAndFormatting = elements.GetDictionary(i).Stream.ToString();
             var reader = new StringReader(textAndFormatting);
             bool inTextBlock = false;
-            string line;
+            string? line;
             while ((line = reader.ReadLine()) != null)
             {
                 if (line.EndsWith("BT", StringComparison.InvariantCulture))
@@ -387,7 +387,7 @@ public class PdfSharpExporter : PdfExporter
 
     private class UnixFontResolver : IFontResolver
     {
-        private byte[] _fontData;
+        private byte[]? _fontData;
 
         public FontResolverInfo ResolveTypeface(string familyName, bool isBold, bool isItalic)
         {
@@ -404,6 +404,10 @@ public class PdfSharpExporter : PdfExporter
                     RedirectStandardOutput = true,
                     UseShellExecute = false
                 });
+                if (proc == null)
+                {
+                    throw new InvalidOperationException("Could not get font data from fc-list");
+                }
                 var fonts = proc.StandardOutput.ReadToEnd().Split('\n').Select(x => x.Split(':')[0]);
                 // TODO: Maybe add more fonts here?
                 var freeserif = fonts.First(f => f.EndsWith("FreeSerif.ttf", StringComparison.OrdinalIgnoreCase));

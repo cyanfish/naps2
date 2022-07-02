@@ -31,7 +31,7 @@ internal class TwainProgressEstimator
     {
         _scanEvents = scanEvents;
         _timingCache = timingCache;
-        _key = new TimingKey(options.Device.ID, options.BitDepth, options.PageSize);
+        _key = new TimingKey(options.Device!.ID!, options.BitDepth, options.PageSize!);
     }
 
     public void MarkStart(long totalPixels)
@@ -136,7 +136,7 @@ internal class TwainProgressEstimator
         private readonly Dictionary<TimingKey, TimingInfo> _cache = new();
     }
 
-    public record TimingKey(string? DeviceId, BitDepth BitDepth, PageSize PageSize);
+    public record TimingKey(string DeviceId, BitDepth BitDepth, PageSize PageSize);
 
     public record TimingInfo(long OverheadMillis, long TotalMillis);
 }

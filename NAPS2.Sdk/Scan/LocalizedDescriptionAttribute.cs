@@ -18,5 +18,5 @@ public class LocalizedDescriptionAttribute : DescriptionAttribute
         _resourceManager = new ResourceManager(resourceType);
     }
 
-    public override string Description => _resourceManager.GetString(_resourceName);
+    public override string Description => _resourceManager.GetString(_resourceName)!;
 }

@@ -47,10 +47,10 @@ public class PdfiumNativeLibrary : Unmanaged.NativeLibrary
     public delegate void FPDFBitmap_Destroy_delegate(IntPtr bitmap);
 
     public delegate IntPtr FPDF_LoadDocument_delegate([MarshalAs(UnmanagedType.LPStr)] string filePath,
-        [MarshalAs(UnmanagedType.LPStr)] string password);
+        [MarshalAs(UnmanagedType.LPStr)] string? password);
 
     public delegate IntPtr FPDF_LoadMemDocument_delegate(IntPtr buffer, int size,
-        [MarshalAs(UnmanagedType.LPStr)] string password);
+        [MarshalAs(UnmanagedType.LPStr)] string? password);
 
     public delegate void FPDF_CloseDocument_delegate(IntPtr document);
 

@@ -15,7 +15,7 @@ public class TiffHelper
         _imageContext = imageContext;
     }
 
-    public async Task<bool> SaveMultipage(IList<ProcessedImage> images, string location, TiffCompression compression, ProgressHandler progressCallback, CancellationToken cancelToken)
+    public bool SaveMultipage(IList<ProcessedImage> images, string location, TiffCompression compression, ProgressHandler progressCallback, CancellationToken cancelToken)
     {
         try
         {

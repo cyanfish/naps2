@@ -87,10 +87,11 @@ public class BatchScanPerformer : IBatchScanPerformer
                                Settings.SaveSeparator == SaveSeparator.PatchT,
                 NoUI = true,
                 NoAutoSave = _config.Get(c => c.DisableAutoSave),
-                DoOcr = Settings.OutputType == BatchOutputType.Load
-                    ? _config.Get(c => c.EnableOcr) && _config.Get(c => c.OcrAfterScanning) // User configured
-                    : _config.Get(c => c.EnableOcr) && GetSavePathExtension().ToLower() == ".pdf", // Fully automated
-                OcrParams = _config.DefaultOcrParams(),
+                OcrParams = Settings.OutputType == BatchOutputType.Load
+                    ? _config.OcrAfterScanningParams()
+                    : GetSavePathExtension().ToLower() == ".pdf"
+                        ? _config.DefaultOcrParams()
+                        : OcrParams.Empty,
                 OcrCancelToken = CancelToken,
                 ThumbnailSize = _config.Get(c => c.ThumbnailSize)
             };

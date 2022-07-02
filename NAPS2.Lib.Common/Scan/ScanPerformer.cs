@@ -48,7 +48,7 @@ internal class ScanPerformer : IScanPerformer
     {
         var options = BuildOptions(scanProfile, scanParams, dialogParent);
         // Make sure we get a real driver value (not just "Default")
-        options = _scanOptionsValidator.ValidateAll(options);
+        options = _scanOptionsValidator.ValidateAll(options, false);
 
         if (!await PopulateDevice(scanProfile, options))
         {
@@ -99,7 +99,7 @@ internal class ScanPerformer : IScanPerformer
     private OcrController ConfigureOcrController(ScanParams scanParams)
     {
         OcrController ocrController = new OcrController(_scanningContext);
-        if (scanParams.DoOcr)
+        if (scanParams.OcrParams?.LanguageCode != null)
         {
             ocrController.Engine = _ocrEngine;
             if (ocrController.Engine == null)
@@ -244,7 +244,7 @@ internal class ScanPerformer : IScanPerformer
             throw new ArgumentException("No page size specified");
         }
 
-        options.PageSize = new PageSize(pageDimensions.Width, pageDimensions.Height, pageDimensions.Unit);
+        options.PageSize = new PageSize(pageDimensions.Width, pageDimensions.Height, (PageSizeUnit) pageDimensions.Unit);
 
         return options;
     }

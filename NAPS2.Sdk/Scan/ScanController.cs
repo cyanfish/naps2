@@ -33,14 +33,14 @@ public class ScanController : IScanController
 
     public async Task<List<ScanDevice>> GetDeviceList(ScanOptions options)
     {
-        options = _scanOptionsValidator.ValidateAll(options);
+        options = _scanOptionsValidator.ValidateAll(options, false);
         var bridge = _scanBridgeFactory.Create(options);
         return await bridge.GetDeviceList(options);
     }
 
     public ScannedImageSource Scan(ScanOptions options, CancellationToken cancelToken = default)
     {
-        options = _scanOptionsValidator.ValidateAll(options);
+        options = _scanOptionsValidator.ValidateAll(options, true);
         var sink = new ScannedImageSink();
         int pageNumber = 0;
 

@@ -10,7 +10,6 @@ namespace NAPS2.Scan;
 /// <summary>
 /// A class that stores user configuration for scanning, including device selection and other options.
 /// </summary>
-[Serializable]
 public class ScanProfile
 {
     public const int CURRENT_VERSION = 2;
@@ -32,10 +31,6 @@ public class ScanProfile
     public ScanProfile Clone()
     {
         var profile = (ScanProfile) MemberwiseClone();
-        if (profile.AutoSaveSettings != null)
-        {
-            profile.AutoSaveSettings = AutoSaveSettings.Clone();
-        }
         return profile;
     }
 
@@ -133,19 +128,11 @@ public record ScanProxyConfig(string Name, string Ip, int? Port);
 /// <summary>
 /// User configuration for the Auto Save feature, which saves to a file immediately after scanning.
 /// </summary>
-[Serializable]
-public class AutoSaveSettings
-{
-    internal AutoSaveSettings Clone() => (AutoSaveSettings) MemberwiseClone();
-
-    public string FilePath { get; set; }
-
-    public bool PromptForFilePath { get; set; }
-
-    public bool ClearImagesAfterSaving { get; set; }
-
-    public SaveSeparator Separator { get; set; } = SaveSeparator.FilePerPage;
-}
+public record AutoSaveSettings(
+    string FilePath,
+    bool PromptForFilePath,
+    bool ClearImagesAfterSaving,
+    SaveSeparator Separator = SaveSeparator.FilePerPage);
 
 /// <summary>
 /// The type of TWAIN driver implementation (this option is provided for compatibility).
@@ -247,25 +234,25 @@ public enum ScanScale
 public enum ScanPageSize
 {
     [LocalizedDescription(typeof(SettingsResources), "PageSize_Letter")]
-    [PageDimensions("8.5", "11", PageSizeUnit.Inch)]
+    [PageDimensions("8.5", "11", LocalizedPageSizeUnit.Inch)]
     Letter,
     [LocalizedDescription(typeof(SettingsResources), "PageSize_Legal")]
-    [PageDimensions("8.5", "14", PageSizeUnit.Inch)]
+    [PageDimensions("8.5", "14", LocalizedPageSizeUnit.Inch)]
     Legal,
     [LocalizedDescription(typeof(SettingsResources), "PageSize_A5")]
-    [PageDimensions("148", "210", PageSizeUnit.Millimetre)]
+    [PageDimensions("148", "210", LocalizedPageSizeUnit.Millimetre)]
     A5,
     [LocalizedDescription(typeof(SettingsResources), "PageSize_A4")]
-    [PageDimensions("210", "297", PageSizeUnit.Millimetre)]
+    [PageDimensions("210", "297", LocalizedPageSizeUnit.Millimetre)]
     A4,
     [LocalizedDescription(typeof(SettingsResources), "PageSize_A3")]
-    [PageDimensions("297", "420", PageSizeUnit.Millimetre)]
+    [PageDimensions("297", "420", LocalizedPageSizeUnit.Millimetre)]
     A3,
     [LocalizedDescription(typeof(SettingsResources), "PageSize_B5")]
-    [PageDimensions("176", "250", PageSizeUnit.Millimetre)]
+    [PageDimensions("176", "250", LocalizedPageSizeUnit.Millimetre)]
     B5,
     [LocalizedDescription(typeof(SettingsResources), "PageSize_B4")]
-    [PageDimensions("250", "353", PageSizeUnit.Millimetre)]
+    [PageDimensions("250", "353", LocalizedPageSizeUnit.Millimetre)]
     B4,
     [LocalizedDescription(typeof(SettingsResources), "PageSize_Custom")]
     Custom
@@ -274,7 +261,7 @@ public enum ScanPageSize
 /// <summary>
 /// Configuration for a particular page size.
 /// </summary>
-public record PageDimensions(decimal Width, decimal Height, PageSizeUnit Unit);
+public record PageDimensions(decimal Width, decimal Height, LocalizedPageSizeUnit Unit);
 
 /// <summary>
 /// Configuration for a user-created custom page size.
@@ -286,7 +273,7 @@ public record NamedPageSize(string Name, PageDimensions Dimens);
 /// </summary>
 public class PageDimensionsAttribute : Attribute
 {
-    public PageDimensionsAttribute(string width, string height, PageSizeUnit unit)
+    public PageDimensionsAttribute(string width, string height, LocalizedPageSizeUnit unit)
     {
         PageDimensions = new PageDimensions(
             decimal.Parse(width, CultureInfo.InvariantCulture),
@@ -301,7 +288,7 @@ public class PageDimensionsAttribute : Attribute
 /// <summary>
 /// The unit used for Width and Height in PageDimensions.
 /// </summary>
-public enum PageSizeUnit
+public enum LocalizedPageSizeUnit
 {
     [LocalizedDescription(typeof(SettingsResources), "PageSizeUnit_Inch")]
     Inch,
@@ -316,76 +303,6 @@ public enum PageSizeUnit
 /// </summary>
 public static class ScanEnumExtensions
 {
-    public static decimal WidthInMm(this PageDimensions pageDimensions)
-    {
-        switch (pageDimensions.Unit)
-        {
-            case PageSizeUnit.Inch:
-                return pageDimensions.Width * 25.4m;
-            case PageSizeUnit.Centimetre:
-                return pageDimensions.Width * 10;
-            case PageSizeUnit.Millimetre:
-                return pageDimensions.Width;
-            default:
-                throw new ArgumentException();
-        }
-    }
-
-    public static decimal WidthInInches(this PageDimensions pageDimensions)
-    {
-        switch (pageDimensions.Unit)
-        {
-            case PageSizeUnit.Inch:
-                return pageDimensions.Width;
-            case PageSizeUnit.Centimetre:
-                return pageDimensions.Width * 0.393701m;
-            case PageSizeUnit.Millimetre:
-                return pageDimensions.Width * 0.0393701m;
-            default:
-                throw new ArgumentException();
-        }
-    }
-
-    public static int WidthInThousandthsOfAnInch(this PageDimensions pageDimensions)
-    {
-        return (int)(WidthInInches(pageDimensions) * 1000);
-    }
-
-    public static decimal HeightInMm(this PageDimensions pageDimensions)
-    {
-        switch (pageDimensions.Unit)
-        {
-            case PageSizeUnit.Inch:
-                return pageDimensions.Height * 25.4m;
-            case PageSizeUnit.Centimetre:
-                return pageDimensions.Height * 10;
-            case PageSizeUnit.Millimetre:
-                return pageDimensions.Height;
-            default:
-                throw new ArgumentException();
-        }
-    }
-
-    public static decimal HeightInInches(this PageDimensions pageDimensions)
-    {
-        switch (pageDimensions.Unit)
-        {
-            case PageSizeUnit.Inch:
-                return pageDimensions.Height;
-            case PageSizeUnit.Centimetre:
-                return pageDimensions.Height * 0.393701m;
-            case PageSizeUnit.Millimetre:
-                return pageDimensions.Height * 0.0393701m;
-            default:
-                throw new ArgumentException();
-        }
-    }
-
-    public static int HeightInThousandthsOfAnInch(this PageDimensions pageDimensions)
-    {
-        return (int)(HeightInInches(pageDimensions) * 1000);
-    }
-
     public static PageDimensions? PageDimensions(this Enum enumValue)
     {
         var attrs = enumValue.GetType().GetField(enumValue.ToString())!.GetCustomAttributes<PageDimensionsAttribute>();

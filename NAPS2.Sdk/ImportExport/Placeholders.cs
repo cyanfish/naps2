@@ -45,35 +45,40 @@ public abstract class Placeholders
     /// <param name="numberSkip">The file number will be at least one bigger than this value.</param>
     /// <param name="autoNumberDigits">The minimum number of digits in the file number. Only has an effect if the path does not contain a numeric placeholder like $(n) or $(nnn).</param>
     /// <returns>The file path with substitutions.</returns>
-    public abstract string? Substitute(string? filePath, bool incrementIfExists = true, int numberSkip = 0, int autoNumberDigits = 0);
+    [return: NotNullIfNotNull("filePath")]
+    public abstract string? Substitute(string? filePath, bool incrementIfExists = true, int numberSkip = 0,
+        int autoNumberDigits = 0);
 
     public class StubPlaceholders : Placeholders
     {
-        public override string? Substitute(string? filePath, bool incrementIfExists = true, int numberSkip = 0, int autoNumberDigits = 0) => filePath;
+        public override string? Substitute(string? filePath, bool incrementIfExists = true, int numberSkip = 0,
+            int autoNumberDigits = 0) => filePath;
     }
 
     public class EnvironmentPlaceholders : Placeholders
     {
-        public override string? Substitute(string? filePath, bool incrementIfExists = true, int numberSkip = 0, int autoNumberDigits = 0) => Environment.ExpandEnvironmentVariables(filePath);
+        public override string? Substitute(string? filePath, bool incrementIfExists = true, int numberSkip = 0,
+            int autoNumberDigits = 0) => Environment.ExpandEnvironmentVariables(filePath);
     }
 
     public class DefaultPlaceholders : Placeholders
     {
-        private static readonly Dictionary<string, Func<DateTime, string>> Replacements = new Dictionary<string, Func<DateTime, string>>
-        {
-            {YEAR_4_DIGITS, dateTime => dateTime.ToString("yyyy")},
-            {YEAR_2_DIGITS, dateTime => dateTime.ToString("yy")},
-            {MONTH_2_DIGITS, dateTime => dateTime.ToString("MM")},
-            {DAY_2_DIGITS, dateTime => dateTime.ToString("dd")},
-            {HOUR_24_CLOCK, dateTime => dateTime.ToString("HH")},
-            {MINUTE_2_DIGITS, dateTime => dateTime.ToString("mm")},
-            {SECOND_2_DIGITS, dateTime => dateTime.ToString("ss")},
-        };
+        private static readonly Dictionary<string, Func<DateTime, string>> Replacements =
+            new Dictionary<string, Func<DateTime, string>>
+            {
+                { YEAR_4_DIGITS, dateTime => dateTime.ToString("yyyy") },
+                { YEAR_2_DIGITS, dateTime => dateTime.ToString("yy") },
+                { MONTH_2_DIGITS, dateTime => dateTime.ToString("MM") },
+                { DAY_2_DIGITS, dateTime => dateTime.ToString("dd") },
+                { HOUR_24_CLOCK, dateTime => dateTime.ToString("HH") },
+                { MINUTE_2_DIGITS, dateTime => dateTime.ToString("mm") },
+                { SECOND_2_DIGITS, dateTime => dateTime.ToString("ss") },
+            };
 
         private static readonly Regex NumberPlaceholderPattern = new Regex(@"\$\(n+\)");
 
         private readonly DateTime? _dateTimeOverride;
-            
+
         public DefaultPlaceholders(DateTime? dateTimeOverride = null)
         {
             _dateTimeOverride = dateTimeOverride;
@@ -87,7 +92,8 @@ public abstract class Placeholders
         public DefaultPlaceholders WithDate(DateTime dateTime) => new DefaultPlaceholders(dateTime);
 
         [return: NotNullIfNotNull("filePath")]
-        public override string? Substitute(string? filePath, bool incrementIfExists = true, int numberSkip = 0, int autoNumberDigits = 0)
+        public override string? Substitute(string? filePath, bool incrementIfExists = true, int numberSkip = 0,
+            int autoNumberDigits = 0)
         {
             if (filePath == null)
             {
@@ -109,13 +115,15 @@ public abstract class Placeholders
             else if (autoNumberDigits > 0)
             {
                 result = result.Insert(result.Length - Path.GetExtension(result).Length, ".");
-                result = SubstituteNumber(result, result.Length - Path.GetExtension(result).Length, autoNumberDigits, numberSkip, incrementIfExists);
+                result = SubstituteNumber(result, result.Length - Path.GetExtension(result).Length, autoNumberDigits,
+                    numberSkip, incrementIfExists);
             }
 
             return result;
         }
 
-        private string SubstituteNumber(string path, int insertionIndex, int minDigits, int skip, bool incrementIfExists)
+        private string SubstituteNumber(string path, int insertionIndex, int minDigits, int skip,
+            bool incrementIfExists)
         {
             string result;
             int i = skip;
