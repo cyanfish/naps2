@@ -60,7 +60,7 @@ public class LanguageContext
         var doc = XDocument.Load(file.FullName);
         bool hasSomethingTranslatable = false;
 
-        foreach (var item in doc.Root.Elements("data").ToList())
+        foreach (var item in doc.Root!.Elements("data").ToList())
         {
             var prop = item.Attribute("name")?.Value;
             var original = item.Element("value")?.Value;
@@ -76,7 +76,7 @@ public class LanguageContext
                 var translation = Strings[original].Translation;
                 if (!string.IsNullOrWhiteSpace(translation))
                 {
-                    item.Element("value").Value = prefix + Strings[original].Translation + suffix;
+                    item.Element("value")!.Value = prefix + Strings[original].Translation + suffix;
                 }
             }
         }

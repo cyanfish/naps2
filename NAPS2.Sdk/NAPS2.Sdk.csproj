@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net5;net462</TargetFrameworks>
+    <TargetFrameworks>net5;net5-windows;net462</TargetFrameworks>
     <Nullable>enable</Nullable>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <RootNamespace>NAPS2</RootNamespace>
@@ -50,7 +50,9 @@
     <PackageReference Include="MimeKit" Version="1.22.0" />
     <PackageReference Include="NAPS2.Wia" Version="1.0.1" />
     <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
-    <PackageReference Include="NTwain" Version="3.7.1" />
+    <!-- Hide compatibility warnings for NTwain as it will only be actually used on Windows. -->
+    <!-- TODO: Does this actually work if we build a net5 framework-dependent app and try to use Twain? -->
+    <PackageReference Include="NTwain" Version="3.7.1" NoWarn="NU1701" />
     <PackageReference Include="Nullable" Version="1.2.0" />
     <PackageReference Include="System.Drawing.Common" Version="6.0.0" />
     <PackageReference Include="System.Collections.Immutable" Version="5.0.0" />

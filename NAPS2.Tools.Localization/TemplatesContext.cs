@@ -33,7 +33,7 @@ msgstr """"
     private void LoadFile(FileInfo file, bool winforms)
     {
         var doc = XDocument.Load(file.FullName);
-        foreach (var item in doc.Root.Elements("data"))
+        foreach (var item in doc.Root!.Elements("data"))
         {
             var prop = item.Attribute("name")?.Value;
             var original = item.Element("value")?.Value;
