@@ -16,9 +16,10 @@ public class ConsoleAppTests : ContextualTexts
         var process = AppTestHelper.StartProcess("NAPS2.Console.exe", FolderPath, args);
         try
         {
-            Assert.True(process.WaitForExit(2000));
+            Assert.True(process.WaitForExit(5000));
+            var stdout = process.StandardOutput.ReadToEnd();
             Assert.Equal(0, process.ExitCode);
-            Assert.Empty(process.StandardOutput.ReadToEnd());
+            Assert.Empty(stdout);
             AppTestHelper.AssertNoErrorLog(FolderPath);
             Assert.True(File.Exists(outputPath));
         }
@@ -38,7 +39,7 @@ public class ConsoleAppTests : ContextualTexts
         var process = AppTestHelper.StartProcess("NAPS2.Console.exe", FolderPath, args);
         try
         {
-            Assert.True(process.WaitForExit(2000));
+            Assert.True(process.WaitForExit(5000));
             var stdout = process.StandardOutput.ReadToEnd();
             Assert.NotEqual(0, process.ExitCode);
             Assert.NotEmpty(stdout);
