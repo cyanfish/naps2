@@ -33,12 +33,12 @@ public class RecoveryStorageManager : IDisposable
 
     private bool _disposed;
 
-    public static RecoveryStorageManager CreateFolder(string recoveryFolderPath)
+    public static RecoveryStorageManager CreateFolder(string recoveryFolderPath, UiImageList imageList)
     {
-        return new RecoveryStorageManager(recoveryFolderPath);
+        return new RecoveryStorageManager(recoveryFolderPath, imageList);
     }
 
-    private RecoveryStorageManager(string recoveryFolderPath)
+    private RecoveryStorageManager(string recoveryFolderPath, UiImageList imageList)
     {
         RecoveryFolderPath = recoveryFolderPath;
         _folder = new DirectoryInfo(RecoveryFolderPath);
@@ -46,22 +46,12 @@ public class RecoveryStorageManager : IDisposable
         _folderLockFile = new FileInfo(Path.Combine(RecoveryFolderPath, LOCK_FILE_NAME));
         _folderLock = _folderLockFile.Open(FileMode.CreateNew, FileAccess.Write, FileShare.None);
         _writeThrottle = new TimedThrottle(WriteIndexFromImageList, WriteThrottleInterval);
+        _imageList = imageList;
+        imageList.ImagesUpdated += ImageListUpdated;
+        imageList.ImagesThumbnailInvalidated += ImageListUpdated;
     }
 
     public string RecoveryFolderPath { get; }
-
-    // TODO: Maybe just make UiImageList part of the constructor?
-    public void RegisterForChanges(UiImageList imageList)
-    {
-        lock (this)
-        {
-            if (_disposed) throw new ObjectDisposedException(nameof(RecoveryStorageManager));
-            if (_imageList != null) throw new InvalidOperationException();
-            _imageList = imageList;
-            imageList.ImagesUpdated += ImageListUpdated;
-            imageList.ImagesThumbnailInvalidated += ImageListUpdated;
-        }
-    }
 
     private void ImageListUpdated(object? sender, EventArgs args)
     {
@@ -114,11 +104,8 @@ public class RecoveryStorageManager : IDisposable
             _folderLock.Close();
             _folderLockFile.Delete();
             _folder.Delete(true);
-            if (_imageList != null)
-            {
-                _imageList.ImagesUpdated -= ImageListUpdated;
-                _imageList.ImagesThumbnailInvalidated -= ImageListUpdated;
-            }
+            _imageList.ImagesUpdated -= ImageListUpdated;
+            _imageList.ImagesThumbnailInvalidated -= ImageListUpdated;
             _disposed = true;
         }
     }

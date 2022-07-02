@@ -168,7 +168,8 @@ public class RecoveryManagerTests : ContextualTexts
 
     private List<UiImage> CreateFolderToRecoverFrom(string folderPath, int imageCount)
     {
-        var rsm1 = RecoveryStorageManager.CreateFolder(folderPath);
+        var imageList = new UiImageList();
+        var rsm1 = RecoveryStorageManager.CreateFolder(folderPath, imageList);
         var recoveryContext = new ScanningContext(new GdiImageContext(), new FileStorageManager(folderPath));
         var images = Enumerable.Range(0, imageCount).Select(x => new UiImage(CreateRecoveryImage(recoveryContext)))
             .ToList();

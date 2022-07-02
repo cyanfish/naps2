@@ -9,8 +9,7 @@ public class RecoveryModule : NinjectModule
     public override void Load()
     {
         string recoveryFolderPath = Path.Combine(Paths.Recovery, Path.GetRandomFileName());
-        var recoveryStorageManager = RecoveryStorageManager.CreateFolder(recoveryFolderPath);
-        recoveryStorageManager.RegisterForChanges(Kernel.Get<UiImageList>());
+        var recoveryStorageManager = RecoveryStorageManager.CreateFolder(recoveryFolderPath, Kernel.Get<UiImageList>());
         var fileStorageManager = new FileStorageManager(recoveryFolderPath);
         Kernel.Bind<RecoveryStorageManager>().ToConstant(recoveryStorageManager);
         Kernel.Bind<FileStorageManager>().ToConstant(fileStorageManager);

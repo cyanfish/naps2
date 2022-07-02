@@ -7,13 +7,15 @@ namespace NAPS2.Sdk.Tests.Images;
 public class RecoveryStorageManagerTests : ContextualTexts
 {
     private readonly string _recoveryFolder;
+    private readonly UiImageList _imageList; // TODO: Add tests for this
     private readonly RecoveryStorageManager _recoveryStorageManager;
 
     public RecoveryStorageManagerTests()
     {
         _recoveryFolder = Path.Combine(FolderPath, "recovery");
         ScanningContext.FileStorageManager = new FileStorageManager(_recoveryFolder);
-        _recoveryStorageManager = RecoveryStorageManager.CreateFolder(_recoveryFolder);
+        _imageList = new UiImageList();
+        _recoveryStorageManager = RecoveryStorageManager.CreateFolder(_recoveryFolder, _imageList);
     }
 
     public override void Dispose()

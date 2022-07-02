@@ -14,7 +14,7 @@ public class UndoStack : IDisposable
         _maxLength = maxLength;
         _stack = new LinkedList<Memento>();
         _stack.AddFirst(Memento.Empty);
-        _current = _stack.First;
+        _current = _stack.First!;
     }
 
     public Memento Current => _current.Value;
@@ -26,7 +26,7 @@ public class UndoStack : IDisposable
 
     public bool Push(Memento memento)
     {
-        if (_stack.First.Value == memento)
+        if (_stack.First!.Value == memento)
         {
             return false;
         }
@@ -41,7 +41,7 @@ public class UndoStack : IDisposable
     {
         while (_stack.Count > _maxLength && _stack.Last != _current)
         {
-            _stack.Last.Value.Dispose();
+            _stack.Last!.Value.Dispose();
             _stack.RemoveLast();
         }
     }
@@ -50,7 +50,7 @@ public class UndoStack : IDisposable
     {
         while (_stack.First != _current)
         {
-            _stack.First.Value.Dispose();
+            _stack.First!.Value.Dispose();
             _stack.RemoveFirst();
         }
     }
@@ -59,7 +59,7 @@ public class UndoStack : IDisposable
     {
         while (_stack.Last != _current)
         {
-            _stack.Last.Value.Dispose();
+            _stack.Last!.Value.Dispose();
             _stack.RemoveLast();
         }
     }

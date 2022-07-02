@@ -36,8 +36,8 @@ public class DesktopControllerTests : ContextualTexts
     {
         ScanningContext.RecoveryPath = Path.Combine(FolderPath, "recovery");
         ScanningContext.FileStorageManager = new FileStorageManager(ScanningContext.RecoveryPath);
-        _recoveryStorageManager = RecoveryStorageManager.CreateFolder(ScanningContext.RecoveryPath);
         _imageList = new UiImageList();
+        _recoveryStorageManager = RecoveryStorageManager.CreateFolder(ScanningContext.RecoveryPath, _imageList);
         _thumbnailRenderQueue = new ThumbnailRenderQueue(ScanningContext, new ThumbnailRenderer(ImageContext));
         _operationProgress = new Mock<OperationProgress>();
         _config = Naps2Config.Stub();

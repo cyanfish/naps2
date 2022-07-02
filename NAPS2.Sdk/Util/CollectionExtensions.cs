@@ -115,6 +115,7 @@ public static class CollectionExtensions
     /// <param name="key"></param>
     /// <param name="value"></param>
     public static void AddMulti<TKey, TValue>(this Dictionary<TKey, HashSet<TValue>> dict, TKey key, TValue value)
+        where TKey : notnull
     {
         if (!dict.ContainsKey(key))
         {
@@ -171,6 +172,7 @@ public static class CollectionExtensions
     /// <param name="defaultValue"></param>
     /// <returns></returns>
     public static TValue Get<TKey, TValue>(this Dictionary<TKey, TValue> dict, TKey key, TValue defaultValue)
+        where TKey : notnull
     {
         if (dict.ContainsKey(key))
         {
@@ -189,6 +191,7 @@ public static class CollectionExtensions
     /// <param name="defaultValue"></param>
     /// <returns></returns>
     public static TValue Get<TKey, TValue>(this Dictionary<TKey, TValue> dict, TKey key, Func<TValue> defaultValue)
+        where TKey : notnull
     {
         if (dict.ContainsKey(key))
         {
@@ -207,6 +210,7 @@ public static class CollectionExtensions
     /// <param name="defaultValue"></param>
     /// <returns></returns>
     public static TValue GetOrSet<TKey, TValue>(this Dictionary<TKey, TValue> dict, TKey key, TValue defaultValue)
+        where TKey : notnull
     {
         if (!dict.ContainsKey(key))
         {
@@ -225,6 +229,7 @@ public static class CollectionExtensions
     /// <param name="defaultValue"></param>
     /// <returns></returns>
     public static TValue GetOrSet<TKey, TValue>(this Dictionary<TKey, TValue> dict, TKey key, Func<TValue> defaultValue)
+        where TKey : notnull
     {
         if (!dict.ContainsKey(key))
         {
