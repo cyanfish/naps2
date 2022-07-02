@@ -9,8 +9,11 @@ public class ConsoleErrorOutput : ErrorOutput
         _output = output;
     }
 
+    public bool HasError { get; private set; }
+
     public override void DisplayError(string errorMessage)
     {
+        HasError = true;
         _output.Writer.WriteLine(errorMessage);
     }
 

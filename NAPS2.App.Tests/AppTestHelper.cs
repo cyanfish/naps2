@@ -72,4 +72,10 @@ public static class AppTestHelper
         var path = Path.Combine(appData, "NAPS2", "errorlog.txt");
         Assert.False(File.Exists(path));
     }
+
+    public static void AssertErrorLog(string appData)
+    {
+        var path = Path.Combine(appData, "NAPS2", "errorlog.txt");
+        Assert.True(File.Exists(path));
+    }
 }

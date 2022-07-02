@@ -22,5 +22,4 @@ public class WinFormsAppTests : ContextualTexts
             AppTestHelper.Cleanup(process);
         }
     }
-    
 }

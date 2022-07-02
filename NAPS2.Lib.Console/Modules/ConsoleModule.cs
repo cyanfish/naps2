@@ -9,10 +9,19 @@ namespace NAPS2.Modules;
 
 public class ConsoleModule : NinjectModule
 {
+    private readonly AutomatedScanningOptions _options;
+
+    public ConsoleModule(AutomatedScanningOptions options)
+    {
+        _options = options;
+    }
+
     public override void Load()
     {
+        Bind<AutomatedScanningOptions>().ToConstant(_options);
+
         Bind<IPdfPasswordProvider>().To<ConsolePdfPasswordProvider>();
-        Bind<ErrorOutput>().To<ConsoleErrorOutput>();
+        Bind<ErrorOutput>().To<ConsoleErrorOutput>().InSingletonScope();
         Bind<IOverwritePrompt>().To<ConsoleOverwritePrompt>();
         Bind<OperationProgress>().To<ConsoleOperationProgress>();
         Bind<IComponentInstallPrompt>().To<ConsoleComponentInstallPrompt>();

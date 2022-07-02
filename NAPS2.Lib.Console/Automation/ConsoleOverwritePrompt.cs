@@ -5,18 +5,18 @@ namespace NAPS2.Automation;
 
 public class ConsoleOverwritePrompt : IOverwritePrompt
 {
-    public static bool ForceOverwrite { get; set; }
-
+    private readonly AutomatedScanningOptions _options;
     private readonly ErrorOutput _errorOutput;
 
-    public ConsoleOverwritePrompt(ErrorOutput errorOutput)
+    public ConsoleOverwritePrompt(AutomatedScanningOptions options, ErrorOutput errorOutput)
     {
+        _options = options;
         _errorOutput = errorOutput;
     }
 
     public OverwriteResponse ConfirmOverwrite(string path)
     {
-        if (ForceOverwrite)
+        if (_options.ForceOverwrite)
         {
             return OverwriteResponse.Yes;
         }

@@ -29,9 +29,9 @@ public class CommandLineIntegrationTests : ContextualTexts
     private async Task RunCommand(AutomatedScanningOptions options, params Bitmap[] imagesToScan)
     {
         var scanDriverFactory = new ScanDriverFactoryBuilder().WithScannedImages(imagesToScan).Build();
-        var kernel = new StandardKernel(new CommonModule(), new ConsoleModule(),
+        var kernel = new StandardKernel(new CommonModule(), new ConsoleModule(options),
             new TestModule(ScanningContext, ImageContext, scanDriverFactory, _testOutputHelper, FolderPath));
-        var automatedScanning = kernel.Get<AutomatedScanning>(new ConstructorArgument("options", options));
+        var automatedScanning = kernel.Get<AutomatedScanning>();
         await automatedScanning.Execute();
     }
 
@@ -162,7 +162,8 @@ public class CommandLineIntegrationTests : ContextualTexts
                 _folderPath)).InSingletonScope();
 
             string recoveryFolderPath = Path.Combine(_folderPath, "recovery");
-            var recoveryStorageManager = RecoveryStorageManager.CreateFolder(recoveryFolderPath);
+            var recoveryStorageManager =
+                RecoveryStorageManager.CreateFolder(recoveryFolderPath, Kernel.Get<UiImageList>());
             var fileStorageManager = new FileStorageManager(recoveryFolderPath);
             Kernel.Bind<RecoveryStorageManager>().ToConstant(recoveryStorageManager);
             Kernel.Bind<FileStorageManager>().ToConstant(fileStorageManager);

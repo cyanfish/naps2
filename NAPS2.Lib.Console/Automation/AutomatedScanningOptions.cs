@@ -9,27 +9,27 @@ public class AutomatedScanningOptions
     [Option('o', "output", HelpText = "The name and path of the file to save." +
                                       " The extension determines the output type (e.g. .pdf for a PDF file, .jpg for a JPEG)." +
                                       " Placeholders can be used (e.g. $(YYYY)-$(MM)-$(DD) for the date, $(hh)_$(mm)_$(ss) for the time, $(nnnn) for an auto-incrementing number).")]
-    public string OutputPath { get; set; }
+    public string? OutputPath { get; set; }
 
     [Option('a', "autosave", HelpText = "Use the Auto Save settings from the selected profile." +
                                         " Only works if the profile has Auto Save enabled.")]
     public bool AutoSave { get; set; }
 
     [Option("install", HelpText = "Use this option to download and install optional components (e.g. \"ocr-eng\", \"generic-import\").")]
-    public string Install { get; set; }
+    public string? Install { get; set; }
 
     [Option('p', "profile", HelpText = "The name of the profile to use for scanning." +
                                        " If not specified, the most-recently-used profile from the GUI is selected.")]
-    public string ProfileName { get; set; }
+    public string? ProfileName { get; set; }
 
     [Option('i', "import", HelpText = "The name and path of one or more pdf/image files to import." +
                                       " Imported files are prepended to the output in the order they are specified." +
                                       " Multiple files are separated by a semicolon (\";\")." +
                                       " Slice notation can be used to only import some pages (e.g. \"[0]\" for the first page or \"[:2]\" for the first two pages).")]
-    public string ImportPath { get; set; }
+    public string? ImportPath { get; set; }
 
     [Option("importpassword", HelpText = "The password to use to import one or more encrypted PDF files.")]
-    public string ImportPassword { get; set; }
+    public string? ImportPassword { get; set; }
         
     [Option("progress", HelpText = "Display a graphical window for scanning progress.")]
     public bool Progress { get; set; }
@@ -91,16 +91,16 @@ public class AutomatedScanningOptions
     #region PDF Options
 
     [Option("pdftitle", HelpText = "The title for generated PDF metadata.")]
-    public string PdfTitle { get; set; }
+    public string? PdfTitle { get; set; }
 
     [Option("pdfauthor", HelpText = "The author for generated PDF metadata.")]
-    public string PdfAuthor { get; set; }
+    public string? PdfAuthor { get; set; }
 
     [Option("pdfsubject", HelpText = "The subject for generated PDF metadata.")]
-    public string PdfSubject { get; set; }
+    public string? PdfSubject { get; set; }
 
     [Option("pdfkeywords", HelpText = "The keywords for generated PDF metadata.")]
-    public string PdfKeywords { get; set; }
+    public string? PdfKeywords { get; set; }
 
     [Option("usesavedmetadata", HelpText = "Use the metadata (title, author, subject, keywords) configured in the GUI, if any, for the generated PDF.")]
     public bool UseSavedMetadata { get; set; }
@@ -134,29 +134,29 @@ public class AutomatedScanningOptions
     [Option('e', "email", HelpText = "The name of the file to attach to an email." +
                                      " The extension determines the output type (e.g. .pdf for a PDF file, .jpg for a JPEG).")]
     //" You can use \"<date>\" and/or \"<time>\" to insert the date/time of the scan.")]
-    public string EmailFileName { get; set; }
+    public string? EmailFileName { get; set; }
 
     [Option("subject", HelpText = "The email message's subject." +
                                   //" You can use \"<date>\" and/or \"<time>\" to insert the date/time of the scan." +
                                   " Requires -e/--email.")]
-    public string EmailSubject { get; set; }
+    public string? EmailSubject { get; set; }
 
     [Option("body", HelpText = "The email message's body text." +
                                //" You can use \"<date>\" and/or \"<time>\" to insert the date/time of the scan." +
                                " Requires -e/--email.")]
-    public string EmailBody { get; set; }
+    public string? EmailBody { get; set; }
 
     [Option("to", HelpText = "A comma-separated list of email addresses of the recipients." +
                              " Requires -e/--email.")]
-    public string EmailTo { get; set; }
+    public string? EmailTo { get; set; }
 
     [Option("cc", HelpText = "A comma-separated list of email addresses of the recipients." +
                              " Requires -e/--email.")]
-    public string EmailCc { get; set; }
+    public string? EmailCc { get; set; }
 
     [Option("bcc", HelpText = "A comma-separated list of email addresses of the recipients." +
                               " Requires -e/--email.")]
-    public string EmailBcc { get; set; }
+    public string? EmailBcc { get; set; }
 
     [Option("autosend", HelpText = "Actually send the email immediately after scanning completes without prompting the user for changes." +
                                    " However, this may prompt the user to login. To avoid that, use --silentsend." +
@@ -178,7 +178,7 @@ public class AutomatedScanningOptions
     public int JpegQuality { get; set; }
 
     [Option("tiffcomp", HelpText = "The compression to use for TIFF files. Possible values: auto, lzw, ccitt4, none")]
-    public string TiffComp { get; set; }
+    public string? TiffComp { get; set; }
         
     #endregion
 }

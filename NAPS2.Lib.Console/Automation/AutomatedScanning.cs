@@ -86,7 +86,6 @@ public class AutomatedScanning
             }
 
             _placeholders = Placeholders.All.WithDate(DateTime.Now);
-            ConsoleOverwritePrompt.ForceOverwrite = _options.ForceOverwrite;
 
             if (_options.Install != null)
             {
@@ -266,8 +265,6 @@ public class AutomatedScanning
     {
         OutputVerbose(ConsoleResources.Importing);
 
-        ConsolePdfPasswordProvider.PasswordToProvide = _options.ImportPassword;
-
         var filePaths = _options.ImportPath.Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
         int i = 0;
         foreach (var filePath in filePaths)
@@ -292,6 +289,7 @@ public class AutomatedScanning
             {
                 Log.ErrorException(string.Format(ConsoleResources.ErrorImporting, filePath), ex);
                 _errorOutput.DisplayError(string.Format(ConsoleResources.ErrorImporting, filePath));
+                // TODO: Should we really continue?
                 continue;
             }
             OutputVerbose(ConsoleResources.ImportedFile, i, filePaths.Length);

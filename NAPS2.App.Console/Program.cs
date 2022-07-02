@@ -8,9 +8,9 @@ static class Program
     /// The NAPS2.Console.exe main method.
     /// </summary>
     [STAThread]
-    static void Main(string[] args)
+    static int Main(string[] args)
     {
         // Use reflection to avoid antivirus false positives (yes, really)
-        typeof(ConsoleEntryPoint).GetMethod("Run").Invoke(null, new object[] { args });
+        return (int) typeof(ConsoleEntryPoint).GetMethod("Run")!.Invoke(null, new object[] { args })!;
     }
 }
