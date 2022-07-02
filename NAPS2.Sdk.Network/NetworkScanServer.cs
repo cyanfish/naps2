@@ -24,14 +24,15 @@ public class NetworkScanServer : IDisposable
     {
     }
 
-    internal NetworkScanServer(ScanningContext scanningContext, IScanBridgeFactory scanBridgeFactory, NetworkScanServerOptions options)
+    internal NetworkScanServer(ScanningContext scanningContext, IScanBridgeFactory scanBridgeFactory,
+        NetworkScanServerOptions options)
     {
         _scanningContext = scanningContext;
         _options = options;
         _scanBridgeFactory = scanBridgeFactory;
     }
 
-    public void Start()
+    public Task Start()
     {
         if (_server != null)
         {
@@ -42,7 +43,11 @@ public class NetworkScanServer : IDisposable
         // TODO: Secure
         _server = new Server
         {
-            Services = { NetworkScanService.BindService(new NetworkScanServiceImpl(_scanningContext.ImageContext, _scanBridgeFactory)) },
+            Services =
+            {
+                NetworkScanService.BindService(new NetworkScanServiceImpl(_scanningContext.ImageContext,
+                    _scanBridgeFactory))
+            },
             Ports = { new ServerPort("0.0.0.0", _options.Port ?? ServerPort.PickUnused, ServerCredentials.Insecure) }
         };
         _server.Start();
@@ -53,8 +58,20 @@ public class NetworkScanServer : IDisposable
             int discoveryPort = _options.DiscoveryPort ?? Discovery.DEFAULT_DISCOVERY_PORT;
             int serverPort = _server.Ports.Single().BoundPort;
             string serverName = _options.ServerName ?? Environment.MachineName;
-            Task.Run(() => Discovery.ListenForBroadcast(discoveryPort, serverPort, serverName, _cts.Token));
+
+            var tcs = new TaskCompletionSource<bool>();
+            Task.Run(() =>
+            {
+                // We only want Start to resolve once this task starts running. Otherwise discovery might not yet be
+                // active which could cause test failures. Of course there's still a few ms until the actual UDP socket
+                // receive starts, but that shouldn't generally be an issue. We could also consider tying this to
+                // UdpClient.BeginReceive resolving though that's more complicated.
+                tcs.TrySetResult(true);
+                return Discovery.ListenForBroadcast(discoveryPort, serverPort, serverName, _cts.Token);
+            });
+            return tcs.Task;
         }
+        return Task.CompletedTask;
     }
 
     public void Kill()

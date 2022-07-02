@@ -15,12 +15,11 @@ public class ServerDiscoveryTests
             ServerName = "NetworkScanTests.ServerDiscovery"
         });
         var client = new NetworkScanClient();
-        server.Start();
-        await Task.Delay(100);
+        await server.Start();
         var discovered = await client.DiscoverServers(100);
         Assert.Contains(discovered, x => x.Name == "NetworkScanTests.ServerDiscovery");
     }
-        
+
     [Fact]
     public async Task ServerDiscoveryCustomPort()
     {
@@ -33,12 +32,11 @@ public class ServerDiscoveryTests
         {
             DiscoveryPort = 33433
         });
-        server.Start();
-        await Task.Delay(100);
+        await server.Start();
         var discovered = await client.DiscoverServers(100);
         Assert.Contains(discovered, x => x.Name == "NetworkScanTests.ServerDiscoveryCustomPort");
     }
-        
+
     [Fact]
     public async Task ServerDiscoveryMismatchPort()
     {
@@ -51,12 +49,11 @@ public class ServerDiscoveryTests
         {
             DiscoveryPort = 33555
         });
-        server.Start();
-        await Task.Delay(100);
+        await server.Start();
         var discovered = await client.DiscoverServers(100);
         Assert.DoesNotContain(discovered, x => x.Name == "NetworkScanTests.ServerDiscoveryMismatchPort");
     }
-        
+
     [Fact]
     public async Task ServerDiscoveryOff()
     {
@@ -66,8 +63,7 @@ public class ServerDiscoveryTests
             AllowDiscovery = false
         });
         var client = new NetworkScanClient();
-        server.Start();
-        await Task.Delay(100);
+        await server.Start();
         var discovered = await client.DiscoverServers(100);
         Assert.DoesNotContain(discovered, x => x.Name == "NetworkScanTests.ServerDiscoveryOff");
     }
