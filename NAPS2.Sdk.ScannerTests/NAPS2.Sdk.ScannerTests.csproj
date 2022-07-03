@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net462</TargetFramework>
+        <RootNamespace>NAPS2.Sdk.ScannerTests</RootNamespace>
+    </PropertyGroup>
+
+    <Import Project="..\NAPS2.Setup\CommonTargets.targets" />
+    <Import Project="..\NAPS2.Setup\NativeLibs.targets" />
+    <Import Project="..\NAPS2.Setup\SdkUsers.targets" />
+
+    <ItemGroup>
+        <ProjectReference Include="..\NAPS2.Sdk.Tests\NAPS2.Sdk.Tests.csproj" />
+
+        <PackageReference Include="NAPS2.Wia" Version="1.0.1" />
+        <PackageReference Include="Moq" Version="4.18.1" />
+        <PackageReference Include="xunit" Version="2.4.1" />
+        <PackageReference Include="xunit.runner.visualstudio" Version="2.4.1" />
+    </ItemGroup>
+
+</Project>

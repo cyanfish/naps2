@@ -1,5 +1,6 @@
 namespace NAPS2.Scan;
 
+// TODO: Can we make this a record and/or make properties non-nullable?
 /// <summary>
 /// The representation of a scanning device identified by a driver.
 /// </summary>

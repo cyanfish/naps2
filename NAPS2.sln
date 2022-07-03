@@ -55,6 +55,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NAPS2.Images.Gdi", "NAPS2.I
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NAPS2.App.Tests", "NAPS2.App.Tests\NAPS2.App.Tests.csproj", "{3CA45B6B-F055-4FFB-B9B6-0FF381A752F9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NAPS2.Sdk.ScannerTests", "NAPS2.Sdk.ScannerTests\NAPS2.Sdk.ScannerTests.csproj", "{D291C9E9-42D2-4601-9EE3-1CBCA200B897}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -253,6 +255,16 @@ Global
 		{3CA45B6B-F055-4FFB-B9B6-0FF381A752F9}.InstallerMSI|Any CPU.Build.0 = Debug|Any CPU
 		{3CA45B6B-F055-4FFB-B9B6-0FF381A752F9}.Standalone|Any CPU.ActiveCfg = Debug|Any CPU
 		{3CA45B6B-F055-4FFB-B9B6-0FF381A752F9}.Standalone|Any CPU.Build.0 = Debug|Any CPU
+		{D291C9E9-42D2-4601-9EE3-1CBCA200B897}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D291C9E9-42D2-4601-9EE3-1CBCA200B897}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D291C9E9-42D2-4601-9EE3-1CBCA200B897}.DebugLang|Any CPU.ActiveCfg = Debug|Any CPU
+		{D291C9E9-42D2-4601-9EE3-1CBCA200B897}.DebugLang|Any CPU.Build.0 = Debug|Any CPU
+		{D291C9E9-42D2-4601-9EE3-1CBCA200B897}.InstallerEXE|Any CPU.ActiveCfg = Debug|Any CPU
+		{D291C9E9-42D2-4601-9EE3-1CBCA200B897}.InstallerEXE|Any CPU.Build.0 = Debug|Any CPU
+		{D291C9E9-42D2-4601-9EE3-1CBCA200B897}.InstallerMSI|Any CPU.ActiveCfg = Debug|Any CPU
+		{D291C9E9-42D2-4601-9EE3-1CBCA200B897}.InstallerMSI|Any CPU.Build.0 = Debug|Any CPU
+		{D291C9E9-42D2-4601-9EE3-1CBCA200B897}.Standalone|Any CPU.ActiveCfg = Debug|Any CPU
+		{D291C9E9-42D2-4601-9EE3-1CBCA200B897}.Standalone|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
