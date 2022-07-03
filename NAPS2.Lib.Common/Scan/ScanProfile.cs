@@ -52,11 +52,11 @@ public class ScanProfile
 
     public string? DriverName { get; set; }
 
-    public ScanProxyConfig ProxyConfig { get; set; }
+    public ScanProxyConfig? ProxyConfig { get; set; }
 
     public string? ProxyDriverName { get; set; }
 
-    public string? DisplayName { get; set; }
+    public string DisplayName { get; set; } = "";
 
     public int IconID { get; set; }
 
@@ -78,7 +78,7 @@ public class ScanProfile
 
     public ScanPageSize PageSize { get; set; }
 
-    public string CustomPageSizeName { get; set; }
+    public string? CustomPageSizeName { get; set; }
 
     public PageDimensions? CustomPageSize { get; set; }
 
@@ -88,7 +88,7 @@ public class ScanProfile
 
     public bool EnableAutoSave { get; set; }
 
-    public AutoSaveSettings AutoSaveSettings { get; set; }
+    public AutoSaveSettings? AutoSaveSettings { get; set; }
 
     public int Quality { get; set; }
 
@@ -120,7 +120,7 @@ public class ScanProfile
 
     public bool FlipDuplexedPages { get; set; }
 
-    public KeyValueScanOptions KeyValueOptions { get; set; }
+    public KeyValueScanOptions? KeyValueOptions { get; set; }
 }
 
 public record ScanProxyConfig(string Name, string Ip, int? Port);
@@ -353,8 +353,8 @@ public static class ScanEnumExtensions
 
     public static string Description(this Enum enumValue)
     {
-        object[] attrs = enumValue.GetType().GetField(enumValue.ToString()).GetCustomAttributes(typeof(DescriptionAttribute), false);
-        return attrs.Cast<DescriptionAttribute>().Select(x => x.Description).SingleOrDefault();
+        object[] attrs = enumValue.GetType().GetField(enumValue.ToString())!.GetCustomAttributes(typeof(DescriptionAttribute), false);
+        return attrs.Cast<DescriptionAttribute>().Select(x => x.Description).Single();
     }
 
     public static BitDepth ToBitDepth(this ScanBitDepth bitDepth)

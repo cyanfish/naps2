@@ -37,7 +37,7 @@ internal class ScanPerformer : IScanPerformer
         _ocrEngine = ocrEngine;
     }
 
-    public async Task<ScanDevice> PromptForDevice(ScanProfile scanProfile, IntPtr dialogParent = default)
+    public async Task<ScanDevice?> PromptForDevice(ScanProfile scanProfile, IntPtr dialogParent = default)
     {
         var options = BuildOptions(scanProfile, new ScanParams(), dialogParent);
         return await PromptForDevice(options);
@@ -124,16 +124,16 @@ internal class ScanPerformer : IScanPerformer
         if (!(error is ScanDriverException))
         {
             Log.ErrorException(error.Message, error);
-            _errorOutput?.DisplayError(error.Message, error);
+            _errorOutput.DisplayError(error.Message, error);
         }
         else if (error is ScanDriverUnknownException)
         {
-            Log.ErrorException(error.Message, error.InnerException);
-            _errorOutput?.DisplayError(error.Message, error);
+            Log.ErrorException(error.Message, error.InnerException!);
+            _errorOutput.DisplayError(error.Message, error);
         }
         else if (error is not AlreadyHandledDriverException)
         {
-            _errorOutput?.DisplayError(error.Message);
+            _errorOutput.DisplayError(error.Message);
         }
     }
 
@@ -163,11 +163,11 @@ internal class ScanPerformer : IScanPerformer
     private void TranslateProgress(ScanController controller, ScanOperation op)
     {
         var smoothProgress = new SmoothProgress();
-        controller.PageStart += (sender, args) => smoothProgress.Reset();
-        controller.PageProgress += (sender, args) => smoothProgress.InputProgressChanged(args.Progress);
-        controller.ScanEnd += (senders, args) => smoothProgress.Reset();
+        controller.PageStart += (_, _) => smoothProgress.Reset();
+        controller.PageProgress += (_, args) => smoothProgress.InputProgressChanged(args.Progress);
+        controller.ScanEnd += (_, _) => smoothProgress.Reset();
         smoothProgress.OutputProgressChanged +=
-            (sender, args) => op.Progress((int) Math.Round(args.Value * 1000), 1000);
+            (_, args) => op.Progress((int) Math.Round(args.Value * 1000), 1000);
     }
 
     private ScanOptions BuildOptions(ScanProfile scanProfile, ScanParams scanParams, IntPtr dialogParent)
@@ -275,7 +275,7 @@ internal class ScanPerformer : IScanPerformer
         return true;
     }
 
-    private async Task<ScanDevice> PromptForDevice(ScanOptions options)
+    private async Task<ScanDevice?> PromptForDevice(ScanOptions options)
     {
         // TODO: Not sure how best to handle this for console
         if (options.Driver == Driver.Wia)

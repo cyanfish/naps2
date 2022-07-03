@@ -44,11 +44,11 @@ public class CultureHelper
     {
         // Read a list of languages from the Languages.resx file
         var resourceManager = LanguageNames.ResourceManager;
-        var resourceSet = resourceManager.GetResourceSet(CultureInfo.InvariantCulture, true, true);
+        var resourceSet = resourceManager.GetResourceSet(CultureInfo.InvariantCulture, true, true)!;
         foreach (DictionaryEntry entry in resourceSet.Cast<DictionaryEntry>().OrderBy(x => x.Value))
         {
             var langCode = ((string) entry.Key).Replace("_", "-");
-            var langName = (string) entry.Value;
+            var langName = (string) entry.Value!;
 
             // Only include those languages for which localized resources exist
             string localizedResourcesPath =

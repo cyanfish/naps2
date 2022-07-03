@@ -37,24 +37,24 @@ public class ConfigSerializer : VersionedSerializer<ConfigStorage<CommonConfig>>
             if (_mode == ConfigReadMode.DefaultOnly)
             {
                 var oldAppConfig = new XmlSerializer<AppConfigV0>().Deserialize(stream);
-                return AppConfigV0ToCommonConfigDefault(oldAppConfig);
+                return AppConfigV0ToCommonConfigDefault(oldAppConfig ?? throw new InvalidOperationException("Couldn't parse app config"));
             }
             if (_mode == ConfigReadMode.LockedOnly)
             {
                 var oldAppConfig = new XmlSerializer<AppConfigV0>().Deserialize(stream);
-                return AppConfigV0ToCommonConfigLocked(oldAppConfig);
+                return AppConfigV0ToCommonConfigLocked(oldAppConfig ?? throw new InvalidOperationException("Couldn't parse app config"));
             }
             var oldUserConfig = new XmlSerializer<UserConfigV0>().Deserialize(stream);
-            return UserConfigV0ToCommonConfig(oldUserConfig);
+            return UserConfigV0ToCommonConfig(oldUserConfig ?? throw new InvalidOperationException("Couldn't parse user config"));
         }
         if (_mode == ConfigReadMode.DefaultOnly)
         {
-            FilterProperties(doc.Root, "default", "default");
+            FilterProperties(doc.Root!, "default", "default");
             return DeserializeXDoc(doc);
         }
         if (_mode == ConfigReadMode.LockedOnly)
         {
-            FilterProperties(doc.Root, "override", "default");
+            FilterProperties(doc.Root!, "override", "default");
             return DeserializeXDoc(doc);
         }
         return _storageSerializer.Deserialize(stream);

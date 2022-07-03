@@ -15,7 +15,7 @@ public class ProfileManager : IProfileManager
     private readonly bool _lockUnspecifiedDevices;
     private readonly bool _noUserProfiles;
 
-    private List<ScanProfile> _profiles;
+    private List<ScanProfile>? _profiles;
 
     public ProfileManager(string userPath, string systemPath, bool lockSystemProfiles, bool lockUnspecifiedDevices, bool noUserProfiles)
     {
@@ -36,7 +36,7 @@ public class ProfileManager : IProfileManager
             lock (this)
             {
                 Load();
-                return ImmutableList.CreateRange(_profiles);
+                return ImmutableList.CreateRange(_profiles!);
             }
         }
     }
@@ -44,14 +44,14 @@ public class ProfileManager : IProfileManager
     public void Mutate(ListMutation<ScanProfile> mutation, ISelectable<ScanProfile> selectable)
     {
         Load();
-        mutation.Apply(_profiles, selectable);
+        mutation.Apply(_profiles!, selectable);
         Save();
     }
 
     public void Mutate(ListMutation<ScanProfile> mutation, ListSelection<ScanProfile> selection)
     {
         Load();
-        mutation.Apply(_profiles, ref selection);
+        mutation.Apply(_profiles!, ref selection);
         Save();
     }
 
@@ -62,7 +62,7 @@ public class ProfileManager : IProfileManager
             lock (this)
             {
                 Load();
-                if (_profiles.Count == 1)
+                if (_profiles!.Count == 1)
                 {
                     return _profiles.First();
                 }
@@ -74,11 +74,14 @@ public class ProfileManager : IProfileManager
             lock (this)
             {
                 Load();
-                foreach (var profile in _profiles)
+                foreach (var profile in _profiles!)
                 {
                     profile.IsDefault = false;
                 }
-                value.IsDefault = true;
+                if (value != null)
+                {
+                    value.IsDefault = true;
+                }
             }
             Save();
         }
@@ -101,7 +104,7 @@ public class ProfileManager : IProfileManager
         Load();
         lock (this)
         {
-            _userScope.Set(c => c, ImmutableList.CreateRange(_profiles));
+            _userScope.Set(c => c, ImmutableList.CreateRange(_profiles!));
         }
         ProfilesUpdated?.Invoke(this, EventArgs.Empty);
     }
@@ -155,11 +158,7 @@ public class ProfileManager : IProfileManager
             {
                 // Merge some properties from the user's copy of the profile
                 var systemProfile = systemProfiles.First(x => x.DisplayName == profile.DisplayName);
-                if (systemProfile.Device == null)
-                {
-                    systemProfile.Device = profile.Device;
-                }
-
+                systemProfile.Device ??= profile.Device;
                 systemProfile.IsDefault = profile.IsDefault;
 
                 // Delete the user's copy of the profile

@@ -42,7 +42,7 @@ public abstract class ConfigScope<TConfig>
         return TryGet(accessor, out var value) ? value : orValue;
     }
     
-    public T GetOrDefault<T>(Expression<Func<TConfig, T>> accessor) => GetOr(accessor, default);
+    public T? GetOrDefault<T>(Expression<Func<TConfig, T>> accessor) => GetOr(accessor!, default);
 
     public void Set<T>(Expression<Func<TConfig, T>> accessor, T value)
     {

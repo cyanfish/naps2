@@ -54,7 +54,7 @@ public class AutoSaver
                     await InternalSave(settings, imageList);
                     if (t.IsFaulted && t.Exception != null)
                     {
-                        sink.SetError(t.Exception.InnerException);
+                        sink.SetError(t.Exception.InnerException!);
                     }
                 }
                 finally
@@ -100,7 +100,7 @@ public class AutoSaver
             var scans = SaveSeparatorHelper.SeparateScans(new[] { images }, settings.Separator).ToList();
             foreach (var imageList in scans)
             {
-                (bool success, string filePath) =
+                (bool success, string? filePath) =
                     await SaveOneFile(settings, placeholders, i++, imageList, scans.Count == 1);
                 if (!success)
                 {
@@ -155,7 +155,7 @@ public class AutoSaver
             {
                 _operationProgress.ShowProgress(op);
             }
-            bool success = await op.Success;
+            bool success = await op.Success!;
             if (success && doNotify)
             {
                 _notify.PdfSaved(subPath);
@@ -169,8 +169,8 @@ public class AutoSaver
             {
                 _operationProgress.ShowProgress(op);
             }
-            bool success = await op.Success;
-            if (success && doNotify)
+            bool success = await op.Success!;
+            if (success && doNotify && op.FirstFileSaved != null)
             {
                 _notify.ImagesSaved(images.Count, op.FirstFileSaved);
             }

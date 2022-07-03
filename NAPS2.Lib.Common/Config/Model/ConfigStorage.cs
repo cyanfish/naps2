@@ -5,10 +5,9 @@ namespace NAPS2.Config.Model;
 
 public class ConfigStorage<TConfig>
 {
-    private readonly StorageNode _root = new()
+    private readonly StorageNode _root = new(typeof(TConfig))
     {
         IsRoot = true,
-        ValueType = typeof(TConfig),
         IsLeaf = !ConfigLookup.HasConfigAttribute(typeof(TConfig))
     };
 
@@ -24,10 +23,10 @@ public class ConfigStorage<TConfig>
     public bool TryGet<T>(Expression<Func<TConfig, T>> accessor, out T value)
     {
         var result = TryGet(ConfigLookup.ExpandExpression(accessor), out var obj);
-        value = (T) obj;
+        value = (T) obj!;
         return result;
     }
-    
+
     public bool TryGet(ConfigLookup lookup, out object? value)
     {
         lock (this)
@@ -67,7 +66,7 @@ public class ConfigStorage<TConfig>
             }
             else
             {
-                node.Parent!.Children.Remove(node.Key);
+                node.Parent!.Children.Remove(node.Key!);
             }
         }
     }
@@ -97,12 +96,11 @@ public class ConfigStorage<TConfig>
         {
             return node;
         }
-        var nextNode = node.Children.GetOrSet(nextLookup.Key, () => new StorageNode
+        var nextNode = node.Children.GetOrSet(nextLookup.Key, () => new StorageNode(nextLookup.Type)
         {
             Key = nextLookup.Key,
             Parent = node,
-            IsLeaf = nextLookup.IsLeaf,
-            ValueType = nextLookup.Type
+            IsLeaf = nextLookup.IsLeaf
         });
         return GetNodeRecursive(nextNode, nextLookup);
     }
@@ -122,17 +120,16 @@ public class ConfigStorage<TConfig>
         foreach (var childSrcKvp in src.Children)
         {
             var childSrc = childSrcKvp.Value;
-            var childDst = dst.Children.GetOrSet(childSrc.Key, () => new StorageNode
+            var childDst = dst.Children.GetOrSet(childSrc.Key!, () => new StorageNode(childSrc.ValueType)
             {
                 Key = childSrc.Key,
                 Parent = dst,
-                ValueType = childSrc.ValueType,
                 IsLeaf = childSrc.IsLeaf,
             });
             CopyNodeToNode(childSrc, childDst);
         }
     }
-    
+
     private void CopyObjectToNode(object? obj, StorageNode node)
     {
         if (node.IsLeaf)
@@ -150,11 +147,10 @@ public class ConfigStorage<TConfig>
         foreach (var propData in ConfigLookup.GetPropertyData(node.ValueType))
         {
             var childObj = propData.PropertyInfo.GetValue(obj);
-            var childNode = node.Children.GetOrSet(propData.Name, () => new StorageNode
+            var childNode = node.Children.GetOrSet(propData.Name, () => new StorageNode(propData.Type)
             {
                 Key = propData.Name,
                 Parent = node,
-                ValueType = propData.Type,
                 IsLeaf = !propData.IsNestedConfig
             });
             CopyObjectToNode(childObj, childNode);
@@ -178,7 +174,7 @@ public class ConfigStorage<TConfig>
         foreach (var childNodeKvp in src.Children)
         {
             var childNode = childNodeKvp.Value;
-            var childElement = new XElement(childNode.Key);
+            var childElement = new XElement(childNode.Key!);
             dst.Add(childElement);
             CopyNodeToXElement(childNode, childElement, serializer);
         }
@@ -198,11 +194,10 @@ public class ConfigStorage<TConfig>
         {
             // TODO: Handle errors
             var propData = propDataDict[childElement.Name.ToString()];
-            var childNode = dst.Children.GetOrSet(propData.Name, () => new StorageNode
+            var childNode = dst.Children.GetOrSet(propData.Name, () => new StorageNode(propData.Type)
             {
                 Key = propData.Name,
                 Parent = dst,
-                ValueType = propData.Type,
                 IsLeaf = !propData.IsNestedConfig
             });
             CopyXElementToNode(childElement, childNode, serializer);
@@ -235,17 +230,22 @@ public class ConfigStorage<TConfig>
 
     private class StorageNode
     {
+        public StorageNode(Type valueType)
+        {
+            ValueType = valueType;
+        }
+
+        public Type ValueType { get; }
+
         public bool IsLeaf { get; init; }
 
         public bool IsRoot { get; init; }
 
-        public string Key { get; init; }
+        public string? Key { get; init; }
 
         public object? Value { get; set; }
-        
-        public bool HasValue { get; set; }
 
-        public Type ValueType { get; init; }
+        public bool HasValue { get; set; }
 
         public StorageNode? Parent { get; init; }
 

@@ -52,12 +52,7 @@ public class ImageListDiffer
             }
 
             _currentState = newState;
-            return new ListViewDiffs<UiImage>
-            {
-                AppendOperations = appendOps,
-                ReplaceOperations = replaceOps,
-                TrimOperations = trimOps
-            };
+            return new ListViewDiffs<UiImage>(appendOps, replaceOps, trimOps);
         }
     }
 }

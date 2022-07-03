@@ -64,11 +64,11 @@ public abstract class OauthProvider
             response.OutputStream.Close();
 
             // Validate the state (standard oauth2 security)
-            string requestState = queryString.Get("state");
+            var requestState = queryString.Get("state");
             if (requestState == state)
             {
                 // Yay, we got an authorization code
-                code = queryString.Get("code");
+                code = queryString.Get("code") ?? throw new InvalidOperationException();
                 break;
             }
         }
@@ -94,6 +94,7 @@ public abstract class OauthProvider
 
     public void RefreshToken()
     {
+        if (Token?.RefreshToken == null) throw new InvalidOperationException();
         var resp = Post(TokenEndpoint, new NameValueCollection
         {
             {"refresh_token", Token.RefreshToken},
@@ -169,7 +170,7 @@ public abstract class OauthProvider
     {
         var client = new WebClient();
         var token = Token;
-        if (!string.IsNullOrEmpty(token.AccessToken))
+        if (token?.AccessToken != null && !string.IsNullOrEmpty(token.AccessToken))
         {
             if (token.Expiry < DateTime.Now + TimeSpan.FromMinutes(10))
             {

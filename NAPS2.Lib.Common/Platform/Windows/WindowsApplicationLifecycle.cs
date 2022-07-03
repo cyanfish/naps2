@@ -137,7 +137,7 @@ public class WindowsApplicationLifecycle
         Process.Start(new ProcessStartInfo
         {
             Verb = "runas",
-            FileName = Assembly.GetEntryAssembly().Location,
+            FileName = Assembly.GetEntryAssembly()!.Location,
             Arguments = string.Join(" ", Environment.GetCommandLineArgs().Skip(1)) + " /NoElevation"
         });
     }

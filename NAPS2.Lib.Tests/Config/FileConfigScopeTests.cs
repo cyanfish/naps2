@@ -3,7 +3,7 @@ using NAPS2.Config.Model;
 using NAPS2.Sdk.Tests;
 using Xunit;
 
-namespace NAPS2.Lib.Tests.Config.Model;
+namespace NAPS2.Lib.Tests.Config;
 
 public class FileConfigScopeTests : ContextualTexts
 {
@@ -79,6 +79,35 @@ public class FileConfigScopeTests : ContextualTexts
         Assert.Equal("true", doc.Descendants("DisableAutoSave").Single().Value);
         Assert.Equal("test_path", doc.Descendants("ComponentsPath").Single().Value);
         Assert.Equal("false", doc.Descendants("NoUserProfiles").Single().Value);
+    }
+
+    [Fact]
+    public void ReadWithBadXml()
+    {
+        var configPath = Path.Combine(FolderPath, "config.xml");
+        File.WriteAllText(configPath, @"blah");
+        var scope = new FileConfigScope<CommonConfig>(configPath, new ConfigSerializer(ConfigReadMode.All, ConfigRootName.UserConfig), ConfigScopeMode.ReadWrite);
+
+        Assert.False(scope.TryGet(c => c.Culture, out _));
+    }
+
+    [Fact]
+    public void ReadWithBadConfig()
+    {
+        var configPath = Path.Combine(FolderPath, "config.xml");
+        File.WriteAllText(configPath, @"<?xml version=""1.0"" encoding=""utf-8""?><Blah><Culture>fr</Culture></Blah>");
+        var scope = new FileConfigScope<CommonConfig>(configPath, new ConfigSerializer(ConfigReadMode.DefaultOnly, ConfigRootName.UserConfig), ConfigScopeMode.ReadWrite);
+
+        Assert.False(scope.TryGet(c => c.Culture, out _));
+    }
+
+    [Fact]
+    public void ReadWithMissingFile()
+    {
+        var configPath = Path.Combine(FolderPath, "config.xml");
+        var scope = new FileConfigScope<CommonConfig>(configPath, new ConfigSerializer(ConfigReadMode.DefaultOnly, ConfigRootName.UserConfig), ConfigScopeMode.ReadWrite);
+
+        Assert.False(scope.TryGet(c => c.Culture, out _));
     }
 
     private static void DirectSetValue(FileStream stream, string tagName, string value)

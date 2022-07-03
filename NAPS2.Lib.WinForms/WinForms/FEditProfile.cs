@@ -133,7 +133,14 @@ public partial class FEditProfile : FormBase
     {
         if (ScanProfile.PageSize == ScanPageSize.Custom)
         {
-            SelectCustomPageSize(ScanProfile.CustomPageSizeName, ScanProfile.CustomPageSize);
+            if (ScanProfile.CustomPageSizeName != null && ScanProfile.CustomPageSize != null)
+            {
+                SelectCustomPageSize(ScanProfile.CustomPageSizeName, ScanProfile.CustomPageSize);
+            }
+            else
+            {
+                cmbPage.SelectedIndex = 0;
+            }
         }
         else
         {

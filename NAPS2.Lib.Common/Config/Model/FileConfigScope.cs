@@ -73,6 +73,10 @@ public class FileConfigScope<TConfig> : ConfigScope<TConfig>
             {
                 Log.ErrorException($"Error reading {_filePath}", ex);
             }
+            catch (Exception ex)
+            {
+                Log.ErrorException($"Error parsing config {_filePath}", ex);
+            }
         }
     }
 

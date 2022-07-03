@@ -8,7 +8,7 @@ namespace NAPS2.Scan;
 /// </summary>
 public interface IScanPerformer
 {
-    Task<ScanDevice> PromptForDevice(ScanProfile scanProfile, IntPtr dialogParent = default);
-        
+    Task<ScanDevice?> PromptForDevice(ScanProfile scanProfile, IntPtr dialogParent = default);
+
     Task<ScannedImageSource> PerformScan(ScanProfile scanProfile, ScanParams scanParams, IntPtr dialogParent = default, CancellationToken cancelToken = default);
 }

@@ -308,9 +308,12 @@ public class OcrRequestQueueTests : ContextualTexts
             .Returns(_expectedResultTask);
 
         var tasks = EnqueueMany(OcrPriority.Foreground, 1000);
-        await Task.Delay(1000);
-        
-        int completedCount = tasks.Count(x => x.IsCompleted);
+        int completedCount = 0;
+        for (int i = 0; i < 10 && completedCount < 1000; i++)
+        {
+            await Task.Delay(500);
+            completedCount = tasks.Count(x => x.IsCompleted);
+        }
         Assert.Equal(1000, completedCount);
     }
     

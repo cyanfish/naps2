@@ -51,6 +51,8 @@ public class Naps2Config : ScopedConfig<CommonConfig>
         Scopes = new[] { AppLocked, Run, User, AppDefault, InternalDefault };
     }
 
+    protected override ConfigScope<CommonConfig>[] Scopes { get; }
+
     // TODO: Maybe generalize this somehow
     public Naps2Config WithTransaction(params TransactionConfigScope<CommonConfig>[] transactions)
     {

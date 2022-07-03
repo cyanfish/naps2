@@ -2,9 +2,9 @@
 
 public abstract class VersionedSerializer<T> : ISerializer<T>
 {
-    public void Serialize(Stream stream, T obj)
+    public void Serialize(Stream stream, T? obj)
     {
-        InternalSerialize(stream, obj);
+        InternalSerialize(stream, obj ?? throw new ArgumentNullException());
     }
 
     public T Deserialize(Stream stream)

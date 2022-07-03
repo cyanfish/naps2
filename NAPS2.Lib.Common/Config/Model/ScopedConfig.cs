@@ -4,12 +4,12 @@ namespace NAPS2.Config.Model;
 
 public abstract class ScopedConfig<TConfig>
 {
-    protected ConfigScope<TConfig>[] Scopes { get; init; }
+    protected abstract ConfigScope<TConfig>[] Scopes { get; }
 
     public T Get<T>(Expression<Func<TConfig, T>> accessor)
     {
         var lookup = ConfigLookup.ExpandExpression(accessor);
-        return (T) Get(lookup);
+        return (T) Get(lookup)!;
     }
 
     private object? Get(ConfigLookup lookup)

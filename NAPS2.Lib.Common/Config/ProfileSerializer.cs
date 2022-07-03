@@ -48,7 +48,7 @@ public class ProfileSerializer : VersionedSerializer<ConfigStorage<ImmutableList
     private ImmutableList<ScanProfile> ReadProfiles(Stream configFileStream)
     {
         var serializer = new XmlSerializer<ImmutableList<ScanProfile>>();
-        var settingsList = serializer.Deserialize(configFileStream);
+        var settingsList = serializer.Deserialize(configFileStream) ?? throw new InvalidOperationException();
         // Upgrade from v1 to v2 if necessary
         foreach (var settings in settingsList)
         {
@@ -68,7 +68,7 @@ public class ProfileSerializer : VersionedSerializer<ConfigStorage<ImmutableList
     private ImmutableList<ScanProfile> ReadOldProfiles(Stream configFileStream)
     {
         var serializer = new XmlSerializer<List<ExtendedScanSettingsV0>>();
-        var profiles = serializer.Deserialize(configFileStream);
+        var profiles = serializer.Deserialize(configFileStream) ?? throw new InvalidOperationException();
         // Upgrade from v1 to v2 if necessary
         foreach (var settings in profiles)
         {
@@ -86,7 +86,7 @@ public class ProfileSerializer : VersionedSerializer<ConfigStorage<ImmutableList
             UpgradedFrom = profile.Version,
             Device = profile.Device != null ? new ScanDevice(profile.Device.ID, profile.Device.Name) : null,
             DriverName = profile.DriverName,
-            DisplayName = profile.DisplayName,
+            DisplayName = profile.DisplayName ?? "",
             MaxQuality = profile.MaxQuality,
             IsDefault = profile.IsDefault,
             IconID = profile.IconID,
@@ -107,7 +107,7 @@ public class ProfileSerializer : VersionedSerializer<ConfigStorage<ImmutableList
     {
         // For compatibility with profiles.xml from old versions, load ScanSettingsV0 instead of ScanProfile (which is used exclusively now)
         var serializer = new XmlSerializer<List<ScanSettingsV0>>();
-        var profiles = serializer.Deserialize(configFileStream);
+        var profiles = serializer.Deserialize(configFileStream) ?? throw new InvalidOperationException();
 
         return profiles.Select(profile =>
         {
@@ -125,7 +125,7 @@ public class ProfileSerializer : VersionedSerializer<ConfigStorage<ImmutableList
                 UpgradedFrom = 0,
                 Device = profile.Device != null ? new ScanDevice(profile.Device.ID, profile.Device.Name) : null,
                 DriverName = profile.DriverName,
-                DisplayName = profile.DisplayName,
+                DisplayName = profile.DisplayName ?? "",
                 MaxQuality = profile.MaxQuality,
                 IsDefault = profile.IsDefault,
                 IconID = profile.IconID,

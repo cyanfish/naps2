@@ -46,7 +46,7 @@ public class StillImage
     // Instead of modifying the registry directly.
     public void Register()
     {
-        var exe = Assembly.GetEntryAssembly().Location;
+        var exe = Assembly.GetEntryAssembly()!.Location;
 
         using (var key1 = Registry.LocalMachine.CreateSubKey(REGKEY_AUTOPLAY_HANDLER_NAPS2))
         {

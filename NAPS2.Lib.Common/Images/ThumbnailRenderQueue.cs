@@ -117,7 +117,7 @@ public class ThumbnailRenderQueue : IDisposable
                 if (worker != null)
                 {
                     worker.Dispose();
-                    worker = _scanningContext.WorkerFactory.Create();
+                    worker = _scanningContext.WorkerFactory?.Create();
                 }
                 Thread.Sleep(fallback.Value);
                 fallback.Increase();
@@ -148,7 +148,7 @@ public class ThumbnailRenderQueue : IDisposable
     private UiImage? GetNextThumbnailToRender(int thumbnailSize)
     {
         List<UiImage> listCopy;
-        lock (_imageList)
+        lock (_imageList!)
         {
             listCopy = _imageList.Images.ToList();
         }
