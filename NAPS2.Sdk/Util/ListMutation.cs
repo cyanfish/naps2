@@ -1,6 +1,6 @@
 namespace NAPS2.Util;
 
-public abstract class ListMutation<T>
+public abstract class ListMutation<T> where T : notnull
 {
     public void Apply(List<T> list, ISelectable<T> selectable)
     {

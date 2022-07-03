@@ -8,7 +8,7 @@ public class ScanOperation : OperationBase
 
     public ScanOperation(ScanOptions options)
     {
-        ProgressTitle = options.Device.Name;
+        ProgressTitle = options.Device!.Name;
         Status = new OperationStatus
         {
             StatusText = options.PaperSource == PaperSource.Flatbed

@@ -4,6 +4,6 @@ public class SaneOptionCollection : Dictionary<string, SaneOption>
 {
     public void Add(SaneOption option)
     {
-        Add(option.Name, option);
+        Add(option.Name!, option);
     }
 }

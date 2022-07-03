@@ -16,7 +16,7 @@ public class NativeLibrary
 
     public T Load<T>()
     {
-        return (T)_funcCache.Get(typeof(T), () => Marshal.GetDelegateForFunctionPointer<T>(LoadFunc<T>()));
+        return (T)_funcCache.Get(typeof(T), () => Marshal.GetDelegateForFunctionPointer<T>(LoadFunc<T>())!);
     }
 
     private IntPtr LoadFunc<T>()

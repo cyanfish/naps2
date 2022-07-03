@@ -83,11 +83,11 @@ public class OcrOperationManager
                 _currentOp = null;
                 finished = true;
             }
-            var taskSet = _ongoingTasks[(OcrController) sender];
+            var taskSet = _ongoingTasks[(OcrController) sender!];
             taskSet.Remove(e.ResultTask);
             if (taskSet.Count == 0)
             {
-                _ongoingTasks.Remove((OcrController) sender);
+                _ongoingTasks.Remove((OcrController) sender!);
             }
         }
         op.InvokeStatusChanged();

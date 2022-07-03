@@ -18,7 +18,7 @@ public static class ListSelection
         new(Enumerable.Empty<T>());
 }
 
-public class ListSelection<T> : IEnumerable<T>, IEquatable<ListSelection<T>>
+public class ListSelection<T> : IEnumerable<T>, IEquatable<ListSelection<T>> where T : notnull
 {
     private readonly HashSet<T> _internalSelection;
 
