@@ -25,7 +25,7 @@
     <value>&amp;Valeurs par défaut</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
-    <value>Chemin de fichier prédéfini :</value>
+    <value>Chemin de fichier par défaut :</value>
   </data>
   <data name="linkPlaceholders.Text" xml:space="preserve">
     <value>Chaînes de substitution</value>

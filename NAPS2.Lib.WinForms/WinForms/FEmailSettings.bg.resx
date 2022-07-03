@@ -34,7 +34,7 @@
     <value>No provider selected.</value>
   </data>
   <data name="btnChangeProvider.Text" xml:space="preserve">
-    <value>Change</value>
+    <value>Промяна</value>
   </data>
   <data name="groupBox1.Text" xml:space="preserve">
     <value>Provider</value>

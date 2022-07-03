@@ -19,48 +19,48 @@
     <value>&amp;OK</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
-    <value>File Name</value>
+    <value>Tiedoston nimi</value>
   </data>
   <data name="label2.Text" xml:space="preserve">
     <value>Esikatsele:</value>
   </data>
   <data name="label3.Text" xml:space="preserve">
-    <value>Year</value>
+    <value>Vuosi</value>
   </data>
   <data name="label4.Text" xml:space="preserve">
-    <value>Year (00-99)</value>
+    <value>Vuosi (00-99)</value>
   </data>
   <data name="label5.Text" xml:space="preserve">
-    <value>Month (01-12)</value>
+    <value>Kuukausi (01-12)</value>
   </data>
   <data name="label6.Text" xml:space="preserve">
-    <value>Day (01-31)</value>
+    <value>Päivä (01-31)</value>
   </data>
   <data name="label7.Text" xml:space="preserve">
-    <value>Hour (0-23)</value>
+    <value>Tunti (0-23)</value>
   </data>
   <data name="label8.Text" xml:space="preserve">
-    <value>Minute (00-59)</value>
+    <value>Minuutti (00-59)</value>
   </data>
   <data name="label9.Text" xml:space="preserve">
-    <value>Second (00-59)</value>
+    <value>Sekunti (00-59)</value>
   </data>
   <data name="label10.Text" xml:space="preserve">
-    <value>Auto-incrementing number (4 digits)</value>
+    <value>Automaattinen lisäys (4 numeroa)</value>
   </data>
   <data name="label11.Text" xml:space="preserve">
-    <value>Auto-incrementing number (3 digits)</value>
+    <value>Automaattinen lisäys (3 numeroa)</value>
   </data>
   <data name="label12.Text" xml:space="preserve">
-    <value>Auto-incrementing number (2 digits)</value>
+    <value>Automaattinen lisäys (2 numeroa)</value>
   </data>
   <data name="label13.Text" xml:space="preserve">
-    <value>Auto-incrementing number (1 digit)</value>
+    <value>Automaattinen lisäys (1 numero)</value>
   </data>
   <data name="gboxPlaceholders.Text" xml:space="preserve">
-    <value>Placeholders</value>
+    <value>Varaukset</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>Placeholders</value>
+    <value>Varaukset</value>
   </data>
 </root>

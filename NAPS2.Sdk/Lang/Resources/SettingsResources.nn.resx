@@ -46,7 +46,7 @@
     <value>800 dpi</value>
   </data>
   <data name="EmailProviderType_CustomSmtp" xml:space="preserve">
-    <value>Custom SMTP</value>
+    <value>Eigen SMTP</value>
   </data>
   <data name="EmailProviderType_Gmail" xml:space="preserve">
     <value>Gmail</value>
@@ -55,7 +55,7 @@
     <value>Outlook Web Access</value>
   </data>
   <data name="EmailProvider_NotSelected" xml:space="preserve">
-    <value>No provider selected.</value>
+    <value>Ingen leverandør vald.</value>
   </data>
   <data name="HorizontalAlign_Center" xml:space="preserve">
     <value>Senter</value>

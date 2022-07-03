@@ -40,7 +40,7 @@
     <value>Xóa ảnh sau khi lưu</value>
   </data>
   <data name="cbPromptForFilePath.Text" xml:space="preserve">
-    <value>Prompt for file path</value>
+    <value>Hỏi nơi lưu.</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Cài đặt Tự động Lưu</value>

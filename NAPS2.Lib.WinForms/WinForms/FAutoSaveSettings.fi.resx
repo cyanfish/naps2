@@ -19,30 +19,30 @@
     <value>&amp;Peruuta</value>
   </data>
   <data name="linkPatchCodeInfo.Text" xml:space="preserve">
-    <value>More info</value>
+    <value>Lisätietoja</value>
   </data>
   <data name="rdSeparateByPatchT.Text" xml:space="preserve">
-    <value>Separate files by Patch-T</value>
+    <value>Erota sivut Patch-T - koodilla</value>
   </data>
   <data name="rdFilePerPage.Text" xml:space="preserve">
-    <value>One file per page</value>
+    <value>Tiedosto joka sivusta</value>
   </data>
   <data name="rdFilePerScan.Text" xml:space="preserve">
-    <value>One file per scan</value>
+    <value>Skannauksesta yksi tiedosto</value>
   </data>
   <data name="linkPlaceholders.Text" xml:space="preserve">
-    <value>Placeholders</value>
+    <value>Varaukset</value>
   </data>
   <data name="lblFilePath.Text" xml:space="preserve">
-    <value>File path:</value>
+    <value>Tiedostopolku:</value>
   </data>
   <data name="cbClearAfterSave.Text" xml:space="preserve">
-    <value>Clear images after saving</value>
+    <value>Pyyhi kuvat tallennukset jälkeen</value>
   </data>
   <data name="cbPromptForFilePath.Text" xml:space="preserve">
-    <value>Prompt for file path</value>
+    <value>Kysy tiedostopolkua</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>Auto Save Settings</value>
+    <value>Automaattisen tallennuksen asetukset</value>
   </data>
 </root>

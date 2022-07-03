@@ -28,7 +28,7 @@
     <value>Изрязване</value>
   </data>
   <data name="tsBrightnessContrast.Text" xml:space="preserve">
-    <value>Brightness / Contrast</value>
+    <value>Яркост / Контраст</value>
   </data>
   <data name="tsHueSaturation.Text" xml:space="preserve">
     <value>Hue / Saturation</value>

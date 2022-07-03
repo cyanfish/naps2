@@ -28,10 +28,10 @@
     <value>&amp;OK</value>
   </data>
   <data name="labelOcrMode.Text" xml:space="preserve">
-    <value>OCR mode:</value>
+    <value>Mode de l'OCR :</value>
   </data>
   <data name="checkBoxRunInBG.Text" xml:space="preserve">
-    <value>&amp;Automatically run OCR after scanning</value>
+    <value>&amp;Exécuter automatiquement l'OCR après la numérisation</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Configuration OCR (reconnaissance optique de caractères)</value>

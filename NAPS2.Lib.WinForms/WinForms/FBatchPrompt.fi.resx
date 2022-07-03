@@ -19,9 +19,9 @@
     <value>&amp;Skannaa</value>
   </data>
   <data name="lblStatus.Text" xml:space="preserve">
-    <value>Ready for scan {0}.</value>
+    <value>Valmis skannaamaan {0}.</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>Next Scan</value>
+    <value>Seuraava skannaus</value>
   </data>
 </root>

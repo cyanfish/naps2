@@ -118,7 +118,7 @@
     <value>Installation Failed</value>
   </data>
   <data name="AllCount" xml:space="preserve">
-    <value>All ({0})</value>
+    <value>Tot ({0})</value>
   </data>
   <data name="SelectedCount" xml:space="preserve">
     <value>Selected ({0})</value>
@@ -391,6 +391,6 @@
     <value>Scanning page {0}...</value>
   </data>
   <data name="AcquiringData" xml:space="preserve">
-    <value>Acquiring data...</value>
+    <value>S'estan obtenint les dades...</value>
   </data>
 </root>

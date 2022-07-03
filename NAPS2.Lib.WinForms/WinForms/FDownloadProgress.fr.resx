@@ -19,7 +19,7 @@
     <value>{0} / {1} Mo</value>
   </data>
   <data name="labelTop.Text" xml:space="preserve">
-    <value>Fichier {0} / {1}</value>
+    <value>Fichier(s) {0} / {1}</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Progression du téléchargement</value>

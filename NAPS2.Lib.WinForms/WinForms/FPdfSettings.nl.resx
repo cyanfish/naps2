@@ -18,9 +18,6 @@
   <data name="btnCancel.Text" xml:space="preserve">
     <value>&amp;Annuleren</value>
   </data>
-  <data name="groupMetadata.Text" xml:space="preserve">
-    <value>Metadata</value>
-  </data>
   <data name="label6.Text" xml:space="preserve">
     <value>Sleutelwoorden:</value>
   </data>
@@ -33,8 +30,8 @@
   <data name="label4.Text" xml:space="preserve">
     <value>Titel:</value>
   </data>
-  <data name="groupProtection.Text" xml:space="preserve">
-    <value>Versleuteling</value>
+  <data name="groupMetadata.Text" xml:space="preserve">
+    <value>Metadata</value>
   </data>
   <data name="clbPerms.Items" xml:space="preserve">
     <value>Afdrukken toestaan</value>
@@ -75,6 +72,9 @@
   <data name="cbEncryptPdf.Text" xml:space="preserve">
     <value>PDF versleutelen</value>
   </data>
+  <data name="groupProtection.Text" xml:space="preserve">
+    <value>Versleuteling</value>
+  </data>
   <data name="cbRememberSettings.Text" xml:space="preserve">
     <value>Onthoud deze instellingen</value>
   </data>
@@ -92,6 +92,9 @@
   </data>
   <data name="groupCompat.Text" xml:space="preserve">
     <value>Compatibiliteit</value>
+  </data>
+  <data name="cbSinglePagePdf.Text" xml:space="preserve">
+    <value>Enkele-pagina bestanden</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>PDF instellingen</value>

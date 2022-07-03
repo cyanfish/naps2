@@ -160,13 +160,13 @@
     <value>Máte neuložené změny. Jste si jisti, že chcete odejít a zahodit tyto změny?</value>
   </data>
   <data name="ExitWithActiveOperations" xml:space="preserve">
-    <value>An operation is in progress. Are you sure you want to exit and cancel the operation?</value>
+    <value>Probíhá operace. Určitě chcete odejít a přerušit tuto operaci?</value>
   </data>
   <data name="UnsavedChanges" xml:space="preserve">
     <value>Neuložené změny</value>
   </data>
   <data name="ActiveOperations" xml:space="preserve">
-    <value>Operation in Progress</value>
+    <value>Probíhá operace</value>
   </data>
   <data name="ScanPageProgress" xml:space="preserve">
     <value>Skenuje se stránka {0}</value>
@@ -334,49 +334,49 @@
     <value>NAPS2 je zcela zdarma. Zvažte poskytnutí daru.</value>
   </data>
   <data name="SaneNotAvailable" xml:space="preserve">
-    <value>The SANE driver is not available. Make sure to install the required packages:</value>
+    <value>Ovladač SANE není dostupný. Ověřte instalaci požadovaných balíčků:</value>
   </data>
   <data name="TesseractNotAvailable" xml:space="preserve">
-    <value>The OCR engine is not available. Make sure to install the required package:</value>
+    <value>OCR není dostupné. Ověřte instalaci požadovaného balíčku:</value>
   </data>
   <data name="DriverNotSupported" xml:space="preserve">
-    <value>The selected driver is not supported on this system.</value>
+    <value>Vybraný ovladač není na tomto systému podporován.</value>
   </data>
   <data name="OcrProgress" xml:space="preserve">
-    <value>OCR Progress</value>
+    <value>Průběh OCR</value>
   </data>
   <data name="RunningOcr" xml:space="preserve">
-    <value>Running OCR...</value>
+    <value>Spuštěno OCR...</value>
   </data>
   <data name="UpdateProgress" xml:space="preserve">
-    <value>Update Progress</value>
+    <value>Průběh aktualizace</value>
   </data>
   <data name="Updating" xml:space="preserve">
-    <value>Updating...</value>
+    <value>Aktualizace...</value>
   </data>
   <data name="NoUpdates" xml:space="preserve">
-    <value>No updates available.</value>
+    <value>Nejsou dostupné aktualizace.</value>
   </data>
   <data name="CheckingForUpdates" xml:space="preserve">
-    <value>Checking...</value>
+    <value>Vyhledávání...</value>
   </data>
   <data name="UpdateError" xml:space="preserve">
-    <value>An error occured when trying to install the update.</value>
+    <value>Při pokusu o aktualizaci došlo k chybě..</value>
   </data>
   <data name="Install" xml:space="preserve">
-    <value>Install {0}</value>
+    <value>Instalovat {0}</value>
   </data>
   <data name="UpdateAvailable" xml:space="preserve">
-    <value>An update is available.</value>
+    <value>Je dostupná aktualizace.</value>
   </data>
   <data name="AuthError" xml:space="preserve">
-    <value>An error occurred when trying to authorize.</value>
+    <value>Došlo k chybě při pokusu o autorizaci.</value>
   </data>
   <data name="UploadingEmail" xml:space="preserve">
-    <value>Uploading email...</value>
+    <value>Odesílání emailu...</value>
   </data>
   <data name="ErrorEmailing" xml:space="preserve">
-    <value>An error occurred when trying to send the email.</value>
+    <value>Došlo k chybě při pokusu o odeslání emailu.</value>
   </data>
   <data name="Naps2Server" xml:space="preserve">
     <value>NAPS2 Server</value>

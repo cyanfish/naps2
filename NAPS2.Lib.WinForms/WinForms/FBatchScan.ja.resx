@@ -19,7 +19,7 @@
     <value>キャンセル</value>
   </data>
   <data name="btnStart.Text" xml:space="preserve">
-    <value>Start</value>
+    <value>開始</value>
   </data>
   <data name="lblTimeBetweenScans.Text" xml:space="preserve">
     <value>スキャン間の時間 (seconds):</value>

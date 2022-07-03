@@ -18,9 +18,6 @@
   <data name="btnCancel.Text" xml:space="preserve">
     <value>&amp;Hủy</value>
   </data>
-  <data name="groupMetadata.Text" xml:space="preserve">
-    <value>Metadata</value>
-  </data>
   <data name="label6.Text" xml:space="preserve">
     <value>Từ khóa:</value>
   </data>
@@ -33,8 +30,8 @@
   <data name="label4.Text" xml:space="preserve">
     <value>Tiêu đề:</value>
   </data>
-  <data name="groupProtection.Text" xml:space="preserve">
-    <value>Encryption</value>
+  <data name="groupMetadata.Text" xml:space="preserve">
+    <value>Metadata</value>
   </data>
   <data name="clbPerms.Items" xml:space="preserve">
     <value>Cho phép in</value>
@@ -43,7 +40,7 @@
     <value>Cho phép cải thiện bản In</value>
   </data>
   <data name="clbPerms.Items2" xml:space="preserve">
-    <value>Cho phép tài liệu Modification</value>
+    <value>Cho phép thay đổi tài liệu</value>
   </data>
   <data name="clbPerms.Items3" xml:space="preserve">
     <value>Cho phép tài liệu Assembly</value>
@@ -75,6 +72,9 @@
   <data name="cbEncryptPdf.Text" xml:space="preserve">
     <value>Mã hóa PDF</value>
   </data>
+  <data name="groupProtection.Text" xml:space="preserve">
+    <value>Encryption</value>
+  </data>
   <data name="cbRememberSettings.Text" xml:space="preserve">
     <value>Ghi các thiết lập</value>
   </data>
@@ -92,6 +92,9 @@
   </data>
   <data name="groupCompat.Text" xml:space="preserve">
     <value>Khả năng tương thích</value>
+  </data>
+  <data name="cbSinglePagePdf.Text" xml:space="preserve">
+    <value>Single page files</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Cài đặt PDF</value>

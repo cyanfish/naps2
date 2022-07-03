@@ -37,10 +37,10 @@
     <value>Versatzbreite basierend auf Ausrichtung (WIA)</value>
   </data>
   <data name="cbForcePageSize.Text" xml:space="preserve">
-    <value>Auf Seitengröße ziehen</value>
+    <value>Auf Seitengröße dehnen</value>
   </data>
   <data name="cbBrightnessContrastAfterScan.Text" xml:space="preserve">
-    <value>Helligkeits- und Kontrastanpassung nach dem Scannen anwenden</value>
+    <value>Passe Helligkeit und Kontrast nach dem Scannen an</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
     <value>Twain Implementierung:</value>

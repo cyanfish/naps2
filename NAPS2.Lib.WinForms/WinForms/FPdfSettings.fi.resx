@@ -18,82 +18,85 @@
   <data name="btnCancel.Text" xml:space="preserve">
     <value>&amp;Peruuta</value>
   </data>
-  <data name="groupMetadata.Text" xml:space="preserve">
-    <value>Metadata</value>
-  </data>
   <data name="label6.Text" xml:space="preserve">
-    <value>Keywords:</value>
+    <value>Avainsanat:</value>
   </data>
   <data name="label5.Text" xml:space="preserve">
-    <value>Subject:</value>
+    <value>Aihe:</value>
   </data>
   <data name="label3.Text" xml:space="preserve">
-    <value>Author:</value>
+    <value>Tekijä:</value>
   </data>
   <data name="label4.Text" xml:space="preserve">
-    <value>Title:</value>
+    <value>Otsikko:</value>
   </data>
-  <data name="groupProtection.Text" xml:space="preserve">
-    <value>Encryption</value>
+  <data name="groupMetadata.Text" xml:space="preserve">
+    <value>Metatiedot</value>
   </data>
   <data name="clbPerms.Items" xml:space="preserve">
-    <value>Allow Printing</value>
+    <value>Salli tulostaminen</value>
   </data>
   <data name="clbPerms.Items1" xml:space="preserve">
-    <value>Allow Full Quality Printing</value>
+    <value>Salli korkealaatuinen tulostus</value>
   </data>
   <data name="clbPerms.Items2" xml:space="preserve">
-    <value>Allow Document Modification</value>
+    <value>Salli asiakirjan muokkaus</value>
   </data>
   <data name="clbPerms.Items3" xml:space="preserve">
-    <value>Allow Document Assembly</value>
+    <value>Salli asiakirjan kokoaminen</value>
   </data>
   <data name="clbPerms.Items4" xml:space="preserve">
     <value>Salli sisällön kopiointi</value>
   </data>
   <data name="clbPerms.Items5" xml:space="preserve">
-    <value>Allow Content Copying for Accessibility</value>
+    <value>Salli sisällön kopioiminen helppokäyttötoimintoja varten</value>
   </data>
   <data name="clbPerms.Items6" xml:space="preserve">
     <value>Salli kommentit</value>
   </data>
   <data name="clbPerms.Items7" xml:space="preserve">
-    <value>Allow Form Filling</value>
+    <value>Salli lomakkeiden täyttäminen</value>
   </data>
   <data name="cbShowUserPassword.Text" xml:space="preserve">
-    <value>Show</value>
+    <value>Näytä</value>
   </data>
   <data name="cbShowOwnerPassword.Text" xml:space="preserve">
-    <value>Show</value>
+    <value>Näytä</value>
   </data>
   <data name="lblUserPassword.Text" xml:space="preserve">
-    <value>User Password:</value>
+    <value>Käyttäjän salasana:</value>
   </data>
   <data name="lblOwnerPassword.Text" xml:space="preserve">
-    <value>Owner Password:</value>
+    <value>Omistajan salasana:</value>
   </data>
   <data name="cbEncryptPdf.Text" xml:space="preserve">
-    <value>Encrypt PDF</value>
+    <value>Salaa PDF</value>
+  </data>
+  <data name="groupProtection.Text" xml:space="preserve">
+    <value>Salaus</value>
   </data>
   <data name="cbRememberSettings.Text" xml:space="preserve">
-    <value>Remember these settings</value>
+    <value>Muista asetukset</value>
   </data>
   <data name="btnRestoreDefaults.Text" xml:space="preserve">
-    <value>Restore &amp;Defaults</value>
+    <value>&amp;Palauta oletusarvoihin</value>
   </data>
   <data name="linkPlaceholders.Text" xml:space="preserve">
-    <value>Placeholders</value>
+    <value>Varaukset</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
-    <value>Default File Path:</value>
+    <value>Oletuspolku:</value>
   </data>
   <data name="cbSkipSavePrompt.Text" xml:space="preserve">
-    <value>Skip save prompt</value>
+    <value>Ohita talleta - kysymys</value>
   </data>
   <data name="groupCompat.Text" xml:space="preserve">
-    <value>Compatibility</value>
+    <value>Yhteensopivuus</value>
+  </data>
+  <data name="cbSinglePagePdf.Text" xml:space="preserve">
+    <value>Yhden sivun tiedostot</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>PDF Settings</value>
+    <value>PDF - asetukset</value>
   </data>
 </root>

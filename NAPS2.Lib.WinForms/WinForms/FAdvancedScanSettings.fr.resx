@@ -31,16 +31,16 @@
     <value>Recadrer aux dimensions de la page</value>
   </data>
   <data name="cbFlipDuplex.Text" xml:space="preserve">
-    <value>Retourner les pages en duplex</value>
+    <value>Retourner les pages recto-verso</value>
   </data>
   <data name="cbWiaOffsetWidth.Text" xml:space="preserve">
     <value>Largeur de décalage basée sur l'alignement (WIA)</value>
   </data>
   <data name="cbForcePageSize.Text" xml:space="preserve">
-    <value>Étirer selon les dimensions de la page</value>
+    <value>Étirer aux dimensions de la page</value>
   </data>
   <data name="cbBrightnessContrastAfterScan.Text" xml:space="preserve">
-    <value>Appliquer luminosité/contraste après acquisition</value>
+    <value>Appliquer la luminosité/contraste après acquisition</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
     <value>Implémentation Twain :</value>

@@ -18,9 +18,6 @@
   <data name="btnCancel.Text" xml:space="preserve">
     <value>&amp;Anuluj</value>
   </data>
-  <data name="groupMetadata.Text" xml:space="preserve">
-    <value>Metadane</value>
-  </data>
   <data name="label6.Text" xml:space="preserve">
     <value>Słowa kluczowe:</value>
   </data>
@@ -33,8 +30,8 @@
   <data name="label4.Text" xml:space="preserve">
     <value>Tytuł:</value>
   </data>
-  <data name="groupProtection.Text" xml:space="preserve">
-    <value>Szyfrowanie</value>
+  <data name="groupMetadata.Text" xml:space="preserve">
+    <value>Metadane</value>
   </data>
   <data name="clbPerms.Items" xml:space="preserve">
     <value>Zezwalaj na drukowanie</value>
@@ -75,6 +72,9 @@
   <data name="cbEncryptPdf.Text" xml:space="preserve">
     <value>Zaszyfruj PDF</value>
   </data>
+  <data name="groupProtection.Text" xml:space="preserve">
+    <value>Szyfrowanie</value>
+  </data>
   <data name="cbRememberSettings.Text" xml:space="preserve">
     <value>Zapamiętaj te ustawienia</value>
   </data>
@@ -92,6 +92,9 @@
   </data>
   <data name="groupCompat.Text" xml:space="preserve">
     <value>Zgodność</value>
+  </data>
+  <data name="cbSinglePagePdf.Text" xml:space="preserve">
+    <value>Pliki pojedynczej strony</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Ustawienia PDF</value>

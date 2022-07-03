@@ -12,8 +12,32 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="tStrip.Text" xml:space="preserve">
+    <value>Hlavný panel nástrojov</value>
+  </data>
+  <data name="ctxView.Text" xml:space="preserve">
+    <value>Pohľad</value>
+  </data>
+  <data name="ctxSelectAll.Text" xml:space="preserve">
+    <value>Vyber všetko</value>
+  </data>
+  <data name="ctxCopy.Text" xml:space="preserve">
+    <value>Kopírovať</value>
+  </data>
+  <data name="ctxPaste.Text" xml:space="preserve">
+    <value>Vložiť</value>
+  </data>
+  <data name="ctxDelete.Text" xml:space="preserve">
+    <value>Zmazať</value>
+  </data>
   <data name="tsScan.Text" xml:space="preserve">
     <value>&amp;Sken</value>
+  </data>
+  <data name="tsNewProfile.Text" xml:space="preserve">
+    <value>&amp;Nový profil</value>
+  </data>
+  <data name="tsBatchScan.Text" xml:space="preserve">
+    <value>&amp;Dávkové skenovanie</value>
   </data>
   <data name="tsProfiles.Text" xml:space="preserve">
     <value>&amp;Profily</value>
@@ -27,14 +51,47 @@
   <data name="tsdSavePDF.Text" xml:space="preserve">
     <value>&amp;Uložiť PDF</value>
   </data>
+  <data name="tsSavePDFAll.Text" xml:space="preserve">
+    <value>&amp;Všetko ({0})</value>
+  </data>
+  <data name="tsSavePDFSelected.Text" xml:space="preserve">
+    <value>&amp;Vybrané ({0})</value>
+  </data>
+  <data name="tsPDFSettings.Text" xml:space="preserve">
+    <value>&amp;Nastavenie PDF</value>
+  </data>
   <data name="tsdSaveImages.Text" xml:space="preserve">
     <value>&amp;Uložiť snímky</value>
+  </data>
+  <data name="tsSaveImagesAll.Text" xml:space="preserve">
+    <value>&amp;Všetko ({0})</value>
+  </data>
+  <data name="tsSaveImagesSelected.Text" xml:space="preserve">
+    <value>&amp;Vybrané ({0})</value>
+  </data>
+  <data name="tsImageSettings.Text" xml:space="preserve">
+    <value>&amp;Nastavnie snímok</value>
   </data>
   <data name="tsdEmailPDF.Text" xml:space="preserve">
     <value>&amp;Odoslať PDF e-mailom</value>
   </data>
+  <data name="tsEmailPDFAll.Text" xml:space="preserve">
+    <value>&amp;Všetko ({0})</value>
+  </data>
+  <data name="tsEmailPDFSelected.Text" xml:space="preserve">
+    <value>&amp;Vybrané ({0})</value>
+  </data>
+  <data name="tsEmailSettings.Text" xml:space="preserve">
+    <value>&amp;Nastavenie e-mailu</value>
+  </data>
+  <data name="tsPdfSettings2.Text" xml:space="preserve">
+    <value>&amp;Nastavenie PDF</value>
+  </data>
   <data name="tsPrint.Text" xml:space="preserve">
     <value>&amp;Tlačiť</value>
+  </data>
+  <data name="tsdImage.Text" xml:space="preserve">
+    <value>&amp;Snímka</value>
   </data>
   <data name="tsView.Text" xml:space="preserve">
     <value>&amp;Pohľad</value>
@@ -57,86 +114,8 @@
   <data name="tsReset.Text" xml:space="preserve">
     <value>&amp;Reset</value>
   </data>
-  <data name="tsdImage.Text" xml:space="preserve">
-    <value>&amp;Snímka</value>
-  </data>
   <data name="tsdRotate.Text" xml:space="preserve">
     <value>&amp;Natočiť</value>
-  </data>
-  <data name="tsMove.FirstText" xml:space="preserve">
-    <value>Posun hore</value>
-  </data>
-  <data name="tsMove.SecondText" xml:space="preserve">
-    <value>Posun dole</value>
-  </data>
-  <data name="tsdReorder.Text" xml:space="preserve">
-    <value>&amp;Zoradiť</value>
-  </data>
-  <data name="tsDelete.Text" xml:space="preserve">
-    <value>&amp;Zmazať</value>
-  </data>
-  <data name="tsClear.Text" xml:space="preserve">
-    <value>&amp;Vyčistiť</value>
-  </data>
-  <data name="toolStripDropDownButton1.Text" xml:space="preserve">
-    <value>&amp;Jazyk</value>
-  </data>
-  <data name="tsAbout.Text" xml:space="preserve">
-    <value>&amp;O aplikácii</value>
-  </data>
-  <data name="tStrip.Text" xml:space="preserve">
-    <value>Hlavný panel nástrojov</value>
-  </data>
-  <data name="ctxView.Text" xml:space="preserve">
-    <value>Pohľad</value>
-  </data>
-  <data name="ctxSelectAll.Text" xml:space="preserve">
-    <value>Vyber všetko</value>
-  </data>
-  <data name="ctxCopy.Text" xml:space="preserve">
-    <value>Kopírovať</value>
-  </data>
-  <data name="ctxPaste.Text" xml:space="preserve">
-    <value>Vložiť</value>
-  </data>
-  <data name="ctxDelete.Text" xml:space="preserve">
-    <value>Zmazať</value>
-  </data>
-  <data name="tsNewProfile.Text" xml:space="preserve">
-    <value>&amp;Nový profil</value>
-  </data>
-  <data name="tsBatchScan.Text" xml:space="preserve">
-    <value>&amp;Dávkové skenovanie</value>
-  </data>
-  <data name="tsSavePDFAll.Text" xml:space="preserve">
-    <value>&amp;Všetko ({0})</value>
-  </data>
-  <data name="tsSavePDFSelected.Text" xml:space="preserve">
-    <value>&amp;Vybrané ({0})</value>
-  </data>
-  <data name="tsPDFSettings.Text" xml:space="preserve">
-    <value>&amp;Nastavenie PDF</value>
-  </data>
-  <data name="tsSaveImagesAll.Text" xml:space="preserve">
-    <value>&amp;Všetko ({0})</value>
-  </data>
-  <data name="tsSaveImagesSelected.Text" xml:space="preserve">
-    <value>&amp;Vybrané ({0})</value>
-  </data>
-  <data name="tsImageSettings.Text" xml:space="preserve">
-    <value>&amp;Nastavnie snímok</value>
-  </data>
-  <data name="tsEmailPDFAll.Text" xml:space="preserve">
-    <value>&amp;Všetko ({0})</value>
-  </data>
-  <data name="tsEmailPDFSelected.Text" xml:space="preserve">
-    <value>&amp;Vybrané ({0})</value>
-  </data>
-  <data name="tsEmailSettings.Text" xml:space="preserve">
-    <value>&amp;Nastavenie e-mailu</value>
-  </data>
-  <data name="tsPdfSettings2.Text" xml:space="preserve">
-    <value>&amp;Nastavenie PDF</value>
   </data>
   <data name="tsRotateLeft.Text" xml:space="preserve">
     <value>&amp;Natočiť vľavo</value>
@@ -152,6 +131,15 @@
   </data>
   <data name="tsCustomRotation.Text" xml:space="preserve">
     <value>&amp;Vlastné natočenie</value>
+  </data>
+  <data name="tsMove.FirstText" xml:space="preserve">
+    <value>Posun hore</value>
+  </data>
+  <data name="tsMove.SecondText" xml:space="preserve">
+    <value>Posun dole</value>
+  </data>
+  <data name="tsdReorder.Text" xml:space="preserve">
+    <value>&amp;Zoradiť</value>
   </data>
   <data name="tsInterleave.Text" xml:space="preserve">
     <value>&amp;Prekladanie</value>
@@ -173,6 +161,18 @@
   </data>
   <data name="tsReverseSelected.Text" xml:space="preserve">
     <value>&amp;Vybrané ({0})</value>
+  </data>
+  <data name="tsDelete.Text" xml:space="preserve">
+    <value>&amp;Zmazať</value>
+  </data>
+  <data name="tsClear.Text" xml:space="preserve">
+    <value>&amp;Vyčistiť</value>
+  </data>
+  <data name="toolStripDropDownButton1.Text" xml:space="preserve">
+    <value>&amp;Jazyk</value>
+  </data>
+  <data name="tsAbout.Text" xml:space="preserve">
+    <value>&amp;O aplikácii</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Not Another PDF Scanner 2</value>

@@ -22,7 +22,7 @@
     <value>Plus d'informations</value>
   </data>
   <data name="rdSeparateByPatchT.Text" xml:space="preserve">
-    <value>Séparer les fichiers par Patch-T</value>
+    <value>Délimitation des fichiers par Patch-T</value>
   </data>
   <data name="rdFilePerPage.Text" xml:space="preserve">
     <value>Un fichier par page</value>
@@ -34,7 +34,7 @@
     <value>Chaînes de substitution</value>
   </data>
   <data name="lblFilePath.Text" xml:space="preserve">
-    <value>Chemin de fichier :</value>
+    <value>Chemin du fichier :</value>
   </data>
   <data name="cbClearAfterSave.Text" xml:space="preserve">
     <value>Effacer les images après l'enregistrement</value>

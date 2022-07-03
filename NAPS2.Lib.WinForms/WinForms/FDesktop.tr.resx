@@ -12,8 +12,32 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="tStrip.Text" xml:space="preserve">
+    <value>Ana araç çubuğu</value>
+  </data>
+  <data name="ctxView.Text" xml:space="preserve">
+    <value>Görüntüle</value>
+  </data>
+  <data name="ctxSelectAll.Text" xml:space="preserve">
+    <value>Tümünü Seç</value>
+  </data>
+  <data name="ctxCopy.Text" xml:space="preserve">
+    <value>Kopyala</value>
+  </data>
+  <data name="ctxPaste.Text" xml:space="preserve">
+    <value>Yapıştır</value>
+  </data>
+  <data name="ctxDelete.Text" xml:space="preserve">
+    <value>Sil</value>
+  </data>
   <data name="tsScan.Text" xml:space="preserve">
     <value>&amp;Tara</value>
+  </data>
+  <data name="tsNewProfile.Text" xml:space="preserve">
+    <value>&amp;Yeni Profil</value>
+  </data>
+  <data name="tsBatchScan.Text" xml:space="preserve">
+    <value>&amp;Yığın Tarama</value>
   </data>
   <data name="tsProfiles.Text" xml:space="preserve">
     <value>&amp;Profiller</value>
@@ -27,14 +51,47 @@
   <data name="tsdSavePDF.Text" xml:space="preserve">
     <value>&amp;PDF Kaydet</value>
   </data>
+  <data name="tsSavePDFAll.Text" xml:space="preserve">
+    <value>&amp;Tümü ({0})</value>
+  </data>
+  <data name="tsSavePDFSelected.Text" xml:space="preserve">
+    <value>&amp;Seçilen ({0})</value>
+  </data>
+  <data name="tsPDFSettings.Text" xml:space="preserve">
+    <value>&amp;PDF Ayarları</value>
+  </data>
   <data name="tsdSaveImages.Text" xml:space="preserve">
     <value>&amp;Resimleri Kaydet</value>
+  </data>
+  <data name="tsSaveImagesAll.Text" xml:space="preserve">
+    <value>&amp;Tümü ({0})</value>
+  </data>
+  <data name="tsSaveImagesSelected.Text" xml:space="preserve">
+    <value>&amp;Seçilen ({0})</value>
+  </data>
+  <data name="tsImageSettings.Text" xml:space="preserve">
+    <value>&amp;Resim Ayarları</value>
   </data>
   <data name="tsdEmailPDF.Text" xml:space="preserve">
     <value>&amp;PDF'yi E-postala</value>
   </data>
+  <data name="tsEmailPDFAll.Text" xml:space="preserve">
+    <value>&amp;Tümü ({0})</value>
+  </data>
+  <data name="tsEmailPDFSelected.Text" xml:space="preserve">
+    <value>&amp;Seçilen ({0})</value>
+  </data>
+  <data name="tsEmailSettings.Text" xml:space="preserve">
+    <value>&amp;E-Posta Ayarları</value>
+  </data>
+  <data name="tsPdfSettings2.Text" xml:space="preserve">
+    <value>&amp;PDF Ayarları</value>
+  </data>
   <data name="tsPrint.Text" xml:space="preserve">
     <value>&amp;Yazdır</value>
+  </data>
+  <data name="tsdImage.Text" xml:space="preserve">
+    <value>&amp;Resim</value>
   </data>
   <data name="tsView.Text" xml:space="preserve">
     <value>&amp;Görüntüle</value>
@@ -57,86 +114,8 @@
   <data name="tsReset.Text" xml:space="preserve">
     <value>&amp;Sıfırla</value>
   </data>
-  <data name="tsdImage.Text" xml:space="preserve">
-    <value>&amp;Resim</value>
-  </data>
   <data name="tsdRotate.Text" xml:space="preserve">
     <value>&amp;Çevir</value>
-  </data>
-  <data name="tsMove.FirstText" xml:space="preserve">
-    <value>Yukarı Taşı</value>
-  </data>
-  <data name="tsMove.SecondText" xml:space="preserve">
-    <value>Aşağı Taşı</value>
-  </data>
-  <data name="tsdReorder.Text" xml:space="preserve">
-    <value>&amp;Yeniden Sırala</value>
-  </data>
-  <data name="tsDelete.Text" xml:space="preserve">
-    <value>&amp;Sil</value>
-  </data>
-  <data name="tsClear.Text" xml:space="preserve">
-    <value>&amp;Temizle</value>
-  </data>
-  <data name="toolStripDropDownButton1.Text" xml:space="preserve">
-    <value>&amp;Dil</value>
-  </data>
-  <data name="tsAbout.Text" xml:space="preserve">
-    <value>&amp;Hakkında</value>
-  </data>
-  <data name="tStrip.Text" xml:space="preserve">
-    <value>Ana araç çubuğu</value>
-  </data>
-  <data name="ctxView.Text" xml:space="preserve">
-    <value>Görüntüle</value>
-  </data>
-  <data name="ctxSelectAll.Text" xml:space="preserve">
-    <value>Tümünü Seç</value>
-  </data>
-  <data name="ctxCopy.Text" xml:space="preserve">
-    <value>Kopyala</value>
-  </data>
-  <data name="ctxPaste.Text" xml:space="preserve">
-    <value>Yapıştır</value>
-  </data>
-  <data name="ctxDelete.Text" xml:space="preserve">
-    <value>Sil</value>
-  </data>
-  <data name="tsNewProfile.Text" xml:space="preserve">
-    <value>&amp;Yeni Profil</value>
-  </data>
-  <data name="tsBatchScan.Text" xml:space="preserve">
-    <value>&amp;Yığın Tarama</value>
-  </data>
-  <data name="tsSavePDFAll.Text" xml:space="preserve">
-    <value>&amp;Tümü ({0})</value>
-  </data>
-  <data name="tsSavePDFSelected.Text" xml:space="preserve">
-    <value>&amp;Seçilen ({0})</value>
-  </data>
-  <data name="tsPDFSettings.Text" xml:space="preserve">
-    <value>&amp;PDF Ayarları</value>
-  </data>
-  <data name="tsSaveImagesAll.Text" xml:space="preserve">
-    <value>&amp;Tümü ({0})</value>
-  </data>
-  <data name="tsSaveImagesSelected.Text" xml:space="preserve">
-    <value>&amp;Seçilen ({0})</value>
-  </data>
-  <data name="tsImageSettings.Text" xml:space="preserve">
-    <value>&amp;Resim Ayarları</value>
-  </data>
-  <data name="tsEmailPDFAll.Text" xml:space="preserve">
-    <value>&amp;Tümü ({0})</value>
-  </data>
-  <data name="tsEmailPDFSelected.Text" xml:space="preserve">
-    <value>&amp;Seçilen ({0})</value>
-  </data>
-  <data name="tsEmailSettings.Text" xml:space="preserve">
-    <value>&amp;E-Posta Ayarları</value>
-  </data>
-  <data name="tsPdfSettings2.Text" xml:space="preserve">
-    <value>&amp;PDF Ayarları</value>
   </data>
   <data name="tsRotateLeft.Text" xml:space="preserve">
     <value>&amp;Sola Çevir</value>
@@ -152,6 +131,15 @@
   </data>
   <data name="tsCustomRotation.Text" xml:space="preserve">
     <value>&amp;Özel Döndürme</value>
+  </data>
+  <data name="tsMove.FirstText" xml:space="preserve">
+    <value>Yukarı Taşı</value>
+  </data>
+  <data name="tsMove.SecondText" xml:space="preserve">
+    <value>Aşağı Taşı</value>
+  </data>
+  <data name="tsdReorder.Text" xml:space="preserve">
+    <value>&amp;Yeniden Sırala</value>
   </data>
   <data name="tsInterleave.Text" xml:space="preserve">
     <value>&amp;Boşluk Ekle</value>
@@ -173,6 +161,18 @@
   </data>
   <data name="tsReverseSelected.Text" xml:space="preserve">
     <value>&amp;Seçilen ({0})</value>
+  </data>
+  <data name="tsDelete.Text" xml:space="preserve">
+    <value>&amp;Sil</value>
+  </data>
+  <data name="tsClear.Text" xml:space="preserve">
+    <value>&amp;Temizle</value>
+  </data>
+  <data name="toolStripDropDownButton1.Text" xml:space="preserve">
+    <value>&amp;Dil</value>
+  </data>
+  <data name="tsAbout.Text" xml:space="preserve">
+    <value>&amp;Hakkında</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Not Another PDF Scanner 2</value>

@@ -28,7 +28,7 @@
     <value>Chỉnh sửa</value>
   </data>
   <data name="tsBrightnessContrast.Text" xml:space="preserve">
-    <value>Brightness / Contrast</value>
+    <value>Độ Sáng / Tương Phản</value>
   </data>
   <data name="tsHueSaturation.Text" xml:space="preserve">
     <value>Hue / Saturation</value>
@@ -37,7 +37,7 @@
     <value>Trắng &amp; Đen</value>
   </data>
   <data name="tsSharpen.Text" xml:space="preserve">
-    <value>Sharpen</value>
+    <value>Độ nét</value>
   </data>
   <data name="tsSavePDF.Text" xml:space="preserve">
     <value>Lưu PDF</value>

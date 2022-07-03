@@ -160,13 +160,13 @@
     <value>Es gibt ungespeicherte Änderungen. Möchten Sie das Programm beenden und diese Änderungen verwerfen?</value>
   </data>
   <data name="ExitWithActiveOperations" xml:space="preserve">
-    <value>An operation is in progress. Are you sure you want to exit and cancel the operation?</value>
+    <value>Verarbeitung läuft noch. Wollen Sie wirklich beenden und die Verarbeitung abbrechen?</value>
   </data>
   <data name="UnsavedChanges" xml:space="preserve">
     <value>Ungespeicherte Änderungen</value>
   </data>
   <data name="ActiveOperations" xml:space="preserve">
-    <value>Operation in Progress</value>
+    <value>Verarbeitung läuft</value>
   </data>
   <data name="ScanPageProgress" xml:space="preserve">
     <value>Seite {0} wird eingescannt</value>
@@ -226,7 +226,7 @@
     <value>Importiere {0}...</value>
   </data>
   <data name="ImportProgress" xml:space="preserve">
-    <value>Importfortschritt</value>
+    <value>Import-Fortschritt</value>
   </data>
   <data name="Recovering" xml:space="preserve">
     <value>Wiederherstellen...</value>
@@ -244,7 +244,7 @@
     <value>PDF speichern</value>
   </data>
   <data name="SavePdfProgress" xml:space="preserve">
-    <value>Fortschritt des PDF-speicherns</value>
+    <value>Fortschritt des PDF-Speicherns</value>
   </data>
   <data name="SavingFormat" xml:space="preserve">
     <value>{0} gespeichert...</value>
@@ -289,7 +289,7 @@
     <value>Der Scanner wird vorgewärmt.</value>
   </data>
   <data name="OcrUpdateAvailable" xml:space="preserve">
-    <value>Es ist ein Update für OCR verfügbar.</value>
+    <value>Ein Update für OCR ist verfügbar.</value>
   </data>
   <data name="ImageSaved" xml:space="preserve">
     <value>Bild gespeichert.</value>
@@ -334,49 +334,49 @@
     <value>NAPS2 ist vollständig gratis. Unterstützen Sie uns mit einer Spende.</value>
   </data>
   <data name="SaneNotAvailable" xml:space="preserve">
-    <value>The SANE driver is not available. Make sure to install the required packages:</value>
+    <value>Der SANE-Treiber ist nicht verfügbar. Stelle sicher, dass die erforderlichen Pakete installiert sind:</value>
   </data>
   <data name="TesseractNotAvailable" xml:space="preserve">
-    <value>The OCR engine is not available. Make sure to install the required package:</value>
+    <value>Das OCR-Modul ist nicht verfügbar. Stelle sicher, dass das benötigte Paket installiert ist:</value>
   </data>
   <data name="DriverNotSupported" xml:space="preserve">
-    <value>The selected driver is not supported on this system.</value>
+    <value>Der ausgewählte Treiber wird auf diesem System nicht unterstützt.</value>
   </data>
   <data name="OcrProgress" xml:space="preserve">
-    <value>OCR Progress</value>
+    <value>OCR-Fortschritt</value>
   </data>
   <data name="RunningOcr" xml:space="preserve">
-    <value>Running OCR...</value>
+    <value>Führe OCR aus...</value>
   </data>
   <data name="UpdateProgress" xml:space="preserve">
-    <value>Update Progress</value>
+    <value>Update-Fortschritt</value>
   </data>
   <data name="Updating" xml:space="preserve">
-    <value>Updating...</value>
+    <value>Aktualisiere...</value>
   </data>
   <data name="NoUpdates" xml:space="preserve">
-    <value>No updates available.</value>
+    <value>Keine Updates verfügbar.</value>
   </data>
   <data name="CheckingForUpdates" xml:space="preserve">
-    <value>Checking...</value>
+    <value>Prüfe...</value>
   </data>
   <data name="UpdateError" xml:space="preserve">
-    <value>An error occured when trying to install the update.</value>
+    <value>Beim Versuch das Update zu installieren ist ein Fehler aufgetreten.</value>
   </data>
   <data name="Install" xml:space="preserve">
-    <value>Install {0}</value>
+    <value>Installiere {0}</value>
   </data>
   <data name="UpdateAvailable" xml:space="preserve">
-    <value>An update is available.</value>
+    <value>Ein Update ist verfügbar.</value>
   </data>
   <data name="AuthError" xml:space="preserve">
-    <value>An error occurred when trying to authorize.</value>
+    <value>Bei der Anmeldung ist ein Fehler aufgetreten.</value>
   </data>
   <data name="UploadingEmail" xml:space="preserve">
-    <value>Uploading email...</value>
+    <value>Hochladen der E-Mail...</value>
   </data>
   <data name="ErrorEmailing" xml:space="preserve">
-    <value>An error occurred when trying to send the email.</value>
+    <value>Beim Senden der E-Mail ist ein Fehler aufgetreten.</value>
   </data>
   <data name="Naps2Server" xml:space="preserve">
     <value>NAPS2 Server</value>

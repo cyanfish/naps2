@@ -22,6 +22,6 @@
     <value>Rétablir</value>
   </data>
   <data name="checkboxApplyToSelected.Text" xml:space="preserve">
-    <value>Appliquer à toutes les {0} images sélectionnées</value>
+    <value>Appliquer aux {0} images sélectionnées</value>
   </data>
 </root>

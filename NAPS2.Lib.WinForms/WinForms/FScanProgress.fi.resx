@@ -16,7 +16,7 @@
     <value>&amp;Peruuta</value>
   </data>
   <data name="labelPage.Text" xml:space="preserve">
-    <value>Scanning page {0}</value>
+    <value>Skannataan kuvaa {0}</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Haetaan tietoja</value>

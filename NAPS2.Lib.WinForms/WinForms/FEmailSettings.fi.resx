@@ -19,27 +19,27 @@
     <value>&amp;Peruuta</value>
   </data>
   <data name="cbRememberSettings.Text" xml:space="preserve">
-    <value>Remember these settings</value>
+    <value>Muista asetukset</value>
   </data>
   <data name="btnRestoreDefaults.Text" xml:space="preserve">
-    <value>Restore &amp;Defaults</value>
+    <value>&amp;Palauta oletusarvoihin</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
-    <value>Attachment Name:</value>
+    <value>Liitteen nimi:</value>
   </data>
   <data name="linkPlaceholders.Text" xml:space="preserve">
-    <value>Placeholders</value>
+    <value>Varaukset</value>
   </data>
   <data name="lblProvider.Text" xml:space="preserve">
-    <value>No provider selected.</value>
+    <value>Tapaa ei ole valittu.</value>
   </data>
   <data name="btnChangeProvider.Text" xml:space="preserve">
-    <value>Change</value>
+    <value>Muuta</value>
   </data>
   <data name="groupBox1.Text" xml:space="preserve">
-    <value>Provider</value>
+    <value>Palveluntarjoaja</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>Email Settings</value>
+    <value>Sähköpostiasetukset</value>
   </data>
 </root>

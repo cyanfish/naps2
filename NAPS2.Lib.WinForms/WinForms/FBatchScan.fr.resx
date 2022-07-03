@@ -13,7 +13,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="lblStatus.Text" xml:space="preserve">
-    <value>Presser « Démarrer » une fois prêt.</value>
+    <value>Presser « Démarrer » une fois prêt.</value>
   </data>
   <data name="btnCancel.Text" xml:space="preserve">
     <value>Annuler</value>
@@ -46,7 +46,7 @@
     <value>Plus d'informations</value>
   </data>
   <data name="rdSeparateByPatchT.Text" xml:space="preserve">
-    <value>Séparer les fichiers par Patch-T</value>
+    <value>Délimitation des fichiers par Patch-T</value>
   </data>
   <data name="rdFilePerPage.Text" xml:space="preserve">
     <value>Un fichier par page</value>
@@ -58,13 +58,13 @@
     <value>Chaînes de substitution</value>
   </data>
   <data name="lblFilePath.Text" xml:space="preserve">
-    <value>Chemin de fichier :</value>
+    <value>Chemin du fichier :</value>
   </data>
   <data name="rdSaveToMultipleFiles.Text" xml:space="preserve">
-    <value>Sauvegarder en fichiers uniques</value>
+    <value>Enregistrer en fichiers uniques</value>
   </data>
   <data name="rdSaveToSingleFile.Text" xml:space="preserve">
-    <value>Sauvegarder en un fichier multi-pages unique</value>
+    <value>Enregistrer en un fichier multipages unique</value>
   </data>
   <data name="rdLoadIntoNaps2.Text" xml:space="preserve">
     <value>Charger les images dans NAPS2</value>

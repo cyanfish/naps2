@@ -31,10 +31,10 @@
     <value>Placeholders</value>
   </data>
   <data name="lblProvider.Text" xml:space="preserve">
-    <value>No provider selected.</value>
+    <value>Geen provider gekozen.</value>
   </data>
   <data name="btnChangeProvider.Text" xml:space="preserve">
-    <value>Change</value>
+    <value>Wijzig</value>
   </data>
   <data name="groupBox1.Text" xml:space="preserve">
     <value>Provider</value>

@@ -16,9 +16,9 @@
     <value>&amp;Peruuta</value>
   </data>
   <data name="btnSelect.Text" xml:space="preserve">
-    <value>&amp;Select</value>
+    <value>&amp;Valitse</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>Select Source</value>
+    <value>Valitse mistä</value>
   </data>
 </root>

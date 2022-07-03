@@ -322,10 +322,10 @@
     <value>An additional component is needed to import this PDF file. Would you like to download it now?</value>
   </data>
   <data name="ConfirmCancelBatch" xml:space="preserve">
-    <value>Are you sure you want to cancel the batch scan?</value>
+    <value>Сигурен ли сте, че искате да прекъснете поточното сканиране?</value>
   </data>
   <data name="CancelBatch" xml:space="preserve">
-    <value>Cancel Batch</value>
+    <value>Спри групата</value>
   </data>
   <data name="Donate" xml:space="preserve">
     <value>Donate</value>
@@ -367,7 +367,7 @@
     <value>Install {0}</value>
   </data>
   <data name="UpdateAvailable" xml:space="preserve">
-    <value>An update is available.</value>
+    <value>Налично обновяване.</value>
   </data>
   <data name="AuthError" xml:space="preserve">
     <value>An error occurred when trying to authorize.</value>

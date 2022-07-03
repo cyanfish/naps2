@@ -19,7 +19,7 @@
     <value>キャンセル</value>
   </data>
   <data name="btnRevert.Text" xml:space="preserve">
-    <value>Revert</value>
+    <value>元に戻す</value>
   </data>
   <data name="checkboxApplyToSelected.Text" xml:space="preserve">
     <value>選択されたイメージ{0}個すべてに適用</value>

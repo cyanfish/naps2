@@ -13,21 +13,21 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="label3.Text" xml:space="preserve">
-    <value>Select one or more languages:</value>
+    <value>Valitse yksi tai useampi kieli:</value>
   </data>
   <data name="btnDownload.Text" xml:space="preserve">
-    <value>&amp;Download</value>
+    <value>&amp;Lataa</value>
   </data>
   <data name="btnCancel.Text" xml:space="preserve">
     <value>&amp;Peruuta</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
-    <value>Using OCR requires you to download each language you want to scan.</value>
+    <value>OCR:n käyttäminen vaatii, että lataat kaikki kielet, joilla haluat skannata.</value>
   </data>
   <data name="labelSizeEstimate.Text" xml:space="preserve">
-    <value>Estimated download size: {0} MB</value>
+    <value>Arvioitu latauskoko {0} MB</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>OCR Download</value>
+    <value>OCR lataus</value>
   </data>
 </root>

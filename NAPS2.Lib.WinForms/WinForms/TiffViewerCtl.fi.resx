@@ -13,18 +13,18 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="tsStretch.ToolTipText" xml:space="preserve">
-    <value>Scale With Window</value>
+    <value>Skaalaa ikkunan mukaan</value>
   </data>
   <data name="tsZoomActual.ToolTipText" xml:space="preserve">
-    <value>Zoom Actual</value>
+    <value>Alkuperäiseen kokoon</value>
   </data>
   <data name="tsZoomPlus.ToolTipText" xml:space="preserve">
-    <value>Zoom In</value>
+    <value>Suurenna</value>
   </data>
   <data name="tsZoomOut.ToolTipText" xml:space="preserve">
-    <value>Zoom Out</value>
+    <value>Pienennä</value>
   </data>
   <data name="tsZoom.ToolTipText" xml:space="preserve">
-    <value>Zoomaus</value>
+    <value>Muuta kokoa</value>
   </data>
 </root>

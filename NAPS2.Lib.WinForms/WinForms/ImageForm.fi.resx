@@ -19,9 +19,9 @@
     <value>Peruuta</value>
   </data>
   <data name="btnRevert.Text" xml:space="preserve">
-    <value>Revert</value>
+    <value>Käännä</value>
   </data>
   <data name="checkboxApplyToSelected.Text" xml:space="preserve">
-    <value>Apply to all {0} selected images</value>
+    <value>Käytä kaikissa  {0} valitussa kuvassa</value>
   </data>
 </root>

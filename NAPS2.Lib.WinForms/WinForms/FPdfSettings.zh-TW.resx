@@ -18,9 +18,6 @@
   <data name="btnCancel.Text" xml:space="preserve">
     <value>&amp;取消</value>
   </data>
-  <data name="groupMetadata.Text" xml:space="preserve">
-    <value>中繼資料</value>
-  </data>
   <data name="label6.Text" xml:space="preserve">
     <value>關鍵字:</value>
   </data>
@@ -33,8 +30,8 @@
   <data name="label4.Text" xml:space="preserve">
     <value>標題:</value>
   </data>
-  <data name="groupProtection.Text" xml:space="preserve">
-    <value>加密</value>
+  <data name="groupMetadata.Text" xml:space="preserve">
+    <value>中繼資料</value>
   </data>
   <data name="clbPerms.Items" xml:space="preserve">
     <value>允許列印</value>
@@ -75,6 +72,9 @@
   <data name="cbEncryptPdf.Text" xml:space="preserve">
     <value>加密 PDF</value>
   </data>
+  <data name="groupProtection.Text" xml:space="preserve">
+    <value>加密</value>
+  </data>
   <data name="cbRememberSettings.Text" xml:space="preserve">
     <value>記住這些設定</value>
   </data>
@@ -92,6 +92,9 @@
   </data>
   <data name="groupCompat.Text" xml:space="preserve">
     <value>Compatibility</value>
+  </data>
+  <data name="cbSinglePagePdf.Text" xml:space="preserve">
+    <value>Single page files</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>PDF 設定</value>

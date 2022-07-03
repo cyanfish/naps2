@@ -22,7 +22,7 @@
     <value>設定を保存する</value>
   </data>
   <data name="btnRestoreDefaults.Text" xml:space="preserve">
-    <value>Restore &amp;Defaults</value>
+    <value>&amp;標準設定に戻す</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
     <value>Default File Path:</value>
@@ -46,7 +46,7 @@
     <value>JPEG画像の品質</value>
   </data>
   <data name="groupTiff.Text" xml:space="preserve">
-    <value>Tiff Options</value>
+    <value>TIFF形式の設定</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>画像設定</value>

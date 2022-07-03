@@ -13,66 +13,66 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="lblStatus.Text" xml:space="preserve">
-    <value>Press Start when ready.</value>
+    <value>Paina Start, kun olet vlamis.</value>
   </data>
   <data name="btnCancel.Text" xml:space="preserve">
     <value>Peruuta</value>
   </data>
   <data name="btnStart.Text" xml:space="preserve">
-    <value>Start</value>
+    <value>Aloita</value>
   </data>
   <data name="lblTimeBetweenScans.Text" xml:space="preserve">
-    <value>Time between scans (seconds):</value>
+    <value>Aika skannausten välillä (sekuntia):</value>
   </data>
   <data name="lblNumberOfScans.Text" xml:space="preserve">
-    <value>Number of scans:</value>
+    <value>Skannauksia:</value>
   </data>
   <data name="rdMultipleScansPrompt.Text" xml:space="preserve">
-    <value>Multiple scans (prompt between scans)</value>
+    <value>Monta skannausta (kysy skannausten välillä)</value>
   </data>
   <data name="rdMultipleScansDelay.Text" xml:space="preserve">
-    <value>Multiple scans (fixed delay between scans)</value>
+    <value>Monta skannausta (vakioviive skannausten välillä)</value>
   </data>
   <data name="rdSingleScan.Text" xml:space="preserve">
-    <value>Single scan</value>
+    <value>Yksittäisskannaus</value>
   </data>
   <data name="lblProfile.Text" xml:space="preserve">
     <value>Profiilit:</value>
   </data>
   <data name="groupboxScanConfig.Text" xml:space="preserve">
-    <value>Scan Configuration</value>
+    <value>Skannausasetukset</value>
   </data>
   <data name="linkPatchCodeInfo.Text" xml:space="preserve">
-    <value>More info</value>
+    <value>Lisätietoja</value>
   </data>
   <data name="rdSeparateByPatchT.Text" xml:space="preserve">
-    <value>Separate files by Patch-T</value>
+    <value>Erota sivut Patch-T - koodilla</value>
   </data>
   <data name="rdFilePerPage.Text" xml:space="preserve">
-    <value>One file per page</value>
+    <value>Tiedosto joka sivusta</value>
   </data>
   <data name="rdFilePerScan.Text" xml:space="preserve">
-    <value>One file per scan</value>
+    <value>Skannauksesta yksi tiedosto</value>
   </data>
   <data name="linkPlaceholders.Text" xml:space="preserve">
-    <value>Placeholders</value>
+    <value>Varaukset</value>
   </data>
   <data name="lblFilePath.Text" xml:space="preserve">
-    <value>File path:</value>
+    <value>Tiedostopolku:</value>
   </data>
   <data name="rdSaveToMultipleFiles.Text" xml:space="preserve">
-    <value>Save to multiple files</value>
+    <value>Tallenna useaan tiedostoon</value>
   </data>
   <data name="rdSaveToSingleFile.Text" xml:space="preserve">
-    <value>Save to a single file</value>
+    <value>Tallenna yhteen tiedostoon</value>
   </data>
   <data name="rdLoadIntoNaps2.Text" xml:space="preserve">
-    <value>Load images into NAPS2</value>
+    <value>Lataa kuvia NAPS2:een</value>
   </data>
   <data name="groupboxOutput.Text" xml:space="preserve">
-    <value>Output</value>
+    <value>Tulos</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>Batch Scan</value>
+    <value>Sarjaskannaus</value>
   </data>
 </root>

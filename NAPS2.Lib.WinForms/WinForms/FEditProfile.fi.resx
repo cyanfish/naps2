@@ -28,10 +28,10 @@
     <value>Käytä esimääritettyjä asetuksia</value>
   </data>
   <data name="rdbNative.Text" xml:space="preserve">
-    <value>Use native UI</value>
+    <value>Käytä laiitteen käyttöliittymää</value>
   </data>
   <data name="label3.Text" xml:space="preserve">
-    <value>Bitin syvyys:</value>
+    <value>Bittisyvyys:</value>
   </data>
   <data name="label4.Text" xml:space="preserve">
     <value>Sivun koko:</value>
@@ -52,10 +52,10 @@
     <value>Näyttönimi:</value>
   </data>
   <data name="label9.Text" xml:space="preserve">
-    <value>Vaakasuora:</value>
+    <value>Vaaka-asettelu:</value>
   </data>
   <data name="label10.Text" xml:space="preserve">
-    <value>Skaalaa:</value>
+    <value>Kuvasuhde:</value>
   </data>
   <data name="rdTWAIN.Text" xml:space="preserve">
     <value>TWAIN-ajuri</value>
@@ -64,18 +64,18 @@
     <value>WIA-ajuri</value>
   </data>
   <data name="rdSANE.Text" xml:space="preserve">
-    <value>SANE Driver</value>
+    <value>SANE - ajuri</value>
   </data>
   <data name="cbAutoSave.Text" xml:space="preserve">
-    <value>Enable Auto Save</value>
+    <value>Salli automaattinen tallennus</value>
   </data>
   <data name="linkAutoSaveSettings.Text" xml:space="preserve">
-    <value>Auto Save Settings</value>
+    <value>Automaattisen tallennuksen asetukset</value>
   </data>
   <data name="btnAdvanced.Text" xml:space="preserve">
-    <value>&amp;Advanced</value>
+    <value>&amp;Edistyneet</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>Profiilin asetukset</value>
+    <value>Profiiliasetukset</value>
   </data>
 </root>

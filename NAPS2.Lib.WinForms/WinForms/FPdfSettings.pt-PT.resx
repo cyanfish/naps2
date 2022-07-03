@@ -18,9 +18,6 @@
   <data name="btnCancel.Text" xml:space="preserve">
     <value>&amp;Cancelar</value>
   </data>
-  <data name="groupMetadata.Text" xml:space="preserve">
-    <value>Metadados</value>
-  </data>
   <data name="label6.Text" xml:space="preserve">
     <value>Palavras chave:</value>
   </data>
@@ -33,8 +30,8 @@
   <data name="label4.Text" xml:space="preserve">
     <value>Title:</value>
   </data>
-  <data name="groupProtection.Text" xml:space="preserve">
-    <value>Encriptação</value>
+  <data name="groupMetadata.Text" xml:space="preserve">
+    <value>Metadados</value>
   </data>
   <data name="clbPerms.Items" xml:space="preserve">
     <value>Permitir Impressão</value>
@@ -75,6 +72,9 @@
   <data name="cbEncryptPdf.Text" xml:space="preserve">
     <value>Encriptar PDF</value>
   </data>
+  <data name="groupProtection.Text" xml:space="preserve">
+    <value>Encriptação</value>
+  </data>
   <data name="cbRememberSettings.Text" xml:space="preserve">
     <value>Lembrar estas configurações</value>
   </data>
@@ -92,6 +92,9 @@
   </data>
   <data name="groupCompat.Text" xml:space="preserve">
     <value>Compatibility</value>
+  </data>
+  <data name="cbSinglePagePdf.Text" xml:space="preserve">
+    <value>Single page files</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Definições PDF</value>
