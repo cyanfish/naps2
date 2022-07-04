@@ -1,6 +1,6 @@
 ﻿using System.Text.RegularExpressions;
 
-namespace NAPS2.Localization;
+namespace NAPS2.Tools.Localization;
 
 public static class Rules
 {

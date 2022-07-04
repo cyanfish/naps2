@@ -1,4 +1,4 @@
-﻿namespace NAPS2.Localization;
+﻿namespace NAPS2.Tools.Localization;
 
 public class LanguageContext
 {

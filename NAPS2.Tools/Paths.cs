@@ -1,8 +1,8 @@
 ﻿using System.Reflection;
 
-namespace NAPS2.Localization;
+namespace NAPS2.Tools;
 
-internal class Paths
+internal static class Paths
 {
     private static string? _root;
 
@@ -13,14 +13,12 @@ internal class Paths
             if (_root == null)
             {
                 _root = Assembly.GetExecutingAssembly().Location;
-                while (Path.GetFileName(_root) != "NAPS2")
+                while (!File.Exists(Path.Combine(_root, "NAPS2.sln")))
                 {
                     _root = Path.GetDirectoryName(_root);
                     if (_root == null)
                     {
-                        Console.WriteLine("Couldn't find NAPS2 folder");
-                        Environment.Exit(0);
-                        throw new Exception();
+                        throw new Exception("Couldn't find NAPS2 folder");
                     }
                 }
             }

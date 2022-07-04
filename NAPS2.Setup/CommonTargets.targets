@@ -5,11 +5,6 @@
     </PropertyGroup>
 
     <Import Project="..\NAPS2.Setup\VersionTargets.targets" />
-    
-   <Target Name="FullClean" AfterTargets="Clean">
-		<RemoveDir Directories="$(ProjectDir)bin" Condition="Exists('$(ProjectDir)bin')" ContinueOnError="true" />
-		<RemoveDir Directories="$(ProjectDir)obj" Condition="Exists('$(ProjectDir)obj')" ContinueOnError="true" />
-   </Target>
 
     <ItemGroup>
         <Using Include="System" />
