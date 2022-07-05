@@ -6,7 +6,7 @@ internal static class Paths
 {
     private static string? _root;
 
-    public static string Root
+    public static string SolutionRoot
     {
         get
         {

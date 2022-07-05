@@ -2,9 +2,9 @@ namespace NAPS2.Tools.Project;
 
 public static class CleanCommand
 {
-    public static int Run()
+    public static int Run(CleanOptions opts)
     {
-        foreach (var projectDir in new DirectoryInfo(Paths.Root).EnumerateDirectories("NAPS2.*")
+        foreach (var projectDir in new DirectoryInfo(Paths.SolutionRoot).EnumerateDirectories("NAPS2.*")
                      .Where(x => x.Name.ToLower() != "naps2.tools"))
         {
             foreach (var cleanDir in projectDir.EnumerateDirectories()
