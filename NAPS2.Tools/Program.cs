@@ -7,9 +7,10 @@ namespace NAPS2.Tools;
 public static class Program
 {
     public static void Main(string[] args) =>
-        Parser.Default.ParseArguments<CleanOptions, BuildOptions, TemplatesOptions, LanguageOptions>(args).MapResult(
+        Parser.Default.ParseArguments<CleanOptions, BuildOptions, PackageOptions, TemplatesOptions, LanguageOptions>(args).MapResult(
             (CleanOptions opts) => CleanCommand.Run(opts),
             (BuildOptions opts) => BuildCommand.Run(opts),
+            (PackageOptions opts) => PackageCommand.Run(opts),
             (TemplatesOptions opts) => TemplatesCommand.Run(opts),
             (LanguageOptions opts) => LanguageCommand.Run(opts),
             errors => 1);
