@@ -6,6 +6,7 @@
     <LargeAddressAware>true</LargeAddressAware>
     <RootNamespace>NAPS2</RootNamespace>
     <AssemblyName>NAPS2</AssemblyName>
+    <Version>7.0.1</Version>
 
 <!--    <PublishSingleFile>true</PublishSingleFile>-->
 <!--    <SelfContained>true</SelfContained>-->

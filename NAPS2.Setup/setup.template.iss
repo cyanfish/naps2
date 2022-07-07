@@ -1,4 +1,4 @@
-; !define version
+; !version
 
 [Setup]
 AppName=NAPS2 (Not Another PDF Scanner 2)
@@ -21,69 +21,37 @@ UninstallDisplayIcon={app}\scanner-app.ico
 Filename: "{app}\NAPS2.exe"; Flags: nowait postinstall
 
 [Languages]
-Name: "english";              MessagesFile: "compiler:Default.isl"
-Name: "BrazilianPortuguese";  MessagesFile: "C:\Program Files (x86)\Inno Setup 5\Languages\BrazilianPortuguese.isl"; 
-Name: "Catalan";              MessagesFile: "C:\Program Files (x86)\Inno Setup 5\Languages\Catalan.isl"; 
-Name: "Corsican";             MessagesFile: "C:\Program Files (x86)\Inno Setup 5\Languages\Corsican.isl"; 
-Name: "Danish";               MessagesFile: "C:\Program Files (x86)\Inno Setup 5\Languages\Danish.isl"; 
-Name: "Dutch";                MessagesFile: "C:\Program Files (x86)\Inno Setup 5\Languages\Dutch.isl"; 
-Name: "Finnish";              MessagesFile: "C:\Program Files (x86)\Inno Setup 5\Languages\Finnish.isl";
-Name: "French";               MessagesFile: "C:\Program Files (x86)\Inno Setup 5\Languages\French.isl";
-Name: "German";               MessagesFile: "C:\Program Files (x86)\Inno Setup 5\Languages\German.isl";
-Name: "Greek";                MessagesFile: "C:\Program Files (x86)\Inno Setup 5\Languages\Greek.isl"; 
-Name: "Hebrew";               MessagesFile: "C:\Program Files (x86)\Inno Setup 5\Languages\Hebrew.isl"; 
-Name: "Hungarian";            MessagesFile: "C:\Program Files (x86)\Inno Setup 5\Languages\Hungarian.isl"; 
-Name: "Italian";              MessagesFile: "C:\Program Files (x86)\Inno Setup 5\Languages\Italian.isl";
-Name: "Japanese";             MessagesFile: "C:\Program Files (x86)\Inno Setup 5\Languages\Japanese.isl";
-Name: "Norwegian";            MessagesFile: "C:\Program Files (x86)\Inno Setup 5\Languages\Norwegian.isl"; 
-Name: "Polish";               MessagesFile: "C:\Program Files (x86)\Inno Setup 5\Languages\Polish.isl";
-Name: "Portuguese";           MessagesFile: "C:\Program Files (x86)\Inno Setup 5\Languages\Portuguese.isl"; 
-Name: "Russian";              MessagesFile: "C:\Program Files (x86)\Inno Setup 5\Languages\Russian.isl"; 
-Name: "ScottishGaelic";       MessagesFile: "C:\Program Files (x86)\Inno Setup 5\Languages\ScottishGaelic.isl"; 
-Name: "SerbianCyrillic";      MessagesFile: "C:\Program Files (x86)\Inno Setup 5\Languages\SerbianCyrillic.isl"; 
-Name: "SerbianLatin";         MessagesFile: "C:\Program Files (x86)\Inno Setup 5\Languages\SerbianLatin.isl"; 
-Name: "Slovenian";            MessagesFile: "C:\Program Files (x86)\Inno Setup 5\Languages\Slovenian.isl"; 
-Name: "Spanish";              MessagesFile: "C:\Program Files (x86)\Inno Setup 5\Languages\Spanish.isl";
-Name: "Turkish";              MessagesFile: "C:\Program Files (x86)\Inno Setup 5\Languages\Turkish.isl"; 
-Name: "Ukrainian";            MessagesFile: "C:\Program Files (x86)\Inno Setup 5\Languages\Ukrainian.isl"; 
+Name: "english";              MessagesFile: "compiler:Default.isl"                                                 
+Name: "Armenian";             MessagesFile: "C:\Program Files (x86)\Inno Setup 6\Languages\Armenian.isl"; 
+Name: "BrazilianPortuguese";  MessagesFile: "C:\Program Files (x86)\Inno Setup 6\Languages\BrazilianPortuguese.isl"; 
+Name: "Bulgarian";            MessagesFile: "C:\Program Files (x86)\Inno Setup 6\Languages\Bulgarian.isl"; 
+Name: "Catalan";              MessagesFile: "C:\Program Files (x86)\Inno Setup 6\Languages\Catalan.isl"; 
+Name: "Corsican";             MessagesFile: "C:\Program Files (x86)\Inno Setup 6\Languages\Corsican.isl"; 
+Name: "Czech";                MessagesFile: "C:\Program Files (x86)\Inno Setup 6\Languages\Czech.isl"; 
+Name: "Danish";               MessagesFile: "C:\Program Files (x86)\Inno Setup 6\Languages\Danish.isl"; 
+Name: "Dutch";                MessagesFile: "C:\Program Files (x86)\Inno Setup 6\Languages\Dutch.isl"; 
+Name: "Finnish";              MessagesFile: "C:\Program Files (x86)\Inno Setup 6\Languages\Finnish.isl";
+Name: "French";               MessagesFile: "C:\Program Files (x86)\Inno Setup 6\Languages\French.isl";
+Name: "German";               MessagesFile: "C:\Program Files (x86)\Inno Setup 6\Languages\German.isl";
+Name: "Hebrew";               MessagesFile: "C:\Program Files (x86)\Inno Setup 6\Languages\Hebrew.isl"; 
+Name: "Icelandic";            MessagesFile: "C:\Program Files (x86)\Inno Setup 6\Languages\Icelandic.isl"; 
+Name: "Italian";              MessagesFile: "C:\Program Files (x86)\Inno Setup 6\Languages\Italian.isl";
+Name: "Japanese";             MessagesFile: "C:\Program Files (x86)\Inno Setup 6\Languages\Japanese.isl";
+Name: "Norwegian";            MessagesFile: "C:\Program Files (x86)\Inno Setup 6\Languages\Norwegian.isl"; 
+Name: "Polish";               MessagesFile: "C:\Program Files (x86)\Inno Setup 6\Languages\Polish.isl";
+Name: "Portuguese";           MessagesFile: "C:\Program Files (x86)\Inno Setup 6\Languages\Portuguese.isl"; 
+Name: "Russian";              MessagesFile: "C:\Program Files (x86)\Inno Setup 6\Languages\Russian.isl"; 
+Name: "Slovak";               MessagesFile: "C:\Program Files (x86)\Inno Setup 6\Languages\Slovak.isl"; 
+Name: "Slovenian";            MessagesFile: "C:\Program Files (x86)\Inno Setup 6\Languages\Slovenian.isl"; 
+Name: "Spanish";              MessagesFile: "C:\Program Files (x86)\Inno Setup 6\Languages\Spanish.isl";
+Name: "Turkish";              MessagesFile: "C:\Program Files (x86)\Inno Setup 6\Languages\Turkish.isl"; 
+Name: "Ukrainian";            MessagesFile: "C:\Program Files (x86)\Inno Setup 6\Languages\Ukrainian.isl"; 
 
 [Tasks]
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
 
 [Files]                              
-; !include files
-Source: "..\bin\InstallerEXE\NAPS2.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\bin\InstallerEXE\NAPS2.exe.config"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\bin\InstallerEXE\NAPS2.Core.dll"; DestDir: "{app}\lib"; Flags: ignoreversion
-Source: "..\bin\InstallerEXE\NAPS2.DI.dll"; DestDir: "{app}\lib"; Flags: ignoreversion
-Source: "..\bin\InstallerEXE\CommandLine.dll"; DestDir: "{app}\lib"; Flags: ignoreversion
-Source: "..\bin\InstallerEXE\Ghostscript.NET.dll"; DestDir: "{app}\lib"; Flags: ignoreversion
-Source: "..\bin\InstallerEXE\ICSharpCode.SharpZipLib.dll"; DestDir: "{app}\lib"; Flags: ignoreversion
-Source: "..\bin\InstallerEXE\Microsoft.Threading.Tasks.dll"; DestDir: "{app}\lib"; Flags: ignoreversion
-Source: "..\bin\InstallerEXE\Microsoft.Threading.Tasks.Extensions.Desktop.dll"; DestDir: "{app}\lib"; Flags: ignoreversion
-Source: "..\bin\InstallerEXE\Microsoft.Threading.Tasks.Extensions.dll"; DestDir: "{app}\lib"; Flags: ignoreversion
-Source: "..\bin\InstallerEXE\MimeKit.dll"; DestDir: "{app}\lib"; Flags: ignoreversion
-Source: "..\bin\InstallerEXE\Newtonsoft.Json.dll"; DestDir: "{app}\lib"; Flags: ignoreversion
-Source: "..\bin\InstallerEXE\Ninject.dll"; DestDir: "{app}\lib"; Flags: ignoreversion
-Source: "..\bin\InstallerEXE\NLog.dll"; DestDir: "{app}\lib"; Flags: ignoreversion
-Source: "..\bin\InstallerEXE\NTwain.dll"; DestDir: "{app}\lib"; Flags: ignoreversion
-Source: "..\bin\InstallerEXE\PdfSharp.dll"; DestDir: "{app}\lib"; Flags: ignoreversion
-Source: "..\bin\InstallerEXE\System.IO.dll"; DestDir: "{app}\lib"; Flags: ignoreversion
-Source: "..\bin\InstallerEXE\System.Runtime.dll"; DestDir: "{app}\lib"; Flags: ignoreversion
-Source: "..\bin\InstallerEXE\System.Threading.Tasks.dll"; DestDir: "{app}\lib"; Flags: ignoreversion
-Source: "..\bin\InstallerEXE\System.ValueTuple.dll"; DestDir: "{app}\lib"; Flags: ignoreversion
-Source: "..\bin\InstallerEXE\zxing.dll"; DestDir: "{app}\lib"; Flags: ignoreversion
-Source: "..\appsettings.xml"; DestDir: "{app}"; Flags: ignoreversion           
-Source: "..\..\LICENSE"; DestDir: "{app}"; DestName: "license.txt"; Flags: ignoreversion
-Source: "..\..\CONTRIBUTORS"; DestDir: "{app}"; DestName: "contributors.txt"; Flags: ignoreversion
-Source: "..\..\NAPS2.Console\bin\InstallerEXE\NAPS2.Console.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\..\NAPS2.Console\bin\InstallerEXE\NAPS2.Console.exe.config"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\..\NAPS2.Worker\bin\InstallerEXE\NAPS2.Worker.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\..\NAPS2.Worker\bin\InstallerEXE\NAPS2.Worker.exe.config"; DestDir: "{app}"; Flags: ignoreversion
-Source: "lib\64\twaindsm.dll"; DestDir: "{app}\lib\64"; Flags: ignoreversion
-Source: "lib\twaindsm.dll"; DestDir: "{sys}"; Flags: sharedfile
-Source: "..\bin\InstallerEXE\_win32\NAPS2.Wia.Native.dll"; DestDir: "{app}\lib\_win32"; Flags: ignoreversion
-Source: "..\bin\InstallerEXE\_win64\NAPS2.Wia.Native.dll"; DestDir: "{app}\lib\_win64"; Flags: ignoreversion
+; !files
 
 ; Delete files from old locations in case of upgrade
 ; TODO: Delete from Program Files (x86)?
