@@ -98,5 +98,14 @@
   <ItemGroup>
     <Folder Include="ImportExport\Email\Oauth" />
   </ItemGroup>
+
+  <ItemGroup Condition="'$(Configuration)' == 'Debug'">
+
+    <EmbeddedResource Remove="Lang\Resources\SdkResources.*.resx" Condition="'$(Configuration)' == 'Debug'" />
+    <EmbeddedResource Update="Lang\Resources\SdkResources.*.resx">
+      <DependentUpon>SdkResources.resx</DependentUpon>
+    </EmbeddedResource>
+
+  </ItemGroup>
   
 </Project>

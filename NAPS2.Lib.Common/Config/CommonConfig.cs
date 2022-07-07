@@ -117,7 +117,7 @@ public class CommonConfig
     public string? OcrLanguageCode { get; set; }
 
     [Common]
-    public OcrMode OcrMode { get; set; }
+    public LocalizedOcrMode OcrMode { get; set; }
 
     [Common]
     public bool OcrAfterScanning { get; set; }

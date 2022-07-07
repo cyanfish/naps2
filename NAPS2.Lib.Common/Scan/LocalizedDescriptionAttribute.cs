@@ -3,6 +3,7 @@ using System.Resources;
 
 namespace NAPS2.Scan;
 
+// TODO: Move this to a different namespace and clean up the ScanProfile enums
 /// <summary>
 /// An attribute used for enum values that assigns a string from a resources file.
 /// The string value is accessed using the ScanEnumExtensions.Description extension method.

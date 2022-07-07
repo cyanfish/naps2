@@ -12,8 +12,21 @@ public static class ConfigExtensions
         }
         return new OcrParams(
             config.Get(c => c.OcrLanguageCode),
-            config.Get(c => c.OcrMode),
+            MapOcrMode(config.Get(c => c.OcrMode)),
             config.Get(c => c.OcrTimeoutInSeconds));
+    }
+
+    private static OcrMode MapOcrMode(LocalizedOcrMode ocrMode)
+    {
+        switch (ocrMode)
+        {
+            case LocalizedOcrMode.Fast:
+                return OcrMode.Fast;
+            case LocalizedOcrMode.Best:
+                return OcrMode.Best;
+            default:
+                return OcrMode.Default;
+        }
     }
 
     public static OcrParams OcrAfterScanningParams(this Naps2Config config)

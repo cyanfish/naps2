@@ -15,7 +15,15 @@ public partial class FPdfSettings : FormBase
     {
         _dialogHelper = dialogHelper;
         InitializeComponent();
-        AddEnumItems<PdfCompat>(cmbCompat);
+        AddEnumItems<PdfCompat>(cmbCompat, compat => compat switch
+        {
+            PdfCompat.Default => UiStrings.Default,
+            PdfCompat.PdfA1B => "PDF/A-1b",
+            PdfCompat.PdfA2B => "PDF/A-2b",
+            PdfCompat.PdfA3B => "PDF/A-3b",
+            PdfCompat.PdfA3U => "PDF/A-3u",
+            _ => throw new ArgumentException()
+        });
     }
 
     protected override void OnLoad(object sender, EventArgs e)

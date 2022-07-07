@@ -3,7 +3,7 @@ namespace NAPS2.Scan.Exceptions;
 public class NoDuplexSupportException : ScanDriverException
 {
     public NoDuplexSupportException()
-        : base(MiscResources.NoDuplexSupport)
+        : base(SdkResources.NoDuplexSupport)
     {
     }
 
@@ -13,7 +13,7 @@ public class NoDuplexSupportException : ScanDriverException
     }
 
     public NoDuplexSupportException(Exception innerException)
-        : base(MiscResources.NoDuplexSupport, innerException)
+        : base(SdkResources.NoDuplexSupport, innerException)
     {
     }
 

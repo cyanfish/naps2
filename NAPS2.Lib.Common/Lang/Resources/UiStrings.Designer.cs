@@ -194,5 +194,14 @@ namespace NAPS2.Lang.Resources {
                 return ResourceManager.GetString("SetDefault", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Default.
+        /// </summary>
+        public static string Default {
+            get {
+                return ResourceManager.GetString("Default", resourceCulture);
+            }
+        }
     }
 }

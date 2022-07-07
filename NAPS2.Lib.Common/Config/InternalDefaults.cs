@@ -49,7 +49,7 @@ public static class InternalDefaults
             OcrTimeoutInSeconds = 10 * 60, // 10 minutes
             EnableOcr = false,
             OcrLanguageCode = "",
-            OcrMode = OcrMode.Default,
+            OcrMode = LocalizedOcrMode.Default,
             OcrAfterScanning = true,
             LastImageExt = "",
             ThumbnailSize = 128,

@@ -5,7 +5,6 @@
     <ItemGroup>
         <Using Include="NAPS2.Lang.Resources" />
         <Using Include="NAPS2.Logging" />
-        <Using Include="NAPS2.Operation" />
         <Using Include="NAPS2.Platform" />
         <Using Include="NAPS2.Testing" />
         <Using Include="NAPS2.Threading" />

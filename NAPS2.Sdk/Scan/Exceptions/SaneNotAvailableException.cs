@@ -4,11 +4,11 @@ public class SaneNotAvailableException : ScanDriverException
 {
     private const string PACKAGES = "\nsane\nsane-utils";
 
-    public SaneNotAvailableException() : base(MiscResources.SaneNotAvailable + PACKAGES)
+    public SaneNotAvailableException() : base(SdkResources.SaneNotAvailable + PACKAGES)
     {
     }
 
-    public SaneNotAvailableException(Exception innerException) : base(MiscResources.SaneNotAvailable + PACKAGES, innerException)
+    public SaneNotAvailableException(Exception innerException) : base(SdkResources.SaneNotAvailable + PACKAGES, innerException)
     {
     }
 }

@@ -65,7 +65,7 @@ public class AppConfigV0
 
     public string? OcrDefaultLanguage { get; set; }
 
-    public OcrMode OcrDefaultMode { get; set; }
+    public LocalizedOcrMode OcrDefaultMode { get; set; }
 
     public bool OcrDefaultAfterScanning { get; set; }
 

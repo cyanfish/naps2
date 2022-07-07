@@ -31,16 +31,6 @@
 
   <ItemGroup Condition="'$(Configuration)' == 'Debug'">
 
-    <EmbeddedResource Remove="Lang\Resources\SettingsResources.*.resx" Condition="'$(Configuration)' == 'Debug'" />
-    <EmbeddedResource Update="Lang\Resources\SettingsResources.*.resx">
-      <DependentUpon>SettingsResources.resx</DependentUpon>
-    </EmbeddedResource>
-
-    <EmbeddedResource Remove="Lang\Resources\MiscResources.*.resx" Condition="'$(Configuration)' == 'Debug'" />
-    <EmbeddedResource Update="Lang\Resources\MiscResources.*.resx">
-      <DependentUpon>MiscResources.resx</DependentUpon>
-    </EmbeddedResource>
-
     <EmbeddedResource Remove="WinForms\EmailProviderWidget.*.resx" Condition="'$(Configuration)' == 'Debug'" />
     <EmbeddedResource Update="WinForms\EmailProviderWidget.*.resx">
       <DependentUpon>EmailProviderWidget.cs</DependentUpon>

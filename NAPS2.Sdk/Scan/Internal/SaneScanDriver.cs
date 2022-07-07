@@ -140,11 +140,11 @@ internal class SaneScanDriver : IScanDriver
     {
         if (stderr.EndsWith("Device busy", StringComparison.InvariantCultureIgnoreCase))
         {
-            throw new DeviceException(MiscResources.DeviceBusy);
+            throw new DeviceException(SdkResources.DeviceBusy);
         }
         if (stderr.EndsWith("Invalid argument", StringComparison.InvariantCultureIgnoreCase))
         {
-            throw new DeviceException(MiscResources.DeviceNotFound);
+            throw new DeviceException(SdkResources.DeviceNotFound);
         }
         throw new ScanDriverUnknownException(new Exception(stderr));
     }

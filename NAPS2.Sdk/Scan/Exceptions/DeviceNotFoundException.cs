@@ -3,7 +3,7 @@ namespace NAPS2.Scan.Exceptions;
 public class DeviceNotFoundException : ScanDriverException
 {
     public DeviceNotFoundException()
-        : base(MiscResources.DeviceNotFound)
+        : base(SdkResources.DeviceNotFound)
     {
     }
 
@@ -13,7 +13,7 @@ public class DeviceNotFoundException : ScanDriverException
     }
 
     public DeviceNotFoundException(Exception innerException)
-        : base(MiscResources.DeviceNotFound, innerException)
+        : base(SdkResources.DeviceNotFound, innerException)
     {
     }
 

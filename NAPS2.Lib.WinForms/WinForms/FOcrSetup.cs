@@ -7,7 +7,7 @@ namespace NAPS2.WinForms;
 public partial class FOcrSetup : FormBase
 {
     private readonly TesseractLanguageManager _tesseractLanguageManager;
-    private readonly List<OcrMode> _availableModes = new() { OcrMode.Fast, OcrMode.Best };
+    private readonly List<LocalizedOcrMode> _availableModes = new() { LocalizedOcrMode.Fast, LocalizedOcrMode.Best };
 
     public FOcrSetup(TesseractLanguageManager tesseractLanguageManager)
     {
@@ -110,7 +110,7 @@ public partial class FOcrSetup : FormBase
             var transact = Config.User.BeginTransaction();
             transact.Set(c => c.EnableOcr, checkBoxEnableOcr.Checked);
             transact.Set(c => c.OcrLanguageCode, (string)comboLanguages.SelectedValue);
-            transact.Set(c => c.OcrMode, (OcrMode) comboOcrMode.SelectedItem);
+            transact.Set(c => c.OcrMode, (LocalizedOcrMode) comboOcrMode.SelectedItem);
             transact.Set(c => c.OcrAfterScanning, checkBoxRunInBG.Checked);
             transact.Commit();
         }

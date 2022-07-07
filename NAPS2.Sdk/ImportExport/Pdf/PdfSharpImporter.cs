@@ -60,7 +60,7 @@ public class PdfSharpImporter : IPdfImporter
                     && !document.SecuritySettings.HasOwnerPermissions
                     && !document.SecuritySettings.PermitExtractContent)
                 {
-                    _errorOutput.DisplayError(string.Format(MiscResources.PdfNoPermissionToExtractContent,
+                    _errorOutput.DisplayError(string.Format(SdkResources.PdfNoPermissionToExtractContent,
                         Path.GetFileName(filePath)));
                     sink.SetCompleted();
                 }
@@ -68,7 +68,7 @@ public class PdfSharpImporter : IPdfImporter
                 progressCallback(0, document.PageCount);
                 var pages = importParams.Slice.Indices(document.PageCount)
                     .Select(index => document.Pages[index]);
-                if (document.Info.Creator != MiscResources.NAPS2 && document.Info.Author != MiscResources.NAPS2)
+                if (document.Info.Creator != SdkResources.NAPS2 && document.Info.Author != SdkResources.NAPS2)
                 {
                     await Pipeline.For(pages, cancelToken)
                         .StepParallel(async page => await ExportRawPdfPage(page, importParams))
@@ -102,14 +102,15 @@ public class PdfSharpImporter : IPdfImporter
             }
             catch (ImageRenderException e)
             {
-                _errorOutput.DisplayError(string.Format(MiscResources.ImportErrorNAPS2Pdf, Path.GetFileName(filePath)));
+                // TODO: Propagate these errors outwards and handle externally, i.e. in ImportOperation?
+                _errorOutput.DisplayError(string.Format(SdkResources.ImportErrorNAPS2Pdf, Path.GetFileName(filePath)));
                 Log.ErrorException("Error importing PDF file.", e);
             }
             catch (Exception e)
             {
                 if (!aborted)
                 {
-                    _errorOutput.DisplayError(string.Format(MiscResources.ImportErrorCouldNot,
+                    _errorOutput.DisplayError(string.Format(SdkResources.ImportErrorCouldNot,
                         Path.GetFileName(filePath)));
                     Log.ErrorException("Error importing PDF file.", e);
                 }

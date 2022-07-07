@@ -3,7 +3,7 @@ namespace NAPS2.Scan.Exceptions;
 public class NoPagesException : ScanDriverException
 {
     public NoPagesException()
-        : base(MiscResources.NoPagesInFeeder)
+        : base(SdkResources.NoPagesInFeeder)
     {
     }
 
@@ -13,7 +13,7 @@ public class NoPagesException : ScanDriverException
     }
 
     public NoPagesException(Exception innerException)
-        : base(MiscResources.NoPagesInFeeder, innerException)
+        : base(SdkResources.NoPagesInFeeder, innerException)
     {
     }
 

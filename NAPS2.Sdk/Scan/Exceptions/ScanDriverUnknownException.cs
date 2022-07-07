@@ -7,7 +7,7 @@ public class ScanDriverUnknownException : ScanDriverException
     }
 
     public ScanDriverUnknownException(Exception innerException)
-        : base(MiscResources.UnknownDriverError, innerException)
+        : base(SdkResources.UnknownDriverError, innerException)
     {
     }
 

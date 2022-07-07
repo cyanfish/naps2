@@ -3,7 +3,7 @@ namespace NAPS2.Scan.Exceptions;
 public class NoFeederSupportException : ScanDriverException
 {
     public NoFeederSupportException()
-        : base(MiscResources.NoFeederSupport)
+        : base(SdkResources.NoFeederSupport)
     {
     }
 
@@ -13,7 +13,7 @@ public class NoFeederSupportException : ScanDriverException
     }
 
     public NoFeederSupportException(Exception innerException)
-        : base(MiscResources.NoFeederSupport, innerException)
+        : base(SdkResources.NoFeederSupport, innerException)
     {
     }
 

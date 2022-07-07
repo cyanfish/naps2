@@ -22,7 +22,7 @@ namespace NAPS2.Lang.Resources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class SettingsResources {
+    public class SettingsResources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -63,7 +63,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Black &amp; White.
         /// </summary>
-        internal static string BitDepth_1BlackAndWhite {
+        public static string BitDepth_1BlackAndWhite {
             get {
                 return ResourceManager.GetString("BitDepth_1BlackAndWhite", resourceCulture);
             }
@@ -72,7 +72,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to 24-bit Color.
         /// </summary>
-        internal static string BitDepth_24Color {
+        public static string BitDepth_24Color {
             get {
                 return ResourceManager.GetString("BitDepth_24Color", resourceCulture);
             }
@@ -81,7 +81,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Grayscale.
         /// </summary>
-        internal static string BitDepth_8Grayscale {
+        public static string BitDepth_8Grayscale {
             get {
                 return ResourceManager.GetString("BitDepth_8Grayscale", resourceCulture);
             }
@@ -90,7 +90,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to 100 dpi.
         /// </summary>
-        internal static string Dpi_100 {
+        public static string Dpi_100 {
             get {
                 return ResourceManager.GetString("Dpi_100", resourceCulture);
             }
@@ -99,7 +99,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to 1200 dpi.
         /// </summary>
-        internal static string Dpi_1200 {
+        public static string Dpi_1200 {
             get {
                 return ResourceManager.GetString("Dpi_1200", resourceCulture);
             }
@@ -108,7 +108,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to 150 dpi.
         /// </summary>
-        internal static string Dpi_150 {
+        public static string Dpi_150 {
             get {
                 return ResourceManager.GetString("Dpi_150", resourceCulture);
             }
@@ -117,7 +117,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to 200 dpi.
         /// </summary>
-        internal static string Dpi_200 {
+        public static string Dpi_200 {
             get {
                 return ResourceManager.GetString("Dpi_200", resourceCulture);
             }
@@ -126,7 +126,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to 300 dpi.
         /// </summary>
-        internal static string Dpi_300 {
+        public static string Dpi_300 {
             get {
                 return ResourceManager.GetString("Dpi_300", resourceCulture);
             }
@@ -135,7 +135,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to 400 dpi.
         /// </summary>
-        internal static string Dpi_400 {
+        public static string Dpi_400 {
             get {
                 return ResourceManager.GetString("Dpi_400", resourceCulture);
             }
@@ -144,7 +144,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to 600 dpi.
         /// </summary>
-        internal static string Dpi_600 {
+        public static string Dpi_600 {
             get {
                 return ResourceManager.GetString("Dpi_600", resourceCulture);
             }
@@ -153,7 +153,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to 800 dpi.
         /// </summary>
-        internal static string Dpi_800 {
+        public static string Dpi_800 {
             get {
                 return ResourceManager.GetString("Dpi_800", resourceCulture);
             }
@@ -162,7 +162,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to No provider selected..
         /// </summary>
-        internal static string EmailProvider_NotSelected {
+        public static string EmailProvider_NotSelected {
             get {
                 return ResourceManager.GetString("EmailProvider_NotSelected", resourceCulture);
             }
@@ -171,7 +171,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Custom SMTP.
         /// </summary>
-        internal static string EmailProviderType_CustomSmtp {
+        public static string EmailProviderType_CustomSmtp {
             get {
                 return ResourceManager.GetString("EmailProviderType_CustomSmtp", resourceCulture);
             }
@@ -180,7 +180,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Gmail.
         /// </summary>
-        internal static string EmailProviderType_Gmail {
+        public static string EmailProviderType_Gmail {
             get {
                 return ResourceManager.GetString("EmailProviderType_Gmail", resourceCulture);
             }
@@ -189,7 +189,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Outlook Web Access.
         /// </summary>
-        internal static string EmailProviderType_OutlookWeb {
+        public static string EmailProviderType_OutlookWeb {
             get {
                 return ResourceManager.GetString("EmailProviderType_OutlookWeb", resourceCulture);
             }
@@ -198,7 +198,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Center.
         /// </summary>
-        internal static string HorizontalAlign_Center {
+        public static string HorizontalAlign_Center {
             get {
                 return ResourceManager.GetString("HorizontalAlign_Center", resourceCulture);
             }
@@ -207,7 +207,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Left.
         /// </summary>
-        internal static string HorizontalAlign_Left {
+        public static string HorizontalAlign_Left {
             get {
                 return ResourceManager.GetString("HorizontalAlign_Left", resourceCulture);
             }
@@ -216,7 +216,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Right.
         /// </summary>
-        internal static string HorizontalAlign_Right {
+        public static string HorizontalAlign_Right {
             get {
                 return ResourceManager.GetString("HorizontalAlign_Right", resourceCulture);
             }
@@ -225,7 +225,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to A3 (297x420 mm).
         /// </summary>
-        internal static string PageSize_A3 {
+        public static string PageSize_A3 {
             get {
                 return ResourceManager.GetString("PageSize_A3", resourceCulture);
             }
@@ -234,7 +234,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to A4 (210x297 mm).
         /// </summary>
-        internal static string PageSize_A4 {
+        public static string PageSize_A4 {
             get {
                 return ResourceManager.GetString("PageSize_A4", resourceCulture);
             }
@@ -243,7 +243,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to A5 (148x210 mm).
         /// </summary>
-        internal static string PageSize_A5 {
+        public static string PageSize_A5 {
             get {
                 return ResourceManager.GetString("PageSize_A5", resourceCulture);
             }
@@ -252,7 +252,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to B4 (250x353 mm).
         /// </summary>
-        internal static string PageSize_B4 {
+        public static string PageSize_B4 {
             get {
                 return ResourceManager.GetString("PageSize_B4", resourceCulture);
             }
@@ -261,7 +261,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to B5 (176x250 mm).
         /// </summary>
-        internal static string PageSize_B5 {
+        public static string PageSize_B5 {
             get {
                 return ResourceManager.GetString("PageSize_B5", resourceCulture);
             }
@@ -270,7 +270,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Custom....
         /// </summary>
-        internal static string PageSize_Custom {
+        public static string PageSize_Custom {
             get {
                 return ResourceManager.GetString("PageSize_Custom", resourceCulture);
             }
@@ -279,7 +279,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to US Legal (8.5x14 in).
         /// </summary>
-        internal static string PageSize_Legal {
+        public static string PageSize_Legal {
             get {
                 return ResourceManager.GetString("PageSize_Legal", resourceCulture);
             }
@@ -288,7 +288,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to US Letter (8.5x11 in).
         /// </summary>
-        internal static string PageSize_Letter {
+        public static string PageSize_Letter {
             get {
                 return ResourceManager.GetString("PageSize_Letter", resourceCulture);
             }
@@ -297,7 +297,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to cm.
         /// </summary>
-        internal static string PageSizeUnit_Centimetre {
+        public static string PageSizeUnit_Centimetre {
             get {
                 return ResourceManager.GetString("PageSizeUnit_Centimetre", resourceCulture);
             }
@@ -306,7 +306,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to in.
         /// </summary>
-        internal static string PageSizeUnit_Inch {
+        public static string PageSizeUnit_Inch {
             get {
                 return ResourceManager.GetString("PageSizeUnit_Inch", resourceCulture);
             }
@@ -315,7 +315,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to mm.
         /// </summary>
-        internal static string PageSizeUnit_Millimetre {
+        public static string PageSizeUnit_Millimetre {
             get {
                 return ResourceManager.GetString("PageSizeUnit_Millimetre", resourceCulture);
             }
@@ -324,7 +324,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Default.
         /// </summary>
-        internal static string PdfCompat_Default {
+        public static string PdfCompat_Default {
             get {
                 return ResourceManager.GetString("PdfCompat_Default", resourceCulture);
             }
@@ -333,7 +333,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to PDF/A-1b.
         /// </summary>
-        internal static string PdfCompat_PdfA1B {
+        public static string PdfCompat_PdfA1B {
             get {
                 return ResourceManager.GetString("PdfCompat_PdfA1B", resourceCulture);
             }
@@ -342,7 +342,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to PDF/A-2b.
         /// </summary>
-        internal static string PdfCompat_PdfA2B {
+        public static string PdfCompat_PdfA2B {
             get {
                 return ResourceManager.GetString("PdfCompat_PdfA2B", resourceCulture);
             }
@@ -351,7 +351,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to PDF/A-3b.
         /// </summary>
-        internal static string PdfCompat_PdfA3B {
+        public static string PdfCompat_PdfA3B {
             get {
                 return ResourceManager.GetString("PdfCompat_PdfA3B", resourceCulture);
             }
@@ -360,7 +360,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to PDF/A-3u.
         /// </summary>
-        internal static string PdfCompat_PdfA3U {
+        public static string PdfCompat_PdfA3U {
             get {
                 return ResourceManager.GetString("PdfCompat_PdfA3U", resourceCulture);
             }
@@ -369,7 +369,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to 1:1.
         /// </summary>
-        internal static string Scale_1_1 {
+        public static string Scale_1_1 {
             get {
                 return ResourceManager.GetString("Scale_1_1", resourceCulture);
             }
@@ -378,7 +378,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to 1:2.
         /// </summary>
-        internal static string Scale_1_2 {
+        public static string Scale_1_2 {
             get {
                 return ResourceManager.GetString("Scale_1_2", resourceCulture);
             }
@@ -387,7 +387,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to 1:4.
         /// </summary>
-        internal static string Scale_1_4 {
+        public static string Scale_1_4 {
             get {
                 return ResourceManager.GetString("Scale_1_4", resourceCulture);
             }
@@ -396,7 +396,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to 1:8.
         /// </summary>
-        internal static string Scale_1_8 {
+        public static string Scale_1_8 {
             get {
                 return ResourceManager.GetString("Scale_1_8", resourceCulture);
             }
@@ -405,7 +405,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Duplex.
         /// </summary>
-        internal static string Source_Duplex {
+        public static string Source_Duplex {
             get {
                 return ResourceManager.GetString("Source_Duplex", resourceCulture);
             }
@@ -414,7 +414,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Feeder.
         /// </summary>
-        internal static string Source_Feeder {
+        public static string Source_Feeder {
             get {
                 return ResourceManager.GetString("Source_Feeder", resourceCulture);
             }
@@ -423,7 +423,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Glass.
         /// </summary>
-        internal static string Source_Glass {
+        public static string Source_Glass {
             get {
                 return ResourceManager.GetString("Source_Glass", resourceCulture);
             }
@@ -432,7 +432,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Auto.
         /// </summary>
-        internal static string TiffComp_Auto {
+        public static string TiffComp_Auto {
             get {
                 return ResourceManager.GetString("TiffComp_Auto", resourceCulture);
             }
@@ -441,7 +441,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to CCITT4.
         /// </summary>
-        internal static string TiffComp_Ccitt4 {
+        public static string TiffComp_Ccitt4 {
             get {
                 return ResourceManager.GetString("TiffComp_Ccitt4", resourceCulture);
             }
@@ -450,7 +450,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to LZW.
         /// </summary>
-        internal static string TiffComp_Lzw {
+        public static string TiffComp_Lzw {
             get {
                 return ResourceManager.GetString("TiffComp_Lzw", resourceCulture);
             }
@@ -459,7 +459,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to None.
         /// </summary>
-        internal static string TiffComp_None {
+        public static string TiffComp_None {
             get {
                 return ResourceManager.GetString("TiffComp_None", resourceCulture);
             }
@@ -468,7 +468,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Default.
         /// </summary>
-        internal static string TwainImpl_Default {
+        public static string TwainImpl_Default {
             get {
                 return ResourceManager.GetString("TwainImpl_Default", resourceCulture);
             }
@@ -477,7 +477,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Legacy (native UI only).
         /// </summary>
-        internal static string TwainImpl_Legacy {
+        public static string TwainImpl_Legacy {
             get {
                 return ResourceManager.GetString("TwainImpl_Legacy", resourceCulture);
             }
@@ -486,7 +486,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Alternative Transfer.
         /// </summary>
-        internal static string TwainImpl_MemXfer {
+        public static string TwainImpl_MemXfer {
             get {
                 return ResourceManager.GetString("TwainImpl_MemXfer", resourceCulture);
             }
@@ -495,7 +495,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Old DSM.
         /// </summary>
-        internal static string TwainImpl_OldDsm {
+        public static string TwainImpl_OldDsm {
             get {
                 return ResourceManager.GetString("TwainImpl_OldDsm", resourceCulture);
             }
@@ -504,7 +504,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to x64.
         /// </summary>
-        internal static string TwainImpl_X64 {
+        public static string TwainImpl_X64 {
             get {
                 return ResourceManager.GetString("TwainImpl_X64", resourceCulture);
             }
@@ -513,7 +513,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Default.
         /// </summary>
-        internal static string WiaVersion_Default {
+        public static string WiaVersion_Default {
             get {
                 return ResourceManager.GetString("WiaVersion_Default", resourceCulture);
             }
@@ -522,7 +522,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to 1.0.
         /// </summary>
-        internal static string WiaVersion_Wia10 {
+        public static string WiaVersion_Wia10 {
             get {
                 return ResourceManager.GetString("WiaVersion_Wia10", resourceCulture);
             }
@@ -531,7 +531,7 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to 2.0.
         /// </summary>
-        internal static string WiaVersion_Wia20 {
+        public static string WiaVersion_Wia20 {
             get {
                 return ResourceManager.GetString("WiaVersion_Wia20", resourceCulture);
             }

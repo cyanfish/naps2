@@ -17,23 +17,23 @@ public class WiaScanErrors
         }
         if (e.ErrorCode == WiaErrorCodes.OFFLINE)
         {
-            throw new DeviceException(MiscResources.DeviceOffline);
+            throw new DeviceException(SdkResources.DeviceOffline);
         }
         if (e.ErrorCode == WiaErrorCodes.BUSY)
         {
-            throw new DeviceException(MiscResources.DeviceBusy);
+            throw new DeviceException(SdkResources.DeviceBusy);
         }
         if (e.ErrorCode == WiaErrorCodes.COVER_OPEN)
         {
-            throw new DeviceException(MiscResources.DeviceCoverOpen);
+            throw new DeviceException(SdkResources.DeviceCoverOpen);
         }
         if (e.ErrorCode == WiaErrorCodes.PAPER_JAM)
         {
-            throw new DeviceException(MiscResources.DevicePaperJam);
+            throw new DeviceException(SdkResources.DevicePaperJam);
         }
         if (e.ErrorCode == WiaErrorCodes.WARMING_UP)
         {
-            throw new DeviceException(MiscResources.DeviceWarmingUp);
+            throw new DeviceException(SdkResources.DeviceWarmingUp);
         }
         throw new ScanDriverUnknownException(e);
     }

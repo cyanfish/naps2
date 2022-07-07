@@ -3,7 +3,7 @@ namespace NAPS2.Scan.Exceptions;
 public class DriverNotSupportedException : ScanDriverException
 {
     public DriverNotSupportedException()
-        : base(MiscResources.DriverNotSupported)
+        : base(SdkResources.DriverNotSupported)
     {
     }
 
@@ -13,7 +13,7 @@ public class DriverNotSupportedException : ScanDriverException
     }
 
     public DriverNotSupportedException(Exception innerException)
-        : base(MiscResources.DriverNotSupported, innerException)
+        : base(SdkResources.DriverNotSupported, innerException)
     {
     }
 
