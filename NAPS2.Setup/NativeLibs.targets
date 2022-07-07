@@ -15,10 +15,10 @@
             <Link>lib\linux\libpdfium.so</Link>
             <TargetPath>_linux\libpdfium.so</TargetPath>
         </ContentWithTargetPath>
-        <ContentWithTargetPath Include="..\NAPS2.Setup\lib\osx\libpdfium.dylib">
+        <ContentWithTargetPath Include="..\NAPS2.Setup\lib\mac\libpdfium.dylib">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-            <Link>lib\osx\libpdfium.dylib</Link>
-            <TargetPath>_osx\libpdfium.dylib</TargetPath>
+            <Link>lib\mac\libpdfium.dylib</Link>
+            <TargetPath>_mac\libpdfium.dylib</TargetPath>
         </ContentWithTargetPath>
 
         <ContentWithTargetPath Include="..\NAPS2.Setup\lib\win64\tesseract.exe">
@@ -30,6 +30,17 @@
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
             <Link>lib\win32\tesseract.exe</Link>
             <TargetPath>_win32\tesseract.exe</TargetPath>
+        </ContentWithTargetPath>
+
+        <ContentWithTargetPath Include="..\NAPS2.Setup\lib\win64\twaindsm.dll">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+            <Link>lib\win64\twaindsm.dll</Link>
+            <TargetPath>_win64\twaindsm.dll</TargetPath>
+        </ContentWithTargetPath>
+        <ContentWithTargetPath Include="..\NAPS2.Setup\lib\win32\twaindsm.dll">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+            <Link>lib\win32\twaindsm.dll</Link>
+            <TargetPath>_win32\twaindsm.dll</TargetPath>
         </ContentWithTargetPath>
     </ItemGroup>
 </Project>

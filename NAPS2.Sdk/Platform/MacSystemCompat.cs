@@ -23,9 +23,9 @@ public class MacSystemCompat : ISystemCompat
 
     public string? TesseractExecutablePath => null;
 
-    public string PdfiumLibraryPath => "_osx/libpdfium.dylib";
+    public string PdfiumLibraryPath => "_mac/libpdfium.dylib";
 
-    public IntPtr LoadLibrary(string path) => OsxInterop.dlopen(path, RTLD_LAZY | RTLD_GLOBAL);
+    public IntPtr LoadLibrary(string path) => MacInterop.dlopen(path, RTLD_LAZY | RTLD_GLOBAL);
 
-    public IntPtr LoadSymbol(IntPtr libraryHandle, string symbol) => OsxInterop.dlsym(libraryHandle, symbol);
+    public IntPtr LoadSymbol(IntPtr libraryHandle, string symbol) => MacInterop.dlsym(libraryHandle, symbol);
 }

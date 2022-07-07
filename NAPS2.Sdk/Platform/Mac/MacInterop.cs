@@ -2,7 +2,7 @@ using System.Runtime.InteropServices;
 
 namespace NAPS2.Platform.Mac;
 
-public static class OsxInterop
+public static class MacInterop
 {
     [DllImport("libSystem.dylib")]
     public static extern IntPtr dlopen(string filename, int flags);
