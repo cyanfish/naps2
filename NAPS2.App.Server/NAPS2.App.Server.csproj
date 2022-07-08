@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFrameworks>net5-windows;net462</TargetFrameworks>
     <OutputType>WinExe</OutputType>
+    <AppConfig>app.config</AppConfig>
     <LargeAddressAware>true</LargeAddressAware>
     <RootNamespace>NAPS2.Server</RootNamespace>
     <AssemblyName>NAPS2.Server</AssemblyName>

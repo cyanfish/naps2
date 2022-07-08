@@ -2,9 +2,9 @@ namespace NAPS2.Tools;
 
 public static class Cli
 {
-    public static void Run(string command, string args)
+    public static void Run(string command, string args, Dictionary<string, string>? env = null)
     {
-        var proc = Process.Start(new ProcessStartInfo
+        var startInfo = new ProcessStartInfo
         {
             FileName = command,
             Arguments = args,
@@ -13,7 +13,15 @@ public static class Cli
             RedirectStandardOutput = true,
             CreateNoWindow = true,
             WorkingDirectory = Paths.SolutionRoot
-        });
+        };
+        if (env != null)
+        {
+            foreach (var kvp in env)
+            {
+                startInfo.EnvironmentVariables[kvp.Key] = kvp.Value;
+            }
+        }
+        var proc = Process.Start(startInfo);
         if (proc == null)
         {
             throw new Exception($"Could not start {command}");

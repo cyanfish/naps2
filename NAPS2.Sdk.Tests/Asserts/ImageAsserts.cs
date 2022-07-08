@@ -12,7 +12,7 @@ public static class ImageAsserts
     // TODO: Use PNG or some other way to do a precise comparison.
     public const double GENERAL_RMSE_THRESHOLD = 3.5;
 
-    public const double NULL_RMSE_THRESHOLD = 0.5;
+    public const double NULL_RMSE_THRESHOLD = 0.6;
 
     private const double RESOLUTION_THRESHOLD = 0.02;
 

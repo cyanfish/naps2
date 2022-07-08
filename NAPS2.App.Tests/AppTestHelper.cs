@@ -9,33 +9,59 @@ public static class AppTestHelper
 {
     public static Process StartGuiProcess(string exeName, string appData, string args = null)
     {
-        var dir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
         var startInfo = new ProcessStartInfo
         {
-            FileName = Path.Combine(dir, exeName),
+            FileName = GetExePath(exeName),
             Arguments = args ?? "",
-            UseShellExecute = false
+            UseShellExecute = false,
+            EnvironmentVariables =
+            {
+                ["APPDATA"] = appData
+            }
         };
-        startInfo.EnvironmentVariables["APPDATA"] = appData;
         var process = Process.Start(startInfo);
         return process;
     }
 
     public static Process StartProcess(string exeName, string appData, string args = null)
     {
-        var dir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
         var startInfo = new ProcessStartInfo
         {
-            FileName = Path.Combine(dir, exeName),
+            FileName = GetExePath(exeName),
             Arguments = args ?? "",
             RedirectStandardInput = true,
             RedirectStandardOutput = true,
             RedirectStandardError = true,
-            UseShellExecute = false
+            UseShellExecute = false,
+            EnvironmentVariables =
+            {
+                ["APPDATA"] = appData
+            }
         };
-        startInfo.EnvironmentVariables["APPDATA"] = appData;
         var process = Process.Start(startInfo);
         return process;
+    }
+
+    private static string GetBaseDirectory()
+    {
+        var envDirectory = Environment.GetEnvironmentVariable("NAPS2_TEST_ROOT");
+        var testDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+        return string.IsNullOrEmpty(envDirectory) ? testDirectory : envDirectory;
+    }
+
+    private static string GetExePath(string exeName)
+    {
+        var dir = GetBaseDirectory();
+        var file = Path.Combine(dir, exeName);
+        if (!File.Exists(file))
+        {
+            file = Path.Combine(dir, "lib", exeName);
+        }
+        if (!File.Exists(file))
+        {
+            throw new Exception($"Could not find {exeName} in {dir}");
+        }
+        return file;
     }
 
     public static void Cleanup(Process process)

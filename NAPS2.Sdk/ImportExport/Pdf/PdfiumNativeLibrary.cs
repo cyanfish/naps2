@@ -17,7 +17,13 @@ public class PdfiumNativeLibrary : Unmanaged.NativeLibrary
     {
         var assemblyLocation = Assembly.GetExecutingAssembly().Location;
         var assemblyFolder = Path.GetDirectoryName(assemblyLocation);
-        var libraryPath = Path.Combine(assemblyFolder, PlatformCompat.System.PdfiumLibraryPath);
+        var testRoot = Environment.GetEnvironmentVariable("NAPS2_TEST_ROOT");
+        var depsFolder = string.IsNullOrEmpty(testRoot) ? assemblyFolder : testRoot;
+        var libraryPath = Path.Combine(depsFolder, PlatformCompat.System.PdfiumLibraryPath);
+        if (!File.Exists(libraryPath))
+        {
+            throw new Exception($"Library does not exist: {libraryPath}");
+        }
         var nativeLib = new PdfiumNativeLibrary(libraryPath);
         nativeLib.FPDF_InitLibrary();
         return nativeLib;
