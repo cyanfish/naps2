@@ -7,13 +7,6 @@
   <Import Project="..\NAPS2.Setup\CommonTargets.targets" />
 
   <ItemGroup>
-    <None Update="setup.languagefiles.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>setup.languagefiles.iss</LastGenOutput>
-    </None>
-    <None Update="setup.languagefiles.iss">
-      <DependentUpon>setup.languagefiles.tt</DependentUpon>
-    </None>
     <None Update="LanguageComponents.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>LanguageComponents.wxs</LastGenOutput>
@@ -21,6 +14,10 @@
     <None Update="LanguageComponents.wxs">
       <DependentUpon>LanguageComponents.tt</DependentUpon>
     </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="setup.template.wxs" />
   </ItemGroup>
   
 </Project>

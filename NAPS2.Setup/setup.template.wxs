@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+  <Product
+      Id="*"
+      Name="NAPS2"
+      Language="1033"
+      Version="{{ !version }}"
+      Manufacturer="Ben Olden-Cooligan"
+      UpgradeCode="FEB82971-B3E6-4F19-9684-1D543E644D73">
+    <Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
+    <Media Id="1" Cabinet="NAPS2.cab" EmbedCab="yes" CompressionLevel="high" />
+
+    <Icon Id="icon.ico" SourceFile="NAPS2.Sdk\Icons\scanner.ico"/>
+    <Property Id="ARPPRODUCTICON" Value="icon.ico" />
+
+    <MajorUpgrade DowngradeErrorMessage="A later version of [ProductName] is already installed. Setup will now exit." />
+
+    <Property Id="WIXUI_INSTALLDIR" Value="INSTALLFOLDER" />
+    <UIRef Id="WixUI_InstallDir" />
+    <WixVariable Id="WixUILicenseRtf" Value="NAPS2.Setup\license.rtf" />
+
+    <Feature Id="MainApplication" Title="NAPS2" Level="1">
+      <ComponentRef Id="Exec" />
+      <ComponentRef Id="Deps" />
+      <ComponentRef Id="DepsWin32" />
+      <!-- !64 --><ComponentRef Id="DepsWin64" /><!-- !~64 -->
+      <ComponentRef Id="ApplicationShortcut" />
+      <ComponentRef Id="RegistryEntries" />
+<!--      <ComponentGroupRef Id="LangComponents" />-->
+    </Feature>
+
+    <Directory Id="TARGETDIR" Name="SourceDir">
+      <Directory Id="ProgramFilesFolder">
+        <Directory Id="INSTALLFOLDER" Name="NAPS2">
+          <Directory Id="LIBFOLDER" Name="lib">
+            <Directory Id="LIBWIN32FOLDER" Name="win32" />
+            <!-- !64 --><Directory Id="LIBWIN64FOLDER" Name="win64" /><!-- !~64 -->
+          </Directory>
+        </Directory>
+      </Directory>
+      <Directory Id="ProgramMenuFolder">
+        <Directory Id="ProgramMenuDir" Name="NAPS2" />
+      </Directory>
+      <Directory Id="SystemFolder" />
+
+      <!-- Registry -->
+      <Component Id="RegistryEntries" Guid="5A1EA674-0ED2-42DF-817A-772F1B91EAE3">
+        <RegistryKey Root="HKLM" Key="SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\AutoplayHandlers\Handlers\WIA_{1c3a7177-f3a7-439e-be47-e304a185f932}">
+          <RegistryValue Type="string" Name="Action" Value="Scan with NAPS2" />
+          <RegistryValue Type="string" Name="CLSID" Value="WIACLSID" />
+          <RegistryValue Type="string" Name="DefaultIcon" Value="sti.dll,0" />
+          <RegistryValue Type="string" Name="InitCmdLine" Value="/WiaCmd;[INSTALLFOLDER]NAPS2.exe /StiDevice:%1 /StiEvent:%2;" />
+          <RegistryValue Type="string" Name="Provider" Value="NAPS2" />
+        </RegistryKey>
+        <RegistryKey Root="HKLM" Key="SOFTWARE\Microsoft\Windows\CurrentVersion\StillImage\Registered Applications">
+          <RegistryValue Type="string" Name="NAPS2" Value="[INSTALLFOLDER]NAPS2.exe" />
+        </RegistryKey>
+        <RegistryKey Root="HKLM" Key="SYSTEM\CurrentControlSet\Control\StillImage\Events\STIProxyEvent\{1c3a7177-f3a7-439e-be47-e304a185f932}">
+          <RegistryValue Type="string" Name="Cmdline" Value="[INSTALLFOLDER]NAPS2.exe /StiDevice:%1 /StiEvent:%2" />
+          <RegistryValue Type="string" Name="Desc" Value="Scan with NAPS2" />
+          <RegistryValue Type="string" Name="Icon" Value="[INSTALLFOLDER]NAPS2.exe,0" />
+          <RegistryValue Type="string" Name="Name" Value="NAPS2" />
+        </RegistryKey>
+      </Component>
+    </Directory>
+
+    <DirectoryRef Id="INSTALLFOLDER">
+      <Component Id="Exec" Guid="3ED24800-E1D9-4D64-A106-6DC3597D9266">
+        <!-- !root -->
+      </Component>
+    </DirectoryRef>
+    
+    <DirectoryRef Id="LIBFOLDER">
+      <Component Id="Deps" Guid="04AC2B17-BDFA-4AA0-B8CA-0AE208D9193A">
+        <!-- !lib -->
+      </Component>
+    </DirectoryRef>
+
+    <!-- Platform-specific dependencies -->
+    <DirectoryRef Id="LIBWIN32FOLDER">
+      <Component Id="DepsWin32" Guid="2BE3E5A4-7526-4074-90A1-5B4E830EA337">
+        <!-- !win32 -->
+      </Component>
+    </DirectoryRef>
+    <!-- !64 --><DirectoryRef Id="LIBWIN64FOLDER">
+      <Component Id="DepsWin64" Guid="9F734E22-7835-43B9-8B58-E10EF6484DD7">
+        <!-- !win64 -->
+      </Component>
+    </DirectoryRef><!-- !~64 -->
+
+    <DirectoryRef Id="ProgramMenuDir">
+      <Component Id="ApplicationShortcut" Guid="F5122C0C-7DCA-4D0A-AF70-C87C972267AB">
+        <Shortcut Id="ApplicationStartMenuShortcut"
+                  Name="NAPS2"
+                  Description="Not Another PDF Scanner 2"
+                  Target="[INSTALLFOLDER]NAPS2.exe"
+                  WorkingDirectory="INSTALLFOLDER" />
+        <RemoveFolder Id="ProgramMenuDir" On="uninstall"/>
+        <RegistryValue Root="HKCU" Key="Software\Microsoft\NAPS2" Name="installed" Type="integer" Value="1" KeyPath="yes"/>
+      </Component>
+    </DirectoryRef>
+
+  </Product>
+</Wix>

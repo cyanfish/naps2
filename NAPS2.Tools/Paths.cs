@@ -26,4 +26,10 @@ internal static class Paths
             return _root;
         }
     }
+
+    public static string Setup => Path.Combine(SolutionRoot, "NAPS2.Setup");
+    
+    public static string SetupObj => Path.Combine(Setup, "obj");
+    
+    public static string Publish => Path.Combine(Setup, "publish");
 }

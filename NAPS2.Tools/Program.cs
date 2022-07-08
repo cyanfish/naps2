@@ -1,6 +1,7 @@
 ﻿using CommandLine;
 using NAPS2.Tools.Localization;
 using NAPS2.Tools.Project;
+using NAPS2.Tools.Project.Packaging;
 
 namespace NAPS2.Tools;
 
