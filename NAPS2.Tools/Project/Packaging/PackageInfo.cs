@@ -2,6 +2,9 @@ namespace NAPS2.Tools.Project.Packaging;
 
 public class PackageInfo
 {
+    private readonly List<PackageFile> _files = new();
+    private readonly HashSet<string> _destPaths = new();
+
     public PackageInfo(Platform platform, string version)
     {
         Platform = platform;
@@ -14,7 +17,7 @@ public class PackageInfo
 
     public string FileName => $"naps2-{Version}-{Platform.PackageName()}";
 
-    public List<PackageFile> Files { get; } = new();
+    public IEnumerable<PackageFile> Files => _files;
 
     public void AddFile(FileInfo file, string destFolder, string? destFileName = null)
     {
@@ -22,6 +25,14 @@ public class PackageInfo
         {
             throw new ArgumentException();
         }
-        Files.Add(new PackageFile(file.DirectoryName, destFolder, file.Name, destFileName));
+        AddFile(new PackageFile(file.DirectoryName, destFolder, file.Name, destFileName));
+    }
+
+    public void AddFile(PackageFile file)
+    {
+        if (_destPaths.Add(file.DestPath))
+        {
+            _files.Add(file);
+        }
     }
 }

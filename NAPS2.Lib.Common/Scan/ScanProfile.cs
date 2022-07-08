@@ -123,16 +123,23 @@ public class ScanProfile
     public KeyValueScanOptions? KeyValueOptions { get; set; }
 }
 
-public record ScanProxyConfig(string Name, string Ip, int? Port);
+public record ScanProxyConfig
+{
+    public string Name { get; init; } = "";
+    public string Ip { get; init; } = "";
+    public int? Port { get; init; }
+}
 
 /// <summary>
 /// User configuration for the Auto Save feature, which saves to a file immediately after scanning.
 /// </summary>
-public record AutoSaveSettings(
-    string FilePath,
-    bool PromptForFilePath,
-    bool ClearImagesAfterSaving,
-    SaveSeparator Separator = SaveSeparator.FilePerPage);
+public record AutoSaveSettings
+{
+    public string FilePath { get; init; } = "";
+    public bool PromptForFilePath { get; init; }
+    public bool ClearImagesAfterSaving { get; init; }
+    public SaveSeparator Separator { get; init; } = SaveSeparator.FilePerPage;
+}
 
 /// <summary>
 /// The type of TWAIN driver implementation (this option is provided for compatibility).
@@ -261,12 +268,21 @@ public enum ScanPageSize
 /// <summary>
 /// Configuration for a particular page size.
 /// </summary>
-public record PageDimensions(decimal Width, decimal Height, LocalizedPageSizeUnit Unit);
+public record PageDimensions
+{
+    public decimal Width { get; init; }
+    public decimal Height { get; init; }
+    public LocalizedPageSizeUnit Unit { get; init; }
+}
 
 /// <summary>
 /// Configuration for a user-created custom page size.
 /// </summary>
-public record NamedPageSize(string Name, PageDimensions Dimens);
+public record NamedPageSize
+{
+    public string Name { get; init; }
+    public PageDimensions Dimens { get; init; }
+}
 
 /// <summary>
 /// Helper attribute used to assign physical dimensions to the ScanPageSize enum.
@@ -275,11 +291,12 @@ public class PageDimensionsAttribute : Attribute
 {
     public PageDimensionsAttribute(string width, string height, LocalizedPageSizeUnit unit)
     {
-        PageDimensions = new PageDimensions(
-            decimal.Parse(width, CultureInfo.InvariantCulture),
-            decimal.Parse(height, CultureInfo.InvariantCulture),
-            unit
-        );
+        PageDimensions = new PageDimensions
+        {
+            Width = decimal.Parse(width, CultureInfo.InvariantCulture),
+            Height = decimal.Parse(height, CultureInfo.InvariantCulture),
+            Unit = unit
+        };
     }
 
     public PageDimensions PageDimensions { get; }
@@ -353,7 +370,9 @@ public static class ScanEnumExtensions
 
     public static string Description(this Enum enumValue)
     {
-        object[] attrs = enumValue.GetType().GetField(enumValue.ToString())!.GetCustomAttributes(typeof(DescriptionAttribute), false);
+        object[] attrs =
+            enumValue.GetType().GetField(enumValue.ToString())!.GetCustomAttributes(typeof(DescriptionAttribute),
+                false);
         return attrs.Cast<DescriptionAttribute>().Select(x => x.Description).Single();
     }
 

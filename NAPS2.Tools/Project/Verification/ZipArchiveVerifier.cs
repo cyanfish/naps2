@@ -4,7 +4,7 @@ namespace NAPS2.Tools.Project.Verification;
 
 public class ZipArchiveVerifier
 {
-    public static void Verify(string zipPath)
+    public static void Verify(string zipPath, bool noCleanup)
     {
         // TODO: We probably want other commands to use unique paths too
         var extractPath = Path.Combine(Paths.SetupObj, Path.GetRandomFileName());
@@ -18,7 +18,10 @@ public class ZipArchiveVerifier
         }
         finally
         {
-            Directory.Delete(extractPath, true);
+            if (!noCleanup)
+            {
+                Directory.Delete(extractPath, true);
+            }
         }
     }
 }

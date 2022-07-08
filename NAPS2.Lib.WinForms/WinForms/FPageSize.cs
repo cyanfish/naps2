@@ -58,13 +58,14 @@ public partial class FPageSize : FormBase
     {
         textboxWidth.Text = dimens.Width.ToString(CultureInfo.CurrentCulture);
         textboxHeight.Text = dimens.Height.ToString(CultureInfo.CurrentCulture);
-        comboUnit.SelectedIndex = (int)dimens.Unit;
+        comboUnit.SelectedIndex = (int) dimens.Unit;
     }
 
     private void comboName_SelectionChangeCommitted(object sender, EventArgs e)
     {
         var presets = Config.Get(c => c.CustomPageSizePresets);
-        var dimens = presets.Where(x => x.Name == (string)comboName.SelectedItem).Select(x => x.Dimens).FirstOrDefault();
+        var dimens = presets.Where(x => x.Name == (string) comboName.SelectedItem).Select(x => x.Dimens)
+            .FirstOrDefault();
         if (dimens != null)
         {
             UpdateDimens(dimens);
@@ -84,7 +85,8 @@ public partial class FPageSize : FormBase
 
     private void btnOK_Click(object sender, EventArgs e)
     {
-        const NumberStyles numberStyle = NumberStyles.AllowDecimalPoint | NumberStyles.AllowThousands | NumberStyles.AllowLeadingWhite | NumberStyles.AllowTrailingSign;
+        const NumberStyles numberStyle = NumberStyles.AllowDecimalPoint | NumberStyles.AllowThousands |
+                                         NumberStyles.AllowLeadingWhite | NumberStyles.AllowTrailingSign;
         if (!decimal.TryParse(textboxWidth.Text, numberStyle, CultureInfo.CurrentCulture, out decimal width))
         {
             textboxWidth.Focus();
@@ -96,13 +98,22 @@ public partial class FPageSize : FormBase
             return;
         }
         PageSizeName = null;
-        PageSizeDimens = new PageDimensions(width, height, (LocalizedPageSizeUnit) comboUnit.SelectedIndex);
+        PageSizeDimens = new PageDimensions
+        {
+            Width = width,
+            Height = height,
+            Unit = (LocalizedPageSizeUnit) comboUnit.SelectedIndex
+        };
         if (!string.IsNullOrWhiteSpace(comboName.Text))
         {
             PageSizeName = comboName.Text;
             var presets = Config.Get(c => c.CustomPageSizePresets);
             presets = presets.RemoveAll(x => x.Name == PageSizeName);
-            presets = presets.Add(new NamedPageSize(PageSizeName, PageSizeDimens));
+            presets = presets.Add(new NamedPageSize
+            {
+                Name = PageSizeName,
+                Dimens = PageSizeDimens
+            });
             Config.User.Set(c => c.CustomPageSizePresets, presets);
         }
         DialogResult = DialogResult.OK;
@@ -111,7 +122,8 @@ public partial class FPageSize : FormBase
 
     private void btnDelete_Click(object sender, EventArgs e)
     {
-        if (MessageBox.Show(string.Format(MiscResources.ConfirmDelete, comboName.Text), MiscResources.Delete, MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
+        if (MessageBox.Show(string.Format(MiscResources.ConfirmDelete, comboName.Text), MiscResources.Delete,
+                MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
         {
             var presets = Config.Get(c => c.CustomPageSizePresets);
             presets = presets.RemoveAll(x => x.Name == comboName.Text);

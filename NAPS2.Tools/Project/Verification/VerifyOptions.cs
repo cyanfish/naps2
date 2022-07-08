@@ -10,4 +10,7 @@ public class VerifyOptions
     
     [Option('p', "platform", Required = false, HelpText = "win32|win64|mac|macarm|linux")]
     public string? Platform { get; set; }
+
+    [Option("nocleanup", Required = false, HelpText = "Skip cleaning up temp files")]
+    public bool NoCleanup { get; set; }
 }

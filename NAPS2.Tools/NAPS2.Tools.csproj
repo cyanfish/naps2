@@ -6,6 +6,7 @@
     <OutputType>Exe</OutputType>
     <RootNamespace>NAPS2.Tools</RootNamespace>
     <AssemblyName>n2</AssemblyName>
+    <Configurations>Debug</Configurations>
   </PropertyGroup>
 
   <ItemGroup>

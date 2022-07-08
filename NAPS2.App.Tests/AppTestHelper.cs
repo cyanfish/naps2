@@ -42,7 +42,7 @@ public static class AppTestHelper
         return process;
     }
 
-    private static string GetBaseDirectory()
+    public static string GetBaseDirectory()
     {
         var envDirectory = Environment.GetEnvironmentVariable("NAPS2_TEST_ROOT");
         var testDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
@@ -96,7 +96,7 @@ public static class AppTestHelper
     public static void AssertNoErrorLog(string appData)
     {
         var path = Path.Combine(appData, "NAPS2", "errorlog.txt");
-        Assert.False(File.Exists(path));
+        Assert.False(File.Exists(path), File.ReadAllText(path));
     }
 
     public static void AssertErrorLog(string appData)

@@ -19,7 +19,7 @@ public class VerifyCommand
         }
         if (opts.What == "zip" || opts.What == "all")
         {
-            ZipArchiveVerifier.Verify(basePath + ".zip");
+            ZipArchiveVerifier.Verify(basePath + ".zip", opts.NoCleanup);
         }
         return 0;
     }

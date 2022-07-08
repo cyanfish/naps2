@@ -38,9 +38,8 @@
   </ItemGroup>
   
   <ItemGroup>
-    <Content Update="appsettings.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      <SubType>Designer</SubType>
+    <Content Include="appsettings.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
 </Project>
