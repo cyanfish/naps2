@@ -52,7 +52,7 @@ public static class InternalDefaults
             OcrMode = LocalizedOcrMode.Default,
             OcrAfterScanning = true,
             LastImageExt = "",
-            ThumbnailSize = 128,
+            ThumbnailSize = ThumbnailSizes.DEFAULT_SIZE,
             DesktopToolStripDock = DockStyle.Top,
             EventLogging = EventType.None,
             PdfSettings = new PdfSettings

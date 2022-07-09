@@ -37,4 +37,14 @@ public static class ConfigExtensions
         }
         return config.DefaultOcrParams();
     }
+
+    public static int ThumbnailSize(this Naps2Config config)
+    {
+        var size = config.Get(c => c.ThumbnailSize);
+        if (size == 0)
+        {
+            return ThumbnailSizes.DEFAULT_SIZE;
+        }
+        return ThumbnailSizes.Validate(size);
+    }
 }

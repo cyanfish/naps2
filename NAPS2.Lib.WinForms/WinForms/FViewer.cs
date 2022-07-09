@@ -448,7 +448,7 @@ public class FViewer : FormBase
     private async void tsDeskew_Click(object sender, EventArgs e)
     {
         var op = _operationFactory.Create<DeskewOperation>();
-        if (op.Start(new[] { CurrentImage }, new DeskewParams { ThumbnailSize = Config.Get(c => c.ThumbnailSize) }))
+        if (op.Start(new[] { CurrentImage }, new DeskewParams { ThumbnailSize = Config.ThumbnailSize() }))
         {
             _operationProgress.ShowProgress(op);
         }

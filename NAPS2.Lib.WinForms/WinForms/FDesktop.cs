@@ -129,7 +129,7 @@ public partial class FDesktop : FormBase
             WinFormsHacks.SetControlStyle(panel, ControlStyles.Selectable, true);
         }
         _imageList.ThumbnailRenderer = _thumbnailRenderer;
-        int thumbnailSize = Config.Get(c => c.ThumbnailSize);
+        int thumbnailSize = Config.ThumbnailSize();
         _listView.ImageSize = thumbnailSize;
         SetThumbnailSpacing(thumbnailSize);
 
@@ -275,8 +275,8 @@ public partial class FDesktop : FormBase
         ctxSelectAll.Enabled = _imageList.Images.Any();
 
         // Other
-        btnZoomIn.Enabled = _imageList.Images.Any() && Config.Get(c => c.ThumbnailSize) < ThumbnailSizes.MAX_SIZE;
-        btnZoomOut.Enabled = _imageList.Images.Any() && Config.Get(c => c.ThumbnailSize) > ThumbnailSizes.MIN_SIZE;
+        btnZoomIn.Enabled = _imageList.Images.Any() && Config.ThumbnailSize() < ThumbnailSizes.MAX_SIZE;
+        btnZoomOut.Enabled = _imageList.Images.Any() && Config.ThumbnailSize() > ThumbnailSizes.MIN_SIZE;
         tsNewProfile.Enabled =
             !(Config.Get(c => c.NoUserProfiles) && _profileManager.Profiles.Any(x => x.IsLocked));
 
@@ -694,10 +694,10 @@ public partial class FDesktop : FormBase
 
     private void StepThumbnailSize(double step)
     {
-        int thumbnailSize = Config.Get(c => c.ThumbnailSize);
+        int thumbnailSize = Config.ThumbnailSize();
         thumbnailSize =
             (int) ThumbnailSizes.StepNumberToSize(ThumbnailSizes.SizeToStepNumber(thumbnailSize) + step);
-        thumbnailSize = Math.Max(Math.Min(thumbnailSize, ThumbnailSizes.MAX_SIZE), ThumbnailSizes.MIN_SIZE);
+        thumbnailSize = ThumbnailSizes.Validate(thumbnailSize);
         Config.User.Set(c => c.ThumbnailSize, thumbnailSize);
         ResizeThumbnails(thumbnailSize);
     }

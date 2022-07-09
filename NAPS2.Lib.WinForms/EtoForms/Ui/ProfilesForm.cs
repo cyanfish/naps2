@@ -219,7 +219,7 @@ public class ProfilesForm : EtoDialogBase
         {
             NoAutoSave = Config.Get(c => c.DisableAutoSave),
             OcrParams = Config.OcrAfterScanningParams(),
-            ThumbnailSize = Config.Get(c => c.ThumbnailSize)
+            ThumbnailSize = Config.ThumbnailSize()
         };
 
     private void ContextMenuOpening(object sender, EventArgs e)

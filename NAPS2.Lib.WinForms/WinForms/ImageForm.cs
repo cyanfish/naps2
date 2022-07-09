@@ -155,7 +155,7 @@ public partial class ImageForm : FormBase
                     if (img == Image)
                     {
                         var transformed = _imageContext.PerformAllTransforms(new GdiImage(workingImage).Clone(), Transforms);
-                        img.SetThumbnail(_imageContext.PerformTransform(transformed, new ThumbnailTransform(Config.Get(c => c.ThumbnailSize))));
+                        img.SetThumbnail(_imageContext.PerformTransform(transformed, new ThumbnailTransform(Config.ThumbnailSize())));
                     }
                 }
             }

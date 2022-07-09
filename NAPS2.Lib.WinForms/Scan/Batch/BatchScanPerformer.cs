@@ -93,7 +93,7 @@ public class BatchScanPerformer : IBatchScanPerformer
                         ? _config.DefaultOcrParams()
                         : OcrParams.Empty,
                 OcrCancelToken = CancelToken,
-                ThumbnailSize = _config.Get(c => c.ThumbnailSize)
+                ThumbnailSize = _config.ThumbnailSize()
             };
 
             try

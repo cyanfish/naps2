@@ -31,7 +31,7 @@ public class DesktopScanController : IDesktopScanController
         {
             NoAutoSave = _config.Get(c => c.DisableAutoSave),
             OcrParams = _config.OcrAfterScanningParams(),
-            ThumbnailSize = _config.Get(c => c.ThumbnailSize)
+            ThumbnailSize = _config.ThumbnailSize()
         };
 
     public async Task ScanWithDevice(string deviceID)

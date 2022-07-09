@@ -6,6 +6,11 @@ public static class ThumbnailSizes
     public const int DEFAULT_SIZE = 128;
     public static int MAX_SIZE = 1024;
 
+    public static int Validate(int inputSize)
+    {
+        return inputSize.Clamp(MIN_SIZE, MAX_SIZE);
+    } 
+
     public static double StepNumberToSize(double stepNumber)
     {
         // 64-256:32:6 256-448:48:4 448-832:64:6 832-1024:96:2

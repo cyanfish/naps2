@@ -87,6 +87,7 @@ public class ConfigSerializer : VersionedSerializer<ConfigStorage<CommonConfig>>
     private ConfigStorage<CommonConfig> AppConfigV0ToCommonConfigDefault(AppConfigV0 c) =>
         new(new CommonConfig
         {
+            // TODO: This initializes all properties, we need to specify exactly what's set
             // Could maybe move the app-only properties to Locked scope, but it really shouldn't matter
             Version = CommonConfig.CURRENT_VERSION,
             Culture = c.DefaultCulture,

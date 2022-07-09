@@ -276,7 +276,7 @@ public class DesktopController
         // Allow scanned images to be recovered in case of an unexpected close
         var op = _operationFactory.Create<RecoveryOperation>();
         if (op.Start(_desktopImagesController.ReceiveScannedImage(),
-                new RecoveryParams { ThumbnailSize = _config.Get(c => c.ThumbnailSize) }))
+                new RecoveryParams { ThumbnailSize = _config.ThumbnailSize() }))
         {
             _operationProgress.ShowProgress(op);
         }
@@ -284,7 +284,7 @@ public class DesktopController
 
     private void InitThumbnailRendering()
     {
-        _thumbnailRenderQueue.SetThumbnailSize(_config.Get(c => c.ThumbnailSize));
+        _thumbnailRenderQueue.SetThumbnailSize(_config.ThumbnailSize());
         _thumbnailRenderQueue.StartRendering(_imageList);
     }
 
@@ -292,7 +292,7 @@ public class DesktopController
     {
         var op = _operationFactory.Create<ImportOperation>();
         if (op.Start(OrderFiles(files), _desktopImagesController.ReceiveScannedImage(),
-                new ImportParams { ThumbnailSize = _config.Get(c => c.ThumbnailSize) }))
+                new ImportParams { ThumbnailSize = _config.ThumbnailSize() }))
         {
             _operationProgress.ShowProgress(op);
         }
@@ -310,7 +310,7 @@ public class DesktopController
     {
         var op = _operationFactory.Create<DirectImportOperation>();
         if (op.Start(data, copy, _desktopImagesController.ReceiveScannedImage(),
-                new DirectImportParams { ThumbnailSize = _config.Get(c => c.ThumbnailSize) }))
+                new DirectImportParams { ThumbnailSize = _config.ThumbnailSize() }))
         {
             _operationProgress.ShowProgress(op);
         }

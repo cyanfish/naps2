@@ -96,7 +96,10 @@ public static class AppTestHelper
     public static void AssertNoErrorLog(string appData)
     {
         var path = Path.Combine(appData, "NAPS2", "errorlog.txt");
-        Assert.False(File.Exists(path), File.ReadAllText(path));
+        if (File.Exists(path))
+        {
+            Assert.False(File.Exists(path), File.ReadAllText(path));
+        }
     }
 
     public static void AssertErrorLog(string appData)
