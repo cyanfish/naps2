@@ -9,38 +9,30 @@ public static class AppTestHelper
 {
     public static Process StartGuiProcess(string exeName, string appData, string args = null)
     {
-        var startInfo = new ProcessStartInfo
-        {
-            FileName = GetExePath(exeName),
-            Arguments = args ?? "",
-            UseShellExecute = false,
-            EnvironmentVariables =
-            {
-                ["APPDATA"] = appData
-            }
-        };
-        var process = Process.Start(startInfo);
-        return process;
+        var startInfo = GetProcessStartInfo(exeName, appData, args);
+        return Process.Start(startInfo);
     }
 
     public static Process StartProcess(string exeName, string appData, string args = null)
     {
-        var startInfo = new ProcessStartInfo
+        var startInfo = GetProcessStartInfo(exeName, appData, args);
+        startInfo.RedirectStandardInput = true;
+        startInfo.RedirectStandardOutput = true;
+        startInfo.RedirectStandardError = true;
+        return Process.Start(startInfo);
+    }
+
+    private static ProcessStartInfo GetProcessStartInfo(string exeName, string appData, string args) =>
+        new()
         {
             FileName = GetExePath(exeName),
             Arguments = args ?? "",
-            RedirectStandardInput = true,
-            RedirectStandardOutput = true,
-            RedirectStandardError = true,
             UseShellExecute = false,
             EnvironmentVariables =
             {
-                ["APPDATA"] = appData
+                ["NAPS2_TEST_DATA"] = appData
             }
         };
-        var process = Process.Start(startInfo);
-        return process;
-    }
 
     public static string GetBaseDirectory()
     {
@@ -95,7 +87,7 @@ public static class AppTestHelper
 
     public static void AssertNoErrorLog(string appData)
     {
-        var path = Path.Combine(appData, "NAPS2", "errorlog.txt");
+        var path = Path.Combine(appData, "errorlog.txt");
         if (File.Exists(path))
         {
             Assert.False(File.Exists(path), File.ReadAllText(path));
@@ -104,7 +96,7 @@ public static class AppTestHelper
 
     public static void AssertErrorLog(string appData)
     {
-        var path = Path.Combine(appData, "NAPS2", "errorlog.txt");
-        Assert.True(File.Exists(path));
+        var path = Path.Combine(appData, "errorlog.txt");
+        Assert.True(File.Exists(path), path);
     }
 }

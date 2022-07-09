@@ -6,17 +6,16 @@ public static class Paths
 {
     private static readonly string ExecutablePath = Application.StartupPath;
 
-    private static readonly string AppDataEnv = Environment.ExpandEnvironmentVariables("%APPDATA%");
+    private static readonly string TestDataPath = Environment.ExpandEnvironmentVariables("%NAPS2_TEST_DATA%");
 
-    private static readonly string UserAppDataFolder = string.IsNullOrEmpty(AppDataEnv)
-        ? Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)
-        : AppDataEnv;
-    
 #if STANDALONE
-        private static readonly string AppDataPath = Path.Combine(ExecutablePath, "..", "Data");
+    private static readonly string RealDataPath = Path.Combine(ExecutablePath, "..", "Data");
 #else
-    private static readonly string AppDataPath = Path.Combine(UserAppDataFolder, "NAPS2");
+    private static readonly string RealDataPath =
+        Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "NAPS2");
 #endif
+
+    private static readonly string AppDataPath = string.IsNullOrEmpty(TestDataPath) ? RealDataPath : TestDataPath;
 
     private static readonly string TempPath = Path.Combine(AppDataPath, "temp");
 
