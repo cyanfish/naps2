@@ -1,6 +1,6 @@
 using Xunit;
 
-namespace NAPS2.App.Tests;
+namespace NAPS2.App.Tests.Verification;
 
 public class VerifyTextFilesTests
 {

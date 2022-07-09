@@ -41,7 +41,7 @@ public static class AppTestHelper
         return string.IsNullOrEmpty(envDirectory) ? testDirectory : envDirectory;
     }
 
-    private static string GetExePath(string exeName)
+    public static string GetExePath(string exeName)
     {
         var dir = GetBaseDirectory();
         var file = Path.Combine(dir, exeName);

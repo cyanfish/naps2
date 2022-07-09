@@ -8,7 +8,8 @@ public class VerifyCommand
 
         var version = VersionHelper.GetProjectVersion("NAPS2.App.WinForms");
         var basePath = Path.Combine(Paths.Publish, version, $"naps2-{version}-{platform.PackageName()}");
-        
+
+        using var appDriverRunner = AppDriverRunner.Start();
         if (opts.What == "exe" || opts.What == "all")
         {
             // ExeSetupVerifier.Verify()

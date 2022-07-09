@@ -40,7 +40,7 @@ public class CultureHelper
         }
     }
 
-    public IEnumerable<(string langCode, string langName)> GetAvailableCultures()
+    public IEnumerable<(string langCode, string langName)> GetAllCultures()
     {
         // Read a list of languages from the Languages.resx file
         var resourceManager = LanguageNames.ResourceManager;
@@ -49,11 +49,19 @@ public class CultureHelper
         {
             var langCode = ((string) entry.Key).Replace("_", "-");
             var langName = (string) entry.Value!;
+            yield return (langCode, langName);
+        }
+    }
 
+    public IEnumerable<(string langCode, string langName)> GetAvailableCultures()
+    {
+        foreach (var (langCode, langName) in GetAllCultures())
+        {
             // Only include those languages for which localized resources exist
+            // TODO: Should we check for multiple project resource files? Or be less specific so this doesn't break if we rename the projects?
             string localizedResourcesPath =
                 Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) ?? "", langCode,
-                    "NAPS2.Core.resources.dll");
+                    "NAPS2.Lib.Common.resources.dll");
             if (langCode == "en" || File.Exists(localizedResourcesPath))
             {
                 yield return (langCode, langName);

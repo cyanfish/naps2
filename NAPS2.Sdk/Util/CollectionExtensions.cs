@@ -4,6 +4,19 @@ namespace NAPS2.Util;
 
 public static class CollectionExtensions
 {
+#if !NETCOREAPP2_0_OR_GREATER && !NET472_OR_GREATER
+    /// <summary>
+    /// Creates a HashSet from the enumerable.
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="enumerable"></param>
+    /// <returns></returns>
+    public static HashSet<T> ToHashSet<T>(this IEnumerable<T> enumerable)
+    {
+        return new HashSet<T>(enumerable);
+    }
+#endif
+
 #if !NETCOREAPP3_0_OR_GREATER && !NET471_OR_GREATER
     /// <summary>
     /// Appends the given item to the end of the enumerable.

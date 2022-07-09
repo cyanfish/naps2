@@ -1,27 +1,42 @@
-﻿using System.Windows.Forms;
+﻿using System;
+using System.Diagnostics;
+using System.IO;
+using System.Linq;
+using System.Windows.Forms;
 
 namespace NAPS2;
 
 public static class Paths
 {
     private static readonly string ExecutablePath = Application.StartupPath;
+    private static readonly string AppDataPath;
+    private static readonly string TempPath;
+    private static readonly string RecoveryPath;
+    private static readonly string ComponentsPath;
 
-    private static readonly string TestDataPath = Environment.ExpandEnvironmentVariables("%NAPS2_TEST_DATA%");
-
+    static Paths()
+    {
 #if STANDALONE
-    private static readonly string RealDataPath = Path.Combine(ExecutablePath, "..", "Data");
+        AppDataPath = Path.Combine(ExecutablePath, "..", "Data");
 #else
-    private static readonly string RealDataPath =
-        Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "NAPS2");
+        AppDataPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "NAPS2");
 #endif
+        var dataPathFromEnv = Environment.ExpandEnvironmentVariables("%NAPS2_TEST_DATA%");
+        if (!string.IsNullOrEmpty(dataPathFromEnv))
+        {
+            AppDataPath = dataPathFromEnv;
+        }
+        var args = Environment.GetCommandLineArgs();
+        var flagIndex = Array.IndexOf(args, "/Naps2TestData");
+        if (flagIndex >= 0 && flagIndex < args.Length - 1)
+        {
+            AppDataPath = args[flagIndex + 1];
+        }
 
-    private static readonly string AppDataPath = string.IsNullOrEmpty(TestDataPath) ? RealDataPath : TestDataPath;
-
-    private static readonly string TempPath = Path.Combine(AppDataPath, "temp");
-
-    private static readonly string RecoveryPath = Path.Combine(AppDataPath, "recovery");
-
-    private static readonly string ComponentsPath = Path.Combine(AppDataPath, "components");
+        TempPath = Path.Combine(AppDataPath, "temp");
+        RecoveryPath = Path.Combine(AppDataPath, "recovery");
+        ComponentsPath = Path.Combine(AppDataPath, "components");
+    }
 
     public static string AppData => EnsureFolderExists(AppDataPath);
 
