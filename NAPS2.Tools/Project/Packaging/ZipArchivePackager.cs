@@ -4,9 +4,10 @@ namespace NAPS2.Tools.Project.Packaging;
 
 public static class ZipArchivePackager
 {
-    public static void PackageZip(PackageInfo pkgInfo)
+    public static void PackageZip(PackageInfo pkgInfo, bool verbose)
     {
-        var zipPath = Path.Combine(Paths.Publish, pkgInfo.Version, $"{pkgInfo.FileName}.zip");
+        var zipPath = pkgInfo.GetPath("zip");
+        Console.WriteLine($"Packaging zip archive: {zipPath}");
         if (File.Exists(zipPath))
         {
             File.Delete(zipPath);
@@ -22,9 +23,24 @@ public static class ZipArchivePackager
         using var archive = ZipFile.Open(zipPath, ZipArchiveMode.Create);
         foreach (var file in pkgInfo.Files)
         {
-            archive.CreateEntryFromFile(file.SourcePath, Path.Combine("App", file.DestPath));
+            var destPath = Path.Combine("App", file.DestPath);
+            if (verbose)
+            {
+                Console.WriteLine($"Compressing {destPath}");
+            }
+            archive.CreateEntryFromFile(file.SourcePath, destPath);
+        }
+        if (verbose)
+        {
+            Console.WriteLine($"Creating Data/");
         }
         archive.CreateEntry("Data/");
+        if (verbose)
+        {
+            Console.WriteLine($"Compressing NAPS2.Portable.exe");
+        }
         archive.CreateEntryFromFile(portableExe, "NAPS2.Portable.exe");
+        
+        Console.WriteLine(verbose ? $"Packaged zip archive: {zipPath}" : "Done.");
     }
 }

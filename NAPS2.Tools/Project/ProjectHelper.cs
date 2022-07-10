@@ -2,7 +2,7 @@ using System.Text.RegularExpressions;
 
 namespace NAPS2.Tools.Project;
 
-public static class VersionHelper
+public static class ProjectHelper
 {
     public static string GetProjectVersion(string projectName)
     {
@@ -18,5 +18,16 @@ public static class VersionHelper
             throw new Exception($"Invalid project version: {version}");
         }
         return version;
+    }
+
+    public static string GetDefaultProjectVersion()
+    {
+        return GetProjectVersion("NAPS2.App.WinForms");
+    }
+
+    public static string GetPackagePath(string ext, Platform platform, string? version = null)
+    {
+        version ??= GetProjectVersion("NAPS2.App.WinForms");
+        return Path.Combine(Paths.Publish, version, $"naps2-{version}-{platform.PackageName()}.{ext}");
     }
 }

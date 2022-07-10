@@ -11,6 +11,9 @@ public class PackageOptions
     // TODO: Allow platform combos (e.g. win32+win64)
     [Option('p', "platform", Required = false, HelpText = "win32|win64|mac|macarm|linux")]
     public string? Platform { get; set; }
+
+    [Option('v', "verbose", Required = false, HelpText = "Show full output")]
+    public bool Verbose { get; set; }
     
     // TODO: Add net target (net462/net5/net5-windows etc.)
 }

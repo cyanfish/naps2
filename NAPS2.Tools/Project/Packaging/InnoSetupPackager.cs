@@ -4,13 +4,18 @@ namespace NAPS2.Tools.Project.Packaging;
 
 public static class InnoSetupPackager
 {
-    public static void PackageExe(PackageInfo packageInfo)
+    public static void PackageExe(PackageInfo packageInfo, bool verbose)
     {
+        var exePath = packageInfo.GetPath("exe");
+        Console.WriteLine($"Packaging exe installer: {exePath}");
+
         var innoDefPath = GenerateInnoDef(packageInfo);
 
         // TODO: Use https://github.com/DomGries/InnoDependencyInstaller for .net dependency
         var iscc = Environment.ExpandEnvironmentVariables("%PROGRAMFILES(X86)%/Inno Setup 6/iscc.exe");
-        Cli.Run(iscc, $"\"{innoDefPath}\"");
+        Cli.Run(iscc, $"\"{innoDefPath}\"", verbose);
+
+        Console.WriteLine(verbose ? $"Packaged exe installer: {exePath}" : "Done.");
     }
 
     private static string GenerateInnoDef(PackageInfo packageInfo)
@@ -21,6 +26,15 @@ public static class InnoSetupPackager
         defLines.AppendLine($"#define AppVersion \"{packageInfo.Version}\"");
         defLines.AppendLine($"#define AppPlatform \"{packageInfo.Platform.PackageName()}\"");
         template = template.Replace("; !defs", defLines.ToString());
+
+        if (packageInfo.Platform == Platform.Win64)
+        {
+            var arch = new StringBuilder();
+            arch.AppendLine("ArchitecturesInstallIn64BitMode=x64");
+            arch.AppendLine("ArchitecturesAllowed=x64");
+            template = template.Replace("; !arch", arch.ToString());
+            template = template.Replace("; !clean32", @"Type: filesandordirs; Name: ""{commonpf32}\NAPS2""");
+        }
 
         var fileLines = new StringBuilder();
         foreach (var pkgFile in packageInfo.Files)

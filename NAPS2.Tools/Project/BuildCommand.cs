@@ -7,7 +7,7 @@ public static class BuildCommand
         foreach (var config in GetConfigs(opts.What))
         {
             Console.WriteLine($"---------- BUILDING CONFIGURATION: {config} ----------");
-            Cli.Run("dotnet", $"build -c {config}");
+            Cli.Run("dotnet", $"build -c {config}", opts.Verbose);
         }
         return 0;
     }

@@ -2,7 +2,7 @@ namespace NAPS2.Tools;
 
 public static class Cli
 {
-    public static void Run(string command, string args, Dictionary<string, string>? env = null)
+    public static void Run(string command, string args, bool verbose, Dictionary<string, string>? env = null)
     {
         var startInfo = new ProcessStartInfo
         {
@@ -29,23 +29,26 @@ public static class Cli
         // TODO: Maybe we forward Console.CancelKeyPress
         while (!proc.WaitForExit(100))
         {
-            PrintAll(proc.StandardOutput);
-            PrintAll(proc.StandardError);
+            PrintAll(proc.StandardOutput, verbose);
+            PrintAll(proc.StandardError, true);
         }
-        PrintAll(proc.StandardOutput);
-        PrintAll(proc.StandardError);
+        PrintAll(proc.StandardOutput, verbose);
+        PrintAll(proc.StandardError, true);
         if (proc.ExitCode != 0)
         {
             throw new Exception($"Command failed: {command} {args}");
         }
     }
 
-    private static void PrintAll(StreamReader stream)
+    private static void PrintAll(StreamReader stream, bool forwardToStdout)
     {
         string? line;
         while ((line = stream.ReadLine()) != null)
         {
-            Console.WriteLine(line);
+            if (forwardToStdout)
+            {
+                Console.WriteLine(line);
+            }
         }
     }
 }

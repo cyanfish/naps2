@@ -13,4 +13,7 @@ public class VerifyOptions
 
     [Option("nocleanup", Required = false, HelpText = "Skip cleaning up temp files")]
     public bool NoCleanup { get; set; }
+
+    [Option('v', "verbose", Required = false, HelpText = "Show full output")]
+    public bool Verbose { get; set; }
 }

@@ -13,6 +13,7 @@ OutputDir=../publish/{#AppVersion}
 OutputBaseFilename=naps2-{#AppVersion}-{#AppPlatform}       
 Compression=lzma
 SolidCompression=yes
+; !arch
 
 LicenseFile=..\..\LICENSE
 UninstallDisplayIcon={app}\scanner-app.ico
@@ -54,11 +55,11 @@ Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{
 ; !files
 
 ; Delete files from old locations in case of upgrade
-; TODO: Delete from Program Files (x86)?
 [InstallDelete]     
 Type: files; Name: "{app}\*.exe"
 Type: files; Name: "{app}\*.exe.config"
 Type: filesandordirs; Name: "{app}\lib"
+; !clean32
 
 [Icons]
 Name: "{group}\NAPS2"; Filename: "{app}\NAPS2.exe"

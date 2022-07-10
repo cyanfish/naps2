@@ -5,14 +5,12 @@ public class VerifyCommand
     public static int Run(VerifyOptions opts)
     {
         var platform = PlatformHelper.FromOption(opts.Platform, Platform.Win64);
+        var version = ProjectHelper.GetDefaultProjectVersion();
 
-        var version = VersionHelper.GetProjectVersion("NAPS2.App.WinForms");
-        var basePath = Path.Combine(Paths.Publish, version, $"naps2-{version}-{platform.PackageName()}");
-
-        using var appDriverRunner = AppDriverRunner.Start();
+        using var appDriverRunner = AppDriverRunner.Start(opts.Verbose);
         if (opts.What == "exe" || opts.What == "all")
         {
-            // ExeSetupVerifier.Verify()
+            ExeSetupVerifier.Verify(platform, version, opts.Verbose);
         }
         if (opts.What == "msi" || opts.What == "all")
         {
@@ -20,7 +18,7 @@ public class VerifyCommand
         }
         if (opts.What == "zip" || opts.What == "all")
         {
-            ZipArchiveVerifier.Verify(basePath + ".zip", opts.NoCleanup);
+            ZipArchiveVerifier.Verify(platform, version, opts.NoCleanup, opts.Verbose);
         }
         return 0;
     }

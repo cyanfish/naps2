@@ -15,7 +15,10 @@ public class PackageInfo
     
     public string Version { get; }
 
-    public string FileName => $"naps2-{Version}-{Platform.PackageName()}";
+    public string GetPath(string ext)
+    {
+        return ProjectHelper.GetPackagePath(ext, Platform, Version);
+    }
 
     public IEnumerable<PackageFile> Files => _files;
 

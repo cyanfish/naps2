@@ -13,24 +13,24 @@ public static class PackageCommand
             // TODO: Allow customizing net version, platform, etc
             // TODO: The fact that we only have one project config for the app but multiple for the SDK is problematic; things will overwrite each other unless we either pull them explicitly from the right project or have a separate config or normalize things somehow to avoid needing multiple configs
             var pkgInfo = GetPackageInfo(platform, "InstallerEXE");
-            InnoSetupPackager.PackageExe(pkgInfo);
+            InnoSetupPackager.PackageExe(pkgInfo, opts.Verbose);
         }
         if (opts.What == "msi" || opts.What == "all")
         {
             var pkgInfo = GetPackageInfo(platform, "InstallerMSI");
-            WixToolsetPackager.PackageMsi(pkgInfo);
+            WixToolsetPackager.PackageMsi(pkgInfo, opts.Verbose);
         }
         if (opts.What == "zip" || opts.What == "all")
         {
             var pkgInfo = GetPackageInfo(platform, "Standalone");
-            ZipArchivePackager.PackageZip(pkgInfo);
+            ZipArchivePackager.PackageZip(pkgInfo, opts.Verbose);
         }
         return 0;
     }
 
     private static PackageInfo GetPackageInfo(Platform platform, string preferredConfig)
     {
-        var pkgInfo = new PackageInfo(platform, VersionHelper.GetProjectVersion("NAPS2.App.WinForms"));
+        var pkgInfo = new PackageInfo(platform, ProjectHelper.GetProjectVersion("NAPS2.App.WinForms"));
         foreach (var project in new[]
                      { "NAPS2.Sdk", "NAPS2.Lib.Common", "NAPS2.App.Worker", "NAPS2.App.Console", "NAPS2.App.WinForms" })
         {

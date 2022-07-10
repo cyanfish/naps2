@@ -4,17 +4,17 @@ namespace NAPS2.Tools.Project.Verification;
 
 public class ZipArchiveVerifier
 {
-    public static void Verify(string zipPath, bool noCleanup)
+    public static void Verify(Platform platform, string version, bool verbose, bool noCleanup)
     {
+        var zipPath = ProjectHelper.GetPackagePath("zip", platform, version);
+        Console.WriteLine($"Extracting zip archive: {zipPath}");
         // TODO: We probably want other commands to use unique paths too
         var extractPath = Path.Combine(Paths.SetupObj, Path.GetRandomFileName());
         try
         {
             ZipFile.ExtractToDirectory(zipPath, extractPath);
-            Cli.Run("dotnet", "test NAPS2.App.Tests -f net462", new()
-            {
-                { "NAPS2_TEST_ROOT", Path.Combine(extractPath, "App") }
-            });
+            Verifier.RunVerificationTests(Path.Combine(extractPath, "App"), verbose);
+            Console.WriteLine(verbose ? $"Verified zip archive: {zipPath}" : "Done.");
         }
         finally
         {

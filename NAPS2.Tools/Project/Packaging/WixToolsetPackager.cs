@@ -5,18 +5,20 @@ namespace NAPS2.Tools.Project.Packaging;
 
 public static class WixToolsetPackager
 {
-    public static void PackageMsi(PackageInfo pkgInfo)
+    public static void PackageMsi(PackageInfo pkgInfo, bool verbose)
     {
+        var msiPath = pkgInfo.GetPath("msi");
+        Console.WriteLine($"Packaging msi installer: {msiPath}");
         var wxsPath = GenerateWxs(pkgInfo);
 
         var candle = Environment.ExpandEnvironmentVariables("%PROGRAMFILES(X86)%/WiX Toolset v3.11/bin/candle.exe");
-        Cli.Run(candle, $"\"{wxsPath}\" -o \"{Paths.SetupObj}/\"");
+        Cli.Run(candle, $"\"{wxsPath}\" -o \"{Paths.SetupObj}/\"", verbose);
         
         var wixobjPath = wxsPath.Replace(".wxs", ".wixobj");
 
         var light = Environment.ExpandEnvironmentVariables("%PROGRAMFILES(X86)%/WiX Toolset v3.11/bin/light.exe");
-        var publishFile = Path.Combine(Paths.Publish, pkgInfo.Version, $"{pkgInfo.FileName}.msi");
-        Cli.Run(light, $"\"{wixobjPath}\" -spdb -ext WixUIExtension -o \"{publishFile}\"");
+        Cli.Run(light, $"\"{wixobjPath}\" -spdb -ext WixUIExtension -o \"{msiPath}\"", verbose);
+        Console.WriteLine(verbose ? $"Packaged msi installer: {msiPath}" : "Done.");
     }
 
     private static string GenerateWxs(PackageInfo packageInfo)
