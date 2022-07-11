@@ -12,7 +12,8 @@ public static class WixToolsetPackager
         var wxsPath = GenerateWxs(pkgInfo);
 
         var candle = Environment.ExpandEnvironmentVariables("%PROGRAMFILES(X86)%/WiX Toolset v3.11/bin/candle.exe");
-        Cli.Run(candle, $"\"{wxsPath}\" -o \"{Paths.SetupObj}/\"", verbose);
+        var arch = pkgInfo.Platform == Platform.Win64 ? "x64" : "x86";
+        Cli.Run(candle, $"\"{wxsPath}\" -o \"{Paths.SetupObj}/\" -arch {arch}", verbose);
         
         var wixobjPath = wxsPath.Replace(".wxs", ".wixobj");
 
@@ -56,10 +57,8 @@ public static class WixToolsetPackager
         }
         template = template.Replace("<!-- !win64 -->", win64Lines.ToString());
 
-        if (packageInfo.Platform == Platform.Win32)
-        {
-            template = Regex.Replace(template, "<!-- !64 -->.*?<!-- !~64 -->", "", RegexOptions.Singleline);
-        }
+        var replacementFor64 = packageInfo.Platform == Platform.Win32 ? "" : "$3";
+        template = Regex.Replace(template, "(<!--|{{) !64 (-->|}})(.*?)(<!--|{{) !~64 (-->|}})", replacementFor64, RegexOptions.Singleline);
         
         // TODO: Lang components
 

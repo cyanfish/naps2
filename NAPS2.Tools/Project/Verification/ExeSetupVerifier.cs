@@ -17,9 +17,7 @@ public static class ExeSetupVerifier
         }
         process.WaitForExit();
 
-        var pfVar = platform == Platform.Win64 ? "%PROGRAMFILES%" : "%PROGRAMFILES(X86)%";
-        var pfPath = Environment.ExpandEnvironmentVariables(pfVar);
-        Verifier.RunVerificationTests(Path.Combine(pfPath, "NAPS2"), verbose);
+        Verifier.RunVerificationTests(ProjectHelper.GetInstallationFolder(platform), verbose);
         Console.WriteLine(verbose ? $"Verified exe installer: {exePath}" : "Done.");
     }
 }

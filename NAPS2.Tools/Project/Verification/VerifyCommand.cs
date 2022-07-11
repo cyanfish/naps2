@@ -14,7 +14,7 @@ public class VerifyCommand
         }
         if (opts.What == "msi" || opts.What == "all")
         {
-            // MsiSetupVerifier.Verify()
+            MsiSetupVerifier.Verify(platform, version, opts.Verbose);
         }
         if (opts.What == "zip" || opts.What == "all")
         {

@@ -30,4 +30,11 @@ public static class ProjectHelper
         version ??= GetProjectVersion("NAPS2.App.WinForms");
         return Path.Combine(Paths.Publish, version, $"naps2-{version}-{platform.PackageName()}.{ext}");
     }
+
+    public static string GetInstallationFolder(Platform platform)
+    {
+        var pfVar = platform == Platform.Win64 ? "%PROGRAMFILES%" : "%PROGRAMFILES(X86)%";
+        var pfPath = Environment.ExpandEnvironmentVariables(pfVar);
+        return Path.Combine(pfPath, "NAPS2");
+    }
 }
