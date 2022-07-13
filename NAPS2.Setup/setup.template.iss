@@ -16,7 +16,7 @@ SolidCompression=yes
 ; !arch
 
 LicenseFile=..\..\LICENSE
-UninstallDisplayIcon={app}\scanner-app.ico
+UninstallDisplayIcon={app}\NAPS2.exe
 
 [Run]
 Filename: "{app}\NAPS2.exe"; Flags: nowait postinstall

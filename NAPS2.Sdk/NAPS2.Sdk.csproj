@@ -4,6 +4,7 @@
     <TargetFrameworks>net5;net5-windows;net462</TargetFrameworks>
     <Nullable>enable</Nullable>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <!-- TODO: Move ClientCreds etc out of NAPS2.Sdk -->
     <GenerateResourceUsePreserializedResources>true</GenerateResourceUsePreserializedResources>
     <RootNamespace>NAPS2</RootNamespace>
 

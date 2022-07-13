@@ -8,6 +8,7 @@
     <RootNamespace>NAPS2</RootNamespace>
     <AssemblyName>NAPS2</AssemblyName>
     <Version>7.0.1</Version>
+    <ApplicationIcon>../NAPS2.Lib.Common/Icons/favicon.ico</ApplicationIcon>
 
 <!--    <PublishSingleFile>true</PublishSingleFile>-->
 <!--    <SelfContained>true</SelfContained>-->

@@ -4,6 +4,7 @@ public class VerifyCommand
 {
     public static int Run(VerifyOptions opts)
     {
+        // TODO: Add an "install" command that installs exe/msi without verifying (and removes old version first)
         var platform = PlatformHelper.FromOption(opts.Platform, Platform.Win64);
         var version = ProjectHelper.GetDefaultProjectVersion();
 
