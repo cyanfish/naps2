@@ -22,6 +22,8 @@ public class PackageInfo
 
     public IEnumerable<PackageFile> Files => _files;
 
+    public HashSet<string> Languages { get; } = new();
+
     public void AddFile(FileInfo file, string destFolder, string? destFileName = null)
     {
         if (file.DirectoryName == null)

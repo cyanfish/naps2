@@ -26,7 +26,7 @@
       <!-- !64 --><ComponentRef Id="DepsWin64" /><!-- !~64 -->
       <ComponentRef Id="ApplicationShortcut" />
       <ComponentRef Id="RegistryEntries" />
-<!--      <ComponentGroupRef Id="LangComponents" />-->
+      <ComponentGroupRef Id="LangComponents" />
     </Feature>
 
     <Directory Id="TARGETDIR" Name="SourceDir">
@@ -98,6 +98,14 @@
         <RemoveFolder Id="ProgramMenuDir" On="uninstall"/>
         <RegistryValue Root="HKCU" Key="Software\Microsoft\NAPS2" Name="installed" Type="integer" Value="1" KeyPath="yes"/>
       </Component>
+    </DirectoryRef>
+
+    <ComponentGroup Id="LangComponents">
+      <!-- !langrefs -->
+    </ComponentGroup>
+
+    <DirectoryRef Id="LIBFOLDER">
+      <!-- !langfiles -->
     </DirectoryRef>
 
   </Product>

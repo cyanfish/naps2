@@ -57,10 +57,27 @@ public static class WixToolsetPackager
         }
         template = template.Replace("<!-- !win64 -->", win64Lines.ToString());
 
+        var langRefsLines = new StringBuilder();
+        var langFilesLines = new StringBuilder();
+        foreach (var language in packageInfo.Languages.OrderBy(x => x))
+        {
+            var id = ToId(language);
+            langFilesLines.AppendLine($"<Directory Id=\"LangFolder_{id}\" Name=\"{language}\">");
+            foreach (var langResource in packageInfo.Files.Where(x => x.DestDir == Path.Combine("lib", language)))
+            {
+                var componentId = $"LangComponent_{ToId(langResource.DestPath)}";
+                langRefsLines.AppendLine($"<ComponentRef Id=\"{componentId}\" />");
+                langFilesLines.AppendLine($"<Component Id=\"{componentId}\">");
+                DeclareFile(langFilesLines, langResource);
+                langFilesLines.AppendLine("</Component>");
+            }
+            langFilesLines.AppendLine("</Directory>");
+        }
+        template = template.Replace("<!-- !langrefs -->", langRefsLines.ToString());
+        template = template.Replace("<!-- !langfiles -->", langFilesLines.ToString());
+
         var replacementFor64 = packageInfo.Platform == Platform.Win32 ? "" : "$3";
         template = Regex.Replace(template, "(<!--|{{) !64 (-->|}})(.*?)(<!--|{{) !~64 (-->|}})", replacementFor64, RegexOptions.Singleline);
-        
-        // TODO: Lang components
 
         var wxsPath = Path.Combine(Paths.SetupObj, "setup.wxs");
         File.WriteAllText(wxsPath, template);
@@ -74,8 +91,13 @@ public static class WixToolsetPackager
         {
             output.Append($" Name=\"{file.DestFileName}\"");
         }
-        var fileId = Regex.Replace(file.DestPath, @"[^a-zA-Z0-9]+", "_");
+        var fileId = ToId(file.DestPath);
         output.Append($" Id=\"{fileId}\"");
         output.AppendLine(" />");
+    }
+
+    private static string ToId(string raw)
+    {
+        return Regex.Replace(raw, @"[^a-zA-Z0-9]+", "_");
     }
 }

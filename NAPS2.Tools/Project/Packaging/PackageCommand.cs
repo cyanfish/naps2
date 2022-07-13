@@ -106,6 +106,7 @@ public static class PackageCommand
             foreach (var resourceDll in langFolder.EnumerateFiles("*.resources.dll"))
             {
                 pkgInfo.AddFile(resourceDll, Path.Combine("lib", langFolder.Name));
+                pkgInfo.Languages.Add(langFolder.Name);
             }
         }
     }
