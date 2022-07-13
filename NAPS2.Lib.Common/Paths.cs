@@ -21,7 +21,7 @@ public static class Paths
 #else
         AppDataPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "NAPS2");
 #endif
-        var dataPathFromEnv = Environment.ExpandEnvironmentVariables("%NAPS2_TEST_DATA%");
+        var dataPathFromEnv = Environment.GetEnvironmentVariable("NAPS2_TEST_DATA");
         if (!string.IsNullOrEmpty(dataPathFromEnv))
         {
             AppDataPath = dataPathFromEnv;
