@@ -9,11 +9,11 @@ public class InstallCommand
 
         if (opts.What == "exe")
         {
-            ExeInstaller.Install(platform, version, opts.Verbose);
+            ExeInstaller.Install(platform, version, opts.Run, opts.Verbose);
         }
         if (opts.What == "msi")
         {
-            MsiInstaller.Install(platform, version, opts.Verbose);
+            MsiInstaller.Install(platform, version, opts.Run, opts.Verbose);
         }
         return 0;
     }

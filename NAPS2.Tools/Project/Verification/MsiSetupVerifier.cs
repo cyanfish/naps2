@@ -4,9 +4,7 @@ public static class MsiSetupVerifier
 {
     public static void Verify(Platform platform, string version, bool verbose)
     {
-        if (!ProjectHelper.RequireElevation()) return;
-
-        MsiInstaller.Install(platform, version, verbose);
+        MsiInstaller.Install(platform, version, false, verbose);
         Verifier.RunVerificationTests(ProjectHelper.GetInstallationFolder(platform), verbose);
 
         var msiPath = ProjectHelper.GetPackagePath("msi", platform, version);

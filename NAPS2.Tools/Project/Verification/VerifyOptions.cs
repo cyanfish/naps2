@@ -16,7 +16,4 @@ public class VerifyOptions
 
     [Option('v', "verbose", Required = false, HelpText = "Show full output")]
     public bool Verbose { get; set; }
-
-    [Option("noelevation", Required = false)]
-    public bool NoElevation { get; set; }
 }

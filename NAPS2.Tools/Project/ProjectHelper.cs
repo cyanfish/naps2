@@ -1,6 +1,7 @@
 using System.Reflection;
 using System.Security.Principal;
 using System.Text.RegularExpressions;
+using System.Threading;
 
 namespace NAPS2.Tools.Project;
 
@@ -46,49 +47,32 @@ public static class ProjectHelper
         if (Directory.Exists(folder))
         {
             Console.WriteLine($"Deleting old installation: {folder}");
-            Directory.Delete(folder, true);
+            try
+            {
+                Directory.Delete(folder, true);
+            }
+            catch (UnauthorizedAccessException e)
+            {
+                // TODO: Once we add more complex workflows, we should verify elevation before running the workflow
+                throw new Exception("This command requires administrator permissions to run.", e);
+            }
         }
     }
 
-    public static bool RequireElevation()
+    public static void CloseMostRecentNaps2()
     {
-        if (IsElevated)
+        for (int i = 0; i < 20; i++)
         {
-            return true;
-        }
-        if (Environment.GetCommandLineArgs().Contains("--noelevation"))
-        {
-            throw new Exception("Could not get elevated permissions");
-        }
-        var n2 = Assembly.GetEntryAssembly()!.Location;
-        var oldArgs = string.Join(" ", Environment.GetCommandLineArgs().Skip(1));
-        var args = $"\"{n2}\" {oldArgs} --noelevation";
-        var process = Process.Start(new ProcessStartInfo
-        {
-            Verb = "runas",
-            FileName = "dotnet",
-            Arguments = args,
-            UseShellExecute = true
-        }) ?? throw new Exception("Could not restart for elevated permissions");
-        process.WaitForExit();
-        return false;
-    }
-
-    private static bool IsElevated
-    {
-        get
-        {
-            if (!OperatingSystem.IsWindows())
+            var proc = Process.GetProcessesByName("NAPS2")
+                .Where(x => x.StartTime > DateTime.Now - TimeSpan.FromSeconds(2))
+                .OrderBy(x => x.StartTime)
+                .FirstOrDefault();
+            if (proc != null)
             {
-                throw new Exception("This command can only be run on Windows.");
+                proc.Kill();
+                break;
             }
-            var identity = WindowsIdentity.GetCurrent();
-            if (identity == null)
-            {
-                return false;
-            }
-            var principal = new WindowsPrincipal(identity);
-            return principal.IsInRole(WindowsBuiltInRole.Administrator);
+            Thread.Sleep(100);
         }
     }
 }

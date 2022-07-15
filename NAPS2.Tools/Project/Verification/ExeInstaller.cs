@@ -2,9 +2,8 @@ namespace NAPS2.Tools.Project.Verification;
 
 public static class ExeInstaller
 {
-    public static void Install(Platform platform, string version, bool verbose)
+    public static void Install(Platform platform, string version, bool run, bool verbose)
     {
-        if (!ProjectHelper.RequireElevation()) return;
         ProjectHelper.DeleteInstallationFolder(platform);
 
         var exePath = ProjectHelper.GetPackagePath("exe", platform, version);
@@ -20,6 +19,11 @@ public static class ExeInstaller
             throw new Exception($"Could not start installer: {exePath}");
         }
         process.WaitForExit();
+
+        if (!run)
+        {
+            ProjectHelper.CloseMostRecentNaps2();
+        }
 
         Console.WriteLine("Installed.");
     }

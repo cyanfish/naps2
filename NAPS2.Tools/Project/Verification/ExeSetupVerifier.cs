@@ -4,9 +4,7 @@ public static class ExeSetupVerifier
 {
     public static void Verify(Platform platform, string version, bool verbose)
     {
-        if (!ProjectHelper.RequireElevation()) return;
-        
-        ExeInstaller.Install(platform, version, verbose);
+        ExeInstaller.Install(platform, version, false, verbose);
         Verifier.RunVerificationTests(ProjectHelper.GetInstallationFolder(platform), verbose);
 
         var exePath = ProjectHelper.GetPackagePath("exe", platform, version);

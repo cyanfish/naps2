@@ -1,8 +1,10 @@
+using System.Threading;
+
 namespace NAPS2.Tools;
 
 public static class Cli
 {
-    public static void Run(string command, string args, bool verbose, Dictionary<string, string>? env = null)
+    public static void Run(string command, string args, bool verbose, Dictionary<string, string>? env = null, CancellationToken cancel = default)
     {
         var startInfo = new ProcessStartInfo
         {
@@ -26,6 +28,7 @@ public static class Cli
         {
             throw new Exception($"Could not start {command}");
         }
+        cancel.Register(proc.Kill);
         // TODO: Maybe we forward Console.CancelKeyPress
         while (!proc.WaitForExit(100))
         {

@@ -2,9 +2,8 @@ namespace NAPS2.Tools.Project.Verification;
 
 public static class MsiInstaller
 {
-    public static void Install(Platform platform, string version, bool verbose)
+    public static void Install(Platform platform, string version, bool run, bool verbose)
     {
-        if (!ProjectHelper.RequireElevation()) return;
         ProjectHelper.DeleteInstallationFolder(platform);
 
         var msiPath = ProjectHelper.GetPackagePath("msi", platform, version);
@@ -21,8 +20,10 @@ public static class MsiInstaller
         }
         process.WaitForExit();
 
-        // For consistency with exe (which auto starts the application), start it here too
-        Process.Start(Path.Combine(ProjectHelper.GetInstallationFolder(platform), "NAPS2.exe"));
+        if (run)
+        {
+            Process.Start(Path.Combine(ProjectHelper.GetInstallationFolder(platform), "NAPS2.exe"));
+        }
 
         Console.WriteLine("Installed.");
     }

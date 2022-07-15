@@ -1,8 +1,10 @@
+using System.Threading;
+
 namespace NAPS2.Tools.Project.Verification;
 
 public class AppDriverRunner : IDisposable
 {
-    private readonly Process _process;
+    private readonly CancellationTokenSource _cts = new();
 
     public static AppDriverRunner Start(bool verbose)
     {
@@ -12,21 +14,25 @@ public class AppDriverRunner : IDisposable
     private AppDriverRunner(bool verbose)
     {
         var path = @"C:\Program Files (x86)\Windows Application Driver\WinAppDriver.exe";
-        // TODO: Wait for successful starting and handle errors (e.g. if the dev doesn't have developer mode on)
-        _process = Process.Start(new ProcessStartInfo
+        new Thread(() =>
         {
-            FileName = path,
-            UseShellExecute = false,
-            // TODO: Fix (use Cli.Run from a thread? Or similar)
-            // RedirectStandardOutput = !verbose
-        }) ?? throw new Exception($"Could not start WinAppDriver: {path}");
+            try
+            {
+                Cli.Run(path, "", verbose, cancel: _cts.Token);
+                // TODO: Wait for successful starting and handle errors (e.g. if the dev doesn't have developer mode on)
+            }
+            catch (Exception)
+            {
+                // Errors expected after we kill it
+            }
+        }).Start();
     }
 
     public void Dispose()
     {
         try
         {
-            _process.Kill();
+            _cts.Cancel();
         }
         catch (Exception)
         {
