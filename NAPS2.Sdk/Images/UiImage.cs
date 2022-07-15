@@ -68,19 +68,36 @@ public class UiImage : IDisposable
         }
     }
 
-    public void AddTransform(Transform transform)
+    public void AddTransform(Transform transform, IMemoryImage? prerenderedThumbnail = null)
     {
-        if (transform.IsNull)
+        AddTransforms(new[] { transform }, prerenderedThumbnail);
+    }
+
+    public void AddTransforms(IEnumerable<Transform> transforms, IMemoryImage? prerenderedThumbnail = null)
+    {
+        var transformList = transforms.ToList();
+        if (transformList.All(x => x.IsNull))
         {
             return;
         }
         lock (this)
         {
-            var newImage = _processedImage.WithTransform(transform);
-            _processedImage.Dispose();
-            _processedImage = newImage;
+            foreach (var transform in transformList)
+            {
+                _processedImage = _processedImage.WithTransform(transform, true);
+            }
+            if (prerenderedThumbnail != null)
+            {
+                _thumbnail?.Dispose();
+                _thumbnail = prerenderedThumbnail;
+                _thumbnailTransformState = _processedImage.TransformState;
+            }
         }
         ThumbnailInvalidated?.Invoke(this, EventArgs.Empty);
+        if (prerenderedThumbnail != null)
+        {
+            ThumbnailChanged?.Invoke(this, EventArgs.Empty);
+        }
     }
 
     public void ResetTransforms()

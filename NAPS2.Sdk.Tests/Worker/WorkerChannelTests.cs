@@ -100,8 +100,11 @@ public class WorkerChannelTests : ContextualTexts
 
         using var channel = Start(remoteScanController);
         var receivedImages = new List<ProcessedImage>();
-        await channel.Client.Scan(ScanningContext, new ScanOptions(),
-            CancellationToken.None, new ScanEvents(() => { }, _ => { }),
+        await channel.Client.Scan(
+            ScanningContext,
+            new ScanOptions(),
+            CancellationToken.None,
+            ScanEvents.Stub,
             (img, path) => { receivedImages.Add(img); });
 
         Assert.Equal(2, receivedImages.Count);
@@ -125,7 +128,7 @@ public class WorkerChannelTests : ContextualTexts
             ScanningContext,
             new ScanOptions(),
             CancellationToken.None,
-            new ScanEvents(() => { }, _ => { }),
+            ScanEvents.Stub,
             (img, path) => { }));
         Assert.Contains(nameof(MockRemoteScanController), ex.StackTrace);
         Assert.Contains("Test error", ex.Message);

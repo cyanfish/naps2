@@ -4,6 +4,8 @@ namespace NAPS2.Scan;
 
 internal class ScanEvents : IScanEvents
 {
+    public static readonly IScanEvents Stub = new ScanEvents(() => { }, _ => { });
+
     private readonly Action _pageStartCallback;
     private readonly Action<double> _pageProgressCallback;
 

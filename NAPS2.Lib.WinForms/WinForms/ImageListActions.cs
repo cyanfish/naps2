@@ -4,10 +4,17 @@ public class ImageListActions
 {
     private readonly ImageContext _imageContext;
     private readonly UiImageList _imageList;
+    private readonly IOperationFactory _operationFactory;
+    private readonly OperationProgress _operationProgress;
+    private readonly Naps2Config _config;
 
-    public ImageListActions(ImageContext imageContext, UiImageList imageList)
+    public ImageListActions(ImageContext imageContext, UiImageList imageList, IOperationFactory operationFactory,
+        OperationProgress operationProgress, Naps2Config config)
     {
         _imageList = imageList;
+        _operationFactory = operationFactory;
+        _operationProgress = operationProgress;
+        _config = config;
         _imageContext = imageContext;
     }
 
@@ -41,20 +48,20 @@ public class ImageListActions
 
     public async Task Flip() => await _imageList.MutateAsync(new ImageListMutation.RotateFlip(_imageContext, 180));
 
+    // TODO: Does it make sense to move this method somewhere else?
     public void Deskew()
     {
-        // TODO
-//            if (!SelectedIndices.Any())
-//            {
-//                return;
-//            }
-//
-//            var op = operationFactory.Create<DeskewOperation>();
-//            if (op.Start(SelectedImages.ToList(), new DeskewParams { ThumbnailSize = Config.Get(c => c.ThumbnailSize) }))
-//            {
-//                operationProgress.ShowProgress(op);
-//                changeTracker.Made();
-//            }
+        var images = _imageList.Images.ToList();
+        if (!images.Any())
+        {
+            return;
+        }
+
+        var op = _operationFactory.Create<DeskewOperation>();
+        if (op.Start(images, new DeskewParams { ThumbnailSize = _config.ThumbnailSize() }))
+        {
+            _operationProgress.ShowProgress(op);
+        }
     }
 
     public async Task RotateFlip(double angle) =>

@@ -42,13 +42,13 @@ public partial class ImageForm : FormBase
 
     protected virtual Bitmap RenderPreview()
     {
-        var result = (Bitmap)workingImage.Clone();
+        var result = (Bitmap) workingImage.Clone();
         foreach (var transform in Transforms)
         {
             if (!transform.IsNull)
             {
                 // TODO: Maybe the working images etc. should be storage
-                result = ((GdiImage)_imageContext.PerformTransform(new GdiImage(result), transform)).Bitmap;
+                result = ((GdiImage) _imageContext.PerformTransform(new GdiImage(result), transform)).Bitmap;
             }
         }
         return result;
@@ -87,13 +87,13 @@ public partial class ImageForm : FormBase
         // TODO: Limit to maxDimen * 2
         using var imageToRender = Image.GetClonedImage();
         // TODO: More generic or avoid the cast somehow? In general how do we integrate with eto?
-        workingImage = ((GdiImageContext)_imageContext).RenderToBitmap(imageToRender);
+        workingImage = ((GdiImageContext) _imageContext).RenderToBitmap(imageToRender);
         if (_closed)
         {
             workingImage?.Dispose();
             return;
         }
-        workingImage2 = (Bitmap)workingImage.Clone();
+        workingImage2 = (Bitmap) workingImage.Clone();
 
         InitTransform();
         lock (this)
@@ -145,19 +145,16 @@ public partial class ImageForm : FormBase
         {
             foreach (var img in ImagesToTransform)
             {
-                lock (img)
+                IMemoryImage? updatedThumb = null;
+                if (img == Image)
                 {
-                    foreach (var t in Transforms)
-                    {
-                        img.AddTransform(t);
-                    }
                     // Optimize thumbnail rendering for the first (or only) image since we already have it loaded into memory
-                    if (img == Image)
-                    {
-                        var transformed = _imageContext.PerformAllTransforms(new GdiImage(workingImage).Clone(), Transforms);
-                        img.SetThumbnail(_imageContext.PerformTransform(transformed, new ThumbnailTransform(Config.ThumbnailSize())));
-                    }
+                    var transformed =
+                        _imageContext.PerformAllTransforms(new GdiImage(workingImage).Clone(), Transforms);
+                    updatedThumb =
+                        _imageContext.PerformTransform(transformed, new ThumbnailTransform(Config.ThumbnailSize()));
                 }
+                img.AddTransforms(Transforms, updatedThumb);
             }
         }
         TransformSaved();

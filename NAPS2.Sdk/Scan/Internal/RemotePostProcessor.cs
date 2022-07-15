@@ -61,7 +61,7 @@ internal class RemotePostProcessor : IRemotePostProcessor
         }
 
         double scaleFactor = 1;
-        if (!options.UseNativeUI)
+        if (!options.UseNativeUI && options.ScaleRatio > 0)
         {
             scaleFactor = 1.0 / options.ScaleRatio;
         }

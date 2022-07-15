@@ -36,14 +36,7 @@ public class DeskewOperation : OperationBase
                     var thumbnail = deskewParams.ThumbnailSize.HasValue
                         ? _imageContext.PerformTransform(image, new ThumbnailTransform(deskewParams.ThumbnailSize.Value))
                         : null;
-                    lock (img)
-                    {
-                        img.AddTransform(transform);
-                        if (thumbnail != null)
-                        {
-                            img.SetThumbnail(thumbnail);
-                        }
-                    }
+                    img.AddTransform(transform, thumbnail);
                     lock (this)
                     {
                         Status.CurrentProgress += 1;

@@ -18,16 +18,10 @@ public abstract class ImageListMutation : ListMutation<UiImage>
         {
             foreach (UiImage img in selection)
             {
-                lock (img)
-                {
-                    var transform = new RotationTransform(_angle);
-                    img.AddTransform(transform);
-                    var thumb = img.GetThumbnailClone();
-                    if (thumb != null)
-                    {
-                        img.SetThumbnail(_imageContext.PerformTransform(thumb, transform));
-                    }
-                }
+                var transform = new RotationTransform(_angle);
+                var thumb = img.GetThumbnailClone();
+                var updatedThumb = thumb != null ? _imageContext.PerformTransform(thumb, transform) : null;
+                img.AddTransform(transform, updatedThumb);
             }
         }
     }

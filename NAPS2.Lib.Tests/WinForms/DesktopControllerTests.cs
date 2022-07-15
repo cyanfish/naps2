@@ -64,7 +64,8 @@ public class DesktopControllerTests : ContextualTexts
             _notifcationManager.Object,
             _imageTransfer,
             _imageClipboard,
-            new ImageListActions(ImageContext, _imageList),
+            new ImageListActions(ImageContext, _imageList, _operationFactory.Object, _operationProgress.Object,
+                _config),
             _exportHelper.Object,
             _desktopImagesController,
             _desktopScanController.Object,
@@ -155,7 +156,7 @@ public class DesktopControllerTests : ContextualTexts
     {
         await _desktopController.Initialize();
         await Task.Delay(50);
-        
+
         Assert.False(_config.Get(c => c.HasCheckedForUpdates));
         Assert.Null(_config.Get(c => c.LastUpdateCheckDate));
         _updateChecker.VerifyNoOtherCalls();
@@ -165,7 +166,7 @@ public class DesktopControllerTests : ContextualTexts
     public async Task Initialize_WithNoUpdate_DoesntPromptToUpdate()
     {
         _config.User.Set(c => c.CheckForUpdates, true);
-        
+
         await _desktopController.Initialize();
         await Task.Delay(50);
 
@@ -183,7 +184,7 @@ public class DesktopControllerTests : ContextualTexts
         var mockUpdateInfo =
             new UpdateInfo("10.0.0", "https://www.example.com", Array.Empty<byte>(), Array.Empty<byte>());
         _updateChecker.Setup(x => x.CheckForUpdates()).ReturnsAsync(mockUpdateInfo);
-        
+
         await _desktopController.Initialize();
         await Task.Delay(50);
 
@@ -217,7 +218,7 @@ public class DesktopControllerTests : ContextualTexts
         _config.User.Set(c => c.CheckForUpdates, true);
         _config.User.Set(c => c.HasCheckedForUpdates, true);
         _config.User.Set(c => c.LastUpdateCheckDate, updateCheckDate);
-        
+
         await _desktopController.Initialize();
         await Task.Delay(50);
 
@@ -237,7 +238,7 @@ public class DesktopControllerTests : ContextualTexts
         var mockUpdateInfo =
             new UpdateInfo("10.0.0", "https://www.example.com", Array.Empty<byte>(), Array.Empty<byte>());
         _updateChecker.Setup(x => x.CheckForUpdates()).ReturnsAsync(mockUpdateInfo);
-        
+
         await _desktopController.Initialize();
         await Task.Delay(50);
 
