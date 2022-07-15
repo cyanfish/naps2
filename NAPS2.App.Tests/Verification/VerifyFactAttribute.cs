@@ -7,7 +7,7 @@ public sealed class VerifyFactAttribute : FactAttribute
 {
     public VerifyFactAttribute()
     {
-        if (string.IsNullOrEmpty(Environment.GetEnvironmentVariable("NAPS2_TEST_ROOT")))
+        if (string.IsNullOrEmpty(Environment.GetEnvironmentVariable("NAPS2_TEST_VERIFY")))
         {
             Skip = "This test only runs during verification ('n2 verify').";
         }

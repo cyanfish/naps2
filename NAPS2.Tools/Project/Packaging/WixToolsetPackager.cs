@@ -1,5 +1,6 @@
 using System.Text;
 using System.Text.RegularExpressions;
+using NAPS2.Tools.Project.Targets;
 
 namespace NAPS2.Tools.Project.Packaging;
 

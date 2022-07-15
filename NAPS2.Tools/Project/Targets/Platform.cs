@@ -1,4 +1,4 @@
-namespace NAPS2.Tools.Project;
+namespace NAPS2.Tools.Project.Targets;
 
 public enum Platform
 {

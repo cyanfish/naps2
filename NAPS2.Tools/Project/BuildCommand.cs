@@ -1,32 +1,31 @@
+using NAPS2.Tools.Project.Targets;
+
 namespace NAPS2.Tools.Project;
 
 public static class BuildCommand
 {
     public static int Run(BuildOptions opts)
     {
-        foreach (var config in GetConfigs(opts.What))
+        var constraints = new TargetConstraints
         {
-            Console.WriteLine($"---------- BUILDING CONFIGURATION: {config} ----------");
+            AllowDebug = true
+        };
+        foreach (var target in TargetsHelper.Enumerate(opts.BuildType, null, constraints))
+        {
+            var config = GetConfig(target.BuildType);
+            Console.WriteLine($"Building: {config}");
             Cli.Run("dotnet", $"build -c {config}", opts.Verbose);
+            Console.WriteLine(opts.Verbose ? $"Built: {config}" : "Built.");
         }
         return 0;
     }
 
-    private static IEnumerable<string> GetConfigs(string? what)
+    private static string GetConfig(BuildType buildType) => buildType switch
     {
-        switch (what?.ToLower())
-        {
-            case "debug":
-                return new[] { "Debug" };
-            case "exe":
-                return new[] { "InstallerEXE" };
-            case "msi":
-                return new[] { "InstallerMSI" };
-            case "zip":
-                return new[] { "Standalone" };
-            case "all":
-                return new[] { "Debug", "InstallerEXE", "InstallerMSI", "Standalone" };
-        }
-        return new string[] { };
-    }
+        BuildType.Debug => "Debug",
+        BuildType.Exe => "InstallerEXE",
+        BuildType.Msi => "InstallerMSI",
+        BuildType.Zip => "Standalone",
+        _ => throw new ArgumentException()
+    };
 }

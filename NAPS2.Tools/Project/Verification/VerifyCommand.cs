@@ -1,24 +1,33 @@
+using NAPS2.Tools.Project.Targets;
+
 namespace NAPS2.Tools.Project.Verification;
 
-public class VerifyCommand
+public static class VerifyCommand
 {
     public static int Run(VerifyOptions opts)
     {
-        var platform = PlatformHelper.FromOption(opts.Platform, Platform.Win64);
         var version = ProjectHelper.GetDefaultProjectVersion();
-
+        
         using var appDriverRunner = AppDriverRunner.Start(opts.Verbose);
-        if (opts.What == "exe" || opts.What == "all")
+
+        var constraints = new TargetConstraints
         {
-            ExeSetupVerifier.Verify(platform, version, opts.Verbose);
-        }
-        if (opts.What == "msi" || opts.What == "all")
+            AllowMultiplePlatforms = true
+        };
+        foreach (var target in TargetsHelper.Enumerate(opts.BuildType, opts.Platform, constraints))
         {
-            MsiSetupVerifier.Verify(platform, version, opts.Verbose);
-        }
-        if (opts.What == "zip" || opts.What == "all")
-        {
-            ZipArchiveVerifier.Verify(platform, version, opts.NoCleanup, opts.Verbose);
+            switch (target.BuildType)
+            {
+                case BuildType.Exe:
+                    ExeSetupVerifier.Verify(target.Platform, version, opts.Verbose);
+                    break;
+                case BuildType.Msi:
+                    MsiSetupVerifier.Verify(target.Platform, version, opts.Verbose);
+                    break;
+                case BuildType.Zip:
+                    ZipArchiveVerifier.Verify(target.Platform, version, opts.NoCleanup, opts.Verbose);
+                    break;
+            }
         }
         return 0;
     }

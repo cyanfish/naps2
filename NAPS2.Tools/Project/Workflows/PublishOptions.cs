@@ -1,14 +1,14 @@
 using CommandLine;
 
-namespace NAPS2.Tools.Project.Verification;
+namespace NAPS2.Tools.Project.Workflows;
 
-[Verb("verify", HelpText = "Verify the packaged app, 'verify {all|exe|msi|zip}'")]
-public class VerifyOptions
+[Verb("publish", HelpText = "Build, test, package, and verify standard targets")]
+public class PublishOptions
 {
-    [Value(0, MetaName = "build type", Required = true, HelpText = "all|exe|msi|zip")]
+    [Value(0, MetaName = "build type", Required = false, HelpText = "all|exe|msi|zip")]
     public string? BuildType { get; set; }
     
-    [Option('p', "platform", Required = false, HelpText = "win32|win64|mac|macarm|linux")]
+    [Option('p', "platform", Required = false, HelpText = "all|win32|win64|mac|macarm|linux")]
     public string? Platform { get; set; }
 
     [Option("nocleanup", Required = false, HelpText = "Skip cleaning up temp files")]

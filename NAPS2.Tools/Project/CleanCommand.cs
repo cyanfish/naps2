@@ -4,6 +4,7 @@ public static class CleanCommand
 {
     public static int Run(CleanOptions opts)
     {
+        Console.WriteLine("Starting clean");
         foreach (var projectDir in new DirectoryInfo(Paths.SolutionRoot).EnumerateDirectories("NAPS2.*")
                      .Where(x => x.Name.ToLower() != "naps2.tools"))
         {
@@ -23,8 +24,12 @@ public static class CleanCommand
                     }
                 }
             }
-            Console.WriteLine($"Cleaned {projectDir.Name}");
+            if (opts.Verbose)
+            {
+                Console.WriteLine($"Cleaned {projectDir.Name}");
+            }
         }
+        Console.WriteLine("Cleaned.");
         return 0;
     }
 }

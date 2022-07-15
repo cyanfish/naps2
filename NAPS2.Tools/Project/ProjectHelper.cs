@@ -1,7 +1,6 @@
-using System.Reflection;
-using System.Security.Principal;
 using System.Text.RegularExpressions;
 using System.Threading;
+using NAPS2.Tools.Project.Targets;
 
 namespace NAPS2.Tools.Project;
 

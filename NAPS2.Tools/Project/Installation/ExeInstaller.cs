@@ -1,4 +1,6 @@
-namespace NAPS2.Tools.Project.Verification;
+using NAPS2.Tools.Project.Targets;
+
+namespace NAPS2.Tools.Project.Installation;
 
 public static class ExeInstaller
 {

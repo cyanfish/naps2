@@ -1,4 +1,5 @@
 using System.Text;
+using NAPS2.Tools.Project.Targets;
 
 namespace NAPS2.Tools.Project.Packaging;
 

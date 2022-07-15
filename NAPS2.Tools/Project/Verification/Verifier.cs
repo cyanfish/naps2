@@ -7,7 +7,8 @@ public static class Verifier
         Console.WriteLine($"Running verification tests in: {testRoot}");
         Cli.Run("dotnet", "test NAPS2.App.Tests -f net462", verbose, new()
         {
-            { "NAPS2_TEST_ROOT", testRoot }
+            { "NAPS2_TEST_ROOT", testRoot },
+            { "NAPS2_TEST_VERIFY", "1" }
         });
         if (verbose)
         {

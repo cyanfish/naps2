@@ -1,3 +1,6 @@
+using NAPS2.Tools.Project.Installation;
+using NAPS2.Tools.Project.Targets;
+
 namespace NAPS2.Tools.Project.Verification;
 
 public static class ExeSetupVerifier

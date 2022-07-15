@@ -1,4 +1,5 @@
 using System.Text.RegularExpressions;
+using NAPS2.Tools.Project.Targets;
 
 namespace NAPS2.Tools.Project.Packaging;
 
@@ -6,24 +7,25 @@ public static class PackageCommand
 {
     public static int Run(PackageOptions opts)
     {
-        var platform = PlatformHelper.FromOption(opts.Platform, Platform.Win64);
-
-        if (opts.What == "exe" || opts.What == "all")
+        // TODO: Allow customizing dotnet version
+        var constraints = new TargetConstraints
         {
-            // TODO: Allow customizing net version, platform, etc
-            // TODO: The fact that we only have one project config for the app but multiple for the SDK is problematic; things will overwrite each other unless we either pull them explicitly from the right project or have a separate config or normalize things somehow to avoid needing multiple configs
-            var pkgInfo = GetPackageInfo(platform, "InstallerEXE");
-            InnoSetupPackager.PackageExe(pkgInfo, opts.Verbose);
-        }
-        if (opts.What == "msi" || opts.What == "all")
+            AllowMultiplePlatforms = true
+        };
+        foreach (var target in TargetsHelper.Enumerate(opts.BuildType, opts.Platform, constraints))
         {
-            var pkgInfo = GetPackageInfo(platform, "InstallerMSI");
-            WixToolsetPackager.PackageMsi(pkgInfo, opts.Verbose);
-        }
-        if (opts.What == "zip" || opts.What == "all")
-        {
-            var pkgInfo = GetPackageInfo(platform, "Standalone");
-            ZipArchivePackager.PackageZip(pkgInfo, opts.Verbose);
+            switch (target.BuildType)
+            {
+                case BuildType.Exe:
+                    InnoSetupPackager.PackageExe(GetPackageInfo(target.Platform, "InstallerEXE"), opts.Verbose);
+                    break;
+                case BuildType.Msi:
+                    WixToolsetPackager.PackageMsi(GetPackageInfo(target.Platform, "InstallerMSI"), opts.Verbose);
+                    break;
+                case BuildType.Zip:
+                    ZipArchivePackager.PackageZip(GetPackageInfo(target.Platform, "Standalone"), opts.Verbose);
+                    break;
+            }
         }
         return 0;
     }

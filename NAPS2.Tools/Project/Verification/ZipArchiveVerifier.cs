@@ -1,4 +1,5 @@
 using System.IO.Compression;
+using NAPS2.Tools.Project.Targets;
 
 namespace NAPS2.Tools.Project.Verification;
 
