@@ -67,7 +67,6 @@ public class KeyboardShortcutManager
 
     public bool Assign(string? value, ToolStripMenuItem item, Action action)
     {
-        if (item.GetCurrentParent() == null) return false;
         var keys = Parse(value);
         if (keys != Keys.None)
         {
@@ -106,7 +105,6 @@ public class KeyboardShortcutManager
 
     public bool Assign(string? value, ToolStripMenuItem item)
     {
-        if (item.GetCurrentParent() == null) return false;
         return Assign(value, item, item.PerformClick);
     }
 
@@ -124,7 +122,6 @@ public class KeyboardShortcutManager
 
     public bool Assign(string? value, Button item)
     {
-        if (item.Parent == null) return false;
         return Assign(value, item.PerformClick);
     }
 
