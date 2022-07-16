@@ -50,7 +50,7 @@ public class DragScrollListView : ListView
         }
     }
 
-    private void tmrLVScroll_Tick(object sender, EventArgs e)
+    private void tmrLVScroll_Tick(object? sender, EventArgs e)
     {
         Win32.SendMessage(Handle, WM_VSCROLL, (IntPtr)_mintScrollDirection, IntPtr.Zero);
     }

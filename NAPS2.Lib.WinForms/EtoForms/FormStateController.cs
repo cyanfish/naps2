@@ -26,7 +26,7 @@ public class FormStateController : IFormStateController
 
     public string FormName => _window.GetType().Name;
 
-    private void OnLoadInternal(object sender, EventArgs eventArgs)
+    private void OnLoadInternal(object? sender, EventArgs eventArgs)
     {
         if (RestoreFormState || SaveFormState)
         {
@@ -68,7 +68,7 @@ public class FormStateController : IFormStateController
         }
     }
 
-    private void OnResize(object sender, EventArgs eventArgs)
+    private void OnResize(object? sender, EventArgs eventArgs)
     {
         if (_loaded && _formState != null && SaveFormState)
         {
@@ -80,7 +80,7 @@ public class FormStateController : IFormStateController
         }
     }
 
-    private void OnMove(object sender, EventArgs eventArgs)
+    private void OnMove(object? sender, EventArgs eventArgs)
     {
         if (_loaded && _formState != null && SaveFormState)
         {
@@ -91,7 +91,7 @@ public class FormStateController : IFormStateController
         }
     }
 
-    private void OnClosed(object sender, EventArgs eventArgs)
+    private void OnClosed(object? sender, EventArgs eventArgs)
     {
         if (SaveFormState && _formState != null)
         {

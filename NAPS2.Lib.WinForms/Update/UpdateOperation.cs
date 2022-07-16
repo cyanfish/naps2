@@ -70,14 +70,14 @@ public class UpdateOperation : OperationBase
         _client?.CancelAsync();
     }
 
-    public override void Wait(CancellationToken cancelToken)
+    public override void Wait(CancellationToken cancelToken = default)
     {
         while (!_waitHandle.WaitOne(1000) && !cancelToken.IsCancellationRequested)
         {
         }
     }
 
-    private void DownloadCompleted(object sender, AsyncCompletedEventArgs e)
+    private void DownloadCompleted(object? sender, AsyncCompletedEventArgs e)
     {
         try
         {
@@ -92,13 +92,13 @@ public class UpdateOperation : OperationBase
             }
             if (!VerifyHash())
             {
-                Log.Error($"Update error for {_update.Name}: hash does not match");
+                Log.Error($"Update error for {_update!.Name}: hash does not match");
                 _errorOutput.DisplayError(MiscResources.UpdateError);
                 return;
             }
             if (!VerifySignature())
             {
-                Log.Error($"Update error for {_update.Name}: signature does not validate");
+                Log.Error($"Update error for {_update!.Name}: signature does not validate");
                 _errorOutput.DisplayError(MiscResources.UpdateError);
                 return;
             }
@@ -138,11 +138,11 @@ public class UpdateOperation : OperationBase
         ZipFile.ExtractToDirectory(_tempPath, _tempFolder);
         string assemblyFolder = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) ?? "";
         string portableLauncherPath = Path.Combine(assemblyFolder, "..", "..", "NAPS2.Portable.exe");
-        AtomicReplaceFile(Path.Combine(_tempFolder, "NAPS2.Portable.exe"), portableLauncherPath);
+        AtomicReplaceFile(Path.Combine(_tempFolder!, "NAPS2.Portable.exe"), portableLauncherPath);
         Process.Start(new ProcessStartInfo
         {
             FileName = portableLauncherPath,
-            Arguments = $"/Update {Process.GetCurrentProcess().Id} \"{Path.Combine(_tempFolder, "App")}\""
+            Arguments = $"/Update {Process.GetCurrentProcess().Id} \"{Path.Combine(_tempFolder!, "App")}\""
         });
     }
 
@@ -170,16 +170,16 @@ public class UpdateOperation : OperationBase
     private bool VerifyHash()
     {
         using var sha = new SHA1CryptoServiceProvider();
-        using FileStream stream = File.OpenRead(_tempPath);
+        using FileStream stream = File.OpenRead(_tempPath!);
         byte[] checksum = sha.ComputeHash(stream);
-        return checksum.SequenceEqual(_update.Sha1);
+        return checksum.SequenceEqual(_update!.Sha1);
     }
 
     private bool VerifySignature()
     {
         var cert = new X509Certificate2(ClientCreds.naps2_public);
         var csp = (RSACryptoServiceProvider) cert.PublicKey.Key;
-        return csp.VerifyHash(_update.Sha1, CryptoConfig.MapNameToOID("SHA1"), _update.Signature);
+        return csp.VerifyHash(_update!.Sha1, CryptoConfig.MapNameToOID("SHA1"), _update.Signature);
     }
 
     private void DownloadProgress(object sender, DownloadProgressChangedEventArgs e)

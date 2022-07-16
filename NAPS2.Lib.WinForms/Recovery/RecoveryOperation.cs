@@ -35,7 +35,7 @@ internal class RecoveryOperation : OperationBase
             switch (PromptToRecover(recoverableFolder))
             {
                 case DialogResult.Yes: // Recover
-                    RunAsync(async () =>
+                    RunAsync(() =>
                     {
                         try
                         {

@@ -4,7 +4,7 @@ using IDataObject = Eto.Forms.IDataObject;
 
 namespace NAPS2.EtoForms;
 
-public abstract class ListViewBehavior<T>
+public abstract class ListViewBehavior<T> where T : notnull
 {
     public bool MultiSelect { get; protected set; }
         

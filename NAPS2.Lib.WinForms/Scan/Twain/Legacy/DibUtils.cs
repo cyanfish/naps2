@@ -40,7 +40,7 @@ internal class DibUtils
     //THIS METHOD GETS THE POINTER TO THE BITMAP HEADER INFO
     private static IntPtr GetPixelInfo(IntPtr bmpPtr)
     {
-        var bmi = (BitmapInfoHeader)Marshal.PtrToStructure(bmpPtr, typeof(BitmapInfoHeader));
+        var bmi = (BitmapInfoHeader)Marshal.PtrToStructure(bmpPtr, typeof(BitmapInfoHeader))!;
 
         if (bmi.biSizeImage == 0)
             bmi.biSizeImage = (uint)(((((bmi.biWidth * bmi.biBitCount) + 31) & ~31) >> 3) * bmi.biHeight);
@@ -55,7 +55,7 @@ internal class DibUtils
     //THIS METHOD GETS THE POINTER TO THE BITMAP HEADER INFO
     private static BitmapInfoHeader GetDibInfo(IntPtr bmpPtr)
     {
-        var bmi = (BitmapInfoHeader)Marshal.PtrToStructure(bmpPtr, typeof(BitmapInfoHeader));
+        var bmi = (BitmapInfoHeader)Marshal.PtrToStructure(bmpPtr, typeof(BitmapInfoHeader))!;
         return bmi;
     }
 }

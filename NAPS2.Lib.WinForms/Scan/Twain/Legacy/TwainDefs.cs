@@ -188,11 +188,11 @@ internal class TwIdentity
     public short ProtocolMinor;
     public int SupportedGroups;
     [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 34)]
-    public string Manufacturer;
+    public string? Manufacturer;
     [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 34)]
-    public string ProductFamily;
+    public string? ProductFamily;
     [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 34)]
-    public string ProductName;
+    public string? ProductName;
 }
 
 [StructLayout(LayoutKind.Sequential, Pack = 2, CharSet = CharSet.Ansi)]

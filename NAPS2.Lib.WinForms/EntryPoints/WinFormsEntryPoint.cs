@@ -42,13 +42,13 @@ public static class WinFormsEntryPoint
         Application.Run(desktop);
     }
 
-    private static void UnhandledTaskException(object sender, UnobservedTaskExceptionEventArgs e)
+    private static void UnhandledTaskException(object? sender, UnobservedTaskExceptionEventArgs e)
     {
         Log.FatalException("An error occurred that caused the task to terminate.", e.Exception);
         e.SetObserved();
     }
 
-    private static void UnhandledException(object sender, ThreadExceptionEventArgs e)
+    private static void UnhandledException(object? sender, ThreadExceptionEventArgs e)
     {
         Log.FatalException("An error occurred that caused the application to close.", e.Exception);
     }

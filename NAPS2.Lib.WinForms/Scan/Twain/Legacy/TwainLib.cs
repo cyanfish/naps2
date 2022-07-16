@@ -140,7 +140,7 @@ internal class Twain
         return false;
     }
 
-    public string GetCurrentName() => _srcds.ProductName;
+    public string? GetCurrentName() => _srcds.ProductName;
 
     public bool Acquire()
     {
@@ -322,7 +322,7 @@ internal class Twain
     private static extern int GetDeviceCaps(IntPtr hDC, int nIndex);
 
     [DllImport("gdi32.dll", CharSet = CharSet.Auto)]
-    private static extern IntPtr CreateDC(string szdriver, string szdevice, string szoutput, IntPtr devmode);
+    private static extern IntPtr CreateDC(string szdriver, string? szdevice, string? szoutput, IntPtr devmode);
 
     [DllImport("gdi32.dll", ExactSpelling = true)]
     private static extern bool DeleteDC(IntPtr hdc);

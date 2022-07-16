@@ -89,7 +89,7 @@ public class AboutForm : EtoDialogBase
             {
                 if (task.IsFaulted)
                 {
-                    Log.ErrorException("Error checking for updates", task.Exception);
+                    Log.ErrorException("Error checking for updates", task.Exception!);
                 }
                 else
                 {
@@ -136,7 +136,7 @@ public class AboutForm : EtoDialogBase
         }
     }
 
-    private void CheckForUpdatesChanged(object sender, EventArgs e)
+    private void CheckForUpdatesChanged(object? sender, EventArgs e)
     {
         Config.User.Set(c => c.CheckForUpdates, _checkForUpdates.Checked);
         UpdateControls();

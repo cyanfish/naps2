@@ -33,14 +33,7 @@ public class BatchScanPerformer : IBatchScanPerformer
         Action<ProcessedImage> imageCallback, Action<string> progressCallback, CancellationToken cancelToken)
     {
         var state = new BatchState(_scanPerformer, _pdfExporter, _operationFactory, _formFactory, _config,
-            _profileManager)
-        {
-            Settings = settings,
-            ProgressCallback = progressCallback,
-            CancelToken = cancelToken,
-            BatchForm = batchForm,
-            LoadImageCallback = imageCallback
-        };
+            _profileManager, settings, progressCallback, cancelToken, batchForm, imageCallback);
         await state.Do();
     }
 
@@ -53,12 +46,20 @@ public class BatchScanPerformer : IBatchScanPerformer
         private readonly Naps2Config _config;
         private readonly IProfileManager _profileManager;
 
+        private readonly BatchSettings _settings;
+        private readonly Action<string> _progressCallback;
+        private readonly CancellationToken _cancelToken;
+        private readonly FormBase _batchForm;
+        private readonly Action<ProcessedImage> _loadImageCallback;
+
         private ScanProfile _profile;
         private ScanParams _scanParams;
         private List<List<ProcessedImage>> _scans;
 
         public BatchState(IScanPerformer scanPerformer, PdfExporter pdfExporter, IOperationFactory operationFactory,
-            IFormFactory formFactory, Naps2Config config, IProfileManager profileManager)
+            IFormFactory formFactory, Naps2Config config, IProfileManager profileManager, BatchSettings settings,
+            Action<string> progressCallback, CancellationToken cancelToken, FormBase batchForm,
+            Action<ProcessedImage> loadImageCallback)
         {
             _scanPerformer = scanPerformer;
             _pdfExporter = pdfExporter;
@@ -66,39 +67,35 @@ public class BatchScanPerformer : IBatchScanPerformer
             _formFactory = formFactory;
             _config = config;
             _profileManager = profileManager;
-        }
-
-        public BatchSettings Settings { get; set; }
-
-        public Action<string> ProgressCallback { get; set; }
-
-        public CancellationToken CancelToken { get; set; }
-
-        public FormBase BatchForm { get; set; }
-
-        public Action<ProcessedImage> LoadImageCallback { get; set; }
-
-        public async Task Do()
-        {
-            _profile = _profileManager.Profiles.First(x => x.DisplayName == Settings.ProfileDisplayName);
+            _settings = settings;
+            _progressCallback = progressCallback;
+            _cancelToken = cancelToken;
+            _batchForm = batchForm;
+            _loadImageCallback = loadImageCallback;
+            
+            _profile = _profileManager.Profiles.First(x => x.DisplayName == _settings.ProfileDisplayName);
             _scanParams = new ScanParams
             {
-                DetectPatchT = Settings.OutputType == BatchOutputType.MultipleFiles &&
-                               Settings.SaveSeparator == SaveSeparator.PatchT,
+                DetectPatchT = _settings.OutputType == BatchOutputType.MultipleFiles &&
+                               _settings.SaveSeparator == SaveSeparator.PatchT,
                 NoUI = true,
                 NoAutoSave = _config.Get(c => c.DisableAutoSave),
-                OcrParams = Settings.OutputType == BatchOutputType.Load
+                OcrParams = _settings.OutputType == BatchOutputType.Load
                     ? _config.OcrAfterScanningParams()
                     : GetSavePathExtension().ToLower() == ".pdf"
                         ? _config.DefaultOcrParams()
                         : OcrParams.Empty,
-                OcrCancelToken = CancelToken,
+                OcrCancelToken = _cancelToken,
                 ThumbnailSize = _config.ThumbnailSize()
             };
+            _scans = new List<List<ProcessedImage>>();
+        }
 
+        public async Task Do()
+        {
             try
             {
-                CancelToken.ThrowIfCancellationRequested();
+                _cancelToken.ThrowIfCancellationRequested();
                 await Input();
             }
             catch (OperationCanceledException)
@@ -107,7 +104,7 @@ public class BatchScanPerformer : IBatchScanPerformer
             }
             catch (Exception)
             {
-                CancelToken.ThrowIfCancellationRequested();
+                _cancelToken.ThrowIfCancellationRequested();
                 // Save at least some data so it isn't lost
                 await Output();
                 throw;
@@ -115,7 +112,7 @@ public class BatchScanPerformer : IBatchScanPerformer
 
             try
             {
-                CancelToken.ThrowIfCancellationRequested();
+                _cancelToken.ThrowIfCancellationRequested();
                 await Output();
             }
             catch (OperationCanceledException)
@@ -127,22 +124,20 @@ public class BatchScanPerformer : IBatchScanPerformer
         {
             await Task.Run(async () =>
             {
-                _scans = new List<List<ProcessedImage>>();
-
-                if (Settings.ScanType == BatchScanType.Single)
+                if (_settings.ScanType == BatchScanType.Single)
                 {
                     await InputOneScan(-1);
                 }
-                else if (Settings.ScanType == BatchScanType.MultipleWithDelay)
+                else if (_settings.ScanType == BatchScanType.MultipleWithDelay)
                 {
-                    for (int i = 0; i < Settings.ScanCount; i++)
+                    for (int i = 0; i < _settings.ScanCount; i++)
                     {
-                        ProgressCallback(string.Format(MiscResources.BatchStatusWaitingForScan, i + 1));
+                        _progressCallback(string.Format(MiscResources.BatchStatusWaitingForScan, i + 1));
                         if (i != 0)
                         {
-                            ThreadSleepWithCancel(TimeSpan.FromSeconds(Settings.ScanIntervalSeconds),
-                                CancelToken);
-                            CancelToken.ThrowIfCancellationRequested();
+                            ThreadSleepWithCancel(TimeSpan.FromSeconds(_settings.ScanIntervalSeconds),
+                                _cancelToken);
+                            _cancelToken.ThrowIfCancellationRequested();
                         }
 
                         if (!await InputOneScan(i))
@@ -151,17 +146,17 @@ public class BatchScanPerformer : IBatchScanPerformer
                         }
                     }
                 }
-                else if (Settings.ScanType == BatchScanType.MultipleWithPrompt)
+                else if (_settings.ScanType == BatchScanType.MultipleWithPrompt)
                 {
                     int i = 0;
                     do
                     {
-                        ProgressCallback(string.Format(MiscResources.BatchStatusWaitingForScan, i + 1));
+                        _progressCallback(string.Format(MiscResources.BatchStatusWaitingForScan, i + 1));
                         if (!await InputOneScan(i++))
                         {
                             return;
                         }
-                        CancelToken.ThrowIfCancellationRequested();
+                        _cancelToken.ThrowIfCancellationRequested();
                     } while (PromptForNextScan());
                 }
             });
@@ -176,10 +171,10 @@ public class BatchScanPerformer : IBatchScanPerformer
         {
             var scan = new List<ProcessedImage>();
             int pageNumber = 1;
-            ProgressCallback(scanNumber == -1
+            _progressCallback(scanNumber == -1
                 ? string.Format(MiscResources.BatchStatusPage, pageNumber++)
                 : string.Format(MiscResources.BatchStatusScanPage, pageNumber++, scanNumber + 1));
-            CancelToken.ThrowIfCancellationRequested();
+            _cancelToken.ThrowIfCancellationRequested();
             try
             {
                 await DoScan(scanNumber, scan, pageNumber);
@@ -200,12 +195,13 @@ public class BatchScanPerformer : IBatchScanPerformer
 
         private async Task DoScan(int scanNumber, List<ProcessedImage> scan, int pageNumber)
         {
-            var source = await _scanPerformer.PerformScan(_profile, _scanParams, BatchForm.SafeHandle(), CancelToken);
+            var source =
+                await _scanPerformer.PerformScan(_profile, _scanParams, _batchForm.SafeHandle(), _cancelToken);
             await source.ForEach(image =>
             {
                 scan.Add(image);
-                CancelToken.ThrowIfCancellationRequested();
-                ProgressCallback(scanNumber == -1
+                _cancelToken.ThrowIfCancellationRequested();
+                _progressCallback(scanNumber == -1
                     ? string.Format(MiscResources.BatchStatusPage, pageNumber++)
                     : string.Format(MiscResources.BatchStatusScanPage, pageNumber++, scanNumber + 1));
             });
@@ -220,19 +216,19 @@ public class BatchScanPerformer : IBatchScanPerformer
 
         private async Task Output()
         {
-            ProgressCallback(MiscResources.BatchStatusSaving);
+            _progressCallback(MiscResources.BatchStatusSaving);
 
             var placeholders = Placeholders.All.WithDate(DateTime.Now);
             var allImages = _scans.SelectMany(x => x).ToList();
 
-            if (Settings.OutputType == BatchOutputType.Load)
+            if (_settings.OutputType == BatchOutputType.Load)
             {
                 foreach (var image in allImages)
                 {
-                    LoadImageCallback(image);
+                    _loadImageCallback(image);
                 }
             }
-            else if (Settings.OutputType == BatchOutputType.SingleFile)
+            else if (_settings.OutputType == BatchOutputType.SingleFile)
             {
                 await Save(placeholders, 0, allImages);
                 foreach (var img in allImages)
@@ -240,10 +236,10 @@ public class BatchScanPerformer : IBatchScanPerformer
                     img.Dispose();
                 }
             }
-            else if (Settings.OutputType == BatchOutputType.MultipleFiles)
+            else if (_settings.OutputType == BatchOutputType.MultipleFiles)
             {
                 int i = 0;
-                foreach (var imageList in SaveSeparatorHelper.SeparateScans(_scans, Settings.SaveSeparator))
+                foreach (var imageList in SaveSeparatorHelper.SeparateScans(_scans, _settings.SaveSeparator))
                 {
                     await Save(placeholders, i++, imageList);
                     foreach (var img in imageList)
@@ -260,7 +256,7 @@ public class BatchScanPerformer : IBatchScanPerformer
             {
                 return;
             }
-            var subPath = placeholders.Substitute(Settings.SavePath, true, i);
+            var subPath = placeholders.Substitute(_settings.SavePath!, true, i);
             if (GetSavePathExtension().ToLower() == ".pdf")
             {
                 if (File.Exists(subPath))
@@ -276,7 +272,7 @@ public class BatchScanPerformer : IBatchScanPerformer
                         _config.Get(c => c.PdfSettings.Encryption),
                         _config.Get(c => c.PdfSettings.Compat));
                     await _pdfExporter.Export(subPath, images, exportParams, _config.DefaultOcrParams(),
-                        (j, k) => { }, CancelToken);
+                        (j, k) => { }, _cancelToken);
                 }
                 finally
                 {
@@ -290,19 +286,17 @@ public class BatchScanPerformer : IBatchScanPerformer
             {
                 var op = _operationFactory.Create<SaveImagesOperation>();
                 op.Start(subPath, placeholders, images, _config.Get(c => c.ImageSettings), true);
-                await op.Success;
+                await op.Success!;
             }
         }
 
         private string GetSavePathExtension()
         {
-            if (string.IsNullOrEmpty(Settings.SavePath))
+            if (string.IsNullOrEmpty(_settings.SavePath))
             {
                 throw new ArgumentException();
             }
-            string extension = Path.GetExtension(Settings.SavePath);
-            Debug.Assert(extension != null);
-            return extension;
+            return Path.GetExtension(_settings.SavePath)!;
         }
     }
 }

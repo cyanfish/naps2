@@ -10,7 +10,7 @@ namespace NAPS2.Scan.Twain.Legacy;
 // TODO: Either make this usable without a form, or just get rid of it...
 internal static class TwainApi
 {
-    public static ScanDevice SelectDeviceUI()
+    public static ScanDevice? SelectDeviceUI()
     {
         var tw = new Twain();
         if (!tw.Init(Application.OpenForms[0].Handle))
@@ -21,7 +21,7 @@ internal static class TwainApi
         {
             return null;
         }
-        string name = tw.GetCurrentName();
+        string? name = tw.GetCurrentName();
         if (name == null)
         {
             return null;
@@ -43,7 +43,7 @@ internal static class TwainApi
         }
         do
         {
-            string name = tw.GetCurrentName();
+            string? name = tw.GetCurrentName();
             result.Add(new ScanDevice(name, name));
         } while (tw.GetNext());
         return result;
@@ -56,7 +56,7 @@ internal static class TwainApi
         {
             throw new DeviceNotFoundException();
         }
-        if (!tw.SelectByName(device.ID))
+        if (!tw.SelectByName(device.ID!))
         {
             throw new DeviceNotFoundException();
         }
@@ -147,7 +147,7 @@ internal static class TwainApi
             }
         }
 
-        private void FTwainGui_Activated(object sender, EventArgs e)
+        private void FTwainGui_Activated(object? sender, EventArgs e)
         {
             if (_activated)
                 return;

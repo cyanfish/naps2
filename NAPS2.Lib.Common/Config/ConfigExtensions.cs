@@ -1,4 +1,5 @@
 ﻿using NAPS2.Ocr;
+using NAPS2.Scan;
 
 namespace NAPS2.Config;
 
@@ -46,5 +47,11 @@ public static class ConfigExtensions
             return ThumbnailSizes.DEFAULT_SIZE;
         }
         return ThumbnailSizes.Validate(size);
+    }
+
+    public static ScanProfile DefaultProfileSettings(this Naps2Config config)
+    {
+        return config.Get(c => c.DefaultProfileSettings) ??
+               new ScanProfile { Version = ScanProfile.CURRENT_VERSION };
     }
 }

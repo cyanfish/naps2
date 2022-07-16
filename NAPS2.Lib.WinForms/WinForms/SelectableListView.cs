@@ -2,7 +2,7 @@ using System.Windows.Forms;
 
 namespace NAPS2.WinForms;
 
-public class SelectableListView<T> : ISelectable<T>
+public class SelectableListView<T> : ISelectable<T> where T : notnull
 {
     private readonly ListView _listView;
     private ListSelection<T> _selection = ListSelection.Empty<T>();
@@ -14,7 +14,7 @@ public class SelectableListView<T> : ISelectable<T>
         listView.SelectedIndexChanged += ListViewOnSelectedIndexChanged;
     }
 
-    public event EventHandler SelectionChanged;
+    public event EventHandler? SelectionChanged;
 
     private void ListViewOnSelectedIndexChanged(object sender, EventArgs e)
     {

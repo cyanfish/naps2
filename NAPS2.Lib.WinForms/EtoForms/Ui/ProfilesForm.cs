@@ -154,7 +154,7 @@ public class ProfilesForm : EtoDialogBase
 
     private bool NoUserProfiles => Config.Get(c => c.NoUserProfiles) && _profileManager.Profiles.Any(x => x.IsLocked);
 
-    private void ProfilesUpdated(object sender, EventArgs e)
+    private void ProfilesUpdated(object? sender, EventArgs e)
     {
         ReloadProfiles();
             
@@ -171,13 +171,13 @@ public class ProfilesForm : EtoDialogBase
         _listView.SetItems(_profileManager.Profiles);
     }
 
-    private void SelectionChanged(object sender, EventArgs e)
+    private void SelectionChanged(object? sender, EventArgs e)
     {
         _editCommand.Enabled = _listView.Selection.Count == 1;
         _deleteCommand.Enabled = _listView.Selection.Count > 0 && !SelectionLocked;
     }
 
-    private void ItemClicked(object sender, EventArgs e)
+    private void ItemClicked(object? sender, EventArgs e)
     {
         if (SelectedProfile != null)
         {
@@ -185,7 +185,7 @@ public class ProfilesForm : EtoDialogBase
         }
     }
 
-    private void Drop(object sender, DropEventArgs e)
+    private void Drop(object? sender, DropEventArgs e)
     {
         // Receive drop data
         if (_profileTransfer.IsIn(e.Data.ToEto()))
@@ -222,7 +222,7 @@ public class ProfilesForm : EtoDialogBase
             ThumbnailSize = Config.ThumbnailSize()
         };
 
-    private void ContextMenuOpening(object sender, EventArgs e)
+    private void ContextMenuOpening(object? sender, EventArgs e)
     {
         _setDefaultCommand.Enabled = SelectedProfile != null && !SelectedProfile.IsDefault;
         _editCommand.Enabled = SelectedProfile != null;
@@ -269,7 +269,7 @@ public class ProfilesForm : EtoDialogBase
     private void DoAdd()
     {
         var fedit = FormFactory.Create<FEditProfile>();
-        fedit.ScanProfile = Config.Get(c => c.DefaultProfileSettings);
+        fedit.ScanProfile = Config.DefaultProfileSettings();
         fedit.ShowDialog();
         if (fedit.Result)
         {

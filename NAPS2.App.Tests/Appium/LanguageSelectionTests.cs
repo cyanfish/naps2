@@ -65,7 +65,10 @@ public class LanguageSelectionTests : ContextualTexts
 
     private void ClickAt(WindowsElement element)
     {
+#pragma warning disable CS0618
+        // This is apparently obsolete, but the "correct" code is 10x as complicated so whatever
         _session.Mouse.Click(element.Coordinates);
+#pragma warning restore CS0618
     }
 
     private List<(string langCode, string langName)> GetAllLanguages()

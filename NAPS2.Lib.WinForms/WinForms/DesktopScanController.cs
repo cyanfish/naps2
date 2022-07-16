@@ -58,7 +58,7 @@ public class DesktopScanController : IDesktopScanController
 
             // No profile for the device we're scanning with, so prompt to create one
             var editSettingsForm = _formFactory.Create<FEditProfile>();
-            editSettingsForm.ScanProfile = _config.Get(c => c.DefaultProfileSettings);
+            editSettingsForm.ScanProfile = _config.DefaultProfileSettings();
             try
             {
                 // Populate the device field automatically (because we can do that!)
@@ -79,11 +79,9 @@ public class DesktopScanController : IDesktopScanController
                 ListSelection.Empty<ScanProfile>());
             _profileManager.DefaultProfile = profile;
         }
-        if (profile != null)
-        {
-            // We got a profile, yay, so we can actually do the scan now
-            await DoScan(profile);
-        }
+
+        // We got a profile, yay, so we can actually do the scan now
+        await DoScan(profile);
     }
 
     public async Task ScanDefault()
@@ -105,7 +103,7 @@ public class DesktopScanController : IDesktopScanController
     public async Task ScanWithNewProfile()
     {
         var editSettingsForm = _formFactory.Create<FEditProfile>();
-        editSettingsForm.ScanProfile = _config.Get(c => c.DefaultProfileSettings);
+        editSettingsForm.ScanProfile = _config.DefaultProfileSettings();
         editSettingsForm.ShowDialog();
         if (!editSettingsForm.Result)
         {

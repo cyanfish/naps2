@@ -220,7 +220,7 @@ public partial class FBatchScan : FormBase
         if (!(Config.Get(c => c.NoUserProfiles) && _profileManager.Profiles.Any(x => x.IsLocked)))
         {
             var fedit = FormFactory.Create<FEditProfile>();
-            fedit.ScanProfile = Config.Get(c => c.DefaultProfileSettings);
+            fedit.ScanProfile = Config.DefaultProfileSettings();
             fedit.ShowDialog();
             if (fedit.Result)
             {

@@ -5,7 +5,7 @@ using NAPS2.WinForms;
 
 namespace NAPS2.EtoForms.WinForms;
 
-public class WinFormsListView<T> : IListView<T>
+public class WinFormsListView<T> : IListView<T> where T : notnull
 {
     private readonly ListView _view;
     private readonly ListViewBehavior<T> _behavior;
@@ -53,7 +53,7 @@ public class WinFormsListView<T> : IListView<T>
         set => _view.AllowDrop = value;
     }
 
-    private void OnDragEnter(object sender, DragEventArgs e)
+    private void OnDragEnter(object? sender, DragEventArgs e)
     {
         if (!AllowDrop)
         {
@@ -228,7 +228,7 @@ public class WinFormsListView<T> : IListView<T>
         return _behavior.GetLabel(item);
     }
 
-    private void OnSelectedIndexChanged(object sender, EventArgs e)
+    private void OnSelectedIndexChanged(object? sender, EventArgs e)
     {
         if (!_refreshing)
         {
@@ -238,12 +238,12 @@ public class WinFormsListView<T> : IListView<T>
         }
     }
 
-    private void OnItemActivate(object sender, EventArgs e)
+    private void OnItemActivate(object? sender, EventArgs e)
     {
         ItemClicked?.Invoke(this, EventArgs.Empty);
     }
 
-    private void OnItemDrag(object sender, ItemDragEventArgs e)
+    private void OnItemDrag(object? sender, ItemDragEventArgs e)
     {
         if (!AllowDrag)
         {
@@ -258,7 +258,7 @@ public class WinFormsListView<T> : IListView<T>
         }
     }
 
-    private void OnDragDrop(object sender, DragEventArgs e)
+    private void OnDragDrop(object? sender, DragEventArgs e)
     {
         var index = GetDragIndex(e);
         if (index != -1)
@@ -268,12 +268,12 @@ public class WinFormsListView<T> : IListView<T>
         _view.InsertionMark.Index = -1;
     }
 
-    private void OnDragLeave(object sender, EventArgs e)
+    private void OnDragLeave(object? sender, EventArgs e)
     {
         _view.InsertionMark.Index = -1;
     }
 
-    private void OnDragOver(object sender, DragEventArgs e)
+    private void OnDragOver(object? sender, DragEventArgs e)
     {
         if (e.Effect == DragDropEffects.Move)
         {

@@ -171,6 +171,6 @@ public partial class FAdvancedScanSettings : FormBase
 
     private void btnRestoreDefaults_Click(object sender, EventArgs e)
     {
-        UpdateValues(Config.Get(c => c.DefaultProfileSettings));
+        UpdateValues(Config.DefaultProfileSettings());
     }
 }
