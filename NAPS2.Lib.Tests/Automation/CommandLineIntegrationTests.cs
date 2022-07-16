@@ -1,6 +1,7 @@
 using System.Drawing;
 using System.Text;
 using NAPS2.Automation;
+using NAPS2.ImportExport.Pdf;
 using NAPS2.Modules;
 using NAPS2.Ocr;
 using NAPS2.Recovery;
@@ -17,6 +18,7 @@ using Xunit.Abstractions;
 
 namespace NAPS2.Lib.Tests.Automation;
 
+// TODO: Write tests for every option, or as many as possible
 public class CommandLineIntegrationTests : ContextualTexts
 {
     private readonly ITestOutputHelper _testOutputHelper;
@@ -26,11 +28,17 @@ public class CommandLineIntegrationTests : ContextualTexts
         _testOutputHelper = testOutputHelper;
     }
 
-    private async Task RunCommand(AutomatedScanningOptions options, params Bitmap[] imagesToScan)
+    private Task RunCommand(AutomatedScanningOptions options, params Bitmap[] imagesToScan)
+    {
+        return RunCommand(options, null, imagesToScan);
+    }
+
+    private async Task RunCommand(AutomatedScanningOptions options, Action<IKernel> setup, params Bitmap[] imagesToScan)
     {
         var scanDriverFactory = new ScanDriverFactoryBuilder().WithScannedImages(imagesToScan).Build();
         var kernel = new StandardKernel(new CommonModule(), new ConsoleModule(options),
             new TestModule(ScanningContext, ImageContext, scanDriverFactory, _testOutputHelper, FolderPath));
+        setup?.Invoke(kernel);
         var automatedScanning = kernel.Get<AutomatedScanning>();
         await automatedScanning.Execute();
     }
@@ -98,6 +106,107 @@ public class CommandLineIntegrationTests : ContextualTexts
             SharedData.ocr_test);
         Assert.True(File.Exists(path));
         PdfAsserts.AssertContainsText("ADVERTISEMENT.", path);
+        AssertRecoveryCleanedUp();
+    }
+
+    [Fact]
+    public async Task ScanPdfSettings_DefaultMetadata()
+    {
+        var path = $"{FolderPath}/test.pdf";
+        await RunCommand(
+            new AutomatedScanningOptions
+            {
+                Number = 1,
+                OutputPath = path,
+                Verbose = true
+            },
+            kernel =>
+            {
+                var config = kernel.Get<Naps2Config>();
+                config.User.Set(c => c.PdfSettings.Metadata, new PdfMetadata
+                {
+                    Author = "author1",
+                    Creator = "creator1",
+                    Keywords = "keywords1",
+                    Subject = "subject1",
+                    Title = "title1"
+                });
+            },
+            SharedData.color_image);
+        Assert.True(File.Exists(path));
+        PdfAsserts.AssertMetadata(new PdfMetadata
+        {
+            Author = "NAPS2",
+            Creator = "NAPS2",
+            Keywords = "",
+            Subject = "Scanned Image",
+            Title = "Scanned Image"
+        }, path);
+        AssertRecoveryCleanedUp();
+    }
+
+    [Fact]
+    public async Task ScanPdfSettings_SavedMetadata()
+    {
+        var path = $"{FolderPath}/test.pdf";
+        await RunCommand(
+            new AutomatedScanningOptions
+            {
+                Number = 1,
+                OutputPath = path,
+                UseSavedMetadata = true,
+                Verbose = true
+            },
+            kernel =>
+            {
+                var config = kernel.Get<Naps2Config>();
+                config.User.Set(c => c.PdfSettings.Metadata, new PdfMetadata
+                {
+                    Author = "author1",
+                    Creator = "creator1",
+                    Keywords = "keywords1",
+                    Subject = "subject1",
+                    Title = "title1"
+                });
+            },
+            SharedData.color_image);
+        Assert.True(File.Exists(path));
+        PdfAsserts.AssertMetadata(new PdfMetadata
+        {
+            Author = "author1",
+            Creator = "creator1",
+            Keywords = "keywords1",
+            Subject = "subject1",
+            Title = "title1"
+        }, path);
+        AssertRecoveryCleanedUp();
+    }
+
+    [Fact]
+    public async Task ScanPdfSettings_CustomMetadata()
+    {
+        var path = $"{FolderPath}/test.pdf";
+        await RunCommand(
+            new AutomatedScanningOptions
+            {
+                Number = 1,
+                OutputPath = path,
+                PdfAuthor = "author1",
+                PdfSubject = "subject1",
+                PdfTitle = "title1",
+                PdfKeywords = "keywords1",
+                Verbose = true
+            },
+            SharedData.color_image);
+        Assert.True(File.Exists(path));
+        PdfAsserts.AssertMetadata(new PdfMetadata
+        {
+            Author = "author1",
+            Creator = "NAPS2",
+            Keywords = "keywords1",
+            Subject = "subject1",
+            Title = "title1"
+        }, path);
         AssertRecoveryCleanedUp();
     }
 

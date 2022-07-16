@@ -55,7 +55,6 @@ public class SavePdfOperation : OperationBase
             bool result = false;
             try
             {
-                // TODO: I forget this actually won't work, as we need to access the metadata/encryption subpart.
                 result = await _pdfExporter.Export(subFileName, images,
                     new PdfExportParams(pdfSettings.Metadata, pdfSettings.Encryption,
                         pdfSettings.Compat), ocrParams, OnProgress, CancelToken);

@@ -25,8 +25,6 @@ public class AutomatedScanning
     private readonly TesseractLanguageManager _tesseractLanguageManager;
     private readonly IFormFactory _formFactory;
     private readonly Naps2Config _config;
-    private readonly TransactionConfigScope<CommonConfig> _userTransact;
-    private readonly Naps2Config _transactionConfig;
     private readonly IProfileManager _profileManager;
     private readonly RecoveryStorageManager _recoveryStorageManager;
     private readonly ScanningContext _scanningContext;
@@ -60,11 +58,6 @@ public class AutomatedScanning
         _profileManager = profileManager;
         _recoveryStorageManager = recoveryStorageManager;
         _scanningContext = scanningContext;
-
-        _userTransact = config.User.BeginTransaction();
-        // TODO: Rename/document (and test) this, as its purpose is really to sub out a config
-        // TODO: And why do we do that? Isn't that what run scope is for?
-        _transactionConfig = config.WithTransaction(_userTransact);
     }
 
     public IEnumerable<ProcessedImage> AllImages => _scanList.SelectMany(x => x);
@@ -166,7 +159,7 @@ public class AutomatedScanning
             _config.Run.Set(c => c.EnableOcr, true);
         }
         _config.Run.Set(c => c.OcrLanguageCode, _options.OcrLang);
-        _ocrParams = _transactionConfig.DefaultOcrParams();
+        _ocrParams = _config.DefaultOcrParams();
     }
 
     private void InstallComponents()
@@ -441,8 +434,6 @@ public class AutomatedScanning
 
     private async Task DoExportToImageFiles(string outputPath)
     {
-        // TODO: Fix this
-        _userTransact.Set(c => c.ImageSettings, new ImageSettings());
         _config.Run.Set(c => c.ImageSettings, new ImageSettings
         {
             JpegQuality = _options.JpegQuality,
@@ -463,7 +454,7 @@ public class AutomatedScanning
                     i = op.Status.CurrentProgress;
                 }
             };
-            op.Start(outputPath, _placeholders, scan, _transactionConfig.Get(c => c.ImageSettings));
+            op.Start(outputPath, _placeholders, scan, _config.Get(c => c.ImageSettings));
             await op.Success;
         }
     }
@@ -475,19 +466,33 @@ public class AutomatedScanning
 
     private async Task<bool> DoExportToPdf(string path, bool email)
     {
-        // TODO: Fix this
-        // var savedMetadata = _userTransact.Get(c => c.PdfSettings.Metadata);
-        // var savedEncryptConfig = _userTransact.Get(c => c.PdfSettings.Encryption);
-        //
-        // _userTransact.Set(c => c.PdfSettings = new PdfSettings());
-        // if (_options.UseSavedMetadata)
-        // {
-        //     _userTransact.Set(c => c.PdfSettings.Metadata = savedMetadata);
-        // }
-        // if (_options.UseSavedEncryptConfig)
-        // {
-        //     _userTransact.Set(c => c.PdfSettings.Encryption = savedEncryptConfig);
-        // }
+        var defaults = InternalDefaults.GetCommonConfig();
+        
+        if (!_options.UseSavedMetadata)
+        {
+            _config.Run.Set(c => c.PdfSettings.Metadata, defaults.PdfSettings.Metadata);
+        }
+        if (_options.PdfTitle != null)
+        {
+            _config.Run.Set(c => c.PdfSettings.Metadata.Title, _options.PdfTitle);
+        }
+        if (_options.PdfAuthor != null)
+        {
+            _config.Run.Set(c => c.PdfSettings.Metadata.Author, _options.PdfAuthor);
+        }
+        if (_options.PdfSubject != null)
+        {
+            _config.Run.Set(c => c.PdfSettings.Metadata.Subject, _options.PdfSubject);
+        }
+        if (_options.PdfKeywords != null)
+        {
+            _config.Run.Set(c => c.PdfSettings.Metadata.Keywords, _options.PdfKeywords);
+        }
+        
+        if (!_options.UseSavedEncryptConfig)
+        {
+            _config.Run.Set(c => c.PdfSettings.Encryption, defaults.PdfSettings.Encryption);
+        }
 
         if (!string.IsNullOrEmpty(_options.EncryptConfig))
         {
@@ -562,7 +567,7 @@ public class AutomatedScanning
     {
         OutputVerbose(ConsoleResources.BeginningScan);
 
-        bool autoSaveEnabled = !_transactionConfig.Get(c => c.DisableAutoSave) && profile.EnableAutoSave &&
+        bool autoSaveEnabled = !_config.Get(c => c.DisableAutoSave) && profile.EnableAutoSave &&
                                profile.AutoSaveSettings != null;
         if (_options.AutoSave && !autoSaveEnabled)
         {

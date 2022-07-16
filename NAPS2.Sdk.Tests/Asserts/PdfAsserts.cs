@@ -35,4 +35,14 @@ public static class PdfAsserts
         }
         Assert.True(containsText);
     }
+
+    public static void AssertMetadata(PdfMetadata metadata, string filePath)
+    {
+        var doc = PdfReader.Open(filePath, PdfDocumentOpenMode.InformationOnly);
+        Assert.Equal(metadata.Author, doc.Info.Author);
+        Assert.Equal(metadata.Creator, doc.Info.Creator);
+        Assert.Equal(metadata.Keywords, doc.Info.Keywords);
+        Assert.Equal(metadata.Subject, doc.Info.Subject);
+        Assert.Equal(metadata.Title, doc.Info.Title);
+    }
 }
