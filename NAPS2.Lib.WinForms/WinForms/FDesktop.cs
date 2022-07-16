@@ -20,7 +20,6 @@ public partial class FDesktop : FormBase
     private readonly TesseractLanguageManager _tesseractLanguageManager;
     private readonly IScannedImagePrinter _scannedImagePrinter;
     private readonly KeyboardShortcutManager _ksm;
-    private readonly ThumbnailRenderer _thumbnailRenderer;
     private readonly INotificationManager _notify;
     private readonly CultureHelper _cultureHelper;
     private readonly IProfileManager _profileManager;
@@ -45,7 +44,6 @@ public partial class FDesktop : FormBase
         TesseractLanguageManager tesseractLanguageManager,
         IScannedImagePrinter scannedImagePrinter,
         KeyboardShortcutManager ksm,
-        ThumbnailRenderer thumbnailRenderer,
         INotificationManager notify,
         CultureHelper cultureHelper,
         IProfileManager profileManager,
@@ -62,7 +60,6 @@ public partial class FDesktop : FormBase
         _tesseractLanguageManager = tesseractLanguageManager;
         _scannedImagePrinter = scannedImagePrinter;
         _ksm = ksm;
-        _thumbnailRenderer = thumbnailRenderer;
         _notify = notify;
         _cultureHelper = cultureHelper;
         _profileManager = profileManager;
@@ -128,7 +125,6 @@ public partial class FDesktop : FormBase
             // Allow tabbing through the toolbar for accessibility
             WinFormsHacks.SetControlStyle(panel, ControlStyles.Selectable, true);
         }
-        _imageList.ThumbnailRenderer = _thumbnailRenderer;
         int thumbnailSize = Config.ThumbnailSize();
         _listView.ImageSize = thumbnailSize;
         SetThumbnailSpacing(thumbnailSize);

@@ -14,15 +14,11 @@ public class UiImageList
 
     public UiImageList(List<UiImage> images)
     {
-        Images = images;
+        Images = images.ToImmutableList();
         _selection = ListSelection.Empty<UiImage>();
     }
 
-    // TODO: Can we inject this?
-    public ThumbnailRenderer? ThumbnailRenderer { get; set; }
-
-    // TODO: Make this immutable?
-    public List<UiImage> Images { get; }
+    public ImmutableList<UiImage> Images { get; private set; }
 
     public StateToken CurrentState => new(Images.Select(x => x.GetImageWeakReference()).ToImmutableList());
 
@@ -69,14 +65,16 @@ public class UiImageList
         {
             var currentSelection = _selection;
             var before = new HashSet<UiImage>(Images);
+            var mutableImages = Images.ToList();
             if (!ReferenceEquals(selectionToMutate, null))
             {
-                mutation.Apply(Images, ref selectionToMutate);
+                mutation.Apply(mutableImages, ref selectionToMutate);
             }
             else
             {
-                mutation.Apply(Images, ref currentSelection);
+                mutation.Apply(mutableImages, ref currentSelection);
             }
+            Images = mutableImages.ToImmutableList();
             var after = new HashSet<UiImage>(Images);
 
             foreach (var added in after.Except(before))

@@ -370,7 +370,7 @@ public class DesktopController
         }
     }
 
-    public async Task SavePDF(List<UiImage> images)
+    public async Task SavePDF(ICollection<UiImage> images)
     {
         using var imagesToSave = images.Select(x => x.GetClonedImage()).ToDisposableList();
         if (await _exportHelper.SavePDF(imagesToSave.InnerList, _notify))
@@ -382,7 +382,7 @@ public class DesktopController
         }
     }
 
-    public async Task SaveImages(List<UiImage> images)
+    public async Task SaveImages(ICollection<UiImage> images)
     {
         using var imagesToSave = images.Select(x => x.GetClonedImage()).ToDisposableList();
         if (await _exportHelper.SaveImages(imagesToSave.InnerList, _notify))
@@ -394,7 +394,7 @@ public class DesktopController
         }
     }
 
-    public async Task EmailPDF(List<UiImage> images)
+    public async Task EmailPDF(ICollection<UiImage> images)
     {
         using var imagesToEmail = images.Select(x => x.GetClonedImage()).ToDisposableList();
         await _exportHelper.EmailPDF(imagesToEmail.InnerList);

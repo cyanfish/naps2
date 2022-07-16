@@ -10,10 +10,10 @@ namespace NAPS2.Util;
 /// </summary>
 public class KeyboardShortcutManager
 {
-    private readonly Dictionary<Keys, Action> _dict = new Dictionary<Keys, Action>();
-    private readonly Dictionary<Keys, ToolStripMenuItem> _itemDict = new Dictionary<Keys, ToolStripMenuItem>();
+    private readonly Dictionary<Keys, Action> _dict = new();
+    private readonly Dictionary<Keys, ToolStripMenuItem> _itemDict = new();
 
-    private readonly Dictionary<string, Keys> _customMap = new Dictionary<string, Keys>
+    private readonly Dictionary<string, Keys> _customMap = new()
     {
         { "ctrl", Keys.Control },
         { "del", Keys.Delete },
@@ -28,7 +28,7 @@ public class KeyboardShortcutManager
             if (!string.IsNullOrWhiteSpace(value))
             {
                 var keys = Keys.None;
-                foreach (var part in value.Split('+').Select(x => x.Trim().ToLowerInvariant()))
+                foreach (var part in value!.Split('+').Select(x => x.Trim().ToLowerInvariant()))
                 {
                     if (_customMap.ContainsKey(part))
                     {
@@ -67,6 +67,7 @@ public class KeyboardShortcutManager
 
     public bool Assign(string? value, ToolStripMenuItem item, Action action)
     {
+        if (item.GetCurrentParent() == null) return false;
         var keys = Parse(value);
         if (keys != Keys.None)
         {
@@ -93,6 +94,7 @@ public class KeyboardShortcutManager
 
     public bool Assign(string? value, ToolStripButton item)
     {
+        if (item.GetCurrentParent() == null) return false;
         if (Assign(value, item.PerformClick))
         {
             item.AutoToolTip = true;
@@ -104,11 +106,13 @@ public class KeyboardShortcutManager
 
     public bool Assign(string? value, ToolStripMenuItem item)
     {
+        if (item.GetCurrentParent() == null) return false;
         return Assign(value, item, item.PerformClick);
     }
 
     public bool Assign(string? value, ToolStripSplitButton item)
     {
+        if (item.GetCurrentParent() == null) return false;
         if (Assign(value, item.PerformButtonClick))
         {
             item.AutoToolTip = true;
@@ -120,6 +124,7 @@ public class KeyboardShortcutManager
 
     public bool Assign(string? value, Button item)
     {
+        if (item.Parent == null) return false;
         return Assign(value, item.PerformClick);
     }
 
