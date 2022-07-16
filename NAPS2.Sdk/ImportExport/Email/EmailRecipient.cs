@@ -2,7 +2,7 @@
 
 public class EmailRecipient
 {
-    public static IEnumerable<EmailRecipient> FromText(EmailRecipientType recipType, string recipText)
+    public static IEnumerable<EmailRecipient> FromText(EmailRecipientType recipType, string? recipText)
     {
         if (string.IsNullOrWhiteSpace(recipText))
         {

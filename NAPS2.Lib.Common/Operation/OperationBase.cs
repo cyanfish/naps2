@@ -7,7 +7,8 @@ namespace NAPS2.Operation;
 /// </summary>
 public abstract class OperationBase : IOperation
 {
-    private readonly CancellationTokenSource _cts = new CancellationTokenSource();
+    private readonly CancellationTokenSource _cts = new();
+    private readonly TaskCompletionSource<bool> _tcs = new();
 
     public string? ProgressTitle { get; protected set; }
 
@@ -19,13 +20,13 @@ public abstract class OperationBase : IOperation
 
     public OperationStatus Status { get; protected set; } = new OperationStatus();
 
-    public Task<bool>? Success { get; protected set; }
+    public Task<bool> Success => _tcs.Task;
 
     public bool IsFinished { get; protected set; }
 
     public virtual void Wait(CancellationToken cancelToken = default)
     {
-        Success?.Wait(cancelToken);
+        Success.Wait(cancelToken);
     }
 
     public virtual void Cancel()
@@ -45,17 +46,17 @@ public abstract class OperationBase : IOperation
 
     protected void RunAsync(Func<Task<bool>> action)
     {
-        Success = StartTask(action);
+        StartTask(action);
     }
 
     protected void RunAsync(Func<bool> action)
     {
-        Success = StartTask(() => Task.FromResult(action()));
+        StartTask(() => Task.FromResult(action()));
     }
 
-    private Task<T> StartTask<T>(Func<Task<T>> action)
+    private void StartTask(Func<Task<bool>> action)
     {
-        return Task.Run(async () =>
+        Task.Run(async () =>
         {
             // We don't need to catch errors in general. The idea is that for a typical operation,
             // OperationManager will handle it and show an error message box.
@@ -69,7 +70,21 @@ public abstract class OperationBase : IOperation
                 InvokeFinished();
             }
             // TODO: Maybe try and move away from "return false on cancel" and use cancellation tokens/OperationCancelledException via ct.ThrowIfCancellationRequested
-        }, CancelToken);
+        }, CancelToken).ContinueWith(t =>
+        {
+            if (t.IsCanceled)
+            {
+                _tcs.TrySetCanceled();
+            }
+            if (t.IsFaulted)
+            {
+                _tcs.TrySetException(t.Exception!);
+            }
+            if (t.IsCompleted)
+            {
+                _tcs.TrySetResult(t.Result);
+            }
+        }).AssertNoAwait();
     }
 
     protected void InvokeFinished()

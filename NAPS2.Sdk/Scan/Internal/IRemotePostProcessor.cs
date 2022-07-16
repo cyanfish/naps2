@@ -5,5 +5,5 @@
 /// </summary>
 internal interface IRemotePostProcessor
 {
-    ProcessedImage PostProcess(IMemoryImage image, ScanOptions options, PostProcessingContext postProcessingContext);
+    ProcessedImage? PostProcess(IMemoryImage image, ScanOptions options, PostProcessingContext postProcessingContext);
 }

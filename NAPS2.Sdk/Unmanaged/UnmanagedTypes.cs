@@ -6,7 +6,7 @@ namespace NAPS2.Unmanaged;
 /// </summary>
 public static class UnmanagedTypes
 {
-    public static UnmanagedObject<T> CopyOf<T>(T value) => new UnmanagedObject<T>(value);
+    public static UnmanagedObject<T> CopyOf<T>(T value) where T : notnull => new(value);
 
-    public static UnmanagedArray<T> CopyOf<T>(T[] value) => new UnmanagedArray<T>(value);
+    public static UnmanagedArray<T> CopyOf<T>(T[] value) where T : notnull => new(value);
 }

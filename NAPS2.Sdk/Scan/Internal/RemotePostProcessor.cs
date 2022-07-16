@@ -26,7 +26,7 @@ internal class RemotePostProcessor : IRemotePostProcessor
     //    return image;
     //}
 
-    public ProcessedImage PostProcess(IMemoryImage image, ScanOptions options, PostProcessingContext postProcessingContext)
+    public ProcessedImage? PostProcess(IMemoryImage image, ScanOptions options, PostProcessingContext postProcessingContext)
     {
         image = DoInitialTransforms(image, options);
         try
@@ -34,6 +34,8 @@ internal class RemotePostProcessor : IRemotePostProcessor
             if (options.ExcludeBlankPages && BlankDetector.IsBlank(image, options.BlankPageWhiteThreshold,
                     options.BlankPageCoverageThreshold))
             {
+                // TODO: Consider annotating the image as blank via postprocessingdata rather than excluding here
+                // TODO: In theory we might want to add some functionality to allow the user to correct blank detection
                 return null;
             }
 
@@ -133,6 +135,7 @@ internal class RemotePostProcessor : IRemotePostProcessor
             processedImage = AddTransformAndUpdateThumbnail(processedImage, ref image, new TrueContrastTransform(options.Contrast), options);
         }
 
+        // TODO: Do we need to restrict this to only when an actual duplex scan is happening?
         if (options.FlipDuplexedPages && postProcessingContext.PageNumber % 2 == 0)
         {
             processedImage = AddTransformAndUpdateThumbnail(processedImage, ref image, new RotationTransform(180), options);

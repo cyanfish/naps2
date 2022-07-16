@@ -28,7 +28,8 @@ internal class RemoteScanController : IRemoteScanController
         return deviceList;
     }
 
-    public async Task Scan(ScanOptions options, CancellationToken cancelToken, IScanEvents scanEvents, Action<ProcessedImage, PostProcessingContext> callback)
+    public async Task Scan(ScanOptions options, CancellationToken cancelToken, IScanEvents scanEvents,
+        Action<ProcessedImage, PostProcessingContext> callback)
     {
         var driver = _scanDriverFactory.Create(options);
         var progressThrottle = new EventThrottle<double>(scanEvents.PageProgress);
@@ -38,10 +39,15 @@ internal class RemoteScanController : IRemoteScanController
         {
             var postProcessingContext = new PostProcessingContext
             {
+                // Note we still want to increment even if we don't send a page callback (i.e. when blank detection is
+                // on). The page number is only used to determine whether we're on the front or back of a duplex scan. 
                 PageNumber = ++pageNumber
             };
             var scannedImage = _remotePostProcessor.PostProcess(image, options, postProcessingContext);
-            callback(scannedImage, postProcessingContext);
+            if (scannedImage != null)
+            {
+                callback(scannedImage, postProcessingContext);
+            }
         });
     }
 }

@@ -4,7 +4,7 @@ namespace NAPS2.Util;
 
 public static class ExceptionExtensions
 {
-    private static MethodInfo _internalPreserveStackTrace;
+    private static MethodInfo? _internalPreserveStackTrace;
 
     static ExceptionExtensions()
     {

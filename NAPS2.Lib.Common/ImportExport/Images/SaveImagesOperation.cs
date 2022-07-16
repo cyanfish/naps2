@@ -126,7 +126,7 @@ public class SaveImagesOperation : OperationBase
             }
             return false;
         });
-        Success!.ContinueWith(task =>
+        Success.ContinueWith(task =>
         {
             if (task.Result)
             {

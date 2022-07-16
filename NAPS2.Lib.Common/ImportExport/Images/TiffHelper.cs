@@ -139,6 +139,6 @@ public class TiffHelper
     private ImageCodecInfo GetCodecForString(string type)
     {
         ImageCodecInfo[] info = ImageCodecInfo.GetImageEncoders();
-        return info.FirstOrDefault(t => t.FormatDescription.Equals(type));
+        return info.First(t => t.FormatDescription == type);
     }
 }

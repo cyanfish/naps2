@@ -6,7 +6,7 @@ namespace NAPS2.Unmanaged;
 /// Class for implicitly converting structures to unmanaged objects addressed by IntPtr.
 /// </summary>
 /// <typeparam name="T"></typeparam>
-public class UnmanagedObject<T> : UnmanagedBase<T>
+public class UnmanagedObject<T> : UnmanagedBase<T> where T : notnull
 {
     public UnmanagedObject(T value)
     {
@@ -15,7 +15,7 @@ public class UnmanagedObject<T> : UnmanagedBase<T>
         Marshal.StructureToPtr(value, Pointer, false);
     }
 
-    protected override T GetValue() => (T)Marshal.PtrToStructure(Pointer, typeof(T));
+    protected override T GetValue() => (T)Marshal.PtrToStructure(Pointer, typeof(T))!;
 
     protected override void DestroyStructures() => Marshal.DestroyStructure(Pointer, typeof(T));
 }

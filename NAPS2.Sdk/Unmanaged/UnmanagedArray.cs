@@ -6,7 +6,7 @@ namespace NAPS2.Unmanaged;
 /// Class for implicitly converting arrays of structures to unmanaged objects addressed by IntPtr.
 /// </summary>
 /// <typeparam name="T"></typeparam>
-public class UnmanagedArray<T> : UnmanagedBase<T[]>
+public class UnmanagedArray<T> : UnmanagedBase<T[]> where T : notnull
 {
     public UnmanagedArray(IEnumerable<T> array)
     {
@@ -63,7 +63,7 @@ public class UnmanagedArray<T> : UnmanagedBase<T[]>
         var result = new T[Length];
         for (int i = 0; i < Length; ++i)
         {
-            result[i] = (T)Marshal.PtrToStructure(this[i], typeof(T));
+            result[i] = (T)Marshal.PtrToStructure(this[i], typeof(T))!;
         }
         return result;
     }

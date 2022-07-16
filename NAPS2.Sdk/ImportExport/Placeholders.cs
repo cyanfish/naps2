@@ -58,7 +58,11 @@ public abstract class Placeholders
     public class EnvironmentPlaceholders : Placeholders
     {
         public override string? Substitute(string? filePath, bool incrementIfExists = true, int numberSkip = 0,
-            int autoNumberDigits = 0) => Environment.ExpandEnvironmentVariables(filePath);
+            int autoNumberDigits = 0)
+        {
+            if (filePath == null) return null;
+            return Environment.ExpandEnvironmentVariables(filePath);
+        }
     }
 
     public class DefaultPlaceholders : Placeholders

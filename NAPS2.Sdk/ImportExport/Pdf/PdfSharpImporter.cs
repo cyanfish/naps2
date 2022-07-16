@@ -145,7 +145,7 @@ public class PdfSharpImporter : IPdfImporter
                 var element = xObject.Elements.Single(x => x.Key == "/Filter");
                 if (element.Value is PdfArray elementAsArray)
                 {
-                    string[] arrayElements = elementAsArray.Elements.Select(x => x.ToString()).ToArray();
+                    string[] arrayElements = elementAsArray.Elements.Select(x => x.ToString()!).ToArray();
                     if (arrayElements.Length == 2)
                     {
                         yield return DecodeImage(arrayElements[1], page, xObject,

@@ -115,7 +115,7 @@ public class SavePdfOperation : OperationBase
 
             return result;
         });
-        Success!.ContinueWith(task =>
+        Success.ContinueWith(task =>
         {
             if (task.Result)
             {

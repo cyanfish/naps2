@@ -64,7 +64,7 @@ public class TimedThrottle
         }
     }
 
-    private void Tick(object state)
+    private void Tick(object? state)
     {
         lock (this)
         {

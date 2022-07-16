@@ -1,5 +1,4 @@
 ﻿using System.Threading;
-using System.Xml.Serialization;
 using NAPS2.Config.Model;
 using NAPS2.Dependencies;
 using NAPS2.ImportExport;
@@ -10,6 +9,7 @@ using NAPS2.Lang.ConsoleResources;
 using NAPS2.Ocr;
 using NAPS2.Recovery;
 using NAPS2.Scan;
+using NAPS2.Serialization;
 using NAPS2.WinForms;
 
 namespace NAPS2.Automation;
@@ -33,12 +33,12 @@ public class AutomatedScanning
 
     private readonly ConsoleOutput _output;
     private readonly AutomatedScanningOptions _options;
-    private List<List<ProcessedImage>> _scanList;
+    private List<List<ProcessedImage>> _scanList = null!;
     private int _pagesScanned;
     private int _totalPagesScanned;
-    private Placeholders _placeholders;
-    private List<string> _actualOutputPaths;
-    private OcrParams _ocrParams;
+    private Placeholders _placeholders = null!;
+    private List<string> _actualOutputPaths = null!;
+    private OcrParams _ocrParams = null!;
 
     public AutomatedScanning(ConsoleOutput output, AutomatedScanningOptions options, ImageContext imageContext,
         IScanPerformer scanPerformer, ErrorOutput errorOutput, IEmailProviderFactory emailProviderFactory,
@@ -175,7 +175,7 @@ public class AutomatedScanning
         availableComponents.AddRange(_tesseractLanguageManager.LanguageComponents);
 
         var componentDict = availableComponents.ToDictionary(x => x.Id.ToLowerInvariant());
-        var installId = _options.Install.ToLowerInvariant();
+        var installId = _options.Install!.ToLowerInvariant();
         if (!componentDict.TryGetValue(installId, out var toInstall))
         {
             _output.Writer.WriteLine(ConsoleResources.ComponentNotAvailable);
@@ -266,7 +266,7 @@ public class AutomatedScanning
     {
         OutputVerbose(ConsoleResources.Importing);
 
-        var filePaths = _options.ImportPath.Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
+        var filePaths = _options.ImportPath!.Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
         int i = 0;
         foreach (var filePath in filePaths)
         {
@@ -324,7 +324,7 @@ public class AutomatedScanning
         tempFolder.Create();
         try
         {
-            string targetPath = Path.Combine(tempFolder.FullName, _options.EmailFileName);
+            string targetPath = Path.Combine(tempFolder.FullName, _options.EmailFileName!);
             if (IsPdfFile(targetPath))
             {
                 if (_options.OutputPath != null && IsPdfFile(_options.OutputPath))
@@ -335,7 +335,7 @@ public class AutomatedScanning
                     int i = 0;
                     foreach (var path in _actualOutputPaths)
                     {
-                        string attachmentName = _placeholders.Substitute(_options.EmailFileName, false, i++,
+                        string attachmentName = _placeholders.Substitute(_options.EmailFileName!, false, i++,
                             _scanList.Count > 1 ? digits : 0);
                         message.Attachments.Add(new EmailAttachment(path, attachmentName));
                     }
@@ -426,18 +426,16 @@ public class AutomatedScanning
         }
     }
 
-    private bool IsPdfFile(string path)
+    private bool IsPdfFile(string? path)
     {
         if (path == null) return false;
-        string extension = Path.GetExtension(path);
-        Debug.Assert(extension != null);
-        return extension.ToLower() == ".pdf";
+        return Path.GetExtension(path)?.ToLower() == ".pdf";
     }
 
     private async Task ExportToImageFiles()
     {
-        var path = _placeholders.Substitute(_options.OutputPath);
-        await DoExportToImageFiles(_options.OutputPath);
+        var path = _placeholders.Substitute(_options.OutputPath!);
+        await DoExportToImageFiles(_options.OutputPath!);
         OutputVerbose(ConsoleResources.FinishedSavingImages, Path.GetFullPath(path));
     }
 
@@ -472,7 +470,7 @@ public class AutomatedScanning
 
     private async Task ExportToPdf()
     {
-        await DoExportToPdf(_options.OutputPath, false);
+        await DoExportToPdf(_options.OutputPath!, false);
     }
 
     private async Task<bool> DoExportToPdf(string path, bool email)
@@ -495,9 +493,9 @@ public class AutomatedScanning
         {
             try
             {
-                using Stream configFileStream = File.OpenRead(_options.EncryptConfig!);
-                var serializer = new XmlSerializer(typeof(PdfEncryption));
-                var encryption = (PdfEncryption) serializer.Deserialize(configFileStream);
+                // TODO: Add tests for this
+                var serializer = new XmlSerializer<PdfEncryption>();
+                var encryption = serializer.DeserializeFromFile(_options.EncryptConfig!);
                 _config.Run.Set(c => c.PdfSettings.Encryption, encryption);
             }
             catch (Exception ex)
@@ -619,7 +617,7 @@ public class AutomatedScanning
         catch (InvalidOperationException)
         {
             _errorOutput.DisplayError(ConsoleResources.ProfileUnavailableOrAmbiguous);
-            profile = null;
+            profile = null!;
             return false;
         }
         return true;

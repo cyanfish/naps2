@@ -5,16 +5,17 @@ namespace NAPS2.Util;
 // TODO: Move this to another namespace
 public static class ListSelection
 {
-    public static ListSelection<T> From<T>(IEnumerable<T> list) =>
+    public static ListSelection<T> From<T>(IEnumerable<T> list) where T : notnull =>
         new(list);
 
-    public static ListSelection<T> Of<T>(params T[] items) =>
+    public static ListSelection<T> Of<T>(params T[] items) where T : notnull =>
         new(items);
 
-    public static ListSelection<T> FromSelectedIndices<T>(IList<T> list, IEnumerable<int> selectedIndices) =>
+    public static ListSelection<T> FromSelectedIndices<T>(IList<T> list, IEnumerable<int> selectedIndices)
+        where T : notnull =>
         new(list.ElementsAt(selectedIndices));
 
-    public static ListSelection<T> Empty<T>() =>
+    public static ListSelection<T> Empty<T>() where T : notnull =>
         new(Enumerable.Empty<T>());
 }
 
@@ -30,7 +31,7 @@ public class ListSelection<T> : IEnumerable<T>, IEquatable<ListSelection<T>> whe
     public IEnumerable<int> ToSelectedIndices(List<T> list) => list.IndiciesOf(_internalSelection);
 
     public int Count => _internalSelection.Count;
-        
+
     public bool Contains(T item) => _internalSelection.Contains(item);
 
     public IEnumerator<T> GetEnumerator() => _internalSelection.GetEnumerator();
@@ -59,12 +60,12 @@ public class ListSelection<T> : IEnumerable<T>, IEquatable<ListSelection<T>> whe
     public static bool operator !=(ListSelection<T> left, ListSelection<T> right) => !Equals(left, right);
 }
 
-public interface ISelectable<T>
+public interface ISelectable<T> where T : notnull
 {
     ListSelection<T> Selection { get; set; }
 }
-    
-public class Selectable<T> : ISelectable<T>
+
+public class Selectable<T> : ISelectable<T> where T : notnull
 {
     private ListSelection<T> _selection = ListSelection.Empty<T>();
 

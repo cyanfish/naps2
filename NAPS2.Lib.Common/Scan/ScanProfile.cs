@@ -280,8 +280,8 @@ public record PageDimensions
 /// </summary>
 public record NamedPageSize
 {
-    public string Name { get; init; }
-    public PageDimensions Dimens { get; init; }
+    public string Name { get; init; } = "";
+    public PageDimensions Dimens { get; init; } = new();
 }
 
 /// <summary>

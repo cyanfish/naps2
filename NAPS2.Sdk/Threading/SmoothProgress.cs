@@ -56,8 +56,8 @@ public class SmoothProgress : IDisposable
                 _previousInputPos.AddLast(_inputPos);
                 _previousInputTimes.AddLast(_stopwatch.ElapsedMilliseconds);
 
-                var deltaPos = _previousInputPos.Last.Value - SampleStart(_previousInputPos);
-                var deltaTime = _previousInputTimes.Last.Value - SampleStart(_previousInputTimes);
+                var deltaPos = _previousInputPos.Last!.Value - SampleStart(_previousInputPos);
+                var deltaTime = _previousInputTimes.Last!.Value - SampleStart(_previousInputTimes);
 
                 if (deltaTime > 0 && _inputPos < 1)
                 {
@@ -84,7 +84,7 @@ public class SmoothProgress : IDisposable
 
     private T SampleStart<T>(LinkedList<T> list)
     {
-        var node = list.Last;
+        var node = list.Last!;
         for (int i = 0; i < VELOCITY_SAMPLE_SIZE; i++)
         {
             if (node.Previous == null)
@@ -106,7 +106,7 @@ public class SmoothProgress : IDisposable
         _timer?.Dispose();
     }
 
-    private void TimerTick(object state)
+    private void TimerTick(object? state)
     {
         lock (this)
         {
