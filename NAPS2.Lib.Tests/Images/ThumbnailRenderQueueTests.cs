@@ -3,7 +3,7 @@ using Xunit;
 
 namespace NAPS2.Lib.Tests.Images;
 
-public class ThumbnailRenderQueueTests : ContextualTexts
+public class ThumbnailRenderQueueTests : ContextualTests
 {
     private readonly UiImageList _uiImageList;
     private readonly ThumbnailRenderQueue _thumbnailRenderQueue;

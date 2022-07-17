@@ -6,7 +6,7 @@ using Xunit;
 
 namespace NAPS2.Sdk.Tests.ImportExport;
 
-public class ImportPostProcessorTests : ContextualTexts
+public class ImportPostProcessorTests : ContextualTests
 {
     private readonly ImportPostProcessor _importPostProcessor;
 

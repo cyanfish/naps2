@@ -11,7 +11,7 @@ using IScanDriverFactory = NAPS2.Scan.Internal.IScanDriverFactory;
 
 namespace NAPS2.Sdk.Tests.Scan;
 
-public class RemoteScanControllerTests : ContextualTexts
+public class RemoteScanControllerTests : ContextualTests
 {
     [Fact]
     public async Task GetDeviceList()

@@ -4,7 +4,7 @@ using Xunit;
 
 namespace NAPS2.Sdk.Tests.Images;
 
-public class TransformTests : ContextualTexts
+public class TransformTests : ContextualTests
 {
     // TODO: Test handling of other pixel formats
     // ARGB32 -> should work (ignoring alpha channel)

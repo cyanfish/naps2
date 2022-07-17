@@ -6,7 +6,7 @@ using Xunit;
 
 namespace NAPS2.Lib.Tests.Config;
 
-public class CommonConfigTests : ContextualTexts
+public class CommonConfigTests : ContextualTests
 {
     [Fact]
     public void CanSerialize()

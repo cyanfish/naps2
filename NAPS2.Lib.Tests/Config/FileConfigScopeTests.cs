@@ -5,7 +5,7 @@ using Xunit;
 
 namespace NAPS2.Lib.Tests.Config;
 
-public class FileConfigScopeTests : ContextualTexts
+public class FileConfigScopeTests : ContextualTests
 {
     // TODO: Split up into different tests
     [Fact]

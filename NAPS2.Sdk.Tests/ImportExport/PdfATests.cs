@@ -4,7 +4,7 @@ using Xunit;
 
 namespace NAPS2.Sdk.Tests.ImportExport;
 
-public class PdfATests : ContextualTexts
+public class PdfATests : ContextualTests
 {
     [Fact]
     public void Validate()

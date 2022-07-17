@@ -3,7 +3,7 @@ using Xunit;
 
 namespace NAPS2.Sdk.Tests.Images;
 
-public class ScannedImageSinkTests : ContextualTexts
+public class ScannedImageSinkTests : ContextualTests
 {
     [Fact]
     public async Task NoImages()

@@ -3,7 +3,7 @@ using Xunit;
 
 namespace NAPS2.Sdk.Tests.Dependencies;
 
-public class DownloadFormatTests : ContextualTexts
+public class DownloadFormatTests : ContextualTests
 {
     [Fact]
     public void Gzip()

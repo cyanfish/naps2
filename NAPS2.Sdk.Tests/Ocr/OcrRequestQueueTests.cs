@@ -6,7 +6,7 @@ using Xunit;
 
 namespace NAPS2.Sdk.Tests.Ocr;
 
-public class OcrRequestQueueTests : ContextualTexts
+public class OcrRequestQueueTests : ContextualTests
 {
     private readonly OcrRequestQueue _ocrRequestQueue;
     private readonly Mock<IOcrEngine> _mockEngine;

@@ -9,10 +9,10 @@ namespace NAPS2.Lib.Tests.Automation;
 
 public class AutomationHelper
 {
-    private readonly ContextualTexts _testClass;
+    private readonly ContextualTests _testClass;
     private readonly ITestOutputHelper _testOutputHelper;
 
-    public AutomationHelper(ContextualTexts testClass, ITestOutputHelper testOutputHelper)
+    public AutomationHelper(ContextualTests testClass, ITestOutputHelper testOutputHelper)
     {
         _testClass = testClass;
         _testOutputHelper = testOutputHelper;

@@ -8,7 +8,7 @@ using Xunit;
 
 namespace NAPS2.Lib.Tests.WinForms;
 
-public class BatchFormTests : ContextualTexts
+public class BatchFormTests : ContextualTests
 {
     private readonly IProfileManager _profileManager = new StubProfileManager();
     

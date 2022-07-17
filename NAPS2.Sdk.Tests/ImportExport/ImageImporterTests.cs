@@ -9,7 +9,7 @@ using Xunit;
 
 namespace NAPS2.Sdk.Tests.ImportExport;
 
-public class ImageImporterTests : ContextualTexts
+public class ImageImporterTests : ContextualTests
 {
     private readonly ImageImporter _imageImporter;
 

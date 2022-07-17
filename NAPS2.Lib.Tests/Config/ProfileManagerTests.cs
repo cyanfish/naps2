@@ -4,7 +4,7 @@ using Xunit;
 
 namespace NAPS2.Lib.Tests.Config;
 
-public class ProfileManagerTests : ContextualTexts
+public class ProfileManagerTests : ContextualTests
 {
     private readonly string _userPath;
     private readonly string _systemPath;

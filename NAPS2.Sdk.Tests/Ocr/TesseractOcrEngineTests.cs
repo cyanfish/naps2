@@ -4,7 +4,7 @@ using Xunit;
 
 namespace NAPS2.Sdk.Tests.Ocr;
 
-public class TesseractOcrEngineTests : ContextualTexts
+public class TesseractOcrEngineTests : ContextualTests
 {
     private readonly TesseractOcrEngine _engine;
     private readonly string _testImagePath;

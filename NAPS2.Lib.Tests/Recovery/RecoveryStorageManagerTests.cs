@@ -6,7 +6,7 @@ using Xunit;
 
 namespace NAPS2.Lib.Tests.Recovery;
 
-public class RecoveryStorageManagerTests : ContextualTexts
+public class RecoveryStorageManagerTests : ContextualTests
 {
     private readonly string _recoveryFolder;
     private readonly UiImageList _imageList; // TODO: Add tests for this

@@ -5,7 +5,7 @@ using Xunit;
 
 namespace NAPS2.Sdk.Tests.Scan;
 
-public class ScanningContextTests : ContextualTexts
+public class ScanningContextTests : ContextualTests
 {
     [Fact]
     public void CreateAndNormallyDisposeImages()

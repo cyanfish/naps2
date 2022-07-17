@@ -6,7 +6,7 @@ using Xunit;
 
 namespace NAPS2.Sdk.Tests.Scan;
 
-public class ScanErrorHandling : ContextualTexts
+public class ScanErrorHandling : ContextualTests
 {
     [Fact]
     public void Scan_InvalidOptions()

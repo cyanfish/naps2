@@ -11,7 +11,7 @@ using Xunit.Abstractions;
 namespace NAPS2.Lib.Tests.Automation;
 
 // TODO: Write tests for every option, or as many as possible
-public class CommandLineIntegrationTests : ContextualTexts
+public class CommandLineIntegrationTests : ContextualTests
 {
     private readonly AutomationHelper _automationHelper;
 

@@ -6,7 +6,7 @@ using Xunit;
 
 namespace NAPS2.App.Tests.Appium;
 
-public class LanguageSelectionTests : ContextualTexts
+public class LanguageSelectionTests : ContextualTests
 {
     // TODO: Verify why zh-TW isn't here (and that hi still hasn't been translated)
     private static readonly HashSet<string> ExpectedMissingLanguages = new() { "zh-TW", "hi" };

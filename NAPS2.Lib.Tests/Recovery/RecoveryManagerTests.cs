@@ -9,7 +9,7 @@ using Xunit;
 
 namespace NAPS2.Lib.Tests.Recovery;
 
-public class RecoveryManagerTests : ContextualTexts
+public class RecoveryManagerTests : ContextualTests
 {
     private readonly string _recoveryBasePath;
     private readonly RecoveryManager _recoveryManager;

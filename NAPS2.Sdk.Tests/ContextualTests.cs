@@ -5,10 +5,9 @@ using NAPS2.Scan;
 
 namespace NAPS2.Sdk.Tests;
 
-// TODO: Fix typo (texts -> tests)
-public class ContextualTexts : IDisposable
+public class ContextualTests : IDisposable
 {
-    public ContextualTexts()
+    public ContextualTests()
     {
         FolderPath = Path.GetFullPath(Path.Combine("naps2_test_temp", Path.GetRandomFileName()));
         Folder = Directory.CreateDirectory(FolderPath);

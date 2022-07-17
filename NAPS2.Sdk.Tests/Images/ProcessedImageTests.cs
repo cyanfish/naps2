@@ -6,7 +6,7 @@ using Xunit;
 
 namespace NAPS2.Sdk.Tests.Images;
 
-public class ProcessedImageTests : ContextualTexts
+public class ProcessedImageTests : ContextualTests
 {
     [Fact]
     public void Construct()

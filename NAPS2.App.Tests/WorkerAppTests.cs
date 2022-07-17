@@ -5,7 +5,7 @@ using Xunit;
 
 namespace NAPS2.App.Tests;
 
-public class WorkerAppTests : ContextualTexts
+public class WorkerAppTests : ContextualTests
 {
     [Fact]
     public void CreatesPipeServer()

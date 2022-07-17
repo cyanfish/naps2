@@ -6,7 +6,7 @@ using Xunit;
 
 namespace NAPS2.Sdk.Tests.Images;
 
-public class ImageSerializationTests : ContextualTexts
+public class ImageSerializationTests : ContextualTests
 {
     private const double TOLERANCE = 0.0001;
 

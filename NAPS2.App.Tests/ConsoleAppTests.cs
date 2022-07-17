@@ -3,7 +3,7 @@ using Xunit;
 
 namespace NAPS2.App.Tests;
 
-public class ConsoleAppTests : ContextualTexts
+public class ConsoleAppTests : ContextualTests
 {
     [Fact]
     public void ConvertsImportedFile()

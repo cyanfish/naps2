@@ -5,7 +5,7 @@ using Xunit;
 
 namespace NAPS2.Sdk.Tests.ImportExport;
 
-public class PdfiumTests : ContextualTexts
+public class PdfiumTests : ContextualTests
 {
     [Fact]
     public void RenderPdfFromWord()

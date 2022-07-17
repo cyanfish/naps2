@@ -10,7 +10,7 @@ using Xunit;
 
 namespace NAPS2.Lib.Tests.WinForms;
 
-public class DesktopControllerTests : ContextualTexts
+public class DesktopControllerTests : ContextualTests
 {
     // TODO: We should create individual unit tests for everything that's mocked here.
     // TODO: We should also make some things more testable:

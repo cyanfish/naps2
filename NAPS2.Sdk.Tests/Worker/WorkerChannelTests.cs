@@ -11,7 +11,7 @@ using Xunit;
 
 namespace NAPS2.Sdk.Tests.Worker;
 
-public class WorkerChannelTests : ContextualTexts
+public class WorkerChannelTests : ContextualTests
 {
     private Channel Start(IRemoteScanController remoteScanController = null, ThumbnailRenderer thumbnailRenderer = null,
         IMapiWrapper mapiWrapper = null, ITwainSessionController twainSessionController = null)

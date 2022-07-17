@@ -3,7 +3,7 @@ using Xunit;
 
 namespace NAPS2.App.Tests;
 
-public class WinFormsAppTests : ContextualTexts
+public class WinFormsAppTests : ContextualTests
 {
     [Fact]
     public void CreatesWindow()

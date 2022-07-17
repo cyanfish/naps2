@@ -1,6 +1,6 @@
 ﻿namespace NAPS2.Sdk.Tests.Scan;
 
-public class AutoSaveTests : ContextualTexts
+public class AutoSaveTests : ContextualTests
 {
     // TODO: Need to make ScanPerformer testable
 //        [Fact]

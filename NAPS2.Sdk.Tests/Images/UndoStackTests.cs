@@ -3,7 +3,7 @@ using Xunit;
 
 namespace NAPS2.Sdk.Tests.Images;
 
-public class UndoStackTests : ContextualTexts
+public class UndoStackTests : ContextualTests
 {
     [Fact]
     public void MementoComparison()
