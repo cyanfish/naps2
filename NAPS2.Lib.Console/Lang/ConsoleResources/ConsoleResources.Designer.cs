@@ -341,6 +341,15 @@ namespace NAPS2.Lang.ConsoleResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Only one of --interleave, --deinterleave, --altinterleave, --altdeinterleave can be specified..
+        /// </summary>
+        internal static string OnlyOneInterleaveOption {
+            get {
+                return ResourceManager.GetString("OnlyOneInterleaveOption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to At least one of the -o/--output, -e/--email, or -a/--autosave options must be specified..
         /// </summary>
         internal static string OutputOrEmailRequired {

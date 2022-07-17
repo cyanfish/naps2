@@ -236,6 +236,9 @@ Use the "--importpassword" option.</value>
   <data name="OutputOrEmailRequiredForImport" xml:space="preserve">
     <value>At least one of the -o/--output or -e/--email options must be specified if -i/--import is specified. Import does not work with -a/--autosave.</value>
   </data>
+  <data name="OnlyOneInterleaveOption" xml:space="preserve">
+    <value>Only one of --interleave, --deinterleave, --altinterleave, --altdeinterleave can be specified.</value>
+  </data>
   <data name="ComponentAlreadyInstalled" xml:space="preserve">
     <value>The specified component is already installed.</value>
   </data>

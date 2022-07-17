@@ -404,8 +404,7 @@ public class AutomatedScanning
         if (new[] { _options.Interleave, _options.Deinterleave, _options.AltInterleave, _options.AltDeinterleave }
                 .Count(x => x) > 1)
         {
-            // TODO
-            // _errorOutput.DisplayError(ConsoleResources.OnlyOneInterleaveOption);
+            _errorOutput.DisplayError(ConsoleResources.OnlyOneInterleaveOption);
             return false;
         }
 
