@@ -364,6 +364,10 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
 
+    <EmbeddedResource Update="**/*.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+
   </ItemGroup>
 
   <ItemGroup>

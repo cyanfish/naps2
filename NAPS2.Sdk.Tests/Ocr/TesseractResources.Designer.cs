@@ -22,7 +22,7 @@ namespace NAPS2.Sdk.Tests.Ocr {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class TesseractResources {
+    internal class TesseractResources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         

@@ -19,5 +19,11 @@
     <ProjectReference Include="..\NAPS2.Lib.WinForms\NAPS2.Lib.WinForms.csproj" />
     <PackageReference Include="CommandLineParser" Version="2.9.1" />
   </ItemGroup>
+  
+  <ItemGroup>
+    <EmbeddedResource Update="**/*.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
 
 </Project>

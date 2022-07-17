@@ -44,6 +44,10 @@
       <DependentUpon>MiscResources.resx</DependentUpon>
     </EmbeddedResource>
 
+    <EmbeddedResource Update="**/*.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+
   </ItemGroup>
   
 </Project>
