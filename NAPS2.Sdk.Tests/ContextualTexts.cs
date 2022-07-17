@@ -5,6 +5,7 @@ using NAPS2.Scan;
 
 namespace NAPS2.Sdk.Tests;
 
+// TODO: Fix typo (texts -> tests)
 public class ContextualTexts : IDisposable
 {
     public ContextualTexts()

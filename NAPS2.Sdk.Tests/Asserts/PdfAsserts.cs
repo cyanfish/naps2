@@ -1,15 +1,16 @@
 ﻿using NAPS2.ImportExport.Pdf;
 using PdfSharp.Pdf.IO;
+using PdfSharp.Pdf.Security;
 using Xunit;
 
 namespace NAPS2.Sdk.Tests.Asserts;
 
 using PdfAValidator = PdfAValidator.PdfAValidator;
-    
+
 public static class PdfAsserts
 {
     private static readonly Lazy<PdfAValidator> LazyPdfAValidator = new Lazy<PdfAValidator>(() => new PdfAValidator());
-        
+
     public static void AssertPageCount(int count, string filePath)
     {
         var doc = PdfReader.Open(filePath, PdfDocumentOpenMode.InformationOnly);
@@ -44,5 +45,15 @@ public static class PdfAsserts
         Assert.Equal(metadata.Keywords, doc.Info.Keywords);
         Assert.Equal(metadata.Subject, doc.Info.Subject);
         Assert.Equal(metadata.Title, doc.Info.Title);
+    }
+
+    public static void AssertEncrypted(string filePath, string ownerPassword, string userPassword,
+        Action<PdfSecuritySettings> securitySettingsAsserts)
+    {
+        Assert.Throws<PdfReaderException>(() => PdfReader.Open(filePath, PdfDocumentOpenMode.InformationOnly));
+        var doc = PdfReader.Open(filePath, ownerPassword, PdfDocumentOpenMode.InformationOnly);
+        Assert.Equal(PasswordValidity.OwnerPassword, doc.SecurityHandler.ValidatePassword(ownerPassword));
+        Assert.Equal(PasswordValidity.UserPassword, doc.SecurityHandler.ValidatePassword(userPassword));
+        securitySettingsAsserts(doc.SecuritySettings);
     }
 }

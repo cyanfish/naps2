@@ -31,6 +31,7 @@ public class AutomatedScanning
 
     private readonly ConsoleOutput _output;
     private readonly AutomatedScanningOptions _options;
+    private PdfEncryption _parsedEncryptConfigOption = null!;
     private List<List<ProcessedImage>> _scanList = null!;
     private int _pagesScanned;
     private int _totalPagesScanned;
@@ -396,6 +397,21 @@ public class AutomatedScanning
             _errorOutput.DisplayError(ConsoleResources.OutputOrEmailRequiredForImport);
             return false;
         }
+
+        if (!string.IsNullOrEmpty(_options.EncryptConfig))
+        {
+            try
+            {
+                var serializer = new XmlSerializer<PdfEncryption>();
+                _parsedEncryptConfigOption = serializer.DeserializeFromFile(_options.EncryptConfig!);
+            }
+            catch (Exception ex)
+            {
+                _errorOutput.DisplayError(ConsoleResources.CouldntLoadEncryptionConfig, ex);
+                return false;
+            }
+        }
+
         return true;
     }
 
@@ -488,26 +504,15 @@ public class AutomatedScanning
         {
             _config.Run.Set(c => c.PdfSettings.Metadata.Keywords, _options.PdfKeywords);
         }
-        
+
         if (!_options.UseSavedEncryptConfig)
         {
             _config.Run.Set(c => c.PdfSettings.Encryption, defaults.PdfSettings.Encryption);
         }
-
-        if (!string.IsNullOrEmpty(_options.EncryptConfig))
+        if (_options.EncryptConfig != null)
         {
-            try
-            {
-                // TODO: Add tests for this
-                var serializer = new XmlSerializer<PdfEncryption>();
-                var encryption = serializer.DeserializeFromFile(_options.EncryptConfig!);
-                _config.Run.Set(c => c.PdfSettings.Encryption, encryption);
-            }
-            catch (Exception ex)
-            {
-                Log.ErrorException(ConsoleResources.CouldntLoadEncryptionConfig, ex);
-                _errorOutput.DisplayError(ConsoleResources.CouldntLoadEncryptionConfig);
-            }
+            // The actual file reading/parsing was done in ValidateOptions in case it failed
+            _config.Run.Set(c => c.PdfSettings.Encryption, _parsedEncryptConfigOption);
         }
 
         var compat = PdfCompat.Default;

@@ -1,18 +1,10 @@
-using System.Drawing;
-using System.Text;
 using NAPS2.Automation;
 using NAPS2.ImportExport.Pdf;
-using NAPS2.Modules;
-using NAPS2.Ocr;
-using NAPS2.Recovery;
-using NAPS2.Scan;
-using NAPS2.Scan.Internal;
 using NAPS2.Sdk.Tests;
 using NAPS2.Sdk.Tests.Asserts;
-using NAPS2.Sdk.Tests.Mocks;
 using NAPS2.Sdk.Tests.Ocr;
 using Ninject;
-using Ninject.Modules;
+using PdfSharp.Pdf.Security;
 using Xunit;
 using Xunit.Abstractions;
 
@@ -21,33 +13,18 @@ namespace NAPS2.Lib.Tests.Automation;
 // TODO: Write tests for every option, or as many as possible
 public class CommandLineIntegrationTests : ContextualTexts
 {
-    private readonly ITestOutputHelper _testOutputHelper;
+    private readonly AutomationHelper _automationHelper;
 
     public CommandLineIntegrationTests(ITestOutputHelper testOutputHelper)
     {
-        _testOutputHelper = testOutputHelper;
-    }
-
-    private Task RunCommand(AutomatedScanningOptions options, params Bitmap[] imagesToScan)
-    {
-        return RunCommand(options, null, imagesToScan);
-    }
-
-    private async Task RunCommand(AutomatedScanningOptions options, Action<IKernel> setup, params Bitmap[] imagesToScan)
-    {
-        var scanDriverFactory = new ScanDriverFactoryBuilder().WithScannedImages(imagesToScan).Build();
-        var kernel = new StandardKernel(new CommonModule(), new ConsoleModule(options),
-            new TestModule(ScanningContext, ImageContext, scanDriverFactory, _testOutputHelper, FolderPath));
-        setup?.Invoke(kernel);
-        var automatedScanning = kernel.Get<AutomatedScanning>();
-        await automatedScanning.Execute();
+        _automationHelper = new AutomationHelper(this, testOutputHelper);
     }
 
     [Fact]
     public async Task ScanSanity()
     {
         var path = $"{FolderPath}/test.pdf";
-        await RunCommand(
+        await _automationHelper.RunCommand(
             new AutomatedScanningOptions
             {
                 Number = 1,
@@ -63,7 +40,7 @@ public class CommandLineIntegrationTests : ContextualTexts
     [Fact]
     public async Task SplitPatchT()
     {
-        await RunCommand(
+        await _automationHelper.RunCommand(
             new AutomatedScanningOptions
             {
                 Number = 1,
@@ -95,7 +72,7 @@ public class CommandLineIntegrationTests : ContextualTexts
         CopyResourceToFile(TesseractResources.eng_traineddata, fast, "eng.traineddata");
 
         var path = $"{FolderPath}/test.pdf";
-        await RunCommand(
+        await _automationHelper.RunCommand(
             new AutomatedScanningOptions
             {
                 Number = 1,
@@ -113,7 +90,7 @@ public class CommandLineIntegrationTests : ContextualTexts
     public async Task ScanPdfSettings_DefaultMetadata()
     {
         var path = $"{FolderPath}/test.pdf";
-        await RunCommand(
+        await _automationHelper.RunCommand(
             new AutomatedScanningOptions
             {
                 Number = 1,
@@ -149,7 +126,7 @@ public class CommandLineIntegrationTests : ContextualTexts
     public async Task ScanPdfSettings_SavedMetadata()
     {
         var path = $"{FolderPath}/test.pdf";
-        await RunCommand(
+        await _automationHelper.RunCommand(
             new AutomatedScanningOptions
             {
                 Number = 1,
@@ -186,7 +163,7 @@ public class CommandLineIntegrationTests : ContextualTexts
     public async Task ScanPdfSettings_CustomMetadata()
     {
         var path = $"{FolderPath}/test.pdf";
-        await RunCommand(
+        await _automationHelper.RunCommand(
             new AutomatedScanningOptions
             {
                 Number = 1,
@@ -210,90 +187,95 @@ public class CommandLineIntegrationTests : ContextualTexts
         AssertRecoveryCleanedUp();
     }
 
+    [Fact]
+    public async Task ScanPdfSettings_SavedEncryptConfig()
+    {
+        var path = $"{FolderPath}/test.pdf";
+        await _automationHelper.RunCommand(
+            new AutomatedScanningOptions
+            {
+                Number = 1,
+                OutputPath = path,
+                UseSavedEncryptConfig = true,
+                Verbose = true
+            },
+            kernel =>
+            {
+                var config = kernel.Get<Naps2Config>();
+                config.User.Set(c => c.PdfSettings.Encryption, new PdfEncryption
+                {
+                    EncryptPdf = true,
+                    OwnerPassword = "hello",
+                    UserPassword = "world",
+                    AllowAnnotations = true,
+                    AllowContentCopying = false
+                });
+            },
+            SharedData.color_image);
+        Assert.True(File.Exists(path));
+        PdfAsserts.AssertEncrypted(path, "hello", "world", x =>
+        { 
+            Assert.True(x.PermitAnnotations);
+            Assert.False(x.PermitExtractContent);
+        });
+        AssertRecoveryCleanedUp();
+    }
+
+    [Fact]
+    public async Task ScanPdfSettings_FileEncryptConfig()
+    {
+        var encryptConfigPath = $"{FolderPath}/encrypt.xml";
+        File.WriteAllText(encryptConfigPath, @"
+<PdfEncryption>
+    <EncryptPdf>true</EncryptPdf>
+    <OwnerPassword>hello</OwnerPassword>
+    <UserPassword>world</UserPassword>
+    <AllowAnnotations>true</AllowAnnotations>
+    <AllowContentCopying>false</AllowContentCopying>
+</PdfEncryption>");
+        
+        var path = $"{FolderPath}/test.pdf";
+        await _automationHelper.RunCommand(
+            new AutomatedScanningOptions
+            {
+                Number = 1,
+                OutputPath = path,
+                EncryptConfig = encryptConfigPath,
+                Verbose = true
+            },
+            SharedData.color_image);
+        Assert.True(File.Exists(path));
+        PdfAsserts.AssertEncrypted(path, "hello", "world", x =>
+        { 
+            Assert.True(x.PermitAnnotations);
+            Assert.False(x.PermitExtractContent);
+        });
+        AssertRecoveryCleanedUp();
+    }
+
+    [Fact]
+    public async Task ScanPdfSettings_InvalidEncryptConfig()
+    {
+        var encryptConfigPath = $"{FolderPath}/encrypt.xml";
+        File.WriteAllText(encryptConfigPath, "blah blah");
+        
+        var path = $"{FolderPath}/test.pdf";
+        await _automationHelper.RunCommand(
+            new AutomatedScanningOptions
+            {
+                Number = 1,
+                OutputPath = path,
+                EncryptConfig = encryptConfigPath,
+                Verbose = true
+            },
+            SharedData.color_image);
+        Assert.False(File.Exists(path));
+        AssertRecoveryCleanedUp();
+    }
+
     private void AssertRecoveryCleanedUp()
     {
-        Assert.False(new DirectoryInfo($"{FolderPath}/recovery").Exists);
     }
 
     // TODO: Add tests for all options, as well as key combinations
-
-    private class TestModule : NinjectModule
-    {
-        private readonly ScanningContext _scanningContext;
-        private readonly ImageContext _imageContext;
-        private readonly IScanDriverFactory _scanDriverFactory;
-        private readonly ITestOutputHelper _testOutputHelper;
-        private readonly string _folderPath;
-
-        public TestModule(ScanningContext scanningContext, ImageContext imageContext,
-            IScanDriverFactory scanDriverFactory,
-            ITestOutputHelper testOutputHelper, string folderPath)
-        {
-            _scanningContext = scanningContext;
-            _imageContext = imageContext;
-            _scanDriverFactory = scanDriverFactory;
-            _testOutputHelper = testOutputHelper;
-            _folderPath = folderPath;
-        }
-
-        public override void Load()
-        {
-            Rebind<ImageContext>().ToConstant(_imageContext);
-            Rebind<IScanDriverFactory>().ToConstant(_scanDriverFactory);
-            Rebind<IScanBridgeFactory>().To<InProcScanBridgeFactory>();
-            Rebind<ConsoleOutput>().ToSelf()
-                .WithConstructorArgument("writer", new TestOutputTextWriter(_testOutputHelper));
-            Rebind<Naps2Config>().ToConstant(Naps2Config.Stub());
-            Rebind<IProfileManager>().ToMethod(_ =>
-            {
-                var userPath = Path.Combine(_folderPath, "profiles.xml");
-                var systemPath = Path.Combine(_folderPath, "sysprofiles.xml");
-                var profileManager = new ProfileManager(userPath, systemPath, false, false, false);
-                var defaultProfile = new ScanProfile
-                {
-                    IsDefault = true,
-                    Device = new ScanDevice("001", "Some Scanner")
-                };
-                profileManager.Mutate(
-                    new ListMutation<ScanProfile>.Append(defaultProfile),
-                    new Selectable<ScanProfile>());
-                return profileManager;
-            }).InSingletonScope();
-            Rebind<TesseractLanguageManager>().ToMethod(_ =>
-            {
-                var componentsPath = Path.Combine(_folderPath, "components");
-                Directory.CreateDirectory(componentsPath);
-                return new TesseractLanguageManager(componentsPath);
-            }).InSingletonScope();
-            Rebind<IOcrEngine>().ToMethod(ctx => new TesseractOcrEngine(
-                Path.Combine(_folderPath, "tesseract.exe"),
-                _folderPath,
-                _folderPath)).InSingletonScope();
-
-            string recoveryFolderPath = Path.Combine(_folderPath, "recovery");
-            var recoveryStorageManager =
-                RecoveryStorageManager.CreateFolder(recoveryFolderPath, Kernel.Get<UiImageList>());
-            var fileStorageManager = new FileStorageManager(recoveryFolderPath);
-            Kernel.Bind<RecoveryStorageManager>().ToConstant(recoveryStorageManager);
-            Kernel.Bind<FileStorageManager>().ToConstant(fileStorageManager);
-
-            Kernel.Get<ScanningContext>().TempFolderPath = _scanningContext.TempFolderPath;
-        }
-    }
-
-    private class TestOutputTextWriter : TextWriter
-    {
-        readonly ITestOutputHelper _output;
-
-        public TestOutputTextWriter(ITestOutputHelper output)
-        {
-            _output = output;
-        }
-
-        public override Encoding Encoding => Encoding.UTF8;
-
-        public override void WriteLine(string message) => _output.WriteLine(message);
-
-        public override void WriteLine(string format, params object[] args) => _output.WriteLine(format, args);
-    }
 }
