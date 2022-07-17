@@ -1,10 +1,11 @@
+using System.Drawing;
 using NAPS2.Automation;
 using NAPS2.ImportExport.Pdf;
 using NAPS2.Sdk.Tests;
 using NAPS2.Sdk.Tests.Asserts;
+using NAPS2.Sdk.Tests.Images;
 using NAPS2.Sdk.Tests.Ocr;
 using Ninject;
-using PdfSharp.Pdf.Security;
 using Xunit;
 using Xunit.Abstractions;
 
@@ -13,6 +14,14 @@ namespace NAPS2.Lib.Tests.Automation;
 // TODO: Write tests for every option, or as many as possible
 public class CommandLineIntegrationTests : ContextualTests
 {
+    private static readonly Bitmap Image1 = SharedData.color_image;
+    private static readonly Bitmap Image2 = TransformTestsData.color_image_h_n300;
+    private static readonly Bitmap Image3 = TransformTestsData.color_image_h_p300;
+    private static readonly Bitmap Image4 = TransformTestsData.color_image_s_n300;
+    private static readonly Bitmap Image5 = TransformTestsData.color_image_s_p300;
+    private static readonly Bitmap Image6 = TransformTestsData.color_image_bw;
+    private static readonly Bitmap PatchT = SharedData.patcht;
+    
     private readonly AutomationHelper _automationHelper;
 
     public CommandLineIntegrationTests(ITestOutputHelper testOutputHelper)
@@ -27,11 +36,10 @@ public class CommandLineIntegrationTests : ContextualTests
         await _automationHelper.RunCommand(
             new AutomatedScanningOptions
             {
-                Number = 1,
                 OutputPath = path,
                 Verbose = true
             },
-            SharedData.color_image);
+            Image1);
         Assert.True(File.Exists(path));
         PdfAsserts.AssertPageCount(1, path);
         AssertRecoveryCleanedUp();
@@ -43,19 +51,18 @@ public class CommandLineIntegrationTests : ContextualTests
         await _automationHelper.RunCommand(
             new AutomatedScanningOptions
             {
-                Number = 1,
                 SplitPatchT = true,
                 OutputPath = $"{FolderPath}/$(n).pdf",
                 Verbose = true
             },
-            SharedData.color_image,
-            SharedData.color_image,
-            SharedData.patcht,
-            SharedData.color_image,
-            SharedData.patcht,
-            SharedData.patcht,
-            SharedData.color_image,
-            SharedData.patcht);
+            Image1,
+            Image1,
+            PatchT,
+            Image1,
+            PatchT,
+            PatchT,
+            Image1,
+            PatchT);
         PdfAsserts.AssertPageCount(2, $"{FolderPath}/1.pdf");
         PdfAsserts.AssertPageCount(1, $"{FolderPath}/2.pdf");
         PdfAsserts.AssertPageCount(1, $"{FolderPath}/3.pdf");
@@ -75,7 +82,6 @@ public class CommandLineIntegrationTests : ContextualTests
         await _automationHelper.RunCommand(
             new AutomatedScanningOptions
             {
-                Number = 1,
                 OutputPath = path,
                 Verbose = true,
                 OcrLang = "eng"
@@ -93,7 +99,6 @@ public class CommandLineIntegrationTests : ContextualTests
         await _automationHelper.RunCommand(
             new AutomatedScanningOptions
             {
-                Number = 1,
                 OutputPath = path,
                 Verbose = true
             },
@@ -109,7 +114,7 @@ public class CommandLineIntegrationTests : ContextualTests
                     Title = "title1"
                 });
             },
-            SharedData.color_image);
+            Image1);
         Assert.True(File.Exists(path));
         PdfAsserts.AssertMetadata(new PdfMetadata
         {
@@ -129,7 +134,6 @@ public class CommandLineIntegrationTests : ContextualTests
         await _automationHelper.RunCommand(
             new AutomatedScanningOptions
             {
-                Number = 1,
                 OutputPath = path,
                 UseSavedMetadata = true,
                 Verbose = true
@@ -146,7 +150,7 @@ public class CommandLineIntegrationTests : ContextualTests
                     Title = "title1"
                 });
             },
-            SharedData.color_image);
+            Image1);
         Assert.True(File.Exists(path));
         PdfAsserts.AssertMetadata(new PdfMetadata
         {
@@ -166,7 +170,6 @@ public class CommandLineIntegrationTests : ContextualTests
         await _automationHelper.RunCommand(
             new AutomatedScanningOptions
             {
-                Number = 1,
                 OutputPath = path,
                 PdfAuthor = "author1",
                 PdfSubject = "subject1",
@@ -174,7 +177,7 @@ public class CommandLineIntegrationTests : ContextualTests
                 PdfKeywords = "keywords1",
                 Verbose = true
             },
-            SharedData.color_image);
+            Image1);
         Assert.True(File.Exists(path));
         PdfAsserts.AssertMetadata(new PdfMetadata
         {
@@ -194,7 +197,6 @@ public class CommandLineIntegrationTests : ContextualTests
         await _automationHelper.RunCommand(
             new AutomatedScanningOptions
             {
-                Number = 1,
                 OutputPath = path,
                 UseSavedEncryptConfig = true,
                 Verbose = true
@@ -211,7 +213,7 @@ public class CommandLineIntegrationTests : ContextualTests
                     AllowContentCopying = false
                 });
             },
-            SharedData.color_image);
+            Image1);
         Assert.True(File.Exists(path));
         PdfAsserts.AssertEncrypted(path, "hello", "world", x =>
         { 
@@ -238,12 +240,11 @@ public class CommandLineIntegrationTests : ContextualTests
         await _automationHelper.RunCommand(
             new AutomatedScanningOptions
             {
-                Number = 1,
                 OutputPath = path,
                 EncryptConfig = encryptConfigPath,
                 Verbose = true
             },
-            SharedData.color_image);
+            Image1);
         Assert.True(File.Exists(path));
         PdfAsserts.AssertEncrypted(path, "hello", "world", x =>
         { 
@@ -263,13 +264,174 @@ public class CommandLineIntegrationTests : ContextualTests
         await _automationHelper.RunCommand(
             new AutomatedScanningOptions
             {
-                Number = 1,
                 OutputPath = path,
                 EncryptConfig = encryptConfigPath,
                 Verbose = true
             },
-            SharedData.color_image);
+            Image1);
         Assert.False(File.Exists(path));
+        AssertRecoveryCleanedUp();
+    }
+
+    [Fact]
+    public async Task ExistingFile_NoOverwrite()
+    {
+        var path = $"{FolderPath}/test.pdf";
+        File.WriteAllText(path, "blah");
+        await _automationHelper.RunCommand(
+            new AutomatedScanningOptions
+            {
+                OutputPath = path,
+                Verbose = true
+            },
+            Image1);
+        Assert.Equal("blah", File.ReadAllText(path));
+        AssertRecoveryCleanedUp();
+    }
+
+    [Fact]
+    public async Task ExistingFile_ForceOverwrite()
+    {
+        var path = $"{FolderPath}/test.pdf";
+        File.WriteAllText(path, "blah");
+        await _automationHelper.RunCommand(
+            new AutomatedScanningOptions
+            {
+                OutputPath = path,
+                ForceOverwrite = true,
+                Verbose = true
+            },
+            Image1);
+        PdfAsserts.AssertPageCount(1, path);
+        AssertRecoveryCleanedUp();
+    }
+
+    [Fact]
+    public async Task MultipleImages()
+    {
+        var path = $"{FolderPath}/test.pdf";
+        await _automationHelper.RunCommand(
+            new AutomatedScanningOptions
+            {
+                OutputPath = path,
+                Verbose = true
+            },
+            new[] { Image1, Image2, Image3, Image4, Image5, Image6 });
+        PdfAsserts.AssertImages(new[] { Image1, Image2, Image3, Image4, Image5, Image6 }, path);
+        AssertRecoveryCleanedUp();
+    }
+
+    [Fact]
+    public async Task MultipleImages_Interleave()
+    {
+        var path = $"{FolderPath}/test.pdf";
+        await _automationHelper.RunCommand(
+            new AutomatedScanningOptions
+            {
+                OutputPath = path,
+                Interleave = true,
+                Verbose = true
+            },
+            new[] { Image1, Image3, Image5, Image2, Image4, Image6 });
+        PdfAsserts.AssertImages(new[] { Image1, Image2, Image3, Image4, Image5, Image6 }, path);
+        AssertRecoveryCleanedUp();
+    }
+
+    [Fact]
+    public async Task MultipleImages_AltInterleave()
+    {
+        var path = $"{FolderPath}/test.pdf";
+        await _automationHelper.RunCommand(
+            new AutomatedScanningOptions
+            {
+                OutputPath = path,
+                AltInterleave = true,
+                Verbose = true
+            },
+            new[] { Image1, Image3, Image5, Image6, Image4, Image2 });
+        PdfAsserts.AssertImages(new[] { Image1, Image2, Image3, Image4, Image5, Image6 }, path);
+        AssertRecoveryCleanedUp();
+    }
+
+    [Fact]
+    public async Task MultipleImages_Deinterleave()
+    {
+        var path = $"{FolderPath}/test.pdf";
+        await _automationHelper.RunCommand(
+            new AutomatedScanningOptions
+            {
+                OutputPath = path,
+                Deinterleave = true,
+                Verbose = true
+            },
+            new[] { Image1, Image2, Image3, Image4, Image5, Image6 });
+        PdfAsserts.AssertImages(new[] { Image1, Image3, Image5, Image2, Image4, Image6 }, path);
+        AssertRecoveryCleanedUp();
+    }
+
+    [Fact]
+    public async Task MultipleImages_AltDeinterleave()
+    {
+        var path = $"{FolderPath}/test.pdf";
+        await _automationHelper.RunCommand(
+            new AutomatedScanningOptions
+            {
+                OutputPath = path,
+                AltDeinterleave = true,
+                Verbose = true
+            },
+            new[] { Image1, Image2, Image3, Image4, Image5, Image6 });
+        PdfAsserts.AssertImages(new[] { Image1, Image3, Image5, Image6, Image4, Image2 }, path);
+        AssertRecoveryCleanedUp();
+    }
+
+    [Fact]
+    public async Task MultipleImages_Reverse()
+    {
+        var path = $"{FolderPath}/test.pdf";
+        await _automationHelper.RunCommand(
+            new AutomatedScanningOptions
+            {
+                OutputPath = path,
+                Reverse = true,
+                Verbose = true
+            },
+            new[] { Image1, Image2, Image3, Image4, Image5, Image6 });
+        PdfAsserts.AssertImages(new[] { Image6, Image5, Image4, Image3, Image2, Image1 }, path);
+        AssertRecoveryCleanedUp();
+    }
+
+    [Fact]
+    public async Task MultipleImages_MultipleInterleaveOptions()
+    {
+        var path = $"{FolderPath}/test.pdf";
+        await _automationHelper.RunCommand(
+            new AutomatedScanningOptions
+            {
+                OutputPath = path,
+                Interleave = true,
+                Deinterleave = true,
+                Verbose = true
+            },
+            new[] { Image1, Image2, Image3, Image4, Image5, Image6 });
+        Assert.False(File.Exists(path));
+        AssertRecoveryCleanedUp();
+    }
+
+    [Fact]
+    public async Task MultipleImages_InterleaveAndReverse()
+    {
+        var path = $"{FolderPath}/test.pdf";
+        await _automationHelper.RunCommand(
+            new AutomatedScanningOptions
+            {
+                OutputPath = path,
+                Interleave = true,
+                Reverse = true,
+                Verbose = true
+            },
+            new[] { Image1, Image3, Image5, Image2, Image4, Image6 });
+        PdfAsserts.AssertImages(new[] { Image6, Image5, Image4, Image3, Image2, Image1 }, path);
         AssertRecoveryCleanedUp();
     }
 

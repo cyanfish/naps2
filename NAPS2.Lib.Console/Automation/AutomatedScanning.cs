@@ -211,7 +211,7 @@ public class AutomatedScanning
 
         foreach (var scan in _scanList)
         {
-            // TODO: The result doesn't get propagated back, i.e. this does nothing 
+            // To take advantage of the existing mutation logic we wrap the scan in a UiImageList then copy it back
             var imageList = new UiImageList(scan.Select(x => new UiImage(x)).ToList());
 
             if (_options.AltDeinterleave)
@@ -235,6 +235,9 @@ public class AutomatedScanning
             {
                 imageList.Mutate(new ImageListMutation.ReverseAll());
             }
+            
+            scan.Clear();
+            scan.AddRange(imageList.Images.Select(x => x.GetImageWeakReference().ProcessedImage));
         }
     }
 
@@ -395,6 +398,14 @@ public class AutomatedScanning
         if (_options.OutputPath == null && _options.EmailFileName == null && _options.ImportPath != null)
         {
             _errorOutput.DisplayError(ConsoleResources.OutputOrEmailRequiredForImport);
+            return false;
+        }
+
+        if (new[] { _options.Interleave, _options.Deinterleave, _options.AltInterleave, _options.AltDeinterleave }
+                .Count(x => x) > 1)
+        {
+            // TODO
+            // _errorOutput.DisplayError(ConsoleResources.OnlyOneInterleaveOption);
             return false;
         }
 

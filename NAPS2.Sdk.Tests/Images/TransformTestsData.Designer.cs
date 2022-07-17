@@ -22,21 +22,21 @@ namespace NAPS2.Sdk.Tests.Images {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class TransformTestsData {
+    public class TransformTestsData {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal TransformTestsData() {
+        public TransformTestsData() {
         }
         
         /// <summary>
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("NAPS2.Sdk.Tests.Images.TransformTestsData", typeof(TransformTestsData).Assembly);
@@ -51,7 +51,7 @@ namespace NAPS2.Sdk.Tests.Images {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -63,7 +63,7 @@ namespace NAPS2.Sdk.Tests.Images {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap color_image {
+        public static System.Drawing.Bitmap color_image {
             get {
                 object obj = ResourceManager.GetObject("color_image", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -73,7 +73,7 @@ namespace NAPS2.Sdk.Tests.Images {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap color_image_b_n300 {
+        public static System.Drawing.Bitmap color_image_b_n300 {
             get {
                 object obj = ResourceManager.GetObject("color_image_b_n300", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -83,7 +83,7 @@ namespace NAPS2.Sdk.Tests.Images {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap color_image_b_p300 {
+        public static System.Drawing.Bitmap color_image_b_p300 {
             get {
                 object obj = ResourceManager.GetObject("color_image_b_p300", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -93,7 +93,7 @@ namespace NAPS2.Sdk.Tests.Images {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap color_image_bw {
+        public static System.Drawing.Bitmap color_image_bw {
             get {
                 object obj = ResourceManager.GetObject("color_image_bw", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -103,7 +103,7 @@ namespace NAPS2.Sdk.Tests.Images {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap color_image_bw_p300 {
+        public static System.Drawing.Bitmap color_image_bw_p300 {
             get {
                 object obj = ResourceManager.GetObject("color_image_bw_p300", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -113,7 +113,7 @@ namespace NAPS2.Sdk.Tests.Images {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap color_image_c_5_10_15_20 {
+        public static System.Drawing.Bitmap color_image_c_5_10_15_20 {
             get {
                 object obj = ResourceManager.GetObject("color_image_c_5_10_15_20", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -123,7 +123,7 @@ namespace NAPS2.Sdk.Tests.Images {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap color_image_c_n300 {
+        public static System.Drawing.Bitmap color_image_c_n300 {
             get {
                 object obj = ResourceManager.GetObject("color_image_c_n300", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -133,7 +133,7 @@ namespace NAPS2.Sdk.Tests.Images {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap color_image_c_p300 {
+        public static System.Drawing.Bitmap color_image_c_p300 {
             get {
                 object obj = ResourceManager.GetObject("color_image_c_p300", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -143,7 +143,7 @@ namespace NAPS2.Sdk.Tests.Images {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap color_image_h_n300 {
+        public static System.Drawing.Bitmap color_image_h_n300 {
             get {
                 object obj = ResourceManager.GetObject("color_image_h_n300", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -153,7 +153,7 @@ namespace NAPS2.Sdk.Tests.Images {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap color_image_h_p300 {
+        public static System.Drawing.Bitmap color_image_h_p300 {
             get {
                 object obj = ResourceManager.GetObject("color_image_h_p300", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -163,7 +163,7 @@ namespace NAPS2.Sdk.Tests.Images {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap color_image_r_180 {
+        public static System.Drawing.Bitmap color_image_r_180 {
             get {
                 object obj = ResourceManager.GetObject("color_image_r_180", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -173,7 +173,7 @@ namespace NAPS2.Sdk.Tests.Images {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap color_image_r_n45 {
+        public static System.Drawing.Bitmap color_image_r_n45 {
             get {
                 object obj = ResourceManager.GetObject("color_image_r_n45", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -183,7 +183,7 @@ namespace NAPS2.Sdk.Tests.Images {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap color_image_r_p46 {
+        public static System.Drawing.Bitmap color_image_r_p46 {
             get {
                 object obj = ResourceManager.GetObject("color_image_r_p46", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -193,7 +193,7 @@ namespace NAPS2.Sdk.Tests.Images {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap color_image_r_p90 {
+        public static System.Drawing.Bitmap color_image_r_p90 {
             get {
                 object obj = ResourceManager.GetObject("color_image_r_p90", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -203,7 +203,7 @@ namespace NAPS2.Sdk.Tests.Images {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap color_image_s_n300 {
+        public static System.Drawing.Bitmap color_image_s_n300 {
             get {
                 object obj = ResourceManager.GetObject("color_image_s_n300", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -213,7 +213,7 @@ namespace NAPS2.Sdk.Tests.Images {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap color_image_s_p300 {
+        public static System.Drawing.Bitmap color_image_s_p300 {
             get {
                 object obj = ResourceManager.GetObject("color_image_s_p300", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -223,7 +223,7 @@ namespace NAPS2.Sdk.Tests.Images {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap color_image_sh_n1000 {
+        public static System.Drawing.Bitmap color_image_sh_n1000 {
             get {
                 object obj = ResourceManager.GetObject("color_image_sh_n1000", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -233,7 +233,7 @@ namespace NAPS2.Sdk.Tests.Images {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap color_image_sh_p1000 {
+        public static System.Drawing.Bitmap color_image_sh_p1000 {
             get {
                 object obj = ResourceManager.GetObject("color_image_sh_p1000", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -243,7 +243,7 @@ namespace NAPS2.Sdk.Tests.Images {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap color_image_thumb_256 {
+        public static System.Drawing.Bitmap color_image_thumb_256 {
             get {
                 object obj = ResourceManager.GetObject("color_image_thumb_256", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));

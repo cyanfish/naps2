@@ -39,7 +39,7 @@ public class AutomatedScanningOptions
     public bool Verbose { get; set; }
 
     [Option('n', "number", Default = 1, HelpText = "The number of scans to perform.")]
-    public int Number { get; set; }
+    public int Number { get; set; } = 1;
 
     [Option('d', "delay", Default = 0, HelpText = "The delay (in milliseconds) between each scan.")]
     public int Delay { get; set; }
@@ -175,7 +175,7 @@ public class AutomatedScanningOptions
     #region Image Options
 
     [Option("jpegquality", Default = 75, HelpText = "The quality of saved JPEG files (0-100, default 75).")]
-    public int JpegQuality { get; set; }
+    public int JpegQuality { get; set; } = 75;
 
     [Option("tiffcomp", HelpText = "The compression to use for TIFF files. Possible values: auto, lzw, ccitt4, none")]
     public string? TiffComp { get; set; }

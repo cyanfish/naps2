@@ -1,4 +1,6 @@
-﻿using NAPS2.ImportExport.Pdf;
+﻿using System.Drawing;
+using NAPS2.Images.Gdi;
+using NAPS2.ImportExport.Pdf;
 using PdfSharp.Pdf.IO;
 using PdfSharp.Pdf.Security;
 using Xunit;
@@ -55,5 +57,17 @@ public static class PdfAsserts
         Assert.Equal(PasswordValidity.OwnerPassword, doc.SecurityHandler.ValidatePassword(ownerPassword));
         Assert.Equal(PasswordValidity.UserPassword, doc.SecurityHandler.ValidatePassword(userPassword));
         securitySettingsAsserts(doc.SecuritySettings);
+    }
+
+    public static void AssertImages(Bitmap[] expectedImages, string path)
+    {
+        var renderer = new PdfiumPdfRenderer(new GdiImageContext());
+        var dpi = expectedImages[0].HorizontalResolution;
+        var actualImages = renderer.Render(path, dpi).ToList();
+        Assert.Equal(expectedImages.Length, actualImages.Count);
+        for (int i = 0; i < expectedImages.Length; i++)
+        {
+            ImageAsserts.Similar(new GdiImage(expectedImages[i]), actualImages[i], ImageAsserts.GENERAL_RMSE_THRESHOLD);
+        }
     }
 }
