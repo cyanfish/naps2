@@ -16,7 +16,11 @@ public static class SaveSeparatorHelper
         {
             foreach (var scan in scans)
             {
-                yield return scan.ToList();
+                var images = scan.ToList();
+                if (images.Count > 0)
+                {
+                    yield return images;
+                }
             }
         }
         else if (separator == SaveSeparator.FilePerPage)
@@ -59,7 +63,11 @@ public static class SaveSeparatorHelper
         }
         else
         {
-            yield return scans.SelectMany(x => x.ToList()).ToList();
+            var images = scans.SelectMany(x => x.ToList()).ToList();
+            if (images.Count > 0)
+            {
+                yield return images;
+            }
         }
     }
 }

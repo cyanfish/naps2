@@ -210,8 +210,7 @@ public class AutomatedScanning
             : _options.SplitScans ? SaveSeparator.FilePerScan
             : _options.SplitSize > 0 || _options.Split ? SaveSeparator.FilePerPage
             : SaveSeparator.None;
-        _scanList = SaveSeparatorHelper.SeparateScans(_scanList, sep, _options.SplitSize).Where(x => x.Count > 0)
-            .ToList();
+        _scanList = SaveSeparatorHelper.SeparateScans(_scanList, sep, _options.SplitSize).ToList();
 
         foreach (var scan in _scanList)
         {

@@ -40,8 +40,21 @@ public class CommandLineIntegrationTests : ContextualTests
                 Verbose = true
             },
             Image1);
-        Assert.True(File.Exists(path));
-        PdfAsserts.AssertPageCount(1, path);
+        PdfAsserts.AssertImages(path, Image1);
+        AssertRecoveryCleanedUp();
+    }
+
+    [Fact]
+    public async Task ScanWithNoImages()
+    {
+        var path = $"{FolderPath}/test.pdf";
+        await _automationHelper.RunCommand(
+            new AutomatedScanningOptions
+            {
+                OutputPath = path,
+                Verbose = true
+            });
+        Assert.False(File.Exists(path));
         AssertRecoveryCleanedUp();
     }
 
@@ -62,7 +75,6 @@ public class CommandLineIntegrationTests : ContextualTests
                 OcrLang = "eng"
             },
             SharedData.ocr_test);
-        Assert.True(File.Exists(path));
         PdfAsserts.AssertContainsText("ADVERTISEMENT.", path);
         AssertRecoveryCleanedUp();
     }
@@ -90,7 +102,6 @@ public class CommandLineIntegrationTests : ContextualTests
                 });
             },
             Image1);
-        Assert.True(File.Exists(path));
         PdfAsserts.AssertMetadata(new PdfMetadata
         {
             Author = "NAPS2",
@@ -126,7 +137,6 @@ public class CommandLineIntegrationTests : ContextualTests
                 });
             },
             Image1);
-        Assert.True(File.Exists(path));
         PdfAsserts.AssertMetadata(new PdfMetadata
         {
             Author = "author1",
@@ -153,7 +163,6 @@ public class CommandLineIntegrationTests : ContextualTests
                 Verbose = true
             },
             Image1);
-        Assert.True(File.Exists(path));
         PdfAsserts.AssertMetadata(new PdfMetadata
         {
             Author = "author1",
@@ -189,7 +198,6 @@ public class CommandLineIntegrationTests : ContextualTests
                 });
             },
             Image1);
-        Assert.True(File.Exists(path));
         PdfAsserts.AssertEncrypted(path, "hello", "world", x =>
         {
             Assert.True(x.PermitAnnotations);
@@ -220,7 +228,6 @@ public class CommandLineIntegrationTests : ContextualTests
                 Verbose = true
             },
             Image1);
-        Assert.True(File.Exists(path));
         PdfAsserts.AssertEncrypted(path, "hello", "world", x =>
         {
             Assert.True(x.PermitAnnotations);
@@ -277,7 +284,7 @@ public class CommandLineIntegrationTests : ContextualTests
                 Verbose = true
             },
             Image1);
-        PdfAsserts.AssertPageCount(1, path);
+        PdfAsserts.AssertImages(path, Image1);
         AssertRecoveryCleanedUp();
     }
 
@@ -468,6 +475,30 @@ public class CommandLineIntegrationTests : ContextualTests
     }
 
     [Fact]
+    public async Task SplitSizeWithMultipleScans()
+    {
+        var path = $"{FolderPath}/test$(n).pdf";
+        await _automationHelper.RunCommand(
+            new AutomatedScanningOptions
+            {
+                OutputPath = path,
+                Number = 3,
+                SplitSize = 2,
+                Verbose = true
+            },
+            new ScanDriverFactoryBuilder()
+                .WithScannedImages(Image1, Image2, Image3)
+                .WithScannedImages(Image4, Image5)
+                .WithScannedImages()
+                .Build());
+        PdfAsserts.AssertImages($"{FolderPath}/test1.pdf", Image1, Image2);
+        PdfAsserts.AssertImages($"{FolderPath}/test2.pdf", Image3);
+        PdfAsserts.AssertImages($"{FolderPath}/test3.pdf", Image4, Image5);
+        Assert.False(File.Exists($"{FolderPath}/test4.pdf"));
+        AssertRecoveryCleanedUp();
+    }
+
+    [Fact]
     public async Task SplitScans()
     {
         var path = $"{FolderPath}/test$(n).pdf";
@@ -476,11 +507,12 @@ public class CommandLineIntegrationTests : ContextualTests
             {
                 OutputPath = path,
                 SplitScans = true,
-                Number = 3,
+                Number = 4,
                 Verbose = true
             },
             new ScanDriverFactoryBuilder()
                 .WithScannedImages(Image1)
+                .WithScannedImages()
                 .WithScannedImages(Image2, Image3)
                 .WithScannedImages(Image4)
                 .Build());
@@ -501,14 +533,7 @@ public class CommandLineIntegrationTests : ContextualTests
                 OutputPath = $"{FolderPath}/$(n).pdf",
                 Verbose = true
             },
-            Image1,
-            Image2,
-            PatchT,
-            Image3,
-            PatchT,
-            PatchT,
-            Image4,
-            PatchT);
+            Image1, Image2, PatchT, Image3, PatchT, PatchT, Image4, PatchT);
         PdfAsserts.AssertImages($"{FolderPath}/1.pdf", Image1, Image2);
         PdfAsserts.AssertImages($"{FolderPath}/2.pdf", Image3);
         PdfAsserts.AssertImages($"{FolderPath}/3.pdf", Image4);
