@@ -73,6 +73,7 @@ public class AutomatedScanning
 
     public async Task Execute()
     {
+        bool hasUnexpectedException = false;
         try
         {
             if (!ValidateOptions())
@@ -126,17 +127,20 @@ public class AutomatedScanning
             {
                 await EmailScannedImages();
             }
-
-            _scanningContext.Dispose();
-            _recoveryStorageManager.Dispose();
         }
         catch (Exception ex)
         {
+            hasUnexpectedException = true;
             Log.FatalException("An error occurred that caused the console application to close.", ex);
             _output.Writer.WriteLine(ConsoleResources.UnexpectedError);
         }
         finally
         {
+            if (!hasUnexpectedException)
+            {
+                _scanningContext.Dispose();
+                _recoveryStorageManager.Dispose();
+            }
             if (_options.WaitForEnter)
             {
                 Console.ReadLine();

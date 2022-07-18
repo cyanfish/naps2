@@ -1,13 +1,14 @@
 using System.Drawing;
 using NAPS2.Automation;
 using NAPS2.Modules;
+using NAPS2.Scan.Internal;
 using NAPS2.Sdk.Tests;
 using Ninject;
 using Xunit.Abstractions;
 
 namespace NAPS2.Lib.Tests.Automation;
 
-public class AutomationHelper
+internal class AutomationHelper
 {
     private readonly ContextualTests _testClass;
     private readonly ITestOutputHelper _testOutputHelper;
@@ -23,9 +24,18 @@ public class AutomationHelper
         return RunCommand(options, null, imagesToScan);
     }
 
-    public async Task RunCommand(AutomatedScanningOptions options, Action<IKernel> setup, params Bitmap[] imagesToScan)
+    public Task RunCommand(AutomatedScanningOptions options, Action<IKernel> setup, params Bitmap[] imagesToScan)
     {
-        var scanDriverFactory = new ScanDriverFactoryBuilder().WithScannedImages(imagesToScan).Build();
+        return RunCommand(options, setup, new ScanDriverFactoryBuilder().WithScannedImages(imagesToScan).Build());
+    }
+
+    public Task RunCommand(AutomatedScanningOptions options, IScanDriverFactory scanDriverFactory)
+    {
+        return RunCommand(options, null, scanDriverFactory);
+    }
+
+    public async Task RunCommand(AutomatedScanningOptions options, Action<IKernel> setup, IScanDriverFactory scanDriverFactory)
+    {
         var kernel = new StandardKernel(new CommonModule(), new ConsoleModule(options),
             new TestModule(_testClass.ScanningContext, _testClass.ImageContext, scanDriverFactory, _testOutputHelper,
                 _testClass.FolderPath));

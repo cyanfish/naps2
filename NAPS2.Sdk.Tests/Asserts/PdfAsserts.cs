@@ -59,7 +59,7 @@ public static class PdfAsserts
         securitySettingsAsserts(doc.SecuritySettings);
     }
 
-    public static void AssertImages(Bitmap[] expectedImages, string path)
+    public static void AssertImages(string path, params Bitmap[] expectedImages)
     {
         var renderer = new PdfiumPdfRenderer(new GdiImageContext());
         var dpi = expectedImages[0].HorizontalResolution;
