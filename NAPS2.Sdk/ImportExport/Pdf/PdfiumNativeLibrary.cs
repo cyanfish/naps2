@@ -52,6 +52,8 @@ public class PdfiumNativeLibrary : Unmanaged.NativeLibrary
 
     public delegate void FPDFBitmap_Destroy_delegate(IntPtr bitmap);
 
+    public delegate IntPtr FPDF_CreateNewDocument_delegate();
+
     public delegate IntPtr FPDF_LoadDocument_delegate([MarshalAs(UnmanagedType.LPStr)] string filePath,
         [MarshalAs(UnmanagedType.LPStr)] string? password);
 
@@ -89,6 +91,7 @@ public class PdfiumNativeLibrary : Unmanaged.NativeLibrary
     public FPDFBitmap_CreateEx_delegate FPDFBitmap_CreateEx => Load<FPDFBitmap_CreateEx_delegate>();
     public FPDFBitmap_FillRect_delegate FPDFBitmap_FillRect => Load<FPDFBitmap_FillRect_delegate>();
     public FPDFBitmap_Destroy_delegate FPDFBitmap_Destroy => Load<FPDFBitmap_Destroy_delegate>();
+    public FPDF_CreateNewDocument_delegate FPDF_CreateNewDocument => Load<FPDF_CreateNewDocument_delegate>();
     public FPDF_LoadDocument_delegate FPDF_LoadDocument => Load<FPDF_LoadDocument_delegate>();
     public FPDF_LoadMemDocument_delegate FPDF_LoadMemDocument => Load<FPDF_LoadMemDocument_delegate>();
     public FPDF_CloseDocument_delegate FPDF_CloseDocument => Load<FPDF_CloseDocument_delegate>();
