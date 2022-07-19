@@ -4,6 +4,7 @@ using Xunit;
 
 namespace NAPS2.Remoting.Network.Tests;
 
+// TODO: Try and reduce flakiness without needing to bump up timeouts
 public class ServerDiscoveryTests
 {
     [Fact]
@@ -15,8 +16,8 @@ public class ServerDiscoveryTests
         });
         var client = new NetworkScanClient();
         await server.Start();
-        await Task.Delay(100);
-        var discovered = await client.DiscoverServers(100);
+        await Task.Delay(500);
+        var discovered = await client.DiscoverServers(500);
         Assert.Contains(discovered, x => x.Name == "NetworkScanTests.ServerDiscovery");
     }
 
@@ -33,8 +34,8 @@ public class ServerDiscoveryTests
             DiscoveryPort = 33433
         });
         await server.Start();
-        await Task.Delay(100);
-        var discovered = await client.DiscoverServers(100);
+        await Task.Delay(500);
+        var discovered = await client.DiscoverServers(500);
         Assert.Contains(discovered, x => x.Name == "NetworkScanTests.ServerDiscoveryCustomPort");
     }
 
@@ -51,8 +52,8 @@ public class ServerDiscoveryTests
             DiscoveryPort = 33555
         });
         await server.Start();
-        await Task.Delay(100);
-        var discovered = await client.DiscoverServers(100);
+        await Task.Delay(500);
+        var discovered = await client.DiscoverServers(500);
         Assert.DoesNotContain(discovered, x => x.Name == "NetworkScanTests.ServerDiscoveryMismatchPort");
     }
 
@@ -66,8 +67,8 @@ public class ServerDiscoveryTests
         });
         var client = new NetworkScanClient();
         await server.Start();
-        await Task.Delay(100);
-        var discovered = await client.DiscoverServers(100);
+        await Task.Delay(500);
+        var discovered = await client.DiscoverServers(500);
         Assert.DoesNotContain(discovered, x => x.Name == "NetworkScanTests.ServerDiscoveryOff");
     }
 

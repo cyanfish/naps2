@@ -216,14 +216,13 @@ public class OcrRequestQueueTests : ContextualTests
                 {
                     var cancelToken = (CancellationToken) invocation.Arguments[2];
                     cancelledAtEngineStart = cancelToken.IsCancellationRequested;
-                    await Task.Delay(100);
+                    cts.Cancel();
                     cancelledAtEngineEnd = cancelToken.IsCancellationRequested;
                     return (OcrResult) null;
                 });
                 return mockEngineTask;
             }));
 
-        cts.CancelAfter(50);
         var ocrResult = await DoEnqueueForeground(_image, _tempPath, _ocrParams, cts.Token);
         await mockEngineTask;
 
@@ -340,10 +339,10 @@ public class OcrRequestQueueTests : ContextualTests
             .Returns(_expectedResultTask);
 
         _ocrRequestQueue.WorkerAddedLatency = 50;
-        DoEnqueueForeground(_image, _tempPath, _ocrParams).AssertNoAwait();
+        var queuedTask = DoEnqueueForeground(_image, _tempPath, _ocrParams);
 
         Assert.False(_ocrRequestQueue.HasCachedResult(_mockEngine.Object, _image, _ocrParams));
-        await Task.Delay(200);
+        await queuedTask;
         Assert.True(_ocrRequestQueue.HasCachedResult(_mockEngine.Object, _image, _ocrParams));
     }
     
