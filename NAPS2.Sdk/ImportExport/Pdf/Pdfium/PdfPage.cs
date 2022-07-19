@@ -15,6 +15,17 @@ public class PdfPage : NativePdfiumObject
         return new PdfText(Native.FPDFText_LoadPage(Handle));
     }
 
+    public void InsertObject(PdfPageObject pageObject)
+    {
+        Native.FPDFPage_InsertObject(Handle, pageObject.Handle);
+        pageObject.SetAlreadyDisposed();
+    }
+
+    public void GenerateContent()
+    {
+        Native.FPDFPage_GenerateContent(Handle);
+    }
+
     protected override void DisposeHandle()
     {
         Native.FPDF_ClosePage(Handle);

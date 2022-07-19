@@ -14,10 +14,6 @@ public class PdfBitmap : NativePdfiumObject
     {
     }
 
-    public void FillRect()
-    {
-    }
-
     protected override void DisposeHandle()
     {
         Native.FPDFBitmap_Destroy(Handle);
