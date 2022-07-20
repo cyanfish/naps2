@@ -121,7 +121,6 @@ public class PdfiumPdfExporter : PdfExporter
             }
             else
             {
-                var format = image.Metadata.Lossless ? ImageFileFormat.Png : ImageFileFormat.Jpeg;
                 using var renderedImage = _scanningContext.ImageContext.Render(image);
                 // TODO: Verify always 24 bit? 
                 if (cancelToken.IsCancellationRequested)
@@ -129,7 +128,7 @@ public class PdfiumPdfExporter : PdfExporter
                     return false;
                 }
                 using var page = document.NewPage(renderedImage.Width, renderedImage.Height); // TODO: width/heigth scaling
-                DrawImageOnPage(document, page, renderedImage, compat);
+                DrawImageOnPage(document, page, renderedImage, compat, image.Metadata.Lossless);
             }
             progress++;
             progressCallback?.Invoke(progress, images.Count);
@@ -330,22 +329,43 @@ public class PdfiumPdfExporter : PdfExporter
 //         return string.Concat(elements);
 //     }
 
-    private static void DrawImageOnPage(PdfDocument document, PdfPage page, IMemoryImage img, PdfCompat compat)
+    private static void DrawImageOnPage(PdfDocument document, PdfPage page, IMemoryImage img, PdfCompat compat,
+        bool lossless)
     {
-        using var locked = img.Lock(LockMode.ReadOnly, out var scan0, out var stride);
-        // var (realWidth, realHeight) = GetRealSize(img);
-        // page.Width = realWidth;
-        // page.Height = realHeight;
-        // using XGraphics gfx = XGraphics.FromPdfPage(page);
-        // gfx.DrawImage(img, 0, 0, realWidth, realHeight);
-        using var imageObj = document.NewImage();
-        using var bitmap = PdfBitmap.CreateFromPointerBgr(img.Width, img.Height, scan0, stride);
-        imageObj.SetBitmap(bitmap);
-        int x = 0;
-        int yFromBottom = 0;
-        imageObj.Transform(img.Width, 0, 0, img.Height, x, yFromBottom);
-        page.InsertObject(imageObj);
-        page.GenerateContent();
+        if (lossless)
+        {
+            using var locked = img.Lock(LockMode.ReadOnly, out var scan0, out var stride);
+            // var (realWidth, realHeight) = GetRealSize(img);
+            // page.Width = realWidth;
+            // page.Height = realHeight;
+            // using XGraphics gfx = XGraphics.FromPdfPage(page);
+            // gfx.DrawImage(img, 0, 0, realWidth, realHeight);
+            using var imageObj = document.NewImage();
+            using var bitmap = PdfBitmap.CreateFromPointerBgr(img.Width, img.Height, scan0, stride);
+            imageObj.SetBitmap(bitmap);
+            int x = 0;
+            int yFromBottom = 0;
+            imageObj.Transform(img.Width, 0, 0, img.Height, x, yFromBottom);
+            page.InsertObject(imageObj);
+            page.GenerateContent();
+        }
+        else
+        {
+            // TODO: There is a lot of room for optimization here.
+            // When there are no transforms and the storage is a jpeg file, we could read directly from that stream.
+            // We could also use LoadJpegFile (not inline) to avoid an internal buffer copy in pdfium (that would
+            // require keeping the FileAccess structure/stream intact until Save is called - unless GenerateContent is
+            // enough?).
+
+            using var stream = img.SaveToMemoryStream(ImageFileFormat.Jpeg);
+            using var imageObj = document.NewImage();
+            imageObj.LoadJpegFileInline(stream);
+            int x = 0;
+            int yFromBottom = 0;
+            imageObj.Transform(img.Width, 0, 0, img.Height, x, yFromBottom);
+            page.InsertObject(imageObj);
+            page.GenerateContent();
+        }
     }
 
     private static (int width, int height) GetRealSize(IMemoryImage img)

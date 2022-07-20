@@ -109,6 +109,12 @@ public class PdfiumNativeLibrary : Unmanaged.NativeLibrary
     public delegate IntPtr FPDFPageObj_Transform_delegate(IntPtr page_object, double a, double b, double c, double d,
         double e, double f);
 
+    public delegate bool FPDFImageObj_LoadJpegFile_delegate(IntPtr pages, int count, IntPtr image_object,
+        IntPtr file_access);
+
+    public delegate bool FPDFImageObj_LoadJpegFileInline_delegate(IntPtr pages, int count, IntPtr image_object,
+        IntPtr file_access);
+
     public FPDF_InitLibrary_delegate FPDF_InitLibrary => Load<FPDF_InitLibrary_delegate>();
     public FPDFBitmap_Create_delegate FPDFBitmap_Create => Load<FPDFBitmap_Create_delegate>();
     public FPDFBitmap_CreateEx_delegate FPDFBitmap_CreateEx => Load<FPDFBitmap_CreateEx_delegate>();
@@ -137,6 +143,10 @@ public class PdfiumNativeLibrary : Unmanaged.NativeLibrary
     public FPDFPage_New_delegate FPDFPage_New => Load<FPDFPage_New_delegate>();
     public FPDFPage_GenerateContent_delegate FPDFPage_GenerateContent => Load<FPDFPage_GenerateContent_delegate>();
     public FPDFPageObj_Transform_delegate FPDFPageObj_Transform => Load<FPDFPageObj_Transform_delegate>();
+    public FPDFImageObj_LoadJpegFile_delegate FPDFImageObj_LoadJpegFile => Load<FPDFImageObj_LoadJpegFile_delegate>();
+
+    public FPDFImageObj_LoadJpegFileInline_delegate FPDFImageObj_LoadJpegFileInline =>
+        Load<FPDFImageObj_LoadJpegFileInline_delegate>();
 
     public struct FPDF_FileWrite
     {
@@ -146,4 +156,14 @@ public class PdfiumNativeLibrary : Unmanaged.NativeLibrary
     }
 
     public delegate int WriteBlock_delegate(IntPtr self, IntPtr data, ulong size);
+
+    public struct FPDF_FileAccess
+    {
+        public ulong m_FileLen;
+        [MarshalAs(UnmanagedType.FunctionPtr)]
+        public GetBlock_delegate m_GetBlock;
+        public IntPtr m_Param;
+    }
+
+    public delegate int GetBlock_delegate(IntPtr param, ulong position, IntPtr buffer, ulong size);
 }

@@ -75,6 +75,7 @@ public class ScanningContext : IDisposable
             case IMemoryImage image:
                 if (FileStorageManager == null)
                 {
+                    // TODO: Clone may not be enough, as the original bitmap could have a lock on the filesystem that should be released.
                     return image.Clone();
                 }
                 return WriteImageToBackingFile(image, bitDepth, lossless, quality);
