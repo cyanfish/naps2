@@ -83,9 +83,29 @@ namespace NAPS2.Sdk.Tests.ImportExport {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap word_p1_rotated {
+            get {
+                object obj = ResourceManager.GetObject("word_p1_rotated", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap word_p2 {
             get {
                 object obj = ResourceManager.GetObject("word_p2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap word_p2_bw {
+            get {
+                object obj = ResourceManager.GetObject("word_p2_bw", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

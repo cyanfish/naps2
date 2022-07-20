@@ -84,6 +84,7 @@ public class ScanningContext : IDisposable
                 {
                     return fileStorage;
                 }
+                // TODO: We should revisit existing tests and make sure we have coverage for both filestorage and non
                 return ImageContext.Load(fileStorage.FullPath);
             case MemoryStreamImageStorage memoryStreamStorage:
                 var loadedImage = ImageContext.Load(memoryStreamStorage.Stream);

@@ -70,10 +70,14 @@ public static class PdfAsserts
         var renderer = new PdfiumPdfRenderer();
         var dpi = expectedImages[0].HorizontalResolution;
         var actualImages = renderer.Render(new GdiImageContext(), filePath, dpi).ToList();
+        // var actualImages = renderer.Render(
+        //     new GdiImageContext(),
+        //     filePath, 
+        //     i => expectedImages.Length > i ? expectedImages[i].HorizontalResolution : 300).ToList();
         Assert.Equal(expectedImages.Length, actualImages.Count);
         for (int i = 0; i < expectedImages.Length; i++)
         {
-            ImageAsserts.Similar(expectedImages[i], actualImages[i]);
+            ImageAsserts.Similar(expectedImages[i], actualImages[i], ignoreFormat: true);
         }
     }
 }

@@ -16,23 +16,34 @@ public static class ImageAsserts
 
     private const double RESOLUTION_THRESHOLD = 0.02;
 
-    public static void Similar(Bitmap first, ProcessedImage second, double rmseThreshold = GENERAL_RMSE_THRESHOLD)
+    public static void Similar(Bitmap first, ProcessedImage second, double rmseThreshold = GENERAL_RMSE_THRESHOLD,
+        bool ignoreFormat = false)
     {
         using var rendered = new GdiImageContext().Render(second);
-        Similar(new GdiImage(first), rendered, rmseThreshold);
+        Similar(new GdiImage(first), rendered, rmseThreshold, ignoreFormat);
     }
 
-    public static void Similar(Bitmap first, IMemoryImage second, double rmseThreshold = GENERAL_RMSE_THRESHOLD)
+    public static void Similar(Bitmap first, IMemoryImage second, double rmseThreshold = GENERAL_RMSE_THRESHOLD,
+        bool ignoreFormat = false)
     {
-        Similar(new GdiImage(first), second, rmseThreshold);
+        Similar(new GdiImage(first), second, rmseThreshold, ignoreFormat);
     }
 
     public static unsafe void Similar(IMemoryImage first, IMemoryImage second,
-        double rmseThreshold = GENERAL_RMSE_THRESHOLD)
+        double rmseThreshold = GENERAL_RMSE_THRESHOLD, bool ignoreFormat = false)
     {
+        if (first.PixelFormat != ImagePixelFormat.BW1 && first.PixelFormat != ImagePixelFormat.RGB24 &&
+            first.PixelFormat != ImagePixelFormat.ARGB32)
+        {
+            throw new InvalidOperationException("Unsupported pixel format");
+        }
+
         Assert.Equal(first.Width, second.Width);
         Assert.Equal(first.Height, second.Height);
-        Assert.Equal(first.PixelFormat, second.PixelFormat);
+        if (!ignoreFormat)
+        {
+            Assert.Equal(first.PixelFormat, second.PixelFormat);
+        }
         Assert.InRange(second.HorizontalResolution,
             first.HorizontalResolution - RESOLUTION_THRESHOLD,
             first.HorizontalResolution + RESOLUTION_THRESHOLD);
@@ -40,13 +51,17 @@ public static class ImageAsserts
             first.VerticalResolution - RESOLUTION_THRESHOLD,
             first.VerticalResolution + RESOLUTION_THRESHOLD);
 
+        // TODO: Cleanup
+        var transfomer = new GdiImageTransformer(new GdiImageContext());
+        var firstGdi = (GdiImage) first;
+        var secondGdi = (GdiImage) second;
+        transfomer.EnsurePixelFormat(ref firstGdi);
+        transfomer.EnsurePixelFormat(ref secondGdi);
+        first = firstGdi;
+        second = secondGdi;
+
         using var lock1 = first.Lock(LockMode.ReadOnly, out var scan01, out var stride1);
         using var lock2 = second.Lock(LockMode.ReadOnly, out var scan02, out var stride2);
-        if (first.PixelFormat != ImagePixelFormat.RGB24 && first.PixelFormat != ImagePixelFormat.ARGB32 ||
-            first.PixelFormat != second.PixelFormat)
-        {
-            throw new InvalidOperationException("Unsupported pixel format");
-        }
         int width = first.Width;
         int height = first.Height;
         int bytesPerPixel = first.PixelFormat == ImagePixelFormat.ARGB32 ? 4 : 3;
