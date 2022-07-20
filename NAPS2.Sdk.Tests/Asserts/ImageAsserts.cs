@@ -16,7 +16,19 @@ public static class ImageAsserts
 
     private const double RESOLUTION_THRESHOLD = 0.02;
 
-    public static unsafe void Similar(IMemoryImage first, IMemoryImage second, double rmseThreshold)
+    public static void Similar(Bitmap first, ProcessedImage second, double rmseThreshold = GENERAL_RMSE_THRESHOLD)
+    {
+        using var rendered = new GdiImageContext().Render(second);
+        Similar(new GdiImage(first), rendered, rmseThreshold);
+    }
+
+    public static void Similar(Bitmap first, IMemoryImage second, double rmseThreshold = GENERAL_RMSE_THRESHOLD)
+    {
+        Similar(new GdiImage(first), second, rmseThreshold);
+    }
+
+    public static unsafe void Similar(IMemoryImage first, IMemoryImage second,
+        double rmseThreshold = GENERAL_RMSE_THRESHOLD)
     {
         Assert.Equal(first.Width, second.Width);
         Assert.Equal(first.Height, second.Height);

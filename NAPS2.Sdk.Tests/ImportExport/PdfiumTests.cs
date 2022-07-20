@@ -13,13 +13,10 @@ public class PdfiumTests : ContextualTests
         var path = Path.Combine(FolderPath, "word.pdf");
         File.WriteAllBytes(path, PdfiumTestsData.word);
 
-        IMemoryImage expectedPage1 = new GdiImage(PdfiumTestsData.word_p1);
-        IMemoryImage expectedPage2 = new GdiImage(PdfiumTestsData.word_p2);
-
         var images = new PdfiumPdfRenderer(ImageContext).Render(path, 300).ToList();
 
         Assert.Equal(2, images.Count);
-        ImageAsserts.Similar(images[0], expectedPage1, 3);
-        ImageAsserts.Similar(images[1], expectedPage2, 3);
+        ImageAsserts.Similar(PdfiumTestsData.word_p1, images[0]);
+        ImageAsserts.Similar(PdfiumTestsData.word_p2, images[1]);
     }
 }

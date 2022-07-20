@@ -28,11 +28,10 @@ public class DeskewTests : ContextualTests
     public void DeskewTransform()
     {
         var image = new GdiImage(DeskewTestsData.skewed);
-        var expectedImage = new GdiImage(DeskewTestsData.deskewed);
         Assert.Equal(ImagePixelFormat.RGB24, image.PixelFormat);
         var transform = Deskewer.GetDeskewTransform(image);
         var deskewedImage = ImageContext.PerformTransform(image, transform);
-        ImageAsserts.Similar(expectedImage, deskewedImage, ImageAsserts.GENERAL_RMSE_THRESHOLD);
+        ImageAsserts.Similar(DeskewTestsData.deskewed, deskewedImage);
     }
         
     [Fact]

@@ -73,7 +73,7 @@ public static class PdfAsserts
         Assert.Equal(expectedImages.Length, actualImages.Count);
         for (int i = 0; i < expectedImages.Length; i++)
         {
-            ImageAsserts.Similar(new GdiImage(expectedImages[i]), actualImages[i], ImageAsserts.GENERAL_RMSE_THRESHOLD);
+            ImageAsserts.Similar(expectedImages[i], actualImages[i]);
         }
     }
 }
