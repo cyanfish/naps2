@@ -1,5 +1,4 @@
-﻿using NAPS2.Images.Gdi;
-using NAPS2.ImportExport.Pdf;
+﻿using NAPS2.ImportExport.Pdf;
 using NAPS2.Sdk.Tests.Asserts;
 using Xunit;
 
@@ -13,7 +12,7 @@ public class PdfiumTests : ContextualTests
         var path = Path.Combine(FolderPath, "word.pdf");
         File.WriteAllBytes(path, PdfiumTestsData.word);
 
-        var images = new PdfiumPdfRenderer(ImageContext).Render(path, 300).ToList();
+        var images = new PdfiumPdfRenderer().Render(ImageContext, path, 300).ToList();
 
         Assert.Equal(2, images.Count);
         ImageAsserts.Similar(PdfiumTestsData.word_p1, images[0]);

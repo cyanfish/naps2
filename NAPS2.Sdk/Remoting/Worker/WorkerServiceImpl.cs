@@ -203,8 +203,8 @@ public class WorkerServiceImpl : WorkerService.WorkerServiceBase
         using var callRef = StartCall();
         try
         {
-            var renderer = new PdfiumPdfRenderer(_scanningContext.ImageContext);
-            using var image = renderer.Render(request.Path, request.Dpi).Single();
+            var renderer = new PdfiumPdfRenderer();
+            using var image = renderer.Render(_scanningContext.ImageContext, request.Path, request.Dpi).Single();
             var stream = image.SaveToMemoryStream(ImageFileFormat.Png);
             return Task.FromResult(new RenderPdfResponse
             {

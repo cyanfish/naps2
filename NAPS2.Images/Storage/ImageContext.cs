@@ -4,11 +4,29 @@ namespace NAPS2.Images.Storage;
 
 public abstract class ImageContext
 {
-    // TODO: We may need an IPdfRenderer...
+    private readonly IPdfRenderer? _pdfRenderer;
 
-    protected ImageContext(Type imageType)
+    protected ImageContext(Type imageType, IPdfRenderer? pdfRenderer = null)
     {
         ImageType = imageType;
+        _pdfRenderer = pdfRenderer;
+    }
+
+    // TODO: Add NotNullWhen attribute?
+    protected bool MaybeRenderPdf(ImageFileStorage fileStorage, out IMemoryImage? renderedPdf)
+    {
+        if (Path.GetExtension(fileStorage.FullPath).ToLowerInvariant() == ".pdf")
+        {
+            if (_pdfRenderer == null)
+            {
+                throw new InvalidOperationException(
+                    "Unable to render pdf page as the ImageContext wasn't created with an IPdfRenderer.");
+            }
+            renderedPdf = _pdfRenderer.Render(this, fileStorage.FullPath, 300).Single();
+            return true;
+        }
+        renderedPdf = null;
+        return false;
     }
 
     // TODO: Describe ownership transfer

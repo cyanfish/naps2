@@ -1,6 +1,7 @@
 ﻿using System.Drawing;
 using System.Threading;
 using NAPS2.Images.Gdi;
+using NAPS2.ImportExport.Pdf;
 using NAPS2.Scan;
 
 namespace NAPS2.Sdk.Tests;
@@ -12,7 +13,7 @@ public class ContextualTests : IDisposable
         FolderPath = Path.GetFullPath(Path.Combine("naps2_test_temp", Path.GetRandomFileName()));
         Folder = Directory.CreateDirectory(FolderPath);
 
-        ImageContext = new GdiImageContext();
+        ImageContext = new GdiImageContext(new PdfiumPdfRenderer());
         ScanningContext = new ScanningContext(ImageContext);
         ScanningContext.TempFolderPath = Path.Combine(FolderPath, "temp");
         Directory.CreateDirectory(ScanningContext.TempFolderPath);

@@ -7,7 +7,11 @@ public class GdiImageContext : ImageContext
 {
     private readonly GdiImageTransformer _imageTransformer;
     
-    public GdiImageContext() : base(typeof(GdiImage))
+    public GdiImageContext() : this(null)
+    {
+    }
+
+    public GdiImageContext(IPdfRenderer? pdfRenderer) : base(typeof(GdiImage), pdfRenderer)
     {
         _imageTransformer = new GdiImageTransformer(this);
     }
@@ -73,8 +77,12 @@ public class GdiImageContext : ImageContext
     {
         switch (storage)
         {
-            // TODO: We probably want to support PDFs somehow (which presumably use fileStorage?)
+            // TODO: PDF memory storage?
             case ImageFileStorage fileStorage:
+                if (MaybeRenderPdf(fileStorage, out var renderedPdf))
+                {
+                    return renderedPdf!;
+                }
                 // Rather than creating a bitmap from the file directly, instead we read it into memory first.
                 // This ensures we don't accidentally keep a lock on the storage file, which would cause an error if we
                 // try to delete it before the bitmap is disposed.

@@ -4,14 +4,7 @@ namespace NAPS2.ImportExport.Pdf;
 
 public class PdfiumPdfRenderer : IPdfRenderer
 {
-    private readonly ImageContext _imageContext;
-
-    public PdfiumPdfRenderer(ImageContext imageContext)
-    {
-        _imageContext = imageContext;
-    }
-
-    public IEnumerable<IMemoryImage> Render(string path, float dpi)
+    public IEnumerable<IMemoryImage> Render(ImageContext imageContext, string path, float dpi)
     {
         var nativeLib = PdfiumNativeLibrary.LazyInstance.Value;
 
@@ -33,7 +26,7 @@ public class PdfiumPdfRenderer : IPdfRenderer
                 int widthInPx = (int) Math.Round(widthInInches * dpi);
                 int heightInPx = (int) Math.Round(heightInInches * dpi);
 
-                var bitmap = _imageContext.Create(widthInPx, heightInPx, ImagePixelFormat.RGB24);
+                var bitmap = imageContext.Create(widthInPx, heightInPx, ImagePixelFormat.RGB24);
                 bitmap.SetResolution(dpi, dpi);
                 using var bitmapData = bitmap.Lock(LockMode.ReadWrite, out var scan0, out var stride);
                 using var pdfiumBitmap = PdfBitmap.CreateFromPointerBgr(widthInPx, heightInPx, scan0, stride);

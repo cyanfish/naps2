@@ -67,9 +67,9 @@ public static class PdfAsserts
     public static void AssertImages(string filePath, params Bitmap[] expectedImages)
     {
         Assert.True(File.Exists(filePath));
-        var renderer = new PdfiumPdfRenderer(new GdiImageContext());
+        var renderer = new PdfiumPdfRenderer();
         var dpi = expectedImages[0].HorizontalResolution;
-        var actualImages = renderer.Render(filePath, dpi).ToList();
+        var actualImages = renderer.Render(new GdiImageContext(), filePath, dpi).ToList();
         Assert.Equal(expectedImages.Length, actualImages.Count);
         for (int i = 0; i < expectedImages.Length; i++)
         {

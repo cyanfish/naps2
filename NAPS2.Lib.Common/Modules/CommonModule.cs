@@ -60,8 +60,10 @@ public class CommonModule : NinjectModule
         Bind<UiImageList>().ToSelf().InSingletonScope();
         Bind<StillImage>().ToSelf().InSingletonScope();
         Bind<AutoSaver>().ToSelf();
-        Bind<ImageContext>().To<GdiImageContext>().InSingletonScope();
-        Bind<GdiImageContext>().ToSelf().InSingletonScope();
+        // TODO: Use PdfiumWorkerCoordinator?
+        Bind<IPdfRenderer>().To<PdfiumPdfRenderer>();
+        Bind<ImageContext>().To<GdiImageContext>();
+        Bind<GdiImageContext>().ToSelf();
         Bind<ScanningContext>().ToSelf().InSingletonScope();
 
         //Kernel.Get<ImageContext>().PdfRenderer = Kernel.Get<PdfiumWorkerCoordinator>();
