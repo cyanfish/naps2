@@ -1,6 +1,5 @@
 ﻿using System.Runtime.InteropServices;
 using System.Threading;
-using NAPS2.Dependencies;
 using NAPS2.ImportExport.Images;
 using NAPS2.Scan;
 using PdfSharp.Pdf;
@@ -10,30 +9,35 @@ using PdfSharp.Pdf.IO;
 
 namespace NAPS2.ImportExport.Pdf;
 
+// TODO: We should have a "nicer" name (PdfImporter) for SDK users, or maybe have this be internal and have the public ScannedImageImporter (which should also maybe be renamed...)
 public class PdfSharpImporter : IPdfImporter
 {
     private readonly ScanningContext _scanningContext;
-    private readonly ImageContext _imageContext;
-    private readonly ErrorOutput _errorOutput;
-    private readonly IPdfPasswordProvider _pdfPasswordProvider;
-    private readonly IComponentInstallPrompt _componentInstallPrompt;
+    private readonly IPdfPasswordProvider? _pdfPasswordProvider;
     private readonly ImportPostProcessor _importPostProcessor;
 
-    public PdfSharpImporter(ScanningContext scanningContext, ImageContext imageContext, ErrorOutput errorOutput,
-        IPdfPasswordProvider pdfPasswordProvider, IComponentInstallPrompt componentInstallPrompt,
+    public PdfSharpImporter(ScanningContext scanningContext)
+        : this(scanningContext, null)
+    {
+    }
+
+    public PdfSharpImporter(ScanningContext scanningContext, IPdfPasswordProvider? pdfPasswordProvider)
+        : this(scanningContext, pdfPasswordProvider, new ImportPostProcessor(scanningContext.ImageContext))
+    {
+    }
+
+    internal PdfSharpImporter(ScanningContext scanningContext, IPdfPasswordProvider? pdfPasswordProvider, 
         ImportPostProcessor importPostProcessor)
     {
         _scanningContext = scanningContext;
-        _imageContext = imageContext;
-        _errorOutput = errorOutput;
         _pdfPasswordProvider = pdfPasswordProvider;
-        _componentInstallPrompt = componentInstallPrompt;
         _importPostProcessor = importPostProcessor;
     }
 
-    public ScannedImageSource Import(string filePath, ImportParams importParams, ProgressHandler progressCallback,
-        CancellationToken cancelToken)
+    public ScannedImageSource Import(string filePath, ImportParams? importParams = null, ProgressHandler? progressCallback = null,
+        CancellationToken cancelToken = default)
     {
+        importParams ??= new ImportParams();
         var sink = new ScannedImageSink();
         Task.Run(async () =>
         {
@@ -49,6 +53,16 @@ public class PdfSharpImporter : IPdfImporter
             {
                 PdfDocument document = PdfReader.Open(filePath, PdfDocumentOpenMode.Import, args =>
                 {
+                    if (importParams.Password != null)
+                    {
+                        args.Password = importParams.Password;
+                        return;
+                    }
+                    if (_pdfPasswordProvider == null)
+                    {
+                        // TODO: Resource?
+                        throw new PdfImportException("The PDF document needs a password to import");
+                    }
                     if (!_pdfPasswordProvider.ProvidePassword(Path.GetFileName(filePath), passwordAttempts++,
                             out args.Password))
                     {
@@ -60,12 +74,11 @@ public class PdfSharpImporter : IPdfImporter
                     && !document.SecuritySettings.HasOwnerPermissions
                     && !document.SecuritySettings.PermitExtractContent)
                 {
-                    _errorOutput.DisplayError(string.Format(SdkResources.PdfNoPermissionToExtractContent,
+                    throw new PdfImportException(string.Format(SdkResources.PdfNoPermissionToExtractContent,
                         Path.GetFileName(filePath)));
-                    sink.SetCompleted();
                 }
 
-                progressCallback(0, document.PageCount);
+                progressCallback?.Invoke(0, document.PageCount);
                 var pages = importParams.Slice.Indices(document.PageCount)
                     .Select(index => document.Pages[index]);
                 if (document.Info.Creator != SdkResources.NAPS2 && document.Info.Author != SdkResources.NAPS2)
@@ -74,7 +87,7 @@ public class PdfSharpImporter : IPdfImporter
                         .StepParallel(async page => await ExportRawPdfPage(page, importParams))
                         .Run(image =>
                         {
-                            progressCallback(++i, document.PageCount);
+                            progressCallback?.Invoke(++i, document.PageCount);
                             sink.PutImage(image);
                         });
                 }
@@ -95,24 +108,16 @@ public class PdfSharpImporter : IPdfImporter
                         })
                         .Run(image =>
                         {
-                            progressCallback(++i, document.PageCount);
+                            progressCallback?.Invoke(++i, document.PageCount);
                             sink.PutImage(image);
                         });
                 }
-            }
-            catch (ImageRenderException e)
-            {
-                // TODO: Propagate these errors outwards and handle externally, i.e. in ImportOperation?
-                _errorOutput.DisplayError(string.Format(SdkResources.ImportErrorNAPS2Pdf, Path.GetFileName(filePath)));
-                Log.ErrorException("Error importing PDF file.", e);
             }
             catch (Exception e)
             {
                 if (!aborted)
                 {
-                    _errorOutput.DisplayError(string.Format(SdkResources.ImportErrorCouldNot,
-                        Path.GetFileName(filePath)));
-                    Log.ErrorException("Error importing PDF file.", e);
+                    sink.SetError(e);
                 }
             }
             finally
@@ -206,7 +211,7 @@ public class PdfSharpImporter : IPdfImporter
     {
         // Fortunately JPEG has native support in PDF and exporting an image is just writing the stream to a file.
         using var memoryStream = new MemoryStream(imageBytes);
-        using var storage = _imageContext.Load(memoryStream);
+        using var storage = _scanningContext.ImageContext.Load(memoryStream);
         storage.SetResolution(storage.Width / (float) page.Width.Inch, storage.Height / (float) page.Height.Inch);
         var image = new ProcessedImage(
             storage,
@@ -234,12 +239,12 @@ public class PdfSharpImporter : IPdfImporter
         switch (bitsPerComponent)
         {
             case 8:
-                storage = _imageContext.Create(width, height, ImagePixelFormat.RGB24);
+                storage = _scanningContext.ImageContext.Create(width, height, ImagePixelFormat.RGB24);
                 bitDepth = BitDepth.Color;
                 RgbToBitmapUnmanaged(storage, buffer);
                 break;
             case 1:
-                storage = _imageContext.Create(width, height, ImagePixelFormat.BW1);
+                storage = _scanningContext.ImageContext.Create(width, height, ImagePixelFormat.BW1);
                 bitDepth = BitDepth.BlackAndWhite;
                 BlackAndWhiteToBitmapUnmanaged(storage, buffer);
                 break;
@@ -353,7 +358,7 @@ public class PdfSharpImporter : IPdfImporter
         stream.Seek(0, SeekOrigin.Begin);
 
         // TODO: If we need a TIFF hint for loading, it should go here.
-        using var storage = _imageContext.Load(stream);
+        using var storage = _scanningContext.ImageContext.Load(stream);
         storage.SetResolution(storage.Width / (float) page.Width.Inch, storage.Height / (float) page.Height.Inch);
 
         // TODO: Use CreateProcessedImage?

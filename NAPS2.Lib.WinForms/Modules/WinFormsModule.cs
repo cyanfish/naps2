@@ -21,7 +21,6 @@ public class WinFormsModule : NinjectModule
         Bind<ErrorOutput>().To<MessageBoxErrorOutput>();
         Bind<IOverwritePrompt>().To<WinFormsOverwritePrompt>();
         Bind<OperationProgress>().To<WinFormsOperationProgress>().InSingletonScope();
-        Bind<IComponentInstallPrompt>().To<WinFormsComponentInstallPrompt>();
         Bind<DialogHelper>().To<WinFormsDialogHelper>();
         Bind<IEtoPlatform>().To<WinFormsEtoPlatform>();
         Bind<INotificationManager>().To<NotificationManager>().InSingletonScope();

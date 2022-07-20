@@ -9,6 +9,8 @@ public class ImportParams
         Slice = Slice.Default;
     }
 
+    public string? Password { get; set; }
+
     public Slice Slice { get; set; }
 
     public BarcodeDetectionOptions BarcodeDetectionOptions { get; set; } = new BarcodeDetectionOptions();
