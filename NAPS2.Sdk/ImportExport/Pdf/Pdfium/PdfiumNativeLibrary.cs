@@ -131,6 +131,8 @@ public class PdfiumNativeLibrary : Unmanaged.NativeLibrary
 
     public delegate IntPtr FPDFPage_GetObject_delegate(IntPtr page, int index);
 
+    public delegate bool FPDFPage_RemoveObject_delegate(IntPtr page, IntPtr page_obj);
+
     public delegate IntPtr FPDFImageObj_GetBitmap_delegate(IntPtr image_object);
 
     public delegate IntPtr
@@ -141,7 +143,15 @@ public class PdfiumNativeLibrary : Unmanaged.NativeLibrary
     public delegate bool FPDFPageObj_GetStrokeColor_delegate(IntPtr page_object, out uint r, out uint g, out uint b,
         out uint a);
 
+    public delegate bool FPDFPageObj_GetFillColor_delegate(IntPtr page_object, out uint r, out uint g, out uint b,
+        out uint a);
+
     public delegate int FPDFPageObj_GetType_delegate(IntPtr page_object);
+
+    public delegate ulong
+        FPDFTextObj_GetText_delegate(IntPtr text_object, IntPtr text_page, byte[]? buffer, ulong length);
+
+    public delegate int FPDFTextObj_GetTextRenderMode_delegate(IntPtr text);
 
     public FPDF_InitLibrary_delegate FPDF_InitLibrary => Load<FPDF_InitLibrary_delegate>();
     public FPDFBitmap_Create_delegate FPDFBitmap_Create => Load<FPDFBitmap_Create_delegate>();
@@ -183,6 +193,7 @@ public class PdfiumNativeLibrary : Unmanaged.NativeLibrary
 
     public FPDFPage_CountObjects_delegate FPDFPage_CountObjects => Load<FPDFPage_CountObjects_delegate>();
     public FPDFPage_GetObject_delegate FPDFPage_GetObject => Load<FPDFPage_GetObject_delegate>();
+    public FPDFPage_RemoveObject_delegate FPDFPage_RemoveObject => Load<FPDFPage_RemoveObject_delegate>();
     public FPDFImageObj_GetBitmap_delegate FPDFImageObj_GetBitmap => Load<FPDFImageObj_GetBitmap_delegate>();
 
     public FPDFImageObj_GetRenderedBitmap_delegate FPDFImageObj_GetRenderedBitmap =>
@@ -193,7 +204,14 @@ public class PdfiumNativeLibrary : Unmanaged.NativeLibrary
     public FPDFPageObj_GetStrokeColor_delegate FPDFPageObj_GetStrokeColor =>
         Load<FPDFPageObj_GetStrokeColor_delegate>();
 
+    public FPDFPageObj_GetFillColor_delegate FPDFPageObj_GetFillColor =>
+        Load<FPDFPageObj_GetFillColor_delegate>();
+
     public FPDFPageObj_GetType_delegate FPDFPageObj_GetType => Load<FPDFPageObj_GetType_delegate>();
+    public FPDFTextObj_GetText_delegate FPDFTextObj_GetText => Load<FPDFTextObj_GetText_delegate>();
+
+    public FPDFTextObj_GetTextRenderMode_delegate FPDFTextObj_GetTextRenderMode =>
+        Load<FPDFTextObj_GetTextRenderMode_delegate>();
 
     public struct FPDF_FileWrite
     {

@@ -25,6 +25,15 @@ public class PdfPage : NativePdfiumObject
         Native.FPDFPage_InsertObject(Handle, pageObject.Handle);
         pageObject.SetAlreadyDisposed();
     }
+    
+    public void RemoveObject(PdfPageObject pageObject)
+    {
+        if (!Native.FPDFPage_RemoveObject(Handle, pageObject.Handle))
+        {
+            throw new Exception("Could not remove page object");
+        }
+        pageObject.SetAlreadyDisposed();
+    }
 
     public PdfPageObject GetObject(int index)
     {

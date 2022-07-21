@@ -127,7 +127,12 @@ public class PdfSharpExporter : PdfExporter
         progressCallback?.Invoke(progress, images.Count);
         foreach (var image in images)
         {
-            // TODO: Maybe have a PdfFileStorage?
+            // TODO: To avoid the issue of file size explosion for transformed pdfs (as they get rendered at a default
+            // 300 dpi), we could consider using Pdfium to apply the transform to the underlying PDF file. For example,
+            // doing color shifting on individual text + image objects, or applying matrix changes.
+            // TODO: We also can consider doing this even for scanned image transforms - e.g. for deskew, maybe rather
+            // than rasterize that, rely on the pdf to do the skew transform, which should render better at different
+            // scaling.
             if (image.Storage is ImageFileStorage fileStorage && IsPdfFile(fileStorage) && image.TransformState.IsEmpty)
             {
                 CopyPdfPageToDoc(document, fileStorage);

@@ -2,6 +2,7 @@ namespace NAPS2.ImportExport.Pdf.Pdfium;
 
 public class PdfBitmap : NativePdfiumObject
 {
+    public const uint BLACK = 0;
     public const uint WHITE = uint.MaxValue;
 
     public static PdfBitmap CreateFromPointerBgr(int width, int height, IntPtr scan0, int stride)

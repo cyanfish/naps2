@@ -1,4 +1,5 @@
 using System.Runtime.InteropServices;
+using System.Text;
 
 namespace NAPS2.ImportExport.Pdf.Pdfium;
 
@@ -78,15 +79,34 @@ public class PdfPageObject : NativePdfiumObject
         }
     }
 
-    public uint GetStrokeAlpha()
+    public (uint r, uint g, uint b, uint a) GetStrokeColor()
     {
         // TODO: Maybe fill color? Or something else to get the text color
         if (!Native.FPDFPageObj_GetStrokeColor(Handle, out var r, out var g, out var b, out var a))
         {
             throw new Exception("Could not get stroke color");
         }
-        return a;
+        return (r, g, b, a);
     }
+
+    public (uint r, uint g, uint b, uint a) GetFillColor()
+    {
+        if (!Native.FPDFPageObj_GetFillColor(Handle, out var r, out var g, out var b, out var a))
+        {
+            throw new Exception("Could not get fill color");
+        }
+        return (r, g, b, a);
+    }
+
+    public string GetText(PdfText pageText)
+    {
+        var length = Native.FPDFTextObj_GetText(Handle, pageText.Handle, null, 0);
+        var buffer = new byte[length];
+        Native.FPDFTextObj_GetText(Handle, pageText.Handle, buffer, length);
+        return Encoding.Unicode.GetString(buffer);
+    }
+
+    public TextRenderMode TextRenderMode => (TextRenderMode) Native.FPDFTextObj_GetTextRenderMode(Handle);
 
     public PdfBitmap GetBitmap()
     {

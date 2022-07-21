@@ -4,7 +4,7 @@ using Xunit;
 
 namespace NAPS2.Sdk.Tests.ImportExport;
 
-public class PdfiumTests : ContextualTests
+public class PdfiumPdfRendererTests : ContextualTests
 {
     [Fact]
     public void RenderPdfFromWord()
@@ -32,12 +32,11 @@ public class PdfiumTests : ContextualTests
         ImageAsserts.Similar(SharedData.color_image, images[0]);
     }
 
-    // TODO: Implement
-    [Fact(Skip="Not implemented")]
+    [Fact]
     public void RenderImageWithTextPdf()
     {
         var path = Path.Combine(FolderPath, "test.pdf");
-        File.WriteAllBytes(path, PdfData.image_pdf);
+        File.WriteAllBytes(path, PdfData.image_with_text_pdf);
 
         var images = new PdfiumPdfRenderer().Render(ImageContext, path, 300).ToList();
 
