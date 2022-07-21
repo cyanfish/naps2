@@ -3,7 +3,7 @@ using System.Runtime.InteropServices;
 
 // ReSharper disable InconsistentNaming
 
-namespace NAPS2.ImportExport.Pdf;
+namespace NAPS2.ImportExport.Pdf.Pdfium;
 
 public class PdfiumNativeLibrary : Unmanaged.NativeLibrary
 {
@@ -39,6 +39,9 @@ public class PdfiumNativeLibrary : Unmanaged.NativeLibrary
     public const int FPDF_NOINCREMENTAL = 2;
     public const int FPDF_REMOVE_SECURITY = 3;
 
+    public const int FPDF_PAGEOBJ_TEXT = 1;
+    public const int FPDF_PAGEOBJ_IMAGE = 3;
+
     public PdfiumNativeLibrary(string libraryPath)
         : base(libraryPath)
     {
@@ -55,6 +58,16 @@ public class PdfiumNativeLibrary : Unmanaged.NativeLibrary
         uint color);
 
     public delegate void FPDFBitmap_Destroy_delegate(IntPtr bitmap);
+
+    public delegate int FPDFBitmap_GetWidth_delegate(IntPtr bitmap);
+
+    public delegate int FPDFBitmap_GetHeight_delegate(IntPtr bitmap);
+
+    public delegate IntPtr FPDFBitmap_GetBuffer_delegate(IntPtr bitmap);
+
+    public delegate int FPDFBitmap_GetStride_delegate(IntPtr bitmap);
+
+    public delegate int FPDFBitmap_GetFormat_delegate(IntPtr bitmap);
 
     public delegate IntPtr FPDF_CreateNewDocument_delegate();
 
@@ -76,9 +89,9 @@ public class PdfiumNativeLibrary : Unmanaged.NativeLibrary
 
     public delegate void FPDF_ClosePage_delegate(IntPtr page);
 
-    public delegate double FPDF_GetPageWidth_delegate(IntPtr page);
+    public delegate float FPDF_GetPageWidthF_delegate(IntPtr page);
 
-    public delegate double FPDF_GetPageHeight_delegate(IntPtr page);
+    public delegate float FPDF_GetPageHeightF_delegate(IntPtr page);
 
     public delegate void FPDF_RenderPageBitmap_delegate(IntPtr bitmap, IntPtr page, int startX, int startY, int sizeX,
         int sizeY, int rotate, int flags);
@@ -106,8 +119,7 @@ public class PdfiumNativeLibrary : Unmanaged.NativeLibrary
 
     public delegate IntPtr FPDFPage_GenerateContent_delegate(IntPtr page);
 
-    public delegate IntPtr FPDFPageObj_Transform_delegate(IntPtr page_object, double a, double b, double c, double d,
-        double e, double f);
+    public delegate bool FPDFPageObj_SetMatrix_delegate(IntPtr page_object, ref PdfMatrix matrix);
 
     public delegate bool FPDFImageObj_LoadJpegFile_delegate(IntPtr pages, int count, IntPtr image_object,
         IntPtr file_access);
@@ -115,10 +127,31 @@ public class PdfiumNativeLibrary : Unmanaged.NativeLibrary
     public delegate bool FPDFImageObj_LoadJpegFileInline_delegate(IntPtr pages, int count, IntPtr image_object,
         IntPtr file_access);
 
+    public delegate int FPDFPage_CountObjects_delegate(IntPtr page);
+
+    public delegate IntPtr FPDFPage_GetObject_delegate(IntPtr page, int index);
+
+    public delegate IntPtr FPDFImageObj_GetBitmap_delegate(IntPtr image_object);
+
+    public delegate IntPtr
+        FPDFImageObj_GetRenderedBitmap_delegate(IntPtr document, IntPtr page, IntPtr image_object);
+
+    public delegate bool FPDFPageObj_GetMatrix_delegate(IntPtr page_object, out PdfMatrix matrix);
+
+    public delegate bool FPDFPageObj_GetStrokeColor_delegate(IntPtr page_object, out uint r, out uint g, out uint b,
+        out uint a);
+
+    public delegate int FPDFPageObj_GetType_delegate(IntPtr page_object);
+
     public FPDF_InitLibrary_delegate FPDF_InitLibrary => Load<FPDF_InitLibrary_delegate>();
     public FPDFBitmap_Create_delegate FPDFBitmap_Create => Load<FPDFBitmap_Create_delegate>();
     public FPDFBitmap_CreateEx_delegate FPDFBitmap_CreateEx => Load<FPDFBitmap_CreateEx_delegate>();
     public FPDFBitmap_FillRect_delegate FPDFBitmap_FillRect => Load<FPDFBitmap_FillRect_delegate>();
+    public FPDFBitmap_GetWidth_delegate FPDFBitmap_GetWidth => Load<FPDFBitmap_GetWidth_delegate>();
+    public FPDFBitmap_GetHeight_delegate FPDFBitmap_GetHeight => Load<FPDFBitmap_GetHeight_delegate>();
+    public FPDFBitmap_GetBuffer_delegate FPDFBitmap_GetBuffer => Load<FPDFBitmap_GetBuffer_delegate>();
+    public FPDFBitmap_GetStride_delegate FPDFBitmap_GetStride => Load<FPDFBitmap_GetStride_delegate>();
+    public FPDFBitmap_GetFormat_delegate FPDFBitmap_GetFormat => Load<FPDFBitmap_GetFormat_delegate>();
     public FPDFBitmap_Destroy_delegate FPDFBitmap_Destroy => Load<FPDFBitmap_Destroy_delegate>();
     public FPDF_CreateNewDocument_delegate FPDF_CreateNewDocument => Load<FPDF_CreateNewDocument_delegate>();
     public FPDF_LoadDocument_delegate FPDF_LoadDocument => Load<FPDF_LoadDocument_delegate>();
@@ -128,8 +161,8 @@ public class PdfiumNativeLibrary : Unmanaged.NativeLibrary
     public FPDF_GetPageCount_delegate FPDF_GetPageCount => Load<FPDF_GetPageCount_delegate>();
     public FPDF_LoadPage_delegate FPDF_LoadPage => Load<FPDF_LoadPage_delegate>();
     public FPDF_ClosePage_delegate FPDF_ClosePage => Load<FPDF_ClosePage_delegate>();
-    public FPDF_GetPageWidth_delegate FPDF_GetPageWidth => Load<FPDF_GetPageWidth_delegate>();
-    public FPDF_GetPageHeight_delegate FPDF_GetPageHeight => Load<FPDF_GetPageHeight_delegate>();
+    public FPDF_GetPageWidthF_delegate FPDF_GetPageWidthF => Load<FPDF_GetPageWidthF_delegate>();
+    public FPDF_GetPageHeightF_delegate FPDF_GetPageHeightF => Load<FPDF_GetPageHeightF_delegate>();
     public FPDF_RenderPageBitmap_delegate FPDF_RenderPageBitmap => Load<FPDF_RenderPageBitmap_delegate>();
     public FPDFText_LoadPage_delegate FPDFText_LoadPage => Load<FPDFText_LoadPage_delegate>();
     public FPDFText_ClosePage_delegate FPDFText_ClosePage => Load<FPDFText_ClosePage_delegate>();
@@ -142,11 +175,25 @@ public class PdfiumNativeLibrary : Unmanaged.NativeLibrary
     public FPDFImageObj_SetBitmap_delegate FPDFImageObj_SetBitmap => Load<FPDFImageObj_SetBitmap_delegate>();
     public FPDFPage_New_delegate FPDFPage_New => Load<FPDFPage_New_delegate>();
     public FPDFPage_GenerateContent_delegate FPDFPage_GenerateContent => Load<FPDFPage_GenerateContent_delegate>();
-    public FPDFPageObj_Transform_delegate FPDFPageObj_Transform => Load<FPDFPageObj_Transform_delegate>();
+    public FPDFPageObj_SetMatrix_delegate FPDFPageObj_SetMatrix => Load<FPDFPageObj_SetMatrix_delegate>();
     public FPDFImageObj_LoadJpegFile_delegate FPDFImageObj_LoadJpegFile => Load<FPDFImageObj_LoadJpegFile_delegate>();
 
     public FPDFImageObj_LoadJpegFileInline_delegate FPDFImageObj_LoadJpegFileInline =>
         Load<FPDFImageObj_LoadJpegFileInline_delegate>();
+
+    public FPDFPage_CountObjects_delegate FPDFPage_CountObjects => Load<FPDFPage_CountObjects_delegate>();
+    public FPDFPage_GetObject_delegate FPDFPage_GetObject => Load<FPDFPage_GetObject_delegate>();
+    public FPDFImageObj_GetBitmap_delegate FPDFImageObj_GetBitmap => Load<FPDFImageObj_GetBitmap_delegate>();
+
+    public FPDFImageObj_GetRenderedBitmap_delegate FPDFImageObj_GetRenderedBitmap =>
+        Load<FPDFImageObj_GetRenderedBitmap_delegate>();
+
+    public FPDFPageObj_GetMatrix_delegate FPDFPageObj_GetMatrix => Load<FPDFPageObj_GetMatrix_delegate>();
+
+    public FPDFPageObj_GetStrokeColor_delegate FPDFPageObj_GetStrokeColor =>
+        Load<FPDFPageObj_GetStrokeColor_delegate>();
+
+    public FPDFPageObj_GetType_delegate FPDFPageObj_GetType => Load<FPDFPageObj_GetType_delegate>();
 
     public struct FPDF_FileWrite
     {

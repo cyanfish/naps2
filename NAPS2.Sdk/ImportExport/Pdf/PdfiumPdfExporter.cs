@@ -343,9 +343,7 @@ public class PdfiumPdfExporter : PdfExporter
             using var imageObj = document.NewImage();
             using var bitmap = PdfBitmap.CreateFromPointerBgr(img.Width, img.Height, scan0, stride);
             imageObj.SetBitmap(bitmap);
-            int x = 0;
-            int yFromBottom = 0;
-            imageObj.Transform(img.Width, 0, 0, img.Height, x, yFromBottom);
+            imageObj.Matrix = PdfMatrix.FillPage(img.Width,img.Height);
             page.InsertObject(imageObj);
             page.GenerateContent();
         }
@@ -360,9 +358,7 @@ public class PdfiumPdfExporter : PdfExporter
             using var stream = img.SaveToMemoryStream(ImageFileFormat.Jpeg);
             using var imageObj = document.NewImage();
             imageObj.LoadJpegFileInline(stream);
-            int x = 0;
-            int yFromBottom = 0;
-            imageObj.Transform(img.Width, 0, 0, img.Height, x, yFromBottom);
+            imageObj.Matrix = PdfMatrix.FillPage(img.Width,img.Height);
             page.InsertObject(imageObj);
             page.GenerateContent();
         }

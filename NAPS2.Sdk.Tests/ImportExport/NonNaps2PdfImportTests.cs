@@ -18,7 +18,7 @@ public class NonNaps2PdfImportTests : ContextualTests
         _exporter = new PdfSharpExporter(ScanningContext);
         _importPath = Path.Combine(FolderPath, "import.pdf");
         _exportPath = Path.Combine(FolderPath, "export.pdf");
-        File.WriteAllBytes(_importPath, PdfiumTestsData.word);
+        File.WriteAllBytes(_importPath, PdfData.word_generated_pdf);
     }
 
     [Theory]
@@ -30,8 +30,8 @@ public class NonNaps2PdfImportTests : ContextualTests
         var images = await _importer.Import(_importPath).ToList();
 
         Assert.Equal(2, images.Count);
-        ImageAsserts.Similar(PdfiumTestsData.word_p1, ImageContext.Render(images[0]));
-        ImageAsserts.Similar(PdfiumTestsData.word_p2, ImageContext.Render(images[1]));
+        ImageAsserts.Similar(PdfData.word_p1, ImageContext.Render(images[0]));
+        ImageAsserts.Similar(PdfData.word_p2, ImageContext.Render(images[1]));
     }
 
     [Theory]
@@ -52,7 +52,7 @@ public class NonNaps2PdfImportTests : ContextualTests
         };
         await _exporter.Export(_exportPath, newImages, new PdfExportParams());
 
-        PdfAsserts.AssertImages(_exportPath, PdfiumTestsData.word_p1, SharedData.color_image, PdfiumTestsData.word_p2);
+        PdfAsserts.AssertImages(_exportPath, PdfData.word_p1, SharedData.color_image, PdfData.word_p2);
     }
 
     [Theory]
@@ -69,10 +69,10 @@ public class NonNaps2PdfImportTests : ContextualTests
             images[0].WithTransform(new RotationTransform(90)),
             images[1].WithTransform(new BlackWhiteTransform())
         };
-        ImageAsserts.Similar(PdfiumTestsData.word_p1_rotated, ImageContext.Render(newImages[0]));
-        ImageAsserts.Similar(PdfiumTestsData.word_p2_bw, ImageContext.Render(newImages[1]));
+        ImageAsserts.Similar(PdfData.word_p1_rotated, ImageContext.Render(newImages[0]));
+        ImageAsserts.Similar(PdfData.word_p2_bw, ImageContext.Render(newImages[1]));
         
         await _exporter.Export(_exportPath, newImages, new PdfExportParams());
-        PdfAsserts.AssertImages(_exportPath, PdfiumTestsData.word_p1_rotated, PdfiumTestsData.word_p2_bw);
+        PdfAsserts.AssertImages(_exportPath, PdfData.word_p1_rotated, PdfData.word_p2_bw);
     }
 }

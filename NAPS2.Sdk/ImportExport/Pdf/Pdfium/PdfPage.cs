@@ -2,23 +2,34 @@ namespace NAPS2.ImportExport.Pdf.Pdfium;
 
 public class PdfPage : NativePdfiumObject
 {
-    internal PdfPage(IntPtr handle) : base(handle)
+    private readonly PdfDocument _document;
+
+    internal PdfPage(IntPtr handle, PdfDocument document) : base(handle)
     {
+        _document = document;
     }
     
-    public double Width => Native.FPDF_GetPageWidth(Handle);
+    public float Width => Native.FPDF_GetPageWidthF(Handle);
     
-    public double Height => Native.FPDF_GetPageHeight(Handle);
+    public float Height => Native.FPDF_GetPageHeightF(Handle);
 
     public PdfText GetText()
     {
         return new PdfText(Native.FPDFText_LoadPage(Handle));
     }
 
+    public int ObjectCount => Native.FPDFPage_CountObjects(Handle);
+
     public void InsertObject(PdfPageObject pageObject)
     {
         Native.FPDFPage_InsertObject(Handle, pageObject.Handle);
         pageObject.SetAlreadyDisposed();
+    }
+
+    public PdfPageObject GetObject(int index)
+    {
+        var pageObj = new PdfPageObject(Native.FPDFPage_GetObject(Handle, index),_document, this, false);
+        return pageObj;
     }
 
     public void GenerateContent()

@@ -11,12 +11,12 @@ public class PdfiumWorkerCoordinator : IPdfRenderer
         _workerPool = workerPool;
     }
 
-    public IEnumerable<IMemoryImage> Render(ImageContext imageContext, string path, float dpi)
+    public IEnumerable<IMemoryImage> Render(ImageContext imageContext, string path, float defaultDpi)
     {
         // TODO: Only use worker on windows? Or what... 
         var image = _workerPool.Use(worker =>
         {
-            var imageStream = new MemoryStream(worker.Service.RenderPdf(path, dpi));
+            var imageStream = new MemoryStream(worker.Service.RenderPdf(path, defaultDpi));
             return imageContext.Load(imageStream);
         });
         return new[] { image };

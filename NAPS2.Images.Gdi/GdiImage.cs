@@ -68,6 +68,7 @@ public class GdiImage : IMemoryImage
 
     public void Save(string path, ImageFileFormat imageFileFormat = ImageFileFormat.Unspecified)
     {
+        // TODO: Do we need to infer the file format from the extension ourselves? A particular case: saving an image with an alpha channel to a .jpeg file, how should we handle that? Default behavior is save it as a png with a .jpg extension
         if (imageFileFormat == ImageFileFormat.Unspecified)
         {
             Bitmap.Save(path);

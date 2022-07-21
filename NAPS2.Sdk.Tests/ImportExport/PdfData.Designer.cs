@@ -22,14 +22,14 @@ namespace NAPS2.Sdk.Tests.ImportExport {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class PdfiumTestsData {
+    internal class PdfData {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal PdfiumTestsData() {
+        internal PdfData() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace NAPS2.Sdk.Tests.ImportExport {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("NAPS2.Sdk.Tests.ImportExport.PdfiumTestsData", typeof(PdfiumTestsData).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("NAPS2.Sdk.Tests.ImportExport.PdfData", typeof(PdfData).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -63,9 +63,29 @@ namespace NAPS2.Sdk.Tests.ImportExport {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        internal static byte[] word {
+        internal static byte[] image_pdf {
             get {
-                object obj = ResourceManager.GetObject("word", resourceCulture);
+                object obj = ResourceManager.GetObject("image_pdf", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] image_with_text_pdf {
+            get {
+                object obj = ResourceManager.GetObject("image_with_text_pdf", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] word_generated_pdf {
+            get {
+                object obj = ResourceManager.GetObject("word_generated_pdf", resourceCulture);
                 return ((byte[])(obj));
             }
         }

@@ -4,7 +4,7 @@ namespace NAPS2.ImportExport.Pdf;
 
 public class PdfiumPdfRenderer : IPdfRenderer
 {
-    public IEnumerable<IMemoryImage> Render(ImageContext imageContext, string path, float dpi)
+    public IEnumerable<IMemoryImage> Render(ImageContext imageContext, string path, float defaultDpi)
     {
         var nativeLib = PdfiumNativeLibrary.LazyInstance.Value;
 
@@ -19,9 +19,26 @@ public class PdfiumPdfRenderer : IPdfRenderer
                 var widthInInches = page.Width / 72;
                 var heightInInches = page.Height / 72;
 
+                var objectCount = page.ObjectCount;
+                if (objectCount == 1)
+                {
+                    using var pageObj = page.GetObject(0);
+                    if (pageObj.IsImage && pageObj.Matrix == PdfMatrix.FillPage(page.Width, page.Height))
+                    {
+                        // TODO: This should probably use GetRenderedBitmap, but that does add an alpha channel, and might be slower...
+                        using var pdfBitmap = pageObj.GetBitmap();
+                        if (pdfBitmap.Format is ImagePixelFormat.RGB24 or ImagePixelFormat.ARGB32)
+                        {
+                            yield return CopyPdfBitmapToNewImage(imageContext, pdfBitmap, page);
+                            continue;
+                        }
+                    }
+                }
+
                 // Cap the resolution to 10k pixels in each dimension
-                dpi = Math.Min(dpi, (float) (10000 / heightInInches));
-                dpi = Math.Min(dpi, (float) (10000 / widthInInches));
+                var dpi = defaultDpi;
+                dpi = Math.Min(dpi, 10000 / heightInInches);
+                dpi = Math.Min(dpi, 10000 / widthInInches);
 
                 int widthInPx = (int) Math.Round(widthInInches * dpi);
                 int heightInPx = (int) Math.Round(heightInInches * dpi);
@@ -35,5 +52,22 @@ public class PdfiumPdfRenderer : IPdfRenderer
                 yield return bitmap;
             }
         }
+    }
+
+    private static unsafe IMemoryImage CopyPdfBitmapToNewImage(ImageContext imageContext, PdfBitmap pdfBitmap, PdfPage page)
+    {
+        var dstImage = imageContext.Create(pdfBitmap.Width, pdfBitmap.Height, pdfBitmap.Format);
+        dstImage.SetResolution(dstImage.Width / page.Width * 72, dstImage.Height / page.Height * 72);
+        using var imageLock = dstImage.Lock(LockMode.ReadWrite, out var dstBuffer, out var dstStride);
+        var srcBuffer = pdfBitmap.Buffer;
+        var srcStride = pdfBitmap.Stride;
+        for (int y = 0; y < dstImage.Height; y++)
+        {
+            IntPtr srcRow = srcBuffer + srcStride * y;
+            IntPtr dstRow = dstBuffer + dstStride * y;
+            Buffer.MemoryCopy(srcRow.ToPointer(), dstRow.ToPointer(), dstStride, Math.Min(srcStride, dstStride));
+        }
+
+        return dstImage;
     }
 }

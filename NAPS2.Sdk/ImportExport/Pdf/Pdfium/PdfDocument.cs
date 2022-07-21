@@ -22,7 +22,7 @@ public class PdfDocument : NativePdfiumObject
 
     public PdfPage GetPage(int pageIndex)
     {
-        return new PdfPage(Native.FPDF_LoadPage(Handle, pageIndex));
+        return new PdfPage(Native.FPDF_LoadPage(Handle, pageIndex), this);
     }
 
     protected override void DisposeHandle()
@@ -32,12 +32,12 @@ public class PdfDocument : NativePdfiumObject
 
     public PdfPageObject NewImage()
     {
-        return new PdfPageObject(Native.FPDFPageObj_NewImageObj(Handle));
+        return new PdfPageObject(Native.FPDFPageObj_NewImageObj(Handle), this, null, true);
     }
 
     public PdfPage NewPage(double width, double height)
     {
-        return new PdfPage(Native.FPDFPage_New(Handle, int.MaxValue, width, height));
+        return new PdfPage(Native.FPDFPage_New(Handle, int.MaxValue, width, height), this);
     }
 
     public void Save(string path)

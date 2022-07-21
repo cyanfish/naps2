@@ -10,9 +10,24 @@ public class PdfBitmap : NativePdfiumObject
             Native.FPDFBitmap_CreateEx(width, height, PdfiumNativeLibrary.FPDFBitmap_BGR, scan0, stride));
     }
 
-    private PdfBitmap(IntPtr handle) : base(handle)
+    internal PdfBitmap(IntPtr handle) : base(handle)
     {
     }
+
+    public int Width => Native.FPDFBitmap_GetWidth(Handle);
+    
+    public int Height => Native.FPDFBitmap_GetHeight(Handle);
+    
+    public int Stride => Native.FPDFBitmap_GetStride(Handle);
+
+    public ImagePixelFormat Format => Native.FPDFBitmap_GetFormat(Handle) switch
+    {
+        PdfiumNativeLibrary.FPDFBitmap_BGR => ImagePixelFormat.RGB24,
+        PdfiumNativeLibrary.FPDFBitmap_BGRA => ImagePixelFormat.ARGB32,
+        _ => ImagePixelFormat.Unsupported
+    };
+
+    public IntPtr Buffer => Native.FPDFBitmap_GetBuffer(Handle);
 
     protected override void DisposeHandle()
     {
