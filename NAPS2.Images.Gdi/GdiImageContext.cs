@@ -77,7 +77,6 @@ public class GdiImageContext : ImageContext
     {
         switch (storage)
         {
-            // TODO: PDF memory storage?
             case ImageFileStorage fileStorage:
                 if (MaybeRenderPdf(fileStorage, out var renderedPdf))
                 {
@@ -90,8 +89,12 @@ public class GdiImageContext : ImageContext
                 // that seems like a reasonable tradeoff to avoid a whole class of hard-to-diagnose errors.
                 var stream = new MemoryStream(File.ReadAllBytes(fileStorage.FullPath));
                 return new GdiImage(new Bitmap(stream));
-            case MemoryStreamImageStorage memoryStreamStorage:
-                return new GdiImage(new Bitmap(memoryStreamStorage.Stream));
+            case ImageMemoryStorage memoryStorage:
+                if (MaybeRenderPdf(memoryStorage, out var renderedMemoryPdf))
+                {
+                    return renderedMemoryPdf!;
+                }
+                return new GdiImage(new Bitmap(memoryStorage.Stream));
             case GdiImage image:
                 return image.Clone();
         }

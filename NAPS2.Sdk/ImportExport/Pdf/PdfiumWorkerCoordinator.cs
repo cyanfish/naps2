@@ -21,4 +21,9 @@ public class PdfiumWorkerCoordinator : IPdfRenderer
         });
         return new[] { image };
     }
+
+    public IEnumerable<IMemoryImage> Render(ImageContext imageContext, byte[] buffer, int length, float defaultDpi)
+    {
+        throw new NotImplementedException();
+    }
 }

@@ -3,7 +3,7 @@ using NAPS2.Scan;
 
 namespace NAPS2.Serialization;
 
-// TODO: Add tests for this class
+// TODO: Add tests for this class. Focus on use case tests (i.e. serialize + deserialize) rather than a bunch of tests to verify the generated proto. 
 public static class SerializedImageHelper
 {
     public static SerializedImage Serialize(ProcessedImage image, SerializeOptions options)
@@ -48,20 +48,23 @@ public static class SerializedImageHelper
                 {
                     using var stream = File.OpenRead(fileStorage.FullPath);
                     result.FileContent = ByteString.FromStream(stream);
+                    result.TypeHint = Path.GetExtension(fileStorage.FullPath).ToLowerInvariant();
                 }
                 else
                 {
                     result.FilePath = fileStorage.FullPath;
                 }
                 break;
-            case MemoryStreamImageStorage memoryStreamStorage:
-                result.FileContent = ByteString.FromStream(memoryStreamStorage.Stream);
+            case ImageMemoryStorage memoryStorage:
+                result.FileContent = ByteString.FromStream(memoryStorage.Stream);
+                result.TypeHint = memoryStorage.TypeHint;
                 break;
             case IMemoryImage imageStorage:
                 var fileFormat = imageStorage.OriginalFileFormat == ImageFileFormat.Unspecified
                     ? ImageFileFormat.Jpeg
                     : imageStorage.OriginalFileFormat;
                 result.FileContent = ByteString.FromStream(imageStorage.SaveToMemoryStream(fileFormat));
+                result.TypeHint = fileFormat.AsTypeHint();
                 break;
         }
         return result;
@@ -79,6 +82,8 @@ public static class SerializedImageHelper
             }
             else if (options.ShareFileStorage)
             {
+                // TODO: Think about what exactly the contract is for the serializer and image lifetime.
+                // For example, what happens when we copy an image, delete it, then try to paste?
                 storage = new ImageFileStorage(serializedImage.FilePath, true);
             }
             else
@@ -92,8 +97,8 @@ public static class SerializedImageHelper
         }
         else
         {
-            var memoryStream = new MemoryStream(serializedImage.FileContent.ToByteArray());
-            storage = new MemoryStreamImageStorage(memoryStream);
+            var stream = new MemoryStream(serializedImage.FileContent.ToByteArray());
+            storage = new ImageMemoryStorage(stream, serializedImage.TypeHint);
         }
 
         var processedImage = scanningContext.CreateProcessedImage(

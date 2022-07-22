@@ -9,11 +9,16 @@ public class PdfDocument : NativePdfiumObject
         return new PdfDocument(Native.FPDF_LoadDocument(path, password));
     }
 
+    public static PdfDocument Load(IntPtr buffer, int length, string? password = null)
+    {
+        return new PdfDocument(Native.FPDF_LoadMemDocument(buffer, length, password));
+    }
+
     public static PdfDocument CreateNew()
     {
         return new PdfDocument(Native.FPDF_CreateNewDocument());
     }
-    
+
     private PdfDocument(IntPtr handle) : base(handle)
     {
     }
@@ -43,6 +48,7 @@ public class PdfDocument : NativePdfiumObject
     public void Save(string path)
     {
         using var stream = new FileStream(path, FileMode.Create);
+
         int WriteBlock(IntPtr self, IntPtr data, ulong size)
         {
             var buffer = new byte[size];
@@ -50,7 +56,7 @@ public class PdfDocument : NativePdfiumObject
             stream.Write(buffer, 0, (int) size);
             return 1;
         }
-        
+
         PdfiumNativeLibrary.FPDF_FileWrite fileWrite = new()
         {
             WriteBlock = WriteBlock

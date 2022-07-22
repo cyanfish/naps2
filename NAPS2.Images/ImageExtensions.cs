@@ -9,4 +9,15 @@ public static class ImageExtensions
         stream.Seek(0, SeekOrigin.Begin);
         return stream;
     }
+
+    public static string AsTypeHint(this ImageFileFormat imageFormat)
+    {
+        return imageFormat switch
+        {
+            ImageFileFormat.Bmp => ".bmp",
+            ImageFileFormat.Jpeg => ".jpg",
+            ImageFileFormat.Png => ".png",
+            _ => ""
+        };
+    }
 }

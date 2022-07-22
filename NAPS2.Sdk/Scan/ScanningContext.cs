@@ -70,34 +70,67 @@ public class ScanningContext : IDisposable
 
     private IImageStorage ConvertStorageIfNeeded(IImageStorage storage, BitDepth bitDepth, bool lossless, int quality)
     {
+        // TODO: We should revisit existing tests and make sure we have coverage for both filestorage and non
+        if (FileStorageManager != null)
+        {
+            return ConvertToFileStorage(storage, bitDepth, lossless, quality);
+        }
+        return ConvertToMemoryStorage(storage);
+    }
+
+    private IImageStorage ConvertToMemoryStorage(IImageStorage storage)
+    {
         switch (storage)
         {
             case IMemoryImage image:
-                if (FileStorageManager == null)
+                // TODO: Clone may not be enough, as the original bitmap could have a lock on the filesystem that should be released.
+                return image.Clone();
+            case ImageFileStorage fileStorage:
+                return ImageContext.Load(fileStorage.FullPath);
+            case ImageMemoryStorage memoryStorage:
+                if (memoryStorage.TypeHint == ".pdf")
                 {
-                    // TODO: Clone may not be enough, as the original bitmap could have a lock on the filesystem that should be released.
-                    return image.Clone();
+                    return memoryStorage;
                 }
+                return ImageContext.Load(memoryStorage.Stream);
+            default:
+                // The only case that should hit this is a test with a mock
+                return storage;
+        }
+    }
+
+    private IImageStorage ConvertToFileStorage(IImageStorage storage, BitDepth bitDepth, bool lossless, int quality)
+    {
+        switch (storage)
+        {
+            case IMemoryImage image:
                 return WriteImageToBackingFile(image, bitDepth, lossless, quality);
             case ImageFileStorage fileStorage:
-                if (FileStorageManager != null)
+                return fileStorage;
+            case ImageMemoryStorage memoryStorage:
+                if (memoryStorage.TypeHint == ".pdf")
                 {
-                    return fileStorage;
+                    return WriteDataToBackingFile(memoryStorage.Stream, ".pdf");
                 }
-                // TODO: We should revisit existing tests and make sure we have coverage for both filestorage and non
-                return ImageContext.Load(fileStorage.FullPath);
-            case MemoryStreamImageStorage memoryStreamStorage:
-                var loadedImage = ImageContext.Load(memoryStreamStorage.Stream);
-                if (FileStorageManager == null)
-                {
-                    return loadedImage;
-                }
+                // TODO: Can we just write this to a file directly? Is there any case where SaveSmallestFormat is really needed?
+                var loadedImage = ImageContext.Load(memoryStorage.Stream);
                 return WriteImageToBackingFile(loadedImage, bitDepth, lossless, quality);
             default:
                 // The only case that should hit this is a test with a mock
                 return storage;
         }
-        // TODO: It probably makes sense to abstract this based on the type of backend (filestorage/not)
+    }
+
+    private ImageFileStorage WriteDataToBackingFile(MemoryStream stream, string ext)
+    {
+        if (FileStorageManager == null)
+        {
+            throw new InvalidOperationException();
+        }
+        var path = FileStorageManager.NextFilePath() + ext;
+        using var fileStream = new FileStream(path, FileMode.CreateNew, FileAccess.Write);
+        stream.WriteTo(fileStream);
+        return new ImageFileStorage(path, false);
     }
 
     private IImageStorage WriteImageToBackingFile(IMemoryImage image, BitDepth bitDepth, bool lossless, int quality)

@@ -29,6 +29,23 @@ public abstract class ImageContext
         return false;
     }
 
+    protected bool MaybeRenderPdf(ImageMemoryStorage memoryStorage, out IMemoryImage? renderedPdf)
+    {
+        if (memoryStorage.TypeHint == ".pdf")
+        {
+            if (_pdfRenderer == null)
+            {
+                throw new InvalidOperationException(
+                    "Unable to render pdf page as the ImageContext wasn't created with an IPdfRenderer.");
+            }
+            var stream = memoryStorage.Stream;
+            renderedPdf = _pdfRenderer.Render(this, stream.GetBuffer(), (int) stream.Length, 300).Single();
+            return true;
+        }
+        renderedPdf = null;
+        return false;
+    }
+
     // TODO: Describe ownership transfer
     /// <summary>
     /// Performs the specified transformation on the specified image using a compatible transformer.

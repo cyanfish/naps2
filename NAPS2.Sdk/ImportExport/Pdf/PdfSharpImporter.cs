@@ -187,15 +187,24 @@ public class PdfSharpImporter : IPdfImporter
 
     private async Task<ProcessedImage> ExportRawPdfPage(PdfPage page, ImportParams importParams)
     {
-        // TODO: Handle no file storage (i.e. in-memory pdf storage)
-        string pdfPath = _scanningContext.FileStorageManager.NextFilePath() + ".pdf";
+        IImageStorage storage;
         var document = new PdfDocument();
         document.Pages.Add(page);
-        document.Save(pdfPath);
+        if (_scanningContext.FileStorageManager != null)
+        {
+            string pdfPath = _scanningContext.FileStorageManager.NextFilePath() + ".pdf";
+            document.Save(pdfPath);
+            storage = new ImageFileStorage(pdfPath);
+        }
+        else
+        {
+            var stream = new MemoryStream();
+            document.Save(stream);
+            storage = new ImageMemoryStorage(stream, ".pdf");
+        }
 
-        // TODO: Are we 100% sure we want ProcessedImage to support PDFs? Need to implement that.
         var image = new ProcessedImage(
-            new ImageFileStorage(pdfPath),
+            storage,
             new ImageMetadata(BitDepth.Color, false),
             new PostProcessingData(),
             TransformState.Empty);

@@ -11,6 +11,7 @@ message SerializedImage {
 	SerializedImageMetadata metadata = 4;
 	bytes thumbnail = 5;
 	string renderedFilePath = 6;
+	string typeHint = 7;
 }
 
 message SerializedImageMetadata {
