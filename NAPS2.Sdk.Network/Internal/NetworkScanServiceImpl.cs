@@ -84,7 +84,7 @@ internal class NetworkScanServiceImpl : NetworkScanService.NetworkScanServiceBas
             {
                 sequencedWriter.Write(new ScanResponse
                 {
-                    Image = SerializedImageHelper.Serialize(image, new SerializedImageHelper.SerializeOptions
+                    Image = ImageSerializer.Serialize(image, new SerializeImageOptions
                     {
                         RequireMemoryStorage = true
                     })

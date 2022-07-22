@@ -4,9 +4,9 @@ using NAPS2.Scan;
 namespace NAPS2.Serialization;
 
 // TODO: Add tests for this class. Focus on use case tests (i.e. serialize + deserialize) rather than a bunch of tests to verify the generated proto. 
-public static class SerializedImageHelper
+public static class ImageSerializer
 {
-    public static SerializedImage Serialize(ProcessedImage image, SerializeOptions options)
+    public static SerializedImage Serialize(ProcessedImage image, SerializeImageOptions options)
     {
         if (options.RequireFileStorage && options.RequireMemoryStorage)
         {
@@ -71,7 +71,7 @@ public static class SerializedImageHelper
     }
 
     public static ProcessedImage Deserialize(ScanningContext scanningContext, SerializedImage serializedImage,
-        DeserializeOptions options)
+        DeserializeImageOptions options)
     {
         IImageStorage storage;
         if (!string.IsNullOrEmpty(serializedImage.FilePath))
@@ -89,10 +89,18 @@ public static class SerializedImageHelper
             else
             {
                 // Not transfering or sharing the file, so we need to make a copy
-                // TODO: Handle no file storage
-                string newPath = scanningContext.FileStorageManager.NextFilePath();
-                File.Copy(serializedImage.FilePath, newPath);
-                storage = new ImageFileStorage(newPath);
+                if (scanningContext.FileStorageManager != null)
+                {
+                    string newPath = scanningContext.FileStorageManager.NextFilePath();
+                    File.Copy(serializedImage.FilePath, newPath);
+                    storage = new ImageFileStorage(newPath);
+                }
+                else
+                {
+                    var stream = new MemoryStream(File.ReadAllBytes(serializedImage.FilePath));
+                    var typeHint = Path.GetExtension(serializedImage.FilePath).ToLowerInvariant();
+                    storage = new ImageMemoryStorage(stream, typeHint);
+                }
             }
         }
         else
@@ -118,28 +126,5 @@ public static class SerializedImageHelper
             }, true);
         }
         return processedImage;
-    }
-
-    public class SerializeOptions
-    {
-        public bool TransferOwnership { get; set; }
-
-        public bool IncludeThumbnail { get; set; }
-
-        public bool RequireFileStorage { get; set; }
-
-        public bool RequireMemoryStorage { get; set; }
-
-        public string? RenderedFilePath { get; set; }
-    }
-
-    public class DeserializeOptions
-    {
-        /// <summary>
-        /// If true, the Deserialize caller guarantees that the file storage will not be used for longer than the duration of the RPC call.
-        /// In this way, files can be safely reused even if ownership isn't transferred to the callee.
-        /// This should not be true outside of an RPC context.
-        /// </summary>
-        public bool ShareFileStorage { get; set; }
     }
 }

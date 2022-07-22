@@ -74,8 +74,8 @@ public class WorkerServiceAdapter
                 }
                 if (resp.Image != null)
                 {
-                    var renderableImage = SerializedImageHelper.Deserialize(scanningContext, resp.Image,
-                        new SerializedImageHelper.DeserializeOptions());
+                    var renderableImage = ImageSerializer.Deserialize(scanningContext, resp.Image,
+                        new DeserializeImageOptions());
                     imageCallback?.Invoke(renderableImage, resp.Image.RenderedFilePath);
                 }
             }
@@ -101,7 +101,7 @@ public class WorkerServiceAdapter
     {
         var req = new RenderThumbnailRequest
         {
-            Image = SerializedImageHelper.Serialize(image, new SerializedImageHelper.SerializeOptions
+            Image = ImageSerializer.Serialize(image, new SerializeImageOptions
             {
                 RequireFileStorage = true
             }),

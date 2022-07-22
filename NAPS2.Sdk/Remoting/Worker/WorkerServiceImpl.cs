@@ -40,7 +40,6 @@ public class WorkerServiceImpl : WorkerService.WorkerServiceBase
         _thumbnailRenderer = thumbnailRenderer;
         _mapiWrapper = mapiWrapper;
         _twainSessionController = twainSessionController;
-        _scanningContext = scanningContext;
     }
 
     public override Task<InitResponse> Init(InitRequest request, ServerCallContext context)
@@ -138,8 +137,8 @@ public class WorkerServiceImpl : WorkerService.WorkerServiceBase
                 (image, postProcessingContext) =>
                     sequencedWriter.Write(new ScanResponse
                     {
-                        Image = SerializedImageHelper.Serialize(image,
-                            new SerializedImageHelper.SerializeOptions
+                        Image = ImageSerializer.Serialize(image,
+                            new SerializeImageOptions
                             {
                                 TransferOwnership = true,
                                 IncludeThumbnail = true,
@@ -179,12 +178,12 @@ public class WorkerServiceImpl : WorkerService.WorkerServiceBase
         using var callRef = StartCall();
         try
         {
-            var deserializeOptions = new SerializedImageHelper.DeserializeOptions
+            var deserializeOptions = new DeserializeImageOptions
             {
                 ShareFileStorage = true
             };
             using var image =
-                SerializedImageHelper.Deserialize(_scanningContext, request.Image, deserializeOptions);
+                ImageSerializer.Deserialize(_scanningContext, request.Image, deserializeOptions);
             var thumbnail = _thumbnailRenderer.Render(image, request.Size);
             var stream = thumbnail.SaveToMemoryStream(ImageFileFormat.Png);
             return new RenderThumbnailResponse

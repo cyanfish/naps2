@@ -18,7 +18,8 @@ public class DirectImportOperation : OperationBase
         AllowBackground = true;
     }
 
-    public bool Start(ImageTransferData data, bool copy, Action<ProcessedImage> imageCallback, DirectImportParams importParams)
+    public bool Start(ImageTransferData data, bool copy, Action<ProcessedImage> imageCallback,
+        DirectImportParams importParams)
     {
         ProgressTitle = copy ? MiscResources.CopyProgress : MiscResources.ImportProgress;
         Status = new OperationStatus
@@ -34,7 +35,8 @@ public class DirectImportOperation : OperationBase
             {
                 try
                 {
-                    ProcessedImage img = SerializedImageHelper.Deserialize(_scanningContext, serializedImage, new SerializedImageHelper.DeserializeOptions());
+                    ProcessedImage img = ImageSerializer.Deserialize(_scanningContext, serializedImage,
+                        new DeserializeImageOptions());
                     var thumbnailSize = img.PostProcessingData.Thumbnail == null ? importParams.ThumbnailSize : null;
                     // TODO: Maybe we can use a Pipeline to offload thumbnail rendering?
                     // TODO: And actually we should be using the worker service here...
