@@ -182,6 +182,27 @@ public class ImageSerializerTests : ContextualTests
     }
 
     [Fact]
+    public void TransferOwnershipOfSharedFile()
+    {
+        new StorageConfig.File().Apply(this);
+
+        using var destContext = new ScanningContext(new GdiImageContext(),
+            FileStorageManager.CreateFolder(Path.Combine(FolderPath, "dest")));
+
+        using var sourceImage = ScanningContext.CreateProcessedImage(new GdiImage(SharedData.color_image));
+        var serializedImage = ImageSerializer.Serialize(sourceImage, new SerializeImageOptions());
+        using var destImage = ImageSerializer.Deserialize(destContext, serializedImage, new DeserializeImageOptions
+        {
+            ShareFileStorage = true
+        });
+
+        Assert.Throws<ArgumentException>(() => ImageSerializer.Serialize(destImage, new SerializeImageOptions
+        {
+            TransferOwnership = true
+        }));
+    }
+
+    [Fact]
     public void TransferOwnership_FailsWithClone()
     {
         new StorageConfig.File().Apply(this);

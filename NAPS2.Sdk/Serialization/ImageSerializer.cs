@@ -75,10 +75,15 @@ public static class ImageSerializer
         {
             if (image.Storage is ImageFileStorage fileStorage)
             {
-                fileStorage.MarkShared();
+                if (fileStorage.IsShared)
+                {
+                    throw new ArgumentException("Can't transfer ownership of a shared file");
+                }
+                fileStorage.IsShared = true;
                 image.Dispose();
                 if (!fileStorage.IsDisposed)
                 {
+                    fileStorage.IsShared = false;
                     throw new ArgumentException(
                         "Serialization with TransferOwnership can't be used when there are multiple ProcessedImage objects referencing the same underlying storage.");
                 }
