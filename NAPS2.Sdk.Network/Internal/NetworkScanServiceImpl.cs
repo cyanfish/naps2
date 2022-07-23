@@ -86,7 +86,7 @@ internal class NetworkScanServiceImpl : NetworkScanService.NetworkScanServiceBas
                 {
                     Image = ImageSerializer.Serialize(image, new SerializeImageOptions
                     {
-                        RequireMemoryStorage = true
+                        CrossDevice = true
                     })
                 });
             });

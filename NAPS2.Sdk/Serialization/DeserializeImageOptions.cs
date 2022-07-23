@@ -7,5 +7,5 @@ public class DeserializeImageOptions
     /// In this way, files can be safely reused even if ownership isn't transferred to the callee.
     /// This should not be true outside of an RPC context.
     /// </summary>
-    public bool ShareFileStorage { get; set; }
+    public bool ShareFileStorage { get; init; }
 }

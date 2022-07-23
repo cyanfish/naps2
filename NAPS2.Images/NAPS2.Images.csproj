@@ -17,6 +17,12 @@
         <PackageReference Include="ZXing.Net" Version="0.16.4" />
     </ItemGroup>
 
+    <ItemGroup>
+        <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
+            <_Parameter1>NAPS2.Sdk</_Parameter1>
+        </AssemblyAttribute>
+    </ItemGroup>
+
     <Import Project="..\NAPS2.Setup\CommonTargets.targets" />
     <Import Project="..\NAPS2.Setup\ImageUsers.targets" />
 </Project>

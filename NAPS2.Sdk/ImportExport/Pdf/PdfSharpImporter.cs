@@ -1,4 +1,5 @@
 ﻿using System.Runtime.InteropServices;
+using System.Text;
 using System.Threading;
 using NAPS2.ImportExport.Images;
 using NAPS2.Scan;
@@ -12,6 +13,11 @@ namespace NAPS2.ImportExport.Pdf;
 // TODO: We should have a "nicer" name (PdfImporter) for SDK users, or maybe have this be internal and have the public ScannedImageImporter (which should also maybe be renamed...)
 public class PdfSharpImporter : IPdfImporter
 {
+    static PdfSharpImporter()
+    {
+        Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
+    }
+
     private readonly ScanningContext _scanningContext;
     private readonly IPdfPasswordProvider? _pdfPasswordProvider;
     private readonly ImportPostProcessor _importPostProcessor;

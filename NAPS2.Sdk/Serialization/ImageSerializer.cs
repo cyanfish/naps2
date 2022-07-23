@@ -8,13 +8,17 @@ public static class ImageSerializer
 {
     public static SerializedImage Serialize(ProcessedImage image, SerializeImageOptions options)
     {
-        if (options.RequireFileStorage && options.RequireMemoryStorage)
+        if (options.RequireFileStorage && options.CrossDevice)
         {
             throw new ArgumentException();
         }
         if (options.RequireFileStorage && image.Storage is not ImageFileStorage)
         {
-            throw new InvalidOperationException("FileStorage is required for serialization.");
+            throw new ArgumentException("FileStorage is required for serialization.");
+        }
+        if (options.CrossDevice && options.RenderedFilePath != null)
+        {
+            throw new ArgumentException("A RenderedFilePath can't be specified for cross-device serialization.");
         }
 
         // TODO: What if there are transforms? Does it make sense to include the thumbnail from the postprocessing data
@@ -44,7 +48,7 @@ public static class ImageSerializer
         switch (image.Storage)
         {
             case ImageFileStorage fileStorage:
-                if (options.RequireMemoryStorage)
+                if (options.CrossDevice)
                 {
                     using var stream = File.OpenRead(fileStorage.FullPath);
                     result.FileContent = ByteString.FromStream(stream);
@@ -67,6 +71,25 @@ public static class ImageSerializer
                 result.TypeHint = fileFormat.AsTypeHint();
                 break;
         }
+
+        if (options.TransferOwnership)
+        {
+            if (image.Storage is ImageFileStorage fileStorage)
+            {
+                fileStorage.MarkShared();
+                image.Dispose();
+                if (!fileStorage.IsDisposed)
+                {
+                    throw new ArgumentException(
+                        "Serialization with TransferOwnership can't be used when there are multiple ProcessedImage objects referencing the same underlying storage.");
+                }
+            }
+            else
+            {
+                image.Dispose();
+            }
+        }
+
         return result;
     }
 
@@ -91,22 +114,23 @@ public static class ImageSerializer
                 // Not transfering or sharing the file, so we need to make a copy
                 if (scanningContext.FileStorageManager != null)
                 {
-                    string newPath = scanningContext.FileStorageManager.NextFilePath();
+                    string newPath = scanningContext.FileStorageManager.NextFilePath() +
+                                     Path.GetExtension(serializedImage.FilePath);
                     File.Copy(serializedImage.FilePath, newPath);
                     storage = new ImageFileStorage(newPath);
                 }
                 else
                 {
-                    var stream = new MemoryStream(File.ReadAllBytes(serializedImage.FilePath));
+                    var data = File.ReadAllBytes(serializedImage.FilePath);
                     var typeHint = Path.GetExtension(serializedImage.FilePath).ToLowerInvariant();
-                    storage = new ImageMemoryStorage(stream, typeHint);
+                    storage = new ImageMemoryStorage(data, typeHint);
                 }
             }
         }
         else
         {
-            var stream = new MemoryStream(serializedImage.FileContent.ToByteArray());
-            storage = new ImageMemoryStorage(stream, serializedImage.TypeHint);
+            var data = serializedImage.FileContent.ToByteArray();
+            storage = new ImageMemoryStorage(data, serializedImage.TypeHint);
         }
 
         var processedImage = scanningContext.CreateProcessedImage(

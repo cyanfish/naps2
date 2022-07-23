@@ -14,8 +14,6 @@ namespace NAPS2.ImportExport.Pdf;
 
 public class PdfSharpExporter : PdfExporter
 {
-    private readonly ScanningContext _scanningContext;
-
     static PdfSharpExporter()
     {
         if (PlatformCompat.System.UseUnixFontResolver)
@@ -24,6 +22,8 @@ public class PdfSharpExporter : PdfExporter
         }
         Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
     }
+
+    private readonly ScanningContext _scanningContext;
 
     public PdfSharpExporter(ScanningContext scanningContext)
     {

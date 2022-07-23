@@ -2,7 +2,8 @@
 
 public class ImageFileStorage : IImageStorage
 {
-    private readonly bool _shared;
+    private bool _shared;
+    private bool _disposed;
 
     public ImageFileStorage(string fullPath) : this(fullPath, false)
     {
@@ -16,18 +17,25 @@ public class ImageFileStorage : IImageStorage
 
     public string FullPath { get; }
 
+    internal bool IsDisposed => _disposed;
+
+    internal void MarkShared()
+    {
+        _shared = true;
+    }
+
     public void Dispose()
     {
-        if (!_shared)
+        if (_disposed) return;
+        _disposed = true;
+        if (_shared) return;
+        try
         {
-            try
-            {
-                File.Delete(FullPath);
-            }
-            catch (IOException)
-            {
-                // TODO: Log this
-            }
+            File.Delete(FullPath);
+        }
+        catch (IOException)
+        {
+            // TODO: Log this
         }
     }
 }
