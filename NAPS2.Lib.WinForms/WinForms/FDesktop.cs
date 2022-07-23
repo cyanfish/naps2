@@ -118,7 +118,6 @@ public partial class FDesktop : FormBase
         _listView.NativeControl.MouseWheel += ListViewMouseWheel;
         toolStripContainer1.ContentPanel.Controls.Add(_listView.NativeControl);
         _imageListSyncer?.Dispose();
-        _imageListSyncer = new ImageListSyncer(_imageList, _listView.ApplyDiffs, SynchronizationContext.Current);
 
         foreach (var panel in toolStripContainer1.Controls.OfType<ToolStripPanel>())
         {
@@ -175,7 +174,7 @@ public partial class FDesktop : FormBase
             .Activate();
         _listView.NativeControl.SizeChanged += (_, _) => _layoutManager.UpdateLayout();
 
-        _imageListSyncer.SyncNow();
+        _imageListSyncer = new ImageListSyncer(_imageList, _listView.ApplyDiffs, SynchronizationContext.Current!);
         _listView.NativeControl.Focus();
     }
 
