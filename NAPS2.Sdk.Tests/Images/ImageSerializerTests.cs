@@ -127,6 +127,61 @@ public class ImageSerializerTests : ContextualTests
     }
 
     [Fact]
+    public void CrossDevice()
+    {
+        new StorageConfig.File().Apply(this);
+
+        using var destContext = new ScanningContext(new GdiImageContext(),
+            FileStorageManager.CreateFolder(Path.Combine(FolderPath, "dest")));
+
+        using var sourceImage = ScanningContext.CreateProcessedImage(new GdiImage(SharedData.color_image));
+        var serializedImage = ImageSerializer.Serialize(sourceImage, new SerializeImageOptions
+        {
+            CrossDevice = true
+        });
+        // Disposing before deserialization should have no effect with CrossDevice set
+        sourceImage.Dispose();
+        using var destImage = ImageSerializer.Deserialize(destContext, serializedImage, new DeserializeImageOptions());
+
+        ImageAsserts.Similar(TransformTestsData.color_image, ImageContext.Render(destImage));
+    }
+
+    [Fact]
+    public void DisposeBeforeDeserialization()
+    {
+        new StorageConfig.File().Apply(this);
+
+        using var destContext = new ScanningContext(new GdiImageContext(),
+            FileStorageManager.CreateFolder(Path.Combine(FolderPath, "dest")));
+
+        using var sourceImage = CreateScannedImage();
+        var serializedImage = ImageSerializer.Serialize(sourceImage, new SerializeImageOptions());
+        sourceImage.Dispose();
+
+        Assert.Throws<FileNotFoundException>(() =>
+            ImageSerializer.Deserialize(destContext, serializedImage, new DeserializeImageOptions()));
+    }
+
+    [Fact]
+    public void ShareFileStorage_DisposeBeforeDeserialization()
+    {
+        new StorageConfig.File().Apply(this);
+
+        using var destContext = new ScanningContext(new GdiImageContext(),
+            FileStorageManager.CreateFolder(Path.Combine(FolderPath, "dest")));
+
+        using var sourceImage = CreateScannedImage();
+        var serializedImage = ImageSerializer.Serialize(sourceImage, new SerializeImageOptions());
+        sourceImage.Dispose();
+
+        Assert.Throws<FileNotFoundException>(() =>
+            ImageSerializer.Deserialize(destContext, serializedImage, new DeserializeImageOptions
+            {
+                ShareFileStorage = true
+            }));
+    }
+
+    [Fact]
     public void TransferOwnership_FailsWithClone()
     {
         new StorageConfig.File().Apply(this);
@@ -153,7 +208,7 @@ public class ImageSerializerTests : ContextualTests
     [Fact]
     public void RequireFileStorage_NoFileStorage()
     {
-        using var sourceImage = ScanningContext.CreateProcessedImage(new GdiImage(SharedData.color_image));
+        using var sourceImage = CreateScannedImage();
         Assert.Throws<ArgumentException>(() => ImageSerializer.Serialize(sourceImage, new SerializeImageOptions
         {
             RequireFileStorage = true
@@ -163,9 +218,7 @@ public class ImageSerializerTests : ContextualTests
     [Fact]
     public void RequireFileStorage_AndCrossDevice()
     {
-        new StorageConfig.File().Apply(this);
-
-        using var sourceImage = ScanningContext.CreateProcessedImage(new GdiImage(SharedData.color_image));
+        using var sourceImage = CreateScannedImage();
         Assert.Throws<ArgumentException>(() => ImageSerializer.Serialize(sourceImage, new SerializeImageOptions
         {
             RequireFileStorage = true,
@@ -176,13 +229,22 @@ public class ImageSerializerTests : ContextualTests
     [Fact]
     public void CrossDevice_AndRenderedFilePath()
     {
-        new StorageConfig.File().Apply(this);
-
-        using var sourceImage = ScanningContext.CreateProcessedImage(new GdiImage(SharedData.color_image));
+        using var sourceImage = CreateScannedImage();
         Assert.Throws<ArgumentException>(() => ImageSerializer.Serialize(sourceImage, new SerializeImageOptions
         {
             CrossDevice = true,
             RenderedFilePath = "something.jpg"
+        }));
+    }
+
+    [Fact]
+    public void CrossDevice_AndTransferOwnership()
+    {
+        using var sourceImage = CreateScannedImage();
+        Assert.Throws<ArgumentException>(() => ImageSerializer.Serialize(sourceImage, new SerializeImageOptions
+        {
+            CrossDevice = true,
+            TransferOwnership = true
         }));
     }
 
@@ -229,5 +291,48 @@ public class ImageSerializerTests : ContextualTests
         ImageAsserts.Similar(PdfData.word_p1, ImageContext.Render(destImage));
     }
 
-    // TODO: Finish tests for different options etc.
+    [Theory]
+    [ClassData(typeof(StorageAwareTestData))]
+    public void IncludeThumbnail(StorageConfig config)
+    {
+        config.Apply(this);
+
+        using var destContext = new ScanningContext(new GdiImageContext());
+
+        using var sourceImage = ScanningContext.CreateProcessedImage(new GdiImage(SharedData.color_image));
+        using var imageWithThumbnail = sourceImage.WithPostProcessingData(new PostProcessingData
+        {
+            Thumbnail = ImageContext.PerformTransform(ImageContext.Render(sourceImage), new ThumbnailTransform(256)),
+            ThumbnailTransformState = TransformState.Empty
+        }, true);
+
+        var serializedImage = ImageSerializer.Serialize(imageWithThumbnail, new SerializeImageOptions
+        {
+            IncludeThumbnail = true
+        });
+        using var destImage = ImageSerializer.Deserialize(destContext, serializedImage, new DeserializeImageOptions());
+
+        ImageAsserts.Similar(TransformTestsData.color_image_thumb_256, destImage.PostProcessingData.Thumbnail);
+    }
+
+    [Fact]
+    public void IncludeThumbnail_InvalidTransformState()
+    {
+        using var destContext = new ScanningContext(new GdiImageContext());
+
+        using var sourceImage = ScanningContext.CreateProcessedImage(new GdiImage(SharedData.color_image));
+        using var imageWithThumbnail = sourceImage.WithPostProcessingData(new PostProcessingData
+        {
+            Thumbnail = ImageContext.PerformTransform(ImageContext.Render(sourceImage), new ThumbnailTransform(256)),
+            ThumbnailTransformState = TransformState.Empty.AddOrSimplify(new BrightnessTransform(100))
+        }, true);
+
+        var serializedImage = ImageSerializer.Serialize(imageWithThumbnail, new SerializeImageOptions
+        {
+            IncludeThumbnail = true
+        });
+        using var destImage = ImageSerializer.Deserialize(destContext, serializedImage, new DeserializeImageOptions());
+
+        Assert.Null(destImage.PostProcessingData.Thumbnail);
+    }
 }

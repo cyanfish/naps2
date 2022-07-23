@@ -11,7 +11,11 @@ public class ImageFileStorage : IImageStorage
 
     public ImageFileStorage(string fullPath, bool shared)
     {
-        FullPath = fullPath ?? throw new ArgumentNullException(nameof(fullPath));
+        if (!File.Exists(fullPath ?? throw new ArgumentNullException()))
+        {
+            throw new FileNotFoundException(null, fullPath);
+        }
+        FullPath = fullPath;
         _shared = shared;
     }
 

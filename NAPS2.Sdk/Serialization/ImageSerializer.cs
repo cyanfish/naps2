@@ -3,12 +3,11 @@ using NAPS2.Scan;
 
 namespace NAPS2.Serialization;
 
-// TODO: Add tests for this class. Focus on use case tests (i.e. serialize + deserialize) rather than a bunch of tests to verify the generated proto. 
 public static class ImageSerializer
 {
     public static SerializedImage Serialize(ProcessedImage image, SerializeImageOptions options)
     {
-        if (options.RequireFileStorage && options.CrossDevice)
+        if (options.CrossDevice && (options.RequireFileStorage || options.TransferOwnership))
         {
             throw new ArgumentException();
         }
