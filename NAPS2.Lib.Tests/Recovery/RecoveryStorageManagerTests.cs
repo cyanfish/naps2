@@ -17,7 +17,7 @@ public class RecoveryStorageManagerTests : ContextualTests
         _recoveryFolder = Path.Combine(FolderPath, "recovery");
         ScanningContext.FileStorageManager = new FileStorageManager(_recoveryFolder);
         _imageList = new UiImageList();
-        _recoveryStorageManager = RecoveryStorageManager.CreateFolder(_recoveryFolder, _imageList);
+        _recoveryStorageManager = RecoveryStorageManager.CreateFolderWithoutThrottle(_recoveryFolder, _imageList);
     }
 
     public override void Dispose()
@@ -38,7 +38,7 @@ public class RecoveryStorageManagerTests : ContextualTests
     public void RecoveryFolderCleanup()
     {
         var image1 = new UiImage(CreateScannedImage());
-        _recoveryStorageManager.WriteIndex(new[] {image1});
+        _imageList.Mutate(new ListMutation<UiImage>.Append(image1));
 
         _recoveryStorageManager.Dispose();
         Assert.False(Directory.Exists(_recoveryFolder));
@@ -49,7 +49,7 @@ public class RecoveryStorageManagerTests : ContextualTests
     {
         var image1 = new UiImage(CreateScannedImage());
         var image2 = new UiImage(CreateScannedImage());
-        _recoveryStorageManager.WriteIndex(new[] {image1, image2});
+        _imageList.Mutate(new ListMutation<UiImage>.Append(image1, image2));
         var indexFileContent = File.ReadAllText(Path.Combine(_recoveryFolder, "index.xml"));
 
         Assert.Contains("00001.png</FileName>", indexFileContent);
@@ -64,12 +64,12 @@ public class RecoveryStorageManagerTests : ContextualTests
         var image1 = new UiImage(CreateScannedImage());
         var image2 = new UiImage(CreateScannedImage());
 
-        _recoveryStorageManager.WriteIndex(new[] {image1, image2});
+        _imageList.Mutate(new ListMutation<UiImage>.Append(image1, image2));
         var indexFileContent = File.ReadAllText(Path.Combine(_recoveryFolder, "index.xml"));
         Assert.Contains("00001.png", indexFileContent);
         Assert.Contains("00002.png", indexFileContent);
 
-        _recoveryStorageManager.WriteIndex(new[] {image2});
+        _imageList.Mutate(new ListMutation<UiImage>.DeleteSelected(), ListSelection.Of(image1));
         var indexFileContent2 = File.ReadAllText(Path.Combine(_recoveryFolder, "index.xml"));
         Assert.DoesNotContain("00001.png", indexFileContent2);
         Assert.Contains("00002.png", indexFileContent2);
@@ -85,7 +85,7 @@ public class RecoveryStorageManagerTests : ContextualTests
                 true,
                 -1));
 
-        _recoveryStorageManager.WriteIndex(new[] {image1});
+        _imageList.Mutate(new ListMutation<UiImage>.Append(image1));
         var indexFileContent = File.ReadAllText(Path.Combine(_recoveryFolder, "index.xml"));
         Assert.Contains("<BitDepth>Grayscale</BitDepth>", indexFileContent);
         Assert.Contains("<HighQuality>true</HighQuality>", indexFileContent);
@@ -99,7 +99,7 @@ public class RecoveryStorageManagerTests : ContextualTests
                 new GdiImage(new Bitmap(100, 100)),
                 new[] {new BrightnessTransform(100)}));
 
-        _recoveryStorageManager.WriteIndex(new[] {image1});
+        _imageList.Mutate(new ListMutation<UiImage>.Append(image1));
         var indexFileContent3 = File.ReadAllText(Path.Combine(_recoveryFolder, "index.xml"));
         Assert.Contains("<Transform xsi:type=\"BrightnessTransform\">", indexFileContent3);
         Assert.Contains("<Brightness>100</Brightness>", indexFileContent3);

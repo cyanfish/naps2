@@ -13,7 +13,7 @@ namespace NAPS2.Recovery;
 /// - The recovery folder. Created in RecoveryStorageManager.CreateFolder and deleted by RecoveryStorageManager.Dispose.
 /// - The image files. Created in ScanningContext.CreateProcessedImage based on ScanningContext.FileStorageManager (which should have the same path as the RecoveryStorageManager).
 /// - The recovery index. This is file named index.xml which stores the serialized metadata entries and is updated by RecoveryStorageManager.WriteIndex.
-/// - The recovery lock. This is a file named .lock that has an exclusive write lock until RecoveryStorageManager is disposed.
+/// - The recovery lock. This is a file named .lock that has an exclusive write lock.
 ///
 /// If the process crashes without disposing RecoveryStorageManager, the lock will be automatically released.
 /// Other processes can later detect that and initiate a recovery via RecoveryManager. 
@@ -34,17 +34,26 @@ public class RecoveryStorageManager : IDisposable
 
     public static RecoveryStorageManager CreateFolder(string recoveryFolderPath, UiImageList imageList)
     {
-        return new RecoveryStorageManager(recoveryFolderPath, imageList);
+        return new RecoveryStorageManager(recoveryFolderPath, imageList, true);
     }
 
-    private RecoveryStorageManager(string recoveryFolderPath, UiImageList imageList)
+    /// <summary>
+    /// Normally RecoveryStorageManager throttles multiple writes to the filesystem. For testing we can skip throttling.
+    /// </summary>
+    internal static RecoveryStorageManager CreateFolderWithoutThrottle(string recoveryFolderPath, UiImageList imageList)
+    {
+        return new RecoveryStorageManager(recoveryFolderPath, imageList, false);
+    }
+
+    private RecoveryStorageManager(string recoveryFolderPath, UiImageList imageList, bool throttle)
     {
         RecoveryFolderPath = recoveryFolderPath;
         _folder = new DirectoryInfo(RecoveryFolderPath);
         _folder.Create();
         _folderLockFile = new FileInfo(Path.Combine(RecoveryFolderPath, LOCK_FILE_NAME));
         _folderLock = _folderLockFile.Open(FileMode.CreateNew, FileAccess.Write, FileShare.None);
-        _writeThrottle = new TimedThrottle(WriteIndexFromImageList, WriteThrottleInterval);
+        var interval = throttle ? WriteThrottleInterval : TimeSpan.Zero;
+        _writeThrottle = new TimedThrottle(WriteIndexFromImageList, interval);
         _imageList = imageList;
         imageList.ImagesUpdated += ImageListUpdated;
         imageList.ImagesThumbnailInvalidated += ImageListUpdated;
@@ -67,7 +76,7 @@ public class RecoveryStorageManager : IDisposable
         WriteIndex(images);
     }
     
-    public void WriteIndex(IEnumerable<UiImage> images)
+    private void WriteIndex(IEnumerable<UiImage> images)
     {
         lock (this)
         {
@@ -90,7 +99,7 @@ public class RecoveryStorageManager : IDisposable
         }
     }
 
-    public void ReleaseLockForTesting()
+    internal void ReleaseLockForTesting()
     {
         _folderLock.Close();
     }

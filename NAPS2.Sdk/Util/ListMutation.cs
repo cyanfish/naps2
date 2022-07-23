@@ -310,17 +310,22 @@ public abstract class ListMutation<T> where T : notnull
 
     public class Append : ListMutation<T>
     {
-        private readonly T _item;
+        private readonly List<T> _items;
 
-        public Append(T item)
+        public Append(IEnumerable<T> items)
         {
-            _item = item;
+            _items = items.ToList();
+        }
+
+        public Append(params T[] items)
+        {
+            _items = items.ToList();
         }
 
         public override void Apply(List<T> list, ref ListSelection<T> selection)
         {
-            list.Add(_item);
-            selection = ListSelection.Of(_item);
+            list.AddRange(_items);
+            selection = ListSelection.From(_items);
         }
     }
 }

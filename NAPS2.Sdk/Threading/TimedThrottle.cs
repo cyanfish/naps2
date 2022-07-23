@@ -90,25 +90,23 @@ public class TimedThrottle
 
     private void RunActionOnSyncContext(SynchronizationContext? syncContext)
     {
-        if (syncContext != null)
-        {
-            lock (this)
-            {
-                if (_hasQueuedActionOnSyncContext) return;
-                _hasQueuedActionOnSyncContext = true;
-                syncContext.Post(_ =>
-                {
-                    lock (this)
-                    {
-                        _hasQueuedActionOnSyncContext = false;
-                    }
-                    _action();
-                }, null);
-            }
-        }
-        else
+        if (syncContext == null)
         {
             _action();
+            return;
+        }
+        lock (this)
+        {
+            if (_hasQueuedActionOnSyncContext) return;
+            _hasQueuedActionOnSyncContext = true;
+            syncContext.Post(_ =>
+            {
+                lock (this)
+                {
+                    _hasQueuedActionOnSyncContext = false;
+                }
+                _action();
+            }, null);
         }
     }
 }
