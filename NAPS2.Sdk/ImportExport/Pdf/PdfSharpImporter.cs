@@ -11,6 +11,7 @@ using PdfSharp.Pdf.IO;
 namespace NAPS2.ImportExport.Pdf;
 
 // TODO: We should have a "nicer" name (PdfImporter) for SDK users, or maybe have this be internal and have the public ScannedImageImporter (which should also maybe be renamed...)
+// TODO: Add tests
 public class PdfSharpImporter : IPdfImporter
 {
     static PdfSharpImporter()
@@ -228,11 +229,7 @@ public class PdfSharpImporter : IPdfImporter
         using var memoryStream = new MemoryStream(imageBytes);
         using var storage = _scanningContext.ImageContext.Load(memoryStream);
         storage.SetResolution(storage.Width / (float) page.Width.Inch, storage.Height / (float) page.Height.Inch);
-        var image = new ProcessedImage(
-            storage,
-            new ImageMetadata(BitDepth.Color, false),
-            new PostProcessingData(),
-            TransformState.Empty);
+        var image = _scanningContext.CreateProcessedImage(storage, BitDepth.Color, false, -1);
         return _importPostProcessor.AddPostProcessingData(
             image,
             storage,
@@ -270,8 +267,7 @@ public class PdfSharpImporter : IPdfImporter
         using (storage)
         {
             storage.SetResolution(storage.Width / (float) page.Width.Inch, storage.Height / (float) page.Height.Inch);
-            // TODO: This should probably use CreateProcessedImage to convert the storage? And also make a copy/clone if needed
-            var image = new ProcessedImage(storage, new ImageMetadata(bitDepth, true), new PostProcessingData(), TransformState.Empty);
+            var image = _scanningContext.CreateProcessedImage(storage, bitDepth, true, -1);
             return _importPostProcessor.AddPostProcessingData(
                 image,
                 storage,

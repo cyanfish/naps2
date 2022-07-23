@@ -41,7 +41,7 @@ internal class RemotePostProcessor : IRemotePostProcessor
 
             var bitDepth = options.UseNativeUI ? BitDepth.Color : options.BitDepth;
             var scannedImage = _scanningContext.CreateProcessedImage(image, bitDepth, options.MaxQuality,
-                options.Quality, Enumerable.Empty<Transform>());
+                options.Quality);
             DoRevertibleTransforms(ref scannedImage, ref image, options, postProcessingContext);
             postProcessingContext.TempPath = SaveForBackgroundOcr(image, options);
             // TODO: We need to attach the thumbnail to the scanned image

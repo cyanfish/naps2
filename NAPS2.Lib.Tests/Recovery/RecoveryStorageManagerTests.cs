@@ -83,8 +83,7 @@ public class RecoveryStorageManagerTests : ContextualTests
                 new GdiImage(new Bitmap(100, 100)),
                 BitDepth.Grayscale,
                 true,
-                -1,
-                Enumerable.Empty<Transform>()));
+                -1));
 
         _recoveryStorageManager.WriteIndex(new[] {image1});
         var indexFileContent = File.ReadAllText(Path.Combine(_recoveryFolder, "index.xml"));

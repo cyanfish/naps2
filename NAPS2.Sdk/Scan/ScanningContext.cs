@@ -54,6 +54,11 @@ public class ScanningContext : IDisposable
         return CreateProcessedImage(storage, BitDepth.Color, false, -1, transforms);
     }
 
+    public ProcessedImage CreateProcessedImage(IImageStorage storage, BitDepth bitDepth, bool lossless, int quality)
+    {
+        return CreateProcessedImage(storage, bitDepth, lossless, quality, Enumerable.Empty<Transform>());
+    }
+
     public ProcessedImage CreateProcessedImage(IImageStorage storage, BitDepth bitDepth, bool lossless, int quality,
         IEnumerable<Transform> transforms)
     {

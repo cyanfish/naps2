@@ -60,8 +60,7 @@ public class ImageImporter : IImageImporter
                             frame,
                             BitDepth.Color,
                             lossless,
-                            -1,
-                            Enumerable.Empty<Transform>());
+                            -1);
                         image = _importPostProcessor.AddPostProcessingData(
                             image,
                             frame,
