@@ -2,9 +2,15 @@ using System.Threading;
 
 namespace NAPS2.Images;
 
+/// <summary>
+/// Sends changes in the given UiImageList to the given callback when images are updated. Passive updates (e.g.
+/// receiving the next image from a scan/import) are throttled to avoid excessive UI updates.
+///
+/// If any images are present in the list upon construction, they will be immediately sent to the callback. 
+/// </summary>
 public class ImageListSyncer
 {
-    private static readonly TimeSpan SYNC_INTERVAL = TimeSpan.FromMilliseconds(100);
+    private static readonly TimeSpan SyncThrottleInterval = TimeSpan.FromMilliseconds(100);
 
     private readonly UiImageList _imageList;
     private readonly Action<ListViewDiffs<UiImage>> _diffCallback;
@@ -22,7 +28,7 @@ public class ImageListSyncer
         _imageList.ImagesUpdated += ImagesUpdated;
         _imageList.ImagesThumbnailChanged += ImagesUpdated;
         _imageList.ImagesThumbnailInvalidated += ImagesUpdated;
-        _syncThrottle = new TimedThrottle(Sync, SYNC_INTERVAL);
+        _syncThrottle = new TimedThrottle(Sync, SyncThrottleInterval);
         _differ = new ImageListDiffer(_imageList);
         Sync();
     }

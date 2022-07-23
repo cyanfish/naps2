@@ -6,6 +6,9 @@ using AppendOperation = ListViewDiffs<UiImage>.AppendOperation;
 using ReplaceOperation = ListViewDiffs<UiImage>.ReplaceOperation;
 using TrimOperation = ListViewDiffs<UiImage>.TrimOperation;
 
+/// <summary>
+/// Atomically produces changes made to a UiImageList.
+/// </summary>
 public class ImageListDiffer
 {
     private readonly UiImageList _imageList;
@@ -16,6 +19,14 @@ public class ImageListDiffer
         _imageList = imageList;
     }
 
+    /// <summary>
+    /// Produces the set of changes since the last call to GetAndFlushDiffs. The first call assumes the previous state
+    /// is an empty list, i.e. all items in the list are included as appended items in the diff.
+    ///
+    /// In addition to the images themselves being added/deleted/replaced, if the image's render state changes (i.e. its
+    /// transforms or thumbnail change) it will also be included in the diff. 
+    /// </summary>
+    /// <returns>The changes/diffs.</returns>
     public ListViewDiffs<UiImage> GetAndFlushDiffs()
     {
         lock (this)
@@ -25,17 +36,13 @@ public class ImageListDiffer
             {
                 newState = _imageList.Images.Select(x => x.GetImageRenderState()).ToList();
             }
-
-            // TODO: We do actually need the UiImage reference somehow
-            // TODO: Or actually UiThumbnailProvider goes against this whole thing being fully immutable... 
+ 
             var appendOps = ImmutableList<AppendOperation>.Empty;
             foreach (var image in newState.Skip(_currentState.Count))
             {
                 appendOps = appendOps.Add(new AppendOperation(image.Source));
             }
 
-            // TODO: "Replace" might also mean "refresh", i.e. we have the same image object but it's been updated
-            // TODO: Is it worth representing that somehow?
             var replaceOps = ImmutableList<ReplaceOperation>.Empty;
             for (int i = 0; i < Math.Min(_currentState.Count, newState.Count); i++)
             {
