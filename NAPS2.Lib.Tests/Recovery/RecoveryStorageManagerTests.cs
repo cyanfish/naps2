@@ -9,7 +9,7 @@ namespace NAPS2.Lib.Tests.Recovery;
 public class RecoveryStorageManagerTests : ContextualTests
 {
     private readonly string _recoveryFolder;
-    private readonly UiImageList _imageList; // TODO: Add tests for this
+    private readonly UiImageList _imageList;
     private readonly RecoveryStorageManager _recoveryStorageManager;
 
     public RecoveryStorageManagerTests()

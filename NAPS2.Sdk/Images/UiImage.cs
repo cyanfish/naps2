@@ -127,7 +127,7 @@ public class UiImage : IDisposable
         }
     }
 
-    public void SetThumbnail(IMemoryImage image, TransformState? transformState = null)
+    public void SetThumbnail(IMemoryImage image, TransformState transformState)
     {
         lock (this)
         {
