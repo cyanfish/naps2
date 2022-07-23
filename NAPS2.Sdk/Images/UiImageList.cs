@@ -37,11 +37,11 @@ public class UiImageList
 
     public event EventHandler? SelectionChanged;
 
-    public event EventHandler? ImagesUpdated;
+    public event EventHandler<ImageListEventArgs>? ImagesUpdated;
 
-    public event EventHandler? ImagesThumbnailChanged;
+    public event EventHandler<ImageListEventArgs>? ImagesThumbnailChanged;
 
-    public event EventHandler? ImagesThumbnailInvalidated;
+    public event EventHandler<ImageListEventArgs>? ImagesThumbnailInvalidated;
 
     public void UpdateSelection(ListSelection<UiImage> newSelection)
     {
@@ -49,17 +49,20 @@ public class UiImageList
         SelectionChanged?.Invoke(this, EventArgs.Empty);
     }
 
-    public void Mutate(ListMutation<UiImage> mutation, ListSelection<UiImage>? selectionToMutate = null)
+    public void Mutate(ListMutation<UiImage> mutation, ListSelection<UiImage>? selectionToMutate = null,
+        bool isPassiveInteraction = false)
     {
-        MutateInternal(mutation, selectionToMutate);
+        MutateInternal(mutation, selectionToMutate, isPassiveInteraction);
     }
 
-    public async Task MutateAsync(ListMutation<UiImage> mutation, ListSelection<UiImage>? selectionToMutate = null)
+    public async Task MutateAsync(ListMutation<UiImage> mutation, ListSelection<UiImage>? selectionToMutate = null,
+        bool isPassiveInteraction = false)
     {
-        await Task.Run(() => MutateInternal(mutation, selectionToMutate));
+        await Task.Run(() => MutateInternal(mutation, selectionToMutate, isPassiveInteraction));
     }
 
-    private void MutateInternal(ListMutation<UiImage> mutation, ListSelection<UiImage>? selectionToMutate)
+    private void MutateInternal(ListMutation<UiImage> mutation, ListSelection<UiImage>? selectionToMutate,
+        bool isPassiveInteraction)
     {
         lock (this)
         {
@@ -94,7 +97,7 @@ public class UiImageList
                 UpdateSelectionOnUiThread(currentSelection);
             }
         }
-        ImagesUpdated?.Invoke(this, EventArgs.Empty);
+        ImagesUpdated?.Invoke(this, new ImageListEventArgs(isPassiveInteraction));
     }
 
     private void UpdateSelectionOnUiThread(ListSelection<UiImage> currentSelection)
@@ -113,12 +116,14 @@ public class UiImageList
 
     private void ImageThumbnailChanged(object? sender, EventArgs args)
     {
-        ImagesThumbnailChanged?.Invoke(this, EventArgs.Empty);
+        // A thumbnail change indicates rendering which is a passive interaction.
+        ImagesThumbnailChanged?.Invoke(this, new ImageListEventArgs(false));
     }
 
     private void ImageThumbnailInvalidated(object? sender, EventArgs args)
     {
-        ImagesThumbnailInvalidated?.Invoke(this, EventArgs.Empty);
+        // A thumbnail invalidation indicates an image edit which is an active interaction.
+        ImagesThumbnailInvalidated?.Invoke(this, new ImageListEventArgs(true));
     }
 
     /// <summary>

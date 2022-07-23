@@ -23,7 +23,7 @@ public class DesktopImagesController
             lock (lockObj)
             {
                 var uiImage = new UiImage(scannedImage);
-                _imageList.Mutate(new ImageListMutation.InsertAfter(uiImage, last));
+                _imageList.Mutate(new ImageListMutation.InsertAfter(uiImage, last), isPassiveInteraction: true);
                 last = uiImage;
             }
         };

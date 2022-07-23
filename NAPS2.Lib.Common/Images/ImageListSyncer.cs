@@ -2,10 +2,6 @@ using System.Threading;
 
 namespace NAPS2.Images;
 
-// TODO: We should differentiate between active interactions (e.g. clicking Delete on one image) and passive interactions (e.g. receiving the next image from a large import).
-// TODO: An active interaction should force an immediate sync, it should not be throttled.
-// TODO: Also, passive interactions should not change the selection, because that could confuse the user when the UI doesn't show their selection as up to date. 
-// ImagesThumbnailInvalidated -> active. ThumbnailChanged -> passive. ImagesUpdated -> depends, need to pass through eventargs.
 public class ImageListSyncer
 {
     private static readonly TimeSpan SYNC_INTERVAL = TimeSpan.FromMilliseconds(100);
@@ -31,9 +27,16 @@ public class ImageListSyncer
         Sync();
     }
 
-    private void ImagesUpdated(object? sender, EventArgs e)
+    private void ImagesUpdated(object? sender, ImageListEventArgs e)
     {
-        _syncThrottle.RunAction(_syncContext);
+        if (e.IsPassiveInteraction)
+        {
+            _syncThrottle.RunAction(_syncContext);
+        }
+        else
+        {
+            _syncThrottle.RunActionNow(_syncContext);
+        }
     }
 
     private void Sync()

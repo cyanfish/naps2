@@ -50,7 +50,7 @@ public class ThumbnailRenderQueue : IDisposable
         new Thread(RenderThumbnails).Start();
     }
 
-    private void ImageListUpdated(object? sender, EventArgs args)
+    private void ImageListUpdated(object? sender, ImageListEventArgs args)
     {
         BumpRenderThread();
     }

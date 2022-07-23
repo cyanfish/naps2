@@ -21,6 +21,7 @@ public class TimedThrottle
     private readonly TimeSpan _interval;
     private Timer? _timer;
     private DateTime _lastRun = DateTime.MinValue;
+    private bool _hasQueuedActionOnSyncContext;
 
     /// <summary>
     /// Creates an instance of TimedThrottle.
@@ -64,6 +65,18 @@ public class TimedThrottle
         }
     }
 
+    /// <summary>
+    /// Runs the throttled action immediately, bypassing any delay. This also resets the timer so calls to RunAction
+    /// will be throttled for the next interval period.
+    /// </summary>
+    /// <param name="syncContext">
+    /// The synchronization context to asynchronously run the action on. If null, the action will be run synchronously.
+    /// </param>
+    public void RunActionNow(SynchronizationContext? syncContext)
+    {
+        Tick(syncContext);
+    }
+
     private void Tick(object? state)
     {
         lock (this)
@@ -79,7 +92,19 @@ public class TimedThrottle
     {
         if (syncContext != null)
         {
-            syncContext.Post(_ => _action(), null);
+            lock (this)
+            {
+                if (_hasQueuedActionOnSyncContext) return;
+                _hasQueuedActionOnSyncContext = true;
+                syncContext.Post(_ =>
+                {
+                    lock (this)
+                    {
+                        _hasQueuedActionOnSyncContext = false;
+                    }
+                    _action();
+                }, null);
+            }
         }
         else
         {

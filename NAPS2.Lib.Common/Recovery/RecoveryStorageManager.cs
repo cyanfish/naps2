@@ -52,7 +52,7 @@ public class RecoveryStorageManager : IDisposable
 
     public string RecoveryFolderPath { get; }
 
-    private void ImageListUpdated(object? sender, EventArgs args)
+    private void ImageListUpdated(object? sender, ImageListEventArgs args)
     {
         _writeThrottle.RunAction(null);
     }
