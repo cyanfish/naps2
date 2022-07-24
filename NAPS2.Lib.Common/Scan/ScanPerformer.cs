@@ -65,7 +65,7 @@ internal class ScanPerformer : IScanPerformer
         controller.ScanError += (sender, args) => HandleError(args.Exception);
         TranslateProgress(controller, op);
 
-        ShowOperation(op, scanParams);
+        ShowOperation(op, options, scanParams);
         cancelToken.Register(op.Cancel);
 
         var source = controller.Scan(options, op.CancelToken);
@@ -137,9 +137,10 @@ internal class ScanPerformer : IScanPerformer
         }
     }
 
-    private void ShowOperation(ScanOperation op, ScanParams scanParams)
+    private void ShowOperation(ScanOperation op, ScanOptions scanOptions, ScanParams scanParams)
     {
-        if (scanParams.NoUI)
+        bool isWia10 = scanOptions.Driver == Driver.Wia && scanOptions.WiaOptions.WiaVersion == WiaVersion.Wia10;
+        if (scanParams.NoUI || scanOptions.UseNativeUI && !isWia10)
         {
             return;
         }
