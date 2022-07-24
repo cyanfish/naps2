@@ -78,6 +78,7 @@ internal class TwainSessionScanRunner
 
             Debug.WriteLine("NAPS2.TW - Enabling source");
             var ui = _options.UseNativeUI ? SourceEnableMode.ShowUI : SourceEnableMode.NoUI;
+            // TODO: There is a problem with NativeUI here - somehow the cancel button during the scan is uninteractible (though Esc works to cancel).
             rc = _source.Enable(ui, true, _options.DialogParent);
             if (rc != ReturnCode.Success)
             {
@@ -261,15 +262,15 @@ internal class TwainSessionScanRunner
 
     private void ConfigureSource(DataSource source)
     {
-        if (_options.UseNativeUI)
-        {
-            return;
-        }
-
         // Transfer Mode
         if (_options.TwainOptions.TransferMode == TwainTransferMode.Memory)
         {
             source.Capabilities.ICapXferMech.SetValue(XferMech.Memory);
+        }
+
+        if (_options.UseNativeUI)
+        {
+            return;
         }
 
         // Progress UI
