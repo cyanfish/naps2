@@ -56,7 +56,7 @@ internal class TwainScanDriver : IScanDriver
 
     private ITwainSessionController GetSessionController(ScanOptions options)
     {
-        if (options.TwainOptions.Dsm != TwainDsm.NewX64 && Environment.Is64BitProcess)
+        if (options.TwainOptions.Dsm != TwainDsm.NewX64)
         {
             return new RemoteTwainSessionController(_scanningContext);
         }
