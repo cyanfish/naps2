@@ -6,6 +6,7 @@ using NAPS2.Modules;
 using NAPS2.Remoting.Worker;
 using NAPS2.WinForms;
 using Ninject;
+using Timer = System.Threading.Timer;
 
 namespace NAPS2.EntryPoints;
 
@@ -16,6 +17,8 @@ namespace NAPS2.EntryPoints;
 /// </summary>
 public static class WorkerEntryPoint
 {
+    private static readonly TimeSpan ParentCheckInterval = TimeSpan.FromSeconds(10);
+
     public static void Run(string[] args)
     {
         try
@@ -50,6 +53,15 @@ public static class WorkerEntryPoint
                 new NamedPipeServer(string.Format(WorkerFactory.PIPE_NAME_FORMAT, Process.GetCurrentProcess().Id));
             var serviceImpl = kernel.Get<WorkerServiceImpl>();
             serviceImpl.OnStop += (_, _) => form.Close();
+            using var parentCheckTimer = new Timer(_ =>
+            {
+                // The Job object created by the parent is supposed to kill the child processes,
+                // but it can have issues (especially on Windows 7). This is a backup to avoid leftover workers.
+                if (!IsProcessRunning(procId))
+                {
+                    serviceImpl.Stop();
+                }
+            }, null, TimeSpan.Zero, ParentCheckInterval);
             WorkerService.BindService(server.ServiceBinder, serviceImpl);
             server.Start();
             try

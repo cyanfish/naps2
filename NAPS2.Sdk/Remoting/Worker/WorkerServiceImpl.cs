@@ -231,7 +231,8 @@ public class WorkerServiceImpl : WorkerService.WorkerServiceBase
                 ImageSerializer.Deserialize(_scanningContext, request.Image, new DeserializeImageOptions());
             int? thumbnailSize = request.ThumbnailSize == 0 ? null : request.ThumbnailSize;
             var barcodeOptions = request.BarcodeDetectionOptionsXml.FromXml<BarcodeDetectionOptions>();
-            using var newImage = _importPostProcessor.AddPostProcessingData(image, null, thumbnailSize, barcodeOptions, true);
+            using var newImage =
+                _importPostProcessor.AddPostProcessingData(image, null, thumbnailSize, barcodeOptions, true);
             return new ImportPostProcessResponse
             {
                 Image = ImageSerializer.Serialize(newImage,
@@ -240,7 +241,7 @@ public class WorkerServiceImpl : WorkerService.WorkerServiceBase
                         RequireFileStorage = true,
                         ReturnOwnership = true,
                         IncludeThumbnail = true
-                    }) 
+                    })
             };
         }
         catch (Exception e)
@@ -250,6 +251,12 @@ public class WorkerServiceImpl : WorkerService.WorkerServiceBase
     }
 
     public override Task<StopWorkerResponse> StopWorker(StopWorkerRequest request, ServerCallContext context)
+    {
+        Stop();
+        return Task.FromResult(new StopWorkerResponse());
+    }
+
+    public void Stop()
     {
         Task.Run(async () =>
         {
@@ -266,7 +273,6 @@ public class WorkerServiceImpl : WorkerService.WorkerServiceBase
                 await _ongoingCallFinished.WaitOneAsync();
             }
         }).AssertNoAwait();
-        return Task.FromResult(new StopWorkerResponse());
     }
 
     public override async Task TwainScan(TwainScanRequest request,
