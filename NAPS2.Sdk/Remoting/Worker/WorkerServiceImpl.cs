@@ -3,6 +3,7 @@ using Google.Protobuf;
 using Grpc.Core;
 using NAPS2.ImportExport.Email;
 using NAPS2.ImportExport.Email.Mapi;
+using NAPS2.ImportExport.Images;
 using NAPS2.ImportExport.Pdf;
 using NAPS2.Scan;
 using NAPS2.Scan.Internal;
@@ -20,6 +21,7 @@ public class WorkerServiceImpl : WorkerService.WorkerServiceBase
     private readonly ThumbnailRenderer _thumbnailRenderer;
     private readonly IMapiWrapper _mapiWrapper;
     private readonly ITwainSessionController _twainSessionController;
+    private readonly ImportPostProcessor _importPostProcessor;
 
     private readonly AutoResetEvent _ongoingCallFinished = new(false);
     private int _ongoingCallCount;
@@ -27,19 +29,22 @@ public class WorkerServiceImpl : WorkerService.WorkerServiceBase
     public WorkerServiceImpl(ScanningContext scanningContext, ThumbnailRenderer thumbnailRenderer,
         IMapiWrapper mapiWrapper, ITwainSessionController twainSessionController)
         : this(scanningContext, new RemoteScanController(scanningContext),
-            thumbnailRenderer, mapiWrapper, twainSessionController)
+            thumbnailRenderer, mapiWrapper, twainSessionController,
+            new ImportPostProcessor(scanningContext.ImageContext))
     {
     }
 
     internal WorkerServiceImpl(ScanningContext scanningContext, IRemoteScanController remoteScanController,
         ThumbnailRenderer thumbnailRenderer,
-        IMapiWrapper mapiWrapper, ITwainSessionController twainSessionController)
+        IMapiWrapper mapiWrapper, ITwainSessionController twainSessionController,
+        ImportPostProcessor importPostProcessor)
     {
         _scanningContext = scanningContext;
         _remoteScanController = remoteScanController;
         _thumbnailRenderer = thumbnailRenderer;
         _mapiWrapper = mapiWrapper;
         _twainSessionController = twainSessionController;
+        _importPostProcessor = importPostProcessor;
     }
 
     public override Task<InitResponse> Init(InitRequest request, ServerCallContext context)
@@ -213,6 +218,34 @@ public class WorkerServiceImpl : WorkerService.WorkerServiceBase
         catch (Exception e)
         {
             return Task.FromResult(new RenderPdfResponse { Error = RemotingHelper.ToError(e) });
+        }
+    }
+
+    public override async Task<ImportPostProcessResponse> ImportPostProcess(ImportPostProcessRequest request,
+        ServerCallContext context)
+    {
+        using var callRef = StartCall();
+        try
+        {
+            using var image =
+                ImageSerializer.Deserialize(_scanningContext, request.Image, new DeserializeImageOptions());
+            int? thumbnailSize = request.ThumbnailSize == 0 ? null : request.ThumbnailSize;
+            var barcodeOptions = request.BarcodeDetectionOptionsXml.FromXml<BarcodeDetectionOptions>();
+            using var newImage = _importPostProcessor.AddPostProcessingData(image, null, thumbnailSize, barcodeOptions, true);
+            return new ImportPostProcessResponse
+            {
+                Image = ImageSerializer.Serialize(newImage,
+                    new SerializeImageOptions
+                    {
+                        RequireFileStorage = true,
+                        ReturnOwnership = true,
+                        IncludeThumbnail = true
+                    }) 
+            };
+        }
+        catch (Exception e)
+        {
+            return new ImportPostProcessResponse { Error = RemotingHelper.ToError(e) };
         }
     }
 

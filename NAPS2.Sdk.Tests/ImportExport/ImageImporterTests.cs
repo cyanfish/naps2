@@ -229,6 +229,6 @@ public class ImageImporterTests : ContextualTests
         Assert.True(result[0].PostProcessingData.BarcodeDetection.IsAttempted);
         Assert.True(result[0].PostProcessingData.BarcodeDetection.IsBarcodePresent);
         Assert.True(result[0].PostProcessingData.BarcodeDetection.IsPatchT);
-        Assert.Equal("PATCHT", result[0].PostProcessingData.BarcodeDetection.DetectionResult?.Text);
+        Assert.Equal("PATCHT", result[0].PostProcessingData.BarcodeDetection.DetectedText);
     }
 }

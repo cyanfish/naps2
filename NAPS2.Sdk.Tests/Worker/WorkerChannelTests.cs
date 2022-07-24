@@ -2,6 +2,7 @@
 using GrpcDotNetNamedPipes;
 using Moq;
 using NAPS2.ImportExport.Email.Mapi;
+using NAPS2.ImportExport.Images;
 using NAPS2.Remoting.Worker;
 using NAPS2.Scan;
 using NAPS2.Scan.Exceptions;
@@ -20,7 +21,7 @@ public class WorkerChannelTests : ContextualTests
         NamedPipeServer server = new NamedPipeServer(pipeName);
         WorkerService.BindService(server.ServiceBinder,
             new WorkerServiceImpl(ScanningContext, remoteScanController, thumbnailRenderer, mapiWrapper,
-                twainSessionController));
+                twainSessionController, new ImportPostProcessor(ImageContext)));
         server.Start();
         var client = new WorkerServiceAdapter(new NamedPipeChannel(".", pipeName));
         return new Channel

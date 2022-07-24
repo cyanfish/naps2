@@ -164,4 +164,22 @@ public class WorkerServiceAdapter
             }
         }
     }
+
+    public ProcessedImage ImportPostProcess(ScanningContext scanningContext, ProcessedImage img, int? thumbnailSize,
+        BarcodeDetectionOptions barcodeDetectionOptions)
+    {
+        var req = new ImportPostProcessRequest
+        {
+            Image = ImageSerializer.Serialize(img, new SerializeImageOptions
+            {
+                RequireFileStorage = true,
+                TransferOwnership = true
+            }),
+            ThumbnailSize = thumbnailSize ?? 0,
+            BarcodeDetectionOptionsXml = barcodeDetectionOptions.ToXml()
+        };
+        var resp = _client.ImportPostProcess(req);
+        RemotingHelper.HandleErrors(resp.Error);
+        return ImageSerializer.Deserialize(scanningContext, resp.Image, new DeserializeImageOptions());
+    }
 }

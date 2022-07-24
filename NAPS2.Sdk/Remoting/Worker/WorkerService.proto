@@ -11,6 +11,7 @@ service WorkerService {
 	rpc SendMapiEmail (SendMapiEmailRequest) returns (SendMapiEmailResponse) {}
 	rpc RenderThumbnail (RenderThumbnailRequest) returns (RenderThumbnailResponse) {}
 	rpc RenderPdf (RenderPdfRequest) returns (RenderPdfResponse) {}
+	rpc ImportPostProcess (ImportPostProcessRequest) returns (ImportPostProcessResponse) {}
 	rpc Scan (ScanRequest) returns (stream ScanResponse) {}
 	rpc TwainScan (TwainScanRequest) returns (stream TwainScanResponse) {}
 	rpc GetDeviceList (GetDeviceListRequest) returns (GetDeviceListResponse) {}
@@ -92,6 +93,17 @@ message RenderPdfRequest {
 message RenderPdfResponse {
 	NAPS2.Remoting.Error error = 1;
 	bytes image = 2;
+}
+
+message ImportPostProcessRequest {
+	NAPS2.Serialization.SerializedImage image = 1;
+	int32 thumbnailSize = 2;
+	string barcodeDetectionOptionsXml = 3;
+}
+
+message ImportPostProcessResponse {
+	NAPS2.Remoting.Error error = 1;
+	NAPS2.Serialization.SerializedImage image = 2;
 }
 
 message StopWorkerRequest {

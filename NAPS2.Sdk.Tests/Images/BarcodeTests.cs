@@ -8,7 +8,7 @@ public class BarcodeTests
 {
     // TODO: Also add unit/integration tests for scan/import to ensure things are set correctly (and don't malfunction if detection is off...)
     // TODO: Also add unit/integration tests for patch-t splitting for batch/commandline etc, to ensure detection is enabled and splitting works
-        
+
     [Fact]
     public void DetectPatchT()
     {
@@ -22,7 +22,7 @@ public class BarcodeTests
         Assert.True(detection.IsBarcodePresent);
         Assert.True(detection.IsPatchT);
     }
-        
+
     [Fact]
     public void DetectUpc()
     {
@@ -35,9 +35,9 @@ public class BarcodeTests
         Assert.True(detection.IsAttempted);
         Assert.True(detection.IsBarcodePresent);
         Assert.False(detection.IsPatchT);
-        Assert.Equal("725272730706", detection.DetectionResult.Text);
+        Assert.Equal("725272730706", detection.DetectedText);
     }
-        
+
     [Fact]
     public void DetectNothing()
     {
@@ -50,6 +50,6 @@ public class BarcodeTests
         Assert.True(detection.IsAttempted);
         Assert.False(detection.IsBarcodePresent);
         Assert.False(detection.IsPatchT);
-        Assert.Null(detection.DetectionResult);
+        Assert.Null(detection.DetectedText);
     }
 }

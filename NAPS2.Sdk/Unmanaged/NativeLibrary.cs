@@ -22,6 +22,11 @@ public class NativeLibrary
     private IntPtr LoadFunc<T>()
     {
         var symbol = typeof(T).Name.Replace("_delegate", "");
-        return PlatformCompat.System.LoadSymbol(LibraryHandle, symbol);
+        var ptr = PlatformCompat.System.LoadSymbol(LibraryHandle, symbol);
+        if (ptr == IntPtr.Zero)
+        {
+            throw new InvalidOperationException($"Could not load symbol: {symbol}");
+        }
+        return ptr;
     }
 }

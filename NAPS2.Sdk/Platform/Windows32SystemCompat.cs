@@ -10,10 +10,15 @@ public class Windows32SystemCompat : WindowsSystemCompat
     
     public override IntPtr LoadSymbol(IntPtr libraryHandle, string symbol)
     {
+        var address = Win32.GetProcAddress(libraryHandle, symbol);
+        if (address != IntPtr.Zero)
+        {
+            return address;
+        }
         // Names can be mangled in 32-bit
         for (int i = 0; i < 128; i += 4)
         {
-            var address = Win32.GetProcAddress(libraryHandle, $"_{symbol}@{i}");
+            address = Win32.GetProcAddress(libraryHandle, $"_{symbol}@{i}");
             if (address != IntPtr.Zero)
             {
                 return address;

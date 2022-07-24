@@ -11,6 +11,9 @@ public class SerializeImageOptions
     /// This is set when a worker is transferring a scanned/imported image to another process. 
     /// </summary>
     public bool TransferOwnership { get; init; }
+    
+    // TODO: Add doc/tests
+    public bool ReturnOwnership { get; init; }
 
     /// <summary>
     /// Indicates that the image thumbnail (if present and up to date) should be transferred too. 

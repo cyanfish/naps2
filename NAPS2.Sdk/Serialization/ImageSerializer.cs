@@ -33,7 +33,7 @@ public static class ImageSerializer
 
         var result = new SerializedImage
         {
-            TransferOwnership = options.TransferOwnership,
+            TransferOwnership = options.TransferOwnership || options.ReturnOwnership,
             Metadata = new SerializedImageMetadata
             {
                 TransformListXml = image.TransformState.Transforms.ToXml(),
@@ -41,6 +41,7 @@ public static class ImageSerializer
                 Lossless = image.Metadata.Lossless
             },
             Thumbnail = thumbStream != null ? ByteString.FromStream(thumbStream) : ByteString.Empty,
+            BarcodeDetectionXml = image.PostProcessingData.BarcodeDetection?.ToXml(),
             RenderedFilePath = options.RenderedFilePath ?? ""
         };
 
@@ -71,11 +72,11 @@ public static class ImageSerializer
                 break;
         }
 
-        if (options.TransferOwnership)
+        if (options.TransferOwnership || options.ReturnOwnership)
         {
             if (image.Storage is ImageFileStorage fileStorage)
             {
-                if (fileStorage.IsShared)
+                if (options.TransferOwnership && fileStorage.IsShared)
                 {
                     throw new ArgumentException("Can't transfer ownership of a shared file");
                 }
@@ -151,6 +152,13 @@ public static class ImageSerializer
             {
                 Thumbnail = scanningContext.ImageContext.Load(new MemoryStream(thumbnail)),
                 ThumbnailTransformState = processedImage.TransformState
+            }, true);
+        }
+        if (!string.IsNullOrEmpty(serializedImage.BarcodeDetectionXml))
+        {
+            processedImage = processedImage.WithPostProcessingData(processedImage.PostProcessingData with
+            {
+                BarcodeDetection = serializedImage.BarcodeDetectionXml.FromXml<BarcodeDetection>()
             }, true);
         }
         return processedImage;

@@ -10,8 +10,9 @@ message SerializedImage {
 	}
 	SerializedImageMetadata metadata = 4;
 	bytes thumbnail = 5;
-	string renderedFilePath = 6;
-	string typeHint = 7;
+	string barcodeDetectionXml = 6;
+	string renderedFilePath = 7;
+	string typeHint = 8;
 }
 
 message SerializedImageMetadata {

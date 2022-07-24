@@ -8,6 +8,7 @@ using Xunit;
 
 namespace NAPS2.Sdk.Tests.Images;
 
+// TODO: Add tests for barcode detection
 public class ImageSerializerTests : ContextualTests
 {
     // TODO: Add scanning context tests that verify created images have the right storage

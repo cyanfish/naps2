@@ -35,6 +35,7 @@ public static class BarcodeDetector
         };
         // TODO: Needs to be non-windows-specific
         var reader = new BarcodeReader { Options = zxingOptions };
-        return new BarcodeDetection(true, reader.Decode(gdiImage.Bitmap));
+        var result = reader.Decode(gdiImage.Bitmap);
+        return new BarcodeDetection(true, result != null, result?.Text);
     }
 }
