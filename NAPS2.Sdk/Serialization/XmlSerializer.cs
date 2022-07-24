@@ -53,13 +53,18 @@ public abstract class XmlSerializer
         {
             typeof(Transform), new XmlTypeInfo
             {
-                KnownTypes = new HashSet<Type>(Assembly
+                KnownTypesByElementName = Assembly
                     .GetAssembly(typeof(Transform))!
                     .GetTypes()
-                    .Where(t => typeof(Transform).IsAssignableFrom(t)))
+                    .Where(t => typeof(Transform).IsAssignableFrom(t))
+                    .ToDictionary(GetElementNameForType, t => t)
             }
         },
     };
+
+    private static readonly Dictionary<string, Type> PrimitiveTypesByElementName =
+        TypeInfoCache.Where(x => !x.Key.IsGenericTypeDefinition)
+            .ToDictionary(x => GetElementNameForType(x.Key), x => x.Key);
 
     public static void RegisterCustomSerializer<T>(CustomXmlSerializer<T> customSerializer) where T : notnull
     {
@@ -164,20 +169,13 @@ public abstract class XmlSerializer
     {
         lock (TypeInfoCache)
         {
-            foreach (var type in TypeInfoCache.Keys)
-            {
-                if (GetElementNameForType(type) == actualTypeName)
-                {
-                    return type;
-                }
-            }
-            return GetTypeInfo(baseType).KnownTypes.SingleOrDefault(x => GetElementNameForType(x) == actualTypeName);
+            return PrimitiveTypesByElementName.Get(actualTypeName) ??
+                   GetTypeInfo(baseType).KnownTypesByElementName.Get(actualTypeName);
         }
     }
 
     protected static string GetElementNameForType(Type type)
     {
-        // TODO: Cache this?
         var xmlNameAttribute = type.GetCustomAttributes(typeof(XmlTypeAttribute)).Cast<XmlTypeAttribute>()
             .FirstOrDefault();
         if (xmlNameAttribute != null)
@@ -242,11 +240,19 @@ public abstract class XmlSerializer
 
                 if (typeInfo.CustomSerializer == null)
                 {
-                    typeInfo.KnownTypes = props
-                        .Select(x => GetTypeInfo(x.PropertyType).KnownTypes)
-                        .Append(GetKnownTypes(type))
-                        .Append(type.GetCustomAttributes<XmlIncludeAttribute>().Select(x => x.Type).WhereNotNull())
-                        .Aggregate(new HashSet<Type>(), (x, y) => new HashSet<Type>(x.Union(y)));
+                    var knownTypesFromPropertyTypes =
+                        props.SelectMany(x => GetTypeInfo(x.PropertyType).KnownTypesByElementName);
+                    var knownTypesFromActualType = GetKnownTypes(type);
+                    var knownTypesFromAttributes = type.GetCustomAttributes<XmlIncludeAttribute>().Select(x => x.Type)
+                        .WhereNotNull();
+                    foreach (var kvp in knownTypesFromPropertyTypes)
+                    {
+                        typeInfo.KnownTypesByElementName.Add(kvp.Key, kvp.Value);
+                    }
+                    foreach (var knownType in knownTypesFromActualType.Concat(knownTypesFromAttributes))
+                    {
+                        typeInfo.KnownTypesByElementName.Add(GetElementNameForType(knownType), knownType);
+                    }
                 }
 
                 return typeInfo;
@@ -281,7 +287,7 @@ public abstract class XmlSerializer
 
         public CustomXmlSerializer? CustomSerializer { get; set; }
 
-        public HashSet<Type> KnownTypes { get; set; } = new();
+        public Dictionary<string, Type> KnownTypesByElementName { get; set; } = new();
     }
 
     protected record XmlPropertyInfo(PropertyInfo Property);
