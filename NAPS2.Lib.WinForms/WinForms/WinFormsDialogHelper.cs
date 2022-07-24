@@ -11,7 +11,7 @@ public class WinFormsDialogHelper : DialogHelper
         _config = config;
     }
 
-    public override bool PromptToSavePdfOrImage(string defaultPath, out string savePath)
+    public override bool PromptToSavePdfOrImage(string? defaultPath, out string savePath)
     {
         var sd = new SaveFileDialog
         {
@@ -38,7 +38,7 @@ public class WinFormsDialogHelper : DialogHelper
         return false;
     }
 
-    public override bool PromptToSavePdf(string defaultPath, out string savePath)
+    public override bool PromptToSavePdf(string? defaultPath, out string savePath)
     {
         var sd = new SaveFileDialog
         {
@@ -57,7 +57,7 @@ public class WinFormsDialogHelper : DialogHelper
         return false;
     }
 
-    public override bool PromptToSaveImage(string defaultPath, out string savePath)
+    public override bool PromptToSaveImage(string? defaultPath, out string savePath)
     {
         var sd = new SaveFileDialog
         {
@@ -74,7 +74,7 @@ public class WinFormsDialogHelper : DialogHelper
             FileName = Path.GetFileName(defaultPath),
             InitialDirectory = GetDir(defaultPath)
         };
-        switch (_config.Get(c => c.LastImageExt).ToLowerInvariant())
+        switch (_config.Get(c => c.LastImageExt)?.ToLowerInvariant())
         {
             case "bmp":
                 sd.FilterIndex = 1;
@@ -109,7 +109,7 @@ public class WinFormsDialogHelper : DialogHelper
         return false;
     }
 
-    private string GetDir(string defaultPath)
+    private string? GetDir(string? defaultPath)
     {
         return Path.IsPathRooted(defaultPath)
             ? Path.GetDirectoryName(defaultPath)

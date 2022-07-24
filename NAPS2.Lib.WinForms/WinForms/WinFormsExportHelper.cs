@@ -80,7 +80,6 @@ public class WinFormsExportHelper : IWinFormsExportHelper
             }
             else
             {
-                // TODO: Can this setting be null?
                 if (!_dialogHelper.PromptToSaveImage(_config.Get(c => c.ImageSettings.DefaultFileName), out savePath))
                 {
                     return false;
@@ -96,7 +95,7 @@ public class WinFormsExportHelper : IWinFormsExportHelper
             if (await op.Success)
             {
                 _uiImageList.SavedState = state;
-                notify?.ImagesSaved(images.Count, op.FirstFileSaved);
+                notify.ImagesSaved(images.Count, op.FirstFileSaved!);
                 return true;
             }
         }
