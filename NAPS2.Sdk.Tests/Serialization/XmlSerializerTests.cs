@@ -144,6 +144,26 @@ public class XmlSerializerTests
     }
 
     [Fact]
+    public void SerializeUnknownType()
+    {
+        var original = new List<object>
+        {
+            1,
+            "A"
+        };
+        var serializer = new XmlSerializer<List<object>>();
+        var doc = serializer.SerializeToXDocument(original);
+
+        Assert.NotNull(doc.Root);
+        Assert.Equal("ArrayOfObject", doc.Root.Name);
+        Assert.Equal(2, doc.Root.Elements().Count());
+
+        var copy = serializer.DeserializeFromXDocument(doc);
+        Assert.Equal(1, copy![0]);
+        Assert.Equal("A", copy[1]);
+    }
+
+    [Fact]
     public void SerializeList()
     {
         VerifySerializeCollection(new List<Poco> { new Poco { Str = "Hello" }, new Poco { Str = "World" } });

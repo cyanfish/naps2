@@ -164,6 +164,13 @@ public abstract class XmlSerializer
     {
         lock (TypeInfoCache)
         {
+            foreach (var type in TypeInfoCache.Keys)
+            {
+                if (GetElementNameForType(type) == actualTypeName)
+                {
+                    return type;
+                }
+            }
             return GetTypeInfo(baseType).KnownTypes.SingleOrDefault(x => GetElementNameForType(x) == actualTypeName);
         }
     }
