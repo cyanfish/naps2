@@ -79,10 +79,12 @@ public class WorkerServiceImpl : WorkerService.WorkerServiceBase
                 var response = new Wia10NativeUiResponse();
                 if (item != null)
                 {
-                    response.WiaConfigurationXml = new WiaConfiguration(
-                        device.Properties.SerializeEditable(),
-                        item.Properties.SerializeEditable(),
-                        item.Name()).ToXml();
+                    response.WiaConfigurationXml = new WiaConfiguration
+                    {
+                        DeviceProps = device.Properties.SerializeEditable(),
+                        ItemProps = item.Properties.SerializeEditable(),
+                        ItemName = item.Name()
+                    }.ToXml();
                 }
                 return Task.FromResult(response);
             }

@@ -1,6 +1,10 @@
 ﻿namespace NAPS2.Scan.Wia;
 
-public record WiaConfiguration(
-    Dictionary<int, object> DeviceProps,
-    Dictionary<int, object> ItemProps,
-    string ItemName);
+public record WiaConfiguration
+{
+    public Dictionary<int, object> DeviceProps { get; init; } = new();
+
+    public Dictionary<int, object> ItemProps { get; init; } = new();
+
+    public string ItemName { get; init; } = "";
+};
