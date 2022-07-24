@@ -11,12 +11,20 @@ public class GmailEmailProvider : MimeEmailProvider
     {
         _gmailOauthProvider = gmailOauthProvider;
     }
-        
-    protected override async Task SendMimeMessage(MimeMessage message, ProgressHandler progressCallback, CancellationToken cancelToken)
+
+    protected override async Task SendMimeMessage(MimeMessage message, ProgressHandler progressCallback,
+        CancellationToken cancelToken, bool autoSend)
     {
-        var messageId = await _gmailOauthProvider.UploadDraft(message.ToString(), progressCallback, cancelToken);
-        var userEmail = _gmailOauthProvider.User;
-        // Open the draft in the user's browser
-        Process.Start($"https://mail.google.com/mail/?authuser={userEmail}#drafts?compose={messageId}");
+        var draft = await _gmailOauthProvider.UploadDraft(message.ToString(), progressCallback, cancelToken);
+        if (autoSend)
+        {
+            await _gmailOauthProvider.SendDraft(draft.DraftId);
+        }
+        else
+        {
+            var userEmail = _gmailOauthProvider.User;
+            // Open the draft in the user's browser
+            Process.Start($"https://mail.google.com/mail/?authuser={userEmail}#drafts?compose={draft.MessageId}");
+        }
     }
 }

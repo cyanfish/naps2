@@ -46,7 +46,8 @@ public abstract class OauthProvider
         // TODO: Catch exception on abort
 
         // Open the user interface (which will redirect to our localhost listener)
-        var url = $"{CodeEndpoint}?scope={Scope}&response_type=code&state={state}&redirect_uri={redirectUri}&client_id={ClientCreds.ClientId}";
+        var url =
+            $"{CodeEndpoint}?scope={Scope}&response_type=code&state={state}&redirect_uri={redirectUri}&client_id={ClientCreds.ClientId}";
         Process.Start(url);
 
         // Wait for the authorization code to be sent to the local socket
@@ -78,11 +79,11 @@ public abstract class OauthProvider
         // Trade the code in for a token
         var resp = Post(TokenEndpoint, new NameValueCollection
         {
-            {"code", code},
-            {"client_id", ClientCreds.ClientId},
-            {"client_secret", ClientCreds.ClientSecret},
-            {"redirect_uri", redirectUri},
-            {"grant_type", "authorization_code"}
+            { "code", code },
+            { "client_id", ClientCreds.ClientId },
+            { "client_secret", ClientCreds.ClientSecret },
+            { "redirect_uri", redirectUri },
+            { "grant_type", "authorization_code" }
         });
         SaveToken(new OauthToken
         {
@@ -97,10 +98,10 @@ public abstract class OauthProvider
         if (Token?.RefreshToken == null) throw new InvalidOperationException();
         var resp = Post(TokenEndpoint, new NameValueCollection
         {
-            {"refresh_token", Token.RefreshToken},
-            {"client_id", ClientCreds.ClientId},
-            {"client_secret", ClientCreds.ClientSecret},
-            {"grant_type", "refresh_token"}
+            { "refresh_token", Token.RefreshToken },
+            { "client_id", ClientCreds.ClientId },
+            { "client_secret", ClientCreds.ClientSecret },
+            { "grant_type", "refresh_token" }
         });
         // TODO: Handle failure
         SaveToken(new OauthToken
@@ -152,8 +153,8 @@ public abstract class OauthProvider
         return JObject.Parse(response);
     }
 
-    protected async Task<JObject> PostAuthorized(string url, string body, string contentType, ProgressHandler progressCallback,
-        CancellationToken cancelToken = default)
+    protected async Task<JObject> PostAuthorized(string url, string body, string contentType,
+        ProgressHandler? progressCallback, CancellationToken cancelToken = default)
     {
         using var client = AuthorizedClient();
         client.Headers.Add("Content-Type", contentType);

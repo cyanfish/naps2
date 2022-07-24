@@ -30,7 +30,8 @@ public class GmailOauthProvider : OauthProvider
             {
                 var credObj = JObject.Parse(Encoding.UTF8.GetString(NAPS2.ClientCreds.google_credentials));
                 var installed = credObj.Value<JObject>("installed");
-                _creds = new OauthClientCreds(installed?.Value<string>("client_id"), installed?.Value<string>("client_secret"));
+                _creds = new OauthClientCreds(installed?.Value<string>("client_id"),
+                    installed?.Value<string>("client_secret"));
             }
             return _creds;
         }
@@ -64,15 +65,34 @@ public class GmailOauthProvider : OauthProvider
         return resp.Value<string>("emailAddress");
     }
 
-    public async Task<string> UploadDraft(string messageRaw, ProgressHandler progressCallback, CancellationToken cancelToken)
+    public async Task<DraftInfo> UploadDraft(string messageRaw, ProgressHandler progressCallback,
+        CancellationToken cancelToken)
     {
-        var resp = await PostAuthorized($"https://www.googleapis.com/upload/gmail/v1/users/{User}/drafts?uploadType=multipart",
+        var resp = await PostAuthorized(
+            $"https://www.googleapis.com/upload/gmail/v1/users/{User}/drafts?uploadType=multipart",
             messageRaw,
             "message/rfc822",
             progressCallback,
             cancelToken);
-        return resp.Value<JObject>("message").Value<string>("id");
+        return new DraftInfo(
+            resp.Value<JObject>("message").Value<string>("id"),
+            resp.Value<string>("id")
+        );
     }
+
+    public async Task SendDraft(string draftId)
+    {
+        await PostAuthorized($"https://www.googleapis.com/gmail/v1/users/{User}/drafts/send",
+            new JObject
+            {
+                { "id", draftId }
+            }.ToString(), 
+            "application/json",
+            null,
+            CancellationToken.None);
+    }
+
+    public record DraftInfo(string DraftId, string MessageId);
 
     #endregion
 }
