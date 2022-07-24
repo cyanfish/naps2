@@ -87,7 +87,7 @@ public partial class FEmailProvider : FormBase
     private void ChooseSystem(string clientName)
     {
         var emailSetup = Config.Get(c => c.EmailSetup);
-        emailSetup.SystemProviderName = clientName == _defaultSystemClientName ? null : clientName;
+        emailSetup.SystemProviderName = clientName;
         emailSetup.ProviderType = EmailProviderType.System;
         Config.User.Set(c => c.EmailSetup, emailSetup);
         DialogResult = DialogResult.OK;
