@@ -45,6 +45,7 @@ public abstract class XmlSerializer
         { typeof(UIntPtr), new XmlTypeInfo { CustomSerializer = new UIntPtrSerializer() } },
         { typeof(List<>), new XmlTypeInfo { CustomSerializer = new CollectionSerializer() } },
         { typeof(HashSet<>), new XmlTypeInfo { CustomSerializer = new CollectionSerializer() } },
+        { typeof(Dictionary<,>), new XmlTypeInfo { CustomSerializer = new DictionarySerializer() } },
         { typeof(ImmutableList<>), new XmlTypeInfo { CustomSerializer = new ImmutableListSerializer() } },
         { typeof(ImmutableHashSet<>), new XmlTypeInfo { CustomSerializer = new ImmutableHashSetSerializer() } },
         { typeof(DateTime), new XmlTypeInfo { CustomSerializer = new DateTimeSerializer() } },
@@ -109,7 +110,8 @@ public abstract class XmlSerializer
         {
             foreach (var propInfo in typeInfo.Properties!)
             {
-                var child = SerializeInternal(propInfo.Property.GetValue(obj), new XElement(propInfo.Property.Name), propInfo.Property.PropertyType);
+                var child = SerializeInternal(propInfo.Property.GetValue(obj), new XElement(propInfo.Property.Name),
+                    propInfo.Property.PropertyType);
                 element.Add(child);
             }
         }
@@ -135,7 +137,8 @@ public abstract class XmlSerializer
             actualType = FindType(type, actualTypeName);
             if (actualType == null)
             {
-                throw new InvalidOperationException($"Could not find type {actualTypeName} with base type {type.FullName}");
+                throw new InvalidOperationException(
+                    $"Could not find type {actualTypeName} with base type {type.FullName}");
             }
         }
         var typeInfo = GetTypeInfo(actualType);
@@ -168,7 +171,8 @@ public abstract class XmlSerializer
     protected static string GetElementNameForType(Type type)
     {
         // TODO: Cache this?
-        var xmlNameAttribute = type.GetCustomAttributes(typeof(XmlTypeAttribute)).Cast<XmlTypeAttribute>().FirstOrDefault();
+        var xmlNameAttribute = type.GetCustomAttributes(typeof(XmlTypeAttribute)).Cast<XmlTypeAttribute>()
+            .FirstOrDefault();
         if (xmlNameAttribute != null)
         {
             return xmlNameAttribute.TypeName;
@@ -202,7 +206,8 @@ public abstract class XmlSerializer
             {
                 RuntimeHelpers.RunClassConstructor(type.TypeHandle);
                 var props = type.GetProperties(BindingFlags.Instance | BindingFlags.Public)
-                    .Where(x => x.GetMethod != null && x.SetMethod != null && !x.GetCustomAttributes(typeof(XmlIgnoreAttribute)).Any())
+                    .Where(x => x.GetMethod != null && x.SetMethod != null &&
+                                !x.GetCustomAttributes(typeof(XmlIgnoreAttribute)).Any())
                     .OrderBy(GetPropertyOrder)
                     .ToArray();
                 var typeInfo = new XmlTypeInfo
@@ -465,7 +470,7 @@ public abstract class XmlSerializer
 
         protected override IntPtr Deserialize(XElement element)
         {
-            return (IntPtr)long.Parse(element.Value);
+            return (IntPtr) long.Parse(element.Value);
         }
     }
 
@@ -478,7 +483,7 @@ public abstract class XmlSerializer
 
         protected override UIntPtr Deserialize(XElement element)
         {
-            return (UIntPtr)ulong.Parse(element.Value);
+            return (UIntPtr) ulong.Parse(element.Value);
         }
     }
 
@@ -487,7 +492,7 @@ public abstract class XmlSerializer
         public override void SerializeObject(object obj, XElement element, Type type)
         {
             var itemType = type.GetElementType() ?? throw new ArgumentException("Not an array type");
-            var list = (IList)obj;
+            var list = (IList) obj;
             foreach (var item in list)
             {
                 element.Add(SerializeInternal(item, new XElement(itemType.Name), itemType));
@@ -512,7 +517,7 @@ public abstract class XmlSerializer
         public override void SerializeObject(object obj, XElement element, Type type)
         {
             var itemType = GetItemType(type);
-            var list = (IEnumerable)obj;
+            var list = (IEnumerable) obj;
             foreach (var item in list)
             {
                 element.Add(SerializeInternal(item, new XElement(itemType.Name), itemType));
@@ -565,7 +570,8 @@ public abstract class XmlSerializer
     {
         protected override object CreateInstance(Type type, Type itemType)
         {
-            var emptyField = typeof(ImmutableList<>).MakeGenericType(itemType).GetField("Empty", BindingFlags.Public | BindingFlags.Static) ??
+            var emptyField = typeof(ImmutableList<>).MakeGenericType(itemType)
+                                 .GetField("Empty", BindingFlags.Public | BindingFlags.Static) ??
                              throw new Exception("No Empty field on ImmutableList");
             return emptyField.GetValue(null)!;
         }
@@ -575,9 +581,48 @@ public abstract class XmlSerializer
     {
         protected override object CreateInstance(Type type, Type itemType)
         {
-            var emptyField = typeof(ImmutableHashSet<>).MakeGenericType(itemType).GetField("Empty", BindingFlags.Public | BindingFlags.Static) ??
+            var emptyField = typeof(ImmutableHashSet<>).MakeGenericType(itemType)
+                                 .GetField("Empty", BindingFlags.Public | BindingFlags.Static) ??
                              throw new Exception("No Empty field on ImmutableHashSet");
             return emptyField.GetValue(null)!;
+        }
+    }
+
+    protected class DictionarySerializer : CustomXmlSerializer
+    {
+        public override void SerializeObject(object obj, XElement element, Type type)
+        {
+            var typeArgs = type.GetGenericArguments();
+            var dict = (IDictionary) obj;
+            foreach (DictionaryEntry item in dict)
+            {
+                var itemElement = new XElement("Item");
+                var keyElement = new XElement("Key");
+                var valueElement = new XElement("Value");
+                itemElement.Add(SerializeInternal(item.Key, keyElement, typeArgs[0]));
+                itemElement.Add(SerializeInternal(item.Value, valueElement, typeArgs[1]));
+                element.Add(itemElement);
+            }
+        }
+
+        public override object DeserializeObject(XElement element, Type type)
+        {
+            var typeArgs = type.GetGenericArguments();
+            var dict = (IDictionary) Activator.CreateInstance(type)!;
+            foreach (var itemElement in element.Elements())
+            {
+                if (itemElement.Name != "Item")
+                {
+                    throw new ArgumentException("Expected item element");
+                }
+                var keyElement = itemElement.Element("Key") ?? throw new ArgumentException("Expected key element");
+                var valueElement = itemElement.Element("Value") ??
+                                   throw new ArgumentException("Expected value element");
+                dict.Add(
+                    DeserializeInternalNonNull(keyElement, typeArgs[0]),
+                    DeserializeInternal(valueElement, typeArgs[1]));
+            }
+            return dict;
         }
     }
 
@@ -625,7 +670,8 @@ public class XmlSerializer<T> : XmlSerializer, ISerializer<T>
 {
     public void Serialize(Stream stream, T? obj)
     {
-        using var writer = new XmlTextWriter(new StreamWriter(stream, new UTF8Encoding(false), 1024, true)) { Formatting = Formatting.Indented };
+        using var writer = new XmlTextWriter(new StreamWriter(stream, new UTF8Encoding(false), 1024, true))
+            { Formatting = Formatting.Indented };
         SerializeToXDocument(obj).Save(writer);
         writer.Dispose();
     }
@@ -666,6 +712,6 @@ public class XmlSerializer<T> : XmlSerializer, ISerializer<T>
 
     public T? DeserializeFromXElement(XElement element)
     {
-        return (T?)DeserializeInternal(element, typeof(T));
+        return (T?) DeserializeInternal(element, typeof(T));
     }
 }

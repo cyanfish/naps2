@@ -123,6 +123,27 @@ public class XmlSerializerTests
     }
 
     [Fact]
+    public void SerializeDictionary()
+    {
+        var original = new Dictionary<string, Poco>
+        {
+            { "a", new Poco { Int = 1 } },
+            { "b", new Poco { Str = "c" } }
+        };
+        var serializer = new XmlSerializer<Dictionary<string, Poco>>();
+        var doc = serializer.SerializeToXDocument(original);
+
+        Assert.NotNull(doc.Root);
+        Assert.Equal("DictionaryOfStringPoco", doc.Root.Name);
+        Assert.Equal(2, doc.Root.Elements().Count());
+
+        var copy = serializer.DeserializeFromXDocument(doc);
+        Assert.Equal(2, copy!.Count);
+        Assert.Equal(1, copy.Get("a")?.Int);
+        Assert.Equal("c", copy.Get("b")?.Str);
+    }
+
+    [Fact]
     public void SerializeList()
     {
         VerifySerializeCollection(new List<Poco> { new Poco { Str = "Hello" }, new Poco { Str = "World" } });
