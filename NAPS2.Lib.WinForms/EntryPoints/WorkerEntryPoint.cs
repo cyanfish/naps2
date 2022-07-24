@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using GrpcDotNetNamedPipes;
 using NAPS2.Modules;
 using NAPS2.Remoting.Worker;
+using NAPS2.Scan.Internal.Twain;
 using NAPS2.WinForms;
 using Ninject;
 using Timer = System.Threading.Timer;
@@ -47,6 +48,7 @@ public static class WorkerEntryPoint
             // A parent form is needed for some operations, namely 64-bit TWAIN scanning
             var form = new BackgroundForm();
             Invoker.Current = form;
+            TwainHandleManager.Factory = () => new WinFormsTwainHandleManager(form);
 
             // Connect to the main NAPS2 process and listen for assigned work
             var server =

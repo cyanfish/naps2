@@ -45,6 +45,7 @@ public enum TwainAdapter
 public enum TwainDsm
 {
     New,
+    // TODO: Consider dropping support for x64 twain, it's not tested and I don't think anyone can use it anyway
     NewX64,
     Old
 }

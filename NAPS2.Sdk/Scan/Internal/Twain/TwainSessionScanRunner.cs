@@ -18,6 +18,7 @@ internal class TwainSessionScanRunner
     private readonly ScanOptions _options;
     private readonly CancellationToken _cancelToken;
     private readonly ITwainEvents _twainEvents;
+    private readonly TwainHandleManager _handleManager;
     private readonly TwainSession _session;
     private readonly TaskCompletionSource<bool> _tcs;
     private DataSource? _source;
@@ -30,7 +31,9 @@ internal class TwainSessionScanRunner
         _cancelToken = cancelToken;
         _twainEvents = twainEvents;
 
+        _handleManager = TwainHandleManager.Factory();
         PlatformInfo.Current.PreferNewDSM = dsm != TwainDsm.Old;
+        Debug.WriteLine($"Using TWAIN DSM: {PlatformInfo.Current.ExpectedDsmPath}");
         _session = new TwainSession(TwainScanDriver.TwainAppId);
         _session.TransferReady += TransferReady;
         _session.DataTransferred += DataTransferred;
@@ -51,9 +54,8 @@ internal class TwainSessionScanRunner
         try
         {
             Debug.WriteLine("NAPS2.TW - Opening session");
-            var rc = _options.DialogParent != IntPtr.Zero
-                ? _session.Open(new WindowsFormsMessageLoopHook(_options.DialogParent))
-                : _session.Open();
+            var dsmHandle = _handleManager.GetDsmHandle(_options.DialogParent, _options.UseNativeUI);
+            var rc = _session.Open(new WindowsFormsMessageLoopHook(dsmHandle));
             if (rc != ReturnCode.Success)
             {
                 throw new DeviceException($"TWAIN session open error: {rc}");
@@ -78,8 +80,9 @@ internal class TwainSessionScanRunner
 
             Debug.WriteLine("NAPS2.TW - Enabling source");
             var ui = _options.UseNativeUI ? SourceEnableMode.ShowUI : SourceEnableMode.NoUI;
-            // TODO: There is a problem with NativeUI here - somehow the cancel button during the scan is uninteractible (though Esc works to cancel).
-            rc = _source.Enable(ui, true, _options.DialogParent);
+            var enableHandle = _handleManager.GetEnableHandle(_options.DialogParent, _options.UseNativeUI);
+            // Note that according to the twain spec, on Windows it is recommended to set the modal parameter to false
+            rc = _source.Enable(ui, false, enableHandle);
             if (rc != ReturnCode.Success)
             {
                 throw GetExceptionForStatus(_source.GetStatus());
@@ -133,20 +136,27 @@ internal class TwainSessionScanRunner
 
     private void UnloadTwain()
     {
-        if (_session.State > 4)
+        try
         {
-            // If a transfer is initialized or in progress, this will abort it and also clean up the source/session.
-            _session.ForceStepDown(2);
-            return;
+            if (_session.State > 4)
+            {
+                // If a transfer is initialized or in progress, this will abort it and also clean up the source/session.
+                _session.ForceStepDown(2);
+                return;
+            }
+            // If a transfer isn't in progress, we just clean up the source/session as needed.
+            if (_session.State == 4)
+            {
+                _source!.Close();
+            }
+            if (_session.State >= 3)
+            {
+                _session.Close();
+            }
         }
-        // If a transfer isn't in progress, we just clean up the source/session as needed.
-        if (_session.State == 4)
+        finally
         {
-            _source!.Close();
-        }
-        if (_session.State >= 3)
-        {
-            _session.Close();
+            _handleManager.Dispose();
         }
     }
 

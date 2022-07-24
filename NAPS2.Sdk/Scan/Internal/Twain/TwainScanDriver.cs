@@ -22,10 +22,10 @@ internal class TwainScanDriver : IScanDriver
         {
             string libDir = Environment.Is64BitProcess ? "_win64" : "_win32";
             var location = Assembly.GetExecutingAssembly().Location;
-            var coreDllDir = System.IO.Path.GetDirectoryName(location);
+            var coreDllDir = Path.GetDirectoryName(location);
             if (coreDllDir != null)
             {
-                Win32.SetDllDirectory(System.IO.Path.Combine(coreDllDir, libDir));
+                Win32.SetDllDirectory(Path.Combine(coreDllDir, libDir));
             }
         }
 #if DEBUG

@@ -100,6 +100,7 @@ public static class TwainMemoryBufferReader
                     {
                         int x = memoryBuffer.XOffset + dx;
                         int y = memoryBuffer.YOffset + dy;
+                        // TODO: This might actually be the other way around
                         // Colors are provided as BGR, they need to be swapped to RGB
                         // R
                         *(dstPtr + y * dstBytesPerRow + x * 3) =
