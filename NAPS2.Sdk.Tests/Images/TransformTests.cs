@@ -281,6 +281,17 @@ public class TransformTests : ContextualTests
     }
 
     [Fact]
+    public void CropOutOfBounds()
+    {
+        IMemoryImage actual = new GdiImage(TransformTestsData.color_image);
+        IMemoryImage expected = new GdiImage(TransformTestsData.color_image);
+
+        actual = ImageContext.PerformTransform(actual, new CropTransform(-1, -1, -1, -1));
+
+        ImageAsserts.Similar(expected, actual, ImageAsserts.GENERAL_RMSE_THRESHOLD);
+    }
+
+    [Fact]
     public void BlackWhite()
     {
         IMemoryImage actual = new GdiImage(TransformTestsData.color_image);

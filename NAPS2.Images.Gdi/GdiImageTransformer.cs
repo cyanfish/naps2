@@ -248,10 +248,10 @@ public class GdiImageTransformer : AbstractImageTransformer<GdiImage>
         double xScale = image.Width / (double)(transform.OriginalWidth ?? image.Width),
             yScale = image.Height / (double)(transform.OriginalHeight ?? image.Height);
 
-        int x = (int)Math.Round(transform.Left * xScale);
-        int y = (int)Math.Round(transform.Top * yScale);
-        int width = Math.Max(image.Width - (int)Math.Round((transform.Left + transform.Right) * xScale), 1);
-        int height = Math.Max(image.Height - (int)Math.Round((transform.Top + transform.Bottom) * yScale), 1);
+        int x = Clamp((int)Math.Round(transform.Left * xScale), 0, image.Width - 1);
+        int y = Clamp((int)Math.Round(transform.Top * yScale), 0, image.Height - 1);
+        int width = Clamp(image.Width - (int)Math.Round((transform.Left + transform.Right) * xScale), 1, image.Width - x);
+        int height = Clamp(image.Height - (int)Math.Round((transform.Top + transform.Bottom) * yScale), 1, image.Height - y);
 
         var result = new Bitmap(width, height, image.Bitmap.PixelFormat);
         var resultImage = new GdiImage(result);
@@ -264,6 +264,19 @@ public class GdiImageTransformer : AbstractImageTransformer<GdiImage>
         UnsafeImageOps.RowWiseCopy(image, resultImage, x, y, width, height);
         image.Dispose();
         return resultImage;
+    }
+
+    private int Clamp(int val, int min, int max)
+    {
+        if (val.CompareTo(min) < 0)
+        {
+            return min;
+        }
+        if (val.CompareTo(max) > 0)
+        {
+            return max;
+        }
+        return val;
     }
 
     protected override GdiImage PerformTransform(GdiImage image, ScaleTransform transform)
