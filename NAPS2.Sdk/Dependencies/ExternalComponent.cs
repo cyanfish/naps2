@@ -19,7 +19,7 @@ public class ExternalComponent : IExternalComponent
 
     public void Install(string sourcePath)
     {
-        PathHelper.EnsureParentDirExists(Path);
+        FileSystemHelper.EnsureParentDirExists(Path);
         File.Move(sourcePath, Path);
     }
 }

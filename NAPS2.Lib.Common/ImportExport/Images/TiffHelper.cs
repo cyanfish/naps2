@@ -27,7 +27,7 @@ public class TiffHelper
                 return false;
             }
 
-            PathHelper.EnsureParentDirExists(location);
+            FileSystemHelper.EnsureParentDirExists(location);
 
             if (images.Count == 1)
             {

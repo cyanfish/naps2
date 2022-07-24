@@ -61,6 +61,11 @@ public class SaveImagesOperation : OperationBase
                         {
                             return false;
                         }
+                        if (FileSystemHelper.IsFileInUse(subFileName, out var ex))
+                        {
+                            InvokeError(MiscResources.FileInUse, ex!);
+                            return false;
+                        }
                     }
                     Status.StatusText = string.Format(MiscResources.SavingFormat, Path.GetFileName(subFileName));
                     FirstFileSaved = subFileName;
@@ -87,6 +92,11 @@ public class SaveImagesOperation : OperationBase
                         }
                         if (overwriteResponse == OverwriteResponse.Abort)
                         {
+                            return false;
+                        }
+                        if (FileSystemHelper.IsFileInUse(subFileName, out var ex))
+                        {
+                            InvokeError(MiscResources.FileInUse, ex!);
                             return false;
                         }
                     }
@@ -144,7 +154,7 @@ public class SaveImagesOperation : OperationBase
 
     private void DoSaveImage(ProcessedImage image, string path, ImageFormat format, ImageSettings imageSettings)
     {
-        PathHelper.EnsureParentDirExists(path);
+        FileSystemHelper.EnsureParentDirExists(path);
         if (Equals(format, ImageFormat.Tiff))
         {
             _tiffHelper.SaveMultipage(new List<ProcessedImage> { image }, path, imageSettings.TiffCompression, (i, j) => { }, CancellationToken.None);

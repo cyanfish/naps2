@@ -101,7 +101,7 @@ public class PdfiumPdfExporter : PdfExporter
                 //     PdfAHelper.CreateXmpMetadata(document, compat);
                 // }
 
-                PathHelper.EnsureParentDirExists(path);
+                FileSystemHelper.EnsureParentDirExists(path);
                 document.Save(path);
                 return true;
             }

@@ -48,6 +48,11 @@ public class SavePdfOperation : OperationBase
             {
                 return false;
             }
+            if (FileSystemHelper.IsFileInUse(subFileName, out var ex))
+            {
+                InvokeError(MiscResources.FileInUse, ex!);
+                return false;
+            }
         }
 
         RunAsync(async () =>
