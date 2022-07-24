@@ -1,6 +1,7 @@
 using Eto.Drawing;
 using Eto.Forms;
 using Eto.WinForms;
+using NAPS2.Images.Gdi;
 
 namespace NAPS2.EtoForms;
 
@@ -28,6 +29,13 @@ public static class EtoExtensions
         control.AddTo(layout);
 
     public static Icon ToEtoIcon(this System.Drawing.Bitmap bitmap) => new Icon(1f, bitmap.ToEto());
+
+    public static Bitmap ToEtoImage(this IMemoryImage image) => image switch
+    {
+        // TODO: Eventually we'll need a registry to avoid a direct reference to NAPS2.Images.Gdi here
+        GdiImage gdiImage => gdiImage.Bitmap.ToEto(),
+        _ => throw new ArgumentException()
+    };
 
     public static ControlWithLayoutAttributes Center(this Control control) =>
         new ControlWithLayoutAttributes(control, center: true);

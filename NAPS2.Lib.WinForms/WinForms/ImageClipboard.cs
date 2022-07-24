@@ -1,9 +1,6 @@
-﻿using System.Drawing;
-using System.Drawing.Imaging;
-using System.Text;
+﻿using System.Text;
 using Eto.Forms;
-using Eto.WinForms;
-using NAPS2.Images.Gdi;
+using NAPS2.EtoForms;
 using NAPS2.ImportExport.Images;
 
 namespace NAPS2.WinForms;
@@ -38,27 +35,28 @@ public class ImageClipboard
         // Slow path for more full-featured copying
         if (includeBitmap)
         {
-            // TODO: More generic?
-            using var firstBitmap = ((GdiImageContext)_imageContext).RenderToBitmap(imageList[0]);
-            Clipboard.Instance.Image = firstBitmap.ToEto();
-            Clipboard.Instance.SetString(await RtfEncodeImages(firstBitmap, imageList), "Rich Text Format");
+            using var firstBitmap = _imageContext.Render(imageList[0]);
+            Clipboard.Instance.Image = firstBitmap.ToEtoImage();
+            var encodedRtf = await RtfEncodeImages(firstBitmap, imageList);
+            if (encodedRtf != null)
+            {
+                Clipboard.Instance.SetString(encodedRtf, "Rich Text Format");
+            }
         }
     }
 
-    private async Task<string> RtfEncodeImages(Bitmap firstBitmap, List<ProcessedImage> images)
+    private async Task<string?> RtfEncodeImages(IMemoryImage firstBitmap, List<ProcessedImage> images)
     {
         var sb = new StringBuilder();
         sb.Append("{");
-        // TODO: Is this the right format?
-        if (!AppendRtfEncodedImage(firstBitmap, firstBitmap.RawFormat, sb, false))
+        if (!AppendRtfEncodedImage(firstBitmap, sb, false))
         {
             return null;
         }
         foreach (var img in images.Skip(1))
         {
-            using var bitmap = ((GdiImageContext)_imageContext).RenderToBitmap(img);
-            // TODO: Is this the right format?
-            if (!AppendRtfEncodedImage(bitmap, bitmap.RawFormat, sb, true))
+            using var bitmap = _imageContext.Render(img);
+            if (!AppendRtfEncodedImage(bitmap, sb, true))
             {
                 break;
             }
@@ -67,41 +65,41 @@ public class ImageClipboard
         return sb.ToString();
     }
 
-    private static bool AppendRtfEncodedImage(Image image, ImageFormat format, StringBuilder sb, bool par)
+    private static bool AppendRtfEncodedImage(IMemoryImage image, StringBuilder sb, bool par)
     {
+        // TODO: Use a variation of SaveSmallestFormat here
+        var format = image.OriginalFileFormat == ImageFileFormat.Jpeg ? ImageFileFormat.Jpeg : ImageFileFormat.Png;
         const int maxRtfSize = 20 * 1000 * 1000;
-        using (var stream = new MemoryStream())
+        using var stream = new MemoryStream();
+        image.Save(stream, format);
+        if (sb.Length + stream.Length * 2 > maxRtfSize)
         {
-            image.Save(stream, format);
-            if (sb.Length + stream.Length * 2 > maxRtfSize)
-            {
-                return false;
-            }
-
-            if (par)
-            {
-                sb.Append(@"\par");
-            }
-            sb.Append(@"{\pict\pngblip\picw");
-            sb.Append(image.Width);
-            sb.Append(@"\pich");
-            sb.Append(image.Height);
-            sb.Append(@"\picwgoa");
-            sb.Append(image.Width);
-            sb.Append(@"\pichgoa");
-            sb.Append(image.Height);
-            sb.Append(@"\hex ");
-            // Do a "low-level" conversion to save on memory by avoiding intermediate representations
-            stream.Seek(0, SeekOrigin.Begin);
-            int value;
-            while ((value = stream.ReadByte()) != -1)
-            {
-                int hi = value / 16, lo = value % 16;
-                sb.Append(GetHexChar(hi));
-                sb.Append(GetHexChar(lo));
-            }
-            sb.Append("}");
+            return false;
         }
+
+        if (par)
+        {
+            sb.Append(@"\par");
+        }
+        sb.Append(@"{\pict\pngblip\picw");
+        sb.Append(image.Width);
+        sb.Append(@"\pich");
+        sb.Append(image.Height);
+        sb.Append(@"\picwgoa");
+        sb.Append(image.Width);
+        sb.Append(@"\pichgoa");
+        sb.Append(image.Height);
+        sb.Append(@"\hex ");
+        // Do a "low-level" conversion to save on memory by avoiding intermediate representations
+        stream.Seek(0, SeekOrigin.Begin);
+        int value;
+        while ((value = stream.ReadByte()) != -1)
+        {
+            int hi = value / 16, lo = value % 16;
+            sb.Append(GetHexChar(hi));
+            sb.Append(GetHexChar(lo));
+        }
+        sb.Append("}");
         return true;
     }
 
