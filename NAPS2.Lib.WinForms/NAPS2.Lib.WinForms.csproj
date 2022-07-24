@@ -274,15 +274,6 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
 
-    <EmbeddedResource Remove="WinForms\FScanProgress.*.resx" Condition="'$(Configuration)' == 'Debug'" />
-    <EmbeddedResource Update="WinForms\FScanProgress.*.resx">
-      <DependentUpon>FScanProgress.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Update="WinForms\FScanProgress.resx">
-      <DependentUpon>FScanProgress.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-
     <EmbeddedResource Remove="WinForms\FSelectDevice.*.resx" Condition="'$(Configuration)' == 'Debug'" />
     <EmbeddedResource Update="WinForms\FSelectDevice.*.resx">
       <DependentUpon>FSelectDevice.cs</DependentUpon>
