@@ -19,11 +19,12 @@ internal class ScanPerformer : IScanPerformer
     private readonly ScanOptionsValidator _scanOptionsValidator;
     private readonly IScanBridgeFactory _scanBridgeFactory;
     private readonly IOcrEngine _ocrEngine;
+    private readonly OcrOperationManager _ocrOperationManager;
 
     public ScanPerformer(IDevicePrompt devicePrompt, Naps2Config config, OperationProgress operationProgress,
         AutoSaver autoSaver, IProfileManager profileManager, ErrorOutput errorOutput,
         ScanOptionsValidator scanOptionsValidator, IScanBridgeFactory scanBridgeFactory,
-        ScanningContext scanningContext, IOcrEngine ocrEngine)
+        ScanningContext scanningContext, IOcrEngine ocrEngine, OcrOperationManager ocrOperationManager)
     {
         _devicePrompt = devicePrompt;
         _config = config;
@@ -35,6 +36,7 @@ internal class ScanPerformer : IScanPerformer
         _scanBridgeFactory = scanBridgeFactory;
         _scanningContext = scanningContext;
         _ocrEngine = ocrEngine;
+        _ocrOperationManager = ocrOperationManager;
     }
 
     public async Task<ScanDevice?> PromptForDevice(ScanProfile scanProfile, IntPtr dialogParent = default)
@@ -56,7 +58,9 @@ internal class ScanPerformer : IScanPerformer
             return ScannedImageSource.Empty;
         }
 
-        var localPostProcessor = new LocalPostProcessor(ConfigureOcrController(scanParams));
+        var ocrController = ConfigureOcrController(scanParams);
+        _ocrOperationManager.RegisterOcrController(ocrController);
+        var localPostProcessor = new LocalPostProcessor(ocrController);
         var controller = new ScanController(localPostProcessor, _scanOptionsValidator, _scanBridgeFactory);
         var op = new ScanOperation(options);
 

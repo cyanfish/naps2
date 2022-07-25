@@ -4,6 +4,19 @@ using NAPS2.Scan;
 namespace NAPS2.Ocr;
 
 // TODO: We still need to write the temp image in the remote post processor (where possible... what about actual remote?)
+/// <summary>
+/// Triggers OCR during the scanning process. To use this: create an instance, set the properties appropriately, and
+/// pass it as a constructor argument to ScanController. Then OCR will be automatically triggered on each scanned page.
+///
+/// TODO: Make this more friendlier to use from an SDK perspective, e.g. changing up the events, or maybe even adding an option to include results in postprocessingdata (and delay the scanned image production)
+/// TODO: Maybe even have a OCR-package-provided subclass that automatically sets some properties.
+/// TODO: Also document each property.
+/// TODO: And maybe rethink the class structure a bit to separate the user-friendly portion of this class (basic configuration and maybe events) from the more nitty gritty details. 
+///
+/// In the NAPS2 desktop application, the OcrController instance is registered on OcrOperationManager to show progress.
+/// OCR results are not accessed directly - OCR is only done to populate the OcrRequestQueue cache for future Save PDF
+/// operations.
+/// </summary>
 public class OcrController
 {
     private readonly ScanningContext _scanningContext;
@@ -17,6 +30,7 @@ public class OcrController
 
     public bool EnableOcr { get; set; }
 
+    // TODO: PdfSharpExporter gets the engine from ScanningContext. Should we make this consistent?
     public IOcrEngine? Engine { get; set; }
 
     public OcrParams OcrParams { get; set; } = new(null, OcrMode.Default, 0);

@@ -65,6 +65,7 @@ public class CommonModule : NinjectModule
         Bind<ImageContext>().To<GdiImageContext>();
         Bind<GdiImageContext>().ToSelf();
         Bind<ScanningContext>().ToSelf().InSingletonScope();
+        Bind<OcrOperationManager>().ToSelf().InSingletonScope();
 
         //Kernel.Get<ImageContext>().PdfRenderer = Kernel.Get<PdfiumWorkerCoordinator>();
 

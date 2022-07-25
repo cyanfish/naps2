@@ -35,7 +35,7 @@ public partial class FOcrSetup : FormBase
         comboLanguages.ValueMember = "Code";
 
         checkBoxEnableOcr.Checked = Config.Get(c => c.EnableOcr);
-        SetSelectedValue(comboLanguages, Config.Get(c => c.OcrLanguageCode));
+        SetSelectedValue(comboLanguages, Config.Get(c => c.OcrLanguageCode) ?? "");
         SetSelectedItem(comboOcrMode, Config.Get(c => c.OcrMode));
         checkBoxRunInBG.Checked = Config.Get(c => c.OcrAfterScanning);
 

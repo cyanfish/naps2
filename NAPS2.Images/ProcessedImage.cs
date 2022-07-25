@@ -169,6 +169,7 @@ public class ProcessedImage : IDisposable, IEquatable<ProcessedImage>
 
             _processedImage.Storage.Dispose();
             _processedImage.PostProcessingData.Thumbnail?.Dispose();
+            _processedImage.PostProcessingData.OcrCts?.Cancel();
         }
     }
 

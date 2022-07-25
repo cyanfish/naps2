@@ -31,7 +31,7 @@ public class OcrRequestQueue
     /// </summary>
     public bool HasCachedResult(IOcrEngine ocrEngine, ProcessedImage image, OcrParams ocrParams)
     {
-        var reqParams = new OcrRequestParams(image, ocrEngine, ocrParams);
+        var reqParams = new OcrRequestParams(image.GetWeakReference(), ocrEngine, ocrParams);
         lock (this)
         {
             return _requestCache.ContainsKey(reqParams) && _requestCache[reqParams].State == OcrRequestState.Completed;
@@ -56,7 +56,7 @@ public class OcrRequestQueue
         OcrRequest req;
         lock (this)
         {
-            var reqParams = new OcrRequestParams(image, ocrEngine, ocrParams);
+            var reqParams = new OcrRequestParams(image.GetWeakReference(), ocrEngine, ocrParams);
             req = _requestCache.GetOrSet(reqParams, () => new OcrRequest(reqParams, this));
             if (req.State is OcrRequestState.Canceled or OcrRequestState.Error)
             {
