@@ -155,19 +155,17 @@ internal class RemotePostProcessor : IRemotePostProcessor
         processedImage = processedImage.WithPostProcessingData(data, true);
     }
 
-    public string? SaveForBackgroundOcr(IMemoryImage bitmap, ScanOptions options)
+    private string? SaveForBackgroundOcr(IMemoryImage bitmap, ScanOptions options)
     {
-        // TODO: How do we do this with an OcrController model?
-        // TODO: How do we do this with an actual remote scanner?
-        // if (options.DoOcr)
-        // {
-        //     // TODO: If we use tesseract as a library, this is somethat that could potentially improve (i.e. not having to save to disk)
-        //     // But then again, that doesn't make as much sense on systems (i.e. linux) where tesseract would be provided as an external package
-        //     var path = Path.Combine(_scanningContext.TempFolderPath, Path.GetRandomFileName());
-        //     // TODO: Cleanup this call
-        //     var fullPath = _scanningContext.ImageContext.SaveSmallestFormat(bitmap, path, BitDepth.Color, false, -1, out _);
-        //     return fullPath;
-        // }
+        if (!string.IsNullOrEmpty(options.OcrParams.LanguageCode))
+        {
+            // TODO: If we use tesseract as a library, this is something that that could potentially improve (i.e. not having to save to disk)
+            // But then again, that doesn't make as much sense on systems (i.e. linux) where tesseract would be provided as an external package
+            var path = Path.Combine(_scanningContext.TempFolderPath, Path.GetRandomFileName());
+            // TODO: Is using the options bitdepth safe here if the scanner ignores it?
+            var fullPath = _scanningContext.ImageContext.SaveSmallestFormat(bitmap, path, options.BitDepth, false, -1, out _);
+            return fullPath;
+        }
         return null;
     }
 

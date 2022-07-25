@@ -1,4 +1,6 @@
-﻿namespace NAPS2.Scan;
+﻿using NAPS2.Ocr;
+
+namespace NAPS2.Scan;
 
 // TODO: We can probably make this an immutable record
 public class ScanOptions
@@ -28,6 +30,11 @@ public class ScanOptions
     public SaneOptions SaneOptions { get; set; } = new();
 
     public BarcodeDetectionOptions BarcodeDetectionOptions { get; set; } = new();
+
+    // TODO: Add another option (maybe default on) to wait for the OCR results and include them in postprocessingdata
+    public OcrParams OcrParams { get; set; } = OcrParams.Empty;
+
+    public OcrPriority OcrPriority { get; set; } = OcrPriority.Background;
 
     public BitDepth BitDepth { get; set; }
 

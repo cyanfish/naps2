@@ -6,22 +6,28 @@ namespace NAPS2.Scan;
 
 public class ScanController : IScanController
 {
+    private readonly ScanningContext _scanningContext;
     private readonly ILocalPostProcessor _localPostProcessor;
     private readonly ScanOptionsValidator _scanOptionsValidator;
     private readonly IScanBridgeFactory _scanBridgeFactory;
 
     public ScanController(ScanningContext scanningContext)
-        : this(new LocalPostProcessor(new OcrController(scanningContext)), new ScanOptionsValidator(), new ScanBridgeFactory(scanningContext))
+        : this(scanningContext, new LocalPostProcessor(scanningContext, new OcrController(scanningContext)),
+            new ScanOptionsValidator(),
+            new ScanBridgeFactory(scanningContext))
     {
     }
 
     public ScanController(ScanningContext scanningContext, OcrController ocrController)
-        : this(new LocalPostProcessor(ocrController), new ScanOptionsValidator(), new ScanBridgeFactory(scanningContext))
+        : this(scanningContext, new LocalPostProcessor(scanningContext, ocrController), new ScanOptionsValidator(),
+            new ScanBridgeFactory(scanningContext))
     {
     }
 
-    internal ScanController(ILocalPostProcessor localPostProcessor, ScanOptionsValidator scanOptionsValidator, IScanBridgeFactory scanBridgeFactory)
+    internal ScanController(ScanningContext scanningContext, ILocalPostProcessor localPostProcessor,
+        ScanOptionsValidator scanOptionsValidator, IScanBridgeFactory scanBridgeFactory)
     {
+        _scanningContext = scanningContext;
         _localPostProcessor = localPostProcessor;
         _scanOptionsValidator = scanOptionsValidator;
         _scanBridgeFactory = scanBridgeFactory;
@@ -33,14 +39,14 @@ public class ScanController : IScanController
 
     public async Task<List<ScanDevice>> GetDeviceList(ScanOptions options)
     {
-        options = _scanOptionsValidator.ValidateAll(options, false);
+        options = _scanOptionsValidator.ValidateAll(options, _scanningContext, false);
         var bridge = _scanBridgeFactory.Create(options);
         return await bridge.GetDeviceList(options);
     }
 
     public ScannedImageSource Scan(ScanOptions options, CancellationToken cancelToken = default)
     {
-        options = _scanOptionsValidator.ValidateAll(options, true);
+        options = _scanOptionsValidator.ValidateAll(options, _scanningContext, true);
         var sink = new ScannedImageSink();
         int pageNumber = 0;
 
@@ -48,7 +54,10 @@ public class ScanController : IScanController
         void ScanEndCallback(ScannedImageSource source) => ScanEnd?.Invoke(this, new ScanEndEventArgs(source));
         void ScanErrorCallback(Exception ex) => ScanError?.Invoke(this, new ScanErrorEventArgs(ex));
         void PageStartCallback() => PageStart?.Invoke(this, new PageStartEventArgs(++pageNumber));
-        void PageProgressCallback(double progress) => PageProgress?.Invoke(this, new PageProgressEventArgs(pageNumber, progress));
+
+        void PageProgressCallback(double progress) =>
+            PageProgress?.Invoke(this, new PageProgressEventArgs(pageNumber, progress));
+
         void PageEndCallback(ProcessedImage image) => PageEnd?.Invoke(this, new PageEndEventArgs(pageNumber, image));
 
         ScanStartCallback();

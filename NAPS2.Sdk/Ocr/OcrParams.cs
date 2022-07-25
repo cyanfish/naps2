@@ -9,5 +9,10 @@
 /// </summary>
 public record OcrParams(string? LanguageCode, OcrMode Mode, double TimeoutInSeconds)
 {
-    public static readonly OcrParams Empty = new(null, OcrMode.Default, 0);
+    private OcrParams()
+        : this(null, OcrMode.Default, 0)
+    {
+    }
+    
+    public static readonly OcrParams Empty = new();
 }

@@ -1,4 +1,5 @@
 ﻿using Grpc.Core;
+using NAPS2.Ocr;
 using NAPS2.Scan;
 using NAPS2.Scan.Internal;
 using NAPS2.Serialization;
@@ -112,7 +113,12 @@ internal class NetworkScanServiceImpl : NetworkScanService.NetworkScanServiceBas
 
         // Avoid recursive network bridging
         options.NetworkOptions = new NetworkOptions();
-            
+
+        // OCR is done client-side, except for the optimization of leaving an image file on disk, which won't work
+        // across the network.
+        // TODO: Maybe consider supporting server-side OCR?
+        options.OcrParams = OcrParams.Empty;
+
         return options;
     }
 }

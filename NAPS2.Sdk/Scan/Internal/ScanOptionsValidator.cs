@@ -4,7 +4,7 @@ namespace NAPS2.Scan.Internal;
 
 public class ScanOptionsValidator
 {
-    public ScanOptions ValidateAll(ScanOptions options, bool requireDevice)
+    public ScanOptions ValidateAll(ScanOptions options, ScanningContext scanningContext, bool requireDevice)
     {
         // Easy deep copy. Ideally we'd do this in a more efficient way.
         options = options.ToXml().FromXml<ScanOptions>();
@@ -52,7 +52,11 @@ public class ScanOptionsValidator
             throw new ArgumentException("Invalid value for ScanOptions.ScaleRatio.");
         }
 
-        // TODO: Validate DoOcr based on OcrParams
+        if (!string.IsNullOrEmpty(options.OcrParams.LanguageCode) && scanningContext.OcrEngine == null)
+        {
+            throw new ArgumentException("OCR is enabled but no OCR engine is set on ScanningContext.");
+        }
+
         // TODO: Do we need to validate the presence of a device?
         // TODO: Probably more things as well.
 

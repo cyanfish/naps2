@@ -18,13 +18,12 @@ internal class ScanPerformer : IScanPerformer
     private readonly ErrorOutput _errorOutput;
     private readonly ScanOptionsValidator _scanOptionsValidator;
     private readonly IScanBridgeFactory _scanBridgeFactory;
-    private readonly IOcrEngine _ocrEngine;
     private readonly OcrOperationManager _ocrOperationManager;
 
     public ScanPerformer(IDevicePrompt devicePrompt, Naps2Config config, OperationProgress operationProgress,
         AutoSaver autoSaver, IProfileManager profileManager, ErrorOutput errorOutput,
         ScanOptionsValidator scanOptionsValidator, IScanBridgeFactory scanBridgeFactory,
-        ScanningContext scanningContext, IOcrEngine ocrEngine, OcrOperationManager ocrOperationManager)
+        ScanningContext scanningContext, OcrOperationManager ocrOperationManager)
     {
         _devicePrompt = devicePrompt;
         _config = config;
@@ -35,7 +34,6 @@ internal class ScanPerformer : IScanPerformer
         _scanOptionsValidator = scanOptionsValidator;
         _scanBridgeFactory = scanBridgeFactory;
         _scanningContext = scanningContext;
-        _ocrEngine = ocrEngine;
         _ocrOperationManager = ocrOperationManager;
     }
 
@@ -50,7 +48,7 @@ internal class ScanPerformer : IScanPerformer
     {
         var options = BuildOptions(scanProfile, scanParams, dialogParent);
         // Make sure we get a real driver value (not just "Default")
-        options = _scanOptionsValidator.ValidateAll(options, false);
+        options = _scanOptionsValidator.ValidateAll(options, _scanningContext, false);
 
         if (!await PopulateDevice(scanProfile, options))
         {
@@ -58,10 +56,9 @@ internal class ScanPerformer : IScanPerformer
             return ScannedImageSource.Empty;
         }
 
-        var ocrController = ConfigureOcrController(scanParams);
-        _ocrOperationManager.RegisterOcrController(ocrController);
-        var localPostProcessor = new LocalPostProcessor(ocrController);
-        var controller = new ScanController(localPostProcessor, _scanOptionsValidator, _scanBridgeFactory);
+        var localPostProcessor = new LocalPostProcessor(_scanningContext, ConfigureOcrController(scanParams));
+        var controller = new ScanController(_scanningContext, localPostProcessor, _scanOptionsValidator,
+            _scanBridgeFactory);
         var op = new ScanOperation(options);
 
         controller.PageStart += (sender, args) => op.NextPage(args.PageNumber);
@@ -105,21 +102,9 @@ internal class ScanPerformer : IScanPerformer
         OcrController ocrController = new OcrController(_scanningContext);
         if (scanParams.OcrParams?.LanguageCode != null)
         {
-            ocrController.Engine = _ocrEngine;
-            if (ocrController.Engine == null)
-            {
-                Log.Error("OCR is enabled but no OCR engine is available.");
-            }
-            else
-            {
-                ocrController.EnableOcr = true;
-                ocrController.OcrParams = scanParams.OcrParams;
-                // TODO: Make DoOcr mean just foreground OCR again, and check the config here to enable background ocr 
-                ocrController.Priority = OcrPriority.Foreground;
-                scanParams.OcrCancelToken.Register(() => ocrController.CancelAll());
-            }
+            scanParams.OcrCancelToken.Register(() => ocrController.CancelAll());
         }
-
+        _ocrOperationManager.RegisterOcrController(ocrController);
         return ocrController;
     }
 
@@ -219,6 +204,7 @@ internal class ScanPerformer : IScanPerformer
                                  scanProfile.AutoSaveSettings?.Separator == SaveSeparator.PatchT,
                 PatchTOnly = true
             },
+            OcrParams = scanParams.OcrParams ?? OcrParams.Empty,
             Brightness = scanProfile.Brightness,
             Contrast = scanProfile.Contrast,
             Dpi = scanProfile.Resolution.ToIntDpi(),
@@ -249,7 +235,8 @@ internal class ScanPerformer : IScanPerformer
             throw new ArgumentException("No page size specified");
         }
 
-        options.PageSize = new PageSize(pageDimensions.Width, pageDimensions.Height, (PageSizeUnit) pageDimensions.Unit);
+        options.PageSize =
+            new PageSize(pageDimensions.Width, pageDimensions.Height, (PageSizeUnit) pageDimensions.Unit);
 
         return options;
     }
