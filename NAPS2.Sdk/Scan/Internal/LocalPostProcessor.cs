@@ -26,7 +26,7 @@ internal class LocalPostProcessor : ILocalPostProcessor
     {
         if (tempPath == null)
         {
-            if (string.IsNullOrEmpty(options.NetworkOptions.Ip) || options.NetworkOptions.Port == null)
+            if (string.IsNullOrEmpty(options.NetworkOptions.Ip))
             {
                 throw new InvalidOperationException("Expected OCR tempPath to be set for non-network scan");
             }

@@ -2,6 +2,7 @@
 
 namespace NAPS2.Scan.Internal;
 
+// TODO: Add tests for this and/or scanperformer
 public class ScanOptionsValidator
 {
     public ScanOptions ValidateAll(ScanOptions options, ScanningContext scanningContext, bool requireDevice)
@@ -55,6 +56,11 @@ public class ScanOptionsValidator
         if (!string.IsNullOrEmpty(options.OcrParams.LanguageCode) && scanningContext.OcrEngine == null)
         {
             throw new ArgumentException("OCR is enabled but no OCR engine is set on ScanningContext.");
+        }
+
+        if (string.IsNullOrEmpty(options.NetworkOptions.Ip) != (options.NetworkOptions.Port == null))
+        {
+            throw new ArgumentException("NetworkOptions.Ip and .Port must both be either set or unset.");
         }
 
         // TODO: Do we need to validate the presence of a device?
