@@ -16,6 +16,7 @@ public class ScannedImageHelper
         }
         else if (bitDepth == BitDepth.BlackAndWhite)
         {
+            // TODO: I need to evaluate how this behaves if the image isn't actual black and white. Then consider the best way to handle that case, and audit callers for best practices.
             // Convert to a 1-bit bitmap before saving to help compression
             // This is lossless and takes up minimal storage (best of both worlds), so highQuality is irrelevant
             using var bitmap = BitmapHelper.CopyToBpp(sourceImage, 1);
