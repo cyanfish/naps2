@@ -5,6 +5,7 @@ namespace NAPS2.Scan.Internal;
 /// <summary>
 /// Represents scanning in a worker process on the same machine.
 /// </summary>
+// TODO: Since implementing TwainScan as a distinct operation, this class is unused. We could consider removing it, but it may come in handy at some point.
 internal class WorkerScanBridge : IScanBridge
 {
     private readonly ScanningContext _scanningContext;

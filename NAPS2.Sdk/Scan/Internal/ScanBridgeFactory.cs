@@ -3,18 +3,16 @@
 internal class ScanBridgeFactory : IScanBridgeFactory
 {
     private readonly InProcScanBridge _inProcScanBridge;
-    private readonly WorkerScanBridge _workerScanBridge; // TODO: remove
     private readonly NetworkScanBridge _networkScanBridge;
 
     public ScanBridgeFactory(ScanningContext scanningContext)
-        : this(new InProcScanBridge(scanningContext), new WorkerScanBridge(scanningContext), new NetworkScanBridge(scanningContext))
+        : this(new InProcScanBridge(scanningContext), new NetworkScanBridge(scanningContext))
     {
     }
 
-    public ScanBridgeFactory(InProcScanBridge inProcScanBridge, WorkerScanBridge workerScanBridge, NetworkScanBridge networkScanBridge)
+    public ScanBridgeFactory(InProcScanBridge inProcScanBridge, NetworkScanBridge networkScanBridge)
     {
         _inProcScanBridge = inProcScanBridge;
-        _workerScanBridge = workerScanBridge;
         _networkScanBridge = networkScanBridge;
     }
 
