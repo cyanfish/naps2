@@ -1,5 +1,6 @@
 using System.Threading;
 using NAPS2.Ocr;
+using NAPS2.Sdk.Tests.Images;
 using Xunit;
 
 namespace NAPS2.Sdk.Tests.Ocr;
@@ -17,11 +18,11 @@ public class TesseractOcrEngineTests : ContextualTests
         var fast = Path.Combine(FolderPath, "fast");
         Directory.CreateDirectory(fast);
         
-        var tesseractPath = CopyResourceToFile(TesseractResources.tesseract_x64, FolderPath, "tesseract.exe");
-        CopyResourceToFile(TesseractResources.eng_traineddata, fast, "eng.traineddata");
-        CopyResourceToFile(TesseractResources.heb_traineddata, fast, "heb.traineddata");
-        _testImagePath = CopyResourceToFile(TesseractResources.ocr_test, "ocr_test.jpg");
-        _testImagePathHebrew = CopyResourceToFile(TesseractResources.ocr_test_hebrew, "ocr_test_hebrew.jpg");
+        var tesseractPath = CopyResourceToFile(BinaryResources.tesseract_x64, FolderPath, "tesseract.exe");
+        CopyResourceToFile(BinaryResources.eng_traineddata, fast, "eng.traineddata");
+        CopyResourceToFile(BinaryResources.heb_traineddata, fast, "heb.traineddata");
+        _testImagePath = CopyResourceToFile(BinaryResources.ocr_test, "ocr_test.jpg");
+        _testImagePathHebrew = CopyResourceToFile(BinaryResources.ocr_test_hebrew, "ocr_test_hebrew.jpg");
 
         _engine = new TesseractOcrEngine(tesseractPath, FolderPath, FolderPath);
     }
@@ -95,9 +96,9 @@ public class TesseractOcrEngineTests : ContextualTests
     [Fact]
     public async Task Mode()
     {
-        CopyResourceToFile(TesseractResources.eng_traineddata, Path.Combine(FolderPath, "best"), "eng.traineddata");
+        CopyResourceToFile(BinaryResources.eng_traineddata, Path.Combine(FolderPath, "best"), "eng.traineddata");
         // Bad data for unused mode
-        CopyResourceToFile(TesseractResources.heb_traineddata, Path.Combine(FolderPath, "fast"), "eng.traineddata");
+        CopyResourceToFile(BinaryResources.heb_traineddata, Path.Combine(FolderPath, "fast"), "eng.traineddata");
 
         var mode = OcrMode.Best;
         var result = await _engine.ProcessImage(_testImagePath, new OcrParams("eng", mode, 0), CancellationToken.None);

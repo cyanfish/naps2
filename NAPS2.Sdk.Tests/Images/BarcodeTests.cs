@@ -12,7 +12,7 @@ public class BarcodeTests
     [Fact]
     public void DetectPatchT()
     {
-        var image = new GdiImage(SharedData.patcht);
+        var image = new GdiImage(ImageResources.patcht);
         var detection = BarcodeDetector.Detect(image, new BarcodeDetectionOptions
         {
             DetectBarcodes = true,
@@ -26,7 +26,7 @@ public class BarcodeTests
     [Fact]
     public void DetectUpc()
     {
-        var image = new GdiImage(BarcodeTestsData.image_upc_barcode);
+        var image = new GdiImage(ImageResources.image_upc_barcode);
         var detection = BarcodeDetector.Detect(image, new BarcodeDetectionOptions
         {
             DetectBarcodes = true,
@@ -41,7 +41,7 @@ public class BarcodeTests
     [Fact]
     public void DetectNothing()
     {
-        var image = new GdiImage(SharedData.color_image);
+        var image = new GdiImage(ImageResources.color_image);
         var detection = BarcodeDetector.Detect(image, new BarcodeDetectionOptions
         {
             DetectBarcodes = true,

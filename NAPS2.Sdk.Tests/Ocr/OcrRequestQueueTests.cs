@@ -212,7 +212,7 @@ public class OcrRequestQueueTests : ContextualTests
         _mockEngine.Setup(x => x.ProcessImage(_tempPath, _ocrParams, It.IsAny<CancellationToken>())).Returns(
             new InvocationFunc(invocation =>
             {
-                mockEngineTask = Task.Run(async () =>
+                mockEngineTask = Task.Run(() =>
                 {
                     var cancelToken = (CancellationToken) invocation.Arguments[2];
                     cancelledAtEngineStart = cancelToken.IsCancellationRequested;

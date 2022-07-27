@@ -118,19 +118,34 @@
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
     <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-    <data name="color_image" type="System.Resources.ResXFileRef, System.Windows.Forms">
-        <value>..\Resources\color_image.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <data name="tesseract_x64" type="System.Resources.ResXFileRef, System.Windows.Forms">
+        <value>Resources\tesseract-5.1.0-x64.exe;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </data>
-    <data name="color_image_set" type="System.Resources.ResXFileRef, System.Windows.Forms">
-        <value>..\Resources\color_image_set.tiff;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <data name="eng_traineddata" type="System.Resources.ResXFileRef, System.Windows.Forms">
+        <value>Resources\eng.traineddata;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </data>
-    <data name="patcht" type="System.Resources.ResXFileRef, System.Windows.Forms">
-        <value>..\Resources\patcht.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <data name="heb_traineddata" type="System.Resources.ResXFileRef, System.Windows.Forms">
+        <value>Resources\heb.traineddata;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </data>
-    <data name="skewed_bw" type="System.Resources.ResXFileRef, System.Windows.Forms">
-        <value>..\Resources\skewed_bw.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <data name="animals" type="System.Resources.ResXFileRef, System.Windows.Forms">
+        <value>Resources\animals.zip;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </data>
+    <data name="stock_dog_jpeg" type="System.Resources.ResXFileRef, System.Windows.Forms">
+        <value>Resources\stock-dog.jpeg.gz;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </data>
     <data name="stock_cat" type="System.Resources.ResXFileRef, System.Windows.Forms">
-        <value>..\Resources\stock-cat.jpeg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+        <value>Resources\stock-cat.jpeg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </data>
+    <data name="stock_dog" type="System.Resources.ResXFileRef, System.Windows.Forms">
+        <value>Resources\stock-dog.jpeg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </data>
+    <data name="ocr_test" type="System.Resources.ResXFileRef, System.Windows.Forms">
+        <value>Resources\ocr_test.jpg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </data>
+    <data name="ocr_test_hebrew" type="System.Resources.ResXFileRef, System.Windows.Forms">
+        <value>Resources\ocr_test_hebrew.jpg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </data>
+    <data name="color_image_set" type="System.Resources.ResXFileRef, System.Windows.Forms">
+        <value>Resources\color_image_set.tiff;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </data>
 </root>

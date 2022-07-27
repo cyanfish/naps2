@@ -98,7 +98,7 @@ public class RecoveryManagerTests : ContextualTests
         Assert.True(result);
 
         Assert.Equal(2, images.Count);
-        ImageAsserts.Similar(SharedData.color_image, images[0]);
+        ImageAsserts.Similar(ImageResources.color_image, images[0]);
 
         mockProgressCallback.Verify(callback => callback(0, 2));
         mockProgressCallback.Verify(callback => callback(1, 2));
@@ -155,7 +155,7 @@ public class RecoveryManagerTests : ContextualTests
         Assert.True(result);
 
         Assert.Single(images);
-        ImageAsserts.Similar(SharedData.color_image, images[0]);
+        ImageAsserts.Similar(ImageResources.color_image, images[0]);
 
         mockProgressCallback.Verify(callback => callback(0, 2));
         mockProgressCallback.Verify(callback => callback(1, 2));
@@ -179,6 +179,6 @@ public class RecoveryManagerTests : ContextualTests
 
     private ProcessedImage CreateRecoveryImage(ScanningContext recoveryContext)
     {
-        return recoveryContext.CreateProcessedImage(new GdiImage(SharedData.color_image));
+        return recoveryContext.CreateProcessedImage(new GdiImage(ImageResources.color_image));
     }
 }

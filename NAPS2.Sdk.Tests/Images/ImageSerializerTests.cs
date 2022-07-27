@@ -22,7 +22,7 @@ public class ImageSerializerTests : ContextualTests
         using var destContext = new ScanningContext(new GdiImageContext());
 
         using var sourceImage = ScanningContext.CreateProcessedImage(
-            new GdiImage(SharedData.color_image), // TODO: Use an actual grayscale image
+            new GdiImage(ImageResources.color_image), // TODO: Use an actual grayscale image
             BitDepth.Grayscale,
             true,
             -1,
@@ -35,7 +35,7 @@ public class ImageSerializerTests : ContextualTests
         Assert.Equal(300, Assert.IsType<BrightnessTransform>(destImage.TransformState.Transforms[0]).Brightness);
         Assert.True(destImage.Metadata.Lossless);
         Assert.Equal(BitDepth.Grayscale, destImage.Metadata.BitDepth);
-        ImageAsserts.Similar(TransformTestsData.color_image_b_p300, ImageContext.Render(destImage));
+        ImageAsserts.Similar(ImageResources.color_image_b_p300, ImageContext.Render(destImage));
     }
 
     [Theory]
@@ -47,14 +47,14 @@ public class ImageSerializerTests : ContextualTests
         using var destContext = new ScanningContext(new GdiImageContext(),
             FileStorageManager.CreateFolder(Path.Combine(FolderPath, "dest")));
 
-        using var sourceImage = ScanningContext.CreateProcessedImage(new GdiImage(SharedData.color_image));
+        using var sourceImage = ScanningContext.CreateProcessedImage(new GdiImage(ImageResources.color_image));
         var serializedImage = ImageSerializer.Serialize(sourceImage, new SerializeImageOptions());
         using var destImage = ImageSerializer.Deserialize(destContext, serializedImage, new DeserializeImageOptions());
 
         Assert.IsType<ImageFileStorage>(destImage.Storage);
         // Check that disposing the original doesn't interfere with rendering, i.e. not using the same backing file
         sourceImage.Dispose();
-        ImageAsserts.Similar(TransformTestsData.color_image, ImageContext.Render(destImage));
+        ImageAsserts.Similar(ImageResources.color_image, ImageContext.Render(destImage));
     }
 
     [Theory]
@@ -65,14 +65,14 @@ public class ImageSerializerTests : ContextualTests
 
         using var destContext = new ScanningContext(new GdiImageContext());
 
-        using var sourceImage = ScanningContext.CreateProcessedImage(new GdiImage(SharedData.color_image));
+        using var sourceImage = ScanningContext.CreateProcessedImage(new GdiImage(ImageResources.color_image));
         var serializedImage = ImageSerializer.Serialize(sourceImage, new SerializeImageOptions());
         using var destImage = ImageSerializer.Deserialize(destContext, serializedImage, new DeserializeImageOptions());
 
         Assert.IsType<GdiImage>(destImage.Storage);
         // Check that disposing the original doesn't interfere with rendering, i.e. not using the same image
         sourceImage.Dispose();
-        ImageAsserts.Similar(TransformTestsData.color_image, ImageContext.Render(destImage));
+        ImageAsserts.Similar(ImageResources.color_image, ImageContext.Render(destImage));
     }
 
     [Fact]
@@ -83,7 +83,7 @@ public class ImageSerializerTests : ContextualTests
         using var destContext = new ScanningContext(new GdiImageContext(),
             FileStorageManager.CreateFolder(Path.Combine(FolderPath, "dest")));
 
-        using var sourceImage = ScanningContext.CreateProcessedImage(new GdiImage(SharedData.color_image));
+        using var sourceImage = ScanningContext.CreateProcessedImage(new GdiImage(ImageResources.color_image));
         var serializedImage = ImageSerializer.Serialize(sourceImage, new SerializeImageOptions());
         using var destImage = ImageSerializer.Deserialize(destContext, serializedImage, new DeserializeImageOptions
         {
@@ -93,7 +93,7 @@ public class ImageSerializerTests : ContextualTests
         var sourceStorage = Assert.IsType<ImageFileStorage>(sourceImage.Storage);
         var destStorage = Assert.IsType<ImageFileStorage>(destImage.Storage);
         Assert.Equal(sourceStorage.FullPath, destStorage.FullPath);
-        ImageAsserts.Similar(TransformTestsData.color_image, ImageContext.Render(destImage));
+        ImageAsserts.Similar(ImageResources.color_image, ImageContext.Render(destImage));
 
         destImage.Dispose();
         Assert.True(File.Exists(sourceStorage.FullPath));
@@ -109,7 +109,7 @@ public class ImageSerializerTests : ContextualTests
         using var destContext = new ScanningContext(new GdiImageContext(),
             FileStorageManager.CreateFolder(Path.Combine(FolderPath, "dest")));
 
-        using var sourceImage = ScanningContext.CreateProcessedImage(new GdiImage(SharedData.color_image));
+        using var sourceImage = ScanningContext.CreateProcessedImage(new GdiImage(ImageResources.color_image));
         var serializedImage = ImageSerializer.Serialize(sourceImage, new SerializeImageOptions
         {
             TransferOwnership = true
@@ -119,7 +119,7 @@ public class ImageSerializerTests : ContextualTests
         var sourceStorage = Assert.IsType<ImageFileStorage>(sourceImage.Storage);
         var destStorage = Assert.IsType<ImageFileStorage>(destImage.Storage);
         Assert.Equal(sourceStorage.FullPath, destStorage.FullPath);
-        ImageAsserts.Similar(TransformTestsData.color_image, ImageContext.Render(destImage));
+        ImageAsserts.Similar(ImageResources.color_image, ImageContext.Render(destImage));
 
         sourceImage.Dispose();
         Assert.True(File.Exists(sourceStorage.FullPath));
@@ -135,7 +135,7 @@ public class ImageSerializerTests : ContextualTests
         using var destContext = new ScanningContext(new GdiImageContext(),
             FileStorageManager.CreateFolder(Path.Combine(FolderPath, "dest")));
 
-        using var sourceImage = ScanningContext.CreateProcessedImage(new GdiImage(SharedData.color_image));
+        using var sourceImage = ScanningContext.CreateProcessedImage(new GdiImage(ImageResources.color_image));
         var serializedImage = ImageSerializer.Serialize(sourceImage, new SerializeImageOptions
         {
             CrossDevice = true
@@ -144,7 +144,7 @@ public class ImageSerializerTests : ContextualTests
         sourceImage.Dispose();
         using var destImage = ImageSerializer.Deserialize(destContext, serializedImage, new DeserializeImageOptions());
 
-        ImageAsserts.Similar(TransformTestsData.color_image, ImageContext.Render(destImage));
+        ImageAsserts.Similar(ImageResources.color_image, ImageContext.Render(destImage));
     }
 
     [Fact]
@@ -190,7 +190,7 @@ public class ImageSerializerTests : ContextualTests
         using var destContext = new ScanningContext(new GdiImageContext(),
             FileStorageManager.CreateFolder(Path.Combine(FolderPath, "dest")));
 
-        using var sourceImage = ScanningContext.CreateProcessedImage(new GdiImage(SharedData.color_image));
+        using var sourceImage = ScanningContext.CreateProcessedImage(new GdiImage(ImageResources.color_image));
         var serializedImage = ImageSerializer.Serialize(sourceImage, new SerializeImageOptions());
         using var destImage = ImageSerializer.Deserialize(destContext, serializedImage, new DeserializeImageOptions
         {
@@ -208,7 +208,7 @@ public class ImageSerializerTests : ContextualTests
     {
         new StorageConfig.File().Apply(this);
 
-        using var sourceImage = ScanningContext.CreateProcessedImage(new GdiImage(SharedData.color_image));
+        using var sourceImage = ScanningContext.CreateProcessedImage(new GdiImage(ImageResources.color_image));
         using var clone = sourceImage.Clone();
         Assert.Throws<ArgumentException>(() => ImageSerializer.Serialize(sourceImage, new SerializeImageOptions
         {
@@ -219,7 +219,7 @@ public class ImageSerializerTests : ContextualTests
     [Fact]
     public void TransferOwnership_DisposesMemory()
     {
-        using var sourceImage = ScanningContext.CreateProcessedImage(new GdiImage(SharedData.color_image));
+        using var sourceImage = ScanningContext.CreateProcessedImage(new GdiImage(ImageResources.color_image));
         ImageSerializer.Serialize(sourceImage, new SerializeImageOptions
         {
             TransferOwnership = true
@@ -277,7 +277,7 @@ public class ImageSerializerTests : ContextualTests
         config.Apply(this);
 
         var importPath = Path.Combine(FolderPath, "import.pdf");
-        File.WriteAllBytes(importPath, PdfData.word_generated_pdf);
+        File.WriteAllBytes(importPath, PdfResources.word_generated_pdf);
 
         using var destContext = new ScanningContext(new GdiImageContext(),
             FileStorageManager.CreateFolder(Path.Combine(FolderPath, "dest")));
@@ -289,7 +289,7 @@ public class ImageSerializerTests : ContextualTests
         Assert.IsType<ImageFileStorage>(destImage.Storage);
         // Check that disposing the original doesn't interfere with rendering, i.e. not using the same backing file
         sourceImage.Dispose();
-        ImageAsserts.Similar(PdfData.word_p1, ImageContext.Render(destImage));
+        ImageAsserts.Similar(PdfResources.word_p1, ImageContext.Render(destImage));
     }
 
     [Theory]
@@ -299,7 +299,7 @@ public class ImageSerializerTests : ContextualTests
         config.Apply(this);
 
         var importPath = Path.Combine(FolderPath, "import.pdf");
-        File.WriteAllBytes(importPath, PdfData.word_generated_pdf);
+        File.WriteAllBytes(importPath, PdfResources.word_generated_pdf);
 
         using var destContext = new ScanningContext(new GdiImageContext());
 
@@ -310,7 +310,7 @@ public class ImageSerializerTests : ContextualTests
         Assert.IsType<ImageMemoryStorage>(destImage.Storage);
         // Check that disposing the original doesn't interfere with rendering, i.e. not using the same image
         sourceImage.Dispose();
-        ImageAsserts.Similar(PdfData.word_p1, ImageContext.Render(destImage));
+        ImageAsserts.Similar(PdfResources.word_p1, ImageContext.Render(destImage));
     }
 
     [Theory]
@@ -321,7 +321,7 @@ public class ImageSerializerTests : ContextualTests
 
         using var destContext = new ScanningContext(new GdiImageContext());
 
-        using var sourceImage = ScanningContext.CreateProcessedImage(new GdiImage(SharedData.color_image));
+        using var sourceImage = ScanningContext.CreateProcessedImage(new GdiImage(ImageResources.color_image));
         using var imageWithThumbnail = sourceImage.WithPostProcessingData(new PostProcessingData
         {
             Thumbnail = ImageContext.PerformTransform(ImageContext.Render(sourceImage), new ThumbnailTransform(256)),
@@ -334,7 +334,7 @@ public class ImageSerializerTests : ContextualTests
         });
         using var destImage = ImageSerializer.Deserialize(destContext, serializedImage, new DeserializeImageOptions());
 
-        ImageAsserts.Similar(TransformTestsData.color_image_thumb_256, destImage.PostProcessingData.Thumbnail);
+        ImageAsserts.Similar(ImageResources.color_image_thumb_256, destImage.PostProcessingData.Thumbnail);
     }
 
     [Fact]
@@ -342,7 +342,7 @@ public class ImageSerializerTests : ContextualTests
     {
         using var destContext = new ScanningContext(new GdiImageContext());
 
-        using var sourceImage = ScanningContext.CreateProcessedImage(new GdiImage(SharedData.color_image));
+        using var sourceImage = ScanningContext.CreateProcessedImage(new GdiImage(ImageResources.color_image));
         using var imageWithThumbnail = sourceImage.WithPostProcessingData(new PostProcessingData
         {
             Thumbnail = ImageContext.PerformTransform(ImageContext.Render(sourceImage), new ThumbnailTransform(256)),

@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace NAPS2.Sdk.Tests.ImportExport {
+namespace NAPS2.Sdk.Tests {
     using System;
     
     
@@ -19,17 +19,17 @@ namespace NAPS2.Sdk.Tests.ImportExport {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class ImageImporterTestsData {
+    internal class PdfResources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal ImageImporterTestsData() {
+        internal PdfResources() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace NAPS2.Sdk.Tests.ImportExport {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("NAPS2.Sdk.Tests.ImportExport.ImageImporterTestsData", typeof(ImageImporterTestsData).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("NAPS2.Sdk.Tests.PdfResources", typeof(PdfResources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,21 +61,31 @@ namespace NAPS2.Sdk.Tests.ImportExport {
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        internal static System.Drawing.Bitmap color_image {
+        internal static byte[] image_pdf {
             get {
-                object obj = ResourceManager.GetObject("color_image", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
+                object obj = ResourceManager.GetObject("image_pdf", resourceCulture);
+                return ((byte[])(obj));
             }
         }
         
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        internal static byte[] color_image_set {
+        internal static byte[] image_with_text_pdf {
             get {
-                object obj = ResourceManager.GetObject("color_image_set", resourceCulture);
+                object obj = ResourceManager.GetObject("image_with_text_pdf", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] word_generated_pdf {
+            get {
+                object obj = ResourceManager.GetObject("word_generated_pdf", resourceCulture);
                 return ((byte[])(obj));
             }
         }
@@ -83,9 +93,9 @@ namespace NAPS2.Sdk.Tests.ImportExport {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap patcht {
+        internal static System.Drawing.Bitmap word_p1 {
             get {
-                object obj = ResourceManager.GetObject("patcht", resourceCulture);
+                object obj = ResourceManager.GetObject("word_p1", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -93,9 +103,9 @@ namespace NAPS2.Sdk.Tests.ImportExport {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap skewed_bw {
+        internal static System.Drawing.Bitmap word_p1_rotated {
             get {
-                object obj = ResourceManager.GetObject("skewed_bw", resourceCulture);
+                object obj = ResourceManager.GetObject("word_p1_rotated", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -103,9 +113,19 @@ namespace NAPS2.Sdk.Tests.ImportExport {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap stock_cat {
+        internal static System.Drawing.Bitmap word_p2 {
             get {
-                object obj = ResourceManager.GetObject("stock_cat", resourceCulture);
+                object obj = ResourceManager.GetObject("word_p2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap word_p2_bw {
+            get {
+                object obj = ResourceManager.GetObject("word_p2_bw", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

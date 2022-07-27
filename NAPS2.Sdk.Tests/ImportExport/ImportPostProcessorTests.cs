@@ -18,7 +18,7 @@ public class ImportPostProcessorTests : ContextualTests
     [Fact]
     public void NoPostProcessing()
     {
-        using var image = ScanningContext.CreateProcessedImage(new GdiImage(SharedData.color_image));
+        using var image = ScanningContext.CreateProcessedImage(new GdiImage(ImageResources.color_image));
         using var image2 =
             _importPostProcessor.AddPostProcessingData(image, null, null, new BarcodeDetectionOptions(), false);
 
@@ -33,7 +33,7 @@ public class ImportPostProcessorTests : ContextualTests
     [Fact]
     public void DisposesOriginalImageWithNoPostProcessing()
     {
-        using var image = ScanningContext.CreateProcessedImage(new GdiImage(SharedData.color_image));
+        using var image = ScanningContext.CreateProcessedImage(new GdiImage(ImageResources.color_image));
         using var image2 =
             _importPostProcessor.AddPostProcessingData(image, null, null, new BarcodeDetectionOptions(), true);
 
@@ -45,7 +45,7 @@ public class ImportPostProcessorTests : ContextualTests
     [Fact]
     public void ThumbnailRendering()
     {
-        using var image = ScanningContext.CreateProcessedImage(new GdiImage(SharedData.color_image));
+        using var image = ScanningContext.CreateProcessedImage(new GdiImage(ImageResources.color_image));
         using var image2 =
             _importPostProcessor.AddPostProcessingData(image, null, 256, new BarcodeDetectionOptions(), false);
 
@@ -54,13 +54,13 @@ public class ImportPostProcessorTests : ContextualTests
         Assert.NotNull(actual);
         Assert.NotNull(image2.PostProcessingData.ThumbnailTransformState);
         Assert.True(image2.PostProcessingData.ThumbnailTransformState.IsEmpty);
-        ImageAsserts.Similar(SharedData.color_image_thumb_256, actual);
+        ImageAsserts.Similar(ImageResources.color_image_thumb_256, actual);
     }
 
     [Fact]
     public void ThumbnailRenderingWithTransform()
     {
-        using var image = ScanningContext.CreateProcessedImage(new GdiImage(SharedData.color_image));
+        using var image = ScanningContext.CreateProcessedImage(new GdiImage(ImageResources.color_image));
         using var image2 = image.WithTransform(new BrightnessTransform(300));
         using var image3 =
             _importPostProcessor.AddPostProcessingData(image2, null, 256, new BarcodeDetectionOptions(), false);
@@ -73,13 +73,13 @@ public class ImportPostProcessorTests : ContextualTests
         var transform =
             Assert.IsType<BrightnessTransform>(image3.PostProcessingData.ThumbnailTransformState.Transforms[0]);
         Assert.Equal(300, transform.Brightness);
-        ImageAsserts.Similar(SharedData.color_image_b_p300_thumb_256, actual);
+        ImageAsserts.Similar(ImageResources.color_image_b_p300_thumb_256, actual);
     }
 
     [Fact]
     public void ThumbnailRenderingWithPrerenderedImageAndDisposingOriginal()
     {
-        using var rendered = new GdiImage(SharedData.color_image);
+        using var rendered = new GdiImage(ImageResources.color_image);
         using var image = ScanningContext.CreateProcessedImage(rendered);
         using var image2 =
             _importPostProcessor.AddPostProcessingData(image, rendered, 256, new BarcodeDetectionOptions(), true);
@@ -89,7 +89,7 @@ public class ImportPostProcessorTests : ContextualTests
         Assert.NotNull(actual);
         Assert.NotNull(image2.PostProcessingData.ThumbnailTransformState);
         Assert.True(image2.PostProcessingData.ThumbnailTransformState.IsEmpty);
-        ImageAsserts.Similar(SharedData.color_image_thumb_256, actual);
+        ImageAsserts.Similar(ImageResources.color_image_thumb_256, actual);
         Assert.False(IsDisposed(rendered));
         Assert.False(IsDisposed(image2));
         image2.Dispose();
@@ -99,7 +99,7 @@ public class ImportPostProcessorTests : ContextualTests
     [Fact]
     public void BarcodeDetection()
     {
-        using var image = ScanningContext.CreateProcessedImage(new GdiImage(SharedData.patcht));
+        using var image = ScanningContext.CreateProcessedImage(new GdiImage(ImageResources.patcht));
         var barcodeOptions = new BarcodeDetectionOptions { DetectBarcodes = true };
         using var image2 = _importPostProcessor.AddPostProcessingData(image, null, null, barcodeOptions, false);
 
@@ -109,7 +109,7 @@ public class ImportPostProcessorTests : ContextualTests
     [Fact]
     public void BarcodeDetectionWithPrerenderedImage()
     {
-        using var rendered = new GdiImage(SharedData.patcht);
+        using var rendered = new GdiImage(ImageResources.patcht);
         using var image = ScanningContext.CreateProcessedImage(rendered);
         var barcodeOptions = new BarcodeDetectionOptions { DetectBarcodes = true };
         using var image2 = _importPostProcessor.AddPostProcessingData(image, rendered, null, barcodeOptions, false);

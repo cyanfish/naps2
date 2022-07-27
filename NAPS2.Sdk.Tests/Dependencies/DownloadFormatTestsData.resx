@@ -118,16 +118,11 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="animals" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\animals.zip;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
+  
   <data name="stock_cat" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\stock-cat.jpeg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="stock_dog" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\stock-dog.jpeg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="stock_dog_jpeg" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\stock-dog.jpeg.gz;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
 </root>

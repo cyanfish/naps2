@@ -11,19 +11,19 @@ public class PdfiumPdfExporterTests : ContextualTests
     public async Task ExportSingleImage()
     {
         var filePath = Path.Combine(FolderPath, "test.pdf");
-        using var image = ScanningContext.CreateProcessedImage(new GdiImage(SharedData.color_image));
+        using var image = ScanningContext.CreateProcessedImage(new GdiImage(ImageResources.color_image));
     
         var pdfExporter = new PdfiumPdfExporter(ScanningContext);
         await pdfExporter.Export(filePath, new[] { image }, new PdfExportParams());
         
-        PdfAsserts.AssertImages(filePath, SharedData.color_image);
+        PdfAsserts.AssertImages(filePath, ImageResources.color_image);
     }
 
     // [Fact]
     // public async Task Export100()
     // {
     //     var filePath = Path.Combine(FolderPath, "test");
-    //     using var image = ScanningContext.CreateProcessedImage(new GdiImage(SharedData.color_image), BitDepth.Color, true, -1, Enumerable.Empty<Transform>());
+    //     using var image = ScanningContext.CreateProcessedImage(new GdiImage(ImageResources.color_image), BitDepth.Color, true, -1, Enumerable.Empty<Transform>());
     //
     //     var pdfExporter = new PdfiumPdfExporter(ScanningContext);
     //     Parallel.For(0, 100, i =>

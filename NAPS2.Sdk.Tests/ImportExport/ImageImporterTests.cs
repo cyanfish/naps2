@@ -23,7 +23,7 @@ public class ImageImporterTests : ContextualTests
     public async Task ImportPngImage()
     {
         var filePath = Path.Combine(FolderPath, "image.png");
-        ImageImporterTestsData.skewed_bw.Save(filePath);
+        ImageResources.skewed_bw.Save(filePath);
         
         var source = _imageImporter.Import(filePath, new ImportParams(), (current, max) => { }, CancellationToken.None);
         var result = await source.ToList();
@@ -46,7 +46,7 @@ public class ImageImporterTests : ContextualTests
     public async Task ImportJpegImage()
     {
         var filePath = Path.Combine(FolderPath, "image.jpg");
-        ImageImporterTestsData.color_image.Save(filePath);
+        ImageResources.color_image.Save(filePath);
         
         var source = _imageImporter.Import(filePath, new ImportParams(), (current, max) => { }, CancellationToken.None);
         var result = await source.ToList();
@@ -70,7 +70,7 @@ public class ImageImporterTests : ContextualTests
     {
         var filePath = Path.Combine(FolderPath, "image.tiff");
         // We use a byte array for this resource instead of a bitmap so it's easier to save all 3 tiff frames
-        File.WriteAllBytes(filePath, ImageImporterTestsData.color_image_set);
+        File.WriteAllBytes(filePath, BinaryResources.color_image_set);
         
         var source = _imageImporter.Import(filePath, new ImportParams(), (current, max) => { }, CancellationToken.None);
         var result = await source.ToList();
@@ -79,12 +79,12 @@ public class ImageImporterTests : ContextualTests
         AssertUsesRecoveryStorage(result[0].Storage, "00001.jpg");
         Assert.False(result[0].Metadata.Lossless);
         Assert.Equal(BitDepth.Color, result[0].Metadata.BitDepth);
-        ImageAsserts.Similar(ImageImporterTestsData.color_image, result[0]);
+        ImageAsserts.Similar(ImageResources.color_image, result[0]);
         
         AssertUsesRecoveryStorage(result[2].Storage, "00003.jpg");
         Assert.False(result[2].Metadata.Lossless);
         Assert.Equal(BitDepth.Color, result[2].Metadata.BitDepth);
-        ImageAsserts.Similar(ImageImporterTestsData.stock_cat, result[2]);
+        ImageAsserts.Similar(ImageResources.stock_cat, result[2]);
         
         result[0].Dispose();
         AssertRecoveryStorageCleanedUp(result[0].Storage);
@@ -97,7 +97,7 @@ public class ImageImporterTests : ContextualTests
     public async Task ImportWithThumbnailGeneration()
     {
         var filePath = Path.Combine(FolderPath, "image.jpg");
-        ImageImporterTestsData.color_image.Save(filePath);
+        ImageResources.color_image.Save(filePath);
         
         var source = _imageImporter.Import(filePath, new ImportParams { ThumbnailSize = 256 }, (current, max) => { }, CancellationToken.None);
         var result = await source.ToList();
@@ -111,7 +111,7 @@ public class ImageImporterTests : ContextualTests
     public async Task SingleFrameProgress()
     {
         var filePath = Path.Combine(FolderPath, "image.jpg");
-        ImageImporterTestsData.color_image.Save(filePath);
+        ImageResources.color_image.Save(filePath);
 
         var progressMock = new Mock<ProgressHandler>();
         
@@ -128,7 +128,7 @@ public class ImageImporterTests : ContextualTests
     public async Task MultiFrameProgress()
     {
         var filePath = Path.Combine(FolderPath, "image.tiff");
-        File.WriteAllBytes(filePath, ImageImporterTestsData.color_image_set);
+        File.WriteAllBytes(filePath, BinaryResources.color_image_set);
 
         var progressMock = new Mock<ProgressHandler>();
         var source = _imageImporter.Import(filePath, new ImportParams(), progressMock.Object, CancellationToken.None);
@@ -152,7 +152,7 @@ public class ImageImporterTests : ContextualTests
     public async Task SingleFrameCancellation()
     {
         var filePath = Path.Combine(FolderPath, "image.jpg");
-        ImageImporterTestsData.color_image.Save(filePath);
+        ImageResources.color_image.Save(filePath);
 
         var cts = new CancellationTokenSource();
         var source = _imageImporter.Import(filePath, new ImportParams(), (current, max) => { }, cts.Token);
@@ -165,7 +165,7 @@ public class ImageImporterTests : ContextualTests
     public async Task MultiFrameCancellation()
     {
         var filePath = Path.Combine(FolderPath, "image.tiff");
-        File.WriteAllBytes(filePath, ImageImporterTestsData.color_image_set);
+        File.WriteAllBytes(filePath, BinaryResources.color_image_set);
 
         var cts = new CancellationTokenSource();
         var source = _imageImporter.Import(filePath, new ImportParams(), (current, max) => { }, cts.Token);
@@ -204,7 +204,7 @@ public class ImageImporterTests : ContextualTests
     public async Task ImportInUseFile()
     {
         var filePath = Path.Combine(FolderPath, "image.png");
-        ImageImporterTestsData.color_image.Save(filePath);
+        ImageResources.color_image.Save(filePath);
         using var stream = File.OpenWrite(filePath);
         var source = _imageImporter.Import(filePath, new ImportParams(), (current, max) => { }, CancellationToken.None);
 
@@ -216,7 +216,7 @@ public class ImageImporterTests : ContextualTests
     public async Task ImportWithBarcodeDetection()
     {
         var filePath = Path.Combine(FolderPath, "image.jpg");
-        ImageImporterTestsData.patcht.Save(filePath);
+        ImageResources.patcht.Save(filePath);
 
         var importParams = new ImportParams
         {

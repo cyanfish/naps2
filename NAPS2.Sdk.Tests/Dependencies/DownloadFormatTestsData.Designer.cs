@@ -63,16 +63,6 @@ namespace NAPS2.Sdk.Tests.Dependencies {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        internal static byte[] animals {
-            get {
-                object obj = ResourceManager.GetObject("animals", resourceCulture);
-                return ((byte[])(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
-        /// </summary>
         internal static byte[] stock_cat {
             get {
                 object obj = ResourceManager.GetObject("stock_cat", resourceCulture);
@@ -86,16 +76,6 @@ namespace NAPS2.Sdk.Tests.Dependencies {
         internal static byte[] stock_dog {
             get {
                 object obj = ResourceManager.GetObject("stock_dog", resourceCulture);
-                return ((byte[])(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
-        /// </summary>
-        internal static byte[] stock_dog_jpeg {
-            get {
-                object obj = ResourceManager.GetObject("stock_dog_jpeg", resourceCulture);
                 return ((byte[])(obj));
             }
         }

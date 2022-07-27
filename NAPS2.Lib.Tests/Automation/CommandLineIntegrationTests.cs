@@ -14,13 +14,13 @@ namespace NAPS2.Lib.Tests.Automation;
 // TODO: Write tests for every option, or as many as possible
 public class CommandLineIntegrationTests : ContextualTests
 {
-    private static readonly Bitmap Image1 = SharedData.color_image;
-    private static readonly Bitmap Image2 = TransformTestsData.color_image_h_n300;
-    private static readonly Bitmap Image3 = TransformTestsData.color_image_h_p300;
-    private static readonly Bitmap Image4 = TransformTestsData.color_image_s_n300;
-    private static readonly Bitmap Image5 = TransformTestsData.color_image_s_p300;
-    private static readonly Bitmap Image6 = TransformTestsData.color_image_bw;
-    private static readonly Bitmap PatchT = SharedData.patcht;
+    private static readonly Bitmap Image1 = ImageResources.color_image;
+    private static readonly Bitmap Image2 = ImageResources.color_image_h_n300;
+    private static readonly Bitmap Image3 = ImageResources.color_image_h_p300;
+    private static readonly Bitmap Image4 = ImageResources.color_image_s_n300;
+    private static readonly Bitmap Image5 = ImageResources.color_image_s_p300;
+    private static readonly Bitmap Image6 = ImageResources.color_image_bw;
+    private static readonly Bitmap PatchT = ImageResources.patcht;
 
     private readonly AutomationHelper _automationHelper;
 
@@ -63,8 +63,8 @@ public class CommandLineIntegrationTests : ContextualTests
     {
         var fast = Path.Combine(FolderPath, "fast");
         Directory.CreateDirectory(fast);
-        CopyResourceToFile(TesseractResources.tesseract_x64, FolderPath, "tesseract.exe");
-        CopyResourceToFile(TesseractResources.eng_traineddata, fast, "eng.traineddata");
+        CopyResourceToFile(BinaryResources.tesseract_x64, FolderPath, "tesseract.exe");
+        CopyResourceToFile(BinaryResources.eng_traineddata, fast, "eng.traineddata");
 
         var path = $"{FolderPath}/test.pdf";
         await _automationHelper.RunCommand(
@@ -74,7 +74,7 @@ public class CommandLineIntegrationTests : ContextualTests
                 Verbose = true,
                 OcrLang = "eng"
             },
-            SharedData.ocr_test);
+            ImageResources.ocr_test);
         PdfAsserts.AssertContainsText("ADVERTISEMENT.", path);
         AssertRecoveryCleanedUp();
     }

@@ -9,7 +9,7 @@ public class ConsoleAppTests : ContextualTests
     public void ConvertsImportedFile()
     {
         var importPath = Path.Combine(FolderPath, "in.png");
-        SharedData.color_image.Save(importPath);
+        ImageResources.color_image.Save(importPath);
         var outputPath = Path.Combine(FolderPath, "out.jpg");
         var args = $"-n 0 -i \"{importPath}\" -o \"{outputPath}\"";
 

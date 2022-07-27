@@ -46,7 +46,7 @@ public class RemoteScanControllerTests : ContextualTests
             ctx =>
             {
                 var callback = (Action<IMemoryImage>) ctx.Arguments[3];
-                var image = new GdiImage(DeskewTestsData.skewed);
+                var image = new GdiImage(ImageResources.skewed);
                 callback(image);
                 return Task.FromResult(true);
             }));
@@ -65,7 +65,7 @@ public class RemoteScanControllerTests : ContextualTests
         await controller.Scan(options, CancellationToken.None, ScanEvents.Stub, Callback);
         
         Assert.Single(images);
-        ImageAsserts.Similar(DeskewTestsData.deskewed, images[0]);
+        ImageAsserts.Similar(ImageResources.deskewed, images[0]);
     }
 
     private RemoteScanController CreateControllerWithMockDriver(IScanDriver scanDriver)
