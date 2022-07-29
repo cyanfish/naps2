@@ -5,6 +5,14 @@ namespace NAPS2.Images.Gdi;
 
 public static class GdiExtensions
 {
+    public static void SafeSetResolution(this Bitmap image, float xDpi, float yDpi)
+    {
+        if (xDpi > 0 && yDpi > 0)
+        {
+            image.SetResolution(xDpi, yDpi);
+        }
+    }
+
     public static Bitmap AsBitmap(this IMemoryImage image)
     {
         var gdiImage = image as GdiImage ?? throw new ArgumentException("Expected a GdiImage", nameof(image));
@@ -55,5 +63,33 @@ public static class GdiExtensions
                 return PixelFormat.Format32bppArgb;
         }
         throw new ArgumentException("Unsupported pixel format: " + pixelFormat);
+    }
+
+    public static ImagePixelFormat AsImagePixelFormat(this PixelFormat pixelFormat)
+    {
+        switch (pixelFormat)
+        {
+            case PixelFormat.Format24bppRgb:
+                return ImagePixelFormat.RGB24;
+            case PixelFormat.Format32bppArgb:
+                return ImagePixelFormat.ARGB32;
+            case PixelFormat.Format1bppIndexed:
+                return ImagePixelFormat.BW1;
+            default:
+                return ImagePixelFormat.Unsupported;
+        }
+    }
+
+    public static ImageLockMode AsImageLockMode(this LockMode lockMode)
+    {
+        switch (lockMode)
+        {
+            case LockMode.ReadOnly:
+                return ImageLockMode.ReadOnly;
+            case LockMode.WriteOnly:
+                return ImageLockMode.WriteOnly;
+            default:
+                return ImageLockMode.ReadWrite;
+        }
     }
 }
