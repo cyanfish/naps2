@@ -5,6 +5,8 @@ namespace NAPS2.Images.Storage;
 // TODO: Make internal?
 // TODO: Improve preconditions to guard against misuse causing access violations
 // TODO: Verify test coverage
+// TODO: If we add a new IMemoryImage implementation, we need to figure out RGB vs BGR (bgr is the Bitmap default)
+// TODO: A lot of the r/g/b naming is off, should be b/g/r (I only corrected it where colors are treated differently)
 public static class UnsafeImageOps
 {
     public static unsafe void ChangeBrightness(IMemoryImage bitmap, float brightnessAdjusted)
@@ -309,9 +311,9 @@ public static class UnsafeImageOps
                         if (x + k < w)
                         {
                             byte* pixel = row + (x + k) * bytesPerPixel;
-                            byte r = *pixel;
+                            byte b = *pixel;
                             byte g = *(pixel + 1);
-                            byte b = *(pixel + 2);
+                            byte r = *(pixel + 2);
                             // Use standard values for grayscale conversion to weight the RGB values
                             int luma = r * 299 + g * 587 + b * 114;
                             if (luma >= thresholdAdjusted)
@@ -422,9 +424,9 @@ public static class UnsafeImageOps
                     for (int x = 0; x < w; x++)
                     {
                         byte* pixel = row + x * bytesPerPixel;
-                        byte r = *pixel;
+                        byte b = *pixel;
                         byte g = *(pixel + 1);
-                        byte b = *(pixel + 2);
+                        byte r = *(pixel + 2);
                         // Use standard values for grayscale conversion to weight the RGB values
                         int luma = r * 299 + g * 587 + b * 114;
                         outRow[x] = luma < thresholdAdjusted;

@@ -43,9 +43,9 @@ public static class BlankDetector
         {
             for (int y = 0; y < image.Height; y++)
             {
-                int r = bytes[stride * y + x * 3];
+                int b = bytes[stride * y + x * 3];
                 int g = bytes[stride * y + x * 3 + 1];
-                int b = bytes[stride * y + x * 3 + 2];
+                int r = bytes[stride * y + x * 3 + 2];
                 // Use standard values for grayscale conversion to weight the RGB values
                 int luma = r * 299 + g * 587 + b * 114;
                 if (luma < whiteThreshold * 1000)
