@@ -113,11 +113,4 @@ public class GdiImageContext : ImageContext
         }
         return new GdiImage(bitmap);
     }
-
-    public override string SaveSmallestFormat(IMemoryImage image, string pathWithoutExtension, BitDepth bitDepth, bool highQuality, int quality, out ImageFileFormat imageFileFormat)
-    {
-        var result = ScannedImageHelper.SaveSmallestBitmap(image.AsBitmap(), pathWithoutExtension, bitDepth, highQuality, quality, out var imageFormat);
-        imageFileFormat = imageFormat.AsImageFileFormat();
-        return result;
-    }
 }

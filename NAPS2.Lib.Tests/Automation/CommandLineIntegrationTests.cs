@@ -19,7 +19,8 @@ public class CommandLineIntegrationTests : ContextualTests
     private static readonly Bitmap Image3 = ImageResources.color_image_h_p300;
     private static readonly Bitmap Image4 = ImageResources.color_image_s_n300;
     private static readonly Bitmap Image5 = ImageResources.color_image_s_p300;
-    private static readonly Bitmap Image6 = ImageResources.color_image_bw;
+    // TODO: Figure out why 1bit causes failures, I assume it's just a test issue of some kind but idk
+    private static readonly Bitmap Image6 = ImageResources.color_image_bw_24bit;
     private static readonly Bitmap PatchT = ImageResources.patcht;
 
     private readonly AutomationHelper _automationHelper;

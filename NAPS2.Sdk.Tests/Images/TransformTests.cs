@@ -300,7 +300,6 @@ public class TransformTests : ContextualTests
         actual = ImageContext.PerformTransform(actual, new BlackWhiteTransform());
         Assert.Equal(ImagePixelFormat.BW1, actual.PixelFormat);
 
-        actual = To24Bit(actual);
         ImageAsserts.Similar(expected, actual, ImageAsserts.GENERAL_RMSE_THRESHOLD);
     }
 
@@ -313,7 +312,6 @@ public class TransformTests : ContextualTests
         actual = ImageContext.PerformTransform(actual, new BlackWhiteTransform(300));
         Assert.Equal(ImagePixelFormat.BW1, actual.PixelFormat);
 
-        actual = To24Bit(actual);
         ImageAsserts.Similar(expected, actual, ImageAsserts.GENERAL_RMSE_THRESHOLD);
     }
 

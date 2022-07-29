@@ -149,17 +149,16 @@ public class ScanningContext : IDisposable
         return new ImageFileStorage(fullPath, false);
     }
 
-    public string SaveToTempFile(IMemoryImage image)
+    public string SaveToTempFile(IMemoryImage image, BitDepth bitDepth = BitDepth.Color)
     {
         var path = Path.Combine(TempFolderPath, Path.GetRandomFileName());
-        // TODO: Should we pass in bit depth to this method?
-        return ImageContext.SaveSmallestFormat(image, path, BitDepth.Color, false, -1, out _);
+        return ImageContext.SaveSmallestFormat(image, path, bitDepth, false, -1, out _);
     }
 
-    public string SaveToTempFile(ProcessedImage image)
+    public string SaveToTempFile(ProcessedImage image, BitDepth bitDepth = BitDepth.Color)
     {
         using var rendered = ImageContext.Render(image);
-        return SaveToTempFile(rendered);
+        return SaveToTempFile(rendered, bitDepth);
     }
 
     public void Dispose()

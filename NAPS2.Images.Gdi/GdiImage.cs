@@ -47,7 +47,8 @@ public class GdiImage : IMemoryImage
 
     public ImageLockState Lock(LockMode lockMode, out IntPtr scan0, out int stride)
     {
-        var bitmapData = Bitmap.LockBits(new Rectangle(0, 0, Bitmap.Width, Bitmap.Height), GetGdiLockMode(lockMode), Bitmap.PixelFormat);
+        var bitmapData = Bitmap.LockBits(new Rectangle(0, 0, Bitmap.Width, Bitmap.Height), GetGdiLockMode(lockMode),
+            Bitmap.PixelFormat);
         scan0 = bitmapData.Scan0;
         stride = Math.Abs(bitmapData.Stride);
         return new GdiImageLockState(Bitmap, bitmapData);
@@ -66,12 +67,19 @@ public class GdiImage : IMemoryImage
         }
     }
 
-    public void Save(string path, ImageFileFormat imageFileFormat = ImageFileFormat.Unspecified)
+    public void Save(string path, ImageFileFormat imageFileFormat = ImageFileFormat.Unspecified, int quality = -1)
     {
-        // TODO: Do we need to infer the file format from the extension ourselves? A particular case: saving an image with an alpha channel to a .jpeg file, how should we handle that? Default behavior is save it as a png with a .jpg extension
         if (imageFileFormat == ImageFileFormat.Unspecified)
         {
-            Bitmap.Save(path);
+            imageFileFormat = GetFileFormatFromExtension(path);
+        }
+        if (imageFileFormat == ImageFileFormat.Jpeg && quality != -1)
+        {
+            quality = Math.Max(Math.Min(quality, 100), 0);
+            var encoder = ImageCodecInfo.GetImageEncoders().First(x => x.FormatID == ImageFormat.Jpeg.Guid);
+            var encoderParams = new EncoderParameters(1);
+            encoderParams.Param[0] = new EncoderParameter(Encoder.Quality, quality);
+            Bitmap.Save(path, encoder, encoderParams);
         }
         else
         {
@@ -79,13 +87,35 @@ public class GdiImage : IMemoryImage
         }
     }
 
-    public void Save(Stream stream, ImageFileFormat imageFileFormat)
+    public void Save(Stream stream, ImageFileFormat imageFileFormat, int quality = -1)
     {
         if (imageFileFormat == ImageFileFormat.Unspecified)
         {
             throw new ArgumentException("Format required to save to a stream", nameof(imageFileFormat));
         }
-        Bitmap.Save(stream, imageFileFormat.AsImageFormat());
+        if (imageFileFormat == ImageFileFormat.Jpeg && quality != -1)
+        {
+            quality = Math.Max(Math.Min(quality, 100), 0);
+            var encoder = ImageCodecInfo.GetImageEncoders().First(x => x.FormatID == ImageFormat.Jpeg.Guid);
+            var encoderParams = new EncoderParameters(1);
+            encoderParams.Param[0] = new EncoderParameter(Encoder.Quality, quality);
+            Bitmap.Save(stream, encoder, encoderParams);
+        }
+        else
+        {
+            Bitmap.Save(stream, imageFileFormat.AsImageFormat());
+        }
+    }
+
+    private ImageFileFormat GetFileFormatFromExtension(string path)
+    {
+        return Path.GetExtension(path).ToLowerInvariant() switch
+        {
+            ".png" => ImageFileFormat.Png,
+            ".bmp" => ImageFileFormat.Bmp,
+            ".jpg" or ".jpeg" => ImageFileFormat.Jpeg,
+            _ => throw new ArgumentException($"Could not infer file format from extension: {path}")
+        };
     }
 
     public void Dispose()
@@ -95,6 +125,6 @@ public class GdiImage : IMemoryImage
 
     public IMemoryImage Clone()
     {
-        return new GdiImage((Bitmap)Bitmap.Clone());
+        return new GdiImage((Bitmap) Bitmap.Clone());
     }
 }

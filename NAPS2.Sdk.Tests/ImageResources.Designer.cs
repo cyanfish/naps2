@@ -73,6 +73,16 @@ namespace NAPS2.Sdk.Tests {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap color_image_alpha {
+            get {
+                object obj = ResourceManager.GetObject("color_image_alpha", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap color_image_b_n300 {
             get {
                 object obj = ResourceManager.GetObject("color_image_b_n300", resourceCulture);
@@ -106,6 +116,26 @@ namespace NAPS2.Sdk.Tests {
         internal static System.Drawing.Bitmap color_image_bw {
             get {
                 object obj = ResourceManager.GetObject("color_image_bw", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap color_image_bw_24bit {
+            get {
+                object obj = ResourceManager.GetObject("color_image_bw_24bit", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap color_image_bw_jpg {
+            get {
+                object obj = ResourceManager.GetObject("color_image_bw_jpg", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -166,6 +196,26 @@ namespace NAPS2.Sdk.Tests {
         internal static System.Drawing.Bitmap color_image_h_p300 {
             get {
                 object obj = ResourceManager.GetObject("color_image_h_p300", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap color_image_low_quality {
+            get {
+                object obj = ResourceManager.GetObject("color_image_low_quality", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap color_image_png {
+            get {
+                object obj = ResourceManager.GetObject("color_image_png", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

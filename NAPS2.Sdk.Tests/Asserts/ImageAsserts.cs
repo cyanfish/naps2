@@ -14,7 +14,7 @@ public static class ImageAsserts
 
     public const double NULL_RMSE_THRESHOLD = 0.6;
 
-    private const double RESOLUTION_THRESHOLD = 0.02;
+    private const double RESOLUTION_THRESHOLD = 0.05;
 
     public static void Similar(Bitmap first, ProcessedImage second, double rmseThreshold = GENERAL_RMSE_THRESHOLD,
         bool ignoreFormat = false)
@@ -29,8 +29,33 @@ public static class ImageAsserts
         Similar(new GdiImage(first), second, rmseThreshold, ignoreFormat);
     }
 
-    public static unsafe void Similar(IMemoryImage first, IMemoryImage second,
+    public static void Similar(IMemoryImage first, IMemoryImage second,
         double rmseThreshold = GENERAL_RMSE_THRESHOLD, bool ignoreFormat = false)
+    {
+        Similar(first, second, rmseThreshold, ignoreFormat, true);
+    }
+
+    public static void NotSimilar(Bitmap first, ProcessedImage second, double rmseThreshold = GENERAL_RMSE_THRESHOLD,
+        bool ignoreFormat = false)
+    {
+        using var rendered = new GdiImageContext().Render(second);
+        NotSimilar(new GdiImage(first), rendered, rmseThreshold, ignoreFormat);
+    }
+
+    public static void NotSimilar(Bitmap first, IMemoryImage second, double rmseThreshold = GENERAL_RMSE_THRESHOLD,
+        bool ignoreFormat = false)
+    {
+        NotSimilar(new GdiImage(first), second, rmseThreshold, ignoreFormat);
+    }
+
+    public static void NotSimilar(IMemoryImage first, IMemoryImage second,
+        double rmseThreshold = GENERAL_RMSE_THRESHOLD, bool ignoreFormat = false)
+    {
+        Similar(first, second, rmseThreshold, ignoreFormat, false);
+    }
+
+    private static unsafe void Similar(IMemoryImage first, IMemoryImage second,
+        double rmseThreshold, bool ignoreFormat, bool isSimilar)
     {
         if (first.PixelFormat != ImagePixelFormat.BW1 && first.PixelFormat != ImagePixelFormat.RGB24 &&
             first.PixelFormat != ImagePixelFormat.ARGB32)
@@ -98,7 +123,14 @@ public static class ImageAsserts
         }
 
         double rmse = Math.Sqrt(total / (double) div);
-        Assert.True(rmse <= rmseThreshold, $"RMSE was {rmse}, expected <= {rmseThreshold}");
+        if (isSimilar)
+        {
+            Assert.True(rmse <= rmseThreshold, $"RMSE was {rmse}, expected <= {rmseThreshold}");
+        }
+        else
+        {
+            Assert.True(rmse > rmseThreshold, $"RMSE was {rmse}, expected > {rmseThreshold}");
+        }
     }
 
     public static void PixelColors(IMemoryImage image, PixelColorData colorData)

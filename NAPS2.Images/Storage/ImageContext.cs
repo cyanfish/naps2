@@ -132,6 +132,66 @@ public abstract class ImageContext
     /// <returns></returns>
     public abstract IMemoryImage Create(int width, int height, ImagePixelFormat pixelFormat);
 
-    public abstract string SaveSmallestFormat(IMemoryImage image, string pathWithoutExtension, BitDepth bitDepth,
-        bool highQuality, int quality, out ImageFileFormat imageFileFormat);
+    public string SaveSmallestFormat(IMemoryImage image, string pathWithoutExtension, BitDepth bitDepth,
+        bool highQuality, int quality, out ImageFileFormat imageFileFormat) {
+        // Store the image in as little space as possible
+        if (image.PixelFormat == ImagePixelFormat.BW1)
+        {
+            // Already encoded as 1-bit
+            imageFileFormat = ImageFileFormat.Png;
+            return EncodePng(image, pathWithoutExtension);
+        }
+        if (bitDepth == BitDepth.BlackAndWhite)
+        {
+            // Convert to a 1-bit bitmap before saving to help compression
+            // This is lossless and takes up minimal storage (best of both worlds), so highQuality is irrelevant
+            using var bwImage = PerformTransform(image.Clone(), new BlackWhiteTransform());
+            imageFileFormat = ImageFileFormat.Png;
+            return EncodePng(bwImage, pathWithoutExtension);
+            // Note that if a black and white image comes from native WIA, bitDepth is unknown,
+            // so the image will be png-encoded below instead of using a 1-bit bitmap
+        }
+        if (highQuality)
+        {
+            // Store as PNG
+            // Lossless, but some images (color/grayscale) take up lots of storage
+            imageFileFormat = ImageFileFormat.Png;
+            return EncodePng(image, pathWithoutExtension);
+        }
+        if (image.OriginalFileFormat == ImageFileFormat.Jpeg)
+        {
+            // Store as JPEG
+            // Since the image was originally in JPEG format, PNG is unlikely to have size benefits
+            imageFileFormat = ImageFileFormat.Jpeg;
+            return EncodeJpeg(image, pathWithoutExtension, quality);
+        }
+        // Store as PNG/JPEG depending on which is smaller
+        var pngEncoded = EncodePng(image, pathWithoutExtension);
+        var jpegEncoded = EncodeJpeg(image, pathWithoutExtension, quality);
+        if (new FileInfo(pngEncoded).Length <= new FileInfo(jpegEncoded).Length)
+        {
+            // Probably a black and white image (e.g. from native WIA, where bitDepth is unknown), which PNG compresses well vs. JPEG
+            File.Delete(jpegEncoded);
+            imageFileFormat = ImageFileFormat.Png;
+            return pngEncoded;
+        }
+        // Probably a color or grayscale image, which JPEG compresses well vs. PNG
+        File.Delete(pngEncoded);
+        imageFileFormat = ImageFileFormat.Jpeg;
+        return jpegEncoded;
+    }
+
+    private static string EncodePng(IMemoryImage image, string pathWithoutExt)
+    {
+        var path = pathWithoutExt + ".png";
+        image.Save(path, ImageFileFormat.Png);
+        return path;
+    }
+
+    private static string EncodeJpeg(IMemoryImage image, string pathWithoutExt, int quality)
+    {
+        var path = pathWithoutExt + ".jpg";
+        image.Save(path, ImageFileFormat.Jpeg, quality);
+        return path;
+    }
 }

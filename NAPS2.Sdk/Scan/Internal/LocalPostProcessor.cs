@@ -30,7 +30,7 @@ internal class LocalPostProcessor : ILocalPostProcessor
             {
                 throw new InvalidOperationException("Expected OCR tempPath to be set for non-network scan");
             }
-            tempPath = _scanningContext.SaveToTempFile(image);
+            tempPath = _scanningContext.SaveToTempFile(image, options.BitDepth);
         }
         _ocrController.Start(ref image, tempPath, options.OcrParams, options.OcrPriority).AssertNoAwait();
     }

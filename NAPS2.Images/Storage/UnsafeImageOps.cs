@@ -3,7 +3,8 @@
 namespace NAPS2.Images.Storage;
 
 // TODO: Make internal?
-// TODO: Use IMemoryImage where possible
+// TODO: Improve preconditions to guard against misuse causing access violations
+// TODO: Verify test coverage
 public static class UnsafeImageOps
 {
     public static unsafe void ChangeBrightness(IMemoryImage bitmap, float brightnessAdjusted)
@@ -311,7 +312,6 @@ public static class UnsafeImageOps
                             byte r = *pixel;
                             byte g = *(pixel + 1);
                             byte b = *(pixel + 2);
-                            // TODO: Are R/G/B correct or is this inverted?
                             // Use standard values for grayscale conversion to weight the RGB values
                             int luma = r * 299 + g * 587 + b * 114;
                             if (luma >= thresholdAdjusted)

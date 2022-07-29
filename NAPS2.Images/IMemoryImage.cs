@@ -22,9 +22,9 @@ public interface IMemoryImage : IImageStorage
 
     ImageLockState Lock(LockMode lockMode, out IntPtr scan0, out int stride);
 
-    void Save(string path, ImageFileFormat imageFormat = ImageFileFormat.Unspecified);
+    void Save(string path, ImageFileFormat imageFormat = ImageFileFormat.Unspecified, int quality = -1);
 
-    void Save(Stream stream, ImageFileFormat imageFormat);
+    void Save(Stream stream, ImageFileFormat imageFormat, int quality = -1);
 
     IMemoryImage Clone();
 }
