@@ -330,6 +330,49 @@ public static class UnsafeImageOps
         return monoBitmap;
     }
 
+    public static unsafe IMemoryImage ConvertTo24Bpp(IMemoryImage bitmap, ImageContext imageContext)
+    {
+        int bytesPerPixel = 3;
+
+        using var lockState = bitmap.Lock(LockMode.ReadOnly, out var monoScan0, out var monoStride);
+        byte* monoData = (byte*)monoScan0;
+        int h = bitmap.Height;
+        int w = bitmap.Width;
+
+        var colorBitmap = imageContext.Create(bitmap.Width, bitmap.Height, ImagePixelFormat.RGB24);
+        using var colorBitmapLockState = colorBitmap.Lock(LockMode.WriteOnly, out var colorScan0, out var colorStride);
+        byte* colorData = (byte*)colorScan0;
+
+        PartitionRows(h, (start, end) =>
+        {
+            for (int y = start; y < end; y++)
+            {
+                byte* row = colorData + colorStride * y;
+                for (int x = 0; x < w; x += 8)
+                {
+                    byte monoByte = *(monoData + y * monoStride + x / 8);
+                    for (int k = 7; k >= 0; k--)
+                    {
+                        var bit = monoByte & 1;
+                        monoByte >>= 1;
+                        if (x + k < w)
+                        {
+                            var val = (byte) (bit == 0 ? 0 : 255);
+                            byte* pixel = row + (x + k) * bytesPerPixel;
+                            *pixel = val;
+                            *(pixel + 1) = val;
+                            *(pixel + 2) = val;
+                        }
+                    }
+                }
+            }
+        });
+
+        colorBitmap.SetResolution(bitmap.HorizontalResolution, bitmap.VerticalResolution);
+
+        return colorBitmap;
+    }
+
     public static unsafe BitArray[] ConvertToBitArrays(IMemoryImage bitmap)
     {
         bool bitPerPixel = bitmap.PixelFormat == ImagePixelFormat.BW1;

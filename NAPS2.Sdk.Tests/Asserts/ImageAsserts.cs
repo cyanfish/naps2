@@ -76,14 +76,9 @@ public static class ImageAsserts
             first.VerticalResolution - RESOLUTION_THRESHOLD,
             first.VerticalResolution + RESOLUTION_THRESHOLD);
 
-        // TODO: Cleanup
-        var transfomer = new GdiImageTransformer(new GdiImageContext());
-        var firstGdi = (GdiImage) first;
-        var secondGdi = (GdiImage) second;
-        transfomer.EnsurePixelFormat(ref firstGdi);
-        transfomer.EnsurePixelFormat(ref secondGdi);
-        first = firstGdi;
-        second = secondGdi;
+        var imageContext = new GdiImageContext();
+        first = imageContext.PerformTransform(first, new ColorBitDepthTransform());
+        second = imageContext.PerformTransform(second, new ColorBitDepthTransform());
 
         using var lock1 = first.Lock(LockMode.ReadOnly, out var scan01, out var stride1);
         using var lock2 = second.Lock(LockMode.ReadOnly, out var scan02, out var stride2);

@@ -316,6 +316,19 @@ public class TransformTests : ContextualTests
     }
 
     [Fact]
+    public void ColorBitDepth()
+    {
+        IMemoryImage actual = new GdiImage(ImageResources.color_image_bw);
+        IMemoryImage expected = new GdiImage(ImageResources.color_image_bw_24bit);
+
+        Assert.Equal(ImagePixelFormat.BW1, actual.PixelFormat);
+        actual = ImageContext.PerformTransform(actual, new ColorBitDepthTransform());
+        Assert.Equal(ImagePixelFormat.RGB24, actual.PixelFormat);
+
+        ImageAsserts.Similar(expected, actual, ImageAsserts.NULL_RMSE_THRESHOLD);
+    }
+
+    [Fact]
     public void Thumbnail()
     {
         IMemoryImage actual = new GdiImage(ImageResources.color_image);
@@ -324,14 +337,5 @@ public class TransformTests : ContextualTests
         actual = ImageContext.PerformTransform(actual, new ThumbnailTransform(256));
 
         ImageAsserts.Similar(expected, actual, ImageAsserts.GENERAL_RMSE_THRESHOLD);
-    }
-
-    private IMemoryImage To24Bit(IMemoryImage actual)
-    {
-        // Convert to 24-bit for comparison
-        // TODO: Maybe have a Color24BitTransform or something to be more reusable
-        var gdiImage = (GdiImage) actual;
-        new GdiImageTransformer(ImageContext).EnsurePixelFormat(ref gdiImage);
-        return gdiImage;
     }
 }

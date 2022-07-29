@@ -3,6 +3,7 @@ using NAPS2.Images.Gdi;
 
 namespace NAPS2.Images;
 
+// TODO: Add tests
 public static class BlankDetector
 {
     // If the pixel value (0-255) >= white_threshold, then it counts as a white pixel.
@@ -12,17 +13,12 @@ public static class BlankDetector
     private const double COVERAGE_THRESHOLD_MIN = 0.00;
     private const double COVERAGE_THRESHOLD_MAX = 0.01;
 
-    public static bool IsBlank(IMemoryImage image, int whiteThresholdNorm, int coverageThresholdNorm)
+    public static bool IsBlank(ImageContext imageContext, IMemoryImage image, int whiteThresholdNorm, int coverageThresholdNorm)
     {
         if (image.PixelFormat == ImagePixelFormat.BW1)
         {
-            // TODO: Make more generic
-            if (!(image is GdiImage gdiImage))
-            {
-                throw new InvalidOperationException("Patch code detection only supported for GdiStorage");
-            }
-            using var bitmap2 = BitmapHelper.CopyToBpp(gdiImage.Bitmap, 8);
-            return IsBlankRGB(new GdiImage(bitmap2), whiteThresholdNorm, coverageThresholdNorm);
+            using var bitmap2 = imageContext.PerformTransform(image, new ColorBitDepthTransform());
+            return IsBlankRGB(bitmap2, whiteThresholdNorm, coverageThresholdNorm);
         }
         if (image.PixelFormat != ImagePixelFormat.RGB24)
         {

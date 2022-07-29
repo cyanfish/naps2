@@ -11,6 +11,10 @@ public abstract class AbstractImageTransformer<TImage> where TImage : IMemoryIma
 
     public TImage Apply(TImage image, Transform transform)
     {
+        if (image.PixelFormat == ImagePixelFormat.Unsupported)
+        {
+            throw new ArgumentException("Unsupported pixel format for transforms");
+        }
         switch (transform)
         {
             case BrightnessTransform brightnessTransform:
@@ -33,6 +37,8 @@ public abstract class AbstractImageTransformer<TImage> where TImage : IMemoryIma
                 return PerformTransform(image, scaleTransform);
             case BlackWhiteTransform blackWhiteTransform:
                 return PerformTransform(image, blackWhiteTransform);
+            case ColorBitDepthTransform colorBitDepthTransform:
+                return PerformTransform(image, colorBitDepthTransform);
             case ThumbnailTransform thumbnailTransform:
                 return PerformTransform(image, thumbnailTransform);
             default:
@@ -64,7 +70,7 @@ public abstract class AbstractImageTransformer<TImage> where TImage : IMemoryIma
 
     protected virtual TImage PerformTransform(TImage image, HueTransform transform)
     {
-        if (image.PixelFormat != ImagePixelFormat.RGB24 && image.PixelFormat != ImagePixelFormat.ARGB32)
+        if (image.PixelFormat == ImagePixelFormat.BW1)
         {
             // No need to handle 1bpp since hue shifts are null transforms
             return image;
@@ -93,7 +99,7 @@ public abstract class AbstractImageTransformer<TImage> where TImage : IMemoryIma
 
     protected virtual TImage PerformTransform(TImage image, BlackWhiteTransform transform)
     {
-        if (image.PixelFormat != ImagePixelFormat.RGB24 && image.PixelFormat != ImagePixelFormat.ARGB32)
+        if (image.PixelFormat == ImagePixelFormat.BW1)
         {
             return image;
         }
@@ -102,6 +108,19 @@ public abstract class AbstractImageTransformer<TImage> where TImage : IMemoryIma
         image.Dispose();
 
         return (TImage) monoBitmap;
+    }
+
+    protected virtual TImage PerformTransform(TImage image, ColorBitDepthTransform transform)
+    {
+        if (image.PixelFormat != ImagePixelFormat.BW1)
+        {
+            return image;
+        }
+
+        var colorBitmap = UnsafeImageOps.ConvertTo24Bpp(image, _imageContext);
+        image.Dispose();
+
+        return (TImage) colorBitmap;
     }
 
     /// <summary>
@@ -115,13 +134,25 @@ public abstract class AbstractImageTransformer<TImage> where TImage : IMemoryIma
     /// <summary>
     /// If the provided bitmap is 1-bit (black and white), replace it with a 24-bit bitmap so that image transforms will work. If the bitmap is replaced, the original is disposed.
     /// </summary>
-    /// <param name="bitmap">The bitmap that may be replaced.</param>
-    public abstract void EnsurePixelFormat(ref TImage bitmap);
+    /// <param name="image">The bitmap that may be replaced.</param>
+    protected void EnsurePixelFormat(ref TImage image)
+    {
+        if (image.PixelFormat == ImagePixelFormat.BW1)
+        {
+            image = PerformTransform(image, new ColorBitDepthTransform());
+        }
+    }
 
     /// <summary>
     /// If the original bitmap is 1-bit (black and white), optimize the result by making it 1-bit too.
     /// </summary>
     /// <param name="original">The original bitmap that is used to determine whether the result should be black and white.</param>
     /// <param name="result">The result that may be replaced.</param>
-    protected abstract void OptimizePixelFormat(TImage original, ref TImage result);
+    protected void OptimizePixelFormat(TImage original, ref TImage result)
+    {
+        if (original.PixelFormat == ImagePixelFormat.BW1)
+        {
+            result = PerformTransform(result, new BlackWhiteTransform());
+        }
+    }
 }

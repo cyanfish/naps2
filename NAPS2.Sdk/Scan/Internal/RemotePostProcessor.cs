@@ -31,8 +31,8 @@ internal class RemotePostProcessor : IRemotePostProcessor
         image = DoInitialTransforms(image, options);
         try
         {
-            if (options.ExcludeBlankPages && BlankDetector.IsBlank(image, options.BlankPageWhiteThreshold,
-                    options.BlankPageCoverageThreshold))
+            if (options.ExcludeBlankPages && BlankDetector.IsBlank(_scanningContext.ImageContext, image,
+                    options.BlankPageWhiteThreshold, options.BlankPageCoverageThreshold))
             {
                 // TODO: Consider annotating the image as blank via postprocessingdata rather than excluding here
                 // TODO: In theory we might want to add some functionality to allow the user to correct blank detection

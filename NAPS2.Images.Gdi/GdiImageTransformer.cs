@@ -337,30 +337,4 @@ public class GdiImageTransformer : AbstractImageTransformer<GdiImage>
         }
         return new GdiImage(result);
     }
-
-    public override void EnsurePixelFormat(ref GdiImage image)
-    {
-        if (image.PixelFormat == ImagePixelFormat.BW1)
-        {
-            // Copy B&W over to grayscale
-            var bitmap2 = new Bitmap(image.Width, image.Height, PixelFormat.Format24bppRgb);
-            bitmap2.SafeSetResolution(image.HorizontalResolution, image.VerticalResolution);
-            using (var g = Graphics.FromImage(bitmap2))
-            {
-                g.DrawImage(image.Bitmap, 0, 0);
-            }
-            image.Dispose();
-            image = new GdiImage(bitmap2);
-        }
-    }
-
-    protected override void OptimizePixelFormat(GdiImage original, ref GdiImage result)
-    {
-        if (original.PixelFormat == ImagePixelFormat.BW1)
-        {
-            var bitmap2 = (Bitmap)BitmapHelper.CopyToBpp(result.Bitmap, 1).Clone();
-            result.Dispose();
-            result = new GdiImage(bitmap2);
-        }
-    }
 }
