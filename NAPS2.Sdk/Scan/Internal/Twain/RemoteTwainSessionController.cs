@@ -23,7 +23,7 @@ public class RemoteTwainSessionController : ITwainSessionController
                 "ScanningContext.WorkerFactory must be set to use TWAIN from a 64-bit process.");
         }
         using var workerContext = _scanningContext.WorkerFactory.Create();
-        return await workerContext.Service.GetDeviceList(options);
+        return await workerContext.Service.TwainGetDeviceList(options);
     }
 
     public async Task StartScan(ScanOptions options, ITwainEvents twainEvents, CancellationToken cancelToken)

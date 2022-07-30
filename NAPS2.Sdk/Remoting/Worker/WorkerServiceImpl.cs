@@ -14,6 +14,8 @@ using NAPS2.Serialization;
 
 namespace NAPS2.Remoting.Worker;
 
+// TODO: Scan and GetDeviceList are obsolete (see TwainScan and TwainGetDeviceList), as Twain is the only thing that
+// needs the worker. But I'm keeping them around for now as they could come in handy later. 
 public class WorkerServiceImpl : WorkerService.WorkerServiceBase
 {
     private readonly ScanningContext _scanningContext;
@@ -275,6 +277,24 @@ public class WorkerServiceImpl : WorkerService.WorkerServiceBase
                 await _ongoingCallFinished.WaitOneAsync();
             }
         }).AssertNoAwait();
+    }
+
+    public override async Task<GetDeviceListResponse> TwainGetDeviceList(GetDeviceListRequest request, ServerCallContext context)
+    {
+        using var callRef = StartCall();
+        try
+        {
+            var options = request.OptionsXml.FromXml<ScanOptions>();
+            var deviceList = await _twainSessionController.GetDeviceList(options);
+            return new GetDeviceListResponse
+            {
+                DeviceListXml = deviceList.ToXml()
+            };
+        }
+        catch (Exception e)
+        {
+            return new GetDeviceListResponse { Error = RemotingHelper.ToError(e) };
+        }
     }
 
     public override async Task TwainScan(TwainScanRequest request,

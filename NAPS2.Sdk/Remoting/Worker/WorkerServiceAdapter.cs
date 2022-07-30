@@ -165,6 +165,14 @@ public class WorkerServiceAdapter
         }
     }
 
+    public async Task<List<ScanDevice>> TwainGetDeviceList(ScanOptions options)
+    {
+        var req = new GetDeviceListRequest { OptionsXml = options.ToXml() };
+        var resp = await _client.TwainGetDeviceListAsync(req);
+        RemotingHelper.HandleErrors(resp.Error);
+        return resp.DeviceListXml.FromXml<List<ScanDevice>>();
+    }
+
     public ProcessedImage ImportPostProcess(ScanningContext scanningContext, ProcessedImage img, int? thumbnailSize,
         BarcodeDetectionOptions barcodeDetectionOptions)
     {

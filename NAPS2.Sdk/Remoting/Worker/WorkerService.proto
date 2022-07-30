@@ -12,9 +12,10 @@ service WorkerService {
 	rpc RenderThumbnail (RenderThumbnailRequest) returns (RenderThumbnailResponse) {}
 	rpc RenderPdf (RenderPdfRequest) returns (RenderPdfResponse) {}
 	rpc ImportPostProcess (ImportPostProcessRequest) returns (ImportPostProcessResponse) {}
-	rpc Scan (ScanRequest) returns (stream ScanResponse) {}
-	rpc TwainScan (TwainScanRequest) returns (stream TwainScanResponse) {}
 	rpc GetDeviceList (GetDeviceListRequest) returns (GetDeviceListResponse) {}
+	rpc Scan (ScanRequest) returns (stream ScanResponse) {}
+	rpc TwainGetDeviceList (GetDeviceListRequest) returns (GetDeviceListResponse) {}
+	rpc TwainScan (TwainScanRequest) returns (stream TwainScanResponse) {}
 	rpc StopWorker (StopWorkerRequest) returns (StopWorkerResponse) {}
 }
 
