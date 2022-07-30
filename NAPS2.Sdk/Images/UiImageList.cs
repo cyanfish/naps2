@@ -131,5 +131,21 @@ public class UiImageList
     /// made since the last save. No disposal is needed.
     /// </summary>
     /// <param name="ImageReferences"></param>
-    public record StateToken(ImmutableList<ProcessedImage.WeakReference> ImageReferences);
+    public record StateToken(ImmutableList<ProcessedImage.WeakReference> ImageReferences)
+    {
+        public virtual bool Equals(StateToken? other)
+        {
+            if (other == null)
+            {
+                return false;
+            }
+
+            return ObjectHelpers.ListEquals(ImageReferences, other.ImageReferences);
+        }
+
+        public override int GetHashCode()
+        {
+            return ObjectHelpers.ListHashCode(ImageReferences);
+        }
+    }
 }
