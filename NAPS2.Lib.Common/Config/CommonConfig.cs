@@ -30,7 +30,7 @@ public class CommonConfig
     public ImmutableHashSet<string> BackgroundOperations { get; set; } = ImmutableHashSet<string>.Empty;
 
     [Common]
-    public ImmutableList<NamedPageSize>? CustomPageSizePresets { get; set; }
+    public ImmutableList<NamedPageSize> CustomPageSizePresets { get; set; } = ImmutableList<NamedPageSize>.Empty;
 
     [User]
     public ImmutableList<ScanProxyConfig>? SavedProxies { get; set; }
