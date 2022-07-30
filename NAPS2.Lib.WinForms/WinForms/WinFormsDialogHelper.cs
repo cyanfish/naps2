@@ -111,6 +111,11 @@ public class WinFormsDialogHelper : DialogHelper
 
     private string? GetDir(string? defaultPath)
     {
+        if (Paths.IsTestAppDataPath)
+        {
+            // For UI test automation we choose the appdata folder for test isolation and consistency
+            return Paths.AppData;
+        }
         return Path.IsPathRooted(defaultPath)
             ? Path.GetDirectoryName(defaultPath)
             : "";

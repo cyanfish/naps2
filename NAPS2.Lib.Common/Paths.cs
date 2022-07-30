@@ -25,18 +25,25 @@ public static class Paths
         if (!string.IsNullOrEmpty(dataPathFromEnv))
         {
             AppDataPath = dataPathFromEnv;
+            IsTestAppDataPath = true;
         }
         var args = Environment.GetCommandLineArgs();
         var flagIndex = Array.IndexOf(args, "/Naps2TestData");
         if (flagIndex >= 0 && flagIndex < args.Length - 1)
         {
             AppDataPath = args[flagIndex + 1];
+            IsTestAppDataPath = true;
         }
 
         TempPath = Path.Combine(AppDataPath, "temp");
         RecoveryPath = Path.Combine(AppDataPath, "recovery");
         ComponentsPath = Path.Combine(AppDataPath, "components");
     }
+
+    /// <summary>
+    /// Whether we're in a test and NAPS2_TEST_DATA or /Naps2TestData is set. 
+    /// </summary>
+    public static readonly bool IsTestAppDataPath;
 
     public static string AppData => EnsureFolderExists(AppDataPath);
 
