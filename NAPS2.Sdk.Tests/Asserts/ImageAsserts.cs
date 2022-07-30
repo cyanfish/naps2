@@ -16,6 +16,8 @@ public static class ImageAsserts
 
     private const double RESOLUTION_THRESHOLD = 0.05;
 
+    private const double DIMENSIONS_THRESHOLD = 0.05;
+
     public static void Similar(Bitmap first, ProcessedImage second, double rmseThreshold = GENERAL_RMSE_THRESHOLD,
         bool ignoreFormat = false)
     {
@@ -167,5 +169,14 @@ public static class ImageAsserts
         {
             return GetEnumerator();
         }
+    }
+
+    public static void Inches(string path, double expectedWidth, int expectedHeight)
+    {
+        var image = new GdiImageContext().Load(path);
+        var actualWidth = image.Width / image.HorizontalResolution;
+        var actualHeight = image.Height / image.VerticalResolution;
+        Assert.InRange(actualWidth, expectedWidth - DIMENSIONS_THRESHOLD, expectedWidth + DIMENSIONS_THRESHOLD);
+        Assert.InRange(actualHeight, expectedHeight - DIMENSIONS_THRESHOLD, expectedHeight + DIMENSIONS_THRESHOLD);
     }
 }
