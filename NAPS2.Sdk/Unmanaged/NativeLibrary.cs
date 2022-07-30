@@ -9,8 +9,11 @@ public class NativeLibrary
 
     public NativeLibrary(string libraryPath)
     {
+        LibraryPath = libraryPath;
         _libraryHandle = new Lazy<IntPtr>(() => PlatformCompat.System.LoadLibrary(libraryPath));
     }
+
+    public string LibraryPath { get; }
 
     public IntPtr LibraryHandle => _libraryHandle.Value;
 

@@ -19,7 +19,7 @@ public class PdfiumNativeLibrary : Unmanaged.NativeLibrary
         var assemblyFolder = Path.GetDirectoryName(assemblyLocation);
         var testRoot = Environment.GetEnvironmentVariable("NAPS2_TEST_ROOT");
         var depsFolder = string.IsNullOrEmpty(testRoot) ? assemblyFolder : testRoot;
-        var libraryPath = Path.Combine(depsFolder, PlatformCompat.System.PdfiumLibraryPath);
+        var libraryPath = Path.Combine(depsFolder!, PlatformCompat.System.PdfiumLibraryPath);
         if (!File.Exists(libraryPath))
         {
             throw new Exception($"Library does not exist: {libraryPath}");
@@ -81,7 +81,7 @@ public class PdfiumNativeLibrary : Unmanaged.NativeLibrary
 
     public delegate void FPDF_CloseDocument_delegate(IntPtr document);
 
-    public delegate bool FPDF_SaveAsCopy_delegate(IntPtr document, IntPtr fileWrite, int flags);
+    public delegate bool FPDF_SaveAsCopy_delegate(IntPtr document, ref FPDF_FileWrite fileWrite, int flags);
 
     public delegate int FPDF_GetPageCount_delegate(IntPtr document);
 
@@ -122,10 +122,10 @@ public class PdfiumNativeLibrary : Unmanaged.NativeLibrary
     public delegate bool FPDFPageObj_SetMatrix_delegate(IntPtr page_object, ref PdfMatrix matrix);
 
     public delegate bool FPDFImageObj_LoadJpegFile_delegate(IntPtr pages, int count, IntPtr image_object,
-        IntPtr file_access);
+        ref FPDF_FileAccess file_access);
 
     public delegate bool FPDFImageObj_LoadJpegFileInline_delegate(IntPtr pages, int count, IntPtr image_object,
-        IntPtr file_access);
+        ref FPDF_FileAccess file_access);
 
     public delegate int FPDFPage_CountObjects_delegate(IntPtr page);
 
@@ -148,8 +148,8 @@ public class PdfiumNativeLibrary : Unmanaged.NativeLibrary
 
     public delegate int FPDFPageObj_GetType_delegate(IntPtr page_object);
 
-    public delegate ulong
-        FPDFTextObj_GetText_delegate(IntPtr text_object, IntPtr text_page, byte[]? buffer, ulong length);
+    public delegate IntPtr
+        FPDFTextObj_GetText_delegate(IntPtr text_object, IntPtr text_page, byte[]? buffer, IntPtr length);
 
     public delegate int FPDFTextObj_GetTextRenderMode_delegate(IntPtr text);
 
@@ -215,20 +215,20 @@ public class PdfiumNativeLibrary : Unmanaged.NativeLibrary
 
     public struct FPDF_FileWrite
     {
-        public int version = 1;
+        public int version;
         [MarshalAs(UnmanagedType.FunctionPtr)]
         public WriteBlock_delegate WriteBlock;
     }
 
-    public delegate int WriteBlock_delegate(IntPtr self, IntPtr data, ulong size);
+    public delegate int WriteBlock_delegate(IntPtr self, IntPtr data, IntPtr size);
 
     public struct FPDF_FileAccess
     {
-        public ulong m_FileLen;
+        public IntPtr m_FileLen;
         [MarshalAs(UnmanagedType.FunctionPtr)]
         public GetBlock_delegate m_GetBlock;
         public IntPtr m_Param;
     }
 
-    public delegate int GetBlock_delegate(IntPtr param, ulong position, IntPtr buffer, ulong size);
+    public delegate int GetBlock_delegate(IntPtr param, IntPtr position, IntPtr buffer, IntPtr size);
 }

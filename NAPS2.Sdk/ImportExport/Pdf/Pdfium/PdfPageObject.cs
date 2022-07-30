@@ -24,35 +24,23 @@ public class PdfPageObject : NativePdfiumObject
         }
     }
 
-    public void LoadJpegFileInline(Stream stream)
+    public void LoadJpegFileInline(MemoryStream stream)
     {
-        int GetBlock(IntPtr param, ulong position, IntPtr buffer, ulong size)
+        int GetBlock(IntPtr param, IntPtr position, IntPtr buffer, IntPtr size)
         {
-            stream.Seek((long) position, SeekOrigin.Begin);
-            // TODO: Can we skip the intermediate buffer somehow?
-            var intermediateBuffer = new byte[size];
-            stream.Read(intermediateBuffer, 0, (int) size);
-            Marshal.Copy(intermediateBuffer, 0, buffer, (int) size);
+            var sourceBuffer = stream.GetBuffer();
+            Marshal.Copy(sourceBuffer, (int) position, buffer, (int) size);
             return 1;
         }
-
+        
         PdfiumNativeLibrary.FPDF_FileAccess fileAccess = new()
         {
-            m_FileLen = (ulong) stream.Length,
+            m_FileLen = (IntPtr) stream.Length,
             m_GetBlock = GetBlock
         };
-        IntPtr p = Marshal.AllocHGlobal(Marshal.SizeOf(fileAccess));
-        Marshal.StructureToPtr(fileAccess, p, false);
-        try
+        if (!Native.FPDFImageObj_LoadJpegFileInline(IntPtr.Zero, 0, Handle, ref fileAccess))
         {
-            if (!Native.FPDFImageObj_LoadJpegFileInline(IntPtr.Zero, 0, Handle, p))
-            {
-                throw new Exception("Could not load jpeg");
-            }
-        }
-        finally
-        {
-            Marshal.FreeHGlobal(p);
+            throw new Exception("Could not load jpeg");
         }
     }
 
@@ -100,8 +88,8 @@ public class PdfPageObject : NativePdfiumObject
 
     public string GetText(PdfText pageText)
     {
-        var length = Native.FPDFTextObj_GetText(Handle, pageText.Handle, null, 0);
-        var buffer = new byte[length];
+        var length = Native.FPDFTextObj_GetText(Handle, pageText.Handle, null, (IntPtr) 0);
+        var buffer = new byte[(int) length];
         Native.FPDFTextObj_GetText(Handle, pageText.Handle, buffer, length);
         return Encoding.Unicode.GetString(buffer);
     }

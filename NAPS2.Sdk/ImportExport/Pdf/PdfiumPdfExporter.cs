@@ -5,7 +5,7 @@ using NAPS2.Scan;
 
 namespace NAPS2.ImportExport.Pdf;
 
-// TODO: Experimental
+// TODO: Experimental. Also remember that this is failing with access violations on 32-bit (see tests).
 public class PdfiumPdfExporter : PdfExporter
 {
     private readonly ScanningContext _scanningContext;

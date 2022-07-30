@@ -49,9 +49,9 @@ public class PdfDocument : NativePdfiumObject
     {
         using var stream = new FileStream(path, FileMode.Create);
 
-        int WriteBlock(IntPtr self, IntPtr data, ulong size)
+        int WriteBlock(IntPtr self, IntPtr data, IntPtr size)
         {
-            var buffer = new byte[size];
+            var buffer = new byte[(int) size];
             Marshal.Copy(data, buffer, 0, (int) size);
             stream.Write(buffer, 0, (int) size);
             return 1;
@@ -59,20 +59,12 @@ public class PdfDocument : NativePdfiumObject
 
         PdfiumNativeLibrary.FPDF_FileWrite fileWrite = new()
         {
+            version = 1,
             WriteBlock = WriteBlock
         };
-        IntPtr p = Marshal.AllocHGlobal(Marshal.SizeOf(fileWrite));
-        Marshal.StructureToPtr(fileWrite, p, false);
-        try
+        if (!Native.FPDF_SaveAsCopy(Handle, ref fileWrite, PdfiumNativeLibrary.FPDF_NOINCREMENTAL))
         {
-            if (!Native.FPDF_SaveAsCopy(Handle, p, PdfiumNativeLibrary.FPDF_NOINCREMENTAL))
-            {
-                throw new IOException("Failed to save PDF");
-            }
-        }
-        finally
-        {
-            Marshal.FreeHGlobal(p);
+            throw new IOException("Failed to save PDF");
         }
     }
 }
