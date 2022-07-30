@@ -177,7 +177,7 @@ public class UpdateOperation : OperationBase
 
     private bool VerifySignature()
     {
-        var cert = new X509Certificate2(ClientCreds.naps2_public);
+        var cert = new X509Certificate2(ClientCreds_.naps2_public);
         var csp = (RSACryptoServiceProvider) cert.PublicKey.Key;
         return csp.VerifyHash(_update!.Sha1, CryptoConfig.MapNameToOID("SHA1"), _update.Signature);
     }

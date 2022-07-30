@@ -22,7 +22,6 @@
 
     <!--
     We reference the 32-bit worker directly so the EXE is included in the output.
-    TODO: Is there a better way to do this?
     -->
     <ResolveAssemblyWarnOrErrorOnTargetArchitectureMismatch>None</ResolveAssemblyWarnOrErrorOnTargetArchitectureMismatch>
   </PropertyGroup>

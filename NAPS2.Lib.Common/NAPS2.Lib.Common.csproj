@@ -50,4 +50,20 @@
 
   </ItemGroup>
   
+  
+  <!--
+  This is a weird pattern and there's probably a better way to do it, but in order to have optional build files:
+  1. Have two resource files with similar names (so they generate the same class name, "ClientCreds_")
+  2. Have one resource file reference the optional build files, the other a placeholder build file
+  3. Conditionally exclude them from the build based on whether the optional files exist
+  -->
+  <ItemGroup Condition="Exists('google.credentials.json') and Exists('microsoft.credentials.json')">
+    <EmbeddedResource Remove="ClientCreds-.resx" />
+    <Compile Remove="ClientCreds-.Designer.cs" />
+  </ItemGroup>
+  <ItemGroup Condition="!Exists('google.credentials.json') or !Exists('microsoft.credentials.json')">
+    <EmbeddedResource Remove="ClientCreds_.resx" />
+    <Compile Remove="ClientCreds_.Designer.cs" />
+  </ItemGroup>
+  
 </Project>

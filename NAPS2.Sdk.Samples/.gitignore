@@ -30,4 +30,3 @@ $tf*/
 publish/
 bin/
 temp/
-*.credentials.json

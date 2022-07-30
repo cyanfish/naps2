@@ -30,3 +30,5 @@ $tf*/
 publish/
 bin/
 temp/
+google.credentials.json
+microsoft.credentials.json

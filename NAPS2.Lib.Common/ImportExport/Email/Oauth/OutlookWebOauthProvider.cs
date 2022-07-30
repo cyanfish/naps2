@@ -27,7 +27,7 @@ public class OutlookWebOauthProvider : OauthProvider
         {
             if (_creds == null)
             {
-                var credObj = JObject.Parse(Encoding.UTF8.GetString(NAPS2.ClientCreds.microsoft_credentials));
+                var credObj = JObject.Parse(Encoding.UTF8.GetString(ClientCreds_.microsoft_credentials));
                 _creds = new OauthClientCreds(credObj.Value<string>("client_id"), credObj.Value<string>("client_secret"));
             }
             return _creds;

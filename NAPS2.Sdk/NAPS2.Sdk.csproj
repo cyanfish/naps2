@@ -29,15 +29,6 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Standalone|AnyCPU'">
     <DefineConstants>STANDALONE</DefineConstants>
   </PropertyGroup>
-
-  <PropertyGroup>
-    <PreBuildEvent Condition="'$(OS)' == 'Windows_NT'">If Not Exist $(ProjectDir)google.credentials.json (
-      echo {} &gt; $(ProjectDir)google.credentials.json
-      )
-      If Not Exist $(ProjectDir)microsoft.credentials.json (
-      echo { client_id: null, client_secret: null } &gt; $(ProjectDir)microsoft.credentials.json
-      )</PreBuildEvent>
-  </PropertyGroup>
   
   <ItemGroup>
     <PackageReference Include="ZXing.Net.Bindings.Windows.Compatibility" Version="0.16.7" />

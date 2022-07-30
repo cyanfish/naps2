@@ -28,7 +28,7 @@ public class GmailOauthProvider : OauthProvider
         {
             if (_creds == null)
             {
-                var credObj = JObject.Parse(Encoding.UTF8.GetString(NAPS2.ClientCreds.google_credentials));
+                var credObj = JObject.Parse(Encoding.UTF8.GetString(ClientCreds_.google_credentials));
                 var installed = credObj.Value<JObject>("installed");
                 _creds = new OauthClientCreds(installed?.Value<string>("client_id"),
                     installed?.Value<string>("client_secret"));
