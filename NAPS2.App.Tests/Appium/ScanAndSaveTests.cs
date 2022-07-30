@@ -1,4 +1,5 @@
 using System.Threading;
+using NAPS2.App.Tests.Verification;
 using NAPS2.Sdk.Tests.Asserts;
 using Xunit;
 
@@ -7,7 +8,7 @@ namespace NAPS2.App.Tests.Appium;
 [Collection("appium")]
 public class ScanAndSaveTests : AppiumTests
 {
-    [Fact]
+    [VerifyFact(AllowDebug = true)]
     public void ScanWiaSavePdf()
     {
         // Clicking Scan without a profile opens the profile settings window
