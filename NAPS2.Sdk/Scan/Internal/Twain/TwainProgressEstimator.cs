@@ -22,6 +22,16 @@ internal class TwainProgressEstimator
     private TimingInfo? _previousTimingInfo;
     private Stopwatch? _stopwatch;
 
+    public static bool HasTimingInfo(ScanOptions options)
+    {
+        return TimingCache.Instance.Read(GetTimingKey(options)) != null;
+    }
+
+    private static TimingKey GetTimingKey(ScanOptions options)
+    {
+        return new TimingKey(options.Device!.ID!, options.BitDepth, options.PageSize!);
+    }
+
     public TwainProgressEstimator(ScanOptions options, IScanEvents scanEvents)
         : this(options, scanEvents, TimingCache.Instance)
     {
@@ -31,7 +41,7 @@ internal class TwainProgressEstimator
     {
         _scanEvents = scanEvents;
         _timingCache = timingCache;
-        _key = new TimingKey(options.Device!.ID!, options.BitDepth, options.PageSize!);
+        _key = GetTimingKey(options);
     }
 
     public void MarkStart(long totalPixels)
@@ -120,7 +130,6 @@ internal class TwainProgressEstimator
         {
             lock (_cache)
             {
-                Debug.WriteLine($"Adding to timing cache {value.OverheadMillis} {value.TotalMillis}");
                 _cache[key] = value;
             }
         }

@@ -1,4 +1,5 @@
 ﻿using System.Threading;
+using NAPS2.Scan.Internal.Twain;
 
 namespace NAPS2.Scan;
 
@@ -16,7 +17,7 @@ public class ScanOperation : OperationBase
                 : string.Format(MiscResources.ScanProgressPage, _pageNumber),
             MaxProgress = 1000,
             ProgressType = OperationProgressType.BarOnly,
-            IndeterminateProgress = options.Driver == Driver.Twain && options.TwainOptions.TransferMode != TwainTransferMode.Memory
+            IndeterminateProgress = options.Driver == Driver.Twain && !TwainProgressEstimator.HasTimingInfo(options)
         };
         AllowBackground = true;
         AllowCancel = true;
