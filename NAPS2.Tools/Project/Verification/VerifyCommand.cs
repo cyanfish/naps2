@@ -25,7 +25,7 @@ public static class VerifyCommand
                     MsiSetupVerifier.Verify(target.Platform, version, opts.Verbose);
                     break;
                 case BuildType.Zip:
-                    ZipArchiveVerifier.Verify(target.Platform, version, opts.NoCleanup, opts.Verbose);
+                    ZipArchiveVerifier.Verify(target.Platform, version, opts.Verbose, opts.NoCleanup);
                     break;
             }
         }
