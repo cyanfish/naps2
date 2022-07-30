@@ -22,6 +22,9 @@ public static class ObjectHelpers
 
     public static int ListHashCode<T>(IList<T> list)
     {
-        return list.Aggregate(0, (hash, item) => (hash * 397) ^ item!.GetHashCode());
+        unchecked
+        {
+            return list.Aggregate(0, (hash, item) => (hash * 397) ^ item!.GetHashCode());            
+        }
     }
 }
