@@ -203,6 +203,16 @@ namespace NAPS2.Sdk.Tests {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap color_image_huge {
+            get {
+                object obj = ResourceManager.GetObject("color_image_huge", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap color_image_low_quality {
             get {
                 object obj = ResourceManager.GetObject("color_image_low_quality", resourceCulture);
