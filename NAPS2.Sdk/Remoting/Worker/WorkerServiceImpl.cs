@@ -179,7 +179,7 @@ public class WorkerServiceImpl : WorkerService.WorkerServiceBase
         }
     }
 
-    public override async Task<RenderThumbnailResponse> RenderThumbnail(RenderThumbnailRequest request,
+    public override Task<RenderThumbnailResponse> RenderThumbnail(RenderThumbnailRequest request,
         ServerCallContext context)
     {
         using var callRef = StartCall();
@@ -193,14 +193,14 @@ public class WorkerServiceImpl : WorkerService.WorkerServiceBase
                 ImageSerializer.Deserialize(_scanningContext, request.Image, deserializeOptions);
             var thumbnail = _thumbnailRenderer.Render(image, request.Size);
             var stream = thumbnail.SaveToMemoryStream(ImageFileFormat.Png);
-            return new RenderThumbnailResponse
+            return Task.FromResult(new RenderThumbnailResponse
             {
                 Thumbnail = ByteString.FromStream(stream)
-            };
+            });
         }
         catch (Exception e)
         {
-            return new RenderThumbnailResponse { Error = RemotingHelper.ToError(e) };
+            return Task.FromResult(new RenderThumbnailResponse { Error = RemotingHelper.ToError(e) });
         }
     }
 
@@ -223,7 +223,7 @@ public class WorkerServiceImpl : WorkerService.WorkerServiceBase
         }
     }
 
-    public override async Task<ImportPostProcessResponse> ImportPostProcess(ImportPostProcessRequest request,
+    public override Task<ImportPostProcessResponse> ImportPostProcess(ImportPostProcessRequest request,
         ServerCallContext context)
     {
         using var callRef = StartCall();
@@ -235,7 +235,7 @@ public class WorkerServiceImpl : WorkerService.WorkerServiceBase
             var barcodeOptions = request.BarcodeDetectionOptionsXml.FromXml<BarcodeDetectionOptions>();
             using var newImage =
                 _importPostProcessor.AddPostProcessingData(image, null, thumbnailSize, barcodeOptions, true);
-            return new ImportPostProcessResponse
+            return Task.FromResult(new ImportPostProcessResponse
             {
                 Image = ImageSerializer.Serialize(newImage,
                     new SerializeImageOptions
@@ -244,11 +244,11 @@ public class WorkerServiceImpl : WorkerService.WorkerServiceBase
                         ReturnOwnership = true,
                         IncludeThumbnail = true
                     })
-            };
+            });
         }
         catch (Exception e)
         {
-            return new ImportPostProcessResponse { Error = RemotingHelper.ToError(e) };
+            return Task.FromResult(new ImportPostProcessResponse { Error = RemotingHelper.ToError(e) });
         }
     }
 

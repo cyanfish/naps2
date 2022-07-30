@@ -106,6 +106,17 @@ public static class Pipeline
         }
 
         /// <summary>
+        /// Adds a new step to the pipeline, where multiple items can be processed at once. Note: order is maintained.
+        /// </summary>
+        /// <param name="pipelineStepFunc"></param>
+        /// <param name="maxParallelism"></param>
+        /// <returns></returns>
+        public PipelineStep<T2> StepManyParallel<T2>(Func<T, IEnumerable<T2>> pipelineStepFunc, int maxParallelism = DEFAULT_MAX_PARALLELISM)
+        {
+            return Link(new TransformManyBlock<T, T2>(pipelineStepFunc, ExecutionOptions(maxParallelism)));
+        }
+
+        /// <summary>
         /// Runs the pipeline with the previously defined steps, returning the result. Blocks until the pipeline is finished.
         /// </summary>
         /// <returns></returns>

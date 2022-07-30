@@ -8,7 +8,7 @@ public class EmailRecipient
         {
             yield break;
         }
-        foreach (string address in recipText.Split(','))
+        foreach (string address in recipText!.Split(','))
         {
             yield return new EmailRecipient
             {

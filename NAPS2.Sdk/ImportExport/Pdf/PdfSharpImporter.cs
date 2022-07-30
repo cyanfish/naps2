@@ -91,7 +91,7 @@ public class PdfSharpImporter : IPdfImporter
                 if (document.Info.Creator != SdkResources.NAPS2 && document.Info.Author != SdkResources.NAPS2)
                 {
                     await Pipeline.For(pages, cancelToken)
-                        .StepParallel(async page => await ExportRawPdfPage(page, importParams))
+                        .StepParallel(page => ExportRawPdfPage(page, importParams))
                         .Run(image =>
                         {
                             progressCallback?.Invoke(++i, document.PageCount);
@@ -103,12 +103,12 @@ public class PdfSharpImporter : IPdfImporter
                     await Pipeline.For(pages, cancelToken)
                         // Getting CustomValues is not thread safe, so we need to do it in a separate step
                         .Step(page => (page, page.CustomValues.Elements.ContainsKey("/NAPS2ImportedPage")))
-                        .StepManyParallel(async tuple =>
+                        .StepManyParallel(tuple =>
                         {
                             var (page, isImportedPage) = tuple;
                             if (isImportedPage)
                             {
-                                return new[] {await ExportRawPdfPage(page, importParams)};
+                                return new[] {ExportRawPdfPage(page, importParams)};
                             }
 
                             return GetImagesFromPage(page, importParams);
@@ -138,9 +138,9 @@ public class PdfSharpImporter : IPdfImporter
     private IEnumerable<ProcessedImage> GetImagesFromPage(PdfPage page, ImportParams importParams)
     {
         // Get resources dictionary
-        PdfDictionary resources = page.Elements.GetDictionary("/Resources");
+        var resources = page.Elements.GetDictionary("/Resources");
         // Get external objects dictionary
-        PdfDictionary xObjects = resources?.Elements.GetDictionary("/XObject");
+        var xObjects = resources?.Elements.GetDictionary("/XObject");
         if (xObjects == null)
         {
             yield break;
@@ -192,7 +192,7 @@ public class PdfSharpImporter : IPdfImporter
         }
     }
 
-    private async Task<ProcessedImage> ExportRawPdfPage(PdfPage page, ImportParams importParams)
+    private ProcessedImage ExportRawPdfPage(PdfPage page, ImportParams importParams)
     {
         IImageStorage storage;
         var document = new PdfDocument();
