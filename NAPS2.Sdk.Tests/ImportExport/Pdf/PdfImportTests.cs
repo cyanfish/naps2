@@ -1,3 +1,4 @@
+using NAPS2.ImportExport;
 using NAPS2.ImportExport.Pdf;
 using NAPS2.Sdk.Tests.Asserts;
 using Xunit;
@@ -55,5 +56,18 @@ public class PdfImportTests : ContextualTests
         Assert.Single(images);
         storageConfig.AssertPngStorage(images[0].Storage);
         ImageAsserts.Similar(ImageResources.color_image_bw, ImageContext.Render(images[0]));
+    }
+
+    [Theory]
+    [ClassData(typeof(StorageAwareTestData))]
+    public async Task ImportEncrypted(StorageConfig storageConfig)
+    {
+        storageConfig.Apply(this);
+
+        var importPath = CopyResourceToFile(PdfResources.encrypted_pdf, "import.pdf");
+        var images = await _importer.Import(importPath, new ImportParams { Password = "hello" }).ToList();
+
+        Assert.Single(images);
+        ImageAsserts.Similar(ImageResources.color_image, ImageContext.Render(images[0]));
     }
 }
