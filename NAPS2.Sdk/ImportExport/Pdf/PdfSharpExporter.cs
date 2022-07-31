@@ -39,12 +39,12 @@ public class PdfSharpExporter : PdfExporter
             var compat = exportParams.Compat;
 
             var document = new PdfDocument();
-            // TODO: Defaults for API use
-            document.Info.Author = exportParams.Metadata?.Author;
-            document.Info.Creator = exportParams.Metadata?.Creator;
-            document.Info.Keywords = exportParams.Metadata?.Keywords;
-            document.Info.Subject = exportParams.Metadata?.Subject;
-            document.Info.Title = exportParams.Metadata?.Title;
+            var creator = exportParams.Metadata.Creator;
+            document.Info.Creator = string.IsNullOrEmpty(creator) ? "NAPS2" : creator;
+            document.Info.Author = exportParams.Metadata.Author;
+            document.Info.Keywords = exportParams.Metadata.Keywords;
+            document.Info.Subject = exportParams.Metadata.Subject;
+            document.Info.Title = exportParams.Metadata.Title;
 
             if (exportParams.Encryption?.EncryptPdf == true
                 && (!string.IsNullOrEmpty(exportParams.Encryption.OwnerPassword) ||
