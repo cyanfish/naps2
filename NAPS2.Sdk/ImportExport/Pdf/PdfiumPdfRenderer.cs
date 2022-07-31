@@ -8,7 +8,7 @@ public class PdfiumPdfRenderer : IPdfRenderer
     public IEnumerable<IMemoryImage> Render(ImageContext imageContext, string path, float defaultDpi)
     {
         // Pdfium is not thread-safe
-        lock (PdfiumNativeLibrary.LazyInstance.Value)
+        lock (PdfiumNativeLibrary.Instance)
         {
             using var doc = PdfDocument.Load(path);
             foreach (var memoryImage in RenderDocument(imageContext, defaultDpi, doc))
@@ -21,7 +21,7 @@ public class PdfiumPdfRenderer : IPdfRenderer
     public IEnumerable<IMemoryImage> Render(ImageContext imageContext, byte[] buffer, int length, float defaultDpi)
     {
         // Pdfium is not thread-safe
-        lock (PdfiumNativeLibrary.LazyInstance.Value)
+        lock (PdfiumNativeLibrary.Instance)
         {
             var handle = GCHandle.Alloc(buffer, GCHandleType.Pinned);
             try
@@ -64,7 +64,7 @@ public class PdfiumPdfRenderer : IPdfRenderer
         }
     }
 
-    private PdfPageObject? GetSingleImageObject(PdfPage page)
+    internal PdfPageObject? GetSingleImageObject(PdfPage page)
     {
         using var pageText = page.GetText();
         PdfPageObject? imageObject = null;

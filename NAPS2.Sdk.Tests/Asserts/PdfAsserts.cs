@@ -1,6 +1,7 @@
 ﻿using System.Drawing;
 using NAPS2.Images.Gdi;
 using NAPS2.ImportExport.Pdf;
+using NAPS2.ImportExport.Pdf.Pdfium;
 using PdfSharp.Pdf.IO;
 using PdfSharp.Pdf.Security;
 using Xunit;
@@ -86,6 +87,25 @@ public static class PdfAsserts
         for (int i = 0; i < expectedImages.Length; i++)
         {
             ImageAsserts.Similar(expectedImages[i], actualImages[i], ignoreFormat: true);
+        }
+    }
+
+    public static void AssertImageFilter(string filePath, int pageIndex, params string[] filters)
+    {
+        Assert.True(File.Exists(filePath));
+        lock (PdfiumNativeLibrary.Instance)
+        {
+            var renderer = new PdfiumPdfRenderer();
+            using var doc = PdfDocument.Load(filePath);
+            Assert.InRange(pageIndex, 0, doc.PageCount - 1);
+            using var page = doc.GetPage(pageIndex);
+            using var obj = renderer.GetSingleImageObject(page);
+            Assert.NotNull(obj);
+            Assert.Equal(filters.Length, obj.ImageFilterCount);
+            for (int i = 0; i < filters.Length; i++)
+            {
+                Assert.Equal(filters[i], obj.GetImageFilter(i));
+            }
         }
     }
 }

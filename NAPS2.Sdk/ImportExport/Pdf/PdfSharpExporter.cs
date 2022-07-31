@@ -140,8 +140,11 @@ public class PdfSharpExporter : PdfExporter
             else
             {
                 // TODO: Dedup from other method
-                var format = image.Metadata.Lossless ? ImageFileFormat.Png : ImageFileFormat.Jpeg;
                 using var renderedImage = _scanningContext.ImageContext.Render(image);
+                var format = image.Metadata.Lossless || image.Metadata.BitDepth == BitDepth.BlackAndWhite ||
+                             renderedImage.PixelFormat == ImagePixelFormat.BW1
+                    ? ImageFileFormat.Png
+                    : ImageFileFormat.Jpeg;
                 using Stream stream = renderedImage.SaveToMemoryStream(format);
                 using var img = XImage.FromStream(stream);
                 if (cancelToken.IsCancellationRequested)
