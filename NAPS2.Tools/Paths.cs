@@ -32,4 +32,7 @@ internal static class Paths
     public static string SetupObj => Path.Combine(Setup, "obj");
     
     public static string Publish => Path.Combine(Setup, "publish");
+
+    public static string Naps2UserFolder =>
+        Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), ".naps2");
 }

@@ -12,6 +12,7 @@
   <ItemGroup>
     <PackageReference Include="CommandLineParser" Version="2.9.1" />
     <PackageReference Include="System.Security.Principal.Windows" Version="5.0.0" />
+    <PackageReference Include="VirusTotalNet" Version="2.0.1" />
   </ItemGroup>
 
   <Import Project="..\NAPS2.Setup\CommonTargets.targets" />
