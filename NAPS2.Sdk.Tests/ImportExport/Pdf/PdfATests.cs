@@ -2,7 +2,7 @@ using NAPS2.ImportExport.Pdf;
 using NAPS2.Sdk.Tests.Asserts;
 using Xunit;
 
-namespace NAPS2.Sdk.Tests.ImportExport;
+namespace NAPS2.Sdk.Tests.ImportExport.Pdf;
 
 // TODO: Validate with OCR output
 // TODO: Maaaybe validate with external import? We certainly can't guarantee it, but maybe some cases can be verified for best effort

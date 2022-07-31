@@ -2,7 +2,7 @@
 using NAPS2.Sdk.Tests.Asserts;
 using Xunit;
 
-namespace NAPS2.Sdk.Tests.ImportExport;
+namespace NAPS2.Sdk.Tests.ImportExport.Pdf;
 
 public class PdfiumPdfRendererTests : ContextualTests
 {

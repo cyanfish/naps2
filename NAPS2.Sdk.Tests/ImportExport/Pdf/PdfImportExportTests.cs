@@ -4,35 +4,21 @@ using NAPS2.Ocr;
 using NAPS2.Sdk.Tests.Asserts;
 using Xunit;
 
-namespace NAPS2.Sdk.Tests.ImportExport;
+namespace NAPS2.Sdk.Tests.ImportExport.Pdf;
 
-public class NonNaps2PdfImportTests : ContextualTests
+public class PdfImportExportTests : ContextualTests
 {
     private readonly PdfSharpImporter _importer;
     private readonly PdfSharpExporter _exporter;
     private readonly string _importPath;
     private readonly string _exportPath;
 
-    public NonNaps2PdfImportTests()
+    public PdfImportExportTests()
     {
         _importer = new PdfSharpImporter(ScanningContext);
         _exporter = new PdfSharpExporter(ScanningContext);
-        _importPath = Path.Combine(FolderPath, "import.pdf");
+        _importPath = CopyResourceToFile(PdfResources.word_generated_pdf, "import.pdf");
         _exportPath = Path.Combine(FolderPath, "export.pdf");
-        File.WriteAllBytes(_importPath, PdfResources.word_generated_pdf);
-    }
-
-    [Theory]
-    [ClassData(typeof(StorageAwareTestData))]
-    public async Task Import(StorageConfig storageConfig)
-    {
-        storageConfig.Apply(this);
-
-        var images = await _importer.Import(_importPath).ToList();
-
-        Assert.Equal(2, images.Count);
-        ImageAsserts.Similar(PdfResources.word_p1, ImageContext.Render(images[0]));
-        ImageAsserts.Similar(PdfResources.word_p2, ImageContext.Render(images[1]));
     }
 
     [Theory]
@@ -100,10 +86,4 @@ public class NonNaps2PdfImportTests : ContextualTests
         PdfAsserts.AssertContainsTextOnce("Page one.", _exportPath);
         PdfAsserts.AssertContainsTextOnce("Sized for printing unscaled", _exportPath);
     }
-    
-    // TODO: Add test coverage for NAPS2-generated pdf import (either in another file or reorg import/export test classes), as well as for exporting various image types.
-    // PdfSharpImporterTests, PdfSharpExporterTests, PdfImportExportTests?
-    // Or maybe the ImportExport tests can just be part of PdfSharpExporterTests.
-    // Or maybe forget that. Just create a "Pdf" subfolder with more descriptive test classes. e.g. PdfATests, PdfImportTests, PdfExportTests, PdfImportExportTests, PdfiumExportTests.
-    // Also PdfiumPdfRendererTests should move.
 }

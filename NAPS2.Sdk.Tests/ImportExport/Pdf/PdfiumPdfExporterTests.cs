@@ -2,7 +2,7 @@ using NAPS2.Images.Gdi;
 using NAPS2.ImportExport.Pdf;
 using NAPS2.Sdk.Tests.Asserts;
 
-namespace NAPS2.Sdk.Tests.ImportExport;
+namespace NAPS2.Sdk.Tests.ImportExport.Pdf;
 
 public class PdfiumPdfExporterTests : ContextualTests
 {
@@ -24,17 +24,4 @@ public class PdfiumPdfExporterTests : ContextualTests
         
         PdfAsserts.AssertImages(filePath, ImageResources.color_image);
     }
-
-    // [Fact]
-    // public async Task Export100()
-    // {
-    //     var filePath = Path.Combine(FolderPath, "test");
-    //     using var image = ScanningContext.CreateProcessedImage(new GdiImage(ImageResources.color_image), BitDepth.Color, true, -1, Enumerable.Empty<Transform>());
-    //
-    //     var pdfExporter = new PdfiumPdfExporter(ScanningContext);
-    //     Parallel.For(0, 100, i =>
-    //     {
-    //         pdfExporter.Export(filePath + i + ".pdf", new[] { image }, new PdfExportParams()).Wait();
-    //     });
-    // }
 }
