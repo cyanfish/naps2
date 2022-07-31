@@ -88,8 +88,7 @@ public class ScanningContext : IDisposable
         switch (storage)
         {
             case IMemoryImage image:
-                // TODO: Clone may not be enough, as the original bitmap could have a lock on the filesystem that should be released.
-                return image.Clone();
+                return image.SafeClone();
             case ImageFileStorage fileStorage:
                 return ImageContext.Load(fileStorage.FullPath);
             case ImageMemoryStorage memoryStorage:

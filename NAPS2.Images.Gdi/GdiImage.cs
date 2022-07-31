@@ -100,6 +100,21 @@ public class GdiImage : IMemoryImage
         return new GdiImage((Bitmap) Bitmap.Clone());
     }
 
+    public IMemoryImage SafeClone()
+    {
+        var newBitmap = new Bitmap(Width, Height, PixelFormat.AsPixelFormat());
+        using var g = Graphics.FromImage(newBitmap);
+        if (PixelFormat == ImagePixelFormat.ARGB32)
+        {
+            g.Clear(Color.Transparent);
+        }
+        g.DrawImage(Bitmap, 0, 0, Width, Height);
+
+        var newImage = new GdiImage(newBitmap);
+        newImage.SetResolution(HorizontalResolution, VerticalResolution);
+        return newImage;
+    }
+
     public void Dispose()
     {
         Bitmap.Dispose();
