@@ -17,7 +17,7 @@ public abstract class NativePdfiumObject : IDisposable
     {
         get
         {
-            var value = PdfiumNativeLibrary.LazyInstance.Value;
+            var value = PdfiumNativeLibrary.Instance;
             if (!Monitor.IsEntered(value))
             {
                 throw new InvalidOperationException("Pdfium operations must be locked");

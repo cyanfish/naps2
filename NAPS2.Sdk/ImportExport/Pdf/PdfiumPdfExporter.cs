@@ -21,7 +21,7 @@ public class PdfiumPdfExporter : PdfExporter
     {
         return await Task.Run(() =>
         {
-            lock (PdfiumNativeLibrary.LazyInstance.Value)
+            lock (PdfiumNativeLibrary.Instance)
             {
                 var compat = exportParams.Compat;
 

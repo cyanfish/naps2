@@ -5,16 +5,10 @@ namespace NAPS2.ImportExport.Pdf;
 
 public class PdfiumPdfReader
 {
-    public PdfiumPdfReader()
-    {
-    }
-
     public IEnumerable<string> ReadTextByPage(string path)
     {
-        var nativeLib = PdfiumNativeLibrary.LazyInstance.Value;
-
         // Pdfium is not thread-safe
-        lock (nativeLib)
+        lock (PdfiumNativeLibrary.Instance)
         {
             using var doc = PdfDocument.Load(path);
             var pageCount = doc.PageCount;

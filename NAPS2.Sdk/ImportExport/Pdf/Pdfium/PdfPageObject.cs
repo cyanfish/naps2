@@ -32,7 +32,7 @@ public class PdfPageObject : NativePdfiumObject
             Marshal.Copy(sourceBuffer, (int) position, buffer, (int) size);
             return 1;
         }
-        
+
         PdfiumNativeLibrary.FPDF_FileAccess fileAccess = new()
         {
             m_FileLen = (IntPtr) stream.Length,
@@ -105,6 +105,16 @@ public class PdfPageObject : NativePdfiumObject
     {
         return new PdfBitmap(
             Native.FPDFImageObj_GetRenderedBitmap(_document.Handle, _page?.Handle ?? IntPtr.Zero, Handle));
+    }
+
+    public int ImageFilterCount => Native.FPDFImageObj_GetImageFilterCount(Handle);
+
+    public string GetImageFilter(int index)
+    {
+        var length = Native.FPDFImageObj_GetImageFilter(Handle, index, null, (IntPtr) 0);
+        var buffer = new byte[(int) length];
+        Native.FPDFImageObj_GetImageFilter(Handle, index, buffer, length);
+        return Encoding.UTF8.GetString(buffer, 0, buffer.Length - 1);
     }
 
     protected override void DisposeHandle()

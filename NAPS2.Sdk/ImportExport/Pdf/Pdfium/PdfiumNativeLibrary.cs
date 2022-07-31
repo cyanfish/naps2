@@ -13,7 +13,7 @@ public class PdfiumNativeLibrary : Unmanaged.NativeLibrary
     //
     // API reference: https://pdfium.googlesource.com/pdfium/+/main/public/
 
-    public static readonly Lazy<PdfiumNativeLibrary> LazyInstance = new(() =>
+    private static readonly Lazy<PdfiumNativeLibrary> LazyInstance = new(() =>
     {
         var assemblyLocation = Assembly.GetExecutingAssembly().Location;
         var assemblyFolder = Path.GetDirectoryName(assemblyLocation);
@@ -28,6 +28,8 @@ public class PdfiumNativeLibrary : Unmanaged.NativeLibrary
         nativeLib.FPDF_InitLibrary();
         return nativeLib;
     });
+
+    public static PdfiumNativeLibrary Instance => LazyInstance.Value;
 
     public const int FPDFBitmap_BGR = 2;
     public const int FPDFBitmap_BGRA = 4;
@@ -138,6 +140,14 @@ public class PdfiumNativeLibrary : Unmanaged.NativeLibrary
     public delegate IntPtr
         FPDFImageObj_GetRenderedBitmap_delegate(IntPtr document, IntPtr page, IntPtr image_object);
 
+    public delegate int FPDFImageObj_GetImageFilterCount_delegate(IntPtr image_object);
+
+    public delegate IntPtr FPDFImageObj_GetImageFilter_delegate(IntPtr image_object, int index, byte[]? buffer,
+        IntPtr buflen);
+
+    public delegate bool FPDFImageObj_GetImageMetadata_delegate(IntPtr image_object, IntPtr page,
+        ref FPDF_ImageObj_Metadata metadata);
+
     public delegate bool FPDFPageObj_GetMatrix_delegate(IntPtr page_object, out PdfMatrix matrix);
 
     public delegate bool FPDFPageObj_GetStrokeColor_delegate(IntPtr page_object, out uint r, out uint g, out uint b,
@@ -199,6 +209,15 @@ public class PdfiumNativeLibrary : Unmanaged.NativeLibrary
     public FPDFImageObj_GetRenderedBitmap_delegate FPDFImageObj_GetRenderedBitmap =>
         Load<FPDFImageObj_GetRenderedBitmap_delegate>();
 
+    public FPDFImageObj_GetImageFilterCount_delegate FPDFImageObj_GetImageFilterCount =>
+        Load<FPDFImageObj_GetImageFilterCount_delegate>();
+
+    public FPDFImageObj_GetImageFilter_delegate FPDFImageObj_GetImageFilter =>
+        Load<FPDFImageObj_GetImageFilter_delegate>();
+
+    public FPDFImageObj_GetImageMetadata_delegate FPDFImageObj_GetImageMetadata =>
+        Load<FPDFImageObj_GetImageMetadata_delegate>();
+
     public FPDFPageObj_GetMatrix_delegate FPDFPageObj_GetMatrix => Load<FPDFPageObj_GetMatrix_delegate>();
 
     public FPDFPageObj_GetStrokeColor_delegate FPDFPageObj_GetStrokeColor =>
@@ -231,4 +250,16 @@ public class PdfiumNativeLibrary : Unmanaged.NativeLibrary
     }
 
     public delegate int GetBlock_delegate(IntPtr param, IntPtr position, IntPtr buffer, IntPtr size);
+
+    public struct FPDF_ImageObj_Metadata
+    {
+        public uint width;
+        public uint height;
+        public float horizontal_dpi;
+        public float vertical_dpi;
+        public int bits_per_pixel;
+        [MarshalAs(UnmanagedType.I4)]
+        public Colorspace colorspace;
+        public int marked_content_id;
+    }
 }
