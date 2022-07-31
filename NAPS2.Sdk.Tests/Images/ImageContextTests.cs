@@ -14,7 +14,7 @@ public class ImageContextTests : ContextualTests
         var bw = ctx.PerformTransform(new GdiImage(ImageResources.color_image_bw), new BlackWhiteTransform());
         var path = Path.Combine(FolderPath, "test");
 
-        var fullPath = ctx.SaveSmallestFormat(bw, path, BitDepth.BlackAndWhite, false, -1, out var format);
+        var fullPath = ctx.SaveSmallestFormat(path, bw, BitDepth.BlackAndWhite, false, -1, out var format);
 
         AssertPng(format, fullPath, ImageResources.color_image_bw);
     }
@@ -26,7 +26,7 @@ public class ImageContextTests : ContextualTests
         var bw = ctx.PerformTransform(new GdiImage(ImageResources.color_image_bw), new BlackWhiteTransform());
         var path = Path.Combine(FolderPath, "test");
 
-        var fullPath = ctx.SaveSmallestFormat(bw, path, BitDepth.Color, false, -1, out var format);
+        var fullPath = ctx.SaveSmallestFormat(path, bw, BitDepth.Color, false, -1, out var format);
 
         AssertPng(format, fullPath, ImageResources.color_image_bw);
     }
@@ -38,7 +38,7 @@ public class ImageContextTests : ContextualTests
         var color = new GdiImage(ImageResources.color_image);
         var path = Path.Combine(FolderPath, "test");
 
-        var fullPath = ctx.SaveSmallestFormat(color, path, BitDepth.BlackAndWhite, false, -1, out var format);
+        var fullPath = ctx.SaveSmallestFormat(path, color, BitDepth.BlackAndWhite, false, -1, out var format);
 
         AssertPng(format, fullPath, ImageResources.color_image_bw);
     }
@@ -50,7 +50,7 @@ public class ImageContextTests : ContextualTests
         var color = new GdiImage(ImageResources.color_image);
         var path = Path.Combine(FolderPath, "test");
 
-        var fullPath = ctx.SaveSmallestFormat(color, path, BitDepth.Color, true, -1, out var format);
+        var fullPath = ctx.SaveSmallestFormat(path, color, BitDepth.Color, true, -1, out var format);
 
         AssertPng(format, fullPath, ImageResources.color_image);
     }
@@ -62,7 +62,7 @@ public class ImageContextTests : ContextualTests
         var bw = new GdiImage(ImageResources.color_image_bw_24bit);
         var path = Path.Combine(FolderPath, "test");
 
-        var fullPath = ctx.SaveSmallestFormat(bw, path, BitDepth.Color, false, -1, out var format);
+        var fullPath = ctx.SaveSmallestFormat(path, bw, BitDepth.Color, false, -1, out var format);
 
         AssertPng(format, fullPath, ImageResources.color_image_bw);
     }
@@ -74,7 +74,7 @@ public class ImageContextTests : ContextualTests
         var color = new GdiImage(ImageResources.color_image_png);
         var path = Path.Combine(FolderPath, "test");
 
-        var fullPath = ctx.SaveSmallestFormat(color, path, BitDepth.Color, false, -1, out var format);
+        var fullPath = ctx.SaveSmallestFormat(path, color, BitDepth.Color, false, -1, out var format);
 
         AssertJpeg(format, fullPath, ImageResources.color_image);
     }
@@ -86,7 +86,7 @@ public class ImageContextTests : ContextualTests
         var color = new GdiImage(ImageResources.color_image_bw_jpg);
         var path = Path.Combine(FolderPath, "test");
 
-        var fullPath = ctx.SaveSmallestFormat(color, path, BitDepth.Color, false, -1, out var format);
+        var fullPath = ctx.SaveSmallestFormat(path, color, BitDepth.Color, false, -1, out var format);
 
         AssertJpeg(format, fullPath, ImageResources.color_image_bw);
     }

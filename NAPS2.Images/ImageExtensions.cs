@@ -2,10 +2,11 @@ namespace NAPS2.Images;
 
 public static class ImageExtensions
 {
-    public static MemoryStream SaveToMemoryStream(this IMemoryImage image, ImageFileFormat imageFormat)
+    public static MemoryStream SaveToMemoryStream(this IMemoryImage image, ImageFileFormat imageFormat,
+        int quality = -1)
     {
         var stream = new MemoryStream();
-        image.Save(stream, imageFormat);
+        image.Save(stream, imageFormat, quality);
         stream.Seek(0, SeekOrigin.Begin);
         return stream;
     }

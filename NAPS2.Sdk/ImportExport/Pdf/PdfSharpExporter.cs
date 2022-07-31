@@ -141,11 +141,10 @@ public class PdfSharpExporter : PdfExporter
             {
                 // TODO: Dedup from other method
                 using var renderedImage = _scanningContext.ImageContext.Render(image);
-                var format = image.Metadata.Lossless || image.Metadata.BitDepth == BitDepth.BlackAndWhite ||
-                             renderedImage.PixelFormat == ImagePixelFormat.BW1
-                    ? ImageFileFormat.Png
-                    : ImageFileFormat.Jpeg;
-                using Stream stream = renderedImage.SaveToMemoryStream(format);
+                // TODO: Consider optimizing cases like e.g. starting with a jpeg then scaling it (so the new bitmap
+                // doesn't have an original file format, and this has to encode both jpeg and png to figure that out)
+                using Stream stream = _scanningContext.ImageContext.SaveSmallestFormatToMemoryStream(
+                    renderedImage, image.Metadata.BitDepth, image.Metadata.Lossless, -1, out _);
                 using var img = XImage.FromStream(stream);
                 if (cancelToken.IsCancellationRequested)
                 {
@@ -200,11 +199,9 @@ public class PdfSharpExporter : PdfExporter
                 page = document.AddPage();
             }
 
-            var format = image.Metadata.Lossless ? ImageFileFormat.Png : ImageFileFormat.Jpeg;
-            var ext = format == ImageFileFormat.Png ? ".png" : ".jpg";
-            string ocrTempFilePath = Path.Combine(_scanningContext.TempFolderPath, Path.GetRandomFileName() + ext);
             using var renderedImage = _scanningContext.ImageContext.Render(image);
-            using var stream = renderedImage.SaveToMemoryStream(format);
+            using Stream stream = _scanningContext.ImageContext.SaveSmallestFormatToMemoryStream(
+                renderedImage, image.Metadata.BitDepth, image.Metadata.Lossless, -1, out var fileFormat);
             using var img = XImage.FromStream(stream);
             if (cancelToken.IsCancellationRequested)
             {
@@ -220,6 +217,8 @@ public class PdfSharpExporter : PdfExporter
                 break;
             }
 
+            var ext = fileFormat == ImageFileFormat.Png ? ".png" : ".jpg";
+            string ocrTempFilePath = Path.Combine(_scanningContext.TempFolderPath, Path.GetRandomFileName() + ext);
             if (!_scanningContext.OcrRequestQueue.HasCachedResult(ocrEngine, image, ocrParams))
             {
                 // Save the image to a file for use in OCR.
