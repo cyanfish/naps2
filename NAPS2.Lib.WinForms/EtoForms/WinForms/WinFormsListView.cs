@@ -275,7 +275,7 @@ public class WinFormsListView<T> : IListView<T> where T : notnull
 
     private void OnDragOver(object? sender, DragEventArgs e)
     {
-        if (e.Effect == DragDropEffects.Move)
+        if (e.Effect == DragDropEffects.Move && Items.Count > 0)
         {
             var index = GetDragIndex(e);
             if (index == Items.Count)
@@ -293,6 +293,10 @@ public class WinFormsListView<T> : IListView<T> where T : notnull
 
     private int GetDragIndex(DragEventArgs e)
     {
+        if (Items.Count == 0)
+        {
+            return 0;
+        }
         Point cp = _view.PointToClient(new Point(e.X, e.Y));
         ListViewItem? dragToItem = _view.GetItemAt(cp.X, cp.Y);
         if (dragToItem == null)
