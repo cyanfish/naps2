@@ -161,6 +161,7 @@ public class PdfSharpExporter : PdfExporter
     private static bool IsPdfFile(ImageFileStorage imageFileStorage) => Path.GetExtension(imageFileStorage.FullPath)
         ?.Equals(".pdf", StringComparison.InvariantCultureIgnoreCase) ?? false;
 
+    // TODO: Try to combine/simplify this with the non-ocr method
     private bool BuildDocumentWithOcr(ProgressHandler? progressCallback, CancellationToken cancelToken,
         PdfDocument document, PdfCompat compat, ICollection<ProcessedImage> images, OcrParams ocrParams,
         IOcrEngine ocrEngine)
@@ -197,43 +198,45 @@ public class PdfSharpExporter : PdfExporter
                 page = document.AddPage();
             }
 
-            string tempImageFilePath = Path.Combine(_scanningContext.TempFolderPath, Path.GetRandomFileName());
-
             var format = image.Metadata.Lossless ? ImageFileFormat.Png : ImageFileFormat.Jpeg;
-            using (var renderedImage = _scanningContext.ImageContext.Render(image))
-            using (var stream = renderedImage.SaveToMemoryStream(format))
-            using (var pdfImage = XImage.FromStream(stream))
+            var ext = format == ImageFileFormat.Png ? ".png" : ".jpg";
+            string ocrTempFilePath = Path.Combine(_scanningContext.TempFolderPath, Path.GetRandomFileName() + ext);
+            using var renderedImage = _scanningContext.ImageContext.Render(image);
+            using var stream = renderedImage.SaveToMemoryStream(format);
+            using var img = XImage.FromStream(stream);
+            if (cancelToken.IsCancellationRequested)
             {
-                if (cancelToken.IsCancellationRequested)
-                {
-                    break;
-                }
-
-                if (!importedPdfPassThrough)
-                {
-                    DrawImageOnPage(page, pdfImage, compat);
-                }
-
-                if (cancelToken.IsCancellationRequested)
-                {
-                    break;
-                }
-
-                if (!_scanningContext.OcrRequestQueue.HasCachedResult(ocrEngine, image, ocrParams))
-                {
-                    pdfImage.GdiImage.Save(tempImageFilePath);
-                }
+                break;
+            }
+            if (!importedPdfPassThrough)
+            {
+                DrawImageOnPage(page, img, compat);
             }
 
             if (cancelToken.IsCancellationRequested)
             {
-                File.Delete(tempImageFilePath);
+                break;
+            }
+
+            if (!_scanningContext.OcrRequestQueue.HasCachedResult(ocrEngine, image, ocrParams))
+            {
+                // Save the image to a file for use in OCR.
+                // We don't need to delete this file as long as we pass it to OcrRequestQueue.Enqueue, which takes 
+                // ownership and guarantees its eventual deletion.
+                using var fileStream = new FileStream(ocrTempFilePath, FileMode.CreateNew);
+                stream.Seek(0, SeekOrigin.Begin);
+                stream.CopyTo(fileStream);
+            }
+
+            if (cancelToken.IsCancellationRequested)
+            {
+                File.Delete(ocrTempFilePath);
                 break;
             }
 
             // Start OCR
             var ocrTask = _scanningContext.OcrRequestQueue.Enqueue(
-                ocrEngine, image, tempImageFilePath, ocrParams, OcrPriority.Foreground, cancelToken);
+                ocrEngine, image, ocrTempFilePath, ocrParams, OcrPriority.Foreground, cancelToken);
             ocrTask.ContinueWith(_ =>
             {
                 // This is the best place to put progress reporting
