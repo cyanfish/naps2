@@ -76,7 +76,7 @@ public class CommandLineIntegrationTests : ContextualTests
                 OcrLang = "eng"
             },
             ImageResources.ocr_test);
-        PdfAsserts.AssertContainsText("ADVERTISEMENT.", path);
+        PdfAsserts.AssertContainsTextOnce("ADVERTISEMENT.", path);
         AssertRecoveryCleanedUp();
     }
 

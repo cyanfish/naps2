@@ -13,18 +13,10 @@ public class TesseractOcrEngineTests : ContextualTests
 
     public TesseractOcrEngineTests()
     {
-        var best = Path.Combine(FolderPath, "best");
-        Directory.CreateDirectory(best);
-        var fast = Path.Combine(FolderPath, "fast");
-        Directory.CreateDirectory(fast);
-        
-        var tesseractPath = CopyResourceToFile(BinaryResources.tesseract_x64, FolderPath, "tesseract.exe");
-        CopyResourceToFile(BinaryResources.eng_traineddata, fast, "eng.traineddata");
-        CopyResourceToFile(BinaryResources.heb_traineddata, fast, "heb.traineddata");
+        SetUpOcr();
         _testImagePath = CopyResourceToFile(BinaryResources.ocr_test, "ocr_test.jpg");
         _testImagePathHebrew = CopyResourceToFile(BinaryResources.ocr_test_hebrew, "ocr_test_hebrew.jpg");
-
-        _engine = new TesseractOcrEngine(tesseractPath, FolderPath, FolderPath);
+        _engine = (TesseractOcrEngine) ScanningContext.OcrEngine;
     }
 
     [Fact]

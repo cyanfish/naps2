@@ -182,7 +182,6 @@ public class PdfSharpExporter : PdfExporter
             PdfPage page;
             bool importedPdfPassThrough = false;
 
-            // TODO: Maybe have a PdfFileStorage?
             if (image.Storage is ImageFileStorage fileStorage && IsPdfFile(fileStorage) && image.TransformState.IsEmpty)
             {
                 importedPdfPassThrough = true;

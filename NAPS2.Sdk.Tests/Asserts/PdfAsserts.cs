@@ -28,18 +28,23 @@ public static class PdfAsserts
         Assert.StartsWith($"{profile} ", report.Jobs.Job.ValidationReport.ProfileName);
     }
 
-    public static void AssertContainsText(string text, string filePath)
+    public static void AssertContainsTextOnce(string text, string filePath)
+    {
+        Assert.Equal(1, CountText(text, filePath));
+    }
+
+    private static int CountText(string text, string filePath)
     {
         Assert.True(File.Exists(filePath));
-        bool containsText = false;
+        int count = 0;
         foreach (var pageText in new PdfiumPdfReader().ReadTextByPage(filePath))
         {
             if (pageText.Contains(text))
             {
-                containsText = true;
+                count++;
             }
         }
-        Assert.True(containsText);
+        return count;
     }
 
     public static void AssertMetadata(PdfMetadata metadata, string filePath)

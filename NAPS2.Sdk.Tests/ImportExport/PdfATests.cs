@@ -4,6 +4,8 @@ using Xunit;
 
 namespace NAPS2.Sdk.Tests.ImportExport;
 
+// TODO: Validate with OCR output
+// TODO: Maaaybe validate with external import? We certainly can't guarantee it, but maybe some cases can be verified for best effort
 public class PdfATests : ContextualTests
 {
     [Fact]

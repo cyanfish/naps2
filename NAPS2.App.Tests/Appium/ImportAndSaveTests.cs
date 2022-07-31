@@ -52,7 +52,7 @@ public class ImportAndSaveTests : AppiumTests
             PdfResources.word_p2,
             ImageResources.color_image,
             ImageResources.ocr_test);
-        PdfAsserts.AssertContainsText("ADVERTISEMENT.", path);
+        PdfAsserts.AssertContainsTextOnce("ADVERTISEMENT.", path);
         AppTestHelper.AssertNoErrorLog(FolderPath);
     }
 }

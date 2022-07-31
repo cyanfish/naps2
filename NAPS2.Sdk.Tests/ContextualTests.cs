@@ -2,6 +2,7 @@
 using System.Threading;
 using NAPS2.Images.Gdi;
 using NAPS2.ImportExport.Pdf;
+using NAPS2.Ocr;
 using NAPS2.Scan;
 
 namespace NAPS2.Sdk.Tests;
@@ -30,6 +31,19 @@ public class ContextualTests : IDisposable
     public ProcessedImage CreateScannedImage()
     {
         return ScanningContext.CreateProcessedImage(new GdiImage(new Bitmap(100, 100)));
+    }
+
+    public void SetUpOcr()
+    {
+        var best = Path.Combine(FolderPath, "best");
+        Directory.CreateDirectory(best);
+        var fast = Path.Combine(FolderPath, "fast");
+        Directory.CreateDirectory(fast);
+        
+        var tesseractPath = CopyResourceToFile(BinaryResources.tesseract_x64, FolderPath, "tesseract.exe");
+        CopyResourceToFile(BinaryResources.eng_traineddata, fast, "eng.traineddata");
+        CopyResourceToFile(BinaryResources.heb_traineddata, fast, "heb.traineddata");
+        ScanningContext.OcrEngine = new TesseractOcrEngine(tesseractPath, FolderPath, FolderPath);
     }
     
     public string CopyResourceToFile(byte[] resource, string folder, string fileName)

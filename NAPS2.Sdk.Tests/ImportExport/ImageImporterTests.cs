@@ -1,6 +1,5 @@
 using System.Threading;
 using Moq;
-using NAPS2.Images.Gdi;
 using NAPS2.ImportExport;
 using NAPS2.ImportExport.Images;
 using NAPS2.Scan;
@@ -9,6 +8,7 @@ using Xunit;
 
 namespace NAPS2.Sdk.Tests.ImportExport;
 
+// TODO: Use StorageConfig to test in-memory import (just need to figure out how to handle storage assertions, maybe delegate to StorageConfig)
 public class ImageImporterTests : ContextualTests
 {
     private readonly ImageImporter _imageImporter;
