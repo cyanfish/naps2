@@ -23,6 +23,8 @@ public class PdfImportTests : ContextualTests
         var images = await _importer.Import(importPath).ToList();
 
         Assert.Equal(2, images.Count);
+        storageConfig.AssertPdfStorage(images[0].Storage);
+        storageConfig.AssertPdfStorage(images[1].Storage);
         ImageAsserts.Similar(PdfResources.word_p1, ImageContext.Render(images[0]));
         ImageAsserts.Similar(PdfResources.word_p2, ImageContext.Render(images[1]));
     }
@@ -37,6 +39,7 @@ public class PdfImportTests : ContextualTests
         var images = await _importer.Import(importPath).ToList();
 
         Assert.Single(images);
+        storageConfig.AssertJpegStorage(images[0].Storage);
         ImageAsserts.Similar(ImageResources.color_image, ImageContext.Render(images[0]));
     }
 
@@ -50,6 +53,7 @@ public class PdfImportTests : ContextualTests
         var images = await _importer.Import(importPath).ToList();
 
         Assert.Single(images);
+        storageConfig.AssertPngStorage(images[0].Storage);
         ImageAsserts.Similar(ImageResources.color_image_bw, ImageContext.Render(images[0]));
     }
 }
