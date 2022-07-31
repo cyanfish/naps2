@@ -13,24 +13,17 @@ public class ImportAndSaveTests : AppiumTests
     public void ImportVariousAndSavePdfWithOcr()
     {
         File.WriteAllBytes(Path.Combine(FolderPath, "word.pdf"), PdfResources.word_generated_pdf);
+        File.WriteAllBytes(Path.Combine(FolderPath, "patcht.pdf"), PdfResources.word_patcht_pdf);
         File.WriteAllBytes(Path.Combine(FolderPath, "image.pdf"), PdfResources.image_pdf);
         File.WriteAllBytes(Path.Combine(FolderPath, "text.jpg"), BinaryResources.ocr_test);
         var tessdata = Path.Combine(FolderPath, "components", "tesseract-4.0.0b4", "fast");
         Directory.CreateDirectory(tessdata);
         File.WriteAllBytes(Path.Combine(tessdata, "eng.traineddata"), BinaryResources.eng_traineddata);
         
-        ClickAtName("Import");
-        DoubleClickAtName("word.pdf");
-        ResetMainWindow();
-        Thread.Sleep(100);
-        ClickAtName("Import");
-        DoubleClickAtName("image.pdf");
-        ResetMainWindow();
-        Thread.Sleep(100);
-        ClickAtName("Import");
-        DoubleClickAtName("text.jpg");
-        ResetMainWindow();
-        Thread.Sleep(100);
+        ImportFile("word.pdf");
+        ImportFile("patcht.pdf");
+        ImportFile("image.pdf");
+        ImportFile("text.jpg");
         
         ClickAtName("OCR");
         ClickAtName("Make PDFs searchable using OCR");
@@ -44,15 +37,29 @@ public class ImportAndSaveTests : AppiumTests
         fileTextBox.SendKeys("test.pdf");
         ClickAtName("Save");
         // Wait for the save to finish
+        Thread.Sleep(100);
         WaitUntilGone("Cancel");
 
         var path = Path.Combine(FolderPath, "test.pdf");
         PdfAsserts.AssertImages(path, 
             PdfResources.word_p1,
             PdfResources.word_p2,
+            PdfResources.word_patcht_p1,
             ImageResources.color_image,
             ImageResources.ocr_test);
         PdfAsserts.AssertContainsTextOnce("ADVERTISEMENT.", path);
+        PdfAsserts.AssertContainsTextOnce("Page one.", path);
+        PdfAsserts.AssertContainsTextOnce("Page two.", path);
+        // TODO: This is failing right now
+        PdfAsserts.AssertContainsTextOnce("Sized for printing unscaled", path);
         AppTestHelper.AssertNoErrorLog(FolderPath);
+    }
+
+    private void ImportFile(string fileName)
+    {
+        ClickAtName("Import");
+        DoubleClickAtName(fileName);
+        ResetMainWindow();
+        Thread.Sleep(100);
     }
 }
