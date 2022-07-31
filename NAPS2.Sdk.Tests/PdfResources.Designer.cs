@@ -73,6 +73,16 @@ namespace NAPS2.Sdk.Tests {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
+        internal static byte[] image_pdf_bw {
+            get {
+                object obj = ResourceManager.GetObject("image_pdf_bw", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
         internal static byte[] image_with_text_pdf {
             get {
                 object obj = ResourceManager.GetObject("image_with_text_pdf", resourceCulture);

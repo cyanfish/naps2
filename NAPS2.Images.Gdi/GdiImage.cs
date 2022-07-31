@@ -102,6 +102,12 @@ public class GdiImage : IMemoryImage
 
     public IMemoryImage SafeClone()
     {
+        if (PixelFormat == ImagePixelFormat.BW1)
+        {
+            // TODO: This should do something better, but currently there are no use cases that need it
+            // TODO: In general we might consider, rather than per-impl SafeClone, having an ImageContext method to do a binary copy with CreateImage + Lock
+            return Clone();
+        }
         var newBitmap = new Bitmap(Width, Height, PixelFormat.AsPixelFormat());
         using var g = Graphics.FromImage(newBitmap);
         if (PixelFormat == ImagePixelFormat.ARGB32)

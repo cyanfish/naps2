@@ -372,12 +372,7 @@ public class PdfSharpImporter : IPdfImporter
         using var storage = _scanningContext.ImageContext.Load(stream);
         storage.SetResolution(storage.Width / (float) page.Width.Inch, storage.Height / (float) page.Height.Inch);
 
-        // TODO: Use CreateProcessedImage?
-        var image = new ProcessedImage(
-            storage,
-            new ImageMetadata(BitDepth.BlackAndWhite, true),
-            new PostProcessingData(),
-            TransformState.Empty);
+        var image = _scanningContext.CreateProcessedImage(storage, BitDepth.BlackAndWhite, true, -1);
         return _importPostProcessor.AddPostProcessingData(
             image,
             storage,
