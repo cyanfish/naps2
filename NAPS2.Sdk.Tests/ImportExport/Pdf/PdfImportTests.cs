@@ -1,3 +1,4 @@
+using Moq;
 using NAPS2.ImportExport;
 using NAPS2.ImportExport.Pdf;
 using NAPS2.Sdk.Tests.Asserts;
@@ -66,6 +67,24 @@ public class PdfImportTests : ContextualTests
 
         var importPath = CopyResourceToFile(PdfResources.encrypted_pdf, "import.pdf");
         var images = await _importer.Import(importPath, new ImportParams { Password = "hello" }).ToList();
+
+        Assert.Single(images);
+        ImageAsserts.Similar(ImageResources.color_image, ImageContext.Render(images[0]));
+    }
+
+    [Theory]
+    [ClassData(typeof(StorageAwareTestData))]
+    public async Task ImportEncryptedWithPasswordProvider(StorageConfig storageConfig)
+    {
+        storageConfig.Apply(this);
+
+        var passwordProvider = new Mock<IPdfPasswordProvider>();
+        var password = "hello";
+        passwordProvider.Setup(x => x.ProvidePassword(It.IsAny<string>(), It.IsAny<int>(), out password)).Returns(true);
+        var importer = new PdfSharpImporter(ScanningContext, passwordProvider.Object);
+
+        var importPath = CopyResourceToFile(PdfResources.encrypted_pdf, "import.pdf");
+        var images = await importer.Import(importPath).ToList();
 
         Assert.Single(images);
         ImageAsserts.Similar(ImageResources.color_image, ImageContext.Render(images[0]));
