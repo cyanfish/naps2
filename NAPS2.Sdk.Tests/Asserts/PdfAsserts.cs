@@ -51,34 +51,37 @@ public static class PdfAsserts
         return count;
     }
 
-    public static void AssertMetadata(PdfMetadata metadata, string filePath)
+    public static void AssertMetadata(PdfMetadata expected, string filePath, string? password = null)
     {
         Assert.True(File.Exists(filePath));
-        var doc = PdfReader.Open(filePath, PdfDocumentOpenMode.InformationOnly);
-        Assert.Equal(metadata.Author, doc.Info.Author);
-        Assert.Equal(metadata.Creator, doc.Info.Creator);
-        Assert.Equal(metadata.Keywords, doc.Info.Keywords);
-        Assert.Equal(metadata.Subject, doc.Info.Subject);
-        Assert.Equal(metadata.Title, doc.Info.Title);
+        var actual = new PdfiumPdfReader().ReadMetadata(filePath, password);
+        Assert.Equal(expected.Author, actual.Author);
+        Assert.Equal(expected.Creator, actual.Creator);
+        Assert.Equal(expected.Keywords, actual.Keywords);
+        Assert.Equal(expected.Subject, actual.Subject);
+        Assert.Equal(expected.Title, actual.Title);
     }
 
     public static void AssertEncrypted(string filePath, string ownerPassword, string userPassword,
-        Action<PdfSecuritySettings> securitySettingsAsserts)
+        Action<PdfSecuritySettings>? securitySettingsAsserts = null)
     {
         Assert.True(File.Exists(filePath));
         Assert.Throws<PdfReaderException>(() => PdfReader.Open(filePath, PdfDocumentOpenMode.InformationOnly));
         var doc = PdfReader.Open(filePath, ownerPassword, PdfDocumentOpenMode.InformationOnly);
         Assert.Equal(PasswordValidity.OwnerPassword, doc.SecurityHandler.ValidatePassword(ownerPassword));
         Assert.Equal(PasswordValidity.UserPassword, doc.SecurityHandler.ValidatePassword(userPassword));
-        securitySettingsAsserts(doc.SecuritySettings);
+        securitySettingsAsserts?.Invoke(doc.SecuritySettings);
     }
 
-    public static void AssertImages(string filePath, params Bitmap[] expectedImages)
+    public static void AssertImages(string filePath, params Bitmap[] expectedImages) =>
+        AssertImages(filePath, null, expectedImages);
+
+    public static void AssertImages(string filePath, string? password, params Bitmap[] expectedImages)
     {
         Assert.True(File.Exists(filePath));
         var renderer = new PdfiumPdfRenderer();
         var dpi = expectedImages[0].HorizontalResolution;
-        var actualImages = renderer.Render(new GdiImageContext(), filePath, dpi).ToList();
+        var actualImages = renderer.Render(new GdiImageContext(), filePath, dpi, password).ToList();
         // var actualImages = renderer.Render(
         //     new GdiImageContext(),
         //     filePath, 

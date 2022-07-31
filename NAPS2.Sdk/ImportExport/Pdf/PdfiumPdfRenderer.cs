@@ -5,12 +5,13 @@ namespace NAPS2.ImportExport.Pdf;
 
 public class PdfiumPdfRenderer : IPdfRenderer
 {
-    public IEnumerable<IMemoryImage> Render(ImageContext imageContext, string path, float defaultDpi)
+    public IEnumerable<IMemoryImage> Render(ImageContext imageContext, string path, float defaultDpi,
+        string? password = null)
     {
         // Pdfium is not thread-safe
         lock (PdfiumNativeLibrary.Instance)
         {
-            using var doc = PdfDocument.Load(path);
+            using var doc = PdfDocument.Load(path, password);
             foreach (var memoryImage in RenderDocument(imageContext, defaultDpi, doc))
             {
                 yield return memoryImage;
@@ -18,7 +19,8 @@ public class PdfiumPdfRenderer : IPdfRenderer
         }
     }
 
-    public IEnumerable<IMemoryImage> Render(ImageContext imageContext, byte[] buffer, int length, float defaultDpi)
+    public IEnumerable<IMemoryImage> Render(ImageContext imageContext, byte[] buffer, int length, float defaultDpi,
+        string? password = null)
     {
         // Pdfium is not thread-safe
         lock (PdfiumNativeLibrary.Instance)
@@ -26,7 +28,7 @@ public class PdfiumPdfRenderer : IPdfRenderer
             var handle = GCHandle.Alloc(buffer, GCHandleType.Pinned);
             try
             {
-                using var doc = PdfDocument.Load(handle.AddrOfPinnedObject(), length);
+                using var doc = PdfDocument.Load(handle.AddrOfPinnedObject(), length, password);
                 foreach (var memoryImage in RenderDocument(imageContext, defaultDpi, doc))
                 {
                     yield return memoryImage;

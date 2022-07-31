@@ -1,4 +1,5 @@
 using System.Runtime.InteropServices;
+using System.Text;
 
 namespace NAPS2.ImportExport.Pdf.Pdfium;
 
@@ -43,6 +44,14 @@ public class PdfDocument : NativePdfiumObject
     public PdfPage NewPage(double width, double height)
     {
         return new PdfPage(Native.FPDFPage_New(Handle, int.MaxValue, width, height), this);
+    }
+
+    public string GetMetaText(string tag)
+    {
+        var length = Native.FPDF_GetMetaText(Handle, tag, null, (IntPtr) 0);
+        var buffer = new byte[(int) length];
+        Native.FPDF_GetMetaText(Handle, tag, buffer, length);
+        return Encoding.Unicode.GetString(buffer, 0, buffer.Length - 2);
     }
 
     public void Save(string path)
