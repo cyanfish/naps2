@@ -402,6 +402,7 @@ public class DesktopController
 
     public void Import()
     {
+        // TODO: Merge this into exporthelper/dialoghelper?
         var ofd = new OpenFileDialog
         {
             Multiselect = true,
@@ -419,6 +420,11 @@ public class DesktopController
                      MiscResources.FileTypePng + @"|*.png|" +
                      MiscResources.FileTypeTiff + @"|*.tiff;*.tif"
         };
+        if (Paths.IsTestAppDataPath)
+        {
+            // For UI test automation we choose the appdata folder to find the prepared files to import
+            ofd.InitialDirectory = Paths.AppData;
+        }
         if (ofd.ShowDialog() == DialogResult.OK)
         {
             ImportFiles(ofd.FileNames);

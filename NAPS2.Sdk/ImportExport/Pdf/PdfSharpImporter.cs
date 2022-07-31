@@ -11,7 +11,7 @@ using PdfSharp.Pdf.IO;
 namespace NAPS2.ImportExport.Pdf;
 
 // TODO: We should have a "nicer" name (PdfImporter) for SDK users, or maybe have this be internal and have the public ScannedImageImporter (which should also maybe be renamed...)
-// TODO: Add tests
+// TODO: Add tests (specifically, currently it seems like importing a NAPS2 pdf is wrong, doesn't extract the image)
 public class PdfSharpImporter : IPdfImporter
 {
     static PdfSharpImporter()

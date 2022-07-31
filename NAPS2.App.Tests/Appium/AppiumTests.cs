@@ -63,4 +63,18 @@ public class AppiumTests : ContextualTests
     {
         ClickAt(_session.FindElementByName(name));
     }
+
+    protected void DoubleClickAt(WindowsElement element)
+    {
+#pragma warning disable CS0618
+        // This is apparently obsolete, but the "correct" code is 10x as complicated so whatever
+        _session.Mouse.MouseMove(element.Coordinates);
+        _session.Mouse.DoubleClick(element.Coordinates);
+#pragma warning restore CS0618
+    }
+
+    protected void DoubleClickAtName(string name)
+    {
+        DoubleClickAt(_session.FindElementByName(name));
+    }
 }
