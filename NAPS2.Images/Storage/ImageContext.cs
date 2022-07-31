@@ -133,7 +133,7 @@ public abstract class ImageContext
     public abstract IMemoryImage Create(int width, int height, ImagePixelFormat pixelFormat);
 
     public string SaveSmallestFormat(string pathWithoutExtension, IMemoryImage image, BitDepth bitDepth,
-        bool lossless, int quality, out ImageFileFormat imageFileFormat)
+        bool lossless, int quality, out ImageFileFormat imageFileFormat, bool encodeOnce = false)
     {
         var memoryStream = SaveSmallestFormatToMemoryStream(image, bitDepth, lossless, quality, out imageFileFormat);
         var ext = imageFileFormat == ImageFileFormat.Png ? ".png" : ".jpg";
@@ -144,7 +144,7 @@ public abstract class ImageContext
     }
 
     public MemoryStream SaveSmallestFormatToMemoryStream(IMemoryImage image, BitDepth bitDepth, bool lossless,
-        int quality, out ImageFileFormat imageFileFormat)
+        int quality, out ImageFileFormat imageFileFormat, bool encodeOnce = false)
     {
         // Store the image in as little space as possible
         if (image.PixelFormat == ImagePixelFormat.BW1)
@@ -174,6 +174,12 @@ public abstract class ImageContext
         {
             // Store as JPEG
             // Since the image was originally in JPEG format, PNG is unlikely to have size benefits
+            imageFileFormat = ImageFileFormat.Jpeg;
+            return image.SaveToMemoryStream(ImageFileFormat.Jpeg);
+        }
+        if (encodeOnce)
+        {
+            // If the caller doesn't want to do an extra encode for the chance of a smaller image, just go with jpeg
             imageFileFormat = ImageFileFormat.Jpeg;
             return image.SaveToMemoryStream(ImageFileFormat.Jpeg);
         }

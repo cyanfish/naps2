@@ -141,10 +141,8 @@ public class PdfSharpExporter : PdfExporter
             {
                 // TODO: Dedup from other method
                 using var renderedImage = _scanningContext.ImageContext.Render(image);
-                // TODO: Consider optimizing cases like e.g. starting with a jpeg then scaling it (so the new bitmap
-                // doesn't have an original file format, and this has to encode both jpeg and png to figure that out)
                 using Stream stream = _scanningContext.ImageContext.SaveSmallestFormatToMemoryStream(
-                    renderedImage, image.Metadata.BitDepth, image.Metadata.Lossless, -1, out _);
+                    renderedImage, image.Metadata.BitDepth, image.Metadata.Lossless, -1, out _, true);
                 using var img = XImage.FromStream(stream);
                 if (cancelToken.IsCancellationRequested)
                 {
