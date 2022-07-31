@@ -39,9 +39,12 @@ public static class PdfAsserts
         int count = 0;
         foreach (var pageText in new PdfiumPdfReader().ReadTextByPage(filePath))
         {
-            if (pageText.Contains(text))
+            int startIndex = 0;
+            int index;
+            while ((index = pageText.IndexOf(text, startIndex, StringComparison.InvariantCulture)) != -1)
             {
                 count++;
+                startIndex = index + 1;
             }
         }
         return count;
