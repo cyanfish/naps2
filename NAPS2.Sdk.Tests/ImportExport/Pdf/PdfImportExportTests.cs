@@ -99,4 +99,26 @@ public class PdfImportExportTests : ContextualTests
         PdfAsserts.AssertContainsTextOnce("Page one.", _exportPath);
         PdfAsserts.AssertContainsTextOnce("Sized for printing unscaled", _exportPath);
     }
+
+    [Theory]
+    [ClassData(typeof(StorageAwareTestData))]
+    public async Task ImportExportEncrypted(StorageConfig storageConfig)
+    {
+        storageConfig.Apply(this);
+
+        var images = await _importer.Import(_importPath).ToList();
+        Assert.Equal(2, images.Count);
+        await _exporter.Export(_exportPath, images, new PdfExportParams
+        {
+            Encryption = new()
+            {
+                EncryptPdf = true,
+                OwnerPassword = "hello",
+                UserPassword = "world"
+            }
+        });
+
+        PdfAsserts.AssertEncrypted(_exportPath, "hello", "world");
+        PdfAsserts.AssertImages(_exportPath, "world", PdfResources.word_p1, PdfResources.word_p2);
+    }
 }
