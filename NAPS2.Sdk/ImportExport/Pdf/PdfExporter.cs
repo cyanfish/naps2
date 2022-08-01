@@ -101,6 +101,7 @@ public class PdfExporter : IPdfExporter
             var stream = FinalizeAndSaveDocument(document, exportParams, out var placeholderPage);
 
             var passthroughPages = pdfPages.Where(x => !x.NeedsOcr).ToList();
+            // TODO: We probably should just use PdfSharp to import the pages, as long as it supports it - just need some tests to cover the case when pdfsharp fails to load a pdf 
             MergePassthroughPages(stream, path, passthroughPages, placeholderPage);
 
             return true;

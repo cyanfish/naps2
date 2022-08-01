@@ -144,6 +144,37 @@ public class PdfExporterTests : ContextualTests
 
     [Theory]
     [ClassData(typeof(StorageAwareTestData))]
+    public async Task ExportMetadataEncrypted(StorageConfig storageConfig)
+    {
+        storageConfig.Apply(this);
+
+        var filePath = Path.Combine(FolderPath, "test.pdf");
+        using var image = ScanningContext.CreateProcessedImage(new GdiImage(ImageResources.color_image));
+        var metadata = new PdfMetadata
+        {
+            Author = "author",
+            Title = "title",
+            Keywords = "keywords",
+            Subject = "subject"
+        };
+
+        await _exporter.Export(filePath, new[] { image }, new PdfExportParams
+        {
+            Encryption = new()
+            {
+                EncryptPdf = true,
+                OwnerPassword = "hello",
+                UserPassword = "world"
+            },
+            Metadata = metadata
+        });
+
+        PdfAsserts.AssertEncrypted(filePath, "hello", "world");
+        PdfAsserts.AssertMetadata(metadata with { Creator = "NAPS2" }, filePath, "world");
+    }
+
+    [Theory]
+    [ClassData(typeof(StorageAwareTestData))]
     public async Task ExportUnicodeMetadataEncrypted(StorageConfig storageConfig)
     {
         storageConfig.Apply(this);

@@ -48,6 +48,8 @@ public class PdfImporter : IPdfImporter
                     using var document = LoadDocument(filePath, importParams);
                     if (document == null) return;
                     progressCallback?.Invoke(0, document.PageCount);
+                    
+                    // TODO: Maybe do a permissions check
 
                     // TODO: Make sure to test slices (both unit and command line)
                     using var pages = importParams.Slice
