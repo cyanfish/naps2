@@ -54,29 +54,7 @@ public class PdfiumPdfRenderer : IPdfRenderer
                 yield return image;
                 continue;
             }
-            yield return RenderPageToNewImage(imageContext, page, defaultDpi);
+            yield return new PdfiumBitmapFactory(imageContext).RenderPageToNewImage(page, defaultDpi);
         }
-    }
-
-    private static IMemoryImage RenderPageToNewImage(ImageContext imageContext, PdfPage page, float defaultDpi)
-    {
-        var widthInInches = page.Width / 72;
-        var heightInInches = page.Height / 72;
-
-        // Cap the resolution to 10k pixels in each dimension
-        var dpi = defaultDpi;
-        dpi = Math.Min(dpi, 10000 / heightInInches);
-        dpi = Math.Min(dpi, 10000 / widthInInches);
-
-        int widthInPx = (int) Math.Round(widthInInches * dpi);
-        int heightInPx = (int) Math.Round(heightInInches * dpi);
-
-        var bitmap = imageContext.Create(widthInPx, heightInPx, ImagePixelFormat.RGB24);
-        bitmap.SetResolution(dpi, dpi);
-        using var bitmapData = bitmap.Lock(LockMode.ReadWrite, out var scan0, out var stride);
-        using var pdfiumBitmap = PdfBitmap.CreateFromPointerBgr(widthInPx, heightInPx, scan0, stride);
-        pdfiumBitmap.FillRect(0, 0, widthInPx, heightInPx, PdfBitmap.WHITE);
-        pdfiumBitmap.RenderPage(page, 0, 0, widthInPx, heightInPx);
-        return bitmap;
     }
 }

@@ -163,7 +163,7 @@ public abstract class ImageContext
             // Note that if a black and white image comes from native WIA, bitDepth is unknown,
             // so the image will be png-encoded below instead of using a 1-bit bitmap
         }
-        if (lossless)
+        if (lossless || image.OriginalFileFormat == ImageFileFormat.Png)
         {
             // Store as PNG
             // Lossless, but some images (color/grayscale) take up lots of storage

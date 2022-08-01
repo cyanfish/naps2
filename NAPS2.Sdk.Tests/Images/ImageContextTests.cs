@@ -68,10 +68,23 @@ public class ImageContextTests : ContextualTests
     }
 
     [Fact]
+    public void SaveSmallestFormat_OriginalPng()
+    {
+        var ctx = new GdiImageContext();
+        var color = new GdiImage(ImageResources.color_image_png);
+        var path = Path.Combine(FolderPath, "test");
+
+        var fullPath = ctx.SaveSmallestFormat(path, color, BitDepth.Color, false, -1, out var format);
+
+        AssertPng(format, fullPath, ImageResources.color_image);
+    }
+
+    [Fact]
     public void SaveSmallestFormat_SmallerJpeg()
     {
         var ctx = new GdiImageContext();
         var color = new GdiImage(ImageResources.color_image_png);
+        color.OriginalFileFormat = ImageFileFormat.Unspecified;
         var path = Path.Combine(FolderPath, "test");
 
         var fullPath = ctx.SaveSmallestFormat(path, color, BitDepth.Color, false, -1, out var format);

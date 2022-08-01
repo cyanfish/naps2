@@ -103,11 +103,7 @@ public static class PdfAsserts
             using var page = doc.GetPage(pageIndex);
             using var obj = PdfiumImageExtractor.GetSingleImageObject(page);
             Assert.NotNull(obj);
-            Assert.Equal(filters.Length, obj.ImageFilterCount);
-            for (int i = 0; i < filters.Length; i++)
-            {
-                Assert.Equal(filters[i], obj.GetImageFilter(i));
-            }
+            Assert.True(obj.HasFilters(filters));
         }
     }
 }

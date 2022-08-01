@@ -7,6 +7,8 @@ using Xunit;
 
 namespace NAPS2.Sdk.Tests.ImportExport.Pdf;
 
+// TODO: MemoryStorage tests are a lot slower than FileStorage, why?
+// TODO: Add an import test for 1bit png (not ccitt)
 public class PdfImportTests : ContextualTests
 {
     private readonly PdfImporter _importer;
@@ -43,6 +45,20 @@ public class PdfImportTests : ContextualTests
 
         Assert.Single(images);
         storageConfig.AssertJpegStorage(images[0].Storage);
+        ImageAsserts.Similar(ImageResources.color_image, ImageContext.Render(images[0]));
+    }
+
+    [Theory]
+    [ClassData(typeof(StorageAwareTestData))]
+    public async Task ImportNaps2PngPdf(StorageConfig storageConfig)
+    {
+        storageConfig.Apply(this);
+
+        var importPath = CopyResourceToFile(PdfResources.image_pdf_png, "import.pdf");
+        var images = await _importer.Import(importPath).ToList();
+
+        Assert.Single(images);
+        storageConfig.AssertPngStorage(images[0].Storage);
         ImageAsserts.Similar(ImageResources.color_image, ImageContext.Render(images[0]));
     }
 

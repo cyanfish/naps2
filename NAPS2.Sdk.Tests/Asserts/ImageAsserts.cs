@@ -14,7 +14,7 @@ public static class ImageAsserts
 
     public const double NULL_RMSE_THRESHOLD = 0.6;
 
-    private const double RESOLUTION_THRESHOLD = 0.05;
+    private const double RESOLUTION_THRESHOLD = 0.1;
 
     private const double DIMENSIONS_THRESHOLD = 0.05;
 

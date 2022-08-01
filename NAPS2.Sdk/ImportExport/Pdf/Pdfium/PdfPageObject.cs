@@ -107,6 +107,32 @@ public class PdfPageObject : NativePdfiumObject
             Native.FPDFImageObj_GetRenderedBitmap(_document.Handle, _page?.Handle ?? IntPtr.Zero, Handle));
     }
 
+    public byte[] GetImageDataRaw()
+    {
+        var length = Native.FPDFImageObj_GetImageDataRaw(Handle, null, (IntPtr) 0);
+        var buffer = new byte[(int) length];
+        Native.FPDFImageObj_GetImageDataRaw(Handle, buffer, length);
+        return buffer;
+    }
+
+    public byte[] GetImageDataDecoded()
+    {
+        var length = Native.FPDFImageObj_GetImageDataDecoded(Handle, null, (IntPtr) 0);
+        var buffer = new byte[(int) length];
+        Native.FPDFImageObj_GetImageDataDecoded(Handle, buffer, length);
+        return buffer;
+    }
+
+    public PdfImageMetadata ImageMetadata
+    {
+        get
+        {
+            var metadata = new PdfImageMetadata();
+            Native.FPDFImageObj_GetImageMetadata(Handle, _page?.Handle ?? IntPtr.Zero, ref metadata);
+            return metadata;
+        }
+    }
+
     public int ImageFilterCount => Native.FPDFImageObj_GetImageFilterCount(Handle);
 
     public string GetImageFilter(int index)
@@ -123,5 +149,21 @@ public class PdfPageObject : NativePdfiumObject
         {
             Native.FPDFPageObj_Destroy(Handle);
         }
+    }
+
+    public bool HasFilters(params string[] filters)
+    {
+        if (filters.Length != ImageFilterCount)
+        {
+            return false;
+        }
+        for (int i = 0; i < filters.Length; i++)
+        {
+            if (!filters[i].Equals(GetImageFilter(i), StringComparison.OrdinalIgnoreCase))
+            {
+                return false;
+            }
+        }
+        return true;
     }
 }

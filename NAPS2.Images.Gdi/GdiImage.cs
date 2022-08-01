@@ -8,6 +8,8 @@ namespace NAPS2.Images.Gdi;
 /// </summary>
 public class GdiImage : IMemoryImage
 {
+    private ImageFileFormat? _originalFileFormat;
+    
     public GdiImage(Bitmap bitmap)
     {
         Bitmap = bitmap ?? throw new ArgumentNullException(nameof(bitmap));
@@ -30,7 +32,12 @@ public class GdiImage : IMemoryImage
 
     public ImagePixelFormat PixelFormat => Bitmap.PixelFormat.AsImagePixelFormat();
 
-    public ImageFileFormat OriginalFileFormat => Bitmap.RawFormat.AsImageFileFormat();
+    // TODO: Consider propagating this during transforms (when it makes sense); then maybe we can remove the "encodeOnce" check
+    public ImageFileFormat OriginalFileFormat
+    {
+        get => _originalFileFormat ?? Bitmap.RawFormat.AsImageFileFormat();
+        set => _originalFileFormat = value;
+    }
 
     public ImageLockState Lock(LockMode lockMode, out IntPtr scan0, out int stride)
     {

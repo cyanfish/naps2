@@ -51,7 +51,7 @@ public interface IMemoryImage : IImageStorage
     /// <summary>
     /// Gets the original image file's format (e.g. png/jpeg) if known.
     /// </summary>
-    ImageFileFormat OriginalFileFormat { get; }
+    ImageFileFormat OriginalFileFormat { get; set; }
 
     /// <summary>
     /// Saves the image to the given file path. If the file format is unspecified, it will be inferred from the

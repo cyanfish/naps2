@@ -9,14 +9,59 @@ public class PdfiumImageExtractor
         using var imageObj = GetSingleImageObject(page);
         if (imageObj != null)
         {
-            // TODO: This could be wrong if the image object has a mask, but GetRenderedBitmap does a re-encode which we don't really want
-            // Ideally we would be do this conditionally based on the presence of a mask, if pdfium could provide us that info
+            var metadata = imageObj.ImageMetadata;
+            var image = GetImageFromObject(imageContext, imageObj, metadata);
+            if (image != null)
+            {
+                image.SetResolution(metadata.HorizontalDpi, metadata.VerticalDpi);
+                return image;
+            }
+        }
+        return null;
+    }
+
+    // TODO: This could be wrong if the image object has a mask, but GetRenderedBitmap does a re-encode which we don't really want
+    // Ideally we would be do this conditionally based on the presence of a mask, if pdfium could provide us that info
+    private static IMemoryImage? GetImageFromObject(ImageContext imageContext, PdfPageObject imageObj,
+        PdfImageMetadata metadata)
+    {
+        var bitmapFactory = new PdfiumBitmapFactory(imageContext);
+        // First try and read the raw image data, this is most efficient if we can handle it
+        if (imageObj.HasFilters("DCTDecode"))
+        {
+            return imageContext.Load(new MemoryStream(imageObj.GetImageDataRaw()));
+        }
+        if (imageObj.HasFilters("FlateDecode"))
+        {
+            if (metadata.BitsPerPixel == 24 && metadata.Colorspace == Colorspace.DeviceRgb)
+            {
+                return bitmapFactory.LoadRawRgb(imageObj.GetImageDataDecoded(), metadata);
+            }
+            if (metadata.BitsPerPixel == 1 && metadata.Colorspace == Colorspace.DeviceGray)
+            {
+                // TODO: Needs testing
+                return bitmapFactory.LoadRawBlackAndWhite(imageObj.GetImageDataDecoded(), metadata);
+            }
+        }
+        if (imageObj.HasFilters("CCITTFaxDecode"))
+        {
+            return bitmapFactory.LoadRawCcitt(imageObj.GetImageDataDecoded(), metadata);
+        }
+        // If we can't read the raw data ourselves, we can try and rely on Pdfium to materialize a bitmap, which is a
+        // bit less efficient
+        // TODO: Maybe add support for black & white here too, with tests
+        // TODO: Also this won't have test coverage if everything is covered by the "raw" tests, maybe either find a
+        // test case or just have a switch to test this specifically
+        if (metadata.BitsPerPixel == 24 || metadata.BitsPerPixel == 32)
+        {
             using var pdfBitmap = imageObj.GetBitmap();
             if (pdfBitmap.Format is ImagePixelFormat.RGB24 or ImagePixelFormat.ARGB32)
             {
-                return CopyPdfBitmapToNewImage(imageContext, pdfBitmap, page);
+                return bitmapFactory.CopyPdfBitmapToNewImage(pdfBitmap, metadata);
             }
         }
+        // Otherwise we fall back to relying on Pdfium to render the whole page which is least efficient and won't have
+        // the correct DPI
         return null;
     }
 
@@ -54,26 +99,5 @@ public class PdfiumImageExtractor
         return pageObj.TextRenderMode == TextRenderMode.Invisible
                || pageObj.TextRenderMode == TextRenderMode.Fill && pageObj.GetFillColor().a == 0
                || pageObj.TextRenderMode == TextRenderMode.Stroke && pageObj.GetStrokeColor().a == 0;
-    }
-
-    private static unsafe IMemoryImage CopyPdfBitmapToNewImage(ImageContext imageContext, PdfBitmap pdfBitmap,
-        PdfPage page)
-    {
-        var dstImage = imageContext.Create(pdfBitmap.Width, pdfBitmap.Height, pdfBitmap.Format);
-        // TODO: We can get dpi from FPDFImageObj_GetImageMetadata?
-        // TODO: Also, is there any world where we want to use GetImageData instead of GetBitmap?
-        dstImage.SetResolution((int) Math.Round(dstImage.Width / page.Width * 72),
-            (int) Math.Round(dstImage.Height / page.Height * 72));
-        using var imageLock = dstImage.Lock(LockMode.ReadWrite, out var dstBuffer, out var dstStride);
-        var srcBuffer = pdfBitmap.Buffer;
-        var srcStride = pdfBitmap.Stride;
-        for (int y = 0; y < dstImage.Height; y++)
-        {
-            IntPtr srcRow = srcBuffer + srcStride * y;
-            IntPtr dstRow = dstBuffer + dstStride * y;
-            Buffer.MemoryCopy(srcRow.ToPointer(), dstRow.ToPointer(), dstStride, Math.Min(srcStride, dstStride));
-        }
-
-        return dstImage;
     }
 }

@@ -151,4 +151,7 @@
   <data name="encrypted_pdf" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\encrypted_pdf.pdf;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="image_pdf_png" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\image_pdf_png.pdf;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
 </root>

@@ -145,6 +145,10 @@ public class PdfiumNativeLibrary : Unmanaged.NativeLibrary
 
     public delegate IntPtr FPDFImageObj_GetBitmap_delegate(IntPtr image_object);
 
+    public delegate IntPtr FPDFImageObj_GetImageDataRaw_delegate(IntPtr image_object, byte[]? buffer, IntPtr buflen);
+
+    public delegate IntPtr FPDFImageObj_GetImageDataDecoded_delegate(IntPtr image_object, byte[]? buffer, IntPtr buflen);
+
     public delegate IntPtr
         FPDFImageObj_GetRenderedBitmap_delegate(IntPtr document, IntPtr page, IntPtr image_object);
 
@@ -154,7 +158,7 @@ public class PdfiumNativeLibrary : Unmanaged.NativeLibrary
         IntPtr buflen);
 
     public delegate bool FPDFImageObj_GetImageMetadata_delegate(IntPtr image_object, IntPtr page,
-        ref FPDF_ImageObj_Metadata metadata);
+        ref PdfImageMetadata metadata);
 
     public delegate bool FPDFPageObj_GetMatrix_delegate(IntPtr page_object, out PdfMatrix matrix);
 
@@ -216,6 +220,8 @@ public class PdfiumNativeLibrary : Unmanaged.NativeLibrary
     public FPDFPage_GetObject_delegate FPDFPage_GetObject => Load<FPDFPage_GetObject_delegate>();
     public FPDFPage_RemoveObject_delegate FPDFPage_RemoveObject => Load<FPDFPage_RemoveObject_delegate>();
     public FPDFImageObj_GetBitmap_delegate FPDFImageObj_GetBitmap => Load<FPDFImageObj_GetBitmap_delegate>();
+    public FPDFImageObj_GetImageDataRaw_delegate FPDFImageObj_GetImageDataRaw => Load<FPDFImageObj_GetImageDataRaw_delegate>();
+    public FPDFImageObj_GetImageDataDecoded_delegate FPDFImageObj_GetImageDataDecoded => Load<FPDFImageObj_GetImageDataDecoded_delegate>();
 
     public FPDFImageObj_GetRenderedBitmap_delegate FPDFImageObj_GetRenderedBitmap =>
         Load<FPDFImageObj_GetRenderedBitmap_delegate>();
@@ -263,16 +269,4 @@ public class PdfiumNativeLibrary : Unmanaged.NativeLibrary
 
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate int GetBlock_delegate(IntPtr param, IntPtr position, IntPtr buffer, IntPtr size);
-
-    public struct FPDF_ImageObj_Metadata
-    {
-        public uint width;
-        public uint height;
-        public float horizontal_dpi;
-        public float vertical_dpi;
-        public int bits_per_pixel;
-        [MarshalAs(UnmanagedType.I4)]
-        public Colorspace colorspace;
-        public int marked_content_id;
-    }
 }
