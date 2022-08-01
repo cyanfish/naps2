@@ -3,6 +3,7 @@ using System.Text;
 
 namespace NAPS2.ImportExport.Pdf.Pdfium;
 
+// TODO: Use PdfiumException (with a message, defaulting to unknown error code for the property) instead of other exception types
 public class PdfDocument : NativePdfiumObject
 {
     public static PdfDocument Load(string path, string? password = null)
@@ -28,7 +29,7 @@ public class PdfDocument : NativePdfiumObject
 
     public PdfPage GetPage(int pageIndex)
     {
-        return new PdfPage(Native.FPDF_LoadPage(Handle, pageIndex), this);
+        return new PdfPage(Native.FPDF_LoadPage(Handle, pageIndex), this, pageIndex);
     }
 
     protected override void DisposeHandle()
@@ -43,7 +44,20 @@ public class PdfDocument : NativePdfiumObject
 
     public PdfPage NewPage(double width, double height)
     {
-        return new PdfPage(Native.FPDFPage_New(Handle, int.MaxValue, width, height), this);
+        return new PdfPage(Native.FPDFPage_New(Handle, int.MaxValue, width, height), this, -1);
+    }
+
+    public void ImportPages(PdfDocument sourceDoc, string? pageRange = null, int insertIndex = 0)
+    {
+        if (!Native.FPDF_ImportPages(Handle, sourceDoc.Handle, pageRange, insertIndex))
+        {
+            throw new Exception("Could not import PDF pages");
+        }
+    }
+
+    public void ImportPage(PdfPage page)
+    {
+        ImportPages(page.Document, (page.PageIndex + 1).ToString(), PageCount);
     }
 
     public string GetMetaText(string tag)
@@ -57,7 +71,11 @@ public class PdfDocument : NativePdfiumObject
     public void Save(string path)
     {
         using var stream = new FileStream(path, FileMode.Create);
+        Save(stream);
+    }
 
+    public void Save(Stream stream)
+    {
         int WriteBlock(IntPtr self, IntPtr data, IntPtr size)
         {
             var buffer = new byte[(int) size];

@@ -98,11 +98,10 @@ public static class PdfAsserts
         Assert.True(File.Exists(filePath));
         lock (PdfiumNativeLibrary.Instance)
         {
-            var renderer = new PdfiumPdfRenderer();
             using var doc = PdfDocument.Load(filePath);
             Assert.InRange(pageIndex, 0, doc.PageCount - 1);
             using var page = doc.GetPage(pageIndex);
-            using var obj = renderer.GetSingleImageObject(page);
+            using var obj = PdfiumImageExtractor.GetSingleImageObject(page);
             Assert.NotNull(obj);
             Assert.Equal(filters.Length, obj.ImageFilterCount);
             for (int i = 0; i < filters.Length; i++)

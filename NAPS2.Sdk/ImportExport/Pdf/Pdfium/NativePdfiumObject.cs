@@ -10,6 +10,13 @@ public abstract class NativePdfiumObject : IDisposable
 
     protected NativePdfiumObject(IntPtr handle)
     {
+        if (handle == IntPtr.Zero)
+        {
+            var code = Environment.OSVersion.Platform == PlatformID.Win32NT
+                ? Marshal.GetLastWin32Error()
+                : (int) Native.FPDF_GetLastError();
+            throw new PdfiumException((PdfiumErrorCode) code);
+        }
         Handle = handle;
     }
 
@@ -48,7 +55,10 @@ public abstract class NativePdfiumObject : IDisposable
     {
         if (!_disposed)
         {
-            DisposeHandle();
+            if (Handle != IntPtr.Zero)
+            {
+                DisposeHandle();
+            }
             _disposed = true;
         }
     }
@@ -68,6 +78,8 @@ public abstract class NativePdfiumObject : IDisposable
 
     ~NativePdfiumObject()
     {
+        // TODO: This isn't necessarily going to work as we don't have a lock, not sure the best way to handle it
+        // Though this does provide a way to give some kind of error when running tests
         Dispose(false);
     }
 }

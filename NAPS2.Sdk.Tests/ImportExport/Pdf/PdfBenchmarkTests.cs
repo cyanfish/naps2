@@ -62,7 +62,7 @@ public class PdfBenchmarkTests : ContextualTests
         ScanningContext.FileStorageManager = FileStorageManager.CreateFolder("recovery");
         var filePath = CopyResourceToFile(PdfResources.image_pdf, "test.pdf");
 
-        var pdfExporter = new PdfSharpImporter(ScanningContext);
+        var pdfExporter = new PdfImporter(ScanningContext);
         for (int i = 0; i < 300; i++)
         {
             await pdfExporter.Import(filePath).ToList();
@@ -75,7 +75,7 @@ public class PdfBenchmarkTests : ContextualTests
         ScanningContext.FileStorageManager = FileStorageManager.CreateFolder("recovery");
         var filePath = CopyResourceToFile(PdfResources.word_generated_pdf, "test.pdf");
 
-        var pdfExporter = new PdfSharpImporter(ScanningContext);
+        var pdfExporter = new PdfImporter(ScanningContext);
         for (int i = 0; i < 300; i++)
         {
             await pdfExporter.Import(filePath).ToList();

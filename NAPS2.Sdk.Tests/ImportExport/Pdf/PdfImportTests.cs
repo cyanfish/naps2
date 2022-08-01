@@ -1,6 +1,7 @@
 using Moq;
 using NAPS2.ImportExport;
 using NAPS2.ImportExport.Pdf;
+using NAPS2.ImportExport.Pdf.Pdfium;
 using NAPS2.Sdk.Tests.Asserts;
 using Xunit;
 
@@ -8,11 +9,11 @@ namespace NAPS2.Sdk.Tests.ImportExport.Pdf;
 
 public class PdfImportTests : ContextualTests
 {
-    private readonly PdfSharpImporter _importer;
+    private readonly PdfImporter _importer;
 
     public PdfImportTests()
     {
-        _importer = new PdfSharpImporter(ScanningContext);
+        _importer = new PdfImporter(ScanningContext);
     }
 
     [Theory]
@@ -81,12 +82,37 @@ public class PdfImportTests : ContextualTests
         var passwordProvider = new Mock<IPdfPasswordProvider>();
         var password = "hello";
         passwordProvider.Setup(x => x.ProvidePassword(It.IsAny<string>(), It.IsAny<int>(), out password)).Returns(true);
-        var importer = new PdfSharpImporter(ScanningContext, passwordProvider.Object);
+        var importer = new PdfImporter(ScanningContext, passwordProvider.Object);
 
         var importPath = CopyResourceToFile(PdfResources.encrypted_pdf, "import.pdf");
         var images = await importer.Import(importPath).ToList();
 
         Assert.Single(images);
         ImageAsserts.Similar(ImageResources.color_image, ImageContext.Render(images[0]));
+    }
+
+    [Fact]
+    public async Task ImportMissingFile()
+    {
+        var source = _importer.Import(Path.Combine(FolderPath, "missing.pdf"));
+        await Assert.ThrowsAsync<FileNotFoundException>(async () => await source.ToList());
+    }
+
+    [Fact]
+    public async Task ImportInUseFile()
+    {
+        var path = Path.Combine(FolderPath, "inuse.pdf");
+        using var stream = new FileStream(path, FileMode.CreateNew, FileAccess.ReadWrite, FileShare.None);
+        var source = _importer.Import(path);
+        await Assert.ThrowsAsync<IOException>(async () => await source.ToList());
+    }
+
+    [Fact]
+    public async Task ImportInvalidFile()
+    {
+        var path = CopyResourceToFile(BinaryResources.stock_dog, "notapdf.pdf");
+        var source = _importer.Import(path);
+        var ex = await Assert.ThrowsAsync<PdfiumException>(async () => await source.ToList());
+        Assert.Equal(PdfiumErrorCode.InvalidFileFormat, ex.ErrorCode);
     }
 }

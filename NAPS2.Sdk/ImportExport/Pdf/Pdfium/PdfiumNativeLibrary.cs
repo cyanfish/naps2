@@ -51,6 +51,8 @@ public class PdfiumNativeLibrary : Unmanaged.NativeLibrary
 
     public delegate IntPtr FPDF_InitLibrary_delegate();
 
+    public delegate IntPtr FPDF_GetLastError_delegate();
+
     public delegate IntPtr FPDFBitmap_Create_delegate(int width, int height, int alpha);
 
     public delegate IntPtr
@@ -104,6 +106,9 @@ public class PdfiumNativeLibrary : Unmanaged.NativeLibrary
     public delegate IntPtr FPDFText_LoadPage_delegate(IntPtr page);
 
     public delegate IntPtr FPDFText_ClosePage_delegate(IntPtr text_page);
+
+    public delegate bool FPDF_ImportPages_delegate(IntPtr dest_doc, IntPtr src_doc,
+        [MarshalAs(UnmanagedType.LPStr)] string? pagerange, int index);
 
     public delegate int FPDFText_CountChars_delegate(IntPtr text_page);
 
@@ -167,6 +172,7 @@ public class PdfiumNativeLibrary : Unmanaged.NativeLibrary
     public delegate int FPDFTextObj_GetTextRenderMode_delegate(IntPtr text);
 
     public FPDF_InitLibrary_delegate FPDF_InitLibrary => Load<FPDF_InitLibrary_delegate>();
+    public FPDF_GetLastError_delegate FPDF_GetLastError => Load<FPDF_GetLastError_delegate>();
     public FPDFBitmap_Create_delegate FPDFBitmap_Create => Load<FPDFBitmap_Create_delegate>();
     public FPDFBitmap_CreateEx_delegate FPDFBitmap_CreateEx => Load<FPDFBitmap_CreateEx_delegate>();
     public FPDFBitmap_FillRect_delegate FPDFBitmap_FillRect => Load<FPDFBitmap_FillRect_delegate>();
@@ -190,6 +196,7 @@ public class PdfiumNativeLibrary : Unmanaged.NativeLibrary
     public FPDF_RenderPageBitmap_delegate FPDF_RenderPageBitmap => Load<FPDF_RenderPageBitmap_delegate>();
     public FPDFText_LoadPage_delegate FPDFText_LoadPage => Load<FPDFText_LoadPage_delegate>();
     public FPDFText_ClosePage_delegate FPDFText_ClosePage => Load<FPDFText_ClosePage_delegate>();
+    public FPDF_ImportPages_delegate FPDF_ImportPages => Load<FPDF_ImportPages_delegate>();
     public FPDFText_CountChars_delegate FPDFText_CountChars => Load<FPDFText_CountChars_delegate>();
     public FPDFText_GetUnicode_delegate FPDFText_GetUnicode => Load<FPDFText_GetUnicode_delegate>();
     public FPDFText_GetCharBox_delegate FPDFText_GetCharBox => Load<FPDFText_GetCharBox_delegate>();
@@ -243,6 +250,7 @@ public class PdfiumNativeLibrary : Unmanaged.NativeLibrary
         public WriteBlock_delegate WriteBlock;
     }
 
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate int WriteBlock_delegate(IntPtr self, IntPtr data, IntPtr size);
 
     public struct FPDF_FileAccess
@@ -253,6 +261,7 @@ public class PdfiumNativeLibrary : Unmanaged.NativeLibrary
         public IntPtr m_Param;
     }
 
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate int GetBlock_delegate(IntPtr param, IntPtr position, IntPtr buffer, IntPtr size);
 
     public struct FPDF_ImageObj_Metadata

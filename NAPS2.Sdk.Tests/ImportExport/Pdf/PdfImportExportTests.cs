@@ -8,14 +8,14 @@ namespace NAPS2.Sdk.Tests.ImportExport.Pdf;
 
 public class PdfImportExportTests : ContextualTests
 {
-    private readonly PdfSharpImporter _importer;
+    private readonly PdfImporter _importer;
     private readonly PdfSharpExporter _exporter;
     private readonly string _importPath;
     private readonly string _exportPath;
 
     public PdfImportExportTests()
     {
-        _importer = new PdfSharpImporter(ScanningContext);
+        _importer = new PdfImporter(ScanningContext);
         _exporter = new PdfSharpExporter(ScanningContext);
         _importPath = CopyResourceToFile(PdfResources.word_generated_pdf, "import.pdf");
         _exportPath = Path.Combine(FolderPath, "export.pdf");

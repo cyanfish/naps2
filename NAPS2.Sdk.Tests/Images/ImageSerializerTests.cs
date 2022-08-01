@@ -282,7 +282,7 @@ public class ImageSerializerTests : ContextualTests
         using var destContext = new ScanningContext(new GdiImageContext(),
             FileStorageManager.CreateFolder(Path.Combine(FolderPath, "dest")));
 
-        using var sourceImage = (await new PdfSharpImporter(ScanningContext).Import(importPath).ToList()).First();
+        using var sourceImage = (await new PdfImporter(ScanningContext).Import(importPath).ToList()).First();
         var serializedImage = ImageSerializer.Serialize(sourceImage, new SerializeImageOptions());
         using var destImage = ImageSerializer.Deserialize(destContext, serializedImage, new DeserializeImageOptions());
 
@@ -303,7 +303,7 @@ public class ImageSerializerTests : ContextualTests
 
         using var destContext = new ScanningContext(new GdiImageContext());
 
-        using var sourceImage = (await new PdfSharpImporter(ScanningContext).Import(importPath).ToList()).First();
+        using var sourceImage = (await new PdfImporter(ScanningContext).Import(importPath).ToList()).First();
         var serializedImage = ImageSerializer.Serialize(sourceImage, new SerializeImageOptions());
         using var destImage = ImageSerializer.Deserialize(destContext, serializedImage, new DeserializeImageOptions());
 

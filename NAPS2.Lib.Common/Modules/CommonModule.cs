@@ -24,7 +24,7 @@ public class CommonModule : NinjectModule
     {
         // Import
         Bind<IScannedImageImporter>().To<ScannedImageImporter>();
-        Bind<IPdfImporter>().To<PdfSharpImporter>();
+        Bind<IPdfImporter>().To<PdfImporter>();
         Bind<IImageImporter>().To<ImageImporter>();
         Bind<RecoveryManager>().ToSelf();
 

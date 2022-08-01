@@ -60,6 +60,7 @@ public static class ImageSerializer
                 }
                 break;
             case ImageMemoryStorage memoryStorage:
+                memoryStorage.Stream.Seek(0, SeekOrigin.Begin);
                 result.FileContent = ByteString.FromStream(memoryStorage.Stream);
                 result.TypeHint = memoryStorage.TypeHint;
                 break;
