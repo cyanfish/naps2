@@ -29,7 +29,7 @@ public class CommonModule : NinjectModule
         Bind<RecoveryManager>().ToSelf();
 
         // Export
-        Bind<PdfExporter>().To<PdfSharpExporter>();
+        Bind<IPdfExporter>().To<PdfExporter>();
         Bind<IEmailProviderFactory>().To<NinjectEmailProviderFactory>();
         Bind<IMapiWrapper>().To<MapiWrapper>();
         Bind<OcrRequestQueue>().ToSelf().InSingletonScope();

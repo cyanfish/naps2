@@ -5,11 +5,11 @@ namespace NAPS2.ImportExport.Pdf;
 
 public class SavePdfOperation : OperationBase
 {
-    private readonly PdfExporter _pdfExporter;
+    private readonly IPdfExporter _pdfExporter;
     private readonly IOverwritePrompt _overwritePrompt;
     private readonly IEmailProviderFactory? _emailProviderFactory;
 
-    public SavePdfOperation(PdfExporter pdfExporter, IOverwritePrompt overwritePrompt,
+    public SavePdfOperation(IPdfExporter pdfExporter, IOverwritePrompt overwritePrompt,
         IEmailProviderFactory? emailProviderFactory = null)
     {
         _pdfExporter = pdfExporter;

@@ -11,7 +11,7 @@ public class PdfATests : ContextualTests
     [Fact]
     public void Validate()
     {
-        var pdfExporter = new PdfSharpExporter(ScanningContext);
+        var pdfExporter = new PdfExporter(ScanningContext);
         var testCases = new (PdfCompat pdfCompat, string profile, string fileName)[]
         {
             (PdfCompat.PdfA1B, "PDF/A-1B", "pdfa1b_test.pdf"),

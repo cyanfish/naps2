@@ -13,7 +13,7 @@ public class PdfBenchmarkTests : ContextualTests
         using var image = ScanningContext.CreateProcessedImage(new GdiImage(ImageResources.color_image), BitDepth.Color,
             false, -1, Enumerable.Empty<Transform>());
 
-        var pdfExporter = new PdfSharpExporter(ScanningContext);
+        var pdfExporter = new PdfExporter(ScanningContext);
         for (int i = 0; i < 300; i++)
         {
             await pdfExporter.Export(filePath + i + ".pdf", new[] { image }, new PdfExportParams());
@@ -27,7 +27,7 @@ public class PdfBenchmarkTests : ContextualTests
         using var image = ScanningContext.CreateProcessedImage(new GdiImage(ImageResources.color_image_huge),
             BitDepth.Color, true, -1, Enumerable.Empty<Transform>());
 
-        var pdfExporter = new PdfSharpExporter(ScanningContext);
+        var pdfExporter = new PdfExporter(ScanningContext);
         await pdfExporter.Export(filePath + ".pdf", new[] { image }, new PdfExportParams());
     }
 

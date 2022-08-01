@@ -32,9 +32,9 @@ public class PdfDocument : NativePdfiumObject
         return new PdfPage(Native.FPDF_LoadPage(Handle, pageIndex), this, pageIndex);
     }
 
-    protected override void DisposeHandle()
+    public void DeletePage(int pageIndex)
     {
-        Native.FPDF_CloseDocument(Handle);
+        Native.FPDFPage_Delete(Handle, pageIndex);
     }
 
     public PdfPageObject NewImage()
@@ -93,5 +93,10 @@ public class PdfDocument : NativePdfiumObject
         {
             throw new IOException("Failed to save PDF");
         }
+    }
+
+    protected override void DisposeHandle()
+    {
+        Native.FPDF_CloseDocument(Handle);
     }
 }

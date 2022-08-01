@@ -6,7 +6,7 @@ using NAPS2.Scan;
 namespace NAPS2.ImportExport.Pdf;
 
 // TODO: Experimental. Also remember that this is failing with access violations on 32-bit (see tests).
-public class PdfiumPdfExporter : PdfExporter
+public class PdfiumPdfExporter : IPdfExporter
 {
     private readonly ScanningContext _scanningContext;
 
@@ -15,7 +15,7 @@ public class PdfiumPdfExporter : PdfExporter
         _scanningContext = scanningContext;
     }
 
-    public override async Task<bool> Export(string path, ICollection<ProcessedImage> images,
+    public async Task<bool> Export(string path, ICollection<ProcessedImage> images,
         PdfExportParams exportParams, OcrParams? ocrParams = null, ProgressHandler? progressCallback = null,
         CancellationToken cancelToken = default)
     {

@@ -7,11 +7,11 @@ namespace NAPS2.Sdk.Tests.ImportExport.Pdf;
 
 public class PdfExporterTests : ContextualTests
 {
-    private readonly PdfSharpExporter _exporter;
+    private readonly PdfExporter _exporter;
 
     public PdfExporterTests()
     {
-        _exporter = new PdfSharpExporter(ScanningContext);
+        _exporter = new PdfExporter(ScanningContext);
     }
 
     [Theory]

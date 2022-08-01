@@ -9,16 +9,29 @@ namespace NAPS2.Sdk.Tests.ImportExport.Pdf;
 public class PdfImportExportTests : ContextualTests
 {
     private readonly PdfImporter _importer;
-    private readonly PdfSharpExporter _exporter;
+    private readonly PdfExporter _exporter;
     private readonly string _importPath;
     private readonly string _exportPath;
 
     public PdfImportExportTests()
     {
         _importer = new PdfImporter(ScanningContext);
-        _exporter = new PdfSharpExporter(ScanningContext);
+        _exporter = new PdfExporter(ScanningContext);
         _importPath = CopyResourceToFile(PdfResources.word_generated_pdf, "import.pdf");
         _exportPath = Path.Combine(FolderPath, "export.pdf");
+    }
+
+    [Theory]
+    [ClassData(typeof(StorageAwareTestData))]
+    public async Task ImportExport(StorageConfig storageConfig)
+    {
+        storageConfig.Apply(this);
+
+        var images = await _importer.Import(_importPath).ToList();
+        Assert.Equal(2, images.Count);
+        await _exporter.Export(_exportPath, images, new PdfExportParams());
+
+        PdfAsserts.AssertImages(_exportPath, PdfResources.word_p1, PdfResources.word_p2);
     }
 
     [Theory]

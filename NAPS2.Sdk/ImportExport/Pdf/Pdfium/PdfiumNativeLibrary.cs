@@ -96,6 +96,8 @@ public class PdfiumNativeLibrary : Unmanaged.NativeLibrary
 
     public delegate void FPDF_ClosePage_delegate(IntPtr page);
 
+    public delegate void FPDFPage_Delete_delegate(IntPtr document, int pageIndex);
+
     public delegate float FPDF_GetPageWidthF_delegate(IntPtr page);
 
     public delegate float FPDF_GetPageHeightF_delegate(IntPtr page);
@@ -195,6 +197,7 @@ public class PdfiumNativeLibrary : Unmanaged.NativeLibrary
     public FPDF_GetPageCount_delegate FPDF_GetPageCount => Load<FPDF_GetPageCount_delegate>();
     public FPDF_LoadPage_delegate FPDF_LoadPage => Load<FPDF_LoadPage_delegate>();
     public FPDF_ClosePage_delegate FPDF_ClosePage => Load<FPDF_ClosePage_delegate>();
+    public FPDFPage_Delete_delegate FPDFPage_Delete => Load<FPDFPage_Delete_delegate>();
     public FPDF_GetPageWidthF_delegate FPDF_GetPageWidthF => Load<FPDF_GetPageWidthF_delegate>();
     public FPDF_GetPageHeightF_delegate FPDF_GetPageHeightF => Load<FPDF_GetPageHeightF_delegate>();
     public FPDF_RenderPageBitmap_delegate FPDF_RenderPageBitmap => Load<FPDF_RenderPageBitmap_delegate>();
