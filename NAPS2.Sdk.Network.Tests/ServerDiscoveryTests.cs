@@ -7,7 +7,8 @@ namespace NAPS2.Remoting.Network.Tests;
 // TODO: Try and reduce flakiness without needing to bump up timeouts
 public class ServerDiscoveryTests
 {
-    [Fact]
+    // TODO: Deflake
+    [Fact(Skip = "flaky")]
     public async Task ServerDiscovery()
     {
         using var server = CreateServer(new NetworkScanServerOptions

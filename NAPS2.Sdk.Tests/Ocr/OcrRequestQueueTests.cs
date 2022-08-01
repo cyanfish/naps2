@@ -279,7 +279,8 @@ public class OcrRequestQueueTests : ContextualTests
         _mockEngine.VerifyNoOtherCalls();
     }
 
-    [Fact]
+    // TODO: Deflake
+    [Fact(Skip = "flaky")]
     public async Task ForegroundPrioritized()
     {
         _mockEngine.Setup(x => x.ProcessImage(_tempPath, _ocrParams, It.IsAny<CancellationToken>()))
