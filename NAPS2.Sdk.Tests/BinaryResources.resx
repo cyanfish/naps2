@@ -119,7 +119,7 @@
     </resheader>
     <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
     <data name="tesseract_x64" type="System.Resources.ResXFileRef, System.Windows.Forms">
-        <value>Resources\tesseract-5.1.0-x64.exe;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+        <value>..\NAPS2.Setup\lib\win64\tesseract.exe;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </data>
     <data name="eng_traineddata" type="System.Resources.ResXFileRef, System.Windows.Forms">
         <value>Resources\eng.traineddata;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
