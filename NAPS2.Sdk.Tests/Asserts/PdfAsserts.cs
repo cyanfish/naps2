@@ -2,8 +2,8 @@
 using NAPS2.Images.Gdi;
 using NAPS2.ImportExport.Pdf;
 using NAPS2.ImportExport.Pdf.Pdfium;
-using PdfSharp.Pdf.IO;
-using PdfSharp.Pdf.Security;
+using PdfSharpCore.Pdf.IO;
+using PdfSharpCore.Pdf.Security;
 using Xunit;
 
 namespace NAPS2.Sdk.Tests.Asserts;
@@ -103,7 +103,8 @@ public static class PdfAsserts
             using var page = doc.GetPage(pageIndex);
             using var obj = PdfiumImageExtractor.GetSingleImageObject(page);
             Assert.NotNull(obj);
-            Assert.True(obj.HasFilters(filters));
+            Assert.True(obj.HasImageFilters(filters),
+                $"Expected filters: {string.Join(",", filters)}, actual: {string.Join(",", obj.GetImageFilters())}");
         }
     }
 }

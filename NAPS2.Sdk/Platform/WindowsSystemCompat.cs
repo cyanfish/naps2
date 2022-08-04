@@ -15,8 +15,6 @@ public abstract class WindowsSystemCompat : ISystemCompat
 
     public bool CanUseWin32 => true;
 
-    public bool UseUnixFontResolver => false;
-
     public bool UseSystemTesseract => false;
 
     public abstract string? TesseractExecutablePath { get; }

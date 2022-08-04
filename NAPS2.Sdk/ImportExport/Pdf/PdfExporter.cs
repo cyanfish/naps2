@@ -1,32 +1,21 @@
 ﻿using System.Globalization;
 using System.Runtime.InteropServices;
-using System.Text;
 using System.Threading;
 using NAPS2.ImportExport.Pdf.Pdfium;
 using NAPS2.Ocr;
 using NAPS2.Scan;
-using PdfSharp.Drawing;
-using PdfSharp.Drawing.Layout;
-using PdfSharp.Fonts;
-using PdfSharp.Pdf;
-using PdfSharp.Pdf.IO;
-using PdfSharp.Pdf.Security;
-using PdfDocument = PdfSharp.Pdf.PdfDocument;
-using PdfPage = PdfSharp.Pdf.PdfPage;
+using PdfSharpCore.Drawing;
+using PdfSharpCore.Drawing.Layout;
+using PdfSharpCore.Pdf;
+using PdfSharpCore.Pdf.IO;
+using PdfSharpCore.Pdf.Security;
+using PdfDocument = PdfSharpCore.Pdf.PdfDocument;
+using PdfPage = PdfSharpCore.Pdf.PdfPage;
 
 namespace NAPS2.ImportExport.Pdf;
 
 public class PdfExporter : IPdfExporter
 {
-    static PdfExporter()
-    {
-        if (PlatformCompat.System.UseUnixFontResolver)
-        {
-            GlobalFontSettings.FontResolver = new UnixFontResolver();
-        }
-        Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
-    }
-
     private readonly ScanningContext _scanningContext;
 
     public PdfExporter(ScanningContext scanningContext)
@@ -60,64 +49,76 @@ public class PdfExporter : IPdfExporter
 
             var imagePages = new List<PageExportState>();
             var pdfPages = new List<PageExportState>();
-            int pageIndex = 0;
-            foreach (var image in images)
-            {
-                var pageState = new PageExportState(
-                    image, pageIndex++, document, ocrEngine, ocrParams, cancelToken, exportParams.Compat);
-                // TODO: To improve our ability to passthrough, we could consider using Pdfium to apply the transform to
-                // the underlying PDF file. For example, doing color shifting on individual text + image objects, or
-                // applying matrix changes.
-                // TODO: We also can consider doing this even for scanned image transforms - e.g. for deskew, maybe
-                // rather than rasterize that, rely on the pdf to do the skew transform, which should render better at
-                // different scaling.
-                if (IsPdfStorage(image.Storage) && image.TransformState == TransformState.Empty)
-                {
-                    pdfPages.Add(pageState);
-                }
-                else
-                {
-                    imagePages.Add(pageState);
-                }
-            }
 
-            // TODO: Parallelize later
-            // TODO: Cancellation and progress reporting
-            var imagePagesPipeline = ocrEngine != null
-                ? Pipeline.For(imagePages)
+            try
+            {
+                int pageIndex = 0;
+                foreach (var image in images)
+                {
+                    var pageState = new PageExportState(
+                        image, pageIndex++, document, ocrEngine, ocrParams, cancelToken, exportParams.Compat);
+                    // TODO: To improve our ability to passthrough, we could consider using Pdfium to apply the transform to
+                    // the underlying PDF file. For example, doing color shifting on individual text + image objects, or
+                    // applying matrix changes.
+                    // TODO: We also can consider doing this even for scanned image transforms - e.g. for deskew, maybe
+                    // rather than rasterize that, rely on the pdf to do the skew transform, which should render better at
+                    // different scaling.
+                    if (IsPdfStorage(image.Storage) && image.TransformState == TransformState.Empty)
+                    {
+                        pdfPages.Add(pageState);
+                    }
+                    else
+                    {
+                        imagePages.Add(pageState);
+                    }
+                }
+
+                // TODO: Parallelize later
+                // TODO: Cancellation and progress reporting
+                var imagePagesPipeline = ocrEngine != null
+                    ? Pipeline.For(imagePages)
+                        .Step(RenderStep)
+                        .Step(InitOcrStep)
+                        .Step(WaitForOcrStep)
+                        .Step(WriteToPdfSharpStep)
+                        .Run()
+                    : Pipeline.For(imagePages)
+                        .Step(RenderStep)
+                        .Step(WriteToPdfSharpStep)
+                        .Run();
+
+                var pdfPagesPrePipeline = ocrEngine != null
+                    ? Pipeline.For(pdfPages).Step(CheckIfOcrNeededStep).Run()
+                    : Task.FromResult(pdfPages);
+
+                await pdfPagesPrePipeline;
+
+                var pdfPagesOcrPipeline = Pipeline.For(pdfPages.Where(x => x.NeedsOcr))
                     .Step(RenderStep)
                     .Step(InitOcrStep)
                     .Step(WaitForOcrStep)
                     .Step(WriteToPdfSharpStep)
-                    .Run()
-                : Pipeline.For(imagePages)
-                    .Step(RenderStep)
-                    .Step(WriteToPdfSharpStep)
                     .Run();
 
-            var pdfPagesPrePipeline = ocrEngine != null
-                ? Pipeline.For(pdfPages).Step(CheckIfOcrNeededStep).Run()
-                : Task.FromResult(pdfPages);
+                await imagePagesPipeline;
+                await pdfPagesOcrPipeline;
 
-            await pdfPagesPrePipeline;
+                // TODO: Doing in memory as that's presumably faster than IO, but of course that's quite a bit of memory use potentially...
+                var stream = FinalizeAndSaveDocument(document, exportParams, out var placeholderPage);
 
-            var pdfPagesOcrPipeline = Pipeline.For(pdfPages.Where(x => x.NeedsOcr))
-                .Step(RenderStep)
-                .Step(InitOcrStep)
-                .Step(WaitForOcrStep)
-                .Step(WriteToPdfSharpStep)
-                .Run();
-
-            await imagePagesPipeline;
-            await pdfPagesOcrPipeline;
-
-            // TODO: Doing in memory as that's presumably faster than IO, but of course that's quite a bit of memory use potentially...
-            var stream = FinalizeAndSaveDocument(document, exportParams, out var placeholderPage);
-
-            var passthroughPages = pdfPages.Where(x => !x.NeedsOcr).ToList();
-            // TODO: We probably should just use PdfSharp to import the pages, as long as it supports it - just need some tests to cover the case when pdfsharp fails to load a pdf
-            // Although it makes me wonder if there are any cases where PdfSharp can mess up an imported file without an error...
-            MergePassthroughPages(stream, path, passthroughPages, exportParams, placeholderPage);
+                var passthroughPages = pdfPages.Where(x => !x.NeedsOcr).ToList();
+                // TODO: We probably should just use PdfSharp to import the pages, as long as it supports it - just need some tests to cover the case when pdfsharp fails to load a pdf
+                // Although it makes me wonder if there are any cases where PdfSharp can mess up an imported file without an error...
+                MergePassthroughPages(stream, path, passthroughPages, exportParams, placeholderPage);
+            }
+            finally
+            {
+                // TODO: Easier way to handle this?
+                foreach (var state in imagePages.Concat(pdfPages))
+                {
+                    state.RenderedImage?.Dispose();
+                }
+            }
 
             return true;
         });
@@ -230,11 +231,10 @@ public class PdfExporter : IPdfExporter
 
     private PageExportState RenderStep(PageExportState state)
     {
-        using var renderedImage = _scanningContext.ImageContext.Render(state.Image);
+        var renderedImage = _scanningContext.ImageContext.Render(state.Image);
         var metadata = state.Image.Metadata;
-        state.RenderedStream = _scanningContext.ImageContext.SaveSmallestFormatToMemoryStream(
-            renderedImage, metadata.BitDepth, metadata.Lossless, -1, out var fileFormat, true);
-        state.FileFormat = fileFormat;
+        state.RenderedImage = renderedImage;
+        state.FileFormat = ImageFileFormat.Jpeg;
         return state;
     }
 
@@ -243,10 +243,22 @@ public class PdfExporter : IPdfExporter
         // TODO: Try and avoid locking somehow
         lock (state.Document)
         {
-            using var img = XImage.FromStream(state.RenderedStream);
             // TODO: We need to serialize page adding somehow
             PdfPage page = state.Document.AddPage();
-            DrawImageOnPage(page, img, state.Compat);
+            // TODO: Is there any way we can clean this up?
+            var exportFormat = _scanningContext.ImageContext.GetExportFormat(
+                state.RenderedImage!, state.Image.Metadata.BitDepth, state.Image.Metadata.Lossless);
+            if (exportFormat.FileFormat == ImageFileFormat.Unspecified)
+            {
+                exportFormat = exportFormat with { FileFormat = ImageFileFormat.Jpeg };
+            }
+            if (exportFormat.PixelFormat == ImagePixelFormat.BW1 &&
+                state.RenderedImage!.PixelFormat != ImagePixelFormat.BW1)
+            {
+                state.RenderedImage =
+                    _scanningContext.ImageContext.PerformTransform(state.RenderedImage, new BlackWhiteTransform());
+            }
+            DrawImageOnPage(page, state.RenderedImage!, exportFormat, state.Compat);
             // TODO: Maybe split this up to a different step
             if (state.OcrTask?.Result != null)
             {
@@ -314,9 +326,7 @@ public class PdfExporter : IPdfExporter
             // Save the image to a file for use in OCR.
             // We don't need to delete this file as long as we pass it to OcrRequestQueue.Enqueue, which takes 
             // ownership and guarantees its eventual deletion.
-            using var fileStream = new FileStream(ocrTempFilePath, FileMode.CreateNew);
-            state.RenderedStream!.Seek(0, SeekOrigin.Begin);
-            state.RenderedStream.CopyTo(fileStream);
+            state.RenderedImage!.Save(ocrTempFilePath);
         }
 
         // Start OCR
@@ -406,20 +416,21 @@ public class PdfExporter : IPdfExporter
         return string.Concat(elements);
     }
 
-    private static void DrawImageOnPage(PdfPage page, XImage img, PdfCompat compat)
+    private void DrawImageOnPage(PdfPage page, IMemoryImage image, ImageExportFormat exportFormat, PdfCompat compat)
     {
+        using var xImage = XImage.FromImageSource(new ImageSource(image, exportFormat));
         if (compat != PdfCompat.Default)
         {
-            img.Interpolate = false;
+            xImage.Interpolate = false;
         }
-        var (realWidth, realHeight) = GetRealSize(img);
+        var (realWidth, realHeight) = GetRealSize(image);
         page.Width = realWidth;
         page.Height = realHeight;
         using XGraphics gfx = XGraphics.FromPdfPage(page);
-        gfx.DrawImage(img, 0, 0, realWidth, realHeight);
+        gfx.DrawImage(xImage, 0, 0, realWidth, realHeight);
     }
 
-    private static (int width, int height) GetRealSize(XImage img)
+    private static (int width, int height) GetRealSize(IMemoryImage img)
     {
         double hAdjust = 72 / img.HorizontalResolution;
         double vAdjust = 72 / img.VerticalResolution;
@@ -427,8 +438,8 @@ public class PdfExporter : IPdfExporter
         {
             hAdjust = vAdjust = 0.75;
         }
-        double realWidth = img.PixelWidth * hAdjust;
-        double realHeight = img.PixelHeight * vAdjust;
+        double realWidth = img.Width * hAdjust;
+        double realHeight = img.Height * vAdjust;
         return ((int) realWidth, (int) realHeight);
     }
 
@@ -476,41 +487,104 @@ public class PdfExporter : IPdfExporter
         public PdfCompat Compat { get; }
 
         public bool NeedsOcr { get; set; }
-        public MemoryStream? RenderedStream { get; set; }
+        public IMemoryImage? RenderedImage { get; set; }
         public ImageFileFormat FileFormat { get; set; }
         public Task<OcrResult?>? OcrTask { get; set; }
         public PdfDocument? PageDocument { get; set; }
     }
 
-    private class UnixFontResolver : IFontResolver
+    private class ImageSource : IImageSource
     {
-        private byte[]? _fontData;
+        private readonly IMemoryImage _image;
+        private readonly ImageExportFormat _exportFormat;
 
-        public FontResolverInfo ResolveTypeface(string familyName, bool isBold, bool isItalic)
+        public ImageSource(IMemoryImage image, ImageExportFormat exportFormat)
         {
-            return new FontResolverInfo(familyName, isBold, isItalic);
+            _image = image;
+            _exportFormat = exportFormat;
         }
 
-        public byte[] GetFont(string faceName)
+        public void SaveAsJpeg(MemoryStream ms)
         {
-            if (_fontData == null)
+            _image.Save(ms, ImageFileFormat.Jpeg);
+        }
+
+        public unsafe void SaveAsPdfBitmap(MemoryStream ms)
+        {
+            var bytesPerPixel = _image.PixelFormat switch
             {
-                var proc = Process.Start(new ProcessStartInfo
+                ImagePixelFormat.ARGB32 => 4,
+                ImagePixelFormat.RGB24 => 3,
+                _ => throw new InvalidOperationException("Expected 24 or 32 bit bitmap")
+            };
+            int height = _image.Height;
+            int width = _image.Width;
+            ms.SetLength(height * width * bytesPerPixel);
+            var buffer = ms.GetBuffer();
+            using var data = _image.Lock(LockMode.ReadOnly, out var scan0, out var stride);
+            for (int y = 0; y < height; y++)
+            {
+                for (int x = 0; x < width; x++)
                 {
-                    FileName = "fc-list",
-                    RedirectStandardOutput = true,
-                    UseShellExecute = false
-                });
-                if (proc == null)
-                {
-                    throw new InvalidOperationException("Could not get font data from fc-list");
+                    var pixelData = (byte*) (scan0 + y * stride + x * bytesPerPixel);
+                    int bufferIndex = ((height - y - 1) * width + x) * bytesPerPixel;
+                    buffer[bufferIndex] = *pixelData;
+                    buffer[bufferIndex + 1] = *(pixelData + 1);
+                    buffer[bufferIndex + 2] = *(pixelData + 2);
+                    if (bytesPerPixel == 4)
+                    {
+                        buffer[bufferIndex + 3] = *(pixelData + 3);
+                    }
                 }
-                var fonts = proc.StandardOutput.ReadToEnd().Split('\n').Select(x => x.Split(':')[0]);
-                // TODO: Maybe add more fonts here?
-                var freeserif = fonts.First(f => f.EndsWith("FreeSerif.ttf", StringComparison.OrdinalIgnoreCase));
-                _fontData = File.ReadAllBytes(freeserif);
             }
-            return _fontData;
+        }
+
+        public unsafe void SaveAsPdfIndexedBitmap(MemoryStream ms)
+        {
+            if (_image.PixelFormat != ImagePixelFormat.BW1)
+                throw new InvalidOperationException("Expected 1 bit bitmap");
+            int height = _image.Height;
+            int width = _image.Width;
+            int bytesPerRow = (width - 1) / 8 + 1;
+            ms.SetLength(height * bytesPerRow);
+            var buffer = ms.GetBuffer();
+            using var data = _image.Lock(LockMode.ReadOnly, out var scan0, out var stride);
+            for (int y = 0; y < height; y++)
+            {
+                for (int x = 0; x < bytesPerRow; x++)
+                {
+                    var pixelData = (byte*) (scan0 + y * stride + x);
+                    buffer[(height - y - 1) * bytesPerRow + x] = *pixelData;
+                }
+            }
+        }
+
+        public int Width => _image.Width;
+        public int Height => _image.Height;
+        public string? Name => null;
+
+        public XImageFormat ImageFormat
+        {
+            get
+            {
+                if (_exportFormat.FileFormat == ImageFileFormat.Jpeg)
+                {
+                    return XImageFormat.Jpeg;
+                }
+                if (_exportFormat.PixelFormat == ImagePixelFormat.BW1)
+                {
+                    return XImageFormat.Indexed;
+                }
+                if (_exportFormat.PixelFormat == ImagePixelFormat.ARGB32)
+                {
+                    return XImageFormat.Argb32;
+                }
+                if (_exportFormat.PixelFormat == ImagePixelFormat.RGB24)
+                {
+                    return XImageFormat.Rgb24;
+                }
+                throw new Exception("Unsupported pixel format");
+            }
         }
     }
 }

@@ -13,7 +13,7 @@ public class PdfiumImageExtractor
             var image = GetImageFromObject(imageContext, imageObj, metadata);
             if (image != null)
             {
-                image.SetResolution(metadata.HorizontalDpi, metadata.VerticalDpi);
+                image.SetResolution((int) Math.Round(metadata.HorizontalDpi), (int) Math.Round(metadata.VerticalDpi));
                 return image;
             }
         }
@@ -26,12 +26,25 @@ public class PdfiumImageExtractor
         PdfImageMetadata metadata)
     {
         var bitmapFactory = new PdfiumBitmapFactory(imageContext);
+        // TODO: This condition is never actually true for some reason, we need to use this code path if there is either a monochrome mask or softmask
+        // TODO: Might need a pdfium fix.
+        if (imageObj.HasTransparency)
+        {
+            // If the image has transparency, that implies the bitmap has a mask, so we need to use GetRenderedBitmap
+            // to apply the mask and get the correct image.
+            using var pdfBitmap = imageObj.GetRenderedBitmap();
+            if (pdfBitmap.Format is ImagePixelFormat.RGB24 or ImagePixelFormat.ARGB32)
+            {
+                return bitmapFactory.CopyPdfBitmapToNewImage(pdfBitmap, metadata);
+            }
+            return null;
+        }
         // First try and read the raw image data, this is most efficient if we can handle it
-        if (imageObj.HasFilters("DCTDecode"))
+        if (imageObj.HasImageFilters("DCTDecode"))
         {
             return imageContext.Load(new MemoryStream(imageObj.GetImageDataRaw()));
         }
-        if (imageObj.HasFilters("FlateDecode"))
+        if (imageObj.HasImageFilters("FlateDecode"))
         {
             if (metadata.BitsPerPixel == 24 && metadata.Colorspace == Colorspace.DeviceRgb)
             {
@@ -43,7 +56,7 @@ public class PdfiumImageExtractor
                 return bitmapFactory.LoadRawBlackAndWhite(imageObj.GetImageDataDecoded(), metadata);
             }
         }
-        if (imageObj.HasFilters("CCITTFaxDecode"))
+        if (imageObj.HasImageFilters("CCITTFaxDecode"))
         {
             return bitmapFactory.LoadRawCcitt(imageObj.GetImageDataDecoded(), metadata);
         }
@@ -52,6 +65,7 @@ public class PdfiumImageExtractor
         // TODO: Maybe add support for black & white here too, with tests
         // TODO: Also this won't have test coverage if everything is covered by the "raw" tests, maybe either find a
         // test case or just have a switch to test this specifically
+        // TODO: Is 32 bit even possible here? As alpha is implemented with masks
         if (metadata.BitsPerPixel == 24 || metadata.BitsPerPixel == 32)
         {
             using var pdfBitmap = imageObj.GetBitmap();

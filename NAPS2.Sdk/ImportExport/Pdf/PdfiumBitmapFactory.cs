@@ -11,6 +11,7 @@ public class PdfiumBitmapFactory
         _imageContext = imageContext;
     }
 
+    // TODO: Not sure what to do with these two methods, probably just move them back to the calling classes
     public unsafe IMemoryImage CopyPdfBitmapToNewImage(PdfBitmap pdfBitmap, PdfImageMetadata imageMetadata)
     {
         var dstImage = _imageContext.Create(pdfBitmap.Width, pdfBitmap.Height, pdfBitmap.Format);
@@ -42,7 +43,7 @@ public class PdfiumBitmapFactory
         int heightInPx = (int) Math.Round(heightInInches * dpi);
 
         var bitmap = _imageContext.Create(widthInPx, heightInPx, ImagePixelFormat.RGB24);
-        bitmap.SetResolution(dpi, dpi);
+        bitmap.SetResolution((int) Math.Round(dpi), (int) Math.Round(dpi));
         using var bitmapData = bitmap.Lock(LockMode.ReadWrite, out var scan0, out var stride);
         using var pdfiumBitmap = PdfBitmap.CreateFromPointerBgr(widthInPx, heightInPx, scan0, stride);
         pdfiumBitmap.FillRect(0, 0, widthInPx, heightInPx, PdfBitmap.WHITE);
@@ -50,6 +51,7 @@ public class PdfiumBitmapFactory
         return bitmap;
     }
 
+    // TODO: Move the below methods into a non-pdfium specific class and include the export counterparts.
     public unsafe IMemoryImage LoadRawRgb(byte[] buffer, PdfImageMetadata metadata)
     {
         var image = _imageContext.Create(metadata.Width, metadata.Height, ImagePixelFormat.RGB24);
@@ -74,7 +76,7 @@ public class PdfiumBitmapFactory
 
     public unsafe IMemoryImage LoadRawBlackAndWhite(byte[] buffer, PdfImageMetadata metadata)
     {
-        var image = _imageContext.Create(metadata.Width, metadata.Height, ImagePixelFormat.RGB24);
+        var image = _imageContext.Create(metadata.Width, metadata.Height, ImagePixelFormat.BW1);
         image.OriginalFileFormat = ImageFileFormat.Png;
 
         using var data = image.Lock(LockMode.WriteOnly, out var scan0, out var stride);
@@ -123,14 +125,14 @@ public class PdfiumBitmapFactory
         {
             Write(stream, buffer.Length + 0x10);
         }
-    
+
         Write(stream, TiffBeforeData);
         Write(stream, buffer);
         if (buffer.Length % 2 == 1)
         {
             Write(stream, new byte[] { 0x00 });
         }
-    
+
         Write(stream, TiffBeforeWidth);
         Write(stream, metadata.Width);
         Write(stream, TiffBeforeHeight);
@@ -141,7 +143,7 @@ public class PdfiumBitmapFactory
         Write(stream, buffer.Length);
         Write(stream, TiffTrailer);
         stream.Seek(0, SeekOrigin.Begin);
-    
+
         // TODO: If we need a TIFF hint for loading, it should go here.
         return _imageContext.Load(stream);
     }

@@ -1,6 +1,6 @@
 ﻿using System.Text;
-using PdfSharp.Pdf;
-using PdfSharp.Pdf.Advanced;
+using PdfSharpCore.Pdf;
+using PdfSharpCore.Pdf.Advanced;
 
 namespace NAPS2.ImportExport.Pdf;
 
@@ -45,7 +45,7 @@ public static class PdfAHelper
         xmlns:pdfaid=""http://www.aiim.org/pdfa/ns/id/""
       dc:format=""application/pdf""
 	  pdf:Keywords=""{info.Keywords}""
-      pdf:Producer=""{PdfSharp.ProductVersionInfo.Producer}""
+      pdf:Producer=""{PdfSharpCore.ProductVersionInfo.Producer}""
       xmp:CreateDate=""{info.CreationDate:yyyy'-'MM'-'dd'T'HH':'mm':'ssK}""
       xmp:ModifyDate=""{info.ModificationDate:yyyy'-'MM'-'dd'T'HH':'mm':'ssK}""
       xmp:CreatorTool=""{info.Creator}""

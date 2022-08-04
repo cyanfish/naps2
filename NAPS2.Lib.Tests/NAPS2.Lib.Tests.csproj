@@ -11,9 +11,8 @@
     <Import Project="..\NAPS2.Setup\LibUsers.targets" />
 
     <ItemGroup>
-        <Reference Include="PdfSharp, Version=1.50.4589.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
-            <SpecificVersion>False</SpecificVersion>
-            <HintPath>..\NAPS2.Setup\lib\PdfSharp.dll</HintPath>
+        <Reference Include="PdfSharpCore">
+            <HintPath>..\NAPS2.Setup\lib\PdfSharpCore.dll</HintPath>
         </Reference>
 
         <ProjectReference Include="..\NAPS2.Sdk.Tests\NAPS2.Sdk.Tests.csproj" />

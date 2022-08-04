@@ -17,8 +17,6 @@ public class LinuxSystemCompat : ISystemCompat
 
     public bool CanUseWin32 => false;
 
-    public bool UseUnixFontResolver => true;
-
     public bool UseSystemTesseract => true;
 
     public string? TesseractExecutablePath => null;

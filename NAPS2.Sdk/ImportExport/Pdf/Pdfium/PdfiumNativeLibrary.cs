@@ -133,6 +133,8 @@ public class PdfiumNativeLibrary : Unmanaged.NativeLibrary
 
     public delegate bool FPDFPageObj_SetMatrix_delegate(IntPtr page_object, ref PdfMatrix matrix);
 
+    public delegate bool FPDFPageObj_HasTransparency_delegate(IntPtr page_object);
+
     public delegate bool FPDFImageObj_LoadJpegFile_delegate(IntPtr pages, int count, IntPtr image_object,
         ref FPDF_FileAccess file_access);
 
@@ -144,6 +146,8 @@ public class PdfiumNativeLibrary : Unmanaged.NativeLibrary
     public delegate IntPtr FPDFPage_GetObject_delegate(IntPtr page, int index);
 
     public delegate bool FPDFPage_RemoveObject_delegate(IntPtr page, IntPtr page_obj);
+
+    public delegate bool FPDFPage_HasTransparency_delegate(IntPtr page);
 
     public delegate IntPtr FPDFImageObj_GetBitmap_delegate(IntPtr image_object);
 
@@ -214,6 +218,7 @@ public class PdfiumNativeLibrary : Unmanaged.NativeLibrary
     public FPDFPage_New_delegate FPDFPage_New => Load<FPDFPage_New_delegate>();
     public FPDFPage_GenerateContent_delegate FPDFPage_GenerateContent => Load<FPDFPage_GenerateContent_delegate>();
     public FPDFPageObj_SetMatrix_delegate FPDFPageObj_SetMatrix => Load<FPDFPageObj_SetMatrix_delegate>();
+    public FPDFPageObj_HasTransparency_delegate FPDFPageObj_HasTransparency => Load<FPDFPageObj_HasTransparency_delegate>();
     public FPDFImageObj_LoadJpegFile_delegate FPDFImageObj_LoadJpegFile => Load<FPDFImageObj_LoadJpegFile_delegate>();
 
     public FPDFImageObj_LoadJpegFileInline_delegate FPDFImageObj_LoadJpegFileInline =>
@@ -222,6 +227,7 @@ public class PdfiumNativeLibrary : Unmanaged.NativeLibrary
     public FPDFPage_CountObjects_delegate FPDFPage_CountObjects => Load<FPDFPage_CountObjects_delegate>();
     public FPDFPage_GetObject_delegate FPDFPage_GetObject => Load<FPDFPage_GetObject_delegate>();
     public FPDFPage_RemoveObject_delegate FPDFPage_RemoveObject => Load<FPDFPage_RemoveObject_delegate>();
+    public FPDFPage_HasTransparency_delegate FPDFPage_HasTransparency => Load<FPDFPage_HasTransparency_delegate>();
     public FPDFImageObj_GetBitmap_delegate FPDFImageObj_GetBitmap => Load<FPDFImageObj_GetBitmap_delegate>();
     public FPDFImageObj_GetImageDataRaw_delegate FPDFImageObj_GetImageDataRaw => Load<FPDFImageObj_GetImageDataRaw_delegate>();
     public FPDFImageObj_GetImageDataDecoded_delegate FPDFImageObj_GetImageDataDecoded => Load<FPDFImageObj_GetImageDataDecoded_delegate>();

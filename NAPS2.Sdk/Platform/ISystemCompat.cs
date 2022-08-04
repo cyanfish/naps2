@@ -10,8 +10,6 @@ public interface ISystemCompat
 
     bool CanUseWin32 { get; }
 
-    bool UseUnixFontResolver { get; }
-
     bool IsWia20Supported { get; }
 
     bool UseSystemTesseract { get; }

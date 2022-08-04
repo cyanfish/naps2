@@ -133,8 +133,9 @@ public abstract class ImageContext
     public abstract IMemoryImage Create(int width, int height, ImagePixelFormat pixelFormat);
 
     public string SaveSmallestFormat(string pathWithoutExtension, IMemoryImage image, BitDepth bitDepth,
-        bool lossless, int quality, out ImageFileFormat imageFileFormat, bool encodeOnce = false)
+        bool lossless, int quality, out ImageFileFormat imageFileFormat)
     {
+        // TODO: Should we save directly to the file?
         var memoryStream = SaveSmallestFormatToMemoryStream(image, bitDepth, lossless, quality, out imageFileFormat);
         var ext = imageFileFormat == ImageFileFormat.Png ? ".png" : ".jpg";
         var path = pathWithoutExtension + ext;
@@ -144,46 +145,25 @@ public abstract class ImageContext
     }
 
     public MemoryStream SaveSmallestFormatToMemoryStream(IMemoryImage image, BitDepth bitDepth, bool lossless,
-        int quality, out ImageFileFormat imageFileFormat, bool encodeOnce = false)
+        int quality, out ImageFileFormat imageFileFormat)
     {
-        // Store the image in as little space as possible
-        if (image.PixelFormat == ImagePixelFormat.BW1)
+        var exportFormat = GetExportFormat(image, bitDepth, lossless);
+        if (exportFormat.FileFormat == ImageFileFormat.Png)
         {
-            // Already encoded as 1-bit
             imageFileFormat = ImageFileFormat.Png;
+            if (exportFormat.PixelFormat == ImagePixelFormat.BW1 && image.PixelFormat != ImagePixelFormat.BW1)
+            {
+                using var bwImage = PerformTransform(image.Clone(), new BlackWhiteTransform());
+                return bwImage.SaveToMemoryStream(ImageFileFormat.Png);
+            }
             return image.SaveToMemoryStream(ImageFileFormat.Png);
         }
-        if (bitDepth == BitDepth.BlackAndWhite)
+        if (exportFormat.FileFormat == ImageFileFormat.Jpeg)
         {
-            // Convert to a 1-bit bitmap before saving to help compression
-            // This is lossless and takes up minimal storage (best of both worlds), so highQuality is irrelevant
-            using var bwImage = PerformTransform(image.Clone(), new BlackWhiteTransform());
-            imageFileFormat = ImageFileFormat.Png;
-            return bwImage.SaveToMemoryStream(ImageFileFormat.Png);
-            // Note that if a black and white image comes from native WIA, bitDepth is unknown,
-            // so the image will be png-encoded below instead of using a 1-bit bitmap
-        }
-        if (lossless || image.OriginalFileFormat == ImageFileFormat.Png)
-        {
-            // Store as PNG
-            // Lossless, but some images (color/grayscale) take up lots of storage
-            imageFileFormat = ImageFileFormat.Png;
-            return image.SaveToMemoryStream(ImageFileFormat.Png);
-        }
-        if (image.OriginalFileFormat == ImageFileFormat.Jpeg)
-        {
-            // Store as JPEG
-            // Since the image was originally in JPEG format, PNG is unlikely to have size benefits
             imageFileFormat = ImageFileFormat.Jpeg;
-            return image.SaveToMemoryStream(ImageFileFormat.Jpeg);
+            return image.SaveToMemoryStream(ImageFileFormat.Jpeg, quality);
         }
-        if (encodeOnce)
-        {
-            // If the caller doesn't want to do an extra encode for the chance of a smaller image, just go with jpeg
-            imageFileFormat = ImageFileFormat.Jpeg;
-            return image.SaveToMemoryStream(ImageFileFormat.Jpeg);
-        }
-        // Store as PNG/JPEG depending on which is smaller
+        // Save as PNG/JPEG depending on which is smaller
         var pngEncoded = image.SaveToMemoryStream(ImageFileFormat.Png);
         var jpegEncoded = image.SaveToMemoryStream(ImageFileFormat.Jpeg, quality);
         if (pngEncoded.Length <= jpegEncoded.Length)
@@ -195,5 +175,38 @@ public abstract class ImageContext
         // Probably a color or grayscale image, which JPEG compresses well vs. PNG
         imageFileFormat = ImageFileFormat.Jpeg;
         return jpegEncoded;
+    }
+
+    public ImageExportFormat GetExportFormat(IMemoryImage image, BitDepth bitDepth, bool lossless)
+    {
+        // Store the image in as little space as possible
+        if (image.PixelFormat == ImagePixelFormat.BW1)
+        {
+            // Already encoded as 1-bit
+            return new ImageExportFormat(ImageFileFormat.Png, ImagePixelFormat.BW1);
+        }
+        if (bitDepth == BitDepth.BlackAndWhite)
+        {
+            // Convert to a 1-bit bitmap before saving to help compression
+            // This is lossless and takes up minimal storage (best of both worlds), so highQuality is irrelevant
+            // Note that if a black and white image comes from native WIA, bitDepth is unknown,
+            // so the image will be png-encoded below instead of using a 1-bit bitmap
+            return new ImageExportFormat(ImageFileFormat.Png, ImagePixelFormat.BW1);
+        }
+        // TODO: Also for ARGB32? Or is OriginalFileFormat enough if we populate that more consistently?
+        if (lossless || image.OriginalFileFormat == ImageFileFormat.Png)
+        {
+            // Store as PNG
+            // Lossless, but some images (color/grayscale) take up lots of storage
+            return new ImageExportFormat(ImageFileFormat.Png, image.PixelFormat);
+        }
+        if (image.OriginalFileFormat == ImageFileFormat.Jpeg)
+        {
+            // Store as JPEG
+            // Since the image was originally in JPEG format, PNG is unlikely to have size benefits
+            return new ImageExportFormat(ImageFileFormat.Jpeg, ImagePixelFormat.RGB24);
+        }
+        // No inherent preference for Jpeg or Png, the caller can decide
+        return new ImageExportFormat(ImageFileFormat.Unspecified, ImagePixelFormat.RGB24);
     }
 }

@@ -31,9 +31,11 @@
   </PropertyGroup>
   
   <ItemGroup>
+    <PackageReference Include="SharpZipLib" Version="1.3.3" />
+    <PackageReference Include="SixLabors.Fonts" Version="1.0.0-beta18" />
     <PackageReference Include="ZXing.Net.Bindings.Windows.Compatibility" Version="0.16.7" />
-    <Reference Include="PdfSharp">
-      <HintPath>..\NAPS2.Setup\lib\PdfSharp.dll</HintPath>
+    <Reference Include="PdfSharpCore">
+      <HintPath>..\NAPS2.Setup\lib\PdfSharpCore.dll</HintPath>
     </Reference>
     
     <PackageReference Include="Grpc.Tools" Version="2.26.0" PrivateAssets="all" />

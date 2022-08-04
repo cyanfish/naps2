@@ -47,6 +47,40 @@ public class PdfExporterTests : ContextualTests
 
     [Theory]
     [ClassData(typeof(StorageAwareTestData))]
+    public async Task ExportAlphaImage(StorageConfig storageConfig)
+    {
+        storageConfig.Apply(this);
+
+        var filePath = Path.Combine(FolderPath, "test.pdf");
+        using var image = ScanningContext.CreateProcessedImage(
+            new GdiImage(ImageResources.color_image_alpha), BitDepth.Color, false, -1);
+
+        await _exporter.Export(filePath, new[] { image }, new PdfExportParams());
+
+        // TODO: This assert is broken as pdfium rendering doesn't work for images with masks yet
+        // PdfAsserts.AssertImages(filePath, ImageResources.color_image_alpha);
+        PdfAsserts.AssertImageFilter(filePath, 0, "FlateDecode");
+    }
+
+    [Theory]
+    [ClassData(typeof(StorageAwareTestData))]
+    public async Task ExportMaskedImage(StorageConfig storageConfig)
+    {
+        storageConfig.Apply(this);
+
+        var filePath = Path.Combine(FolderPath, "test.pdf");
+        using var image = ScanningContext.CreateProcessedImage(
+            new GdiImage(ImageResources.color_image_mask), BitDepth.Color, false, -1);
+
+        await _exporter.Export(filePath, new[] { image }, new PdfExportParams());
+
+        // TODO: This assert is broken as pdfium rendering doesn't work for images with masks yet
+        // PdfAsserts.AssertImages(filePath, ImageResources.color_image_alpha);
+        PdfAsserts.AssertImageFilter(filePath, 0, "FlateDecode");
+    }
+
+    [Theory]
+    [ClassData(typeof(StorageAwareTestData))]
     public async Task ExportBlackAndWhiteImage(StorageConfig storageConfig)
     {
         storageConfig.Apply(this);

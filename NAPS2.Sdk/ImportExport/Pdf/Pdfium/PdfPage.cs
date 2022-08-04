@@ -17,6 +17,8 @@ public class PdfPage : NativePdfiumObject
     
     public float Height => Native.FPDF_GetPageHeightF(Handle);
 
+    public bool HasTransparency => Native.FPDFPage_HasTransparency(Handle);
+
     public PdfText GetText()
     {
         return new PdfText(Native.FPDFText_LoadPage(Handle));

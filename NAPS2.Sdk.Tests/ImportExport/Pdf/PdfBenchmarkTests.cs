@@ -25,7 +25,7 @@ public class PdfBenchmarkTests : ContextualTests
     {
         var filePath = Path.Combine(FolderPath, "test");
         using var image = ScanningContext.CreateProcessedImage(new GdiImage(ImageResources.color_image_huge),
-            BitDepth.Color, true, -1, Enumerable.Empty<Transform>());
+            BitDepth.Color, false, -1, Enumerable.Empty<Transform>());
 
         var pdfExporter = new PdfExporter(ScanningContext);
         await pdfExporter.Export(filePath + ".pdf", new[] { image }, new PdfExportParams());
@@ -61,7 +61,7 @@ public class PdfBenchmarkTests : ContextualTests
     {
         var filePath = Path.Combine(FolderPath, "test");
         using var image = ScanningContext.CreateProcessedImage(new GdiImage(ImageResources.color_image_huge),
-            BitDepth.Color, true, -1, Enumerable.Empty<Transform>());
+            BitDepth.Color, false, -1, Enumerable.Empty<Transform>());
 
         var pdfExporter = new PdfiumPdfExporter(ScanningContext);
         await pdfExporter.Export(filePath + ".pdf", new[] { image }, new PdfExportParams());

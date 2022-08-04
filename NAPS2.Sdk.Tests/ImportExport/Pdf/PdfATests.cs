@@ -23,11 +23,12 @@ public class PdfATests : ContextualTests
         Parallel.ForEach(testCases, testCase =>
         {
             using var image = CreateScannedImage();
-            pdfExporter.Export(testCase.fileName, new[] { image }, new PdfExportParams
+            var path = Path.Combine(FolderPath, testCase.fileName);
+            pdfExporter.Export(path, new[] { image }, new PdfExportParams
             {
                 Compat = testCase.pdfCompat
             }).Wait();
-            PdfAsserts.AssertCompliant(testCase.profile, testCase.fileName);
+            PdfAsserts.AssertCompliant(testCase.profile, path);
         });
     }
 }

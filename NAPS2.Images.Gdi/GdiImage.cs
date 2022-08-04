@@ -104,7 +104,10 @@ public class GdiImage : IMemoryImage
 
     public IMemoryImage Clone()
     {
-        return new GdiImage((Bitmap) Bitmap.Clone());
+        var newImage = new GdiImage((Bitmap) Bitmap.Clone());
+        // TODO: We want to make original file format more consistent when copying around and transforming images 
+        newImage._originalFileFormat = _originalFileFormat;
+        return newImage;
     }
 
     public IMemoryImage SafeClone()
@@ -124,6 +127,7 @@ public class GdiImage : IMemoryImage
         g.DrawImage(Bitmap, 0, 0, Width, Height);
 
         var newImage = new GdiImage(newBitmap);
+        newImage.OriginalFileFormat = OriginalFileFormat;
         newImage.SetResolution(HorizontalResolution, VerticalResolution);
         return newImage;
     }

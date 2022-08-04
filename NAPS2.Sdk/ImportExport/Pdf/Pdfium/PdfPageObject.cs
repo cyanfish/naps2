@@ -5,16 +5,20 @@ namespace NAPS2.ImportExport.Pdf.Pdfium;
 
 public class PdfPageObject : NativePdfiumObject
 {
-    private readonly PdfDocument _document;
-    private readonly PdfPage? _page;
     private readonly bool _owned;
 
     internal PdfPageObject(IntPtr handle, PdfDocument document, PdfPage? page, bool owned) : base(handle)
     {
-        _document = document;
-        _page = page;
+        Document = document;
+        Page = page;
         _owned = owned;
     }
+
+    public PdfDocument Document { get; }
+
+    public PdfPage? Page { get; }
+
+    public bool HasTransparency => Native.FPDFPageObj_HasTransparency(Handle);
 
     public void SetBitmap(PdfBitmap bitmap)
     {
@@ -104,7 +108,7 @@ public class PdfPageObject : NativePdfiumObject
     public PdfBitmap GetRenderedBitmap()
     {
         return new PdfBitmap(
-            Native.FPDFImageObj_GetRenderedBitmap(_document.Handle, _page?.Handle ?? IntPtr.Zero, Handle));
+            Native.FPDFImageObj_GetRenderedBitmap(Document.Handle, Page?.Handle ?? IntPtr.Zero, Handle));
     }
 
     public byte[] GetImageDataRaw()
@@ -128,7 +132,7 @@ public class PdfPageObject : NativePdfiumObject
         get
         {
             var metadata = new PdfImageMetadata();
-            Native.FPDFImageObj_GetImageMetadata(Handle, _page?.Handle ?? IntPtr.Zero, ref metadata);
+            Native.FPDFImageObj_GetImageMetadata(Handle, Page?.Handle ?? IntPtr.Zero, ref metadata);
             return metadata;
         }
     }
@@ -151,7 +155,7 @@ public class PdfPageObject : NativePdfiumObject
         }
     }
 
-    public bool HasFilters(params string[] filters)
+    public bool HasImageFilters(params string[] filters)
     {
         if (filters.Length != ImageFilterCount)
         {
@@ -165,5 +169,16 @@ public class PdfPageObject : NativePdfiumObject
             }
         }
         return true;
+    }
+
+    // TODO: Maybe clean up all these filter methods
+    public string[] GetImageFilters()
+    {
+        var filters = new string[ImageFilterCount];
+        for (int i = 0; i < filters.Length; i++)
+        {
+            filters[i] = GetImageFilter(i);
+        }
+        return filters;
     }
 }
