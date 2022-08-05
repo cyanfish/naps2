@@ -1,6 +1,5 @@
 using System.Threading;
 using NAPS2.Ocr;
-using NAPS2.Sdk.Tests.Images;
 using Xunit;
 
 namespace NAPS2.Sdk.Tests.Ocr;

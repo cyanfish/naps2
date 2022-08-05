@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   
   <PropertyGroup>
-    <TargetFrameworks>net5-windows;net462</TargetFrameworks>
+    <TargetFrameworks>net6;net462</TargetFrameworks>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <GenerateResourceUsePreserializedResources>true</GenerateResourceUsePreserializedResources>
   </PropertyGroup>
@@ -16,6 +16,7 @@
     </Reference>
   
     <ProjectReference Include="..\NAPS2.Sdk\NAPS2.Sdk.csproj" />
+    <ProjectReference Include="..\NAPS2.Images.Mac\NAPS2.Images.Mac.csproj" Condition="$(TargetFramework) == 'net6'" />
   
     <PackageReference Include="Moq" Version="4.18.1" />
     <PackageReference Include="PdfAValidator" Version="1.1.141" />
@@ -36,6 +37,12 @@
     <EmbeddedResource Update="**/*.resx">
       <Generator>ResXFileCodeGenerator</Generator>
     </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="TestImageContextFactory.cs">
+      <SubType>Form</SubType>
+    </Compile>
   </ItemGroup>
   
 </Project>

@@ -1,4 +1,3 @@
-using NAPS2.Images.Gdi;
 using NAPS2.ImportExport.Pdf;
 using NAPS2.Sdk.Tests.Asserts;
 using Xunit;
@@ -21,7 +20,7 @@ public class PdfExporterTests : ContextualTests
         storageConfig.Apply(this);
 
         var filePath = Path.Combine(FolderPath, "test.pdf");
-        using var image = ScanningContext.CreateProcessedImage(new GdiImage(ImageResources.color_image));
+        using var image = ScanningContext.CreateProcessedImage(LoadImage(ImageResources.color_image));
 
         await _exporter.Export(filePath, new[] { image }, new PdfExportParams());
 
@@ -37,7 +36,7 @@ public class PdfExporterTests : ContextualTests
 
         var filePath = Path.Combine(FolderPath, "test.pdf");
         using var image = ScanningContext.CreateProcessedImage(
-            new GdiImage(ImageResources.color_image_png), BitDepth.Color, true, -1);
+            LoadImage(ImageResources.color_image_png), BitDepth.Color, true, -1);
 
         await _exporter.Export(filePath, new[] { image }, new PdfExportParams());
 
@@ -53,7 +52,7 @@ public class PdfExporterTests : ContextualTests
 
         var filePath = Path.Combine(FolderPath, "test.pdf");
         using var image = ScanningContext.CreateProcessedImage(
-            new GdiImage(ImageResources.color_image_alpha), BitDepth.Color, false, -1);
+            LoadImage(ImageResources.color_image_alpha), BitDepth.Color, false, -1);
 
         await _exporter.Export(filePath, new[] { image }, new PdfExportParams());
 
@@ -70,7 +69,7 @@ public class PdfExporterTests : ContextualTests
 
         var filePath = Path.Combine(FolderPath, "test.pdf");
         using var image = ScanningContext.CreateProcessedImage(
-            new GdiImage(ImageResources.color_image_mask), BitDepth.Color, false, -1);
+            LoadImage(ImageResources.color_image_mask), BitDepth.Color, false, -1);
 
         await _exporter.Export(filePath, new[] { image }, new PdfExportParams());
 
@@ -86,7 +85,7 @@ public class PdfExporterTests : ContextualTests
         storageConfig.Apply(this);
 
         var filePath = Path.Combine(FolderPath, "test.pdf");
-        using var image = ScanningContext.CreateProcessedImage(new GdiImage(ImageResources.color_image_bw));
+        using var image = ScanningContext.CreateProcessedImage(LoadImage(ImageResources.color_image_bw));
 
         await _exporter.Export(filePath, new[] { image }, new PdfExportParams());
 
@@ -101,7 +100,7 @@ public class PdfExporterTests : ContextualTests
         storageConfig.Apply(this);
 
         var filePath = Path.Combine(FolderPath, "test.pdf");
-        using var image = ScanningContext.CreateProcessedImage(new GdiImage(ImageResources.color_image_bw_24bit),
+        using var image = ScanningContext.CreateProcessedImage(LoadImage(ImageResources.color_image_bw_24bit),
             BitDepth.BlackAndWhite, true, -1);
 
         await _exporter.Export(filePath, new[] { image }, new PdfExportParams());
@@ -117,7 +116,7 @@ public class PdfExporterTests : ContextualTests
         storageConfig.Apply(this);
 
         var filePath = Path.Combine(FolderPath, "test.pdf");
-        using var image = ScanningContext.CreateProcessedImage(new GdiImage(ImageResources.color_image));
+        using var image = ScanningContext.CreateProcessedImage(LoadImage(ImageResources.color_image));
         var metadata = new PdfMetadata
         {
             Author = "author",
@@ -139,7 +138,7 @@ public class PdfExporterTests : ContextualTests
         storageConfig.Apply(this);
 
         var filePath = Path.Combine(FolderPath, "test.pdf");
-        using var image = ScanningContext.CreateProcessedImage(new GdiImage(ImageResources.color_image));
+        using var image = ScanningContext.CreateProcessedImage(LoadImage(ImageResources.color_image));
         var metadata = new PdfMetadata
         {
             Author = "מְחַבֵּר",
@@ -161,7 +160,7 @@ public class PdfExporterTests : ContextualTests
         storageConfig.Apply(this);
 
         var filePath = Path.Combine(FolderPath, "test.pdf");
-        using var image = ScanningContext.CreateProcessedImage(new GdiImage(ImageResources.color_image));
+        using var image = ScanningContext.CreateProcessedImage(LoadImage(ImageResources.color_image));
 
         await _exporter.Export(filePath, new[] { image }, new PdfExportParams
         {
@@ -183,7 +182,7 @@ public class PdfExporterTests : ContextualTests
         storageConfig.Apply(this);
 
         var filePath = Path.Combine(FolderPath, "test.pdf");
-        using var image = ScanningContext.CreateProcessedImage(new GdiImage(ImageResources.color_image));
+        using var image = ScanningContext.CreateProcessedImage(LoadImage(ImageResources.color_image));
         var metadata = new PdfMetadata
         {
             Author = "author",
@@ -214,7 +213,7 @@ public class PdfExporterTests : ContextualTests
         storageConfig.Apply(this);
 
         var filePath = Path.Combine(FolderPath, "test.pdf");
-        using var image = ScanningContext.CreateProcessedImage(new GdiImage(ImageResources.color_image));
+        using var image = ScanningContext.CreateProcessedImage(LoadImage(ImageResources.color_image));
         var metadata = new PdfMetadata
         {
             Author = "מְחַבֵּר",

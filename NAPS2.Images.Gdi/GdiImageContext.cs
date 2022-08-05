@@ -73,34 +73,6 @@ public class GdiImageContext : ImageContext
         return ((GdiImage) Render(processedImage)).Bitmap;
     }
 
-    public override IMemoryImage RenderFromStorage(IImageStorage storage)
-    {
-        switch (storage)
-        {
-            case ImageFileStorage fileStorage:
-                if (MaybeRenderPdf(fileStorage, out var renderedPdf))
-                {
-                    return renderedPdf!;
-                }
-                // Rather than creating a bitmap from the file directly, instead we read it into memory first.
-                // This ensures we don't accidentally keep a lock on the storage file, which would cause an error if we
-                // try to delete it before the bitmap is disposed.
-                // This is less efficient in the case where the bitmap is guaranteed to be disposed quickly, but for now
-                // that seems like a reasonable tradeoff to avoid a whole class of hard-to-diagnose errors.
-                var stream = new MemoryStream(File.ReadAllBytes(fileStorage.FullPath));
-                return new GdiImage(new Bitmap(stream));
-            case ImageMemoryStorage memoryStorage:
-                if (MaybeRenderPdf(memoryStorage, out var renderedMemoryPdf))
-                {
-                    return renderedMemoryPdf!;
-                }
-                return new GdiImage(new Bitmap(memoryStorage.Stream));
-            case GdiImage image:
-                return image.Clone();
-        }
-        throw new ArgumentException("Unsupported image storage: " + storage);
-    }
-
     public override IMemoryImage Create(int width, int height, ImagePixelFormat pixelFormat)
     {
         var bitmap = new Bitmap(width, height, pixelFormat.AsPixelFormat());

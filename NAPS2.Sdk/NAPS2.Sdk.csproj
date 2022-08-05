@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net5;net5-windows;net462</TargetFrameworks>
+    <TargetFrameworks>net6;net462</TargetFrameworks>
     <Nullable>enable</Nullable>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <!-- TODO: Move ClientCreds etc out of NAPS2.Sdk -->
@@ -38,7 +38,7 @@
       <HintPath>..\NAPS2.Setup\lib\PdfSharpCore.dll</HintPath>
     </Reference>
     
-    <PackageReference Include="Grpc.Tools" Version="2.26.0" PrivateAssets="all" />
+    <PackageReference Include="Grpc.Tools" Version="2.47.0" PrivateAssets="all" />
     <PackageReference Include="GrpcDotNetNamedPipes" Version="1.4.4" />
     <PackageReference Include="Microsoft.Bcl.AsyncInterfaces" Version="6.0.0" />
     <PackageReference Include="Microsoft.Win32.Registry" Version="5.0.0" />

@@ -18,17 +18,17 @@ public static class ImageAsserts
 
     private const double DIMENSIONS_THRESHOLD = 0.05;
 
-    public static void Similar(Bitmap first, ProcessedImage second, double rmseThreshold = GENERAL_RMSE_THRESHOLD,
+    public static void Similar(byte[] first, ProcessedImage second, double rmseThreshold = GENERAL_RMSE_THRESHOLD,
         bool ignoreFormat = false)
     {
-        using var rendered = new GdiImageContext().Render(second);
-        Similar(new GdiImage(first), rendered, rmseThreshold, ignoreFormat);
+        using var rendered = TestImageContextFactory.Get().Render(second);
+        Similar(TestImageContextFactory.Get().Load(first), rendered, rmseThreshold, ignoreFormat);
     }
 
-    public static void Similar(Bitmap first, IMemoryImage second, double rmseThreshold = GENERAL_RMSE_THRESHOLD,
+    public static void Similar(byte[] first, IMemoryImage second, double rmseThreshold = GENERAL_RMSE_THRESHOLD,
         bool ignoreFormat = false)
     {
-        Similar(new GdiImage(first), second, rmseThreshold, ignoreFormat);
+        Similar(TestImageContextFactory.Get().Load(first), second, rmseThreshold, ignoreFormat);
     }
 
     public static void Similar(IMemoryImage first, IMemoryImage second,
@@ -37,17 +37,17 @@ public static class ImageAsserts
         Similar(first, second, rmseThreshold, ignoreFormat, true);
     }
 
-    public static void NotSimilar(Bitmap first, ProcessedImage second, double rmseThreshold = GENERAL_RMSE_THRESHOLD,
+    public static void NotSimilar(byte[] first, ProcessedImage second, double rmseThreshold = GENERAL_RMSE_THRESHOLD,
         bool ignoreFormat = false)
     {
-        using var rendered = new GdiImageContext().Render(second);
-        NotSimilar(new GdiImage(first), rendered, rmseThreshold, ignoreFormat);
+        using var rendered = TestImageContextFactory.Get().Render(second);
+        NotSimilar(TestImageContextFactory.Get().Load(first), rendered, rmseThreshold, ignoreFormat);
     }
 
-    public static void NotSimilar(Bitmap first, IMemoryImage second, double rmseThreshold = GENERAL_RMSE_THRESHOLD,
+    public static void NotSimilar(byte[] first, IMemoryImage second, double rmseThreshold = GENERAL_RMSE_THRESHOLD,
         bool ignoreFormat = false)
     {
-        NotSimilar(new GdiImage(first), second, rmseThreshold, ignoreFormat);
+        NotSimilar(TestImageContextFactory.Get().Load(first), second, rmseThreshold, ignoreFormat);
     }
 
     public static void NotSimilar(IMemoryImage first, IMemoryImage second,
@@ -78,7 +78,7 @@ public static class ImageAsserts
             first.VerticalResolution - RESOLUTION_THRESHOLD,
             first.VerticalResolution + RESOLUTION_THRESHOLD);
 
-        var imageContext = new GdiImageContext();
+        var imageContext = TestImageContextFactory.Get();
         first = imageContext.PerformTransform(first, new ColorBitDepthTransform());
         second = imageContext.PerformTransform(second, new ColorBitDepthTransform());
 
@@ -86,7 +86,8 @@ public static class ImageAsserts
         using var lock2 = second.Lock(LockMode.ReadOnly, out var scan02, out var stride2);
         int width = first.Width;
         int height = first.Height;
-        int bytesPerPixel = first.PixelFormat == ImagePixelFormat.ARGB32 ? 4 : 3;
+        int bytesPerPixel1 = first.PixelFormat == ImagePixelFormat.ARGB32 ? 4 : 3;
+        int bytesPerPixel2 = second.PixelFormat == ImagePixelFormat.ARGB32 ? 4 : 3;
         long total = 0;
         long div = width * height * 3;
         byte* data1 = (byte*) scan01;
@@ -97,8 +98,8 @@ public static class ImageAsserts
             byte* row2 = data2 + stride2 * y;
             for (int x = 0; x < width; x++)
             {
-                byte* pixel1 = row1 + x * bytesPerPixel;
-                byte* pixel2 = row2 + x * bytesPerPixel;
+                byte* pixel1 = row1 + x * bytesPerPixel1;
+                byte* pixel2 = row2 + x * bytesPerPixel2;
 
                 byte r1 = *pixel1;
                 byte g1 = *(pixel1 + 1);
@@ -110,7 +111,8 @@ public static class ImageAsserts
 
                 total += (r1 - r2) * (r1 - r2) + (g1 - g2) * (g1 - g2) + (b1 - b2) * (b1 - b2);
 
-                if (bytesPerPixel == 4)
+                // TODO: Should we validate alpha is 255 if there's a bpp mismatch?
+                if (bytesPerPixel1 == 4 && bytesPerPixel2 == 4)
                 {
                     byte a1 = *(pixel1 + 3);
                     byte a2 = *(pixel2 + 3);
@@ -173,7 +175,7 @@ public static class ImageAsserts
 
     public static void Inches(string path, double expectedWidth, int expectedHeight)
     {
-        var image = new GdiImageContext().Load(path);
+        var image = TestImageContextFactory.Get().Load(path);
         var actualWidth = image.Width / image.HorizontalResolution;
         var actualHeight = image.Height / image.VerticalResolution;
         Assert.InRange(actualWidth, expectedWidth - DIMENSIONS_THRESHOLD, expectedWidth + DIMENSIONS_THRESHOLD);

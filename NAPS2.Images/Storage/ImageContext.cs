@@ -5,6 +5,20 @@ namespace NAPS2.Images.Storage;
 public abstract class ImageContext
 {
     private readonly IPdfRenderer? _pdfRenderer;
+    
+    // TODO: Any better place to put this?
+    public static ImageFileFormat GetFileFormatFromExtension(string path, bool allowUnspecified = false)
+    {
+        return Path.GetExtension(path).ToLowerInvariant() switch
+        {
+            ".png" => ImageFileFormat.Png,
+            ".bmp" => ImageFileFormat.Bmp,
+            ".jpg" or ".jpeg" => ImageFileFormat.Jpeg,
+            _ => allowUnspecified
+                ? ImageFileFormat.Unspecified
+                : throw new ArgumentException($"Could not infer file format from extension: {path}")
+        };
+    }
 
     protected ImageContext(Type imageType, IPdfRenderer? pdfRenderer = null)
     {
@@ -98,6 +112,12 @@ public abstract class ImageContext
     /// <returns></returns>
     public abstract IMemoryImage Load(Stream stream);
 
+    // TODO: Document
+    public IMemoryImage Load(byte[] bytes)
+    {
+        return Load(new MemoryStream(bytes));
+    }
+
     // TODO: The original doc said that only the currently enumerated image is guaranteed to be valid. Is this still true?
     /// <summary>
     /// Loads an image that may have multiple frames (e.g. a TIFF file) from the given stream.
@@ -121,7 +141,33 @@ public abstract class ImageContext
         return PerformAllTransforms(bitmap, processedImage.TransformState.Transforms);
     }
 
-    public abstract IMemoryImage RenderFromStorage(IImageStorage storage);
+    public IMemoryImage RenderFromStorage(IImageStorage storage)
+    {
+        switch (storage)
+        {
+            case ImageFileStorage fileStorage:
+                if (MaybeRenderPdf(fileStorage, out var renderedPdf))
+                {
+                    return renderedPdf!;
+                }
+                // Rather than creating a bitmap from the file directly, instead we read it into memory first.
+                // This ensures we don't accidentally keep a lock on the storage file, which would cause an error if we
+                // try to delete it before the bitmap is disposed.
+                // This is less efficient in the case where the bitmap is guaranteed to be disposed quickly, but for now
+                // that seems like a reasonable tradeoff to avoid a whole class of hard-to-diagnose errors.
+                var stream = new MemoryStream(File.ReadAllBytes(fileStorage.FullPath));
+                return Load(stream);
+            case ImageMemoryStorage memoryStorage:
+                if (MaybeRenderPdf(memoryStorage, out var renderedMemoryPdf))
+                {
+                    return renderedMemoryPdf!;
+                }
+                return Load(memoryStorage.Stream);
+            case IMemoryImage image:
+                return image.Clone();
+        }
+        throw new ArgumentException("Unsupported image storage: " + storage);
+    }
 
     /// <summary>
     /// Creates a new empty image.

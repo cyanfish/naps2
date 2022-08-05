@@ -1,5 +1,4 @@
 using Moq;
-using NAPS2.Images.Gdi;
 using NAPS2.Scan;
 using Xunit;
 
@@ -10,7 +9,7 @@ public class ScanningContextTests : ContextualTests
     [Fact]
     public void CreateAndNormallyDisposeImages()
     {
-        var context = new ScanningContext(new GdiImageContext());
+        var context = new ScanningContext(TestImageContextFactory.Get());
         var storage1 = new Mock<IImageStorage>();
         var storage2 = new Mock<IImageStorage>();
         var image1 = context.CreateProcessedImage(storage1.Object);
@@ -27,7 +26,7 @@ public class ScanningContextTests : ContextualTests
     [Fact]
     public void CreateAndDisposeImagesByDisposingContext()
     {
-        var context = new ScanningContext(new GdiImageContext());
+        var context = new ScanningContext(TestImageContextFactory.Get());
         var storage1 = new Mock<IImageStorage>();
         var storage2 = new Mock<IImageStorage>();
         // Create a simple image

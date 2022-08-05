@@ -1,4 +1,3 @@
-using NAPS2.Images.Gdi;
 using NAPS2.ImportExport.Pdf;
 using NAPS2.Ocr;
 using NAPS2.Sdk.Tests.Asserts;
@@ -43,7 +42,7 @@ public class PdfImportExportTests : ContextualTests
         var images = await _importer.Import(_importPath).ToList();
         Assert.Equal(2, images.Count);
 
-        var toInsert = ScanningContext.CreateProcessedImage(new GdiImage(ImageResources.color_image));
+        var toInsert = ScanningContext.CreateProcessedImage(LoadImage(ImageResources.color_image));
         var newImages = new List<ProcessedImage>
         {
             images[0],

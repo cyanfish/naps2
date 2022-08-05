@@ -20,6 +20,11 @@
             <Link>lib\mac\libpdfium.dylib</Link>
             <TargetPath>_mac\libpdfium.dylib</TargetPath>
         </ContentWithTargetPath>
+        <ContentWithTargetPath Include="..\NAPS2.Setup\lib\macarm\libpdfium.dylib">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+            <Link>lib\macarm\libpdfium.dylib</Link>
+            <TargetPath>_macarm\libpdfium.dylib</TargetPath>
+        </ContentWithTargetPath>
 
         <ContentWithTargetPath Include="..\NAPS2.Setup\lib\win64\tesseract.exe">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

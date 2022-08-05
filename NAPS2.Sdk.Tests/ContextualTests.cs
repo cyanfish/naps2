@@ -1,6 +1,4 @@
-﻿using System.Drawing;
-using System.Threading;
-using NAPS2.Images.Gdi;
+﻿using System.Threading;
 using NAPS2.ImportExport.Pdf;
 using NAPS2.Ocr;
 using NAPS2.Scan;
@@ -14,7 +12,7 @@ public class ContextualTests : IDisposable
         FolderPath = Path.GetFullPath(Path.Combine("naps2_test_temp", Path.GetRandomFileName()));
         Folder = Directory.CreateDirectory(FolderPath);
 
-        ImageContext = new GdiImageContext(new PdfiumPdfRenderer());
+        ImageContext = TestImageContextFactory.Get(new PdfiumPdfRenderer());
         ScanningContext = new ScanningContext(ImageContext);
         ScanningContext.TempFolderPath = Path.Combine(FolderPath, "temp");
         Directory.CreateDirectory(ScanningContext.TempFolderPath);
@@ -28,9 +26,15 @@ public class ContextualTests : IDisposable
 
     public DirectoryInfo Folder { get; }
 
+    public IMemoryImage LoadImage(byte[] resource)
+    {
+        return ImageContext.Load(new MemoryStream(resource));
+    }
+
     public ProcessedImage CreateScannedImage()
     {
-        return ScanningContext.CreateProcessedImage(new GdiImage(new Bitmap(100, 100)));
+        // TODO: A different placeholder image here?
+        return ScanningContext.CreateProcessedImage(LoadImage(ImageResources.color_image));
     }
 
     public void SetUpOcr()
@@ -41,6 +45,13 @@ public class ContextualTests : IDisposable
         Directory.CreateDirectory(fast);
         
         var tesseractPath = CopyResourceToFile(BinaryResources.tesseract_x64, FolderPath, "tesseract.exe");
+#if NET6_0_OR_GREATER
+        if (OperatingSystem.IsMacOS())
+        {
+            // TODO: We should try and not rely on tesseract being installed on the system
+            tesseractPath = "tesseract";
+        }
+#endif
         CopyResourceToFile(BinaryResources.eng_traineddata, fast, "eng.traineddata");
         CopyResourceToFile(BinaryResources.heb_traineddata, fast, "heb.traineddata");
         ScanningContext.OcrEngine = new TesseractOcrEngine(tesseractPath, FolderPath, FolderPath);
@@ -91,7 +102,7 @@ public class ContextualTests : IDisposable
         }
     }
 
-    public bool IsDisposed(GdiImage image)
+    public bool IsDisposed(IMemoryImage image)
     {
         try
         {

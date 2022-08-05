@@ -1,5 +1,4 @@
-﻿using NAPS2.Images.Gdi;
-using NAPS2.Sdk.Tests.Asserts;
+﻿using NAPS2.Sdk.Tests.Asserts;
 using Xunit;
 
 namespace NAPS2.Sdk.Tests.Images;
@@ -15,8 +14,8 @@ public class TransformTests : ContextualTests
     [Fact]
     public void BrightnessNull()
     {
-        IMemoryImage actual = new GdiImage(ImageResources.color_image);
-        IMemoryImage expected = new GdiImage(ImageResources.color_image);
+        IMemoryImage actual = LoadImage(ImageResources.color_image);
+        IMemoryImage expected = LoadImage(ImageResources.color_image);
 
         actual = ImageContext.PerformTransform(actual, new BrightnessTransform());
 
@@ -26,8 +25,8 @@ public class TransformTests : ContextualTests
     [Fact]
     public void BrightnessP300()
     {
-        IMemoryImage actual = new GdiImage(ImageResources.color_image);
-        IMemoryImage expected = new GdiImage(ImageResources.color_image_b_p300);
+        IMemoryImage actual = LoadImage(ImageResources.color_image);
+        IMemoryImage expected = LoadImage(ImageResources.color_image_b_p300);
 
         actual = ImageContext.PerformTransform(actual, new BrightnessTransform(300));
 
@@ -37,8 +36,8 @@ public class TransformTests : ContextualTests
     [Fact]
     public void BrightnessN300()
     {
-        IMemoryImage actual = new GdiImage(ImageResources.color_image);
-        IMemoryImage expected = new GdiImage(ImageResources.color_image_b_n300);
+        IMemoryImage actual = LoadImage(ImageResources.color_image);
+        IMemoryImage expected = LoadImage(ImageResources.color_image_b_n300);
 
         actual = ImageContext.PerformTransform(actual, new BrightnessTransform(-300));
 
@@ -48,8 +47,8 @@ public class TransformTests : ContextualTests
     [Fact]
     public void ContrastNull()
     {
-        IMemoryImage actual = new GdiImage(ImageResources.color_image);
-        IMemoryImage expected = new GdiImage(ImageResources.color_image);
+        IMemoryImage actual = LoadImage(ImageResources.color_image);
+        IMemoryImage expected = LoadImage(ImageResources.color_image);
 
         actual = ImageContext.PerformTransform(actual, new TrueContrastTransform());
 
@@ -59,8 +58,8 @@ public class TransformTests : ContextualTests
     [Fact]
     public void ContrastP300()
     {
-        IMemoryImage actual = new GdiImage(ImageResources.color_image);
-        IMemoryImage expected = new GdiImage(ImageResources.color_image_c_p300);
+        IMemoryImage actual = LoadImage(ImageResources.color_image);
+        IMemoryImage expected = LoadImage(ImageResources.color_image_c_p300);
 
         actual = ImageContext.PerformTransform(actual, new TrueContrastTransform(300));
 
@@ -70,8 +69,8 @@ public class TransformTests : ContextualTests
     [Fact]
     public void ContrastN300()
     {
-        IMemoryImage actual = new GdiImage(ImageResources.color_image);
-        IMemoryImage expected = new GdiImage(ImageResources.color_image_c_n300);
+        IMemoryImage actual = LoadImage(ImageResources.color_image);
+        IMemoryImage expected = LoadImage(ImageResources.color_image_c_n300);
 
         actual = ImageContext.PerformTransform(actual, new TrueContrastTransform(-300));
 
@@ -81,8 +80,8 @@ public class TransformTests : ContextualTests
     [Fact]
     public void HueNull()
     {
-        IMemoryImage actual = new GdiImage(ImageResources.color_image);
-        IMemoryImage expected = new GdiImage(ImageResources.color_image);
+        IMemoryImage actual = LoadImage(ImageResources.color_image);
+        IMemoryImage expected = LoadImage(ImageResources.color_image);
 
         actual = ImageContext.PerformTransform(actual, new HueTransform());
 
@@ -92,8 +91,8 @@ public class TransformTests : ContextualTests
     [Fact]
     public void HueP300()
     {
-        IMemoryImage actual = new GdiImage(ImageResources.color_image);
-        IMemoryImage expected = new GdiImage(ImageResources.color_image_h_p300);
+        IMemoryImage actual = LoadImage(ImageResources.color_image);
+        IMemoryImage expected = LoadImage(ImageResources.color_image_h_p300);
 
         actual = ImageContext.PerformTransform(actual, new HueTransform(300));
 
@@ -103,8 +102,8 @@ public class TransformTests : ContextualTests
     [Fact]
     public void HueN300()
     {
-        IMemoryImage actual = new GdiImage(ImageResources.color_image);
-        IMemoryImage expected = new GdiImage(ImageResources.color_image_h_n300);
+        IMemoryImage actual = LoadImage(ImageResources.color_image);
+        IMemoryImage expected = LoadImage(ImageResources.color_image_h_n300);
 
         actual = ImageContext.PerformTransform(actual, new HueTransform(-300));
 
@@ -114,8 +113,8 @@ public class TransformTests : ContextualTests
     [Fact]
     public void SaturationNull()
     {
-        IMemoryImage actual = new GdiImage(ImageResources.color_image);
-        IMemoryImage expected = new GdiImage(ImageResources.color_image);
+        IMemoryImage actual = LoadImage(ImageResources.color_image);
+        IMemoryImage expected = LoadImage(ImageResources.color_image);
 
         actual = ImageContext.PerformTransform(actual, new SaturationTransform());
 
@@ -125,8 +124,8 @@ public class TransformTests : ContextualTests
     [Fact]
     public void SaturationP300()
     {
-        IMemoryImage actual = new GdiImage(ImageResources.color_image);
-        IMemoryImage expected = new GdiImage(ImageResources.color_image_s_p300);
+        IMemoryImage actual = LoadImage(ImageResources.color_image);
+        IMemoryImage expected = LoadImage(ImageResources.color_image_s_p300);
 
         actual = ImageContext.PerformTransform(actual, new SaturationTransform(300));
 
@@ -136,8 +135,8 @@ public class TransformTests : ContextualTests
     [Fact]
     public void SaturationN300()
     {
-        IMemoryImage actual = new GdiImage(ImageResources.color_image);
-        IMemoryImage expected = new GdiImage(ImageResources.color_image_s_n300);
+        IMemoryImage actual = LoadImage(ImageResources.color_image);
+        IMemoryImage expected = LoadImage(ImageResources.color_image_s_n300);
 
         actual = ImageContext.PerformTransform(actual, new SaturationTransform(-300));
 
@@ -147,8 +146,8 @@ public class TransformTests : ContextualTests
     [Fact]
     public void SharpenNull()
     {
-        IMemoryImage actual = new GdiImage(ImageResources.color_image);
-        IMemoryImage expected = new GdiImage(ImageResources.color_image);
+        IMemoryImage actual = LoadImage(ImageResources.color_image);
+        IMemoryImage expected = LoadImage(ImageResources.color_image);
 
         actual = ImageContext.PerformTransform(actual, new SharpenTransform());
 
@@ -158,8 +157,8 @@ public class TransformTests : ContextualTests
     [Fact]
     public void SharpenP300()
     {
-        IMemoryImage actual = new GdiImage(ImageResources.color_image);
-        IMemoryImage expected = new GdiImage(ImageResources.color_image_sh_p1000);
+        IMemoryImage actual = LoadImage(ImageResources.color_image);
+        IMemoryImage expected = LoadImage(ImageResources.color_image_sh_p1000);
 
         actual = ImageContext.PerformTransform(actual, new SharpenTransform(1000));
 
@@ -169,8 +168,8 @@ public class TransformTests : ContextualTests
     [Fact]
     public void SharpenN300()
     {
-        IMemoryImage actual = new GdiImage(ImageResources.color_image);
-        IMemoryImage expected = new GdiImage(ImageResources.color_image_sh_n1000);
+        IMemoryImage actual = LoadImage(ImageResources.color_image);
+        IMemoryImage expected = LoadImage(ImageResources.color_image_sh_n1000);
 
         actual = ImageContext.PerformTransform(actual, new SharpenTransform(-1000));
 
@@ -180,8 +179,8 @@ public class TransformTests : ContextualTests
     [Fact]
     public void RotationNull()
     {
-        IMemoryImage actual = new GdiImage(ImageResources.color_image);
-        IMemoryImage expected = new GdiImage(ImageResources.color_image);
+        IMemoryImage actual = LoadImage(ImageResources.color_image);
+        IMemoryImage expected = LoadImage(ImageResources.color_image);
 
         actual = ImageContext.PerformTransform(actual, new RotationTransform());
 
@@ -191,8 +190,8 @@ public class TransformTests : ContextualTests
     [Fact]
     public void RotationP90()
     {
-        IMemoryImage actual = new GdiImage(ImageResources.color_image);
-        IMemoryImage expected = new GdiImage(ImageResources.color_image_r_p90);
+        IMemoryImage actual = LoadImage(ImageResources.color_image);
+        IMemoryImage expected = LoadImage(ImageResources.color_image_r_p90);
 
         actual = ImageContext.PerformTransform(actual, new RotationTransform(90));
 
@@ -202,8 +201,8 @@ public class TransformTests : ContextualTests
     [Fact]
     public void RotationP46()
     {
-        IMemoryImage actual = new GdiImage(ImageResources.color_image);
-        IMemoryImage expected = new GdiImage(ImageResources.color_image_r_p46);
+        IMemoryImage actual = LoadImage(ImageResources.color_image);
+        IMemoryImage expected = LoadImage(ImageResources.color_image_r_p46);
 
         actual = ImageContext.PerformTransform(actual, new RotationTransform(46));
 
@@ -213,8 +212,8 @@ public class TransformTests : ContextualTests
     [Fact]
     public void RotationN45()
     {
-        IMemoryImage actual = new GdiImage(ImageResources.color_image);
-        IMemoryImage expected = new GdiImage(ImageResources.color_image_r_n45);
+        IMemoryImage actual = LoadImage(ImageResources.color_image);
+        IMemoryImage expected = LoadImage(ImageResources.color_image_r_n45);
 
         actual = ImageContext.PerformTransform(actual, new RotationTransform(-45));
 
@@ -224,9 +223,9 @@ public class TransformTests : ContextualTests
     [Fact]
     public void Rotation180()
     {
-        IMemoryImage actual = new GdiImage(ImageResources.color_image);
-        IMemoryImage actual2 = new GdiImage(ImageResources.color_image);
-        IMemoryImage expected = new GdiImage(ImageResources.color_image_r_180);
+        IMemoryImage actual = LoadImage(ImageResources.color_image);
+        IMemoryImage actual2 = LoadImage(ImageResources.color_image);
+        IMemoryImage expected = LoadImage(ImageResources.color_image_r_180);
 
         actual = ImageContext.PerformTransform(actual, new RotationTransform(180));
         actual2 = ImageContext.PerformTransform(actual2, new RotationTransform(-180));
@@ -238,8 +237,8 @@ public class TransformTests : ContextualTests
     [Fact]
     public void CropNull()
     {
-        IMemoryImage actual = new GdiImage(ImageResources.color_image);
-        IMemoryImage expected = new GdiImage(ImageResources.color_image);
+        IMemoryImage actual = LoadImage(ImageResources.color_image);
+        IMemoryImage expected = LoadImage(ImageResources.color_image);
 
         actual = ImageContext.PerformTransform(actual, new CropTransform());
 
@@ -249,8 +248,8 @@ public class TransformTests : ContextualTests
     [Fact]
     public void Crop()
     {
-        IMemoryImage actual = new GdiImage(ImageResources.color_image);
-        IMemoryImage expected = new GdiImage(ImageResources.color_image_c_5_10_15_20);
+        IMemoryImage actual = LoadImage(ImageResources.color_image);
+        IMemoryImage expected = LoadImage(ImageResources.color_image_c_5_10_15_20);
 
         actual = ImageContext.PerformTransform(actual, new CropTransform(10, 20, 15, 5));
 
@@ -260,8 +259,8 @@ public class TransformTests : ContextualTests
     [Fact]
     public void CropWithOriginal()
     {
-        IMemoryImage actual = new GdiImage(ImageResources.color_image);
-        IMemoryImage expected = new GdiImage(ImageResources.color_image_c_5_10_15_20);
+        IMemoryImage actual = LoadImage(ImageResources.color_image);
+        IMemoryImage expected = LoadImage(ImageResources.color_image_c_5_10_15_20);
 
         actual = ImageContext.PerformTransform(actual, new CropTransform(10, 20, 15, 5, actual.Width, actual.Height));
 
@@ -271,8 +270,8 @@ public class TransformTests : ContextualTests
     [Fact]
     public void CropWithDifferentOriginal()
     {
-        IMemoryImage actual = new GdiImage(ImageResources.color_image);
-        IMemoryImage expected = new GdiImage(ImageResources.color_image_c_5_10_15_20);
+        IMemoryImage actual = LoadImage(ImageResources.color_image);
+        IMemoryImage expected = LoadImage(ImageResources.color_image_c_5_10_15_20);
 
         actual = ImageContext.PerformTransform(actual,
             new CropTransform(20, 40, 30, 10, actual.Width * 2, actual.Height * 2));
@@ -283,8 +282,8 @@ public class TransformTests : ContextualTests
     [Fact]
     public void CropOutOfBounds()
     {
-        IMemoryImage actual = new GdiImage(ImageResources.color_image);
-        IMemoryImage expected = new GdiImage(ImageResources.color_image);
+        IMemoryImage actual = LoadImage(ImageResources.color_image);
+        IMemoryImage expected = LoadImage(ImageResources.color_image);
 
         actual = ImageContext.PerformTransform(actual, new CropTransform(-1, -1, -1, -1));
 
@@ -294,8 +293,8 @@ public class TransformTests : ContextualTests
     [Fact]
     public void BlackWhite()
     {
-        IMemoryImage actual = new GdiImage(ImageResources.color_image);
-        IMemoryImage expected = new GdiImage(ImageResources.color_image_bw);
+        IMemoryImage actual = LoadImage(ImageResources.color_image);
+        IMemoryImage expected = LoadImage(ImageResources.color_image_bw);
 
         actual = ImageContext.PerformTransform(actual, new BlackWhiteTransform());
         Assert.Equal(ImagePixelFormat.BW1, actual.PixelFormat);
@@ -306,8 +305,8 @@ public class TransformTests : ContextualTests
     [Fact]
     public void BlackWhiteP300()
     {
-        IMemoryImage actual = new GdiImage(ImageResources.color_image);
-        IMemoryImage expected = new GdiImage(ImageResources.color_image_bw_p300);
+        IMemoryImage actual = LoadImage(ImageResources.color_image);
+        IMemoryImage expected = LoadImage(ImageResources.color_image_bw_p300);
 
         actual = ImageContext.PerformTransform(actual, new BlackWhiteTransform(300));
         Assert.Equal(ImagePixelFormat.BW1, actual.PixelFormat);
@@ -318,8 +317,8 @@ public class TransformTests : ContextualTests
     [Fact]
     public void ColorBitDepth()
     {
-        IMemoryImage actual = new GdiImage(ImageResources.color_image_bw);
-        IMemoryImage expected = new GdiImage(ImageResources.color_image_bw_24bit);
+        IMemoryImage actual = LoadImage(ImageResources.color_image_bw);
+        IMemoryImage expected = LoadImage(ImageResources.color_image_bw_24bit);
 
         Assert.Equal(ImagePixelFormat.BW1, actual.PixelFormat);
         actual = ImageContext.PerformTransform(actual, new ColorBitDepthTransform());
@@ -331,8 +330,8 @@ public class TransformTests : ContextualTests
     [Fact]
     public void Thumbnail()
     {
-        IMemoryImage actual = new GdiImage(ImageResources.color_image);
-        IMemoryImage expected = new GdiImage(ImageResources.color_image_thumb_256);
+        IMemoryImage actual = LoadImage(ImageResources.color_image);
+        IMemoryImage expected = LoadImage(ImageResources.color_image_thumb_256);
 
         actual = ImageContext.PerformTransform(actual, new ThumbnailTransform(256));
 

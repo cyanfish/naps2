@@ -1,0 +1,29 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net6-macos</TargetFramework>
+        <Nullable>enable</Nullable>
+        <GenerateResourceUsePreserializedResources>true</GenerateResourceUsePreserializedResources>
+        <RootNamespace>NAPS2</RootNamespace>
+
+        <Title>NAPS2 (Not Another PDF Scanner 2)</Title>
+        <Product>NAPS2 (Not Another PDF Scanner 2)</Product>
+        <Copyright>Copyright 2009, 2012-2020 NAPS2 Contributors; Icons from http://www.fatcow.com/free-icons</Copyright>
+    </PropertyGroup>
+
+<!--    <Import Project="..\NAPS2.Setup\CommonTargets.targets" />-->
+<!--    <Import Project="..\NAPS2.Setup\LibUsers.targets" />-->
+
+    <ItemGroup>
+<!--        <ProjectReference Include="..\NAPS2.Lib.Common\NAPS2.Lib.Common.csproj" />-->
+        <PackageReference Include="Eto.Forms" Version="2.7.0" />
+        <PackageReference Include="Eto.Platform.Mac64" Version="2.7.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
+            <_Parameter1>NAPS2.Lib.Tests</_Parameter1>
+        </AssemblyAttribute>
+    </ItemGroup>
+
+</Project>

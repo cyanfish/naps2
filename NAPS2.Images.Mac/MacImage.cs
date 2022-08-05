@@ -1,0 +1,124 @@
+﻿using MonoMac.AppKit;
+using MonoMac.CoreGraphics;
+using MonoMac.Foundation;
+
+namespace NAPS2.Images.Mac;
+
+public class MacImage : IMemoryImage
+{
+    private readonly NSImage _image;
+    private readonly NSBitmapImageRep _imageRep;
+
+    public MacImage(NSImage image)
+    {
+        _image = image;
+        // TODO: Better error checking
+        _imageRep = new NSBitmapImageRep(_image.Representations()[0].Handle, false);
+        // TODO: How to handle samplesperpixel = 3 here?
+        if (_imageRep.BitsPerPixel == 32 && _imageRep.BitsPerSample == 8) // && _imageRep.SamplesPerPixel == 4)
+        {
+            PixelFormat = ImagePixelFormat.ARGB32;
+        }
+        else if (_imageRep.BitsPerPixel == 24 && _imageRep.BitsPerSample == 8 && _imageRep.SamplesPerPixel == 3)
+        {
+            PixelFormat = ImagePixelFormat.RGB24;
+        }
+        else
+        {
+            throw new Exception("Unexpected image representation");
+        }
+    }
+
+    public void Dispose()
+    {
+        _image.Dispose();
+        // TODO: Does this need to dispose the imageRep?
+    }
+
+    public int Width => (int) _imageRep.PixelsWide;
+    public int Height => (int)_imageRep.PixelsHigh;
+    public float HorizontalResolution => (float) _image.Size.Width / Width * 72;
+    public float VerticalResolution => (float) _image.Size.Height / Height * 72;
+    public void SetResolution(float xDpi, float yDpi)
+    {
+        // TODO: Image size or imagerep size?
+        if (xDpi > 0 && yDpi > 0)
+        {
+            _image.Size = new CGSize(xDpi / 72 * Width, yDpi / 72 * Height);
+        }
+    }
+
+    public ImagePixelFormat PixelFormat { get; }
+
+    public ImageLockState Lock(LockMode lockMode, out IntPtr scan0, out int stride)
+    {
+        scan0 = _imageRep.BitmapData;
+        stride = (int) _imageRep.BytesPerRow;
+        return new MacImageLockState();
+    }
+
+    // TODO: Should we implement some kind of actual locking?
+    public class MacImageLockState : ImageLockState
+    {
+        public override void Dispose()
+        {
+        }
+    }
+
+    public ImageFileFormat OriginalFileFormat { get; set; }
+    
+    public void Save(string path, ImageFileFormat imageFormat = ImageFileFormat.Unspecified, int quality = -1)
+    {
+        if (imageFormat == ImageFileFormat.Unspecified)
+        {
+            imageFormat = ImageContext.GetFileFormatFromExtension(path);
+        }
+        var rep = GetRepForSaving(imageFormat, quality);
+        if (!rep.Save(path, false, out var error))
+        {
+            throw new IOException(error.Description);
+        }
+    }
+
+    public void Save(Stream stream, ImageFileFormat imageFormat, int quality = -1)
+    {
+        if (imageFormat == ImageFileFormat.Unspecified)
+        {
+            throw new ArgumentException("Format required to save to a stream", nameof(imageFormat));
+        }
+        var rep = GetRepForSaving(imageFormat, quality);
+        rep.AsStream().CopyTo(stream);
+    }
+
+    private NSData GetRepForSaving(ImageFileFormat imageFormat, int quality)
+    {
+        if (imageFormat == ImageFileFormat.Jpeg)
+        {
+            var props = quality == -1
+                ? null
+                : NSDictionary.FromObjectAndKey(NSNumber.FromDouble(quality / 100.0),
+                    NSBitmapImageRep.CompressionFactor);
+            return _imageRep.RepresentationUsingTypeProperties(NSBitmapImageFileType.Jpeg, props);
+        }
+        if (imageFormat == ImageFileFormat.Png)
+        {
+            return _imageRep.RepresentationUsingTypeProperties(NSBitmapImageFileType.Png, null);
+        }
+        if (imageFormat == ImageFileFormat.Bmp)
+        {
+            return _imageRep.RepresentationUsingTypeProperties(NSBitmapImageFileType.Bmp, null);
+        }
+        // TODO: Do we need/want to handle tiff saving?
+        throw new InvalidOperationException("Unsupported image format");
+    }
+
+    public IMemoryImage Clone()
+    {
+        return new MacImage(new NSImage(_image.Copy().Handle, true));
+    }
+
+    public IMemoryImage SafeClone()
+    {
+        return Clone();
+    }
+}

@@ -10,7 +10,15 @@ public class NativeLibrary
     public NativeLibrary(string libraryPath)
     {
         LibraryPath = libraryPath;
-        _libraryHandle = new Lazy<IntPtr>(() => PlatformCompat.System.LoadLibrary(libraryPath));
+        _libraryHandle = new Lazy<IntPtr>(() =>
+        {
+            var handle = PlatformCompat.System.LoadLibrary(libraryPath);
+            if (handle == IntPtr.Zero)
+            {
+                throw new Exception($"Could not load library: {libraryPath}");
+            }
+            return handle;
+        });
     }
 
     public string LibraryPath { get; }

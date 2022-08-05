@@ -1,6 +1,4 @@
-﻿using System.Drawing;
-using NAPS2.Images.Gdi;
-using NAPS2.ImportExport.Pdf;
+﻿using NAPS2.ImportExport.Pdf;
 using NAPS2.ImportExport.Pdf.Pdfium;
 using PdfSharpCore.Pdf.IO;
 using PdfSharpCore.Pdf.Security;
@@ -51,7 +49,7 @@ public static class PdfAsserts
         return count;
     }
 
-    public static void AssertMetadata(PdfMetadata expected, string filePath, string? password = null)
+    public static void AssertMetadata(PdfMetadata expected, string filePath, string password = null)
     {
         Assert.True(File.Exists(filePath));
         var actual = new PdfiumPdfReader().ReadMetadata(filePath, password);
@@ -63,7 +61,7 @@ public static class PdfAsserts
     }
 
     public static void AssertEncrypted(string filePath, string ownerPassword, string userPassword,
-        Action<PdfSecuritySettings>? securitySettingsAsserts = null)
+        Action<PdfSecuritySettings> securitySettingsAsserts = null)
     {
         Assert.True(File.Exists(filePath));
         Assert.Throws<PdfReaderException>(() => PdfReader.Open(filePath, PdfDocumentOpenMode.InformationOnly));
@@ -73,17 +71,18 @@ public static class PdfAsserts
         securitySettingsAsserts?.Invoke(doc.SecuritySettings);
     }
 
-    public static void AssertImages(string filePath, params Bitmap[] expectedImages) =>
+    public static void AssertImages(string filePath, params byte[][] expectedImages) =>
         AssertImages(filePath, null, expectedImages);
 
-    public static void AssertImages(string filePath, string? password, params Bitmap[] expectedImages)
+    public static void AssertImages(string filePath, string password, params byte[][] expectedImages)
     {
         Assert.True(File.Exists(filePath));
         var renderer = new PdfiumPdfRenderer();
-        var dpi = expectedImages[0].HorizontalResolution;
-        var actualImages = renderer.Render(new GdiImageContext(), filePath, dpi, password).ToList();
+        // TODO: Optimize?
+        var dpi = TestImageContextFactory.Get().Load(expectedImages[0]).HorizontalResolution;
+        var actualImages = renderer.Render(TestImageContextFactory.Get(), filePath, dpi, password).ToList();
         // var actualImages = renderer.Render(
-        //     new GdiImageContext(),
+        //     TestImageContextFactory.Get(),
         //     filePath, 
         //     i => expectedImages.Length > i ? expectedImages[i].HorizontalResolution : 300).ToList();
         Assert.Equal(expectedImages.Length, actualImages.Count);

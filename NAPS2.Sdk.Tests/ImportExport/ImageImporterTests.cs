@@ -22,8 +22,7 @@ public class ImageImporterTests : ContextualTests
     [Fact]
     public async Task ImportPngImage()
     {
-        var filePath = Path.Combine(FolderPath, "image.png");
-        ImageResources.skewed_bw.Save(filePath);
+        var filePath = CopyResourceToFile(ImageResources.skewed_bw, "image.png");
         
         var source = _imageImporter.Import(filePath, new ImportParams(), (current, max) => { }, CancellationToken.None);
         var result = await source.ToList();
@@ -45,8 +44,7 @@ public class ImageImporterTests : ContextualTests
     [Fact]
     public async Task ImportJpegImage()
     {
-        var filePath = Path.Combine(FolderPath, "image.jpg");
-        ImageResources.color_image.Save(filePath);
+        var filePath = CopyResourceToFile(ImageResources.color_image, "image.jpg");
         
         var source = _imageImporter.Import(filePath, new ImportParams(), (current, max) => { }, CancellationToken.None);
         var result = await source.ToList();
@@ -96,8 +94,7 @@ public class ImageImporterTests : ContextualTests
     [Fact]
     public async Task ImportWithThumbnailGeneration()
     {
-        var filePath = Path.Combine(FolderPath, "image.jpg");
-        ImageResources.color_image.Save(filePath);
+        var filePath = CopyResourceToFile(ImageResources.color_image, "image.jpg");
         
         var source = _imageImporter.Import(filePath, new ImportParams { ThumbnailSize = 256 }, (current, max) => { }, CancellationToken.None);
         var result = await source.ToList();
@@ -110,8 +107,7 @@ public class ImageImporterTests : ContextualTests
     [Fact]
     public async Task SingleFrameProgress()
     {
-        var filePath = Path.Combine(FolderPath, "image.jpg");
-        ImageResources.color_image.Save(filePath);
+        var filePath = CopyResourceToFile(ImageResources.color_image, "image.jpg");
 
         var progressMock = new Mock<ProgressHandler>();
         
@@ -151,8 +147,7 @@ public class ImageImporterTests : ContextualTests
     [Fact]
     public async Task SingleFrameCancellation()
     {
-        var filePath = Path.Combine(FolderPath, "image.jpg");
-        ImageResources.color_image.Save(filePath);
+        var filePath = CopyResourceToFile(ImageResources.color_image, "image.jpg");
 
         var cts = new CancellationTokenSource();
         var source = _imageImporter.Import(filePath, new ImportParams(), (current, max) => { }, cts.Token);
@@ -203,8 +198,7 @@ public class ImageImporterTests : ContextualTests
     [Fact]
     public async Task ImportInUseFile()
     {
-        var filePath = Path.Combine(FolderPath, "image.png");
-        ImageResources.color_image.Save(filePath);
+        var filePath = CopyResourceToFile(ImageResources.color_image, "image.png");
         using var stream = File.OpenWrite(filePath);
         var source = _imageImporter.Import(filePath, new ImportParams(), (current, max) => { }, CancellationToken.None);
 
@@ -215,8 +209,7 @@ public class ImageImporterTests : ContextualTests
     [Fact]
     public async Task ImportWithBarcodeDetection()
     {
-        var filePath = Path.Combine(FolderPath, "image.jpg");
-        ImageResources.patcht.Save(filePath);
+        var filePath = CopyResourceToFile(ImageResources.patcht, "image.jpg");
 
         var importParams = new ImportParams
         {

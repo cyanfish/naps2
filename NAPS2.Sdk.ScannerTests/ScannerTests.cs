@@ -1,5 +1,5 @@
-using NAPS2.Images.Gdi;
 using NAPS2.Scan;
+using NAPS2.Sdk.Tests;
 using Xunit;
 
 namespace NAPS2.Sdk.ScannerTests;
@@ -11,7 +11,7 @@ public class ScannerTests
     [ScannerFact]
     public async Task Test1()
     {
-        var imageContext = new GdiImageContext();
+        var imageContext = TestImageContextFactory.Get();
         using var scanningContext = new ScanningContext(imageContext);
 
         var scanController = new ScanController(scanningContext);

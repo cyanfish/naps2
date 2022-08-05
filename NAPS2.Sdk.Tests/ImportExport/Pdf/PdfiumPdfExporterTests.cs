@@ -1,4 +1,3 @@
-using NAPS2.Images.Gdi;
 using NAPS2.ImportExport.Pdf;
 using NAPS2.Sdk.Tests.Asserts;
 using Xunit;
@@ -11,7 +10,7 @@ public class PdfiumPdfExporterTests : ContextualTests
     public async Task ExportSingleImage()
     {
         var filePath = Path.Combine(FolderPath, "test.pdf");
-        using var image = ScanningContext.CreateProcessedImage(new GdiImage(ImageResources.color_image));
+        using var image = ScanningContext.CreateProcessedImage(LoadImage(ImageResources.color_image));
     
         var pdfExporter = new PdfiumPdfExporter(ScanningContext);
         await pdfExporter.Export(filePath, new[] { image }, new PdfExportParams());

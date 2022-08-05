@@ -1,5 +1,3 @@
-using System.Drawing;
-using NAPS2.Images.Gdi;
 using NAPS2.Sdk.Tests.Asserts;
 using Xunit;
 
@@ -10,8 +8,8 @@ public class ImageContextTests : ContextualTests
     [Fact]
     public void SaveSmallestFormat_BlackAndWhite()
     {
-        var ctx = new GdiImageContext();
-        var bw = ctx.PerformTransform(new GdiImage(ImageResources.color_image_bw), new BlackWhiteTransform());
+        var ctx = TestImageContextFactory.Get();
+        var bw = ctx.PerformTransform(LoadImage(ImageResources.color_image_bw), new BlackWhiteTransform());
         var path = Path.Combine(FolderPath, "test");
 
         var fullPath = ctx.SaveSmallestFormat(path, bw, BitDepth.BlackAndWhite, false, -1, out var format);
@@ -22,8 +20,8 @@ public class ImageContextTests : ContextualTests
     [Fact]
     public void SaveSmallestFormat_BlackAndWhiteWithColorBitDepth()
     {
-        var ctx = new GdiImageContext();
-        var bw = ctx.PerformTransform(new GdiImage(ImageResources.color_image_bw), new BlackWhiteTransform());
+        var ctx = TestImageContextFactory.Get();
+        var bw = ctx.PerformTransform(LoadImage(ImageResources.color_image_bw), new BlackWhiteTransform());
         var path = Path.Combine(FolderPath, "test");
 
         var fullPath = ctx.SaveSmallestFormat(path, bw, BitDepth.Color, false, -1, out var format);
@@ -34,8 +32,8 @@ public class ImageContextTests : ContextualTests
     [Fact]
     public void SaveSmallestFormat_ColorWithBlackWhiteBitDepth()
     {
-        var ctx = new GdiImageContext();
-        var color = new GdiImage(ImageResources.color_image);
+        var ctx = TestImageContextFactory.Get();
+        var color = LoadImage(ImageResources.color_image);
         var path = Path.Combine(FolderPath, "test");
 
         var fullPath = ctx.SaveSmallestFormat(path, color, BitDepth.BlackAndWhite, false, -1, out var format);
@@ -46,8 +44,8 @@ public class ImageContextTests : ContextualTests
     [Fact]
     public void SaveSmallestFormat_ColorHighQuality()
     {
-        var ctx = new GdiImageContext();
-        var color = new GdiImage(ImageResources.color_image);
+        var ctx = TestImageContextFactory.Get();
+        var color = LoadImage(ImageResources.color_image);
         var path = Path.Combine(FolderPath, "test");
 
         var fullPath = ctx.SaveSmallestFormat(path, color, BitDepth.Color, true, -1, out var format);
@@ -58,8 +56,8 @@ public class ImageContextTests : ContextualTests
     [Fact]
     public void SaveSmallestFormat_SmallerPng()
     {
-        var ctx = new GdiImageContext();
-        var bw = new GdiImage(ImageResources.color_image_bw_24bit);
+        var ctx = TestImageContextFactory.Get();
+        var bw = LoadImage(ImageResources.color_image_bw_24bit);
         var path = Path.Combine(FolderPath, "test");
 
         var fullPath = ctx.SaveSmallestFormat(path, bw, BitDepth.Color, false, -1, out var format);
@@ -70,8 +68,8 @@ public class ImageContextTests : ContextualTests
     [Fact]
     public void SaveSmallestFormat_OriginalPng()
     {
-        var ctx = new GdiImageContext();
-        var color = new GdiImage(ImageResources.color_image_png);
+        var ctx = TestImageContextFactory.Get();
+        var color = LoadImage(ImageResources.color_image_png);
         var path = Path.Combine(FolderPath, "test");
 
         var fullPath = ctx.SaveSmallestFormat(path, color, BitDepth.Color, false, -1, out var format);
@@ -82,8 +80,8 @@ public class ImageContextTests : ContextualTests
     [Fact]
     public void SaveSmallestFormat_SmallerJpeg()
     {
-        var ctx = new GdiImageContext();
-        var color = new GdiImage(ImageResources.color_image_png);
+        var ctx = TestImageContextFactory.Get();
+        var color = LoadImage(ImageResources.color_image_png);
         color.OriginalFileFormat = ImageFileFormat.Unspecified;
         var path = Path.Combine(FolderPath, "test");
 
@@ -95,8 +93,8 @@ public class ImageContextTests : ContextualTests
     [Fact]
     public void SaveSmallestFormat_OriginalJpeg()
     {
-        var ctx = new GdiImageContext();
-        var color = new GdiImage(ImageResources.color_image_bw_jpg);
+        var ctx = TestImageContextFactory.Get();
+        var color = LoadImage(ImageResources.color_image_bw_jpg);
         var path = Path.Combine(FolderPath, "test");
 
         var fullPath = ctx.SaveSmallestFormat(path, color, BitDepth.Color, false, -1, out var format);
@@ -104,7 +102,7 @@ public class ImageContextTests : ContextualTests
         AssertJpeg(format, fullPath, ImageResources.color_image_bw);
     }
 
-    private void AssertPng(ImageFileFormat format, string fullPath, Bitmap expectedImage)
+    private void AssertPng(ImageFileFormat format, string fullPath, byte[] expectedImage)
     {
         Assert.Equal(ImageFileFormat.Png, format);
         Assert.Equal(".png", Path.GetExtension(fullPath));
@@ -113,7 +111,7 @@ public class ImageContextTests : ContextualTests
         ImageAsserts.Similar(expectedImage, loaded, ignoreFormat: true);
     }
 
-    private void AssertJpeg(ImageFileFormat format, string fullPath, Bitmap expectedImage)
+    private void AssertJpeg(ImageFileFormat format, string fullPath, byte[] expectedImage)
     {
         Assert.Equal(ImageFileFormat.Jpeg, format);
         Assert.Equal(".jpg", Path.GetExtension(fullPath));

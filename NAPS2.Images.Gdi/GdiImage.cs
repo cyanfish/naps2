@@ -48,37 +48,37 @@ public class GdiImage : IMemoryImage
         return new GdiImageLockState(Bitmap, bitmapData);
     }
 
-    public void Save(string path, ImageFileFormat imageFileFormat = ImageFileFormat.Unspecified, int quality = -1)
+    public void Save(string path, ImageFileFormat imageFormat = ImageFileFormat.Unspecified, int quality = -1)
     {
-        if (imageFileFormat == ImageFileFormat.Unspecified)
+        if (imageFormat == ImageFileFormat.Unspecified)
         {
-            imageFileFormat = GetFileFormatFromExtension(path);
+            imageFormat = ImageContext.GetFileFormatFromExtension(path);
         }
-        if (imageFileFormat == ImageFileFormat.Jpeg && quality != -1)
+        if (imageFormat == ImageFileFormat.Jpeg && quality != -1)
         {
             var (encoder, encoderParams) = GetJpegSaveArgs(quality);
             Bitmap.Save(path, encoder, encoderParams);
         }
         else
         {
-            Bitmap.Save(path, imageFileFormat.AsImageFormat());
+            Bitmap.Save(path, imageFormat.AsImageFormat());
         }
     }
 
-    public void Save(Stream stream, ImageFileFormat imageFileFormat, int quality = -1)
+    public void Save(Stream stream, ImageFileFormat imageFormat, int quality = -1)
     {
-        if (imageFileFormat == ImageFileFormat.Unspecified)
+        if (imageFormat == ImageFileFormat.Unspecified)
         {
-            throw new ArgumentException("Format required to save to a stream", nameof(imageFileFormat));
+            throw new ArgumentException("Format required to save to a stream", nameof(imageFormat));
         }
-        if (imageFileFormat == ImageFileFormat.Jpeg && quality != -1)
+        if (imageFormat == ImageFileFormat.Jpeg && quality != -1)
         {
             var (encoder, encoderParams) = GetJpegSaveArgs(quality);
             Bitmap.Save(stream, encoder, encoderParams);
         }
         else
         {
-            Bitmap.Save(stream, imageFileFormat.AsImageFormat());
+            Bitmap.Save(stream, imageFormat.AsImageFormat());
         }
     }
 
@@ -89,17 +89,6 @@ public class GdiImage : IMemoryImage
         var encoderParams = new EncoderParameters(1);
         encoderParams.Param[0] = new EncoderParameter(Encoder.Quality, quality);
         return (encoder, encoderParams);
-    }
-
-    private ImageFileFormat GetFileFormatFromExtension(string path)
-    {
-        return Path.GetExtension(path).ToLowerInvariant() switch
-        {
-            ".png" => ImageFileFormat.Png,
-            ".bmp" => ImageFileFormat.Bmp,
-            ".jpg" or ".jpeg" => ImageFileFormat.Jpeg,
-            _ => throw new ArgumentException($"Could not infer file format from extension: {path}")
-        };
     }
 
     public IMemoryImage Clone()

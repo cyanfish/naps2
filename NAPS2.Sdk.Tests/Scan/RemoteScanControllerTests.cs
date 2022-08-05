@@ -1,10 +1,8 @@
 ﻿using System.Threading;
 using Moq;
-using NAPS2.Images.Gdi;
 using NAPS2.Scan;
 using NAPS2.Scan.Internal;
 using NAPS2.Sdk.Tests.Asserts;
-using NAPS2.Sdk.Tests.Images;
 using Xunit;
 using IScanDriver = NAPS2.Scan.Internal.IScanDriver;
 using IScanDriverFactory = NAPS2.Scan.Internal.IScanDriverFactory;
@@ -46,7 +44,7 @@ public class RemoteScanControllerTests : ContextualTests
             ctx =>
             {
                 var callback = (Action<IMemoryImage>) ctx.Arguments[3];
-                var image = new GdiImage(ImageResources.skewed);
+                var image = LoadImage(ImageResources.skewed);
                 callback(image);
                 return Task.FromResult(true);
             }));

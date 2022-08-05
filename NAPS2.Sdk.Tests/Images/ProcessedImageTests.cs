@@ -1,7 +1,5 @@
 using System.Collections.Immutable;
-using System.Drawing;
 using Moq;
-using NAPS2.Images.Gdi;
 using Xunit;
 
 namespace NAPS2.Sdk.Tests.Images;
@@ -11,7 +9,7 @@ public class ProcessedImageTests : ContextualTests
     [Fact]
     public void Construct()
     {
-        var storage = new GdiImage(new Bitmap(100, 100));
+        var storage = LoadImage(ImageResources.color_image);
 
         var metadata1 = new ImageMetadata(BitDepth.Color, false);
         var postProcessingData1 = new PostProcessingData();
