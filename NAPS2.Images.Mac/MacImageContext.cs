@@ -6,7 +6,7 @@ namespace NAPS2.Images.Mac;
 public class MacImageContext : ImageContext
 {
     // We need to lock around MonoMac constructors as they aren't thread safe
-    internal static readonly object GlobalLock = new object();
+    internal static readonly object ConstructorLock = new object();
     
     private readonly MacImageTransformer _imageTransformer;
     
@@ -27,7 +27,7 @@ public class MacImageContext : ImageContext
     public override IMemoryImage Load(string path)
     {
         NSImage image;
-        lock (GlobalLock)
+        lock (ConstructorLock)
         {
             image = new NSImage(path);
         }
@@ -51,7 +51,7 @@ public class MacImageContext : ImageContext
         {
             stream.Seek(0, SeekOrigin.Begin);
         }
-        lock (GlobalLock)
+        lock (ConstructorLock)
         {
             return new MacImage(new NSImage(NSData.FromStream(stream)));
         }
@@ -74,7 +74,7 @@ public class MacImageContext : ImageContext
     public override IMemoryImage Create(int width, int height, ImagePixelFormat pixelFormat)
     {
         // TODO: Can this support other pixel formats?
-        lock (GlobalLock)
+        lock (ConstructorLock)
         {
             var rep = new NSBitmapImageRep(
                 IntPtr.Zero, width, height, 8, 4, true, false, NSColorSpace.DeviceRGB, 4 * width, 32);

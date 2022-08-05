@@ -13,7 +13,7 @@ public class MacImage : IMemoryImage
     {
         _image = image;
         // TODO: Better error checking
-        lock (MacImageContext.GlobalLock)
+        lock (MacImageContext.ConstructorLock)
         {
             _imageRep = new NSBitmapImageRep(_image.Representations()[0].Handle, false);
         }
@@ -95,7 +95,7 @@ public class MacImage : IMemoryImage
 
     private NSData GetRepForSaving(ImageFileFormat imageFormat, int quality)
     {
-        lock (MacImageContext.GlobalLock)
+        lock (MacImageContext.ConstructorLock)
         {
             if (imageFormat == ImageFileFormat.Jpeg)
             {
@@ -120,7 +120,7 @@ public class MacImage : IMemoryImage
 
     public IMemoryImage Clone()
     {
-        lock (MacImageContext.GlobalLock)
+        lock (MacImageContext.ConstructorLock)
         {
             return new MacImage(new NSImage(_image.Copy().Handle, true));
         }

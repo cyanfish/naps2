@@ -2,12 +2,12 @@ namespace NAPS2.Images.Storage;
 
 public abstract class AbstractImageTransformer<TImage> where TImage : IMemoryImage
 {
-    private readonly ImageContext _imageContext;
-
     protected AbstractImageTransformer(ImageContext imageContext)
     {
-        _imageContext = imageContext;
+        ImageContext = imageContext;
     }
+
+    protected ImageContext ImageContext { get; }
 
     public TImage Apply(TImage image, Transform transform)
     {
@@ -104,7 +104,7 @@ public abstract class AbstractImageTransformer<TImage> where TImage : IMemoryIma
             return image;
         }
 
-        var monoBitmap = UnsafeImageOps.ConvertTo1Bpp(image, transform.Threshold, _imageContext);
+        var monoBitmap = UnsafeImageOps.ConvertTo1Bpp(image, transform.Threshold, ImageContext);
         image.Dispose();
 
         return (TImage) monoBitmap;
@@ -117,7 +117,7 @@ public abstract class AbstractImageTransformer<TImage> where TImage : IMemoryIma
             return image;
         }
 
-        var colorBitmap = UnsafeImageOps.ConvertTo24Bpp(image, _imageContext);
+        var colorBitmap = UnsafeImageOps.ConvertTo24Bpp(image, ImageContext);
         image.Dispose();
 
         return (TImage) colorBitmap;
