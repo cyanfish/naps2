@@ -7,13 +7,16 @@ namespace NAPS2.Images.Mac;
 public class MacImage : IMemoryImage
 {
     private readonly NSImage _image;
-    private readonly NSBitmapImageRep _imageRep;
+    internal readonly NSBitmapImageRep _imageRep;
 
     public MacImage(NSImage image)
     {
         _image = image;
         // TODO: Better error checking
-        _imageRep = new NSBitmapImageRep(_image.Representations()[0].Handle, false);
+        lock (MacImageContext.GlobalLock)
+        {
+            _imageRep = new NSBitmapImageRep(_image.Representations()[0].Handle, false);
+        }
         // TODO: How to handle samplesperpixel = 3 here?
         if (_imageRep.BitsPerPixel == 32 && _imageRep.BitsPerSample == 8) // && _imageRep.SamplesPerPixel == 4)
         {
@@ -92,29 +95,35 @@ public class MacImage : IMemoryImage
 
     private NSData GetRepForSaving(ImageFileFormat imageFormat, int quality)
     {
-        if (imageFormat == ImageFileFormat.Jpeg)
+        lock (MacImageContext.GlobalLock)
         {
-            var props = quality == -1
-                ? null
-                : NSDictionary.FromObjectAndKey(NSNumber.FromDouble(quality / 100.0),
-                    NSBitmapImageRep.CompressionFactor);
-            return _imageRep.RepresentationUsingTypeProperties(NSBitmapImageFileType.Jpeg, props);
+            if (imageFormat == ImageFileFormat.Jpeg)
+            {
+                var props = quality == -1
+                    ? null
+                    : NSDictionary.FromObjectAndKey(NSNumber.FromDouble(quality / 100.0),
+                        NSBitmapImageRep.CompressionFactor);
+                return _imageRep.RepresentationUsingTypeProperties(NSBitmapImageFileType.Jpeg, props);
+            }
+            if (imageFormat == ImageFileFormat.Png)
+            {
+                return _imageRep.RepresentationUsingTypeProperties(NSBitmapImageFileType.Png, null);
+            }
+            if (imageFormat == ImageFileFormat.Bmp)
+            {
+                return _imageRep.RepresentationUsingTypeProperties(NSBitmapImageFileType.Bmp, null);
+            }
+            // TODO: Do we need/want to handle tiff saving?
+            throw new InvalidOperationException("Unsupported image format");
         }
-        if (imageFormat == ImageFileFormat.Png)
-        {
-            return _imageRep.RepresentationUsingTypeProperties(NSBitmapImageFileType.Png, null);
-        }
-        if (imageFormat == ImageFileFormat.Bmp)
-        {
-            return _imageRep.RepresentationUsingTypeProperties(NSBitmapImageFileType.Bmp, null);
-        }
-        // TODO: Do we need/want to handle tiff saving?
-        throw new InvalidOperationException("Unsupported image format");
     }
 
     public IMemoryImage Clone()
     {
-        return new MacImage(new NSImage(_image.Copy().Handle, true));
+        lock (MacImageContext.GlobalLock)
+        {
+            return new MacImage(new NSImage(_image.Copy().Handle, true));
+        }
     }
 
     public IMemoryImage SafeClone()

@@ -5,6 +5,9 @@ namespace NAPS2.Images.Mac;
 
 public class MacImageContext : ImageContext
 {
+    // We need to lock around MonoMac constructors as they aren't thread safe
+    internal static readonly object GlobalLock = new object();
+    
     private readonly MacImageTransformer _imageTransformer;
     
     public MacImageContext(IPdfRenderer? pdfRenderer = null) : base(typeof(MacImage), pdfRenderer)
@@ -23,7 +26,11 @@ public class MacImageContext : ImageContext
 
     public override IMemoryImage Load(string path)
     {
-        var image = new NSImage(path);
+        NSImage image;
+        lock (GlobalLock)
+        {
+            image = new NSImage(path);
+        }
         if (image.Representations() == null)
         {
             if (!File.Exists(path))
@@ -44,7 +51,10 @@ public class MacImageContext : ImageContext
         {
             stream.Seek(0, SeekOrigin.Begin);
         }
-        return new MacImage(new NSImage(NSData.FromStream(stream)));
+        lock (GlobalLock)
+        {
+            return new MacImage(new NSImage(NSData.FromStream(stream)));
+        }
     }
 
     public override IEnumerable<IMemoryImage> LoadFrames(Stream stream, out int count)
@@ -64,10 +74,13 @@ public class MacImageContext : ImageContext
     public override IMemoryImage Create(int width, int height, ImagePixelFormat pixelFormat)
     {
         // TODO: Can this support other pixel formats?
-        var rep = new NSBitmapImageRep(
-            IntPtr.Zero, width, height, 8, 4, true, false, NSColorSpace.DeviceRGB, 4 * width, 32);
-        var image = new NSImage(rep.Size);
-        image.AddRepresentation(rep);
-        return new MacImage(image);
+        lock (GlobalLock)
+        {
+            var rep = new NSBitmapImageRep(
+                IntPtr.Zero, width, height, 8, 4, true, false, NSColorSpace.DeviceRGB, 4 * width, 32);
+            var image = new NSImage(rep.Size);
+            image.AddRepresentation(rep);
+            return new MacImage(image);
+        }
     }
 }
