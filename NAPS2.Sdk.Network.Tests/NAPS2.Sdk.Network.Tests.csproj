@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFrameworks>net5;net462</TargetFrameworks>
+        <TargetFrameworks>net6;net462</TargetFrameworks>
         <RootNamespace>NAPS2.Remoting.Network.Tests</RootNamespace>
     </PropertyGroup>
 
@@ -11,8 +11,9 @@
     <ItemGroup>
         <ProjectReference Include="..\NAPS2.Sdk.Network\NAPS2.Sdk.Network.csproj" />
         
-        <PackageReference Include="xunit" Version="2.4.0" />
-        <PackageReference Include="xunit.runner.visualstudio" Version="2.4.0" />
+        <PackageReference Include="xunit" Version="2.4.1" />
+        <PackageReference Include="xunit.runner.visualstudio" Version="2.4.1" />
+        <ProjectReference Include="..\NAPS2.Sdk.Tests\NAPS2.Sdk.Tests.csproj" />
     </ItemGroup>
 
 </Project>
