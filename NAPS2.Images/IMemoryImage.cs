@@ -1,4 +1,6 @@
-﻿namespace NAPS2.Images;
+﻿using NAPS2.Images.Bitwise;
+
+namespace NAPS2.Images;
 
 /// <summary>
 /// A common interface to wrap around platform-specific implementations of an in-memory image
@@ -39,14 +41,16 @@ public interface IMemoryImage : IImageStorage
     /// </summary>
     ImagePixelFormat PixelFormat { get; }
 
+    // TODO: Deprecate
+    ImageLockState Lock(LockMode lockMode, out IntPtr scan0, out int stride);
+
     /// <summary>
     /// Obtains access to the underlying binary data for the image.
     /// </summary>
     /// <param name="lockMode">The access level (read/write) needed.</param>
-    /// <param name="scan0">A pointer to the start of the binary data.</param>
-    /// <param name="stride">The number of bytes per row in the binary data.</param>
+    /// <param name="pixelInfo">Information about the raw binary pixel data.</param>
     /// <returns>An object that, when disposed, releases the lock.</returns>
-    ImageLockState Lock(LockMode lockMode, out IntPtr scan0, out int stride);
+    ImageLockState Lock(LockMode lockMode, out PixelInfo pixelInfo);
 
     /// <summary>
     /// Gets the original image file's format (e.g. png/jpeg) if known.

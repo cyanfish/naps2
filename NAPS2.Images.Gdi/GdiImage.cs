@@ -1,5 +1,6 @@
 ﻿using System.Drawing;
 using System.Drawing.Imaging;
+using NAPS2.Images.Bitwise;
 
 namespace NAPS2.Images.Gdi;
 
@@ -31,6 +32,11 @@ public class GdiImage : IMemoryImage
     public void SetResolution(float xDpi, float yDpi) => Bitmap.SafeSetResolution(xDpi, yDpi);
 
     public ImagePixelFormat PixelFormat => Bitmap.PixelFormat.AsImagePixelFormat();
+
+    public ImageLockState Lock(LockMode lockMode, out PixelInfo pixelInfo)
+    {
+        throw new NotImplementedException();
+    }
 
     // TODO: Consider propagating this during transforms (when it makes sense); then maybe we can remove the "encodeOnce" check
     public ImageFileFormat OriginalFileFormat

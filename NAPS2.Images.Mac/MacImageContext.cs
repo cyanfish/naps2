@@ -73,11 +73,17 @@ public class MacImageContext : ImageContext
 
     public override IMemoryImage Create(int width, int height, ImagePixelFormat pixelFormat)
     {
-        // TODO: Can this support other pixel formats?
+        // TODO: Can we support 1bpp?
         lock (ConstructorLock)
         {
-            var rep = new NSBitmapImageRep(
-                IntPtr.Zero, width, height, 8, 4, true, false, NSColorSpace.DeviceRGB, 4 * width, 32);
+            var rep = pixelFormat switch
+            {
+                ImagePixelFormat.ARGB32 => new NSBitmapImageRep(
+                    IntPtr.Zero, width, height, 8, 4, true, false, NSColorSpace.DeviceRGB, 4 * width, 32),
+                ImagePixelFormat.RGB24 => new NSBitmapImageRep(
+                    IntPtr.Zero, width, height, 8, 3, false, false, NSColorSpace.DeviceRGB, 3 * width, 24),
+                _ => throw new ArgumentException("Unsupported pixel format")
+            };
             var image = new NSImage(rep.Size);
             image.AddRepresentation(rep);
             return new MacImage(image);

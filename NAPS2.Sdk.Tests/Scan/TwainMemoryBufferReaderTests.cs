@@ -6,15 +6,21 @@ using NAPS2.Scan.Internal.Twain;
 using NAPS2.Sdk.Tests.Asserts;
 using NTwain.Data;
 using Xunit;
-using Color = System.Drawing.Color;
-using PixelFormat = System.Drawing.Imaging.PixelFormat;
 
 namespace NAPS2.Sdk.Tests.Scan;
 
-public class TwainMemoryBufferReaderTests
+public class TwainMemoryBufferReaderTests : ContextualTests
 {
     // As TwainMemoryBufferReader is unsafe, it's extra important we have a lot of tests for edge cases as we don't want
     // to crash the whole process if something goes wrong.
+
+    private static readonly (int, int, int) RED = (0xFF, 0, 0);
+    private static readonly (int, int, int) GREEN = (0, 0xFF, 0);
+    private static readonly (int, int, int) BLUE = (0, 0, 0xFF);
+    private static readonly (int, int, int) WHITE = (0xFF, 0xFF, 0xFF);
+    private static readonly (int, int, int) BLACK = (0, 0, 0);
+    private static readonly (int, int, int) GRAY = (0x80, 0x80, 0x80);
+    private static readonly (int, int, int) LIGHT_GRAY = (0xD3, 0xD3, 0xD3);
 
     [Fact]
     public void ColorImage()
@@ -41,10 +47,10 @@ public class TwainMemoryBufferReaderTests
 
         ImageAsserts.PixelColors(image, new()
         {
-            { (0, 0), Color.Red },
-            { (1, 0), Color.Lime },
-            { (0, 1), Color.Blue },
-            { (1, 1), Color.White },
+            { (0, 0), RED },
+            { (1, 0), GREEN },
+            { (0, 1), BLUE },
+            { (1, 1), WHITE },
         });
     }
 
@@ -92,10 +98,10 @@ public class TwainMemoryBufferReaderTests
 
         ImageAsserts.PixelColors(image, new()
         {
-            { (0, 0), Color.Red },
-            { (1, 0), Color.Lime },
-            { (0, 1), Color.Blue },
-            { (1, 1), Color.White },
+            { (0, 0), RED },
+            { (1, 0), GREEN },
+            { (0, 1), BLUE },
+            { (1, 1), WHITE },
         });
     }
 
@@ -120,10 +126,10 @@ public class TwainMemoryBufferReaderTests
 
         ImageAsserts.PixelColors(image, new()
         {
-            { (0, 0), Color.White },
-            { (1, 0), Color.Black },
-            { (0, 1), Color.Gray },
-            { (1, 1), Color.LightGray },
+            { (0, 0), WHITE },
+            { (1, 0), BLACK },
+            { (0, 1), GRAY },
+            { (1, 1), LIGHT_GRAY },
         });
     }
 
@@ -169,10 +175,10 @@ public class TwainMemoryBufferReaderTests
 
         ImageAsserts.PixelColors(image, new()
         {
-            { (0, 0), Color.White },
-            { (1, 0), Color.Black },
-            { (0, 1), Color.Gray },
-            { (1, 1), Color.LightGray },
+            { (0, 0), WHITE },
+            { (1, 0), BLACK },
+            { (0, 1), GRAY },
+            { (1, 1), LIGHT_GRAY },
         });
     }
 
@@ -197,10 +203,10 @@ public class TwainMemoryBufferReaderTests
 
         ImageAsserts.PixelColors(image, new()
         {
-            { (0, 0), Color.White },
-            { (1, 0), Color.Black },
-            { (0, 1), Color.Black },
-            { (1, 1), Color.White },
+            { (0, 0), WHITE },
+            { (1, 0), BLACK },
+            { (0, 1), BLACK },
+            { (1, 1), WHITE },
         });
     }
 
@@ -246,10 +252,10 @@ public class TwainMemoryBufferReaderTests
 
         ImageAsserts.PixelColors(image, new()
         {
-            { (0, 0), Color.White },
-            { (15, 0), Color.White },
-            { (0, 1), Color.Black },
-            { (15, 1), Color.White }
+            { (0, 0), WHITE },
+            { (15, 0), WHITE },
+            { (0, 1), BLACK },
+            { (15, 1), WHITE }
         });
     }
 
@@ -479,13 +485,13 @@ public class TwainMemoryBufferReaderTests
         };
     }
 
-    private static GdiImage Create24BitImage(int width, int height)
+    private IMemoryImage Create24BitImage(int width, int height)
     {
-        return new GdiImage(new Bitmap(width, height, PixelFormat.Format24bppRgb));
+        return ImageContext.Create(width, height, ImagePixelFormat.RGB24);
     }
 
-    private static GdiImage Create1BitImage(int width, int height)
+    private IMemoryImage Create1BitImage(int width, int height)
     {
-        return new GdiImage(new Bitmap(width, height, PixelFormat.Format1bppIndexed));
+        return ImageContext.Create(width, height, ImagePixelFormat.BW1);
     }
 }

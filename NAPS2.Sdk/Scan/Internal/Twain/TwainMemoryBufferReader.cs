@@ -1,3 +1,4 @@
+using NAPS2.Images.Bitwise;
 using NAPS2.Remoting.Worker;
 using NTwain.Data;
 
@@ -94,24 +95,12 @@ public static class TwainMemoryBufferReader
             }
             fixed (byte* srcPtr = &source[0])
             {
-                for (int dy = 0; dy < memoryBuffer.Rows; dy++)
+                var srcPix = PixelInfo.Rgb(srcPtr, memoryBuffer.BytesPerRow, memoryBuffer.Columns, memoryBuffer.Rows);
+                new CopyBitwiseImageOp
                 {
-                    for (int dx = 0; dx < memoryBuffer.Columns; dx++)
-                    {
-                        int x = memoryBuffer.XOffset + dx;
-                        int y = memoryBuffer.YOffset + dy;
-                        // Colors are provided as RGB, they need to be swapped to BGR
-                        // B
-                        *(dstPtr + y * dstBytesPerRow + x * 3) =
-                            *(srcPtr + dy * srcBytesPerRow + dx * 3 + 2);
-                        // G
-                        *(dstPtr + y * dstBytesPerRow + x * 3 + 1) =
-                            *(srcPtr + dy * srcBytesPerRow + dx * 3 + 1);
-                        // R
-                        *(dstPtr + y * dstBytesPerRow + x * 3 + 2) =
-                            *(srcPtr + dy * srcBytesPerRow + dx * 3);
-                    }
-                }
+                    DestXOffset = memoryBuffer.XOffset,
+                    DestYOffset = memoryBuffer.YOffset
+                }.Perform(srcPix, outputImage);
             }
         }
         else

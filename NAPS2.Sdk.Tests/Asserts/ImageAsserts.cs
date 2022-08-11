@@ -1,6 +1,4 @@
 ﻿using System.Collections;
-using System.Drawing;
-using NAPS2.Images.Gdi;
 using Xunit;
 using Xunit.Sdk;
 
@@ -132,15 +130,17 @@ public static class ImageAsserts
         }
     }
 
-    public static void PixelColors(IMemoryImage image, PixelColorData colorData)
+    public static unsafe void PixelColors(IMemoryImage image, PixelColorData colorData)
     {
-        var bitmap = ((GdiImage) image).Bitmap;
+        using var imageLock = image.Lock(LockMode.ReadOnly, out var pix);
         foreach (var data in colorData)
         {
             var (x, y) = data.Item1;
             var (r, g, b) = data.Item2;
-            var color = bitmap.GetPixel(x, y);
-            var expected = Color.FromArgb(r, g, b);
+            // TODO: 1bpp?
+            var pixel = pix.data + pix.stride * y + pix.bytesPerPixel * x;
+            var color = (*(pixel + pix.rOff), *(pixel + pix.gOff), *(pixel + pix.bOff));
+            var expected = (r, g, b);
             if (color != expected)
             {
                 throw new AssertActualExpectedException(expected, color, $"Mismatched color at ({x}, {y})");
@@ -157,9 +157,9 @@ public static class ImageAsserts
             _colors.Add((pos, color));
         }
 
-        public void Add((int x, int y) pos, Color color)
+        public void Add((int x, int y) pos, int r, int g, int b)
         {
-            _colors.Add((pos, (color.R, color.G, color.B)));
+            _colors.Add((pos, (r, g, b)));
         }
 
         public IEnumerator<((int x, int y), (int r, int g, int b))> GetEnumerator()

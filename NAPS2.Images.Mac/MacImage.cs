@@ -1,6 +1,7 @@
 ﻿using MonoMac.AppKit;
 using MonoMac.CoreGraphics;
 using MonoMac.Foundation;
+using NAPS2.Images.Bitwise;
 
 namespace NAPS2.Images.Mac;
 
@@ -39,9 +40,10 @@ public class MacImage : IMemoryImage
     }
 
     public int Width => (int) _imageRep.PixelsWide;
-    public int Height => (int)_imageRep.PixelsHigh;
+    public int Height => (int) _imageRep.PixelsHigh;
     public float HorizontalResolution => (float) _image.Size.Width / Width * 72;
     public float VerticalResolution => (float) _image.Size.Height / Height * 72;
+
     public void SetResolution(float xDpi, float yDpi)
     {
         // TODO: Image size or imagerep size?
@@ -60,6 +62,20 @@ public class MacImage : IMemoryImage
         return new MacImageLockState();
     }
 
+    public unsafe ImageLockState Lock(LockMode lockMode, out PixelInfo pixelInfo)
+    {
+        var data = (byte*) _imageRep.BitmapData;
+        var stride = (int) _imageRep.BytesPerRow;
+        pixelInfo = PixelFormat switch
+        {
+            // TODO: Verify pixel order is correct / base it on imageRep
+            ImagePixelFormat.RGB24 => PixelInfo.Rgb(data, stride, Width, Height),
+            ImagePixelFormat.ARGB32 => PixelInfo.Rgba(data, stride, Width, Height),
+            _ => throw new InvalidOperationException("Unsupported pixel format")
+        };
+        return new MacImageLockState();
+    }
+
     // TODO: Should we implement some kind of actual locking?
     public class MacImageLockState : ImageLockState
     {
@@ -69,7 +85,7 @@ public class MacImage : IMemoryImage
     }
 
     public ImageFileFormat OriginalFileFormat { get; set; }
-    
+
     public void Save(string path, ImageFileFormat imageFormat = ImageFileFormat.Unspecified, int quality = -1)
     {
         if (imageFormat == ImageFileFormat.Unspecified)
