@@ -1,9 +1,6 @@
-using NAPS2.Images.Gdi;
+using NAPS2.Images.Bitwise;
 using ZXing;
 using ZXing.Common;
-#if !NETFRAMEWORK
-using ZXing.Windows.Compatibility;
-#endif
 
 namespace NAPS2.Scan;
 
@@ -22,20 +19,41 @@ public static class BarcodeDetector
         {
             return BarcodeDetection.NotAttempted;
         }
-        // TODO: Make more generic
-        if (!(image is GdiImage gdiImage))
-        {
-            throw new InvalidOperationException("Patch code detection only supported for GdiStorage");
-        }
 
         var zxingOptions = options.ZXingOptions ?? new DecodingOptions
         {
             TryHarder = true,
             PossibleFormats = options.PatchTOnly ? new List<BarcodeFormat> { PATCH_T_FORMAT } : null
         };
-        // TODO: Needs to be non-windows-specific
-        var reader = new BarcodeReader { Options = zxingOptions };
-        var result = reader.Decode(gdiImage.Bitmap);
+        var reader = new BarcodeReader<IMemoryImage>(x => new MemoryImageLuminanceSource(x))
+        {
+             Options = zxingOptions
+        };
+        var result = reader.Decode(image);
         return new BarcodeDetection(true, result != null, result?.Text);
+    }
+    
+    private class MemoryImageLuminanceSource : LuminanceSource
+    {
+        public unsafe MemoryImageLuminanceSource(IMemoryImage image)
+            : base(image.Width, image.Height)
+        {
+            var matrix = new byte[image.Width * image.Height];
+            fixed (byte* ptr = &matrix[0])
+            {
+                var dstPix = PixelInfo.Gray(ptr, image.Width, image.Width, image.Height);
+                new CopyBitwiseImageOp().Perform(image, dstPix);
+            }
+            Matrix = matrix;
+        }
+
+        public override byte[] getRow(int y, byte[]? row)
+        {
+            row ??= new byte[Width];
+            Array.Copy(Matrix, y * Width, row, 0, Width);
+            return row;
+        }
+
+        public override byte[] Matrix { get; }
     }
 }
