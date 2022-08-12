@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using NAPS2.Images.Bitwise;
 using Xunit;
 using Xunit.Sdk;
 
@@ -57,10 +58,9 @@ public static class ImageAsserts
     private static unsafe void Similar(IMemoryImage first, IMemoryImage second,
         double rmseThreshold, bool ignoreFormat, bool isSimilar)
     {
-        if (first.PixelFormat != ImagePixelFormat.BW1 && first.PixelFormat != ImagePixelFormat.RGB24 &&
-            first.PixelFormat != ImagePixelFormat.ARGB32)
+        if (first.PixelFormat == ImagePixelFormat.Unsupported || second.PixelFormat == ImagePixelFormat.Unsupported)
         {
-            throw new InvalidOperationException("Unsupported pixel format");
+            throw new InvalidOperationException($"Unsupported pixel formats {first.PixelFormat} {second.PixelFormat}");
         }
 
         Assert.Equal(first.Width, second.Width);
@@ -132,14 +132,13 @@ public static class ImageAsserts
 
     public static unsafe void PixelColors(IMemoryImage image, PixelColorData colorData)
     {
-        using var imageLock = image.Lock(LockMode.ReadOnly, out var pix);
+        using var pixelReader = new RgbPixelReader(image);
         foreach (var data in colorData)
         {
             var (x, y) = data.Item1;
             var (r, g, b) = data.Item2;
             // TODO: 1bpp?
-            var pixel = pix.data + pix.stride * y + pix.bytesPerPixel * x;
-            var color = (*(pixel + pix.rOff), *(pixel + pix.gOff), *(pixel + pix.bOff));
+            var color = pixelReader[y, x];
             var expected = (r, g, b);
             if (color != expected)
             {

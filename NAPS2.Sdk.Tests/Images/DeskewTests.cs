@@ -20,7 +20,7 @@ public class DeskewTests : ContextualTests
         var skewAngle = Deskewer.GetSkewAngle(image);
         Assert.InRange(skewAngle, 15.5, 16.5);
     }
-        
+
     [Fact]
     public void DeskewTransform()
     {
@@ -29,7 +29,7 @@ public class DeskewTests : ContextualTests
         var deskewedImage = ImageContext.PerformTransform(image, transform);
         ImageAsserts.Similar(ImageResources.deskewed, deskewedImage);
     }
-        
+
     [Fact]
     public void NoSkewAngle()
     {

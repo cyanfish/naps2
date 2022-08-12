@@ -1,4 +1,6 @@
-﻿namespace NAPS2.Images;
+﻿using NAPS2.Images.Bitwise;
+
+namespace NAPS2.Images;
 
 public abstract class Deskewer
 {
@@ -30,7 +32,7 @@ public abstract class Deskewer
         
     public static double GetSkewAngle(IMemoryImage image)
     {
-        var bitArrays = UnsafeImageOps.ConvertToBitArrays(image);
+        using var pixelReader = new BitPixelReader(image);
 
         int h = image.Height;
         int w = image.Width;
@@ -53,7 +55,7 @@ public abstract class Deskewer
         {
             for (int x = 1; x <= w - 2; x++)
             {
-                if (bitArrays[y][x] && !bitArrays[y + 1][x])
+                if (pixelReader[y, x] && !pixelReader[y + 1, x])
                 {
                     for (int i = 0; i < ANGLE_STEPS; i++)
                     {
