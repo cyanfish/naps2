@@ -2,9 +2,6 @@ namespace NAPS2.Images.Bitwise;
 
 public abstract class BinaryBitwiseImageOp : BitwiseImageOp
 {
-    // TODO: If we parallelize, offset the data instead of adding x/y
-    // TODO: Although for dest offsets, how do we know where we are in the image vertically?
-
     public void Perform(IMemoryImage src, IMemoryImage dst)
     {
         using var srcLock = src.Lock(SrcLockMode, out var srcPix);
@@ -35,8 +32,8 @@ public abstract class BinaryBitwiseImageOp : BitwiseImageOp
 
     private void Validate(PixelInfo src, PixelInfo dst)
     {
-        Validate(src);
-        Validate(dst);
+        ValidateConsistency(src);
+        ValidateConsistency(dst);
         ValidateCore(src, dst);
     }
 

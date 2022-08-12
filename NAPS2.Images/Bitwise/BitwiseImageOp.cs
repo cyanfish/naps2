@@ -2,7 +2,7 @@ namespace NAPS2.Images.Bitwise;
 
 public class BitwiseImageOp
 {
-    protected unsafe void Validate(PixelInfo pix)
+    protected unsafe void ValidateConsistency(PixelInfo pix)
     {
         if (pix.data == (byte*)IntPtr.Zero)
         {

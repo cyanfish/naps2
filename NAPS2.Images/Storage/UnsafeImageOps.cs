@@ -9,84 +9,6 @@ namespace NAPS2.Images.Storage;
 // TODO: A lot of the r/g/b naming is off, should be b/g/r (I only corrected it where colors are treated differently)
 public static class UnsafeImageOps
 {
-    public static unsafe void ChangeBrightness(IMemoryImage bitmap, float brightnessAdjusted)
-    {
-        int bytesPerPixel = GetBytesPerPixel(bitmap);
-
-        using var lockState = bitmap.Lock(LockMode.ReadWrite, out var scan0, out var stride);
-        int h = bitmap.Height;
-        int w = bitmap.Width;
-
-        brightnessAdjusted *= 255;
-
-        byte* data = (byte*)scan0;
-        PartitionRows(h, (start, end) =>
-        {
-            for (int y = start; y < end; y++)
-            {
-                byte* row = data + stride * y;
-                for (int x = 0; x < w; x++)
-                {
-                    byte* pixel = row + x * bytesPerPixel;
-                    byte r = *pixel;
-                    byte g = *(pixel + 1);
-                    byte b = *(pixel + 2);
-
-                    int r2 = (int)(r + brightnessAdjusted);
-                    int g2 = (int)(g + brightnessAdjusted);
-                    int b2 = (int)(b + brightnessAdjusted);
-
-                    r = (byte)(r2 < 0 ? 0 : r2 > 255 ? 255 : r2);
-                    g = (byte)(g2 < 0 ? 0 : g2 > 255 ? 255 : g2);
-                    b = (byte)(b2 < 0 ? 0 : b2 > 255 ? 255 : b2);
-
-                    *pixel = r;
-                    *(pixel + 1) = g;
-                    *(pixel + 2) = b;
-                }
-            }
-        });
-    }
-
-    public static unsafe void ChangeContrast(IMemoryImage bitmap, float contrastAdjusted, float offset)
-    {
-        int bytesPerPixel = GetBytesPerPixel(bitmap);
-
-        using var lockState = bitmap.Lock(LockMode.ReadWrite, out var scan0, out var stride);
-        int h = bitmap.Height;
-        int w = bitmap.Width;
-
-        offset *= 255;
-
-        byte* data = (byte*)scan0;
-        PartitionRows(h, (start, end) =>
-        {
-            for (int y = start; y < end; y++)
-            {
-                byte* row = data + stride * y;
-                for (int x = 0; x < w; x++)
-                {
-                    byte* pixel = row + x * bytesPerPixel;
-                    byte r = *pixel;
-                    byte g = *(pixel + 1);
-                    byte b = *(pixel + 2);
-
-                    int r2 = (int)(r * contrastAdjusted + offset);
-                    int g2 = (int)(g * contrastAdjusted + offset);
-                    int b2 = (int)(b * contrastAdjusted + offset);
-
-                    r = (byte)(r2 < 0 ? 0 : r2 > 255 ? 255 : r2);
-                    g = (byte)(g2 < 0 ? 0 : g2 > 255 ? 255 : g2);
-                    b = (byte)(b2 < 0 ? 0 : b2 > 255 ? 255 : b2);
-
-                    *pixel = r;
-                    *(pixel + 1) = g;
-                    *(pixel + 2) = b;
-                }
-            }
-        });
-    }
-
     public static unsafe void HueShift(IMemoryImage bitmap, float hueShift)
     {
         int bytesPerPixel = GetBytesPerPixel(bitmap);
@@ -242,9 +164,9 @@ public static class UnsafeImageOps
         else
         {
             // Byte-aligned copy is a bit simpler
-            PartitionRows(h, (start, end) =>
-            {
-                for (int y = start; y < end; y++)
+            // PartitionRows(h, (start, end) =>
+            // {
+                for (int y = 0; y < h; y++)
                 {
                     byte* srcPtrB = (byte*)(srcScan0 + srcStride * (y1 + y) + x1 * bytesPerPixel);
                     byte* dstPtrB = (byte*)(dstScan0 + dstStride * y);
@@ -263,7 +185,7 @@ public static class UnsafeImageOps
                         *(dstPtrB + i) = *(srcPtrB + i);
                     }
                 }
-            });
+            // });
         }
     }
 

@@ -1,3 +1,5 @@
+using NAPS2.Images.Bitwise;
+
 namespace NAPS2.Images.Storage;
 
 public abstract class AbstractImageTransformer<TImage> where TImage : IMemoryImage
@@ -48,9 +50,9 @@ public abstract class AbstractImageTransformer<TImage> where TImage : IMemoryIma
 
     protected virtual TImage PerformTransform(TImage image, BrightnessTransform transform)
     {
-        float brightnessAdjusted = transform.Brightness / 1000f;
+        float brightnessNormalized = transform.Brightness / 1000f;
         EnsurePixelFormat(ref image);
-        UnsafeImageOps.ChangeBrightness(image, brightnessAdjusted);
+        new BrightnessBitwiseImageOp(brightnessNormalized).Perform(image);
         return image;
     }
 
@@ -58,13 +60,9 @@ public abstract class AbstractImageTransformer<TImage> where TImage : IMemoryIma
 
     protected virtual TImage PerformTransform(TImage image, TrueContrastTransform transform)
     {
-        // convert +/-1000 input range to a logarithmic scaled multiplier
-        float contrastAdjusted = (float)Math.Pow(2.718281f, transform.Contrast / 500.0f);
-        // see http://docs.rainmeter.net/tips/colormatrix-guide/ for offset & matrix calculation
-        float offset = (1.0f - contrastAdjusted) / 2.0f;
-
+        var contrastNormalized = transform.Contrast / 1000f;
         EnsurePixelFormat(ref image);
-        UnsafeImageOps.ChangeContrast(image, contrastAdjusted, offset);
+        new ContrastBitwiseImageOp(contrastNormalized).Perform(image);
         return image;
     }
 
