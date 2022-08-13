@@ -20,42 +20,42 @@ public static class ImageAsserts
 
     private const double DIMENSIONS_THRESHOLD = 0.05;
 
-    public static void Similar(byte[] first, ProcessedImage second, double rmseThreshold = GENERAL_RMSE_THRESHOLD)
+    public static void Similar(byte[] first, ProcessedImage second, double rmseThreshold = GENERAL_RMSE_THRESHOLD, bool ignoreResolution = false)
     {
         using var rendered = TestImageContextFactory.Get().Render(second);
-        Similar(TestImageContextFactory.Get().Load(first), rendered, rmseThreshold);
+        Similar(TestImageContextFactory.Get().Load(first), rendered, rmseThreshold, ignoreResolution);
     }
 
-    public static void Similar(byte[] first, IMemoryImage second, double rmseThreshold = GENERAL_RMSE_THRESHOLD)
+    public static void Similar(byte[] first, IMemoryImage second, double rmseThreshold = GENERAL_RMSE_THRESHOLD, bool ignoreResolution = false)
     {
-        Similar(TestImageContextFactory.Get().Load(first), second, rmseThreshold);
+        Similar(TestImageContextFactory.Get().Load(first), second, rmseThreshold, ignoreResolution);
     }
 
     public static void Similar(IMemoryImage first, IMemoryImage second,
-        double rmseThreshold = GENERAL_RMSE_THRESHOLD)
+        double rmseThreshold = GENERAL_RMSE_THRESHOLD, bool ignoreResolution = false)
     {
-        Similar(first, second, rmseThreshold, true);
+        Similar(first, second, rmseThreshold, ignoreResolution, true);
     }
 
-    public static void NotSimilar(byte[] first, ProcessedImage second, double rmseThreshold = GENERAL_RMSE_THRESHOLD)
+    public static void NotSimilar(byte[] first, ProcessedImage second, double rmseThreshold = GENERAL_RMSE_THRESHOLD, bool ignoreResolution = false)
     {
         using var rendered = TestImageContextFactory.Get().Render(second);
-        NotSimilar(TestImageContextFactory.Get().Load(first), rendered, rmseThreshold);
+        NotSimilar(TestImageContextFactory.Get().Load(first), rendered, rmseThreshold, ignoreResolution);
     }
 
-    public static void NotSimilar(byte[] first, IMemoryImage second, double rmseThreshold = GENERAL_RMSE_THRESHOLD)
+    public static void NotSimilar(byte[] first, IMemoryImage second, double rmseThreshold = GENERAL_RMSE_THRESHOLD, bool ignoreResolution = false)
     {
-        NotSimilar(TestImageContextFactory.Get().Load(first), second, rmseThreshold);
+        NotSimilar(TestImageContextFactory.Get().Load(first), second, rmseThreshold, ignoreResolution);
     }
 
     public static void NotSimilar(IMemoryImage first, IMemoryImage second,
-        double rmseThreshold = GENERAL_RMSE_THRESHOLD)
+        double rmseThreshold = GENERAL_RMSE_THRESHOLD, bool ignoreResolution = false)
     {
-        Similar(first, second, rmseThreshold, false);
+        Similar(first, second, rmseThreshold, ignoreResolution, false);
     }
 
     private static unsafe void Similar(IMemoryImage first, IMemoryImage second,
-        double rmseThreshold, bool isSimilar)
+        double rmseThreshold, bool ignoreResolution, bool isSimilar)
     {
         if (first.PixelFormat == ImagePixelFormat.Unsupported || second.PixelFormat == ImagePixelFormat.Unsupported)
         {
@@ -64,12 +64,15 @@ public static class ImageAsserts
 
         Assert.Equal(first.Width, second.Width);
         Assert.Equal(first.Height, second.Height);
-        Assert.InRange(second.HorizontalResolution,
-            first.HorizontalResolution - RESOLUTION_THRESHOLD,
-            first.HorizontalResolution + RESOLUTION_THRESHOLD);
-        Assert.InRange(second.VerticalResolution,
-            first.VerticalResolution - RESOLUTION_THRESHOLD,
-            first.VerticalResolution + RESOLUTION_THRESHOLD);
+        if (!ignoreResolution)
+        {
+            Assert.InRange(second.HorizontalResolution,
+                first.HorizontalResolution - RESOLUTION_THRESHOLD,
+                first.HorizontalResolution + RESOLUTION_THRESHOLD);
+            Assert.InRange(second.VerticalResolution,
+                first.VerticalResolution - RESOLUTION_THRESHOLD,
+                first.VerticalResolution + RESOLUTION_THRESHOLD);
+        }
 
         var imageContext = TestImageContextFactory.Get();
         first = imageContext.PerformTransform(first, new ColorBitDepthTransform());

@@ -338,10 +338,10 @@ public class TransformTests : ContextualTests
 
         actual = ImageContext.PerformTransform(actual, new ThumbnailTransform(256));
 
-        // TODO: Fix expected resolution
-        expected.SetResolution(actual.HorizontalResolution, actual.VerticalResolution);
         // TODO: The image is off by 1 pixel, it might have something to do with how the cggraphics coordinate
         // system is a double and not pixel-aligned
-        ImageAsserts.Similar(expected, actual, ImageAsserts.XPLAT_RMSE_THRESHOLD);
+        // TODO: Fix expected resolution
+        // TODO: Also fix ThumbnailRendering tests
+        ImageAsserts.Similar(expected, actual, ImageAsserts.XPLAT_RMSE_THRESHOLD, ignoreResolution: true);
     }
 }
