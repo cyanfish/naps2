@@ -46,6 +46,7 @@ public class SubPixelType
         BytesPerPixel = 1
     };
 
+    // TODO: We probably need to handle bit inversions (i.e. white = 0, black = 1)
     public static readonly SubPixelType Bit = new()
     {
         BitsPerPixel = 1

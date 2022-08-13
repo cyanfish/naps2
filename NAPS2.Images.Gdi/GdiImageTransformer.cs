@@ -243,42 +243,6 @@ public class GdiImageTransformer : AbstractImageTransformer<GdiImage>
         return resultImage;
     }
 
-    protected override GdiImage PerformTransform(GdiImage image, CropTransform transform)
-    {
-        double xScale = image.Width / (double)(transform.OriginalWidth ?? image.Width),
-            yScale = image.Height / (double)(transform.OriginalHeight ?? image.Height);
-
-        int x = Clamp((int)Math.Round(transform.Left * xScale), 0, image.Width - 1);
-        int y = Clamp((int)Math.Round(transform.Top * yScale), 0, image.Height - 1);
-        int width = Clamp(image.Width - (int)Math.Round((transform.Left + transform.Right) * xScale), 1, image.Width - x);
-        int height = Clamp(image.Height - (int)Math.Round((transform.Top + transform.Bottom) * yScale), 1, image.Height - y);
-
-        var result = new Bitmap(width, height, image.Bitmap.PixelFormat);
-        var resultImage = new GdiImage(result);
-        result.SafeSetResolution(image.HorizontalResolution, image.VerticalResolution);
-        if (image.Bitmap.PixelFormat == PixelFormat.Format1bppIndexed)
-        {
-            result.Palette.Entries[0] = image.Bitmap.Palette.Entries[0];
-            result.Palette.Entries[1] = image.Bitmap.Palette.Entries[1];
-        }
-        UnsafeImageOps.RowWiseCopy(image, resultImage, x, y, width, height);
-        image.Dispose();
-        return resultImage;
-    }
-
-    private int Clamp(int val, int min, int max)
-    {
-        if (val.CompareTo(min) < 0)
-        {
-            return min;
-        }
-        if (val.CompareTo(max) > 0)
-        {
-            return max;
-        }
-        return val;
-    }
-
     protected override GdiImage PerformTransform(GdiImage image, ScaleTransform transform)
     {
         int realWidth = (int)Math.Round(image.Width * transform.ScaleFactor);

@@ -74,14 +74,8 @@ public abstract class AbstractImageTransformer<TImage> where TImage : IMemoryIma
             return image;
         }
 
-        float hueShiftAdjusted = transform.HueShift / 2000f * 360;
-        if (hueShiftAdjusted < 0)
-        {
-            hueShiftAdjusted += 360;
-        }
-
-        UnsafeImageOps.HueShift(image, hueShiftAdjusted);
-
+        float hueShiftNormalized = transform.HueShift / 1000f;
+        new HueShiftBitwiseImageOp(hueShiftNormalized).Perform(image);
         return image;
     }
 
@@ -91,7 +85,44 @@ public abstract class AbstractImageTransformer<TImage> where TImage : IMemoryIma
 
     protected abstract TImage PerformTransform(TImage image, RotationTransform transform);
 
-    protected abstract TImage PerformTransform(TImage image, CropTransform transform);
+    protected virtual TImage PerformTransform(TImage image, CropTransform transform)
+    {
+        double xScale = image.Width / (double) (transform.OriginalWidth ?? image.Width),
+            yScale = image.Height / (double) (transform.OriginalHeight ?? image.Height);
+
+        int x = Clamp((int) Math.Round(transform.Left * xScale), 0, image.Width - 1);
+        int y = Clamp((int) Math.Round(transform.Top * yScale), 0, image.Height - 1);
+        int width = Clamp(image.Width - (int) Math.Round((transform.Left + transform.Right) * xScale), 1,
+            image.Width - x);
+        int height = Clamp(image.Height - (int) Math.Round((transform.Top + transform.Bottom) * yScale), 1,
+            image.Height - y);
+
+        var result = ImageContext.Create(width, height, image.PixelFormat);
+        result.SetResolution(image.HorizontalResolution, image.VerticalResolution);
+        new CopyBitwiseImageOp
+        {
+            SourceXOffset = x,
+            SourceYOffset = y,
+            Columns = width,
+            Rows = height
+        }.Perform(image, result);
+        image.Dispose();
+
+        return (TImage) result;
+    }
+
+    private int Clamp(int val, int min, int max)
+    {
+        if (val.CompareTo(min) < 0)
+        {
+            return min;
+        }
+        if (val.CompareTo(max) > 0)
+        {
+            return max;
+        }
+        return val;
+    }
 
     protected abstract TImage PerformTransform(TImage image, ScaleTransform transform);
 

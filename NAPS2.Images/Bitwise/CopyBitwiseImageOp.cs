@@ -9,9 +9,17 @@ public class CopyBitwiseImageOp : BinaryBitwiseImageOp
 
     // TODO: Consider requiring an explicit DiscardAlpha parameter
 
+    public int SourceXOffset { get; set; }
+    public int SourceYOffset { get; set; }
     public int DestXOffset { get; init; }
-
     public int DestYOffset { get; init; }
+    public int? Columns { get; init; }
+    public int? Rows { get; init; }
+
+    protected override int GetPartitionSize(BitwiseImageData src, BitwiseImageData dst)
+    {
+        return Rows ?? src.h;
+    }
 
     public float BlackWhiteThreshold { get; init; }
 
@@ -21,7 +29,10 @@ public class CopyBitwiseImageOp : BinaryBitwiseImageOp
 
     protected override void ValidateCore(BitwiseImageData src, BitwiseImageData dst)
     {
-        if (dst.w - DestXOffset < src.w || dst.h - DestYOffset < src.h)
+        var w = Columns ?? src.w;
+        var h = Rows ?? src.h;
+        if (src.w - SourceXOffset < w || src.h - SourceYOffset < h ||
+            dst.w - DestXOffset < w || dst.h - DestYOffset < h)
         {
             throw new ArgumentException();
         }
@@ -33,7 +44,7 @@ public class CopyBitwiseImageOp : BinaryBitwiseImageOp
 
     protected override void PerformCore(BitwiseImageData src, BitwiseImageData dst, int partStart, int partEnd)
     {
-        if (src.BitLayout == dst.BitLayout)
+        if (src.BitLayout == dst.BitLayout && SourceXOffset == 0 && Columns == -1)
         {
             FastCopy(src, dst, partStart, partEnd);
         }
@@ -57,19 +68,20 @@ public class CopyBitwiseImageOp : BinaryBitwiseImageOp
 
     private unsafe void RgbaCopy(BitwiseImageData src, BitwiseImageData dst, int partStart, int partEnd)
     {
+        var w = Columns ?? src.w;
         bool copyAlpha = src.bytesPerPixel == 4 && dst.bytesPerPixel == 4;
         bool copyFromGray = src.bytesPerPixel == 1;
         bool copyToGray = dst.bytesPerPixel == 1;
         for (int i = partStart; i < partEnd; i++)
         {
-            var srcRow = src.ptr + src.stride * i;
+            var srcRow = src.ptr + src.stride * (i + SourceYOffset);
             var dstY = i + DestYOffset;
             if (dst.invertY)
             {
                 dstY = dst.h - dstY - 1;
             }
             var dstRow = dst.ptr + dst.stride * dstY;
-            for (int j = 0; j < src.w; j++)
+            for (int j = SourceXOffset; j < w; j++)
             {
                 var srcPixel = srcRow + j * src.bytesPerPixel;
                 var dstPixel = dstRow + (j + DestXOffset) * dst.bytesPerPixel;
@@ -105,18 +117,19 @@ public class CopyBitwiseImageOp : BinaryBitwiseImageOp
 
     private unsafe void RgbToBitCopy(BitwiseImageData src, BitwiseImageData dst, int partStart, int partEnd)
     {
+        var w = Columns ?? src.w;
         bool copyFromGray = src.bytesPerPixel == 1;
         var thresholdAdjusted = ((int) (BlackWhiteThreshold * 1000) + 1000) * 255 / 2;
         for (int i = partStart; i < partEnd; i++)
         {
-            var srcRow = src.ptr + src.stride * i;
+            var srcRow = src.ptr + src.stride * (i + SourceYOffset);
             var dstY = i + DestYOffset;
             if (dst.invertY)
             {
                 dstY = dst.h - dstY - 1;
             }
             var dstRow = dst.ptr + dst.stride * dstY;
-            for (int j = 0; j < src.w; j += 8)
+            for (int j = SourceXOffset; j < w; j += 8)
             {
                 byte monoByte = 0;
                 for (int k = 0; k < 8; k++)
@@ -150,17 +163,18 @@ public class CopyBitwiseImageOp : BinaryBitwiseImageOp
 
     private unsafe void BitToRgbCopy(BitwiseImageData src, BitwiseImageData dst, int partStart, int partEnd)
     {
+        var w = Columns ?? src.w;
         bool copyToGray = dst.bytesPerPixel == 1;
         for (int i = partStart; i < partEnd; i++)
         {
-            var srcRow = src.ptr + src.stride * i;
+            var srcRow = src.ptr + src.stride * (i + SourceYOffset);
             var dstY = i + DestYOffset;
             if (dst.invertY)
             {
                 dstY = dst.h - dstY - 1;
             }
             var dstRow = dst.ptr + dst.stride * dstY;
-            for (int j = 0; j < src.w; j += 8)
+            for (int j = SourceXOffset; j < w; j += 8)
             {
                 byte monoByte = *(srcRow + j / 8);
                 for (int k = 7; k >= 0; k--)
@@ -189,10 +203,11 @@ public class CopyBitwiseImageOp : BinaryBitwiseImageOp
 
     private unsafe void FastCopy(BitwiseImageData src, BitwiseImageData dst, int partStart, int partEnd)
     {
+        var w = Columns ?? src.w;
         var bytesPerRow = src.bytesPerPixel * src.w;
         for (int i = partStart; i < partEnd; i++)
         {
-            var srcRow = src.ptr + src.stride * i;
+            var srcRow = src.ptr + src.stride * (i + SourceYOffset);
             var dstRow = dst.ptr + dst.stride * (i + DestYOffset) + DestXOffset * dst.bytesPerPixel;
             Buffer.MemoryCopy(srcRow, dstRow, bytesPerRow, bytesPerRow);
         }

@@ -60,11 +60,6 @@ public class MacImageTransformer : AbstractImageTransformer<MacImage>
         }
     }
 
-    protected override MacImage PerformTransform(MacImage image, CropTransform transform)
-    {
-        throw new NotImplementedException();
-    }
-
     protected override MacImage PerformTransform(MacImage image, ScaleTransform transform)
     {
         throw new NotImplementedException();
