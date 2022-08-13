@@ -245,6 +245,7 @@ public class TransformTests : ContextualTests
         ImageAsserts.Similar(expected, actual, ImageAsserts.NULL_RMSE_THRESHOLD);
     }
 
+    // TODO: Add test for crop with black & white image (and possibly white & black)
     [Fact]
     public void Crop()
     {

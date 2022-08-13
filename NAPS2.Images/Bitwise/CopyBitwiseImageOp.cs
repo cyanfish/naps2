@@ -81,9 +81,9 @@ public class CopyBitwiseImageOp : BinaryBitwiseImageOp
                 dstY = dst.h - dstY - 1;
             }
             var dstRow = dst.ptr + dst.stride * dstY;
-            for (int j = SourceXOffset; j < w; j++)
+            for (int j = 0; j < w; j++)
             {
-                var srcPixel = srcRow + j * src.bytesPerPixel;
+                var srcPixel = srcRow + (j + SourceXOffset) * src.bytesPerPixel;
                 var dstPixel = dstRow + (j + DestXOffset) * dst.bytesPerPixel;
                 byte r, g, b;
                 if (copyFromGray)
@@ -129,7 +129,7 @@ public class CopyBitwiseImageOp : BinaryBitwiseImageOp
                 dstY = dst.h - dstY - 1;
             }
             var dstRow = dst.ptr + dst.stride * dstY;
-            for (int j = SourceXOffset; j < w; j += 8)
+            for (int j = 0; j < w; j += 8)
             {
                 byte monoByte = 0;
                 for (int k = 0; k < 8; k++)
@@ -137,7 +137,7 @@ public class CopyBitwiseImageOp : BinaryBitwiseImageOp
                     monoByte <<= 1;
                     if (j + k < src.w)
                     {
-                        var srcPixel = srcRow + (j + k) * src.bytesPerPixel;
+                        var srcPixel = srcRow + (j + SourceXOffset + k) * src.bytesPerPixel;
                         int luma;
                         if (copyFromGray)
                         {
@@ -174,7 +174,7 @@ public class CopyBitwiseImageOp : BinaryBitwiseImageOp
                 dstY = dst.h - dstY - 1;
             }
             var dstRow = dst.ptr + dst.stride * dstY;
-            for (int j = SourceXOffset; j < w; j += 8)
+            for (int j = 0; j < w; j += 8)
             {
                 byte monoByte = *(srcRow + j / 8);
                 for (int k = 7; k >= 0; k--)
@@ -183,7 +183,7 @@ public class CopyBitwiseImageOp : BinaryBitwiseImageOp
                     monoByte >>= 1;
                     if (j + k < src.w)
                     {
-                        var dstPixel = dstRow + (j + k) * dst.bytesPerPixel;
+                        var dstPixel = dstRow + (j + SourceXOffset + k) * dst.bytesPerPixel;
                         var luma = (byte) (bit == 0 ? 0 : 255);
                         if (copyToGray)
                         {
