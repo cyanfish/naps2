@@ -52,6 +52,28 @@ public class MacImageTransformer : AbstractImageTransformer<MacImage>
         return newImage;
     }
 
+    // TODO: Add tests
+    protected override MacImage PerformTransform(MacImage image, ScaleTransform transform)
+    {
+        var width = (int) Math.Round(image.Width * transform.ScaleFactor);
+        var height = (int) Math.Round(image.Height * transform.ScaleFactor);
+        var pixelFormat = image.PixelFormat switch
+        {
+            ImagePixelFormat.BW1 or ImagePixelFormat.Gray8 => ImagePixelFormat.Gray8,
+            ImagePixelFormat.RGB24 => ImagePixelFormat.RGB24,
+            ImagePixelFormat.ARGB32 => ImagePixelFormat.ARGB32,
+            _ => throw new ArgumentException("Unsupported pixel format")
+        };
+        var newImage = (MacImage) ImageContext.Create(width, height, pixelFormat);
+        newImage.SetResolution(
+            image.HorizontalResolution * image.Width / width,
+            image.VerticalResolution * image.Height / height);
+        using CGBitmapContext c = GetCgBitmapContext(newImage);
+        CGRect rect = new CGRect(0, 0, width, height);
+        c.DrawImage(rect, image._imageRep.AsCGImage(ref rect, null, null));
+        return newImage;
+    }
+
     private static CGBitmapContext GetCgBitmapContext(MacImage image)
     {
         lock (MacImageContext.ConstructorLock)
@@ -67,13 +89,28 @@ public class MacImageTransformer : AbstractImageTransformer<MacImage>
         }
     }
 
-    protected override MacImage PerformTransform(MacImage image, ScaleTransform transform)
-    {
-        throw new NotImplementedException();
-    }
-
     protected override MacImage PerformTransform(MacImage image, ThumbnailTransform transform)
     {
-        throw new NotImplementedException();
+        var pixelFormat = image.PixelFormat switch
+        {
+            ImagePixelFormat.BW1 or ImagePixelFormat.Gray8 => ImagePixelFormat.Gray8,
+            ImagePixelFormat.RGB24 => ImagePixelFormat.RGB24,
+            ImagePixelFormat.ARGB32 => ImagePixelFormat.ARGB32,
+            _ => throw new ArgumentException("Unsupported pixel format")
+        };
+        var newImage = (MacImage) ImageContext.Create(transform.Size, transform.Size, pixelFormat);
+        var (left, top, width, height) = transform.GetDrawRect(image.Width, image.Height);
+        newImage.SetResolution(
+            image.HorizontalResolution * image.Width / width,
+            image.VerticalResolution * image.Height / height);
+        using CGBitmapContext c = GetCgBitmapContext(newImage);
+        CGRect rect = new CGRect(left, top, width, height);
+        c.DrawImage(rect, image._imageRep.AsCGImage(ref rect, null, null));
+
+        CGRect strokeRect = new CGRect(left + 0.5, top + 0.5, width - 1, height - 1);
+        c.SetRGBStrokeColor(0, 0, 0, 255);
+        c.StrokeRect(strokeRect);
+
+        return newImage;
     }
 }

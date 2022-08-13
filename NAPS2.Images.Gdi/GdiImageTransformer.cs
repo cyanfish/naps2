@@ -59,7 +59,8 @@ public class GdiImageTransformer : AbstractImageTransformer<GdiImage>
             return image;
         }
 
-        var data = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height), ImageLockMode.ReadWrite, bitmap.PixelFormat);
+        var data = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height), ImageLockMode.ReadWrite,
+            bitmap.PixelFormat);
         var stride = Math.Abs(data.Stride);
         for (int y = 0; y < data.Height; y++)
         {
@@ -117,11 +118,11 @@ public class GdiImageTransformer : AbstractImageTransformer<GdiImage>
 
         var filter = new double[,]
         {
-            {-1, -1, -1, -1, -1},
-            {-1,  2,  2,  2, -1},
-            {-1,  2, 16,  2, -1},
-            {-1,  2,  2,  2, -1},
-            {-1, -1, -1, -1, -1}
+            { -1, -1, -1, -1, -1 },
+            { -1, 2, 2, 2, -1 },
+            { -1, 2, 16, 2, -1 },
+            { -1, 2, 2, 2, -1 },
+            { -1, -1, -1, -1, -1 }
         };
 
         double bias = 1.0 - sharpnessAdjusted;
@@ -167,9 +168,9 @@ public class GdiImageTransformer : AbstractImageTransformer<GdiImage>
 
                     rgb = y * pbits.Stride + bytesPerPixel * x;
 
-                    int r = Math.Min(Math.Max((int)(factor * red + (bias * rgbValues[rgb + 2])), 0), 255);
-                    int g = Math.Min(Math.Max((int)(factor * green + (bias * rgbValues[rgb + 1])), 0), 255);
-                    int b = Math.Min(Math.Max((int)(factor * blue + (bias * rgbValues[rgb + 0])), 0), 255);
+                    int r = Math.Min(Math.Max((int) (factor * red + (bias * rgbValues[rgb + 2])), 0), 255);
+                    int g = Math.Min(Math.Max((int) (factor * green + (bias * rgbValues[rgb + 1])), 0), 255);
+                    int b = Math.Min(Math.Max((int) (factor * blue + (bias * rgbValues[rgb + 0])), 0), 255);
 
                     result[x, y] = Color.FromArgb(r, g, b);
                 }
@@ -233,7 +234,7 @@ public class GdiImageTransformer : AbstractImageTransformer<GdiImage>
         {
             g.Clear(Color.White);
             g.TranslateTransform(result.Width / 2.0f, result.Height / 2.0f);
-            g.RotateTransform((float)transform.Angle);
+            g.RotateTransform((float) transform.Angle);
             g.TranslateTransform(-image.Width / 2.0f, -image.Height / 2.0f);
             g.DrawImage(image.Bitmap, new Rectangle(0, 0, image.Width, image.Height));
         }
@@ -245,8 +246,8 @@ public class GdiImageTransformer : AbstractImageTransformer<GdiImage>
 
     protected override GdiImage PerformTransform(GdiImage image, ScaleTransform transform)
     {
-        int realWidth = (int)Math.Round(image.Width * transform.ScaleFactor);
-        int realHeight = (int)Math.Round(image.Height * transform.ScaleFactor);
+        int realWidth = (int) Math.Round(image.Width * transform.ScaleFactor);
+        int realHeight = (int) Math.Round(image.Height * transform.ScaleFactor);
 
         double horizontalRes = image.HorizontalResolution * transform.ScaleFactor;
         double verticalRes = image.VerticalResolution * transform.ScaleFactor;
@@ -255,7 +256,7 @@ public class GdiImageTransformer : AbstractImageTransformer<GdiImage>
         using Graphics g = Graphics.FromImage(result);
         g.InterpolationMode = InterpolationMode.HighQualityBicubic;
         g.DrawImage(image.Bitmap, 0, 0, realWidth, realHeight);
-        result.SafeSetResolution((float)horizontalRes, (float)verticalRes);
+        result.SafeSetResolution((float) horizontalRes, (float) verticalRes);
         return new GdiImage(result);
     }
 
@@ -264,35 +265,12 @@ public class GdiImageTransformer : AbstractImageTransformer<GdiImage>
         var result = new Bitmap(transform.Size, transform.Size);
         using (Graphics g = Graphics.FromImage(result))
         {
-            // The location and dimensions of the old bitmap, scaled and positioned within the thumbnail bitmap
-            int left, top, width, height;
-
             // We want a nice thumbnail, so use the maximum quality interpolation
             g.InterpolationMode = InterpolationMode.HighQualityBicubic;
 
-            if (image.Width > image.Height)
-            {
-                // Fill the new bitmap's width
-                width = transform.Size;
-                left = 0;
-                // Scale the drawing height to match the original bitmap's aspect ratio
-                height = (int)(image.Height * (transform.Size / (double)image.Width));
-                // Center the drawing vertically
-                top = (transform.Size - height) / 2;
-            }
-            else
-            {
-                // Fill the new bitmap's height
-                height = transform.Size;
-                top = 0;
-                // Scale the drawing width to match the original bitmap's aspect ratio
-                width = (int)(image.Width * (transform.Size / (double)image.Height));
-                // Center the drawing horizontally
-                left = (transform.Size - width) / 2;
-            }
-
             // Draw the original bitmap onto the new bitmap, using the calculated location and dimensions
             // Note that there may be some padding if the aspect ratios don't match
+            var (left, top, width, height) = transform.GetDrawRect(image.Width, image.Height);
             var destRect = new RectangleF(left, top, width, height);
             var srcRect = new RectangleF(0, 0, image.Width, image.Height);
             g.DrawImage(image.Bitmap, destRect, srcRect, GraphicsUnit.Pixel);
