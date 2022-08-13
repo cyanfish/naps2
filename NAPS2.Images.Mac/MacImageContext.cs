@@ -47,13 +47,19 @@ public class MacImageContext : ImageContext
 
     public override IMemoryImage Load(Stream stream)
     {
+        var firstBytes = new byte[4];
         if (stream.CanSeek)
         {
+            stream.Seek(0, SeekOrigin.Begin);
+            stream.Read(firstBytes, 0, 4);
             stream.Seek(0, SeekOrigin.Begin);
         }
         lock (ConstructorLock)
         {
-            return new MacImage(new NSImage(NSData.FromStream(stream)));
+            var nsImage = new NSImage(NSData.FromStream(stream));
+            var image = new MacImage(nsImage);
+            image.OriginalFileFormat = GetFileFormatFromFirstBytes(firstBytes);
+            return image;
         }
     }
 

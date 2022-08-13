@@ -5,7 +5,7 @@ namespace NAPS2.Images.Storage;
 public abstract class ImageContext
 {
     private readonly IPdfRenderer? _pdfRenderer;
-    
+
     // TODO: Any better place to put this?
     public static ImageFileFormat GetFileFormatFromExtension(string path, bool allowUnspecified = false)
     {
@@ -18,6 +18,23 @@ public abstract class ImageContext
                 ? ImageFileFormat.Unspecified
                 : throw new ArgumentException($"Could not infer file format from extension: {path}")
         };
+    }
+
+    public static ImageFileFormat GetFileFormatFromFirstBytes(byte[] firstBytes)
+    {
+        if (firstBytes[0] == 0x89 && firstBytes[1] == 0x50 && firstBytes[2] == 0x4E && firstBytes[3] == 0x47)
+        {
+            return ImageFileFormat.Png;
+        }
+        if (firstBytes[0] == 0xFF && firstBytes[1] == 0xD8)
+        {
+            return ImageFileFormat.Jpeg;
+        }
+        if (firstBytes[0] == 0x42 && firstBytes[1] == 0x4D)
+        {
+            return ImageFileFormat.Bmp;
+        }
+        return ImageFileFormat.Unspecified;
     }
 
     protected ImageContext(Type imageType, IPdfRenderer? pdfRenderer = null)

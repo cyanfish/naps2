@@ -148,7 +148,9 @@ public class MacImage : IMemoryImage
     {
         lock (MacImageContext.ConstructorLock)
         {
-            return new MacImage(new NSImage(_image.Copy().Handle, true));
+            var image = new MacImage(new NSImage(_image.Copy().Handle, true));
+            image.OriginalFileFormat = OriginalFileFormat;
+            return image;
         }
     }
 
