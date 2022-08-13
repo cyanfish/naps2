@@ -108,7 +108,7 @@ public class ImageContextTests : ContextualTests
         Assert.Equal(".png", Path.GetExtension(fullPath));
         var loaded = ImageContext.Load(fullPath);
         Assert.Equal(ImageFileFormat.Png, loaded.OriginalFileFormat);
-        ImageAsserts.Similar(expectedImage, loaded, ignoreFormat: true);
+        ImageAsserts.Similar(expectedImage, loaded);
     }
 
     private void AssertJpeg(ImageFileFormat format, string fullPath, byte[] expectedImage)
@@ -117,6 +117,6 @@ public class ImageContextTests : ContextualTests
         Assert.Equal(".jpg", Path.GetExtension(fullPath));
         var loaded = ImageContext.Load(fullPath);
         Assert.Equal(ImageFileFormat.Jpeg, loaded.OriginalFileFormat);
-        ImageAsserts.Similar(expectedImage, loaded, ignoreFormat: true);
+        ImageAsserts.Similar(expectedImage, loaded);
     }
 }

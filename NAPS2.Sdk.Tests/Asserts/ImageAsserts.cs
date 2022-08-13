@@ -17,46 +17,42 @@ public static class ImageAsserts
 
     private const double DIMENSIONS_THRESHOLD = 0.05;
 
-    public static void Similar(byte[] first, ProcessedImage second, double rmseThreshold = GENERAL_RMSE_THRESHOLD,
-        bool ignoreFormat = false)
+    public static void Similar(byte[] first, ProcessedImage second, double rmseThreshold = GENERAL_RMSE_THRESHOLD)
     {
         using var rendered = TestImageContextFactory.Get().Render(second);
-        Similar(TestImageContextFactory.Get().Load(first), rendered, rmseThreshold, ignoreFormat);
+        Similar(TestImageContextFactory.Get().Load(first), rendered, rmseThreshold);
     }
 
-    public static void Similar(byte[] first, IMemoryImage second, double rmseThreshold = GENERAL_RMSE_THRESHOLD,
-        bool ignoreFormat = false)
+    public static void Similar(byte[] first, IMemoryImage second, double rmseThreshold = GENERAL_RMSE_THRESHOLD)
     {
-        Similar(TestImageContextFactory.Get().Load(first), second, rmseThreshold, ignoreFormat);
+        Similar(TestImageContextFactory.Get().Load(first), second, rmseThreshold);
     }
 
     public static void Similar(IMemoryImage first, IMemoryImage second,
-        double rmseThreshold = GENERAL_RMSE_THRESHOLD, bool ignoreFormat = false)
+        double rmseThreshold = GENERAL_RMSE_THRESHOLD)
     {
-        Similar(first, second, rmseThreshold, ignoreFormat, true);
+        Similar(first, second, rmseThreshold, true);
     }
 
-    public static void NotSimilar(byte[] first, ProcessedImage second, double rmseThreshold = GENERAL_RMSE_THRESHOLD,
-        bool ignoreFormat = false)
+    public static void NotSimilar(byte[] first, ProcessedImage second, double rmseThreshold = GENERAL_RMSE_THRESHOLD)
     {
         using var rendered = TestImageContextFactory.Get().Render(second);
-        NotSimilar(TestImageContextFactory.Get().Load(first), rendered, rmseThreshold, ignoreFormat);
+        NotSimilar(TestImageContextFactory.Get().Load(first), rendered, rmseThreshold);
     }
 
-    public static void NotSimilar(byte[] first, IMemoryImage second, double rmseThreshold = GENERAL_RMSE_THRESHOLD,
-        bool ignoreFormat = false)
+    public static void NotSimilar(byte[] first, IMemoryImage second, double rmseThreshold = GENERAL_RMSE_THRESHOLD)
     {
-        NotSimilar(TestImageContextFactory.Get().Load(first), second, rmseThreshold, ignoreFormat);
+        NotSimilar(TestImageContextFactory.Get().Load(first), second, rmseThreshold);
     }
 
     public static void NotSimilar(IMemoryImage first, IMemoryImage second,
-        double rmseThreshold = GENERAL_RMSE_THRESHOLD, bool ignoreFormat = false)
+        double rmseThreshold = GENERAL_RMSE_THRESHOLD)
     {
-        Similar(first, second, rmseThreshold, ignoreFormat, false);
+        Similar(first, second, rmseThreshold, false);
     }
 
     private static unsafe void Similar(IMemoryImage first, IMemoryImage second,
-        double rmseThreshold, bool ignoreFormat, bool isSimilar)
+        double rmseThreshold, bool isSimilar)
     {
         if (first.PixelFormat == ImagePixelFormat.Unsupported || second.PixelFormat == ImagePixelFormat.Unsupported)
         {
@@ -65,10 +61,6 @@ public static class ImageAsserts
 
         Assert.Equal(first.Width, second.Width);
         Assert.Equal(first.Height, second.Height);
-        if (!ignoreFormat)
-        {
-            Assert.Equal(first.PixelFormat, second.PixelFormat);
-        }
         Assert.InRange(second.HorizontalResolution,
             first.HorizontalResolution - RESOLUTION_THRESHOLD,
             first.HorizontalResolution + RESOLUTION_THRESHOLD);

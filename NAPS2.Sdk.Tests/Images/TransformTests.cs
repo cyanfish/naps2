@@ -299,7 +299,7 @@ public class TransformTests : ContextualTests
         actual = ImageContext.PerformTransform(actual, new BlackWhiteTransform());
         Assert.Equal(ImagePixelFormat.BW1, actual.PixelFormat);
 
-        ImageAsserts.Similar(expected, actual, ImageAsserts.GENERAL_RMSE_THRESHOLD, true);
+        ImageAsserts.Similar(expected, actual, ImageAsserts.GENERAL_RMSE_THRESHOLD);
     }
 
     [Fact]
@@ -311,7 +311,7 @@ public class TransformTests : ContextualTests
         actual = ImageContext.PerformTransform(actual, new BlackWhiteTransform(300));
         Assert.Equal(ImagePixelFormat.BW1, actual.PixelFormat);
 
-        ImageAsserts.Similar(expected, actual, ImageAsserts.GENERAL_RMSE_THRESHOLD, true);
+        ImageAsserts.Similar(expected, actual, ImageAsserts.GENERAL_RMSE_THRESHOLD);
     }
 
     [Fact]
@@ -323,7 +323,7 @@ public class TransformTests : ContextualTests
         actual = ImageContext.PerformTransform(actual, new ColorBitDepthTransform());
         Assert.Equal(ImagePixelFormat.RGB24, actual.PixelFormat);
 
-        ImageAsserts.Similar(expected, actual, ImageAsserts.NULL_RMSE_THRESHOLD, true);
+        ImageAsserts.Similar(expected, actual, ImageAsserts.NULL_RMSE_THRESHOLD);
     }
 
     [Fact]

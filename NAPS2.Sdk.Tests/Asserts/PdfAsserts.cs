@@ -88,7 +88,7 @@ public static class PdfAsserts
         Assert.Equal(expectedImages.Length, actualImages.Count);
         for (int i = 0; i < expectedImages.Length; i++)
         {
-            ImageAsserts.Similar(expectedImages[i], actualImages[i], ignoreFormat: true);
+            ImageAsserts.Similar(expectedImages[i], actualImages[i]);
         }
     }
 
