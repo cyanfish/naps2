@@ -21,12 +21,12 @@ public abstract class StorageConfig
 
         public override void AssertJpegStorage(IImageStorage storage)
         {
-            Assert.IsType<GdiImage>(storage);
+            Assert.IsAssignableFrom<IMemoryImage>(storage);
         }
 
         public override void AssertPngStorage(IImageStorage storage)
         {
-            Assert.IsType<GdiImage>(storage);
+            Assert.IsAssignableFrom<IMemoryImage>(storage);
         }
     }
 
