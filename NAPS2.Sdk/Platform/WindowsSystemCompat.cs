@@ -24,4 +24,8 @@ public abstract class WindowsSystemCompat : ISystemCompat
     public IntPtr LoadLibrary(string path) => Win32.LoadLibrary(path);
 
     public abstract IntPtr LoadSymbol(IntPtr libraryHandle, string symbol);
+
+    public IDisposable? FileReadLock(string path) => null;
+
+    public IDisposable? FileWriteLock(string path) => null;
 }

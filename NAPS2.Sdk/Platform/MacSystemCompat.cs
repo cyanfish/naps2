@@ -30,4 +30,8 @@ public class MacSystemCompat : ISystemCompat
     public IntPtr LoadLibrary(string path) => MacInterop.dlopen(path, RTLD_LAZY | RTLD_GLOBAL);
 
     public IntPtr LoadSymbol(IntPtr libraryHandle, string symbol) => MacInterop.dlsym(libraryHandle, symbol);
+
+    public IDisposable FileReadLock(string path) => new FileStream(path, FileMode.Open, FileAccess.Read);
+
+    public IDisposable FileWriteLock(string path) => new FileStream(path, FileMode.Open, FileAccess.Write);
 }

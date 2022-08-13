@@ -8,7 +8,7 @@ public class PdfDocument : NativePdfiumObject
 {
     public static PdfDocument Load(string path, string? password = null)
     {
-        return new PdfDocument(Native.FPDF_LoadDocument(path, password));
+        return new PdfDocument(Native.FPDF_LoadDocument(path, password), PlatformCompat.System.FileReadLock(path));
     }
 
     public static PdfDocument Load(IntPtr buffer, int length, string? password = null)
@@ -21,8 +21,11 @@ public class PdfDocument : NativePdfiumObject
         return new PdfDocument(Native.FPDF_CreateNewDocument());
     }
 
-    private PdfDocument(IntPtr handle) : base(handle)
+    private readonly IDisposable? _readLock;
+
+    private PdfDocument(IntPtr handle, IDisposable? readLock = null) : base(handle)
     {
+        _readLock = readLock;
     }
 
     public int PageCount => Native.FPDF_GetPageCount(Handle);
@@ -92,6 +95,15 @@ public class PdfDocument : NativePdfiumObject
         if (!Native.FPDF_SaveAsCopy(Handle, ref fileWrite, PdfiumNativeLibrary.FPDF_NOINCREMENTAL))
         {
             throw new IOException("Failed to save PDF");
+        }
+    }
+
+    protected override void Dispose(bool disposing)
+    {
+        base.Dispose(disposing);
+        if (disposing)
+        {
+            _readLock?.Dispose();
         }
     }
 

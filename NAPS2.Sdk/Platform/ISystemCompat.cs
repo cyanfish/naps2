@@ -21,4 +21,8 @@ public interface ISystemCompat
     IntPtr LoadLibrary(string path);
 
     IntPtr LoadSymbol(IntPtr libraryHandle, string symbol);
+
+    IDisposable? FileReadLock(string path);
+
+    IDisposable? FileWriteLock(string path);
 }

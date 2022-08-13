@@ -26,4 +26,8 @@ public class LinuxSystemCompat : ISystemCompat
     public IntPtr LoadLibrary(string path) => LinuxInterop.dlopen(path, RTLD_LAZY | RTLD_GLOBAL);
 
     public IntPtr LoadSymbol(IntPtr libraryHandle, string symbol) => LinuxInterop.dlsym(libraryHandle, symbol);
+
+    public IDisposable FileReadLock(string path) => new FileStream(path, FileMode.Open, FileAccess.Read);
+
+    public IDisposable FileWriteLock(string path) => new FileStream(path, FileMode.Open, FileAccess.Write);
 }
