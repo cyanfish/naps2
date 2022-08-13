@@ -206,7 +206,7 @@ public class TransformTests : ContextualTests
 
         actual = ImageContext.PerformTransform(actual, new RotationTransform(46));
 
-        ImageAsserts.Similar(expected, actual, ImageAsserts.GENERAL_RMSE_THRESHOLD);
+        ImageAsserts.Similar(expected, actual, ImageAsserts.XPLAT_RMSE_THRESHOLD);
     }
 
     [Fact]
@@ -217,7 +217,8 @@ public class TransformTests : ContextualTests
 
         actual = ImageContext.PerformTransform(actual, new RotationTransform(-45));
 
-        ImageAsserts.Similar(expected, actual, ImageAsserts.GENERAL_RMSE_THRESHOLD);
+        // TODO: The mac rotated image looks way better than gdi, consider if we can improve the gdi end
+        ImageAsserts.Similar(expected, actual, ImageAsserts.XPLAT_RMSE_THRESHOLD);
     }
 
     [Fact]
