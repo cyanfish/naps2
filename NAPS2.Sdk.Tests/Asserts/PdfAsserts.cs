@@ -1,12 +1,11 @@
-﻿using NAPS2.ImportExport.Pdf;
+﻿using Codeuctivity;
+using NAPS2.ImportExport.Pdf;
 using NAPS2.ImportExport.Pdf.Pdfium;
 using PdfSharpCore.Pdf.IO;
 using PdfSharpCore.Pdf.Security;
 using Xunit;
 
 namespace NAPS2.Sdk.Tests.Asserts;
-
-using PdfAValidator = PdfAValidator.PdfAValidator;
 
 public static class PdfAsserts
 {
@@ -19,10 +18,10 @@ public static class PdfAsserts
         Assert.Equal(count, doc.PageCount);
     }
 
-    public static void AssertCompliant(string profile, string filePath)
+    public static async Task AssertCompliant(string profile, string filePath)
     {
         Assert.True(File.Exists(filePath));
-        var report = LazyPdfAValidator.Value.ValidateWithDetailedReport(filePath);
+        var report = await LazyPdfAValidator.Value.ValidateWithDetailedReportAsync(filePath);
         Assert.True(report.Jobs.Job.ValidationReport.IsCompliant);
         Assert.StartsWith($"{profile} ", report.Jobs.Job.ValidationReport.ProfileName);
     }

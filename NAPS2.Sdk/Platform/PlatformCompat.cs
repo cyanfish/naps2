@@ -17,6 +17,7 @@ public class PlatformCompat
             _runtimeCompat = new DefaultRuntimeCompat();
         }
 
+        // TODO: Maybe use RuntimeInformation instead of conditional compiling
 #if NET6_0_OR_GREATER
         if (OperatingSystem.IsWindows()) {
             _systemCompat = Environment.Is64BitProcess ? new Windows64SystemCompat() : new Windows32SystemCompat();

@@ -1,6 +1,5 @@
 using NAPS2.ImportExport.Pdf;
 using NAPS2.Sdk.Tests.Asserts;
-using Xunit;
 
 namespace NAPS2.Sdk.Tests.ImportExport.Pdf;
 
@@ -8,8 +7,9 @@ namespace NAPS2.Sdk.Tests.ImportExport.Pdf;
 // TODO: Maaaybe validate with external import? We certainly can't guarantee it, but maybe some cases can be verified for best effort
 public class PdfATests : ContextualTests
 {
-    [Fact]
-    public void Validate()
+    // Sadly the pdfa verifier library only supports windows/mac
+    [PlatformFact(exclude: Platform.Mac)]
+    public async Task Validate()
     {
         var pdfExporter = new PdfExporter(ScanningContext);
         var testCases = new (PdfCompat pdfCompat, string profile, string fileName)[]
@@ -20,7 +20,7 @@ public class PdfATests : ContextualTests
             (PdfCompat.PdfA3U, "PDF/A-3U", "pdfa3u_test.pdf")
         };
 
-        Parallel.ForEach(testCases, testCase =>
+        var tasks = testCases.Select(testCase =>
         {
             using var image = CreateScannedImage();
             var path = Path.Combine(FolderPath, testCase.fileName);
@@ -28,7 +28,8 @@ public class PdfATests : ContextualTests
             {
                 Compat = testCase.pdfCompat
             }).Wait();
-            PdfAsserts.AssertCompliant(testCase.profile, path);
-        });
+            return PdfAsserts.AssertCompliant(testCase.profile, path);
+        }).ToArray();
+        await Task.WhenAll(tasks);
     }
 }
