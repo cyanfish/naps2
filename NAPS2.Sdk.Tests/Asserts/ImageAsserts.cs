@@ -8,7 +8,7 @@ namespace NAPS2.Sdk.Tests.Asserts;
 public static class ImageAsserts
 {
     // For slight cross-platform differences
-    public const double XPLAT_RMSE_THRESHOLD = 5.0;
+    public const double XPLAT_RMSE_THRESHOLD = 6.0;
     
     // JPEG artifacts seem to consistently create a RMSE of about 2.5.
     public const double GENERAL_RMSE_THRESHOLD = 3.5;
