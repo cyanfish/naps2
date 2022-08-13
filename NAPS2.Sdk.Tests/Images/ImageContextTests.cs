@@ -38,7 +38,7 @@ public class ImageContextTests : ContextualTests
 
         var fullPath = ctx.SaveSmallestFormat(path, color, BitDepth.BlackAndWhite, false, -1, out var format);
 
-        AssertPng(format, fullPath, ImageResources.color_image_bw);
+        AssertPng(format, fullPath, ImageResources.color_image_bw, ImageAsserts.XPLAT_RMSE_THRESHOLD);
     }
 
     [Fact]
@@ -102,13 +102,14 @@ public class ImageContextTests : ContextualTests
         AssertJpeg(format, fullPath, ImageResources.color_image_bw);
     }
 
-    private void AssertPng(ImageFileFormat format, string fullPath, byte[] expectedImage)
+    private void AssertPng(ImageFileFormat format, string fullPath, byte[] expectedImage,
+        double rmseThreshold = ImageAsserts.GENERAL_RMSE_THRESHOLD)
     {
         Assert.Equal(ImageFileFormat.Png, format);
         Assert.Equal(".png", Path.GetExtension(fullPath));
         var loaded = ImageContext.Load(fullPath);
         Assert.Equal(ImageFileFormat.Png, loaded.OriginalFileFormat);
-        ImageAsserts.Similar(expectedImage, loaded);
+        ImageAsserts.Similar(expectedImage, loaded, rmseThreshold);
     }
 
     private void AssertJpeg(ImageFileFormat format, string fullPath, byte[] expectedImage)

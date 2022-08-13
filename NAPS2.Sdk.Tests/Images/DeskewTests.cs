@@ -27,7 +27,7 @@ public class DeskewTests : ContextualTests
         var image = LoadImage(ImageResources.skewed);
         var transform = Deskewer.GetDeskewTransform(image);
         var deskewedImage = ImageContext.PerformTransform(image, transform);
-        ImageAsserts.Similar(ImageResources.deskewed, deskewedImage);
+        ImageAsserts.Similar(ImageResources.deskewed, deskewedImage, ImageAsserts.XPLAT_RMSE_THRESHOLD);
     }
 
     [Fact]
