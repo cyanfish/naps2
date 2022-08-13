@@ -13,11 +13,11 @@ public class ContrastBitwiseImageOp : UnaryBitwiseImageOp
         _offset = (1 - _contrastAdjusted) / 2 * 255;
     }
 
-    protected override void PerformCore(PixelInfo pix)
+    protected override void PerformCore(BitwiseImageData data)
     {
-        if (pix.bytesPerPixel is 3 or 4)
+        if (data.bytesPerPixel is 3 or 4)
         {
-            PerformRgba(pix);
+            PerformRgba(data);
         }
         else
         {
@@ -25,17 +25,17 @@ public class ContrastBitwiseImageOp : UnaryBitwiseImageOp
         }
     }
 
-    private unsafe void PerformRgba(PixelInfo pix)
+    private unsafe void PerformRgba(BitwiseImageData data)
     {
-        for (int i = 0; i < pix.h; i++)
+        for (int i = 0; i < data.h; i++)
         {
-            var row = pix.data + pix.stride * i;
-            for (int j = 0; j < pix.w; j++)
+            var row = data.ptr + data.stride * i;
+            for (int j = 0; j < data.w; j++)
             {
-                var pixel = row + j * pix.bytesPerPixel;
-                var r = *(pixel + pix.rOff);
-                var g = *(pixel + pix.gOff);
-                var b = *(pixel + pix.bOff);
+                var pixel = row + j * data.bytesPerPixel;
+                var r = *(pixel + data.rOff);
+                var g = *(pixel + data.gOff);
+                var b = *(pixel + data.bOff);
 
                 int r2 = (int)(r * _contrastAdjusted + _offset);
                 int g2 = (int)(g * _contrastAdjusted + _offset);
@@ -45,9 +45,9 @@ public class ContrastBitwiseImageOp : UnaryBitwiseImageOp
                 g = (byte)(g2 < 0 ? 0 : g2 > 255 ? 255 : g2);
                 b = (byte)(b2 < 0 ? 0 : b2 > 255 ? 255 : b2);
 
-                *(pixel + pix.rOff) = r;
-                *(pixel + pix.gOff) = g;
-                *(pixel + pix.bOff) = b;
+                *(pixel + data.rOff) = r;
+                *(pixel + data.gOff) = g;
+                *(pixel + data.bOff) = b;
             }
         }
     }

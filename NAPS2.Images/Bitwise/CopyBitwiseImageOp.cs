@@ -19,7 +19,7 @@ public class CopyBitwiseImageOp : BinaryBitwiseImageOp
 
     protected override LockMode DstLockMode => LockMode.WriteOnly;
 
-    protected override void ValidateCore(PixelInfo src, PixelInfo dst)
+    protected override void ValidateCore(BitwiseImageData src, BitwiseImageData dst)
     {
         if (dst.w - DestXOffset < src.w || dst.h - DestYOffset < src.h)
         {
@@ -31,7 +31,7 @@ public class CopyBitwiseImageOp : BinaryBitwiseImageOp
         }
     }
 
-    protected override void PerformCore(PixelInfo src, PixelInfo dst)
+    protected override void PerformCore(BitwiseImageData src, BitwiseImageData dst)
     {
         if (src.BitLayout == dst.BitLayout)
         {
@@ -55,20 +55,20 @@ public class CopyBitwiseImageOp : BinaryBitwiseImageOp
         }
     }
 
-    private unsafe void RgbaCopy(PixelInfo src, PixelInfo dst)
+    private unsafe void RgbaCopy(BitwiseImageData src, BitwiseImageData dst)
     {
         bool copyAlpha = src.bytesPerPixel == 4 && dst.bytesPerPixel == 4;
         bool copyFromGray = src.bytesPerPixel == 1;
         bool copyToGray = dst.bytesPerPixel == 1;
         for (int i = 0; i < src.h; i++)
         {
-            var srcRow = src.data + src.stride * i;
+            var srcRow = src.ptr + src.stride * i;
             var dstY = i + DestYOffset;
             if (dst.invertY)
             {
                 dstY = dst.h - dstY - 1;
             }
-            var dstRow = dst.data + dst.stride * dstY;
+            var dstRow = dst.ptr + dst.stride * dstY;
             for (int j = 0; j < src.w; j++)
             {
                 var srcPixel = srcRow + j * src.bytesPerPixel;
@@ -103,19 +103,19 @@ public class CopyBitwiseImageOp : BinaryBitwiseImageOp
         }
     }
 
-    private unsafe void RgbToBitCopy(PixelInfo src, PixelInfo dst)
+    private unsafe void RgbToBitCopy(BitwiseImageData src, BitwiseImageData dst)
     {
         bool copyFromGray = src.bytesPerPixel == 1;
         var thresholdAdjusted = ((int) (BlackWhiteThreshold * 1000) + 1000) * 255 / 2;
         for (int i = 0; i < src.h; i++)
         {
-            var srcRow = src.data + src.stride * i;
+            var srcRow = src.ptr + src.stride * i;
             var dstY = i + DestYOffset;
             if (dst.invertY)
             {
                 dstY = dst.h - dstY - 1;
             }
-            var dstRow = dst.data + dst.stride * dstY;
+            var dstRow = dst.ptr + dst.stride * dstY;
             for (int j = 0; j < src.w; j += 8)
             {
                 byte monoByte = 0;
@@ -148,18 +148,18 @@ public class CopyBitwiseImageOp : BinaryBitwiseImageOp
         }
     }
 
-    private unsafe void BitToRgbCopy(PixelInfo src, PixelInfo dst)
+    private unsafe void BitToRgbCopy(BitwiseImageData src, BitwiseImageData dst)
     {
         bool copyToGray = dst.bytesPerPixel == 1;
         for (int i = 0; i < src.h; i++)
         {
-            var srcRow = src.data + src.stride * i;
+            var srcRow = src.ptr + src.stride * i;
             var dstY = i + DestYOffset;
             if (dst.invertY)
             {
                 dstY = dst.h - dstY - 1;
             }
-            var dstRow = dst.data + dst.stride * dstY;
+            var dstRow = dst.ptr + dst.stride * dstY;
             for (int j = 0; j < src.w; j += 8)
             {
                 byte monoByte = *(srcRow + j / 8);
@@ -187,13 +187,13 @@ public class CopyBitwiseImageOp : BinaryBitwiseImageOp
         }
     }
 
-    private unsafe void FastCopy(PixelInfo src, PixelInfo dst)
+    private unsafe void FastCopy(BitwiseImageData src, BitwiseImageData dst)
     {
         var bytesPerRow = src.bytesPerPixel * src.w;
         for (int i = 0; i < src.h; i++)
         {
-            var srcRow = src.data + src.stride * i;
-            var dstRow = dst.data + dst.stride * (i + DestYOffset) + DestXOffset * dst.bytesPerPixel;
+            var srcRow = src.ptr + src.stride * i;
+            var dstRow = dst.ptr + dst.stride * (i + DestYOffset) + DestXOffset * dst.bytesPerPixel;
             Buffer.MemoryCopy(srcRow, dstRow, bytesPerRow, bytesPerRow);
         }
     }

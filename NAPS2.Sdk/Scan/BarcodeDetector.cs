@@ -35,15 +35,12 @@ public static class BarcodeDetector
     
     private class MemoryImageLuminanceSource : LuminanceSource
     {
-        public unsafe MemoryImageLuminanceSource(IMemoryImage image)
+        public MemoryImageLuminanceSource(IMemoryImage image)
             : base(image.Width, image.Height)
         {
-            var matrix = new byte[image.Width * image.Height];
-            fixed (byte* ptr = &matrix[0])
-            {
-                var dstPix = PixelInfo.Gray(ptr, image.Width, image.Width, image.Height);
-                new CopyBitwiseImageOp().Perform(image, dstPix);
-            }
+            var dstPixelInfo = new PixelInfo(image.Width, image.Height, SubPixelType.Gray);
+            var matrix = new byte[dstPixelInfo.Length];
+            new CopyBitwiseImageOp().Perform(image, matrix, dstPixelInfo);
             Matrix = matrix;
         }
 

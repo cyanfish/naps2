@@ -93,15 +93,13 @@ public static class TwainMemoryBufferReader
             {
                 ThrowForUnsupportedPixelType(imageData);
             }
-            fixed (byte* srcPtr = &source[0])
+            var srcPixelInfo = new PixelInfo(memoryBuffer.Columns, memoryBuffer.Rows, SubPixelType.Rgb,
+                memoryBuffer.BytesPerRow);
+            new CopyBitwiseImageOp
             {
-                var srcPix = PixelInfo.Rgb(srcPtr, memoryBuffer.BytesPerRow, memoryBuffer.Columns, memoryBuffer.Rows);
-                new CopyBitwiseImageOp
-                {
-                    DestXOffset = memoryBuffer.XOffset,
-                    DestYOffset = memoryBuffer.YOffset
-                }.Perform(srcPix, outputImage);
-            }
+                DestXOffset = memoryBuffer.XOffset,
+                DestYOffset = memoryBuffer.YOffset
+            }.Perform(source, srcPixelInfo, outputImage);
         }
         else
         {

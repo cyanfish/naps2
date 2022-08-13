@@ -1,110 +1,29 @@
 namespace NAPS2.Images.Bitwise;
 
-public struct PixelInfo
+public class PixelInfo
 {
-    // TODO: Maybe use a PixelOrdering enum instead of N methods
-    /// <summary>
-    /// Represents R-G-B subpixel ordering, with 8 bits per component (24 total).
-    /// </summary>
-    public static unsafe PixelInfo Rgb(byte* data, int stride, int w, int h) => new()
+    public PixelInfo(int width, int height, SubPixelType subPixelType, int stride = -1)
     {
-        data = data,
-        stride = stride,
-        w = w,
-        h = h,
-        bitsPerPixel = 24,
-        bytesPerPixel = 3,
-        rOff = 0,
-        gOff = 1,
-        bOff = 2
-    };
+        var minStride = (width * subPixelType.BitsPerPixel + 7) / 8;
+        if (stride == -1)
+        {
+            stride = minStride;
+        }
+        else if (stride < minStride)
+        {
+            throw new ArgumentException("Invalid stride");
+        }
+        Width = width;
+        Height = height;
+        SubPixelType = subPixelType;
+        Stride = stride;
+        Length = stride * height;
+    }
 
-    /// <summary>
-    /// Represents B-G-R subpixel ordering, with 8 bits per component (24 total).
-    /// </summary>
-    public static unsafe PixelInfo Bgr(byte* data, int stride, int w, int h) => new()
-    {
-        data = data,
-        stride = stride,
-        w = w,
-        h = h,
-        bitsPerPixel = 24,
-        bytesPerPixel = 3,
-        rOff = 2,
-        gOff = 1,
-        bOff = 0
-    };
-
-    /// <summary>
-    /// Represents R-G-B-A subpixel ordering, with 8 bits per component (32 total).
-    /// </summary>
-    public static unsafe PixelInfo Rgba(byte* data, int stride, int w, int h) => new()
-    {
-        data = data,
-        stride = stride,
-        w = w,
-        h = h,
-        bitsPerPixel = 32,
-        bytesPerPixel = 4,
-        rOff = 0,
-        gOff = 1,
-        bOff = 2,
-        aOff = 3
-    };
-
-    /// <summary>
-    /// Represents B-G-R-A subpixel ordering, with 8 bits per component (32 total).
-    /// </summary>
-    public static unsafe PixelInfo Bgra(byte* data, int stride, int w, int h) => new()
-    {
-        data = data,
-        stride = stride,
-        w = w,
-        h = h,
-        bitsPerPixel = 32,
-        bytesPerPixel = 4,
-        rOff = 2,
-        gOff = 1,
-        bOff = 0,
-        aOff = 3
-    };
-
-    /// <summary>
-    /// Represents 8 bit grayscale.
-    /// </summary>
-    public static unsafe PixelInfo Gray(byte* data, int stride, int w, int h) => new()
-    {
-        data = data,
-        stride = stride,
-        w = w,
-        h = h,
-        bitsPerPixel = 8,
-        bytesPerPixel = 1
-    };
-
-    /// <summary>
-    /// Represents 1 bit per pixel, 0 = black, 1 = white.
-    /// </summary>
-    public static unsafe PixelInfo Bit(byte* data, int stride, int w, int h) => new()
-    {
-        data = data,
-        stride = stride,
-        w = w,
-        h = h,
-        bitsPerPixel = 1
-    };
-
-    public unsafe byte* data;
-    public int stride;
-    public int w;
-    public int h;
-    public int bitsPerPixel;
-    public int bytesPerPixel;
-    public int rOff;
-    public int gOff;
-    public int bOff;
-    public int aOff;
-    public bool invertY;
-
-    public (int, int, int, int, int) BitLayout => (bitsPerPixel, rOff, gOff, bOff, aOff);
+    public int Width { get; }
+    public int Height { get; }
+    public SubPixelType SubPixelType { get; }
+    public int Stride { get; }
+    public long Length { get; }
+    public bool InvertY { get; init; }
 }

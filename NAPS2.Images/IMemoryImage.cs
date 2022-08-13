@@ -48,9 +48,9 @@ public interface IMemoryImage : IImageStorage
     /// Obtains access to the underlying binary data for the image.
     /// </summary>
     /// <param name="lockMode">The access level (read/write) needed.</param>
-    /// <param name="pixelInfo">Information about the raw binary pixel data.</param>
+    /// <param name="imageData">The raw binary image data.</param>
     /// <returns>An object that, when disposed, releases the lock.</returns>
-    ImageLockState Lock(LockMode lockMode, out PixelInfo pixelInfo);
+    ImageLockState Lock(LockMode lockMode, out BitwiseImageData imageData);
 
     /// <summary>
     /// Gets the original image file's format (e.g. png/jpeg) if known.

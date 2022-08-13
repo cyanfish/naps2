@@ -4,30 +4,33 @@ public abstract class UnaryBitwiseImageOp : BitwiseImageOp
 {
     public void Perform(IMemoryImage image)
     {
-        using var srcLock = image.Lock(LockMode, out var pix);
-        Validate(pix);
-        PerformCore(pix);
+        using var srcLock = image.Lock(LockMode, out var data);
+        ValidateAndPerform(data);
     }
 
-    public void Perform(PixelInfo pix)
+    public unsafe void Perform(byte[] byteArray, PixelInfo pixelInfo)
     {
-        Validate(pix);
-        PerformCore(pix);
+        fixed (byte* ptr = byteArray)
+        {
+            var data = new BitwiseImageData(ptr, pixelInfo);
+            ValidateAndPerform(data);
+        }
     }
 
-    private void Validate(PixelInfo pix)
+    private void ValidateAndPerform(BitwiseImageData data)
     {
-        ValidateConsistency(pix);
-        ValidateCore(pix);
+        ValidateConsistency(data);
+        ValidateCore(data);
+        PerformCore(data);
     }
 
     protected virtual LockMode LockMode => LockMode.ReadWrite;
 
-    protected abstract void PerformCore(PixelInfo pix);
+    protected abstract void PerformCore(BitwiseImageData data);
 
-    protected virtual void ValidateCore(PixelInfo pix)
+    protected virtual void ValidateCore(BitwiseImageData data)
     {
-        if (pix.bytesPerPixel == 0)
+        if (data.bytesPerPixel == 0)
         {
             throw new InvalidOperationException(
                 "Can't perform this op on a black & white image; copy it to RGB(A) first.");

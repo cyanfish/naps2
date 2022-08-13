@@ -33,7 +33,7 @@ public class GdiImage : IMemoryImage
 
     public ImagePixelFormat PixelFormat => Bitmap.PixelFormat.AsImagePixelFormat();
 
-    public ImageLockState Lock(LockMode lockMode, out PixelInfo pixelInfo)
+    public ImageLockState Lock(LockMode lockMode, out BitwiseImageData imageData)
     {
         throw new NotImplementedException();
     }
