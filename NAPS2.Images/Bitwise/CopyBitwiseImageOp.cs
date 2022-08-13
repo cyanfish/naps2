@@ -44,7 +44,7 @@ public class CopyBitwiseImageOp : BinaryBitwiseImageOp
 
     protected override void PerformCore(BitwiseImageData src, BitwiseImageData dst, int partStart, int partEnd)
     {
-        if (src.BitLayout == dst.BitLayout && SourceXOffset == 0 && Columns == -1)
+        if (src.BitLayout == dst.BitLayout && SourceXOffset == 0 && Columns == null)
         {
             FastCopy(src, dst, partStart, partEnd);
         }
@@ -141,7 +141,7 @@ public class CopyBitwiseImageOp : BinaryBitwiseImageOp
                         int luma;
                         if (copyFromGray)
                         {
-                            luma = *(srcPixel + src.rOff) * 1000;
+                            luma = *srcPixel * 1000;
                         }
                         else
                         {
@@ -203,12 +203,16 @@ public class CopyBitwiseImageOp : BinaryBitwiseImageOp
 
     private unsafe void FastCopy(BitwiseImageData src, BitwiseImageData dst, int partStart, int partEnd)
     {
-        var w = Columns ?? src.w;
-        var bytesPerRow = src.bytesPerPixel * src.w;
+        var bytesPerRow = (src.bitsPerPixel * src.w + 7) / 8;
         for (int i = partStart; i < partEnd; i++)
         {
             var srcRow = src.ptr + src.stride * (i + SourceYOffset);
-            var dstRow = dst.ptr + dst.stride * (i + DestYOffset) + DestXOffset * dst.bytesPerPixel;
+            var dstY = i + DestYOffset;
+            if (dst.invertY)
+            {
+                dstY = dst.h - dstY - 1;
+            }
+            var dstRow = dst.ptr + dst.stride * dstY + DestXOffset * dst.bytesPerPixel;
             Buffer.MemoryCopy(srcRow, dstRow, bytesPerRow, bytesPerRow);
         }
     }

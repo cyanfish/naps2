@@ -15,8 +15,8 @@ public class PdfiumPdfRendererTests : ContextualTests
         var images = new PdfiumPdfRenderer().Render(ImageContext, path, 300).ToList();
 
         Assert.Equal(2, images.Count);
-        ImageAsserts.Similar(PdfResources.word_p1, images[0]);
-        ImageAsserts.Similar(PdfResources.word_p2, images[1]);
+        ImageAsserts.Similar(PdfResources.word_p1, images[0], ignoreResolution: true);
+        ImageAsserts.Similar(PdfResources.word_p2, images[1], ignoreResolution: true);
     }
 
     [Fact]
@@ -42,6 +42,6 @@ public class PdfiumPdfRendererTests : ContextualTests
 
         Assert.Single(images);
         // This also verifies that the renderer gets the actual image dpi (72)
-        ImageAsserts.Similar(ImageResources.ocr_test, images[0]);
+        ImageAsserts.Similar(ImageResources.ocr_test, images[0], ignoreResolution: true);
     }
 }
