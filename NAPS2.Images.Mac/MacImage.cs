@@ -18,6 +18,7 @@ public class MacImage : IMemoryImage
         {
             _imageRep = new NSBitmapImageRep(_image.Representations()[0].Handle, false);
         }
+        // TODO: Also verify color spaces.
         // TODO: How to handle samplesperpixel = 3 here?
         if (_imageRep.BitsPerPixel == 32 && _imageRep.BitsPerSample == 8) // && _imageRep.SamplesPerPixel == 4)
         {
@@ -76,7 +77,7 @@ public class MacImage : IMemoryImage
         var stride = (int) _imageRep.BytesPerRow;
         pixelInfo = PixelFormat switch
         {
-            // TODO: Verify pixel order is correct / base it on imageRep
+            // TODO: Base pixel ordering on _imageRep.BitmapFormat
             ImagePixelFormat.RGB24 => PixelInfo.Rgb(data, stride, Width, Height),
             ImagePixelFormat.ARGB32 => PixelInfo.Rgba(data, stride, Width, Height),
             ImagePixelFormat.Gray8 => PixelInfo.Gray(data, stride, Width, Height),

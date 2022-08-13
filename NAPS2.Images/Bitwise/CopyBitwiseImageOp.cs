@@ -6,6 +6,7 @@ public class CopyBitwiseImageOp : BinaryBitwiseImageOp
     private const int R_MULT = 299;
     private const int G_MULT = 587;
     private const int B_MULT = 114;
+
     // TODO: Consider requiring an explicit DiscardAlpha parameter
 
     public int DestXOffset { get; init; }
@@ -24,6 +25,10 @@ public class CopyBitwiseImageOp : BinaryBitwiseImageOp
         {
             throw new ArgumentException();
         }
+        if (src.invertY)
+        {
+            throw new ArgumentException();
+        }
     }
 
     protected override void PerformCore(PixelInfo src, PixelInfo dst)
@@ -32,23 +37,15 @@ public class CopyBitwiseImageOp : BinaryBitwiseImageOp
         {
             FastCopy(src, dst);
         }
-        else if (src.bytesPerPixel is 3 or 4 && dst.bytesPerPixel is 3 or 4)
+        else if (src.bytesPerPixel is 1 or 3 or 4 && dst.bytesPerPixel is 1 or 3 or 4)
         {
             RgbaCopy(src, dst);
         }
-        else if (src.bytesPerPixel is 3 or 4 && dst.bytesPerPixel == 1)
-        {
-            RgbToGrayCopy(src, dst);
-        }
-        else if (src.bytesPerPixel == 1 && dst.bytesPerPixel is 3 or 4)
-        {
-            GrayToRgbCopy(src, dst);
-        }
-        else if (src.bitsPerPixel == 1 && dst.bytesPerPixel is 3 or 4)
+        else if (src.bitsPerPixel == 1 && dst.bytesPerPixel is 1 or 3 or 4)
         {
             BitToRgbCopy(src, dst);
         }
-        else if (dst.bitsPerPixel == 1 && src.bytesPerPixel is 3 or 4)
+        else if (dst.bitsPerPixel == 1 && src.bytesPerPixel is 1 or 3 or 4)
         {
             RgbToBitCopy(src, dst);
         }
@@ -61,29 +58,42 @@ public class CopyBitwiseImageOp : BinaryBitwiseImageOp
     private unsafe void RgbaCopy(PixelInfo src, PixelInfo dst)
     {
         bool copyAlpha = src.bytesPerPixel == 4 && dst.bytesPerPixel == 4;
-        bool copyToRgb = dst.bytesPerPixel >= 3;
+        bool copyFromGray = src.bytesPerPixel == 1;
         bool copyToGray = dst.bytesPerPixel == 1;
         for (int i = 0; i < src.h; i++)
         {
             var srcRow = src.data + src.stride * i;
-            var dstRow = dst.data + dst.stride * (i + DestYOffset);
+            var dstY = i + DestYOffset;
+            if (dst.invertY)
+            {
+                dstY = dst.h - dstY - 1;
+            }
+            var dstRow = dst.data + dst.stride * dstY;
             for (int j = 0; j < src.w; j++)
             {
                 var srcPixel = srcRow + j * src.bytesPerPixel;
                 var dstPixel = dstRow + (j + DestXOffset) * dst.bytesPerPixel;
-                var r = *(srcPixel + src.rOff);
-                var g = *(srcPixel + src.gOff);
-                var b = *(srcPixel + src.bOff);
-                if (copyToRgb)
+                byte r, g, b;
+                if (copyFromGray)
                 {
-                    *(dstPixel + dst.rOff) = r;
-                    *(dstPixel + dst.gOff) = g;
-                    *(dstPixel + dst.bOff) = b;
+                    r = g = b = *srcPixel;
+                }
+                else
+                {
+                    r = *(srcPixel + src.rOff);
+                    g = *(srcPixel + src.gOff);
+                    b = *(srcPixel + src.bOff);
                 }
                 if (copyToGray)
                 {
                     var luma = (byte) ((r * R_MULT + g * G_MULT + b * B_MULT) / 1000);
                     *dstPixel = luma;
+                }
+                else
+                {
+                    *(dstPixel + dst.rOff) = r;
+                    *(dstPixel + dst.gOff) = g;
+                    *(dstPixel + dst.bOff) = b;
                 }
                 if (copyAlpha)
                 {
@@ -93,51 +103,19 @@ public class CopyBitwiseImageOp : BinaryBitwiseImageOp
         }
     }
 
-    // TODO: If branch prediction is actually so fast, can we combine some of these together?
-    private unsafe void RgbToGrayCopy(PixelInfo src, PixelInfo dst)
-    {
-        for (int i = 0; i < src.h; i++)
-        {
-            var srcRow = src.data + src.stride * i;
-            var dstRow = dst.data + dst.stride * (i + DestYOffset);
-            for (int j = 0; j < src.w; j++)
-            {
-                var srcPixel = srcRow + j * src.bytesPerPixel;
-                var dstPixel = dstRow + j + DestXOffset;
-                var r = *(srcPixel + src.rOff);
-                var g = *(srcPixel + src.gOff);
-                var b = *(srcPixel + src.bOff);
-                var luma = (byte) ((r * R_MULT + g * G_MULT + b * B_MULT) / 1000);
-                *dstPixel = luma;
-            }
-        }
-    }
-
-    private unsafe void GrayToRgbCopy(PixelInfo src, PixelInfo dst)
-    {
-        for (int i = 0; i < src.h; i++)
-        {
-            var srcRow = src.data + src.stride * i;
-            var dstRow = dst.data + dst.stride * (i + DestYOffset);
-            for (int j = 0; j < src.w; j++)
-            {
-                var srcPixel = srcRow + j;
-                var dstPixel = dstRow + j * dst.bytesPerPixel + DestXOffset;
-                var luma = *srcPixel;
-                *(dstPixel + dst.rOff) = luma;
-                *(dstPixel + dst.gOff) = luma;
-                *(dstPixel + dst.bOff) = luma;
-            }
-        }
-    }
-
     private unsafe void RgbToBitCopy(PixelInfo src, PixelInfo dst)
     {
+        bool copyFromGray = src.bytesPerPixel == 1;
         var thresholdAdjusted = ((int) (BlackWhiteThreshold * 1000) + 1000) * 255 / 2;
         for (int i = 0; i < src.h; i++)
         {
             var srcRow = src.data + src.stride * i;
-            var dstRow = dst.data + dst.stride * (i + DestYOffset);
+            var dstY = i + DestYOffset;
+            if (dst.invertY)
+            {
+                dstY = dst.h - dstY - 1;
+            }
+            var dstRow = dst.data + dst.stride * dstY;
             for (int j = 0; j < src.w; j += 8)
             {
                 byte monoByte = 0;
@@ -147,10 +125,18 @@ public class CopyBitwiseImageOp : BinaryBitwiseImageOp
                     if (j + k < src.w)
                     {
                         var srcPixel = srcRow + (j + k) * src.bytesPerPixel;
-                        byte r = *(srcPixel + src.rOff);
-                        byte g = *(srcPixel + src.gOff);
-                        byte b = *(srcPixel + src.bOff);
-                        int luma = r * R_MULT + g * G_MULT + b * B_MULT;
+                        int luma;
+                        if (copyFromGray)
+                        {
+                            luma = *(srcPixel + src.rOff) * 1000;
+                        }
+                        else
+                        {
+                            var r = *(srcPixel + src.rOff);
+                            var g = *(srcPixel + src.gOff);
+                            var b = *(srcPixel + src.bOff);
+                            luma = r * R_MULT + g * G_MULT + b * B_MULT;
+                        }
                         if (luma >= thresholdAdjusted)
                         {
                             monoByte |= 1;
@@ -164,10 +150,16 @@ public class CopyBitwiseImageOp : BinaryBitwiseImageOp
 
     private unsafe void BitToRgbCopy(PixelInfo src, PixelInfo dst)
     {
+        bool copyToGray = dst.bytesPerPixel == 1;
         for (int i = 0; i < src.h; i++)
         {
             var srcRow = src.data + src.stride * i;
-            var dstRow = dst.data + dst.stride * (i + DestYOffset);
+            var dstY = i + DestYOffset;
+            if (dst.invertY)
+            {
+                dstY = dst.h - dstY - 1;
+            }
+            var dstRow = dst.data + dst.stride * dstY;
             for (int j = 0; j < src.w; j += 8)
             {
                 byte monoByte = *(srcRow + j / 8);
@@ -179,9 +171,16 @@ public class CopyBitwiseImageOp : BinaryBitwiseImageOp
                     {
                         var dstPixel = dstRow + (j + k) * dst.bytesPerPixel;
                         var luma = (byte) (bit == 0 ? 0 : 255);
-                        *(dstPixel + dst.rOff) = luma;
-                        *(dstPixel + dst.gOff) = luma;
-                        *(dstPixel + dst.bOff) = luma;
+                        if (copyToGray)
+                        {
+                            *dstPixel = luma;
+                        }
+                        else
+                        {
+                            *(dstPixel + dst.rOff) = luma;
+                            *(dstPixel + dst.gOff) = luma;
+                            *(dstPixel + dst.bOff) = luma;
+                        }
                     }
                 }
             }

@@ -43,6 +43,10 @@ public abstract class BinaryBitwiseImageOp : BitwiseImageOp
         {
             throw new ArgumentException("Source and destination dimensions must match");
         }
+        if (src.invertY || dst.invertY)
+        {
+            throw new ArgumentException("InvertY is not supported");
+        }
     }
 
     protected abstract LockMode SrcLockMode { get; }

@@ -2,6 +2,7 @@ namespace NAPS2.Images.Bitwise;
 
 public struct PixelInfo
 {
+    // TODO: Maybe use a PixelOrdering enum instead of N methods
     /// <summary>
     /// Represents R-G-B subpixel ordering, with 8 bits per component (24 total).
     /// </summary>
@@ -103,6 +104,7 @@ public struct PixelInfo
     public int gOff;
     public int bOff;
     public int aOff;
+    public bool invertY;
 
     public (int, int, int, int, int) BitLayout => (bitsPerPixel, rOff, gOff, bOff, aOff);
 }
