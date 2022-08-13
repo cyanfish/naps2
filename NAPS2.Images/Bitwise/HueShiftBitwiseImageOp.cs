@@ -6,7 +6,7 @@ public class HueShiftBitwiseImageOp : UnaryBitwiseImageOp
 
     public HueShiftBitwiseImageOp(float shift)
     {
-        _shiftAdjusted = shift * 3;
+        _shiftAdjusted = shift * -3;
         if (_shiftAdjusted < 0)
         {
             _shiftAdjusted += 6;
