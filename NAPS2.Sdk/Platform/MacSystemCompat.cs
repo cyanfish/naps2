@@ -1,4 +1,5 @@
-﻿using NAPS2.Platform.Mac;
+﻿using System.Runtime.InteropServices;
+using NAPS2.Platform.Mac;
 
 namespace NAPS2.Platform;
 
@@ -21,7 +22,10 @@ public class MacSystemCompat : ISystemCompat
 
     public string? TesseractExecutablePath => null;
 
-    public string PdfiumLibraryPath => "_mac/libpdfium.dylib";
+    public string PdfiumLibraryPath =>
+        RuntimeInformation.ProcessArchitecture == Architecture.Arm64
+            ? "_macarm/libpdfium.dylib"
+            : "_mac/libpdfium.dylib";
 
     public IntPtr LoadLibrary(string path) => MacInterop.dlopen(path, RTLD_LAZY | RTLD_GLOBAL);
 
