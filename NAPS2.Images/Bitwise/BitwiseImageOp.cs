@@ -2,6 +2,8 @@ namespace NAPS2.Images.Bitwise;
 
 public class BitwiseImageOp
 {
+    protected int DefaultPartitionCount { get; } = Math.Max(Math.Min(Environment.ProcessorCount / 2, 4), 1);
+    
     protected unsafe void ValidateConsistency(BitwiseImageData data)
     {
         if (data.ptr == (byte*)IntPtr.Zero)

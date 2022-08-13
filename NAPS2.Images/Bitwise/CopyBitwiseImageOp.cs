@@ -31,23 +31,23 @@ public class CopyBitwiseImageOp : BinaryBitwiseImageOp
         }
     }
 
-    protected override void PerformCore(BitwiseImageData src, BitwiseImageData dst)
+    protected override void PerformCore(BitwiseImageData src, BitwiseImageData dst, int partStart, int partEnd)
     {
         if (src.BitLayout == dst.BitLayout)
         {
-            FastCopy(src, dst);
+            FastCopy(src, dst, partStart, partEnd);
         }
         else if (src.bytesPerPixel is 1 or 3 or 4 && dst.bytesPerPixel is 1 or 3 or 4)
         {
-            RgbaCopy(src, dst);
+            RgbaCopy(src, dst, partStart, partEnd);
         }
         else if (src.bitsPerPixel == 1 && dst.bytesPerPixel is 1 or 3 or 4)
         {
-            BitToRgbCopy(src, dst);
+            BitToRgbCopy(src, dst, partStart, partEnd);
         }
         else if (dst.bitsPerPixel == 1 && src.bytesPerPixel is 1 or 3 or 4)
         {
-            RgbToBitCopy(src, dst);
+            RgbToBitCopy(src, dst, partStart, partEnd);
         }
         else
         {
@@ -55,12 +55,12 @@ public class CopyBitwiseImageOp : BinaryBitwiseImageOp
         }
     }
 
-    private unsafe void RgbaCopy(BitwiseImageData src, BitwiseImageData dst)
+    private unsafe void RgbaCopy(BitwiseImageData src, BitwiseImageData dst, int partStart, int partEnd)
     {
         bool copyAlpha = src.bytesPerPixel == 4 && dst.bytesPerPixel == 4;
         bool copyFromGray = src.bytesPerPixel == 1;
         bool copyToGray = dst.bytesPerPixel == 1;
-        for (int i = 0; i < src.h; i++)
+        for (int i = partStart; i < partEnd; i++)
         {
             var srcRow = src.ptr + src.stride * i;
             var dstY = i + DestYOffset;
@@ -103,11 +103,11 @@ public class CopyBitwiseImageOp : BinaryBitwiseImageOp
         }
     }
 
-    private unsafe void RgbToBitCopy(BitwiseImageData src, BitwiseImageData dst)
+    private unsafe void RgbToBitCopy(BitwiseImageData src, BitwiseImageData dst, int partStart, int partEnd)
     {
         bool copyFromGray = src.bytesPerPixel == 1;
         var thresholdAdjusted = ((int) (BlackWhiteThreshold * 1000) + 1000) * 255 / 2;
-        for (int i = 0; i < src.h; i++)
+        for (int i = partStart; i < partEnd; i++)
         {
             var srcRow = src.ptr + src.stride * i;
             var dstY = i + DestYOffset;
@@ -148,10 +148,10 @@ public class CopyBitwiseImageOp : BinaryBitwiseImageOp
         }
     }
 
-    private unsafe void BitToRgbCopy(BitwiseImageData src, BitwiseImageData dst)
+    private unsafe void BitToRgbCopy(BitwiseImageData src, BitwiseImageData dst, int partStart, int partEnd)
     {
         bool copyToGray = dst.bytesPerPixel == 1;
-        for (int i = 0; i < src.h; i++)
+        for (int i = partStart; i < partEnd; i++)
         {
             var srcRow = src.ptr + src.stride * i;
             var dstY = i + DestYOffset;
@@ -187,10 +187,10 @@ public class CopyBitwiseImageOp : BinaryBitwiseImageOp
         }
     }
 
-    private unsafe void FastCopy(BitwiseImageData src, BitwiseImageData dst)
+    private unsafe void FastCopy(BitwiseImageData src, BitwiseImageData dst, int partStart, int partEnd)
     {
         var bytesPerRow = src.bytesPerPixel * src.w;
-        for (int i = 0; i < src.h; i++)
+        for (int i = partStart; i < partEnd; i++)
         {
             var srcRow = src.ptr + src.stride * i;
             var dstRow = dst.ptr + dst.stride * (i + DestYOffset) + DestXOffset * dst.bytesPerPixel;

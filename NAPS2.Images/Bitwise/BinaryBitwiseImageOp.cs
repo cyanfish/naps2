@@ -28,14 +28,14 @@ public abstract class BinaryBitwiseImageOp : BitwiseImageOp
             ValidateAndPerform(srcData, dstData);
         }
     }
-    
+
     public unsafe void Perform(IntPtr src, PixelInfo srcPixelInfo, IMemoryImage dst)
     {
         using var dstLock = dst.Lock(DstLockMode, out var dstData);
         var srcData = new BitwiseImageData((byte*) src, srcPixelInfo);
         ValidateAndPerform(srcData, dstData);
     }
-    
+
     public unsafe void Perform(IMemoryImage src, IntPtr dst, PixelInfo dstPixelInfo)
     {
         using var srcLock = src.Lock(SrcLockMode, out var srcData);
@@ -48,8 +48,27 @@ public abstract class BinaryBitwiseImageOp : BitwiseImageOp
         ValidateConsistency(src);
         ValidateConsistency(dst);
         ValidateCore(src, dst);
-        PerformCore(src, dst);
+
+        var partitionSize = GetPartitionSize(src, dst);
+        var partitionCount = GetPartitionCount(src, dst);
+        if (partitionCount == 1)
+        {
+            PerformCore(src, dst, 0, partitionSize);
+        }
+        else
+        {
+            int div = (partitionSize + partitionCount - 1) / partitionCount;
+            Parallel.For(0, partitionCount, i =>
+            {
+                int start = div * i, end = Math.Min(div * (i + 1), partitionSize);
+                PerformCore(src, dst, start, end);
+            });
+        }
     }
+
+    protected virtual int GetPartitionSize(BitwiseImageData src, BitwiseImageData dst) => src.h;
+
+    protected virtual int GetPartitionCount(BitwiseImageData src, BitwiseImageData dst) => DefaultPartitionCount;
 
     protected virtual void ValidateCore(BitwiseImageData src, BitwiseImageData dst)
     {
@@ -67,5 +86,5 @@ public abstract class BinaryBitwiseImageOp : BitwiseImageOp
 
     protected abstract LockMode DstLockMode { get; }
 
-    protected abstract void PerformCore(BitwiseImageData src, BitwiseImageData dst);
+    protected abstract void PerformCore(BitwiseImageData src, BitwiseImageData dst, int partStart, int partEnd);
 }

@@ -21,12 +21,31 @@ public abstract class UnaryBitwiseImageOp : BitwiseImageOp
     {
         ValidateConsistency(data);
         ValidateCore(data);
-        PerformCore(data);
+
+        var partitionSize = GetPartitionSize(data);
+        var partitionCount = GetPartitionCount(data);
+        if (partitionCount == 1)
+        {
+            PerformCore(data, 0, partitionSize);
+        }
+        else
+        {
+            int div = (partitionSize + partitionCount - 1) / partitionCount;
+            Parallel.For(0, partitionCount, i =>
+            {
+                int start = div * i, end = Math.Min(div * (i + 1), partitionSize);
+                PerformCore(data, start, end);
+            });
+        }
     }
+
+    protected virtual int GetPartitionSize(BitwiseImageData data) => data.h;
+    
+    protected virtual int GetPartitionCount(BitwiseImageData data) => DefaultPartitionCount;
 
     protected virtual LockMode LockMode => LockMode.ReadWrite;
 
-    protected abstract void PerformCore(BitwiseImageData data);
+    protected abstract void PerformCore(BitwiseImageData data, int partStart, int partEnd);
 
     protected virtual void ValidateCore(BitwiseImageData data)
     {

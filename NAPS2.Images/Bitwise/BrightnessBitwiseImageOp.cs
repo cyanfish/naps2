@@ -9,11 +9,11 @@ public class BrightnessBitwiseImageOp : UnaryBitwiseImageOp
         _brightnessAdjusted = brightness * 255;
     }
 
-    protected override void PerformCore(BitwiseImageData data)
+    protected override void PerformCore(BitwiseImageData data, int partStart, int partEnd)
     {
         if (data.bytesPerPixel is 3 or 4)
         {
-            PerformRgba(data);
+            PerformRgba(data, partStart, partEnd);
         }
         else
         {
@@ -21,9 +21,9 @@ public class BrightnessBitwiseImageOp : UnaryBitwiseImageOp
         }
     }
 
-    private unsafe void PerformRgba(BitwiseImageData data)
+    private unsafe void PerformRgba(BitwiseImageData data, int partStart, int partEnd)
     {
-        for (int i = 0; i < data.h; i++)
+        for (int i = partStart; i < partEnd; i++)
         {
             var row = data.ptr + data.stride * i;
             for (int j = 0; j < data.w; j++)
