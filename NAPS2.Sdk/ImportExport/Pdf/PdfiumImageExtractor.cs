@@ -1,8 +1,9 @@
+using NAPS2.Images.Bitwise;
 using NAPS2.ImportExport.Pdf.Pdfium;
 
 namespace NAPS2.ImportExport.Pdf;
 
-public class PdfiumImageExtractor
+public static class PdfiumImageExtractor
 {
     public static IMemoryImage? GetSingleImage(ImageContext imageContext, PdfPage page)
     {
@@ -25,7 +26,6 @@ public class PdfiumImageExtractor
     private static IMemoryImage? GetImageFromObject(ImageContext imageContext, PdfPageObject imageObj,
         PdfImageMetadata metadata)
     {
-        var bitmapFactory = new PdfiumBitmapFactory(imageContext);
         // TODO: This condition is never actually true for some reason, we need to use this code path if there is either a monochrome mask or softmask
         // TODO: Might need a pdfium fix.
         if (imageObj.HasTransparency)
@@ -35,7 +35,7 @@ public class PdfiumImageExtractor
             using var pdfBitmap = imageObj.GetRenderedBitmap();
             if (pdfBitmap.Format is ImagePixelFormat.RGB24 or ImagePixelFormat.ARGB32)
             {
-                return bitmapFactory.CopyPdfBitmapToNewImage(pdfBitmap, metadata);
+                return CopyPdfBitmapToNewImage(imageContext, pdfBitmap, metadata);
             }
             return null;
         }
@@ -48,17 +48,18 @@ public class PdfiumImageExtractor
         {
             if (metadata.BitsPerPixel == 24 && metadata.Colorspace == Colorspace.DeviceRgb)
             {
-                return bitmapFactory.LoadRawRgb(imageObj.GetImageDataDecoded(), metadata);
+                return LoadRaw(imageContext, imageObj.GetImageDataDecoded(), metadata, ImagePixelFormat.RGB24,
+                    SubPixelType.Rgb);
             }
             if (metadata.BitsPerPixel == 1 && metadata.Colorspace == Colorspace.DeviceGray)
             {
-                // TODO: Needs testing
-                return bitmapFactory.LoadRawBlackAndWhite(imageObj.GetImageDataDecoded(), metadata);
+                return LoadRaw(imageContext, imageObj.GetImageDataDecoded(), metadata, ImagePixelFormat.BW1,
+                    SubPixelType.Bit);
             }
         }
         if (imageObj.HasImageFilters("CCITTFaxDecode"))
         {
-            return bitmapFactory.LoadRawCcitt(imageObj.GetImageDataDecoded(), metadata);
+            return CcittReader.LoadRawCcitt(imageContext, imageObj.GetImageDataDecoded(), metadata);
         }
         // If we can't read the raw data ourselves, we can try and rely on Pdfium to materialize a bitmap, which is a
         // bit less efficient
@@ -71,12 +72,33 @@ public class PdfiumImageExtractor
             using var pdfBitmap = imageObj.GetBitmap();
             if (pdfBitmap.Format is ImagePixelFormat.RGB24 or ImagePixelFormat.ARGB32)
             {
-                return bitmapFactory.CopyPdfBitmapToNewImage(pdfBitmap, metadata);
+                return CopyPdfBitmapToNewImage(imageContext, pdfBitmap, metadata);
             }
         }
         // Otherwise we fall back to relying on Pdfium to render the whole page which is least efficient and won't have
         // the correct DPI
         return null;
+    }
+
+    private static IMemoryImage CopyPdfBitmapToNewImage(ImageContext imageContext, PdfBitmap pdfBitmap,
+        PdfImageMetadata imageMetadata)
+    {
+        var dstImage = imageContext.Create(pdfBitmap.Width, pdfBitmap.Height, pdfBitmap.Format);
+        dstImage.SetResolution(imageMetadata.HorizontalDpi, imageMetadata.VerticalDpi);
+        var subPixelType = pdfBitmap.Format == ImagePixelFormat.ARGB32 ? SubPixelType.Bgra : SubPixelType.Bgr;
+        var srcPixelInfo = new PixelInfo(pdfBitmap.Width, pdfBitmap.Height, subPixelType, pdfBitmap.Stride);
+        new CopyBitwiseImageOp().Perform(pdfBitmap.Buffer, srcPixelInfo, dstImage);
+        return dstImage;
+    }
+
+    private static IMemoryImage LoadRaw(ImageContext imageContext, byte[] buffer, PdfImageMetadata metadata,
+        ImagePixelFormat newImagePixelFormat, SubPixelType bufferSubPixelType)
+    {
+        var image = imageContext.Create(metadata.Width, metadata.Height, newImagePixelFormat);
+        image.OriginalFileFormat = ImageFileFormat.Png;
+        var srcPixelInfo = new PixelInfo(image.Width, image.Height, bufferSubPixelType);
+        new CopyBitwiseImageOp().Perform(buffer, srcPixelInfo, image);
+        return image;
     }
 
     public static PdfPageObject? GetSingleImageObject(PdfPage page)

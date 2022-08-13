@@ -1,6 +1,7 @@
 ﻿using System.Globalization;
 using System.Runtime.InteropServices;
 using System.Threading;
+using NAPS2.Images.Bitwise;
 using NAPS2.ImportExport.Pdf.Pdfium;
 using NAPS2.Ocr;
 using NAPS2.Scan;
@@ -509,54 +510,26 @@ public class PdfExporter : IPdfExporter
             _image.Save(ms, ImageFileFormat.Jpeg);
         }
 
-        public unsafe void SaveAsPdfBitmap(MemoryStream ms)
+        public void SaveAsPdfBitmap(MemoryStream ms)
         {
-            var bytesPerPixel = _image.PixelFormat switch
+            var subPixelType = _image.PixelFormat switch
             {
-                ImagePixelFormat.ARGB32 => 4,
-                ImagePixelFormat.RGB24 => 3,
+                ImagePixelFormat.ARGB32 => SubPixelType.Bgra,
+                ImagePixelFormat.RGB24 => SubPixelType.Bgr,
                 _ => throw new InvalidOperationException("Expected 24 or 32 bit bitmap")
             };
-            int height = _image.Height;
-            int width = _image.Width;
-            ms.SetLength(height * width * bytesPerPixel);
-            var buffer = ms.GetBuffer();
-            using var data = _image.Lock(LockMode.ReadOnly, out var scan0, out var stride);
-            for (int y = 0; y < height; y++)
-            {
-                for (int x = 0; x < width; x++)
-                {
-                    var pixelData = (byte*) (scan0 + y * stride + x * bytesPerPixel);
-                    int bufferIndex = ((height - y - 1) * width + x) * bytesPerPixel;
-                    buffer[bufferIndex] = *pixelData;
-                    buffer[bufferIndex + 1] = *(pixelData + 1);
-                    buffer[bufferIndex + 2] = *(pixelData + 2);
-                    if (bytesPerPixel == 4)
-                    {
-                        buffer[bufferIndex + 3] = *(pixelData + 3);
-                    }
-                }
-            }
+            var dstPixelInfo = new PixelInfo(_image.Width, _image.Height, subPixelType) { InvertY = true };
+            ms.SetLength(dstPixelInfo.Length);
+            new CopyBitwiseImageOp().Perform(_image, ms.GetBuffer(), dstPixelInfo);
         }
 
-        public unsafe void SaveAsPdfIndexedBitmap(MemoryStream ms)
+        public void SaveAsPdfIndexedBitmap(MemoryStream ms)
         {
             if (_image.PixelFormat != ImagePixelFormat.BW1)
                 throw new InvalidOperationException("Expected 1 bit bitmap");
-            int height = _image.Height;
-            int width = _image.Width;
-            int bytesPerRow = (width - 1) / 8 + 1;
-            ms.SetLength(height * bytesPerRow);
-            var buffer = ms.GetBuffer();
-            using var data = _image.Lock(LockMode.ReadOnly, out var scan0, out var stride);
-            for (int y = 0; y < height; y++)
-            {
-                for (int x = 0; x < bytesPerRow; x++)
-                {
-                    var pixelData = (byte*) (scan0 + y * stride + x);
-                    buffer[(height - y - 1) * bytesPerRow + x] = *pixelData;
-                }
-            }
+            var dstPixelInfo = new PixelInfo(_image.Width, _image.Height, SubPixelType.Bit) { InvertY = true };
+            ms.SetLength(dstPixelInfo.Length);
+            new CopyBitwiseImageOp().Perform(_image, ms.GetBuffer(), dstPixelInfo);
         }
 
         public int Width => _image.Width;
@@ -583,7 +556,7 @@ public class PdfExporter : IPdfExporter
                 {
                     return XImageFormat.Rgb24;
                 }
-                throw new Exception("Unsupported pixel format");
+                throw new Exception($"Unsupported pixel format: {_exportFormat.PixelFormat}");
             }
         }
     }
