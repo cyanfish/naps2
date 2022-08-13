@@ -27,6 +27,14 @@ public class MacImage : IMemoryImage
         {
             PixelFormat = ImagePixelFormat.RGB24;
         }
+        else if (_imageRep.BitsPerPixel == 8 && _imageRep.BitsPerSample == 8 && _imageRep.SamplesPerPixel == 1)
+        {
+            PixelFormat = ImagePixelFormat.Gray8;
+        }
+        else if (_imageRep.BitsPerPixel == 1 && _imageRep.BitsPerSample == 1 && _imageRep.SamplesPerPixel == 1)
+        {
+            PixelFormat = ImagePixelFormat.BW1;
+        }
         else
         {
             throw new Exception("Unexpected image representation");
@@ -71,6 +79,8 @@ public class MacImage : IMemoryImage
             // TODO: Verify pixel order is correct / base it on imageRep
             ImagePixelFormat.RGB24 => PixelInfo.Rgb(data, stride, Width, Height),
             ImagePixelFormat.ARGB32 => PixelInfo.Rgba(data, stride, Width, Height),
+            ImagePixelFormat.Gray8 => PixelInfo.Gray(data, stride, Width, Height),
+            ImagePixelFormat.BW1 => PixelInfo.Bit(data, stride, Width, Height),
             _ => throw new InvalidOperationException("Unsupported pixel format")
         };
         return new MacImageLockState();

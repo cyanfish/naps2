@@ -81,6 +81,18 @@ public struct PixelInfo
         bytesPerPixel = 1
     };
 
+    /// <summary>
+    /// Represents 1 bit per pixel, 0 = black, 1 = white.
+    /// </summary>
+    public static unsafe PixelInfo Bit(byte* data, int stride, int w, int h) => new()
+    {
+        data = data,
+        stride = stride,
+        w = w,
+        h = h,
+        bitsPerPixel = 1
+    };
+
     public unsafe byte* data;
     public int stride;
     public int w;

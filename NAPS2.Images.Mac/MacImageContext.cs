@@ -82,6 +82,8 @@ public class MacImageContext : ImageContext
                     IntPtr.Zero, width, height, 8, 4, true, false, NSColorSpace.DeviceRGB, 4 * width, 32),
                 ImagePixelFormat.RGB24 => new NSBitmapImageRep(
                     IntPtr.Zero, width, height, 8, 3, false, false, NSColorSpace.DeviceRGB, 3 * width, 24),
+                ImagePixelFormat.BW1 => new NSBitmapImageRep(
+                    IntPtr.Zero, width, height, 1, 1, false, false, NSColorSpace.DeviceWhite, (width + 7) / 8, 1),
                 _ => throw new ArgumentException("Unsupported pixel format")
             };
             var image = new NSImage(rep.Size);

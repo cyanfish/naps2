@@ -102,7 +102,12 @@ public abstract class AbstractImageTransformer<TImage> where TImage : IMemoryIma
             return image;
         }
 
-        var monoBitmap = UnsafeImageOps.ConvertTo1Bpp(image, transform.Threshold, ImageContext);
+        var monoBitmap = ImageContext.Create(image.Width, image.Height, ImagePixelFormat.BW1);
+        monoBitmap.SetResolution(image.HorizontalResolution, image.VerticalResolution);
+        new CopyBitwiseImageOp
+        {
+            BlackWhiteThreshold = transform.Threshold / 1000f
+        }.Perform(image, monoBitmap);
         image.Dispose();
 
         return (TImage) monoBitmap;
@@ -110,12 +115,14 @@ public abstract class AbstractImageTransformer<TImage> where TImage : IMemoryIma
 
     protected virtual TImage PerformTransform(TImage image, ColorBitDepthTransform transform)
     {
-        if (image.PixelFormat != ImagePixelFormat.BW1)
+        if (image.PixelFormat is ImagePixelFormat.RGB24 or ImagePixelFormat.ARGB32)
         {
             return image;
         }
 
-        var colorBitmap = UnsafeImageOps.ConvertTo24Bpp(image, ImageContext);
+        var colorBitmap = ImageContext.Create(image.Width, image.Height, ImagePixelFormat.RGB24);
+        colorBitmap.SetResolution(image.HorizontalResolution, image.VerticalResolution);
+        new CopyBitwiseImageOp().Perform(image, colorBitmap);
         image.Dispose();
 
         return (TImage) colorBitmap;
