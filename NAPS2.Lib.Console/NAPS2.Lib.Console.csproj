@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net5-windows;net462</TargetFrameworks>
+    <TargetFrameworks>net6;net462</TargetFrameworks>
     <Nullable>enable</Nullable>
     <RootNamespace>NAPS2</RootNamespace>
 
@@ -15,8 +15,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\NAPS2.Lib.Common\NAPS2.Lib.Common.csproj" />
-    <!-- TODO: Do we want to remove this reference? -->
-    <ProjectReference Include="..\NAPS2.Lib.WinForms\NAPS2.Lib.WinForms.csproj" />
     <PackageReference Include="CommandLineParser" Version="2.9.1" />
   </ItemGroup>
   

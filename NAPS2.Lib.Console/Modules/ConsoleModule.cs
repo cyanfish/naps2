@@ -24,7 +24,8 @@ public class ConsoleModule : NinjectModule
         Bind<ErrorOutput>().To<ConsoleErrorOutput>().InSingletonScope();
         Bind<IOverwritePrompt>().To<ConsoleOverwritePrompt>();
         Bind<OperationProgress>().To<ConsoleOperationProgress>();
-        Bind<DialogHelper>().To<WinFormsDialogHelper>(); // TODO: We don't really want this, but it is an explicit option, so it's okay for now...
+        // TODO: We might want an eto-based dialog helper, or at least handle dialogs in a more user-friendly way than just silently doing nothing
+        Bind<DialogHelper>().To<StubDialogHelper>();
         Bind<ConsoleOutput>().ToSelf().WithConstructorArgument("writer", Console.Out);
         Bind<ISaveNotify>().To<SaveNotifyStub>();
         Bind<IDevicePrompt>().To<ConsoleDevicePrompt>();

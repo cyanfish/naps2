@@ -25,7 +25,7 @@
 
   <ItemGroup>
     <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
-      <_Parameter1>NAPS2.Lib.Tests</_Parameter1>
+      <_Parameter1>NAPS2.Lib.WinForms.Tests</_Parameter1>
     </AssemblyAttribute>
   </ItemGroup>
 

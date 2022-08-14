@@ -25,9 +25,9 @@ public class ScanDriverFactoryBuilder
         return this;
     }
 
-    public ScanDriverFactoryBuilder WithScannedImages(params Bitmap[] images)
+    public ScanDriverFactoryBuilder WithScannedImages(params byte[][] images)
     {
-        _scanDriver.AddScanResult(images.Select(bitmap => (IMemoryImage) new GdiImage(bitmap)).ToList());
+        _scanDriver.AddScanResult(images.Select(image => TestImageContextFactory.Get().Load(image)).ToList());
         return this;
     }
 

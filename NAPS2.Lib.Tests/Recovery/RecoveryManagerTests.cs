@@ -179,6 +179,6 @@ public class RecoveryManagerTests : ContextualTests
 
     private ProcessedImage CreateRecoveryImage(ScanningContext recoveryContext)
     {
-        return recoveryContext.CreateProcessedImage(new GdiImage(ImageResources.color_image));
+        return recoveryContext.CreateProcessedImage(ImageContext.Load(ImageResources.color_image));
     }
 }

@@ -1,7 +1,7 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFrameworks>net6;net462</TargetFrameworks>
+        <TargetFrameworks>net6-windows;net462</TargetFrameworks>
         <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
         <RootNamespace>NAPS2.Lib.Tests</RootNamespace>
     </PropertyGroup>
@@ -11,13 +11,8 @@
     <Import Project="..\NAPS2.Setup\LibUsers.targets" />
 
     <ItemGroup>
-        <Reference Include="PdfSharpCore">
-            <HintPath>..\NAPS2.Setup\lib\PdfSharpCore.dll</HintPath>
-        </Reference>
-
         <ProjectReference Include="..\NAPS2.Sdk.Tests\NAPS2.Sdk.Tests.csproj" />
-<!--        <ProjectReference Include="..\NAPS2.Lib.WinForms\NAPS2.Lib.WinForms.csproj" />-->
-        <ProjectReference Include="..\NAPS2.Lib.Console\NAPS2.Lib.Console.csproj" />
+        <ProjectReference Include="..\NAPS2.Lib.WinForms\NAPS2.Lib.WinForms.csproj" />
 
         <PackageReference Include="Moq" Version="4.18.1" />
         <PackageReference Include="xunit" Version="2.4.1" />

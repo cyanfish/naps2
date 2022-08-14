@@ -22,16 +22,20 @@ public class ConsoleOperationProgress : OperationProgress
 
     public override void ShowModalProgress(IOperation op)
     {
-        if (!op.IsFinished)
-        {
-            var form = _formFactory.Create<FProgress>();
-            form.Operation = op;
-            form.ShowDialog();
-        }
+        // TODO: We might want to use an eto-based progress form, or at least show some kind of indicator
+        // Where is this method called from anyway?
+
+        // if (!op.IsFinished)
+        // {
+        //     var form = _formFactory.Create<FProgress>();
+        //     form.Operation = op;
+        //     form.ShowDialog();
+        // }
         op.Wait();
     }
 
-    public override void ShowBackgroundProgress(IOperation op) {
+    public override void ShowBackgroundProgress(IOperation op)
+    {
     }
 
     public override List<IOperation> ActiveOperations => throw new NotSupportedException();

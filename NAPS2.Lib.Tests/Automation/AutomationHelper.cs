@@ -19,12 +19,12 @@ internal class AutomationHelper
         _testOutputHelper = testOutputHelper;
     }
 
-    public Task RunCommand(AutomatedScanningOptions options, params Bitmap[] imagesToScan)
+    public Task RunCommand(AutomatedScanningOptions options, params byte[][] imagesToScan)
     {
         return RunCommand(options, null, imagesToScan);
     }
 
-    public Task RunCommand(AutomatedScanningOptions options, Action<IKernel> setup, params Bitmap[] imagesToScan)
+    public Task RunCommand(AutomatedScanningOptions options, Action<IKernel> setup, params byte[][] imagesToScan)
     {
         return RunCommand(options, setup, new ScanDriverFactoryBuilder().WithScannedImages(imagesToScan).Build());
     }
