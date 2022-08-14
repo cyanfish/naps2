@@ -234,7 +234,7 @@ public class CopyBitwiseImageOp : BinaryBitwiseImageOp
                 var srcByte = *(srcRow + srcPixelIndex / 8);
                 var bit = (srcByte >> (7 - srcPixelIndex % 8)) & 1;
                 var dstPixelIndex = j + DestXOffset;
-                var dstPtr = dstRow + srcPixelIndex / 8;
+                var dstPtr = dstRow + dstPixelIndex / 8;
                 var dstByte = *dstPtr;
                 dstByte |= (byte) (bit << (7 - dstPixelIndex % 8));
                 *dstPtr = dstByte;

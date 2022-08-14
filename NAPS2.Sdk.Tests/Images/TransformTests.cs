@@ -246,7 +246,7 @@ public class TransformTests : ContextualTests
         ImageAsserts.Similar(expected, actual, ImageAsserts.NULL_RMSE_THRESHOLD);
     }
 
-    // TODO: Add test for crop with black & white image (and possibly white & black)
+    // TODO: If we implement white-black (instead of black-white) images, add a crop test
     [Fact]
     public void Crop()
     {
@@ -256,6 +256,20 @@ public class TransformTests : ContextualTests
         actual = ImageContext.PerformTransform(actual, new CropTransform(10, 20, 15, 5));
 
         ImageAsserts.Similar(expected, actual, ImageAsserts.GENERAL_RMSE_THRESHOLD);
+    }
+
+    [Fact]
+    public void CropBlackWhiteBeforeAfter()
+    {
+        IMemoryImage first = LoadImage(ImageResources.color_image);
+        IMemoryImage second = LoadImage(ImageResources.color_image);
+
+        first = ImageContext.PerformTransform(first, new BlackWhiteTransform());
+        first = ImageContext.PerformTransform(first, new CropTransform(10, 20, 15, 5));
+        second = ImageContext.PerformTransform(second, new CropTransform(10, 20, 15, 5));
+        second = ImageContext.PerformTransform(second, new BlackWhiteTransform());
+
+        ImageAsserts.Similar(first, second, ImageAsserts.NULL_RMSE_THRESHOLD);
     }
 
     [Fact]
