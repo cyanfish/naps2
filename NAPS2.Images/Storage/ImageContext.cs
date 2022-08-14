@@ -50,6 +50,8 @@ public abstract class ImageContext
         ImageType = imageType;
         _pdfRenderer = pdfRenderer;
     }
+    
+    protected bool LoadFromFileKeepsLock { get; init; }
 
     // TODO: Add NotNullWhen attribute?
     protected bool MaybeRenderPdf(ImageFileStorage fileStorage, out IMemoryImage? renderedPdf)
@@ -176,13 +178,17 @@ public abstract class ImageContext
                 {
                     return renderedPdf!;
                 }
-                // Rather than creating a bitmap from the file directly, instead we read it into memory first.
-                // This ensures we don't accidentally keep a lock on the storage file, which would cause an error if we
-                // try to delete it before the bitmap is disposed.
-                // This is less efficient in the case where the bitmap is guaranteed to be disposed quickly, but for now
-                // that seems like a reasonable tradeoff to avoid a whole class of hard-to-diagnose errors.
-                var stream = new MemoryStream(File.ReadAllBytes(fileStorage.FullPath));
-                return Load(stream);
+                if (LoadFromFileKeepsLock)
+                {
+                    // Rather than creating a bitmap from the file directly, instead we read it into memory first.
+                    // This ensures we don't accidentally keep a lock on the storage file, which would cause an error if we
+                    // try to delete it before the bitmap is disposed.
+                    // This is less efficient in the case where the bitmap is guaranteed to be disposed quickly, but for now
+                    // that seems like a reasonable tradeoff to avoid a whole class of hard-to-diagnose errors.
+                    var stream = new MemoryStream(File.ReadAllBytes(fileStorage.FullPath));
+                    return Load(stream);
+                }
+                return Load(fileStorage.FullPath);
             case ImageMemoryStorage memoryStorage:
                 if (MaybeRenderPdf(memoryStorage, out var renderedMemoryPdf))
                 {

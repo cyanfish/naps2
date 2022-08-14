@@ -9,6 +9,7 @@ public class GdiImageContext : ImageContext
     
     public GdiImageContext() : this(null)
     {
+        LoadFromFileKeepsLock = true;
     }
 
     public GdiImageContext(IPdfRenderer? pdfRenderer) : base(typeof(GdiImage), pdfRenderer)

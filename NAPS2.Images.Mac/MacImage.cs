@@ -38,6 +38,8 @@ public class MacImage : IMemoryImage
         }
         else
         {
+            // TODO: Draw on a known format image
+            // See https://stackoverflow.com/questions/52675655/how-to-keep-nsbitmapimagerep-from-creating-lots-of-intermediate-cgimages
             throw new Exception("Unexpected image representation");
         }
     }
@@ -150,9 +152,19 @@ public class MacImage : IMemoryImage
     {
         lock (MacImageContext.ConstructorLock)
         {
-            var image = new MacImage(new NSImage(_image.Copy().Handle, true));
-            image.OriginalFileFormat = OriginalFileFormat;
-            return image;
+            if (PixelFormat == ImagePixelFormat.BW1)
+            {
+                // TODO: Trying to copy the NSImage seems to fail specifically for black and white images.
+                // I'm not sure why.
+                var image = new MacImageContext().Create(Width, Height, PixelFormat);
+                new CopyBitwiseImageOp().Perform(this, image);
+                return image;
+            }
+
+            return new MacImage(new NSImage(_image.Copy().Handle, true))
+            {
+                OriginalFileFormat = OriginalFileFormat
+            };
         }
     }
 
