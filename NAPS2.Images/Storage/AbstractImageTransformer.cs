@@ -48,14 +48,27 @@ public abstract class AbstractImageTransformer<TImage> where TImage : IMemoryIma
 
     protected virtual TImage PerformTransform(TImage image, BrightnessTransform transform)
     {
+        if (image.PixelFormat is ImagePixelFormat.BW1)
+        {
+            // No need to handle black & white since brightness is a null transform
+            return image;
+        }
+
         float brightnessNormalized = transform.Brightness / 1000f;
         EnsurePixelFormat(ref image);
+        // TODO: We need to implement brightness for Gray8
         new BrightnessBitwiseImageOp(brightnessNormalized).Perform(image);
         return image;
     }
 
     protected virtual TImage PerformTransform(TImage image, TrueContrastTransform transform)
     {
+        if (image.PixelFormat is ImagePixelFormat.BW1 or ImagePixelFormat.Gray8)
+        {
+            // No need to handle grayscale since contrast is a null transform
+            return image;
+        }
+
         var contrastNormalized = transform.Contrast / 1000f;
         EnsurePixelFormat(ref image);
         new ContrastBitwiseImageOp(contrastNormalized).Perform(image);
@@ -64,9 +77,9 @@ public abstract class AbstractImageTransformer<TImage> where TImage : IMemoryIma
 
     protected virtual TImage PerformTransform(TImage image, HueTransform transform)
     {
-        if (image.PixelFormat == ImagePixelFormat.BW1)
+        if (image.PixelFormat is ImagePixelFormat.BW1 or ImagePixelFormat.Gray8)
         {
-            // No need to handle 1bpp since hue shifts are null transforms
+            // No need to handle grayscale since hue shifts are null transforms
             return image;
         }
 
@@ -75,7 +88,18 @@ public abstract class AbstractImageTransformer<TImage> where TImage : IMemoryIma
         return image;
     }
 
-    protected abstract TImage PerformTransform(TImage image, SaturationTransform transform);
+    protected virtual TImage PerformTransform(TImage image, SaturationTransform transform)
+    {
+        if (image.PixelFormat is ImagePixelFormat.BW1 or ImagePixelFormat.Gray8)
+        {
+            // No need to handle grayscale since saturation is a null transform
+            return image;
+        }
+
+        float saturationNormalized = transform.Saturation / 1000f;
+        new SaturationBitwiseImageOp(saturationNormalized).Perform(image);
+        return image;
+    }
 
     protected abstract TImage PerformTransform(TImage image, SharpenTransform transform);
 

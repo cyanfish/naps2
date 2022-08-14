@@ -65,7 +65,7 @@ public class HueShiftBitwiseImageOp : UnaryBitwiseImageOp
                 float sat = (max == 0) ? 0 : 1f - (1f * min / max);
                 float val = max;
 
-                int hi = (int) Math.Floor(hue);
+                int hi = (int) hue;
                 float f = hue - hi;
 
                 byte v = (byte) (val);

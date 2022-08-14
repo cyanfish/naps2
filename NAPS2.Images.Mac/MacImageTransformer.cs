@@ -8,11 +8,6 @@ public class MacImageTransformer : AbstractImageTransformer<MacImage>
     {
     }
 
-    protected override MacImage PerformTransform(MacImage image, SaturationTransform transform)
-    {
-        throw new NotImplementedException();
-    }
-
     protected override MacImage PerformTransform(MacImage image, SharpenTransform transform)
     {
         throw new NotImplementedException();
@@ -47,7 +42,6 @@ public class MacImageTransformer : AbstractImageTransformer<MacImage>
         return newImage;
     }
 
-    // TODO: Add tests
     protected override MacImage PerformTransform(MacImage image, ScaleTransform transform)
     {
         var width = (int) Math.Round(image.Width * transform.ScaleFactor);

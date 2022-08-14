@@ -89,4 +89,32 @@ public class BitwiseTests : ContextualTests
             Columns = SIZE - 2
         }.Perform(image1, image2);
     }
+
+    [Fact]
+    public void Brightness()
+    {
+        var image = ImageContext.Create(SIZE, SIZE, ImagePixelFormat.ARGB32);
+        new BrightnessBitwiseImageOp(0.5f).Perform(image);
+    }
+
+    [Fact]
+    public void Contrast()
+    {
+        var image = ImageContext.Create(SIZE, SIZE, ImagePixelFormat.ARGB32);
+        new ContrastBitwiseImageOp(0.5f).Perform(image);
+    }
+
+    [Fact]
+    public void HueShift()
+    {
+        var image = ImageContext.Create(SIZE, SIZE, ImagePixelFormat.ARGB32);
+        new HueShiftBitwiseImageOp(0.5f).Perform(image);
+    }
+
+    [Fact]
+    public void Saturation()
+    {
+        var image = ImageContext.Create(SIZE, SIZE, ImagePixelFormat.ARGB32);
+        new SaturationBitwiseImageOp(0.5f).Perform(image);
+    }
 }
