@@ -55,7 +55,11 @@ internal class TwainSessionScanRunner
         {
             Debug.WriteLine("NAPS2.TW - Opening session");
             var dsmHandle = _handleManager.GetDsmHandle(_options.DialogParent, _options.UseNativeUI);
+#if NET6_0_OR_GREATER
+            var rc = _session.Open();
+#else
             var rc = _session.Open(new WindowsFormsMessageLoopHook(dsmHandle));
+#endif
             if (rc != ReturnCode.Success)
             {
                 throw new DeviceException($"TWAIN session open error: {rc}");
@@ -201,6 +205,10 @@ internal class TwainSessionScanRunner
         Debug.WriteLine("NAPS2.TW - DataTransferred");
         try
         {
+            // TODO: We probably want to support native transfer for mac/net6
+#if NET6_0_OR_GREATER
+            _twainEvents.MemoryBufferTransferred(ToMemoryBuffer(e.MemoryData, e.MemoryInfo));
+#else
             if (_options.TwainOptions.TransferMode == TwainTransferMode.Memory)
             {
                 _twainEvents.MemoryBufferTransferred(ToMemoryBuffer(e.MemoryData, e.MemoryInfo));
@@ -212,6 +220,7 @@ internal class TwainSessionScanRunner
                     Buffer = ByteString.FromStream(e.GetNativeImageStream())
                 });
             }
+#endif
         }
         catch (Exception ex)
         {
@@ -225,10 +234,14 @@ internal class TwainSessionScanRunner
         try
         {
             var pageStart = new TwainPageStart();
+#if NET6_0_OR_GREATER
+            pageStart.ImageData = ToImageData(e.PendingImageInfo);
+#else
             if (_options.TwainOptions.TransferMode == TwainTransferMode.Memory)
             {
                 pageStart.ImageData = ToImageData(e.PendingImageInfo);
             }
+#endif
             _twainEvents.PageStart(pageStart);
             if (_cancelToken.IsCancellationRequested)
             {
@@ -272,11 +285,15 @@ internal class TwainSessionScanRunner
 
     private void ConfigureSource(DataSource source)
     {
+#if NET6_0_OR_GREATER
+        source.Capabilities.ICapXferMech.SetValue(XferMech.Memory);
+#else
         // Transfer Mode
         if (_options.TwainOptions.TransferMode == TwainTransferMode.Memory)
         {
             source.Capabilities.ICapXferMech.SetValue(XferMech.Memory);
         }
+#endif
 
         if (_options.UseNativeUI)
         {

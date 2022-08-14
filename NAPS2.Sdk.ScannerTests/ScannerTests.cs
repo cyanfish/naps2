@@ -9,13 +9,13 @@ public class ScannerTests
     // TODO: Make real tests for WIA/TWAIN, Flatbed/Feeder, Color/Gray/BW, DPIs, etc.
 
     [ScannerFact]
-    public async Task Test1()
+    public async Task ScanWithWia()
     {
         var imageContext = TestImageContextFactory.Get();
         using var scanningContext = new ScanningContext(imageContext);
 
         var scanController = new ScanController(scanningContext);
-        var devices = await scanController.GetDeviceList();
+        var devices = await scanController.GetDeviceList(Driver.Wia);
         var device = GetUserDevice(devices);
 
         var options = new ScanOptions
@@ -30,12 +30,36 @@ public class ScannerTests
         var image = await source.Next();
 
         Assert.NotNull(image);
-        
+
         using var rendered = imageContext.Render(image);
-        
+
         // TODO: Aside from generating the relevant files/resources, we also need to consider how to compare images when ImageAsserts assumes perfect pixel alignment.
         // TODO: One possibility is having a section of the test page with gradual gradients and only compare that subsection of the images. 
         // ImageAsserts.Similar(ScannerTestResources.naps2_test_page, rendered);
+    }
+
+    [ScannerFact]
+    public async Task ScanWithTwain()
+    {
+        var imageContext = TestImageContextFactory.Get();
+        using var scanningContext = new ScanningContext(imageContext);
+
+        var scanController = new ScanController(scanningContext);
+        var devices = await scanController.GetDeviceList(Driver.Twain);
+        var device = GetUserDevice(devices);
+
+        var options = new ScanOptions
+        {
+            Device = device,
+            Driver = Driver.Twain,
+            PaperSource = PaperSource.Flatbed,
+            Dpi = 100
+        };
+
+        var source = scanController.Scan(options);
+        var image = await source.Next();
+
+        Assert.NotNull(image);
     }
 
     // TODO: Generalize the common infrastructure into helper classes (ScannerTests as a base class, FlatbedTests, FeederTests, etc.?)

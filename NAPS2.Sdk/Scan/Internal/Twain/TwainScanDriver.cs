@@ -1,4 +1,5 @@
 ﻿using System.Reflection;
+using System.Runtime.InteropServices;
 using System.Threading;
 using NAPS2.Platform.Windows;
 using NTwain;
@@ -56,7 +57,7 @@ internal class TwainScanDriver : IScanDriver
 
     private ITwainSessionController GetSessionController(ScanOptions options)
     {
-        if (options.TwainOptions.Dsm != TwainDsm.NewX64)
+        if (options.TwainOptions.Dsm != TwainDsm.NewX64 && RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
         {
             return new RemoteTwainSessionController(_scanningContext);
         }

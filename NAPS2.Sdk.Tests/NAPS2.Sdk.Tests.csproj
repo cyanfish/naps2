@@ -14,6 +14,9 @@
     <Reference Include="PdfSharpCore">
       <HintPath>..\NAPS2.Setup\lib\PdfSharpCore.dll</HintPath>
     </Reference>
+    <Reference Include="NTwain" Condition="'$(TargetFramework)' == 'net6'">
+      <HintPath>..\NAPS2.Setup\lib\NTwain.dll</HintPath>
+    </Reference>
   
     <ProjectReference Include="..\NAPS2.Sdk\NAPS2.Sdk.csproj" />
     <ProjectReference Include="..\NAPS2.Images.Mac\NAPS2.Images.Mac.csproj" Condition="$(TargetFramework) == 'net6'" />

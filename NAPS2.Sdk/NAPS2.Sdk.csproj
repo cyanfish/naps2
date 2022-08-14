@@ -36,6 +36,9 @@
     <Reference Include="PdfSharpCore">
       <HintPath>..\NAPS2.Setup\lib\PdfSharpCore.dll</HintPath>
     </Reference>
+    <Reference Include="NTwain" Condition="'$(TargetFramework)' == 'net6'">
+      <HintPath>..\NAPS2.Setup\lib\NTwain.dll</HintPath>
+    </Reference>
     
     <PackageReference Include="Grpc.Tools" Version="2.47.0" PrivateAssets="all" />
     <PackageReference Include="GrpcDotNetNamedPipes" Version="1.4.4" />
@@ -44,7 +47,7 @@
     <PackageReference Include="NAPS2.Wia" Version="1.0.1" />
     <!-- Hide compatibility warnings for NTwain as it will only be actually used on Windows. -->
     <!-- TODO: Does this actually work if we build a net5 framework-dependent app and try to use Twain? -->
-    <PackageReference Include="NTwain" Version="3.7.1" NoWarn="NU1701" />
+    <PackageReference Include="NTwain" Version="3.7.1" NoWarn="NU1701" Condition="'$(TargetFramework)' == 'net462'" />
     <PackageReference Include="Nullable" Version="1.2.0" />
     <!-- We're deliberately using an older version of System.Drawing.Common to include cross-platform support. -->
     <!-- TODO: Eventually we will get rid of this dependency on non-windows and will be able to upgrade. -->
