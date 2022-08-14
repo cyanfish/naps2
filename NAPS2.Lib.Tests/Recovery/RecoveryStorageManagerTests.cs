@@ -52,8 +52,8 @@ public class RecoveryStorageManagerTests : ContextualTests
         _imageList.Mutate(new ListMutation<UiImage>.Append(image1, image2));
         var indexFileContent = File.ReadAllText(Path.Combine(_recoveryFolder, "index.xml"));
 
-        Assert.Contains("00001.png</FileName>", indexFileContent);
-        Assert.Contains("00002.png</FileName>", indexFileContent);
+        Assert.Contains("00001.jpg</FileName>", indexFileContent);
+        Assert.Contains("00002.jpg</FileName>", indexFileContent);
         Assert.Contains("<BitDepth>C24Bit</BitDepth>", indexFileContent);
         Assert.Contains("<HighQuality>false</HighQuality>", indexFileContent);
     }
@@ -66,13 +66,13 @@ public class RecoveryStorageManagerTests : ContextualTests
 
         _imageList.Mutate(new ListMutation<UiImage>.Append(image1, image2));
         var indexFileContent = File.ReadAllText(Path.Combine(_recoveryFolder, "index.xml"));
-        Assert.Contains("00001.png", indexFileContent);
-        Assert.Contains("00002.png", indexFileContent);
+        Assert.Contains("00001.jpg", indexFileContent);
+        Assert.Contains("00002.jpg", indexFileContent);
 
         _imageList.Mutate(new ListMutation<UiImage>.DeleteSelected(), ListSelection.Of(image1));
         var indexFileContent2 = File.ReadAllText(Path.Combine(_recoveryFolder, "index.xml"));
-        Assert.DoesNotContain("00001.png", indexFileContent2);
-        Assert.Contains("00002.png", indexFileContent2);
+        Assert.DoesNotContain("00001.jpg", indexFileContent2);
+        Assert.Contains("00002.jpg", indexFileContent2);
     }
 
     [Fact]
@@ -80,7 +80,7 @@ public class RecoveryStorageManagerTests : ContextualTests
     {
         var image1 = new UiImage(
             ScanningContext.CreateProcessedImage(
-                new GdiImage(new Bitmap(100, 100)),
+                ImageContext.Create(100, 100, ImagePixelFormat.RGB24),
                 BitDepth.Grayscale,
                 true,
                 -1));
@@ -96,7 +96,7 @@ public class RecoveryStorageManagerTests : ContextualTests
     {
         var image1 = new UiImage(
             ScanningContext.CreateProcessedImage(
-                new GdiImage(new Bitmap(100, 100)),
+                ImageContext.Create(100, 100, ImagePixelFormat.RGB24),
                 new[] {new BrightnessTransform(100)}));
 
         _imageList.Mutate(new ListMutation<UiImage>.Append(image1));

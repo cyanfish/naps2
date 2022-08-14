@@ -58,10 +58,7 @@ internal class TestModule : NinjectModule
             Directory.CreateDirectory(componentsPath);
             return new TesseractLanguageManager(componentsPath);
         }).InSingletonScope();
-        Rebind<IOcrEngine>().ToMethod(ctx => new TesseractOcrEngine(
-            Path.Combine(_folderPath, "tesseract.exe"),
-            _folderPath,
-            _folderPath)).InSingletonScope();
+        Rebind<IOcrEngine>().ToMethod(_ => _scanningContext.OcrEngine ?? new StubOcrEngine());
 
         string recoveryFolderPath = Path.Combine(_folderPath, "recovery");
         var recoveryStorageManager =

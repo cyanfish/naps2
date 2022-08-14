@@ -62,11 +62,7 @@ public class CommandLineIntegrationTests : ContextualTests
     [Fact]
     public async Task ScanWithOcr()
     {
-        var fast = Path.Combine(FolderPath, "fast");
-        Directory.CreateDirectory(fast);
-        CopyResourceToFile(BinaryResources.tesseract_x64, FolderPath, "tesseract.exe");
-        CopyResourceToFile(BinaryResources.eng_traineddata, fast, "eng.traineddata");
-
+        SetUpOcr();
         var path = $"{FolderPath}/test.pdf";
         await _automationHelper.RunCommand(
             new AutomatedScanningOptions

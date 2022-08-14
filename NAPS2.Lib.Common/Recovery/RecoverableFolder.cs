@@ -22,7 +22,7 @@ public class RecoverableFolder : IDisposable
         _importPostProcessor = importPostProcessor;
         _directory = directory;
         string lockFilePath = Path.Combine(directory.FullName, RecoveryStorageManager.LOCK_FILE_NAME);
-        _lockFile = new FileStream(lockFilePath, FileMode.Open);
+        _lockFile = new FileStream(lockFilePath, FileMode.Open, FileAccess.Read, FileShare.None);
         try
         {
             var serializer = new XmlSerializer<RecoveryIndex>();

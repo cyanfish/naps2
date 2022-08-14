@@ -111,7 +111,7 @@ public class ImageListDifferTests : ContextualTests
         var image1 = new UiImage(CreateScannedImage());
         _imageList.Mutate(new ListMutation<UiImage>.Append(image1));
         _differ.GetAndFlushDiffs();
-        image1.SetThumbnail(new GdiImage(new Bitmap(100, 100)), TransformState.Empty);
+        image1.SetThumbnail(ImageContext.Create(100, 100, ImagePixelFormat.RGB24), TransformState.Empty);
 
         var diffs = _differ.GetAndFlushDiffs();
         Assert.Empty(diffs.AppendOperations);
