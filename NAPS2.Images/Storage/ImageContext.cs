@@ -20,8 +20,16 @@ public abstract class ImageContext
         };
     }
 
-    public static ImageFileFormat GetFileFormatFromFirstBytes(byte[] firstBytes)
+    public static ImageFileFormat GetFileFormatFromFirstBytes(Stream stream)
     {
+        if (!stream.CanSeek)
+        {
+            return ImageFileFormat.Unspecified;
+        }
+        var firstBytes = new byte[4];
+        stream.Seek(0, SeekOrigin.Begin);
+        stream.Read(firstBytes, 0, 4);
+        stream.Seek(0, SeekOrigin.Begin);
         if (firstBytes[0] == 0x89 && firstBytes[1] == 0x50 && firstBytes[2] == 0x4E && firstBytes[3] == 0x47)
         {
             return ImageFileFormat.Png;

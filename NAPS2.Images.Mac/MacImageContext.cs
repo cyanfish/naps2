@@ -26,11 +26,78 @@ public class MacImageContext : ImageContext
 
     public override IMemoryImage Load(string path)
     {
+        using var readLock = new FileStream(path, FileMode.Open, FileAccess.Read);
         NSImage image;
         lock (ConstructorLock)
         {
             image = new NSImage(path);
         }
+        CheckReps(path, image);
+        return new MacImage(image)
+        {
+            OriginalFileFormat = GetFileFormatFromExtension(path, true)
+        };
+    }
+
+    public override IMemoryImage Load(Stream stream)
+    {
+        if (stream.CanSeek)
+        {
+            stream.Seek(0, SeekOrigin.Begin);
+        }
+        lock (ConstructorLock)
+        {
+            var image = new NSImage(NSData.FromStream(stream));
+            return new MacImage(image)
+            {
+                OriginalFileFormat = GetFileFormatFromFirstBytes(stream)
+            };
+        }
+    }
+
+    public override IEnumerable<IMemoryImage> LoadFrames(Stream stream, out int count)
+    {
+        NSImage image;
+        lock (ConstructorLock)
+        {
+            image = new NSImage(NSData.FromStream(stream));
+        }
+        count = image.Representations().Length;
+        return SplitFrames(image, GetFileFormatFromFirstBytes(stream));
+    }
+
+    public override IEnumerable<IMemoryImage> LoadFrames(string path, out int count)
+    {
+        using var readLock = new FileStream(path, FileMode.Open, FileAccess.Read);
+        NSImage image;
+        lock (ConstructorLock)
+        {
+            image = new NSImage(path);
+        }
+        CheckReps(path, image);
+        count = image.Representations().Length;
+        return SplitFrames(image, GetFileFormatFromExtension(path, true));
+    }
+
+    private IEnumerable<IMemoryImage> SplitFrames(NSImage image, ImageFileFormat fileFormat)
+    {
+        foreach (var rep in image.Representations())
+        {
+            NSImage frame;
+            lock (ConstructorLock)
+            {
+                frame = new NSImage(rep.Size);
+            }
+            frame.AddRepresentation(rep);
+            yield return new MacImage(frame)
+            {
+                OriginalFileFormat = fileFormat
+            };
+        }
+    }
+
+    private static void CheckReps(string path, NSImage image)
+    {
         if (image.Representations() == null)
         {
             if (!File.Exists(path))
@@ -39,42 +106,6 @@ public class MacImageContext : ImageContext
             }
             throw new IOException($"Error reading image file '{path}'.");
         }
-        var macImage = new MacImage(image);
-        // TODO: Can we get the real format?
-        macImage.OriginalFileFormat = GetFileFormatFromExtension(path, true);
-        return macImage;
-    }
-
-    public override IMemoryImage Load(Stream stream)
-    {
-        var firstBytes = new byte[4];
-        if (stream.CanSeek)
-        {
-            stream.Seek(0, SeekOrigin.Begin);
-            stream.Read(firstBytes, 0, 4);
-            stream.Seek(0, SeekOrigin.Begin);
-        }
-        lock (ConstructorLock)
-        {
-            var nsImage = new NSImage(NSData.FromStream(stream));
-            var image = new MacImage(nsImage);
-            image.OriginalFileFormat = GetFileFormatFromFirstBytes(firstBytes);
-            return image;
-        }
-    }
-
-    public override IEnumerable<IMemoryImage> LoadFrames(Stream stream, out int count)
-    {
-        // TODO: Handle tiffs
-        count = 1;
-        return Enumerable.Repeat(Load(stream), 1);
-    }
-
-    public override IEnumerable<IMemoryImage> LoadFrames(string path, out int count)
-    {
-        // TODO: Handle tiffs
-        count = 1;
-        return Enumerable.Repeat(Load(path), 1);
     }
 
     public override IMemoryImage Create(int width, int height, ImagePixelFormat pixelFormat)

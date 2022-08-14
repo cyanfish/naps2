@@ -1,3 +1,4 @@
+using System.Runtime.InteropServices;
 using System.Threading;
 using Moq;
 using NAPS2.ImportExport;
@@ -156,7 +157,8 @@ public class ImageImporterTests : ContextualTests
         Assert.Null(await source.Next());
     }
     
-    [Fact]
+    // This test doesn't work on Mac as the full file is loaded first, making per-frame loading instant
+    [PlatformFact(exclude: PlatformFlags.Mac)]
     public async Task MultiFrameCancellation()
     {
         var filePath = Path.Combine(FolderPath, "image.tiff");
@@ -192,7 +194,7 @@ public class ImageImporterTests : ContextualTests
         var source = _imageImporter.Import(filePath, new ImportParams(), (current, max) => { }, CancellationToken.None);
 
         var ex = await Assert.ThrowsAsync<FileNotFoundException>(async () => await source.ToList());
-        Assert.Contains("Could not find image file", ex.Message);
+        Assert.Contains("Could not find", ex.Message);
     }
 
     [Fact]
@@ -203,7 +205,10 @@ public class ImageImporterTests : ContextualTests
         var source = _imageImporter.Import(filePath, new ImportParams(), (current, max) => { }, CancellationToken.None);
 
         var ex = await Assert.ThrowsAsync<IOException>(async () => await source.ToList());
-        Assert.Contains("Error reading image file", ex.Message);
+        var expectedMessage = RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
+            ? "Error reading image file"
+            : "being used by another process";
+        Assert.Contains(expectedMessage, ex.Message);
     }
     
     [Fact]
