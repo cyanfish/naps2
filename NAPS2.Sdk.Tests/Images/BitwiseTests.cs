@@ -63,6 +63,20 @@ public class BitwiseTests : ContextualTests
     }
 
     [Fact]
+    public void CopyAlignedBit()
+    {
+        var image1 = ImageContext.Create(SIZE, SIZE, ImagePixelFormat.BW1);
+        var image2 = ImageContext.Create(SIZE, SIZE, ImagePixelFormat.BW1);
+
+        new CopyBitwiseImageOp
+        {
+            SourceXOffset = 8,
+            DestXOffset = 16,
+            Columns = SIZE - 16
+        }.Perform(image1, image2);
+    }
+
+    [Fact]
     public void CopyUnalignedBit()
     {
         var image1 = ImageContext.Create(SIZE, SIZE, ImagePixelFormat.BW1);
