@@ -31,20 +31,30 @@ public class CopyBitwiseImageOp : BinaryBitwiseImageOp
     {
         var w = Columns ?? src.w;
         var h = Rows ?? src.h;
-        if (src.w - SourceXOffset < w || src.h - SourceYOffset < h ||
+        if (SourceXOffset < 0 || SourceYOffset < 0 || DestXOffset < 0 || DestYOffset < 0)
+        {
+            throw new ArgumentException(
+                $"X/Y offsets must be non-negative: {SourceXOffset} {SourceYOffset} {DestXOffset} {DestYOffset}");
+        }
+        if (SourceXOffset + w > src.w || SourceYOffset + h > src.h ||
             dst.w - DestXOffset < w || dst.h - DestYOffset < h)
         {
-            throw new ArgumentException();
+            throw new ArgumentException("X/Y offsets must be within the row/column counts. " +
+                                        $"Offsets: {SourceXOffset} {SourceYOffset} {DestXOffset} {DestYOffset}; " +
+                                        $"Copy dimensions: {w} {h}; " +
+                                        $"Source dimensions: {src.w} {src.h}; " +
+                                        $"Destination dimensions: {dst.w} {dst.h}");
         }
         if (src.invertY)
         {
-            throw new ArgumentException();
+            throw new ArgumentException("Source Y inversion not supported");
         }
     }
 
     protected override void PerformCore(BitwiseImageData src, BitwiseImageData dst, int partStart, int partEnd)
     {
-        if (src.BitLayout == dst.BitLayout && SourceXOffset == 0 && Columns == null)
+        if (src.BitLayout == dst.BitLayout &&
+            (src.bytesPerPixel > 0 || (SourceXOffset % 8 == 0 && DestXOffset % 8 == 0)))
         {
             FastCopy(src, dst, partStart, partEnd);
         }
@@ -52,13 +62,17 @@ public class CopyBitwiseImageOp : BinaryBitwiseImageOp
         {
             RgbaCopy(src, dst, partStart, partEnd);
         }
-        else if (src.bitsPerPixel == 1 && dst.bytesPerPixel is 1 or 3 or 4)
+        else if (src.bitsPerPixel == 1 && dst.bytesPerPixel is 1 or 3 or 4 && SourceXOffset % 8 == 0)
         {
             BitToRgbCopy(src, dst, partStart, partEnd);
         }
-        else if (dst.bitsPerPixel == 1 && src.bytesPerPixel is 1 or 3 or 4)
+        else if (dst.bitsPerPixel == 1 && src.bytesPerPixel is 1 or 3 or 4 && DestXOffset % 8 == 0)
         {
             RgbToBitCopy(src, dst, partStart, partEnd);
+        }
+        else if (src.bitsPerPixel == 1 && dst.bitsPerPixel == 1)
+        {
+            UnalignedBitCopy(src, dst, partStart, partEnd);
         }
         else
         {
@@ -131,10 +145,10 @@ public class CopyBitwiseImageOp : BinaryBitwiseImageOp
             var dstRow = dst.ptr + dst.stride * dstY;
             for (int j = 0; j < w; j += 8)
             {
-                byte monoByte = 0;
+                byte dstByte = 0;
                 for (int k = 0; k < 8; k++)
                 {
-                    monoByte <<= 1;
+                    dstByte <<= 1;
                     if (j + k < src.w)
                     {
                         var srcPixel = srcRow + (j + SourceXOffset + k) * src.bytesPerPixel;
@@ -152,11 +166,11 @@ public class CopyBitwiseImageOp : BinaryBitwiseImageOp
                         }
                         if (luma >= thresholdAdjusted)
                         {
-                            monoByte |= 1;
+                            dstByte |= 1;
                         }
                     }
                 }
-                *(dstRow + j / 8) = monoByte;
+                *(dstRow + (j + DestXOffset) / 8) = dstByte;
             }
         }
     }
@@ -176,14 +190,14 @@ public class CopyBitwiseImageOp : BinaryBitwiseImageOp
             var dstRow = dst.ptr + dst.stride * dstY;
             for (int j = 0; j < w; j += 8)
             {
-                byte monoByte = *(srcRow + j / 8);
+                byte srcByte = *(srcRow + (j + SourceXOffset) / 8);
                 for (int k = 7; k >= 0; k--)
                 {
-                    var bit = monoByte & 1;
-                    monoByte >>= 1;
+                    var bit = srcByte & 1;
+                    srcByte >>= 1;
                     if (j + k < src.w)
                     {
-                        var dstPixel = dstRow + (j + SourceXOffset + k) * dst.bytesPerPixel;
+                        var dstPixel = dstRow + (j + DestXOffset + k) * dst.bytesPerPixel;
                         var luma = (byte) (bit == 0 ? 0 : 255);
                         if (copyToGray)
                         {
@@ -201,9 +215,10 @@ public class CopyBitwiseImageOp : BinaryBitwiseImageOp
         }
     }
 
-    private unsafe void FastCopy(BitwiseImageData src, BitwiseImageData dst, int partStart, int partEnd)
+    private unsafe void UnalignedBitCopy(BitwiseImageData src, BitwiseImageData dst, int partStart, int partEnd)
     {
-        var bytesPerRow = (src.bitsPerPixel * src.w + 7) / 8;
+        // TODO: This could be a lot faster if we use 64-bit (aligned) shifts & masks for the "middle" bytes
+        var w = Columns ?? src.w;
         for (int i = partStart; i < partEnd; i++)
         {
             var srcRow = src.ptr + src.stride * (i + SourceYOffset);
@@ -212,7 +227,36 @@ public class CopyBitwiseImageOp : BinaryBitwiseImageOp
             {
                 dstY = dst.h - dstY - 1;
             }
-            var dstRow = dst.ptr + dst.stride * dstY + DestXOffset * dst.bytesPerPixel;
+            var dstRow = dst.ptr + dst.stride * dstY;
+            for (int j = 0; j < w; j++)
+            {
+                var srcPixelIndex = j + SourceXOffset;
+                var srcByte = *(srcRow + srcPixelIndex / 8);
+                var bit = (srcByte >> (7 - srcPixelIndex % 8)) & 1;
+                var dstPixelIndex = j + DestXOffset;
+                var dstPtr = dstRow + srcPixelIndex / 8;
+                var dstByte = *dstPtr;
+                dstByte |= (byte) (bit << (7 - dstPixelIndex % 8));
+                *dstPtr = dstByte;
+            }
+        }
+    }
+
+    private unsafe void FastCopy(BitwiseImageData src, BitwiseImageData dst, int partStart, int partEnd)
+    {
+        var w = Columns ?? src.w;
+        var bytesPerRow = (src.bitsPerPixel * w + 7) / 8;
+        var srcXBytesOff = SourceXOffset * src.bitsPerPixel / 8;
+        var dstXBytesOff = DestXOffset * dst.bitsPerPixel / 8;
+        for (int i = partStart; i < partEnd; i++)
+        {
+            var srcRow = src.ptr + src.stride * (i + SourceYOffset) + srcXBytesOff;
+            var dstY = i + DestYOffset;
+            if (dst.invertY)
+            {
+                dstY = dst.h - dstY - 1;
+            }
+            var dstRow = dst.ptr + dst.stride * dstY + dstXBytesOff;
             Buffer.MemoryCopy(srcRow, dstRow, bytesPerRow, bytesPerRow);
         }
     }

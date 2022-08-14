@@ -16,7 +16,7 @@ public class BitwiseTests : ContextualTests
 
         new CopyBitwiseImageOp().Perform(image1, image2);
     }
-    
+
     [Fact]
     public void CopyColor()
     {
@@ -25,7 +25,7 @@ public class BitwiseTests : ContextualTests
 
         new CopyBitwiseImageOp().Perform(image1, image2);
     }
-    
+
     [Fact]
     public void CopyToGray()
     {
@@ -34,7 +34,7 @@ public class BitwiseTests : ContextualTests
 
         new CopyBitwiseImageOp().Perform(image1, image2);
     }
-    
+
     [Fact]
     public void CopyFromGray()
     {
@@ -43,7 +43,7 @@ public class BitwiseTests : ContextualTests
 
         new CopyBitwiseImageOp().Perform(image1, image2);
     }
-    
+
     [Fact]
     public void CopyToBit()
     {
@@ -52,7 +52,7 @@ public class BitwiseTests : ContextualTests
 
         new CopyBitwiseImageOp().Perform(image1, image2);
     }
-    
+
     [Fact]
     public void CopyFromBit()
     {
@@ -60,5 +60,19 @@ public class BitwiseTests : ContextualTests
         var image2 = ImageContext.Create(SIZE, SIZE, ImagePixelFormat.ARGB32);
 
         new CopyBitwiseImageOp().Perform(image1, image2);
+    }
+
+    [Fact]
+    public void CopyUnalignedBit()
+    {
+        var image1 = ImageContext.Create(SIZE, SIZE, ImagePixelFormat.BW1);
+        var image2 = ImageContext.Create(SIZE, SIZE, ImagePixelFormat.BW1);
+
+        new CopyBitwiseImageOp
+        {
+            SourceXOffset = 1,
+            DestXOffset = 2,
+            Columns = SIZE - 2
+        }.Perform(image1, image2);
     }
 }

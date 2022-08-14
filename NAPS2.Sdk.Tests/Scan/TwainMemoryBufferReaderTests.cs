@@ -403,36 +403,6 @@ public class TwainMemoryBufferReaderTests : ContextualTests
         Assert.Throws<ArgumentException>(() => TwainMemoryBufferReader.CopyBufferToImage(buffer, imageData, image));
     }
 
-    [Fact]
-    public void InvalidColorImagePixelFormat()
-    {
-        var buffer = SomeValidBuffer();
-        var imageData = CreateColorImageData(2, 2);
-        var image = Create1BitImage(2, 2);
-
-        Assert.Throws<ArgumentException>(() => TwainMemoryBufferReader.CopyBufferToImage(buffer, imageData, image));
-    }
-
-    [Fact]
-    public void InvalidGrayscaleImagePixelFormat()
-    {
-        var buffer = SomeValidBuffer();
-        var imageData = CreateGrayscaleImageData(2, 2);
-        var image = Create1BitImage(2, 2);
-
-        Assert.Throws<ArgumentException>(() => TwainMemoryBufferReader.CopyBufferToImage(buffer, imageData, image));
-    }
-
-    [Fact]
-    public void InvalidBlackWhiteImagePixelFormat()
-    {
-        var buffer = SomeValidBuffer();
-        var imageData = CreateBlackWhiteImageData(2, 2);
-        var image = Create24BitImage(2, 2);
-
-        Assert.Throws<ArgumentException>(() => TwainMemoryBufferReader.CopyBufferToImage(buffer, imageData, image));
-    }
-
     private static TwainMemoryBuffer SomeValidBuffer()
     {
         return new TwainMemoryBuffer

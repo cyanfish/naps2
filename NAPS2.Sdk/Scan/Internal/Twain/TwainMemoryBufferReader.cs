@@ -9,107 +9,34 @@ namespace NAPS2.Scan.Internal.Twain;
 /// </summary>
 public static class TwainMemoryBufferReader
 {
-    public static unsafe void CopyBufferToImage(TwainMemoryBuffer memoryBuffer, TwainImageData imageData,
+    public static void CopyBufferToImage(TwainMemoryBuffer memoryBuffer, TwainImageData imageData,
         IMemoryImage outputImage)
     {
-        using var data = outputImage.Lock(LockMode.WriteOnly, out var scan0, out var dstBytesPerRow);
-        byte[] source = memoryBuffer.Buffer.ToByteArray();
-        if (memoryBuffer.BytesPerRow < memoryBuffer.Columns * (imageData.BitsPerPixel / 8.0) ||
-            source.Length < memoryBuffer.BytesPerRow * memoryBuffer.Rows ||
-            memoryBuffer.XOffset < 0 ||
-            memoryBuffer.YOffset < 0 ||
-            memoryBuffer.XOffset + memoryBuffer.Columns > imageData.Width ||
-            memoryBuffer.YOffset + memoryBuffer.Rows > imageData.Height)
+        var subPixelType = ((PixelType) imageData.PixelType, imageData.BitsPerPixel, imageData.SamplesPerPixel) switch
         {
-            throw new ArgumentException(
-                $"Invalid buffer parameters: {memoryBuffer.BytesPerRow} {memoryBuffer.Columns} {memoryBuffer.Rows} {source.Length} {memoryBuffer.XOffset} {memoryBuffer.YOffset}");
-        }
-
-        var srcBytesPerRow = memoryBuffer.BytesPerRow;
-        byte* dstPtr = (byte*) scan0.ToPointer();
-
-        if (imageData.BitsPerPixel == 1)
+            (PixelType.RGB, 24, 3) when CheckBitsPerSample(imageData, 8, 8, 8) => SubPixelType.Rgb,
+            (PixelType.Gray, 8, 1) when CheckBitsPerSample(imageData, 8) => SubPixelType.Gray,
+            (PixelType.BlackWhite, 1, 1) when CheckBitsPerSample(imageData, 1) => SubPixelType.Bit,
+            _ => throw new ArgumentException(
+                $"Unsupported pixel type: {imageData.BitsPerPixel} {imageData.PixelType} {imageData.SamplesPerPixel} {string.Join(",", imageData.BitsPerSample)}")
+        };
+        var pixelInfo = new PixelInfo(memoryBuffer.Columns, memoryBuffer.Rows, subPixelType, memoryBuffer.BytesPerRow);
+        new CopyBitwiseImageOp
         {
-            // Black & white
-            if (outputImage.PixelFormat != ImagePixelFormat.BW1) throw new ArgumentException();
-            if (imageData.PixelType != (int) PixelType.BlackWhite || imageData.SamplesPerPixel != 1 ||
-                imageData.BitsPerSample.Count < 1 || imageData.BitsPerSample[0] != 1)
-            {
-                ThrowForUnsupportedPixelType(imageData);
-            }
-            if (memoryBuffer.XOffset % 8 != 0)
-            {
-                throw new ArgumentException("Unaligned offset for 1bpp image");
-            }
-            fixed (byte* srcPtr = &source[0])
-            {
-                for (int dy = 0; dy < memoryBuffer.Rows; dy++)
-                {
-                    for (int dx = 0; dx < (memoryBuffer.Columns + 7) / 8; dx++)
-                    {
-                        int x = memoryBuffer.XOffset / 8 + dx;
-                        int y = memoryBuffer.YOffset + dy;
-                        // Copy 8 bits at a time
-                        *(dstPtr + y * dstBytesPerRow + x) = *(srcPtr + dy * srcBytesPerRow + dx);
-                    }
-                }
-            }
-        }
-        else if (imageData.BitsPerPixel == 8)
-        {
-            // Grayscale
-            if (outputImage.PixelFormat != ImagePixelFormat.RGB24) throw new ArgumentException();
-            if (imageData.PixelType != (int) PixelType.Gray || imageData.SamplesPerPixel != 1 ||
-                imageData.BitsPerSample.Count < 1 || imageData.BitsPerSample[0] != 8)
-            {
-                ThrowForUnsupportedPixelType(imageData);
-            }
-            fixed (byte* srcPtr = &source[0])
-            {
-                for (int dy = 0; dy < memoryBuffer.Rows; dy++)
-                {
-                    for (int dx = 0; dx < memoryBuffer.Columns; dx++)
-                    {
-                        int x = memoryBuffer.XOffset + dx;
-                        int y = memoryBuffer.YOffset + dy;
-                        // No 8-bit greyscale format, so we have to transform into 24-bit RGB
-                        // R
-                        *(dstPtr + y * dstBytesPerRow + x * 3) = *(srcPtr + dy * srcBytesPerRow + dx);
-                        // G
-                        *(dstPtr + y * dstBytesPerRow + x * 3 + 1) = *(srcPtr + dy * srcBytesPerRow + dx);
-                        // B
-                        *(dstPtr + y * dstBytesPerRow + x * 3 + 2) = *(srcPtr + dy * srcBytesPerRow + dx);
-                    }
-                }
-            }
-        }
-        else if (imageData.BitsPerPixel == 24)
-        {
-            // Color
-            if (outputImage.PixelFormat != ImagePixelFormat.RGB24) throw new ArgumentException();
-            if (imageData.PixelType != (int) PixelType.RGB || imageData.SamplesPerPixel != 3 ||
-                imageData.BitsPerSample.Count < 3 || imageData.BitsPerSample[0] != 8 ||
-                imageData.BitsPerSample[1] != 8 || imageData.BitsPerSample[2] != 8)
-            {
-                ThrowForUnsupportedPixelType(imageData);
-            }
-            var srcPixelInfo = new PixelInfo(memoryBuffer.Columns, memoryBuffer.Rows, SubPixelType.Rgb,
-                memoryBuffer.BytesPerRow);
-            new CopyBitwiseImageOp
-            {
-                DestXOffset = memoryBuffer.XOffset,
-                DestYOffset = memoryBuffer.YOffset
-            }.Perform(source, srcPixelInfo, outputImage);
-        }
-        else
-        {
-            ThrowForUnsupportedPixelType(imageData);
-        }
+            DestXOffset = memoryBuffer.XOffset,
+            DestYOffset = memoryBuffer.YOffset
+        }.Perform(memoryBuffer.Buffer.ToByteArray(), pixelInfo, outputImage);
     }
 
-    private static void ThrowForUnsupportedPixelType(TwainImageData imageData)
+    private static bool CheckBitsPerSample(TwainImageData imageData, params int[] expected)
     {
-        throw new ArgumentException(
-            $"Unsupported pixel type: {imageData.BitsPerPixel} {imageData.PixelType} {imageData.SamplesPerPixel} {string.Join(",", imageData.BitsPerSample)}");
+        for (int i = 0; i < expected.Length; i++)
+        {
+            if (imageData.BitsPerSample[i] != expected[i])
+            {
+                return false;
+            }
+        }
+        return true;
     }
 }

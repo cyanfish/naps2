@@ -11,6 +11,11 @@ public abstract class BinaryBitwiseImageOp : BitwiseImageOp
 
     public unsafe void Perform(IMemoryImage src, byte[] dst, PixelInfo dstPixelInfo)
     {
+        if (dst.Length < dstPixelInfo.Length)
+        {
+            throw new ArgumentException(
+                $"Destination byte array length {dst.Length} is less than expected for height {dstPixelInfo.Height} and stride {dstPixelInfo.Stride}");
+        }
         using var srcLock = src.Lock(SrcLockMode, out var srcData);
         fixed (byte* dstPtr = dst)
         {
@@ -21,6 +26,10 @@ public abstract class BinaryBitwiseImageOp : BitwiseImageOp
 
     public unsafe void Perform(byte[] src, PixelInfo srcPixelInfo, IMemoryImage dst)
     {
+        if (src.Length < srcPixelInfo.Length)
+        {
+            throw new ArgumentException("Source byte array length is less than expected");
+        }
         using var dstLock = dst.Lock(DstLockMode, out var dstData);
         fixed (byte* srcPtr = src)
         {
