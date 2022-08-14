@@ -78,8 +78,10 @@ public static class PdfAsserts
         Assert.True(File.Exists(filePath));
         var renderer = new PdfiumPdfRenderer();
         // TODO: Optimize?
-        var dpi = TestImageContextFactory.Get().Load(expectedImages[0]).HorizontalResolution;
-        var actualImages = renderer.Render(TestImageContextFactory.Get(), filePath, dpi, password).ToList();
+        using var firstExpectedImage = TestImageContextFactory.Get().Load(expectedImages[0]);
+        // TODO: Can/should we specify size per page?
+        var actualImages = renderer.Render(TestImageContextFactory.Get(), filePath,
+            PdfRenderSize.FromDimensions(firstExpectedImage.Width, firstExpectedImage.Height), password).ToList();
         // var actualImages = renderer.Render(
         //     TestImageContextFactory.Get(),
         //     filePath, 
@@ -87,7 +89,8 @@ public static class PdfAsserts
         Assert.Equal(expectedImages.Length, actualImages.Count);
         for (int i = 0; i < expectedImages.Length; i++)
         {
-            ImageAsserts.Similar(expectedImages[i], actualImages[i]);
+            // TODO: Try and fix resolution here
+            ImageAsserts.Similar(expectedImages[i], actualImages[i], ignoreResolution: true);
         }
     }
 

@@ -6,22 +6,22 @@ namespace NAPS2.ImportExport.Pdf;
 
 public class PdfiumPdfRenderer : IPdfRenderer
 {
-    public IEnumerable<IMemoryImage> Render(ImageContext imageContext, string path, float defaultDpi,
+    public IEnumerable<IMemoryImage> Render(ImageContext imageContext, string path, PdfRenderSize renderSize,
         string? password = null)
     {
         // Pdfium is not thread-safe
         lock (PdfiumNativeLibrary.Instance)
         {
             using var doc = PdfDocument.Load(path, password);
-            foreach (var memoryImage in RenderDocument(imageContext, defaultDpi, doc))
+            foreach (var memoryImage in RenderDocument(imageContext, renderSize, doc))
             {
                 yield return memoryImage;
             }
         }
     }
 
-    public IEnumerable<IMemoryImage> Render(ImageContext imageContext, byte[] buffer, int length, float defaultDpi,
-        string? password = null)
+    public IEnumerable<IMemoryImage> Render(ImageContext imageContext, byte[] buffer, int length,
+        PdfRenderSize renderSize, string? password = null)
     {
         // Pdfium is not thread-safe
         lock (PdfiumNativeLibrary.Instance)
@@ -30,7 +30,7 @@ public class PdfiumPdfRenderer : IPdfRenderer
             try
             {
                 using var doc = PdfDocument.Load(handle.AddrOfPinnedObject(), length, password);
-                foreach (var memoryImage in RenderDocument(imageContext, defaultDpi, doc))
+                foreach (var memoryImage in RenderDocument(imageContext, renderSize, doc))
                 {
                     yield return memoryImage;
                 }
@@ -42,7 +42,8 @@ public class PdfiumPdfRenderer : IPdfRenderer
         }
     }
 
-    private IEnumerable<IMemoryImage> RenderDocument(ImageContext imageContext, float defaultDpi, PdfDocument doc)
+    private IEnumerable<IMemoryImage> RenderDocument(ImageContext imageContext, PdfRenderSize renderSize,
+        PdfDocument doc)
     {
         var pageCount = doc.PageCount;
         for (int pageIndex = 0; pageIndex < pageCount; pageIndex++)
@@ -55,25 +56,39 @@ public class PdfiumPdfRenderer : IPdfRenderer
                 yield return image;
                 continue;
             }
-            yield return RenderPageToNewImage(imageContext, page, defaultDpi);
+            yield return RenderPageToNewImage(imageContext, page, renderSize);
         }
     }
 
-    public unsafe IMemoryImage RenderPageToNewImage(ImageContext imageContext, PdfPage page, float defaultDpi)
+    public unsafe IMemoryImage RenderPageToNewImage(ImageContext imageContext, PdfPage page, PdfRenderSize renderSize)
     {
         var widthInInches = page.Width / 72;
         var heightInInches = page.Height / 72;
+        
+        int widthInPx, heightInPx;
+        int xDpi, yDpi;
+        if (renderSize.Dpi != null)
+        {
+            // Cap the resolution to 10k pixels in each dimension
+            var dpi = renderSize.Dpi.Value;
+            dpi = Math.Min(dpi, 10000 / heightInInches);
+            dpi = Math.Min(dpi, 10000 / widthInInches);
 
-        // Cap the resolution to 10k pixels in each dimension
-        var dpi = defaultDpi;
-        dpi = Math.Min(dpi, 10000 / heightInInches);
-        dpi = Math.Min(dpi, 10000 / widthInInches);
-
-        int widthInPx = (int) Math.Round(widthInInches * dpi);
-        int heightInPx = (int) Math.Round(heightInInches * dpi);
+            widthInPx = (int) Math.Round(widthInInches * dpi);
+            heightInPx = (int) Math.Round(heightInInches * dpi);
+            xDpi = (int) Math.Round(dpi);
+            yDpi = (int) Math.Round(dpi);
+        }
+        else
+        {
+            widthInPx = renderSize.Width!.Value;
+            heightInPx = renderSize.Height!.Value;
+            xDpi = (int) Math.Round(widthInPx / widthInInches * 72);
+            yDpi = (int) Math.Round(widthInPx / heightInInches * 72);
+        }
 
         var bitmap = imageContext.Create(widthInPx, heightInPx, ImagePixelFormat.RGB24);
-        bitmap.SetResolution((int) Math.Round(dpi), (int) Math.Round(dpi));
+        bitmap.SetResolution(xDpi, yDpi);
 
         // As Pdfium only supports BGR, to be general we need to store it in an intermediate buffer,
         // then use a copy operation to get the data to our output image (which might be BGR or RGB).
@@ -86,9 +101,9 @@ public class PdfiumPdfRenderer : IPdfRenderer
                 PdfBitmap.CreateFromPointerBgr(widthInPx, heightInPx, (IntPtr) ptr, pixelInfo.Stride);
             pdfiumBitmap.FillRect(0, 0, widthInPx, heightInPx, PdfBitmap.WHITE);
             pdfiumBitmap.RenderPage(page, 0, 0, widthInPx, heightInPx);
-            
+
             new CopyBitwiseImageOp().Perform(buffer, pixelInfo, bitmap);
-                
+
             return bitmap;
         }
     }

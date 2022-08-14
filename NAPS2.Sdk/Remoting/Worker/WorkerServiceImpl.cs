@@ -212,7 +212,8 @@ public class WorkerServiceImpl : WorkerService.WorkerServiceBase
         try
         {
             var renderer = new PdfiumPdfRenderer();
-            using var image = renderer.Render(_scanningContext.ImageContext, request.Path, request.Dpi).Single();
+            using var image = renderer
+                .Render(_scanningContext.ImageContext, request.Path, PdfRenderSize.FromDpi(request.Dpi)).Single();
             var stream = image.SaveToMemoryStream(ImageFileFormat.Png);
             return Task.FromResult(new RenderPdfResponse
             {
@@ -279,7 +280,8 @@ public class WorkerServiceImpl : WorkerService.WorkerServiceBase
         }).AssertNoAwait();
     }
 
-    public override async Task<GetDeviceListResponse> TwainGetDeviceList(GetDeviceListRequest request, ServerCallContext context)
+    public override async Task<GetDeviceListResponse> TwainGetDeviceList(GetDeviceListRequest request,
+        ServerCallContext context)
     {
         using var callRef = StartCall();
         try

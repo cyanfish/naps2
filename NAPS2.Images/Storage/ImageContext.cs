@@ -53,7 +53,7 @@ public abstract class ImageContext
                 throw new InvalidOperationException(
                     "Unable to render pdf page as the ImageContext wasn't created with an IPdfRenderer.");
             }
-            renderedPdf = _pdfRenderer.Render(this, fileStorage.FullPath, 300).Single();
+            renderedPdf = _pdfRenderer.Render(this, fileStorage.FullPath, PdfRenderSize.FromDpi(300)).Single();
             return true;
         }
         renderedPdf = null;
@@ -70,7 +70,8 @@ public abstract class ImageContext
                     "Unable to render pdf page as the ImageContext wasn't created with an IPdfRenderer.");
             }
             var stream = memoryStorage.Stream;
-            renderedPdf = _pdfRenderer.Render(this, stream.GetBuffer(), (int) stream.Length, 300).Single();
+            renderedPdf = _pdfRenderer.Render(this, stream.GetBuffer(), (int) stream.Length, PdfRenderSize.FromDpi(300))
+                .Single();
             return true;
         }
         renderedPdf = null;
