@@ -1,4 +1,3 @@
-using NAPS2.Images.Gdi;
 using NAPS2.Scan;
 using NAPS2.Sdk.Tests;
 using Xunit;
@@ -23,7 +22,7 @@ public class ServerDiscoveryTests
         Assert.Contains(discovered, x => x.Name == "NetworkScanTests.ServerDiscovery");
     }
 
-    [Fact]
+    [PlatformFact(include: PlatformFlags.Windows)]
     public async Task ServerDiscoveryCustomPort()
     {
         using var server = CreateServer(new NetworkScanServerOptions
@@ -41,7 +40,7 @@ public class ServerDiscoveryTests
         Assert.Contains(discovered, x => x.Name == "NetworkScanTests.ServerDiscoveryCustomPort");
     }
 
-    [Fact]
+    [PlatformFact(include: PlatformFlags.Windows)]
     public async Task ServerDiscoveryMismatchPort()
     {
         using var server = CreateServer(new NetworkScanServerOptions
@@ -59,7 +58,7 @@ public class ServerDiscoveryTests
         Assert.DoesNotContain(discovered, x => x.Name == "NetworkScanTests.ServerDiscoveryMismatchPort");
     }
 
-    [Fact]
+    [PlatformFact(include: PlatformFlags.Windows)]
     public async Task ServerDiscoveryOff()
     {
         using var server = CreateServer(new NetworkScanServerOptions

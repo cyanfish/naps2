@@ -332,7 +332,8 @@ public class ImageSerializerTests : ContextualTests
         });
         using var destImage = ImageSerializer.Deserialize(destContext, serializedImage, new DeserializeImageOptions());
 
-        ImageAsserts.Similar(ImageResources.color_image_thumb_256, destImage.PostProcessingData.Thumbnail, ignoreResolution: true);
+        ImageAsserts.Similar(ImageResources.color_image_thumb_256, destImage.PostProcessingData.Thumbnail,
+            ImageAsserts.XPLAT_RMSE_THRESHOLD, ignoreResolution: true);
     }
 
     [Fact]

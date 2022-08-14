@@ -1,7 +1,7 @@
 namespace NAPS2.Sdk.Tests;
 
 [Flags]
-public enum Platform
+public enum PlatformFlags
 {
     None = 0,
     Windows = 1,

@@ -5,40 +5,40 @@ namespace NAPS2.Sdk.Tests;
 
 public sealed class PlatformFactAttribute : FactAttribute
 {
-    public PlatformFactAttribute(Platform include = Platform.None, Platform exclude = Platform.None)
+    public PlatformFactAttribute(PlatformFlags include = PlatformFlags.None, PlatformFlags exclude = PlatformFlags.None)
     {
-        if (include != Platform.None && (GetPlatform() & include) != include)
+        if (include != PlatformFlags.None && (GetPlatform() & include) != include)
         {
             Skip = $"Only runs on platform: {include}";
         }
-        if (exclude != Platform.None && (GetPlatform() & exclude) != Platform.None)
+        if (exclude != PlatformFlags.None && (GetPlatform() & exclude) != PlatformFlags.None)
         {
             Skip = $"Doesn't runs on platform: {exclude}";
         }
     }
 
-    private Platform GetPlatform()
+    private PlatformFlags GetPlatform()
     {
-        var p = Platform.None;
+        var p = PlatformFlags.None;
         if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
         {
-            p |= Platform.Windows;
+            p |= PlatformFlags.Windows;
         }
         if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
         {
-            p |= Platform.Mac;
+            p |= PlatformFlags.Mac;
         }
         if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
         {
-            p |= Platform.Linux;
+            p |= PlatformFlags.Linux;
         }
         if (RuntimeInformation.ProcessArchitecture == Architecture.X64)
         {
-            p |= Platform.X64;
+            p |= PlatformFlags.X64;
         }
         if (RuntimeInformation.ProcessArchitecture == Architecture.Arm64)
         {
-            p |= Platform.Arm64;
+            p |= PlatformFlags.Arm64;
         }
         return p;
     }

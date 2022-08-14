@@ -5,7 +5,7 @@ namespace NAPS2.Sdk.Tests.Serialization;
 
 public class SecureStorageTests
 {
-    [PlatformFact(include: Platform.Windows)]
+    [PlatformFact(include: PlatformFlags.Windows)]
     public void EncryptAndDecrypt()
     {
         var text = "Hello, world!";
@@ -17,7 +17,7 @@ public class SecureStorageTests
         Assert.Equal(text, decrypted);
     }
     
-    [PlatformFact(exclude: Platform.Windows)]
+    [PlatformFact(exclude: PlatformFlags.Windows)]
     public void EncryptAndDecryptNonWindows()
     {
         var text = "Hello, world!";

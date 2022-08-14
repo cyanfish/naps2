@@ -8,7 +8,7 @@ namespace NAPS2.Sdk.Tests.ImportExport.Pdf;
 public class PdfATests : ContextualTests
 {
     // Sadly the pdfa verifier library only supports windows/mac
-    [PlatformFact(exclude: Platform.Mac)]
+    [PlatformFact(exclude: PlatformFlags.Mac)]
     public async Task Validate()
     {
         var pdfExporter = new PdfExporter(ScanningContext);
