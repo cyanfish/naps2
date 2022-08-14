@@ -236,6 +236,39 @@ public class TransformTests : ContextualTests
     }
 
     [Fact]
+    public void ScaleNull()
+    {
+        IMemoryImage actual = LoadImage(ImageResources.color_image);
+        IMemoryImage expected = LoadImage(ImageResources.color_image);
+
+        actual = ImageContext.PerformTransform(actual, new ScaleTransform());
+
+        ImageAsserts.Similar(expected, actual, ImageAsserts.NULL_RMSE_THRESHOLD);
+    }
+
+    [Fact]
+    public void Scale50Percent()
+    {
+        IMemoryImage actual = LoadImage(ImageResources.color_image);
+        IMemoryImage expected = LoadImage(ImageResources.color_image_sc_50pct);
+
+        actual = ImageContext.PerformTransform(actual, new ScaleTransform(0.5));
+
+        ImageAsserts.Similar(expected, actual, ignoreResolution: true);
+    }
+
+    [Fact]
+    public void Scale1000Percent()
+    {
+        IMemoryImage actual = LoadImage(ImageResources.color_image);
+        IMemoryImage expected = LoadImage(ImageResources.color_image_huge);
+
+        actual = ImageContext.PerformTransform(actual, new ScaleTransform(10));
+
+        ImageAsserts.Similar(expected, actual, ignoreResolution: true);
+    }
+
+    [Fact]
     public void CropNull()
     {
         IMemoryImage actual = LoadImage(ImageResources.color_image);

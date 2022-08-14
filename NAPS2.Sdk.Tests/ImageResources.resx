@@ -166,6 +166,9 @@
   <data name="color_image_r_p90" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\color_image_r_p90.jpg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="color_image_sc_50pct" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\color_image_sc_50pct.jpg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="color_image_sh_n1000" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\color_image_sh_n1000.jpg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>

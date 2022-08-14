@@ -157,6 +157,13 @@ namespace NAPS2.Sdk.Tests {
             }
         }
         
+        internal static byte[] color_image_sc_50pct {
+            get {
+                object obj = ResourceManager.GetObject("color_image_sc_50pct", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
         internal static byte[] color_image_sh_n1000 {
             get {
                 object obj = ResourceManager.GetObject("color_image_sh_n1000", resourceCulture);
