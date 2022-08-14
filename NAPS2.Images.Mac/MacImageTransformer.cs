@@ -8,11 +8,6 @@ public class MacImageTransformer : AbstractImageTransformer<MacImage>
     {
     }
 
-    protected override MacImage PerformTransform(MacImage image, ContrastTransform transform)
-    {
-        throw new NotImplementedException();
-    }
-
     protected override MacImage PerformTransform(MacImage image, SaturationTransform transform)
     {
         throw new NotImplementedException();

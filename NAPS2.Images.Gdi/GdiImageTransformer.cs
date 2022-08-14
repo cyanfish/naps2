@@ -11,34 +11,6 @@ public class GdiImageTransformer : AbstractImageTransformer<GdiImage>
     {
     }
 
-    protected override GdiImage PerformTransform(GdiImage image, ContrastTransform transform)
-    {
-        float contrastAdjusted = transform.Contrast / 1000f + 1.0f;
-
-        EnsurePixelFormat(ref image);
-        var bitmap = image.Bitmap;
-        using (var g = Graphics.FromImage(bitmap))
-        {
-            var attrs = new ImageAttributes();
-            attrs.SetColorMatrix(new ColorMatrix
-            {
-                Matrix00 = contrastAdjusted,
-                Matrix11 = contrastAdjusted,
-                Matrix22 = contrastAdjusted
-            });
-            g.DrawImage(bitmap,
-                new Rectangle(0, 0, bitmap.Width, bitmap.Height),
-                0,
-                0,
-                bitmap.Width,
-                bitmap.Height,
-                GraphicsUnit.Pixel,
-                attrs);
-        }
-        return image;
-    }
-
-
     protected override GdiImage PerformTransform(GdiImage image, SaturationTransform transform)
     {
         double saturationAdjusted = transform.Saturation / 1000.0 + 1;

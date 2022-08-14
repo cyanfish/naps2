@@ -21,8 +21,6 @@ public abstract class AbstractImageTransformer<TImage> where TImage : IMemoryIma
         {
             case BrightnessTransform brightnessTransform:
                 return PerformTransform(image, brightnessTransform);
-            case ContrastTransform contrastTransform:
-                return PerformTransform(image, contrastTransform);
             case TrueContrastTransform trueContrastTransform:
                 return PerformTransform(image, trueContrastTransform);
             case HueTransform hueTransform:
@@ -55,8 +53,6 @@ public abstract class AbstractImageTransformer<TImage> where TImage : IMemoryIma
         new BrightnessBitwiseImageOp(brightnessNormalized).Perform(image);
         return image;
     }
-
-    protected abstract TImage PerformTransform(TImage image, ContrastTransform transform);
 
     protected virtual TImage PerformTransform(TImage image, TrueContrastTransform transform)
     {
