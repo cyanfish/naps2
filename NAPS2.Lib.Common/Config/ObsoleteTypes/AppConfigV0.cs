@@ -1,4 +1,3 @@
-using System.Windows.Forms;
 using System.Xml.Serialization;
 using NAPS2.ImportExport.Pdf;
 using NAPS2.Ocr;

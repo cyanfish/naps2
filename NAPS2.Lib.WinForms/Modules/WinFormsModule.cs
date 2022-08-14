@@ -32,5 +32,8 @@ public class WinFormsModule : NinjectModule
         Bind<IWinFormsExportHelper>().To<WinFormsExportHelper>();
         Bind<IDesktopScanController>().To<DesktopScanController>();
         Bind<DesktopFormProvider>().ToSelf().InSingletonScope();
+
+        // TODO: Can we add a test for this?
+        Log.EventLogger = new WindowsEventLogger(Kernel!.Get<Naps2Config>());
     }
 }

@@ -1,5 +1,4 @@
-﻿using System.Reflection;
-using NAPS2.Images.Gdi;
+﻿using NAPS2.Images.Gdi;
 using NAPS2.ImportExport;
 using NAPS2.ImportExport.Email;
 using NAPS2.ImportExport.Email.Mapi;
@@ -74,7 +73,7 @@ public class CommonModule : NinjectModule
             var config = ctx.Kernel.Get<Naps2Config>();
             return new ProfileManager(
                 Path.Combine(Paths.AppData, "profiles.xml"),
-                Path.Combine(Path.GetDirectoryName(Assembly.GetEntryAssembly()!.Location)!, "profiles.xml"),
+                Path.Combine(AssemblyHelper.EntryFolder, "profiles.xml"),
                 config.Get(c => c.LockSystemProfiles),
                 config.Get(c => c.LockUnspecifiedDevices),
                 config.Get(c => c.NoUserProfiles));

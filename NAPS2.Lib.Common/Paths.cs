@@ -1,14 +1,8 @@
-﻿using System;
-using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using System.Windows.Forms;
-
-namespace NAPS2;
+﻿namespace NAPS2;
 
 public static class Paths
 {
-    private static readonly string ExecutablePath = Application.StartupPath;
+    private static readonly string ExecutablePath = AssemblyHelper.EntryFolder;
     private static readonly string AppDataPath;
     private static readonly string TempPath;
     private static readonly string RecoveryPath;

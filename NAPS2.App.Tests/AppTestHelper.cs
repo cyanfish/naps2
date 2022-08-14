@@ -1,4 +1,3 @@
-using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Threading;
 using Xunit;
@@ -37,7 +36,7 @@ public static class AppTestHelper
     public static string GetBaseDirectory()
     {
         var envDirectory = Environment.GetEnvironmentVariable("NAPS2_TEST_ROOT");
-        var testDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+        var testDirectory = AssemblyHelper.LibFolder;
         return string.IsNullOrEmpty(envDirectory) ? testDirectory : envDirectory;
     }
 

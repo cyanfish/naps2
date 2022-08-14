@@ -1,4 +1,3 @@
-using System.Reflection;
 using Eto.Forms;
 using Eto.WinForms;
 using NAPS2.Update;
@@ -48,10 +47,10 @@ public class AboutForm : EtoDialogBase
             L.Row(
                 L.Column(new ImageView { Image = Icons.scanner_large.ToEto() }).Padding(right: 4),
                 L.Column(
-                    C.NoWrap(AssemblyProduct),
+                    C.NoWrap(AssemblyHelper.Product),
                     L.Row(
                         L.Column(
-                            C.NoWrap(string.Format(MiscResources.Version, AssemblyVersion)),
+                            C.NoWrap(string.Format(MiscResources.Version, AssemblyHelper.Version)),
                             C.Link(NAPS2_HOMEPAGE)
                         ),
                         L.Column(
@@ -142,42 +141,4 @@ public class AboutForm : EtoDialogBase
         UpdateControls();
         DoUpdateCheck();
     }
-
-    // TODO: Move to a utility class
-    #region Assembly Attribute Accessors
-
-    private static string GetAssemblyAttributeValue<T>(Func<T, string> selector)
-    {
-        object[] attributes = Assembly.GetEntryAssembly().GetCustomAttributes(typeof(T), false);
-        if (attributes.Length == 0)
-        {
-            return "";
-        }
-        return selector((T)attributes[0]);
-    }
-
-    public string AssemblyTitle
-    {
-        get
-        {
-            string title = GetAssemblyAttributeValue<AssemblyTitleAttribute>(x => x.Title);
-            if (string.IsNullOrEmpty(title))
-            {
-                title = Path.GetFileNameWithoutExtension(Assembly.GetEntryAssembly().CodeBase);
-            }
-            return title;
-        }
-    }
-
-    public string AssemblyVersion => Assembly.GetEntryAssembly().GetName().Version.ToString();
-
-    public string AssemblyDescription => GetAssemblyAttributeValue<AssemblyDescriptionAttribute>(x => x.Description);
-
-    public string AssemblyProduct => GetAssemblyAttributeValue<AssemblyProductAttribute>(x => x.Product);
-
-    public string AssemblyCopyright => GetAssemblyAttributeValue<AssemblyCopyrightAttribute>(x => x.Copyright);
-
-    public string AssemblyCompany => GetAssemblyAttributeValue<AssemblyCompanyAttribute>(x => x.Company);
-
-    #endregion
 }

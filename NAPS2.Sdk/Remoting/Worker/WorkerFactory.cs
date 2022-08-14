@@ -14,8 +14,8 @@ public class WorkerFactory : IWorkerFactory
 
     public static string?[] SearchDirs => new[]
     {
-        Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location),
-        Path.GetDirectoryName(Assembly.GetEntryAssembly()?.Location)
+        AssemblyHelper.LibFolder,
+        AssemblyHelper.EntryFolder
     };
 
     private readonly FileStorageManager _fileStorageManager;

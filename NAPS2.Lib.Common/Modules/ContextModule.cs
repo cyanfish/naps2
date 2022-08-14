@@ -15,10 +15,6 @@ public class ContextModule : NinjectModule
         var config = Kernel.Get<Naps2Config>();
 
         Log.Logger = new NLogLogger();
-        if (PlatformCompat.System.CanUseWin32)
-        {
-            Log.EventLogger = new WindowsEventLogger(config);
-        }
 #if DEBUG
         Trace.Listeners.Add(new NLogTraceListener());
 #endif

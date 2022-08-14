@@ -15,10 +15,8 @@ public class PdfiumNativeLibrary : Unmanaged.NativeLibrary
 
     private static readonly Lazy<PdfiumNativeLibrary> LazyInstance = new(() =>
     {
-        var assemblyLocation = Assembly.GetExecutingAssembly().Location;
-        var assemblyFolder = Path.GetDirectoryName(assemblyLocation);
         var testRoot = Environment.GetEnvironmentVariable("NAPS2_TEST_ROOT");
-        var depsFolder = string.IsNullOrEmpty(testRoot) ? assemblyFolder : testRoot;
+        var depsFolder = string.IsNullOrEmpty(testRoot) ? AssemblyHelper.LibFolder : testRoot;
         var libraryPath = Path.Combine(depsFolder!, PlatformCompat.System.PdfiumLibraryPath);
         if (!File.Exists(libraryPath))
         {

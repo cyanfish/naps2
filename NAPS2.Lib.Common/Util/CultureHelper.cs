@@ -60,8 +60,7 @@ public class CultureHelper
             // Only include those languages for which localized resources exist
             // TODO: Should we check for multiple project resource files? Or be less specific so this doesn't break if we rename the projects?
             string localizedResourcesPath =
-                Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) ?? "", langCode,
-                    "NAPS2.Lib.Common.resources.dll");
+                Path.Combine(AssemblyHelper.LibFolder, langCode, "NAPS2.Lib.Common.resources.dll");
             if (langCode == "en" || File.Exists(localizedResourcesPath))
             {
                 yield return (langCode, langName);

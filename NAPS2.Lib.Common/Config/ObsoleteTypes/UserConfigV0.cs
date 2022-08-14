@@ -1,4 +1,3 @@
-using System.Windows.Forms;
 using System.Xml.Serialization;
 using NAPS2.ImportExport.Email;
 using NAPS2.ImportExport.Images;
