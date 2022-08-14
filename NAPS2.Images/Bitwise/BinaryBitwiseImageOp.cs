@@ -68,7 +68,7 @@ public abstract class BinaryBitwiseImageOp : BitwiseImageOp
 
     protected virtual int GetPartitionSize(BitwiseImageData src, BitwiseImageData dst) => src.h;
 
-    protected virtual int GetPartitionCount(BitwiseImageData src, BitwiseImageData dst) => DefaultPartitionCount;
+    protected virtual int GetPartitionCount(BitwiseImageData src, BitwiseImageData dst) => 1;
 
     protected virtual void ValidateCore(BitwiseImageData src, BitwiseImageData dst)
     {

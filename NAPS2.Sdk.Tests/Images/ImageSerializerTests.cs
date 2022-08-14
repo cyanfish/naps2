@@ -287,7 +287,7 @@ public class ImageSerializerTests : ContextualTests
         Assert.IsType<ImageFileStorage>(destImage.Storage);
         // Check that disposing the original doesn't interfere with rendering, i.e. not using the same backing file
         sourceImage.Dispose();
-        ImageAsserts.Similar(PdfResources.word_p1, ImageContext.Render(destImage));
+        ImageAsserts.Similar(PdfResources.word_p1, ImageContext.Render(destImage), ignoreResolution: true);
     }
 
     [Theory]
@@ -308,7 +308,7 @@ public class ImageSerializerTests : ContextualTests
         Assert.IsType<ImageMemoryStorage>(destImage.Storage);
         // Check that disposing the original doesn't interfere with rendering, i.e. not using the same image
         sourceImage.Dispose();
-        ImageAsserts.Similar(PdfResources.word_p1, ImageContext.Render(destImage));
+        ImageAsserts.Similar(PdfResources.word_p1, ImageContext.Render(destImage), ignoreResolution: true);
     }
 
     [Theory]
@@ -332,7 +332,7 @@ public class ImageSerializerTests : ContextualTests
         });
         using var destImage = ImageSerializer.Deserialize(destContext, serializedImage, new DeserializeImageOptions());
 
-        ImageAsserts.Similar(ImageResources.color_image_thumb_256, destImage.PostProcessingData.Thumbnail);
+        ImageAsserts.Similar(ImageResources.color_image_thumb_256, destImage.PostProcessingData.Thumbnail, ignoreResolution: true);
     }
 
     [Fact]
