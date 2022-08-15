@@ -3,16 +3,22 @@ using Xunit;
 
 namespace NAPS2.Sdk.Tests.Images;
 
-public class ImageContextTests : ContextualTests
+public class ImageExportHelperTests : ContextualTests
 {
+    private ImageExportHelper _helper;
+
+    public ImageExportHelperTests()
+    {
+        _helper = new ImageExportHelper(ImageContext);
+    }
+
     [Fact]
     public void SaveSmallestFormat_BlackAndWhite()
     {
-        var ctx = TestImageContextFactory.Get();
-        var bw = ctx.PerformTransform(LoadImage(ImageResources.color_image_bw), new BlackWhiteTransform());
+        var bw = ImageContext.PerformTransform(LoadImage(ImageResources.color_image_bw), new BlackWhiteTransform());
         var path = Path.Combine(FolderPath, "test");
 
-        var fullPath = ctx.SaveSmallestFormat(path, bw, BitDepth.BlackAndWhite, false, -1, out var format);
+        var fullPath = _helper.SaveSmallestFormat(path, bw, BitDepth.BlackAndWhite, false, -1, out var format);
 
         AssertPng(format, fullPath, ImageResources.color_image_bw);
     }
@@ -20,11 +26,10 @@ public class ImageContextTests : ContextualTests
     [Fact]
     public void SaveSmallestFormat_BlackAndWhiteWithColorBitDepth()
     {
-        var ctx = TestImageContextFactory.Get();
-        var bw = ctx.PerformTransform(LoadImage(ImageResources.color_image_bw), new BlackWhiteTransform());
+        var bw = ImageContext.PerformTransform(LoadImage(ImageResources.color_image_bw), new BlackWhiteTransform());
         var path = Path.Combine(FolderPath, "test");
 
-        var fullPath = ctx.SaveSmallestFormat(path, bw, BitDepth.Color, false, -1, out var format);
+        var fullPath = _helper.SaveSmallestFormat(path, bw, BitDepth.Color, false, -1, out var format);
 
         AssertPng(format, fullPath, ImageResources.color_image_bw);
     }
@@ -32,11 +37,10 @@ public class ImageContextTests : ContextualTests
     [Fact]
     public void SaveSmallestFormat_ColorWithBlackWhiteBitDepth()
     {
-        var ctx = TestImageContextFactory.Get();
         var color = LoadImage(ImageResources.color_image);
         var path = Path.Combine(FolderPath, "test");
 
-        var fullPath = ctx.SaveSmallestFormat(path, color, BitDepth.BlackAndWhite, false, -1, out var format);
+        var fullPath = _helper.SaveSmallestFormat(path, color, BitDepth.BlackAndWhite, false, -1, out var format);
 
         AssertPng(format, fullPath, ImageResources.color_image_bw, ImageAsserts.XPLAT_RMSE_THRESHOLD);
     }
@@ -44,11 +48,10 @@ public class ImageContextTests : ContextualTests
     [Fact]
     public void SaveSmallestFormat_ColorHighQuality()
     {
-        var ctx = TestImageContextFactory.Get();
         var color = LoadImage(ImageResources.color_image);
         var path = Path.Combine(FolderPath, "test");
 
-        var fullPath = ctx.SaveSmallestFormat(path, color, BitDepth.Color, true, -1, out var format);
+        var fullPath = _helper.SaveSmallestFormat(path, color, BitDepth.Color, true, -1, out var format);
 
         AssertPng(format, fullPath, ImageResources.color_image);
     }
@@ -56,11 +59,10 @@ public class ImageContextTests : ContextualTests
     [Fact]
     public void SaveSmallestFormat_SmallerPng()
     {
-        var ctx = TestImageContextFactory.Get();
         var bw = LoadImage(ImageResources.color_image_bw_24bit);
         var path = Path.Combine(FolderPath, "test");
 
-        var fullPath = ctx.SaveSmallestFormat(path, bw, BitDepth.Color, false, -1, out var format);
+        var fullPath = _helper.SaveSmallestFormat(path, bw, BitDepth.Color, false, -1, out var format);
 
         AssertPng(format, fullPath, ImageResources.color_image_bw);
     }
@@ -68,11 +70,10 @@ public class ImageContextTests : ContextualTests
     [Fact]
     public void SaveSmallestFormat_OriginalPng()
     {
-        var ctx = TestImageContextFactory.Get();
         var color = LoadImage(ImageResources.color_image_png);
         var path = Path.Combine(FolderPath, "test");
 
-        var fullPath = ctx.SaveSmallestFormat(path, color, BitDepth.Color, false, -1, out var format);
+        var fullPath = _helper.SaveSmallestFormat(path, color, BitDepth.Color, false, -1, out var format);
 
         AssertPng(format, fullPath, ImageResources.color_image);
     }
@@ -80,12 +81,11 @@ public class ImageContextTests : ContextualTests
     [Fact]
     public void SaveSmallestFormat_SmallerJpeg()
     {
-        var ctx = TestImageContextFactory.Get();
         var color = LoadImage(ImageResources.color_image_png);
         color.OriginalFileFormat = ImageFileFormat.Unspecified;
         var path = Path.Combine(FolderPath, "test");
 
-        var fullPath = ctx.SaveSmallestFormat(path, color, BitDepth.Color, false, -1, out var format);
+        var fullPath = _helper.SaveSmallestFormat(path, color, BitDepth.Color, false, -1, out var format);
 
         AssertJpeg(format, fullPath, ImageResources.color_image);
     }
@@ -93,11 +93,10 @@ public class ImageContextTests : ContextualTests
     [Fact]
     public void SaveSmallestFormat_OriginalJpeg()
     {
-        var ctx = TestImageContextFactory.Get();
         var color = LoadImage(ImageResources.color_image_bw_jpg);
         var path = Path.Combine(FolderPath, "test");
 
-        var fullPath = ctx.SaveSmallestFormat(path, color, BitDepth.Color, false, -1, out var format);
+        var fullPath = _helper.SaveSmallestFormat(path, color, BitDepth.Color, false, -1, out var format);
 
         AssertJpeg(format, fullPath, ImageResources.color_image_bw);
     }

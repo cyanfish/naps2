@@ -69,9 +69,9 @@ public class GdiImageContext : ImageContext
         }
     }
 
-    public Bitmap RenderToBitmap(ProcessedImage processedImage)
+    public Bitmap RenderToBitmap(IRenderableImage image)
     {
-        return ((GdiImage) Render(processedImage)).Bitmap;
+        return ((GdiImage) Render(image)).Bitmap;
     }
 
     public override IMemoryImage Create(int width, int height, ImagePixelFormat pixelFormat)

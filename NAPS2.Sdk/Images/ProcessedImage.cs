@@ -10,7 +10,7 @@ namespace NAPS2.Images;
 /// reference with Clone() that will need to be disposed, and the underlying image storage will only be disposed once
 /// all related instances are disposed (or the parent ScanningContext is disposed).
 /// </summary>
-public class ProcessedImage : IDisposable, IEquatable<ProcessedImage>
+public class ProcessedImage : IRenderableImage, IDisposable, IEquatable<ProcessedImage>
 {
     private readonly RefCount.Token _token;
     private bool _disposed;

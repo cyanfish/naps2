@@ -247,8 +247,8 @@ public class PdfExporter : IPdfExporter
             // TODO: We need to serialize page adding somehow
             PdfPage page = state.Document.AddPage();
             // TODO: Is there any way we can clean this up?
-            var exportFormat = _scanningContext.ImageContext.GetExportFormat(
-                state.RenderedImage!, state.Image.Metadata.BitDepth, state.Image.Metadata.Lossless);
+            var exportFormat = new ImageExportHelper(_scanningContext.ImageContext)
+                .GetExportFormat(state.RenderedImage!, state.Image.Metadata.BitDepth, state.Image.Metadata.Lossless);
             if (exportFormat.FileFormat == ImageFileFormat.Unspecified)
             {
                 exportFormat = exportFormat with { FileFormat = ImageFileFormat.Jpeg };
