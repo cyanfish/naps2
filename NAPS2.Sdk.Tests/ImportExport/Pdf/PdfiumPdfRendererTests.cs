@@ -12,7 +12,7 @@ public class PdfiumPdfRendererTests : ContextualTests
         var path = Path.Combine(FolderPath, "test.pdf");
         File.WriteAllBytes(path, PdfResources.word_generated_pdf);
 
-        var images = new PdfiumPdfRenderer().Render(ImageContext, path, PdfRenderSize.FromDpi(300)).ToList();
+        var images = new PdfiumPdfRenderer().Render(ImageContext, path, PdfRenderSize.Default).ToList();
 
         Assert.Equal(2, images.Count);
         ImageAsserts.Similar(PdfResources.word_p1, images[0], ignoreResolution: true);
@@ -25,7 +25,7 @@ public class PdfiumPdfRendererTests : ContextualTests
         var path = Path.Combine(FolderPath, "test.pdf");
         File.WriteAllBytes(path, PdfResources.image_pdf);
 
-        var images = new PdfiumPdfRenderer().Render(ImageContext, path, PdfRenderSize.FromDpi(300)).ToList();
+        var images = new PdfiumPdfRenderer().Render(ImageContext, path, PdfRenderSize.Default).ToList();
         
         Assert.Single(images);
         // This also verifies that the renderer gets the actual image dpi (72) 
@@ -38,7 +38,7 @@ public class PdfiumPdfRendererTests : ContextualTests
         var path = Path.Combine(FolderPath, "test.pdf");
         File.WriteAllBytes(path, PdfResources.image_with_text_pdf);
 
-        var images = new PdfiumPdfRenderer().Render(ImageContext, path, PdfRenderSize.FromDpi(300)).ToList();
+        var images = new PdfiumPdfRenderer().Render(ImageContext, path, PdfRenderSize.Default).ToList();
 
         Assert.Single(images);
         // This also verifies that the renderer gets the actual image dpi (72)
