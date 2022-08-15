@@ -54,7 +54,7 @@ public abstract class ImageContext
     protected bool LoadFromFileKeepsLock { get; init; }
 
     // TODO: Add NotNullWhen attribute?
-    protected bool MaybeRenderPdf(ImageFileStorage fileStorage, out IMemoryImage? renderedPdf)
+    private bool MaybeRenderPdf(ImageFileStorage fileStorage, out IMemoryImage? renderedPdf)
     {
         if (Path.GetExtension(fileStorage.FullPath).ToLowerInvariant() == ".pdf")
         {
@@ -70,7 +70,7 @@ public abstract class ImageContext
         return false;
     }
 
-    protected bool MaybeRenderPdf(ImageMemoryStorage memoryStorage, out IMemoryImage? renderedPdf)
+    private bool MaybeRenderPdf(ImageMemoryStorage memoryStorage, out IMemoryImage? renderedPdf)
     {
         if (memoryStorage.TypeHint == ".pdf")
         {
@@ -115,14 +115,6 @@ public abstract class ImageContext
     }
 
     public Type ImageType { get; }
-
-    // private IPdfRenderer _pdfRenderer;
-    //
-    // public IPdfRenderer PdfRenderer
-    // {
-    //     get => _pdfRenderer;
-    //     set => _pdfRenderer = value ?? throw new ArgumentNullException(nameof(value));
-    // }
 
     /// <summary>
     /// Loads an image from the given file path.
