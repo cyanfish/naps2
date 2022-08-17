@@ -19,7 +19,7 @@ public class ClientServerTests
             }
         });
         server.Start();
-        var client = new EsclHttpClient(new EsclService
+        var client = new EsclClient(new EsclService
         {
             Ip = "localhost",
             Port = 9898,

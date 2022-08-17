@@ -2,14 +2,17 @@ using System.Xml.Linq;
 
 namespace NAPS2.Escl.Client;
 
-public class EsclHttpClient
+public class EsclClient
 {
+    private static readonly XDeclaration Decl = new("1.0", "UTF-8", null);
     private static readonly XNamespace ScanNs = XNamespace.Get("http://schemas.hp.com/imaging/escl/2011/05/03");
+    private static readonly XAttribute ScanNsAttr = new(XNamespace.Xmlns + "scan", ScanNs);
     private static readonly XNamespace PwgNs = XNamespace.Get("http://www.pwg.org/schemas/2010/12/sm");
+    private static readonly XAttribute PwgNsAttr = new(XNamespace.Xmlns + "pwg", PwgNs);
 
     private readonly EsclService _service;
 
-    public EsclHttpClient(EsclService service)
+    public EsclClient(EsclService service)
     {
         _service = service;
     }
@@ -40,6 +43,51 @@ public class EsclHttpClient
             AdminUri = root.Element(ScanNs + "AdminURI")?.Value,
             IconUri = root.Element(ScanNs + "IconURI")?.Value
         };
+    }
+
+    public async Task<EsclScannerStatus> GetStatus()
+    {
+        var text = await new HttpClient().GetStringAsync(GetUrl("ScannerStatus"));
+        var doc = XDocument.Parse(text);
+        return new EsclScannerStatus();
+    }
+
+    public async Task<EsclJob> CreateScanJob(EsclScanSettings scanSettings)
+    {
+        var doc = new XDocument(
+            new XElement(ScanNs + "ScanSettings",
+                PwgNsAttr,
+                ScanNsAttr,
+                new XElement(PwgNs + "Version", "2.6"),
+                new XElement(ScanNs + "Intent", "Photo"),
+                new XElement(PwgNs + "ScanRegions",
+                    new XElement(PwgNs + "ScanRegion",
+                        new XElement(PwgNs + "Height", "1200"),
+                        new XElement(PwgNs + "ContentRegionUnits", "escl:ThreeHundredthsOfInches"),
+                        new XElement(PwgNs + "Width", "1800"),
+                        new XElement(PwgNs + "XOffset"),
+                        new XElement(PwgNs + "YOffset"))),
+                new XElement(PwgNs + "InputSource", "Platen"),
+                new XElement(ScanNs + "ColorMode", "Grayscale8")));
+        var response = await new HttpClient().PostAsync(GetUrl("ScanJobs"), AsContent(doc));
+        response.EnsureSuccessStatusCode();
+        return new EsclJob
+        {
+            Uri = response.Headers.Location
+        };
+    }
+
+    private static StringContent AsContent(XDocument doc)
+    {
+        return new StringContent($"{Decl}{Environment.NewLine}{doc}");
+    }
+
+    public async Task<byte[]> NextDocument(EsclJob job)
+    {
+        var client = new HttpClient();
+        client.DefaultRequestHeaders.TransferEncodingChunked = true;
+        // TODO: Maybe check Content-Location on the response header to ensure no duplicate document?
+        return await client.GetByteArrayAsync(job.Uri + "/NextDocument");
     }
 
     private EsclSettingProfile ParseSettingProfile(XElement element,
@@ -82,14 +130,15 @@ public class EsclHttpClient
 
     private async Task<XDocument> DoRequest(string endpoint)
     {
-        // TODO: We're supposed to reuse these, right?
-        var httpClient = new HttpClient();
+        // TODO: We're supposed to reuse HttpClient, right?
+        var text = await new HttpClient().GetStringAsync(GetUrl(endpoint));
+        return XDocument.Parse(text);
+    }
+
+    private string GetUrl(string endpoint)
+    {
         var protocol = _service.Tls ? "https" : "http";
-        var url = $"{protocol}://{_service.Ip}:{_service.Port}/{_service.RootUrl}/{endpoint}";
-        var response = await httpClient.GetAsync(url);
-        // TODO: Handle status codes better
-        response.EnsureSuccessStatusCode();
-        var responseText = await response.Content.ReadAsStringAsync();
-        return XDocument.Parse(responseText);
+        return new UriBuilder(protocol, _service.Ip.ToString(), _service.Port, $"{_service.RootUrl}/{endpoint}")
+            .Uri.ToString();
     }
 }

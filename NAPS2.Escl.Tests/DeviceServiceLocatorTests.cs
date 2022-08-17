@@ -8,6 +8,6 @@ public class DeviceServiceLocatorTests
     [Fact]
     public async Task Locate()
     {
-        await new DeviceServiceLocator().Locate();
+        await new EsclServiceLocator().Locate();
     }
 }
