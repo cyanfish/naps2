@@ -1,5 +1,3 @@
-#region Usings
-
 using System.Drawing;
 using System.Threading;
 using System.Windows.Forms;
@@ -9,8 +7,7 @@ using NAPS2.EtoForms.WinForms;
 using NAPS2.ImportExport;
 using NAPS2.Ocr;
 using NAPS2.ImportExport.Images;
-
-#endregion
+using DockStyle = System.Windows.Forms.DockStyle;
 
 namespace NAPS2.WinForms;
 
@@ -322,12 +319,12 @@ public partial class FDesktop : FormBase
 
     private void SaveToolStripLocation()
     {
-        Config.User.Set(c => c.DesktopToolStripDock, tStrip.Parent.Dock);
+        Config.User.Set(c => c.DesktopToolStripDock, tStrip.Parent.Dock.ToConfig());
     }
 
     private void LoadToolStripLocation()
     {
-        var dock = Config.Get(c => c.DesktopToolStripDock);
+        var dock = Config.Get(c => c.DesktopToolStripDock).ToWinForms();
         if (dock != DockStyle.None)
         {
             var panel = toolStripContainer1.Controls.OfType<ToolStripPanel>().FirstOrDefault(x => x.Dock == dock);

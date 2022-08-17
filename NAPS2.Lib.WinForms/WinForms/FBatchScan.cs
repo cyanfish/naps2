@@ -6,6 +6,7 @@ using NAPS2.ImportExport;
 using NAPS2.Scan;
 using NAPS2.Scan.Batch;
 using NAPS2.Scan.Exceptions;
+using MessageBoxIcon = System.Windows.Forms.MessageBoxIcon;
 
 namespace NAPS2.WinForms;
 

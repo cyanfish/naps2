@@ -7,6 +7,7 @@ using NAPS2.Recovery;
 using NAPS2.Remoting;
 using NAPS2.Scan;
 using NAPS2.Update;
+using MessageBoxIcon = System.Windows.Forms.MessageBoxIcon;
 
 namespace NAPS2.WinForms;
 
@@ -267,7 +268,7 @@ public class DesktopController
         {
             MessageBox.Show(_config.Get(c => c.StartupMessageText), _config.Get(c => c.StartupMessageTitle),
                 MessageBoxButtons.OK,
-                _config.Get(c => c.StartupMessageIcon));
+                _config.Get(c => c.StartupMessageIcon).ToWinForms());
         }
     }
 

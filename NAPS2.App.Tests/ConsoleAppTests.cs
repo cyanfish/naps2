@@ -8,8 +8,7 @@ public class ConsoleAppTests : ContextualTests
     [Fact]
     public void ConvertsImportedFile()
     {
-        var importPath = Path.Combine(FolderPath, "in.png");
-        ImageResources.color_image.Save(importPath);
+        var importPath = CopyResourceToFile(ImageResources.color_image, "in.png");
         var outputPath = Path.Combine(FolderPath, "out.jpg");
         var args = $"-n 0 -i \"{importPath}\" -o \"{outputPath}\"";
 

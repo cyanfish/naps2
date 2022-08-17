@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net5-windows;net462</TargetFrameworks>
+    <TargetFrameworks>net6-windows;net462</TargetFrameworks>
     <OutputType>Exe</OutputType>
     <AppConfig>app.config</AppConfig>
     <LargeAddressAware>true</LargeAddressAware>

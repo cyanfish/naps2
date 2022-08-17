@@ -2,6 +2,7 @@ using System.ComponentModel;
 using System.Globalization;
 using System.Windows.Forms;
 using NAPS2.Images.Gdi;
+using MessageBoxIcon = System.Windows.Forms.MessageBoxIcon;
 
 namespace NAPS2.WinForms;
 

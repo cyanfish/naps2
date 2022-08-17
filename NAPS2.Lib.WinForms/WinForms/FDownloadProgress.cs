@@ -3,6 +3,7 @@ using System.Net;
 using System.Security.Cryptography;
 using System.Windows.Forms;
 using NAPS2.Dependencies;
+using MessageBoxIcon = System.Windows.Forms.MessageBoxIcon;
 
 namespace NAPS2.WinForms;
 

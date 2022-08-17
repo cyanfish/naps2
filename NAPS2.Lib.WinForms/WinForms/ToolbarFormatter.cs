@@ -1,5 +1,6 @@
 using System.Drawing;
 using System.Windows.Forms;
+using DockStyle = System.Windows.Forms.DockStyle;
 
 namespace NAPS2.WinForms;
 

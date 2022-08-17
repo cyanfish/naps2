@@ -46,7 +46,7 @@
     <PackageReference Include="Microsoft.Win32.Registry" Version="5.0.0" />
     <PackageReference Include="NAPS2.Wia" Version="1.0.1" />
     <!-- Hide compatibility warnings for NTwain as it will only be actually used on Windows. -->
-    <!-- TODO: Does this actually work if we build a net5 framework-dependent app and try to use Twain? -->
+    <!-- TODO: Does this actually work if we build a net6 framework-dependent app and try to use Twain? -->
     <PackageReference Include="NTwain" Version="3.7.1" NoWarn="NU1701" Condition="'$(TargetFramework)' == 'net462'" />
     <PackageReference Include="Nullable" Version="1.2.0" />
     <!-- We're deliberately using an older version of System.Drawing.Common to include cross-platform support. -->

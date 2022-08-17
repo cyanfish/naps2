@@ -20,7 +20,7 @@ public static class SecureStorage
 #if STANDALONE
         return plaintext;
 #else
-#if NET5_0_OR_GREATER
+#if NET6_0_OR_GREATER
         if (!OperatingSystem.IsWindowsVersionAtLeast(7)) return plaintext;
 #endif
         if (plaintext == null)
@@ -41,7 +41,7 @@ public static class SecureStorage
 #if STANDALONE
         return coded;
 #else
-#if NET5_0_OR_GREATER
+#if NET6_0_OR_GREATER
         if (!OperatingSystem.IsWindowsVersionAtLeast(7)) return coded;
 #endif
         if (coded == null)

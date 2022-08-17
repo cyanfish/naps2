@@ -1,6 +1,7 @@
 ﻿using System.Globalization;
 using System.Windows.Forms;
 using NAPS2.Scan;
+using MessageBoxIcon = System.Windows.Forms.MessageBoxIcon;
 
 namespace NAPS2.WinForms;
 

@@ -15,5 +15,5 @@ public class PackageOptions
     [Option('v', "verbose", Required = false, HelpText = "Show full output")]
     public bool Verbose { get; set; }
     
-    // TODO: Add net target (net462/net5/net5-windows etc.)
+    // TODO: Add net target (net462/net6/net6-windows etc.)
 }
