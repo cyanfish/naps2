@@ -66,13 +66,6 @@ public class MacImage : IMemoryImage
 
     public ImagePixelFormat PixelFormat { get; }
 
-    public ImageLockState Lock(LockMode lockMode, out IntPtr scan0, out int stride)
-    {
-        scan0 = _imageRep.BitmapData;
-        stride = (int) _imageRep.BytesPerRow;
-        return new MacImageLockState();
-    }
-
     public ImageLockState Lock(LockMode lockMode, out BitwiseImageData imageData)
     {
         var ptr = _imageRep.BitmapData;

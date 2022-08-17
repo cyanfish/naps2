@@ -52,7 +52,6 @@ public static class GdiExtensions
 
     public static PixelFormat AsPixelFormat(this ImagePixelFormat pixelFormat)
     {
-        // TODO: We need to handle when indexed palette values are unexpected (e.g. WB instead of BW)
         switch (pixelFormat)
         {
             case ImagePixelFormat.BW1:

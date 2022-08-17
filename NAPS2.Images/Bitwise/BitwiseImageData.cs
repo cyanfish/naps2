@@ -10,6 +10,7 @@ public struct BitwiseImageData
     public unsafe BitwiseImageData(byte* ptr, PixelInfo pix)
     {
         this.ptr = ptr;
+        safePtr = (IntPtr) ptr;
         stride = pix.Stride;
         w = pix.Width;
         h = pix.Height;
@@ -24,6 +25,7 @@ public struct BitwiseImageData
     }
 
     public unsafe byte* ptr;
+    public IntPtr safePtr;
     public int stride;
     public int w;
     public int h;

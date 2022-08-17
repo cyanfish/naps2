@@ -334,14 +334,14 @@ public class PdfiumPdfExporter : IPdfExporter
     {
         if (lossless)
         {
-            using var locked = img.Lock(LockMode.ReadOnly, out var scan0, out var stride);
+            using var locked = img.Lock(LockMode.ReadOnly, out var data);
             // var (realWidth, realHeight) = GetRealSize(img);
             // page.Width = realWidth;
             // page.Height = realHeight;
             // using XGraphics gfx = XGraphics.FromPdfPage(page);
             // gfx.DrawImage(img, 0, 0, realWidth, realHeight);
             using var imageObj = document.NewImage();
-            using var bitmap = PdfBitmap.CreateFromPointerBgr(img.Width, img.Height, scan0, stride);
+            using var bitmap = PdfBitmap.CreateFromPointerBgr(img.Width, img.Height, data.safePtr, data.stride);
             imageObj.SetBitmap(bitmap);
             imageObj.Matrix = PdfMatrix.FillPage(img.Width,img.Height);
             page.InsertObject(imageObj);

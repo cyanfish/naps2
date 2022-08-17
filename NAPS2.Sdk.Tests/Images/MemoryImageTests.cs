@@ -9,7 +9,7 @@ public class MemoryImageTests : ContextualTests
     public void LockAndDisposeTwice()
     {
         var image = TestImageContextFactory.Get().Create(100, 100, ImagePixelFormat.RGB24);
-        var lockState = image.Lock(LockMode.ReadWrite, out var scan0, out var stride);
+        var lockState = image.Lock(LockMode.ReadWrite, out var data);
         lockState.Dispose();
         lockState.Dispose();
     }

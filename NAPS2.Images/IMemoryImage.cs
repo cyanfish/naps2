@@ -41,9 +41,6 @@ public interface IMemoryImage : IImageStorage
     /// </summary>
     ImagePixelFormat PixelFormat { get; }
 
-    // TODO: Deprecate
-    ImageLockState Lock(LockMode lockMode, out IntPtr scan0, out int stride);
-
     /// <summary>
     /// Obtains access to the underlying binary data for the image.
     /// </summary>

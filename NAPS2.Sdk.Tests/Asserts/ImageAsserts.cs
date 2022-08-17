@@ -78,20 +78,19 @@ public static class ImageAsserts
         first = imageContext.PerformTransform(first, new ColorBitDepthTransform());
         second = imageContext.PerformTransform(second, new ColorBitDepthTransform());
 
-        using var lock1 = first.Lock(LockMode.ReadOnly, out var scan01, out var stride1);
-        using var lock2 = second.Lock(LockMode.ReadOnly, out var scan02, out var stride2);
+        // TODO: Wrap in a bitwise op
+        using var lock1 = first.Lock(LockMode.ReadOnly, out var data1);
+        using var lock2 = second.Lock(LockMode.ReadOnly, out var data2);
         int width = first.Width;
         int height = first.Height;
         int bytesPerPixel1 = first.PixelFormat == ImagePixelFormat.ARGB32 ? 4 : 3;
         int bytesPerPixel2 = second.PixelFormat == ImagePixelFormat.ARGB32 ? 4 : 3;
         long total = 0;
         long div = width * height * 3;
-        byte* data1 = (byte*) scan01;
-        byte* data2 = (byte*) scan02;
         for (int y = 0; y < height; y++)
         {
-            byte* row1 = data1 + stride1 * y;
-            byte* row2 = data2 + stride2 * y;
+            byte* row1 = data1.ptr + data1.stride * y;
+            byte* row2 = data2.ptr + data2.stride * y;
             for (int x = 0; x < width; x++)
             {
                 byte* pixel1 = row1 + x * bytesPerPixel1;

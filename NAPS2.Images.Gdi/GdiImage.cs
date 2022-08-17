@@ -4,24 +4,29 @@ using NAPS2.Images.Bitwise;
 
 namespace NAPS2.Images.Gdi;
 
-using PixelFormat_ = PixelFormat;
-
 /// <summary>
 /// An implementation of IMemoryImage that wraps a GDI+ image (System.Drawing.Bitmap).
 /// </summary>
 public class GdiImage : IMemoryImage
 {
     private ImageFileFormat? _originalFileFormat;
-    
+
     public GdiImage(Bitmap bitmap)
     {
-        Bitmap = bitmap ?? throw new ArgumentNullException(nameof(bitmap));
+        if (bitmap == null)
+        {
+            throw new ArgumentNullException(nameof(bitmap));
+        }
+        FixedPixelFormat = GdiPixelFormatFixer.MaybeFixPixelFormat(ref bitmap);
+        Bitmap = bitmap;
     }
 
     /// <summary>
     /// Gets the underlying System.Drawing.Bitmap object for this image.
     /// </summary>
     public Bitmap Bitmap { get; }
+
+    internal bool FixedPixelFormat { get; }
 
     public int Width => Bitmap.Width;
 
@@ -37,20 +42,7 @@ public class GdiImage : IMemoryImage
 
     public ImageLockState Lock(LockMode lockMode, out BitwiseImageData imageData)
     {
-        var bitmapData = Bitmap.LockBits(new Rectangle(0, 0, Bitmap.Width, Bitmap.Height), lockMode.AsImageLockMode(),
-            Bitmap.PixelFormat);
-        // TODO: Verify (in construction) that for indexed pixel formats, we have the expected palette
-        var subPixelType = Bitmap.PixelFormat switch
-        {
-            PixelFormat_.Format32bppArgb => SubPixelType.Bgra,
-            PixelFormat_.Format24bppRgb => SubPixelType.Bgr,
-            PixelFormat_.Format8bppIndexed => SubPixelType.Gray,
-            PixelFormat_.Format1bppIndexed => SubPixelType.Bit,
-            _ => throw new InvalidOperationException("Unsupported pixel format")
-        };
-        imageData = new BitwiseImageData(bitmapData.Scan0,
-            new PixelInfo(Width, Height, subPixelType, bitmapData.Stride));
-        return new GdiImageLockState(Bitmap, bitmapData);
+        return GdiImageLockState.Create(Bitmap, lockMode, out imageData);
     }
 
     // TODO: Consider propagating this during transforms (when it makes sense); then maybe we can remove the "encodeOnce" check
@@ -58,15 +50,6 @@ public class GdiImage : IMemoryImage
     {
         get => _originalFileFormat ?? Bitmap.RawFormat.AsImageFileFormat();
         set => _originalFileFormat = value;
-    }
-
-    public ImageLockState Lock(LockMode lockMode, out IntPtr scan0, out int stride)
-    {
-        var bitmapData = Bitmap.LockBits(new Rectangle(0, 0, Bitmap.Width, Bitmap.Height), lockMode.AsImageLockMode(),
-            Bitmap.PixelFormat);
-        scan0 = bitmapData.Scan0;
-        stride = Math.Abs(bitmapData.Stride);
-        return new GdiImageLockState(Bitmap, bitmapData);
     }
 
     public void Save(string path, ImageFileFormat imageFormat = ImageFileFormat.Unspecified, int quality = -1)

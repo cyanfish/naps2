@@ -35,17 +35,18 @@ public static class BlankDetector
         long totalPixels = image.Width * image.Height;
         long matchPixels = 0;
 
-        using var data = image.Lock(LockMode.ReadOnly, out var scan0, out var stride);
-        var bytes = new byte[stride * image.Height];
-        Marshal.Copy(scan0, bytes, 0, bytes.Length);
-        data.Dispose();
+        // TODO: Wrap this in a bitwise op
+        using var lockState = image.Lock(LockMode.ReadOnly, out var data);
+        var bytes = new byte[data.stride * image.Height];
+        Marshal.Copy(data.safePtr, bytes, 0, bytes.Length);
+        lockState.Dispose();
         for (int x = 0; x < image.Width; x++)
         {
             for (int y = 0; y < image.Height; y++)
             {
-                int b = bytes[stride * y + x * 3];
-                int g = bytes[stride * y + x * 3 + 1];
-                int r = bytes[stride * y + x * 3 + 2];
+                int b = bytes[data.stride * y + x * 3];
+                int g = bytes[data.stride * y + x * 3 + 1];
+                int r = bytes[data.stride * y + x * 3 + 2];
                 // Use standard values for grayscale conversion to weight the RGB values
                 int luma = r * 299 + g * 587 + b * 114;
                 if (luma < whiteThreshold * 1000)
