@@ -17,6 +17,7 @@ public class ScanOptions
 
     public PageSize? PageSize { get; set; }
 
+    // TODO: Use this as threshold for B/W scans
     public int Brightness { get; set; }
 
     public int Contrast { get; set; }
@@ -40,6 +41,7 @@ public class ScanOptions
 
     public HorizontalAlign PageAlign { get; set; }
 
+    // TODO: Consider removing this option and doing it by default
     public bool BrightnessContrastAfterScan { get; set; }
 
     public bool UseNativeUI { get; set; }

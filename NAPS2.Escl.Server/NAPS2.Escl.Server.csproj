@@ -9,7 +9,6 @@
 
     <ItemGroup>
       <PackageReference Include="EmbedIO" Version="3.4.3" />
-      <PackageReference Include="Zeroconf" Version="3.6.11" />
     </ItemGroup>
 
     <ItemGroup>

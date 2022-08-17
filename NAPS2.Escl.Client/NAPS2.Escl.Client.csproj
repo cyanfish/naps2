@@ -8,10 +8,6 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="Zeroconf" Version="3.6.11" />
-    </ItemGroup>
-
-    <ItemGroup>
       <ProjectReference Include="..\NAPS2.Escl\NAPS2.Escl.csproj" />
     </ItemGroup>
 
