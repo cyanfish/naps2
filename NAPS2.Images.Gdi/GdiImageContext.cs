@@ -9,12 +9,12 @@ public class GdiImageContext : ImageContext
     
     public GdiImageContext() : this(null)
     {
-        LoadFromFileKeepsLock = true;
     }
 
     public GdiImageContext(IPdfRenderer? pdfRenderer) : base(typeof(GdiImage), pdfRenderer)
     {
         _imageTransformer = new GdiImageTransformer(this);
+        LoadFromFileKeepsLock = true;
     }
 
     public override IMemoryImage PerformTransform(IMemoryImage image, Transform transform)
@@ -82,6 +82,15 @@ public class GdiImageContext : ImageContext
             var p = bitmap.Palette;
             p.Entries[0] = Color.Black;
             p.Entries[1] = Color.White;
+            bitmap.Palette = p;
+        }
+        if (pixelFormat == ImagePixelFormat.Gray8)
+        {
+            var p = bitmap.Palette;
+            for (int i = 0; i < 256; i++)
+            {
+                p.Entries[i] = Color.FromArgb(i, i, i);
+            }
             bitmap.Palette = p;
         }
         return new GdiImage(bitmap);

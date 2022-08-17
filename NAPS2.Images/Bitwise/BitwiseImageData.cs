@@ -2,6 +2,11 @@ namespace NAPS2.Images.Bitwise;
 
 public struct BitwiseImageData
 {
+    public unsafe BitwiseImageData(IntPtr ptr, PixelInfo pix)
+        : this((byte*) ptr, pix)
+    {
+    }
+
     public unsafe BitwiseImageData(byte* ptr, PixelInfo pix)
     {
         this.ptr = ptr;

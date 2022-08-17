@@ -73,9 +73,9 @@ public class MacImage : IMemoryImage
         return new MacImageLockState();
     }
 
-    public unsafe ImageLockState Lock(LockMode lockMode, out BitwiseImageData imageData)
+    public ImageLockState Lock(LockMode lockMode, out BitwiseImageData imageData)
     {
-        var data = (byte*) _imageRep.BitmapData;
+        var ptr = _imageRep.BitmapData;
         var stride = (int) _imageRep.BytesPerRow;
         var subPixelType = PixelFormat switch
         {
@@ -86,7 +86,7 @@ public class MacImage : IMemoryImage
             ImagePixelFormat.BW1 => SubPixelType.Bit,
             _ => throw new InvalidOperationException("Unsupported pixel format")
         };
-        imageData = new BitwiseImageData(data, new PixelInfo(Width, Height, subPixelType, stride));
+        imageData = new BitwiseImageData(ptr, new PixelInfo(Width, Height, subPixelType, stride));
         return new MacImageLockState();
     }
 

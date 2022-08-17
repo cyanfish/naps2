@@ -254,7 +254,7 @@ public class TransformTests : ContextualTests
 
         actual = ImageContext.PerformTransform(actual, new ScaleTransform(0.5));
 
-        ImageAsserts.Similar(expected, actual, ignoreResolution: true);
+        ImageAsserts.Similar(expected, actual, ImageAsserts.XPLAT_RMSE_THRESHOLD, ignoreResolution: true);
     }
 
     [Fact]
@@ -265,7 +265,7 @@ public class TransformTests : ContextualTests
 
         actual = ImageContext.PerformTransform(actual, new ScaleTransform(10));
 
-        ImageAsserts.Similar(expected, actual, ignoreResolution: true);
+        ImageAsserts.Similar(expected, actual, ImageAsserts.XPLAT_RMSE_THRESHOLD, ignoreResolution: true);
     }
 
     [Fact]

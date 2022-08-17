@@ -32,10 +32,11 @@ public class MemoryImageTests : ContextualTests
         var image = LoadImage(ImageResources.color_image);
         var path = Path.Combine(FolderPath, "test.jpg");
         
-        image.Save(path, ImageFileFormat.Jpeg, 10);
+        image.Save(path, ImageFileFormat.Jpeg, 25);
 
         var loaded = TestImageContextFactory.Get().Load(path);
-        // TODO: Not sure if there's a better way to test this cross-platform (maybe q=50 would be more consistent?)
+        // Rather than comparing to a reference image (which doesn't work consistently cross-platform), we just assert
+        // that we're a little bit off from the original image. i.e. that quality does *something*
         ImageAsserts.NotSimilar(ImageResources.color_image, loaded);
         ImageAsserts.Similar(ImageResources.color_image, loaded, 5.0);
     }
@@ -60,9 +61,11 @@ public class MemoryImageTests : ContextualTests
         var path = Path.Combine(FolderPath, "test.jpg");
         
         using var stream = new FileStream(path, FileMode.CreateNew);
-        image.Save(stream, ImageFileFormat.Jpeg, 10);
+        image.Save(stream, ImageFileFormat.Jpeg, 25);
 
         var loaded = TestImageContextFactory.Get().Load(stream);
+        // Rather than comparing to a reference image (which doesn't work consistently cross-platform), we just assert
+        // that we're a little bit off from the original image. i.e. that quality does *something*
         ImageAsserts.NotSimilar(ImageResources.color_image, loaded);
         ImageAsserts.Similar(ImageResources.color_image, loaded, 5.0);
     }

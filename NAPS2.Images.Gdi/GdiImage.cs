@@ -4,6 +4,8 @@ using NAPS2.Images.Bitwise;
 
 namespace NAPS2.Images.Gdi;
 
+using PixelFormat_ = PixelFormat;
+
 /// <summary>
 /// An implementation of IMemoryImage that wraps a GDI+ image (System.Drawing.Bitmap).
 /// </summary>
@@ -35,7 +37,20 @@ public class GdiImage : IMemoryImage
 
     public ImageLockState Lock(LockMode lockMode, out BitwiseImageData imageData)
     {
-        throw new NotImplementedException();
+        var bitmapData = Bitmap.LockBits(new Rectangle(0, 0, Bitmap.Width, Bitmap.Height), lockMode.AsImageLockMode(),
+            Bitmap.PixelFormat);
+        // TODO: Verify (in construction) that for indexed pixel formats, we have the expected palette
+        var subPixelType = Bitmap.PixelFormat switch
+        {
+            PixelFormat_.Format32bppArgb => SubPixelType.Bgra,
+            PixelFormat_.Format24bppRgb => SubPixelType.Bgr,
+            PixelFormat_.Format8bppIndexed => SubPixelType.Gray,
+            PixelFormat_.Format1bppIndexed => SubPixelType.Bit,
+            _ => throw new InvalidOperationException("Unsupported pixel format")
+        };
+        imageData = new BitwiseImageData(bitmapData.Scan0,
+            new PixelInfo(Width, Height, subPixelType, bitmapData.Stride));
+        return new GdiImageLockState(Bitmap, bitmapData);
     }
 
     // TODO: Consider propagating this during transforms (when it makes sense); then maybe we can remove the "encodeOnce" check
@@ -107,7 +122,7 @@ public class GdiImage : IMemoryImage
 
     public IMemoryImage SafeClone()
     {
-        if (PixelFormat == ImagePixelFormat.BW1)
+        if (PixelFormat is ImagePixelFormat.BW1 or ImagePixelFormat.Gray8)
         {
             // TODO: This should do something better, but currently there are no use cases that need it
             // TODO: In general we might consider, rather than per-impl SafeClone, having an ImageContext method to do a binary copy with CreateImage + Lock

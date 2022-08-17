@@ -38,17 +38,17 @@ public abstract class BinaryBitwiseImageOp : BitwiseImageOp
         }
     }
 
-    public unsafe void Perform(IntPtr src, PixelInfo srcPixelInfo, IMemoryImage dst)
+    public void Perform(IntPtr src, PixelInfo srcPixelInfo, IMemoryImage dst)
     {
         using var dstLock = dst.Lock(DstLockMode, out var dstData);
-        var srcData = new BitwiseImageData((byte*) src, srcPixelInfo);
+        var srcData = new BitwiseImageData(src, srcPixelInfo);
         ValidateAndPerform(srcData, dstData);
     }
 
-    public unsafe void Perform(IMemoryImage src, IntPtr dst, PixelInfo dstPixelInfo)
+    public void Perform(IMemoryImage src, IntPtr dst, PixelInfo dstPixelInfo)
     {
         using var srcLock = src.Lock(SrcLockMode, out var srcData);
-        var dstData = new BitwiseImageData((byte*) dst, dstPixelInfo);
+        var dstData = new BitwiseImageData(dst, dstPixelInfo);
         ValidateAndPerform(srcData, dstData);
     }
 

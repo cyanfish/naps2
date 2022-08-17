@@ -52,11 +52,13 @@ public static class GdiExtensions
 
     public static PixelFormat AsPixelFormat(this ImagePixelFormat pixelFormat)
     {
+        // TODO: We need to handle when indexed palette values are unexpected (e.g. WB instead of BW)
         switch (pixelFormat)
         {
             case ImagePixelFormat.BW1:
-                // TODO: Maybe it makes sense to have WB1 format too
                 return PixelFormat.Format1bppIndexed;
+            case ImagePixelFormat.Gray8:
+                return PixelFormat.Format8bppIndexed;
             case ImagePixelFormat.RGB24:
                 return PixelFormat.Format24bppRgb;
             case ImagePixelFormat.ARGB32:
@@ -73,6 +75,8 @@ public static class GdiExtensions
                 return ImagePixelFormat.RGB24;
             case PixelFormat.Format32bppArgb:
                 return ImagePixelFormat.ARGB32;
+            case PixelFormat.Format8bppIndexed:
+                return ImagePixelFormat.Gray8;
             case PixelFormat.Format1bppIndexed:
                 return ImagePixelFormat.BW1;
             default:
