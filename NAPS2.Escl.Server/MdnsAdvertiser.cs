@@ -14,7 +14,7 @@ public class MdnsAdvertiser : IDisposable
         service.AddProperty("rs", "escl");
         service.AddProperty("ty", "NAPS2-Canon MP495");
         service.AddProperty("pdl", "application/pdf,image/jpeg,image/png");
-        service.AddProperty("uuid", Guid.NewGuid().ToString("D"));
+        service.AddProperty("uuid", "0e468f6d-e5dc-4abe-8e9f-ad08d8546b0c");
         service.AddProperty("cs", "color,grayscale,binary");
         service.AddProperty("is", "platen"); // and ,adf
         service.AddProperty("duplex", "F");

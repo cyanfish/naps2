@@ -1,3 +1,5 @@
+using System.Diagnostics;
+using System.Reflection;
 using System.Xml.Linq;
 using EmbedIO;
 using EmbedIO.Routing;
@@ -29,7 +31,7 @@ internal class EsclApiController : WebApiController
                     new XElement(PwgNs + "Version", caps.Version), // TODO: Probably hard code version or something
                     new XElement(PwgNs + "MakeAndModel", caps.MakeAndModel),
                     new XElement(PwgNs + "SerialNumber", caps.SerialNumber),
-                    new XElement(ScanNs + "UUID", Guid.NewGuid().ToString("D")),
+                    new XElement(ScanNs + "UUID", "0e468f6d-e5dc-4abe-8e9f-ad08d8546b0c"),
                     new XElement(ScanNs + "AdminURI", ""),
                     new XElement(ScanNs + "IconURI", ""),
                     new XElement(ScanNs + "SettingProfiles",
@@ -37,14 +39,16 @@ internal class EsclApiController : WebApiController
                             new XAttribute("name", "p1"),
                             new XElement(ScanNs + "ColorModes",
                                 new XElement(ScanNs + "ColorMode", "BlackAndWhite1"),
-                                new XElement(ScanNs + "ColorMode", "Grayscale8")),
+                                new XElement(ScanNs + "ColorMode", "Grayscale8"),
+                                new XElement(ScanNs + "ColorMode", "RGB24")),
                             new XElement(ScanNs + "DocumentFormats",
                                 new XElement(PwgNs + "DocumentFormat", "application/pdf"),
                                 new XElement(PwgNs + "DocumentFormat", "image/jpeg"),
                                 new XElement(PwgNs + "DocumentFormat", "image/png"),
                                 new XElement(ScanNs + "DocumentFormatExt", "application/pdf"),
                                 new XElement(ScanNs + "DocumentFormatExt", "image/jpeg"),
-                                new XElement(ScanNs + "DocumentFormatExt", "image/png")),
+                                new XElement(ScanNs + "DocumentFormatExt", "image/png")
+                            ),
                             new XElement(ScanNs + "SupportedResolutions",
                                 new XElement(ScanNs + "DiscreteResolutions",
                                     new XElement(ScanNs + "DiscreteResolution",
@@ -60,6 +64,7 @@ internal class EsclApiController : WebApiController
                             new XElement(ScanNs + "SettingProfiles",
                                 new XElement(ScanNs + "SettingProfile",
                                     new XAttribute("ref", "p1")))))));
+        Response.ContentType = "text/xml";
         using var writer = new StreamWriter(HttpContext.OpenResponseStream());
         await writer.WriteAsync(doc);
     }
@@ -71,20 +76,28 @@ internal class EsclApiController : WebApiController
         foreach (var jobState in _serverState.Jobs.Values)
         {
             jobsElement.Add(new XElement(ScanNs + "JobInfo",
-                new XElement(PwgNs + "JobUri", $"/ScanJobs/{jobState.Id}"),
+                new XElement(PwgNs + "JobUri", $"/escl/ScanJobs/{jobState.Id}"),
                 new XElement(PwgNs + "JobUuid", jobState.Id),
-                new XElement(ScanNs + "Age", "10"), // TODO: ?
-                new XElement(PwgNs + "ImagesCompleted", jobState.Status == JobStatus.Completed ? 1 : 0),
+                new XElement(ScanNs + "Age", Math.Ceiling(jobState.LastUpdated.Elapsed.TotalSeconds)),
+                new XElement(PwgNs + "ImagesCompleted",
+                    jobState.Status is JobStatus.Pending or JobStatus.Processing ? "0" : "1"),
                 new XElement(PwgNs + "ImagesToTransfer", "1"),
-                new XElement(PwgNs + "JobState", jobState.Status.ToString())));
+                new XElement(PwgNs + "JobState", jobState.Status.ToString()),
+                new XElement(PwgNs + "JobStateReasons",
+                    new XElement(PwgNs + "JobStateReason",
+                        jobState.Status == JobStatus.Processing ? "JobScanning" : "JobCompletedSuccessfully"))));
         }
         var doc =
             EsclXmlHelper.CreateDocAsString(
                 new XElement(ScanNs + "ScannerStatus",
                     new XElement(PwgNs + "Version", "2.6"),
-                    new XElement(PwgNs + "State", _serverState.Jobs.Any(x => x.Value.Status is JobStatus.Pending or JobStatus.Processing) ? "Processing" : "Idle"),
+                    new XElement(PwgNs + "State",
+                        _serverState.Jobs.Any(x => x.Value.Status is JobStatus.Pending or JobStatus.Processing)
+                            ? "Processing"
+                            : "Idle"),
                     jobsElement
                 ));
+        Response.ContentType = "text/xml";
         using var writer = new StreamWriter(HttpContext.OpenResponseStream());
         await writer.WriteAsync(doc);
     }
@@ -94,16 +107,18 @@ internal class EsclApiController : WebApiController
     {
         var jobState = JobState.CreateNewJob();
         _serverState.Jobs[jobState.Id] = jobState;
-        Response.Headers.Add("Location", $"{Request.RawUrl}/{jobState.Id}");
+        Response.Headers.Add("Location", $"{Request.Url}/{jobState.Id}");
         Response.StatusCode = 201;
     }
 
     [Route(HttpVerbs.Delete, "/ScanJobs/{jobId}")]
     public async Task CancelScanJob(string jobId)
     {
-        if (_serverState.Jobs.TryGetValue(jobId, out var jobState))
+        if (_serverState.Jobs.TryGetValue(jobId, out var jobState) &&
+            jobState.Status is JobStatus.Pending or JobStatus.Processing)
         {
             jobState.Status = JobStatus.Canceled;
+            jobState.LastUpdated = Stopwatch.StartNew();
         }
         else
         {
@@ -111,17 +126,30 @@ internal class EsclApiController : WebApiController
         }
     }
 
-    [Route(HttpVerbs.Get, "/{jobId}/NextDocument")]
+    [Route(HttpVerbs.Get, "/ScanJobs/{jobId}/ScanImageInfo")]
+    public async Task GetImageinfo(string jobId)
+    {
+    }
+
+    [Route(HttpVerbs.Get, "/ScanJobs/{jobId}/NextDocument")]
     public async Task NextDocument(string jobId)
     {
-        if (_serverState.Jobs.TryGetValue(jobId, out var jobState))
+        if (_serverState.Jobs.TryGetValue(jobId, out var jobState) &&
+            jobState.Status is JobStatus.Pending or JobStatus.Processing)
         {
             Response.Headers.Add("Content-Location", $"/escl/ScanJobs/{jobState.Id}/1");
+            // Bypass https://github.com/unosquare/embedio/issues/510
+            var field = Response.GetType().GetField("<ProtocolVersion>k__BackingField",
+                BindingFlags.Instance | BindingFlags.NonPublic);
+            field.SetValue(Response, new Version(1, 1));
             Response.SendChunked = true;
-            using var stream = HttpContext.OpenResponseStream();
+            Response.ContentType = "image/jpeg";
+            Response.ContentEncoding = null;
+            using var stream = Response.OutputStream;
             var bytes = File.ReadAllBytes(@"C:\Devel\VS\NAPS2.Future\NAPS2.Sdk.Tests\Resources\color_image.jpg");
-            await stream.WriteAsync(bytes, 0, bytes.Length);
+            stream.Write(bytes, 0, bytes.Length);
             jobState.Status = JobStatus.Completed;
+            jobState.LastUpdated = Stopwatch.StartNew();
         }
         else
         {

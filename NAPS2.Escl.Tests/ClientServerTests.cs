@@ -12,7 +12,7 @@ public class ClientServerTests
     {
         using var server = new EsclServer(new EsclServerConfig
         {
-            Capabilities = new EsclCapabilities()
+            Capabilities = new EsclCapabilities
             {
                 Version = "2.0",
                 MakeAndModel = "HP Blah",

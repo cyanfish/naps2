@@ -1,3 +1,5 @@
+using System.Diagnostics;
+
 namespace NAPS2.Escl.Server;
 
 internal class JobState
@@ -7,13 +9,16 @@ internal class JobState
         return new JobState
         {
             Id = Guid.NewGuid().ToString("D"),
-            Status = JobStatus.Pending
+            Status = JobStatus.Processing,
+            LastUpdated = Stopwatch.StartNew()
         };
     }
 
     public string Id { get; init; }
 
     public JobStatus Status { get; set; }
+    
+    public Stopwatch LastUpdated { get; set; }
 }
 
 internal enum JobStatus
