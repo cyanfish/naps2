@@ -166,8 +166,11 @@
   <data name="scanner_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\scanner-32-rev2.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="scanner_48_old" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Icons\scanner-48-rev1.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="scanner_48" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Icons\scanner-32-rev2.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <value>Icons\scanner-48-rev2.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="scanner_64" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\scanner-64-rev2.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>

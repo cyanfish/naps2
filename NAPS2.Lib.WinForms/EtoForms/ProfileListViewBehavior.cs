@@ -34,7 +34,7 @@ public class ProfileListViewBehavior : ListViewBehavior<ScanProfile>
         {
             return Icons.scanner_lock.ToEto();
         }
-        return Icons.scanner_48.ToEto();
+        return Icons.scanner_48_old.ToEto();
     }
 
     public override void SetDragData(ListSelection<ScanProfile> selection, IDataObject dataObject)
