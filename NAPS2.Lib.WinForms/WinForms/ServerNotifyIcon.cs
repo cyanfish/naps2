@@ -8,7 +8,7 @@ public class ServerNotifyIcon
     {
         NotifyIcon = new NotifyIcon
         {
-            Icon = Icons.scanner_icon,
+            Icon = Icons.favicon,
             BalloonTipIcon = ToolTipIcon.Info,
             BalloonTipText = string.Format(MiscResources.ListeningOnPort, port),
             BalloonTipTitle = MiscResources.ServerStarted,

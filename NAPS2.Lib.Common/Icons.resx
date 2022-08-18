@@ -160,8 +160,20 @@
   <data name="picture" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\picture.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="scanner" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Icons\scanner.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="scanner_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Icons\scanner-16-rev2.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="scanner_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Icons\scanner-32-rev2.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="scanner_48" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Icons\scanner-32-rev2.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="scanner_64" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Icons\scanner-64-rev2.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="scanner_128" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Icons\scanner-128.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="scanner_default" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\scanner-default.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -171,12 +183,6 @@
   </data>
   <data name="scanner_lock" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\scanner-lock.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="scanner_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Icons\scanner.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="scanner_large" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Icons\scanner-large.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="transform_flip" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\transform_flip.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -225,15 +231,6 @@
   </data>
   <data name="blueprints_small" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\blueprints-small.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="scanner_48" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Icons\scanner-48.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="scanner_64" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Icons\scanner-64.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="scanner_72" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Icons\scanner-72.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="world" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\world.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -357,5 +354,8 @@
   </data>
   <data name="information_small" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\information-small.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="favicon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Icons\favicon.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

@@ -70,6 +70,7 @@ public partial class FDesktop : FormBase
         _desktopFormProvider = desktopFormProvider;
         _desktopSubFormController = desktopSubFormController;
         InitializeComponent();
+        Icon = Icons.favicon;
 
         notify.ParentForm = this;
         Shown += FDesktop_Shown;

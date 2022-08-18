@@ -45,7 +45,7 @@ public class AboutForm : EtoDialogBase
     {
         Content = L.Root(
             L.Row(
-                L.Column(new ImageView { Image = Icons.scanner_large.ToEto() }).Padding(right: 4),
+                L.Column(new ImageView { Image = Icons.scanner_128.ToEto() }).Padding(right: 4),
                 L.Column(
                     C.NoWrap(AssemblyHelper.Product),
                     L.Row(
