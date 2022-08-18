@@ -1,3 +1,4 @@
+using System.Net;
 using NAPS2.Escl.Client;
 using NAPS2.Escl.Server;
 using Xunit;
@@ -21,7 +22,7 @@ public class ClientServerTests
         server.Start();
         var client = new EsclClient(new EsclService
         {
-            Ip = "localhost",
+            Ip = IPAddress.IPv6Loopback,
             Port = 9898,
             RootUrl = "escl",
             Tls = false

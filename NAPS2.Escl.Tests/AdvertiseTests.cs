@@ -12,7 +12,7 @@ public class AdvertiseTests
         {
             Capabilities = new EsclCapabilities()
             {
-                Version = "2.0",
+                Version = "2.6",
                 MakeAndModel = "HP Blah",
                 SerialNumber = "123abc"
             }
@@ -20,6 +20,9 @@ public class AdvertiseTests
         server.Start();
         using var advertiser = new MdnsAdvertiser();
         advertiser.Advertise();
-        await Task.Delay(10000);
+        for (int i = 0; i < 10; i++)
+        {
+            await Task.Delay(5000);
+        }
     }
 }

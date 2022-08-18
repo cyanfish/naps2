@@ -16,7 +16,7 @@ public class MdnsAdvertiser : IDisposable
         service.AddProperty("pdl", "application/pdf,image/jpeg,image/png");
         service.AddProperty("uuid", Guid.NewGuid().ToString("D"));
         service.AddProperty("cs", "color,grayscale,binary");
-        service.AddProperty("is", "platen,adf");
+        service.AddProperty("is", "platen"); // and ,adf
         service.AddProperty("duplex", "F");
         _sd = new ServiceDiscovery();
         _sd.Announce(service);

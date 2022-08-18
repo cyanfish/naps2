@@ -4,11 +4,8 @@ namespace NAPS2.Escl.Client;
 
 public class EsclClient
 {
-    private static readonly XDeclaration Decl = new("1.0", "UTF-8", null);
-    private static readonly XNamespace ScanNs = XNamespace.Get("http://schemas.hp.com/imaging/escl/2011/05/03");
-    private static readonly XAttribute ScanNsAttr = new(XNamespace.Xmlns + "scan", ScanNs);
-    private static readonly XNamespace PwgNs = XNamespace.Get("http://www.pwg.org/schemas/2010/12/sm");
-    private static readonly XAttribute PwgNsAttr = new(XNamespace.Xmlns + "pwg", PwgNs);
+    private static readonly XNamespace ScanNs = EsclXmlHelper.ScanNs;
+    private static readonly XNamespace PwgNs = EsclXmlHelper.PwgNs;
 
     private readonly EsclService _service;
 
@@ -54,32 +51,26 @@ public class EsclClient
 
     public async Task<EsclJob> CreateScanJob(EsclScanSettings scanSettings)
     {
-        var doc = new XDocument(
-            new XElement(ScanNs + "ScanSettings",
-                PwgNsAttr,
-                ScanNsAttr,
-                new XElement(PwgNs + "Version", "2.6"),
-                new XElement(ScanNs + "Intent", "Photo"),
-                new XElement(PwgNs + "ScanRegions",
-                    new XElement(PwgNs + "ScanRegion",
-                        new XElement(PwgNs + "Height", "1200"),
-                        new XElement(PwgNs + "ContentRegionUnits", "escl:ThreeHundredthsOfInches"),
-                        new XElement(PwgNs + "Width", "1800"),
-                        new XElement(PwgNs + "XOffset"),
-                        new XElement(PwgNs + "YOffset"))),
-                new XElement(PwgNs + "InputSource", "Platen"),
-                new XElement(ScanNs + "ColorMode", "Grayscale8")));
-        var response = await new HttpClient().PostAsync(GetUrl("ScanJobs"), AsContent(doc));
+        var doc =
+            EsclXmlHelper.CreateDocAsString(
+                new XElement(ScanNs + "ScanSettings",
+                    new XElement(PwgNs + "Version", "2.6"),
+                    new XElement(ScanNs + "Intent", "Photo"),
+                    new XElement(PwgNs + "ScanRegions",
+                        new XElement(PwgNs + "ScanRegion",
+                            new XElement(PwgNs + "Height", "1200"),
+                            new XElement(PwgNs + "ContentRegionUnits", "escl:ThreeHundredthsOfInches"),
+                            new XElement(PwgNs + "Width", "1800"),
+                            new XElement(PwgNs + "XOffset"),
+                            new XElement(PwgNs + "YOffset"))),
+                    new XElement(PwgNs + "InputSource", "Platen"),
+                    new XElement(ScanNs + "ColorMode", "Grayscale8")));
+        var response = await new HttpClient().PostAsync(GetUrl("ScanJobs"), new StringContent(doc));
         response.EnsureSuccessStatusCode();
         return new EsclJob
         {
             Uri = response.Headers.Location
         };
-    }
-
-    private static StringContent AsContent(XDocument doc)
-    {
-        return new StringContent($"{Decl}{Environment.NewLine}{doc}");
     }
 
     public async Task<byte[]> NextDocument(EsclJob job)

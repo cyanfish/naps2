@@ -6,6 +6,7 @@ namespace NAPS2.Escl.Server;
 public class EsclServer : IDisposable
 {
     private readonly EsclServerConfig _serverConfig;
+    private readonly EsclServerState _serverState = new();
     private WebServer? _server;
 
     public EsclServer(EsclServerConfig serverConfig)
@@ -19,11 +20,15 @@ public class EsclServer : IDisposable
         {
             throw new InvalidOperationException();
         }
-        var url = "http://localhost:9898/";
+        var url = "http://+:9898/";
         _server = new WebServer(o => o
                 .WithMode(HttpListenerMode.EmbedIO)
                 .WithUrlPrefix(url))
-            .WithWebApi("/escl", m => m.WithController(() => new EsclApiController(_serverConfig)));
+            .WithWebApi("/escl", m => m.WithController(() => new EsclApiController(_serverConfig, _serverState)));
+        _server.HandleHttpException(async (ctx, ex) =>
+        {
+            
+        });
         _server.StateChanged += ServerOnStateChanged;
         // TODO: This might block on tasks, maybe copy impl but async
         _server.Start();
@@ -31,7 +36,6 @@ public class EsclServer : IDisposable
 
     private void ServerOnStateChanged(object sender, WebServerStateChangedEventArgs e)
     {
-        
     }
 
     public void Dispose()
