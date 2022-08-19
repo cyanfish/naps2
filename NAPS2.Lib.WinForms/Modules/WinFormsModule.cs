@@ -1,5 +1,4 @@
-﻿using NAPS2.Dependencies;
-using NAPS2.EtoForms;
+﻿using NAPS2.EtoForms;
 using NAPS2.EtoForms.WinForms;
 using NAPS2.ImportExport;
 using NAPS2.ImportExport.Pdf;
@@ -22,7 +21,6 @@ public class WinFormsModule : NinjectModule
         Bind<IOverwritePrompt>().To<WinFormsOverwritePrompt>();
         Bind<OperationProgress>().To<WinFormsOperationProgress>().InSingletonScope();
         Bind<DialogHelper>().To<WinFormsDialogHelper>();
-        Bind<IEtoPlatform>().To<WinFormsEtoPlatform>();
         Bind<INotificationManager>().To<NotificationManager>().InSingletonScope();
         Bind<ISaveNotify>().ToMethod(ctx => ctx.Kernel.Get<INotificationManager>());
         Bind<IScannedImagePrinter>().To<PrintDocumentPrinter>();
@@ -33,6 +31,7 @@ public class WinFormsModule : NinjectModule
         Bind<IDesktopScanController>().To<DesktopScanController>();
         Bind<DesktopFormProvider>().ToSelf().InSingletonScope();
 
+        EtoPlatform.Current = new WinFormsEtoPlatform();
         // TODO: Can we add a test for this?
         Log.EventLogger = new WindowsEventLogger(Kernel!.Get<Naps2Config>());
     }

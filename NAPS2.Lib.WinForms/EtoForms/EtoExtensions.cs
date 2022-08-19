@@ -37,6 +37,10 @@ public static class EtoExtensions
         _ => throw new ArgumentException()
     };
 
+    public static ControlWithLayoutAttributes Width(this Control control, int width) =>
+        new ControlWithLayoutAttributes(control, width: width);
+    public static ControlWithLayoutAttributes Height(this Control control, int height) =>
+        new ControlWithLayoutAttributes(control, height: height);
     public static ControlWithLayoutAttributes Center(this Control control) =>
         new ControlWithLayoutAttributes(control, center: true);
     public static ControlWithLayoutAttributes XScale(this Control control) =>
@@ -54,6 +58,10 @@ public static class EtoExtensions
     public static ControlWithLayoutAttributes Spacing(this Control control, Size spacing) =>
         new ControlWithLayoutAttributes(control, spacing: spacing);
         
+    public static ControlWithLayoutAttributes Width(this ControlWithLayoutAttributes control, int width) =>
+        new ControlWithLayoutAttributes(control, width: width);
+    public static ControlWithLayoutAttributes Height(this ControlWithLayoutAttributes control, int height) =>
+        new ControlWithLayoutAttributes(control, height: height);
     public static ControlWithLayoutAttributes Center(this ControlWithLayoutAttributes control) =>
         new ControlWithLayoutAttributes(control, center: true);
     public static ControlWithLayoutAttributes XScale(this ControlWithLayoutAttributes control) =>

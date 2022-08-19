@@ -61,13 +61,16 @@ public static class C
         var button = Button(command);
         button.Image = command.Image;
         button.ImagePosition = imagePosition;
+        EtoPlatform.Current.ConfigureImageButton(button);
         return button;
     }
+
     public static Button Button(Command command, Image image, ButtonImagePosition imagePosition = default)
     {
         var button = Button(command);
         button.Image = image;
         button.ImagePosition = imagePosition;
+        EtoPlatform.Current.ConfigureImageButton(button);
         return button;
     }
 
@@ -100,7 +103,8 @@ public static class C
     /// <param name="xOffset"></param>
     /// <param name="yOffset"></param>
     /// <returns></returns>
-    public static Control AccessibleImageButton(Image image, string text, Action onClick, int xOffset = 0, int yOffset = 0)
+    public static Control AccessibleImageButton(Image image, string text, Action onClick, int xOffset = 0,
+        int yOffset = 0)
     {
         var imageView = new ImageView { Image = image, Cursor = Eto.Forms.Cursors.Pointer };
         imageView.MouseDown += (_, _) => onClick();

@@ -26,7 +26,7 @@ public class ProfilesForm : EtoDialogBase
     private readonly Command _copyCommand;
     private readonly Command _pasteCommand;
 
-    public ProfilesForm(Naps2Config config, IScanPerformer scanPerformer, ProfileNameTracker profileNameTracker, IProfileManager profileManager, IEtoPlatform etoPlatform, ProfileListViewBehavior profileListViewBehavior, ProfileTransfer profileTransfer)
+    public ProfilesForm(Naps2Config config, IScanPerformer scanPerformer, ProfileNameTracker profileNameTracker, IProfileManager profileManager, ProfileListViewBehavior profileListViewBehavior, ProfileTransfer profileTransfer)
         : base(config)
     {
         _scanPerformer = scanPerformer;
@@ -47,7 +47,7 @@ public class ProfilesForm : EtoDialogBase
                 break;
         }
 
-        _listView = etoPlatform.CreateListView(profileListViewBehavior);
+        _listView = EtoPlatform.Current.CreateListView(profileListViewBehavior);
         _scanCommand = new ActionCommand(DoScan)
         {
             MenuText = UiStrings.Scan,
@@ -128,7 +128,7 @@ public class ProfilesForm : EtoDialogBase
         Content = L.Column(
             L.Row(
                 _listView.Control.XScale(),
-                C.Button(_scanCommand, Icons.control_play_blue.ToEto(), ButtonImagePosition.Above).AutoSize()
+                C.Button(_scanCommand, Icons.control_play_blue.ToEto(), ButtonImagePosition.Above).AutoSize().Height(100)
             ).Aligned().YScale(),
             L.Row(
                 L.Column(
