@@ -274,17 +274,31 @@ internal class ScanPerformer : IScanPerformer
         {
             // WIA has a nice built-in device selection dialog, so use it
             using var deviceManager = new WiaDeviceManager(options.WiaOptions.WiaVersion);
-            var wiaDevice = deviceManager.PromptForDevice(options.DialogParent);
-            if (wiaDevice == null)
+            try
             {
-                return null;
+                var wiaDevice = deviceManager.PromptForDevice(options.DialogParent);
+                if (wiaDevice == null)
+                {
+                    return null;
+                }
+                return new ScanDevice(wiaDevice.Id(), wiaDevice.Name());
             }
-
-            return new ScanDevice(wiaDevice.Id(), wiaDevice.Name());
+            catch (WiaException ex) when (ex.ErrorCode == WiaErrorCodes.NO_DEVICE_AVAILABLE)
+            {
+                throw new NoDevicesFoundException();
+            }
+            catch (WiaException ex)
+            {
+                throw new ScanDriverUnknownException(ex);
+            }
         }
 
         // Other drivers do not, so use a generic dialog
         var deviceList = await new ScanController(_scanningContext).GetDeviceList(options);
+        if (deviceList.Count == 0)
+        {
+            throw new NoDevicesFoundException();
+        }
         return _devicePrompt.PromptForDevice(deviceList, options.DialogParent);
     }
 }
