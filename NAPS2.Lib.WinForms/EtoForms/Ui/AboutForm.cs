@@ -30,7 +30,7 @@ public class AboutForm : EtoDialogBase
         FormStateController.RestoreFormState = false;
             
         _donateButton = C.AccessibleImageButton(
-            Icons.btn_donate_LG.ToEto(),
+            Icons.btn_donate_LG.ToEtoImage(),
             UiStrings.Donate,
             () => Process.Start(DONATE_URL));
         _checkForUpdates = new CheckBox { Text = UiStrings.CheckForUpdates };
@@ -45,7 +45,7 @@ public class AboutForm : EtoDialogBase
     {
         Content = L.Root(
             L.Row(
-                L.Column(new ImageView { Image = Icons.scanner_128.ToEto() }).Padding(right: 4),
+                L.Column(new ImageView { Image = Icons.scanner_128.ToEtoImage() }).Padding(right: 4),
                 L.Column(
                     C.NoWrap(AssemblyHelper.Product),
                     L.Row(

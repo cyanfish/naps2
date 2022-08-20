@@ -1,6 +1,8 @@
 using System.ComponentModel;
 using System.Globalization;
 using System.Windows.Forms;
+using Eto.WinForms;
+using NAPS2.EtoForms;
 using NAPS2.Images.Gdi;
 using MessageBoxIcon = System.Windows.Forms.MessageBoxIcon;
 
@@ -251,7 +253,7 @@ public class FViewer : FormBase
         // tsPrev
         // 
         this._tsPrev.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-        this._tsPrev.Image = global::NAPS2.Icons.arrow_left;
+        this._tsPrev.Image = global::NAPS2.Icons.arrow_left.ToEtoImage().ToSD();
         resources.ApplyResources(this._tsPrev, "_tsPrev");
         this._tsPrev.Name = "_tsPrev";
         this._tsPrev.Click += new System.EventHandler(this.tsPrev_Click);
@@ -259,7 +261,7 @@ public class FViewer : FormBase
         // tsNext
         // 
         this._tsNext.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-        this._tsNext.Image = global::NAPS2.Icons.arrow_right;
+        this._tsNext.Image = global::NAPS2.Icons.arrow_right.ToEtoImage().ToSD();
         resources.ApplyResources(this._tsNext, "_tsNext");
         this._tsNext.Name = "_tsNext";
         this._tsNext.Click += new System.EventHandler(this.tsNext_Click);
@@ -280,28 +282,28 @@ public class FViewer : FormBase
             this._tsDeskew,
             this._tsCustomRotation
         });
-        this._tsdRotate.Image = global::NAPS2.Icons.arrow_rotate_anticlockwise_small;
+        this._tsdRotate.Image = global::NAPS2.Icons.arrow_rotate_anticlockwise_small.ToEtoImage().ToSD();
         resources.ApplyResources(this._tsdRotate, "_tsdRotate");
         this._tsdRotate.Name = "_tsdRotate";
         this._tsdRotate.ShowDropDownArrow = false;
         // 
         // tsRotateLeft
         // 
-        this._tsRotateLeft.Image = global::NAPS2.Icons.arrow_rotate_anticlockwise_small;
+        this._tsRotateLeft.Image = global::NAPS2.Icons.arrow_rotate_anticlockwise_small.ToEtoImage().ToSD();
         this._tsRotateLeft.Name = "_tsRotateLeft";
         resources.ApplyResources(this._tsRotateLeft, "_tsRotateLeft");
         this._tsRotateLeft.Click += new System.EventHandler(this.tsRotateLeft_Click);
         // 
         // tsRotateRight
         // 
-        this._tsRotateRight.Image = global::NAPS2.Icons.arrow_rotate_clockwise_small;
+        this._tsRotateRight.Image = global::NAPS2.Icons.arrow_rotate_clockwise_small.ToEtoImage().ToSD();
         this._tsRotateRight.Name = "_tsRotateRight";
         resources.ApplyResources(this._tsRotateRight, "_tsRotateRight");
         this._tsRotateRight.Click += new System.EventHandler(this.tsRotateRight_Click);
         // 
         // tsFlip
         // 
-        this._tsFlip.Image = global::NAPS2.Icons.arrow_switch_small;
+        this._tsFlip.Image = global::NAPS2.Icons.arrow_switch_small.ToEtoImage().ToSD();
         this._tsFlip.Name = "_tsFlip";
         resources.ApplyResources(this._tsFlip, "_tsFlip");
         this._tsFlip.Click += new System.EventHandler(this.tsFlip_Click);
@@ -321,7 +323,7 @@ public class FViewer : FormBase
         // tsCrop
         // 
         this._tsCrop.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-        this._tsCrop.Image = global::NAPS2.Icons.transform_crop;
+        this._tsCrop.Image = global::NAPS2.Icons.transform_crop.ToEtoImage().ToSD();
         resources.ApplyResources(this._tsCrop, "_tsCrop");
         this._tsCrop.Name = "_tsCrop";
         this._tsCrop.Click += new System.EventHandler(this.tsCrop_Click);
@@ -329,7 +331,7 @@ public class FViewer : FormBase
         // tsBrightnessContrast
         // 
         this._tsBrightnessContrast.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-        this._tsBrightnessContrast.Image = global::NAPS2.Icons.contrast_with_sun;
+        this._tsBrightnessContrast.Image = global::NAPS2.Icons.contrast_with_sun.ToEtoImage().ToSD();
         resources.ApplyResources(this._tsBrightnessContrast, "_tsBrightnessContrast");
         this._tsBrightnessContrast.Name = "_tsBrightnessContrast";
         this._tsBrightnessContrast.Click += new System.EventHandler(this.tsBrightnessContrast_Click);
@@ -337,7 +339,7 @@ public class FViewer : FormBase
         // tsHueSaturation
         // 
         this._tsHueSaturation.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-        this._tsHueSaturation.Image = global::NAPS2.Icons.color_management;
+        this._tsHueSaturation.Image = global::NAPS2.Icons.color_management.ToEtoImage().ToSD();
         resources.ApplyResources(this._tsHueSaturation, "_tsHueSaturation");
         this._tsHueSaturation.Name = "_tsHueSaturation";
         this._tsHueSaturation.Click += new System.EventHandler(this.tsHueSaturation_Click);
@@ -345,7 +347,7 @@ public class FViewer : FormBase
         // tsBlackWhite
         // 
         this._tsBlackWhite.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-        this._tsBlackWhite.Image = global::NAPS2.Icons.contrast_high;
+        this._tsBlackWhite.Image = global::NAPS2.Icons.contrast_high.ToEtoImage().ToSD();
         resources.ApplyResources(this._tsBlackWhite, "_tsBlackWhite");
         this._tsBlackWhite.Name = "_tsBlackWhite";
         this._tsBlackWhite.Click += new System.EventHandler(this.tsBlackWhite_Click);
@@ -353,7 +355,7 @@ public class FViewer : FormBase
         // tsSharpen
         // 
         this._tsSharpen.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-        this._tsSharpen.Image = global::NAPS2.Icons.sharpen;
+        this._tsSharpen.Image = global::NAPS2.Icons.sharpen.ToEtoImage().ToSD();
         resources.ApplyResources(this._tsSharpen, "_tsSharpen");
         this._tsSharpen.Name = "_tsSharpen";
         this._tsSharpen.Click += new System.EventHandler(this.tsSharpen_Click);
@@ -366,7 +368,7 @@ public class FViewer : FormBase
         // tsSavePDF
         // 
         this._tsSavePdf.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-        this._tsSavePdf.Image = global::NAPS2.Icons.file_extension_pdf_small;
+        this._tsSavePdf.Image = global::NAPS2.Icons.file_extension_pdf_small.ToEtoImage().ToSD();
         resources.ApplyResources(this._tsSavePdf, "_tsSavePdf");
         this._tsSavePdf.Name = "_tsSavePdf";
         this._tsSavePdf.Click += new System.EventHandler(this.tsSavePDF_Click);
@@ -374,7 +376,7 @@ public class FViewer : FormBase
         // tsSaveImage
         // 
         this._tsSaveImage.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-        this._tsSaveImage.Image = global::NAPS2.Icons.picture_small;
+        this._tsSaveImage.Image = global::NAPS2.Icons.picture_small.ToEtoImage().ToSD();
         resources.ApplyResources(this._tsSaveImage, "_tsSaveImage");
         this._tsSaveImage.Name = "_tsSaveImage";
         this._tsSaveImage.Click += new System.EventHandler(this.tsSaveImage_Click);
@@ -387,7 +389,7 @@ public class FViewer : FormBase
         // tsDelete
         // 
         this._tsDelete.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-        this._tsDelete.Image = global::NAPS2.Icons.cross_small;
+        this._tsDelete.Image = global::NAPS2.Icons.cross_small.ToEtoImage().ToSD();
         resources.ApplyResources(this._tsDelete, "_tsDelete");
         this._tsDelete.Name = "_tsDelete";
         this._tsDelete.Click += new System.EventHandler(this.tsDelete_Click);

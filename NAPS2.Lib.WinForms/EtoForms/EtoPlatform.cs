@@ -1,3 +1,4 @@
+using Eto.Drawing;
 using Eto.Forms;
 
 namespace NAPS2.EtoForms;
@@ -14,4 +15,5 @@ public abstract class EtoPlatform
 
     public abstract IListView<T> CreateListView<T>(ListViewBehavior<T> behavior) where T : notnull;
     public abstract void ConfigureImageButton(Button button);
+    public abstract Bitmap ToBitmap(IMemoryImage image);
 }

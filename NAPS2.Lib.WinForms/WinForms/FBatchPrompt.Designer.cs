@@ -1,4 +1,7 @@
-﻿namespace NAPS2.WinForms
+﻿using Eto.WinForms;
+using NAPS2.EtoForms;
+
+namespace NAPS2.WinForms
 {
     partial class FBatchPrompt
     {
@@ -44,7 +47,7 @@
             // btnScan
             // 
             resources.ApplyResources(this.btnScan, "btnScan");
-            this.btnScan.Image = global::NAPS2.Icons.control_play_blue_small;
+            this.btnScan.Image = global::NAPS2.Icons.control_play_blue_small.ToEtoImage().ToSD();
             this.btnScan.Name = "btnScan";
             this.btnScan.UseVisualStyleBackColor = true;
             this.btnScan.Click += new System.EventHandler(this.btnScan_Click);

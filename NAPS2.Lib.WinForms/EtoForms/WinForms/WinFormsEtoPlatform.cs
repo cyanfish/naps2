@@ -1,7 +1,10 @@
 using System.Drawing;
 using System.Windows.Forms;
 using Eto.Forms;
+using Eto.WinForms;
 using Eto.WinForms.Forms.Controls;
+using NAPS2.Images.Gdi;
+using Bitmap = Eto.Drawing.Bitmap;
 
 namespace NAPS2.EtoForms.WinForms;
 
@@ -38,5 +41,10 @@ public class WinFormsEtoPlatform : EtoPlatform
             var rightPadding = IMAGE_PADDING + (native.Width - widthWithoutRightPadding - IMAGE_PADDING) / 2;
             native.Padding = native.Padding with { Left = IMAGE_PADDING, Right = rightPadding };
         }
+    }
+
+    public override Bitmap ToBitmap(IMemoryImage image)
+    {
+        return ((GdiImage) image).Bitmap.ToEto();
     }
 }

@@ -51,28 +51,28 @@ public class ProfilesForm : EtoDialogBase
         _scanCommand = new ActionCommand(DoScan)
         {
             MenuText = UiStrings.Scan,
-            Image = Icons.control_play_blue_small.ToEto(),
+            Image = Icons.control_play_blue_small.ToEtoImage(),
         };
         _addCommand = new ActionCommand(DoAdd)
         {
             MenuText = UiStrings.Add,
-            Image = Icons.add_small.ToEto()
+            Image = Icons.add_small.ToEtoImage()
         };
         _editCommand = new ActionCommand(DoEdit)
         {
             MenuText = UiStrings.Edit,
-            Image = Icons.pencil_small.ToEto()
+            Image = Icons.pencil_small.ToEtoImage()
         };
         _deleteCommand = new ActionCommand(DoDelete)
         {
             MenuText = UiStrings.Delete,
-            Image = Icons.cross_small.ToEto(),
+            Image = Icons.cross_small.ToEtoImage(),
             Shortcut = Keys.Delete
         };
         _setDefaultCommand = new ActionCommand(DoSetDefault)
         {
             MenuText = UiStrings.SetDefault,
-            Image = Icons.accept_small.ToEto()
+            Image = Icons.accept_small.ToEtoImage()
         };
         _copyCommand = new ActionCommand(DoCopy)
         {
@@ -128,7 +128,7 @@ public class ProfilesForm : EtoDialogBase
         Content = L.Column(
             L.Row(
                 _listView.Control.XScale(),
-                C.Button(_scanCommand, Icons.control_play_blue.ToEto(), ButtonImagePosition.Above).AutoSize().Height(100)
+                C.Button(_scanCommand, Icons.control_play_blue.ToEtoImage(), ButtonImagePosition.Above).AutoSize().Height(100)
             ).Aligned().YScale(),
             L.Row(
                 L.Column(

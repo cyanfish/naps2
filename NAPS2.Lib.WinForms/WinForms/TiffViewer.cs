@@ -1,6 +1,8 @@
 using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
+using Eto.WinForms;
+using NAPS2.EtoForms;
 
 namespace NAPS2.WinForms;
 
@@ -70,7 +72,7 @@ public class TiffViewer : UserControl
 
     private void ClearImage()
     {
-        _pbox.Image = Icons.hourglass_grey;
+        _pbox.Image = Icons.hourglass_grey.ToEtoImage().ToSD();
         _pbox.BorderStyle = BorderStyle.None;
         _pbox.Width = 32;
         _pbox.Height = 32;

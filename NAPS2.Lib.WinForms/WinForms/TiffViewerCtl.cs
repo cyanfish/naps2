@@ -1,6 +1,8 @@
 using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
+using Eto.WinForms;
+using NAPS2.EtoForms;
 
 namespace NAPS2.WinForms;
 
@@ -205,7 +207,7 @@ public class TiffViewerCtl : UserControl
         // tsStretch
         // 
         this._tsStretch.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-        this._tsStretch.Image = global::NAPS2.Icons.arrow_out;
+        this._tsStretch.Image = global::NAPS2.Icons.arrow_out.ToEtoImage().ToSD();
         resources.ApplyResources(this._tsStretch, "_tsStretch");
         this._tsStretch.Name = "_tsStretch";
         this._tsStretch.CheckedChanged += new System.EventHandler(this.tsStretch_CheckedChanged);
@@ -219,7 +221,7 @@ public class TiffViewerCtl : UserControl
         // tsZoomActual
         // 
         this._tsZoomActual.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-        this._tsZoomActual.Image = global::NAPS2.Icons.zoom_actual;
+        this._tsZoomActual.Image = global::NAPS2.Icons.zoom_actual.ToEtoImage().ToSD();
         resources.ApplyResources(this._tsZoomActual, "_tsZoomActual");
         this._tsZoomActual.Name = "_tsZoomActual";
         this._tsZoomActual.Click += new System.EventHandler(this.tsZoomActual_Click);
@@ -227,7 +229,7 @@ public class TiffViewerCtl : UserControl
         // tsZoomPlus
         // 
         this._tsZoomPlus.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-        this._tsZoomPlus.Image = global::NAPS2.Icons.zoom_in;
+        this._tsZoomPlus.Image = global::NAPS2.Icons.zoom_in.ToEtoImage().ToSD();
         resources.ApplyResources(this._tsZoomPlus, "_tsZoomPlus");
         this._tsZoomPlus.Name = "_tsZoomPlus";
         this._tsZoomPlus.Click += new System.EventHandler(this.tsZoomPlus_Click);
@@ -235,7 +237,7 @@ public class TiffViewerCtl : UserControl
         // tsZoomOut
         // 
         this._tsZoomOut.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-        this._tsZoomOut.Image = global::NAPS2.Icons.zoom_out;
+        this._tsZoomOut.Image = global::NAPS2.Icons.zoom_out.ToEtoImage().ToSD();
         resources.ApplyResources(this._tsZoomOut, "_tsZoomOut");
         this._tsZoomOut.Name = "_tsZoomOut";
         this._tsZoomOut.Click += new System.EventHandler(this.tsZoomOut_Click);

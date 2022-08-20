@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Eto.WinForms;
+using NAPS2.EtoForms;
 
 namespace NAPS2.WinForms
 {
@@ -176,7 +178,7 @@ namespace NAPS2.WinForms
             // 
             // btnAddProfile
             // 
-            this.btnAddProfile.Image = global::NAPS2.Icons.add_small;
+            this.btnAddProfile.Image = global::NAPS2.Icons.add_small.ToEtoImage().ToSD();
             resources.ApplyResources(this.btnAddProfile, "btnAddProfile");
             this.btnAddProfile.Name = "btnAddProfile";
             this.btnAddProfile.UseVisualStyleBackColor = true;
@@ -184,7 +186,7 @@ namespace NAPS2.WinForms
             // 
             // btnEditProfile
             // 
-            this.btnEditProfile.Image = global::NAPS2.Icons.pencil_small;
+            this.btnEditProfile.Image = global::NAPS2.Icons.pencil_small.ToEtoImage().ToSD();
             resources.ApplyResources(this.btnEditProfile, "btnEditProfile");
             this.btnEditProfile.Name = "btnEditProfile";
             this.btnEditProfile.UseVisualStyleBackColor = true;

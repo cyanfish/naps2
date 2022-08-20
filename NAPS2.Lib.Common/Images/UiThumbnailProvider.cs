@@ -62,7 +62,7 @@ public class UiThumbnailProvider
                 image.Height,
                 GraphicsUnit.Pixel,
                 attrs);
-            g.DrawImage(Icons.hourglass_grey, new Rectangle((bitmap.Width - 32) / 2, (bitmap.Height - 32) / 2, 32, 32));
+            g.DrawImage(new Bitmap(new MemoryStream(Icons.hourglass_grey)), new Rectangle((bitmap.Width - 32) / 2, (bitmap.Height - 32) / 2, 32, 32));
         }
         image.Dispose();
         return bitmap;

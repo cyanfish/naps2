@@ -1,4 +1,7 @@
-﻿namespace NAPS2.WinForms
+﻿using NAPS2.EtoForms;
+using Eto.WinForms;
+
+namespace NAPS2.WinForms
 {
     partial class FPageSize
     {
@@ -98,7 +101,7 @@
             // btnDelete
             // 
             resources.ApplyResources(this.btnDelete, "btnDelete");
-            this.btnDelete.Image = global::NAPS2.Icons.cross_small;
+            this.btnDelete.Image = global::NAPS2.Icons.cross_small.ToEtoImage().ToSD();
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.UseVisualStyleBackColor = true;
             this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);

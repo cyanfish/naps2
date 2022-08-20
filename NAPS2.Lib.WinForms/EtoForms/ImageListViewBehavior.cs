@@ -22,7 +22,6 @@ public class ImageListViewBehavior : ListViewBehavior<UiImage>
 
     public override Image GetImage(UiImage item, int imageSize)
     {
-        // TODO: Make this non-winforms-specific
         return _thumbnailProvider.GetThumbnail(item, imageSize).ToEto();
     }
 

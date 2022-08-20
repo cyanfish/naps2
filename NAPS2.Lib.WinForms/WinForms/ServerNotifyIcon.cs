@@ -1,4 +1,5 @@
-﻿using System.Windows.Forms;
+﻿using System.Drawing;
+using System.Windows.Forms;
 
 namespace NAPS2.WinForms;
 
@@ -8,7 +9,7 @@ public class ServerNotifyIcon
     {
         NotifyIcon = new NotifyIcon
         {
-            Icon = Icons.favicon,
+            Icon = new Icon(new MemoryStream(Icons.favicon)),
             BalloonTipIcon = ToolTipIcon.Info,
             BalloonTipText = string.Format(MiscResources.ListeningOnPort, port),
             BalloonTipTitle = MiscResources.ServerStarted,

@@ -70,7 +70,7 @@ public partial class FDesktop : FormBase
         _desktopFormProvider = desktopFormProvider;
         _desktopSubFormController = desktopSubFormController;
         InitializeComponent();
-        Icon = Icons.favicon;
+        Icon = new Icon(new MemoryStream(Icons.favicon));
 
         // notify.ParentForm = this;
         Shown += FDesktop_Shown;
@@ -302,7 +302,7 @@ public partial class FDesktop : FormBase
             var item = new ToolStripMenuItem
             {
                 Text = profile.DisplayName.Replace("&", "&&"),
-                Image = profile == defaultProfile ? Icons.accept_small : null,
+                Image = profile == defaultProfile ? Icons.accept_small.ToEtoImage().ToSD() : null,
                 ImageScaling = ToolStripItemImageScaling.None
             };
             AssignProfileShortcut(i, item);

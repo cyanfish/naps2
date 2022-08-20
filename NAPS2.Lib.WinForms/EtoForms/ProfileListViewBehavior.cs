@@ -24,17 +24,17 @@ public class ProfileListViewBehavior : ListViewBehavior<ScanProfile>
     {
         if (item.IsDefault && item.IsLocked)
         {
-            return Icons.scanner_lock_default.ToEto();
+            return Icons.scanner_lock_default.ToEtoImage();
         }
         if (item.IsDefault)
         {
-            return Icons.scanner_default.ToEto();
+            return Icons.scanner_default.ToEtoImage();
         }
         if (item.IsLocked)
         {
-            return Icons.scanner_lock.ToEto();
+            return Icons.scanner_lock.ToEtoImage();
         }
-        return Icons.scanner_48_old.ToEto();
+        return Icons.scanner_48_old.ToEtoImage();
     }
 
     public override void SetDragData(ListSelection<ScanProfile> selection, IDataObject dataObject)

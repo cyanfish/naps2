@@ -1,5 +1,7 @@
 ﻿using System.Drawing;
 using System.Windows.Forms;
+using Eto.WinForms;
+using NAPS2.EtoForms;
 using NAPS2.ImportExport.Email;
 using NAPS2.ImportExport.Email.Mapi;
 using NAPS2.ImportExport.Email.Oauth;
@@ -37,7 +39,7 @@ public partial class FEmailProvider : FormBase
             _providerWidgets.Add(new EmailProviderWidget
             {
                 ProviderType = EmailProviderType.System,
-                ProviderIcon = _systemEmailClients.GetIcon(clientName) ?? Icons.mail_yellow,
+                ProviderIcon = _systemEmailClients.GetIcon(clientName) ?? Icons.mail_yellow.ToEtoImage().ToSD(),
                 ProviderName = clientName,
                 ClickAction = () => ChooseSystem(clientName)
             });
@@ -48,7 +50,7 @@ public partial class FEmailProvider : FormBase
             _providerWidgets.Add(new EmailProviderWidget
             {
                 ProviderType = EmailProviderType.Gmail,
-                ProviderIcon = Icons.gmail,
+                ProviderIcon = Icons.gmail.ToEtoImage().ToSD(),
                 ProviderName = EmailProviderType.Gmail.Description(),
                 ClickAction = () => ChooseOauth(_gmailOauthProvider)
             });
@@ -59,7 +61,7 @@ public partial class FEmailProvider : FormBase
             _providerWidgets.Add(new EmailProviderWidget
             {
                 ProviderType = EmailProviderType.OutlookWeb,
-                ProviderIcon = Icons.outlookweb,
+                ProviderIcon = Icons.outlookweb.ToEtoImage().ToSD(),
                 ProviderName = EmailProviderType.OutlookWeb.Description(),
                 ClickAction = () => ChooseOauth(_outlookWebOauthProvider)
             });
