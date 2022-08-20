@@ -1,7 +1,4 @@
-﻿using MonoMac.AppKit;
-using MonoMac.CoreGraphics;
-using MonoMac.Foundation;
-using NAPS2.Images.Bitwise;
+﻿using NAPS2.Images.Bitwise;
 
 namespace NAPS2.Images.Mac;
 
@@ -16,7 +13,11 @@ public class MacImage : IMemoryImage
         // TODO: Better error checking
         lock (MacImageContext.ConstructorLock)
         {
+#if MONOMAC
             _imageRep = new NSBitmapImageRep(_image.Representations()[0].Handle, false);
+#else
+            _imageRep = (NSBitmapImageRep) _image.Representations()[0];
+#endif
         }
         // TODO: Also verify color spaces.
         // TODO: How to handle samplesperpixel = 3 here?
@@ -102,7 +103,7 @@ public class MacImage : IMemoryImage
         var rep = GetRepForSaving(imageFormat, quality);
         if (!rep.Save(path, false, out var error))
         {
-            throw new IOException(error.Description);
+            throw new IOException(error!.Description);
         }
     }
 
@@ -154,7 +155,12 @@ public class MacImage : IMemoryImage
                 return image;
             }
 
-            return new MacImage(new NSImage(_image.Copy().Handle, true))
+#if MONOMAC
+            var nsImage = new NSImage(_image.Copy().Handle, true);
+#else
+            var nsImage = (NSImage) _image.Copy();
+#endif
+            return new MacImage(nsImage)
             {
                 OriginalFileFormat = OriginalFileFormat
             };

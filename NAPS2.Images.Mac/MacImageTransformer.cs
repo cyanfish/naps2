@@ -1,5 +1,3 @@
-using MonoMac.CoreGraphics;
-
 namespace NAPS2.Images.Mac;
 
 public class MacImageTransformer : AbstractImageTransformer<MacImage>
@@ -32,9 +30,15 @@ public class MacImageTransformer : AbstractImageTransformer<MacImage>
         c.SetFillColor(new CGColor(255, 255, 255, 255));
         c.FillRect(fillRect);
 
+#if MONOMAC
         var t1 = CGAffineTransform.MakeTranslation(-image.Width / 2.0, -image.Height / 2.0);
         var t2 = CGAffineTransform.MakeRotation(-transform.Angle * Math.PI / 180);
         var t3 = CGAffineTransform.MakeTranslation(newImage.Width / 2.0, newImage.Height / 2.0);
+#else
+        var t1 = CGAffineTransform.MakeTranslation((NFloat) (-image.Width / 2.0), (NFloat) (-image.Height / 2.0));
+        var t2 = CGAffineTransform.MakeRotation((NFloat) (-transform.Angle * Math.PI / 180));
+        var t3 = CGAffineTransform.MakeTranslation((NFloat) (newImage.Width / 2.0), (NFloat) (newImage.Height / 2.0));
+#endif
         c.ConcatCTM(CGAffineTransform.Multiply(CGAffineTransform.Multiply(t1, t2), t3));
 
         CGRect rect = new CGRect(0, 0, image.Width, image.Height);
@@ -97,7 +101,11 @@ public class MacImageTransformer : AbstractImageTransformer<MacImage>
         c.DrawImage(rect, image._imageRep.AsCGImage(ref rect, null, null));
 
         CGRect strokeRect = new CGRect(left + 0.5, top + 0.5, width - 1, height - 1);
+#if MONOMAC
         c.SetRGBStrokeColor(0, 0, 0, 255);
+#else
+        c.SetStrokeColor(0, 0, 0, 255);
+#endif
         c.StrokeRect(strokeRect);
 
         return newImage;

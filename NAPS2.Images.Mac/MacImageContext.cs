@@ -1,6 +1,3 @@
-using MonoMac.AppKit;
-using MonoMac.Foundation;
-
 namespace NAPS2.Images.Mac;
 
 public class MacImageContext : ImageContext
@@ -47,7 +44,7 @@ public class MacImageContext : ImageContext
         }
         lock (ConstructorLock)
         {
-            var image = new NSImage(NSData.FromStream(stream));
+            var image = new NSImage(NSData.FromStream(stream) ?? throw new ArgumentException(nameof(stream)));
             return new MacImage(image)
             {
                 OriginalFileFormat = GetFileFormatFromFirstBytes(stream)
@@ -60,7 +57,7 @@ public class MacImageContext : ImageContext
         NSImage image;
         lock (ConstructorLock)
         {
-            image = new NSImage(NSData.FromStream(stream));
+            image = new NSImage(NSData.FromStream(stream) ?? throw new ArgumentException(nameof(stream)));
         }
         count = image.Representations().Length;
         return SplitFrames(image, GetFileFormatFromFirstBytes(stream));
