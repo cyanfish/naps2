@@ -53,8 +53,8 @@ public class MacImage : IMemoryImage
 
     public int Width => (int) _imageRep.PixelsWide;
     public int Height => (int) _imageRep.PixelsHigh;
-    public float HorizontalResolution => (float) _image.Size.Width / Width * 72;
-    public float VerticalResolution => (float) _image.Size.Height / Height * 72;
+    public float HorizontalResolution => (float) _image.Size.Width.ToDouble() / Width * 72;
+    public float VerticalResolution => (float) _image.Size.Height.ToDouble() / Height * 72;
 
     public void SetResolution(float xDpi, float yDpi)
     {

@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFrameworks>net6;net6-macos</TargetFrameworks>
+        <TargetFrameworks>net6;net6-macos10.15</TargetFrameworks>
         <Nullable>enable</Nullable>
         <GenerateResourceUsePreserializedResources>true</GenerateResourceUsePreserializedResources>
         <RootNamespace>NAPS2</RootNamespace>
@@ -18,7 +18,7 @@
 <!--        <ProjectReference Include="..\NAPS2.Lib.Common\NAPS2.Lib.Common.csproj" />-->
         <PackageReference Include="Eto.Forms" Version="2.7.0" />
         <PackageReference Include="Eto.Platform.Mac64" Version="2.7.0" Condition="'$(TargetFramework)' == 'net6'" />
-        <PackageReference Include="Eto.Platform.XamMac2" Version="2.7.0" Condition="'$(TargetFramework)' == 'net6-macos'" />
+        <PackageReference Include="Eto.Platform.XamMac2" Version="2.7.0" Condition="'$(TargetFramework)' == 'net6-macos10.15'" />
     </ItemGroup>
 
     <ItemGroup>

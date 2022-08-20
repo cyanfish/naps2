@@ -27,18 +27,12 @@ public class MacImageTransformer : AbstractImageTransformer<MacImage>
         using CGBitmapContext c = GetCgBitmapContext(newImage);
 
         CGRect fillRect = new CGRect(0, 0, newImage.Width, newImage.Height);
-        c.SetFillColor(new CGColor(255, 255, 255, 255));
+        c.SetFillColor(new CGColor(255.ToNFloat(), 255.ToNFloat(), 255.ToNFloat(), 255.ToNFloat()));
         c.FillRect(fillRect);
 
-#if MONOMAC
-        var t1 = CGAffineTransform.MakeTranslation(-image.Width / 2.0, -image.Height / 2.0);
-        var t2 = CGAffineTransform.MakeRotation(-transform.Angle * Math.PI / 180);
-        var t3 = CGAffineTransform.MakeTranslation(newImage.Width / 2.0, newImage.Height / 2.0);
-#else
-        var t1 = CGAffineTransform.MakeTranslation((NFloat) (-image.Width / 2.0), (NFloat) (-image.Height / 2.0));
-        var t2 = CGAffineTransform.MakeRotation((NFloat) (-transform.Angle * Math.PI / 180));
-        var t3 = CGAffineTransform.MakeTranslation((NFloat) (newImage.Width / 2.0), (NFloat) (newImage.Height / 2.0));
-#endif
+        var t1 = CGAffineTransform.MakeTranslation((-image.Width / 2.0).ToNDouble(), (-image.Height / 2.0).ToNDouble());
+        var t2 = CGAffineTransform.MakeRotation((-transform.Angle * Math.PI / 180).ToNDouble());
+        var t3 = CGAffineTransform.MakeTranslation((newImage.Width / 2.0).ToNDouble(), (newImage.Height / 2.0).ToNDouble());
         c.ConcatCTM(CGAffineTransform.Multiply(CGAffineTransform.Multiply(t1, t2), t3));
 
         CGRect rect = new CGRect(0, 0, image.Width, image.Height);
@@ -102,10 +96,11 @@ public class MacImageTransformer : AbstractImageTransformer<MacImage>
 
         CGRect strokeRect = new CGRect(left + 0.5, top + 0.5, width - 1, height - 1);
 #if MONOMAC
-        c.SetRGBStrokeColor(0, 0, 0, 255);
+        c.SetRGBStrokeColor(
 #else
-        c.SetStrokeColor(0, 0, 0, 255);
+        c.SetStrokeColor(
 #endif
+            0.ToNFloat(), 0.ToNFloat(), 0.ToNFloat(), 255.ToNFloat());
         c.StrokeRect(strokeRect);
 
         return newImage;

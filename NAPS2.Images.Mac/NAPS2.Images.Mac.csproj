@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFrameworks>net6;net6-macos</TargetFrameworks>
+        <TargetFrameworks>net6;net6-macos10.15</TargetFrameworks>
         <Nullable>enable</Nullable>
         <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
         <CheckEolTargetFramework>false</CheckEolTargetFramework>
@@ -26,7 +26,7 @@
         <Using Include="MonoMac.Foundation" />
     </ItemGroup>
 
-    <ItemGroup Condition="'$(TargetFramework)' == 'net6-macos'">
+    <ItemGroup Condition="'$(TargetFramework)' == 'net6-macos10.15'">
         <Using Include="AppKit" />
         <Using Include="CoreGraphics" />
         <Using Include="Foundation" />
