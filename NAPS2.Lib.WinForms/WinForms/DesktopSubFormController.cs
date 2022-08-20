@@ -1,4 +1,5 @@
 using NAPS2.EtoForms.Ui;
+using NAPS2.Ocr;
 
 namespace NAPS2.WinForms;
 
@@ -7,13 +8,15 @@ public class DesktopSubFormController
     private readonly IFormFactory _formFactory;
     private readonly UiImageList _imageList;
     private readonly DesktopImagesController _desktopImagesController;
+    private readonly TesseractLanguageManager _tesseractLanguageManager;
 
     public DesktopSubFormController(IFormFactory formFactory, UiImageList imageList,
-        DesktopImagesController desktopImagesController)
+        DesktopImagesController desktopImagesController, TesseractLanguageManager tesseractLanguageManager)
     {
         _formFactory = formFactory;
         _imageList = imageList;
         _desktopImagesController = desktopImagesController;
+        _tesseractLanguageManager = tesseractLanguageManager;
     }
 
     public void ShowImageForm<T>() where T : ImageForm
@@ -35,6 +38,22 @@ public class DesktopSubFormController
         form.ShowModal();
     }
 
+    public void ShowOcrForm()
+    {
+        if (_tesseractLanguageManager.InstalledLanguages.Any())
+        {
+            _formFactory.Create<FOcrSetup>().ShowDialog();
+        }
+        else
+        {
+            _formFactory.Create<FOcrLanguageDownload>().ShowDialog();
+            if (_tesseractLanguageManager.InstalledLanguages.Any())
+            {
+                _formFactory.Create<FOcrSetup>().ShowDialog();
+            }
+        }
+    }
+
     public void ShowBatchScanForm()
     {
         var form = _formFactory.Create<FBatchScan>();
@@ -51,6 +70,21 @@ public class DesktopSubFormController
             viewer.CurrentImage = selected;
             viewer.ShowDialog();
         }
+    }
+
+    public void ShowPdfSettingsForm()
+    {
+        _formFactory.Create<FPdfSettings>().ShowDialog();
+    }
+
+    public void ShowImageSettingsForm()
+    {
+        _formFactory.Create<FImageSettings>().ShowDialog();
+    }
+
+    public void ShowEmailSettingsForm()
+    {
+        _formFactory.Create<FEmailSettings>().ShowDialog();
     }
 
     public void ShowAboutForm()

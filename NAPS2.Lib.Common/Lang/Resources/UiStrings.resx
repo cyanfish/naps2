@@ -165,4 +165,124 @@
   <data name="Default" xml:space="preserve">
     <value>Default</value>
   </data>
+  <data name="Scan" xml:space="preserve">
+    <value>Scan</value>
+  </data>
+  <data name="NewProfile" xml:space="preserve">
+    <value>New Profile</value>
+  </data>
+  <data name="BatchScan" xml:space="preserve">
+    <value>Batch Scan</value>
+  </data>
+  <data name="Ocr" xml:space="preserve">
+    <value>OCR</value>
+  </data>
+  <data name="Profiles" xml:space="preserve">
+    <value>Profiles</value>
+  </data>
+  <data name="Import" xml:space="preserve">
+    <value>Import</value>
+  </data>
+  <data name="SavePdf" xml:space="preserve">
+    <value>Save PDF</value>
+  </data>
+  <data name="PdfSettings" xml:space="preserve">
+    <value>PDF Settings</value>
+  </data>
+  <data name="SaveImages" xml:space="preserve">
+    <value>Save Images</value>
+  </data>
+  <data name="ImageSettings" xml:space="preserve">
+    <value>Image Settings</value>
+  </data>
+  <data name="EmailPdf" xml:space="preserve">
+    <value>Email PDF</value>
+  </data>
+  <data name="EmailSettings" xml:space="preserve">
+    <value>Email Settings</value>
+  </data>
+  <data name="Print" xml:space="preserve">
+    <value>Print</value>
+  </data>
+  <data name="Image" xml:space="preserve">
+    <value>Image</value>
+  </data>
+  <data name="View" xml:space="preserve">
+    <value>View</value>
+  </data>
+  <data name="Crop" xml:space="preserve">
+    <value>Crop</value>
+  </data>
+  <data name="BrightnessContrast" xml:space="preserve">
+    <value>Brightness / Contrast</value>
+  </data>
+  <data name="HueSaturation" xml:space="preserve">
+    <value>Hue / Saturation</value>
+  </data>
+  <data name="BlackAndWhite" xml:space="preserve">
+    <value>Black and White</value>
+  </data>
+  <data name="Sharpen" xml:space="preserve">
+    <value>Sharpen</value>
+  </data>
+  <data name="Reset" xml:space="preserve">
+    <value>Reset</value>
+  </data>
+  <data name="Rotate" xml:space="preserve">
+    <value>Rotate</value>
+  </data>
+  <data name="RotateLeft" xml:space="preserve">
+    <value>Rotate Left</value>
+  </data>
+  <data name="RotateRight" xml:space="preserve">
+    <value>Rotate Right</value>
+  </data>
+  <data name="Flip" xml:space="preserve">
+    <value>Flip</value>
+  </data>
+  <data name="Deskew" xml:space="preserve">
+    <value>Deskew</value>
+  </data>
+  <data name="CustomRotation" xml:space="preserve">
+    <value>Custom Rotation</value>
+  </data>
+  <data name="MoveUp" xml:space="preserve">
+    <value>Move Up</value>
+  </data>
+  <data name="MoveDown" xml:space="preserve">
+    <value>Move Down</value>
+  </data>
+  <data name="Reorder" xml:space="preserve">
+    <value>Reorder</value>
+  </data>
+  <data name="Interleave" xml:space="preserve">
+    <value>Interleave</value>
+  </data>
+  <data name="Deinterleave" xml:space="preserve">
+    <value>Deinterleave</value>
+  </data>
+  <data name="AltInterleave" xml:space="preserve">
+    <value>Alternate Interleave</value>
+  </data>
+  <data name="AltDeinterleave" xml:space="preserve">
+    <value>Alternate Deinterleave</value>
+  </data>
+  <data name="Reverse" xml:space="preserve">
+    <value>Reverse</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="Clear" xml:space="preserve">
+    <value>Clear</value>
+  </data>
+  <data name="ClearAll" xml:space="preserve">
+    <value>Clear All</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>Language</value>
+  </data>
+  <data name="About" xml:space="preserve">
+    <value>About</value>
+  </data>
 </root>

@@ -1,4 +1,5 @@
 ﻿using NAPS2.EtoForms;
+using NAPS2.EtoForms.Ui;
 using NAPS2.EtoForms.WinForms;
 using NAPS2.ImportExport;
 using NAPS2.ImportExport.Pdf;
@@ -30,6 +31,8 @@ public class WinFormsModule : NinjectModule
         Bind<IWinFormsExportHelper>().To<WinFormsExportHelper>();
         Bind<IDesktopScanController>().To<DesktopScanController>();
         Bind<DesktopFormProvider>().ToSelf().InSingletonScope();
+
+        Bind<DesktopForm>().To<WinFormsDesktopForm>();
 
         EtoPlatform.Current = new WinFormsEtoPlatform();
         // TODO: Can we add a test for this?

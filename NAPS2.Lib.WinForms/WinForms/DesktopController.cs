@@ -36,6 +36,7 @@ public class DesktopController
     private readonly DesktopImagesController _desktopImagesController;
     private readonly IDesktopScanController _desktopScanController;
     private readonly DesktopFormProvider _desktopFormProvider;
+    private readonly IScannedImagePrinter _scannedImagePrinter;
 
     private bool _closed;
 
@@ -46,7 +47,7 @@ public class DesktopController
         IUpdateChecker updateChecker, INotificationManager notify, ImageTransfer imageTransfer,
         ImageClipboard imageClipboard, ImageListActions imageListActions, IWinFormsExportHelper exportHelper,
         DesktopImagesController desktopImagesController, IDesktopScanController desktopScanController,
-        DesktopFormProvider desktopFormProvider)
+        DesktopFormProvider desktopFormProvider, IScannedImagePrinter scannedImagePrinter)
     {
         _scanningContext = scanningContext;
         _imageList = imageList;
@@ -65,6 +66,7 @@ public class DesktopController
         _desktopImagesController = desktopImagesController;
         _desktopScanController = desktopScanController;
         _desktopFormProvider = desktopFormProvider;
+        _scannedImagePrinter = scannedImagePrinter;
     }
 
     public bool SkipRecoveryCleanup { get; set; }
@@ -214,7 +216,7 @@ public class DesktopController
         if (_operationProgress.ActiveOperations.Any())
         {
             _operationProgress.ActiveOperations.ForEach(op => op.Cancel());
-            _desktopFormProvider.DesktopForm.Hide();
+            _desktopFormProvider.DesktopForm.Visible = false;
             _desktopFormProvider.DesktopForm.ShowInTaskbar = false;
             Task.Run(() =>
             {
@@ -228,7 +230,7 @@ public class DesktopController
                 {
                 }
                 _closed = true;
-                _desktopFormProvider.DesktopForm.SafeInvoke(_desktopFormProvider.DesktopForm.Close);
+                Invoker.Current.SafeInvoke(_desktopFormProvider.DesktopForm.Close);
             });
             return false;
         }
@@ -243,12 +245,12 @@ public class DesktopController
         {
             if (msg.StartsWith(Pipes.MSG_SCAN_WITH_DEVICE, StringComparison.InvariantCulture))
             {
-                _desktopFormProvider.DesktopForm.SafeInvoke(async () =>
+                Invoker.Current.SafeInvoke(async () =>
                     await _desktopScanController.ScanWithDevice(msg.Substring(Pipes.MSG_SCAN_WITH_DEVICE.Length)));
             }
             if (msg.Equals(Pipes.MSG_ACTIVATE))
             {
-                _desktopFormProvider.DesktopForm.SafeInvoke(() =>
+                Invoker.Current.SafeInvoke(() =>
                 {
                     var formOnTop = Application.OpenForms.Cast<Form>().Last();
                     if (formOnTop.WindowState == FormWindowState.Minimized)
@@ -399,6 +401,17 @@ public class DesktopController
     {
         using var imagesToEmail = images.Select(x => x.GetClonedImage()).ToDisposableList();
         await _exportHelper.EmailPDF(imagesToEmail.InnerList);
+    }
+    
+    public async Task Print()
+    {
+        var state = _imageList.CurrentState;
+        using var allImages = _imageList.Images.Select(x => x.GetClonedImage()).ToDisposableList();
+        using var selectedImages = _imageList.Selection.Select(x => x.GetClonedImage()).ToDisposableList();
+        if (await _scannedImagePrinter.PromptToPrint(allImages.InnerList, selectedImages.InnerList))
+        {
+            _imageList.SavedState = state;
+        }
     }
 
     public void Import()

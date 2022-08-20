@@ -72,7 +72,7 @@ public partial class FDesktop : FormBase
         InitializeComponent();
         Icon = Icons.favicon;
 
-        notify.ParentForm = this;
+        // notify.ParentForm = this;
         Shown += FDesktop_Shown;
         FormClosing += FDesktop_FormClosing;
         Closed += FDesktop_Closed;
@@ -86,7 +86,7 @@ public partial class FDesktop : FormBase
         };
         imageList.ImagesUpdated += (_, _) => SafeInvoke(UpdateToolbar);
         _profileManager.ProfilesUpdated += (_, _) => UpdateScanButton();
-        _desktopFormProvider.DesktopForm = this;
+        // _desktopFormProvider.DesktopForm = this;
     }
 
     protected override void OnLoad(object sender, EventArgs args) => PostInitializeComponent();

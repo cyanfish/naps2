@@ -28,8 +28,12 @@ public static class EtoExtensions
     public static void Add(this DynamicLayout layout, ControlWithLayoutAttributes control) =>
         control.AddTo(layout);
 
-    public static Icon ToEtoIcon(this System.Drawing.Bitmap bitmap) => new Icon(1f, bitmap.ToEto());
+    public static Icon ToEtoIcon(this byte[] bytes) => new(new MemoryStream(bytes));
+    public static Icon ToEtoIcon(this System.Drawing.Icon icon) => icon.ToEto();
+    public static Icon ToEtoIcon(this System.Drawing.Bitmap bitmap) => new(1f, bitmap.ToEto());
 
+    public static Bitmap ToEtoImage(this byte[] bytes) => new(bytes);
+    public static Bitmap ToEtoImage(this System.Drawing.Bitmap bitmap) => bitmap.ToEto();
     public static Bitmap ToEtoImage(this IMemoryImage image) => image switch
     {
         // TODO: Eventually we'll need a registry to avoid a direct reference to NAPS2.Images.Gdi here

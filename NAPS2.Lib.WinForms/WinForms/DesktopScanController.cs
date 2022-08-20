@@ -36,7 +36,7 @@ public class DesktopScanController : IDesktopScanController
 
     public async Task ScanWithDevice(string deviceID)
     {
-        _desktopFormProvider.DesktopForm.Activate();
+        _desktopFormProvider.DesktopForm.BringToFront();
         ScanProfile? profile;
         if (_profileManager.DefaultProfile?.Device?.ID == deviceID)
         {
@@ -125,8 +125,8 @@ public class DesktopScanController : IDesktopScanController
     private async Task DoScan(ScanProfile profile)
     {
         var source =
-            await _scanPerformer.PerformScan(profile, DefaultScanParams(), _desktopFormProvider.DesktopForm.Handle);
+            await _scanPerformer.PerformScan(profile, DefaultScanParams(), _desktopFormProvider.DesktopForm.NativeHandle);
         await source.ForEach(_desktopImagesController.ReceiveScannedImage());
-        _desktopFormProvider.DesktopForm.Activate();
+        _desktopFormProvider.DesktopForm.BringToFront();
     }
 }

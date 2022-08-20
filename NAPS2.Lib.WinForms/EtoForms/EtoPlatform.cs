@@ -12,6 +12,6 @@ public abstract class EtoPlatform
         set => _current = value ?? throw new ArgumentNullException(nameof(value));
     }
 
-    public abstract IListView<T> CreateListView<T>(ListViewBehavior<T> behavior);
+    public abstract IListView<T> CreateListView<T>(ListViewBehavior<T> behavior) where T : notnull;
     public abstract void ConfigureImageButton(Button button);
 }

@@ -74,7 +74,7 @@ public class WinFormsOperationProgress : OperationProgress
 
         if (!op.IsFinished)
         {
-            _notificationManager.ParentForm.SafeInvoke(() => _notificationManager.OperationProgress(this, op));
+            Invoker.Current.SafeInvoke(() => _notificationManager.OperationProgress(this, op));
         }
     }
 

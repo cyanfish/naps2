@@ -1,10 +1,13 @@
 ﻿using System.Threading;
-using System.Windows.Forms;
+using Eto.Forms;
+using NAPS2.EtoForms.Ui;
+using NAPS2.EtoForms.WinForms;
 using NAPS2.Modules;
 using NAPS2.Platform.Windows;
 using NAPS2.Remoting.Worker;
 using NAPS2.WinForms;
 using Ninject;
+using Application = System.Windows.Forms.Application;
 
 namespace NAPS2.EntryPoints;
 
@@ -36,10 +39,12 @@ public static class WinFormsEntryPoint
         TaskScheduler.UnobservedTaskException += UnhandledTaskException;
 
         // Show the main form
+        var application = new Eto.Forms.Application(Eto.Platforms.WinForms);
         var formFactory = kernel.Get<IFormFactory>();
-        var desktop = formFactory.Create<FDesktop>();
-        Invoker.Current = desktop;
-        Application.Run(desktop);
+        var desktop = formFactory.Create<DesktopForm>();
+        Invoker.Current = new WinFormsInvoker(desktop.ToNative());
+
+        application.Run(desktop);
     }
 
     private static void UnhandledTaskException(object? sender, UnobservedTaskExceptionEventArgs e)
