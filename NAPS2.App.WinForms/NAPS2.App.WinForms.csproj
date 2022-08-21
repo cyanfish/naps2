@@ -36,10 +36,12 @@
     <ProjectReference Include="..\NAPS2.Lib.WinForms\NAPS2.Lib.WinForms.csproj" />
     <PackageReference Include="LargeAddressAware" Version="1.0.3" />
   </ItemGroup>
-  
+
   <ItemGroup>
-    <Content Include="appsettings.xml">
+    <ContentWithTargetPath Include="..\NAPS2.Setup\appsettings.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+      <Link>appsettings.xml</Link>
+      <TargetPath>appsettings.xml</TargetPath>
+    </ContentWithTargetPath>
   </ItemGroup>
 </Project>
