@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net6</TargetFramework>
+    <TargetFramework>net6-macos10.15</TargetFramework>
     <OutputType>Exe</OutputType>
     <RootNamespace>NAPS2</RootNamespace>
     <AssemblyName>NAPS2</AssemblyName>
@@ -9,7 +9,7 @@
     <ApplicationIcon>../NAPS2.Lib/Icons/favicon.ico</ApplicationIcon>
 
     <SelfContained>true</SelfContained>
-    <PublishSingleFile>true</PublishSingleFile>
+    <PublishSingleFile>false</PublishSingleFile>
     <PublishTrimmed>true</PublishTrimmed>
 
     <!-- TODO: Do we need a separate project for x64? Multiple RuntimeIdentifiers fails with SelfContained. -->
@@ -26,7 +26,7 @@
   
   <ItemGroup>
     <ProjectReference Include="..\NAPS2.Lib.Mac\NAPS2.Lib.Mac.csproj" />
-    <PackageReference Include="Eto.Platform.Mac64" Version="2.7.0" />
+    <PackageReference Include="Eto.Platform.macOS" Version="2.7.1" />
   </ItemGroup>
 
   <ItemGroup>
@@ -35,5 +35,9 @@
       <Link>appsettings.xml</Link>
       <TargetPath>appsettings.xml</TargetPath>
     </ContentWithTargetPath>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Icon.icns" />
   </ItemGroup>
 </Project>

@@ -1,13 +1,10 @@
-using System;
-using System.Collections.Generic;
 using Eto.Forms;
-using NAPS2.Images;
-using NAPS2.Util;
 
 namespace NAPS2.EtoForms.Mac;
 
 public class MacListView<T> : IListView<T> where T : notnull
 {
+    private readonly NSCollectionView _view = new();
     private readonly ListViewBehavior<T> _behavior;
 
     private ListSelection<T> _selection = ListSelection.Empty<T>();
@@ -38,7 +35,7 @@ public class MacListView<T> : IListView<T> where T : notnull
         e.Effects = _behavior.GetDropEffect(e.Data);
     }
 
-    public Control Control { get; set; }
+    public Control Control => _view.ToEto();
 
     public event EventHandler? SelectionChanged;
 

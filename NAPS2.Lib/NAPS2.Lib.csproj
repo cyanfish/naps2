@@ -21,7 +21,7 @@
     <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
     <PackageReference Include="Ninject" Version="3.3.6" />
     <PackageReference Include="NLog" Version="4.5.8" />
-    <PackageReference Include="Eto.Forms" Version="2.7.0" />
+    <PackageReference Include="Eto.Forms" Version="2.7.1" />
   </ItemGroup>
   
   <ItemGroup>

@@ -13,7 +13,7 @@
 
     <ItemGroup>
         <ProjectReference Include="..\NAPS2.Images\NAPS2.Images.csproj" />
-        <PackageReference Include="Eto.Platform.Mac64" Version="2.7.0" Condition="'$(TargetFramework)' == 'net6'" />
+        <PackageReference Include="Eto.Platform.Mac64" Version="2.7.1" Condition="'$(TargetFramework)' == 'net6'" />
     </ItemGroup>
 
     <PropertyGroup Condition="'$(TargetFramework)' == 'net6'">

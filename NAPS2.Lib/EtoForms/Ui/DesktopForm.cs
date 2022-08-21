@@ -21,53 +21,53 @@ public abstract class DesktopForm : EtoFormBase
     private readonly DesktopFormProvider _desktopFormProvider;
     private readonly IDesktopSubFormController _desktopSubFormController;
 
-    private readonly Command _scanCommand;
-    private readonly Command _newProfileCommand;
-    private readonly Command _batchScanCommand;
-    private readonly Command _profilesCommand;
-    private readonly Command _ocrCommand;
-    private readonly Command _importCommand;
-    private readonly Command _savePdfCommand;
-    private readonly Command _saveAllPdfCommand;
-    private readonly Command _saveSelectedPdfCommand;
-    private readonly Command _pdfSettingsCommand;
-    private readonly Command _saveImagesCommand;
-    private readonly Command _saveAllImagesCommand;
-    private readonly Command _saveSelectedImagesCommand;
-    private readonly Command _imageSettingsCommand;
-    private readonly Command _emailPdfCommand;
-    private readonly Command _emailAllPdfCommand;
-    private readonly Command _emailSelectedPdfCommand;
-    private readonly Command _emailSettingsCommand;
-    private readonly Command _printCommand;
-    private readonly Command _imageMenuCommand;
-    private readonly Command _viewImageCommand;
-    private readonly Command _cropCommand;
-    private readonly Command _brightContCommand;
-    private readonly Command _hueSatCommand;
-    private readonly Command _blackWhiteCommand;
-    private readonly Command _sharpenCommand;
-    private readonly Command _resetImageCommand;
-    private readonly Command _rotateMenuCommand;
-    private readonly Command _rotateLeftCommand;
-    private readonly Command _rotateRightCommand;
-    private readonly Command _flipCommand;
-    private readonly Command _deskewCommand;
-    private readonly Command _customRotateCommand;
-    private readonly Command _reorderMenuCommand;
-    private readonly Command _moveUpCommand;
-    private readonly Command _moveDownCommand;
-    private readonly Command _interleaveCommand;
-    private readonly Command _deinterleaveCommand;
-    private readonly Command _altInterleaveCommand;
-    private readonly Command _altDeinterleaveCommand;
-    private readonly Command _reverseMenuCommand;
-    private readonly Command _reverseAllCommand;
-    private readonly Command _reverseSelectedCommand;
-    private readonly Command _deleteCommand;
-    private readonly Command _clearAllCommand;
-    private readonly Command _languageMenuCommand;
-    private readonly Command _aboutCommand;
+    protected readonly Command _scanCommand;
+    protected readonly Command _newProfileCommand;
+    protected readonly Command _batchScanCommand;
+    protected readonly Command _profilesCommand;
+    protected readonly Command _ocrCommand;
+    protected readonly Command _importCommand;
+    protected readonly Command _savePdfCommand;
+    protected readonly Command _saveAllPdfCommand;
+    protected readonly Command _saveSelectedPdfCommand;
+    protected readonly Command _pdfSettingsCommand;
+    protected readonly Command _saveImagesCommand;
+    protected readonly Command _saveAllImagesCommand;
+    protected readonly Command _saveSelectedImagesCommand;
+    protected readonly Command _imageSettingsCommand;
+    protected readonly Command _emailPdfCommand;
+    protected readonly Command _emailAllPdfCommand;
+    protected readonly Command _emailSelectedPdfCommand;
+    protected readonly Command _emailSettingsCommand;
+    protected readonly Command _printCommand;
+    protected readonly Command _imageMenuCommand;
+    protected readonly Command _viewImageCommand;
+    protected readonly Command _cropCommand;
+    protected readonly Command _brightContCommand;
+    protected readonly Command _hueSatCommand;
+    protected readonly Command _blackWhiteCommand;
+    protected readonly Command _sharpenCommand;
+    protected readonly Command _resetImageCommand;
+    protected readonly Command _rotateMenuCommand;
+    protected readonly Command _rotateLeftCommand;
+    protected readonly Command _rotateRightCommand;
+    protected readonly Command _flipCommand;
+    protected readonly Command _deskewCommand;
+    protected readonly Command _customRotateCommand;
+    protected readonly Command _reorderMenuCommand;
+    protected readonly Command _moveUpCommand;
+    protected readonly Command _moveDownCommand;
+    protected readonly Command _interleaveCommand;
+    protected readonly Command _deinterleaveCommand;
+    protected readonly Command _altInterleaveCommand;
+    protected readonly Command _altDeinterleaveCommand;
+    protected readonly Command _reverseMenuCommand;
+    protected readonly Command _reverseAllCommand;
+    protected readonly Command _reverseSelectedCommand;
+    protected readonly Command _deleteCommand;
+    protected readonly Command _clearAllCommand;
+    protected readonly Command _languageMenuCommand;
+    protected readonly Command _aboutCommand;
 
     private readonly ListProvider<Command> _scanMenuCommands = new();
     private readonly ListProvider<Command> _languageMenuCommands = new();
@@ -109,7 +109,8 @@ public abstract class DesktopForm : EtoFormBase
         _scanCommand = new ActionCommand(_desktopScanController.ScanDefault)
         {
             ToolBarText = UiStrings.Scan,
-            Image = Icons.control_play_blue.ToEtoImage()
+            Image = Icons.control_play_blue.ToEtoImage(),
+            MacSymbol = "play"
         };
         _newProfileCommand = new ActionCommand(_desktopScanController.ScanWithNewProfile)
         {
@@ -124,7 +125,8 @@ public abstract class DesktopForm : EtoFormBase
         _profilesCommand = new ActionCommand(_desktopSubFormController.ShowProfilesForm)
         {
             ToolBarText = UiStrings.Profiles,
-            Image = Icons.blueprints.ToEtoImage()
+            Image = Icons.blueprints.ToEtoImage(),
+            MacSymbol = "list.bullet"
         };
         _ocrCommand = new ActionCommand(_desktopSubFormController.ShowOcrForm)
         {
@@ -182,7 +184,8 @@ public abstract class DesktopForm : EtoFormBase
         };
         _viewImageCommand = new ActionCommand(_desktopSubFormController.ShowViewerForm)
         {
-            MenuText = UiStrings.View
+            MenuText = UiStrings.View,
+            MacSymbol = "viewfinder"
         };
         _cropCommand = new ActionCommand(_desktopSubFormController.ShowCropForm)
         {
@@ -213,25 +216,29 @@ public abstract class DesktopForm : EtoFormBase
         {
             MenuText = UiStrings.Reset
         };
-        _rotateMenuCommand = new Command
+        _rotateMenuCommand = new ActionCommand
         {
             ToolBarText = UiStrings.Rotate,
-            Image = Icons.arrow_rotate_anticlockwise.ToEtoImage()
+            Image = Icons.arrow_rotate_anticlockwise.ToEtoImage(),
+            MacSymbol = "arrow.counterclockwise"
         };
         _rotateLeftCommand = new ActionCommand(_imageListActions.RotateLeft)
         {
             MenuText = UiStrings.RotateLeft,
-            Image = Icons.arrow_rotate_anticlockwise_small.ToEtoImage()
+            Image = Icons.arrow_rotate_anticlockwise_small.ToEtoImage(),
+            MacSymbol = "arrow.counterclockwise"
         };
         _rotateRightCommand = new ActionCommand(_imageListActions.RotateRight)
         {
             MenuText = UiStrings.RotateRight,
-            Image = Icons.arrow_rotate_clockwise_small.ToEtoImage()
+            Image = Icons.arrow_rotate_clockwise_small.ToEtoImage(),
+            MacSymbol = "arrow.clockwise"
         };
         _flipCommand = new ActionCommand(_imageListActions.Flip)
         {
             MenuText = UiStrings.Flip,
-            Image = Icons.arrow_switch_small.ToEtoImage()
+            Image = Icons.arrow_switch_small.ToEtoImage(),
+            MacSymbol = "arrow.2.squarepath"
         };
         _deskewCommand = new ActionCommand(_imageListActions.Deskew)
         {
@@ -244,12 +251,14 @@ public abstract class DesktopForm : EtoFormBase
         _moveUpCommand = new ActionCommand(_imageListActions.MoveUp)
         {
             ToolBarText = UiStrings.MoveUp,
-            Image = Icons.arrow_up_small.ToEtoImage()
+            Image = Icons.arrow_up_small.ToEtoImage(),
+            MacSymbol = "arrow.up"
         };
         _moveDownCommand = new ActionCommand(_imageListActions.MoveDown)
         {
             ToolBarText = UiStrings.MoveDown,
-            Image = Icons.arrow_down_small.ToEtoImage()
+            Image = Icons.arrow_down_small.ToEtoImage(),
+            MacSymbol = "arrow.down"
         };
         _reorderMenuCommand = new Command
         {
@@ -297,6 +306,7 @@ public abstract class DesktopForm : EtoFormBase
         _aboutCommand = new ActionCommand(_desktopSubFormController.ShowAboutForm)
         {
             ToolBarText = UiStrings.About,
+            MenuText = UiStrings.About,
             Image = Icons.information.ToEtoImage()
         };
 
@@ -398,12 +408,7 @@ public abstract class DesktopForm : EtoFormBase
                 .Separator()
                 .Append(_resetImageCommand));
         if (!hiddenButtons.HasFlag(ToolbarButtons.Rotate))
-            CreateToolbarMenu(_rotateMenuCommand, new MenuProvider()
-                .Append(_rotateLeftCommand)
-                .Append(_rotateRightCommand)
-                .Append(_flipCommand)
-                .Append(_deskewCommand)
-                .Append(_customRotateCommand));
+            CreateToolbarMenu(_rotateMenuCommand, GetRotateMenuProvider());
         if (!hiddenButtons.HasFlag(ToolbarButtons.Move))
             CreateToolbarStackedButtons(_moveUpCommand, _moveDownCommand);
         if (!hiddenButtons.HasFlag(ToolbarButtons.Reorder))
@@ -428,6 +433,14 @@ public abstract class DesktopForm : EtoFormBase
         if (!hiddenButtons.HasFlag(ToolbarButtons.About))
             CreateToolbarButton(_aboutCommand);
     }
+
+    protected MenuProvider GetRotateMenuProvider() =>
+        new MenuProvider()
+            .Append(_rotateLeftCommand)
+            .Append(_rotateRightCommand)
+            .Append(_flipCommand)
+            .Append(_deskewCommand)
+            .Append(_customRotateCommand);
 
     protected virtual void AfterLayout()
     {

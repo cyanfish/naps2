@@ -1,7 +1,6 @@
 using Eto.Drawing;
 using Eto.Forms;
 using Eto.Mac.Drawing;
-using NAPS2.Images;
 using NAPS2.Images.Mac;
 using sd = System.Drawing;
 

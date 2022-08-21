@@ -1,11 +1,7 @@
-﻿using System;
-using System.Threading.Tasks;
-using Eto;
+﻿using Eto;
 using Eto.Forms;
 using NAPS2.EtoForms.Ui;
-using NAPS2.Logging;
 using NAPS2.Modules;
-using NAPS2.Util;
 using NAPS2.WinForms;
 using Ninject;
 using UnhandledExceptionEventArgs = Eto.UnhandledExceptionEventArgs;
@@ -29,7 +25,7 @@ public static class MacEntryPoint
         TaskScheduler.UnobservedTaskException += UnhandledTaskException;
 
         // Show the main form
-        var application = new Application(Platforms.Mac64);
+        var application = new Application(Platforms.macOS);
         application.UnhandledException += UnhandledException;
         var formFactory = kernel.Get<IFormFactory>();
         var desktop = formFactory.Create<DesktopForm>();
