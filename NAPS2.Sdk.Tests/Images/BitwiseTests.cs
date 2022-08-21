@@ -117,4 +117,13 @@ public class BitwiseTests : ContextualTests
         var image = ImageContext.Create(SIZE, SIZE, ImagePixelFormat.ARGB32);
         new SaturationBitwiseImageOp(0.5f).Perform(image);
     }
+
+    [Fact]
+    public void Sharpness()
+    {
+        // Using a smaller size as sharpening is super slow
+        var image = ImageContext.Create(SIZE / 4, SIZE / 4, ImagePixelFormat.ARGB32);
+        var image2 = ImageContext.Create(SIZE / 4, SIZE / 4, ImagePixelFormat.ARGB32);
+        new SharpenBitwiseImageOp(0.5f).Perform(image, image2);
+    }
 }

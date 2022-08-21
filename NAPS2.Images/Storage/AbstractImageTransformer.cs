@@ -101,7 +101,22 @@ public abstract class AbstractImageTransformer<TImage> where TImage : IMemoryIma
         return image;
     }
 
-    protected abstract TImage PerformTransform(TImage image, SharpenTransform transform);
+    protected virtual TImage PerformTransform(TImage image, SharpenTransform transform)
+    {
+        if (image.PixelFormat is ImagePixelFormat.BW1 or ImagePixelFormat.Gray8)
+        {
+            // TODO: Handle grayscale
+            return image;
+        }
+
+        var newImage = ImageContext.Create(image.Width, image.Height, image.PixelFormat);
+
+        float sharpnessNormalized = transform.Sharpness / 1000f;
+        new SharpenBitwiseImageOp(sharpnessNormalized).Perform(image, newImage);
+
+        image.Dispose();
+        return (TImage) newImage;
+    }
 
     protected abstract TImage PerformTransform(TImage image, RotationTransform transform);
 

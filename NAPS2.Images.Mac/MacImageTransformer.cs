@@ -6,11 +6,6 @@ public class MacImageTransformer : AbstractImageTransformer<MacImage>
     {
     }
 
-    protected override MacImage PerformTransform(MacImage image, SharpenTransform transform)
-    {
-        throw new NotImplementedException();
-    }
-
     protected override MacImage PerformTransform(MacImage image, RotationTransform transform)
     {
         MacImage newImage;
