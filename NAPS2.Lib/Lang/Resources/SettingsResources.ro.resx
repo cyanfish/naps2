@@ -1,0 +1,156 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="BitDepth_1BlackAndWhite" xml:space="preserve">
+    <value>Alb-negru</value>
+  </data>
+  <data name="BitDepth_24Color" xml:space="preserve">
+    <value>Color pe 24 biți</value>
+  </data>
+  <data name="BitDepth_8Grayscale" xml:space="preserve">
+    <value>Tonuri de gri</value>
+  </data>
+  <data name="Dpi_100" xml:space="preserve">
+    <value>100 dpi</value>
+  </data>
+  <data name="Dpi_1200" xml:space="preserve">
+    <value>1200 dpi</value>
+  </data>
+  <data name="Dpi_150" xml:space="preserve">
+    <value>150 dpi</value>
+  </data>
+  <data name="Dpi_200" xml:space="preserve">
+    <value>200 dpi</value>
+  </data>
+  <data name="Dpi_300" xml:space="preserve">
+    <value>300 dpi</value>
+  </data>
+  <data name="Dpi_400" xml:space="preserve">
+    <value>400 dpi</value>
+  </data>
+  <data name="Dpi_600" xml:space="preserve">
+    <value>600 dpi</value>
+  </data>
+  <data name="Dpi_800" xml:space="preserve">
+    <value>800 dpi</value>
+  </data>
+  <data name="EmailProviderType_CustomSmtp" xml:space="preserve">
+    <value>Custom SMTP</value>
+  </data>
+  <data name="EmailProviderType_Gmail" xml:space="preserve">
+    <value>Gmail</value>
+  </data>
+  <data name="EmailProviderType_OutlookWeb" xml:space="preserve">
+    <value>Outlook Web Access</value>
+  </data>
+  <data name="EmailProvider_NotSelected" xml:space="preserve">
+    <value>No provider selected.</value>
+  </data>
+  <data name="HorizontalAlign_Center" xml:space="preserve">
+    <value>Centrează</value>
+  </data>
+  <data name="HorizontalAlign_Left" xml:space="preserve">
+    <value>Stânga</value>
+  </data>
+  <data name="HorizontalAlign_Right" xml:space="preserve">
+    <value>Dreapta</value>
+  </data>
+  <data name="PageSizeUnit_Centimetre" xml:space="preserve">
+    <value>cm</value>
+  </data>
+  <data name="PageSizeUnit_Inch" xml:space="preserve">
+    <value>in</value>
+  </data>
+  <data name="PageSizeUnit_Millimetre" xml:space="preserve">
+    <value>mm</value>
+  </data>
+  <data name="PageSize_A3" xml:space="preserve">
+    <value>A3 (297 x 420 mm)</value>
+  </data>
+  <data name="PageSize_A4" xml:space="preserve">
+    <value>A4 (210 x 297 mm)</value>
+  </data>
+  <data name="PageSize_A5" xml:space="preserve">
+    <value>A5 (148 x 210 mm)</value>
+  </data>
+  <data name="PageSize_B4" xml:space="preserve">
+    <value>B4 (250 x 353 mm)</value>
+  </data>
+  <data name="PageSize_B5" xml:space="preserve">
+    <value>B5 (176x250 mm)</value>
+  </data>
+  <data name="PageSize_Custom" xml:space="preserve">
+    <value>Personalizat...</value>
+  </data>
+  <data name="PageSize_Legal" xml:space="preserve">
+    <value>US Legal (8.5x14 in)</value>
+  </data>
+  <data name="PageSize_Letter" xml:space="preserve">
+    <value>US Letter (8.5x11 in)</value>
+  </data>
+  <data name="PdfCompat_Default" xml:space="preserve">
+    <value>Default</value>
+  </data>
+  <data name="PdfCompat_PdfA1B" xml:space="preserve">
+    <value>PDF/A-1b</value>
+  </data>
+  <data name="PdfCompat_PdfA2B" xml:space="preserve">
+    <value>PDF/A-2b</value>
+  </data>
+  <data name="PdfCompat_PdfA3B" xml:space="preserve">
+    <value>PDF/A-3b</value>
+  </data>
+  <data name="PdfCompat_PdfA3U" xml:space="preserve">
+    <value>PDF/A-3u</value>
+  </data>
+  <data name="Source_Duplex" xml:space="preserve">
+    <value>Fată-verso</value>
+  </data>
+  <data name="Source_Feeder" xml:space="preserve">
+    <value>Alimentator</value>
+  </data>
+  <data name="Source_Glass" xml:space="preserve">
+    <value>Sticlă</value>
+  </data>
+  <data name="TiffComp_Auto" xml:space="preserve">
+    <value>Auto</value>
+  </data>
+  <data name="TiffComp_Ccitt4" xml:space="preserve">
+    <value>CCITT4</value>
+  </data>
+  <data name="TiffComp_Lzw" xml:space="preserve">
+    <value>LZW</value>
+  </data>
+  <data name="TiffComp_None" xml:space="preserve">
+    <value>Finalizat</value>
+  </data>
+  <data name="TwainImpl_Default" xml:space="preserve">
+    <value>Default</value>
+  </data>
+  <data name="TwainImpl_Legacy" xml:space="preserve">
+    <value>Legacy (native UI only)</value>
+  </data>
+  <data name="TwainImpl_MemXfer" xml:space="preserve">
+    <value>Alternative Transfer</value>
+  </data>
+  <data name="TwainImpl_OldDsm" xml:space="preserve">
+    <value>Old DSM</value>
+  </data>
+  <data name="TwainImpl_X64" xml:space="preserve">
+    <value>x64</value>
+  </data>
+  <data name="WiaVersion_Default" xml:space="preserve">
+    <value>Default</value>
+  </data>
+</root>

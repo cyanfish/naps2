@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ImportGroup Condition=" '$(TargetFramework)' == 'net462' AND '$(ExcludeRestorePackageImports)' != 'true' ">
+    <Import Project="$(NuGetPackageRoot)system.resources.extensions\6.0.0\buildTransitive\net461\System.Resources.Extensions.targets" Condition="Exists('$(NuGetPackageRoot)system.resources.extensions\6.0.0\buildTransitive\net461\System.Resources.Extensions.targets')" />
+    <Import Project="$(NuGetPackageRoot)eto.forms\2.7.0\build\Eto.Forms.targets" Condition="Exists('$(NuGetPackageRoot)eto.forms\2.7.0\build\Eto.Forms.targets')" />
+  </ImportGroup>
+  <ImportGroup Condition=" '$(TargetFramework)' == 'net6' AND '$(ExcludeRestorePackageImports)' != 'true' ">
+    <Import Project="$(NuGetPackageRoot)eto.forms\2.7.0\build\Eto.Forms.targets" Condition="Exists('$(NuGetPackageRoot)eto.forms\2.7.0\build\Eto.Forms.targets')" />
+  </ImportGroup>
+</Project>

@@ -1,0 +1,396 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="ChooseProfile" xml:space="preserve">
+    <value>Zgjidh Profilin</value>
+  </data>
+  <data name="Clear" xml:space="preserve">
+    <value>Pastro</value>
+  </data>
+  <data name="ConfirmClearItems" xml:space="preserve">
+    <value>A je i sigurt se dëshiron të pastrosh {0} element(e)?</value>
+  </data>
+  <data name="ConfirmDeleteItems" xml:space="preserve">
+    <value>A je i sigurt se dëshiron të fshish {0} element(e)?</value>
+  </data>
+  <data name="ConfirmDeleteMultipleProfiles" xml:space="preserve">
+    <value>A je i sigurt se dëshiron të fshish {0} profile?</value>
+  </data>
+  <data name="ConfirmDeleteSingleProfile" xml:space="preserve">
+    <value>A je i sigurt se dëshiron të fshish profilin {0}?</value>
+  </data>
+  <data name="ConfirmOverwriteFile" xml:space="preserve">
+    <value>Skedari {0} tashmë ekziston. A dëshironi ta mbishkruani?</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Fshi</value>
+  </data>
+  <data name="DeviceNotFound" xml:space="preserve">
+    <value>Skaneri i zgjedhur nuk mund të gjendej.</value>
+  </data>
+  <data name="DeviceOffline" xml:space="preserve">
+    <value>Skaneri i zgjedhur është jashtë linje.</value>
+  </data>
+  <data name="DontHavePermission" xml:space="preserve">
+    <value>Nuk ke të drejta për të ruajtur skedarët në këtë vendndodhje.</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>Gabim</value>
+  </data>
+  <data name="FileTypeBmp" xml:space="preserve">
+    <value>Skedarët Bitmap (*.bmp)</value>
+  </data>
+  <data name="FileTypeEmf" xml:space="preserve">
+    <value>Metaskedar i përmirësuar i Windows (*.emf)</value>
+  </data>
+  <data name="FileTypeExif" xml:space="preserve">
+    <value>Skedar imazhi i shkëmbyeshëm (*.exif)</value>
+  </data>
+  <data name="FileTypeGif" xml:space="preserve">
+    <value>Skedar GIF (*.gif)</value>
+  </data>
+  <data name="FileTypeJpeg" xml:space="preserve">
+    <value>Skedar JPEG (*.jpg, *.jpeg)</value>
+  </data>
+  <data name="FileTypePdf" xml:space="preserve">
+    <value>Dokument PDF (*.pdf)</value>
+  </data>
+  <data name="FileTypePng" xml:space="preserve">
+    <value>Skedar PNG (*.png)</value>
+  </data>
+  <data name="FileTypeTiff" xml:space="preserve">
+    <value>Skedar TIFF (*.tiff, *.tif)</value>
+  </data>
+  <data name="NameMissing" xml:space="preserve">
+    <value>Emri mungon.</value>
+  </data>
+  <data name="NAPS2" xml:space="preserve">
+    <value>NAPS2</value>
+  </data>
+  <data name="NoDeviceSelected" xml:space="preserve">
+    <value>Nuk është zgjedhur asnjë pajisje.</value>
+  </data>
+  <data name="NoDevicesFound" xml:space="preserve">
+    <value>Nuk është gjetur asnjë pajisje skanimi.</value>
+  </data>
+  <data name="OverwriteFile" xml:space="preserve">
+    <value>Mbishkruaj skedarin</value>
+  </data>
+  <data name="PdfStatus" xml:space="preserve">
+    <value>{0} nga {1}</value>
+  </data>
+  <data name="ScannedImage" xml:space="preserve">
+    <value>Imazhi i skanuar</value>
+  </data>
+  <data name="SelectProfileBeforeScan" xml:space="preserve">
+    <value>Zgjidh një profil para se të klikosh Skano.</value>
+  </data>
+  <data name="UnknownDriverError" xml:space="preserve">
+    <value>Ndodhi një gabim me drejtuesin e skanimit.</value>
+  </data>
+  <data name="Version" xml:space="preserve">
+    <value>Versioni {0}</value>
+  </data>
+  <data name="EmailError" xml:space="preserve">
+    <value>Ndodhi një gabim gjatë provës për të dërguar një email.</value>
+  </data>
+  <data name="InstallComplete" xml:space="preserve">
+    <value>Instalimi përfundoi</value>
+  </data>
+  <data name="InstallCompletePromptRestart" xml:space="preserve">
+    <value>Instalimi përfundoi. A dëshiron ta rihapësh NAPS2 tani?</value>
+  </data>
+  <data name="InstallFailed" xml:space="preserve">
+    <value>Instalimi dështoi.</value>
+  </data>
+  <data name="InstallFailedTitle" xml:space="preserve">
+    <value>Instalimi dështoi</value>
+  </data>
+  <data name="AllCount" xml:space="preserve">
+    <value>Të gjitha ({0})</value>
+  </data>
+  <data name="SelectedCount" xml:space="preserve">
+    <value>E zgjedhur ({0})</value>
+  </data>
+  <data name="EstimatedDownloadSize" xml:space="preserve">
+    <value>Madhësia e vlerësuar e shkarkimit: {0} MB</value>
+  </data>
+  <data name="FilesProgressFormat" xml:space="preserve">
+    <value>{0} / {1} skedarë</value>
+  </data>
+  <data name="SizeProgress" xml:space="preserve">
+    <value>{0} / {1} MB</value>
+  </data>
+  <data name="ImportErrorCouldNot" xml:space="preserve">
+    <value>Skedari '{0}' nuk mund të importohej.</value>
+  </data>
+  <data name="ImportErrorNAPS2Pdf" xml:space="preserve">
+    <value>Skedari '{0}' nuk mund të importohej. Vetëm skedarët PDF të gjeneruar nga NAPS2 mund të importohen.</value>
+  </data>
+  <data name="DownloadError" xml:space="preserve">
+    <value>Gabim gjatë shkarkimit</value>
+  </data>
+  <data name="FilesCouldNotBeDownloaded" xml:space="preserve">
+    <value>Një ose më shumë skedarë s'mund të shkarkoheshin.</value>
+  </data>
+  <data name="CustomPageSizeFormat" xml:space="preserve">
+    <value>E personalizuar ({0}x{1} {2})</value>
+  </data>
+  <data name="Scan" xml:space="preserve">
+    <value>Skano</value>
+  </data>
+  <data name="ConfirmResetImages" xml:space="preserve">
+    <value>A je i sigurt se dëshiron të zhbësh ndryshimet e tua te {0} imazh(e)?</value>
+  </data>
+  <data name="ResetImage" xml:space="preserve">
+    <value>Rivendos imazhin</value>
+  </data>
+  <data name="ExitWithUnsavedChanges" xml:space="preserve">
+    <value>Ke ndryshime të paruajtura. A je i sigurt se dëshiron të dalësh dhe të mos i ruash ato ndryshime?</value>
+  </data>
+  <data name="ExitWithActiveOperations" xml:space="preserve">
+    <value>Një operacion është në progres. Je i sigurt se dëshiron të dalësh dhe të anulosh operacionin?</value>
+  </data>
+  <data name="UnsavedChanges" xml:space="preserve">
+    <value>Ndryshimet e pa ruajtura</value>
+  </data>
+  <data name="ActiveOperations" xml:space="preserve">
+    <value>Veprimi në progres</value>
+  </data>
+  <data name="ScanPageProgress" xml:space="preserve">
+    <value>Po skanon faqen {0}</value>
+  </data>
+  <data name="NoFeederSupport" xml:space="preserve">
+    <value>Skaneri i zgjedhur nuk e mbështet përdorimin e furnizuesit. Nëse skaneri yt nuk ka një furnizues, provo të përdorësh një drejtues të ndryshëm.</value>
+  </data>
+  <data name="NoPagesInFeeder" xml:space="preserve">
+    <value>Nuk ka faqe te furnizuesi.</value>
+  </data>
+  <data name="PdfNoPermissionToExtractContent" xml:space="preserve">
+    <value>Nuk ke të drejta të kopjosh përmbajtjen nga skedari '{0}'.</value>
+  </data>
+  <data name="ErrorSaving" xml:space="preserve">
+    <value>Ndodhi një gabim gjatë provës për ruajtjen e skedarit.</value>
+  </data>
+  <data name="OfN" xml:space="preserve">
+    <value>nga {0}</value>
+  </data>
+  <data name="BatchError" xml:space="preserve">
+    <value>Ndodhi një gabim i panjohur gjatë skanimit në grup.</value>
+  </data>
+  <data name="BatchStatusCancelled" xml:space="preserve">
+    <value>Grupi u anulua.</value>
+  </data>
+  <data name="BatchStatusCancelling" xml:space="preserve">
+    <value>Po anulon....</value>
+  </data>
+  <data name="BatchStatusComplete" xml:space="preserve">
+    <value>Grupi përfundoi me sukses.</value>
+  </data>
+  <data name="BatchStatusError" xml:space="preserve">
+    <value>Skanimi në grup ndaloi për shkak gabimi.</value>
+  </data>
+  <data name="BatchStatusPage" xml:space="preserve">
+    <value>Po skanon faqen {0}...</value>
+  </data>
+  <data name="BatchStatusScanPage" xml:space="preserve">
+    <value>Po skanon faqen {0} (skanimi {1})...</value>
+  </data>
+  <data name="BatchStatusWaitingForScan" xml:space="preserve">
+    <value>Po pret për skanimin {0}...</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Anulo</value>
+  </data>
+  <data name="Close" xml:space="preserve">
+    <value>Mbyll</value>
+  </data>
+  <data name="BatchStatusSaving" xml:space="preserve">
+    <value>Po ruan rezultatet në grup...</value>
+  </data>
+  <data name="NoDuplexSupport" xml:space="preserve">
+    <value>Skaneri i zgjedhur nuk e mbështet dupleksin. Nëse skaneri supozohet se e pranon dupleksin, provoni të përdorni një drejtues tjetër..</value>
+  </data>
+  <data name="ImportingFormat" xml:space="preserve">
+    <value>Po importon {0}...</value>
+  </data>
+  <data name="ImportProgress" xml:space="preserve">
+    <value>Progresi i importit</value>
+  </data>
+  <data name="Recovering" xml:space="preserve">
+    <value>Po rikuperohet...</value>
+  </data>
+  <data name="RecoveryProgress" xml:space="preserve">
+    <value>Progresi i rekuperimit</value>
+  </data>
+  <data name="SaveImages" xml:space="preserve">
+    <value>Ruaj imazhet</value>
+  </data>
+  <data name="SaveImagesProgress" xml:space="preserve">
+    <value>Progresi i ruajtjes së imazheve</value>
+  </data>
+  <data name="SavePdf" xml:space="preserve">
+    <value>Ruaj PDF</value>
+  </data>
+  <data name="SavePdfProgress" xml:space="preserve">
+    <value>Progresi i ruajtjes së PDF</value>
+  </data>
+  <data name="SavingFormat" xml:space="preserve">
+    <value>Po ruan {0}...</value>
+  </data>
+  <data name="Print" xml:space="preserve">
+    <value>Printo</value>
+  </data>
+  <data name="Copying" xml:space="preserve">
+    <value>Po kopjon...</value>
+  </data>
+  <data name="CopyProgress" xml:space="preserve">
+    <value>Progresi i kopjimit</value>
+  </data>
+  <data name="Importing" xml:space="preserve">
+    <value>Po importon...</value>
+  </data>
+  <data name="EmailPdf" xml:space="preserve">
+    <value>Dërgo PDF me email</value>
+  </data>
+  <data name="EmailPdfProgress" xml:space="preserve">
+    <value>Progresi i email të PDF</value>
+  </data>
+  <data name="AutoSaveError" xml:space="preserve">
+    <value>Ndodhi një gabim gjatë provës për ruajtjen automatike.</value>
+  </data>
+  <data name="FileTypeAllFiles" xml:space="preserve">
+    <value>Të gjithë skedarët</value>
+  </data>
+  <data name="FileTypeImageFiles" xml:space="preserve">
+    <value>Skedarët e imazhit</value>
+  </data>
+  <data name="DeviceBusy" xml:space="preserve">
+    <value>Skaneri i zgjedhur është i zënë.</value>
+  </data>
+  <data name="DeviceCoverOpen" xml:space="preserve">
+    <value>Mbulesa e skanerit është e hapur.</value>
+  </data>
+  <data name="DevicePaperJam" xml:space="preserve">
+    <value>Skaneri ka një bllokim letre.</value>
+  </data>
+  <data name="DeviceWarmingUp" xml:space="preserve">
+    <value>Skaneri po ngrohet.</value>
+  </data>
+  <data name="OcrUpdateAvailable" xml:space="preserve">
+    <value>Një përditësim i OCR është i disponueshëm.</value>
+  </data>
+  <data name="ImageSaved" xml:space="preserve">
+    <value>Imazhi u ruajt.</value>
+  </data>
+  <data name="ImagesSaved" xml:space="preserve">
+    <value>{0} imazhe u ruajtën.</value>
+  </data>
+  <data name="PdfSaved" xml:space="preserve">
+    <value>PDF u ruajt.</value>
+  </data>
+  <data name="NamedPageSizeFormat" xml:space="preserve">
+    <value>{0} ({1}x{2} {3})</value>
+  </data>
+  <data name="ConfirmDelete" xml:space="preserve">
+    <value>Are you sure you want to delete "{0}"?</value>
+  </data>
+  <data name="FileInUse" xml:space="preserve">
+    <value>Skedari nuk mund të mbishkruhej sepse aktualisht është në përdorim.</value>
+  </data>
+  <data name="AutoDeskewing" xml:space="preserve">
+    <value>Deskewing...</value>
+  </data>
+  <data name="AutoDeskewProgress" xml:space="preserve">
+    <value>Deskew Progress</value>
+  </data>
+  <data name="DownloadNeeded" xml:space="preserve">
+    <value>Download Needed</value>
+  </data>
+  <data name="PdfImportComponentNeeded" xml:space="preserve">
+    <value>Nevojitet një komponent shtesë për të importuar këtë skedar PDF. A dëshiron ta shkarkosh tani?</value>
+  </data>
+  <data name="ConfirmCancelBatch" xml:space="preserve">
+    <value>Are you sure you want to cancel the batch scan?</value>
+  </data>
+  <data name="CancelBatch" xml:space="preserve">
+    <value>Cancel Batch</value>
+  </data>
+  <data name="Donate" xml:space="preserve">
+    <value>Dhuro</value>
+  </data>
+  <data name="DonatePrompt" xml:space="preserve">
+    <value>NAPS2 is completely free. Consider making a donation.</value>
+  </data>
+  <data name="SaneNotAvailable" xml:space="preserve">
+    <value>The SANE driver is not available. Make sure to install the required packages:</value>
+  </data>
+  <data name="TesseractNotAvailable" xml:space="preserve">
+    <value>Motori i OCR nuk është i disponueshëm. Sigurohu të instalosh paketën e kërkuar:</value>
+  </data>
+  <data name="DriverNotSupported" xml:space="preserve">
+    <value>The selected driver is not supported on this system.</value>
+  </data>
+  <data name="OcrProgress" xml:space="preserve">
+    <value>Progresi i OCR</value>
+  </data>
+  <data name="RunningOcr" xml:space="preserve">
+    <value>Po ekzekuton OCR...</value>
+  </data>
+  <data name="UpdateProgress" xml:space="preserve">
+    <value>Progresi i përditësimit</value>
+  </data>
+  <data name="Updating" xml:space="preserve">
+    <value>Po përditëson...</value>
+  </data>
+  <data name="NoUpdates" xml:space="preserve">
+    <value>No updates available.</value>
+  </data>
+  <data name="CheckingForUpdates" xml:space="preserve">
+    <value>Po kontrollon...</value>
+  </data>
+  <data name="UpdateError" xml:space="preserve">
+    <value>Ndodhi një gabim gjatë instalimit të përditësimit .</value>
+  </data>
+  <data name="Install" xml:space="preserve">
+    <value>Instalo {0}</value>
+  </data>
+  <data name="UpdateAvailable" xml:space="preserve">
+    <value>Një përditësim i disponueshëm.</value>
+  </data>
+  <data name="AuthError" xml:space="preserve">
+    <value>Ndodhi një gabim gjatë provës për të autorizuar.</value>
+  </data>
+  <data name="UploadingEmail" xml:space="preserve">
+    <value>Po ngarkon emailin...</value>
+  </data>
+  <data name="ErrorEmailing" xml:space="preserve">
+    <value>Ndodhi një gabim gjatë provës për të dërguar email.</value>
+  </data>
+  <data name="Naps2Server" xml:space="preserve">
+    <value>NAPS2 Server</value>
+  </data>
+  <data name="ServerStarted" xml:space="preserve">
+    <value>Server started</value>
+  </data>
+  <data name="ListeningOnPort" xml:space="preserve">
+    <value>Listening on port {0}</value>
+  </data>
+  <data name="ScanProgressPage" xml:space="preserve">
+    <value>Po skanon faqen {0}...</value>
+  </data>
+  <data name="AcquiringData" xml:space="preserve">
+    <value>Po merr të dhënat...</value>
+  </data>
+</root>

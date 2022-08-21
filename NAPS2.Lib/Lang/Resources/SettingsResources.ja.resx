@@ -1,0 +1,156 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="BitDepth_1BlackAndWhite" xml:space="preserve">
+    <value>白黒</value>
+  </data>
+  <data name="BitDepth_24Color" xml:space="preserve">
+    <value>24ビットカラー</value>
+  </data>
+  <data name="BitDepth_8Grayscale" xml:space="preserve">
+    <value>グレースケール</value>
+  </data>
+  <data name="Dpi_100" xml:space="preserve">
+    <value>100 dpi</value>
+  </data>
+  <data name="Dpi_1200" xml:space="preserve">
+    <value>1200 dpi</value>
+  </data>
+  <data name="Dpi_150" xml:space="preserve">
+    <value>150 dpi</value>
+  </data>
+  <data name="Dpi_200" xml:space="preserve">
+    <value>200 dpi</value>
+  </data>
+  <data name="Dpi_300" xml:space="preserve">
+    <value>300 dpi</value>
+  </data>
+  <data name="Dpi_400" xml:space="preserve">
+    <value>400 dpi</value>
+  </data>
+  <data name="Dpi_600" xml:space="preserve">
+    <value>600 dpi</value>
+  </data>
+  <data name="Dpi_800" xml:space="preserve">
+    <value>800 dpi</value>
+  </data>
+  <data name="EmailProviderType_CustomSmtp" xml:space="preserve">
+    <value>カスタムSMTP</value>
+  </data>
+  <data name="EmailProviderType_Gmail" xml:space="preserve">
+    <value>Gmail</value>
+  </data>
+  <data name="EmailProviderType_OutlookWeb" xml:space="preserve">
+    <value>Outlookへのウェブアクセス</value>
+  </data>
+  <data name="EmailProvider_NotSelected" xml:space="preserve">
+    <value>プロバイダが選択されていません。.</value>
+  </data>
+  <data name="HorizontalAlign_Center" xml:space="preserve">
+    <value>中央揃え</value>
+  </data>
+  <data name="HorizontalAlign_Left" xml:space="preserve">
+    <value>左側</value>
+  </data>
+  <data name="HorizontalAlign_Right" xml:space="preserve">
+    <value>右</value>
+  </data>
+  <data name="PageSizeUnit_Centimetre" xml:space="preserve">
+    <value>cm</value>
+  </data>
+  <data name="PageSizeUnit_Inch" xml:space="preserve">
+    <value>インチ</value>
+  </data>
+  <data name="PageSizeUnit_Millimetre" xml:space="preserve">
+    <value>ミリ</value>
+  </data>
+  <data name="PageSize_A3" xml:space="preserve">
+    <value>A3 (297x420 mm)</value>
+  </data>
+  <data name="PageSize_A4" xml:space="preserve">
+    <value>A4 (210x297 mm)</value>
+  </data>
+  <data name="PageSize_A5" xml:space="preserve">
+    <value>A5 (148x210 mm)</value>
+  </data>
+  <data name="PageSize_B4" xml:space="preserve">
+    <value>B4 (250x353 mm)</value>
+  </data>
+  <data name="PageSize_B5" xml:space="preserve">
+    <value>B5 (176x250 mm)</value>
+  </data>
+  <data name="PageSize_Custom" xml:space="preserve">
+    <value>カスタム...</value>
+  </data>
+  <data name="PageSize_Legal" xml:space="preserve">
+    <value>US Legal (8.5x14 in)</value>
+  </data>
+  <data name="PageSize_Letter" xml:space="preserve">
+    <value>US Legal (8.5x14 インチ)</value>
+  </data>
+  <data name="PdfCompat_Default" xml:space="preserve">
+    <value>デフォルト</value>
+  </data>
+  <data name="PdfCompat_PdfA1B" xml:space="preserve">
+    <value>PDF/A-1b</value>
+  </data>
+  <data name="PdfCompat_PdfA2B" xml:space="preserve">
+    <value>PDF/A-2b</value>
+  </data>
+  <data name="PdfCompat_PdfA3B" xml:space="preserve">
+    <value>PDF/A-3b</value>
+  </data>
+  <data name="PdfCompat_PdfA3U" xml:space="preserve">
+    <value>PDF/A-3u</value>
+  </data>
+  <data name="Source_Duplex" xml:space="preserve">
+    <value>両面</value>
+  </data>
+  <data name="Source_Feeder" xml:space="preserve">
+    <value>フィーダー</value>
+  </data>
+  <data name="Source_Glass" xml:space="preserve">
+    <value>Glass</value>
+  </data>
+  <data name="TiffComp_Auto" xml:space="preserve">
+    <value>Auto</value>
+  </data>
+  <data name="TiffComp_Ccitt4" xml:space="preserve">
+    <value>CCITT4</value>
+  </data>
+  <data name="TiffComp_Lzw" xml:space="preserve">
+    <value>LZW</value>
+  </data>
+  <data name="TiffComp_None" xml:space="preserve">
+    <value>なし</value>
+  </data>
+  <data name="TwainImpl_Default" xml:space="preserve">
+    <value>デフォルト</value>
+  </data>
+  <data name="TwainImpl_Legacy" xml:space="preserve">
+    <value>スキャナ付属のUIのみを利用</value>
+  </data>
+  <data name="TwainImpl_MemXfer" xml:space="preserve">
+    <value>Alternative Transfer</value>
+  </data>
+  <data name="TwainImpl_OldDsm" xml:space="preserve">
+    <value>Old DSM</value>
+  </data>
+  <data name="TwainImpl_X64" xml:space="preserve">
+    <value>x64</value>
+  </data>
+  <data name="WiaVersion_Default" xml:space="preserve">
+    <value>デフォルト</value>
+  </data>
+</root>

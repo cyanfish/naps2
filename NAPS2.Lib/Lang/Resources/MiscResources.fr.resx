@@ -1,0 +1,396 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="ChooseProfile" xml:space="preserve">
+    <value>Choisir un profil</value>
+  </data>
+  <data name="Clear" xml:space="preserve">
+    <value>Tout supprimer</value>
+  </data>
+  <data name="ConfirmClearItems" xml:space="preserve">
+    <value>Faut-il vraiment effacer {0} élément(s) ?</value>
+  </data>
+  <data name="ConfirmDeleteItems" xml:space="preserve">
+    <value>Faut-il vraiment supprimer {0} élément(s) ?</value>
+  </data>
+  <data name="ConfirmDeleteMultipleProfiles" xml:space="preserve">
+    <value>Faut-il vraiment supprimer {0} profil(s) ?</value>
+  </data>
+  <data name="ConfirmDeleteSingleProfile" xml:space="preserve">
+    <value>Faut-il vraiment supprimer le profil « {0} » ?</value>
+  </data>
+  <data name="ConfirmOverwriteFile" xml:space="preserve">
+    <value>Le fichier « {0} » existe déjà. Faut-il vraiment l'écraser ?</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Supprimer</value>
+  </data>
+  <data name="DeviceNotFound" xml:space="preserve">
+    <value>Le scanner sélectionné est introuvable.</value>
+  </data>
+  <data name="DeviceOffline" xml:space="preserve">
+    <value>Le scanner sélectionné est éteint.</value>
+  </data>
+  <data name="DontHavePermission" xml:space="preserve">
+    <value>Vous n'avez pas la permission d'enregistrer des fichiers à cet emplacement.</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>Erreur</value>
+  </data>
+  <data name="FileTypeBmp" xml:space="preserve">
+    <value>Fichiers Bitmap (*.bmp)</value>
+  </data>
+  <data name="FileTypeEmf" xml:space="preserve">
+    <value>Fichier EMF (*.emf)</value>
+  </data>
+  <data name="FileTypeExif" xml:space="preserve">
+    <value>Fichier EXIF (*.exif)</value>
+  </data>
+  <data name="FileTypeGif" xml:space="preserve">
+    <value>Fichier GIF (*.gif)</value>
+  </data>
+  <data name="FileTypeJpeg" xml:space="preserve">
+    <value>Fichier JPEG (*.jpg, *.jpeg)</value>
+  </data>
+  <data name="FileTypePdf" xml:space="preserve">
+    <value>Document PDF (*.pdf)</value>
+  </data>
+  <data name="FileTypePng" xml:space="preserve">
+    <value>Fichier PNG (*.png)</value>
+  </data>
+  <data name="FileTypeTiff" xml:space="preserve">
+    <value>Fichier TIFF (*.tiff, *.tif)</value>
+  </data>
+  <data name="NameMissing" xml:space="preserve">
+    <value>Nom manquant.</value>
+  </data>
+  <data name="NAPS2" xml:space="preserve">
+    <value>NAPS2</value>
+  </data>
+  <data name="NoDeviceSelected" xml:space="preserve">
+    <value>Aucun périphérique sélectionné.</value>
+  </data>
+  <data name="NoDevicesFound" xml:space="preserve">
+    <value>Aucun périphérique d'acquisition n'a été trouvé.</value>
+  </data>
+  <data name="OverwriteFile" xml:space="preserve">
+    <value>Écraser le fichier</value>
+  </data>
+  <data name="PdfStatus" xml:space="preserve">
+    <value>{0} sur {1}</value>
+  </data>
+  <data name="ScannedImage" xml:space="preserve">
+    <value>Image numérisée</value>
+  </data>
+  <data name="SelectProfileBeforeScan" xml:space="preserve">
+    <value>Sélectionner un profil avant de cliquer sur « Numériser ».</value>
+  </data>
+  <data name="UnknownDriverError" xml:space="preserve">
+    <value>Une erreur est survenue avec le pilote d'acquisition.</value>
+  </data>
+  <data name="Version" xml:space="preserve">
+    <value>Version {0}</value>
+  </data>
+  <data name="EmailError" xml:space="preserve">
+    <value>Une erreur est survenue en essayant d'envoyer un courriel.</value>
+  </data>
+  <data name="InstallComplete" xml:space="preserve">
+    <value>Installation terminée</value>
+  </data>
+  <data name="InstallCompletePromptRestart" xml:space="preserve">
+    <value>Installation terminée. Faut-il redémarrer NAPS2 maintenant ?</value>
+  </data>
+  <data name="InstallFailed" xml:space="preserve">
+    <value>Échec de l'installation.</value>
+  </data>
+  <data name="InstallFailedTitle" xml:space="preserve">
+    <value>Échec de l'installation</value>
+  </data>
+  <data name="AllCount" xml:space="preserve">
+    <value>Tout ({0})</value>
+  </data>
+  <data name="SelectedCount" xml:space="preserve">
+    <value>Sélection ({0})</value>
+  </data>
+  <data name="EstimatedDownloadSize" xml:space="preserve">
+    <value>Taille estimée du téléchargement : {0} Mo</value>
+  </data>
+  <data name="FilesProgressFormat" xml:space="preserve">
+    <value>Fichier(s) {0} / {1}</value>
+  </data>
+  <data name="SizeProgress" xml:space="preserve">
+    <value>{0} / {1} Mo</value>
+  </data>
+  <data name="ImportErrorCouldNot" xml:space="preserve">
+    <value>Le fichier « {0} » n'a pas pu être importé.</value>
+  </data>
+  <data name="ImportErrorNAPS2Pdf" xml:space="preserve">
+    <value>Le fichier « {0} » n'a pas pu être importé. Seuls les fichiers PDF générés par NAPS2 peuvent être importés.</value>
+  </data>
+  <data name="DownloadError" xml:space="preserve">
+    <value>Erreur de téléchargement</value>
+  </data>
+  <data name="FilesCouldNotBeDownloaded" xml:space="preserve">
+    <value>Au moins un fichier n'a pas pu être téléchargé.</value>
+  </data>
+  <data name="CustomPageSizeFormat" xml:space="preserve">
+    <value>Personnalisé ({0}x{1} {2})</value>
+  </data>
+  <data name="Scan" xml:space="preserve">
+    <value>Numériser</value>
+  </data>
+  <data name="ConfirmResetImages" xml:space="preserve">
+    <value>Faut-il vraiment défaire les modifications sur {0} image(s) ?</value>
+  </data>
+  <data name="ResetImage" xml:space="preserve">
+    <value>Réinitialisation de l'image</value>
+  </data>
+  <data name="ExitWithUnsavedChanges" xml:space="preserve">
+    <value>Il existe des modifications non enregistrées. Faut-il vraiment quitter et les perdre ?</value>
+  </data>
+  <data name="ExitWithActiveOperations" xml:space="preserve">
+    <value>Une opération est en cours. Faut-il vraiment quitter et annuler l'opération ?</value>
+  </data>
+  <data name="UnsavedChanges" xml:space="preserve">
+    <value>Modifications non enregistrées</value>
+  </data>
+  <data name="ActiveOperations" xml:space="preserve">
+    <value>Progression de l'opération</value>
+  </data>
+  <data name="ScanPageProgress" xml:space="preserve">
+    <value>Acquisition de la page {0}...</value>
+  </data>
+  <data name="NoFeederSupport" xml:space="preserve">
+    <value>Le scanner sélectionné ne gère pas de dispositif d'alimentation. Si ce scanner en possède un, essayer d'utiliser un autre pilote.</value>
+  </data>
+  <data name="NoPagesInFeeder" xml:space="preserve">
+    <value>Il n'y a aucune page dans le dispositif d'alimentation.</value>
+  </data>
+  <data name="PdfNoPermissionToExtractContent" xml:space="preserve">
+    <value>Vous n'avez pas la permission de copier le contenu du fichier « {0} »..</value>
+  </data>
+  <data name="ErrorSaving" xml:space="preserve">
+    <value>Une erreur est survenue en essayant d'enregistrer le fichier.</value>
+  </data>
+  <data name="OfN" xml:space="preserve">
+    <value>de {0}</value>
+  </data>
+  <data name="BatchError" xml:space="preserve">
+    <value>Une erreur inconnue est survenue lors de l'acquisition par lot.</value>
+  </data>
+  <data name="BatchStatusCancelled" xml:space="preserve">
+    <value>Lot annulé.</value>
+  </data>
+  <data name="BatchStatusCancelling" xml:space="preserve">
+    <value>Annulation....</value>
+  </data>
+  <data name="BatchStatusComplete" xml:space="preserve">
+    <value>Lot terminé avec succès.</value>
+  </data>
+  <data name="BatchStatusError" xml:space="preserve">
+    <value>Acquisition par lot arrêtée avec l'erreur.</value>
+  </data>
+  <data name="BatchStatusPage" xml:space="preserve">
+    <value>Acquisition de la page {0}......</value>
+  </data>
+  <data name="BatchStatusScanPage" xml:space="preserve">
+    <value>Acquisition page {0} (numérisation {1})......</value>
+  </data>
+  <data name="BatchStatusWaitingForScan" xml:space="preserve">
+    <value>En attente de l'acquisition {0}...</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Annuler</value>
+  </data>
+  <data name="Close" xml:space="preserve">
+    <value>Fermer</value>
+  </data>
+  <data name="BatchStatusSaving" xml:space="preserve">
+    <value>Enregistrement des acquisitions par lot...</value>
+  </data>
+  <data name="NoDuplexSupport" xml:space="preserve">
+    <value>Le scanner sélectionné ne gère pas le recto-verso. Si ce scanner est supposé le gérer, essayer d'utiliser un autre pilote.</value>
+  </data>
+  <data name="ImportingFormat" xml:space="preserve">
+    <value>Importation de « {0} »...</value>
+  </data>
+  <data name="ImportProgress" xml:space="preserve">
+    <value>Progression de l'importation</value>
+  </data>
+  <data name="Recovering" xml:space="preserve">
+    <value>Récupération...</value>
+  </data>
+  <data name="RecoveryProgress" xml:space="preserve">
+    <value>Progression de la récupération</value>
+  </data>
+  <data name="SaveImages" xml:space="preserve">
+    <value>Enregistrer les images</value>
+  </data>
+  <data name="SaveImagesProgress" xml:space="preserve">
+    <value>Progression de l'enregistrement des images</value>
+  </data>
+  <data name="SavePdf" xml:space="preserve">
+    <value>Enregistrer en PDF</value>
+  </data>
+  <data name="SavePdfProgress" xml:space="preserve">
+    <value>Progression de l'enregistrement en PDF</value>
+  </data>
+  <data name="SavingFormat" xml:space="preserve">
+    <value>Enregistrement de « {0} »...</value>
+  </data>
+  <data name="Print" xml:space="preserve">
+    <value>Imprimer</value>
+  </data>
+  <data name="Copying" xml:space="preserve">
+    <value>Copie...</value>
+  </data>
+  <data name="CopyProgress" xml:space="preserve">
+    <value>Progression de la copie</value>
+  </data>
+  <data name="Importing" xml:space="preserve">
+    <value>Importation...</value>
+  </data>
+  <data name="EmailPdf" xml:space="preserve">
+    <value>PDF par courriel</value>
+  </data>
+  <data name="EmailPdfProgress" xml:space="preserve">
+    <value>Progression du PDF par courriel</value>
+  </data>
+  <data name="AutoSaveError" xml:space="preserve">
+    <value>Une erreur est survenue en essayant d'enregistrer automatiquement.</value>
+  </data>
+  <data name="FileTypeAllFiles" xml:space="preserve">
+    <value>Tous les fichiers</value>
+  </data>
+  <data name="FileTypeImageFiles" xml:space="preserve">
+    <value>Fichiers image</value>
+  </data>
+  <data name="DeviceBusy" xml:space="preserve">
+    <value>Le scanner sélectionné est occupé.</value>
+  </data>
+  <data name="DeviceCoverOpen" xml:space="preserve">
+    <value>Le capot du scanner est ouvert.</value>
+  </data>
+  <data name="DevicePaperJam" xml:space="preserve">
+    <value>Le scanner a un bourrage papier.</value>
+  </data>
+  <data name="DeviceWarmingUp" xml:space="preserve">
+    <value>Le scanner est en train de préchauffer.</value>
+  </data>
+  <data name="OcrUpdateAvailable" xml:space="preserve">
+    <value>Une mise à jour pour l'OCR est disponible.</value>
+  </data>
+  <data name="ImageSaved" xml:space="preserve">
+    <value>Image enregistrée.</value>
+  </data>
+  <data name="ImagesSaved" xml:space="preserve">
+    <value>{0} images enregistrées.</value>
+  </data>
+  <data name="PdfSaved" xml:space="preserve">
+    <value>PDF enregistré.</value>
+  </data>
+  <data name="NamedPageSizeFormat" xml:space="preserve">
+    <value>{0} ({1}x{2} {3})</value>
+  </data>
+  <data name="ConfirmDelete" xml:space="preserve">
+    <value>Are you sure you want to delete "{0}"?</value>
+  </data>
+  <data name="FileInUse" xml:space="preserve">
+    <value>Le fichier ne peut pas être écrasé car il est en cours d'utilisation.</value>
+  </data>
+  <data name="AutoDeskewing" xml:space="preserve">
+    <value>Réalignement…...</value>
+  </data>
+  <data name="AutoDeskewProgress" xml:space="preserve">
+    <value>Progression du réalignement</value>
+  </data>
+  <data name="DownloadNeeded" xml:space="preserve">
+    <value>Téléchargement requis</value>
+  </data>
+  <data name="PdfImportComponentNeeded" xml:space="preserve">
+    <value>Un composant supplémentaire est requis pour importer ce fichier PDF. Faut-il le télécharger maintenant ?</value>
+  </data>
+  <data name="ConfirmCancelBatch" xml:space="preserve">
+    <value>Faut-il vraiment annuler l'acquisition par lot ?</value>
+  </data>
+  <data name="CancelBatch" xml:space="preserve">
+    <value>Annuler le lot</value>
+  </data>
+  <data name="Donate" xml:space="preserve">
+    <value>Don</value>
+  </data>
+  <data name="DonatePrompt" xml:space="preserve">
+    <value>NAPS2 est gratuit mais il est possible de faire un don.</value>
+  </data>
+  <data name="SaneNotAvailable" xml:space="preserve">
+    <value>Le pilote SANE n'est pas disponible. Merci d'installer les paquets requis:</value>
+  </data>
+  <data name="TesseractNotAvailable" xml:space="preserve">
+    <value>Le moteur OCR n'est pas disponible. Merci d'installer le paquet requis.:</value>
+  </data>
+  <data name="DriverNotSupported" xml:space="preserve">
+    <value>Le pilote sélectionné n'est pas pris en charge sur ce système.</value>
+  </data>
+  <data name="OcrProgress" xml:space="preserve">
+    <value>Progression de l'OCR</value>
+  </data>
+  <data name="RunningOcr" xml:space="preserve">
+    <value>OCR en exécution...</value>
+  </data>
+  <data name="UpdateProgress" xml:space="preserve">
+    <value>Progression de la mise à jour</value>
+  </data>
+  <data name="Updating" xml:space="preserve">
+    <value>Mise à jour...</value>
+  </data>
+  <data name="NoUpdates" xml:space="preserve">
+    <value>Aucune mise à jour disponible.</value>
+  </data>
+  <data name="CheckingForUpdates" xml:space="preserve">
+    <value>Vérification...</value>
+  </data>
+  <data name="UpdateError" xml:space="preserve">
+    <value>Une erreur est survenue en essayant d'installer la mise à jour.</value>
+  </data>
+  <data name="Install" xml:space="preserve">
+    <value>Installer {0}</value>
+  </data>
+  <data name="UpdateAvailable" xml:space="preserve">
+    <value>Une mise à jour est disponible.</value>
+  </data>
+  <data name="AuthError" xml:space="preserve">
+    <value>Une erreur est survenue en essayent d'autoriser.</value>
+  </data>
+  <data name="UploadingEmail" xml:space="preserve">
+    <value>Envoi du courriel...</value>
+  </data>
+  <data name="ErrorEmailing" xml:space="preserve">
+    <value>Une erreur est survenue en essayant d'envoyer le courriel.</value>
+  </data>
+  <data name="Naps2Server" xml:space="preserve">
+    <value>NAPS2 Server</value>
+  </data>
+  <data name="ServerStarted" xml:space="preserve">
+    <value>Server started</value>
+  </data>
+  <data name="ListeningOnPort" xml:space="preserve">
+    <value>Listening on port {0}</value>
+  </data>
+  <data name="ScanProgressPage" xml:space="preserve">
+    <value>Acquisition de la page {0}......</value>
+  </data>
+  <data name="AcquiringData" xml:space="preserve">
+    <value>Acquisition des données...</value>
+  </data>
+</root>

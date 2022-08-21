@@ -1,0 +1,396 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="ChooseProfile" xml:space="preserve">
+    <value>בחר פרופיל</value>
+  </data>
+  <data name="Clear" xml:space="preserve">
+    <value>מחק הכל</value>
+  </data>
+  <data name="ConfirmClearItems" xml:space="preserve">
+    <value>בטוחים שתרצו למחוק {0} פריט/ים?</value>
+  </data>
+  <data name="ConfirmDeleteItems" xml:space="preserve">
+    <value>בטוחים שתרצו למחוק {0} פריט/ים?</value>
+  </data>
+  <data name="ConfirmDeleteMultipleProfiles" xml:space="preserve">
+    <value>בטוחים שתרצו למחוק את הפרופיל/ים {0}?</value>
+  </data>
+  <data name="ConfirmDeleteSingleProfile" xml:space="preserve">
+    <value>בטוחים שתרצו למחוק את הפרופיל {0}?</value>
+  </data>
+  <data name="ConfirmOverwriteFile" xml:space="preserve">
+    <value>הקובץ {0} כבר קיים. האם להחליפו?</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>מחיקה</value>
+  </data>
+  <data name="DeviceNotFound" xml:space="preserve">
+    <value>הסורק שנבחר לא נמצא.</value>
+  </data>
+  <data name="DeviceOffline" xml:space="preserve">
+    <value>הסורק שנבחר איננו מקוון (OFFLINE).</value>
+  </data>
+  <data name="DontHavePermission" xml:space="preserve">
+    <value>אין ברשותכם הרשאות מספיקות לשמירת הקובץ במיקום זה.</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>שגיאה</value>
+  </data>
+  <data name="FileTypeBmp" xml:space="preserve">
+    <value>קובץ מפת סיביות (*.bmp)</value>
+  </data>
+  <data name="FileTypeEmf" xml:space="preserve">
+    <value>קובצי מטא מורחבים (‎*.emf)</value>
+  </data>
+  <data name="FileTypeExif" xml:space="preserve">
+    <value>קובץ תמונה בר-החלפה (*.exif)</value>
+  </data>
+  <data name="FileTypeGif" xml:space="preserve">
+    <value>קובץ GIF (*.gif)</value>
+  </data>
+  <data name="FileTypeJpeg" xml:space="preserve">
+    <value>קובץ JPEG (*.jpg, *.jpeg)</value>
+  </data>
+  <data name="FileTypePdf" xml:space="preserve">
+    <value>מסמך PDF (*.pdf)</value>
+  </data>
+  <data name="FileTypePng" xml:space="preserve">
+    <value>קובץ PNG (*.png)</value>
+  </data>
+  <data name="FileTypeTiff" xml:space="preserve">
+    <value>קובץ TIFF (*.tiff, *.tif)</value>
+  </data>
+  <data name="NameMissing" xml:space="preserve">
+    <value>שם חסר.</value>
+  </data>
+  <data name="NAPS2" xml:space="preserve">
+    <value>NAPS2</value>
+  </data>
+  <data name="NoDeviceSelected" xml:space="preserve">
+    <value>לא נבחר התקן.</value>
+  </data>
+  <data name="NoDevicesFound" xml:space="preserve">
+    <value>לא נמצא סורק.</value>
+  </data>
+  <data name="OverwriteFile" xml:space="preserve">
+    <value>החלפת קובץ</value>
+  </data>
+  <data name="PdfStatus" xml:space="preserve">
+    <value>{0} מתוך {1}</value>
+  </data>
+  <data name="ScannedImage" xml:space="preserve">
+    <value>תמונה שנסרקה</value>
+  </data>
+  <data name="SelectProfileBeforeScan" xml:space="preserve">
+    <value>יש לבחור פרופיל לפני לחיצה על כפתור סריקה.</value>
+  </data>
+  <data name="UnknownDriverError" xml:space="preserve">
+    <value>אירעה שגיאה במנהל ההתקן של הסורק.</value>
+  </data>
+  <data name="Version" xml:space="preserve">
+    <value>גרסה {0}</value>
+  </data>
+  <data name="EmailError" xml:space="preserve">
+    <value>תקלה בשליחת דוא\"ל.</value>
+  </data>
+  <data name="InstallComplete" xml:space="preserve">
+    <value>ההתקנה הושלמה</value>
+  </data>
+  <data name="InstallCompletePromptRestart" xml:space="preserve">
+    <value>ההתקנה הושלמה. האם ברצונך לאתחל את התוכנה?</value>
+  </data>
+  <data name="InstallFailed" xml:space="preserve">
+    <value>תקלה בהתקנה.</value>
+  </data>
+  <data name="InstallFailedTitle" xml:space="preserve">
+    <value>תקלה בהתקנה</value>
+  </data>
+  <data name="AllCount" xml:space="preserve">
+    <value>הכל ({0})</value>
+  </data>
+  <data name="SelectedCount" xml:space="preserve">
+    <value>מסומנים ({0})</value>
+  </data>
+  <data name="EstimatedDownloadSize" xml:space="preserve">
+    <value>גודל מוערך להורדה: {0} מ\"ב</value>
+  </data>
+  <data name="FilesProgressFormat" xml:space="preserve">
+    <value>{0} / {1} קבצים</value>
+  </data>
+  <data name="SizeProgress" xml:space="preserve">
+    <value>{0} / {1} מ\"ב</value>
+  </data>
+  <data name="ImportErrorCouldNot" xml:space="preserve">
+    <value>לא ניתן לייבא את הקובץ '{0}'.</value>
+  </data>
+  <data name="ImportErrorNAPS2Pdf" xml:space="preserve">
+    <value>לא ניתן לייבא את הקובץ '{0}'. ניתן לייבא רק קבצים שנוצרו על ידי תוכנה זו.</value>
+  </data>
+  <data name="DownloadError" xml:space="preserve">
+    <value>תקלה בהורדה</value>
+  </data>
+  <data name="FilesCouldNotBeDownloaded" xml:space="preserve">
+    <value>תקלה בהורדת קובץ אחד או יותר.</value>
+  </data>
+  <data name="CustomPageSizeFormat" xml:space="preserve">
+    <value>מותאם אישית ({0}x{1} {2})</value>
+  </data>
+  <data name="Scan" xml:space="preserve">
+    <value>סריקה</value>
+  </data>
+  <data name="ConfirmResetImages" xml:space="preserve">
+    <value>לבטל שינויים ב-{0} תמונה/תמונות?</value>
+  </data>
+  <data name="ResetImage" xml:space="preserve">
+    <value>אפס תמונה</value>
+  </data>
+  <data name="ExitWithUnsavedChanges" xml:space="preserve">
+    <value>ישנם שינויים שלא נשמרו. האם לסגור את התוכנה ולאבד את השינויים הללו?</value>
+  </data>
+  <data name="ExitWithActiveOperations" xml:space="preserve">
+    <value>An operation is in progress. Are you sure you want to exit and cancel the operation?</value>
+  </data>
+  <data name="UnsavedChanges" xml:space="preserve">
+    <value>שינויים שלא נשמרו</value>
+  </data>
+  <data name="ActiveOperations" xml:space="preserve">
+    <value>Operation in Progress</value>
+  </data>
+  <data name="ScanPageProgress" xml:space="preserve">
+    <value>סורק עמוד {0}</value>
+  </data>
+  <data name="NoFeederSupport" xml:space="preserve">
+    <value>הסורק שנבחר איננו תומך במזין מסמכים. אם לסורק יש מזין מסמכים, נסה להשתמש במנהל התקן אחר.</value>
+  </data>
+  <data name="NoPagesInFeeder" xml:space="preserve">
+    <value>אין דפים במזין המסמכים.</value>
+  </data>
+  <data name="PdfNoPermissionToExtractContent" xml:space="preserve">
+    <value>אין לך הרשאה להעתקת תוכן מהקובץ '{0}'.</value>
+  </data>
+  <data name="ErrorSaving" xml:space="preserve">
+    <value>תקלה בשמירת הקובץ.</value>
+  </data>
+  <data name="OfN" xml:space="preserve">
+    <value>מתוך {0}</value>
+  </data>
+  <data name="BatchError" xml:space="preserve">
+    <value>שגיאה בלתי ידוע אירע בעת סריקת אצווה.</value>
+  </data>
+  <data name="BatchStatusCancelled" xml:space="preserve">
+    <value>האצווה בוטלה.</value>
+  </data>
+  <data name="BatchStatusCancelling" xml:space="preserve">
+    <value>Cancelling....</value>
+  </data>
+  <data name="BatchStatusComplete" xml:space="preserve">
+    <value>אצווה הושלמה בהצלחה.</value>
+  </data>
+  <data name="BatchStatusError" xml:space="preserve">
+    <value>סריקה אצווה נעצרה עקב שגיאה.</value>
+  </data>
+  <data name="BatchStatusPage" xml:space="preserve">
+    <value>סורק עמוד {0}...</value>
+  </data>
+  <data name="BatchStatusScanPage" xml:space="preserve">
+    <value>Scanning page {0} (scan {1})...</value>
+  </data>
+  <data name="BatchStatusWaitingForScan" xml:space="preserve">
+    <value>Waiting for scan {0}...</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>ביטול</value>
+  </data>
+  <data name="Close" xml:space="preserve">
+    <value>Close</value>
+  </data>
+  <data name="BatchStatusSaving" xml:space="preserve">
+    <value>Saving batch results...</value>
+  </data>
+  <data name="NoDuplexSupport" xml:space="preserve">
+    <value>The selected scanner does not support using duplex. If your scanner is supposed to support duplex, try using a different driver.</value>
+  </data>
+  <data name="ImportingFormat" xml:space="preserve">
+    <value>Importing {0}...</value>
+  </data>
+  <data name="ImportProgress" xml:space="preserve">
+    <value>Import Progress</value>
+  </data>
+  <data name="Recovering" xml:space="preserve">
+    <value>Recovering...</value>
+  </data>
+  <data name="RecoveryProgress" xml:space="preserve">
+    <value>Recovery Progress</value>
+  </data>
+  <data name="SaveImages" xml:space="preserve">
+    <value>לשמור תמונות</value>
+  </data>
+  <data name="SaveImagesProgress" xml:space="preserve">
+    <value>Save Images Progress</value>
+  </data>
+  <data name="SavePdf" xml:space="preserve">
+    <value>לשמור PDF</value>
+  </data>
+  <data name="SavePdfProgress" xml:space="preserve">
+    <value>Save PDF Progress</value>
+  </data>
+  <data name="SavingFormat" xml:space="preserve">
+    <value>Saving {0}...</value>
+  </data>
+  <data name="Print" xml:space="preserve">
+    <value>הדפסה</value>
+  </data>
+  <data name="Copying" xml:space="preserve">
+    <value>העתקה...</value>
+  </data>
+  <data name="CopyProgress" xml:space="preserve">
+    <value>התקדמות העתקה</value>
+  </data>
+  <data name="Importing" xml:space="preserve">
+    <value>Importing...</value>
+  </data>
+  <data name="EmailPdf" xml:space="preserve">
+    <value>שליחת PDF בדוא\"ל</value>
+  </data>
+  <data name="EmailPdfProgress" xml:space="preserve">
+    <value>Email PDF Progress</value>
+  </data>
+  <data name="AutoSaveError" xml:space="preserve">
+    <value>אירעה שגיאה בעת שמירת אוטומטי.</value>
+  </data>
+  <data name="FileTypeAllFiles" xml:space="preserve">
+    <value>כל הקבצים</value>
+  </data>
+  <data name="FileTypeImageFiles" xml:space="preserve">
+    <value>Image Files</value>
+  </data>
+  <data name="DeviceBusy" xml:space="preserve">
+    <value>הסורק שנבחר איננו מקוון (OFFLINE).</value>
+  </data>
+  <data name="DeviceCoverOpen" xml:space="preserve">
+    <value>The scanner's cover is open.</value>
+  </data>
+  <data name="DevicePaperJam" xml:space="preserve">
+    <value>The scanner has a paper jam.</value>
+  </data>
+  <data name="DeviceWarmingUp" xml:space="preserve">
+    <value>The scanner is warming up.</value>
+  </data>
+  <data name="OcrUpdateAvailable" xml:space="preserve">
+    <value>עדכון ל- OCR זמין.</value>
+  </data>
+  <data name="ImageSaved" xml:space="preserve">
+    <value>Image saved.</value>
+  </data>
+  <data name="ImagesSaved" xml:space="preserve">
+    <value>{0} images saved.</value>
+  </data>
+  <data name="PdfSaved" xml:space="preserve">
+    <value>PDF saved.</value>
+  </data>
+  <data name="NamedPageSizeFormat" xml:space="preserve">
+    <value>{0} ({1}x{2} {3})</value>
+  </data>
+  <data name="ConfirmDelete" xml:space="preserve">
+    <value>Are you sure you want to delete "{0}"?</value>
+  </data>
+  <data name="FileInUse" xml:space="preserve">
+    <value>The file could not be overwritten because it is currently in use.</value>
+  </data>
+  <data name="AutoDeskewing" xml:space="preserve">
+    <value>Deskewing...</value>
+  </data>
+  <data name="AutoDeskewProgress" xml:space="preserve">
+    <value>Deskew Progress</value>
+  </data>
+  <data name="DownloadNeeded" xml:space="preserve">
+    <value>Download Needed</value>
+  </data>
+  <data name="PdfImportComponentNeeded" xml:space="preserve">
+    <value>An additional component is needed to import this PDF file. Would you like to download it now?</value>
+  </data>
+  <data name="ConfirmCancelBatch" xml:space="preserve">
+    <value>Are you sure you want to cancel the batch scan?</value>
+  </data>
+  <data name="CancelBatch" xml:space="preserve">
+    <value>Cancel Batch</value>
+  </data>
+  <data name="Donate" xml:space="preserve">
+    <value>Donate</value>
+  </data>
+  <data name="DonatePrompt" xml:space="preserve">
+    <value>NAPS2 is completely free. Consider making a donation.</value>
+  </data>
+  <data name="SaneNotAvailable" xml:space="preserve">
+    <value>The SANE driver is not available. Make sure to install the required packages:</value>
+  </data>
+  <data name="TesseractNotAvailable" xml:space="preserve">
+    <value>The OCR engine is not available. Make sure to install the required package:</value>
+  </data>
+  <data name="DriverNotSupported" xml:space="preserve">
+    <value>The selected driver is not supported on this system.</value>
+  </data>
+  <data name="OcrProgress" xml:space="preserve">
+    <value>OCR Progress</value>
+  </data>
+  <data name="RunningOcr" xml:space="preserve">
+    <value>Running OCR...</value>
+  </data>
+  <data name="UpdateProgress" xml:space="preserve">
+    <value>Update Progress</value>
+  </data>
+  <data name="Updating" xml:space="preserve">
+    <value>Updating...</value>
+  </data>
+  <data name="NoUpdates" xml:space="preserve">
+    <value>No updates available.</value>
+  </data>
+  <data name="CheckingForUpdates" xml:space="preserve">
+    <value>Checking...</value>
+  </data>
+  <data name="UpdateError" xml:space="preserve">
+    <value>An error occured when trying to install the update.</value>
+  </data>
+  <data name="Install" xml:space="preserve">
+    <value>Install {0}</value>
+  </data>
+  <data name="UpdateAvailable" xml:space="preserve">
+    <value>An update is available.</value>
+  </data>
+  <data name="AuthError" xml:space="preserve">
+    <value>An error occurred when trying to authorize.</value>
+  </data>
+  <data name="UploadingEmail" xml:space="preserve">
+    <value>Uploading email...</value>
+  </data>
+  <data name="ErrorEmailing" xml:space="preserve">
+    <value>An error occurred when trying to send the email.</value>
+  </data>
+  <data name="Naps2Server" xml:space="preserve">
+    <value>NAPS2 Server</value>
+  </data>
+  <data name="ServerStarted" xml:space="preserve">
+    <value>Server started</value>
+  </data>
+  <data name="ListeningOnPort" xml:space="preserve">
+    <value>Listening on port {0}</value>
+  </data>
+  <data name="ScanProgressPage" xml:space="preserve">
+    <value>סורק עמוד {0}...</value>
+  </data>
+  <data name="AcquiringData" xml:space="preserve">
+    <value>מייבא נתונים...</value>
+  </data>
+</root>

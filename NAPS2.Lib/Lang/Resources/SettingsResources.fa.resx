@@ -1,0 +1,156 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="BitDepth_1BlackAndWhite" xml:space="preserve">
+    <value>سیاه و سفید</value>
+  </data>
+  <data name="BitDepth_24Color" xml:space="preserve">
+    <value>رنگ ۲۴ بیتی</value>
+  </data>
+  <data name="BitDepth_8Grayscale" xml:space="preserve">
+    <value>بی‌رنگ</value>
+  </data>
+  <data name="Dpi_100" xml:space="preserve">
+    <value>۱۰۰ نقطه در اینچ</value>
+  </data>
+  <data name="Dpi_1200" xml:space="preserve">
+    <value>۱۲۰۰ نقطه در اینچ</value>
+  </data>
+  <data name="Dpi_150" xml:space="preserve">
+    <value>۱۵۰ نقطه در اینچ</value>
+  </data>
+  <data name="Dpi_200" xml:space="preserve">
+    <value>۲۰۰ نقطه در اینچ</value>
+  </data>
+  <data name="Dpi_300" xml:space="preserve">
+    <value>۳۰۰ نقطه در اینچ</value>
+  </data>
+  <data name="Dpi_400" xml:space="preserve">
+    <value>۴۰۰ نقطه در اینچ</value>
+  </data>
+  <data name="Dpi_600" xml:space="preserve">
+    <value>۶۰۰ نقطه در اینچ</value>
+  </data>
+  <data name="Dpi_800" xml:space="preserve">
+    <value>۸۰۰ نقطه در اینچ</value>
+  </data>
+  <data name="EmailProviderType_CustomSmtp" xml:space="preserve">
+    <value>Custom SMTP</value>
+  </data>
+  <data name="EmailProviderType_Gmail" xml:space="preserve">
+    <value>Gmail</value>
+  </data>
+  <data name="EmailProviderType_OutlookWeb" xml:space="preserve">
+    <value>Outlook Web Access</value>
+  </data>
+  <data name="EmailProvider_NotSelected" xml:space="preserve">
+    <value>No provider selected.</value>
+  </data>
+  <data name="HorizontalAlign_Center" xml:space="preserve">
+    <value>مرکز</value>
+  </data>
+  <data name="HorizontalAlign_Left" xml:space="preserve">
+    <value>چپ</value>
+  </data>
+  <data name="HorizontalAlign_Right" xml:space="preserve">
+    <value>راست</value>
+  </data>
+  <data name="PageSizeUnit_Centimetre" xml:space="preserve">
+    <value>سانتی‌متر</value>
+  </data>
+  <data name="PageSizeUnit_Inch" xml:space="preserve">
+    <value>اینچ</value>
+  </data>
+  <data name="PageSizeUnit_Millimetre" xml:space="preserve">
+    <value>میلی‌متر</value>
+  </data>
+  <data name="PageSize_A3" xml:space="preserve">
+    <value>A3 ۲۹۷ × ۴۲۰ میلی‌متر</value>
+  </data>
+  <data name="PageSize_A4" xml:space="preserve">
+    <value>A4 ۲۱۰×۲۹۷ میلی‌متر</value>
+  </data>
+  <data name="PageSize_A5" xml:space="preserve">
+    <value>A5 (۱۴۸×۲۱۰ میلی‌متر)</value>
+  </data>
+  <data name="PageSize_B4" xml:space="preserve">
+    <value>ب۴ (۲۵۰ در ۳۵۳ م.م)</value>
+  </data>
+  <data name="PageSize_B5" xml:space="preserve">
+    <value>ب۵ (۱۷۶ در ۲۵۰ م.م)</value>
+  </data>
+  <data name="PageSize_Custom" xml:space="preserve">
+    <value>سفارشی...</value>
+  </data>
+  <data name="PageSize_Legal" xml:space="preserve">
+    <value>US Legal (۸٫۵x۱۴ اینچ)</value>
+  </data>
+  <data name="PageSize_Letter" xml:space="preserve">
+    <value>US Letter (۸٫۵x۱۱ اینچ)</value>
+  </data>
+  <data name="PdfCompat_Default" xml:space="preserve">
+    <value>پیش‌فرض</value>
+  </data>
+  <data name="PdfCompat_PdfA1B" xml:space="preserve">
+    <value>PDF/A-1b</value>
+  </data>
+  <data name="PdfCompat_PdfA2B" xml:space="preserve">
+    <value>PDF/A-2b</value>
+  </data>
+  <data name="PdfCompat_PdfA3B" xml:space="preserve">
+    <value>PDF/A-3b</value>
+  </data>
+  <data name="PdfCompat_PdfA3U" xml:space="preserve">
+    <value>PDF/A-3u</value>
+  </data>
+  <data name="Source_Duplex" xml:space="preserve">
+    <value>دورو</value>
+  </data>
+  <data name="Source_Feeder" xml:space="preserve">
+    <value>خوراننده</value>
+  </data>
+  <data name="Source_Glass" xml:space="preserve">
+    <value>شیشه</value>
+  </data>
+  <data name="TiffComp_Auto" xml:space="preserve">
+    <value>Auto</value>
+  </data>
+  <data name="TiffComp_Ccitt4" xml:space="preserve">
+    <value>CCITT4</value>
+  </data>
+  <data name="TiffComp_Lzw" xml:space="preserve">
+    <value>LZW</value>
+  </data>
+  <data name="TiffComp_None" xml:space="preserve">
+    <value>انجام شد</value>
+  </data>
+  <data name="TwainImpl_Default" xml:space="preserve">
+    <value>پیش‌فرض</value>
+  </data>
+  <data name="TwainImpl_Legacy" xml:space="preserve">
+    <value>ارث (فقط رابط کاربری بومی)</value>
+  </data>
+  <data name="TwainImpl_MemXfer" xml:space="preserve">
+    <value>Alternative Transfer</value>
+  </data>
+  <data name="TwainImpl_OldDsm" xml:space="preserve">
+    <value>Old DSM</value>
+  </data>
+  <data name="TwainImpl_X64" xml:space="preserve">
+    <value>x64</value>
+  </data>
+  <data name="WiaVersion_Default" xml:space="preserve">
+    <value>پیش‌فرض</value>
+  </data>
+</root>

@@ -1,0 +1,396 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="ChooseProfile" xml:space="preserve">
+    <value>Vel profil</value>
+  </data>
+  <data name="Clear" xml:space="preserve">
+    <value>Fjern</value>
+  </data>
+  <data name="ConfirmClearItems" xml:space="preserve">
+    <value>Er du sikker på at du vil fjerna {0} element?</value>
+  </data>
+  <data name="ConfirmDeleteItems" xml:space="preserve">
+    <value>Er du sikker på at du vil sletta {0} element?</value>
+  </data>
+  <data name="ConfirmDeleteMultipleProfiles" xml:space="preserve">
+    <value>Er du sikker på at du vil sletta {0} profilar?</value>
+  </data>
+  <data name="ConfirmDeleteSingleProfile" xml:space="preserve">
+    <value>Er du sikker på at du vil sletta profilen {0}?</value>
+  </data>
+  <data name="ConfirmOverwriteFile" xml:space="preserve">
+    <value>Fila {0} eksisterer. Vil du overskriva den?</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Slette</value>
+  </data>
+  <data name="DeviceNotFound" xml:space="preserve">
+    <value>Den valde skannaren vart ikkje funnen.</value>
+  </data>
+  <data name="DeviceOffline" xml:space="preserve">
+    <value>Den valde skannaren er fråkopla.</value>
+  </data>
+  <data name="DontHavePermission" xml:space="preserve">
+    <value>Du har ikkje lov til å lagra filer til denne staden.</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>Feil</value>
+  </data>
+  <data name="FileTypeBmp" xml:space="preserve">
+    <value>Bitmap-filer (*.bmp)</value>
+  </data>
+  <data name="FileTypeEmf" xml:space="preserve">
+    <value>Forbetra Windows MetaFil (*.emf)</value>
+  </data>
+  <data name="FileTypeExif" xml:space="preserve">
+    <value>Exchangeable Image File (*.exif)</value>
+  </data>
+  <data name="FileTypeGif" xml:space="preserve">
+    <value>GIF-fil (*.gif)</value>
+  </data>
+  <data name="FileTypeJpeg" xml:space="preserve">
+    <value>JPEG-fil (*.jpg, *.jpeg)</value>
+  </data>
+  <data name="FileTypePdf" xml:space="preserve">
+    <value>PDF-dokument (*.pdf)</value>
+  </data>
+  <data name="FileTypePng" xml:space="preserve">
+    <value>PNG-fil (*.png)</value>
+  </data>
+  <data name="FileTypeTiff" xml:space="preserve">
+    <value>TIFF fil (*.tiff, *.tif)</value>
+  </data>
+  <data name="NameMissing" xml:space="preserve">
+    <value>Namn manglar.</value>
+  </data>
+  <data name="NAPS2" xml:space="preserve">
+    <value>NAPS2</value>
+  </data>
+  <data name="NoDeviceSelected" xml:space="preserve">
+    <value>Ingen skannar vald.</value>
+  </data>
+  <data name="NoDevicesFound" xml:space="preserve">
+    <value>Ingen skannar vart funnen.</value>
+  </data>
+  <data name="OverwriteFile" xml:space="preserve">
+    <value>Overskriv fil</value>
+  </data>
+  <data name="PdfStatus" xml:space="preserve">
+    <value>{0} av {1}</value>
+  </data>
+  <data name="ScannedImage" xml:space="preserve">
+    <value>Skanna bilde</value>
+  </data>
+  <data name="SelectProfileBeforeScan" xml:space="preserve">
+    <value>Vel ein profil før du klikker Skann.</value>
+  </data>
+  <data name="UnknownDriverError" xml:space="preserve">
+    <value>Ukjend feil med skanne-drivaren.</value>
+  </data>
+  <data name="Version" xml:space="preserve">
+    <value>Versjon {0}</value>
+  </data>
+  <data name="EmailError" xml:space="preserve">
+    <value>Feil ved sending av epost.</value>
+  </data>
+  <data name="InstallComplete" xml:space="preserve">
+    <value>Installasjon fullført</value>
+  </data>
+  <data name="InstallCompletePromptRestart" xml:space="preserve">
+    <value>Innstallasjon fullført. Vil du restarta NAPS2 nå?</value>
+  </data>
+  <data name="InstallFailed" xml:space="preserve">
+    <value>Installasjon feila.</value>
+  </data>
+  <data name="InstallFailedTitle" xml:space="preserve">
+    <value>Installasjon feila</value>
+  </data>
+  <data name="AllCount" xml:space="preserve">
+    <value>Alle ({0})</value>
+  </data>
+  <data name="SelectedCount" xml:space="preserve">
+    <value>Vald ({0})</value>
+  </data>
+  <data name="EstimatedDownloadSize" xml:space="preserve">
+    <value>Berekna nedlastingsvolum: {0} MB</value>
+  </data>
+  <data name="FilesProgressFormat" xml:space="preserve">
+    <value>{0} / {1} filer</value>
+  </data>
+  <data name="SizeProgress" xml:space="preserve">
+    <value>{0} / {1} MB</value>
+  </data>
+  <data name="ImportErrorCouldNot" xml:space="preserve">
+    <value>Fila '{0}' kunne ikkje importerast.</value>
+  </data>
+  <data name="ImportErrorNAPS2Pdf" xml:space="preserve">
+    <value>Fila '{0}' kunne ikkje importerast. Bare PDF-filer laga av NAPS2 kan importerast.</value>
+  </data>
+  <data name="DownloadError" xml:space="preserve">
+    <value>Nedlastingsfeil</value>
+  </data>
+  <data name="FilesCouldNotBeDownloaded" xml:space="preserve">
+    <value>Ei eller fleire filer vart ikkje lasta ned.</value>
+  </data>
+  <data name="CustomPageSizeFormat" xml:space="preserve">
+    <value>Eigendefinert ({0}x{1} {2})</value>
+  </data>
+  <data name="Scan" xml:space="preserve">
+    <value>Skann</value>
+  </data>
+  <data name="ConfirmResetImages" xml:space="preserve">
+    <value>Er du sikker på at du vil gjera om endringane til {0} bilde?</value>
+  </data>
+  <data name="ResetImage" xml:space="preserve">
+    <value>Resett bilde</value>
+  </data>
+  <data name="ExitWithUnsavedChanges" xml:space="preserve">
+    <value>Du har ulagra endringar. Er du sikker på at du vil avslutta og forkasta desse endringane?</value>
+  </data>
+  <data name="ExitWithActiveOperations" xml:space="preserve">
+    <value>Ein operasjon er i gang. Er du sikker på at du vil avbryta operasjonen og avslutta?</value>
+  </data>
+  <data name="UnsavedChanges" xml:space="preserve">
+    <value>Ulagra endringar</value>
+  </data>
+  <data name="ActiveOperations" xml:space="preserve">
+    <value>Operasjon under gjennomføring</value>
+  </data>
+  <data name="ScanPageProgress" xml:space="preserve">
+    <value>Skanner side {0}</value>
+  </data>
+  <data name="NoFeederSupport" xml:space="preserve">
+    <value>Den valde skannaren støtter ikkje bruk av matar. Hvis skannaren din har ein matar, prøv å bruka ein annan drivar.</value>
+  </data>
+  <data name="NoPagesInFeeder" xml:space="preserve">
+    <value>Der er ingen ark i mataren.</value>
+  </data>
+  <data name="PdfNoPermissionToExtractContent" xml:space="preserve">
+    <value>Du har ikkje løyve til å kopiera innhald frå fila '{0}'.</value>
+  </data>
+  <data name="ErrorSaving" xml:space="preserve">
+    <value>Feil ved lagring av fila.</value>
+  </data>
+  <data name="OfN" xml:space="preserve">
+    <value>av {0}</value>
+  </data>
+  <data name="BatchError" xml:space="preserve">
+    <value>Ukjend feil ved gruppeskanning.</value>
+  </data>
+  <data name="BatchStatusCancelled" xml:space="preserve">
+    <value>Multiskann avbroten.</value>
+  </data>
+  <data name="BatchStatusCancelling" xml:space="preserve">
+    <value>Avbryter....</value>
+  </data>
+  <data name="BatchStatusComplete" xml:space="preserve">
+    <value>Multiskann vellukka utført.</value>
+  </data>
+  <data name="BatchStatusError" xml:space="preserve">
+    <value>Multiskann stoppa på grunn av feil.</value>
+  </data>
+  <data name="BatchStatusPage" xml:space="preserve">
+    <value>Skanner side {0}...</value>
+  </data>
+  <data name="BatchStatusScanPage" xml:space="preserve">
+    <value>Skanner side {0} (skann {1})...</value>
+  </data>
+  <data name="BatchStatusWaitingForScan" xml:space="preserve">
+    <value>Venter på skann {0}...</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Avbryt</value>
+  </data>
+  <data name="Close" xml:space="preserve">
+    <value>Lukk</value>
+  </data>
+  <data name="BatchStatusSaving" xml:space="preserve">
+    <value>Lagrer multiskann resultat...</value>
+  </data>
+  <data name="NoDuplexSupport" xml:space="preserve">
+    <value>Den valde skannaren støtter ikkje tosidig. Hvis skannaren din skal støtta tosidig, prøv å bruka ein annan driver.</value>
+  </data>
+  <data name="ImportingFormat" xml:space="preserve">
+    <value>Importerer {0}...</value>
+  </data>
+  <data name="ImportProgress" xml:space="preserve">
+    <value>Import-framdrift</value>
+  </data>
+  <data name="Recovering" xml:space="preserve">
+    <value>Henter tilbake...</value>
+  </data>
+  <data name="RecoveryProgress" xml:space="preserve">
+    <value>Tilbakehenting framgang</value>
+  </data>
+  <data name="SaveImages" xml:space="preserve">
+    <value>Lagre bilde</value>
+  </data>
+  <data name="SaveImagesProgress" xml:space="preserve">
+    <value>Lagre bilde framdrift</value>
+  </data>
+  <data name="SavePdf" xml:space="preserve">
+    <value>Lagre PDF</value>
+  </data>
+  <data name="SavePdfProgress" xml:space="preserve">
+    <value>Lagre PDF framdrift</value>
+  </data>
+  <data name="SavingFormat" xml:space="preserve">
+    <value>Lagrer {0}...</value>
+  </data>
+  <data name="Print" xml:space="preserve">
+    <value>Skriv ut</value>
+  </data>
+  <data name="Copying" xml:space="preserve">
+    <value>Kopierer...</value>
+  </data>
+  <data name="CopyProgress" xml:space="preserve">
+    <value>Kopieringsframdrift</value>
+  </data>
+  <data name="Importing" xml:space="preserve">
+    <value>Importerer...</value>
+  </data>
+  <data name="EmailPdf" xml:space="preserve">
+    <value>Send PDF som epost</value>
+  </data>
+  <data name="EmailPdfProgress" xml:space="preserve">
+    <value>Epost PDF framdrift</value>
+  </data>
+  <data name="AutoSaveError" xml:space="preserve">
+    <value>Feil ved autolagring.</value>
+  </data>
+  <data name="FileTypeAllFiles" xml:space="preserve">
+    <value>Alle filer</value>
+  </data>
+  <data name="FileTypeImageFiles" xml:space="preserve">
+    <value>Bildefiler</value>
+  </data>
+  <data name="DeviceBusy" xml:space="preserve">
+    <value>Den valde skannaren er opptatt.</value>
+  </data>
+  <data name="DeviceCoverOpen" xml:space="preserve">
+    <value>Skannardekselet er opent.</value>
+  </data>
+  <data name="DevicePaperJam" xml:space="preserve">
+    <value>Skannaren har papirstopp.</value>
+  </data>
+  <data name="DeviceWarmingUp" xml:space="preserve">
+    <value>Skannaren varmer opp.</value>
+  </data>
+  <data name="OcrUpdateAvailable" xml:space="preserve">
+    <value>Oppdatering til OCR er tilgjengeleg.</value>
+  </data>
+  <data name="ImageSaved" xml:space="preserve">
+    <value>Bilde lagra.</value>
+  </data>
+  <data name="ImagesSaved" xml:space="preserve">
+    <value>{0} bilde lagra.</value>
+  </data>
+  <data name="PdfSaved" xml:space="preserve">
+    <value>PDF lagra.</value>
+  </data>
+  <data name="NamedPageSizeFormat" xml:space="preserve">
+    <value>{0} ({1}x{2} {3})</value>
+  </data>
+  <data name="ConfirmDelete" xml:space="preserve">
+    <value>Are you sure you want to delete "{0}"?</value>
+  </data>
+  <data name="FileInUse" xml:space="preserve">
+    <value>Fila kunne ikkje overskrivast fordi den er i bruk.</value>
+  </data>
+  <data name="AutoDeskewing" xml:space="preserve">
+    <value>Oppretting...</value>
+  </data>
+  <data name="AutoDeskewProgress" xml:space="preserve">
+    <value>Oppretting framdrift</value>
+  </data>
+  <data name="DownloadNeeded" xml:space="preserve">
+    <value>Nedlasting nødvendig</value>
+  </data>
+  <data name="PdfImportComponentNeeded" xml:space="preserve">
+    <value>Ein tilleggskomponent trengs for import av denne PDF-fila. Vil du lasta den ned nå?</value>
+  </data>
+  <data name="ConfirmCancelBatch" xml:space="preserve">
+    <value>Er du sikker på at du vil avbryta sats-skanninga?</value>
+  </data>
+  <data name="CancelBatch" xml:space="preserve">
+    <value>Avbryt sats</value>
+  </data>
+  <data name="Donate" xml:space="preserve">
+    <value>Doner</value>
+  </data>
+  <data name="DonatePrompt" xml:space="preserve">
+    <value>NAPS2 er heilt gratis. Vurder å gje ein donasjon.</value>
+  </data>
+  <data name="SaneNotAvailable" xml:space="preserve">
+    <value>SANE-drivaren er ikkje tilgjengeleg. Installer den nødvendige pakken:</value>
+  </data>
+  <data name="TesseractNotAvailable" xml:space="preserve">
+    <value>OCR-motoren er ikkje tilgjengeleg. Installer den nødvendige pakken:</value>
+  </data>
+  <data name="DriverNotSupported" xml:space="preserve">
+    <value>Den valde drivaren er ikkje støtta på dette systemet.</value>
+  </data>
+  <data name="OcrProgress" xml:space="preserve">
+    <value>OCR framgang</value>
+  </data>
+  <data name="RunningOcr" xml:space="preserve">
+    <value>Kjører OCR...</value>
+  </data>
+  <data name="UpdateProgress" xml:space="preserve">
+    <value>Oppdatering framgang</value>
+  </data>
+  <data name="Updating" xml:space="preserve">
+    <value>Oppdaterer...</value>
+  </data>
+  <data name="NoUpdates" xml:space="preserve">
+    <value>Ingen oppdateringar tilgjengelege.</value>
+  </data>
+  <data name="CheckingForUpdates" xml:space="preserve">
+    <value>Sjekker...</value>
+  </data>
+  <data name="UpdateError" xml:space="preserve">
+    <value>Det vart ein feil ved installasjon av oppdatering.</value>
+  </data>
+  <data name="Install" xml:space="preserve">
+    <value>Installer {0}</value>
+  </data>
+  <data name="UpdateAvailable" xml:space="preserve">
+    <value>Oppdatering er tilgjengeleg.</value>
+  </data>
+  <data name="AuthError" xml:space="preserve">
+    <value>Feil ved autorisering.</value>
+  </data>
+  <data name="UploadingEmail" xml:space="preserve">
+    <value>Laster opp epost...</value>
+  </data>
+  <data name="ErrorEmailing" xml:space="preserve">
+    <value>Feil ved sending av eposten.</value>
+  </data>
+  <data name="Naps2Server" xml:space="preserve">
+    <value>NAPS2 Server</value>
+  </data>
+  <data name="ServerStarted" xml:space="preserve">
+    <value>Server started</value>
+  </data>
+  <data name="ListeningOnPort" xml:space="preserve">
+    <value>Listening on port {0}</value>
+  </data>
+  <data name="ScanProgressPage" xml:space="preserve">
+    <value>Skanner side {0}...</value>
+  </data>
+  <data name="AcquiringData" xml:space="preserve">
+    <value>Henter data...</value>
+  </data>
+</root>

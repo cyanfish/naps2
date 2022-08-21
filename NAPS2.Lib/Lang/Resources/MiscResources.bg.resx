@@ -1,0 +1,396 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="ChooseProfile" xml:space="preserve">
+    <value>Изберете профил</value>
+  </data>
+  <data name="Clear" xml:space="preserve">
+    <value>Изчистване</value>
+  </data>
+  <data name="ConfirmClearItems" xml:space="preserve">
+    <value>Сигурни ли сте, че искате да изчистите {0} обект(а)?</value>
+  </data>
+  <data name="ConfirmDeleteItems" xml:space="preserve">
+    <value>Сигурни ли сте, че искате да изтриете {0} обект(а)?</value>
+  </data>
+  <data name="ConfirmDeleteMultipleProfiles" xml:space="preserve">
+    <value>Сигурни ли сте, че искате да изтриете профила {0}?</value>
+  </data>
+  <data name="ConfirmDeleteSingleProfile" xml:space="preserve">
+    <value>Сигурни ли сте, че искате да изтриете профилa {0}?</value>
+  </data>
+  <data name="ConfirmOverwriteFile" xml:space="preserve">
+    <value>Вече има файл {0} . Искате ли да бъде презаписан?</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Изтриване</value>
+  </data>
+  <data name="DeviceNotFound" xml:space="preserve">
+    <value>Избраният скенер не е достъпен.</value>
+  </data>
+  <data name="DeviceOffline" xml:space="preserve">
+    <value>Избраният скенер е недостъпен.</value>
+  </data>
+  <data name="DontHavePermission" xml:space="preserve">
+    <value>Нямате права за създаването на файлове в тази папка..</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>Грешка</value>
+  </data>
+  <data name="FileTypeBmp" xml:space="preserve">
+    <value>Bitmap файл (*.bmp)</value>
+  </data>
+  <data name="FileTypeEmf" xml:space="preserve">
+    <value>Подобрен Windows MetaFile (*.emf)</value>
+  </data>
+  <data name="FileTypeExif" xml:space="preserve">
+    <value>Exchangeable Image File (*.exif)</value>
+  </data>
+  <data name="FileTypeGif" xml:space="preserve">
+    <value>GIF файл (*.gif)</value>
+  </data>
+  <data name="FileTypeJpeg" xml:space="preserve">
+    <value>JPEG файл (*.jpg, *.jpeg)</value>
+  </data>
+  <data name="FileTypePdf" xml:space="preserve">
+    <value>PDF документ (*.pdf)</value>
+  </data>
+  <data name="FileTypePng" xml:space="preserve">
+    <value>PNG файл (*.png)</value>
+  </data>
+  <data name="FileTypeTiff" xml:space="preserve">
+    <value>TIFF файл (*.tiff, *.tif)</value>
+  </data>
+  <data name="NameMissing" xml:space="preserve">
+    <value>Липсва име.</value>
+  </data>
+  <data name="NAPS2" xml:space="preserve">
+    <value>NAPS2</value>
+  </data>
+  <data name="NoDeviceSelected" xml:space="preserve">
+    <value>Не е избрано устройство.</value>
+  </data>
+  <data name="NoDevicesFound" xml:space="preserve">
+    <value>Не е открито сканиращо устройство.</value>
+  </data>
+  <data name="OverwriteFile" xml:space="preserve">
+    <value>Презаписване на файла</value>
+  </data>
+  <data name="PdfStatus" xml:space="preserve">
+    <value>{0} от {1}</value>
+  </data>
+  <data name="ScannedImage" xml:space="preserve">
+    <value>Сканирано изображение</value>
+  </data>
+  <data name="SelectProfileBeforeScan" xml:space="preserve">
+    <value>Изберете профил преди да натиснете \"Сканиране\".</value>
+  </data>
+  <data name="UnknownDriverError" xml:space="preserve">
+    <value>Проблем с драйвъра на скенера.</value>
+  </data>
+  <data name="Version" xml:space="preserve">
+    <value>Версия {0}</value>
+  </data>
+  <data name="EmailError" xml:space="preserve">
+    <value>Грешка при изпращане на имейл.</value>
+  </data>
+  <data name="InstallComplete" xml:space="preserve">
+    <value>Инсталацията е завършена</value>
+  </data>
+  <data name="InstallCompletePromptRestart" xml:space="preserve">
+    <value>Инсталацията е завършена. Искате ли да рестартирате NAPS2 сега?</value>
+  </data>
+  <data name="InstallFailed" xml:space="preserve">
+    <value>Неуспешна инсталация.</value>
+  </data>
+  <data name="InstallFailedTitle" xml:space="preserve">
+    <value>Неуспешна инсталация</value>
+  </data>
+  <data name="AllCount" xml:space="preserve">
+    <value>Всички ({0})</value>
+  </data>
+  <data name="SelectedCount" xml:space="preserve">
+    <value>Избрани ({0})</value>
+  </data>
+  <data name="EstimatedDownloadSize" xml:space="preserve">
+    <value>Приблизителен размер за сваляне: {0} MB</value>
+  </data>
+  <data name="FilesProgressFormat" xml:space="preserve">
+    <value>{0} / {1} файлове</value>
+  </data>
+  <data name="SizeProgress" xml:space="preserve">
+    <value>{0} / {1} MB</value>
+  </data>
+  <data name="ImportErrorCouldNot" xml:space="preserve">
+    <value>Файлът '{0}' не може да бъде внесен.</value>
+  </data>
+  <data name="ImportErrorNAPS2Pdf" xml:space="preserve">
+    <value>Файлът '{0}' не може да бъде внесен. Само PDF файлове, създадени от NAPS2, могат да бъдат внесени.</value>
+  </data>
+  <data name="DownloadError" xml:space="preserve">
+    <value>Грешка при сваляне</value>
+  </data>
+  <data name="FilesCouldNotBeDownloaded" xml:space="preserve">
+    <value>Един или няколко файла не могат да бъдат свалени.</value>
+  </data>
+  <data name="CustomPageSizeFormat" xml:space="preserve">
+    <value>По избор ({0}x{1} {2})</value>
+  </data>
+  <data name="Scan" xml:space="preserve">
+    <value>Сканиране</value>
+  </data>
+  <data name="ConfirmResetImages" xml:space="preserve">
+    <value>Сигурни ли сте, че искате да отмените редакцията на {0} документ/а ?</value>
+  </data>
+  <data name="ResetImage" xml:space="preserve">
+    <value>Връщане изображението в начално състояние</value>
+  </data>
+  <data name="ExitWithUnsavedChanges" xml:space="preserve">
+    <value>Има незаписани промени. Сигурни ли сте, че искате да затворите програмата и да отхвърлите тези промени?</value>
+  </data>
+  <data name="ExitWithActiveOperations" xml:space="preserve">
+    <value>An operation is in progress. Are you sure you want to exit and cancel the operation?</value>
+  </data>
+  <data name="UnsavedChanges" xml:space="preserve">
+    <value>Незаписани промени</value>
+  </data>
+  <data name="ActiveOperations" xml:space="preserve">
+    <value>Operation in Progress</value>
+  </data>
+  <data name="ScanPageProgress" xml:space="preserve">
+    <value>Сканиране на страница {0}</value>
+  </data>
+  <data name="NoFeederSupport" xml:space="preserve">
+    <value>Избраният скенер не поддържа автоматично подаване на листове. Ако вашият скенер има устройство за автоматично подаване на листове, опитайте различен драйвър..</value>
+  </data>
+  <data name="NoPagesInFeeder" xml:space="preserve">
+    <value>Няма листoве в устройството за подаване.</value>
+  </data>
+  <data name="PdfNoPermissionToExtractContent" xml:space="preserve">
+    <value>Нямате разрешение да копирате съдържание от файл '{0}'.</value>
+  </data>
+  <data name="ErrorSaving" xml:space="preserve">
+    <value>Възникна грешка при опит за запис на файла.</value>
+  </data>
+  <data name="OfN" xml:space="preserve">
+    <value>от {0}</value>
+  </data>
+  <data name="BatchError" xml:space="preserve">
+    <value>Възникна неизвестна грешка при групово сканиране.</value>
+  </data>
+  <data name="BatchStatusCancelled" xml:space="preserve">
+    <value>Груповата задача е отменена.</value>
+  </data>
+  <data name="BatchStatusCancelling" xml:space="preserve">
+    <value>Анулиране....</value>
+  </data>
+  <data name="BatchStatusComplete" xml:space="preserve">
+    <value>Груповата задача приключи успешно.</value>
+  </data>
+  <data name="BatchStatusError" xml:space="preserve">
+    <value>Груповото сканиране спря поради грешка.</value>
+  </data>
+  <data name="BatchStatusPage" xml:space="preserve">
+    <value>Сканиране на страница {0}...</value>
+  </data>
+  <data name="BatchStatusScanPage" xml:space="preserve">
+    <value>Сканиране на страница {0} (сканиране {1})...</value>
+  </data>
+  <data name="BatchStatusWaitingForScan" xml:space="preserve">
+    <value>Изчакване на сканиране {0}...</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Отказ</value>
+  </data>
+  <data name="Close" xml:space="preserve">
+    <value>Затвори</value>
+  </data>
+  <data name="BatchStatusSaving" xml:space="preserve">
+    <value>Запазване на груповата задача...</value>
+  </data>
+  <data name="NoDuplexSupport" xml:space="preserve">
+    <value>Избраният скенер не поддържа двустранно сканиране. Ако тази функция би трябвало да се поддържа, използвайте различен драйвер..</value>
+  </data>
+  <data name="ImportingFormat" xml:space="preserve">
+    <value>Импортиране {0}...</value>
+  </data>
+  <data name="ImportProgress" xml:space="preserve">
+    <value>Напредък на импортиране</value>
+  </data>
+  <data name="Recovering" xml:space="preserve">
+    <value>Възстановяване...</value>
+  </data>
+  <data name="RecoveryProgress" xml:space="preserve">
+    <value>Напредък на възстановяването</value>
+  </data>
+  <data name="SaveImages" xml:space="preserve">
+    <value>Запис на изображенията</value>
+  </data>
+  <data name="SaveImagesProgress" xml:space="preserve">
+    <value>Напредък на запазване на изображенията</value>
+  </data>
+  <data name="SavePdf" xml:space="preserve">
+    <value>Запис в PDF</value>
+  </data>
+  <data name="SavePdfProgress" xml:space="preserve">
+    <value>Напредък на запазване на PDF</value>
+  </data>
+  <data name="SavingFormat" xml:space="preserve">
+    <value>Запазване {0}...</value>
+  </data>
+  <data name="Print" xml:space="preserve">
+    <value>Печат</value>
+  </data>
+  <data name="Copying" xml:space="preserve">
+    <value>Копиране...</value>
+  </data>
+  <data name="CopyProgress" xml:space="preserve">
+    <value>Напредък на копирането</value>
+  </data>
+  <data name="Importing" xml:space="preserve">
+    <value>Импортиране...</value>
+  </data>
+  <data name="EmailPdf" xml:space="preserve">
+    <value>Изпрати PDF по имейл</value>
+  </data>
+  <data name="EmailPdfProgress" xml:space="preserve">
+    <value>Напредък на изпращане на PDF по имейл</value>
+  </data>
+  <data name="AutoSaveError" xml:space="preserve">
+    <value>Грешка при опит за автоматичен запис на файла.</value>
+  </data>
+  <data name="FileTypeAllFiles" xml:space="preserve">
+    <value>Всички файлове</value>
+  </data>
+  <data name="FileTypeImageFiles" xml:space="preserve">
+    <value>Изображения</value>
+  </data>
+  <data name="DeviceBusy" xml:space="preserve">
+    <value>Избраният скенер е недостъпен.</value>
+  </data>
+  <data name="DeviceCoverOpen" xml:space="preserve">
+    <value>Капакът на скенера не е затворен.</value>
+  </data>
+  <data name="DevicePaperJam" xml:space="preserve">
+    <value>Заседнала хартия в скенера.</value>
+  </data>
+  <data name="DeviceWarmingUp" xml:space="preserve">
+    <value>Подготовка на скенера.</value>
+  </data>
+  <data name="OcrUpdateAvailable" xml:space="preserve">
+    <value>Наличен е ъпдейт за OCR модула.</value>
+  </data>
+  <data name="ImageSaved" xml:space="preserve">
+    <value>Изображението е записано.</value>
+  </data>
+  <data name="ImagesSaved" xml:space="preserve">
+    <value>{0} изображения са записани.</value>
+  </data>
+  <data name="PdfSaved" xml:space="preserve">
+    <value>PDF записан.</value>
+  </data>
+  <data name="NamedPageSizeFormat" xml:space="preserve">
+    <value>{0} ({1}x{2} {3})</value>
+  </data>
+  <data name="ConfirmDelete" xml:space="preserve">
+    <value>Are you sure you want to delete "{0}"?</value>
+  </data>
+  <data name="FileInUse" xml:space="preserve">
+    <value>Файлът не може да бъде презаписан, защото в момента се ползва.</value>
+  </data>
+  <data name="AutoDeskewing" xml:space="preserve">
+    <value>Deskewing...</value>
+  </data>
+  <data name="AutoDeskewProgress" xml:space="preserve">
+    <value>Deskew Progress</value>
+  </data>
+  <data name="DownloadNeeded" xml:space="preserve">
+    <value>Download Needed</value>
+  </data>
+  <data name="PdfImportComponentNeeded" xml:space="preserve">
+    <value>An additional component is needed to import this PDF file. Would you like to download it now?</value>
+  </data>
+  <data name="ConfirmCancelBatch" xml:space="preserve">
+    <value>Сигурен ли сте, че искате да прекъснете поточното сканиране?</value>
+  </data>
+  <data name="CancelBatch" xml:space="preserve">
+    <value>Спри групата</value>
+  </data>
+  <data name="Donate" xml:space="preserve">
+    <value>Donate</value>
+  </data>
+  <data name="DonatePrompt" xml:space="preserve">
+    <value>NAPS2 is completely free. Consider making a donation.</value>
+  </data>
+  <data name="SaneNotAvailable" xml:space="preserve">
+    <value>The SANE driver is not available. Make sure to install the required packages:</value>
+  </data>
+  <data name="TesseractNotAvailable" xml:space="preserve">
+    <value>The OCR engine is not available. Make sure to install the required package:</value>
+  </data>
+  <data name="DriverNotSupported" xml:space="preserve">
+    <value>The selected driver is not supported on this system.</value>
+  </data>
+  <data name="OcrProgress" xml:space="preserve">
+    <value>OCR Progress</value>
+  </data>
+  <data name="RunningOcr" xml:space="preserve">
+    <value>Running OCR...</value>
+  </data>
+  <data name="UpdateProgress" xml:space="preserve">
+    <value>Update Progress</value>
+  </data>
+  <data name="Updating" xml:space="preserve">
+    <value>Updating...</value>
+  </data>
+  <data name="NoUpdates" xml:space="preserve">
+    <value>No updates available.</value>
+  </data>
+  <data name="CheckingForUpdates" xml:space="preserve">
+    <value>Checking...</value>
+  </data>
+  <data name="UpdateError" xml:space="preserve">
+    <value>An error occured when trying to install the update.</value>
+  </data>
+  <data name="Install" xml:space="preserve">
+    <value>Install {0}</value>
+  </data>
+  <data name="UpdateAvailable" xml:space="preserve">
+    <value>Налично обновяване.</value>
+  </data>
+  <data name="AuthError" xml:space="preserve">
+    <value>An error occurred when trying to authorize.</value>
+  </data>
+  <data name="UploadingEmail" xml:space="preserve">
+    <value>Uploading email...</value>
+  </data>
+  <data name="ErrorEmailing" xml:space="preserve">
+    <value>An error occurred when trying to send the email.</value>
+  </data>
+  <data name="Naps2Server" xml:space="preserve">
+    <value>NAPS2 Server</value>
+  </data>
+  <data name="ServerStarted" xml:space="preserve">
+    <value>Server started</value>
+  </data>
+  <data name="ListeningOnPort" xml:space="preserve">
+    <value>Listening on port {0}</value>
+  </data>
+  <data name="ScanProgressPage" xml:space="preserve">
+    <value>Сканиране на страница {0}...</value>
+  </data>
+  <data name="AcquiringData" xml:space="preserve">
+    <value>Получаване на данни...</value>
+  </data>
+</root>

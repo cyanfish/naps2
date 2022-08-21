@@ -1,0 +1,396 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="ChooseProfile" xml:space="preserve">
+    <value>Επιλογή Προφίλ</value>
+  </data>
+  <data name="Clear" xml:space="preserve">
+    <value>Ολική Διαγραφή</value>
+  </data>
+  <data name="ConfirmClearItems" xml:space="preserve">
+    <value>Θέλετε σίγουρα ολική διαγραφή ({0} αντικείμενα);</value>
+  </data>
+  <data name="ConfirmDeleteItems" xml:space="preserve">
+    <value>Θέλετε σίγουρα να διαγραφούν {0} αντικείμενα;</value>
+  </data>
+  <data name="ConfirmDeleteMultipleProfiles" xml:space="preserve">
+    <value>Θέλετε σίγουρα να διαγραφούν {0} προφίλ;</value>
+  </data>
+  <data name="ConfirmDeleteSingleProfile" xml:space="preserve">
+    <value>Θέλετε σίγουρα να διαγραφεί το προφίλ '{0}';</value>
+  </data>
+  <data name="ConfirmOverwriteFile" xml:space="preserve">
+    <value>Το αρχείο '{0}' υπάρχει ήδη. Θέλετε να αντικατασταθεί;</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Διαγραφή</value>
+  </data>
+  <data name="DeviceNotFound" xml:space="preserve">
+    <value>Ο επιλεγμένος σαρωτής δεν μπόρεσε να βρεθεί.</value>
+  </data>
+  <data name="DeviceOffline" xml:space="preserve">
+    <value>Ο επιλεγμένος σαρωτής βρίσκεται εκτός σύνδεσης (offline).</value>
+  </data>
+  <data name="DontHavePermission" xml:space="preserve">
+    <value>Δεν υπάρχει δικαίωμα αποθήκευσης αρχείων σε αυτή την τοποθεσία.</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>Σφάλμα</value>
+  </data>
+  <data name="FileTypeBmp" xml:space="preserve">
+    <value>Αρχεία BMP (*.bmp)</value>
+  </data>
+  <data name="FileTypeEmf" xml:space="preserve">
+    <value>Αρχεία EMF (*.emf)</value>
+  </data>
+  <data name="FileTypeExif" xml:space="preserve">
+    <value>Αρχεία EXIF (*.exif)</value>
+  </data>
+  <data name="FileTypeGif" xml:space="preserve">
+    <value>Αρχεία GIF (*.gif)</value>
+  </data>
+  <data name="FileTypeJpeg" xml:space="preserve">
+    <value>Αρχεία JPEG (*.jpg, *.jpeg)</value>
+  </data>
+  <data name="FileTypePdf" xml:space="preserve">
+    <value>Αρχεία PDF (*.pdf)</value>
+  </data>
+  <data name="FileTypePng" xml:space="preserve">
+    <value>Αρχεία PNG (*.png)</value>
+  </data>
+  <data name="FileTypeTiff" xml:space="preserve">
+    <value>Αρχεία TIFF (*.tiff, *.tif)</value>
+  </data>
+  <data name="NameMissing" xml:space="preserve">
+    <value>Απουσιάζει το όνομα.</value>
+  </data>
+  <data name="NAPS2" xml:space="preserve">
+    <value>NAPS2</value>
+  </data>
+  <data name="NoDeviceSelected" xml:space="preserve">
+    <value>Δεν επιλέχθηκε συσκευή.</value>
+  </data>
+  <data name="NoDevicesFound" xml:space="preserve">
+    <value>Δεν βρέθηκε συσκευή σάρωσης.</value>
+  </data>
+  <data name="OverwriteFile" xml:space="preserve">
+    <value>Αντικατάσταση Αρχείου</value>
+  </data>
+  <data name="PdfStatus" xml:space="preserve">
+    <value>{0} από {1}</value>
+  </data>
+  <data name="ScannedImage" xml:space="preserve">
+    <value>Σαρωμένη Εικόνα</value>
+  </data>
+  <data name="SelectProfileBeforeScan" xml:space="preserve">
+    <value>Δεν έχει επιλεγεί προφίλ.</value>
+  </data>
+  <data name="UnknownDriverError" xml:space="preserve">
+    <value>Σφάλμα του οδηγού σάρωσης.</value>
+  </data>
+  <data name="Version" xml:space="preserve">
+    <value>Έκδοση {0}</value>
+  </data>
+  <data name="EmailError" xml:space="preserve">
+    <value>Σφάλμα κατά την αποστολή Email.</value>
+  </data>
+  <data name="InstallComplete" xml:space="preserve">
+    <value>Η Εγκατάσταση Ολοκληρώθηκε</value>
+  </data>
+  <data name="InstallCompletePromptRestart" xml:space="preserve">
+    <value>Η εγκατάσταση ολοκληρώθηκε. Θέλετε να επανεκκινήσει το NAPS2 τώρα;</value>
+  </data>
+  <data name="InstallFailed" xml:space="preserve">
+    <value>Η εγκατάσταση απέτυχε.</value>
+  </data>
+  <data name="InstallFailedTitle" xml:space="preserve">
+    <value>Η Εγκατάσταση Απέτυχε</value>
+  </data>
+  <data name="AllCount" xml:space="preserve">
+    <value>Όλα ({0})</value>
+  </data>
+  <data name="SelectedCount" xml:space="preserve">
+    <value>Επιλεγμένα ({0})</value>
+  </data>
+  <data name="EstimatedDownloadSize" xml:space="preserve">
+    <value>Εκτιμώμενο μέγεθος λήψης: {0} MB</value>
+  </data>
+  <data name="FilesProgressFormat" xml:space="preserve">
+    <value>{0} / {1} αρχεία</value>
+  </data>
+  <data name="SizeProgress" xml:space="preserve">
+    <value>{0} / {1} MB</value>
+  </data>
+  <data name="ImportErrorCouldNot" xml:space="preserve">
+    <value>Το αρχείο '{0}' δεν μπόρεσε να εισαχθεί.</value>
+  </data>
+  <data name="ImportErrorNAPS2Pdf" xml:space="preserve">
+    <value>Το αρχείο '{0}' δεν μπόρεσε να εισαχθεί. Μόνο αρχεία PDF που έχουν παραχθεί από το NAPS2 είναι συμβατά.</value>
+  </data>
+  <data name="DownloadError" xml:space="preserve">
+    <value>Σφάλμα Λήψης</value>
+  </data>
+  <data name="FilesCouldNotBeDownloaded" xml:space="preserve">
+    <value>Αποτυχία λήψης για ένα ή περισσότερα αρχεία.</value>
+  </data>
+  <data name="CustomPageSizeFormat" xml:space="preserve">
+    <value>Προσαρμογή ({0}x{1} {2})</value>
+  </data>
+  <data name="Scan" xml:space="preserve">
+    <value>Σάρωση</value>
+  </data>
+  <data name="ConfirmResetImages" xml:space="preserve">
+    <value>Θέλετε σίγουρα να αναιρεθούν οι αλλαγές σε {0} εικόνες;</value>
+  </data>
+  <data name="ResetImage" xml:space="preserve">
+    <value>Αρχικοποίηση Εικόνας</value>
+  </data>
+  <data name="ExitWithUnsavedChanges" xml:space="preserve">
+    <value>Υπάρχουν αλλαγές που δεν έχουν αποθηκευτεί. Θέλετε σίγουρα να τερματιστεί η εφαρμογή;</value>
+  </data>
+  <data name="ExitWithActiveOperations" xml:space="preserve">
+    <value>An operation is in progress. Are you sure you want to exit and cancel the operation?</value>
+  </data>
+  <data name="UnsavedChanges" xml:space="preserve">
+    <value>Μη Αποθηκευμένες Αλλαγές</value>
+  </data>
+  <data name="ActiveOperations" xml:space="preserve">
+    <value>Operation in Progress</value>
+  </data>
+  <data name="ScanPageProgress" xml:space="preserve">
+    <value>Σάρωση σελίδας {0}</value>
+  </data>
+  <data name="NoFeederSupport" xml:space="preserve">
+    <value>Ο επιλεγμένος σαρωτής δεν υποστηρίζει χρήση τροφοδότη. Εάν ο σαρωτής πράγματι διαθέτει τροφοδότη, προτείνεται η χρήση διαφορετικού οδηγού.</value>
+  </data>
+  <data name="NoPagesInFeeder" xml:space="preserve">
+    <value>Δεν υπάρχουν σελίδες στον τροφοδότη.</value>
+  </data>
+  <data name="PdfNoPermissionToExtractContent" xml:space="preserve">
+    <value>Δεν υπάρχει δικαίωμα αντιγραφής περιεχομένου από το αρχείο '{0}'.</value>
+  </data>
+  <data name="ErrorSaving" xml:space="preserve">
+    <value>Σφάλμα κατά την αποθήκευση του αρχείου.</value>
+  </data>
+  <data name="OfN" xml:space="preserve">
+    <value>από {0}</value>
+  </data>
+  <data name="BatchError" xml:space="preserve">
+    <value>Άγνωστο σφάλμα κατά την μαζική σάρωση.</value>
+  </data>
+  <data name="BatchStatusCancelled" xml:space="preserve">
+    <value>Η μαζική ακυρώθηκε.</value>
+  </data>
+  <data name="BatchStatusCancelling" xml:space="preserve">
+    <value>Ακύρωση....</value>
+  </data>
+  <data name="BatchStatusComplete" xml:space="preserve">
+    <value>Η μαζική ολοκληρώθηκε με επιτυχία.</value>
+  </data>
+  <data name="BatchStatusError" xml:space="preserve">
+    <value>Η μαζική διακόπηκε λόγω σφάλματος.</value>
+  </data>
+  <data name="BatchStatusPage" xml:space="preserve">
+    <value>Σάρωση σελίδας {0}...</value>
+  </data>
+  <data name="BatchStatusScanPage" xml:space="preserve">
+    <value>Σάρωση σελίδας {0} (σάρωση {1})...</value>
+  </data>
+  <data name="BatchStatusWaitingForScan" xml:space="preserve">
+    <value>Σε αναμονή για σάρωση {0}...</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Άκυρο</value>
+  </data>
+  <data name="Close" xml:space="preserve">
+    <value>Κλείσιμο</value>
+  </data>
+  <data name="BatchStatusSaving" xml:space="preserve">
+    <value>Αποθήκευση αποτελεσμάτων μαζικής...</value>
+  </data>
+  <data name="NoDuplexSupport" xml:space="preserve">
+    <value>Ο επιλεγμένος σαρωτής δεν υποστηρίζει λειτουργία διπλής όψης. Εάν ο σαρωτής πράγματι διαθέτει λειτουργία διπλής όψης, προτείνεται η χρήση διαφορετικού οδηγού.</value>
+  </data>
+  <data name="ImportingFormat" xml:space="preserve">
+    <value>Εισαγωγή '{0}'...</value>
+  </data>
+  <data name="ImportProgress" xml:space="preserve">
+    <value>Πρόοδος Εισαγωγής</value>
+  </data>
+  <data name="Recovering" xml:space="preserve">
+    <value>Ανάκτηση...</value>
+  </data>
+  <data name="RecoveryProgress" xml:space="preserve">
+    <value>Πρόοδος Ανάκτησης</value>
+  </data>
+  <data name="SaveImages" xml:space="preserve">
+    <value>Αποθήκευση Εικόνων</value>
+  </data>
+  <data name="SaveImagesProgress" xml:space="preserve">
+    <value>Πρόοδος Αποθήκευσης Εικόνων</value>
+  </data>
+  <data name="SavePdf" xml:space="preserve">
+    <value>Αποθήκευση PDF</value>
+  </data>
+  <data name="SavePdfProgress" xml:space="preserve">
+    <value>Πρόοδος Αποθήκευσης PDF</value>
+  </data>
+  <data name="SavingFormat" xml:space="preserve">
+    <value>Αποθήκευση '{0}'...</value>
+  </data>
+  <data name="Print" xml:space="preserve">
+    <value>Εκτύπωση</value>
+  </data>
+  <data name="Copying" xml:space="preserve">
+    <value>Αντιγραφή...</value>
+  </data>
+  <data name="CopyProgress" xml:space="preserve">
+    <value>Πρόοδος Αντιγραφής</value>
+  </data>
+  <data name="Importing" xml:space="preserve">
+    <value>Εισαγωγή...</value>
+  </data>
+  <data name="EmailPdf" xml:space="preserve">
+    <value>Αποστολή PDF (Email)</value>
+  </data>
+  <data name="EmailPdfProgress" xml:space="preserve">
+    <value>Πρόοδος Αποστολής PDF (Email)</value>
+  </data>
+  <data name="AutoSaveError" xml:space="preserve">
+    <value>Σφάλμα κατά την αυτόματη αποθήκευση.</value>
+  </data>
+  <data name="FileTypeAllFiles" xml:space="preserve">
+    <value>Όλα τα Αρχεία</value>
+  </data>
+  <data name="FileTypeImageFiles" xml:space="preserve">
+    <value>Αρχεία Εικόνας</value>
+  </data>
+  <data name="DeviceBusy" xml:space="preserve">
+    <value>Ο επιλεγμένος σαρωτής είναι απασχολημένος.</value>
+  </data>
+  <data name="DeviceCoverOpen" xml:space="preserve">
+    <value>Το κάλυμμα του σαρωτή είναι ανοικτό.</value>
+  </data>
+  <data name="DevicePaperJam" xml:space="preserve">
+    <value>Εμπλοκή χαρτιού στον σαρωτή.</value>
+  </data>
+  <data name="DeviceWarmingUp" xml:space="preserve">
+    <value>Προθέρμανση σαρωτή.</value>
+  </data>
+  <data name="OcrUpdateAvailable" xml:space="preserve">
+    <value>Υπάρχει διαθέσιμη ενημέρωση για το OCR.</value>
+  </data>
+  <data name="ImageSaved" xml:space="preserve">
+    <value>Η εικόνα αποθηκεύτηκε.</value>
+  </data>
+  <data name="ImagesSaved" xml:space="preserve">
+    <value>{0} εικόνες αποθηκεύτηκαν.</value>
+  </data>
+  <data name="PdfSaved" xml:space="preserve">
+    <value>Το PDF αποθηκεύτηκε.</value>
+  </data>
+  <data name="NamedPageSizeFormat" xml:space="preserve">
+    <value>{0} ({1}x{2} {3})</value>
+  </data>
+  <data name="ConfirmDelete" xml:space="preserve">
+    <value>Are you sure you want to delete "{0}"?</value>
+  </data>
+  <data name="FileInUse" xml:space="preserve">
+    <value>Το αρχείο είναι σε χρήση και είναι αδύνατο να αντικατασταθεί.</value>
+  </data>
+  <data name="AutoDeskewing" xml:space="preserve">
+    <value>Διόρθωση Ασυμμετρίας...</value>
+  </data>
+  <data name="AutoDeskewProgress" xml:space="preserve">
+    <value>Πρόοδος Διόρθωσης Ασυμμετρίας</value>
+  </data>
+  <data name="DownloadNeeded" xml:space="preserve">
+    <value>Λήψη Απαραίτητη</value>
+  </data>
+  <data name="PdfImportComponentNeeded" xml:space="preserve">
+    <value>Ένα πρόσθετο συστατικό είναι απαραίτητο για την εισαγωγή αυτού του PDF. Θέλετε την λήψη του τώρα;</value>
+  </data>
+  <data name="ConfirmCancelBatch" xml:space="preserve">
+    <value>Θέλετε σίγουρα την ακύρωση της μαζικής σάρωσης;</value>
+  </data>
+  <data name="CancelBatch" xml:space="preserve">
+    <value>Ακύρωση της μαζικής σάρωσης</value>
+  </data>
+  <data name="Donate" xml:space="preserve">
+    <value>Δωρεά</value>
+  </data>
+  <data name="DonatePrompt" xml:space="preserve">
+    <value>Το NAPS2 είναι ελεύθερο λογισμικό. Αξιολογήστε την επιλογή μιας δωρεάς.</value>
+  </data>
+  <data name="SaneNotAvailable" xml:space="preserve">
+    <value>The SANE driver is not available. Make sure to install the required packages:</value>
+  </data>
+  <data name="TesseractNotAvailable" xml:space="preserve">
+    <value>The OCR engine is not available. Make sure to install the required package:</value>
+  </data>
+  <data name="DriverNotSupported" xml:space="preserve">
+    <value>The selected driver is not supported on this system.</value>
+  </data>
+  <data name="OcrProgress" xml:space="preserve">
+    <value>OCR Progress</value>
+  </data>
+  <data name="RunningOcr" xml:space="preserve">
+    <value>Running OCR...</value>
+  </data>
+  <data name="UpdateProgress" xml:space="preserve">
+    <value>Update Progress</value>
+  </data>
+  <data name="Updating" xml:space="preserve">
+    <value>Updating...</value>
+  </data>
+  <data name="NoUpdates" xml:space="preserve">
+    <value>No updates available.</value>
+  </data>
+  <data name="CheckingForUpdates" xml:space="preserve">
+    <value>Checking...</value>
+  </data>
+  <data name="UpdateError" xml:space="preserve">
+    <value>An error occured when trying to install the update.</value>
+  </data>
+  <data name="Install" xml:space="preserve">
+    <value>Install {0}</value>
+  </data>
+  <data name="UpdateAvailable" xml:space="preserve">
+    <value>An update is available.</value>
+  </data>
+  <data name="AuthError" xml:space="preserve">
+    <value>An error occurred when trying to authorize.</value>
+  </data>
+  <data name="UploadingEmail" xml:space="preserve">
+    <value>Uploading email...</value>
+  </data>
+  <data name="ErrorEmailing" xml:space="preserve">
+    <value>An error occurred when trying to send the email.</value>
+  </data>
+  <data name="Naps2Server" xml:space="preserve">
+    <value>NAPS2 Server</value>
+  </data>
+  <data name="ServerStarted" xml:space="preserve">
+    <value>Server started</value>
+  </data>
+  <data name="ListeningOnPort" xml:space="preserve">
+    <value>Listening on port {0}</value>
+  </data>
+  <data name="ScanProgressPage" xml:space="preserve">
+    <value>Σάρωση σελίδας {0}...</value>
+  </data>
+  <data name="AcquiringData" xml:space="preserve">
+    <value>Απόκτηση δεδομένων...</value>
+  </data>
+</root>

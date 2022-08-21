@@ -15,9 +15,8 @@
             <HintPath>..\NAPS2.Setup\lib\PdfSharpCore.dll</HintPath>
         </Reference>
 
+        <ProjectReference Include="..\NAPS2.Lib\NAPS2.Lib.csproj" />
         <ProjectReference Include="..\NAPS2.Sdk.Tests\NAPS2.Sdk.Tests.csproj" />
-<!--        <ProjectReference Include="..\NAPS2.Lib.WinForms\NAPS2.Lib.WinForms.csproj" />-->
-        <ProjectReference Include="..\NAPS2.Lib.Console\NAPS2.Lib.Console.csproj" />
 
         <PackageReference Include="Moq" Version="4.18.1" />
         <PackageReference Include="xunit" Version="2.4.1" />

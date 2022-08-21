@@ -25,7 +25,7 @@
   <ItemGroup>
     <PackageReference Include="NAPS2.Wia" Version="1.0.1" />
     <ProjectReference Include="..\NAPS2.App.Worker\NAPS2.App.Worker.csproj" />
-    <ProjectReference Include="..\NAPS2.Lib.Console\NAPS2.Lib.Console.csproj" />
+    <ProjectReference Include="..\NAPS2.Lib\NAPS2.Lib.csproj" />
     <PackageReference Include="LargeAddressAware" Version="1.0.3" />
   </ItemGroup>
   

@@ -1,0 +1,396 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="ChooseProfile" xml:space="preserve">
+    <value>اختيار ملف الشخصي</value>
+  </data>
+  <data name="Clear" xml:space="preserve">
+    <value>محو</value>
+  </data>
+  <data name="ConfirmClearItems" xml:space="preserve">
+    <value>أمتأكد من أنك تريد مسح {0} عنصر؟</value>
+  </data>
+  <data name="ConfirmDeleteItems" xml:space="preserve">
+    <value>أمتأكد أنك ترغب في حذف هذا/هذه {0} العنصر/العناصر؟</value>
+  </data>
+  <data name="ConfirmDeleteMultipleProfiles" xml:space="preserve">
+    <value>هل أنت متأكد من أنك تريد حذف الملفات الشخصية {0}؟</value>
+  </data>
+  <data name="ConfirmDeleteSingleProfile" xml:space="preserve">
+    <value>أمتأكدٌ أنّك تريد حذف الملف الشخصي هذا {0}؟</value>
+  </data>
+  <data name="ConfirmOverwriteFile" xml:space="preserve">
+    <value>الملف {0} موجود بالفعل. هل تريد الكتابة فوقه؟</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>حدف</value>
+  </data>
+  <data name="DeviceNotFound" xml:space="preserve">
+    <value>تعذر العثور على الماسح الضوئي المحدد.</value>
+  </data>
+  <data name="DeviceOffline" xml:space="preserve">
+    <value>الماسح الضوئي المحدد غير متصل.</value>
+  </data>
+  <data name="DontHavePermission" xml:space="preserve">
+    <value>ليس لديك إذن لحفظ الملفات في هذا الموقع.</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>خطأ</value>
+  </data>
+  <data name="FileTypeBmp" xml:space="preserve">
+    <value>ملفات صور نقطية (*.bmp)</value>
+  </data>
+  <data name="FileTypeEmf" xml:space="preserve">
+    <value>Windows ملف التعريف المحسن (*.emf)</value>
+  </data>
+  <data name="FileTypeExif" xml:space="preserve">
+    <value>ملف صورة قابلة لإستبدال (*.exif)</value>
+  </data>
+  <data name="FileTypeGif" xml:space="preserve">
+    <value>ملف GIF (*.gif)</value>
+  </data>
+  <data name="FileTypeJpeg" xml:space="preserve">
+    <value>ملف JPEG (*.jpg, *.jpeg)</value>
+  </data>
+  <data name="FileTypePdf" xml:space="preserve">
+    <value>مستند PDF (*.pdf)</value>
+  </data>
+  <data name="FileTypePng" xml:space="preserve">
+    <value>ملف PNG (*.png)</value>
+  </data>
+  <data name="FileTypeTiff" xml:space="preserve">
+    <value>ملف TIFF (*.tiff، *.tif)</value>
+  </data>
+  <data name="NameMissing" xml:space="preserve">
+    <value>الاسم مفقود.</value>
+  </data>
+  <data name="NAPS2" xml:space="preserve">
+    <value>NAPS2</value>
+  </data>
+  <data name="NoDeviceSelected" xml:space="preserve">
+    <value>لم يتم تحديد أي جهاز.</value>
+  </data>
+  <data name="NoDevicesFound" xml:space="preserve">
+    <value>لم يتم العثور على أي جهاز مسح الضوئي.</value>
+  </data>
+  <data name="OverwriteFile" xml:space="preserve">
+    <value>الكتابة فوق الملف</value>
+  </data>
+  <data name="PdfStatus" xml:space="preserve">
+    <value>{0} من {1}</value>
+  </data>
+  <data name="ScannedImage" xml:space="preserve">
+    <value>صورة ممسوحة ضوئياً</value>
+  </data>
+  <data name="SelectProfileBeforeScan" xml:space="preserve">
+    <value>حدد ملف شخصي قبل النقر فوق مسح ضوئي.</value>
+  </data>
+  <data name="UnknownDriverError" xml:space="preserve">
+    <value>حدث خطأ مع تعريف المسح الضوئي..</value>
+  </data>
+  <data name="Version" xml:space="preserve">
+    <value>الإصدارة {0}</value>
+  </data>
+  <data name="EmailError" xml:space="preserve">
+    <value>حدث خطأ أثناء محاولة إرسال بريد إلكتروني.</value>
+  </data>
+  <data name="InstallComplete" xml:space="preserve">
+    <value>اكتمل التثبيت.</value>
+  </data>
+  <data name="InstallCompletePromptRestart" xml:space="preserve">
+    <value>اكتمل التثبيت. هل تريد إعادة تشغيل NAPS2 الآن؟</value>
+  </data>
+  <data name="InstallFailed" xml:space="preserve">
+    <value>فشل التثبيت.</value>
+  </data>
+  <data name="InstallFailedTitle" xml:space="preserve">
+    <value>فشل التثبيت</value>
+  </data>
+  <data name="AllCount" xml:space="preserve">
+    <value>كل ({0})</value>
+  </data>
+  <data name="SelectedCount" xml:space="preserve">
+    <value>مختار ({0})</value>
+  </data>
+  <data name="EstimatedDownloadSize" xml:space="preserve">
+    <value>حجم التنزيل المقدّر: {0} ميغابايت</value>
+  </data>
+  <data name="FilesProgressFormat" xml:space="preserve">
+    <value>{0}/{1} ملفات</value>
+  </data>
+  <data name="SizeProgress" xml:space="preserve">
+    <value>{0}/{1} ميغابايت</value>
+  </data>
+  <data name="ImportErrorCouldNot" xml:space="preserve">
+    <value>لا يمكن استيراد الملف '{0}'.</value>
+  </data>
+  <data name="ImportErrorNAPS2Pdf" xml:space="preserve">
+    <value>لا يمكن استيراد الملف '{0}'. يمكن استيراد ملفات PDF فقط التي تم إنشاؤها بواسطة NAPS2.</value>
+  </data>
+  <data name="DownloadError" xml:space="preserve">
+    <value>خطأ في التنزيل</value>
+  </data>
+  <data name="FilesCouldNotBeDownloaded" xml:space="preserve">
+    <value>تعذر تنزيل ملف واحد أو أكثر.</value>
+  </data>
+  <data name="CustomPageSizeFormat" xml:space="preserve">
+    <value>مخصص ({0} × {1} {2})</value>
+  </data>
+  <data name="Scan" xml:space="preserve">
+    <value>مسح ضوئي</value>
+  </data>
+  <data name="ConfirmResetImages" xml:space="preserve">
+    <value>هل أنت متأكد من أنك تريد التراجع عن التغييرات التي أجريتها على {0} صورة؟</value>
+  </data>
+  <data name="ResetImage" xml:space="preserve">
+    <value>إعادة تعيين الصورة</value>
+  </data>
+  <data name="ExitWithUnsavedChanges" xml:space="preserve">
+    <value>لديك تغييرات غير محفوظة. هل أنت متأكد من أنك تريد الخروج وتجاهل هذه التغييرات؟</value>
+  </data>
+  <data name="ExitWithActiveOperations" xml:space="preserve">
+    <value>An operation is in progress. Are you sure you want to exit and cancel the operation?</value>
+  </data>
+  <data name="UnsavedChanges" xml:space="preserve">
+    <value>التغييرات التي لم يتم حفظها</value>
+  </data>
+  <data name="ActiveOperations" xml:space="preserve">
+    <value>Operation in Progress</value>
+  </data>
+  <data name="ScanPageProgress" xml:space="preserve">
+    <value>يمسح ضوئياً الصفحة {0}</value>
+  </data>
+  <data name="NoFeederSupport" xml:space="preserve">
+    <value>لا يدعم الماسح الضوئي المحدد باستخدام علبة تغذية. إذا كان الماسح الضوئي الخاص يوجد به مغذي، حاول استخدام برنامج تشغيل مختلف.</value>
+  </data>
+  <data name="NoPagesInFeeder" xml:space="preserve">
+    <value>لا توجد صفحات في المغذي.</value>
+  </data>
+  <data name="PdfNoPermissionToExtractContent" xml:space="preserve">
+    <value>ليس لديك الإذن لنسخ المحتوى من الملف '{0}'.</value>
+  </data>
+  <data name="ErrorSaving" xml:space="preserve">
+    <value>حدث خطأ أثناء محاولة حفظ الملف.</value>
+  </data>
+  <data name="OfN" xml:space="preserve">
+    <value>من {0}</value>
+  </data>
+  <data name="BatchError" xml:space="preserve">
+    <value>حدث خطأ غير معروف أثناء المسح الضوئي على دفعات.</value>
+  </data>
+  <data name="BatchStatusCancelled" xml:space="preserve">
+    <value>الدفعات تم إلغائها.</value>
+  </data>
+  <data name="BatchStatusCancelling" xml:space="preserve">
+    <value>جارِ الإلغاء....</value>
+  </data>
+  <data name="BatchStatusComplete" xml:space="preserve">
+    <value>اكتملت الدفعات بنجاح.</value>
+  </data>
+  <data name="BatchStatusError" xml:space="preserve">
+    <value>المسح الضوئي على دفعات توقف بسبب خطأ.</value>
+  </data>
+  <data name="BatchStatusPage" xml:space="preserve">
+    <value>يمسح ضوئياً الصفحة {0}...</value>
+  </data>
+  <data name="BatchStatusScanPage" xml:space="preserve">
+    <value>يمسح ضوئياً الصفحة {0} (مسح ضوئي) {1}...</value>
+  </data>
+  <data name="BatchStatusWaitingForScan" xml:space="preserve">
+    <value>في انتظار المسح الضوئي {0}...</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>إلغاء</value>
+  </data>
+  <data name="Close" xml:space="preserve">
+    <value>إغلاق</value>
+  </data>
+  <data name="BatchStatusSaving" xml:space="preserve">
+    <value>حفظ نتائج الدفعات...</value>
+  </data>
+  <data name="NoDuplexSupport" xml:space="preserve">
+    <value>الماسح الضوئي المحدد لا يدعم استخدام الوضع المزدوج. إذا كان ماسحك الضوئي من المفترض أن يدعم الوضع المزدوج، حاول استخدام تعريف مختلف.</value>
+  </data>
+  <data name="ImportingFormat" xml:space="preserve">
+    <value>يستورد {0}...</value>
+  </data>
+  <data name="ImportProgress" xml:space="preserve">
+    <value>تقدم الاستيراد</value>
+  </data>
+  <data name="Recovering" xml:space="preserve">
+    <value>يستردّ...</value>
+  </data>
+  <data name="RecoveryProgress" xml:space="preserve">
+    <value>تقدّم الاسترداد</value>
+  </data>
+  <data name="SaveImages" xml:space="preserve">
+    <value>حفظ الصور</value>
+  </data>
+  <data name="SaveImagesProgress" xml:space="preserve">
+    <value>تقدم حفظ الصور</value>
+  </data>
+  <data name="SavePdf" xml:space="preserve">
+    <value>حفظ PDF</value>
+  </data>
+  <data name="SavePdfProgress" xml:space="preserve">
+    <value>تقدم حفظ PDF</value>
+  </data>
+  <data name="SavingFormat" xml:space="preserve">
+    <value>يحفظ {0}...</value>
+  </data>
+  <data name="Print" xml:space="preserve">
+    <value>﻿طباعة</value>
+  </data>
+  <data name="Copying" xml:space="preserve">
+    <value>ينسخ...</value>
+  </data>
+  <data name="CopyProgress" xml:space="preserve">
+    <value>تقدم النسخ</value>
+  </data>
+  <data name="Importing" xml:space="preserve">
+    <value>يستورد...</value>
+  </data>
+  <data name="EmailPdf" xml:space="preserve">
+    <value>إرسال PDF بالبريد</value>
+  </data>
+  <data name="EmailPdfProgress" xml:space="preserve">
+    <value>تقدم إرسال PDF بالبريد</value>
+  </data>
+  <data name="AutoSaveError" xml:space="preserve">
+    <value>حدث خطأ عند محاولة الحفظ الآلي.</value>
+  </data>
+  <data name="FileTypeAllFiles" xml:space="preserve">
+    <value>كل الملفات</value>
+  </data>
+  <data name="FileTypeImageFiles" xml:space="preserve">
+    <value>ملفات صور</value>
+  </data>
+  <data name="DeviceBusy" xml:space="preserve">
+    <value>الماسح الضوئي المحدد مشغول.</value>
+  </data>
+  <data name="DeviceCoverOpen" xml:space="preserve">
+    <value>غطاء الماسح الضوئي مفتوح.</value>
+  </data>
+  <data name="DevicePaperJam" xml:space="preserve">
+    <value>الماسح الضوئي لديه ورق منحشر.</value>
+  </data>
+  <data name="DeviceWarmingUp" xml:space="preserve">
+    <value>الماسح الضوئي يقوم بالإحماء.</value>
+  </data>
+  <data name="OcrUpdateAvailable" xml:space="preserve">
+    <value>هناك تحديث متاح للـ OCR.</value>
+  </data>
+  <data name="ImageSaved" xml:space="preserve">
+    <value>حفظت الصورة.</value>
+  </data>
+  <data name="ImagesSaved" xml:space="preserve">
+    <value>{0} صور محفوظة.</value>
+  </data>
+  <data name="PdfSaved" xml:space="preserve">
+    <value>تم حفظ PDF.</value>
+  </data>
+  <data name="NamedPageSizeFormat" xml:space="preserve">
+    <value>{0} ({1} × {2} {3})</value>
+  </data>
+  <data name="ConfirmDelete" xml:space="preserve">
+    <value>Are you sure you want to delete "{0}"?</value>
+  </data>
+  <data name="FileInUse" xml:space="preserve">
+    <value>The file could not be overwritten because it is currently in use.</value>
+  </data>
+  <data name="AutoDeskewing" xml:space="preserve">
+    <value>Deskewing...</value>
+  </data>
+  <data name="AutoDeskewProgress" xml:space="preserve">
+    <value>Deskew Progress</value>
+  </data>
+  <data name="DownloadNeeded" xml:space="preserve">
+    <value>Download Needed</value>
+  </data>
+  <data name="PdfImportComponentNeeded" xml:space="preserve">
+    <value>قوائم الأرشفة هى نتاج ماتم إنشاءه سابقا فى الإعدادات العامة (التراميز) والمجموعات بشقيها الرئيسي والفرعى والقوالب وهيكلها بعد أن تم إنشاءها لتظهرلنا على الشكل المراد إظهارها عليه :</value>
+  </data>
+  <data name="ConfirmCancelBatch" xml:space="preserve">
+    <value>Are you sure you want to cancel the batch scan?</value>
+  </data>
+  <data name="CancelBatch" xml:space="preserve">
+    <value>Cancel Batch</value>
+  </data>
+  <data name="Donate" xml:space="preserve">
+    <value>Donate</value>
+  </data>
+  <data name="DonatePrompt" xml:space="preserve">
+    <value>NAPS2 is completely free. Consider making a donation.</value>
+  </data>
+  <data name="SaneNotAvailable" xml:space="preserve">
+    <value>The SANE driver is not available. Make sure to install the required packages:</value>
+  </data>
+  <data name="TesseractNotAvailable" xml:space="preserve">
+    <value>The OCR engine is not available. Make sure to install the required package:</value>
+  </data>
+  <data name="DriverNotSupported" xml:space="preserve">
+    <value>The selected driver is not supported on this system.</value>
+  </data>
+  <data name="OcrProgress" xml:space="preserve">
+    <value>OCR Progress</value>
+  </data>
+  <data name="RunningOcr" xml:space="preserve">
+    <value>Running OCR...</value>
+  </data>
+  <data name="UpdateProgress" xml:space="preserve">
+    <value>Update Progress</value>
+  </data>
+  <data name="Updating" xml:space="preserve">
+    <value>Updating...</value>
+  </data>
+  <data name="NoUpdates" xml:space="preserve">
+    <value>No updates available.</value>
+  </data>
+  <data name="CheckingForUpdates" xml:space="preserve">
+    <value>Checking...</value>
+  </data>
+  <data name="UpdateError" xml:space="preserve">
+    <value>An error occured when trying to install the update.</value>
+  </data>
+  <data name="Install" xml:space="preserve">
+    <value>Install {0}</value>
+  </data>
+  <data name="UpdateAvailable" xml:space="preserve">
+    <value>An update is available.</value>
+  </data>
+  <data name="AuthError" xml:space="preserve">
+    <value>An error occurred when trying to authorize.</value>
+  </data>
+  <data name="UploadingEmail" xml:space="preserve">
+    <value>Uploading email...</value>
+  </data>
+  <data name="ErrorEmailing" xml:space="preserve">
+    <value>An error occurred when trying to send the email.</value>
+  </data>
+  <data name="Naps2Server" xml:space="preserve">
+    <value>NAPS2 Server</value>
+  </data>
+  <data name="ServerStarted" xml:space="preserve">
+    <value>Server started</value>
+  </data>
+  <data name="ListeningOnPort" xml:space="preserve">
+    <value>Listening on port {0}</value>
+  </data>
+  <data name="ScanProgressPage" xml:space="preserve">
+    <value>يمسح ضوئياً الصفحة {0}...</value>
+  </data>
+  <data name="AcquiringData" xml:space="preserve">
+    <value>الحصول على البيانات...</value>
+  </data>
+</root>

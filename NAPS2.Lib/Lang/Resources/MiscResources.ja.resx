@@ -1,0 +1,396 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="ChooseProfile" xml:space="preserve">
+    <value>プロファイルを選択</value>
+  </data>
+  <data name="Clear" xml:space="preserve">
+    <value>クリア</value>
+  </data>
+  <data name="ConfirmClearItems" xml:space="preserve">
+    <value>Are you sure you want to clear {0} item(s)?</value>
+  </data>
+  <data name="ConfirmDeleteItems" xml:space="preserve">
+    <value>{0}個のアイテムを削除しますか?</value>
+  </data>
+  <data name="ConfirmDeleteMultipleProfiles" xml:space="preserve">
+    <value>{0}個のプロファイルを本当に削除しますか?</value>
+  </data>
+  <data name="ConfirmDeleteSingleProfile" xml:space="preserve">
+    <value>プロフィール「{0}」を削除しますか?</value>
+  </data>
+  <data name="ConfirmOverwriteFile" xml:space="preserve">
+    <value>{0}は既存のファイルです。上書きしますか?</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>削除</value>
+  </data>
+  <data name="DeviceNotFound" xml:space="preserve">
+    <value>選択されたスキャナーが見つかりません.</value>
+  </data>
+  <data name="DeviceOffline" xml:space="preserve">
+    <value>選択されたスキャナは接続されていません。.</value>
+  </data>
+  <data name="DontHavePermission" xml:space="preserve">
+    <value>この場所に保存する権限がありません.</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>エラー</value>
+  </data>
+  <data name="FileTypeBmp" xml:space="preserve">
+    <value>ビットマップファイル(*.bmp)</value>
+  </data>
+  <data name="FileTypeEmf" xml:space="preserve">
+    <value>Enhanced Windows MetaFile (*.emf)</value>
+  </data>
+  <data name="FileTypeExif" xml:space="preserve">
+    <value>Exchangeable Image File (*.exif)</value>
+  </data>
+  <data name="FileTypeGif" xml:space="preserve">
+    <value>GIF File (*.gif)</value>
+  </data>
+  <data name="FileTypeJpeg" xml:space="preserve">
+    <value>JPEG File (*.jpg, *.jpeg)</value>
+  </data>
+  <data name="FileTypePdf" xml:space="preserve">
+    <value>PDF Document (*.pdf)</value>
+  </data>
+  <data name="FileTypePng" xml:space="preserve">
+    <value>PNG File (*.png)</value>
+  </data>
+  <data name="FileTypeTiff" xml:space="preserve">
+    <value>TIFF File (*.tiff, *.tif)</value>
+  </data>
+  <data name="NameMissing" xml:space="preserve">
+    <value>名前がありません.</value>
+  </data>
+  <data name="NAPS2" xml:space="preserve">
+    <value>NAPS2</value>
+  </data>
+  <data name="NoDeviceSelected" xml:space="preserve">
+    <value>デバイスが選択されていません.</value>
+  </data>
+  <data name="NoDevicesFound" xml:space="preserve">
+    <value>スキャンできるデバイスが検出されませんでした.</value>
+  </data>
+  <data name="OverwriteFile" xml:space="preserve">
+    <value>ファイルを上書きする</value>
+  </data>
+  <data name="PdfStatus" xml:space="preserve">
+    <value>{1} 個中 {0}</value>
+  </data>
+  <data name="ScannedImage" xml:space="preserve">
+    <value>スキャンされた画像</value>
+  </data>
+  <data name="SelectProfileBeforeScan" xml:space="preserve">
+    <value>プロファイルを選んでください.</value>
+  </data>
+  <data name="UnknownDriverError" xml:space="preserve">
+    <value>スキャナドライバにエラーが発生しました.</value>
+  </data>
+  <data name="Version" xml:space="preserve">
+    <value>Version {0}</value>
+  </data>
+  <data name="EmailError" xml:space="preserve">
+    <value>メール送信中にエラーが発生しました.</value>
+  </data>
+  <data name="InstallComplete" xml:space="preserve">
+    <value>インストールが完了しました</value>
+  </data>
+  <data name="InstallCompletePromptRestart" xml:space="preserve">
+    <value>インストールが完了しました。NAPS2を再起動しますか?</value>
+  </data>
+  <data name="InstallFailed" xml:space="preserve">
+    <value>インストールに失敗しました.</value>
+  </data>
+  <data name="InstallFailedTitle" xml:space="preserve">
+    <value>インストールに失敗しました</value>
+  </data>
+  <data name="AllCount" xml:space="preserve">
+    <value>すべて({0})</value>
+  </data>
+  <data name="SelectedCount" xml:space="preserve">
+    <value>({0})個を選択中</value>
+  </data>
+  <data name="EstimatedDownloadSize" xml:space="preserve">
+    <value>推定ダウンロードサイズ: 約{0} MB</value>
+  </data>
+  <data name="FilesProgressFormat" xml:space="preserve">
+    <value>ファイル：{0} / {1}個 </value>
+  </data>
+  <data name="SizeProgress" xml:space="preserve">
+    <value>{0} / {1} MB</value>
+  </data>
+  <data name="ImportErrorCouldNot" xml:space="preserve">
+    <value>'{0}'個のファイルが取り込まれませんでした.</value>
+  </data>
+  <data name="ImportErrorNAPS2Pdf" xml:space="preserve">
+    <value>'{0}'個のファイルは、NAPS2によって作成されたファイルではありませんので、読み込めませんでした。.</value>
+  </data>
+  <data name="DownloadError" xml:space="preserve">
+    <value>ダウンロードエラー</value>
+  </data>
+  <data name="FilesCouldNotBeDownloaded" xml:space="preserve">
+    <value>1つ以上のファイルをダウンロードできませんでした.</value>
+  </data>
+  <data name="CustomPageSizeFormat" xml:space="preserve">
+    <value>ユーザー設定 ({0}x{1} {2})</value>
+  </data>
+  <data name="Scan" xml:space="preserve">
+    <value>スキャン</value>
+  </data>
+  <data name="ConfirmResetImages" xml:space="preserve">
+    <value>{0}個のイメージへの変更を取り消しますか?</value>
+  </data>
+  <data name="ResetImage" xml:space="preserve">
+    <value>画像のリセット</value>
+  </data>
+  <data name="ExitWithUnsavedChanges" xml:space="preserve">
+    <value>未保存の変更があります。変更を破棄しますか?</value>
+  </data>
+  <data name="ExitWithActiveOperations" xml:space="preserve">
+    <value>作業が進行中です。それでも終了しますか？</value>
+  </data>
+  <data name="UnsavedChanges" xml:space="preserve">
+    <value>保存されていない変更</value>
+  </data>
+  <data name="ActiveOperations" xml:space="preserve">
+    <value>実行中</value>
+  </data>
+  <data name="ScanPageProgress" xml:space="preserve">
+    <value>ページ {0} をスキャン中</value>
+  </data>
+  <data name="NoFeederSupport" xml:space="preserve">
+    <value>選択されたスキャナはフィーダーを利用できません。もしスキャナにフィーダーがある場合は、別のドライバを試してみてください。.</value>
+  </data>
+  <data name="NoPagesInFeeder" xml:space="preserve">
+    <value>フィーダーが空です.</value>
+  </data>
+  <data name="PdfNoPermissionToExtractContent" xml:space="preserve">
+    <value>'{0}'からのコピーは許可されていません.</value>
+  </data>
+  <data name="ErrorSaving" xml:space="preserve">
+    <value>セーブ中にエラーが発生しました.</value>
+  </data>
+  <data name="OfN" xml:space="preserve">
+    <value>{0} の</value>
+  </data>
+  <data name="BatchError" xml:space="preserve">
+    <value>一括スキャン中に不明なエラーが発生しました.</value>
+  </data>
+  <data name="BatchStatusCancelled" xml:space="preserve">
+    <value>一括スキャンはキャンセルされました.</value>
+  </data>
+  <data name="BatchStatusCancelling" xml:space="preserve">
+    <value>キャンセル....</value>
+  </data>
+  <data name="BatchStatusComplete" xml:space="preserve">
+    <value>一括スキャンが正常に終了しました.</value>
+  </data>
+  <data name="BatchStatusError" xml:space="preserve">
+    <value>エラーのために一括スキャンは異常終了しました.</value>
+  </data>
+  <data name="BatchStatusPage" xml:space="preserve">
+    <value>ページ {0} をスキャン中...</value>
+  </data>
+  <data name="BatchStatusScanPage" xml:space="preserve">
+    <value>ページ {0} をスキャン中 (スキャン {1})...</value>
+  </data>
+  <data name="BatchStatusWaitingForScan" xml:space="preserve">
+    <value>スキャン待機中 {0}...</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>キャンセル</value>
+  </data>
+  <data name="Close" xml:space="preserve">
+    <value>閉じる</value>
+  </data>
+  <data name="BatchStatusSaving" xml:space="preserve">
+    <value>バッチの保存...</value>
+  </data>
+  <data name="NoDuplexSupport" xml:space="preserve">
+    <value>両面スキャンがこのスキャナではできません。スキャナに両面機能が備わっている場合は、別のドライバを試してみてください。.</value>
+  </data>
+  <data name="ImportingFormat" xml:space="preserve">
+    <value>{0}を読み込み中...</value>
+  </data>
+  <data name="ImportProgress" xml:space="preserve">
+    <value>読み込みの進捗</value>
+  </data>
+  <data name="Recovering" xml:space="preserve">
+    <value>回復中...</value>
+  </data>
+  <data name="RecoveryProgress" xml:space="preserve">
+    <value>回復作業の進捗</value>
+  </data>
+  <data name="SaveImages" xml:space="preserve">
+    <value>複数の画像を保存</value>
+  </data>
+  <data name="SaveImagesProgress" xml:space="preserve">
+    <value>保存作業の進捗</value>
+  </data>
+  <data name="SavePdf" xml:space="preserve">
+    <value>PDFを保存</value>
+  </data>
+  <data name="SavePdfProgress" xml:space="preserve">
+    <value>PDF保存の進捗</value>
+  </data>
+  <data name="SavingFormat" xml:space="preserve">
+    <value>{0} を保存中...</value>
+  </data>
+  <data name="Print" xml:space="preserve">
+    <value>印刷</value>
+  </data>
+  <data name="Copying" xml:space="preserve">
+    <value>コピー...</value>
+  </data>
+  <data name="CopyProgress" xml:space="preserve">
+    <value>コピーの進捗状況</value>
+  </data>
+  <data name="Importing" xml:space="preserve">
+    <value>読み込み...</value>
+  </data>
+  <data name="EmailPdf" xml:space="preserve">
+    <value>PDFをEmailで送信</value>
+  </data>
+  <data name="EmailPdfProgress" xml:space="preserve">
+    <value>PDF送信の進捗</value>
+  </data>
+  <data name="AutoSaveError" xml:space="preserve">
+    <value>自動セーブ中にエラーが発生しました.</value>
+  </data>
+  <data name="FileTypeAllFiles" xml:space="preserve">
+    <value>すべてのファイル</value>
+  </data>
+  <data name="FileTypeImageFiles" xml:space="preserve">
+    <value>イメージファイル</value>
+  </data>
+  <data name="DeviceBusy" xml:space="preserve">
+    <value>選択されたスキャナは使用中です。.</value>
+  </data>
+  <data name="DeviceCoverOpen" xml:space="preserve">
+    <value>スキャナーのカバーが開いています.</value>
+  </data>
+  <data name="DevicePaperJam" xml:space="preserve">
+    <value>スキャナーの紙詰まりです.</value>
+  </data>
+  <data name="DeviceWarmingUp" xml:space="preserve">
+    <value>スキャナーがウォームアップ中です.</value>
+  </data>
+  <data name="OcrUpdateAvailable" xml:space="preserve">
+    <value>新しいOCRのアップデートがあります.</value>
+  </data>
+  <data name="ImageSaved" xml:space="preserve">
+    <value>保存された画像.</value>
+  </data>
+  <data name="ImagesSaved" xml:space="preserve">
+    <value>{0} 個の画像が保存されました.</value>
+  </data>
+  <data name="PdfSaved" xml:space="preserve">
+    <value>PDFは保存されました.</value>
+  </data>
+  <data name="NamedPageSizeFormat" xml:space="preserve">
+    <value>{0} ({1}x{2} {3})</value>
+  </data>
+  <data name="ConfirmDelete" xml:space="preserve">
+    <value>Are you sure you want to delete "{0}"?</value>
+  </data>
+  <data name="FileInUse" xml:space="preserve">
+    <value>使用中ファイルのため、上書きできませんでした。.</value>
+  </data>
+  <data name="AutoDeskewing" xml:space="preserve">
+    <value>歪み補正...</value>
+  </data>
+  <data name="AutoDeskewProgress" xml:space="preserve">
+    <value>歪み補正の進捗</value>
+  </data>
+  <data name="DownloadNeeded" xml:space="preserve">
+    <value>ダウンロードが必要です</value>
+  </data>
+  <data name="PdfImportComponentNeeded" xml:space="preserve">
+    <value>PDFファイルをインポートするのに必要なファイルがあります。ダウンロードしますか?</value>
+  </data>
+  <data name="ConfirmCancelBatch" xml:space="preserve">
+    <value>一括スキャンをキャンセルしますか?</value>
+  </data>
+  <data name="CancelBatch" xml:space="preserve">
+    <value>一括スキャンをキャンセル</value>
+  </data>
+  <data name="Donate" xml:space="preserve">
+    <value>支援</value>
+  </data>
+  <data name="DonatePrompt" xml:space="preserve">
+    <value>NAPS2はフリーウェアです。気に入ったら寄付をお願いします。.</value>
+  </data>
+  <data name="SaneNotAvailable" xml:space="preserve">
+    <value>SANEドライバが利用不可能です。必要なパッケージをインストールしてください。:</value>
+  </data>
+  <data name="TesseractNotAvailable" xml:space="preserve">
+    <value>OCRエンジンが利用できません。言語パッケージをインストールしてください。:</value>
+  </data>
+  <data name="DriverNotSupported" xml:space="preserve">
+    <value>選択されたドライバはOSでサポートされていません.</value>
+  </data>
+  <data name="OcrProgress" xml:space="preserve">
+    <value>OCR適用中</value>
+  </data>
+  <data name="RunningOcr" xml:space="preserve">
+    <value>OCR適用中...</value>
+  </data>
+  <data name="UpdateProgress" xml:space="preserve">
+    <value>更新中</value>
+  </data>
+  <data name="Updating" xml:space="preserve">
+    <value>更新中...</value>
+  </data>
+  <data name="NoUpdates" xml:space="preserve">
+    <value>有効な更新はありません.</value>
+  </data>
+  <data name="CheckingForUpdates" xml:space="preserve">
+    <value>確認中です...</value>
+  </data>
+  <data name="UpdateError" xml:space="preserve">
+    <value>アップデートをインストールする際にエラーが発生しました.</value>
+  </data>
+  <data name="Install" xml:space="preserve">
+    <value>{0}のインストール</value>
+  </data>
+  <data name="UpdateAvailable" xml:space="preserve">
+    <value>利用可能なアップデートがあります.</value>
+  </data>
+  <data name="AuthError" xml:space="preserve">
+    <value>認証中にエラーが発生しました.</value>
+  </data>
+  <data name="UploadingEmail" xml:space="preserve">
+    <value>メールをアップロード中...</value>
+  </data>
+  <data name="ErrorEmailing" xml:space="preserve">
+    <value>メール送信時にエラーが発生しました.</value>
+  </data>
+  <data name="Naps2Server" xml:space="preserve">
+    <value>NAPS2 Server</value>
+  </data>
+  <data name="ServerStarted" xml:space="preserve">
+    <value>Server started</value>
+  </data>
+  <data name="ListeningOnPort" xml:space="preserve">
+    <value>Listening on port {0}</value>
+  </data>
+  <data name="ScanProgressPage" xml:space="preserve">
+    <value>ページ {0} をスキャン中...</value>
+  </data>
+  <data name="AcquiringData" xml:space="preserve">
+    <value>データを取得中...</value>
+  </data>
+</root>

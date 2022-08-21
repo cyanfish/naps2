@@ -1,0 +1,396 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="ChooseProfile" xml:space="preserve">
+    <value>Profil Seç</value>
+  </data>
+  <data name="Clear" xml:space="preserve">
+    <value>Temizle</value>
+  </data>
+  <data name="ConfirmClearItems" xml:space="preserve">
+    <value>{0} adet ögeyi temizlemek istediğinize emin misiniz?</value>
+  </data>
+  <data name="ConfirmDeleteItems" xml:space="preserve">
+    <value>{0} adet ögeyi silmek istediğinize emin misiniz?</value>
+  </data>
+  <data name="ConfirmDeleteMultipleProfiles" xml:space="preserve">
+    <value>{0} adet profili silmek istediğinize emin misiniz?</value>
+  </data>
+  <data name="ConfirmDeleteSingleProfile" xml:space="preserve">
+    <value>{0} profilini silmek istediğinize emin misiniz?</value>
+  </data>
+  <data name="ConfirmOverwriteFile" xml:space="preserve">
+    <value>{0} dosyası zaten var. Üzerine yazmak ister misiniz?</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Sil</value>
+  </data>
+  <data name="DeviceNotFound" xml:space="preserve">
+    <value>Seçilen tarayıcı bulunamadı.</value>
+  </data>
+  <data name="DeviceOffline" xml:space="preserve">
+    <value>Seçilen tarayıcı çevrim dışı.</value>
+  </data>
+  <data name="DontHavePermission" xml:space="preserve">
+    <value>Bu konuma kaydetmek için yetkiniz bulunmuyor..</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>Hata</value>
+  </data>
+  <data name="FileTypeBmp" xml:space="preserve">
+    <value>Bitmap Dosyaları (*.bmp)</value>
+  </data>
+  <data name="FileTypeEmf" xml:space="preserve">
+    <value>Gelişmiş Windows Meta Dosyası (*.emf)</value>
+  </data>
+  <data name="FileTypeExif" xml:space="preserve">
+    <value>Takas Edilebilir Resim Dosyası (*.exif)</value>
+  </data>
+  <data name="FileTypeGif" xml:space="preserve">
+    <value>GIF Dosyası (*.gif)</value>
+  </data>
+  <data name="FileTypeJpeg" xml:space="preserve">
+    <value>JPEG Dosyası (*.jpg, *.jpeg)</value>
+  </data>
+  <data name="FileTypePdf" xml:space="preserve">
+    <value>PDF Belgesi (*.pdf)</value>
+  </data>
+  <data name="FileTypePng" xml:space="preserve">
+    <value>PNG Dosya (*.png)</value>
+  </data>
+  <data name="FileTypeTiff" xml:space="preserve">
+    <value>TIFF Dosyası (*.tiff, *.tif)</value>
+  </data>
+  <data name="NameMissing" xml:space="preserve">
+    <value>Ad eksik.</value>
+  </data>
+  <data name="NAPS2" xml:space="preserve">
+    <value>NAPS2</value>
+  </data>
+  <data name="NoDeviceSelected" xml:space="preserve">
+    <value>Hiçbir aygıt seçilmedi.</value>
+  </data>
+  <data name="NoDevicesFound" xml:space="preserve">
+    <value>Hiçbir tarama aygıtı bulunamadı.</value>
+  </data>
+  <data name="OverwriteFile" xml:space="preserve">
+    <value>Dosyanın Üzerine Yaz</value>
+  </data>
+  <data name="PdfStatus" xml:space="preserve">
+    <value>{0} / {1} dosya</value>
+  </data>
+  <data name="ScannedImage" xml:space="preserve">
+    <value>Taranmış Resim</value>
+  </data>
+  <data name="SelectProfileBeforeScan" xml:space="preserve">
+    <value>Taraya tıklamadan önce profil seçiniz.</value>
+  </data>
+  <data name="UnknownDriverError" xml:space="preserve">
+    <value>Tarayıcı sürücüsü ile ilgili bir hata oluştu.</value>
+  </data>
+  <data name="Version" xml:space="preserve">
+    <value>Sürüm {0}</value>
+  </data>
+  <data name="EmailError" xml:space="preserve">
+    <value>E-posta gönderilmeye çalışılırken bir hata oluştu.</value>
+  </data>
+  <data name="InstallComplete" xml:space="preserve">
+    <value>Kurulum Tamamlandı</value>
+  </data>
+  <data name="InstallCompletePromptRestart" xml:space="preserve">
+    <value>Kurulum tamamlandı. Şimdi NAPS2'yi yeniden başlatmak etmek ister misiniz?</value>
+  </data>
+  <data name="InstallFailed" xml:space="preserve">
+    <value>Kurulum başarısız.</value>
+  </data>
+  <data name="InstallFailedTitle" xml:space="preserve">
+    <value>Kurulum Başarısız</value>
+  </data>
+  <data name="AllCount" xml:space="preserve">
+    <value>Tümü ({0})</value>
+  </data>
+  <data name="SelectedCount" xml:space="preserve">
+    <value>Seçilen ({0})</value>
+  </data>
+  <data name="EstimatedDownloadSize" xml:space="preserve">
+    <value>Tahmini indirme boyutu: {0} MB</value>
+  </data>
+  <data name="FilesProgressFormat" xml:space="preserve">
+    <value>{0} / {1} dosya</value>
+  </data>
+  <data name="SizeProgress" xml:space="preserve">
+    <value>{0} / {1} MB</value>
+  </data>
+  <data name="ImportErrorCouldNot" xml:space="preserve">
+    <value>'{0}' dosyası içeri aktarılamadı.</value>
+  </data>
+  <data name="ImportErrorNAPS2Pdf" xml:space="preserve">
+    <value>'{0}' dosyası içeri aktarılamadı. Yalnızca NAPS2 tarafından üretilen PDF dosyaları içeri aktarılabilir..</value>
+  </data>
+  <data name="DownloadError" xml:space="preserve">
+    <value>İndirme Hatası</value>
+  </data>
+  <data name="FilesCouldNotBeDownloaded" xml:space="preserve">
+    <value>Bir veya daha çok dosya indirilemedi.</value>
+  </data>
+  <data name="CustomPageSizeFormat" xml:space="preserve">
+    <value>Özel ({0}x{1} {2})</value>
+  </data>
+  <data name="Scan" xml:space="preserve">
+    <value>Tara</value>
+  </data>
+  <data name="ConfirmResetImages" xml:space="preserve">
+    <value>{0} adet resimde yapılan değişiklikleri geri almak istediğinize emin misiniz?</value>
+  </data>
+  <data name="ResetImage" xml:space="preserve">
+    <value>Resmi Sıfırla</value>
+  </data>
+  <data name="ExitWithUnsavedChanges" xml:space="preserve">
+    <value>Kaydedilmemiş değişiklikleriniz var. Değişiklikleri iptal edip çıkmak istediğinize emin misiniz?</value>
+  </data>
+  <data name="ExitWithActiveOperations" xml:space="preserve">
+    <value>An operation is in progress. Are you sure you want to exit and cancel the operation?</value>
+  </data>
+  <data name="UnsavedChanges" xml:space="preserve">
+    <value>Kaydedilmemiş Değişiklikler</value>
+  </data>
+  <data name="ActiveOperations" xml:space="preserve">
+    <value>Operation in Progress</value>
+  </data>
+  <data name="ScanPageProgress" xml:space="preserve">
+    <value>{0}. sayfa taranıyor</value>
+  </data>
+  <data name="NoFeederSupport" xml:space="preserve">
+    <value>Seçilen tarayıcı, besleyici kullanmayı desteklemiyor. Eğer tarayıcınızın bir besleyicisi varsa başka bir sürücü kullanmayı deneyin.</value>
+  </data>
+  <data name="NoPagesInFeeder" xml:space="preserve">
+    <value>Besleyicide sayfa yok.</value>
+  </data>
+  <data name="PdfNoPermissionToExtractContent" xml:space="preserve">
+    <value>'{0}' dosyasından içeriği kopyalamaya yetkiniz yok.</value>
+  </data>
+  <data name="ErrorSaving" xml:space="preserve">
+    <value>Dosya kaydedilmeye çalışılırken bir hata oluştu..</value>
+  </data>
+  <data name="OfN" xml:space="preserve">
+    <value> / {0}</value>
+  </data>
+  <data name="BatchError" xml:space="preserve">
+    <value>Yığın tarama sırasında bilinmeyen bir hata oluştu.</value>
+  </data>
+  <data name="BatchStatusCancelled" xml:space="preserve">
+    <value>Yığın iptal edildi.</value>
+  </data>
+  <data name="BatchStatusCancelling" xml:space="preserve">
+    <value>İptal ediliyor....</value>
+  </data>
+  <data name="BatchStatusComplete" xml:space="preserve">
+    <value>Yığın başarıyla tamamlandı.</value>
+  </data>
+  <data name="BatchStatusError" xml:space="preserve">
+    <value>Yığın tarama hata nedeniyle durdu.</value>
+  </data>
+  <data name="BatchStatusPage" xml:space="preserve">
+    <value>{0}. sayfa taranıyor...</value>
+  </data>
+  <data name="BatchStatusScanPage" xml:space="preserve">
+    <value>{0}. sayfa taranıyor ({1}. tarama)...</value>
+  </data>
+  <data name="BatchStatusWaitingForScan" xml:space="preserve">
+    <value>{0}. tarama için bekleniyor...</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Vazgeç</value>
+  </data>
+  <data name="Close" xml:space="preserve">
+    <value>Kapat</value>
+  </data>
+  <data name="BatchStatusSaving" xml:space="preserve">
+    <value>Yığın sonuçları kaydediliyor...</value>
+  </data>
+  <data name="NoDuplexSupport" xml:space="preserve">
+    <value>Seçilen tarayıcı, çift taraflı kullanımı desteklemiyor. Eğer tarayıcınız çift taraflı kullanımı destekliyorsa başka bir sürücü kullanmayı deneyin.</value>
+  </data>
+  <data name="ImportingFormat" xml:space="preserve">
+    <value>{0} içe aktarılıyor...</value>
+  </data>
+  <data name="ImportProgress" xml:space="preserve">
+    <value>İçe Aktarım Süreci</value>
+  </data>
+  <data name="Recovering" xml:space="preserve">
+    <value>Kurtarılıyor...</value>
+  </data>
+  <data name="RecoveryProgress" xml:space="preserve">
+    <value>Kurtarma Süreci</value>
+  </data>
+  <data name="SaveImages" xml:space="preserve">
+    <value>Resimleri Kaydet</value>
+  </data>
+  <data name="SaveImagesProgress" xml:space="preserve">
+    <value>Resimleri Kaydetme Süreci</value>
+  </data>
+  <data name="SavePdf" xml:space="preserve">
+    <value>PDF Kaydet</value>
+  </data>
+  <data name="SavePdfProgress" xml:space="preserve">
+    <value>PDF Kaydetme Süreci</value>
+  </data>
+  <data name="SavingFormat" xml:space="preserve">
+    <value>{0} kaydediliyor...</value>
+  </data>
+  <data name="Print" xml:space="preserve">
+    <value>Yazdır</value>
+  </data>
+  <data name="Copying" xml:space="preserve">
+    <value>Kopyalanıyor...</value>
+  </data>
+  <data name="CopyProgress" xml:space="preserve">
+    <value>Kopyalama Süreci</value>
+  </data>
+  <data name="Importing" xml:space="preserve">
+    <value>İçe Aktarılıyor...</value>
+  </data>
+  <data name="EmailPdf" xml:space="preserve">
+    <value>PDF'yi E-postala</value>
+  </data>
+  <data name="EmailPdfProgress" xml:space="preserve">
+    <value>PDF'yi E-Postalama Süreci</value>
+  </data>
+  <data name="AutoSaveError" xml:space="preserve">
+    <value>Kendiliğinden kaydetme denenirken hata oluştu.</value>
+  </data>
+  <data name="FileTypeAllFiles" xml:space="preserve">
+    <value>Tüm Dosyalar</value>
+  </data>
+  <data name="FileTypeImageFiles" xml:space="preserve">
+    <value>Resim Dosyaları</value>
+  </data>
+  <data name="DeviceBusy" xml:space="preserve">
+    <value>Seçilen tarayıcı meşgul.</value>
+  </data>
+  <data name="DeviceCoverOpen" xml:space="preserve">
+    <value>Tarayıcının kapağı açık.</value>
+  </data>
+  <data name="DevicePaperJam" xml:space="preserve">
+    <value>Tarayıcıda kağıt sıkışması var.</value>
+  </data>
+  <data name="DeviceWarmingUp" xml:space="preserve">
+    <value>Tarayıcı ısınıyor.</value>
+  </data>
+  <data name="OcrUpdateAvailable" xml:space="preserve">
+    <value>OCR için bir güncelleme var.</value>
+  </data>
+  <data name="ImageSaved" xml:space="preserve">
+    <value>Resim kaydedildi.</value>
+  </data>
+  <data name="ImagesSaved" xml:space="preserve">
+    <value>{0} resim kaydedildi.</value>
+  </data>
+  <data name="PdfSaved" xml:space="preserve">
+    <value>PDF kaydedildi.</value>
+  </data>
+  <data name="NamedPageSizeFormat" xml:space="preserve">
+    <value>{0} ({1}x{2} {3})</value>
+  </data>
+  <data name="ConfirmDelete" xml:space="preserve">
+    <value>Are you sure you want to delete "{0}"?</value>
+  </data>
+  <data name="FileInUse" xml:space="preserve">
+    <value>Dosyanın üzerine yazılamaz çünkü şu anda kullanımda.</value>
+  </data>
+  <data name="AutoDeskewing" xml:space="preserve">
+    <value>Eğrilik Düzeltiliyor...</value>
+  </data>
+  <data name="AutoDeskewProgress" xml:space="preserve">
+    <value>Eğriliği Düzeltme Süreci</value>
+  </data>
+  <data name="DownloadNeeded" xml:space="preserve">
+    <value>İndirme Gerekli</value>
+  </data>
+  <data name="PdfImportComponentNeeded" xml:space="preserve">
+    <value>Bu PDF dosyasını içe aktarmak için ek bileşen gerekiyor. Şimdi indirmek ister misiniz?</value>
+  </data>
+  <data name="ConfirmCancelBatch" xml:space="preserve">
+    <value>Yığın taramayı iptal etmek istediğinize emin misiniz?</value>
+  </data>
+  <data name="CancelBatch" xml:space="preserve">
+    <value>Yığını İptal Et</value>
+  </data>
+  <data name="Donate" xml:space="preserve">
+    <value>Bağış Yap</value>
+  </data>
+  <data name="DonatePrompt" xml:space="preserve">
+    <value>NAPS2 tümüyle ücretsizdir. Bağış yapmayı düşünün.</value>
+  </data>
+  <data name="SaneNotAvailable" xml:space="preserve">
+    <value>The SANE driver is not available. Make sure to install the required packages:</value>
+  </data>
+  <data name="TesseractNotAvailable" xml:space="preserve">
+    <value>The OCR engine is not available. Make sure to install the required package:</value>
+  </data>
+  <data name="DriverNotSupported" xml:space="preserve">
+    <value>The selected driver is not supported on this system.</value>
+  </data>
+  <data name="OcrProgress" xml:space="preserve">
+    <value>OCR Progress</value>
+  </data>
+  <data name="RunningOcr" xml:space="preserve">
+    <value>Running OCR...</value>
+  </data>
+  <data name="UpdateProgress" xml:space="preserve">
+    <value>Update Progress</value>
+  </data>
+  <data name="Updating" xml:space="preserve">
+    <value>Updating...</value>
+  </data>
+  <data name="NoUpdates" xml:space="preserve">
+    <value>No updates available.</value>
+  </data>
+  <data name="CheckingForUpdates" xml:space="preserve">
+    <value>Checking...</value>
+  </data>
+  <data name="UpdateError" xml:space="preserve">
+    <value>An error occured when trying to install the update.</value>
+  </data>
+  <data name="Install" xml:space="preserve">
+    <value>Install {0}</value>
+  </data>
+  <data name="UpdateAvailable" xml:space="preserve">
+    <value>An update is available.</value>
+  </data>
+  <data name="AuthError" xml:space="preserve">
+    <value>An error occurred when trying to authorize.</value>
+  </data>
+  <data name="UploadingEmail" xml:space="preserve">
+    <value>Uploading email...</value>
+  </data>
+  <data name="ErrorEmailing" xml:space="preserve">
+    <value>An error occurred when trying to send the email.</value>
+  </data>
+  <data name="Naps2Server" xml:space="preserve">
+    <value>NAPS2 Server</value>
+  </data>
+  <data name="ServerStarted" xml:space="preserve">
+    <value>Server started</value>
+  </data>
+  <data name="ListeningOnPort" xml:space="preserve">
+    <value>Listening on port {0}</value>
+  </data>
+  <data name="ScanProgressPage" xml:space="preserve">
+    <value>{0}. sayfa taranıyor...</value>
+  </data>
+  <data name="AcquiringData" xml:space="preserve">
+    <value>Veri elde ediliyor...</value>
+  </data>
+</root>

@@ -1,0 +1,396 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="ChooseProfile" xml:space="preserve">
+    <value>Chọn hồ sơ</value>
+  </data>
+  <data name="Clear" xml:space="preserve">
+    <value>Xóa</value>
+  </data>
+  <data name="ConfirmClearItems" xml:space="preserve">
+    <value>Bạn có chắc chắn bạn muốn xóa {0} mục?</value>
+  </data>
+  <data name="ConfirmDeleteItems" xml:space="preserve">
+    <value>Bạn có chắc chắn muốn xóa {0} mục?</value>
+  </data>
+  <data name="ConfirmDeleteMultipleProfiles" xml:space="preserve">
+    <value>Bạn có chắc chắn muốn xóa {0} hồ sơ?</value>
+  </data>
+  <data name="ConfirmDeleteSingleProfile" xml:space="preserve">
+    <value>Bạn có chắc chắn bạn muốn xóa hồ sơ {0}?</value>
+  </data>
+  <data name="ConfirmOverwriteFile" xml:space="preserve">
+    <value>Các tập tin {0} đã tồn tại. Bạn có muốn ghi đè không?</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Xóa</value>
+  </data>
+  <data name="DeviceNotFound" xml:space="preserve">
+    <value>Máy quét chọn không thể được tìm thấy.</value>
+  </data>
+  <data name="DeviceOffline" xml:space="preserve">
+    <value>Máy quét chọn đang ẩn.</value>
+  </data>
+  <data name="DontHavePermission" xml:space="preserve">
+    <value>Bạn không có quyền để lưu các tập tin tại vị trí này.</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>Lỗi</value>
+  </data>
+  <data name="FileTypeBmp" xml:space="preserve">
+    <value>Bitmap Files (*.bmp)</value>
+  </data>
+  <data name="FileTypeEmf" xml:space="preserve">
+    <value>Enhanced Windows MetaFile (*.emf)</value>
+  </data>
+  <data name="FileTypeExif" xml:space="preserve">
+    <value>Exchangeable Image File (*.exif)</value>
+  </data>
+  <data name="FileTypeGif" xml:space="preserve">
+    <value>GIF File (*.gif)</value>
+  </data>
+  <data name="FileTypeJpeg" xml:space="preserve">
+    <value>JPEG File (*.jpg, *.jpeg)</value>
+  </data>
+  <data name="FileTypePdf" xml:space="preserve">
+    <value>Tài liệu PDF  (*.pdf)</value>
+  </data>
+  <data name="FileTypePng" xml:space="preserve">
+    <value>Tệp PNG  (*.png)</value>
+  </data>
+  <data name="FileTypeTiff" xml:space="preserve">
+    <value>TIFF File (*.tiff, *.tif)</value>
+  </data>
+  <data name="NameMissing" xml:space="preserve">
+    <value>Đặt tên lỗi.</value>
+  </data>
+  <data name="NAPS2" xml:space="preserve">
+    <value>NAPS2</value>
+  </data>
+  <data name="NoDeviceSelected" xml:space="preserve">
+    <value>Không có thiết bị được lựa chọn.</value>
+  </data>
+  <data name="NoDevicesFound" xml:space="preserve">
+    <value>Không thấy thiết bị quét.</value>
+  </data>
+  <data name="OverwriteFile" xml:space="preserve">
+    <value>Ghi đè Tiệp</value>
+  </data>
+  <data name="PdfStatus" xml:space="preserve">
+    <value>{0} tới {1}</value>
+  </data>
+  <data name="ScannedImage" xml:space="preserve">
+    <value>Quét Ảnh</value>
+  </data>
+  <data name="SelectProfileBeforeScan" xml:space="preserve">
+    <value>Chọn một cấu hình trước khi bấm Scan.</value>
+  </data>
+  <data name="UnknownDriverError" xml:space="preserve">
+    <value>Có lỗi xảy ra với trình điều khiển máy quét.</value>
+  </data>
+  <data name="Version" xml:space="preserve">
+    <value>Phiên bản {0}</value>
+  </data>
+  <data name="EmailError" xml:space="preserve">
+    <value>Có lỗi xảy ra trong khi đang cố gắng để gửi một email.</value>
+  </data>
+  <data name="InstallComplete" xml:space="preserve">
+    <value>Cài đặt thành công</value>
+  </data>
+  <data name="InstallCompletePromptRestart" xml:space="preserve">
+    <value>Cài đặt hoàn tất. Bạn có muốn khởi động lại NAPS2 bây giờ?</value>
+  </data>
+  <data name="InstallFailed" xml:space="preserve">
+    <value>Cài đặt thất bại.</value>
+  </data>
+  <data name="InstallFailedTitle" xml:space="preserve">
+    <value>Cài đặt bị lỗi</value>
+  </data>
+  <data name="AllCount" xml:space="preserve">
+    <value>Tất cả ({0})</value>
+  </data>
+  <data name="SelectedCount" xml:space="preserve">
+    <value>Chọn ({0})</value>
+  </data>
+  <data name="EstimatedDownloadSize" xml:space="preserve">
+    <value>Ước tính kích thước download: {0} MB</value>
+  </data>
+  <data name="FilesProgressFormat" xml:space="preserve">
+    <value>{0} / {1} files</value>
+  </data>
+  <data name="SizeProgress" xml:space="preserve">
+    <value>{0} / {1} MB</value>
+  </data>
+  <data name="ImportErrorCouldNot" xml:space="preserve">
+    <value>Các tập tin '{0}' không thể chèn được.</value>
+  </data>
+  <data name="ImportErrorNAPS2Pdf" xml:space="preserve">
+    <value>Các tập tin '{0}' không thể chèn được. Chỉ những tập tin PDF được tạo bởi NAPS2 có thể được chèn.</value>
+  </data>
+  <data name="DownloadError" xml:space="preserve">
+    <value>Tải Về lỗi</value>
+  </data>
+  <data name="FilesCouldNotBeDownloaded" xml:space="preserve">
+    <value>Một hoặc nhiều tập tin không thể được tải về.</value>
+  </data>
+  <data name="CustomPageSizeFormat" xml:space="preserve">
+    <value>Tùy chỉnh ({0}x{1} {2})</value>
+  </data>
+  <data name="Scan" xml:space="preserve">
+    <value>Quét</value>
+  </data>
+  <data name="ConfirmResetImages" xml:space="preserve">
+    <value>Bạn có chắc chắn muốn hoàn tác các thay đổi đến {0} hình ảnh?</value>
+  </data>
+  <data name="ResetImage" xml:space="preserve">
+    <value>Thiết lập lại hình ảnh</value>
+  </data>
+  <data name="ExitWithUnsavedChanges" xml:space="preserve">
+    <value>Bạn có thay đổi chưa được lưu. Bạn có chắc chắn muốn thoát ra và loại bỏ những thay đổi?</value>
+  </data>
+  <data name="ExitWithActiveOperations" xml:space="preserve">
+    <value>Đang thực thi lệnh nào đó. Bạn có muốn hủy lệnh và thoát?</value>
+  </data>
+  <data name="UnsavedChanges" xml:space="preserve">
+    <value>Thay đổi chưa được lưu</value>
+  </data>
+  <data name="ActiveOperations" xml:space="preserve">
+    <value>Đang thực thi lệnh</value>
+  </data>
+  <data name="ScanPageProgress" xml:space="preserve">
+    <value>Trang quét {0}</value>
+  </data>
+  <data name="NoFeederSupport" xml:space="preserve">
+    <value>Máy quét chọn không hỗ trợ sử dụng một feeder. Nếu máy quét của bạn không có một feeder, hãy thử sử dụng một trình điều khiển khác nhau.</value>
+  </data>
+  <data name="NoPagesInFeeder" xml:space="preserve">
+    <value>Không trang sau nằm trong máng.</value>
+  </data>
+  <data name="PdfNoPermissionToExtractContent" xml:space="preserve">
+    <value>Bạn không có quyền sao chép nội dung từ file '{0}'.</value>
+  </data>
+  <data name="ErrorSaving" xml:space="preserve">
+    <value>Có lỗi khi lưu tập tin.</value>
+  </data>
+  <data name="OfN" xml:space="preserve">
+    <value>of {0}</value>
+  </data>
+  <data name="BatchError" xml:space="preserve">
+    <value>Có lỗi khi scan hàng loạt.</value>
+  </data>
+  <data name="BatchStatusCancelled" xml:space="preserve">
+    <value>Hủy Scan hàng loạt.</value>
+  </data>
+  <data name="BatchStatusCancelling" xml:space="preserve">
+    <value>Đang dừng....</value>
+  </data>
+  <data name="BatchStatusComplete" xml:space="preserve">
+    <value>Scan hàng loạt thành công.</value>
+  </data>
+  <data name="BatchStatusError" xml:space="preserve">
+    <value>Scan hàng loạt dừng lại do lỗi.</value>
+  </data>
+  <data name="BatchStatusPage" xml:space="preserve">
+    <value>Trang quét {0}...</value>
+  </data>
+  <data name="BatchStatusScanPage" xml:space="preserve">
+    <value>Đang quét trang {0} (Quét {1})...</value>
+  </data>
+  <data name="BatchStatusWaitingForScan" xml:space="preserve">
+    <value>Đang chờ quét {0}...</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Hủy</value>
+  </data>
+  <data name="Close" xml:space="preserve">
+    <value>Đóng</value>
+  </data>
+  <data name="BatchStatusSaving" xml:space="preserve">
+    <value>Lưu vào nhiều file...</value>
+  </data>
+  <data name="NoDuplexSupport" xml:space="preserve">
+    <value>Máy quét chọn không hỗ trợ sử dụng hai mặt. Nếu máy quét của bạn phải hỗ trợ hai mặt, hãy thử sử dụng một trình điều khiển khác nhau.</value>
+  </data>
+  <data name="ImportingFormat" xml:space="preserve">
+    <value>Đang chèn {0}...</value>
+  </data>
+  <data name="ImportProgress" xml:space="preserve">
+    <value>Chèn xong</value>
+  </data>
+  <data name="Recovering" xml:space="preserve">
+    <value>Đang Khôi Phục...</value>
+  </data>
+  <data name="RecoveryProgress" xml:space="preserve">
+    <value>Khôi Phục thành công</value>
+  </data>
+  <data name="SaveImages" xml:space="preserve">
+    <value>Lưu Ảnh</value>
+  </data>
+  <data name="SaveImagesProgress" xml:space="preserve">
+    <value>Lưu hình ảnh tiến độ</value>
+  </data>
+  <data name="SavePdf" xml:space="preserve">
+    <value>Lưu PDF</value>
+  </data>
+  <data name="SavePdfProgress" xml:space="preserve">
+    <value>Lưu Tiến độ PDF</value>
+  </data>
+  <data name="SavingFormat" xml:space="preserve">
+    <value>Đang Lưu..{0}...</value>
+  </data>
+  <data name="Print" xml:space="preserve">
+    <value>In</value>
+  </data>
+  <data name="Copying" xml:space="preserve">
+    <value>Đang sao chép...</value>
+  </data>
+  <data name="CopyProgress" xml:space="preserve">
+    <value>Tiến trình sao chép</value>
+  </data>
+  <data name="Importing" xml:space="preserve">
+    <value>Đang chèn...</value>
+  </data>
+  <data name="EmailPdf" xml:space="preserve">
+    <value>Email PDF</value>
+  </data>
+  <data name="EmailPdfProgress" xml:space="preserve">
+    <value>Email PDF Progress</value>
+  </data>
+  <data name="AutoSaveError" xml:space="preserve">
+    <value>Có lỗi xảy ra khi lưu tự động.</value>
+  </data>
+  <data name="FileTypeAllFiles" xml:space="preserve">
+    <value>Tất cả các tập tin</value>
+  </data>
+  <data name="FileTypeImageFiles" xml:space="preserve">
+    <value>TỆP ẢNH</value>
+  </data>
+  <data name="DeviceBusy" xml:space="preserve">
+    <value>Máy quét chọn đang bận.</value>
+  </data>
+  <data name="DeviceCoverOpen" xml:space="preserve">
+    <value>Nắp máy quét mở.</value>
+  </data>
+  <data name="DevicePaperJam" xml:space="preserve">
+    <value>Máy quét có kẹt giấy.</value>
+  </data>
+  <data name="DeviceWarmingUp" xml:space="preserve">
+    <value>Máy quét đang ấm dần lên.</value>
+  </data>
+  <data name="OcrUpdateAvailable" xml:space="preserve">
+    <value>OCR có bản cập nhật mới..</value>
+  </data>
+  <data name="ImageSaved" xml:space="preserve">
+    <value>Lưu ảnh.</value>
+  </data>
+  <data name="ImagesSaved" xml:space="preserve">
+    <value>{0} hình ảnh được lưu.</value>
+  </data>
+  <data name="PdfSaved" xml:space="preserve">
+    <value>Lưu PDF.</value>
+  </data>
+  <data name="NamedPageSizeFormat" xml:space="preserve">
+    <value>{0} ({1}x{2} {3})</value>
+  </data>
+  <data name="ConfirmDelete" xml:space="preserve">
+    <value>Are you sure you want to delete "{0}"?</value>
+  </data>
+  <data name="FileInUse" xml:space="preserve">
+    <value>Các tập tin có thể không được ghi đè bởi vì nó hiện đang sử dụng.</value>
+  </data>
+  <data name="AutoDeskewing" xml:space="preserve">
+    <value>Deskewing...</value>
+  </data>
+  <data name="AutoDeskewProgress" xml:space="preserve">
+    <value>Deskew Progress</value>
+  </data>
+  <data name="DownloadNeeded" xml:space="preserve">
+    <value>Cần Tải Về</value>
+  </data>
+  <data name="PdfImportComponentNeeded" xml:space="preserve">
+    <value>Cần phải cài thêm phần mềm để nhập tập tin PDF này vào. Bạn có muốn tải ngay?</value>
+  </data>
+  <data name="ConfirmCancelBatch" xml:space="preserve">
+    <value>Bạn chắc chắn là muốn hủy lệnh scan liên tục này?</value>
+  </data>
+  <data name="CancelBatch" xml:space="preserve">
+    <value>Hủy lệnh</value>
+  </data>
+  <data name="Donate" xml:space="preserve">
+    <value>Donate</value>
+  </data>
+  <data name="DonatePrompt" xml:space="preserve">
+    <value>NAPS2 miễn phí hoàn toàn. Bạn có thể ủng hộ tùy ý..</value>
+  </data>
+  <data name="SaneNotAvailable" xml:space="preserve">
+    <value>The SANE driver is not available. Make sure to install the required packages:</value>
+  </data>
+  <data name="TesseractNotAvailable" xml:space="preserve">
+    <value>OCR chưa được cài. Vui lòng cài đặt gói liên quan để thao tác.:</value>
+  </data>
+  <data name="DriverNotSupported" xml:space="preserve">
+    <value>Driver bạn đang chọn không hỗ trợ hệ điều hành này..</value>
+  </data>
+  <data name="OcrProgress" xml:space="preserve">
+    <value>Quá trình OCR</value>
+  </data>
+  <data name="RunningOcr" xml:space="preserve">
+    <value>Đang thực hiện OCR...</value>
+  </data>
+  <data name="UpdateProgress" xml:space="preserve">
+    <value>Tiến trình cập nhật</value>
+  </data>
+  <data name="Updating" xml:space="preserve">
+    <value>Đang cập nhật...</value>
+  </data>
+  <data name="NoUpdates" xml:space="preserve">
+    <value>Chưa có phiên bản mới..</value>
+  </data>
+  <data name="CheckingForUpdates" xml:space="preserve">
+    <value>Đang kiểm tra...</value>
+  </data>
+  <data name="UpdateError" xml:space="preserve">
+    <value>Có lỗi khi đang cập nhật..</value>
+  </data>
+  <data name="Install" xml:space="preserve">
+    <value>Install {0}</value>
+  </data>
+  <data name="UpdateAvailable" xml:space="preserve">
+    <value>Đã có phiên bản mới hơn..</value>
+  </data>
+  <data name="AuthError" xml:space="preserve">
+    <value>Có lỗi khi đang xác thực..</value>
+  </data>
+  <data name="UploadingEmail" xml:space="preserve">
+    <value>Đang tải lên email...</value>
+  </data>
+  <data name="ErrorEmailing" xml:space="preserve">
+    <value>Có lỗi khi đang gửi email..</value>
+  </data>
+  <data name="Naps2Server" xml:space="preserve">
+    <value>NAPS2 Server</value>
+  </data>
+  <data name="ServerStarted" xml:space="preserve">
+    <value>Server started</value>
+  </data>
+  <data name="ListeningOnPort" xml:space="preserve">
+    <value>Listening on port {0}</value>
+  </data>
+  <data name="ScanProgressPage" xml:space="preserve">
+    <value>Trang quét {0}...</value>
+  </data>
+  <data name="AcquiringData" xml:space="preserve">
+    <value>Thu thập dữ liệu...</value>
+  </data>
+</root>

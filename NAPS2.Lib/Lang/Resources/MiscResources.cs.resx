@@ -1,0 +1,396 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="ChooseProfile" xml:space="preserve">
+    <value>Vybrat profil</value>
+  </data>
+  <data name="Clear" xml:space="preserve">
+    <value>Vymazat</value>
+  </data>
+  <data name="ConfirmClearItems" xml:space="preserve">
+    <value>Opravdu si přejete smazat položky {0}?</value>
+  </data>
+  <data name="ConfirmDeleteItems" xml:space="preserve">
+    <value>Opravdu si přejete smazat položky {0}?</value>
+  </data>
+  <data name="ConfirmDeleteMultipleProfiles" xml:space="preserve">
+    <value>Jste si jisti, že chcete smazat profily {0}? </value>
+  </data>
+  <data name="ConfirmDeleteSingleProfile" xml:space="preserve">
+    <value>Jste si jisti, že chcete smazat profil {0}?</value>
+  </data>
+  <data name="ConfirmOverwriteFile" xml:space="preserve">
+    <value>Soubor {0} již existuje. Přejete si jej přepsat?</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Odstranit</value>
+  </data>
+  <data name="DeviceNotFound" xml:space="preserve">
+    <value>Vybraný skener nebyl nalezen.</value>
+  </data>
+  <data name="DeviceOffline" xml:space="preserve">
+    <value>Vybraný skener je vypnutý.</value>
+  </data>
+  <data name="DontHavePermission" xml:space="preserve">
+    <value>Nemáte oprávnění zapisovat do tohoto umístění.</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>Chyba</value>
+  </data>
+  <data name="FileTypeBmp" xml:space="preserve">
+    <value>Soubory Bitmap (*.bmp)</value>
+  </data>
+  <data name="FileTypeEmf" xml:space="preserve">
+    <value>Rozšířený Windows MetaFile (*.emf)</value>
+  </data>
+  <data name="FileTypeExif" xml:space="preserve">
+    <value>Soubor ExIF (*.exif)</value>
+  </data>
+  <data name="FileTypeGif" xml:space="preserve">
+    <value>Soubor GIF (*.gif)</value>
+  </data>
+  <data name="FileTypeJpeg" xml:space="preserve">
+    <value>Soubor JPEG (*.jpg, *.jpeg) </value>
+  </data>
+  <data name="FileTypePdf" xml:space="preserve">
+    <value>PDF dokument (*.pdf)</value>
+  </data>
+  <data name="FileTypePng" xml:space="preserve">
+    <value>Soubor PNG (*.png)</value>
+  </data>
+  <data name="FileTypeTiff" xml:space="preserve">
+    <value>Soubor TIFF (*.tiff, *.tif)</value>
+  </data>
+  <data name="NameMissing" xml:space="preserve">
+    <value>Název chybí.</value>
+  </data>
+  <data name="NAPS2" xml:space="preserve">
+    <value>NAPS2</value>
+  </data>
+  <data name="NoDeviceSelected" xml:space="preserve">
+    <value>Nebylo vybráno žádné zařízení.</value>
+  </data>
+  <data name="NoDevicesFound" xml:space="preserve">
+    <value>Nenalezeno žádné skenovací zařízení.</value>
+  </data>
+  <data name="OverwriteFile" xml:space="preserve">
+    <value>Přepsat soubor</value>
+  </data>
+  <data name="PdfStatus" xml:space="preserve">
+    <value>{0} z {1}</value>
+  </data>
+  <data name="ScannedImage" xml:space="preserve">
+    <value>Naskenovaný obrázek</value>
+  </data>
+  <data name="SelectProfileBeforeScan" xml:space="preserve">
+    <value>Vyberte profil před spuštěním skenování.</value>
+  </data>
+  <data name="UnknownDriverError" xml:space="preserve">
+    <value>Došlo k chybě ovladače skeneru.</value>
+  </data>
+  <data name="Version" xml:space="preserve">
+    <value>Verze {0}</value>
+  </data>
+  <data name="EmailError" xml:space="preserve">
+    <value>Při pokusu o odeslání e-mailu došlo k chybě.</value>
+  </data>
+  <data name="InstallComplete" xml:space="preserve">
+    <value>Instalace dokončena</value>
+  </data>
+  <data name="InstallCompletePromptRestart" xml:space="preserve">
+    <value>Instalace dokončena. Chcete nyní restartovat NAPS2?</value>
+  </data>
+  <data name="InstallFailed" xml:space="preserve">
+    <value>Instalace selhala.</value>
+  </data>
+  <data name="InstallFailedTitle" xml:space="preserve">
+    <value>Instalace selhala</value>
+  </data>
+  <data name="AllCount" xml:space="preserve">
+    <value>Vše ({0})</value>
+  </data>
+  <data name="SelectedCount" xml:space="preserve">
+    <value>Vybráno ({0})</value>
+  </data>
+  <data name="EstimatedDownloadSize" xml:space="preserve">
+    <value>Odhadovaná velikost stažení: {0} MB</value>
+  </data>
+  <data name="FilesProgressFormat" xml:space="preserve">
+    <value>{0}/{1} souborů</value>
+  </data>
+  <data name="SizeProgress" xml:space="preserve">
+    <value>{0}/{1} MB</value>
+  </data>
+  <data name="ImportErrorCouldNot" xml:space="preserve">
+    <value>Soubor '{0}' nelze importovat.</value>
+  </data>
+  <data name="ImportErrorNAPS2Pdf" xml:space="preserve">
+    <value>Soubor '{0}' nelze importovat. Importovány mohou být poze soubory PDF vytvořené NAPS2.</value>
+  </data>
+  <data name="DownloadError" xml:space="preserve">
+    <value>Chyba stahování</value>
+  </data>
+  <data name="FilesCouldNotBeDownloaded" xml:space="preserve">
+    <value>Jeden nebo více souborů nelze stáhnout.</value>
+  </data>
+  <data name="CustomPageSizeFormat" xml:space="preserve">
+    <value>Vlastní ({0} × {1} {2})</value>
+  </data>
+  <data name="Scan" xml:space="preserve">
+    <value>Skenovat</value>
+  </data>
+  <data name="ConfirmResetImages" xml:space="preserve">
+    <value>Jste si jisti, že chcete zrušit změny obrázků {0}?</value>
+  </data>
+  <data name="ResetImage" xml:space="preserve">
+    <value>Resetovat obrázek</value>
+  </data>
+  <data name="ExitWithUnsavedChanges" xml:space="preserve">
+    <value>Máte neuložené změny. Jste si jisti, že chcete odejít a zahodit tyto změny?</value>
+  </data>
+  <data name="ExitWithActiveOperations" xml:space="preserve">
+    <value>Probíhá operace. Určitě chcete odejít a přerušit tuto operaci?</value>
+  </data>
+  <data name="UnsavedChanges" xml:space="preserve">
+    <value>Neuložené změny</value>
+  </data>
+  <data name="ActiveOperations" xml:space="preserve">
+    <value>Probíhá operace</value>
+  </data>
+  <data name="ScanPageProgress" xml:space="preserve">
+    <value>Skenuje se stránka {0}</value>
+  </data>
+  <data name="NoFeederSupport" xml:space="preserve">
+    <value>Vybraný skener nepodporuje použití podavače. Pokud váš skener má podavač, zkuste použít jiný ovladač.</value>
+  </data>
+  <data name="NoPagesInFeeder" xml:space="preserve">
+    <value>V podavači nejsou žádné papíry.</value>
+  </data>
+  <data name="PdfNoPermissionToExtractContent" xml:space="preserve">
+    <value>Nemáte oprávnění kopírovat obsah ze souboru '{0}'.</value>
+  </data>
+  <data name="ErrorSaving" xml:space="preserve">
+    <value>Při pokusu o uložení souboru došlo k chybě.</value>
+  </data>
+  <data name="OfN" xml:space="preserve">
+    <value>z {0}</value>
+  </data>
+  <data name="BatchError" xml:space="preserve">
+    <value>Během dávkového skenování došlo k chybě.</value>
+  </data>
+  <data name="BatchStatusCancelled" xml:space="preserve">
+    <value>Dávka byla přerušena.</value>
+  </data>
+  <data name="BatchStatusCancelling" xml:space="preserve">
+    <value>Ruší se....</value>
+  </data>
+  <data name="BatchStatusComplete" xml:space="preserve">
+    <value>Dávka byla úspěšně dokončena.</value>
+  </data>
+  <data name="BatchStatusError" xml:space="preserve">
+    <value>Dávka byla zastavena kvůli chybě.</value>
+  </data>
+  <data name="BatchStatusPage" xml:space="preserve">
+    <value>Skenuje se stránka {0}...</value>
+  </data>
+  <data name="BatchStatusScanPage" xml:space="preserve">
+    <value>Skenuje se stránka {0} (sken {1})...</value>
+  </data>
+  <data name="BatchStatusWaitingForScan" xml:space="preserve">
+    <value>Čekání na sken {0}...</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Zrušit</value>
+  </data>
+  <data name="Close" xml:space="preserve">
+    <value>Zavřít</value>
+  </data>
+  <data name="BatchStatusSaving" xml:space="preserve">
+    <value>Ukládání výsledků dávky...</value>
+  </data>
+  <data name="NoDuplexSupport" xml:space="preserve">
+    <value>Vybraný skener nepodporuje použití oboustranný mód. Pokud by měl podporovat oboustranný mód, zkuste použít jiný ovladač.</value>
+  </data>
+  <data name="ImportingFormat" xml:space="preserve">
+    <value>Importuje se {0}...</value>
+  </data>
+  <data name="ImportProgress" xml:space="preserve">
+    <value>Průběh importu</value>
+  </data>
+  <data name="Recovering" xml:space="preserve">
+    <value>Obnovuje se...</value>
+  </data>
+  <data name="RecoveryProgress" xml:space="preserve">
+    <value>Průběh obnovení</value>
+  </data>
+  <data name="SaveImages" xml:space="preserve">
+    <value>Uložit obrázek</value>
+  </data>
+  <data name="SaveImagesProgress" xml:space="preserve">
+    <value>Průběh ukládání obrázků</value>
+  </data>
+  <data name="SavePdf" xml:space="preserve">
+    <value>Uložit PDF</value>
+  </data>
+  <data name="SavePdfProgress" xml:space="preserve">
+    <value>Průběh ukládání PDF</value>
+  </data>
+  <data name="SavingFormat" xml:space="preserve">
+    <value>Ukládá se {0}...</value>
+  </data>
+  <data name="Print" xml:space="preserve">
+    <value>Tisk</value>
+  </data>
+  <data name="Copying" xml:space="preserve">
+    <value>Kopírování...</value>
+  </data>
+  <data name="CopyProgress" xml:space="preserve">
+    <value>Průběh kopírování</value>
+  </data>
+  <data name="Importing" xml:space="preserve">
+    <value>Importuje se...</value>
+  </data>
+  <data name="EmailPdf" xml:space="preserve">
+    <value>PDF e-mailem</value>
+  </data>
+  <data name="EmailPdfProgress" xml:space="preserve">
+    <value>Průběh PDF e-mailem</value>
+  </data>
+  <data name="AutoSaveError" xml:space="preserve">
+    <value>Při pokusu o automatické uložení došlo k chybě.</value>
+  </data>
+  <data name="FileTypeAllFiles" xml:space="preserve">
+    <value>Všechny soubory</value>
+  </data>
+  <data name="FileTypeImageFiles" xml:space="preserve">
+    <value>Soubory obrázků</value>
+  </data>
+  <data name="DeviceBusy" xml:space="preserve">
+    <value>Vybraný skener je zaneprázdněn.</value>
+  </data>
+  <data name="DeviceCoverOpen" xml:space="preserve">
+    <value>Víko skeneru je otevřené.</value>
+  </data>
+  <data name="DevicePaperJam" xml:space="preserve">
+    <value>Ve skeneru je zmuchlaný papír.</value>
+  </data>
+  <data name="DeviceWarmingUp" xml:space="preserve">
+    <value>Skener se rozehřívá.</value>
+  </data>
+  <data name="OcrUpdateAvailable" xml:space="preserve">
+    <value>Je k dispozici aktualizace OCR.</value>
+  </data>
+  <data name="ImageSaved" xml:space="preserve">
+    <value>Obrázek uložen.</value>
+  </data>
+  <data name="ImagesSaved" xml:space="preserve">
+    <value>{0} obrázků uloženo.</value>
+  </data>
+  <data name="PdfSaved" xml:space="preserve">
+    <value>PDF uloženo.</value>
+  </data>
+  <data name="NamedPageSizeFormat" xml:space="preserve">
+    <value>{0} ({1} × {2} {3})</value>
+  </data>
+  <data name="ConfirmDelete" xml:space="preserve">
+    <value>Are you sure you want to delete "{0}"?</value>
+  </data>
+  <data name="FileInUse" xml:space="preserve">
+    <value>Soubor nemůže být přepsán, protože je právě používán.</value>
+  </data>
+  <data name="AutoDeskewing" xml:space="preserve">
+    <value>Odstraňování zešikmení...</value>
+  </data>
+  <data name="AutoDeskewProgress" xml:space="preserve">
+    <value>Průběh odstraňování zešikmení</value>
+  </data>
+  <data name="DownloadNeeded" xml:space="preserve">
+    <value>Potřebné stažení</value>
+  </data>
+  <data name="PdfImportComponentNeeded" xml:space="preserve">
+    <value>K importu tohoto PDF je nutná doplňující komponenta. Chcete ji teď stáhnout?</value>
+  </data>
+  <data name="ConfirmCancelBatch" xml:space="preserve">
+    <value>Určitě chcete přerušit dávkové skenování?</value>
+  </data>
+  <data name="CancelBatch" xml:space="preserve">
+    <value>Přerušit dávku</value>
+  </data>
+  <data name="Donate" xml:space="preserve">
+    <value>Darovat</value>
+  </data>
+  <data name="DonatePrompt" xml:space="preserve">
+    <value>NAPS2 je zcela zdarma. Zvažte poskytnutí daru.</value>
+  </data>
+  <data name="SaneNotAvailable" xml:space="preserve">
+    <value>Ovladač SANE není dostupný. Ověřte instalaci požadovaných balíčků:</value>
+  </data>
+  <data name="TesseractNotAvailable" xml:space="preserve">
+    <value>OCR není dostupné. Ověřte instalaci požadovaného balíčku:</value>
+  </data>
+  <data name="DriverNotSupported" xml:space="preserve">
+    <value>Vybraný ovladač není na tomto systému podporován.</value>
+  </data>
+  <data name="OcrProgress" xml:space="preserve">
+    <value>Průběh OCR</value>
+  </data>
+  <data name="RunningOcr" xml:space="preserve">
+    <value>Spuštěno OCR...</value>
+  </data>
+  <data name="UpdateProgress" xml:space="preserve">
+    <value>Průběh aktualizace</value>
+  </data>
+  <data name="Updating" xml:space="preserve">
+    <value>Aktualizace...</value>
+  </data>
+  <data name="NoUpdates" xml:space="preserve">
+    <value>Nejsou dostupné aktualizace.</value>
+  </data>
+  <data name="CheckingForUpdates" xml:space="preserve">
+    <value>Vyhledávání...</value>
+  </data>
+  <data name="UpdateError" xml:space="preserve">
+    <value>Při pokusu o aktualizaci došlo k chybě..</value>
+  </data>
+  <data name="Install" xml:space="preserve">
+    <value>Instalovat {0}</value>
+  </data>
+  <data name="UpdateAvailable" xml:space="preserve">
+    <value>Je dostupná aktualizace.</value>
+  </data>
+  <data name="AuthError" xml:space="preserve">
+    <value>Došlo k chybě při pokusu o autorizaci.</value>
+  </data>
+  <data name="UploadingEmail" xml:space="preserve">
+    <value>Odesílání emailu...</value>
+  </data>
+  <data name="ErrorEmailing" xml:space="preserve">
+    <value>Došlo k chybě při pokusu o odeslání emailu.</value>
+  </data>
+  <data name="Naps2Server" xml:space="preserve">
+    <value>NAPS2 Server</value>
+  </data>
+  <data name="ServerStarted" xml:space="preserve">
+    <value>Server started</value>
+  </data>
+  <data name="ListeningOnPort" xml:space="preserve">
+    <value>Listening on port {0}</value>
+  </data>
+  <data name="ScanProgressPage" xml:space="preserve">
+    <value>Skenuje se stránka {0}...</value>
+  </data>
+  <data name="AcquiringData" xml:space="preserve">
+    <value>Získávání dat...</value>
+  </data>
+</root>
