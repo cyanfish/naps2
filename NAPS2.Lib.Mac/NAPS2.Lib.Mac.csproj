@@ -1,7 +1,8 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFrameworks>net6;net6-macos10.15</TargetFrameworks>
+        <!-- TODO: Add net6-macos10.15 target once Eto supports it for the latest dotnet -->
+        <TargetFrameworks>net6</TargetFrameworks>
         <Nullable>enable</Nullable>
         <GenerateResourceUsePreserializedResources>true</GenerateResourceUsePreserializedResources>
         <RootNamespace>NAPS2</RootNamespace>
@@ -15,7 +16,8 @@
 <!--    <Import Project="..\NAPS2.Setup\LibUsers.targets" />-->
 
     <ItemGroup>
-<!--        <ProjectReference Include="..\NAPS2.Lib\NAPS2.Lib.csproj" />-->
+        <ProjectReference Include="..\NAPS2.Images.Mac\NAPS2.Images.Mac.csproj" />
+        <ProjectReference Include="..\NAPS2.Lib\NAPS2.Lib.csproj" />
         <PackageReference Include="Eto.Forms" Version="2.7.0" />
         <PackageReference Include="Eto.Platform.Mac64" Version="2.7.0" Condition="'$(TargetFramework)' == 'net6'" />
         <PackageReference Include="Eto.Platform.XamMac2" Version="2.7.0" Condition="'$(TargetFramework)' == 'net6-macos10.15'" />

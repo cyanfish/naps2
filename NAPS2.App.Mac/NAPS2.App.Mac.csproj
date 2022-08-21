@@ -1,0 +1,39 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6</TargetFramework>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>NAPS2</RootNamespace>
+    <AssemblyName>NAPS2</AssemblyName>
+    <Version>7.0.1</Version>
+    <ApplicationIcon>../NAPS2.Lib/Icons/favicon.ico</ApplicationIcon>
+
+    <SelfContained>true</SelfContained>
+    <PublishSingleFile>true</PublishSingleFile>
+    <PublishTrimmed>true</PublishTrimmed>
+
+    <!-- TODO: Do we need a separate project for x64? Multiple RuntimeIdentifiers fails with SelfContained. -->
+    <RuntimeIdentifier>osx-arm64</RuntimeIdentifier>
+
+    <Title>NAPS2 (Not Another PDF Scanner 2)</Title>
+    <Product>NAPS2 (Not Another PDF Scanner 2)</Product>
+    <Copyright>Copyright 2009, 2012-2022 NAPS2 Contributors</Copyright>
+  </PropertyGroup>
+
+  <Import Project="..\NAPS2.Setup\CommonTargets.targets" />
+  <Import Project="..\NAPS2.Setup\NativeLibs.targets" />
+  <Import Project="..\NAPS2.Setup\SdkUsers.targets" />
+  
+  <ItemGroup>
+    <ProjectReference Include="..\NAPS2.Lib.Mac\NAPS2.Lib.Mac.csproj" />
+    <PackageReference Include="Eto.Platform.Mac64" Version="2.7.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ContentWithTargetPath Include="..\NAPS2.Setup\appsettings.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <Link>appsettings.xml</Link>
+      <TargetPath>appsettings.xml</TargetPath>
+    </ContentWithTargetPath>
+  </ItemGroup>
+</Project>

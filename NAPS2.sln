@@ -62,6 +62,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NAPS2.Escl.Client", "NAPS2.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NAPS2.Escl.Tests", "NAPS2.Escl.Tests\NAPS2.Escl.Tests.csproj", "{ECD69481-CD4D-4EEC-A3BA-612DB29F13B3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NAPS2.App.Mac", "NAPS2.App.Mac\NAPS2.App.Mac.csproj", "{A280B315-3670-484D-B7A1-294E3DE56E7E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -338,6 +340,18 @@ Global
 		{ECD69481-CD4D-4EEC-A3BA-612DB29F13B3}.Standalone|Any CPU.Build.0 = Debug|Any CPU
 		{ECD69481-CD4D-4EEC-A3BA-612DB29F13B3}.Tools|Any CPU.ActiveCfg = Debug|Any CPU
 		{ECD69481-CD4D-4EEC-A3BA-612DB29F13B3}.Tools|Any CPU.Build.0 = Debug|Any CPU
+		{A280B315-3670-484D-B7A1-294E3DE56E7E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A280B315-3670-484D-B7A1-294E3DE56E7E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A280B315-3670-484D-B7A1-294E3DE56E7E}.DebugLang|Any CPU.ActiveCfg = Debug|Any CPU
+		{A280B315-3670-484D-B7A1-294E3DE56E7E}.DebugLang|Any CPU.Build.0 = Debug|Any CPU
+		{A280B315-3670-484D-B7A1-294E3DE56E7E}.InstallerEXE|Any CPU.ActiveCfg = Debug|Any CPU
+		{A280B315-3670-484D-B7A1-294E3DE56E7E}.InstallerEXE|Any CPU.Build.0 = Debug|Any CPU
+		{A280B315-3670-484D-B7A1-294E3DE56E7E}.InstallerMSI|Any CPU.ActiveCfg = Debug|Any CPU
+		{A280B315-3670-484D-B7A1-294E3DE56E7E}.InstallerMSI|Any CPU.Build.0 = Debug|Any CPU
+		{A280B315-3670-484D-B7A1-294E3DE56E7E}.Standalone|Any CPU.ActiveCfg = Debug|Any CPU
+		{A280B315-3670-484D-B7A1-294E3DE56E7E}.Standalone|Any CPU.Build.0 = Debug|Any CPU
+		{A280B315-3670-484D-B7A1-294E3DE56E7E}.Tools|Any CPU.ActiveCfg = Debug|Any CPU
+		{A280B315-3670-484D-B7A1-294E3DE56E7E}.Tools|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

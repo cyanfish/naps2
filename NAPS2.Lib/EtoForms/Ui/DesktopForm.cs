@@ -433,17 +433,22 @@ public abstract class DesktopForm : EtoFormBase
     {
     }
 
-    protected abstract void ConfigureToolbar();
+    protected virtual void ConfigureToolbar()
+    {
+    }
 
-    protected abstract void CreateToolbarButton(Command command);
+    protected virtual void CreateToolbarButton(Command command) => throw new InvalidOperationException();
 
-    protected abstract void CreateToolbarButtonWithMenu(Command command, MenuProvider menu);
+    protected virtual void CreateToolbarButtonWithMenu(Command command, MenuProvider menu) =>
+        throw new InvalidOperationException();
 
-    protected abstract void CreateToolbarMenu(Command command, MenuProvider menu);
+    protected virtual void CreateToolbarMenu(Command command, MenuProvider menu) =>
+        throw new InvalidOperationException();
 
-    protected abstract void CreateToolbarStackedButtons(Command command1, Command command2);
+    protected virtual void CreateToolbarStackedButtons(Command command1, Command command2) =>
+        throw new InvalidOperationException();
 
-    protected abstract void CreateToolbarSeparator();
+    protected virtual void CreateToolbarSeparator() => throw new InvalidOperationException();
 
     protected virtual void SetContent(Control content)
     {

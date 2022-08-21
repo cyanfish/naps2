@@ -4,19 +4,18 @@ namespace NAPS2.Images.Mac;
 
 public class MacImage : IMemoryImage
 {
-    private readonly NSImage _image;
     internal readonly NSBitmapImageRep _imageRep;
 
     public MacImage(NSImage image)
     {
-        _image = image;
+        NsImage = image;
         // TODO: Better error checking
         lock (MacImageContext.ConstructorLock)
         {
 #if MONOMAC
-            _imageRep = new NSBitmapImageRep(_image.Representations()[0].Handle, false);
+            _imageRep = new NSBitmapImageRep(Image.Representations()[0].Handle, false);
 #else
-            _imageRep = (NSBitmapImageRep) _image.Representations()[0];
+            _imageRep = (NSBitmapImageRep) NsImage.Representations()[0];
 #endif
         }
         // TODO: Also verify color spaces.
@@ -45,23 +44,25 @@ public class MacImage : IMemoryImage
         }
     }
 
+    public NSImage NsImage { get; }
+
     public void Dispose()
     {
-        _image.Dispose();
+        Image.Dispose();
         // TODO: Does this need to dispose the imageRep?
     }
 
     public int Width => (int) _imageRep.PixelsWide;
     public int Height => (int) _imageRep.PixelsHigh;
-    public float HorizontalResolution => (float) _image.Size.Width.ToDouble() / Width * 72;
-    public float VerticalResolution => (float) _image.Size.Height.ToDouble() / Height * 72;
+    public float HorizontalResolution => (float) Image.Size.Width.ToDouble() / Width * 72;
+    public float VerticalResolution => (float) Image.Size.Height.ToDouble() / Height * 72;
 
     public void SetResolution(float xDpi, float yDpi)
     {
         // TODO: Image size or imagerep size?
         if (xDpi > 0 && yDpi > 0)
         {
-            _image.Size = new CGSize(xDpi / 72 * Width, yDpi / 72 * Height);
+            Image.Size = new CGSize(xDpi / 72 * Width, yDpi / 72 * Height);
         }
     }
 
@@ -93,6 +94,8 @@ public class MacImage : IMemoryImage
     }
 
     public ImageFileFormat OriginalFileFormat { get; set; }
+
+    public NSImage Image => NsImage;
 
     public void Save(string path, ImageFileFormat imageFormat = ImageFileFormat.Unspecified, int quality = -1)
     {
@@ -156,9 +159,9 @@ public class MacImage : IMemoryImage
             }
 
 #if MONOMAC
-            var nsImage = new NSImage(_image.Copy().Handle, true);
+            var nsImage = new NSImage(Image.Copy().Handle, true);
 #else
-            var nsImage = (NSImage) _image.Copy();
+            var nsImage = (NSImage) NsImage.Copy();
 #endif
             return new MacImage(nsImage)
             {
