@@ -58,5 +58,5 @@ public class LanguageSelectionTests : AppiumTests
         return _session.FindElementsByTagName("MenuItem");
     }
 
-    // TODO: As part of language switching, check several languages (one LTR: fr, one RTL: he, one country-specific LTR: pt-BR); and check several strings (from each NAPS2.Sdk, NAPS2.Lib.Common, NAPS2.Lib.WinForms)
+    // TODO: As part of language switching, check several languages (one LTR: fr, one RTL: he, one country-specific LTR: pt-BR); and check several strings (from each NAPS2.Sdk, NAPS2.Lib, NAPS2.Lib.WinForms)
 }

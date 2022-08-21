@@ -14,7 +14,7 @@
   <Import Project="..\NAPS2.Setup\LibUsers.targets" />
 
   <ItemGroup>
-    <ProjectReference Include="..\NAPS2.Lib.Common\NAPS2.Lib.Common.csproj" />
+    <ProjectReference Include="..\NAPS2.Lib\NAPS2.Lib.csproj" />
     <PackageReference Include="CommandLineParser" Version="2.9.1" />
   </ItemGroup>
   

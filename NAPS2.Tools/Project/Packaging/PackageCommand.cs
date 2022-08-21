@@ -34,7 +34,7 @@ public static class PackageCommand
     {
         var pkgInfo = new PackageInfo(platform, ProjectHelper.GetProjectVersion("NAPS2.App.WinForms"));
         foreach (var project in new[]
-                     { "NAPS2.Sdk", "NAPS2.Lib.Common", "NAPS2.App.Worker", "NAPS2.App.Console", "NAPS2.App.WinForms" })
+                     { "NAPS2.Sdk", "NAPS2.Lib", "NAPS2.App.Worker", "NAPS2.App.Console", "NAPS2.App.WinForms" })
         {
             var buildPath = Path.Combine(Paths.SolutionRoot, project, "bin", preferredConfig, "net462");
             if (!Directory.Exists(buildPath))

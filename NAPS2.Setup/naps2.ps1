@@ -40,7 +40,7 @@ function Set-NAPS2-Version {
 	Set-Assembly-Version ([IO.Path]::Combine($pwd, "$SolutionRoot\NAPS2.App.Worker\Properties\AssemblyInfo.cs")) $Version".*"
 	Set-Assembly-Version ([IO.Path]::Combine($pwd, "$SolutionRoot\NAPS2.App.Server\Properties\AssemblyInfo.cs")) $Version".*"
     Set-Assembly-Version ([IO.Path]::Combine($pwd, "$SolutionRoot\NAPS2.Sdk\Properties\AssemblyInfo.cs")) $Version".*"
-    Set-Assembly-Version ([IO.Path]::Combine($pwd, "$SolutionRoot\NAPS2.Lib.Common\Properties\AssemblyInfo.cs")) $Version".*"
+    Set-Assembly-Version ([IO.Path]::Combine($pwd, "$SolutionRoot\NAPS2.Lib\Properties\AssemblyInfo.cs")) $Version".*"
     Set-Assembly-Version ([IO.Path]::Combine($pwd, "$SolutionRoot\NAPS2.App.Console\Properties\AssemblyInfo.cs")) $Version".*"
     Set-Assembly-Version ([IO.Path]::Combine($pwd, "$SolutionRoot\NAPS2.App.PortableLauncher\Properties\AssemblyInfo.cs")) $Version".*"
     Replace-Content ([IO.Path]::Combine($pwd, "setup.iss")) '^#define AppVersion "[^"]+"' "#define AppVersion `"$Version`""

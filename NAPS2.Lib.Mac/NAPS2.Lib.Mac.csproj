@@ -15,7 +15,7 @@
 <!--    <Import Project="..\NAPS2.Setup\LibUsers.targets" />-->
 
     <ItemGroup>
-<!--        <ProjectReference Include="..\NAPS2.Lib.Common\NAPS2.Lib.Common.csproj" />-->
+<!--        <ProjectReference Include="..\NAPS2.Lib\NAPS2.Lib.csproj" />-->
         <PackageReference Include="Eto.Forms" Version="2.7.0" />
         <PackageReference Include="Eto.Platform.Mac64" Version="2.7.0" Condition="'$(TargetFramework)' == 'net6'" />
         <PackageReference Include="Eto.Platform.XamMac2" Version="2.7.0" Condition="'$(TargetFramework)' == 'net6-macos10.15'" />

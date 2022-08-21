@@ -11,7 +11,7 @@
     <Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
     <Media Id="1" Cabinet="NAPS2.cab" EmbedCab="yes" CompressionLevel="high" />
 
-    <Icon Id="icon.ico" SourceFile="NAPS2.Lib.Common\Icons\favicon.ico"/>
+    <Icon Id="icon.ico" SourceFile="NAPS2.Lib\Icons\favicon.ico"/>
     <Property Id="ARPPRODUCTICON" Value="icon.ico" />
 
     <MajorUpgrade DowngradeErrorMessage="A later version of [ProductName] is already installed. Setup will now exit." />
