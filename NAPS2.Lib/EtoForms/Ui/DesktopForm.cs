@@ -109,6 +109,7 @@ public abstract class DesktopForm : EtoFormBase
         _scanCommand = new ActionCommand(_desktopScanController.ScanDefault)
         {
             ToolBarText = UiStrings.Scan,
+            MenuText = UiStrings.Scan,
             Image = Icons.control_play_blue.ToEtoImage(),
             MacSymbol = "play"
         };
@@ -131,12 +132,15 @@ public abstract class DesktopForm : EtoFormBase
         _ocrCommand = new ActionCommand(_desktopSubFormController.ShowOcrForm)
         {
             ToolBarText = UiStrings.Ocr,
+            MenuText = UiStrings.Ocr,
             Image = Icons.text.ToEtoImage()
         };
         _importCommand = new ActionCommand(() => _desktopController.Import(this))
         {
             ToolBarText = UiStrings.Import,
-            Image = Icons.folder_picture.ToEtoImage()
+            MenuText = UiStrings.Import,
+            Image = Icons.folder_picture.ToEtoImage(),
+            Shortcut = Application.Instance.CommonModifier | Keys.O
         };
         _savePdfCommand = new ActionCommand(SavePdf)
         {
@@ -175,11 +179,14 @@ public abstract class DesktopForm : EtoFormBase
         _printCommand = new ActionCommand(_desktopController.Print)
         {
             ToolBarText = UiStrings.Print,
-            Image = Icons.printer.ToEtoImage()
+            MenuText = UiStrings.Print,
+            Image = Icons.printer.ToEtoImage(),
+            Shortcut = Application.Instance.CommonModifier | Keys.P
         };
         _imageMenuCommand = new Command
         {
             ToolBarText = UiStrings.Image,
+            MenuText = UiStrings.Image,
             Image = Icons.picture_edit.ToEtoImage()
         };
         _viewImageCommand = new ActionCommand(_desktopSubFormController.ShowViewerForm)
@@ -251,12 +258,14 @@ public abstract class DesktopForm : EtoFormBase
         _moveUpCommand = new ActionCommand(_imageListActions.MoveUp)
         {
             ToolBarText = UiStrings.MoveUp,
+            MenuText = UiStrings.MoveUp,
             Image = Icons.arrow_up_small.ToEtoImage(),
             MacSymbol = "arrow.up"
         };
         _moveDownCommand = new ActionCommand(_imageListActions.MoveDown)
         {
             ToolBarText = UiStrings.MoveDown,
+            MenuText = UiStrings.MoveDown,
             Image = Icons.arrow_down_small.ToEtoImage(),
             MacSymbol = "arrow.down"
         };
@@ -290,17 +299,20 @@ public abstract class DesktopForm : EtoFormBase
         _deleteCommand = new ActionCommand(_imageListActions.DeleteSelected)
         {
             ToolBarText = UiStrings.Delete,
+             MenuText = UiStrings.Delete,
             Image = Icons.cross.ToEtoImage()
         };
         _clearAllCommand = new ActionCommand(_imageListActions.DeleteAll)
         {
             ToolBarText = UiStrings.Clear,
             MenuText = UiStrings.ClearAll,
-            Image = Icons.cancel.ToEtoImage()
+            Image = Icons.cancel.ToEtoImage(),
+            Shortcut = Application.Instance.CommonModifier | Keys.Shift | Keys.Delete
         };
         _languageMenuCommand = new Command
         {
             ToolBarText = UiStrings.Language,
+            MenuText = UiStrings.Language,
             Image = Icons.world.ToEtoImage()
         };
         _aboutCommand = new ActionCommand(_desktopSubFormController.ShowAboutForm)
@@ -429,7 +441,7 @@ public abstract class DesktopForm : EtoFormBase
             CreateToolbarButton(_clearAllCommand);
         CreateToolbarSeparator();
         if (!hiddenButtons.HasFlag(ToolbarButtons.Language))
-            CreateToolbarMenu(_languageMenuCommand, new MenuProvider().Dynamic(_languageMenuCommands));
+            CreateToolbarMenu(_languageMenuCommand, GetLanguageMenuProvider());
         if (!hiddenButtons.HasFlag(ToolbarButtons.About))
             CreateToolbarButton(_aboutCommand);
     }
@@ -441,6 +453,11 @@ public abstract class DesktopForm : EtoFormBase
             .Append(_flipCommand)
             .Append(_deskewCommand)
             .Append(_customRotateCommand);
+
+    protected MenuProvider GetLanguageMenuProvider()
+    {
+        return new MenuProvider().Dynamic(_languageMenuCommands);
+    }
 
     protected virtual void AfterLayout()
     {
@@ -462,6 +479,35 @@ public abstract class DesktopForm : EtoFormBase
         throw new InvalidOperationException();
 
     protected virtual void CreateToolbarSeparator() => throw new InvalidOperationException();
+
+    // TODO: Can we generalize this kind of logic?
+    protected SubMenuItem CreateSubMenu(Command menuCommand, MenuProvider menuProvider)
+    {
+        var menuItem = new SubMenuItem
+        {
+            Text = menuCommand.MenuText,
+            Image = menuCommand.Image
+        };
+        menuProvider.Handle(subItems =>
+        {
+            menuItem.Items.Clear();
+            foreach (var subItem in subItems)
+            {
+                switch (subItem)
+                {
+                    case MenuProvider.CommandItem { Command: var command }:
+                        menuItem.Items.Add(new ButtonMenuItem(command));
+                        break;
+                    case MenuProvider.SeparatorItem:
+                        menuItem.Items.Add(new SeparatorMenuItem());
+                        break;
+                    case MenuProvider.SubMenuItem:
+                        throw new NotImplementedException();
+                }
+            }
+        });
+        return menuItem;
+    }
 
     protected virtual void SetContent(Control content)
     {
