@@ -18,7 +18,7 @@ public class WinFormsDesktopForm : DesktopForm
 
     public WinFormsDesktopForm(
         Naps2Config config,
-        KeyboardShortcutManager ksm,
+        // KeyboardShortcutManager ksm,
         INotificationManager notify,
         CultureHelper cultureHelper,
         IProfileManager profileManager,
@@ -31,7 +31,7 @@ public class WinFormsDesktopForm : DesktopForm
         ImageListActions imageListActions,
         DesktopFormProvider desktopFormProvider,
         DesktopSubFormController desktopSubFormController)
-        : base(config, ksm, notify, cultureHelper, profileManager,
+        : base(config, /*ksm,*/ notify, cultureHelper, profileManager,
             imageList, imageTransfer, thumbnailRenderQueue, thumbnailProvider, desktopController, desktopScanController,
             imageListActions, desktopFormProvider, desktopSubFormController)
     {

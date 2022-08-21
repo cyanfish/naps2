@@ -1,11 +1,8 @@
 using Eto.Drawing;
 using Eto.Forms;
-using Eto.WinForms;
-using Eto.WinForms.Forms;
 using NAPS2.ImportExport.Profiles;
 using NAPS2.Scan;
 using NAPS2.Serialization;
-using NAPS2.WinForms;
 
 namespace NAPS2.EtoForms.Ui;
 
@@ -35,17 +32,18 @@ public class ProfilesForm : EtoDialogBase
         _profileTransfer = profileTransfer;
 
         Title = UiStrings.ProfilesFormTitle;
-        Icon = Icons.blueprints_small.ToEtoIcon();
+        Icon = new Icon(1f, Icons.blueprints_small.ToEtoImage());
         Size = new Size(700, 200);
         MinimumSize = new Size(600, 180);
         Resizable = true;
 
-        switch (Handler)
-        {
-            case IWindowsControl windowsControl:
-                windowsControl.UseShellDropManager = false;
-                break;
-        }
+        // TODO: Do this only in WinForms (?)
+        // switch (Handler)
+        // {
+        //     case IWindowsControl windowsControl:
+        //         windowsControl.UseShellDropManager = false;
+        //         break;
+        // }
 
         _listView = EtoPlatform.Current.CreateListView(profileListViewBehavior);
         _scanCommand = new ActionCommand(DoScan)
@@ -188,9 +186,9 @@ public class ProfilesForm : EtoDialogBase
     private void Drop(object? sender, DropEventArgs e)
     {
         // Receive drop data
-        if (_profileTransfer.IsIn(e.Data.ToEto()))
+        if (_profileTransfer.IsIn(e.Data))
         {
-            var data = _profileTransfer.GetFrom(e.Data.ToEto());
+            var data = _profileTransfer.GetFrom(e.Data);
             if (data.ProcessId == Process.GetCurrentProcess().Id)
             {
                 if (data.Locked)
@@ -233,63 +231,64 @@ public class ProfilesForm : EtoDialogBase
 
     private async void DoScan()
     {
-        if (ImageCallback == null)
-        {
-            throw new InvalidOperationException("Image callback not specified");
-        }
-        if (_profileManager.Profiles.Count == 0)
-        {
-            var editSettingsForm = FormFactory.Create<FEditProfile>();
-            editSettingsForm.ScanProfile = new ScanProfile
-            {
-                Version = ScanProfile.CURRENT_VERSION
-            };
-            editSettingsForm.ShowDialog();
-            if (!editSettingsForm.Result)
-            {
-                return;
-            }
-            _profileManager.Mutate(new ListMutation<ScanProfile>.Append(editSettingsForm.ScanProfile), ListSelection.Empty<ScanProfile>());
-            _profileManager.DefaultProfile = editSettingsForm.ScanProfile;
-        }
-        if (SelectedProfile == null)
-        {
-            MessageBox.Show(MiscResources.SelectProfileBeforeScan, MiscResources.ChooseProfile, MessageBoxButtons.OK, MessageBoxType.Warning);
-            return;
-        }
-        if (_profileManager.DefaultProfile == null)
-        {
-            _profileManager.DefaultProfile = SelectedProfile;
-        }
-        var source = await _scanPerformer.PerformScan(SelectedProfile, DefaultScanParams(), this.ToNative().Handle);
-        await source.ForEach(ImageCallback);
-        this.ToNative().Activate();
+        // TODO: Migrate FEditProfile to eto
+        // if (ImageCallback == null)
+        // {
+        //     throw new InvalidOperationException("Image callback not specified");
+        // }
+        // if (_profileManager.Profiles.Count == 0)
+        // {
+        //     var editSettingsForm = FormFactory.Create<FEditProfile>();
+        //     editSettingsForm.ScanProfile = new ScanProfile
+        //     {
+        //         Version = ScanProfile.CURRENT_VERSION
+        //     };
+        //     editSettingsForm.ShowDialog();
+        //     if (!editSettingsForm.Result)
+        //     {
+        //         return;
+        //     }
+        //     _profileManager.Mutate(new ListMutation<ScanProfile>.Append(editSettingsForm.ScanProfile), ListSelection.Empty<ScanProfile>());
+        //     _profileManager.DefaultProfile = editSettingsForm.ScanProfile;
+        // }
+        // if (SelectedProfile == null)
+        // {
+        //     MessageBox.Show(MiscResources.SelectProfileBeforeScan, MiscResources.ChooseProfile, MessageBoxButtons.OK, MessageBoxType.Warning);
+        //     return;
+        // }
+        // if (_profileManager.DefaultProfile == null)
+        // {
+        //     _profileManager.DefaultProfile = SelectedProfile;
+        // }
+        // var source = await _scanPerformer.PerformScan(SelectedProfile, DefaultScanParams(), this.ToNative().Handle);
+        // await source.ForEach(ImageCallback);
+        // this.ToNative().Activate();
     }
 
     private void DoAdd()
     {
-        var fedit = FormFactory.Create<FEditProfile>();
-        fedit.ScanProfile = Config.DefaultProfileSettings();
-        fedit.ShowDialog();
-        if (fedit.Result)
-        {
-            _profileManager.Mutate(new ListMutation<ScanProfile>.Append(fedit.ScanProfile), _listView);
-        }
+        // var fedit = FormFactory.Create<FEditProfile>();
+        // fedit.ScanProfile = Config.DefaultProfileSettings();
+        // fedit.ShowDialog();
+        // if (fedit.Result)
+        // {
+        //     _profileManager.Mutate(new ListMutation<ScanProfile>.Append(fedit.ScanProfile), _listView);
+        // }
     }
 
     private void DoEdit()
     {
-        var originalProfile = SelectedProfile;
-        if (originalProfile != null)
-        {
-            var fedit = FormFactory.Create<FEditProfile>();
-            fedit.ScanProfile = originalProfile;
-            fedit.ShowDialog();
-            if (fedit.Result)
-            {
-                _profileManager.Mutate(new ListMutation<ScanProfile>.ReplaceWith(fedit.ScanProfile), _listView);
-            }
-        }
+        // var originalProfile = SelectedProfile;
+        // if (originalProfile != null)
+        // {
+        //     var fedit = FormFactory.Create<FEditProfile>();
+        //     fedit.ScanProfile = originalProfile;
+        //     fedit.ShowDialog();
+        //     if (fedit.Result)
+        //     {
+        //         _profileManager.Mutate(new ListMutation<ScanProfile>.ReplaceWith(fedit.ScanProfile), _listView);
+        //     }
+        // }
     }
 
     private void DoDelete()

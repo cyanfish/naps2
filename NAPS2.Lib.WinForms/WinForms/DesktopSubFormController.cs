@@ -3,7 +3,7 @@ using NAPS2.Ocr;
 
 namespace NAPS2.WinForms;
 
-public class DesktopSubFormController
+public class DesktopSubFormController : IDesktopSubFormController
 {
     private readonly IFormFactory _formFactory;
     private readonly UiImageList _imageList;
@@ -19,7 +19,14 @@ public class DesktopSubFormController
         _tesseractLanguageManager = tesseractLanguageManager;
     }
 
-    public void ShowImageForm<T>() where T : ImageForm
+    public void ShowCropForm() => ShowImageForm<FCrop>();
+    public void ShowBrightnessContrastForm() => ShowImageForm<FBrightnessContrast>();
+    public void ShowHueSaturationForm() => ShowImageForm<FHueSaturation>();
+    public void ShowBlackWhiteForm() => ShowImageForm<FBlackWhite>();
+    public void ShowSharpenForm() => ShowImageForm<FSharpen>();
+    public void ShowRotateForm() => ShowImageForm<FRotate>();
+
+    private void ShowImageForm<T>() where T : ImageForm
     {
         var selection = _imageList.Selection.ToList();
         if (selection.Any())

@@ -1,5 +1,5 @@
+using Eto.Drawing;
 using Eto.Forms;
-using Eto.WinForms;
 using NAPS2.Update;
 
 namespace NAPS2.EtoForms.Ui;
@@ -25,7 +25,7 @@ public class AboutForm : EtoDialogBase
         _updateChecker = updateChecker;
             
         Title = UiStrings.AboutFormTitle;
-        Icon = Icons.information_small.ToEtoIcon();
+        Icon = new Icon(1f, Icons.information_small.ToEtoImage());
         Resizable = false;
         FormStateController.RestoreFormState = false;
             

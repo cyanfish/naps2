@@ -1,6 +1,5 @@
 using Eto.Drawing;
 using Eto.Forms;
-using Eto.WinForms;
 using NAPS2.ImportExport.Images;
 
 namespace NAPS2.EtoForms;
@@ -22,7 +21,7 @@ public class ImageListViewBehavior : ListViewBehavior<UiImage>
 
     public override Image GetImage(UiImage item, int imageSize)
     {
-        return _thumbnailProvider.GetThumbnail(item, imageSize).ToEto();
+        return _thumbnailProvider.GetThumbnail(item, imageSize).ToEtoImage();
     }
 
     public override void SetDragData(ListSelection<UiImage> selection, IDataObject dataObject)

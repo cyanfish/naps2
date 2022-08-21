@@ -7,7 +7,11 @@ using NAPS2.EtoForms.WinForms;
 using NAPS2.ImportExport;
 using NAPS2.Ocr;
 using NAPS2.ImportExport.Images;
+using DataFormats = System.Windows.Forms.DataFormats;
 using DockStyle = System.Windows.Forms.DockStyle;
+using KeyEventArgs = System.Windows.Forms.KeyEventArgs;
+using Keys = System.Windows.Forms.Keys;
+using MouseEventArgs = System.Windows.Forms.MouseEventArgs;
 
 namespace NAPS2.WinForms;
 
@@ -504,7 +508,7 @@ public partial class FDesktop : FormBase
         }
     }
 
-    private void tsImport_Click(object sender, EventArgs e) => _desktopController.Import();
+    private void tsImport_Click(object sender, EventArgs e) => _desktopController.Import(Eto.Forms.WinFormsHelpers.ToEto(this));
 
     private async void tsdSavePDF_ButtonClick(object sender, EventArgs e)
     {
@@ -625,18 +629,18 @@ public partial class FDesktop : FormBase
     #region Event Handlers - Image Menu
 
     private void tsView_Click(object sender, EventArgs e) => _desktopSubFormController.ShowViewerForm();
-    private void tsCrop_Click(object sender, EventArgs e) => _desktopSubFormController.ShowImageForm<FCrop>();
+    private void tsCrop_Click(object sender, EventArgs e) => _desktopSubFormController.ShowCropForm();
 
     private void tsBrightnessContrast_Click(object sender, EventArgs e) =>
-        _desktopSubFormController.ShowImageForm<FBrightnessContrast>();
+        _desktopSubFormController.ShowBrightnessContrastForm();
 
     private void tsHueSaturation_Click(object sender, EventArgs e) =>
-        _desktopSubFormController.ShowImageForm<FHueSaturation>();
+        _desktopSubFormController.ShowHueSaturationForm();
 
     private void tsBlackWhite_Click(object sender, EventArgs e) =>
-        _desktopSubFormController.ShowImageForm<FBlackWhite>();
+        _desktopSubFormController.ShowBlackWhiteForm();
 
-    private void tsSharpen_Click(object sender, EventArgs e) => _desktopSubFormController.ShowImageForm<FSharpen>();
+    private void tsSharpen_Click(object sender, EventArgs e) => _desktopSubFormController.ShowSharpenForm();
     private void tsReset_Click(object sender, EventArgs e) => _desktopController.ResetImage();
 
     #endregion
@@ -647,7 +651,7 @@ public partial class FDesktop : FormBase
     private async void tsRotateRight_Click(object sender, EventArgs e) => await _imageListActions.RotateRight();
     private async void tsFlip_Click(object sender, EventArgs e) => await _imageListActions.Flip();
     private void tsDeskew_Click(object sender, EventArgs e) => _imageListActions.Deskew();
-    private void tsCustomRotation_Click(object sender, EventArgs e) => _desktopSubFormController.ShowImageForm<FRotate>();
+    private void tsCustomRotation_Click(object sender, EventArgs e) => _desktopSubFormController.ShowRotateForm();
 
     #endregion
 
@@ -750,9 +754,9 @@ public partial class FDesktop : FormBase
 
     private void ListViewDrop(object? sender, DropEventArgs args)
     {
-        if (_imageTransfer.IsIn(args.Data.ToEto()))
+        if (_imageTransfer.IsIn(args.Data))
         {
-            var data = _imageTransfer.GetFrom(args.Data.ToEto());
+            var data = _imageTransfer.GetFrom(args.Data);
             if (data.ProcessId == Process.GetCurrentProcess().Id)
             {
                 DragMoveImages(args.Position);
@@ -762,9 +766,9 @@ public partial class FDesktop : FormBase
                 _desktopController.ImportDirect(data, false);
             }
         }
-        else if (args.Data.GetDataPresent(DataFormats.FileDrop))
+        else if (args.Data.Contains(DataFormats.FileDrop))
         {
-            var data = (string[]) args.Data.GetData(DataFormats.FileDrop);
+            var data = args.Data.GetObject<string[]>(DataFormats.FileDrop);
             _desktopController.ImportFiles(data);
         }
     }

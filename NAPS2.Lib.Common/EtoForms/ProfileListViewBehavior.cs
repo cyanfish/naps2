@@ -1,6 +1,5 @@
 using Eto.Drawing;
 using Eto.Forms;
-using Eto.WinForms;
 using NAPS2.ImportExport.Profiles;
 using NAPS2.Scan;
 

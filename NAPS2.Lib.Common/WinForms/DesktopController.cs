@@ -1,5 +1,6 @@
 using System.Threading;
-using System.Windows.Forms;
+using Eto.Forms;
+using NAPS2.EtoForms;
 using NAPS2.ImportExport;
 using NAPS2.ImportExport.Images;
 using NAPS2.Platform.Windows;
@@ -7,7 +8,6 @@ using NAPS2.Recovery;
 using NAPS2.Remoting;
 using NAPS2.Scan;
 using NAPS2.Update;
-using MessageBoxIcon = System.Windows.Forms.MessageBoxIcon;
 
 namespace NAPS2.WinForms;
 
@@ -181,9 +181,10 @@ public class DesktopController
             {
                 if (_operationProgress.ActiveOperations.Any(x => !x.SkipExitPrompt))
                 {
-                    var result = MessageBox.Show(MiscResources.ExitWithActiveOperations,
+                    var result = MessageBox.Show(_desktopFormProvider.DesktopForm,
+                        MiscResources.ExitWithActiveOperations,
                         MiscResources.ActiveOperations,
-                        MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2);
+                        MessageBoxButtons.YesNo, MessageBoxType.Warning, MessageBoxDefaultButton.No);
                     if (result != DialogResult.Yes)
                     {
                         return false;
@@ -199,8 +200,9 @@ public class DesktopController
         {
             if (userClosing && !SkipRecoveryCleanup)
             {
-                var result = MessageBox.Show(MiscResources.ExitWithUnsavedChanges, MiscResources.UnsavedChanges,
-                    MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2);
+                var result = MessageBox.Show(_desktopFormProvider.DesktopForm, MiscResources.ExitWithUnsavedChanges,
+                    MiscResources.UnsavedChanges,
+                    MessageBoxButtons.YesNo, MessageBoxType.Warning, MessageBoxDefaultButton.No);
                 if (result != DialogResult.Yes)
                 {
                     return false;
@@ -252,12 +254,13 @@ public class DesktopController
             {
                 Invoker.Current.SafeInvoke(() =>
                 {
-                    var formOnTop = Application.OpenForms.Cast<Form>().Last();
-                    if (formOnTop.WindowState == FormWindowState.Minimized)
+                    // TODO: xplat
+                    var formOnTop = Application.Instance.Windows.Last();
+                    if (formOnTop.WindowState == WindowState.Minimized)
                     {
-                        Win32.ShowWindow(formOnTop.Handle, Win32.ShowWindowCommands.Restore);
+                        Win32.ShowWindow(formOnTop.NativeHandle, Win32.ShowWindowCommands.Restore);
                     }
-                    formOnTop.Activate();
+                    formOnTop.BringToFront();
                 });
             }
         });
@@ -270,19 +273,20 @@ public class DesktopController
         {
             MessageBox.Show(_config.Get(c => c.StartupMessageText), _config.Get(c => c.StartupMessageTitle),
                 MessageBoxButtons.OK,
-                _config.Get(c => c.StartupMessageIcon).ToWinForms());
+                _config.Get(c => c.StartupMessageIcon).ToEto());
         }
     }
 
     private void ShowRecoveryPrompt()
     {
         // Allow scanned images to be recovered in case of an unexpected close
-        var op = _operationFactory.Create<RecoveryOperation>();
-        if (op.Start(_desktopImagesController.ReceiveScannedImage(),
-                new RecoveryParams { ThumbnailSize = _config.ThumbnailSize() }))
-        {
-            _operationProgress.ShowProgress(op);
-        }
+        // TODO: Eto implementation
+        // var op = _operationFactory.Create<RecoveryOperation>();
+        // if (op.Start(_desktopImagesController.ReceiveScannedImage(),
+        //         new RecoveryParams { ThumbnailSize = _config.ThumbnailSize() }))
+        // {
+        //     _operationProgress.ShowProgress(op);
+        // }
     }
 
     private void InitThumbnailRendering()
@@ -338,9 +342,10 @@ public class DesktopController
     {
         if (_imageList.Images.Count > 0)
         {
-            if (MessageBox.Show(string.Format(MiscResources.ConfirmClearItems, _imageList.Images.Count),
+            if (MessageBox.Show(_desktopFormProvider.DesktopForm,
+                    string.Format(MiscResources.ConfirmClearItems, _imageList.Images.Count),
                     MiscResources.Clear, MessageBoxButtons.OKCancel,
-                    MessageBoxIcon.Question) == DialogResult.OK)
+                    MessageBoxType.Question) == DialogResult.Ok)
             {
                 _imageListActions.DeleteAll();
             }
@@ -351,9 +356,10 @@ public class DesktopController
     {
         if (_imageList.Selection.Any())
         {
-            if (MessageBox.Show(string.Format(MiscResources.ConfirmDeleteItems, _imageList.Selection.Count),
+            if (MessageBox.Show(_desktopFormProvider.DesktopForm,
+                    string.Format(MiscResources.ConfirmDeleteItems, _imageList.Selection.Count),
                     MiscResources.Delete, MessageBoxButtons.OKCancel,
-                    MessageBoxIcon.Question) == DialogResult.OK)
+                    MessageBoxType.Question) == DialogResult.Ok)
             {
                 _imageListActions.DeleteSelected();
             }
@@ -364,9 +370,10 @@ public class DesktopController
     {
         if (_imageList.Selection.Any())
         {
-            if (MessageBox.Show(string.Format(MiscResources.ConfirmResetImages, _imageList.Selection.Count),
+            if (MessageBox.Show(_desktopFormProvider.DesktopForm,
+                    string.Format(MiscResources.ConfirmResetImages, _imageList.Selection.Count),
                     MiscResources.ResetImage,
-                    MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
+                    MessageBoxButtons.OKCancel, MessageBoxType.Question) == DialogResult.Ok)
             {
                 _imageListActions.ResetTransforms();
             }
@@ -402,7 +409,7 @@ public class DesktopController
         using var imagesToEmail = images.Select(x => x.GetClonedImage()).ToDisposableList();
         await _exportHelper.EmailPDF(imagesToEmail.InnerList);
     }
-    
+
     public async Task Print()
     {
         var state = _imageList.CurrentState;
@@ -414,34 +421,37 @@ public class DesktopController
         }
     }
 
-    public void Import()
+    public void Import(Control parentForm)
     {
         // TODO: Merge this into exporthelper/dialoghelper?
         var ofd = new OpenFileDialog
         {
-            Multiselect = true,
+            MultiSelect = true,
             CheckFileExists = true,
-            // TODO: Move filter logic somewhere common
-            Filter = MiscResources.FileTypeAllFiles + @"|*.*|" +
-                     MiscResources.FileTypePdf + @"|*.pdf|" +
-                     MiscResources.FileTypeImageFiles +
-                     @"|*.bmp;*.emf;*.exif;*.gif;*.jpg;*.jpeg;*.png;*.tiff;*.tif|" +
-                     MiscResources.FileTypeBmp + @"|*.bmp|" +
-                     MiscResources.FileTypeEmf + @"|*.emf|" +
-                     MiscResources.FileTypeExif + @"|*.exif|" +
-                     MiscResources.FileTypeGif + @"|*.gif|" +
-                     MiscResources.FileTypeJpeg + @"|*.jpg;*.jpeg|" +
-                     MiscResources.FileTypePng + @"|*.png|" +
-                     MiscResources.FileTypeTiff + @"|*.tiff;*.tif"
+            Filters =
+            {
+                // TODO: Move filter logic somewhere common
+                new FileFilter(MiscResources.FileTypeAllFiles, ".*"),
+                new FileFilter(MiscResources.FileTypePdf, ".pdf"),
+                new FileFilter(MiscResources.FileTypeImageFiles,
+                    ".bmp", ".emf", ".exif", ".gif", "jpg", ".jpeg", ".png", ".tiff", ".tif"),
+                new FileFilter(MiscResources.FileTypeBmp, ".bmp"),
+                new FileFilter(MiscResources.FileTypeEmf, ".emf"),
+                new FileFilter(MiscResources.FileTypeExif, ".exif"),
+                new FileFilter(MiscResources.FileTypeGif, ".gif"),
+                new FileFilter(MiscResources.FileTypeJpeg, ".jpg", ".jpeg"),
+                new FileFilter(MiscResources.FileTypePng, ".png"),
+                new FileFilter(MiscResources.FileTypeTiff, ".tiff", ".tif"),
+            }
         };
         if (Paths.IsTestAppDataPath)
         {
             // For UI test automation we choose the appdata folder to find the prepared files to import
-            ofd.InitialDirectory = Paths.AppData;
+            ofd.Directory = new Uri(Path.GetFullPath(Paths.AppData));
         }
-        if (ofd.ShowDialog() == DialogResult.OK)
+        if (ofd.ShowDialog(parentForm) == DialogResult.Ok)
         {
-            ImportFiles(ofd.FileNames);
+            ImportFiles(ofd.Filenames);
         }
     }
 }

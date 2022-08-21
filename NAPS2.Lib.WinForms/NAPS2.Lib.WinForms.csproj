@@ -362,6 +362,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="ImportExport\Images" />
     <Folder Include="Scan\Internal" />
   </ItemGroup>
 

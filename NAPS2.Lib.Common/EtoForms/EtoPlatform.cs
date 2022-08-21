@@ -16,4 +16,5 @@ public abstract class EtoPlatform
     public abstract IListView<T> CreateListView<T>(ListViewBehavior<T> behavior) where T : notnull;
     public abstract void ConfigureImageButton(Button button);
     public abstract Bitmap ToBitmap(IMemoryImage image);
+    public abstract IMemoryImage DrawHourglass(IMemoryImage thumb);
 }

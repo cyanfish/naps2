@@ -10,12 +10,12 @@ public class DesktopScanController : IDesktopScanController
     private readonly IFormFactory _formFactory;
     private readonly IScanPerformer _scanPerformer;
     private readonly DesktopImagesController _desktopImagesController;
-    private readonly DesktopSubFormController _desktopSubFormController;
+    private readonly IDesktopSubFormController _desktopSubFormController;
     private readonly DesktopFormProvider _desktopFormProvider;
 
     public DesktopScanController(Naps2Config config, IProfileManager profileManager, IFormFactory formFactory,
         IScanPerformer scanPerformer, DesktopImagesController desktopImagesController,
-        DesktopSubFormController desktopSubFormController, DesktopFormProvider desktopFormProvider)
+        IDesktopSubFormController desktopSubFormController, DesktopFormProvider desktopFormProvider)
     {
         _config = config;
         _profileManager = profileManager;

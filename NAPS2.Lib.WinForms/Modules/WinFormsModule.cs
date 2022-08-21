@@ -30,6 +30,7 @@ public class WinFormsModule : NinjectModule
         Bind<IUpdateChecker>().To<UpdateChecker>();
         Bind<IWinFormsExportHelper>().To<WinFormsExportHelper>();
         Bind<IDesktopScanController>().To<DesktopScanController>();
+        Bind<IDesktopSubFormController>().To<DesktopSubFormController>();
         Bind<DesktopFormProvider>().ToSelf().InSingletonScope();
 
         Bind<DesktopForm>().To<WinFormsDesktopForm>();

@@ -1,4 +1,4 @@
-using System.Windows.Forms;
+using Eto.Forms;
 
 namespace NAPS2.EtoForms;
 

@@ -1,6 +1,5 @@
 using System.Collections.Immutable;
 using Eto.Forms;
-using Eto.WinForms;
 using NAPS2.ImportExport.Images;
 using NAPS2.WinForms;
 
@@ -8,7 +7,7 @@ namespace NAPS2.EtoForms.Ui;
 
 public abstract class DesktopForm : EtoFormBase
 {
-    private readonly KeyboardShortcutManager _ksm;
+    // private readonly KeyboardShortcutManager _ksm;
     private readonly INotificationManager _notify;
     private readonly CultureHelper _cultureHelper;
     private readonly IProfileManager _profileManager;
@@ -20,7 +19,7 @@ public abstract class DesktopForm : EtoFormBase
     private readonly IDesktopScanController _desktopScanController;
     private readonly ImageListActions _imageListActions;
     private readonly DesktopFormProvider _desktopFormProvider;
-    private readonly DesktopSubFormController _desktopSubFormController;
+    private readonly IDesktopSubFormController _desktopSubFormController;
 
     private readonly Command _scanCommand;
     private readonly Command _newProfileCommand;
@@ -79,7 +78,7 @@ public abstract class DesktopForm : EtoFormBase
 
     public DesktopForm(
         Naps2Config config,
-        KeyboardShortcutManager ksm,
+        // KeyboardShortcutManager ksm,
         INotificationManager notify,
         CultureHelper cultureHelper,
         IProfileManager profileManager,
@@ -91,9 +90,9 @@ public abstract class DesktopForm : EtoFormBase
         IDesktopScanController desktopScanController,
         ImageListActions imageListActions,
         DesktopFormProvider desktopFormProvider,
-        DesktopSubFormController desktopSubFormController) : base(config)
+        IDesktopSubFormController desktopSubFormController) : base(config)
     {
-        _ksm = ksm;
+        // _ksm = ksm;
         _notify = notify;
         _cultureHelper = cultureHelper;
         _profileManager = profileManager;
@@ -132,7 +131,7 @@ public abstract class DesktopForm : EtoFormBase
             ToolBarText = UiStrings.Ocr,
             Image = Icons.text.ToEtoImage()
         };
-        _importCommand = new ActionCommand(_desktopController.Import)
+        _importCommand = new ActionCommand(() => _desktopController.Import(this))
         {
             ToolBarText = UiStrings.Import,
             Image = Icons.folder_picture.ToEtoImage()
@@ -185,27 +184,27 @@ public abstract class DesktopForm : EtoFormBase
         {
             MenuText = UiStrings.View
         };
-        _cropCommand = new ActionCommand(_desktopSubFormController.ShowImageForm<FCrop>)
+        _cropCommand = new ActionCommand(_desktopSubFormController.ShowCropForm)
         {
             MenuText = UiStrings.Crop,
             Image = Icons.transform_crop.ToEtoImage()
         };
-        _brightContCommand = new ActionCommand(_desktopSubFormController.ShowImageForm<FBrightnessContrast>)
+        _brightContCommand = new ActionCommand(_desktopSubFormController.ShowBrightnessContrastForm)
         {
             MenuText = UiStrings.BrightnessContrast,
             Image = Icons.contrast_with_sun.ToEtoImage()
         };
-        _hueSatCommand = new ActionCommand(_desktopSubFormController.ShowImageForm<FHueSaturation>)
+        _hueSatCommand = new ActionCommand(_desktopSubFormController.ShowHueSaturationForm)
         {
             MenuText = UiStrings.HueSaturation,
             Image = Icons.color_management.ToEtoImage()
         };
-        _blackWhiteCommand = new ActionCommand(_desktopSubFormController.ShowImageForm<FBlackWhite>)
+        _blackWhiteCommand = new ActionCommand(_desktopSubFormController.ShowBlackWhiteForm)
         {
             MenuText = UiStrings.BlackAndWhite,
             Image = Icons.contrast_high.ToEtoImage()
         };
-        _sharpenCommand = new ActionCommand(_desktopSubFormController.ShowImageForm<FSharpen>)
+        _sharpenCommand = new ActionCommand(_desktopSubFormController.ShowSharpenForm)
         {
             MenuText = UiStrings.Sharpen,
             Image = Icons.sharpen.ToEtoImage()
@@ -238,7 +237,7 @@ public abstract class DesktopForm : EtoFormBase
         {
             MenuText = UiStrings.Deskew
         };
-        _customRotateCommand = new ActionCommand(_desktopSubFormController.ShowImageForm<FRotate>)
+        _customRotateCommand = new ActionCommand(_desktopSubFormController.ShowRotateForm)
         {
             MenuText = UiStrings.CustomRotation
         };
@@ -872,9 +871,9 @@ public abstract class DesktopForm : EtoFormBase
 
     private void ListViewDrop(object? sender, DropEventArgs args)
     {
-        if (_imageTransfer.IsIn(args.Data.ToEto()))
+        if (_imageTransfer.IsIn(args.Data))
         {
-            var data = _imageTransfer.GetFrom(args.Data.ToEto());
+            var data = _imageTransfer.GetFrom(args.Data);
             if (data.ProcessId == Process.GetCurrentProcess().Id)
             {
                 DragMoveImages(args.Position);
@@ -884,10 +883,10 @@ public abstract class DesktopForm : EtoFormBase
                 _desktopController.ImportDirect(data, false);
             }
         }
-        else if (args.Data.GetDataPresent("FileDrop"))
+        else if (args.Data.Contains("FileDrop"))
         {
             // TODO: Is this xplat-compatible?
-            var data = (string[]) args.Data.GetData("FileDrop");
+            var data = args.Data.GetObject<string[]>("FileDrop");
             _desktopController.ImportFiles(data);
         }
     }

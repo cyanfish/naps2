@@ -263,7 +263,7 @@ public class WinFormsListView<T> : IListView<T> where T : notnull
         var index = GetDragIndex(e);
         if (index != -1)
         {
-            Drop?.Invoke(this, new DropEventArgs(index, e.Data));
+            Drop?.Invoke(this, new DropEventArgs(index, e.Data.ToEto()));
         }
         _view.InsertionMark.Index = -1;
     }
