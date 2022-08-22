@@ -9,7 +9,7 @@ public static class ThumbnailSizes
     public static int Validate(int inputSize)
     {
         return inputSize.Clamp(MIN_SIZE, MAX_SIZE);
-    } 
+    }
 
     public static double StepNumberToSize(double stepNumber)
     {
@@ -44,5 +44,19 @@ public static class ThumbnailSizes
             return (size - 448) / 64 + 10;
         }
         return (size - 832) / 96 + 16;
+    }
+
+    public static int CurveToSize(double value)
+    {
+        value = value.Clamp(0, 1);
+        var curved = (Math.Exp(value) - 1) / (Math.E - 1);
+        return (int) Math.Round(MIN_SIZE + curved * (MAX_SIZE - MIN_SIZE));
+    }
+
+    public static double SizeToCurve(int size)
+    {
+        size = Validate(size);
+        var curved = (size - MIN_SIZE) / (double) (MAX_SIZE - MIN_SIZE);
+        return Math.Log(curved * (Math.E - 1) + 1);
     }
 }

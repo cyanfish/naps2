@@ -1,3 +1,4 @@
+using System.Threading;
 using Eto.Drawing;
 using Eto.Forms;
 using Eto.Mac;
@@ -29,10 +30,21 @@ public class MacDesktopForm : DesktopForm
     {
     }
 
+    protected override void SetContent(Control content)
+    {
+        var scrollView = new NSScrollView();
+        scrollView.DocumentView = content.ToNative();
+        Content = scrollView.ToEto();
+    }
+
     protected override void OnLoad(EventArgs e)
     {
+        // TODO: What's the best place to initialize this? It needs to happen from the UI event loop.
+        Invoker.Current = new SyncContextInvoker(SynchronizationContext.Current);
         base.OnLoad(e);
         ClientSize = new Size(1000, 600);
+        // TODO: Initialize everything that needs to be initialized where it's best
+        ResizeThumbnails(Config.ThumbnailSize());
     }
 
     protected override void CreateToolbarsAndMenus()
@@ -126,13 +138,15 @@ public class MacDesktopForm : DesktopForm
         window.ToolbarStyle = NSWindowToolbarStyle.Unified;
         // TODO: Subtitle based on active profile?
         window.Subtitle = "Not Another PDF Scanner 2";
+        // TODO: Do we want full size content?
         window.StyleMask |= NSWindowStyle.FullSizeContentView;
         window.StyleMask |= NSWindowStyle.UnifiedTitleAndToolbar;
     }
 
     private void ZoomUpdated(NSSlider sender)
     {
-        Config.User.Set(c => c.ThumbnailSize, sender.IntValue);
+        var size = ThumbnailSizes.CurveToSize(sender.DoubleValue);
+        ResizeThumbnails(size);
     }
 
     public class ToolbarDelegate : NSToolbarDelegate
@@ -179,9 +193,9 @@ public class MacDesktopForm : DesktopForm
                 {
                     View = new NSSlider
                     {
-                        MinValue = ThumbnailSizes.MIN_SIZE,
-                        MaxValue = ThumbnailSizes.MAX_SIZE,
-                        IntValue = _form.Config.ThumbnailSize()
+                        MinValue = 0,
+                        MaxValue = 1,
+                        DoubleValue = ThumbnailSizes.SizeToCurve(_form.Config.ThumbnailSize())
                     }.WithAction(_form.ZoomUpdated),
                     MaxSize = new CGSize(64, 999)
                 },

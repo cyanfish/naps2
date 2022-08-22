@@ -14,6 +14,8 @@ public interface ISystemCompat
 
     bool UseSystemTesseract { get; }
 
+    bool RenderInWorker { get; }
+
     string? TesseractExecutablePath { get; }
 
     string PdfiumLibraryPath { get; }

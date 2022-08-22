@@ -74,7 +74,7 @@ public class ThumbnailRenderQueue : IDisposable
     {
         // TODO: Make this run as async?
         // TODO: Verify WorkerFactory is not null? Or handle this better for tests?
-        bool useWorker = PlatformCompat.Runtime.UseWorker;
+        bool useWorker = PlatformCompat.System.RenderInWorker;
         var worker = useWorker ? _scanningContext.WorkerFactory?.Create() : null;
         var fallback = new ExpFallback(100, 60 * 1000);
         while (true)
@@ -174,7 +174,7 @@ public class ThumbnailRenderQueue : IDisposable
         foreach (var img in listCopy)
         {
             var thumb = img.GetThumbnailClone();
-            if (thumb == null || thumb.Width != thumbnailSize || thumb.Height != thumbnailSize)
+            if (thumb == null || thumb.Width != thumbnailSize && thumb.Height != thumbnailSize)
             {
                 return img;
             }

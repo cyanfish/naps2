@@ -1,4 +1,5 @@
 using System.Collections.Immutable;
+using System.Threading;
 using Eto.Forms;
 using NAPS2.ImportExport.Images;
 using NAPS2.WinForms;
@@ -72,7 +73,7 @@ public abstract class DesktopForm : EtoFormBase
     private readonly ListProvider<Command> _scanMenuCommands = new();
     private readonly ListProvider<Command> _languageMenuCommands = new();
 
-    private IListView<UiImage> _listView;
+    protected IListView<UiImage> _listView;
     private ImageListSyncer? _imageListSyncer;
     // private LayoutManager _layoutManager;
 
@@ -364,6 +365,10 @@ public abstract class DesktopForm : EtoFormBase
         // imageList.ImagesUpdated += (_, _) => Invoker.Current.SafeInvoke(UpdateToolbar);
         _profileManager.ProfilesUpdated += (_, _) => UpdateScanButton();
         _desktopFormProvider.DesktopForm = this;
+
+        // TODO: Initialization needs work
+        _imageListSyncer = new ImageListSyncer(_imageList, _listView.ApplyDiffs, SynchronizationContext.Current!);
+        _desktopController.Initialize();
     }
 
     protected virtual void CreateToolbarsAndMenus()
@@ -874,48 +879,35 @@ public abstract class DesktopForm : EtoFormBase
     //     int thumbnailSize = Config.ThumbnailSize();
     //     thumbnailSize =
     //         (int) ThumbnailSizes.StepNumberToSize(ThumbnailSizes.SizeToStepNumber(thumbnailSize) + step);
-    //     thumbnailSize = ThumbnailSizes.Validate(thumbnailSize);
-    //     Config.User.Set(c => c.ThumbnailSize, thumbnailSize);
     //     ResizeThumbnails(thumbnailSize);
     // }
     //
-    // private void ResizeThumbnails(int thumbnailSize)
-    // {
-    //     if (!_imageList.Images.Any())
-    //     {
-    //         // Can't show visual feedback so don't do anything
-    //         // TODO: This is wrong?
-    //         return;
-    //     }
-    //     if (_listView.ImageSize == thumbnailSize)
-    //     {
-    //         // Same size so no resizing needed
-    //         return;
-    //     }
-    //
-    //     // Adjust the visible thumbnail display with the new size
-    //     _listView.ImageSize = thumbnailSize;
-    //     _listView.RegenerateImages();
-    //
-    //     SetThumbnailSpacing(thumbnailSize);
-    //     UpdateToolbar(); // TODO: Do we need this?
-    //
-    //     // Render high-quality thumbnails at the new size in a background task
-    //     // The existing (poorly scaled) thumbnails are used in the meantime
-    //     _thumbnailRenderQueue.SetThumbnailSize(thumbnailSize);
-    // }
-    //
-    // private void SetThumbnailSpacing(int thumbnailSize)
-    // {
-    //     _listView.NativeControl.Padding = new Padding(0, 20, 0, 0);
-    //     const int MIN_PADDING = 6;
-    //     const int MAX_PADDING = 66;
-    //     // Linearly scale the padding with the thumbnail size
-    //     int padding = MIN_PADDING + (MAX_PADDING - MIN_PADDING) * (thumbnailSize - ThumbnailSizes.MIN_SIZE) /
-    //         (ThumbnailSizes.MAX_SIZE - ThumbnailSizes.MIN_SIZE);
-    //     int spacing = thumbnailSize + padding * 2;
-    //     WinFormsHacks.SetListSpacing(_listView.NativeControl, spacing, spacing);
-    // }
+    protected void ResizeThumbnails(int thumbnailSize)
+    {
+        thumbnailSize = ThumbnailSizes.Validate(thumbnailSize);
+        Config.User.Set(c => c.ThumbnailSize, thumbnailSize);
+        if (_listView.ImageSize == thumbnailSize)
+        {
+            // Same size so no resizing needed
+            return;
+        }
+
+        // Adjust the visible thumbnail display with the new size
+        _listView.ImageSize = thumbnailSize;
+        _listView.RegenerateImages();
+
+        SetThumbnailSpacing(thumbnailSize);
+        UpdateToolbar(); // TODO: Do we need this?
+
+        // Render high-quality thumbnails at the new size in a background task
+        // The existing (poorly scaled) thumbnails are used in the meantime
+        _thumbnailRenderQueue.SetThumbnailSize(thumbnailSize);
+    }
+
+    protected virtual void SetThumbnailSpacing(int thumbnailSize)
+    {
+    }
+
     //
     // private void btnZoomOut_Click(object sender, EventArgs e) => StepThumbnailSize(-1);
     // private void btnZoomIn_Click(object sender, EventArgs e) => StepThumbnailSize(1);

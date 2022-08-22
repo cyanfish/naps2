@@ -20,6 +20,8 @@ public class MacSystemCompat : ISystemCompat
 
     public bool UseSystemTesseract => true;
 
+    public bool RenderInWorker => false;
+
     public string? TesseractExecutablePath => null;
 
     public string PdfiumLibraryPath =>

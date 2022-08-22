@@ -17,6 +17,8 @@ public abstract class WindowsSystemCompat : ISystemCompat
 
     public bool UseSystemTesseract => false;
 
+    public bool RenderInWorker => true;
+
     public abstract string? TesseractExecutablePath { get; }
 
     public abstract string PdfiumLibraryPath { get; }

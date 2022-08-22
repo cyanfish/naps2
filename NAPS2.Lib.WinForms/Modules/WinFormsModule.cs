@@ -32,6 +32,8 @@ public class WinFormsModule : NinjectModule
         Bind<IDesktopScanController>().To<DesktopScanController>();
         Bind<IDesktopSubFormController>().To<DesktopSubFormController>();
         Bind<DesktopFormProvider>().ToSelf().InSingletonScope();
+        Bind<ImageContext>().To<GdiImageContext>();
+        Bind<GdiImageContext>().ToSelf();
 
         Bind<DesktopForm>().To<WinFormsDesktopForm>();
 
