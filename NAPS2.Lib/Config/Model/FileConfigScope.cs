@@ -61,6 +61,10 @@ public class FileConfigScope<TConfig> : ConfigScope<TConfig>
         lock (this)
         {
             // TODO: Retry
+            if (!File.Exists(_filePath))
+            {
+                return;
+            }
             try
             {
                 using var stream = new FileStream(_filePath, FileMode.Open, FileAccess.Read, FileShare.Read);
