@@ -1,7 +1,4 @@
-using CoreAnimation;
-using Eto.Drawing;
 using Eto.Forms;
-using Eto.Mac;
 
 namespace NAPS2.EtoForms.Mac;
 
@@ -10,7 +7,7 @@ public class MacListView<T> : NSCollectionViewDelegateFlowLayout, IListView<T> w
     private readonly ListViewBehavior<T> _behavior;
     private readonly NSCollectionView _view = new();
     private readonly NSCollectionViewFlowLayout _layout;
-    private readonly DataSource<T> _dataSource;
+    private readonly ListViewDataSource<T> _dataSource;
 
     private ListSelection<T> _selection = ListSelection.Empty<T>();
     private bool _refreshing;
@@ -18,13 +15,13 @@ public class MacListView<T> : NSCollectionViewDelegateFlowLayout, IListView<T> w
     public MacListView(ListViewBehavior<T> behavior)
     {
         _behavior = behavior;
-        _layout = new NSCollectionViewFlowLayout
+        _layout = new LeftFlowLayout
         {
             SectionInset = new NSEdgeInsets(20, 20, 20, 20),
             MinimumInteritemSpacing = 15,
             MinimumLineSpacing = 15
         };
-        _dataSource = new DataSource<T>(this, _behavior);
+        _dataSource = new ListViewDataSource<T>(this, _behavior);
         _view.DataSource = _dataSource;
         _view.Delegate = this;
         _view.CollectionViewLayout = _layout;
@@ -134,79 +131,5 @@ public class MacListView<T> : NSCollectionViewDelegateFlowLayout, IListView<T> w
         var size = _behavior.GetImage(item, ImageSize).Size;
         var max = (double) Math.Max(size.Width, size.Height);
         return new CGSize(size.Width * ImageSize / max, size.Height * ImageSize / max);
-    }
-}
-
-public class DataSource<T> : NSCollectionViewDataSource where T : notnull
-{
-    private readonly IListView<T> _listView;
-    private readonly ListViewBehavior<T> _behavior;
-
-    public DataSource(IListView<T> listView, ListViewBehavior<T> behavior)
-    {
-        _listView = listView;
-        _behavior = behavior;
-    }
-
-    public List<T> Items { get; } = new();
-
-    public override nint GetNumberofItems(NSCollectionView collectionView, nint section)
-    {
-        return Items.Count;
-    }
-
-    public override NSCollectionViewItem GetItem(NSCollectionView collectionView, NSIndexPath indexPath)
-    {
-        var i = (int) indexPath.Item;
-        return new Cell
-        {
-            CellImage = _behavior.GetImage(Items[i], _listView.ImageSize)
-        };
-    }
-}
-
-public class Cell : NSCollectionViewItem
-{
-    private bool _selected;
-
-    public Image CellImage { get; set; }
-
-    public override void LoadView()
-    {
-        var imageView = new NSImageView
-        {
-            Image = CellImage.ToNS()
-        };
-        Console.WriteLine("Setting up imageview layer " + CellImage.Width + " " + CellImage.Height);
-        imageView.WantsLayer = true;
-        imageView.CanDrawSubviewsIntoLayer = true;
-        imageView.Frame = new CGRect(0, 0, CellImage.Width, CellImage.Height);
-        var layer = new CALayer();
-        layer.Frame = new CGRect(0, 0, CellImage.Width, CellImage.Height);
-        layer.CornerRadius = 4;
-        layer.MasksToBounds = true;
-        layer.Contents = CellImage.ToCG();
-        layer.ZPosition = 1000;
-        imageView.Layer = layer;
-        View = imageView;
-        UpdateViewForSelectedState();
-    }
-
-    public override bool Selected
-    {
-        get => _selected;
-        set
-        {
-            _selected = value;
-            UpdateViewForSelectedState();
-        }
-    }
-
-    private void UpdateViewForSelectedState()
-    {
-        Console.WriteLine("UpdateViewForSelectedState " + Selected);
-        var layer = ((NSImageView) View).Layer;
-        layer.BorderWidth = Selected ? 4 : 1;
-        layer.BorderColor = Selected ? NSColor.SelectedContentBackground.ToCG() : NSColor.Black.ToCG();
     }
 }
