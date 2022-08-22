@@ -1,5 +1,4 @@
-﻿using NAPS2.Images.Gdi;
-using NAPS2.ImportExport;
+﻿using NAPS2.ImportExport;
 using NAPS2.ImportExport.Email;
 using NAPS2.ImportExport.Email.Mapi;
 using NAPS2.ImportExport.Images;
@@ -61,10 +60,9 @@ public class CommonModule : NinjectModule
         Bind<AutoSaver>().ToSelf();
         // TODO: Use PdfiumWorkerCoordinator?
         Bind<IPdfRenderer>().To<PdfiumPdfRenderer>();
-        Bind<ImageContext>().To<GdiImageContext>();
-        Bind<GdiImageContext>().ToSelf();
         Bind<ScanningContext>().ToSelf().InSingletonScope();
         Bind<OcrOperationManager>().ToSelf().InSingletonScope();
+        Bind<ThumbnailRenderQueue>().ToSelf().InSingletonScope();
 
         //Kernel.Get<ImageContext>().PdfRenderer = Kernel.Get<PdfiumWorkerCoordinator>();
 

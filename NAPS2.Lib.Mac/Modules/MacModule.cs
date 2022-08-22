@@ -1,6 +1,7 @@
 ﻿using NAPS2.EtoForms;
 using NAPS2.EtoForms.Mac;
 using NAPS2.EtoForms.Ui;
+using NAPS2.Images.Mac;
 using NAPS2.ImportExport;
 using NAPS2.ImportExport.Email;
 using NAPS2.ImportExport.Pdf;
@@ -32,6 +33,8 @@ public class MacModule : NinjectModule
         Bind<IDesktopScanController>().To<StubDesktopScanController>();
         Bind<IDesktopSubFormController>().To<StubDesktopSubFormController>();
         Bind<DesktopFormProvider>().ToSelf().InSingletonScope();
+        Bind<ImageContext>().To<MacImageContext>();
+        Bind<MacImageContext>().ToSelf();
 
         Bind<DesktopForm>().To<MacDesktopForm>();
 
