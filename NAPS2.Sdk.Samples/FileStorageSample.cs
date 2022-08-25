@@ -9,13 +9,11 @@ public class FileStorageSample
     public static async Task Run()
     {
         GdiImageContext imageContext = new GdiImageContext();
-        ScanningContext scanningContext = new ScanningContext(imageContext);
+        using ScanningContext scanningContext = new ScanningContext(imageContext);
 
         // To save memory, we can store scanned images on disk after initial processing.
-        // This will put files in the system temp folder by default, which can be
-        // overriden by changing FileStorageManager.Current.
-        // TODO: Change
-        //imageContext.ConfigureBackingStorage<FileStorage>();
+        // This will put files in the system temp folder, but you can use any folder.
+        scanningContext.FileStorageManager = new FileStorageManager(Path.GetTempPath());
 
         var controller = new ScanController(scanningContext);
         var device = (await controller.GetDeviceList()).First();
@@ -27,7 +25,7 @@ public class FileStorageSample
 
         // We can wait for the entire scan to complete and not worry about using an
         // excessive amount of memory, since it is all stored on disk until rendered.
-        // This is just for illustration purposes; in real code you usually want to
+        // This is just for illustration purposes; in real code you may want to
         // process images as they come rather than waiting for the full scan.
         List<ProcessedImage> processedImages = await controller.Scan(options).ToList();
 
@@ -44,9 +42,12 @@ public class FileStorageSample
         {
             foreach (var scannedImage in processedImages)
             {
-                // This cleanly deletes any data from the filesystem.
+                // This deletes the data for the individual image from the filesystem.
                 scannedImage.Dispose();
             }
         }
+
+        // As we declared the scanningContext with "using", it will now be disposed and delete any remaining data on
+        // the filesystem.
     }
 }

@@ -1,6 +1,11 @@
 # NAPS2 (Not Another PDF Scanner 2)
 
-NAPS2 is a document scanning application with a focus on simplicity and ease of use. Scan your documents from WIA- and TWAIN-compatible scanners, organize the pages as you like, and save them as PDF, TIFF, JPEG, PNG, and other file formats. Requires .NET Framework 4.6.1 or higher.
+NAPS2 is a document scanning application with a focus on simplicity and ease of use. Scan your documents from WIA- and TWAIN-compatible scanners, organize the pages as you like, and save them as PDF, TIFF, JPEG, PNG, and other file formats.
+
+System requirements:
+- Windows 7+ with .NET Framework 4.6.2 or higher
+- macOS 10.15+
+- Linux x64 with a [supported distro](https://docs.microsoft.com/en-us/dotnet/core/install/linux#official-package-archives)
 
 Visit the NAPS2 home page at [www.naps2.com](http://www.naps2.com).
 
@@ -13,7 +18,7 @@ Other links:
 
 ## NAPS2.Sdk (for developers)
 
-[NAPS2.Sdk](https://github.com/cyanfish/naps2/tree/master/NAPS2.Sdk) is a fully-featured scanning library, supporting WIA, TWAIN, and SANE scanners on Windows and Linux.
+[NAPS2.Sdk](https://github.com/cyanfish/naps2/tree/master/NAPS2.Sdk) is a fully-featured scanning library, supporting WIA, TWAIN, SANE, and ESCL scanners on Windows, Mac, and Linux.
 [Read more.](https://github.com/cyanfish/naps2/tree/master/NAPS2.Sdk)
 
 <!-- TODO: Move dev onboarding to the github wiki -->

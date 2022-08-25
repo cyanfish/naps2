@@ -10,7 +10,7 @@ public class HelloWorldSample
         // This is the absolute bare bones example of scanning.
         // See the other samples for more description and functionality.
 
-        ScanningContext scanningContext = new ScanningContext(new GdiImageContext());
+        using ScanningContext scanningContext = new ScanningContext(new GdiImageContext());
         ScanController controller = new ScanController(scanningContext);
         ScanDevice device = (await controller.GetDeviceList()).First();
         ScanOptions options = new ScanOptions { Device = device };
