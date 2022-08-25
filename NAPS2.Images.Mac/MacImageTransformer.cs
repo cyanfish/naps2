@@ -27,7 +27,8 @@ public class MacImageTransformer : AbstractImageTransformer<MacImage>
 
         var t1 = CGAffineTransform.MakeTranslation((-image.Width / 2.0).ToNDouble(), (-image.Height / 2.0).ToNDouble());
         var t2 = CGAffineTransform.MakeRotation((-transform.Angle * Math.PI / 180).ToNDouble());
-        var t3 = CGAffineTransform.MakeTranslation((newImage.Width / 2.0).ToNDouble(), (newImage.Height / 2.0).ToNDouble());
+        var t3 = CGAffineTransform.MakeTranslation((newImage.Width / 2.0).ToNDouble(),
+            (newImage.Height / 2.0).ToNDouble());
         c.ConcatCTM(CGAffineTransform.Multiply(CGAffineTransform.Multiply(t1, t2), t3));
 
         CGRect rect = new CGRect(0, 0, image.Width, image.Height);
@@ -42,7 +43,7 @@ public class MacImageTransformer : AbstractImageTransformer<MacImage>
         var pixelFormat = image.PixelFormat switch
         {
             ImagePixelFormat.BW1 or ImagePixelFormat.Gray8 => ImagePixelFormat.Gray8,
-            ImagePixelFormat.RGB24 => ImagePixelFormat.RGB24,
+            ImagePixelFormat.RGB24 => ImagePixelFormat.ARGB32,
             ImagePixelFormat.ARGB32 => ImagePixelFormat.ARGB32,
             _ => throw new ArgumentException("Unsupported pixel format")
         };
@@ -58,6 +59,12 @@ public class MacImageTransformer : AbstractImageTransformer<MacImage>
 
     private static CGBitmapContext GetCgBitmapContext(MacImage image)
     {
+        if (image.PixelFormat is not (ImagePixelFormat.Gray8 or ImagePixelFormat.ARGB32))
+        {
+            // Only some formats supported for drawing, see "Pixel formats supported for bitmap graphics contexts"
+            // https://developer.apple.com/library/archive/documentation/GraphicsImaging/Conceptual/drawingwithquartz2d/dq_context/dq_context.html#//apple_ref/doc/uid/TP30001066-CH203-BCIBHHBB
+            throw new ArgumentException($"Unsupported pixel format for CGBitmapContext: {image.PixelFormat}");
+        }
         lock (MacImageContext.ConstructorLock)
         {
             return new CGBitmapContext(
@@ -76,7 +83,7 @@ public class MacImageTransformer : AbstractImageTransformer<MacImage>
         var pixelFormat = image.PixelFormat switch
         {
             ImagePixelFormat.BW1 or ImagePixelFormat.Gray8 => ImagePixelFormat.Gray8,
-            ImagePixelFormat.RGB24 => ImagePixelFormat.RGB24,
+            ImagePixelFormat.RGB24 => ImagePixelFormat.ARGB32,
             ImagePixelFormat.ARGB32 => ImagePixelFormat.ARGB32,
             _ => throw new ArgumentException("Unsupported pixel format")
         };
