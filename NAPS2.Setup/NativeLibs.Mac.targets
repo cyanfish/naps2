@@ -1,0 +1,16 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <ItemGroup>
+        <ContentWithTargetPath Include="..\NAPS2.Setup\lib\mac\libpdfium.dylib"
+                               Condition="'$(RuntimeIdentifier)' == 'osx-x64'">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+            <Link>lib\mac\libpdfium.dylib</Link>
+            <TargetPath>libpdfium.dylib</TargetPath>
+        </ContentWithTargetPath>
+        <ContentWithTargetPath Include="..\NAPS2.Setup\lib\macarm\libpdfium.dylib"
+                               Condition="'$(RuntimeIdentifier)' == 'osx-arm64'">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+            <Link>lib\macarm\libpdfium.dylib</Link>
+            <TargetPath>libpdfium.dylib</TargetPath>
+        </ContentWithTargetPath>
+    </ItemGroup>
+</Project>

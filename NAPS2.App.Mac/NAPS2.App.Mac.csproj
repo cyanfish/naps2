@@ -21,7 +21,7 @@
   </PropertyGroup>
 
   <Import Project="..\NAPS2.Setup\CommonTargets.targets" />
-  <Import Project="..\NAPS2.Setup\NativeLibs.targets" />
+  <Import Project="..\NAPS2.Setup\NativeLibs.Mac.targets" />
   <Import Project="..\NAPS2.Setup\SdkUsers.targets" />
   
   <ItemGroup>
