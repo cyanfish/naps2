@@ -45,6 +45,13 @@ public class MacModule : NinjectModule
 
 public class StubDesktopSubFormController : IDesktopSubFormController
 {
+    private IFormFactory _formFactory;
+
+    public StubDesktopSubFormController(IFormFactory formFactory)
+    {
+        _formFactory = formFactory;
+    }
+
     public void ShowCropForm()
     {
     }
@@ -99,6 +106,7 @@ public class StubDesktopSubFormController : IDesktopSubFormController
 
     public void ShowAboutForm()
     {
+        _formFactory.Create<AboutForm>().ShowModal();
     }
 
     public void ShowSettingsForm()
