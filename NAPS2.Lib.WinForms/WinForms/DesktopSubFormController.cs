@@ -28,7 +28,7 @@ public class DesktopSubFormController : IDesktopSubFormController
 
     private void ShowImageForm<T>() where T : ImageForm
     {
-        var selection = _imageList.Selection.ToList();
+        var selection = _imageList.Selection;
         if (selection.Any())
         {
             var form = _formFactory.Create<T>();

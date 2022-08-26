@@ -46,10 +46,12 @@ public class MacModule : NinjectModule
 public class StubDesktopSubFormController : IDesktopSubFormController
 {
     private IFormFactory _formFactory;
+    private DesktopImagesController _desktopImagesController;
 
-    public StubDesktopSubFormController(IFormFactory formFactory)
+    public StubDesktopSubFormController(IFormFactory formFactory, DesktopImagesController desktopImagesController)
     {
         _formFactory = formFactory;
+        _desktopImagesController = desktopImagesController;
     }
 
     public void ShowCropForm()
@@ -78,6 +80,9 @@ public class StubDesktopSubFormController : IDesktopSubFormController
 
     public void ShowProfilesForm()
     {
+        var form = _formFactory.Create<ProfilesForm>();
+        form.ImageCallback = _desktopImagesController.ReceiveScannedImage();
+        form.ShowModal();
     }
 
     public void ShowOcrForm()

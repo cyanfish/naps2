@@ -19,7 +19,7 @@ public static class ListSelection
         new(Enumerable.Empty<T>());
 }
 
-public class ListSelection<T> : IEnumerable<T>, IEquatable<ListSelection<T>> where T : notnull
+public class ListSelection<T> : ICollection<T>, IEquatable<ListSelection<T>> where T : notnull
 {
     private readonly HashSet<T> _internalSelection;
 
@@ -33,6 +33,13 @@ public class ListSelection<T> : IEnumerable<T>, IEquatable<ListSelection<T>> whe
     public int Count => _internalSelection.Count;
 
     public bool Contains(T item) => _internalSelection.Contains(item);
+
+    public bool IsReadOnly => true;
+    public void Add(T item) => throw new NotSupportedException();
+    public void Clear() => throw new NotSupportedException();
+    public bool Remove(T item) => throw new NotSupportedException();
+
+    public void CopyTo(T[] array, int arrayIndex) => _internalSelection.CopyTo(array, arrayIndex);
 
     public IEnumerator<T> GetEnumerator() => _internalSelection.GetEnumerator();
 

@@ -521,7 +521,7 @@ public partial class FDesktop : FormBase
         }
         else if (action == SaveButtonDefaultAction.SaveSelected && _imageList.Selection.Any())
         {
-            await _desktopController.SavePDF(_imageList.Selection.ToList());
+            await _desktopController.SavePDF(_imageList.Selection);
         }
         else
         {
@@ -540,7 +540,7 @@ public partial class FDesktop : FormBase
         }
         else if (action == SaveButtonDefaultAction.SaveSelected && _imageList.Selection.Any())
         {
-            await _desktopController.SaveImages(_imageList.Selection.ToList());
+            await _desktopController.SaveImages(_imageList.Selection);
         }
         else
         {
@@ -559,7 +559,7 @@ public partial class FDesktop : FormBase
         }
         else if (action == SaveButtonDefaultAction.SaveSelected && _imageList.Selection.Any())
         {
-            await _desktopController.EmailPDF(_imageList.Selection.ToList());
+            await _desktopController.EmailPDF(_imageList.Selection);
         }
         else
         {
@@ -598,7 +598,7 @@ public partial class FDesktop : FormBase
         await _desktopController.SavePDF(_imageList.Images);
 
     private async void tsSavePDFSelected_Click(object sender, EventArgs e) =>
-        await _desktopController.SavePDF(_imageList.Selection.ToList());
+        await _desktopController.SavePDF(_imageList.Selection);
 
     private async void tsPDFSettings_Click(object sender, EventArgs e) =>
         FormFactory.Create<FPdfSettings>().ShowDialog();
@@ -607,7 +607,7 @@ public partial class FDesktop : FormBase
         await _desktopController.SaveImages(_imageList.Images);
 
     private async void tsSaveImagesSelected_Click(object sender, EventArgs e) =>
-        await _desktopController.SaveImages(_imageList.Selection.ToList());
+        await _desktopController.SaveImages(_imageList.Selection);
 
     private void tsImageSettings_Click(object sender, EventArgs e) =>
         FormFactory.Create<FImageSettings>().ShowDialog();
@@ -616,7 +616,7 @@ public partial class FDesktop : FormBase
         await _desktopController.EmailPDF(_imageList.Images);
 
     private async void tsEmailPDFSelected_Click(object sender, EventArgs e) =>
-        await _desktopController.EmailPDF(_imageList.Selection.ToList());
+        await _desktopController.EmailPDF(_imageList.Selection);
 
     private void tsPdfSettings2_Click(object sender, EventArgs e) =>
         FormFactory.Create<FPdfSettings>().ShowDialog();

@@ -28,6 +28,7 @@ public abstract class DesktopForm : EtoFormBase
     protected readonly Command _profilesCommand;
     protected readonly Command _ocrCommand;
     protected readonly Command _importCommand;
+    protected readonly Command _saveCommand;
     protected readonly Command _savePdfCommand;
     protected readonly Command _saveAllPdfCommand;
     protected readonly Command _saveSelectedPdfCommand;
@@ -141,15 +142,27 @@ public abstract class DesktopForm : EtoFormBase
             ToolBarText = UiStrings.Import,
             MenuText = UiStrings.Import,
             Image = Icons.folder_picture.ToEtoImage(),
-            Shortcut = Application.Instance.CommonModifier | Keys.O
+            Shortcut = Application.Instance.CommonModifier | Keys.O,
+            MacSymbol = "folder"
+        };
+        _saveCommand = new ActionCommand
+        {
+            ToolBarText = UiStrings.Save,
+            MacSymbol = "square.and.arrow.down"
         };
         _savePdfCommand = new ActionCommand(SavePdf)
         {
             ToolBarText = UiStrings.SavePdf,
             Image = Icons.file_extension_pdf.ToEtoImage()
         };
-        _saveAllPdfCommand = new ActionCommand(() => _desktopController.SavePDF(_imageList.Images));
-        _saveSelectedPdfCommand = new ActionCommand(() => _desktopController.SavePDF(_imageList.Selection.ToList()));
+        _saveAllPdfCommand = new ActionCommand(() => _desktopController.SavePDF(_imageList.Images))
+        {
+            MenuText = UiStrings.SaveAllAsPdf
+        };
+        _saveSelectedPdfCommand = new ActionCommand(() => _desktopController.SavePDF(_imageList.Selection))
+        {
+            MenuText = UiStrings.SaveSelectedAsPdf
+        };
         _pdfSettingsCommand = new ActionCommand(_desktopSubFormController.ShowPdfSettingsForm)
         {
             MenuText = UiStrings.PdfSettings
@@ -159,9 +172,14 @@ public abstract class DesktopForm : EtoFormBase
             ToolBarText = UiStrings.SaveImages,
             Image = Icons.pictures.ToEtoImage()
         };
-        _saveAllImagesCommand = new ActionCommand(() => _desktopController.SaveImages(_imageList.Images));
-        _saveSelectedImagesCommand =
-            new ActionCommand(() => _desktopController.SaveImages(_imageList.Selection.ToList()));
+        _saveAllImagesCommand = new ActionCommand(() => _desktopController.SaveImages(_imageList.Images))
+        {
+            MenuText = UiStrings.SaveAllAsImages
+        };
+        _saveSelectedImagesCommand = new ActionCommand(() => _desktopController.SaveImages(_imageList.Selection))
+        {
+            MenuText = UiStrings.SaveSelectedAsImages
+        };
         _imageSettingsCommand = new ActionCommand(_desktopSubFormController.ShowImageSettingsForm)
         {
             MenuText = UiStrings.ImageSettings
@@ -171,8 +189,14 @@ public abstract class DesktopForm : EtoFormBase
             ToolBarText = UiStrings.EmailPdf,
             Image = Icons.email_attach.ToEtoImage()
         };
-        _emailAllPdfCommand = new ActionCommand(() => _desktopController.EmailPDF(_imageList.Images));
-        _emailSelectedPdfCommand = new ActionCommand(() => _desktopController.EmailPDF(_imageList.Selection.ToList()));
+        _emailAllPdfCommand = new ActionCommand(() => _desktopController.EmailPDF(_imageList.Images))
+        {
+            MenuText = UiStrings.EmailAllAsPdf
+        };
+        _emailSelectedPdfCommand = new ActionCommand(() => _desktopController.EmailPDF(_imageList.Selection))
+        {
+            MenuText = UiStrings.EmailSelectedAsPdf
+        };
         _emailSettingsCommand = new ActionCommand(_desktopSubFormController.ShowEmailSettingsForm)
         {
             MenuText = UiStrings.EmailSettings
@@ -192,6 +216,7 @@ public abstract class DesktopForm : EtoFormBase
         };
         _viewImageCommand = new ActionCommand(_desktopSubFormController.ShowViewerForm)
         {
+            ToolBarText = UiStrings.View,
             MenuText = UiStrings.View,
             MacSymbol = "viewfinder"
         };
@@ -300,7 +325,7 @@ public abstract class DesktopForm : EtoFormBase
         _deleteCommand = new ActionCommand(_imageListActions.DeleteSelected)
         {
             ToolBarText = UiStrings.Delete,
-             MenuText = UiStrings.Delete,
+            MenuText = UiStrings.Delete,
             Image = Icons.cross.ToEtoImage()
         };
         _clearAllCommand = new ActionCommand(_imageListActions.DeleteAll)
@@ -803,7 +828,7 @@ public abstract class DesktopForm : EtoFormBase
         }
         else if (action == SaveButtonDefaultAction.SaveSelected && _imageList.Selection.Any())
         {
-            await _desktopController.SavePDF(_imageList.Selection.ToList());
+            await _desktopController.SavePDF(_imageList.Selection);
         }
         else
         {
@@ -823,7 +848,7 @@ public abstract class DesktopForm : EtoFormBase
         }
         else if (action == SaveButtonDefaultAction.SaveSelected && _imageList.Selection.Any())
         {
-            await _desktopController.SaveImages(_imageList.Selection.ToList());
+            await _desktopController.SaveImages(_imageList.Selection);
         }
         else
         {
@@ -843,7 +868,7 @@ public abstract class DesktopForm : EtoFormBase
         }
         else if (action == SaveButtonDefaultAction.SaveSelected && _imageList.Selection.Any())
         {
-            await _desktopController.EmailPDF(_imageList.Selection.ToList());
+            await _desktopController.EmailPDF(_imageList.Selection);
         }
         else
         {
@@ -884,6 +909,7 @@ public abstract class DesktopForm : EtoFormBase
     //
     protected void ResizeThumbnails(int thumbnailSize)
     {
+        // TODO: Do we want a DesktopListViewController or something? That handles listview, thumbnail rendering, etc.?
         thumbnailSize = ThumbnailSizes.Validate(thumbnailSize);
         Config.User.Set(c => c.ThumbnailSize, thumbnailSize);
         if (_listView.ImageSize == thumbnailSize)

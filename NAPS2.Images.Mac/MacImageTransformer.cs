@@ -78,6 +78,7 @@ public class MacImageTransformer : AbstractImageTransformer<MacImage>
         }
     }
 
+    // TODO: Fix tests for mac (as thumbnail rendering is now platform-specific in result)
     protected override MacImage PerformTransform(MacImage image, ThumbnailTransform transform)
     {
         var pixelFormat = image.PixelFormat switch
@@ -87,7 +88,7 @@ public class MacImageTransformer : AbstractImageTransformer<MacImage>
             ImagePixelFormat.ARGB32 => ImagePixelFormat.ARGB32,
             _ => throw new ArgumentException("Unsupported pixel format")
         };
-        var (left, top, width, height) = transform.GetDrawRect(image.Width, image.Height);
+        var (_, _, width, height) = transform.GetDrawRect(image.Width, image.Height);
         var newImage = (MacImage) ImageContext.Create(width, height, pixelFormat);
         newImage.SetResolution(
             image.HorizontalResolution * image.Width / width,
@@ -95,16 +96,6 @@ public class MacImageTransformer : AbstractImageTransformer<MacImage>
         using CGBitmapContext c = GetCgBitmapContext(newImage);
         CGRect rect = new CGRect(0, 0, width, height);
         c.DrawImage(rect, image._imageRep.AsCGImage(ref rect, null, null));
-
-        // CGRect strokeRect = new CGRect(left + 0.5, top + 0.5, width - 1, height - 1);
-// #if MONOMAC
-//         c.SetRGBStrokeColor(
-// #else
-//         c.SetStrokeColor(
-// #endif
-//             0.ToNFloat(), 0.ToNFloat(), 0.ToNFloat(), 255.ToNFloat());
-//         c.StrokeRect(strokeRect);
-
         return newImage;
     }
 }

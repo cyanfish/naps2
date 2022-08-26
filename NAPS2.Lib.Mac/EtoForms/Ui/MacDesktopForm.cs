@@ -49,16 +49,12 @@ public class MacDesktopForm : DesktopForm
 
     protected override void CreateToolbarsAndMenus()
     {
-        var saveAllCommand = new ActionCommand()
-        {
-            MenuText = "Save All",
-            Shortcut = Application.Instance.CommonModifier | Keys.S
-        };
-        var saveSelectedCommand = new ActionCommand()
-        {
-            MenuText = "Save Selected",
-            Shortcut = Application.Instance.CommonModifier | Keys.Shift | Keys.S
-        };
+        _moveDownCommand.ToolBarText = "";
+        _moveUpCommand.ToolBarText = "";
+        _saveAllPdfCommand.Shortcut = Application.Instance.CommonModifier | Keys.S;
+        _saveSelectedPdfCommand.Shortcut = Application.Instance.CommonModifier | Keys.Shift | Keys.S;
+        _saveAllImagesCommand.Shortcut = Application.Instance.CommonModifier | Keys.M;
+        _saveSelectedImagesCommand.Shortcut = Application.Instance.CommonModifier | Keys.Shift | Keys.M;
 
         Menu = new MenuBar
         {
@@ -76,11 +72,13 @@ public class MacDesktopForm : DesktopForm
                     {
                         _importCommand,
                         new SeparatorMenuItem(),
-                        saveAllCommand,
-                        saveSelectedCommand,
-                        // new SeparatorMenuItem(),
-                        // _emailAllPdfCommand,
-                        // _emailSelectedPdfCommand,
+                        _saveAllPdfCommand,
+                        _saveSelectedPdfCommand,
+                        _saveAllImagesCommand,
+                        _saveSelectedImagesCommand,
+                        new SeparatorMenuItem(),
+                        _emailAllPdfCommand,
+                        _emailSelectedPdfCommand,
                         _printCommand,
                         new SeparatorMenuItem(),
                         _clearAllCommand
@@ -166,36 +164,45 @@ public class MacDesktopForm : DesktopForm
 
         public override string[] AllowedItemIdentifiers(NSToolbar toolbar)
         {
-            return new[] { "scan", "profiles", "viewer", "rotate", "moveUp", "moveDown", "zoom" };
+            return new[] { "scan", "profiles", "import", "save", "viewer", "rotate", "moveUp", "moveDown", "zoom" };
         }
 
         public override string[] DefaultItemIdentifiers(NSToolbar toolbar)
         {
-            return new[] { "scan", "profiles", "viewer", "rotate", "moveUp", "moveDown", "zoom" };
+            return new[] { "scan", "profiles", "import", "save", "viewer", "rotate", "moveUp", "moveDown", "zoom" };
         }
 
         public override string[] SelectableItemIdentifiers(NSToolbar toolbar)
         {
-            return new[] { "scan", "profiles", "viewer", "rotate", "moveUp", "moveDown", "zoom" };
+            return new[] { "scan", "profiles", "import", "save", "viewer", "rotate", "moveUp", "moveDown", "zoom" };
         }
 
         public override NSToolbarItem? WillInsertItem(NSToolbar toolbar, string itemIdentifier, bool willBeInserted)
         {
             return itemIdentifier switch
             {
-                "scan" => CreateToolbarItem(_form._scanCommand),
-                "profiles" => CreateToolbarItem(_form._profilesCommand),
+                "scan" => CreateToolbarItem(_form._scanCommand, UiStrings.Scan),
+                "profiles" => CreateToolbarItem(_form._profilesCommand, UiStrings.Profiles),
+                "import" => CreateToolbarItem(_form._importCommand, UiStrings.Import),
+                "save" => CreateNsToolbarMenu(_form._saveCommand, new MenuProvider()
+                        .Append(_form._saveAllPdfCommand)
+                        .Append(_form._saveSelectedPdfCommand)
+                        .Append(_form._saveAllImagesCommand)
+                        .Append(_form._saveSelectedImagesCommand),
+                    UiStrings.Save),
                 "viewer" => CreateToolbarItem(_form._viewImageCommand),
                 "rotate" => CreateNsToolbarMenu(_form._rotateMenuCommand, _form.GetRotateMenuProvider()),
-                "moveUp" => CreateToolbarItem(_form._moveUpCommand),
-                "moveDown" => CreateToolbarItem(_form._moveDownCommand),
+                "moveUp" => CreateToolbarItem(_form._moveUpCommand, tooltip: UiStrings.MoveUp),
+                "moveDown" => CreateToolbarItem(_form._moveDownCommand, tooltip: UiStrings.MoveDown),
                 "zoom" => new NSToolbarItem
                 {
                     View = new NSSlider
                     {
                         MinValue = 0,
                         MaxValue = 1,
-                        DoubleValue = ThumbnailSizes.SizeToCurve(_form.Config.ThumbnailSize())
+                        DoubleValue = ThumbnailSizes.SizeToCurve(_form.Config.ThumbnailSize()),
+                        ToolTip = UiStrings.Zoom,
+                        Title = UiStrings.Zoom
                     }.WithAction(_form.ZoomUpdated),
                     MaxSize = new CGSize(64, 999)
                 },
@@ -203,11 +210,15 @@ public class MacDesktopForm : DesktopForm
             };
         }
 
-        private NSToolbarItem CreateNsToolbarMenu(Command menuCommand, MenuProvider menuProvider)
+        private NSToolbarItem CreateNsToolbarMenu(Command menuCommand, MenuProvider menuProvider,
+            string? title = null, string? tooltip = null)
         {
             return new NSMenuToolbarItem
             {
                 Image = GetMacSymbol(menuCommand, true),
+                Label = menuCommand.ToolBarText ?? "",
+                Title = title ?? "",
+                ToolTip = tooltip ?? menuCommand.ToolBarText ?? "",
                 Menu = CreateMenu(menuProvider)
             };
         }
@@ -240,11 +251,14 @@ public class MacDesktopForm : DesktopForm
             return menu;
         }
 
-        private NSToolbarItem CreateToolbarItem(Command command)
+        private NSToolbarItem CreateToolbarItem(Command command, string? title = null, string? tooltip = null)
         {
             return new NSToolbarItem
             {
                 Image = GetMacSymbol(command, true),
+                Title = title ?? "",
+                Label = command.ToolBarText ?? "",
+                ToolTip = tooltip ?? command.ToolBarText ?? "",
                 Bordered = true
             }.WithAction(command.Execute);
         }

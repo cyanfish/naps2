@@ -51,7 +51,7 @@ public class ImageListActions
     // TODO: Does it make sense to move this method somewhere else?
     public void Deskew()
     {
-        var images = _imageList.Selection.ToList();
+        var images = _imageList.Selection;
         if (!images.Any())
         {
             return;
