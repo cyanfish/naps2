@@ -44,6 +44,9 @@ public abstract class ConfigScope<TConfig>
     
     public T? GetOrDefault<T>(Expression<Func<TConfig, T>> accessor) => GetOr(accessor!, default);
 
+    // TODO: This call isn't necessarily safe, as the compiler may insert a cast into the accessor expression.
+    // e.g. if the value is a nullable struct but the config property isn't nullable
+    // One possible fix is to use a property set expression instead of accessor + value
     public void Set<T>(Expression<Func<TConfig, T>> accessor, T value)
     {
         if (Mode == ConfigScopeMode.ReadOnly)

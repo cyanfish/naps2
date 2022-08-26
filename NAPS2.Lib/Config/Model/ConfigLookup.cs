@@ -40,7 +40,7 @@ public class ConfigLookup
                 var rootNode = new Node("c", !HasConfigAttribute(rootType), rootType);
                 return new ConfigLookup(rootNode, rootNode);
             default:
-                throw new ArgumentException();
+                throw new ArgumentException($"Unexpected expression: {expression}");
         }
     }
 

@@ -137,7 +137,7 @@ public class AboutForm : EtoDialogBase
 
     private void CheckForUpdatesChanged(object? sender, EventArgs e)
     {
-        Config.User.Set(c => c.CheckForUpdates, _checkForUpdates.Checked);
+        Config.User.Set(c => c.CheckForUpdates, _checkForUpdates.Checked == true);
         UpdateControls();
         DoUpdateCheck();
     }
