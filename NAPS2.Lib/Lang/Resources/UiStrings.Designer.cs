@@ -387,6 +387,12 @@ namespace NAPS2.Lang.Resources {
             }
         }
         
+        internal static string Save {
+            get {
+                return ResourceManager.GetString("Save", resourceCulture);
+            }
+        }
+        
         internal static string SaveAllAsPdf {
             get {
                 return ResourceManager.GetString("SaveAllAsPdf", resourceCulture);
@@ -410,13 +416,13 @@ namespace NAPS2.Lang.Resources {
                 return ResourceManager.GetString("SaveSelectedAsImages", resourceCulture);
             }
         }
-
+        
         internal static string EmailAllAsPdf {
             get {
                 return ResourceManager.GetString("EmailAllAsPdf", resourceCulture);
             }
         }
-
+        
         internal static string EmailSelectedAsPdf {
             get {
                 return ResourceManager.GetString("EmailSelectedAsPdf", resourceCulture);
