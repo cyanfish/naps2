@@ -31,8 +31,8 @@ public class PdfImportTests : ContextualTests
         storageConfig.AssertPdfStorage(images[0].Storage);
         storageConfig.AssertPdfStorage(images[1].Storage);
         // TODO: Why is the expected resolution weird?
-        ImageAsserts.Similar(PdfResources.word_p1, ImageContext.Render(images[0]), ignoreResolution: true);
-        ImageAsserts.Similar(PdfResources.word_p2, ImageContext.Render(images[1]), ignoreResolution: true);
+        ImageAsserts.Similar(PdfResources.word_p1, images[0].Render(), ignoreResolution: true);
+        ImageAsserts.Similar(PdfResources.word_p2, images[1].Render(), ignoreResolution: true);
     }
 
     [Theory]
@@ -46,7 +46,7 @@ public class PdfImportTests : ContextualTests
 
         Assert.Single(images);
         storageConfig.AssertJpegStorage(images[0].Storage);
-        ImageAsserts.Similar(ImageResources.color_image, ImageContext.Render(images[0]));
+        ImageAsserts.Similar(ImageResources.color_image, images[0].Render());
     }
 
     [Theory]
@@ -60,7 +60,7 @@ public class PdfImportTests : ContextualTests
 
         Assert.Single(images);
         storageConfig.AssertPngStorage(images[0].Storage);
-        ImageAsserts.Similar(ImageResources.color_image, ImageContext.Render(images[0]));
+        ImageAsserts.Similar(ImageResources.color_image, images[0].Render());
     }
 
     [Theory]
@@ -74,7 +74,7 @@ public class PdfImportTests : ContextualTests
 
         Assert.Single(images);
         storageConfig.AssertPngStorage(images[0].Storage);
-        ImageAsserts.Similar(ImageResources.color_image_bw, ImageContext.Render(images[0]));
+        ImageAsserts.Similar(ImageResources.color_image_bw, images[0].Render());
     }
 
     [Theory]
@@ -87,7 +87,7 @@ public class PdfImportTests : ContextualTests
         var images = await _importer.Import(importPath, new ImportParams { Password = "hello" }).ToList();
 
         Assert.Single(images);
-        ImageAsserts.Similar(ImageResources.color_image, ImageContext.Render(images[0]));
+        ImageAsserts.Similar(ImageResources.color_image, images[0].Render());
     }
 
     [Theory]
@@ -105,7 +105,7 @@ public class PdfImportTests : ContextualTests
         var images = await importer.Import(importPath).ToList();
 
         Assert.Single(images);
-        ImageAsserts.Similar(ImageResources.color_image, ImageContext.Render(images[0]));
+        ImageAsserts.Similar(ImageResources.color_image, images[0].Render());
     }
 
     [Fact]

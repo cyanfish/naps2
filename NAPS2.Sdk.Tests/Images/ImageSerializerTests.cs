@@ -33,7 +33,7 @@ public class ImageSerializerTests : ContextualTests
         Assert.Equal(300, Assert.IsType<BrightnessTransform>(destImage.TransformState.Transforms[0]).Brightness);
         Assert.True(destImage.Metadata.Lossless);
         Assert.Equal(BitDepth.Grayscale, destImage.Metadata.BitDepth);
-        ImageAsserts.Similar(ImageResources.color_image_b_p300, ImageContext.Render(destImage));
+        ImageAsserts.Similar(ImageResources.color_image_b_p300, destImage.Render());
     }
 
     [Theory]
@@ -52,7 +52,7 @@ public class ImageSerializerTests : ContextualTests
         Assert.IsType<ImageFileStorage>(destImage.Storage);
         // Check that disposing the original doesn't interfere with rendering, i.e. not using the same backing file
         sourceImage.Dispose();
-        ImageAsserts.Similar(ImageResources.color_image, ImageContext.Render(destImage));
+        ImageAsserts.Similar(ImageResources.color_image, destImage.Render());
     }
 
     [Theory]
@@ -70,7 +70,7 @@ public class ImageSerializerTests : ContextualTests
         Assert.IsAssignableFrom<IMemoryImage>(destImage.Storage);
         // Check that disposing the original doesn't interfere with rendering, i.e. not using the same image
         sourceImage.Dispose();
-        ImageAsserts.Similar(ImageResources.color_image, ImageContext.Render(destImage));
+        ImageAsserts.Similar(ImageResources.color_image, destImage.Render());
     }
 
     [Fact]
@@ -91,7 +91,7 @@ public class ImageSerializerTests : ContextualTests
         var sourceStorage = Assert.IsType<ImageFileStorage>(sourceImage.Storage);
         var destStorage = Assert.IsType<ImageFileStorage>(destImage.Storage);
         Assert.Equal(sourceStorage.FullPath, destStorage.FullPath);
-        ImageAsserts.Similar(ImageResources.color_image, ImageContext.Render(destImage));
+        ImageAsserts.Similar(ImageResources.color_image, destImage.Render());
 
         destImage.Dispose();
         Assert.True(File.Exists(sourceStorage.FullPath));
@@ -117,7 +117,7 @@ public class ImageSerializerTests : ContextualTests
         var sourceStorage = Assert.IsType<ImageFileStorage>(sourceImage.Storage);
         var destStorage = Assert.IsType<ImageFileStorage>(destImage.Storage);
         Assert.Equal(sourceStorage.FullPath, destStorage.FullPath);
-        ImageAsserts.Similar(ImageResources.color_image, ImageContext.Render(destImage));
+        ImageAsserts.Similar(ImageResources.color_image, destImage.Render());
 
         sourceImage.Dispose();
         Assert.True(File.Exists(sourceStorage.FullPath));
@@ -142,7 +142,7 @@ public class ImageSerializerTests : ContextualTests
         sourceImage.Dispose();
         using var destImage = ImageSerializer.Deserialize(destContext, serializedImage, new DeserializeImageOptions());
 
-        ImageAsserts.Similar(ImageResources.color_image, ImageContext.Render(destImage));
+        ImageAsserts.Similar(ImageResources.color_image, destImage.Render());
     }
 
     [Fact]
@@ -277,7 +277,7 @@ public class ImageSerializerTests : ContextualTests
         var importPath = Path.Combine(FolderPath, "import.pdf");
         File.WriteAllBytes(importPath, PdfResources.word_generated_pdf);
 
-        using var destContext = new ScanningContext(TestImageContextFactory.Get(),
+        using var destContext = new ScanningContext(TestImageContextFactory.Get(new PdfiumPdfRenderer()),
             FileStorageManager.CreateFolder(Path.Combine(FolderPath, "dest")));
 
         using var sourceImage = (await new PdfImporter(ScanningContext).Import(importPath).ToList()).First();
@@ -287,7 +287,7 @@ public class ImageSerializerTests : ContextualTests
         Assert.IsType<ImageFileStorage>(destImage.Storage);
         // Check that disposing the original doesn't interfere with rendering, i.e. not using the same backing file
         sourceImage.Dispose();
-        ImageAsserts.Similar(PdfResources.word_p1, ImageContext.Render(destImage), ignoreResolution: true);
+        ImageAsserts.Similar(PdfResources.word_p1, destImage.Render(), ignoreResolution: true);
     }
 
     [Theory]
@@ -299,7 +299,7 @@ public class ImageSerializerTests : ContextualTests
         var importPath = Path.Combine(FolderPath, "import.pdf");
         File.WriteAllBytes(importPath, PdfResources.word_generated_pdf);
 
-        using var destContext = new ScanningContext(TestImageContextFactory.Get());
+        using var destContext = new ScanningContext(TestImageContextFactory.Get(new PdfiumPdfRenderer()));
 
         using var sourceImage = (await new PdfImporter(ScanningContext).Import(importPath).ToList()).First();
         var serializedImage = ImageSerializer.Serialize(sourceImage, new SerializeImageOptions());
@@ -308,7 +308,7 @@ public class ImageSerializerTests : ContextualTests
         Assert.IsType<ImageMemoryStorage>(destImage.Storage);
         // Check that disposing the original doesn't interfere with rendering, i.e. not using the same image
         sourceImage.Dispose();
-        ImageAsserts.Similar(PdfResources.word_p1, ImageContext.Render(destImage), ignoreResolution: true);
+        ImageAsserts.Similar(PdfResources.word_p1, destImage.Render(), ignoreResolution: true);
     }
 
     [Theory]
@@ -322,7 +322,7 @@ public class ImageSerializerTests : ContextualTests
         using var sourceImage = ScanningContext.CreateProcessedImage(LoadImage(ImageResources.color_image));
         using var imageWithThumbnail = sourceImage.WithPostProcessingData(new PostProcessingData
         {
-            Thumbnail = ImageContext.PerformTransform(ImageContext.Render(sourceImage), new ThumbnailTransform(256)),
+            Thumbnail = ImageContext.PerformTransform(sourceImage.Render(), new ThumbnailTransform(256)),
             ThumbnailTransformState = TransformState.Empty
         }, true);
 
@@ -344,7 +344,7 @@ public class ImageSerializerTests : ContextualTests
         using var sourceImage = ScanningContext.CreateProcessedImage(LoadImage(ImageResources.color_image));
         using var imageWithThumbnail = sourceImage.WithPostProcessingData(new PostProcessingData
         {
-            Thumbnail = ImageContext.PerformTransform(ImageContext.Render(sourceImage), new ThumbnailTransform(256)),
+            Thumbnail = ImageContext.PerformTransform(sourceImage.Render(), new ThumbnailTransform(256)),
             ThumbnailTransformState = TransformState.Empty.AddOrSimplify(new BrightnessTransform(100))
         }, true);
 

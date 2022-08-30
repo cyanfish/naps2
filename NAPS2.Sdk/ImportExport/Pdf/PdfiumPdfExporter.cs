@@ -121,7 +121,7 @@ public class PdfiumPdfExporter : IPdfExporter
             }
             else
             {
-                using var renderedImage = _scanningContext.ImageContext.Render(image);
+                using var renderedImage = image.Render();
                 // TODO: Verify always 24 bit? 
                 if (cancelToken.IsCancellationRequested)
                 {

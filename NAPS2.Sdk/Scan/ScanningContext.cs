@@ -71,6 +71,7 @@ public class ScanningContext : IDisposable
         var convertedStorage = ConvertStorageIfNeeded(storage, bitDepth, lossless, quality);
         var metadata = new ImageMetadata(bitDepth, lossless);
         var image = new ProcessedImage(
+            ImageContext,
             convertedStorage,
             metadata,
             new PostProcessingData(),
@@ -164,7 +165,7 @@ public class ScanningContext : IDisposable
 
     public string SaveToTempFile(ProcessedImage image, BitDepth bitDepth = BitDepth.Color)
     {
-        using var rendered = ImageContext.Render(image);
+        using var rendered = image.Render();
         return SaveToTempFile(rendered, bitDepth);
     }
 

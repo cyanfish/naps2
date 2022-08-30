@@ -22,7 +22,7 @@ public class ImportPostProcessor
         }
 
         var disposeRendered = rendered == null;
-        rendered ??= _imageContext.Render(image);
+        rendered ??= image.Render();
         try
         {
             var thumbnail = thumbnailSize.HasValue

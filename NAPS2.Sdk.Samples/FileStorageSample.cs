@@ -8,8 +8,7 @@ public class FileStorageSample
 {
     public static async Task Run()
     {
-        GdiImageContext imageContext = new GdiImageContext();
-        using ScanningContext scanningContext = new ScanningContext(imageContext);
+        using ScanningContext scanningContext = new ScanningContext(new GdiImageContext());
 
         // To save memory, we can store scanned images on disk after initial processing.
         // This will put files in the system temp folder, but you can use any folder.
@@ -34,7 +33,7 @@ public class FileStorageSample
             foreach (var processedImage in processedImages)
             {
                 // This seamlessly loads the image data from disk.
-                using Bitmap bitmap = imageContext.RenderToBitmap(processedImage);
+                using Bitmap bitmap = processedImage.RenderToBitmap();
                 // TODO: Do something with the bitmap
             }
         }

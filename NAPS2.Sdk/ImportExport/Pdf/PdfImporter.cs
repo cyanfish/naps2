@@ -155,11 +155,7 @@ public class PdfImporter : IPdfImporter
             storage = new ImageMemoryStorage(stream, ".pdf");
         }
 
-        var image = new ProcessedImage(
-            storage,
-            new ImageMetadata(BitDepth.Color, false),
-            new PostProcessingData(),
-            TransformState.Empty);
+        var image = _scanningContext.CreateProcessedImage(storage);
         return _importPostProcessor.AddPostProcessingData(
             image,
             null,

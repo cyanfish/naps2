@@ -4,6 +4,11 @@ namespace NAPS2.Images;
 
 public static class ImageExtensions
 {
+    public static IMemoryImage Render(this IRenderableImage image)
+    {
+        return image.ImageContext.Render(image);
+    }
+
     public static void CopyTo(this IMemoryImage source, IMemoryImage destination)
     {
         new CopyBitwiseImageOp().Perform(source, destination);

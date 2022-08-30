@@ -4,13 +4,6 @@ namespace NAPS2.ImportExport.Images;
 
 public class ImageTransfer : TransferHelper<IEnumerable<ProcessedImage>, ImageTransferData>
 {
-    private readonly ImageContext _imageContext;
-
-    public ImageTransfer(ImageContext imageContext)
-    {
-        _imageContext = imageContext;
-    }
-
     protected override ImageTransferData AsData(IEnumerable<ProcessedImage> images)
     {
         var transfer = new ImageTransferData

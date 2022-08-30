@@ -138,8 +138,7 @@ public class FViewer : FormBase
         _tiffViewer1.Image?.Dispose();
         _tiffViewer1.Image = null;
         using var imageToRender = CurrentImage.GetClonedImage();
-        var rendered = _imageContext.RenderToBitmap(imageToRender);
-        _tiffViewer1.Image = rendered;
+        _tiffViewer1.Image = imageToRender.RenderToBitmap();
     }
 
     protected override void Dispose(bool disposing)

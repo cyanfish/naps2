@@ -232,9 +232,8 @@ public class PdfExporter : IPdfExporter
 
     private PageExportState RenderStep(PageExportState state)
     {
-        var renderedImage = _scanningContext.ImageContext.Render(state.Image);
-        var metadata = state.Image.Metadata;
-        state.RenderedImage = renderedImage;
+        state.RenderedImage = state.Image.Render();
+        // TODO: How to set this?
         state.FileFormat = ImageFileFormat.Jpeg;
         return state;
     }

@@ -11,8 +11,7 @@ public class ScannerTests
     [ScannerFact]
     public async Task ScanWithWia()
     {
-        var imageContext = TestImageContextFactory.Get();
-        using var scanningContext = new ScanningContext(imageContext);
+        using var scanningContext = new ScanningContext(TestImageContextFactory.Get());
 
         var scanController = new ScanController(scanningContext);
         var devices = await scanController.GetDeviceList(Driver.Wia);
@@ -31,7 +30,7 @@ public class ScannerTests
 
         Assert.NotNull(image);
 
-        using var rendered = imageContext.Render(image);
+        using var rendered = image.Render();
 
         // TODO: Aside from generating the relevant files/resources, we also need to consider how to compare images when ImageAsserts assumes perfect pixel alignment.
         // TODO: One possibility is having a section of the test page with gradual gradients and only compare that subsection of the images. 

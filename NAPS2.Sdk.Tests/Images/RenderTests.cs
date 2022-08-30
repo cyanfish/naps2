@@ -15,7 +15,7 @@ public class RenderTests : ContextualTests
         var image = LoadImage(ImageResources.color_image);
         var processedImage = ScanningContext.CreateProcessedImage(image);
 
-        var rendered = ImageContext.Render(processedImage);
+        var rendered = processedImage.Render();
 
         ImageAsserts.Similar(ImageResources.color_image, rendered);
     }
@@ -32,7 +32,7 @@ public class RenderTests : ContextualTests
         image.CopyTo(grayImage);
         var processedImage = ScanningContext.CreateProcessedImage(grayImage);
 
-        var rendered = ImageContext.Render(processedImage);
+        var rendered = processedImage.Render();
 
         ImageAsserts.Similar(grayImage, rendered);
     }
@@ -47,7 +47,7 @@ public class RenderTests : ContextualTests
         image = ImageContext.PerformTransform(image, new BlackWhiteTransform());
         var processedImage = ScanningContext.CreateProcessedImage(image);
 
-        var rendered = ImageContext.Render(processedImage);
+        var rendered = processedImage.Render();
 
         ImageAsserts.Similar(ImageResources.color_image_bw, rendered);
     }

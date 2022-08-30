@@ -166,12 +166,12 @@ public class SaveImagesOperation : OperationBase
             var encoderParams = new EncoderParameters(1);
             encoderParams.Param[0] = new EncoderParameter(Encoder.Quality, quality);
             // TODO: Something more generic
-            using Bitmap bitmap = ((GdiImageContext)_imageContext).RenderToBitmap(image);
+            using Bitmap bitmap = image.RenderToBitmap();
             bitmap.Save(path, encoder, encoderParams);
         }
         else
         {
-            using Bitmap bitmap = ((GdiImageContext)_imageContext).RenderToBitmap(image);;
+            using Bitmap bitmap = image.RenderToBitmap();
             bitmap.Save(path, format);
         }
     }

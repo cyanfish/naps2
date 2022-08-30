@@ -86,8 +86,8 @@ public partial class ImageForm : FormBase
         var maxDimen = Screen.AllScreens.Max(s => Math.Max(s.WorkingArea.Height, s.WorkingArea.Width));
         // TODO: Limit to maxDimen * 2
         using var imageToRender = Image.GetClonedImage();
-        // TODO: More generic or avoid the cast somehow? In general how do we integrate with eto?
-        workingImage = ((GdiImageContext) _imageContext).RenderToBitmap(imageToRender);
+        // TODO: More generic? In general how do we integrate with eto?
+        workingImage = imageToRender.RenderToBitmap();
         if (_closed)
         {
             workingImage?.Dispose();

@@ -14,7 +14,7 @@ public class ProcessedImageTests : ContextualTests
         var metadata1 = new ImageMetadata(BitDepth.Color, false);
         var postProcessingData1 = new PostProcessingData();
         var transformState1 = TransformState.Empty;
-        var image1 = new ProcessedImage(storage, metadata1, postProcessingData1, transformState1);
+        var image1 = new ProcessedImage(ImageContext, storage, metadata1, postProcessingData1, transformState1);
         Assert.Equal(storage, image1.Storage);
         Assert.Equal(BitDepth.Color, image1.Metadata.BitDepth);
         Assert.False(image1.Metadata.Lossless);
@@ -23,7 +23,7 @@ public class ProcessedImageTests : ContextualTests
         var metadata2 = new ImageMetadata(BitDepth.BlackAndWhite, true);
         var postProcessingData2 = new PostProcessingData();
         var transformState2 = new TransformState(ImmutableList<Transform>.Empty.Add(new CropTransform(0, 50, 0, 50)));
-        var image2 = new ProcessedImage(storage, metadata2, postProcessingData2, transformState2);
+        var image2 = new ProcessedImage(ImageContext, storage, metadata2, postProcessingData2, transformState2);
         Assert.Equal(storage, image2.Storage);
         Assert.Equal(BitDepth.BlackAndWhite, image2.Metadata.BitDepth);
         Assert.True(image2.Metadata.Lossless);
@@ -41,7 +41,8 @@ public class ProcessedImageTests : ContextualTests
         var storageMock = new Mock<IImageStorage>();
         var metadata = new ImageMetadata(BitDepth.Color, false);
 
-        var image = new ProcessedImage(storageMock.Object, metadata, new PostProcessingData(), TransformState.Empty);
+        var image = new ProcessedImage(
+            ImageContext, storageMock.Object, metadata, new PostProcessingData(), TransformState.Empty);
         image.Dispose();
 
         storageMock.Verify(storage => storage.Dispose());
@@ -53,7 +54,8 @@ public class ProcessedImageTests : ContextualTests
         var storageMock = new Mock<IImageStorage>();
         var metadata = new ImageMetadata(BitDepth.Color, false);
 
-        var image = new ProcessedImage(storageMock.Object, metadata, new PostProcessingData(), TransformState.Empty);
+        var image = new ProcessedImage(
+            ImageContext, storageMock.Object, metadata, new PostProcessingData(), TransformState.Empty);
         var image2 = image.Clone();
         var image3 = image.Clone();
         var image4 = image2.Clone();
@@ -80,7 +82,8 @@ public class ProcessedImageTests : ContextualTests
         var storageMock = new Mock<IImageStorage>();
         var metadata = new ImageMetadata(BitDepth.Color, false);
 
-        var image = new ProcessedImage(storageMock.Object, metadata, new PostProcessingData(), TransformState.Empty);
+        var image = new ProcessedImage(
+            ImageContext, storageMock.Object, metadata, new PostProcessingData(), TransformState.Empty);
 
         // 90deg transform 
         var image2 = image.WithTransform(new RotationTransform(90));
@@ -117,7 +120,8 @@ public class ProcessedImageTests : ContextualTests
         var storageMock = new Mock<IImageStorage>();
         var metadata = new ImageMetadata(BitDepth.Color, false);
 
-        var image = new ProcessedImage(storageMock.Object, metadata, new PostProcessingData(), TransformState.Empty);
+        var image = new ProcessedImage(
+            ImageContext, storageMock.Object, metadata, new PostProcessingData(), TransformState.Empty);
 
         // 90deg transform 
         var image2 = image.WithTransform(new RotationTransform(90));
@@ -155,7 +159,8 @@ public class ProcessedImageTests : ContextualTests
         var storageMock = new Mock<IImageStorage>();
         var metadata = new ImageMetadata(BitDepth.Color, false);
 
-        var image = new ProcessedImage(storageMock.Object, metadata, new PostProcessingData(), TransformState.Empty);
+        var image = new ProcessedImage(
+            ImageContext, storageMock.Object, metadata, new PostProcessingData(), TransformState.Empty);
 
         image.Dispose();
         storageMock.Verify(storage => storage.Dispose());

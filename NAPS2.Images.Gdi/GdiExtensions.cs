@@ -5,6 +5,13 @@ namespace NAPS2.Images.Gdi;
 
 public static class GdiExtensions
 {
+    public static Bitmap RenderToBitmap(this IRenderableImage image)
+    {
+        var gdiImageContext = image.ImageContext as GdiImageContext ??
+                              throw new ArgumentException("The provided image does not have a GdiImageContext");
+        return gdiImageContext.RenderToBitmap(image);
+    }
+
     public static void SafeSetResolution(this Bitmap image, float xDpi, float yDpi)
     {
         if (xDpi > 0 && yDpi > 0)

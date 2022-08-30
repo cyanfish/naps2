@@ -15,9 +15,10 @@ public class ProcessedImage : IRenderableImage, IDisposable, IEquatable<Processe
     private readonly RefCount.Token _token;
     private bool _disposed;
 
-    internal ProcessedImage(IImageStorage storage, ImageMetadata metadata, PostProcessingData postProcessingData,
-        TransformState transformState, RefCount refCount)
+    internal ProcessedImage(ImageContext imageContext, IImageStorage storage, ImageMetadata metadata,
+        PostProcessingData postProcessingData, TransformState transformState, RefCount refCount)
     {
+        ImageContext = imageContext;
         Storage = storage;
         Metadata = metadata;
         PostProcessingData = postProcessingData;
@@ -25,9 +26,10 @@ public class ProcessedImage : IRenderableImage, IDisposable, IEquatable<Processe
         _token = refCount.NewToken();
     }
 
-    public ProcessedImage(IImageStorage storage, ImageMetadata metadata, PostProcessingData postProcessingData,
-        TransformState transformState, IProcessedImageOwner? owner = null)
+    public ProcessedImage(ImageContext imageContext, IImageStorage storage, ImageMetadata metadata,
+        PostProcessingData postProcessingData, TransformState transformState, IProcessedImageOwner? owner = null)
     {
+        ImageContext = imageContext;
         Storage = storage;
         Metadata = metadata;
         PostProcessingData = postProcessingData;
@@ -36,6 +38,8 @@ public class ProcessedImage : IRenderableImage, IDisposable, IEquatable<Processe
         var refCount = new RefCount(internalDisposer);
         _token = refCount.NewToken();
     }
+
+    public ImageContext ImageContext { get; }
 
     public IImageStorage Storage { get; }
 
@@ -56,7 +60,8 @@ public class ProcessedImage : IRenderableImage, IDisposable, IEquatable<Processe
     {
         // TODO: Should metadata update for some transforms?
         var newTransformState = TransformState.AddOrSimplify(transform);
-        var result = new ProcessedImage(Storage, Metadata, PostProcessingData, newTransformState, _token.RefCount);
+        var result =
+            new ProcessedImage(ImageContext, Storage, Metadata, PostProcessingData, newTransformState, _token.RefCount);
         if (disposeSelf)
         {
             Dispose();
@@ -72,12 +77,14 @@ public class ProcessedImage : IRenderableImage, IDisposable, IEquatable<Processe
     /// <returns></returns>
     public ProcessedImage WithNoTransforms()
     {
-        return new ProcessedImage(Storage, Metadata, PostProcessingData, TransformState.Empty, _token.RefCount);
+        return new ProcessedImage(
+            ImageContext, Storage, Metadata, PostProcessingData, TransformState.Empty, _token.RefCount);
     }
 
     public ProcessedImage WithPostProcessingData(PostProcessingData postProcessingData, bool disposeSelf)
     {
-        var result = new ProcessedImage(Storage, Metadata, postProcessingData, TransformState, _token.RefCount);
+        var result =
+            new ProcessedImage(ImageContext, Storage, Metadata, postProcessingData, TransformState, _token.RefCount);
         if (disposeSelf)
         {
             Dispose();
@@ -100,7 +107,7 @@ public class ProcessedImage : IRenderableImage, IDisposable, IEquatable<Processe
                 throw new ObjectDisposedException(nameof(ProcessedImage));
             }
 
-            return new(Storage, Metadata, PostProcessingData, TransformState, _token.RefCount);
+            return new(ImageContext, Storage, Metadata, PostProcessingData, TransformState, _token.RefCount);
         }
     }
 

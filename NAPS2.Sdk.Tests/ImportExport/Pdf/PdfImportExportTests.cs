@@ -68,8 +68,8 @@ public class PdfImportExportTests : ContextualTests
             images[0].WithTransform(new RotationTransform(90)),
             images[1].WithTransform(new BlackWhiteTransform())
         };
-        ImageAsserts.Similar(PdfResources.word_p1_rotated, ImageContext.Render(newImages[0]), ignoreResolution: true);
-        ImageAsserts.Similar(PdfResources.word_p2_bw, ImageContext.Render(newImages[1]), ignoreResolution: true);
+        ImageAsserts.Similar(PdfResources.word_p1_rotated, newImages[0].Render(), ignoreResolution: true);
+        ImageAsserts.Similar(PdfResources.word_p2_bw, newImages[1].Render(), ignoreResolution: true);
 
         await _exporter.Export(_exportPath, newImages, new PdfExportParams());
         PdfAsserts.AssertImages(_exportPath, PdfResources.word_p1_rotated, PdfResources.word_p2_bw);
@@ -89,7 +89,7 @@ public class PdfImportExportTests : ContextualTests
 
         Assert.Equal(2, images.Count);
         Assert.Single(imagesForOcr);
-        ImageAsserts.Similar(PdfResources.word_patcht_p1, ImageContext.Render(imagesForOcr[0]), ignoreResolution: true);
+        ImageAsserts.Similar(PdfResources.word_patcht_p1, imagesForOcr[0].Render(), ignoreResolution: true);
 
         var allImages = images.Concat(imagesForOcr).ToList();
 

@@ -10,8 +10,7 @@ public class ScanToBitmapSample
     {
         // We configure scanned images to be stored in GDI+ format, which uses
         // System.Drawing.Bitmap internally.
-        GdiImageContext imageContext = new GdiImageContext();
-        ScanningContext scanningContext = new ScanningContext(imageContext);
+        ScanningContext scanningContext = new ScanningContext(new GdiImageContext());
 
         // To select a device and scan, you need a controller.
         ScanController controller = new ScanController(scanningContext);
@@ -43,7 +42,7 @@ public class ScanToBitmapSample
         {
             // Make sure ScannedImage and rendered images are disposed after use
             using (processedImage)
-            using (Bitmap bitmap = imageContext.RenderToBitmap(processedImage))
+            using (Bitmap bitmap = processedImage.RenderToBitmap())
             {
                 // TODO: Do something with the bitmap
             }

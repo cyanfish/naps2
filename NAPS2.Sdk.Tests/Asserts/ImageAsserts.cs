@@ -22,7 +22,7 @@ public static class ImageAsserts
 
     public static void Similar(byte[] first, ProcessedImage second, double rmseThreshold = GENERAL_RMSE_THRESHOLD, bool ignoreResolution = false)
     {
-        using var rendered = TestImageContextFactory.Get().Render(second);
+        using var rendered = second.Render();
         Similar(TestImageContextFactory.Get().Load(first), rendered, rmseThreshold, ignoreResolution);
     }
 
@@ -39,7 +39,7 @@ public static class ImageAsserts
 
     public static void NotSimilar(byte[] first, ProcessedImage second, double rmseThreshold = GENERAL_RMSE_THRESHOLD, bool ignoreResolution = false)
     {
-        using var rendered = TestImageContextFactory.Get().Render(second);
+        using var rendered = second.Render();
         NotSimilar(TestImageContextFactory.Get().Load(first), rendered, rmseThreshold, ignoreResolution);
     }
 
