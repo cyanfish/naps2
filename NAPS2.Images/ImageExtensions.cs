@@ -1,7 +1,14 @@
+using NAPS2.Images.Bitwise;
+
 namespace NAPS2.Images;
 
 public static class ImageExtensions
 {
+    public static void CopyTo(this IMemoryImage source, IMemoryImage destination)
+    {
+        new CopyBitwiseImageOp().Perform(source, destination);
+    }
+
     public static MemoryStream SaveToMemoryStream(this IMemoryImage image, ImageFileFormat imageFormat,
         int quality = -1)
     {
