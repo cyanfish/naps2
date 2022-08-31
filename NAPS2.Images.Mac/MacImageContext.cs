@@ -30,7 +30,7 @@ public class MacImageContext : ImageContext
             image = new NSImage(path);
         }
         CheckReps(path, image);
-        return new MacImage(image)
+        return new MacImage(this, image)
         {
             OriginalFileFormat = GetFileFormatFromExtension(path, true)
         };
@@ -45,7 +45,7 @@ public class MacImageContext : ImageContext
         lock (ConstructorLock)
         {
             var image = new NSImage(NSData.FromStream(stream) ?? throw new ArgumentException(nameof(stream)));
-            return new MacImage(image)
+            return new MacImage(this, image)
             {
                 OriginalFileFormat = GetFileFormatFromFirstBytes(stream)
             };
@@ -86,7 +86,7 @@ public class MacImageContext : ImageContext
                 frame = new NSImage(rep.Size);
             }
             frame.AddRepresentation(rep);
-            yield return new MacImage(frame)
+            yield return new MacImage(this, frame)
             {
                 OriginalFileFormat = fileFormat
             };
@@ -124,7 +124,7 @@ public class MacImageContext : ImageContext
             };
             var image = new NSImage(rep.Size);
             image.AddRepresentation(rep);
-            return new MacImage(image);
+            return new MacImage(this, image);
         }
     }
 }

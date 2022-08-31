@@ -2,13 +2,6 @@ namespace NAPS2.Images;
 
 public class ImageExportHelper
 {
-    private readonly ImageContext _imageContext;
-
-    public ImageExportHelper(ImageContext imageContext)
-    {
-        _imageContext = imageContext;
-    }
-
     public string SaveSmallestFormat(string pathWithoutExtension, IMemoryImage image, BitDepth bitDepth,
         bool lossless, int quality, out ImageFileFormat imageFileFormat)
     {
@@ -30,7 +23,7 @@ public class ImageExportHelper
             imageFileFormat = ImageFileFormat.Png;
             if (exportFormat.PixelFormat == ImagePixelFormat.BW1 && image.PixelFormat != ImagePixelFormat.BW1)
             {
-                using var bwImage = _imageContext.PerformTransform(image.Clone(), new BlackWhiteTransform());
+                using var bwImage = image.Clone().PerformTransform(new BlackWhiteTransform());
                 return bwImage.SaveToMemoryStream(ImageFileFormat.Png);
             }
             return image.SaveToMemoryStream(ImageFileFormat.Png);

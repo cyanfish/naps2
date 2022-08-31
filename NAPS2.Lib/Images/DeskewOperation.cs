@@ -2,12 +2,8 @@
 
 public class DeskewOperation : OperationBase
 {
-    private readonly ImageContext _imageContext;
-
-    public DeskewOperation(ImageContext imageContext)
+    public DeskewOperation()
     {
-        _imageContext = imageContext;
-
         AllowCancel = true;
         AllowBackground = true;
     }
@@ -32,9 +28,9 @@ public class DeskewOperation : OperationBase
                     CancelToken.ThrowIfCancellationRequested();
                     var transform = Deskewer.GetDeskewTransform(image);
                     CancelToken.ThrowIfCancellationRequested();
-                    image = _imageContext.PerformTransform(image, transform);
+                    image = image.PerformTransform(transform);
                     var thumbnail = deskewParams.ThumbnailSize.HasValue
-                        ? _imageContext.PerformTransform(image, new ThumbnailTransform(deskewParams.ThumbnailSize.Value))
+                        ? image.PerformTransform(new ThumbnailTransform(deskewParams.ThumbnailSize.Value))
                         : null;
                     img.AddTransform(transform, thumbnail);
                     lock (this)

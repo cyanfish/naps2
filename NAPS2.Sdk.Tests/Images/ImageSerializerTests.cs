@@ -322,7 +322,7 @@ public class ImageSerializerTests : ContextualTests
         using var sourceImage = ScanningContext.CreateProcessedImage(LoadImage(ImageResources.color_image));
         using var imageWithThumbnail = sourceImage.WithPostProcessingData(new PostProcessingData
         {
-            Thumbnail = ImageContext.PerformTransform(sourceImage.Render(), new ThumbnailTransform(256)),
+            Thumbnail = sourceImage.Render().PerformTransform(new ThumbnailTransform(256)),
             ThumbnailTransformState = TransformState.Empty
         }, true);
 
@@ -344,7 +344,7 @@ public class ImageSerializerTests : ContextualTests
         using var sourceImage = ScanningContext.CreateProcessedImage(LoadImage(ImageResources.color_image));
         using var imageWithThumbnail = sourceImage.WithPostProcessingData(new PostProcessingData
         {
-            Thumbnail = ImageContext.PerformTransform(sourceImage.Render(), new ThumbnailTransform(256)),
+            Thumbnail = sourceImage.Render().PerformTransform(new ThumbnailTransform(256)),
             ThumbnailTransformState = TransformState.Empty.AddOrSimplify(new BrightnessTransform(100))
         }, true);
 

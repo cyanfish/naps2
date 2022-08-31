@@ -151,7 +151,7 @@ public class ScanningContext : IDisposable
             throw new InvalidOperationException();
         }
         var path = FileStorageManager.NextFilePath();
-        var fullPath = new ImageExportHelper(ImageContext)
+        var fullPath = new ImageExportHelper()
             .SaveSmallestFormat(path, image, bitDepth, lossless, quality, out _);
         return new ImageFileStorage(fullPath, false);
     }
@@ -159,7 +159,7 @@ public class ScanningContext : IDisposable
     public string SaveToTempFile(IMemoryImage image, BitDepth bitDepth = BitDepth.Color)
     {
         var path = Path.Combine(TempFolderPath, Path.GetRandomFileName());
-        return new ImageExportHelper(ImageContext)
+        return new ImageExportHelper()
             .SaveSmallestFormat(path, image, bitDepth, false, -1, out _);
     }
 

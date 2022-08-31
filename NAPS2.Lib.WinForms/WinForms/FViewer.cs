@@ -39,21 +39,19 @@ public class FViewer : FormBase
     private ToolStripButton _tsSharpen;
     private readonly KeyboardShortcutManager _ksm;
     private readonly OperationProgress _operationProgress;
-    private readonly GdiImageContext _imageContext;
     private readonly UiImageList _imageList;
     private readonly INotificationManager _notificationManager;
 
     private UiImage? _currentImage;
 
     public FViewer(IOperationFactory operationFactory, IWinFormsExportHelper exportHelper,
-        KeyboardShortcutManager ksm, OperationProgress operationProgress, GdiImageContext imageContext,
+        KeyboardShortcutManager ksm, OperationProgress operationProgress,
         UiImageList imageList, INotificationManager notificationManager)
     {
         _operationFactory = operationFactory;
         _exportHelper = exportHelper;
         _ksm = ksm;
         _operationProgress = operationProgress;
-        _imageContext = imageContext;
         _imageList = imageList;
         _notificationManager = notificationManager;
         InitializeComponent();
@@ -431,19 +429,19 @@ public class FViewer : FormBase
 
     private async void tsRotateLeft_Click(object sender, EventArgs e)
     {
-        await _imageList.MutateAsync(new ImageListMutation.RotateFlip(_imageContext, 270),
+        await _imageList.MutateAsync(new ImageListMutation.RotateFlip(270),
             ListSelection.Of(CurrentImage));
     }
 
     private async void tsRotateRight_Click(object sender, EventArgs e)
     {
-        await _imageList.MutateAsync(new ImageListMutation.RotateFlip(_imageContext, 90),
+        await _imageList.MutateAsync(new ImageListMutation.RotateFlip(90),
             ListSelection.Of(CurrentImage));
     }
 
     private async void tsFlip_Click(object sender, EventArgs e)
     {
-        await _imageList.MutateAsync(new ImageListMutation.RotateFlip(_imageContext, 180),
+        await _imageList.MutateAsync(new ImageListMutation.RotateFlip(180),
             ListSelection.Of(CurrentImage));
     }
 

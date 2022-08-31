@@ -44,7 +44,7 @@ public class RenderTests : ContextualTests
         config.Apply(this);
 
         var image = LoadImage(ImageResources.color_image_bw);
-        image = ImageContext.PerformTransform(image, new BlackWhiteTransform());
+        image = image.PerformTransform(new BlackWhiteTransform());
         var processedImage = ScanningContext.CreateProcessedImage(image);
 
         var rendered = processedImage.Render();

@@ -11,8 +11,9 @@ public class GdiImage : IMemoryImage
 {
     private ImageFileFormat? _originalFileFormat;
 
-    public GdiImage(Bitmap bitmap)
+    public GdiImage(ImageContext imageContext, Bitmap bitmap)
     {
+        ImageContext = imageContext ?? throw new ArgumentNullException(nameof(imageContext));
         if (bitmap == null)
         {
             throw new ArgumentNullException(nameof(bitmap));
@@ -20,6 +21,8 @@ public class GdiImage : IMemoryImage
         FixedPixelFormat = GdiPixelFormatFixer.MaybeFixPixelFormat(ref bitmap);
         Bitmap = bitmap;
     }
+
+    public ImageContext ImageContext { get; }
 
     /// <summary>
     /// Gets the underlying System.Drawing.Bitmap object for this image.
@@ -97,7 +100,7 @@ public class GdiImage : IMemoryImage
 
     public IMemoryImage Clone()
     {
-        var newImage = new GdiImage((Bitmap) Bitmap.Clone());
+        var newImage = new GdiImage(ImageContext, (Bitmap) Bitmap.Clone());
         // TODO: We want to make original file format more consistent when copying around and transforming images 
         newImage._originalFileFormat = _originalFileFormat;
         return newImage;
@@ -119,7 +122,7 @@ public class GdiImage : IMemoryImage
         }
         g.DrawImage(Bitmap, 0, 0, Width, Height);
 
-        var newImage = new GdiImage(newBitmap);
+        var newImage = new GdiImage(ImageContext, newBitmap);
         newImage.OriginalFileFormat = OriginalFileFormat;
         newImage.SetResolution(HorizontalResolution, VerticalResolution);
         return newImage;

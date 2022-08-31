@@ -10,7 +10,7 @@ internal class RemotePostProcessor : IRemotePostProcessor
         _scanningContext = scanningContext;
     }
 
-        
+
     //using (var result = PostProcessStep1(output, scanProfile))
     //{
     //    if (blankDetector.ExcludePage(result, scanProfile))
@@ -31,8 +31,8 @@ internal class RemotePostProcessor : IRemotePostProcessor
         image = DoInitialTransforms(image, options);
         try
         {
-            if (options.ExcludeBlankPages && BlankDetector.IsBlank(_scanningContext.ImageContext, image,
-                    options.BlankPageWhiteThreshold, options.BlankPageCoverageThreshold))
+            if (options.ExcludeBlankPages &&
+                BlankDetector.IsBlank(image, options.BlankPageWhiteThreshold, options.BlankPageCoverageThreshold))
             {
                 // TODO: Consider annotating the image as blank via postprocessingdata rather than excluding here
                 // TODO: In theory we might want to add some functionality to allow the user to correct blank detection
@@ -59,7 +59,7 @@ internal class RemotePostProcessor : IRemotePostProcessor
         if (!PlatformCompat.System.CanUseWin32 && options.BitDepth == BitDepth.BlackAndWhite)
         {
             // TODO: Don't do this here, do it where BitmapHelper is used or something
-            original = _scanningContext.ImageContext.PerformTransform(original, new BlackWhiteTransform(-options.Brightness));
+            original = original.PerformTransform(new BlackWhiteTransform(-options.Brightness));
         }
 
         double scaleFactor = 1;
@@ -68,8 +68,7 @@ internal class RemotePostProcessor : IRemotePostProcessor
             scaleFactor = 1.0 / options.ScaleRatio;
         }
 
-        // TODO: Simplify performing transforms (can the image itself have it as a method?)
-        var scaled = _scanningContext.ImageContext.PerformTransform(original, new ScaleTransform(scaleFactor));
+        var scaled = original.PerformTransform(new ScaleTransform(scaleFactor));
 
         if (!options.UseNativeUI && (options.StretchToPageSize || options.CropToPageSize))
         {
@@ -85,7 +84,7 @@ internal class RemotePostProcessor : IRemotePostProcessor
             {
                 if (options.CropToPageSize)
                 {
-                    scaled = _scanningContext.ImageContext.PerformTransform(scaled, new CropTransform(
+                    scaled = scaled.PerformTransform(new CropTransform(
                         0,
                         (int) ((width - (float) options.PageSize.HeightInInches) * original.HorizontalResolution),
                         0,
@@ -102,7 +101,7 @@ internal class RemotePostProcessor : IRemotePostProcessor
             {
                 if (options.CropToPageSize)
                 {
-                    scaled = _scanningContext.ImageContext.PerformTransform(scaled, new CropTransform
+                    scaled = scaled.PerformTransform(new CropTransform
                     (
                         0,
                         (int) ((width - (float) options.PageSize.WidthInInches) * original.HorizontalResolution),
@@ -126,9 +125,9 @@ internal class RemotePostProcessor : IRemotePostProcessor
         var data = processedImage.PostProcessingData;
         if (options.ThumbnailSize.HasValue)
         {
-            data = data with { Thumbnail = _scanningContext.ImageContext.PerformTransform(image, new ThumbnailTransform(options.ThumbnailSize.Value)) };
+            data = data with { Thumbnail = image.PerformTransform(new ThumbnailTransform(options.ThumbnailSize.Value)) };
         }
-            
+
         if (!options.UseNativeUI && options.BrightnessContrastAfterScan)
         {
             processedImage = AddTransformAndUpdateThumbnail(processedImage, ref image, new BrightnessTransform(options.Brightness), options);
@@ -182,11 +181,11 @@ internal class RemotePostProcessor : IRemotePostProcessor
             // TODO: So basically we should probably do ONE thumbnail render, after all transforms are determined.
             // TODO: BUT we should have some kind of fast path (not just used here) that moves the thumbnail transform up the transform stack
             // TODO: as long as subsequent transforms are size agnostic (i.e. 90 deg rotation).
-            image = _scanningContext.ImageContext.PerformTransform(image, transform);
+            image = image.PerformTransform(transform);
             transformed = transformed.WithPostProcessingData(
                 transformed.PostProcessingData with
                 {
-                    Thumbnail = _scanningContext.ImageContext.PerformTransform(image, new ThumbnailTransform(options.ThumbnailSize.Value))
+                    Thumbnail = image.PerformTransform(new ThumbnailTransform(options.ThumbnailSize.Value))
                 }, true);
         }
         return transformed;

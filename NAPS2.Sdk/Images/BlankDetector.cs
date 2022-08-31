@@ -13,11 +13,11 @@ public static class BlankDetector
     private const double COVERAGE_THRESHOLD_MIN = 0.00;
     private const double COVERAGE_THRESHOLD_MAX = 0.01;
 
-    public static bool IsBlank(ImageContext imageContext, IMemoryImage image, int whiteThresholdNorm, int coverageThresholdNorm)
+    public static bool IsBlank(IMemoryImage image, int whiteThresholdNorm, int coverageThresholdNorm)
     {
         if (image.PixelFormat == ImagePixelFormat.BW1)
         {
-            using var bitmap2 = imageContext.PerformTransform(image, new ColorBitDepthTransform());
+            using var bitmap2 = image.PerformTransform(new ColorBitDepthTransform());
             return IsBlankRGB(bitmap2, whiteThresholdNorm, coverageThresholdNorm);
         }
         if (image.PixelFormat != ImagePixelFormat.RGB24)

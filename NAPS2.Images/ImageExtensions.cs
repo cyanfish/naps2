@@ -9,6 +9,16 @@ public static class ImageExtensions
         return image.ImageContext.Render(image);
     }
 
+    public static IMemoryImage PerformTransform(this IMemoryImage image, Transform transform)
+    {
+        return image.ImageContext.PerformTransform(image, transform);
+    }
+
+    public static IMemoryImage PerformAllTransforms(this IMemoryImage image, IEnumerable<Transform> transforms)
+    {
+        return image.ImageContext.PerformAllTransforms(image, transforms);
+    }
+
     public static void CopyTo(this IMemoryImage source, IMemoryImage destination)
     {
         new CopyBitwiseImageOp().Perform(source, destination);

@@ -23,7 +23,7 @@ public class WorkerChannelTests : ContextualTests
         NamedPipeServer server = new NamedPipeServer(pipeName);
         WorkerService.BindService(server.ServiceBinder,
             new WorkerServiceImpl(ScanningContext, remoteScanController, thumbnailRenderer, mapiWrapper,
-                twainSessionController, new ImportPostProcessor(ImageContext)));
+                twainSessionController, new ImportPostProcessor()));
         server.Start();
         var client = new WorkerServiceAdapter(new NamedPipeChannel(".", pipeName));
         return new Channel

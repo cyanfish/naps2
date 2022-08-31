@@ -6,8 +6,9 @@ public class MacImage : IMemoryImage
 {
     internal readonly NSBitmapImageRep _imageRep;
 
-    public MacImage(NSImage image)
+    public MacImage(ImageContext imageContext, NSImage image)
     {
+        ImageContext = imageContext ?? throw new ArgumentNullException(nameof(imageContext));
         NsImage = image;
         // TODO: Better error checking
         lock (MacImageContext.ConstructorLock)
@@ -43,6 +44,8 @@ public class MacImage : IMemoryImage
             throw new Exception("Unexpected image representation");
         }
     }
+
+    public ImageContext ImageContext { get; }
 
     public NSImage NsImage { get; }
 
@@ -153,7 +156,7 @@ public class MacImage : IMemoryImage
             {
                 // TODO: Trying to copy the NSImage seems to fail specifically for black and white images.
                 // I'm not sure why.
-                var image = new MacImageContext().Create(Width, Height, PixelFormat);
+                var image = ImageContext.Create(Width, Height, PixelFormat);
                 this.CopyTo(image);
                 return image;
             }
@@ -163,7 +166,7 @@ public class MacImage : IMemoryImage
 #else
             var nsImage = (NSImage) NsImage.Copy();
 #endif
-            return new MacImage(nsImage)
+            return new MacImage(ImageContext, nsImage)
             {
                 OriginalFileFormat = OriginalFileFormat
             };

@@ -19,7 +19,7 @@ public class PdfImporter : IPdfImporter
     }
 
     public PdfImporter(ScanningContext scanningContext, IPdfPasswordProvider? pdfPasswordProvider)
-        : this(scanningContext, pdfPasswordProvider, new ImportPostProcessor(scanningContext.ImageContext))
+        : this(scanningContext, pdfPasswordProvider, new ImportPostProcessor())
     {
     }
 

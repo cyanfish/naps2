@@ -74,9 +74,8 @@ public static class ImageAsserts
                 first.VerticalResolution + RESOLUTION_THRESHOLD);
         }
 
-        var imageContext = TestImageContextFactory.Get();
-        first = imageContext.PerformTransform(first, new ColorBitDepthTransform());
-        second = imageContext.PerformTransform(second, new ColorBitDepthTransform());
+        first = first.PerformTransform(new ColorBitDepthTransform());
+        second = second.PerformTransform(new ColorBitDepthTransform());
 
         // TODO: Wrap in a bitwise op
         using var lock1 = first.Lock(LockMode.ReadOnly, out var data1);

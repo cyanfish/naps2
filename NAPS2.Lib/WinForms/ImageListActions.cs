@@ -2,20 +2,18 @@ namespace NAPS2.WinForms;
 
 public class ImageListActions
 {
-    private readonly ImageContext _imageContext;
     private readonly UiImageList _imageList;
     private readonly IOperationFactory _operationFactory;
     private readonly OperationProgress _operationProgress;
     private readonly Naps2Config _config;
 
-    public ImageListActions(ImageContext imageContext, UiImageList imageList, IOperationFactory operationFactory,
+    public ImageListActions(UiImageList imageList, IOperationFactory operationFactory,
         OperationProgress operationProgress, Naps2Config config)
     {
         _imageList = imageList;
         _operationFactory = operationFactory;
         _operationProgress = operationProgress;
         _config = config;
-        _imageContext = imageContext;
     }
 
     public void MoveDown() => _imageList.Mutate(new ImageListMutation.MoveDown());
@@ -41,12 +39,12 @@ public class ImageListActions
     public void ReverseSelected() => _imageList.Mutate(new ImageListMutation.ReverseSelection());
 
     public async Task RotateLeft() =>
-        await _imageList.MutateAsync(new ImageListMutation.RotateFlip(_imageContext, 270));
+        await _imageList.MutateAsync(new ImageListMutation.RotateFlip(270));
 
     public async Task RotateRight() =>
-        await _imageList.MutateAsync(new ImageListMutation.RotateFlip(_imageContext, 90));
+        await _imageList.MutateAsync(new ImageListMutation.RotateFlip(90));
 
-    public async Task Flip() => await _imageList.MutateAsync(new ImageListMutation.RotateFlip(_imageContext, 180));
+    public async Task Flip() => await _imageList.MutateAsync(new ImageListMutation.RotateFlip(180));
 
     // TODO: Does it make sense to move this method somewhere else?
     public void Deskew()
@@ -65,7 +63,7 @@ public class ImageListActions
     }
 
     public async Task RotateFlip(double angle) =>
-        await _imageList.MutateAsync(new ImageListMutation.RotateFlip(_imageContext, angle));
+        await _imageList.MutateAsync(new ImageListMutation.RotateFlip(angle));
 
     public void ResetTransforms() => _imageList.Mutate(new ImageListMutation.ResetTransforms());
 

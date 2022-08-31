@@ -11,7 +11,7 @@ public class ImportPostProcessorTests : ContextualTests
 
     public ImportPostProcessorTests()
     {
-        _importPostProcessor = new ImportPostProcessor(ImageContext);
+        _importPostProcessor = new ImportPostProcessor();
     }
 
     [Fact]

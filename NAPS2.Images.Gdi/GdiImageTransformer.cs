@@ -51,7 +51,7 @@ public class GdiImageTransformer : AbstractImageTransformer<GdiImage>
             g.TranslateTransform(-image.Width / 2.0f, -image.Height / 2.0f);
             g.DrawImage(image.Bitmap, new Rectangle(0, 0, image.Width, image.Height));
         }
-        var resultImage = new GdiImage(result);
+        var resultImage = new GdiImage(ImageContext, result);
         OptimizePixelFormat(image, ref resultImage);
         image.Dispose();
         return resultImage;
@@ -70,7 +70,7 @@ public class GdiImageTransformer : AbstractImageTransformer<GdiImage>
         g.InterpolationMode = InterpolationMode.HighQualityBicubic;
         g.DrawImage(image.Bitmap, 0, 0, realWidth, realHeight);
         result.SafeSetResolution((float) horizontalRes, (float) verticalRes);
-        return new GdiImage(result);
+        return new GdiImage(ImageContext, result);
     }
 
     protected override GdiImage PerformTransform(GdiImage image, ThumbnailTransform transform)
@@ -90,6 +90,6 @@ public class GdiImageTransformer : AbstractImageTransformer<GdiImage>
             // Draw a border around the original bitmap's content, inside the padding
             g.DrawRectangle(Pens.Black, left, top, width - 1, height - 1);
         }
-        return new GdiImage(result);
+        return new GdiImage(ImageContext, result);
     }
 }

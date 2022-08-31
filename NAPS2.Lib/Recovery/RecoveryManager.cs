@@ -9,7 +9,7 @@ public class RecoveryManager
     private readonly ImportPostProcessor _importPostProcessor;
 
     public RecoveryManager(ScanningContext scanningContext)
-        : this(scanningContext, new ImportPostProcessor(scanningContext.ImageContext))
+        : this(scanningContext, new ImportPostProcessor())
     {
     }
 

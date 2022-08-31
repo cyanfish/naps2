@@ -9,6 +9,11 @@ namespace NAPS2.Images;
 public interface IMemoryImage : IImageStorage
 {
     /// <summary>
+    /// Gets the image context used to create this image.
+    /// </summary>
+    ImageContext ImageContext { get; }
+
+    /// <summary>
     /// Gets the image's width in pixels.
     /// </summary>
     int Width { get; }

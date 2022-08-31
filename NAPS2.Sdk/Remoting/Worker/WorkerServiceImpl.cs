@@ -32,7 +32,7 @@ public class WorkerServiceImpl : WorkerService.WorkerServiceBase
         IMapiWrapper mapiWrapper, ITwainSessionController twainSessionController)
         : this(scanningContext, new RemoteScanController(scanningContext),
             thumbnailRenderer, mapiWrapper, twainSessionController,
-            new ImportPostProcessor(scanningContext.ImageContext))
+            new ImportPostProcessor())
     {
     }
 

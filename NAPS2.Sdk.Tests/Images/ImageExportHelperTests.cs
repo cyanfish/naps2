@@ -9,13 +9,13 @@ public class ImageExportHelperTests : ContextualTests
 
     public ImageExportHelperTests()
     {
-        _helper = new ImageExportHelper(ImageContext);
+        _helper = new ImageExportHelper();
     }
 
     [Fact]
     public void SaveSmallestFormat_BlackAndWhite()
     {
-        var bw = ImageContext.PerformTransform(LoadImage(ImageResources.color_image_bw), new BlackWhiteTransform());
+        var bw = LoadImage(ImageResources.color_image_bw).PerformTransform(new BlackWhiteTransform());
         var path = Path.Combine(FolderPath, "test");
 
         var fullPath = _helper.SaveSmallestFormat(path, bw, BitDepth.BlackAndWhite, false, -1, out var format);
@@ -26,7 +26,7 @@ public class ImageExportHelperTests : ContextualTests
     [Fact]
     public void SaveSmallestFormat_BlackAndWhiteWithColorBitDepth()
     {
-        var bw = ImageContext.PerformTransform(LoadImage(ImageResources.color_image_bw), new BlackWhiteTransform());
+        var bw = LoadImage(ImageResources.color_image_bw).PerformTransform(new BlackWhiteTransform());
         var path = Path.Combine(FolderPath, "test");
 
         var fullPath = _helper.SaveSmallestFormat(path, bw, BitDepth.Color, false, -1, out var format);

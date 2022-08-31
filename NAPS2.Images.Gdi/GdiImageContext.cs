@@ -23,9 +23,9 @@ public class GdiImageContext : ImageContext
         return _imageTransformer.Apply(gdiImage, transform);
     }
 
-    public override IMemoryImage Load(string path) => new GdiImage(LoadBitmapWithExceptionHandling(path));
+    public override IMemoryImage Load(string path) => new GdiImage(this, LoadBitmapWithExceptionHandling(path));
 
-    public override IMemoryImage Load(Stream stream) => new GdiImage(new Bitmap(stream));
+    public override IMemoryImage Load(Stream stream) => new GdiImage(this, new Bitmap(stream));
 
     public override IEnumerable<IMemoryImage> LoadFrames(Stream stream, out int count)
     {
@@ -64,7 +64,7 @@ public class GdiImageContext : ImageContext
             for (int i = 0; i < count; i++)
             {
                 bitmap.SelectActiveFrame(FrameDimension.Page, i);
-                yield return new GdiImage((Bitmap) bitmap.Clone());
+                yield return new GdiImage(this, (Bitmap) bitmap.Clone());
             }
         }
     }
@@ -93,6 +93,6 @@ public class GdiImageContext : ImageContext
             }
             bitmap.Palette = p;
         }
-        return new GdiImage(bitmap);
+        return new GdiImage(this, bitmap);
     }
 }

@@ -17,7 +17,7 @@ public class TransformTests : ContextualTests
         IMemoryImage actual = LoadImage(ImageResources.color_image);
         IMemoryImage expected = LoadImage(ImageResources.color_image);
 
-        actual = ImageContext.PerformTransform(actual, new BrightnessTransform());
+        actual = actual.PerformTransform(new BrightnessTransform());
 
         ImageAsserts.Similar(expected, actual, ImageAsserts.NULL_RMSE_THRESHOLD);
     }
@@ -28,7 +28,7 @@ public class TransformTests : ContextualTests
         IMemoryImage actual = LoadImage(ImageResources.color_image);
         IMemoryImage expected = LoadImage(ImageResources.color_image_b_p300);
 
-        actual = ImageContext.PerformTransform(actual, new BrightnessTransform(300));
+        actual = actual.PerformTransform(new BrightnessTransform(300));
 
         ImageAsserts.Similar(expected, actual, ImageAsserts.GENERAL_RMSE_THRESHOLD);
     }
@@ -39,7 +39,7 @@ public class TransformTests : ContextualTests
         IMemoryImage actual = LoadImage(ImageResources.color_image);
         IMemoryImage expected = LoadImage(ImageResources.color_image_b_n300);
 
-        actual = ImageContext.PerformTransform(actual, new BrightnessTransform(-300));
+        actual = actual.PerformTransform(new BrightnessTransform(-300));
 
         ImageAsserts.Similar(expected, actual, ImageAsserts.GENERAL_RMSE_THRESHOLD);
     }
@@ -50,7 +50,7 @@ public class TransformTests : ContextualTests
         IMemoryImage actual = LoadImage(ImageResources.color_image);
         IMemoryImage expected = LoadImage(ImageResources.color_image);
 
-        actual = ImageContext.PerformTransform(actual, new TrueContrastTransform());
+        actual = actual.PerformTransform(new TrueContrastTransform());
 
         ImageAsserts.Similar(expected, actual, ImageAsserts.NULL_RMSE_THRESHOLD);
     }
@@ -61,7 +61,7 @@ public class TransformTests : ContextualTests
         IMemoryImage actual = LoadImage(ImageResources.color_image);
         IMemoryImage expected = LoadImage(ImageResources.color_image_c_p300);
 
-        actual = ImageContext.PerformTransform(actual, new TrueContrastTransform(300));
+        actual = actual.PerformTransform(new TrueContrastTransform(300));
 
         ImageAsserts.Similar(expected, actual, ImageAsserts.GENERAL_RMSE_THRESHOLD);
     }
@@ -72,7 +72,7 @@ public class TransformTests : ContextualTests
         IMemoryImage actual = LoadImage(ImageResources.color_image);
         IMemoryImage expected = LoadImage(ImageResources.color_image_c_n300);
 
-        actual = ImageContext.PerformTransform(actual, new TrueContrastTransform(-300));
+        actual = actual.PerformTransform(new TrueContrastTransform(-300));
 
         ImageAsserts.Similar(expected, actual, ImageAsserts.GENERAL_RMSE_THRESHOLD);
     }
@@ -83,7 +83,7 @@ public class TransformTests : ContextualTests
         IMemoryImage actual = LoadImage(ImageResources.color_image);
         IMemoryImage expected = LoadImage(ImageResources.color_image);
 
-        actual = ImageContext.PerformTransform(actual, new HueTransform());
+        actual = actual.PerformTransform(new HueTransform());
 
         ImageAsserts.Similar(expected, actual, ImageAsserts.NULL_RMSE_THRESHOLD);
     }
@@ -94,7 +94,7 @@ public class TransformTests : ContextualTests
         IMemoryImage actual = LoadImage(ImageResources.color_image);
         IMemoryImage expected = LoadImage(ImageResources.color_image_h_p300);
 
-        actual = ImageContext.PerformTransform(actual, new HueTransform(300));
+        actual = actual.PerformTransform(new HueTransform(300));
 
         ImageAsserts.Similar(expected, actual, ImageAsserts.GENERAL_RMSE_THRESHOLD);
     }
@@ -105,7 +105,7 @@ public class TransformTests : ContextualTests
         IMemoryImage actual = LoadImage(ImageResources.color_image);
         IMemoryImage expected = LoadImage(ImageResources.color_image_h_n300);
 
-        actual = ImageContext.PerformTransform(actual, new HueTransform(-300));
+        actual = actual.PerformTransform(new HueTransform(-300));
 
         ImageAsserts.Similar(expected, actual, ImageAsserts.GENERAL_RMSE_THRESHOLD);
     }
@@ -116,7 +116,7 @@ public class TransformTests : ContextualTests
         IMemoryImage actual = LoadImage(ImageResources.color_image);
         IMemoryImage expected = LoadImage(ImageResources.color_image);
 
-        actual = ImageContext.PerformTransform(actual, new SaturationTransform());
+        actual = actual.PerformTransform(new SaturationTransform());
 
         ImageAsserts.Similar(expected, actual, ImageAsserts.NULL_RMSE_THRESHOLD);
     }
@@ -127,7 +127,7 @@ public class TransformTests : ContextualTests
         IMemoryImage actual = LoadImage(ImageResources.color_image);
         IMemoryImage expected = LoadImage(ImageResources.color_image_s_p300);
 
-        actual = ImageContext.PerformTransform(actual, new SaturationTransform(300));
+        actual = actual.PerformTransform(new SaturationTransform(300));
 
         ImageAsserts.Similar(expected, actual, ImageAsserts.GENERAL_RMSE_THRESHOLD);
     }
@@ -138,7 +138,7 @@ public class TransformTests : ContextualTests
         IMemoryImage actual = LoadImage(ImageResources.color_image);
         IMemoryImage expected = LoadImage(ImageResources.color_image_s_n300);
 
-        actual = ImageContext.PerformTransform(actual, new SaturationTransform(-300));
+        actual = actual.PerformTransform(new SaturationTransform(-300));
 
         ImageAsserts.Similar(expected, actual, ImageAsserts.GENERAL_RMSE_THRESHOLD);
     }
@@ -149,7 +149,7 @@ public class TransformTests : ContextualTests
         IMemoryImage actual = LoadImage(ImageResources.color_image);
         IMemoryImage expected = LoadImage(ImageResources.color_image);
 
-        actual = ImageContext.PerformTransform(actual, new SharpenTransform());
+        actual = actual.PerformTransform(new SharpenTransform());
 
         ImageAsserts.Similar(expected, actual, ImageAsserts.NULL_RMSE_THRESHOLD);
     }
@@ -160,7 +160,7 @@ public class TransformTests : ContextualTests
         IMemoryImage actual = LoadImage(ImageResources.color_image);
         IMemoryImage expected = LoadImage(ImageResources.color_image_sh_p1000);
 
-        actual = ImageContext.PerformTransform(actual, new SharpenTransform(1000));
+        actual = actual.PerformTransform(new SharpenTransform(1000));
 
         ImageAsserts.Similar(expected, actual, ImageAsserts.GENERAL_RMSE_THRESHOLD);
     }
@@ -171,7 +171,7 @@ public class TransformTests : ContextualTests
         IMemoryImage actual = LoadImage(ImageResources.color_image);
         IMemoryImage expected = LoadImage(ImageResources.color_image_sh_n1000);
 
-        actual = ImageContext.PerformTransform(actual, new SharpenTransform(-1000));
+        actual = actual.PerformTransform(new SharpenTransform(-1000));
 
         ImageAsserts.Similar(expected, actual, ImageAsserts.GENERAL_RMSE_THRESHOLD);
     }
@@ -182,7 +182,7 @@ public class TransformTests : ContextualTests
         IMemoryImage actual = LoadImage(ImageResources.color_image);
         IMemoryImage expected = LoadImage(ImageResources.color_image);
 
-        actual = ImageContext.PerformTransform(actual, new RotationTransform());
+        actual = actual.PerformTransform(new RotationTransform());
 
         ImageAsserts.Similar(expected, actual, ImageAsserts.NULL_RMSE_THRESHOLD);
     }
@@ -193,7 +193,7 @@ public class TransformTests : ContextualTests
         IMemoryImage actual = LoadImage(ImageResources.color_image);
         IMemoryImage expected = LoadImage(ImageResources.color_image_r_p90);
 
-        actual = ImageContext.PerformTransform(actual, new RotationTransform(90));
+        actual = actual.PerformTransform(new RotationTransform(90));
 
         ImageAsserts.Similar(expected, actual, ImageAsserts.GENERAL_RMSE_THRESHOLD);
     }
@@ -204,7 +204,7 @@ public class TransformTests : ContextualTests
         IMemoryImage actual = LoadImage(ImageResources.color_image);
         IMemoryImage expected = LoadImage(ImageResources.color_image_r_p46);
 
-        actual = ImageContext.PerformTransform(actual, new RotationTransform(46));
+        actual = actual.PerformTransform(new RotationTransform(46));
 
         ImageAsserts.Similar(expected, actual, ImageAsserts.XPLAT_RMSE_THRESHOLD);
     }
@@ -215,7 +215,7 @@ public class TransformTests : ContextualTests
         IMemoryImage actual = LoadImage(ImageResources.color_image);
         IMemoryImage expected = LoadImage(ImageResources.color_image_r_n45);
 
-        actual = ImageContext.PerformTransform(actual, new RotationTransform(-45));
+        actual = actual.PerformTransform(new RotationTransform(-45));
 
         // TODO: The mac rotated image looks way better than gdi, consider if we can improve the gdi end
         ImageAsserts.Similar(expected, actual, ImageAsserts.XPLAT_RMSE_THRESHOLD);
@@ -228,8 +228,8 @@ public class TransformTests : ContextualTests
         IMemoryImage actual2 = LoadImage(ImageResources.color_image);
         IMemoryImage expected = LoadImage(ImageResources.color_image_r_180);
 
-        actual = ImageContext.PerformTransform(actual, new RotationTransform(180));
-        actual2 = ImageContext.PerformTransform(actual2, new RotationTransform(-180));
+        actual = actual.PerformTransform(new RotationTransform(180));
+        actual2 = actual2.PerformTransform(new RotationTransform(-180));
 
         ImageAsserts.Similar(actual2, actual, 0);
         ImageAsserts.Similar(expected, actual, ImageAsserts.GENERAL_RMSE_THRESHOLD);
@@ -241,7 +241,7 @@ public class TransformTests : ContextualTests
         IMemoryImage actual = LoadImage(ImageResources.color_image);
         IMemoryImage expected = LoadImage(ImageResources.color_image);
 
-        actual = ImageContext.PerformTransform(actual, new ScaleTransform());
+        actual = actual.PerformTransform(new ScaleTransform());
 
         ImageAsserts.Similar(expected, actual, ImageAsserts.NULL_RMSE_THRESHOLD);
     }
@@ -252,7 +252,7 @@ public class TransformTests : ContextualTests
         IMemoryImage actual = LoadImage(ImageResources.color_image);
         IMemoryImage expected = LoadImage(ImageResources.color_image_sc_50pct);
 
-        actual = ImageContext.PerformTransform(actual, new ScaleTransform(0.5));
+        actual = actual.PerformTransform(new ScaleTransform(0.5));
 
         ImageAsserts.Similar(expected, actual, ImageAsserts.XPLAT_RMSE_THRESHOLD, ignoreResolution: true);
     }
@@ -263,7 +263,7 @@ public class TransformTests : ContextualTests
         IMemoryImage actual = LoadImage(ImageResources.color_image);
         IMemoryImage expected = LoadImage(ImageResources.color_image_huge);
 
-        actual = ImageContext.PerformTransform(actual, new ScaleTransform(10));
+        actual = actual.PerformTransform(new ScaleTransform(10));
 
         ImageAsserts.Similar(expected, actual, ImageAsserts.XPLAT_RMSE_THRESHOLD, ignoreResolution: true);
     }
@@ -274,7 +274,7 @@ public class TransformTests : ContextualTests
         IMemoryImage actual = LoadImage(ImageResources.color_image);
         IMemoryImage expected = LoadImage(ImageResources.color_image);
 
-        actual = ImageContext.PerformTransform(actual, new CropTransform());
+        actual = actual.PerformTransform(new CropTransform());
 
         ImageAsserts.Similar(expected, actual, ImageAsserts.NULL_RMSE_THRESHOLD);
     }
@@ -286,7 +286,7 @@ public class TransformTests : ContextualTests
         IMemoryImage actual = LoadImage(ImageResources.color_image);
         IMemoryImage expected = LoadImage(ImageResources.color_image_c_5_10_15_20);
 
-        actual = ImageContext.PerformTransform(actual, new CropTransform(10, 20, 15, 5));
+        actual = actual.PerformTransform(new CropTransform(10, 20, 15, 5));
 
         ImageAsserts.Similar(expected, actual, ImageAsserts.GENERAL_RMSE_THRESHOLD);
     }
@@ -297,10 +297,10 @@ public class TransformTests : ContextualTests
         IMemoryImage first = LoadImage(ImageResources.color_image);
         IMemoryImage second = LoadImage(ImageResources.color_image);
 
-        first = ImageContext.PerformTransform(first, new BlackWhiteTransform());
-        first = ImageContext.PerformTransform(first, new CropTransform(10, 20, 15, 5));
-        second = ImageContext.PerformTransform(second, new CropTransform(10, 20, 15, 5));
-        second = ImageContext.PerformTransform(second, new BlackWhiteTransform());
+        first = first.PerformTransform(new BlackWhiteTransform());
+        first = first.PerformTransform(new CropTransform(10, 20, 15, 5));
+        second = second.PerformTransform(new CropTransform(10, 20, 15, 5));
+        second = second.PerformTransform(new BlackWhiteTransform());
 
         ImageAsserts.Similar(first, second, ImageAsserts.NULL_RMSE_THRESHOLD);
     }
@@ -311,7 +311,7 @@ public class TransformTests : ContextualTests
         IMemoryImage actual = LoadImage(ImageResources.color_image);
         IMemoryImage expected = LoadImage(ImageResources.color_image_c_5_10_15_20);
 
-        actual = ImageContext.PerformTransform(actual, new CropTransform(10, 20, 15, 5, actual.Width, actual.Height));
+        actual = actual.PerformTransform(new CropTransform(10, 20, 15, 5, actual.Width, actual.Height));
 
         ImageAsserts.Similar(expected, actual, ImageAsserts.GENERAL_RMSE_THRESHOLD);
     }
@@ -334,7 +334,7 @@ public class TransformTests : ContextualTests
         IMemoryImage actual = LoadImage(ImageResources.color_image);
         IMemoryImage expected = LoadImage(ImageResources.color_image);
 
-        actual = ImageContext.PerformTransform(actual, new CropTransform(-1, -1, -1, -1));
+        actual = actual.PerformTransform(new CropTransform(-1, -1, -1, -1));
 
         ImageAsserts.Similar(expected, actual, ImageAsserts.GENERAL_RMSE_THRESHOLD);
     }
@@ -345,7 +345,7 @@ public class TransformTests : ContextualTests
         IMemoryImage actual = LoadImage(ImageResources.color_image);
         IMemoryImage expected = LoadImage(ImageResources.color_image_bw);
 
-        actual = ImageContext.PerformTransform(actual, new BlackWhiteTransform());
+        actual = actual.PerformTransform(new BlackWhiteTransform());
         Assert.Equal(ImagePixelFormat.BW1, actual.PixelFormat);
 
         // TODO: There's no inherent reason this shouldn't be an exact match, unless I guess if
@@ -359,7 +359,7 @@ public class TransformTests : ContextualTests
         IMemoryImage actual = LoadImage(ImageResources.color_image);
         IMemoryImage expected = LoadImage(ImageResources.color_image_bw_p300);
 
-        actual = ImageContext.PerformTransform(actual, new BlackWhiteTransform(300));
+        actual = actual.PerformTransform(new BlackWhiteTransform(300));
         Assert.Equal(ImagePixelFormat.BW1, actual.PixelFormat);
 
         ImageAsserts.Similar(expected, actual, ImageAsserts.XPLAT_RMSE_THRESHOLD);
@@ -371,7 +371,7 @@ public class TransformTests : ContextualTests
         IMemoryImage actual = LoadImage(ImageResources.color_image_bw);
         IMemoryImage expected = LoadImage(ImageResources.color_image_bw_24bit);
 
-        actual = ImageContext.PerformTransform(actual, new ColorBitDepthTransform());
+        actual = actual.PerformTransform(new ColorBitDepthTransform());
         Assert.Equal(ImagePixelFormat.RGB24, actual.PixelFormat);
 
         ImageAsserts.Similar(expected, actual, ImageAsserts.NULL_RMSE_THRESHOLD);
@@ -383,7 +383,7 @@ public class TransformTests : ContextualTests
         IMemoryImage actual = LoadImage(ImageResources.color_image);
         IMemoryImage expected = LoadImage(ImageResources.color_image_thumb_256);
 
-        actual = ImageContext.PerformTransform(actual, new ThumbnailTransform(256));
+        actual = actual.PerformTransform(new ThumbnailTransform(256));
 
         // TODO: The image is off by 1 pixel, it might have something to do with how the cggraphics coordinate
         // system is a double and not pixel-aligned

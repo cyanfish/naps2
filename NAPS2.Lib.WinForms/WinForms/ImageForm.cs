@@ -48,7 +48,7 @@ public partial class ImageForm : FormBase
             if (!transform.IsNull)
             {
                 // TODO: Maybe the working images etc. should be storage
-                result = ((GdiImage) _imageContext.PerformTransform(new GdiImage(result), transform)).Bitmap;
+                result = ((GdiImage) new GdiImage(_imageContext, result).PerformTransform(transform)).Bitmap;
             }
         }
         return result;
@@ -150,9 +150,9 @@ public partial class ImageForm : FormBase
                 {
                     // Optimize thumbnail rendering for the first (or only) image since we already have it loaded into memory
                     var transformed =
-                        _imageContext.PerformAllTransforms(new GdiImage(workingImage).Clone(), Transforms);
+                        new GdiImage(_imageContext, workingImage).Clone().PerformAllTransforms(Transforms);
                     updatedThumb =
-                        _imageContext.PerformTransform(transformed, new ThumbnailTransform(Config.ThumbnailSize()));
+                        transformed.PerformTransform(new ThumbnailTransform(Config.ThumbnailSize()));
                 }
                 img.AddTransforms(Transforms, updatedThumb);
             }
