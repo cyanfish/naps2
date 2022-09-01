@@ -4,6 +4,27 @@ namespace NAPS2.Unmanaged;
 
 public class NativeLibrary
 {
+    public static string FindPath(string libraryName, string? baseFolder = null)
+    {
+        var baseFolders = !string.IsNullOrWhiteSpace(baseFolder)
+            ? new[] { baseFolder }
+            : new[] { AssemblyHelper.LibFolder, AssemblyHelper.EntryFolder };
+        foreach (var actualBaseFolder in baseFolders)
+        {
+            foreach (var searchPath in PlatformCompat.System.LibrarySearchPaths)
+            {
+                var path = Path.Combine(actualBaseFolder, searchPath, libraryName);
+                if (File.Exists(path))
+                {
+                    return path;
+                }
+            }
+        }
+        var expectedPath =
+            Path.Combine(AssemblyHelper.LibFolder, PlatformCompat.System.LibrarySearchPaths[0], libraryName);
+        throw new Exception($"Library does not exist: {expectedPath}");
+    }
+
     private readonly Dictionary<Type, object> _funcCache = new();
     private readonly Lazy<IntPtr> _libraryHandle;
 
@@ -27,7 +48,7 @@ public class NativeLibrary
 
     public T Load<T>()
     {
-        return (T)_funcCache.Get(typeof(T), () => Marshal.GetDelegateForFunctionPointer<T>(LoadFunc<T>())!);
+        return (T) _funcCache.Get(typeof(T), () => Marshal.GetDelegateForFunctionPointer<T>(LoadFunc<T>())!);
     }
 
     private IntPtr LoadFunc<T>()

@@ -22,22 +22,23 @@ public class MacSystemCompat : ISystemCompat
 
     public bool RenderInWorker => false;
 
-    public string? TesseractExecutablePath => null;
-
-    public string PdfiumLibraryPath
-    {
+    public string[] LibrarySearchPaths {
         get
         {
-            var archPath = RuntimeInformation.ProcessArchitecture == Architecture.Arm64
-                ? "_macarm/libpdfium.dylib"
-                : "_mac/libpdfium.dylib";
-            if (File.Exists(Path.Combine(AssemblyHelper.LibFolder, archPath)))
+            var prefix = RuntimeInformation.ProcessArchitecture == Architecture.Arm64
+                ? "_macarm"
+                : "_mac";
+            return new[]
             {
-                return archPath;
-            }
-            return "libpdfium.dylib";
+                prefix,
+                $"../Resources/{prefix}" // Path in .app bundle
+            };
         }
     }
+
+    public string? TesseractExecutableName => null;
+
+    public string PdfiumLibraryName => "libpdfium.dylib";
 
     public IntPtr LoadLibrary(string path) => MacInterop.dlopen(path, RTLD_LAZY | RTLD_GLOBAL);
 

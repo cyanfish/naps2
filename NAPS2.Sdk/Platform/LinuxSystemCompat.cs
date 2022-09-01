@@ -21,9 +21,11 @@ public class LinuxSystemCompat : ISystemCompat
 
     public bool RenderInWorker => false;
 
-    public string? TesseractExecutablePath => null;
+    public string[] LibrarySearchPaths => new[] { "_linux" };
 
-    public string PdfiumLibraryPath => "_linux/libpdfium.so";
+    public string? TesseractExecutableName => null;
+
+    public string PdfiumLibraryName => "libpdfium.so";
     
     public IntPtr LoadLibrary(string path) => LinuxInterop.dlopen(path, RTLD_LAZY | RTLD_GLOBAL);
 

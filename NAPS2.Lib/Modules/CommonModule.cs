@@ -9,6 +9,7 @@ using NAPS2.Recovery;
 using NAPS2.Remoting.Worker;
 using NAPS2.Scan;
 using NAPS2.Scan.Internal;
+using NAPS2.Unmanaged;
 using NAPS2.WinForms;
 using Ninject;
 using Ninject.Modules;
@@ -90,7 +91,7 @@ public class CommonModule : NinjectModule
         {
             var tesseractPath = PlatformCompat.System.UseSystemTesseract
                 ? "tesseract"
-                : Path.Combine(Paths.Executable, PlatformCompat.System.TesseractExecutablePath!);
+                : NativeLibrary.FindPath(PlatformCompat.System.TesseractExecutableName!);
             return new TesseractOcrEngine(
                 tesseractPath,
                 ctx.Kernel.Get<TesseractLanguageManager>().TessdataBasePath,

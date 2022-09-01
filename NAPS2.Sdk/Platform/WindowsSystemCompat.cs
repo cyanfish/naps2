@@ -19,9 +19,11 @@ public abstract class WindowsSystemCompat : ISystemCompat
 
     public bool RenderInWorker => true;
 
-    public abstract string? TesseractExecutablePath { get; }
+    public abstract string[] LibrarySearchPaths { get;  }
 
-    public abstract string PdfiumLibraryPath { get; }
+    public string TesseractExecutableName => "tesseract.exe";
+
+    public string PdfiumLibraryName => "pdfium.dll";
 
     public IntPtr LoadLibrary(string path) => Win32.LoadLibrary(path);
 

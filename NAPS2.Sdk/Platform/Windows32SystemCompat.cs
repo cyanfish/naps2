@@ -4,9 +4,7 @@ namespace NAPS2.Platform;
 
 public class Windows32SystemCompat : WindowsSystemCompat
 {
-    public override string TesseractExecutablePath => "_win32/tesseract.exe";
-    
-    public override string PdfiumLibraryPath => "_win32/pdfium.dll";
+    public override string[] LibrarySearchPaths => new[] { "_win32" };
     
     public override IntPtr LoadSymbol(IntPtr libraryHandle, string symbol)
     {

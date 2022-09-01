@@ -1,5 +1,4 @@
-﻿using System.Reflection;
-using System.Runtime.InteropServices;
+﻿using System.Runtime.InteropServices;
 
 // ReSharper disable InconsistentNaming
 
@@ -7,21 +6,10 @@ namespace NAPS2.ImportExport.Pdf.Pdfium;
 
 public class PdfiumNativeLibrary : Unmanaged.NativeLibrary
 {
-    // TODO: Consider using Pdfium as a full replacement for PdfSharp.
-    // The benefits would be more import compatibility + a solution to PdfSharp xplat. But there may be some
-    // limitations, e.g. I don't see how you encrypt a document with Pdfium.
-    //
-    // API reference: https://pdfium.googlesource.com/pdfium/+/main/public/
-
     private static readonly Lazy<PdfiumNativeLibrary> LazyInstance = new(() =>
     {
         var testRoot = Environment.GetEnvironmentVariable("NAPS2_TEST_ROOT");
-        var depsFolder = string.IsNullOrEmpty(testRoot) ? AssemblyHelper.LibFolder : testRoot;
-        var libraryPath = Path.Combine(depsFolder!, PlatformCompat.System.PdfiumLibraryPath);
-        if (!File.Exists(libraryPath))
-        {
-            throw new Exception($"Library does not exist: {libraryPath}");
-        }
+        var libraryPath = FindPath(PlatformCompat.System.PdfiumLibraryName, testRoot);
         var nativeLib = new PdfiumNativeLibrary(libraryPath);
         nativeLib.FPDF_InitLibrary();
         return nativeLib;
