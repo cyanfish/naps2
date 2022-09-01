@@ -13,6 +13,7 @@ public class CopyBitwiseImageOp : BinaryBitwiseImageOp
     public int SourceYOffset { get; set; }
     public int DestXOffset { get; init; }
     public int DestYOffset { get; init; }
+    public ColorChannel DestChannel { get; init; }
     public int? Columns { get; init; }
     public int? Rows { get; init; }
 
@@ -49,12 +50,19 @@ public class CopyBitwiseImageOp : BinaryBitwiseImageOp
         {
             throw new ArgumentException("Source Y inversion not supported");
         }
+        if (DestChannel != ColorChannel.All &&
+            (src.bytesPerPixel is not (1 or 3 or 4) || dst.bytesPerPixel is not (3 or 4)))
+        {
+            throw new ArgumentException(
+                "DestChannel is only supported when the source is grayscale/color and the destination is color.");
+        }
     }
 
     protected override void PerformCore(BitwiseImageData src, BitwiseImageData dst, int partStart, int partEnd)
     {
         if (src.BitLayout == dst.BitLayout &&
-            (src.bytesPerPixel > 0 || (SourceXOffset % 8 == 0 && DestXOffset % 8 == 0)))
+            (src.bytesPerPixel > 0 || (SourceXOffset % 8 == 0 && DestXOffset % 8 == 0)) &&
+            DestChannel == ColorChannel.All)
         {
             FastCopy(src, dst, partStart, partEnd);
         }
@@ -85,6 +93,9 @@ public class CopyBitwiseImageOp : BinaryBitwiseImageOp
         var w = Columns ?? src.w;
         bool copyAlpha = src.bytesPerPixel == 4 && dst.bytesPerPixel == 4;
         bool copyFromGray = src.bytesPerPixel == 1;
+        bool copyToRed = dst.bytesPerPixel != 1 && DestChannel is ColorChannel.All or ColorChannel.Red;
+        bool copyToGreen = dst.bytesPerPixel != 1 && DestChannel is ColorChannel.All or ColorChannel.Green;
+        bool copyToBlue = dst.bytesPerPixel != 1 && DestChannel is ColorChannel.All or ColorChannel.Blue;
         bool copyToGray = dst.bytesPerPixel == 1;
         for (int i = partStart; i < partEnd; i++)
         {
@@ -115,16 +126,10 @@ public class CopyBitwiseImageOp : BinaryBitwiseImageOp
                     var luma = (byte) ((r * R_MULT + g * G_MULT + b * B_MULT) / 1000);
                     *dstPixel = luma;
                 }
-                else
-                {
-                    *(dstPixel + dst.rOff) = r;
-                    *(dstPixel + dst.gOff) = g;
-                    *(dstPixel + dst.bOff) = b;
-                }
-                if (copyAlpha)
-                {
-                    *(dstPixel + dst.aOff) = *(srcPixel + src.aOff);
-                }
+                if (copyToRed) *(dstPixel + dst.rOff) = r;
+                if (copyToGreen) *(dstPixel + dst.gOff) = g;
+                if (copyToBlue) *(dstPixel + dst.bOff) = b;
+                if (copyAlpha) *(dstPixel + dst.aOff) = *(srcPixel + src.aOff);
             }
         }
     }

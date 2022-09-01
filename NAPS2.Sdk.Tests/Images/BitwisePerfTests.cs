@@ -3,8 +3,7 @@ using Xunit;
 
 namespace NAPS2.Sdk.Tests.Images;
 
-// TODO: Make real tests instead of just perf comparison
-public class BitwiseTests : ContextualTests
+public class BitwisePerfTests : ContextualTests
 {
     private const int SIZE = 10000;
 
