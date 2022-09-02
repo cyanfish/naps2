@@ -25,6 +25,8 @@ public abstract class WindowsSystemCompat : ISystemCompat
 
     public string PdfiumLibraryName => "pdfium.dll";
 
+    public string SaneLibraryName => "sane.dll";
+
     public IntPtr LoadLibrary(string path) => Win32.LoadLibrary(path);
 
     public abstract IntPtr LoadSymbol(IntPtr libraryHandle, string symbol);

@@ -61,6 +61,30 @@ public class ScannerTests
         Assert.NotNull(image);
     }
 
+    [ScannerFact]
+    public async Task ScanWithSane()
+    {
+        var imageContext = TestImageContextFactory.Get();
+        using var scanningContext = new ScanningContext(imageContext);
+
+        var scanController = new ScanController(scanningContext);
+        var devices = await scanController.GetDeviceList(Driver.Sane);
+        var device = GetUserDevice(devices);
+
+        var options = new ScanOptions
+        {
+            Device = device,
+            Driver = Driver.Sane,
+            PaperSource = PaperSource.Flatbed,
+            Dpi = 100
+        };
+
+        var source = scanController.Scan(options);
+        var image = await source.Next();
+
+        Assert.NotNull(image);
+    }
+
     // TODO: Generalize the common infrastructure into helper classes (ScannerTests as a base class, FlatbedTests, FeederTests, etc.?)
     private static ScanDevice GetUserDevice(List<ScanDevice> devices)
     {

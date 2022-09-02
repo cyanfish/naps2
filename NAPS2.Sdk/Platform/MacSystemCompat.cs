@@ -40,6 +40,8 @@ public class MacSystemCompat : ISystemCompat
 
     public string PdfiumLibraryName => "libpdfium.dylib";
 
+    public string SaneLibraryName => "libsane.dylib";
+
     public IntPtr LoadLibrary(string path) => MacInterop.dlopen(path, RTLD_LAZY | RTLD_GLOBAL);
 
     public IntPtr LoadSymbol(IntPtr libraryHandle, string symbol) => MacInterop.dlsym(libraryHandle, symbol);

@@ -22,6 +22,8 @@ public interface ISystemCompat
 
     string PdfiumLibraryName { get; }
 
+    string SaneLibraryName { get; }
+
     IntPtr LoadLibrary(string path);
 
     IntPtr LoadSymbol(IntPtr libraryHandle, string symbol);

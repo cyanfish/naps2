@@ -26,6 +26,8 @@ public class LinuxSystemCompat : ISystemCompat
     public string? TesseractExecutableName => null;
 
     public string PdfiumLibraryName => "libpdfium.so";
+
+    public string SaneLibraryName => "libsane.so";
     
     public IntPtr LoadLibrary(string path) => LinuxInterop.dlopen(path, RTLD_LAZY | RTLD_GLOBAL);
 
