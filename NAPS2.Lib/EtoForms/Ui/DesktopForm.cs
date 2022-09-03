@@ -12,7 +12,6 @@ public abstract class DesktopForm : EtoFormBase
     private readonly INotificationManager _notify;
     private readonly CultureHelper _cultureHelper;
     private readonly IProfileManager _profileManager;
-    private readonly UiImageList _imageList;
     private readonly ImageTransfer _imageTransfer;
     private readonly ThumbnailRenderQueue _thumbnailRenderQueue;
     private readonly UiThumbnailProvider _thumbnailProvider;
@@ -98,7 +97,7 @@ public abstract class DesktopForm : EtoFormBase
         _notify = notify;
         _cultureHelper = cultureHelper;
         _profileManager = profileManager;
-        _imageList = imageList;
+        ImageList = imageList;
         _imageTransfer = imageTransfer;
         _thumbnailRenderQueue = thumbnailRenderQueue;
         _thumbnailProvider = thumbnailProvider;
@@ -155,11 +154,11 @@ public abstract class DesktopForm : EtoFormBase
             ToolBarText = UiStrings.SavePdf,
             Image = Icons.file_extension_pdf.ToEtoImage()
         };
-        _saveAllPdfCommand = new ActionCommand(() => _desktopController.SavePDF(_imageList.Images))
+        _saveAllPdfCommand = new ActionCommand(() => _desktopController.SavePDF(ImageList.Images))
         {
             MenuText = UiStrings.SaveAllAsPdf
         };
-        _saveSelectedPdfCommand = new ActionCommand(() => _desktopController.SavePDF(_imageList.Selection))
+        _saveSelectedPdfCommand = new ActionCommand(() => _desktopController.SavePDF(ImageList.Selection))
         {
             MenuText = UiStrings.SaveSelectedAsPdf
         };
@@ -172,11 +171,11 @@ public abstract class DesktopForm : EtoFormBase
             ToolBarText = UiStrings.SaveImages,
             Image = Icons.pictures.ToEtoImage()
         };
-        _saveAllImagesCommand = new ActionCommand(() => _desktopController.SaveImages(_imageList.Images))
+        _saveAllImagesCommand = new ActionCommand(() => _desktopController.SaveImages(ImageList.Images))
         {
             MenuText = UiStrings.SaveAllAsImages
         };
-        _saveSelectedImagesCommand = new ActionCommand(() => _desktopController.SaveImages(_imageList.Selection))
+        _saveSelectedImagesCommand = new ActionCommand(() => _desktopController.SaveImages(ImageList.Selection))
         {
             MenuText = UiStrings.SaveSelectedAsImages
         };
@@ -189,11 +188,11 @@ public abstract class DesktopForm : EtoFormBase
             ToolBarText = UiStrings.EmailPdf,
             Image = Icons.email_attach.ToEtoImage()
         };
-        _emailAllPdfCommand = new ActionCommand(() => _desktopController.EmailPDF(_imageList.Images))
+        _emailAllPdfCommand = new ActionCommand(() => _desktopController.EmailPDF(ImageList.Images))
         {
             MenuText = UiStrings.EmailAllAsPdf
         };
-        _emailSelectedPdfCommand = new ActionCommand(() => _desktopController.EmailPDF(_imageList.Selection))
+        _emailSelectedPdfCommand = new ActionCommand(() => _desktopController.EmailPDF(ImageList.Selection))
         {
             MenuText = UiStrings.EmailSelectedAsPdf
         };
@@ -359,41 +358,46 @@ public abstract class DesktopForm : EtoFormBase
         _listView = EtoPlatform.Current.CreateListView(new ImageListViewBehavior(_thumbnailProvider, _imageTransfer));
         _listView.AllowDrag = true;
         _listView.AllowDrop = true;
-        _listView.Selection = _imageList.Selection;
+        _listView.Selection = ImageList.Selection;
         _listView.ItemClicked += ListViewItemClicked;
         _listView.Drop += ListViewDrop;
         _listView.SelectionChanged += ListViewSelectionChanged;
-        // _listView.NativeControl.TabIndex = 7;
-        // _listView.NativeControl.Dock = DockStyle.Fill;
-        // _listView.NativeControl.ContextMenuStrip = contextMenuStrip;
-        // _listView.NativeControl.KeyDown += ListViewKeyDown;
-        // _listView.NativeControl.MouseWheel += ListViewMouseWheel;
         _imageListSyncer?.Dispose();
 
         SetContent(_listView.Control);
         AfterLayout();
 
-        // Content = _listView.Control;
-        //
         //
         // Shown += FDesktop_Shown;
         // Closing += FDesktop_Closing;
         // Closed += FDesktop_Closed;
-        // imageList.SelectionChanged += (_, _) =>
-        // {
-        //     Invoker.Current.SafeInvoke(() =>
-        //     {
-        //         UpdateToolbar();
-        //         _listView!.Selection = _imageList.Selection;
-        //     });
-        // };
-        // imageList.ImagesUpdated += (_, _) => Invoker.Current.SafeInvoke(UpdateToolbar);
+        imageList.SelectionChanged += (_, _) =>
+        {
+            Invoker.Current.SafeInvoke(() =>
+            {
+                UpdateToolbar();
+                _listView!.Selection = ImageList.Selection;
+            });
+        };
+        ImageList.ImagesUpdated += (_, _) => Invoker.Current.SafeInvoke(UpdateToolbar);
         _profileManager.ProfilesUpdated += (_, _) => UpdateScanButton();
         _desktopFormProvider.DesktopForm = this;
+    }
 
-        // TODO: Initialization needs work
-        _imageListSyncer = new ImageListSyncer(_imageList, _listView.ApplyDiffs, SynchronizationContext.Current!);
+    protected UiImageList ImageList { get; }
+
+    protected override void OnLoad(EventArgs e)
+    {
+        base.OnLoad(e);
+        _imageListSyncer = new ImageListSyncer(ImageList, _listView.ApplyDiffs, SynchronizationContext.Current!);
         _desktopController.Initialize();
+    }
+
+    protected override void OnShown(EventArgs e)
+    {
+        base.OnShown(e);
+        UpdateToolbar();
+        ResizeThumbnails(Config.ThumbnailSize());
     }
 
     protected virtual void CreateToolbarsAndMenus()
@@ -563,15 +567,6 @@ public abstract class DesktopForm : EtoFormBase
     //     AssignKeyboardShortcuts();
     //     UpdateScanButton();
     //
-    //     _layoutManager?.Deactivate();
-    //     btnZoomIn.Location = new Point(btnZoomIn.Location.X, _listView.NativeControl.Height - 33);
-    //     btnZoomOut.Location = new Point(btnZoomOut.Location.X, _listView.NativeControl.Height - 33);
-    //     btnZoomMouseCatcher.Location =
-    //         new Point(btnZoomMouseCatcher.Location.X, _listView.NativeControl.Height - 33);
-    //     _layoutManager = new LayoutManager(this)
-    //         .Bind(btnZoomIn, btnZoomOut, btnZoomMouseCatcher)
-    //         .BottomTo(() => _listView.NativeControl.Height)
-    //         .Activate();
     //     _listView.NativeControl.SizeChanged += (_, _) => _layoutManager.UpdateLayout();
     //
     //     _imageListSyncer = new ImageListSyncer(_imageList, _listView.ApplyDiffs, SynchronizationContext.Current!);
@@ -640,28 +635,26 @@ public abstract class DesktopForm : EtoFormBase
 
     #region Toolbar
 
-    private void UpdateToolbar()
+    protected virtual void UpdateToolbar()
     {
         // "All" dropdown items
         _saveAllPdfCommand.MenuText = _saveAllImagesCommand.MenuText = _emailAllPdfCommand.MenuText =
-            _reverseAllCommand.MenuText = string.Format(MiscResources.AllCount, _imageList.Images.Count);
+            _reverseAllCommand.MenuText = string.Format(MiscResources.AllCount, ImageList.Images.Count);
         _saveAllPdfCommand.Enabled = _saveAllImagesCommand.Enabled = _emailAllPdfCommand.Enabled =
-            _reverseAllCommand.Enabled = _imageList.Images.Any();
+            _reverseAllCommand.Enabled = ImageList.Images.Any();
 
         // "Selected" dropdown items
         _saveSelectedPdfCommand.MenuText = _saveSelectedImagesCommand.MenuText = _emailSelectedPdfCommand.MenuText =
-            _reverseSelectedCommand.MenuText = string.Format(MiscResources.SelectedCount, _imageList.Selection.Count);
+            _reverseSelectedCommand.MenuText = string.Format(MiscResources.SelectedCount, ImageList.Selection.Count);
         _saveSelectedPdfCommand.Enabled = _saveSelectedImagesCommand.Enabled = _emailSelectedPdfCommand.Enabled =
-            _reverseSelectedCommand.Enabled = _imageList.Selection.Any();
+            _reverseSelectedCommand.Enabled = ImageList.Selection.Any();
         //
         // // Context-menu actions
         // ctxView.Visible = ctxCopy.Visible = ctxDelete.Visible =
         //     ctxSeparator1.Visible = ctxSeparator2.Visible = _imageList.Selection.Any();
         // ctxSelectAll.Enabled = _imageList.Images.Any();
         //
-        // // Other
-        // btnZoomIn.Enabled = _imageList.Images.Any() && Config.ThumbnailSize() < ThumbnailSizes.MAX_SIZE;
-        // btnZoomOut.Enabled = _imageList.Images.Any() && Config.ThumbnailSize() > ThumbnailSizes.MIN_SIZE;
+        // Other
         _newProfileCommand.Enabled =
             !(Config.Get(c => c.NoUserProfiles) && _profileManager.Profiles.Any(x => x.IsLocked));
     }
@@ -821,18 +814,18 @@ public abstract class DesktopForm : EtoFormBase
         var action = Config.Get(c => c.SaveButtonDefaultAction);
 
         if (action == SaveButtonDefaultAction.AlwaysPrompt
-            || action == SaveButtonDefaultAction.PromptIfSelected && _imageList.Selection.Any())
+            || action == SaveButtonDefaultAction.PromptIfSelected && ImageList.Selection.Any())
         {
             // TODO
             // tsdSavePDF.ShowDropDown();
         }
-        else if (action == SaveButtonDefaultAction.SaveSelected && _imageList.Selection.Any())
+        else if (action == SaveButtonDefaultAction.SaveSelected && ImageList.Selection.Any())
         {
-            await _desktopController.SavePDF(_imageList.Selection);
+            await _desktopController.SavePDF(ImageList.Selection);
         }
         else
         {
-            await _desktopController.SavePDF(_imageList.Images);
+            await _desktopController.SavePDF(ImageList.Images);
         }
     }
 
@@ -841,18 +834,18 @@ public abstract class DesktopForm : EtoFormBase
         var action = Config.Get(c => c.SaveButtonDefaultAction);
 
         if (action == SaveButtonDefaultAction.AlwaysPrompt
-            || action == SaveButtonDefaultAction.PromptIfSelected && _imageList.Selection.Any())
+            || action == SaveButtonDefaultAction.PromptIfSelected && ImageList.Selection.Any())
         {
             // TODO
             // tsdSaveImages.ShowDropDown();
         }
-        else if (action == SaveButtonDefaultAction.SaveSelected && _imageList.Selection.Any())
+        else if (action == SaveButtonDefaultAction.SaveSelected && ImageList.Selection.Any())
         {
-            await _desktopController.SaveImages(_imageList.Selection);
+            await _desktopController.SaveImages(ImageList.Selection);
         }
         else
         {
-            await _desktopController.SaveImages(_imageList.Images);
+            await _desktopController.SaveImages(ImageList.Images);
         }
     }
 
@@ -861,18 +854,18 @@ public abstract class DesktopForm : EtoFormBase
         var action = Config.Get(c => c.SaveButtonDefaultAction);
 
         if (action == SaveButtonDefaultAction.AlwaysPrompt
-            || action == SaveButtonDefaultAction.PromptIfSelected && _imageList.Selection.Any())
+            || action == SaveButtonDefaultAction.PromptIfSelected && ImageList.Selection.Any())
         {
             // TODO
             // tsdEmailPDF.ShowDropDown();
         }
-        else if (action == SaveButtonDefaultAction.SaveSelected && _imageList.Selection.Any())
+        else if (action == SaveButtonDefaultAction.SaveSelected && ImageList.Selection.Any())
         {
-            await _desktopController.EmailPDF(_imageList.Selection);
+            await _desktopController.EmailPDF(ImageList.Selection);
         }
         else
         {
-            await _desktopController.EmailPDF(_imageList.Images);
+            await _desktopController.EmailPDF(ImageList.Images);
         }
     }
 
@@ -899,13 +892,6 @@ public abstract class DesktopForm : EtoFormBase
     //
     // #region Thumbnail Resizing
     //
-    // private void StepThumbnailSize(double step)
-    // {
-    //     int thumbnailSize = Config.ThumbnailSize();
-    //     thumbnailSize =
-    //         (int) ThumbnailSizes.StepNumberToSize(ThumbnailSizes.SizeToStepNumber(thumbnailSize) + step);
-    //     ResizeThumbnails(thumbnailSize);
-    // }
     //
     protected void ResizeThumbnails(int thumbnailSize)
     {
@@ -947,7 +933,7 @@ public abstract class DesktopForm : EtoFormBase
 
     private void ListViewSelectionChanged(object? sender, EventArgs e)
     {
-        _imageList.UpdateSelection(_listView.Selection);
+        ImageList.UpdateSelection(_listView.Selection);
         UpdateToolbar();
     }
 
@@ -975,7 +961,7 @@ public abstract class DesktopForm : EtoFormBase
 
     private void DragMoveImages(int position)
     {
-        if (!_imageList.Selection.Any())
+        if (!ImageList.Selection.Any())
         {
             return;
         }

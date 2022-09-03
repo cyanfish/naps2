@@ -35,14 +35,16 @@ public class ImageRenderState : IEquatable<ImageRenderState>
         if (ReferenceEquals(null, other)) return false;
         if (ReferenceEquals(this, other)) return true;
         // TODO: Should we also compare metadata? 
-        return Equals(Image, other.Image) && Equals(ThumbnailState, other.ThumbnailState);
+        return Equals(Image, other.Image) && Equals(ThumbnailState, other.ThumbnailState) &&
+               Equals(Thumbnail, other.Thumbnail);
     }
 
     public override int GetHashCode()
     {
         unchecked
         {
-            return (Image.GetHashCode() * 397) ^ (ThumbnailState?.GetHashCode() ?? 0);
+            return ((Image.GetHashCode() * 397) ^ (ThumbnailState?.GetHashCode() ?? 0) * 397) ^
+                   (Thumbnail?.GetHashCode() ?? 0);
         }
     }
 }

@@ -43,8 +43,6 @@ public class MacDesktopForm : DesktopForm
         Invoker.Current = new SyncContextInvoker(SynchronizationContext.Current);
         base.OnLoad(e);
         ClientSize = new Size(1000, 600);
-        // TODO: Initialize everything that needs to be initialized where it's best
-        ResizeThumbnails(Config.ThumbnailSize());
     }
 
     protected override void CreateToolbarsAndMenus()

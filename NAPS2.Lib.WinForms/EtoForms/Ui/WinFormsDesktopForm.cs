@@ -14,7 +14,9 @@ public class WinFormsDesktopForm : DesktopForm
     private readonly ToolbarFormatter _toolbarFormatter = new(new StringWrapper());
     private readonly wf.Form _form;
     private wf.ToolStrip _toolStrip = null!;
-    private wf.ToolStripContainer _container;
+    private wf.ToolStripContainer _container = null!;
+    private LayoutManager _layoutManager;
+    private wf.Button btnZoomIn, btnZoomOut, btnZoomMouseCatcher;
 
     public WinFormsDesktopForm(
         Naps2Config config,
@@ -38,6 +40,83 @@ public class WinFormsDesktopForm : DesktopForm
         _form = this.ToNative();
         _form.ClientSize = new Size(1204, 526);
     }
+
+    protected override void OnLoad(EventArgs e)
+    {
+        base.OnLoad(e);
+
+        ConfigureZoomButtons();
+
+        NativeListView.TabIndex = 7;
+        NativeListView.Dock = wf.DockStyle.Fill;
+        // NativeListView.ContextMenuStrip = contextMenuStrip;
+        // NativeListView.KeyDown += ListViewKeyDown;
+        // NativeListView.MouseWheel += ListViewMouseWheel;
+        NativeListView.SizeChanged += (_, _) => _layoutManager.UpdateLayout();
+        NativeListView.Focus();
+    }
+
+    private void ConfigureZoomButtons()
+    {
+        _layoutManager?.Deactivate();
+        btnZoomIn = new wf.Button
+        {
+            Image = Icons.zoom_in.ToEtoImage().ToSD(),
+            AccessibleName = UiStrings.ZoomIn,
+            BackColor = Color.White,
+            Size = new Size(23, 23),
+            FlatStyle = wf.FlatStyle.Flat,
+            TabIndex = 8
+        };
+        btnZoomIn.Click += (_, _) => StepThumbnailSize(1);
+        _container.ContentPanel.Controls.Add(btnZoomIn);
+        btnZoomOut = new wf.Button
+        {
+            Image = Icons.zoom_out.ToEtoImage().ToSD(),
+            AccessibleName = UiStrings.ZoomOut,
+            BackColor = Color.White,
+            Size = new Size(23, 23),
+            FlatStyle = wf.FlatStyle.Flat,
+            TabIndex = 9
+        };
+        btnZoomOut.Click += (_, _) => StepThumbnailSize(-1);
+        _container.ContentPanel.Controls.Add(btnZoomOut);
+        btnZoomMouseCatcher = new wf.Button
+        {
+            BackColor = Color.White,
+            Size = new Size(45, 23),
+            FlatStyle = wf.FlatStyle.Flat
+        };
+        _container.ContentPanel.Controls.Add(btnZoomMouseCatcher);
+        btnZoomMouseCatcher.BringToFront();
+        btnZoomIn.BringToFront();
+        btnZoomOut.BringToFront();
+
+        btnZoomIn.Location = new Point(32, NativeListView.Height - 33);
+        btnZoomOut.Location = new Point(10, NativeListView.Height - 33);
+        btnZoomMouseCatcher.Location = new Point(10, NativeListView.Height - 33);
+        _layoutManager = new LayoutManager(_form)
+            .Bind(btnZoomIn, btnZoomOut, btnZoomMouseCatcher)
+            .BottomTo(() => NativeListView.Height)
+            .Activate();
+    }
+
+    private void StepThumbnailSize(double step)
+    {
+        int thumbnailSize = Config.ThumbnailSize();
+        thumbnailSize =
+            (int) ThumbnailSizes.StepNumberToSize(ThumbnailSizes.SizeToStepNumber(thumbnailSize) + step);
+        ResizeThumbnails(thumbnailSize);
+    }
+
+    protected override void UpdateToolbar()
+    {
+        base.UpdateToolbar();
+        btnZoomIn.Enabled = ImageList.Images.Any() && Config.ThumbnailSize() < ThumbnailSizes.MAX_SIZE;
+        btnZoomOut.Enabled = ImageList.Images.Any() && Config.ThumbnailSize() > ThumbnailSizes.MIN_SIZE;
+    }
+
+    private wf.ListView NativeListView => ((WinFormsListView<UiImage>) _listView).NativeControl;
 
     protected override void ConfigureToolbar()
     {
@@ -72,15 +151,14 @@ public class WinFormsDesktopForm : DesktopForm
 
     protected override void SetThumbnailSpacing(int thumbnailSize)
     {
-        var nativeControl = ((WinFormsListView<UiImage>) _listView).NativeControl;
-        nativeControl.Padding = new wf.Padding(0, 20, 0, 0);
+        NativeListView.Padding = new wf.Padding(0, 20, 0, 0);
         const int MIN_PADDING = 6;
         const int MAX_PADDING = 66;
         // Linearly scale the padding with the thumbnail size
         int padding = MIN_PADDING + (MAX_PADDING - MIN_PADDING) * (thumbnailSize - ThumbnailSizes.MIN_SIZE) /
             (ThumbnailSizes.MAX_SIZE - ThumbnailSizes.MIN_SIZE);
         int spacing = thumbnailSize + padding * 2;
-        WinFormsHacks.SetListSpacing(nativeControl, spacing, spacing);
+        WinFormsHacks.SetListSpacing(NativeListView, spacing, spacing);
     }
 
     protected override void CreateToolbarButton(Command command)
