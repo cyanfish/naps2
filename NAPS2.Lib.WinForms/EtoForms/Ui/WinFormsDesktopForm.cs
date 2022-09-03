@@ -72,14 +72,15 @@ public class WinFormsDesktopForm : DesktopForm
 
     protected override void SetThumbnailSpacing(int thumbnailSize)
     {
-        _listView.NativeControl.Padding = new Padding(0, 20, 0, 0);
+        var nativeControl = ((WinFormsListView<UiImage>) _listView).NativeControl;
+        nativeControl.Padding = new wf.Padding(0, 20, 0, 0);
         const int MIN_PADDING = 6;
         const int MAX_PADDING = 66;
         // Linearly scale the padding with the thumbnail size
         int padding = MIN_PADDING + (MAX_PADDING - MIN_PADDING) * (thumbnailSize - ThumbnailSizes.MIN_SIZE) /
             (ThumbnailSizes.MAX_SIZE - ThumbnailSizes.MIN_SIZE);
         int spacing = thumbnailSize + padding * 2;
-        WinFormsHacks.SetListSpacing(_listView.NativeControl, spacing, spacing);
+        WinFormsHacks.SetListSpacing(nativeControl, spacing, spacing);
     }
 
     protected override void CreateToolbarButton(Command command)

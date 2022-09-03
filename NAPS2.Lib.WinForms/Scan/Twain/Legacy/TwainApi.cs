@@ -125,9 +125,12 @@ internal static class TwainApi
                     {
                         int bitcount = 0;
 
-                        // TODO: Clean this up a bit
                         using Bitmap bmp = DibUtils.BitmapFromDib(img, out bitcount);
-                        Bitmaps.Add(_scanningContext.CreateProcessedImage(new GdiImage(bmp), bitcount == 1 ? BitDepth.BlackAndWhite : BitDepth.Color, _settings.MaxQuality, _settings.Quality));
+                        var bitDepth = bitcount == 1 ? BitDepth.BlackAndWhite : BitDepth.Color;
+                        using var storage = new GdiImage(_scanningContext.ImageContext, bmp);
+                        var image = _scanningContext.CreateProcessedImage(
+                            storage, bitDepth, _settings.MaxQuality, _settings.Quality);
+                        Bitmaps.Add(image);
                     }
                     _form.Close();
                     break;

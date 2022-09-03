@@ -29,7 +29,7 @@ public class MacEtoPlatform : EtoPlatform
         return new Bitmap(new BitmapHandler(nsImage));
     }
 
-    public override IMemoryImage DrawHourglass(IMemoryImage image)
+    public override IMemoryImage DrawHourglass(ImageContext imageContext, IMemoryImage image)
     {
         // TODO
         return image;

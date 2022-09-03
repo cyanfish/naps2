@@ -30,7 +30,7 @@ public class UiThumbnailProvider
             }
             if (img.IsThumbnailDirty)
             {
-                thumb = EtoPlatform.Current.DrawHourglass(thumb);
+                thumb = EtoPlatform.Current.DrawHourglass(_imageContext, thumb);
             }
             return thumb;
         }
@@ -46,7 +46,7 @@ public class UiThumbnailProvider
             }
             _placeholder?.Dispose();
             _placeholder = _imageContext.Create(thumbnailSize, thumbnailSize, ImagePixelFormat.RGB24);
-            _placeholder = EtoPlatform.Current.DrawHourglass(_placeholder);
+            _placeholder = EtoPlatform.Current.DrawHourglass(_imageContext, _placeholder);
             return _placeholder;
         }
     }

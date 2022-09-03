@@ -1,6 +1,7 @@
 ﻿using NAPS2.EtoForms;
 using NAPS2.EtoForms.Ui;
 using NAPS2.EtoForms.WinForms;
+using NAPS2.Images.Gdi;
 using NAPS2.ImportExport;
 using NAPS2.ImportExport.Pdf;
 using NAPS2.Scan;

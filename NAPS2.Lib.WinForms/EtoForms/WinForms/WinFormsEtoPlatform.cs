@@ -49,7 +49,7 @@ public class WinFormsEtoPlatform : EtoPlatform
         return ((GdiImage) image).Bitmap.ToEto();
     }
 
-    public override IMemoryImage DrawHourglass(IMemoryImage image)
+    public override IMemoryImage DrawHourglass(ImageContext imageContext, IMemoryImage image)
     {
         var bitmap = new System.Drawing.Bitmap(image.Width, image.Height);
         using (var g = sd.Graphics.FromImage(bitmap))
@@ -71,6 +71,6 @@ public class WinFormsEtoPlatform : EtoPlatform
             g.DrawImage(hourglass, new sd.Rectangle((bitmap.Width - 32) / 2, (bitmap.Height - 32) / 2, 32, 32));
         }
         image.Dispose();
-        return new GdiImage(bitmap);
+        return new GdiImage(imageContext, bitmap);
     }
 }
