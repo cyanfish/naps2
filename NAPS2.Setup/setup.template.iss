@@ -11,7 +11,8 @@ DefaultDirName={commonpf}\NAPS2
 DefaultGroupName=NAPS2
 OutputDir=../publish/{#AppVersion}
 OutputBaseFilename=naps2-{#AppVersion}-{#AppPlatform}       
-Compression=lzma
+Compression=lzma2/ultra
+LZMAUseSeparateProcess=yes
 SolidCompression=yes
 ; !arch
 
