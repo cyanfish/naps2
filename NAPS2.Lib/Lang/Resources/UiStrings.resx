@@ -165,9 +165,6 @@
   <data name="Default" xml:space="preserve">
     <value>Default</value>
   </data>
-  <data name="Scan" xml:space="preserve">
-    <value>Scan</value>
-  </data>
   <data name="NewProfile" xml:space="preserve">
     <value>New Profile</value>
   </data>
@@ -269,9 +266,6 @@
   </data>
   <data name="Reverse" xml:space="preserve">
     <value>Reverse</value>
-  </data>
-  <data name="Delete" xml:space="preserve">
-    <value>Delete</value>
   </data>
   <data name="Clear" xml:space="preserve">
     <value>Clear</value>
@@ -378,9 +372,6 @@
   <data name="Advanced" xml:space="preserve">
     <value>Advanced</value>
   </data>
-  <data name="OK" xml:space="preserve">
-    <value>OK</value>
-  </data>
   <data name="Cancel" xml:space="preserve">
     <value>Cancel</value>
   </data>
@@ -389,5 +380,8 @@
   </data>
   <data name="SelectSource" xml:space="preserve">
     <value>Select Source</value>
+  </data>
+  <data name="RunInBackground" xml:space="preserve">
+    <value>Run in Background</value>
   </data>
 </root>

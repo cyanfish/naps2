@@ -654,6 +654,15 @@ namespace NAPS2.Lang.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Run in Background.
+        /// </summary>
+        internal static string RunInBackground {
+            get {
+                return ResourceManager.GetString("RunInBackground", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to SANE Driver.
         /// </summary>
         internal static string SaneDriver {

@@ -21,7 +21,7 @@ public class MacModule : NinjectModule
         Bind<IPdfPasswordProvider>().To<StubPdfPasswordProvider>();
         Bind<ErrorOutput>().To<StubErrorOutput>();
         Bind<IOverwritePrompt>().To<StubOverwritePrompt>();
-        Bind<OperationProgress>().To<StubOperationProgress>().InSingletonScope();
+        Bind<OperationProgress>().To<EtoOperationProgress>().InSingletonScope();
         Bind<DialogHelper>().To<StubDialogHelper>();
         Bind<INotificationManager>().To<StubNotificationManager>().InSingletonScope();
         Bind<ISaveNotify>().ToMethod(ctx => ctx.Kernel.Get<INotificationManager>());

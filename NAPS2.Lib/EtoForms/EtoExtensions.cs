@@ -56,6 +56,8 @@ public static class EtoExtensions
         new ControlWithLayoutAttributes(control, width: width);
     public static ControlWithLayoutAttributes Height(this Control control, int height) =>
         new ControlWithLayoutAttributes(control, height: height);
+    public static ControlWithLayoutAttributes Size(this Control control, int width, int height) =>
+        new ControlWithLayoutAttributes(control, width: width, height: height);
     public static ControlWithLayoutAttributes Center(this Control control) =>
         new ControlWithLayoutAttributes(control, center: true);
     public static ControlWithLayoutAttributes XScale(this Control control) =>

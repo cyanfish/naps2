@@ -4,7 +4,6 @@ using NAPS2.EtoForms.WinForms;
 using NAPS2.Images.Gdi;
 using NAPS2.ImportExport;
 using NAPS2.ImportExport.Pdf;
-using NAPS2.Scan;
 using NAPS2.Scan.Batch;
 using NAPS2.Update;
 using NAPS2.WinForms;
@@ -21,7 +20,7 @@ public class WinFormsModule : NinjectModule
         Bind<IPdfPasswordProvider>().To<WinFormsPdfPasswordProvider>();
         Bind<ErrorOutput>().To<MessageBoxErrorOutput>();
         Bind<IOverwritePrompt>().To<WinFormsOverwritePrompt>();
-        Bind<OperationProgress>().To<WinFormsOperationProgress>().InSingletonScope();
+        Bind<OperationProgress>().To<EtoOperationProgress>().InSingletonScope();
         Bind<DialogHelper>().To<WinFormsDialogHelper>();
         Bind<INotificationManager>().To<NotificationManager>().InSingletonScope();
         Bind<ISaveNotify>().ToMethod(ctx => ctx.Kernel.Get<INotificationManager>());

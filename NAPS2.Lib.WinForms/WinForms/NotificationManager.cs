@@ -1,5 +1,7 @@
 ﻿using System.Drawing;
+using Eto.Forms;
 using NAPS2.Update;
+using wf = System.Windows.Forms;
 
 namespace NAPS2.WinForms;
 
@@ -9,22 +11,21 @@ public class NotificationManager : INotificationManager
     private const int SPACING_Y = 20;
 
     private readonly Naps2Config _config;
-    private readonly List<NotifyWidgetBase> _slots = new List<NotifyWidgetBase>();
-    private FormBase _parentForm;
+    private readonly List<NotifyWidgetBase> _slots = new();
+    private wf.Form? _parentForm;
 
-    public NotificationManager(Naps2Config config)
+    public NotificationManager(Naps2Config config, DesktopFormProvider desktopFormProvider)
     {
         _config = config;
-    }
-
-    public FormBase ParentForm
-    {
-        get => _parentForm;
-        set
+        desktopFormProvider.DesktopFormChanged += (_, _) =>
         {
-            _parentForm = value;
+            if (_parentForm != null)
+            {
+                _parentForm.Resize -= parentForm_Resize;
+            }
+            _parentForm = desktopFormProvider.DesktopForm.ToNative();
             _parentForm.Resize += parentForm_Resize;
-        }
+        };
     }
 
     public void PdfSaved(string path)
@@ -106,7 +107,7 @@ public class NotificationManager : INotificationManager
         var index = _slots.IndexOf(n);
         if (index != -1)
         {
-            _parentForm.Controls.Remove(n);
+            _parentForm!.Controls.Remove(n);
             _slots[index] = null;
         }
     }
@@ -123,13 +124,13 @@ public class NotificationManager : INotificationManager
         {
             _slots[index] = n;
         }
-        _parentForm.Controls.Add(n);
+        _parentForm!.Controls.Add(n);
         return index;
     }
 
     private Point GetPosition(NotifyWidgetBase n, int slot)
     {
-        return new Point(_parentForm.ClientSize.Width - n.Width - PADDING_X,
+        return new Point(_parentForm!.ClientSize.Width - n.Width - PADDING_X,
             _parentForm.ClientSize.Height - n.Height - PADDING_Y - (n.Height + SPACING_Y) * slot);
     }
 }
