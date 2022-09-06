@@ -9,7 +9,6 @@ public class SaneNativeLibrary : Unmanaged.NativeLibrary
         var testRoot = Environment.GetEnvironmentVariable("NAPS2_TEST_ROOT");
         var libraryPath = FindPath(PlatformCompat.System.SaneLibraryName, testRoot);
         var nativeLib = new SaneNativeLibrary(libraryPath);
-        nativeLib.sane_init(out _, IntPtr.Zero);
         return nativeLib;
     });
 
@@ -18,13 +17,6 @@ public class SaneNativeLibrary : Unmanaged.NativeLibrary
     private SaneNativeLibrary(string libraryPath)
         : base(libraryPath)
     {
-    }
-
-    ~SaneNativeLibrary()
-    {
-        // TODO: Is this safe? Maybe just do this in a better way, e.g. if we do sane in a worker process, call this
-        // when the worker finishes
-        sane_exit();
     }
 
     public delegate SANE_Status sane_init_delegate(out int version_code, IntPtr authorize);

@@ -1,5 +1,4 @@
 ﻿using System.Runtime.InteropServices;
-using System.Text.RegularExpressions;
 using System.Threading;
 using NAPS2.Images.Bitwise;
 using NAPS2.Scan.Exceptions;
@@ -10,11 +9,6 @@ namespace NAPS2.Scan.Internal;
 
 internal class SaneScanDriver : IScanDriver
 {
-    private const string SCANIMAGE = "scanimage";
-    private const int SIGINT = 2;
-    private const int SIGTERM = 15;
-    private static readonly Regex ProgressRegex = new(@"^Progress: (\d+(\.\d+)?)%");
-
     private static readonly Dictionary<string, SaneOptionCollection> SaneOptionCache = new();
 
     private readonly ScanningContext _scanningContext;
@@ -32,19 +26,33 @@ internal class SaneScanDriver : IScanDriver
         {
             var deviceList = new List<ScanDevice>();
 
-            HandleStatus(Native.sane_get_devices(out var deviceListPtr, 0));
-            IntPtr devicePtr;
-            int offset = 0;
-            while ((devicePtr = Marshal.ReadIntPtr(deviceListPtr, offset++ * IntPtr.Size)) != IntPtr.Zero)
+            // TODO: Run SANE in a worker process so we can parallelize
+            lock (Native)
             {
-                var device = Marshal.PtrToStructure<SANE_Device>(devicePtr);
-                // TODO: We can use .type and .vendor to help pick an icon etc.
-                // https://sane-project.gitlab.io/standard/api.html#device-descriptor-type
-                deviceList.Add(new ScanDevice
+                // The doc says we only need to init once, but in practice it seems like sane_get_devices
+                // caches its values unless we exit and re-init.
+                Native.sane_init(out _, IntPtr.Zero);
+                try
                 {
-                    ID = device.name,
-                    Name = device.model
-                });
+                    HandleStatus(Native.sane_get_devices(out var deviceListPtr, 0));
+                    IntPtr devicePtr;
+                    int offset = 0;
+                    while ((devicePtr = Marshal.ReadIntPtr(deviceListPtr, offset++ * IntPtr.Size)) != IntPtr.Zero)
+                    {
+                        var device = Marshal.PtrToStructure<SANE_Device>(devicePtr);
+                        // TODO: We can use .type and .vendor to help pick an icon etc.
+                        // https://sane-project.gitlab.io/standard/api.html#device-descriptor-type
+                        deviceList.Add(new ScanDevice
+                        {
+                            ID = device.name,
+                            Name = device.model
+                        });
+                    }
+                }
+                finally
+                {
+                    Native.sane_exit();
+                }
             }
 
             return deviceList;
@@ -80,34 +88,46 @@ internal class SaneScanDriver : IScanDriver
     {
         return Task.Run(() =>
         {
-            if (cancelToken.IsCancellationRequested) return;
-            HandleStatus(Native.sane_open(options.Device!.ID!, out var handle));
-            try
+            lock (Native)
             {
-                if (cancelToken.IsCancellationRequested) return;
-                // TODO: Set up options
-                cancelToken.Register(() => Native.sane_cancel(handle));
-
-                // TODO: Can we validate whether it's really an adf?
-                if (options.PaperSource == PaperSource.Flatbed)
+                Native.sane_init(out _, IntPtr.Zero);
+                try
                 {
-                    var image = ScanPage(handle, scanEvents) ?? throw new DeviceException("SANE expected image");
-                    callback(image);
-                }
-                else
-                {
-                    while (ScanPage(handle, scanEvents) is { } image)
+                    if (cancelToken.IsCancellationRequested) return;
+                    HandleStatus(Native.sane_open(options.Device!.ID!, out var handle));
+                    try
                     {
-                        callback(image);
+                        if (cancelToken.IsCancellationRequested) return;
+                        // TODO: Set up options
+                        cancelToken.Register(() => Native.sane_cancel(handle));
+
+                        // TODO: Can we validate whether it's really an adf?
+                        if (options.PaperSource == PaperSource.Flatbed)
+                        {
+                            var image = ScanPage(handle, scanEvents) ??
+                                        throw new DeviceException("SANE expected image");
+                            callback(image);
+                        }
+                        else
+                        {
+                            while (ScanPage(handle, scanEvents) is { } image)
+                            {
+                                callback(image);
+                            }
+                        }
+                    }
+                    catch (OperationCanceledException)
+                    {
+                    }
+                    finally
+                    {
+                        Native.sane_close(handle);
                     }
                 }
-            }
-            catch (OperationCanceledException)
-            {
-            }
-            finally
-            {
-                Native.sane_close(handle);
+                finally
+                {
+                    Native.sane_exit();
+                }
             }
 
             // // TODO: Test ADF
@@ -213,6 +233,7 @@ internal class SaneScanDriver : IScanDriver
         {
             Array.Copy(buffer, 0, data, index, len);
             index += len;
+            currentProgress += len;
             scanEvents.PageProgress(currentProgress / (double) totalProgress);
         }
 
