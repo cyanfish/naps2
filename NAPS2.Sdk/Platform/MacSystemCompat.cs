@@ -12,11 +12,11 @@ public class MacSystemCompat : ISystemCompat
 
     public bool IsWia20Supported => false;
 
-    public bool IsTwainDriverSupported => true;
+    public bool IsTwainDriverSupported => false;
 
     public bool IsAppleDriverSupported => true;
 
-    public bool IsSaneDriverSupported => false;
+    public bool IsSaneDriverSupported => true;
 
     public bool CanUseWin32 => false;
 

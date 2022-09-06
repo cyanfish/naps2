@@ -254,10 +254,10 @@ public class EditProfileForm : EtoDialogBase
             var device = await _scanPerformer.PromptForDevice(ScanProfile, NativeHandle);
             if (device != null)
             {
-                if (string.IsNullOrEmpty(_deviceName.Text) ||
-                    CurrentDevice != null && CurrentDevice.Name == _deviceName.Text)
+                if (string.IsNullOrEmpty(_displayName.Text) ||
+                    CurrentDevice != null && CurrentDevice.Name == _displayName.Text)
                 {
-                    _deviceName.Text = device.Name;
+                    _displayName.Text = device.Name;
                 }
                 CurrentDevice = device;
             }

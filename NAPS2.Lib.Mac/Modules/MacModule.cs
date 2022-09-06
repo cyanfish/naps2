@@ -19,7 +19,7 @@ public class MacModule : NinjectModule
     {
         // Bind<IBatchScanPerformer>().To<BatchScanPerformer>();
         Bind<IPdfPasswordProvider>().To<StubPdfPasswordProvider>();
-        Bind<ErrorOutput>().To<StubErrorOutput>();
+        Bind<ErrorOutput>().To<MessageBoxErrorOutput>();
         Bind<IOverwritePrompt>().To<StubOverwritePrompt>();
         Bind<OperationProgress>().To<EtoOperationProgress>().InSingletonScope();
         Bind<DialogHelper>().To<StubDialogHelper>();
@@ -27,9 +27,9 @@ public class MacModule : NinjectModule
         Bind<ISaveNotify>().ToMethod(ctx => ctx.Kernel.Get<INotificationManager>());
         Bind<IScannedImagePrinter>().To<StubScannedImagePrinter>();
         Bind<DesktopController>().ToSelf().InSingletonScope();
+        Bind<IDesktopScanController>().To<DesktopScanController>();
         Bind<IUpdateChecker>().To<UpdateChecker>();
         Bind<IWinFormsExportHelper>().To<StubExportHelper>();
-        Bind<IDesktopScanController>().To<StubDesktopScanController>();
         Bind<IDesktopSubFormController>().To<StubDesktopSubFormController>();
         Bind<DesktopFormProvider>().ToSelf().InSingletonScope();
         Bind<ImageContext>().To<MacImageContext>();
@@ -115,29 +115,6 @@ public class StubDesktopSubFormController : IDesktopSubFormController
 
     public void ShowSettingsForm()
     {
-    }
-}
-
-public class StubDesktopScanController : IDesktopScanController
-{
-    public Task ScanWithDevice(string deviceID)
-    {
-        return Task.CompletedTask;
-    }
-
-    public Task ScanDefault()
-    {
-        return Task.CompletedTask;
-    }
-
-    public Task ScanWithNewProfile()
-    {
-        return Task.CompletedTask;
-    }
-
-    public Task ScanWithProfile(ScanProfile profile)
-    {
-        return Task.CompletedTask;
     }
 }
 

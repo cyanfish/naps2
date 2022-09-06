@@ -1,5 +1,4 @@
-﻿using System.Windows.Forms;
-using MessageBoxIcon = System.Windows.Forms.MessageBoxIcon;
+﻿using Eto.Forms;
 
 namespace NAPS2.WinForms;
 
@@ -14,7 +13,7 @@ public class MessageBoxErrorOutput : ErrorOutput
 
     public override void DisplayError(string errorMessage)
     {
-        Invoker.Current.SafeInvoke(() => MessageBox.Show(errorMessage, MiscResources.Error, MessageBoxButtons.OK, MessageBoxIcon.Error));
+        Invoker.Current.SafeInvoke(() => MessageBox.Show(errorMessage, MiscResources.Error, MessageBoxButtons.OK, MessageBoxType.Error));
     }
 
     public override void DisplayError(string errorMessage, string details)
@@ -28,11 +27,13 @@ public class MessageBoxErrorOutput : ErrorOutput
     }
     private void ShowErrorWithDetails(string errorMessage, string details)
     {
-        var form = new FError
-        {
-            ErrorMessage = errorMessage,
-            Details = details
-        };
-        form.ShowDialog();
+        // TODO: Migrate error form
+        MessageBox.Show(errorMessage, MessageBoxType.Error);
+        // var form = new FError
+        // {
+        //     ErrorMessage = errorMessage,
+        //     Details = details
+        // };
+        // form.ShowDialog();
     }
 }
