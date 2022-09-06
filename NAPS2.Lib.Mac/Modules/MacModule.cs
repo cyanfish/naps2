@@ -26,7 +26,6 @@ public class MacModule : NinjectModule
         Bind<INotificationManager>().To<StubNotificationManager>().InSingletonScope();
         Bind<ISaveNotify>().ToMethod(ctx => ctx.Kernel.Get<INotificationManager>());
         Bind<IScannedImagePrinter>().To<StubScannedImagePrinter>();
-        Bind<IDevicePrompt>().To<StubDevicePrompt>();
         Bind<DesktopController>().ToSelf().InSingletonScope();
         Bind<IUpdateChecker>().To<UpdateChecker>();
         Bind<IWinFormsExportHelper>().To<StubExportHelper>();
@@ -162,14 +161,6 @@ public class StubExportHelper : IWinFormsExportHelper
     public Task<bool> EmailPDF(IList<ProcessedImage> images)
     {
         return Task.FromResult(false);
-    }
-}
-
-public class StubDevicePrompt : IDevicePrompt
-{
-    public ScanDevice? PromptForDevice(List<ScanDevice> deviceList, IntPtr dialogParent)
-    {
-        return null;
     }
 }
 

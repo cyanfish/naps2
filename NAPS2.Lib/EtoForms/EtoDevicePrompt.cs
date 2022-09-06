@@ -1,22 +1,23 @@
-﻿using NAPS2.Platform.Windows;
+﻿using NAPS2.EtoForms.Ui;
 using NAPS2.Scan;
+using NAPS2.WinForms;
 
-namespace NAPS2.WinForms;
+namespace NAPS2.EtoForms;
 
-public class WinFormsDevicePrompt : IDevicePrompt
+public class EtoDevicePrompt : IDevicePrompt
 {
     private readonly IFormFactory _formFactory;
 
-    public WinFormsDevicePrompt(IFormFactory formFactory)
+    public EtoDevicePrompt(IFormFactory formFactory)
     {
         _formFactory = formFactory;
     }
 
     public ScanDevice? PromptForDevice(List<ScanDevice> deviceList, IntPtr dialogParent)
     {
-        var deviceForm = _formFactory.Create<FSelectDevice>();
+        var deviceForm = _formFactory.Create<SelectDeviceForm>();
         deviceForm.DeviceList = deviceList;
-        deviceForm.ShowDialog(new Win32Window(dialogParent));
+        deviceForm.ShowModal();
         return deviceForm.SelectedDevice;
     }
 }

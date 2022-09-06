@@ -60,7 +60,7 @@ public class EditProfileForm : EtoDialogBase
         _appleDriver = new RadioButton(_wiaDriver) { Text = UiStrings.AppleDriver };
         _saneDriver = new RadioButton(_wiaDriver) { Text = UiStrings.SaneDriver };
         _predefinedSettings = new RadioButton { Text = UiStrings.UsePredefinedSettings };
-        _nativeUi = new RadioButton(_nativeUi) { Text = UiStrings.UseNativeUi };
+        _nativeUi = new RadioButton(_predefinedSettings) { Text = UiStrings.UseNativeUi };
         _pageSize.SelectedIndexChanged += PageSize_SelectedIndexChanged;
         _contrastSlider.ValueChanged += ContrastSlider_Scroll;
         _contrastText.TextChanged += ContrastText_TextChanged;

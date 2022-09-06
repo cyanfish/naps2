@@ -384,4 +384,10 @@
   <data name="Cancel" xml:space="preserve">
     <value>Cancel</value>
   </data>
+  <data name="Select" xml:space="preserve">
+    <value>Select</value>
+  </data>
+  <data name="SelectSource" xml:space="preserve">
+    <value>Select Source</value>
+  </data>
 </root>
