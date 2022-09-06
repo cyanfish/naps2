@@ -6,6 +6,8 @@ public interface ISystemCompat
 
     bool IsTwainDriverSupported { get; }
 
+    bool IsAppleDriverSupported { get; }
+
     bool IsSaneDriverSupported { get; }
 
     bool CanUseWin32 { get; }

@@ -11,20 +11,15 @@ namespace NAPS2.EtoForms.WinForms;
 
 public class WinFormsEtoPlatform : EtoPlatform
 {
-    private const int MIN_BUTTON_WIDTH = 75;
-    private const int MIN_BUTTON_HEIGHT = 32;
+    private static readonly Size MinImageButtonSize = new(75, 32);
     private const int IMAGE_PADDING = 5;
-
-    static WinFormsEtoPlatform()
-    {
-        ButtonHandler.DefaultMinimumSize = new Eto.Drawing.Size(MIN_BUTTON_WIDTH, MIN_BUTTON_HEIGHT);
-    }
 
     public override IListView<T> CreateListView<T>(ListViewBehavior<T> behavior) =>
         new WinFormsListView<T>(behavior);
 
     public override void ConfigureImageButton(Eto.Forms.Button button)
     {
+        button.MinimumSize = MinImageButtonSize;
         if (button.ImagePosition == ButtonImagePosition.Left)
         {
             var native = (System.Windows.Forms.Button) button.ToNative();

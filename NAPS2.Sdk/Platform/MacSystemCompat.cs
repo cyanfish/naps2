@@ -14,6 +14,8 @@ public class MacSystemCompat : ISystemCompat
 
     public bool IsTwainDriverSupported => true;
 
+    public bool IsAppleDriverSupported => true;
+
     public bool IsSaneDriverSupported => false;
 
     public bool CanUseWin32 => false;

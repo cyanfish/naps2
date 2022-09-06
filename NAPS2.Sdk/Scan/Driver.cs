@@ -5,5 +5,7 @@ public enum Driver
     Default,
     Wia,
     Twain,
-    Sane
+    Apple,
+    Sane,
+    Escl
 }

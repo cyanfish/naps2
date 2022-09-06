@@ -1,6 +1,7 @@
 using System.Windows.Input;
 using Eto.Drawing;
 using Eto.Forms;
+using NAPS2.Scan;
 
 namespace NAPS2.EtoForms;
 
@@ -119,5 +120,32 @@ public static class C
         pix.Add(button, xOffset, yOffset);
         pix.Add(imageView, 0, 0);
         return pix;
+    }
+
+    public static Label Label(string text)
+    {
+        return new Label
+        {
+            Text = text
+        };
+    }
+
+    public static DropDown EnumDropDown<T>() where T : Enum
+    {
+        return EnumDropDown<T>(x => x.Description());
+    }
+
+    public static DropDown EnumDropDown<T>(Func<T, string> format) where T : Enum
+    {
+        var combo = new DropDown();
+        foreach (var item in Enum.GetValues(typeof(T)))
+        {
+            combo.Items.Add(new ListItem
+            {
+                Key = item.ToString(),
+                Text = format((T) item)
+            });
+        }
+        return combo;
     }
 }

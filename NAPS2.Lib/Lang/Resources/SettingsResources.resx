@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="BitDepth_1BlackAndWhite" xml:space="preserve">
-    <value>Black &amp; White</value>
+    <value>Black/White</value>
   </data>
   <data name="BitDepth_24Color" xml:space="preserve">
     <value>24-bit Color</value>

@@ -1,3 +1,4 @@
+using NAPS2.EtoForms.Ui;
 using NAPS2.Scan;
 using NAPS2.Wia;
 
@@ -57,7 +58,7 @@ public class DesktopScanController : IDesktopScanController
             }
 
             // No profile for the device we're scanning with, so prompt to create one
-            var editSettingsForm = _formFactory.Create<FEditProfile>();
+            var editSettingsForm = _formFactory.Create<EditProfileForm>();
             editSettingsForm.ScanProfile = _config.DefaultProfileSettings();
             try
             {
@@ -69,7 +70,7 @@ public class DesktopScanController : IDesktopScanController
             catch (WiaException)
             {
             }
-            editSettingsForm.ShowDialog();
+            editSettingsForm.ShowModal();
             if (!editSettingsForm.Result)
             {
                 return;
@@ -102,9 +103,9 @@ public class DesktopScanController : IDesktopScanController
 
     public async Task ScanWithNewProfile()
     {
-        var editSettingsForm = _formFactory.Create<FEditProfile>();
+        var editSettingsForm = _formFactory.Create<EditProfileForm>();
         editSettingsForm.ScanProfile = _config.DefaultProfileSettings();
-        editSettingsForm.ShowDialog();
+        editSettingsForm.ShowModal();
         if (!editSettingsForm.Result)
         {
             return;

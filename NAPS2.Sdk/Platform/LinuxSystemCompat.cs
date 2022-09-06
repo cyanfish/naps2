@@ -13,6 +13,8 @@ public class LinuxSystemCompat : ISystemCompat
 
     public bool IsTwainDriverSupported => false;
 
+    public bool IsAppleDriverSupported => false;
+
     public bool IsSaneDriverSupported => true;
 
     public bool CanUseWin32 => false;

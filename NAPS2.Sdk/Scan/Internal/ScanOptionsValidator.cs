@@ -10,7 +10,7 @@ public class ScanOptionsValidator
         // Easy deep copy. Ideally we'd do this in a more efficient way.
         options = options.ToXml().FromXml<ScanOptions>();
 
-        options.Driver = ValidateDriver(options);
+        options.Driver = ValidateDriver(options.Driver);
         if (options.Driver == Driver.Sane)
         {
             options.UseNativeUI = false;
@@ -69,28 +69,30 @@ public class ScanOptionsValidator
         return options;
     }
 
-    public Driver ValidateDriver(ScanOptions options)
-    {
-        if (options.Driver == Driver.Default)
-        {
-            return GetSystemDefaultDriver();
-        }
-        // TODO: Throw NotSupportedException if the platform doesn't match the driver
-        return options.Driver;
-    }
+    public Driver ValidateDriver(Driver driver) =>
+        driver == Driver.Default
+            ? SystemDefaultDriver
+            : driver;
 
-    private Driver GetSystemDefaultDriver()
+    public static Driver SystemDefaultDriver
     {
-        switch (Environment.OSVersion.Platform)
+        get
         {
-            case PlatformID.Win32NT:
+            if (PlatformCompat.System.IsWiaDriverSupported)
+            {
+                // TODO: Maybe default to TWAIN
+                // TODO: Also in general "default driver" handling should change
                 return Driver.Wia;
-            case PlatformID.Unix:
+            }
+            if (PlatformCompat.System.IsAppleDriverSupported)
+            {
+                return Driver.Apple;
+            }
+            if (PlatformCompat.System.IsSaneDriverSupported)
+            {
                 return Driver.Sane;
-            case PlatformID.MacOSX:
-                return Driver.Twain;
-            default:
-                throw new InvalidOperationException("Unsupported operating system.");
+            }
+            return Driver.Escl;
         }
     }
 }

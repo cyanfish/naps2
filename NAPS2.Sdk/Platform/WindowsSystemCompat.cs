@@ -11,6 +11,8 @@ public abstract class WindowsSystemCompat : ISystemCompat
 
     public bool IsTwainDriverSupported => true;
 
+    public bool IsAppleDriverSupported => false;
+
     public bool IsSaneDriverSupported => false;
 
     public bool CanUseWin32 => true;

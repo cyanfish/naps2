@@ -231,64 +231,63 @@ public class ProfilesForm : EtoDialogBase
 
     private async void DoScan()
     {
-        // TODO: Migrate FEditProfile to eto
-        // if (ImageCallback == null)
-        // {
-        //     throw new InvalidOperationException("Image callback not specified");
-        // }
-        // if (_profileManager.Profiles.Count == 0)
-        // {
-        //     var editSettingsForm = FormFactory.Create<FEditProfile>();
-        //     editSettingsForm.ScanProfile = new ScanProfile
-        //     {
-        //         Version = ScanProfile.CURRENT_VERSION
-        //     };
-        //     editSettingsForm.ShowDialog();
-        //     if (!editSettingsForm.Result)
-        //     {
-        //         return;
-        //     }
-        //     _profileManager.Mutate(new ListMutation<ScanProfile>.Append(editSettingsForm.ScanProfile), ListSelection.Empty<ScanProfile>());
-        //     _profileManager.DefaultProfile = editSettingsForm.ScanProfile;
-        // }
-        // if (SelectedProfile == null)
-        // {
-        //     MessageBox.Show(MiscResources.SelectProfileBeforeScan, MiscResources.ChooseProfile, MessageBoxButtons.OK, MessageBoxType.Warning);
-        //     return;
-        // }
-        // if (_profileManager.DefaultProfile == null)
-        // {
-        //     _profileManager.DefaultProfile = SelectedProfile;
-        // }
-        // var source = await _scanPerformer.PerformScan(SelectedProfile, DefaultScanParams(), this.ToNative().Handle);
-        // await source.ForEach(ImageCallback);
-        // this.ToNative().Activate();
+        if (ImageCallback == null)
+        {
+            throw new InvalidOperationException("Image callback not specified");
+        }
+        if (_profileManager.Profiles.Count == 0)
+        {
+            var editSettingsForm = FormFactory.Create<EditProfileForm>();
+            editSettingsForm.ScanProfile = new ScanProfile
+            {
+                Version = ScanProfile.CURRENT_VERSION
+            };
+            editSettingsForm.ShowModal();
+            if (!editSettingsForm.Result)
+            {
+                return;
+            }
+            _profileManager.Mutate(new ListMutation<ScanProfile>.Append(editSettingsForm.ScanProfile), ListSelection.Empty<ScanProfile>());
+            _profileManager.DefaultProfile = editSettingsForm.ScanProfile;
+        }
+        if (SelectedProfile == null)
+        {
+            MessageBox.Show(MiscResources.SelectProfileBeforeScan, MiscResources.ChooseProfile, MessageBoxButtons.OK, MessageBoxType.Warning);
+            return;
+        }
+        if (_profileManager.DefaultProfile == null)
+        {
+            _profileManager.DefaultProfile = SelectedProfile;
+        }
+        var source = await _scanPerformer.PerformScan(SelectedProfile, DefaultScanParams(), NativeHandle);
+        await source.ForEach(ImageCallback);
+        Focus();
     }
 
     private void DoAdd()
     {
-        // var fedit = FormFactory.Create<FEditProfile>();
-        // fedit.ScanProfile = Config.DefaultProfileSettings();
-        // fedit.ShowDialog();
-        // if (fedit.Result)
-        // {
-        //     _profileManager.Mutate(new ListMutation<ScanProfile>.Append(fedit.ScanProfile), _listView);
-        // }
+        var fedit = FormFactory.Create<EditProfileForm>();
+        fedit.ScanProfile = Config.DefaultProfileSettings();
+        fedit.ShowModal();
+        if (fedit.Result)
+        {
+            _profileManager.Mutate(new ListMutation<ScanProfile>.Append(fedit.ScanProfile), _listView);
+        }
     }
 
     private void DoEdit()
     {
-        // var originalProfile = SelectedProfile;
-        // if (originalProfile != null)
-        // {
-        //     var fedit = FormFactory.Create<FEditProfile>();
-        //     fedit.ScanProfile = originalProfile;
-        //     fedit.ShowDialog();
-        //     if (fedit.Result)
-        //     {
-        //         _profileManager.Mutate(new ListMutation<ScanProfile>.ReplaceWith(fedit.ScanProfile), _listView);
-        //     }
-        // }
+        var originalProfile = SelectedProfile;
+        if (originalProfile != null)
+        {
+            var fedit = FormFactory.Create<EditProfileForm>();
+            fedit.ScanProfile = originalProfile;
+            fedit.ShowModal();
+            if (fedit.Result)
+            {
+                _profileManager.Mutate(new ListMutation<ScanProfile>.ReplaceWith(fedit.ScanProfile), _listView);
+            }
+        }
     }
 
     private void DoDelete()
