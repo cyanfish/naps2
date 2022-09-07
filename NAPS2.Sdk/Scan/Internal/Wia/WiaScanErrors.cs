@@ -1,7 +1,7 @@
 ﻿using NAPS2.Scan.Exceptions;
 using NAPS2.Wia;
 
-namespace NAPS2.Scan.Wia;
+namespace NAPS2.Scan.Internal.Wia;
 
 public class WiaScanErrors
 {

@@ -1,9 +1,8 @@
 ﻿using System.Threading;
 using NAPS2.Scan.Exceptions;
-using NAPS2.Scan.Wia;
 using NAPS2.Wia;
 
-namespace NAPS2.Scan.Internal;
+namespace NAPS2.Scan.Internal.Wia;
 
 internal class WiaScanDriver : IScanDriver
 {

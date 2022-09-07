@@ -1,4 +1,4 @@
-﻿namespace NAPS2.Scan.Wia;
+﻿namespace NAPS2.Scan.Internal.Wia;
 
 public record WiaConfiguration
 {

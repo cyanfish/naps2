@@ -2,9 +2,8 @@ using System.Threading;
 using NAPS2.Escl;
 using NAPS2.Escl.Client;
 using NAPS2.Scan.Exceptions;
-using NAPS2.Scan.Internal;
 
-namespace NAPS2.Scan;
+namespace NAPS2.Scan.Internal.Escl;
 
 public class EsclScanDriver : IScanDriver
 {

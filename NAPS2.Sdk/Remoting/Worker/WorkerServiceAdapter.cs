@@ -5,7 +5,7 @@ using NAPS2.ImportExport.Email.Mapi;
 using NAPS2.Scan;
 using NAPS2.Scan.Internal;
 using NAPS2.Scan.Internal.Twain;
-using NAPS2.Scan.Wia;
+using NAPS2.Scan.Internal.Wia;
 using NAPS2.Serialization;
 
 namespace NAPS2.Remoting.Worker;

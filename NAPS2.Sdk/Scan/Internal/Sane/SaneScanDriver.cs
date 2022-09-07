@@ -1,11 +1,9 @@
-﻿using System.Runtime.InteropServices;
-using System.Threading;
+﻿using System.Threading;
 using NAPS2.Images.Bitwise;
 using NAPS2.Scan.Exceptions;
-using NAPS2.Scan.Sane;
-using static NAPS2.Scan.Sane.SaneNativeLibrary;
+using NAPS2.Scan.Internal.Sane.Native;
 
-namespace NAPS2.Scan.Internal;
+namespace NAPS2.Scan.Internal.Sane;
 
 internal class SaneScanDriver : IScanDriver
 {
@@ -18,21 +16,19 @@ internal class SaneScanDriver : IScanDriver
         _scanningContext = scanningContext;
     }
 
-    private SaneNativeLibrary Native => Instance;
-
     public Task<List<ScanDevice>> GetDeviceList(ScanOptions options)
     {
         return Task.Run(() =>
         {
             // TODO: Run SANE in a worker process so we can parallelize
             // TODO: Maybe use a mutex in SaneClient instead of needing manual locking?
-            lock (Native)
+            lock (SaneNativeLibrary.Instance)
             {
                 using var client = new SaneClient();
                 // TODO: We can use device.type and .vendor to help pick an icon etc.
                 // https://sane-project.gitlab.io/standard/api.html#device-descriptor-type
                 return client.GetDevices()
-                    .Select(device => new ScanDevice(device.name, device.model))
+                    .Select(device => new ScanDevice(device.Name, device.Model))
                     .ToList();
             }
         });
@@ -43,7 +39,7 @@ internal class SaneScanDriver : IScanDriver
     {
         return Task.Run(() =>
         {
-            lock (Native)
+            lock (SaneNativeLibrary.Instance)
             {
                 using var client = new SaneClient();
                 if (cancelToken.IsCancellationRequested) return;
@@ -104,36 +100,36 @@ internal class SaneScanDriver : IScanDriver
         {
             return null;
         }
-        if (p.frame is SANE_Frame.Red or SANE_Frame.Green or SANE_Frame.Blue)
+        if (p.Frame is SaneFrameType.Red or SaneFrameType.Green or SaneFrameType.Blue)
         {
             return ProcessMultiFrameImage(device, scanEvents, p, data);
         }
         return ProcessSingleFrameImage(p, data);
     }
 
-    private IMemoryImage ProcessSingleFrameImage(SANE_Parameters p, byte[] data)
+    private IMemoryImage ProcessSingleFrameImage(SaneReadParameters p, byte[] data)
     {
-        var (pixelFormat, subPixelType) = (p.depth, p.frame) switch
+        var (pixelFormat, subPixelType) = (depth: p.Depth, frame: p.Frame) switch
         {
-            (1, SANE_Frame.Gray) => (ImagePixelFormat.BW1, SubPixelType.Bit),
-            (8, SANE_Frame.Gray) => (ImagePixelFormat.Gray8, SubPixelType.Gray),
-            (8, SANE_Frame.Rgb) => (ImagePixelFormat.RGB24, SubPixelType.Rgb),
+            (1, SaneFrameType.Gray) => (ImagePixelFormat.BW1, SubPixelType.Bit),
+            (8, SaneFrameType.Gray) => (ImagePixelFormat.Gray8, SubPixelType.Gray),
+            (8, SaneFrameType.Rgb) => (ImagePixelFormat.RGB24, SubPixelType.Rgb),
             _ => throw new InvalidOperationException(
-                $"Unsupported transfer format: {p.depth} bits per sample, {p.frame} frame")
+                $"Unsupported transfer format: {p.Depth} bits per sample, {p.Frame} frame")
         };
-        var image = _scanningContext.ImageContext.Create(p.pixels_per_line, p.lines, pixelFormat);
-        var pixelInfo = new PixelInfo(p.pixels_per_line, p.lines, subPixelType);
+        var image = _scanningContext.ImageContext.Create(p.PixelsPerLine, p.Lines, pixelFormat);
+        var pixelInfo = new PixelInfo(p.PixelsPerLine, p.Lines, subPixelType);
         new CopyBitwiseImageOp().Perform(data, pixelInfo, image);
         return image;
     }
 
-    private IMemoryImage ProcessMultiFrameImage(SaneDevice device, IScanEvents scanEvents, SANE_Parameters p, byte[] data)
+    private IMemoryImage ProcessMultiFrameImage(SaneDevice device, IScanEvents scanEvents, SaneReadParameters p, byte[] data)
     {
-        var image = _scanningContext.ImageContext.Create(p.pixels_per_line, p.lines, ImagePixelFormat.RGB24);
-        var pixelInfo = new PixelInfo(p.pixels_per_line, p.lines, SubPixelType.Gray);
+        var image = _scanningContext.ImageContext.Create(p.PixelsPerLine, p.Lines, ImagePixelFormat.RGB24);
+        var pixelInfo = new PixelInfo(p.PixelsPerLine, p.Lines, SubPixelType.Gray);
 
         // Use the first buffer, then read two more buffers and use them so we get all 3 channels
-        new CopyBitwiseImageOp { DestChannel = ToChannel(p.frame) }.Perform(data, pixelInfo, image);
+        new CopyBitwiseImageOp { DestChannel = ToChannel(p.Frame) }.Perform(data, pixelInfo, image);
         ReadSingleChannelFrame(device, scanEvents, 1, pixelInfo, image);
         ReadSingleChannelFrame(device, scanEvents, 2, pixelInfo, image);
         return image;
@@ -144,18 +140,18 @@ internal class SaneScanDriver : IScanDriver
     {
         var data = ScanFrame(device, scanEvents, frame, out var p)
                    ?? throw new DeviceException("SANE unexpected last frame");
-        new CopyBitwiseImageOp { DestChannel = ToChannel(p.frame) }.Perform(data, pixelInfo, image);
+        new CopyBitwiseImageOp { DestChannel = ToChannel(p.Frame) }.Perform(data, pixelInfo, image);
     }
 
-    private ColorChannel ToChannel(SANE_Frame frame) => frame switch
+    private ColorChannel ToChannel(SaneFrameType frame) => frame switch
     {
-        SANE_Frame.Red => ColorChannel.Red,
-        SANE_Frame.Green => ColorChannel.Green,
-        SANE_Frame.Blue => ColorChannel.Blue,
+        SaneFrameType.Red => ColorChannel.Red,
+        SaneFrameType.Green => ColorChannel.Green,
+        SaneFrameType.Blue => ColorChannel.Blue,
         _ => throw new ArgumentException()
     };
 
-    private byte[]? ScanFrame(SaneDevice device, IScanEvents scanEvents, int frame, out SANE_Parameters p)
+    private byte[]? ScanFrame(SaneDevice device, IScanEvents scanEvents, int frame, out SaneReadParameters p)
     {
         device.Start();
         if (frame == 0)
@@ -163,8 +159,8 @@ internal class SaneScanDriver : IScanDriver
             scanEvents.PageStart();
         }
         p = device.GetParameters();
-        bool isMultiFrame = p.frame is SANE_Frame.Red or SANE_Frame.Green or SANE_Frame.Blue;
-        var frameSize = p.bytes_per_line * p.lines;
+        bool isMultiFrame = p.Frame is SaneFrameType.Red or SaneFrameType.Green or SaneFrameType.Blue;
+        var frameSize = p.BytesPerLine * p.Lines;
         var currentProgress = frame * frameSize;
         var totalProgress = isMultiFrame ? frameSize * 3 : frameSize;
         var data = new byte[frameSize];

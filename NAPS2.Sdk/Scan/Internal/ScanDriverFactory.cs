@@ -1,4 +1,6 @@
-﻿using NAPS2.Scan.Internal.Twain;
+﻿using NAPS2.Scan.Internal.Sane;
+using NAPS2.Scan.Internal.Twain;
+using NAPS2.Scan.Internal.Wia;
 
 namespace NAPS2.Scan.Internal;
 

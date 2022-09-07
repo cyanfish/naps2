@@ -1,6 +1,6 @@
-namespace NAPS2.Scan.Sane;
+namespace NAPS2.Scan.Internal.Sane.Native;
 
-public class SaneDevice : NativeSaneObject
+public class SaneDevice : SaneNativeObject
 {
     public SaneDevice(IntPtr handle) : base(handle)
     {
@@ -21,7 +21,7 @@ public class SaneDevice : NativeSaneObject
         HandleStatus(Native.sane_start(Handle));
     }
 
-    public SaneNativeLibrary.SANE_Parameters GetParameters()
+    public SaneReadParameters GetParameters()
     {
         HandleStatus(Native.sane_get_parameters(Handle, out var p));
         return p;
@@ -30,11 +30,11 @@ public class SaneDevice : NativeSaneObject
     public bool Read(byte[] buffer, out int len)
     {
         var status = Native.sane_read(Handle, buffer, buffer.Length, out len);
-        if (status == SaneNativeLibrary.SANE_Status.Good)
+        if (status == SaneStatus.Good)
         {
             return true;
         }
-        if (status is SaneNativeLibrary.SANE_Status.Eof or SaneNativeLibrary.SANE_Status.NoDocs)
+        if (status is SaneStatus.Eof or SaneStatus.NoDocs)
         {
             return false;
         }
