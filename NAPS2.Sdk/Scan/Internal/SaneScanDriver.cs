@@ -24,63 +24,18 @@ internal class SaneScanDriver : IScanDriver
     {
         return Task.Run(() =>
         {
-            var deviceList = new List<ScanDevice>();
-
             // TODO: Run SANE in a worker process so we can parallelize
+            // TODO: Maybe use a mutex in SaneClient instead of needing manual locking?
             lock (Native)
             {
-                // The doc says we only need to init once, but in practice it seems like sane_get_devices
-                // caches its values unless we exit and re-init.
-                Native.sane_init(out _, IntPtr.Zero);
-                try
-                {
-                    HandleStatus(Native.sane_get_devices(out var deviceListPtr, 0));
-                    IntPtr devicePtr;
-                    int offset = 0;
-                    while ((devicePtr = Marshal.ReadIntPtr(deviceListPtr, offset++ * IntPtr.Size)) != IntPtr.Zero)
-                    {
-                        var device = Marshal.PtrToStructure<SANE_Device>(devicePtr);
-                        // TODO: We can use .type and .vendor to help pick an icon etc.
-                        // https://sane-project.gitlab.io/standard/api.html#device-descriptor-type
-                        deviceList.Add(new ScanDevice
-                        {
-                            ID = device.name,
-                            Name = device.model
-                        });
-                    }
-                }
-                finally
-                {
-                    Native.sane_exit();
-                }
+                using var client = new SaneClient();
+                // TODO: We can use device.type and .vendor to help pick an icon etc.
+                // https://sane-project.gitlab.io/standard/api.html#device-descriptor-type
+                return client.GetDevices()
+                    .Select(device => new ScanDevice(device.name, device.model))
+                    .ToList();
             }
-
-            return deviceList;
         });
-    }
-
-    private void HandleStatus(SANE_Status status)
-    {
-        switch (status)
-        {
-            case SANE_Status.Good:
-                return;
-            case SANE_Status.Cancelled:
-                throw new OperationCanceledException();
-            case SANE_Status.NoDocs:
-                throw new NoPagesException();
-            case SANE_Status.DeviceBusy:
-                throw new DeviceException(SdkResources.DeviceBusy);
-            case SANE_Status.Invalid:
-                // TODO: Maybe not always correct? e.g. when setting options
-                throw new DeviceException(SdkResources.DeviceOffline);
-            case SANE_Status.Jammed:
-                throw new DeviceException(SdkResources.DevicePaperJam);
-            case SANE_Status.CoverOpen:
-                throw new DeviceException(SdkResources.DeviceCoverOpen);
-            default:
-                throw new DeviceException($"SANE error: {status}");
-        }
     }
 
     public Task Scan(ScanOptions options, CancellationToken cancelToken, IScanEvents scanEvents,
@@ -90,43 +45,32 @@ internal class SaneScanDriver : IScanDriver
         {
             lock (Native)
             {
-                Native.sane_init(out _, IntPtr.Zero);
+                using var client = new SaneClient();
+                if (cancelToken.IsCancellationRequested) return;
+                using var device = client.OpenDevice(options.Device!.ID!);
                 try
                 {
                     if (cancelToken.IsCancellationRequested) return;
-                    HandleStatus(Native.sane_open(options.Device!.ID!, out var handle));
-                    try
-                    {
-                        if (cancelToken.IsCancellationRequested) return;
-                        // TODO: Set up options
-                        cancelToken.Register(() => Native.sane_cancel(handle));
+                    // TODO: Set up options
+                    cancelToken.Register(device.Cancel);
 
-                        // TODO: Can we validate whether it's really an adf?
-                        if (options.PaperSource == PaperSource.Flatbed)
+                    // TODO: Can we validate whether it's really an adf?
+                    if (options.PaperSource == PaperSource.Flatbed)
+                    {
+                        var image = ScanPage(device, scanEvents) ??
+                                    throw new DeviceException("SANE expected image");
+                        callback(image);
+                    }
+                    else
+                    {
+                        while (ScanPage(device, scanEvents) is { } image)
                         {
-                            var image = ScanPage(handle, scanEvents) ??
-                                        throw new DeviceException("SANE expected image");
                             callback(image);
                         }
-                        else
-                        {
-                            while (ScanPage(handle, scanEvents) is { } image)
-                            {
-                                callback(image);
-                            }
-                        }
-                    }
-                    catch (OperationCanceledException)
-                    {
-                    }
-                    finally
-                    {
-                        Native.sane_close(handle);
                     }
                 }
-                finally
+                catch (OperationCanceledException)
                 {
-                    Native.sane_exit();
                 }
             }
 
@@ -152,17 +96,17 @@ internal class SaneScanDriver : IScanDriver
         });
     }
 
-    private IMemoryImage? ScanPage(IntPtr handle, IScanEvents scanEvents)
+    private IMemoryImage? ScanPage(SaneDevice device, IScanEvents scanEvents)
     {
         // TODO: Fix up events
-        var data = ScanFrame(handle, scanEvents, 0, out var p);
+        var data = ScanFrame(device, scanEvents, 0, out var p);
         if (data == null)
         {
             return null;
         }
         if (p.frame is SANE_Frame.Red or SANE_Frame.Green or SANE_Frame.Blue)
         {
-            return ProcessMultiFrameImage(handle, scanEvents, p, data);
+            return ProcessMultiFrameImage(device, scanEvents, p, data);
         }
         return ProcessSingleFrameImage(p, data);
     }
@@ -183,22 +127,22 @@ internal class SaneScanDriver : IScanDriver
         return image;
     }
 
-    private IMemoryImage ProcessMultiFrameImage(IntPtr handle, IScanEvents scanEvents, SANE_Parameters p, byte[] data)
+    private IMemoryImage ProcessMultiFrameImage(SaneDevice device, IScanEvents scanEvents, SANE_Parameters p, byte[] data)
     {
         var image = _scanningContext.ImageContext.Create(p.pixels_per_line, p.lines, ImagePixelFormat.RGB24);
         var pixelInfo = new PixelInfo(p.pixels_per_line, p.lines, SubPixelType.Gray);
 
         // Use the first buffer, then read two more buffers and use them so we get all 3 channels
         new CopyBitwiseImageOp { DestChannel = ToChannel(p.frame) }.Perform(data, pixelInfo, image);
-        ReadSingleChannelFrame(handle, scanEvents, 1, pixelInfo, image);
-        ReadSingleChannelFrame(handle, scanEvents, 2, pixelInfo, image);
+        ReadSingleChannelFrame(device, scanEvents, 1, pixelInfo, image);
+        ReadSingleChannelFrame(device, scanEvents, 2, pixelInfo, image);
         return image;
     }
 
-    private void ReadSingleChannelFrame(IntPtr handle, IScanEvents scanEvents, int frame, PixelInfo pixelInfo,
+    private void ReadSingleChannelFrame(SaneDevice device, IScanEvents scanEvents, int frame, PixelInfo pixelInfo,
         IMemoryImage image)
     {
-        var data = ScanFrame(handle, scanEvents, frame, out var p)
+        var data = ScanFrame(device, scanEvents, frame, out var p)
                    ?? throw new DeviceException("SANE unexpected last frame");
         new CopyBitwiseImageOp { DestChannel = ToChannel(p.frame) }.Perform(data, pixelInfo, image);
     }
@@ -211,14 +155,14 @@ internal class SaneScanDriver : IScanDriver
         _ => throw new ArgumentException()
     };
 
-    private byte[]? ScanFrame(IntPtr handle, IScanEvents scanEvents, int frame, out SANE_Parameters p)
+    private byte[]? ScanFrame(SaneDevice device, IScanEvents scanEvents, int frame, out SANE_Parameters p)
     {
-        HandleStatus(Native.sane_start(handle));
+        device.Start();
         if (frame == 0)
         {
             scanEvents.PageStart();
         }
-        HandleStatus(Native.sane_get_parameters(handle, out p));
+        p = device.GetParameters();
         bool isMultiFrame = p.frame is SANE_Frame.Red or SANE_Frame.Green or SANE_Frame.Blue;
         var frameSize = p.bytes_per_line * p.lines;
         var currentProgress = frame * frameSize;
@@ -228,22 +172,16 @@ internal class SaneScanDriver : IScanDriver
         var buffer = new byte[65536];
         scanEvents.PageProgress(currentProgress / (double) totalProgress);
 
-        SANE_Status status;
-        while ((status = Native.sane_read(handle, buffer, buffer.Length, out var len)) == SANE_Status.Good)
+        while (device.Read(buffer, out var len))
         {
             Array.Copy(buffer, 0, data, index, len);
             index += len;
             currentProgress += len;
             scanEvents.PageProgress(currentProgress / (double) totalProgress);
         }
-
-        if (status == SANE_Status.NoDocs)
+        if (index == 0)
         {
             return null;
-        }
-        if (status != SANE_Status.Eof)
-        {
-            HandleStatus(status);
         }
         if (index != frameSize)
         {
