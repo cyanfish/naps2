@@ -7,8 +7,6 @@ namespace NAPS2.Scan.Internal.Sane;
 
 internal class SaneScanDriver : IScanDriver
 {
-    private static readonly Dictionary<string, SaneOptionCollection> SaneOptionCache = new();
-
     private readonly ScanningContext _scanningContext;
 
     public SaneScanDriver(ScanningContext scanningContext)
@@ -47,7 +45,8 @@ internal class SaneScanDriver : IScanDriver
                 try
                 {
                     if (cancelToken.IsCancellationRequested) return;
-                    // TODO: Set up options
+                    SetOptions(device, options);
+                    // TODO: We apparently need to cancel even upon normal completion, i.e. one sane_cancel per sane_start
                     cancelToken.Register(device.Cancel);
 
                     // TODO: Can we validate whether it's really an adf?
@@ -69,27 +68,22 @@ internal class SaneScanDriver : IScanDriver
                 {
                 }
             }
-
-            // // TODO: Test ADF
-            // var keyValueOptions = new Lazy<KeyValueScanOptions>(() => GetKeyValueOptions(options));
-            // scanEvents.PageStart();
-            // bool result = Transfer(keyValueOptions, options, cancelToken, scanEvents, callback);
-            //
-            // if (result && options.PaperSource != PaperSource.Flatbed)
-            // {
-            //     try
-            //     {
-            //         do
-            //         {
-            //             scanEvents.PageStart();
-            //         } while (Transfer(keyValueOptions, options, cancelToken, scanEvents, callback));
-            //     }
-            //     catch (Exception e)
-            //     {
-            //         Log.ErrorException("Error in SANE. This may be a normal ADF termination.", e);
-            //     }
-            // }
         });
+    }
+
+    private void SetOptions(SaneDevice device, ScanOptions options)
+    {
+        var controller = new SaneOptionController(device);
+        controller.TrySet(SaneOptionNames.RESOLUTION, options.Dpi);
+        controller.TrySet(SaneOptionNames.X_RESOLUTION, options.Dpi);
+        controller.TrySet(SaneOptionNames.Y_RESOLUTION, options.Dpi);
+        var mode = options.BitDepth switch
+        {
+            BitDepth.BlackAndWhite => SaneOptionTranslations.Lineart,
+            BitDepth.Grayscale => SaneOptionTranslations.Gray,
+            _ => SaneOptionTranslations.Color
+        };
+        controller.TrySet(SaneOptionNames.MODE, mode);
     }
 
     private IMemoryImage? ScanPage(SaneDevice device, IScanEvents scanEvents)
@@ -111,7 +105,7 @@ internal class SaneScanDriver : IScanDriver
     {
         var (pixelFormat, subPixelType) = (depth: p.Depth, frame: p.Frame) switch
         {
-            (1, SaneFrameType.Gray) => (ImagePixelFormat.BW1, SubPixelType.Bit),
+            (1, SaneFrameType.Gray) => (ImagePixelFormat.BW1, SubPixelType.InvertedBit),
             (8, SaneFrameType.Gray) => (ImagePixelFormat.Gray8, SubPixelType.Gray),
             (8, SaneFrameType.Rgb) => (ImagePixelFormat.RGB24, SubPixelType.Rgb),
             _ => throw new InvalidOperationException(
@@ -123,7 +117,8 @@ internal class SaneScanDriver : IScanDriver
         return image;
     }
 
-    private IMemoryImage ProcessMultiFrameImage(SaneDevice device, IScanEvents scanEvents, SaneReadParameters p, byte[] data)
+    private IMemoryImage ProcessMultiFrameImage(SaneDevice device, IScanEvents scanEvents, SaneReadParameters p,
+        byte[] data)
     {
         var image = _scanningContext.ImageContext.Create(p.PixelsPerLine, p.Lines, ImagePixelFormat.RGB24);
         var pixelInfo = new PixelInfo(p.PixelsPerLine, p.Lines, SubPixelType.Gray);
