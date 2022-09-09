@@ -7,6 +7,7 @@
     <RootNamespace>NAPS2.Tools</RootNamespace>
     <AssemblyName>n2</AssemblyName>
     <Configurations>Debug</Configurations>
+    <LangVersion>11</LangVersion>
   </PropertyGroup>
 
   <ItemGroup>

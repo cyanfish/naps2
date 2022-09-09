@@ -13,7 +13,7 @@ public static class Program
     public static void Main(string[] args) =>
         Parser.Default
             .ParseArguments<CleanOptions, BuildOptions, TestOptions, PackageOptions, InstallOptions, VerifyOptions,
-                PublishOptions, VirusScanOptions, TemplatesOptions, LanguageOptions>(args).MapResult(
+                PublishOptions, VirusScanOptions, TemplatesOptions, LanguageOptions, SaneOptsOptions>(args).MapResult(
                 (CleanOptions opts) => CleanCommand.Run(opts),
                 (BuildOptions opts) => BuildCommand.Run(opts),
                 (TestOptions opts) => TestCommand.Run(opts),
@@ -24,5 +24,6 @@ public static class Program
                 (VirusScanOptions opts) => VirusScanCommand.Run(opts),
                 (TemplatesOptions opts) => TemplatesCommand.Run(opts),
                 (LanguageOptions opts) => LanguageCommand.Run(opts),
+                (SaneOptsOptions opts) => SaneOptsCommand.Run(opts),
                 errors => 1);
 }
