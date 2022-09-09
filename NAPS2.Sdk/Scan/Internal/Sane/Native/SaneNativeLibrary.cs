@@ -24,8 +24,8 @@ public class SaneNativeLibrary : Unmanaged.NativeLibrary
     public delegate SaneStatus sane_get_devices_delegate(out IntPtr device_list, int local_only);
     public delegate SaneStatus sane_open_delegate(string name, out IntPtr handle);
     public delegate void sane_close_delegate(IntPtr handle);
-    public delegate ref SaneOptionDescriptor sane_get_option_descriptor_delegate(IntPtr handle, int n);
-    public delegate SaneStatus sane_control_option_delegate(IntPtr handle, int n, int a, IntPtr v, out int i);
+    public delegate IntPtr sane_get_option_descriptor_delegate(IntPtr handle, int n);
+    public delegate SaneStatus sane_control_option_delegate(IntPtr handle, int n, SaneOptionAction a, IntPtr v, out SaneOptionSetInfo i);
     public delegate SaneStatus sane_get_parameters_delegate(IntPtr handle, out SaneReadParameters p);
     public delegate SaneStatus sane_start_delegate(IntPtr handle);
     public delegate SaneStatus sane_read_delegate(IntPtr handle, byte[] buf, int maxlen, out int len);

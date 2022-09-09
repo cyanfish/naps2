@@ -1,14 +1,14 @@
 namespace NAPS2.Scan.Internal.Sane.Native;
 
-public struct SaneOptionDescriptor
+internal struct SaneOptionDescriptor
 {
     public string Name;
     public string Title;
     public string Desc;
-    public int Type;
-    public int Unit;
+    public SaneValueType Type;
+    public SaneUnit Unit;
     public int Size;
-    public int Cap;
-    public int ConstraintType;
+    public SaneCapabilities Capabilities;
+    public SaneConstraintType ConstraintType;
     public IntPtr Constraint;
 }
