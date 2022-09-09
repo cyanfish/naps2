@@ -24,6 +24,14 @@ public static class ImageExtensions
         new CopyBitwiseImageOp().Perform(source, destination);
     }
 
+    public static IMemoryImage CopyWithPixelFormat(this IMemoryImage source, ImagePixelFormat pixelFormat)
+    {
+        var newImage = source.ImageContext.Create(source.Width, source.Height, pixelFormat);
+        newImage.SetResolution(source.HorizontalResolution, source.VerticalResolution);
+        new CopyBitwiseImageOp().Perform(source, newImage);
+        return newImage;
+    }
+
     public static MemoryStream SaveToMemoryStream(this IMemoryImage image, ImageFileFormat imageFormat,
         int quality = -1)
     {

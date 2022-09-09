@@ -7,6 +7,7 @@ public class TransformTests : ContextualTests
 {
     // TODO: Test handling of other pixel formats
     // ARGB32 -> should work (ignoring alpha channel)
+    // Gray -> commutativity tests mostly done, need to verify ones that don't work
     // BW1 -> should work where applicable
     // Unsupported -> should throw an exception
     // This might require some actual changes to the transforms.
@@ -257,6 +258,22 @@ public class TransformTests : ContextualTests
         ImageAsserts.Similar(expected, actual, ImageAsserts.XPLAT_RMSE_THRESHOLD, ignoreResolution: true);
     }
 
+    [Theory]
+    [MemberData(nameof(CommutativeGrayTransforms))]
+    public void GrayTransformsAreCommutative(Transform transform)
+    {
+        IMemoryImage original = LoadImage(ImageResources.color_image);
+
+        var actual = original.CopyWithPixelFormat(ImagePixelFormat.Gray8);
+        actual = actual.PerformTransform(transform);
+
+        var expected = original.Clone();
+        expected = expected.PerformTransform(transform);
+        expected = expected.CopyWithPixelFormat(ImagePixelFormat.Gray8);
+
+        ImageAsserts.Similar(expected, actual);
+    }
+
     [Fact]
     public void Scale1000Percent()
     {
@@ -391,4 +408,17 @@ public class TransformTests : ContextualTests
         // TODO: Also fix ThumbnailRendering tests
         ImageAsserts.Similar(expected, actual, ImageAsserts.XPLAT_RMSE_THRESHOLD, ignoreResolution: true);
     }
+
+    public static IEnumerable<object[]> CommutativeGrayTransforms = new List<object[]>
+    {
+        // TODO: These don't work - should they?
+        // new object[] { new BrightnessTransform(300) },
+        // new object[] { new TrueContrastTransform(300) },
+        // new object[] { new HueTransform(300) },
+        // new object[] { new SaturationTransform(300) },
+        new object[] { new ScaleTransform(0.5) },
+        new object[] { new RotationTransform(46) },
+        new object[] { new ThumbnailTransform() },
+        new object[] { new CropTransform(10, 10, 10, 10) }
+    };
 }

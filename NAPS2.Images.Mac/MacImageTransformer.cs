@@ -9,14 +9,17 @@ public class MacImageTransformer : AbstractImageTransformer<MacImage>
     protected override MacImage PerformTransform(MacImage image, RotationTransform transform)
     {
         MacImage newImage;
+        var pixelFormat = image.PixelFormat is ImagePixelFormat.ARGB32 or ImagePixelFormat.RGB24
+            ? ImagePixelFormat.ARGB32
+            : ImagePixelFormat.Gray8;
         if (transform.Angle > 45.0 && transform.Angle < 135.0 || transform.Angle > 225.0 && transform.Angle < 315.0)
         {
-            newImage = (MacImage) ImageContext.Create(image.Height, image.Width, ImagePixelFormat.ARGB32);
+            newImage = (MacImage) ImageContext.Create(image.Height, image.Width, pixelFormat);
             newImage.SetResolution(image.VerticalResolution, image.HorizontalResolution);
         }
         else
         {
-            newImage = (MacImage) ImageContext.Create(image.Width, image.Height, ImagePixelFormat.ARGB32);
+            newImage = (MacImage) ImageContext.Create(image.Width, image.Height, pixelFormat);
             newImage.SetResolution(image.HorizontalResolution, image.VerticalResolution);
         }
         using CGBitmapContext c = GetCgBitmapContext(newImage);
@@ -67,14 +70,20 @@ public class MacImageTransformer : AbstractImageTransformer<MacImage>
         }
         lock (MacImageContext.ConstructorLock)
         {
+            var colorSpace = image.PixelFormat == ImagePixelFormat.Gray8
+                ? CGColorSpace.CreateDeviceGray()
+                : CGColorSpace.CreateDeviceRGB();
+            var alphaInfo = image.PixelFormat == ImagePixelFormat.Gray8
+                ? CGImageAlphaInfo.None
+                : CGImageAlphaInfo.PremultipliedLast;
             return new CGBitmapContext(
                 image._imageRep.BitmapData,
                 image.Width,
                 image.Height,
                 (int) image._imageRep.BitsPerSample,
                 (int) image._imageRep.BytesPerRow,
-                CGColorSpace.CreateDeviceRGB(),
-                CGImageAlphaInfo.PremultipliedLast);
+                colorSpace,
+                alphaInfo);
         }
     }
 

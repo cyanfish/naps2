@@ -186,11 +186,8 @@ public abstract class AbstractImageTransformer<TImage> where TImage : IMemoryIma
             return image;
         }
 
-        var colorBitmap = ImageContext.Create(image.Width, image.Height, ImagePixelFormat.RGB24);
-        colorBitmap.SetResolution(image.HorizontalResolution, image.VerticalResolution);
-        image.CopyTo(colorBitmap);
+        var colorBitmap = image.CopyWithPixelFormat(ImagePixelFormat.RGB24);
         image.Dispose();
-
         return (TImage) colorBitmap;
     }
 
