@@ -2,6 +2,9 @@ namespace NAPS2.Images.Bitwise;
 
 public class SubPixelType
 {
+    /// <summary>
+    /// 4 bytes per pixel, 1 byte per sample, red-green-blue-alpha order.
+    /// </summary>
     public static readonly SubPixelType Rgba = new()
     {
         BitsPerPixel = 32,
@@ -12,6 +15,9 @@ public class SubPixelType
         AlphaOffset = 3
     };
 
+    /// <summary>
+    /// 3 bytes per pixel, 1 byte per sample, red-green-blue order.
+    /// </summary>
     public static readonly SubPixelType Rgb = new()
     {
         BitsPerPixel = 24,
@@ -21,6 +27,9 @@ public class SubPixelType
         BlueOffset = 2
     };
 
+    /// <summary>
+    /// 4 bytes per pixel, 1 byte per sample, blue-green-red-alpha order.
+    /// </summary>
     public static readonly SubPixelType Bgra = new()
     {
         BitsPerPixel = 32,
@@ -31,6 +40,9 @@ public class SubPixelType
         AlphaOffset = 3
     };
 
+    /// <summary>
+    /// 3 bytes per pixel, 1 byte per sample, blue-green-red order.
+    /// </summary>
     public static readonly SubPixelType Bgr = new()
     {
         BitsPerPixel = 24,
@@ -40,16 +52,30 @@ public class SubPixelType
         BlueOffset = 0
     };
 
+    /// <summary>
+    /// 1 byte per pixel, 0 = black, 255 = white.
+    /// </summary>
     public static readonly SubPixelType Gray = new()
     {
         BitsPerPixel = 8,
         BytesPerPixel = 1
     };
 
-    // TODO: We probably need to handle bit inversions (i.e. white = 0, black = 1)
+    /// <summary>
+    /// 1 bit per pixel, 0 = black, 1 = white.
+    /// </summary>
     public static readonly SubPixelType Bit = new()
     {
         BitsPerPixel = 1
+    };
+
+    /// <summary>
+    /// 1 bit per pixel, 0 = white, 1 = black.
+    /// </summary>
+    public static readonly SubPixelType InvertedBit = new()
+    {
+        BitsPerPixel = 1,
+        InvertColorSpace = true
     };
 
     private SubPixelType()
@@ -62,4 +88,5 @@ public class SubPixelType
     public int GreenOffset { get; private init; }
     public int BlueOffset { get; private init; }
     public int AlphaOffset { get; private init; }
+    public bool InvertColorSpace { get; private init; }
 }

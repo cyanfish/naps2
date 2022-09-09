@@ -56,6 +56,11 @@ public class CopyBitwiseImageOp : BinaryBitwiseImageOp
             throw new ArgumentException(
                 "DestChannel is only supported when the source is grayscale/color and the destination is color.");
         }
+        if ((src.invertColorSpace || dst.invertColorSpace) && (src.bitsPerPixel != 1 || dst.bitsPerPixel != 1))
+        {
+            throw new ArgumentException(
+                "SubPixelType.InvertedBit is only supported when both source and destination are 1 bit per pixel");
+        }
     }
 
     protected override void PerformCore(BitwiseImageData src, BitwiseImageData dst, int partStart, int partEnd)
@@ -85,6 +90,10 @@ public class CopyBitwiseImageOp : BinaryBitwiseImageOp
         else
         {
             throw new InvalidOperationException("Unsupported copy parameters");
+        }
+        if (src.invertColorSpace ^ dst.invertColorSpace)
+        {
+            Invert(dst, partStart, partEnd);
         }
     }
 
@@ -263,6 +272,20 @@ public class CopyBitwiseImageOp : BinaryBitwiseImageOp
             }
             var dstRow = dst.ptr + dst.stride * dstY + dstXBytesOff;
             Buffer.MemoryCopy(srcRow, dstRow, bytesPerRow, bytesPerRow);
+        }
+    }
+
+    private unsafe void Invert(BitwiseImageData data, int partStart, int partEnd)
+    {
+        for (int i = partStart; i < partEnd; i++)
+        {
+            var row = data.ptr + data.stride * i;
+            // TODO: Optimize with long operations
+            for (int j = 0; j < data.stride; j++)
+            {
+                var b = *(row + j);
+                *(row + j) = (byte) (~b & 0xFF);
+            }
         }
     }
 }

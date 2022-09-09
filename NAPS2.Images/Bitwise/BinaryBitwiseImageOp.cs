@@ -89,6 +89,10 @@ public abstract class BinaryBitwiseImageOp : BitwiseImageOp
         {
             throw new ArgumentException("InvertY is not supported");
         }
+        if (src.invertColorSpace || dst.invertColorSpace)
+        {
+            throw new ArgumentException("InvertBit is not supported");
+        }
     }
 
     protected abstract LockMode SrcLockMode { get; }

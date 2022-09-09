@@ -22,6 +22,7 @@ public struct BitwiseImageData
         bOff = sub.BlueOffset;
         aOff = sub.AlphaOffset;
         invertY = pix.InvertY;
+        invertColorSpace = sub.InvertColorSpace;
     }
 
     public unsafe byte* ptr;
@@ -36,6 +37,7 @@ public struct BitwiseImageData
     public int bOff;
     public int aOff;
     public bool invertY;
+    public bool invertColorSpace;
 
     public (int, int, int, int, int) BitLayout => (bitsPerPixel, rOff, gOff, bOff, aOff);
 }
