@@ -1,20 +1,16 @@
-﻿using System.Drawing;
-using System.Drawing.Imaging;
-using System.Threading;
-using NAPS2.Images.Gdi;
+﻿using System.Threading;
+using Eto.Drawing;
 
 namespace NAPS2.ImportExport.Images;
 
-// TODO: Avoid GDI dependency
+// TODO: Cross-platform TIFF
 public class SaveImagesOperation : OperationBase
 {
-    private readonly ImageContext _imageContext;
     private readonly IOverwritePrompt _overwritePrompt;
     private readonly TiffHelper _tiffHelper;
 
-    public SaveImagesOperation(ImageContext imageContext, IOverwritePrompt overwritePrompt, TiffHelper tiffHelper)
+    public SaveImagesOperation(IOverwritePrompt overwritePrompt, TiffHelper tiffHelper)
     {
-        _imageContext = imageContext;
         _overwritePrompt = overwritePrompt;
         _tiffHelper = tiffHelper;
 
@@ -162,17 +158,19 @@ public class SaveImagesOperation : OperationBase
         else if (Equals(format, ImageFormat.Jpeg))
         {
             var quality = imageSettings.JpegQuality.Clamp(0, 100);
-            var encoder = ImageCodecInfo.GetImageEncoders().First(x => x.FormatID == ImageFormat.Jpeg.Guid);
-            var encoderParams = new EncoderParameters(1);
-            encoderParams.Param[0] = new EncoderParameter(Encoder.Quality, quality);
-            // TODO: Something more generic
-            using Bitmap bitmap = image.RenderToBitmap();
-            bitmap.Save(path, encoder, encoderParams);
+            using var bitmap = image.Render();
+            bitmap.Save(path, ImageFileFormat.Jpeg, quality);
         }
         else
         {
-            using Bitmap bitmap = image.RenderToBitmap();
-            bitmap.Save(path, format);
+            using var bitmap = image.Render();
+            var fileFormat = format switch
+            {
+                ImageFormat.Bitmap => ImageFileFormat.Bmp,
+                ImageFormat.Jpeg => ImageFileFormat.Jpeg,
+                ImageFormat.Png => ImageFileFormat.Png
+            };
+            bitmap.Save(path, fileFormat);
         }
     }
 
@@ -181,14 +179,15 @@ public class SaveImagesOperation : OperationBase
         string extension = Path.GetExtension(fileName);
         switch (extension.ToLower())
         {
+            // TODO: Get rid of unsupported file types
             case ".bmp":
-                return ImageFormat.Bmp;
-            case ".emf":
-                return ImageFormat.Emf;
+                return ImageFormat.Bitmap;
+            // case ".emf":
+            //     return ImageFormat.Emf;
             case ".gif":
                 return ImageFormat.Gif;
-            case ".ico":
-                return ImageFormat.Icon;
+            // case ".ico":
+            //     return ImageFormat.Icon;
             case ".jpg":
             case ".jpeg":
                 return ImageFormat.Jpeg;
@@ -197,8 +196,8 @@ public class SaveImagesOperation : OperationBase
             case ".tif":
             case ".tiff":
                 return ImageFormat.Tiff;
-            case ".wmf":
-                return ImageFormat.Wmf;
+            // case ".wmf":
+            //     return ImageFormat.Wmf;
             default:
                 return ImageFormat.Jpeg;
         }

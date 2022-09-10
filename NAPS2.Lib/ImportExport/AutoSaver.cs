@@ -164,7 +164,7 @@ public class AutoSaver
         }
         else
         {
-            var op = new SaveImagesOperation(_imageContext, _overwritePrompt, _tiffHelper);
+            var op = new SaveImagesOperation(_overwritePrompt, _tiffHelper);
             if (op.Start(subPath, placeholders, images, _config.Get(c => c.ImageSettings)))
             {
                 _operationProgress.ShowProgress(op);

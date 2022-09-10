@@ -20,16 +20,16 @@ public class MacModule : NinjectModule
         // Bind<IBatchScanPerformer>().To<BatchScanPerformer>();
         Bind<IPdfPasswordProvider>().To<StubPdfPasswordProvider>();
         Bind<ErrorOutput>().To<MessageBoxErrorOutput>();
-        Bind<IOverwritePrompt>().To<StubOverwritePrompt>();
+        Bind<IOverwritePrompt>().To<WinFormsOverwritePrompt>();
         Bind<OperationProgress>().To<EtoOperationProgress>().InSingletonScope();
-        Bind<DialogHelper>().To<StubDialogHelper>();
+        Bind<DialogHelper>().To<WinFormsDialogHelper>();
         Bind<INotificationManager>().To<StubNotificationManager>().InSingletonScope();
         Bind<ISaveNotify>().ToMethod(ctx => ctx.Kernel.Get<INotificationManager>());
         Bind<IScannedImagePrinter>().To<StubScannedImagePrinter>();
         Bind<DesktopController>().ToSelf().InSingletonScope();
         Bind<IDesktopScanController>().To<DesktopScanController>();
         Bind<IUpdateChecker>().To<UpdateChecker>();
-        Bind<IWinFormsExportHelper>().To<StubExportHelper>();
+        Bind<IWinFormsExportHelper>().To<WinFormsExportHelper>();
         Bind<IDesktopSubFormController>().To<StubDesktopSubFormController>();
         Bind<DesktopFormProvider>().ToSelf().InSingletonScope();
         Bind<ImageContext>().To<MacImageContext>();
@@ -115,29 +115,6 @@ public class StubDesktopSubFormController : IDesktopSubFormController
 
     public void ShowSettingsForm()
     {
-    }
-}
-
-public class StubExportHelper : IWinFormsExportHelper
-{
-    public Task<bool> SavePDF(IList<ProcessedImage> images, ISaveNotify notify)
-    {
-        return Task.FromResult(false);
-    }
-
-    public Task<bool> ExportPDF(string filename, IList<ProcessedImage> images, bool email, EmailMessage emailMessage)
-    {
-        return Task.FromResult(false);
-    }
-
-    public Task<bool> SaveImages(IList<ProcessedImage> images, ISaveNotify notify)
-    {
-        return Task.FromResult(false);
-    }
-
-    public Task<bool> EmailPDF(IList<ProcessedImage> images)
-    {
-        return Task.FromResult(false);
     }
 }
 

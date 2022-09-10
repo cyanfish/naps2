@@ -1,5 +1,4 @@
-﻿using System.Windows.Forms;
-using NAPS2.ImportExport;
+﻿using NAPS2.ImportExport;
 using NAPS2.ImportExport.Email;
 using NAPS2.ImportExport.Images;
 using NAPS2.ImportExport.Pdf;
@@ -110,15 +109,15 @@ public class WinFormsExportHelper : IWinFormsExportHelper
         }
 
         // TODO: What?
-        if (_config == null)
-        {
-            // First run; prompt for a 
-            var form = _formFactory.Create<FEmailProvider>();
-            if (form.ShowDialog() != DialogResult.OK)
-            {
-                return false;
-            }
-        }
+        // if (_config == null)
+        // {
+        //     // First run; prompt for a
+        //     var form = _formFactory.Create<FEmailProvider>();
+        //     if (form.ShowDialog() != DialogResult.OK)
+        //     {
+        //         return false;
+        //     }
+        // }
 
         var invalidChars = new HashSet<char>(Path.GetInvalidFileNameChars());
         var attachmentName = new string(_config.Get(c => c.EmailSettings.AttachmentName).Where(x => !invalidChars.Contains(x)).ToArray());

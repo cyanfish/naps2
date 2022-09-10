@@ -1,5 +1,4 @@
-﻿using System.Windows.Forms;
-using MessageBoxIcon = System.Windows.Forms.MessageBoxIcon;
+﻿using Eto.Forms;
 
 namespace NAPS2.WinForms;
 
@@ -9,7 +8,7 @@ public class WinFormsOverwritePrompt : IOverwritePrompt
     {
         string fileName = Path.GetFileName(path);
         var dialogResult = MessageBox.Show(string.Format(MiscResources.ConfirmOverwriteFile, fileName),
-            MiscResources.OverwriteFile, MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
+            MiscResources.OverwriteFile, MessageBoxButtons.YesNoCancel, MessageBoxType.Warning);
         return dialogResult switch
         {
             DialogResult.Yes => OverwriteResponse.Yes,
