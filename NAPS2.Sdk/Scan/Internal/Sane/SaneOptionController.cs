@@ -76,4 +76,29 @@ internal class SaneOptionController
         }
         return false;
     }
+
+    public SaneOption? GetOption(string name)
+    {
+        return _options.ContainsKey(name) ? _options[name] : null;
+    }
+
+    public bool TryGet(string name, out double value)
+    {
+        value = 0;
+        if (!_options.ContainsKey(name))
+            return false;
+        var opt = _options[name];
+        if (!opt.IsActive || opt.Type is not (SaneValueType.Int or SaneValueType.Fixed))
+            return false;
+        try
+        {
+            _device.GetOption(_options[name], out value);
+            return true;
+        }
+        catch (Exception ex)
+        {
+            Log.ErrorException($"Error reading SANE option {name}", ex);
+            return false;
+        }
+    }
 }

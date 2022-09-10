@@ -74,9 +74,6 @@ internal class SaneScanDriver : IScanDriver
     private void SetOptions(SaneDevice device, ScanOptions options)
     {
         var controller = new SaneOptionController(device);
-        controller.TrySet(SaneOptionNames.RESOLUTION, options.Dpi);
-        controller.TrySet(SaneOptionNames.X_RESOLUTION, options.Dpi);
-        controller.TrySet(SaneOptionNames.Y_RESOLUTION, options.Dpi);
         var mode = options.BitDepth switch
         {
             BitDepth.BlackAndWhite => SaneOptionTranslations.Lineart,
@@ -84,6 +81,29 @@ internal class SaneScanDriver : IScanDriver
             _ => SaneOptionTranslations.Color
         };
         controller.TrySet(SaneOptionNames.MODE, mode);
+
+        // TODO: Get closest resolution value
+        if (!controller.TrySet(SaneOptionNames.RESOLUTION, options.Dpi))
+        {
+            controller.TrySet(SaneOptionNames.X_RESOLUTION, options.Dpi);
+            controller.TrySet(SaneOptionNames.Y_RESOLUTION, options.Dpi);
+        }
+
+        var frameController = new SaneFrameController(controller);
+        if (frameController.CanSetFrame)
+        {
+            var (minX, minY, maxX, maxY) = frameController.GetBounds();
+            var width = Math.Min((double) options.PageSize!.WidthInMm, maxX - minX);
+            var height = Math.Min((double) options.PageSize.HeightInMm, maxY - minY);
+            var deltaX = maxX - minX - width;
+            var offsetX = options.PageAlign switch
+            {
+                HorizontalAlign.Left => deltaX,
+                HorizontalAlign.Center => deltaX / 2,
+                _ => 0
+            };
+            frameController.SetFrame(minX + offsetX, minY, minX + offsetX + width, minY + height);
+        }
     }
 
     private IMemoryImage? ScanPage(SaneDevice device, IScanEvents scanEvents)

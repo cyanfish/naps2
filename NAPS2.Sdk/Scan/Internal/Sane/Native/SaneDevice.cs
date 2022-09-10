@@ -62,6 +62,14 @@ public class SaneDevice : SaneNativeObject
         HandleStatus(Native.sane_control_option(Handle, option.Index, SaneOptionAction.SetValue, (IntPtr) ptr, out info));
     }
 
+    public unsafe void GetOption(SaneOption option, out double value)
+    {
+        int word = 0;
+        int* ptr = &word;
+        HandleStatus(Native.sane_control_option(Handle, option.Index, SaneOptionAction.GetValue, (IntPtr) ptr, out _));
+        value = option.Type == SaneValueType.Fixed ? SaneFixedPoint.ToDouble(word) : word;
+    }
+
     public void SetOption(SaneOption option, string value, out SaneOptionSetInfo info)
     {
         var s = Marshal.StringToHGlobalAnsi(value);
