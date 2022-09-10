@@ -7,6 +7,27 @@ namespace NAPS2.Scan.Internal.Sane;
 
 internal class SaneScanDriver : IScanDriver
 {
+    private static readonly HashSet<string> FlatbedStrs = new[]
+    {
+        SaneOptionTranslations.Flatbed,
+        SaneOptionTranslations.FB,
+        SaneOptionTranslations.fb
+    }.SelectMany(x => x).ToHashSet();
+
+    private static readonly HashSet<string> FeederStrs = new[]
+    {
+        SaneOptionTranslations.ADF,
+        SaneOptionTranslations.adf,
+        SaneOptionTranslations.Automatic_Document_Feeder,
+        SaneOptionTranslations.ADF_Front
+    }.SelectMany(x => x).ToHashSet();
+
+    private static readonly HashSet<string> DuplexStrs = new[]
+    {
+        SaneOptionTranslations.Duplex,
+        SaneOptionTranslations.ADF_Duplex
+    }.SelectMany(x => x).ToHashSet();
+
     private readonly ScanningContext _scanningContext;
 
     public SaneScanDriver(ScanningContext scanningContext)
@@ -73,7 +94,25 @@ internal class SaneScanDriver : IScanDriver
 
     private void SetOptions(SaneDevice device, ScanOptions options)
     {
+        // TODO: How to handle brightness, contrast, etc.?
         var controller = new SaneOptionController(device);
+
+        if (options.PaperSource == PaperSource.Flatbed)
+        {
+            controller.TrySet(SaneOptionNames.SOURCE, FlatbedStrs);
+        }
+        else if (options.PaperSource == PaperSource.Feeder)
+        {
+            // We could throw NoFeederSupportException on failure, except this might be a feeder-only scanner.
+            controller.TrySet(SaneOptionNames.SOURCE, FeederStrs);
+        }
+        else if (options.PaperSource == PaperSource.Duplex)
+        {
+            controller.TrySet(SaneOptionNames.SOURCE, DuplexStrs);
+            controller.TrySet(SaneOptionNames.ADF_MODE1, DuplexStrs);
+            controller.TrySet(SaneOptionNames.ADF_MODE2, DuplexStrs);
+        }
+
         var mode = options.BitDepth switch
         {
             BitDepth.BlackAndWhite => SaneOptionTranslations.Lineart,

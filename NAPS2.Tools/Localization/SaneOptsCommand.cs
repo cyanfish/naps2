@@ -8,7 +8,16 @@ public static class SaneOptsCommand
     {
         "Color",
         "Gray",
-        "Lineart"
+        "Lineart",
+        "ADF",
+        "adf",
+        "ADF Front",
+        "Automatic Document Feeder",
+        "ADF Duplex",
+        "Duplex",
+        "Flatbed",
+        "FB",
+        "fb"
     };
 
     public static int Run(SaneOptsOptions opts)
@@ -20,7 +29,7 @@ public static class SaneOptsCommand
             throw new DirectoryNotFoundException($"Couldn't find SANE sources: {dir.FullName}");
         }
 
-        var translations = NeededStrings.ToDictionary(_ => _, _ => new List<string>());
+        var translations = NeededStrings.ToDictionary(_ => _, _ => new HashSet<string>() { _ });
 
         foreach (var poFile in dir.EnumerateFiles("*.po"))
         {
@@ -42,7 +51,7 @@ public static class SaneOptsCommand
         var fields = NeededStrings.Select(x =>
         {
             var variable = Regex.Replace(x, @"\s", "_");
-            var values = translations[x].Select(y => $"\"{y}\"").ToArray();
+            var values = translations[x].OrderBy(_ => _).Select(y => $"\"{y}\"").ToArray();
             return $$"""
                     public static readonly string[] {{ variable }} = {
                         {{ string.Join(",\n        ", values) }}
