@@ -89,10 +89,10 @@ internal class SaneScanDriver : IScanDriver
             controller.TrySet(SaneOptionNames.Y_RESOLUTION, options.Dpi);
         }
 
-        var frameController = new SaneFrameController(controller);
-        if (frameController.CanSetFrame)
+        var scanAreaController = new SaneScanAreaController(controller);
+        if (scanAreaController.CanSetArea)
         {
-            var (minX, minY, maxX, maxY) = frameController.GetBounds();
+            var (minX, minY, maxX, maxY) = scanAreaController.GetBounds();
             var width = Math.Min((double) options.PageSize!.WidthInMm, maxX - minX);
             var height = Math.Min((double) options.PageSize.HeightInMm, maxY - minY);
             var deltaX = maxX - minX - width;
@@ -102,7 +102,7 @@ internal class SaneScanDriver : IScanDriver
                 HorizontalAlign.Center => deltaX / 2,
                 _ => 0
             };
-            frameController.SetFrame(minX + offsetX, minY, minX + offsetX + width, minY + height);
+            scanAreaController.SetArea(minX + offsetX, minY, minX + offsetX + width, minY + height);
         }
     }
 

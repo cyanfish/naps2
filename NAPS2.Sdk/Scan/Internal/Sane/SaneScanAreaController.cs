@@ -2,7 +2,7 @@ using NAPS2.Scan.Internal.Sane.Native;
 
 namespace NAPS2.Scan.Internal.Sane;
 
-internal class SaneFrameController
+internal class SaneScanAreaController
 {
     private readonly SaneOptionController _optionController;
     private readonly SaneOption? _tlx;
@@ -12,7 +12,7 @@ internal class SaneFrameController
     private readonly double? _xres;
     private readonly double? _yres;
 
-    public SaneFrameController(SaneOptionController optionController)
+    public SaneScanAreaController(SaneOptionController optionController)
     {
         _optionController = optionController;
 
@@ -34,12 +34,12 @@ internal class SaneFrameController
                 _yres = yres;
             }
         }
-        CanSetFrame = _tlx != null && _tly != null && _brx != null && _bry != null &&
+        CanSetArea = _tlx != null && _tly != null && _brx != null && _bry != null &&
                       IsNumericRange(_tlx) && IsNumericRange(_tly) && IsNumericRange(_brx) && IsNumericRange(_bry) &&
                       (_brx.Unit == SaneUnit.Mm || _xres != null && _yres != null);
     }
 
-    public bool CanSetFrame { get; }
+    public bool CanSetArea { get; }
 
     private double GetNumericRangeMin(SaneOption opt)
     {
@@ -61,9 +61,9 @@ internal class SaneFrameController
                opt.ConstraintType is SaneConstraintType.Range or SaneConstraintType.WordList;
     }
 
-    private double GetFrameMinMm(SaneOption opt, double? dpi) => ToMm(opt, GetNumericRangeMin(opt), dpi);
+    private double GetMinMm(SaneOption opt, double? dpi) => ToMm(opt, GetNumericRangeMin(opt), dpi);
 
-    private double GetFrameMaxMm(SaneOption opt, double? dpi) => ToMm(opt, GetNumericRangeMax(opt), dpi);
+    private double GetMaxMm(SaneOption opt, double? dpi) => ToMm(opt, GetNumericRangeMax(opt), dpi);
 
     private double ToMm(SaneOption opt, double value, double? dpi)
     {
@@ -76,15 +76,15 @@ internal class SaneFrameController
 
     public (double minX, double minY, double maxX, double maxY) GetBounds()
     {
-        if (!CanSetFrame) throw new InvalidOperationException();
+        if (!CanSetArea) throw new InvalidOperationException();
         return (
-            GetFrameMinMm(_tlx!, _xres), GetFrameMinMm(_tly!, _yres),
-            GetFrameMaxMm(_brx!, _xres), GetFrameMaxMm(_bry!, _yres));
+            GetMinMm(_tlx!, _xres), GetMinMm(_tly!, _yres),
+            GetMaxMm(_brx!, _xres), GetMaxMm(_bry!, _yres));
     }
 
-    public void SetFrame(double x1, double y1, double x2, double y2)
+    public void SetArea(double x1, double y1, double x2, double y2)
     {
-        if (!CanSetFrame) throw new InvalidOperationException();
+        if (!CanSetArea) throw new InvalidOperationException();
         _optionController.TrySet(SaneOptionNames.TOP_LEFT_X, x1);
         _optionController.TrySet(SaneOptionNames.TOP_LEFT_Y, y1);
         _optionController.TrySet(SaneOptionNames.BOT_RIGHT_X, x2);
