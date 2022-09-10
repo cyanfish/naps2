@@ -108,7 +108,7 @@ public class MacListView<T> : NSCollectionViewDelegateFlowLayout, IListView<T> w
         {
             _refreshing = true;
             _view.SelectionIndexes =
-                NSIndexSet.FromArray(_selection.ToSelectedIndices(_dataSource.Items).ToArray());
+                NSIndexSet.FromArray(_selection.ToSelectedIndices(_dataSource.Items).Where(x => x != -1).ToArray());
             _refreshing = false;
         }
     }
