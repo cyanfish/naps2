@@ -41,9 +41,27 @@ public abstract class AbstractImageTransformer<TImage> where TImage : IMemoryIma
                 return PerformTransform(image, colorBitDepthTransform);
             case ThumbnailTransform thumbnailTransform:
                 return PerformTransform(image, thumbnailTransform);
+            case CorrectionTransform correctionTransform:
+                return PerformTransform(image, correctionTransform);
             default:
                 throw new ArgumentException($"Unsupported transform type: {transform.GetType().FullName}");
         }
+    }
+
+    private TImage PerformTransform(TImage image, CorrectionTransform transform)
+    {
+        if (transform.Mode == CorrectionMode.Document)
+        {
+            var image2 = ImageContext.Create(image.Width, image.Height, image.PixelFormat);
+            image2.SetResolution(image.HorizontalResolution, image.VerticalResolution);
+            new BilateralFilterOp().Perform(image, image2);
+            image.Dispose();
+            image = (TImage) image2;
+        }
+        var op1 = new CorrectionPreProcessingOp(transform.Mode);
+        op1.Perform(image);
+        new CorrectionOp(op1).Perform(image);
+        return image;
     }
 
     protected virtual TImage PerformTransform(TImage image, BrightnessTransform transform)
