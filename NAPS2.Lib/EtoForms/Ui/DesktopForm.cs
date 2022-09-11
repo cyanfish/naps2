@@ -396,14 +396,13 @@ public abstract class DesktopForm : EtoFormBase
     {
         base.OnLoad(e);
         _imageListSyncer = new ImageListSyncer(ImageList, _listView.ApplyDiffs, SynchronizationContext.Current!);
-        _desktopController.Initialize();
     }
 
     protected override void OnShown(EventArgs e)
     {
         base.OnShown(e);
         UpdateToolbar();
-        _thumbnailController.Reload();
+        _desktopController.Initialize();
     }
 
     protected override void OnClosed(EventArgs e)

@@ -63,6 +63,7 @@ public class CommonModule : NinjectModule
         Bind<IPdfRenderer>().To<PdfiumPdfRenderer>();
         Bind<ScanningContext>().ToSelf().InSingletonScope();
         Bind<OcrOperationManager>().ToSelf().InSingletonScope();
+        Bind<ThumbnailController>().ToSelf().InSingletonScope();
         Bind<ThumbnailRenderQueue>().ToSelf().InSingletonScope();
 
         //Kernel.Get<ImageContext>().PdfRenderer = Kernel.Get<PdfiumWorkerCoordinator>();
