@@ -78,8 +78,8 @@ public class ThumbnailController : IDisposable
 
     public void Init(UiImageList imageList)
     {
-        _renderQueue.StartRendering(imageList);
         Reload();
+        _renderQueue.StartRendering(imageList);
     }
 
     public void Dispose()

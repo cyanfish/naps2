@@ -1,5 +1,4 @@
-﻿using NAPS2.EtoForms;
-using NAPS2.ImportExport;
+﻿using NAPS2.ImportExport;
 using NAPS2.ImportExport.Email;
 using NAPS2.ImportExport.Email.Mapi;
 using NAPS2.ImportExport.Images;
@@ -65,7 +64,6 @@ public class CommonModule : NinjectModule
         Bind<ScanningContext>().ToSelf().InSingletonScope();
         Bind<OcrOperationManager>().ToSelf().InSingletonScope();
         Bind<ThumbnailRenderQueue>().ToSelf().InSingletonScope();
-        Bind<IDevicePrompt>().To<EtoDevicePrompt>();
 
         //Kernel.Get<ImageContext>().PdfRenderer = Kernel.Get<PdfiumWorkerCoordinator>();
 

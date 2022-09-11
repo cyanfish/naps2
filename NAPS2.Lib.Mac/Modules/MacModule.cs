@@ -23,6 +23,7 @@ public class MacModule : NinjectModule
         Bind<IOverwritePrompt>().To<WinFormsOverwritePrompt>();
         Bind<OperationProgress>().To<EtoOperationProgress>().InSingletonScope();
         Bind<DialogHelper>().To<WinFormsDialogHelper>();
+        Bind<IDevicePrompt>().To<EtoDevicePrompt>();
         Bind<INotificationManager>().To<StubNotificationManager>().InSingletonScope();
         Bind<ISaveNotify>().ToMethod(ctx => ctx.Kernel.Get<INotificationManager>());
         Bind<IScannedImagePrinter>().To<StubScannedImagePrinter>();

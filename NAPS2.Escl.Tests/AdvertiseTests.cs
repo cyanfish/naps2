@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using NAPS2.Escl.Server;
 using Xunit;
 
@@ -20,9 +21,12 @@ public class AdvertiseTests
         server.Start();
         using var advertiser = new MdnsAdvertiser();
         advertiser.Advertise();
-        for (int i = 0; i < 10; i++)
+        if (Debugger.IsAttached)
         {
-            await Task.Delay(5000);
+            for (int i = 0; i < 10; i++)
+            {
+                await Task.Delay(5000);
+            }
         }
     }
 }
