@@ -17,9 +17,12 @@ public class BatchScanPerformer : IBatchScanPerformer
     private readonly IFormFactory _formFactory;
     private readonly Naps2Config _config;
     private readonly IProfileManager _profileManager;
+    private readonly ThumbnailController _thumbnailController;
 
-    public BatchScanPerformer(IScanPerformer scanPerformer, IPdfExporter pdfExporter, IOperationFactory operationFactory,
-        IFormFactory formFactory, Naps2Config config, IProfileManager profileManager)
+    public BatchScanPerformer(IScanPerformer scanPerformer, IPdfExporter pdfExporter,
+        IOperationFactory operationFactory,
+        IFormFactory formFactory, Naps2Config config, IProfileManager profileManager,
+        ThumbnailController thumbnailController)
     {
         _scanPerformer = scanPerformer;
         _pdfExporter = pdfExporter;
@@ -27,13 +30,14 @@ public class BatchScanPerformer : IBatchScanPerformer
         _formFactory = formFactory;
         _config = config;
         _profileManager = profileManager;
+        _thumbnailController = thumbnailController;
     }
 
     public async Task PerformBatchScan(BatchSettings settings, FormBase batchForm,
         Action<ProcessedImage> imageCallback, Action<string> progressCallback, CancellationToken cancelToken)
     {
         var state = new BatchState(_scanPerformer, _pdfExporter, _operationFactory, _formFactory, _config,
-            _profileManager, settings, progressCallback, cancelToken, batchForm, imageCallback);
+            _profileManager, _thumbnailController, settings, progressCallback, cancelToken, batchForm, imageCallback);
         await state.Do();
     }
 
@@ -57,7 +61,8 @@ public class BatchScanPerformer : IBatchScanPerformer
         private List<List<ProcessedImage>> _scans;
 
         public BatchState(IScanPerformer scanPerformer, IPdfExporter pdfExporter, IOperationFactory operationFactory,
-            IFormFactory formFactory, Naps2Config config, IProfileManager profileManager, BatchSettings settings,
+            IFormFactory formFactory, Naps2Config config, IProfileManager profileManager,
+            ThumbnailController thumbnailController, BatchSettings settings,
             Action<string> progressCallback, CancellationToken cancelToken, FormBase batchForm,
             Action<ProcessedImage> loadImageCallback)
         {
@@ -72,7 +77,7 @@ public class BatchScanPerformer : IBatchScanPerformer
             _cancelToken = cancelToken;
             _batchForm = batchForm;
             _loadImageCallback = loadImageCallback;
-            
+
             _profile = _profileManager.Profiles.First(x => x.DisplayName == _settings.ProfileDisplayName);
             _scanParams = new ScanParams
             {
@@ -86,7 +91,7 @@ public class BatchScanPerformer : IBatchScanPerformer
                         ? _config.DefaultOcrParams()
                         : OcrParams.Empty,
                 OcrCancelToken = _cancelToken,
-                ThumbnailSize = _config.ThumbnailSize()
+                ThumbnailSize = thumbnailController.RenderSize
             };
             _scans = new List<List<ProcessedImage>>();
         }

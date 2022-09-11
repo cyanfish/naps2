@@ -126,9 +126,9 @@ public partial class FDesktop : FormBase
             // Allow tabbing through the toolbar for accessibility
             WinFormsHacks.SetControlStyle(panel, ControlStyles.Selectable, true);
         }
-        int thumbnailSize = Config.ThumbnailSize();
-        _listView.ImageSize = thumbnailSize;
-        SetThumbnailSpacing(thumbnailSize);
+        // int thumbnailSize = Config.ThumbnailSize();
+        // _listView.ImageSize = thumbnailSize;
+        // SetThumbnailSpacing(thumbnailSize);
 
         // TODO: Verify that hidden buttons can't be accessed via keyboard shortcut
         var hiddenButtons = Config.Get(c => c.HiddenButtons);
@@ -272,8 +272,8 @@ public partial class FDesktop : FormBase
         ctxSelectAll.Enabled = _imageList.Images.Any();
 
         // Other
-        btnZoomIn.Enabled = _imageList.Images.Any() && Config.ThumbnailSize() < ThumbnailSizes.MAX_SIZE;
-        btnZoomOut.Enabled = _imageList.Images.Any() && Config.ThumbnailSize() > ThumbnailSizes.MIN_SIZE;
+        // btnZoomIn.Enabled = _imageList.Images.Any() && Config.ThumbnailSize() < ThumbnailSizes.MAX_SIZE;
+        // btnZoomOut.Enabled = _imageList.Images.Any() && Config.ThumbnailSize() > ThumbnailSizes.MIN_SIZE;
         tsNewProfile.Enabled =
             !(Config.Get(c => c.NoUserProfiles) && _profileManager.Profiles.Any(x => x.IsLocked));
 
@@ -691,12 +691,12 @@ public partial class FDesktop : FormBase
 
     private void StepThumbnailSize(double step)
     {
-        int thumbnailSize = Config.ThumbnailSize();
-        thumbnailSize =
-            (int) ThumbnailSizes.StepNumberToSize(ThumbnailSizes.SizeToStepNumber(thumbnailSize) + step);
-        thumbnailSize = ThumbnailSizes.Validate(thumbnailSize);
-        Config.User.Set(c => c.ThumbnailSize, thumbnailSize);
-        ResizeThumbnails(thumbnailSize);
+        // int thumbnailSize = Config.ThumbnailSize();
+        // thumbnailSize =
+        //     (int) ThumbnailSizes.StepNumberToSize(ThumbnailSizes.SizeToStepNumber(thumbnailSize) + step);
+        // thumbnailSize = ThumbnailSizes.Validate(thumbnailSize);
+        // Config.User.Set(c => c.ThumbnailSize, thumbnailSize);
+        // ResizeThumbnails(thumbnailSize);
     }
 
     private void ResizeThumbnails(int thumbnailSize)

@@ -4,8 +4,8 @@ namespace NAPS2.WinForms;
 
 partial class FBrightnessContrast : ImageForm
 {
-    public FBrightnessContrast(ImageContext imageContext)
-        : base(imageContext)
+    public FBrightnessContrast(ImageContext imageContext, ThumbnailController thumbnailController)
+        : base(imageContext, thumbnailController)
     {
         InitializeComponent();
         ActiveControl = txtBrightness;

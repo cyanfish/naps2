@@ -17,7 +17,7 @@ public class MacDesktopForm : DesktopForm
         IProfileManager profileManager,
         UiImageList imageList,
         ImageTransfer imageTransfer,
-        ThumbnailRenderQueue thumbnailRenderQueue,
+        ThumbnailController thumbnailController,
         UiThumbnailProvider thumbnailProvider,
         DesktopController desktopController,
         IDesktopScanController desktopScanController,
@@ -25,9 +25,11 @@ public class MacDesktopForm : DesktopForm
         DesktopFormProvider desktopFormProvider,
         IDesktopSubFormController desktopSubFormController)
         : base(config, /*ksm,*/ notify, cultureHelper, profileManager,
-            imageList, imageTransfer, thumbnailRenderQueue, thumbnailProvider, desktopController, desktopScanController,
+            imageList, imageTransfer, thumbnailController, thumbnailProvider, desktopController, desktopScanController,
             imageListActions, desktopFormProvider, desktopSubFormController)
     {
+        // For retina screens
+        _thumbnailController.Oversample = 2.0;
     }
 
     protected override void SetContent(Control content)
@@ -141,8 +143,7 @@ public class MacDesktopForm : DesktopForm
 
     private void ZoomUpdated(NSSlider sender)
     {
-        var size = ThumbnailSizes.CurveToSize(sender.DoubleValue);
-        ResizeThumbnails(size);
+        _thumbnailController.VisibleSize = ThumbnailSizes.CurveToSize(sender.DoubleValue);
     }
 
     public class ToolbarDelegate : NSToolbarDelegate
@@ -198,7 +199,7 @@ public class MacDesktopForm : DesktopForm
                     {
                         MinValue = 0,
                         MaxValue = 1,
-                        DoubleValue = ThumbnailSizes.SizeToCurve(_form.Config.ThumbnailSize()),
+                        DoubleValue = ThumbnailSizes.SizeToCurve(_form._thumbnailController.VisibleSize),
                         ToolTip = UiStrings.Zoom,
                         Title = UiStrings.Zoom
                     }.WithAction(_form.ZoomUpdated),

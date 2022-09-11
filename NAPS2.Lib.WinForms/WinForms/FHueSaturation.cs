@@ -4,8 +4,8 @@ namespace NAPS2.WinForms;
 
 partial class FHueSaturation : ImageForm
 {
-    public FHueSaturation(ImageContext imageContext)
-        : base(imageContext)
+    public FHueSaturation(ImageContext imageContext, ThumbnailController thumbnailController)
+        : base(imageContext, thumbnailController)
     {
         InitializeComponent();
         ActiveControl = txtHue;

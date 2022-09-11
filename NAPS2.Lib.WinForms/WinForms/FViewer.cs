@@ -41,12 +41,13 @@ public class FViewer : FormBase
     private readonly OperationProgress _operationProgress;
     private readonly UiImageList _imageList;
     private readonly INotificationManager _notificationManager;
+    private readonly ThumbnailController _thumbnailController;
 
     private UiImage? _currentImage;
 
     public FViewer(IOperationFactory operationFactory, IWinFormsExportHelper exportHelper,
         KeyboardShortcutManager ksm, OperationProgress operationProgress,
-        UiImageList imageList, INotificationManager notificationManager)
+        UiImageList imageList, INotificationManager notificationManager, ThumbnailController thumbnailController)
     {
         _operationFactory = operationFactory;
         _exportHelper = exportHelper;
@@ -54,6 +55,7 @@ public class FViewer : FormBase
         _operationProgress = operationProgress;
         _imageList = imageList;
         _notificationManager = notificationManager;
+        _thumbnailController = thumbnailController;
         InitializeComponent();
     }
 
@@ -448,7 +450,7 @@ public class FViewer : FormBase
     private async void tsDeskew_Click(object sender, EventArgs e)
     {
         var op = _operationFactory.Create<DeskewOperation>();
-        if (op.Start(new[] { CurrentImage }, new DeskewParams { ThumbnailSize = Config.ThumbnailSize() }))
+        if (op.Start(new[] { CurrentImage }, new DeskewParams { ThumbnailSize = _thumbnailController.RenderSize }))
         {
             _operationProgress.ShowProgress(op);
         }

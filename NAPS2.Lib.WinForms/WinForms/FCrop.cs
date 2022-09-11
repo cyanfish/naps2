@@ -14,8 +14,8 @@ partial class FCrop : ImageForm
 
     private int _originalWidth, _originalHeight;
 
-    public FCrop(ImageContext imageContext)
-        : base(imageContext)
+    public FCrop(ImageContext imageContext, ThumbnailController thumbnailController)
+        : base(imageContext, thumbnailController)
     {
         InitializeComponent();
 

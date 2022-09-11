@@ -33,6 +33,7 @@ public class DesktopControllerTests : ContextualTests
     private readonly Mock<IDesktopScanController> _desktopScanController;
     private readonly DesktopFormProvider _desktopFormProvider;
     private readonly Mock<IScannedImagePrinter> _scannedImagePrinter;
+    private readonly ThumbnailController _thumbnailController;
 
     public DesktopControllerTests()
     {
@@ -47,18 +48,19 @@ public class DesktopControllerTests : ContextualTests
         _stillImage = new StillImage();
         _updateChecker = new Mock<IUpdateChecker>();
         _notifcationManager = new Mock<INotificationManager>();
-        _imageTransfer = new ImageTransfer(ImageContext);
-        _imageClipboard = new ImageClipboard(ImageContext, _imageTransfer);
+        _imageTransfer = new ImageTransfer();
+        _imageClipboard = new ImageClipboard();
         _exportHelper = new Mock<IWinFormsExportHelper>();
         _desktopImagesController = new DesktopImagesController(_imageList);
         _desktopScanController = new Mock<IDesktopScanController>();
         _desktopFormProvider = new DesktopFormProvider();
         _scannedImagePrinter = new Mock<IScannedImagePrinter>();
+        _thumbnailController = new ThumbnailController(_thumbnailRenderQueue, _config);
         _desktopController = new DesktopController(
             ScanningContext,
             _imageList,
             _recoveryStorageManager,
-            _thumbnailRenderQueue,
+            _thumbnailController,
             _operationProgress.Object,
             _config,
             _operationFactory.Object,
@@ -67,8 +69,8 @@ public class DesktopControllerTests : ContextualTests
             _notifcationManager.Object,
             _imageTransfer,
             _imageClipboard,
-            new ImageListActions(ImageContext, _imageList, _operationFactory.Object, _operationProgress.Object,
-                _config),
+            new ImageListActions(_imageList, _operationFactory.Object, _operationProgress.Object,
+                _config, _thumbnailController),
             _exportHelper.Object,
             _desktopImagesController,
             _desktopScanController.Object,

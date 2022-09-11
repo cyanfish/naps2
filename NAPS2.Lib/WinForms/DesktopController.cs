@@ -22,7 +22,7 @@ public class DesktopController
     private readonly ScanningContext _scanningContext;
     private readonly UiImageList _imageList;
     private readonly RecoveryStorageManager _recoveryStorageManager;
-    private readonly ThumbnailRenderQueue _thumbnailRenderQueue;
+    private readonly ThumbnailController _thumbnailController;
     private readonly OperationProgress _operationProgress;
     private readonly Naps2Config _config;
     private readonly IOperationFactory _operationFactory;
@@ -41,7 +41,7 @@ public class DesktopController
     private bool _closed;
 
     public DesktopController(ScanningContext scanningContext, UiImageList imageList,
-        RecoveryStorageManager recoveryStorageManager, ThumbnailRenderQueue thumbnailRenderQueue,
+        RecoveryStorageManager recoveryStorageManager, ThumbnailController thumbnailController,
         OperationProgress operationProgress, Naps2Config config, IOperationFactory operationFactory,
         StillImage stillImage,
         IUpdateChecker updateChecker, INotificationManager notify, ImageTransfer imageTransfer,
@@ -52,7 +52,7 @@ public class DesktopController
         _scanningContext = scanningContext;
         _imageList = imageList;
         _recoveryStorageManager = recoveryStorageManager;
-        _thumbnailRenderQueue = thumbnailRenderQueue;
+        _thumbnailController = thumbnailController;
         _operationProgress = operationProgress;
         _config = config;
         _operationFactory = operationFactory;
@@ -168,7 +168,7 @@ public class DesktopController
             }
         }
         _closed = true;
-        _thumbnailRenderQueue.Dispose();
+        _thumbnailController.Dispose();
     }
 
     public bool PrepareForClosing(bool userClosing)
@@ -291,15 +291,14 @@ public class DesktopController
 
     private void InitThumbnailRendering()
     {
-        _thumbnailRenderQueue.SetThumbnailSize(_config.ThumbnailSize());
-        _thumbnailRenderQueue.StartRendering(_imageList);
+        _thumbnailController.Init(_imageList);
     }
 
     public void ImportFiles(IEnumerable<string> files)
     {
         var op = _operationFactory.Create<ImportOperation>();
         if (op.Start(OrderFiles(files), _desktopImagesController.ReceiveScannedImage(),
-                new ImportParams { ThumbnailSize = _config.ThumbnailSize() }))
+                new ImportParams { ThumbnailSize = _thumbnailController.RenderSize }))
         {
             _operationProgress.ShowProgress(op);
         }
@@ -317,7 +316,7 @@ public class DesktopController
     {
         var op = _operationFactory.Create<DirectImportOperation>();
         if (op.Start(data, copy, _desktopImagesController.ReceiveScannedImage(),
-                new DirectImportParams { ThumbnailSize = _config.ThumbnailSize() }))
+                new DirectImportParams { ThumbnailSize = _thumbnailController.RenderSize }))
         {
             _operationProgress.ShowProgress(op);
         }

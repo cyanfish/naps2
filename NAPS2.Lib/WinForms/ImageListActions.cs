@@ -6,14 +6,16 @@ public class ImageListActions
     private readonly IOperationFactory _operationFactory;
     private readonly OperationProgress _operationProgress;
     private readonly Naps2Config _config;
+    private readonly ThumbnailController _thumbnailController;
 
     public ImageListActions(UiImageList imageList, IOperationFactory operationFactory,
-        OperationProgress operationProgress, Naps2Config config)
+        OperationProgress operationProgress, Naps2Config config, ThumbnailController thumbnailController)
     {
         _imageList = imageList;
         _operationFactory = operationFactory;
         _operationProgress = operationProgress;
         _config = config;
+        _thumbnailController = thumbnailController;
     }
 
     public void MoveDown() => _imageList.Mutate(new ImageListMutation.MoveDown());
@@ -56,7 +58,7 @@ public class ImageListActions
         }
 
         var op = _operationFactory.Create<DeskewOperation>();
-        if (op.Start(images, new DeskewParams { ThumbnailSize = _config.ThumbnailSize() }))
+        if (op.Start(images, new DeskewParams { ThumbnailSize = _thumbnailController.RenderSize }))
         {
             _operationProgress.ShowProgress(op);
         }

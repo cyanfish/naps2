@@ -13,10 +13,12 @@ public class DesktopScanController : IDesktopScanController
     private readonly DesktopImagesController _desktopImagesController;
     private readonly IDesktopSubFormController _desktopSubFormController;
     private readonly DesktopFormProvider _desktopFormProvider;
+    private readonly ThumbnailController _thumbnailController;
 
     public DesktopScanController(Naps2Config config, IProfileManager profileManager, IFormFactory formFactory,
         IScanPerformer scanPerformer, DesktopImagesController desktopImagesController,
-        IDesktopSubFormController desktopSubFormController, DesktopFormProvider desktopFormProvider)
+        IDesktopSubFormController desktopSubFormController, DesktopFormProvider desktopFormProvider,
+        ThumbnailController thumbnailController)
     {
         _config = config;
         _profileManager = profileManager;
@@ -25,6 +27,7 @@ public class DesktopScanController : IDesktopScanController
         _desktopImagesController = desktopImagesController;
         _desktopSubFormController = desktopSubFormController;
         _desktopFormProvider = desktopFormProvider;
+        _thumbnailController = thumbnailController;
     }
 
     private ScanParams DefaultScanParams() =>
@@ -32,7 +35,7 @@ public class DesktopScanController : IDesktopScanController
         {
             NoAutoSave = _config.Get(c => c.DisableAutoSave),
             OcrParams = _config.OcrAfterScanningParams(),
-            ThumbnailSize = _config.ThumbnailSize()
+            ThumbnailSize = _thumbnailController.RenderSize
         };
 
     public async Task ScanWithDevice(string deviceID)
@@ -126,7 +129,8 @@ public class DesktopScanController : IDesktopScanController
     private async Task DoScan(ScanProfile profile)
     {
         var source =
-            await _scanPerformer.PerformScan(profile, DefaultScanParams(), _desktopFormProvider.DesktopForm.NativeHandle);
+            await _scanPerformer.PerformScan(profile, DefaultScanParams(),
+                _desktopFormProvider.DesktopForm.NativeHandle);
         await source.ForEach(_desktopImagesController.ReceiveScannedImage());
         _desktopFormProvider.DesktopForm.BringToFront();
     }

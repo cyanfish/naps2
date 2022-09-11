@@ -12,9 +12,10 @@ public class ProfilesForm : EtoDialogBase
     private readonly ProfileNameTracker _profileNameTracker;
     private readonly IProfileManager _profileManager;
     private readonly ProfileTransfer _profileTransfer;
+    private readonly ThumbnailController _thumbnailController;
 
     private readonly IListView<ScanProfile> _listView;
-        
+
     private readonly Command _scanCommand;
     private readonly Command _addCommand;
     private readonly Command _editCommand;
@@ -23,13 +24,16 @@ public class ProfilesForm : EtoDialogBase
     private readonly Command _copyCommand;
     private readonly Command _pasteCommand;
 
-    public ProfilesForm(Naps2Config config, IScanPerformer scanPerformer, ProfileNameTracker profileNameTracker, IProfileManager profileManager, ProfileListViewBehavior profileListViewBehavior, ProfileTransfer profileTransfer)
+    public ProfilesForm(Naps2Config config, IScanPerformer scanPerformer, ProfileNameTracker profileNameTracker,
+        IProfileManager profileManager, ProfileListViewBehavior profileListViewBehavior,
+        ProfileTransfer profileTransfer, ThumbnailController thumbnailController)
         : base(config)
     {
         _scanPerformer = scanPerformer;
         _profileNameTracker = profileNameTracker;
         _profileManager = profileManager;
         _profileTransfer = profileTransfer;
+        _thumbnailController = thumbnailController;
 
         Title = UiStrings.ProfilesFormTitle;
         Icon = new Icon(1f, Icons.blueprints_small.ToEtoImage());
@@ -90,7 +94,7 @@ public class ProfilesForm : EtoDialogBase
         _listView.SelectionChanged += SelectionChanged;
         _listView.Drop += Drop;
         profileManager.ProfilesUpdated += ProfilesUpdated;
-            
+
         _addCommand.Enabled = !NoUserProfiles;
         _editCommand.Enabled = false;
         _deleteCommand.Enabled = false;
@@ -117,7 +121,7 @@ public class ProfilesForm : EtoDialogBase
         ContextMenu.AddItems(
             new ButtonMenuItem(_deleteCommand));
         ContextMenu.Opening += ContextMenuOpening;
-            
+
         BuildLayout();
     }
 
@@ -126,7 +130,8 @@ public class ProfilesForm : EtoDialogBase
         Content = L.Column(
             L.Row(
                 _listView.Control.XScale(),
-                C.Button(_scanCommand, Icons.control_play_blue.ToEtoImage(), ButtonImagePosition.Above).AutoSize().Height(100)
+                C.Button(_scanCommand, Icons.control_play_blue.ToEtoImage(), ButtonImagePosition.Above).AutoSize()
+                    .Height(100)
             ).Aligned().YScale(),
             L.Row(
                 L.Column(
@@ -155,7 +160,7 @@ public class ProfilesForm : EtoDialogBase
     private void ProfilesUpdated(object? sender, EventArgs e)
     {
         ReloadProfiles();
-            
+
         // If we only have one profile, make it the default
         var profiles = _profileManager.Profiles;
         if (profiles.Count == 1 && !profiles[0].IsDefault)
@@ -206,7 +211,8 @@ public class ProfilesForm : EtoDialogBase
             {
                 if (!NoUserProfiles)
                 {
-                    _profileManager.Mutate(new ListMutation<ScanProfile>.Append(data.ScanProfileXml.FromXml<ScanProfile>()), _listView);
+                    _profileManager.Mutate(
+                        new ListMutation<ScanProfile>.Append(data.ScanProfileXml.FromXml<ScanProfile>()), _listView);
                 }
             }
         }
@@ -217,7 +223,7 @@ public class ProfilesForm : EtoDialogBase
         {
             NoAutoSave = Config.Get(c => c.DisableAutoSave),
             OcrParams = Config.OcrAfterScanningParams(),
-            ThumbnailSize = Config.ThumbnailSize()
+            ThumbnailSize = _thumbnailController.RenderSize
         };
 
     private void ContextMenuOpening(object? sender, EventArgs e)
@@ -247,12 +253,14 @@ public class ProfilesForm : EtoDialogBase
             {
                 return;
             }
-            _profileManager.Mutate(new ListMutation<ScanProfile>.Append(editSettingsForm.ScanProfile), ListSelection.Empty<ScanProfile>());
+            _profileManager.Mutate(new ListMutation<ScanProfile>.Append(editSettingsForm.ScanProfile),
+                ListSelection.Empty<ScanProfile>());
             _profileManager.DefaultProfile = editSettingsForm.ScanProfile;
         }
         if (SelectedProfile == null)
         {
-            MessageBox.Show(MiscResources.SelectProfileBeforeScan, MiscResources.ChooseProfile, MessageBoxButtons.OK, MessageBoxType.Warning);
+            MessageBox.Show(MiscResources.SelectProfileBeforeScan, MiscResources.ChooseProfile, MessageBoxButtons.OK,
+                MessageBoxType.Warning);
             return;
         }
         if (_profileManager.DefaultProfile == null)
@@ -295,7 +303,8 @@ public class ProfilesForm : EtoDialogBase
         if (SelectedProfile != null && !SelectionLocked)
         {
             string message = string.Format(MiscResources.ConfirmDeleteSingleProfile, SelectedProfile.DisplayName);
-            if (MessageBox.Show(message, MiscResources.Delete, MessageBoxButtons.YesNo, MessageBoxType.Warning) == DialogResult.Yes)
+            if (MessageBox.Show(message, MiscResources.Delete, MessageBoxButtons.YesNo, MessageBoxType.Warning) ==
+                DialogResult.Yes)
             {
                 foreach (var profile in _listView.Selection)
                 {

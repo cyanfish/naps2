@@ -8,6 +8,7 @@ namespace NAPS2.WinForms;
 public partial class ImageForm : FormBase
 {
     private readonly ImageContext _imageContext;
+    private readonly ThumbnailController _thumbnailController;
 
     protected Bitmap workingImage, workingImage2;
     private bool _initComplete;
@@ -22,9 +23,10 @@ public partial class ImageForm : FormBase
         InitializeComponent();
     }
 
-    protected ImageForm(ImageContext imageContext)
+    protected ImageForm(ImageContext imageContext, ThumbnailController thumbnailController)
     {
         _imageContext = imageContext;
+        _thumbnailController = thumbnailController;
         InitializeComponent();
     }
 
@@ -152,7 +154,7 @@ public partial class ImageForm : FormBase
                     var transformed =
                         new GdiImage(_imageContext, workingImage).Clone().PerformAllTransforms(Transforms);
                     updatedThumb =
-                        transformed.PerformTransform(new ThumbnailTransform(Config.ThumbnailSize()));
+                        transformed.PerformTransform(new ThumbnailTransform(_thumbnailController.RenderSize));
                 }
                 img.AddTransforms(Transforms, updatedThumb);
             }

@@ -13,7 +13,7 @@ public abstract class DesktopForm : EtoFormBase
     private readonly CultureHelper _cultureHelper;
     private readonly IProfileManager _profileManager;
     private readonly ImageTransfer _imageTransfer;
-    private readonly ThumbnailRenderQueue _thumbnailRenderQueue;
+    protected readonly ThumbnailController _thumbnailController;
     private readonly UiThumbnailProvider _thumbnailProvider;
     private readonly DesktopController _desktopController;
     private readonly IDesktopScanController _desktopScanController;
@@ -85,7 +85,7 @@ public abstract class DesktopForm : EtoFormBase
         IProfileManager profileManager,
         UiImageList imageList,
         ImageTransfer imageTransfer,
-        ThumbnailRenderQueue thumbnailRenderQueue,
+        ThumbnailController thumbnailController,
         UiThumbnailProvider thumbnailProvider,
         DesktopController desktopController,
         IDesktopScanController desktopScanController,
@@ -99,7 +99,7 @@ public abstract class DesktopForm : EtoFormBase
         _profileManager = profileManager;
         ImageList = imageList;
         _imageTransfer = imageTransfer;
-        _thumbnailRenderQueue = thumbnailRenderQueue;
+        _thumbnailController = thumbnailController;
         _thumbnailProvider = thumbnailProvider;
         _desktopController = desktopController;
         _desktopScanController = desktopScanController;
@@ -382,6 +382,12 @@ public abstract class DesktopForm : EtoFormBase
         ImageList.ImagesUpdated += (_, _) => Invoker.Current.SafeInvoke(UpdateToolbar);
         _profileManager.ProfilesUpdated += (_, _) => UpdateScanButton();
         _desktopFormProvider.DesktopForm = this;
+        _thumbnailController.ListView = _listView;
+        _thumbnailController.ThumbnailSizeChanged += (_, _) =>
+        {
+            SetThumbnailSpacing(_thumbnailController.VisibleSize);
+            UpdateToolbar();
+        };
     }
 
     protected UiImageList ImageList { get; }
@@ -397,7 +403,7 @@ public abstract class DesktopForm : EtoFormBase
     {
         base.OnShown(e);
         UpdateToolbar();
-        ResizeThumbnails(Config.ThumbnailSize());
+        _thumbnailController.Reload();
     }
 
     protected virtual void CreateToolbarsAndMenus()
@@ -893,28 +899,6 @@ public abstract class DesktopForm : EtoFormBase
     // #region Thumbnail Resizing
     //
     //
-    protected void ResizeThumbnails(int thumbnailSize)
-    {
-        // TODO: Do we want a DesktopListViewController or something? That handles listview, thumbnail rendering, etc.?
-        thumbnailSize = ThumbnailSizes.Validate(thumbnailSize);
-        Config.User.Set(c => c.ThumbnailSize, thumbnailSize);
-        if (_listView.ImageSize == thumbnailSize)
-        {
-            // Same size so no resizing needed
-            return;
-        }
-
-        // Adjust the visible thumbnail display with the new size
-        _listView.ImageSize = thumbnailSize;
-        _listView.RegenerateImages();
-
-        SetThumbnailSpacing(thumbnailSize);
-        UpdateToolbar(); // TODO: Do we need this?
-
-        // Render high-quality thumbnails at the new size in a background task
-        // The existing (poorly scaled) thumbnails are used in the meantime
-        _thumbnailRenderQueue.SetThumbnailSize(thumbnailSize);
-    }
 
     protected virtual void SetThumbnailSpacing(int thumbnailSize)
     {
