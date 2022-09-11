@@ -25,7 +25,7 @@
   <Import Project="..\NAPS2.Setup\SdkUsers.targets" />
   
   <ItemGroup>
-    <PackageReference Include="NAPS2.Sane" Version="1.0.0" />
+    <PackageReference Include="NAPS2.Sane" Version="0.1.0" />
     <ProjectReference Include="..\NAPS2.Lib.Mac\NAPS2.Lib.Mac.csproj" />
     <PackageReference Include="Eto.Platform.macOS" Version="2.7.1" />
   </ItemGroup>
