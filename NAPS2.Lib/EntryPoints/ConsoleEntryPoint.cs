@@ -6,6 +6,8 @@ using Ninject;
 
 namespace NAPS2.EntryPoints;
 
+// TODO: NAPS2.Console.exe should probably be Windows-only, but we should add command-line capabilities to the Mac/Linux
+// TODO: executables too (e.g. "./NAPS2 console --argshere", also "./NAPS2 worker argshere").
 /// <summary>
 /// The entry point for NAPS2.Console.exe, the NAPS2 CLI.
 /// </summary>
