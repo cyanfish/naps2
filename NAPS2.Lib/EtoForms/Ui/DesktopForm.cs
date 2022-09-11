@@ -350,7 +350,7 @@ public abstract class DesktopForm : EtoFormBase
         // PostInitializeComponent();
         //
         Icon = Icons.favicon.ToEtoIcon();
-        Title = MiscResources.NAPS2;
+        Title = UiStrings.Naps2FullTitle;
         CreateToolbarsAndMenus();
         UpdateScanButton();
         InitLanguageDropdown();
@@ -404,6 +404,12 @@ public abstract class DesktopForm : EtoFormBase
         base.OnShown(e);
         UpdateToolbar();
         _thumbnailController.Reload();
+    }
+
+    protected override void OnClosed(EventArgs e)
+    {
+        base.OnClosed(e);
+        _desktopController.Cleanup();
     }
 
     protected virtual void CreateToolbarsAndMenus()

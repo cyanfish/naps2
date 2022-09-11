@@ -1,7 +1,7 @@
 ; !defs
 
 [Setup]
-AppName=NAPS2 (Not Another PDF Scanner 2)
+AppName=NAPS2 - Not Another PDF Scanner
 AppVerName=NAPS2 {#AppVersion}
 AppPublisher=Ben Olden-Cooligan
 AppPublisherURL=https://www.naps2.com

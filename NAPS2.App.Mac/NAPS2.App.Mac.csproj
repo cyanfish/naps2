@@ -15,8 +15,8 @@
     <!-- TODO: Do we need a separate project for x64? Multiple RuntimeIdentifiers fails with SelfContained. -->
     <RuntimeIdentifier>osx-arm64</RuntimeIdentifier>
 
-    <Title>NAPS2 (Not Another PDF Scanner 2)</Title>
-    <Product>NAPS2 (Not Another PDF Scanner 2)</Product>
+    <Title>NAPS2 - Not Another PDF Scanner</Title>
+    <Product>NAPS2 - Not Another PDF Scanner</Product>
     <Copyright>Copyright 2009, 2012-2022 NAPS2 Contributors</Copyright>
   </PropertyGroup>
 

@@ -6,8 +6,8 @@
         <GenerateResourceUsePreserializedResources>true</GenerateResourceUsePreserializedResources>
         <RootNamespace>NAPS2</RootNamespace>
 
-        <Title>NAPS2 (Not Another PDF Scanner 2)</Title>
-        <Product>NAPS2 (Not Another PDF Scanner 2)</Product>
+        <Title>NAPS2 - Not Another PDF Scanner</Title>
+        <Product>NAPS2 - Not Another PDF Scanner</Product>
         <Copyright>Copyright 2009, 2012-2020 NAPS2 Contributors; Icons from http://www.fatcow.com/free-icons</Copyright>
     </PropertyGroup>
 

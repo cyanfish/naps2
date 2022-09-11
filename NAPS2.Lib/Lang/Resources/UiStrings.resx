@@ -384,4 +384,7 @@
   <data name="RunInBackground" xml:space="preserve">
     <value>Run in Background</value>
   </data>
+  <data name="Naps2FullTitle" xml:space="preserve">
+    <value>NAPS2 - Not Another PDF Scanner</value>
+  </data>
 </root>

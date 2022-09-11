@@ -135,7 +135,7 @@ public class MacDesktopForm : DesktopForm
         window.Toolbar = toolbar;
         window.ToolbarStyle = NSWindowToolbarStyle.Unified;
         // TODO: Subtitle based on active profile?
-        window.Subtitle = "Not Another PDF Scanner 2";
+        window.Subtitle = "Not Another PDF Scanner";
         // TODO: Do we want full size content?
         window.StyleMask |= NSWindowStyle.FullSizeContentView;
         window.StyleMask |= NSWindowStyle.UnifiedTitleAndToolbar;

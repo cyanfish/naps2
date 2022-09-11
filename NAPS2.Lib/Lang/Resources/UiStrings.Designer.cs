@@ -501,6 +501,15 @@ namespace NAPS2.Lang.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to NAPS2 - Not Another PDF Scanner.
+        /// </summary>
+        internal static string Naps2FullTitle {
+            get {
+                return ResourceManager.GetString("Naps2FullTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to New Profile.
         /// </summary>
         internal static string NewProfile {

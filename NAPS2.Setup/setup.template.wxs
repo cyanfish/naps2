@@ -93,7 +93,7 @@
       <Component Id="ApplicationShortcut" Guid="F5122C0C-7DCA-4D0A-AF70-C87C972267AB">
         <Shortcut Id="ApplicationStartMenuShortcut"
                   Name="NAPS2"
-                  Description="Not Another PDF Scanner 2"
+                  Description="Not Another PDF Scanner"
                   Target="[INSTALLFOLDER]NAPS2.exe"
                   WorkingDirectory="INSTALLFOLDER" />
         <RemoveFolder Id="ProgramMenuDir" On="uninstall"/>
