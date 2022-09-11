@@ -19,16 +19,51 @@ public static class ImageExtensions
         return image.ImageContext.PerformAllTransforms(image, transforms);
     }
 
+    /// <summary>
+    /// Copies the content of this image to the destination image. It does not need to be the same pixel format, but if it's different,
+    /// there may be some loss of information (e.g. when converting color to gray or black/white).
+    /// </summary>
+    /// <param name="source"></param>
+    /// <param name="destination"></param>
     public static void CopyTo(this IMemoryImage source, IMemoryImage destination)
     {
         new CopyBitwiseImageOp().Perform(source, destination);
     }
 
+    /// <summary>
+    /// Creates a new image with the same content, dimensions, and resolution as this image, but possibly with a different pixel format.
+    /// This can result in some loss of information (e.g. when converting color to gray or black/white).
+    /// </summary>
+    /// <param name="source"></param>
+    /// <param name="pixelFormat"></param>
+    /// <returns></returns>
     public static IMemoryImage CopyWithPixelFormat(this IMemoryImage source, ImagePixelFormat pixelFormat)
+    {
+        var newImage = source.CopyBlankWithPixelFormat(pixelFormat);
+        new CopyBitwiseImageOp().Perform(source, newImage);
+        return newImage;
+    }
+
+    /// <summary>
+    /// Creates a new (empty) image with the same dimensions, pixel format, and resolution as this image.
+    /// </summary>
+    /// <param name="source"></param>
+    /// <returns></returns>
+    public static IMemoryImage CopyBlank(this IMemoryImage source)
+    {
+        return source.CopyBlankWithPixelFormat(source.PixelFormat);
+    }
+
+    /// <summary>
+    /// Creates a new (empty) image with the same dimensions and resolution as this image, and the specified pixel format.
+    /// </summary>
+    /// <param name="source"></param>
+    /// <param name="pixelFormat"></param>
+    /// <returns></returns>
+    public static IMemoryImage CopyBlankWithPixelFormat(this IMemoryImage source, ImagePixelFormat pixelFormat)
     {
         var newImage = source.ImageContext.Create(source.Width, source.Height, pixelFormat);
         newImage.SetResolution(source.HorizontalResolution, source.VerticalResolution);
-        new CopyBitwiseImageOp().Perform(source, newImage);
         return newImage;
     }
 

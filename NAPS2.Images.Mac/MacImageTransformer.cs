@@ -19,8 +19,7 @@ public class MacImageTransformer : AbstractImageTransformer<MacImage>
         }
         else
         {
-            newImage = (MacImage) ImageContext.Create(image.Width, image.Height, pixelFormat);
-            newImage.SetResolution(image.HorizontalResolution, image.VerticalResolution);
+            newImage = (MacImage) image.CopyBlankWithPixelFormat(pixelFormat);
         }
         using CGBitmapContext c = GetCgBitmapContext(newImage);
 

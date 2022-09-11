@@ -28,8 +28,7 @@ public class RenderTests : ContextualTests
 
         // TODO: Have an actual gray image to load
         var image = LoadImage(ImageResources.color_image);
-        var grayImage = ImageContext.Create(image.Width, image.Height, ImagePixelFormat.Gray8);
-        image.CopyTo(grayImage);
+        var grayImage = image.CopyWithPixelFormat(ImagePixelFormat.Gray8);
         var processedImage = ScanningContext.CreateProcessedImage(grayImage);
 
         var rendered = processedImage.Render();

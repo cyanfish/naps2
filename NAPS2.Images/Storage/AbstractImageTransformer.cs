@@ -52,8 +52,7 @@ public abstract class AbstractImageTransformer<TImage> where TImage : IMemoryIma
     {
         if (transform.Mode == CorrectionMode.Document)
         {
-            var image2 = ImageContext.Create(image.Width, image.Height, image.PixelFormat);
-            image2.SetResolution(image.HorizontalResolution, image.VerticalResolution);
+            var image2 = image.CopyBlank();
             new BilateralFilterOp().Perform(image, image2);
             image.Dispose();
             image = (TImage) image2;
@@ -127,7 +126,7 @@ public abstract class AbstractImageTransformer<TImage> where TImage : IMemoryIma
             return image;
         }
 
-        var newImage = ImageContext.Create(image.Width, image.Height, image.PixelFormat);
+        var newImage = image.CopyBlank();
 
         float sharpnessNormalized = transform.Sharpness / 1000f;
         new SharpenBitwiseImageOp(sharpnessNormalized).Perform(image, newImage);
@@ -186,8 +185,7 @@ public abstract class AbstractImageTransformer<TImage> where TImage : IMemoryIma
             return image;
         }
 
-        var monoBitmap = ImageContext.Create(image.Width, image.Height, ImagePixelFormat.BW1);
-        monoBitmap.SetResolution(image.HorizontalResolution, image.VerticalResolution);
+        var monoBitmap = image.CopyBlankWithPixelFormat(ImagePixelFormat.BW1);
         new CopyBitwiseImageOp
         {
             BlackWhiteThreshold = transform.Threshold / 1000f

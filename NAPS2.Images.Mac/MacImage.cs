@@ -156,9 +156,7 @@ public class MacImage : IMemoryImage
             {
                 // TODO: Trying to copy the NSImage seems to fail specifically for black and white images.
                 // I'm not sure why.
-                var image = ImageContext.Create(Width, Height, PixelFormat);
-                this.CopyTo(image);
-                return image;
+                return this.CopyWithPixelFormat(PixelFormat);
             }
 
 #if MONOMAC

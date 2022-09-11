@@ -11,10 +11,10 @@ public class CopyBitwiseImageOpTests : ContextualTests
     {
         var original = LoadImage(ImageResources.color_image);
 
-        var destR = ImageContext.Create(original.Width, original.Height, ImagePixelFormat.ARGB32);
-        var destB = ImageContext.Create(original.Width, original.Height, ImagePixelFormat.ARGB32);
-        var destG = ImageContext.Create(original.Width, original.Height, ImagePixelFormat.ARGB32);
-        var destRbg = ImageContext.Create(original.Width, original.Height, ImagePixelFormat.ARGB32);
+        var destR = original.CopyBlank();
+        var destB = original.CopyBlank();
+        var destG = original.CopyBlank();
+        var destRbg = original.CopyBlank();
 
         new CopyBitwiseImageOp { DestChannel = ColorChannel.Red }.Perform(original, destR);
         new CopyBitwiseImageOp { DestChannel = ColorChannel.Green }.Perform(original, destG);
@@ -34,10 +34,9 @@ public class CopyBitwiseImageOpTests : ContextualTests
     public void DestChannel_GrayscaleToColor()
     {
         var color  = LoadImage(ImageResources.color_image);
-        var original = ImageContext.Create(color.Width, color.Height, ImagePixelFormat.Gray8);
-        color.CopyTo(original);
+        var original = color.CopyWithPixelFormat(ImagePixelFormat.Gray8);
 
-        var dest = ImageContext.Create(original.Width, original.Height, ImagePixelFormat.ARGB32);
+        var dest = color.CopyBlank();
 
         new CopyBitwiseImageOp { DestChannel = ColorChannel.Red }.Perform(original, dest);
         new CopyBitwiseImageOp { DestChannel = ColorChannel.Green }.Perform(original, dest);
