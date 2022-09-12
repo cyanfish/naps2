@@ -1,5 +1,4 @@
-﻿using System.Drawing;
-using System.Runtime.InteropServices;
+﻿using System.Runtime.InteropServices;
 using Microsoft.Win32;
 using NAPS2.Platform.Windows;
 
@@ -29,7 +28,7 @@ public class SystemEmailClients
         }).ToArray() ?? Array.Empty<string>();
     }
 
-    public Image? GetIcon(string clientName)
+    public string? GetExePath(string clientName)
     {
         using var command = Registry.LocalMachine.OpenSubKey($@"SOFTWARE\Clients\Mail\{clientName}\shell\open\command", false);
         string commandText = command?.GetValue(null)?.ToString() ?? "";
@@ -37,9 +36,8 @@ public class SystemEmailClients
         {
             return null;
         }
-        string exePath = commandText.Substring(1, commandText.IndexOf("\"", 1, StringComparison.InvariantCulture) - 1);
-        var icon = Icon.ExtractAssociatedIcon(exePath);
-        return icon?.ToBitmap();
+        return commandText.Substring(1, commandText.IndexOf("\"", 1, StringComparison.InvariantCulture) - 1);
+
     }
 
     internal IntPtr GetLibrary(string? clientName)

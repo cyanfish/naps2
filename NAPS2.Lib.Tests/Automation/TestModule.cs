@@ -1,4 +1,5 @@
 using NAPS2.Automation;
+using NAPS2.ImportExport.Images;
 using NAPS2.Ocr;
 using NAPS2.Recovery;
 using NAPS2.Scan;
@@ -31,7 +32,8 @@ internal class TestModule : NinjectModule
 
     public override void Load()
     {
-        Rebind<ImageContext>().ToConstant(_imageContext);
+        Bind<ImageContext>().ToConstant(_imageContext);
+        Bind<ITiffHelper>().To<StubTiffHelper>();
         Rebind<IScanDriverFactory>().ToConstant(_scanDriverFactory);
         Rebind<IScanBridgeFactory>().To<InProcScanBridgeFactory>();
         Rebind<ConsoleOutput>().ToSelf()

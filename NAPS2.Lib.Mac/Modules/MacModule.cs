@@ -3,7 +3,7 @@ using NAPS2.EtoForms.Mac;
 using NAPS2.EtoForms.Ui;
 using NAPS2.Images.Mac;
 using NAPS2.ImportExport;
-using NAPS2.ImportExport.Email;
+using NAPS2.ImportExport.Images;
 using NAPS2.ImportExport.Pdf;
 using NAPS2.Scan;
 using NAPS2.Update;
@@ -27,6 +27,7 @@ public class MacModule : NinjectModule
         Bind<INotificationManager>().To<StubNotificationManager>().InSingletonScope();
         Bind<ISaveNotify>().ToMethod(ctx => ctx.Kernel.Get<INotificationManager>());
         Bind<IScannedImagePrinter>().To<StubScannedImagePrinter>();
+        Bind<ITiffHelper>().To<StubTiffHelper>();
         Bind<DesktopController>().ToSelf().InSingletonScope();
         Bind<IDesktopScanController>().To<DesktopScanController>();
         Bind<IUpdateChecker>().To<UpdateChecker>();

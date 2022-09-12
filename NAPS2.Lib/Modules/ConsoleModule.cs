@@ -1,6 +1,4 @@
 using NAPS2.Automation;
-using NAPS2.Dependencies;
-using NAPS2.Images.Gdi;
 using NAPS2.ImportExport.Pdf;
 using NAPS2.Scan;
 using NAPS2.WinForms;
@@ -30,6 +28,5 @@ public class ConsoleModule : NinjectModule
         Bind<ConsoleOutput>().ToSelf().WithConstructorArgument("writer", Console.Out);
         Bind<ISaveNotify>().To<SaveNotifyStub>();
         Bind<IDevicePrompt>().To<ConsoleDevicePrompt>();
-        Bind<ImageContext>().To<GdiImageContext>();
     }
 }

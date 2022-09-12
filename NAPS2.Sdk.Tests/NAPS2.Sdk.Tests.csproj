@@ -19,6 +19,7 @@
     </Reference>
   
     <ProjectReference Include="..\NAPS2.Sdk\NAPS2.Sdk.csproj" />
+    <ProjectReference Include="..\NAPS2.Images.Gdi\NAPS2.Images.Gdi.csproj" />
     <ProjectReference Include="..\NAPS2.Images.Mac\NAPS2.Images.Mac.csproj" Condition="$(TargetFramework) == 'net6'" />
     <ProjectReference Include="..\NAPS2.Images.Gtk\NAPS2.Images.Gtk.csproj" Condition="$(TargetFramework) == 'net6'" />
   

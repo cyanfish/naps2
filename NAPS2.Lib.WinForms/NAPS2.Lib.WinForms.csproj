@@ -17,8 +17,8 @@
   <Import Project="..\NAPS2.Setup\LibUsers.targets" />
 
   <ItemGroup>
-    <PackageReference Include="NTwain" Version="3.7.1" />
     <ProjectReference Include="..\NAPS2.Lib\NAPS2.Lib.csproj" />
+    <ProjectReference Include="..\NAPS2.Images.Gdi\NAPS2.Images.Gdi.csproj" />
     <PackageReference Include="Eto.Forms" Version="2.7.1" />
     <PackageReference Include="Eto.Platform.Windows" Version="2.7.1" />
   </ItemGroup>
@@ -362,7 +362,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="ImportExport\Images" />
     <Folder Include="Scan\Internal" />
   </ItemGroup>
 

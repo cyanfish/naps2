@@ -1,7 +1,6 @@
 ﻿using NAPS2.EtoForms;
 using NAPS2.EtoForms.Ui;
 using NAPS2.EtoForms.WinForms;
-using NAPS2.Images.Gdi;
 using NAPS2.ImportExport;
 using NAPS2.ImportExport.Pdf;
 using NAPS2.Scan;
@@ -33,8 +32,6 @@ public class WinFormsModule : NinjectModule
         Bind<IDesktopScanController>().To<DesktopScanController>();
         Bind<IDesktopSubFormController>().To<DesktopSubFormController>();
         Bind<DesktopFormProvider>().ToSelf().InSingletonScope();
-        Bind<ImageContext>().To<GdiImageContext>();
-        Bind<GdiImageContext>().ToSelf();
 
         Bind<DesktopForm>().To<WinFormsDesktopForm>();
 

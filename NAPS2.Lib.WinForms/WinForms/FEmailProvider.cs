@@ -36,10 +36,13 @@ public partial class FEmailProvider : FormBase
 
         foreach (var clientName in _systemClientNames.OrderBy(x => x == _defaultSystemClientName ? 0 : 1))
         {
+            var exePath = _systemEmailClients.GetExePath(clientName);
+            var icon = exePath == null ? null : Icon.ExtractAssociatedIcon(exePath);
+            var bitmap = icon?.ToBitmap();
             _providerWidgets.Add(new EmailProviderWidget
             {
                 ProviderType = EmailProviderType.System,
-                ProviderIcon = _systemEmailClients.GetIcon(clientName) ?? Icons.mail_yellow.ToEtoImage().ToSD(),
+                ProviderIcon = bitmap ?? Icons.mail_yellow.ToEtoImage().ToSD(),
                 ProviderName = clientName,
                 ClickAction = () => ChooseSystem(clientName)
             });

@@ -1,7 +1,4 @@
-using System.Drawing;
-using System.Drawing.Imaging;
 using NAPS2.EtoForms;
-using NAPS2.Images.Gdi;
 
 namespace NAPS2.Images;
 

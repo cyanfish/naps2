@@ -49,9 +49,6 @@
     <!-- TODO: Does this actually work if we build a net6 framework-dependent app and try to use Twain? -->
     <PackageReference Include="NTwain" Version="3.7.1" NoWarn="NU1701" Condition="'$(TargetFramework)' == 'net462'" />
     <PackageReference Include="Nullable" Version="1.2.0" />
-    <!-- We're deliberately using an older version of System.Drawing.Common to include cross-platform support. -->
-    <!-- TODO: Eventually we will get rid of this dependency on non-windows and will be able to upgrade. -->
-    <PackageReference Include="System.Drawing.Common" Version="5.0.3" />
     <PackageReference Include="System.Collections.Immutable" Version="6.0.0" />
     <PackageReference Include="System.Resources.Extensions" Version="6.0.0" />
     <PackageReference Include="System.Security.Cryptography.ProtectedData" Version="6.0.0" />
@@ -89,7 +86,6 @@
   <ItemGroup>
     <ProjectReference Include="..\NAPS2.Escl.Client\NAPS2.Escl.Client.csproj" />
     <ProjectReference Include="..\NAPS2.Escl.Server\NAPS2.Escl.Server.csproj" />
-    <ProjectReference Include="..\NAPS2.Images.Gdi\NAPS2.Images.Gdi.csproj" />
     <ProjectReference Include="..\NAPS2.Images\NAPS2.Images.csproj" />
   </ItemGroup>
   

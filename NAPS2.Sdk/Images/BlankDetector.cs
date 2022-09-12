@@ -1,5 +1,4 @@
 ﻿using System.Runtime.InteropServices;
-using NAPS2.Images.Gdi;
 
 namespace NAPS2.Images;
 

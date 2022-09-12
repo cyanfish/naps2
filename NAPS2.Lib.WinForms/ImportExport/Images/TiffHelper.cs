@@ -6,7 +6,7 @@ using NAPS2.Images.Gdi;
 
 namespace NAPS2.ImportExport.Images;
 
-public class TiffHelper
+public class TiffHelper : ITiffHelper
 {
     public bool SaveMultipage(IList<ProcessedImage> images, string location, TiffCompression compression, ProgressHandler progressCallback, CancellationToken cancelToken)
     {
