@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net6</TargetFramework>
+        <Nullable>enable</Nullable>
+        <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+        <RootNamespace>NAPS2.Images.Gtk</RootNamespace>
+
+        <Title>NAPS2.Images.Gtk</Title>
+        <Copyright>Copyright 2022 Ben Olden-Cooligan</Copyright>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\NAPS2.Images\NAPS2.Images.csproj" />
+        <PackageReference Include="Eto.Platform.Gtk" Version="2.7.1" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
+            <_Parameter1>NAPS2.Sdk.Tests</_Parameter1>
+        </AssemblyAttribute>
+    </ItemGroup>
+
+    <Import Project="..\NAPS2.Setup\CommonTargets.targets" />
+    <Import Project="..\NAPS2.Setup\ImageUsers.targets" />
+
+</Project>

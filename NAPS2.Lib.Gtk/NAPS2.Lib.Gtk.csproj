@@ -1,0 +1,30 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFrameworks>net6</TargetFrameworks>
+        <Nullable>enable</Nullable>
+        <GenerateResourceUsePreserializedResources>true</GenerateResourceUsePreserializedResources>
+        <RootNamespace>NAPS2</RootNamespace>
+
+        <Title>NAPS2 - Not Another PDF Scanner</Title>
+        <Product>NAPS2 - Not Another PDF Scanner</Product>
+        <Copyright>Copyright 2009, 2012-2020 NAPS2 Contributors; Icons from http://www.fatcow.com/free-icons</Copyright>
+    </PropertyGroup>
+
+    <Import Project="..\NAPS2.Setup\CommonTargets.targets" />
+    <Import Project="..\NAPS2.Setup\LibUsers.targets" />
+
+    <ItemGroup>
+        <ProjectReference Include="..\NAPS2.Images.Gtk\NAPS2.Images.Gtk.csproj" />
+        <ProjectReference Include="..\NAPS2.Lib\NAPS2.Lib.csproj" />
+        <PackageReference Include="Eto.Forms" Version="2.7.1" />
+        <PackageReference Include="Eto.Platform.Gtk" Version="2.7.1" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
+            <_Parameter1>NAPS2.Lib.Tests</_Parameter1>
+        </AssemblyAttribute>
+    </ItemGroup>
+
+</Project>

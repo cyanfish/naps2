@@ -11,6 +11,10 @@ public static class TestImageContextFactory
         {
             return new NAPS2.Images.Mac.MacImageContext(pdfRenderer);
         }
+        else if (OperatingSystem.IsLinux())
+        {
+            return new NAPS2.Images.Gtk.GtkImageContext(pdfRenderer);
+        }
         else
         {
             return new GdiImageContext(pdfRenderer);
