@@ -22,6 +22,7 @@
     <PackageReference Include="Ninject" Version="3.3.6" />
     <PackageReference Include="NLog" Version="4.5.8" />
     <PackageReference Include="Eto.Forms" Version="2.7.1" />
+    <PackageReference Include="System.Security.Cryptography.ProtectedData" Version="6.0.0" />
   </ItemGroup>
   
   <ItemGroup>
