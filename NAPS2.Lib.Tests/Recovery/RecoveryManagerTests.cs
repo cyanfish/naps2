@@ -1,6 +1,5 @@
 using System.Threading;
 using Moq;
-using NAPS2.Images.Gdi;
 using NAPS2.Recovery;
 using NAPS2.Scan;
 using NAPS2.Sdk.Tests;

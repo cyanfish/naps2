@@ -1,5 +1,3 @@
-using System.Drawing;
-using NAPS2.Images.Gdi;
 using NAPS2.Sdk.Tests;
 using Xunit;
 
