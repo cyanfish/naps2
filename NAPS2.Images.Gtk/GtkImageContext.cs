@@ -1,4 +1,5 @@
 using Gdk;
+using NAPS2.Images.Bitwise;
 
 namespace NAPS2.Images.Gtk;
 
@@ -50,8 +51,49 @@ public class GtkImageContext : ImageContext
     public override IEnumerable<IMemoryImage> LoadFrames(string path, out int count)
     {
         // TODO
-        count = 1;
-        return new[] { Load(path) };
+        var format = GetFileFormatFromExtension(path, true);
+        if (format == ImageFileFormat.Tiff)
+        {
+            var images = LoadTiff(path);
+            count = images.Count;
+            return images;
+        }
+        else
+        {
+            count = 1;
+            return new[] { Load(path) };
+        }
+    }
+
+    private unsafe List<IMemoryImage> LoadTiff(string path)
+    {
+        // TODO: Add more thorough tests for reading/writing tiffs etc.
+        var tiff = LibTiff.TIFFOpen(path, "r");
+        try
+        {
+            var images = new List<IMemoryImage>();
+            do
+            {
+                LibTiff.TIFFGetField(tiff, 256, out var w);
+                LibTiff.TIFFGetField(tiff, 257, out var h);
+                var buffer = new byte[w * h * 4];
+                fixed (void* ptr = &buffer[0])
+                {
+                    int r = LibTiff.TIFFReadRGBAImage(tiff, w, h, (IntPtr) ptr, 0);
+                    // TODO: Check return value
+                }
+                var bufferInfo = new PixelInfo(w, h, SubPixelType.Rgba) { InvertY = true };
+                // TODO: Get pixel format from tiff
+                var img = Create(w, h, ImagePixelFormat.ARGB32);
+                new CopyBitwiseImageOp().Perform(buffer, bufferInfo, img);
+                images.Add(img);
+            } while (LibTiff.TIFFReadDirectory(tiff) == 1);
+            return images;
+        }
+        finally
+        {
+            LibTiff.TIFFClose(tiff);
+        }
     }
 
     public override IMemoryImage Create(int width, int height, ImagePixelFormat pixelFormat)

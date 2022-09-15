@@ -54,6 +54,7 @@ public interface IMemoryImage : IImageStorage
     /// <returns>An object that, when disposed, releases the lock.</returns>
     ImageLockState Lock(LockMode lockMode, out BitwiseImageData imageData);
 
+    // TODO: Change to Lossless or similar?
     /// <summary>
     /// Gets the original image file's format (e.g. png/jpeg) if known.
     /// </summary>

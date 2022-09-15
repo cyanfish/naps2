@@ -14,6 +14,7 @@ public abstract class ImageContext
             ".png" => ImageFileFormat.Png,
             ".bmp" => ImageFileFormat.Bmp,
             ".jpg" or ".jpeg" => ImageFileFormat.Jpeg,
+            ".tif" or ".tiff" => ImageFileFormat.Tiff,
             _ => allowUnspecified
                 ? ImageFileFormat.Unspecified
                 : throw new ArgumentException($"Could not infer file format from extension: {path}")

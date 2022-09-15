@@ -46,10 +46,6 @@ public class CopyBitwiseImageOp : BinaryBitwiseImageOp
                                         $"Source dimensions: {src.w} {src.h}; " +
                                         $"Destination dimensions: {dst.w} {dst.h}");
         }
-        if (src.invertY)
-        {
-            throw new ArgumentException("Source Y inversion not supported");
-        }
         if (DestChannel != ColorChannel.All &&
             (src.bytesPerPixel is not (1 or 3 or 4) || dst.bytesPerPixel is not (3 or 4)))
         {
@@ -106,11 +102,12 @@ public class CopyBitwiseImageOp : BinaryBitwiseImageOp
         bool copyToGreen = dst.bytesPerPixel != 1 && DestChannel is ColorChannel.All or ColorChannel.Green;
         bool copyToBlue = dst.bytesPerPixel != 1 && DestChannel is ColorChannel.All or ColorChannel.Blue;
         bool copyToGray = dst.bytesPerPixel == 1;
+        bool invertY = src.invertY ^ dst.invertY;
         for (int i = partStart; i < partEnd; i++)
         {
             var srcRow = src.ptr + src.stride * (i + SourceYOffset);
             var dstY = i + DestYOffset;
-            if (dst.invertY)
+            if (invertY)
             {
                 dstY = dst.h - dstY - 1;
             }
@@ -148,11 +145,12 @@ public class CopyBitwiseImageOp : BinaryBitwiseImageOp
         var w = Columns ?? src.w;
         bool copyFromGray = src.bytesPerPixel == 1;
         var thresholdAdjusted = ((int) (BlackWhiteThreshold * 1000) + 1000) * 255 / 2;
+        bool invertY = src.invertY ^ dst.invertY;
         for (int i = partStart; i < partEnd; i++)
         {
             var srcRow = src.ptr + src.stride * (i + SourceYOffset);
             var dstY = i + DestYOffset;
-            if (dst.invertY)
+            if (invertY)
             {
                 dstY = dst.h - dstY - 1;
             }
@@ -193,11 +191,12 @@ public class CopyBitwiseImageOp : BinaryBitwiseImageOp
     {
         var w = Columns ?? src.w;
         bool copyToGray = dst.bytesPerPixel == 1;
+        bool invertY = src.invertY ^ dst.invertY;
         for (int i = partStart; i < partEnd; i++)
         {
             var srcRow = src.ptr + src.stride * (i + SourceYOffset);
             var dstY = i + DestYOffset;
-            if (dst.invertY)
+            if (invertY)
             {
                 dstY = dst.h - dstY - 1;
             }
@@ -233,11 +232,12 @@ public class CopyBitwiseImageOp : BinaryBitwiseImageOp
     {
         // TODO: This could be a lot faster if we use 64-bit (aligned) shifts & masks for the "middle" bytes
         var w = Columns ?? src.w;
+        bool invertY = src.invertY ^ dst.invertY;
         for (int i = partStart; i < partEnd; i++)
         {
             var srcRow = src.ptr + src.stride * (i + SourceYOffset);
             var dstY = i + DestYOffset;
-            if (dst.invertY)
+            if (invertY)
             {
                 dstY = dst.h - dstY - 1;
             }
@@ -262,11 +262,12 @@ public class CopyBitwiseImageOp : BinaryBitwiseImageOp
         var bytesPerRow = (src.bitsPerPixel * w + 7) / 8;
         var srcXBytesOff = SourceXOffset * src.bitsPerPixel / 8;
         var dstXBytesOff = DestXOffset * dst.bitsPerPixel / 8;
+        bool invertY = src.invertY ^ dst.invertY;
         for (int i = partStart; i < partEnd; i++)
         {
             var srcRow = src.ptr + src.stride * (i + SourceYOffset) + srcXBytesOff;
             var dstY = i + DestYOffset;
-            if (dst.invertY)
+            if (invertY)
             {
                 dstY = dst.h - dstY - 1;
             }
