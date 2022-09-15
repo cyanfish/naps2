@@ -1,6 +1,4 @@
-using System.Drawing;
 using Google.Protobuf;
-using NAPS2.Images.Gdi;
 using NAPS2.Remoting.Worker;
 using NAPS2.Scan.Internal.Twain;
 using NAPS2.Sdk.Tests.Asserts;

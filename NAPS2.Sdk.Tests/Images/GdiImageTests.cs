@@ -1,3 +1,4 @@
+#if WINDOWS
 using System.Drawing;
 using System.Drawing.Imaging;
 using NAPS2.Images.Gdi;
@@ -70,3 +71,4 @@ public class GdiImageTests
         Assert.Equal(ImagePixelFormat.ARGB32, image.PixelFormat);
     }
 }
+#endif

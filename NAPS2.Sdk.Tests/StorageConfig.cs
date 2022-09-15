@@ -1,4 +1,3 @@
-using NAPS2.Images.Gdi;
 using Xunit;
 
 namespace NAPS2.Sdk.Tests;
