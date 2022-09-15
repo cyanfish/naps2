@@ -21,7 +21,7 @@ public class ImageExportHelper
         if (exportFormat.FileFormat == ImageFileFormat.Png)
         {
             imageFileFormat = ImageFileFormat.Png;
-            if (exportFormat.PixelFormat == ImagePixelFormat.BW1 && image.PixelFormat != ImagePixelFormat.BW1)
+            if (exportFormat.PixelFormat == ImagePixelFormat.BW1 && image.LogicalPixelFormat != ImagePixelFormat.BW1)
             {
                 using var bwImage = image.Clone().PerformTransform(new BlackWhiteTransform());
                 return bwImage.SaveToMemoryStream(ImageFileFormat.Png);
@@ -50,7 +50,7 @@ public class ImageExportHelper
     public ImageExportFormat GetExportFormat(IMemoryImage image, BitDepth bitDepth, bool lossless)
     {
         // Store the image in as little space as possible
-        if (image.PixelFormat == ImagePixelFormat.BW1)
+        if (image.LogicalPixelFormat == ImagePixelFormat.BW1)
         {
             // Already encoded as 1-bit
             return new ImageExportFormat(ImageFileFormat.Png, ImagePixelFormat.BW1);
@@ -68,7 +68,7 @@ public class ImageExportHelper
         {
             // Store as PNG
             // Lossless, but some images (color/grayscale) take up lots of storage
-            return new ImageExportFormat(ImageFileFormat.Png, image.PixelFormat);
+            return new ImageExportFormat(ImageFileFormat.Png, image.LogicalPixelFormat);
         }
         if (image.OriginalFileFormat == ImageFileFormat.Jpeg)
         {

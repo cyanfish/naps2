@@ -62,13 +62,12 @@ internal class RemotePostProcessor : IRemotePostProcessor
             original = original.PerformTransform(new BlackWhiteTransform(-options.Brightness));
         }
 
-        double scaleFactor = 1;
-        if (!options.UseNativeUI && options.ScaleRatio > 0)
+        var scaled = original;
+        if (!options.UseNativeUI && options.ScaleRatio > 1)
         {
-            scaleFactor = 1.0 / options.ScaleRatio;
+            var scaleFactor = 1.0 / options.ScaleRatio;
+            scaled = scaled.PerformTransform(new ScaleTransform(scaleFactor));
         }
-
-        var scaled = original.PerformTransform(new ScaleTransform(scaleFactor));
 
         if (!options.UseNativeUI && (options.StretchToPageSize || options.CropToPageSize))
         {

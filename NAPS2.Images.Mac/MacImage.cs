@@ -98,6 +98,8 @@ public class MacImage : IMemoryImage
 
     public ImageFileFormat OriginalFileFormat { get; set; }
 
+    public ImagePixelFormat LogicalPixelFormat => PixelFormat;
+
     public NSImage Image => NsImage;
 
     public void Save(string path, ImageFileFormat imageFormat = ImageFileFormat.Unspecified, int quality = -1)

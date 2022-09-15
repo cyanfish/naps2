@@ -60,6 +60,11 @@ public interface IMemoryImage : IImageStorage
     ImageFileFormat OriginalFileFormat { get; set; }
 
     /// <summary>
+    /// Gets the original image's pixel format (e.g. gray/bw) if known.
+    /// </summary>
+    ImagePixelFormat LogicalPixelFormat { get; }
+
+    /// <summary>
     /// Saves the image to the given file path. If the file format is unspecified, it will be inferred from the
     /// file extension if possible.
     /// </summary>

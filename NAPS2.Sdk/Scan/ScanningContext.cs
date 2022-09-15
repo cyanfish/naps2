@@ -53,8 +53,8 @@ public class ScanningContext : IDisposable
     {
         var bitDepth = storage switch
         {
-            IMemoryImage { PixelFormat: ImagePixelFormat.BW1 } => BitDepth.BlackAndWhite,
-            IMemoryImage { PixelFormat: ImagePixelFormat.Gray8 } => BitDepth.Grayscale,
+            IMemoryImage { LogicalPixelFormat: ImagePixelFormat.BW1 } => BitDepth.BlackAndWhite,
+            IMemoryImage { LogicalPixelFormat: ImagePixelFormat.Gray8 } => BitDepth.Grayscale,
             _ => BitDepth.Color
         };
         return CreateProcessedImage(storage, bitDepth, false, -1, transforms);

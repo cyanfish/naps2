@@ -5,10 +5,11 @@ namespace NAPS2.Images.Gtk;
 
 public class GtkImage : IMemoryImage
 {
-    public GtkImage(ImageContext imageContext, Pixbuf pixbuf)
+    public GtkImage(ImageContext imageContext, Pixbuf pixbuf, ImagePixelFormat logicalPixelFormat)
     {
         ImageContext = imageContext ?? throw new ArgumentNullException(nameof(imageContext));
         Pixbuf = pixbuf;
+        LogicalPixelFormat = logicalPixelFormat;
     }
 
     public ImageContext ImageContext { get; }
@@ -61,6 +62,8 @@ public class GtkImage : IMemoryImage
 
     public ImageFileFormat OriginalFileFormat { get; set; }
 
+    public ImagePixelFormat LogicalPixelFormat { get; set; }
+
     public void Save(string path, ImageFileFormat imageFormat = ImageFileFormat.Unspecified, int quality = -1)
     {
         if (imageFormat == ImageFileFormat.Unspecified)
@@ -106,7 +109,10 @@ public class GtkImage : IMemoryImage
         _ => throw new ArgumentException("Unsupported file format")
     };
 
-    public IMemoryImage Clone() => new GtkImage(ImageContext, (Pixbuf) Pixbuf.Clone());
+    public IMemoryImage Clone() => new GtkImage(ImageContext, (Pixbuf) Pixbuf.Clone(), LogicalPixelFormat)
+    {
+        OriginalFileFormat = OriginalFileFormat
+    };
 
     public IMemoryImage SafeClone() => Clone();
 

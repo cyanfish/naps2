@@ -362,7 +362,7 @@ public class TransformTests : ContextualTests
         IMemoryImage expected = LoadImage(ImageResources.color_image_bw);
 
         actual = actual.PerformTransform(new BlackWhiteTransform());
-        Assert.Equal(ImagePixelFormat.BW1, actual.PixelFormat);
+        Assert.Equal(ImagePixelFormat.BW1, actual.LogicalPixelFormat);
 
         // TODO: There's no inherent reason this shouldn't be an exact match, unless I guess if
         // there's a slight pixel difference between png loading on mac/gdi
@@ -376,7 +376,7 @@ public class TransformTests : ContextualTests
         IMemoryImage expected = LoadImage(ImageResources.color_image_bw_p300);
 
         actual = actual.PerformTransform(new BlackWhiteTransform(300));
-        Assert.Equal(ImagePixelFormat.BW1, actual.PixelFormat);
+        Assert.Equal(ImagePixelFormat.BW1, actual.LogicalPixelFormat);
 
         ImageAsserts.Similar(expected, actual, ImageAsserts.XPLAT_RMSE_THRESHOLD);
     }

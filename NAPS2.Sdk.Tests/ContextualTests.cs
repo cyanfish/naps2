@@ -46,7 +46,7 @@ public class ContextualTests : IDisposable
         
         var tesseractPath = CopyResourceToFile(BinaryResources.tesseract_x64, FolderPath, "tesseract.exe");
 #if NET6_0_OR_GREATER
-        if (OperatingSystem.IsMacOS())
+        if (OperatingSystem.IsMacOS() || OperatingSystem.IsLinux())
         {
             // TODO: We should try and not rely on tesseract being installed on the system
             tesseractPath = "tesseract";

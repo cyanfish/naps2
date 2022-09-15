@@ -253,7 +253,7 @@ public class PdfExporter : IPdfExporter
                 exportFormat = exportFormat with { FileFormat = ImageFileFormat.Jpeg };
             }
             if (exportFormat.PixelFormat == ImagePixelFormat.BW1 &&
-                state.RenderedImage!.PixelFormat != ImagePixelFormat.BW1)
+                state.RenderedImage!.LogicalPixelFormat != ImagePixelFormat.BW1)
             {
                 state.RenderedImage = state.RenderedImage.PerformTransform(new BlackWhiteTransform());
             }
@@ -523,7 +523,7 @@ public class PdfExporter : IPdfExporter
 
         public void SaveAsPdfIndexedBitmap(MemoryStream ms)
         {
-            if (_image.PixelFormat != ImagePixelFormat.BW1)
+            if (_image.LogicalPixelFormat != ImagePixelFormat.BW1)
                 throw new InvalidOperationException("Expected 1 bit bitmap");
             var dstPixelInfo = new PixelInfo(_image.Width, _image.Height, SubPixelType.Bit) { InvertY = true };
             ms.SetLength(dstPixelInfo.Length);

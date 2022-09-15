@@ -21,7 +21,7 @@ public class GtkImageContext : ImageContext
     {
         using var readStream = new FileStream(path, FileMode.Open, FileAccess.Read);
         var pixbuf = new Pixbuf(readStream);
-        return new GtkImage(this, pixbuf)
+        return new GtkImage(this, pixbuf, pixbuf.HasAlpha ? ImagePixelFormat.ARGB32 : ImagePixelFormat.RGB24)
         {
             OriginalFileFormat = GetFileFormatFromExtension(path, true)
         };
@@ -34,7 +34,7 @@ public class GtkImageContext : ImageContext
             stream.Seek(0, SeekOrigin.Begin);
         }
         var pixbuf = new Pixbuf(stream);
-        return new GtkImage(this, pixbuf)
+        return new GtkImage(this, pixbuf, pixbuf.HasAlpha ? ImagePixelFormat.ARGB32 : ImagePixelFormat.RGB24)
         {
             OriginalFileFormat = GetFileFormatFromFirstBytes(stream)
         };
@@ -56,8 +56,11 @@ public class GtkImageContext : ImageContext
 
     public override IMemoryImage Create(int width, int height, ImagePixelFormat pixelFormat)
     {
-        // TODO: Can we do any better, i.e. for bw/gray?
+        if (pixelFormat == ImagePixelFormat.Unsupported)
+        {
+            throw new ArgumentException("Unsupported pixel format");
+        }
         var pixbuf = new Pixbuf(Colorspace.Rgb, pixelFormat == ImagePixelFormat.ARGB32, 8, width, height);
-        return new GtkImage(this, pixbuf);
+        return new GtkImage(this, pixbuf, pixelFormat);
     }
 }

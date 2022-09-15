@@ -55,6 +55,8 @@ public class GdiImage : IMemoryImage
         set => _originalFileFormat = value;
     }
 
+    public ImagePixelFormat LogicalPixelFormat => PixelFormat;
+
     public void Save(string path, ImageFileFormat imageFormat = ImageFileFormat.Unspecified, int quality = -1)
     {
         if (imageFormat == ImageFileFormat.Unspecified)

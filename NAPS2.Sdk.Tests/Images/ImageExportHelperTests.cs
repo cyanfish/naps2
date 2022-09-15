@@ -117,6 +117,6 @@ public class ImageExportHelperTests : ContextualTests
         Assert.Equal(".jpg", Path.GetExtension(fullPath));
         var loaded = ImageContext.Load(fullPath);
         Assert.Equal(ImageFileFormat.Jpeg, loaded.OriginalFileFormat);
-        ImageAsserts.Similar(expectedImage, loaded);
+        ImageAsserts.Similar(expectedImage, loaded, ImageAsserts.XPLAT_RMSE_THRESHOLD);
     }
 }
