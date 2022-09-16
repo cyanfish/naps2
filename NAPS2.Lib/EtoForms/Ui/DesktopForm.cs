@@ -321,13 +321,13 @@ public abstract class DesktopForm : EtoFormBase
         };
         _reverseAllCommand = new ActionCommand(_imageListActions.ReverseAll);
         _reverseSelectedCommand = new ActionCommand(_imageListActions.ReverseSelected);
-        _deleteCommand = new ActionCommand(_imageListActions.DeleteSelected)
+        _deleteCommand = new ActionCommand(_desktopController.Delete)
         {
             ToolBarText = UiStrings.Delete,
             MenuText = UiStrings.Delete,
             Image = Icons.cross.ToEtoImage()
         };
-        _clearAllCommand = new ActionCommand(_imageListActions.DeleteAll)
+        _clearAllCommand = new ActionCommand(_desktopController.Clear)
         {
             ToolBarText = UiStrings.Clear,
             MenuText = UiStrings.ClearAll,
