@@ -106,6 +106,7 @@ public class GtkImage : IMemoryImage
         ImageFileFormat.Jpeg => "jpeg",
         ImageFileFormat.Png => "png",
         ImageFileFormat.Bmp => "bmp",
+        ImageFileFormat.Tiff => "tiff",
         _ => throw new ArgumentException("Unsupported file format")
     };
 

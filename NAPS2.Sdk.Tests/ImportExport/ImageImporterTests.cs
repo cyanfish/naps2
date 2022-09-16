@@ -67,9 +67,7 @@ public class ImageImporterTests : ContextualTests
     [Fact]
     public async Task ImportTiffImage()
     {
-        var filePath = Path.Combine(FolderPath, "image.tiff");
-        // We use a byte array for this resource instead of a bitmap so it's easier to save all 3 tiff frames
-        File.WriteAllBytes(filePath, BinaryResources.color_image_set);
+        var filePath = CopyResourceToFile(ImageResources.color_image_tiff, "image.tiff");
         
         var source = _imageImporter.Import(filePath, new ImportParams(), (current, max) => { }, CancellationToken.None);
         var result = await source.ToList();
@@ -124,8 +122,7 @@ public class ImageImporterTests : ContextualTests
     [Fact]
     public async Task MultiFrameProgress()
     {
-        var filePath = Path.Combine(FolderPath, "image.tiff");
-        File.WriteAllBytes(filePath, BinaryResources.color_image_set);
+        var filePath = CopyResourceToFile(ImageResources.color_image_tiff, "image.tiff");
 
         var progressMock = new Mock<ProgressHandler>();
         var source = _imageImporter.Import(filePath, new ImportParams(), progressMock.Object, CancellationToken.None);
@@ -161,8 +158,7 @@ public class ImageImporterTests : ContextualTests
     [PlatformFact(exclude: PlatformFlags.Mac)]
     public async Task MultiFrameCancellation()
     {
-        var filePath = Path.Combine(FolderPath, "image.tiff");
-        File.WriteAllBytes(filePath, BinaryResources.color_image_set);
+        var filePath = CopyResourceToFile(ImageResources.color_image_tiff, "image.tiff");
 
         var cts = new CancellationTokenSource();
         var source = _imageImporter.Import(filePath, new ImportParams(), (current, max) => { }, cts.Token);

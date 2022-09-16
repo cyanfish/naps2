@@ -12,6 +12,9 @@ public static class LibTiff
     public static extern IntPtr TIFFClose(IntPtr tiff);
 
     [DllImport("libtiff.so.5")]
+    public static extern short TIFFNumberOfDirectories(IntPtr tiff);
+
+    [DllImport("libtiff.so.5")]
     public static extern int TIFFReadDirectory(IntPtr tiff);
 
     [DllImport("libtiff.so.5")]

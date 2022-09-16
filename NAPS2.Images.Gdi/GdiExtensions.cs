@@ -3,6 +3,9 @@ using System.Drawing.Imaging;
 
 namespace NAPS2.Images.Gdi;
 
+#if NET6_0_OR_GREATER
+[System.Runtime.Versioning.SupportedOSPlatform("windows7.0")]
+#endif
 public static class GdiExtensions
 {
     public static Bitmap RenderToBitmap(this IRenderableImage image)
@@ -36,6 +39,8 @@ public static class GdiExtensions
                 return ImageFormat.Jpeg;
             case ImageFileFormat.Png:
                 return ImageFormat.Png;
+            case ImageFileFormat.Tiff:
+                return ImageFormat.Tiff;
         }
         throw new ArgumentException("Unsupported image format", nameof(imageFileFormat));
     }
@@ -53,6 +58,10 @@ public static class GdiExtensions
         if (Equals(imageFormat, ImageFormat.Png))
         {
             return ImageFileFormat.Png;
+        }
+        if (Equals(imageFormat, ImageFormat.Tiff))
+        {
+            return ImageFileFormat.Tiff;
         }
         return ImageFileFormat.Unspecified;
     }

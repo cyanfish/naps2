@@ -7,6 +7,9 @@ namespace NAPS2.Images.Gdi;
 /// <summary>
 /// An implementation of IMemoryImage that wraps a GDI+ image (System.Drawing.Bitmap).
 /// </summary>
+#if NET6_0_OR_GREATER
+[System.Runtime.Versioning.SupportedOSPlatform("windows7.0")]
+#endif
 public class GdiImage : IMemoryImage
 {
     private ImageFileFormat? _originalFileFormat;

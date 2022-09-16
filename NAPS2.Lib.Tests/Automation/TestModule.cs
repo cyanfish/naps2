@@ -33,7 +33,6 @@ internal class TestModule : NinjectModule
     public override void Load()
     {
         Bind<ImageContext>().ToConstant(_imageContext);
-        Bind<ITiffHelper>().To<StubTiffHelper>();
         Rebind<IScanDriverFactory>().ToConstant(_scanDriverFactory);
         Rebind<IScanBridgeFactory>().To<InProcScanBridgeFactory>();
         Rebind<ConsoleOutput>().ToSelf()

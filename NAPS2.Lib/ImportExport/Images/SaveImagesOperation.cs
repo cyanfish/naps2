@@ -1,5 +1,4 @@
-﻿using System.Threading;
-using Eto.Drawing;
+﻿using Eto.Drawing;
 
 namespace NAPS2.ImportExport.Images;
 
@@ -7,12 +6,12 @@ namespace NAPS2.ImportExport.Images;
 public class SaveImagesOperation : OperationBase
 {
     private readonly IOverwritePrompt _overwritePrompt;
-    private readonly ITiffHelper _tiffHelper;
+    private readonly ImageContext _imageContext;
 
-    public SaveImagesOperation(IOverwritePrompt overwritePrompt, ITiffHelper tiffHelper)
+    public SaveImagesOperation(IOverwritePrompt overwritePrompt, ImageContext imageContext)
     {
         _overwritePrompt = overwritePrompt;
-        _tiffHelper = tiffHelper;
+        _imageContext = imageContext;
 
         ProgressTitle = MiscResources.SaveImagesProgress;
         AllowCancel = true;
@@ -29,7 +28,8 @@ public class SaveImagesOperation : OperationBase
     /// <param name="placeholders"></param>
     /// <param name="images">The collection of images to save.</param>
     /// <param name="batch"></param>
-    public bool Start(string fileName, Placeholders placeholders, IList<ProcessedImage> images, ImageSettings imageSettings, bool batch = false)
+    public bool Start(string fileName, Placeholders placeholders, IList<ProcessedImage> images,
+        ImageSettings imageSettings, bool batch = false)
     {
         Status = new OperationStatus
         {
@@ -65,11 +65,14 @@ public class SaveImagesOperation : OperationBase
                     }
                     Status.StatusText = string.Format(MiscResources.SavingFormat, Path.GetFileName(subFileName));
                     FirstFileSaved = subFileName;
-                    return _tiffHelper.SaveMultipage(images, subFileName, imageSettings.TiffCompression, OnProgress, CancelToken);
+                    FileSystemHelper.EnsureParentDirExists(subFileName);
+                    using var renderedImages = images.Select(x => x.Render()).ToDisposableList();
+                    return _imageContext.SaveTiff(renderedImages.InnerList, subFileName,
+                        imageSettings.TiffCompression.ToTiffCompressionType(), OnProgress, CancelToken);
                 }
 
                 int i = 0;
-                int digits = (int)Math.Floor(Math.Log10(images.Count)) + 1;
+                int digits = (int) Math.Floor(Math.Log10(images.Count)) + 1;
                 foreach (ProcessedImage image in images)
                 {
                     if (CancelToken.IsCancellationRequested)
@@ -153,7 +156,9 @@ public class SaveImagesOperation : OperationBase
         FileSystemHelper.EnsureParentDirExists(path);
         if (Equals(format, ImageFormat.Tiff))
         {
-            _tiffHelper.SaveMultipage(new List<ProcessedImage> { image }, path, imageSettings.TiffCompression, (i, j) => { }, CancellationToken.None);
+            using var renderedImage = image.Render();
+            _imageContext.SaveTiff(new[] { renderedImage }, path,
+                imageSettings.TiffCompression.ToTiffCompressionType(), null, CancelToken);
         }
         else if (Equals(format, ImageFormat.Jpeg))
         {

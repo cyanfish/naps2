@@ -1,4 +1,5 @@
 ﻿using System.Collections.Immutable;
+using System.Threading;
 
 namespace NAPS2.Images.Storage;
 
@@ -43,6 +44,11 @@ public abstract class ImageContext
         {
             return ImageFileFormat.Bmp;
         }
+        if (firstBytes[0] is 0x4D or 0x49 && firstBytes[1] is 0x4D or 0x49 && firstBytes[2] == 0x2A &&
+            firstBytes[3] == 0x00)
+        {
+            return ImageFileFormat.Tiff;
+        }
         return ImageFileFormat.Unspecified;
     }
 
@@ -51,7 +57,7 @@ public abstract class ImageContext
         ImageType = imageType;
         _pdfRenderer = pdfRenderer;
     }
-    
+
     protected bool LoadFromFileKeepsLock { get; init; }
 
     // TODO: Add NotNullWhen attribute?
@@ -155,6 +161,14 @@ public abstract class ImageContext
     /// <param name="count">The number of returned images.</param>
     /// <returns></returns>
     public abstract IEnumerable<IMemoryImage> LoadFrames(string path, out int count);
+
+    public abstract bool SaveTiff(IList<IMemoryImage> images, string path,
+        TiffCompressionType compression = TiffCompressionType.Auto, Action<int, int>? progressCallback = null,
+        CancellationToken cancelToken = default);
+
+    public abstract bool SaveTiff(IList<IMemoryImage> images, Stream stream,
+        TiffCompressionType compression = TiffCompressionType.Auto, Action<int, int>? progressCallback = null,
+        CancellationToken cancelToken = default);
 
     public IMemoryImage Render(IRenderableImage image)
     {

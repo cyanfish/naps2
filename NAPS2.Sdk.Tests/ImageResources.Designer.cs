@@ -362,6 +362,16 @@ namespace NAPS2.Sdk.Tests {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
+        internal static byte[] color_image_tiff {
+            get {
+                object obj = ResourceManager.GetObject("color_image_tiff", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
         internal static byte[] deskewed {
             get {
                 object obj = ResourceManager.GetObject("deskewed", resourceCulture);

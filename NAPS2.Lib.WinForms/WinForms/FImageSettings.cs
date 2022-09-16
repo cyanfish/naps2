@@ -64,7 +64,7 @@ public partial class FImageSettings : FormBase
             DefaultFileName = txtDefaultFilePath.Text,
             SkipSavePrompt = cbSkipSavePrompt.Checked,
             JpegQuality = tbJpegQuality.Value,
-            TiffCompression = (TiffCompression)cmbTiffCompr.SelectedIndex,
+            TiffCompression = (ImportExport.Images.TiffCompression)cmbTiffCompr.SelectedIndex,
             SinglePageTiff = cbSinglePageTiff.Checked
         };
 

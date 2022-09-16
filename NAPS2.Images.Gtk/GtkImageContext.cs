@@ -1,3 +1,4 @@
+using System.Threading;
 using Gdk;
 using NAPS2.Images.Bitwise;
 
@@ -54,9 +55,7 @@ public class GtkImageContext : ImageContext
         var format = GetFileFormatFromExtension(path, true);
         if (format == ImageFileFormat.Tiff)
         {
-            var images = LoadTiff(path);
-            count = images.Count;
-            return images;
+            return LoadTiff(path, out count);
         }
         else
         {
@@ -65,34 +64,55 @@ public class GtkImageContext : ImageContext
         }
     }
 
-    private unsafe List<IMemoryImage> LoadTiff(string path)
+    public override bool SaveTiff(IList<IMemoryImage> images, string path, TiffCompressionType compression = TiffCompressionType.Auto,
+        Action<int, int>? progressCallback = null, CancellationToken cancelToken = default)
     {
-        // TODO: Add more thorough tests for reading/writing tiffs etc.
+        throw new NotImplementedException();
+    }
+
+    public override bool SaveTiff(IList<IMemoryImage> images, Stream stream, TiffCompressionType compression = TiffCompressionType.Auto,
+        Action<int, int>? progressCallback = null, CancellationToken cancelToken = default)
+    {
+        throw new NotImplementedException();
+    }
+
+    private IEnumerable<IMemoryImage> LoadTiff(string path, out int count)
+    {
         var tiff = LibTiff.TIFFOpen(path, "r");
+        count = LibTiff.TIFFNumberOfDirectories(tiff);
+        return EnumerateTiffFrames(tiff);
+    }
+
+    private IEnumerable<IMemoryImage> EnumerateTiffFrames(IntPtr tiff)
+    {
         try
         {
-            var images = new List<IMemoryImage>();
             do
             {
                 LibTiff.TIFFGetField(tiff, 256, out var w);
                 LibTiff.TIFFGetField(tiff, 257, out var h);
                 var buffer = new byte[w * h * 4];
-                fixed (void* ptr = &buffer[0])
-                {
-                    int r = LibTiff.TIFFReadRGBAImage(tiff, w, h, (IntPtr) ptr, 0);
-                    // TODO: Check return value
-                }
+                ReadTiffFrame(buffer, tiff, w, h);
                 var bufferInfo = new PixelInfo(w, h, SubPixelType.Rgba) { InvertY = true };
                 // TODO: Get pixel format from tiff
                 var img = Create(w, h, ImagePixelFormat.ARGB32);
+                img.OriginalFileFormat = ImageFileFormat.Tiff;
                 new CopyBitwiseImageOp().Perform(buffer, bufferInfo, img);
-                images.Add(img);
+                yield return img;
             } while (LibTiff.TIFFReadDirectory(tiff) == 1);
-            return images;
         }
         finally
         {
             LibTiff.TIFFClose(tiff);
+        }
+    }
+
+    private static unsafe void ReadTiffFrame(byte[] buffer, IntPtr tiff, int w, int h)
+    {
+        fixed (void* ptr = &buffer[0])
+        {
+            int r = LibTiff.TIFFReadRGBAImage(tiff, w, h, (IntPtr) ptr, 0);
+            // TODO: Check return value
         }
     }
 

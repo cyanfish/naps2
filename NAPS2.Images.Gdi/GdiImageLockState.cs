@@ -4,6 +4,9 @@ using NAPS2.Images.Bitwise;
 
 namespace NAPS2.Images.Gdi;
 
+#if NET6_0_OR_GREATER
+[System.Runtime.Versioning.SupportedOSPlatform("windows7.0")]
+#endif
 public class GdiImageLockState : ImageLockState
 {
     public static GdiImageLockState Create(Bitmap bitmap, LockMode lockMode, out BitwiseImageData imageData)

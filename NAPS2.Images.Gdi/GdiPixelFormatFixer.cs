@@ -6,6 +6,9 @@ namespace NAPS2.Images.Gdi;
 /// <summary>
 /// Ensures that bitmaps use a standard pixel format/palette.
 /// </summary>
+#if NET6_0_OR_GREATER
+[System.Runtime.Versioning.SupportedOSPlatform("windows7.0")]
+#endif
 internal static class GdiPixelFormatFixer
 {
     public static bool MaybeFixPixelFormat(ref Bitmap bitmap)
