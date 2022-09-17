@@ -1,8 +1,8 @@
 ﻿using System.Collections.Immutable;
-using System.Threading;
 
 namespace NAPS2.Images.Storage;
 
+// TODO: Move this (and related classes) to top level Images namespace?
 public abstract class ImageContext
 {
     private readonly IPdfRenderer? _pdfRenderer;
@@ -162,14 +162,7 @@ public abstract class ImageContext
     /// <returns></returns>
     public abstract IEnumerable<IMemoryImage> LoadFrames(string path, out int count);
 
-    // TODO: Instead of having these methods directly here, instead have a TiffWriter property
-    public abstract bool SaveTiff(IList<IMemoryImage> images, string path,
-        TiffCompressionType compression = TiffCompressionType.Auto, Action<int, int>? progressCallback = null,
-        CancellationToken cancelToken = default);
-
-    public abstract bool SaveTiff(IList<IMemoryImage> images, Stream stream,
-        TiffCompressionType compression = TiffCompressionType.Auto, Action<int, int>? progressCallback = null,
-        CancellationToken cancelToken = default);
+    public abstract ITiffWriter TiffWriter { get; }
 
     public IMemoryImage Render(IRenderableImage image)
     {

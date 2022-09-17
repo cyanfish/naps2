@@ -89,7 +89,7 @@ public class LoadSaveTests : ContextualTests
         var path = Path.Combine(FolderPath, "image.tiff");
         var original = LoadImage(ImageResources.color_image);
 
-        ImageContext.SaveTiff(new[] { original }, path);
+        ImageContext.TiffWriter.SaveTiff(new[] { original }, path);
         AssertTiff(path, ImageResources.color_image);
     }
 
@@ -104,7 +104,7 @@ public class LoadSaveTests : ContextualTests
             LoadImage(ImageResources.stock_cat)
         };
 
-        ImageContext.SaveTiff(original, path);
+        ImageContext.TiffWriter.SaveTiff(original, path);
         AssertTiff(path, ImageResources.color_image, ImageResources.color_image_bw, ImageResources.stock_cat);
     }
 
@@ -114,7 +114,7 @@ public class LoadSaveTests : ContextualTests
         var stream = new MemoryStream();
         var original = LoadImage(ImageResources.color_image);
 
-        ImageContext.SaveTiff(new[] { original }, stream);
+        ImageContext.TiffWriter.SaveTiff(new[] { original }, stream);
         AssertTiff(stream, ImageResources.color_image);
     }
 
@@ -129,7 +129,7 @@ public class LoadSaveTests : ContextualTests
             LoadImage(ImageResources.stock_cat)
         };
 
-        ImageContext.SaveTiff(original, stream);
+        ImageContext.TiffWriter.SaveTiff(original, stream);
         AssertTiff(stream, ImageResources.color_image, ImageResources.color_image_bw, ImageResources.stock_cat);
     }
 
@@ -140,7 +140,7 @@ public class LoadSaveTests : ContextualTests
         var original = LoadImage(ImageResources.color_image_bw);
         original = original.PerformTransform(new BlackWhiteTransform());
 
-        ImageContext.SaveTiff(new[] { original }, path);
+        ImageContext.TiffWriter.SaveTiff(new[] { original }, path);
         AssertTiff(path, ImageResources.color_image_bw);
     }
 
@@ -150,7 +150,7 @@ public class LoadSaveTests : ContextualTests
         var path = Path.Combine(FolderPath, "image.tiff");
         var original = LoadImage(ImageResources.color_image);
 
-        ImageContext.SaveTiff(new[] { original }, path, TiffCompressionType.Ccitt4);
+        ImageContext.TiffWriter.SaveTiff(new[] { original }, path, TiffCompressionType.Ccitt4);
         AssertTiff(path, ImageResources.color_image_bw);
     }
 

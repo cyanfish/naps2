@@ -1,5 +1,3 @@
-using System.Threading;
-
 namespace NAPS2.Images.Mac;
 
 public class MacImageContext : ImageContext
@@ -78,17 +76,7 @@ public class MacImageContext : ImageContext
         return SplitFrames(image, GetFileFormatFromExtension(path, true));
     }
 
-    public override bool SaveTiff(IList<IMemoryImage> images, string path, TiffCompressionType compression = TiffCompressionType.Auto,
-        Action<int, int>? progressCallback = null, CancellationToken cancelToken = default)
-    {
-        throw new NotImplementedException();
-    }
-
-    public override bool SaveTiff(IList<IMemoryImage> images, Stream stream, TiffCompressionType compression = TiffCompressionType.Auto,
-        Action<int, int>? progressCallback = null, CancellationToken cancelToken = default)
-    {
-        throw new NotImplementedException();
-    }
+    public override ITiffWriter TiffWriter => throw new NotImplementedException();
 
     private IEnumerable<IMemoryImage> SplitFrames(NSImage image, ImageFileFormat fileFormat)
     {
