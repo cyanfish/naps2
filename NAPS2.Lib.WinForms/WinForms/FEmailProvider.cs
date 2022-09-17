@@ -42,7 +42,7 @@ public partial class FEmailProvider : FormBase
             _providerWidgets.Add(new EmailProviderWidget
             {
                 ProviderType = EmailProviderType.System,
-                ProviderIcon = bitmap ?? Icons.mail_yellow.ToEtoImage().ToSD(),
+                ProviderIcon = bitmap ?? Icons.mail_yellow.ToBitmap(),
                 ProviderName = clientName,
                 ClickAction = () => ChooseSystem(clientName)
             });
@@ -53,7 +53,7 @@ public partial class FEmailProvider : FormBase
             _providerWidgets.Add(new EmailProviderWidget
             {
                 ProviderType = EmailProviderType.Gmail,
-                ProviderIcon = Icons.gmail.ToEtoImage().ToSD(),
+                ProviderIcon = Icons.gmail.ToBitmap(),
                 ProviderName = EmailProviderType.Gmail.Description(),
                 ClickAction = () => ChooseOauth(_gmailOauthProvider)
             });
@@ -64,7 +64,7 @@ public partial class FEmailProvider : FormBase
             _providerWidgets.Add(new EmailProviderWidget
             {
                 ProviderType = EmailProviderType.OutlookWeb,
-                ProviderIcon = Icons.outlookweb.ToEtoImage().ToSD(),
+                ProviderIcon = Icons.outlookweb.ToBitmap(),
                 ProviderName = EmailProviderType.OutlookWeb.Description(),
                 ClickAction = () => ChooseOauth(_outlookWebOauthProvider)
             });

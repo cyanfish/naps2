@@ -101,7 +101,7 @@ namespace NAPS2.WinForms
             // btnDelete
             // 
             resources.ApplyResources(this.btnDelete, "btnDelete");
-            this.btnDelete.Image = global::NAPS2.Icons.cross_small.ToEtoImage().ToSD();
+            this.btnDelete.Image = global::NAPS2.Icons.cross_small.ToBitmap();
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.UseVisualStyleBackColor = true;
             this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);

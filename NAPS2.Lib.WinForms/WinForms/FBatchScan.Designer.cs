@@ -178,7 +178,7 @@ namespace NAPS2.WinForms
             // 
             // btnAddProfile
             // 
-            this.btnAddProfile.Image = global::NAPS2.Icons.add_small.ToEtoImage().ToSD();
+            this.btnAddProfile.Image = global::NAPS2.Icons.add_small.ToBitmap();
             resources.ApplyResources(this.btnAddProfile, "btnAddProfile");
             this.btnAddProfile.Name = "btnAddProfile";
             this.btnAddProfile.UseVisualStyleBackColor = true;
@@ -186,7 +186,7 @@ namespace NAPS2.WinForms
             // 
             // btnEditProfile
             // 
-            this.btnEditProfile.Image = global::NAPS2.Icons.pencil_small.ToEtoImage().ToSD();
+            this.btnEditProfile.Image = global::NAPS2.Icons.pencil_small.ToBitmap();
             resources.ApplyResources(this.btnEditProfile, "btnEditProfile");
             this.btnEditProfile.Name = "btnEditProfile";
             this.btnEditProfile.UseVisualStyleBackColor = true;

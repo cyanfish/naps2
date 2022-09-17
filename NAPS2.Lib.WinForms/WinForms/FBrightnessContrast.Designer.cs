@@ -88,14 +88,14 @@ namespace NAPS2.WinForms
             // pictureBox1
             // 
             resources.ApplyResources(this.pictureBox1, "pictureBox1");
-            this.pictureBox1.Image = global::NAPS2.Icons.weather_sun.ToEtoImage().ToSD();
+            this.pictureBox1.Image = global::NAPS2.Icons.weather_sun.ToBitmap();
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.TabStop = false;
             // 
             // pictureBox2
             // 
             resources.ApplyResources(this.pictureBox2, "pictureBox2");
-            this.pictureBox2.Image = global::NAPS2.Icons.contrast.ToEtoImage().ToSD();
+            this.pictureBox2.Image = global::NAPS2.Icons.contrast.ToBitmap();
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.TabStop = false;
             // 

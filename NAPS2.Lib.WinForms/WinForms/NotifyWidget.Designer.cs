@@ -59,7 +59,7 @@ namespace NAPS2.WinForms
             resources.ApplyResources(this.btnClose, "btnClose");
             this.btnClose.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnClose.FlatAppearance.BorderSize = 0;
-            this.btnClose.Image = global::NAPS2.Icons.close.ToEtoImage().ToSD();
+            this.btnClose.Image = global::NAPS2.Icons.close.ToBitmap();
             this.btnClose.Name = "btnClose";
             this.btnClose.UseVisualStyleBackColor = true;
             this.btnClose.Click += new System.EventHandler(this.btnClose_Click);

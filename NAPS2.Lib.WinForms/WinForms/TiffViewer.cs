@@ -72,7 +72,7 @@ public class TiffViewer : UserControl
 
     private void ClearImage()
     {
-        _pbox.Image = Icons.hourglass_grey.ToEtoImage().ToSD();
+        _pbox.Image = Icons.hourglass_grey.ToBitmap();
         _pbox.BorderStyle = BorderStyle.None;
         _pbox.Width = 32;
         _pbox.Height = 32;

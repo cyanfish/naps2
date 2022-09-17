@@ -61,7 +61,7 @@ public class WinFormsDesktopForm : DesktopForm
         _layoutManager?.Deactivate();
         btnZoomIn = new wf.Button
         {
-            Image = Icons.zoom_in.ToEtoImage().ToSD(),
+            Image = Icons.zoom_in.ToBitmap(),
             AccessibleName = UiStrings.ZoomIn,
             BackColor = Color.White,
             Size = new Size(23, 23),
@@ -72,7 +72,7 @@ public class WinFormsDesktopForm : DesktopForm
         _container.ContentPanel.Controls.Add(btnZoomIn);
         btnZoomOut = new wf.Button
         {
-            Image = Icons.zoom_out.ToEtoImage().ToSD(),
+            Image = Icons.zoom_out.ToBitmap(),
             AccessibleName = UiStrings.ZoomOut,
             BackColor = Color.White,
             Size = new Size(23, 23),

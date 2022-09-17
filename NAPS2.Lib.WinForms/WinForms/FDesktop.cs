@@ -306,7 +306,7 @@ public partial class FDesktop : FormBase
             var item = new ToolStripMenuItem
             {
                 Text = profile.DisplayName.Replace("&", "&&"),
-                Image = profile == defaultProfile ? Icons.accept_small.ToEtoImage().ToSD() : null,
+                Image = profile == defaultProfile ? Icons.accept_small.ToBitmap() : null,
                 ImageScaling = ToolStripItemImageScaling.None
             };
             AssignProfileShortcut(i, item);
