@@ -1,6 +1,5 @@
 using System.Threading;
 using Gdk;
-using NAPS2.Images.Bitwise;
 
 namespace NAPS2.Images.Gtk;
 
@@ -44,24 +43,24 @@ public class GtkImageContext : ImageContext
 
     public override IEnumerable<IMemoryImage> LoadFrames(Stream stream, out int count)
     {
-        // TODO
+        var format = GetFileFormatFromFirstBytes(stream);
+        if (format == ImageFileFormat.Tiff)
+        {
+            return LoadTiff(stream, out count);
+        }
         count = 1;
         return new[] { Load(stream) };
     }
 
     public override IEnumerable<IMemoryImage> LoadFrames(string path, out int count)
     {
-        // TODO
         var format = GetFileFormatFromExtension(path, true);
         if (format == ImageFileFormat.Tiff)
         {
             return LoadTiff(path, out count);
         }
-        else
-        {
-            count = 1;
-            return new[] { Load(path) };
-        }
+        count = 1;
+        return new[] { Load(path) };
     }
 
     public override bool SaveTiff(IList<IMemoryImage> images, string path, TiffCompressionType compression = TiffCompressionType.Auto,
@@ -76,28 +75,34 @@ public class GtkImageContext : ImageContext
         throw new NotImplementedException();
     }
 
+    private IEnumerable<IMemoryImage> LoadTiff(Stream stream, out int count)
+    {
+        var c = new LibTiffStreamClient(stream);
+        var tiff = c.TIFFClientOpen("r");
+        count = LibTiff.TIFFNumberOfDirectories(tiff);
+        return EnumerateTiffFrames(tiff, c);
+    }
+
     private IEnumerable<IMemoryImage> LoadTiff(string path, out int count)
     {
         var tiff = LibTiff.TIFFOpen(path, "r");
         count = LibTiff.TIFFNumberOfDirectories(tiff);
-        return EnumerateTiffFrames(tiff);
+        return EnumerateTiffFrames(tiff, null);
     }
 
-    private IEnumerable<IMemoryImage> EnumerateTiffFrames(IntPtr tiff)
+    private IEnumerable<IMemoryImage> EnumerateTiffFrames(IntPtr tiff, LibTiffStreamClient? client)
     {
+        // We keep a reference to the client to avoid garbage collection
         try
         {
             do
             {
                 LibTiff.TIFFGetField(tiff, 256, out var w);
                 LibTiff.TIFFGetField(tiff, 257, out var h);
-                var buffer = new byte[w * h * 4];
-                ReadTiffFrame(buffer, tiff, w, h);
-                var bufferInfo = new PixelInfo(w, h, SubPixelType.Rgba) { InvertY = true };
-                // TODO: Get pixel format from tiff
                 var img = Create(w, h, ImagePixelFormat.ARGB32);
                 img.OriginalFileFormat = ImageFileFormat.Tiff;
-                new CopyBitwiseImageOp().Perform(buffer, bufferInfo, img);
+                using var imageLock = img.Lock(LockMode.WriteOnly, out var data);
+                ReadTiffFrame(data.safePtr, tiff, w, h);
                 yield return img;
             } while (LibTiff.TIFFReadDirectory(tiff) == 1);
         }
@@ -107,13 +112,10 @@ public class GtkImageContext : ImageContext
         }
     }
 
-    private static unsafe void ReadTiffFrame(byte[] buffer, IntPtr tiff, int w, int h)
+    private static void ReadTiffFrame(IntPtr buffer, IntPtr tiff, int w, int h)
     {
-        fixed (void* ptr = &buffer[0])
-        {
-            int r = LibTiff.TIFFReadRGBAImage(tiff, w, h, (IntPtr) ptr, 0);
-            // TODO: Check return value
-        }
+        int r = LibTiff.TIFFReadRGBAImageOriented(tiff, w, h, buffer, 1, 0);
+        // TODO: Check return value
     }
 
     public override IMemoryImage Create(int width, int height, ImagePixelFormat pixelFormat)
