@@ -67,7 +67,7 @@ public class SaveImagesOperation : OperationBase
                     FirstFileSaved = subFileName;
                     FileSystemHelper.EnsureParentDirExists(subFileName);
                     using var renderedImages = images.Select(x => x.Render()).ToDisposableList();
-                    return _imageContext.SaveTiff(renderedImages.InnerList, subFileName,
+                    return _imageContext.TiffWriter.SaveTiff(renderedImages.InnerList, subFileName,
                         imageSettings.TiffCompression.ToTiffCompressionType(), OnProgress, CancelToken);
                 }
 
@@ -157,7 +157,7 @@ public class SaveImagesOperation : OperationBase
         if (Equals(format, ImageFormat.Tiff))
         {
             using var renderedImage = image.Render();
-            _imageContext.SaveTiff(new[] { renderedImage }, path,
+            _imageContext.TiffWriter.SaveTiff(new[] { renderedImage }, path,
                 imageSettings.TiffCompression.ToTiffCompressionType(), null, CancelToken);
         }
         else if (Equals(format, ImageFormat.Jpeg))
