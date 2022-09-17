@@ -6,7 +6,7 @@ using tdata_t = System.IntPtr;
 
 namespace NAPS2.Images.Gtk;
 
-public static class LibTiff
+internal static class LibTiff
 {
     // TODO: String marshalling?
     [DllImport("libtiff.so.5")]
@@ -54,7 +54,17 @@ public static class LibTiff
     public static extern int TIFFReadDirectory(IntPtr tiff);
 
     [DllImport("libtiff.so.5")]
-    public static extern int TIFFGetField(IntPtr tiff, int tag, out int field);
+    public static extern int TIFFWriteDirectory(IntPtr tiff);
+
+    [DllImport("libtiff.so.5")]
+    public static extern int TIFFGetField(IntPtr tiff, TiffTag tag, out int field);
+
+    [DllImport("libtiff.so.5")]
+    public static extern int TIFFSetField(IntPtr tiff, TiffTag tag, int field);
+
+    [DllImport("libtiff.so.5")]
+    public static extern int TIFFWriteScanline(
+        IntPtr tiff, tdata_t buf, int row, short sample);
 
     [DllImport("libtiff.so.5")]
     public static extern int TIFFReadRGBAImage(

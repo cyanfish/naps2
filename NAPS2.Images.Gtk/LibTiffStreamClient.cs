@@ -6,7 +6,7 @@ using tdata_t = System.IntPtr;
 
 namespace NAPS2.Images.Gtk;
 
-public class LibTiffStreamClient
+internal class LibTiffStreamClient
 {
     private readonly Stream _stream;
     private readonly LibTiff.TIFFErrorHandler _error;

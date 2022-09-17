@@ -6,7 +6,8 @@ namespace NAPS2.Sdk.Tests.Images;
 
 public class LoadSaveTests : ContextualTests
 {
-    // TODO: Add tests for error/edge cases (e.g. invalid files, mismatched extensions/format (?), tiff progress)
+    // TODO: Add tests for error/edge cases (e.g. invalid files, mismatched extensions/format (?), tiff progress, saving 0/null images, unicode file names)
+    // TODO: Verify rough expected file sizes to ensure compression is as expected (especially for tiff saving)
 
     [Theory]
     [MemberData(nameof(TestCases))]
@@ -89,12 +90,7 @@ public class LoadSaveTests : ContextualTests
         var original = LoadImage(ImageResources.color_image);
 
         ImageContext.SaveTiff(new[] { original }, path);
-        var actual = ImageContext.LoadFrames(path, out var count).ToArray();
-
-        Assert.Equal(1, count);
-        Assert.Single(actual);
-        Assert.Equal(ImageFileFormat.Tiff, actual[0].OriginalFileFormat);
-        ImageAsserts.Similar(ImageResources.color_image, actual[0]);
+        AssertTiff(path, ImageResources.color_image);
     }
 
     [Fact]
@@ -104,21 +100,12 @@ public class LoadSaveTests : ContextualTests
         var original = new[]
         {
             LoadImage(ImageResources.color_image),
-            LoadImage(ImageResources.color_image_h_p300),
+            LoadImage(ImageResources.color_image_bw).PerformTransform(new BlackWhiteTransform()),
             LoadImage(ImageResources.stock_cat)
         };
 
         ImageContext.SaveTiff(original, path);
-        var actual = ImageContext.LoadFrames(path, out var count).ToArray();
-
-        Assert.Equal(3, count);
-        Assert.Equal(3, original.Length);
-        Assert.Equal(ImageFileFormat.Tiff, actual[0].OriginalFileFormat);
-        ImageAsserts.Similar(ImageResources.color_image, actual[0]);
-        Assert.Equal(ImageFileFormat.Tiff, actual[1].OriginalFileFormat);
-        ImageAsserts.Similar(ImageResources.color_image_h_p300, actual[1]);
-        Assert.Equal(ImageFileFormat.Tiff, actual[2].OriginalFileFormat);
-        ImageAsserts.Similar(ImageResources.stock_cat, actual[2]);
+        AssertTiff(path, ImageResources.color_image, ImageResources.color_image_bw, ImageResources.stock_cat);
     }
 
     [Fact]
@@ -128,13 +115,7 @@ public class LoadSaveTests : ContextualTests
         var original = LoadImage(ImageResources.color_image);
 
         ImageContext.SaveTiff(new[] { original }, stream);
-        stream.Seek(0, SeekOrigin.Begin);
-        var actual = ImageContext.LoadFrames(stream, out var count).ToArray();
-
-        Assert.Equal(1, count);
-        Assert.Single(actual);
-        Assert.Equal(ImageFileFormat.Tiff, actual[0].OriginalFileFormat);
-        ImageAsserts.Similar(ImageResources.color_image, actual[0]);
+        AssertTiff(stream, ImageResources.color_image);
     }
 
     [Fact]
@@ -144,22 +125,57 @@ public class LoadSaveTests : ContextualTests
         var original = new[]
         {
             LoadImage(ImageResources.color_image),
-            LoadImage(ImageResources.color_image_h_p300),
+            LoadImage(ImageResources.color_image_bw).PerformTransform(new BlackWhiteTransform()),
             LoadImage(ImageResources.stock_cat)
         };
 
         ImageContext.SaveTiff(original, stream);
+        AssertTiff(stream, ImageResources.color_image, ImageResources.color_image_bw, ImageResources.stock_cat);
+    }
+
+    [Fact]
+    public void SaveBlackAndWhiteTiff()
+    {
+        var path = Path.Combine(FolderPath, "image.tiff");
+        var original = LoadImage(ImageResources.color_image_bw);
+        original = original.PerformTransform(new BlackWhiteTransform());
+
+        ImageContext.SaveTiff(new[] { original }, path);
+        AssertTiff(path, ImageResources.color_image_bw);
+    }
+
+    [Fact]
+    public void SaveColorTiffWithG4()
+    {
+        var path = Path.Combine(FolderPath, "image.tiff");
+        var original = LoadImage(ImageResources.color_image);
+
+        ImageContext.SaveTiff(new[] { original }, path, TiffCompressionType.Ccitt4);
+        AssertTiff(path, ImageResources.color_image_bw);
+    }
+
+    private void AssertTiff(string path, params byte[][] expectedImages)
+    {
+        var actual = ImageContext.LoadFrames(path, out var count).ToArray();
+        DoAssertTiff(actual, count, expectedImages);
+    }
+
+    private void AssertTiff(Stream stream, params byte[][] expectedImages)
+    {
         stream.Seek(0, SeekOrigin.Begin);
         var actual = ImageContext.LoadFrames(stream, out var count).ToArray();
+        DoAssertTiff(actual, count, expectedImages);
+    }
 
-        Assert.Equal(3, count);
-        Assert.Equal(3, original.Length);
-        Assert.Equal(ImageFileFormat.Tiff, actual[0].OriginalFileFormat);
-        ImageAsserts.Similar(ImageResources.color_image, actual[0]);
-        Assert.Equal(ImageFileFormat.Tiff, actual[1].OriginalFileFormat);
-        ImageAsserts.Similar(ImageResources.color_image_h_p300, actual[1]);
-        Assert.Equal(ImageFileFormat.Tiff, actual[2].OriginalFileFormat);
-        ImageAsserts.Similar(ImageResources.stock_cat, actual[2]);
+    private static void DoAssertTiff(IMemoryImage[] actual, int count, byte[][] expectedImages)
+    {
+        Assert.Equal(expectedImages.Length, count);
+        Assert.Equal(expectedImages.Length, actual.Length);
+        for (int i = 0; i < expectedImages.Length; i++)
+        {
+            Assert.Equal(ImageFileFormat.Tiff, actual[i].OriginalFileFormat);
+            ImageAsserts.Similar(expectedImages[i], actual[i]);
+        }
     }
 
     private static byte[] GetResource(string resource) =>

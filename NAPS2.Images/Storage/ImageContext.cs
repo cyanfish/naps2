@@ -162,6 +162,7 @@ public abstract class ImageContext
     /// <returns></returns>
     public abstract IEnumerable<IMemoryImage> LoadFrames(string path, out int count);
 
+    // TODO: Instead of having these methods directly here, instead have a TiffWriter property
     public abstract bool SaveTiff(IList<IMemoryImage> images, string path,
         TiffCompressionType compression = TiffCompressionType.Auto, Action<int, int>? progressCallback = null,
         CancellationToken cancelToken = default);
