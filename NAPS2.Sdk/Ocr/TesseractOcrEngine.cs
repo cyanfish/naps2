@@ -97,6 +97,7 @@ public class TesseractOcrEngine : IOcrEngine
                 .First();
             var elements = hocrDocument.Descendants()
                 .Where(x => x.Attributes("class").Any(y => y.Value == "ocrx_word"))
+                .Where(x => !string.IsNullOrWhiteSpace(x.Value))
                 .Select(x =>
                 {
                     var text = x.Value;
