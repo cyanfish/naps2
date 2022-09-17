@@ -18,12 +18,12 @@ public class ClientServerTests
                 MakeAndModel = "HP Blah",
                 SerialNumber = "123abc"
             }
-        });
+        }) { Port = 9801 };
         server.Start();
         var client = new EsclClient(new EsclService
         {
             Ip = IPAddress.IPv6Loopback,
-            Port = 9898,
+            Port = 9801,
             RootUrl = "escl",
             Tls = false
         });
