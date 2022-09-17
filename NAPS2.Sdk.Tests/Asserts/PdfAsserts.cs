@@ -9,7 +9,7 @@ namespace NAPS2.Sdk.Tests.Asserts;
 
 public static class PdfAsserts
 {
-    private static readonly Lazy<PdfAValidator> LazyPdfAValidator = new Lazy<PdfAValidator>(() => new PdfAValidator());
+    private static readonly Lazy<PdfAValidator> LazyPdfAValidator = new(() => new PdfAValidator());
 
     public static void AssertPageCount(int count, string filePath)
     {
