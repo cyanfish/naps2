@@ -82,6 +82,8 @@ internal class LibTiffIo : ITiffWriter
     private static void WriteTiffMetadata(IntPtr tiff, ImagePixelFormat pixelFormat,
         TiffCompressionType compression, IMemoryImage image)
     {
+        // TODO: A lot of these types are wrong (e.g. int32 instead of int16)
+        // http://www.libtiff.org/man/TIFFSetField.3t.html
         LibTiff.TIFFSetField(tiff, TiffTag.ImageWidth, image.Width);
         LibTiff.TIFFSetField(tiff, TiffTag.ImageHeight, image.Height);
         LibTiff.TIFFSetField(tiff, TiffTag.PlanarConfig, 1);
@@ -110,13 +112,15 @@ internal class LibTiffIo : ITiffWriter
         }));
         if (pixelFormat == ImagePixelFormat.ARGB32)
         {
+            // TODO: I think this is completely wrong
             LibTiff.TIFFSetField(tiff, TiffTag.ExtraSamples, 1);
         }
         if (image.HorizontalResolution != 0 && image.VerticalResolution != 0)
         {
             LibTiff.TIFFSetField(tiff, TiffTag.ResolutionUnit, 2);
-            LibTiff.TIFFSetField(tiff, TiffTag.XResolution, (int) image.HorizontalResolution);
-            LibTiff.TIFFSetField(tiff, TiffTag.YResolution, (int) image.VerticalResolution);
+            // TODO: Why do we need to write as a double? It's supposed to be a float.
+            LibTiff.TIFFSetField(tiff, TiffTag.XResolution, (double) image.HorizontalResolution);
+            LibTiff.TIFFSetField(tiff, TiffTag.YResolution, (double) image.VerticalResolution);
         }
     }
 
@@ -142,9 +146,13 @@ internal class LibTiffIo : ITiffWriter
         {
             do
             {
-                LibTiff.TIFFGetField(tiff, TiffTag.ImageWidth, out var w);
-                LibTiff.TIFFGetField(tiff, TiffTag.ImageHeight, out var h);
+                LibTiff.TIFFGetField(tiff, TiffTag.ImageWidth, out int w);
+                LibTiff.TIFFGetField(tiff, TiffTag.ImageHeight, out int h);
+                // TODO: Check return values
+                LibTiff.TIFFGetField(tiff, TiffTag.XResolution, out float xres);
+                LibTiff.TIFFGetField(tiff, TiffTag.YResolution, out float yres);
                 var img = _imageContext.Create(w, h, ImagePixelFormat.ARGB32);
+                img.SetResolution(xres, yres);
                 img.OriginalFileFormat = ImageFileFormat.Tiff;
                 using var imageLock = img.Lock(LockMode.WriteOnly, out var data);
                 ReadTiffFrame(data.safePtr, tiff, w, h);

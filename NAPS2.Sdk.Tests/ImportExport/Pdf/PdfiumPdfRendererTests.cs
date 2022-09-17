@@ -9,8 +9,7 @@ public class PdfiumPdfRendererTests : ContextualTests
     [Fact]
     public void RenderPdfFromWord()
     {
-        var path = Path.Combine(FolderPath, "test.pdf");
-        File.WriteAllBytes(path, PdfResources.word_generated_pdf);
+        var path = CopyResourceToFile(PdfResources.word_generated_pdf, "test.pdf");
 
         var images = new PdfiumPdfRenderer().Render(ImageContext, path, PdfRenderSize.Default).ToList();
 
@@ -22,21 +21,19 @@ public class PdfiumPdfRendererTests : ContextualTests
     [Fact]
     public void RenderPlainImagePdf()
     {
-        var path = Path.Combine(FolderPath, "test.pdf");
-        File.WriteAllBytes(path, PdfResources.image_pdf);
+        var path = CopyResourceToFile(PdfResources.image_pdf, "test.pdf");
 
         var images = new PdfiumPdfRenderer().Render(ImageContext, path, PdfRenderSize.Default).ToList();
         
         Assert.Single(images);
-        // This also verifies that the renderer gets the actual image dpi (72) 
+        // This also verifies that the renderer gets the actual image dpi (72)
         ImageAsserts.Similar(ImageResources.color_image, images[0]);
     }
 
     [Fact]
     public void RenderImageWithTextPdf()
     {
-        var path = Path.Combine(FolderPath, "test.pdf");
-        File.WriteAllBytes(path, PdfResources.image_with_text_pdf);
+        var path = CopyResourceToFile(PdfResources.image_with_text_pdf, "test.pdf");
 
         var images = new PdfiumPdfRenderer().Render(ImageContext, path, PdfRenderSize.Default).ToList();
 

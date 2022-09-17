@@ -1,3 +1,4 @@
+using System.Globalization;
 using Gdk;
 using NAPS2.Images.Bitwise;
 
@@ -10,6 +11,8 @@ public class GtkImage : IMemoryImage
         ImageContext = imageContext ?? throw new ArgumentNullException(nameof(imageContext));
         Pixbuf = pixbuf;
         LogicalPixelFormat = logicalPixelFormat;
+        HorizontalResolution = float.TryParse(pixbuf.GetOption("x-dpi"), out var xDpi) ? xDpi : 0;
+        VerticalResolution = float.TryParse(pixbuf.GetOption("y-dpi"), out var yDpi) ? yDpi : 0;
     }
 
     public ImageContext ImageContext { get; }
@@ -26,7 +29,6 @@ public class GtkImage : IMemoryImage
 
     public void SetResolution(float xDpi, float yDpi)
     {
-        // TODO: ?
         HorizontalResolution = xDpi;
         VerticalResolution = yDpi;
     }
@@ -71,14 +73,8 @@ public class GtkImage : IMemoryImage
             imageFormat = ImageContext.GetFileFormatFromExtension(path);
         }
         var type = GetType(imageFormat);
-        if (imageFormat == ImageFileFormat.Jpeg && quality != -1)
-        {
-            Pixbuf.Savev(path, type, new[] { "quality" }, new[] { quality.ToString() });
-        }
-        else
-        {
-            Pixbuf.Save(path, type);
-        }
+        var (keys, values) = GetSaveOptions(imageFormat, quality);
+        Pixbuf.Savev(path, type, keys, values);
     }
 
     public void Save(Stream stream, ImageFileFormat imageFormat, int quality = -1)
@@ -88,17 +84,9 @@ public class GtkImage : IMemoryImage
             throw new ArgumentException("Format required to save to a stream", nameof(imageFormat));
         }
         var type = GetType(imageFormat);
+        var (keys, values) = GetSaveOptions(imageFormat, quality);
         // TODO: Map to OutputStream directly?
-        byte[] buffer;
-        if (imageFormat == ImageFileFormat.Jpeg && quality != -1)
-        {
-            buffer = Pixbuf.SaveToBuffer(type, new[] { "quality" }, new[] { quality.ToString() });
-        }
-        else
-        {
-            buffer = Pixbuf.SaveToBuffer(type);
-        }
-        stream.Write(buffer);
+        stream.Write(Pixbuf.SaveToBuffer(type, keys, values));
     }
 
     private string GetType(ImageFileFormat fileFormat) => fileFormat switch
@@ -109,6 +97,26 @@ public class GtkImage : IMemoryImage
         ImageFileFormat.Tiff => "tiff",
         _ => throw new ArgumentException("Unsupported file format")
     };
+
+    private (string[] keys, string[] values) GetSaveOptions(ImageFileFormat imageFormat, int quality)
+    {
+        var keys = new List<string>
+        {
+            "x-dpi",
+            "y-dpi"
+        };
+        var values = new List<string>
+        {
+            HorizontalResolution.ToString(CultureInfo.InvariantCulture),
+            VerticalResolution.ToString(CultureInfo.InvariantCulture)
+        };
+        if (imageFormat == ImageFileFormat.Jpeg && quality != -1)
+        {
+            keys.Add("quality");
+            values.Add(quality.ToString());
+        }
+        return (keys.ToArray(), values.ToArray());
+    }
 
     public IMemoryImage Clone() => new GtkImage(ImageContext, (Pixbuf) Pixbuf.Clone(), LogicalPixelFormat)
     {

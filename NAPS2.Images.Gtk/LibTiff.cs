@@ -56,11 +56,24 @@ internal static class LibTiff
     [DllImport("libtiff.so.5")]
     public static extern int TIFFWriteDirectory(IntPtr tiff);
 
+    // TODO: Clean these overloads up
     [DllImport("libtiff.so.5")]
     public static extern int TIFFGetField(IntPtr tiff, TiffTag tag, out int field);
 
     [DllImport("libtiff.so.5")]
+    public static extern int TIFFGetField(IntPtr tiff, TiffTag tag, out float field);
+
+    [DllImport("libtiff.so.5")]
+    public static extern int TIFFGetField(IntPtr tiff, TiffTag tag, out double field);
+
+    [DllImport("libtiff.so.5")]
     public static extern int TIFFSetField(IntPtr tiff, TiffTag tag, int field);
+
+    [DllImport("libtiff.so.5")]
+    public static extern int TIFFSetField(IntPtr tiff, TiffTag tag, float field);
+
+    [DllImport("libtiff.so.5")]
+    public static extern int TIFFSetField(IntPtr tiff, TiffTag tag, double field);
 
     [DllImport("libtiff.so.5")]
     public static extern int TIFFWriteScanline(
