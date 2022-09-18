@@ -100,16 +100,15 @@ public class GtkImage : IMemoryImage
 
     private (string[] keys, string[] values) GetSaveOptions(ImageFileFormat imageFormat, int quality)
     {
-        var keys = new List<string>
+        var keys = new List<string>();
+        var values = new List<string>();
+        if (HorizontalResolution > 0 && VerticalResolution > 0)
         {
-            "x-dpi",
-            "y-dpi"
-        };
-        var values = new List<string>
-        {
-            HorizontalResolution.ToString(CultureInfo.InvariantCulture),
-            VerticalResolution.ToString(CultureInfo.InvariantCulture)
-        };
+            keys.Add("x-dpi");
+            keys.Add("y-dpi");
+            values.Add(HorizontalResolution.ToString(CultureInfo.InvariantCulture));
+            values.Add(VerticalResolution.ToString(CultureInfo.InvariantCulture));
+        }
         if (imageFormat == ImageFileFormat.Jpeg && quality != -1)
         {
             keys.Add("quality");
