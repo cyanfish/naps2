@@ -236,6 +236,8 @@ public class TransformTests : ContextualTests
         ImageAsserts.Similar(expected, actual, ImageAsserts.GENERAL_RMSE_THRESHOLD);
     }
 
+    // TODO: Add tests for rotating black and white images
+
     [Fact]
     public void ScaleNull()
     {

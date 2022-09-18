@@ -19,49 +19,35 @@ public class GtkImageContext : ImageContext
         return _imageTransformer.Apply(gdiImage, transform);
     }
 
-    public override IMemoryImage Load(string path)
+    protected override IMemoryImage LoadCore(string path, ImageFileFormat format)
     {
         using var readStream = new FileStream(path, FileMode.Open, FileAccess.Read);
-        var pixbuf = new Pixbuf(readStream);
-        return new GtkImage(this, pixbuf, pixbuf.HasAlpha ? ImagePixelFormat.ARGB32 : ImagePixelFormat.RGB24)
-        {
-            OriginalFileFormat = GetFileFormatFromExtension(path, true)
-        };
+        return new GtkImage(this, new Pixbuf(readStream));
     }
 
-    public override IMemoryImage Load(Stream stream)
+    protected override IMemoryImage LoadCore(Stream stream, ImageFileFormat format)
     {
-        if (stream.CanSeek)
-        {
-            stream.Seek(0, SeekOrigin.Begin);
-        }
-        var pixbuf = new Pixbuf(stream);
-        return new GtkImage(this, pixbuf, pixbuf.HasAlpha ? ImagePixelFormat.ARGB32 : ImagePixelFormat.RGB24)
-        {
-            OriginalFileFormat = GetFileFormatFromFirstBytes(stream)
-        };
+        return new GtkImage(this, new Pixbuf(stream));
     }
 
-    public override IEnumerable<IMemoryImage> LoadFrames(Stream stream, out int count)
+    protected override IEnumerable<IMemoryImage> LoadFramesCore(Stream stream, ImageFileFormat format, out int count)
     {
-        var format = GetFileFormatFromFirstBytes(stream);
         if (format == ImageFileFormat.Tiff)
         {
             return _tiffIo.LoadTiff(stream, out count);
         }
         count = 1;
-        return new[] { Load(stream) };
+        return new[] { LoadCore(stream, format) };
     }
 
-    public override IEnumerable<IMemoryImage> LoadFrames(string path, out int count)
+    protected override IEnumerable<IMemoryImage> LoadFramesCore(string path, ImageFileFormat format, out int count)
     {
-        var format = GetFileFormatFromExtension(path, true);
         if (format == ImageFileFormat.Tiff)
         {
             return _tiffIo.LoadTiff(path, out count);
         }
         count = 1;
-        return new[] { Load(path) };
+        return new[] { LoadCore(path, format) };
     }
 
     public override ITiffWriter TiffWriter => _tiffIo;
@@ -73,6 +59,6 @@ public class GtkImageContext : ImageContext
             throw new ArgumentException("Unsupported pixel format");
         }
         var pixbuf = new Pixbuf(Colorspace.Rgb, pixelFormat == ImagePixelFormat.ARGB32, 8, width, height);
-        return new GtkImage(this, pixbuf, pixelFormat);
+        return new GtkImage(this, pixbuf);
     }
 }

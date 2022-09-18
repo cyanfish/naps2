@@ -125,4 +125,11 @@ public class BitwisePerfTests : ContextualTests
         var image2 = ImageContext.Create(SIZE / 4, SIZE / 4, ImagePixelFormat.ARGB32);
         new SharpenBitwiseImageOp(0.5f).Perform(image, image2);
     }
+
+    [Fact]
+    public void LogicalPixelFormat()
+    {
+        var image = ImageContext.Create(SIZE, SIZE, ImagePixelFormat.ARGB32);
+        new LogicalPixelFormatOp().Perform(image);
+    }
 }

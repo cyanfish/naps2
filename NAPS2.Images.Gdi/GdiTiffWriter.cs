@@ -75,7 +75,8 @@ internal class GdiTiffWriter : ITiffWriter
 
     private GdiImage GetImageToSave(IMemoryImage original, TiffCompressionType compression) {
          var image = original.Clone();
-         if (compression == TiffCompressionType.Ccitt4) {
+         if (compression == TiffCompressionType.Ccitt4)
+         {
              image = image.PerformTransform(new BlackWhiteTransform());
          }
          return (GdiImage) image;

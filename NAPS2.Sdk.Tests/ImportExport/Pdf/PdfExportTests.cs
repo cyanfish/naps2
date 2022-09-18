@@ -86,7 +86,6 @@ public class PdfExporterTests : ContextualTests
 
         var filePath = Path.Combine(FolderPath, "test.pdf");
         var storageImage = LoadImage(ImageResources.color_image_bw);
-        storageImage = storageImage.PerformTransform(new BlackWhiteTransform());
         using var image = ScanningContext.CreateProcessedImage(storageImage);
 
         await _exporter.Export(filePath, new[] { image }, new PdfExportParams());

@@ -32,7 +32,7 @@ public class TiffWriterTests : ContextualTests
         var original = new[]
         {
             LoadImage(ImageResources.color_image),
-            LoadImage(ImageResources.color_image_bw).PerformTransform(new BlackWhiteTransform()),
+            LoadImage(ImageResources.color_image_bw),
             LoadImage(ImageResources.stock_cat)
         };
 
@@ -57,7 +57,7 @@ public class TiffWriterTests : ContextualTests
         var original = new[]
         {
             LoadImage(ImageResources.color_image),
-            LoadImage(ImageResources.color_image_bw).PerformTransform(new BlackWhiteTransform()),
+            LoadImage(ImageResources.color_image_bw),
             LoadImage(ImageResources.stock_cat)
         };
 
@@ -70,7 +70,6 @@ public class TiffWriterTests : ContextualTests
     {
         var path = Path.Combine(FolderPath, "image.tiff");
         var original = LoadImage(ImageResources.color_image_bw);
-        original = original.PerformTransform(new BlackWhiteTransform());
 
         _tiffWriter.SaveTiff(new[] { original }, path);
         AssertTiff(path, ImageResources.color_image_bw);

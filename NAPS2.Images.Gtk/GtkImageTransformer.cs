@@ -31,10 +31,11 @@ public class GtkImageTransformer : AbstractImageTransformer<GtkImage>
         context.Translate(-image.Width / 2.0, -image.Height / 2.0);
         CairoHelper.SetSourcePixbuf(context, image.Pixbuf, 0, 0);
         context.Paint();
-        var originalPixelFormat = image.LogicalPixelFormat == ImagePixelFormat.BW1
+        var newImage = new GtkImage(ImageContext, new Pixbuf(surface, 0, 0, width, height));
+        // TODO: In Gdi, we convert this back to BW1. Should we do the same?
+        newImage.LogicalPixelFormat = image.LogicalPixelFormat == ImagePixelFormat.BW1
             ? ImagePixelFormat.Gray8
             : image.LogicalPixelFormat;
-        var newImage = new GtkImage(ImageContext, new Pixbuf(surface, 0, 0, width, height), originalPixelFormat);
         newImage.SetResolution(xres, yres);
         return newImage;
     }
@@ -49,10 +50,10 @@ public class GtkImageTransformer : AbstractImageTransformer<GtkImage>
         context.Scale(width / (double) image.Width, height / (double) image.Height);
         CairoHelper.SetSourcePixbuf(context, image.Pixbuf, 0, 0);
         context.Paint();
-        var originalPixelFormat = image.LogicalPixelFormat == ImagePixelFormat.BW1
+        var newImage = new GtkImage(ImageContext, new Pixbuf(surface, 0, 0, width, height));
+        newImage.LogicalPixelFormat = image.LogicalPixelFormat == ImagePixelFormat.BW1
             ? ImagePixelFormat.Gray8
             : image.LogicalPixelFormat;
-        var newImage = new GtkImage(ImageContext, new Pixbuf(surface, 0, 0, width, height), originalPixelFormat);
         newImage.SetResolution(
             image.HorizontalResolution * image.Width / width,
             image.VerticalResolution * image.Height / height);

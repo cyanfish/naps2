@@ -26,42 +26,28 @@ public class GdiImageContext : ImageContext
         return _imageTransformer.Apply(gdiImage, transform);
     }
 
-    public override IMemoryImage Load(string path)
+    protected override IMemoryImage LoadCore(string path, ImageFileFormat format)
     {
-        var format = GetFileFormatFromExtension(path, true);
-        var image = new GdiImage(this, LoadBitmapWithExceptionHandling(path));
-        if (format != ImageFileFormat.Unspecified)
-        {
-            image.OriginalFileFormat = format;
-        }
-        return image;
+        return new GdiImage(this, LoadBitmapWithExceptionHandling(path));
     }
 
-    public override IMemoryImage Load(Stream stream)
+    protected override IMemoryImage LoadCore(Stream stream, ImageFileFormat format)
     {
-        var format = GetFileFormatFromFirstBytes(stream);
-        var image = new GdiImage(this, new Bitmap(stream));
-        if (format != ImageFileFormat.Unspecified)
-        {
-            image.OriginalFileFormat = format;
-        }
-        return image;
+        return new GdiImage(this, new Bitmap(stream));
     }
 
-    public override IEnumerable<IMemoryImage> LoadFrames(Stream stream, out int count)
+    protected override IEnumerable<IMemoryImage> LoadFramesCore(Stream stream, ImageFileFormat format, out int count)
     {
-        var format = GetFileFormatFromFirstBytes(stream);
         var bitmap = new Bitmap(stream);
         count = bitmap.GetFrameCount(FrameDimension.Page);
-        return EnumerateFrames(bitmap, format, count);
+        return EnumerateFrames(bitmap, count);
     }
 
-    public override IEnumerable<IMemoryImage> LoadFrames(string path, out int count)
+    protected override IEnumerable<IMemoryImage> LoadFramesCore(string path, ImageFileFormat format, out int count)
     {
-        var format = GetFileFormatFromExtension(path);
         var bitmap = LoadBitmapWithExceptionHandling(path);
         count = bitmap.GetFrameCount(FrameDimension.Page);
-        return EnumerateFrames(bitmap, format, count);
+        return EnumerateFrames(bitmap, count);
     }
 
     private static Bitmap LoadBitmapWithExceptionHandling(string path)
@@ -80,19 +66,14 @@ public class GdiImageContext : ImageContext
         }
     }
 
-    private IEnumerable<IMemoryImage> EnumerateFrames(Bitmap bitmap, ImageFileFormat format, int count)
+    private IEnumerable<IMemoryImage> EnumerateFrames(Bitmap bitmap, int count)
     {
         using (bitmap)
         {
             for (int i = 0; i < count; i++)
             {
                 bitmap.SelectActiveFrame(FrameDimension.Page, i);
-                var image = new GdiImage(this, (Bitmap) bitmap.Clone());
-                if (format != ImageFileFormat.Unspecified)
-                {
-                    image.OriginalFileFormat = format;
-                }
-                yield return image;
+                yield return new GdiImage(this, bitmap).Copy();
             }
         }
     }

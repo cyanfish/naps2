@@ -42,7 +42,7 @@ public interface IMemoryImage : IImageStorage
     void SetResolution(float xDpi, float yDpi);
 
     /// <summary>
-    /// Gets the bits per pixel for the image's underlying binary data.  
+    /// Gets the bits per pixel for the image's underlying binary data.
     /// </summary>
     ImagePixelFormat PixelFormat { get; }
 
@@ -61,9 +61,10 @@ public interface IMemoryImage : IImageStorage
     ImageFileFormat OriginalFileFormat { get; set; }
 
     /// <summary>
-    /// Gets the original image's pixel format (e.g. gray/bw) if known.
+    /// Gets the type of color information stored in the image. For example, an image might be stored in memory with
+    /// PixelFormat = ARGB32, but if it's a grayscale image with no transparency, then LogicalPixelFormat = Gray8.
     /// </summary>
-    ImagePixelFormat LogicalPixelFormat { get; }
+    ImagePixelFormat LogicalPixelFormat { get; set; }
 
     /// <summary>
     /// Saves the image to the given file path. If the file format is unspecified, it will be inferred from the

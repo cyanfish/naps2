@@ -10,7 +10,6 @@ public class MacImageContext : ImageContext
     public MacImageContext(IPdfRenderer? pdfRenderer = null) : base(typeof(MacImage), pdfRenderer)
     {
         // TODO: Not sure if this is truly thread safe.
-        // Maybe we need to do something like use CGImage with a custom context for thread safety.
         NSApplication.CheckForIllegalCrossThreadCalls = false;
         _imageTransformer = new MacImageTransformer(this);
     }
@@ -21,7 +20,7 @@ public class MacImageContext : ImageContext
         return _imageTransformer.Apply(gdiImage, transform);
     }
 
-    public override IMemoryImage Load(string path)
+    protected override IMemoryImage LoadCore(string path, ImageFileFormat format)
     {
         using var readLock = new FileStream(path, FileMode.Open, FileAccess.Read);
         NSImage image;
@@ -30,29 +29,19 @@ public class MacImageContext : ImageContext
             image = new NSImage(path);
         }
         CheckReps(path, image);
-        return new MacImage(this, image)
-        {
-            OriginalFileFormat = GetFileFormatFromExtension(path, true)
-        };
+        return new MacImage(this, image);
     }
 
-    public override IMemoryImage Load(Stream stream)
+    protected override IMemoryImage LoadCore(Stream stream, ImageFileFormat format)
     {
-        if (stream.CanSeek)
-        {
-            stream.Seek(0, SeekOrigin.Begin);
-        }
         lock (ConstructorLock)
         {
             var image = new NSImage(NSData.FromStream(stream) ?? throw new ArgumentException(nameof(stream)));
-            return new MacImage(this, image)
-            {
-                OriginalFileFormat = GetFileFormatFromFirstBytes(stream)
-            };
+            return new MacImage(this, image);
         }
     }
 
-    public override IEnumerable<IMemoryImage> LoadFrames(Stream stream, out int count)
+    protected override IEnumerable<IMemoryImage> LoadFramesCore(Stream stream, ImageFileFormat format, out int count)
     {
         NSImage image;
         lock (ConstructorLock)
@@ -60,10 +49,10 @@ public class MacImageContext : ImageContext
             image = new NSImage(NSData.FromStream(stream) ?? throw new ArgumentException(nameof(stream)));
         }
         count = image.Representations().Length;
-        return SplitFrames(image, GetFileFormatFromFirstBytes(stream));
+        return SplitFrames(image);
     }
 
-    public override IEnumerable<IMemoryImage> LoadFrames(string path, out int count)
+    protected override IEnumerable<IMemoryImage> LoadFramesCore(string path, ImageFileFormat format, out int count)
     {
         using var readLock = new FileStream(path, FileMode.Open, FileAccess.Read);
         NSImage image;
@@ -73,12 +62,12 @@ public class MacImageContext : ImageContext
         }
         CheckReps(path, image);
         count = image.Representations().Length;
-        return SplitFrames(image, GetFileFormatFromExtension(path, true));
+        return SplitFrames(image);
     }
 
     public override ITiffWriter TiffWriter => throw new NotImplementedException();
 
-    private IEnumerable<IMemoryImage> SplitFrames(NSImage image, ImageFileFormat fileFormat)
+    private IEnumerable<IMemoryImage> SplitFrames(NSImage image)
     {
         foreach (var rep in image.Representations())
         {
@@ -88,10 +77,7 @@ public class MacImageContext : ImageContext
                 frame = new NSImage(rep.Size);
             }
             frame.AddRepresentation(rep);
-            yield return new MacImage(this, frame)
-            {
-                OriginalFileFormat = fileFormat
-            };
+            yield return new MacImage(this, frame);
         }
     }
 
@@ -109,7 +95,6 @@ public class MacImageContext : ImageContext
 
     public override IMemoryImage Create(int width, int height, ImagePixelFormat pixelFormat)
     {
-        // TODO: Can we support 1bpp?
         lock (ConstructorLock)
         {
             var rep = pixelFormat switch

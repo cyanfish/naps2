@@ -19,6 +19,13 @@ public static class ImageExtensions
         return image.ImageContext.PerformAllTransforms(image, transforms);
     }
 
+    public static void UpdateLogicalPixelFormat(this IMemoryImage image)
+    {
+        var op = new LogicalPixelFormatOp();
+        op.Perform(image);
+        image.LogicalPixelFormat = op.LogicalPixelFormat;
+    }
+
     /// <summary>
     /// Copies the content of this image to the destination image. It does not need to be the same pixel format, but if it's different,
     /// there may be some loss of information (e.g. when converting color to gray or black/white).
@@ -30,6 +37,19 @@ public static class ImageExtensions
         new CopyBitwiseImageOp().Perform(source, destination);
     }
 
+    // TODO: Use this to implement Clone/SafeClone in more places. Also make "Clone" be safe by default, and optionally have UnsafeClone be a thing.
+    // TODO: Actually specifically, maybe we can make an IMemoryImage proxy that doesn't dispose the original, and on lock with Write creates an actual copy, and use that instead of UnsafeClone?
+    // TODO: Though we'd need to be careful as transforms and maybe other spots make assumptions that the image type matches the image context type.
+    /// <summary>
+    /// Creates a new image with the same content, dimensions, and resolution as this image.
+    /// </summary>
+    /// <param name="source"></param>
+    /// <returns></returns>
+    public static IMemoryImage Copy(this IMemoryImage source)
+    {
+        return source.CopyWithPixelFormat(source.PixelFormat);
+    }
+
     /// <summary>
     /// Creates a new image with the same content, dimensions, and resolution as this image, but possibly with a different pixel format.
     /// This can result in some loss of information (e.g. when converting color to gray or black/white).
@@ -39,8 +59,14 @@ public static class ImageExtensions
     /// <returns></returns>
     public static IMemoryImage CopyWithPixelFormat(this IMemoryImage source, ImagePixelFormat pixelFormat)
     {
+        if (pixelFormat == ImagePixelFormat.Unsupported) throw new ArgumentException();
         var newImage = source.CopyBlankWithPixelFormat(pixelFormat);
         new CopyBitwiseImageOp().Perform(source, newImage);
+        newImage.OriginalFileFormat = source.OriginalFileFormat;
+        if (source.LogicalPixelFormat < pixelFormat)
+        {
+            newImage.LogicalPixelFormat = source.LogicalPixelFormat;
+        }
         return newImage;
     }
 
@@ -62,6 +88,7 @@ public static class ImageExtensions
     /// <returns></returns>
     public static IMemoryImage CopyBlankWithPixelFormat(this IMemoryImage source, ImagePixelFormat pixelFormat)
     {
+        if (pixelFormat == ImagePixelFormat.Unsupported) throw new ArgumentException();
         var newImage = source.ImageContext.Create(source.Width, source.Height, pixelFormat);
         newImage.SetResolution(source.HorizontalResolution, source.VerticalResolution);
         return newImage;

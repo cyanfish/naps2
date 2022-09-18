@@ -12,8 +12,6 @@ namespace NAPS2.Images.Gdi;
 #endif
 public class GdiImage : IMemoryImage
 {
-    private ImageFileFormat? _originalFileFormat;
-
     public GdiImage(ImageContext imageContext, Bitmap bitmap)
     {
         ImageContext = imageContext ?? throw new ArgumentNullException(nameof(imageContext));
@@ -23,6 +21,8 @@ public class GdiImage : IMemoryImage
         }
         FixedPixelFormat = GdiPixelFormatFixer.MaybeFixPixelFormat(ref bitmap);
         Bitmap = bitmap;
+        OriginalFileFormat = bitmap.RawFormat.AsImageFileFormat();
+        LogicalPixelFormat = PixelFormat;
     }
 
     public ImageContext ImageContext { get; }
@@ -52,13 +52,9 @@ public class GdiImage : IMemoryImage
     }
 
     // TODO: Consider propagating this during transforms (when it makes sense); then maybe we can remove the "encodeOnce" check
-    public ImageFileFormat OriginalFileFormat
-    {
-        get => _originalFileFormat ?? Bitmap.RawFormat.AsImageFileFormat();
-        set => _originalFileFormat = value;
-    }
+    public ImageFileFormat OriginalFileFormat { get; set; }
 
-    public ImagePixelFormat LogicalPixelFormat => PixelFormat;
+    public ImagePixelFormat LogicalPixelFormat { get; set; }
 
     public void Save(string path, ImageFileFormat imageFormat = ImageFileFormat.Unspecified, int quality = -1)
     {
@@ -106,8 +102,9 @@ public class GdiImage : IMemoryImage
     public IMemoryImage Clone()
     {
         var newImage = new GdiImage(ImageContext, (Bitmap) Bitmap.Clone());
-        // TODO: We want to make original file format more consistent when copying around and transforming images 
-        newImage._originalFileFormat = _originalFileFormat;
+        // TODO: We want to make these more consistent when copying around and transforming images
+        newImage.OriginalFileFormat = OriginalFileFormat;
+        newImage.LogicalPixelFormat = LogicalPixelFormat;
         return newImage;
     }
 
@@ -129,6 +126,7 @@ public class GdiImage : IMemoryImage
 
         var newImage = new GdiImage(ImageContext, newBitmap);
         newImage.OriginalFileFormat = OriginalFileFormat;
+        newImage.LogicalPixelFormat = LogicalPixelFormat;
         newImage.SetResolution(HorizontalResolution, VerticalResolution);
         return newImage;
     }

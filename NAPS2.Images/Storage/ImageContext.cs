@@ -7,7 +7,7 @@ public abstract class ImageContext
 {
     private readonly IPdfRenderer? _pdfRenderer;
 
-    // TODO: Any better place to put this?
+    // TODO: Can these be made private?
     public static ImageFileFormat GetFileFormatFromExtension(string path, bool allowUnspecified = false)
     {
         return Path.GetExtension(path).ToLowerInvariant() switch
@@ -123,36 +123,65 @@ public abstract class ImageContext
 
     public Type ImageType { get; }
 
+    // TODO: Implement these 4 load methods here, calling protected abstract internal methods.
+    // TODO: That will let us implement common behavior (reading file formats, setting originalfileformat/logicalpixelformat) consistently.
     /// <summary>
     /// Loads an image from the given file path.
     /// </summary>
     /// <param name="path">The image path.</param>
     /// <returns></returns>
-    public abstract IMemoryImage Load(string path);
+    public IMemoryImage Load(string path)
+    {
+        var format = GetFileFormatFromExtension(path, true);
+        var image = LoadCore(path, format);
+        if (image.OriginalFileFormat == ImageFileFormat.Unspecified)
+        {
+            image.OriginalFileFormat = format;
+        }
+        image.UpdateLogicalPixelFormat();
+        return image;
+    }
 
-    // TODO: The original method had an extension/fileformat. Is that relevant?
-    // Old doc: A file extension hinting at the image format. When possible, the contents of the stream should be used to definitively determine the image format.
+    protected abstract IMemoryImage LoadCore(string path, ImageFileFormat format);
+
     /// <summary>
     /// Decodes an image from the given stream.
     /// </summary>
     /// <param name="stream">The image data, in a common format (JPEG, PNG, etc).</param>
     /// <returns></returns>
-    public abstract IMemoryImage Load(Stream stream);
+    public IMemoryImage Load(Stream stream)
+    {
+        var format = GetFileFormatFromFirstBytes(stream);
+        var image = LoadCore(stream, format);
+        if (image.OriginalFileFormat == ImageFileFormat.Unspecified)
+        {
+            image.OriginalFileFormat = format;
+        }
+        image.UpdateLogicalPixelFormat();
+        return image;
+    }
 
-    // TODO: Document
+    protected abstract IMemoryImage LoadCore(Stream stream, ImageFileFormat format);
+
     public IMemoryImage Load(byte[] bytes)
     {
         return Load(new MemoryStream(bytes));
     }
 
-    // TODO: The original doc said that only the currently enumerated image is guaranteed to be valid. Is this still true?
+    // TODO: The original doc said that only the currently enumerated image is guaranteed to be valid. I don't think this is true, but we should make a test.
     /// <summary>
     /// Loads an image that may have multiple frames (e.g. a TIFF file) from the given stream.
     /// </summary>
     /// <param name="stream">The image data, in a common format (JPEG, PNG, etc).</param>
     /// <param name="count">The number of returned images.</param>
     /// <returns></returns>
-    public abstract IEnumerable<IMemoryImage> LoadFrames(Stream stream, out int count);
+    public IEnumerable<IMemoryImage> LoadFrames(Stream stream, out int count)
+    {
+        var format = GetFileFormatFromFirstBytes(stream);
+        return ProcessFrames(format, LoadFramesCore(stream, format, out count));
+    }
+
+    protected abstract IEnumerable<IMemoryImage> LoadFramesCore(Stream stream, ImageFileFormat format, out int count);
 
     /// <summary>
     /// Loads an image that may have multiple frames (e.g. a TIFF file) from the given file path.
@@ -160,7 +189,26 @@ public abstract class ImageContext
     /// <param name="path">The image path.</param>
     /// <param name="count">The number of returned images.</param>
     /// <returns></returns>
-    public abstract IEnumerable<IMemoryImage> LoadFrames(string path, out int count);
+    public IEnumerable<IMemoryImage> LoadFrames(string path, out int count)
+    {
+        var format = GetFileFormatFromExtension(path, true);
+        return ProcessFrames(format, LoadFramesCore(path, format, out count));
+    }
+
+    protected abstract IEnumerable<IMemoryImage> LoadFramesCore(string stream, ImageFileFormat format, out int count);
+
+    private IEnumerable<IMemoryImage> ProcessFrames(ImageFileFormat format, IEnumerable<IMemoryImage> frames)
+    {
+        foreach (var image in frames)
+        {
+            if (image.OriginalFileFormat == ImageFileFormat.Unspecified)
+            {
+                image.OriginalFileFormat = format;
+            }
+            image.UpdateLogicalPixelFormat();
+            yield return image;
+        }
+    }
 
     public abstract ITiffWriter TiffWriter { get; }
 

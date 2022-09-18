@@ -43,6 +43,7 @@ public class MacImage : IMemoryImage
             // See https://stackoverflow.com/questions/52675655/how-to-keep-nsbitmapimagerep-from-creating-lots-of-intermediate-cgimages
             throw new Exception("Unexpected image representation");
         }
+        LogicalPixelFormat = PixelFormat;
     }
 
     public ImageContext ImageContext { get; }
@@ -98,7 +99,7 @@ public class MacImage : IMemoryImage
 
     public ImageFileFormat OriginalFileFormat { get; set; }
 
-    public ImagePixelFormat LogicalPixelFormat => PixelFormat;
+    public ImagePixelFormat LogicalPixelFormat { get; set; }
 
     public NSImage Image => NsImage;
 
@@ -152,6 +153,8 @@ public class MacImage : IMemoryImage
 
     public IMemoryImage Clone()
     {
+        // TODO: Try and standardize clone/safeclone logic more (e.g. copy by default)
+        // TODO: Can we use an extension method?
         lock (MacImageContext.ConstructorLock)
         {
             if (PixelFormat == ImagePixelFormat.BW1)

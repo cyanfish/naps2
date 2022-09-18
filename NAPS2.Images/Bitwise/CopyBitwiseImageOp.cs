@@ -59,6 +59,7 @@ public class CopyBitwiseImageOp : BinaryBitwiseImageOp
         }
     }
 
+    // TODO: Consider providing a mechanism for bitwise ops to backflow LogicalPixelFormat to input images
     protected override void PerformCore(BitwiseImageData src, BitwiseImageData dst, int partStart, int partEnd)
     {
         if (src.BitLayout == dst.BitLayout &&
