@@ -115,6 +115,7 @@ internal class RemotePostProcessor : IRemotePostProcessor
             }
         }
 
+        scaled.UpdateLogicalPixelFormat();
         return scaled;
     }
 
