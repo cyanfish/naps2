@@ -153,15 +153,13 @@ public class MacImage : IMemoryImage
 
     public IMemoryImage Clone()
     {
-        // TODO: Try and standardize clone/safeclone logic more (e.g. copy by default)
-        // TODO: Can we use an extension method?
         lock (MacImageContext.ConstructorLock)
         {
             if (PixelFormat == ImagePixelFormat.BW1)
             {
                 // TODO: Trying to copy the NSImage seems to fail specifically for black and white images.
                 // I'm not sure why.
-                return this.CopyWithPixelFormat(PixelFormat);
+                return this.Copy();
             }
 
 #if MONOMAC
@@ -174,10 +172,5 @@ public class MacImage : IMemoryImage
                 OriginalFileFormat = OriginalFileFormat
             };
         }
-    }
-
-    public IMemoryImage SafeClone()
-    {
-        return Clone();
     }
 }

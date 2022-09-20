@@ -123,7 +123,5 @@ public class GtkImage : IMemoryImage
         LogicalPixelFormat = LogicalPixelFormat
     };
 
-    public IMemoryImage SafeClone() => Clone();
-
     public void Dispose() => Pixbuf.Dispose();
 }

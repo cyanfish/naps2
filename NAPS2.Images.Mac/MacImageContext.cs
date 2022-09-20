@@ -20,18 +20,6 @@ public class MacImageContext : ImageContext
         return _imageTransformer.Apply(gdiImage, transform);
     }
 
-    protected override IMemoryImage LoadCore(string path, ImageFileFormat format)
-    {
-        using var readLock = new FileStream(path, FileMode.Open, FileAccess.Read);
-        NSImage image;
-        lock (ConstructorLock)
-        {
-            image = new NSImage(path);
-        }
-        CheckReps(path, image);
-        return new MacImage(this, image);
-    }
-
     protected override IMemoryImage LoadCore(Stream stream, ImageFileFormat format)
     {
         lock (ConstructorLock)
@@ -52,19 +40,6 @@ public class MacImageContext : ImageContext
         return SplitFrames(image);
     }
 
-    protected override IEnumerable<IMemoryImage> LoadFramesCore(string path, ImageFileFormat format, out int count)
-    {
-        using var readLock = new FileStream(path, FileMode.Open, FileAccess.Read);
-        NSImage image;
-        lock (ConstructorLock)
-        {
-            image = new NSImage(path);
-        }
-        CheckReps(path, image);
-        count = image.Representations().Length;
-        return SplitFrames(image);
-    }
-
     public override ITiffWriter TiffWriter => throw new NotImplementedException();
 
     private IEnumerable<IMemoryImage> SplitFrames(NSImage image)
@@ -78,18 +53,6 @@ public class MacImageContext : ImageContext
             }
             frame.AddRepresentation(rep);
             yield return new MacImage(this, frame);
-        }
-    }
-
-    private static void CheckReps(string path, NSImage image)
-    {
-        if (image.Representations() == null)
-        {
-            if (!File.Exists(path))
-            {
-                throw new FileNotFoundException($"Could not find image file '{path}'.");
-            }
-            throw new IOException($"Error reading image file '{path}'.");
         }
     }
 

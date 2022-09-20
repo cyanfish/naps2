@@ -95,7 +95,7 @@ public class ScanningContext : IDisposable
         switch (storage)
         {
             case IMemoryImage image:
-                return image.SafeClone();
+                return image.Clone();
             case ImageFileStorage fileStorage:
                 return ImageContext.Load(fileStorage.FullPath);
             case ImageMemoryStorage memoryStorage:

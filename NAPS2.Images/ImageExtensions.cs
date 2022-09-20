@@ -37,9 +37,6 @@ public static class ImageExtensions
         new CopyBitwiseImageOp().Perform(source, destination);
     }
 
-    // TODO: Use this to implement Clone/SafeClone in more places. Also make "Clone" be safe by default, and optionally have UnsafeClone be a thing.
-    // TODO: Actually specifically, maybe we can make an IMemoryImage proxy that doesn't dispose the original, and on lock with Write creates an actual copy, and use that instead of UnsafeClone?
-    // TODO: Though we'd need to be careful as transforms and maybe other spots make assumptions that the image type matches the image context type.
     /// <summary>
     /// Creates a new image with the same content, dimensions, and resolution as this image.
     /// </summary>

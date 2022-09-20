@@ -6,7 +6,7 @@ namespace NAPS2.Sdk.Tests.Images;
 
 public class LoadSaveTests : ContextualTests
 {
-    // TODO: Add tests for error/edge cases (e.g. invalid files, mismatched extensions/format (?), unicode file names)
+    // TODO: Add tests for error/edge cases (e.g. invalid files, unicode file names)
 
     [Theory]
     [MemberData(nameof(TestCases))]
@@ -52,7 +52,7 @@ public class LoadSaveTests : ContextualTests
     [Theory]
     [MemberData(nameof(TestCases))]
     public void LoadFramesFromStream(ImageFileFormat format, string ext, string resource, string[] compare,
-            ImagePixelFormat[] logicalPixelFormats, bool ignoreRes)
+        ImagePixelFormat[] logicalPixelFormats, bool ignoreRes)
     {
         var stream = new MemoryStream(GetResource(resource));
         var images = ImageContext.LoadFrames(stream, out var count).ToArray();
@@ -92,6 +92,27 @@ public class LoadSaveTests : ContextualTests
         Assert.Equal(format, image2.OriginalFileFormat);
         Assert.Equal(logicalPixelFormats[0], image2.LogicalPixelFormat);
         ImageAsserts.Similar(GetResource(compare[0]), image2, ignoreResolution: ignoreRes);
+    }
+
+    [Fact]
+    public void LoadFromWrongExtension()
+    {
+        // Actually a jpeg
+        var path = CopyResourceToFile(ImageResources.color_image, "image.png");
+        var image = ImageContext.Load(path);
+        Assert.Equal(ImageFileFormat.Jpeg, image.OriginalFileFormat);
+        ImageAsserts.Similar(ImageResources.color_image, image);
+    }
+
+    [Fact]
+    public void LoadFramesFromWrongExtension()
+    {
+        // Actually a jpeg
+        var path = CopyResourceToFile(ImageResources.color_image, "image.tiff");
+        var images = ImageContext.LoadFrames(path, out _).ToList();
+        Assert.Single(images);
+        Assert.Equal(ImageFileFormat.Jpeg, images[0].OriginalFileFormat);
+        ImageAsserts.Similar(ImageResources.color_image, images[0]);
     }
 
     private static byte[] GetResource(string resource) =>

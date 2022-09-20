@@ -7,8 +7,7 @@ public abstract class ImageContext
 {
     private readonly IPdfRenderer? _pdfRenderer;
 
-    // TODO: Can these be made private?
-    public static ImageFileFormat GetFileFormatFromExtension(string path, bool allowUnspecified = false)
+    public static ImageFileFormat GetFileFormatFromExtension(string path)
     {
         return Path.GetExtension(path).ToLowerInvariant() switch
         {
@@ -16,13 +15,11 @@ public abstract class ImageContext
             ".bmp" => ImageFileFormat.Bmp,
             ".jpg" or ".jpeg" => ImageFileFormat.Jpeg,
             ".tif" or ".tiff" => ImageFileFormat.Tiff,
-            _ => allowUnspecified
-                ? ImageFileFormat.Unspecified
-                : throw new ArgumentException($"Could not infer file format from extension: {path}")
+            _ => throw new ArgumentException($"Could not infer file format from extension: {path}")
         };
     }
 
-    public static ImageFileFormat GetFileFormatFromFirstBytes(Stream stream)
+    private static ImageFileFormat GetFileFormatFromFirstBytes(Stream stream)
     {
         if (!stream.CanSeek)
         {
@@ -57,8 +54,6 @@ public abstract class ImageContext
         ImageType = imageType;
         _pdfRenderer = pdfRenderer;
     }
-
-    protected bool LoadFromFileKeepsLock { get; init; }
 
     // TODO: Add NotNullWhen attribute?
     private bool MaybeRenderPdf(ImageFileStorage fileStorage, out IMemoryImage? renderedPdf)
@@ -132,17 +127,9 @@ public abstract class ImageContext
     /// <returns></returns>
     public IMemoryImage Load(string path)
     {
-        var format = GetFileFormatFromExtension(path, true);
-        var image = LoadCore(path, format);
-        if (image.OriginalFileFormat == ImageFileFormat.Unspecified)
-        {
-            image.OriginalFileFormat = format;
-        }
-        image.UpdateLogicalPixelFormat();
-        return image;
+        using var stream = File.OpenRead(path);
+        return Load(stream);
     }
-
-    protected abstract IMemoryImage LoadCore(string path, ImageFileFormat format);
 
     /// <summary>
     /// Decodes an image from the given stream.
@@ -191,11 +178,9 @@ public abstract class ImageContext
     /// <returns></returns>
     public IEnumerable<IMemoryImage> LoadFrames(string path, out int count)
     {
-        var format = GetFileFormatFromExtension(path, true);
-        return ProcessFrames(format, LoadFramesCore(path, format, out count));
+        using var stream = File.OpenRead(path);
+        return LoadFrames(stream, out count);
     }
-
-    protected abstract IEnumerable<IMemoryImage> LoadFramesCore(string stream, ImageFileFormat format, out int count);
 
     private IEnumerable<IMemoryImage> ProcessFrames(ImageFileFormat format, IEnumerable<IMemoryImage> frames)
     {
@@ -226,16 +211,6 @@ public abstract class ImageContext
                 if (MaybeRenderPdf(fileStorage, out var renderedPdf))
                 {
                     return renderedPdf!;
-                }
-                if (LoadFromFileKeepsLock)
-                {
-                    // Rather than creating a bitmap from the file directly, instead we read it into memory first.
-                    // This ensures we don't accidentally keep a lock on the storage file, which would cause an error if we
-                    // try to delete it before the bitmap is disposed.
-                    // This is less efficient in the case where the bitmap is guaranteed to be disposed quickly, but for now
-                    // that seems like a reasonable tradeoff to avoid a whole class of hard-to-diagnose errors.
-                    var stream = new MemoryStream(File.ReadAllBytes(fileStorage.FullPath));
-                    return Load(stream);
                 }
                 return Load(fileStorage.FullPath);
             case ImageMemoryStorage memoryStorage:

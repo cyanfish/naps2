@@ -19,12 +19,6 @@ public class GtkImageContext : ImageContext
         return _imageTransformer.Apply(gdiImage, transform);
     }
 
-    protected override IMemoryImage LoadCore(string path, ImageFileFormat format)
-    {
-        using var readStream = new FileStream(path, FileMode.Open, FileAccess.Read);
-        return new GtkImage(this, new Pixbuf(readStream));
-    }
-
     protected override IMemoryImage LoadCore(Stream stream, ImageFileFormat format)
     {
         return new GtkImage(this, new Pixbuf(stream));
@@ -38,16 +32,6 @@ public class GtkImageContext : ImageContext
         }
         count = 1;
         return new[] { LoadCore(stream, format) };
-    }
-
-    protected override IEnumerable<IMemoryImage> LoadFramesCore(string path, ImageFileFormat format, out int count)
-    {
-        if (format == ImageFileFormat.Tiff)
-        {
-            return _tiffIo.LoadTiff(path, out count);
-        }
-        count = 1;
-        return new[] { LoadCore(path, format) };
     }
 
     public override ITiffWriter TiffWriter => _tiffIo;

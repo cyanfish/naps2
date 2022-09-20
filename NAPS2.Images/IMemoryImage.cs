@@ -88,11 +88,4 @@ public interface IMemoryImage : IImageStorage
     /// </summary>
     /// <returns>The copy.</returns>
     IMemoryImage Clone();
-
-    /// <summary>
-    /// Creates a copy of the image that is fully independent of the original image (i.e. doesn't share the same source
-    /// stream).
-    /// </summary>
-    /// <returns>The copy.</returns>
-    IMemoryImage SafeClone();
 }

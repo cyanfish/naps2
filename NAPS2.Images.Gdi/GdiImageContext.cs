@@ -17,7 +17,6 @@ public class GdiImageContext : ImageContext
     public GdiImageContext(IPdfRenderer? pdfRenderer) : base(typeof(GdiImage), pdfRenderer)
     {
         _imageTransformer = new GdiImageTransformer(this);
-        LoadFromFileKeepsLock = true;
     }
 
     public override IMemoryImage PerformTransform(IMemoryImage image, Transform transform)
@@ -26,44 +25,31 @@ public class GdiImageContext : ImageContext
         return _imageTransformer.Apply(gdiImage, transform);
     }
 
-    protected override IMemoryImage LoadCore(string path, ImageFileFormat format)
-    {
-        return new GdiImage(this, LoadBitmapWithExceptionHandling(path));
-    }
-
     protected override IMemoryImage LoadCore(Stream stream, ImageFileFormat format)
     {
+        stream = EnsureMemoryStream(stream);
         return new GdiImage(this, new Bitmap(stream));
     }
 
     protected override IEnumerable<IMemoryImage> LoadFramesCore(Stream stream, ImageFileFormat format, out int count)
     {
+        stream = EnsureMemoryStream(stream);
         var bitmap = new Bitmap(stream);
         count = bitmap.GetFrameCount(FrameDimension.Page);
         return EnumerateFrames(bitmap, count);
     }
 
-    protected override IEnumerable<IMemoryImage> LoadFramesCore(string path, ImageFileFormat format, out int count)
+    private static Stream EnsureMemoryStream(Stream stream)
     {
-        var bitmap = LoadBitmapWithExceptionHandling(path);
-        count = bitmap.GetFrameCount(FrameDimension.Page);
-        return EnumerateFrames(bitmap, count);
-    }
-
-    private static Bitmap LoadBitmapWithExceptionHandling(string path)
-    {
-        try
+        // Loading a bitmap directly from a file keeps a lock on the file, which we don't want.
+        // Instead we can copy it to an in-memory stream first.
+        if (stream is not MemoryStream)
         {
-            return new Bitmap(path);
+            var memoryStream = new MemoryStream();
+            stream.CopyTo(memoryStream);
+            stream = memoryStream;
         }
-        catch (ArgumentException)
-        {
-            if (!File.Exists(path))
-            {
-                throw new FileNotFoundException($"Could not find image file '{path}'.");
-            }
-            throw new IOException($"Error reading image file '{path}'.");
-        }
+        return stream;
     }
 
     private IEnumerable<IMemoryImage> EnumerateFrames(Bitmap bitmap, int count)
