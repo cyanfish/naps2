@@ -30,15 +30,20 @@ public class MemoryImageTests : ContextualTests
     public void SaveWithQuality()
     {
         var image = LoadImage(ImageResources.color_image);
-        var path = Path.Combine(FolderPath, "test.jpg");
+        var highQualityPath = Path.Combine(FolderPath, "highq.jpg");
+        var lowQualityPath = Path.Combine(FolderPath, "lowq.jpg");
         
-        image.Save(path, ImageFileFormat.Jpeg, 25);
+        image.Save(highQualityPath, ImageFileFormat.Jpeg, 75);
+        image.Save(lowQualityPath, ImageFileFormat.Jpeg, 25);
 
-        var loaded = TestImageContextFactory.Get().Load(path);
+        var highQuality = TestImageContextFactory.Get().Load(highQualityPath);
+        var lowQuality = TestImageContextFactory.Get().Load(lowQualityPath);
+
+        ImageAsserts.Similar(ImageResources.color_image, highQuality);
         // Rather than comparing to a reference image (which doesn't work consistently cross-platform), we just assert
         // that we're a little bit off from the original image. i.e. that quality does *something*
-        ImageAsserts.NotSimilar(ImageResources.color_image, loaded);
-        ImageAsserts.Similar(ImageResources.color_image, loaded, 5.0);
+        ImageAsserts.NotSimilar(ImageResources.color_image, lowQuality);
+        ImageAsserts.Similar(ImageResources.color_image, lowQuality, 5.0);
     }
 
     [Fact]
@@ -58,16 +63,20 @@ public class MemoryImageTests : ContextualTests
     public void SaveWithQualityToStream()
     {
         var image = LoadImage(ImageResources.color_image);
-        var path = Path.Combine(FolderPath, "test.jpg");
-        
-        using var stream = new FileStream(path, FileMode.CreateNew);
-        image.Save(stream, ImageFileFormat.Jpeg, 25);
+        var highQualityStream = new MemoryStream();
+        var lowQualityStream = new MemoryStream();
 
-        var loaded = TestImageContextFactory.Get().Load(stream);
+        image.Save(highQualityStream, ImageFileFormat.Jpeg, 75);
+        image.Save(lowQualityStream, ImageFileFormat.Jpeg, 25);
+
+        var highQuality = TestImageContextFactory.Get().Load(highQualityStream);
+        var lowQuality = TestImageContextFactory.Get().Load(lowQualityStream);
+
+        ImageAsserts.Similar(ImageResources.color_image, highQuality);
         // Rather than comparing to a reference image (which doesn't work consistently cross-platform), we just assert
         // that we're a little bit off from the original image. i.e. that quality does *something*
-        ImageAsserts.NotSimilar(ImageResources.color_image, loaded);
-        ImageAsserts.Similar(ImageResources.color_image, loaded, 5.0);
+        ImageAsserts.NotSimilar(ImageResources.color_image, lowQuality);
+        ImageAsserts.Similar(ImageResources.color_image, lowQuality, 5.0);
     }
 
     [Fact]

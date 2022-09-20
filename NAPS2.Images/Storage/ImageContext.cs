@@ -41,8 +41,11 @@ public abstract class ImageContext
         {
             return ImageFileFormat.Bmp;
         }
-        if (firstBytes[0] is 0x4D or 0x49 && firstBytes[1] is 0x4D or 0x49 && firstBytes[2] == 0x2A &&
-            firstBytes[3] == 0x00)
+        if (firstBytes[0] == 0x49 && firstBytes[1] == 0x49 && firstBytes[2] == 0x2A && firstBytes[3] == 0x00)
+        {
+            return ImageFileFormat.Tiff;
+        }
+        if (firstBytes[0] == 0x4D && firstBytes[1] == 0x4D && firstBytes[2] == 0x00 && firstBytes[3] == 0x2A)
         {
             return ImageFileFormat.Tiff;
         }

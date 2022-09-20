@@ -55,7 +55,7 @@ public class LogicalPixelFormatOp : UnaryBitwiseImageOp
                     // TODO: Uh oh. Big problem in copy, as well as other places: when copying to rgba, the alpha should be set to 255.
                     if (checkOpacity)
                     {
-                        var a = *(pixel + data.bOff);
+                        var a = *(pixel + data.aOff);
                         if (a != 255)
                         {
                             isOpaque = false;

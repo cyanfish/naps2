@@ -138,16 +138,14 @@ public class MacImage : IMemoryImage
                         NSBitmapImageRep.CompressionFactor);
                 return _imageRep.RepresentationUsingTypeProperties(NSBitmapImageFileType.Jpeg, props);
             }
-            if (imageFormat == ImageFileFormat.Png)
+            var fileType = imageFormat switch
             {
-                return _imageRep.RepresentationUsingTypeProperties(NSBitmapImageFileType.Png, null);
-            }
-            if (imageFormat == ImageFileFormat.Bmp)
-            {
-                return _imageRep.RepresentationUsingTypeProperties(NSBitmapImageFileType.Bmp, null);
-            }
-            // TODO: Do we need/want to handle tiff saving?
-            throw new InvalidOperationException("Unsupported image format");
+                ImageFileFormat.Png => NSBitmapImageFileType.Png,
+                ImageFileFormat.Bmp => NSBitmapImageFileType.Bmp,
+                ImageFileFormat.Tiff => NSBitmapImageFileType.Tiff,
+                _ => throw new InvalidOperationException("Unsupported image format")
+            };
+            return _imageRep.RepresentationUsingTypeProperties(fileType, null);
         }
     }
 
