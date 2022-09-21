@@ -2,6 +2,10 @@ namespace NAPS2.Images.Bitwise;
 
 public class BitwiseImageOp
 {
+    public const int R_MULT = 299;
+    public const int G_MULT = 587;
+    public const int B_MULT = 114;
+
     protected int DefaultPartitionCount { get; } = Math.Max(Math.Min(Environment.ProcessorCount / 2, 4), 1);
     
     protected unsafe void ValidateConsistency(BitwiseImageData data)

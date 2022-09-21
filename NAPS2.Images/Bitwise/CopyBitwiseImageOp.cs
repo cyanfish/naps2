@@ -3,10 +3,6 @@ namespace NAPS2.Images.Bitwise;
 // TODO: Need to double check callers set resolution when needed
 public class CopyBitwiseImageOp : BinaryBitwiseImageOp
 {
-    private const int R_MULT = 299;
-    private const int G_MULT = 587;
-    private const int B_MULT = 114;
-
     // TODO: Consider requiring an explicit DiscardAlpha parameter
 
     public int SourceXOffset { get; set; }

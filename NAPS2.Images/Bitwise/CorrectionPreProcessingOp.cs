@@ -3,10 +3,6 @@ namespace NAPS2.Images.Bitwise;
 // TODO: experimental
 public class CorrectionPreProcessingOp : UnaryBitwiseImageOp
 {
-    private const int R_MULT = 299;
-    private const int G_MULT = 587;
-    private const int B_MULT = 114;
-
     public CorrectionPreProcessingOp(CorrectionMode mode)
     {
         Mode = mode;

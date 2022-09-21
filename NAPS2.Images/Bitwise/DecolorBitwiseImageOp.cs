@@ -2,10 +2,6 @@ namespace NAPS2.Images.Bitwise;
 
 public class DecolorBitwiseImageOp : UnaryBitwiseImageOp
 {
-    private const int R_MULT = 299;
-    private const int G_MULT = 587;
-    private const int B_MULT = 114;
-
     private readonly bool _blackAndWhite;
 
     public DecolorBitwiseImageOp(bool blackAndWhite)
