@@ -98,21 +98,21 @@ public class LoadSaveTests : ContextualTests
     public void LoadFromWrongExtension()
     {
         // Actually a jpeg
-        var path = CopyResourceToFile(ImageResources.color_image, "image.png");
+        var path = CopyResourceToFile(ImageResources.dog, "image.png");
         var image = ImageContext.Load(path);
         Assert.Equal(ImageFileFormat.Jpeg, image.OriginalFileFormat);
-        ImageAsserts.Similar(ImageResources.color_image, image);
+        ImageAsserts.Similar(ImageResources.dog, image);
     }
 
     [Fact]
     public void LoadFramesFromWrongExtension()
     {
         // Actually a jpeg
-        var path = CopyResourceToFile(ImageResources.color_image, "image.tiff");
+        var path = CopyResourceToFile(ImageResources.dog, "image.tiff");
         var images = ImageContext.LoadFrames(path, out _).ToList();
         Assert.Single(images);
         Assert.Equal(ImageFileFormat.Jpeg, images[0].OriginalFileFormat);
-        ImageAsserts.Similar(ImageResources.color_image, images[0]);
+        ImageAsserts.Similar(ImageResources.dog, images[0]);
     }
 
     private static byte[] GetResource(string resource) =>
@@ -123,39 +123,39 @@ public class LoadSaveTests : ContextualTests
     {
         new object[]
         {
-            ImageFileFormat.Png, ".png", "color_image_alpha",
-            new[] { "color_image_alpha" }, new[] { ImagePixelFormat.ARGB32 }, false
+            ImageFileFormat.Png, ".png", "dog_alpha",
+            new[] { "dog_alpha" }, new[] { ImagePixelFormat.ARGB32 }, false
         },
         new object[]
         {
-            ImageFileFormat.Png, ".png", "color_image_png",
-            new[] { "color_image" }, new[] { ImagePixelFormat.RGB24 }, false
+            ImageFileFormat.Png, ".png", "dog_png",
+            new[] { "dog" }, new[] { ImagePixelFormat.RGB24 }, false
         },
         new object[]
         {
-            ImageFileFormat.Png, ".png", "color_image_bw",
-            new[] { "color_image_bw" }, new[] { ImagePixelFormat.BW1 }, false
+            ImageFileFormat.Png, ".png", "dog_bw",
+            new[] { "dog_bw" }, new[] { ImagePixelFormat.BW1 }, false
         },
         // TODO: Update resources for more pixel format tests
         new object[]
         {
-            ImageFileFormat.Jpeg, ".jpg", "color_image",
-            new[] { "color_image" }, new[] { ImagePixelFormat.RGB24 }, false
+            ImageFileFormat.Jpeg, ".jpg", "dog",
+            new[] { "dog" }, new[] { ImagePixelFormat.RGB24 }, false
         },
         new object[]
         {
-            ImageFileFormat.Jpeg, ".jpg", "color_image_bw_jpg",
-            new[] { "color_image_bw" }, new[] { ImagePixelFormat.Gray8 }, false
+            ImageFileFormat.Jpeg, ".jpg", "dog_bw_jpg",
+            new[] { "dog_bw" }, new[] { ImagePixelFormat.Gray8 }, false
         },
         new object[]
         {
-            ImageFileFormat.Bmp, ".bmp", "color_image_bw_invertpal",
-            new[] { "color_image_bw" }, new[] { ImagePixelFormat.BW1 }, true
+            ImageFileFormat.Bmp, ".bmp", "dog_bw_invertpal",
+            new[] { "dog_bw" }, new[] { ImagePixelFormat.BW1 }, true
         },
         new object[]
         {
-            ImageFileFormat.Tiff, ".tiff", "color_image_tiff",
-            new[] { "color_image", "color_image_h_p300", "stock_cat" },
+            ImageFileFormat.Tiff, ".tiff", "dog_tiff",
+            new[] { "dog", "dog_h_p300", "stock_cat" },
             new[] { ImagePixelFormat.RGB24, ImagePixelFormat.RGB24, ImagePixelFormat.RGB24 }, false
         },
     };

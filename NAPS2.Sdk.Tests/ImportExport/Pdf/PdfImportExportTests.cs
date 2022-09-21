@@ -42,7 +42,7 @@ public class PdfImportExportTests : ContextualTests
         var images = await _importer.Import(_importPath).ToList();
         Assert.Equal(2, images.Count);
 
-        var toInsert = ScanningContext.CreateProcessedImage(LoadImage(ImageResources.color_image));
+        var toInsert = ScanningContext.CreateProcessedImage(LoadImage(ImageResources.dog));
         var newImages = new List<ProcessedImage>
         {
             images[0],
@@ -51,7 +51,7 @@ public class PdfImportExportTests : ContextualTests
         };
         await _exporter.Export(_exportPath, newImages, new PdfExportParams());
 
-        PdfAsserts.AssertImages(_exportPath, PdfResources.word_p1, ImageResources.color_image, PdfResources.word_p2);
+        PdfAsserts.AssertImages(_exportPath, PdfResources.word_p1, ImageResources.dog, PdfResources.word_p2);
     }
 
     [Theory]

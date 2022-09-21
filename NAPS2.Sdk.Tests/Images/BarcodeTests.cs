@@ -40,7 +40,7 @@ public class BarcodeTests : ContextualTests
     [Fact]
     public void DetectNothing()
     {
-        var image = LoadImage(ImageResources.color_image);
+        var image = LoadImage(ImageResources.dog);
         var detection = BarcodeDetector.Detect(image, new BarcodeDetectionOptions
         {
             DetectBarcodes = true,

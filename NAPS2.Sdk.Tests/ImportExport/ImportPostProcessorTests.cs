@@ -17,7 +17,7 @@ public class ImportPostProcessorTests : ContextualTests
     [Fact]
     public void NoPostProcessing()
     {
-        using var image = ScanningContext.CreateProcessedImage(LoadImage(ImageResources.color_image));
+        using var image = ScanningContext.CreateProcessedImage(LoadImage(ImageResources.dog));
         using var image2 =
             _importPostProcessor.AddPostProcessingData(image, null, null, new BarcodeDetectionOptions(), false);
 
@@ -32,7 +32,7 @@ public class ImportPostProcessorTests : ContextualTests
     [Fact]
     public void DisposesOriginalImageWithNoPostProcessing()
     {
-        using var image = ScanningContext.CreateProcessedImage(LoadImage(ImageResources.color_image));
+        using var image = ScanningContext.CreateProcessedImage(LoadImage(ImageResources.dog));
         using var image2 =
             _importPostProcessor.AddPostProcessingData(image, null, null, new BarcodeDetectionOptions(), true);
 
@@ -44,7 +44,7 @@ public class ImportPostProcessorTests : ContextualTests
     [Fact]
     public void ThumbnailRendering()
     {
-        using var image = ScanningContext.CreateProcessedImage(LoadImage(ImageResources.color_image));
+        using var image = ScanningContext.CreateProcessedImage(LoadImage(ImageResources.dog));
         using var image2 =
             _importPostProcessor.AddPostProcessingData(image, null, 256, new BarcodeDetectionOptions(), false);
 
@@ -56,7 +56,7 @@ public class ImportPostProcessorTests : ContextualTests
 #if NET6_0_OR_GREATER
         Assert.Equal(256, actual.Width);
 #else
-        ImageAsserts.Similar(ImageResources.color_image_thumb_256, actual, ImageAsserts.XPLAT_RMSE_THRESHOLD,
+        ImageAsserts.Similar(ImageResources.dog_thumb_256, actual, ImageAsserts.XPLAT_RMSE_THRESHOLD,
             ignoreResolution: true);
 #endif
     }
@@ -64,7 +64,7 @@ public class ImportPostProcessorTests : ContextualTests
     [Fact]
     public void ThumbnailRenderingWithTransform()
     {
-        using var image = ScanningContext.CreateProcessedImage(LoadImage(ImageResources.color_image));
+        using var image = ScanningContext.CreateProcessedImage(LoadImage(ImageResources.dog));
         using var image2 = image.WithTransform(new BrightnessTransform(300));
         using var image3 =
             _importPostProcessor.AddPostProcessingData(image2, null, 256, new BarcodeDetectionOptions(), false);
@@ -80,7 +80,7 @@ public class ImportPostProcessorTests : ContextualTests
 #if NET6_0_OR_GREATER
         Assert.Equal(256, actual.Width);
 #else
-        ImageAsserts.Similar(ImageResources.color_image_b_p300_thumb_256, actual, ImageAsserts.XPLAT_RMSE_THRESHOLD,
+        ImageAsserts.Similar(ImageResources.dog_b_p300_thumb_256, actual, ImageAsserts.XPLAT_RMSE_THRESHOLD,
             ignoreResolution: true);
 #endif
     }
@@ -88,7 +88,7 @@ public class ImportPostProcessorTests : ContextualTests
     [Fact]
     public void ThumbnailRenderingWithPrerenderedImageAndDisposingOriginal()
     {
-        using var rendered = LoadImage(ImageResources.color_image);
+        using var rendered = LoadImage(ImageResources.dog);
         using var image = ScanningContext.CreateProcessedImage(rendered);
         using var image2 =
             _importPostProcessor.AddPostProcessingData(image, rendered, 256, new BarcodeDetectionOptions(), true);
@@ -101,7 +101,7 @@ public class ImportPostProcessorTests : ContextualTests
 #if NET6_0_OR_GREATER
         Assert.Equal(256, actual.Width);
 #else
-        ImageAsserts.Similar(ImageResources.color_image_thumb_256, actual, ImageAsserts.XPLAT_RMSE_THRESHOLD,
+        ImageAsserts.Similar(ImageResources.dog_thumb_256, actual, ImageAsserts.XPLAT_RMSE_THRESHOLD,
             ignoreResolution: true);
 #endif
         Assert.False(IsDisposed(rendered));

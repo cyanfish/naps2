@@ -27,14 +27,14 @@ public class GdiImageTests
     [PlatformFact(include: PlatformFlags.Windows)]
     public void LoadInvertedPaletteBlackAndWhiteImage()
     {
-        var bitmap = new Bitmap(new MemoryStream(ImageResources.color_image_bw_invertpal));
+        var bitmap = new Bitmap(new MemoryStream(ImageResources.dog_bw_invertpal));
 
         var image = new GdiImage(new GdiImageContext(), bitmap);
         Assert.True(image.FixedPixelFormat);
         Assert.Equal(ImagePixelFormat.BW1, image.PixelFormat);
         Assert.Equal(Color.Black.ToArgb(), image.Bitmap.Palette.Entries[0].ToArgb());
         Assert.Equal(Color.White.ToArgb(), image.Bitmap.Palette.Entries[1].ToArgb());
-        ImageAsserts.Similar(ImageResources.color_image_bw, image, ImageAsserts.NULL_RMSE_THRESHOLD);
+        ImageAsserts.Similar(ImageResources.dog_bw, image, ImageAsserts.NULL_RMSE_THRESHOLD);
     }
 
     [PlatformFact(include: PlatformFlags.Windows)]

@@ -9,7 +9,7 @@ public class CopyBitwiseImageOpTests : ContextualTests
     [Fact]
     public void DestChannel_ColorToColor()
     {
-        var original = LoadImage(ImageResources.color_image);
+        var original = LoadImage(ImageResources.dog);
 
         var destR = original.CopyBlank();
         var destB = original.CopyBlank();
@@ -33,7 +33,7 @@ public class CopyBitwiseImageOpTests : ContextualTests
     [Fact]
     public void DestChannel_GrayscaleToColor()
     {
-        var color  = LoadImage(ImageResources.color_image);
+        var color  = LoadImage(ImageResources.dog);
         var original = color.CopyWithPixelFormat(ImagePixelFormat.Gray8);
 
         var dest = color.CopyBlank();

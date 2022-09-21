@@ -97,7 +97,7 @@ public class RecoveryManagerTests : ContextualTests
         Assert.True(result);
 
         Assert.Equal(2, images.Count);
-        ImageAsserts.Similar(ImageResources.color_image, images[0]);
+        ImageAsserts.Similar(ImageResources.dog, images[0]);
 
         mockProgressCallback.Verify(callback => callback(0, 2));
         mockProgressCallback.Verify(callback => callback(1, 2));
@@ -154,7 +154,7 @@ public class RecoveryManagerTests : ContextualTests
         Assert.True(result);
 
         Assert.Single(images);
-        ImageAsserts.Similar(ImageResources.color_image, images[0]);
+        ImageAsserts.Similar(ImageResources.dog, images[0]);
 
         mockProgressCallback.Verify(callback => callback(0, 2));
         mockProgressCallback.Verify(callback => callback(1, 2));
@@ -178,6 +178,6 @@ public class RecoveryManagerTests : ContextualTests
 
     private ProcessedImage CreateRecoveryImage(ScanningContext recoveryContext)
     {
-        return recoveryContext.CreateProcessedImage(ImageContext.Load(ImageResources.color_image));
+        return recoveryContext.CreateProcessedImage(ImageContext.Load(ImageResources.dog));
     }
 }

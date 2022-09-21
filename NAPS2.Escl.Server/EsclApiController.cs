@@ -146,7 +146,7 @@ internal class EsclApiController : WebApiController
             Response.ContentType = "image/jpeg";
             Response.ContentEncoding = null;
             using var stream = Response.OutputStream;
-            var bytes = File.ReadAllBytes(@"C:\Devel\VS\NAPS2.Future\NAPS2.Sdk.Tests\Resources\color_image.jpg");
+            var bytes = File.ReadAllBytes(@"C:\Devel\VS\NAPS2.Future\NAPS2.Sdk.Tests\Resources\dog.jpg");
             stream.Write(bytes, 0, bytes.Length);
             jobState.Status = JobStatus.Completed;
             jobState.LastUpdated = Stopwatch.StartNew();

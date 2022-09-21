@@ -45,7 +45,7 @@ public class ImportAndSaveTests : AppiumTests
             PdfResources.word_p1,
             PdfResources.word_p2,
             PdfResources.word_patcht_p1,
-            ImageResources.color_image,
+            ImageResources.dog,
             ImageResources.ocr_test);
         PdfAsserts.AssertContainsTextOnce("ADVERTISEMENT.", path);
         PdfAsserts.AssertContainsTextOnce("Page one.", path);

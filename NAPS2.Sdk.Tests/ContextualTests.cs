@@ -34,7 +34,7 @@ public class ContextualTests : IDisposable
     public ProcessedImage CreateScannedImage()
     {
         // TODO: A different placeholder image here?
-        return ScanningContext.CreateProcessedImage(LoadImage(ImageResources.color_image));
+        return ScanningContext.CreateProcessedImage(LoadImage(ImageResources.dog));
     }
 
     public void SetUpOcr()

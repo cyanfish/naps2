@@ -45,7 +45,7 @@ public class ImageImporterTests : ContextualTests
     [Fact]
     public async Task ImportJpegImage()
     {
-        var filePath = CopyResourceToFile(ImageResources.color_image, "image.jpg");
+        var filePath = CopyResourceToFile(ImageResources.dog, "image.jpg");
 
         var source = _imageImporter.Import(filePath, new ImportParams(), (current, max) => { }, CancellationToken.None);
         var result = await source.ToList();
@@ -67,7 +67,7 @@ public class ImageImporterTests : ContextualTests
     [Fact]
     public async Task ImportTiffImage()
     {
-        var filePath = CopyResourceToFile(ImageResources.color_image_tiff, "image.tiff");
+        var filePath = CopyResourceToFile(ImageResources.dog_tiff, "image.tiff");
 
         var source = _imageImporter.Import(filePath, new ImportParams(), (current, max) => { }, CancellationToken.None);
         var result = await source.ToList();
@@ -76,7 +76,7 @@ public class ImageImporterTests : ContextualTests
         AssertUsesRecoveryStorage(result[0].Storage, "00001.jpg");
         Assert.False(result[0].Metadata.Lossless);
         Assert.Equal(BitDepth.Color, result[0].Metadata.BitDepth);
-        ImageAsserts.Similar(ImageResources.color_image, result[0]);
+        ImageAsserts.Similar(ImageResources.dog, result[0]);
 
         AssertUsesRecoveryStorage(result[2].Storage, "00003.jpg");
         Assert.False(result[2].Metadata.Lossless);
@@ -93,7 +93,7 @@ public class ImageImporterTests : ContextualTests
     [Fact]
     public async Task ImportWithThumbnailGeneration()
     {
-        var filePath = CopyResourceToFile(ImageResources.color_image, "image.jpg");
+        var filePath = CopyResourceToFile(ImageResources.dog, "image.jpg");
 
         var source = _imageImporter.Import(filePath, new ImportParams { ThumbnailSize = 256 }, (current, max) => { },
             CancellationToken.None);
@@ -107,7 +107,7 @@ public class ImageImporterTests : ContextualTests
     [Fact]
     public async Task SingleFrameProgress()
     {
-        var filePath = CopyResourceToFile(ImageResources.color_image, "image.jpg");
+        var filePath = CopyResourceToFile(ImageResources.dog, "image.jpg");
 
         var progressMock = new Mock<ProgressHandler>();
 
@@ -123,7 +123,7 @@ public class ImageImporterTests : ContextualTests
     [Fact]
     public async Task MultiFrameProgress()
     {
-        var filePath = CopyResourceToFile(ImageResources.color_image_tiff, "image.tiff");
+        var filePath = CopyResourceToFile(ImageResources.dog_tiff, "image.tiff");
 
         var progressMock = new Mock<ProgressHandler>();
         var source = _imageImporter.Import(filePath, new ImportParams(), progressMock.Object, CancellationToken.None);
@@ -146,7 +146,7 @@ public class ImageImporterTests : ContextualTests
     [Fact]
     public async Task SingleFrameCancellation()
     {
-        var filePath = CopyResourceToFile(ImageResources.color_image, "image.jpg");
+        var filePath = CopyResourceToFile(ImageResources.dog, "image.jpg");
 
         var cts = new CancellationTokenSource();
         var source = _imageImporter.Import(filePath, new ImportParams(), (current, max) => { }, cts.Token);
@@ -159,7 +159,7 @@ public class ImageImporterTests : ContextualTests
     [PlatformFact(exclude: PlatformFlags.Mac)]
     public async Task MultiFrameCancellation()
     {
-        var filePath = CopyResourceToFile(ImageResources.color_image_tiff, "image.tiff");
+        var filePath = CopyResourceToFile(ImageResources.dog_tiff, "image.tiff");
 
         var cts = new CancellationTokenSource();
         var source = _imageImporter.Import(filePath, new ImportParams(), (current, max) => { }, cts.Token);
@@ -197,7 +197,7 @@ public class ImageImporterTests : ContextualTests
     [Fact]
     public async Task ImportInUseFile()
     {
-        var filePath = CopyResourceToFile(ImageResources.color_image, "image.png");
+        var filePath = CopyResourceToFile(ImageResources.dog, "image.png");
         using var stream = File.OpenWrite(filePath);
         var source = _imageImporter.Import(filePath, new ImportParams(), (current, max) => { }, CancellationToken.None);
 

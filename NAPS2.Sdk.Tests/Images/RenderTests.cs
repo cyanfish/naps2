@@ -12,12 +12,12 @@ public class RenderTests : ContextualTests
     {
         config.Apply(this);
 
-        var image = LoadImage(ImageResources.color_image);
+        var image = LoadImage(ImageResources.dog);
         var processedImage = ScanningContext.CreateProcessedImage(image);
 
         var rendered = processedImage.Render();
 
-        ImageAsserts.Similar(ImageResources.color_image, rendered);
+        ImageAsserts.Similar(ImageResources.dog, rendered);
     }
     
     [Theory]
@@ -27,7 +27,7 @@ public class RenderTests : ContextualTests
         config.Apply(this);
 
         // TODO: Have an actual gray image to load
-        var image = LoadImage(ImageResources.color_image);
+        var image = LoadImage(ImageResources.dog);
         var grayImage = image.CopyWithPixelFormat(ImagePixelFormat.Gray8);
         var processedImage = ScanningContext.CreateProcessedImage(grayImage);
 
@@ -42,12 +42,12 @@ public class RenderTests : ContextualTests
     {
         config.Apply(this);
 
-        var image = LoadImage(ImageResources.color_image_bw);
+        var image = LoadImage(ImageResources.dog_bw);
         image = image.PerformTransform(new BlackWhiteTransform());
         var processedImage = ScanningContext.CreateProcessedImage(image);
 
         var rendered = processedImage.Render();
 
-        ImageAsserts.Similar(ImageResources.color_image_bw, rendered);
+        ImageAsserts.Similar(ImageResources.dog_bw, rendered);
     }
 }

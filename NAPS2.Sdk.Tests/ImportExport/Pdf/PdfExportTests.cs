@@ -20,11 +20,11 @@ public class PdfExporterTests : ContextualTests
         storageConfig.Apply(this);
 
         var filePath = Path.Combine(FolderPath, "test.pdf");
-        using var image = ScanningContext.CreateProcessedImage(LoadImage(ImageResources.color_image));
+        using var image = ScanningContext.CreateProcessedImage(LoadImage(ImageResources.dog));
 
         await _exporter.Export(filePath, new[] { image }, new PdfExportParams());
 
-        PdfAsserts.AssertImages(filePath, ImageResources.color_image);
+        PdfAsserts.AssertImages(filePath, ImageResources.dog);
         PdfAsserts.AssertImageFilter(filePath, 0, "DCTDecode");
     }
 
@@ -36,11 +36,11 @@ public class PdfExporterTests : ContextualTests
 
         var filePath = Path.Combine(FolderPath, "test.pdf");
         using var image = ScanningContext.CreateProcessedImage(
-            LoadImage(ImageResources.color_image_png), BitDepth.Color, true, -1);
+            LoadImage(ImageResources.dog_png), BitDepth.Color, true, -1);
 
         await _exporter.Export(filePath, new[] { image }, new PdfExportParams());
 
-        PdfAsserts.AssertImages(filePath, ImageResources.color_image);
+        PdfAsserts.AssertImages(filePath, ImageResources.dog);
         PdfAsserts.AssertImageFilter(filePath, 0, "FlateDecode");
     }
 
@@ -52,12 +52,12 @@ public class PdfExporterTests : ContextualTests
 
         var filePath = Path.Combine(FolderPath, "test.pdf");
         using var image = ScanningContext.CreateProcessedImage(
-            LoadImage(ImageResources.color_image_alpha), BitDepth.Color, false, -1);
+            LoadImage(ImageResources.dog_alpha), BitDepth.Color, false, -1);
 
         await _exporter.Export(filePath, new[] { image }, new PdfExportParams());
 
         // TODO: This assert is broken as pdfium rendering doesn't work for images with masks yet
-        // PdfAsserts.AssertImages(filePath, ImageResources.color_image_alpha);
+        // PdfAsserts.AssertImages(filePath, ImageResources.dog_alpha);
         PdfAsserts.AssertImageFilter(filePath, 0, "FlateDecode");
     }
 
@@ -69,12 +69,12 @@ public class PdfExporterTests : ContextualTests
 
         var filePath = Path.Combine(FolderPath, "test.pdf");
         using var image = ScanningContext.CreateProcessedImage(
-            LoadImage(ImageResources.color_image_mask), BitDepth.Color, false, -1);
+            LoadImage(ImageResources.dog_mask), BitDepth.Color, false, -1);
 
         await _exporter.Export(filePath, new[] { image }, new PdfExportParams());
 
         // TODO: This assert is broken as pdfium rendering doesn't work for images with masks yet
-        // PdfAsserts.AssertImages(filePath, ImageResources.color_image_alpha);
+        // PdfAsserts.AssertImages(filePath, ImageResources.dog_alpha);
         PdfAsserts.AssertImageFilter(filePath, 0, "FlateDecode");
     }
 
@@ -85,12 +85,12 @@ public class PdfExporterTests : ContextualTests
         storageConfig.Apply(this);
 
         var filePath = Path.Combine(FolderPath, "test.pdf");
-        var storageImage = LoadImage(ImageResources.color_image_bw);
+        var storageImage = LoadImage(ImageResources.dog_bw);
         using var image = ScanningContext.CreateProcessedImage(storageImage);
 
         await _exporter.Export(filePath, new[] { image }, new PdfExportParams());
 
-        PdfAsserts.AssertImages(filePath, ImageResources.color_image_bw);
+        PdfAsserts.AssertImages(filePath, ImageResources.dog_bw);
         PdfAsserts.AssertImageFilter(filePath, 0, "CCITTFaxDecode");
     }
 
@@ -101,12 +101,12 @@ public class PdfExporterTests : ContextualTests
         storageConfig.Apply(this);
 
         var filePath = Path.Combine(FolderPath, "test.pdf");
-        using var image = ScanningContext.CreateProcessedImage(LoadImage(ImageResources.color_image_bw_24bit),
+        using var image = ScanningContext.CreateProcessedImage(LoadImage(ImageResources.dog_bw_24bit),
             BitDepth.BlackAndWhite, true, -1);
 
         await _exporter.Export(filePath, new[] { image }, new PdfExportParams());
 
-        PdfAsserts.AssertImages(filePath, ImageResources.color_image_bw);
+        PdfAsserts.AssertImages(filePath, ImageResources.dog_bw);
         PdfAsserts.AssertImageFilter(filePath, 0, "CCITTFaxDecode");
     }
 
@@ -117,7 +117,7 @@ public class PdfExporterTests : ContextualTests
         storageConfig.Apply(this);
 
         var filePath = Path.Combine(FolderPath, "test.pdf");
-        using var image = ScanningContext.CreateProcessedImage(LoadImage(ImageResources.color_image));
+        using var image = ScanningContext.CreateProcessedImage(LoadImage(ImageResources.dog));
         var metadata = new PdfMetadata
         {
             Author = "author",
@@ -139,7 +139,7 @@ public class PdfExporterTests : ContextualTests
         storageConfig.Apply(this);
 
         var filePath = Path.Combine(FolderPath, "test.pdf");
-        using var image = ScanningContext.CreateProcessedImage(LoadImage(ImageResources.color_image));
+        using var image = ScanningContext.CreateProcessedImage(LoadImage(ImageResources.dog));
         var metadata = new PdfMetadata
         {
             Author = "מְחַבֵּר",
@@ -161,7 +161,7 @@ public class PdfExporterTests : ContextualTests
         storageConfig.Apply(this);
 
         var filePath = Path.Combine(FolderPath, "test.pdf");
-        using var image = ScanningContext.CreateProcessedImage(LoadImage(ImageResources.color_image));
+        using var image = ScanningContext.CreateProcessedImage(LoadImage(ImageResources.dog));
 
         await _exporter.Export(filePath, new[] { image }, new PdfExportParams
         {
@@ -183,7 +183,7 @@ public class PdfExporterTests : ContextualTests
         storageConfig.Apply(this);
 
         var filePath = Path.Combine(FolderPath, "test.pdf");
-        using var image = ScanningContext.CreateProcessedImage(LoadImage(ImageResources.color_image));
+        using var image = ScanningContext.CreateProcessedImage(LoadImage(ImageResources.dog));
         var metadata = new PdfMetadata
         {
             Author = "author",
@@ -214,7 +214,7 @@ public class PdfExporterTests : ContextualTests
         storageConfig.Apply(this);
 
         var filePath = Path.Combine(FolderPath, "test.pdf");
-        using var image = ScanningContext.CreateProcessedImage(LoadImage(ImageResources.color_image));
+        using var image = ScanningContext.CreateProcessedImage(LoadImage(ImageResources.dog));
         var metadata = new PdfMetadata
         {
             Author = "מְחַבֵּר",

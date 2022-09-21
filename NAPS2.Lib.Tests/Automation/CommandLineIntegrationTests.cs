@@ -14,13 +14,13 @@ namespace NAPS2.Lib.Tests.Automation;
 // TODO: Write tests for every option, or as many as possible
 public class CommandLineIntegrationTests : ContextualTests
 {
-    private static readonly byte[] Image1 = ImageResources.color_image;
-    private static readonly byte[] Image2 = ImageResources.color_image_h_n300;
-    private static readonly byte[] Image3 = ImageResources.color_image_h_p300;
-    private static readonly byte[] Image4 = ImageResources.color_image_s_n300;
-    private static readonly byte[] Image5 = ImageResources.color_image_s_p300;
+    private static readonly byte[] Image1 = ImageResources.dog;
+    private static readonly byte[] Image2 = ImageResources.dog_h_n300;
+    private static readonly byte[] Image3 = ImageResources.dog_h_p300;
+    private static readonly byte[] Image4 = ImageResources.dog_s_n300;
+    private static readonly byte[] Image5 = ImageResources.dog_s_p300;
     // TODO: Figure out why 1bit causes failures, I assume it's just a test issue of some kind but idk
-    private static readonly byte[] Image6 = ImageResources.color_image_bw_24bit;
+    private static readonly byte[] Image6 = ImageResources.dog_bw_24bit;
     private static readonly byte[] PatchT = ImageResources.patcht;
 
     private readonly AutomationHelper _automationHelper;

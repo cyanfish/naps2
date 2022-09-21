@@ -46,7 +46,7 @@ public class PdfImportTests : ContextualTests
 
         Assert.Single(images);
         storageConfig.AssertJpegStorage(images[0].Storage);
-        ImageAsserts.Similar(ImageResources.color_image, images[0].Render());
+        ImageAsserts.Similar(ImageResources.dog, images[0].Render());
     }
 
     [Theory]
@@ -60,7 +60,7 @@ public class PdfImportTests : ContextualTests
 
         Assert.Single(images);
         storageConfig.AssertPngStorage(images[0].Storage);
-        ImageAsserts.Similar(ImageResources.color_image, images[0].Render());
+        ImageAsserts.Similar(ImageResources.dog, images[0].Render());
     }
 
     [Theory]
@@ -74,7 +74,7 @@ public class PdfImportTests : ContextualTests
 
         Assert.Single(images);
         storageConfig.AssertPngStorage(images[0].Storage);
-        ImageAsserts.Similar(ImageResources.color_image_bw, images[0].Render());
+        ImageAsserts.Similar(ImageResources.dog_bw, images[0].Render());
     }
 
     [Theory]
@@ -87,7 +87,7 @@ public class PdfImportTests : ContextualTests
         var images = await _importer.Import(importPath, new ImportParams { Password = "hello" }).ToList();
 
         Assert.Single(images);
-        ImageAsserts.Similar(ImageResources.color_image, images[0].Render());
+        ImageAsserts.Similar(ImageResources.dog, images[0].Render());
     }
 
     [Theory]
@@ -105,7 +105,7 @@ public class PdfImportTests : ContextualTests
         var images = await importer.Import(importPath).ToList();
 
         Assert.Single(images);
-        ImageAsserts.Similar(ImageResources.color_image, images[0].Render());
+        ImageAsserts.Similar(ImageResources.dog, images[0].Render());
     }
 
     [Fact]

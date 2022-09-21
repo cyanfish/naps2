@@ -9,7 +9,7 @@ public class ProcessedImageTests : ContextualTests
     [Fact]
     public void Construct()
     {
-        var storage = LoadImage(ImageResources.color_image);
+        var storage = LoadImage(ImageResources.dog);
 
         var metadata1 = new ImageMetadata(BitDepth.Color, false);
         var postProcessingData1 = new PostProcessingData();

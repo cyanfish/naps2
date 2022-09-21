@@ -27,7 +27,7 @@ public class PdfiumPdfRendererTests : ContextualTests
         
         Assert.Single(images);
         // This also verifies that the renderer gets the actual image dpi (72)
-        ImageAsserts.Similar(ImageResources.color_image, images[0]);
+        ImageAsserts.Similar(ImageResources.dog, images[0]);
     }
 
     [Fact]

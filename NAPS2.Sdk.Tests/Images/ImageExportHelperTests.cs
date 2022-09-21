@@ -15,90 +15,90 @@ public class ImageExportHelperTests : ContextualTests
     [Fact]
     public void SaveSmallestFormat_BlackAndWhite()
     {
-        var bw = LoadImage(ImageResources.color_image_bw).PerformTransform(new BlackWhiteTransform());
+        var bw = LoadImage(ImageResources.dog_bw).PerformTransform(new BlackWhiteTransform());
         var path = Path.Combine(FolderPath, "test");
 
         var fullPath = _helper.SaveSmallestFormat(path, bw, BitDepth.BlackAndWhite, false, -1, out var format);
 
-        AssertPng(format, fullPath, ImageResources.color_image_bw);
+        AssertPng(format, fullPath, ImageResources.dog_bw);
     }
 
     [Fact]
     public void SaveSmallestFormat_BlackAndWhiteWithColorBitDepth()
     {
-        var bw = LoadImage(ImageResources.color_image_bw).PerformTransform(new BlackWhiteTransform());
+        var bw = LoadImage(ImageResources.dog_bw).PerformTransform(new BlackWhiteTransform());
         var path = Path.Combine(FolderPath, "test");
 
         var fullPath = _helper.SaveSmallestFormat(path, bw, BitDepth.Color, false, -1, out var format);
 
-        AssertPng(format, fullPath, ImageResources.color_image_bw);
+        AssertPng(format, fullPath, ImageResources.dog_bw);
     }
 
     [Fact]
     public void SaveSmallestFormat_ColorWithBlackWhiteBitDepth()
     {
-        var color = LoadImage(ImageResources.color_image);
+        var color = LoadImage(ImageResources.dog);
         var path = Path.Combine(FolderPath, "test");
 
         var fullPath = _helper.SaveSmallestFormat(path, color, BitDepth.BlackAndWhite, false, -1, out var format);
 
-        AssertPng(format, fullPath, ImageResources.color_image_bw, ImageAsserts.XPLAT_RMSE_THRESHOLD);
+        AssertPng(format, fullPath, ImageResources.dog_bw, ImageAsserts.XPLAT_RMSE_THRESHOLD);
     }
 
     [Fact]
     public void SaveSmallestFormat_ColorHighQuality()
     {
-        var color = LoadImage(ImageResources.color_image);
+        var color = LoadImage(ImageResources.dog);
         var path = Path.Combine(FolderPath, "test");
 
         var fullPath = _helper.SaveSmallestFormat(path, color, BitDepth.Color, true, -1, out var format);
 
-        AssertPng(format, fullPath, ImageResources.color_image);
+        AssertPng(format, fullPath, ImageResources.dog);
     }
 
     [Fact]
     public void SaveSmallestFormat_SmallerPng()
     {
-        var bw = LoadImage(ImageResources.color_image_bw_24bit);
+        var bw = LoadImage(ImageResources.dog_bw_24bit);
         var path = Path.Combine(FolderPath, "test");
 
         var fullPath = _helper.SaveSmallestFormat(path, bw, BitDepth.Color, false, -1, out var format);
 
-        AssertPng(format, fullPath, ImageResources.color_image_bw);
+        AssertPng(format, fullPath, ImageResources.dog_bw);
     }
 
     [Fact]
     public void SaveSmallestFormat_OriginalPng()
     {
-        var color = LoadImage(ImageResources.color_image_png);
+        var color = LoadImage(ImageResources.dog_png);
         var path = Path.Combine(FolderPath, "test");
 
         var fullPath = _helper.SaveSmallestFormat(path, color, BitDepth.Color, false, -1, out var format);
 
-        AssertPng(format, fullPath, ImageResources.color_image);
+        AssertPng(format, fullPath, ImageResources.dog);
     }
 
     [Fact]
     public void SaveSmallestFormat_SmallerJpeg()
     {
-        var color = LoadImage(ImageResources.color_image_png);
+        var color = LoadImage(ImageResources.dog_png);
         color.OriginalFileFormat = ImageFileFormat.Unspecified;
         var path = Path.Combine(FolderPath, "test");
 
         var fullPath = _helper.SaveSmallestFormat(path, color, BitDepth.Color, false, -1, out var format);
 
-        AssertJpeg(format, fullPath, ImageResources.color_image);
+        AssertJpeg(format, fullPath, ImageResources.dog);
     }
 
     [Fact]
     public void SaveSmallestFormat_OriginalJpeg()
     {
-        var color = LoadImage(ImageResources.color_image_bw_jpg);
+        var color = LoadImage(ImageResources.dog_bw_jpg);
         var path = Path.Combine(FolderPath, "test");
 
         var fullPath = _helper.SaveSmallestFormat(path, color, BitDepth.Color, false, -1, out var format);
 
-        AssertJpeg(format, fullPath, ImageResources.color_image_bw);
+        AssertJpeg(format, fullPath, ImageResources.dog_bw);
     }
 
     private void AssertPng(ImageFileFormat format, string fullPath, byte[] expectedImage,

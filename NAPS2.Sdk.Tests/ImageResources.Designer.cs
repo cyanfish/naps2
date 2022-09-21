@@ -62,9 +62,9 @@ namespace NAPS2.Sdk.Tests {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        internal static byte[] color_image {
+        internal static byte[] dog {
             get {
-                object obj = ResourceManager.GetObject("color_image", resourceCulture);
+                object obj = ResourceManager.GetObject("dog", resourceCulture);
                 return ((byte[])(obj));
             }
         }
@@ -72,9 +72,9 @@ namespace NAPS2.Sdk.Tests {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        internal static byte[] color_image_alpha {
+        internal static byte[] dog_alpha {
             get {
-                object obj = ResourceManager.GetObject("color_image_alpha", resourceCulture);
+                object obj = ResourceManager.GetObject("dog_alpha", resourceCulture);
                 return ((byte[])(obj));
             }
         }
@@ -82,9 +82,9 @@ namespace NAPS2.Sdk.Tests {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        internal static byte[] color_image_b_n300 {
+        internal static byte[] dog_b_n300 {
             get {
-                object obj = ResourceManager.GetObject("color_image_b_n300", resourceCulture);
+                object obj = ResourceManager.GetObject("dog_b_n300", resourceCulture);
                 return ((byte[])(obj));
             }
         }
@@ -92,9 +92,9 @@ namespace NAPS2.Sdk.Tests {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        internal static byte[] color_image_b_p300 {
+        internal static byte[] dog_b_p300 {
             get {
-                object obj = ResourceManager.GetObject("color_image_b_p300", resourceCulture);
+                object obj = ResourceManager.GetObject("dog_b_p300", resourceCulture);
                 return ((byte[])(obj));
             }
         }
@@ -102,9 +102,9 @@ namespace NAPS2.Sdk.Tests {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        internal static byte[] color_image_b_p300_thumb_256 {
+        internal static byte[] dog_b_p300_thumb_256 {
             get {
-                object obj = ResourceManager.GetObject("color_image_b_p300_thumb_256", resourceCulture);
+                object obj = ResourceManager.GetObject("dog_b_p300_thumb_256", resourceCulture);
                 return ((byte[])(obj));
             }
         }
@@ -112,9 +112,9 @@ namespace NAPS2.Sdk.Tests {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        internal static byte[] color_image_bw {
+        internal static byte[] dog_bw {
             get {
-                object obj = ResourceManager.GetObject("color_image_bw", resourceCulture);
+                object obj = ResourceManager.GetObject("dog_bw", resourceCulture);
                 return ((byte[])(obj));
             }
         }
@@ -122,9 +122,9 @@ namespace NAPS2.Sdk.Tests {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        internal static byte[] color_image_bw_24bit {
+        internal static byte[] dog_bw_24bit {
             get {
-                object obj = ResourceManager.GetObject("color_image_bw_24bit", resourceCulture);
+                object obj = ResourceManager.GetObject("dog_bw_24bit", resourceCulture);
                 return ((byte[])(obj));
             }
         }
@@ -132,9 +132,9 @@ namespace NAPS2.Sdk.Tests {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        internal static byte[] color_image_bw_invertpal {
+        internal static byte[] dog_bw_invertpal {
             get {
-                object obj = ResourceManager.GetObject("color_image_bw_invertpal", resourceCulture);
+                object obj = ResourceManager.GetObject("dog_bw_invertpal", resourceCulture);
                 return ((byte[])(obj));
             }
         }
@@ -142,9 +142,9 @@ namespace NAPS2.Sdk.Tests {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        internal static byte[] color_image_bw_jpg {
+        internal static byte[] dog_bw_jpg {
             get {
-                object obj = ResourceManager.GetObject("color_image_bw_jpg", resourceCulture);
+                object obj = ResourceManager.GetObject("dog_bw_jpg", resourceCulture);
                 return ((byte[])(obj));
             }
         }
@@ -152,9 +152,9 @@ namespace NAPS2.Sdk.Tests {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        internal static byte[] color_image_bw_p300 {
+        internal static byte[] dog_bw_p300 {
             get {
-                object obj = ResourceManager.GetObject("color_image_bw_p300", resourceCulture);
+                object obj = ResourceManager.GetObject("dog_bw_p300", resourceCulture);
                 return ((byte[])(obj));
             }
         }
@@ -162,9 +162,9 @@ namespace NAPS2.Sdk.Tests {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        internal static byte[] color_image_c_5_10_15_20 {
+        internal static byte[] dog_c_5_10_15_20 {
             get {
-                object obj = ResourceManager.GetObject("color_image_c_5_10_15_20", resourceCulture);
+                object obj = ResourceManager.GetObject("dog_c_5_10_15_20", resourceCulture);
                 return ((byte[])(obj));
             }
         }
@@ -172,9 +172,9 @@ namespace NAPS2.Sdk.Tests {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        internal static byte[] color_image_c_n300 {
+        internal static byte[] dog_c_n300 {
             get {
-                object obj = ResourceManager.GetObject("color_image_c_n300", resourceCulture);
+                object obj = ResourceManager.GetObject("dog_c_n300", resourceCulture);
                 return ((byte[])(obj));
             }
         }
@@ -182,9 +182,9 @@ namespace NAPS2.Sdk.Tests {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        internal static byte[] color_image_c_p300 {
+        internal static byte[] dog_c_p300 {
             get {
-                object obj = ResourceManager.GetObject("color_image_c_p300", resourceCulture);
+                object obj = ResourceManager.GetObject("dog_c_p300", resourceCulture);
                 return ((byte[])(obj));
             }
         }
@@ -192,9 +192,9 @@ namespace NAPS2.Sdk.Tests {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        internal static byte[] color_image_h_n300 {
+        internal static byte[] dog_h_n300 {
             get {
-                object obj = ResourceManager.GetObject("color_image_h_n300", resourceCulture);
+                object obj = ResourceManager.GetObject("dog_h_n300", resourceCulture);
                 return ((byte[])(obj));
             }
         }
@@ -202,9 +202,9 @@ namespace NAPS2.Sdk.Tests {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        internal static byte[] color_image_h_p300 {
+        internal static byte[] dog_h_p300 {
             get {
-                object obj = ResourceManager.GetObject("color_image_h_p300", resourceCulture);
+                object obj = ResourceManager.GetObject("dog_h_p300", resourceCulture);
                 return ((byte[])(obj));
             }
         }
@@ -212,9 +212,9 @@ namespace NAPS2.Sdk.Tests {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        internal static byte[] color_image_huge {
+        internal static byte[] dog_huge {
             get {
-                object obj = ResourceManager.GetObject("color_image_huge", resourceCulture);
+                object obj = ResourceManager.GetObject("dog_huge", resourceCulture);
                 return ((byte[])(obj));
             }
         }
@@ -222,9 +222,9 @@ namespace NAPS2.Sdk.Tests {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        internal static byte[] color_image_huge_png {
+        internal static byte[] dog_huge_png {
             get {
-                object obj = ResourceManager.GetObject("color_image_huge_png", resourceCulture);
+                object obj = ResourceManager.GetObject("dog_huge_png", resourceCulture);
                 return ((byte[])(obj));
             }
         }
@@ -232,9 +232,9 @@ namespace NAPS2.Sdk.Tests {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        internal static byte[] color_image_low_quality {
+        internal static byte[] dog_low_quality {
             get {
-                object obj = ResourceManager.GetObject("color_image_low_quality", resourceCulture);
+                object obj = ResourceManager.GetObject("dog_low_quality", resourceCulture);
                 return ((byte[])(obj));
             }
         }
@@ -242,9 +242,9 @@ namespace NAPS2.Sdk.Tests {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        internal static byte[] color_image_mask {
+        internal static byte[] dog_mask {
             get {
-                object obj = ResourceManager.GetObject("color_image_mask", resourceCulture);
+                object obj = ResourceManager.GetObject("dog_mask", resourceCulture);
                 return ((byte[])(obj));
             }
         }
@@ -252,9 +252,9 @@ namespace NAPS2.Sdk.Tests {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        internal static byte[] color_image_png {
+        internal static byte[] dog_png {
             get {
-                object obj = ResourceManager.GetObject("color_image_png", resourceCulture);
+                object obj = ResourceManager.GetObject("dog_png", resourceCulture);
                 return ((byte[])(obj));
             }
         }
@@ -262,9 +262,9 @@ namespace NAPS2.Sdk.Tests {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        internal static byte[] color_image_r_180 {
+        internal static byte[] dog_r_180 {
             get {
-                object obj = ResourceManager.GetObject("color_image_r_180", resourceCulture);
+                object obj = ResourceManager.GetObject("dog_r_180", resourceCulture);
                 return ((byte[])(obj));
             }
         }
@@ -272,9 +272,9 @@ namespace NAPS2.Sdk.Tests {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        internal static byte[] color_image_r_n45 {
+        internal static byte[] dog_r_n45 {
             get {
-                object obj = ResourceManager.GetObject("color_image_r_n45", resourceCulture);
+                object obj = ResourceManager.GetObject("dog_r_n45", resourceCulture);
                 return ((byte[])(obj));
             }
         }
@@ -282,9 +282,9 @@ namespace NAPS2.Sdk.Tests {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        internal static byte[] color_image_r_p46 {
+        internal static byte[] dog_r_p46 {
             get {
-                object obj = ResourceManager.GetObject("color_image_r_p46", resourceCulture);
+                object obj = ResourceManager.GetObject("dog_r_p46", resourceCulture);
                 return ((byte[])(obj));
             }
         }
@@ -292,9 +292,9 @@ namespace NAPS2.Sdk.Tests {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        internal static byte[] color_image_r_p90 {
+        internal static byte[] dog_r_p90 {
             get {
-                object obj = ResourceManager.GetObject("color_image_r_p90", resourceCulture);
+                object obj = ResourceManager.GetObject("dog_r_p90", resourceCulture);
                 return ((byte[])(obj));
             }
         }
@@ -302,9 +302,9 @@ namespace NAPS2.Sdk.Tests {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        internal static byte[] color_image_s_n300 {
+        internal static byte[] dog_s_n300 {
             get {
-                object obj = ResourceManager.GetObject("color_image_s_n300", resourceCulture);
+                object obj = ResourceManager.GetObject("dog_s_n300", resourceCulture);
                 return ((byte[])(obj));
             }
         }
@@ -312,9 +312,9 @@ namespace NAPS2.Sdk.Tests {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        internal static byte[] color_image_s_p300 {
+        internal static byte[] dog_s_p300 {
             get {
-                object obj = ResourceManager.GetObject("color_image_s_p300", resourceCulture);
+                object obj = ResourceManager.GetObject("dog_s_p300", resourceCulture);
                 return ((byte[])(obj));
             }
         }
@@ -322,9 +322,9 @@ namespace NAPS2.Sdk.Tests {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        internal static byte[] color_image_sc_50pct {
+        internal static byte[] dog_sc_50pct {
             get {
-                object obj = ResourceManager.GetObject("color_image_sc_50pct", resourceCulture);
+                object obj = ResourceManager.GetObject("dog_sc_50pct", resourceCulture);
                 return ((byte[])(obj));
             }
         }
@@ -332,9 +332,9 @@ namespace NAPS2.Sdk.Tests {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        internal static byte[] color_image_sh_n1000 {
+        internal static byte[] dog_sh_n1000 {
             get {
-                object obj = ResourceManager.GetObject("color_image_sh_n1000", resourceCulture);
+                object obj = ResourceManager.GetObject("dog_sh_n1000", resourceCulture);
                 return ((byte[])(obj));
             }
         }
@@ -342,9 +342,9 @@ namespace NAPS2.Sdk.Tests {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        internal static byte[] color_image_sh_p1000 {
+        internal static byte[] dog_sh_p1000 {
             get {
-                object obj = ResourceManager.GetObject("color_image_sh_p1000", resourceCulture);
+                object obj = ResourceManager.GetObject("dog_sh_p1000", resourceCulture);
                 return ((byte[])(obj));
             }
         }
@@ -352,9 +352,9 @@ namespace NAPS2.Sdk.Tests {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        internal static byte[] color_image_thumb_256 {
+        internal static byte[] dog_thumb_256 {
             get {
-                object obj = ResourceManager.GetObject("color_image_thumb_256", resourceCulture);
+                object obj = ResourceManager.GetObject("dog_thumb_256", resourceCulture);
                 return ((byte[])(obj));
             }
         }
@@ -362,9 +362,9 @@ namespace NAPS2.Sdk.Tests {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        internal static byte[] color_image_tiff {
+        internal static byte[] dog_tiff {
             get {
-                object obj = ResourceManager.GetObject("color_image_tiff", resourceCulture);
+                object obj = ResourceManager.GetObject("dog_tiff", resourceCulture);
                 return ((byte[])(obj));
             }
         }

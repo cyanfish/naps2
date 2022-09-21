@@ -9,7 +9,7 @@ public class PdfBenchmarkTests : ContextualTests
     public async Task PdfSharpExport300()
     {
         var filePath = Path.Combine(FolderPath, "test");
-        using var image = ScanningContext.CreateProcessedImage(LoadImage(ImageResources.color_image), BitDepth.Color,
+        using var image = ScanningContext.CreateProcessedImage(LoadImage(ImageResources.dog), BitDepth.Color,
             false, -1, Enumerable.Empty<Transform>());
 
         var pdfExporter = new PdfExporter(ScanningContext);
@@ -23,7 +23,7 @@ public class PdfBenchmarkTests : ContextualTests
     public async Task PdfSharpExportHuge()
     {
         var filePath = Path.Combine(FolderPath, "test");
-        using var image = ScanningContext.CreateProcessedImage(LoadImage(ImageResources.color_image_huge),
+        using var image = ScanningContext.CreateProcessedImage(LoadImage(ImageResources.dog_huge),
             BitDepth.Color, false, -1, Enumerable.Empty<Transform>());
 
         var pdfExporter = new PdfExporter(ScanningContext);
@@ -34,7 +34,7 @@ public class PdfBenchmarkTests : ContextualTests
     public async Task PdfSharpExportHugePng()
     {
         var filePath = Path.Combine(FolderPath, "test");
-        using var image = ScanningContext.CreateProcessedImage(LoadImage(ImageResources.color_image_huge_png),
+        using var image = ScanningContext.CreateProcessedImage(LoadImage(ImageResources.dog_huge_png),
             BitDepth.Color, true, -1, Enumerable.Empty<Transform>());
 
         var pdfExporter = new PdfExporter(ScanningContext);
@@ -45,7 +45,7 @@ public class PdfBenchmarkTests : ContextualTests
     public async Task PdfiumExport300()
     {
         var filePath = Path.Combine(FolderPath, "test");
-        using var image = ScanningContext.CreateProcessedImage(LoadImage(ImageResources.color_image), BitDepth.Color,
+        using var image = ScanningContext.CreateProcessedImage(LoadImage(ImageResources.dog), BitDepth.Color,
             false, -1, Enumerable.Empty<Transform>());
 
         var pdfExporter = new PdfiumPdfExporter(ScanningContext);
@@ -59,7 +59,7 @@ public class PdfBenchmarkTests : ContextualTests
     public async Task PdfiumExportHuge()
     {
         var filePath = Path.Combine(FolderPath, "test");
-        using var image = ScanningContext.CreateProcessedImage(LoadImage(ImageResources.color_image_huge),
+        using var image = ScanningContext.CreateProcessedImage(LoadImage(ImageResources.dog_huge),
             BitDepth.Color, false, -1, Enumerable.Empty<Transform>());
 
         var pdfExporter = new PdfiumPdfExporter(ScanningContext);
@@ -70,7 +70,7 @@ public class PdfBenchmarkTests : ContextualTests
     public async Task PdfiumExportHugePng()
     {
         var filePath = Path.Combine(FolderPath, "test");
-        using var image = ScanningContext.CreateProcessedImage(LoadImage(ImageResources.color_image_huge_png),
+        using var image = ScanningContext.CreateProcessedImage(LoadImage(ImageResources.dog_huge_png),
             BitDepth.Color, true, -1, Enumerable.Empty<Transform>());
 
         var pdfExporter = new PdfiumPdfExporter(ScanningContext);
