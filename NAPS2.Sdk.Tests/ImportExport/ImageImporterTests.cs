@@ -67,7 +67,7 @@ public class ImageImporterTests : ContextualTests
     [Fact]
     public async Task ImportTiffImage()
     {
-        var filePath = CopyResourceToFile(ImageResources.dog_tiff, "image.tiff");
+        var filePath = CopyResourceToFile(ImageResources.animals_tiff, "image.tiff");
 
         var source = _imageImporter.Import(filePath, new ImportParams(), (current, max) => { }, CancellationToken.None);
         var result = await source.ToList();
@@ -123,7 +123,7 @@ public class ImageImporterTests : ContextualTests
     [Fact]
     public async Task MultiFrameProgress()
     {
-        var filePath = CopyResourceToFile(ImageResources.dog_tiff, "image.tiff");
+        var filePath = CopyResourceToFile(ImageResources.animals_tiff, "image.tiff");
 
         var progressMock = new Mock<ProgressHandler>();
         var source = _imageImporter.Import(filePath, new ImportParams(), progressMock.Object, CancellationToken.None);
@@ -159,7 +159,7 @@ public class ImageImporterTests : ContextualTests
     [PlatformFact(exclude: PlatformFlags.Mac)]
     public async Task MultiFrameCancellation()
     {
-        var filePath = CopyResourceToFile(ImageResources.dog_tiff, "image.tiff");
+        var filePath = CopyResourceToFile(ImageResources.animals_tiff, "image.tiff");
 
         var cts = new CancellationTokenSource();
         var source = _imageImporter.Import(filePath, new ImportParams(), (current, max) => { }, cts.Token);

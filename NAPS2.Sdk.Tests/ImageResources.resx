@@ -130,6 +130,12 @@
   <data name="dog_bw_jpg" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\dog_bw.jpg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="dog_bw_bmp" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\dog_bw.bmp;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="dog_bw_tiff" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\dog_bw.tiff;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="dog_bw_p300" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\dog_bw_p300.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
@@ -217,11 +223,20 @@
   <data name="dog_alpha" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\dog_alpha.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="dog_alpha_tiff" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\dog_alpha.tiff;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="dog_mask" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\dog_mask.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="dog_png" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\dog.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="dog_bmp" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\dog.bmp;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="dog_tiff" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\dog.tiff;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="dog_huge" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\dog_huge.jpg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -229,7 +244,25 @@
   <data name="dog_huge_png" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\dog_huge.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="dog_tiff" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Resources\dog_set.tiff;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="animals_tiff" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\animals.tiff;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="dog_gray" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\dog_gray.jpg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="dog_gray_png" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\dog_gray.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="dog_gray_24bit_png" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\dog_gray_24bit.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="dog_gray_bmp" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\dog_gray.bmp;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="dog_gray_tiff" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\dog_gray.tiff;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="dog_gray_24bit_tiff" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\dog_gray_24bit.tiff;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
 </root>

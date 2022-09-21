@@ -62,6 +62,26 @@ namespace NAPS2.Sdk.Tests {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
+        internal static byte[] animals_tiff {
+            get {
+                object obj = ResourceManager.GetObject("animals_tiff", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] deskewed {
+            get {
+                object obj = ResourceManager.GetObject("deskewed", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
         internal static byte[] dog {
             get {
                 object obj = ResourceManager.GetObject("dog", resourceCulture);
@@ -75,6 +95,16 @@ namespace NAPS2.Sdk.Tests {
         internal static byte[] dog_alpha {
             get {
                 object obj = ResourceManager.GetObject("dog_alpha", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] dog_alpha_tiff {
+            get {
+                object obj = ResourceManager.GetObject("dog_alpha_tiff", resourceCulture);
                 return ((byte[])(obj));
             }
         }
@@ -112,6 +142,16 @@ namespace NAPS2.Sdk.Tests {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
+        internal static byte[] dog_bmp {
+            get {
+                object obj = ResourceManager.GetObject("dog_bmp", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
         internal static byte[] dog_bw {
             get {
                 object obj = ResourceManager.GetObject("dog_bw", resourceCulture);
@@ -125,6 +165,16 @@ namespace NAPS2.Sdk.Tests {
         internal static byte[] dog_bw_24bit {
             get {
                 object obj = ResourceManager.GetObject("dog_bw_24bit", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] dog_bw_bmp {
+            get {
+                object obj = ResourceManager.GetObject("dog_bw_bmp", resourceCulture);
                 return ((byte[])(obj));
             }
         }
@@ -162,6 +212,16 @@ namespace NAPS2.Sdk.Tests {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
+        internal static byte[] dog_bw_tiff {
+            get {
+                object obj = ResourceManager.GetObject("dog_bw_tiff", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
         internal static byte[] dog_c_5_10_15_20 {
             get {
                 object obj = ResourceManager.GetObject("dog_c_5_10_15_20", resourceCulture);
@@ -185,6 +245,66 @@ namespace NAPS2.Sdk.Tests {
         internal static byte[] dog_c_p300 {
             get {
                 object obj = ResourceManager.GetObject("dog_c_p300", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] dog_gray {
+            get {
+                object obj = ResourceManager.GetObject("dog_gray", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] dog_gray_24bit_png {
+            get {
+                object obj = ResourceManager.GetObject("dog_gray_24bit_png", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] dog_gray_24bit_tiff {
+            get {
+                object obj = ResourceManager.GetObject("dog_gray_24bit_tiff", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] dog_gray_bmp {
+            get {
+                object obj = ResourceManager.GetObject("dog_gray_bmp", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] dog_gray_png {
+            get {
+                object obj = ResourceManager.GetObject("dog_gray_png", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] dog_gray_tiff {
+            get {
+                object obj = ResourceManager.GetObject("dog_gray_tiff", resourceCulture);
                 return ((byte[])(obj));
             }
         }
@@ -365,16 +485,6 @@ namespace NAPS2.Sdk.Tests {
         internal static byte[] dog_tiff {
             get {
                 object obj = ResourceManager.GetObject("dog_tiff", resourceCulture);
-                return ((byte[])(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
-        /// </summary>
-        internal static byte[] deskewed {
-            get {
-                object obj = ResourceManager.GetObject("deskewed", resourceCulture);
                 return ((byte[])(obj));
             }
         }

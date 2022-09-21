@@ -133,14 +133,33 @@ public class LoadSaveTests : ContextualTests
         },
         new object[]
         {
+            ImageFileFormat.Png, ".png", "dog_gray_png",
+            new[] { "dog_gray" }, new[] { ImagePixelFormat.Gray8 }, true
+        },
+        new object[]
+        {
+            ImageFileFormat.Png, ".png", "dog_gray_24bit_png",
+            new[] { "dog_gray" }, new[] { ImagePixelFormat.Gray8 }, false
+        },
+        new object[]
+        {
             ImageFileFormat.Png, ".png", "dog_bw",
             new[] { "dog_bw" }, new[] { ImagePixelFormat.BW1 }, false
         },
-        // TODO: Update resources for more pixel format tests
+        new object[]
+        {
+            ImageFileFormat.Png, ".png", "dog_bw_24bit",
+            new[] { "dog_bw" }, new[] { ImagePixelFormat.BW1 }, false
+        },
         new object[]
         {
             ImageFileFormat.Jpeg, ".jpg", "dog",
             new[] { "dog" }, new[] { ImagePixelFormat.RGB24 }, false
+        },
+        new object[]
+        {
+            ImageFileFormat.Jpeg, ".jpg", "dog_gray",
+            new[] { "dog_gray" }, new[] { ImagePixelFormat.Gray8 }, false
         },
         new object[]
         {
@@ -149,12 +168,52 @@ public class LoadSaveTests : ContextualTests
         },
         new object[]
         {
+            ImageFileFormat.Bmp, ".bmp", "dog_bmp",
+            new[] { "dog" }, new[] { ImagePixelFormat.RGB24 }, true
+        },
+        new object[]
+        {
+            ImageFileFormat.Bmp, ".bmp", "dog_gray_bmp",
+            new[] { "dog_gray" }, new[] { ImagePixelFormat.Gray8 }, true
+        },
+        new object[]
+        {
+            ImageFileFormat.Bmp, ".bmp", "dog_bw_bmp",
+            new[] { "dog_bw" }, new[] { ImagePixelFormat.BW1 }, true
+        },
+        new object[]
+        {
             ImageFileFormat.Bmp, ".bmp", "dog_bw_invertpal",
             new[] { "dog_bw" }, new[] { ImagePixelFormat.BW1 }, true
         },
         new object[]
         {
+            ImageFileFormat.Tiff, ".tiff", "dog_alpha_tiff",
+            new[] { "dog_alpha" }, new[] { ImagePixelFormat.ARGB32 }, false
+        },
+        new object[]
+        {
             ImageFileFormat.Tiff, ".tiff", "dog_tiff",
+            new[] { "dog" }, new[] { ImagePixelFormat.RGB24 }, false
+        },
+        new object[]
+        {
+            ImageFileFormat.Tiff, ".tiff", "dog_gray_tiff",
+            new[] { "dog_gray" }, new[] { ImagePixelFormat.Gray8 }, true
+        },
+        new object[]
+        {
+            ImageFileFormat.Tiff, ".tiff", "dog_gray_24bit_tiff",
+            new[] { "dog_gray" }, new[] { ImagePixelFormat.Gray8 }, false
+        },
+        new object[]
+        {
+            ImageFileFormat.Tiff, ".tiff", "dog_bw_tiff",
+            new[] { "dog_bw" }, new[] { ImagePixelFormat.BW1 }, false
+        },
+        new object[]
+        {
+            ImageFileFormat.Tiff, ".tiff", "animals_tiff",
             new[] { "dog", "dog_h_p300", "stock_cat" },
             new[] { ImagePixelFormat.RGB24, ImagePixelFormat.RGB24, ImagePixelFormat.RGB24 }, false
         },
