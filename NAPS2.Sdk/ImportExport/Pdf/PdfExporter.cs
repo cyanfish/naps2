@@ -510,7 +510,7 @@ public class PdfExporter : IPdfExporter
 
         public void SaveAsPdfBitmap(MemoryStream ms)
         {
-            var subPixelType = _image.PixelFormat switch
+            var subPixelType = _exportFormat.PixelFormat switch
             {
                 ImagePixelFormat.ARGB32 => SubPixelType.Bgra,
                 ImagePixelFormat.RGB24 => SubPixelType.Bgr,

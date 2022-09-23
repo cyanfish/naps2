@@ -9,7 +9,7 @@ namespace NAPS2.Sdk.Tests.Images;
 
 public class GdiImageTests
 {
-    [PlatformFact(include: PlatformFlags.Windows)]
+    [Fact]
     public void ImageContextCreateDoesntFixFormat()
     {
         var ctx = new GdiImageContext();
@@ -24,7 +24,7 @@ public class GdiImageTests
         Assert.False(imageBw1.FixedPixelFormat);
     }
 
-    [PlatformFact(include: PlatformFlags.Windows)]
+    [Fact]
     public void LoadInvertedPaletteBlackAndWhiteImage()
     {
         var bitmap = new Bitmap(new MemoryStream(ImageResources.dog_bw_invertpal));
@@ -37,7 +37,7 @@ public class GdiImageTests
         ImageAsserts.Similar(ImageResources.dog_bw, image, ImageAsserts.NULL_RMSE_THRESHOLD);
     }
 
-    [PlatformFact(include: PlatformFlags.Windows)]
+    [Fact]
     public void LoadNonGrayscale8BitImage()
     {
         var workingImage = new GdiImageContext().Create(1, 1, ImagePixelFormat.Gray8);
@@ -51,7 +51,7 @@ public class GdiImageTests
         Assert.Equal(ImagePixelFormat.RGB24, image.PixelFormat);
     }
 
-    [PlatformFact(include: PlatformFlags.Windows)]
+    [Fact]
     public void Load48BitImage()
     {
         var bitmap = new Bitmap(1, 1, PixelFormat.Format48bppRgb);
@@ -61,7 +61,7 @@ public class GdiImageTests
         Assert.Equal(ImagePixelFormat.RGB24, image.PixelFormat);
     }
 
-    [PlatformFact(include: PlatformFlags.Windows)]
+    [Fact]
     public void Load64BitImage()
     {
         var bitmap = new Bitmap(1, 1, PixelFormat.Format64bppArgb);

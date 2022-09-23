@@ -21,7 +21,7 @@ public class MacImageTransformer : AbstractImageTransformer<MacImage>
         {
             newImage = (MacImage) image.CopyBlankWithPixelFormat(pixelFormat);
         }
-        using CGBitmapContext c = GetCgBitmapContext(newImage);
+        using CGBitmapContext c = MacBitmapHelper.CreateContext(newImage);
 
         CGRect fillRect = new CGRect(0, 0, newImage.Width, newImage.Height);
         c.SetFillColor(new CGColor(255.ToNFloat(), 255.ToNFloat(), 255.ToNFloat(), 255.ToNFloat()));
@@ -53,37 +53,10 @@ public class MacImageTransformer : AbstractImageTransformer<MacImage>
         newImage.SetResolution(
             image.HorizontalResolution * image.Width / width,
             image.VerticalResolution * image.Height / height);
-        using CGBitmapContext c = GetCgBitmapContext(newImage);
+        using CGBitmapContext c = MacBitmapHelper.CreateContext(newImage);
         CGRect rect = new CGRect(0, 0, width, height);
         c.DrawImage(rect, image._imageRep.AsCGImage(ref rect, null, null));
         return newImage;
-    }
-
-    private static CGBitmapContext GetCgBitmapContext(MacImage image)
-    {
-        if (image.PixelFormat is not (ImagePixelFormat.Gray8 or ImagePixelFormat.ARGB32))
-        {
-            // Only some formats supported for drawing, see "Pixel formats supported for bitmap graphics contexts"
-            // https://developer.apple.com/library/archive/documentation/GraphicsImaging/Conceptual/drawingwithquartz2d/dq_context/dq_context.html#//apple_ref/doc/uid/TP30001066-CH203-BCIBHHBB
-            throw new ArgumentException($"Unsupported pixel format for CGBitmapContext: {image.PixelFormat}");
-        }
-        lock (MacImageContext.ConstructorLock)
-        {
-            var colorSpace = image.PixelFormat == ImagePixelFormat.Gray8
-                ? CGColorSpace.CreateDeviceGray()
-                : CGColorSpace.CreateDeviceRGB();
-            var alphaInfo = image.PixelFormat == ImagePixelFormat.Gray8
-                ? CGImageAlphaInfo.None
-                : CGImageAlphaInfo.PremultipliedLast;
-            return new CGBitmapContext(
-                image._imageRep.BitmapData,
-                image.Width,
-                image.Height,
-                (int) image._imageRep.BitsPerSample,
-                (int) image._imageRep.BytesPerRow,
-                colorSpace,
-                alphaInfo);
-        }
     }
 
     // TODO: Fix tests for mac (as thumbnail rendering is now platform-specific in result)
@@ -101,7 +74,7 @@ public class MacImageTransformer : AbstractImageTransformer<MacImage>
         newImage.SetResolution(
             image.HorizontalResolution * image.Width / width,
             image.VerticalResolution * image.Height / height);
-        using CGBitmapContext c = GetCgBitmapContext(newImage);
+        using CGBitmapContext c = MacBitmapHelper.CreateContext(newImage);
         CGRect rect = new CGRect(0, 0, width, height);
         c.DrawImage(rect, image._imageRep.AsCGImage(ref rect, null, null));
         return newImage;

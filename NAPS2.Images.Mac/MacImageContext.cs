@@ -16,8 +16,8 @@ public class MacImageContext : ImageContext
 
     public override IMemoryImage PerformTransform(IMemoryImage image, Transform transform)
     {
-        var gdiImage = image as MacImage ?? throw new ArgumentException("Expected MacImage object");
-        return _imageTransformer.Apply(gdiImage, transform);
+        var macImage = image as MacImage ?? throw new ArgumentException("Expected MacImage object");
+        return _imageTransformer.Apply(macImage, transform);
     }
 
     protected override IMemoryImage LoadCore(Stream stream, ImageFileFormat format)
@@ -60,18 +60,7 @@ public class MacImageContext : ImageContext
     {
         lock (ConstructorLock)
         {
-            var rep = pixelFormat switch
-            {
-                ImagePixelFormat.ARGB32 => new NSBitmapImageRep(
-                    IntPtr.Zero, width, height, 8, 4, true, false, NSColorSpace.DeviceRGB, 4 * width, 32),
-                ImagePixelFormat.RGB24 => new NSBitmapImageRep(
-                    IntPtr.Zero, width, height, 8, 3, false, false, NSColorSpace.DeviceRGB, 3 * width, 24),
-                ImagePixelFormat.Gray8 => new NSBitmapImageRep(
-                    IntPtr.Zero, width, height, 8, 1, false, false, NSColorSpace.DeviceWhite, width, 8),
-                ImagePixelFormat.BW1 => new NSBitmapImageRep(
-                    IntPtr.Zero, width, height, 1, 1, false, false, NSColorSpace.DeviceWhite, (width + 7) / 8, 1),
-                _ => throw new ArgumentException("Unsupported pixel format")
-            };
+            var rep = MacBitmapHelper.CreateRep(width, height, pixelFormat);
             var image = new NSImage(rep.Size);
             image.AddRepresentation(rep);
             return new MacImage(this, image);

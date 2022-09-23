@@ -9,41 +9,55 @@ public class MacImage : IMemoryImage
     public MacImage(ImageContext imageContext, NSImage image)
     {
         ImageContext = imageContext ?? throw new ArgumentNullException(nameof(imageContext));
-        NsImage = image;
-        // TODO: Better error checking
+        NsImage = image ?? throw new ArgumentNullException(nameof(image));
+        var reps = Image.Representations();
+        // TODO: Figure out how to handle this when .Load on a multi-page tiff
+        // if (reps.Length != 1)
+        // {
+        //     throw new ArgumentException("Expected NSImage with exactly one representation");
+        // }
         lock (MacImageContext.ConstructorLock)
         {
 #if MONOMAC
-            _imageRep = new NSBitmapImageRep(Image.Representations()[0].Handle, false);
+            _imageRep = new NSBitmapImageRep(reps[0].Handle, false);
 #else
-            _imageRep = (NSBitmapImageRep) NsImage.Representations()[0];
+            _imageRep = (NSBitmapImageRep) reps[0];
 #endif
         }
-        // TODO: Also verify color spaces.
-        // TODO: How to handle samplesperpixel = 3 here?
-        if (_imageRep.BitsPerPixel == 32 && _imageRep.BitsPerSample == 8) // && _imageRep.SamplesPerPixel == 4)
+        PixelFormat = GetPixelFormat(_imageRep);
+        bool isSrgb = _imageRep.ColorSpaceName == NSColorSpace.DeviceRGB ||
+                      _imageRep.ColorSpaceName == NSColorSpace.DeviceWhite ||
+                      _imageRep.ColorSpaceName == NSColorSpace.CalibratedRGB &&
+                      _imageRep.ColorSpace.Description.StartsWith("srgb", StringComparison.InvariantCultureIgnoreCase);
+        if (!isSrgb || PixelFormat == ImagePixelFormat.Unsupported)
         {
-            PixelFormat = ImagePixelFormat.ARGB32;
-        }
-        else if (_imageRep.BitsPerPixel == 24 && _imageRep.BitsPerSample == 8 && _imageRep.SamplesPerPixel == 3)
-        {
-            PixelFormat = ImagePixelFormat.RGB24;
-        }
-        else if (_imageRep.BitsPerPixel == 8 && _imageRep.BitsPerSample == 8 && _imageRep.SamplesPerPixel == 1)
-        {
-            PixelFormat = ImagePixelFormat.Gray8;
-        }
-        else if (_imageRep.BitsPerPixel == 1 && _imageRep.BitsPerSample == 1 && _imageRep.SamplesPerPixel == 1)
-        {
-            PixelFormat = ImagePixelFormat.BW1;
-        }
-        else
-        {
-            // TODO: Draw on a known format image
-            // See https://stackoverflow.com/questions/52675655/how-to-keep-nsbitmapimagerep-from-creating-lots-of-intermediate-cgimages
-            throw new Exception("Unexpected image representation");
+            NsImage.RemoveRepresentation(_imageRep);
+            _imageRep = ConvertToSrgb(_imageRep,
+                PixelFormat == ImagePixelFormat.Unsupported ? ImagePixelFormat.ARGB32 : PixelFormat);
+            NsImage.AddRepresentation(_imageRep);
+            PixelFormat = GetPixelFormat(_imageRep);
         }
         LogicalPixelFormat = PixelFormat;
+    }
+
+    private static ImagePixelFormat GetPixelFormat(NSBitmapImageRep rep)
+    {
+        return rep switch
+        {
+            { BitsPerPixel: 32, BitsPerSample: 8, SamplesPerPixel: 4 } => ImagePixelFormat.ARGB32,
+            { BitsPerPixel: 24, BitsPerSample: 8, SamplesPerPixel: 3 } => ImagePixelFormat.RGB24,
+            { BitsPerPixel: 8, BitsPerSample: 8, SamplesPerPixel: 1 } => ImagePixelFormat.Gray8,
+            { BitsPerPixel: 1, BitsPerSample: 1, SamplesPerPixel: 1 } => ImagePixelFormat.BW1,
+            _ => ImagePixelFormat.Unsupported
+        };
+    }
+
+    private static NSBitmapImageRep ConvertToSrgb(NSBitmapImageRep original, ImagePixelFormat pixelFormat)
+    {
+        var isGray = pixelFormat is ImagePixelFormat.BW1 or ImagePixelFormat.Gray8;
+        var copy = MacBitmapHelper.CopyRep(original, isGray, !isGray);
+        original.Dispose();
+        return copy;
     }
 
     public ImageContext ImageContext { get; }
@@ -130,22 +144,31 @@ public class MacImage : IMemoryImage
     {
         lock (MacImageContext.ConstructorLock)
         {
-            if (imageFormat == ImageFileFormat.Jpeg)
-            {
-                var props = quality == -1
-                    ? null
-                    : NSDictionary.FromObjectAndKey(NSNumber.FromDouble(quality / 100.0),
-                        NSBitmapImageRep.CompressionFactor);
-                return _imageRep.RepresentationUsingTypeProperties(NSBitmapImageFileType.Jpeg, props);
-            }
+            var props = quality != -1 && imageFormat == ImageFileFormat.Jpeg
+                ? NSDictionary.FromObjectAndKey(NSNumber.FromDouble(quality / 100.0),
+                    NSBitmapImageRep.CompressionFactor)
+                : null;
             var fileType = imageFormat switch
             {
+                ImageFileFormat.Jpeg => NSBitmapImageFileType.Jpeg,
                 ImageFileFormat.Png => NSBitmapImageFileType.Png,
                 ImageFileFormat.Bmp => NSBitmapImageFileType.Bmp,
                 ImageFileFormat.Tiff => NSBitmapImageFileType.Tiff,
                 _ => throw new InvalidOperationException("Unsupported image format")
             };
-            return _imageRep.RepresentationUsingTypeProperties(fileType, null);
+            var targetFormat = LogicalPixelFormat;
+            if (imageFormat == ImageFileFormat.Bmp && targetFormat == ImagePixelFormat.Gray8)
+            {
+                // Workaround for NSImage issue saving 8bit BMPs
+                targetFormat = ImagePixelFormat.RGB24;
+            }
+            if (targetFormat != PixelFormat)
+            {
+                // We only want to save with the needed color info to minimize file sizes
+                using var copy = (MacImage) this.CopyWithPixelFormat(targetFormat);
+                return copy._imageRep.RepresentationUsingTypeProperties(fileType, props);
+            }
+            return _imageRep.RepresentationUsingTypeProperties(fileType, props);
         }
     }
 
@@ -155,8 +178,7 @@ public class MacImage : IMemoryImage
         {
             if (PixelFormat == ImagePixelFormat.BW1)
             {
-                // TODO: Trying to copy the NSImage seems to fail specifically for black and white images.
-                // I'm not sure why.
+                // Workaround for NSImage issue copying 1bit images
                 return this.Copy();
             }
 
@@ -167,7 +189,8 @@ public class MacImage : IMemoryImage
 #endif
             return new MacImage(ImageContext, nsImage)
             {
-                OriginalFileFormat = OriginalFileFormat
+                OriginalFileFormat = OriginalFileFormat,
+                LogicalPixelFormat = LogicalPixelFormat
             };
         }
     }
