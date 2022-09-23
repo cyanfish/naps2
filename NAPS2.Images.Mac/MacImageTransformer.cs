@@ -34,7 +34,7 @@ public class MacImageTransformer : AbstractImageTransformer<MacImage>
         c.ConcatCTM(CGAffineTransform.Multiply(CGAffineTransform.Multiply(t1, t2), t3));
 
         CGRect rect = new CGRect(0, 0, image.Width, image.Height);
-        c.DrawImage(rect, image._imageRep.AsCGImage(ref rect, null, null));
+        c.DrawImage(rect, image.Rep.AsCGImage(ref rect, null, null));
         return newImage;
     }
 
@@ -55,7 +55,7 @@ public class MacImageTransformer : AbstractImageTransformer<MacImage>
             image.VerticalResolution * image.Height / height);
         using CGBitmapContext c = MacBitmapHelper.CreateContext(newImage);
         CGRect rect = new CGRect(0, 0, width, height);
-        c.DrawImage(rect, image._imageRep.AsCGImage(ref rect, null, null));
+        c.DrawImage(rect, image.Rep.AsCGImage(ref rect, null, null));
         return newImage;
     }
 
@@ -76,7 +76,7 @@ public class MacImageTransformer : AbstractImageTransformer<MacImage>
             image.VerticalResolution * image.Height / height);
         using CGBitmapContext c = MacBitmapHelper.CreateContext(newImage);
         CGRect rect = new CGRect(0, 0, width, height);
-        c.DrawImage(rect, image._imageRep.AsCGImage(ref rect, null, null));
+        c.DrawImage(rect, image.Rep.AsCGImage(ref rect, null, null));
         return newImage;
     }
 }

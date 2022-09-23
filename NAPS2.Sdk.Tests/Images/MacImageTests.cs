@@ -23,7 +23,7 @@ public class MacImageTests : ContextualTests
         nsImage.AddRepresentation(rep);
         var image = new MacImage(_imageContext, nsImage);
         Assert.Equal(pixelFormat, image.PixelFormat);
-        Assert.Equal(rep.Handle, image._imageRep.Handle);
+        Assert.Equal(rep.Handle, image.Rep.Handle);
     }
 
     [Fact]
@@ -56,7 +56,7 @@ public class MacImageTests : ContextualTests
         rep = rep.ConvertingToColorSpace(colorSpace, NSColorRenderingIntent.Default);
         nsImage.AddRepresentation(rep);
         var image = new MacImage(_imageContext, nsImage);
-        Assert.NotEqual(rep.Handle, image._imageRep.Handle);
+        Assert.NotEqual(rep.Handle, image.Rep.Handle);
         Assert.Equal(pixelFormat, image.PixelFormat);
     }
 
@@ -67,7 +67,7 @@ public class MacImageTests : ContextualTests
         var rep = new NSBitmapImageRep(IntPtr.Zero, 100, 100, 1, 1, false, false, NSColorSpace.DeviceBlack, 13, 1);
         nsImage.AddRepresentation(rep);
         var image = new MacImage(_imageContext, nsImage);
-        Assert.NotEqual(rep.Handle, image._imageRep.Handle);
+        Assert.NotEqual(rep.Handle, image.Rep.Handle);
         Assert.Equal(ImagePixelFormat.Gray8, image.PixelFormat);
     }
 
@@ -79,7 +79,7 @@ public class MacImageTests : ContextualTests
         var rep = Create64BitRepFromImage(referenceImage);
         nsImage.AddRepresentation(rep);
         var image = new MacImage(_imageContext, nsImage);
-        Assert.NotEqual(rep.Handle, image._imageRep.Handle);
+        Assert.NotEqual(rep.Handle, image.Rep.Handle);
         ImageAsserts.Similar(referenceImage, image);
     }
 
@@ -89,7 +89,7 @@ public class MacImageTests : ContextualTests
         var h = testImage.Height;
         var rep = new NSBitmapImageRep(IntPtr.Zero, w, h, 16, 3, false, false, NSColorSpace.DeviceRGB, w * 8, 64);
         using var ctx = MacBitmapHelper.CreateContext(rep, false, false);
-        ctx.DrawImage(new CGRect(0, 0, w, h), testImage._imageRep.CGImage);
+        ctx.DrawImage(new CGRect(0, 0, w, h), testImage.Rep.CGImage);
         return rep;
     }
 }

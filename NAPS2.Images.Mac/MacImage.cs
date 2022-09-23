@@ -4,40 +4,37 @@ namespace NAPS2.Images.Mac;
 
 public class MacImage : IMemoryImage
 {
-    internal NSBitmapImageRep _imageRep;
-
     public MacImage(ImageContext imageContext, NSImage image)
     {
         ImageContext = imageContext ?? throw new ArgumentNullException(nameof(imageContext));
         NsImage = image ?? throw new ArgumentNullException(nameof(image));
-        var reps = Image.Representations();
-        // TODO: Figure out how to handle this when .Load on a multi-page tiff
-        // if (reps.Length != 1)
-        // {
-        //     throw new ArgumentException("Expected NSImage with exactly one representation");
-        // }
+        var reps = NsImage.Representations();
+        if (reps.Length != 1)
+        {
+            throw new ArgumentException("Expected NSImage with exactly one representation");
+        }
         lock (MacImageContext.ConstructorLock)
         {
 #if MONOMAC
-            _imageRep = new NSBitmapImageRep(reps[0].Handle, false);
+            Rep = new NSBitmapImageRep(reps[0].Handle, false);
 #else
-            _imageRep = (NSBitmapImageRep) reps[0];
+            Rep = (NSBitmapImageRep) reps[0];
 #endif
         }
-        PixelFormat = GetPixelFormat(_imageRep);
-        bool isDeviceColorSpace = _imageRep.ColorSpaceName == NSColorSpace.DeviceRGB ||
-                                  _imageRep.ColorSpaceName == NSColorSpace.DeviceWhite;
+        PixelFormat = GetPixelFormat(Rep);
+        bool isDeviceColorSpace = Rep.ColorSpaceName == NSColorSpace.DeviceRGB ||
+                                  Rep.ColorSpaceName == NSColorSpace.DeviceWhite;
         if (PixelFormat == ImagePixelFormat.Unsupported)
         {
-            var rep = MacBitmapHelper.CopyRep(_imageRep);
+            var rep = MacBitmapHelper.CopyRep(Rep);
             ReplaceRep(rep);
         }
         else if (!isDeviceColorSpace)
         {
-            var newColorSpace = _imageRep.ColorSpace.ColorComponents == 1
+            var newColorSpace = Rep.ColorSpace.ColorComponents == 1
                 ? NSColorSpace.DeviceGrayColorSpace
                 : NSColorSpace.DeviceRGBColorSpace;
-            var rep = _imageRep.ConvertingToColorSpace(newColorSpace, NSColorRenderingIntent.Default);
+            var rep = Rep.ConvertingToColorSpace(newColorSpace, NSColorRenderingIntent.Default);
             ReplaceRep(rep);
         }
         LogicalPixelFormat = PixelFormat;
@@ -45,11 +42,11 @@ public class MacImage : IMemoryImage
 
     private void ReplaceRep(NSBitmapImageRep rep)
     {
-        NsImage.RemoveRepresentation(_imageRep);
-        _imageRep.Dispose();
-        _imageRep = rep;
-        NsImage.AddRepresentation(_imageRep);
-        PixelFormat = GetPixelFormat(_imageRep);
+        NsImage.RemoveRepresentation(Rep);
+        Rep.Dispose();
+        Rep = rep;
+        NsImage.AddRepresentation(Rep);
+        PixelFormat = GetPixelFormat(Rep);
     }
 
     private static ImagePixelFormat GetPixelFormat(NSBitmapImageRep rep)
@@ -68,23 +65,25 @@ public class MacImage : IMemoryImage
 
     public NSImage NsImage { get; }
 
+    internal NSBitmapImageRep Rep { get; private set; }
+
     public void Dispose()
     {
-        Image.Dispose();
+        NsImage.Dispose();
         // TODO: Does this need to dispose the imageRep?
     }
 
-    public int Width => (int) _imageRep.PixelsWide;
-    public int Height => (int) _imageRep.PixelsHigh;
-    public float HorizontalResolution => (float) Image.Size.Width.ToDouble() / Width * 72;
-    public float VerticalResolution => (float) Image.Size.Height.ToDouble() / Height * 72;
+    public int Width => (int) Rep.PixelsWide;
+    public int Height => (int) Rep.PixelsHigh;
+    public float HorizontalResolution => (float) NsImage.Size.Width.ToDouble() / Width * 72;
+    public float VerticalResolution => (float) NsImage.Size.Height.ToDouble() / Height * 72;
 
     public void SetResolution(float xDpi, float yDpi)
     {
         // TODO: Image size or imagerep size?
         if (xDpi > 0 && yDpi > 0)
         {
-            Image.Size = new CGSize(xDpi / 72 * Width, yDpi / 72 * Height);
+            NsImage.Size = new CGSize(xDpi / 72 * Width, yDpi / 72 * Height);
         }
     }
 
@@ -92,8 +91,8 @@ public class MacImage : IMemoryImage
 
     public ImageLockState Lock(LockMode lockMode, out BitwiseImageData imageData)
     {
-        var ptr = _imageRep.BitmapData;
-        var stride = (int) _imageRep.BytesPerRow;
+        var ptr = Rep.BitmapData;
+        var stride = (int) Rep.BytesPerRow;
         var subPixelType = PixelFormat switch
         {
             ImagePixelFormat.ARGB32 => SubPixelType.Rgba,
@@ -117,8 +116,6 @@ public class MacImage : IMemoryImage
     public ImageFileFormat OriginalFileFormat { get; set; }
 
     public ImagePixelFormat LogicalPixelFormat { get; set; }
-
-    public NSImage Image => NsImage;
 
     public void Save(string path, ImageFileFormat imageFormat = ImageFileFormat.Unspecified, int quality = -1)
     {
@@ -169,9 +166,9 @@ public class MacImage : IMemoryImage
             {
                 // We only want to save with the needed color info to minimize file sizes
                 using var copy = (MacImage) this.CopyWithPixelFormat(targetFormat);
-                return copy._imageRep.RepresentationUsingTypeProperties(fileType, props);
+                return copy.Rep.RepresentationUsingTypeProperties(fileType, props);
             }
-            return _imageRep.RepresentationUsingTypeProperties(fileType, props);
+            return Rep.RepresentationUsingTypeProperties(fileType, props);
         }
     }
 
@@ -186,7 +183,7 @@ public class MacImage : IMemoryImage
             }
 
 #if MONOMAC
-            var nsImage = new NSImage(Image.Copy().Handle, true);
+            var nsImage = new NSImage(NsImage.Copy().Handle, true);
 #else
             var nsImage = (NSImage) NsImage.Copy();
 #endif

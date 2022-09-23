@@ -79,7 +79,7 @@ public class TiffWriterTests : ContextualTests
     public void SaveColorTiffWithG4()
     {
         var path = Path.Combine(FolderPath, "image.tiff");
-        var original = LoadImage(ImageResources.dog);
+        var original = LoadImage(ImageResources.dog_png);
 
         _tiffWriter.SaveTiff(new[] { original }, path, TiffCompressionType.Ccitt4);
         AssertTiff(path, ImageResources.dog_bw);

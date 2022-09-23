@@ -68,7 +68,7 @@ internal static class MacBitmapHelper
             throw new ArgumentException($"Unsupported pixel format for CGBitmapContext: {image.PixelFormat}");
         }
         bool isGray = image.PixelFormat == ImagePixelFormat.Gray8;
-        return CreateContext(image._imageRep, isGray, !isGray);
+        return CreateContext(image.Rep, isGray, !isGray);
     }
 
     public static CGBitmapContext CreateContext(NSBitmapImageRep rep, bool isGray, bool hasAlpha)

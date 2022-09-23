@@ -25,6 +25,11 @@ public class MacImageContext : ImageContext
         lock (ConstructorLock)
         {
             var image = new NSImage(NSData.FromStream(stream) ?? throw new ArgumentException(nameof(stream)));
+            var reps = image.Representations();
+            if (reps.Length > 1)
+            {
+                return CreateImage(reps[0]);
+            }
             return new MacImage(this, image);
         }
     }
@@ -40,20 +45,25 @@ public class MacImageContext : ImageContext
         return SplitFrames(image);
     }
 
-    public override ITiffWriter TiffWriter => throw new NotImplementedException();
+    public override ITiffWriter TiffWriter { get; } = new MacTiffWriter();
 
     private IEnumerable<IMemoryImage> SplitFrames(NSImage image)
     {
         foreach (var rep in image.Representations())
         {
-            NSImage frame;
-            lock (ConstructorLock)
-            {
-                frame = new NSImage(rep.Size);
-            }
-            frame.AddRepresentation(rep);
-            yield return new MacImage(this, frame);
+            yield return CreateImage(rep);
         }
+    }
+
+    private IMemoryImage CreateImage(NSImageRep rep)
+    {
+        NSImage frame;
+        lock (ConstructorLock)
+        {
+            frame = new NSImage(rep.Size);
+        }
+        frame.AddRepresentation(rep);
+        return new MacImage(this, frame);
     }
 
     public override IMemoryImage Create(int width, int height, ImagePixelFormat pixelFormat)
