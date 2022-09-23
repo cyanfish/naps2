@@ -1,11 +1,13 @@
 #if MAC
 using MonoMac.AppKit;
+using MonoMac.CoreGraphics;
 using NAPS2.Images.Mac;
+using NAPS2.Sdk.Tests.Asserts;
 using Xunit;
 
 namespace NAPS2.Sdk.Tests.Images;
 
-public class MacImageTests
+public class MacImageTests : ContextualTests
 {
     private readonly ImageContext _imageContext = new MacImageContext();
 
@@ -44,40 +46,51 @@ public class MacImageTests
     [InlineData(ImagePixelFormat.ARGB32)]
     [InlineData(ImagePixelFormat.RGB24)]
     [InlineData(ImagePixelFormat.Gray8)]
-    [InlineData(ImagePixelFormat.BW1)]
     public void ConvertsUnexpectedColorSpace(ImagePixelFormat pixelFormat)
     {
         var nsImage = new NSImage();
         var rep = MacBitmapHelper.CreateRep(100, 100, pixelFormat);
-        rep = rep.ConvertingToColorSpace(NSColorSpace.GenericRGBColorSpace, NSColorRenderingIntent.Default);
+        var colorSpace = pixelFormat is ImagePixelFormat.ARGB32 or ImagePixelFormat.RGB24
+            ? NSColorSpace.GenericRGBColorSpace
+            : NSColorSpace.GenericGrayColorSpace;
+        rep = rep.ConvertingToColorSpace(colorSpace, NSColorRenderingIntent.Default);
         nsImage.AddRepresentation(rep);
         var image = new MacImage(_imageContext, nsImage);
         Assert.NotEqual(rep.Handle, image._imageRep.Handle);
-        // TODO: Do we want to check the pixel format is the same as the original?
+        Assert.Equal(pixelFormat, image.PixelFormat);
     }
 
-    [Theory]
-    [InlineData(ImagePixelFormat.ARGB32)]
-    [InlineData(ImagePixelFormat.RGB24)]
-    public void DoesntConvertSrgbColorSpace(ImagePixelFormat pixelFormat)
+    [Fact]
+    public void ConvertsBlackColorSpace()
     {
         var nsImage = new NSImage();
-        var rep = MacBitmapHelper.CreateRep(100, 100, pixelFormat);
-        rep = rep.ConvertingToColorSpace(NSColorSpace.SRGBColorSpace, NSColorRenderingIntent.Default);
+        var rep = new NSBitmapImageRep(IntPtr.Zero, 100, 100, 1, 1, false, false, NSColorSpace.DeviceBlack, 13, 1);
         nsImage.AddRepresentation(rep);
         var image = new MacImage(_imageContext, nsImage);
-        Assert.Equal(pixelFormat, image.PixelFormat);
-        Assert.Equal(rep.Handle, image._imageRep.Handle);
+        Assert.NotEqual(rep.Handle, image._imageRep.Handle);
+        Assert.Equal(ImagePixelFormat.Gray8, image.PixelFormat);
     }
 
     [Fact]
     public void ConvertsUnsupportedPixelFormat()
     {
+        var referenceImage = (MacImage) LoadImage(ImageResources.dog);
         var nsImage = new NSImage();
-        var rep = new NSBitmapImageRep(IntPtr.Zero, 100, 100, 16, 3, false, false, NSColorSpace.DeviceRGB, 600, 48);
+        var rep = Create64BitRepFromImage(referenceImage);
         nsImage.AddRepresentation(rep);
         var image = new MacImage(_imageContext, nsImage);
         Assert.NotEqual(rep.Handle, image._imageRep.Handle);
+        ImageAsserts.Similar(referenceImage, image);
+    }
+
+    private static NSBitmapImageRep Create64BitRepFromImage(MacImage testImage)
+    {
+        var w = testImage.Width;
+        var h = testImage.Height;
+        var rep = new NSBitmapImageRep(IntPtr.Zero, w, h, 16, 3, false, false, NSColorSpace.DeviceRGB, w * 8, 64);
+        using var ctx = MacBitmapHelper.CreateContext(rep, false, false);
+        ctx.DrawImage(new CGRect(0, 0, w, h), testImage._imageRep.CGImage);
+        return rep;
     }
 }
 #endif

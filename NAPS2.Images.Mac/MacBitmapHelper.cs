@@ -2,12 +2,14 @@ namespace NAPS2.Images.Mac;
 
 internal static class MacBitmapHelper
 {
-    public static NSBitmapImageRep CopyRep(NSBitmapImageRep original, bool isGray, bool hasAlpha)
+    public static NSBitmapImageRep CopyRep(NSBitmapImageRep original)
     {
         var w = original.PixelsWide;
         var h = original.PixelsHigh;
-        var copy = CreateRepForDrawing(w, h, isGray, hasAlpha);
-        using var c = CreateContext(copy, isGray, hasAlpha);
+        // TODO: Consider creating something other than ARGB32 images based on the original rep
+        // Though it doesn't matter that much as we're not hitting this case in practice.
+        var copy = CreateRepForDrawing(w, h);
+        using var c = CreateContext(copy, false, true);
         CGRect rect = new CGRect(0, 0, w, h);
         c.DrawImage(rect, original.AsCGImage(ref rect, null, null));
         return copy;
@@ -15,11 +17,10 @@ internal static class MacBitmapHelper
 
     public static NSBitmapImageRep CreateRep(long width, long height, ImagePixelFormat pixelFormat)
     {
-        // TODO: Might want to change up reps - e.g. 32bit non-alpha for rgb.
         var samplesPerPixel = pixelFormat switch
         {
             ImagePixelFormat.ARGB32 => 4,
-            ImagePixelFormat.RGB24 => 3,
+            ImagePixelFormat.RGB24 => 4,
             ImagePixelFormat.Gray8 => 1,
             ImagePixelFormat.BW1 => 1,
             _ => throw new ArgumentException("Unsupported pixel format")
@@ -32,11 +33,9 @@ internal static class MacBitmapHelper
         return CreateRep(width, height, samplesPerPixel, bitsPerSample, colorSpace, hasAlpha);
     }
 
-    public static NSBitmapImageRep CreateRepForDrawing(long width, long height, bool isGray, bool hasAlpha)
+    public static NSBitmapImageRep CreateRepForDrawing(long width, long height)
     {
-        var samplesPerPixel = isGray ? 1 : 4;
-        var colorSpace = isGray ? NSColorSpace.DeviceWhite : NSColorSpace.DeviceRGB;
-        return CreateRep(width, height, samplesPerPixel, 8, colorSpace, hasAlpha);
+        return CreateRep(width, height, 4, 8, NSColorSpace.DeviceRGB, true);
     }
 
     private static NSBitmapImageRep CreateRep(long width, long height, int samplesPerPixel, int bitsPerSample,
@@ -44,12 +43,13 @@ internal static class MacBitmapHelper
     {
         lock (MacImageContext.ConstructorLock)
         {
+            var realSamples = samplesPerPixel == 4 && !hasAlpha ? 3 : samplesPerPixel;
             return new NSBitmapImageRep(
                 IntPtr.Zero,
                 width,
                 height,
                 bitsPerSample,
-                samplesPerPixel,
+                realSamples,
                 hasAlpha,
                 false,
                 colorSpace,
@@ -76,9 +76,12 @@ internal static class MacBitmapHelper
         var colorSpace = isGray
             ? CGColorSpace.CreateDeviceGray()
             : CGColorSpace.CreateDeviceRGB();
+        var bytesPerPixel = rep.BytesPerRow / rep.PixelsWide;
         var alphaInfo = hasAlpha
             ? CGImageAlphaInfo.PremultipliedLast
-            : CGImageAlphaInfo.None;
+            : bytesPerPixel is 4 or 8
+                ? CGImageAlphaInfo.NoneSkipLast
+                : CGImageAlphaInfo.None;
         lock (MacImageContext.ConstructorLock)
         {
             return new CGBitmapContext(

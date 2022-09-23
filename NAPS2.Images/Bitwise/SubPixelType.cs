@@ -29,6 +29,18 @@ public class SubPixelType
     };
 
     /// <summary>
+    /// 4 bytes per pixel, 1 byte per sample, red-green-blue-none order.
+    /// </summary>
+    public static readonly SubPixelType Rgbn = new()
+    {
+        BitsPerPixel = 32,
+        BytesPerPixel = 4,
+        RedOffset = 0,
+        GreenOffset = 1,
+        BlueOffset = 2
+    };
+
+    /// <summary>
     /// 4 bytes per pixel, 1 byte per sample, blue-green-red-alpha order.
     /// </summary>
     public static readonly SubPixelType Bgra = new()

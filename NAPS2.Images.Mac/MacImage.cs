@@ -4,7 +4,7 @@ namespace NAPS2.Images.Mac;
 
 public class MacImage : IMemoryImage
 {
-    internal readonly NSBitmapImageRep _imageRep;
+    internal NSBitmapImageRep _imageRep;
 
     public MacImage(ImageContext imageContext, NSImage image)
     {
@@ -25,19 +25,31 @@ public class MacImage : IMemoryImage
 #endif
         }
         PixelFormat = GetPixelFormat(_imageRep);
-        bool isSrgb = _imageRep.ColorSpaceName == NSColorSpace.DeviceRGB ||
-                      _imageRep.ColorSpaceName == NSColorSpace.DeviceWhite ||
-                      _imageRep.ColorSpaceName == NSColorSpace.CalibratedRGB &&
-                      _imageRep.ColorSpace.Description.StartsWith("srgb", StringComparison.InvariantCultureIgnoreCase);
-        if (!isSrgb || PixelFormat == ImagePixelFormat.Unsupported)
+        bool isDeviceColorSpace = _imageRep.ColorSpaceName == NSColorSpace.DeviceRGB ||
+                                  _imageRep.ColorSpaceName == NSColorSpace.DeviceWhite;
+        if (PixelFormat == ImagePixelFormat.Unsupported)
         {
-            NsImage.RemoveRepresentation(_imageRep);
-            _imageRep = ConvertToSrgb(_imageRep,
-                PixelFormat == ImagePixelFormat.Unsupported ? ImagePixelFormat.ARGB32 : PixelFormat);
-            NsImage.AddRepresentation(_imageRep);
-            PixelFormat = GetPixelFormat(_imageRep);
+            var rep = MacBitmapHelper.CopyRep(_imageRep);
+            ReplaceRep(rep);
+        }
+        else if (!isDeviceColorSpace)
+        {
+            var newColorSpace = _imageRep.ColorSpace.ColorComponents == 1
+                ? NSColorSpace.DeviceGrayColorSpace
+                : NSColorSpace.DeviceRGBColorSpace;
+            var rep = _imageRep.ConvertingToColorSpace(newColorSpace, NSColorRenderingIntent.Default);
+            ReplaceRep(rep);
         }
         LogicalPixelFormat = PixelFormat;
+    }
+
+    private void ReplaceRep(NSBitmapImageRep rep)
+    {
+        NsImage.RemoveRepresentation(_imageRep);
+        _imageRep.Dispose();
+        _imageRep = rep;
+        NsImage.AddRepresentation(_imageRep);
+        PixelFormat = GetPixelFormat(_imageRep);
     }
 
     private static ImagePixelFormat GetPixelFormat(NSBitmapImageRep rep)
@@ -45,19 +57,11 @@ public class MacImage : IMemoryImage
         return rep switch
         {
             { BitsPerPixel: 32, BitsPerSample: 8, SamplesPerPixel: 4 } => ImagePixelFormat.ARGB32,
-            { BitsPerPixel: 24, BitsPerSample: 8, SamplesPerPixel: 3 } => ImagePixelFormat.RGB24,
+            { BitsPerPixel: 32, BitsPerSample: 8, SamplesPerPixel: 3 } => ImagePixelFormat.RGB24,
             { BitsPerPixel: 8, BitsPerSample: 8, SamplesPerPixel: 1 } => ImagePixelFormat.Gray8,
             { BitsPerPixel: 1, BitsPerSample: 1, SamplesPerPixel: 1 } => ImagePixelFormat.BW1,
             _ => ImagePixelFormat.Unsupported
         };
-    }
-
-    private static NSBitmapImageRep ConvertToSrgb(NSBitmapImageRep original, ImagePixelFormat pixelFormat)
-    {
-        var isGray = pixelFormat is ImagePixelFormat.BW1 or ImagePixelFormat.Gray8;
-        var copy = MacBitmapHelper.CopyRep(original, isGray, !isGray);
-        original.Dispose();
-        return copy;
     }
 
     public ImageContext ImageContext { get; }
@@ -84,7 +88,7 @@ public class MacImage : IMemoryImage
         }
     }
 
-    public ImagePixelFormat PixelFormat { get; }
+    public ImagePixelFormat PixelFormat { get; private set; }
 
     public ImageLockState Lock(LockMode lockMode, out BitwiseImageData imageData)
     {
@@ -92,9 +96,8 @@ public class MacImage : IMemoryImage
         var stride = (int) _imageRep.BytesPerRow;
         var subPixelType = PixelFormat switch
         {
-            // TODO: Base subpixel type on _imageRep.BitmapFormat
-            ImagePixelFormat.RGB24 => SubPixelType.Rgb,
             ImagePixelFormat.ARGB32 => SubPixelType.Rgba,
+            ImagePixelFormat.RGB24 => SubPixelType.Rgbn,
             ImagePixelFormat.Gray8 => SubPixelType.Gray,
             ImagePixelFormat.BW1 => SubPixelType.Bit,
             _ => throw new InvalidOperationException("Unsupported pixel format")

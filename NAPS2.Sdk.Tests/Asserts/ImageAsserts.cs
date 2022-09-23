@@ -82,8 +82,6 @@ public static class ImageAsserts
         using var lock2 = second.Lock(LockMode.ReadOnly, out var data2);
         int width = first.Width;
         int height = first.Height;
-        int bytesPerPixel1 = first.PixelFormat == ImagePixelFormat.ARGB32 ? 4 : 3;
-        int bytesPerPixel2 = second.PixelFormat == ImagePixelFormat.ARGB32 ? 4 : 3;
         long total = 0;
         long div = width * height * 3;
         for (int y = 0; y < height; y++)
@@ -92,8 +90,8 @@ public static class ImageAsserts
             byte* row2 = data2.ptr + data2.stride * y;
             for (int x = 0; x < width; x++)
             {
-                byte* pixel1 = row1 + x * bytesPerPixel1;
-                byte* pixel2 = row2 + x * bytesPerPixel2;
+                byte* pixel1 = row1 + x * data1.bytesPerPixel;
+                byte* pixel2 = row2 + x * data2.bytesPerPixel;
 
                 byte r1 = *pixel1;
                 byte g1 = *(pixel1 + 1);
@@ -106,7 +104,7 @@ public static class ImageAsserts
                 total += (r1 - r2) * (r1 - r2) + (g1 - g2) * (g1 - g2) + (b1 - b2) * (b1 - b2);
 
                 // TODO: Should we validate alpha is 255 if there's a bpp mismatch?
-                if (bytesPerPixel1 == 4 && bytesPerPixel2 == 4)
+                if (data1.hasAlpha && data2.hasAlpha)
                 {
                     byte a1 = *(pixel1 + 3);
                     byte a2 = *(pixel2 + 3);
