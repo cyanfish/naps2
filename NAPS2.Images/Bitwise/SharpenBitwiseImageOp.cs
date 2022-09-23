@@ -28,7 +28,7 @@ public class SharpenBitwiseImageOp : BinaryBitwiseImageOp
     private unsafe void PerformRgba(BitwiseImageData src, BitwiseImageData dst, int partStart, int partEnd)
     {
         // TODO: This is super slow (as we read each pixel 25 times), I wonder if there's a good way to optimize?
-        bool copyAlpha = src.bytesPerPixel == 4 && dst.bytesPerPixel == 4;
+        bool copyAlpha = src.hasAlpha && dst.hasAlpha;
         const int filterSize = 5;
         const int s = filterSize / 2;
 

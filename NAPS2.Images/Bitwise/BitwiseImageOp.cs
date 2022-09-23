@@ -26,7 +26,7 @@ public class BitwiseImageOp
         {
             throw new ArgumentException("Invalid stride");
         }
-        if (data.bytesPerPixel == 4)
+        if (data.bytesPerPixel == 4 && data.hasAlpha)
         {
             var offsets = new[] { data.rOff, data.gOff, data.bOff, data.aOff };
             if (offsets.Distinct().Count() < 4 || offsets.Any(x => x is < 0 or > 3))
@@ -34,13 +34,17 @@ public class BitwiseImageOp
                 throw new ArgumentException("Invalid offsets");
             }
         }
-        if (data.bytesPerPixel == 3)
+        if (data.bytesPerPixel is 3 or 4 && !data.hasAlpha)
         {
             var offsets = new[] { data.rOff, data.gOff, data.bOff };
             if (offsets.Distinct().Count() < 3 || offsets.Any(x => x is < 0 or > 2))
             {
                 throw new ArgumentException("Invalid offsets");
             }
+        }
+        if (data.hasAlpha && data.bytesPerPixel != 4)
+        {
+            throw new ArgumentException("Invalid alpha");
         }
     }
 }

@@ -21,6 +21,7 @@ public struct BitwiseImageData
         gOff = sub.GreenOffset;
         bOff = sub.BlueOffset;
         aOff = sub.AlphaOffset;
+        hasAlpha = sub.HasAlpha;
         invertY = pix.InvertY;
         invertColorSpace = sub.InvertColorSpace;
     }
@@ -36,6 +37,7 @@ public struct BitwiseImageData
     public int gOff;
     public int bOff;
     public int aOff;
+    public bool hasAlpha;
     public bool invertY;
     public bool invertColorSpace;
 

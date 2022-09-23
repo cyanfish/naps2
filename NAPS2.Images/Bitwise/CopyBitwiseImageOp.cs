@@ -93,7 +93,7 @@ public class CopyBitwiseImageOp : BinaryBitwiseImageOp
     private unsafe void RgbaCopy(BitwiseImageData src, BitwiseImageData dst, int partStart, int partEnd)
     {
         var w = Columns ?? src.w;
-        bool copyAlpha = src.bytesPerPixel == 4 && dst.bytesPerPixel == 4;
+        bool copyAlpha = src.hasAlpha && dst.hasAlpha;
         bool copyFromGray = src.bytesPerPixel == 1;
         bool copyToRed = dst.bytesPerPixel != 1 && DestChannel is ColorChannel.All or ColorChannel.Red;
         bool copyToGreen = dst.bytesPerPixel != 1 && DestChannel is ColorChannel.All or ColorChannel.Green;

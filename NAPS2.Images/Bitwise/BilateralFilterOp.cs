@@ -25,7 +25,7 @@ public class BilateralFilterOp : BinaryBitwiseImageOp
 
     private unsafe void PerformRgba(BitwiseImageData src, BitwiseImageData dst, int partStart, int partEnd)
     {
-        bool copyAlpha = src.bytesPerPixel == 4 && dst.bytesPerPixel == 4;
+        bool copyAlpha = src.hasAlpha && dst.hasAlpha;
         const int filterSize = 9;
         const int s = filterSize / 2;
 

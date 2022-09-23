@@ -12,7 +12,8 @@ public class SubPixelType
         RedOffset = 0,
         GreenOffset = 1,
         BlueOffset = 2,
-        AlphaOffset = 3
+        AlphaOffset = 3,
+        HasAlpha = true
     };
 
     /// <summary>
@@ -37,7 +38,8 @@ public class SubPixelType
         RedOffset = 2,
         GreenOffset = 1,
         BlueOffset = 0,
-        AlphaOffset = 3
+        AlphaOffset = 3,
+        HasAlpha = true
     };
 
     /// <summary>
@@ -88,5 +90,6 @@ public class SubPixelType
     public int GreenOffset { get; private init; }
     public int BlueOffset { get; private init; }
     public int AlphaOffset { get; private init; }
+    public bool HasAlpha { get; private init; }
     public bool InvertColorSpace { get; private init; }
 }

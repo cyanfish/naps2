@@ -27,7 +27,7 @@ public class LogicalPixelFormatOp : UnaryBitwiseImageOp
         bool isOpaque = true;
         bool checkBinary = data.bytesPerPixel >= 1;
         bool checkGray = data.bytesPerPixel >= 3;
-        bool checkOpacity = data.bytesPerPixel == 4;
+        bool checkOpacity = data.hasAlpha;
         for (int i = partStart; i < partEnd; i++)
         {
             byte* row = data.ptr + data.stride * i;
