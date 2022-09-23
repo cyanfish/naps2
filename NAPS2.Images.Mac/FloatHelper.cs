@@ -31,6 +31,16 @@ public static class FloatHelper
     {
         return value;
     }
+
+    public static long ToNInt(this long value)
+    {
+        return value;
+    }
+
+    public static int ToNInt(this int value)
+    {
+        return value;
+    }
 #else
     public static float ToFloat(this NFloat value)
     {
@@ -55,6 +65,16 @@ public static class FloatHelper
     public static NFloat ToNDouble(this double value)
     {
         return new NFloat(value);
+    }
+
+    public static nint ToNInt(this long value)
+    {
+        return (nint) value;
+    }
+
+    public static nint ToNInt(this int value)
+    {
+        return (nint) value;
     }
 #endif
 }

@@ -1,6 +1,4 @@
 using System.Threading;
-using MonoMac.ImageIO;
-using MonoMac.MobileCoreServices;
 
 namespace NAPS2.Images.Mac;
 
@@ -34,7 +32,12 @@ public class MacTiffWriter : ITiffWriter
         lock (MacImageContext.ConstructorLock)
         {
             data = new NSMutableData();
-            dest = CGImageDestination.FromData(data, UTType.TIFF, images.Count);
+#if MONOMAC
+            dest = CGImageDestination.FromData(
+#else
+            dest = CGImageDestination.Create(
+#endif
+                data, UTType.TIFF, images.Count);
         }
         foreach (var image in images)
         {

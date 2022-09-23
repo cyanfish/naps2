@@ -24,12 +24,16 @@
         <Using Include="MonoMac.AppKit" />
         <Using Include="MonoMac.CoreGraphics" />
         <Using Include="MonoMac.Foundation" />
+        <Using Include="MonoMac.ImageIO" />
+        <Using Include="MonoMac.MobileCoreServices" />
     </ItemGroup>
 
     <ItemGroup Condition="'$(TargetFramework)' == 'net6-macos10.15'">
         <Using Include="AppKit" />
         <Using Include="CoreGraphics" />
         <Using Include="Foundation" />
+        <Using Include="ImageIO" />
+        <Using Include="MobileCoreServices" />
         <Using Include="System.Runtime.InteropServices" />
     </ItemGroup>
 
