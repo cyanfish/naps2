@@ -1,8 +1,4 @@
-﻿using NAPS2.Scan.Internal.Sane;
-using NAPS2.Scan.Internal.Twain;
-using NAPS2.Scan.Internal.Wia;
-
-namespace NAPS2.Scan.Internal;
+﻿namespace NAPS2.Scan.Internal;
 
 internal class ScanDriverFactory : IScanDriverFactory
 {
@@ -17,18 +13,23 @@ internal class ScanDriverFactory : IScanDriverFactory
     {
         switch (options.Driver)
         {
-#if !MAC
+#if MAC
+            case Driver.Apple:
+                return new Apple.AppleScanDriver(_scanningContext);
+#else
             case Driver.Wia:
-                return new WiaScanDriver(_scanningContext);
+                return new Wia.WiaScanDriver(_scanningContext);
             case Driver.Twain:
                 return options.TwainOptions.Adapter == TwainAdapter.Legacy
-                    ? new LegacyTwainScanDriver()
-                    : new TwainScanDriver(_scanningContext);
+                    ? new Twain.LegacyTwainScanDriver()
+                    : new Twain.TwainScanDriver(_scanningContext);
 #endif
             case Driver.Sane:
-                return new SaneScanDriver(_scanningContext);
+                return new Sane.SaneScanDriver(_scanningContext);
             default:
-                throw new InvalidOperationException($"Unsupported driver: {options.Driver}");
-        };
+                throw new NotSupportedException(
+                    $"Unsupported driver: {options.Driver}. " +
+                    "Make sure you're using the right framework target (e.g. net6-macos10.15 for the Apple driver).");
+        }
     }
 }
