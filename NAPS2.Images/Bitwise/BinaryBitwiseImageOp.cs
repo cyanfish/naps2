@@ -58,6 +58,8 @@ public abstract class BinaryBitwiseImageOp : BitwiseImageOp
         ValidateConsistency(dst);
         ValidateCore(src, dst);
 
+        StartCore();
+
         var partitionSize = GetPartitionSize(src, dst);
         var partitionCount = GetPartitionCount(src, dst);
         if (partitionCount == 1)
@@ -73,11 +75,13 @@ public abstract class BinaryBitwiseImageOp : BitwiseImageOp
                 PerformCore(src, dst, start, end);
             });
         }
+
+        FinishCore();
     }
 
     protected virtual int GetPartitionSize(BitwiseImageData src, BitwiseImageData dst) => src.h;
 
-    protected virtual int GetPartitionCount(BitwiseImageData src, BitwiseImageData dst) => 1;
+    protected virtual int GetPartitionCount(BitwiseImageData src, BitwiseImageData dst) => DefaultPartitionCount;
 
     protected virtual void ValidateCore(BitwiseImageData src, BitwiseImageData dst)
     {

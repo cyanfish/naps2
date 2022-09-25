@@ -77,43 +77,9 @@ public static class ImageAsserts
         first = first.PerformTransform(new ColorBitDepthTransform());
         second = second.PerformTransform(new ColorBitDepthTransform());
 
-        // TODO: Wrap in a bitwise op
-        using var lock1 = first.Lock(LockMode.ReadOnly, out var data1);
-        using var lock2 = second.Lock(LockMode.ReadOnly, out var data2);
-        int width = first.Width;
-        int height = first.Height;
-        long total = 0;
-        long div = width * height * 3;
-        for (int y = 0; y < height; y++)
-        {
-            byte* row1 = data1.ptr + data1.stride * y;
-            byte* row2 = data2.ptr + data2.stride * y;
-            for (int x = 0; x < width; x++)
-            {
-                byte* pixel1 = row1 + x * data1.bytesPerPixel;
-                byte* pixel2 = row2 + x * data2.bytesPerPixel;
-
-                byte r1 = *pixel1;
-                byte g1 = *(pixel1 + 1);
-                byte b1 = *(pixel1 + 2);
-
-                byte r2 = *pixel2;
-                byte g2 = *(pixel2 + 1);
-                byte b2 = *(pixel2 + 2);
-
-                total += (r1 - r2) * (r1 - r2) + (g1 - g2) * (g1 - g2) + (b1 - b2) * (b1 - b2);
-
-                // TODO: Should we validate alpha is 255 if there's a bpp mismatch?
-                if (data1.hasAlpha && data2.hasAlpha)
-                {
-                    byte a1 = *(pixel1 + 3);
-                    byte a2 = *(pixel2 + 3);
-                    total += (a1 - a2) * (a1 - a2);
-                }
-            }
-        }
-
-        double rmse = Math.Sqrt(total / (double) div);
+        var op = new RmseBitwiseImageOp();
+        op.Perform(first, second);
+        var rmse = op.Rmse;
         if (isSimilar)
         {
             Assert.True(rmse <= rmseThreshold, $"RMSE was {rmse}, expected <= {rmseThreshold}");

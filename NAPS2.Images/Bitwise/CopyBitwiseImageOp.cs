@@ -86,7 +86,7 @@ public class CopyBitwiseImageOp : BinaryBitwiseImageOp
         }
         if (src.invertColorSpace ^ dst.invertColorSpace)
         {
-            Invert(dst, partStart, partEnd);
+            BitwisePrimitives.Invert(dst, partStart, partEnd);
         }
     }
 
@@ -270,20 +270,6 @@ public class CopyBitwiseImageOp : BinaryBitwiseImageOp
             }
             var dstRow = dst.ptr + dst.stride * dstY + dstXBytesOff;
             Buffer.MemoryCopy(srcRow, dstRow, bytesPerRow, bytesPerRow);
-        }
-    }
-
-    private unsafe void Invert(BitwiseImageData data, int partStart, int partEnd)
-    {
-        for (int i = partStart; i < partEnd; i++)
-        {
-            var row = data.ptr + data.stride * i;
-            // TODO: Optimize with long operations
-            for (int j = 0; j < data.stride; j++)
-            {
-                var b = *(row + j);
-                *(row + j) = (byte) (~b & 0xFF);
-            }
         }
     }
 }

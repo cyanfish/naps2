@@ -7,7 +7,7 @@ public class BitwiseImageOp
     public const int B_MULT = 114;
 
     protected int DefaultPartitionCount { get; } = Math.Max(Math.Min(Environment.ProcessorCount / 2, 4), 1);
-    
+
     protected unsafe void ValidateConsistency(BitwiseImageData data)
     {
         if (data.ptr == (byte*)IntPtr.Zero)
@@ -46,5 +46,13 @@ public class BitwiseImageOp
         {
             throw new ArgumentException("Invalid alpha");
         }
+    }
+
+    protected virtual void StartCore()
+    {
+    }
+
+    protected virtual void FinishCore()
+    {
     }
 }

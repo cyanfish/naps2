@@ -1,5 +1,6 @@
 using System.Drawing;
 using System.Drawing.Imaging;
+using NAPS2.Images.Bitwise;
 
 namespace NAPS2.Images.Gdi;
 
@@ -73,22 +74,14 @@ internal static class GdiPixelFormatFixer
         return true;
     }
 
-    private static unsafe void InvertPalette(Bitmap bitmap)
+    private static void InvertPalette(Bitmap bitmap)
     {
         var p = bitmap.Palette;
         p.Entries[0] = Color.Black;
         p.Entries[1] = Color.White;
         bitmap.Palette = p;
         using var lockState = GdiImageLockState.Create(bitmap, LockMode.ReadWrite, out var data);
-        for (int i = 0; i < data.h; i++)
-        {
-            var row = data.ptr + i * data.stride;
-            for (int j = 0; j < data.stride; j++)
-            {
-                var b = row + j;
-                *b = (byte) (~*b & 0xFF);
-            }
-        }
+        BitwisePrimitives.Invert(data);
     }
 
     private static void Redraw(ref Bitmap bitmap, PixelFormat newPixelFormat)

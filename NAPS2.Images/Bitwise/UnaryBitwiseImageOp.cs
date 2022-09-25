@@ -22,6 +22,8 @@ public abstract class UnaryBitwiseImageOp : BitwiseImageOp
         ValidateConsistency(data);
         ValidateCore(data);
 
+        StartCore();
+
         var partitionSize = GetPartitionSize(data);
         var partitionCount = GetPartitionCount(data);
         if (partitionCount == 1)
@@ -37,6 +39,8 @@ public abstract class UnaryBitwiseImageOp : BitwiseImageOp
                 PerformCore(data, start, end);
             });
         }
+
+        FinishCore();
     }
 
     protected virtual int GetPartitionSize(BitwiseImageData data) => data.h;
