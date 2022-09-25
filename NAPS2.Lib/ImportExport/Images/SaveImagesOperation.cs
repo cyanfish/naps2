@@ -68,7 +68,7 @@ public class SaveImagesOperation : OperationBase
                     FileSystemHelper.EnsureParentDirExists(subFileName);
                     using var renderedImages = images.Select(x => x.Render()).ToDisposableList();
                     return _imageContext.TiffWriter.SaveTiff(renderedImages.InnerList, subFileName,
-                        imageSettings.TiffCompression.ToTiffCompressionType(), OnProgress, CancelToken);
+                        imageSettings.TiffCompression.ToTiffCompressionType(), ProgressHandler);
                 }
 
                 int i = 0;
@@ -158,7 +158,7 @@ public class SaveImagesOperation : OperationBase
         {
             using var renderedImage = image.Render();
             _imageContext.TiffWriter.SaveTiff(new[] { renderedImage }, path,
-                imageSettings.TiffCompression.ToTiffCompressionType(), null, CancelToken);
+                imageSettings.TiffCompression.ToTiffCompressionType(), CancelToken);
         }
         else if (Equals(format, ImageFormat.Jpeg))
         {

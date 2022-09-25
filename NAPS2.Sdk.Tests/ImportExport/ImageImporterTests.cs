@@ -1,4 +1,3 @@
-using System.Runtime.InteropServices;
 using System.Threading;
 using Moq;
 using NAPS2.ImportExport;
@@ -25,7 +24,7 @@ public class ImageImporterTests : ContextualTests
     {
         var filePath = CopyResourceToFile(ImageResources.skewed_bw, "image.png");
 
-        var source = _imageImporter.Import(filePath, new ImportParams(), (current, max) => { }, CancellationToken.None);
+        var source = _imageImporter.Import(filePath, new ImportParams());
         var result = await source.ToList();
 
         Assert.Single(result);
@@ -47,7 +46,7 @@ public class ImageImporterTests : ContextualTests
     {
         var filePath = CopyResourceToFile(ImageResources.dog, "image.jpg");
 
-        var source = _imageImporter.Import(filePath, new ImportParams(), (current, max) => { }, CancellationToken.None);
+        var source = _imageImporter.Import(filePath, new ImportParams());
         var result = await source.ToList();
 
         Assert.Single(result);
@@ -69,7 +68,7 @@ public class ImageImporterTests : ContextualTests
     {
         var filePath = CopyResourceToFile(ImageResources.animals_tiff, "image.tiff");
 
-        var source = _imageImporter.Import(filePath, new ImportParams(), (current, max) => { }, CancellationToken.None);
+        var source = _imageImporter.Import(filePath, new ImportParams());
         var result = await source.ToList();
 
         Assert.Equal(3, result.Count);
@@ -95,8 +94,7 @@ public class ImageImporterTests : ContextualTests
     {
         var filePath = CopyResourceToFile(ImageResources.dog, "image.jpg");
 
-        var source = _imageImporter.Import(filePath, new ImportParams { ThumbnailSize = 256 }, (current, max) => { },
-            CancellationToken.None);
+        var source = _imageImporter.Import(filePath, new ImportParams { ThumbnailSize = 256 });
         var result = await source.ToList();
 
         Assert.Single(result);
@@ -109,9 +107,8 @@ public class ImageImporterTests : ContextualTests
     {
         var filePath = CopyResourceToFile(ImageResources.dog, "image.jpg");
 
-        var progressMock = new Mock<ProgressHandler>();
-
-        var source = _imageImporter.Import(filePath, new ImportParams(), progressMock.Object, CancellationToken.None);
+        var progressMock = new Mock<ProgressCallback>();
+        var source = _imageImporter.Import(filePath, new ImportParams(), progressMock.Object);
 
         progressMock.VerifyNoOtherCalls();
         await source.ToList();
@@ -125,8 +122,8 @@ public class ImageImporterTests : ContextualTests
     {
         var filePath = CopyResourceToFile(ImageResources.animals_tiff, "image.tiff");
 
-        var progressMock = new Mock<ProgressHandler>();
-        var source = _imageImporter.Import(filePath, new ImportParams(), progressMock.Object, CancellationToken.None);
+        var progressMock = new Mock<ProgressCallback>();
+        var source = _imageImporter.Import(filePath, new ImportParams(), progressMock.Object);
 
         progressMock.VerifyNoOtherCalls();
         Assert.NotNull(await source.Next());
@@ -149,7 +146,7 @@ public class ImageImporterTests : ContextualTests
         var filePath = CopyResourceToFile(ImageResources.dog, "image.jpg");
 
         var cts = new CancellationTokenSource();
-        var source = _imageImporter.Import(filePath, new ImportParams(), (current, max) => { }, cts.Token);
+        var source = _imageImporter.Import(filePath, new ImportParams(), cts.Token);
 
         cts.Cancel();
         Assert.Null(await source.Next());
@@ -162,7 +159,7 @@ public class ImageImporterTests : ContextualTests
         var filePath = CopyResourceToFile(ImageResources.animals_tiff, "image.tiff");
 
         var cts = new CancellationTokenSource();
-        var source = _imageImporter.Import(filePath, new ImportParams(), (current, max) => { }, cts.Token);
+        var source = _imageImporter.Import(filePath, new ImportParams(), cts.Token);
 
         Assert.NotNull(await source.Next());
         Assert.NotNull(await source.Next());
@@ -188,7 +185,7 @@ public class ImageImporterTests : ContextualTests
     public async Task ImportMissingFile()
     {
         var filePath = Path.Combine(FolderPath, "missing.png");
-        var source = _imageImporter.Import(filePath, new ImportParams(), (current, max) => { }, CancellationToken.None);
+        var source = _imageImporter.Import(filePath, new ImportParams());
 
         var ex = await Assert.ThrowsAsync<FileNotFoundException>(async () => await source.ToList());
         Assert.Contains("Could not find", ex.Message);
@@ -199,7 +196,7 @@ public class ImageImporterTests : ContextualTests
     {
         var filePath = CopyResourceToFile(ImageResources.dog, "image.png");
         using var stream = File.OpenWrite(filePath);
-        var source = _imageImporter.Import(filePath, new ImportParams(), (current, max) => { }, CancellationToken.None);
+        var source = _imageImporter.Import(filePath, new ImportParams());
 
         var ex = await Assert.ThrowsAsync<IOException>(async () => await source.ToList());
         Assert.Contains("being used by another process", ex.Message);
@@ -214,7 +211,7 @@ public class ImageImporterTests : ContextualTests
         {
             BarcodeDetectionOptions = new BarcodeDetectionOptions { DetectBarcodes = true }
         };
-        var source = _imageImporter.Import(filePath, importParams, (current, max) => { }, CancellationToken.None);
+        var source = _imageImporter.Import(filePath, importParams);
         var result = await source.ToList();
 
         Assert.Single(result);

@@ -15,7 +15,7 @@ public class ScannedImageImporter : IScannedImageImporter
         _imageImporter = imageImporter;
     }
 
-    public AsyncSource<ProcessedImage> Import(string filePath, ImportParams importParams, ProgressHandler progressCallback, CancellationToken cancelToken)
+    public AsyncSource<ProcessedImage> Import(string filePath, ImportParams importParams, ProgressHandler progress = default)
     {
         if (filePath == null)
         {
@@ -24,9 +24,9 @@ public class ScannedImageImporter : IScannedImageImporter
         switch (Path.GetExtension(filePath).ToLowerInvariant())
         {
             case ".pdf":
-                return _pdfImporter.Import(filePath, importParams, progressCallback, cancelToken);
+                return _pdfImporter.Import(filePath, importParams, progress);
             default:
-                return _imageImporter.Import(filePath, importParams, progressCallback, cancelToken);
+                return _imageImporter.Import(filePath, importParams, progress);
         }
     }
 }

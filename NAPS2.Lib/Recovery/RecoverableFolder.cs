@@ -64,17 +64,17 @@ public class RecoverableFolder : IDisposable
     }
 
     public bool TryRecover(Action<ProcessedImage> imageCallback, RecoveryParams recoveryParams,
-        ProgressHandler progressCallback, CancellationToken cancelToken)
+        ProgressHandler progress)
     {
         if (_disposed) throw new ObjectDisposedException(nameof(RecoverableFolder));
 
         int currentProgress = 0;
         int totalProgress = ImageCount;
-        progressCallback(currentProgress, totalProgress);
+        progress.Report(currentProgress, totalProgress);
 
         foreach (RecoveryIndexImage indexImage in _recoveryIndex.Images)
         {
-            if (cancelToken.IsCancellationRequested)
+            if (progress.IsCancellationRequested)
             {
                 return false;
             }
@@ -91,9 +91,9 @@ public class RecoverableFolder : IDisposable
             {
                 // TODO: Should we treat FileNotFound differently than other exceptions? i.e. continue on FNF, abort otherwise
                 Log.ErrorException("Could not recover image", e);
-                
+
                 currentProgress++;
-                progressCallback(currentProgress, totalProgress);
+                progress.Report(currentProgress, totalProgress);
                 continue;
             }
 
@@ -102,7 +102,7 @@ public class RecoverableFolder : IDisposable
             imageCallback(recoveredImage);
 
             currentProgress++;
-            progressCallback(currentProgress, totalProgress);
+            progress.Report(currentProgress, totalProgress);
         }
         // Now that we've recovered successfully, we can safely delete the old folder
         TryDelete();

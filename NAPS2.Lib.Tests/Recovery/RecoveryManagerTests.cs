@@ -88,12 +88,11 @@ public class RecoveryManagerTests : ContextualTests
 
         var images = new List<ProcessedImage>();
         void ImageCallback(ProcessedImage img) => images.Add(img);
-        var mockProgressCallback = new Mock<ProgressHandler>();
+        var mockProgressCallback = new Mock<ProgressCallback>();
 
         using var folder = _recoveryManager.GetLatestRecoverableFolder();
         Assert.NotNull(folder);
-        var result = folder.TryRecover(ImageCallback, new RecoveryParams(), mockProgressCallback.Object,
-            CancellationToken.None);
+        var result = folder.TryRecover(ImageCallback, new RecoveryParams(), mockProgressCallback.Object);
         Assert.True(result);
 
         Assert.Equal(2, images.Count);
@@ -123,8 +122,8 @@ public class RecoveryManagerTests : ContextualTests
         using var folder = _recoveryManager.GetLatestRecoverableFolder();
         Assert.NotNull(folder);
 
-        var result = folder.TryRecover(mockImageCallback.Object, new RecoveryParams(), ProgressCallback,
-            cts.Token);
+        var result = folder.TryRecover(mockImageCallback.Object, new RecoveryParams(),
+            new ProgressHandler(ProgressCallback, cts.Token));
         Assert.False(result);
         Assert.True(Directory.Exists(recovery1));
         mockImageCallback.Verify(callback => callback(It.IsAny<ProcessedImage>()));
@@ -145,12 +144,11 @@ public class RecoveryManagerTests : ContextualTests
 
         var images = new List<ProcessedImage>();
         void ImageCallback(ProcessedImage img) => images.Add(img);
-        var mockProgressCallback = new Mock<ProgressHandler>();
+        var mockProgressCallback = new Mock<ProgressCallback>();
 
         using var folder = _recoveryManager.GetLatestRecoverableFolder();
         Assert.NotNull(folder);
-        var result = folder.TryRecover(ImageCallback, new RecoveryParams(), mockProgressCallback.Object,
-            CancellationToken.None);
+        var result = folder.TryRecover(ImageCallback, new RecoveryParams(), mockProgressCallback.Object);
         Assert.True(result);
 
         Assert.Single(images);

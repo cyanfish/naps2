@@ -25,8 +25,7 @@ public class PdfExporter : IPdfExporter
     }
 
     public async Task<bool> Export(string path, ICollection<ProcessedImage> images,
-        PdfExportParams exportParams, OcrParams? ocrParams = null, ProgressHandler? progressCallback = null,
-        CancellationToken cancelToken = default)
+        PdfExportParams exportParams, OcrParams? ocrParams = null, ProgressHandler progress = default)
     {
         return await Task.Run(async () =>
         {
@@ -57,7 +56,7 @@ public class PdfExporter : IPdfExporter
                 foreach (var image in images)
                 {
                     var pageState = new PageExportState(
-                        image, pageIndex++, document, ocrEngine, ocrParams, cancelToken, exportParams.Compat);
+                        image, pageIndex++, document, ocrEngine, ocrParams, progress.CancelToken, exportParams.Compat);
                     // TODO: To improve our ability to passthrough, we could consider using Pdfium to apply the transform to
                     // the underlying PDF file. For example, doing color shifting on individual text + image objects, or
                     // applying matrix changes.

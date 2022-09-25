@@ -1,6 +1,4 @@
 ﻿using System.Threading;
-using NAPS2.Config.Model;
-using NAPS2.Dependencies;
 using NAPS2.ImportExport;
 using NAPS2.ImportExport.Email;
 using NAPS2.ImportExport.Images;
@@ -285,8 +283,7 @@ public class AutomatedScanning
                         PatchTOnly = true
                     }
                 };
-                var images = await _scannedImageImporter
-                    .Import(actualPath, importParams, (j, k) => { }, CancellationToken.None).ToList();
+                var images = await _scannedImageImporter.Import(actualPath, importParams).ToList();
                 _scanList.Add(images);
             }
             catch (Exception ex)
@@ -368,7 +365,7 @@ public class AutomatedScanning
             }
 
             OutputVerbose(ConsoleResources.SendingEmail);
-            if (await _emailProviderFactory.Default.SendEmail(message, (j, k) => { }, CancellationToken.None))
+            if (await _emailProviderFactory.Default.SendEmail(message))
             {
                 OutputVerbose(ConsoleResources.EmailSent);
             }

@@ -1,5 +1,3 @@
-using System.Threading;
-
 namespace NAPS2.ImportExport.Email.Mapi;
 
 public class MapiEmailProvider : IEmailProvider
@@ -19,10 +17,9 @@ public class MapiEmailProvider : IEmailProvider
     /// Sends an email described by the given message object.
     /// </summary>
     /// <param name="message">The object describing the email message.</param>
-    /// <param name="progressCallback"></param>
-    /// <param name="cancelToken"></param>
+    /// <param name="progress"></param>
     /// <returns>Returns true if the message was sent, false if the user aborted.</returns>
-    public Task<bool> SendEmail(EmailMessage message, ProgressHandler progressCallback, CancellationToken cancelToken)
+    public Task<bool> SendEmail(EmailMessage message, ProgressHandler progress = default)
     {
 #if NET6_0_OR_GREATER
         if (!OperatingSystem.IsWindowsVersionAtLeast(7)) throw new InvalidOperationException("Windows-only");

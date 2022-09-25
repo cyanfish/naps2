@@ -1,5 +1,4 @@
 ﻿using System.Text;
-using System.Threading;
 using Newtonsoft.Json.Linq;
 
 namespace NAPS2.ImportExport.Email.Oauth;
@@ -65,15 +64,13 @@ public class GmailOauthProvider : OauthProvider
         return resp.Value<string>("emailAddress");
     }
 
-    public async Task<DraftInfo> UploadDraft(string messageRaw, ProgressHandler progressCallback,
-        CancellationToken cancelToken)
+    public async Task<DraftInfo> UploadDraft(string messageRaw, ProgressHandler progress = default)
     {
         var resp = await PostAuthorized(
             $"https://www.googleapis.com/upload/gmail/v1/users/{User}/drafts?uploadType=multipart",
             messageRaw,
             "message/rfc822",
-            progressCallback,
-            cancelToken);
+            progress);
         return new DraftInfo(
             resp.Value<JObject>("message").Value<string>("id"),
             resp.Value<string>("id")
@@ -87,9 +84,7 @@ public class GmailOauthProvider : OauthProvider
             {
                 { "id", draftId }
             }.ToString(), 
-            "application/json",
-            null,
-            CancellationToken.None);
+            "application/json");
     }
 
     public record DraftInfo(string DraftId, string MessageId);

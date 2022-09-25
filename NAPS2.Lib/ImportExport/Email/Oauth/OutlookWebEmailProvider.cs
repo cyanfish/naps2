@@ -1,5 +1,4 @@
-﻿using System.Threading;
-using Newtonsoft.Json.Linq;
+﻿using Newtonsoft.Json.Linq;
 
 namespace NAPS2.ImportExport.Email.Oauth;
 
@@ -12,7 +11,7 @@ public class OutlookWebEmailProvider : IEmailProvider
         _outlookWebOauthProvider = outlookWebOauthProvider;
     }
 
-    public async Task<bool> SendEmail(EmailMessage emailMessage, ProgressHandler progressCallback, CancellationToken cancelToken)
+    public async Task<bool> SendEmail(EmailMessage emailMessage, ProgressHandler progress = default)
     {
         var messageObj = new JObject
         {
@@ -32,7 +31,7 @@ public class OutlookWebEmailProvider : IEmailProvider
                 { "ContentBytes", Convert.ToBase64String(File.ReadAllBytes(attachment.FilePath)) }
             }))}
         };
-        var respUrl = await _outlookWebOauthProvider.UploadDraft(messageObj.ToString(), progressCallback, cancelToken);
+        var respUrl = await _outlookWebOauthProvider.UploadDraft(messageObj.ToString(), progress);
 
         // Open the draft in the user's browser
         Process.Start(respUrl + "&ispopout=0");

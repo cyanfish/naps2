@@ -62,7 +62,7 @@ public class SavePdfOperation : OperationBase
             {
                 result = await _pdfExporter.Export(subFileName, images,
                     new PdfExportParams(pdfSettings.Metadata, pdfSettings.Encryption,
-                        pdfSettings.Compat), ocrParams, OnProgress, CancelToken);
+                        pdfSettings.Compat), ocrParams, ProgressHandler);
             }
             catch (UnauthorizedAccessException ex)
             {
@@ -105,7 +105,7 @@ public class SavePdfOperation : OperationBase
 
                 try
                 {
-                    result = await _emailProviderFactory.Default.SendEmail(emailMessage, OnProgress, CancelToken);
+                    result = await _emailProviderFactory.Default.SendEmail(emailMessage, ProgressHandler);
                 }
                 catch (OperationCanceledException)
                 {

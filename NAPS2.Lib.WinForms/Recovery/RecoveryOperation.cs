@@ -39,7 +39,7 @@ internal class RecoveryOperation : OperationBase
                     {
                         try
                         {
-                            return recoverableFolder.TryRecover(imageCallback, recoveryParams, OnProgress, CancelToken);
+                            return recoverableFolder.TryRecover(imageCallback, recoveryParams, ProgressHandler);
                         }
                         finally
                         {

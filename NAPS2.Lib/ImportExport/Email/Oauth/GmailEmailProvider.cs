@@ -1,5 +1,4 @@
-﻿using System.Threading;
-using MimeKit;
+﻿using MimeKit;
 
 namespace NAPS2.ImportExport.Email.Oauth;
 
@@ -12,10 +11,9 @@ public class GmailEmailProvider : MimeEmailProvider
         _gmailOauthProvider = gmailOauthProvider;
     }
 
-    protected override async Task SendMimeMessage(MimeMessage message, ProgressHandler progressCallback,
-        CancellationToken cancelToken, bool autoSend)
+    protected override async Task SendMimeMessage(MimeMessage message, ProgressHandler progress, bool autoSend)
     {
-        var draft = await _gmailOauthProvider.UploadDraft(message.ToString(), progressCallback, cancelToken);
+        var draft = await _gmailOauthProvider.UploadDraft(message.ToString(), progress);
         if (autoSend)
         {
             await _gmailOauthProvider.SendDraft(draft.DraftId);

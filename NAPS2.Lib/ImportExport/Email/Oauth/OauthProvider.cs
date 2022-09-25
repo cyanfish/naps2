@@ -154,7 +154,7 @@ public abstract class OauthProvider
     }
 
     protected async Task<JObject> PostAuthorized(string url, string body, string contentType,
-        ProgressHandler? progressCallback, CancellationToken cancelToken = default)
+        ProgressHandler progress = default)
     {
         using var client = AuthorizedClient();
         client.Headers.Add("Content-Type", contentType);
@@ -163,7 +163,7 @@ public abstract class OauthProvider
         // https://stackoverflow.com/questions/8181114/uploading-http-progress-tracking
         // Maybe using HttpClient would fix it.
         //client.AddUploadProgressHandler(progressCallback);
-        string response = await client.UploadStringTaskAsync(url, "POST", body, cancelToken);
+        string response = await client.UploadStringTaskAsync(url, "POST", body, progress.CancelToken);
         return JObject.Parse(response);
     }
 

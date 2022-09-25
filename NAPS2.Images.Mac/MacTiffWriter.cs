@@ -1,12 +1,11 @@
-using System.Threading;
+using NAPS2.Util;
 
 namespace NAPS2.Images.Mac;
 
 public class MacTiffWriter : ITiffWriter
 {
     public bool SaveTiff(IList<IMemoryImage> images, string path,
-        TiffCompressionType compression = TiffCompressionType.Auto,
-        Action<int, int>? progressCallback = null, CancellationToken cancelToken = default)
+        TiffCompressionType compression = TiffCompressionType.Auto, ProgressHandler progress = default)
     {
         var data = GetTiffData(images, compression);
         if (!data.Save(path, false, out var error))
@@ -17,8 +16,7 @@ public class MacTiffWriter : ITiffWriter
     }
 
     public bool SaveTiff(IList<IMemoryImage> images, Stream stream,
-        TiffCompressionType compression = TiffCompressionType.Auto,
-        Action<int, int>? progressCallback = null, CancellationToken cancelToken = default)
+        TiffCompressionType compression = TiffCompressionType.Auto, ProgressHandler progress = default)
     {
         var data = GetTiffData(images, compression);
         data.AsStream().CopyTo(stream);

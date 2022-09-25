@@ -1,5 +1,4 @@
-﻿using System.Threading;
-using NAPS2.Scan;
+﻿using NAPS2.Scan;
 
 namespace NAPS2.ImportExport.Images;
 
@@ -16,14 +15,14 @@ public class ImageImporter : IImageImporter
         _importPostProcessor = importPostProcessor;
     }
 
-    public AsyncSource<ProcessedImage> Import(string filePath, ImportParams importParams, ProgressHandler progressCallback, CancellationToken cancelToken)
+    public AsyncSource<ProcessedImage> Import(string filePath, ImportParams importParams, ProgressHandler progress = default)
     {
         var sink = new AsyncSink<ProcessedImage>();
         Task.Run(() =>
         {
             try
             {
-                if (cancelToken.IsCancellationRequested)
+                if (progress.IsCancellationRequested)
                 {
                     sink.SetCompleted();
                     return;
@@ -42,14 +41,14 @@ public class ImageImporter : IImageImporter
                     throw;
                 }
                 
-                progressCallback(0, frameCount);
+                progress.Report(0, frameCount);
 
                 int i = 0;
                 foreach (var frame in toImport)
                 {
                     using (frame)
                     {
-                        if (cancelToken.IsCancellationRequested)
+                        if (progress.IsCancellationRequested)
                         {
                             sink.SetCompleted();
                             return;
@@ -68,7 +67,7 @@ public class ImageImporter : IImageImporter
                             importParams.BarcodeDetectionOptions,
                             true);
 
-                        progressCallback(++i, frameCount);
+                        progress.Report(++i, frameCount);
                         sink.PutItem(image);
                     }
                 }

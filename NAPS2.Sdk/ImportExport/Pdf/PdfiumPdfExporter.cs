@@ -1,5 +1,4 @@
-﻿using System.Threading;
-using NAPS2.ImportExport.Pdf.Pdfium;
+﻿using NAPS2.ImportExport.Pdf.Pdfium;
 using NAPS2.Ocr;
 using NAPS2.Scan;
 
@@ -16,8 +15,7 @@ public class PdfiumPdfExporter : IPdfExporter
     }
 
     public async Task<bool> Export(string path, ICollection<ProcessedImage> images,
-        PdfExportParams exportParams, OcrParams? ocrParams = null, ProgressHandler? progressCallback = null,
-        CancellationToken cancelToken = default)
+        PdfExportParams exportParams, OcrParams? ocrParams = null, ProgressHandler progress = default)
     {
         return await Task.Run(() =>
         {
@@ -79,7 +77,7 @@ public class PdfiumPdfExporter : IPdfExporter
                 //     ? BuildDocumentWithOcr(progressCallback, cancelToken, document, compat, images, ocrParams!,
                 //         ocrEngine)
                 //     : BuildDocumentWithoutOcr(progressCallback, cancelToken, document, compat, images);
-                bool result = BuildDocumentWithoutOcr(progressCallback, cancelToken, document, compat, images);
+                bool result = BuildDocumentWithoutOcr(progress, document, compat, images);
                 if (!result)
                 {
                     return false;
@@ -108,11 +106,11 @@ public class PdfiumPdfExporter : IPdfExporter
         });
     }
 
-    private bool BuildDocumentWithoutOcr(ProgressHandler? progressCallback, CancellationToken cancelToken,
+    private bool BuildDocumentWithoutOcr(ProgressHandler progress,
         PdfDocument document, PdfCompat compat, ICollection<ProcessedImage> images)
     {
-        int progress = 0;
-        progressCallback?.Invoke(progress, images.Count);
+        int done = 0;
+        progress.Report(done, images.Count);
         foreach (var image in images)
         {
             if (image.Storage is ImageFileStorage fileStorage && IsPdfFile(fileStorage) && image.TransformState.IsEmpty)
@@ -122,16 +120,16 @@ public class PdfiumPdfExporter : IPdfExporter
             else
             {
                 using var renderedImage = image.Render();
-                // TODO: Verify always 24 bit? 
-                if (cancelToken.IsCancellationRequested)
+                // TODO: Verify always 24 bit?
+                if (progress.IsCancellationRequested)
                 {
                     return false;
                 }
                 using var page = document.NewPage(renderedImage.Width, renderedImage.Height); // TODO: width/heigth scaling
                 DrawImageOnPage(document, page, renderedImage, compat, image.Metadata.Lossless);
             }
-            progress++;
-            progressCallback?.Invoke(progress, images.Count);
+            done++;
+            progress.Report(done, images.Count);
         }
         return true;
     }

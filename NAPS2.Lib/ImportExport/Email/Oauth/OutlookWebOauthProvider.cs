@@ -1,5 +1,4 @@
 ﻿using System.Text;
-using System.Threading;
 using Newtonsoft.Json.Linq;
 
 namespace NAPS2.ImportExport.Email.Oauth;
@@ -62,9 +61,9 @@ public class OutlookWebOauthProvider : OauthProvider
         return resp.Value<string>("Id");
     }
 
-    public async Task<string> UploadDraft(string messageRaw, ProgressHandler progressCallback, CancellationToken cancelToken)
+    public async Task<string> UploadDraft(string messageRaw, ProgressHandler progress = default)
     {
-        var resp = await PostAuthorized("https://outlook.office.com/api/v1.0/me/messages", messageRaw, "application/json", progressCallback, cancelToken);
+        var resp = await PostAuthorized("https://outlook.office.com/api/v1.0/me/messages", messageRaw, "application/json", progress);
         return resp.Value<string>("WebLink");
     }
 

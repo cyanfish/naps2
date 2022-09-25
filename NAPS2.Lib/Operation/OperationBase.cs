@@ -44,6 +44,8 @@ public abstract class OperationBase : IOperation
 
     protected CancellationToken CancelToken => _cts.Token;
 
+    protected ProgressHandler ProgressHandler => new(OnProgress, CancelToken);
+
     protected void RunAsync(Func<Task<bool>> action)
     {
         StartTask(action);

@@ -1,6 +1,6 @@
 using System.Drawing;
 using System.Drawing.Imaging;
-using System.Threading;
+using NAPS2.Util;
 
 namespace NAPS2.Images.Gdi;
 
@@ -10,30 +10,28 @@ namespace NAPS2.Images.Gdi;
 internal class GdiTiffWriter : ITiffWriter
 {
     public bool SaveTiff(IList<IMemoryImage> images, string path,
-        TiffCompressionType compression = TiffCompressionType.Auto, Action<int, int>? progressCallback = null,
-        CancellationToken cancelToken = default)
+        TiffCompressionType compression = TiffCompressionType.Auto, ProgressHandler progress = default)
     {
         return SaveTiffInternal(images,
             (bitmap, codecInfo, encoderParams) => bitmap.Save(path, codecInfo, encoderParams),
-            () => File.Delete(path), compression, progressCallback, cancelToken);
+            () => File.Delete(path), compression, progress);
     }
 
     public bool SaveTiff(IList<IMemoryImage> images, Stream stream,
-        TiffCompressionType compression = TiffCompressionType.Auto, Action<int, int>? progressCallback = null,
-        CancellationToken cancelToken = default)
+        TiffCompressionType compression = TiffCompressionType.Auto, ProgressHandler progress = default)
     {
         return SaveTiffInternal(images,
             (bitmap, codecInfo, encoderParams) => bitmap.Save(stream, codecInfo, encoderParams),
-            () => { }, compression, progressCallback, cancelToken);
+            () => { }, compression, progress);
     }
 
     private bool SaveTiffInternal(IList<IMemoryImage> images, Action<Bitmap, ImageCodecInfo, EncoderParameters> save,
-        Action cleanup, TiffCompressionType compression, Action<int, int>? progressCallback, CancellationToken cancelToken)
+        Action cleanup, TiffCompressionType compression, ProgressHandler progress = default)
     {
         ImageCodecInfo codecInfo = GetCodecForString("TIFF");
 
-        progressCallback?.Invoke(0, images.Count);
-        if (cancelToken.IsCancellationRequested)
+        progress.Report(0, images.Count);
+        if (progress.IsCancellationRequested)
         {
             return false;
         }
@@ -50,8 +48,8 @@ internal class GdiTiffWriter : ITiffWriter
 
             for (int i = 1; i < images.Count; i++)
             {
-                progressCallback?.Invoke(i, images.Count);
-                if (cancelToken.IsCancellationRequested)
+                progress.Report(i, images.Count);
+                if (progress.IsCancellationRequested)
                 {
                     cleanup();
                     return false;

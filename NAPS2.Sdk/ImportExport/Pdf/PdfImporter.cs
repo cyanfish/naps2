@@ -32,8 +32,7 @@ public class PdfImporter : IPdfImporter
     }
 
     public AsyncSource<ProcessedImage> Import(string filePath, ImportParams? importParams = null,
-        ProgressHandler? progressCallback = null,
-        CancellationToken cancelToken = default)
+        ProgressHandler progress = default)
     {
         importParams ??= new ImportParams();
         var sink = new AsyncSink<ProcessedImage>();
@@ -41,13 +40,13 @@ public class PdfImporter : IPdfImporter
         {
             try
             {
-                if (cancelToken.IsCancellationRequested) return;
+                if (progress.IsCancellationRequested) return;
 
                 lock (PdfiumNativeLibrary.Instance)
                 {
                     using var document = LoadDocument(filePath, importParams);
                     if (document == null) return;
-                    progressCallback?.Invoke(0, document.PageCount);
+                    progress.Report(0, document.PageCount);
                     
                     // TODO: Maybe do a permissions check
 
@@ -60,9 +59,9 @@ public class PdfImporter : IPdfImporter
                     int i = 0;
                     foreach (var page in pages.InnerList)
                     {
-                        if (cancelToken.IsCancellationRequested) return;
+                        if (progress.IsCancellationRequested) return;
                         var image = GetImageFromPage(page, importParams);
-                        progressCallback?.Invoke(++i, document.PageCount);
+                        progress.Report(++i, document.PageCount);
                         sink.PutItem(image);
                     }
                 }

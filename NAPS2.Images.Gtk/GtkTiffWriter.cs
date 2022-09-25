@@ -1,5 +1,5 @@
-using System.Threading;
 using NAPS2.Images.Bitwise;
+using NAPS2.Util;
 
 namespace NAPS2.Images.Gtk;
 
@@ -13,32 +13,30 @@ internal class LibTiffIo : ITiffWriter
     }
 
     public bool SaveTiff(IList<IMemoryImage> images, string path,
-        TiffCompressionType compression = TiffCompressionType.Auto,
-        Action<int, int>? progressCallback = null, CancellationToken cancelToken = default)
+        TiffCompressionType compression = TiffCompressionType.Auto, ProgressHandler progress = default)
     {
         var tiff = LibTiff.TIFFOpen(path, "w");
-        return WriteTiff(tiff, null, images, compression, progressCallback, cancelToken);
+        return WriteTiff(tiff, null, images, compression, progress);
     }
 
     public bool SaveTiff(IList<IMemoryImage> images, Stream stream,
-        TiffCompressionType compression = TiffCompressionType.Auto,
-        Action<int, int>? progressCallback = null, CancellationToken cancelToken = default)
+        TiffCompressionType compression = TiffCompressionType.Auto, ProgressHandler progress = default)
     {
         var client = new LibTiffStreamClient(stream);
         var tiff = client.TIFFClientOpen("w");
-        return WriteTiff(tiff, client, images, compression, progressCallback, cancelToken);
+        return WriteTiff(tiff, client, images, compression, progress);
     }
 
     private bool WriteTiff(IntPtr tiff, LibTiffStreamClient client, IList<IMemoryImage> images,
-        TiffCompressionType compression, Action<int, int>? progressCallback, CancellationToken cancelToken)
+        TiffCompressionType compression, ProgressHandler progress = default)
     {
         try
         {
             int i = 0;
-            progressCallback?.Invoke(0, images.Count);
+            progress.Report(0, images.Count);
             foreach (var image in images)
             {
-                if (cancelToken.IsCancellationRequested) return false;
+                if (progress.IsCancellationRequested) return false;
                 var pixelFormat =
                     image.LogicalPixelFormat == ImagePixelFormat.BW1 || compression == TiffCompressionType.Ccitt4
                         ? ImagePixelFormat.BW1
@@ -49,7 +47,7 @@ internal class LibTiffIo : ITiffWriter
                 {
                     LibTiff.TIFFWriteDirectory(tiff);
                 }
-                progressCallback?.Invoke(++i, images.Count);
+                progress.Report(++i, images.Count);
             }
             return true;
         }

@@ -65,13 +65,14 @@ public static class WebClientExtensions
         return tcs.Task;
     }
 
-    public static void AddDownloadProgressHandler(this WebClient client, ProgressHandler progressHandler)
+    // TODO: Use these extensions?
+    public static void AddDownloadProgressHandler(this WebClient client, ProgressHandler progress)
     {
-        client.DownloadProgressChanged += (sender, args) => progressHandler((int)args.BytesReceived, (int)args.TotalBytesToReceive);
+        client.DownloadProgressChanged += (sender, args) => progress.Report((int)args.BytesReceived, (int)args.TotalBytesToReceive);
     }
 
-    public static void AddUploadProgressHandler(this WebClient client, ProgressHandler progressHandler)
+    public static void AddUploadProgressHandler(this WebClient client, ProgressHandler progress)
     {
-        client.UploadProgressChanged += (sender, args) => progressHandler((int)args.BytesSent, (int)args.TotalBytesToSend);
+        client.UploadProgressChanged += (sender, args) => progress.Report((int)args.BytesSent, (int)args.TotalBytesToSend);
     }
 }

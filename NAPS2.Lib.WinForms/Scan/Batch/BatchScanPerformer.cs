@@ -276,8 +276,7 @@ public class BatchScanPerformer : IBatchScanPerformer
                         _config.Get(c => c.PdfSettings.Metadata),
                         _config.Get(c => c.PdfSettings.Encryption),
                         _config.Get(c => c.PdfSettings.Compat));
-                    await _pdfExporter.Export(subPath, images, exportParams, _config.DefaultOcrParams(),
-                        (j, k) => { }, _cancelToken);
+                    await _pdfExporter.Export(subPath, images, exportParams, _config.DefaultOcrParams(), _cancelToken);
                 }
                 finally
                 {
