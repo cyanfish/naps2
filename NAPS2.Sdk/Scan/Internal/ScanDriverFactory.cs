@@ -17,16 +17,18 @@ internal class ScanDriverFactory : IScanDriverFactory
     {
         switch (options.Driver)
         {
+#if !MAC
             case Driver.Wia:
                 return new WiaScanDriver(_scanningContext);
-            case Driver.Sane:
-                return new SaneScanDriver(_scanningContext);
             case Driver.Twain:
                 return options.TwainOptions.Adapter == TwainAdapter.Legacy
                     ? new LegacyTwainScanDriver()
                     : new TwainScanDriver(_scanningContext);
+#endif
+            case Driver.Sane:
+                return new SaneScanDriver(_scanningContext);
             default:
-                throw new InvalidOperationException("Unknown driver. Should never happen.");
+                throw new InvalidOperationException($"Unsupported driver: {options.Driver}");
         };
     }
 }

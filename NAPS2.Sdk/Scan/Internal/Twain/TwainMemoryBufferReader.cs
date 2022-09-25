@@ -1,3 +1,4 @@
+#if !MAC
 using NAPS2.Images.Bitwise;
 using NAPS2.Remoting.Worker;
 using NTwain.Data;
@@ -40,3 +41,4 @@ public static class TwainMemoryBufferReader
         return true;
     }
 }
+#endif

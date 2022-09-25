@@ -1,3 +1,4 @@
+#if !MAC
 using System.Threading;
 using Google.Protobuf;
 using NAPS2.Remoting.Worker;
@@ -373,3 +374,4 @@ internal class TwainSessionScanRunner
         source.Capabilities.ICapYResolution.SetValue(_options.Dpi);
     }
 }
+#endif

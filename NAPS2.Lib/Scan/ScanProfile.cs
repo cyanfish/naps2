@@ -3,7 +3,6 @@ using System.Globalization;
 using System.Reflection;
 using System.Xml.Serialization;
 using NAPS2.ImportExport;
-using NAPS2.Wia;
 
 namespace NAPS2.Scan;
 
@@ -116,7 +115,7 @@ public class ScanProfile
 
     public double WiaDelayBetweenScansSeconds { get; set; }
 
-    public WiaVersion WiaVersion { get; set; }
+    public WiaApiVersion WiaVersion { get; set; }
 
     public bool FlipDuplexedPages { get; set; }
 

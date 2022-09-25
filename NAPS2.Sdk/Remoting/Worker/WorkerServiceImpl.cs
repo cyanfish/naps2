@@ -8,8 +8,10 @@ using NAPS2.ImportExport.Pdf;
 using NAPS2.Scan;
 using NAPS2.Scan.Internal;
 using NAPS2.Scan.Internal.Twain;
+#if !MAC
 using NAPS2.Scan.Internal.Wia;
 using NAPS2.Wia;
+#endif
 using NAPS2.Serialization;
 
 namespace NAPS2.Remoting.Worker;
@@ -70,12 +72,15 @@ public class WorkerServiceImpl : WorkerService.WorkerServiceBase
 
     public override Task<Wia10NativeUiResponse> Wia10NativeUi(Wia10NativeUiRequest request, ServerCallContext context)
     {
+#if MAC
+        throw new NotSupportedException();
+#else
         using var callRef = StartCall();
         try
         {
             try
             {
-                using var deviceManager = new WiaDeviceManager(WiaVersion.Wia10);
+                using var deviceManager = new WiaDeviceManager(Wia.WiaVersion.Wia10);
                 using var device = deviceManager.FindDevice(request.DeviceId);
                 var item = device.PromptToConfigure((IntPtr) request.Hwnd);
                 var response = new Wia10NativeUiResponse();
@@ -100,6 +105,7 @@ public class WorkerServiceImpl : WorkerService.WorkerServiceBase
         {
             return Task.FromResult(new Wia10NativeUiResponse { Error = RemotingHelper.ToError(e) });
         }
+#endif
     }
 
     public override async Task<GetDeviceListResponse> GetDeviceList(GetDeviceListRequest request,

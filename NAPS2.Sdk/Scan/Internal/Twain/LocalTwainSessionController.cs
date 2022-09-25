@@ -1,3 +1,4 @@
+#if !MAC
 using System.Threading;
 using NAPS2.Scan.Exceptions;
 using NTwain;
@@ -78,3 +79,4 @@ public class LocalTwainSessionController : ITwainSessionController
         await runner.Run();
     }
 }
+#endif

@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net6;net462</TargetFrameworks>
+    <TargetFrameworks>net6;net6-macos10.15;net462</TargetFrameworks>
     <Nullable>enable</Nullable>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <!-- TODO: Move ClientCreds etc out of NAPS2.Sdk -->
@@ -29,6 +29,9 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Standalone|AnyCPU'">
     <DefineConstants>STANDALONE</DefineConstants>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(TargetFramework)' == 'net6-macos10.15'">
+    <DefineConstants>MAC</DefineConstants>
+  </PropertyGroup>
   
   <ItemGroup>
     <PackageReference Include="SharpZipLib" Version="1.3.3" />
@@ -36,17 +39,14 @@
     <Reference Include="PdfSharpCore">
       <HintPath>..\NAPS2.Setup\lib\PdfSharpCore.dll</HintPath>
     </Reference>
-    <Reference Include="NTwain" Condition="'$(TargetFramework)' == 'net6'">
-      <HintPath>..\NAPS2.Setup\lib\NTwain.dll</HintPath>
-    </Reference>
     
     <PackageReference Include="Grpc.Tools" Version="2.47.0" PrivateAssets="all" />
     <PackageReference Include="GrpcDotNetNamedPipes" Version="1.4.4" />
-    <PackageReference Include="Microsoft.Win32.Registry" Version="5.0.0" />
-    <PackageReference Include="NAPS2.Wia" Version="1.0.1" />
+    <PackageReference Include="Microsoft.Win32.Registry" Version="5.0.0" Condition="'$(TargetFramework)' != 'net6-macos10.15'" />
+    <PackageReference Include="NAPS2.Wia" Version="1.0.1" Condition="'$(TargetFramework)' != 'net6-macos10.15'" />
     <!-- Hide compatibility warnings for NTwain as it will only be actually used on Windows. -->
     <!-- TODO: Does this actually work if we build a net6 framework-dependent app and try to use Twain? -->
-    <PackageReference Include="NTwain" Version="3.7.1" NoWarn="NU1701" Condition="'$(TargetFramework)' == 'net462'" />
+    <PackageReference Include="NTwain" Version="3.7.1" NoWarn="NU1701" Condition="'$(TargetFramework)' != 'net6-macos10.15'" />
     <PackageReference Include="Nullable" Version="1.2.0" Condition="'$(TargetFramework)' == 'net462'" />
     <PackageReference Include="System.Collections.Immutable" Version="6.0.0" />
     <PackageReference Include="System.Resources.Extensions" Version="6.0.0" />

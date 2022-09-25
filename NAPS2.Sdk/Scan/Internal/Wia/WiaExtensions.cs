@@ -1,4 +1,5 @@
-﻿using NAPS2.Wia;
+﻿#if !MAC
+using NAPS2.Wia;
 
 namespace NAPS2.Scan.Internal.Wia;
 
@@ -40,3 +41,4 @@ public static class WiaExtensions
         }
     }
 }
+#endif

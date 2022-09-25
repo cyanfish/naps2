@@ -1,5 +1,4 @@
 using NAPS2.Scan;
-using NAPS2.Wia;
 
 namespace NAPS2.WinForms;
 
@@ -9,7 +8,7 @@ public partial class FAdvancedScanSettings : FormBase
     {
         InitializeComponent();
 
-        AddEnumItems<WiaVersion>(cmbWiaVersion, FormatWiaVersion);
+        AddEnumItems<WiaApiVersion>(cmbWiaVersion, FormatWiaVersion);
         AddEnumItems<TwainImpl>(cmbTwainImpl);
         if (!Environment.Is64BitProcess)
         {
@@ -18,13 +17,13 @@ public partial class FAdvancedScanSettings : FormBase
     }
 
     // TODO: Standardize on this and put all formatters in some common location
-    private string FormatWiaVersion(WiaVersion value)
+    private string FormatWiaVersion(WiaApiVersion value)
     {
         return value switch
         {
-            WiaVersion.Default => SettingsResources.WiaVersion_Default,
-            WiaVersion.Wia10 => SettingsResources.WiaVersion_Wia10,
-            WiaVersion.Wia20 => SettingsResources.WiaVersion_Wia20,
+            WiaApiVersion.Default => SettingsResources.WiaVersion_Default,
+            WiaApiVersion.Wia10 => SettingsResources.WiaVersion_Wia10,
+            WiaApiVersion.Wia20 => SettingsResources.WiaVersion_Wia20,
             _ => value.ToString()
         };
     }
@@ -86,7 +85,7 @@ public partial class FAdvancedScanSettings : FormBase
         ScanProfile.WiaOffsetWidth = cbWiaOffsetWidth.Checked;
         if (cmbWiaVersion.SelectedIndex != -1)
         {
-            ScanProfile.WiaVersion = (WiaVersion)cmbWiaVersion.SelectedIndex;
+            ScanProfile.WiaVersion = (WiaApiVersion) cmbWiaVersion.SelectedIndex;
         }
         ScanProfile.ForcePageSize = cbForcePageSize.Checked;
         ScanProfile.ForcePageSizeCrop = cbForcePageSizeCrop.Checked;

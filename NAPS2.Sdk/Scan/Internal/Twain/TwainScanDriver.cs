@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿#if !MAC
+using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Threading;
 using NAPS2.Platform.Windows;
@@ -59,3 +60,4 @@ internal class TwainScanDriver : IScanDriver
         return new LocalTwainSessionController();
     }
 }
+#endif

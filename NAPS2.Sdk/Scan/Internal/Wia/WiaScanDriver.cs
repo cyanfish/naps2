@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿#if !MAC
+using System.Threading;
 using NAPS2.Scan.Exceptions;
 using NAPS2.Wia;
 
@@ -17,7 +18,7 @@ internal class WiaScanDriver : IScanDriver
     {
         return Task.Run(() =>
         {
-            using var deviceManager = new WiaDeviceManager(options.WiaOptions.WiaVersion);
+            using var deviceManager = new WiaDeviceManager((WiaVersion) options.WiaOptions.WiaApiVersion);
             return deviceManager.GetDeviceInfos().Select(deviceInfo =>
             {
                 using (deviceInfo)
@@ -36,13 +37,14 @@ internal class WiaScanDriver : IScanDriver
             var context = new WiaScanContext(_scanningContext, options, cancelToken, scanEvents, callback);
             try
             {
+                var version = (WiaVersion) options.WiaOptions.WiaApiVersion;
                 try
                 {
-                    context.Scan(options.WiaOptions.WiaVersion);
+                    context.Scan(version);
                 }
                 catch (WiaException e) when
                     (e.ErrorCode == Hresult.E_INVALIDARG &&
-                     options.WiaOptions.WiaVersion == WiaVersion.Default &&
+                     version == WiaVersion.Default &&
                      NativeWiaObject.DefaultWiaVersion == WiaVersion.Wia20
                      && !options.UseNativeUI)
                 {
@@ -363,3 +365,4 @@ internal class WiaScanDriver : IScanDriver
         }
     }
 }
+#endif

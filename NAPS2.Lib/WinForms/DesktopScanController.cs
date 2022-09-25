@@ -1,6 +1,8 @@
 using NAPS2.EtoForms.Ui;
 using NAPS2.Scan;
+#if !MAC
 using NAPS2.Wia;
+#endif
 
 namespace NAPS2.WinForms;
 
@@ -63,6 +65,7 @@ public class DesktopScanController : IDesktopScanController
             // No profile for the device we're scanning with, so prompt to create one
             var editSettingsForm = _formFactory.Create<EditProfileForm>();
             editSettingsForm.ScanProfile = _config.DefaultProfileSettings();
+#if !MAC
             try
             {
                 // Populate the device field automatically (because we can do that!)
@@ -73,6 +76,7 @@ public class DesktopScanController : IDesktopScanController
             catch (WiaException)
             {
             }
+#endif
             editSettingsForm.ShowModal();
             if (!editSettingsForm.Result)
             {

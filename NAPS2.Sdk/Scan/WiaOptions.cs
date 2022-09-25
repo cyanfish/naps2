@@ -1,10 +1,8 @@
-﻿using NAPS2.Wia;
-
-namespace NAPS2.Scan;
+﻿namespace NAPS2.Scan;
 
 public class WiaOptions
 {
-    public WiaVersion WiaVersion { get; set; }
+    public WiaApiVersion WiaApiVersion { get; set; }
 
     public bool OffsetWidth { get; set; }
 }

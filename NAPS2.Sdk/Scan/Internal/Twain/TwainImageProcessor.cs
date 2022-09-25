@@ -1,3 +1,4 @@
+#if !MAC
 using NAPS2.Remoting.Worker;
 
 namespace NAPS2.Scan.Internal.Twain;
@@ -72,3 +73,4 @@ internal class TwainImageProcessor : ITwainEvents, IDisposable
         _currentMemoryImage?.Dispose();
     }
 }
+#endif

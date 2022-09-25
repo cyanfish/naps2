@@ -3,7 +3,9 @@ using NAPS2.ImportExport;
 using NAPS2.Ocr;
 using NAPS2.Scan.Exceptions;
 using NAPS2.Scan.Internal;
+#if !MAC
 using NAPS2.Wia;
+#endif
 
 namespace NAPS2.Scan;
 
@@ -128,7 +130,7 @@ internal class ScanPerformer : IScanPerformer
 
     private void ShowOperation(ScanOperation op, ScanOptions scanOptions, ScanParams scanParams)
     {
-        bool isWia10 = scanOptions.Driver == Driver.Wia && scanOptions.WiaOptions.WiaVersion == WiaVersion.Wia10;
+        bool isWia10 = scanOptions.Driver == Driver.Wia && scanOptions.WiaOptions.WiaApiVersion == WiaApiVersion.Wia10;
         if (scanParams.NoUI || scanOptions.UseNativeUI && !isWia10)
         {
             return;
@@ -170,7 +172,7 @@ internal class ScanPerformer : IScanPerformer
                 : Driver.Default,
             WiaOptions =
             {
-                WiaVersion = scanProfile.WiaVersion,
+                WiaApiVersion = scanProfile.WiaVersion,
                 OffsetWidth = scanProfile.WiaOffsetWidth
             },
             TwainOptions =
@@ -269,11 +271,12 @@ internal class ScanPerformer : IScanPerformer
 
     private async Task<ScanDevice?> PromptForDevice(ScanOptions options)
     {
+#if !MAC
         // TODO: Not sure how best to handle this for console
         if (options.Driver == Driver.Wia)
         {
             // WIA has a nice built-in device selection dialog, so use it
-            using var deviceManager = new WiaDeviceManager(options.WiaOptions.WiaVersion);
+            using var deviceManager = new WiaDeviceManager((WiaVersion) options.WiaOptions.WiaApiVersion);
             try
             {
                 var wiaDevice = deviceManager.PromptForDevice(options.DialogParent);
@@ -292,6 +295,7 @@ internal class ScanPerformer : IScanPerformer
                 throw new ScanDriverUnknownException(ex);
             }
         }
+#endif
 
         // Other drivers do not, so use a generic dialog
         var deviceList = await new ScanController(_scanningContext).GetDeviceList(options);
