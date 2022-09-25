@@ -15,7 +15,7 @@ public class ScannedImageImporter : IScannedImageImporter
         _imageImporter = imageImporter;
     }
 
-    public ScannedImageSource Import(string filePath, ImportParams importParams, ProgressHandler progressCallback, CancellationToken cancelToken)
+    public AsyncSource<ProcessedImage> Import(string filePath, ImportParams importParams, ProgressHandler progressCallback, CancellationToken cancelToken)
     {
         if (filePath == null)
         {

@@ -3,12 +3,12 @@ using Xunit;
 
 namespace NAPS2.Sdk.Tests.Images;
 
-public class ScannedImageSinkTests : ContextualTests
+public class AsyncSinkTests : ContextualTests
 {
     [Fact]
     public async Task NoImages()
     {
-        var sink = new ScannedImageSink();
+        var sink = new AsyncSink<ProcessedImage>();
         sink.SetCompleted();
 
         var source = sink.AsSource();
@@ -18,9 +18,9 @@ public class ScannedImageSinkTests : ContextualTests
     [Fact]
     public async Task OneImage()
     {
-        var sink = new ScannedImageSink();
+        var sink = new AsyncSink<ProcessedImage>();
         var img1 = CreateScannedImage();
-        sink.PutImage(img1);
+        sink.PutItem(img1);
         sink.SetCompleted();
 
         var source = sink.AsSource();
@@ -31,11 +31,11 @@ public class ScannedImageSinkTests : ContextualTests
     [Fact]
     public async Task TwoImages()
     {
-        var sink = new ScannedImageSink();
+        var sink = new AsyncSink<ProcessedImage>();
         var img1 = CreateScannedImage();
         var img2 = CreateScannedImage();
-        sink.PutImage(img1);
-        sink.PutImage(img2);
+        sink.PutItem(img1);
+        sink.PutItem(img2);
         sink.SetCompleted();
 
         var source = sink.AsSource();
@@ -47,7 +47,7 @@ public class ScannedImageSinkTests : ContextualTests
     [Fact]
     public async Task PropagatesError()
     {
-        var sink = new ScannedImageSink();
+        var sink = new AsyncSink<ProcessedImage>();
         var error = new Exception();
         sink.SetError(error);
 
@@ -58,10 +58,10 @@ public class ScannedImageSinkTests : ContextualTests
     [Fact]
     public async Task PropagatesErrorAfterImages()
     {
-        var sink = new ScannedImageSink();
+        var sink = new AsyncSink<ProcessedImage>();
         var error = new Exception();
-        sink.PutImage(CreateScannedImage());
-        sink.PutImage(CreateScannedImage());
+        sink.PutItem(CreateScannedImage());
+        sink.PutItem(CreateScannedImage());
         sink.SetError(error);
 
         var source = sink.AsSource();
@@ -75,7 +75,7 @@ public class ScannedImageSinkTests : ContextualTests
     {
         var wait = new ManualResetEvent(false);
 
-        var sink = new ScannedImageSink();
+        var sink = new AsyncSink<ProcessedImage>();
         var source = sink.AsSource();
         var t1 = Task.Run(async () =>
         {
@@ -86,7 +86,7 @@ public class ScannedImageSinkTests : ContextualTests
         var t2 = Task.Run(() =>
         {
             wait.WaitOne();
-            sink.PutImage(CreateScannedImage());
+            sink.PutItem(CreateScannedImage());
             sink.SetCompleted();
         });
         await t1;

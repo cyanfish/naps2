@@ -31,12 +31,12 @@ public class PdfImporter : IPdfImporter
         _importPostProcessor = importPostProcessor;
     }
 
-    public ScannedImageSource Import(string filePath, ImportParams? importParams = null,
+    public AsyncSource<ProcessedImage> Import(string filePath, ImportParams? importParams = null,
         ProgressHandler? progressCallback = null,
         CancellationToken cancelToken = default)
     {
         importParams ??= new ImportParams();
-        var sink = new ScannedImageSink();
+        var sink = new AsyncSink<ProcessedImage>();
         Task.Run(async () =>
         {
             try
@@ -63,7 +63,7 @@ public class PdfImporter : IPdfImporter
                         if (cancelToken.IsCancellationRequested) return;
                         var image = GetImageFromPage(page, importParams);
                         progressCallback?.Invoke(++i, document.PageCount);
-                        sink.PutImage(image);
+                        sink.PutItem(image);
                     }
                 }
             }

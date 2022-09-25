@@ -1,5 +1,6 @@
 ﻿using System.Reflection;
 
+// ReSharper disable once CheckNamespace
 namespace NAPS2.Util;
 
 public static class ExceptionExtensions

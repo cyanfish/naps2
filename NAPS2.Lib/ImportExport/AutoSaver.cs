@@ -30,9 +30,9 @@ public class AutoSaver
         _imageContext = imageContext;
     }
 
-    public ScannedImageSource Save(AutoSaveSettings settings, ScannedImageSource source)
+    public AsyncSource<ProcessedImage> Save(AutoSaveSettings settings, AsyncSource<ProcessedImage> source)
     {
-        var sink = new ScannedImageSink();
+        var sink = new AsyncSink<ProcessedImage>();
 
         if (!settings.ClearImagesAfterSaving)
         {
@@ -43,7 +43,7 @@ public class AutoSaver
                 // TODO: We should assume the returned sink may dispose what we give it, therefore we should make
                 // a clone before sending it out, and then dispose the clone when we're done with it
                 // TODO: We should add tests for this class
-                sink.PutImage(img);
+                sink.PutItem(img);
                 imageList.Add(img);
             }).ContinueWith(async t =>
             {
@@ -78,7 +78,7 @@ public class AutoSaver
                 // Fallback in case auto save failed; pipe all the images back at once
                 foreach (ProcessedImage img in t.Result)
                 {
-                    sink.PutImage(img);
+                    sink.PutItem(img);
                 }
             }
 

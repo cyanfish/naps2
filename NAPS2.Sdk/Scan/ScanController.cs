@@ -44,14 +44,14 @@ public class ScanController : IScanController
         return await bridge.GetDeviceList(options);
     }
 
-    public ScannedImageSource Scan(ScanOptions options, CancellationToken cancelToken = default)
+    public AsyncSource<ProcessedImage> Scan(ScanOptions options, CancellationToken cancelToken = default)
     {
         options = _scanOptionsValidator.ValidateAll(options, _scanningContext, true);
-        var sink = new ScannedImageSink();
+        var sink = new AsyncSink<ProcessedImage>();
         int pageNumber = 0;
 
         void ScanStartCallback() => ScanStart?.Invoke(this, new ScanStartEventArgs());
-        void ScanEndCallback(ScannedImageSource source) => ScanEnd?.Invoke(this, new ScanEndEventArgs(source));
+        void ScanEndCallback(AsyncSource<ProcessedImage> source) => ScanEnd?.Invoke(this, new ScanEndEventArgs(source));
         void ScanErrorCallback(Exception ex) => ScanError?.Invoke(this, new ScanErrorEventArgs(ex));
         void PageStartCallback() => PageStart?.Invoke(this, new PageStartEventArgs(++pageNumber));
 
@@ -70,7 +70,7 @@ public class ScanController : IScanController
                     (scannedImage, postProcessingContext) =>
                     {
                         scannedImage = _localPostProcessor.PostProcess(scannedImage, options, postProcessingContext);
-                        sink.PutImage(scannedImage);
+                        sink.PutItem(scannedImage);
                         PageEndCallback(scannedImage);
                     });
                 sink.SetCompleted();

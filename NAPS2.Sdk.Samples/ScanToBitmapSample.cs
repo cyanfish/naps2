@@ -34,9 +34,9 @@ public class ScanToBitmapSample
 
         // This starts the scan and immediately returns with an object that asynchronously
         // receives the results of the scan.
-        ScannedImageSource imageSource = controller.Scan(options);
+        AsyncSource<ProcessedImage> imageSource = controller.Scan(options);
 
-        // ScannedImageSource has several different methods to help you consume images.
+        // AsyncSource has several different methods to help you consume images.
         // ForEach allows you to asynchronously process images as they arrive.
         await imageSource.ForEach(processedImage =>
         {

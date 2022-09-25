@@ -1,4 +1,5 @@
-﻿namespace NAPS2.Util;
+﻿// ReSharper disable once CheckNamespace
+namespace NAPS2.Util;
 
 /// <summary>
 /// A common signature for progress handling.

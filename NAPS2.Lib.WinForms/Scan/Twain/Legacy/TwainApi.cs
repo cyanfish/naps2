@@ -49,7 +49,7 @@ internal static class TwainApi
         return result;
     }
 
-    public static void Scan(ScanningContext scanningContext, ScanProfile settings, ScanDevice device, IWin32Window pForm, ScannedImageSink sink)
+    public static void Scan(ScanningContext scanningContext, ScanProfile settings, ScanDevice device, IWin32Window pForm, AsyncSink<ProcessedImage> sink)
     {
         var tw = new Twain();
         if (!tw.Init(pForm.Handle))
@@ -65,7 +65,7 @@ internal static class TwainApi
         form.ShowDialog(pForm);
         foreach (var b in mf.Bitmaps)
         {
-            sink.PutImage(b);
+            sink.PutItem(b);
         }
     }
 

@@ -14,7 +14,7 @@ public class HelloWorldSample
         ScanController controller = new ScanController(scanningContext);
         ScanDevice device = (await controller.GetDeviceList()).First();
         ScanOptions options = new ScanOptions { Device = device };
-        ScannedImageSource imageSource = controller.Scan(options);
+        AsyncSource<ProcessedImage> imageSource = controller.Scan(options);
         await imageSource.ForEach(scannedImage =>
         {
             using (scannedImage)

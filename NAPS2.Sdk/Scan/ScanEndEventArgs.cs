@@ -2,10 +2,10 @@
 
 public class ScanEndEventArgs : EventArgs
 {
-    public ScanEndEventArgs(ScannedImageSource source)
+    public ScanEndEventArgs(AsyncSource<ProcessedImage> source)
     {
         Source = source;
     }
 
-    public ScannedImageSource Source { get; }
+    public AsyncSource<ProcessedImage> Source { get; }
 }

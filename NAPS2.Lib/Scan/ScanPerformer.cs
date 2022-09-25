@@ -45,7 +45,7 @@ internal class ScanPerformer : IScanPerformer
         return await PromptForDevice(options);
     }
 
-    public async Task<ScannedImageSource> PerformScan(ScanProfile scanProfile, ScanParams scanParams,
+    public async Task<AsyncSource<ProcessedImage>> PerformScan(ScanProfile scanProfile, ScanParams scanParams,
         IntPtr dialogParent = default, CancellationToken cancelToken = default)
     {
         var options = BuildOptions(scanProfile, scanParams, dialogParent);
@@ -55,7 +55,7 @@ internal class ScanPerformer : IScanPerformer
         if (!await PopulateDevice(scanProfile, options))
         {
             // User cancelled out of a dialog
-            return ScannedImageSource.Empty;
+            return AsyncSource<ProcessedImage>.Empty;
         }
 
         var localPostProcessor = new LocalPostProcessor(_scanningContext, ConfigureOcrController(scanParams));
@@ -78,16 +78,16 @@ internal class ScanPerformer : IScanPerformer
             source = _autoSaver.Save(scanProfile.AutoSaveSettings, source);
         }
 
-        var sink = new ScannedImageSink();
-        source.ForEach(img => sink.PutImage(img)).ContinueWith(t =>
+        var sink = new AsyncSink<ProcessedImage>();
+        source.ForEach(img => sink.PutItem(img)).ContinueWith(t =>
         {
             // Errors are handled by the ScanError callback so we ignore them here
-            if (sink.ImageCount > 0)
+            if (sink.ItemCount > 0)
             {
                 Log.Event(EventType.Scan, new EventParams
                 {
                     Name = MiscResources.Scan,
-                    Pages = sink.ImageCount,
+                    Pages = sink.ItemCount,
                     DeviceName = scanProfile.Device?.Name,
                     ProfileName = scanProfile.DisplayName,
                     BitDepth = scanProfile.BitDepth.Description()

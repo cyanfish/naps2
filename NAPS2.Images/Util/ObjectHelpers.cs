@@ -1,4 +1,5 @@
-namespace NAPS2.Images;
+// ReSharper disable once CheckNamespace
+namespace NAPS2.Util;
 
 public static class ObjectHelpers
 {

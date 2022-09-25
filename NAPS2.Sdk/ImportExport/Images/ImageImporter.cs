@@ -16,9 +16,9 @@ public class ImageImporter : IImageImporter
         _importPostProcessor = importPostProcessor;
     }
 
-    public ScannedImageSource Import(string filePath, ImportParams importParams, ProgressHandler progressCallback, CancellationToken cancelToken)
+    public AsyncSource<ProcessedImage> Import(string filePath, ImportParams importParams, ProgressHandler progressCallback, CancellationToken cancelToken)
     {
-        var sink = new ScannedImageSink();
+        var sink = new AsyncSink<ProcessedImage>();
         Task.Run(() =>
         {
             try
@@ -69,7 +69,7 @@ public class ImageImporter : IImageImporter
                             true);
 
                         progressCallback(++i, frameCount);
-                        sink.PutImage(image);
+                        sink.PutItem(image);
                     }
                 }
 

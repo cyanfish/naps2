@@ -1,4 +1,5 @@
 using System.Collections.Immutable;
+using NAPS2.Util;
 
 namespace NAPS2.Images;
 

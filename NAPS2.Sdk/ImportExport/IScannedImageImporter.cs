@@ -4,5 +4,5 @@ namespace NAPS2.ImportExport;
 
 public interface IScannedImageImporter
 {
-    ScannedImageSource Import(string filePath, ImportParams importParams, ProgressHandler progressCallback, CancellationToken cancelToken);
+    AsyncSource<ProcessedImage> Import(string filePath, ImportParams importParams, ProgressHandler progressCallback, CancellationToken cancelToken);
 }

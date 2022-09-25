@@ -10,5 +10,5 @@ public interface IScanPerformer
 {
     Task<ScanDevice?> PromptForDevice(ScanProfile scanProfile, IntPtr dialogParent = default);
 
-    Task<ScannedImageSource> PerformScan(ScanProfile scanProfile, ScanParams scanParams, IntPtr dialogParent = default, CancellationToken cancelToken = default);
+    Task<AsyncSource<ProcessedImage>> PerformScan(ScanProfile scanProfile, ScanParams scanParams, IntPtr dialogParent = default, CancellationToken cancelToken = default);
 }
