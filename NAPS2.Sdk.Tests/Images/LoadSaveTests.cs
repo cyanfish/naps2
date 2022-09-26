@@ -176,6 +176,8 @@ public class LoadSaveTests : ContextualTests
             ImageFileFormat.Bmp, ".bmp", "dog_bmp",
             new[] { "dog" }, new[] { ImagePixelFormat.RGB24 }, true
         },
+        // TODO: Re-enable this for macOS - seems like a bug in 12.6, 12.5 was fine and apparently 13.0 works ok
+#if !MAC
         new object[]
         {
             ImageFileFormat.Bmp, ".bmp", "dog_gray_bmp",
@@ -191,6 +193,7 @@ public class LoadSaveTests : ContextualTests
             ImageFileFormat.Bmp, ".bmp", "dog_bw_invertpal",
             new[] { "dog_bw" }, new[] { ImagePixelFormat.BW1 }, true
         },
+#endif
         new object[]
         {
             ImageFileFormat.Tiff, ".tiff", "dog_alpha_tiff",
