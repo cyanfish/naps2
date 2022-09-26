@@ -8,17 +8,19 @@ public class ImageImporter : IImageImporter
     private readonly ImageContext _imageContext;
     private readonly ImportPostProcessor _importPostProcessor;
 
-    public ImageImporter(ScanningContext scanningContext, ImageContext imageContext, ImportPostProcessor importPostProcessor)
+    public ImageImporter(ScanningContext scanningContext, ImageContext imageContext,
+        ImportPostProcessor importPostProcessor)
     {
         _scanningContext = scanningContext;
         _imageContext = imageContext;
         _importPostProcessor = importPostProcessor;
     }
 
-    public AsyncSource<ProcessedImage> Import(string filePath, ImportParams importParams, ProgressHandler progress = default)
+    public AsyncSource<ProcessedImage> Import(string filePath, ImportParams importParams,
+        ProgressHandler progress = default)
     {
         var sink = new AsyncSink<ProcessedImage>();
-        Task.Run(() =>
+        Task.Run(async () =>
         {
             try
             {
@@ -28,11 +30,47 @@ public class ImageImporter : IImageImporter
                     return;
                 }
 
-                IEnumerable<IMemoryImage> toImport;
-                int frameCount;
+                int frameCount = 0;
                 try
                 {
-                    toImport = _imageContext.LoadFrames(filePath, out frameCount);
+                    var toImport =
+                        _imageContext.LoadFrames(filePath, new ProgressCallback((current, max) =>
+                        {
+                            frameCount = max;
+                            if (current == 0)
+                            {
+                                progress.Report(0, frameCount);
+                            }
+                        }));
+
+                    int i = 0;
+                    await toImport.ForEach(frame =>
+                    {
+                        using (frame)
+                        {
+                            if (progress.IsCancellationRequested)
+                            {
+                                sink.SetCompleted();
+                                return;
+                            }
+
+                            bool lossless = frame.OriginalFileFormat is ImageFileFormat.Bmp or ImageFileFormat.Png;
+                            var image = _scanningContext.CreateProcessedImage(
+                                frame,
+                                BitDepth.Color,
+                                lossless,
+                                -1);
+                            image = _importPostProcessor.AddPostProcessingData(
+                                image,
+                                frame,
+                                importParams.ThumbnailSize,
+                                importParams.BarcodeDetectionOptions,
+                                true);
+
+                            progress.Report(++i, frameCount);
+                            sink.PutItem(image);
+                        }
+                    });
                 }
                 catch (Exception e)
                 {
@@ -40,41 +78,10 @@ public class ImageImporter : IImageImporter
                     // Handle and notify the user outside the method so that errors importing multiple files can be aggregated
                     throw;
                 }
-                
-                progress.Report(0, frameCount);
-
-                int i = 0;
-                foreach (var frame in toImport)
-                {
-                    using (frame)
-                    {
-                        if (progress.IsCancellationRequested)
-                        {
-                            sink.SetCompleted();
-                            return;
-                        }
-
-                        bool lossless = frame.OriginalFileFormat is ImageFileFormat.Bmp or ImageFileFormat.Png;
-                        var image = _scanningContext.CreateProcessedImage(
-                            frame,
-                            BitDepth.Color,
-                            lossless,
-                            -1);
-                        image = _importPostProcessor.AddPostProcessingData(
-                            image,
-                            frame,
-                            importParams.ThumbnailSize,
-                            importParams.BarcodeDetectionOptions,
-                            true);
-
-                        progress.Report(++i, frameCount);
-                        sink.PutItem(image);
-                    }
-                }
 
                 sink.SetCompleted();
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 sink.SetError(e);
             }

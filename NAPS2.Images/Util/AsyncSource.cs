@@ -54,8 +54,31 @@ public abstract class AsyncSource<T> where T : class
         }
     }
 
+    public AsyncSource<T2> Map<T2>(Func<T, T2> mapper) where T2 : class
+    {
+        return new MappingSource<T2>(this, mapper);
+    }
+
     private class EmptySource : AsyncSource<T>
     {
         public override Task<T?> Next() => Task.FromResult<T?>(null);
+    }
+
+    private class MappingSource<T2> : AsyncSource<T2> where T2 : class
+    {
+        private readonly AsyncSource<T> _original;
+        private readonly Func<T, T2> _mapper;
+
+        public MappingSource(AsyncSource<T> original, Func<T, T2> mapper)
+        {
+            _original = original;
+            _mapper = mapper;
+        }
+
+        public override async Task<T2?> Next()
+        {
+            var item = await _original.Next();
+            return item == null ? null : _mapper(item);
+        }
     }
 }

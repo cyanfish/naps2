@@ -1,5 +1,6 @@
 using System.Drawing;
 using System.Drawing.Imaging;
+using NAPS2.Util;
 
 namespace NAPS2.Images.Gdi;
 
@@ -31,37 +32,32 @@ public class GdiImageContext : ImageContext
         return new GdiImage(this, new Bitmap(stream));
     }
 
-    protected override IEnumerable<IMemoryImage> LoadFramesCore(Stream stream, ImageFileFormat format, out int count)
+    protected override void LoadFramesCore(AsyncSink<IMemoryImage> sink, Stream stream, ImageFileFormat format,
+        ProgressHandler progress)
     {
-        stream = EnsureMemoryStream(stream);
-        var bitmap = new Bitmap(stream);
-        count = bitmap.GetFrameCount(FrameDimension.Page);
-        return EnumerateFrames(bitmap, count);
+        var memoryStream = EnsureMemoryStream(stream);
+        using var bitmap = new Bitmap(memoryStream);
+        int count = bitmap.GetFrameCount(FrameDimension.Page);
+        for (int i = 0; i < count; i++)
+        {
+            progress.Report(i, count);
+            if (progress.IsCancellationRequested) break;
+            bitmap.SelectActiveFrame(FrameDimension.Page, i);
+            sink.PutItem(new GdiImage(this, bitmap).Copy());
+        }
+        progress.Report(count, count);
     }
 
-    private static Stream EnsureMemoryStream(Stream stream)
+    private static MemoryStream EnsureMemoryStream(Stream stream)
     {
         // Loading a bitmap directly from a file keeps a lock on the file, which we don't want.
         // Instead we can copy it to an in-memory stream first.
-        if (stream is not MemoryStream)
+        if (stream is not MemoryStream memoryStream)
         {
-            var memoryStream = new MemoryStream();
+            memoryStream = new MemoryStream();
             stream.CopyTo(memoryStream);
-            stream = memoryStream;
         }
-        return stream;
-    }
-
-    private IEnumerable<IMemoryImage> EnumerateFrames(Bitmap bitmap, int count)
-    {
-        using (bitmap)
-        {
-            for (int i = 0; i < count; i++)
-            {
-                bitmap.SelectActiveFrame(FrameDimension.Page, i);
-                yield return new GdiImage(this, bitmap).Copy();
-            }
-        }
+        return memoryStream;
     }
 
     public override ITiffWriter TiffWriter { get; } = new GdiTiffWriter();

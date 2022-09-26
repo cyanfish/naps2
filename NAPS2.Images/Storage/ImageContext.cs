@@ -1,4 +1,5 @@
 ﻿using System.Collections.Immutable;
+using NAPS2.Util;
 
 namespace NAPS2.Images.Storage;
 
@@ -158,44 +159,73 @@ public abstract class ImageContext
         return Load(new MemoryStream(bytes));
     }
 
-    // TODO: The original doc said that only the currently enumerated image is guaranteed to be valid. I don't think this is true, but we should make a test.
     /// <summary>
     /// Loads an image that may have multiple frames (e.g. a TIFF file) from the given stream.
     /// </summary>
     /// <param name="stream">The image data, in a common format (JPEG, PNG, etc).</param>
-    /// <param name="count">The number of returned images.</param>
+    /// <param name="progress">The progress callback and/or cancellation token.</param>
     /// <returns></returns>
-    public IEnumerable<IMemoryImage> LoadFrames(Stream stream, out int count)
+    public AsyncSource<IMemoryImage> LoadFrames(Stream stream, ProgressHandler progress = default)
     {
         var format = GetFileFormatFromFirstBytes(stream);
-        return ProcessFrames(format, LoadFramesCore(stream, format, out count));
+        var source = DoLoadFrames(stream, format, progress, false);
+        return WrapSource(source, format);
     }
-
-    protected abstract IEnumerable<IMemoryImage> LoadFramesCore(Stream stream, ImageFileFormat format, out int count);
 
     /// <summary>
     /// Loads an image that may have multiple frames (e.g. a TIFF file) from the given file path.
     /// </summary>
     /// <param name="path">The image path.</param>
-    /// <param name="count">The number of returned images.</param>
+    /// <param name="progress">The progress callback and/or cancellation token.</param>
     /// <returns></returns>
-    public IEnumerable<IMemoryImage> LoadFrames(string path, out int count)
+    public AsyncSource<IMemoryImage> LoadFrames(string path, ProgressHandler progress = default)
     {
-        using var stream = File.OpenRead(path);
-        return LoadFrames(stream, out count);
+        var stream = File.OpenRead(path);
+        var format = GetFileFormatFromFirstBytes(stream);
+        var source = DoLoadFrames(stream, format, progress, true);
+        return WrapSource(source, format);
     }
 
-    private IEnumerable<IMemoryImage> ProcessFrames(ImageFileFormat format, IEnumerable<IMemoryImage> frames)
+    private AsyncSource<IMemoryImage> DoLoadFrames(Stream stream, ImageFileFormat format, ProgressHandler progress,
+        bool disposeStream)
     {
-        foreach (var image in frames)
+        var sink = new AsyncSink<IMemoryImage>();
+        Task.Run(() =>
+        {
+            try
+            {
+                LoadFramesCore(sink, stream, format, progress);
+            }
+            catch (Exception ex)
+            {
+                sink.SetError(ex);
+            }
+            finally
+            {
+                sink.SetCompleted();
+                if (disposeStream)
+                {
+                    stream.Dispose();
+                }
+            }
+        });
+        return sink.AsSource();
+    }
+
+    protected abstract void LoadFramesCore(AsyncSink<IMemoryImage> sink, Stream stream, ImageFileFormat format,
+        ProgressHandler progress);
+
+    private AsyncSource<IMemoryImage> WrapSource(AsyncSource<IMemoryImage> source, ImageFileFormat format)
+    {
+        return source.Map(image =>
         {
             if (image.OriginalFileFormat == ImageFileFormat.Unspecified)
             {
                 image.OriginalFileFormat = format;
             }
             image.UpdateLogicalPixelFormat();
-            yield return image;
-        }
+            return image;
+        });
     }
 
     public abstract ITiffWriter TiffWriter { get; }

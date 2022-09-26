@@ -1,12 +1,14 @@
+using NAPS2.Util;
+
 namespace NAPS2.Images.Mac;
 
 public class MacImageContext : ImageContext
 {
     // We need to lock around MonoMac constructors as they aren't thread safe
     internal static readonly object ConstructorLock = new object();
-    
+
     private readonly MacImageTransformer _imageTransformer;
-    
+
     public MacImageContext(IPdfRenderer? pdfRenderer = null) : base(typeof(MacImage), pdfRenderer)
     {
         // TODO: Not sure if this is truly thread safe.
@@ -34,26 +36,25 @@ public class MacImageContext : ImageContext
         }
     }
 
-    protected override IEnumerable<IMemoryImage> LoadFramesCore(Stream stream, ImageFileFormat format, out int count)
+    protected override void LoadFramesCore(AsyncSink<IMemoryImage> sink, Stream stream, ImageFileFormat format,
+        ProgressHandler progress)
     {
         NSImage image;
         lock (ConstructorLock)
         {
             image = new NSImage(NSData.FromStream(stream) ?? throw new ArgumentException(nameof(stream)));
         }
-        count = image.Representations().Length;
-        return SplitFrames(image);
+        var reps = image.Representations();
+        for (int i = 0; i < reps.Length; i++)
+        {
+            progress.Report(i, reps.Length);
+            if (progress.IsCancellationRequested) break;
+            sink.PutItem(CreateImage(reps[i]));
+        }
+        progress.Report(reps.Length, reps.Length);
     }
 
     public override ITiffWriter TiffWriter { get; } = new MacTiffWriter();
-
-    private IEnumerable<IMemoryImage> SplitFrames(NSImage image)
-    {
-        foreach (var rep in image.Representations())
-        {
-            yield return CreateImage(rep);
-        }
-    }
 
     private IMemoryImage CreateImage(NSImageRep rep)
     {

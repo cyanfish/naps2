@@ -32,7 +32,7 @@ internal class WiaScanDriver : IScanDriver
     public Task Scan(ScanOptions options, CancellationToken cancelToken, IScanEvents scanEvents,
         Action<IMemoryImage> callback)
     {
-        return Task.Run(() =>
+        return Task.Run(async () =>
         {
             var context = new WiaScanContext(_scanningContext, options, cancelToken, scanEvents, callback);
             try
@@ -40,7 +40,7 @@ internal class WiaScanDriver : IScanDriver
                 var version = (WiaVersion) options.WiaOptions.WiaApiVersion;
                 try
                 {
-                    context.Scan(version);
+                    await context.Scan(version);
                 }
                 catch (WiaException e) when
                     (e.ErrorCode == Hresult.E_INVALIDARG &&
@@ -49,7 +49,7 @@ internal class WiaScanDriver : IScanDriver
                      && !options.UseNativeUI)
                 {
                     Debug.WriteLine("Falling back to WIA 1.0 due to E_INVALIDARG");
-                    context.Scan(WiaVersion.Wia10);
+                    await context.Scan(WiaVersion.Wia10);
                 }
             }
             catch (WiaException e)
@@ -76,13 +76,13 @@ internal class WiaScanDriver : IScanDriver
             _callback = callback;
         }
 
-        public void Scan(WiaVersion wiaVersion)
+        public async Task Scan(WiaVersion wiaVersion)
         {
             using var deviceManager = new WiaDeviceManager(wiaVersion);
             using var device = deviceManager.FindDevice(_options.Device!.ID!);
             if (device.Version == WiaVersion.Wia20 && _options.UseNativeUI)
             {
-                DoWia20NativeTransfer(deviceManager, device);
+                await DoWia20NativeTransfer(deviceManager, device);
                 return;
             }
 
@@ -95,7 +95,7 @@ internal class WiaScanDriver : IScanDriver
             DoTransfer(device, item);
         }
 
-        private void DoWia20NativeTransfer(WiaDeviceManager deviceManager, WiaDevice device)
+        private async Task DoWia20NativeTransfer(WiaDeviceManager deviceManager, WiaDevice device)
         {
             // WIA 2.0 doesn't support normal transfers with native UI.
             // Instead we need to have it write the scans to a set of files and load those.
@@ -111,15 +111,14 @@ internal class WiaScanDriver : IScanDriver
             {
                 foreach (var path in paths)
                 {
-                    using var stream = new FileStream(path, FileMode.Open);
-                    foreach (var image in _scanningContext.ImageContext.LoadFrames(stream, out _))
+                    await _scanningContext.ImageContext.LoadFrames(path).ForEach(image =>
                     {
                         using (image)
                         {
                             // TODO: Might still need to do some work on ownership for in-memory ScannedImage storage
                             _callback(image);
                         }
-                    }
+                    });
                 }
             }
             finally

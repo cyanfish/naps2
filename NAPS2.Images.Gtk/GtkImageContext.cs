@@ -1,4 +1,5 @@
 using Gdk;
+using NAPS2.Util;
 
 namespace NAPS2.Images.Gtk;
 
@@ -24,14 +25,18 @@ public class GtkImageContext : ImageContext
         return new GtkImage(this, new Pixbuf(stream));
     }
 
-    protected override IEnumerable<IMemoryImage> LoadFramesCore(Stream stream, ImageFileFormat format, out int count)
+    protected override void LoadFramesCore(AsyncSink<IMemoryImage> sink, Stream stream, ImageFileFormat format,
+        ProgressHandler progress)
     {
         if (format == ImageFileFormat.Tiff)
         {
-            return _tiffIo.LoadTiff(stream, out count);
+            _tiffIo.LoadTiff(sink, stream, progress);
+            return;
         }
-        count = 1;
-        return new[] { LoadCore(stream, format) };
+        progress.Report(0, 1);
+        if (progress.IsCancellationRequested) return;
+        sink.PutItem(LoadCore(stream, format));
+        progress.Report(1, 1);
     }
 
     public override ITiffWriter TiffWriter => _tiffIo;

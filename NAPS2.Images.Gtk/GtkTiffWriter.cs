@@ -27,7 +27,7 @@ internal class LibTiffIo : ITiffWriter
         return WriteTiff(tiff, client, images, compression, progress);
     }
 
-    private bool WriteTiff(IntPtr tiff, LibTiffStreamClient client, IList<IMemoryImage> images,
+    private bool WriteTiff(IntPtr tiff, LibTiffStreamClient? client, IList<IMemoryImage> images,
         TiffCompressionType compression, ProgressHandler progress = default)
     {
         try
@@ -122,28 +122,30 @@ internal class LibTiffIo : ITiffWriter
         }
     }
 
-    public IEnumerable<IMemoryImage> LoadTiff(Stream stream, out int count)
+    public void LoadTiff(AsyncSink<IMemoryImage> sink, Stream stream, ProgressHandler progress)
     {
         var client = new LibTiffStreamClient(stream);
         var tiff = client.TIFFClientOpen("r");
-        count = LibTiff.TIFFNumberOfDirectories(tiff);
-        return EnumerateTiffFrames(tiff, client);
+        EnumerateTiffFrames(sink, tiff, progress, client);
     }
 
-    public IEnumerable<IMemoryImage> LoadTiff(string path, out int count)
+    public void LoadTiff(AsyncSink<IMemoryImage> sink, string path, ProgressHandler progress)
     {
         var tiff = LibTiff.TIFFOpen(path, "r");
-        count = LibTiff.TIFFNumberOfDirectories(tiff);
-        return EnumerateTiffFrames(tiff);
+        EnumerateTiffFrames(sink, tiff, progress);
     }
 
-    private IEnumerable<IMemoryImage> EnumerateTiffFrames(IntPtr tiff, LibTiffStreamClient? client = null)
+    private void EnumerateTiffFrames(AsyncSink<IMemoryImage> sink, IntPtr tiff, ProgressHandler progress, LibTiffStreamClient? client = null)
     {
         // We keep a reference to the client to avoid garbage collection
         try
         {
+            var count = LibTiff.TIFFNumberOfDirectories(tiff);
+            progress.Report(0, count);
+            int i = 0;
             do
             {
+                if (progress.IsCancellationRequested) break;
                 LibTiff.TIFFGetField(tiff, TiffTag.ImageWidth, out int w);
                 LibTiff.TIFFGetField(tiff, TiffTag.ImageHeight, out int h);
                 // TODO: Check return values
@@ -154,7 +156,8 @@ internal class LibTiffIo : ITiffWriter
                 img.OriginalFileFormat = ImageFileFormat.Tiff;
                 using var imageLock = img.Lock(LockMode.WriteOnly, out var data);
                 ReadTiffFrame(data.safePtr, tiff, w, h);
-                yield return img;
+                sink.PutItem(img);
+                progress.Report(++i, count);
             } while (LibTiff.TIFFReadDirectory(tiff) == 1);
         }
         finally

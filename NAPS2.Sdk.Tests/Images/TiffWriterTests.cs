@@ -85,23 +85,22 @@ public class TiffWriterTests : ContextualTests
         AssertTiff(path, ImageResources.dog_bw);
     }
 
-    private void AssertTiff(string path, params byte[][] expectedImages)
+    private async Task AssertTiff(string path, params byte[][] expectedImages)
     {
-        var actual = ImageContext.LoadFrames(path, out var count).ToArray();
-        DoAssertTiff(actual, count, expectedImages);
+        var actual = await ImageContext.LoadFrames(path).ToList();
+        DoAssertTiff(actual, expectedImages);
     }
 
-    private void AssertTiff(Stream stream, params byte[][] expectedImages)
+    private async Task AssertTiff(Stream stream, params byte[][] expectedImages)
     {
         stream.Seek(0, SeekOrigin.Begin);
-        var actual = ImageContext.LoadFrames(stream, out var count).ToArray();
-        DoAssertTiff(actual, count, expectedImages);
+        var actual = await ImageContext.LoadFrames(stream).ToList();
+        DoAssertTiff(actual, expectedImages);
     }
 
-    private static void DoAssertTiff(IMemoryImage[] actual, int count, byte[][] expectedImages)
+    private static void DoAssertTiff(List<IMemoryImage> actual, byte[][] expectedImages)
     {
-        Assert.Equal(expectedImages.Length, count);
-        Assert.Equal(expectedImages.Length, actual.Length);
+        Assert.Equal(expectedImages.Length, actual.Count);
         for (int i = 0; i < expectedImages.Length; i++)
         {
             Assert.Equal(ImageFileFormat.Tiff, actual[i].OriginalFileFormat);

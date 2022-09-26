@@ -1,4 +1,5 @@
 using System.Globalization;
+using Moq;
 using NAPS2.Sdk.Tests.Asserts;
 using Xunit;
 
@@ -34,36 +35,40 @@ public class LoadSaveTests : ContextualTests
 
     [Theory]
     [MemberData(nameof(TestCases))]
-    public void LoadFramesFromFile(ImageFileFormat format, string ext, string resource, string[] compare,
+    public async Task LoadFramesFromFile(ImageFileFormat format, string ext, string resource, string[] compare,
         ImagePixelFormat[] logicalPixelFormats, bool ignoreRes)
     {
         var path = CopyResourceToFile(GetResource(resource), $"image{ext}");
-        var images = ImageContext.LoadFrames(path, out var count).ToArray();
-        Assert.Equal(compare.Length, count);
-        Assert.Equal(compare.Length, images.Length);
-        for (int i = 0; i < images.Length; i++)
+        var progressMock = new Mock<ProgressCallback>();
+        var images = await ImageContext.LoadFrames(path, progressMock.Object).ToList();
+        Assert.Equal(compare.Length, images.Count);
+        for (int i = 0; i < images.Count; i++)
         {
             Assert.Equal(format, images[i].OriginalFileFormat);
             Assert.Equal(logicalPixelFormats[i], images[i].LogicalPixelFormat);
             ImageAsserts.Similar(GetResource(compare[i]), images[i], ignoreResolution: ignoreRes);
+            progressMock.Verify(x => x(i, images.Count));
         }
+        progressMock.Verify(x => x(images.Count, images.Count));
     }
 
     [Theory]
     [MemberData(nameof(TestCases))]
-    public void LoadFramesFromStream(ImageFileFormat format, string ext, string resource, string[] compare,
+    public async Task LoadFramesFromStream(ImageFileFormat format, string ext, string resource, string[] compare,
         ImagePixelFormat[] logicalPixelFormats, bool ignoreRes)
     {
         var stream = new MemoryStream(GetResource(resource));
-        var images = ImageContext.LoadFrames(stream, out var count).ToArray();
-        Assert.Equal(compare.Length, count);
-        Assert.Equal(compare.Length, images.Length);
-        for (int i = 0; i < images.Length; i++)
+        var progressMock = new Mock<ProgressCallback>();
+        var images = await ImageContext.LoadFrames(stream, progressMock.Object).ToList();
+        Assert.Equal(compare.Length, images.Count);
+        for (int i = 0; i < images.Count; i++)
         {
             Assert.Equal(format, images[i].OriginalFileFormat);
             Assert.Equal(logicalPixelFormats[i], images[i].LogicalPixelFormat);
             ImageAsserts.Similar(GetResource(compare[i]), images[i], ignoreResolution: ignoreRes);
+            progressMock.Verify(x => x(i, images.Count));
         }
+        progressMock.Verify(x => x(images.Count, images.Count));
     }
 
     [Theory]
@@ -105,11 +110,11 @@ public class LoadSaveTests : ContextualTests
     }
 
     [Fact]
-    public void LoadFramesFromWrongExtension()
+    public async Task LoadFramesFromWrongExtension()
     {
         // Actually a jpeg
         var path = CopyResourceToFile(ImageResources.dog, "image.tiff");
-        var images = ImageContext.LoadFrames(path, out _).ToList();
+        var images = await ImageContext.LoadFrames(path).ToList();
         Assert.Single(images);
         Assert.Equal(ImageFileFormat.Jpeg, images[0].OriginalFileFormat);
         ImageAsserts.Similar(ImageResources.dog, images[0]);
