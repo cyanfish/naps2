@@ -111,14 +111,14 @@ internal class WiaScanDriver : IScanDriver
             {
                 foreach (var path in paths)
                 {
-                    await _scanningContext.ImageContext.LoadFrames(path).ForEach(image =>
+                    await foreach(var image in _scanningContext.ImageContext.LoadFrames(path))
                     {
                         using (image)
                         {
                             // TODO: Might still need to do some work on ownership for in-memory ScannedImage storage
                             _callback(image);
                         }
-                    });
+                    }
                 }
             }
             finally

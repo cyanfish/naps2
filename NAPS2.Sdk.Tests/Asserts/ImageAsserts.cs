@@ -26,6 +26,12 @@ public static class ImageAsserts
         Similar(TestImageContextFactory.Get().Load(first), rendered, rmseThreshold, ignoreResolution);
     }
 
+    public static void Similar(byte[] first, string secondPath, double rmseThreshold = GENERAL_RMSE_THRESHOLD, bool ignoreResolution = false)
+    {
+        using var second = TestImageContextFactory.Get().Load(secondPath);
+        Similar(TestImageContextFactory.Get().Load(first), second, rmseThreshold, ignoreResolution);
+    }
+
     public static void Similar(byte[] first, IMemoryImage second, double rmseThreshold = GENERAL_RMSE_THRESHOLD, bool ignoreResolution = false)
     {
         Similar(TestImageContextFactory.Get().Load(first), second, rmseThreshold, ignoreResolution);

@@ -25,7 +25,7 @@ public class ImageImporterTests : ContextualTests
         var filePath = CopyResourceToFile(ImageResources.skewed_bw, "image.png");
 
         var source = _imageImporter.Import(filePath, new ImportParams());
-        var result = await source.ToList();
+        var result = await source.ToListAsync();
 
         Assert.Single(result);
         var storage = Assert.IsType<ImageFileStorage>(result[0].Storage);
@@ -47,7 +47,7 @@ public class ImageImporterTests : ContextualTests
         var filePath = CopyResourceToFile(ImageResources.dog, "image.jpg");
 
         var source = _imageImporter.Import(filePath, new ImportParams());
-        var result = await source.ToList();
+        var result = await source.ToListAsync();
 
         Assert.Single(result);
         var storage = Assert.IsType<ImageFileStorage>(result[0].Storage);
@@ -69,7 +69,7 @@ public class ImageImporterTests : ContextualTests
         var filePath = CopyResourceToFile(ImageResources.animals_tiff, "image.tiff");
 
         var source = _imageImporter.Import(filePath, new ImportParams());
-        var result = await source.ToList();
+        var result = await source.ToListAsync();
 
         Assert.Equal(3, result.Count);
         AssertUsesRecoveryStorage(result[0].Storage, "00001.jpg");
@@ -95,7 +95,7 @@ public class ImageImporterTests : ContextualTests
         var filePath = CopyResourceToFile(ImageResources.dog, "image.jpg");
 
         var source = _imageImporter.Import(filePath, new ImportParams { ThumbnailSize = 256 });
-        var result = await source.ToList();
+        var result = await source.ToListAsync();
 
         Assert.Single(result);
         Assert.NotNull(result[0].PostProcessingData.Thumbnail);
@@ -111,7 +111,7 @@ public class ImageImporterTests : ContextualTests
         var source = _imageImporter.Import(filePath, new ImportParams(), progressMock.Object);
 
         progressMock.VerifyNoOtherCalls();
-        await source.ToList();
+        await source.ToListAsync();
         progressMock.Verify(x => x(0, 1));
         progressMock.Verify(x => x(1, 1));
         progressMock.VerifyNoOtherCalls();
@@ -124,19 +124,20 @@ public class ImageImporterTests : ContextualTests
 
         var progressMock = new Mock<ProgressCallback>();
         var source = _imageImporter.Import(filePath, new ImportParams(), progressMock.Object);
+        var enumerator = source.GetAsyncEnumerator();
 
         progressMock.VerifyNoOtherCalls();
-        Assert.NotNull(await source.Next());
+        Assert.True(await enumerator.MoveNextAsync());
         progressMock.Verify(x => x(0, 3));
         progressMock.Verify(x => x(1, 3));
         progressMock.VerifyNoOtherCalls();
-        Assert.NotNull(await source.Next());
+        Assert.True(await enumerator.MoveNextAsync());
         progressMock.Verify(x => x(2, 3));
         progressMock.VerifyNoOtherCalls();
-        Assert.NotNull(await source.Next());
+        Assert.True(await enumerator.MoveNextAsync());
         progressMock.Verify(x => x(3, 3));
         progressMock.VerifyNoOtherCalls();
-        Assert.Null(await source.Next());
+        Assert.False(await enumerator.MoveNextAsync());
         progressMock.VerifyNoOtherCalls();
     }
 
@@ -147,9 +148,10 @@ public class ImageImporterTests : ContextualTests
 
         var cts = new CancellationTokenSource();
         var source = _imageImporter.Import(filePath, new ImportParams(), cts.Token);
+        var enumerator = source.GetAsyncEnumerator();
 
         cts.Cancel();
-        Assert.Null(await source.Next());
+        Assert.False(await enumerator.MoveNextAsync());
     }
 
     // This test doesn't work on Mac as the full file is loaded first, making per-frame loading instant
@@ -160,11 +162,12 @@ public class ImageImporterTests : ContextualTests
 
         var cts = new CancellationTokenSource();
         var source = _imageImporter.Import(filePath, new ImportParams(), cts.Token);
+        var enumerator = source.GetAsyncEnumerator();
 
-        Assert.NotNull(await source.Next());
-        Assert.NotNull(await source.Next());
+        Assert.True(await enumerator.MoveNextAsync());
+        Assert.True(await enumerator.MoveNextAsync());
         cts.Cancel();
-        Assert.Null(await source.Next());
+        Assert.False(await enumerator.MoveNextAsync());
     }
 
     private void AssertUsesRecoveryStorage(IImageStorage storage, string expectedFileName)
@@ -187,7 +190,7 @@ public class ImageImporterTests : ContextualTests
         var filePath = Path.Combine(FolderPath, "missing.png");
         var source = _imageImporter.Import(filePath, new ImportParams());
 
-        var ex = await Assert.ThrowsAsync<FileNotFoundException>(async () => await source.ToList());
+        var ex = await Assert.ThrowsAsync<FileNotFoundException>(async () => await source.ToListAsync());
         Assert.Contains("Could not find", ex.Message);
     }
 
@@ -198,7 +201,7 @@ public class ImageImporterTests : ContextualTests
         using var stream = File.OpenWrite(filePath);
         var source = _imageImporter.Import(filePath, new ImportParams());
 
-        var ex = await Assert.ThrowsAsync<IOException>(async () => await source.ToList());
+        var ex = await Assert.ThrowsAsync<IOException>(async () => await source.ToListAsync());
         Assert.Contains("being used by another process", ex.Message);
     }
 
@@ -212,7 +215,7 @@ public class ImageImporterTests : ContextualTests
             BarcodeDetectionOptions = new BarcodeDetectionOptions { DetectBarcodes = true }
         };
         var source = _imageImporter.Import(filePath, importParams);
-        var result = await source.ToList();
+        var result = await source.ToListAsync();
 
         Assert.Single(result);
         Assert.True(result[0].PostProcessingData.BarcodeDetection.IsAttempted);

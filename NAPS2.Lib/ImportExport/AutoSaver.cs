@@ -30,61 +30,36 @@ public class AutoSaver
         _imageContext = imageContext;
     }
 
-    public AsyncSource<ProcessedImage> Save(AutoSaveSettings settings, AsyncSource<ProcessedImage> source)
+    public IAsyncEnumerable<ProcessedImage> Save(AutoSaveSettings settings, IAsyncEnumerable<ProcessedImage> images)
     {
-        var sink = new AsyncSink<ProcessedImage>();
-
-        if (!settings.ClearImagesAfterSaving)
+        return AsyncProducers.RunProducer<ProcessedImage>(async produceImage =>
         {
-            // Basic auto save, so keep track of images as we pipe them and try to auto save afterwards
             var imageList = new List<ProcessedImage>();
-            source.ForEach(img =>
+            try
             {
-                // TODO: We should assume the returned sink may dispose what we give it, therefore we should make
-                // a clone before sending it out, and then dispose the clone when we're done with it
-                // TODO: We should add tests for this class
-                sink.PutItem(img);
-                imageList.Add(img);
-            }).ContinueWith(async t =>
-            {
-                try
+                await foreach (var img in images)
                 {
-                    await InternalSave(settings, imageList);
-                    if (t.IsFaulted && t.Exception != null)
+                    // TODO: We should assume the returned sink may dispose what we give it, therefore we should make
+                    // a clone before sending it out, and then dispose the clone when we're done with it
+                    imageList.Add(img);
+                    if (!settings.ClearImagesAfterSaving)
                     {
-                        sink.SetError(t.Exception.InnerException!);
+                        produceImage(img);
                     }
                 }
-                finally
-                {
-                    sink.SetCompleted();
-                }
-            });
-            return sink.AsSource();
-        }
-
-        // Auto save without piping images
-        source.ToList().ContinueWith(async t =>
-        {
-            if (await InternalSave(settings, t.Result))
+            }
+            finally
             {
-                foreach (ProcessedImage img in t.Result)
+                if (!await InternalSave(settings, imageList) && settings.ClearImagesAfterSaving)
                 {
-                    img.Dispose();
+                    // Fallback in case auto save failed; pipe all the images back at once
+                    foreach (var img in imageList)
+                    {
+                        produceImage(img);
+                    }
                 }
             }
-            else
-            {
-                // Fallback in case auto save failed; pipe all the images back at once
-                foreach (ProcessedImage img in t.Result)
-                {
-                    sink.PutItem(img);
-                }
-            }
-
-            sink.SetCompleted();
         });
-        return sink.AsSource();
     }
 
     private async Task<bool> InternalSave(AutoSaveSettings settings, List<ProcessedImage> images)
@@ -141,6 +116,8 @@ public class AutoSaver
                 subPath = placeholders.Substitute(newPath, true, i);
             }
         }
+        // TODO: This placeholder handling is complex and wrong in some cases (e.g. FilePerScan with ext = "jpg")
+        // TODO: Maybe have initial placeholders that replace date, then rely on the ops to increment the file num
         var extension = Path.GetExtension(subPath);
         if (extension != null && extension.Equals(".pdf", StringComparison.InvariantCultureIgnoreCase))
         {

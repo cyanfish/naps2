@@ -87,14 +87,14 @@ public class TiffWriterTests : ContextualTests
 
     private async Task AssertTiff(string path, params byte[][] expectedImages)
     {
-        var actual = await ImageContext.LoadFrames(path).ToList();
+        var actual = await ImageContext.LoadFrames(path).ToListAsync();
         DoAssertTiff(actual, expectedImages);
     }
 
     private async Task AssertTiff(Stream stream, params byte[][] expectedImages)
     {
         stream.Seek(0, SeekOrigin.Begin);
-        var actual = await ImageContext.LoadFrames(stream).ToList();
+        var actual = await ImageContext.LoadFrames(stream).ToListAsync();
         DoAssertTiff(actual, expectedImages);
     }
 

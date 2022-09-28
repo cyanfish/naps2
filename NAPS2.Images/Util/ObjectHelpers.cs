@@ -1,7 +1,7 @@
 // ReSharper disable once CheckNamespace
 namespace NAPS2.Util;
 
-public static class ObjectHelpers
+internal static class ObjectHelpers
 {
     public static bool ListEquals<T>(IList<T> first, IList<T> second)
     {

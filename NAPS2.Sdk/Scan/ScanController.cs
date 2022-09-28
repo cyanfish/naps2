@@ -44,14 +44,13 @@ public class ScanController : IScanController
         return await bridge.GetDeviceList(options);
     }
 
-    public AsyncSource<ProcessedImage> Scan(ScanOptions options, CancellationToken cancelToken = default)
+    public IAsyncEnumerable<ProcessedImage> Scan(ScanOptions options, CancellationToken cancelToken = default)
     {
         options = _scanOptionsValidator.ValidateAll(options, _scanningContext, true);
-        var sink = new AsyncSink<ProcessedImage>();
         int pageNumber = 0;
 
-        void ScanStartCallback() => ScanStart?.Invoke(this, new ScanStartEventArgs());
-        void ScanEndCallback(AsyncSource<ProcessedImage> source) => ScanEnd?.Invoke(this, new ScanEndEventArgs(source));
+        void ScanStartCallback() => ScanStart?.Invoke(this, EventArgs.Empty);
+        void ScanEndCallback() => ScanEnd?.Invoke(this, EventArgs.Empty);
         void ScanErrorCallback(Exception ex) => ScanError?.Invoke(this, new ScanErrorEventArgs(ex));
         void PageStartCallback() => PageStart?.Invoke(this, new PageStartEventArgs(++pageNumber));
 
@@ -61,33 +60,34 @@ public class ScanController : IScanController
         void PageEndCallback(ProcessedImage image) => PageEnd?.Invoke(this, new PageEndEventArgs(pageNumber, image));
 
         ScanStartCallback();
-        Task.Run(async () =>
+        return AsyncProducers.RunProducer<ProcessedImage>(async produceImage =>
         {
             try
             {
                 var bridge = _scanBridgeFactory.Create(options);
                 await bridge.Scan(options, cancelToken, new ScanEvents(PageStartCallback, PageProgressCallback),
-                    (scannedImage, postProcessingContext) =>
+                    (image, postProcessingContext) =>
                     {
-                        scannedImage = _localPostProcessor.PostProcess(scannedImage, options, postProcessingContext);
-                        sink.PutItem(scannedImage);
-                        PageEndCallback(scannedImage);
+                        image = _localPostProcessor.PostProcess(image, options, postProcessingContext);
+                        produceImage(image);
+                        PageEndCallback(image);
                     });
-                sink.SetCompleted();
             }
             catch (Exception ex)
             {
-                sink.SetError(ex);
                 ScanErrorCallback(ex);
+                throw;
             }
-            ScanEndCallback(sink.AsSource());
+            finally
+            {
+                ScanEndCallback();
+            }
         });
-        return sink.AsSource();
     }
 
-    public event EventHandler<ScanStartEventArgs>? ScanStart;
+    public event EventHandler? ScanStart;
 
-    public event EventHandler<ScanEndEventArgs>? ScanEnd;
+    public event EventHandler? ScanEnd;
 
     public event EventHandler<ScanErrorEventArgs>? ScanError;
 

@@ -36,8 +36,8 @@ public class MacImageContext : ImageContext
         }
     }
 
-    protected override void LoadFramesCore(AsyncSink<IMemoryImage> sink, Stream stream, ImageFileFormat format,
-        ProgressHandler progress)
+    protected override void LoadFramesCore(Action<IMemoryImage> produceImage, Stream stream,
+        ImageFileFormat format, ProgressHandler progress)
     {
         NSImage image;
         lock (ConstructorLock)
@@ -49,7 +49,7 @@ public class MacImageContext : ImageContext
         {
             progress.Report(i, reps.Length);
             if (progress.IsCancellationRequested) break;
-            sink.PutItem(CreateImage(reps[i]));
+            produceImage(CreateImage(reps[i]));
         }
         progress.Report(reps.Length, reps.Length);
     }

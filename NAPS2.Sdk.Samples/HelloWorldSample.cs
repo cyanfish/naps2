@@ -10,17 +10,16 @@ public class HelloWorldSample
         // This is the absolute bare bones example of scanning.
         // See the other samples for more description and functionality.
 
-        using ScanningContext scanningContext = new ScanningContext(new GdiImageContext());
-        ScanController controller = new ScanController(scanningContext);
+        using var scanningContext = new ScanningContext(new GdiImageContext());
+        var controller = new ScanController(scanningContext);
         ScanDevice device = (await controller.GetDeviceList()).First();
-        ScanOptions options = new ScanOptions { Device = device };
-        AsyncSource<ProcessedImage> imageSource = controller.Scan(options);
-        await imageSource.ForEach(scannedImage =>
+        var options = new ScanOptions { Device = device };
+        await foreach(var image in controller.Scan(options))
         {
-            using (scannedImage)
+            using (image)
             {
                 Console.WriteLine("Scanned a page!");
             }
-        });
+        }
     }
 }

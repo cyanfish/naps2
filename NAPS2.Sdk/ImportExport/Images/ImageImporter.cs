@@ -16,76 +16,57 @@ public class ImageImporter : IImageImporter
         _importPostProcessor = importPostProcessor;
     }
 
-    public AsyncSource<ProcessedImage> Import(string filePath, ImportParams importParams,
+    public IAsyncEnumerable<ProcessedImage> Import(string filePath, ImportParams importParams,
         ProgressHandler progress = default)
     {
-        var sink = new AsyncSink<ProcessedImage>();
-        Task.Run(async () =>
+        return AsyncProducers.RunProducer<ProcessedImage>(async produceImage =>
         {
+            if (progress.IsCancellationRequested) return;
+
+            int frameCount = 0;
             try
             {
-                if (progress.IsCancellationRequested)
-                {
-                    sink.SetCompleted();
-                    return;
-                }
-
-                int frameCount = 0;
-                try
-                {
-                    var toImport =
-                        _imageContext.LoadFrames(filePath, new ProgressCallback((current, max) =>
-                        {
-                            frameCount = max;
-                            if (current == 0)
-                            {
-                                progress.Report(0, frameCount);
-                            }
-                        }));
-
-                    int i = 0;
-                    await toImport.ForEach(frame =>
+                var toImport =
+                    _imageContext.LoadFrames(filePath, new ProgressCallback((current, max) =>
                     {
-                        using (frame)
+                        frameCount = max;
+                        if (current == 0)
                         {
-                            if (progress.IsCancellationRequested)
-                            {
-                                sink.SetCompleted();
-                                return;
-                            }
-
-                            bool lossless = frame.OriginalFileFormat is ImageFileFormat.Bmp or ImageFileFormat.Png;
-                            var image = _scanningContext.CreateProcessedImage(
-                                frame,
-                                BitDepth.Color,
-                                lossless,
-                                -1);
-                            image = _importPostProcessor.AddPostProcessingData(
-                                image,
-                                frame,
-                                importParams.ThumbnailSize,
-                                importParams.BarcodeDetectionOptions,
-                                true);
-
-                            progress.Report(++i, frameCount);
-                            sink.PutItem(image);
+                            progress.Report(0, frameCount);
                         }
-                    });
-                }
-                catch (Exception e)
-                {
-                    Log.ErrorException("Error importing image: " + filePath, e);
-                    // Handle and notify the user outside the method so that errors importing multiple files can be aggregated
-                    throw;
-                }
+                    }));
 
-                sink.SetCompleted();
+                int i = 0;
+                await foreach (var frame in toImport)
+                {
+                    using (frame)
+                    {
+                        if (progress.IsCancellationRequested) return;
+
+                        bool lossless = frame.OriginalFileFormat is ImageFileFormat.Bmp or ImageFileFormat.Png;
+                        var image = _scanningContext.CreateProcessedImage(
+                            frame,
+                            BitDepth.Color,
+                            lossless,
+                            -1);
+                        image = _importPostProcessor.AddPostProcessingData(
+                            image,
+                            frame,
+                            importParams.ThumbnailSize,
+                            importParams.BarcodeDetectionOptions,
+                            true);
+
+                        progress.Report(++i, frameCount);
+                        produceImage(image);
+                    }
+                }
             }
             catch (Exception e)
             {
-                sink.SetError(e);
+                Log.ErrorException("Error importing image: " + filePath, e);
+                // Handle and notify the user outside the method so that errors importing multiple files can be aggregated
+                throw;
             }
         });
-        return sink.AsSource();
     }
 }

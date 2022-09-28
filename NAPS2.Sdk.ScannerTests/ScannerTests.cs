@@ -25,11 +25,8 @@ public class ScannerTests
             Dpi = 100
         };
 
-        var source = scanController.Scan(options);
-        var image = await source.Next();
-
+        var image = await scanController.Scan(options).FirstAsync();
         Assert.NotNull(image);
-
         using var rendered = image.Render();
 
         // TODO: Aside from generating the relevant files/resources, we also need to consider how to compare images when ImageAsserts assumes perfect pixel alignment.
@@ -55,9 +52,7 @@ public class ScannerTests
             Dpi = 100
         };
 
-        var source = scanController.Scan(options);
-        var image = await source.Next();
-
+        var image = await scanController.Scan(options).FirstAsync();
         Assert.NotNull(image);
     }
 
@@ -79,9 +74,7 @@ public class ScannerTests
             Dpi = 100
         };
 
-        var source = scanController.Scan(options);
-        var image = await source.Next();
-
+        var image = await scanController.Scan(options).FirstAsync();
         Assert.NotNull(image);
     }
 

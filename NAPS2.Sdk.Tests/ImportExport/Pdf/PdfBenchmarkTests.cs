@@ -86,7 +86,7 @@ public class PdfBenchmarkTests : ContextualTests
         var pdfExporter = new PdfImporter(ScanningContext);
         for (int i = 0; i < 300; i++)
         {
-            await pdfExporter.Import(filePath).ToList();
+            await pdfExporter.Import(filePath).ToListAsync();
         }
     }
 
@@ -99,7 +99,7 @@ public class PdfBenchmarkTests : ContextualTests
         var pdfExporter = new PdfImporter(ScanningContext);
         for (int i = 0; i < 300; i++)
         {
-            await pdfExporter.Import(filePath).ToList();
+            await pdfExporter.Import(filePath).ToListAsync();
         }
     }
 

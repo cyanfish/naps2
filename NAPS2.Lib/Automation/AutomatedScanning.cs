@@ -272,6 +272,7 @@ public class AutomatedScanning
         foreach (var filePath in filePaths)
         {
             i++;
+            var scan = new List<ProcessedImage>();
             try
             {
                 var importParams = new ImportParams
@@ -283,13 +284,21 @@ public class AutomatedScanning
                         PatchTOnly = true
                     }
                 };
-                var images = await _scannedImageImporter.Import(actualPath, importParams).ToList();
-                _scanList.Add(images);
+                await foreach (var image in _scannedImageImporter.Import(actualPath, importParams))
+                {
+                    scan.Add(image);
+                }
+                _scanList.Add(scan);
             }
             catch (Exception ex)
             {
                 Log.ErrorException(string.Format(ConsoleResources.ErrorImporting, filePath), ex);
                 _errorOutput.DisplayError(string.Format(ConsoleResources.ErrorImporting, filePath));
+                // TODO: Should we keep these images?
+                foreach (var image in scan)
+                {
+                    image.Dispose();
+                }
                 // TODO: Should we really continue?
                 continue;
             }
@@ -614,8 +623,10 @@ public class AutomatedScanning
                 DetectPatchT = _options.SplitPatchT,
                 OcrParams = _ocrParams
             };
-            var source = await _scanPerformer.PerformScan(profile, scanParams);
-            await source.ForEach(ReceiveScannedImage);
+            await foreach (var image in _scanPerformer.PerformScan(profile, scanParams))
+            {
+                ReceiveScannedImage(image);
+            }
             OutputVerbose(ConsoleResources.PagesScanned, _pagesScanned);
         }
     }

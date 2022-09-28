@@ -267,8 +267,11 @@ public class ProfilesForm : EtoDialogBase
         {
             _profileManager.DefaultProfile = SelectedProfile;
         }
-        var source = await _scanPerformer.PerformScan(SelectedProfile, DefaultScanParams(), NativeHandle);
-        await source.ForEach(ImageCallback);
+        var images = _scanPerformer.PerformScan(SelectedProfile, DefaultScanParams(), NativeHandle);
+        await foreach (var image in images)
+        {
+            ImageCallback(image);
+        }
         Focus();
     }
 

@@ -6,5 +6,5 @@ public interface IScanController
 {
     Task<List<ScanDevice>> GetDeviceList(ScanOptions options);
 
-    AsyncSource<ProcessedImage> Scan(ScanOptions options, CancellationToken cancelToken = default);
+    IAsyncEnumerable<ProcessedImage> Scan(ScanOptions options, CancellationToken cancelToken = default);
 }

@@ -165,7 +165,7 @@ public abstract class ImageContext
     /// <param name="stream">The image data, in a common format (JPEG, PNG, etc).</param>
     /// <param name="progress">The progress callback and/or cancellation token.</param>
     /// <returns></returns>
-    public AsyncSource<IMemoryImage> LoadFrames(Stream stream, ProgressHandler progress = default)
+    public IAsyncEnumerable<IMemoryImage> LoadFrames(Stream stream, ProgressHandler progress = default)
     {
         var format = GetFileFormatFromFirstBytes(stream);
         var source = DoLoadFrames(stream, format, progress, false);
@@ -178,7 +178,7 @@ public abstract class ImageContext
     /// <param name="path">The image path.</param>
     /// <param name="progress">The progress callback and/or cancellation token.</param>
     /// <returns></returns>
-    public AsyncSource<IMemoryImage> LoadFrames(string path, ProgressHandler progress = default)
+    public IAsyncEnumerable<IMemoryImage> LoadFrames(string path, ProgressHandler progress = default)
     {
         var stream = File.OpenRead(path);
         var format = GetFileFormatFromFirstBytes(stream);
@@ -186,46 +186,40 @@ public abstract class ImageContext
         return WrapSource(source, format);
     }
 
-    private AsyncSource<IMemoryImage> DoLoadFrames(Stream stream, ImageFileFormat format, ProgressHandler progress,
+    private IAsyncEnumerable<IMemoryImage> DoLoadFrames(Stream stream, ImageFileFormat format, ProgressHandler progress,
         bool disposeStream)
     {
-        var sink = new AsyncSink<IMemoryImage>();
-        Task.Run(() =>
+        return AsyncProducers.RunProducer<IMemoryImage>(produceImage =>
         {
             try
             {
-                LoadFramesCore(sink, stream, format, progress);
-            }
-            catch (Exception ex)
-            {
-                sink.SetError(ex);
+                LoadFramesCore(produceImage, stream, format, progress);
             }
             finally
             {
-                sink.SetCompleted();
                 if (disposeStream)
                 {
                     stream.Dispose();
                 }
             }
         });
-        return sink.AsSource();
     }
 
-    protected abstract void LoadFramesCore(AsyncSink<IMemoryImage> sink, Stream stream, ImageFileFormat format,
-        ProgressHandler progress);
+    protected abstract void LoadFramesCore(Action<IMemoryImage> produceImage, Stream stream,
+        ImageFileFormat format, ProgressHandler progress);
 
-    private AsyncSource<IMemoryImage> WrapSource(AsyncSource<IMemoryImage> source, ImageFileFormat format)
+    private async IAsyncEnumerable<IMemoryImage> WrapSource(IAsyncEnumerable<IMemoryImage> source,
+        ImageFileFormat format)
     {
-        return source.Map(image =>
+        await foreach (var image in source)
         {
             if (image.OriginalFileFormat == ImageFileFormat.Unspecified)
             {
                 image.OriginalFileFormat = format;
             }
             image.UpdateLogicalPixelFormat();
-            return image;
-        });
+            yield return image;
+        }
     }
 
     public abstract ITiffWriter TiffWriter { get; }

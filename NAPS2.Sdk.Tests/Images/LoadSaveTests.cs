@@ -40,7 +40,7 @@ public class LoadSaveTests : ContextualTests
     {
         var path = CopyResourceToFile(GetResource(resource), $"image{ext}");
         var progressMock = new Mock<ProgressCallback>();
-        var images = await ImageContext.LoadFrames(path, progressMock.Object).ToList();
+        var images = await ImageContext.LoadFrames(path, progressMock.Object).ToListAsync();
         Assert.Equal(compare.Length, images.Count);
         for (int i = 0; i < images.Count; i++)
         {
@@ -59,7 +59,7 @@ public class LoadSaveTests : ContextualTests
     {
         var stream = new MemoryStream(GetResource(resource));
         var progressMock = new Mock<ProgressCallback>();
-        var images = await ImageContext.LoadFrames(stream, progressMock.Object).ToList();
+        var images = await ImageContext.LoadFrames(stream, progressMock.Object).ToListAsync();
         Assert.Equal(compare.Length, images.Count);
         for (int i = 0; i < images.Count; i++)
         {
@@ -114,7 +114,7 @@ public class LoadSaveTests : ContextualTests
     {
         // Actually a jpeg
         var path = CopyResourceToFile(ImageResources.dog, "image.tiff");
-        var images = await ImageContext.LoadFrames(path).ToList();
+        var images = await ImageContext.LoadFrames(path).ToListAsync();
         Assert.Single(images);
         Assert.Equal(ImageFileFormat.Jpeg, images[0].OriginalFileFormat);
         ImageAsserts.Similar(ImageResources.dog, images[0]);

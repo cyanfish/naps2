@@ -11,8 +11,8 @@ public class AsyncSinkTests : ContextualTests
         var sink = new AsyncSink<ProcessedImage>();
         sink.SetCompleted();
 
-        var source = sink.AsSource();
-        Assert.Null(await source.Next());
+        var enumerator = sink.AsAsyncEnumerable().GetAsyncEnumerator();
+        Assert.False(await enumerator.MoveNextAsync());
     }
 
     [Fact]
@@ -23,9 +23,10 @@ public class AsyncSinkTests : ContextualTests
         sink.PutItem(img1);
         sink.SetCompleted();
 
-        var source = sink.AsSource();
-        Assert.Equal(img1, await source.Next());
-        Assert.Null(await source.Next());
+        var enumerator = sink.AsAsyncEnumerable().GetAsyncEnumerator();
+        Assert.True(await enumerator.MoveNextAsync());
+        Assert.Equal(img1, enumerator.Current);
+        Assert.False(await enumerator.MoveNextAsync());
     }
 
     [Fact]
@@ -38,10 +39,12 @@ public class AsyncSinkTests : ContextualTests
         sink.PutItem(img2);
         sink.SetCompleted();
 
-        var source = sink.AsSource();
-        Assert.Equal(img1, await source.Next());
-        Assert.Equal(img2, await source.Next());
-        Assert.Null(await source.Next());
+        var enumerator = sink.AsAsyncEnumerable().GetAsyncEnumerator();
+        Assert.True(await enumerator.MoveNextAsync());
+        Assert.Equal(img1, enumerator.Current);
+        Assert.True(await enumerator.MoveNextAsync());
+        Assert.Equal(img2, enumerator.Current);
+        Assert.False(await enumerator.MoveNextAsync());
     }
 
     [Fact]
@@ -51,8 +54,8 @@ public class AsyncSinkTests : ContextualTests
         var error = new Exception();
         sink.SetError(error);
 
-        var source = sink.AsSource();
-        await Assert.ThrowsAsync<Exception>(() => source.Next());
+        var enumerator = sink.AsAsyncEnumerable().GetAsyncEnumerator();
+        await Assert.ThrowsAsync<Exception>(async () => await enumerator.MoveNextAsync());
     }
 
     [Fact]
@@ -64,10 +67,10 @@ public class AsyncSinkTests : ContextualTests
         sink.PutItem(CreateScannedImage());
         sink.SetError(error);
 
-        var source = sink.AsSource();
-        await source.Next();
-        await source.Next();
-        await Assert.ThrowsAsync<Exception>(() => source.Next());
+        var enumerator = sink.AsAsyncEnumerable().GetAsyncEnumerator();
+        await enumerator.MoveNextAsync();
+        await enumerator.MoveNextAsync();
+        await Assert.ThrowsAsync<Exception>(async () => await enumerator.MoveNextAsync());
     }
 
     [Fact]
@@ -76,12 +79,12 @@ public class AsyncSinkTests : ContextualTests
         var wait = new ManualResetEvent(false);
 
         var sink = new AsyncSink<ProcessedImage>();
-        var source = sink.AsSource();
+        var enumerator = sink.AsAsyncEnumerable().GetAsyncEnumerator();
         var t1 = Task.Run(async () =>
         {
             wait.Set();
-            Assert.NotNull(await source.Next());
-            Assert.Null(await source.Next());
+            Assert.True(await enumerator.MoveNextAsync());
+            Assert.False(await enumerator.MoveNextAsync());
         });
         var t2 = Task.Run(() =>
         {

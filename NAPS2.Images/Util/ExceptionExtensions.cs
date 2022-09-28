@@ -3,7 +3,7 @@
 // ReSharper disable once CheckNamespace
 namespace NAPS2.Util;
 
-public static class ExceptionExtensions
+internal static class ExceptionExtensions
 {
     private static MethodInfo? _internalPreserveStackTrace;
 

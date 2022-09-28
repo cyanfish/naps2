@@ -20,6 +20,8 @@ public class ContextualTests : IDisposable
 
     public ImageContext ImageContext { get; }
 
+    // TODO: We can probably do some processed image lifecycle checking by ensuring the scanning context has no
+    // registered images after running a test.
     public ScanningContext ScanningContext { get; }
 
     public string FolderPath { get; }
@@ -33,8 +35,15 @@ public class ContextualTests : IDisposable
 
     public ProcessedImage CreateScannedImage()
     {
-        // TODO: A different placeholder image here?
         return ScanningContext.CreateProcessedImage(LoadImage(ImageResources.dog));
+    }
+
+    public IEnumerable<ProcessedImage> CreateScannedImages(params byte[][] images)
+    {
+        foreach (var image in images)
+        {
+            yield return ScanningContext.CreateProcessedImage(LoadImage(image));
+        }
     }
 
     public void SetUpOcr()

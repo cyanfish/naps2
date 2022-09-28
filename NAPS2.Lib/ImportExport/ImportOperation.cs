@@ -31,8 +31,11 @@ public class ImportOperation : OperationBase
                     {
                         Status.StatusText = string.Format(MiscResources.ImportingFormat, Path.GetFileName(fileName));
                         InvokeStatusChanged();
-                        var imageSrc = _scannedImageImporter.Import(fileName, importParams, oneFile ? ProgressHandler : CancelToken);
-                        await imageSrc.ForEach(imageCallback);
+                        var images = _scannedImageImporter.Import(fileName, importParams, oneFile ? ProgressHandler : CancelToken);
+                        await foreach (var image in images)
+                        {
+                            imageCallback(image);
+                        }
                     }
                     catch (Exception ex)
                     {

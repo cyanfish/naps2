@@ -45,7 +45,7 @@ public class ScanErrorHandling : ContextualTests
 
         bridgeFactory.Setup(factory => factory.Create(It.IsAny<ScanOptions>())).Throws<InvalidOperationException>();
         var source = controller.Scan(new ScanOptions { Device = new ScanDevice { ID = "blah" } });
-        await Assert.ThrowsAsync<InvalidOperationException>(source.ToList);
+        await Assert.ThrowsAsync<InvalidOperationException>(async () => await source.ToListAsync());
     }
 
     [Fact]
@@ -90,7 +90,7 @@ public class ScanErrorHandling : ContextualTests
                 pp.PostProcess(It.IsAny<ProcessedImage>(), It.IsAny<ScanOptions>(), It.IsAny<PostProcessingContext>()))
             .Throws<InvalidOperationException>();
         var source = controller.Scan(new ScanOptions { Device = new ScanDevice { ID = "blah" } });
-        await Assert.ThrowsAsync<InvalidOperationException>(source.ToList);
+        await Assert.ThrowsAsync<InvalidOperationException>(async () => await source.ToListAsync());
     }
 
     [Fact]
@@ -105,7 +105,7 @@ public class ScanErrorHandling : ContextualTests
 
         bridgeFactory.Setup(factory => factory.Create(It.IsAny<ScanOptions>())).Returns(bridge);
         var source = controller.Scan(new ScanOptions { Device = new ScanDevice { ID = "blah" } });
-        await Assert.ThrowsAsync<InvalidOperationException>(source.ToList);
+        await Assert.ThrowsAsync<InvalidOperationException>(async () => await source.ToListAsync());
     }
 
     // TODO: Add some testing that exceptions are wrapped up in ScanDriverUnknownException where appropriate (always? only from driver itself? is it really needed?)

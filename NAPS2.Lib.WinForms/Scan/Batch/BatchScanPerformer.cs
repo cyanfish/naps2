@@ -200,16 +200,16 @@ public class BatchScanPerformer : IBatchScanPerformer
 
         private async Task DoScan(int scanNumber, List<ProcessedImage> scan, int pageNumber)
         {
-            var source =
-                await _scanPerformer.PerformScan(_profile, _scanParams, _batchForm.SafeHandle(), _cancelToken);
-            await source.ForEach(image =>
+            var images =
+                _scanPerformer.PerformScan(_profile, _scanParams, _batchForm.SafeHandle(), _cancelToken);
+            await foreach(var image in images)
             {
                 scan.Add(image);
                 _cancelToken.ThrowIfCancellationRequested();
                 _progressCallback(scanNumber == -1
                     ? string.Format(MiscResources.BatchStatusPage, pageNumber++)
                     : string.Format(MiscResources.BatchStatusScanPage, pageNumber++, scanNumber + 1));
-            });
+            }
         }
 
         private bool PromptForNextScan()

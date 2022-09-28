@@ -18,35 +18,27 @@ public class FileStorageSample
         var device = (await controller.GetDeviceList()).First();
         var options = new ScanOptions
         {
-            Device = device,
-            Dpi = 300
+            Device = device
         };
 
-        // We can wait for the entire scan to complete and not worry about using an
+        // We can keep references to every image in the scan and not worry about using an
         // excessive amount of memory, since it is all stored on disk until rendered.
-        // This is just for illustration purposes; in real code you may want to
-        // process images as they come rather than waiting for the full scan.
-        List<ProcessedImage> processedImages = await controller.Scan(options).ToList();
-
-        try
+        var images = new List<ProcessedImage>();
+        await foreach (var image in controller.Scan(options))
         {
-            foreach (var processedImage in processedImages)
-            {
-                // This seamlessly loads the image data from disk.
-                using Bitmap bitmap = processedImage.RenderToBitmap();
-                // TODO: Do something with the bitmap
-            }
-        }
-        finally
-        {
-            foreach (var scannedImage in processedImages)
-            {
-                // This deletes the data for the individual image from the filesystem.
-                scannedImage.Dispose();
-            }
+            images.Add(image);
         }
 
-        // As we declared the scanningContext with "using", it will now be disposed and delete any remaining data on
+        // Now we can use the images as needed.
+        foreach (var image in images)
+        {
+            // This seamlessly loads the image data from disk.
+            using Bitmap bitmap = image.RenderToBitmap();
+            // This deletes the data for the individual image from the filesystem.
+            image.Dispose();
+        }
+
+        // As we declared the ScanningContext with "using", it will now be disposed and delete any remaining data on
         // the filesystem.
     }
 }

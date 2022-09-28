@@ -25,17 +25,17 @@ public class GtkImageContext : ImageContext
         return new GtkImage(this, new Pixbuf(stream));
     }
 
-    protected override void LoadFramesCore(AsyncSink<IMemoryImage> sink, Stream stream, ImageFileFormat format,
-        ProgressHandler progress)
+    protected override void LoadFramesCore(Action<IMemoryImage> produceImage, Stream stream,
+        ImageFileFormat format, ProgressHandler progress)
     {
         if (format == ImageFileFormat.Tiff)
         {
-            _tiffIo.LoadTiff(sink, stream, progress);
+            _tiffIo.LoadTiff(produceImage, stream, progress);
             return;
         }
         progress.Report(0, 1);
         if (progress.IsCancellationRequested) return;
-        sink.PutItem(LoadCore(stream, format));
+        produceImage(LoadCore(stream, format));
         progress.Report(1, 1);
     }
 

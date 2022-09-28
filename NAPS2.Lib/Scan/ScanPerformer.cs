@@ -45,7 +45,7 @@ internal class ScanPerformer : IScanPerformer
         return await PromptForDevice(options);
     }
 
-    public async Task<AsyncSource<ProcessedImage>> PerformScan(ScanProfile scanProfile, ScanParams scanParams,
+    public async IAsyncEnumerable<ProcessedImage> PerformScan(ScanProfile scanProfile, ScanParams scanParams,
         IntPtr dialogParent = default, CancellationToken cancelToken = default)
     {
         var options = BuildOptions(scanProfile, scanParams, dialogParent);
@@ -55,7 +55,7 @@ internal class ScanPerformer : IScanPerformer
         if (!await PopulateDevice(scanProfile, options))
         {
             // User cancelled out of a dialog
-            return AsyncSource<ProcessedImage>.Empty;
+            yield break;
         }
 
         var localPostProcessor = new LocalPostProcessor(_scanningContext, ConfigureOcrController(scanParams));
@@ -71,32 +71,37 @@ internal class ScanPerformer : IScanPerformer
         ShowOperation(op, options, scanParams);
         cancelToken.Register(op.Cancel);
 
-        var source = controller.Scan(options, op.CancelToken);
+        var images = controller.Scan(options, op.CancelToken);
 
         if (scanProfile.EnableAutoSave && scanProfile.AutoSaveSettings != null)
         {
-            source = _autoSaver.Save(scanProfile.AutoSaveSettings, source);
+            images = _autoSaver.Save(scanProfile.AutoSaveSettings, images);
         }
 
-        var sink = new AsyncSink<ProcessedImage>();
-        source.ForEach(img => sink.PutItem(img)).ContinueWith(t =>
+        int pageCount = 0;
+        try
         {
-            // Errors are handled by the ScanError callback so we ignore them here
-            if (sink.ItemCount > 0)
+            await foreach (var image in images)
             {
+                pageCount++;
+                yield return image;
+            }
+        }
+        finally
+        {
+            if (pageCount > 0)
+            {
+                // TODO: Test event logging
                 Log.Event(EventType.Scan, new EventParams
                 {
                     Name = MiscResources.Scan,
-                    Pages = sink.ItemCount,
+                    Pages = pageCount,
                     DeviceName = scanProfile.Device?.Name,
                     ProfileName = scanProfile.DisplayName,
                     BitDepth = scanProfile.BitDepth.Description()
                 });
             }
-
-            sink.SetCompleted();
-        }).AssertNoAwait();
-        return sink.AsSource();
+        }
     }
 
     private OcrController ConfigureOcrController(ScanParams scanParams)

@@ -15,7 +15,7 @@ public class ScannedImageImporter : IScannedImageImporter
         _imageImporter = imageImporter;
     }
 
-    public AsyncSource<ProcessedImage> Import(string filePath, ImportParams importParams, ProgressHandler progress = default)
+    public IAsyncEnumerable<ProcessedImage> Import(string filePath, ImportParams importParams, ProgressHandler progress = default)
     {
         if (filePath == null)
         {

@@ -33,7 +33,7 @@ public class ImageSerializerTests : ContextualTests
         Assert.Equal(300, Assert.IsType<BrightnessTransform>(destImage.TransformState.Transforms[0]).Brightness);
         Assert.True(destImage.Metadata.Lossless);
         Assert.Equal(BitDepth.Grayscale, destImage.Metadata.BitDepth);
-        ImageAsserts.Similar(ImageResources.dog_b_p300, destImage.Render());
+        ImageAsserts.Similar(ImageResources.dog_b_p300, destImage);
     }
 
     [Theory]
@@ -52,7 +52,7 @@ public class ImageSerializerTests : ContextualTests
         Assert.IsType<ImageFileStorage>(destImage.Storage);
         // Check that disposing the original doesn't interfere with rendering, i.e. not using the same backing file
         sourceImage.Dispose();
-        ImageAsserts.Similar(ImageResources.dog, destImage.Render());
+        ImageAsserts.Similar(ImageResources.dog, destImage);
     }
 
     [Theory]
@@ -70,7 +70,7 @@ public class ImageSerializerTests : ContextualTests
         Assert.IsAssignableFrom<IMemoryImage>(destImage.Storage);
         // Check that disposing the original doesn't interfere with rendering, i.e. not using the same image
         sourceImage.Dispose();
-        ImageAsserts.Similar(ImageResources.dog, destImage.Render());
+        ImageAsserts.Similar(ImageResources.dog, destImage);
     }
 
     [Fact]
@@ -91,7 +91,7 @@ public class ImageSerializerTests : ContextualTests
         var sourceStorage = Assert.IsType<ImageFileStorage>(sourceImage.Storage);
         var destStorage = Assert.IsType<ImageFileStorage>(destImage.Storage);
         Assert.Equal(sourceStorage.FullPath, destStorage.FullPath);
-        ImageAsserts.Similar(ImageResources.dog, destImage.Render());
+        ImageAsserts.Similar(ImageResources.dog, destImage);
 
         destImage.Dispose();
         Assert.True(File.Exists(sourceStorage.FullPath));
@@ -117,7 +117,7 @@ public class ImageSerializerTests : ContextualTests
         var sourceStorage = Assert.IsType<ImageFileStorage>(sourceImage.Storage);
         var destStorage = Assert.IsType<ImageFileStorage>(destImage.Storage);
         Assert.Equal(sourceStorage.FullPath, destStorage.FullPath);
-        ImageAsserts.Similar(ImageResources.dog, destImage.Render());
+        ImageAsserts.Similar(ImageResources.dog, destImage);
 
         sourceImage.Dispose();
         Assert.True(File.Exists(sourceStorage.FullPath));
@@ -142,7 +142,7 @@ public class ImageSerializerTests : ContextualTests
         sourceImage.Dispose();
         using var destImage = ImageSerializer.Deserialize(destContext, serializedImage, new DeserializeImageOptions());
 
-        ImageAsserts.Similar(ImageResources.dog, destImage.Render());
+        ImageAsserts.Similar(ImageResources.dog, destImage);
     }
 
     [Fact]
@@ -280,14 +280,14 @@ public class ImageSerializerTests : ContextualTests
         using var destContext = new ScanningContext(TestImageContextFactory.Get(new PdfiumPdfRenderer()),
             FileStorageManager.CreateFolder(Path.Combine(FolderPath, "dest")));
 
-        using var sourceImage = (await new PdfImporter(ScanningContext).Import(importPath).ToList()).First();
+        using var sourceImage = await new PdfImporter(ScanningContext).Import(importPath).FirstAsync();
         var serializedImage = ImageSerializer.Serialize(sourceImage, new SerializeImageOptions());
         using var destImage = ImageSerializer.Deserialize(destContext, serializedImage, new DeserializeImageOptions());
 
         Assert.IsType<ImageFileStorage>(destImage.Storage);
         // Check that disposing the original doesn't interfere with rendering, i.e. not using the same backing file
         sourceImage.Dispose();
-        ImageAsserts.Similar(PdfResources.word_p1, destImage.Render(), ignoreResolution: true);
+        ImageAsserts.Similar(PdfResources.word_p1, destImage, ignoreResolution: true);
     }
 
     [Theory]
@@ -301,14 +301,14 @@ public class ImageSerializerTests : ContextualTests
 
         using var destContext = new ScanningContext(TestImageContextFactory.Get(new PdfiumPdfRenderer()));
 
-        using var sourceImage = (await new PdfImporter(ScanningContext).Import(importPath).ToList()).First();
+        using var sourceImage = await new PdfImporter(ScanningContext).Import(importPath).FirstAsync();
         var serializedImage = ImageSerializer.Serialize(sourceImage, new SerializeImageOptions());
         using var destImage = ImageSerializer.Deserialize(destContext, serializedImage, new DeserializeImageOptions());
 
         Assert.IsType<ImageMemoryStorage>(destImage.Storage);
         // Check that disposing the original doesn't interfere with rendering, i.e. not using the same image
         sourceImage.Dispose();
-        ImageAsserts.Similar(PdfResources.word_p1, destImage.Render(), ignoreResolution: true);
+        ImageAsserts.Similar(PdfResources.word_p1, destImage, ignoreResolution: true);
     }
 
     [Theory]

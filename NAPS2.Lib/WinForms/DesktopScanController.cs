@@ -132,10 +132,13 @@ public class DesktopScanController : IDesktopScanController
 
     private async Task DoScan(ScanProfile profile)
     {
-        var source =
-            await _scanPerformer.PerformScan(profile, DefaultScanParams(),
-                _desktopFormProvider.DesktopForm.NativeHandle);
-        await source.ForEach(_desktopImagesController.ReceiveScannedImage());
+        var images =
+            _scanPerformer.PerformScan(profile, DefaultScanParams(), _desktopFormProvider.DesktopForm.NativeHandle);
+        var imageCallback = _desktopImagesController.ReceiveScannedImage();
+        await foreach (var image in images)
+        {
+            imageCallback(image);
+        }
         _desktopFormProvider.DesktopForm.BringToFront();
     }
 }

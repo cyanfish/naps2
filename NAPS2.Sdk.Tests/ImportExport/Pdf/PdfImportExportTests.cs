@@ -26,7 +26,7 @@ public class PdfImportExportTests : ContextualTests
     {
         storageConfig.Apply(this);
 
-        var images = await _importer.Import(_importPath).ToList();
+        var images = await _importer.Import(_importPath).ToListAsync();
         Assert.Equal(2, images.Count);
         await _exporter.Export(_exportPath, images, new PdfExportParams());
 
@@ -39,7 +39,7 @@ public class PdfImportExportTests : ContextualTests
     {
         storageConfig.Apply(this);
 
-        var images = await _importer.Import(_importPath).ToList();
+        var images = await _importer.Import(_importPath).ToListAsync();
         Assert.Equal(2, images.Count);
 
         var toInsert = ScanningContext.CreateProcessedImage(LoadImage(ImageResources.dog));
@@ -60,7 +60,7 @@ public class PdfImportExportTests : ContextualTests
     {
         storageConfig.Apply(this);
 
-        var images = await _importer.Import(_importPath).ToList();
+        var images = await _importer.Import(_importPath).ToListAsync();
         Assert.Equal(2, images.Count);
 
         var newImages = new List<ProcessedImage>
@@ -68,8 +68,8 @@ public class PdfImportExportTests : ContextualTests
             images[0].WithTransform(new RotationTransform(90)),
             images[1].WithTransform(new BlackWhiteTransform())
         };
-        ImageAsserts.Similar(PdfResources.word_p1_rotated, newImages[0].Render(), ignoreResolution: true);
-        ImageAsserts.Similar(PdfResources.word_p2_bw, newImages[1].Render(), ignoreResolution: true);
+        ImageAsserts.Similar(PdfResources.word_p1_rotated, newImages[0], ignoreResolution: true);
+        ImageAsserts.Similar(PdfResources.word_p2_bw, newImages[1], ignoreResolution: true);
 
         await _exporter.Export(_exportPath, newImages, new PdfExportParams());
         PdfAsserts.AssertImages(_exportPath, PdfResources.word_p1_rotated, PdfResources.word_p2_bw);
@@ -84,12 +84,12 @@ public class PdfImportExportTests : ContextualTests
 
         var importPathForOcr = Path.Combine(FolderPath, "import_ocr.pdf");
         File.WriteAllBytes(importPathForOcr, PdfResources.word_patcht_pdf);
-        var images = await _importer.Import(_importPath).ToList();
-        var imagesForOcr = await _importer.Import(importPathForOcr).ToList();
+        var images = await _importer.Import(_importPath).ToListAsync();
+        var imagesForOcr = await _importer.Import(importPathForOcr).ToListAsync();
 
         Assert.Equal(2, images.Count);
         Assert.Single(imagesForOcr);
-        ImageAsserts.Similar(PdfResources.word_patcht_p1, imagesForOcr[0].Render(), ignoreResolution: true);
+        ImageAsserts.Similar(PdfResources.word_patcht_p1, imagesForOcr[0], ignoreResolution: true);
 
         var allImages = images.Concat(imagesForOcr).ToList();
 
@@ -105,7 +105,7 @@ public class PdfImportExportTests : ContextualTests
     {
         storageConfig.Apply(this);
 
-        var images = await _importer.Import(_importPath).ToList();
+        var images = await _importer.Import(_importPath).ToListAsync();
         Assert.Equal(2, images.Count);
         await _exporter.Export(_exportPath, images, new PdfExportParams
         {

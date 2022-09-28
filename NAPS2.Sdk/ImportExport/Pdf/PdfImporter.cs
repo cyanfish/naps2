@@ -8,7 +8,7 @@ namespace NAPS2.ImportExport.Pdf;
 public class PdfImporter : IPdfImporter
 {
     private const int MAX_PASSWORD_ATTEMPTS = 5;
-    
+
     private readonly ScanningContext _scanningContext;
     private readonly IPdfPasswordProvider? _pdfPasswordProvider;
     private readonly ImportPostProcessor _importPostProcessor;
@@ -31,51 +31,38 @@ public class PdfImporter : IPdfImporter
         _importPostProcessor = importPostProcessor;
     }
 
-    public AsyncSource<ProcessedImage> Import(string filePath, ImportParams? importParams = null,
+    public IAsyncEnumerable<ProcessedImage> Import(string filePath, ImportParams? importParams = null,
         ProgressHandler progress = default)
     {
         importParams ??= new ImportParams();
-        var sink = new AsyncSink<ProcessedImage>();
-        Task.Run(async () =>
+        return AsyncProducers.RunProducer<ProcessedImage>(produceImage =>
         {
-            try
+            if (progress.IsCancellationRequested) return;
+
+            lock (PdfiumNativeLibrary.Instance)
             {
-                if (progress.IsCancellationRequested) return;
+                using var document = LoadDocument(filePath, importParams);
+                if (document == null) return;
+                progress.Report(0, document.PageCount);
 
-                lock (PdfiumNativeLibrary.Instance)
+                // TODO: Maybe do a permissions check
+
+                // TODO: Make sure to test slices (both unit and command line)
+                using var pages = importParams.Slice
+                    .Indices(document.PageCount)
+                    .Select(index => document.GetPage(index))
+                    .ToDisposableList();
+
+                int i = 0;
+                foreach (var page in pages.InnerList)
                 {
-                    using var document = LoadDocument(filePath, importParams);
-                    if (document == null) return;
-                    progress.Report(0, document.PageCount);
-                    
-                    // TODO: Maybe do a permissions check
-
-                    // TODO: Make sure to test slices (both unit and command line)
-                    using var pages = importParams.Slice
-                        .Indices(document.PageCount)
-                        .Select(index => document.GetPage(index))
-                        .ToDisposableList();
-
-                    int i = 0;
-                    foreach (var page in pages.InnerList)
-                    {
-                        if (progress.IsCancellationRequested) return;
-                        var image = GetImageFromPage(page, importParams);
-                        progress.Report(++i, document.PageCount);
-                        sink.PutItem(image);
-                    }
+                    if (progress.IsCancellationRequested) return;
+                    var image = GetImageFromPage(page, importParams);
+                    progress.Report(++i, document.PageCount);
+                    produceImage(image);
                 }
             }
-            catch (Exception e)
-            {
-                sink.SetError(e);
-            }
-            finally
-            {
-                sink.SetCompleted();
-            }
         });
-        return sink.AsSource();
     }
 
     private PdfDocument? LoadDocument(string filePath, ImportParams importParams)

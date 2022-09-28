@@ -1,6 +1,5 @@
 namespace NAPS2.Images;
 
-// TODO: Write tests for this class
 /// <summary>
 /// An image that has gone through the scanning (or importing) process. It has metadata about the image, possibly
 /// additional post-processing data from the scan, and may have transformations that have been applied during or after

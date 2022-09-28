@@ -122,20 +122,21 @@ internal class LibTiffIo : ITiffWriter
         }
     }
 
-    public void LoadTiff(AsyncSink<IMemoryImage> sink, Stream stream, ProgressHandler progress)
+    public void LoadTiff(Action<IMemoryImage> produceImage, Stream stream, ProgressHandler progress)
     {
         var client = new LibTiffStreamClient(stream);
         var tiff = client.TIFFClientOpen("r");
-        EnumerateTiffFrames(sink, tiff, progress, client);
+        EnumerateTiffFrames(produceImage, tiff, progress, client);
     }
 
-    public void LoadTiff(AsyncSink<IMemoryImage> sink, string path, ProgressHandler progress)
+    public void LoadTiff(Action<IMemoryImage> produceImage, string path, ProgressHandler progress)
     {
         var tiff = LibTiff.TIFFOpen(path, "r");
-        EnumerateTiffFrames(sink, tiff, progress);
+        EnumerateTiffFrames(produceImage, tiff, progress);
     }
 
-    private void EnumerateTiffFrames(AsyncSink<IMemoryImage> sink, IntPtr tiff, ProgressHandler progress, LibTiffStreamClient? client = null)
+    private void EnumerateTiffFrames(Action<IMemoryImage> produceImage, IntPtr tiff,
+        ProgressHandler progress, LibTiffStreamClient? client = null)
     {
         // We keep a reference to the client to avoid garbage collection
         try
@@ -156,7 +157,7 @@ internal class LibTiffIo : ITiffWriter
                 img.OriginalFileFormat = ImageFileFormat.Tiff;
                 using var imageLock = img.Lock(LockMode.WriteOnly, out var data);
                 ReadTiffFrame(data.safePtr, tiff, w, h);
-                sink.PutItem(img);
+                produceImage(img);
                 progress.Report(++i, count);
             } while (LibTiff.TIFFReadDirectory(tiff) == 1);
         }

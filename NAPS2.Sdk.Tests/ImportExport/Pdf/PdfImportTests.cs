@@ -25,14 +25,14 @@ public class PdfImportTests : ContextualTests
         storageConfig.Apply(this);
 
         var importPath = CopyResourceToFile(PdfResources.word_generated_pdf, "import.pdf");
-        var images = await _importer.Import(importPath).ToList();
+        var images = await _importer.Import(importPath).ToListAsync();
 
         Assert.Equal(2, images.Count);
         storageConfig.AssertPdfStorage(images[0].Storage);
         storageConfig.AssertPdfStorage(images[1].Storage);
         // TODO: Why is the expected resolution weird?
-        ImageAsserts.Similar(PdfResources.word_p1, images[0].Render(), ignoreResolution: true);
-        ImageAsserts.Similar(PdfResources.word_p2, images[1].Render(), ignoreResolution: true);
+        ImageAsserts.Similar(PdfResources.word_p1, images[0], ignoreResolution: true);
+        ImageAsserts.Similar(PdfResources.word_p2, images[1], ignoreResolution: true);
     }
 
     [Theory]
@@ -42,11 +42,11 @@ public class PdfImportTests : ContextualTests
         storageConfig.Apply(this);
 
         var importPath = CopyResourceToFile(PdfResources.image_pdf, "import.pdf");
-        var images = await _importer.Import(importPath).ToList();
+        var images = await _importer.Import(importPath).ToListAsync();
 
         Assert.Single(images);
         storageConfig.AssertJpegStorage(images[0].Storage);
-        ImageAsserts.Similar(ImageResources.dog, images[0].Render());
+        ImageAsserts.Similar(ImageResources.dog, images[0]);
     }
 
     [Theory]
@@ -56,11 +56,11 @@ public class PdfImportTests : ContextualTests
         storageConfig.Apply(this);
 
         var importPath = CopyResourceToFile(PdfResources.image_pdf_png, "import.pdf");
-        var images = await _importer.Import(importPath).ToList();
+        var images = await _importer.Import(importPath).ToListAsync();
 
         Assert.Single(images);
         storageConfig.AssertPngStorage(images[0].Storage);
-        ImageAsserts.Similar(ImageResources.dog, images[0].Render());
+        ImageAsserts.Similar(ImageResources.dog, images[0]);
     }
 
     [Theory]
@@ -70,11 +70,11 @@ public class PdfImportTests : ContextualTests
         storageConfig.Apply(this);
 
         var importPath = CopyResourceToFile(PdfResources.image_pdf_bw, "import.pdf");
-        var images = await _importer.Import(importPath).ToList();
+        var images = await _importer.Import(importPath).ToListAsync();
 
         Assert.Single(images);
         storageConfig.AssertPngStorage(images[0].Storage);
-        ImageAsserts.Similar(ImageResources.dog_bw, images[0].Render());
+        ImageAsserts.Similar(ImageResources.dog_bw, images[0]);
     }
 
     [Theory]
@@ -84,10 +84,10 @@ public class PdfImportTests : ContextualTests
         storageConfig.Apply(this);
 
         var importPath = CopyResourceToFile(PdfResources.encrypted_pdf, "import.pdf");
-        var images = await _importer.Import(importPath, new ImportParams { Password = "hello" }).ToList();
+        var images = await _importer.Import(importPath, new ImportParams { Password = "hello" }).ToListAsync();
 
         Assert.Single(images);
-        ImageAsserts.Similar(ImageResources.dog, images[0].Render());
+        ImageAsserts.Similar(ImageResources.dog, images[0]);
     }
 
     [Theory]
@@ -102,17 +102,17 @@ public class PdfImportTests : ContextualTests
         var importer = new PdfImporter(ScanningContext, passwordProvider.Object);
 
         var importPath = CopyResourceToFile(PdfResources.encrypted_pdf, "import.pdf");
-        var images = await importer.Import(importPath).ToList();
+        var images = await importer.Import(importPath).ToListAsync();
 
         Assert.Single(images);
-        ImageAsserts.Similar(ImageResources.dog, images[0].Render());
+        ImageAsserts.Similar(ImageResources.dog, images[0]);
     }
 
     [Fact]
     public async Task ImportMissingFile()
     {
         var source = _importer.Import(Path.Combine(FolderPath, "missing.pdf"));
-        await Assert.ThrowsAsync<FileNotFoundException>(async () => await source.ToList());
+        await Assert.ThrowsAsync<FileNotFoundException>(async () => await source.ToListAsync());
     }
 
     [Fact]
@@ -121,7 +121,7 @@ public class PdfImportTests : ContextualTests
         var path = Path.Combine(FolderPath, "inuse.pdf");
         using var stream = new FileStream(path, FileMode.CreateNew, FileAccess.ReadWrite, FileShare.None);
         var source = _importer.Import(path);
-        await Assert.ThrowsAsync<IOException>(async () => await source.ToList());
+        await Assert.ThrowsAsync<IOException>(async () => await source.ToListAsync());
     }
 
     [Fact]
@@ -129,7 +129,7 @@ public class PdfImportTests : ContextualTests
     {
         var path = CopyResourceToFile(BinaryResources.stock_dog, "notapdf.pdf");
         var source = _importer.Import(path);
-        var ex = await Assert.ThrowsAsync<PdfiumException>(async () => await source.ToList());
+        var ex = await Assert.ThrowsAsync<PdfiumException>(async () => await source.ToListAsync());
         Assert.Equal(PdfiumErrorCode.InvalidFileFormat, ex.ErrorCode);
     }
 }

@@ -2,5 +2,5 @@
 
 public interface IScannedImageImporter
 {
-    AsyncSource<ProcessedImage> Import(string filePath, ImportParams importParams, ProgressHandler progress = default);
+    IAsyncEnumerable<ProcessedImage> Import(string filePath, ImportParams importParams, ProgressHandler progress = default);
 }

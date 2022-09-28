@@ -32,8 +32,8 @@ public class GdiImageContext : ImageContext
         return new GdiImage(this, new Bitmap(stream));
     }
 
-    protected override void LoadFramesCore(AsyncSink<IMemoryImage> sink, Stream stream, ImageFileFormat format,
-        ProgressHandler progress)
+    protected override void LoadFramesCore(Action<IMemoryImage> produceImage, Stream stream,
+        ImageFileFormat format, ProgressHandler progress)
     {
         var memoryStream = EnsureMemoryStream(stream);
         using var bitmap = new Bitmap(memoryStream);
@@ -43,7 +43,7 @@ public class GdiImageContext : ImageContext
             progress.Report(i, count);
             if (progress.IsCancellationRequested) break;
             bitmap.SelectActiveFrame(FrameDimension.Page, i);
-            sink.PutItem(new GdiImage(this, bitmap).Copy());
+            produceImage(new GdiImage(this, bitmap).Copy());
         }
         progress.Report(count, count);
     }
