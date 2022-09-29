@@ -68,6 +68,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NAPS2.Lib.Gtk", "NAPS2.Lib.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NAPS2.Images.Gtk", "NAPS2.Images.Gtk\NAPS2.Images.Gtk.csproj", "{0F0187B3-8633-46BB-A409-16D893E37B3D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NAPS2.App.Gtk", "NAPS2.App.Gtk\NAPS2.App.Gtk.csproj", "{DCAC4A2E-BF9A-4F90-9B16-08DC38038A71}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -374,6 +376,18 @@ Global
 		{0F0187B3-8633-46BB-A409-16D893E37B3D}.Standalone|Any CPU.Build.0 = Debug|Any CPU
 		{0F0187B3-8633-46BB-A409-16D893E37B3D}.Tools|Any CPU.ActiveCfg = Debug|Any CPU
 		{0F0187B3-8633-46BB-A409-16D893E37B3D}.Tools|Any CPU.Build.0 = Debug|Any CPU
+		{DCAC4A2E-BF9A-4F90-9B16-08DC38038A71}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DCAC4A2E-BF9A-4F90-9B16-08DC38038A71}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DCAC4A2E-BF9A-4F90-9B16-08DC38038A71}.DebugLang|Any CPU.ActiveCfg = Debug|Any CPU
+		{DCAC4A2E-BF9A-4F90-9B16-08DC38038A71}.DebugLang|Any CPU.Build.0 = Debug|Any CPU
+		{DCAC4A2E-BF9A-4F90-9B16-08DC38038A71}.InstallerEXE|Any CPU.ActiveCfg = Debug|Any CPU
+		{DCAC4A2E-BF9A-4F90-9B16-08DC38038A71}.InstallerEXE|Any CPU.Build.0 = Debug|Any CPU
+		{DCAC4A2E-BF9A-4F90-9B16-08DC38038A71}.InstallerMSI|Any CPU.ActiveCfg = Debug|Any CPU
+		{DCAC4A2E-BF9A-4F90-9B16-08DC38038A71}.InstallerMSI|Any CPU.Build.0 = Debug|Any CPU
+		{DCAC4A2E-BF9A-4F90-9B16-08DC38038A71}.Standalone|Any CPU.ActiveCfg = Debug|Any CPU
+		{DCAC4A2E-BF9A-4F90-9B16-08DC38038A71}.Standalone|Any CPU.Build.0 = Debug|Any CPU
+		{DCAC4A2E-BF9A-4F90-9B16-08DC38038A71}.Tools|Any CPU.ActiveCfg = Debug|Any CPU
+		{DCAC4A2E-BF9A-4F90-9B16-08DC38038A71}.Tools|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
