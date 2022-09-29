@@ -1,0 +1,10 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <ItemGroup>
+        <ContentWithTargetPath Include="..\NAPS2.Setup\lib\linux\libpdfium.so"
+                               Condition="'$(RuntimeIdentifier)' == 'linux-x64'">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+            <Link>lib\linux\libpdfium.so</Link>
+            <TargetPath>_linux\libpdfium.so</TargetPath>
+        </ContentWithTargetPath>
+    </ItemGroup>
+</Project>

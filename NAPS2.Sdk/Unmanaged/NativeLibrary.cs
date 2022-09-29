@@ -20,9 +20,12 @@ public class NativeLibrary
                 }
             }
         }
-        var expectedPath =
-            Path.Combine(AssemblyHelper.LibFolder, PlatformCompat.System.LibrarySearchPaths[0], libraryName);
-        throw new Exception($"Library does not exist: {expectedPath}");
+        // TODO: Maybe do this for some platforms?
+        // var expectedPath =
+        //     Path.Combine(AssemblyHelper.LibFolder, PlatformCompat.System.LibrarySearchPaths[0], libraryName);
+        // throw new Exception($"Library does not exist: {expectedPath}");
+        // Just the library name so it uses the system search paths
+        return libraryName;
     }
 
     private readonly Dictionary<Type, object> _funcCache = new();

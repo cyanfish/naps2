@@ -55,7 +55,8 @@ public class ImageListDiffer
             var trimOps = ImmutableList<TrimOperation>.Empty;
             if (newState.Count < _currentState.Count)
             {
-                trimOps = trimOps.Add(new TrimOperation(_currentState.Count - newState.Count));
+                var deletedItems = _currentState.Skip(newState.Count).Select(x => x.Source).ToImmutableList();
+                trimOps = trimOps.Add(new TrimOperation(_currentState.Count - newState.Count, deletedItems));
             }
 
             _currentState = newState;

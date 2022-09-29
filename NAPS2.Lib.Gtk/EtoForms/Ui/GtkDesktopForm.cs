@@ -1,7 +1,7 @@
 using System.Threading;
 using Eto.Drawing;
 using Eto.Forms;
-using Eto.GtkSharp;
+using NAPS2.EtoForms.Gtk;
 using NAPS2.ImportExport.Images;
 using NAPS2.WinForms;
 
@@ -28,16 +28,7 @@ public class GtkDesktopForm : DesktopForm
             imageList, imageTransfer, thumbnailController, thumbnailProvider, desktopController, desktopScanController,
             imageListActions, desktopFormProvider, desktopSubFormController)
     {
-        // For retina screens
-        _thumbnailController.Oversample = 2.0;
     }
-
-    // protected override void SetContent(Control content)
-    // {
-    //     var scrollView = new NSScrollView();
-    //     scrollView.DocumentView = content.ToNative();
-    //     Content = scrollView.ToEto();
-    // }
 
     protected override void OnLoad(EventArgs e)
     {
@@ -45,6 +36,8 @@ public class GtkDesktopForm : DesktopForm
         Invoker.Current = new SyncContextInvoker(SynchronizationContext.Current);
         base.OnLoad(e);
         ClientSize = new Size(1000, 600);
+        // TODO: This is a bit of a hack as for some reason the view doesn't update unless we do this
+        ((GtkListView<UiImage>)_listView).Updated += (_, _) => Content = _listView.Control;
     }
 
     protected override void CreateToolbarsAndMenus()

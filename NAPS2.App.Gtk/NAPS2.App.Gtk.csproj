@@ -20,6 +20,7 @@
     </PropertyGroup>
 
     <Import Project="..\NAPS2.Setup\CommonTargets.targets" />
+    <Import Project="..\NAPS2.Setup\NativeLibs.Linux.targets" />
     <Import Project="..\NAPS2.Setup\SdkUsers.targets" />
 
     <ItemGroup>

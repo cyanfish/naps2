@@ -29,7 +29,7 @@ public class LinuxSystemCompat : ISystemCompat
 
     public string PdfiumLibraryName => "libpdfium.so";
 
-    public string SaneLibraryName => "libsane.so";
+    public string SaneLibraryName => "libsane.so.1";
     
     public IntPtr LoadLibrary(string path) => LinuxInterop.dlopen(path, RTLD_LAZY | RTLD_GLOBAL);
 
