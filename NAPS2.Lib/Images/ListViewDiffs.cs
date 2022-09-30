@@ -30,5 +30,5 @@ public record ListViewDiffs<T>(
 
     public record ReplaceOperation(int Index, T Item);
 
-    public record TrimOperation(int Count, ImmutableList<T> DeletedItems);
+    public record TrimOperation(int Count);
 }

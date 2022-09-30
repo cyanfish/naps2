@@ -44,6 +44,8 @@ public class SavePdfOperation : OperationBase
         }
         if (File.Exists(subFileName))
         {
+            // TODO: Gtk auto prompts for overwrite in the save dialog. How to handle this and avoid duplicate prompts?
+            // Can we just change the overwrite prompt implementation or will that be a problem in some cases where the save dialog isn't used, e.g. auto save, batch, etc?
             if (_overwritePrompt.ConfirmOverwrite(subFileName) != OverwriteResponse.Yes)
             {
                 return false;
