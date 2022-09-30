@@ -1,14 +1,19 @@
 using System.Threading;
-using Eto.Drawing;
-using Eto.Forms;
+using Eto.GtkSharp;
+using Eto.GtkSharp.Forms.ToolBar;
+using Gdk;
+using Gtk;
 using NAPS2.EtoForms.Gtk;
 using NAPS2.ImportExport.Images;
 using NAPS2.WinForms;
+using Command = Eto.Forms.Command;
 
 namespace NAPS2.EtoForms.Ui;
 
 public class GtkDesktopForm : DesktopForm
 {
+    private Toolbar _toolbar;
+
     public GtkDesktopForm(
         Naps2Config config,
         // KeyboardShortcutManager ksm,
@@ -36,102 +41,110 @@ public class GtkDesktopForm : DesktopForm
         // TODO: What's the best place to initialize this? It needs to happen from the UI event loop.
         Invoker.Current = new SyncContextInvoker(SynchronizationContext.Current);
         base.OnLoad(e);
-        ClientSize = new Size(1000, 600);
+        ClientSize = new Eto.Drawing.Size(1000, 600);
         // TODO: This is a bit of a hack as for some reason the view doesn't update unless we do this
-        ((GtkListView<UiImage>)_listView).Updated += (_, _) => Content = _listView.Control;
+        ((GtkListView<UiImage>) _listView).Updated += (_, _) => Content = _listView.Control;
     }
 
-    protected override void CreateToolbarsAndMenus()
+    protected override void ConfigureToolbar()
     {
-        Commands.MoveDown.ToolBarText = "";
-        Commands.MoveUp.ToolBarText = "";
-        Commands.SaveAllPdf.Shortcut = Application.Instance.CommonModifier | Keys.S;
-        Commands.SaveSelectedPdf.Shortcut = Application.Instance.CommonModifier | Keys.Shift | Keys.S;
-        Commands.SaveAllImages.Shortcut = Application.Instance.CommonModifier | Keys.M;
-        Commands.SaveSelectedImages.Shortcut = Application.Instance.CommonModifier | Keys.Shift | Keys.M;
+        _toolbar = ((ToolBarHandler) ToolBar.Handler).Control;
+        _toolbar.Style = ToolbarStyle.Both;
+    }
 
-        Menu = new MenuBar
+    protected override void CreateToolbarButton(Command command)
+    {
+        var button = new ToolButton(command.Image.ToGtk(), command.ToolBarText)
         {
-            AboutItem = Commands.About,
-            ApplicationItems =
+            Homogeneous = false
+        };
+        button.StyleContext.AddProvider(new StyleProperties()
+        {
+            Data = { { "padding", "0" } }
+        }, 0);
+        button.Sensitive = command.Enabled;
+        command.EnabledChanged +=
+            (_, _) => button.Sensitive = command.Enabled;
+        button.Clicked += (_, _) => command.Execute();
+        _toolbar.Add(button);
+    }
+
+    protected override void CreateToolbarSeparator()
+    {
+        _toolbar.Add(new SeparatorToolItem());
+    }
+
+    protected override void CreateToolbarStackedButtons(Command command1, Command command2)
+    {
+        var toolItem = new ToolItem();
+        var box = new Box(Orientation.Vertical, 16);
+        box.Add(Icons.arrow_up_small.ToEtoImage().ToGtk());
+        box.Add(Icons.arrow_down_small.ToEtoImage().ToGtk());
+        toolItem.Add(box);
+        _toolbar.Add(toolItem);
+    }
+
+    protected override void CreateToolbarButtonWithMenu(Command command, MenuProvider menu)
+    {
+        var button = new MenuToolButton(command.Image.ToGtk(), command.ToolBarText)
+        {
+            Homogeneous = false,
+            Menu = CreateMenuWidget(menu)
+        };
+        button.Sensitive = command.Enabled;
+        command.EnabledChanged +=
+            (_, _) => button.Sensitive = command.Enabled;
+        button.Clicked += (_, _) => command.Execute();
+        _toolbar.Add(button);
+    }
+
+    private Menu CreateMenuWidget(MenuProvider menu)
+    {
+        var menuWidget = new Menu();
+        menu.Handle(items =>
+        {
+            foreach (var child in menuWidget.Children)
             {
-                CreateSubMenu(Commands.LanguageMenu, GetLanguageMenuProvider())
-            },
-            Items =
+                menuWidget.Remove(child);
+            }
+            foreach (var item in items)
             {
-                new SubMenuItem
+                switch (item)
                 {
-                    Text = "File",
-                    Items =
-                    {
-                        Commands.Import,
-                        new SeparatorMenuItem(),
-                        Commands.SaveAllPdf,
-                        Commands.SaveSelectedPdf,
-                        Commands.SaveAllImages,
-                        Commands.SaveSelectedImages,
-                        new SeparatorMenuItem(),
-                        Commands.EmailAllPdf,
-                        Commands.EmailSelectedPdf,
-                        Commands.Print,
-                        new SeparatorMenuItem(),
-                        Commands.ClearAll
-                    }
-                },
-                new SubMenuItem
-                {
-                    Text = "Edit"
-                },
-                new SubMenuItem
-                {
-                    Text = "Scan",
-                    Items =
-                    {
-                        Commands.Scan,
-                        Commands.NewProfile
-                    }
-                },
-                new SubMenuItem
-                {
-                    Text = "Image",
-                    Items =
-                    {
-                        Commands.ViewImage,
-                        new SeparatorMenuItem(),
-                        Commands.Crop,
-                        Commands.BrightCont,
-                        Commands.HueSat,
-                        Commands.BlackWhite,
-                        Commands.Sharpen,
-                        new SeparatorMenuItem(),
-                        Commands.ResetImage
-                    }
-                },
-                new SubMenuItem
-                {
-                    Text = "Tools",
-                    Items =
-                    {
-                        Commands.BatchScan,
-                        Commands.Ocr
-                    }
+                    case MenuProvider.CommandItem commandItem:
+                        var menuItem = new MenuItem
+                        {
+                            Label = commandItem.Command.MenuText
+                        };
+                        menuItem.Sensitive = commandItem.Command.Enabled;
+                        commandItem.Command.EnabledChanged +=
+                            (_, _) => menuItem.Sensitive = commandItem.Command.Enabled;
+                        menuItem.Activated += (_, _) => commandItem.Command.Execute();
+                        menuWidget.Add(menuItem);
+                        break;
+                    case MenuProvider.SeparatorItem:
+                        menuWidget.Add(new SeparatorMenuItem());
+                        break;
+                    case MenuProvider.SubMenuItem subMenuItem:
+                        menuWidget.Add(CreateMenuWidget(subMenuItem.MenuProvider));
+                        break;
                 }
             }
+        });
+        return menuWidget;
+    }
+
+    protected override void CreateToolbarMenu(Command command, MenuProvider menu)
+    {
+        var button = new ToolButton(command.Image.ToGtk(), command.ToolBarText)
+        {
+            Homogeneous = false
         };
-        //
-        // var toolbar = new NSToolbar("naps2.desktop.toolbar");
-        // toolbar.Delegate = new ToolbarDelegate(this);
-        // toolbar.AllowsUserCustomization = true;
-        // // toolbar.AutosavesConfiguration = true;
-        // toolbar.DisplayMode = NSToolbarDisplayMode.Icon;
-        //
-        // var window = this.ToNative();
-        // window.Toolbar = toolbar;
-        // window.ToolbarStyle = NSWindowToolbarStyle.Unified;
-        // // TODO: Subtitle based on active profile?
-        // window.Subtitle = "Not Another PDF Scanner";
-        // // TODO: Do we want full size content?
-        // window.StyleMask |= NSWindowStyle.FullSizeContentView;
-        // window.StyleMask |= NSWindowStyle.UnifiedTitleAndToolbar;
+        var menuWidget = CreateMenuWidget(menu);
+        button.Clicked += (_, _) => menuWidget.PopupAtWidget(button, Gravity.SouthWest, Gravity.NorthWest, null);
+        button.Sensitive = command.Enabled;
+        command.EnabledChanged +=
+            (_, _) => button.Sensitive = command.Enabled;
+        _toolbar.Add(button);
     }
 }

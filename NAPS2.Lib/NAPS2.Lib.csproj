@@ -39,6 +39,9 @@
     <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
       <_Parameter1>NAPS2.Lib.Mac</_Parameter1>
     </AssemblyAttribute>
+    <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
+      <_Parameter1>NAPS2.Lib.Gtk</_Parameter1>
+    </AssemblyAttribute>
   </ItemGroup>
 
   <ItemGroup Condition="'$(Configuration)' == 'Debug'">
