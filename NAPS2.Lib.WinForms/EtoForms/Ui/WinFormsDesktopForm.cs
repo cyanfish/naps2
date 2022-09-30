@@ -32,10 +32,11 @@ public class WinFormsDesktopForm : DesktopForm
         IDesktopScanController desktopScanController,
         ImageListActions imageListActions,
         DesktopFormProvider desktopFormProvider,
-        DesktopSubFormController desktopSubFormController)
+        DesktopSubFormController desktopSubFormController,
+        DesktopCommands commands)
         : base(config, /*ksm,*/ notify, cultureHelper, profileManager,
             imageList, imageTransfer, thumbnailController, thumbnailProvider, desktopController, desktopScanController,
-            imageListActions, desktopFormProvider, desktopSubFormController)
+            imageListActions, desktopFormProvider, desktopSubFormController, commands)
     {
         _form = this.ToNative();
         _form.ClientSize = new Size(1204, 526);

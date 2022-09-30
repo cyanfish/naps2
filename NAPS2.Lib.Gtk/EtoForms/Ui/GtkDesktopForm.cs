@@ -23,10 +23,11 @@ public class GtkDesktopForm : DesktopForm
         IDesktopScanController desktopScanController,
         ImageListActions imageListActions,
         DesktopFormProvider desktopFormProvider,
-        IDesktopSubFormController desktopSubFormController)
+        IDesktopSubFormController desktopSubFormController,
+        DesktopCommands commands)
         : base(config, /*ksm,*/ notify, cultureHelper, profileManager,
             imageList, imageTransfer, thumbnailController, thumbnailProvider, desktopController, desktopScanController,
-            imageListActions, desktopFormProvider, desktopSubFormController)
+            imageListActions, desktopFormProvider, desktopSubFormController, commands)
     {
     }
 
@@ -42,19 +43,19 @@ public class GtkDesktopForm : DesktopForm
 
     protected override void CreateToolbarsAndMenus()
     {
-        _moveDownCommand.ToolBarText = "";
-        _moveUpCommand.ToolBarText = "";
-        _saveAllPdfCommand.Shortcut = Application.Instance.CommonModifier | Keys.S;
-        _saveSelectedPdfCommand.Shortcut = Application.Instance.CommonModifier | Keys.Shift | Keys.S;
-        _saveAllImagesCommand.Shortcut = Application.Instance.CommonModifier | Keys.M;
-        _saveSelectedImagesCommand.Shortcut = Application.Instance.CommonModifier | Keys.Shift | Keys.M;
+        Commands.MoveDown.ToolBarText = "";
+        Commands.MoveUp.ToolBarText = "";
+        Commands.SaveAllPdf.Shortcut = Application.Instance.CommonModifier | Keys.S;
+        Commands.SaveSelectedPdf.Shortcut = Application.Instance.CommonModifier | Keys.Shift | Keys.S;
+        Commands.SaveAllImages.Shortcut = Application.Instance.CommonModifier | Keys.M;
+        Commands.SaveSelectedImages.Shortcut = Application.Instance.CommonModifier | Keys.Shift | Keys.M;
 
         Menu = new MenuBar
         {
-            AboutItem = _aboutCommand,
+            AboutItem = Commands.About,
             ApplicationItems =
             {
-                CreateSubMenu(_languageMenuCommand, GetLanguageMenuProvider())
+                CreateSubMenu(Commands.LanguageMenu, GetLanguageMenuProvider())
             },
             Items =
             {
@@ -63,18 +64,18 @@ public class GtkDesktopForm : DesktopForm
                     Text = "File",
                     Items =
                     {
-                        _importCommand,
+                        Commands.Import,
                         new SeparatorMenuItem(),
-                        _saveAllPdfCommand,
-                        _saveSelectedPdfCommand,
-                        _saveAllImagesCommand,
-                        _saveSelectedImagesCommand,
+                        Commands.SaveAllPdf,
+                        Commands.SaveSelectedPdf,
+                        Commands.SaveAllImages,
+                        Commands.SaveSelectedImages,
                         new SeparatorMenuItem(),
-                        _emailAllPdfCommand,
-                        _emailSelectedPdfCommand,
-                        _printCommand,
+                        Commands.EmailAllPdf,
+                        Commands.EmailSelectedPdf,
+                        Commands.Print,
                         new SeparatorMenuItem(),
-                        _clearAllCommand
+                        Commands.ClearAll
                     }
                 },
                 new SubMenuItem
@@ -86,8 +87,8 @@ public class GtkDesktopForm : DesktopForm
                     Text = "Scan",
                     Items =
                     {
-                        _scanCommand,
-                        _newProfileCommand
+                        Commands.Scan,
+                        Commands.NewProfile
                     }
                 },
                 new SubMenuItem
@@ -95,15 +96,15 @@ public class GtkDesktopForm : DesktopForm
                     Text = "Image",
                     Items =
                     {
-                        _viewImageCommand,
+                        Commands.ViewImage,
                         new SeparatorMenuItem(),
-                        _cropCommand,
-                        _brightContCommand,
-                        _hueSatCommand,
-                        _blackWhiteCommand,
-                        _sharpenCommand,
+                        Commands.Crop,
+                        Commands.BrightCont,
+                        Commands.HueSat,
+                        Commands.BlackWhite,
+                        Commands.Sharpen,
                         new SeparatorMenuItem(),
-                        _resetImageCommand
+                        Commands.ResetImage
                     }
                 },
                 new SubMenuItem
@@ -111,8 +112,8 @@ public class GtkDesktopForm : DesktopForm
                     Text = "Tools",
                     Items =
                     {
-                        _batchScanCommand,
-                        _ocrCommand
+                        Commands.BatchScan,
+                        Commands.Ocr
                     }
                 }
             }

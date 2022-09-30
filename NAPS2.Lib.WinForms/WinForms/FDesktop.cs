@@ -508,7 +508,7 @@ public partial class FDesktop : FormBase
         }
     }
 
-    private void tsImport_Click(object sender, EventArgs e) => _desktopController.Import(Eto.Forms.WinFormsHelpers.ToEto(this));
+    private void tsImport_Click(object sender, EventArgs e) => _desktopController.Import();
 
     private async void tsdSavePDF_ButtonClick(object sender, EventArgs e)
     {

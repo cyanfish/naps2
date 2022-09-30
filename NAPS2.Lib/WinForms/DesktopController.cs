@@ -379,6 +379,66 @@ public class DesktopController
         }
     }
 
+    public async Task SavePdf()
+    {
+        var action = _config.Get(c => c.SaveButtonDefaultAction);
+
+        if (action == SaveButtonDefaultAction.AlwaysPrompt
+            || action == SaveButtonDefaultAction.PromptIfSelected && _imageList.Selection.Any())
+        {
+            // TODO
+            // tsdSavePDF.ShowDropDown();
+        }
+        else if (action == SaveButtonDefaultAction.SaveSelected && _imageList.Selection.Any())
+        {
+            await SavePDF(_imageList.Selection);
+        }
+        else
+        {
+            await SavePDF(_imageList.Images);
+        }
+    }
+
+    public async Task SaveImages()
+    {
+        var action = _config.Get(c => c.SaveButtonDefaultAction);
+
+        if (action == SaveButtonDefaultAction.AlwaysPrompt
+            || action == SaveButtonDefaultAction.PromptIfSelected && _imageList.Selection.Any())
+        {
+            // TODO
+            // tsdSaveImages.ShowDropDown();
+        }
+        else if (action == SaveButtonDefaultAction.SaveSelected && _imageList.Selection.Any())
+        {
+            await SaveImages(_imageList.Selection);
+        }
+        else
+        {
+            await SaveImages(_imageList.Images);
+        }
+    }
+
+    public async Task EmailPdf()
+    {
+        var action = _config.Get(c => c.SaveButtonDefaultAction);
+
+        if (action == SaveButtonDefaultAction.AlwaysPrompt
+            || action == SaveButtonDefaultAction.PromptIfSelected && _imageList.Selection.Any())
+        {
+            // TODO
+            // tsdEmailPDF.ShowDropDown();
+        }
+        else if (action == SaveButtonDefaultAction.SaveSelected && _imageList.Selection.Any())
+        {
+            await EmailPDF(_imageList.Selection);
+        }
+        else
+        {
+            await EmailPDF(_imageList.Images);
+        }
+    }
+
     public async Task SavePDF(ICollection<UiImage> images)
     {
         using var imagesToSave = images.Select(x => x.GetClonedImage()).ToDisposableList();
@@ -420,7 +480,7 @@ public class DesktopController
         }
     }
 
-    public void Import(Control parentForm)
+    public void Import()
     {
         // TODO: Merge this into exporthelper/dialoghelper?
         var ofd = new OpenFileDialog
@@ -448,7 +508,7 @@ public class DesktopController
             // For UI test automation we choose the appdata folder to find the prepared files to import
             ofd.Directory = new Uri(Path.GetFullPath(Paths.AppData));
         }
-        if (ofd.ShowDialog(parentForm) == DialogResult.Ok)
+        if (ofd.ShowDialog(_desktopFormProvider.DesktopForm) == DialogResult.Ok)
         {
             ImportFiles(ofd.Filenames);
         }

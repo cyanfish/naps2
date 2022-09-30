@@ -21,55 +21,6 @@ public abstract class DesktopForm : EtoFormBase
     private readonly DesktopFormProvider _desktopFormProvider;
     private readonly IDesktopSubFormController _desktopSubFormController;
 
-    protected readonly Command _scanCommand;
-    protected readonly Command _newProfileCommand;
-    protected readonly Command _batchScanCommand;
-    protected readonly Command _profilesCommand;
-    protected readonly Command _ocrCommand;
-    protected readonly Command _importCommand;
-    protected readonly Command _saveCommand;
-    protected readonly Command _savePdfCommand;
-    protected readonly Command _saveAllPdfCommand;
-    protected readonly Command _saveSelectedPdfCommand;
-    protected readonly Command _pdfSettingsCommand;
-    protected readonly Command _saveImagesCommand;
-    protected readonly Command _saveAllImagesCommand;
-    protected readonly Command _saveSelectedImagesCommand;
-    protected readonly Command _imageSettingsCommand;
-    protected readonly Command _emailPdfCommand;
-    protected readonly Command _emailAllPdfCommand;
-    protected readonly Command _emailSelectedPdfCommand;
-    protected readonly Command _emailSettingsCommand;
-    protected readonly Command _printCommand;
-    protected readonly Command _imageMenuCommand;
-    protected readonly Command _viewImageCommand;
-    protected readonly Command _cropCommand;
-    protected readonly Command _brightContCommand;
-    protected readonly Command _hueSatCommand;
-    protected readonly Command _blackWhiteCommand;
-    protected readonly Command _sharpenCommand;
-    protected readonly Command _resetImageCommand;
-    protected readonly Command _rotateMenuCommand;
-    protected readonly Command _rotateLeftCommand;
-    protected readonly Command _rotateRightCommand;
-    protected readonly Command _flipCommand;
-    protected readonly Command _deskewCommand;
-    protected readonly Command _customRotateCommand;
-    protected readonly Command _reorderMenuCommand;
-    protected readonly Command _moveUpCommand;
-    protected readonly Command _moveDownCommand;
-    protected readonly Command _interleaveCommand;
-    protected readonly Command _deinterleaveCommand;
-    protected readonly Command _altInterleaveCommand;
-    protected readonly Command _altDeinterleaveCommand;
-    protected readonly Command _reverseMenuCommand;
-    protected readonly Command _reverseAllCommand;
-    protected readonly Command _reverseSelectedCommand;
-    protected readonly Command _deleteCommand;
-    protected readonly Command _clearAllCommand;
-    protected readonly Command _languageMenuCommand;
-    protected readonly Command _aboutCommand;
-
     private readonly ListProvider<Command> _scanMenuCommands = new();
     private readonly ListProvider<Command> _languageMenuCommands = new();
 
@@ -91,7 +42,8 @@ public abstract class DesktopForm : EtoFormBase
         IDesktopScanController desktopScanController,
         ImageListActions imageListActions,
         DesktopFormProvider desktopFormProvider,
-        IDesktopSubFormController desktopSubFormController) : base(config)
+        IDesktopSubFormController desktopSubFormController,
+        DesktopCommands commands) : base(config)
     {
         // _ksm = ksm;
         _notify = notify;
@@ -106,246 +58,9 @@ public abstract class DesktopForm : EtoFormBase
         _imageListActions = imageListActions;
         _desktopFormProvider = desktopFormProvider;
         _desktopSubFormController = desktopSubFormController;
+        Commands = commands;
 
-        _scanCommand = new ActionCommand(_desktopScanController.ScanDefault)
-        {
-            ToolBarText = UiStrings.Scan,
-            MenuText = UiStrings.Scan,
-            Image = Icons.control_play_blue.ToEtoImage(),
-            MacSymbol = "play"
-        };
-        _newProfileCommand = new ActionCommand(_desktopScanController.ScanWithNewProfile)
-        {
-            MenuText = UiStrings.NewProfile,
-            Image = Icons.add_small.ToEtoImage()
-        };
-        _batchScanCommand = new ActionCommand(_desktopSubFormController.ShowBatchScanForm)
-        {
-            MenuText = UiStrings.BatchScan,
-            Image = Icons.application_cascade.ToEtoImage()
-        };
-        _profilesCommand = new ActionCommand(_desktopSubFormController.ShowProfilesForm)
-        {
-            ToolBarText = UiStrings.Profiles,
-            Image = Icons.blueprints.ToEtoImage(),
-            MacSymbol = "list.bullet"
-        };
-        _ocrCommand = new ActionCommand(_desktopSubFormController.ShowOcrForm)
-        {
-            ToolBarText = UiStrings.Ocr,
-            MenuText = UiStrings.Ocr,
-            Image = Icons.text.ToEtoImage()
-        };
-        _importCommand = new ActionCommand(() => _desktopController.Import(this))
-        {
-            ToolBarText = UiStrings.Import,
-            MenuText = UiStrings.Import,
-            Image = Icons.folder_picture.ToEtoImage(),
-            Shortcut = Application.Instance.CommonModifier | Keys.O,
-            MacSymbol = "folder"
-        };
-        _saveCommand = new ActionCommand
-        {
-            ToolBarText = UiStrings.Save,
-            MacSymbol = "square.and.arrow.down"
-        };
-        _savePdfCommand = new ActionCommand(SavePdf)
-        {
-            ToolBarText = UiStrings.SavePdf,
-            Image = Icons.file_extension_pdf.ToEtoImage()
-        };
-        _saveAllPdfCommand = new ActionCommand(() => _desktopController.SavePDF(ImageList.Images))
-        {
-            MenuText = UiStrings.SaveAllAsPdf
-        };
-        _saveSelectedPdfCommand = new ActionCommand(() => _desktopController.SavePDF(ImageList.Selection))
-        {
-            MenuText = UiStrings.SaveSelectedAsPdf
-        };
-        _pdfSettingsCommand = new ActionCommand(_desktopSubFormController.ShowPdfSettingsForm)
-        {
-            MenuText = UiStrings.PdfSettings
-        };
-        _saveImagesCommand = new ActionCommand(SaveImages)
-        {
-            ToolBarText = UiStrings.SaveImages,
-            Image = Icons.pictures.ToEtoImage()
-        };
-        _saveAllImagesCommand = new ActionCommand(() => _desktopController.SaveImages(ImageList.Images))
-        {
-            MenuText = UiStrings.SaveAllAsImages
-        };
-        _saveSelectedImagesCommand = new ActionCommand(() => _desktopController.SaveImages(ImageList.Selection))
-        {
-            MenuText = UiStrings.SaveSelectedAsImages
-        };
-        _imageSettingsCommand = new ActionCommand(_desktopSubFormController.ShowImageSettingsForm)
-        {
-            MenuText = UiStrings.ImageSettings
-        };
-        _emailPdfCommand = new ActionCommand(EmailPdf)
-        {
-            ToolBarText = UiStrings.EmailPdf,
-            Image = Icons.email_attach.ToEtoImage()
-        };
-        _emailAllPdfCommand = new ActionCommand(() => _desktopController.EmailPDF(ImageList.Images))
-        {
-            MenuText = UiStrings.EmailAllAsPdf
-        };
-        _emailSelectedPdfCommand = new ActionCommand(() => _desktopController.EmailPDF(ImageList.Selection))
-        {
-            MenuText = UiStrings.EmailSelectedAsPdf
-        };
-        _emailSettingsCommand = new ActionCommand(_desktopSubFormController.ShowEmailSettingsForm)
-        {
-            MenuText = UiStrings.EmailSettings
-        };
-        _printCommand = new ActionCommand(_desktopController.Print)
-        {
-            ToolBarText = UiStrings.Print,
-            MenuText = UiStrings.Print,
-            Image = Icons.printer.ToEtoImage(),
-            Shortcut = Application.Instance.CommonModifier | Keys.P
-        };
-        _imageMenuCommand = new Command
-        {
-            ToolBarText = UiStrings.Image,
-            MenuText = UiStrings.Image,
-            Image = Icons.picture_edit.ToEtoImage()
-        };
-        _viewImageCommand = new ActionCommand(_desktopSubFormController.ShowViewerForm)
-        {
-            ToolBarText = UiStrings.View,
-            MenuText = UiStrings.View,
-            MacSymbol = "viewfinder"
-        };
-        _cropCommand = new ActionCommand(_desktopSubFormController.ShowCropForm)
-        {
-            MenuText = UiStrings.Crop,
-            Image = Icons.transform_crop.ToEtoImage()
-        };
-        _brightContCommand = new ActionCommand(_desktopSubFormController.ShowBrightnessContrastForm)
-        {
-            MenuText = UiStrings.BrightnessContrast,
-            Image = Icons.contrast_with_sun.ToEtoImage()
-        };
-        _hueSatCommand = new ActionCommand(_desktopSubFormController.ShowHueSaturationForm)
-        {
-            MenuText = UiStrings.HueSaturation,
-            Image = Icons.color_management.ToEtoImage()
-        };
-        _blackWhiteCommand = new ActionCommand(_desktopSubFormController.ShowBlackWhiteForm)
-        {
-            MenuText = UiStrings.BlackAndWhite,
-            Image = Icons.contrast_high.ToEtoImage()
-        };
-        _sharpenCommand = new ActionCommand(_desktopSubFormController.ShowSharpenForm)
-        {
-            MenuText = UiStrings.Sharpen,
-            Image = Icons.sharpen.ToEtoImage()
-        };
-        _resetImageCommand = new ActionCommand(_desktopController.ResetImage)
-        {
-            MenuText = UiStrings.Reset
-        };
-        _rotateMenuCommand = new ActionCommand
-        {
-            ToolBarText = UiStrings.Rotate,
-            Image = Icons.arrow_rotate_anticlockwise.ToEtoImage(),
-            MacSymbol = "arrow.counterclockwise"
-        };
-        _rotateLeftCommand = new ActionCommand(_imageListActions.RotateLeft)
-        {
-            MenuText = UiStrings.RotateLeft,
-            Image = Icons.arrow_rotate_anticlockwise_small.ToEtoImage(),
-            MacSymbol = "arrow.counterclockwise"
-        };
-        _rotateRightCommand = new ActionCommand(_imageListActions.RotateRight)
-        {
-            MenuText = UiStrings.RotateRight,
-            Image = Icons.arrow_rotate_clockwise_small.ToEtoImage(),
-            MacSymbol = "arrow.clockwise"
-        };
-        _flipCommand = new ActionCommand(_imageListActions.Flip)
-        {
-            MenuText = UiStrings.Flip,
-            Image = Icons.arrow_switch_small.ToEtoImage(),
-            MacSymbol = "arrow.2.squarepath"
-        };
-        _deskewCommand = new ActionCommand(_imageListActions.Deskew)
-        {
-            MenuText = UiStrings.Deskew
-        };
-        _customRotateCommand = new ActionCommand(_desktopSubFormController.ShowRotateForm)
-        {
-            MenuText = UiStrings.CustomRotation
-        };
-        _moveUpCommand = new ActionCommand(_imageListActions.MoveUp)
-        {
-            ToolBarText = UiStrings.MoveUp,
-            MenuText = UiStrings.MoveUp,
-            Image = Icons.arrow_up_small.ToEtoImage(),
-            MacSymbol = "arrow.up"
-        };
-        _moveDownCommand = new ActionCommand(_imageListActions.MoveDown)
-        {
-            ToolBarText = UiStrings.MoveDown,
-            MenuText = UiStrings.MoveDown,
-            Image = Icons.arrow_down_small.ToEtoImage(),
-            MacSymbol = "arrow.down"
-        };
-        _reorderMenuCommand = new Command
-        {
-            ToolBarText = UiStrings.Reorder,
-            Image = Icons.arrow_refresh.ToEtoImage()
-        };
-        _interleaveCommand = new ActionCommand(_imageListActions.Interleave)
-        {
-            MenuText = UiStrings.Interleave
-        };
-        _deinterleaveCommand = new ActionCommand(_imageListActions.Deinterleave)
-        {
-            MenuText = UiStrings.Deinterleave
-        };
-        _altInterleaveCommand = new ActionCommand(_imageListActions.AltInterleave)
-        {
-            MenuText = UiStrings.AltInterleave
-        };
-        _altDeinterleaveCommand = new ActionCommand(_imageListActions.AltDeinterleave)
-        {
-            MenuText = UiStrings.AltDeinterleave
-        };
-        _reverseMenuCommand = new Command
-        {
-            MenuText = UiStrings.Reverse
-        };
-        _reverseAllCommand = new ActionCommand(_imageListActions.ReverseAll);
-        _reverseSelectedCommand = new ActionCommand(_imageListActions.ReverseSelected);
-        _deleteCommand = new ActionCommand(_desktopController.Delete)
-        {
-            ToolBarText = UiStrings.Delete,
-            MenuText = UiStrings.Delete,
-            Image = Icons.cross.ToEtoImage()
-        };
-        _clearAllCommand = new ActionCommand(_desktopController.Clear)
-        {
-            ToolBarText = UiStrings.Clear,
-            MenuText = UiStrings.ClearAll,
-            Image = Icons.cancel.ToEtoImage(),
-            Shortcut = Application.Instance.CommonModifier | Keys.Shift | Keys.Delete
-        };
-        _languageMenuCommand = new Command
-        {
-            ToolBarText = UiStrings.Language,
-            MenuText = UiStrings.Language,
-            Image = Icons.world.ToEtoImage()
-        };
-        _aboutCommand = new ActionCommand(_desktopSubFormController.ShowAboutForm)
-        {
-            ToolBarText = UiStrings.About,
-            MenuText = UiStrings.About,
-            Image = Icons.information.ToEtoImage()
-        };
+
 
         // PostInitializeComponent();
         //
@@ -391,6 +106,7 @@ public abstract class DesktopForm : EtoFormBase
     }
 
     protected UiImageList ImageList { get; }
+    protected DesktopCommands Commands { get; }
 
     protected override void OnLoad(EventArgs e)
     {
@@ -419,85 +135,85 @@ public abstract class DesktopForm : EtoFormBase
         var hiddenButtons = Config.Get(c => c.HiddenButtons);
 
         if (!hiddenButtons.HasFlag(ToolbarButtons.Scan))
-            CreateToolbarButtonWithMenu(_scanCommand, new MenuProvider()
+            CreateToolbarButtonWithMenu(Commands.Scan, new MenuProvider()
                 .Dynamic(_scanMenuCommands)
                 .Separator()
-                .Append(_newProfileCommand)
-                .Append(_batchScanCommand));
+                .Append(Commands.NewProfile)
+                .Append(Commands.BatchScan));
         if (!hiddenButtons.HasFlag(ToolbarButtons.Profiles))
-            CreateToolbarButton(_profilesCommand);
+            CreateToolbarButton(Commands.Profiles);
         if (!hiddenButtons.HasFlag(ToolbarButtons.Ocr))
-            CreateToolbarButton(_ocrCommand);
+            CreateToolbarButton(Commands.Ocr);
         if (!hiddenButtons.HasFlag(ToolbarButtons.Import))
-            CreateToolbarButton(_importCommand);
+            CreateToolbarButton(Commands.Import);
         CreateToolbarSeparator();
         if (!hiddenButtons.HasFlag(ToolbarButtons.SavePdf))
-            CreateToolbarButtonWithMenu(_savePdfCommand, new MenuProvider()
-                .Append(_saveAllPdfCommand)
-                .Append(_saveSelectedPdfCommand)
+            CreateToolbarButtonWithMenu(Commands.SavePdf, new MenuProvider()
+                .Append(Commands.SaveAllPdf)
+                .Append(Commands.SaveSelectedPdf)
                 .Separator()
-                .Append(_pdfSettingsCommand));
+                .Append(Commands.PdfSettings));
         if (!hiddenButtons.HasFlag(ToolbarButtons.SaveImages))
-            CreateToolbarButtonWithMenu(_saveImagesCommand, new MenuProvider()
-                .Append(_saveAllImagesCommand)
-                .Append(_saveSelectedImagesCommand)
+            CreateToolbarButtonWithMenu(Commands.SaveImages, new MenuProvider()
+                .Append(Commands.SaveAllImages)
+                .Append(Commands.SaveSelectedImages)
                 .Separator()
-                .Append(_imageSettingsCommand));
+                .Append(Commands.ImageSettings));
         if (!hiddenButtons.HasFlag(ToolbarButtons.EmailPdf))
-            CreateToolbarButtonWithMenu(_emailPdfCommand, new MenuProvider()
-                .Append(_emailAllPdfCommand)
-                .Append(_emailSelectedPdfCommand)
+            CreateToolbarButtonWithMenu(Commands.EmailPdf, new MenuProvider()
+                .Append(Commands.EmailAllPdf)
+                .Append(Commands.EmailSelectedPdf)
                 .Separator()
-                .Append(_emailSettingsCommand)
-                .Append(_pdfSettingsCommand));
+                .Append(Commands.EmailSettings)
+                .Append(Commands.PdfSettings));
         if (!hiddenButtons.HasFlag(ToolbarButtons.Print))
-            CreateToolbarButton(_printCommand);
+            CreateToolbarButton(Commands.Print);
         CreateToolbarSeparator();
         if (!hiddenButtons.HasFlag(ToolbarButtons.Image))
-            CreateToolbarMenu(_imageMenuCommand, new MenuProvider()
-                .Append(_viewImageCommand)
+            CreateToolbarMenu(Commands.ImageMenu, new MenuProvider()
+                .Append(Commands.ViewImage)
                 .Separator()
-                .Append(_cropCommand)
-                .Append(_brightContCommand)
-                .Append(_hueSatCommand)
-                .Append(_blackWhiteCommand)
-                .Append(_sharpenCommand)
+                .Append(Commands.Crop)
+                .Append(Commands.BrightCont)
+                .Append(Commands.HueSat)
+                .Append(Commands.BlackWhite)
+                .Append(Commands.Sharpen)
                 .Separator()
-                .Append(_resetImageCommand));
+                .Append(Commands.ResetImage));
         if (!hiddenButtons.HasFlag(ToolbarButtons.Rotate))
-            CreateToolbarMenu(_rotateMenuCommand, GetRotateMenuProvider());
+            CreateToolbarMenu(Commands.RotateMenu, GetRotateMenuProvider());
         if (!hiddenButtons.HasFlag(ToolbarButtons.Move))
-            CreateToolbarStackedButtons(_moveUpCommand, _moveDownCommand);
+            CreateToolbarStackedButtons(Commands.MoveUp, Commands.MoveDown);
         if (!hiddenButtons.HasFlag(ToolbarButtons.Reorder))
-            CreateToolbarMenu(_reorderMenuCommand, new MenuProvider()
-                .Append(_interleaveCommand)
-                .Append(_deinterleaveCommand)
+            CreateToolbarMenu(Commands.ReorderMenu, new MenuProvider()
+                .Append(Commands.Interleave)
+                .Append(Commands.Deinterleave)
                 .Separator()
-                .Append(_altInterleaveCommand)
-                .Append(_altDeinterleaveCommand)
+                .Append(Commands.AltInterleave)
+                .Append(Commands.AltDeinterleave)
                 .Separator()
-                .SubMenu(_reverseMenuCommand, new MenuProvider()
-                    .Append(_reverseAllCommand)
-                    .Append(_reverseSelectedCommand)));
+                .SubMenu(Commands.ReverseMenu, new MenuProvider()
+                    .Append(Commands.ReverseAll)
+                    .Append(Commands.ReverseSelected)));
         CreateToolbarSeparator();
         if (!hiddenButtons.HasFlag(ToolbarButtons.Delete))
-            CreateToolbarButton(_deleteCommand);
+            CreateToolbarButton(Commands.Delete);
         if (!hiddenButtons.HasFlag(ToolbarButtons.Clear))
-            CreateToolbarButton(_clearAllCommand);
+            CreateToolbarButton(Commands.ClearAll);
         CreateToolbarSeparator();
         if (!hiddenButtons.HasFlag(ToolbarButtons.Language))
-            CreateToolbarMenu(_languageMenuCommand, GetLanguageMenuProvider());
+            CreateToolbarMenu(Commands.LanguageMenu, GetLanguageMenuProvider());
         if (!hiddenButtons.HasFlag(ToolbarButtons.About))
-            CreateToolbarButton(_aboutCommand);
+            CreateToolbarButton(Commands.About);
     }
 
     protected MenuProvider GetRotateMenuProvider() =>
         new MenuProvider()
-            .Append(_rotateLeftCommand)
-            .Append(_rotateRightCommand)
-            .Append(_flipCommand)
-            .Append(_deskewCommand)
-            .Append(_customRotateCommand);
+            .Append(Commands.RotateLeft)
+            .Append(Commands.RotateRight)
+            .Append(Commands.Flip)
+            .Append(Commands.Deskew)
+            .Append(Commands.CustomRotate);
 
     protected MenuProvider GetLanguageMenuProvider()
     {
@@ -649,16 +365,16 @@ public abstract class DesktopForm : EtoFormBase
     protected virtual void UpdateToolbar()
     {
         // "All" dropdown items
-        _saveAllPdfCommand.MenuText = _saveAllImagesCommand.MenuText = _emailAllPdfCommand.MenuText =
-            _reverseAllCommand.MenuText = string.Format(MiscResources.AllCount, ImageList.Images.Count);
-        _saveAllPdfCommand.Enabled = _saveAllImagesCommand.Enabled = _emailAllPdfCommand.Enabled =
-            _reverseAllCommand.Enabled = ImageList.Images.Any();
+        Commands.SaveAllPdf.MenuText = Commands.SaveAllImages.MenuText = Commands.EmailAllPdf.MenuText =
+            Commands.ReverseAll.MenuText = string.Format(MiscResources.AllCount, ImageList.Images.Count);
+        Commands.SaveAllPdf.Enabled = Commands.SaveAllImages.Enabled = Commands.EmailAllPdf.Enabled =
+            Commands.ReverseAll.Enabled = ImageList.Images.Any();
 
         // "Selected" dropdown items
-        _saveSelectedPdfCommand.MenuText = _saveSelectedImagesCommand.MenuText = _emailSelectedPdfCommand.MenuText =
-            _reverseSelectedCommand.MenuText = string.Format(MiscResources.SelectedCount, ImageList.Selection.Count);
-        _saveSelectedPdfCommand.Enabled = _saveSelectedImagesCommand.Enabled = _emailSelectedPdfCommand.Enabled =
-            _reverseSelectedCommand.Enabled = ImageList.Selection.Any();
+        Commands.SaveSelectedPdf.MenuText = Commands.SaveSelectedImages.MenuText = Commands.EmailSelectedPdf.MenuText =
+            Commands.ReverseSelected.MenuText = string.Format(MiscResources.SelectedCount, ImageList.Selection.Count);
+        Commands.SaveSelectedPdf.Enabled = Commands.SaveSelectedImages.Enabled = Commands.EmailSelectedPdf.Enabled =
+            Commands.ReverseSelected.Enabled = ImageList.Selection.Any();
         //
         // // Context-menu actions
         // ctxView.Visible = ctxCopy.Visible = ctxDelete.Visible =
@@ -666,7 +382,7 @@ public abstract class DesktopForm : EtoFormBase
         // ctxSelectAll.Enabled = _imageList.Images.Any();
         //
         // Other
-        _newProfileCommand.Enabled =
+        Commands.NewProfile.Enabled =
             !(Config.Get(c => c.NoUserProfiles) && _profileManager.Profiles.Any(x => x.IsLocked));
     }
 
@@ -819,66 +535,6 @@ public abstract class DesktopForm : EtoFormBase
     // #endregion
     //
     //
-
-    private async void SavePdf()
-    {
-        var action = Config.Get(c => c.SaveButtonDefaultAction);
-
-        if (action == SaveButtonDefaultAction.AlwaysPrompt
-            || action == SaveButtonDefaultAction.PromptIfSelected && ImageList.Selection.Any())
-        {
-            // TODO
-            // tsdSavePDF.ShowDropDown();
-        }
-        else if (action == SaveButtonDefaultAction.SaveSelected && ImageList.Selection.Any())
-        {
-            await _desktopController.SavePDF(ImageList.Selection);
-        }
-        else
-        {
-            await _desktopController.SavePDF(ImageList.Images);
-        }
-    }
-
-    private async void SaveImages()
-    {
-        var action = Config.Get(c => c.SaveButtonDefaultAction);
-
-        if (action == SaveButtonDefaultAction.AlwaysPrompt
-            || action == SaveButtonDefaultAction.PromptIfSelected && ImageList.Selection.Any())
-        {
-            // TODO
-            // tsdSaveImages.ShowDropDown();
-        }
-        else if (action == SaveButtonDefaultAction.SaveSelected && ImageList.Selection.Any())
-        {
-            await _desktopController.SaveImages(ImageList.Selection);
-        }
-        else
-        {
-            await _desktopController.SaveImages(ImageList.Images);
-        }
-    }
-
-    private async void EmailPdf()
-    {
-        var action = Config.Get(c => c.SaveButtonDefaultAction);
-
-        if (action == SaveButtonDefaultAction.AlwaysPrompt
-            || action == SaveButtonDefaultAction.PromptIfSelected && ImageList.Selection.Any())
-        {
-            // TODO
-            // tsdEmailPDF.ShowDropDown();
-        }
-        else if (action == SaveButtonDefaultAction.SaveSelected && ImageList.Selection.Any())
-        {
-            await _desktopController.EmailPDF(ImageList.Selection);
-        }
-        else
-        {
-            await _desktopController.EmailPDF(ImageList.Images);
-        }
-    }
 
     // #region Context Menu
     //
