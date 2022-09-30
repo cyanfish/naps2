@@ -2,6 +2,7 @@ using System.Collections.Immutable;
 using System.Threading;
 using Eto.Forms;
 using NAPS2.ImportExport.Images;
+using NAPS2.Scan;
 using NAPS2.WinForms;
 
 namespace NAPS2.EtoForms.Ui;
@@ -63,7 +64,6 @@ public abstract class DesktopForm : EtoFormBase
         // PostInitializeComponent();
         //
         Icon = Icons.favicon.ToEtoIcon();
-        Title = UiStrings.Naps2FullTitle;
         CreateToolbarsAndMenus();
         UpdateScanButton();
         InitLanguageDropdown();
@@ -395,6 +395,7 @@ public abstract class DesktopForm : EtoFormBase
     private void UpdateScanButton()
     {
         var defaultProfile = _profileManager.DefaultProfile;
+        UpdateTitle(defaultProfile);
         _scanMenuCommands.Value = _profileManager.Profiles.Select(profile =>
                 new ActionCommand(() => _desktopScanController.ScanWithProfile(profile))
                 {
@@ -402,6 +403,11 @@ public abstract class DesktopForm : EtoFormBase
                     Image = profile == defaultProfile ? Icons.accept_small.ToEtoImage() : null
                 })
             .ToImmutableList<Command>();
+    }
+
+    protected virtual void UpdateTitle(ScanProfile? defaultProfile)
+    {
+        Title = string.Format(UiStrings.Naps2TitleFormat, defaultProfile?.DisplayName ?? UiStrings.Naps2FullName);
     }
 
     #endregion

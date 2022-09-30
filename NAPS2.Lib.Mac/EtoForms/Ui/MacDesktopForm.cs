@@ -3,6 +3,7 @@ using Eto.Drawing;
 using Eto.Forms;
 using Eto.Mac;
 using NAPS2.ImportExport.Images;
+using NAPS2.Scan;
 using NAPS2.WinForms;
 
 namespace NAPS2.EtoForms.Ui;
@@ -46,6 +47,12 @@ public class MacDesktopForm : DesktopForm
         Invoker.Current = new SyncContextInvoker(SynchronizationContext.Current);
         base.OnLoad(e);
         ClientSize = new Size(1000, 600);
+    }
+
+    protected override void UpdateTitle(ScanProfile? defaultProfile)
+    {
+        Title = UiStrings.Naps2;
+        this.ToNative().Subtitle = defaultProfile?.DisplayName ?? UiStrings.Naps2FullName;
     }
 
     protected override void CreateToolbarsAndMenus()
@@ -135,8 +142,6 @@ public class MacDesktopForm : DesktopForm
         var window = this.ToNative();
         window.Toolbar = toolbar;
         window.ToolbarStyle = NSWindowToolbarStyle.Unified;
-        // TODO: Subtitle based on active profile?
-        window.Subtitle = "Not Another PDF Scanner";
         // TODO: Do we want full size content?
         window.StyleMask |= NSWindowStyle.FullSizeContentView;
         window.StyleMask |= NSWindowStyle.UnifiedTitleAndToolbar;
