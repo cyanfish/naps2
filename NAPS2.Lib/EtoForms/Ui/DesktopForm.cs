@@ -60,8 +60,6 @@ public abstract class DesktopForm : EtoFormBase
         _desktopSubFormController = desktopSubFormController;
         Commands = commands;
 
-
-
         // PostInitializeComponent();
         //
         Icon = Icons.favicon.ToEtoIcon();
@@ -364,6 +362,14 @@ public abstract class DesktopForm : EtoFormBase
 
     protected virtual void UpdateToolbar()
     {
+        // Top-level toolbar items
+        Commands.ImageMenu.Enabled =
+            Commands.RotateMenu.Enabled = Commands.MoveUp.Enabled = Commands.MoveDown.Enabled =
+                Commands.Delete.Enabled = ImageList.Selection.Any();
+        Commands.SavePdf.Enabled = Commands.SaveImages.Enabled = Commands.ClearAll.Enabled =
+            Commands.ReorderMenu.Enabled =
+                Commands.EmailPdf.Enabled = Commands.Print.Enabled = ImageList.Images.Any();
+
         // "All" dropdown items
         Commands.SaveAllPdf.MenuText = Commands.SaveAllImages.MenuText = Commands.EmailAllPdf.MenuText =
             Commands.ReverseAll.MenuText = string.Format(MiscResources.AllCount, ImageList.Images.Count);
