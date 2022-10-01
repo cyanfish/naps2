@@ -1,5 +1,4 @@
 ﻿using NAPS2.Ocr;
-using NAPS2.Scan.Internal.Sane;
 
 namespace NAPS2.Scan;
 

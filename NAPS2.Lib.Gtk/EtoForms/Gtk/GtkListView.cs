@@ -2,7 +2,6 @@ using Eto.Forms;
 using Eto.GtkSharp;
 using Gtk;
 using Orientation = Gtk.Orientation;
-using GtkImageView = Gtk.Image;
 
 namespace NAPS2.EtoForms.Gtk;
 

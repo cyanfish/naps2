@@ -2,11 +2,12 @@
 using NAPS2.ImportExport;
 using NAPS2.ImportExport.Pdf;
 using NAPS2.Scan;
+using NAPS2.Sdk.Tests;
 using NAPS2.Sdk.Tests.Asserts;
 using NAPS2.WinForms;
 using Xunit;
 
-namespace NAPS2.Sdk.Tests.Scan;
+namespace NAPS2.Lib.Tests.Scan;
 
 public class AutoSaverTests : ContextualTests
 {

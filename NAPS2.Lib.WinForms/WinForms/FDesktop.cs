@@ -1,7 +1,6 @@
 using System.Drawing;
 using System.Threading;
 using System.Windows.Forms;
-using Eto.WinForms;
 using NAPS2.EtoForms;
 using NAPS2.EtoForms.WinForms;
 using NAPS2.ImportExport;

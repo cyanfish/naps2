@@ -1,5 +1,4 @@
-﻿using System.Reflection;
-using Microsoft.Win32;
+﻿using Microsoft.Win32;
 
 namespace NAPS2.Platform.Windows;
 

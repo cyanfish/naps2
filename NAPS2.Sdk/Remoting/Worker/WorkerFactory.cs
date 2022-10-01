@@ -1,5 +1,4 @@
 ﻿using System.Collections.Concurrent;
-using System.Reflection;
 using GrpcDotNetNamedPipes;
 
 namespace NAPS2.Remoting.Worker;

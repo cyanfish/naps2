@@ -1,5 +1,4 @@
-﻿using System.Threading;
-using NAPS2.ImportExport.Images;
+﻿using NAPS2.ImportExport.Images;
 using NAPS2.ImportExport.Pdf;
 
 namespace NAPS2.ImportExport;

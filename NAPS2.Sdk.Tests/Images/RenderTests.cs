@@ -1,5 +1,4 @@
-﻿using NAPS2.Images.Bitwise;
-using NAPS2.Sdk.Tests.Asserts;
+﻿using NAPS2.Sdk.Tests.Asserts;
 using Xunit;
 
 namespace NAPS2.Sdk.Tests.Images;

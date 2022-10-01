@@ -1,8 +1,6 @@
 using System.ComponentModel;
 using System.Globalization;
 using System.Windows.Forms;
-using Eto.WinForms;
-using NAPS2.EtoForms;
 using NAPS2.Images.Gdi;
 using MessageBoxIcon = System.Windows.Forms.MessageBoxIcon;
 

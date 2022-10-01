@@ -1,7 +1,8 @@
+using NAPS2.Sdk.Tests;
 using NAPS2.Serialization;
 using Xunit;
 
-namespace NAPS2.Sdk.Tests.Serialization;
+namespace NAPS2.Lib.Tests.Serialization;
 
 public class SecureStorageTests
 {

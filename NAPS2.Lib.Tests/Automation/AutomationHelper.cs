@@ -1,8 +1,8 @@
-using System.Drawing;
 using NAPS2.Automation;
 using NAPS2.Modules;
 using NAPS2.Scan.Internal;
 using NAPS2.Sdk.Tests;
+using NAPS2.Sdk.Tests.Mocks;
 using Ninject;
 using Xunit.Abstractions;
 

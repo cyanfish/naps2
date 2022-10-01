@@ -1,5 +1,4 @@
 using NAPS2.Images.Gdi;
-using NAPS2.ImportExport.Images;
 using Ninject.Modules;
 
 namespace NAPS2.Modules;

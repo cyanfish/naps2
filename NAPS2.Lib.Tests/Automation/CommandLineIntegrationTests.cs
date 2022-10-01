@@ -1,10 +1,8 @@
-using System.Drawing;
 using NAPS2.Automation;
 using NAPS2.ImportExport.Pdf;
 using NAPS2.Sdk.Tests;
 using NAPS2.Sdk.Tests.Asserts;
-using NAPS2.Sdk.Tests.Images;
-using NAPS2.Sdk.Tests.Ocr;
+using NAPS2.Sdk.Tests.Mocks;
 using Ninject;
 using Xunit;
 using Xunit.Abstractions;

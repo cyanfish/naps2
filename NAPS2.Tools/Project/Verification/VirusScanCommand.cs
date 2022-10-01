@@ -1,8 +1,6 @@
-using System.Text;
 using NAPS2.Tools.Project.Targets;
 using VirusTotalNet;
 using VirusTotalNet.ResponseCodes;
-using VirusTotalNet.Results;
 
 namespace NAPS2.Tools.Project.Verification;
 

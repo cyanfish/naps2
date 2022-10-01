@@ -3,7 +3,6 @@ using NAPS2.EtoForms.Mac;
 using NAPS2.EtoForms.Ui;
 using NAPS2.Images.Mac;
 using NAPS2.ImportExport;
-using NAPS2.ImportExport.Images;
 using NAPS2.ImportExport.Pdf;
 using NAPS2.Scan;
 using NAPS2.Update;

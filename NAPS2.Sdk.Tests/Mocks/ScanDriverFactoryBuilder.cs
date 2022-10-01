@@ -3,7 +3,7 @@ using Moq;
 using NAPS2.Scan;
 using NAPS2.Scan.Internal;
 
-namespace NAPS2.Sdk.Tests;
+namespace NAPS2.Sdk.Tests.Mocks;
 
 public class ScanDriverFactoryBuilder
 {

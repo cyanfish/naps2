@@ -1,5 +1,4 @@
 using NAPS2.Automation;
-using NAPS2.ImportExport.Images;
 using NAPS2.Ocr;
 using NAPS2.Recovery;
 using NAPS2.Scan;

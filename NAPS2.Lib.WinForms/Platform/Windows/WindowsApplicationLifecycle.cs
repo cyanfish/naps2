@@ -1,5 +1,4 @@
-﻿using System.Reflection;
-using System.Security.Principal;
+﻿using System.Security.Principal;
 using System.Windows.Forms;
 using NAPS2.Remoting;
 

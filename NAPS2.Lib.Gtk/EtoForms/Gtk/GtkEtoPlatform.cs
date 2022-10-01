@@ -2,7 +2,6 @@ using Eto.Drawing;
 using Eto.Forms;
 using Eto.GtkSharp.Drawing;
 using NAPS2.Images.Gtk;
-using sd = System.Drawing;
 
 namespace NAPS2.EtoForms.Gtk;
 
