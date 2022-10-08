@@ -43,9 +43,9 @@ public class BilateralFilterOp : BinaryBitwiseImageOp
         }
 
         var diffWeights = new int[256];
-        for (int i = 0; i < 32; i++)
+        for (int i = 0; i < 64; i++)
         {
-            diffWeights[i] = 32 - i;
+            diffWeights[i] = 64 - i;
         }
 
         for (int i = partStart; i < partEnd; i++)

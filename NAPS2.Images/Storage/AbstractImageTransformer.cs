@@ -52,10 +52,10 @@ public abstract class AbstractImageTransformer<TImage> where TImage : IMemoryIma
     {
         if (transform.Mode == CorrectionMode.Document)
         {
-            var image2 = image.CopyBlank();
+            // We do two filter passes, which is convenient as we can end up with the final data in the original image
+            using var image2 = image.CopyBlank();
             new BilateralFilterOp().Perform(image, image2);
-            image.Dispose();
-            image = (TImage) image2;
+            new BilateralFilterOp().Perform(image2, image);
         }
         var op1 = new CorrectionPreProcessingOp(transform.Mode);
         op1.Perform(image);
