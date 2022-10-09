@@ -26,7 +26,7 @@ public class BilateralFilterOp : BinaryBitwiseImageOp
     private unsafe void PerformRgba(BitwiseImageData src, BitwiseImageData dst, int partStart, int partEnd)
     {
         bool copyAlpha = src.hasAlpha && dst.hasAlpha;
-        const int filterSize = 9;
+        const int filterSize = 15;
         const int s = filterSize / 2;
 
         var filter = new int[filterSize, filterSize];
@@ -43,10 +43,11 @@ public class BilateralFilterOp : BinaryBitwiseImageOp
         }
 
         var diffWeights = new int[256 * 3 * 2];
-        for (int i = 0; i < 64 * 3; i++)
+        const int dMax = 48;
+        for (int i = 0; i < dMax * 3; i++)
         {
-            diffWeights[256 * 3 + i] = 64 - i / 3;
-            diffWeights[256 * 3 - i] = 64 - i / 3;
+            diffWeights[256 * 3 + i] = dMax - i / 3;
+            diffWeights[256 * 3 - i] = dMax - i / 3;
         }
 
         for (int i = partStart; i < partEnd; i++)
