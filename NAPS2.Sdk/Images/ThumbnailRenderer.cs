@@ -23,6 +23,7 @@ public class ThumbnailRenderer
             // As a middle ground we scale to an "oversampled" size first.
             double oversampledSize = outputSize * OVERSAMPLE;
             double scaleFactor = Math.Min(oversampledSize / image.Height, oversampledSize / image.Width);
+            scaleFactor = Math.Min(scaleFactor, 1);
             transformList = transformList.Insert(0, new ScaleTransform(scaleFactor));
         }
         transformList = transformList.Add(new ThumbnailTransform(outputSize));
