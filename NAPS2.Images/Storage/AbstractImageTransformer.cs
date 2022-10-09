@@ -50,31 +50,36 @@ public abstract class AbstractImageTransformer<TImage> where TImage : IMemoryIma
 
     private TImage PerformTransform(TImage image, CorrectionTransform transform)
     {
+        // TODO: Include deskew?
+        // TODO: Add border detection/removal? After deskew.
         var stopwatch = Stopwatch.StartNew();
         ColumnColorOp.PerformFullOp(image);
         Console.WriteLine($"Column color op time: {stopwatch.ElapsedMilliseconds}");
         stopwatch.Restart();
         if (transform.Mode == CorrectionMode.Document)
         {
-            // We do two filter passes, which is convenient as we can end up with the final data in the original image
-            using var image2 = image.CopyBlank();
-            new BilateralFilterOp().Perform(image, image2);
-            Console.WriteLine($"Bilateral filter op time (pass 1): {stopwatch.ElapsedMilliseconds}");
-            stopwatch.Restart();
-            WhiteBlackPointOp.PerformFullOp(image2, transform.Mode);
+            WhiteBlackPointOp.PerformFullOp(image, transform.Mode);
             Console.WriteLine($"White/black point op time: {stopwatch.ElapsedMilliseconds}");
             stopwatch.Restart();
-            new BilateralFilterOp().Perform(image2, image);
-            Console.WriteLine($"Bilateral filter op time (pass 2): {stopwatch.ElapsedMilliseconds}");
+            // A previous version ran a filter pass before white/black point correction with the theory that it could
+            // help the accuracy of that correction.
+            // But running after is much faster (>2x) as the filter is optimized to skip pure-white blocks.
+            // Plus the filter color-distance function assumes a normal 0-255 color range - if that's compressed (and
+            // not yet corrected) it could potentially remove fine details.
+            var image2 = (TImage) image.CopyBlank();
+            new BilateralFilterOp().Perform(image, image2);
+            Console.WriteLine($"Bilateral filter op time: {stopwatch.ElapsedMilliseconds}");
             stopwatch.Restart();
+            image.Dispose();
+            return image2;
         }
         else
         {
             WhiteBlackPointOp.PerformFullOp(image, transform.Mode);
             Console.WriteLine($"White/black point op time: {stopwatch.ElapsedMilliseconds}");
             stopwatch.Restart();
+            return image;
         }
-        return image;
     }
 
     protected virtual TImage PerformTransform(TImage image, BrightnessTransform transform)

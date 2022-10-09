@@ -1,6 +1,8 @@
 namespace NAPS2.Images.Bitwise;
 
-// TODO: experimental
+/// <summary>
+/// Performs pre-processing for the ColumnColorOp.
+/// </summary>
 public class ColumnColorPreOp : UnaryBitwiseImageOp
 {
     private const double COL_IGNORE_TOP_AND_BOTTOM = 0.02;
@@ -71,47 +73,8 @@ public class ColumnColorPreOp : UnaryBitwiseImageOp
         }
     }
 
-    private unsafe void CalculateNoiseOrientation(BitwiseImageData data)
+    protected override void FinishCore()
     {
-        // TODO: Not sure if we actually need this, but it does seem to pick out much greater horizontal noise (2x)
-        // vs control (1.1x) when there are vertical bands.
-        if (data.w < 3 || data.h < 3) return;
-        const int maxDelta = 10;
-        int midX = data.w / 2;
-        int midY = data.h / 2;
-        long horNoiseCount = 0, horNoiseTotal = 0;
-        long verNoiseCount = 0, verNoiseTotal = 0;
-        for (int i = 0; i < data.h; i++)
-        {
-            var midPixel = data.ptr + data.stride * i + midX * data.bytesPerPixel;
-            var prePixel = midPixel - data.bytesPerPixel;
-            var postPixel = midPixel + data.bytesPerPixel;
-
-            var deltaR = Math.Abs((*(prePixel + data.rOff) + *(postPixel + data.rOff)) / 2 - *(midPixel + data.rOff));
-            var deltaG = Math.Abs((*(prePixel + data.gOff) + *(postPixel + data.gOff)) / 2 - *(midPixel + data.gOff));
-            var deltaB = Math.Abs((*(prePixel + data.bOff) + *(postPixel + data.bOff)) / 2 - *(midPixel + data.bOff));
-            var delta = deltaR + deltaG + deltaB;
-            if (delta < maxDelta)
-            {
-                horNoiseTotal += delta;
-                horNoiseCount++;
-            }
-        }
-        for (int i = 0; i < data.w; i++)
-        {
-            var midPixel = data.ptr + data.stride * midY + i * data.bytesPerPixel;
-            var prePixel = midPixel - data.stride;
-            var postPixel = midPixel + data.stride;
-
-            var deltaR = Math.Abs((*(prePixel + data.rOff) + *(postPixel + data.rOff)) / 2 - *(midPixel + data.rOff));
-            var deltaG = Math.Abs((*(prePixel + data.gOff) + *(postPixel + data.gOff)) / 2 - *(midPixel + data.gOff));
-            var deltaB = Math.Abs((*(prePixel + data.bOff) + *(postPixel + data.bOff)) / 2 - *(midPixel + data.bOff));
-            var delta = deltaR + deltaG + deltaB;
-            if (delta < maxDelta)
-            {
-                verNoiseTotal += delta;
-                verNoiseCount++;
-            }
-        }
+        // TODO: Outlier detection and removal? (e.g. if there are some black columns at the side of the page)
     }
 }

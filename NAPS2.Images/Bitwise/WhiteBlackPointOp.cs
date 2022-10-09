@@ -1,12 +1,22 @@
 namespace NAPS2.Images.Bitwise;
 
-// TODO: experimental
+/// <summary>
+/// Corrects images with poor calibration for white/black values.
+/// </summary>
 public class WhiteBlackPointOp : UnaryBitwiseImageOp
 {
+    // When we've identified the block of pixel values that we consider white (or black),
+    // this is the percentile (counting from the mid levels) at which we set the
+    // actual white/black point. 0 is maximally aggressive correction and flattens
+    // out near-white and near-black colors to pure white/black, while 1 leaves all
+    // of the variability/noise.
+    private const double PERCENTILE = 0.2;
+
     /// <summary>
     /// Performs this operation including pre-processing steps.
     /// </summary>
     /// <param name="image"></param>
+    /// <param name="mode"></param>
     public static void PerformFullOp(IMemoryImage image, CorrectionMode mode)
     {
         var op1 = new WhiteBlackPointPreOp(mode);
@@ -22,33 +32,129 @@ public class WhiteBlackPointOp : UnaryBitwiseImageOp
     public WhiteBlackPointOp(WhiteBlackPointPreOp preOp)
     {
         _mode = preOp.Mode;
-        var total = preOp.PixelTotalCount;
+
         var counts = preOp.PixelLumCounts;
-        var segments = new int[64];
+        var total = preOp.PixelTotalCount;
+
+        var peaks = FindPeaks(counts, total);
+        var whitePeak = peaks.OrderByDescending(WhitePeakScore).FirstOrDefault();
+        var blackPeak = peaks.OrderByDescending(BlackPeakScore).FirstOrDefault();
+        if (whitePeak == null || blackPeak == null || whitePeak.Value <= blackPeak.Value)
+        {
+            _valid = false;
+            return;
+        }
+
+        _whitePoint = GetWhitePoint(counts, whitePeak);
+        _blackPoint = GetBlackPoint(counts, blackPeak);
+        _valid = true;
+
+        Console.WriteLine($"Correcting with whitepoint {_whitePoint} blackpoint {_blackPoint}");
+    }
+
+    private static int GetWhitePoint(int[] counts, Peak whitePeak)
+    {
+        var whiteTotal = counts.Skip(whitePeak.Left).Sum();
+        long whiteCumul = 0;
+        var whitePoint = whitePeak.Right;
+        for (int i = whitePeak.Left; i < whitePeak.Right; i++)
+        {
+            whiteCumul += counts[i];
+            if (whiteCumul >= PERCENTILE * whiteTotal)
+            {
+                whitePoint = i;
+                break;
+            }
+        }
+        return whitePoint;
+    }
+
+    private static int GetBlackPoint(int[] counts, Peak blackPeak)
+    {
+        var blackTotal = counts.Take(blackPeak.Right + 1).Sum();
+        long blackCumul = 0;
+        var blackPoint = blackPeak.Left;
+        for (int i = blackPeak.Right; i > blackPeak.Left; i--)
+        {
+            blackCumul += counts[i];
+            if (blackCumul >= PERCENTILE * blackTotal)
+            {
+                blackPoint = i;
+                break;
+            }
+        }
+        return blackPoint;
+    }
+
+    private double BlackPeakScore(Peak peak)
+    {
+        var vScore = Math.Pow(1 - peak.Value / 255.0, 3);
+        var hScore = Magnitude(peak.Height) - Magnitude(Math.Min(peak.LeftBottom, peak.RightBottom));
+        return vScore * hScore;
+    }
+
+    private double Magnitude(double h)
+    {
+        return Math.Log10(1e4 * h + 1);
+    }
+
+    private double WhitePeakScore(Peak peak)
+    {
+        var vScore = Math.Pow(peak.Value / 255.0, 3);
+        var mScore = peak.Mass > 0.1 ? Math.Log10(100 * peak.Mass) : 10 * peak.Mass;
+        return vScore * mScore;
+    }
+
+    private static List<Peak> FindPeaks(int[] counts, long total)
+    {
+        var peaks = new List<Peak>();
+        var dCounts = counts.Select(x => x / (double) total).ToList();
+        var dCountsPlus = new double[] { 0, 0 }.Concat(dCounts).Concat(new double[] { 0, 0 }).ToList();
         for (int i = 0; i < 256; i++)
         {
-            segments[i / 4] += counts[i];
+            if (dCounts[i] > dCountsPlus[i + 1] && dCounts[i] > dCountsPlus[i] &&
+                dCounts[i] > dCountsPlus[i + 4] && dCounts[i] > dCountsPlus[i + 3])
+            {
+                var p = new Peak
+                {
+                    Value = i,
+                    Height = dCounts[i],
+                    LeftBottom = dCounts[i],
+                    RightBottom = dCounts[i],
+                    Left = i,
+                    Right = i,
+                    Mass = dCounts[i]
+                };
+                for (int j = i - 1; j >= 0; j--)
+                {
+                    if (dCounts[j] < p.LeftBottom || j > 0 && dCounts[j - 1] < p.LeftBottom)
+                    {
+                        p.LeftBottom = Math.Min(p.LeftBottom, dCounts[j]);
+                        p.Left = j;
+                        p.Mass += dCounts[j];
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+                for (int j = i + 1; j < 256; j++)
+                {
+                    if (dCounts[j] < p.RightBottom || j < 255 && dCounts[j + 1] < p.RightBottom)
+                    {
+                        p.RightBottom = Math.Min(p.RightBottom, dCounts[j]);
+                        p.Right = j;
+                        p.Mass += dCounts[j];
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+                peaks.Add(p);
+            }
         }
-        Console.WriteLine(string.Join(" | ", counts));
-        Console.WriteLine(string.Join(" | ", segments));
-        int bs = 0;
-        while (bs < 62 && (segments[bs] < segments[bs + 1] || segments[bs] < total / 2000))
-            bs++;
-        int ws = 63;
-        while (ws > 1 && (segments[ws] < segments[ws - 1] || segments[ws] < total / 64))
-            ws--;
-        // if (bs > 38 || ws < 24 || bs >= ws)
-        // {
-        //     _valid = false;
-        //     return;
-        // }
-        _valid = true;
-        // TODO: Find a better way to get the white and black points
-        // var whiteMode = ws * 4 + 2;
-        // var blackMode = bs * 4 + 2;
-        _whitePoint = 235;
-        _blackPoint = 110;
-        Console.WriteLine($"Correcting with whitepoint {_whitePoint} blackpoint {_blackPoint}");
+        return peaks;
     }
 
     private (byte[] iToL, byte[] lToI) GetGammaConversion()
@@ -135,5 +241,16 @@ public class WhiteBlackPointOp : UnaryBitwiseImageOp
                 *(pixel + data.bOff) = (byte) b;
             }
         }
+    }
+
+    private class Peak
+    {
+        public int Value { get; set; }
+        public int Left { get; set; }
+        public int Right { get; set; }
+        public double Height { get; set; }
+        public double LeftBottom { get; set; }
+        public double RightBottom { get; set; }
+        public double Mass { get; set; }
     }
 }

@@ -1,11 +1,19 @@
 namespace NAPS2.Images.Bitwise;
 
-// TODO: experimental
+/// <summary>
+/// Runs a bilateral filter operation, which reduces noise without losing edges or fine details.
+/// https://en.wikipedia.org/wiki/Bilateral_filter
+/// </summary>
 public class BilateralFilterOp : BinaryBitwiseImageOp
 {
-    public BilateralFilterOp()
-    {
-    }
+    // The color distance (in the 0-255 range) at which pixels are weighted to 0.
+    // The weight linearly scales up as the color distance approaches 0.
+    private const int COLOR_DIST_MAX = 32;
+
+    // The size of the square around the current pixel to check.
+    // Should be an odd number for symmetry.
+    // Pixels in the square are weighted by how close they are to the center.
+    private const int FILTER_SIZE = 15;
 
     protected override LockMode SrcLockMode => LockMode.ReadOnly;
     protected override LockMode DstLockMode => LockMode.WriteOnly;
@@ -26,13 +34,12 @@ public class BilateralFilterOp : BinaryBitwiseImageOp
     private unsafe void PerformRgba(BitwiseImageData src, BitwiseImageData dst, int partStart, int partEnd)
     {
         bool copyAlpha = src.hasAlpha && dst.hasAlpha;
-        const int filterSize = 15;
-        const int s = filterSize / 2;
+        const int s = FILTER_SIZE / 2;
 
-        var filter = new int[filterSize, filterSize];
-        for (int filterX = 0; filterX < filterSize; filterX++)
+        var filter = new int[FILTER_SIZE, FILTER_SIZE];
+        for (int filterX = 0; filterX < FILTER_SIZE; filterX++)
         {
-            for (int filterY = 0; filterY < filterSize; filterY++)
+            for (int filterY = 0; filterY < FILTER_SIZE; filterY++)
             {
                 int dx = filterX - s;
                 int dy = filterY - s;
@@ -43,11 +50,10 @@ public class BilateralFilterOp : BinaryBitwiseImageOp
         }
 
         var diffWeights = new int[256 * 3 * 2];
-        const int dMax = 48;
-        for (int i = 0; i < dMax * 3; i++)
+        for (int i = 0; i < COLOR_DIST_MAX * 3; i++)
         {
-            diffWeights[256 * 3 + i] = dMax - i / 3;
-            diffWeights[256 * 3 - i] = dMax - i / 3;
+            diffWeights[256 * 3 + i] = COLOR_DIST_MAX - i / 3;
+            diffWeights[256 * 3 - i] = COLOR_DIST_MAX - i / 3;
         }
 
         for (int i = partStart; i < partEnd; i++)
@@ -84,9 +90,9 @@ public class BilateralFilterOp : BinaryBitwiseImageOp
                     {
                         int rTotal = 0, gTotal = 0, bTotal = 0;
                         int weightTotal = 0;
-                        for (int filterX = 0; filterX < filterSize; filterX++)
+                        for (int filterX = 0; filterX < FILTER_SIZE; filterX++)
                         {
-                            for (int filterY = 0; filterY < filterSize; filterY++)
+                            for (int filterY = 0; filterY < FILTER_SIZE; filterY++)
                             {
                                 int imageX = j - s + filterX;
                                 int imageY = i - s + filterY;
