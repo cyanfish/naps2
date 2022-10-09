@@ -145,6 +145,11 @@ public class DesktopCommands
             MenuText = UiStrings.Sharpen,
             Image = Icons.sharpen.ToEtoImage()
         };
+        // TODO: Make this an image form with options
+        DocumentCorrection = new ActionCommand(desktopController.RunDocumentCorrection)
+        {
+            MenuText = UiStrings.DocumentCorrection
+        };
         ResetImage = new ActionCommand(desktopController.ResetImage)
         {
             MenuText = UiStrings.Reset
@@ -276,6 +281,7 @@ public class DesktopCommands
     public ActionCommand HueSat { get; set; }
     public ActionCommand BlackWhite { get; set; }
     public ActionCommand Sharpen { get; set; }
+    public ActionCommand DocumentCorrection { get; set; }
     public ActionCommand ResetImage { get; set; }
     public ActionCommand RotateMenu { get; set; }
     public ActionCommand RotateLeft { get; set; }

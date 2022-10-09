@@ -42,10 +42,11 @@ public class BilateralFilterOp : BinaryBitwiseImageOp
             }
         }
 
-        var diffWeights = new int[256];
-        for (int i = 0; i < 64; i++)
+        var diffWeights = new int[256 * 3 * 2];
+        for (int i = 0; i < 64 * 3; i++)
         {
-            diffWeights[i] = 64 - i;
+            diffWeights[256 * 3 + i] = 64 - i / 3;
+            diffWeights[256 * 3 - i] = 64 - i / 3;
         }
 
         for (int i = partStart; i < partEnd; i++)
@@ -62,33 +63,52 @@ public class BilateralFilterOp : BinaryBitwiseImageOp
 
                 if (j > s && j < src.w - s && i > s && i < src.h - s)
                 {
-                    int rTotal = 0, gTotal = 0, bTotal = 0;
-                    int weightTotal = 0;
-                    for (int filterX = 0; filterX < filterSize; filterX++)
+                    bool skipPixel = false;
+                    if (r == 255 && g == 255 & b == 255)
                     {
-                        for (int filterY = 0; filterY < filterSize; filterY++)
+                        var prevPixel = src.ptr + src.stride * i + src.bytesPerPixel * j - 1;
+                        var nextPixel = src.ptr + src.stride * i + src.bytesPerPixel * j + 1;
+                        byte prevR = *(prevPixel + src.rOff);
+                        byte prevG = *(prevPixel + src.gOff);
+                        byte prevB = *(prevPixel + src.bOff);
+                        byte nextR = *(nextPixel + src.rOff);
+                        byte nextG = *(nextPixel + src.gOff);
+                        byte nextB = *(nextPixel + src.bOff);
+                        if (prevR == 255 && prevG == 255 && prevB == 255 && nextR == 255 && nextG == 255 && nextB == 255)
                         {
-                            int imageX = j - s + filterX;
-                            int imageY = i - s + filterY;
-
-                            var pixel = src.ptr + src.stride * imageY + src.bytesPerPixel * imageX;
-
-                            var r2 = *(pixel + src.rOff);
-                            var g2 = *(pixel + src.gOff);
-                            var b2 = *(pixel + src.bOff);
-
-                            // TODO: Better color distance
-                            var diff = Math.Abs((r + g + b) / 3 - (r2 + g2 + b2) / 3);
-                            var weight = filter[filterX, filterY] * diffWeights[diff];
-                            weightTotal += weight;
-                            rTotal += r2 * weight;
-                            gTotal += g2 * weight;
-                            bTotal += b2 * weight;
+                            skipPixel = true;
                         }
                     }
-                    r = rTotal / weightTotal;
-                    g = gTotal / weightTotal;
-                    b = bTotal / weightTotal;
+                    if (!skipPixel)
+                    {
+                        int rTotal = 0, gTotal = 0, bTotal = 0;
+                        int weightTotal = 0;
+                        for (int filterX = 0; filterX < filterSize; filterX++)
+                        {
+                            for (int filterY = 0; filterY < filterSize; filterY++)
+                            {
+                                int imageX = j - s + filterX;
+                                int imageY = i - s + filterY;
+
+                                var pixel = src.ptr + src.stride * imageY + src.bytesPerPixel * imageX;
+
+                                var r2 = *(pixel + src.rOff);
+                                var g2 = *(pixel + src.gOff);
+                                var b2 = *(pixel + src.bOff);
+
+                                // TODO: Better color distance
+                                var diff = (r + g + b) - (r2 + g2 + b2) + 256 * 3;
+                                var weight = filter[filterX, filterY] * diffWeights[diff];
+                                weightTotal += weight;
+                                rTotal += r2 * weight;
+                                gTotal += g2 * weight;
+                                bTotal += b2 * weight;
+                            }
+                        }
+                        r = rTotal / weightTotal;
+                        g = gTotal / weightTotal;
+                        b = bTotal / weightTotal;
+                    }
                 }
                 *(dstPixel + dst.rOff) = (byte) r;
                 *(dstPixel + dst.gOff) = (byte) g;

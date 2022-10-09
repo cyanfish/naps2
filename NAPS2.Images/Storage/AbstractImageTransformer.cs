@@ -50,16 +50,30 @@ public abstract class AbstractImageTransformer<TImage> where TImage : IMemoryIma
 
     private TImage PerformTransform(TImage image, CorrectionTransform transform)
     {
+        var stopwatch = Stopwatch.StartNew();
+        ColumnColorOp.PerformFullOp(image);
+        Console.WriteLine($"Column color op time: {stopwatch.ElapsedMilliseconds}");
+        stopwatch.Restart();
         if (transform.Mode == CorrectionMode.Document)
         {
             // We do two filter passes, which is convenient as we can end up with the final data in the original image
             using var image2 = image.CopyBlank();
             new BilateralFilterOp().Perform(image, image2);
+            Console.WriteLine($"Bilateral filter op time (pass 1): {stopwatch.ElapsedMilliseconds}");
+            stopwatch.Restart();
+            WhiteBlackPointOp.PerformFullOp(image2, transform.Mode);
+            Console.WriteLine($"White/black point op time: {stopwatch.ElapsedMilliseconds}");
+            stopwatch.Restart();
             new BilateralFilterOp().Perform(image2, image);
+            Console.WriteLine($"Bilateral filter op time (pass 2): {stopwatch.ElapsedMilliseconds}");
+            stopwatch.Restart();
         }
-        var op1 = new CorrectionPreProcessingOp(transform.Mode);
-        op1.Perform(image);
-        new CorrectionOp(op1).Perform(image);
+        else
+        {
+            WhiteBlackPointOp.PerformFullOp(image, transform.Mode);
+            Console.WriteLine($"White/black point op time: {stopwatch.ElapsedMilliseconds}");
+            stopwatch.Restart();
+        }
         return image;
     }
 

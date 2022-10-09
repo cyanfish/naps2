@@ -255,6 +255,12 @@ namespace NAPS2.Lang.Resources {
             }
         }
         
+        internal static string DocumentCorrection {
+            get {
+                return ResourceManager.GetString("DocumentCorrection", resourceCulture);
+            }
+        }
+        
         internal static string Reset {
             get {
                 return ResourceManager.GetString("Reset", resourceCulture);

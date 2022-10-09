@@ -58,7 +58,7 @@ public abstract class BinaryBitwiseImageOp : BitwiseImageOp
         ValidateConsistency(dst);
         ValidateCore(src, dst);
 
-        StartCore();
+        StartCore(src, dst);
 
         var partitionSize = GetPartitionSize(src, dst);
         var partitionCount = GetPartitionCount(src, dst);
@@ -102,6 +102,10 @@ public abstract class BinaryBitwiseImageOp : BitwiseImageOp
     protected abstract LockMode SrcLockMode { get; }
 
     protected abstract LockMode DstLockMode { get; }
+
+    protected virtual void StartCore(BitwiseImageData src, BitwiseImageData dst)
+    {
+    }
 
     protected abstract void PerformCore(BitwiseImageData src, BitwiseImageData dst, int partStart, int partEnd);
 }

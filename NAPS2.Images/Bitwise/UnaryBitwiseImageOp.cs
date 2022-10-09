@@ -22,7 +22,7 @@ public abstract class UnaryBitwiseImageOp : BitwiseImageOp
         ValidateConsistency(data);
         ValidateCore(data);
 
-        StartCore();
+        StartCore(data);
 
         var partitionSize = GetPartitionSize(data);
         var partitionCount = GetPartitionCount(data);
@@ -48,6 +48,10 @@ public abstract class UnaryBitwiseImageOp : BitwiseImageOp
     protected virtual int GetPartitionCount(BitwiseImageData data) => DefaultPartitionCount;
 
     protected virtual LockMode LockMode => LockMode.ReadWrite;
+
+    protected virtual void StartCore(BitwiseImageData data)
+    {
+    }
 
     protected abstract void PerformCore(BitwiseImageData data, int partStart, int partEnd);
 

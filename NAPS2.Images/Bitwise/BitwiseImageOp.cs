@@ -48,10 +48,6 @@ public class BitwiseImageOp
         }
     }
 
-    protected virtual void StartCore()
-    {
-    }
-
     protected virtual void FinishCore()
     {
     }

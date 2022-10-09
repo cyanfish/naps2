@@ -1,18 +1,29 @@
 namespace NAPS2.Images.Bitwise;
 
 // TODO: experimental
-public class CorrectionOp : UnaryBitwiseImageOp
+public class WhiteBlackPointOp : UnaryBitwiseImageOp
 {
+    /// <summary>
+    /// Performs this operation including pre-processing steps.
+    /// </summary>
+    /// <param name="image"></param>
+    public static void PerformFullOp(IMemoryImage image, CorrectionMode mode)
+    {
+        var op1 = new WhiteBlackPointPreOp(mode);
+        op1.Perform(image);
+        new WhiteBlackPointOp(op1).Perform(image);
+    }
+
     private readonly CorrectionMode _mode;
     private readonly bool _valid;
     private readonly int _whitePoint;
     private readonly int _blackPoint;
 
-    public CorrectionOp(CorrectionPreProcessingOp preProcessingOp)
+    public WhiteBlackPointOp(WhiteBlackPointPreOp preOp)
     {
-        _mode = preProcessingOp.Mode;
-        var total = preProcessingOp.TotalCount;
-        var counts = preProcessingOp.Counts;
+        _mode = preOp.Mode;
+        var total = preOp.PixelTotalCount;
+        var counts = preOp.PixelLumCounts;
         var segments = new int[64];
         for (int i = 0; i < 256; i++)
         {
@@ -26,32 +37,21 @@ public class CorrectionOp : UnaryBitwiseImageOp
         int ws = 63;
         while (ws > 1 && (segments[ws] < segments[ws - 1] || segments[ws] < total / 64))
             ws--;
-        if (bs > 38 || ws < 24 || bs >= ws)
-        {
-            _valid = false;
-            return;
-        }
+        // if (bs > 38 || ws < 24 || bs >= ws)
+        // {
+        //     _valid = false;
+        //     return;
+        // }
         _valid = true;
         // TODO: Find a better way to get the white and black points
         // var whiteMode = ws * 4 + 2;
         // var blackMode = bs * 4 + 2;
-        _whitePoint = 236;
-        _blackPoint = 72;
+        _whitePoint = 205;
+        _blackPoint = 0;
+        Console.WriteLine($"Correcting with whitepoint {_whitePoint} blackpoint {_blackPoint}");
     }
 
-    protected override void PerformCore(BitwiseImageData data, int partStart, int partEnd)
-    {
-        if (data.bytesPerPixel is 1 or 3 or 4)
-        {
-            PerformRgba(data, partStart, partEnd);
-        }
-        else
-        {
-            throw new InvalidOperationException("Unsupported pixel format");
-        }
-    }
-
-    private unsafe void PerformRgba(BitwiseImageData data, int partStart, int partEnd)
+    protected override unsafe void PerformCore(BitwiseImageData data, int partStart, int partEnd)
     {
         if (!_valid)
             return;

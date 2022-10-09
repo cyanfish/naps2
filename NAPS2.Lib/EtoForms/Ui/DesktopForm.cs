@@ -176,6 +176,7 @@ public abstract class DesktopForm : EtoFormBase
                 .Append(Commands.HueSat)
                 .Append(Commands.BlackWhite)
                 .Append(Commands.Sharpen)
+                .Append(Commands.DocumentCorrection)
                 .Separator()
                 .Append(Commands.ResetImage));
         if (!hiddenButtons.HasFlag(ToolbarButtons.Rotate))

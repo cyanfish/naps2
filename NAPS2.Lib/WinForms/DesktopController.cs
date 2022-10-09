@@ -365,6 +365,14 @@ public class DesktopController
         }
     }
 
+    public void RunDocumentCorrection()
+    {
+        foreach (var image in _imageList.Selection)
+        {
+            image.AddTransform(new CorrectionTransform(CorrectionMode.Document));
+        }
+    }
+
     public void ResetImage()
     {
         if (_imageList.Selection.Any())

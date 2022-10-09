@@ -153,6 +153,17 @@ public class BitwisePerfTests : ContextualTests
     }
 
     [Fact]
+    public void BilateralFilter()
+    {
+        // Using a smaller size as sharpening is super slow
+        var image = CreateAndFill(ImagePixelFormat.ARGB32, SIZE / 4);
+        var image2 = CreateAndFill(ImagePixelFormat.ARGB32, SIZE / 4);
+
+        using var _ = Timer();
+        new BilateralFilterOp().Perform(image, image2);
+    }
+
+    [Fact]
     public void LogicalPixelFormat()
     {
         var image = CreateAndFill(ImagePixelFormat.ARGB32);

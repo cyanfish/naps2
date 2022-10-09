@@ -117,6 +117,7 @@ public class MacDesktopForm : DesktopForm
                         Commands.HueSat,
                         Commands.BlackWhite,
                         Commands.Sharpen,
+                        Commands.DocumentCorrection,
                         new SeparatorMenuItem(),
                         Commands.ResetImage
                     }
