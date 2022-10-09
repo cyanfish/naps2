@@ -46,9 +46,24 @@ public class WhiteBlackPointOp : UnaryBitwiseImageOp
         // TODO: Find a better way to get the white and black points
         // var whiteMode = ws * 4 + 2;
         // var blackMode = bs * 4 + 2;
-        _whitePoint = 205;
-        _blackPoint = 0;
+        _whitePoint = 235;
+        _blackPoint = 110;
         Console.WriteLine($"Correcting with whitepoint {_whitePoint} blackpoint {_blackPoint}");
+    }
+
+    private (byte[] iToL, byte[] lToI) GetGammaConversion()
+    {
+        const double gamma = 2.2;
+        var iToL = new byte[256];
+        var lToI = new byte[256];
+        for (int x = 0; x < 256; x++)
+        {
+            var i = Math.Pow(x / 255.0, 1 / gamma);
+            lToI[x] = (byte) Math.Round(i * 255);
+            var l = Math.Pow(x / 255.0, gamma);
+            iToL[x] = (byte) Math.Round(l * 255);
+        }
+        return (iToL, lToI);
     }
 
     protected override unsafe void PerformCore(BitwiseImageData data, int partStart, int partEnd)
@@ -57,6 +72,9 @@ public class WhiteBlackPointOp : UnaryBitwiseImageOp
             return;
         bool flatten = _mode == CorrectionMode.Document;
         bool retainColor = _mode == CorrectionMode.Photo;
+        var (iToL, lToI) = GetGammaConversion();
+        var blackL = iToL[_blackPoint];
+        var whiteL = iToL[_whitePoint];
         for (int i = partStart; i < partEnd; i++)
         {
             var row = data.ptr + data.stride * i;
@@ -86,9 +104,18 @@ public class WhiteBlackPointOp : UnaryBitwiseImageOp
                     if (b > white)
                         b = white;
 
-                    r = (r - black) * 255 / (white - black);
-                    g = (g - black) * 255 / (white - black);
-                    b = (b - black) * 255 / (white - black);
+                    // Use a gamma function to convert to the luminescence space
+                    int rL = iToL[r];
+                    int gL = iToL[g];
+                    int bL = iToL[b];
+                    // Scale the color values in the luminescence space
+                    rL = (rL - blackL) * 255 / (whiteL - blackL);
+                    gL = (gL - blackL) * 255 / (whiteL - blackL);
+                    bL = (bL - blackL) * 255 / (whiteL - blackL);
+                    // Convert back to the intensity space
+                    r = lToI[rL];
+                    g = lToI[gL];
+                    b = lToI[bL];
                 }
 
                 if (retainColor)

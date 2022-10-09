@@ -37,6 +37,8 @@ public class WhiteBlackPointPreOp : UnaryBitwiseImageOp
                     // {
                     //     continue;
                     // }
+                    // TODO: Not sure whether it's best to use this or just an average, though it probably doesn't matter
+                    // much as the lows/highs should be black/white.
                     value = (r * R_MULT + g * G_MULT + b * B_MULT) / 1000;
                 }
                 else
