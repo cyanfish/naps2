@@ -157,28 +157,14 @@ public class WhiteBlackPointOp : UnaryBitwiseImageOp
         return peaks;
     }
 
-    private (byte[] iToL, byte[] lToI) GetGammaConversion()
-    {
-        const double gamma = 2.2;
-        var iToL = new byte[256];
-        var lToI = new byte[256];
-        for (int x = 0; x < 256; x++)
-        {
-            var i = Math.Pow(x / 255.0, 1 / gamma);
-            lToI[x] = (byte) Math.Round(i * 255);
-            var l = Math.Pow(x / 255.0, gamma);
-            iToL[x] = (byte) Math.Round(l * 255);
-        }
-        return (iToL, lToI);
-    }
-
     protected override unsafe void PerformCore(BitwiseImageData data, int partStart, int partEnd)
     {
         if (!_valid)
             return;
         bool flatten = _mode == CorrectionMode.Document;
         bool retainColor = _mode == CorrectionMode.Photo;
-        var (iToL, lToI) = GetGammaConversion();
+        var iToL = GammaTables.IntensityToLum;
+        var lToI = GammaTables.LumToIntensity;
         var blackL = iToL[_blackPoint];
         var whiteL = iToL[_whitePoint];
         for (int i = partStart; i < partEnd; i++)
