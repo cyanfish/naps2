@@ -16,6 +16,7 @@ public abstract class ImageContext
             ".bmp" => ImageFileFormat.Bmp,
             ".jpg" or ".jpeg" => ImageFileFormat.Jpeg,
             ".tif" or ".tiff" => ImageFileFormat.Tiff,
+            ".jp2" or ".jpx" => ImageFileFormat.Jpeg2000,
             _ => throw new ArgumentException($"Could not infer file format from extension: {path}")
         };
     }
@@ -26,9 +27,9 @@ public abstract class ImageContext
         {
             return ImageFileFormat.Unspecified;
         }
-        var firstBytes = new byte[4];
+        var firstBytes = new byte[8];
         stream.Seek(0, SeekOrigin.Begin);
-        stream.Read(firstBytes, 0, 4);
+        stream.Read(firstBytes, 0, 8);
         stream.Seek(0, SeekOrigin.Begin);
         if (firstBytes[0] == 0x89 && firstBytes[1] == 0x50 && firstBytes[2] == 0x4E && firstBytes[3] == 0x47)
         {
@@ -49,6 +50,10 @@ public abstract class ImageContext
         if (firstBytes[0] == 0x4D && firstBytes[1] == 0x4D && firstBytes[2] == 0x00 && firstBytes[3] == 0x2A)
         {
             return ImageFileFormat.Tiff;
+        }
+        if (firstBytes[4] == 0x6A && firstBytes[5] == 0x50 && firstBytes[6] == 0x20 && firstBytes[7] == 0x20)
+        {
+            return ImageFileFormat.Jpeg2000;
         }
         return ImageFileFormat.Unspecified;
     }
@@ -122,6 +127,13 @@ public abstract class ImageContext
 
     public Type ImageType { get; }
 
+    public bool SupportsFormat(ImageFileFormat format) =>
+        format is ImageFileFormat.Bmp or ImageFileFormat.Jpeg or ImageFileFormat.Png ||
+        format == ImageFileFormat.Tiff && SupportsTiff || format == ImageFileFormat.Jpeg2000 && SupportsJpeg2000;
+
+    protected virtual bool SupportsTiff => false;
+    protected virtual bool SupportsJpeg2000 => false;
+
     // TODO: Implement these 4 load methods here, calling protected abstract internal methods.
     // TODO: That will let us implement common behavior (reading file formats, setting originalfileformat/logicalpixelformat) consistently.
     /// <summary>
@@ -143,6 +155,7 @@ public abstract class ImageContext
     public IMemoryImage Load(Stream stream)
     {
         var format = GetFileFormatFromFirstBytes(stream);
+        CheckSupportsFormat(format);
         var image = LoadCore(stream, format);
         if (image.OriginalFileFormat == ImageFileFormat.Unspecified)
         {
@@ -189,6 +202,15 @@ public abstract class ImageContext
     private IAsyncEnumerable<IMemoryImage> DoLoadFrames(Stream stream, ImageFileFormat format, ProgressHandler progress,
         bool disposeStream)
     {
+        try
+        {
+            CheckSupportsFormat(format);
+        }
+        catch (Exception)
+        {
+            if (disposeStream) stream.Dispose();
+            throw;
+        }
         return AsyncProducers.RunProducer<IMemoryImage>(produceImage =>
         {
             try
@@ -222,7 +244,15 @@ public abstract class ImageContext
         }
     }
 
-    public abstract ITiffWriter TiffWriter { get; }
+    public void CheckSupportsFormat(ImageFileFormat format)
+    {
+        if (!SupportsFormat(format))
+        {
+            throw new NotSupportedException($"Unsupported file format: {format}");
+        }
+    }
+
+    public virtual ITiffWriter TiffWriter => throw new NotSupportedException();
 
     public IMemoryImage Render(IRenderableImage image)
     {

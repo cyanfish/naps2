@@ -1,37 +1,29 @@
 ﻿using Eto.Forms;
+using NAPS2.EtoForms;
 
 namespace NAPS2.WinForms;
 
 public class WinFormsDialogHelper : DialogHelper
 {
     private readonly Naps2Config _config;
+    private readonly FileFilters _fileFilters;
 
-    public WinFormsDialogHelper(Naps2Config config)
+    public WinFormsDialogHelper(Naps2Config config, FileFilters fileFilters)
     {
         _config = config;
+        _fileFilters = fileFilters;
     }
 
-    public override bool PromptToSavePdfOrImage(string? defaultPath, out string savePath)
+    public override bool PromptToSavePdfOrImage(string? defaultPath, out string? savePath)
     {
         var sd = new SaveFileDialog
         {
             CheckFileExists = false,
             // TODO
             // AddExtension = true,
-            // TODO: Move filter logic somewhere common
-            Filters =
-            {
-                new FileFilter(MiscResources.FileTypePdf, ".pdf"),
-                new FileFilter(MiscResources.FileTypeBmp, ".bmp"),
-                new FileFilter(MiscResources.FileTypeEmf, ".emf"),
-                new FileFilter(MiscResources.FileTypeExif, ".exif"),
-                new FileFilter(MiscResources.FileTypeGif, ".gif"),
-                new FileFilter(MiscResources.FileTypeJpeg, ".jpg", ".jpeg"),
-                new FileFilter(MiscResources.FileTypePng, ".png"),
-                new FileFilter(MiscResources.FileTypeTiff, ".tiff", ".tif"),
-            },
             FileName = Path.GetFileName(defaultPath)
         };
+        _fileFilters.Set(sd, FileFilterGroup.Pdf | FileFilterGroup.Image);
         SetDir(sd, defaultPath);
         if (sd.ShowDialog(null) == DialogResult.Ok)
         {
@@ -42,18 +34,15 @@ public class WinFormsDialogHelper : DialogHelper
         return false;
     }
 
-    public override bool PromptToSavePdf(string? defaultPath, out string savePath)
+    public override bool PromptToSavePdf(string? defaultPath, out string? savePath)
     {
         var sd = new SaveFileDialog
         {
             CheckFileExists = false,
             // AddExtension = true,
-            Filters =
-            {
-                new FileFilter(MiscResources.FileTypePdf, ".pdf"),
-            },
             FileName = Path.GetFileName(defaultPath)
         };
+        _fileFilters.Set(sd, FileFilterGroup.Pdf);
         SetDir(sd, defaultPath);
         if (sd.ShowDialog(null) == DialogResult.Ok)
         {
@@ -64,51 +53,17 @@ public class WinFormsDialogHelper : DialogHelper
         return false;
     }
 
-    public override bool PromptToSaveImage(string? defaultPath, out string savePath)
+    public override bool PromptToSaveImage(string? defaultPath, out string? savePath)
     {
         var sd = new SaveFileDialog
         {
             CheckFileExists = false,
             // AddExtension = true,
-            // TODO: Move filter logic somewhere common
-            Filters =
-            {
-                new FileFilter(MiscResources.FileTypeBmp, ".bmp"),
-                new FileFilter(MiscResources.FileTypeEmf, ".emf"),
-                new FileFilter(MiscResources.FileTypeExif, ".exif"),
-                new FileFilter(MiscResources.FileTypeGif, ".gif"),
-                new FileFilter(MiscResources.FileTypeJpeg, ".jpg", ".jpeg"),
-                new FileFilter(MiscResources.FileTypePng, ".png"),
-                new FileFilter(MiscResources.FileTypeTiff, ".tiff", ".tif"),
-            },
             FileName = Path.GetFileName(defaultPath)
         };
+        var lastExt = _config.Get(c => c.LastImageExt)?.ToLowerInvariant();
+        _fileFilters.Set(sd, FileFilterGroup.Image, lastExt ?? "jpg");
         SetDir(sd, defaultPath);
-        switch (_config.Get(c => c.LastImageExt)?.ToLowerInvariant())
-        {
-            case "bmp":
-                sd.CurrentFilterIndex = 0;
-                break;
-            case "emf":
-                sd.CurrentFilterIndex = 1;
-                break;
-            case "exif":
-                sd.CurrentFilterIndex = 2;
-                break;
-            case "gif":
-                sd.CurrentFilterIndex = 3;
-                break;
-            case "png":
-                sd.CurrentFilterIndex = 5;
-                break;
-            case "tif":
-            case "tiff":
-                sd.CurrentFilterIndex = 6;
-                break;
-            default: // Jpeg
-                sd.CurrentFilterIndex = 4;
-                break;
-        }
         if (sd.ShowDialog(null) == DialogResult.Ok)
         {
             savePath = sd.FileName;
@@ -137,5 +92,28 @@ public class WinFormsDialogHelper : DialogHelper
         {
             dialog.Directory = new Uri(Path.GetFullPath(path));
         }
+    }
+
+    public override bool PromptToImport(out string[]? filePaths)
+    {
+        var ofd = new OpenFileDialog
+        {
+            MultiSelect = true,
+            CheckFileExists = true
+        };
+        _fileFilters.Set(ofd,
+            FileFilterGroup.AllFiles | FileFilterGroup.Pdf | FileFilterGroup.AllImages | FileFilterGroup.Image);
+        if (Paths.IsTestAppDataPath)
+        {
+            // For UI test automation we choose the appdata folder to find the prepared files to import
+            ofd.Directory = new Uri(Path.GetFullPath(Paths.AppData));
+        }
+        if (ofd.ShowDialog(null) == DialogResult.Ok)
+        {
+            filePaths = ofd.Filenames.ToArray();
+            return true;
+        }
+        filePaths = null;
+        return false;
     }
 }

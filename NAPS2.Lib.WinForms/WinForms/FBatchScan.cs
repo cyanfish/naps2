@@ -183,9 +183,9 @@ public partial class FBatchScan : FormBase
 
     private void btnChooseFolder_Click(object sender, EventArgs e)
     {
-        if (_dialogHelper.PromptToSavePdfOrImage(null, out string savePath))
+        if (_dialogHelper.PromptToSavePdfOrImage(null, out string? savePath))
         {
-            txtFilePath.Text = savePath;
+            txtFilePath.Text = savePath!;
         }
     }
 

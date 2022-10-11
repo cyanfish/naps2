@@ -16,6 +16,9 @@ public class MacImageContext : ImageContext
         _imageTransformer = new MacImageTransformer(this);
     }
 
+    protected override bool SupportsTiff => true;
+    protected override bool SupportsJpeg2000 => true;
+
     public override IMemoryImage PerformTransform(IMemoryImage image, Transform transform)
     {
         var macImage = image as MacImage ?? throw new ArgumentException("Expected MacImage object");

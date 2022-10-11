@@ -29,6 +29,7 @@ public class DesktopControllerTests : ContextualTests
     private readonly ImageTransfer _imageTransfer;
     private readonly ImageClipboard _imageClipboard;
     private readonly Mock<IWinFormsExportHelper> _exportHelper;
+    private readonly Mock<DialogHelper> _dialogHelper;
     private readonly DesktopImagesController _desktopImagesController;
     private readonly Mock<IDesktopScanController> _desktopScanController;
     private readonly DesktopFormProvider _desktopFormProvider;
@@ -51,6 +52,7 @@ public class DesktopControllerTests : ContextualTests
         _imageTransfer = new ImageTransfer();
         _imageClipboard = new ImageClipboard();
         _exportHelper = new Mock<IWinFormsExportHelper>();
+        _dialogHelper = new Mock<DialogHelper>();
         _desktopImagesController = new DesktopImagesController(_imageList);
         _desktopScanController = new Mock<IDesktopScanController>();
         _desktopFormProvider = new DesktopFormProvider();
@@ -72,6 +74,7 @@ public class DesktopControllerTests : ContextualTests
             new ImageListActions(_imageList, _operationFactory.Object, _operationProgress.Object,
                 _config, _thumbnailController),
             _exportHelper.Object,
+            _dialogHelper.Object,
             _desktopImagesController,
             _desktopScanController.Object,
             _desktopFormProvider,

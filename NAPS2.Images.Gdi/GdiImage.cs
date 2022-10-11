@@ -14,7 +14,8 @@ public class GdiImage : IMemoryImage
 {
     public GdiImage(ImageContext imageContext, Bitmap bitmap)
     {
-        ImageContext = imageContext ?? throw new ArgumentNullException(nameof(imageContext));
+        if (imageContext is not GdiImageContext) throw new ArgumentException();
+        ImageContext = imageContext;
         if (bitmap == null)
         {
             throw new ArgumentNullException(nameof(bitmap));
@@ -62,6 +63,7 @@ public class GdiImage : IMemoryImage
         {
             imageFormat = ImageContext.GetFileFormatFromExtension(path);
         }
+        ImageContext.CheckSupportsFormat(imageFormat);
         if (imageFormat == ImageFileFormat.Jpeg && quality != -1)
         {
             var (encoder, encoderParams) = GetJpegSaveArgs(quality);
@@ -79,6 +81,7 @@ public class GdiImage : IMemoryImage
         {
             throw new ArgumentException("Format required to save to a stream", nameof(imageFormat));
         }
+        ImageContext.CheckSupportsFormat(imageFormat);
         if (imageFormat == ImageFileFormat.Jpeg && quality != -1)
         {
             var (encoder, encoderParams) = GetJpegSaveArgs(quality);

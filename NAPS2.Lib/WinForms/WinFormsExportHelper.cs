@@ -38,7 +38,7 @@ public class WinFormsExportHelper : IWinFormsExportHelper
             }
             else
             {
-                if (!_dialogHelper.PromptToSavePdf(defaultFileName, out savePath))
+                if (!_dialogHelper.PromptToSavePdf(defaultFileName, out savePath!))
                 {
                     return false;
                 }
@@ -79,7 +79,7 @@ public class WinFormsExportHelper : IWinFormsExportHelper
             }
             else
             {
-                if (!_dialogHelper.PromptToSaveImage(_config.Get(c => c.ImageSettings.DefaultFileName), out savePath))
+                if (!_dialogHelper.PromptToSaveImage(_config.Get(c => c.ImageSettings.DefaultFileName), out savePath!))
                 {
                     return false;
                 }

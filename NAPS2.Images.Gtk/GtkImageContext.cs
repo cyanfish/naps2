@@ -14,6 +14,8 @@ public class GtkImageContext : ImageContext
         _tiffIo = new LibTiffIo(this);
     }
 
+    protected override bool SupportsTiff => true;
+
     public override IMemoryImage PerformTransform(IMemoryImage image, Transform transform)
     {
         var gdiImage = image as GtkImage ?? throw new ArgumentException("Expected GtkImage object");

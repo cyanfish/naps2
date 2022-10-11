@@ -111,9 +111,9 @@ public class AutoSaver
         string subPath = placeholders.Substitute(settings.FilePath, true, i);
         if (settings.PromptForFilePath)
         {
-            if (_dialogHelper.PromptToSavePdfOrImage(subPath, out string newPath))
+            if (_dialogHelper.PromptToSavePdfOrImage(subPath, out string? newPath))
             {
-                subPath = placeholders.Substitute(newPath, true, i);
+                subPath = placeholders.Substitute(newPath!, true, i);
             }
         }
         // TODO: This placeholder handling is complex and wrong in some cases (e.g. FilePerScan with ext = "jpg")

@@ -33,6 +33,7 @@ public class DesktopController
     private readonly ImageClipboard _imageClipboard;
     private readonly ImageListActions _imageListActions;
     private readonly IWinFormsExportHelper _exportHelper;
+    private readonly DialogHelper _dialogHelper;
     private readonly DesktopImagesController _desktopImagesController;
     private readonly IDesktopScanController _desktopScanController;
     private readonly DesktopFormProvider _desktopFormProvider;
@@ -46,6 +47,7 @@ public class DesktopController
         StillImage stillImage,
         IUpdateChecker updateChecker, INotificationManager notify, ImageTransfer imageTransfer,
         ImageClipboard imageClipboard, ImageListActions imageListActions, IWinFormsExportHelper exportHelper,
+        DialogHelper dialogHelper,
         DesktopImagesController desktopImagesController, IDesktopScanController desktopScanController,
         DesktopFormProvider desktopFormProvider, IScannedImagePrinter scannedImagePrinter)
     {
@@ -63,6 +65,7 @@ public class DesktopController
         _imageClipboard = imageClipboard;
         _imageListActions = imageListActions;
         _exportHelper = exportHelper;
+        _dialogHelper = dialogHelper;
         _desktopImagesController = desktopImagesController;
         _desktopScanController = desktopScanController;
         _desktopFormProvider = desktopFormProvider;
@@ -490,35 +493,9 @@ public class DesktopController
 
     public void Import()
     {
-        // TODO: Merge this into exporthelper/dialoghelper?
-        var ofd = new OpenFileDialog
+        if (_dialogHelper.PromptToImport(out var fileNames))
         {
-            MultiSelect = true,
-            CheckFileExists = true,
-            Filters =
-            {
-                // TODO: Move filter logic somewhere common
-                new FileFilter(MiscResources.FileTypeAllFiles, ".*"),
-                new FileFilter(MiscResources.FileTypePdf, ".pdf"),
-                new FileFilter(MiscResources.FileTypeImageFiles,
-                    ".bmp", ".emf", ".exif", ".gif", "jpg", ".jpeg", ".png", ".tiff", ".tif"),
-                new FileFilter(MiscResources.FileTypeBmp, ".bmp"),
-                new FileFilter(MiscResources.FileTypeEmf, ".emf"),
-                new FileFilter(MiscResources.FileTypeExif, ".exif"),
-                new FileFilter(MiscResources.FileTypeGif, ".gif"),
-                new FileFilter(MiscResources.FileTypeJpeg, ".jpg", ".jpeg"),
-                new FileFilter(MiscResources.FileTypePng, ".png"),
-                new FileFilter(MiscResources.FileTypeTiff, ".tiff", ".tif"),
-            }
-        };
-        if (Paths.IsTestAppDataPath)
-        {
-            // For UI test automation we choose the appdata folder to find the prepared files to import
-            ofd.Directory = new Uri(Path.GetFullPath(Paths.AppData));
-        }
-        if (ofd.ShowDialog(_desktopFormProvider.DesktopForm) == DialogResult.Ok)
-        {
-            ImportFiles(ofd.Filenames);
+            ImportFiles(fileNames!);
         }
     }
 }

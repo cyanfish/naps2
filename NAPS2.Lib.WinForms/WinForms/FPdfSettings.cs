@@ -165,9 +165,9 @@ public partial class FPdfSettings : FormBase
 
     private void btnChooseFolder_Click(object sender, EventArgs e)
     {
-        if (_dialogHelper.PromptToSavePdf(txtDefaultFilePath.Text, out string savePath))
+        if (_dialogHelper.PromptToSavePdf(txtDefaultFilePath.Text, out string? savePath))
         {
-            txtDefaultFilePath.Text = savePath;
+            txtDefaultFilePath.Text = savePath!;
         }
     }
 }

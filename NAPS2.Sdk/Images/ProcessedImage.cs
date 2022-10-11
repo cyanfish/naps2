@@ -40,6 +40,7 @@ public class ProcessedImage : IRenderableImage, IDisposable, IEquatable<Processe
 
     public ImageContext ImageContext { get; }
 
+    // TODO: Consider having two copies of the image on disk - one before transforms, one after.
     public IImageStorage Storage { get; }
 
     public ImageMetadata Metadata { get; }

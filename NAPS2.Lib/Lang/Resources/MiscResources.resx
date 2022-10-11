@@ -177,6 +177,9 @@
   <data name="FileTypeTiff" xml:space="preserve">
     <value>TIFF File (*.tiff, *.tif)</value>
   </data>
+  <data name="FileTypeJp2" xml:space="preserve">
+    <value>JPEG2000 File (*.jp2, *.jpx)</value>
+  </data>
   <data name="NameMissing" xml:space="preserve">
     <value>Name missing.</value>
   </data>

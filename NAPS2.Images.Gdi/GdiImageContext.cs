@@ -20,6 +20,8 @@ public class GdiImageContext : ImageContext
         _imageTransformer = new GdiImageTransformer(this);
     }
 
+    protected override bool SupportsTiff => true;
+
     public override IMemoryImage PerformTransform(IMemoryImage image, Transform transform)
     {
         var gdiImage = image as GdiImage ?? throw new ArgumentException("Expected GdiImage object");

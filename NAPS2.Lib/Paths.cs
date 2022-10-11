@@ -13,6 +13,7 @@ public static class Paths
 #if STANDALONE
         AppDataPath = Path.Combine(ExecutablePath, "..", "Data");
 #else
+        // TODO: Make lowercase for non-windows
         AppDataPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "NAPS2");
 #endif
         var dataPathFromEnv = Environment.GetEnvironmentVariable("NAPS2_TEST_DATA");

@@ -121,9 +121,9 @@ public partial class FImageSettings : FormBase
 
     private void btnChooseFolder_Click(object sender, EventArgs e)
     {
-        if (_dialogHelper.PromptToSaveImage(txtDefaultFilePath.Text, out string savePath))
+        if (_dialogHelper.PromptToSaveImage(txtDefaultFilePath.Text, out string? savePath))
         {
-            txtDefaultFilePath.Text = savePath;
+            txtDefaultFilePath.Text = savePath!;
         }
     }
 }

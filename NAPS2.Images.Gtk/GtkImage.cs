@@ -8,7 +8,8 @@ public class GtkImage : IMemoryImage
 {
     public GtkImage(ImageContext imageContext, Pixbuf pixbuf)
     {
-        ImageContext = imageContext ?? throw new ArgumentNullException(nameof(imageContext));
+        if (imageContext is not GtkImageContext) throw new ArgumentException();
+        ImageContext = imageContext;
         Pixbuf = pixbuf;
         LogicalPixelFormat = PixelFormat;
         HorizontalResolution = float.TryParse(pixbuf.GetOption("x-dpi"), out var xDpi) ? xDpi : 0;
@@ -72,6 +73,7 @@ public class GtkImage : IMemoryImage
         {
             imageFormat = ImageContext.GetFileFormatFromExtension(path);
         }
+        ImageContext.CheckSupportsFormat(imageFormat);
         var type = GetType(imageFormat);
         var (keys, values) = GetSaveOptions(imageFormat, quality);
         Pixbuf.Savev(path, type, keys, values);
@@ -83,6 +85,7 @@ public class GtkImage : IMemoryImage
         {
             throw new ArgumentException("Format required to save to a stream", nameof(imageFormat));
         }
+        ImageContext.CheckSupportsFormat(imageFormat);
         var type = GetType(imageFormat);
         var (keys, values) = GetSaveOptions(imageFormat, quality);
         // TODO: Map to OutputStream directly?

@@ -1,6 +1,4 @@
-﻿using Eto.Drawing;
-
-namespace NAPS2.ImportExport.Images;
+﻿namespace NAPS2.ImportExport.Images;
 
 // TODO: Cross-platform TIFF
 public class SaveImagesOperation : OperationBase
@@ -47,9 +45,9 @@ public class SaveImagesOperation : OperationBase
                     fileName = Path.Combine(subFileName, "$(n).jpg");
                     subFileName = placeholders.Substitute(fileName, batch);
                 }
-                ImageFormat format = GetImageFormat(subFileName);
+                var format = ImageContext.GetFileFormatFromExtension(subFileName);
 
-                if (Equals(format, ImageFormat.Tiff) && !imageSettings.SinglePageTiff)
+                if (format == ImageFileFormat.Tiff && !imageSettings.SinglePageTiff)
                 {
                     if (File.Exists(subFileName))
                     {
@@ -151,60 +149,22 @@ public class SaveImagesOperation : OperationBase
         return true;
     }
 
-    private void DoSaveImage(ProcessedImage image, string path, ImageFormat format, ImageSettings imageSettings)
+    private void DoSaveImage(ProcessedImage image, string path, ImageFileFormat format, ImageSettings imageSettings)
     {
         FileSystemHelper.EnsureParentDirExists(path);
-        if (Equals(format, ImageFormat.Tiff))
+        if (format == ImageFileFormat.Tiff)
         {
             using var renderedImage = image.Render();
             _imageContext.TiffWriter.SaveTiff(new[] { renderedImage }, path,
                 imageSettings.TiffCompression.ToTiffCompressionType(), CancelToken);
         }
-        else if (Equals(format, ImageFormat.Jpeg))
-        {
-            var quality = imageSettings.JpegQuality.Clamp(0, 100);
-            using var bitmap = image.Render();
-            bitmap.Save(path, ImageFileFormat.Jpeg, quality);
-        }
         else
         {
+            // Quality will be ignored when not needed
+            // TODO: Scale quality differently for jpeg2000?
+            var quality = imageSettings.JpegQuality.Clamp(0, 100);
             using var bitmap = image.Render();
-            var fileFormat = format switch
-            {
-                ImageFormat.Bitmap => ImageFileFormat.Bmp,
-                ImageFormat.Jpeg => ImageFileFormat.Jpeg,
-                ImageFormat.Png => ImageFileFormat.Png
-            };
-            bitmap.Save(path, fileFormat);
-        }
-    }
-
-    private static ImageFormat GetImageFormat(string fileName)
-    {
-        string extension = Path.GetExtension(fileName);
-        switch (extension.ToLower())
-        {
-            // TODO: Get rid of unsupported file types
-            case ".bmp":
-                return ImageFormat.Bitmap;
-            // case ".emf":
-            //     return ImageFormat.Emf;
-            case ".gif":
-                return ImageFormat.Gif;
-            // case ".ico":
-            //     return ImageFormat.Icon;
-            case ".jpg":
-            case ".jpeg":
-                return ImageFormat.Jpeg;
-            case ".png":
-                return ImageFormat.Png;
-            case ".tif":
-            case ".tiff":
-                return ImageFormat.Tiff;
-            // case ".wmf":
-            //     return ImageFormat.Wmf;
-            default:
-                return ImageFormat.Jpeg;
+            bitmap.Save(path, format, quality);
         }
     }
 }

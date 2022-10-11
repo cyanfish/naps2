@@ -7,7 +7,8 @@ public class MacImage : IMemoryImage
 {
     public MacImage(ImageContext imageContext, NSImage image)
     {
-        ImageContext = imageContext ?? throw new ArgumentNullException(nameof(imageContext));
+        if (imageContext is not MacImageContext) throw new ArgumentException();
+        ImageContext = imageContext;
         NsImage = image ?? throw new ArgumentNullException(nameof(image));
         var reps = NsImage.Representations();
         if (reps.Length != 1)
@@ -124,6 +125,7 @@ public class MacImage : IMemoryImage
         {
             imageFormat = ImageContext.GetFileFormatFromExtension(path);
         }
+        ImageContext.CheckSupportsFormat(imageFormat);
         var rep = GetRepForSaving(imageFormat, quality);
         if (!rep.Save(path, false, out var error))
         {
@@ -137,6 +139,7 @@ public class MacImage : IMemoryImage
         {
             throw new ArgumentException("Format required to save to a stream", nameof(imageFormat));
         }
+        ImageContext.CheckSupportsFormat(imageFormat);
         var rep = GetRepForSaving(imageFormat, quality);
         rep.AsStream().CopyTo(stream);
     }
@@ -145,7 +148,7 @@ public class MacImage : IMemoryImage
     {
         lock (MacImageContext.ConstructorLock)
         {
-            var props = quality != -1 && imageFormat == ImageFileFormat.Jpeg
+            var props = quality != -1 && imageFormat is ImageFileFormat.Jpeg or ImageFileFormat.Jpeg2000
                 ? NSDictionary.FromObjectAndKey(NSNumber.FromDouble(quality / 100.0),
                     NSBitmapImageRep.CompressionFactor)
                 : null;
@@ -155,6 +158,7 @@ public class MacImage : IMemoryImage
                 ImageFileFormat.Png => NSBitmapImageFileType.Png,
                 ImageFileFormat.Bmp => NSBitmapImageFileType.Bmp,
                 ImageFileFormat.Tiff => NSBitmapImageFileType.Tiff,
+                ImageFileFormat.Jpeg2000 => NSBitmapImageFileType.Jpeg2000,
                 _ => throw new InvalidOperationException("Unsupported image format")
             };
             var targetFormat = LogicalPixelFormat;

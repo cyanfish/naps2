@@ -173,6 +173,11 @@ public class LoadSaveTests : ContextualTests
         },
         new object[]
         {
+            ImageFileFormat.Jpeg2000, ".jp2", "dog_jp2",
+            new[] { "dog" }, new[] { ImagePixelFormat.RGB24 }, false
+        },
+        new object[]
+        {
             ImageFileFormat.Bmp, ".bmp", "dog_bmp",
             new[] { "dog" }, new[] { ImagePixelFormat.RGB24 }, true
         },
