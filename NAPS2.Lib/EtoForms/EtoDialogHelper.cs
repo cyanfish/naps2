@@ -1,14 +1,13 @@
 ﻿using Eto.Forms;
-using NAPS2.EtoForms;
 
-namespace NAPS2.WinForms;
+namespace NAPS2.EtoForms;
 
-public class WinFormsDialogHelper : DialogHelper
+public class EtoDialogHelper : DialogHelper
 {
     private readonly Naps2Config _config;
     private readonly FileFilters _fileFilters;
 
-    public WinFormsDialogHelper(Naps2Config config, FileFilters fileFilters)
+    public EtoDialogHelper(Naps2Config config, FileFilters fileFilters)
     {
         _config = config;
         _fileFilters = fileFilters;

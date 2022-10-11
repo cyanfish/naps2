@@ -1,4 +1,5 @@
 ﻿using System.Windows.Forms;
+using NAPS2.EtoForms;
 using NAPS2.WinForms;
 
 namespace NAPS2.ImportExport.Pdf;

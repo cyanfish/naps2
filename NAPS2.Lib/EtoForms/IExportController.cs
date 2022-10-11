@@ -1,8 +1,8 @@
 using NAPS2.ImportExport.Email;
 
-namespace NAPS2.WinForms;
+namespace NAPS2.EtoForms;
 
-public interface IWinFormsExportHelper
+public interface IExportController
 {
     Task<bool> SavePDF(IList<ProcessedImage> images, ISaveNotify notify);
     Task<bool> ExportPDF(string filename, IList<ProcessedImage> images, bool email, EmailMessage emailMessage);

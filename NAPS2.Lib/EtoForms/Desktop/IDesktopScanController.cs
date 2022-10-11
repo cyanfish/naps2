@@ -1,6 +1,6 @@
 using NAPS2.Scan;
 
-namespace NAPS2.WinForms;
+namespace NAPS2.EtoForms.Desktop;
 
 public interface IDesktopScanController
 {

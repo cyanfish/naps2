@@ -1,4 +1,5 @@
 using NAPS2.EtoForms;
+using NAPS2.EtoForms.Desktop;
 using NAPS2.EtoForms.Gtk;
 using NAPS2.EtoForms.Ui;
 using NAPS2.Images.Gtk;
@@ -6,7 +7,6 @@ using NAPS2.ImportExport;
 using NAPS2.ImportExport.Pdf;
 using NAPS2.Scan;
 using NAPS2.Update;
-using NAPS2.WinForms;
 using Ninject;
 using Ninject.Modules;
 
@@ -19,9 +19,9 @@ public class GtkModule : NinjectModule
         // Bind<IBatchScanPerformer>().To<BatchScanPerformer>();
         Bind<IPdfPasswordProvider>().To<StubPdfPasswordProvider>();
         Bind<ErrorOutput>().To<MessageBoxErrorOutput>();
-        Bind<IOverwritePrompt>().To<WinFormsOverwritePrompt>();
+        Bind<IOverwritePrompt>().To<EtoOverwritePrompt>();
         Bind<OperationProgress>().To<EtoOperationProgress>().InSingletonScope();
-        Bind<DialogHelper>().To<WinFormsDialogHelper>();
+        Bind<DialogHelper>().To<EtoDialogHelper>();
         Bind<IDevicePrompt>().To<EtoDevicePrompt>();
         Bind<INotificationManager>().To<StubNotificationManager>().InSingletonScope();
         Bind<ISaveNotify>().ToMethod(ctx => ctx.Kernel.Get<INotificationManager>());
@@ -29,7 +29,7 @@ public class GtkModule : NinjectModule
         Bind<DesktopController>().ToSelf().InSingletonScope();
         Bind<IDesktopScanController>().To<DesktopScanController>();
         Bind<IUpdateChecker>().To<UpdateChecker>();
-        Bind<IWinFormsExportHelper>().To<WinFormsExportHelper>();
+        Bind<IExportController>().To<ExportController>();
         Bind<IDesktopSubFormController>().To<StubDesktopSubFormController>();
         Bind<DesktopFormProvider>().ToSelf().InSingletonScope();
         Bind<ImageContext>().To<GtkImageContext>();

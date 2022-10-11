@@ -1,5 +1,6 @@
 ﻿using System.Collections.Immutable;
 using System.Windows.Forms;
+using NAPS2.EtoForms;
 
 namespace NAPS2.WinForms;
 

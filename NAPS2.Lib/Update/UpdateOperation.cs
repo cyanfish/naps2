@@ -4,7 +4,7 @@ using System.Net;
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading;
-using NAPS2.WinForms;
+using NAPS2.EtoForms.Desktop;
 
 namespace NAPS2.Update;
 

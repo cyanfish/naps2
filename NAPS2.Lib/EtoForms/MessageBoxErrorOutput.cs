@@ -1,6 +1,6 @@
 ﻿using Eto.Forms;
 
-namespace NAPS2.WinForms;
+namespace NAPS2.EtoForms;
 
 public class MessageBoxErrorOutput : ErrorOutput
 {

@@ -2,6 +2,7 @@ using System.Globalization;
 using System.Threading;
 using System.Windows.Forms;
 using NAPS2.Config.Model;
+using NAPS2.EtoForms;
 using NAPS2.ImportExport;
 using NAPS2.Scan;
 using NAPS2.Scan.Batch;

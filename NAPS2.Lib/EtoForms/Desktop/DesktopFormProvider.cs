@@ -1,6 +1,4 @@
-using NAPS2.EtoForms;
-
-namespace NAPS2.WinForms;
+namespace NAPS2.EtoForms.Desktop;
 
 public class DesktopFormProvider
 {

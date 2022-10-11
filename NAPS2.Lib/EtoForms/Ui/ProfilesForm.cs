@@ -1,5 +1,6 @@
 using Eto.Drawing;
 using Eto.Forms;
+using NAPS2.EtoForms.Layout;
 using NAPS2.ImportExport.Profiles;
 using NAPS2.Scan;
 using NAPS2.Serialization;

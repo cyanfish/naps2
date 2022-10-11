@@ -1,4 +1,5 @@
 ﻿using NAPS2.EtoForms;
+using NAPS2.EtoForms.Desktop;
 using NAPS2.EtoForms.Ui;
 using NAPS2.EtoForms.WinForms;
 using NAPS2.ImportExport;
@@ -19,16 +20,16 @@ public class WinFormsModule : NinjectModule
         Bind<IBatchScanPerformer>().To<BatchScanPerformer>();
         Bind<IPdfPasswordProvider>().To<WinFormsPdfPasswordProvider>();
         Bind<ErrorOutput>().To<MessageBoxErrorOutput>();
-        Bind<IOverwritePrompt>().To<WinFormsOverwritePrompt>();
+        Bind<IOverwritePrompt>().To<EtoOverwritePrompt>();
         Bind<OperationProgress>().To<EtoOperationProgress>().InSingletonScope();
-        Bind<DialogHelper>().To<WinFormsDialogHelper>();
+        Bind<DialogHelper>().To<EtoDialogHelper>();
         Bind<IDevicePrompt>().To<EtoDevicePrompt>();
         Bind<INotificationManager>().To<NotificationManager>().InSingletonScope();
         Bind<ISaveNotify>().ToMethod(ctx => ctx.Kernel.Get<INotificationManager>());
         Bind<IScannedImagePrinter>().To<PrintDocumentPrinter>();
         Bind<DesktopController>().ToSelf().InSingletonScope();
         Bind<IUpdateChecker>().To<UpdateChecker>();
-        Bind<IWinFormsExportHelper>().To<WinFormsExportHelper>();
+        Bind<IExportController>().To<ExportController>();
         Bind<IDesktopScanController>().To<DesktopScanController>();
         Bind<IDesktopSubFormController>().To<DesktopSubFormController>();
         Bind<DesktopFormProvider>().ToSelf().InSingletonScope();

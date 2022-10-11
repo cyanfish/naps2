@@ -1,6 +1,7 @@
 using System.ComponentModel;
 using System.Globalization;
 using System.Windows.Forms;
+using NAPS2.EtoForms;
 using NAPS2.Images.Gdi;
 using MessageBoxIcon = System.Windows.Forms.MessageBoxIcon;
 
@@ -31,7 +32,7 @@ public class FViewer : FormBase
     private ToolStripSeparator _toolStripSeparator2;
     private ToolStripButton _tsSaveImage;
     private readonly IOperationFactory _operationFactory;
-    private readonly IWinFormsExportHelper _exportHelper;
+    private readonly IExportController _exportController;
     private ToolStripButton _tsHueSaturation;
     private ToolStripButton _tsBlackWhite;
     private ToolStripButton _tsSharpen;
@@ -43,12 +44,12 @@ public class FViewer : FormBase
 
     private UiImage? _currentImage;
 
-    public FViewer(IOperationFactory operationFactory, IWinFormsExportHelper exportHelper,
+    public FViewer(IOperationFactory operationFactory, IExportController exportController,
         KeyboardShortcutManager ksm, OperationProgress operationProgress,
         UiImageList imageList, INotificationManager notificationManager, ThumbnailController thumbnailController)
     {
         _operationFactory = operationFactory;
-        _exportHelper = exportHelper;
+        _exportController = exportController;
         _ksm = ksm;
         _operationProgress = operationProgress;
         _imageList = imageList;
@@ -543,7 +544,7 @@ public class FViewer : FormBase
     private async void tsSavePDF_Click(object sender, EventArgs e)
     {
         using var imageToSave = CurrentImage.GetClonedImage();
-        if (await _exportHelper.SavePDF(new List<ProcessedImage> { imageToSave }, _notificationManager))
+        if (await _exportController.SavePDF(new List<ProcessedImage> { imageToSave }, _notificationManager))
         {
             if (Config.Get(c => c.DeleteAfterSaving))
             {
@@ -555,7 +556,7 @@ public class FViewer : FormBase
     private async void tsSaveImage_Click(object sender, EventArgs e)
     {
         using var imageToSave = CurrentImage.GetClonedImage();
-        if (await _exportHelper.SaveImages(new List<ProcessedImage> { imageToSave }, _notificationManager))
+        if (await _exportController.SaveImages(new List<ProcessedImage> { imageToSave }, _notificationManager))
         {
             if (Config.Get(c => c.DeleteAfterSaving))
             {

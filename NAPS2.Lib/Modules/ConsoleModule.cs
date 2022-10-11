@@ -1,7 +1,7 @@
 using NAPS2.Automation;
+using NAPS2.EtoForms;
 using NAPS2.ImportExport.Pdf;
 using NAPS2.Scan;
-using NAPS2.WinForms;
 using Ninject.Modules;
 
 namespace NAPS2.Modules;

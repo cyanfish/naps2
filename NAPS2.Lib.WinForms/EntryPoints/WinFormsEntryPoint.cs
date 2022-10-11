@@ -1,5 +1,6 @@
 ﻿using System.Threading;
 using Eto.Forms;
+using NAPS2.EtoForms;
 using NAPS2.EtoForms.Ui;
 using NAPS2.EtoForms.WinForms;
 using NAPS2.Modules;

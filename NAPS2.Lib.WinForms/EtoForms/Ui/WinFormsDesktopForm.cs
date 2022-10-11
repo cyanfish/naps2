@@ -2,6 +2,7 @@ using System.Drawing;
 using Eto.Forms;
 using Eto.WinForms;
 using Eto.WinForms.Forms.ToolBar;
+using NAPS2.EtoForms.Desktop;
 using NAPS2.EtoForms.WinForms;
 using NAPS2.ImportExport.Images;
 using NAPS2.WinForms;

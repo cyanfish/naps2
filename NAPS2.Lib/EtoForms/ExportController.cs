@@ -3,10 +3,9 @@ using NAPS2.ImportExport.Email;
 using NAPS2.ImportExport.Images;
 using NAPS2.ImportExport.Pdf;
 
-namespace NAPS2.WinForms;
+namespace NAPS2.EtoForms;
 
-// TODO: Rename this ImageExportController or something
-public class WinFormsExportHelper : IWinFormsExportHelper
+public class ExportController : IExportController
 {
     private readonly DialogHelper _dialogHelper;
     private readonly IOperationFactory _operationFactory;
@@ -15,7 +14,7 @@ public class WinFormsExportHelper : IWinFormsExportHelper
     private readonly Naps2Config _config;
     private readonly UiImageList _uiImageList;
 
-    public WinFormsExportHelper(DialogHelper dialogHelper, IOperationFactory operationFactory, IFormFactory formFactory, OperationProgress operationProgress, Naps2Config config, UiImageList uiImageList)
+    public ExportController(DialogHelper dialogHelper, IOperationFactory operationFactory, IFormFactory formFactory, OperationProgress operationProgress, Naps2Config config, UiImageList uiImageList)
     {
         _dialogHelper = dialogHelper;
         _operationFactory = operationFactory;

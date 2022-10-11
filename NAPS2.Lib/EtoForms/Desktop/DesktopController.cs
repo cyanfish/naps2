@@ -1,6 +1,5 @@
 using System.Threading;
 using Eto.Forms;
-using NAPS2.EtoForms;
 using NAPS2.ImportExport;
 using NAPS2.ImportExport.Images;
 using NAPS2.Platform.Windows;
@@ -9,7 +8,7 @@ using NAPS2.Remoting;
 using NAPS2.Scan;
 using NAPS2.Update;
 
-namespace NAPS2.WinForms;
+namespace NAPS2.EtoForms.Desktop;
 
 // TODO: We undoubtedly want to decompose this file even further.
 // We almost certainly want a DesktopScanController for the scanning-related logic.
@@ -32,7 +31,7 @@ public class DesktopController
     private readonly ImageTransfer _imageTransfer;
     private readonly ImageClipboard _imageClipboard;
     private readonly ImageListActions _imageListActions;
-    private readonly IWinFormsExportHelper _exportHelper;
+    private readonly IExportController _exportController;
     private readonly DialogHelper _dialogHelper;
     private readonly DesktopImagesController _desktopImagesController;
     private readonly IDesktopScanController _desktopScanController;
@@ -46,7 +45,7 @@ public class DesktopController
         OperationProgress operationProgress, Naps2Config config, IOperationFactory operationFactory,
         StillImage stillImage,
         IUpdateChecker updateChecker, INotificationManager notify, ImageTransfer imageTransfer,
-        ImageClipboard imageClipboard, ImageListActions imageListActions, IWinFormsExportHelper exportHelper,
+        ImageClipboard imageClipboard, ImageListActions imageListActions, IExportController exportController,
         DialogHelper dialogHelper,
         DesktopImagesController desktopImagesController, IDesktopScanController desktopScanController,
         DesktopFormProvider desktopFormProvider, IScannedImagePrinter scannedImagePrinter)
@@ -64,7 +63,7 @@ public class DesktopController
         _imageTransfer = imageTransfer;
         _imageClipboard = imageClipboard;
         _imageListActions = imageListActions;
-        _exportHelper = exportHelper;
+        _exportController = exportController;
         _dialogHelper = dialogHelper;
         _desktopImagesController = desktopImagesController;
         _desktopScanController = desktopScanController;
@@ -453,7 +452,7 @@ public class DesktopController
     public async Task SavePDF(ICollection<UiImage> images)
     {
         using var imagesToSave = images.Select(x => x.GetClonedImage()).ToDisposableList();
-        if (await _exportHelper.SavePDF(imagesToSave.InnerList, _notify))
+        if (await _exportController.SavePDF(imagesToSave.InnerList, _notify))
         {
             if (_config.Get(c => c.DeleteAfterSaving))
             {
@@ -465,7 +464,7 @@ public class DesktopController
     public async Task SaveImages(ICollection<UiImage> images)
     {
         using var imagesToSave = images.Select(x => x.GetClonedImage()).ToDisposableList();
-        if (await _exportHelper.SaveImages(imagesToSave.InnerList, _notify))
+        if (await _exportController.SaveImages(imagesToSave.InnerList, _notify))
         {
             if (_config.Get(c => c.DeleteAfterSaving))
             {
@@ -477,7 +476,7 @@ public class DesktopController
     public async Task EmailPDF(ICollection<UiImage> images)
     {
         using var imagesToEmail = images.Select(x => x.GetClonedImage()).ToDisposableList();
-        await _exportHelper.EmailPDF(imagesToEmail.InnerList);
+        await _exportController.EmailPDF(imagesToEmail.InnerList);
     }
 
     public async Task Print()

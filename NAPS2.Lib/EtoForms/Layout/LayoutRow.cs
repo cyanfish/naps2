@@ -1,6 +1,6 @@
 using Eto.Forms;
 
-namespace NAPS2.EtoForms;
+namespace NAPS2.EtoForms.Layout;
 
 public class LayoutRow : LayoutElement
 {

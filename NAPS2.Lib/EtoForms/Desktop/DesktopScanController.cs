@@ -4,7 +4,7 @@ using NAPS2.Scan;
 using NAPS2.Wia;
 #endif
 
-namespace NAPS2.WinForms;
+namespace NAPS2.EtoForms.Desktop;
 
 public class DesktopScanController : IDesktopScanController
 {

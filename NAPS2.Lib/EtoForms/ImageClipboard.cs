@@ -1,9 +1,8 @@
 ﻿using System.Text;
 using Eto.Forms;
-using NAPS2.EtoForms;
 using NAPS2.ImportExport.Images;
 
-namespace NAPS2.WinForms;
+namespace NAPS2.EtoForms;
 
 public class ImageClipboard
 {

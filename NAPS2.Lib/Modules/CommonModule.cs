@@ -1,4 +1,5 @@
-﻿using NAPS2.ImportExport;
+﻿using NAPS2.EtoForms;
+using NAPS2.ImportExport;
 using NAPS2.ImportExport.Email;
 using NAPS2.ImportExport.Email.Mapi;
 using NAPS2.ImportExport.Images;
@@ -10,7 +11,6 @@ using NAPS2.Remoting.Worker;
 using NAPS2.Scan;
 using NAPS2.Scan.Internal;
 using NAPS2.Unmanaged;
-using NAPS2.WinForms;
 using Ninject;
 using Ninject.Modules;
 using ILogger = NAPS2.Logging.ILogger;

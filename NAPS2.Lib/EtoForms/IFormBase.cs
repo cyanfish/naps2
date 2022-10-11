@@ -1,5 +1,3 @@
-using NAPS2.WinForms;
-
 namespace NAPS2.EtoForms;
 
 public interface IFormBase

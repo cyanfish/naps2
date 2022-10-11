@@ -1,6 +1,6 @@
 using NAPS2.Update;
 
-namespace NAPS2.WinForms;
+namespace NAPS2.EtoForms;
 
 public interface INotificationManager : ISaveNotify
 {

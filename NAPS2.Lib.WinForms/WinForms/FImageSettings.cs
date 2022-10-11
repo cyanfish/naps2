@@ -1,6 +1,7 @@
 using System.Globalization;
 using System.Windows.Forms;
 using NAPS2.Config.Model;
+using NAPS2.EtoForms;
 using NAPS2.ImportExport.Images;
 
 namespace NAPS2.WinForms;

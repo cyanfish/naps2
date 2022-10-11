@@ -1,4 +1,6 @@
 using Moq;
+using NAPS2.EtoForms;
+using NAPS2.EtoForms.Desktop;
 using NAPS2.ImportExport;
 using NAPS2.ImportExport.Images;
 using NAPS2.Platform.Windows;
@@ -6,7 +8,6 @@ using NAPS2.Recovery;
 using NAPS2.Sdk.Tests;
 using NAPS2.Sdk.Tests.Asserts;
 using NAPS2.Update;
-using NAPS2.WinForms;
 using Xunit;
 
 namespace NAPS2.Lib.Tests.WinForms;
@@ -28,7 +29,7 @@ public class DesktopControllerTests : ContextualTests
     private readonly Mock<INotificationManager> _notifcationManager;
     private readonly ImageTransfer _imageTransfer;
     private readonly ImageClipboard _imageClipboard;
-    private readonly Mock<IWinFormsExportHelper> _exportHelper;
+    private readonly Mock<IExportController> _exportHelper;
     private readonly Mock<DialogHelper> _dialogHelper;
     private readonly DesktopImagesController _desktopImagesController;
     private readonly Mock<IDesktopScanController> _desktopScanController;
@@ -51,7 +52,7 @@ public class DesktopControllerTests : ContextualTests
         _notifcationManager = new Mock<INotificationManager>();
         _imageTransfer = new ImageTransfer();
         _imageClipboard = new ImageClipboard();
-        _exportHelper = new Mock<IWinFormsExportHelper>();
+        _exportHelper = new Mock<IExportController>();
         _dialogHelper = new Mock<DialogHelper>();
         _desktopImagesController = new DesktopImagesController(_imageList);
         _desktopScanController = new Mock<IDesktopScanController>();

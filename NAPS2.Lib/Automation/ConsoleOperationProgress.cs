@@ -1,4 +1,4 @@
-﻿using NAPS2.WinForms;
+﻿using NAPS2.EtoForms;
 
 namespace NAPS2.Automation;
 

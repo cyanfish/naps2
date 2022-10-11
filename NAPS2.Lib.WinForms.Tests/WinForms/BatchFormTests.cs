@@ -1,4 +1,5 @@
 ﻿using Moq;
+using NAPS2.EtoForms;
 using NAPS2.ImportExport;
 using NAPS2.Scan;
 using NAPS2.Scan.Batch;

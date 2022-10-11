@@ -1,4 +1,5 @@
 using System.Windows.Forms;
+using NAPS2.EtoForms;
 using NAPS2.ImportExport;
 using NAPS2.Scan;
 

@@ -1,9 +1,9 @@
 using System.Collections.Immutable;
 using System.Threading;
 using Eto.Forms;
+using NAPS2.EtoForms.Desktop;
 using NAPS2.ImportExport.Images;
 using NAPS2.Scan;
-using NAPS2.WinForms;
 
 namespace NAPS2.EtoForms.Ui;
 

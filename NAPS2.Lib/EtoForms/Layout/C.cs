@@ -3,7 +3,7 @@ using Eto.Drawing;
 using Eto.Forms;
 using NAPS2.Scan;
 
-namespace NAPS2.EtoForms;
+namespace NAPS2.EtoForms.Layout;
 
 public static class C
 {

@@ -1,6 +1,5 @@
 using Eto.Forms;
 using NAPS2.EtoForms.Ui;
-using NAPS2.WinForms;
 
 namespace NAPS2.EtoForms;
 

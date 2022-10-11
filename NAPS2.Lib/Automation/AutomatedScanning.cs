@@ -1,4 +1,5 @@
 ﻿using System.Threading;
+using NAPS2.EtoForms;
 using NAPS2.ImportExport;
 using NAPS2.ImportExport.Email;
 using NAPS2.ImportExport.Images;
@@ -8,7 +9,6 @@ using NAPS2.Ocr;
 using NAPS2.Recovery;
 using NAPS2.Scan;
 using NAPS2.Serialization;
-using NAPS2.WinForms;
 
 namespace NAPS2.Automation;
 

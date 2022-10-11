@@ -2,9 +2,9 @@ using System.Threading;
 using Eto.Drawing;
 using Eto.Forms;
 using Eto.Mac;
+using NAPS2.EtoForms.Desktop;
 using NAPS2.ImportExport.Images;
 using NAPS2.Scan;
-using NAPS2.WinForms;
 
 namespace NAPS2.EtoForms.Ui;
 

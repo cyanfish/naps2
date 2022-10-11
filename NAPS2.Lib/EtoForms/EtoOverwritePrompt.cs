@@ -1,8 +1,8 @@
 ﻿using Eto.Forms;
 
-namespace NAPS2.WinForms;
+namespace NAPS2.EtoForms;
 
-public class WinFormsOverwritePrompt : IOverwritePrompt
+public class EtoOverwritePrompt : IOverwritePrompt
 {
     public OverwriteResponse ConfirmOverwrite(string path)
     {

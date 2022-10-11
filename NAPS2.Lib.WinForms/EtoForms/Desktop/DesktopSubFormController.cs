@@ -1,7 +1,9 @@
 using NAPS2.EtoForms.Ui;
+using NAPS2.Images;
 using NAPS2.Ocr;
+using NAPS2.WinForms;
 
-namespace NAPS2.WinForms;
+namespace NAPS2.EtoForms.Desktop;
 
 public class DesktopSubFormController : IDesktopSubFormController
 {

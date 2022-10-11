@@ -3,9 +3,9 @@ using Eto.GtkSharp;
 using Eto.GtkSharp.Forms.ToolBar;
 using Gdk;
 using Gtk;
+using NAPS2.EtoForms.Desktop;
 using NAPS2.EtoForms.Gtk;
 using NAPS2.ImportExport.Images;
-using NAPS2.WinForms;
 using Command = Eto.Forms.Command;
 
 namespace NAPS2.EtoForms.Ui;

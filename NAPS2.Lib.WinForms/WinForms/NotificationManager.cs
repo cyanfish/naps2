@@ -1,5 +1,7 @@
 ﻿using System.Drawing;
 using Eto.Forms;
+using NAPS2.EtoForms;
+using NAPS2.EtoForms.Desktop;
 using NAPS2.Update;
 using wf = System.Windows.Forms;
 

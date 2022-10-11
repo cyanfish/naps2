@@ -1,7 +1,7 @@
+using NAPS2.EtoForms;
 using NAPS2.ImportExport.Images;
 using NAPS2.ImportExport.Pdf;
 using NAPS2.Scan;
-using NAPS2.WinForms;
 
 namespace NAPS2.ImportExport;
 
