@@ -38,25 +38,9 @@ public abstract class SaneNativeObject : IDisposable
 
     protected void HandleStatus(SaneStatus status)
     {
-        switch (status)
+        if (status != SaneStatus.Good)
         {
-            case SaneStatus.Good:
-                return;
-            case SaneStatus.Cancelled:
-                throw new OperationCanceledException();
-            case SaneStatus.NoDocs:
-                throw new NoPagesException();
-            case SaneStatus.DeviceBusy:
-                throw new DeviceException(SdkResources.DeviceBusy);
-            case SaneStatus.Invalid:
-                // TODO: Maybe not always correct? e.g. when setting options
-                throw new DeviceException(SdkResources.DeviceOffline);
-            case SaneStatus.Jammed:
-                throw new DeviceException(SdkResources.DevicePaperJam);
-            case SaneStatus.CoverOpen:
-                throw new DeviceException(SdkResources.DeviceCoverOpen);
-            default:
-                throw new DeviceException($"SANE error: {status}");
+            throw new SaneException(status);
         }
     }
 
@@ -70,21 +54,15 @@ public abstract class SaneNativeObject : IDisposable
 
     protected virtual void Dispose(bool disposing)
     {
-        if (!_disposed)
-        {
-            if (Handle != IntPtr.Zero)
-            {
-                DisposeHandle();
-            }
-            _disposed = true;
-        }
     }
-
-    protected abstract void DisposeHandle();
 
     public void Dispose()
     {
-        Dispose(true);
+        if (!_disposed)
+        {
+            Dispose(true);
+            _disposed = true;
+        }
         GC.SuppressFinalize(this);
     }
 

@@ -60,11 +60,12 @@ internal class SaneScanDriver : IScanDriver
         {
             lock (SaneNativeLibrary.Instance)
             {
-                using var client = new SaneClient();
-                if (cancelToken.IsCancellationRequested) return;
-                using var device = client.OpenDevice(options.Device!.ID!);
+                bool hasAtLeastOneImage = false;
                 try
                 {
+                    using var client = new SaneClient();
+                    if (cancelToken.IsCancellationRequested) return;
+                    using var device = client.OpenDevice(options.Device!.ID!);
                     if (cancelToken.IsCancellationRequested) return;
                     SetOptions(device, options);
                     // TODO: We apparently need to cancel even upon normal completion, i.e. one sane_cancel per sane_start
@@ -81,12 +82,36 @@ internal class SaneScanDriver : IScanDriver
                     {
                         while (ScanPage(device, scanEvents) is { } image)
                         {
+                            hasAtLeastOneImage = true;
                             callback(image);
                         }
                     }
                 }
-                catch (OperationCanceledException)
+                catch (SaneException ex)
                 {
+                    switch (ex.Status)
+                    {
+                        case SaneStatus.Good:
+                        case SaneStatus.Cancelled:
+                            return;
+                        case SaneStatus.NoDocs:
+                            if (!hasAtLeastOneImage)
+                            {
+                                throw new NoPagesException();
+                            }
+                            break;
+                        case SaneStatus.DeviceBusy:
+                            throw new DeviceException(SdkResources.DeviceBusy);
+                        case SaneStatus.Invalid:
+                            // TODO: Maybe not always correct? e.g. when setting options
+                            throw new DeviceException(SdkResources.DeviceOffline);
+                        case SaneStatus.Jammed:
+                            throw new DeviceException(SdkResources.DevicePaperJam);
+                        case SaneStatus.CoverOpen:
+                            throw new DeviceException(SdkResources.DeviceCoverOpen);
+                        default:
+                            throw new DeviceException($"SANE error: {ex.Status}");
+                    }
                 }
             }
         });

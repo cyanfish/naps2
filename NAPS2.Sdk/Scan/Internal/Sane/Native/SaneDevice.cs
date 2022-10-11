@@ -8,7 +8,7 @@ public class SaneDevice : SaneNativeObject
     {
     }
 
-    protected override void DisposeHandle()
+    protected override void Dispose(bool disposing)
     {
         Native.sane_close(Handle);
     }

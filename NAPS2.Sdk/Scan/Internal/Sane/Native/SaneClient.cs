@@ -27,7 +27,7 @@ public class SaneClient : SaneNativeObject
         return new SaneDevice(handle);
     }
 
-    protected override void DisposeHandle()
+    protected override void Dispose(bool disposing)
     {
         Native.sane_exit();
     }
