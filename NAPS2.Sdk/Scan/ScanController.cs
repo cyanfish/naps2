@@ -76,7 +76,10 @@ public class ScanController : IScanController
             catch (Exception ex)
             {
                 ScanErrorCallback(ex);
-                throw;
+                if (PropagateErrors)
+                {
+                    throw;
+                }
             }
             finally
             {
@@ -84,6 +87,12 @@ public class ScanController : IScanController
             }
         });
     }
+
+    /// <summary>
+    /// Whether scan errors should be thrown when enumerating the IAsyncEnumerable result. If false (the default), you
+    /// will need to listen for the ScanError event to handle errors.
+    /// </summary>
+    public bool PropagateErrors { get; set; }
 
     public event EventHandler? ScanStart;
 

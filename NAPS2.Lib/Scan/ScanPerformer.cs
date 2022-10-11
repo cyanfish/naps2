@@ -117,7 +117,7 @@ internal class ScanPerformer : IScanPerformer
 
     private void HandleError(Exception error)
     {
-        if (!(error is ScanDriverException))
+        if (error is not ScanDriverException)
         {
             Log.ErrorException(error.Message, error);
             _errorOutput.DisplayError(error.Message, error);

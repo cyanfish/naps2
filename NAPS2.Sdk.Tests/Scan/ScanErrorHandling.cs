@@ -42,6 +42,7 @@ public class ScanErrorHandling : ContextualTests
         var controller =
             new ScanController(ScanningContext, localPostProcessor.Object, new ScanOptionsValidator(),
                 bridgeFactory.Object);
+        controller.PropagateErrors = true;
 
         bridgeFactory.Setup(factory => factory.Create(It.IsAny<ScanOptions>())).Throws<InvalidOperationException>();
         var source = controller.Scan(new ScanOptions { Device = new ScanDevice { ID = "blah" } });
@@ -84,6 +85,7 @@ public class ScanErrorHandling : ContextualTests
         var controller =
             new ScanController(ScanningContext, localPostProcessor.Object, new ScanOptionsValidator(),
                 bridgeFactory.Object);
+        controller.PropagateErrors = true;
 
         bridgeFactory.Setup(factory => factory.Create(It.IsAny<ScanOptions>())).Returns(bridge);
         localPostProcessor.Setup(pp =>
@@ -102,6 +104,7 @@ public class ScanErrorHandling : ContextualTests
         var controller =
             new ScanController(ScanningContext, localPostProcessor.Object, new ScanOptionsValidator(),
                 bridgeFactory.Object);
+        controller.PropagateErrors = true;
 
         bridgeFactory.Setup(factory => factory.Create(It.IsAny<ScanOptions>())).Returns(bridge);
         var source = controller.Scan(new ScanOptions { Device = new ScanDevice { ID = "blah" } });
