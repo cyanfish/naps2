@@ -30,12 +30,13 @@ public class MacTiffWriter : ITiffWriter
         lock (MacImageContext.ConstructorLock)
         {
             data = new NSMutableData();
+            // TODO: Fix unsupported warning
 #if MONOMAC
             dest = CGImageDestination.FromData(
 #else
             dest = CGImageDestination.Create(
 #endif
-                data, UTType.TIFF, images.Count);
+                data, UTType.TIFF, images.Count)!;
         }
         foreach (var image in images)
         {

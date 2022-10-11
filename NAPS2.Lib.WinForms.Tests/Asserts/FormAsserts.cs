@@ -1,4 +1,5 @@
-﻿using Xunit;
+﻿using System.Windows.Forms;
+using Xunit;
 
 namespace NAPS2.Lib.Tests.Asserts;
 

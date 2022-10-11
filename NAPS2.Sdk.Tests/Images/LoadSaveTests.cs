@@ -5,6 +5,9 @@ using Xunit;
 
 namespace NAPS2.Sdk.Tests.Images;
 
+// As we use the same data for multiple methods, some parameters may be unused
+#pragma warning disable xUnit1026
+
 public class LoadSaveTests : ContextualTests
 {
     // TODO: Add tests for error/edge cases (e.g. invalid files, unicode file names)
@@ -15,7 +18,14 @@ public class LoadSaveTests : ContextualTests
         ImagePixelFormat[] logicalPixelFormats, bool ignoreRes)
     {
         var path = CopyResourceToFile(GetResource(resource), $"image{ext}");
+
+        if (!ImageContext.SupportsFormat(format))
+        {
+            Assert.Throws<NotSupportedException>(() => ImageContext.Load(path));
+            return;
+        }
         using var image = ImageContext.Load(path);
+
         Assert.Equal(format, image.OriginalFileFormat);
         Assert.Equal(logicalPixelFormats[0], image.LogicalPixelFormat);
         ImageAsserts.Similar(GetResource(compare[0]), image, ignoreResolution: ignoreRes);
@@ -27,7 +37,14 @@ public class LoadSaveTests : ContextualTests
         ImagePixelFormat[] logicalPixelFormats, bool ignoreRes)
     {
         var stream = new MemoryStream(GetResource(resource));
+
+        if (!ImageContext.SupportsFormat(format))
+        {
+            Assert.Throws<NotSupportedException>(() => ImageContext.Load(stream));
+            return;
+        }
         using var image = ImageContext.Load(stream);
+
         Assert.Equal(format, image.OriginalFileFormat);
         Assert.Equal(logicalPixelFormats[0], image.LogicalPixelFormat);
         ImageAsserts.Similar(GetResource(compare[0]), image, ignoreResolution: ignoreRes);
@@ -40,7 +57,15 @@ public class LoadSaveTests : ContextualTests
     {
         var path = CopyResourceToFile(GetResource(resource), $"image{ext}");
         var progressMock = new Mock<ProgressCallback>();
+
+        if (!ImageContext.SupportsFormat(format))
+        {
+            await Assert.ThrowsAsync<NotSupportedException>(async () =>
+                await ImageContext.LoadFrames(path, progressMock.Object).ToListAsync());
+            return;
+        }
         var images = await ImageContext.LoadFrames(path, progressMock.Object).ToListAsync();
+
         Assert.Equal(compare.Length, images.Count);
         for (int i = 0; i < images.Count; i++)
         {
@@ -59,7 +84,15 @@ public class LoadSaveTests : ContextualTests
     {
         var stream = new MemoryStream(GetResource(resource));
         var progressMock = new Mock<ProgressCallback>();
+
+        if (!ImageContext.SupportsFormat(format))
+        {
+            await Assert.ThrowsAsync<NotSupportedException>(async () =>
+                await ImageContext.LoadFrames(stream, progressMock.Object).ToListAsync());
+            return;
+        }
         var images = await ImageContext.LoadFrames(stream, progressMock.Object).ToListAsync();
+
         Assert.Equal(compare.Length, images.Count);
         for (int i = 0; i < images.Count; i++)
         {
@@ -76,13 +109,21 @@ public class LoadSaveTests : ContextualTests
     public void SaveToFile(ImageFileFormat format, string ext, string resource, string[] compare,
         ImagePixelFormat[] logicalPixelFormats, bool ignoreRes)
     {
-        var image = LoadImage(GetResource(resource));
         var path = Path.Combine(FolderPath, $"image{ext}");
+        var expected = LoadImage(GetResource(compare[0]));
+
+        if (!ImageContext.SupportsFormat(format))
+        {
+            Assert.Throws<NotSupportedException>(() => expected.Save(path));
+            return;
+        }
+        var image = LoadImage(GetResource(resource));
         image.Save(path);
+
         var image2 = ImageContext.Load(path);
         Assert.Equal(format, image2.OriginalFileFormat);
         Assert.Equal(logicalPixelFormats[0], image2.LogicalPixelFormat);
-        ImageAsserts.Similar(GetResource(compare[0]), image2, ignoreResolution: ignoreRes);
+        ImageAsserts.Similar(expected, image2, ignoreResolution: ignoreRes);
     }
 
     [Theory]
@@ -90,13 +131,21 @@ public class LoadSaveTests : ContextualTests
     public void SaveToStream(ImageFileFormat format, string ext, string resource, string[] compare,
         ImagePixelFormat[] logicalPixelFormats, bool ignoreRes)
     {
-        var image = LoadImage(GetResource(resource));
         var stream = new MemoryStream();
+        var expected = LoadImage(GetResource(compare[0]));
+
+        if (!ImageContext.SupportsFormat(format))
+        {
+            Assert.Throws<NotSupportedException>(() => expected.Save(stream, format));
+            return;
+        }
+        var image = LoadImage(GetResource(resource));
         image.Save(stream, format);
+
         var image2 = ImageContext.Load(stream);
         Assert.Equal(format, image2.OriginalFileFormat);
         Assert.Equal(logicalPixelFormats[0], image2.LogicalPixelFormat);
-        ImageAsserts.Similar(GetResource(compare[0]), image2, ignoreResolution: ignoreRes);
+        ImageAsserts.Similar(expected, image2, ignoreResolution: ignoreRes);
     }
 
     [Fact]

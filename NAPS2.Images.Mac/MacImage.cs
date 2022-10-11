@@ -24,6 +24,7 @@ public class MacImage : IMemoryImage
 #endif
         }
         PixelFormat = GetPixelFormat(Rep);
+        // TODO: Why do we get an unsupported warning for ColorSpaceName?
         bool isDeviceColorSpace = Rep.ColorSpaceName == NSColorSpace.DeviceRGB ||
                                   Rep.ColorSpaceName == NSColorSpace.DeviceWhite;
         if (PixelFormat == ImagePixelFormat.Unsupported)

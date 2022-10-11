@@ -49,18 +49,18 @@ public class MenuProvider
 
     private class DynamicItem : Item
     {
-        public ListProvider<Command> CommandListProvider { get; init; }
+        public ListProvider<Command> CommandListProvider { get; init; } = null!;
     }
 
     public class CommandItem : Item
     {
-        public Command Command { get; init; }
+        public Command Command { get; init; } = null!;
     }
 
     public class SubMenuItem : Item
     {
-        public Command Command { get; init; }
-        public MenuProvider MenuProvider { get; init; }
+        public Command Command { get; init; } = null!;
+        public MenuProvider MenuProvider { get; init; } = null!;
     }
 
     public class SeparatorItem : Item

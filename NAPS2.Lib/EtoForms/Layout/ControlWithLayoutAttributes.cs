@@ -5,7 +5,7 @@ namespace NAPS2.EtoForms.Layout;
 
 public class ControlWithLayoutAttributes : LayoutElement
 {
-    public ControlWithLayoutAttributes(Control control)
+    public ControlWithLayoutAttributes(Control? control)
     {
         Control = control;
     }
@@ -28,7 +28,7 @@ public class ControlWithLayoutAttributes : LayoutElement
     public static implicit operator ControlWithLayoutAttributes(Control control) =>
         new ControlWithLayoutAttributes(control);
 
-    private Control Control { get; }
+    private Control? Control { get; }
     private bool Center { get; }
     private bool? XScale { get; }
     private bool? YScale { get; }
@@ -42,11 +42,11 @@ public class ControlWithLayoutAttributes : LayoutElement
     {
         if (Width != null)
         {
-            Control.Width = Width.Value;
+            Control!.Width = Width.Value;
         }
         if (Height != null)
         {
-            Control.Height = Height.Value;
+            Control!.Height = Height.Value;
         }
         if (AutoSize)
         {

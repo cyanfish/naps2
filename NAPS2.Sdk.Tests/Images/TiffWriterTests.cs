@@ -16,17 +16,17 @@ public class TiffWriterTests : ContextualTests
     }
 
     [Fact]
-    public void SaveSinglePageTiffToFile()
+    public async Task SaveSinglePageTiffToFile()
     {
         var path = Path.Combine(FolderPath, "image.tiff");
         var original = LoadImage(ImageResources.dog);
 
         _tiffWriter.SaveTiff(new[] { original }, path);
-        AssertTiff(path, ImageResources.dog);
+        await AssertTiff(path, ImageResources.dog);
     }
 
     [Fact]
-    public void SaveMultiPageTiffToFile()
+    public async Task SaveMultiPageTiffToFile()
     {
         var path = Path.Combine(FolderPath, "image.tiff");
         var original = new[]
@@ -37,21 +37,21 @@ public class TiffWriterTests : ContextualTests
         };
 
         _tiffWriter.SaveTiff(original, path);
-        AssertTiff(path, ImageResources.dog, ImageResources.dog_bw, ImageResources.stock_cat);
+        await AssertTiff(path, ImageResources.dog, ImageResources.dog_bw, ImageResources.stock_cat);
     }
 
     [Fact]
-    public void SaveSinglePageTiffToStream()
+    public async Task SaveSinglePageTiffToStream()
     {
         var stream = new MemoryStream();
         var original = LoadImage(ImageResources.dog);
 
         _tiffWriter.SaveTiff(new[] { original }, stream);
-        AssertTiff(stream, ImageResources.dog);
+        await AssertTiff(stream, ImageResources.dog);
     }
 
     [Fact]
-    public void SaveMultiPageTiffToStream()
+    public async Task SaveMultiPageTiffToStream()
     {
         var stream = new MemoryStream();
         var original = new[]
@@ -62,27 +62,27 @@ public class TiffWriterTests : ContextualTests
         };
 
         _tiffWriter.SaveTiff(original, stream);
-        AssertTiff(stream, ImageResources.dog, ImageResources.dog_bw, ImageResources.stock_cat);
+        await AssertTiff(stream, ImageResources.dog, ImageResources.dog_bw, ImageResources.stock_cat);
     }
 
     [Fact]
-    public void SaveBlackAndWhiteTiff()
+    public async Task SaveBlackAndWhiteTiff()
     {
         var path = Path.Combine(FolderPath, "image.tiff");
         var original = LoadImage(ImageResources.dog_bw);
 
         _tiffWriter.SaveTiff(new[] { original }, path);
-        AssertTiff(path, ImageResources.dog_bw);
+        await AssertTiff(path, ImageResources.dog_bw);
     }
 
     [Fact]
-    public void SaveColorTiffWithG4()
+    public async Task SaveColorTiffWithG4()
     {
         var path = Path.Combine(FolderPath, "image.tiff");
         var original = LoadImage(ImageResources.dog_png);
 
         _tiffWriter.SaveTiff(new[] { original }, path, TiffCompressionType.Ccitt4);
-        AssertTiff(path, ImageResources.dog_bw);
+        await AssertTiff(path, ImageResources.dog_bw);
     }
 
     private async Task AssertTiff(string path, params byte[][] expectedImages)

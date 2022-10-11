@@ -9,6 +9,9 @@ public static class TestImageContextFactory
 #elif LINUX
         return new NAPS2.Images.Gtk.GtkImageContext(pdfRenderer);
 #else
+#if NET6_0_OR_GREATER
+        if (!OperatingSystem.IsWindowsVersionAtLeast(7)) throw new InvalidOperationException();
+#endif
         return new NAPS2.Images.Gdi.GdiImageContext(pdfRenderer);
 #endif
     }

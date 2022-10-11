@@ -6,9 +6,9 @@ public static class ImageSettingExtensions
     public static TiffCompressionType ToTiffCompressionType(this TiffCompression tiffCompression) =>
         tiffCompression switch
         {
-            TiffCompression.Auto => TiffCompressionType.Auto,
             TiffCompression.Ccitt4 => TiffCompressionType.Ccitt4,
             TiffCompression.Lzw => TiffCompressionType.Lzw,
             TiffCompression.None => TiffCompressionType.None,
+            _ => TiffCompressionType.Auto
         };
 }

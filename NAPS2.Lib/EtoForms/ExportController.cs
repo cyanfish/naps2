@@ -33,7 +33,7 @@ public class ExportController : IExportController
             var defaultFileName = _config.Get(c => c.PdfSettings.DefaultFileName);
             if (_config.Get(c => c.PdfSettings.SkipSavePrompt) && Path.IsPathRooted(defaultFileName))
             {
-                savePath = defaultFileName;
+                savePath = defaultFileName!;
             }
             else
             {
@@ -55,7 +55,7 @@ public class ExportController : IExportController
         return false;
     }
 
-    public async Task<bool> ExportPDF(string filename, IList<ProcessedImage> images, bool email, EmailMessage emailMessage)
+    public async Task<bool> ExportPDF(string filename, IList<ProcessedImage> images, bool email, EmailMessage? emailMessage)
     {
         var op = _operationFactory.Create<SavePdfOperation>();
 

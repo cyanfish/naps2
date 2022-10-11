@@ -1,5 +1,8 @@
 using NAPS2.ImportExport.Images;
 using NAPS2.Scan;
+#if !NET6_0_OR_GREATER
+using NAPS2.Sdk.Tests.Asserts;
+#endif
 using Xunit;
 
 namespace NAPS2.Sdk.Tests.ImportExport;

@@ -2,7 +2,7 @@ using Eto.Forms;
 
 namespace NAPS2.EtoForms;
 
-public interface IListView<T> : Util.ISelectable<T>
+public interface IListView<T> : Util.ISelectable<T> where T : notnull
 {
     Control Control { get; }
 

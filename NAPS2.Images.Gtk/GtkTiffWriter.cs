@@ -64,7 +64,8 @@ internal class LibTiffIo : ITiffWriter
             ImagePixelFormat.ARGB32 => SubPixelType.Rgba,
             ImagePixelFormat.RGB24 => SubPixelType.Rgb,
             ImagePixelFormat.Gray8 => SubPixelType.Gray,
-            ImagePixelFormat.BW1 => SubPixelType.Bit
+            ImagePixelFormat.BW1 => SubPixelType.Bit,
+            _ => throw new InvalidOperationException("Unsupported pixel format")
         });
         var buffer = new byte[bufferInfo.Length];
         new CopyBitwiseImageOp().Perform(image, buffer, bufferInfo);
@@ -88,12 +89,12 @@ internal class LibTiffIo : ITiffWriter
         // TODO: Test setting g4 compression when it's not a BW image
         LibTiff.TIFFSetField(tiff, TiffTag.Compression, (int) (compression switch
         {
-            TiffCompressionType.Auto => pixelFormat == ImagePixelFormat.BW1
-                ? TiffCompression.G4
-                : TiffCompression.Lzw,
             TiffCompressionType.Ccitt4 => TiffCompression.G4,
             TiffCompressionType.Lzw => TiffCompression.Lzw,
-            TiffCompressionType.None => TiffCompression.None
+            TiffCompressionType.None => TiffCompression.None,
+            _ => pixelFormat == ImagePixelFormat.BW1
+                ? TiffCompression.G4
+                : TiffCompression.Lzw
         }));
         LibTiff.TIFFSetField(tiff, TiffTag.Orientation, 1);
         LibTiff.TIFFSetField(tiff, TiffTag.BitsPerSample, pixelFormat == ImagePixelFormat.BW1 ? 1 : 8);

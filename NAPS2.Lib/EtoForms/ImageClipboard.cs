@@ -41,6 +41,7 @@ public class ImageClipboard
         }
     }
 
+    // TODO: Do we need to run this in a task?
     private async Task<string?> RtfEncodeImages(IMemoryImage firstBitmap, List<ProcessedImage> images)
     {
         var sb = new StringBuilder();
