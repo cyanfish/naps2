@@ -42,4 +42,16 @@ public class LayoutRoot : LayoutElement
             child.AddTo(layout);
         }
     }
+
+    public override void DoLayout(LayoutContext context, RectangleF bounds)
+    {
+        if (_children.Length != 1) throw new InvalidOperationException();
+        _children[0].DoLayout(context, bounds);
+    }
+
+    public override SizeF GetPreferredSize(LayoutContext context, RectangleF parentBounds)
+    {
+        if (_children.Length != 1) throw new InvalidOperationException();
+        return _children[0].GetPreferredSize(context, parentBounds);
+    }
 }

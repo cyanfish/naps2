@@ -34,4 +34,21 @@ public class MacEtoPlatform : EtoPlatform
         // TODO
         return image;
     }
+
+    public override void SetFrame(Control container, Control control, Point location, Size size)
+    {
+        var rect = new CGRect(location.X, container.Height - location.Y - size.Height, size.Width, size.Height);
+        var view = control.ToNative();
+        view.Frame = view.GetFrameForAlignmentRect(rect);
+    }
+
+    public override Control CreateContainer()
+    {
+        return new NSView().ToEto();
+    }
+
+    public override void AddToContainer(Control container, Control control)
+    {
+        container.ToNative().AddSubview(control.ToNative());
+    }
 }

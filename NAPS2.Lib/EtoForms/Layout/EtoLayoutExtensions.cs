@@ -72,8 +72,8 @@ public static class EtoLayoutExtensions
         new ControlWithLayoutAttributes(control, padding: new Padding(all));
     public static ControlWithLayoutAttributes Padding(this Control control, int left = 0, int top = 0, int right = 0, int bottom = 0) =>
         new ControlWithLayoutAttributes(control, padding: new Padding(left, top, right, bottom));
-    public static ControlWithLayoutAttributes Spacing(this Control control, Size spacing) =>
-        new ControlWithLayoutAttributes(control, spacing: spacing);
+    public static ControlWithLayoutAttributes Spacing(this Control control) =>
+        new ControlWithLayoutAttributes(control);
         
     public static ControlWithLayoutAttributes Width(this ControlWithLayoutAttributes control, int width) =>
         new ControlWithLayoutAttributes(control, width: width);
@@ -93,8 +93,6 @@ public static class EtoLayoutExtensions
         new ControlWithLayoutAttributes(control, padding: new Padding(all));
     public static ControlWithLayoutAttributes Padding(this ControlWithLayoutAttributes control, int left = 0, int top = 0, int right = 0, int bottom = 0) =>
         new ControlWithLayoutAttributes(control, padding: new Padding(left, top, right, bottom));
-    public static ControlWithLayoutAttributes Spacing(this ControlWithLayoutAttributes control, Size spacing) =>
-        new ControlWithLayoutAttributes(control, spacing: spacing);
         
     public static LayoutColumn Padding(this LayoutColumn column, Padding padding) =>
         new LayoutColumn(column, padding: padding);
@@ -102,10 +100,8 @@ public static class EtoLayoutExtensions
         new LayoutColumn(column, padding: new Padding(all));
     public static LayoutColumn Padding(this LayoutColumn column, int left = 0, int top = 0, int right = 0, int bottom = 0) =>
         new LayoutColumn(column, padding: new Padding(left, top, right, bottom));
-    public static LayoutColumn Spacing(this LayoutColumn column, Size spacing) =>
+    public static LayoutColumn Spacing(this LayoutColumn column, int spacing) =>
         new LayoutColumn(column, spacing: spacing);
-    public static LayoutColumn Spacing(this LayoutColumn column, int xSpacing, int ySpacing) =>
-        new LayoutColumn(column, spacing: new Size(xSpacing, ySpacing));
     public static LayoutColumn XScale(this LayoutColumn column) =>
         new LayoutColumn(column, xScale: true);
     public static LayoutColumn YScale(this LayoutColumn column) =>

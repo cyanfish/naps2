@@ -128,7 +128,8 @@ public class ProfilesForm : EtoDialogBase
 
     private void BuildLayout()
     {
-        Content = L.Column(
+        var layoutController = new LayoutController();
+        layoutController.Content = L.Column(
             L.Row(
                 _listView.Control.XScale(),
                 C.Button(_scanCommand, Icons.control_play_blue.ToEtoImage(), ButtonImagePosition.Above).AutoSize()
@@ -140,11 +141,12 @@ public class ProfilesForm : EtoDialogBase
                         C.Button(_addCommand, ButtonImagePosition.Left),
                         C.Button(_editCommand, ButtonImagePosition.Left),
                         C.Button(_deleteCommand, ButtonImagePosition.Left),
-                        C.ZeroSpace()
+                        C.ZeroSpace().XScale()
                     )
                 ),
                 C.Button(UiStrings.Done, Close)
             ).Aligned());
+        layoutController.Bind(this);
     }
 
     public Action<ProcessedImage>? ImageCallback { get; set; }

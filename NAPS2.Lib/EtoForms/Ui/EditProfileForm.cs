@@ -101,7 +101,8 @@ public class EditProfileForm : EtoDialogBase
         _advanced.Click += Advanced_Click;
         _deviceName.KeyDown += DeviceName_KeyDown;
 
-        Content = L.Root(L.Column(
+        var layoutController = new LayoutController();
+        layoutController.Content = L.Column(
             L.Row(
                 L.Column(
                     C.Label(UiStrings.DisplayNameLabel),
@@ -118,8 +119,8 @@ public class EditProfileForm : EtoDialogBase
                 new ImageView { Image = Icons.scanner_48.ToEtoImage() }
             ),
             L.Row(
-                _predefinedSettings.XScale(),
-                _nativeUi.XScale()
+                _predefinedSettings,
+                _nativeUi
             ),
             L.Row(
                 L.Column(
@@ -134,7 +135,7 @@ public class EditProfileForm : EtoDialogBase
                         _brightnessSlider.XScale(),
                         _brightnessText.Width(40)
                     )
-                ).XScale(),
+                ),
                 L.Column(
                     C.Label(UiStrings.BitDepthLabel),
                     _bitDepth,
@@ -147,11 +148,12 @@ public class EditProfileForm : EtoDialogBase
                         _contrastSlider.XScale(),
                         _contrastText.Width(40)
                     )
-                ).XScale()
+                )
             ),
             L.Row(
                 _enableAutoSave,
-                _autoSaveSettings
+                _autoSaveSettings,
+                C.ZeroSpace().XScale()
             ),
             C.ZeroSpace().YScale(),
             L.Row(
@@ -160,7 +162,8 @@ public class EditProfileForm : EtoDialogBase
                 _ok,
                 _cancel
             )
-        ));
+        );
+        layoutController.Bind(this);
     }
 
 

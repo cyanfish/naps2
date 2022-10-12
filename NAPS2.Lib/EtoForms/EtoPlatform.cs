@@ -17,4 +17,7 @@ public abstract class EtoPlatform
     public abstract void ConfigureImageButton(Button button);
     public abstract Bitmap ToBitmap(IMemoryImage image);
     public abstract IMemoryImage DrawHourglass(ImageContext imageContext, IMemoryImage thumb);
+    public abstract void SetFrame(Control container, Control control, Point location, Size size);
+    public abstract Control CreateContainer();
+    public abstract void AddToContainer(Control container, Control control);
 }

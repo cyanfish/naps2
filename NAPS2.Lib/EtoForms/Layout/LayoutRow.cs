@@ -1,25 +1,26 @@
+using Eto.Drawing;
 using Eto.Forms;
 
 namespace NAPS2.EtoForms.Layout;
 
-public class LayoutRow : LayoutElement
+public class LayoutRow : LayoutLine<LayoutRow, LayoutColumn>
 {
-    private readonly LayoutElement[] _children;
-
     public LayoutRow(LayoutElement[] children)
     {
-        _children = children;
+        Children = children;
     }
-        
-    public LayoutRow(LayoutRow original, bool? yScale = null, bool? aligned = null)
+
+    public LayoutRow(LayoutRow original, Padding? padding = null, int? spacing = null, bool? yScale = null,
+        bool? aligned = null)
     {
-        _children = original._children;
+        Children = original.Children;
+        Padding = padding ?? original.Padding;
+        Spacing = spacing ?? original.Spacing;
         YScale = yScale ?? original.YScale;
         Aligned = aligned ?? original.Aligned;
     }
 
-    private bool YScale { get; }
-    private bool Aligned { get; }
+    private Padding? Padding { get; }
 
     public override void AddTo(DynamicLayout layout)
     {
@@ -28,7 +29,7 @@ public class LayoutRow : LayoutElement
             layout.BeginVertical();
         }
         layout.BeginHorizontal(yscale: YScale);
-        foreach (var child in _children)
+        foreach (var child in Children)
         {
             child.AddTo(layout);
         }
@@ -38,4 +39,23 @@ public class LayoutRow : LayoutElement
             layout.EndVertical();
         }
     }
+
+    protected override PointF UpdatePosition(PointF position, float delta)
+    {
+        position.X += delta;
+        return position;
+    }
+
+    protected override SizeF UpdateTotalSize(SizeF size, SizeF childSize, int spacing)
+    {
+        size.Width += childSize.Width + spacing;
+        size.Height = Math.Max(size.Height, childSize.Height);
+        return size;
+    }
+
+    protected internal override bool DoesChildScale(LayoutElement child) => child.XScale;
+
+    protected override float GetBreadth(SizeF size) => size.Height;
+    protected override float GetLength(SizeF size) => size.Width;
+    protected override SizeF GetSize(float length, float breadth) => new(length, breadth);
 }
