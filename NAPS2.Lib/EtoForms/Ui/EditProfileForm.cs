@@ -135,7 +135,7 @@ public class EditProfileForm : EtoDialogBase
                         _brightnessSlider.XScale(),
                         _brightnessText.Width(40)
                     )
-                ),
+                ).XScale(),
                 L.Column(
                     C.Label(UiStrings.BitDepthLabel),
                     _bitDepth,
@@ -148,7 +148,7 @@ public class EditProfileForm : EtoDialogBase
                         _contrastSlider.XScale(),
                         _contrastText.Width(40)
                     )
-                )
+                ).XScale()
             ),
             L.Row(
                 _enableAutoSave,

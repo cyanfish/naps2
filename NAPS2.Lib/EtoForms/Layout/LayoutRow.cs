@@ -3,7 +3,7 @@ using Eto.Forms;
 
 namespace NAPS2.EtoForms.Layout;
 
-public class LayoutRow : LayoutLine<LayoutRow, LayoutColumn>
+public class LayoutRow : LayoutLine<LayoutColumn>
 {
     public LayoutRow(LayoutElement[] children)
     {

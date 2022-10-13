@@ -67,6 +67,11 @@ public class ControlWithLayoutAttributes : LayoutElement
 
     public override void DoLayout(LayoutContext context, RectangleF bounds)
     {
+        if (DEBUG_LAYOUT)
+        {
+            var text = Control is TextControl txt ? $"\"{txt.Text}\" " : "";
+            Debug.WriteLine($"{new string(' ', context.Depth)}{text} layout with bounds {bounds}");
+        }
         if (Control != null)
         {
             var location = new PointF(bounds.X + Padding.Left, bounds.Y + Padding.Right);

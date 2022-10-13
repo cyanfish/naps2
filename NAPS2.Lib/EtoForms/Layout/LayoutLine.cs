@@ -2,8 +2,12 @@ using Eto.Drawing;
 
 namespace NAPS2.EtoForms.Layout;
 
-public abstract class LayoutLine<TLine, TOpposite> : LayoutContainer
-    where TLine : LayoutContainer where TOpposite : LayoutContainer
+/// <summary>
+/// Abstract base class for LayoutColumn and LayoutRow. We use this class to generalize column and row layout logic.
+/// </summary>
+/// <typeparam name="TOrthogonal">The orthogonal type (e.g. LayoutRow if this is LayoutColumn).</typeparam>
+public abstract class LayoutLine<TOrthogonal> : LayoutContainer
+    where TOrthogonal : LayoutContainer
 {
     protected int? Spacing { get; init; }
 
@@ -13,6 +17,10 @@ public abstract class LayoutLine<TLine, TOpposite> : LayoutContainer
 
     public override void DoLayout(LayoutContext context, RectangleF bounds)
     {
+        if (DEBUG_LAYOUT)
+        {
+            Debug.WriteLine($"{new string(' ', context.Depth)}{GetType().Name} layout with bounds {bounds}");
+        }
         var childContext = GetChildContext(context, bounds);
         var cellLengths = Aligned ? context.CellLengths : null;
         var cellScaling = Aligned ? context.CellScaling : null;
@@ -29,26 +37,36 @@ public abstract class LayoutLine<TLine, TOpposite> : LayoutContainer
 
         var spacing = Spacing ?? context.DefaultSpacing;
 
-        var excess = GetLength(bounds.Size) - cellLengths.Sum() - spacing * (Children.Length - 1);
         var scaleCount = cellScaling.Count(scales => scales);
-        var scaleAmount = Math.DivRem((int) excess, scaleCount == 0 ? Children.Length : scaleCount, out int scaleExtra);
+        if (scaleCount > 0)
+        {
+            // If no controls scale, then they will all take up their preferred length.
+            // If some controls scale, then we take [excess = remaining space + length of all scaling controls],
+            // and divide that evenly among all scaling controls so they all have equal length.
+            var excess = GetLength(bounds.Size) - spacing * (Children.Length - 1);
+            for (int i = 0; i < Children.Length; i++)
+            {
+                if (!cellScaling[i])
+                {
+                    excess -= cellLengths[i];
+                }
+            }
+            // Update the lengths of scaling controls
+            var scaleAmount = Math.DivRem((int) excess, scaleCount, out int scaleExtra);
+            for (int i = 0; i < Children.Length; i++)
+            {
+                if (cellScaling[i])
+                {
+                    cellLengths[i] = scaleAmount + (scaleExtra-- > 0 ? 1 : 0);
+                }
+            }
+        }
 
         var cellOrigin = bounds.Location;
         for (int i = 0; i < Children.Length; i++)
         {
-            var child = Children[i];
-            var length = cellLengths[i];
-            if (cellScaling[i] || scaleCount == 0)
-            {
-                length += scaleAmount;
-                if (scaleExtra > 0)
-                {
-                    length++;
-                    scaleExtra--;
-                }
-            }
-            var cellSize = GetSize(length, GetBreadth(bounds.Size));
-            child.DoLayout(childContext, new RectangleF(cellOrigin, cellSize));
+            var cellSize = GetSize(cellLengths[i], GetBreadth(bounds.Size));
+            Children[i].DoLayout(childContext, new RectangleF(cellOrigin, cellSize));
             cellOrigin = UpdatePosition(cellOrigin, GetLength(cellSize) + spacing);
         }
     }
@@ -82,7 +100,7 @@ public abstract class LayoutLine<TLine, TOpposite> : LayoutContainer
         var cellLengths = new List<float>();
         foreach (var child in Children)
         {
-            if (child is TOpposite { Aligned: true } opposite)
+            if (child is TOrthogonal { Aligned: true } opposite)
             {
                 for (int i = 0; i < opposite.Children.Length; i++)
                 {
@@ -101,7 +119,7 @@ public abstract class LayoutLine<TLine, TOpposite> : LayoutContainer
         var cellScaling = new List<bool>();
         foreach (var child in Children)
         {
-            if (child is TOpposite { Aligned: true } opposite)
+            if (child is TOrthogonal { Aligned: true } opposite)
             {
                 for (int i = 0; i < opposite.Children.Length; i++)
                 {

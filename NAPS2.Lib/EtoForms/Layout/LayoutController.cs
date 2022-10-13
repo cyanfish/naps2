@@ -49,6 +49,10 @@ public class LayoutController
         _firstLayout = false;
         int p = RootPadding;
         var bounds = new Rectangle(p, p, size.Width - 2 * p, size.Height - 2 * p);
+        if (LayoutElement.DEBUG_LAYOUT)
+        {
+            Debug.WriteLine("\n(((Starting layout)))");
+        }
         _content.DoLayout(context, bounds);
     }
 }
