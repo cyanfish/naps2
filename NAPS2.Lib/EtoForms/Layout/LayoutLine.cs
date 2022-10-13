@@ -31,7 +31,7 @@ public abstract class LayoutLine<TLine, TOpposite> : LayoutContainer
 
         var excess = GetLength(bounds.Size) - cellLengths.Sum() - spacing * (Children.Length - 1);
         var scaleCount = cellScaling.Count(scales => scales);
-        var (scaleAmount, scaleExtra) = Math.DivRem((int) excess, scaleCount == 0 ? Children.Length : scaleCount);
+        var scaleAmount = Math.DivRem((int) excess, scaleCount == 0 ? Children.Length : scaleCount, out int scaleExtra);
 
         var cellOrigin = bounds.Location;
         for (int i = 0; i < Children.Length; i++)

@@ -34,13 +34,6 @@ public class MacDesktopForm : DesktopForm
         _thumbnailController.Oversample = 2.0;
     }
 
-    protected override void SetContent(Control content)
-    {
-        var scrollView = new NSScrollView();
-        scrollView.DocumentView = content.ToNative();
-        Content = scrollView.ToEto();
-    }
-
     protected override void OnLoad(EventArgs e)
     {
         // TODO: What's the best place to initialize this? It needs to happen from the UI event loop.

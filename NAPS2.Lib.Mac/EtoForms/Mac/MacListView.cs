@@ -6,6 +6,7 @@ public class MacListView<T> : NSCollectionViewDelegateFlowLayout, IListView<T> w
 {
     private readonly ListViewBehavior<T> _behavior;
     private readonly NSCollectionView _view = new();
+    private readonly NSScrollView _scrollView = new();
     private readonly NSCollectionViewFlowLayout _layout;
     private readonly ListViewDataSource<T> _dataSource;
 
@@ -15,18 +16,23 @@ public class MacListView<T> : NSCollectionViewDelegateFlowLayout, IListView<T> w
     public MacListView(ListViewBehavior<T> behavior)
     {
         _behavior = behavior;
-        _layout = new LeftFlowLayout
+        _layout = new CustomFlowLayout
         {
-            SectionInset = new NSEdgeInsets(20, 20, 20, 20),
-            MinimumInteritemSpacing = 15,
-            MinimumLineSpacing = 15
+            SectionInset = behavior.ShowLabels
+                ? new NSEdgeInsets(5, 5, 5, 5)
+                : new NSEdgeInsets(20, 20, 20, 20),
+            MinimumInteritemSpacing = behavior.ShowLabels ? 5 : 15,
+            MinimumLineSpacing = behavior.ShowLabels ? 5 : 15,
+            TopAlign = behavior.ShowLabels,
+            LeftGravity = false // TODO: I prefer this true, but it glitches out selection
         };
         _dataSource = new ListViewDataSource<T>(this, _behavior);
         _view.DataSource = _dataSource;
         _view.Delegate = this;
         _view.CollectionViewLayout = _layout;
         _view.Selectable = true;
-        _view.AllowsMultipleSelection = true;
+        _view.AllowsMultipleSelection = behavior.MultiSelect;
+        _scrollView.DocumentView = _view;
     }
 
     public int ImageSize
@@ -49,7 +55,7 @@ public class MacListView<T> : NSCollectionViewDelegateFlowLayout, IListView<T> w
         e.Effects = _behavior.GetDropEffect(e.Data);
     }
 
-    public Control Control => _view.ToEto();
+    public Control Control => _scrollView.ToEto();
 
     public event EventHandler? SelectionChanged;
 
@@ -120,16 +126,28 @@ public class MacListView<T> : NSCollectionViewDelegateFlowLayout, IListView<T> w
         SelectionChanged?.Invoke(this, EventArgs.Empty);
     }
 
-    public override void ItemsChanged(NSCollectionView collectionView, NSSet indexPaths, NSCollectionViewItemHighlightState highlightState)
+    public override void ItemsChanged(NSCollectionView collectionView, NSSet indexPaths,
+        NSCollectionViewItemHighlightState highlightState)
     {
         UpdateViewSelection();
     }
 
-    public override CGSize SizeForItem(NSCollectionView collectionView, NSCollectionViewLayout collectionViewLayout, NSIndexPath indexPath)
+    public override CGSize SizeForItem(NSCollectionView collectionView, NSCollectionViewLayout collectionViewLayout,
+        NSIndexPath indexPath)
     {
         var item = _dataSource.Items[(int) indexPath.Item];
-        var size = _behavior.GetImage(item, ImageSize).Size;
-        var max = (double) Math.Max(size.Width, size.Height);
-        return new CGSize(size.Width * ImageSize / max, size.Height * ImageSize / max);
+        if (_behavior.ShowLabels)
+        {
+            using var image = _behavior.GetImage(item, ImageSize);
+            using var listItem = new ListViewItem(image, _behavior.GetLabel(item));
+            listItem.LoadView();
+            return listItem.View.FittingSize;
+        }
+        else
+        {
+            var size = _behavior.GetImage(item, ImageSize).Size;
+            var max = (double) Math.Max(size.Width, size.Height);
+            return new CGSize(size.Width * ImageSize / max, size.Height * ImageSize / max);
+        }
     }
 }

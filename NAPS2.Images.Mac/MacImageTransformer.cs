@@ -9,9 +9,7 @@ public class MacImageTransformer : AbstractImageTransformer<MacImage>
     protected override MacImage PerformTransform(MacImage image, RotationTransform transform)
     {
         MacImage newImage;
-        var pixelFormat = image.PixelFormat is ImagePixelFormat.ARGB32 or ImagePixelFormat.RGB24
-            ? ImagePixelFormat.ARGB32
-            : ImagePixelFormat.Gray8;
+        var pixelFormat = GetDrawingPixelFormat(image);
         if (transform.Angle > 45.0 && transform.Angle < 135.0 || transform.Angle > 225.0 && transform.Angle < 315.0)
         {
             newImage = (MacImage) ImageContext.Create(image.Height, image.Width, pixelFormat);
@@ -42,41 +40,36 @@ public class MacImageTransformer : AbstractImageTransformer<MacImage>
     {
         var width = (int) Math.Round(image.Width * transform.ScaleFactor);
         var height = (int) Math.Round(image.Height * transform.ScaleFactor);
-        var pixelFormat = image.PixelFormat switch
-        {
-            ImagePixelFormat.BW1 or ImagePixelFormat.Gray8 => ImagePixelFormat.Gray8,
-            ImagePixelFormat.RGB24 => ImagePixelFormat.ARGB32,
-            ImagePixelFormat.ARGB32 => ImagePixelFormat.ARGB32,
-            _ => throw new ArgumentException("Unsupported pixel format")
-        };
+        return DoScale(image, width, height, GetDrawingPixelFormat(image));
+    }
+
+    protected override MacImage PerformTransform(MacImage image, ThumbnailTransform transform)
+    {
+        var (_, _, width, height) = transform.GetDrawRect(image.Width, image.Height);
+        return DoScale(image, width, height, GetDrawingPixelFormat(image));
+    }
+
+    private MacImage DoScale(MacImage image, int width, int height, ImagePixelFormat pixelFormat)
+    {
         var newImage = (MacImage) ImageContext.Create(width, height, pixelFormat);
         newImage.SetResolution(
             image.HorizontalResolution * image.Width / width,
             image.VerticalResolution * image.Height / height);
         using CGBitmapContext c = MacBitmapHelper.CreateContext(newImage);
         CGRect rect = new CGRect(0, 0, width, height);
+        // TODO: This changes the image size to match the original which we probably don't want.
         c.DrawImage(rect, image.Rep.AsCGImage(ref rect, null, null));
         return newImage;
     }
 
-    // TODO: Fix tests for mac (as thumbnail rendering is now platform-specific in result)
-    protected override MacImage PerformTransform(MacImage image, ThumbnailTransform transform)
+    private static ImagePixelFormat GetDrawingPixelFormat(MacImage image)
     {
-        var pixelFormat = image.PixelFormat switch
+        return image.PixelFormat switch
         {
             ImagePixelFormat.BW1 or ImagePixelFormat.Gray8 => ImagePixelFormat.Gray8,
-            ImagePixelFormat.RGB24 => ImagePixelFormat.ARGB32,
+            ImagePixelFormat.RGB24 => ImagePixelFormat.RGB24,
             ImagePixelFormat.ARGB32 => ImagePixelFormat.ARGB32,
             _ => throw new ArgumentException("Unsupported pixel format")
         };
-        var (_, _, width, height) = transform.GetDrawRect(image.Width, image.Height);
-        var newImage = (MacImage) ImageContext.Create(width, height, pixelFormat);
-        newImage.SetResolution(
-            image.HorizontalResolution * image.Width / width,
-            image.VerticalResolution * image.Height / height);
-        using CGBitmapContext c = MacBitmapHelper.CreateContext(newImage);
-        CGRect rect = new CGRect(0, 0, width, height);
-        c.DrawImage(rect, image.Rep.AsCGImage(ref rect, null, null));
-        return newImage;
     }
 }

@@ -21,6 +21,8 @@ public class ListViewDataSource<T> : NSCollectionViewDataSource where T : notnul
     public override NSCollectionViewItem GetItem(NSCollectionView collectionView, NSIndexPath indexPath)
     {
         var i = (int) indexPath.Item;
-        return new ListViewItem(_behavior.GetImage(Items[i], _listView.ImageSize));
+        var image = _behavior.GetImage(Items[i], _listView.ImageSize);
+        var label = _behavior.ShowLabels ? _behavior.GetLabel(Items[i]) : null;
+        return new ListViewItem(image, label);
     }
 }

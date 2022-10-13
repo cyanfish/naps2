@@ -60,8 +60,7 @@ internal static class MacBitmapHelper
 
     public static CGBitmapContext CreateContext(MacImage image)
     {
-        // TODO: We probably want to support PixelFormat=RGB24 here provided the actual rep is 32 bits (with alpha=none)
-        if (image.PixelFormat is not (ImagePixelFormat.Gray8 or ImagePixelFormat.ARGB32))
+        if (image.PixelFormat is not (ImagePixelFormat.Gray8 or ImagePixelFormat.RGB24 or ImagePixelFormat.ARGB32))
         {
             // Only some formats supported for drawing, see "Pixel formats supported for bitmap graphics contexts"
             // https://developer.apple.com/library/archive/documentation/GraphicsImaging/Conceptual/drawingwithquartz2d/dq_context/dq_context.html#//apple_ref/doc/uid/TP30001066-CH203-BCIBHHBB

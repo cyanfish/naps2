@@ -25,6 +25,9 @@ public class MacEtoPlatform : EtoPlatform
 
     public override Bitmap ToBitmap(IMemoryImage image)
     {
+        // TODO: This is kind of busted in terms of image size.
+        // Eto seems to use NsImage.Size instead of Rep.PixelsWide/High.
+        // That can be incorrect (see MacImageTransformer.DoScale).
         var nsImage = ((MacImage) image).NsImage;
         return new Bitmap(new BitmapHandler(nsImage));
     }
