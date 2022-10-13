@@ -52,7 +52,7 @@ public class EditProfileForm : EtoDialogBase
         _profileNameTracker = profileNameTracker;
         Title = UiStrings.EditProfileFormTitle;
         Icon = new Icon(1f, Icons.blueprints_small.ToEtoImage());
-        Size = new Size(448, 478);
+        EtoPlatform.Current.SetFormSize(this, new Size(448, 478));
         MinimumSize = new Size(448, 478);
         Resizable = true;
 

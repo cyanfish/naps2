@@ -25,4 +25,14 @@ public abstract class EtoPlatform
     {
         return control.GetPreferredSize(availableSpace);
     }
+
+    public virtual Size GetFormSize(Window window)
+    {
+        return window.Size;
+    }
+
+    public virtual void SetFormSize(Window window, Size size)
+    {
+        window.Size = size;
+    }
 }

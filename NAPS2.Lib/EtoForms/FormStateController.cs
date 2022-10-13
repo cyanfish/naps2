@@ -60,7 +60,7 @@ public class FormStateController : IFormStateController
         }
         if (!size.IsEmpty)
         {
-            _window.Size = size;
+            EtoPlatform.Current.SetFormSize(_window, size);
         }
         if (_formState.Maximized)
         {
@@ -75,7 +75,8 @@ public class FormStateController : IFormStateController
             _formState.Maximized = (_window.WindowState == WindowState.Maximized);
             if (_window.WindowState == WindowState.Normal)
             {
-                _formState.Size = new FormState.FormSize(_window.Size.Width, _window.Size.Height);
+                var size = EtoPlatform.Current.GetFormSize(_window);
+                _formState.Size = new FormState.FormSize(size.Width, size.Height);
             }
         }
     }

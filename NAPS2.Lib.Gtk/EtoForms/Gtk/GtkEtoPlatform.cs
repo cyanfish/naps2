@@ -3,6 +3,7 @@ using Eto.Forms;
 using Eto.GtkSharp.Drawing;
 using NAPS2.Images.Gtk;
 using GtkFixed = Gtk.Fixed;
+using GtkWindow = Gtk.Window;
 
 namespace NAPS2.EtoForms.Gtk;
 
@@ -51,5 +52,18 @@ public class GtkEtoPlatform : EtoPlatform
     {
         var fixedContainer = (GtkFixed) container.ToNative();
         fixedContainer.Add(control.ToNative());
+    }
+
+    public override Size GetFormSize(Window window)
+    {
+        var native = (GtkWindow) window.ToNative();
+        native.GetSize(out int w, out int h);
+        return new Size(w, h);
+    }
+
+    public override void SetFormSize(Window window, Size size)
+    {
+        var native = (GtkWindow) window.ToNative();
+        native.SetDefaultSize(size.Width, size.Height);
     }
 }

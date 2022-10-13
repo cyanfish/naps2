@@ -38,7 +38,7 @@ public class ProfilesForm : EtoDialogBase
 
         Title = UiStrings.ProfilesFormTitle;
         Icon = new Icon(1f, Icons.blueprints_small.ToEtoImage());
-        Size = new Size(700, 200);
+        EtoPlatform.Current.SetFormSize(this, new Size(700, 200));
         MinimumSize = new Size(600, 180);
         Resizable = true;
 
