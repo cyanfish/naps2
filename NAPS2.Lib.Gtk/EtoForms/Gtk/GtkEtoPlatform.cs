@@ -2,6 +2,7 @@ using Eto.Drawing;
 using Eto.Forms;
 using Eto.GtkSharp.Drawing;
 using NAPS2.Images.Gtk;
+using GtkFixed = Gtk.Fixed;
 
 namespace NAPS2.EtoForms.Gtk;
 
@@ -32,5 +33,23 @@ public class GtkEtoPlatform : EtoPlatform
     {
         // TODO
         return image;
+    }
+
+    public override void SetFrame(Control container, Control control, Point location, Size size)
+    {
+        var fixedContainer = (GtkFixed) container.ToNative();
+        fixedContainer.Move(control.ToNative(), location.X, location.Y);
+        control.ToNative().SetSizeRequest(size.Width, size.Height);
+    }
+
+    public override Control CreateContainer()
+    {
+        return new GtkFixed().ToEto();
+    }
+
+    public override void AddToContainer(Control container, Control control)
+    {
+        var fixedContainer = (GtkFixed) container.ToNative();
+        fixedContainer.Add(control.ToNative());
     }
 }

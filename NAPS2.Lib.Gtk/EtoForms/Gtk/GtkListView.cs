@@ -36,6 +36,7 @@ public class GtkListView<T> : IListView<T> where T : notnull
         }
         _flowBox.SelectedChildrenChanged += FlowBoxSelectionChanged;
         _scrolledWindow.Add(_flowBox);
+        _scrolledWindow.StyleContext.AddClass("listview");
     }
 
     public int ImageSize { get; set; }
@@ -78,10 +79,17 @@ public class GtkListView<T> : IListView<T> where T : notnull
         {
             _flowBox.Remove(widget);
         }
+        _entries.Clear();
         foreach (var item in items)
         {
             var widget = GetItemWidget(item);
             _flowBox.Add(widget);
+            _entries.Add(new Entry
+            {
+                Index = _entries.Count,
+                Item = item,
+                Widget = widget
+            });
         }
         SetSelectedItems();
         _refreshing = false;

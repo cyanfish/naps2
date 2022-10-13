@@ -44,7 +44,7 @@ public class GtkDesktopForm : DesktopForm
             .desktop-toolbar .image-button { min-width: 50px; padding-left: 0; padding-right: 0; }
             .desktop-toolbar .toggle { min-width: 0; padding-left: 0; padding-right: 0; }
             .desktop-toolbar { border-bottom: 1px solid #ddd; }
-            .desktop-listview .frame { background-color: #fff; }
+            .listview .frame { background-color: #fff; }
             .desktop-listview .listview-item image { border: 1px solid #000; }
         ");
         StyleContext.AddProviderForScreen(Gdk.Screen.Default, cssProvider, 800);
