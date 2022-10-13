@@ -370,8 +370,25 @@ internal class TwainSessionScanRunner
         }
 
         // Resolution
-        source.Capabilities.ICapXResolution.SetValue(_options.Dpi);
-        source.Capabilities.ICapYResolution.SetValue(_options.Dpi);
+        SetClosest(source.Capabilities.ICapXResolution, _options.Dpi);
+        SetClosest(source.Capabilities.ICapYResolution, _options.Dpi);
+    }
+
+    private void SetClosest(ICapWrapper<TWFix32> cap, int value)
+    {
+        if (!cap.CanGet)
+        {
+            cap.SetValue(value);
+            return;
+        }
+        var possibleValues = cap.GetValues().ToList();
+        if (possibleValues.Count == 0)
+        {
+            cap.SetValue(value);
+            return;
+        }
+        var closest = possibleValues.OrderBy(v => Math.Abs(v - value)).First();
+        cap.SetValue(closest);
     }
 }
 #endif
