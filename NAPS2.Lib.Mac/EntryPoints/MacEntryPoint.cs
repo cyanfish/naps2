@@ -23,6 +23,7 @@ public static class MacEntryPoint
         // Set up basic application configuration
         kernel.Get<CultureHelper>().SetCulturesFromConfig();
         TaskScheduler.UnobservedTaskException += UnhandledTaskException;
+        Trace.Listeners.Add(new ConsoleTraceListener());
 
         // Show the main form
         var application = new Application(Platforms.macOS);

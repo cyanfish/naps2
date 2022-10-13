@@ -41,14 +41,18 @@ public class LayoutController
         if (_window == null || _content == null) throw new InvalidOperationException();
         // TODO: Handle added/removed things
         var size = _window.ClientSize;
+        int p = RootPadding;
+        var bounds = new Rectangle(p, p, size.Width - 2 * p, size.Height - 2 * p);
+        if (bounds.Width < 0 || bounds.Height < 0)
+        {
+            return;
+        }
         var context = new LayoutContext(_layout)
         {
             DefaultSpacing = DefaultSpacing,
             IsFirstLayout = _firstLayout
         };
         _firstLayout = false;
-        int p = RootPadding;
-        var bounds = new Rectangle(p, p, size.Width - 2 * p, size.Height - 2 * p);
         if (LayoutElement.DEBUG_LAYOUT)
         {
             Debug.WriteLine("\n(((Starting layout)))");

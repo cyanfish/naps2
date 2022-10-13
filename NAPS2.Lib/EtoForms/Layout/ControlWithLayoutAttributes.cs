@@ -5,7 +5,7 @@ namespace NAPS2.EtoForms.Layout;
 
 public class ControlWithLayoutAttributes : LayoutElement
 {
-    private Size? _originalSize;
+    private bool _isAdded;
 
     public ControlWithLayoutAttributes(Control? control)
     {
@@ -76,10 +76,7 @@ public class ControlWithLayoutAttributes : LayoutElement
         {
             var location = new PointF(bounds.X + Padding.Left, bounds.Y + Padding.Right);
             var size = new SizeF(bounds.Width - Padding.Horizontal, bounds.Height - Padding.Vertical);
-            if (context.IsFirstLayout)
-            {
-                EtoPlatform.Current.AddToContainer(context.Layout, Control);
-            }
+            EnsureIsAdded(context);
             EtoPlatform.Current.SetFrame(context.Layout, Control, Point.Round(location), Size.Round(size));
         }
     }
@@ -89,17 +86,18 @@ public class ControlWithLayoutAttributes : LayoutElement
         var size = SizeF.Empty;
         if (Control != null)
         {
+            EnsureIsAdded(context);
             size = EtoPlatform.Current.GetPreferredSize(Control, parentBounds.Size);
         }
         return new SizeF(size.Width + Padding.Horizontal, size.Height + Padding.Vertical);
     }
 
-    public Size OriginalSize
+    private void EnsureIsAdded(LayoutContext context)
     {
-        get
+        if (context.IsFirstLayout && !_isAdded)
         {
-            _originalSize ??= Control?.Size ?? Size.Empty;
-            return _originalSize.Value;
+            EtoPlatform.Current.AddToContainer(context.Layout, Control);
+            _isAdded = true;
         }
     }
 }

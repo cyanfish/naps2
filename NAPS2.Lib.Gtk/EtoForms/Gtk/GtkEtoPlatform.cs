@@ -66,4 +66,10 @@ public class GtkEtoPlatform : EtoPlatform
         var native = (GtkWindow) window.ToNative();
         native.SetDefaultSize(size.Width, size.Height);
     }
+
+    public override SizeF GetPreferredSize(Control control, SizeF availableSpace)
+    {
+        control.ToNative().ShowAll();
+        return base.GetPreferredSize(control, availableSpace);
+    }
 }
