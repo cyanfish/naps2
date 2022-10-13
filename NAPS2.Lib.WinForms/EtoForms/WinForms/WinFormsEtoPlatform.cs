@@ -1,11 +1,11 @@
 using System.Drawing.Imaging;
-using System.Windows.Forms;
 using Eto.Drawing;
 using Eto.Forms;
 using Eto.WinForms;
 using Eto.WinForms.Forms.Controls;
 using NAPS2.Images.Gdi;
 using sd = System.Drawing;
+using wf = System.Windows.Forms;
 
 namespace NAPS2.EtoForms.WinForms;
 
@@ -22,8 +22,8 @@ public class WinFormsEtoPlatform : EtoPlatform
         button.MinimumSize = MinImageButtonSize;
         if (button.ImagePosition == ButtonImagePosition.Left)
         {
-            var native = (System.Windows.Forms.Button) button.ToNative();
-            native.TextImageRelation = TextImageRelation.Overlay;
+            var native = (wf.Button) button.ToNative();
+            native.TextImageRelation = wf.TextImageRelation.Overlay;
             native.ImageAlign = sd.ContentAlignment.MiddleLeft;
             native.TextAlign = sd.ContentAlignment.MiddleRight;
 
@@ -67,5 +67,30 @@ public class WinFormsEtoPlatform : EtoPlatform
         }
         image.Dispose();
         return new GdiImage(imageContext, bitmap);
+    }
+
+    public override void SetFrame(Control container, Control control, Point location, Size size)
+    {
+        var native = control.ToNative();
+        native.Location = new sd.Point(location.X, location.Y);
+        native.AutoSize = false;
+        native.Size = new sd.Size(size.Width, size.Height);
+    }
+
+    public override SizeF GetPreferredSize(Control control, SizeF availableSpace)
+    {
+        return SizeF.Max(
+            base.GetPreferredSize(control, availableSpace),
+            control.ToNative().PreferredSize.ToEto());
+    }
+
+    public override Control CreateContainer()
+    {
+        return new wf.Panel().ToEto();
+    }
+
+    public override void AddToContainer(Control container, Control control)
+    {
+        container.ToNative().Controls.Add(control.ToNative());
     }
 }

@@ -10,6 +10,7 @@ public abstract class EtoDialogBase : Dialog, IFormBase
     {
         Config = config;
         FormStateController = new FormStateController(this, config);
+        ShowInTaskbar = true;
     }
 
     public IFormStateController FormStateController { get; }

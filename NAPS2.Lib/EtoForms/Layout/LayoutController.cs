@@ -32,6 +32,7 @@ public class LayoutController
         if (_window != null) throw new InvalidOperationException();
         _window = window;
         window.Content = _layout;
+        window.Shown += (_, _) => DoLayout();
         window.SizeChanged += (_, _) => DoLayout();
     }
 

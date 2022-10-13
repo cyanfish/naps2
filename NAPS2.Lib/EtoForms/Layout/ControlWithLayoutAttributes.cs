@@ -81,11 +81,11 @@ public class ControlWithLayoutAttributes : LayoutElement
 
     public override SizeF GetPreferredSize(LayoutContext context, RectangleF parentBounds)
     {
+        var size = SizeF.Empty;
         if (Control != null)
         {
-            Control.Size = OriginalSize;
+            size = EtoPlatform.Current.GetPreferredSize(Control, parentBounds.Size);
         }
-        var size = Control?.GetPreferredSize(parentBounds.Size) ?? SizeF.Empty;
         return new SizeF(size.Width + Padding.Horizontal, size.Height + Padding.Vertical);
     }
 

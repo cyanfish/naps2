@@ -20,4 +20,9 @@ public abstract class EtoPlatform
     public abstract void SetFrame(Control container, Control control, Point location, Size size);
     public abstract Control CreateContainer();
     public abstract void AddToContainer(Control container, Control control);
+
+    public virtual SizeF GetPreferredSize(Control control, SizeF availableSpace)
+    {
+        return control.GetPreferredSize(availableSpace);
+    }
 }
