@@ -30,4 +30,9 @@ public abstract class EtoPlatform
     {
         window.Size = size;
     }
+
+    public virtual SizeF GetPreferredSize(Control control, SizeF availableSpace)
+    {
+        return control.GetPreferredSize(availableSpace);
+    }
 }

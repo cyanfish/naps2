@@ -87,7 +87,7 @@ public class ControlWithLayoutAttributes : LayoutElement
         if (Control != null)
         {
             EnsureIsAdded(context);
-            size = Control.GetPreferredSize(parentBounds.Size);
+            size = EtoPlatform.Current.GetPreferredSize(Control, parentBounds.Size);
         }
         return new SizeF(size.Width + Padding.Horizontal, size.Height + Padding.Vertical);
     }
