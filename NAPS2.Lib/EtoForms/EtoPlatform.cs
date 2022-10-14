@@ -21,11 +21,6 @@ public abstract class EtoPlatform
     public abstract Control CreateContainer();
     public abstract void AddToContainer(Control container, Control control);
 
-    public virtual SizeF GetPreferredSize(Control control, SizeF availableSpace)
-    {
-        return control.GetPreferredSize(availableSpace);
-    }
-
     public virtual Size GetFormSize(Window window)
     {
         return window.Size;

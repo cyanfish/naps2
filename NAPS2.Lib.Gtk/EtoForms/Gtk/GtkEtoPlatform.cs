@@ -51,25 +51,21 @@ public class GtkEtoPlatform : EtoPlatform
     public override void AddToContainer(Control container, Control control)
     {
         var fixedContainer = (GtkFixed) container.ToNative();
-        fixedContainer.Add(control.ToNative());
+        var widget = control.ToNative();
+        fixedContainer.Add(widget);
+        widget.ShowAll();
     }
 
     public override Size GetFormSize(Window window)
     {
-        var native = (GtkWindow) window.ToNative();
-        native.GetSize(out int w, out int h);
+        var gtkWindow = (GtkWindow) window.ToNative();
+        gtkWindow.GetSize(out int w, out int h);
         return new Size(w, h);
     }
 
     public override void SetFormSize(Window window, Size size)
     {
-        var native = (GtkWindow) window.ToNative();
-        native.SetDefaultSize(size.Width, size.Height);
-    }
-
-    public override SizeF GetPreferredSize(Control control, SizeF availableSpace)
-    {
-        control.ToNative().ShowAll();
-        return base.GetPreferredSize(control, availableSpace);
+        var gtkWindow = (GtkWindow) window.ToNative();
+        gtkWindow.SetDefaultSize(size.Width, size.Height);
     }
 }
