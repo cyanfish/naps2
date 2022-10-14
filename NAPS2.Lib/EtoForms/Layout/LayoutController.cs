@@ -36,6 +36,15 @@ public class LayoutController
         window.SizeChanged += (_, _) => DoLayout();
     }
 
+    public Size GetNaturalSize()
+    {
+        if (_content == null) throw new InvalidOperationException();
+        var bounds = new RectangleF(0, 0, int.MaxValue, int.MaxValue);
+        var contentSize = _content.GetPreferredSize(GetLayoutContext(), bounds);
+        var padding = new SizeF(RootPadding * 2, RootPadding * 2);
+        return Size.Ceiling(contentSize + padding);
+    }
+
     private void DoLayout()
     {
         if (_window == null || _content == null) throw new InvalidOperationException();
@@ -47,16 +56,21 @@ public class LayoutController
         {
             return;
         }
-        var context = new LayoutContext(_layout)
-        {
-            DefaultSpacing = DefaultSpacing,
-            IsFirstLayout = _firstLayout
-        };
+        var context = GetLayoutContext();
         _firstLayout = false;
         if (LayoutElement.DEBUG_LAYOUT)
         {
             Debug.WriteLine("\n(((Starting layout)))");
         }
         _content.DoLayout(context, bounds);
+    }
+
+    private LayoutContext GetLayoutContext()
+    {
+        return new LayoutContext(_layout)
+        {
+            DefaultSpacing = DefaultSpacing,
+            IsFirstLayout = _firstLayout
+        };
     }
 }

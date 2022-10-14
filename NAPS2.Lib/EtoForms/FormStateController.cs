@@ -9,6 +9,7 @@ public class FormStateController : IFormStateController
     private readonly Naps2Config _config;
     private FormState? _formState;
     private bool _loaded;
+    private bool _hasSetSize;
 
     public FormStateController(Window window, Naps2Config config)
     {
@@ -17,12 +18,17 @@ public class FormStateController : IFormStateController
         window.SizeChanged += OnResize;
         window.LocationChanged += OnMove;
         window.PreLoad += OnLoadInternal;
+        window.Shown += OnShownInternal;
         window.Closed += OnClosed;
     }
 
     public bool SaveFormState { get; set; } = true;
 
     public bool RestoreFormState { get; set; } = true;
+
+    public Size MinimumClientSize { get; set; }
+
+    public Size DefaultClientSize { get; set; }
 
     public string FormName => _window.GetType().Name;
 
@@ -38,7 +44,20 @@ public class FormStateController : IFormStateController
         {
             DoRestoreFormState();
         }
+        if (!_hasSetSize && !DefaultClientSize.IsEmpty)
+        {
+            _window.ClientSize = DefaultClientSize;
+        }
         _loaded = true;
+    }
+
+    private void OnShownInternal(object sender, EventArgs e)
+    {
+        if (!MinimumClientSize.IsEmpty)
+        {
+            var windowDecorationSize = _window.Size - _window.ClientSize;
+            _window.MinimumSize = MinimumClientSize + windowDecorationSize;
+        }
     }
 
     protected void DoRestoreFormState()
@@ -61,6 +80,7 @@ public class FormStateController : IFormStateController
         if (!size.IsEmpty)
         {
             EtoPlatform.Current.SetFormSize(_window, size);
+            _hasSetSize = true;
         }
         if (_formState.Maximized)
         {

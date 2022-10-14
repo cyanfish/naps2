@@ -38,8 +38,6 @@ public class ProfilesForm : EtoDialogBase
 
         Title = UiStrings.ProfilesFormTitle;
         Icon = new Icon(1f, Icons.blueprints_small.ToEtoImage());
-        EtoPlatform.Current.SetFormSize(this, new Size(700, 200));
-        MinimumSize = new Size(600, 180);
         Resizable = true;
 
         // TODO: Do this only in WinForms (?)
@@ -146,6 +144,11 @@ public class ProfilesForm : EtoDialogBase
                 ),
                 C.Button(UiStrings.Done, Close)
             ).Aligned());
+        var naturalSize = layoutController.GetNaturalSize();
+        var buffer = new Size(200, 0);
+        FormStateController.MinimumClientSize = naturalSize;
+        FormStateController.DefaultClientSize = naturalSize + buffer;
+        // FormStateController.RestoreFormState = false;
         layoutController.Bind(this);
     }
 

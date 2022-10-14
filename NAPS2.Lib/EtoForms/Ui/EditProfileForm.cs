@@ -52,8 +52,6 @@ public class EditProfileForm : EtoDialogBase
         _profileNameTracker = profileNameTracker;
         Title = UiStrings.EditProfileFormTitle;
         Icon = new Icon(1f, Icons.blueprints_small.ToEtoImage());
-        EtoPlatform.Current.SetFormSize(this, new Size(448, 478));
-        MinimumSize = new Size(448, 478);
         Resizable = true;
 
         _wiaDriver = new RadioButton { Text = UiStrings.WiaDriver };
@@ -163,6 +161,11 @@ public class EditProfileForm : EtoDialogBase
                 _cancel
             )
         );
+        var naturalSize = layoutController.GetNaturalSize();
+        var buffer = new Size(130, 0);
+        FormStateController.MinimumClientSize = naturalSize;
+        FormStateController.DefaultClientSize = naturalSize + buffer;
+        FormStateController.RestoreFormState = false;
         layoutController.Bind(this);
     }
 
