@@ -76,6 +76,7 @@ public class ControlWithLayoutAttributes : LayoutElement
         {
             var location = new PointF(bounds.X + Padding.Left, bounds.Y + Padding.Right);
             var size = new SizeF(bounds.Width - Padding.Horizontal, bounds.Height - Padding.Vertical);
+            size = SizeF.Max(SizeF.Empty, size);
             EnsureIsAdded(context);
             EtoPlatform.Current.SetFrame(context.Layout, Control, Point.Round(location), Size.Round(size));
         }

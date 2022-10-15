@@ -161,12 +161,12 @@ public class EditProfileForm : EtoDialogBase
                 _cancel
             )
         );
+        layoutController.Bind(this);
         var naturalSize = layoutController.GetNaturalSize();
         var buffer = new Size(130, 0);
         FormStateController.MinimumClientSize = naturalSize;
         FormStateController.DefaultClientSize = naturalSize + buffer;
         FormStateController.RestoreFormState = false;
-        layoutController.Bind(this);
     }
 
 

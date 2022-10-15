@@ -144,12 +144,12 @@ public class ProfilesForm : EtoDialogBase
                 ),
                 C.Button(UiStrings.Done, Close)
             ).Aligned());
+        layoutController.Bind(this);
         var naturalSize = layoutController.GetNaturalSize();
         var buffer = new Size(200, 0);
         FormStateController.MinimumClientSize = naturalSize;
         FormStateController.DefaultClientSize = naturalSize + buffer;
-        // FormStateController.RestoreFormState = false;
-        layoutController.Bind(this);
+        FormStateController.RestoreFormState = false;
     }
 
     public Action<ProcessedImage>? ImageCallback { get; set; }
