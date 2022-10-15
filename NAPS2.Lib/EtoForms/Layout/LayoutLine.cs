@@ -22,45 +22,10 @@ public abstract class LayoutLine<TOrthogonal> : LayoutContainer
             Debug.WriteLine($"{new string(' ', context.Depth)}{GetType().Name} layout with bounds {bounds}");
         }
         var childContext = GetChildContext(context, bounds);
-        var cellLengths = Aligned ? context.CellLengths : null;
-        var cellScaling = Aligned ? context.CellScaling : null;
-        if (cellLengths == null || cellScaling == null)
-        {
-            cellLengths = new List<float>();
-            cellScaling = new List<bool>();
-            foreach (var child in Children)
-            {
-                cellLengths.Add(GetLength(child.GetPreferredSize(childContext, bounds)));
-                cellScaling.Add(DoesChildScale(child));
-            }
-        }
+        GetInitialCellLengthsAndScaling(context, childContext, bounds, out var cellLengths, out var cellScaling);
 
         var spacing = Spacing ?? context.DefaultSpacing;
-
-        var scaleCount = cellScaling.Count(scales => scales);
-        if (scaleCount > 0)
-        {
-            // If no controls scale, then they will all take up their preferred length.
-            // If some controls scale, then we take [excess = remaining space + length of all scaling controls],
-            // and divide that evenly among all scaling controls so they all have equal length.
-            var excess = GetLength(bounds.Size) - spacing * (Children.Length - 1);
-            for (int i = 0; i < Children.Length; i++)
-            {
-                if (!cellScaling[i])
-                {
-                    excess -= cellLengths[i];
-                }
-            }
-            // Update the lengths of scaling controls
-            var scaleAmount = Math.DivRem((int) excess, scaleCount, out int scaleExtra);
-            for (int i = 0; i < Children.Length; i++)
-            {
-                if (cellScaling[i])
-                {
-                    cellLengths[i] = scaleAmount + (scaleExtra-- > 0 ? 1 : 0);
-                }
-            }
-        }
+        UpdateCellLengthsForAvailableSpace(cellLengths, cellScaling, bounds, spacing);
 
         var cellOrigin = bounds.Location;
         for (int i = 0; i < Children.Length; i++)
@@ -75,11 +40,14 @@ public abstract class LayoutLine<TOrthogonal> : LayoutContainer
     {
         var childContext = GetChildContext(context, parentBounds);
         var size = SizeF.Empty;
+        GetInitialCellLengthsAndScaling(context, childContext, parentBounds, out var cellLengths, out var cellScaling);
+        UpdateCellLengthsWithPreferredLength(cellLengths, cellScaling);
         var spacing = Spacing ?? context.DefaultSpacing;
-        foreach (var child in Children)
+        for (int i = 0; i < Children.Length; i++)
         {
-            var childSize = child.GetPreferredSize(childContext, parentBounds);
-            size = UpdateTotalSize(size, childSize, spacing);
+            var childSize = Children[i].GetPreferredSize(childContext, parentBounds);
+            var childLayoutSize = GetSize(cellLengths[i], GetBreadth(childSize));
+            size = UpdateTotalSize(size, childLayoutSize, spacing);
         }
         size = UpdateTotalSize(size, SizeF.Empty, -spacing);
         return size;
@@ -89,13 +57,89 @@ public abstract class LayoutLine<TOrthogonal> : LayoutContainer
     {
         return context with
         {
-            CellLengths = GetCellLengths(context, bounds),
-            CellScaling = GetCellScaling(),
+            CellLengths = GetChildCellLengths(context, bounds),
+            CellScaling = GetChildCellScaling(),
             Depth = context.Depth + 1
         };
     }
 
-    private List<float> GetCellLengths(LayoutContext context, RectangleF bounds)
+    private void GetInitialCellLengthsAndScaling(LayoutContext context, LayoutContext childContext, RectangleF bounds,
+        out List<float> cellLengths, out List<bool> cellScaling)
+    {
+        // If this line is supposed to be aligned with adjacent lines (e.g. 2 rows in a parent column or vice versa),
+        // then our parent will have pre-calculated our cell sizes and scaling for us.
+        cellLengths = Aligned ? context.CellLengths : null;
+        cellScaling = Aligned ? context.CellScaling : null;
+        // If we aren't aligned or we don't have a parent to do that pre-calculation, then we just determine our cell
+        // sizes and scaling directly without any special alignment constraints.
+        if (cellLengths == null || cellScaling == null)
+        {
+            cellLengths = new List<float>();
+            cellScaling = new List<bool>();
+            foreach (var child in Children)
+            {
+                cellLengths.Add(GetLength(child.GetPreferredSize(childContext, bounds)));
+                cellScaling.Add(DoesChildScale(child));
+            }
+        }
+    }
+
+    private void UpdateCellLengthsWithPreferredLength(List<float> cellLengths, List<bool> cellScaling)
+    {
+        if (!cellScaling.Any(scales => scales))
+        {
+            return;
+        }
+        // If multiple cells scale, then they will end up with the same length. Therefore, the biggest initial length
+        // defines the preferred length for all scaled cells.
+        float maxScaledLength = 0;
+        for (int i = 0; i < cellLengths.Count; i++)
+        {
+            if (cellScaling[i])
+            {
+                maxScaledLength = Math.Max(maxScaledLength, cellLengths[i]);
+            }
+        }
+        for (int i = 0; i < cellLengths.Count; i++)
+        {
+            if (cellScaling[i])
+            {
+                cellLengths[i] = maxScaledLength;
+            }
+        }
+    }
+
+    private void UpdateCellLengthsForAvailableSpace(List<float> cellLengths, List<bool> cellScaling, RectangleF bounds,
+        int spacing)
+    {
+        var scaleCount = cellScaling.Count(scales => scales);
+        if (scaleCount == 0)
+        {
+            return;
+        }
+        // If no controls scale, then they will all take up their preferred length.
+        // If some controls scale, then we take [excess = remaining space + length of all scaling controls],
+        // and divide that evenly among all scaling controls so they all have equal length.
+        var excess = GetLength(bounds.Size) - spacing * (Children.Length - 1);
+        for (int i = 0; i < Children.Length; i++)
+        {
+            if (!cellScaling[i])
+            {
+                excess -= cellLengths[i];
+            }
+        }
+        // Update the lengths of scaling controls
+        var scaleAmount = Math.DivRem((int) excess, scaleCount, out int scaleExtra);
+        for (int i = 0; i < Children.Length; i++)
+        {
+            if (cellScaling[i])
+            {
+                cellLengths[i] = scaleAmount + (scaleExtra-- > 0 ? 1 : 0);
+            }
+        }
+    }
+
+    private List<float> GetChildCellLengths(LayoutContext context, RectangleF bounds)
     {
         var cellLengths = new List<float>();
         foreach (var child in Children)
@@ -114,7 +158,7 @@ public abstract class LayoutLine<TOrthogonal> : LayoutContainer
         return cellLengths;
     }
 
-    private List<bool> GetCellScaling()
+    private List<bool> GetChildCellScaling()
     {
         var cellScaling = new List<bool>();
         foreach (var child in Children)
