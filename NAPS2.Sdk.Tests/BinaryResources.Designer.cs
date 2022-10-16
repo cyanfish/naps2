@@ -138,15 +138,5 @@ namespace NAPS2.Sdk.Tests {
                 return ((byte[])(obj));
             }
         }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
-        /// </summary>
-        internal static byte[] tesseract_x64 {
-            get {
-                object obj = ResourceManager.GetObject("tesseract_x64", resourceCulture);
-                return ((byte[])(obj));
-            }
-        }
     }
 }

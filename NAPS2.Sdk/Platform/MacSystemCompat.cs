@@ -38,7 +38,7 @@ public class MacSystemCompat : ISystemCompat
         }
     }
 
-    public string? TesseractExecutableName => null;
+    public string TesseractExecutableName => "tesseract";
 
     public string PdfiumLibraryName => "libpdfium.dylib";
 

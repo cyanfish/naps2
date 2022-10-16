@@ -24,7 +24,10 @@
     <Import Project="..\NAPS2.Setup\SdkUsers.targets" />
 
     <ItemGroup>
+        <PackageReference Include="NAPS2.Tesseract.Binaries" Version="0.2.0" />
+
         <ProjectReference Include="..\NAPS2.Lib.Gtk\NAPS2.Lib.Gtk.csproj" />
+
         <PackageReference Include="Eto.Platform.Gtk" Version="2.7.1" />
     </ItemGroup>
 

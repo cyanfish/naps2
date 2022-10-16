@@ -2,6 +2,7 @@
 using NAPS2.ImportExport.Pdf;
 using NAPS2.Ocr;
 using NAPS2.Scan;
+using NAPS2.Unmanaged;
 
 namespace NAPS2.Sdk.Tests;
 
@@ -52,15 +53,9 @@ public class ContextualTests : IDisposable
         Directory.CreateDirectory(best);
         var fast = Path.Combine(FolderPath, "fast");
         Directory.CreateDirectory(fast);
-        
-        var tesseractPath = CopyResourceToFile(BinaryResources.tesseract_x64, FolderPath, "tesseract.exe");
-#if NET6_0_OR_GREATER
-        if (OperatingSystem.IsMacOS() || OperatingSystem.IsLinux())
-        {
-            // TODO: We should try and not rely on tesseract being installed on the system
-            tesseractPath = "tesseract";
-        }
-#endif
+
+        var testRoot = Environment.GetEnvironmentVariable("NAPS2_TEST_ROOT");
+        var tesseractPath = NativeLibrary.FindPath(PlatformCompat.System.TesseractExecutableName, testRoot);
         CopyResourceToFile(BinaryResources.eng_traineddata, fast, "eng.traineddata");
         CopyResourceToFile(BinaryResources.heb_traineddata, fast, "heb.traineddata");
         ScanningContext.OcrEngine = new TesseractOcrEngine(tesseractPath, FolderPath, FolderPath);

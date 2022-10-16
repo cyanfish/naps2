@@ -20,7 +20,7 @@ public interface ISystemCompat
 
     string[] LibrarySearchPaths { get; }
 
-    string? TesseractExecutableName { get; }
+    string TesseractExecutableName { get; }
 
     string PdfiumLibraryName { get; }
 

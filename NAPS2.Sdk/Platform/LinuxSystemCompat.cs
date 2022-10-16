@@ -25,7 +25,7 @@ public class LinuxSystemCompat : ISystemCompat
 
     public string[] LibrarySearchPaths => new[] { "_linux" };
 
-    public string? TesseractExecutableName => null;
+    public string TesseractExecutableName => "tesseract";
 
     public string PdfiumLibraryName => "libpdfium.so";
 

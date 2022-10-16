@@ -118,9 +118,6 @@
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
     <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-    <data name="tesseract_x64" type="System.Resources.ResXFileRef, System.Windows.Forms">
-        <value>..\NAPS2.Setup\lib\win64\tesseract.exe;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-    </data>
     <data name="eng_traineddata" type="System.Resources.ResXFileRef, System.Windows.Forms">
         <value>Resources\eng.traineddata;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </data>
