@@ -99,8 +99,8 @@ public class EditProfileForm : EtoDialogBase
         _advanced.Click += Advanced_Click;
         _deviceName.KeyDown += DeviceName_KeyDown;
 
-        var layoutController = new LayoutController();
-        layoutController.Content = L.Column(
+        FormStateController.DefaultExtraLayoutSize = new Size(60, 0);
+        LayoutController.Content = L.Column(
             L.Row(
                 L.Column(
                     C.Label(UiStrings.DisplayNameLabel),
@@ -163,12 +163,6 @@ public class EditProfileForm : EtoDialogBase
                 _cancel
             )
         );
-        layoutController.Bind(this);
-        var naturalSize = layoutController.GetNaturalSize();
-        var buffer = new Size(130, 0);
-        FormStateController.MinimumClientSize = naturalSize;
-        FormStateController.DefaultClientSize = naturalSize + buffer;
-        FormStateController.RestoreFormState = true;
     }
 
     public bool Result => _result;

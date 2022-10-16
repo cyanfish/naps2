@@ -143,7 +143,7 @@ public class WinFormsDesktopForm : DesktopForm
         wfContent.Dock = wf.DockStyle.Fill;
         _container.ContentPanel.Controls.Add(wfContent);
 
-        Content = _container.ToEto();
+        LayoutController.Content = _container.ToEto();
     }
 
     protected override void AfterLayout()

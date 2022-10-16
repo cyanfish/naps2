@@ -37,48 +37,47 @@ public class AboutForm : EtoDialogBase
         _checkForUpdates = new CheckBox { Text = UiStrings.CheckForUpdates };
         _checkForUpdates.CheckedChanged += CheckForUpdatesChanged;
         _updatePanel = new Panel();
-            
-        BuildLayout();
+
         UpdateControls();
+        BuildLayout();
     }
 
     private void BuildLayout()
     {
-        Content = L.Root(
-            L.Row(
-                L.Column(new ImageView { Image = Icons.scanner_128.ToEtoImage() }).Padding(right: 4),
-                L.Column(
-                    C.NoWrap(AssemblyHelper.Product),
-                    L.Row(
-                        L.Column(
-                            C.NoWrap(string.Format(MiscResources.Version, AssemblyHelper.Version)),
-                            C.Link(NAPS2_HOMEPAGE)
-                        ),
-                        L.Column(
-                            C.ZeroSpace().YScale(),
-                            _donateButton
-                        ).Padding(left: 10)
+        LayoutController.DefaultSpacing = 2;
+        LayoutController.Content = L.Row(
+            L.Column(new ImageView { Image = Icons.scanner_128.ToEtoImage() }).Padding(right: 4),
+            L.Column(
+                C.NoWrap(AssemblyHelper.Product),
+                L.Row(
+                    L.Column(
+                        C.NoWrap(string.Format(MiscResources.Version, AssemblyHelper.Version)),
+                        C.Link(NAPS2_HOMEPAGE)
                     ),
-                    C.TextSpace(),
-                    _checkForUpdates.AutoSize().Padding(left: 4),
-                    _updatePanel,
-                    C.TextSpace(),
-                    C.NoWrap(UiStrings.Copyright),
-                    C.TextSpace(),
-                    L.Row(
-                        L.Column(
-                            C.NoWrap(UiStrings.IconsFrom),
-                            C.Link(ICONS_HOMEPAGE)
-                        ).XScale(),
-                        L.Column(
-                            C.ZeroSpace().YScale(),
-                            C.Button(UiStrings.OK, Close)
-                        ).Padding(left: 20)
-                    ),
-                    C.ZeroSpace()
-                )
+                    L.Column(
+                        C.ZeroSpace().YScale(),
+                        _donateButton
+                    ).Padding(left: 10)
+                ),
+                C.TextSpace(),
+                _checkForUpdates.AutoSize().Padding(left: 4),
+                _updatePanel,
+                C.TextSpace(),
+                C.NoWrap(UiStrings.Copyright),
+                C.TextSpace(),
+                L.Row(
+                    L.Column(
+                        C.NoWrap(UiStrings.IconsFrom),
+                        C.Link(ICONS_HOMEPAGE)
+                    ).XScale(),
+                    L.Column(
+                        C.ZeroSpace().YScale(),
+                        C.Button(UiStrings.OK, Close)
+                    ).Padding(left: 20)
+                ),
+                C.ZeroSpace()
             )
-        ).DefaultSpacing(2);
+        );
     }
         
     private void DoUpdateCheck()

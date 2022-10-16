@@ -126,8 +126,8 @@ public class ProfilesForm : EtoDialogBase
 
     private void BuildLayout()
     {
-        var layoutController = new LayoutController();
-        layoutController.Content = L.Column(
+        FormStateController.DefaultExtraLayoutSize = new Size(200, 0);
+        LayoutController.Content = L.Column(
             L.Row(
                 _listView.Control.XScale(),
                 C.Button(_scanCommand, Icons.control_play_blue.ToEtoImage(), ButtonImagePosition.Above).AutoSize()
@@ -144,12 +144,6 @@ public class ProfilesForm : EtoDialogBase
                 ),
                 C.Button(UiStrings.Done, Close)
             ).Aligned());
-        layoutController.Bind(this);
-        var naturalSize = layoutController.GetNaturalSize();
-        var buffer = new Size(200, 0);
-        FormStateController.MinimumClientSize = naturalSize;
-        FormStateController.DefaultClientSize = naturalSize + buffer;
-        FormStateController.RestoreFormState = false;
     }
 
     public Action<ProcessedImage>? ImageCallback { get; set; }

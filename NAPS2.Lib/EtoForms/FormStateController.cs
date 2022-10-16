@@ -1,5 +1,6 @@
 using Eto.Drawing;
 using Eto.Forms;
+using NAPS2.EtoForms.Layout;
 
 namespace NAPS2.EtoForms;
 
@@ -10,6 +11,8 @@ public class FormStateController : IFormStateController
     private FormState? _formState;
     private bool _loaded;
     private bool _hasSetSize;
+    private Size _defaultClientSize;
+    private Size _minimumClientSize;
 
     public FormStateController(Window window, Naps2Config config)
     {
@@ -26,11 +29,21 @@ public class FormStateController : IFormStateController
 
     public bool RestoreFormState { get; set; } = true;
 
-    public Size MinimumClientSize { get; set; }
+    public bool AutoLayoutSize { get; set; } = true;
 
-    public Size DefaultClientSize { get; set; }
+    public Size DefaultExtraLayoutSize { get; set; }
 
     public string FormName => _window.GetType().Name;
+
+    public void UpdateLayoutSize(LayoutController layoutController)
+    {
+        if (AutoLayoutSize)
+        {
+            var naturalSize = layoutController.GetNaturalSize();
+            _minimumClientSize = naturalSize;
+            _defaultClientSize = naturalSize + DefaultExtraLayoutSize;
+        }
+    }
 
     private void OnLoadInternal(object? sender, EventArgs eventArgs)
     {
@@ -44,18 +57,18 @@ public class FormStateController : IFormStateController
         {
             DoRestoreFormState();
         }
-        if (!_hasSetSize && !DefaultClientSize.IsEmpty)
+        if (!_hasSetSize && !_defaultClientSize.IsEmpty)
         {
-            EtoPlatform.Current.SetClientSize(_window, DefaultClientSize);
+            EtoPlatform.Current.SetClientSize(_window, _defaultClientSize);
         }
         _loaded = true;
     }
 
     private void OnShownInternal(object sender, EventArgs e)
     {
-        if (!MinimumClientSize.IsEmpty)
+        if (!_minimumClientSize.IsEmpty)
         {
-            EtoPlatform.Current.SetMinimumClientSize(_window, MinimumClientSize);
+            EtoPlatform.Current.SetMinimumClientSize(_window, _minimumClientSize);
         }
     }
 

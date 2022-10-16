@@ -1,4 +1,5 @@
 using Eto.Forms;
+using NAPS2.EtoForms.Layout;
 
 namespace NAPS2.EtoForms;
 
@@ -10,9 +11,13 @@ public abstract class EtoFormBase : Form, IFormBase
     {
         Config = config;
         FormStateController = new FormStateController(this, config);
+        LayoutController.Bind(this);
+        LayoutController.ContentSet += (_, _) => FormStateController.UpdateLayoutSize(LayoutController);
     }
 
     public IFormStateController FormStateController { get; }
+
+    public LayoutController LayoutController { get; } = new();
 
     public IFormFactory FormFactory
     {

@@ -72,7 +72,7 @@ public class ControlWithLayoutAttributes : LayoutElement
         if (DEBUG_LAYOUT)
         {
             var text = Control is TextControl txt ? $"\"{txt.Text}\" " : "";
-            Debug.WriteLine($"{new string(' ', context.Depth)}{text} layout with bounds {bounds}");
+            Debug.WriteLine($"{new string(' ', context.Depth)}{text}{Control?.GetType().Name ?? "ZeroSpace"} layout with bounds {bounds}");
         }
         bounds.Size = UpdateFixedDimensions(bounds.Size);
         if (Control != null)

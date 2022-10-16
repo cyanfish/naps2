@@ -77,6 +77,7 @@ public abstract class DesktopForm : EtoFormBase
         _listView.SelectionChanged += ListViewSelectionChanged;
         _imageListSyncer?.Dispose();
 
+        LayoutController.RootPadding = 0;
         SetContent(_listView.Control);
         AfterLayout();
 
@@ -271,7 +272,7 @@ public abstract class DesktopForm : EtoFormBase
 
     protected virtual void SetContent(Control content)
     {
-        Content = content;
+        LayoutController.Content = content;
     }
 
     // // protected override void OnLoad(EventArgs args) => PostInitializeComponent();

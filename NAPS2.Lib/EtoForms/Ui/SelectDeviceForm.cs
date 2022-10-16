@@ -11,6 +11,7 @@ public class SelectDeviceForm : EtoDialogBase
 
     public SelectDeviceForm(Naps2Config config) : base(config)
     {
+        Resizable = true;
         FormStateController.SaveFormState = false;
         FormStateController.RestoreFormState = false;
 
@@ -31,8 +32,8 @@ public class SelectDeviceForm : EtoDialogBase
         cancelButton.Click += Cancel_Click;
 
         Title = UiStrings.SelectSource;
-        Size = new Size(330, 170);
-        Content = L.Root(
+        FormStateController.DefaultExtraLayoutSize = new Size(50, 0);
+        LayoutController.Content = L.Root(
             L.Row(
                 _devices.XScale(),
                 L.Column(

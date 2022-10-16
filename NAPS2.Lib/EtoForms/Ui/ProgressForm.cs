@@ -26,15 +26,14 @@ public class ProgressForm : EtoDialogBase
 
         Size = new Size();
 
-        Content = L.Root(L.Column(
-                _status,
-                _progressBar.Size(420, 40),
-                L.Row(
-                    _numeric,
-                    C.ZeroSpace().XScale(),
-                    _runInBg,
-                    _cancel
-                )
+        LayoutController.Content = L.Column(
+            _status,
+            _progressBar.Size(420, 40),
+            L.Row(
+                _numeric,
+                C.ZeroSpace().XScale(),
+                _runInBg,
+                _cancel
             )
         );
     }
