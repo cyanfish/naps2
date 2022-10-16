@@ -13,6 +13,8 @@ public class MacEtoPlatform : EtoPlatform
     private const int MIN_BUTTON_HEIGHT = 32;
     private const int IMAGE_PADDING = 5;
 
+    public override bool IsMac => true;
+
     public override Application CreateApplication()
     {
         return new Application(Platforms.macOS);

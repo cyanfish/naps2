@@ -70,6 +70,8 @@ public static class EtoLayoutExtensions
         new ControlWithLayoutAttributes(control, alignment: LayoutAlignment.Leading);
     public static ControlWithLayoutAttributes AlignTrailing(this Control control) =>
         new ControlWithLayoutAttributes(control, alignment: LayoutAlignment.Trailing);
+    public static ControlWithLayoutAttributes Align(this Control control, LayoutAlignment alignment) =>
+        new ControlWithLayoutAttributes(control, alignment: alignment);
     public static ControlWithLayoutAttributes AutoSize(this Control control) =>
         new ControlWithLayoutAttributes(control, autoSize: true);
     public static ControlWithLayoutAttributes Padding(this Control control, Padding padding) =>
@@ -97,6 +99,8 @@ public static class EtoLayoutExtensions
         new ControlWithLayoutAttributes(control, alignment: LayoutAlignment.Leading);
     public static ControlWithLayoutAttributes AlignTrailing(this ControlWithLayoutAttributes control) =>
         new ControlWithLayoutAttributes(control, alignment: LayoutAlignment.Trailing);
+    public static ControlWithLayoutAttributes Align(this ControlWithLayoutAttributes control, LayoutAlignment alignment) =>
+        new ControlWithLayoutAttributes(control, alignment: alignment);
     public static ControlWithLayoutAttributes AutoSize(this ControlWithLayoutAttributes control) =>
         new ControlWithLayoutAttributes(control, autoSize: true);
     public static ControlWithLayoutAttributes Padding(this ControlWithLayoutAttributes control, Padding padding) =>

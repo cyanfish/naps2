@@ -14,6 +14,8 @@ public class WinFormsEtoPlatform : EtoPlatform
     private static readonly Size MinImageButtonSize = new(75, 32);
     private const int IMAGE_PADDING = 5;
 
+    public override bool IsWinForms => true;
+
     public override Application CreateApplication()
     {
         wf.Application.EnableVisualStyles();

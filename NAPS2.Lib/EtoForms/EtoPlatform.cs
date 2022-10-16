@@ -13,6 +13,10 @@ public abstract class EtoPlatform
         set => _current = value ?? throw new ArgumentNullException(nameof(value));
     }
 
+    public virtual bool IsGtk => false;
+    public virtual bool IsMac => false;
+    public virtual bool IsWinForms => false;
+
     public abstract Application CreateApplication();
     public abstract IListView<T> CreateListView<T>(ListViewBehavior<T> behavior) where T : notnull;
     public abstract void ConfigureImageButton(Button button);

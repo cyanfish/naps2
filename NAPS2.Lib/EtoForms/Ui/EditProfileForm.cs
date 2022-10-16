@@ -131,7 +131,8 @@ public class EditProfileForm : EtoDialogBase
                     C.Label(UiStrings.BrightnessLabel),
                     L.Row(
                         _brightnessSlider.XScale(),
-                        _brightnessText.Width(50).AlignCenter()
+                        _brightnessText.Width(EtoPlatform.Current.IsGtk ? 50 : 40)
+                            .Align(EtoPlatform.Current.IsWinForms ? LayoutAlignment.Leading : LayoutAlignment.Center)
                     )
                 ).XScale(),
                 L.Column(
@@ -144,7 +145,8 @@ public class EditProfileForm : EtoDialogBase
                     C.Label(UiStrings.ContrastLabel),
                     L.Row(
                         _contrastSlider.XScale(),
-                        _contrastText.Width(50).AlignCenter()
+                        _contrastText.Width(EtoPlatform.Current.IsGtk ? 50 : 40)
+                            .Align(EtoPlatform.Current.IsWinForms ? LayoutAlignment.Leading : LayoutAlignment.Center)
                     )
                 ).XScale()
             ),

@@ -5,7 +5,7 @@ namespace NAPS2.EtoForms.Layout;
 
 public abstract class LayoutElement
 {
-    internal const bool DEBUG_LAYOUT = false;
+    internal const bool DEBUG_LAYOUT = true;
 
     protected internal bool XScale { get; set; }
     protected internal bool YScale { get; set; }
