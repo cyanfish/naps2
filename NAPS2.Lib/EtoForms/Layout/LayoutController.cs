@@ -49,7 +49,7 @@ public class LayoutController
     {
         if (_window == null || _content == null) throw new InvalidOperationException();
         // TODO: Handle added/removed things
-        var size = _window.ClientSize;
+        var size = EtoPlatform.Current.GetClientSize(_window);
         int p = RootPadding;
         var bounds = new Rectangle(p, p, size.Width - 2 * p, size.Height - 2 * p);
         if (bounds.Width < 0 || bounds.Height < 0)

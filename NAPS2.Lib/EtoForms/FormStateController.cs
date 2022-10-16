@@ -46,7 +46,7 @@ public class FormStateController : IFormStateController
         }
         if (!_hasSetSize && !DefaultClientSize.IsEmpty)
         {
-            _window.ClientSize = DefaultClientSize;
+            EtoPlatform.Current.SetClientSize(_window, DefaultClientSize);
         }
         _loaded = true;
     }
@@ -55,8 +55,7 @@ public class FormStateController : IFormStateController
     {
         if (!MinimumClientSize.IsEmpty)
         {
-            var windowDecorationSize = _window.Size - _window.ClientSize;
-            _window.MinimumSize = MinimumClientSize + windowDecorationSize;
+            EtoPlatform.Current.SetMinimumClientSize(_window, MinimumClientSize);
         }
     }
 
@@ -74,6 +73,7 @@ public class FormStateController : IFormStateController
             {
                 // Only move to the specified location if it's onscreen
                 // It might be offscreen if the user has disconnected a monitor
+                // TODO: Make this platform-specific to avoid drift?
                 _window.Location = location;
             }
         }

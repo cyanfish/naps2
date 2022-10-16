@@ -1,3 +1,5 @@
+using System.Reflection;
+using Eto;
 using Eto.Drawing;
 using Eto.Forms;
 using Eto.GtkSharp.Drawing;
@@ -39,7 +41,8 @@ public class GtkEtoPlatform : EtoPlatform
     public override void SetFrame(Control container, Control control, Point location, Size size)
     {
         var fixedContainer = (GtkFixed) container.ToNative();
-        fixedContainer.Move(control.ToNative(), location.X, location.Y);
+        fixedContainer.GetAllocatedSize(out var allocation, out _);
+        fixedContainer.Move(control.ToNative(), location.X - allocation.Left, location.Y - allocation.Top);
         control.ToNative().SetSizeRequest(size.Width, size.Height);
     }
 
@@ -78,5 +81,24 @@ public class GtkEtoPlatform : EtoPlatform
         }
         widget.GetPreferredSize(out var minSize, out var naturalSize);
         return new SizeF(naturalSize.Width, naturalSize.Height);
+    }
+
+    public override Size GetClientSize(Window window)
+    {
+        var gtkWindow = (GtkWindow) window.ToNative();
+        gtkWindow.GetSize(out var w, out var h);
+        return new Size(w, h);
+    }
+
+    public override void SetClientSize(Window window, Size clientSize)
+    {
+        var gtkWindow = (GtkWindow) window.ToNative();
+        gtkWindow.Resize(clientSize.Width, clientSize.Height);
+    }
+
+    public override void SetMinimumClientSize(Window window, Size minSize)
+    {
+        var gtkWindow = (GtkWindow) window.ToNative();
+        gtkWindow.SetSizeRequest(minSize.Width, minSize.Height);
     }
 }

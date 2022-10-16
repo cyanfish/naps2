@@ -31,6 +31,22 @@ public abstract class EtoPlatform
         window.Size = size;
     }
 
+    public virtual Size GetClientSize(Window window)
+    {
+        return window.ClientSize;
+    }
+
+    public virtual void SetClientSize(Window window, Size clientSize)
+    {
+        window.ClientSize = clientSize;
+    }
+
+    public virtual void SetMinimumClientSize(Window window, Size minSize)
+    {
+        var windowDecorationSize = window.Size - window.ClientSize;
+        window.MinimumSize = minSize + windowDecorationSize;
+    }
+
     public virtual SizeF GetPreferredSize(Control control, SizeF availableSpace)
     {
         return control.GetPreferredSize(availableSpace);
