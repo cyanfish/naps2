@@ -1,5 +1,4 @@
 using System.Drawing.Imaging;
-using Eto;
 using Eto.Drawing;
 using Eto.Forms;
 using Eto.WinForms;
@@ -19,7 +18,7 @@ public class WinFormsEtoPlatform : EtoPlatform
     {
         wf.Application.EnableVisualStyles();
         wf.Application.SetCompatibleTextRenderingDefault(false);
-        return new Application(Platforms.WinForms);
+        return new Application(Eto.Platforms.WinForms);
     }
 
     public override IListView<T> CreateListView<T>(ListViewBehavior<T> behavior) =>
