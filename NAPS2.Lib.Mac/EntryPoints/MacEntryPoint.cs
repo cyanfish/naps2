@@ -26,7 +26,7 @@ public static class MacEntryPoint
         Trace.Listeners.Add(new ConsoleTraceListener());
 
         // Show the main form
-        var application = new Application(Platforms.macOS);
+        var application = EtoPlatform.Current.CreateApplication();
         application.UnhandledException += UnhandledException;
         var formFactory = kernel.Get<IFormFactory>();
         var desktop = formFactory.Create<DesktopForm>();

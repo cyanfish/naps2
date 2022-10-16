@@ -15,8 +15,17 @@ public class GtkEtoPlatform : EtoPlatform
     private const int MIN_BUTTON_HEIGHT = 32;
     private const int IMAGE_PADDING = 5;
 
-    static GtkEtoPlatform()
+    public override Application CreateApplication()
     {
+        var application = new Application(Platforms.Gtk);
+        application.Initialized += (_, _) =>
+        {
+            // Hack to force Eto to use normal title bars for dialogs
+            var type = Assembly.GetAssembly(typeof(Eto.GtkSharp.Platform)).GetType("Eto.GtkSharp.Helper");
+            var prop = type.GetField("UseHeaderBar", BindingFlags.Public | BindingFlags.Static);
+            prop.SetValue(null, false);
+        };
+        return application;
     }
 
     public override IListView<T> CreateListView<T>(ListViewBehavior<T> behavior) =>

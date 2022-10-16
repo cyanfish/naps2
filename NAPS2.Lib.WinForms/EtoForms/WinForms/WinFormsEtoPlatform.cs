@@ -1,4 +1,5 @@
 using System.Drawing.Imaging;
+using Eto;
 using Eto.Drawing;
 using Eto.Forms;
 using Eto.WinForms;
@@ -13,6 +14,13 @@ public class WinFormsEtoPlatform : EtoPlatform
 {
     private static readonly Size MinImageButtonSize = new(75, 32);
     private const int IMAGE_PADDING = 5;
+
+    public override Application CreateApplication()
+    {
+        wf.Application.EnableVisualStyles();
+        wf.Application.SetCompatibleTextRenderingDefault(false);
+        return new Application(Platforms.WinForms);
+    }
 
     public override IListView<T> CreateListView<T>(ListViewBehavior<T> behavior) =>
         new WinFormsListView<T>(behavior);

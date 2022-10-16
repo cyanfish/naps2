@@ -1,6 +1,4 @@
-﻿using Eto;
-using Eto.Forms;
-using NAPS2.EtoForms;
+﻿using NAPS2.EtoForms;
 using NAPS2.EtoForms.Ui;
 using NAPS2.Modules;
 using Ninject;
@@ -26,12 +24,12 @@ public static class GtkEntryPoint
         Trace.Listeners.Add(new ConsoleTraceListener());
 
         // Show the main form
-        var application = new Application(Platforms.Gtk);
+        var application = EtoPlatform.Current.CreateApplication();
         application.UnhandledException += UnhandledException;
         var formFactory = kernel.Get<IFormFactory>();
         var desktop = formFactory.Create<DesktopForm>();
+        // TODO: Clean up invoker setting
         // Invoker.Current = new WinFormsInvoker(desktop.ToNative());
-
         application.Run(desktop);
     }
 

@@ -1,3 +1,4 @@
+using Eto;
 using Eto.Drawing;
 using Eto.Forms;
 using Eto.Mac.Drawing;
@@ -12,8 +13,9 @@ public class MacEtoPlatform : EtoPlatform
     private const int MIN_BUTTON_HEIGHT = 32;
     private const int IMAGE_PADDING = 5;
 
-    static MacEtoPlatform()
+    public override Application CreateApplication()
     {
+        return new Application(Platforms.macOS);
     }
 
     public override IListView<T> CreateListView<T>(ListViewBehavior<T> behavior) =>

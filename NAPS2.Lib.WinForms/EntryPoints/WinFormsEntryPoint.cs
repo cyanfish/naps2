@@ -6,7 +6,6 @@ using NAPS2.EtoForms.WinForms;
 using NAPS2.Modules;
 using NAPS2.Platform.Windows;
 using NAPS2.Remoting.Worker;
-using NAPS2.WinForms;
 using Ninject;
 using Application = System.Windows.Forms.Application;
 
@@ -35,13 +34,12 @@ public static class WinFormsEntryPoint
 
         // Set up basic application configuration
         kernel.Get<CultureHelper>().SetCulturesFromConfig();
-        Application.EnableVisualStyles();
-        Application.SetCompatibleTextRenderingDefault(false);
+        // TODO: Unify unhandled exception handling across platforms
         Application.ThreadException += UnhandledException;
         TaskScheduler.UnobservedTaskException += UnhandledTaskException;
 
         // Show the main form
-        var application = new Eto.Forms.Application(Eto.Platforms.WinForms);
+        var application = EtoPlatform.Current.CreateApplication();
         var formFactory = kernel.Get<IFormFactory>();
         var desktop = formFactory.Create<DesktopForm>();
         Invoker.Current = new WinFormsInvoker(desktop.ToNative());
