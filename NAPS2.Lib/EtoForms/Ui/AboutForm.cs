@@ -60,7 +60,7 @@ public class AboutForm : EtoDialogBase
                     ).Padding(left: 10)
                 ),
                 C.TextSpace(),
-                _checkForUpdates.AutoSize().Padding(left: 4),
+                _checkForUpdates.Padding(left: 4),
                 _updatePanel,
                 C.TextSpace(),
                 C.NoWrap(UiStrings.Copyright),

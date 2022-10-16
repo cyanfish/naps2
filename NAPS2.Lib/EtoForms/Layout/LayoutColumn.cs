@@ -11,28 +11,16 @@ public class LayoutColumn : LayoutLine<LayoutRow>
     }
 
     public LayoutColumn(LayoutColumn original, Padding? padding = null, int? spacing = null, bool? xScale = null,
-        bool? yScale = null, bool? aligned = null)
+        bool? aligned = null)
     {
         Children = original.Children;
         Padding = padding ?? original.Padding;
         Spacing = spacing ?? original.Spacing;
         XScale = xScale ?? original.XScale;
-        YScale = yScale ?? original.YScale;
         Aligned = aligned ?? original.Aligned;
     }
 
     private Padding? Padding { get; }
-
-    public override void AddTo(DynamicLayout layout)
-    {
-        Size? spacing = Spacing == null ? null : new Size(Spacing.Value, Spacing.Value);
-        layout.BeginVertical(padding: Padding, spacing: spacing, xscale: XScale, yscale: YScale);
-        foreach (var child in Children)
-        {
-            child.AddTo(layout);
-        }
-        layout.EndVertical();
-    }
 
     protected override PointF UpdatePosition(PointF position, float delta)
     {

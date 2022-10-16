@@ -33,14 +33,12 @@ public class SelectDeviceForm : EtoDialogBase
 
         Title = UiStrings.SelectSource;
         FormStateController.DefaultExtraLayoutSize = new Size(50, 0);
-        LayoutController.Content = L.Root(
-            L.Row(
-                _devices.XScale(),
-                L.Column(
-                    selectButton,
-                    cancelButton,
-                    C.ZeroSpace().YScale()
-                )
+        LayoutController.Content = L.Row(
+            _devices.XScale(),
+            L.Column(
+                selectButton,
+                cancelButton,
+                C.ZeroSpace().YScale()
             )
         );
     }

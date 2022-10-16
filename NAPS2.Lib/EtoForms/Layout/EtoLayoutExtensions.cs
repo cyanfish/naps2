@@ -5,27 +5,6 @@ namespace NAPS2.EtoForms.Layout;
 
 public static class EtoLayoutExtensions
 {
-    public static DynamicRow AddSeparateRow(this DynamicLayout layout, params ControlWithLayoutAttributes[] controls)
-    {
-        layout.BeginVertical();
-        var row = layout.BeginHorizontal();
-        layout.AddAll(controls);
-        layout.EndHorizontal();
-        layout.EndVertical();
-        return row;
-    }
-        
-    public static void AddAll(this DynamicLayout layout, params ControlWithLayoutAttributes[] controls)
-    {
-        foreach (var control in controls)
-        {
-            layout.Add(control);
-        }
-    }
-
-    public static void Add(this DynamicLayout layout, ControlWithLayoutAttributes control) =>
-        control.AddTo(layout);
-
     public static Icon ToEtoIcon(this byte[] bytes) => new(new MemoryStream(bytes));
 
     public static Bitmap ToEtoImage(this byte[] bytes) => new(bytes);
@@ -58,8 +37,6 @@ public static class EtoLayoutExtensions
         new ControlWithLayoutAttributes(control, height: height);
     public static ControlWithLayoutAttributes Size(this Control control, int width, int height) =>
         new ControlWithLayoutAttributes(control, width: width, height: height);
-    public static ControlWithLayoutAttributes Center(this Control control) =>
-        new ControlWithLayoutAttributes(control, center: true);
     public static ControlWithLayoutAttributes XScale(this Control control) =>
         new ControlWithLayoutAttributes(control, xScale: true);
     public static ControlWithLayoutAttributes YScale(this Control control) =>
@@ -72,8 +49,6 @@ public static class EtoLayoutExtensions
         new ControlWithLayoutAttributes(control, alignment: LayoutAlignment.Trailing);
     public static ControlWithLayoutAttributes Align(this Control control, LayoutAlignment alignment) =>
         new ControlWithLayoutAttributes(control, alignment: alignment);
-    public static ControlWithLayoutAttributes AutoSize(this Control control) =>
-        new ControlWithLayoutAttributes(control, autoSize: true);
     public static ControlWithLayoutAttributes Padding(this Control control, Padding padding) =>
         new ControlWithLayoutAttributes(control, padding: padding);
     public static ControlWithLayoutAttributes Padding(this Control control, int all) =>
@@ -87,8 +62,6 @@ public static class EtoLayoutExtensions
         new ControlWithLayoutAttributes(control, width: width);
     public static ControlWithLayoutAttributes Height(this ControlWithLayoutAttributes control, int height) =>
         new ControlWithLayoutAttributes(control, height: height);
-    public static ControlWithLayoutAttributes Center(this ControlWithLayoutAttributes control) =>
-        new ControlWithLayoutAttributes(control, center: true);
     public static ControlWithLayoutAttributes XScale(this ControlWithLayoutAttributes control) =>
         new ControlWithLayoutAttributes(control, xScale: true);
     public static ControlWithLayoutAttributes YScale(this ControlWithLayoutAttributes control) =>
@@ -101,8 +74,6 @@ public static class EtoLayoutExtensions
         new ControlWithLayoutAttributes(control, alignment: LayoutAlignment.Trailing);
     public static ControlWithLayoutAttributes Align(this ControlWithLayoutAttributes control, LayoutAlignment alignment) =>
         new ControlWithLayoutAttributes(control, alignment: alignment);
-    public static ControlWithLayoutAttributes AutoSize(this ControlWithLayoutAttributes control) =>
-        new ControlWithLayoutAttributes(control, autoSize: true);
     public static ControlWithLayoutAttributes Padding(this ControlWithLayoutAttributes control, Padding padding) =>
         new ControlWithLayoutAttributes(control, padding: padding);
     public static ControlWithLayoutAttributes Padding(this ControlWithLayoutAttributes control, int all) =>
@@ -120,8 +91,6 @@ public static class EtoLayoutExtensions
         new LayoutColumn(column, spacing: spacing);
     public static LayoutColumn XScale(this LayoutColumn column) =>
         new LayoutColumn(column, xScale: true);
-    public static LayoutColumn YScale(this LayoutColumn column) =>
-        new LayoutColumn(column, yScale: true);
         
     public static LayoutRow YScale(this LayoutRow row) =>
         new LayoutRow(row, yScale: true);

@@ -13,15 +13,13 @@ public class ControlWithLayoutAttributes : LayoutElement
     }
 
     public ControlWithLayoutAttributes(
-        ControlWithLayoutAttributes control, bool? center = null, bool? xScale = null, bool? yScale = null,
-        bool? autoSize = null, Padding? padding = null, int? width = null, int? height = null,
+        ControlWithLayoutAttributes control, bool? xScale = null, bool? yScale = null,
+        Padding? padding = null, int? width = null, int? height = null,
         LayoutAlignment? alignment = null)
     {
         Control = control.Control;
-        Center = center ?? control.Center;
         XScale = xScale ?? control.XScale;
         YScale = yScale ?? control.YScale;
-        AutoSize = autoSize ?? control.AutoSize;
         Padding = padding ?? control.Padding;
         Width = width ?? control.Width;
         Height = height ?? control.Height;
@@ -32,40 +30,9 @@ public class ControlWithLayoutAttributes : LayoutElement
         new ControlWithLayoutAttributes(control);
 
     private Control? Control { get; }
-    private bool Center { get; }
-    private bool AutoSize { get; }
     private Padding Padding { get; }
     private int? Width { get; }
     private int? Height { get; }
-
-    public override void AddTo(DynamicLayout layout)
-    {
-        if (Width != null)
-        {
-            Control!.Width = Width.Value;
-        }
-        if (Height != null)
-        {
-            Control!.Height = Height.Value;
-        }
-        if (AutoSize)
-        {
-            layout.AddAutoSized(Control, xscale: XScale, yscale: YScale, centered: Center, padding: Padding);
-        }
-        else if (Center)
-        {
-            layout.AddCentered(Control, xscale: XScale, yscale: YScale, padding: Padding);
-        }
-        else
-        {
-            // if (Padding != null)
-            // {
-            //     throw new InvalidOperationException(
-            //         "Padding and Spacing aren't supported on controls except with AutoSize and/or Center.");
-            // }
-            layout.Add(Control, xscale: XScale, yscale: YScale);
-        }
-    }
 
     public override void DoLayout(LayoutContext context, RectangleF bounds)
     {

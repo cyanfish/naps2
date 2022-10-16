@@ -22,24 +22,6 @@ public class LayoutRow : LayoutLine<LayoutColumn>
 
     private Padding? Padding { get; }
 
-    public override void AddTo(DynamicLayout layout)
-    {
-        if (!Aligned)
-        {
-            layout.BeginVertical();
-        }
-        layout.BeginHorizontal(yscale: YScale);
-        foreach (var child in Children)
-        {
-            child.AddTo(layout);
-        }
-        layout.EndHorizontal();
-        if (!Aligned)
-        {
-            layout.EndVertical();
-        }
-    }
-
     protected override PointF UpdatePosition(PointF position, float delta)
     {
         position.X += delta;
