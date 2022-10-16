@@ -13,6 +13,8 @@ public abstract class LayoutLine<TOrthogonal> : LayoutContainer
 
     protected abstract PointF UpdatePosition(PointF position, float delta);
 
+    protected abstract PointF UpdateOrthogonalPosition(PointF position, float delta);
+
     protected abstract SizeF UpdateTotalSize(SizeF size, SizeF childSize, int spacing);
 
     public override void DoLayout(LayoutContext context, RectangleF bounds)
@@ -27,13 +29,38 @@ public abstract class LayoutLine<TOrthogonal> : LayoutContainer
         var spacing = Spacing ?? context.DefaultSpacing;
         UpdateCellLengthsForAvailableSpace(cellLengths, cellScaling, bounds, spacing);
 
+        // The "cell" size and origin define the space the control can fit in, while the "child" size and origin define
+        // the actual space the control fills. The child always fills the cell length-wise, but breadth-wise it depends
+        // on the control alignment.
         var cellOrigin = bounds.Location;
         for (int i = 0; i < Children.Length; i++)
         {
+            var child = Children[i];
             var cellSize = GetSize(cellLengths[i], GetBreadth(bounds.Size));
-            Children[i].DoLayout(childContext, new RectangleF(cellOrigin, cellSize));
-            cellOrigin = UpdatePosition(cellOrigin, GetLength(cellSize) + spacing);
+            GetChildSizeAndOrigin(child, childContext, cellSize, cellOrigin,
+                out var childSize, out var childOrigin);
+            child.DoLayout(childContext, new RectangleF(childOrigin, childSize));
+            cellOrigin = UpdatePosition(cellOrigin, GetLength(childSize) + spacing);
         }
+    }
+
+    private void GetChildSizeAndOrigin(LayoutElement child, LayoutContext childContext,
+        SizeF cellSize, PointF cellOrigin, out SizeF childSize, out PointF childOrigin)
+    {
+        var breadth = GetBreadth(
+            child.Alignment == LayoutAlignment.Fill
+                ? cellSize
+                : child.GetPreferredSize(childContext, new RectangleF(cellOrigin, cellSize)));
+        var remainingBreadth = GetBreadth(cellSize) - breadth;
+        var alignmentOffset = child.Alignment switch
+        {
+            LayoutAlignment.Leading => 0,
+            LayoutAlignment.Center => remainingBreadth / 2,
+            LayoutAlignment.Trailing => remainingBreadth,
+            _ => 0
+        };
+        childSize = GetSize(GetLength(cellSize), breadth);
+        childOrigin = UpdateOrthogonalPosition(cellOrigin, alignmentOffset);
     }
 
     public override SizeF GetPreferredSize(LayoutContext context, RectangleF parentBounds)

@@ -9,6 +9,7 @@ public abstract class LayoutElement
 
     protected internal bool XScale { get; set; }
     protected internal bool YScale { get; set; }
+    protected internal LayoutAlignment Alignment { get; set; }
 
     public abstract void AddTo(DynamicLayout layout);
         

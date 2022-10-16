@@ -40,6 +40,12 @@ public class LayoutColumn : LayoutLine<LayoutRow>
         return position;
     }
 
+    protected override PointF UpdateOrthogonalPosition(PointF position, float delta)
+    {
+        position.X += delta;
+        return position;
+    }
+
     protected override SizeF UpdateTotalSize(SizeF size, SizeF childSize, int spacing)
     {
         size.Height += childSize.Height + spacing;

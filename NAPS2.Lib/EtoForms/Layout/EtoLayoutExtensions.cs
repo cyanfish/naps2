@@ -64,6 +64,12 @@ public static class EtoLayoutExtensions
         new ControlWithLayoutAttributes(control, xScale: true);
     public static ControlWithLayoutAttributes YScale(this Control control) =>
         new ControlWithLayoutAttributes(control, yScale: true);
+    public static ControlWithLayoutAttributes AlignCenter(this Control control) =>
+        new ControlWithLayoutAttributes(control, alignment: LayoutAlignment.Center);
+    public static ControlWithLayoutAttributes AlignLeading(this Control control) =>
+        new ControlWithLayoutAttributes(control, alignment: LayoutAlignment.Leading);
+    public static ControlWithLayoutAttributes AlignTrailing(this Control control) =>
+        new ControlWithLayoutAttributes(control, alignment: LayoutAlignment.Trailing);
     public static ControlWithLayoutAttributes AutoSize(this Control control) =>
         new ControlWithLayoutAttributes(control, autoSize: true);
     public static ControlWithLayoutAttributes Padding(this Control control, Padding padding) =>
@@ -85,6 +91,12 @@ public static class EtoLayoutExtensions
         new ControlWithLayoutAttributes(control, xScale: true);
     public static ControlWithLayoutAttributes YScale(this ControlWithLayoutAttributes control) =>
         new ControlWithLayoutAttributes(control, yScale: true);
+    public static ControlWithLayoutAttributes AlignCenter(this ControlWithLayoutAttributes control) =>
+        new ControlWithLayoutAttributes(control, alignment: LayoutAlignment.Center);
+    public static ControlWithLayoutAttributes AlignLeading(this ControlWithLayoutAttributes control) =>
+        new ControlWithLayoutAttributes(control, alignment: LayoutAlignment.Leading);
+    public static ControlWithLayoutAttributes AlignTrailing(this ControlWithLayoutAttributes control) =>
+        new ControlWithLayoutAttributes(control, alignment: LayoutAlignment.Trailing);
     public static ControlWithLayoutAttributes AutoSize(this ControlWithLayoutAttributes control) =>
         new ControlWithLayoutAttributes(control, autoSize: true);
     public static ControlWithLayoutAttributes Padding(this ControlWithLayoutAttributes control, Padding padding) =>

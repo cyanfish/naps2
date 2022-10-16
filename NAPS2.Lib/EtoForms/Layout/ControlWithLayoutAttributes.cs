@@ -14,7 +14,8 @@ public class ControlWithLayoutAttributes : LayoutElement
 
     public ControlWithLayoutAttributes(
         ControlWithLayoutAttributes control, bool? center = null, bool? xScale = null, bool? yScale = null,
-        bool? autoSize = null, Padding? padding = null, int? width = null, int? height = null)
+        bool? autoSize = null, Padding? padding = null, int? width = null, int? height = null,
+        LayoutAlignment? alignment = null)
     {
         Control = control.Control;
         Center = center ?? control.Center;
@@ -24,6 +25,7 @@ public class ControlWithLayoutAttributes : LayoutElement
         Padding = padding ?? control.Padding;
         Width = width ?? control.Width;
         Height = height ?? control.Height;
+        Alignment = alignment ?? control.Alignment;
     }
 
     public static implicit operator ControlWithLayoutAttributes(Control control) =>
@@ -72,6 +74,7 @@ public class ControlWithLayoutAttributes : LayoutElement
             var text = Control is TextControl txt ? $"\"{txt.Text}\" " : "";
             Debug.WriteLine($"{new string(' ', context.Depth)}{text} layout with bounds {bounds}");
         }
+        bounds.Size = UpdateFixedDimensions(bounds.Size);
         if (Control != null)
         {
             var location = new PointF(bounds.X + Padding.Left, bounds.Y + Padding.Right);
@@ -90,7 +93,21 @@ public class ControlWithLayoutAttributes : LayoutElement
             EnsureIsAdded(context);
             size = EtoPlatform.Current.GetPreferredSize(Control, parentBounds.Size);
         }
+        size = UpdateFixedDimensions(size);
         return new SizeF(size.Width + Padding.Horizontal, size.Height + Padding.Vertical);
+    }
+
+    private SizeF UpdateFixedDimensions(SizeF size)
+    {
+        if (Width != null)
+        {
+            size.Width = Width.Value;
+        }
+        if (Height != null)
+        {
+            size.Height = Height.Value;
+        }
+        return size;
     }
 
     private void EnsureIsAdded(LayoutContext context)

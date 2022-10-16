@@ -131,7 +131,7 @@ public class EditProfileForm : EtoDialogBase
                     C.Label(UiStrings.BrightnessLabel),
                     L.Row(
                         _brightnessSlider.XScale(),
-                        _brightnessText.Width(40)
+                        _brightnessText.Width(50).AlignCenter()
                     )
                 ).XScale(),
                 L.Column(
@@ -144,7 +144,7 @@ public class EditProfileForm : EtoDialogBase
                     C.Label(UiStrings.ContrastLabel),
                     L.Row(
                         _contrastSlider.XScale(),
-                        _contrastText.Width(40)
+                        _contrastText.Width(50).AlignCenter()
                     )
                 ).XScale()
             ),
@@ -166,9 +166,8 @@ public class EditProfileForm : EtoDialogBase
         var buffer = new Size(130, 0);
         FormStateController.MinimumClientSize = naturalSize;
         FormStateController.DefaultClientSize = naturalSize + buffer;
-        FormStateController.RestoreFormState = false;
+        FormStateController.RestoreFormState = true;
     }
-
 
     public bool Result => _result;
 

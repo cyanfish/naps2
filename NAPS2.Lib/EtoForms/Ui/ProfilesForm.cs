@@ -131,7 +131,7 @@ public class ProfilesForm : EtoDialogBase
             L.Row(
                 _listView.Control.XScale(),
                 C.Button(_scanCommand, Icons.control_play_blue.ToEtoImage(), ButtonImagePosition.Above).AutoSize()
-                    .Height(100)
+                    .Height(80)
             ).Aligned().YScale(),
             L.Row(
                 L.Column(
