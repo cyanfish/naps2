@@ -19,7 +19,7 @@ public class LinuxSystemCompat : ISystemCompat
 
     public bool CanUseWin32 => false;
 
-    public bool UseSystemTesseract => true;
+    public bool UseSystemTesseract => false;
 
     public bool RenderInWorker => false;
 
