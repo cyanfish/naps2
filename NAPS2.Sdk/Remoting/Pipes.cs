@@ -16,7 +16,7 @@ public static class Pipes
     // An arbitrary non-secret unique name with a single format argument (for the process ID).
     // This could be edtion/version-specific, but I like the idea that if the user is running a portable version and
     // happens to have NAPS2 installed too, the scan button will propagate to the portable version.
-    private const string PIPE_NAME_FORMAT = "NAPS2_PIPE_86a6ef67-742a-44ec-9ca5-64c5bddfd013_{0}";
+    private const string PIPE_NAME_FORMAT = "NAPS2_PIPE_v1_{0}";
     // The timeout is small since pipe connections should be on the local machine only.
     private const int TIMEOUT = 1000;
 
