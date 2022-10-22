@@ -13,7 +13,7 @@
     <ItemGroup>
         <ProjectReference Include="..\NAPS2.Sdk.Tests\NAPS2.Sdk.Tests.csproj" />
 
-        <PackageReference Include="NAPS2.Sane" Version="0.1.0" />
+        <PackageReference Include="NAPS2.Sane.Binaries" Version="1.0.0" />
         <PackageReference Include="NAPS2.Wia" Version="1.0.1" />
         <PackageReference Include="Moq" Version="4.18.1" />
         <PackageReference Include="xunit" Version="2.4.1" />
