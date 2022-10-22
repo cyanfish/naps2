@@ -45,7 +45,10 @@ public class MacDesktopForm : DesktopForm
     protected override void UpdateTitle(ScanProfile? defaultProfile)
     {
         Title = UiStrings.Naps2;
-        this.ToNative().Subtitle = defaultProfile?.DisplayName ?? UiStrings.Naps2FullName;
+        if (OperatingSystem.IsMacOSVersionAtLeast(11))
+        {
+            this.ToNative().Subtitle = defaultProfile?.DisplayName ?? UiStrings.Naps2FullName;
+        }
     }
 
     protected override void CreateToolbarsAndMenus()
@@ -135,7 +138,10 @@ public class MacDesktopForm : DesktopForm
 
         var window = this.ToNative();
         window.Toolbar = toolbar;
-        window.ToolbarStyle = NSWindowToolbarStyle.Unified;
+        if (OperatingSystem.IsMacOSVersionAtLeast(11))
+        {
+            window.ToolbarStyle = NSWindowToolbarStyle.Unified;
+        }
         // TODO: Do we want full size content?
         window.StyleMask |= NSWindowStyle.FullSizeContentView;
         window.StyleMask |= NSWindowStyle.UnifiedTitleAndToolbar;
@@ -270,7 +276,9 @@ public class MacDesktopForm : DesktopForm
                 return required ? throw new InvalidOperationException() : null;
             }
             // Fall back to the embedded NAPS2 icon if on an older mac version
-            return NSImage.GetSystemSymbol(symbol, null) ?? command.Image.ToNS();
+            return OperatingSystem.IsMacOSVersionAtLeast(11)
+                ? NSImage.GetSystemSymbol(symbol, null)
+                : command.Image.ToNS();
         }
     }
 }
