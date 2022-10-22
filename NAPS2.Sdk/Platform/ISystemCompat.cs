@@ -30,6 +30,8 @@ public interface ISystemCompat
 
     IntPtr LoadSymbol(IntPtr libraryHandle, string symbol);
 
+    string GetLoadError();
+
     IDisposable? FileReadLock(string path);
 
     IDisposable? FileWriteLock(string path);

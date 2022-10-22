@@ -35,6 +35,8 @@ public class LinuxSystemCompat : ISystemCompat
 
     public IntPtr LoadSymbol(IntPtr libraryHandle, string symbol) => LinuxInterop.dlsym(libraryHandle, symbol);
 
+    public string GetLoadError() => LinuxInterop.dlerror();
+
     public IDisposable FileReadLock(string path) => new FileStream(path, FileMode.Open, FileAccess.Read);
 
     public IDisposable FileWriteLock(string path) => new FileStream(path, FileMode.Open, FileAccess.Write);

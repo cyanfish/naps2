@@ -39,7 +39,8 @@ public class NativeLibrary
             var handle = PlatformCompat.System.LoadLibrary(libraryPath);
             if (handle == IntPtr.Zero)
             {
-                throw new Exception($"Could not load library: {libraryPath}");
+                var error = PlatformCompat.System.GetLoadError();
+                throw new Exception($"Could not load library: \"{libraryPath}\". Error: {error}");
             }
             return handle;
         });
@@ -60,7 +61,8 @@ public class NativeLibrary
         var ptr = PlatformCompat.System.LoadSymbol(LibraryHandle, symbol);
         if (ptr == IntPtr.Zero)
         {
-            throw new InvalidOperationException($"Could not load symbol: {symbol}");
+            var error = PlatformCompat.System.GetLoadError();
+            throw new InvalidOperationException($"Could not load symbol: \"{symbol}\". Error: {error}");
         }
         return ptr;
     }

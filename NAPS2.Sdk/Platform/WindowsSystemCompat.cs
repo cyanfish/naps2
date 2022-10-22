@@ -1,4 +1,5 @@
-﻿using NAPS2.Dependencies;
+﻿using System.Runtime.InteropServices;
+using NAPS2.Dependencies;
 using NAPS2.Platform.Windows;
 
 namespace NAPS2.Platform;
@@ -30,6 +31,8 @@ public abstract class WindowsSystemCompat : ISystemCompat
     public string SaneLibraryName => "sane.dll";
 
     public IntPtr LoadLibrary(string path) => Win32.LoadLibrary(path);
+
+    public string GetLoadError() => Marshal.GetLastWin32Error().ToString();
 
     public abstract IntPtr LoadSymbol(IntPtr libraryHandle, string symbol);
 

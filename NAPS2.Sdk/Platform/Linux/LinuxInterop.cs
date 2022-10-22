@@ -8,7 +8,7 @@ public static class LinuxInterop
     public static extern IntPtr dlopen(string filename, int flags);
 
     [DllImport("libc.so.6")]
-    public static extern IntPtr dlerror();
+    public static extern string dlerror();
 
     [DllImport("libc.so.6")]
     public static extern IntPtr dlsym(IntPtr handle, string symbol);

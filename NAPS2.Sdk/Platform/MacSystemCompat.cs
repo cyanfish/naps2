@@ -48,6 +48,8 @@ public class MacSystemCompat : ISystemCompat
 
     public IntPtr LoadSymbol(IntPtr libraryHandle, string symbol) => MacInterop.dlsym(libraryHandle, symbol);
 
+    public string GetLoadError() => MacInterop.dlerror();
+
     public IDisposable FileReadLock(string path) => new FileStream(path, FileMode.Open, FileAccess.Read);
 
     public IDisposable FileWriteLock(string path) => new FileStream(path, FileMode.Open, FileAccess.Write);
