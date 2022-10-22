@@ -26,7 +26,7 @@ public static class MacEntryPoint
         Runtime.MarshalManagedException += (_, eventArgs) =>
         {
             Log.ErrorException("Marshalling managed exception", eventArgs.Exception);
-            eventArgs.ExceptionMode = MarshalManagedExceptionMode.UnwindNativeCode;
+            eventArgs.ExceptionMode = MarshalManagedExceptionMode.ThrowObjectiveCException;
         };
         Runtime.MarshalObjectiveCException += (_, eventArgs) =>
         {
