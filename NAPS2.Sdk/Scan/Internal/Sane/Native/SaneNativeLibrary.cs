@@ -8,14 +8,16 @@ public class SaneNativeLibrary : Unmanaged.NativeLibrary
     {
         var testRoot = Environment.GetEnvironmentVariable("NAPS2_TEST_ROOT");
         var libraryPath = FindPath(PlatformCompat.System.SaneLibraryName, testRoot);
-        var nativeLib = new SaneNativeLibrary(libraryPath);
+        var libraryDeps = PlatformCompat.System.SaneLibraryDeps
+            ?.Select(path => FindPath(path, testRoot)).ToArray();
+        var nativeLib = new SaneNativeLibrary(libraryPath, libraryDeps);
         return nativeLib;
     });
 
     public static SaneNativeLibrary Instance => LazyInstance.Value;
 
-    private SaneNativeLibrary(string libraryPath)
-        : base(libraryPath)
+    private SaneNativeLibrary(string libraryPath, string[]? libraryDeps)
+        : base(libraryPath, libraryDeps)
     {
     }
 
@@ -25,7 +27,8 @@ public class SaneNativeLibrary : Unmanaged.NativeLibrary
     public delegate SaneStatus sane_open_delegate(string name, out IntPtr handle);
     public delegate void sane_close_delegate(IntPtr handle);
     public delegate IntPtr sane_get_option_descriptor_delegate(IntPtr handle, int n);
-    public delegate SaneStatus sane_control_option_delegate(IntPtr handle, int n, SaneOptionAction a, IntPtr v, out SaneOptionSetInfo i);
+    public delegate SaneStatus sane_control_option_delegate(IntPtr handle, int n, SaneOptionAction a, IntPtr v,
+        out SaneOptionSetInfo i);
     public delegate SaneStatus sane_get_parameters_delegate(IntPtr handle, out SaneReadParameters p);
     public delegate SaneStatus sane_start_delegate(IntPtr handle);
     public delegate SaneStatus sane_read_delegate(IntPtr handle, byte[] buf, int maxlen, out int len);
@@ -36,7 +39,8 @@ public class SaneNativeLibrary : Unmanaged.NativeLibrary
     public sane_get_devices_delegate sane_get_devices => Load<sane_get_devices_delegate>();
     public sane_open_delegate sane_open => Load<sane_open_delegate>();
     public sane_close_delegate sane_close => Load<sane_close_delegate>();
-    public sane_get_option_descriptor_delegate sane_get_option_descriptor => Load<sane_get_option_descriptor_delegate>();
+    public sane_get_option_descriptor_delegate sane_get_option_descriptor =>
+        Load<sane_get_option_descriptor_delegate>();
     public sane_control_option_delegate sane_control_option => Load<sane_control_option_delegate>();
     public sane_get_parameters_delegate sane_get_parameters => Load<sane_get_parameters_delegate>();
     public sane_start_delegate sane_start => Load<sane_start_delegate>();

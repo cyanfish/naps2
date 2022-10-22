@@ -31,19 +31,32 @@ public class NativeLibrary
     private readonly Dictionary<Type, object> _funcCache = new();
     private readonly Lazy<IntPtr> _libraryHandle;
 
-    public NativeLibrary(string libraryPath)
+    public NativeLibrary(string libraryPath, string[]? depPaths = null)
     {
         LibraryPath = libraryPath;
         _libraryHandle = new Lazy<IntPtr>(() =>
         {
-            var handle = PlatformCompat.System.LoadLibrary(libraryPath);
-            if (handle == IntPtr.Zero)
+            if (depPaths != null)
             {
-                var error = PlatformCompat.System.GetLoadError();
-                throw new Exception($"Could not load library: \"{libraryPath}\". Error: {error}");
+                foreach (var depPath in depPaths)
+                {
+                    DoLoadLibrary(depPath);
+                }
             }
+            var handle = DoLoadLibrary(libraryPath);
             return handle;
         });
+    }
+
+    private static IntPtr DoLoadLibrary(string path)
+    {
+        var handle = PlatformCompat.System.LoadLibrary(path);
+        if (handle == IntPtr.Zero)
+        {
+            var error = PlatformCompat.System.GetLoadError();
+            throw new Exception($"Could not load library: \"{path}\". Error: {error}");
+        }
+        return handle;
     }
 
     public string LibraryPath { get; }

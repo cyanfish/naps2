@@ -24,6 +24,8 @@ public interface ISystemCompat
 
     string PdfiumLibraryName { get; }
 
+    string[]? SaneLibraryDeps { get; }
+
     string SaneLibraryName { get; }
 
     IntPtr LoadLibrary(string path);

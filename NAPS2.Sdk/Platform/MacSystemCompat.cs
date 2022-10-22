@@ -24,7 +24,8 @@ public class MacSystemCompat : ISystemCompat
 
     public bool RenderInWorker => false;
 
-    public string[] LibrarySearchPaths {
+    public string[] LibrarySearchPaths
+    {
         get
         {
             var prefix = RuntimeInformation.ProcessArchitecture == Architecture.Arm64
@@ -41,6 +42,8 @@ public class MacSystemCompat : ISystemCompat
     public string TesseractExecutableName => "tesseract";
 
     public string PdfiumLibraryName => "libpdfium.dylib";
+
+    public string[] SaneLibraryDeps => new[] { "libusb.dylib", "libjpeg.dylib" };
 
     public string SaneLibraryName => "libsane.dylib";
 
