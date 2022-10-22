@@ -68,8 +68,6 @@ public abstract class SaneNativeObject : IDisposable
 
     ~SaneNativeObject()
     {
-        // TODO: This isn't necessarily going to work as we don't have a lock, not sure the best way to handle it
-        // Though this does provide a way to give some kind of error when running tests
         Dispose(false);
     }
 }

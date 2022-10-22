@@ -10,7 +10,10 @@ public class SaneDevice : SaneNativeObject
 
     protected override void Dispose(bool disposing)
     {
-        Native.sane_close(Handle);
+        if (disposing)
+        {
+            Native.sane_close(Handle);
+        }
     }
 
     public void Cancel()

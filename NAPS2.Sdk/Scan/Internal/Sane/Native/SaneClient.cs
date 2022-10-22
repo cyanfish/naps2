@@ -29,6 +29,9 @@ public class SaneClient : SaneNativeObject
 
     protected override void Dispose(bool disposing)
     {
-        Native.sane_exit();
+        if (disposing)
+        {
+            Native.sane_exit();
+        }
     }
 }
