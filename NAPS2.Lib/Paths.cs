@@ -13,8 +13,18 @@ public static class Paths
 #if STANDALONE
         AppDataPath = Path.Combine(ExecutablePath, "..", "Data");
 #else
-        // TODO: Make lowercase for non-windows
-        AppDataPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "NAPS2");
+        var userAppData = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+#if NET6_0_OR_GREATER
+        var subfolder = OperatingSystem.IsWindows() ? "NAPS2" : "naps2";
+        if (string.IsNullOrEmpty(userAppData) && OperatingSystem.IsMacOS())
+        {
+            // Not sure if this is necessary but older macOS (10.15) didn't seem to get the appdata path
+            userAppData = Environment.ExpandEnvironmentVariables("/Users/%USER%/.config");
+        }
+#else
+        var subfolder = "NAPS2";
+#endif
+        AppDataPath = Path.Combine(userAppData, subfolder);
 #endif
         var dataPathFromEnv = Environment.GetEnvironmentVariable("NAPS2_TEST_DATA");
         if (!string.IsNullOrEmpty(dataPathFromEnv))
