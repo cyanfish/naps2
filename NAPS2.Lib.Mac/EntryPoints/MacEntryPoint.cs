@@ -1,6 +1,4 @@
-﻿using Eto;
-using Eto.Forms;
-using NAPS2.EtoForms;
+﻿using NAPS2.EtoForms;
 using NAPS2.EtoForms.Ui;
 using NAPS2.Modules;
 using Ninject;
@@ -24,6 +22,16 @@ public static class MacEntryPoint
         kernel.Get<CultureHelper>().SetCulturesFromConfig();
         TaskScheduler.UnobservedTaskException += UnhandledTaskException;
         Trace.Listeners.Add(new ConsoleTraceListener());
+
+        Runtime.MarshalManagedException += (_, eventArgs) =>
+        {
+            Log.ErrorException("Marshalling managed exception", eventArgs.Exception);
+            eventArgs.ExceptionMode = MarshalManagedExceptionMode.UnwindNativeCode;
+        };
+        Runtime.MarshalObjectiveCException += (_, eventArgs) =>
+        {
+            Log.Error($"Marshalling ObjC exception: {eventArgs.Exception.Description}");
+        };
 
         // Show the main form
         var application = EtoPlatform.Current.CreateApplication();
