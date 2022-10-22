@@ -14,10 +14,29 @@ public class TesseractLanguageManager
 
     public TesseractLanguageManager(string basePath)
     {
-        TessdataBasePath = Path.Combine(basePath, "tesseract-4.0.0b4");
+        TessdataBasePath = GetTessdataBasePath(basePath);
         LanguageComponents = _languageData.Data.Select(x =>
             new MultiFileExternalComponent($"ocr-{x.Code}", TessdataBasePath, new[] { $"best/{x.Code}.traineddata", $"fast/{x.Code}.traineddata" },
                 new DownloadInfo(x.Filename, Mirrors, x.Size, x.Sha1, DownloadFormat.Zip)));
+    }
+
+    private string GetTessdataBasePath(string basePath)
+    {
+        var legacyBasePath = Path.Combine(basePath, "tesseract-4.0.0b4");
+        var newBasePath = Path.Combine(basePath, "tesseract4");
+        if (Directory.Exists(legacyBasePath) && !Directory.Exists(newBasePath))
+        {
+            try
+            {
+                Directory.Move(legacyBasePath, newBasePath);
+            }
+            catch (Exception)
+            {
+                // Ignore errors and keep the legacy path, e.g. if the components folder is read-only
+                return legacyBasePath;
+            }
+        }
+        return newBasePath;
     }
 
     public string TessdataBasePath { get; }

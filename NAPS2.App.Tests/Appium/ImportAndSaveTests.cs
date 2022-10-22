@@ -16,7 +16,7 @@ public class ImportAndSaveTests : AppiumTests
         File.WriteAllBytes(Path.Combine(FolderPath, "patcht.pdf"), PdfResources.word_patcht_pdf);
         File.WriteAllBytes(Path.Combine(FolderPath, "image.pdf"), PdfResources.image_pdf);
         File.WriteAllBytes(Path.Combine(FolderPath, "text.jpg"), BinaryResources.ocr_test);
-        var tessdata = Path.Combine(FolderPath, "components", "tesseract-4.0.0b4", "fast");
+        var tessdata = Path.Combine(FolderPath, "components", "tesseract4", "fast");
         Directory.CreateDirectory(tessdata);
         File.WriteAllBytes(Path.Combine(tessdata, "eng.traineddata"), BinaryResources.eng_traineddata);
         
