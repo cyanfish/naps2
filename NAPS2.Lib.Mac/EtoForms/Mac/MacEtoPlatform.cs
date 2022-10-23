@@ -25,6 +25,11 @@ public class MacEtoPlatform : EtoPlatform
 
     public override void ConfigureImageButton(Button button)
     {
+        if (button.ImagePosition == ButtonImagePosition.Above)
+        {
+            var nsButton = (NSButton) button.ToNative();
+            nsButton.ImageHugsTitle = true;
+        }
     }
 
     public override Bitmap ToBitmap(IMemoryImage image)
