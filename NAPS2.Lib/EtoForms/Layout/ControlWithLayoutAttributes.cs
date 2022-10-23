@@ -50,7 +50,7 @@ public class ControlWithLayoutAttributes : LayoutElement
         bounds.Size = UpdateFixedDimensions(context, bounds.Size);
         if (Control != null)
         {
-            var location = new PointF(bounds.X + Padding.Left, bounds.Y + Padding.Right);
+            var location = new PointF(bounds.X + Padding.Left, bounds.Y + Padding.Top);
             var size = new SizeF(bounds.Width - Padding.Horizontal, bounds.Height - Padding.Vertical);
             size = SizeF.Max(SizeF.Empty, size);
             EnsureIsAdded(context);

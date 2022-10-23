@@ -256,6 +256,9 @@
   <data name="text" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\text.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="text_small" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Icons\text-small.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="control_play_blue" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\control_play_blue.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>

@@ -772,6 +772,16 @@ namespace NAPS2 {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
+        internal static byte[] text_small {
+            get {
+                object obj = ResourceManager.GetObject("text_small", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
         internal static byte[] tick {
             get {
                 object obj = ResourceManager.GetObject("tick", resourceCulture);

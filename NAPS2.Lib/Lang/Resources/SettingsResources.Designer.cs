@@ -222,6 +222,33 @@ namespace NAPS2.Lang.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Best.
+        /// </summary>
+        internal static string OcrMode_Best {
+            get {
+                return ResourceManager.GetString("OcrMode_Best", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fast.
+        /// </summary>
+        internal static string OcrMode_Fast {
+            get {
+                return ResourceManager.GetString("OcrMode_Fast", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Legacy.
+        /// </summary>
+        internal static string OcrMode_Legacy {
+            get {
+                return ResourceManager.GetString("OcrMode_Legacy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to A3 (297x420 mm).
         /// </summary>
         internal static string PageSize_A3 {

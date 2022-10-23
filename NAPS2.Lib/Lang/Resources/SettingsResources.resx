@@ -276,4 +276,13 @@
   <data name="WiaVersion_Wia20" xml:space="preserve">
     <value>2.0</value>
   </data>
+  <data name="OcrMode_Fast" xml:space="preserve">
+    <value>Fast</value>
+  </data>
+  <data name="OcrMode_Best" xml:space="preserve">
+    <value>Best</value>
+  </data>
+  <data name="OcrMode_Legacy" xml:space="preserve">
+    <value>Legacy</value>
+  </data>
 </root>

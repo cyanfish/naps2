@@ -16,21 +16,51 @@ public static class C
         new Label { Text = text, Wrap = WrapMode.None };
 
     /// <summary>
+    /// Creates a link button with the given URL as both text and click action.
+    /// </summary>
+    /// <param name="url"></param>
+    /// <returns></returns>
+    public static LinkButton UrlLink(string url)
+    {
+        void OnClick() => Process.Start(new ProcessStartInfo(url) { UseShellExecute = true });
+        return new LinkButton
+        {
+            Text = url,
+            Command = new ActionCommand(OnClick)
+        };
+    }
+
+    /// <summary>
+    /// Creates a link button with the specified text.
+    /// </summary>
+    /// <param name="text"></param>
+    /// <returns></returns>
+    public static LinkButton Link(string text)
+    {
+        return new LinkButton { Text = text };
+    }
+
+    /// <summary>
     /// Creates a link button with the specified text and action.
-    /// If the action is not specified, it will assume the text is a URL to be opened.
     /// </summary>
     /// <param name="text"></param>
     /// <param name="onClick"></param>
     /// <returns></returns>
-    public static LinkButton Link(string text, Action? onClick = null)
+    public static LinkButton Link(string text, Action onClick)
     {
-        onClick ??= () => Process.Start(text);
         return new LinkButton
         {
             Text = text,
             Command = new ActionCommand(onClick)
         };
     }
+
+    /// <summary>
+    /// Creates a button with the specified text.
+    /// </summary>
+    /// <param name="text"></param>
+    /// <returns></returns>
+    public static Button Button(string text) => new() { Text = text };
 
     /// <summary>
     /// Creates a button with the specified text and action.
@@ -83,6 +113,13 @@ public static class C
         new ControlWithLayoutAttributes(null).XScale().YScale();
 
     /// <summary>
+    /// Creates a null placeholder for Eto layouts.
+    /// </summary>
+    /// <returns></returns>
+    public static ControlWithLayoutAttributes Spacer() =>
+        new ControlWithLayoutAttributes(null);
+
+    /// <summary>
     /// Creates an label of default height to be used as a visual paragraph separator.
     /// </summary>
     /// <returns></returns>
@@ -90,7 +127,7 @@ public static class C
 
     /// <summary>
     /// Creates a hacky image button that supports accessible interaction.
-    /// 
+    ///
     /// It works by overlaying an image on top a button.
     /// If the image has transparency an offset may need to be specified to keep the button hidden.
     /// If the text is too large relative to the button it will be impossible to hide fully.
@@ -119,12 +156,20 @@ public static class C
         return pix;
     }
 
-    public static Label Label(string text)
+    public static Label Label(string text) => new() { Text = text };
+
+    public static DropDown EnumDropDown<T>(params T[] values) where T : Enum
     {
-        return new Label
+        var combo = new DropDown();
+        foreach (var item in values)
         {
-            Text = text
-        };
+            combo.Items.Add(new ListItem
+            {
+                Key = item.ToString(),
+                Text = item.Description()
+            });
+        }
+        return combo;
     }
 
     public static DropDown EnumDropDown<T>() where T : Enum
@@ -145,4 +190,6 @@ public static class C
         }
         return combo;
     }
+
+    public static CheckBox CheckBox(string text) => new() { Text = text };
 }

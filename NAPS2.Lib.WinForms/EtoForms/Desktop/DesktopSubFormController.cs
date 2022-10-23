@@ -51,14 +51,14 @@ public class DesktopSubFormController : IDesktopSubFormController
     {
         if (_tesseractLanguageManager.InstalledLanguages.Any())
         {
-            _formFactory.Create<FOcrSetup>().ShowDialog();
+            _formFactory.Create<OcrSetupForm>().ShowModal();
         }
         else
         {
             _formFactory.Create<FOcrLanguageDownload>().ShowDialog();
             if (_tesseractLanguageManager.InstalledLanguages.Any())
             {
-                _formFactory.Create<FOcrSetup>().ShowDialog();
+                _formFactory.Create<OcrSetupForm>().ShowModal();
             }
         }
     }
