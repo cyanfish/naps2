@@ -86,6 +86,7 @@ public class StubDesktopSubFormController : IDesktopSubFormController
 
     public void ShowOcrForm()
     {
+        _formFactory.Create<OcrSetupForm>().ShowModal();
     }
 
     public void ShowBatchScanForm()

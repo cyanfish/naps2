@@ -29,7 +29,7 @@ public class AboutForm : EtoDialogBase
         Icon = new Icon(1f, Icons.information_small.ToEtoImage());
         Resizable = false;
         FormStateController.RestoreFormState = false;
-            
+
         _donateButton = C.AccessibleImageButton(
             Icons.btn_donate_LG.ToEtoImage(),
             UiStrings.Donate,

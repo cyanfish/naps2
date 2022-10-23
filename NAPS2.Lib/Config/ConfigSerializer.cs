@@ -152,7 +152,8 @@ public class ConfigSerializer : VersionedSerializer<ConfigStorage<CommonConfig>>
         {
             Version = CommonConfig.CURRENT_VERSION,
             Culture = c.Culture,
-            FormStates = ImmutableList.CreateRange(c.FormStates),
+            // The new form states have different values (client size instead of form size), so best to go with defaults
+            FormStates = ImmutableList<FormState>.Empty, // ImmutableList.CreateRange(c.FormStates),
             BackgroundOperations = ImmutableHashSet.CreateRange(c.BackgroundOperations),
             CheckForUpdates = c.CheckForUpdates,
             LastUpdateCheckDate = c.LastUpdateCheckDate,

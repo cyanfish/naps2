@@ -9,6 +9,7 @@ public interface IFormStateController
     bool RestoreFormState { get; set; }
     bool AutoLayoutSize { get; set; }
     Size DefaultExtraLayoutSize { get; set; }
+    bool FixedHeightLayout { get; set; }
     string FormName { get; }
     void UpdateLayoutSize(LayoutController layoutController);
 }

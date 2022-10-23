@@ -100,6 +100,7 @@ public class EditProfileForm : EtoDialogBase
         _deviceName.KeyDown += DeviceName_KeyDown;
 
         FormStateController.DefaultExtraLayoutSize = new Size(60, 0);
+        FormStateController.FixedHeightLayout = true;
         LayoutController.Content = L.Column(
             L.Row(
                 L.Column(

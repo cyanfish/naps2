@@ -13,6 +13,7 @@ public class FormStateController : IFormStateController
     private bool _hasSetSize;
     private Size _defaultClientSize;
     private Size _minimumClientSize;
+    private Size _maximumClientSize;
 
     public FormStateController(Window window, Naps2Config config)
     {
@@ -33,6 +34,8 @@ public class FormStateController : IFormStateController
 
     public Size DefaultExtraLayoutSize { get; set; }
 
+    public bool FixedHeightLayout { get; set; }
+
     public string FormName => _window.GetType().Name;
 
     public void UpdateLayoutSize(LayoutController layoutController)
@@ -41,6 +44,10 @@ public class FormStateController : IFormStateController
         {
             _minimumClientSize = layoutController.GetLayoutSize(false);
             _defaultClientSize = layoutController.GetLayoutSize(true) + DefaultExtraLayoutSize;
+            if (FixedHeightLayout)
+            {
+                _maximumClientSize = new Size(0, _minimumClientSize.Height);
+            }
         }
     }
 
@@ -89,12 +96,20 @@ public class FormStateController : IFormStateController
                 _window.Location = location;
             }
         }
-        if (!size.IsEmpty)
+        if (!size.IsEmpty && _window.Resizable)
         {
-            EtoPlatform.Current.SetFormSize(_window, size);
+            if (!_minimumClientSize.IsEmpty)
+            {
+                size = Size.Max(size, _minimumClientSize);
+            }
+            if (_maximumClientSize.Height > 0)
+            {
+                size.Height = Math.Min(size.Height, _maximumClientSize.Height);
+            }
+            EtoPlatform.Current.SetClientSize(_window, size);
             _hasSetSize = true;
         }
-        if (_formState.Maximized)
+        if (_formState.Maximized && _window.Resizable)
         {
             _window.WindowState = WindowState.Maximized;
         }
@@ -107,7 +122,7 @@ public class FormStateController : IFormStateController
             _formState.Maximized = (_window.WindowState == WindowState.Maximized);
             if (_window.WindowState == WindowState.Normal)
             {
-                var size = EtoPlatform.Current.GetFormSize(_window);
+                var size = EtoPlatform.Current.GetClientSize(_window);
                 _formState.Size = new FormState.FormSize(size.Width, size.Height);
             }
         }
