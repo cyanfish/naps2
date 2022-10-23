@@ -11,10 +11,6 @@ namespace NAPS2.EtoForms.Gtk;
 
 public class GtkEtoPlatform : EtoPlatform
 {
-    private const int MIN_BUTTON_WIDTH = 75;
-    private const int MIN_BUTTON_HEIGHT = 32;
-    private const int IMAGE_PADDING = 5;
-
     public override bool IsGtk => true;
 
     public override Application CreateApplication()

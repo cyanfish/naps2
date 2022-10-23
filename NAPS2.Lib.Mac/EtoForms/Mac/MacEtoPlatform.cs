@@ -9,10 +9,6 @@ namespace NAPS2.EtoForms.Mac;
 
 public class MacEtoPlatform : EtoPlatform
 {
-    private const int MIN_BUTTON_WIDTH = 75;
-    private const int MIN_BUTTON_HEIGHT = 32;
-    private const int IMAGE_PADDING = 5;
-
     public override bool IsMac => true;
 
     public override Application CreateApplication()
