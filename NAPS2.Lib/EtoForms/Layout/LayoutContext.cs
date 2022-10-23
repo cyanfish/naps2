@@ -15,4 +15,6 @@ public record LayoutContext(Control Layout)
     public bool IsNaturalSizeQuery { get; set; }
 
     public int Depth { get; set; }
+
+    public Window? Window { get; set; }
 }

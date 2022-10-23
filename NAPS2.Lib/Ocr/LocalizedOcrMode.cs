@@ -4,7 +4,6 @@ namespace NAPS2.Ocr;
 
 public enum LocalizedOcrMode
 {
-    Default,
     [LocalizedDescription(typeof(SettingsResources), "OcrMode_Fast")]
     Fast,
     [LocalizedDescription(typeof(SettingsResources), "OcrMode_Best")]

@@ -393,7 +393,7 @@ public class EditProfileForm : EtoDialogBase
             Resolution = (ScanDpi) _resolution.SelectedIndex,
             PaperSource = (ScanSource) _paperSource.SelectedIndex,
 
-            EnableAutoSave = _enableAutoSave.Checked == true,
+            EnableAutoSave = _enableAutoSave.IsChecked(),
             AutoSaveSettings = ScanProfile.AutoSaveSettings,
             Quality = ScanProfile.Quality,
             BrightnessContrastAfterScan = ScanProfile.BrightnessContrastAfterScan,
@@ -471,7 +471,7 @@ public class EditProfileForm : EtoDialogBase
             _contrastText.Enabled = settingsEnabled;
 
             _enableAutoSave.Enabled = !locked && !Config.Get(c => c.DisableAutoSave);
-            _autoSaveSettings.Enabled = _enableAutoSave.Checked == true;
+            _autoSaveSettings.Enabled = _enableAutoSave.IsChecked();
             _autoSaveSettings.Visible = !locked && !Config.Get(c => c.DisableAutoSave);
 
             _advanced.Enabled = !locked;
@@ -575,7 +575,7 @@ public class EditProfileForm : EtoDialogBase
     {
         if (!_suppressChangeEvent)
         {
-            if (_enableAutoSave.Checked == true)
+            if (_enableAutoSave.IsChecked())
             {
                 _autoSaveSettings.Enabled = true;
                 // var form = FormFactory.Create<FAutoSaveSettings>();
@@ -587,7 +587,7 @@ public class EditProfileForm : EtoDialogBase
                 // }
             }
         }
-        _autoSaveSettings.Enabled = _enableAutoSave.Checked == true;
+        _autoSaveSettings.Enabled = _enableAutoSave.IsChecked();
     }
 
     private void DeviceName_KeyDown(object? sender, KeyEventArgs e)

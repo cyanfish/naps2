@@ -141,7 +141,7 @@ public class ProfilesForm : EtoDialogBase
                         C.Button(_deleteCommand, ButtonImagePosition.Left)
                     )
                 ),
-                C.Button(UiStrings.Done, Close)
+                C.CancelButton(this, UiStrings.Done)
             ).Aligned());
     }
 

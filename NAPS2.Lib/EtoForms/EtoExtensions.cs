@@ -35,4 +35,9 @@ public static class EtoExtensions
     {
         contextMenu.Items.AddRange(menuItems);
     }
+
+    public static bool IsChecked(this CheckBox checkBox)
+    {
+        return checkBox.Checked == true;
+    }
 }

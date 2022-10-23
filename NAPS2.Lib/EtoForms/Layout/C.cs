@@ -192,4 +192,35 @@ public static class C
     }
 
     public static CheckBox CheckBox(string text) => new() { Text = text };
+
+    public static Button CancelButton(Dialog dialog, string? text = null) =>
+        DialogButton(dialog, text ?? UiStrings.Cancel, isAbort: true);
+
+    public static Button OkButton(Dialog dialog, Action? beforeClose = null, string? text = null) =>
+        DialogButton(dialog, text ?? UiStrings.OK, isDefault: true, beforeClose: beforeClose);
+
+    public static Button DialogButton(Dialog dialog, string text, bool isDefault = false, bool isAbort = false,
+        Action? beforeClose = null)
+    {
+        var button = Button(text, () =>
+        {
+            beforeClose?.Invoke();
+            dialog.Close();
+        });
+        if (isDefault)
+        {
+            dialog.DefaultButton = button;
+        }
+        if (isAbort)
+        {
+            dialog.AbortButton = button;
+        }
+        return button;
+    }
+
+    private static IEnumerable<Control> GetAllControls(Control control)
+    {
+        if (control is not Container container) return Enumerable.Repeat(control, 1);
+        return container.Controls.SelectMany(GetAllControls).Append(control);
+    }
 }

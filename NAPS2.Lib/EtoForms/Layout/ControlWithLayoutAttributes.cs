@@ -1,3 +1,4 @@
+using System.Reflection;
 using Eto.Drawing;
 using Eto.Forms;
 
@@ -5,7 +6,11 @@ namespace NAPS2.EtoForms.Layout;
 
 public class ControlWithLayoutAttributes : LayoutElement
 {
+    private static readonly FieldInfo VisualParentField =
+        typeof(Control).GetField("VisualParent_Key", BindingFlags.NonPublic | BindingFlags.Static)!;
+
     private bool _isAdded;
+    private bool _isWindowSet;
 
     public ControlWithLayoutAttributes(Control? control)
     {
@@ -93,10 +98,16 @@ public class ControlWithLayoutAttributes : LayoutElement
 
     private void EnsureIsAdded(LayoutContext context)
     {
+        if (Control == null) return;
         if (context.IsFirstLayout && !_isAdded)
         {
             EtoPlatform.Current.AddToContainer(context.Layout, Control);
             _isAdded = true;
+        }
+        if (context.IsFirstLayout && !_isWindowSet && context.Window != null)
+        {
+            Control.Properties.Set<Container>(VisualParentField.GetValue(null), context.Window);
+            _isWindowSet = true;
         }
     }
 }

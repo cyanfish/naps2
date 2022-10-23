@@ -72,7 +72,7 @@ public class AboutForm : EtoDialogBase
                     ).XScale(),
                     L.Column(
                         C.Filler(),
-                        C.Button(UiStrings.OK, Close)
+                        C.DialogButton(this, UiStrings.OK, true, true)
                     ).Padding(left: 20)
                 )
             )
@@ -81,7 +81,7 @@ public class AboutForm : EtoDialogBase
         
     private void DoUpdateCheck()
     {
-        if (_checkForUpdates.Checked == true)
+        if (_checkForUpdates.IsChecked())
         {
             _updateChecker.CheckForUpdates().ContinueWith(task =>
             {
@@ -110,7 +110,7 @@ public class AboutForm : EtoDialogBase
 
     private Control GetUpdatePanelContent()
     {
-        if (_checkForUpdates.Checked != true)
+        if (!_checkForUpdates.IsChecked())
         {
             return C.NoWrap(MiscResources.UpdateCheckDisabled);
         }
@@ -136,7 +136,7 @@ public class AboutForm : EtoDialogBase
 
     private void CheckForUpdatesChanged(object? sender, EventArgs e)
     {
-        Config.User.Set(c => c.CheckForUpdates, _checkForUpdates.Checked == true);
+        Config.User.Set(c => c.CheckForUpdates, _checkForUpdates.IsChecked());
         UpdateControls();
         DoUpdateCheck();
     }

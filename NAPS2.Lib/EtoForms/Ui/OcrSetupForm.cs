@@ -7,19 +7,35 @@ namespace NAPS2.EtoForms.Ui;
 
 public class OcrSetupForm : EtoDialogBase
 {
+    private readonly TesseractLanguageManager _tesseractLanguageManager;
+
     private readonly CheckBox _enableOcr = C.CheckBox(UiStrings.MakePdfsSearchable);
     private readonly DropDown _ocrLang = new();
     private readonly DropDown _ocrMode = C.EnumDropDown(LocalizedOcrMode.Fast, LocalizedOcrMode.Best);
     private readonly CheckBox _ocrAfterScanning = C.CheckBox(UiStrings.RunOcrAfterScanning);
     private readonly LinkButton _moreLanguages = C.Link(UiStrings.GetMoreLanguages);
-    private readonly Button _ok = C.Button(UiStrings.OK);
-    private readonly Button _cancel = C.Button(UiStrings.Cancel);
 
-    public OcrSetupForm(Naps2Config config) : base(config)
+    public OcrSetupForm(Naps2Config config, TesseractLanguageManager tesseractLanguageManager) : base(config)
     {
+        _tesseractLanguageManager = tesseractLanguageManager;
+
         Title = UiStrings.OcrSetupFormTitle;
         Icon = new Icon(1f, Icons.text_small.ToEtoImage());
         Resizable = false;
+
+        _enableOcr.CheckedChanged += EnableOcr_CheckedChanged;
+        _moreLanguages.Click += MoreLanguages_Click;
+
+        LoadLanguages();
+
+        _enableOcr.Checked = Config.Get(c => c.EnableOcr);
+        _ocrLang.SelectedKey = Config.Get(c => c.OcrLanguageCode) ?? "";
+        if (_ocrLang.SelectedIndex == -1) _ocrLang.SelectedIndex = 0;
+        _ocrMode.SelectedIndex = (int) Config.Get(c => c.OcrMode);
+        if (_ocrMode.SelectedIndex == -1) _ocrMode.SelectedIndex = 0;
+        _ocrAfterScanning.Checked = Config.Get(c => c.OcrAfterScanning);
+
+        UpdateView();
 
         LayoutController.Content = L.Column(
             _enableOcr,
@@ -36,9 +52,59 @@ public class OcrSetupForm : EtoDialogBase
             L.Row(
                 _moreLanguages.AlignCenter().Padding(right: 30),
                 C.Filler(),
-                _ok,
-                _cancel
+                C.OkButton(this, Save),
+                // TODO: Should we allow Esc to close the window if there are unsaved changes?
+                C.CancelButton(this)
             )
         );
+    }
+
+    private void LoadLanguages()
+    {
+        var languages = _tesseractLanguageManager.InstalledLanguages
+            .OrderBy(x => x.Name)
+            .ToList();
+        var selectedKey = _ocrLang.SelectedKey;
+        _ocrLang.Items.Clear();
+        _ocrLang.Items.AddRange(languages.Select(lang => new ListItem
+        {
+            Key = lang.Code,
+            Text = lang.Name
+        }));
+        _ocrLang.SelectedKey = selectedKey;
+    }
+
+    private void UpdateView()
+    {
+        bool isEnabled = _enableOcr.IsChecked();
+        _enableOcr.Enabled = !Config.AppLocked.TryGet(c => c.EnableOcr, out _);
+        _ocrLang.Enabled = isEnabled && !Config.AppLocked.TryGet(c => c.OcrLanguageCode, out _);
+        _ocrMode.Enabled = isEnabled && !Config.AppLocked.TryGet(c => c.OcrMode, out _);
+        _ocrAfterScanning.Enabled = isEnabled && !Config.AppLocked.TryGet(c => c.OcrAfterScanning, out _);
+        _moreLanguages.Enabled = !Config.AppLocked.TryGet(c => c.OcrLanguageCode, out _);
+    }
+
+    private void EnableOcr_CheckedChanged(object? sender, EventArgs e)
+    {
+        UpdateView();
+    }
+
+    private void MoreLanguages_Click(object? sender, EventArgs e)
+    {
+        // FormFactory.Create<FOcrLanguageDownload>().ShowDialog();
+        LoadLanguages();
+    }
+
+    private void Save()
+    {
+        if (!Config.AppLocked.TryGet(c => c.EnableOcr, out _))
+        {
+            var transact = Config.User.BeginTransaction();
+            transact.Set(c => c.EnableOcr, _enableOcr.IsChecked());
+            transact.Set(c => c.OcrLanguageCode, _ocrLang.SelectedKey);
+            transact.Set(c => c.OcrMode, (LocalizedOcrMode) _ocrMode.SelectedIndex);
+            transact.Set(c => c.OcrAfterScanning, _ocrAfterScanning.IsChecked());
+            transact.Commit();
+        }
     }
 }
