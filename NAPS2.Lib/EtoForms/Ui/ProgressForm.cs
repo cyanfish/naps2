@@ -31,7 +31,7 @@ public class ProgressForm : EtoDialogBase
             _progressBar.Size(420, 40),
             L.Row(
                 _numeric,
-                C.ZeroSpace().XScale(),
+                C.Filler(),
                 _runInBg,
                 _cancel
             )

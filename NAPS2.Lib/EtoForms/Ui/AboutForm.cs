@@ -52,10 +52,10 @@ public class AboutForm : EtoDialogBase
                 L.Row(
                     L.Column(
                         C.NoWrap(string.Format(MiscResources.Version, AssemblyHelper.Version)),
-                        C.Link(NAPS2_HOMEPAGE)
+                        C.UrlLink(NAPS2_HOMEPAGE)
                     ),
                     L.Column(
-                        C.ZeroSpace().YScale(),
+                        C.Filler(),
                         _donateButton
                     ).Padding(left: 10)
                 ),
@@ -68,14 +68,13 @@ public class AboutForm : EtoDialogBase
                 L.Row(
                     L.Column(
                         C.NoWrap(UiStrings.IconsFrom),
-                        C.Link(ICONS_HOMEPAGE)
+                        C.UrlLink(ICONS_HOMEPAGE)
                     ).XScale(),
                     L.Column(
-                        C.ZeroSpace().YScale(),
+                        C.Filler(),
                         C.Button(UiStrings.OK, Close)
                     ).Padding(left: 20)
-                ),
-                C.ZeroSpace()
+                )
             )
         );
     }

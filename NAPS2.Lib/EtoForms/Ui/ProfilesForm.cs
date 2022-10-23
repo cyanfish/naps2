@@ -138,8 +138,7 @@ public class ProfilesForm : EtoDialogBase
                     L.Row(
                         C.Button(_addCommand, ButtonImagePosition.Left),
                         C.Button(_editCommand, ButtonImagePosition.Left),
-                        C.Button(_deleteCommand, ButtonImagePosition.Left),
-                        C.ZeroSpace().XScale()
+                        C.Button(_deleteCommand, ButtonImagePosition.Left)
                     )
                 ),
                 C.Button(UiStrings.Done, Close)

@@ -37,8 +37,7 @@ public class SelectDeviceForm : EtoDialogBase
             _devices.NaturalSize(150, 100).XScale(),
             L.Column(
                 selectButton,
-                cancelButton,
-                C.ZeroSpace().YScale()
+                cancelButton
             )
         );
     }

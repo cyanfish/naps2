@@ -152,13 +152,12 @@ public class EditProfileForm : EtoDialogBase
             ),
             L.Row(
                 _enableAutoSave,
-                _autoSaveSettings,
-                C.ZeroSpace().XScale()
+                _autoSaveSettings
             ),
-            C.ZeroSpace().YScale(),
+            C.Filler(),
             L.Row(
                 _advanced,
-                C.ZeroSpace().XScale(),
+                C.Filler(),
                 _ok,
                 _cancel
             )

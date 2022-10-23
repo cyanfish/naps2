@@ -76,14 +76,11 @@ public static class C
     }
 
     /// <summary>
-    /// Creates a null placeholder for Eto layouts.
-    /// 
-    /// For example, it can be added to a row or column to absorb scaling.
-    /// If it isn't at the end of the row/column, it must be annotated with .XScale() or .YScale(). 
+    /// Creates a null placeholder for Eto layouts that absorbs scaling.
     /// </summary>
     /// <returns></returns>
-    public static ControlWithLayoutAttributes ZeroSpace() =>
-        new ControlWithLayoutAttributes(null);
+    public static ControlWithLayoutAttributes Filler() =>
+        new ControlWithLayoutAttributes(null).XScale().YScale();
 
     /// <summary>
     /// Creates an label of default height to be used as a visual paragraph separator.
