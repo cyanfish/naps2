@@ -108,6 +108,7 @@ public class EditProfileForm : EtoDialogBase
                     L.Row(
                         driverElements.ToArray()
                     ),
+                    C.Spacer(),
                     C.Label(UiStrings.DeviceLabel),
                     L.Row(
                         _deviceName.XScale(),
@@ -116,10 +117,12 @@ public class EditProfileForm : EtoDialogBase
                 ).XScale(),
                 new ImageView { Image = Icons.scanner_48.ToEtoImage() }
             ),
+            C.Spacer(),
             L.Row(
                 _predefinedSettings,
                 _nativeUi
             ),
+            C.Spacer(),
             L.Row(
                 L.Column(
                     C.Label(UiStrings.PaperSourceLabel),
