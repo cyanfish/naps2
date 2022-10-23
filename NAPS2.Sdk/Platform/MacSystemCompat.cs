@@ -43,15 +43,17 @@ public class MacSystemCompat : ISystemCompat
 
     public string PdfiumLibraryName => "libpdfium.dylib";
 
-    public string[] SaneLibraryDeps => new[] { "libusb.dylib", "libjpeg.dylib" };
+    public string[] SaneLibraryDeps => new[] { "libusb-1.0.0.dylib", "libjpeg.62.dylib" };
 
-    public string SaneLibraryName => "libsane.dylib";
+    public string SaneLibraryName => "libsane.1.dylib";
 
     public IntPtr LoadLibrary(string path) => MacInterop.dlopen(path, RTLD_LAZY | RTLD_GLOBAL);
 
     public IntPtr LoadSymbol(IntPtr libraryHandle, string symbol) => MacInterop.dlsym(libraryHandle, symbol);
 
     public string GetLoadError() => MacInterop.dlerror();
+
+    public void SetEnv(string name, string value) => MacInterop.setenv(name, value, 1);
 
     public IDisposable FileReadLock(string path) => new FileStream(path, FileMode.Open, FileAccess.Read);
 

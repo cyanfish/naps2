@@ -12,4 +12,7 @@ public static class MacInterop
 
     [DllImport("libSystem.dylib")]
     public static extern IntPtr dlsym(IntPtr handle, string symbol);
+
+    [DllImport("libSystem.dylib")]
+    public static extern int setenv(string name, string value, int overwrite);
 }

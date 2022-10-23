@@ -39,6 +39,8 @@ public class LinuxSystemCompat : ISystemCompat
 
     public string GetLoadError() => LinuxInterop.dlerror();
 
+    public void SetEnv(string name, string value) => throw new NotSupportedException();
+
     public IDisposable FileReadLock(string path) => new FileStream(path, FileMode.Open, FileAccess.Read);
 
     public IDisposable FileWriteLock(string path) => new FileStream(path, FileMode.Open, FileAccess.Write);

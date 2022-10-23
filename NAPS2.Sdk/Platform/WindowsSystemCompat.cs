@@ -38,6 +38,8 @@ public abstract class WindowsSystemCompat : ISystemCompat
 
     public abstract IntPtr LoadSymbol(IntPtr libraryHandle, string symbol);
 
+    public void SetEnv(string name, string value) => throw new NotSupportedException();
+
     public IDisposable? FileReadLock(string path) => null;
 
     public IDisposable? FileWriteLock(string path) => null;

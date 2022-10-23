@@ -37,4 +37,6 @@ public interface ISystemCompat
     IDisposable? FileReadLock(string path);
 
     IDisposable? FileWriteLock(string path);
+
+    void SetEnv(string name, string value);
 }
