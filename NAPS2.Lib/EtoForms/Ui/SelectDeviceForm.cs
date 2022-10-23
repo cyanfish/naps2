@@ -34,7 +34,7 @@ public class SelectDeviceForm : EtoDialogBase
         Title = UiStrings.SelectSource;
         FormStateController.DefaultExtraLayoutSize = new Size(50, 0);
         LayoutController.Content = L.Row(
-            _devices.XScale(),
+            _devices.NaturalSize(150, 100).XScale(),
             L.Column(
                 selectButton,
                 cancelButton,
@@ -47,9 +47,8 @@ public class SelectDeviceForm : EtoDialogBase
 
     public ScanDevice? SelectedDevice { get; private set; }
 
-    protected override void OnLoad(EventArgs e)
+    protected override void OnPreLoad(EventArgs e)
     {
-        base.OnLoad(e);
         foreach (var device in DeviceList)
         {
             _devices.Items.Add(new ListItem
@@ -62,6 +61,10 @@ public class SelectDeviceForm : EtoDialogBase
         {
             _devices.SelectedIndex = 0;
         }
+        // TODO: Re-order things so we don't need to do this twice
+        // Just need to be careful not to break things cross-platform
+        FormStateController.UpdateLayoutSize(LayoutController);
+        base.OnPreLoad(e);
     }
 
     private void Select_Click(object? sender, EventArgs e)

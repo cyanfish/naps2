@@ -14,7 +14,9 @@ public class ControlWithLayoutAttributes : LayoutElement
 
     public ControlWithLayoutAttributes(
         ControlWithLayoutAttributes control, bool? xScale = null, bool? yScale = null,
-        Padding? padding = null, int? width = null, int? height = null,
+        Padding? padding = null,
+        int? width = null, int? height = null,
+        int? naturalWidth = null, int? naturalHeight = null,
         LayoutAlignment? alignment = null)
     {
         Control = control.Control;
@@ -23,6 +25,8 @@ public class ControlWithLayoutAttributes : LayoutElement
         Padding = padding ?? control.Padding;
         Width = width ?? control.Width;
         Height = height ?? control.Height;
+        NaturalWidth = naturalWidth ?? control.NaturalWidth;
+        NaturalHeight = naturalHeight ?? control.NaturalHeight;
         Alignment = alignment ?? control.Alignment;
     }
 
@@ -33,6 +37,8 @@ public class ControlWithLayoutAttributes : LayoutElement
     private Padding Padding { get; }
     private int? Width { get; }
     private int? Height { get; }
+    public int? NaturalWidth { get; }
+    public int? NaturalHeight { get; }
 
     public override void DoLayout(LayoutContext context, RectangleF bounds)
     {
@@ -41,7 +47,7 @@ public class ControlWithLayoutAttributes : LayoutElement
             var text = Control is TextControl txt ? $"\"{txt.Text}\" " : "";
             Debug.WriteLine($"{new string(' ', context.Depth)}{text}{Control?.GetType().Name ?? "ZeroSpace"} layout with bounds {bounds}");
         }
-        bounds.Size = UpdateFixedDimensions(bounds.Size);
+        bounds.Size = UpdateFixedDimensions(context, bounds.Size);
         if (Control != null)
         {
             var location = new PointF(bounds.X + Padding.Left, bounds.Y + Padding.Right);
@@ -60,11 +66,11 @@ public class ControlWithLayoutAttributes : LayoutElement
             EnsureIsAdded(context);
             size = EtoPlatform.Current.GetPreferredSize(Control, parentBounds.Size);
         }
-        size = UpdateFixedDimensions(size);
+        size = UpdateFixedDimensions(context, size);
         return new SizeF(size.Width + Padding.Horizontal, size.Height + Padding.Vertical);
     }
 
-    private SizeF UpdateFixedDimensions(SizeF size)
+    private SizeF UpdateFixedDimensions(LayoutContext context, SizeF size)
     {
         if (Width != null)
         {
@@ -73,6 +79,14 @@ public class ControlWithLayoutAttributes : LayoutElement
         if (Height != null)
         {
             size.Height = Height.Value;
+        }
+        if (context.IsNaturalSizeQuery && NaturalWidth != null)
+        {
+            size.Width = Math.Max(size.Width, NaturalWidth.Value);
+        }
+        if (context.IsNaturalSizeQuery && NaturalHeight != null)
+        {
+            size.Height = Math.Max(size.Height, NaturalHeight.Value);
         }
         return size;
     }

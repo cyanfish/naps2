@@ -42,13 +42,15 @@ public class LayoutController
         window.SizeChanged += (_, _) => DoLayout();;
     }
 
-    public Size GetNaturalSize()
+    public Size GetLayoutSize(bool natural)
     {
         if (_content == null) throw new InvalidOperationException();
         var bounds = new RectangleF(0, 0, int.MaxValue, int.MaxValue);
-        var contentSize = _content.GetPreferredSize(GetLayoutContext(), bounds);
+        var context = GetLayoutContext() with { IsNaturalSizeQuery = natural };
+        var contentSize = _content.GetPreferredSize(context, bounds);
         var padding = new SizeF(RootPadding * 2, RootPadding * 2);
-        return Size.Ceiling(contentSize + padding);
+        var naturalSize = Size.Ceiling(contentSize + padding);
+        return naturalSize;
     }
 
     private void DoLayout()

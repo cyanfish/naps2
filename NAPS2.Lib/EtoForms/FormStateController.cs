@@ -39,9 +39,8 @@ public class FormStateController : IFormStateController
     {
         if (AutoLayoutSize)
         {
-            var naturalSize = layoutController.GetNaturalSize();
-            _minimumClientSize = naturalSize;
-            _defaultClientSize = naturalSize + DefaultExtraLayoutSize;
+            _minimumClientSize = layoutController.GetLayoutSize(false);
+            _defaultClientSize = layoutController.GetLayoutSize(true) + DefaultExtraLayoutSize;
         }
     }
 
