@@ -9,9 +9,18 @@ public class AssemblyHelper
         return Path.GetDirectoryName(assembly?.Location) ?? LibFolder;
     }
 
-    public static string LibFolder { get; } = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) ?? "";
+    public static string LibFolder
+    {
+        get
+        {
+            var assemblyFolder = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            return string.IsNullOrEmpty(assemblyFolder) ? AppContext.BaseDirectory : assemblyFolder;
+        }
+    }
 
-    public static string EntryFolder { get; } = GetFolder(Assembly.GetEntryAssembly());
+    // We can't use the assembly location, see
+    // https://learn.microsoft.com/en-us/dotnet/core/deploying/single-file/overview?tabs=cli#api-incompatibility
+    public static string EntryFolder { get; } = AppContext.BaseDirectory;
 
     public static string EntryFile =>
         Assembly.GetEntryAssembly()?.Location ?? throw new InvalidOperationException("No entry file");
