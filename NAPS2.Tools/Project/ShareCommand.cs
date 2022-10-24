@@ -9,9 +9,21 @@ public static class ShareCommand
         bool doIn = opts.ShareType is "both" or "in";
         bool doOut = opts.ShareType is "both" or "out";
 
-        var localFolder = Path.Combine(Paths.Publish, ProjectHelper.GetDefaultProjectVersion());
-        var syncFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "OneDrive",
-            "Software", "naps2", "publish");
+        var version = ProjectHelper.GetDefaultProjectVersion();
+
+        var userProfile = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
+        var syncBaseFolder = Path.Combine(userProfile, "OneDrive", "Software", "naps2");
+        if (!Directory.Exists(syncBaseFolder))
+        {
+            // Don't create automatically as we don't want to create a OneDrive folder that doesn't exist
+            throw new InvalidOperationException($"Sync folder does not exist: {syncBaseFolder}");
+        }
+
+        var syncFolder = Path.Combine(syncBaseFolder, "publish", version);
+        if (!Directory.Exists(syncFolder)) Directory.CreateDirectory(syncFolder);
+
+        var localFolder = Path.Combine(Paths.Publish, version);
+        if (!Directory.Exists(localFolder)) Directory.CreateDirectory(localFolder);
 
         var l = doIn ? "<" : "";
         var r = doOut ? ">" : "";
