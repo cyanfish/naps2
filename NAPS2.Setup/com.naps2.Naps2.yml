@@ -1,0 +1,27 @@
+app-id: com.naps2.Naps2
+runtime: org.freedesktop.Platform
+runtime-version: '22.08'
+sdk: org.freedesktop.Sdk
+command: NAPS2
+modules:
+  - name: main
+    buildsystem: simple
+    build-commands:
+      - install -D NAPS2 /app/bin/NAPS2
+    sources:
+      - type: file
+        path: NAPS2
+finish-args:
+  # GUI
+  - --socket=x11
+  - --share=ipc
+  - --socket=wayland
+  # USB scanning
+  - --device=all
+  # Network scanning
+  - --share=network
+  # Full file access makes sure batch scanning, console, etc. work
+  # It also gives us access to host-installed SANE backends
+  - --filesystem=host
+  # - --filesystem=xdg-config/naps2:create
+  # - --filesystem=xdg-documents
