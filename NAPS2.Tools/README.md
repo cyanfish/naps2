@@ -17,6 +17,7 @@ n2 build all
 
 ```
 alias n2="dotnet run -p:LangVersion=preview --project NAPS2.Tools --"
+n2 build all
 ```
 
 ## Commands
@@ -29,6 +30,9 @@ n2 test
 n2 build exe
 n2 pkg exe
 n2 verify exe
+n2 publish exe
+n2 virus exe
+n2 share
 ```
 - `clean`: Clear out bin/obj subfolders
 - `test`: Run solution tests
@@ -36,3 +40,6 @@ n2 verify exe
 - `pkg`: Generates the specified package type, e.g. exe => naps2-{version}-win-x64.exe installer
 - `verify`: Installs/extracts the packaged file and runs NAPS2.App.Tests against it
   - Requires elevation for exe/msi as it does a real install on your local machine (and uninstalls the old NAPS2)
+- `publish`: Runs a series of commands: clean, test, build, pkg, verify
+- `virus`: Uploads a package to VirusTotal for a false positive check 
+- `share`: Syncs local packages with a cloud folder (to help with cross-platform packaging)
