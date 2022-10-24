@@ -66,6 +66,7 @@ public class FormStateController : IFormStateController
         }
         if (!_hasSetSize && !DefaultClientSize.IsEmpty)
         {
+            // TODO: Use size delta to re-center
             EtoPlatform.Current.SetClientSize(_window, DefaultClientSize);
         }
         _loaded = true;
