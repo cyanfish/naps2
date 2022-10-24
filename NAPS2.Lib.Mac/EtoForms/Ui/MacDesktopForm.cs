@@ -39,7 +39,6 @@ public class MacDesktopForm : DesktopForm
         // TODO: What's the best place to initialize this? It needs to happen from the UI event loop.
         Invoker.Current = new SyncContextInvoker(SynchronizationContext.Current);
         base.OnLoad(e);
-        ClientSize = new Size(1000, 600);
     }
 
     protected override void UpdateTitle(ScanProfile? defaultProfile)

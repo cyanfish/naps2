@@ -55,7 +55,6 @@ public class GtkDesktopForm : DesktopForm
         // TODO: What's the best place to initialize this? It needs to happen from the UI event loop.
         Invoker.Current = new SyncContextInvoker(SynchronizationContext.Current);
         base.OnLoad(e);
-        ClientSize = new Eto.Drawing.Size(1210, 600);
         var listView = (GtkListView<UiImage>) _listView;
         // TODO: This is a bit of a hack as for some reason the view doesn't update unless we do this
         listView.Updated += (_, _) => Content = _listView.Control;

@@ -11,7 +11,6 @@ public class FormStateController : IFormStateController
     private FormState? _formState;
     private bool _loaded;
     private bool _hasSetSize;
-    private Size _defaultClientSize;
     private Size _minimumClientSize;
     private Size _maximumClientSize;
 
@@ -34,6 +33,8 @@ public class FormStateController : IFormStateController
 
     public Size DefaultExtraLayoutSize { get; set; }
 
+    public Size DefaultClientSize { get; set; }
+
     public bool FixedHeightLayout { get; set; }
 
     public string FormName => _window.GetType().Name;
@@ -43,7 +44,7 @@ public class FormStateController : IFormStateController
         if (AutoLayoutSize)
         {
             _minimumClientSize = layoutController.GetLayoutSize(false);
-            _defaultClientSize = layoutController.GetLayoutSize(true) + DefaultExtraLayoutSize;
+            DefaultClientSize = layoutController.GetLayoutSize(true) + DefaultExtraLayoutSize;
             if (FixedHeightLayout)
             {
                 _maximumClientSize = new Size(0, _minimumClientSize.Height);
@@ -63,9 +64,9 @@ public class FormStateController : IFormStateController
         {
             DoRestoreFormState();
         }
-        if (!_hasSetSize && !_defaultClientSize.IsEmpty)
+        if (!_hasSetSize && !DefaultClientSize.IsEmpty)
         {
-            EtoPlatform.Current.SetClientSize(_window, _defaultClientSize);
+            EtoPlatform.Current.SetClientSize(_window, DefaultClientSize);
         }
         _loaded = true;
     }

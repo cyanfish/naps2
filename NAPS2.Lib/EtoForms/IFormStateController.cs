@@ -8,6 +8,7 @@ public interface IFormStateController
     bool SaveFormState { get; set; }
     bool RestoreFormState { get; set; }
     bool AutoLayoutSize { get; set; }
+    Size DefaultClientSize { get; set; }
     Size DefaultExtraLayoutSize { get; set; }
     bool FixedHeightLayout { get; set; }
     string FormName { get; }

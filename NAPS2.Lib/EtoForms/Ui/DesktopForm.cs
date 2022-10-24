@@ -1,5 +1,6 @@
 using System.Collections.Immutable;
 using System.Threading;
+using Eto.Drawing;
 using Eto.Forms;
 using NAPS2.EtoForms.Desktop;
 using NAPS2.ImportExport.Images;
@@ -78,6 +79,8 @@ public abstract class DesktopForm : EtoFormBase
         _imageListSyncer?.Dispose();
 
         LayoutController.RootPadding = 0;
+        FormStateController.AutoLayoutSize = false;
+        FormStateController.DefaultClientSize = new Size(1210, 600);
         SetContent(_listView.Control);
         AfterLayout();
 

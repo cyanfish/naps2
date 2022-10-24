@@ -40,7 +40,6 @@ public class WinFormsDesktopForm : DesktopForm
             imageListActions, desktopFormProvider, desktopSubFormController, commands)
     {
         _form = this.ToNative();
-        _form.ClientSize = new Size(1204, 526);
     }
 
     protected override void OnLoad(EventArgs e)
