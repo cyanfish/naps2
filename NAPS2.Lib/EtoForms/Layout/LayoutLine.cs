@@ -155,6 +155,10 @@ public abstract class LayoutLine<TOrthogonal> : LayoutContainer
                 excess -= cellLengths[i];
             }
         }
+        // TODO: This protects against both forms being shrunk below their minimum size, but also
+        // on Gtk apparently the bounds are wrong for non-resizable forms. This would become visible
+        // if we have a non-resizable form with extra layout size + scaling in the same direction.
+        if (excess <= 0) return;
         // Update the lengths of scaling controls
         var scaleAmount = Math.DivRem((int) excess, scaleCount, out int scaleExtra);
         for (int i = 0; i < Children.Length; i++)
