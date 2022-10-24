@@ -7,4 +7,6 @@ public record TargetConstraints
     public bool AllowDebug { get; set; }
 
     public bool AllowMultiplePlatforms { get; set; }
+
+    public bool RequireBuildablePlatform { get; set; }
 }

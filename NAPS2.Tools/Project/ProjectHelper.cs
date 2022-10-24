@@ -30,7 +30,9 @@ public static class ProjectHelper
     public static string GetPackagePath(string ext, Platform platform, string? version = null)
     {
         version ??= GetProjectVersion("NAPS2.App.WinForms");
-        return Path.Combine(Paths.Publish, version, $"naps2-{version}-{platform.PackageName()}.{ext}");
+        var path = Path.Combine(Paths.Publish, version, $"naps2-{version}-{platform.PackageName()}.{ext}");
+        Directory.CreateDirectory(Path.GetDirectoryName(path)!);
+        return path;
     }
 
     public static string GetInstallationFolder(Platform platform)

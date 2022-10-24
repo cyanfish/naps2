@@ -10,14 +10,22 @@ public static class PackageCommand
         // TODO: Allow customizing dotnet version
         var constraints = new TargetConstraints
         {
-            AllowMultiplePlatforms = true
+            AllowMultiplePlatforms = true,
+            RequireBuildablePlatform = true
         };
         foreach (var target in TargetsHelper.Enumerate(opts.BuildType, opts.Platform, constraints))
         {
             switch (target.BuildType)
             {
                 case BuildType.Exe:
-                    InnoSetupPackager.PackageExe(GetPackageInfo(target.Platform, "InstallerEXE"), opts.Verbose);
+                    if (target.Platform is Platform.Mac or Platform.MacArm)
+                    {
+                        MacPackager.Package(GetPackageInfo(target.Platform, "InstallerEXE"), opts.Verbose);
+                    }
+                    else if (target.Platform is Platform.Win64 or Platform.Win32)
+                    {
+                        InnoSetupPackager.PackageExe(GetPackageInfo(target.Platform, "InstallerEXE"), opts.Verbose);
+                    }
                     break;
                 case BuildType.Msi:
                     WixToolsetPackager.PackageMsi(GetPackageInfo(target.Platform, "InstallerMSI"), opts.Verbose);
@@ -33,6 +41,13 @@ public static class PackageCommand
     private static PackageInfo GetPackageInfo(Platform platform, string preferredConfig)
     {
         var pkgInfo = new PackageInfo(platform, ProjectHelper.GetProjectVersion("NAPS2.App.WinForms"));
+
+        if (platform is Platform.Mac or Platform.MacArm)
+        {
+            // We rely on "dotnet publish" to build the installer
+            return pkgInfo;
+        }
+
         foreach (var project in new[]
                      { "NAPS2.Sdk", "NAPS2.Lib", "NAPS2.App.Worker", "NAPS2.App.Console", "NAPS2.App.WinForms" })
         {

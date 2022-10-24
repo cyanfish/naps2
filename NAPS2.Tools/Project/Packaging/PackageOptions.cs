@@ -5,7 +5,7 @@ namespace NAPS2.Tools.Project.Packaging;
 [Verb("pkg", HelpText = "Package the project, 'pkg {all|exe|msi|zip}'")]
 public class PackageOptions
 {
-    [Value(0, MetaName = "build type", Required = true, HelpText = "all|exe|msi|zip")]
+    [Value(0, MetaName = "build type", Required = false, HelpText = "all|exe|msi|zip")]
     public string? BuildType { get; set; }
     
     // TODO: Allow platform combos (e.g. win32+win64)

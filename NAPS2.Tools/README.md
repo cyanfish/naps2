@@ -9,8 +9,14 @@ You will need the latest [.NET SDK](https://dotnet.microsoft.com/en-us/download)
 ### Powershell
 
 ```
-function n2 { dotnet run --project NAPS2.Tools $args }
+function n2 { dotnet run -p:LangVersion=preview --project NAPS2.Tools $args }
 n2 build all
+```
+
+### Bash
+
+```
+alias n2="dotnet run -p:LangVersion=preview --project NAPS2.Tools --"
 ```
 
 ## Commands
