@@ -3,25 +3,38 @@ runtime: org.freedesktop.Platform
 runtime-version: '22.08'
 sdk: org.freedesktop.Sdk
 command: NAPS2
+copy-icon: true
 modules:
   - name: main
     buildsystem: simple
     build-commands:
       - install -D NAPS2 /app/bin/NAPS2
+      - install -Dm644 com.naps2.Naps2.png /app/share/icons/hicolor/128x128/apps/com.naps2.Naps2.png
+      - install -Dm644 com.naps2.Naps2.metainfo.xml /app/share/metainfo/com.naps2.Naps2.metainfo.xml
+      - install -Dm644 com.naps2.Naps2.desktop /app/share/applications/com.naps2.Naps2.desktop
     sources:
       - type: file
         path: NAPS2
+      - type: file
+        path: com.naps2.Naps2.png
+      - type: file
+        path: com.naps2.Naps2.metainfo.xml
+      - type: file
+        path: com.naps2.Naps2.desktop
 finish-args:
   # GUI
-  - --socket=x11
-  - --share=ipc
   - --socket=wayland
+  - --socket=fallback-x11
+  - --share=ipc
   # USB scanning
   - --device=all
   # Network scanning
   - --share=network
-  # Full file access makes sure batch scanning, console, etc. work
-  # It also gives us access to host-installed SANE backends
+  # We need /usr access to read host-installed SANE backends
+  # CLI/batch scanning might also need read/write access to arbitrary folders without being able to use a portal
   - --filesystem=host
-  # - --filesystem=xdg-config/naps2:create
-  # - --filesystem=xdg-documents
+  # App data
+  - --filesystem=xdg-config/naps2
+  # GVfs
+  - --filesystem=xdg-run/gvfsd
+  - --talk-name=org.gtk.vfs.*

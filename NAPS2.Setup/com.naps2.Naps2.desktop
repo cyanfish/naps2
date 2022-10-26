@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Version=1.0
+Name=NAPS2
+Comment=Not Another PDF Scanner
+Path=/app/bin/NAPS2
+Exec=NAPS2
+Icon=com.naps2.Naps2
