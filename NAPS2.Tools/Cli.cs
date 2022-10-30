@@ -23,6 +23,10 @@ public static class Cli
                 startInfo.EnvironmentVariables[kvp.Key] = kvp.Value;
             }
         }
+        if (verbose)
+        {
+            Console.WriteLine($"{command} {args}");
+        }
         var proc = Process.Start(startInfo);
         if (proc == null)
         {
@@ -30,28 +34,25 @@ public static class Cli
         }
         cancel.Register(proc.Kill);
         // TODO: Maybe we forward Console.CancelKeyPress
+        if (verbose)
+        {
+            proc.OutputDataReceived += Print;
+        }
+        proc.ErrorDataReceived += Print;
+        proc.BeginOutputReadLine();
+        proc.BeginErrorReadLine();
         while (!proc.WaitForExit(100))
         {
-            PrintAll(proc.StandardOutput, verbose);
-            PrintAll(proc.StandardError, true);
         }
-        PrintAll(proc.StandardOutput, verbose);
-        PrintAll(proc.StandardError, true);
         if (proc.ExitCode != 0)
         {
+            // TODO: If verbose=false, print out the stdout now
             throw new Exception($"Command failed: {command} {args}");
         }
     }
 
-    private static void PrintAll(StreamReader stream, bool forwardToStdout)
+    private static void Print(object sender, DataReceivedEventArgs e)
     {
-        string? line;
-        while ((line = stream.ReadLine()) != null)
-        {
-            if (forwardToStdout)
-            {
-                Console.WriteLine(line);
-            }
-        }
+        Console.WriteLine(e.Data);
     }
 }

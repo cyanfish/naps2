@@ -17,7 +17,18 @@ public static class InstallCommand
             switch (target.BuildType)
             {
                 case BuildType.Exe:
-                    ExeInstaller.Install(target.Platform, version, opts.Run, opts.Verbose);
+                    if (target.Platform.IsLinux())
+                    {
+                        FlatpakInstaller.Install(target.Platform, version, opts.Run, opts.Verbose);
+                    }
+                    else if (target.Platform.IsMac())
+                    {
+                        // TODO: Mac install?
+                    }
+                    else if (target.Platform.IsWindows())
+                    {
+                        ExeInstaller.Install(target.Platform, version, opts.Run, opts.Verbose);
+                    }
                     break;
                 case BuildType.Msi:
                     MsiInstaller.Install(target.Platform, version, opts.Run, opts.Verbose);

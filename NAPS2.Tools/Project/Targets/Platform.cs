@@ -6,5 +6,7 @@ public enum Platform
     Win64,
     Mac,
     MacArm,
-    Linux
+    Linux,
+    LinuxArm32,
+    LinuxArm64
 }

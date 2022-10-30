@@ -18,11 +18,17 @@ public static class PackageCommand
             switch (target.BuildType)
             {
                 case BuildType.Exe:
-                    if (target.Platform is Platform.Mac or Platform.MacArm)
+                    // TODO: We need configs designed for mac + linux (and/or runtime changes - but either way
+                    // we should rename the config)
+                    if (target.Platform.IsLinux())
+                    {
+                        FlatpakPackager.Package(GetPackageInfo(target.Platform, "InstallerEXE"), opts.NoPre, opts.Verbose);
+                    }
+                    else if (target.Platform.IsMac())
                     {
                         MacPackager.Package(GetPackageInfo(target.Platform, "InstallerEXE"), opts.Verbose);
                     }
-                    else if (target.Platform is Platform.Win64 or Platform.Win32)
+                    else if (target.Platform.IsWindows())
                     {
                         InnoSetupPackager.PackageExe(GetPackageInfo(target.Platform, "InstallerEXE"), opts.Verbose);
                     }
@@ -42,7 +48,7 @@ public static class PackageCommand
     {
         var pkgInfo = new PackageInfo(platform, ProjectHelper.GetProjectVersion("NAPS2.App.WinForms"));
 
-        if (platform is Platform.Mac or Platform.MacArm)
+        if (platform is Platform.Mac or Platform.MacArm or Platform.Linux or Platform.LinuxArm32 or Platform.LinuxArm64)
         {
             // We rely on "dotnet publish" to build the installer
             return pkgInfo;

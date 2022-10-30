@@ -36,9 +36,6 @@ modules:
     sources:
       - type: git
         path: ../../../../../..
-      - type: file
-        path: project.assets.json
-        dest: NAPS2.App.Gtk/obj
       - nuget-sources.json
       - type: file
         path: com.naps2.Naps2.png

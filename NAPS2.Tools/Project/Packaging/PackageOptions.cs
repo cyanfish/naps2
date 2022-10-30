@@ -12,6 +12,9 @@ public class PackageOptions
     [Option('p', "platform", Required = false, HelpText = "win32|win64|mac|macarm|linux")]
     public string? Platform { get; set; }
 
+    [Option("nopre", Required = false, HelpText = "Skip pre-packaging steps")]
+    public bool NoPre { get; set; }
+
     [Option('v', "verbose", Required = false, HelpText = "Show full output")]
     public bool Verbose { get; set; }
     

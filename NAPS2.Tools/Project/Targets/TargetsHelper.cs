@@ -11,6 +11,8 @@ public static class TargetsHelper
         Platform.Mac => "mac-x64",
         Platform.MacArm => "mac-arm64",
         Platform.Linux => "linux-x64",
+        Platform.LinuxArm32 => "linux-arm",
+        Platform.LinuxArm64 => "linux-arm64",
         _ => throw new ArgumentException()
     };
 
@@ -35,7 +37,7 @@ public static class TargetsHelper
         var buildTypesParsed = buildTypes.Select(ParseBuildType).ToList();
 
         string[] allowedPlatforms = (constraints.RequireBuildablePlatform ? GetBuildablePlatforms() : GetAllPlatforms())
-            .Select(x => x.ToString()).ToArray();
+            .Select(x => x.ToString().ToLowerInvariant()).ToArray();
         string[] platforms = platformOpt == "all" ? allowedPlatforms : platformOpt.Split("+");
         if (platforms.Any(x => !allowedPlatforms.Contains(x)))
         {
@@ -71,13 +73,17 @@ public static class TargetsHelper
         }
         if (OperatingSystem.IsLinux())
         {
-            return new[] { "exe", "zip" };
+            return new[] { "exe" };
         }
         throw new InvalidOperationException("Unsupported OS");
     }
 
     private static Platform[] GetAllPlatforms() =>
-        new[] { Platform.Win64, Platform.Win32, Platform.MacArm, Platform.Mac, Platform.Linux };
+        new[]
+        {
+            Platform.Win64, Platform.Win32, Platform.MacArm, Platform.Mac, Platform.Linux, Platform.LinuxArm32,
+            Platform.LinuxArm64
+        };
 
     private static Platform[] GetBuildablePlatforms()
     {
@@ -90,7 +96,7 @@ public static class TargetsHelper
         }
         if (OperatingSystem.IsLinux())
         {
-            return new[] { Platform.Linux };
+            return new[] { Platform.Linux, Platform.LinuxArm64, Platform.LinuxArm32 };
         }
         throw new InvalidOperationException("Unsupported OS");
     }
