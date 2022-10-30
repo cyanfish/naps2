@@ -52,7 +52,7 @@ public static class ShareCommand
             if (targetFile.Exists)
             {
                 var tempPath = targetFile.FullName + ".old";
-                targetFile.MoveTo(tempPath);
+                File.Move(targetFile.FullName, tempPath);
                 try
                 {
                     if (verbose)
