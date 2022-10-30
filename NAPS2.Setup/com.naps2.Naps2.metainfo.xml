@@ -24,12 +24,51 @@
         </p>
     </description>
     <url type="homepage">https://www.naps2.com</url>
+    <url type="bugtracker">https://github.com/cyanfish/naps2/issues</url>
+    <url type="help">https://www.naps2.com/support.html</url>
+    <url type="contribute">https://www.naps2.com/contribute.html</url>
+    <url type="donation">https://www.naps2.com/donate</url>
+    <url type="translate">https://translate.naps2.com</url>
     <developer_name>Ben Olden-Cooligan</developer_name>
 
     <launchable type="desktop-id">com.naps2.Naps2.desktop</launchable>
     <provides>
         <binary>naps2</binary>
     </provides>
+
+    <content_rating type="oars-1.1" />
+    <categories>
+        <category>Graphics</category>
+        <category>Office</category>
+    </categories>
+    <branding>
+        <color type="primary">#6688aa</color>
+    </branding>
+    <keywords>
+        <keyword translate="no">NAPS2</keyword>
+        <keyword translate="no">SANE</keyword>
+        <keyword translate="no">ESCL</keyword>
+        <keyword translate="no">PDF</keyword>
+        <keyword translate="no">TIFF</keyword>
+        <keyword>scan</keyword>
+        <keyword>scanning</keyword>
+        <keyword>scanner</keyword>
+        <keyword>duplex</keyword>
+        <keyword>ADF</keyword>
+        <keyword>OCR</keyword>
+    </keywords>
+
+    <requires>
+        <display_length compare="ge">medium</display_length>
+    </requires>
+    <recommends>
+        <display_length compare="ge">large</display_length>
+        <control>pointing</control>
+        <control>keyboard</control>
+        <control>console</control>
+        <control>tablet</control>
+        <control>touch</control>
+    </recommends>
 
     <screenshots>
         <screenshot type="default">
