@@ -17,9 +17,6 @@ modules:
         DOTNET_CLI_TELEMETRY_OPTOUT: 'true'
         DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 'true'
       arch:
-        arm:
-          env:
-            RUNTIME: linux-arm
         aarch64:
           env:
             RUNTIME: linux-arm64

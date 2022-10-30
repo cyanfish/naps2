@@ -48,7 +48,7 @@ public static class PackageCommand
     {
         var pkgInfo = new PackageInfo(platform, ProjectHelper.GetProjectVersion("NAPS2.App.WinForms"));
 
-        if (platform is Platform.Mac or Platform.MacArm or Platform.Linux or Platform.LinuxArm32 or Platform.LinuxArm64)
+        if (!platform.IsWindows())
         {
             // We rely on "dotnet publish" to build the installer
             return pkgInfo;

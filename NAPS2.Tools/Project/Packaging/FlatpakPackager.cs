@@ -57,8 +57,7 @@ public static class FlatpakPackager
         var manifestPath = Path.Combine(packageDir, "com.naps2.Naps2.yml");
         var arch = packageInfo.Platform switch
         {
-            Platform.LinuxArm64 => "aarch64",
-            Platform.LinuxArm32 => "arm",
+            Platform.LinuxArm => "aarch64",
             _ => "x86_64"
         };
         var stateDir = Path.Combine(packageDir, "builder-state");
@@ -79,18 +78,13 @@ public static class FlatpakPackager
 
     private static void VerifyCanBuildArch(Platform platform, bool verbose)
     {
-        if (platform == Platform.Linux && RuntimeInformation.ProcessArchitecture != Architecture.X64)
+        if (platform == Platform.Linux && RuntimeInformation.OSArchitecture != Architecture.X64)
         {
             Cli.Run("qemu-x86_64-static", "--version", verbose);
         }
-        if (platform == Platform.LinuxArm64 && RuntimeInformation.ProcessArchitecture != Architecture.Arm64)
+        if (platform == Platform.LinuxArm && RuntimeInformation.OSArchitecture != Architecture.Arm64)
         {
             Cli.Run("qemu-aarch64-static", "--version", verbose);
-        }
-        if (platform == Platform.LinuxArm32 &&
-            RuntimeInformation.ProcessArchitecture is not Architecture.Arm or Architecture.Arm64)
-        {
-            Cli.Run("qemu-arm-static", "--version", verbose);
         }
     }
 }

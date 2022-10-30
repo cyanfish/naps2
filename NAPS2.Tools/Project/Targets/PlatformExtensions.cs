@@ -6,5 +6,5 @@ public static class PlatformExtensions
 
     public static bool IsMac(this Platform platform) => platform is Platform.Mac or Platform.MacArm;
 
-    public static bool IsLinux(this Platform platform) => platform is Platform.Linux or Platform.LinuxArm32 or Platform.LinuxArm64;
+    public static bool IsLinux(this Platform platform) => platform is Platform.Linux or Platform.LinuxArm;
 }

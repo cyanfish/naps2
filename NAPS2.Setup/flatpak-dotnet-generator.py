@@ -44,7 +44,6 @@ def main():
 
         runCommand('restore -r linux-x64 "$@"')
         runCommand('restore -r linux-arm64 "$@"')
-        runCommand('restore -r linux-arm "$@"')
 
         for path in Path(tmp).glob('**/*.nupkg.sha512'):
             name = path.parent.parent.name
