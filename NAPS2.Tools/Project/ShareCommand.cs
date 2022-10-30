@@ -1,5 +1,3 @@
-using NAPS2.Tools.Project.Targets;
-
 namespace NAPS2.Tools.Project;
 
 public static class ShareCommand
@@ -11,15 +9,13 @@ public static class ShareCommand
 
         var version = ProjectHelper.GetDefaultProjectVersion();
 
-        var userProfile = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
-        var syncBaseFolder = Path.Combine(userProfile, "OneDrive", "Software", "naps2");
+        var syncBaseFolder = N2Config.ShareDir;
         if (!Directory.Exists(syncBaseFolder))
         {
-            // Don't create automatically as we don't want to create a OneDrive folder that doesn't exist
             throw new InvalidOperationException($"Sync folder does not exist: {syncBaseFolder}");
         }
 
-        var syncFolder = Path.Combine(syncBaseFolder, "publish", version);
+        var syncFolder = Path.Combine(syncBaseFolder, version);
         if (!Directory.Exists(syncFolder)) Directory.CreateDirectory(syncFolder);
 
         var localFolder = Path.Combine(Paths.Publish, version);
@@ -94,6 +90,6 @@ public static class ShareCommand
     private static IEnumerable<FileInfo> GetFiles(string folderPath)
     {
         return new DirectoryInfo(folderPath).EnumerateFiles()
-            .Where(x => x.Extension is ".exe" or ".msi" or ".zip" or ".pkg");
+            .Where(x => x.Extension is ".exe" or ".msi" or ".zip" or ".pkg" or ".flatpak");
     }
 }

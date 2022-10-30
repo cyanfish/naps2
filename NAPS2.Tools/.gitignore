@@ -30,3 +30,5 @@ $tf*/
 publish/
 bin/
 temp/
+
+n2-config.json

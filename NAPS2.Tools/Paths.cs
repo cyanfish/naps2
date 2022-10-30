@@ -35,4 +35,6 @@ internal static class Paths
 
     public static string Naps2UserFolder =>
         Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), ".naps2");
+
+    public static string ConfigFile => Path.Combine(SolutionRoot, "NAPS2.Tools", "n2-config.json");
 }
