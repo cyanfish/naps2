@@ -1,16 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component type="desktop-application">
-  <id>com.naps2.Naps2</id>
-  <metadata_license>FSFAP</metadata_license>
-  <project_license>GPL-2.0-or-later</project_license>
+    <id>com.naps2.Naps2</id>
+    <metadata_license>FSFAP</metadata_license>
+    <project_license>GPL-2.0-or-later</project_license>
 
-  <name>NAPS2</name>
-  <summary>Scan documents to PDF and other file types, as simply as possible.</summary>
-  <description><p>Scan documents to PDF and other file types, as simply as possible.(desc)</p></description>
-  <url type="homepage">https://www.naps2.com</url>
-  <developer_name>Ben Olden-Cooligan</developer_name>
+    <name>NAPS2 - Not Another PDF Scanner</name>
+    <summary>Scan documents to PDF and other file types, as simply as possible.</summary>
+    <description>
+        <p>
+            NAPS2 on Linux allows you to scan from USB (using SANE) and network scanners. Use your chosen settings, or
+            set up multiple profiles for different devices and configurations. Once you've finished scanning, you can
+            save, email, or print with only a couple clicks. Save to PDF, TIFF, JPEG, PNG, or other file types.
+        </p>
+        <p>
+            Easily rotate, crop, and rearrange scanned pages. Adjust brightness, contrast, and apply automatic document
+            corrections to make your scanned pages look great. Use OCR to add searchable text to your PDFs in any of
+            over 100 languages. Use batch scanning, advanced profile settings, and an optional CLI to automate tedious
+            tasks.
+        </p>
+        <p>
+            NAPS2 is available on Windows, Mac, and Linux. Share your scanners over the network so you can use them
+            across devices and operating systems.
+        </p>
+    </description>
+    <url type="homepage">https://www.naps2.com</url>
+    <developer_name>Ben Olden-Cooligan</developer_name>
 
-  <releases>
-    <release version="7.0b1" date="2022-10-25" />
-  </releases>
+    <launchable type="desktop-id">com.naps2.Naps2.desktop</launchable>
+    <provides>
+        <binary>naps2</binary>
+    </provides>
+
+    <screenshots>
+        <screenshot type="default">
+            <image>https://www.naps2.com/images/naps2-gtk-screen-desktop-small.png</image>
+        </screenshot>
+        <screenshot>
+            <image>https://www.naps2.com/images/naps2-gtk-screen-desktop.png</image>
+        </screenshot>
+        <screenshot>
+            <image>https://www.naps2.com/images/naps2-gtk-screen-profile-settings.png</image>
+        </screenshot>
+        <screenshot>
+            <image>https://www.naps2.com/images/naps2-gtk-screen-ocr-setup.png</image>
+        </screenshot>
+    </screenshots>
+
+    <releases>
+        <release version="7.0b1" date="2022-10-25"/>
+    </releases>
 </component>
