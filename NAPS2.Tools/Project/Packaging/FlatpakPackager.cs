@@ -67,11 +67,11 @@ public static class FlatpakPackager
         // Generate a temp repo with the package info
         if (verbose) Console.WriteLine($"Creating flatpak repo");
         var repoDir = Path.Combine(packageDir, "repo");
-        Cli.Run("flatpak", $"build-export {repoDir} {buildDir}", verbose);
+        Cli.Run("flatpak", $"build-export --arch {arch} {repoDir} {buildDir}", verbose);
 
         // Generate a single-file bundle from the temp repo
         if (verbose) Console.WriteLine($"Building flatpak bundle");
-        Cli.Run("flatpak", $"build-bundle {repoDir} {bundlePath} com.naps2.Naps2", verbose);
+        Cli.Run("flatpak", $"build-bundle --arch {arch} {repoDir} {bundlePath} com.naps2.Naps2", verbose);
 
         Console.WriteLine(verbose ? $"Packaged flatpak: {bundlePath}" : "Done.");
     }
