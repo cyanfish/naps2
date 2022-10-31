@@ -11,8 +11,13 @@ namespace NAPS2.EntryPoints;
 /// </summary>
 public static class GtkEntryPoint
 {
-    public static void Run(string[] args)
+    public static int Run(string[] args)
     {
+        if (args.Length > 0 && args[0] is "cli" or "console")
+        {
+            return ConsoleEntryPoint.Run(args.Skip(1).ToArray(), new GtkModule(), false);
+        }
+
         // Initialize Autofac (the DI framework)
         var container = AutoFacHelper.FromModules(
             new CommonModule(), new GtkModule(), new RecoveryModule(), new ContextModule());
@@ -32,6 +37,7 @@ public static class GtkEntryPoint
         // TODO: Clean up invoker setting
         // Invoker.Current = new WinFormsInvoker(desktop.ToNative());
         application.Run(desktop);
+        return 0;
     }
 
     private static void UnhandledTaskException(object? sender, UnobservedTaskExceptionEventArgs e)

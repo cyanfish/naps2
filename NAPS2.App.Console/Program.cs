@@ -11,6 +11,6 @@ static class Program
     static int Main(string[] args)
     {
         // Use reflection to avoid antivirus false positives (yes, really)
-        return (int) typeof(ConsoleEntryPoint).GetMethod("Run")!.Invoke(null, new object[] { args })!;
+        return (int) typeof(WindowsConsoleEntryPoint).GetMethod("Run")!.Invoke(null, new object[] { args })!;
     }
 }

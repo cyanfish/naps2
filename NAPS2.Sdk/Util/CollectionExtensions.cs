@@ -53,6 +53,7 @@ public static class CollectionExtensions
     }
 #endif
 
+#if !NETCOREAPP3_0_OR_GREATER && !NET471_OR_GREATER
     /// <summary>
     /// Prepends the given item to the start of the enumerable.
     /// </summary>
@@ -68,6 +69,7 @@ public static class CollectionExtensions
             yield return obj;
         }
     }
+#endif
 
     /// <summary>
     /// Removes multiple elements from the list.
