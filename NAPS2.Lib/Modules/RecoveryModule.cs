@@ -1,17 +1,15 @@
-﻿using NAPS2.Recovery;
-using Ninject;
-using Ninject.Modules;
+﻿using Autofac;
+using NAPS2.Recovery;
 
 namespace NAPS2.Modules;
 
-public class RecoveryModule : NinjectModule
+public class RecoveryModule : Module
 {
-    public override void Load()
+    protected override void Load(ContainerBuilder builder)
     {
         string recoveryFolderPath = Path.Combine(Paths.Recovery, Path.GetRandomFileName());
-        var recoveryStorageManager = RecoveryStorageManager.CreateFolder(recoveryFolderPath, Kernel.Get<UiImageList>());
-        var fileStorageManager = new FileStorageManager(recoveryFolderPath);
-        Kernel.Bind<RecoveryStorageManager>().ToConstant(recoveryStorageManager);
-        Kernel.Bind<FileStorageManager>().ToConstant(fileStorageManager);
+        builder.Register(ctx => RecoveryStorageManager.CreateFolder(recoveryFolderPath, ctx.Resolve<UiImageList>()))
+            .SingleInstance();
+        builder.RegisterInstance(new FileStorageManager(recoveryFolderPath));
     }
 }

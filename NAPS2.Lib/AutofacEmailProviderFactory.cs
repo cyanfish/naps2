@@ -1,17 +1,17 @@
-﻿using NAPS2.ImportExport.Email;
+﻿using Autofac;
+using NAPS2.ImportExport.Email;
 using NAPS2.ImportExport.Email.Mapi;
 using NAPS2.ImportExport.Email.Oauth;
-using Ninject;
 
 namespace NAPS2;
 
-public class NinjectEmailProviderFactory : IEmailProviderFactory
+public class AutofacEmailProviderFactory : IEmailProviderFactory
 {
-    private readonly IKernel _kernel;
+    private readonly IComponentContext _container;
 
-    public NinjectEmailProviderFactory(IKernel kernel)
+    public AutofacEmailProviderFactory(IComponentContext container)
     {
-        _kernel = kernel;
+        _container = container;
     }
 
     public IEmailProvider Create(EmailProviderType type)
@@ -19,11 +19,11 @@ public class NinjectEmailProviderFactory : IEmailProviderFactory
         switch (type)
         {
             case EmailProviderType.Gmail:
-                return _kernel.Get<GmailEmailProvider>();
+                return _container.Resolve<GmailEmailProvider>();
             case EmailProviderType.OutlookWeb:
-                return _kernel.Get<OutlookWebEmailProvider>();
+                return _container.Resolve<OutlookWebEmailProvider>();
             default:
-                return _kernel.Get<MapiEmailProvider>();
+                return _container.Resolve<MapiEmailProvider>();
         }
     }
 
@@ -31,7 +31,7 @@ public class NinjectEmailProviderFactory : IEmailProviderFactory
     {
         get
         {
-            var config = _kernel.Get<Naps2Config>();
+            var config = _container.Resolve<Naps2Config>();
             var providerType = config.Get(c => c.EmailSetup.ProviderType);
             return Create(providerType);
         }

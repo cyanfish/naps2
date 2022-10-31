@@ -1,9 +1,9 @@
 ﻿using System.Threading;
 using System.Windows.Forms;
+using Autofac;
 using NAPS2.Modules;
 using NAPS2.Remoting.Worker;
 using NAPS2.WinForms;
-using Ninject;
 
 namespace NAPS2.Server;
 
@@ -18,11 +18,12 @@ public static class ServerEntryPoint
     {
         try
         {
-            // Initialize Ninject (the DI framework)
-            var kernel = new StandardKernel(new CommonModule(), new WinFormsModule(), new RecoveryModule(), new ContextModule());
+            // Initialize Autofac (the DI framework)
+            var container = AutoFacHelper.FromModules(
+                new CommonModule(), new WinFormsModule(), new RecoveryModule(), new ContextModule());
 
             // Start a pending worker process
-            kernel.Get<IWorkerFactory>().Init();
+            container.Resolve<IWorkerFactory>().Init();
 
             // Set up basic application configuration
             Application.EnableVisualStyles();
@@ -49,7 +50,7 @@ public static class ServerEntryPoint
             // using var host = new ServiceHost(typeof(ScanService));
             var serverIcon = new ServerNotifyIcon(port, () => form.Close());
             // host.Opened += (sender, eventArgs) => serverIcon.Show();
-            // // host.Description.Behaviors.Add(new ServiceFactoryBehavior(() => kernel.Get<ScanService>()));
+            // // host.Description.Behaviors.Add(new ServiceFactoryBehavior(() => container.Resolve<ScanService>()));
             // var binding = new NetTcpBinding
             // {
             //     ReceiveTimeout = TimeSpan.FromHours(1),

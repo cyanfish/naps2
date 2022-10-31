@@ -1,9 +1,9 @@
+using Autofac;
 using NAPS2.Automation;
 using NAPS2.ImportExport.Pdf;
 using NAPS2.Sdk.Tests;
 using NAPS2.Sdk.Tests.Asserts;
 using NAPS2.Sdk.Tests.Mocks;
-using Ninject;
 using Xunit;
 using Xunit.Abstractions;
 
@@ -84,9 +84,9 @@ public class CommandLineIntegrationTests : ContextualTests
                 OutputPath = path,
                 Verbose = true
             },
-            kernel =>
+            container =>
             {
-                var config = kernel.Get<Naps2Config>();
+                var config = container.Resolve<Naps2Config>();
                 config.User.Set(c => c.PdfSettings.Metadata, new PdfMetadata
                 {
                     Author = "author1",
@@ -119,9 +119,9 @@ public class CommandLineIntegrationTests : ContextualTests
                 UseSavedMetadata = true,
                 Verbose = true
             },
-            kernel =>
+            container =>
             {
-                var config = kernel.Get<Naps2Config>();
+                var config = container.Resolve<Naps2Config>();
                 config.User.Set(c => c.PdfSettings.Metadata, new PdfMetadata
                 {
                     Author = "author1",
@@ -180,9 +180,9 @@ public class CommandLineIntegrationTests : ContextualTests
                 UseSavedEncryptConfig = true,
                 Verbose = true
             },
-            kernel =>
+            container =>
             {
-                var config = kernel.Get<Naps2Config>();
+                var config = container.Resolve<Naps2Config>();
                 config.User.Set(c => c.PdfSettings.Encryption, new PdfEncryption
                 {
                     EncryptPdf = true,

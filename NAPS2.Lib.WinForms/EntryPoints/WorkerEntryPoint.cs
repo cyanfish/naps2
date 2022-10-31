@@ -1,12 +1,12 @@
 ﻿using System.Text;
 using System.Threading;
 using System.Windows.Forms;
+using Autofac;
 using GrpcDotNetNamedPipes;
 using NAPS2.Modules;
 using NAPS2.Remoting.Worker;
 using NAPS2.Scan.Internal.Twain;
 using NAPS2.WinForms;
-using Ninject;
 using Timer = System.Threading.Timer;
 
 namespace NAPS2.EntryPoints;
@@ -28,9 +28,9 @@ public static class WorkerEntryPoint
             // Debugger.Launch();
 #endif
 
-            // Initialize Ninject (the DI framework)
-            var kernel = new StandardKernel(new CommonModule(), new GdiModule(), new WinFormsModule(),
-                new WorkerModule(), new ContextModule());
+            // Initialize Autofac (the DI framework)
+            var container = AutoFacHelper.FromModules(
+                new CommonModule(), new GdiModule(), new WinFormsModule(), new WorkerModule(), new ContextModule());
 
             // Expect a single argument, the parent process id
             if (args.Length != 1 || !int.TryParse(args[0], out int procId) || !IsProcessRunning(procId))
@@ -53,7 +53,7 @@ public static class WorkerEntryPoint
             // Connect to the main NAPS2 process and listen for assigned work
             var server =
                 new NamedPipeServer(string.Format(WorkerFactory.PIPE_NAME_FORMAT, Process.GetCurrentProcess().Id));
-            var serviceImpl = kernel.Get<WorkerServiceImpl>();
+            var serviceImpl = container.Resolve<WorkerServiceImpl>();
             serviceImpl.OnStop += (_, _) => form.Close();
             using var parentCheckTimer = new Timer(_ =>
             {

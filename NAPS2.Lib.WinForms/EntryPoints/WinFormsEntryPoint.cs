@@ -1,4 +1,5 @@
 ﻿using System.Threading;
+using Autofac;
 using Eto.Forms;
 using NAPS2.EtoForms;
 using NAPS2.EtoForms.Ui;
@@ -6,7 +7,6 @@ using NAPS2.EtoForms.WinForms;
 using NAPS2.Modules;
 using NAPS2.Platform.Windows;
 using NAPS2.Remoting.Worker;
-using Ninject;
 using Application = System.Windows.Forms.Application;
 
 namespace NAPS2.EntryPoints;
@@ -18,29 +18,29 @@ public static class WinFormsEntryPoint
 {
     public static void Run(string[] args)
     {
-        // Initialize Ninject (the DI framework)
-        var kernel = new StandardKernel(new CommonModule(), new GdiModule(), new WinFormsModule(),
-            new RecoveryModule(), new ContextModule());
+        // Initialize Autofac (the DI framework)
+        var container = AutoFacHelper.FromModules(
+            new CommonModule(), new GdiModule(), new WinFormsModule(), new RecoveryModule(), new ContextModule());
 
         Paths.ClearTemp();
 
         // Parse the command-line arguments and see if we're doing something other than displaying the main form
-        var lifecycle = kernel.Get<WindowsApplicationLifecycle>();
+        var lifecycle = container.Resolve<WindowsApplicationLifecycle>();
         lifecycle.ParseArgs(args);
         lifecycle.ExitIfRedundant();
 
         // Start a pending worker process
-        kernel.Get<IWorkerFactory>().Init();
+        container.Resolve<IWorkerFactory>().Init();
 
         // Set up basic application configuration
-        kernel.Get<CultureHelper>().SetCulturesFromConfig();
+        container.Resolve<CultureHelper>().SetCulturesFromConfig();
         // TODO: Unify unhandled exception handling across platforms
         Application.ThreadException += UnhandledException;
         TaskScheduler.UnobservedTaskException += UnhandledTaskException;
 
         // Show the main form
         var application = EtoPlatform.Current.CreateApplication();
-        var formFactory = kernel.Get<IFormFactory>();
+        var formFactory = container.Resolve<IFormFactory>();
         var desktop = formFactory.Create<DesktopForm>();
         Invoker.Current = new WinFormsInvoker(desktop.ToNative());
 

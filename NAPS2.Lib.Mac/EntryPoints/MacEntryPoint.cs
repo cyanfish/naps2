@@ -1,7 +1,7 @@
-﻿using NAPS2.EtoForms;
+﻿using Autofac;
+using NAPS2.EtoForms;
 using NAPS2.EtoForms.Ui;
 using NAPS2.Modules;
-using Ninject;
 using UnhandledExceptionEventArgs = Eto.UnhandledExceptionEventArgs;
 
 namespace NAPS2.EntryPoints;
@@ -13,13 +13,14 @@ public static class MacEntryPoint
 {
     public static void Run(string[] args)
     {
-        // Initialize Ninject (the DI framework)
-        var kernel = new StandardKernel(new CommonModule(), new MacModule(), new RecoveryModule(), new ContextModule());
+        // Initialize Autofac (the DI framework)
+        var container = AutoFacHelper.FromModules(
+            new CommonModule(), new MacModule(), new RecoveryModule(), new ContextModule());
 
         Paths.ClearTemp();
 
         // Set up basic application configuration
-        kernel.Get<CultureHelper>().SetCulturesFromConfig();
+        container.Resolve<CultureHelper>().SetCulturesFromConfig();
         TaskScheduler.UnobservedTaskException += UnhandledTaskException;
         Trace.Listeners.Add(new ConsoleTraceListener());
 
@@ -36,7 +37,7 @@ public static class MacEntryPoint
         // Show the main form
         var application = EtoPlatform.Current.CreateApplication();
         application.UnhandledException += UnhandledException;
-        var formFactory = kernel.Get<IFormFactory>();
+        var formFactory = container.Resolve<IFormFactory>();
         var desktop = formFactory.Create<DesktopForm>();
         // Invoker.Current = new WinFormsInvoker(desktop.ToNative());
 

@@ -1,12 +1,12 @@
+using Autofac;
 using NAPS2.Automation;
 using NAPS2.EtoForms;
 using NAPS2.ImportExport.Pdf;
 using NAPS2.Scan;
-using Ninject.Modules;
 
 namespace NAPS2.Modules;
 
-public class ConsoleModule : NinjectModule
+public class ConsoleModule : Module
 {
     private readonly AutomatedScanningOptions _options;
 
@@ -15,18 +15,18 @@ public class ConsoleModule : NinjectModule
         _options = options;
     }
 
-    public override void Load()
+    protected override void Load(ContainerBuilder builder)
     {
-        Bind<AutomatedScanningOptions>().ToConstant(_options);
+        builder.RegisterInstance(_options);
 
-        Bind<IPdfPasswordProvider>().To<ConsolePdfPasswordProvider>();
-        Bind<ErrorOutput>().To<ConsoleErrorOutput>().InSingletonScope();
-        Bind<IOverwritePrompt>().To<ConsoleOverwritePrompt>();
-        Bind<OperationProgress>().To<ConsoleOperationProgress>();
+        builder.RegisterType<ConsolePdfPasswordProvider>().As<IPdfPasswordProvider>();
+        builder.RegisterType<ConsoleErrorOutput>().As<ErrorOutput>().SingleInstance();
+        builder.RegisterType<ConsoleOverwritePrompt>().As<IOverwritePrompt>();
+        builder.RegisterType<ConsoleOperationProgress>().As<OperationProgress>();
         // TODO: We might want an eto-based dialog helper, or at least handle dialogs in a more user-friendly way than just silently doing nothing
-        Bind<DialogHelper>().To<StubDialogHelper>();
-        Bind<ConsoleOutput>().ToSelf().WithConstructorArgument("writer", Console.Out);
-        Bind<ISaveNotify>().To<SaveNotifyStub>();
-        Bind<IDevicePrompt>().To<ConsoleDevicePrompt>();
+        builder.RegisterType<StubDialogHelper>().As<DialogHelper>();
+        builder.RegisterType<ConsoleOutput>().AsSelf().WithParameter("writer", Console.Out);
+        builder.RegisterType<SaveNotifyStub>().As<ISaveNotify>();
+        builder.RegisterType<ConsoleDevicePrompt>().As<IDevicePrompt>();
     }
 }

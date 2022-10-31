@@ -1,4 +1,5 @@
-﻿using NAPS2.EtoForms;
+﻿using Autofac;
+using NAPS2.EtoForms;
 using NAPS2.ImportExport;
 using NAPS2.ImportExport.Email;
 using NAPS2.ImportExport.Email.Mapi;
@@ -11,92 +12,89 @@ using NAPS2.Remoting.Worker;
 using NAPS2.Scan;
 using NAPS2.Scan.Internal;
 using NAPS2.Unmanaged;
-using Ninject;
-using Ninject.Modules;
 using ILogger = NAPS2.Logging.ILogger;
 
 namespace NAPS2.Modules;
 
-public class CommonModule : NinjectModule
+public class CommonModule : Module
 {
-    public override void Load()
+    protected override void Load(ContainerBuilder builder)
     {
         // Import
-        Bind<IScannedImageImporter>().To<ScannedImageImporter>();
-        Bind<IPdfImporter>().To<PdfImporter>();
-        Bind<IImageImporter>().To<ImageImporter>();
-        Bind<RecoveryManager>().ToSelf();
+        builder.RegisterType<ScannedImageImporter>().As<IScannedImageImporter>();
+        builder.RegisterType<PdfImporter>().As<IPdfImporter>();
+        builder.RegisterType<ImageImporter>().As<IImageImporter>();
+        builder.RegisterType<RecoveryManager>().AsSelf();
 
         // Export
-        Bind<IPdfExporter>().To<PdfExporter>();
-        Bind<IEmailProviderFactory>().To<NinjectEmailProviderFactory>();
-        Bind<IMapiWrapper>().To<MapiWrapper>();
-        Bind<OcrRequestQueue>().ToSelf().InSingletonScope();
+        builder.RegisterType<PdfExporter>().As<IPdfExporter>();
+        builder.RegisterType<AutofacEmailProviderFactory>().As<IEmailProviderFactory>();
+        builder.RegisterType<MapiWrapper>().As<IMapiWrapper>();
+        builder.RegisterType<OcrRequestQueue>().AsSelf().SingleInstance();
 
         // Scan
-        Bind<IScanPerformer>().To<ScanPerformer>();
-        Bind<ILocalPostProcessor>().To<LocalPostProcessor>();
-        Bind<IRemotePostProcessor>().To<RemotePostProcessor>();
-        Bind<IScanBridgeFactory>().To<ScanBridgeFactory>();
-        Bind<IScanDriverFactory>().To<ScanDriverFactory>();
-        Bind<IRemoteScanController>().To<RemoteScanController>();
-        Bind<InProcScanBridge>().ToSelf();
-        Bind<WorkerScanBridge>().ToSelf();
-        Bind<NetworkScanBridge>().ToSelf();
+        builder.RegisterType<ScanPerformer>().As<IScanPerformer>();
+        builder.RegisterType<LocalPostProcessor>().As<ILocalPostProcessor>();
+        builder.RegisterType<RemotePostProcessor>().As<IRemotePostProcessor>();
+        builder.RegisterType<ScanBridgeFactory>().As<IScanBridgeFactory>();
+        builder.RegisterType<ScanDriverFactory>().As<IScanDriverFactory>();
+        builder.RegisterType<RemoteScanController>().As<IRemoteScanController>();
+        builder.RegisterType<InProcScanBridge>().AsSelf();
+        builder.RegisterType<WorkerScanBridge>().AsSelf();
+        builder.RegisterType<NetworkScanBridge>().AsSelf();
 
         // Config
-        Bind<Naps2Config>().ToMethod(_ =>
-            new Naps2Config(Path.Combine(Paths.Executable, "appsettings.xml"),
-                Path.Combine(Paths.AppData, "config.xml"))).InSingletonScope();
+        builder.Register(_ => new Naps2Config(Path.Combine(Paths.Executable, "appsettings.xml"),
+                Path.Combine(Paths.AppData, "config.xml")));
 
         // Host
-        Bind<IWorkerFactory>().To<WorkerFactory>().InSingletonScope();
+        builder.RegisterType<WorkerFactory>().As<IWorkerFactory>().SingleInstance();
 
         // Misc
-        Bind<IFormFactory>().To<NinjectFormFactory>();
-        Bind<IOperationFactory>().To<NinjectOperationFactory>();
-        Bind<ILogger>().To<NLogLogger>().InSingletonScope();
-        Bind<UiImageList>().ToSelf().InSingletonScope();
-        Bind<StillImage>().ToSelf().InSingletonScope();
-        Bind<AutoSaver>().ToSelf();
+        builder.RegisterType<AutofacFormFactory>().As<IFormFactory>();
+        builder.RegisterType<AutofacOperationFactory>().As<IOperationFactory>();
+        builder.RegisterType<NLogLogger>().As<ILogger>().SingleInstance();
+        builder.RegisterInstance(new UiImageList());
+        builder.RegisterType<StillImage>().AsSelf().SingleInstance();
+        builder.RegisterType<AutoSaver>().AsSelf();
         // TODO: Use PdfiumWorkerCoordinator?
-        Bind<IPdfRenderer>().To<PdfiumPdfRenderer>();
-        Bind<ScanningContext>().ToSelf().InSingletonScope();
-        Bind<OcrOperationManager>().ToSelf().InSingletonScope();
-        Bind<ThumbnailController>().ToSelf().InSingletonScope();
-        Bind<ThumbnailRenderQueue>().ToSelf().InSingletonScope();
+        builder.RegisterType<PdfiumPdfRenderer>().As<IPdfRenderer>();
+        builder.RegisterType<ScanningContext>().AsSelf().SingleInstance();
+        builder.RegisterType<OcrOperationManager>().AsSelf().SingleInstance();
+        builder.RegisterType<ThumbnailController>().AsSelf().SingleInstance();
+        builder.RegisterType<ThumbnailRenderQueue>().AsSelf().SingleInstance();
 
-        //Kernel.Get<ImageContext>().PdfRenderer = Kernel.Get<PdfiumWorkerCoordinator>();
+        //container.Resolve<ImageContext>().PdfRenderer = container.Resolve<PdfiumWorkerCoordinator>();
 
-        Bind<IProfileManager>().ToMethod(ctx =>
+        builder.Register<IProfileManager>(ctx =>
         {
-            var config = ctx.Kernel.Get<Naps2Config>();
+            var config = ctx.Resolve<Naps2Config>();
             return new ProfileManager(
                 Path.Combine(Paths.AppData, "profiles.xml"),
                 Path.Combine(AssemblyHelper.EntryFolder, "profiles.xml"),
                 config.Get(c => c.LockSystemProfiles),
                 config.Get(c => c.LockUnspecifiedDevices),
                 config.Get(c => c.NoUserProfiles));
-        }).InSingletonScope();
+        }).SingleInstance();
 
-        Bind<TesseractLanguageManager>().ToMethod(ctx =>
+        builder.Register(ctx =>
         {
-            var config = ctx.Kernel.Get<Naps2Config>();
+            var config = ctx.Resolve<Naps2Config>();
             var customComponentsPath = config.Get(c => c.ComponentsPath);
             var componentsPath = string.IsNullOrWhiteSpace(customComponentsPath)
                 ? Paths.Components
                 : Environment.ExpandEnvironmentVariables(customComponentsPath);
             return new TesseractLanguageManager(componentsPath);
-        }).InSingletonScope();
-        Bind<IOcrEngine>().ToMethod(ctx =>
+        }).SingleInstance();
+        builder.Register(ctx =>
         {
             var tesseractPath = PlatformCompat.System.UseSystemTesseract
                 ? "tesseract"
                 : NativeLibrary.FindPath(PlatformCompat.System.TesseractExecutableName!);
             return new TesseractOcrEngine(
                 tesseractPath,
-                ctx.Kernel.Get<TesseractLanguageManager>().TessdataBasePath,
+                ctx.Resolve<TesseractLanguageManager>().TessdataBasePath,
                 Paths.Temp);
-        }).InSingletonScope();
+        }).SingleInstance();
     }
 }

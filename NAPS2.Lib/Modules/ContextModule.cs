@@ -1,18 +1,18 @@
-﻿using NAPS2.Scan;
-using Ninject;
-using Ninject.Modules;
+﻿using Autofac;
+using NAPS2.Scan;
 using NLog;
 
 namespace NAPS2.Modules;
 
-public class ContextModule : NinjectModule
+public class ContextModule : Module
 {
-    public override void Load()
+    protected override void Load(ContainerBuilder builder)
     {
-        Kernel.Get<ScanningContext>().TempFolderPath = Paths.Temp;
-        Kernel.Get<ScanningContext>().RecoveryPath = Paths.Recovery;
-
-        var config = Kernel.Get<Naps2Config>();
+        builder.RegisterBuildCallback(ctx =>
+        {
+            ctx.Resolve<ScanningContext>().TempFolderPath = Paths.Temp;
+            ctx.Resolve<ScanningContext>().RecoveryPath = Paths.Recovery;
+        });
 
         Log.Logger = new NLogLogger();
 #if DEBUG

@@ -1,21 +1,21 @@
-﻿using Ninject;
+﻿using Autofac;
 
 namespace NAPS2;
 
-public class NinjectOperationFactory : IOperationFactory
+public class AutofacOperationFactory : IOperationFactory
 {
-    private readonly IKernel _kernel;
+    private readonly IComponentContext _container;
     private readonly ErrorOutput _errorOutput;
 
-    public NinjectOperationFactory(IKernel kernel, ErrorOutput errorOutput)
+    public AutofacOperationFactory(IComponentContext container, ErrorOutput errorOutput)
     {
-        _kernel = kernel;
+        _container = container;
         _errorOutput = errorOutput;
     }
 
     public T Create<T>() where T : IOperation
     {
-        var op = _kernel.Get<T>();
+        var op = _container.Resolve<T>();
         op.Error += (sender, args) => _errorOutput.DisplayError(args.ErrorMessage, args.Exception);
         return op;
     }

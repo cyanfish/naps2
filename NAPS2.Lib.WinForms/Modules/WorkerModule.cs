@@ -1,12 +1,14 @@
-﻿using NAPS2.Scan.Internal.Twain;
-using Ninject.Modules;
+﻿using Autofac;
+using NAPS2.Scan;
+using NAPS2.Scan.Internal.Twain;
 
 namespace NAPS2.Modules;
 
-public class WorkerModule : NinjectModule
+public class WorkerModule : Module
 {
-    public override void Load()
+    protected override void Load(ContainerBuilder builder)
     {
-        Bind<ITwainSessionController>().To<LocalTwainSessionController>();
+        builder.Register(ctx => new ScanningContext(ctx.Resolve<ImageContext>()));
+        builder.RegisterType<LocalTwainSessionController>().As<ITwainSessionController>();
     }
 }

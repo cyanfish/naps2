@@ -1,13 +1,13 @@
+using Autofac;
 using NAPS2.Images.Gdi;
-using Ninject.Modules;
 
 namespace NAPS2.Modules;
 
-public class GdiModule : NinjectModule
+public class GdiModule : Module
 {
-    public override void Load()
+    protected override void Load(ContainerBuilder builder)
     {
-        Bind<ImageContext>().To<GdiImageContext>();
-        Bind<GdiImageContext>().ToSelf();
+        builder.RegisterType<GdiImageContext>().As<ImageContext>();
+        builder.RegisterType<GdiImageContext>().AsSelf();
     }
 }

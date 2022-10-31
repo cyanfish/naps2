@@ -1,8 +1,8 @@
-﻿using CommandLine;
+﻿using Autofac;
+using CommandLine;
 using NAPS2.Automation;
 using NAPS2.Modules;
 using NAPS2.Remoting.Worker;
-using Ninject;
 
 namespace NAPS2.EntryPoints;
 
@@ -22,19 +22,19 @@ public static class ConsoleEntryPoint
             return 0;
         }
 
-        // Initialize Ninject (the DI framework)
-        var kernel = new StandardKernel(new CommonModule(), new GdiModule(), new ConsoleModule(options),
+        // Initialize Autofac (the DI framework)
+        var container = AutoFacHelper.FromModules(new CommonModule(), new GdiModule(), new ConsoleModule(options),
             new RecoveryModule(), new ContextModule());
 
         Paths.ClearTemp();
 
         // Start a pending worker process
-        kernel.Get<IWorkerFactory>().Init();
+        container.Resolve<IWorkerFactory>().Init();
 
         // Run the scan automation logic
-        var scanning = kernel.Get<AutomatedScanning>();
+        var scanning = container.Resolve<AutomatedScanning>();
         scanning.Execute().Wait();
 
-        return ((ConsoleErrorOutput) kernel.Get<ErrorOutput>()).HasError ? 1 : 0;
+        return ((ConsoleErrorOutput) container.Resolve<ErrorOutput>()).HasError ? 1 : 0;
     }
 }

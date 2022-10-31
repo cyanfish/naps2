@@ -1,7 +1,7 @@
-﻿using NAPS2.EtoForms;
+﻿using Autofac;
+using NAPS2.EtoForms;
 using NAPS2.EtoForms.Ui;
 using NAPS2.Modules;
-using Ninject;
 using UnhandledExceptionEventArgs = Eto.UnhandledExceptionEventArgs;
 
 namespace NAPS2.EntryPoints;
@@ -13,20 +13,21 @@ public static class GtkEntryPoint
 {
     public static void Run(string[] args)
     {
-        // Initialize Ninject (the DI framework)
-        var kernel = new StandardKernel(new CommonModule(), new GtkModule(), new RecoveryModule(), new ContextModule());
+        // Initialize Autofac (the DI framework)
+        var container = AutoFacHelper.FromModules(
+            new CommonModule(), new GtkModule(), new RecoveryModule(), new ContextModule());
 
         Paths.ClearTemp();
 
         // Set up basic application configuration
-        kernel.Get<CultureHelper>().SetCulturesFromConfig();
+        container.Resolve<CultureHelper>().SetCulturesFromConfig();
         TaskScheduler.UnobservedTaskException += UnhandledTaskException;
         Trace.Listeners.Add(new ConsoleTraceListener());
 
         // Show the main form
         var application = EtoPlatform.Current.CreateApplication();
         application.UnhandledException += UnhandledException;
-        var formFactory = kernel.Get<IFormFactory>();
+        var formFactory = container.Resolve<IFormFactory>();
         var desktop = formFactory.Create<DesktopForm>();
         // TODO: Clean up invoker setting
         // Invoker.Current = new WinFormsInvoker(desktop.ToNative());

@@ -1,16 +1,15 @@
+using Autofac;
 using NAPS2.Automation;
 using NAPS2.Ocr;
 using NAPS2.Recovery;
 using NAPS2.Scan;
 using NAPS2.Scan.Internal;
 using NAPS2.Sdk.Tests.Mocks;
-using Ninject;
-using Ninject.Modules;
 using Xunit.Abstractions;
 
 namespace NAPS2.Lib.Tests.Automation;
 
-internal class TestModule : NinjectModule
+internal class TestModule : Module
 {
     private readonly ScanningContext _scanningContext;
     private readonly ImageContext _imageContext;
@@ -29,15 +28,15 @@ internal class TestModule : NinjectModule
         _folderPath = folderPath;
     }
 
-    public override void Load()
+    protected override void Load(ContainerBuilder builder)
     {
-        Bind<ImageContext>().ToConstant(_imageContext);
-        Rebind<IScanDriverFactory>().ToConstant(_scanDriverFactory);
-        Rebind<IScanBridgeFactory>().To<InProcScanBridgeFactory>();
-        Rebind<ConsoleOutput>().ToSelf()
-            .WithConstructorArgument("writer", new TestOutputTextWriter(_testOutputHelper));
-        Rebind<Naps2Config>().ToConstant(Naps2Config.Stub());
-        Rebind<IProfileManager>().ToMethod(_ =>
+        builder.RegisterInstance(_imageContext);
+        builder.RegisterInstance(_scanDriverFactory);
+        builder.RegisterType<InProcScanBridgeFactory>().As<IScanBridgeFactory>();
+        builder.RegisterType<ConsoleOutput>().AsSelf()
+            .WithParameter("writer", new TestOutputTextWriter(_testOutputHelper));
+        builder.RegisterInstance(Naps2Config.Stub());
+        builder.Register<IProfileManager>(_ =>
         {
             var userPath = Path.Combine(_folderPath, "profiles.xml");
             var systemPath = Path.Combine(_folderPath, "sysprofiles.xml");
@@ -51,22 +50,21 @@ internal class TestModule : NinjectModule
                 new ListMutation<ScanProfile>.Append(defaultProfile),
                 new Selectable<ScanProfile>());
             return profileManager;
-        }).InSingletonScope();
-        Rebind<TesseractLanguageManager>().ToMethod(_ =>
+        }).SingleInstance();
+        builder.Register(_ =>
         {
             var componentsPath = Path.Combine(_folderPath, "components");
             Directory.CreateDirectory(componentsPath);
             return new TesseractLanguageManager(componentsPath);
-        }).InSingletonScope();
-        Rebind<IOcrEngine>().ToMethod(_ => _scanningContext.OcrEngine ?? new StubOcrEngine());
+        }).SingleInstance();
+        builder.Register(_ => _scanningContext.OcrEngine ?? new StubOcrEngine());
 
         string recoveryFolderPath = Path.Combine(_folderPath, "recovery");
-        var recoveryStorageManager =
-            RecoveryStorageManager.CreateFolder(recoveryFolderPath, Kernel.Get<UiImageList>());
-        var fileStorageManager = new FileStorageManager(recoveryFolderPath);
-        Kernel.Bind<RecoveryStorageManager>().ToConstant(recoveryStorageManager);
-        Kernel.Bind<FileStorageManager>().ToConstant(fileStorageManager);
+        builder.Register(ctx => RecoveryStorageManager.CreateFolder(recoveryFolderPath, ctx.Resolve<UiImageList>()))
+            .SingleInstance();
+        builder.RegisterInstance(new FileStorageManager(recoveryFolderPath));
 
-        Kernel.Get<ScanningContext>().TempFolderPath = _scanningContext.TempFolderPath;
+        builder.RegisterBuildCallback(ctx =>
+            ctx.Resolve<ScanningContext>().TempFolderPath = _scanningContext.TempFolderPath);
     }
 }
