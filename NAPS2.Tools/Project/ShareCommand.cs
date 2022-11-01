@@ -55,10 +55,7 @@ public static class ShareCommand
                 File.Move(targetFile.FullName, tempPath);
                 try
                 {
-                    if (verbose)
-                    {
-                        Console.WriteLine($"Replacing {file.FullName} -> {targetFile.FullName}");
-                    }
+                    Console.WriteLine($"Replacing {file.FullName} -> {targetFile.FullName}");
                     file.CopyTo(targetFile.FullName);
                     File.Delete(tempPath);
                 }
@@ -70,10 +67,7 @@ public static class ShareCommand
             }
             else
             {
-                if (verbose)
-                {
-                    Console.WriteLine($"Copying {file.FullName} -> {targetFile.FullName}");
-                }
+                Console.WriteLine($"Copying {file.FullName} -> {targetFile.FullName}");
                 file.CopyTo(targetFile.FullName);
             }
         }
