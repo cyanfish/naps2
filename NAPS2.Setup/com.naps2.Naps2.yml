@@ -42,14 +42,10 @@ modules:
       - -DBUILD_TRAINING_TOOLS=OFF
       - -DENABLE_LTO=ON
     sources:
-      - type: archive
-        url: https://github.com/tesseract-ocr/tesseract/archive/refs/tags/5.2.0.tar.gz
-        sha256: eba4deb2f92a3f89a6623812074af8c53b772079525b3c263aa70bbf7b748b3c
-# TODO: Fix git submodule issue (might be a flatpak bug related to CVE-2022-39253 fix)
-#      - type: git
-#        url: https://github.com/tesseract-ocr/tesseract
-#        tag: 5.2.0
-#        commit: 5ad5325a0aa8effc47ca033625b6a51682f82767
+      - type: git
+        url: https://github.com/tesseract-ocr/tesseract
+        tag: 5.2.0
+        commit: 5ad5325a0aa8effc47ca033625b6a51682f82767
   - name: sane
     buildsystem: autotools
     sources:
