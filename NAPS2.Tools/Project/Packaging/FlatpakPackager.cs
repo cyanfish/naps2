@@ -8,6 +8,8 @@ public static class FlatpakPackager
 {
     public static void Package(PackageInfo packageInfo, bool noPre, bool verbose)
     {
+        // TODO: This only uses committed files, which is different from other packagers - maybe we can fix that somehow
+
         var bundlePath = packageInfo.GetPath("flatpak");
         Console.WriteLine($"Packaging flatpak: {bundlePath}");
 

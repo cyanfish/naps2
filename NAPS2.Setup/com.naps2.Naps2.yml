@@ -6,7 +6,57 @@ sdk-extensions:
   - org.freedesktop.Sdk.Extension.dotnet6
 command: naps2
 copy-icon: true
+cleanup:
+  - /include
+  - /lib/*.a
+  - /lib/*.la
+  - /lib/cmake
+  - /lib/debug
+  - /lib/pkgconfig
+  - /share/doc
+  - /share/man
 modules:
+  # TODO: Used shared module for libusb
+  - name: libusb
+    buildsystem: autotools
+    sources:
+      - type: git
+        url: https://github.com/libusb/libusb
+        tag: v1.0.26
+        commit: 4239bc3a50014b8e6a5a2a59df1fff3b7469543b
+  - name: leptonica
+    buildsystem: cmake-ninja
+    builddir: true
+    sources:
+      - type: git
+        url: https://github.com/DanBloomberg/leptonica
+        tag: 1.82.0
+        commit: f4138265b390f1921b9891d6669674d3157887d8
+  - name: tesseract
+    buildsystem: cmake-ninja
+    builddir: true
+    cleanup:
+      - /app/share/tessdata
+    config-opts:
+      - -DDISABLED_LEGACY_ENGINE=ON
+      - -DBUILD_TRAINING_TOOLS=OFF
+      - -DENABLE_LTO=ON
+    sources:
+      - type: archive
+        url: https://github.com/tesseract-ocr/tesseract/archive/refs/tags/5.2.0.tar.gz
+        sha256: eba4deb2f92a3f89a6623812074af8c53b772079525b3c263aa70bbf7b748b3c
+# TODO: Fix git submodule issue (might be a flatpak bug related to CVE-2022-39253 fix)
+#      - type: git
+#        url: https://github.com/tesseract-ocr/tesseract
+#        tag: 5.2.0
+#        commit: 5ad5325a0aa8effc47ca033625b6a51682f82767
+  - name: sane
+    buildsystem: autotools
+    sources:
+      - type: git
+        url: https://gitlab.com/sane-project/backends
+        tag: 1.1.1
+        commit: 332edc8b7ce642bb06132cf204a8c2dd57720bce
   - name: main
     buildsystem: simple
     build-options:
@@ -30,6 +80,8 @@ modules:
       - install -Dm644 com.naps2.Naps2.png /app/share/icons/hicolor/128x128/apps/com.naps2.Naps2.png
       - install -Dm644 com.naps2.Naps2.metainfo.xml /app/share/metainfo/com.naps2.Naps2.metainfo.xml
       - install -Dm644 com.naps2.Naps2.desktop /app/share/applications/com.naps2.Naps2.desktop
+    cleanup:
+      - /bin/_linux
     sources:
       - type: git
         path: ../../../../../..
