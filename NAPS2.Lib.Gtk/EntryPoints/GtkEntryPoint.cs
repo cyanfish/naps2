@@ -27,6 +27,7 @@ public static class GtkEntryPoint
         // Set up basic application configuration
         container.Resolve<CultureHelper>().SetCulturesFromConfig();
         TaskScheduler.UnobservedTaskException += UnhandledTaskException;
+        GLib.ExceptionManager.UnhandledException += UnhandledGtkException;
         Trace.Listeners.Add(new ConsoleTraceListener());
 
         // Show the main form
@@ -38,6 +39,18 @@ public static class GtkEntryPoint
         // Invoker.Current = new WinFormsInvoker(desktop.ToNative());
         application.Run(desktop);
         return 0;
+    }
+
+    private static void UnhandledGtkException(GLib.UnhandledExceptionArgs e)
+    {
+        if (e.IsTerminating)
+        {
+            Log.FatalException("An error occurred that caused the task to terminate.", e.ExceptionObject as Exception);
+        }
+        else
+        {
+            Log.ErrorException("An unhandled error occurred.", e.ExceptionObject as Exception);
+        }
     }
 
     private static void UnhandledTaskException(object? sender, UnobservedTaskExceptionEventArgs e)
