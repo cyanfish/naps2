@@ -91,6 +91,7 @@ public class GtkListView<T> : IListView<T> where T : notnull
                 Widget = widget
             });
         }
+        _flowBox.ShowAll();
         SetSelectedItems();
         _refreshing = false;
         Updated?.Invoke(this, EventArgs.Empty);
@@ -126,6 +127,7 @@ public class GtkListView<T> : IListView<T> where T : notnull
             var newWidget = GetItemWidget(entry.Item);
             entry.Widget = newWidget;
         }
+        _flowBox.ShowAll();
         SetSelectedItems();
         _refreshing = false;
         Updated?.Invoke(this, EventArgs.Empty);
@@ -167,6 +169,7 @@ public class GtkListView<T> : IListView<T> where T : notnull
             }
             _entries = _entries.Take(_entries.Count - op.Count).ToList();
         }
+        _flowBox.ShowAll();
         SetSelectedItems();
         _refreshing = false;
         Updated?.Invoke(this, EventArgs.Empty);
@@ -198,7 +201,10 @@ public class GtkListView<T> : IListView<T> where T : notnull
         var byItem = ByItem();
         foreach (var item in _selection)
         {
-            _flowBox.SelectChild((FlowBoxChild) byItem[item].Widget);
+            if (byItem.Get(item) is { } entry)
+            {
+                _flowBox.SelectChild((FlowBoxChild) entry.Widget);
+            }
         }
     }
 

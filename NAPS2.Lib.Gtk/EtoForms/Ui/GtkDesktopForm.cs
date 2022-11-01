@@ -56,7 +56,7 @@ public class GtkDesktopForm : DesktopForm
         Invoker.Current = new SyncContextInvoker(SynchronizationContext.Current);
         base.OnLoad(e);
         var listView = (GtkListView<UiImage>) _listView;
-        // TODO: This is a bit of a hack as for some reason the view doesn't update unless we do this
+        // TODO: This is hack to fix the issue where the toolbar isn't included in the layout so the listview extends up, there should be a better way
         listView.Updated += (_, _) => Content = _listView.Control;
         listView.NativeControl.StyleContext.AddClass("desktop-listview");
     }
