@@ -26,7 +26,7 @@ public abstract class EtoPlatform
     public abstract Control CreateContainer();
     public abstract void AddToContainer(Control container, Control control);
 
-    public virtual void SetContainerSize(Control container, Size size)
+    public virtual void SetContainerSize(Control container, Size size, int padding)
     {
     }
 

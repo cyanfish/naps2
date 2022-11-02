@@ -69,11 +69,12 @@ public class GtkEtoPlatform : EtoPlatform
         widget.ShowAll();
     }
 
-    public override void SetContainerSize(Control container, Size size)
+    public override void SetContainerSize(Control container, Size size, int padding)
     {
         // This ensures even with Resizable=false, the window has the appropriate margins
         var fixedContainer = (GtkFixed) container.ToNative();
-        fixedContainer.SetSizeRequest(size.Width + X_OFF * 2, size.Height + Y_OFF * 2);
+        fixedContainer.MarginBottom = padding - Y_OFF;
+        fixedContainer.MarginEnd = padding - X_OFF;
     }
 
     public override Size GetFormSize(Window window)

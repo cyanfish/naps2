@@ -71,7 +71,7 @@ public class LayoutController
             Debug.WriteLine("\n(((Starting layout)))");
         }
         _content.DoLayout(context, bounds);
-        EtoPlatform.Current.SetContainerSize(_layout, size);
+        EtoPlatform.Current.SetContainerSize(_layout, size, p);
     }
 
     private LayoutContext GetLayoutContext()
