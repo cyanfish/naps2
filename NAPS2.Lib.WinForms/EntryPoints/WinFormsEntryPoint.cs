@@ -7,7 +7,7 @@ using NAPS2.EtoForms.WinForms;
 using NAPS2.Modules;
 using NAPS2.Platform.Windows;
 using NAPS2.Remoting.Worker;
-using Application = System.Windows.Forms.Application;
+using wf = System.Windows.Forms;
 
 namespace NAPS2.EntryPoints;
 
@@ -35,7 +35,7 @@ public static class WinFormsEntryPoint
         // Set up basic application configuration
         container.Resolve<CultureHelper>().SetCulturesFromConfig();
         // TODO: Unify unhandled exception handling across platforms
-        Application.ThreadException += UnhandledException;
+        wf.Application.ThreadException += UnhandledException;
         TaskScheduler.UnobservedTaskException += UnhandledTaskException;
 
         // Show the main form
@@ -44,7 +44,13 @@ public static class WinFormsEntryPoint
         var desktop = formFactory.Create<DesktopForm>();
         Invoker.Current = new WinFormsInvoker(desktop.ToNative());
 
-        application.Run(desktop);
+        // We manually run an application rather than using eto as that lets us change the main form
+        // TODO: PR for eto to handle mainform changes correctly
+        application.MainForm = desktop;
+        desktop.Show();
+        var appContext = new wf.ApplicationContext(desktop.ToNative());
+        WinFormsDesktopForm.ApplicationContext = appContext;
+        wf.Application.Run(appContext);
     }
 
     private static void UnhandledTaskException(object? sender, UnobservedTaskExceptionEventArgs e)

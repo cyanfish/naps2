@@ -12,6 +12,8 @@ namespace NAPS2.EtoForms.Ui;
 
 public class WinFormsDesktopForm : DesktopForm
 {
+    public static wf.ApplicationContext ApplicationContext { get; set; }
+
     private readonly ToolbarFormatter _toolbarFormatter = new(new StringWrapper());
     private readonly wf.Form _form;
     private wf.ToolStrip _toolStrip = null!;
@@ -118,6 +120,12 @@ public class WinFormsDesktopForm : DesktopForm
     }
 
     private wf.ListView NativeListView => ((WinFormsListView<UiImage>) _listView).NativeControl;
+
+    protected override void SetMainForm(Form newMainForm)
+    {
+        base.SetMainForm(newMainForm);
+        ApplicationContext.MainForm = newMainForm.ToSWF();
+    }
 
     protected override void ConfigureToolbar()
     {

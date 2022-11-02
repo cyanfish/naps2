@@ -322,6 +322,7 @@ public abstract class DesktopForm : EtoFormBase
             FormStateController.DoSaveFormState();
             var newDesktop = FormFactory.Create<DesktopForm>();
             newDesktop.Show();
+            SetMainForm(newDesktop);
             Close();
         }
         finally
@@ -329,6 +330,11 @@ public abstract class DesktopForm : EtoFormBase
             _desktopController.Resume();
         }
         // TODO: If we make any other forms non-modal, we will need to refresh them too
+    }
+
+    protected virtual void SetMainForm(Form newMainForm)
+    {
+        Application.Instance.MainForm = newMainForm;
     }
     //
     // private async void FDesktop_Shown(object sender, EventArgs e)
