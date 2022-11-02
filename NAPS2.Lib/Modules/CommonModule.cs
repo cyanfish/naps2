@@ -45,7 +45,7 @@ public class CommonModule : Module
 
         // Config
         builder.Register(_ => new Naps2Config(Path.Combine(Paths.Executable, "appsettings.xml"),
-                Path.Combine(Paths.AppData, "config.xml")));
+                Path.Combine(Paths.AppData, "config.xml"))).SingleInstance();
 
         // Host
         builder.RegisterType<WorkerFactory>().As<IWorkerFactory>().SingleInstance();
