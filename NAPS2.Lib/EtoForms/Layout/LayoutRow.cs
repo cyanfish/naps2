@@ -20,8 +20,6 @@ public class LayoutRow : LayoutLine<LayoutColumn>
         Aligned = aligned ?? original.Aligned;
     }
 
-    private Padding? Padding { get; }
-
     protected override PointF UpdatePosition(PointF position, float delta)
     {
         position.X += delta;

@@ -9,6 +9,8 @@ namespace NAPS2.EtoForms.Layout;
 public abstract class LayoutLine<TOrthogonal> : LayoutContainer
     where TOrthogonal : LayoutContainer
 {
+    protected Padding? Padding { get; init; }
+
     protected int? Spacing { get; init; }
 
     protected abstract PointF UpdatePosition(PointF position, float delta);
@@ -22,6 +24,12 @@ public abstract class LayoutLine<TOrthogonal> : LayoutContainer
         if (DEBUG_LAYOUT)
         {
             Debug.WriteLine($"{new string(' ', context.Depth)}{GetType().Name} layout with bounds {bounds}");
+        }
+        if (Padding is { } padding)
+        {
+            bounds = new RectangleF(
+                bounds.X + padding.Left, bounds.Y + padding.Top,
+                bounds.Width - padding.Horizontal, bounds.Height - padding.Vertical);
         }
         var childContext = GetChildContext(context, bounds);
         GetInitialCellLengthsAndScaling(context, childContext, bounds, out var cellLengths, out var cellScaling);
@@ -77,6 +85,7 @@ public abstract class LayoutLine<TOrthogonal> : LayoutContainer
             size = UpdateTotalSize(size, childLayoutSize, spacing);
         }
         size = UpdateTotalSize(size, SizeF.Empty, -spacing);
+        size += new SizeF(Padding?.Horizontal ?? 0, Padding?.Vertical ?? 0);
         return size;
     }
 
