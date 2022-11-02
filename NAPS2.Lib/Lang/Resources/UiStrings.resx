@@ -414,4 +414,19 @@
   <data name="GetMoreLanguages" xml:space="preserve">
     <value>Get more languages</value>
   </data>
+  <data name="OcrDownloadFormTitle" xml:space="preserve">
+    <value>OCR Download</value>
+  </data>
+  <data name="OcrDownloadSummaryText" xml:space="preserve">
+    <value>Using OCR requires you to download each language you want to scan.</value>
+  </data>
+  <data name="OcrSelectLanguageLabel" xml:space="preserve">
+    <value>Select one or more languages:</value>
+  </data>
+  <data name="EstimatedDownloadSize" xml:space="preserve">
+    <value>Estimated download size: {0} MB</value>
+  </data>
+  <data name="Download" xml:space="preserve">
+    <value>Download</value>
+  </data>
 </root>

@@ -1,6 +1,7 @@
 using Eto.Forms;
 using Eto.GtkSharp;
 using Gtk;
+using Label = Gtk.Label;
 using Orientation = Gtk.Orientation;
 
 namespace NAPS2.EtoForms.Gtk;
@@ -23,18 +24,22 @@ public class GtkListView<T> : IListView<T> where T : notnull
         {
             Orientation = Orientation.Horizontal,
             Valign = Align.Start,
-            Homogeneous = false,
+            Homogeneous = _behavior.Checkboxes,
             ActivateOnSingleClick = false,
             MaxChildrenPerLine = uint.MaxValue,
             Margin = 8,
-            ColumnSpacing = 16,
-            RowSpacing = 16
+            ColumnSpacing = _behavior.Checkboxes ? 0 : 16u,
+            RowSpacing = _behavior.Checkboxes ? 0 : 16u,
+            SelectionMode = _behavior.Checkboxes
+                ? SelectionMode.None
+                : _behavior.MultiSelect
+                    ? SelectionMode.Multiple
+                    : SelectionMode.Single
         };
-        if (_behavior.MultiSelect)
+        if (!_behavior.Checkboxes)
         {
-            _flowBox.SelectionMode = SelectionMode.Multiple;
+            _flowBox.SelectedChildrenChanged += FlowBoxSelectionChanged;
         }
-        _flowBox.SelectedChildrenChanged += FlowBoxSelectionChanged;
         _scrolledWindow.Add(_flowBox);
         _scrolledWindow.StyleContext.AddClass("listview");
     }
@@ -100,15 +105,35 @@ public class GtkListView<T> : IListView<T> where T : notnull
     private Widget GetItemWidget(T item)
     {
         var flowBoxChild = new FlowBoxChild();
-        var image = _behavior.GetImage(item, ImageSize).ToGtk();
-        // TODO: Is there a better way to prevent the image from expanding in both dimensions?
-        var hframe = new Box(Orientation.Horizontal, 0);
-        hframe.Halign = Align.Center;
-        hframe.Add(image);
-        var vframe = new Box(Orientation.Vertical, 0);
-        vframe.Valign = Align.Center;
-        vframe.Add(hframe);
-        flowBoxChild.Add(vframe);
+        if (_behavior.Checkboxes)
+        {
+            var check = new CheckButton(_behavior.GetLabel(item));
+            flowBoxChild.Add(check);
+            flowBoxChild.CanFocus = false;
+            check.Toggled += FlowBoxSelectionChanged;
+        }
+        else
+        {
+            var image = _behavior.GetImage(item, ImageSize).ToGtk();
+            // TODO: Is there a better way to prevent the image from expanding in both dimensions?
+            var hframe = new Box(Orientation.Horizontal, 0);
+            hframe.Halign = Align.Center;
+            hframe.Add(image);
+            var vframe = new Box(Orientation.Vertical, 0);
+            vframe.Valign = Align.Center;
+            vframe.Add(hframe);
+            if (_behavior.ShowLabels)
+            {
+                var label = new Label
+                {
+                    Text = _behavior.GetLabel(item),
+                    // TODO: Fix wrapping
+                    // Wrap = true
+                };
+                vframe.Add(label);
+            }
+            flowBoxChild.Add(vframe);
+        }
         flowBoxChild.StyleContext.AddClass("listview-item");
         return flowBoxChild;
     }
@@ -197,11 +222,26 @@ public class GtkListView<T> : IListView<T> where T : notnull
 
     private void SetSelectedItems()
     {
-        _flowBox.UnselectAll();
+        if (_behavior.Checkboxes)
+        {
+            foreach (var widget in _flowBox.Children)
+            {
+                GetCheckButton(widget).Active = false;
+            }
+        }
+        else
+        {
+            _flowBox.UnselectAll();
+        }
         var byItem = ByItem();
         foreach (var item in _selection)
         {
-            if (byItem.Get(item) is { } entry)
+            if (byItem.Get(item) is not { } entry) continue;
+            if (_behavior.Checkboxes)
+            {
+                GetCheckButton(entry.Widget).Active = true;
+            }
+            else
             {
                 _flowBox.SelectChild((FlowBoxChild) entry.Widget);
             }
@@ -217,9 +257,25 @@ public class GtkListView<T> : IListView<T> where T : notnull
         {
             _refreshing = true;
             var byWidget = ByWidget();
-            Selection = ListSelection.From(_flowBox.SelectedChildren.Select(x => byWidget[x].Item));
+            if (_behavior.Checkboxes)
+            {
+                var checkButtons = _flowBox.Children.Select(GetCheckButton).ToList();
+                Selection = ListSelection.From(
+                    checkButtons
+                        .Where(check => check.Active)
+                        .Select(check => byWidget[check.Parent].Item));
+            }
+            else
+            {
+                Selection = ListSelection.From(_flowBox.SelectedChildren.Select(x => byWidget[x].Item));
+            }
             _refreshing = false;
         }
+    }
+
+    private static CheckButton GetCheckButton(Widget widget)
+    {
+        return (CheckButton) ((FlowBoxChild) widget).Child;
     }
 
     private class Entry

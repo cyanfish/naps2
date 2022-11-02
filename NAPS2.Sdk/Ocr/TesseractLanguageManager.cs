@@ -47,5 +47,7 @@ public class TesseractLanguageManager
     public virtual IEnumerable<Language> NotInstalledLanguages =>
         LanguageComponents.Where(x => !x.IsInstalled).Select(x => _languageData.LanguageMap[x.Id]);
 
+    public Language GetLanguage(string code) => _languageData.LanguageMap["ocr-" + code];
+
     public IEnumerable<IExternalComponent> LanguageComponents { get; }
 }

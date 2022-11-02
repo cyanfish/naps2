@@ -91,7 +91,7 @@ public class OcrSetupForm : EtoDialogBase
 
     private void MoreLanguages_Click(object? sender, EventArgs e)
     {
-        // FormFactory.Create<FOcrLanguageDownload>().ShowDialog();
+        FormFactory.Create<OcrDownloadForm>().ShowModal();
         LoadLanguages();
     }
 
