@@ -25,7 +25,7 @@ public class FormBase : Form, IInvoker, IFormBase
         Move += OnMove;
     }
 
-    public IFormStateController FormStateController => throw new NotSupportedException();
+    public FormStateController FormStateController => throw new NotSupportedException();
 
     public IFormFactory FormFactory { get; set; }
 

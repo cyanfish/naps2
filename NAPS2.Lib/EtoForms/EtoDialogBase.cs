@@ -17,7 +17,7 @@ public abstract class EtoDialogBase : Dialog, IFormBase
         LayoutController.ContentSet += (_, _) => FormStateController.UpdateLayoutSize(LayoutController);
     }
 
-    public IFormStateController FormStateController { get; }
+    public FormStateController FormStateController { get; }
 
     public LayoutController LayoutController { get; } = new();
 

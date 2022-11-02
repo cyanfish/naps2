@@ -16,7 +16,7 @@ public abstract class EtoFormBase : Form, IFormBase
         LayoutController.ContentSet += (_, _) => FormStateController.UpdateLayoutSize(LayoutController);
     }
 
-    public IFormStateController FormStateController { get; }
+    public FormStateController FormStateController { get; }
 
     public LayoutController LayoutController { get; } = new();
 

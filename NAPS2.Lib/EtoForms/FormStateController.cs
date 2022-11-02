@@ -4,7 +4,7 @@ using NAPS2.EtoForms.Layout;
 
 namespace NAPS2.EtoForms;
 
-public class FormStateController : IFormStateController
+public class FormStateController
 {
     private readonly Window _window;
     private readonly Naps2Config _config;
@@ -144,6 +144,11 @@ public class FormStateController : IFormStateController
     }
 
     private void OnClosed(object? sender, EventArgs eventArgs)
+    {
+        DoSaveFormState();
+    }
+
+    public void DoSaveFormState()
     {
         if (SaveFormState && _formState != null)
         {
