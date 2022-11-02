@@ -21,7 +21,7 @@ public class OcrSetupForm : EtoDialogBase
 
         Title = UiStrings.OcrSetupFormTitle;
         Icon = new Icon(1f, Icons.text_small.ToEtoImage());
-        Resizable = false;
+        FormStateController.Resizable = false;
 
         _enableOcr.CheckedChanged += EnableOcr_CheckedChanged;
         _moreLanguages.Click += MoreLanguages_Click;

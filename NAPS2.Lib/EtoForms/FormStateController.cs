@@ -37,6 +37,8 @@ public class FormStateController : IFormStateController
 
     public bool FixedHeightLayout { get; set; }
 
+    public bool Resizable { get; set; } = true;
+
     public string FormName => _window.GetType().Name;
 
     public void UpdateLayoutSize(LayoutController layoutController)
@@ -74,10 +76,12 @@ public class FormStateController : IFormStateController
 
     private void OnShownInternal(object sender, EventArgs e)
     {
+        Console.WriteLine("FormStateController on shown");
         if (!_minimumClientSize.IsEmpty)
         {
             EtoPlatform.Current.SetMinimumClientSize(_window, _minimumClientSize);
         }
+        _window.Resizable = Resizable;
     }
 
     protected void DoRestoreFormState()

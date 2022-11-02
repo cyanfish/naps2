@@ -20,7 +20,6 @@ public class OcrDownloadForm : EtoDialogBase
 
         Title = UiStrings.OcrDownloadFormTitle;
         Icon = new Icon(1f, Icons.text_small.ToEtoImage());
-        Resizable = true;
         FormStateController.RestoreFormState = false;
 
         var initialSelection = new HashSet<string>();

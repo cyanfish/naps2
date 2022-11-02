@@ -11,6 +11,7 @@ public interface IFormStateController
     Size DefaultClientSize { get; set; }
     Size DefaultExtraLayoutSize { get; set; }
     bool FixedHeightLayout { get; set; }
+    bool Resizable { get; set; }
     string FormName { get; }
     void UpdateLayoutSize(LayoutController layoutController);
 }

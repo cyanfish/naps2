@@ -11,6 +11,7 @@ public abstract class EtoDialogBase : Dialog, IFormBase
     {
         Config = config;
         FormStateController = new FormStateController(this, config);
+        Resizable = true;
         ShowInTaskbar = true;
         LayoutController.Bind(this);
         LayoutController.ContentSet += (_, _) => FormStateController.UpdateLayoutSize(LayoutController);

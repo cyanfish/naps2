@@ -38,7 +38,6 @@ public class ProfilesForm : EtoDialogBase
 
         Title = UiStrings.ProfilesFormTitle;
         Icon = new Icon(1f, Icons.blueprints_small.ToEtoImage());
-        Resizable = true;
 
         // TODO: Do this only in WinForms (?)
         // switch (Handler)

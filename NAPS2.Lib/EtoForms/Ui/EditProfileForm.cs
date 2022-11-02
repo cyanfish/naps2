@@ -52,7 +52,6 @@ public class EditProfileForm : EtoDialogBase
         _profileNameTracker = profileNameTracker;
         Title = UiStrings.EditProfileFormTitle;
         Icon = new Icon(1f, Icons.blueprints_small.ToEtoImage());
-        Resizable = true;
 
         _wiaDriver = new RadioButton { Text = UiStrings.WiaDriver };
         _twainDriver = new RadioButton(_wiaDriver) { Text = UiStrings.TwainDriver };

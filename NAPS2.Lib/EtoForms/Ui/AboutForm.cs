@@ -27,7 +27,7 @@ public class AboutForm : EtoDialogBase
 
         Title = UiStrings.AboutFormTitle;
         Icon = new Icon(1f, Icons.information_small.ToEtoImage());
-        Resizable = false;
+        FormStateController.Resizable = false;
         FormStateController.RestoreFormState = false;
 
         _donateButton = C.AccessibleImageButton(

@@ -31,7 +31,6 @@ public class DownloadProgressForm : EtoDialogBase
         FormStateController.RestoreFormState = false;
         Title = UiStrings.DownloadProgressFormTitle;
         Icon = new Icon(1f, Icons.text_small.ToEtoImage());
-        Resizable = true;
 
         // TODO: Is this needed for net462?
         ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;

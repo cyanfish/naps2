@@ -11,7 +11,6 @@ public class SelectDeviceForm : EtoDialogBase
 
     public SelectDeviceForm(Naps2Config config) : base(config)
     {
-        Resizable = true;
         FormStateController.SaveFormState = false;
         FormStateController.RestoreFormState = false;
 
