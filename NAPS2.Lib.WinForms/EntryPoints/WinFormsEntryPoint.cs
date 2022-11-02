@@ -42,13 +42,13 @@ public static class WinFormsEntryPoint
         var application = EtoPlatform.Current.CreateApplication();
         var formFactory = container.Resolve<IFormFactory>();
         var desktop = formFactory.Create<DesktopForm>();
-        Invoker.Current = new WinFormsInvoker(desktop.ToNative());
 
         // We manually run an application rather than using eto as that lets us change the main form
         // TODO: PR for eto to handle mainform changes correctly
         application.MainForm = desktop;
         desktop.Show();
         var appContext = new wf.ApplicationContext(desktop.ToNative());
+        Invoker.Current = new WinFormsInvoker(appContext);
         WinFormsDesktopForm.ApplicationContext = appContext;
         wf.Application.Run(appContext);
     }

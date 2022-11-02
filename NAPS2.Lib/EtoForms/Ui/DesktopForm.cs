@@ -76,7 +76,7 @@ public abstract class DesktopForm : EtoFormBase
         _listView.ItemClicked += ListViewItemClicked;
         _listView.Drop += ListViewDrop;
         _listView.SelectionChanged += ListViewSelectionChanged;
-        _imageListSyncer?.Dispose();
+        _listView.ImageSize = _thumbnailController.VisibleSize;
 
         LayoutController.RootPadding = 0;
         FormStateController.AutoLayoutSize = false;
@@ -88,23 +88,37 @@ public abstract class DesktopForm : EtoFormBase
         // Shown += FDesktop_Shown;
         // Closing += FDesktop_Closing;
         // Closed += FDesktop_Closed;
-        imageList.SelectionChanged += (_, _) =>
-        {
-            Invoker.Current.SafeInvoke(() =>
-            {
-                UpdateToolbar();
-                _listView!.Selection = ImageList.Selection;
-            });
-        };
-        ImageList.ImagesUpdated += (_, _) => Invoker.Current.SafeInvoke(UpdateToolbar);
-        _profileManager.ProfilesUpdated += (_, _) => UpdateScanButton();
         _desktopFormProvider.DesktopForm = this;
         _thumbnailController.ListView = _listView;
-        _thumbnailController.ThumbnailSizeChanged += (_, _) =>
+        _thumbnailController.ThumbnailSizeChanged += ThumbnailController_ThumbnailSizeChanged;
+        ImageList.SelectionChanged += ImageList_SelectionChanged;
+        ImageList.ImagesUpdated += ImageList_ImagesUpdated;
+        _profileManager.ProfilesUpdated += ProfileManager_ProfilesUpdated;
+    }
+
+    private void ImageList_SelectionChanged(object? sender, EventArgs e)
+    {
+        Invoker.Current.SafeInvoke(() =>
         {
-            SetThumbnailSpacing(_thumbnailController.VisibleSize);
             UpdateToolbar();
-        };
+            _listView!.Selection = ImageList.Selection;
+        });
+    }
+
+    private void ImageList_ImagesUpdated(object? sender, ImageListEventArgs e)
+    {
+        Invoker.Current.SafeInvoke(UpdateToolbar);
+    }
+
+    private void ProfileManager_ProfilesUpdated(object? sender, EventArgs e)
+    {
+        UpdateScanButton();
+    }
+
+    private void ThumbnailController_ThumbnailSizeChanged(object? sender, EventArgs e)
+    {
+        SetThumbnailSpacing(_thumbnailController.VisibleSize);
+        UpdateToolbar();
     }
 
     protected UiImageList ImageList { get; }
@@ -127,6 +141,13 @@ public abstract class DesktopForm : EtoFormBase
     {
         base.OnClosed(e);
         _desktopController.Cleanup();
+
+        // TODO: Make sure we don't have any remaining memory leaks (toolbars? commands?)
+        _thumbnailController.ThumbnailSizeChanged -= ThumbnailController_ThumbnailSizeChanged;
+        ImageList.SelectionChanged -= ImageList_SelectionChanged;
+        ImageList.ImagesUpdated -= ImageList_ImagesUpdated;
+        _profileManager.ProfilesUpdated -= ProfileManager_ProfilesUpdated;
+        _imageListSyncer?.Dispose();
     }
 
     protected virtual void CreateToolbarsAndMenus()

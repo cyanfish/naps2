@@ -4,16 +4,16 @@ namespace NAPS2.EtoForms.WinForms;
 
 public class WinFormsInvoker : IInvoker
 {
-    private readonly Form _form;
+    private readonly ApplicationContext _appContext;
 
-    public WinFormsInvoker(Form form)
+    public WinFormsInvoker(ApplicationContext appContext)
     {
-        _form = form;
+        _appContext = appContext;
     }
 
     public void Invoke(Action action)
     {
-        _form.Invoke(action);
+        _appContext.MainForm.Invoke(action);
     }
 
     // TODO: Maybe these can be extension methods?
