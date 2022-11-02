@@ -59,4 +59,11 @@ public class MacEtoPlatform : EtoPlatform
     {
         container.ToNative().AddSubview(control.ToNative());
     }
+
+    public override Control AccessibleImageButton(Image image, String text, Action onClick,
+        int xOffset = 0, int yOffset = 9)
+    {
+        // TODO
+        return new NSView();
+    }
 }

@@ -2,10 +2,10 @@ using System.Reflection;
 using Eto;
 using Eto.Drawing;
 using Eto.Forms;
+using Eto.GtkSharp;
 using Eto.GtkSharp.Drawing;
 using NAPS2.Images.Gtk;
-using GtkFixed = Gtk.Fixed;
-using GtkWindow = Gtk.Window;
+using gtk = Gtk;
 
 namespace NAPS2.EtoForms.Gtk;
 
@@ -51,19 +51,19 @@ public class GtkEtoPlatform : EtoPlatform
 
     public override void SetFrame(Control container, Control control, Point location, Size size)
     {
-        var fixedContainer = (GtkFixed) container.ToNative();
+        var fixedContainer = (gtk.Fixed) container.ToNative();
         fixedContainer.Move(control.ToNative(), location.X - X_OFF, location.Y - Y_OFF);
         control.ToNative().SetSizeRequest(size.Width, size.Height);
     }
 
     public override Control CreateContainer()
     {
-        return new GtkFixed().ToEto();
+        return new gtk.Fixed().ToEto();
     }
 
     public override void AddToContainer(Control container, Control control)
     {
-        var fixedContainer = (GtkFixed) container.ToNative();
+        var fixedContainer = (gtk.Fixed) container.ToNative();
         var widget = control.ToNative();
         fixedContainer.Add(widget);
         widget.ShowAll();
@@ -72,21 +72,21 @@ public class GtkEtoPlatform : EtoPlatform
     public override void SetContainerSize(Control container, Size size, int padding)
     {
         // This ensures even with Resizable=false, the window has the appropriate margins
-        var fixedContainer = (GtkFixed) container.ToNative();
+        var fixedContainer = (gtk.Fixed) container.ToNative();
         fixedContainer.MarginBottom = padding - Y_OFF;
         fixedContainer.MarginEnd = padding - X_OFF;
     }
 
     public override Size GetFormSize(Window window)
     {
-        var gtkWindow = (GtkWindow) window.ToNative();
+        var gtkWindow = (gtk.Window) window.ToNative();
         gtkWindow.GetSize(out int w, out int h);
         return new Size(w, h);
     }
 
     public override void SetFormSize(Window window, Size size)
     {
-        var gtkWindow = (GtkWindow) window.ToNative();
+        var gtkWindow = (gtk.Window) window.ToNative();
         gtkWindow.SetDefaultSize(size.Width, size.Height);
     }
 
@@ -103,25 +103,46 @@ public class GtkEtoPlatform : EtoPlatform
 
     public override Size GetClientSize(Window window)
     {
-        var gtkWindow = (GtkWindow) window.ToNative();
+        var gtkWindow = (gtk.Window) window.ToNative();
         gtkWindow.GetSize(out var w, out var h);
         return new Size(w, h);
     }
 
     public override void SetClientSize(Window window, Size clientSize)
     {
-        var gtkWindow = (GtkWindow) window.ToNative();
+        var gtkWindow = (gtk.Window) window.ToNative();
         gtkWindow.Resize(clientSize.Width, clientSize.Height);
     }
 
     public override void SetMinimumClientSize(Window window, Size minSize)
     {
-        var gtkWindow = (GtkWindow) window.ToNative();
+        var gtkWindow = (gtk.Window) window.ToNative();
         gtkWindow.SetSizeRequest(minSize.Width, minSize.Height);
     }
 
     public override void SetFormLocation(Window window, Point location)
     {
         // TODO: Gtk windows drift if we remember location. For now using the default location is fine.
+    }
+
+    public override Control AccessibleImageButton(Image image, string text, Action onClick,
+        int xOffset = 0, int yOffset = 0)
+    {
+        var box = new gtk.EventBox
+        {
+            CanFocus = true
+        };
+        var imageControl = image.ToGtk();
+        box.Add(imageControl);
+        box.ButtonPressEvent += (_, _) => onClick();
+        box.KeyPressEvent += (_, e) =>
+        {
+            if (e.Event.Key is Gdk.Key.Return or Gdk.Key.space)
+            {
+                onClick();
+                e.RetVal = true;
+            }
+        };
+        return box.ToEto();
     }
 }

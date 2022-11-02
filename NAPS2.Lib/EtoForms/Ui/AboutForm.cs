@@ -30,10 +30,10 @@ public class AboutForm : EtoDialogBase
         FormStateController.Resizable = false;
         FormStateController.RestoreFormState = false;
 
-        _donateButton = C.AccessibleImageButton(
+        _donateButton = EtoPlatform.Current.AccessibleImageButton(
             Icons.btn_donate_LG.ToEtoImage(),
             UiStrings.Donate,
-            () => Process.Start(DONATE_URL));
+            () => Process.Start(new ProcessStartInfo(DONATE_URL) { UseShellExecute = true }));
         _checkForUpdates = new CheckBox { Text = UiStrings.CheckForUpdates };
         _checkForUpdates.CheckedChanged += CheckForUpdatesChanged;
         _updatePanel = new Panel();

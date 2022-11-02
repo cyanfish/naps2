@@ -125,37 +125,6 @@ public static class C
     /// <returns></returns>
     public static LayoutElement TextSpace() => NoWrap(" ");
 
-    /// <summary>
-    /// Creates a hacky image button that supports accessible interaction.
-    ///
-    /// It works by overlaying an image on top a button.
-    /// If the image has transparency an offset may need to be specified to keep the button hidden.
-    /// If the text is too large relative to the button it will be impossible to hide fully.
-    /// </summary>
-    /// <param name="image"></param>
-    /// <param name="text"></param>
-    /// <param name="onClick"></param>
-    /// <param name="xOffset"></param>
-    /// <param name="yOffset"></param>
-    /// <returns></returns>
-    public static Control AccessibleImageButton(Image image, string text, Action onClick, int xOffset = 0,
-        int yOffset = 0)
-    {
-        var imageView = new ImageView { Image = image, Cursor = Eto.Forms.Cursors.Pointer };
-        imageView.MouseDown += (_, _) => onClick();
-        var button = new Button
-        {
-            Text = text,
-            Width = 0,
-            Height = 0,
-            Command = new ActionCommand(onClick)
-        };
-        var pix = new PixelLayout();
-        pix.Add(button, xOffset, yOffset);
-        pix.Add(imageView, 0, 0);
-        return pix;
-    }
-
     public static Label Label(string text) => new() { Text = text };
 
     public static DropDown EnumDropDown<T>(params T[] values) where T : Enum

@@ -76,7 +76,6 @@ public class FormStateController : IFormStateController
 
     private void OnShownInternal(object sender, EventArgs e)
     {
-        Console.WriteLine("FormStateController on shown");
         if (!_minimumClientSize.IsEmpty)
         {
             EtoPlatform.Current.SetMinimumClientSize(_window, _minimumClientSize);

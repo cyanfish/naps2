@@ -27,6 +27,9 @@ public abstract class EtoPlatform
     public abstract Control CreateContainer();
     public abstract void AddToContainer(Control container, Control control);
 
+    public abstract Control AccessibleImageButton(Image image, string text, Action onClick,
+        int xOffset = 0, int yOffset = 0);
+
     public virtual void SetContainerSize(Control container, Size size, int padding)
     {
     }
