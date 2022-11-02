@@ -59,9 +59,9 @@ public class OcrDownloadForm : EtoDialogBase
 
     private void UpdateView()
     {
-        var selectedLanguageComponents = SelectedLanguageComponents;
+        var selected = SelectedLanguageComponents;
         double downloadSize = _tesseractLanguageManager.LanguageComponents
-            .Where(x => selectedLanguageComponents.Contains(x.Id))
+            .Where(x => selected.Contains(x.Id))
             .Select(x => x.DownloadInfo.Size)
             .Sum();
 
@@ -77,15 +77,15 @@ public class OcrDownloadForm : EtoDialogBase
 
     private void Download()
     {
-        // var progressForm = FormFactory.Create<DownloadProgressForm>();
-        //
-        // var selectedLanguages = SelectedLanguages;
-        // foreach (var langComponent in _tesseractLanguageManager.LanguageComponents.Where(x => selectedLanguages.Contains(x.Id)))
-        // {
-        //     progressForm.QueueFile(langComponent);
-        // }
-        //
-        // Close();
-        // progressForm.ShowDialog();
+        var progressForm = FormFactory.Create<DownloadProgressForm>();
+
+        var selected = SelectedLanguageComponents;
+        foreach (var langComponent in _tesseractLanguageManager.LanguageComponents.Where(x => selected.Contains(x.Id)))
+        {
+            progressForm.QueueFile(langComponent);
+        }
+
+        Close();
+        progressForm.ShowModal();
     }
 }

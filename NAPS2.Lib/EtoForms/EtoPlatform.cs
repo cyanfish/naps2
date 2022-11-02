@@ -1,5 +1,6 @@
 using Eto.Drawing;
 using Eto.Forms;
+using NAPS2.EtoForms.Layout;
 
 namespace NAPS2.EtoForms;
 
@@ -59,5 +60,10 @@ public abstract class EtoPlatform
     public virtual SizeF GetPreferredSize(Control control, SizeF availableSpace)
     {
         return control.GetPreferredSize(availableSpace);
+    }
+
+    public virtual LayoutElement FormatProgressBar(ProgressBar progressBar)
+    {
+        return progressBar.Width(420).Padding(top: 10, bottom: 10);
     }
 }

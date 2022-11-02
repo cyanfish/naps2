@@ -28,7 +28,7 @@ public class ProgressForm : EtoDialogBase
 
         LayoutController.Content = L.Column(
             _status,
-            _progressBar.Size(420, 40),
+            EtoPlatform.Current.FormatProgressBar(_progressBar),
             L.Row(
                 _numeric,
                 C.Filler(),

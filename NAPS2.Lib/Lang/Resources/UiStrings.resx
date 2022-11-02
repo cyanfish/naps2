@@ -429,4 +429,7 @@
   <data name="Download" xml:space="preserve">
     <value>Download</value>
   </data>
+  <data name="DownloadProgressFormTitle" xml:space="preserve">
+    <value>Download Progress</value>
+  </data>
 </root>

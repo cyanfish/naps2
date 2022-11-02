@@ -668,5 +668,11 @@ namespace NAPS2.Lang.Resources {
                 return ResourceManager.GetString("Download", resourceCulture);
             }
         }
+        
+        internal static string DownloadProgressFormTitle {
+            get {
+                return ResourceManager.GetString("DownloadProgressFormTitle", resourceCulture);
+            }
+        }
     }
 }

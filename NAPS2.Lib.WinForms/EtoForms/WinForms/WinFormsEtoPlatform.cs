@@ -3,6 +3,7 @@ using Eto.Drawing;
 using Eto.Forms;
 using Eto.WinForms;
 using Eto.WinForms.Forms.Controls;
+using NAPS2.EtoForms.Layout;
 using NAPS2.Images.Gdi;
 using sd = System.Drawing;
 using wf = System.Windows.Forms;
@@ -101,5 +102,10 @@ public class WinFormsEtoPlatform : EtoPlatform
     public override void AddToContainer(Control container, Control control)
     {
         container.ToNative().Controls.Add(control.ToNative());
+    }
+
+    public override LayoutElement FormatProgressBar(ProgressBar progressBar)
+    {
+        return progressBar.Size(420, 40);
     }
 }
