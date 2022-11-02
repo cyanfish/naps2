@@ -39,6 +39,8 @@ public class DesktopController
     private readonly IScannedImagePrinter _scannedImagePrinter;
 
     private bool _closed;
+    private bool _initialized;
+    private bool _suspended;
 
     public DesktopController(ScanningContext scanningContext, UiImageList imageList,
         RecoveryStorageManager recoveryStorageManager, ThumbnailController thumbnailController,
@@ -75,6 +77,8 @@ public class DesktopController
 
     public async Task Initialize()
     {
+        if (_initialized) return;
+        _initialized = true;
         StartPipesServer();
         ShowStartupMessages();
         ShowRecoveryPrompt();
@@ -155,6 +159,7 @@ public class DesktopController
 
     public void Cleanup()
     {
+        if (_suspended) return;
         Pipes.KillServer();
         if (!SkipRecoveryCleanup)
         {
@@ -496,5 +501,15 @@ public class DesktopController
         {
             ImportFiles(fileNames!);
         }
+    }
+
+    public void Suspend()
+    {
+        _suspended = true;
+    }
+
+    public void Resume()
+    {
+        _suspended = false;
     }
 }

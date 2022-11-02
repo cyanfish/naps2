@@ -314,23 +314,21 @@ public abstract class DesktopForm : EtoFormBase
 
     private void SetCulture(string cultureId)
     {
-        // SaveToolStripLocation();
-        // Config.User.Set(c => c.Culture, cultureId);
-        // _cultureHelper.SetCulturesFromConfig();
-        //
-        // // Update localized values
-        // // Since all forms are opened modally and this is the root form, it should be the only one that needs to be updated live
-        // SaveFormState = false;
-        // Controls.Clear();
-        // UpdateRTL();
-        // InitializeComponent();
-        // PostInitializeComponent();
-        // AfterLayout();
-        // _notify.Rebuild();
-        // Focus();
-        // WindowState = FormWindowState.Normal;
-        // DoRestoreFormState();
-        // SaveFormState = true;
+        _desktopController.Suspend();
+        try
+        {
+            Config.User.Set(c => c.Culture, cultureId);
+            _cultureHelper.SetCulturesFromConfig();
+            FormStateController.DoSaveFormState();
+            var newDesktop = FormFactory.Create<DesktopForm>();
+            newDesktop.Show();
+            Close();
+        }
+        finally
+        {
+            _desktopController.Resume();
+        }
+        // TODO: If we make any other forms non-modal, we will need to refresh them too
     }
     //
     // private async void FDesktop_Shown(object sender, EventArgs e)
