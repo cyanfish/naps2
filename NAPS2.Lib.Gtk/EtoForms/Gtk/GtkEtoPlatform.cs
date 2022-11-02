@@ -11,6 +11,10 @@ namespace NAPS2.EtoForms.Gtk;
 
 public class GtkEtoPlatform : EtoPlatform
 {
+    // TODO: Can we determine this dynamically? Tried container.GetAllocatedSize.Left/Top which works on LxQT but not Gnome
+    private const int X_OFF = 2;
+    private const int Y_OFF = 2;
+    
     public override bool IsGtk => true;
 
     public override Application CreateApplication()
@@ -48,8 +52,7 @@ public class GtkEtoPlatform : EtoPlatform
     public override void SetFrame(Control container, Control control, Point location, Size size)
     {
         var fixedContainer = (GtkFixed) container.ToNative();
-        fixedContainer.GetAllocatedSize(out var allocation, out _);
-        fixedContainer.Move(control.ToNative(), location.X - allocation.Left, location.Y - allocation.Top);
+        fixedContainer.Move(control.ToNative(), location.X - X_OFF, location.Y - Y_OFF);
         control.ToNative().SetSizeRequest(size.Width, size.Height);
     }
 
@@ -64,6 +67,13 @@ public class GtkEtoPlatform : EtoPlatform
         var widget = control.ToNative();
         fixedContainer.Add(widget);
         widget.ShowAll();
+    }
+
+    public override void SetContainerSize(Control container, Size size)
+    {
+        // This ensures even with Resizable=false, the window has the appropriate margins
+        var fixedContainer = (GtkFixed) container.ToNative();
+        fixedContainer.SetSizeRequest(size.Width + X_OFF * 2, size.Height + Y_OFF * 2);
     }
 
     public override Size GetFormSize(Window window)

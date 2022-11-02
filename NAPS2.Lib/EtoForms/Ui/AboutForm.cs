@@ -7,16 +7,16 @@ namespace NAPS2.EtoForms.Ui;
 
 public class AboutForm : EtoDialogBase
 {
-    private const string NAPS2_HOMEPAGE = "https://www.naps2.com";  
+    private const string NAPS2_HOMEPAGE = "https://www.naps2.com";
     private const string ICONS_HOMEPAGE = "https://www.fatcow.com/free-icons";
     private const string DONATE_URL = "https://www.naps2.com/donate";
 
     private readonly UpdateChecker _updateChecker;
-        
+
     private readonly Control _donateButton;
     private readonly CheckBox _checkForUpdates;
     private readonly Panel _updatePanel;
-        
+
     private bool _hasCheckedForUpdates;
     private UpdateInfo? _update;
 
@@ -24,7 +24,7 @@ public class AboutForm : EtoDialogBase
         : base(config)
     {
         _updateChecker = updateChecker;
-            
+
         Title = UiStrings.AboutFormTitle;
         Icon = new Icon(1f, Icons.information_small.ToEtoImage());
         Resizable = false;
@@ -78,7 +78,7 @@ public class AboutForm : EtoDialogBase
             )
         );
     }
-        
+
     private void DoUpdateCheck()
     {
         if (_checkForUpdates.IsChecked())
