@@ -9,6 +9,7 @@ public abstract class EtoFormBase : Form, IFormBase
 
     protected EtoFormBase(Naps2Config config)
     {
+        EtoPlatform.Current.UpdateRtl(this);
         Config = config;
         FormStateController = new FormStateController(this, config);
         Resizable = true;

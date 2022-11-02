@@ -1,4 +1,5 @@
 using System.Drawing.Imaging;
+using System.Globalization;
 using Eto.Drawing;
 using Eto.Forms;
 using Eto.WinForms;
@@ -103,7 +104,13 @@ public class WinFormsEtoPlatform : EtoPlatform
     public override void SetFrame(Control container, Control control, Point location, Size size)
     {
         var native = control.ToNative();
-        native.Location = new sd.Point(location.X, location.Y);
+        var x = location.X;
+        var y = location.Y;
+        if (CultureInfo.CurrentCulture.TextInfo.IsRightToLeft)
+        {
+            x = container.Width - x - size.Width;
+        }
+        native.Location = new sd.Point(x, y);
         native.AutoSize = false;
         native.Size = new sd.Size(size.Width, size.Height);
     }
@@ -128,5 +135,13 @@ public class WinFormsEtoPlatform : EtoPlatform
     public override LayoutElement FormatProgressBar(ProgressBar progressBar)
     {
         return progressBar.Size(420, 40);
+    }
+
+    public override void UpdateRtl(Window window)
+    {
+        var form = window.ToNative();
+        bool isRtl = CultureInfo.CurrentCulture.TextInfo.IsRightToLeft;
+        form.RightToLeft = isRtl ? wf.RightToLeft.Yes : wf.RightToLeft.No;
+        form.RightToLeftLayout = isRtl;
     }
 }

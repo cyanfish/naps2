@@ -74,4 +74,8 @@ public abstract class EtoPlatform
     {
         window.Location = location;
     }
+
+    public virtual void UpdateRtl(Window window)
+    {
+    }
 }
