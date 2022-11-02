@@ -128,21 +128,14 @@ public class GtkEtoPlatform : EtoPlatform
     public override Control AccessibleImageButton(Image image, string text, Action onClick,
         int xOffset = 0, int yOffset = 0)
     {
-        var box = new gtk.EventBox
+        var button = new gtk.Button
         {
-            CanFocus = true
+            // Label = text,
+            Image = image.ToGtk(),
+            ImagePosition = gtk.PositionType.Left
         };
-        var imageControl = image.ToGtk();
-        box.Add(imageControl);
-        box.ButtonPressEvent += (_, _) => onClick();
-        box.KeyPressEvent += (_, e) =>
-        {
-            if (e.Event.Key is Gdk.Key.Return or Gdk.Key.space)
-            {
-                onClick();
-                e.RetVal = true;
-            }
-        };
-        return box.ToEto();
+        button.StyleContext.AddClass("accessible-image-button");
+        button.Clicked += (_, _) => onClick();
+        return button.ToEto();
     }
 }
