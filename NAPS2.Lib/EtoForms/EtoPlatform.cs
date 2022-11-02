@@ -30,7 +30,7 @@ public abstract class EtoPlatform
     public abstract Control AccessibleImageButton(Image image, string text, Action onClick,
         int xOffset = 0, int yOffset = 0);
 
-    public virtual void SetContainerSize(Control container, Size size, int padding)
+    public virtual void SetContainerSize(Window window, Control container, Size size, int padding)
     {
     }
 

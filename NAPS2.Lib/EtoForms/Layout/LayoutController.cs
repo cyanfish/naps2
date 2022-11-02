@@ -39,7 +39,7 @@ public class LayoutController
             _isShown = true;
             DoLayout();
         };
-        window.SizeChanged += (_, _) => DoLayout();;
+        window.SizeChanged += (_, _) => DoLayout();
     }
 
     public Size GetLayoutSize(bool natural)
@@ -71,7 +71,7 @@ public class LayoutController
             Debug.WriteLine("\n(((Starting layout)))");
         }
         _content.DoLayout(context, bounds);
-        EtoPlatform.Current.SetContainerSize(_layout, size, p);
+        EtoPlatform.Current.SetContainerSize(_window, _layout, size, p);
     }
 
     private LayoutContext GetLayoutContext()
