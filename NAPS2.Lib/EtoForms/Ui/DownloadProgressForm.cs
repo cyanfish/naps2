@@ -137,7 +137,7 @@ public class DownloadProgressForm : EtoDialogBase
         }
         if (_filesDownloaded >= _filesToDownload.Count)
         {
-            // Close();
+            Close();
             return;
         }
         if (_urlIndex >= _filesToDownload[_filesDownloaded].DownloadInfo.Urls.Count)
