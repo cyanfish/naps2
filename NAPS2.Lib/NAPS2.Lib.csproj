@@ -45,23 +45,34 @@
     </AssemblyAttribute>
   </ItemGroup>
 
-  <ItemGroup Condition="'$(Configuration)' == 'Debug'">
+  <ItemGroup>
 
     <EmbeddedResource Remove="Lang\Resources\SettingsResources.*.resx" Condition="'$(Configuration)' == 'Debug'" />
+    <EmbeddedResource Include="Lang\Resources\SettingsResources.fr.resx" Condition="'$(Configuration)' == 'Debug'" />
+    <EmbeddedResource Include="Lang\Resources\SettingsResources.he.resx" Condition="'$(Configuration)' == 'Debug'" />
     <EmbeddedResource Update="Lang\Resources\SettingsResources.*.resx">
       <DependentUpon>SettingsResources.resx</DependentUpon>
     </EmbeddedResource>
 
     <EmbeddedResource Remove="Lang\Resources\MiscResources.*.resx" Condition="'$(Configuration)' == 'Debug'" />
+    <EmbeddedResource Include="Lang\Resources\MiscResources.fr.resx" Condition="'$(Configuration)' == 'Debug'" />
+    <EmbeddedResource Include="Lang\Resources\MiscResources.he.resx" Condition="'$(Configuration)' == 'Debug'" />
     <EmbeddedResource Update="Lang\Resources\MiscResources.*.resx">
       <DependentUpon>MiscResources.resx</DependentUpon>
+    </EmbeddedResource>
+
+    <EmbeddedResource Remove="Lang\Resources\UiStrings.*.resx" Condition="'$(Configuration)' == 'Debug'" />
+    <EmbeddedResource Include="Lang\Resources\UiStrings.fr.resx" Condition="'$(Configuration)' == 'Debug'" />
+    <EmbeddedResource Include="Lang\Resources\UiStrings.he.resx" Condition="'$(Configuration)' == 'Debug'" />
+    <EmbeddedResource Update="Lang\Resources\UiStrings.*.resx">
+      <DependentUpon>UiStrings.resx</DependentUpon>
     </EmbeddedResource>
 
     <EmbeddedResource Update="**/*.resx">
       <Generator>ResXFileCodeGenerator</Generator>
     </EmbeddedResource>
 
-    <EmbeddedResource Update="Lang\ConsoleResources\ConsoleResources.resx">
+    <EmbeddedResource Update="Lang\Reesources\UiStrings.fr.resx">
       <Generator>ResXFileCodeGenerator</Generator>
     </EmbeddedResource>
 

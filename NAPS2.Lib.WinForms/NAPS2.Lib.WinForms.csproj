@@ -29,7 +29,7 @@
     </AssemblyAttribute>
   </ItemGroup>
 
-  <ItemGroup Condition="'$(Configuration)' == 'Debug'">
+  <ItemGroup>
 
     <EmbeddedResource Remove="WinForms\EmailProviderWidget.*.resx" Condition="'$(Configuration)' == 'Debug'" />
     <EmbeddedResource Update="WinForms\EmailProviderWidget.*.resx">
@@ -359,10 +359,6 @@
       <Generator>ResXFileCodeGenerator</Generator>
     </EmbeddedResource>
 
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Scan\Internal" />
   </ItemGroup>
 
 </Project>

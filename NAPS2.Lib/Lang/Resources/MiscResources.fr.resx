@@ -72,6 +72,9 @@
   <data name="FileTypeTiff" xml:space="preserve">
     <value>Fichier TIFF (*.tiff, *.tif)</value>
   </data>
+  <data name="FileTypeJp2" xml:space="preserve">
+    <value>JPEG2000 File (*.jp2, *.jpx)</value>
+  </data>
   <data name="NameMissing" xml:space="preserve">
     <value>Nom manquant.</value>
   </data>
@@ -359,6 +362,9 @@
   </data>
   <data name="CheckingForUpdates" xml:space="preserve">
     <value>Vérification...</value>
+  </data>
+  <data name="UpdateCheckDisabled" xml:space="preserve">
+    <value>Update checking is disabled.</value>
   </data>
   <data name="UpdateError" xml:space="preserve">
     <value>Une erreur est survenue en essayant d'installer la mise à jour.</value>
