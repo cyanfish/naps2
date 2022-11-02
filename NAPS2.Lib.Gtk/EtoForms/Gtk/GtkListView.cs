@@ -127,8 +127,9 @@ public class GtkListView<T> : IListView<T> where T : notnull
                 var label = new Label
                 {
                     Text = _behavior.GetLabel(item),
-                    // TODO: Fix wrapping
-                    // Wrap = true
+                    LineWrap = true,
+                    Justify = Justification.Center,
+                    MaxWidthChars = 15
                 };
                 vframe.Add(label);
             }
