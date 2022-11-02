@@ -86,7 +86,7 @@ public class CommonModule : Module
                 : Environment.ExpandEnvironmentVariables(customComponentsPath);
             return new TesseractLanguageManager(componentsPath);
         }).SingleInstance();
-        builder.Register(ctx =>
+        builder.Register<IOcrEngine>(ctx =>
         {
             var tesseractPath = PlatformCompat.System.UseSystemTesseract
                 ? "tesseract"
