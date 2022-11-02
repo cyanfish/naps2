@@ -75,17 +75,22 @@ public class MenuProvider
         {
             if (item is DynamicItem dynamicItem)
             {
-                actualItems.AddRange(
+                var dynamicItemValues =
                     dynamicItem.CommandListProvider.Value.Select(x => new CommandItem
-                    {
-                        Command = x
-                    }));
+                {
+                    Command = x
+                }).ToList();
+                if (dynamicItemValues.Any())
+                {
+                    actualItems.AddRange(dynamicItemValues);
+                    lastItem = item;
+                }
             }
             else if (item is not SeparatorItem || (lastItem != null && lastItem is not SeparatorItem))
             {
                 actualItems.Add(item);
+                lastItem = item;
             }
-            lastItem = item;
         }
         return actualItems;
     }
