@@ -98,8 +98,7 @@ public class FormStateController : IFormStateController
             {
                 // Only move to the specified location if it's onscreen
                 // It might be offscreen if the user has disconnected a monitor
-                // TODO: Make this platform-specific to avoid drift?
-                _window.Location = location;
+                EtoPlatform.Current.SetFormLocation(_window, location);
             }
         }
         if (!size.IsEmpty && _window.Resizable)

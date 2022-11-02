@@ -119,4 +119,9 @@ public class GtkEtoPlatform : EtoPlatform
         var gtkWindow = (GtkWindow) window.ToNative();
         gtkWindow.SetSizeRequest(minSize.Width, minSize.Height);
     }
+
+    public override void SetFormLocation(Window window, Point location)
+    {
+        // TODO: Gtk windows drift if we remember location. For now using the default location is fine.
+    }
 }

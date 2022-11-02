@@ -66,4 +66,9 @@ public abstract class EtoPlatform
     {
         return progressBar.Width(420).Padding(top: 10, bottom: 10);
     }
+
+    public virtual void SetFormLocation(Window window, Point location)
+    {
+        window.Location = location;
+    }
 }
