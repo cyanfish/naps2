@@ -57,9 +57,7 @@ public static class EtoLayoutExtensions
         new ControlWithLayoutAttributes(control, padding: new Padding(all));
     public static ControlWithLayoutAttributes Padding(this Control control, int left = 0, int top = 0, int right = 0, int bottom = 0) =>
         new ControlWithLayoutAttributes(control, padding: new Padding(left, top, right, bottom));
-    public static ControlWithLayoutAttributes Spacing(this Control control) =>
-        new ControlWithLayoutAttributes(control);
-        
+
     public static ControlWithLayoutAttributes Width(this ControlWithLayoutAttributes control, int width) =>
         new ControlWithLayoutAttributes(control, width: width);
     public static ControlWithLayoutAttributes Height(this ControlWithLayoutAttributes control, int height) =>
@@ -82,7 +80,7 @@ public static class EtoLayoutExtensions
         new ControlWithLayoutAttributes(control, padding: new Padding(all));
     public static ControlWithLayoutAttributes Padding(this ControlWithLayoutAttributes control, int left = 0, int top = 0, int right = 0, int bottom = 0) =>
         new ControlWithLayoutAttributes(control, padding: new Padding(left, top, right, bottom));
-        
+
     public static LayoutColumn Padding(this LayoutColumn column, Padding padding) =>
         new LayoutColumn(column, padding: padding);
     public static LayoutColumn Padding(this LayoutColumn column, int all) =>
@@ -93,7 +91,17 @@ public static class EtoLayoutExtensions
         new LayoutColumn(column, spacing: spacing);
     public static LayoutColumn XScale(this LayoutColumn column) =>
         new LayoutColumn(column, xScale: true);
-        
+    public static LayoutColumn Aligned(this LayoutColumn column) =>
+        new LayoutColumn(column, aligned: true);
+
+    public static LayoutRow Padding(this LayoutRow row, Padding padding) =>
+        new LayoutRow(row, padding: padding);
+    public static LayoutRow Padding(this LayoutRow row, int all) =>
+        new LayoutRow(row, padding: new Padding(all));
+    public static LayoutRow Padding(this LayoutRow row, int left = 0, int top = 0, int right = 0, int bottom = 0) =>
+        new LayoutRow(row, padding: new Padding(left, top, right, bottom));
+    public static LayoutRow Spacing(this LayoutRow row, int spacing) =>
+        new LayoutRow(row, spacing: spacing);
     public static LayoutRow YScale(this LayoutRow row) =>
         new LayoutRow(row, yScale: true);
     public static LayoutRow Aligned(this LayoutRow row) =>

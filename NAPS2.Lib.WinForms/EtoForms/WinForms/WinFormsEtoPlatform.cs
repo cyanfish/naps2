@@ -144,4 +144,9 @@ public class WinFormsEtoPlatform : EtoPlatform
         form.RightToLeft = isRtl ? wf.RightToLeft.Yes : wf.RightToLeft.No;
         form.RightToLeftLayout = isRtl;
     }
+
+    public override void BringToFront(Control control)
+    {
+        control.ToNative().BringToFront();
+    }
 }

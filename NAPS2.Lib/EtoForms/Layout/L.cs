@@ -10,4 +10,7 @@ public static class L
         
     public static LayoutRow Row(params LayoutElement[] children) =>
         new LayoutRow(children);
+
+    public static LayoutOverlay Overlay(params LayoutElement[] children) =>
+        new LayoutOverlay(children);
 }

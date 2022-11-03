@@ -78,4 +78,8 @@ public abstract class EtoPlatform
     public virtual void UpdateRtl(Window window)
     {
     }
+
+    public virtual void BringToFront(Control control)
+    {
+    }
 }

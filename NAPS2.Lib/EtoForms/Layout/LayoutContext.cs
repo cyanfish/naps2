@@ -17,4 +17,6 @@ public record LayoutContext(Control Layout)
     public int Depth { get; set; }
 
     public Window? Window { get; set; }
+
+    public bool InOverlay { get; set; }
 }

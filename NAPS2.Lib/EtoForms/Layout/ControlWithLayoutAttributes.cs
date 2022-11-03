@@ -60,6 +60,10 @@ public class ControlWithLayoutAttributes : LayoutElement
             size = SizeF.Max(SizeF.Empty, size);
             EnsureIsAdded(context);
             EtoPlatform.Current.SetFrame(context.Layout, Control, Point.Round(location), Size.Round(size));
+            if (context.InOverlay)
+            {
+                EtoPlatform.Current.BringToFront(Control);
+            }
         }
     }
 

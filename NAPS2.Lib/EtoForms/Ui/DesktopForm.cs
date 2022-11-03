@@ -3,6 +3,7 @@ using System.Threading;
 using Eto.Drawing;
 using Eto.Forms;
 using NAPS2.EtoForms.Desktop;
+using NAPS2.EtoForms.Layout;
 using NAPS2.ImportExport.Images;
 using NAPS2.Scan;
 
@@ -28,7 +29,6 @@ public abstract class DesktopForm : EtoFormBase
 
     protected IListView<UiImage> _listView;
     private ImageListSyncer? _imageListSyncer;
-    // private LayoutManager _layoutManager;
 
     public DesktopForm(
         Naps2Config config,
@@ -81,7 +81,13 @@ public abstract class DesktopForm : EtoFormBase
         LayoutController.RootPadding = 0;
         FormStateController.AutoLayoutSize = false;
         FormStateController.DefaultClientSize = new Size(1210, 600);
-        SetContent(_listView.Control);
+        LayoutController.Content = L.Overlay(
+            GetMainContent(),
+            L.Column(
+                C.Filler(),
+                L.Row(GetZoomButtons(), C.Filler())
+            ).Padding(10)
+        );
         AfterLayout();
 
         //
@@ -294,10 +300,9 @@ public abstract class DesktopForm : EtoFormBase
         return menuItem;
     }
 
-    protected virtual void SetContent(Control content)
-    {
-        LayoutController.Content = content;
-    }
+    protected virtual LayoutElement GetMainContent() => _listView.Control;
+
+    protected virtual LayoutElement GetZoomButtons() => C.Spacer();
 
     // // protected override void OnLoad(EventArgs args) => PostInitializeComponent();
     //

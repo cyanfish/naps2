@@ -3,6 +3,7 @@ using Eto.Forms;
 using Eto.WinForms;
 using Eto.WinForms.Forms.ToolBar;
 using NAPS2.EtoForms.Desktop;
+using NAPS2.EtoForms.Layout;
 using NAPS2.EtoForms.WinForms;
 using NAPS2.ImportExport.Images;
 using NAPS2.WinForms;
@@ -18,7 +19,6 @@ public class WinFormsDesktopForm : DesktopForm
     private readonly wf.Form _form;
     private wf.ToolStrip _toolStrip = null!;
     private wf.ToolStripContainer _container = null!;
-    private LayoutManager _layoutManager;
     private wf.Button btnZoomIn, btnZoomOut, btnZoomMouseCatcher;
 
     public WinFormsDesktopForm(
@@ -48,20 +48,16 @@ public class WinFormsDesktopForm : DesktopForm
     {
         base.OnLoad(e);
 
-        ConfigureZoomButtons();
-
         NativeListView.TabIndex = 7;
         NativeListView.Dock = wf.DockStyle.Fill;
         // NativeListView.ContextMenuStrip = contextMenuStrip;
         // NativeListView.KeyDown += ListViewKeyDown;
         // NativeListView.MouseWheel += ListViewMouseWheel;
-        NativeListView.SizeChanged += (_, _) => _layoutManager.UpdateLayout();
         NativeListView.Focus();
     }
 
-    private void ConfigureZoomButtons()
+    protected override LayoutElement GetZoomButtons()
     {
-        _layoutManager?.Deactivate();
         btnZoomIn = new wf.Button
         {
             Image = Icons.zoom_in.ToBitmap(),
@@ -72,7 +68,6 @@ public class WinFormsDesktopForm : DesktopForm
             TabIndex = 8
         };
         btnZoomIn.Click += (_, _) => StepThumbnailSize(1);
-        _container.ContentPanel.Controls.Add(btnZoomIn);
         btnZoomOut = new wf.Button
         {
             Image = Icons.zoom_out.ToBitmap(),
@@ -83,25 +78,19 @@ public class WinFormsDesktopForm : DesktopForm
             TabIndex = 9
         };
         btnZoomOut.Click += (_, _) => StepThumbnailSize(-1);
-        _container.ContentPanel.Controls.Add(btnZoomOut);
+        // Disabled buttons don't prevent click events from being sent to the listview below the button, so without this
+        // "mouse catcher" control you could e.g. spam click zoom out until it's maxed and then accidentally keep
+        // clicking and change the listview selection.
         btnZoomMouseCatcher = new wf.Button
         {
             BackColor = Color.White,
             Size = new Size(45, 23),
             FlatStyle = wf.FlatStyle.Flat
         };
-        _container.ContentPanel.Controls.Add(btnZoomMouseCatcher);
-        btnZoomMouseCatcher.BringToFront();
-        btnZoomIn.BringToFront();
-        btnZoomOut.BringToFront();
-
-        btnZoomIn.Location = new Point(32, NativeListView.Height - 33);
-        btnZoomOut.Location = new Point(10, NativeListView.Height - 33);
-        btnZoomMouseCatcher.Location = new Point(10, NativeListView.Height - 33);
-        _layoutManager = new LayoutManager(_form)
-            .Bind(btnZoomIn, btnZoomOut, btnZoomMouseCatcher)
-            .BottomTo(() => NativeListView.Height)
-            .Activate();
+        return L.Overlay(
+            btnZoomMouseCatcher.ToEto(),
+            L.Row(btnZoomOut.ToEto(), btnZoomIn.ToEto()).Spacing(-1)
+        );
     }
 
     private void StepThumbnailSize(double step)
@@ -136,7 +125,7 @@ public class WinFormsDesktopForm : DesktopForm
         _toolStrip.ParentChanged += (_, _) => _toolbarFormatter.RelayoutToolbar(_toolStrip);
     }
 
-    protected override void SetContent(Control content)
+    protected override LayoutElement GetMainContent()
     {
         _container = new wf.ToolStripContainer();
         _container.TopToolStripPanel.Controls.Add(_toolStrip);
@@ -146,11 +135,11 @@ public class WinFormsDesktopForm : DesktopForm
             WinFormsHacks.SetControlStyle(panel, wf.ControlStyles.Selectable, true);
         }
 
-        var wfContent = content.ToNative();
+        var wfContent = _listView.Control.ToNative();
         wfContent.Dock = wf.DockStyle.Fill;
         _container.ContentPanel.Controls.Add(wfContent);
 
-        LayoutController.Content = _container.ToEto();
+        return _container.ToEto();
     }
 
     protected override void AfterLayout()
