@@ -152,6 +152,7 @@ public class GtkListView<T> : IListView<T> where T : notnull
             _flowBox.Remove(entry.Widget);
             var newWidget = GetItemWidget(entry.Item);
             entry.Widget = newWidget;
+            _flowBox.Add(newWidget);
         }
         _flowBox.ShowAll();
         SetSelectedItems();
