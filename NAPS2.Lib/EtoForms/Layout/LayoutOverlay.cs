@@ -13,16 +13,24 @@ public class LayoutOverlay : LayoutElement
 
     public override void DoLayout(LayoutContext context, RectangleF bounds)
     {
+        bool inOverlay = false;
         foreach (var child in Children)
         {
-            child.DoLayout(context with { InOverlay = true }, bounds);
+            child.DoLayout(context with { InOverlay = inOverlay }, bounds);
+            inOverlay = true;
         }
     }
 
     public override SizeF GetPreferredSize(LayoutContext context, RectangleF parentBounds)
     {
-        return Children
-            .Select(child => child.GetPreferredSize(context, parentBounds))
-            .Aggregate(SizeF.Max);
+        bool inOverlay = false;
+        SizeF size = SizeF.Empty;
+        foreach (var child in Children)
+        {
+            var childSize = child.GetPreferredSize(context with { InOverlay = inOverlay }, parentBounds);
+            size = SizeF.Max(size, childSize);
+            inOverlay = true;
+        }
+        return size;
     }
 }

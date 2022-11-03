@@ -23,9 +23,9 @@ public abstract class EtoPlatform
     public abstract void ConfigureImageButton(Button button);
     public abstract Bitmap ToBitmap(IMemoryImage image);
     public abstract IMemoryImage DrawHourglass(ImageContext imageContext, IMemoryImage thumb);
-    public abstract void SetFrame(Control container, Control control, Point location, Size size);
+    public abstract void SetFrame(Control container, Control control, Point location, Size size, bool inOverlay);
     public abstract Control CreateContainer();
-    public abstract void AddToContainer(Control container, Control control);
+    public abstract void AddToContainer(Control container, Control control, bool inOverlay);
 
     public abstract Control AccessibleImageButton(Image image, string text, Action onClick,
         int xOffset = 0, int yOffset = 0);
@@ -79,7 +79,7 @@ public abstract class EtoPlatform
     {
     }
 
-    public virtual void BringToFront(Control control)
+    public virtual void ConfigureZoomButton(Button button)
     {
     }
 }

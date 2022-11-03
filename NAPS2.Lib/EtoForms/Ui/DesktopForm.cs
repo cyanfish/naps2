@@ -302,7 +302,14 @@ public abstract class DesktopForm : EtoFormBase
 
     protected virtual LayoutElement GetMainContent() => _listView.Control;
 
-    protected virtual LayoutElement GetZoomButtons() => C.Spacer();
+    protected virtual LayoutElement GetZoomButtons()
+    {
+        var zoomIn = C.ImageButton(Commands.ZoomIn);
+        EtoPlatform.Current.ConfigureZoomButton(zoomIn);
+        var zoomOut = C.ImageButton(Commands.ZoomOut);
+        EtoPlatform.Current.ConfigureZoomButton(zoomOut);
+        return L.Row(zoomOut, zoomIn).Spacing(-1);
+    }
 
     // // protected override void OnLoad(EventArgs args) => PostInitializeComponent();
     //
@@ -423,6 +430,8 @@ public abstract class DesktopForm : EtoFormBase
         // ctxSelectAll.Enabled = _imageList.Images.Any();
         //
         // Other
+        Commands.ZoomIn.Enabled = ImageList.Images.Any() && _thumbnailController.VisibleSize < ThumbnailSizes.MAX_SIZE;
+        Commands.ZoomOut.Enabled = ImageList.Images.Any() && _thumbnailController.VisibleSize > ThumbnailSizes.MIN_SIZE;
         Commands.NewProfile.Enabled =
             !(Config.Get(c => c.NoUserProfiles) && _profileManager.Profiles.Any(x => x.IsLocked));
     }

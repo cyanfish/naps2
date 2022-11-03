@@ -6,7 +6,8 @@ namespace NAPS2.EtoForms.Ui;
 public class DesktopCommands
 {
     public DesktopCommands(DesktopController desktopController, DesktopScanController desktopScanController,
-        IDesktopSubFormController desktopSubFormController, UiImageList imageList, ImageListActions imageListActions)
+        IDesktopSubFormController desktopSubFormController, UiImageList imageList, ImageListActions imageListActions,
+        ThumbnailController thumbnailController)
     {
         Scan = new ActionCommand(desktopScanController.ScanDefault)
         {
@@ -252,6 +253,18 @@ public class DesktopCommands
             MenuText = UiStrings.About,
             Image = Icons.information.ToEtoImage()
         };
+        ZoomIn = new ActionCommand(() => thumbnailController.StepSize(1))
+        {
+            ToolBarText = UiStrings.ZoomIn,
+            MenuText = UiStrings.ZoomIn,
+            Image = Icons.zoom_in.ToEtoImage()
+        };
+        ZoomOut = new ActionCommand(() => thumbnailController.StepSize(-1))
+        {
+            ToolBarText = UiStrings.ZoomOut,
+            MenuText = UiStrings.ZoomOut,
+            Image = Icons.zoom_out.ToEtoImage()
+        };
     }
 
     public ActionCommand Scan { get; set; }
@@ -303,4 +316,6 @@ public class DesktopCommands
     public ActionCommand ClearAll { get; set; }
     public Command LanguageMenu { get; set; }
     public ActionCommand About { get; set; }
+    public ActionCommand ZoomIn { get; set; }
+    public ActionCommand ZoomOut { get; set; }
 }

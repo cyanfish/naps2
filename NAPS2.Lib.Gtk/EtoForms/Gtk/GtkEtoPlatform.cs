@@ -49,35 +49,42 @@ public class GtkEtoPlatform : EtoPlatform
         return image;
     }
 
-    public override void SetFrame(Control container, Control control, Point location, Size size)
+    public override void SetFrame(Control container, Control control, Point location, Size size, bool inOverlay)
     {
-        var fixedContainer = (gtk.Fixed) container.ToNative();
-        fixedContainer.Move(control.ToNative(), location.X - X_OFF, location.Y - Y_OFF);
+        var overlay = (gtk.Overlay) container.ToNative();
+        var panel = (gtk.Fixed) overlay.Children[inOverlay ? 1 : 0];
+        panel.Move(control.ToNative(), location.X - X_OFF, location.Y - Y_OFF);
         control.ToNative().SetSizeRequest(size.Width, size.Height);
     }
 
     public override Control CreateContainer()
     {
-        return new gtk.Fixed().ToEto();
+        var overlay = new gtk.Overlay();
+        overlay.Add(new gtk.Fixed());
+        var overlayPanel = new gtk.Fixed();
+        overlay.AddOverlay(overlayPanel);
+        overlay.SetOverlayPassThrough(overlayPanel, true);
+        return overlay.ToEto();
     }
 
-    public override void AddToContainer(Control container, Control control)
+    public override void AddToContainer(Control container, Control control, bool inOverlay)
     {
-        var fixedContainer = (gtk.Fixed) container.ToNative();
+        var overlay = (gtk.Overlay) container.ToNative();
+        var panel = (gtk.Fixed) overlay.Children[inOverlay ? 1 : 0];
         var widget = control.ToNative();
-        fixedContainer.Add(widget);
+        panel.Add(widget);
         widget.ShowAll();
     }
 
     public override void SetContainerSize(Window _window, Control container, Size size, int padding)
     {
-        var fixedContainer = (gtk.Fixed) container.ToNative();
+        var overlay = (gtk.Overlay) container.ToNative();
         if (!_window.Resizable)
         {
             // This ensures the window has the appropriate margins, otherwise with resizable=false it changes to fit
             // the contents
-            fixedContainer.MarginBottom = padding - Y_OFF;
-            fixedContainer.MarginEnd = padding - X_OFF;
+            overlay.MarginBottom = padding - Y_OFF;
+            overlay.MarginEnd = padding - X_OFF;
         }
     }
 
@@ -141,5 +148,14 @@ public class GtkEtoPlatform : EtoPlatform
         button.StyleContext.AddClass("accessible-image-button");
         button.Clicked += (_, _) => onClick();
         return button.ToEto();
+    }
+
+    public override void ConfigureZoomButton(Button button)
+    {
+        button.Text = "";
+        button.Size = Size.Empty;
+        var gtkButton = button.ToNative();
+        gtkButton.StyleContext.AddClass("zoom-button");
+        gtkButton.SetSizeRequest(0, 0);
     }
 }

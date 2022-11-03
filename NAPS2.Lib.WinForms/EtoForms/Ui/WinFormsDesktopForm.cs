@@ -58,26 +58,6 @@ public class WinFormsDesktopForm : DesktopForm
 
     protected override LayoutElement GetZoomButtons()
     {
-        btnZoomIn = new wf.Button
-        {
-            Image = Icons.zoom_in.ToBitmap(),
-            AccessibleName = UiStrings.ZoomIn,
-            BackColor = Color.White,
-            Size = new Size(23, 23),
-            FlatStyle = wf.FlatStyle.Flat,
-            TabIndex = 8
-        };
-        btnZoomIn.Click += (_, _) => StepThumbnailSize(1);
-        btnZoomOut = new wf.Button
-        {
-            Image = Icons.zoom_out.ToBitmap(),
-            AccessibleName = UiStrings.ZoomOut,
-            BackColor = Color.White,
-            Size = new Size(23, 23),
-            FlatStyle = wf.FlatStyle.Flat,
-            TabIndex = 9
-        };
-        btnZoomOut.Click += (_, _) => StepThumbnailSize(-1);
         // Disabled buttons don't prevent click events from being sent to the listview below the button, so without this
         // "mouse catcher" control you could e.g. spam click zoom out until it's maxed and then accidentally keep
         // clicking and change the listview selection.
@@ -89,23 +69,8 @@ public class WinFormsDesktopForm : DesktopForm
         };
         return L.Overlay(
             btnZoomMouseCatcher.ToEto(),
-            L.Row(btnZoomOut.ToEto(), btnZoomIn.ToEto()).Spacing(-1)
+            base.GetZoomButtons()
         );
-    }
-
-    private void StepThumbnailSize(double step)
-    {
-        int thumbnailSize = _thumbnailController.VisibleSize;
-        thumbnailSize =
-            (int) ThumbnailSizes.StepNumberToSize(ThumbnailSizes.SizeToStepNumber(thumbnailSize) + step);
-        _thumbnailController.VisibleSize = thumbnailSize;
-    }
-
-    protected override void UpdateToolbar()
-    {
-        base.UpdateToolbar();
-        btnZoomIn.Enabled = ImageList.Images.Any() && _thumbnailController.VisibleSize < ThumbnailSizes.MAX_SIZE;
-        btnZoomOut.Enabled = ImageList.Images.Any() && _thumbnailController.VisibleSize > ThumbnailSizes.MIN_SIZE;
     }
 
     private wf.ListView NativeListView => ((WinFormsListView<UiImage>) _listView).NativeControl;

@@ -101,7 +101,7 @@ public class WinFormsEtoPlatform : EtoPlatform
         return new GdiImage(imageContext, bitmap);
     }
 
-    public override void SetFrame(Control container, Control control, Point location, Size size)
+    public override void SetFrame(Control container, Control control, Point location, Size size, bool inOverlay)
     {
         var native = control.ToNative();
         var x = location.X;
@@ -113,6 +113,10 @@ public class WinFormsEtoPlatform : EtoPlatform
         native.Location = new sd.Point(x, y);
         native.AutoSize = false;
         native.Size = new sd.Size(size.Width, size.Height);
+        if (inOverlay)
+        {
+            native.BringToFront();
+        }
     }
 
     public override SizeF GetPreferredSize(Control control, SizeF availableSpace)
@@ -127,7 +131,7 @@ public class WinFormsEtoPlatform : EtoPlatform
         return new wf.Panel().ToEto();
     }
 
-    public override void AddToContainer(Control container, Control control)
+    public override void AddToContainer(Control container, Control control, bool inOverlay)
     {
         container.ToNative().Controls.Add(control.ToNative());
     }
@@ -145,8 +149,13 @@ public class WinFormsEtoPlatform : EtoPlatform
         form.RightToLeftLayout = isRtl;
     }
 
-    public override void BringToFront(Control control)
+    public override void ConfigureZoomButton(Button button)
     {
-        control.ToNative().BringToFront();
+        var wfButton = (wf.Button) button.ToNative();
+        wfButton.AccessibleName = button.Text;
+        wfButton.Text = "";
+        wfButton.BackColor = sd.Color.White;
+        wfButton.Size = new sd.Size(23, 23);
+        wfButton.FlatStyle = wf.FlatStyle.Flat;
     }
 }

@@ -105,6 +105,15 @@ public static class C
         return button;
     }
 
+    // TODO: Clean up button overloads
+    public static Button ImageButton(Command command) =>
+        new Button
+        {
+            Text = command.MenuText,
+            Command = command,
+            Image = command.Image
+        };
+
     /// <summary>
     /// Creates a null placeholder for Eto layouts that absorbs scaling.
     /// </summary>

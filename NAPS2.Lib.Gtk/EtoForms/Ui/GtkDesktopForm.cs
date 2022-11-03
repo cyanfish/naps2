@@ -5,6 +5,7 @@ using Gdk;
 using Gtk;
 using NAPS2.EtoForms.Desktop;
 using NAPS2.EtoForms.Gtk;
+using NAPS2.EtoForms.Layout;
 using NAPS2.ImportExport.Images;
 using Command = Eto.Forms.Command;
 
@@ -48,6 +49,7 @@ public class GtkDesktopForm : DesktopForm
             .desktop-listview .listview-item image { border: 1px solid #000; }
             .link { padding: 0; }
             .accessible-image-button { border: none; background: none; }
+            .zoom-button { background: white; border: 1px solid; border-radius: 0; }
         ");
         StyleContext.AddProviderForScreen(Gdk.Screen.Default, cssProvider, 800);
     }
@@ -89,9 +91,25 @@ public class GtkDesktopForm : DesktopForm
         ");
     }
 
+    protected override LayoutElement GetMainContent()
+    {
+        return L.Column(
+            Eto.Forms.Gtk3Helpers.ToEto(_toolbar),
+            _listView.Control.YScale()
+        ).Spacing(0);
+    }
+
     protected override void ConfigureToolbar()
     {
+        // TODO: Zoom is behaving weirdly - full zoomout and images become invisible
+        // TODO: Also getting "g_sequence_remove: assertion 'iter != NULL' failed" on zoom
+        // TODO: Also zoom buttons (and listview) are 2px above the bottom for no apparent reason
+
         _toolbar = ((ToolBarHandler) ToolBar.Handler).Control;
+        // Remove the toolbar from the container as we will manually layout it
+        // TODO: Clean this up
+        var parent = (Container) _toolbar.Parent;
+        parent.Remove(_toolbar);
         _toolbar.Style = ToolbarStyle.Both;
         _toolbar.StyleContext.AddClass("desktop-toolbar");
     }

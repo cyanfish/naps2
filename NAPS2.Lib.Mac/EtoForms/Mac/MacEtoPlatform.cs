@@ -43,7 +43,7 @@ public class MacEtoPlatform : EtoPlatform
         return image;
     }
 
-    public override void SetFrame(Control container, Control control, Point location, Size size)
+    public override void SetFrame(Control container, Control control, Point location, Size size, bool inOverlay)
     {
         var rect = new CGRect(location.X, container.Height - location.Y - size.Height, size.Width, size.Height);
         var view = control.ToNative();
@@ -55,7 +55,7 @@ public class MacEtoPlatform : EtoPlatform
         return new NSView().ToEto();
     }
 
-    public override void AddToContainer(Control container, Control control)
+    public override void AddToContainer(Control container, Control control, bool inOverlay)
     {
         container.ToNative().AddSubview(control.ToNative());
     }

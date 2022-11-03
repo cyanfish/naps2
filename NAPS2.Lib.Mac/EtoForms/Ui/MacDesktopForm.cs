@@ -3,6 +3,7 @@ using Eto.Drawing;
 using Eto.Forms;
 using Eto.Mac;
 using NAPS2.EtoForms.Desktop;
+using NAPS2.EtoForms.Layout;
 using NAPS2.ImportExport.Images;
 using NAPS2.Scan;
 
@@ -145,6 +146,8 @@ public class MacDesktopForm : DesktopForm
         window.StyleMask |= NSWindowStyle.FullSizeContentView;
         window.StyleMask |= NSWindowStyle.UnifiedTitleAndToolbar;
     }
+
+    protected override LayoutElement GetZoomButtons() => C.Spacer();
 
     private void ZoomUpdated(NSSlider sender)
     {

@@ -60,6 +60,14 @@ public class ThumbnailController : IDisposable
         }
     }
 
+    public void StepSize(double step)
+    {
+        int thumbnailSize = VisibleSize;
+        thumbnailSize =
+            (int) ThumbnailSizes.StepNumberToSize(ThumbnailSizes.SizeToStepNumber(thumbnailSize) + step);
+        VisibleSize = thumbnailSize;
+    }
+
     public event EventHandler? ThumbnailSizeChanged;
 
     public void Reload()

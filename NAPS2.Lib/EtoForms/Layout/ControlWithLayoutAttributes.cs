@@ -59,11 +59,12 @@ public class ControlWithLayoutAttributes : LayoutElement
             var size = new SizeF(bounds.Width - Padding.Horizontal, bounds.Height - Padding.Vertical);
             size = SizeF.Max(SizeF.Empty, size);
             EnsureIsAdded(context);
-            EtoPlatform.Current.SetFrame(context.Layout, Control, Point.Round(location), Size.Round(size));
-            if (context.InOverlay)
-            {
-                EtoPlatform.Current.BringToFront(Control);
-            }
+            EtoPlatform.Current.SetFrame(
+                context.Layout,
+                Control,
+                Point.Round(location),
+                Size.Round(size),
+                context.InOverlay);
         }
     }
 
@@ -105,7 +106,7 @@ public class ControlWithLayoutAttributes : LayoutElement
         if (Control == null) return;
         if (context.IsFirstLayout && !_isAdded)
         {
-            EtoPlatform.Current.AddToContainer(context.Layout, Control);
+            EtoPlatform.Current.AddToContainer(context.Layout, Control, context.InOverlay);
             _isAdded = true;
         }
         if (context.IsFirstLayout && !_isWindowSet && context.Window != null)
