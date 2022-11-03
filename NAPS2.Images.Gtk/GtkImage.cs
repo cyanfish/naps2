@@ -133,9 +133,4 @@ public class GtkImage : IMemoryImage
         Pixbuf.Dispose();
         LeakTracer.StopTracking(this);
     }
-
-    ~GtkImage()
-    {
-        Pixbuf.Dispose();
-    }
 }
