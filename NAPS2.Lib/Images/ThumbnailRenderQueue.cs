@@ -103,6 +103,7 @@ public class ThumbnailRenderQueue : IDisposable
 
                         if (!ThumbnailStillNeedsRendering(next, thumbnailSize))
                         {
+                            thumb.Dispose();
                             continue;
                         }
 
@@ -139,9 +140,7 @@ public class ThumbnailRenderQueue : IDisposable
     {
         lock (next)
         {
-            var thumb = next.GetThumbnailClone();
-            return thumb == null || next.IsThumbnailDirty || thumb.Width != thumbnailSize ||
-                   thumb.Height != thumbnailSize;
+            return next.IsThumbnailDirty || next.GetThumbnailSize() != thumbnailSize;
         }
     }
 
@@ -157,7 +156,7 @@ public class ThumbnailRenderQueue : IDisposable
         // Look for images without thumbnails
         foreach (var img in listCopy)
         {
-            if (img.GetThumbnailClone() == null)
+            if (img.GetThumbnailSize() == -1)
             {
                 return img;
             }
@@ -173,8 +172,7 @@ public class ThumbnailRenderQueue : IDisposable
         // Look for images with mis-sized thumbnails
         foreach (var img in listCopy)
         {
-            var thumb = img.GetThumbnailClone();
-            if (thumb == null || thumb.Width != thumbnailSize && thumb.Height != thumbnailSize)
+            if (img.GetThumbnailSize() != thumbnailSize)
             {
                 return img;
             }

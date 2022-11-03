@@ -78,6 +78,7 @@ public class UiImage : IDisposable
         var transformList = transforms.ToList();
         if (transformList.All(x => x.IsNull))
         {
+            prerenderedThumbnail?.Dispose();
             return;
         }
         lock (this)
@@ -124,6 +125,18 @@ public class UiImage : IDisposable
         lock (this)
         {
             return _thumbnail?.Clone();
+        }
+    }
+
+    public int GetThumbnailSize()
+    {
+        lock (this)
+        {
+            if (_thumbnail == null)
+            {
+                return -1;
+            }
+            return Math.Max(_thumbnail.Width, _thumbnail.Height);
         }
     }
 

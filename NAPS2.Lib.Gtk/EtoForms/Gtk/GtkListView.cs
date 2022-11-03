@@ -82,7 +82,7 @@ public class GtkListView<T> : IListView<T> where T : notnull
         // TODO: Any better way to remove all?
         foreach (var widget in _flowBox.Children)
         {
-            _flowBox.Remove(widget);
+            RemoveAndDisposeWidget(widget);
         }
         _entries.Clear();
         foreach (var item in items)
@@ -114,11 +114,12 @@ public class GtkListView<T> : IListView<T> where T : notnull
         }
         else
         {
-            var image = _behavior.GetImage(item, ImageSize).ToGtk();
+            using var image = _behavior.GetImage(item, ImageSize);
+            var imageWidget = image.ToGtk();
             // TODO: Is there a better way to prevent the image from expanding in both dimensions?
             var hframe = new Box(Orientation.Horizontal, 0);
             hframe.Halign = Align.Center;
-            hframe.Add(image);
+            hframe.Add(imageWidget);
             var vframe = new Box(Orientation.Vertical, 0);
             vframe.Valign = Align.Center;
             vframe.Add(hframe);
@@ -140,6 +141,7 @@ public class GtkListView<T> : IListView<T> where T : notnull
     }
 
     // TODO: Do we need this method? Clean up the name/doc at least
+    // TODO: Seems like we might not need it at all, the syncer is working? Or is the idea this is faster for WinForms? But in that case we should probably not update on sync.
     public void RegenerateImages()
     {
         if (_refreshing)
@@ -149,7 +151,7 @@ public class GtkListView<T> : IListView<T> where T : notnull
         _refreshing = true;
         foreach (var entry in _entries)
         {
-            _flowBox.Remove(entry.Widget);
+            RemoveAndDisposeWidget(entry.Widget);
             var newWidget = GetItemWidget(entry.Item);
             entry.Widget = newWidget;
             _flowBox.Add(newWidget);
@@ -158,6 +160,13 @@ public class GtkListView<T> : IListView<T> where T : notnull
         SetSelectedItems();
         _refreshing = false;
         Updated?.Invoke(this, EventArgs.Empty);
+    }
+
+    private void RemoveAndDisposeWidget(Widget widget)
+    {
+        _flowBox.Remove(widget);
+        widget.Unrealize();
+        widget.Dispose();
     }
 
     public void ApplyDiffs(ListViewDiffs<T> diffs)
@@ -182,7 +191,7 @@ public class GtkListView<T> : IListView<T> where T : notnull
         foreach (var op in diffs.ReplaceOperations)
         {
             var entry = _entries[op.Index];
-            _flowBox.Remove(entry.Widget);
+            RemoveAndDisposeWidget(entry.Widget);
             var newWidget = GetItemWidget(op.Item);
             _flowBox.Insert(newWidget, entry.Index);
             entry.Widget = newWidget;
@@ -192,7 +201,7 @@ public class GtkListView<T> : IListView<T> where T : notnull
         {
             foreach (var entry in _entries.Skip(_entries.Count - op.Count).ToList())
             {
-                _flowBox.Remove(entry.Widget);
+                RemoveAndDisposeWidget(entry.Widget);
             }
             _entries = _entries.Take(_entries.Count - op.Count).ToList();
         }

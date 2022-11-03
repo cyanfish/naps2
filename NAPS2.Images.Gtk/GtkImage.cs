@@ -1,6 +1,7 @@
 using System.Globalization;
 using Gdk;
 using NAPS2.Images.Bitwise;
+using NAPS2.Util;
 
 namespace NAPS2.Images.Gtk;
 
@@ -9,6 +10,7 @@ public class GtkImage : IMemoryImage
     public GtkImage(ImageContext imageContext, Pixbuf pixbuf)
     {
         if (imageContext is not GtkImageContext) throw new ArgumentException();
+        LeakTracer.StartTracking(this);
         ImageContext = imageContext;
         Pixbuf = pixbuf;
         LogicalPixelFormat = PixelFormat;
@@ -126,5 +128,14 @@ public class GtkImage : IMemoryImage
         LogicalPixelFormat = LogicalPixelFormat
     };
 
-    public void Dispose() => Pixbuf.Dispose();
+    public void Dispose()
+    {
+        Pixbuf.Dispose();
+        LeakTracer.StopTracking(this);
+    }
+
+    ~GtkImage()
+    {
+        Pixbuf.Dispose();
+    }
 }

@@ -37,6 +37,7 @@ public class GtkImageTransformer : AbstractImageTransformer<GtkImage>
             ? ImagePixelFormat.Gray8
             : image.LogicalPixelFormat;
         newImage.SetResolution(xres, yres);
+        image.Dispose();
         return newImage;
     }
 
@@ -57,6 +58,7 @@ public class GtkImageTransformer : AbstractImageTransformer<GtkImage>
         newImage.SetResolution(
             image.HorizontalResolution * image.Width / width,
             image.VerticalResolution * image.Height / height);
+        image.Dispose();
         return newImage;
     }
 
