@@ -1,5 +1,6 @@
 ﻿namespace NAPS2.Platform;
 
+// TODO: Remove this class as we no longer support mono
 public interface IRuntimeCompat
 {
     bool UseToolStripRenderHack { get; }

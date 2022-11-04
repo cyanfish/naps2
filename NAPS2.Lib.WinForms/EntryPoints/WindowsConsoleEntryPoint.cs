@@ -13,6 +13,6 @@ public static class WindowsConsoleEntryPoint
 {
     public static int Run(string[] args)
     {
-        return ConsoleEntryPoint.Run(args, new GdiModule(), true);
+        return ConsoleEntryPoint.Run(args, new GdiModule());
     }
 }

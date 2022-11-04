@@ -2,6 +2,7 @@
 using NAPS2.EtoForms;
 using NAPS2.EtoForms.Ui;
 using NAPS2.Modules;
+using NAPS2.Remoting.Worker;
 using UnhandledExceptionEventArgs = Eto.UnhandledExceptionEventArgs;
 
 namespace NAPS2.EntryPoints;
@@ -15,7 +16,7 @@ public static class MacEntryPoint
     {
         if (args.Length > 0 && args[0] is "cli" or "console")
         {
-            return ConsoleEntryPoint.Run(args.Skip(1).ToArray(), new MacModule(), false);
+            return ConsoleEntryPoint.Run(args.Skip(1).ToArray(), new MacModule());
         }
         if (args.Length > 0 && args[0] == "worker")
         {
@@ -42,6 +43,9 @@ public static class MacEntryPoint
         {
             Log.Error($"Marshalling ObjC exception: {eventArgs.Exception.Description}");
         };
+
+        // Start a pending worker process
+        container.Resolve<IWorkerFactory>().Init();
 
         // Show the main form
         var application = EtoPlatform.Current.CreateApplication();

@@ -22,6 +22,8 @@ public abstract class WindowsSystemCompat : ISystemCompat
 
     public bool RenderInWorker => true;
 
+    public bool UseSeparateWorkerExe => true;
+
     public abstract string[] LibrarySearchPaths { get;  }
 
     public string TesseractExecutableName => "tesseract.exe";

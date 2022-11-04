@@ -18,6 +18,8 @@ public interface ISystemCompat
 
     bool RenderInWorker { get; }
 
+    bool UseSeparateWorkerExe { get; }
+
     string[] LibrarySearchPaths { get; }
 
     string TesseractExecutableName { get; }

@@ -50,14 +50,33 @@ public class WorkerFactory : IWorkerFactory
     private Process StartWorkerProcess()
     {
         var parentId = Process.GetCurrentProcess().Id;
-        var proc = Process.Start(new ProcessStartInfo
+        Process proc;
+        if (PlatformCompat.System.UseSeparateWorkerExe)
         {
-            FileName = PlatformCompat.Runtime.ExeRunner ?? WorkerExePath,
-            Arguments = PlatformCompat.Runtime.ExeRunner != null ? $"{WorkerExePath} {parentId}" : $"{parentId}",
-            RedirectStandardInput = true,
-            RedirectStandardOutput = true,
-            UseShellExecute = false
-        });
+            proc = Process.Start(new ProcessStartInfo
+            {
+                FileName = PlatformCompat.Runtime.ExeRunner ?? WorkerExePath,
+                Arguments = PlatformCompat.Runtime.ExeRunner != null ? $"{WorkerExePath} {parentId}" : $"{parentId}",
+                RedirectStandardInput = true,
+                RedirectStandardOutput = true,
+                UseShellExecute = false
+            });
+        }
+        else
+        {
+#if NET6_0_OR_GREATER
+            proc = Process.Start(new ProcessStartInfo
+            {
+                FileName = Environment.ProcessPath,
+                Arguments = $"worker {parentId}",
+                RedirectStandardInput = true,
+                RedirectStandardOutput = true,
+                UseShellExecute = false
+            });
+#else
+            throw new Exception("Unexpected worker configuration");
+#endif
+        }
         if (proc == null)
         {
             throw new Exception("Could not start worker process");

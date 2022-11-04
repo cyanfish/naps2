@@ -11,7 +11,7 @@ namespace NAPS2.EntryPoints;
 /// </summary>
 public static class ConsoleEntryPoint
 {
-    public static int Run(string[] args, Module imageModule, bool initWorker)
+    public static int Run(string[] args, Module imageModule)
     {
         // Parse the command-line arguments (and display help text if appropriate)
         var options = Parser.Default.ParseArguments<AutomatedScanningOptions>(args).Value;
@@ -26,11 +26,8 @@ public static class ConsoleEntryPoint
 
         Paths.ClearTemp();
 
-        if (initWorker)
-        {
-            // Start a pending worker process
-            container.Resolve<IWorkerFactory>().Init();
-        }
+        // Start a pending worker process
+        container.Resolve<IWorkerFactory>().Init();
 
         // Run the scan automation logic
         var scanning = container.Resolve<AutomatedScanning>();
