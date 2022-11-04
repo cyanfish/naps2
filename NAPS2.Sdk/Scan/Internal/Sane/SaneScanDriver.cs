@@ -43,11 +43,19 @@ internal class SaneScanDriver : IScanDriver
             // TODO: Maybe use a mutex in SaneClient instead of needing manual locking?
             lock (SaneNativeLibrary.Instance)
             {
+                // TODO: This is crashing after a delay for no apparent reason.
+                // Presumably it's a bad backend.
+                // TODO: Run SANE in a worker process for added stability.
                 using var client = new SaneClient();
                 // TODO: We can use device.type and .vendor to help pick an icon etc.
                 // https://sane-project.gitlab.io/standard/api.html#device-descriptor-type
                 return client.GetDevices()
-                    .Select(device => new ScanDevice(device.Name, device.Model))
+                    .Select(device =>
+                    {
+                        // TODO: The backend should be part of the device metadata, e.g. DriverSubType
+                        var backend = device.Name.Split(':')[0];
+                        return new ScanDevice(device.Name, $"{device.Model} ({backend})");
+                    })
                     .ToList();
             }
         });
