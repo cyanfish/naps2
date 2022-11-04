@@ -151,11 +151,11 @@ public class WinFormsEtoPlatform : EtoPlatform
 
     public override void ConfigureZoomButton(Button button)
     {
+        button.Size = new Size(23, 23);
         var wfButton = (wf.Button) button.ToNative();
         wfButton.AccessibleName = button.Text;
         wfButton.Text = "";
         wfButton.BackColor = sd.Color.White;
-        wfButton.Size = new sd.Size(23, 23);
         wfButton.FlatStyle = wf.FlatStyle.Flat;
     }
 }
