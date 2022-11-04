@@ -17,6 +17,10 @@ public static class MacEntryPoint
         {
             return ConsoleEntryPoint.Run(args.Skip(1).ToArray(), new MacModule(), false);
         }
+        if (args.Length > 0 && args[0] == "worker")
+        {
+            return WorkerEntryPoint.Run(args.Skip(1).ToArray(), new MacModule());
+        }
 
         // Initialize Autofac (the DI framework)
         var container = AutoFacHelper.FromModules(

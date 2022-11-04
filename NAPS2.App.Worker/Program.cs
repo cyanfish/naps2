@@ -11,6 +11,6 @@ static class Program
     static void Main(string[] args)
     {
         // Use reflection to avoid antivirus false positives (yes, really)
-        typeof(WorkerEntryPoint).GetMethod("Run").Invoke(null, new object[] { args });
+        typeof(WindowsWorkerEntryPoint).GetMethod("Run").Invoke(null, new object[] { args });
     }
 }

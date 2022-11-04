@@ -1,13 +1,9 @@
 ﻿using System.Text;
 using System.Threading;
-using System.Windows.Forms;
 using Autofac;
 using GrpcDotNetNamedPipes;
 using NAPS2.Modules;
 using NAPS2.Remoting.Worker;
-using NAPS2.Scan.Internal.Twain;
-using NAPS2.WinForms;
-using Timer = System.Threading.Timer;
 
 namespace NAPS2.EntryPoints;
 
@@ -20,7 +16,7 @@ public static class WorkerEntryPoint
 {
     private static readonly TimeSpan ParentCheckInterval = TimeSpan.FromSeconds(10);
 
-    public static void Run(string[] args)
+    public static int Run(string[] args, Module imageModule, Action? run = null, Action? stop = null)
     {
         try
         {
@@ -30,31 +26,25 @@ public static class WorkerEntryPoint
 
             // Initialize Autofac (the DI framework)
             var container = AutoFacHelper.FromModules(
-                new CommonModule(), new GdiModule(), new WinFormsModule(), new WorkerModule(), new ContextModule());
+                new CommonModule(), imageModule, new WorkerModule(), new ContextModule());
 
             // Expect a single argument, the parent process id
             if (args.Length != 1 || !int.TryParse(args[0], out int procId) || !IsProcessRunning(procId))
             {
-                return;
+                return 1;
             }
 
-            // Set up basic application configuration
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            Application.ThreadException += UnhandledException;
             TaskScheduler.UnobservedTaskException += UnhandledTaskException;
 
-            // Set up a form for the worker process
-            // A parent form is needed for some operations, namely 64-bit TWAIN scanning
-            var form = new BackgroundForm();
-            Invoker.Current = form;
-            TwainHandleManager.Factory = () => new WinFormsTwainHandleManager(form);
+            var flag = new ManualResetEvent(false);
+            run ??= () => flag.WaitOne();
+            stop ??= () => flag.Set();
 
             // Connect to the main NAPS2 process and listen for assigned work
             var server =
                 new NamedPipeServer(string.Format(WorkerFactory.PIPE_NAME_FORMAT, Process.GetCurrentProcess().Id));
             var serviceImpl = container.Resolve<WorkerServiceImpl>();
-            serviceImpl.OnStop += (_, _) => form.Close();
+            serviceImpl.OnStop += (_, _) => stop();
             using var parentCheckTimer = new Timer(_ =>
             {
                 // The Job object created by the parent is supposed to kill the child processes,
@@ -69,18 +59,19 @@ public static class WorkerEntryPoint
             try
             {
                 Console.WriteLine(@"ready");
-                Application.Run(form);
+                run();
             }
             finally
             {
                 server.Kill();
             }
+            return 0;
         }
         catch (Exception ex)
         {
             Console.Write(@"error");
             Log.FatalException("An error occurred that caused the worker application to close.", ex);
-            Environment.Exit(1);
+            return 1;
         }
     }
 
@@ -107,10 +98,5 @@ public static class WorkerEntryPoint
     {
         Log.FatalException("An error occurred that caused the worker task to terminate.", e.Exception);
         e.SetObserved();
-    }
-
-    private static void UnhandledException(object? sender, ThreadExceptionEventArgs e)
-    {
-        Log.FatalException("An error occurred that caused the worker to close.", e.Exception);
     }
 }
