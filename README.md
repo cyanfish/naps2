@@ -3,9 +3,9 @@
 NAPS2 is a document scanning application with a focus on simplicity and ease of use. Scan your documents from WIA- and TWAIN-compatible scanners, organize the pages as you like, and save them as PDF, TIFF, JPEG, PNG, and other file formats.
 
 System requirements:
-- Windows 7+ with .NET Framework 4.6.2 or higher
-- macOS 10.15+
-- Linux x64 with a [supported distro](https://docs.microsoft.com/en-us/dotnet/core/install/linux#official-package-archives)
+- Windows 7+ (x64, x86)
+- macOS 10.15+ (x64, arm64)
+- Linux (x64, arm64)
 
 Visit the NAPS2 home page at [www.naps2.com](http://www.naps2.com).
 
