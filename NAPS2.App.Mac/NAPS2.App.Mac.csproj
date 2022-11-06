@@ -30,7 +30,7 @@
 
     <ProjectReference Include="..\NAPS2.Lib.Mac\NAPS2.Lib.Mac.csproj" />
 
-    <PackageReference Include="Eto.Platform.macOS" Version="2.7.1" />
+    <PackageReference Include="Eto.Platform.macOS" Version="2.7.2" />
   </ItemGroup>
 
   <ItemGroup>

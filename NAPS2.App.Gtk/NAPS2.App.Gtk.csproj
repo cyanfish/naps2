@@ -28,7 +28,7 @@
 
         <ProjectReference Include="..\NAPS2.Lib.Gtk\NAPS2.Lib.Gtk.csproj" />
 
-        <PackageReference Include="Eto.Platform.Gtk" Version="2.7.1" />
+        <PackageReference Include="Eto.Platform.Gtk" Version="2.7.2" />
         <!-- This shouldn't need a reference normally, but otherwise "dotnet restore" doesn't pick
              it up, which breaks the flatpak build. -->
         <PackageReference Include="Microsoft.NETCore.App" Version="2.1.*" />
