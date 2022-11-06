@@ -9,7 +9,7 @@ namespace NAPS2.Remoting.Worker;
 public class WorkerFactory : IWorkerFactory
 {
     public const string WORKER_EXE_NAME = "NAPS2.Worker.exe";
-    public const string PIPE_NAME_FORMAT = "NAPS2.Worker/{0}";
+    public const string PIPE_NAME_FORMAT = "NAPS2.Worker.{0}";
 
     public static string?[] SearchDirs => new[]
     {
