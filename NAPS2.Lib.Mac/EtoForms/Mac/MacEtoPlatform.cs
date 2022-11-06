@@ -61,9 +61,9 @@ public class MacEtoPlatform : EtoPlatform
     }
 
     public override Control AccessibleImageButton(Image image, String text, Action onClick,
-        int xOffset = 0, int yOffset = 9)
+        int xOffset = 0, int yOffset = 0)
     {
         // TODO
-        return new NSView();
+        return new NSView().ToEto();
     }
 }
