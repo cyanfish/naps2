@@ -7,7 +7,7 @@ public class MacImage : IMemoryImage
 {
     public MacImage(ImageContext imageContext, NSImage image)
     {
-        if (imageContext is not MacImageContext) throw new ArgumentException();
+        if (imageContext is not MacImageContext) throw new ArgumentException("Expected MacImageContext");
         ImageContext = imageContext;
         NsImage = image ?? throw new ArgumentNullException(nameof(image));
         var reps = NsImage.Representations();

@@ -14,7 +14,7 @@ public class GdiImage : IMemoryImage
 {
     public GdiImage(ImageContext imageContext, Bitmap bitmap)
     {
-        if (imageContext is not GdiImageContext) throw new ArgumentException();
+        if (imageContext is not GdiImageContext) throw new ArgumentException("Expected GdiImageContext");
         ImageContext = imageContext;
         if (bitmap == null)
         {

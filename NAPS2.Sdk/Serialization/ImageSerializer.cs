@@ -9,7 +9,7 @@ public static class ImageSerializer
     {
         if (options.CrossDevice && (options.RequireFileStorage || options.TransferOwnership))
         {
-            throw new ArgumentException();
+            throw new ArgumentException("Invalid options for cross-device serialization.");
         }
         if (options.RequireFileStorage && image.Storage is not ImageFileStorage)
         {
@@ -117,7 +117,7 @@ public static class ImageSerializer
             }
             else
             {
-                // Not transfering or sharing the file, so we need to make a copy
+                // Not transferring or sharing the file, so we need to make a copy
                 if (scanningContext.FileStorageManager != null)
                 {
                     string newPath = scanningContext.FileStorageManager.NextFilePath() +

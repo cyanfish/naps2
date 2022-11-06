@@ -9,7 +9,7 @@ public class GtkImage : IMemoryImage
 {
     public GtkImage(ImageContext imageContext, Pixbuf pixbuf)
     {
-        if (imageContext is not GtkImageContext) throw new ArgumentException();
+        if (imageContext is not GtkImageContext) throw new ArgumentException("Expected GtkImageContext");
         LeakTracer.StartTracking(this);
         ImageContext = imageContext;
         Pixbuf = pixbuf;
