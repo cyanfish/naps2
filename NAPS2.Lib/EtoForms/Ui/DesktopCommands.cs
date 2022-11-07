@@ -7,54 +7,51 @@ public class DesktopCommands
 {
     public DesktopCommands(DesktopController desktopController, DesktopScanController desktopScanController,
         IDesktopSubFormController desktopSubFormController, UiImageList imageList, ImageListActions imageListActions,
-        ThumbnailController thumbnailController)
+        ThumbnailController thumbnailController, IIconProvider iconProvider)
     {
         Scan = new ActionCommand(desktopScanController.ScanDefault)
         {
             ToolBarText = UiStrings.Scan,
             MenuText = UiStrings.Scan,
-            Image = Icons.control_play_blue.ToEtoImage(),
-            MacSymbol = "play"
+            Image = iconProvider.GetIcon("control_play_blue")
         };
         NewProfile = new ActionCommand(desktopScanController.ScanWithNewProfile)
         {
             MenuText = UiStrings.NewProfile,
-            Image = Icons.add_small.ToEtoImage()
+            Image = iconProvider.GetIcon("add_small")
         };
         BatchScan = new ActionCommand(desktopSubFormController.ShowBatchScanForm)
         {
             MenuText = UiStrings.BatchScan,
-            Image = Icons.application_cascade.ToEtoImage()
+            Image = iconProvider.GetIcon("application_cascade")
         };
         Profiles = new ActionCommand(desktopSubFormController.ShowProfilesForm)
         {
             ToolBarText = UiStrings.Profiles,
-            Image = Icons.blueprints.ToEtoImage(),
-            MacSymbol = "list.bullet"
+            Image = iconProvider.GetIcon("blueprints")
         };
         Ocr = new ActionCommand(desktopSubFormController.ShowOcrForm)
         {
             ToolBarText = UiStrings.Ocr,
             MenuText = UiStrings.Ocr,
-            Image = Icons.text.ToEtoImage()
+            Image = iconProvider.GetIcon("text")
         };
         Import = new ActionCommand(desktopController.Import)
         {
             ToolBarText = UiStrings.Import,
             MenuText = UiStrings.Import,
-            Image = Icons.folder_picture.ToEtoImage(),
-            Shortcut = Application.Instance.CommonModifier | Keys.O,
-            MacSymbol = "folder"
+            Image = iconProvider.GetIcon("folder_picture"),
+            Shortcut = Application.Instance.CommonModifier | Keys.O
         };
         Save = new ActionCommand
         {
             ToolBarText = UiStrings.Save,
-            MacSymbol = "square.and.arrow.down"
+            Image = iconProvider.GetIcon("save"),
         };
         SavePdf = new ActionCommand(desktopController.SavePdf)
         {
             ToolBarText = UiStrings.SavePdf,
-            Image = Icons.file_extension_pdf.ToEtoImage()
+            Image = iconProvider.GetIcon("file_extension_pdf")
         };
         SaveAllPdf = new ActionCommand(() => desktopController.SavePDF(imageList.Images))
         {
@@ -71,7 +68,7 @@ public class DesktopCommands
         SaveImages = new ActionCommand(desktopController.SaveImages)
         {
             ToolBarText = UiStrings.SaveImages,
-            Image = Icons.pictures.ToEtoImage()
+            Image = iconProvider.GetIcon("pictures")
         };
         SaveAllImages = new ActionCommand(() => desktopController.SaveImages(imageList.Images))
         {
@@ -88,7 +85,7 @@ public class DesktopCommands
         EmailPdf = new ActionCommand(desktopController.EmailPdf)
         {
             ToolBarText = UiStrings.EmailPdf,
-            Image = Icons.email_attach.ToEtoImage()
+            Image = iconProvider.GetIcon("email_attach")
         };
         EmailAllPdf = new ActionCommand(() => desktopController.EmailPDF(imageList.Images))
         {
@@ -106,45 +103,45 @@ public class DesktopCommands
         {
             ToolBarText = UiStrings.Print,
             MenuText = UiStrings.Print,
-            Image = Icons.printer.ToEtoImage(),
+            Image = iconProvider.GetIcon("printer"),
             Shortcut = Application.Instance.CommonModifier | Keys.P
         };
         ImageMenu = new Command
         {
             ToolBarText = UiStrings.Image,
             MenuText = UiStrings.Image,
-            Image = Icons.picture_edit.ToEtoImage()
+            Image = iconProvider.GetIcon("picture_edit")
         };
         ViewImage = new ActionCommand(desktopSubFormController.ShowViewerForm)
         {
             ToolBarText = UiStrings.View,
             MenuText = UiStrings.View,
-            MacSymbol = "viewfinder"
+            Image = iconProvider.GetIcon("viewfinder")
         };
         Crop = new ActionCommand(desktopSubFormController.ShowCropForm)
         {
             MenuText = UiStrings.Crop,
-            Image = Icons.transform_crop.ToEtoImage()
+            Image = iconProvider.GetIcon("transform_crop")
         };
         BrightCont = new ActionCommand(desktopSubFormController.ShowBrightnessContrastForm)
         {
             MenuText = UiStrings.BrightnessContrast,
-            Image = Icons.contrast_with_sun.ToEtoImage()
+            Image = iconProvider.GetIcon("contrast_with_sun")
         };
         HueSat = new ActionCommand(desktopSubFormController.ShowHueSaturationForm)
         {
             MenuText = UiStrings.HueSaturation,
-            Image = Icons.color_management.ToEtoImage()
+            Image = iconProvider.GetIcon("color_management")
         };
         BlackWhite = new ActionCommand(desktopSubFormController.ShowBlackWhiteForm)
         {
             MenuText = UiStrings.BlackAndWhite,
-            Image = Icons.contrast_high.ToEtoImage()
+            Image = iconProvider.GetIcon("contrast_high")
         };
         Sharpen = new ActionCommand(desktopSubFormController.ShowSharpenForm)
         {
             MenuText = UiStrings.Sharpen,
-            Image = Icons.sharpen.ToEtoImage()
+            Image = iconProvider.GetIcon("sharpen")
         };
         // TODO: Make this an image form with options
         DocumentCorrection = new ActionCommand(desktopController.RunDocumentCorrection)
@@ -158,26 +155,22 @@ public class DesktopCommands
         RotateMenu = new ActionCommand
         {
             ToolBarText = UiStrings.Rotate,
-            Image = Icons.arrow_rotate_anticlockwise.ToEtoImage(),
-            MacSymbol = "arrow.counterclockwise"
+            Image = iconProvider.GetIcon("arrow_rotate_anticlockwise")
         };
         RotateLeft = new ActionCommand(imageListActions.RotateLeft)
         {
             MenuText = UiStrings.RotateLeft,
-            Image = Icons.arrow_rotate_anticlockwise_small.ToEtoImage(),
-            MacSymbol = "arrow.counterclockwise"
+            Image = iconProvider.GetIcon("arrow_rotate_anticlockwise_small")
         };
         RotateRight = new ActionCommand(imageListActions.RotateRight)
         {
             MenuText = UiStrings.RotateRight,
-            Image = Icons.arrow_rotate_clockwise_small.ToEtoImage(),
-            MacSymbol = "arrow.clockwise"
+            Image = iconProvider.GetIcon("arrow_rotate_clockwise_small")
         };
         Flip = new ActionCommand(imageListActions.Flip)
         {
             MenuText = UiStrings.Flip,
-            Image = Icons.arrow_switch_small.ToEtoImage(),
-            MacSymbol = "arrow.2.squarepath"
+            Image = iconProvider.GetIcon("arrow_switch_small")
         };
         Deskew = new ActionCommand(imageListActions.Deskew)
         {
@@ -191,20 +184,18 @@ public class DesktopCommands
         {
             ToolBarText = UiStrings.MoveUp,
             MenuText = UiStrings.MoveUp,
-            Image = Icons.arrow_up_small.ToEtoImage(),
-            MacSymbol = "arrow.up"
+            Image = iconProvider.GetIcon("arrow_up_small")
         };
         MoveDown = new ActionCommand(imageListActions.MoveDown)
         {
             ToolBarText = UiStrings.MoveDown,
             MenuText = UiStrings.MoveDown,
-            Image = Icons.arrow_down_small.ToEtoImage(),
-            MacSymbol = "arrow.down"
+            Image = iconProvider.GetIcon("arrow_down_small")
         };
         ReorderMenu = new Command
         {
             ToolBarText = UiStrings.Reorder,
-            Image = Icons.arrow_refresh.ToEtoImage()
+            Image = iconProvider.GetIcon("arrow_refresh")
         };
         Interleave = new ActionCommand(imageListActions.Interleave)
         {
@@ -232,38 +223,38 @@ public class DesktopCommands
         {
             ToolBarText = UiStrings.Delete,
             MenuText = UiStrings.Delete,
-            Image = Icons.cross.ToEtoImage()
+            Image = iconProvider.GetIcon("cross")
         };
         ClearAll = new ActionCommand(desktopController.Clear)
         {
             ToolBarText = UiStrings.Clear,
             MenuText = UiStrings.ClearAll,
-            Image = Icons.cancel.ToEtoImage(),
+            Image = iconProvider.GetIcon("cancel"),
             Shortcut = Application.Instance.CommonModifier | Keys.Shift | Keys.Delete
         };
         LanguageMenu = new Command
         {
             ToolBarText = UiStrings.Language,
             MenuText = UiStrings.Language,
-            Image = Icons.world.ToEtoImage()
+            Image = iconProvider.GetIcon("world")
         };
         About = new ActionCommand(desktopSubFormController.ShowAboutForm)
         {
             ToolBarText = UiStrings.About,
             MenuText = UiStrings.About,
-            Image = Icons.information.ToEtoImage()
+            Image = iconProvider.GetIcon("information")
         };
         ZoomIn = new ActionCommand(() => thumbnailController.StepSize(1))
         {
             ToolBarText = UiStrings.ZoomIn,
             MenuText = UiStrings.ZoomIn,
-            Image = Icons.zoom_in.ToEtoImage()
+            Image = iconProvider.GetIcon("zoom_in")
         };
         ZoomOut = new ActionCommand(() => thumbnailController.StepSize(-1))
         {
             ToolBarText = UiStrings.ZoomOut,
             MenuText = UiStrings.ZoomOut,
-            Image = Icons.zoom_out.ToEtoImage()
+            Image = iconProvider.GetIcon("zoom_out")
         };
     }
 

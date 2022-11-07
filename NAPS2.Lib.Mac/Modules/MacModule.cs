@@ -33,6 +33,7 @@ public class MacModule : Module
         builder.RegisterType<DesktopFormProvider>().AsSelf().SingleInstance();
         builder.RegisterType<MacImageContext>().As<ImageContext>();
         builder.RegisterType<MacImageContext>().AsSelf();
+        builder.RegisterType<MacIconProvider>().As<IIconProvider>();
 
         builder.RegisterType<MacDesktopForm>().As<DesktopForm>();
 

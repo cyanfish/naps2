@@ -63,6 +63,7 @@ public class CommonModule : Module
         builder.RegisterType<OcrOperationManager>().AsSelf().SingleInstance();
         builder.RegisterType<ThumbnailController>().AsSelf().SingleInstance();
         builder.RegisterType<ThumbnailRenderQueue>().AsSelf().SingleInstance();
+        builder.RegisterType<DefaultIconProvider>().As<IIconProvider>();
 
         //container.Resolve<ImageContext>().PdfRenderer = container.Resolve<PdfiumWorkerCoordinator>();
 
