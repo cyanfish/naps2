@@ -33,10 +33,8 @@ public class EditProfileForm : EtoDialogBase
     private readonly Button _advanced = new() { Text = UiStrings.Advanced };
     private readonly Button _ok = new() { Text = UiStrings.OK };
     private readonly Button _cancel = new() { Text = UiStrings.Cancel };
-    private readonly Slider _brightnessSlider = new() { MinValue = -1000, MaxValue = 1000, TickFrequency = 200 };
-    private readonly NumericMaskedTextBox<int> _brightnessText = new();
-    private readonly Slider _contrastSlider = new() { MinValue = -1000, MaxValue = 1000, TickFrequency = 200 };
-    private readonly NumericMaskedTextBox<int> _contrastText = new();
+    private readonly SliderWithTextBox _brightnessSlider = new();
+    private readonly SliderWithTextBox _contrastSlider = new();
 
     private ScanProfile _scanProfile = null!;
     private ScanDevice? _currentDevice;
@@ -60,10 +58,6 @@ public class EditProfileForm : EtoDialogBase
         _predefinedSettings = new RadioButton { Text = UiStrings.UsePredefinedSettings };
         _nativeUi = new RadioButton(_predefinedSettings) { Text = UiStrings.UseNativeUi };
         _pageSize.SelectedIndexChanged += PageSize_SelectedIndexChanged;
-        _contrastSlider.ValueChanged += ContrastSlider_Scroll;
-        _contrastText.TextChanged += ContrastText_TextChanged;
-        _brightnessSlider.ValueChanged += BrightnessSlider_Scroll;
-        _brightnessText.TextChanged += BrightnessText_TextChanged;
         _wiaDriver.CheckedChanged += Driver_CheckedChanged;
         _twainDriver.CheckedChanged += Driver_CheckedChanged;
         _appleDriver.CheckedChanged += Driver_CheckedChanged;
@@ -132,11 +126,7 @@ public class EditProfileForm : EtoDialogBase
                     C.Label(UiStrings.ResolutionLabel),
                     _resolution,
                     C.Label(UiStrings.BrightnessLabel),
-                    L.Row(
-                        _brightnessSlider.XScale(),
-                        _brightnessText.Width(EtoPlatform.Current.IsGtk ? 50 : 40)
-                            .Align(EtoPlatform.Current.IsWinForms ? LayoutAlignment.Leading : LayoutAlignment.Center)
-                    )
+                    _brightnessSlider
                 ).XScale(),
                 L.Column(
                     C.Label(UiStrings.BitDepthLabel),
@@ -146,11 +136,7 @@ public class EditProfileForm : EtoDialogBase
                     C.Label(UiStrings.ScaleLabel),
                     _scale,
                     C.Label(UiStrings.ContrastLabel),
-                    L.Row(
-                        _contrastSlider.XScale(),
-                        _contrastText.Width(EtoPlatform.Current.IsGtk ? 50 : 40)
-                            .Align(EtoPlatform.Current.IsWinForms ? LayoutAlignment.Leading : LayoutAlignment.Center)
-                    )
+                    _contrastSlider
                 ).XScale()
             ),
             L.Row(
@@ -227,8 +213,8 @@ public class EditProfileForm : EtoDialogBase
         _paperSource.SelectedIndex = (int) ScanProfile.PaperSource;
         _bitDepth.SelectedIndex = (int) ScanProfile.BitDepth;
         _resolution.SelectedIndex = (int) ScanProfile.Resolution;
-        _contrastText.Text = ScanProfile.Contrast.ToString("G");
-        _brightnessText.Text = ScanProfile.Brightness.ToString("G");
+        _contrastSlider.Value = ScanProfile.Contrast;
+        _brightnessSlider.Value = ScanProfile.Brightness;
         UpdatePageSizeList();
         SelectPageSize();
         _scale.SelectedIndex = (int) ScanProfile.AfterScanScale;
@@ -467,8 +453,6 @@ public class EditProfileForm : EtoDialogBase
             _scale.Enabled = settingsEnabled;
             _brightnessSlider.Enabled = settingsEnabled;
             _contrastSlider.Enabled = settingsEnabled;
-            _brightnessText.Enabled = settingsEnabled;
-            _contrastText.Enabled = settingsEnabled;
 
             _enableAutoSave.Enabled = !locked && !Config.Get(c => c.DisableAutoSave);
             _autoSaveSettings.Enabled = _enableAutoSave.IsChecked();
@@ -490,38 +474,6 @@ public class EditProfileForm : EtoDialogBase
             CurrentDevice = null;
             UpdateEnabledControls();
         }
-    }
-
-    private void BrightnessText_TextChanged(object? sender, EventArgs e)
-    {
-        if (int.TryParse(_brightnessText.Text, out int value))
-        {
-            if (value >= _brightnessSlider.MinValue && value <= _brightnessSlider.MaxValue)
-            {
-                _brightnessSlider.Value = value;
-            }
-        }
-    }
-
-    private void BrightnessSlider_Scroll(object? sender, EventArgs e)
-    {
-        _brightnessText.Text = _brightnessSlider.Value.ToString("G");
-    }
-
-    private void ContrastText_TextChanged(object? sender, EventArgs e)
-    {
-        if (int.TryParse(_contrastText.Text, out int value))
-        {
-            if (value >= _contrastSlider.MinValue && value <= _contrastSlider.MaxValue)
-            {
-                _contrastSlider.Value = value;
-            }
-        }
-    }
-
-    private void ContrastSlider_Scroll(object? sender, EventArgs e)
-    {
-        _contrastText.Text = _contrastSlider.Value.ToString("G");
     }
 
     private int _lastPageSizeIndex = -1;
