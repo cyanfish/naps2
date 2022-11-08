@@ -29,6 +29,7 @@ public class StubDesktopSubFormController : IDesktopSubFormController
 
     public void ShowCropForm()
     {
+        ShowImageForm<CropForm>();
     }
 
     public void ShowBrightnessContrastForm()

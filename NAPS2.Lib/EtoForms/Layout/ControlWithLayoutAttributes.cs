@@ -9,6 +9,9 @@ public class ControlWithLayoutAttributes : LayoutElement
     private static readonly FieldInfo VisualParentField =
         typeof(Control).GetField("VisualParent_Key", BindingFlags.NonPublic | BindingFlags.Static)!;
 
+    private static readonly MethodInfo TriggerLoadMethod =
+        typeof(Control).GetMethod("TriggerLoad", BindingFlags.NonPublic | BindingFlags.Instance)!;
+
     private bool _isAdded;
     private bool _isWindowSet;
 
@@ -50,7 +53,8 @@ public class ControlWithLayoutAttributes : LayoutElement
         if (DEBUG_LAYOUT)
         {
             var text = Control is TextControl txt ? $"\"{txt.Text}\" " : "";
-            Debug.WriteLine($"{new string(' ', context.Depth)}{text}{Control?.GetType().Name ?? "ZeroSpace"} layout with bounds {bounds}");
+            Debug.WriteLine(
+                $"{new string(' ', context.Depth)}{text}{Control?.GetType().Name ?? "ZeroSpace"} layout with bounds {bounds}");
         }
         bounds.Size = UpdateFixedDimensions(context, bounds.Size);
         if (Control != null)
@@ -112,6 +116,7 @@ public class ControlWithLayoutAttributes : LayoutElement
         if (context.IsFirstLayout && !_isWindowSet && context.Window != null)
         {
             Control.Properties.Set<Container>(VisualParentField.GetValue(null), context.Window);
+            TriggerLoadMethod.Invoke(Control, new object[] { EventArgs.Empty });
             _isWindowSet = true;
         }
     }

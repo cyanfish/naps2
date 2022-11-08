@@ -21,26 +21,14 @@ public class DesktopSubFormController : IDesktopSubFormController
         _tesseractLanguageManager = tesseractLanguageManager;
     }
 
-    public void ShowCropForm() => ShowImageForm<FCrop>();
-    public void ShowBrightnessContrastForm() => ShowImageForm2<BrightContForm>();
-    public void ShowHueSaturationForm() => ShowImageForm2<HueSatForm>();
-    public void ShowBlackWhiteForm() => ShowImageForm2<BlackWhiteForm>();
-    public void ShowSharpenForm() => ShowImageForm2<SharpenForm>();
-    public void ShowRotateForm() => ShowImageForm2<RotateForm>();
+    public void ShowCropForm() => ShowImageForm<CropForm>();
+    public void ShowBrightnessContrastForm() => ShowImageForm<BrightContForm>();
+    public void ShowHueSaturationForm() => ShowImageForm<HueSatForm>();
+    public void ShowBlackWhiteForm() => ShowImageForm<BlackWhiteForm>();
+    public void ShowSharpenForm() => ShowImageForm<SharpenForm>();
+    public void ShowRotateForm() => ShowImageForm<RotateForm>();
 
-    private void ShowImageForm<T>() where T : ImageForm
-    {
-        var selection = _imageList.Selection;
-        if (selection.Any())
-        {
-            var form = _formFactory.Create<T>();
-            form.Image = selection.First();
-            form.SelectedImages = selection.ToList();
-            form.ShowDialog();
-        }
-    }
-
-    private void ShowImageForm2<T>() where T : ImageFormBase
+    private void ShowImageForm<T>() where T : ImageFormBase
     {
         var selection = _imageList.Selection;
         if (selection.Any())

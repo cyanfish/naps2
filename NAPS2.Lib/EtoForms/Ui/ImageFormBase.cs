@@ -13,7 +13,7 @@ public abstract class ImageFormBase : EtoDialogBase
     private readonly Button _revert = C.Button(UiStrings.Revert);
 
     private readonly RefreshThrottle _renderThrottle;
-    private IMemoryImage? _workingImage;
+    protected IMemoryImage? _workingImage;
 
     public ImageFormBase(Naps2Config config, ThumbnailController thumbnailController) : base(config)
     {
@@ -22,6 +22,10 @@ public abstract class ImageFormBase : EtoDialogBase
         _renderThrottle = new RefreshThrottle(RenderImage);
         FormStateController.DefaultExtraLayoutSize = new Size(400, 400);
     }
+
+    protected int ImageHeight { get; set; }
+    protected int ImageWidth { get; set; }
+    protected int ImagePadding { get; set; }
 
     protected Drawable Overlay { get; } = new();
 
@@ -82,7 +86,7 @@ public abstract class ImageFormBase : EtoDialogBase
         }
 
         LayoutController.Content = L.Column(
-            L.Overlay(_imageView, Overlay).YScale(),
+            L.Overlay(_imageView.Padding(ImagePadding), Overlay).YScale(),
             CreateControls(),
             SelectedImages is { Count: > 1 } ? _applyToSelected : C.None(),
             L.Row(
@@ -103,6 +107,8 @@ public abstract class ImageFormBase : EtoDialogBase
 
         using var imageToRender = Image.GetClonedImage();
         _workingImage = imageToRender.Render();
+        ImageWidth = _workingImage.Width;
+        ImageHeight = _workingImage.Height;
         InitTransform();
         UpdatePreviewBox();
     }
