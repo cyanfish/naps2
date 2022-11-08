@@ -15,12 +15,25 @@ public class StubDesktopSubFormController : IDesktopSubFormController
         _imageList = imageList;
     }
 
+    private void ShowImageForm<T>() where T : ImageFormBase
+    {
+        var selection = _imageList.Selection;
+        if (selection.Any())
+        {
+            var form = _formFactory.Create<T>();
+            form.Image = selection.First();
+            form.SelectedImages = selection.ToList();
+            form.ShowModal();
+        }
+    }
+
     public void ShowCropForm()
     {
     }
 
     public void ShowBrightnessContrastForm()
     {
+        ShowImageForm<BrightContForm>();
     }
 
     public void ShowHueSaturationForm()

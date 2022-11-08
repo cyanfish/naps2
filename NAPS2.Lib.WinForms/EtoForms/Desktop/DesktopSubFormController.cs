@@ -22,7 +22,7 @@ public class DesktopSubFormController : IDesktopSubFormController
     }
 
     public void ShowCropForm() => ShowImageForm<FCrop>();
-    public void ShowBrightnessContrastForm() => ShowImageForm<FBrightnessContrast>();
+    public void ShowBrightnessContrastForm() => ShowImageForm2<BrightContForm>();
     public void ShowHueSaturationForm() => ShowImageForm<FHueSaturation>();
     public void ShowBlackWhiteForm() => ShowImageForm<FBlackWhite>();
     public void ShowSharpenForm() => ShowImageForm<FSharpen>();
@@ -37,6 +37,18 @@ public class DesktopSubFormController : IDesktopSubFormController
             form.Image = selection.First();
             form.SelectedImages = selection.ToList();
             form.ShowDialog();
+        }
+    }
+
+    private void ShowImageForm2<T>() where T : ImageFormBase
+    {
+        var selection = _imageList.Selection;
+        if (selection.Any())
+        {
+            var form = _formFactory.Create<T>();
+            form.Image = selection.First();
+            form.SelectedImages = selection.ToList();
+            form.ShowModal();
         }
     }
 

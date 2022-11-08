@@ -698,5 +698,17 @@ namespace NAPS2.Lang.Resources {
                 return ResourceManager.GetString("XOfY", resourceCulture);
             }
         }
+        
+        internal static string Revert {
+            get {
+                return ResourceManager.GetString("Revert", resourceCulture);
+            }
+        }
+        
+        internal static string ApplyToSelected {
+            get {
+                return ResourceManager.GetString("ApplyToSelected", resourceCulture);
+            }
+        }
     }
 }
