@@ -1,3 +1,4 @@
+using Eto.Drawing;
 using Eto.Forms;
 using NAPS2.EtoForms.Layout;
 
@@ -7,6 +8,8 @@ public class SliderWithTextBox
 {
     private readonly Slider _slider = new() { MinValue = -1000, MaxValue = 1000, TickFrequency = 200 };
     private readonly NumericMaskedTextBox<int> _textBox = new() { Text = 0.ToString("G") };
+
+    private int _valueCache;
 
     public SliderWithTextBox()
     {
@@ -18,7 +21,7 @@ public class SliderWithTextBox
         {
             if (int.TryParse(_textBox.Text, out int value))
             {
-                if (value != Value && value >= MinValue && value <= MaxValue)
+                if (value >= MinValue && value <= MaxValue)
                 {
                     Value = value;
                 }
@@ -46,18 +49,13 @@ public class SliderWithTextBox
 
     public int Value
     {
-        get => _slider.Value;
+        get => _valueCache;
         set
         {
-            if (_slider.Value != value)
-            {
-                _slider.Value = value;
-            }
-            var text = value.ToString("G");
-            if (_textBox.Text != text)
-            {
-                _textBox.Text = text;
-            }
+            if (value == _valueCache) return;
+            _valueCache = value;
+            _slider.Value = value;
+            _textBox.Text = value.ToString("G");
             ValueChanged?.Invoke();
         }
     }
@@ -72,9 +70,12 @@ public class SliderWithTextBox
         }
     }
 
+    public Image? Icon { get; set; }
+
     public static implicit operator LayoutElement(SliderWithTextBox control)
     {
         return L.Row(
+            control.Icon != null ? new ImageView { Image = control.Icon }.AlignCenter() : C.None(),
             control._slider.XScale(),
             control._textBox.Width(EtoPlatform.Current.IsGtk ? 50 : 40)
                 .Align(EtoPlatform.Current.IsWinForms ? LayoutAlignment.Leading : LayoutAlignment.Center)

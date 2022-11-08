@@ -9,6 +9,10 @@ namespace NAPS2.EtoForms.Layout;
 public abstract class LayoutLine<TOrthogonal> : LayoutContainer
     where TOrthogonal : LayoutContainer
 {
+    protected LayoutLine(LayoutElement[] children) : base(children)
+    {
+    }
+
     protected Padding? Padding { get; init; }
 
     protected int? Spacing { get; init; }

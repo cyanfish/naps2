@@ -201,4 +201,9 @@ public static class C
         if (control is not Container container) return Enumerable.Repeat(control, 1);
         return container.Controls.SelectMany(GetAllControls).Append(control);
     }
+
+    public static LayoutElement None()
+    {
+        return new SkipLayoutElement();
+    }
 }

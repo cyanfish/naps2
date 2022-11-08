@@ -5,15 +5,14 @@ namespace NAPS2.EtoForms.Layout;
 
 public class LayoutColumn : LayoutLine<LayoutRow>
 {
-    public LayoutColumn(LayoutElement[] children)
+    public LayoutColumn(LayoutElement[] children) : base(children)
     {
-        Children = children;
     }
 
     public LayoutColumn(LayoutColumn original, Padding? padding = null, int? spacing = null, bool? xScale = null,
         bool? aligned = null)
+        : base(original.Children)
     {
-        Children = original.Children;
         Padding = padding ?? original.Padding;
         Spacing = spacing ?? original.Spacing;
         XScale = xScale ?? original.XScale;

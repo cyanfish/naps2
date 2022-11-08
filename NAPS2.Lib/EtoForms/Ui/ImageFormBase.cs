@@ -23,6 +23,8 @@ public abstract class ImageFormBase : EtoDialogBase
         FormStateController.DefaultExtraLayoutSize = new Size(400, 400);
     }
 
+    protected SliderWithTextBox[] Sliders { get; set; } = Array.Empty<SliderWithTextBox>();
+
     private void RenderImage()
     {
         var bitmap = RenderPreview();
@@ -33,7 +35,10 @@ public abstract class ImageFormBase : EtoDialogBase
         });
     }
 
-    protected abstract LayoutElement CreateControls();
+    protected virtual LayoutElement CreateControls()
+    {
+        return L.Column(Sliders.Select(x => (LayoutElement) x).ToArray());
+    }
 
     public UiImage Image { get; set; }
 
@@ -57,6 +62,10 @@ public abstract class ImageFormBase : EtoDialogBase
 
     protected virtual void ResetTransform()
     {
+        foreach (var slider in Sliders)
+        {
+            slider.Value = 0;
+        }
     }
 
     protected virtual void TransformSaved()
@@ -65,10 +74,15 @@ public abstract class ImageFormBase : EtoDialogBase
 
     protected override void OnLoad(EventArgs e)
     {
+        foreach (var slider in Sliders)
+        {
+            slider.ValueChanged += UpdatePreviewBox;
+        }
+
         LayoutController.Content = L.Column(
             _imageView.YScale(),
             CreateControls(),
-            SelectedImages is { Count: > 1 } ? _applyToSelected : null!,
+            SelectedImages is { Count: > 1 } ? _applyToSelected : C.None(),
             L.Row(
                 _revert,
                 C.Filler(),
