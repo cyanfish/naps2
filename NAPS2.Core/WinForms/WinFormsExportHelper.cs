@@ -1,15 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Microsoft.VisualBasic;
 using NAPS2.Config;
 using NAPS2.ImportExport;
 using NAPS2.ImportExport.Email;
 using NAPS2.ImportExport.Images;
 using NAPS2.ImportExport.Pdf;
 using NAPS2.Lang.Resources;
+using NAPS2.Logging;
 using NAPS2.Ocr;
 using NAPS2.Operation;
 using NAPS2.Scan.Images;
@@ -177,5 +181,97 @@ namespace NAPS2.WinForms
             }
             return false;
         }
+
+        public async Task<bool> SendPDF2LN(List<ScannedImage> images)
+        {
+            if (!images.Any())
+            {
+                // return false;
+            }
+
+            var tempFolder = new DirectoryInfo(Path.Combine(Paths.Temp, Path.GetRandomFileName()));
+            var emailSettings = emailSettingsContainer.EmailSettings;
+            var invalidChars = new HashSet<char>(Path.GetInvalidFileNameChars());
+            var attachmentName = new string(emailSettings.AttachmentName.Where(x => !invalidChars.Contains(x)).ToArray());
+            if (string.IsNullOrEmpty(attachmentName))
+            {
+                attachmentName = "Scan.pdf";
+            }
+            if (!attachmentName.EndsWith(".pdf", StringComparison.InvariantCultureIgnoreCase))
+            {
+                attachmentName += ".pdf";
+            }
+            attachmentName = fileNamePlaceholders.SubstitutePlaceholders(attachmentName, DateTime.Now, false);
+            tempFolder.Create();
+
+            Object ws, uidoc, doc, rtf, embObj;
+            try
+            {
+                var changeToken = changeTracker.State;
+                string targetPath = Path.Combine(tempFolder.FullName, attachmentName);
+                string pdfFileSaved = await ExportPDF(targetPath, images, false, null);
+                if (pdfFileSaved != null)
+                {
+                    // instantiate a Notes session and workspace
+                    //Type NotesSession = Type.GetTypeFromProgID("Notes.NotesSession");
+                    //Object sess = Activator.CreateInstance(NotesSession);
+                    Type NotesUIWorkspace = Type.GetTypeFromProgID("Notes.NotesUIWorkspace");
+                    if (NotesUIWorkspace == null) throw new NullReferenceException("Not found Notes.NotesUIWorkspace");
+                    ws = Activator.CreateInstance(NotesUIWorkspace);
+                    if (ws == null) throw new NullReferenceException("Not found Notes.NotesUIWorkspace");
+                    uidoc = NotesUIWorkspace.InvokeMember("EditDocument", BindingFlags.InvokeMethod, null, ws, new Object[] { true });
+                    if (uidoc == null) throw new NullReferenceException("Not found opened document in Notes.NotesUIWorkspace");
+
+                    Type NotesUIDocument = uidoc.GetType();
+                    doc = NotesUIDocument.InvokeMember("Document", BindingFlags.GetProperty, null, uidoc, null);
+                    Type NotesDocument = doc.GetType();
+
+                    /*       rtf = NotesDocument.InvokeMember("GetFirstItem", BindingFlags.InvokeMethod, null, doc, new Object[] { "Body" });
+                           Type NotesRichTextItem = rtf.GetType();
+       */
+                    // bring the Notes window to the front
+                    String windowTitle = (String)NotesUIDocument.InvokeMember("WindowTitle", BindingFlags.GetProperty, null, uidoc, null);
+                    Interaction.AppActivate(windowTitle);
+
+                    /*        embObj = NotesRichTextItem.InvokeMember("EmbedObject", BindingFlags.InvokeMethod, null, rtf, new Object[] { 1454, "", "d:\\Download\\scan17_33_39.pdf" });
+                            bool resSave = (bool)NotesDocument.InvokeMember("Save", BindingFlags.InvokeMethod, null, doc, new Object[] { true, true });
+                            if (resSave)
+                            {
+                                changeTracker.Saved(changeToken);
+                                return true;
+                            }
+                     */
+
+                    StringCollection paths = new StringCollection();
+                    paths.Add(@pdfFileSaved);
+                    Clipboard.SetFileDropList(paths);
+
+                    NotesUIDocument.InvokeMember("GotoField", BindingFlags.InvokeMethod, null, uidoc, new Object[] { "Body" });
+                    NotesUIDocument.InvokeMember("Paste", BindingFlags.InvokeMethod, null, uidoc, null);
+
+                    changeTracker.Saved(changeToken);
+                    return true;
+
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Log.ErrorException(MiscResources.ErrorSaving, ex);
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                tempFolder.Delete(true);
+                uidoc = null;
+                //sess = null;
+                ws = null;
+            }
+
+            return false;
+
+        }
+
     }
 }

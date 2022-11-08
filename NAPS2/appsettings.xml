@@ -20,7 +20,7 @@
   <AlwaysRememberDevice>false</AlwaysRememberDevice>
   <DisableGenericPdfImport>false</DisableGenericPdfImport>
   <NoUpdatePrompt>false</NoUpdatePrompt>
-  <DeleteAfterSaving>false</DeleteAfterSaving>
+  <DeleteAfterSaving>true</DeleteAfterSaving>
   <DisableSaveNotifications>false</DisableSaveNotifications>
   <SingleInstance>false</SingleInstance>
   <ComponentsPath></ComponentsPath>
@@ -52,7 +52,7 @@
     </CustomPageSize>
     -->
     <PageAlign>Right</PageAlign>
-    <Resolution>Dpi100</Resolution>
+    <Resolution>Dpi200</Resolution>
     <AfterScanScale>OneToOne</AfterScanScale>
     <Brightness>0</Brightness>
     <Contrast>0</Contrast>

@@ -693,7 +693,7 @@ namespace NAPS2.WinForms
             // "All" dropdown items
             tsSavePDFAll.Text = tsSaveImagesAll.Text = tsEmailPDFAll.Text = tsReverseAll.Text =
                 string.Format(MiscResources.AllCount, imageList.Images.Count);
-            tsSavePDFAll.Enabled = tsSaveImagesAll.Enabled = tsEmailPDFAll.Enabled = tsReverseAll.Enabled =
+            tsSavePDFAll.Enabled = tsSaveImagesAll.Enabled = tsEmailPDFAll.Enabled = tsReverseAll.Enabled = tsSendLN.Enabled =
                 imageList.Images.Any();
 
             // "Selected" dropdown items
@@ -1019,6 +1019,18 @@ namespace NAPS2.WinForms
             if (op.Start(data, copy, ReceiveScannedImage()))
             {
                 operationProgress.ShowProgress(op);
+            }
+        }
+
+        private async void Send2LN(List<ScannedImage> images)
+        {
+            if (await exportHelper.SendPDF2LN(images))
+            {
+                if (appConfigManager.Config.DeleteAfterSaving)
+                {
+                    imageList.Delete(imageList.Images.IndiciesOf(images));
+                    DeleteThumbnails();
+                }
             }
         }
 
@@ -1456,6 +1468,11 @@ namespace NAPS2.WinForms
         private void tsEmailSettings_Click(object sender, EventArgs e)
         {
             FormFactory.Create<FEmailSettings>().ShowDialog();
+        }
+
+        private void tsSendLn_Click(object sender, EventArgs e)
+        {
+            Send2LN(imageList.Images);
         }
 
         #endregion
@@ -2080,5 +2097,6 @@ namespace NAPS2.WinForms
         }
 
         #endregion
+      
     }
 }

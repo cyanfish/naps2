@@ -1,8 +1,11 @@
 # NAPS2 (Not Another PDF Scanner 2)
 
-NAPS2 is a document scanning application with a focus on simplicity and ease of use. Scan your documents from WIA- and TWAIN-compatible scanners, organize the pages as you like, and save them as PDF, TIFF, JPEG, PNG, and other file formats. Requires .NET Framework 4.0 or higher.
+This fork NAPS2 lets sending PDF document to Lotus Notes with only a couple clicks.
+Added button "Send to LN"
+The "Send to LN" button allows you to attach a scanned PDF file to a previously opened Lotus Notes document with one click. Requires installed Lotus Notes client.
+Attachment name set from choosing "Email Settings". If you'd like images to be deleted after they're sended to LN to avoid accidental duplication, use the DeleteAfterSaving element in appsettings.xml.
 
-Visit the NAPS2 home page at [www.naps2.com](http://www.naps2.com).
+For additional information visit the NAPS2 home page at [www.naps2.com](http://www.naps2.com).
 
 Other links:
 - [Documentation](http://www.naps2.com/support.html)
