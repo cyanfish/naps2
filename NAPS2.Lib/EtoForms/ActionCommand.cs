@@ -15,4 +15,14 @@ public class ActionCommand : Command
     public ActionCommand(Func<Task> action) : base(async (sender, args) => await action())
     {
     }
+
+    public string Text
+    {
+        get => string.IsNullOrEmpty(ToolBarText) ? MenuText : ToolBarText;
+        set
+        {
+            ToolBarText = value;
+            MenuText = value;
+        }
+    }
 }

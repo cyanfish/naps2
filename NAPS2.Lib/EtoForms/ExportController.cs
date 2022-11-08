@@ -12,20 +12,22 @@ public class ExportController : IExportController
     private readonly IFormFactory _formFactory;
     private readonly OperationProgress _operationProgress;
     private readonly Naps2Config _config;
-    private readonly UiImageList _uiImageList;
+    private readonly UiImageList _imageList;
 
-    public ExportController(DialogHelper dialogHelper, IOperationFactory operationFactory, IFormFactory formFactory, OperationProgress operationProgress, Naps2Config config, UiImageList uiImageList)
+    public ExportController(DialogHelper dialogHelper, IOperationFactory operationFactory, IFormFactory formFactory,
+        OperationProgress operationProgress, Naps2Config config, UiImageList imageList)
     {
         _dialogHelper = dialogHelper;
         _operationFactory = operationFactory;
         _formFactory = formFactory;
         _operationProgress = operationProgress;
         _config = config;
-        _uiImageList = uiImageList;
+        _imageList = imageList;
     }
 
-    public async Task<bool> SavePDF(IList<ProcessedImage> images, ISaveNotify notify)
+    public async Task<bool> SavePdf(ICollection<UiImage> uiImages, ISaveNotify notify)
     {
+        using var images = GetSnapshots(uiImages);
         if (images.Any())
         {
             string savePath;
@@ -43,36 +45,24 @@ public class ExportController : IExportController
                 }
             }
 
-            var subSavePath = Placeholders.All.Substitute(savePath);
-            var state = _uiImageList.CurrentState;
-            if (await ExportPDF(subSavePath, images, false, null))
+            if (await DoSavePdf(images, notify, savePath))
             {
-                _uiImageList.SavedState = state;
-                notify?.PdfSaved(subSavePath);
+                MaybeDeleteAfterSaving(uiImages);
                 return true;
             }
         }
         return false;
     }
 
-    public async Task<bool> ExportPDF(string filename, IList<ProcessedImage> images, bool email, EmailMessage? emailMessage)
+    public async Task<bool> SaveImages(ICollection<UiImage> uiImages, ISaveNotify notify)
     {
-        var op = _operationFactory.Create<SavePdfOperation>();
-
-        if (op.Start(filename, Placeholders.All.WithDate(DateTime.Now), images, _config.Get(c => c.PdfSettings), _config.DefaultOcrParams(), email, emailMessage))
-        {
-            _operationProgress.ShowProgress(op);
-        }
-        return await op.Success;
-    }
-
-    public async Task<bool> SaveImages(IList<ProcessedImage> images, ISaveNotify notify)
-    {
+        using var images = GetSnapshots(uiImages);
         if (images.Any())
         {
             string savePath;
 
-            if (_config.Get(c => c.ImageSettings.SkipSavePrompt) && Path.IsPathRooted(_config.Get(c => c.ImageSettings.DefaultFileName)))
+            if (_config.Get(c => c.ImageSettings.SkipSavePrompt) &&
+                Path.IsPathRooted(_config.Get(c => c.ImageSettings.DefaultFileName)))
             {
                 savePath = _config.Get(c => c.ImageSettings.DefaultFileName)!;
             }
@@ -84,24 +74,36 @@ public class ExportController : IExportController
                 }
             }
 
-            var op = _operationFactory.Create<SaveImagesOperation>();
-            var state = _uiImageList.CurrentState;
-            if (op.Start(savePath, Placeholders.All.WithDate(DateTime.Now), images, _config.Get(c => c.ImageSettings)))
+            if (await DoSaveImages(images, notify, savePath))
             {
-                _operationProgress.ShowProgress(op);
-            }
-            if (await op.Success)
-            {
-                _uiImageList.SavedState = state;
-                notify.ImagesSaved(images.Count, op.FirstFileSaved!);
+                MaybeDeleteAfterSaving(uiImages);
                 return true;
             }
         }
         return false;
     }
 
-    public async Task<bool> EmailPDF(IList<ProcessedImage> images)
+    public async Task<bool> SavePdfOrImages(ICollection<UiImage> uiImages, ISaveNotify notify)
     {
+        // Note this path bypasses some of the pdf/image save options (e.g. default file name)
+        using var images = GetSnapshots(uiImages);
+        if (!_dialogHelper.PromptToSavePdfOrImage(null, out var savePath))
+        {
+            return false;
+        }
+        if (Path.GetExtension(savePath!).ToLowerInvariant() == ".pdf"
+                ? await DoSavePdf(images, notify, savePath!)
+                : await DoSaveImages(images, notify, savePath!))
+        {
+            MaybeDeleteAfterSaving(uiImages);
+            return true;
+        }
+        return false;
+    }
+
+    public async Task<bool> EmailPdf(ICollection<UiImage> uiImages)
+    {
+        using var images = GetSnapshots(uiImages);
         if (!images.Any())
         {
             return false;
@@ -119,7 +121,8 @@ public class ExportController : IExportController
         // }
 
         var invalidChars = new HashSet<char>(Path.GetInvalidFileNameChars());
-        var attachmentName = new string(_config.Get(c => c.EmailSettings.AttachmentName).Where(x => !invalidChars.Contains(x)).ToArray());
+        var attachmentName = new string(_config.Get(c => c.EmailSettings.AttachmentName)
+            .Where(x => !invalidChars.Contains(x)).ToArray());
         if (string.IsNullOrEmpty(attachmentName))
         {
             attachmentName = "Scan.pdf";
@@ -130,21 +133,61 @@ public class ExportController : IExportController
         }
         attachmentName = Placeholders.All.Substitute(attachmentName, false);
 
+        if (await DoEmailPdf(images, attachmentName))
+        {
+            MaybeDeleteAfterSaving(uiImages);
+            return true;
+        }
+        return false;
+    }
+
+    private async Task<bool> DoSavePdf(IList<ProcessedImage> images, ISaveNotify notify, string savePath)
+    {
+        var subSavePath = Placeholders.All.Substitute(savePath);
+        var state = _imageList.CurrentState;
+        if (await RunSavePdfOperation(subSavePath, images, false, null))
+        {
+            _imageList.SavedState = state;
+            notify?.PdfSaved(subSavePath);
+            return true;
+        }
+        return false;
+    }
+
+    private async Task<bool> DoSaveImages(IList<ProcessedImage> images, ISaveNotify notify, string savePath)
+    {
+        var op = _operationFactory.Create<SaveImagesOperation>();
+        var state = _imageList.CurrentState;
+        if (op.Start(savePath, Placeholders.All.WithDate(DateTime.Now), images, _config.Get(c => c.ImageSettings)))
+        {
+            _operationProgress.ShowProgress(op);
+        }
+        if (await op.Success)
+        {
+            _imageList.SavedState = state;
+            notify.ImagesSaved(images.Count, op.FirstFileSaved!);
+            return true;
+        }
+        return false;
+    }
+
+    private async Task<bool> DoEmailPdf(IList<ProcessedImage> images, string attachmentName)
+    {
         var tempFolder = new DirectoryInfo(Path.Combine(Paths.Temp, Path.GetRandomFileName()));
         tempFolder.Create();
         try
         {
             string targetPath = Path.Combine(tempFolder.FullName, attachmentName);
-            var state = _uiImageList.CurrentState;
+            var state = _imageList.CurrentState;
 
             var message = new EmailMessage
             {
                 Attachments = { new EmailAttachment(targetPath, attachmentName) }
             };
 
-            if (await ExportPDF(targetPath, images, true, message))
+            if (await RunSavePdfOperation(targetPath, images, true, message))
             {
-                _uiImageList.SavedState = state;
+                _imageList.SavedState = state;
                 return true;
             }
         }
@@ -153,5 +196,31 @@ public class ExportController : IExportController
             tempFolder.Delete(true);
         }
         return false;
+    }
+
+    private async Task<bool> RunSavePdfOperation(string filename, IList<ProcessedImage> images, bool email,
+        EmailMessage? emailMessage)
+    {
+        var op = _operationFactory.Create<SavePdfOperation>();
+
+        if (op.Start(filename, Placeholders.All.WithDate(DateTime.Now), images, _config.Get(c => c.PdfSettings),
+                _config.DefaultOcrParams(), email, emailMessage))
+        {
+            _operationProgress.ShowProgress(op);
+        }
+        return await op.Success;
+    }
+
+    private DisposableList<ProcessedImage> GetSnapshots(IEnumerable<UiImage> uiImages)
+    {
+        return uiImages.Select(x => x.GetClonedImage()).ToDisposableList();
+    }
+
+    private void MaybeDeleteAfterSaving(ICollection<UiImage> uiImages)
+    {
+        if (_config.Get(c => c.DeleteAfterSaving))
+        {
+            _imageList.Mutate(new ImageListMutation.DeleteSelected(), ListSelection.From(uiImages));
+        }
     }
 }

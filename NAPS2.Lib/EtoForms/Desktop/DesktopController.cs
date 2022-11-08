@@ -360,6 +360,7 @@ public class DesktopController
 
     public void Delete()
     {
+        // TODO: Move to ImageListActions and use a null parent form
         if (_imageList.Selection.Any())
         {
             if (MessageBox.Show(_desktopFormProvider.DesktopForm,
@@ -406,11 +407,11 @@ public class DesktopController
         }
         else if (action == SaveButtonDefaultAction.SaveSelected && _imageList.Selection.Any())
         {
-            await SavePDF(_imageList.Selection);
+            await _imageListActions.SaveSelectedAsPdf();
         }
         else
         {
-            await SavePDF(_imageList.Images);
+            await _imageListActions.SaveAllAsPdf();
         }
     }
 
@@ -426,11 +427,11 @@ public class DesktopController
         }
         else if (action == SaveButtonDefaultAction.SaveSelected && _imageList.Selection.Any())
         {
-            await SaveImages(_imageList.Selection);
+            await _imageListActions.SaveSelectedAsImages();
         }
         else
         {
-            await SaveImages(_imageList.Images);
+            await _imageListActions.SaveAllAsImages();
         }
     }
 
@@ -446,42 +447,12 @@ public class DesktopController
         }
         else if (action == SaveButtonDefaultAction.SaveSelected && _imageList.Selection.Any())
         {
-            await EmailPDF(_imageList.Selection);
+            await _imageListActions.EmailSelectedAsPdf();
         }
         else
         {
-            await EmailPDF(_imageList.Images);
+            await _imageListActions.EmailAllAsPdf();
         }
-    }
-
-    public async Task SavePDF(ICollection<UiImage> images)
-    {
-        using var imagesToSave = images.Select(x => x.GetClonedImage()).ToDisposableList();
-        if (await _exportController.SavePDF(imagesToSave.InnerList, _notify))
-        {
-            if (_config.Get(c => c.DeleteAfterSaving))
-            {
-                _imageList.Mutate(new ImageListMutation.DeleteSelected(), ListSelection.From(images));
-            }
-        }
-    }
-
-    public async Task SaveImages(ICollection<UiImage> images)
-    {
-        using var imagesToSave = images.Select(x => x.GetClonedImage()).ToDisposableList();
-        if (await _exportController.SaveImages(imagesToSave.InnerList, _notify))
-        {
-            if (_config.Get(c => c.DeleteAfterSaving))
-            {
-                _imageList.Mutate(new ImageListMutation.DeleteSelected(), ListSelection.From(images));
-            }
-        }
-    }
-
-    public async Task EmailPDF(ICollection<UiImage> images)
-    {
-        using var imagesToEmail = images.Select(x => x.GetClonedImage()).ToDisposableList();
-        await _exportController.EmailPDF(imagesToEmail.InnerList);
     }
 
     public async Task Print()

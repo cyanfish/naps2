@@ -5,224 +5,236 @@ namespace NAPS2.EtoForms.Ui;
 
 public class DesktopCommands
 {
+    private readonly DesktopController _desktopController;
+    private readonly DesktopScanController _desktopScanController;
+    private readonly IDesktopSubFormController _desktopSubFormController;
+    private readonly UiImageList _imageList;
+    private readonly ImageListActions _imageListActions;
+    private readonly ThumbnailController _thumbnailController;
+    private readonly IIconProvider _iconProvider;
+
     public DesktopCommands(DesktopController desktopController, DesktopScanController desktopScanController,
         IDesktopSubFormController desktopSubFormController, UiImageList imageList, ImageListActions imageListActions,
         ThumbnailController thumbnailController, IIconProvider iconProvider)
     {
+        _desktopController = desktopController;
+        _desktopScanController = desktopScanController;
+        _desktopSubFormController = desktopSubFormController;
+        _imageList = imageList;
+        _imageListActions = imageListActions;
+        _thumbnailController = thumbnailController;
+        _iconProvider = iconProvider;
+
         Scan = new ActionCommand(desktopScanController.ScanDefault)
         {
-            ToolBarText = UiStrings.Scan,
-            MenuText = UiStrings.Scan,
+            Text = UiStrings.Scan,
             Image = iconProvider.GetIcon("control_play_blue")
         };
         NewProfile = new ActionCommand(desktopScanController.ScanWithNewProfile)
         {
-            MenuText = UiStrings.NewProfile,
+            Text = UiStrings.NewProfile,
             Image = iconProvider.GetIcon("add_small")
         };
         BatchScan = new ActionCommand(desktopSubFormController.ShowBatchScanForm)
         {
-            MenuText = UiStrings.BatchScan,
+            Text = UiStrings.BatchScan,
             Image = iconProvider.GetIcon("application_cascade")
         };
         Profiles = new ActionCommand(desktopSubFormController.ShowProfilesForm)
         {
-            ToolBarText = UiStrings.Profiles,
+            Text = UiStrings.Profiles,
             Image = iconProvider.GetIcon("blueprints")
         };
         Ocr = new ActionCommand(desktopSubFormController.ShowOcrForm)
         {
-            ToolBarText = UiStrings.Ocr,
-            MenuText = UiStrings.Ocr,
+            Text = UiStrings.Ocr,
             Image = iconProvider.GetIcon("text")
         };
         Import = new ActionCommand(desktopController.Import)
         {
-            ToolBarText = UiStrings.Import,
-            MenuText = UiStrings.Import,
+            Text = UiStrings.Import,
             Image = iconProvider.GetIcon("folder_picture"),
             Shortcut = Application.Instance.CommonModifier | Keys.O
         };
         Save = new ActionCommand
         {
-            ToolBarText = UiStrings.Save,
+            Text = UiStrings.Save,
+            Image = iconProvider.GetIcon("save"),
+        };
+        SaveSelected = new ActionCommand(_imageListActions.SaveSelectedAsPdfOrImages)
+        {
+            Text = UiStrings.Save,
             Image = iconProvider.GetIcon("save"),
         };
         SavePdf = new ActionCommand(desktopController.SavePdf)
         {
-            ToolBarText = UiStrings.SavePdf,
+            Text = UiStrings.SavePdf,
             Image = iconProvider.GetIcon("file_extension_pdf")
         };
-        SaveAllPdf = new ActionCommand(() => desktopController.SavePDF(imageList.Images))
+        SaveAllPdf = new ActionCommand(imageListActions.SaveAllAsPdf)
         {
-            MenuText = UiStrings.SaveAllAsPdf
+            Text = UiStrings.SaveAllAsPdf
         };
-        SaveSelectedPdf = new ActionCommand(() => desktopController.SavePDF(imageList.Selection))
+        SaveSelectedPdf = new ActionCommand(imageListActions.SaveSelectedAsPdf)
         {
-            MenuText = UiStrings.SaveSelectedAsPdf
+            Text = UiStrings.SaveSelectedAsPdf
         };
         PdfSettings = new ActionCommand(desktopSubFormController.ShowPdfSettingsForm)
         {
-            MenuText = UiStrings.PdfSettings
+            Text = UiStrings.PdfSettings
         };
         SaveImages = new ActionCommand(desktopController.SaveImages)
         {
-            ToolBarText = UiStrings.SaveImages,
+            Text = UiStrings.SaveImages,
             Image = iconProvider.GetIcon("pictures")
         };
-        SaveAllImages = new ActionCommand(() => desktopController.SaveImages(imageList.Images))
+        SaveAllImages = new ActionCommand(imageListActions.SaveAllAsImages)
         {
-            MenuText = UiStrings.SaveAllAsImages
+            Text = UiStrings.SaveAllAsImages
         };
-        SaveSelectedImages = new ActionCommand(() => desktopController.SaveImages(imageList.Selection))
+        SaveSelectedImages = new ActionCommand(imageListActions.SaveSelectedAsImages)
         {
-            MenuText = UiStrings.SaveSelectedAsImages
+            Text = UiStrings.SaveSelectedAsImages
         };
         ImageSettings = new ActionCommand(desktopSubFormController.ShowImageSettingsForm)
         {
-            MenuText = UiStrings.ImageSettings
+            Text = UiStrings.ImageSettings
         };
         EmailPdf = new ActionCommand(desktopController.EmailPdf)
         {
-            ToolBarText = UiStrings.EmailPdf,
+            Text = UiStrings.EmailPdf,
             Image = iconProvider.GetIcon("email_attach")
         };
-        EmailAllPdf = new ActionCommand(() => desktopController.EmailPDF(imageList.Images))
+        EmailAllPdf = new ActionCommand(imageListActions.EmailAllAsPdf)
         {
-            MenuText = UiStrings.EmailAllAsPdf
+            Text = UiStrings.EmailAllAsPdf
         };
-        EmailSelectedPdf = new ActionCommand(() => desktopController.EmailPDF(imageList.Selection))
+        EmailSelectedPdf = new ActionCommand(imageListActions.EmailSelectedAsPdf)
         {
-            MenuText = UiStrings.EmailSelectedAsPdf
+            Text = UiStrings.EmailSelectedAsPdf
         };
         EmailSettings = new ActionCommand(desktopSubFormController.ShowEmailSettingsForm)
         {
-            MenuText = UiStrings.EmailSettings
+            Text = UiStrings.EmailSettings
         };
         Print = new ActionCommand(desktopController.Print)
         {
-            ToolBarText = UiStrings.Print,
-            MenuText = UiStrings.Print,
+            Text = UiStrings.Print,
             Image = iconProvider.GetIcon("printer"),
             Shortcut = Application.Instance.CommonModifier | Keys.P
         };
-        ImageMenu = new Command
+        ImageMenu = new ActionCommand
         {
-            ToolBarText = UiStrings.Image,
-            MenuText = UiStrings.Image,
+            Text = UiStrings.Image,
             Image = iconProvider.GetIcon("picture_edit")
         };
         ViewImage = new ActionCommand(desktopSubFormController.ShowViewerForm)
         {
-            ToolBarText = UiStrings.View,
-            MenuText = UiStrings.View,
+            Text = UiStrings.View,
             Image = iconProvider.GetIcon("viewfinder")
         };
         Crop = new ActionCommand(desktopSubFormController.ShowCropForm)
         {
-            MenuText = UiStrings.Crop,
+            Text = UiStrings.Crop,
             Image = iconProvider.GetIcon("transform_crop")
         };
         BrightCont = new ActionCommand(desktopSubFormController.ShowBrightnessContrastForm)
         {
-            MenuText = UiStrings.BrightnessContrast,
+            Text = UiStrings.BrightnessContrast,
             Image = iconProvider.GetIcon("contrast_with_sun")
         };
         HueSat = new ActionCommand(desktopSubFormController.ShowHueSaturationForm)
         {
-            MenuText = UiStrings.HueSaturation,
+            Text = UiStrings.HueSaturation,
             Image = iconProvider.GetIcon("color_management")
         };
         BlackWhite = new ActionCommand(desktopSubFormController.ShowBlackWhiteForm)
         {
-            MenuText = UiStrings.BlackAndWhite,
+            Text = UiStrings.BlackAndWhite,
             Image = iconProvider.GetIcon("contrast_high")
         };
         Sharpen = new ActionCommand(desktopSubFormController.ShowSharpenForm)
         {
-            MenuText = UiStrings.Sharpen,
+            Text = UiStrings.Sharpen,
             Image = iconProvider.GetIcon("sharpen")
         };
         // TODO: Make this an image form with options
         DocumentCorrection = new ActionCommand(desktopController.RunDocumentCorrection)
         {
-            MenuText = UiStrings.DocumentCorrection
+            Text = UiStrings.DocumentCorrection
         };
         ResetImage = new ActionCommand(desktopController.ResetImage)
         {
-            MenuText = UiStrings.Reset
+            Text = UiStrings.Reset
         };
         RotateMenu = new ActionCommand
         {
-            ToolBarText = UiStrings.Rotate,
+            Text = UiStrings.Rotate,
             Image = iconProvider.GetIcon("arrow_rotate_anticlockwise")
         };
         RotateLeft = new ActionCommand(imageListActions.RotateLeft)
         {
-            MenuText = UiStrings.RotateLeft,
+            Text = UiStrings.RotateLeft,
             Image = iconProvider.GetIcon("arrow_rotate_anticlockwise_small")
         };
         RotateRight = new ActionCommand(imageListActions.RotateRight)
         {
-            MenuText = UiStrings.RotateRight,
+            Text = UiStrings.RotateRight,
             Image = iconProvider.GetIcon("arrow_rotate_clockwise_small")
         };
         Flip = new ActionCommand(imageListActions.Flip)
         {
-            MenuText = UiStrings.Flip,
+            Text = UiStrings.Flip,
             Image = iconProvider.GetIcon("arrow_switch_small")
         };
         Deskew = new ActionCommand(imageListActions.Deskew)
         {
-            MenuText = UiStrings.Deskew
+            Text = UiStrings.Deskew
         };
         CustomRotate = new ActionCommand(desktopSubFormController.ShowRotateForm)
         {
-            MenuText = UiStrings.CustomRotation
+            Text = UiStrings.CustomRotation
         };
         MoveUp = new ActionCommand(imageListActions.MoveUp)
         {
-            ToolBarText = UiStrings.MoveUp,
-            MenuText = UiStrings.MoveUp,
+            Text = UiStrings.MoveUp,
             Image = iconProvider.GetIcon("arrow_up_small")
         };
         MoveDown = new ActionCommand(imageListActions.MoveDown)
         {
-            ToolBarText = UiStrings.MoveDown,
-            MenuText = UiStrings.MoveDown,
+            Text = UiStrings.MoveDown,
             Image = iconProvider.GetIcon("arrow_down_small")
         };
-        ReorderMenu = new Command
+        ReorderMenu = new ActionCommand
         {
-            ToolBarText = UiStrings.Reorder,
+            Text = UiStrings.Reorder,
             Image = iconProvider.GetIcon("arrow_refresh")
         };
         Interleave = new ActionCommand(imageListActions.Interleave)
         {
-            MenuText = UiStrings.Interleave
+            Text = UiStrings.Interleave
         };
         Deinterleave = new ActionCommand(imageListActions.Deinterleave)
         {
-            MenuText = UiStrings.Deinterleave
+            Text = UiStrings.Deinterleave
         };
         AltInterleave = new ActionCommand(imageListActions.AltInterleave)
         {
-            MenuText = UiStrings.AltInterleave
+            Text = UiStrings.AltInterleave
         };
         AltDeinterleave = new ActionCommand(imageListActions.AltDeinterleave)
         {
-            MenuText = UiStrings.AltDeinterleave
+            Text = UiStrings.AltDeinterleave
         };
-        ReverseMenu = new Command
+        ReverseMenu = new ActionCommand
         {
-            MenuText = UiStrings.Reverse
+            Text = UiStrings.Reverse
         };
         ReverseAll = new ActionCommand(imageListActions.ReverseAll);
         ReverseSelected = new ActionCommand(imageListActions.ReverseSelected);
         Delete = new ActionCommand(desktopController.Delete)
         {
-            ToolBarText = UiStrings.Delete,
-            MenuText = UiStrings.Delete,
+            Text = UiStrings.Delete,
             Image = iconProvider.GetIcon("cross")
         };
         ClearAll = new ActionCommand(desktopController.Clear)
@@ -232,30 +244,38 @@ public class DesktopCommands
             Image = iconProvider.GetIcon("cancel"),
             Shortcut = Application.Instance.CommonModifier | Keys.Shift | Keys.Delete
         };
-        LanguageMenu = new Command
+        LanguageMenu = new ActionCommand
         {
-            ToolBarText = UiStrings.Language,
-            MenuText = UiStrings.Language,
+            Text = UiStrings.Language,
             Image = iconProvider.GetIcon("world")
         };
         About = new ActionCommand(desktopSubFormController.ShowAboutForm)
         {
-            ToolBarText = UiStrings.About,
-            MenuText = UiStrings.About,
+            Text = UiStrings.About,
             Image = iconProvider.GetIcon("information")
         };
         ZoomIn = new ActionCommand(() => thumbnailController.StepSize(1))
         {
-            ToolBarText = UiStrings.ZoomIn,
-            MenuText = UiStrings.ZoomIn,
+            Text = UiStrings.ZoomIn,
             Image = iconProvider.GetIcon("zoom_in")
         };
         ZoomOut = new ActionCommand(() => thumbnailController.StepSize(-1))
         {
-            ToolBarText = UiStrings.ZoomOut,
-            MenuText = UiStrings.ZoomOut,
+            Text = UiStrings.ZoomOut,
             Image = iconProvider.GetIcon("zoom_out")
         };
+    }
+
+    public DesktopCommands WithSelection(ListSelection<UiImage> selection)
+    {
+        return new DesktopCommands(
+            _desktopController,
+            _desktopScanController,
+            _desktopSubFormController,
+            _imageList,
+            _imageListActions.WithSelection(selection),
+            _thumbnailController,
+            _iconProvider);
     }
 
     public ActionCommand Scan { get; set; }
@@ -265,6 +285,7 @@ public class DesktopCommands
     public ActionCommand Ocr { get; set; }
     public ActionCommand Import { get; set; }
     public ActionCommand Save { get; set; }
+    public ActionCommand SaveSelected { get; set; }
     public ActionCommand SavePdf { get; set; }
     public ActionCommand SaveAllPdf { get; set; }
     public ActionCommand SaveSelectedPdf { get; set; }
@@ -278,7 +299,7 @@ public class DesktopCommands
     public ActionCommand EmailSelectedPdf { get; set; }
     public ActionCommand EmailSettings { get; set; }
     public ActionCommand Print { get; set; }
-    public Command ImageMenu { get; set; }
+    public ActionCommand ImageMenu { get; set; }
     public ActionCommand ViewImage { get; set; }
     public ActionCommand Crop { get; set; }
     public ActionCommand BrightCont { get; set; }
@@ -295,17 +316,17 @@ public class DesktopCommands
     public ActionCommand CustomRotate { get; set; }
     public ActionCommand MoveUp { get; set; }
     public ActionCommand MoveDown { get; set; }
-    public Command ReorderMenu { get; set; }
+    public ActionCommand ReorderMenu { get; set; }
     public ActionCommand Interleave { get; set; }
     public ActionCommand Deinterleave { get; set; }
     public ActionCommand AltInterleave { get; set; }
     public ActionCommand AltDeinterleave { get; set; }
-    public Command ReverseMenu { get; set; }
+    public ActionCommand ReverseMenu { get; set; }
     public ActionCommand ReverseAll { get; set; }
     public ActionCommand ReverseSelected { get; set; }
     public ActionCommand Delete { get; set; }
     public ActionCommand ClearAll { get; set; }
-    public Command LanguageMenu { get; set; }
+    public ActionCommand LanguageMenu { get; set; }
     public ActionCommand About { get; set; }
     public ActionCommand ZoomIn { get; set; }
     public ActionCommand ZoomOut { get; set; }
