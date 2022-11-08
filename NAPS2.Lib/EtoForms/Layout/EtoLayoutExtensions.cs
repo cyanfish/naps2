@@ -107,6 +107,11 @@ public static class EtoLayoutExtensions
     public static LayoutRow Aligned(this LayoutRow row) =>
         new LayoutRow(row, aligned: true);
 
+    public static LayoutOverlay XScale(this LayoutOverlay overlay) =>
+        new LayoutOverlay(overlay, xScale: true);
+    public static LayoutOverlay YScale(this LayoutOverlay overlay) =>
+        new LayoutOverlay(overlay, yScale: true);
+
     public static void AddItems(this ContextMenu contextMenu, params MenuItem[] menuItems)
     {
         contextMenu.Items.AddRange(menuItems);

@@ -9,6 +9,13 @@ public class LayoutOverlay : LayoutElement
         Children = children;
     }
 
+    public LayoutOverlay(LayoutOverlay original, bool? xScale = null, bool? yScale = null)
+    {
+        Children = original.Children;
+        XScale = xScale ?? original.XScale;
+        YScale = yScale ?? original.YScale;
+    }
+
     public LayoutElement[] Children { get; set; }
 
     public override void DoLayout(LayoutContext context, RectangleF bounds)

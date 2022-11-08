@@ -23,6 +23,8 @@ public abstract class ImageFormBase : EtoDialogBase
         FormStateController.DefaultExtraLayoutSize = new Size(400, 400);
     }
 
+    protected Drawable Overlay { get; } = new();
+
     protected SliderWithTextBox[] Sliders { get; set; } = Array.Empty<SliderWithTextBox>();
 
     private void RenderImage()
@@ -80,7 +82,7 @@ public abstract class ImageFormBase : EtoDialogBase
         }
 
         LayoutController.Content = L.Column(
-            _imageView.YScale(),
+            L.Overlay(_imageView, Overlay).YScale(),
             CreateControls(),
             SelectedImages is { Count: > 1 } ? _applyToSelected : C.None(),
             L.Row(
@@ -107,6 +109,7 @@ public abstract class ImageFormBase : EtoDialogBase
 
     protected void UpdatePreviewBox()
     {
+        Overlay.Invalidate();
         _renderThrottle.RunAction();
     }
 

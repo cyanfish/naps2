@@ -53,6 +53,7 @@ public class StubDesktopSubFormController : IDesktopSubFormController
 
     public void ShowRotateForm()
     {
+        ShowImageForm<RotateForm>();
     }
 
     public void ShowProfilesForm()
