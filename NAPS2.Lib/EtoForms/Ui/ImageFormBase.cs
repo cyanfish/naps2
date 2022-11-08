@@ -72,7 +72,7 @@ public abstract class ImageFormBase : EtoDialogBase
     {
     }
 
-    protected override void OnLoad(EventArgs e)
+    protected override void OnPreLoad(EventArgs e)
     {
         foreach (var slider in Sliders)
         {
@@ -90,6 +90,12 @@ public abstract class ImageFormBase : EtoDialogBase
                 C.OkButton(this, beforeClose: Apply)
             )
         );
+
+        base.OnPreLoad(e);
+    }
+
+    protected override void OnLoad(EventArgs e)
+    {
         base.OnLoad(e);
         _applyToSelected.Text = string.Format(UiStrings.ApplyToSelected, SelectedImages?.Count);
 

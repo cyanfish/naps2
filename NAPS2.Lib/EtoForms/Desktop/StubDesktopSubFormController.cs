@@ -38,14 +38,17 @@ public class StubDesktopSubFormController : IDesktopSubFormController
 
     public void ShowHueSaturationForm()
     {
+        ShowImageForm<HueSatForm>();
     }
 
     public void ShowBlackWhiteForm()
     {
+        ShowImageForm<BlackWhiteForm>();
     }
 
     public void ShowSharpenForm()
     {
+        ShowImageForm<SharpenForm>();
     }
 
     public void ShowRotateForm()

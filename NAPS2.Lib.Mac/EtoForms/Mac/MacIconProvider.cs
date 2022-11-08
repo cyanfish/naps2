@@ -24,6 +24,8 @@ public class MacIconProvider : IIconProvider
         { "weather_sun", "sun.max" },
         { "contrast_with_sun", "sun.max" },
         { "color_management", "paintpalette" },
+        { "color_wheel", "paintpalette" },
+        { "color_gradient", "square.righthalf.filled" },
         { "contrast", "circle.righthalf.filled" },
         { "contrast_high", "circle.righthalf.filled" },
         { "sharpen", "rhombus" },
