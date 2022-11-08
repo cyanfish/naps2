@@ -1,4 +1,3 @@
-using System.Threading;
 using Eto.Drawing;
 using Eto.Forms;
 using NAPS2.EtoForms.Layout;
@@ -13,19 +12,25 @@ public abstract class ImageFormBase : EtoDialogBase
     private readonly CheckBox _applyToSelected = new();
     private readonly Button _revert = C.Button(UiStrings.Revert);
 
-    private IMemoryImage? workingImage, workingImage2;
-    private bool _closed;
-    private Timer _previewTimer;
-    private bool _working;
-    private bool _previewOutOfDate;
-    private bool _isShown;
-    private bool _initComplete;
+    private readonly RefreshThrottle _renderThrottle;
+    private IMemoryImage? _workingImage;
 
     public ImageFormBase(Naps2Config config, ThumbnailController thumbnailController) : base(config)
     {
         _thumbnailController = thumbnailController;
         _revert.Click += Revert;
+        _renderThrottle = new RefreshThrottle(RenderImage);
         FormStateController.DefaultExtraLayoutSize = new Size(400, 400);
+    }
+
+    private void RenderImage()
+    {
+        var bitmap = RenderPreview();
+        Invoker.Current.SafeInvoke(() =>
+        {
+            _imageView.Image?.Dispose();
+            _imageView.Image = bitmap.ToEtoImage();
+        });
     }
 
     protected abstract LayoutElement CreateControls();
@@ -42,7 +47,7 @@ public abstract class ImageFormBase : EtoDialogBase
 
     protected virtual IMemoryImage RenderPreview()
     {
-        var result = workingImage.Clone();
+        var result = _workingImage.Clone();
         return result.PerformAllTransforms(Transforms);
     }
 
@@ -63,7 +68,7 @@ public abstract class ImageFormBase : EtoDialogBase
         LayoutController.Content = L.Column(
             _imageView.YScale(),
             CreateControls(),
-            SelectedImages is { Count: > 1 } ? _applyToSelected : null,
+            SelectedImages is { Count: > 1 } ? _applyToSelected : null!,
             L.Row(
                 _revert,
                 C.Filler(),
@@ -74,61 +79,15 @@ public abstract class ImageFormBase : EtoDialogBase
         base.OnLoad(e);
         _applyToSelected.Text = string.Format(UiStrings.ApplyToSelected, SelectedImages?.Count);
 
-        var maxDimen = Screen.Screens.Max(s => Math.Max(s.WorkingArea.Height, s.WorkingArea.Width));
-        // TODO: Limit to maxDimen * 2
         using var imageToRender = Image.GetClonedImage();
-        // TODO: More generic? In general how do we integrate with eto?
-        workingImage = imageToRender.Render();
-        if (_closed)
-        {
-            workingImage?.Dispose();
-            return;
-        }
-        workingImage2 = workingImage.Clone();
-
+        _workingImage = imageToRender.Render();
         InitTransform();
-        lock (this)
-        {
-            _initComplete = true;
-        }
-
         UpdatePreviewBox();
-    }
-
-    protected override void OnShown(EventArgs e)
-    {
-        base.OnShown(e);
-        _isShown = true;
     }
 
     protected void UpdatePreviewBox()
     {
-        if (_previewTimer == null)
-        {
-            _previewTimer = new Timer(_ =>
-            {
-                lock (this)
-                {
-                    if (!_isShown || !_previewOutOfDate || _working) return;
-                    _working = true;
-                    _previewOutOfDate = false;
-                }
-                var bitmap = RenderPreview();
-                Invoker.Current.SafeInvoke(() =>
-                {
-                    _imageView.Image?.Dispose();
-                    _imageView.Image = bitmap.ToEtoImage();
-                });
-                lock (this)
-                {
-                    _working = false;
-                }
-            }, null, 0, 100);
-        }
-        lock (this)
-        {
-            _previewOutOfDate = true;
-        }
+        _renderThrottle.RunAction();
     }
 
     private void Apply()
@@ -141,7 +100,7 @@ public abstract class ImageFormBase : EtoDialogBase
                 if (img == Image)
                 {
                     // Optimize thumbnail rendering for the first (or only) image since we already have it loaded into memory
-                    var transformed = workingImage.Clone().PerformAllTransforms(Transforms);
+                    var transformed = _workingImage.Clone().PerformAllTransforms(Transforms);
                     updatedThumb =
                         transformed.PerformTransform(new ThumbnailTransform(_thumbnailController.RenderSize));
                 }
@@ -160,10 +119,7 @@ public abstract class ImageFormBase : EtoDialogBase
     protected override void OnClosed(EventArgs e)
     {
         base.OnClosed(e);
-        workingImage?.Dispose();
-        workingImage2?.Dispose();
+        _workingImage?.Dispose();
         _imageView.Image?.Dispose();
-        _previewTimer?.Dispose();
-        _closed = true;
     }
 }
