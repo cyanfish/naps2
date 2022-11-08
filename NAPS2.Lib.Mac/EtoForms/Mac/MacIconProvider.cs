@@ -18,6 +18,8 @@ public class MacIconProvider : IIconProvider
         { "arrow_switch_small", "arrow.2.squarepath" },
         { "arrow_up_small", "arrow.up" },
         { "arrow_down_small", "arrow.down" },
+        { "arrow_left", "arrow.left" },
+        { "arrow_right", "arrow.right" },
         { "transform_crop", "crop" },
         { "contrast_with_sun", "sun.max" },
         { "color_management", "paintpalette" },

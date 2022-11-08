@@ -1,11 +1,17 @@
 using Eto.Forms;
 using Eto.Mac;
+using Eto.Mac.Forms.ToolBar;
 
 namespace NAPS2.EtoForms.Mac;
 
-public record MacToolbarEntry(string Identifier, NSToolbarItem Item)
+public record MacToolbarEntry(string Identifier, NSToolbarItem? Item)
 {
-    public static NSToolbarItem CreateItem(Command command, string? title = null, string? tooltip = null)
+    public static NSToolbarItem CreateSeparator()
+    {
+        return new ToolBarHandler.DividerToolbarItem(true);
+    }
+
+    public static NSToolbarItem CreateItem(Command command, string? title = null, string? tooltip = null, bool nav = false)
     {
         return new NSToolbarItem
         {
@@ -13,7 +19,8 @@ public record MacToolbarEntry(string Identifier, NSToolbarItem Item)
             Title = title ?? "",
             Label = command.ToolBarText ?? "",
             ToolTip = tooltip ?? command.ToolBarText ?? "",
-            Bordered = true
+            Bordered = true,
+            Navigational = nav
         }.WithAction(command.Execute);
     }
 

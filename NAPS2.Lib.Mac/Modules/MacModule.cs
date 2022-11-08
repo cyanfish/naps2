@@ -36,6 +36,7 @@ public class MacModule : Module
         builder.RegisterType<MacIconProvider>().As<IIconProvider>();
 
         builder.RegisterType<MacDesktopForm>().As<DesktopForm>();
+        builder.RegisterType<MacPreviewForm>().As<PreviewForm>();
 
         EtoPlatform.Current = new MacEtoPlatform();
         // Log.EventLogger = new WindowsEventLogger(Kernel!.Get<Naps2Config>());

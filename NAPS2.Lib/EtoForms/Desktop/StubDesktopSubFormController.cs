@@ -6,11 +6,13 @@ public class StubDesktopSubFormController : IDesktopSubFormController
 {
     private readonly IFormFactory _formFactory;
     private readonly DesktopImagesController _desktopImagesController;
+    private readonly UiImageList _imageList;
 
-    public StubDesktopSubFormController(IFormFactory formFactory, DesktopImagesController desktopImagesController)
+    public StubDesktopSubFormController(IFormFactory formFactory, DesktopImagesController desktopImagesController, UiImageList imageList)
     {
         _formFactory = formFactory;
         _desktopImagesController = desktopImagesController;
+        _imageList = imageList;
     }
 
     public void ShowCropForm()
@@ -55,6 +57,13 @@ public class StubDesktopSubFormController : IDesktopSubFormController
 
     public void ShowViewerForm()
     {
+        var selected = _imageList.Selection.FirstOrDefault();
+        if (selected != null)
+        {
+            using var viewer = _formFactory.Create<PreviewForm>();
+            viewer.CurrentImage = selected;
+            viewer.ShowModal();
+        }
     }
 
     public void ShowPdfSettingsForm()

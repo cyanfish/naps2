@@ -674,5 +674,29 @@ namespace NAPS2.Lang.Resources {
                 return ResourceManager.GetString("DownloadProgressFormTitle", resourceCulture);
             }
         }
+        
+        internal static string PreviewFormTitle {
+            get {
+                return ResourceManager.GetString("PreviewFormTitle", resourceCulture);
+            }
+        }
+        
+        internal static string Next {
+            get {
+                return ResourceManager.GetString("Next", resourceCulture);
+            }
+        }
+        
+        internal static string Previous {
+            get {
+                return ResourceManager.GetString("Previous", resourceCulture);
+            }
+        }
+        
+        internal static string XOfY {
+            get {
+                return ResourceManager.GetString("XOfY", resourceCulture);
+            }
+        }
     }
 }
