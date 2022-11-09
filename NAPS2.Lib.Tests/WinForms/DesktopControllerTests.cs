@@ -26,7 +26,7 @@ public class DesktopControllerTests : ContextualTests
     private readonly Mock<IOperationFactory> _operationFactory;
     private readonly StillImage _stillImage;
     private readonly Mock<IUpdateChecker> _updateChecker;
-    private readonly Mock<INotificationManager> _notifcationManager;
+    private readonly Mock<INotificationManager> _notificationManager;
     private readonly ImageTransfer _imageTransfer;
     private readonly ImageClipboard _imageClipboard;
     private readonly Mock<IExportController> _exportHelper;
@@ -49,7 +49,7 @@ public class DesktopControllerTests : ContextualTests
         _operationFactory = new Mock<IOperationFactory>();
         _stillImage = new StillImage();
         _updateChecker = new Mock<IUpdateChecker>();
-        _notifcationManager = new Mock<INotificationManager>();
+        _notificationManager = new Mock<INotificationManager>();
         _imageTransfer = new ImageTransfer();
         _imageClipboard = new ImageClipboard();
         _exportHelper = new Mock<IExportController>();
@@ -69,11 +69,11 @@ public class DesktopControllerTests : ContextualTests
             _operationFactory.Object,
             _stillImage,
             _updateChecker.Object,
-            _notifcationManager.Object,
+            _notificationManager.Object,
             _imageTransfer,
             _imageClipboard,
             new ImageListActions(_imageList, _operationFactory.Object, _operationProgress.Object,
-                _config, _thumbnailController),
+                _config, _thumbnailController, _exportHelper.Object, _notificationManager.Object),
             _exportHelper.Object,
             _dialogHelper.Object,
             _desktopImagesController,
@@ -103,7 +103,7 @@ public class DesktopControllerTests : ContextualTests
 
         Assert.True(_config.Get(c => c.HasBeenRun));
         DateAsserts.Recent(TimeSpan.FromMilliseconds(100), _config.Get(c => c.FirstRunDate));
-        _notifcationManager.VerifyNoOtherCalls();
+        _notificationManager.VerifyNoOtherCalls();
     }
 
     [Fact]
@@ -117,7 +117,7 @@ public class DesktopControllerTests : ContextualTests
 
         Assert.True(_config.Get(c => c.HasBeenRun));
         Assert.Equal(firstRunDate, _config.Get(c => c.FirstRunDate));
-        _notifcationManager.VerifyNoOtherCalls();
+        _notificationManager.VerifyNoOtherCalls();
     }
 
     [Fact]
@@ -129,7 +129,7 @@ public class DesktopControllerTests : ContextualTests
 
         await _desktopController.Initialize();
 
-        _notifcationManager.Verify(x => x.DonatePrompt());
+        _notificationManager.Verify(x => x.DonatePrompt());
         Assert.True(_config.Get(c => c.HasBeenPromptedForDonation));
         DateAsserts.Recent(TimeSpan.FromMilliseconds(100), _config.Get(c => c.LastDonatePromptDate));
     }
@@ -148,7 +148,7 @@ public class DesktopControllerTests : ContextualTests
 
         Assert.True(_config.Get(c => c.HasBeenPromptedForDonation));
         Assert.Equal(donatePromptDate, _config.Get(c => c.LastDonatePromptDate));
-        _notifcationManager.VerifyNoOtherCalls();
+        _notificationManager.VerifyNoOtherCalls();
     }
 
     [Fact]
@@ -185,7 +185,7 @@ public class DesktopControllerTests : ContextualTests
         DateAsserts.Recent(TimeSpan.FromMilliseconds(100), _config.Get(c => c.LastUpdateCheckDate));
         _updateChecker.Verify(x => x.CheckForUpdates());
         _updateChecker.VerifyNoOtherCalls();
-        _notifcationManager.VerifyNoOtherCalls();
+        _notificationManager.VerifyNoOtherCalls();
     }
 
     [Fact]
@@ -202,9 +202,9 @@ public class DesktopControllerTests : ContextualTests
         Assert.True(_config.Get(c => c.HasCheckedForUpdates));
         DateAsserts.Recent(TimeSpan.FromMilliseconds(100), _config.Get(c => c.LastUpdateCheckDate));
         _updateChecker.Verify(x => x.CheckForUpdates());
-        _notifcationManager.Verify(x => x.UpdateAvailable(_updateChecker.Object, mockUpdateInfo));
+        _notificationManager.Verify(x => x.UpdateAvailable(_updateChecker.Object, mockUpdateInfo));
         _updateChecker.VerifyNoOtherCalls();
-        _notifcationManager.VerifyNoOtherCalls();
+        _notificationManager.VerifyNoOtherCalls();
     }
 
     [Fact]
@@ -219,7 +219,7 @@ public class DesktopControllerTests : ContextualTests
         Assert.False(_config.Get(c => c.HasCheckedForUpdates));
         Assert.Null(_config.Get(c => c.LastUpdateCheckDate));
         _updateChecker.VerifyNoOtherCalls();
-        _notifcationManager.VerifyNoOtherCalls();
+        _notificationManager.VerifyNoOtherCalls();
     }
 
     [Fact]
@@ -236,7 +236,7 @@ public class DesktopControllerTests : ContextualTests
         Assert.True(_config.Get(c => c.HasCheckedForUpdates));
         Assert.Equal(updateCheckDate, _config.Get(c => c.LastUpdateCheckDate));
         _updateChecker.VerifyNoOtherCalls();
-        _notifcationManager.VerifyNoOtherCalls();
+        _notificationManager.VerifyNoOtherCalls();
     }
 
     [Fact]
@@ -256,8 +256,8 @@ public class DesktopControllerTests : ContextualTests
         Assert.True(_config.Get(c => c.HasCheckedForUpdates));
         DateAsserts.Recent(TimeSpan.FromMilliseconds(100), _config.Get(c => c.LastUpdateCheckDate));
         _updateChecker.Verify(x => x.CheckForUpdates());
-        _notifcationManager.Verify(x => x.UpdateAvailable(_updateChecker.Object, mockUpdateInfo));
+        _notificationManager.Verify(x => x.UpdateAvailable(_updateChecker.Object, mockUpdateInfo));
         _updateChecker.VerifyNoOtherCalls();
-        _notifcationManager.VerifyNoOtherCalls();
+        _notificationManager.VerifyNoOtherCalls();
     }
 }
