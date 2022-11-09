@@ -12,7 +12,7 @@ public static class MacPackager
         var runtimeId = packageInfo.Platform == Platform.MacArm ? "osx-arm64" : "osx-x64";
         Cli.Run("dotnet", $"publish NAPS2.App.Mac -c InstallerEXE -r {runtimeId}", verbose);
         // TODO: Fix version
-        var sourcePath = Path.Combine(Paths.SolutionRoot, "NAPS2.App.Mac", "bin", "InstallerEXE", "net6-macos10.15",
+        var sourcePath = Path.Combine(Paths.SolutionRoot, "NAPS2.App.Mac", "bin", "InstallerEXE", "net7-macos10.15",
             runtimeId, "publish", "NAPS2-1.0.pkg");
         if (File.Exists(pkgPath))
         {
