@@ -12,19 +12,23 @@ public class CropForm : ImageFormBase
 
     // Mouse down location
     private PointF _mouseOrigin;
+
     // Image bounds in the coordinate space of the overlay control
     private float _overlayT, _overlayL, _overlayR, _overlayB, _overlayW, _overlayH;
+
     // Crop amounts from each side as a fraction of the total image size (updated as the user drags)
     private float _cropL, _cropR, _cropT, _cropB;
+
     // Crop amounts from each side as pixels of the image to be cropped (updated on mouse up)
     private float _realL, _realR, _realT, _realB;
+
     // Whether the given crop handle is currently being moved by the user
     private bool _activeTL, _activeTR, _activeBL, _activeBR;
 
     public CropForm(Naps2Config config, ThumbnailController thumbnailController) :
         base(config, thumbnailController)
     {
-        ImagePadding = HANDLE_WIDTH;
+        UseImageView = false;
         Overlay.Paint += Overlay_Paint;
         Overlay.MouseDown += Overlay_MouseDown;
         Overlay.MouseMove += Overlay_MouseMove;
@@ -139,6 +143,8 @@ public class CropForm : ImageFormBase
 
     private void Overlay_Paint(object? sender, PaintEventArgs e)
     {
+        e.Graphics.DrawImage(WorkingImage!.ToEtoImage(), _overlayL, _overlayT, _overlayW, _overlayH);
+
         var offsetL = _cropL * _overlayW;
         var offsetT = _cropT * _overlayH;
         var offsetR = _cropR * _overlayW;
@@ -147,19 +153,21 @@ public class CropForm : ImageFormBase
         var handlePen = new Pen(new Color(0, 0, 0), HANDLE_WIDTH);
 
         // Fade out cropped-out portions of the image
-        // - Full left side
-        e.Graphics.FillRectangle(fillColor, _overlayL, _overlayT, offsetL, _overlayH);
-        // - Full right side
-        e.Graphics.FillRectangle(fillColor, _overlayR - offsetR, _overlayT, offsetR, _overlayH);
-        // - Top middle
-        e.Graphics.FillRectangle(fillColor, _overlayL + offsetL, _overlayT, _overlayW - offsetL - offsetR, offsetT);
-        // - Bottom middle
-        e.Graphics.FillRectangle(fillColor, _overlayL + offsetL, _overlayB - offsetB, _overlayW - offsetL - offsetR, offsetB);
+        using var fade = new Bitmap((int) _overlayW, (int) _overlayH, PixelFormat.Format32bppRgba);
+        var fadeGraphics = new Graphics(fade);
+        fadeGraphics.FillRectangle(fillColor, 0, 0, _overlayW, _overlayH);
+        fadeGraphics.SetClip(new RectangleF(
+            offsetL, offsetT,
+            _overlayW - offsetL - offsetR,
+            _overlayH - offsetT - offsetB));
+        fadeGraphics.Clear();
+        fadeGraphics.Dispose();
+        e.Graphics.DrawImage(fade, _overlayL, _overlayT);
 
         var x1 = _overlayL + offsetL - HANDLE_WIDTH / 2f;
         var y1 = _overlayT + offsetT - HANDLE_WIDTH / 2f;
-        var x2 = _overlayR - offsetR + HANDLE_WIDTH / 2f + 1;
-        var y2 = _overlayB - offsetB + HANDLE_WIDTH / 2f + 1;
+        var x2 = _overlayR - offsetR + HANDLE_WIDTH / 2f - 0.5f;
+        var y2 = _overlayB - offsetB + HANDLE_WIDTH / 2f - 0.5f;
 
         // TODO: Edge handles
         // Draw corner handles

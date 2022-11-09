@@ -13,7 +13,6 @@ public abstract class ImageFormBase : EtoDialogBase
     private readonly Button _revert = C.Button(UiStrings.Revert);
 
     private readonly RefreshThrottle _renderThrottle;
-    protected IMemoryImage? _workingImage;
 
     public ImageFormBase(Naps2Config config, ThumbnailController thumbnailController) : base(config)
     {
@@ -23,10 +22,11 @@ public abstract class ImageFormBase : EtoDialogBase
         FormStateController.DefaultExtraLayoutSize = new Size(400, 400);
     }
 
+    protected bool UseImageView { get; set; } = true;
     protected int ImageHeight { get; set; }
     protected int ImageWidth { get; set; }
-    protected int ImagePadding { get; set; }
 
+    protected IMemoryImage? WorkingImage { get; private set; }
     protected Drawable Overlay { get; } = new();
 
     protected SliderWithTextBox[] Sliders { get; set; } = Array.Empty<SliderWithTextBox>();
@@ -36,8 +36,15 @@ public abstract class ImageFormBase : EtoDialogBase
         var bitmap = RenderPreview();
         Invoker.Current.SafeInvoke(() =>
         {
-            _imageView.Image?.Dispose();
-            _imageView.Image = bitmap.ToEtoImage();
+            if (UseImageView)
+            {
+                _imageView.Image?.Dispose();
+                _imageView.Image = bitmap.ToEtoImage();
+            }
+            else
+            {
+                Overlay.Invalidate();
+            }
         });
     }
 
@@ -58,7 +65,7 @@ public abstract class ImageFormBase : EtoDialogBase
 
     protected virtual IMemoryImage RenderPreview()
     {
-        var result = _workingImage.Clone();
+        var result = WorkingImage.Clone();
         return result.PerformAllTransforms(Transforms);
     }
 
@@ -86,7 +93,7 @@ public abstract class ImageFormBase : EtoDialogBase
         }
 
         LayoutController.Content = L.Column(
-            L.Overlay(_imageView.Padding(ImagePadding), Overlay).YScale(),
+            L.Overlay(UseImageView ? _imageView : C.None(), Overlay).YScale(),
             CreateControls(),
             SelectedImages is { Count: > 1 } ? _applyToSelected : C.None(),
             L.Row(
@@ -106,9 +113,9 @@ public abstract class ImageFormBase : EtoDialogBase
         _applyToSelected.Text = string.Format(UiStrings.ApplyToSelected, SelectedImages?.Count);
 
         using var imageToRender = Image.GetClonedImage();
-        _workingImage = imageToRender.Render();
-        ImageWidth = _workingImage.Width;
-        ImageHeight = _workingImage.Height;
+        WorkingImage = imageToRender.Render();
+        ImageWidth = WorkingImage.Width;
+        ImageHeight = WorkingImage.Height;
         InitTransform();
         UpdatePreviewBox();
     }
@@ -129,7 +136,7 @@ public abstract class ImageFormBase : EtoDialogBase
                 if (img == Image)
                 {
                     // Optimize thumbnail rendering for the first (or only) image since we already have it loaded into memory
-                    var transformed = _workingImage.Clone().PerformAllTransforms(Transforms);
+                    var transformed = WorkingImage.Clone().PerformAllTransforms(Transforms);
                     updatedThumb =
                         transformed.PerformTransform(new ThumbnailTransform(_thumbnailController.RenderSize));
                 }
@@ -148,7 +155,7 @@ public abstract class ImageFormBase : EtoDialogBase
     protected override void OnClosed(EventArgs e)
     {
         base.OnClosed(e);
-        _workingImage?.Dispose();
+        WorkingImage?.Dispose();
         _imageView.Image?.Dispose();
     }
 }

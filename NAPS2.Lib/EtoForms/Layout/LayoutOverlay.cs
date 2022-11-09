@@ -6,7 +6,7 @@ public class LayoutOverlay : LayoutElement
 {
     public LayoutOverlay(LayoutElement[] children)
     {
-        Children = children;
+        Children = children.Where(x => x is not SkipLayoutElement).ToArray();
     }
 
     public LayoutOverlay(LayoutOverlay original, bool? xScale = null, bool? yScale = null)
