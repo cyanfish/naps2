@@ -56,6 +56,12 @@ public class WinFormsDesktopForm : DesktopForm
         NativeListView.Focus();
     }
 
+    protected override void OnShown(EventArgs e)
+    {
+        _toolbarFormatter.RelayoutToolbar(_toolStrip);
+        base.OnShown(e);
+    }
+
     protected override LayoutElement GetZoomButtons()
     {
         // Disabled buttons don't prevent click events from being sent to the listview below the button, so without this
@@ -105,11 +111,6 @@ public class WinFormsDesktopForm : DesktopForm
         _container.ContentPanel.Controls.Add(wfContent);
 
         return _container.ToEto();
-    }
-
-    protected override void AfterLayout()
-    {
-        _toolbarFormatter.RelayoutToolbar(_toolStrip);
     }
 
     protected override void SetThumbnailSpacing(int thumbnailSize)

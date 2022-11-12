@@ -89,7 +89,6 @@ public abstract class DesktopForm : EtoFormBase
                 L.Row(GetZoomButtons(), C.Filler())
             ).Padding(10)
         );
-        AfterLayout();
 
         //
         // Shown += FDesktop_Shown;
@@ -257,10 +256,6 @@ public abstract class DesktopForm : EtoFormBase
     protected MenuProvider GetLanguageMenuProvider()
     {
         return new MenuProvider().Dynamic(_languageMenuCommands);
-    }
-
-    protected virtual void AfterLayout()
-    {
     }
 
     protected virtual void ConfigureToolbar()

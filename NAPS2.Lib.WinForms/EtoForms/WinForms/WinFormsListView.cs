@@ -17,17 +17,27 @@ public class WinFormsListView<T> : IListView<T> where T : notnull
     {
         _behavior = behavior;
         _view = behavior.ScrollOnDrag ? new DragScrollListView() : new ListView();
-        _view.LargeImageList = new ImageList
-        {
-            ColorDepth = ColorDepth.Depth32Bit,
-            TransparentColor = Color.Transparent
-        };
-        _view.View = View.LargeIcon;
         _view.MultiSelect = behavior.MultiSelect;
-        WinFormsHacks.SetControlStyle(_view, ControlStyles.OptimizedDoubleBuffer | ControlStyles.AllPaintingInWmPaint,
-            true);
+        if (_behavior.Checkboxes)
+        {
+            _view.View = View.List;
+            _view.CheckBoxes = true;
+            _view.ItemChecked += OnSelectedIndexChanged;
+        }
+        else
+        {
+            _view.View = View.LargeIcon;
+            _view.LargeImageList = new ImageList
+            {
+                ColorDepth = ColorDepth.Depth32Bit,
+                TransparentColor = Color.Transparent
+            };
+            WinFormsHacks.SetControlStyle(_view,
+                ControlStyles.OptimizedDoubleBuffer | ControlStyles.AllPaintingInWmPaint,
+                true);
+            _view.SelectedIndexChanged += OnSelectedIndexChanged;
+        }
 
-        _view.SelectedIndexChanged += OnSelectedIndexChanged;
         _view.ItemActivate += OnItemActivate;
         _view.ItemDrag += OnItemDrag;
         _view.DragEnter += OnDragEnter;
@@ -84,11 +94,19 @@ public class WinFormsListView<T> : IListView<T> where T : notnull
         }
         _refreshing = true;
         Items.Clear();
-        ImageList.Clear();
+        if (!_behavior.Checkboxes)
+        {
+            ImageList.Clear();
+        }
         foreach (var item in items)
         {
-            ImageList.Add(_behavior.GetImage(item, ImageSize).ToSD());
-            var listViewItem = Items.Add(GetLabel(item), ImageList.Count - 1);
+            if (!_behavior.Checkboxes)
+            {
+                ImageList.Add(_behavior.GetImage(item, ImageSize).ToSD());
+            }
+            var listViewItem = _behavior.Checkboxes
+                ? Items.Add(GetLabel(item))
+                : Items.Add(GetLabel(item), ImageList.Count - 1);
             listViewItem.Tag = item;
         }
         SetSelectedItems();
@@ -99,7 +117,14 @@ public class WinFormsListView<T> : IListView<T> where T : notnull
     {
         for (int i = 0; i < Items.Count; i++)
         {
-            Items[i].Selected = Selection.Contains((T) Items[i].Tag);
+            if (_behavior.Checkboxes)
+            {
+                Items[i].Checked = Selection.Contains((T) Items[i].Tag);
+            }
+            else
+            {
+                Items[i].Selected = Selection.Contains((T) Items[i].Tag);
+            }
         }
     }
 
@@ -144,8 +169,8 @@ public class WinFormsListView<T> : IListView<T> where T : notnull
 
         // TODO: We might want to make the differ even smarter. e.g. maybe it can generate an arbitrary order of operations that minimizes update cost
         // example: clear then append 1 instead of delete all but 1
-        var originalImagesList = Items.OfType<ListViewItem>().Select(x => (T) x.Tag).ToList();
-        var originalImagesSet = new HashSet<T>(originalImagesList);
+        var originalItemsList = Items.OfType<ListViewItem>().Select(x => (T) x.Tag).ToList();
+        var originalItemsSet = new HashSet<T>(originalItemsList);
         if (!diffs.AppendOperations.Any() && !diffs.ReplaceOperations.Any() &&
             diffs.TrimOperations.Any(x => x.Count == Items.Count))
         {
@@ -160,30 +185,39 @@ public class WinFormsListView<T> : IListView<T> where T : notnull
                 // TODO: Use AddRange instead?
                 // TODO: Add this to the new ImageListViewBehavior
                 //  _thumbnailProvider.GetThumbnail(append.Image.Source, ThumbnailSize)
-                ImageList.Add(_behavior.GetImage(append.Item, ImageSize).ToSD());
                 var item = Items.Add(GetLabel(append.Item));
                 item.Tag = append.Item;
-                // TODO: This isn't used above, is it needed?
-                item.ImageIndex = ImageList.Count - 1;
+                if (!_behavior.Checkboxes)
+                {
+                    ImageList.Add(_behavior.GetImage(append.Item, ImageSize).ToSD());
+                    // TODO: This isn't used above, is it needed?
+                    item.ImageIndex = ImageList.Count - 1;
+                }
             }
             foreach (var replace in diffs.ReplaceOperations)
             {
-                ImageList[replace.Index] = _behavior.GetImage(replace.Item, ImageSize).ToSD();
+                if (!_behavior.Checkboxes)
+                {
+                    ImageList[replace.Index] = _behavior.GetImage(replace.Item, ImageSize).ToSD();
+                }
                 Items[replace.Index].Tag = replace.Item;
             }
             foreach (var trim in diffs.TrimOperations)
             {
                 for (int i = 0; i < trim.Count; i++)
                 {
-                    ImageList.RemoveAt(ImageList.Count - 1);
+                    if (!_behavior.Checkboxes)
+                    {
+                        ImageList.RemoveAt(ImageList.Count - 1);
+                    }
                     Items.RemoveAt(Items.Count - 1);
                 }
             }
         }
         SetSelectedItems();
-        var newImagesList = Items.OfType<ListViewItem>().Select(x => (T) x.Tag).ToList();
-        var newImagesSet = new HashSet<T>(newImagesList);
-        if (originalImagesSet.SetEquals(newImagesSet) && !originalImagesList.SequenceEqual(newImagesList))
+        var newItemsList = Items.OfType<ListViewItem>().Select(x => (T) x.Tag).ToList();
+        var newItemsSet = new HashSet<T>(newItemsList);
+        if (originalItemsSet.SetEquals(newItemsSet) && !originalItemsList.SequenceEqual(newItemsList))
         {
             ScrollToSelection();
         }
@@ -219,21 +253,17 @@ public class WinFormsListView<T> : IListView<T> where T : notnull
         }
     }
 
-    private string GetLabel(T item)
-    {
-        if (!_behavior.ShowLabels)
-        {
-            return PlatformCompat.Runtime.UseSpaceInListViewItem ? " " : "";
-        }
-        return _behavior.GetLabel(item);
-    }
+    private string GetLabel(T item) => _behavior.ShowLabels ? _behavior.GetLabel(item) : "";
 
     private void OnSelectedIndexChanged(object? sender, EventArgs e)
     {
         if (!_refreshing)
         {
             _refreshing = true;
-            Selection = ListSelection.From(_view.SelectedItems.Cast<ListViewItem>().Select(x => (T) x.Tag));
+            var items = _behavior.Checkboxes
+                ? _view.CheckedItems.Cast<ListViewItem>()
+                : _view.SelectedItems.Cast<ListViewItem>();
+            Selection = ListSelection.From(items.Select(x => (T) x.Tag));
             _refreshing = false;
         }
     }

@@ -42,7 +42,7 @@ public class MacIconProvider : IIconProvider
         _defaultIconProvider = defaultIconProvider;
     }
 
-    public Image GetIcon(string name)
+    public Image? GetIcon(string name)
     {
         // TODO: Fix names (like "save") that have no non-mac image and will break on macOS 10.15
         if (OperatingSystem.IsMacOSVersionAtLeast(11) && IconMap.ContainsKey(name))
