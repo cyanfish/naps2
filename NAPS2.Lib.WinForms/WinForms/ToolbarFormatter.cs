@@ -25,10 +25,6 @@ public class ToolbarFormatter
         {
             foreach (var btn in tStrip.Items.OfType<ToolStripItem>())
             {
-                if (PlatformCompat.Runtime.SetToolbarFont)
-                {
-                    btn.Font = new Font("Segoe UI", 9);
-                }
                 btn.Text = _stringWrapper.Wrap(btn.Text ?? "", 80, g, btn.Font);
             }
         }

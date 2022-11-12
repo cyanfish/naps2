@@ -50,13 +50,13 @@ public class WorkerFactory : IWorkerFactory
     private Process StartWorkerProcess()
     {
         var parentId = Process.GetCurrentProcess().Id;
-        Process proc;
+        Process? proc;
         if (PlatformCompat.System.UseSeparateWorkerExe)
         {
             proc = Process.Start(new ProcessStartInfo
             {
-                FileName = PlatformCompat.Runtime.ExeRunner ?? WorkerExePath,
-                Arguments = PlatformCompat.Runtime.ExeRunner != null ? $"{WorkerExePath} {parentId}" : $"{parentId}",
+                FileName = WorkerExePath,
+                Arguments = $"{parentId}",
                 RedirectStandardInput = true,
                 RedirectStandardOutput = true,
                 UseShellExecute = false
@@ -128,11 +128,6 @@ public class WorkerFactory : IWorkerFactory
 
     public void Init()
     {
-        if (!PlatformCompat.Runtime.UseWorker)
-        {
-            return;
-        }
-
         if (_workerQueue == null)
         {
             _workerQueue = new BlockingCollection<WorkerContext>();

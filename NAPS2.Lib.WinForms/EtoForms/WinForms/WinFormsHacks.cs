@@ -17,16 +17,8 @@ public static class WinFormsHacks
 
     static WinFormsHacks()
     {
-        if (PlatformCompat.Runtime.SetImageListSizeOnImageCollection)
-        {
-            ImageSizeField = typeof(ImageList.ImageCollection).GetField("imageSize", BindingFlags.Instance | BindingFlags.NonPublic);
-            PerformRecreateHandleMethod = typeof(ImageList.ImageCollection).GetMethod("RecreateHandle", BindingFlags.Instance | BindingFlags.NonPublic);
-        }
-        else
-        {
-            ImageSizeField = typeof(ImageList).GetField("imageSize", BindingFlags.Instance | BindingFlags.NonPublic);
-            PerformRecreateHandleMethod = typeof(ImageList).GetMethod("PerformRecreateHandle", BindingFlags.Instance | BindingFlags.NonPublic);
-        }
+        ImageSizeField = typeof(ImageList).GetField("imageSize", BindingFlags.Instance | BindingFlags.NonPublic);
+        PerformRecreateHandleMethod = typeof(ImageList).GetMethod("PerformRecreateHandle", BindingFlags.Instance | BindingFlags.NonPublic);
 
         if (ImageSizeField == null || PerformRecreateHandleMethod == null)
         {
@@ -39,16 +31,8 @@ public static class WinFormsHacks
     {
         if (ImageSizeField != null && PerformRecreateHandleMethod != null)
         {
-            if (PlatformCompat.Runtime.SetImageListSizeOnImageCollection)
-            {
-                ImageSizeField.SetValue(imageList.Images, size);
-                PerformRecreateHandleMethod.Invoke(imageList.Images, new object[] { });
-            }
-            else
-            {
-                ImageSizeField.SetValue(imageList, size);
-                PerformRecreateHandleMethod.Invoke(imageList, new object[] { "ImageSize" });
-            }
+            ImageSizeField.SetValue(imageList, size);
+            PerformRecreateHandleMethod.Invoke(imageList, new object[] { "ImageSize" });
         }
         else
         {

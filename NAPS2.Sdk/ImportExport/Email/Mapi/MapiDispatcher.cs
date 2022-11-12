@@ -21,7 +21,7 @@ public class MapiDispatcher
         _mapiWrapper = mapiWrapper;
     }
 
-    private bool UseWorker => Environment.Is64BitProcess && PlatformCompat.Runtime.UseWorker;
+    private bool UseWorker => Environment.Is64BitProcess;
 
     /// <summary>
     /// Sends an email described by the given message object.

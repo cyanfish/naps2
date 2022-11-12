@@ -64,30 +64,16 @@ public class ToolStripDoubleButton : ToolStripButton
         if (Owner == null)
             return;
         ToolStripRenderer renderer = ToolStripManager.Renderer;
-            
-        if (PlatformCompat.Runtime.UseToolStripRenderHack)
-        {
-            var oldHeight = Height;
-            var oldParent = Parent;
-            Parent = null;
-            Height = Height / 2;
-            e.Graphics.TranslateTransform(0, _currentButton == 1 ? Height : 0);
-            renderer.DrawButtonBackground(new ToolStripItemRenderEventArgs(e.Graphics, this));
-            e.Graphics.TranslateTransform(0, _currentButton == 1 ? -Height : 0);
-            Height = oldHeight;
-            Parent = oldParent;
-        }
-        else
-        {
-            if (_currentButton == 0)
-            {
-                e.Graphics.DrawRectangle(new Pen(Color.Black), 0, 0, Width - 1, Height / 2 - 1);
-            }
-            if (_currentButton == 1)
-            {
-                e.Graphics.DrawRectangle(new Pen(Color.Black), 0, Height / 2, Width - 1, Height / 2 - 1);
-            }
-        }
+
+        var oldHeight = Height;
+        var oldParent = Parent;
+        Parent = null;
+        Height = Height / 2;
+        e.Graphics.TranslateTransform(0, _currentButton == 1 ? Height : 0);
+        renderer.DrawButtonBackground(new ToolStripItemRenderEventArgs(e.Graphics, this));
+        e.Graphics.TranslateTransform(0, _currentButton == 1 ? -Height : 0);
+        Height = oldHeight;
+        Parent = oldParent;
 
         bool wrap = false;
         int textWidth = Math.Max(MeasureTextWidth(FirstText, ref wrap), MeasureTextWidth(SecondText, ref wrap));
