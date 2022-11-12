@@ -10,6 +10,13 @@ namespace NAPS2.Tools;
 
 public static class Program
 {
+    // TODO: Add a "testpo"/"testlang" command that:
+    // - Takes the URL/path of a .po file as input
+    // - Downloads it
+    // - Replaces the corresponding .po file
+    // - Updates language resources for that language
+    // - Possibly then runs "pkg zip --name test-{lang}"
+
     public static void Main(string[] args) =>
         Parser.Default
             .ParseArguments<CleanOptions, BuildOptions, TestOptions, PackageOptions, InstallOptions, VerifyOptions,

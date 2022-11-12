@@ -19,4 +19,6 @@ public class PackageOptions
     public bool Verbose { get; set; }
     
     // TODO: Add net target (net462/net6/net6-windows etc.)
+
+    // TODO: Add an option to change the package name for building test packages
 }
