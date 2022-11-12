@@ -181,4 +181,123 @@ public class PreviewForm : EtoDialogBase
         }
         base.Dispose(disposing);
     }
+
+    // private async void tbPageCurrent_TextChanged(object sender, EventArgs e)
+    // {
+    //     if (int.TryParse(_tbPageCurrent.Text, out int indexOffBy1))
+    //     {
+    //         await GoTo(indexOffBy1 - 1);
+    //     }
+    // }
+
+    // private async Task DeleteCurrentImage()
+    // {
+    //     // TODO: Are the file access issues still a thing?
+    //     // Need to dispose the bitmap first to avoid file access issues
+    //     _tiffViewer1.Image?.Dispose();
+    //
+    //     var lastIndex = ImageIndex;
+    //     await _imageList.MutateAsync(new ImageListMutation.DeleteSelected(),
+    //         ListSelection.Of(CurrentImage));
+    //
+    //     bool shouldClose = false;
+    //     lock (_imageList)
+    //     {
+    //         if (_imageList.Images.Any())
+    //         {
+    //             // Update the GUI for the newly displayed image
+    //             var nextIndex = lastIndex >= _imageList.Images.Count ? _imageList.Images.Count - 1 : lastIndex;
+    //             CurrentImage = _imageList.Images[nextIndex];
+    //         }
+    //         else
+    //         {
+    //             shouldClose = true;
+    //         }
+    //     }
+    //     if (shouldClose)
+    //     {
+    //         // No images left to display, so no point keeping the form open
+    //         Close();
+    //     }
+    //     else
+    //     {
+    //         UpdatePage();
+    //         await UpdateImage();
+    //     }
+    // }
+
+    // private async void tiffViewer1_KeyDown(object sender, KeyEventArgs e)
+    // {
+    //     if (!(e.Control || e.Shift || e.Alt))
+    //     {
+    //         switch (e.KeyCode)
+    //         {
+    //             case Keys.Escape:
+    //                 Close();
+    //                 return;
+    //             case Keys.PageDown:
+    //             case Keys.Right:
+    //             case Keys.Down:
+    //                 await GoTo(ImageIndex + 1);
+    //                 return;
+    //             case Keys.PageUp:
+    //             case Keys.Left:
+    //             case Keys.Up:
+    //                 await GoTo(ImageIndex - 1);
+    //                 return;
+    //         }
+    //     }
+    //
+    //     e.Handled = _ksm.Perform(e.KeyData);
+    // }
+    //
+    // private async void tbPageCurrent_KeyDown(object sender, KeyEventArgs e)
+    // {
+    //     if (!(e.Control || e.Shift || e.Alt))
+    //     {
+    //         switch (e.KeyCode)
+    //         {
+    //             case Keys.PageDown:
+    //             case Keys.Right:
+    //             case Keys.Down:
+    //                 await GoTo(ImageIndex + 1);
+    //                 return;
+    //             case Keys.PageUp:
+    //             case Keys.Left:
+    //             case Keys.Up:
+    //                 await GoTo(ImageIndex - 1);
+    //                 return;
+    //         }
+    //     }
+    //
+    //     e.Handled = _ksm.Perform(e.KeyData);
+    // }
+    //
+    // private void AssignKeyboardShortcuts()
+    // {
+    //     // Defaults
+    //
+    //     _ksm.Assign("Del", _tsDelete);
+    //
+    //     // Configured
+    //
+    //     // TODO: Granular
+    //     var ks = Config.Get(c => c.KeyboardShortcuts);
+    //
+    //     _ksm.Assign(ks.Delete, _tsDelete);
+    //     _ksm.Assign(ks.ImageBlackWhite, _tsBlackWhite);
+    //     _ksm.Assign(ks.ImageBrightness, _tsBrightnessContrast);
+    //     _ksm.Assign(ks.ImageContrast, _tsBrightnessContrast);
+    //     _ksm.Assign(ks.ImageCrop, _tsCrop);
+    //     _ksm.Assign(ks.ImageHue, _tsHueSaturation);
+    //     _ksm.Assign(ks.ImageSaturation, _tsHueSaturation);
+    //     _ksm.Assign(ks.ImageSharpen, _tsSharpen);
+    //
+    //     _ksm.Assign(ks.RotateCustom, _tsCustomRotation);
+    //     _ksm.Assign(ks.RotateFlip, _tsFlip);
+    //     _ksm.Assign(ks.RotateLeft, _tsRotateLeft);
+    //     _ksm.Assign(ks.RotateRight, _tsRotateRight);
+    //     _ksm.Assign(ks.SaveImages, _tsSaveImage);
+    //     _ksm.Assign(ks.SavePDF, _tsSavePdf);
+    // }
 }

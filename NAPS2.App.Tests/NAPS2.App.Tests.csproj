@@ -26,7 +26,6 @@
     <ItemGroup Condition="$([MSBuild]::IsOSPlatform('Windows'))">
         <ProjectReference Include="..\NAPS2.App.Console\NAPS2.App.Console.csproj" />
         <ProjectReference Include="..\NAPS2.App.PortableLauncher\NAPS2.App.PortableLauncher.csproj" />
-        <ProjectReference Include="..\NAPS2.App.Server\NAPS2.App.Server.csproj" />
         <ProjectReference Include="..\NAPS2.App.WinForms\NAPS2.App.WinForms.csproj" />
         <ProjectReference Include="..\NAPS2.App.Worker\NAPS2.App.Worker.csproj" />
     </ItemGroup>

@@ -116,10 +116,6 @@
     <EmbeddedResource Update="WinForms\FDesktop.*.resx">
       <DependentUpon>FDesktop.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Update="WinForms\FDesktop.resx">
-      <DependentUpon>FDesktop.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
 
     <EmbeddedResource Remove="WinForms\FDownloadProgress.*.resx" Condition="'$(Configuration)' == 'Debug'" />
     <EmbeddedResource Update="WinForms\FDownloadProgress.*.resx">
@@ -304,10 +300,6 @@
     <EmbeddedResource Remove="WinForms\FViewer.*.resx" Condition="'$(Configuration)' == 'Debug'" />
     <EmbeddedResource Update="WinForms\FViewer.*.resx">
       <DependentUpon>FViewer.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Update="WinForms\FViewer.resx">
-      <DependentUpon>FViewer.cs</DependentUpon>
-      <SubType>Designer</SubType>
     </EmbeddedResource>
 
     <EmbeddedResource Remove="WinForms\NotifyWidget.*.resx" Condition="'$(Configuration)' == 'Debug'" />

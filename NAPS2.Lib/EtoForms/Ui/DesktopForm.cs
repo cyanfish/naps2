@@ -1,4 +1,5 @@
 using System.Collections.Immutable;
+using System.ComponentModel;
 using System.Threading;
 using Eto.Drawing;
 using Eto.Forms;
@@ -142,6 +143,14 @@ public abstract class DesktopForm : EtoFormBase
         UpdateToolbar();
         _desktopController.Initialize();
     }
+
+    // protected override void OnClosing(CancelEventArgs e)
+    // {
+    //     if (!_desktopController.PrepareForClosing(e.CloseReason == CloseReason.UserClosing))
+    //     {
+    //         e.Cancel = true;
+    //     }
+    // }
 
     protected override void OnClosed(EventArgs e)
     {
@@ -380,25 +389,6 @@ public abstract class DesktopForm : EtoFormBase
     // }
     //
     // #endregion
-    //
-    // #region Cleanup
-    //
-    // private void FDesktop_Closing(object? sender, CancelEventArgs e)
-    // {
-    //     // if (!_desktopController.PrepareForClosing(e.CloseReason == CloseReason.UserClosing))
-    //     // {
-    //     //     e.Cancel = true;
-    //     // }
-    // }
-    //
-    // private void FDesktop_Closed(object sender, EventArgs e)
-    // {
-    //     SaveToolStripLocation();
-    //     _desktopController.Cleanup();
-    // }
-    //
-    // #endregion
-    //
 
     #region Toolbar
 

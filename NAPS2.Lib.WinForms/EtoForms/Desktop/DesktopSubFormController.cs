@@ -75,9 +75,9 @@ public class DesktopSubFormController : IDesktopSubFormController
         var selected = _imageList.Selection.FirstOrDefault();
         if (selected != null)
         {
-            using var viewer = _formFactory.Create<FViewer>();
+            using var viewer = _formFactory.Create<PreviewForm>();
             viewer.CurrentImage = selected;
-            viewer.ShowDialog();
+            viewer.ShowModal();
         }
     }
 
