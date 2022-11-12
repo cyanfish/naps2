@@ -9,8 +9,6 @@ public class LinuxSystemCompat : ISystemCompat
     
     public bool IsWiaDriverSupported => false;
 
-    public bool IsWia20Supported => false;
-
     public bool IsTwainDriverSupported => false;
 
     public bool IsAppleDriverSupported => false;

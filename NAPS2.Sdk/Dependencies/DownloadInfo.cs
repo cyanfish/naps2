@@ -5,7 +5,7 @@ public class DownloadInfo
     public DownloadInfo(string fileName, List<DownloadMirror> mirrors, double size, string sha1, DownloadFormat format)
     {
         FileName = fileName;
-        Urls = mirrors.Where(x => x.IsSupported).Select(x => x.Url(fileName)).ToList();
+        Urls = mirrors.Select(x => x.Url(fileName)).ToList();
         Size = size;
         Sha1 = sha1;
         Format = format;

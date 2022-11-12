@@ -6,8 +6,8 @@ public class TesseractLanguageManager
 {
     private static readonly List<DownloadMirror> Mirrors = new()
     {
-        new(PlatformSupport.ModernWindows.Or(PlatformSupport.Linux), @"https://github.com/cyanfish/naps2-components/releases/download/tesseract-4.0.0b4/{0}"),
-        new(PlatformSupport.ModernWindows.Or(PlatformSupport.Linux), @"https://sourceforge.net/projects/naps2/files/components/tesseract-4.0.0b4/{0}/download")
+        new(@"https://github.com/cyanfish/naps2-components/releases/download/tesseract-4.0.0b4/{0}"),
+        new(@"https://sourceforge.net/projects/naps2/files/components/tesseract-4.0.0b4/{0}/download")
     };
 
     private readonly TesseractLanguageData _languageData = TesseractLanguageData.Latest;

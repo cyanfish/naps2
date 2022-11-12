@@ -8,8 +8,6 @@ public abstract class WindowsSystemCompat : ISystemCompat
 {
     public bool IsWiaDriverSupported => true;
 
-    public bool IsWia20Supported => PlatformSupport.ModernWindows.Validate();
-
     public bool IsTwainDriverSupported => true;
 
     public bool IsAppleDriverSupported => false;

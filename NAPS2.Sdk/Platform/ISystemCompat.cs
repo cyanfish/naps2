@@ -12,8 +12,6 @@ public interface ISystemCompat
 
     bool CanUseWin32 { get; }
 
-    bool IsWia20Supported { get; }
-
     bool UseSystemTesseract { get; }
 
     bool RenderInWorker { get; }
