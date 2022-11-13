@@ -1,13 +1,14 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net6</TargetFramework>
+    <TargetFramework>net7</TargetFramework>
     <Nullable>enable</Nullable>
     <OutputType>Exe</OutputType>
     <RootNamespace>NAPS2.Tools</RootNamespace>
     <AssemblyName>n2</AssemblyName>
     <Configurations>Debug</Configurations>
     <LangVersion>11</LangVersion>
+    <EnablePreviewFeatures>true</EnablePreviewFeatures>
   </PropertyGroup>
 
   <ItemGroup>
