@@ -130,11 +130,12 @@ public class MacDesktopForm : DesktopForm
         };
 
         var toolbar = new NSToolbar("naps2.desktop.toolbar");
-        toolbar.Delegate = new MacToolbarDelegate(CreateMacToolbarEntries());
+        toolbar.Delegate = new MacToolbarDelegate(CreateMacToolbarItems());
         toolbar.AllowsUserCustomization = true;
         // toolbar.AutosavesConfiguration = true;
         toolbar.DisplayMode = NSToolbarDisplayMode.Icon;
 
+        // TODO: Get rid of the borders/excessive padding on macOS 13
         var window = this.ToNative();
         window.Toolbar = toolbar;
         if (OperatingSystem.IsMacOSVersionAtLeast(11))
@@ -146,24 +147,24 @@ public class MacDesktopForm : DesktopForm
         window.StyleMask |= NSWindowStyle.UnifiedTitleAndToolbar;
     }
 
-    private List<MacToolbarEntry> CreateMacToolbarEntries()
+    private List<NSToolbarItem> CreateMacToolbarItems()
     {
-        return new List<MacToolbarEntry>
+        return new List<NSToolbarItem>
         {
-            new("scan", MacToolbarEntry.CreateItem(Commands.Scan, UiStrings.Scan)),
-            new("profiles", MacToolbarEntry.CreateItem(Commands.Profiles, UiStrings.Profiles)),
-            new("import", MacToolbarEntry.CreateItem(Commands.Import, UiStrings.Import)),
-            new("save", MacToolbarEntry.CreateMenuItem(Commands.Save, new MenuProvider()
+            MacToolbarItems.Create("scan", Commands.Scan, UiStrings.Scan),
+            MacToolbarItems.Create("profiles", Commands.Profiles, UiStrings.Profiles),
+            MacToolbarItems.Create("import", Commands.Import, UiStrings.Import),
+            MacToolbarItems.CreateMenu("save", Commands.Save, new MenuProvider()
                     .Append(Commands.SaveAllPdf)
                     .Append(Commands.SaveSelectedPdf)
                     .Append(Commands.SaveAllImages)
                     .Append(Commands.SaveSelectedImages),
-                UiStrings.Save)),
-            new("viewer", MacToolbarEntry.CreateItem(Commands.ViewImage)),
-            new("rotate", MacToolbarEntry.CreateMenuItem(Commands.RotateMenu, GetRotateMenuProvider())),
-            new("moveUp", MacToolbarEntry.CreateItem(Commands.MoveUp, tooltip: UiStrings.MoveUp)),
-            new("moveDown", MacToolbarEntry.CreateItem(Commands.MoveDown, tooltip: UiStrings.MoveDown)),
-            new("zoom", new NSToolbarItem
+                UiStrings.Save),
+            MacToolbarItems.Create("viewer", Commands.ViewImage),
+            MacToolbarItems.CreateMenu("rotate", Commands.RotateMenu, GetRotateMenuProvider()),
+            MacToolbarItems.Create("moveUp", Commands.MoveUp, tooltip: UiStrings.MoveUp),
+            MacToolbarItems.Create("moveDown", Commands.MoveDown, tooltip: UiStrings.MoveDown),
+            new NSToolbarItem("zoom")
             {
                 View = new NSSlider
                 {
@@ -174,7 +175,7 @@ public class MacDesktopForm : DesktopForm
                     Title = UiStrings.Zoom
                 }.WithAction(ZoomUpdated),
                 MaxSize = new CGSize(64, 999)
-            })
+            }
         };
     }
 

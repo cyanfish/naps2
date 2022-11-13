@@ -6,14 +6,14 @@ public class MacToolbarDelegate : NSToolbarDelegate
 {
     private readonly string[] _identifiers;
     private string[] _selectableIdentifiers;
-    private readonly Dictionary<string, MacToolbarEntry> _entryMap;
+    private readonly Dictionary<string, NSToolbarItem> _itemMap;
 
-    public MacToolbarDelegate(List<MacToolbarEntry> entries)
+    public MacToolbarDelegate(List<NSToolbarItem> items)
     {
-        _identifiers = entries.Select(x => x.Identifier).ToArray();
-        _selectableIdentifiers = entries.Where(x => x.Item is not ToolBarHandler.DividerToolbarItem)
+        _identifiers = items.Select(x => x.Identifier).ToArray();
+        _selectableIdentifiers = items.Where(x => x is not ToolBarHandler.DividerToolbarItem)
             .Select(x => x.Identifier).ToArray();
-        _entryMap = entries.ToDictionary(x => x.Identifier);
+        _itemMap = items.ToDictionary(x => x.Identifier);
     }
 
     public NativeHandle Handle { get; }
@@ -28,6 +28,6 @@ public class MacToolbarDelegate : NSToolbarDelegate
 
     public override NSToolbarItem? WillInsertItem(NSToolbar toolbar, string itemIdentifier, bool willBeInserted)
     {
-        return _entryMap.Get(itemIdentifier)?.Item;
+        return _itemMap.Get(itemIdentifier);
     }
 }

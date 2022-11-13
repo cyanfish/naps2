@@ -13,7 +13,7 @@ public class MacPreviewForm : PreviewForm
     protected override void CreateToolbar()
     {
         var toolbar = new NSToolbar("naps2.preview.toolbar");
-        toolbar.Delegate = new MacToolbarDelegate(CreateMacToolbarEntries());
+        toolbar.Delegate = new MacToolbarDelegate(CreateMacToolbarItems());
         toolbar.AllowsUserCustomization = true;
         // toolbar.AutosavesConfiguration = true;
         toolbar.DisplayMode = NSToolbarDisplayMode.Icon;
@@ -36,27 +36,28 @@ public class MacPreviewForm : PreviewForm
         }
     }
 
-    private List<MacToolbarEntry> CreateMacToolbarEntries()
+    private List<NSToolbarItem> CreateMacToolbarItems()
     {
-        return new List<MacToolbarEntry>
+        return new List<NSToolbarItem>
         {
-            new("prev", MacToolbarEntry.CreateItem(GoToPrevCommand, nav: true)),
-            new("next", MacToolbarEntry.CreateItem(GoToNextCommand, nav: true)),
-            new("rotate", MacToolbarEntry.CreateMenuItem(Commands.RotateMenu, new MenuProvider()
+            MacToolbarItems.Create("prev", GoToPrevCommand, nav: true),
+            MacToolbarItems.Create("next", GoToNextCommand, nav: true),
+            MacToolbarItems.CreateMenu("rotate", Commands.RotateMenu, new MenuProvider()
                 .Append(Commands.RotateLeft)
                 .Append(Commands.RotateRight)
                 .Append(Commands.Flip)
                 .Append(Commands.Deskew)
-                .Append(Commands.CustomRotate))),
-            new("crop", MacToolbarEntry.CreateItem(Commands.Crop)),
-            new("brightcont", MacToolbarEntry.CreateItem(Commands.BrightCont)),
-            new("huesat", MacToolbarEntry.CreateItem(Commands.HueSat)),
-            new("blackwhite", MacToolbarEntry.CreateItem(Commands.BlackWhite)),
-            new("sharpen", MacToolbarEntry.CreateItem(Commands.Sharpen)),
-            new("sep0", MacToolbarEntry.CreateSeparator()),
-            new("save", MacToolbarEntry.CreateItem(Commands.SaveSelected)),
-            new("sep1", MacToolbarEntry.CreateSeparator()),
-            new("delete", MacToolbarEntry.CreateItem(Commands.Delete)),
+                .Append(Commands.CustomRotate)),
+            MacToolbarItems.Create("crop", Commands.Crop),
+            MacToolbarItems.Create("brightcont", Commands.BrightCont),
+            MacToolbarItems.Create("huesat", Commands.HueSat),
+            MacToolbarItems.Create("blackwhite", Commands.BlackWhite),
+            MacToolbarItems.Create("sharpen", Commands.Sharpen),
+            MacToolbarItems.CreateSeparator("sep0"),
+            MacToolbarItems.Create("save", Commands.SaveSelected),
+            // TODO: Fix this
+            // MacToolbarItems.CreateSeparator("sep1"),
+            MacToolbarItems.Create("delete", Commands.Delete)
         };
     }
 }

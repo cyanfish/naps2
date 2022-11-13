@@ -4,40 +4,45 @@ using Eto.Mac.Forms.ToolBar;
 
 namespace NAPS2.EtoForms.Mac;
 
-public record MacToolbarEntry(string Identifier, NSToolbarItem? Item)
+public static class MacToolbarItems
 {
-    public static NSToolbarItem CreateSeparator()
+    public static NSToolbarItem CreateSeparator(string id)
     {
         return new ToolBarHandler.DividerToolbarItem(true);
     }
 
-    public static NSToolbarItem CreateItem(Command command, string? title = null, string? tooltip = null, bool nav = false)
+    public static NSToolbarItem Create(string id, Command command, string? title = null, string? tooltip = null,
+        bool nav = false)
     {
-        return new NSToolbarItem
+        var item = new NSToolbarItem(id)
         {
             Image = command.Image?.ToNS(),
             Title = title ?? "",
             Label = command.ToolBarText ?? "",
             ToolTip = tooltip ?? command.ToolBarText ?? "",
-            Bordered = true,
-            Navigational = nav
+            Bordered = true
         }.WithAction(command.Execute);
+        if (OperatingSystem.IsMacOSVersionAtLeast(11))
+        {
+            item.Navigational = nav;
+        }
+        return item;
     }
 
-    public static NSToolbarItem CreateMenuItem(Command menuCommand, MenuProvider menuProvider,
+    public static NSToolbarItem CreateMenu(string id, Command menuCommand, MenuProvider menuProvider,
         string? title = null, string? tooltip = null)
     {
-        return new NSMenuToolbarItem
+        return new NSMenuToolbarItem(id)
         {
             Image = menuCommand.Image?.ToNS(),
             Label = menuCommand.ToolBarText ?? "",
             Title = title ?? "",
             ToolTip = tooltip ?? menuCommand.ToolBarText ?? "",
-            Menu = CreateMenu(menuProvider)
+            Menu = CreateMenuObject(menuProvider)
         };
     }
 
-    private static NSMenu CreateMenu(MenuProvider menuProvider)
+    private static NSMenu CreateMenuObject(MenuProvider menuProvider)
     {
         var menu = new NSMenu();
         menuProvider.Handle(items =>
