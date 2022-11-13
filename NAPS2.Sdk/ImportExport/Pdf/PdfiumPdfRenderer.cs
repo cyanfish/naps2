@@ -56,36 +56,17 @@ public class PdfiumPdfRenderer : IPdfRenderer
                 yield return image;
                 continue;
             }
-            yield return RenderPageToNewImage(imageContext, page, renderSize);
+            yield return RenderPageToNewImage(imageContext, page, pageIndex, renderSize);
         }
     }
 
-    public unsafe IMemoryImage RenderPageToNewImage(ImageContext imageContext, PdfPage page, PdfRenderSize renderSize)
+    public unsafe IMemoryImage RenderPageToNewImage(ImageContext imageContext, PdfPage page, int pageIndex,
+        PdfRenderSize renderSize)
     {
         var widthInInches = page.Width / 72;
         var heightInInches = page.Height / 72;
-        
-        int widthInPx, heightInPx;
-        int xDpi, yDpi;
-        if (renderSize.Dpi != null)
-        {
-            // Cap the resolution to 10k pixels in each dimension
-            var dpi = renderSize.Dpi.Value;
-            dpi = Math.Min(dpi, 10000 / heightInInches);
-            dpi = Math.Min(dpi, 10000 / widthInInches);
 
-            widthInPx = (int) Math.Round(widthInInches * dpi);
-            heightInPx = (int) Math.Round(heightInInches * dpi);
-            xDpi = (int) Math.Round(dpi);
-            yDpi = (int) Math.Round(dpi);
-        }
-        else
-        {
-            widthInPx = renderSize.Width!.Value;
-            heightInPx = renderSize.Height!.Value;
-            xDpi = (int) Math.Round(widthInPx / widthInInches * 72);
-            yDpi = (int) Math.Round(widthInPx / heightInInches * 72);
-        }
+        var (widthInPx, heightInPx, xDpi, yDpi) = renderSize.GetDimensions(widthInInches, heightInInches, pageIndex);
 
         var bitmap = imageContext.Create(widthInPx, heightInPx, ImagePixelFormat.RGB24);
         bitmap.SetResolution(xDpi, yDpi);

@@ -31,6 +31,11 @@ public static class PdfAsserts
         Assert.Equal(1, CountText(text, filePath));
     }
 
+    public static void AssertDoesNotContainText(string text, string filePath)
+    {
+        Assert.Equal(0, CountText(text, filePath));
+    }
+
     private static int CountText(string text, string filePath)
     {
         Assert.True(File.Exists(filePath));
@@ -77,20 +82,16 @@ public static class PdfAsserts
     {
         Assert.True(File.Exists(filePath));
         var renderer = new PdfiumPdfRenderer();
-        // TODO: Optimize?
-        using var firstExpectedImage = TestImageContextFactory.Get().Load(expectedImages[0]);
-        // TODO: Can/should we specify size per page?
-        var actualImages = renderer.Render(TestImageContextFactory.Get(), filePath,
-            PdfRenderSize.FromDimensions(firstExpectedImage.Width, firstExpectedImage.Height), password).ToList();
-        // var actualImages = renderer.Render(
-        //     TestImageContextFactory.Get(),
-        //     filePath, 
-        //     i => expectedImages.Length > i ? expectedImages[i].HorizontalResolution : 300).ToList();
+        using var expectedImagesRendered =
+            expectedImages.Select(data => TestImageContextFactory.Get().Load(data)).ToDisposableList();
+        var renderSizes = PdfRenderSize.FromIndividualPageSizes(
+            expectedImagesRendered.Select(image => PdfRenderSize.FromDimensions(image.Width, image.Height)));
+        var actualImages = renderer.Render(TestImageContextFactory.Get(), filePath, renderSizes, password).ToList();
         Assert.Equal(expectedImages.Length, actualImages.Count);
         for (int i = 0; i < expectedImages.Length; i++)
         {
             // TODO: Try and fix resolution here
-            ImageAsserts.Similar(expectedImages[i], actualImages[i], ignoreResolution: true);
+            ImageAsserts.Similar(expectedImagesRendered[i], actualImages[i], ignoreResolution: true);
         }
     }
 
