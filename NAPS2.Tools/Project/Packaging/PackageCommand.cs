@@ -70,19 +70,23 @@ public static class PackageCommand
         }
 
         var appBuildPath = Path.Combine(Paths.SolutionRoot, "NAPS2.App.WinForms", "bin", "Release", "net462");
-        if (platform == Platform.Win32)
+        if (platform == Platform.Win)
+        {
+            AddPlatformFiles(pkgInfo, appBuildPath, "_win32");
+            AddPlatformFiles(pkgInfo, appBuildPath, "_win64");
+        }
+        else if (platform == Platform.Win32)
         {
             AddPlatformFiles(pkgInfo, appBuildPath, "_win32");
         }
         else if (platform == Platform.Win64)
         {
+            AddPlatformFiles(pkgInfo, appBuildPath, "_win64");
             // Special case as we have a 64 bit main app and a 32 bit worker
             AddPlatformFile(pkgInfo, appBuildPath, "_win32", "NAPS2.Wia.Native.dll");
-            AddPlatformFile(pkgInfo, appBuildPath, "_win64", "NAPS2.Wia.Native.dll");
             AddPlatformFile(pkgInfo, appBuildPath, "_win32", "twaindsm.dll");
-            AddPlatformFile(pkgInfo, appBuildPath, "_win64", "twaindsm.dll");
+            // TODO: We should run pdfium in a 64-bit worker
             AddPlatformFile(pkgInfo, appBuildPath, "_win32", "pdfium.dll");
-            AddPlatformFile(pkgInfo, appBuildPath, "_win64", "tesseract.exe");
         }
         else
         {

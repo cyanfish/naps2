@@ -1,3 +1,4 @@
+using System.Text;
 using System.Threading;
 
 namespace NAPS2.Tools;
@@ -34,10 +35,15 @@ public static class Cli
         }
         cancel.Register(proc.Kill);
         // TODO: Maybe we forward Console.CancelKeyPress
-        if (verbose)
+
+        var savedOutput = new StringBuilder();
+        void Save(object sender, DataReceivedEventArgs e)
         {
-            proc.OutputDataReceived += Print;
+            savedOutput.AppendLine(e.Data);
         }
+
+        proc.OutputDataReceived += verbose ? Print : Save;
+
         proc.ErrorDataReceived += Print;
         proc.BeginOutputReadLine();
         proc.BeginErrorReadLine();
@@ -46,7 +52,10 @@ public static class Cli
         }
         if (proc.ExitCode != 0)
         {
-            // TODO: If verbose=false, print out the stdout now
+            if (!verbose)
+            {
+                Console.Write(savedOutput);
+            }
             throw new Exception($"Command failed: {command} {args}");
         }
     }

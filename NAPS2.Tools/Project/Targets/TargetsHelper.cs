@@ -6,9 +6,10 @@ public static class TargetsHelper
 {
     public static string PackageName(this Platform platform) => platform switch
     {
+        Platform.Win => "win",
         Platform.Win32 => "win-x86",
         Platform.Win64 => "win-x64",
-        Platform.Mac => "mac-x64",
+        Platform.MacIntel => "mac-x64",
         Platform.MacArm => "mac-arm64",
         Platform.Linux => "linux-x64",
         Platform.LinuxArm => "linux-arm64",
@@ -24,23 +25,30 @@ public static class TargetsHelper
         }
         if (string.IsNullOrEmpty(platformOpt))
         {
-            platformOpt = constraints.AllowMultiplePlatforms ? "all" : GetBuildablePlatforms()[0].ToString();
+            platformOpt = constraints.AllowMultiplePlatforms ? "all" : GetBuildablePlatforms()[0].ToString().ToLowerInvariant();
         }
 
         string[] allowedBuildTypes = GetAllowedBuildTypes(constraints);
         string[] buildTypes = buildTypeOpt == "all" ? allowedBuildTypes : buildTypeOpt.Split("+");
-        if (buildTypes.Any(x => !allowedBuildTypes.Contains(x)))
+        foreach (var buildType in buildTypes)
         {
-            throw new Exception($"Invalid build type, expected one of {string.Join(",", allowedBuildTypes)}");
+            if (!allowedBuildTypes.Contains(buildType))
+            {
+                throw new Exception(
+                    $"Invalid build type '{buildType}', expected one of {string.Join(",", allowedBuildTypes)}");
+            }
         }
         var buildTypesParsed = buildTypes.Select(ParseBuildType).ToList();
 
         string[] allowedPlatforms = (constraints.RequireBuildablePlatform ? GetBuildablePlatforms() : GetAllPlatforms())
             .Select(x => x.ToString().ToLowerInvariant()).ToArray();
         string[] platforms = platformOpt == "all" ? allowedPlatforms : platformOpt.Split("+");
-        if (platforms.Any(x => !allowedPlatforms.Contains(x)))
+        foreach (var platform in platforms)
         {
-            throw new Exception($"Invalid platform, expected one of {string.Join(",", allowedPlatforms)}");
+            if (!allowedPlatforms.Contains(platform))
+            {
+                throw new Exception($"Invalid platform '{platform}', expected one of {string.Join(",", allowedPlatforms)}");
+            }
         }
         var platformsParsed = platforms.Select(ParsePlatform).ToList();
 
@@ -80,17 +88,17 @@ public static class TargetsHelper
     private static Platform[] GetAllPlatforms() =>
         new[]
         {
-            Platform.Win64, Platform.Win32, Platform.MacArm, Platform.Mac, Platform.Linux, Platform.LinuxArm
+            Platform.Win, Platform.Win64, Platform.Win32, Platform.MacArm, Platform.MacIntel, Platform.Linux, Platform.LinuxArm
         };
 
     private static Platform[] GetBuildablePlatforms()
     {
-        if (OperatingSystem.IsWindows()) return new[] { Platform.Win64, Platform.Win32 };
+        if (OperatingSystem.IsWindows()) return new[] { Platform.Win, Platform.Win64, Platform.Win32 };
         if (OperatingSystem.IsMacOS())
         {
             return RuntimeInformation.OSArchitecture == Architecture.Arm64
-                ? new[] { Platform.MacArm, Platform.Mac }
-                : new[] { Platform.Mac };
+                ? new[] { Platform.MacArm, Platform.MacIntel }
+                : new[] { Platform.MacIntel };
         }
         if (OperatingSystem.IsLinux())
         {

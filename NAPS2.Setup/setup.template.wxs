@@ -31,7 +31,7 @@
     </Feature>
 
     <Directory Id="TARGETDIR" Name="SourceDir">
-      <Directory Id="ProgramFiles{{ !64 }}64{{ !~64 }}Folder">
+      <Directory Id="ProgramFiles{{ !64 }}64{{ !~64 }}{{ !univ }}32{{ !~univ }}Folder">
         <Directory Id="INSTALLFOLDER" Name="NAPS2">
           <Directory Id="LIBFOLDER" Name="lib">
             <Directory Id="LIBWIN32FOLDER" Name="win32" />

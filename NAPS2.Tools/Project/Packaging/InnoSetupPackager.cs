@@ -28,14 +28,17 @@ public static class InnoSetupPackager
         defLines.AppendLine($"#define AppPlatform \"{packageInfo.Platform.PackageName()}\"");
         template = template.Replace("; !defs", defLines.ToString());
 
-        if (packageInfo.Platform == Platform.Win64)
+        var arch = new StringBuilder();
+        if (packageInfo.Platform is Platform.Win64 or Platform.Win)
         {
-            var arch = new StringBuilder();
             arch.AppendLine("ArchitecturesInstallIn64BitMode=x64");
-            arch.AppendLine("ArchitecturesAllowed=x64");
-            template = template.Replace("; !arch", arch.ToString());
             template = template.Replace("; !clean32", @"Type: filesandordirs; Name: ""{commonpf32}\NAPS2""");
         }
+        if (packageInfo.Platform == Platform.Win64)
+        {
+            arch.AppendLine("ArchitecturesAllowed=x64");
+        }
+        template = template.Replace("; !arch", arch.ToString());
 
         var fileLines = new StringBuilder();
         foreach (var pkgFile in packageInfo.Files)

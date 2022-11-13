@@ -37,7 +37,7 @@ public static class ProjectHelper
 
     public static string GetInstallationFolder(Platform platform)
     {
-        var pfVar = platform == Platform.Win64 ? "%PROGRAMFILES%" : "%PROGRAMFILES(X86)%";
+        var pfVar = platform == Platform.Win32 ? "%PROGRAMFILES(X86)%" : "%PROGRAMFILES%";
         var pfPath = Environment.ExpandEnvironmentVariables(pfVar);
         return Path.Combine(pfPath, "NAPS2");
     }

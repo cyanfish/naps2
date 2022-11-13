@@ -7,6 +7,7 @@ public static class ExeSetupVerifier
 {
     public static void Verify(Platform platform, string version, bool verbose)
     {
+        // TODO: Verify upgrades work correct (including for 32 -> 64 bit)
         ExeInstaller.Install(platform, version, false, verbose);
         Verifier.RunVerificationTests(ProjectHelper.GetInstallationFolder(platform), verbose);
 

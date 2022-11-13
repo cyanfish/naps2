@@ -68,7 +68,7 @@ public static class WixToolsetPackager
             {
                 var componentId = $"LangComponent_{ToId(langResource.DestPath)}";
                 langRefsLines.AppendLine($"<ComponentRef Id=\"{componentId}\" />");
-                langFilesLines.AppendLine($"<Component Id=\"{componentId}\">");
+                langFilesLines.AppendLine($"<Component Id=\"{componentId}\" Guid=\"{Guid.NewGuid()}\" >");
                 DeclareFile(langFilesLines, langResource);
                 langFilesLines.AppendLine("</Component>");
             }
@@ -79,6 +79,9 @@ public static class WixToolsetPackager
 
         var replacementFor64 = packageInfo.Platform == Platform.Win32 ? "" : "$3";
         template = Regex.Replace(template, "(<!--|{{) !64 (-->|}})(.*?)(<!--|{{) !~64 (-->|}})", replacementFor64, RegexOptions.Singleline);
+
+        var replacementForUniv = packageInfo.Platform == Platform.Win ? "$3" : "";
+        template = Regex.Replace(template, "(<!--|{{) !univ (-->|}})(.*?)(<!--|{{) !~univ (-->|}})", replacementForUniv, RegexOptions.Singleline);
 
         var wxsPath = Path.Combine(Paths.SetupObj, "setup.wxs");
         File.WriteAllText(wxsPath, template);
