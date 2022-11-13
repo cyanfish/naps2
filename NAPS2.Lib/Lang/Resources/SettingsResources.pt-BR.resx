@@ -13,7 +13,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="BitDepth_1BlackAndWhite" xml:space="preserve">
-    <value>Preto e Branco</value>
+    <value>Black/White</value>
   </data>
   <data name="BitDepth_24Color" xml:space="preserve">
     <value>Colorido 24 bits</value>
@@ -152,5 +152,14 @@
   </data>
   <data name="WiaVersion_Default" xml:space="preserve">
     <value>Padrão</value>
+  </data>
+  <data name="OcrMode_Fast" xml:space="preserve">
+    <value>Fast</value>
+  </data>
+  <data name="OcrMode_Best" xml:space="preserve">
+    <value>Best</value>
+  </data>
+  <data name="OcrMode_Legacy" xml:space="preserve">
+    <value>Legacy</value>
   </data>
 </root>

@@ -8,6 +8,9 @@ namespace NAPS2.App.Tests.Appium;
 [Collection("appium")]
 public class ScanAndSaveTests : AppiumTests
 {
+    private const string WIA_DEVICE_NAME = "";
+    private const string TWAIN_DEVICE_NAME = "Canon MP495 ser";
+
     [VerifyFact(AllowDebug = true)]
     public void ScanWiaSavePdf()
     {
@@ -16,12 +19,15 @@ public class ScanAndSaveTests : AppiumTests
         // WIA driver is selected by default, so we open the WIA device dialog
         ClickAtName("Choose device");
         Thread.Sleep(100);
+        if (WIA_DEVICE_NAME != "") ClickAtName(WIA_DEVICE_NAME);
         // Click OK in the wia device dialog (selecting the first available device by default)
-        ClickAt(_session.FindElementsByName("OK")[1]);
+        // TODO: More consistent way to pick the right OK button
+        ClickAt(_session.FindElementsByName("OK")[0]);
+        WaitUntilGone("Properties", 1_000);
         // Click OK in the profile settings window
         ClickAtName("OK");
         // Wait for scanning to finish
-        WaitUntilGone("Cancel");
+        WaitUntilGone("Cancel", 30_000);
         ResetMainWindow();
         // Save "test.pdf" in the default location (which will be the test data path as NAPS2 knows we're in a test)^
         ClickAtName("Save PDF");
@@ -47,12 +53,14 @@ public class ScanAndSaveTests : AppiumTests
         // Open the TWAIN device dialog
         ClickAtName("Choose device");
         Thread.Sleep(100);
+        if (TWAIN_DEVICE_NAME != "") ClickAtName(TWAIN_DEVICE_NAME);
         // Click Select in the twain device dialog (selecting the first available device by default)
         ClickAtName("Select");
+        WaitUntilGone("Select", 1_000);
         // Click OK in the profile settings window
         ClickAtName("OK");
         // Wait for scanning to finish
-        WaitUntilGone("Cancel");
+        WaitUntilGone("Cancel", 30_000);
         ResetMainWindow();
         // Save "test.pdf" in the default location (which will be the test data path as NAPS2 knows we're in a test)^
         ClickAtName("Save Images");

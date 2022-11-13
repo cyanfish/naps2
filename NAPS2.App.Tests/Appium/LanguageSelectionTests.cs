@@ -12,40 +12,47 @@ public class LanguageSelectionTests : AppiumTests
     // TODO: Verify why zh-TW isn't here (and that hi still hasn't been translated)
     private static readonly HashSet<string> ExpectedMissingLanguages = new() { "zh-TW", "hi" };
 
-    [VerifyFact]
+    [VerifyFact(AllowDebug = true)]
     public void OpenLanguageDropdown()
     {
         // Open the Language dropdown
         ClickAtName("Language");
         var menuItems = GetMenuItems();
-    
-        // Verify all expected languages have menu items
-        var menuItemTexts = menuItems.Select(x => x.Text).ToHashSet();
-        var allLanguages = GetAllLanguages();
-        var missingLanguages = allLanguages
-            .Where(x => !menuItemTexts.Contains(x.langName) && !ExpectedMissingLanguages.Contains(x.langCode)).ToList();
-        Assert.True(missingLanguages.Count == 0, $"Missing languages: {string.Join(",", missingLanguages)}");
-    
+
+        if (!Debugger.IsAttached)
+        {
+            // Verify all expected languages have menu items
+            var menuItemTexts = menuItems.Select(x => x.Text).ToHashSet();
+            var allLanguages = GetAllLanguages();
+            var missingLanguages = allLanguages
+                .Where(x => !menuItemTexts.Contains(x.langName) && !ExpectedMissingLanguages.Contains(x.langCode))
+                .ToList();
+            Assert.True(missingLanguages.Count == 0, $"Missing languages: {string.Join(",", missingLanguages)}");
+        }
+
         // Verify French (fr) translation as a standard language example
-        ClickAtName("Français");
-        ClickAtName("Langue");
+        ClickAndResetWindow("Français");
+        ClickAndResetWindow("Langue");
         
         // Verify Portuguese (pt-BR) translation as a country-specific language example
-        ClickAtName("Português (Brasil)");
-        ClickAtName("Idioma");
+        ClickAndResetWindow("Português (Brasil)");
+        ClickAndResetWindow("Idioma");
         
         // Verify Hebrew translation as a RTL language example
-        ClickAtName("עברית");
-        // Toggling RTL causes a new window to be created
-        ResetMainWindow();
-        ClickAtName("שפה");
+        ClickAndResetWindow("עברית");
+        ClickAndResetWindow("שפה");
     
         // And back to English
-        ClickAtName("English");
-        ResetMainWindow();
+        ClickAndResetWindow("English");
         ClickAtName("Language");
     
         AppTestHelper.AssertNoErrorLog(FolderPath);
+    }
+
+    private void ClickAndResetWindow(string name)
+    {
+        ClickAtName(name);
+        ResetMainWindow();
     }
 
     private List<(string langCode, string langName)> GetAllLanguages()

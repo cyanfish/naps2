@@ -1,5 +1,6 @@
 using System.Threading;
 using NAPS2.Sdk.Tests;
+using OpenQA.Selenium;
 using OpenQA.Selenium.Appium;
 using OpenQA.Selenium.Appium.Windows;
 
@@ -28,8 +29,9 @@ public class AppiumTests : ContextualTests
         base.Dispose();
     }
 
-    protected void WaitUntilGone(string name)
+    protected void WaitUntilGone(string name, int timeoutInMs)
     {
+        var stopwatch = Stopwatch.StartNew();
         try
         {
             while (true)
@@ -37,6 +39,10 @@ public class AppiumTests : ContextualTests
                 if (_session.FindElementsByName(name).Count == 0)
                 {
                     break;
+                }
+                if (stopwatch.ElapsedMilliseconds > timeoutInMs)
+                {
+                    throw new WebDriverException("Timeout waiting for element to be gone");
                 }
                 Thread.Sleep(100);
             }
@@ -61,7 +67,7 @@ public class AppiumTests : ContextualTests
 
     protected void ClickAtName(string name)
     {
-        ClickAt(_session.FindElementByName(name));
+        ClickAt(WaitAndFindElementByName(name));
     }
 
     protected void DoubleClickAt(WindowsElement element)
@@ -75,6 +81,23 @@ public class AppiumTests : ContextualTests
 
     protected void DoubleClickAtName(string name)
     {
-        DoubleClickAt(_session.FindElementByName(name));
+        DoubleClickAt(WaitAndFindElementByName(name));
+    }
+
+    protected WindowsElement WaitAndFindElementByName(string name)
+    {
+        int i = 0;
+        while(true)
+        {
+            try
+            {
+                return _session.FindElementByName(name);
+            }
+            catch (WebDriverException)
+            {
+                if (++i > 10) throw;
+                Thread.Sleep(100);
+            }
+        }
     }
 }

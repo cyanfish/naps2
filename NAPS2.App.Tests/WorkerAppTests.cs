@@ -14,7 +14,7 @@ public class WorkerAppTests : ContextualTests
         try
         {
             Assert.Equal("ready", process.StandardOutput.ReadLine());
-            string pipeName = $"NAPS2.Worker/{process.Id}";
+            string pipeName = $"NAPS2.Worker.{process.Id}";
             var client = new WorkerServiceAdapter(new NamedPipeChannel(".", pipeName));
             client.Init(FolderPath);
             AppTestHelper.AssertNoErrorLog(FolderPath);
