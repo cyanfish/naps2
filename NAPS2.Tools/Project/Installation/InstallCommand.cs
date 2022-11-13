@@ -2,9 +2,9 @@ using NAPS2.Tools.Project.Targets;
 
 namespace NAPS2.Tools.Project.Installation;
 
-public static class InstallCommand
+public class InstallCommand : ICommand<InstallOptions>
 {
-    public static int Run(InstallOptions opts)
+    public int Run(InstallOptions opts)
     {
         var version = ProjectHelper.GetDefaultProjectVersion();
 
@@ -19,7 +19,7 @@ public static class InstallCommand
                 case BuildType.Exe:
                     if (target.Platform.IsLinux())
                     {
-                        FlatpakInstaller.Install(target.Platform, version, opts.Run, opts.Verbose);
+                        FlatpakInstaller.Install(target.Platform, version, opts.Run);
                     }
                     else if (target.Platform.IsMac())
                     {
@@ -27,11 +27,11 @@ public static class InstallCommand
                     }
                     else if (target.Platform.IsWindows())
                     {
-                        ExeInstaller.Install(target.Platform, version, opts.Run, opts.Verbose);
+                        ExeInstaller.Install(target.Platform, version, opts.Run);
                     }
                     break;
                 case BuildType.Msi:
-                    MsiInstaller.Install(target.Platform, version, opts.Run, opts.Verbose);
+                    MsiInstaller.Install(target.Platform, version, opts.Run);
                     break;
             }
         }

@@ -1,8 +1,8 @@
 namespace NAPS2.Tools.Project;
 
-public static class ShareCommand
+public class ShareCommand : ICommand<ShareOptions>
 {
-    public static int Run(ShareOptions opts)
+    public int Run(ShareOptions opts)
     {
         bool doIn = opts.ShareType is "both" or "in";
         bool doOut = opts.ShareType is "both" or "out";
@@ -24,27 +24,27 @@ public static class ShareCommand
         var l = doIn ? "<" : "";
         var r = doOut ? ">" : "";
         var arrow = $"{l}-{r}";
-        Console.WriteLine($"Syncing {localFolder} {arrow} {syncFolder}");
+        Output.Info($"Syncing {localFolder} {arrow} {syncFolder}");
 
         if (doIn)
         {
             foreach (var file in GetFiles(syncFolder))
             {
-                CopyFileIfNewer(file, localFolder, opts.Verbose);
+                CopyFileIfNewer(file, localFolder);
             }
         }
         if (doOut)
         {
             foreach (var file in GetFiles(localFolder))
             {
-                CopyFileIfNewer(file, syncFolder, opts.Verbose);
+                CopyFileIfNewer(file, syncFolder);
             }
         }
-        Console.WriteLine("Done.");
+        Output.Info("Done.");
         return 0;
     }
 
-    private static void CopyFileIfNewer(FileInfo file, string targetFolder, bool verbose)
+    private static void CopyFileIfNewer(FileInfo file, string targetFolder)
     {
         var targetFile = new FileInfo(Path.Combine(targetFolder, file.Name));
         if (!targetFile.Exists || targetFile.LastWriteTimeUtc < file.LastWriteTimeUtc)
@@ -55,7 +55,7 @@ public static class ShareCommand
                 File.Move(targetFile.FullName, tempPath);
                 try
                 {
-                    Console.WriteLine($"Replacing {file.FullName} -> {targetFile.FullName}");
+                    Output.Info($"Replacing {file.FullName} -> {targetFile.FullName}");
                     file.CopyTo(targetFile.FullName);
                     File.Delete(tempPath);
                 }
@@ -67,17 +67,14 @@ public static class ShareCommand
             }
             else
             {
-                Console.WriteLine($"Copying {file.FullName} -> {targetFile.FullName}");
+                Output.Info($"Copying {file.FullName} -> {targetFile.FullName}");
                 file.CopyTo(targetFile.FullName);
             }
         }
         else
         {
-            if (verbose)
-            {
-                var time = targetFile.LastWriteTimeUtc == file.LastWriteTimeUtc ? "same" : "older";
-                Console.WriteLine($"Ignoring {file.FullName} ({time})");
-            }
+            var time = targetFile.LastWriteTimeUtc == file.LastWriteTimeUtc ? "same" : "older";
+            Output.Verbose($"Ignoring {file.FullName} ({time})");
         }
     }
 

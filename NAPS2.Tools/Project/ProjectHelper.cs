@@ -47,7 +47,7 @@ public static class ProjectHelper
         var folder = GetInstallationFolder(platform);
         if (Directory.Exists(folder))
         {
-            Console.WriteLine($"Deleting old installation: {folder}");
+            Output.Info($"Deleting old installation: {folder}");
             try
             {
                 Directory.Delete(folder, true);

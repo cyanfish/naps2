@@ -2,13 +2,13 @@ using NAPS2.Tools.Project.Targets;
 
 namespace NAPS2.Tools.Project.Verification;
 
-public static class VerifyCommand
+public class VerifyCommand : ICommand<VerifyOptions>
 {
-    public static int Run(VerifyOptions opts)
+    public int Run(VerifyOptions opts)
     {
         var version = ProjectHelper.GetDefaultProjectVersion();
         
-        using var appDriverRunner = AppDriverRunner.Start(opts.Verbose);
+        using var appDriverRunner = AppDriverRunner.Start();
 
         var constraints = new TargetConstraints
         {
@@ -19,13 +19,13 @@ public static class VerifyCommand
             switch (target.BuildType)
             {
                 case BuildType.Exe:
-                    ExeSetupVerifier.Verify(target.Platform, version, opts.Verbose);
+                    ExeSetupVerifier.Verify(target.Platform, version);
                     break;
                 case BuildType.Msi:
-                    MsiSetupVerifier.Verify(target.Platform, version, opts.Verbose);
+                    MsiSetupVerifier.Verify(target.Platform, version);
                     break;
                 case BuildType.Zip:
-                    ZipArchiveVerifier.Verify(target.Platform, version, opts.Verbose, opts.NoCleanup);
+                    ZipArchiveVerifier.Verify(target.Platform, version, opts.NoCleanup);
                     break;
             }
         }

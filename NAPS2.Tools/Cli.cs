@@ -5,7 +5,7 @@ namespace NAPS2.Tools;
 
 public static class Cli
 {
-    public static void Run(string command, string args, bool verbose, Dictionary<string, string>? env = null, CancellationToken cancel = default)
+    public static void Run(string command, string args, Dictionary<string, string>? env = null, CancellationToken cancel = default)
     {
         var startInfo = new ProcessStartInfo
         {
@@ -24,10 +24,7 @@ public static class Cli
                 startInfo.EnvironmentVariables[kvp.Key] = kvp.Value;
             }
         }
-        if (verbose)
-        {
-            Console.WriteLine($"{command} {args}");
-        }
+        Output.Verbose($"{command} {args}");
         var proc = Process.Start(startInfo);
         if (proc == null)
         {
@@ -42,8 +39,7 @@ public static class Cli
             savedOutput.AppendLine(e.Data);
         }
 
-        proc.OutputDataReceived += verbose ? Print : Save;
-
+        proc.OutputDataReceived += Output.EnableVerbose ? Print : Save;
         proc.ErrorDataReceived += Print;
         proc.BeginOutputReadLine();
         proc.BeginErrorReadLine();
@@ -52,7 +48,7 @@ public static class Cli
         }
         if (proc.ExitCode != 0 && !cancel.IsCancellationRequested)
         {
-            if (!verbose)
+            if (!Output.EnableVerbose)
             {
                 Console.Write(savedOutput);
             }
@@ -62,6 +58,9 @@ public static class Cli
 
     private static void Print(object sender, DataReceivedEventArgs e)
     {
-        Console.WriteLine(e.Data);
+        if (!string.IsNullOrWhiteSpace(e.Data))
+        {
+            Console.WriteLine(e.Data);
+        }
     }
 }

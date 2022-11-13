@@ -3,7 +3,7 @@ using CommandLine;
 namespace NAPS2.Tools.Project.Installation;
 
 [Verb("install", HelpText = "Install the packaged app, 'install {exe|msi}'")]
-public class InstallOptions
+public class InstallOptions : OptionsBase
 {
     [Value(0, MetaName = "build type", Required = true, HelpText = "exe|msi")]
     public string? BuildType { get; set; }
@@ -13,7 +13,4 @@ public class InstallOptions
     
     [Option('r', "run", Required = false, HelpText = "Run NAPS2 after installation")]
     public bool Run { get; set; }
-
-    [Option('v', "verbose", Required = false, HelpText = "Show full output")]
-    public bool Verbose { get; set; }
 }

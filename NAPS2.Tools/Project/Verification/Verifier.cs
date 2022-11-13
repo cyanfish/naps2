@@ -2,17 +2,14 @@ namespace NAPS2.Tools.Project.Verification;
 
 public static class Verifier
 {
-    public static void RunVerificationTests(string testRoot, bool verbose)
+    public static void RunVerificationTests(string testRoot)
     {
-        Console.WriteLine($"Running verification tests in: {testRoot}");
-        Cli.Run("dotnet", "test NAPS2.App.Tests -f net462", verbose, new()
+        Output.Info($"Running verification tests in: {testRoot}");
+        Cli.Run("dotnet", "test NAPS2.App.Tests -f net462", new()
         {
             { "NAPS2_TEST_ROOT", testRoot },
             { "NAPS2_TEST_VERIFY", "1" }
         });
-        if (verbose)
-        {
-            Console.WriteLine($"Ran verification tests in: {testRoot}");
-        }
+        Output.Verbose($"Ran verification tests in: {testRoot}");
     }
 }

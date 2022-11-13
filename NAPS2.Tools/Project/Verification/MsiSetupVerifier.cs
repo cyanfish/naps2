@@ -5,12 +5,12 @@ namespace NAPS2.Tools.Project.Verification;
 
 public static class MsiSetupVerifier
 {
-    public static void Verify(Platform platform, string version, bool verbose)
+    public static void Verify(Platform platform, string version)
     {
-        MsiInstaller.Install(platform, version, false, verbose);
-        Verifier.RunVerificationTests(ProjectHelper.GetInstallationFolder(platform), verbose);
+        MsiInstaller.Install(platform, version, false);
+        Verifier.RunVerificationTests(ProjectHelper.GetInstallationFolder(platform));
 
         var msiPath = ProjectHelper.GetPackagePath("msi", platform, version);
-        Console.WriteLine(verbose ? $"Verified msi installer: {msiPath}" : "Done.");
+        Output.OperationEnd($"Verified msi installer: {msiPath}");
     }
 }

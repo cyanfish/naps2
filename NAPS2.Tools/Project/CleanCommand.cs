@@ -1,10 +1,10 @@
 namespace NAPS2.Tools.Project;
 
-public static class CleanCommand
+public class CleanCommand : ICommand<CleanOptions>
 {
-    public static int Run(CleanOptions opts)
+    public int Run(CleanOptions opts)
     {
-        Console.WriteLine("Starting clean");
+        Output.Info("Starting clean");
         foreach (var projectDir in new DirectoryInfo(Paths.SolutionRoot).EnumerateDirectories("NAPS2.*")
                      .Where(x => x.Name.ToLower() != "naps2.tools"))
         {
@@ -19,17 +19,13 @@ public static class CleanCommand
                     }
                     catch (Exception ex)
                     {
-                        Console.WriteLine(
-                            $"Could not delete {projectDir.Name}/{cleanDir.Name}/{subDir.Name}: {ex.Message}");
+                        Output.Info($"Could not delete {projectDir.Name}/{cleanDir.Name}/{subDir.Name}: {ex.Message}");
                     }
                 }
             }
-            if (opts.Verbose)
-            {
-                Console.WriteLine($"Cleaned {projectDir.Name}");
-            }
+            Output.Verbose($"Cleaned {projectDir.Name}");
         }
-        Console.WriteLine("Cleaned.");
+        Output.Info("Cleaned.");
         return 0;
     }
 }

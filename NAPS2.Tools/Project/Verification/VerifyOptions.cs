@@ -3,7 +3,7 @@ using CommandLine;
 namespace NAPS2.Tools.Project.Verification;
 
 [Verb("verify", HelpText = "Verify the packaged app, 'verify {all|exe|msi|zip}'")]
-public class VerifyOptions
+public class VerifyOptions : OptionsBase
 {
     [Value(0, MetaName = "build type", Required = true, HelpText = "all|exe|msi|zip")]
     public string? BuildType { get; set; }
@@ -13,7 +13,4 @@ public class VerifyOptions
 
     [Option("nocleanup", Required = false, HelpText = "Skip cleaning up temp files")]
     public bool NoCleanup { get; set; }
-
-    [Option('v', "verbose", Required = false, HelpText = "Show full output")]
-    public bool Verbose { get; set; }
 }

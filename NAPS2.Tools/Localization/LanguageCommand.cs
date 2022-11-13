@@ -1,8 +1,10 @@
-﻿namespace NAPS2.Tools.Localization;
+﻿using NAPS2.Tools.Project;
 
-public static class LanguageCommand
+namespace NAPS2.Tools.Localization;
+
+public class LanguageCommand : ICommand<LanguageOptions>
 {
-    public static int Run(LanguageOptions opts)
+    public int Run(LanguageOptions opts)
     {
         // TODO: Handle null langCode to detect all languages
         var langCode = opts.LanguageCode;

@@ -3,9 +3,9 @@ using NAPS2.Tools.Project.Targets;
 
 namespace NAPS2.Tools.Project.Packaging;
 
-public static class PackageCommand
+public class PackageCommand : ICommand<PackageOptions>
 {
-    public static int Run(PackageOptions opts)
+    public int Run(PackageOptions opts)
     {
         // TODO: Allow customizing dotnet version
         var constraints = new TargetConstraints
@@ -22,22 +22,22 @@ public static class PackageCommand
                     // we should rename the config)
                     if (target.Platform.IsLinux())
                     {
-                        FlatpakPackager.Package(GetPackageInfo(target.Platform, "InstallerEXE"), opts.NoPre, opts.Verbose);
+                        FlatpakPackager.Package(GetPackageInfo(target.Platform, "InstallerEXE"), opts.NoPre);
                     }
                     else if (target.Platform.IsMac())
                     {
-                        MacPackager.Package(GetPackageInfo(target.Platform, "InstallerEXE"), opts.Verbose);
+                        MacPackager.Package(GetPackageInfo(target.Platform, "InstallerEXE"));
                     }
                     else if (target.Platform.IsWindows())
                     {
-                        InnoSetupPackager.PackageExe(GetPackageInfo(target.Platform, "InstallerEXE"), opts.Verbose);
+                        InnoSetupPackager.PackageExe(GetPackageInfo(target.Platform, "InstallerEXE"));
                     }
                     break;
                 case BuildType.Msi:
-                    WixToolsetPackager.PackageMsi(GetPackageInfo(target.Platform, "InstallerMSI"), opts.Verbose);
+                    WixToolsetPackager.PackageMsi(GetPackageInfo(target.Platform, "InstallerMSI"));
                     break;
                 case BuildType.Zip:
-                    ZipArchivePackager.PackageZip(GetPackageInfo(target.Platform, "Standalone"), opts.Verbose);
+                    ZipArchivePackager.PackageZip(GetPackageInfo(target.Platform, "Standalone"));
                     break;
             }
         }

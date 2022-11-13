@@ -6,14 +6,14 @@ namespace NAPS2.Tools.Project.Packaging;
 
 public static class FlatpakPackager
 {
-    public static void Package(PackageInfo packageInfo, bool noPre, bool verbose)
+    public static void Package(PackageInfo packageInfo, bool noPre)
     {
         // TODO: This only uses committed files, which is different from other packagers - maybe we can fix that somehow
 
         var bundlePath = packageInfo.GetPath("flatpak");
-        Console.WriteLine($"Packaging flatpak: {bundlePath}");
+        Output.Info($"Packaging flatpak: {bundlePath}");
 
-        VerifyCanBuildArch(packageInfo.Platform, verbose);
+        VerifyCanBuildArch(packageInfo.Platform);
 
         // Update metainfo file with the current version/date
         var metaInfo = File.ReadAllText(Path.Combine(Paths.Setup, "com.naps2.Naps2.metainfo.xml"));
@@ -46,15 +46,15 @@ public static class FlatpakPackager
             // This is needed as the build sandbox doesn't have internet access
             // TODO: Maybe have an option to just restore for the current arch? When we do an upload we definitely want all
             // of them, but for just building a single file we only need the current
-            if (verbose) Console.WriteLine($"Generating nuget sources");
+            Output.Verbose("Generating nuget sources");
             var scriptPath = Path.Combine(Paths.Setup, "flatpak-dotnet-generator.py");
             var nugetSourcesPath = Path.Combine(packageDir, "nuget-sources.json");
             var projectPath = Path.Combine(Paths.SolutionRoot, "NAPS2.App.Gtk", "NAPS2.App.Gtk.csproj");
-            Cli.Run("python3", $"{scriptPath} {nugetSourcesPath} {projectPath}", verbose);
+            Cli.Run("python3", $"{scriptPath} {nugetSourcesPath} {projectPath}");
         }
 
         // Do the actual flatpak build
-        if (verbose) Console.WriteLine($"Running flatpak build");
+        Output.Verbose("Running flatpak build");
         var buildDir = Path.Combine(packageDir, "build-dir");
         var manifestPath = Path.Combine(packageDir, "com.naps2.Naps2.yml");
         var arch = packageInfo.Platform switch
@@ -63,30 +63,29 @@ public static class FlatpakPackager
             _ => "x86_64"
         };
         var stateDir = Path.Combine(packageDir, "builder-state");
-        Cli.Run("flatpak-builder", $"--arch {arch} --force-clean --state-dir {stateDir} {buildDir} {manifestPath}",
-            verbose);
+        Cli.Run("flatpak-builder", $"--arch {arch} --force-clean --state-dir {stateDir} {buildDir} {manifestPath}");
 
         // Generate a temp repo with the package info
-        if (verbose) Console.WriteLine($"Creating flatpak repo");
+        Output.Verbose("Creating flatpak repo");
         var repoDir = Path.Combine(packageDir, "repo");
-        Cli.Run("flatpak", $"build-export --arch {arch} {repoDir} {buildDir}", verbose);
+        Cli.Run("flatpak", $"build-export --arch {arch} {repoDir} {buildDir}");
 
         // Generate a single-file bundle from the temp repo
-        if (verbose) Console.WriteLine($"Building flatpak bundle");
-        Cli.Run("flatpak", $"build-bundle --arch {arch} {repoDir} {bundlePath} com.naps2.Naps2", verbose);
+        Output.Verbose("Building flatpak bundle");
+        Cli.Run("flatpak", $"build-bundle --arch {arch} {repoDir} {bundlePath} com.naps2.Naps2");
 
-        Console.WriteLine(verbose ? $"Packaged flatpak: {bundlePath}" : "Done.");
+        Output.OperationEnd($"Packaged flatpak: {bundlePath}");
     }
 
-    private static void VerifyCanBuildArch(Platform platform, bool verbose)
+    private static void VerifyCanBuildArch(Platform platform)
     {
         if (platform == Platform.Linux && RuntimeInformation.OSArchitecture != Architecture.X64)
         {
-            Cli.Run("qemu-x86_64-static", "--version", verbose);
+            Cli.Run("qemu-x86_64-static", "--version");
         }
         if (platform == Platform.LinuxArm && RuntimeInformation.OSArchitecture != Architecture.Arm64)
         {
-            Cli.Run("qemu-aarch64-static", "--version", verbose);
+            Cli.Run("qemu-aarch64-static", "--version");
         }
     }
 }

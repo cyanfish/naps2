@@ -17,21 +17,53 @@ public static class Program
     // - Updates language resources for that language
     // - Possibly then runs "pkg zip --name test-{lang}"
 
-    public static void Main(string[] args) =>
-        Parser.Default
-            .ParseArguments<CleanOptions, BuildOptions, TestOptions, PackageOptions, InstallOptions, VerifyOptions,
-                PublishOptions, VirusScanOptions, ShareOptions, TemplatesOptions, LanguageOptions, SaneOptsOptions>(args).MapResult(
-                (CleanOptions opts) => CleanCommand.Run(opts),
-                (BuildOptions opts) => BuildCommand.Run(opts),
-                (TestOptions opts) => TestCommand.Run(opts),
-                (PackageOptions opts) => PackageCommand.Run(opts),
-                (InstallOptions opts) => InstallCommand.Run(opts),
-                (VerifyOptions opts) => VerifyCommand.Run(opts),
-                (PublishOptions opts) => PublishCommand.Run(opts),
-                (VirusScanOptions opts) => VirusScanCommand.Run(opts),
-                (ShareOptions opts) => ShareCommand.Run(opts),
-                (TemplatesOptions opts) => TemplatesCommand.Run(opts),
-                (LanguageOptions opts) => LanguageCommand.Run(opts),
-                (SaneOptsOptions opts) => SaneOptsCommand.Run(opts),
-                errors => 1);
+    public static int Main(string[] args)
+    {
+        var commands = new CommandList()
+            .Add<CleanOptions, CleanCommand>()
+            .Add<BuildOptions, BuildCommand>()
+            .Add<TestOptions, TestCommand>()
+            .Add<PackageOptions, PackageCommand>()
+            .Add<InstallOptions, InstallCommand>()
+            .Add<VerifyOptions, VerifyCommand>()
+            .Add<PublishOptions, PublishCommand>()
+            .Add<VirusScanOptions, VirusScanCommand>()
+            .Add<ShareOptions, ShareCommand>()
+            .Add<TemplatesOptions, TemplatesCommand>()
+            .Add<LanguageOptions, LanguageCommand>()
+            .Add<SaneOptsOptions, SaneOptsCommand>();
+
+        var result = Parser.Default.ParseArguments(args, commands.OptionTypes);
+        if (result.Errors.Any())
+        {
+            return 1;
+        }
+        var options = (OptionsBase) result.Value;
+        Output.EnableVerbose = options.Verbose;
+        var commandType = commands.GetCommandType(options.GetType());
+        var command = Activator.CreateInstance(commandType);
+        var run = commandType.GetMethod("Run") ?? throw new InvalidOperationException();
+        run.Invoke(command, new object?[] { options });
+        return 0;
+    }
+
+    public class CommandList
+    {
+        private readonly List<Type> _optionTypes = new();
+        private readonly Dictionary<Type, Type> _optionTypeToCommandType = new();
+
+        public CommandList Add<TOption, TCommand>() where TOption : OptionsBase where TCommand : ICommand<TOption>
+        {
+            _optionTypes.Add(typeof(TOption));
+            _optionTypeToCommandType.Add(typeof(TOption), typeof(TCommand));
+            return this;
+        }
+
+        public Type[] OptionTypes => _optionTypes.ToArray();
+
+        public Type GetCommandType(Type optionType)
+        {
+            return _optionTypeToCommandType[optionType];
+        }
+    }
 }

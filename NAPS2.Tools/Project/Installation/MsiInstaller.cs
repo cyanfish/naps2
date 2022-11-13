@@ -4,12 +4,12 @@ namespace NAPS2.Tools.Project.Installation;
 
 public static class MsiInstaller
 {
-    public static void Install(Platform platform, string version, bool run, bool verbose)
+    public static void Install(Platform platform, string version, bool run)
     {
         ProjectHelper.DeleteInstallationFolder(platform);
 
         var msiPath = ProjectHelper.GetPackagePath("msi", platform, version);
-        Console.WriteLine($"Starting msi installer: {msiPath}");
+        Output.Info($"Starting msi installer: {msiPath}");
 
         var process = Process.Start(new ProcessStartInfo
         {
@@ -27,6 +27,6 @@ public static class MsiInstaller
             Process.Start(Path.Combine(ProjectHelper.GetInstallationFolder(platform), "NAPS2.exe"));
         }
 
-        Console.WriteLine("Installed.");
+        Output.Info("Installed.");
     }
 }

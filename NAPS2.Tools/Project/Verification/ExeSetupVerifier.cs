@@ -5,18 +5,18 @@ namespace NAPS2.Tools.Project.Verification;
 
 public static class ExeSetupVerifier
 {
-    public static void Verify(Platform platform, string version, bool verbose)
+    public static void Verify(Platform platform, string version)
     {
         // Verify upgrades delete old files, including moving from "Program Files (x86)" to "Program Files".
         using var upgradeTest = new UpgradeTest(platform);
 
-        ExeInstaller.Install(platform, version, false, verbose);
-        Verifier.RunVerificationTests(ProjectHelper.GetInstallationFolder(platform), verbose);
+        ExeInstaller.Install(platform, version, false);
+        Verifier.RunVerificationTests(ProjectHelper.GetInstallationFolder(platform));
 
         upgradeTest.Verify();
 
         var exePath = ProjectHelper.GetPackagePath("exe", platform, version);
-        Console.WriteLine(verbose ? $"Verified exe installer: {exePath}" : "Done.");
+        Output.OperationEnd($"Verified exe installer: {exePath}");
     }
 
     private class UpgradeTest : IDisposable

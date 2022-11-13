@@ -6,17 +6,17 @@ public class AppDriverRunner : IDisposable
 {
     private readonly CancellationTokenSource _cts = new();
 
-    public static AppDriverRunner Start(bool verbose)
+    public static AppDriverRunner Start()
     {
-        return new AppDriverRunner(verbose);
+        return new AppDriverRunner();
     }
 
-    private AppDriverRunner(bool verbose)
+    private AppDriverRunner()
     {
         var path = @"C:\Program Files (x86)\Windows Application Driver\WinAppDriver.exe";
         new Thread(() =>
         {
-            Cli.Run(path, "", verbose, cancel: _cts.Token);
+            Cli.Run(path, "", cancel: _cts.Token);
             // TODO: Wait for successful starting and handle errors (e.g. if the dev doesn't have developer mode on)
         }).Start();
     }

@@ -4,12 +4,12 @@ namespace NAPS2.Tools.Project.Installation;
 
 public static class ExeInstaller
 {
-    public static void Install(Platform platform, string version, bool run, bool verbose)
+    public static void Install(Platform platform, string version, bool run)
     {
         ProjectHelper.DeleteInstallationFolder(platform);
 
         var exePath = ProjectHelper.GetPackagePath("exe", platform, version);
-        Console.WriteLine($"Starting exe installer: {exePath}");
+        Output.Info($"Starting exe installer: {exePath}");
 
         var process = Process.Start(new ProcessStartInfo
         {
@@ -27,6 +27,6 @@ public static class ExeInstaller
             ProjectHelper.CloseMostRecentNaps2();
         }
 
-        Console.WriteLine("Installed.");
+        Output.Info("Installed.");
     }
 }

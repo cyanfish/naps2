@@ -3,34 +3,25 @@ using NAPS2.Tools.Project.Verification;
 
 namespace NAPS2.Tools.Project.Workflows;
 
-public static class PublishCommand
+public class PublishCommand : ICommand<PublishOptions>
 {
-    public static int Run(PublishOptions opts)
+    public int Run(PublishOptions opts)
     {
-        CleanCommand.Run(new CleanOptions
+        new CleanCommand().Run(new CleanOptions());
+        new BuildCommand().Run(new BuildOptions
         {
-            Verbose = opts.Verbose
+            BuildType = opts.BuildType
         });
-        BuildCommand.Run(new BuildOptions
-        {
-            BuildType = opts.BuildType,
-            Verbose = opts.Verbose
-        });
-        TestCommand.Run(new TestOptions
-        {
-            Verbose = opts.Verbose
-        });
-        PackageCommand.Run(new PackageOptions
+        new TestCommand().Run(new TestOptions());
+        new PackageCommand().Run(new PackageOptions
         {
             BuildType = opts.BuildType,
-            Platform = opts.Platform,
-            Verbose = opts.Verbose
+            Platform = opts.Platform
         });
-        VerifyCommand.Run(new VerifyOptions
+        new VerifyCommand().Run(new VerifyOptions
         { 
             BuildType = opts.BuildType,
-            Platform = opts.Platform,
-            Verbose = opts.Verbose
+            Platform = opts.Platform
         });
         return 0;
     }

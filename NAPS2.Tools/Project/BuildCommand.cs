@@ -2,9 +2,9 @@ using NAPS2.Tools.Project.Targets;
 
 namespace NAPS2.Tools.Project;
 
-public static class BuildCommand
+public class BuildCommand : ICommand<BuildOptions>
 {
-    public static int Run(BuildOptions opts)
+    public int Run(BuildOptions opts)
     {
         var constraints = new TargetConstraints
         {
@@ -13,9 +13,9 @@ public static class BuildCommand
         foreach (var target in TargetsHelper.Enumerate(opts.BuildType, null, constraints))
         {
             var config = GetConfig(target.BuildType);
-            Console.WriteLine($"Building: {config}");
-            Cli.Run("dotnet", $"build -c {config}", opts.Verbose);
-            Console.WriteLine(opts.Verbose ? $"Built: {config}" : "Built.");
+            Output.Info($"Building: {config}");
+            Cli.Run("dotnet", $"build -c {config}");
+            Output.OperationEnd($"Built: {config}");
         }
         return 0;
     }

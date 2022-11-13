@@ -1,16 +1,16 @@
 namespace NAPS2.Tools.Project;
 
-public static class TestCommand
+public class TestCommand : ICommand<TestOptions>
 {
-    public static int Run(TestOptions opts)
+    public int Run(TestOptions opts)
     {
         // TODO: Framework options (e.g. "-f net462")
-        Console.WriteLine("Running tests");
-        Cli.Run("dotnet", "test", opts.Verbose, new()
+        Output.Info("Running tests");
+        Cli.Run("dotnet", "test", new()
         {
             {"NAPS2_TEST_ROOT", Path.Combine(Paths.SolutionRoot, "NAPS2.App.Tests", "bin", "Debug", "net462")}
         });
-        Console.WriteLine("Tests passed.");
+        Output.Info("Tests passed.");
         return 0;
     }
 }

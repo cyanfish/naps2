@@ -5,18 +5,18 @@ namespace NAPS2.Tools.Project.Packaging;
 
 public static class InnoSetupPackager
 {
-    public static void PackageExe(PackageInfo packageInfo, bool verbose)
+    public static void PackageExe(PackageInfo packageInfo)
     {
         var exePath = packageInfo.GetPath("exe");
-        Console.WriteLine($"Packaging exe installer: {exePath}");
+        Output.Info($"Packaging exe installer: {exePath}");
 
         var innoDefPath = GenerateInnoDef(packageInfo);
 
         // TODO: Use https://github.com/DomGries/InnoDependencyInstaller for .net dependency
         var iscc = Environment.ExpandEnvironmentVariables("%PROGRAMFILES(X86)%/Inno Setup 6/iscc.exe");
-        Cli.Run(iscc, $"\"{innoDefPath}\"", verbose);
+        Cli.Run(iscc, $"\"{innoDefPath}\"");
 
-        Console.WriteLine(verbose ? $"Packaged exe installer: {exePath}" : "Done.");
+        Output.OperationEnd($"Packaged exe installer: {exePath}");
     }
 
     private static string GenerateInnoDef(PackageInfo packageInfo)

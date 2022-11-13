@@ -1,8 +1,9 @@
 using System.Text.RegularExpressions;
+using NAPS2.Tools.Project;
 
 namespace NAPS2.Tools.Localization;
 
-public static class SaneOptsCommand
+public class SaneOptsCommand : ICommand<SaneOptsOptions>
 {
     private static readonly string[] NeededStrings =
     {
@@ -20,7 +21,7 @@ public static class SaneOptsCommand
         "fb"
     };
 
-    public static int Run(SaneOptsOptions opts)
+    public int Run(SaneOptsOptions opts)
     {
         var dirPath = Path.Combine(Paths.SolutionRoot, "..", "naps2-sane", "sources", "sane-backends", "po");
         var dir = new DirectoryInfo(dirPath);

@@ -1,8 +1,10 @@
-﻿namespace NAPS2.Tools.Localization;
+﻿using NAPS2.Tools.Project;
 
-public static class TemplatesCommand
+namespace NAPS2.Tools.Localization;
+
+public class TemplatesCommand : ICommand<TemplatesOptions>
 {
-    public static int Run(TemplatesOptions opts)
+    public int Run(TemplatesOptions opts)
     {
         var ctx = new TemplatesContext();
         ctx.Load(Path.Combine(Paths.SolutionRoot, @"NAPS2.Core\Lang\Resources"), false);

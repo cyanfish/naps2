@@ -4,14 +4,14 @@ using VirusTotalNet.ResponseCodes;
 
 namespace NAPS2.Tools.Project.Verification;
 
-public static class VirusScanCommand
+public class VirusScanCommand : ICommand<VirusScanOptions>
 {
-    public static int Run(VirusScanOptions opts)
+    public int Run(VirusScanOptions opts)
     {
-        Console.WriteLine("Checking for antivirus false positives");
+        Output.Info("Checking for antivirus false positives");
         var version = ProjectHelper.GetDefaultProjectVersion();
 
-        using var appDriverRunner = AppDriverRunner.Start(opts.Verbose);
+        using var appDriverRunner = AppDriverRunner.Start();
 
         var constraints = new TargetConstraints
         {
@@ -23,25 +23,22 @@ public static class VirusScanCommand
             switch (target.BuildType)
             {
                 case BuildType.Exe:
-                    tasks.Add(StartVirusScan(ProjectHelper.GetPackagePath("exe", target.Platform, version),
-                        opts.Verbose));
+                    tasks.Add(StartVirusScan(ProjectHelper.GetPackagePath("exe", target.Platform, version)));
                     break;
                 case BuildType.Msi:
-                    tasks.Add(StartVirusScan(ProjectHelper.GetPackagePath("msi", target.Platform, version),
-                        opts.Verbose));
+                    tasks.Add(StartVirusScan(ProjectHelper.GetPackagePath("msi", target.Platform, version)));
                     break;
                 case BuildType.Zip:
-                    tasks.Add(StartVirusScan(ProjectHelper.GetPackagePath("zip", target.Platform, version),
-                        opts.Verbose));
+                    tasks.Add(StartVirusScan(ProjectHelper.GetPackagePath("zip", target.Platform, version)));
                     break;
             }
         }
         Task.WaitAll(tasks.ToArray());
-        Console.WriteLine(opts.Verbose ? "No antivirus false positives." : "Done.");
+        Output.OperationEnd("No antivirus false positives.");
         return 0;
     }
 
-    private static async Task StartVirusScan(string packagePath, bool verbose)
+    private static async Task StartVirusScan(string packagePath)
     {
         var key = await File.ReadAllTextAsync(Path.Combine(Paths.Naps2UserFolder, "virustotal"));
         VirusTotal virusTotal = new VirusTotal(key)
@@ -53,19 +50,16 @@ public static class VirusScanCommand
         var report = await virusTotal.GetFileReportAsync(file);
         if (report.ResponseCode == FileReportResponseCode.NotPresent)
         {
-            if (verbose)
-            {
-                Console.WriteLine($"Uploading to VirusTotal: {packagePath}");
-            }
+            Output.Verbose($"Uploading to VirusTotal: {packagePath}");
             await virusTotal.ScanFileAsync(await File.ReadAllBytesAsync(packagePath), Path.GetFileName(packagePath));
         }
-        else if (verbose)
+        else
         {
-            Console.WriteLine(report.ResponseCode == FileReportResponseCode.Queued
+            Output.Verbose(report.ResponseCode == FileReportResponseCode.Queued
                 ? $"VirusTotal already has a report queued for: {packagePath}"
                 : $"VirusTotal already has a report completed for: {packagePath}");
         }
-        Console.WriteLine($"Report permalink: {report.Permalink}");
+        Output.Info($"Report permalink: {report.Permalink}");
         while (report.ResponseCode != FileReportResponseCode.Present)
         {
             await Task.Delay(15000);
@@ -75,6 +69,6 @@ public static class VirusScanCommand
         {
             throw new Exception($"VirusTotal has {report.Positives} engines with positive flags. {report.Permalink}");
         }
-        Console.WriteLine($"No false positives.");
+        Output.Info($"No false positives.");
     }
 }

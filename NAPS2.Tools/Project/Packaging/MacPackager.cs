@@ -4,13 +4,13 @@ namespace NAPS2.Tools.Project.Packaging;
 
 public static class MacPackager
 {
-    public static void Package(PackageInfo packageInfo, bool verbose)
+    public static void Package(PackageInfo packageInfo)
     {
         var pkgPath = packageInfo.GetPath("pkg");
-        Console.WriteLine($"Packaging installer: {pkgPath}");
+        Output.Info($"Packaging installer: {pkgPath}");
 
         var runtimeId = packageInfo.Platform == Platform.MacArm ? "osx-arm64" : "osx-x64";
-        Cli.Run("dotnet", $"publish NAPS2.App.Mac -c InstallerEXE -r {runtimeId}", verbose);
+        Cli.Run("dotnet", $"publish NAPS2.App.Mac -c InstallerEXE -r {runtimeId}");
         // TODO: Fix version
         var sourcePath = Path.Combine(Paths.SolutionRoot, "NAPS2.App.Mac", "bin", "InstallerEXE", "net7-macos10.15",
             runtimeId, "publish", "NAPS2-1.0.pkg");
@@ -20,6 +20,6 @@ public static class MacPackager
         }
         File.Copy(sourcePath, pkgPath);
 
-        Console.WriteLine(verbose ? $"Packaged installer: {pkgPath}" : "Done.");
+        Output.OperationEnd($"Packaged installer: {pkgPath}");
     }
 }
