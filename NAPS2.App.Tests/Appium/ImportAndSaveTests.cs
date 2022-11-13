@@ -12,13 +12,13 @@ public class ImportAndSaveTests : AppiumTests
     [VerifyFact(AllowDebug = true)]
     public void ImportVariousAndSavePdfWithOcr()
     {
-        File.WriteAllBytes(Path.Combine(FolderPath, "word.pdf"), PdfResources.word_generated_pdf);
-        File.WriteAllBytes(Path.Combine(FolderPath, "patcht.pdf"), PdfResources.word_patcht_pdf);
-        File.WriteAllBytes(Path.Combine(FolderPath, "image.pdf"), PdfResources.image_pdf);
-        File.WriteAllBytes(Path.Combine(FolderPath, "text.jpg"), BinaryResources.ocr_test);
+        CopyResourceToFile(PdfResources.word_generated_pdf, "word.pdf");
+        CopyResourceToFile(PdfResources.word_patcht_pdf, "patcht.pdf");
+        CopyResourceToFile(PdfResources.image_pdf, "image.pdf");
+        CopyResourceToFile(BinaryResources.ocr_test, "text.jpg");
         var tessdata = Path.Combine(FolderPath, "components", "tesseract4", "fast");
         Directory.CreateDirectory(tessdata);
-        File.WriteAllBytes(Path.Combine(tessdata, "eng.traineddata"), BinaryResources.eng_traineddata);
+        CopyResourceToFile(BinaryResources.eng_traineddata, tessdata, "eng.traineddata");
         
         ImportFile("word.pdf");
         ImportFile("patcht.pdf");
@@ -38,7 +38,7 @@ public class ImportAndSaveTests : AppiumTests
         ClickAtName("Save");
         // Wait for the save to finish
         Thread.Sleep(100);
-        WaitUntilGone("Cancel");
+        WaitUntilGone("Cancel", 10_000);
 
         var path = Path.Combine(FolderPath, "test.pdf");
         PdfAsserts.AssertImages(path, 
@@ -47,10 +47,9 @@ public class ImportAndSaveTests : AppiumTests
             PdfResources.word_patcht_p1,
             ImageResources.dog,
             ImageResources.ocr_test);
-        PdfAsserts.AssertContainsTextOnce("ADVERTISEMENT.", path);
         PdfAsserts.AssertContainsTextOnce("Page one.", path);
         PdfAsserts.AssertContainsTextOnce("Page two.", path);
-        // TODO: This is failing right now
+        PdfAsserts.AssertContainsTextOnce("ADVERTISEMENT.", path);
         PdfAsserts.AssertContainsTextOnce("Sized for printing unscaled", path);
         AppTestHelper.AssertNoErrorLog(FolderPath);
     }

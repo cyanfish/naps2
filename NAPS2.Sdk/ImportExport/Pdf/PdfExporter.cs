@@ -40,6 +40,9 @@ public class PdfExporter : IPdfExporter
             // Export is also complicated by the fact that we may or may not have OCR enabled, and when it is enabled,
             // we want to parallelize and pipeline the different operations (image rendering, OCR, PDF saving) to
             // maximize performance.
+            //
+            // It would be simpler if we could use Pdfium for everything, but it doesn't support a lot of features we
+            // need, e.g. configuring interpolation, encryption, PDF/A, etc.
 
             var document = InitializeDocument(exportParams);
 
@@ -56,7 +59,7 @@ public class PdfExporter : IPdfExporter
                 foreach (var image in images)
                 {
                     var pageState = new PageExportState(
-                        image, pageIndex++, document, ocrEngine, ocrParams, progress.CancelToken, exportParams.Compat);
+                        image, pageIndex++, document, document.AddPage(), ocrEngine, ocrParams, progress.CancelToken, exportParams.Compat);
                     // TODO: To improve our ability to passthrough, we could consider using Pdfium to apply the transform to
                     // the underlying PDF file. For example, doing color shifting on individual text + image objects, or
                     // applying matrix changes.
@@ -104,12 +107,10 @@ public class PdfExporter : IPdfExporter
                 await pdfPagesOcrPipeline;
 
                 // TODO: Doing in memory as that's presumably faster than IO, but of course that's quite a bit of memory use potentially...
-                var stream = FinalizeAndSaveDocument(document, exportParams, out var placeholderPage);
+                var stream = FinalizeAndSaveDocument(document, exportParams);
 
                 var passthroughPages = pdfPages.Where(x => !x.NeedsOcr).ToList();
-                // TODO: We probably should just use PdfSharp to import the pages, as long as it supports it - just need some tests to cover the case when pdfsharp fails to load a pdf
-                // Although it makes me wonder if there are any cases where PdfSharp can mess up an imported file without an error...
-                MergePassthroughPages(stream, path, passthroughPages, exportParams, placeholderPage);
+                MergePassthroughPages(stream, path, passthroughPages, exportParams);
             }
             finally
             {
@@ -125,14 +126,10 @@ public class PdfExporter : IPdfExporter
     }
 
     private void MergePassthroughPages(MemoryStream stream, string path, List<PageExportState> passthroughPages,
-        PdfExportParams exportParams, bool placeholderPage)
+        PdfExportParams exportParams)
     {
         if (!passthroughPages.Any())
         {
-            if (placeholderPage)
-            {
-                throw new Exception("No pages to save");
-            }
             using var fileStream = new FileStream(path, FileMode.Create);
             stream.CopyTo(fileStream);
             return;
@@ -147,12 +144,9 @@ public class PdfExporter : IPdfExporter
                 var password = exportParams.Encryption.EncryptPdf ? exportParams.Encryption.OwnerPassword : null;
                 using var destDoc =
                     Pdfium.PdfDocument.Load(destHandle.AddrOfPinnedObject(), (int) stream.Length, password);
-                if (placeholderPage)
-                {
-                    destDoc.DeletePage(0);
-                }
                 foreach (var state in passthroughPages)
                 {
+                    destDoc.DeletePage(state.PageIndex);
                     if (state.Image.Storage is ImageFileStorage fileStorage)
                     {
                         using var sourceDoc = Pdfium.PdfDocument.Load(fileStorage.FullPath);
@@ -242,8 +236,6 @@ public class PdfExporter : IPdfExporter
         // TODO: Try and avoid locking somehow
         lock (state.Document)
         {
-            // TODO: We need to serialize page adding somehow
-            PdfPage page = state.Document.AddPage();
             // TODO: Is there any way we can clean this up?
             var exportFormat = new ImageExportHelper()
                 .GetExportFormat(state.RenderedImage!, state.Image.Metadata.BitDepth, state.Image.Metadata.Lossless);
@@ -256,26 +248,18 @@ public class PdfExporter : IPdfExporter
             {
                 state.RenderedImage = state.RenderedImage.PerformTransform(new BlackWhiteTransform());
             }
-            DrawImageOnPage(page, state.RenderedImage!, exportFormat, state.Compat);
+            DrawImageOnPage(state.Page, state.RenderedImage!, exportFormat, state.Compat);
             // TODO: Maybe split this up to a different step
             if (state.OcrTask?.Result != null)
             {
-                DrawOcrTextOnPage(page, state.OcrTask.Result);
+                DrawOcrTextOnPage(state.Page, state.OcrTask.Result);
             }
         }
         return state;
     }
 
-    private static MemoryStream FinalizeAndSaveDocument(PdfDocument document, PdfExportParams exportParams,
-        out bool placeholderPage)
+    private static MemoryStream FinalizeAndSaveDocument(PdfDocument document, PdfExportParams exportParams)
     {
-        placeholderPage = false;
-        if (document.PageCount == 0)
-        {
-            document.AddPage();
-            placeholderPage = true;
-        }
-
         var compat = exportParams.Compat;
         var now = DateTime.Now;
         document.Info.CreationDate = now;
@@ -463,12 +447,13 @@ public class PdfExporter : IPdfExporter
 
     private class PageExportState
     {
-        public PageExportState(ProcessedImage image, int pageIndex, PdfDocument document, IOcrEngine? ocrEngine,
-            OcrParams? ocrParams, CancellationToken cancelToken, PdfCompat compat)
+        public PageExportState(ProcessedImage image, int pageIndex, PdfDocument document, PdfPage page,
+            IOcrEngine? ocrEngine, OcrParams? ocrParams, CancellationToken cancelToken, PdfCompat compat)
         {
             Image = image;
             PageIndex = pageIndex;
             Document = document;
+            Page = page;
             OcrEngine = ocrEngine;
             OcrParams = ocrParams;
             CancelToken = cancelToken;
@@ -479,6 +464,7 @@ public class PdfExporter : IPdfExporter
         public int PageIndex { get; }
 
         public PdfDocument Document { get; }
+        public PdfPage Page { get; set; }
         public IOcrEngine? OcrEngine { get; }
         public OcrParams? OcrParams { get; }
         public CancellationToken CancelToken { get; }

@@ -21,23 +21,23 @@ public class PdfImportExportTests : ContextualTests
     }
 
     [Theory]
-    [ClassData(typeof(StorageAwareTestData))]
-    public async Task ImportExport(StorageConfig storageConfig)
+    [ClassData(typeof(OcrTestData))]
+    public async Task ImportExport(OcrTestConfig config)
     {
-        storageConfig.Apply(this);
+        config.StorageConfig.Apply(this);
 
         var images = await _importer.Import(_importPath).ToListAsync();
         Assert.Equal(2, images.Count);
-        await _exporter.Export(_exportPath, images, new PdfExportParams());
+        await _exporter.Export(_exportPath, images, new PdfExportParams(), config.OcrParams);
 
         PdfAsserts.AssertImages(_exportPath, PdfResources.word_p1, PdfResources.word_p2);
     }
 
     [Theory]
-    [ClassData(typeof(StorageAwareTestData))]
-    public async Task ImportInsertExport(StorageConfig storageConfig)
+    [ClassData(typeof(OcrTestData))]
+    public async Task ImportInsertExport(OcrTestConfig config)
     {
-        storageConfig.Apply(this);
+        config.StorageConfig.Apply(this);
 
         var images = await _importer.Import(_importPath).ToListAsync();
         Assert.Equal(2, images.Count);
@@ -49,16 +49,16 @@ public class PdfImportExportTests : ContextualTests
             toInsert,
             images[1]
         };
-        await _exporter.Export(_exportPath, newImages, new PdfExportParams());
+        await _exporter.Export(_exportPath, newImages, new PdfExportParams(), config.OcrParams);
 
         PdfAsserts.AssertImages(_exportPath, PdfResources.word_p1, ImageResources.dog, PdfResources.word_p2);
     }
 
     [Theory]
-    [ClassData(typeof(StorageAwareTestData))]
-    public async Task ImportTransformExport(StorageConfig storageConfig)
+    [ClassData(typeof(OcrTestData))]
+    public async Task ImportTransformExport(OcrTestConfig config)
     {
-        storageConfig.Apply(this);
+        config.StorageConfig.Apply(this);
 
         var images = await _importer.Import(_importPath).ToListAsync();
         Assert.Equal(2, images.Count);
@@ -71,15 +71,15 @@ public class PdfImportExportTests : ContextualTests
         ImageAsserts.Similar(PdfResources.word_p1_rotated, newImages[0], ignoreResolution: true);
         ImageAsserts.Similar(PdfResources.word_p2_bw, newImages[1], ignoreResolution: true);
 
-        await _exporter.Export(_exportPath, newImages, new PdfExportParams());
+        await _exporter.Export(_exportPath, newImages, new PdfExportParams(), config.OcrParams);
         PdfAsserts.AssertImages(_exportPath, PdfResources.word_p1_rotated, PdfResources.word_p2_bw);
     }
 
     [Theory]
-    [ClassData(typeof(StorageAwareTestData))]
-    public async Task ImportExportWithOcr(StorageConfig storageConfig)
+    [ClassData(typeof(OcrTestData))]
+    public async Task ImportExportOcrablePdf(OcrTestConfig config)
     {
-        storageConfig.Apply(this);
+        config.StorageConfig.Apply(this);
         SetUpOcr();
 
         var importPathForOcr = Path.Combine(FolderPath, "import_ocr.pdf");
@@ -93,17 +93,24 @@ public class PdfImportExportTests : ContextualTests
 
         var allImages = images.Concat(imagesForOcr).ToList();
 
-        await _exporter.Export(_exportPath, allImages, new PdfExportParams(), new OcrParams("eng", OcrMode.Fast, 0));
+        await _exporter.Export(_exportPath, allImages, new PdfExportParams(), config.OcrParams);
         PdfAsserts.AssertImages(_exportPath, PdfResources.word_p1, PdfResources.word_p2, PdfResources.word_patcht_p1);
         PdfAsserts.AssertContainsTextOnce("Page one.", _exportPath);
-        PdfAsserts.AssertContainsTextOnce("Sized for printing unscaled", _exportPath);
+        if (config.OcrParams != null)
+        {
+            PdfAsserts.AssertContainsTextOnce("Sized for printing unscaled", _exportPath);
+        }
+        else
+        {
+            PdfAsserts.AssertDoesNotContainText("Sized for printing unscaled", _exportPath);
+        }
     }
 
     [Theory]
-    [ClassData(typeof(StorageAwareTestData))]
-    public async Task ImportExportEncrypted(StorageConfig storageConfig)
+    [ClassData(typeof(OcrTestData))]
+    public async Task ImportExportEncrypted(OcrTestConfig config)
     {
-        storageConfig.Apply(this);
+        config.StorageConfig.Apply(this);
 
         var images = await _importer.Import(_importPath).ToListAsync();
         Assert.Equal(2, images.Count);
@@ -115,9 +122,51 @@ public class PdfImportExportTests : ContextualTests
                 OwnerPassword = "hello",
                 UserPassword = "world"
             }
-        });
+        }, config.OcrParams);
 
         PdfAsserts.AssertEncrypted(_exportPath, "hello", "world");
         PdfAsserts.AssertImages(_exportPath, "world", PdfResources.word_p1, PdfResources.word_p2);
+    }
+
+    [Theory]
+    [ClassData(typeof(OcrTestData))]
+    public async Task ImportVariousAndExport(OcrTestConfig config)
+    {
+        config.StorageConfig.Apply(this);
+
+        var f1 = CopyResourceToFile(PdfResources.word_generated_pdf, "word.pdf");
+        var f2 = CopyResourceToFile(PdfResources.word_patcht_pdf, "patcht.pdf");
+        var f3 = CopyResourceToFile(PdfResources.image_pdf, "image.pdf");
+
+        var images = new List<ProcessedImage>();
+
+        images.AddRange(await _importer.Import(f1).ToListAsync());
+        images.AddRange(await _importer.Import(f2).ToListAsync());
+        images.AddRange(await _importer.Import(f3).ToListAsync());
+        images.Add(ScanningContext.CreateProcessedImage(LoadImage(ImageResources.ocr_test)));
+        Assert.Equal(5, images.Count);
+
+        SetUpOcr();
+        await _exporter.Export(_exportPath, images, new PdfExportParams(), config.OcrParams);
+
+        PdfAsserts.AssertImages(_exportPath,
+            PdfResources.word_p1,
+            PdfResources.word_p2,
+            PdfResources.word_patcht_p1,
+            ImageResources.dog,
+            ImageResources.ocr_test);
+
+        PdfAsserts.AssertContainsTextOnce("Page one.", _exportPath);
+        PdfAsserts.AssertContainsTextOnce("Page two.", _exportPath);
+        if (config.OcrParams != null)
+        {
+            PdfAsserts.AssertContainsTextOnce("ADVERTISEMENT.", _exportPath);
+            PdfAsserts.AssertContainsTextOnce("Sized for printing unscaled", _exportPath);
+        }
+        else
+        {
+            PdfAsserts.AssertDoesNotContainText("ADVERTISEMENT.", _exportPath);
+            PdfAsserts.AssertDoesNotContainText("Sized for printing unscaled", _exportPath);
+        }
     }
 }
