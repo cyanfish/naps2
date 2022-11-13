@@ -16,15 +16,8 @@ public class AppDriverRunner : IDisposable
         var path = @"C:\Program Files (x86)\Windows Application Driver\WinAppDriver.exe";
         new Thread(() =>
         {
-            try
-            {
-                Cli.Run(path, "", verbose, cancel: _cts.Token);
-                // TODO: Wait for successful starting and handle errors (e.g. if the dev doesn't have developer mode on)
-            }
-            catch (Exception)
-            {
-                // Errors expected after we kill it
-            }
+            Cli.Run(path, "", verbose, cancel: _cts.Token);
+            // TODO: Wait for successful starting and handle errors (e.g. if the dev doesn't have developer mode on)
         }).Start();
     }
 

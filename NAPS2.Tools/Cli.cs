@@ -50,7 +50,7 @@ public static class Cli
         while (!proc.WaitForExit(100))
         {
         }
-        if (proc.ExitCode != 0)
+        if (proc.ExitCode != 0 && !cancel.IsCancellationRequested)
         {
             if (!verbose)
             {
