@@ -21,6 +21,8 @@ namespace NAPS2.ImportExport.Pdf
 
         public bool SinglePagePdf { get; set; }
 
+        public bool ShowFolder { get; set; }
+
         public PdfMetadata Metadata
         {
             get => metadata;

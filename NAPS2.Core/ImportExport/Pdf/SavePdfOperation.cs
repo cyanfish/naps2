@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -172,6 +173,12 @@ namespace NAPS2.ImportExport.Pdf
                             Pages = snapshots.Count,
                             FileFormat = ".pdf"
                         });
+
+                        if (pdfSettings.ShowFolder)
+                        {
+                            String filePath = Path.GetDirectoryName(fileName);
+                            Process.Start("explorer.exe", filePath);
+                        }
                     }
                 }
             }, TaskContinuationOptions.OnlyOnRanToCompletion);

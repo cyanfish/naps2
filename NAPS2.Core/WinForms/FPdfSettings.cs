@@ -46,6 +46,7 @@ namespace NAPS2.WinForms
             txtDefaultFilePath.Text = pdfSettings.DefaultFileName;
             cbSkipSavePrompt.Checked = pdfSettings.SkipSavePrompt;
             cbSinglePagePdf.Checked = pdfSettings.SinglePagePdf;
+            cbShowFolder.Checked = pdfSettings.ShowFolder;
             txtTitle.Text = pdfSettings.Metadata.Title;
             txtAuthor.Text = pdfSettings.Metadata.Author;
             txtSubject.Text = pdfSettings.Metadata.Subject;
@@ -84,6 +85,7 @@ namespace NAPS2.WinForms
                 DefaultFileName = txtDefaultFilePath.Text,
                 SkipSavePrompt = cbSkipSavePrompt.Checked,
                 SinglePagePdf = cbSinglePagePdf.Checked,
+                ShowFolder = cbShowFolder.Checked,
                 Metadata =
                 {
                     Title = txtTitle.Text,
@@ -163,6 +165,11 @@ namespace NAPS2.WinForms
             {
                 txtDefaultFilePath.Text = savePath;
             }
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
