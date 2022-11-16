@@ -9,6 +9,7 @@ public static class TargetsHelper
         Platform.Win => "win",
         Platform.Win32 => "win-x86",
         Platform.Win64 => "win-x64",
+        Platform.Mac => "mac",
         Platform.MacIntel => "mac-x64",
         Platform.MacArm => "mac-arm64",
         Platform.Linux => "linux-x64",
@@ -88,7 +89,7 @@ public static class TargetsHelper
     private static Platform[] GetAllPlatforms() =>
         new[]
         {
-            Platform.Win, Platform.Win64, Platform.Win32, Platform.MacArm, Platform.MacIntel, Platform.Linux, Platform.LinuxArm
+            Platform.Win, Platform.Win64, Platform.Win32, Platform.Mac, Platform.MacArm, Platform.MacIntel, Platform.Linux, Platform.LinuxArm
         };
 
     private static Platform[] GetBuildablePlatforms()
@@ -97,7 +98,7 @@ public static class TargetsHelper
         if (OperatingSystem.IsMacOS())
         {
             return RuntimeInformation.OSArchitecture == Architecture.Arm64
-                ? new[] { Platform.MacArm, Platform.MacIntel }
+                ? new[] { Platform.Mac, Platform.MacArm, Platform.MacIntel }
                 : new[] { Platform.MacIntel };
         }
         if (OperatingSystem.IsLinux())

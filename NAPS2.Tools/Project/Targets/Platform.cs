@@ -5,6 +5,7 @@ public enum Platform
     Win,
     Win32,
     Win64,
+    Mac,
     MacIntel,
     MacArm,
     Linux,
