@@ -26,7 +26,7 @@
   
   <ItemGroup>
     <PackageReference Include="NAPS2.Sane.Binaries" Version="1.0.4" />
-    <PackageReference Include="NAPS2.Tesseract.Binaries" Version="1.0.2" />
+    <PackageReference Include="NAPS2.Tesseract.Binaries" Version="1.0.3" />
 
     <ProjectReference Include="..\NAPS2.Lib.Mac\NAPS2.Lib.Mac.csproj" />
 
