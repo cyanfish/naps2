@@ -8,12 +8,7 @@
     <Version>7.0.1</Version>
     <ApplicationIcon>../NAPS2.Lib/Icons/favicon.ico</ApplicationIcon>
 
-    <SelfContained>true</SelfContained>
-    <PublishSingleFile>false</PublishSingleFile>
-    <PublishTrimmed>true</PublishTrimmed>
-
-    <!-- TODO: Do we need a separate project for x64? Multiple RuntimeIdentifiers fails with SelfContained. -->
-    <RuntimeIdentifier>osx-arm64</RuntimeIdentifier>
+    <RuntimeIdentifiers>osx-x64;osx-arm64</RuntimeIdentifiers>
 
     <Title>NAPS2 - Not Another PDF Scanner</Title>
     <Product>NAPS2 - Not Another PDF Scanner</Product>
