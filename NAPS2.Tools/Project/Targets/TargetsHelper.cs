@@ -9,7 +9,7 @@ public static class TargetsHelper
         Platform.Win => "win",
         Platform.Win32 => "win-x86",
         Platform.Win64 => "win-x64",
-        Platform.Mac => "mac",
+        Platform.Mac => "mac-univ",
         Platform.MacIntel => "mac-x64",
         Platform.MacArm => "mac-arm64",
         Platform.Linux => "linux-x64",

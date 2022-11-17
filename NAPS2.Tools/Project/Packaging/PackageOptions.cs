@@ -7,9 +7,8 @@ public class PackageOptions : OptionsBase
 {
     [Value(0, MetaName = "build type", Required = false, HelpText = "all|exe|msi|zip")]
     public string? BuildType { get; set; }
-    
-    // TODO: Allow platform combos (e.g. win32+win64)
-    [Option('p', "platform", Required = false, HelpText = "win32|win64|mac|macarm|linux")]
+
+    [Option('p', "platform", Required = false, HelpText = "win|win32|win64|mac|macintel|macarm|linux")]
     public string? Platform { get; set; }
 
     [Option("nopre", Required = false, HelpText = "Skip pre-packaging steps")]

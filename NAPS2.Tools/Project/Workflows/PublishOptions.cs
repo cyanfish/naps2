@@ -8,7 +8,7 @@ public class PublishOptions : OptionsBase
     [Value(0, MetaName = "build type", Required = false, HelpText = "all|exe|msi|zip")]
     public string? BuildType { get; set; }
     
-    [Option('p', "platform", Required = false, HelpText = "all|win32|win64|mac|macarm|linux")]
+    [Option('p', "platform", Required = false, HelpText = "all|win|win32|win64|mac|macintel|macarm|linux")]
     public string? Platform { get; set; }
 
     [Option("nocleanup", Required = false, HelpText = "Skip cleaning up temp files")]

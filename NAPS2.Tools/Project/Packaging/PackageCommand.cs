@@ -7,6 +7,7 @@ public class PackageCommand : ICommand<PackageOptions>
 {
     public int Run(PackageOptions opts)
     {
+        // TODO: Fix windows targets to ensure that the project is built
         // TODO: Allow customizing dotnet version
         var constraints = new TargetConstraints
         {

@@ -11,8 +11,6 @@ public class VirusScanCommand : ICommand<VirusScanOptions>
         Output.Info("Checking for antivirus false positives");
         var version = ProjectHelper.GetDefaultProjectVersion();
 
-        using var appDriverRunner = AppDriverRunner.Start();
-
         var constraints = new TargetConstraints
         {
             AllowMultiplePlatforms = true
@@ -23,7 +21,8 @@ public class VirusScanCommand : ICommand<VirusScanOptions>
             switch (target.BuildType)
             {
                 case BuildType.Exe:
-                    tasks.Add(StartVirusScan(ProjectHelper.GetPackagePath("exe", target.Platform, version)));
+                    var ext = target.Platform.IsMac() ? "pkg" : target.Platform.IsLinux() ? "flatpak" : "exe";
+                    tasks.Add(StartVirusScan(ProjectHelper.GetPackagePath(ext, target.Platform, version)));
                     break;
                 case BuildType.Msi:
                     tasks.Add(StartVirusScan(ProjectHelper.GetPackagePath("msi", target.Platform, version)));
@@ -41,7 +40,7 @@ public class VirusScanCommand : ICommand<VirusScanOptions>
     private static async Task StartVirusScan(string packagePath)
     {
         var key = await File.ReadAllTextAsync(Path.Combine(Paths.Naps2UserFolder, "virustotal"));
-        VirusTotal virusTotal = new VirusTotal(key)
+        VirusTotal virusTotal = new VirusTotal(key.Trim())
         {
             UseTLS = true
         };
