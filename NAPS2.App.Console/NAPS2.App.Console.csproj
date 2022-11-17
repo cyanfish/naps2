@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFrameworks>net6-windows;net462</TargetFrameworks>
+    <EnableWindowsTargeting>true</EnableWindowsTargeting>
     <OutputType>Exe</OutputType>
     <AppConfig>app.config</AppConfig>
     <LargeAddressAware>true</LargeAddressAware>
