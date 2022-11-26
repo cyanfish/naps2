@@ -3,13 +3,14 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-09-17 20:27+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: 2020-04-03 17:16+0000\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Translate Toolkit 2.2.5\n"
+"X-Generator: Pootle 2.8\n"
+"X-POOTLE-MTIME: 1585934161.571888\n"
 
 #: SettingsResources.resx$Dpi_100$Message
 msgid "100 dpi"
@@ -142,11 +143,11 @@ msgstr ""
 
 #: MiscResources.resx$UpdateError$Message
 msgid "An error occured when trying to install the update"
-msgstr ""
+msgstr "Güncelleme kurulmaya çalışılırken hata oluştu"
 
 #: MiscResources.resx$AuthError$Message
 msgid "An error occurred when trying to authorize"
-msgstr ""
+msgstr "Yetkilendirmeye çalışılırken hata oluştu"
 
 #: MiscResources.resx$AutoSaveError$Message
 msgid "An error occurred when trying to auto save"
@@ -154,11 +155,11 @@ msgstr "Kendiliğinden kaydetme denenirken hata oluştu"
 
 #: MiscResources.resx$ErrorSaving$Message
 msgid "An error occurred when trying to save the file"
-msgstr "Dosya kaydedilmeye çalışılırken bir hata oluştu."
+msgstr "Dosya kaydedilmeye çalışılırken hata oluştu"
 
 #: MiscResources.resx$ErrorEmailing$Message
 msgid "An error occurred when trying to send the email"
-msgstr ""
+msgstr "E-posta gönderilmeye çalışılırken hata oluştu"
 
 #: MiscResources.resx$EmailError$Message
 msgid "An error occurred while trying to send an email"
@@ -173,6 +174,7 @@ msgid ""
 "An operation is in progress. Are you sure you want to exit and cancel the "
 "operation?"
 msgstr ""
+"Süren işlem var. Çıkmak ve süreci iptal etmek istediğinize emin misiniz?"
 
 #: MiscResources.resx$BatchError$Message
 msgid "An unknown error ocurred during the batch scan"
@@ -180,7 +182,7 @@ msgstr "Yığın tarama sırasında bilinmeyen bir hata oluştu"
 
 #: MiscResources.resx$UpdateAvailable$Message
 msgid "An update is available"
-msgstr ""
+msgstr "Güncelleme var"
 
 #: MiscResources.resx$OcrUpdateAvailable$Message
 msgid "An update to OCR is available"
@@ -200,7 +202,7 @@ msgstr "Yığın taramayı iptal etmek istediğinize emin misiniz?"
 
 #: MiscResources.resx$ConfirmClearItems$Message
 msgid "Are you sure you want to clear {0} item(s)?"
-msgstr "{0} adet ögeyi temizlemek istediğinize emin misiniz?"
+msgstr "{0} ögeyi temizlemek istediğinize emin misiniz?"
 
 #: MiscResources.resx$ConfirmDelete$Message
 msgid "Are you sure you want to delete \"{0}\"?"
@@ -233,7 +235,7 @@ msgstr "Yazar"
 
 #: FAuthorize.resx$$this.Text$Message
 msgid "Authorize"
-msgstr ""
+msgstr "Yetkilendir"
 
 #: SettingsResources.resx$TiffComp_Auto$Message
 msgid "Auto"
@@ -262,7 +264,7 @@ msgstr "Kendiliğinden artan sayı (4 hane)"
 
 #: FOcrSetup.resx$checkBoxRunInBG.Text$Message
 msgid "Automatically run OCR after scanning"
-msgstr ""
+msgstr "Taradıktan sonra OCR'yi kendiliğinden çalıştır"
 
 #: SettingsResources.resx$PageSize_B4$Message
 msgid "B4 (250x353 mm)"
@@ -362,19 +364,19 @@ msgstr "Merkez"
 
 #: FEmailSettings.resx$btnChangeProvider.Text$Message
 msgid "Change"
-msgstr ""
+msgstr "Değiştir"
 
 #: FAbout.resx$cbCheckForUpdates.Text$Message
 msgid "Check for updates"
-msgstr ""
+msgstr "Güncellemeleri denetle"
 
 #: MiscResources.resx$CheckingForUpdates$Message
 msgid "Checking"
-msgstr ""
+msgstr "Denetleniyor"
 
 #: FEmailProvider.resx$$this.Text$Message
 msgid "Choose Email Provider"
-msgstr ""
+msgstr "E-Posta Sağlayıcı Seç"
 
 #: MiscResources.resx$ChooseProfile$Message
 msgid "Choose Profile"
@@ -425,7 +427,7 @@ msgstr "Kopyalanıyor"
 
 #: FAbout.resx$labelCopyright.Text$Message
 msgid "Copyright 2009, 2012-2018 NAPS2 Contributors"
-msgstr ""
+msgstr "Telif Hakkı 2009, 2012-2018 NAPS2 Katkıcıları"
 
 #: FAdvancedScanSettings.resx$label3.Text$Message
 msgid "Coverage Threshold"
@@ -460,7 +462,7 @@ msgstr "Özel Döndürme"
 
 #: SettingsResources.resx$EmailProviderType_CustomSmtp$Message
 msgid "Custom SMTP"
-msgstr ""
+msgstr "Özel SMTP"
 
 #: FPlaceholders.resx$label6.Text$Message
 msgid "Day (01-31)"
@@ -648,7 +650,7 @@ msgstr "Üst Kapak"
 
 #: SettingsResources.resx$EmailProviderType_Gmail$Message
 msgid "Gmail"
-msgstr ""
+msgstr "Gmail"
 
 #: SettingsResources.resx$BitDepth_8Grayscale$Message
 msgid "Grayscale"
@@ -711,7 +713,7 @@ msgstr "{0} içe aktarılıyor"
 
 #: MiscResources.resx$Install$Message
 msgid "Install {0}"
-msgstr ""
+msgstr "{0} Kur"
 
 #: MiscResources.resx$InstallComplete$Message
 msgid "Installation Complete"
@@ -854,7 +856,7 @@ msgstr "Besleyicide sayfa yok"
 #: FEmailSettings.resx$lblProvider.Text$Message
 #: SettingsResources.resx$EmailProvider_NotSelected$Message
 msgid "No provider selected"
-msgstr ""
+msgstr "Sağlayıcı seçilmedi"
 
 #: MiscResources.resx$NoDevicesFound$Message
 msgid "No scanning device was found"
@@ -862,7 +864,7 @@ msgstr "Hiçbir tarama aygıtı bulunamadı"
 
 #: MiscResources.resx$NoUpdates$Message
 msgid "No updates available"
-msgstr ""
+msgstr "Güncelleme yok"
 
 #: SettingsResources.resx$TiffComp_None$Message
 msgid "None"
@@ -890,7 +892,7 @@ msgstr "OCR Dili Yükle"
 
 #: MiscResources.resx$OcrProgress$Message
 msgid "OCR Progress"
-msgstr ""
+msgstr "OCR Süreci"
 
 #: FOcrSetup.resx$$this.Text$Message
 msgid "OCR Setup"
@@ -902,7 +904,7 @@ msgstr "OCR dili"
 
 #: FOcrSetup.resx$labelOcrMode.Text$Message
 msgid "OCR mode"
-msgstr ""
+msgstr "OCR kipi"
 
 #: FAbout.resx$okButton.Text$Message
 #: FAdvancedScanSettings.resx$btnOK.Text$Message
@@ -948,11 +950,11 @@ msgstr "Klasörü Aç"
 
 #: MiscResources.resx$ActiveOperations$Message
 msgid "Operation in Progress"
-msgstr ""
+msgstr "İşlem Sürüyor"
 
 #: SettingsResources.resx$EmailProviderType_OutlookWeb$Message
 msgid "Outlook Web Access"
-msgstr ""
+msgstr "Outlook Web Erişimi"
 
 #: FBatchScan.resx$groupboxOutput.Text$Message
 msgid "Output"
@@ -1067,7 +1069,7 @@ msgstr "Dosya yolu için komut iste"
 
 #: FEmailSettings.resx$groupBox1.Text$Message
 msgid "Provider"
-msgstr ""
+msgstr "Sağlayıcı"
 
 #: FBatchPrompt.resx$lblStatus.Text$Message
 msgid "Ready for scan {0}"
@@ -1152,15 +1154,15 @@ msgstr "Sağa Çevir"
 
 #: FProgress.resx$btnRunInBG.Text$Message
 msgid "Run in Background"
-msgstr ""
+msgstr "Arka Planda Çalıştır"
 
 #: MiscResources.resx$RunningOcr$Message
 msgid "Running OCR"
-msgstr ""
+msgstr "OCR Çalıştırılıyor"
 
 #: FEditProfile.resx$rdSANE.Text$Message
 msgid "SANE Driver"
-msgstr ""
+msgstr "SANE Sürücüsü"
 
 #: FViewer.resx$tsSaveImage.Text$Message
 msgid "Save Image"
@@ -1325,12 +1327,13 @@ msgstr "Teknik Ayrıntılar"
 #: MiscResources.resx$TesseractNotAvailable$Message
 msgid ""
 "The OCR engine is not available. Make sure to install the required package"
-msgstr ""
+msgstr "OCR motoru kullanılamıyor. Gerekli paketin kurulduğundan emin olun"
 
 #: MiscResources.resx$SaneNotAvailable$Message
 msgid ""
 "The SANE driver is not available. Make sure to install the required packages"
 msgstr ""
+"SANE sürücüsü kullanılamıyor. Gerekli paketlerin kuruluduğundan emin olun"
 
 #: MiscResources.resx$ImportErrorCouldNot$Message
 msgid "The file '{0}' could not be imported"
@@ -1342,7 +1345,7 @@ msgid ""
 "be imported"
 msgstr ""
 "'{0}' dosyası içeri aktarılamadı. Yalnızca NAPS2 tarafından üretilen PDF "
-"dosyaları içeri aktarılabilir."
+"dosyaları içeri aktarılabilir"
 
 #: MiscResources.resx$FileInUse$Message
 msgid "The file could not be overwritten because it is currently in use"
@@ -1370,7 +1373,7 @@ msgstr "Tarayıcının kapağı açık"
 
 #: MiscResources.resx$DriverNotSupported$Message
 msgid "The selected driver is not supported on this system"
-msgstr ""
+msgstr "Seçilen sürücü bu sistemde desteklenmiyor"
 
 #: MiscResources.resx$DeviceNotFound$Message
 msgid "The selected scanner could not be found"
@@ -1430,15 +1433,15 @@ msgstr "Kaydedilmemiş Değişiklikler"
 
 #: MiscResources.resx$UpdateProgress$Message
 msgid "Update Progress"
-msgstr ""
+msgstr "Güncelleme Süreci"
 
 #: MiscResources.resx$Updating$Message
 msgid "Updating"
-msgstr ""
+msgstr "Güncelleniyor"
 
 #: MiscResources.resx$UploadingEmail$Message
 msgid "Uploading email"
-msgstr ""
+msgstr "E-posta yükleniyor"
 
 #: FEditProfile.resx$rdbNative.Text$Message
 msgid "Use native UI"
@@ -1475,7 +1478,7 @@ msgstr "Tamamlamak için TWAIN bekleniyor"
 
 #: FAuthorize.resx$lblWaiting.Text$Message
 msgid "Waiting for authorization"
-msgstr ""
+msgstr "Yetkilendirme bekleniyor"
 
 #: MiscResources.resx$BatchStatusWaitingForScan$Message
 msgid "Waiting for scan {0}"
@@ -1503,7 +1506,7 @@ msgstr "'{0}' dosyasından içeriği kopyalamaya yetkiniz yok"
 
 #: MiscResources.resx$DontHavePermission$Message
 msgid "You don't have permission to save files at this location"
-msgstr "Bu konuma kaydetmek için yetkiniz bulunmuyor."
+msgstr "Bu konuma kaydetmek için yetkiniz bulunmuyor"
 
 #: MiscResources.resx$ExitWithUnsavedChanges$Message
 msgid ""

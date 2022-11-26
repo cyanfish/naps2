@@ -3,13 +3,14 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-09-17 20:27+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: 2020-05-22 18:26+0000\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: hu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Translate Toolkit 2.2.5\n"
+"X-Generator: Pootle 2.8\n"
+"X-POOTLE-MTIME: 1590171990.747244\n"
 
 #: SettingsResources.resx$Dpi_100$Message
 msgid "100 dpi"
@@ -182,8 +183,9 @@ msgid "An update is available"
 msgstr ""
 
 #: MiscResources.resx$OcrUpdateAvailable$Message
+#, fuzzy
 msgid "An update to OCR is available"
-msgstr ""
+msgstr "OCR futtatása"
 
 #: FAdvancedScanSettings.resx$cbBrightnessContrastAfterScan.Text$Message
 msgid "Apply brightness/contrast after scan"
@@ -309,7 +311,7 @@ msgstr "Fekete-fehér"
 
 #: FAdvancedScanSettings.resx$groupBox3.Text$Message
 msgid "Blank Pages"
-msgstr ""
+msgstr "Üres oldalak"
 
 #: FEditProfile.resx$label6.Text$Message
 msgid "Brightness"
@@ -319,7 +321,7 @@ msgstr "Fényerő"
 #: FDesktop.resx$tsBrightnessContrast.Text$Message
 #: FViewer.resx$tsBrightnessContrast.Text$Message
 msgid "Brightness / Contrast"
-msgstr ""
+msgstr "Fényerő / kontraszt"
 
 #: SettingsResources.resx$TiffComp_Ccitt4$Message
 msgid "CCITT4"
@@ -366,7 +368,7 @@ msgstr ""
 
 #: FAbout.resx$cbCheckForUpdates.Text$Message
 msgid "Check for updates"
-msgstr ""
+msgstr "Frissítések keresése"
 
 #: MiscResources.resx$CheckingForUpdates$Message
 msgid "Checking"
@@ -391,20 +393,20 @@ msgstr "Kép tisztítása"
 
 #: FAutoSaveSettings.resx$cbClearAfterSave.Text$Message
 msgid "Clear images after saving"
-msgstr ""
+msgstr "Csak mentse, ne jelenjenek meg a programban"
 
 #: MiscResources.resx$Close$Message
 msgid "Close"
-msgstr ""
+msgstr "Bezárás"
 
 #: FAdvancedScanSettings.resx$groupBox2.Text$Message
 #: FPdfSettings.resx$groupCompat.Text$Message
 msgid "Compatibility"
-msgstr ""
+msgstr "Kompatibilitás"
 
 #: FImageSettings.resx$label3.Text$Message
 msgid "Compression"
-msgstr ""
+msgstr "Tömörítés"
 
 #: FEditProfile.resx$label7.Text$Message
 msgid "Contrast"
@@ -421,7 +423,7 @@ msgstr ""
 
 #: MiscResources.resx$Copying$Message
 msgid "Copying"
-msgstr ""
+msgstr "Másolás folyamatban"
 
 #: FAbout.resx$labelCopyright.Text$Message
 msgid "Copyright 2009, 2012-2018 NAPS2 Contributors"
@@ -435,7 +437,7 @@ msgstr ""
 #: FDesktop.resx$tsCrop.Text$Message
 #: FViewer.resx$tsCrop.Text$Message
 msgid "Crop"
-msgstr ""
+msgstr "Levágás"
 
 #: FAdvancedScanSettings.resx$cbForcePageSizeCrop.Text$Message
 msgid "Crop to page size"
@@ -497,19 +499,19 @@ msgstr "Oldal törlése"
 #: FDesktop.resx$tsDeskew.Text$Message
 #: FViewer.resx$tsDeskew.Text$Message
 msgid "Deskew"
-msgstr ""
+msgstr "Visszatorzítás"
 
 #: MiscResources.resx$AutoDeskewProgress$Message
 msgid "Deskew Progress"
-msgstr ""
+msgstr "Visszatorzítás folyamatban"
 
 #: FAdvancedScanSettings.resx$cbAutoDeskew.Text$Message
 msgid "Deskew scanned pages"
-msgstr ""
+msgstr "Szkennelt oldalak visszatorzítása"
 
 #: MiscResources.resx$AutoDeskewing$Message
 msgid "Deskewing"
-msgstr ""
+msgstr "Visszatorzítás"
 
 #: FEditProfile.resx$label1.Text$Message
 msgid "Device"
@@ -517,7 +519,7 @@ msgstr "Eszköz"
 
 #: FPageSize.resx$label2.Text$Message
 msgid "Dimensions"
-msgstr ""
+msgstr "Méretek"
 
 #: FEditProfile.resx$label8.Text$Message
 msgid "Display name"
@@ -525,7 +527,7 @@ msgstr "Név"
 
 #: MiscResources.resx$Donate$Message
 msgid "Donate"
-msgstr ""
+msgstr "Támogatás"
 
 #: FBatchPrompt.resx$btnDone.Text$Message
 #: FProfiles.resx$btnDone.Text$Message
@@ -542,7 +544,7 @@ msgstr "Letöltési hiba"
 
 #: MiscResources.resx$DownloadNeeded$Message
 msgid "Download Needed"
-msgstr ""
+msgstr "Letöltés szükséges"
 
 #: FDownloadProgress.resx$$this.Text$Message
 msgid "Download Progress"
@@ -568,19 +570,19 @@ msgstr ""
 #: FDesktop.resx$tsEmailSettings.Text$Message
 #: FEmailSettings.resx$$this.Text$Message
 msgid "Email Settings"
-msgstr ""
+msgstr "Email beállítások"
 
 #: FEditProfile.resx$cbAutoSave.Text$Message
 msgid "Enable Auto Save"
-msgstr ""
+msgstr "Automatikus mentés engedélyezése"
 
 #: FPdfSettings.resx$cbEncryptPdf.Text$Message
 msgid "Encrypt PDF"
-msgstr ""
+msgstr "PDF titkosítása"
 
 #: FPdfSettings.resx$groupProtection.Text$Message
 msgid "Encryption"
-msgstr ""
+msgstr "Titkosítás"
 
 #: MiscResources.resx$FileTypeEmf$Message
 msgid "Enhanced Windows MetaFile (*.emf)"
@@ -602,7 +604,7 @@ msgstr "EXIF fájl (*.exif)"
 
 #: FAdvancedScanSettings.resx$cbExcludeBlankPages.Text$Message
 msgid "Exclude blank pages"
-msgstr ""
+msgstr "Üres oldalak kihagyása"
 
 #: SettingsResources.resx$Source_Feeder$Message
 msgid "Feeder"
@@ -610,12 +612,12 @@ msgstr "Lapadagoló"
 
 #: FPlaceholders.resx$label1.Text$Message
 msgid "File Name"
-msgstr ""
+msgstr "Fájlnév"
 
 #: FAutoSaveSettings.resx$lblFilePath.Text$Message
 #: FBatchScan.resx$lblFilePath.Text$Message
 msgid "File path"
-msgstr ""
+msgstr "Fájl elérési útvonal"
 
 #: FDesktop.resx$tsFlip.Text$Message
 #: FViewer.resx$tsFlip.Text$Message
@@ -658,7 +660,7 @@ msgstr "Vízszintes igazítás"
 
 #: FPlaceholders.resx$label7.Text$Message
 msgid "Hour (0-23)"
-msgstr ""
+msgstr "Óra (0-23)"
 
 #: FDesktop.resx$tsHueSaturation.Text$Message
 #: FHueSaturation.resx$$this.Text$Message
@@ -680,16 +682,16 @@ msgstr ""
 
 #: FAdvancedScanSettings.resx$groupBox1.Text$Message
 msgid "Image Quality"
-msgstr ""
+msgstr "Képminőség"
 
 #: FDesktop.resx$tsImageSettings.Text$Message
 #: FImageSettings.resx$$this.Text$Message
 msgid "Image Settings"
-msgstr ""
+msgstr "Kép beállításai"
 
 #: MiscResources.resx$ImageSaved$Message
 msgid "Image saved"
-msgstr ""
+msgstr "Kép mentve"
 
 #: FDesktop.resx$tsImport.Text$Message
 msgid "Import"
@@ -701,11 +703,11 @@ msgstr ""
 
 #: MiscResources.resx$Importing$Message
 msgid "Importing"
-msgstr ""
+msgstr "Importálás"
 
 #: MiscResources.resx$ImportingFormat$Message
 msgid "Importing {0}"
-msgstr ""
+msgstr "Importálás {0}"
 
 #: MiscResources.resx$Install$Message
 msgid "Install {0}"
@@ -737,11 +739,11 @@ msgstr "JPEG fájl (*.jpg, *.jpeg)"
 
 #: FImageSettings.resx$groupJpeg.Text$Message
 msgid "Jpeg Quality"
-msgstr ""
+msgstr "JPEG tömörítés"
 
 #: FPdfSettings.resx$label6.Text$Message
 msgid "Keywords"
-msgstr ""
+msgstr "Kulcsszavak"
 
 #: SettingsResources.resx$TiffComp_Lzw$Message
 msgid "LZW"
@@ -777,20 +779,20 @@ msgstr "Legjobb minőség (nagy fájlok)"
 
 #: FPdfSettings.resx$groupMetadata.Text$Message
 msgid "Metadata"
-msgstr ""
+msgstr "Metaadatok"
 
 #: FPlaceholders.resx$label8.Text$Message
 msgid "Minute (00-59)"
-msgstr ""
+msgstr "Perc (00-59)"
 
 #: FPlaceholders.resx$label5.Text$Message
 msgid "Month (01-12)"
-msgstr ""
+msgstr "Hónap (01-12)"
 
 #: FAutoSaveSettings.resx$linkPatchCodeInfo.Text$Message
 #: FBatchScan.resx$linkPatchCodeInfo.Text$Message
 msgid "More info"
-msgstr ""
+msgstr "További információ"
 
 #: FDesktop.resx$tsMove.SecondText$Message
 msgid "Move Down"
@@ -826,15 +828,15 @@ msgstr "Hiányzó név"
 
 #: FProfiles.resx$btnAdd.Text$Message
 msgid "New"
-msgstr ""
+msgstr "Új"
 
 #: FDesktop.resx$tsNewProfile.Text$Message
 msgid "New Profile"
-msgstr ""
+msgstr "Új profil"
 
 #: FViewer.resx$tsNext.Text$Message
 msgid "Next"
-msgstr ""
+msgstr "Következő"
 
 #: FBatchPrompt.resx$$this.Text$Message
 msgid "Next Scan"
@@ -859,7 +861,7 @@ msgstr "Nincs elérhető képolvasó"
 
 #: MiscResources.resx$NoUpdates$Message
 msgid "No updates available"
-msgstr ""
+msgstr "Nem érhető el frissítés"
 
 #: SettingsResources.resx$TiffComp_None$Message
 #, fuzzy
@@ -887,8 +889,9 @@ msgid "OCR Download"
 msgstr "OCR Letöltés"
 
 #: MiscResources.resx$OcrProgress$Message
+#, fuzzy
 msgid "OCR Progress"
-msgstr ""
+msgstr "OCR futtatása"
 
 #: FOcrSetup.resx$$this.Text$Message
 msgid "OCR Setup"
@@ -899,8 +902,9 @@ msgid "OCR language"
 msgstr "Karakterfelismerés nyelve"
 
 #: FOcrSetup.resx$labelOcrMode.Text$Message
+#, fuzzy
 msgid "OCR mode"
-msgstr ""
+msgstr "OCR futtatása"
 
 #: FAbout.resx$okButton.Text$Message
 #: FAdvancedScanSettings.resx$btnOK.Text$Message
@@ -942,11 +946,11 @@ msgstr "Egy vagy több fájlt nem sikerült letölteni"
 
 #: NotifyWidget.resx$openFolderToolStripMenuItem.Text$Message
 msgid "Open Folder"
-msgstr ""
+msgstr "Mappa megnyitása"
 
 #: MiscResources.resx$ActiveOperations$Message
 msgid "Operation in Progress"
-msgstr ""
+msgstr "Művelet folyamatban"
 
 #: SettingsResources.resx$EmailProviderType_OutlookWeb$Message
 msgid "Outlook Web Access"
@@ -954,7 +958,7 @@ msgstr ""
 
 #: FBatchScan.resx$groupboxOutput.Text$Message
 msgid "Output"
-msgstr ""
+msgstr "Kimenet"
 
 #: MiscResources.resx$OverwriteFile$Message
 msgid "Overwrite File"
@@ -973,11 +977,11 @@ msgstr "PDF dokumentum (*.pdf)"
 #: FDesktop.resx$tsPdfSettings2.Text$Message
 #: FPdfSettings.resx$$this.Text$Message
 msgid "PDF Settings"
-msgstr ""
+msgstr "PDF beállításai"
 
 #: MiscResources.resx$PdfSaved$Message
 msgid "PDF saved"
-msgstr ""
+msgstr "PDF mentve"
 
 #: SettingsResources.resx$PdfCompat_PdfA1B$Message
 msgid "PDF/A-1b"
@@ -1009,12 +1013,12 @@ msgstr "Forrás"
 
 #: FPdfPassword.resx$$this.Text$Message
 msgid "Password"
-msgstr ""
+msgstr "Jelszó"
 
 #: FDesktop.resx$ctxPaste.Text$Message
 #: FProfiles.resx$ctxPaste.Text$Message
 msgid "Paste"
-msgstr ""
+msgstr "Beillesztés"
 
 #: FAutoSaveSettings.resx$linkPlaceholders.Text$Message
 #: FBatchScan.resx$linkPlaceholders.Text$Message
@@ -1028,7 +1032,7 @@ msgstr ""
 
 #: FAdvancedScanSettings.resx$groupBox4.Text$Message
 msgid "Post-processing"
-msgstr ""
+msgstr "Utófeldogozás"
 
 #: FBatchScan.resx$lblStatus.Text$Message
 msgid "Press Start when ready"
@@ -1041,16 +1045,15 @@ msgstr "Előnézet"
 
 #: FViewer.resx$tsPrev.Text$Message
 msgid "Previous"
-msgstr ""
+msgstr "Előző"
 
 #: FDesktop.resx$tsPrint.Text$Message
 msgid "Print"
-msgstr ""
+msgstr "Nyomtatás"
 
 #: FBatchScan.resx$lblProfile.Text$Message
-#, fuzzy
 msgid "Profile"
-msgstr "Profilok"
+msgstr "Profil"
 
 #: FEditProfile.resx$$this.Text$Message
 msgid "Profile Settings"
@@ -1063,7 +1066,7 @@ msgstr "Profilok"
 
 #: FAutoSaveSettings.resx$cbPromptForFilePath.Text$Message
 msgid "Prompt for file path"
-msgstr ""
+msgstr "Kérdezzen rá a mentési helyre"
 
 #: FEmailSettings.resx$groupBox1.Text$Message
 msgid "Provider"
@@ -1079,21 +1082,21 @@ msgstr "Helyreállítás"
 
 #: FRecover.resx$$this.Text$Message
 msgid "Recover Scanned Images"
-msgstr ""
+msgstr "Szkennelt képek helyreállítása"
 
 #: MiscResources.resx$Recovering$Message
 msgid "Recovering"
-msgstr ""
+msgstr "Helyreállítás"
 
 #: MiscResources.resx$RecoveryProgress$Message
 msgid "Recovery Progress"
-msgstr ""
+msgstr "Helyreállítási folyamat"
 
 #: FEmailSettings.resx$cbRememberSettings.Text$Message
 #: FImageSettings.resx$cbRememberSettings.Text$Message
 #: FPdfSettings.resx$cbRememberSettings.Text$Message
 msgid "Remember these settings"
-msgstr ""
+msgstr "Jegyezd meg ezeket a beállításokat"
 
 #: FDesktop.resx$tsdReorder.Text$Message
 msgid "Reorder"
@@ -1116,7 +1119,7 @@ msgstr "Felbontás"
 #: FImageSettings.resx$btnRestoreDefaults.Text$Message
 #: FPdfSettings.resx$btnRestoreDefaults.Text$Message
 msgid "Restore Defaults"
-msgstr ""
+msgstr "Alapértelmezések visszaállítása"
 
 #: FAdvancedScanSettings.resx$cbWiaRetryOnFailure.Text$Message
 msgid "Retry on failure (WIA)"
@@ -1152,11 +1155,11 @@ msgstr "Elforgatás jobbra"
 
 #: FProgress.resx$btnRunInBG.Text$Message
 msgid "Run in Background"
-msgstr ""
+msgstr "Háttérbe"
 
 #: MiscResources.resx$RunningOcr$Message
 msgid "Running OCR"
-msgstr ""
+msgstr "OCR futtatása"
 
 #: FEditProfile.resx$rdSANE.Text$Message
 msgid "SANE Driver"
@@ -1240,7 +1243,7 @@ msgstr ""
 
 #: FSelectDevice.resx$btnSelect.Text$Message
 msgid "Select"
-msgstr ""
+msgstr "Kijelölés"
 
 #: FDesktop.resx$ctxSelectAll.Text$Message
 msgid "Select All"
@@ -1279,7 +1282,7 @@ msgstr ""
 #: FSharpen.resx$$this.Text$Message
 #: FViewer.resx$tsSharpen.Text$Message
 msgid "Sharpen"
-msgstr ""
+msgstr "Élesítés"
 
 #: FPdfSettings.resx$cbShowOwnerPassword.Text$Message
 #: FPdfSettings.resx$cbShowUserPassword.Text$Message
@@ -1309,7 +1312,7 @@ msgstr ""
 
 #: FPdfSettings.resx$label5.Text$Message
 msgid "Subject"
-msgstr ""
+msgstr "Tárgy"
 
 #: MiscResources.resx$FileTypeTiff$Message
 msgid "TIFF File (*.tiff, *.tif)"
@@ -1423,8 +1426,11 @@ msgid "US Letter (8.5x11 in)"
 msgstr "US Letter (8.5x11 in)"
 
 #: MiscResources.resx$UnsavedChanges$Message
+#, fuzzy
 msgid "Unsaved Changes"
 msgstr ""
+"Nem mentett módosításai vannak, amik elvesznek ha bezárja a programot. "
+"Biztosan kilép?"
 
 #: MiscResources.resx$UpdateProgress$Message
 msgid "Update Progress"
@@ -1511,6 +1517,8 @@ msgid ""
 "You have unsaved changes. Are you sure you want to exit and discard those "
 "changes?"
 msgstr ""
+"Nem mentett módosításai vannak, amik elvesznek ha bezárja a programot. "
+"Biztosan kilép?"
 
 #: TiffViewerCtl.resx$tsZoom.ToolTipText$Message
 msgid "Zoom"
@@ -1518,17 +1526,17 @@ msgstr "Nagyítás"
 
 #: TiffViewerCtl.resx$tsZoomActual.ToolTipText$Message
 msgid "Zoom Actual"
-msgstr ""
+msgstr "Eredeti méret"
 
 #: TiffViewerCtl.resx$tsZoomPlus.ToolTipText$Message
 #, fuzzy
 msgid "Zoom In"
-msgstr "Nagyobb"
+msgstr "Eredeti méret"
 
 #: TiffViewerCtl.resx$tsZoomOut.ToolTipText$Message
 #, fuzzy
 msgid "Zoom Out"
-msgstr "Kisebb"
+msgstr "Eredeti méret"
 
 #: SettingsResources.resx$PageSizeUnit_Centimetre$Message
 msgid "cm"

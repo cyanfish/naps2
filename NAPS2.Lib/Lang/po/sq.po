@@ -3,14 +3,14 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-09-17 20:27+0000\n"
-"PO-Revision-Date: 2018-09-24 14:02+0000\n"
+"PO-Revision-Date: 2020-03-27 03:36+0000\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: sq\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Pootle 2.8\n"
-"X-POOTLE-MTIME: 1537797742.932260\n"
+"X-POOTLE-MTIME: 1585280216.862054\n"
 
 # No need for change.
 #: SettingsResources.resx$Dpi_100$Message
@@ -152,7 +152,7 @@ msgstr ""
 
 #: MiscResources.resx$UpdateError$Message
 msgid "An error occured when trying to install the update"
-msgstr "Ndodhi një gabim gjatë instalimit të përditësimit "
+msgstr "Ndodhi një gabim gjatë instalimit të përditësimit"
 
 #: MiscResources.resx$AuthError$Message
 msgid "An error occurred when trying to authorize"
@@ -208,7 +208,7 @@ msgstr "Zbato te të gjithë imazhet e zgjedhura {0}"
 
 #: MiscResources.resx$ConfirmCancelBatch$Message
 msgid "Are you sure you want to cancel the batch scan?"
-msgstr ""
+msgstr "Je i sigurt se do ta anulosh skanimin në grup?"
 
 # No change needed.
 #: MiscResources.resx$ConfirmClearItems$Message
@@ -318,7 +318,6 @@ msgstr "Bardhë e zi"
 #: FBlackWhite.resx$$this.Text$Message
 #: FDesktop.resx$tsBlackWhite.Text$Message
 #: FViewer.resx$tsBlackWhite.Text$Message
-#, fuzzy
 msgid "Black and White"
 msgstr "Bardhë e zi"
 
@@ -334,7 +333,7 @@ msgstr "Shkëlqimi"
 #: FDesktop.resx$tsBrightnessContrast.Text$Message
 #: FViewer.resx$tsBrightnessContrast.Text$Message
 msgid "Brightness / Contrast"
-msgstr ""
+msgstr "Ndriçimi/Kontrasti"
 
 #: SettingsResources.resx$TiffComp_Ccitt4$Message
 msgid "CCITT4"
@@ -365,7 +364,7 @@ msgstr "Anulo"
 
 #: MiscResources.resx$CancelBatch$Message
 msgid "Cancel Batch"
-msgstr ""
+msgstr "Anulo Grupin"
 
 #: MiscResources.resx$BatchStatusCancelling$Message
 msgid "Cancelling"
@@ -454,7 +453,7 @@ msgstr "Preje"
 
 #: FAdvancedScanSettings.resx$cbForcePageSizeCrop.Text$Message
 msgid "Crop to page size"
-msgstr ""
+msgstr "Prit te madhësia e faqes"
 
 #: SettingsResources.resx$PageSize_Custom$Message
 msgid "Custom"
@@ -499,7 +498,7 @@ msgstr "Heq përzierjen"
 
 #: FAdvancedScanSettings.resx$cbWiaDelayBetweenScans.Text$Message
 msgid "Delay between scans (WIA)"
-msgstr ""
+msgstr "Vonesa midis skanimeve (WIA)"
 
 #: FDesktop.resx$ctxDelete.Text$Message
 #: FDesktop.resx$tsDelete.Text$Message
@@ -514,19 +513,19 @@ msgstr "Fshi"
 #: FDesktop.resx$tsDeskew.Text$Message
 #: FViewer.resx$tsDeskew.Text$Message
 msgid "Deskew"
-msgstr ""
+msgstr "Drejto"
 
 #: MiscResources.resx$AutoDeskewProgress$Message
 msgid "Deskew Progress"
-msgstr ""
+msgstr "Progresi i drejtimit"
 
 #: FAdvancedScanSettings.resx$cbAutoDeskew.Text$Message
 msgid "Deskew scanned pages"
-msgstr ""
+msgstr "Drejto faqet e skanuara"
 
 #: MiscResources.resx$AutoDeskewing$Message
 msgid "Deskewing"
-msgstr ""
+msgstr "Po drejton"
 
 #: FEditProfile.resx$label1.Text$Message
 msgid "Device"
@@ -559,7 +558,7 @@ msgstr "Gabim gjatë shkarkimit"
 
 #: MiscResources.resx$DownloadNeeded$Message
 msgid "Download Needed"
-msgstr ""
+msgstr "Nevojitet shkarkim"
 
 #: FDownloadProgress.resx$$this.Text$Message
 msgid "Download Progress"
@@ -648,6 +647,8 @@ msgid ""
 "For high JPEG qualities (80+), also increase Image Quality in your profile "
 "for best results"
 msgstr ""
+"Për cilësi të larta të JPEG (80+), gjithashtu rrisni Cilësinë e imazhit te "
+"profili juaj për rezultatet më të mira"
 
 #: MiscResources.resx$FileTypeGif$Message
 msgid "GIF File (*.gif)"
@@ -682,7 +683,7 @@ msgstr "Ora (0-23)"
 #: FHueSaturation.resx$$this.Text$Message
 #: FViewer.resx$tsHueSaturation.Text$Message
 msgid "Hue / Saturation"
-msgstr ""
+msgstr "Ngjyrimi/Ngopja"
 
 #: FAbout.resx$label1.Text$Message
 msgid "Icons from"
@@ -834,7 +835,7 @@ msgstr "NAPS2"
 
 #: MiscResources.resx$DonatePrompt$Message
 msgid "NAPS2 is completely free. Consider making a donation"
-msgstr ""
+msgstr "NAPS2 is tërësisht falas. Mendoni të dhuroni"
 
 #: FPageSize.resx$label1.Text$Message
 msgid "Name (optional)"
@@ -871,7 +872,7 @@ msgstr "Nuk ka faqe te furnizuesi"
 #: FEmailSettings.resx$lblProvider.Text$Message
 #: SettingsResources.resx$EmailProvider_NotSelected$Message
 msgid "No provider selected"
-msgstr ""
+msgstr "Nuk u zgjodh asnjë ofrues"
 
 #: MiscResources.resx$NoDevicesFound$Message
 msgid "No scanning device was found"
@@ -879,12 +880,11 @@ msgstr "Nuk është gjetur asnjë pajisje skanimi"
 
 #: MiscResources.resx$NoUpdates$Message
 msgid "No updates available"
-msgstr ""
+msgstr "Nuk ka përditësime të disponueshme"
 
 #: SettingsResources.resx$TiffComp_None$Message
-#, fuzzy
 msgid "None"
-msgstr "U krye"
+msgstr "Asnjë"
 
 #: FDesktop.resx$$this.Text$Message
 msgid "Not Another PDF Scanner 2"
@@ -1008,11 +1008,11 @@ msgstr "PDF/A-2b"
 
 #: SettingsResources.resx$PdfCompat_PdfA3B$Message
 msgid "PDF/A-3b"
-msgstr ""
+msgstr "PDF/A-3b"
 
 #: SettingsResources.resx$PdfCompat_PdfA3U$Message
 msgid "PDF/A-3u"
-msgstr ""
+msgstr "PDF/A-3u"
 
 #: MiscResources.resx$FileTypePng$Message
 msgid "PNG File (*.png)"
@@ -1047,7 +1047,7 @@ msgstr "Vendmbajtëset"
 
 #: FAdvancedScanSettings.resx$groupBox4.Text$Message
 msgid "Post-processing"
-msgstr ""
+msgstr "Pas përpunimit"
 
 #: FBatchScan.resx$lblStatus.Text$Message
 msgid "Press Start when ready"
@@ -1081,7 +1081,7 @@ msgstr "Profilet"
 
 #: FAutoSaveSettings.resx$cbPromptForFilePath.Text$Message
 msgid "Prompt for file path"
-msgstr ""
+msgstr "Pyet për shtegun e skedarit"
 
 #: FEmailSettings.resx$groupBox1.Text$Message
 msgid "Provider"
@@ -1138,7 +1138,7 @@ msgstr "Rikthe të paracaktuarat"
 
 #: FAdvancedScanSettings.resx$cbWiaRetryOnFailure.Text$Message
 msgid "Retry on failure (WIA)"
-msgstr ""
+msgstr "Riprovo në moskryerje (WIA)"
 
 #: FDesktop.resx$tsReverse.Text$Message
 msgid "Reverse"
@@ -1181,9 +1181,8 @@ msgid "SANE Driver"
 msgstr "Drejtuesi SANE"
 
 #: FViewer.resx$tsSaveImage.Text$Message
-#, fuzzy
 msgid "Save Image"
-msgstr "Ruaj imazhet"
+msgstr "Ruaj Imazhin"
 
 #: FDesktop.resx$tsdSaveImages.Text$Message
 msgid "Save Images"
@@ -1298,7 +1297,7 @@ msgstr "Vendos të paracaktuar"
 #: FSharpen.resx$$this.Text$Message
 #: FViewer.resx$tsSharpen.Text$Message
 msgid "Sharpen"
-msgstr ""
+msgstr "Thekso"
 
 #: FPdfSettings.resx$cbShowOwnerPassword.Text$Message
 #: FPdfSettings.resx$cbShowUserPassword.Text$Message
@@ -1307,7 +1306,7 @@ msgstr "Shfaq"
 
 #: FImageSettings.resx$cbSinglePageTiff.Text$Message
 msgid "Single page files"
-msgstr ""
+msgstr "Skedarët me një faqe"
 
 #: FBatchScan.resx$rdSingleScan.Text$Message
 msgid "Single scan"
@@ -1324,7 +1323,7 @@ msgstr "Fillo"
 
 #: FAdvancedScanSettings.resx$cbForcePageSize.Text$Message
 msgid "Stretch to page size"
-msgstr ""
+msgstr "Zgjero te madhësia e faqes"
 
 #: FPdfSettings.resx$label5.Text$Message
 msgid "Subject"
@@ -1353,6 +1352,8 @@ msgstr ""
 msgid ""
 "The SANE driver is not available. Make sure to install the required packages"
 msgstr ""
+"Drejtuesi SANE nuk është i disponueshëm. Sigurohuni të instaloni paketat e "
+"duhura"
 
 #: MiscResources.resx$ImportErrorCouldNot$Message
 msgid "The file '{0}' could not be imported"
@@ -1394,7 +1395,7 @@ msgstr "Mbulesa e skanerit është e hapur"
 
 #: MiscResources.resx$DriverNotSupported$Message
 msgid "The selected driver is not supported on this system"
-msgstr ""
+msgstr "Drejtuesi i zgjedhur nuk mbështetet në këtë sistem"
 
 #: MiscResources.resx$DeviceNotFound$Message
 msgid "The selected scanner could not be found"
@@ -1414,7 +1415,7 @@ msgid ""
 "supposed to support duplex, try using a different driver"
 msgstr ""
 "Skaneri i zgjedhur nuk e mbështet dupleksin. Nëse skaneri supozohet se e "
-"pranon dupleksin, provoni të përdorni një drejtues tjetër."
+"pranon dupleksin, provoni të përdorni një drejtues tjetër"
 
 #: MiscResources.resx$DeviceBusy$Message
 msgid "The selected scanner is busy"
@@ -1426,7 +1427,7 @@ msgstr "Skaneri i zgjedhur është jashtë linje"
 
 #: FImageSettings.resx$groupTiff.Text$Message
 msgid "Tiff Options"
-msgstr ""
+msgstr "Opsionet Tiff"
 
 #: FBatchScan.resx$lblTimeBetweenScans.Text$Message
 msgid "Time between scans (seconds)"
@@ -1603,8 +1604,8 @@ msgid ""
 "{0} image(s) scanned on {1} at {2} may not have been saved, and are "
 "recoverable. Do you want to recover them?"
 msgstr ""
-"{0} imazhe të skanuara në {1} në {2} mund të mos jenë ruajtur, dhe janë të "
-"rikuperueshme. A dëshironi t'i rikuperoni ato?"
+"{0} imazh(e) i(të) skanuar në {1} në {2} mund të mos jenë ruajtur, dhe janë "
+"të rikuperueshme. A dëshironi t'i rikuperoni ato?"
 
 #: MiscResources.resx$ImagesSaved$Message
 msgid "{0} images saved"

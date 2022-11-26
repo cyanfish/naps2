@@ -3,13 +3,14 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-09-17 20:27+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: 2020-11-03 08:08+0000\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: sk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Translate Toolkit 2.2.5\n"
+"X-Generator: Pootle 2.8\n"
+"X-POOTLE-MTIME: 1604390900.935462\n"
 
 #: SettingsResources.resx$Dpi_100$Message
 msgid "100 dpi"
@@ -29,7 +30,7 @@ msgstr "200 dpi"
 
 #: SettingsResources.resx$BitDepth_24Color$Message
 msgid "24-bit Color"
-msgstr "24-bitová farebná hĺbka"
+msgstr "24-bitová farba"
 
 #: SettingsResources.resx$Dpi_300$Message
 msgid "300 dpi"
@@ -62,11 +63,11 @@ msgstr "A5 (148x210 mm)"
 #: FAbout.resx$$this.Text$Message
 #: FDesktop.resx$tsAbout.Text$Message
 msgid "About"
-msgstr "O aplikácii"
+msgstr "O programe"
 
 #: FScanProgress.resx$$this.Text$Message
 msgid "Acquiring data"
-msgstr "Získať dáta"
+msgstr "Získať údaje"
 
 #: FEditProfile.resx$btnAdvanced.Text$Message
 msgid "Advanced"
@@ -90,7 +91,7 @@ msgstr "Všetky súbory"
 
 #: FPdfSettings.resx$clbPerms.Items6$Message
 msgid "Allow Annotations"
-msgstr "Povoliť anotácie"
+msgstr "Povoliť vysvetlivky"
 
 #: FPdfSettings.resx$clbPerms.Items4$Message
 msgid "Allow Content Copying"
@@ -98,19 +99,19 @@ msgstr "Povoliť kopírovanie obsahu"
 
 #: FPdfSettings.resx$clbPerms.Items5$Message
 msgid "Allow Content Copying for Accessibility"
-msgstr "Povoliť kopírovanie obsahu"
+msgstr "Povoliť dostupnosť kopírovania obsahu"
 
 #: FPdfSettings.resx$clbPerms.Items3$Message
 msgid "Allow Document Assembly"
-msgstr "Povoliť úpravy dokumentu (vkladanie/odoberanie/otáčanie strán)"
+msgstr "Povoliť zostavovanie dokumentu"
 
 #: FPdfSettings.resx$clbPerms.Items2$Message
 msgid "Allow Document Modification"
-msgstr "Povoliť modifikáciu dokumentu"
+msgstr "Povoliť úpravy dokumentu"
 
 #: FPdfSettings.resx$clbPerms.Items7$Message
 msgid "Allow Form Filling"
-msgstr "Povoliť napĺňanie formulárov"
+msgstr "Povoliť vyplňovanie formulárov"
 
 #: FPdfSettings.resx$clbPerms.Items1$Message
 msgid "Allow Full Quality Printing"
@@ -122,108 +123,109 @@ msgstr "Povoliť tlač"
 
 #: FDesktop.resx$tsAltDeinterleave.Text$Message
 msgid "Alternate Deinterleave"
-msgstr ""
+msgstr "Alternatívne prekladanie"
 
 #: FDesktop.resx$tsAltInterleave.Text$Message
 msgid "Alternate Interleave"
-msgstr ""
+msgstr "Alternatívne vkladanie"
 
 #: SettingsResources.resx$TwainImpl_MemXfer$Message
 msgid "Alternative Transfer"
-msgstr ""
+msgstr "Alternatívny prenos"
 
 #: MiscResources.resx$PdfImportComponentNeeded$Message
 msgid ""
 "An additional component is needed to import this PDF file. Would you like to "
 "download it now?"
 msgstr ""
+"Na import tohto súboru PDF je potrebný ďalší komponent. Chcete ho stiahnuť "
+"teraz?"
 
 #: MiscResources.resx$UpdateError$Message
 msgid "An error occured when trying to install the update"
-msgstr ""
+msgstr "Pri pokuse o inštaláciu aktualizácie sa vyskytla chyba"
 
 #: MiscResources.resx$AuthError$Message
 msgid "An error occurred when trying to authorize"
-msgstr ""
+msgstr "Pri pokuse o autorizáciu sa vyskytla chyba"
 
 #: MiscResources.resx$AutoSaveError$Message
 msgid "An error occurred when trying to auto save"
-msgstr "Chyba pri pokuse o automatické uloženie"
+msgstr "Pri pokuse o automatické uloženie sa vyskytla chyba"
 
 #: MiscResources.resx$ErrorSaving$Message
 msgid "An error occurred when trying to save the file"
-msgstr "Chyba pri ukladaní súboru"
+msgstr "Pri pokuse o uloženie súboru sa vyskytla chyba"
 
 #: MiscResources.resx$ErrorEmailing$Message
 msgid "An error occurred when trying to send the email"
-msgstr ""
+msgstr "Pri pokuse o odoslanie e-mailu sa vyskytla chyba"
 
 #: MiscResources.resx$EmailError$Message
 msgid "An error occurred while trying to send an email"
-msgstr "Chyba pri odosielaní e-mailu"
+msgstr "Pri pokuse o odosielanie e-mailu sa vyskytla chyba"
 
 #: MiscResources.resx$UnknownDriverError$Message
 msgid "An error occurred with the scanning driver"
-msgstr "Chyba s ovládačom skeneru"
+msgstr "Pri ovládači skenovania sa vyskytla chyba"
 
 #: MiscResources.resx$ExitWithActiveOperations$Message
 msgid ""
 "An operation is in progress. Are you sure you want to exit and cancel the "
 "operation?"
-msgstr ""
+msgstr "Prebieha operácia. Naozaj chcete operáciu ukončiť a zrušiť?"
 
 #: MiscResources.resx$BatchError$Message
 msgid "An unknown error ocurred during the batch scan"
-msgstr "Neznáma chyba v priebehu dávkového skenovania"
+msgstr "Počas dávkového skenovania sa vyskytla neznáma chyba"
 
 #: MiscResources.resx$UpdateAvailable$Message
 msgid "An update is available"
-msgstr ""
+msgstr "Je dostupná aktualizácia"
 
 #: MiscResources.resx$OcrUpdateAvailable$Message
 msgid "An update to OCR is available"
-msgstr "Dostupná aktualizácia OCR"
+msgstr "Je dostupná aktualizácia OCR"
 
 #: FAdvancedScanSettings.resx$cbBrightnessContrastAfterScan.Text$Message
 msgid "Apply brightness/contrast after scan"
-msgstr "Aplikuj jas/kontrast po zoskenovaní"
+msgstr "Po skenovaní použite jas/kontrast"
 
 #: ImageForm.resx$checkboxApplyToSelected.Text$Message
 msgid "Apply to all {0} selected images"
-msgstr "Aplikovať na {0} vybraných snímkov"
+msgstr "Použiť na všetky {0} vybrané obrázky"
 
 #: MiscResources.resx$ConfirmCancelBatch$Message
 msgid "Are you sure you want to cancel the batch scan?"
-msgstr ""
+msgstr "Naozaj chcete zrušiť dávkové skenovanie?"
 
 #: MiscResources.resx$ConfirmClearItems$Message
 msgid "Are you sure you want to clear {0} item(s)?"
-msgstr "Určite vyčistiť {0} prvkov?"
+msgstr "Naozaj chcete vymazať {0} položky?"
 
 #: MiscResources.resx$ConfirmDelete$Message
-#, fuzzy
 msgid "Are you sure you want to delete \"{0}\"?"
-msgstr "Určite vymazať {0} prvkov?"
+msgstr "Naozaj chcete odstrániť znak \"{0}\"?"
 
 #: MiscResources.resx$ConfirmDeleteSingleProfile$Message
 msgid "Are you sure you want to delete the profile {0}?"
-msgstr "Určite zmazať profil {0}?"
+msgstr "Naozaj chcete odstrániť profil {0}?"
 
 #: MiscResources.resx$ConfirmDeleteItems$Message
 msgid "Are you sure you want to delete {0} item(s)?"
-msgstr "Určite vymazať {0} prvkov?"
+msgstr "Naozaj chcete odstrániť {0} položky?"
 
 #: MiscResources.resx$ConfirmDeleteMultipleProfiles$Message
 msgid "Are you sure you want to delete {0} profiles?"
-msgstr "Určite zmazať {0} profily/ov?"
+msgstr "Naozaj chcete odstrániť {0} profilov?"
 
 #: MiscResources.resx$ConfirmResetImages$Message
 msgid "Are you sure you want undo your changes to {0} image(s)?"
-msgstr "Určite potlačiť zmeny na {0} snímkoch?"
+msgstr "Naozaj chcete vrátiť späť svoje zmeny v {0} obrázkoch?"
 
 #: FEmailSettings.resx$label1.Text$Message
 msgid "Attachment Name"
-msgstr "Meno prílohy"
+msgstr "Názov prílohy"
 
 #: FPdfSettings.resx$label3.Text$Message
 msgid "Author"
@@ -231,36 +233,36 @@ msgstr "Autor"
 
 #: FAuthorize.resx$$this.Text$Message
 msgid "Authorize"
-msgstr ""
+msgstr "Autorizovať"
 
 #: SettingsResources.resx$TiffComp_Auto$Message
 msgid "Auto"
-msgstr ""
+msgstr "Automaticky"
 
 #: FAutoSaveSettings.resx$$this.Text$Message
 #: FEditProfile.resx$linkAutoSaveSettings.Text$Message
 msgid "Auto Save Settings"
-msgstr "Nastavenie automatického ukladania"
+msgstr "Nastavenia automatického ukladania"
 
 #: FPlaceholders.resx$label13.Text$Message
 msgid "Auto-incrementing number (1 digit)"
-msgstr "Navyšujúce sa číslo (1 cifra)"
+msgstr "Automatické zvyšovanie čísla (1 číslica)"
 
 #: FPlaceholders.resx$label12.Text$Message
 msgid "Auto-incrementing number (2 digits)"
-msgstr "Navyšujúce sa číslo (2 cifry)"
+msgstr "Automatické zvyšovanie čísla (2 číslice)"
 
 #: FPlaceholders.resx$label11.Text$Message
 msgid "Auto-incrementing number (3 digits)"
-msgstr "Navyšujúce sa číslo (3 cifry)"
+msgstr "Automatické zvyšovanie čísla (3 číslice)"
 
 #: FPlaceholders.resx$label10.Text$Message
 msgid "Auto-incrementing number (4 digits)"
-msgstr "Navyšujúce sa číslo (4 cifry)"
+msgstr "Automatické zvyšovanie čísla (4 číslice)"
 
 #: FOcrSetup.resx$checkBoxRunInBG.Text$Message
 msgid "Automatically run OCR after scanning"
-msgstr ""
+msgstr "Po skenovaní automaticky spustiť OCR"
 
 #: SettingsResources.resx$PageSize_B4$Message
 msgid "B4 (250x353 mm)"
@@ -285,7 +287,7 @@ msgstr "Dávka úspešne ukončená"
 
 #: MiscResources.resx$BatchStatusError$Message
 msgid "Batch scan stopped due to error"
-msgstr "Dávkové spracovanie zastavené pre chybu"
+msgstr "Dávkové skenovanie sa zastavilo kvôli chybe"
 
 #: FEditProfile.resx$label3.Text$Message
 msgid "Bit depth"
@@ -297,18 +299,17 @@ msgstr "Súbor bitmapy (*.bmp)"
 
 #: SettingsResources.resx$BitDepth_1BlackAndWhite$Message
 msgid "Black & White"
-msgstr "Čiernobielo"
+msgstr "Čiernobiela"
 
 #: FBlackWhite.resx$$this.Text$Message
 #: FDesktop.resx$tsBlackWhite.Text$Message
 #: FViewer.resx$tsBlackWhite.Text$Message
-#, fuzzy
 msgid "Black and White"
-msgstr "Čiernobielo"
+msgstr "Čiernobiela"
 
 #: FAdvancedScanSettings.resx$groupBox3.Text$Message
 msgid "Blank Pages"
-msgstr "Prázdne strany"
+msgstr "Prázdne stránky"
 
 #: FEditProfile.resx$label6.Text$Message
 msgid "Brightness"
@@ -318,11 +319,11 @@ msgstr "Jas"
 #: FDesktop.resx$tsBrightnessContrast.Text$Message
 #: FViewer.resx$tsBrightnessContrast.Text$Message
 msgid "Brightness / Contrast"
-msgstr ""
+msgstr "Jas / kontrast"
 
 #: SettingsResources.resx$TiffComp_Ccitt4$Message
 msgid "CCITT4"
-msgstr ""
+msgstr "CCITT4"
 
 #: FAdvancedScanSettings.resx$btnCancel.Text$Message
 #: FAuthorize.resx$btnCancel.Text$Message
@@ -349,7 +350,7 @@ msgstr "Zrušiť"
 
 #: MiscResources.resx$CancelBatch$Message
 msgid "Cancel Batch"
-msgstr ""
+msgstr "Zrušiť dávku"
 
 #: MiscResources.resx$BatchStatusCancelling$Message
 msgid "Cancelling"
@@ -361,36 +362,36 @@ msgstr "Na stred"
 
 #: FEmailSettings.resx$btnChangeProvider.Text$Message
 msgid "Change"
-msgstr ""
+msgstr "Zmeniť"
 
 #: FAbout.resx$cbCheckForUpdates.Text$Message
 msgid "Check for updates"
-msgstr ""
+msgstr "Kontrola aktualizácií"
 
 #: MiscResources.resx$CheckingForUpdates$Message
 msgid "Checking"
-msgstr ""
+msgstr "Kontrola"
 
 #: FEmailProvider.resx$$this.Text$Message
 msgid "Choose Email Provider"
-msgstr ""
+msgstr "Vyberte poskytovateľa e-mailu"
 
 #: MiscResources.resx$ChooseProfile$Message
 msgid "Choose Profile"
-msgstr "Vybrať profil"
+msgstr "Vyberte profil"
 
 #: FEditProfile.resx$btnChooseDevice.Text$Message
 msgid "Choose device"
-msgstr "Vybrať zariadenie"
+msgstr "Vyberte zariadenie"
 
 #: FDesktop.resx$tsClear.Text$Message
 #: MiscResources.resx$Clear$Message
 msgid "Clear"
-msgstr "Vyčistiť"
+msgstr "Zmazať"
 
 #: FAutoSaveSettings.resx$cbClearAfterSave.Text$Message
 msgid "Clear images after saving"
-msgstr "Vyčistiť po uložení"
+msgstr "Po uložení obrázky vymažte"
 
 #: MiscResources.resx$Close$Message
 msgid "Close"
@@ -403,7 +404,7 @@ msgstr "Kompatibilta"
 
 #: FImageSettings.resx$label3.Text$Message
 msgid "Compression"
-msgstr ""
+msgstr "Kompresia"
 
 #: FEditProfile.resx$label7.Text$Message
 msgid "Contrast"
@@ -416,7 +417,7 @@ msgstr "Kopírovať"
 
 #: MiscResources.resx$CopyProgress$Message
 msgid "Copy Progress"
-msgstr "Stav kopírovania"
+msgstr "Priebeh kopírovania"
 
 #: MiscResources.resx$Copying$Message
 msgid "Copying"
@@ -424,11 +425,11 @@ msgstr "Kopírovanie"
 
 #: FAbout.resx$labelCopyright.Text$Message
 msgid "Copyright 2009, 2012-2018 NAPS2 Contributors"
-msgstr ""
+msgstr "Copyright 2009, 2012-2018 Prispievatelia NAPS2"
 
 #: FAdvancedScanSettings.resx$label3.Text$Message
 msgid "Coverage Threshold"
-msgstr "Hranica pokrytia"
+msgstr "Prahová hodnota pokrytia"
 
 #: FCrop.resx$$this.Text$Message
 #: FDesktop.resx$tsCrop.Text$Message
@@ -438,7 +439,7 @@ msgstr "Orezať"
 
 #: FAdvancedScanSettings.resx$cbForcePageSizeCrop.Text$Message
 msgid "Crop to page size"
-msgstr ""
+msgstr "Orezať na veľkosť strany"
 
 #: SettingsResources.resx$PageSize_Custom$Message
 msgid "Custom"
@@ -446,11 +447,11 @@ msgstr "Vlastné"
 
 #: MiscResources.resx$CustomPageSizeFormat$Message
 msgid "Custom ({0}x{1} {2})"
-msgstr "Custom ({0}x{1} {2})"
+msgstr "Vlastné ({0}x{1} {2})"
 
 #: FPageSize.resx$$this.Text$Message
 msgid "Custom Page Size"
-msgstr "Vlastná veľkosť strany"
+msgstr "Vlastná veľkosť stránky"
 
 #: FDesktop.resx$tsCustomRotation.Text$Message
 #: FViewer.resx$tsCustomRotation.Text$Message
@@ -459,7 +460,7 @@ msgstr "Vlastné natočenie"
 
 #: SettingsResources.resx$EmailProviderType_CustomSmtp$Message
 msgid "Custom SMTP"
-msgstr ""
+msgstr "Vlastné SMTP"
 
 #: FPlaceholders.resx$label6.Text$Message
 msgid "Day (01-31)"
@@ -473,16 +474,15 @@ msgstr "Pôvodné"
 #: FImageSettings.resx$label1.Text$Message
 #: FPdfSettings.resx$label1.Text$Message
 msgid "Default File Path"
-msgstr "Štandardná cesta k súborom"
+msgstr "Pôvodná cesta k súborom"
 
 #: FDesktop.resx$tsDeinterleave.Text$Message
-#, fuzzy
 msgid "Deinterleave"
-msgstr "Prekladanie"
+msgstr "Rozklad"
 
 #: FAdvancedScanSettings.resx$cbWiaDelayBetweenScans.Text$Message
 msgid "Delay between scans (WIA)"
-msgstr ""
+msgstr "Oneskorenie medzi skenovaniami (WIA)"
 
 #: FDesktop.resx$ctxDelete.Text$Message
 #: FDesktop.resx$tsDelete.Text$Message
@@ -492,24 +492,24 @@ msgstr ""
 #: FViewer.resx$tsDelete.Text$Message
 #: MiscResources.resx$Delete$Message
 msgid "Delete"
-msgstr "Zmazať"
+msgstr "Odstrániť"
 
 #: FDesktop.resx$tsDeskew.Text$Message
 #: FViewer.resx$tsDeskew.Text$Message
 msgid "Deskew"
-msgstr ""
+msgstr "Vyrovnanie sklonu"
 
 #: MiscResources.resx$AutoDeskewProgress$Message
 msgid "Deskew Progress"
-msgstr ""
+msgstr "Priebeh vyrovnávania sklonu"
 
 #: FAdvancedScanSettings.resx$cbAutoDeskew.Text$Message
 msgid "Deskew scanned pages"
-msgstr ""
+msgstr "Vyrovnanie sklonu skenovaných stránok"
 
 #: MiscResources.resx$AutoDeskewing$Message
 msgid "Deskewing"
-msgstr ""
+msgstr "Vyrovnávanie sklonu"
 
 #: FEditProfile.resx$label1.Text$Message
 msgid "Device"
@@ -521,11 +521,11 @@ msgstr "Rozmery"
 
 #: FEditProfile.resx$label8.Text$Message
 msgid "Display name"
-msgstr "Zobrazované meno"
+msgstr "Zobrazovaný názov"
 
 #: MiscResources.resx$Donate$Message
 msgid "Donate"
-msgstr ""
+msgstr "Obdarovať"
 
 #: FBatchPrompt.resx$btnDone.Text$Message
 #: FProfiles.resx$btnDone.Text$Message
@@ -534,23 +534,23 @@ msgstr "Hotovo"
 
 #: FOcrLanguageDownload.resx$btnDownload.Text$Message
 msgid "Download"
-msgstr "Preberanie"
+msgstr "Stiahnuť"
 
 #: MiscResources.resx$DownloadError$Message
 msgid "Download Error"
-msgstr "Chyba pri preberaní"
+msgstr "Chyba sťahovania"
 
 #: MiscResources.resx$DownloadNeeded$Message
 msgid "Download Needed"
-msgstr ""
+msgstr "Potrebné stiahnutie"
 
 #: FDownloadProgress.resx$$this.Text$Message
 msgid "Download Progress"
-msgstr "Stav preberania"
+msgstr "Priebeh sťahovania"
 
 #: SettingsResources.resx$Source_Duplex$Message
 msgid "Duplex"
-msgstr "Obojstranne"
+msgstr "Obojsmerne"
 
 #: FProfiles.resx$btnEdit.Text$Message
 #: FProfiles.resx$ctxEdit.Text$Message
@@ -559,11 +559,11 @@ msgstr "Úprava"
 
 #: FDesktop.resx$tsdEmailPDF.Text$Message
 msgid "Email PDF"
-msgstr "Odoslať PDF e-mailom"
+msgstr "PDF e-mailom"
 
 #: MiscResources.resx$EmailPdfProgress$Message
 msgid "Email PDF Progress"
-msgstr "Odosielanie PDF e-mailom"
+msgstr "Priebeh PDF e-mailom"
 
 #: FDesktop.resx$tsEmailSettings.Text$Message
 #: FEmailSettings.resx$$this.Text$Message
@@ -594,7 +594,7 @@ msgstr "Chyba"
 #: FOcrLanguageDownload.resx$labelSizeEstimate.Text$Message
 #: MiscResources.resx$EstimatedDownloadSize$Message
 msgid "Estimated download size: {0} MB"
-msgstr "Približná veľkosť preberania: {0} MB"
+msgstr "Odhadovaná veľkosť sťahovaného súboru: {0} MB"
 
 #: MiscResources.resx$FileTypeExif$Message
 msgid "Exchangeable Image File (*.exif)"
@@ -602,7 +602,7 @@ msgstr "Exchangeable Image File (*.exif)"
 
 #: FAdvancedScanSettings.resx$cbExcludeBlankPages.Text$Message
 msgid "Exclude blank pages"
-msgstr "Bez prázdnych stránok"
+msgstr "Vylúčiť prázdne stránky"
 
 #: SettingsResources.resx$Source_Feeder$Message
 msgid "Feeder"
@@ -615,7 +615,7 @@ msgstr "Názov súboru"
 #: FAutoSaveSettings.resx$lblFilePath.Text$Message
 #: FBatchScan.resx$lblFilePath.Text$Message
 msgid "File path"
-msgstr "Cesta k súboru"
+msgstr "Cesta súboru"
 
 #: FDesktop.resx$tsFlip.Text$Message
 #: FViewer.resx$tsFlip.Text$Message
@@ -624,13 +624,15 @@ msgstr "Preklopiť"
 
 #: FAdvancedScanSettings.resx$cbFlipDuplex.Text$Message
 msgid "Flip duplexed pages"
-msgstr "Preklopiť druhé strany"
+msgstr "Preklopiť obojsmerné strany"
 
 #: FImageSettings.resx$lblWarning.Text$Message
 msgid ""
 "For high JPEG qualities (80+), also increase Image Quality in your profile "
 "for best results"
 msgstr ""
+"Pre najlepšie výsledky vysokej kvality obrázkov JPEG (80+), zvýšte tiež "
+"Kvalitu obrázku vo svojom profile"
 
 #: MiscResources.resx$FileTypeGif$Message
 msgid "GIF File (*.gif)"
@@ -638,58 +640,58 @@ msgstr "Súbor GIF (*.gif)"
 
 #: FOcrSetup.resx$linkGetLanguages.Text$Message
 msgid "Get more languages"
-msgstr "Získať ďalšie jazyky"
+msgstr "Získať viac jazykov"
 
 #: SettingsResources.resx$Source_Glass$Message
 msgid "Glass"
-msgstr "Zo skla"
+msgstr "Sklo"
 
 #: SettingsResources.resx$EmailProviderType_Gmail$Message
 msgid "Gmail"
-msgstr ""
+msgstr "Gmail"
 
 #: SettingsResources.resx$BitDepth_8Grayscale$Message
 msgid "Grayscale"
-msgstr "Odtiene šedej"
+msgstr "Odtiene sivej"
 
 #: FEditProfile.resx$label9.Text$Message
 msgid "Horizontal align"
-msgstr "Vodorovné zarovnanie"
+msgstr "Zarovnať horizontálne"
 
 #: FPlaceholders.resx$label7.Text$Message
 msgid "Hour (0-23)"
-msgstr "Hodiny (0-23)"
+msgstr "Hodina (0-23)"
 
 #: FDesktop.resx$tsHueSaturation.Text$Message
 #: FHueSaturation.resx$$this.Text$Message
 #: FViewer.resx$tsHueSaturation.Text$Message
 msgid "Hue / Saturation"
-msgstr ""
+msgstr "Odtieň / nasýtenie"
 
 #: FAbout.resx$label1.Text$Message
 msgid "Icons from"
-msgstr "Ikony od"
+msgstr "Ikony z"
 
 #: FDesktop.resx$tsdImage.Text$Message
 msgid "Image"
-msgstr "Snímka"
+msgstr "Obrázok"
 
 #: MiscResources.resx$FileTypeImageFiles$Message
 msgid "Image Files"
-msgstr "S´úbory snímok"
+msgstr "Súbory obrázkov"
 
 #: FAdvancedScanSettings.resx$groupBox1.Text$Message
 msgid "Image Quality"
-msgstr "Kvalita snímky"
+msgstr "Kvalita obrázku"
 
 #: FDesktop.resx$tsImageSettings.Text$Message
 #: FImageSettings.resx$$this.Text$Message
 msgid "Image Settings"
-msgstr "Nastavnie snímok"
+msgstr "Nastavenia obrázkov"
 
 #: MiscResources.resx$ImageSaved$Message
 msgid "Image saved"
-msgstr "Snímka uložená"
+msgstr "Obrázok bol uložený"
 
 #: FDesktop.resx$tsImport.Text$Message
 msgid "Import"
@@ -697,7 +699,7 @@ msgstr "Import"
 
 #: MiscResources.resx$ImportProgress$Message
 msgid "Import Progress"
-msgstr "Stav importu"
+msgstr "Priebeh importu"
 
 #: MiscResources.resx$Importing$Message
 msgid "Importing"
@@ -709,7 +711,7 @@ msgstr "Importuje sa {0}"
 
 #: MiscResources.resx$Install$Message
 msgid "Install {0}"
-msgstr ""
+msgstr "Inštalovať {0}"
 
 #: MiscResources.resx$InstallComplete$Message
 msgid "Installation Complete"
@@ -721,7 +723,7 @@ msgstr "Inštalácia zlyhala"
 
 #: MiscResources.resx$InstallCompletePromptRestart$Message
 msgid "Installation complete. Do you want to restart NAPS2 now?"
-msgstr "Inštalácia dokončená, môže sa teraz reštartovať NAPS2?"
+msgstr "Inštalácia dokončená. Chcete teraz reštartovať NAPS2?"
 
 #: MiscResources.resx$InstallFailed$Message
 msgid "Installation failed"
@@ -733,11 +735,11 @@ msgstr "Prekladanie"
 
 #: MiscResources.resx$FileTypeJpeg$Message
 msgid "JPEG File (*.jpg, *.jpeg)"
-msgstr "SúborJPEG (*.jpg, *.jpeg)"
+msgstr "Súbor JPEG (*.jpg, *.jpeg)"
 
 #: FImageSettings.resx$groupJpeg.Text$Message
 msgid "Jpeg Quality"
-msgstr "Kvalita JPEG"
+msgstr "Kvalita Jpeg"
 
 #: FPdfSettings.resx$label6.Text$Message
 msgid "Keywords"
@@ -745,7 +747,7 @@ msgstr "Kľúčové slová"
 
 #: SettingsResources.resx$TiffComp_Lzw$Message
 msgid "LZW"
-msgstr ""
+msgstr "LZW"
 
 #: FDesktop.resx$toolStripDropDownButton1.Text$Message
 msgid "Language"
@@ -757,31 +759,31 @@ msgstr "Vľavo"
 
 #: SettingsResources.resx$TwainImpl_Legacy$Message
 msgid "Legacy (native UI only)"
-msgstr "Staršie (len natívne rozhranie)"
+msgstr "Staršie (len natívne užívateľské rozhranie)"
 
 #: FBatchScan.resx$rdLoadIntoNaps2.Text$Message
 msgid "Load images into NAPS2"
-msgstr "Vložiť snímky do NAPS2"
+msgstr "Načítanie obrázkov do NAPS2"
 
 #: FDesktop.resx$tStrip.Text$Message
 msgid "Main toolbar"
-msgstr "Hlavný panel nástrojov"
+msgstr "Hlavná lišta nástrojov"
 
 #: FOcrSetup.resx$checkBoxEnableOcr.Text$Message
 msgid "Make PDFs searchable using OCR"
-msgstr "Vytvoriť prehľadávateľné PDF použitím OCR"
+msgstr "Umožnite vyhľadávanie PDF pomocou OCR"
 
 #: FAdvancedScanSettings.resx$cbHighQuality.Text$Message
 msgid "Maximum quality (large files)"
-msgstr "Najvyššia kvalita (vytvorí veľké súbory)"
+msgstr "Maximálna kvalita (veľké súbory)"
 
 #: FPdfSettings.resx$groupMetadata.Text$Message
 msgid "Metadata"
-msgstr "Metadata"
+msgstr "Metaúdaje"
 
 #: FPlaceholders.resx$label8.Text$Message
 msgid "Minute (00-59)"
-msgstr "Minúty (00-59)"
+msgstr "Minúta (00-59)"
 
 #: FPlaceholders.resx$label5.Text$Message
 msgid "Month (01-12)"
@@ -794,19 +796,19 @@ msgstr "Viac informácií"
 
 #: FDesktop.resx$tsMove.SecondText$Message
 msgid "Move Down"
-msgstr "Posun dole"
+msgstr "Posunúť nadol"
 
 #: FDesktop.resx$tsMove.FirstText$Message
 msgid "Move Up"
-msgstr "Posun hore"
+msgstr "Posunúť nahor"
 
 #: FBatchScan.resx$rdMultipleScansDelay.Text$Message
 msgid "Multiple scans (fixed delay between scans)"
-msgstr "Viacnásobné skenovanie (s prestávkou medzi skenmi)"
+msgstr "Viacnásobné skenovanie (s pevným oneskorením medzi skenovaniami)"
 
 #: FBatchScan.resx$rdMultipleScansPrompt.Text$Message
 msgid "Multiple scans (prompt between scans)"
-msgstr "Viacnásobné skenovanie (potvrdenie medzi skenovaním)"
+msgstr "Viacnásobné skenovanie (výzva medzi skenovaniami)"
 
 #: MiscResources.resx$NAPS2$Message
 msgid "NAPS2"
@@ -814,15 +816,15 @@ msgstr "NAPS2"
 
 #: MiscResources.resx$DonatePrompt$Message
 msgid "NAPS2 is completely free. Consider making a donation"
-msgstr ""
+msgstr "NAPS2 je úplne zadarmo. Zvážte obdarovanie"
 
 #: FPageSize.resx$label1.Text$Message
 msgid "Name (optional)"
-msgstr "Meno (nepovinné)"
+msgstr "Názov (nepovinné)"
 
 #: MiscResources.resx$NameMissing$Message
 msgid "Name missing"
-msgstr "Chýba meno"
+msgstr "Chýba názov"
 
 #: FProfiles.resx$btnAdd.Text$Message
 msgid "New"
@@ -834,7 +836,7 @@ msgstr "Nový profil"
 
 #: FViewer.resx$tsNext.Text$Message
 msgid "Next"
-msgstr "Ďalší"
+msgstr "Ďalej"
 
 #: FBatchPrompt.resx$$this.Text$Message
 msgid "Next Scan"
@@ -846,29 +848,28 @@ msgstr "Nebolo vybrané žiadne zariadenie"
 
 #: MiscResources.resx$NoPagesInFeeder$Message
 msgid "No pages are in the feeder"
-msgstr "V podávači nie je nič vložené"
+msgstr "V podávači nie sú žiadne listy"
 
 #: FEmailSettings.resx$lblProvider.Text$Message
 #: SettingsResources.resx$EmailProvider_NotSelected$Message
 msgid "No provider selected"
-msgstr ""
+msgstr "Nie je vybratý žiadny poskytovateľ"
 
 #: MiscResources.resx$NoDevicesFound$Message
 msgid "No scanning device was found"
-msgstr "Nenašlo sa skenovacie zariadenie"
+msgstr "Nenašlo sa žiadne skenovacie zariadenie"
 
 #: MiscResources.resx$NoUpdates$Message
 msgid "No updates available"
-msgstr ""
+msgstr "Žiadne dostupné aktualizácie"
 
 #: SettingsResources.resx$TiffComp_None$Message
-#, fuzzy
 msgid "None"
-msgstr "Hotovo"
+msgstr "Žiadny"
 
 #: FDesktop.resx$$this.Text$Message
 msgid "Not Another PDF Scanner 2"
-msgstr "Not Another PDF Scanner 2"
+msgstr "Nie je ďašlší PDF skener 2"
 
 #: FRecover.resx$btnCancel.Text$Message
 msgid "Not Now"
@@ -876,7 +877,7 @@ msgstr "Teraz nie"
 
 #: FBatchScan.resx$lblNumberOfScans.Text$Message
 msgid "Number of scans"
-msgstr "Počet snímkov"
+msgstr "Počet skenov"
 
 #: FDesktop.resx$tsOcr.Text$Message
 msgid "OCR"
@@ -884,11 +885,11 @@ msgstr "OCR"
 
 #: FOcrLanguageDownload.resx$$this.Text$Message
 msgid "OCR Download"
-msgstr "Prevziať OCR"
+msgstr "Stiahnuť OCR"
 
 #: MiscResources.resx$OcrProgress$Message
 msgid "OCR Progress"
-msgstr ""
+msgstr "Priebeh OCR"
 
 #: FOcrSetup.resx$$this.Text$Message
 msgid "OCR Setup"
@@ -900,7 +901,7 @@ msgstr "Jazyk OCR"
 
 #: FOcrSetup.resx$labelOcrMode.Text$Message
 msgid "OCR mode"
-msgstr ""
+msgstr "Režim OCR"
 
 #: FAbout.resx$okButton.Text$Message
 #: FAdvancedScanSettings.resx$btnOK.Text$Message
@@ -920,7 +921,7 @@ msgstr "OK"
 
 #: FAdvancedScanSettings.resx$cbWiaOffsetWidth.Text$Message
 msgid "Offset width based on alignment (WIA)"
-msgstr "Veľkosť posunu závislé na zarovnaní (WIA)"
+msgstr "Šírka posunu na základe zarovnania (WIA)"
 
 #: SettingsResources.resx$TwainImpl_OldDsm$Message
 msgid "Old DSM"
@@ -929,7 +930,7 @@ msgstr "Staršie DSM"
 #: FAutoSaveSettings.resx$rdFilePerPage.Text$Message
 #: FBatchScan.resx$rdFilePerPage.Text$Message
 msgid "One file per page"
-msgstr "Jeden súbor na snímok"
+msgstr "Jeden súbor na stránku"
 
 #: FAutoSaveSettings.resx$rdFilePerScan.Text$Message
 #: FBatchScan.resx$rdFilePerScan.Text$Message
@@ -938,7 +939,7 @@ msgstr "Jeden súbor na skenovanie"
 
 #: MiscResources.resx$FilesCouldNotBeDownloaded$Message
 msgid "One or more files could not be downloaded"
-msgstr "Jeden alebo viac súborov sa nepodarilo prevziať"
+msgstr "Jeden alebo viac súborov sa nepodarilo stiahnuť"
 
 #: NotifyWidget.resx$openFolderToolStripMenuItem.Text$Message
 msgid "Open Folder"
@@ -946,11 +947,11 @@ msgstr "Otvoriť priečinok"
 
 #: MiscResources.resx$ActiveOperations$Message
 msgid "Operation in Progress"
-msgstr ""
+msgstr "Priebeh operácie"
 
 #: SettingsResources.resx$EmailProviderType_OutlookWeb$Message
 msgid "Outlook Web Access"
-msgstr ""
+msgstr "Služba Outlook Web Access"
 
 #: FBatchScan.resx$groupboxOutput.Text$Message
 msgid "Output"
@@ -962,7 +963,7 @@ msgstr "Prepísať súbor"
 
 #: FPdfSettings.resx$lblOwnerPassword.Text$Message
 msgid "Owner Password"
-msgstr "Uživateľské heslo"
+msgstr "Heslo vlastníka"
 
 #: MiscResources.resx$FileTypePdf$Message
 msgid "PDF Document (*.pdf)"
@@ -976,23 +977,23 @@ msgstr "Nastavenie PDF"
 
 #: MiscResources.resx$PdfSaved$Message
 msgid "PDF saved"
-msgstr "PDF uložené"
+msgstr "PDF bolo uložené"
 
 #: SettingsResources.resx$PdfCompat_PdfA1B$Message
 msgid "PDF/A-1b"
-msgstr ""
+msgstr "PDF/A-1b"
 
 #: SettingsResources.resx$PdfCompat_PdfA2B$Message
 msgid "PDF/A-2b"
-msgstr ""
+msgstr "PDF/A-2b"
 
 #: SettingsResources.resx$PdfCompat_PdfA3B$Message
 msgid "PDF/A-3b"
-msgstr ""
+msgstr "PDF/A-3b"
 
 #: SettingsResources.resx$PdfCompat_PdfA3U$Message
 msgid "PDF/A-3u"
-msgstr ""
+msgstr "PDF/A-3u"
 
 #: MiscResources.resx$FileTypePng$Message
 msgid "PNG File (*.png)"
@@ -1000,7 +1001,7 @@ msgstr "Súbor PNG (*.png)"
 
 #: FEditProfile.resx$label4.Text$Message
 msgid "Page size"
-msgstr "Rozmer strany"
+msgstr "Veľkosť stránky"
 
 #: FEditProfile.resx$label2.Text$Message
 msgid "Paper source"
@@ -1013,7 +1014,7 @@ msgstr "Heslo"
 #: FDesktop.resx$ctxPaste.Text$Message
 #: FProfiles.resx$ctxPaste.Text$Message
 msgid "Paste"
-msgstr "Vložiť"
+msgstr "Prilepiť"
 
 #: FAutoSaveSettings.resx$linkPlaceholders.Text$Message
 #: FBatchScan.resx$linkPlaceholders.Text$Message
@@ -1023,15 +1024,15 @@ msgstr "Vložiť"
 #: FPlaceholders.resx$$this.Text$Message
 #: FPlaceholders.resx$gboxPlaceholders.Text$Message
 msgid "Placeholders"
-msgstr "Zástupné znaky"
+msgstr "Zástupné symboly"
 
 #: FAdvancedScanSettings.resx$groupBox4.Text$Message
 msgid "Post-processing"
-msgstr ""
+msgstr "Následné spracovanie"
 
 #: FBatchScan.resx$lblStatus.Text$Message
 msgid "Press Start when ready"
-msgstr "Ak je všetko pripravené, stlačte Štart"
+msgstr "Ak budete pripravení, stlačte Štart"
 
 #: FPlaceholders.resx$label2.Text$Message
 #: FViewer.resx$$this.Text$Message
@@ -1040,7 +1041,7 @@ msgstr "Náhľad"
 
 #: FViewer.resx$tsPrev.Text$Message
 msgid "Previous"
-msgstr "Predchádzajúci"
+msgstr "Predošlý"
 
 #: FDesktop.resx$tsPrint.Text$Message
 msgid "Print"
@@ -1052,7 +1053,7 @@ msgstr "Profil"
 
 #: FEditProfile.resx$$this.Text$Message
 msgid "Profile Settings"
-msgstr "Nastavenie profilu"
+msgstr "Nastavenia profilu"
 
 #: FDesktop.resx$tsProfiles.Text$Message
 #: FProfiles.resx$$this.Text$Message
@@ -1061,11 +1062,11 @@ msgstr "Profily"
 
 #: FAutoSaveSettings.resx$cbPromptForFilePath.Text$Message
 msgid "Prompt for file path"
-msgstr ""
+msgstr "Výzva na zadanie cesty k súboru"
 
 #: FEmailSettings.resx$groupBox1.Text$Message
 msgid "Provider"
-msgstr ""
+msgstr "Poskytovateľ"
 
 #: FBatchPrompt.resx$lblStatus.Text$Message
 msgid "Ready for scan {0}"
@@ -1077,7 +1078,7 @@ msgstr "Obnoviť"
 
 #: FRecover.resx$$this.Text$Message
 msgid "Recover Scanned Images"
-msgstr "Obnoviť zoskenované snímky"
+msgstr "Obnoviť naskenované obrázky"
 
 #: MiscResources.resx$Recovering$Message
 msgid "Recovering"
@@ -1085,13 +1086,13 @@ msgstr "Obnovovanie"
 
 #: MiscResources.resx$RecoveryProgress$Message
 msgid "Recovery Progress"
-msgstr "Stav obnovovania"
+msgstr "Priebeh obnovovania"
 
 #: FEmailSettings.resx$cbRememberSettings.Text$Message
 #: FImageSettings.resx$cbRememberSettings.Text$Message
 #: FPdfSettings.resx$cbRememberSettings.Text$Message
 msgid "Remember these settings"
-msgstr "Zapamätať tieto nastavnia"
+msgstr "Zapamätať si tieto nastavenia"
 
 #: FDesktop.resx$tsdReorder.Text$Message
 msgid "Reorder"
@@ -1099,11 +1100,11 @@ msgstr "Zoradiť"
 
 #: FDesktop.resx$tsReset.Text$Message
 msgid "Reset"
-msgstr "Reset"
+msgstr "Vynulovať"
 
 #: MiscResources.resx$ResetImage$Message
 msgid "Reset Image"
-msgstr "Reset snímky"
+msgstr "Vynulovať obrázok"
 
 #: FEditProfile.resx$label5.Text$Message
 msgid "Resolution"
@@ -1118,7 +1119,7 @@ msgstr "Obnoviť pôvodné"
 
 #: FAdvancedScanSettings.resx$cbWiaRetryOnFailure.Text$Message
 msgid "Retry on failure (WIA)"
-msgstr ""
+msgstr "Opakovať pri zlyhaní (WIA)"
 
 #: FDesktop.resx$tsReverse.Text$Message
 msgid "Reverse"
@@ -1126,7 +1127,7 @@ msgstr "Opačné poradie"
 
 #: ImageForm.resx$btnRevert.Text$Message
 msgid "Revert"
-msgstr "Vrátiť"
+msgstr "Prevrátiť"
 
 #: SettingsResources.resx$HorizontalAlign_Right$Message
 msgid "Right"
@@ -1150,28 +1151,27 @@ msgstr "Natočiť vpravo"
 
 #: FProgress.resx$btnRunInBG.Text$Message
 msgid "Run in Background"
-msgstr ""
+msgstr "Spustiť na pozadí"
 
 #: MiscResources.resx$RunningOcr$Message
 msgid "Running OCR"
-msgstr ""
+msgstr "Spustené OCR"
 
 #: FEditProfile.resx$rdSANE.Text$Message
 msgid "SANE Driver"
-msgstr ""
+msgstr "Ovládač SANE"
 
 #: FViewer.resx$tsSaveImage.Text$Message
-#, fuzzy
 msgid "Save Image"
-msgstr "Uložiť snímky"
+msgstr "Uložiť obrázok"
 
 #: FDesktop.resx$tsdSaveImages.Text$Message
 msgid "Save Images"
-msgstr "Uložiť snímky"
+msgstr "Uložiť obrázky"
 
 #: MiscResources.resx$SaveImagesProgress$Message
 msgid "Save Images Progress"
-msgstr "Stav ukladania snímok"
+msgstr "Priebeh ukladania obrázkov"
 
 #: FDesktop.resx$tsdSavePDF.Text$Message
 #: FViewer.resx$tsSavePDF.Text$Message
@@ -1180,11 +1180,11 @@ msgstr "Uložiť PDF"
 
 #: MiscResources.resx$SavePdfProgress$Message
 msgid "Save PDF Progress"
-msgstr "Stav ukladania PDF"
+msgstr "Priebeh ukladania PDF"
 
 #: FBatchScan.resx$rdSaveToSingleFile.Text$Message
 msgid "Save to a single file"
-msgstr "Uložiť do jediného súboru"
+msgstr "Uložiť do jedného súboru"
 
 #: FBatchScan.resx$rdSaveToMultipleFiles.Text$Message
 msgid "Save to multiple files"
@@ -1212,7 +1212,7 @@ msgstr "Mierka podľa okna"
 #: FProfiles.resx$ctxScan.Text$Message
 #: MiscResources.resx$Scan$Message
 msgid "Scan"
-msgstr "Sken"
+msgstr "Skenovať"
 
 #: FBatchScan.resx$groupboxScanConfig.Text$Message
 msgid "Scan Configuration"
@@ -1220,41 +1220,41 @@ msgstr "Konfigurácia skenovania"
 
 #: MiscResources.resx$ScannedImage$Message
 msgid "Scanned Image"
-msgstr "Zoskenovaná snímka"
+msgstr "Naskenovaný obrázok"
 
 #: FScanProgress.resx$labelPage.Text$Message
 #: MiscResources.resx$BatchStatusPage$Message
 #: MiscResources.resx$ScanPageProgress$Message
 msgid "Scanning page {0}"
-msgstr "Skenujem stranu {0}"
+msgstr "Skenovanie strany {0}"
 
 #: MiscResources.resx$BatchStatusScanPage$Message
 msgid "Scanning page {0} (scan {1})"
-msgstr "Skenujem stranu {0} (sken {1})"
+msgstr "Skenovanie strany {0} (skenovanie {1})"
 
 #: FPlaceholders.resx$label9.Text$Message
 msgid "Second (00-59)"
-msgstr "Sekundy (00-59)"
+msgstr "Sekunda (00-59)"
 
 #: FSelectDevice.resx$btnSelect.Text$Message
 msgid "Select"
-msgstr "Výber"
+msgstr "Vybrať"
 
 #: FDesktop.resx$ctxSelectAll.Text$Message
 msgid "Select All"
-msgstr "Vyber všetko"
+msgstr "Vybrať všetko"
 
 #: FSelectDevice.resx$$this.Text$Message
 msgid "Select Source"
-msgstr "Vyber zdroj"
+msgstr "Vybrať zdroj"
 
 #: MiscResources.resx$SelectProfileBeforeScan$Message
 msgid "Select a profile before clicking Scan"
-msgstr "Pred stlačením Skenuj najskôr vyber profil"
+msgstr "Pred kliknutím na Skenovať najskôr vyberte profil"
 
 #: FOcrLanguageDownload.resx$label3.Text$Message
 msgid "Select one or more languages"
-msgstr "Vyber jeden alebo viac jazykov"
+msgstr "Vybrať jeden alebo viac jazykov"
 
 #: FDesktop.resx$tsEmailPDFSelected.Text$Message
 #: FDesktop.resx$tsReverseSelected.Text$Message
@@ -1267,7 +1267,7 @@ msgstr "Vybrané ({0})"
 #: FAutoSaveSettings.resx$rdSeparateByPatchT.Text$Message
 #: FBatchScan.resx$rdSeparateByPatchT.Text$Message
 msgid "Separate files by Patch-T"
-msgstr ""
+msgstr "Oddeľte súbory podľa Patch-T"
 
 #: FProfiles.resx$ctxSetDefault.Text$Message
 msgid "Set Default"
@@ -1277,16 +1277,16 @@ msgstr "Nastaviť pôvodné"
 #: FSharpen.resx$$this.Text$Message
 #: FViewer.resx$tsSharpen.Text$Message
 msgid "Sharpen"
-msgstr ""
+msgstr "Zaostriť"
 
 #: FPdfSettings.resx$cbShowOwnerPassword.Text$Message
 #: FPdfSettings.resx$cbShowUserPassword.Text$Message
 msgid "Show"
-msgstr "Ukáž"
+msgstr "Ukázať"
 
 #: FImageSettings.resx$cbSinglePageTiff.Text$Message
 msgid "Single page files"
-msgstr ""
+msgstr "Jednostránkové súbory"
 
 #: FBatchScan.resx$rdSingleScan.Text$Message
 msgid "Single scan"
@@ -1295,7 +1295,7 @@ msgstr "Jedno skenovanie"
 #: FImageSettings.resx$cbSkipSavePrompt.Text$Message
 #: FPdfSettings.resx$cbSkipSavePrompt.Text$Message
 msgid "Skip save prompt"
-msgstr "Nepýtať sa na ukladanie"
+msgstr "Preskočiť výzvu na uloženie"
 
 #: FBatchScan.resx$btnStart.Text$Message
 msgid "Start"
@@ -1303,11 +1303,11 @@ msgstr "Štart"
 
 #: FAdvancedScanSettings.resx$cbForcePageSize.Text$Message
 msgid "Stretch to page size"
-msgstr ""
+msgstr "Roztiahnuť na veľkosť stránky"
 
 #: FPdfSettings.resx$label5.Text$Message
 msgid "Subject"
-msgstr "Predmet správy"
+msgstr "Predmet"
 
 #: MiscResources.resx$FileTypeTiff$Message
 msgid "TIFF File (*.tiff, *.tif)"
@@ -1319,37 +1319,40 @@ msgstr "Ovládač TWAIN"
 
 #: FError.resx$linkDetails.Text$Message
 msgid "Technical Details"
-msgstr ""
+msgstr "Technické detaily"
 
 #: MiscResources.resx$TesseractNotAvailable$Message
 msgid ""
 "The OCR engine is not available. Make sure to install the required package"
 msgstr ""
+"Mechanizmus OCR nie je k dispozícii. Určite preverte požadovaný balík pre "
+"inštaláciu"
 
 #: MiscResources.resx$SaneNotAvailable$Message
 msgid ""
 "The SANE driver is not available. Make sure to install the required packages"
 msgstr ""
+"Ovládač SANE nie je k dispozícii. Preverte požadované balíky pre inštaláciu"
 
 #: MiscResources.resx$ImportErrorCouldNot$Message
 msgid "The file '{0}' could not be imported"
-msgstr "Súbor '{0}' nemôže byť importovaný"
+msgstr "Súbor '{0}' sa nemožno importovať"
 
 #: MiscResources.resx$ImportErrorNAPS2Pdf$Message
 msgid ""
 "The file '{0}' could not be imported. Only PDF files generated by NAPS2 can "
 "be imported"
 msgstr ""
-"Súbor '{0}' nemôže byť importovaný. Len súbory vytvorené cez NAPS2 je možné "
-"importovať"
+"Súbor '{0}' nemožno importovať. Možno importovať len PDF súbory vygenerované "
+"cez NAPS2"
 
 #: MiscResources.resx$FileInUse$Message
 msgid "The file could not be overwritten because it is currently in use"
-msgstr ""
+msgstr "Súbor nemožno prepísať, pretože sa momentálne používa"
 
 #: MiscResources.resx$ConfirmOverwriteFile$Message
 msgid "The file {0} already exists. Do you want to overwrite it?"
-msgstr "Súbor {0} už existuje, prepísať?"
+msgstr "Súbor {0} už existuje. Chcete ho prepísať?"
 
 #: FPdfPassword.resx$lblPrompt.Text$Message
 msgid "The following file is encrypted and requires a password to open: {0}"
@@ -1365,11 +1368,11 @@ msgstr "Skener sa zahrieva"
 
 #: MiscResources.resx$DeviceCoverOpen$Message
 msgid "The scanner's cover is open"
-msgstr "Víko skenera je otvorené"
+msgstr "Kryt skenera je otvorený"
 
 #: MiscResources.resx$DriverNotSupported$Message
 msgid "The selected driver is not supported on this system"
-msgstr ""
+msgstr "Vybraný ovládač nie je v tomto systéme podporovaný"
 
 #: MiscResources.resx$DeviceNotFound$Message
 msgid "The selected scanner could not be found"
@@ -1380,7 +1383,8 @@ msgid ""
 "The selected scanner does not support using a feeder. If your scanner does "
 "have a feeder, try using a different driver"
 msgstr ""
-"Vybraný skener nepodporuje podávač. Ak ho má, potom treba nájsť iný ovládač"
+"Vybraný skener nepodporuje použitie podávača. Ak skener obsahuje podávač, "
+"skúste použiť iný ovládač"
 
 #: MiscResources.resx$NoDuplexSupport$Message
 msgid ""
@@ -1400,7 +1404,7 @@ msgstr "Vybraný skener je offline"
 
 #: FImageSettings.resx$groupTiff.Text$Message
 msgid "Tiff Options"
-msgstr ""
+msgstr "Možnosti Tiff"
 
 #: FBatchScan.resx$lblTimeBetweenScans.Text$Message
 msgid "Time between scans (seconds)"
@@ -1408,7 +1412,7 @@ msgstr "Čas medzi skenovaniami (v sekundách)"
 
 #: FPdfSettings.resx$label4.Text$Message
 msgid "Title"
-msgstr "Titul"
+msgstr "Titulok"
 
 #: FAdvancedScanSettings.resx$label1.Text$Message
 msgid "Twain Implementation"
@@ -1428,33 +1432,33 @@ msgstr "Neuložené zmeny"
 
 #: MiscResources.resx$UpdateProgress$Message
 msgid "Update Progress"
-msgstr ""
+msgstr "Priebeh aktualizácie"
 
 #: MiscResources.resx$Updating$Message
 msgid "Updating"
-msgstr ""
+msgstr "Aktualizácia"
 
 #: MiscResources.resx$UploadingEmail$Message
 msgid "Uploading email"
-msgstr ""
+msgstr "Povýšenie e-mailom"
 
 #: FEditProfile.resx$rdbNative.Text$Message
 msgid "Use native UI"
-msgstr "Použiť natívne rozhranie skenera"
+msgstr "Použiť natívne užívateľské rozhranie"
 
 #: FEditProfile.resx$rdbConfig.Text$Message
 msgid "Use predefined settings"
-msgstr "Použiť pôvodné nastavenia"
+msgstr "Použite preddefinované nastavenia"
 
 #: FPdfSettings.resx$lblUserPassword.Text$Message
 msgid "User Password"
-msgstr "Uživateľské heslo"
+msgstr "Heslo užívateľa"
 
 #: FOcrLanguageDownload.resx$label1.Text$Message
 msgid "Using OCR requires you to download each language you want to scan"
 msgstr ""
-"Použitie OCR vyžaduje prevzatie takej jazykovej sady, v akej je skenovaný "
-"obsah"
+"Používanie OCR vyžaduje, aby ste si stiahli každý jazyk, ktorý chcete "
+"skenovať"
 
 #: MiscResources.resx$Version$Message
 msgid "Version {0}"
@@ -1463,7 +1467,7 @@ msgstr "Verzia {0}"
 #: FDesktop.resx$ctxView.Text$Message
 #: FDesktop.resx$tsView.Text$Message
 msgid "View"
-msgstr "Pohľad"
+msgstr "Zobrazenie"
 
 #: FEditProfile.resx$rdWIA.Text$Message
 msgid "WIA Driver"
@@ -1471,19 +1475,19 @@ msgstr "Ovládač WIA"
 
 #: FTwainGui.resx$label1.Text$Message
 msgid "Waiting for TWAIN to complete"
-msgstr " Čaká sa na skener"
+msgstr "Čaká sa na dokončenie TWAIN"
 
 #: FAuthorize.resx$lblWaiting.Text$Message
 msgid "Waiting for authorization"
-msgstr ""
+msgstr "Čaká sa na autorizáciu"
 
 #: MiscResources.resx$BatchStatusWaitingForScan$Message
 msgid "Waiting for scan {0}"
-msgstr "Čakanie na sken {0}"
+msgstr "Čaká sa na skenovanie {0}"
 
 #: FAdvancedScanSettings.resx$label2.Text$Message
 msgid "White Threshold"
-msgstr "Hranica pre bielu"
+msgstr "Prah bielej"
 
 #: FPageSize.resx$labelX.Text$Message
 msgid "X"
@@ -1499,17 +1503,17 @@ msgstr "Rok (00-99)"
 
 #: MiscResources.resx$PdfNoPermissionToExtractContent$Message
 msgid "You do not have permission to copy content from the file '{0}'"
-msgstr "Nemáte práva na kopírovanie obsahu zo súboru '{0}'"
+msgstr "Nemáte povolenie na kopírovanie obsahu zo súboru '{0}'"
 
 #: MiscResources.resx$DontHavePermission$Message
 msgid "You don't have permission to save files at this location"
-msgstr "Nemáte práva na uloženie súboru do tohto priestoru"
+msgstr "Na tomto mieste nemáte povolenie na ukladanie súborov"
 
 #: MiscResources.resx$ExitWithUnsavedChanges$Message
 msgid ""
 "You have unsaved changes. Are you sure you want to exit and discard those "
 "changes?"
-msgstr "Máte neuložené zmeny. Naozaj ukončiť a zmeny zahodiť?"
+msgstr "Máte neuložené zmeny. Naozaj chcete skončiť a tieto zmeny zahodiť?"
 
 #: TiffViewerCtl.resx$tsZoom.ToolTipText$Message
 msgid "Zoom"
@@ -1521,11 +1525,11 @@ msgstr "Aktuálne priblíženie"
 
 #: TiffViewerCtl.resx$tsZoomPlus.ToolTipText$Message
 msgid "Zoom In"
-msgstr "Zväčšenie"
+msgstr "Priblíženie"
 
 #: TiffViewerCtl.resx$tsZoomOut.ToolTipText$Message
 msgid "Zoom Out"
-msgstr "Zmenšenie"
+msgstr "Oddialenie"
 
 #: SettingsResources.resx$PageSizeUnit_Centimetre$Message
 msgid "cm"
@@ -1541,7 +1545,7 @@ msgstr "http://www.naps2.com"
 
 #: SettingsResources.resx$PageSizeUnit_Inch$Message
 msgid "in"
-msgstr "in"
+msgstr "palec"
 
 #: SettingsResources.resx$PageSizeUnit_Millimetre$Message
 msgid "mm"
@@ -1568,19 +1572,19 @@ msgstr "{0} / {1} MB"
 #: FDownloadProgress.resx$labelTop.Text$Message
 #: MiscResources.resx$FilesProgressFormat$Message
 msgid "{0} / {1} files"
-msgstr "{0} z {1} súborov"
+msgstr "{0} / {1} súborov"
 
 #: FRecover.resx$lblPrompt.Text$Message
 msgid ""
 "{0} image(s) scanned on {1} at {2} may not have been saved, and are "
 "recoverable. Do you want to recover them?"
 msgstr ""
-"{0} snímkov odskenovaných na {1} v {2} zostalo neuložených a sú obnoviteľné. "
-"Obnoviť?"
+"{0} skenovaných obrázkov na {1} v {2} zostalo neuložených a sú obnoviteľné. "
+"Chcete ich obnoviť?"
 
 #: MiscResources.resx$ImagesSaved$Message
 msgid "{0} images saved"
-msgstr "{0} snímkov uložených"
+msgstr "{0} uložených obrázkov"
 
 #: MiscResources.resx$PdfStatus$Message
 msgid "{0} of {1}"

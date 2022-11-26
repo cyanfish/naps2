@@ -3,13 +3,14 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-09-17 20:27+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: 2019-12-29 06:04+0000\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: zh-CHS\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Translate Toolkit 2.2.5\n"
+"X-Generator: Pootle 2.8\n"
+"X-POOTLE-MTIME: 1577599467.095680\n"
 
 #: SettingsResources.resx$Dpi_100$Message
 msgid "100 dpi"
@@ -29,7 +30,7 @@ msgstr "200 dpi"
 
 #: SettingsResources.resx$BitDepth_24Color$Message
 msgid "24-bit Color"
-msgstr "24位色彩"
+msgstr "24-位色"
 
 #: SettingsResources.resx$Dpi_300$Message
 msgid "300 dpi"
@@ -74,7 +75,7 @@ msgstr "高级"
 
 #: FAdvancedScanSettings.resx$$this.Text$Message
 msgid "Advanced Profile Settings"
-msgstr "高级设置"
+msgstr "高级配置文件设置"
 
 #: FDesktop.resx$tsEmailPDFAll.Text$Message
 #: FDesktop.resx$tsReverseAll.Text$Message
@@ -82,7 +83,7 @@ msgstr "高级设置"
 #: FDesktop.resx$tsSavePDFAll.Text$Message
 #: MiscResources.resx$AllCount$Message
 msgid "All ({0})"
-msgstr "全部({0})"
+msgstr "全部 ({0})"
 
 #: MiscResources.resx$FileTypeAllFiles$Message
 msgid "All Files"
@@ -94,27 +95,27 @@ msgstr "允许注释"
 
 #: FPdfSettings.resx$clbPerms.Items4$Message
 msgid "Allow Content Copying"
-msgstr "允许内容复制"
+msgstr "允许复制内容"
 
 #: FPdfSettings.resx$clbPerms.Items5$Message
 msgid "Allow Content Copying for Accessibility"
-msgstr "允许其他工具内容复制"
+msgstr "允许其他工具复制内容"
 
 #: FPdfSettings.resx$clbPerms.Items3$Message
 msgid "Allow Document Assembly"
-msgstr "允许文件组件"
+msgstr "允许组合文件"
 
 #: FPdfSettings.resx$clbPerms.Items2$Message
 msgid "Allow Document Modification"
-msgstr "允许文件修改"
+msgstr "允许修改文件"
 
 #: FPdfSettings.resx$clbPerms.Items7$Message
 msgid "Allow Form Filling"
-msgstr "允许表单填写"
+msgstr "允许填写表单"
 
 #: FPdfSettings.resx$clbPerms.Items1$Message
 msgid "Allow Full Quality Printing"
-msgstr "允许完整品质打印"
+msgstr "允许全品质打印"
 
 #: FPdfSettings.resx$clbPerms.Items$Message
 msgid "Allow Printing"
@@ -122,11 +123,11 @@ msgstr "允许打印"
 
 #: FDesktop.resx$tsAltDeinterleave.Text$Message
 msgid "Alternate Deinterleave"
-msgstr "逆序相互交换位置"
+msgstr "奇偶页分别排列（偶数页逆序）"
 
 #: FDesktop.resx$tsAltInterleave.Text$Message
 msgid "Alternate Interleave"
-msgstr "顺序相互交换位置"
+msgstr "取消奇偶页分别排列（偶数页逆序）"
 
 #: SettingsResources.resx$TwainImpl_MemXfer$Message
 msgid "Alternative Transfer"
@@ -140,53 +141,53 @@ msgstr "需要额外的组件来导入这个 PDF 文件，您想要现在开始�
 
 #: MiscResources.resx$UpdateError$Message
 msgid "An error occured when trying to install the update"
-msgstr ""
+msgstr "尝试安装更新时发生错误"
 
 #: MiscResources.resx$AuthError$Message
 msgid "An error occurred when trying to authorize"
-msgstr ""
+msgstr "尝试授权时发生错误"
 
 #: MiscResources.resx$AutoSaveError$Message
 msgid "An error occurred when trying to auto save"
-msgstr "试图自动保存时发生错误！"
+msgstr "尝试自动保存时发生错误"
 
 #: MiscResources.resx$ErrorSaving$Message
 msgid "An error occurred when trying to save the file"
-msgstr "存储为文件时失败！"
+msgstr "尝试存储文件时发生错误"
 
 #: MiscResources.resx$ErrorEmailing$Message
 msgid "An error occurred when trying to send the email"
-msgstr ""
+msgstr "尝试发送此邮件时发生错误"
 
 #: MiscResources.resx$EmailError$Message
 msgid "An error occurred while trying to send an email"
-msgstr "尝试发送邮件时发生错误！"
+msgstr "尝试发送邮件时发生错误"
 
 #: MiscResources.resx$UnknownDriverError$Message
 msgid "An error occurred with the scanning driver"
-msgstr "扫描文件失败！"
+msgstr "尝试扫描文件发生错误"
 
 #: MiscResources.resx$ExitWithActiveOperations$Message
 msgid ""
 "An operation is in progress. Are you sure you want to exit and cancel the "
 "operation?"
-msgstr ""
+msgstr "操作进行中，是否取消操作并退出？"
 
 #: MiscResources.resx$BatchError$Message
 msgid "An unknown error ocurred during the batch scan"
-msgstr "批量扫描时发生一个未知错误！"
+msgstr "批量扫描时发生未知错误"
 
 #: MiscResources.resx$UpdateAvailable$Message
 msgid "An update is available"
-msgstr ""
+msgstr "有可用的更新"
 
 #: MiscResources.resx$OcrUpdateAvailable$Message
 msgid "An update to OCR is available"
-msgstr "OCR有可用更新！"
+msgstr "OCR 有可用的更新"
 
 #: FAdvancedScanSettings.resx$cbBrightnessContrastAfterScan.Text$Message
 msgid "Apply brightness/contrast after scan"
-msgstr "确认扫描后的亮度/对比度"
+msgstr "扫描后调整亮度/对比度"
 
 #: FBrightnessContrast.resx$checkboxApplyToSelected.Text$Message
 #: FHueSaturation.resx$checkboxApplyToSelected.Text$Message
@@ -195,35 +196,35 @@ msgstr "确认扫描后的亮度/对比度"
 #: FCrop.resx$checkboxApplyToSelected.Text$Message
 #: FBlackWhite.resx$checkboxApplyToSelected.Text$Message
 msgid "Apply to all {0} selected images"
-msgstr "应用到所有已选定的{0}个图像"
+msgstr "应用到所有已选定的 {0} 个图像"
 
 #: MiscResources.resx$ConfirmCancelBatch$Message
 msgid "Are you sure you want to cancel the batch scan?"
-msgstr ""
+msgstr "您确定要取消批量扫描吗?"
 
 #: MiscResources.resx$ConfirmClearItems$Message
 msgid "Are you sure you want to clear {0} item(s)?"
-msgstr "您确定要清除{0}个项目吗？"
+msgstr "您确定要清除 {0} 个项目吗？"
 
 #: MiscResources.resx$ConfirmDelete$Message
 msgid "Are you sure you want to delete \"{0}\"?"
-msgstr "您确定要删除{0}？"
+msgstr "您确定要删除“{0}”吗？"
 
 #: MiscResources.resx$ConfirmDeleteSingleProfile$Message
 msgid "Are you sure you want to delete the profile {0}?"
-msgstr "您确定要删除这个{0}设置吗？"
+msgstr "您确定要删除这个{0}配置吗？"
 
 #: MiscResources.resx$ConfirmDeleteItems$Message
 msgid "Are you sure you want to delete {0} item(s)?"
-msgstr "您确定要删除{0}个设置吗？"
+msgstr "您确定要删除{0}个项目吗?"
 
 #: MiscResources.resx$ConfirmDeleteMultipleProfiles$Message
 msgid "Are you sure you want to delete {0} profiles?"
-msgstr "您确定要删除{0}个设置吗？"
+msgstr "您确定要删除{0}个配置吗？"
 
 #: MiscResources.resx$ConfirmResetImages$Message
 msgid "Are you sure you want undo your changes to {0} image(s)?"
-msgstr "您确定要复原您的变更到{0}到图像吗？"
+msgstr "您确定要撤销您对{0}个图像的修改吗？"
 
 #: FEmailSettings.resx$label1.Text$Message
 msgid "Attachment Name"
@@ -235,11 +236,11 @@ msgstr "作者"
 
 #: FAuthorize.resx$$this.Text$Message
 msgid "Authorize"
-msgstr ""
+msgstr "授权"
 
 #: SettingsResources.resx$TiffComp_Auto$Message
 msgid "Auto"
-msgstr ""
+msgstr "自动"
 
 #: FEditProfile.resx$linkAutoSaveSettings.Text$Message
 #: FAutoSaveSettings.resx$$this.Text$Message
@@ -248,23 +249,23 @@ msgstr "自动保存设置"
 
 #: FPlaceholders.resx$label13.Text$Message
 msgid "Auto-incrementing number (1 digit)"
-msgstr "自动递增（1个数字）"
+msgstr "自动递增（1位数字）"
 
 #: FPlaceholders.resx$label12.Text$Message
 msgid "Auto-incrementing number (2 digits)"
-msgstr "自动递增（2个数字）"
+msgstr "自动递增（2位数字）"
 
 #: FPlaceholders.resx$label11.Text$Message
 msgid "Auto-incrementing number (3 digits)"
-msgstr "自动递增（3个数字）"
+msgstr "自动递增（3位数字）"
 
 #: FPlaceholders.resx$label10.Text$Message
 msgid "Auto-incrementing number (4 digits)"
-msgstr "自动递增（4个数字）"
+msgstr "自动递增（4位数字）"
 
 #: FOcrSetup.resx$checkBoxRunInBG.Text$Message
 msgid "Automatically run OCR after scanning"
-msgstr ""
+msgstr "扫描后自动进行 OCR 识别"
 
 #: SettingsResources.resx$PageSize_B4$Message
 msgid "B4 (250x353 mm)"
@@ -281,11 +282,11 @@ msgstr "批量扫描"
 
 #: MiscResources.resx$BatchStatusCancelled$Message
 msgid "Batch cancelled"
-msgstr "批量取消"
+msgstr "已取消批量扫描"
 
 #: MiscResources.resx$BatchStatusComplete$Message
 msgid "Batch completed successfully"
-msgstr "批量操作完成"
+msgstr "已完成批量扫描"
 
 #: MiscResources.resx$BatchStatusError$Message
 msgid "Batch scan stopped due to error"
@@ -293,22 +294,21 @@ msgstr "批量扫描由于错误而停止"
 
 #: FEditProfile.resx$label3.Text$Message
 msgid "Bit depth"
-msgstr "像素深度"
+msgstr "位深"
 
 #: MiscResources.resx$FileTypeBmp$Message
 msgid "Bitmap Files (*.bmp)"
-msgstr "位图文件(*.bmp)"
+msgstr "位图文件 (*.bmp)"
 
 #: SettingsResources.resx$BitDepth_1BlackAndWhite$Message
 msgid "Black & White"
-msgstr "黑与白"
+msgstr "黑白"
 
 #: FDesktop.resx$tsBlackWhite.Text$Message
 #: FViewer.resx$tsBlackWhite.Text$Message
 #: FBlackWhite.resx$$this.Text$Message
-#, fuzzy
 msgid "Black and White"
-msgstr "黑与白"
+msgstr "黑白"
 
 #: FAdvancedScanSettings.resx$groupBox3.Text$Message
 msgid "Blank Pages"
@@ -322,11 +322,11 @@ msgstr "亮度"
 #: FViewer.resx$tsBrightnessContrast.Text$Message
 #: FBrightnessContrast.resx$$this.Text$Message
 msgid "Brightness / Contrast"
-msgstr ""
+msgstr "亮度/对比度"
 
 #: SettingsResources.resx$TiffComp_Ccitt4$Message
 msgid "CCITT4"
-msgstr ""
+msgstr "CCITT4"
 
 #: FEmailSettings.resx$btnCancel.Text$Message
 #: FImageSettings.resx$btnCancel.Text$Message
@@ -356,11 +356,11 @@ msgstr "取消"
 
 #: MiscResources.resx$CancelBatch$Message
 msgid "Cancel Batch"
-msgstr ""
+msgstr "取消批量扫描"
 
 #: MiscResources.resx$BatchStatusCancelling$Message
 msgid "Cancelling"
-msgstr "取消中"
+msgstr "正在取消"
 
 #: SettingsResources.resx$HorizontalAlign_Center$Message
 msgid "Center"
@@ -368,23 +368,23 @@ msgstr "居中"
 
 #: FEmailSettings.resx$btnChangeProvider.Text$Message
 msgid "Change"
-msgstr ""
+msgstr "改变"
 
 #: FAbout.resx$cbCheckForUpdates.Text$Message
 msgid "Check for updates"
-msgstr ""
+msgstr "检查是否有新版本"
 
 #: MiscResources.resx$CheckingForUpdates$Message
 msgid "Checking"
-msgstr ""
+msgstr "正在检查"
 
 #: FEmailProvider.resx$$this.Text$Message
 msgid "Choose Email Provider"
-msgstr ""
+msgstr "选择电子邮件服务商"
 
 #: MiscResources.resx$ChooseProfile$Message
 msgid "Choose Profile"
-msgstr "选择设置"
+msgstr "选择配置"
 
 #: FEditProfile.resx$btnChooseDevice.Text$Message
 msgid "Choose device"
@@ -410,7 +410,7 @@ msgstr "兼容性"
 
 #: FImageSettings.resx$label3.Text$Message
 msgid "Compression"
-msgstr ""
+msgstr "压缩"
 
 #: FEditProfile.resx$label7.Text$Message
 msgid "Contrast"
@@ -427,11 +427,11 @@ msgstr "复制进度"
 
 #: MiscResources.resx$Copying$Message
 msgid "Copying"
-msgstr "复制中"
+msgstr "正在复制"
 
 #: FAbout.resx$labelCopyright.Text$Message
 msgid "Copyright 2009, 2012-2018 NAPS2 Contributors"
-msgstr ""
+msgstr "版权所有 2009, 2012-2018 NAPS2 及其参与贡献者"
 
 #: FAdvancedScanSettings.resx$label3.Text$Message
 msgid "Coverage Threshold"
@@ -445,7 +445,7 @@ msgstr "裁剪"
 
 #: FAdvancedScanSettings.resx$cbForcePageSizeCrop.Text$Message
 msgid "Crop to page size"
-msgstr "裁剪到纸张大小"
+msgstr "裁剪到页面大小"
 
 #: SettingsResources.resx$PageSize_Custom$Message
 msgid "Custom"
@@ -453,11 +453,11 @@ msgstr "自定义"
 
 #: MiscResources.resx$CustomPageSizeFormat$Message
 msgid "Custom ({0}x{1} {2})"
-msgstr "自定义({0}x{1} {2})"
+msgstr "自定义 ({0}x{1} {2})"
 
 #: FPageSize.resx$$this.Text$Message
 msgid "Custom Page Size"
-msgstr "自定义页面大小"
+msgstr "自定义纸张大小"
 
 #: FDesktop.resx$tsCustomRotation.Text$Message
 #: FViewer.resx$tsCustomRotation.Text$Message
@@ -466,7 +466,7 @@ msgstr "自定义旋转"
 
 #: SettingsResources.resx$EmailProviderType_CustomSmtp$Message
 msgid "Custom SMTP"
-msgstr ""
+msgstr "自定义 SMTP"
 
 #: FPlaceholders.resx$label6.Text$Message
 msgid "Day (01-31)"
@@ -484,7 +484,7 @@ msgstr "默认文件路径"
 
 #: FDesktop.resx$tsDeinterleave.Text$Message
 msgid "Deinterleave"
-msgstr "去除间隔"
+msgstr "奇偶页分别排列"
 
 #: FAdvancedScanSettings.resx$cbWiaDelayBetweenScans.Text$Message
 msgid "Delay between scans (WIA)"
@@ -511,11 +511,11 @@ msgstr "倾斜校正进度"
 
 #: FAdvancedScanSettings.resx$cbAutoDeskew.Text$Message
 msgid "Deskew scanned pages"
-msgstr "倾斜校正已经扫描的页面"
+msgstr "对已扫描页面进行倾斜校正"
 
 #: MiscResources.resx$AutoDeskewing$Message
 msgid "Deskewing"
-msgstr "正在倾斜校正"
+msgstr "倾斜校正中"
 
 #: FEditProfile.resx$label1.Text$Message
 msgid "Device"
@@ -531,7 +531,7 @@ msgstr "显示名称"
 
 #: MiscResources.resx$Donate$Message
 msgid "Donate"
-msgstr ""
+msgstr "捐赠"
 
 #: FProfiles.resx$btnDone.Text$Message
 #: FBatchPrompt.resx$btnDone.Text$Message
@@ -546,7 +546,7 @@ msgstr "下载"
 
 #: MiscResources.resx$DownloadError$Message
 msgid "Download Error"
-msgstr "下载发生错误"
+msgstr "下载错误"
 
 #: MiscResources.resx$DownloadNeeded$Message
 msgid "Download Needed"
@@ -558,7 +558,7 @@ msgstr "下载进度"
 
 #: SettingsResources.resx$Source_Duplex$Message
 msgid "Duplex"
-msgstr "双面"
+msgstr "输稿器（双面）"
 
 #: FProfiles.resx$btnEdit.Text$Message
 #: FProfiles.resx$ctxEdit.Text$Message
@@ -567,11 +567,11 @@ msgstr "编辑"
 
 #: FDesktop.resx$tsdEmailPDF.Text$Message
 msgid "Email PDF"
-msgstr "邮件发送PDF"
+msgstr "通过邮件发送 PDF"
 
 #: MiscResources.resx$EmailPdfProgress$Message
 msgid "Email PDF Progress"
-msgstr "邮件发送PDF进度"
+msgstr "PDF 邮件发送进度"
 
 #: FDesktop.resx$tsEmailSettings.Text$Message
 #: FEmailSettings.resx$$this.Text$Message
@@ -584,7 +584,7 @@ msgstr "启用自动保存"
 
 #: FPdfSettings.resx$cbEncryptPdf.Text$Message
 msgid "Encrypt PDF"
-msgstr "加密PDF"
+msgstr "加密 PDF"
 
 #: FPdfSettings.resx$groupProtection.Text$Message
 msgid "Encryption"
@@ -592,7 +592,7 @@ msgstr "加密"
 
 #: MiscResources.resx$FileTypeEmf$Message
 msgid "Enhanced Windows MetaFile (*.emf)"
-msgstr "增强的Windows图元文件 (*.emf)"
+msgstr "增强的 Windows 图元文件 (*.emf)"
 
 #: MiscResources.resx$Error$Message
 #: FError.resx$$this.Text$Message
@@ -614,7 +614,7 @@ msgstr "排除空白页"
 
 #: SettingsResources.resx$Source_Feeder$Message
 msgid "Feeder"
-msgstr "进纸器"
+msgstr "输稿器"
 
 #: FPlaceholders.resx$label1.Text$Message
 msgid "File Name"
@@ -632,13 +632,13 @@ msgstr "翻转"
 
 #: FAdvancedScanSettings.resx$cbFlipDuplex.Text$Message
 msgid "Flip duplexed pages"
-msgstr "双面翻转"
+msgstr "翻转偶数页面"
 
 #: FImageSettings.resx$lblWarning.Text$Message
 msgid ""
 "For high JPEG qualities (80+), also increase Image Quality in your profile "
 "for best results"
-msgstr ""
+msgstr "对于 JPEG 高质量 (80+)，还可以在配置文件中增加图像质量，以获得最佳效果"
 
 #: MiscResources.resx$FileTypeGif$Message
 msgid "GIF File (*.gif)"
@@ -650,11 +650,11 @@ msgstr "获取更多的语言"
 
 #: SettingsResources.resx$Source_Glass$Message
 msgid "Glass"
-msgstr "半透明"
+msgstr "玻璃稿台"
 
 #: SettingsResources.resx$EmailProviderType_Gmail$Message
 msgid "Gmail"
-msgstr ""
+msgstr "Gmail"
 
 #: SettingsResources.resx$BitDepth_8Grayscale$Message
 msgid "Grayscale"
@@ -672,7 +672,7 @@ msgstr "小时 (0-23)"
 #: FViewer.resx$tsHueSaturation.Text$Message
 #: FHueSaturation.resx$$this.Text$Message
 msgid "Hue / Saturation"
-msgstr ""
+msgstr "色相/饱和度"
 
 #: FAbout.resx$label1.Text$Message
 msgid "Icons from"
@@ -697,7 +697,7 @@ msgstr "图像设定"
 
 #: MiscResources.resx$ImageSaved$Message
 msgid "Image saved"
-msgstr "图像保存"
+msgstr "图像已保存"
 
 #: FDesktop.resx$tsImport.Text$Message
 msgid "Import"
@@ -709,15 +709,15 @@ msgstr "导入进度"
 
 #: MiscResources.resx$Importing$Message
 msgid "Importing"
-msgstr "导入中"
+msgstr "正在导入"
 
 #: MiscResources.resx$ImportingFormat$Message
 msgid "Importing {0}"
-msgstr "导入中{0}"
+msgstr "正在导入 {0}"
 
 #: MiscResources.resx$Install$Message
 msgid "Install {0}"
-msgstr ""
+msgstr "安装 {0}"
 
 #: MiscResources.resx$InstallComplete$Message
 msgid "Installation Complete"
@@ -729,7 +729,7 @@ msgstr "安装失败"
 
 #: MiscResources.resx$InstallCompletePromptRestart$Message
 msgid "Installation complete. Do you want to restart NAPS2 now?"
-msgstr "安装完成。您需要立即重新启动NAPS2吗？"
+msgstr "安装完成。您需要立即重新启动 NAPS2 吗？"
 
 #: MiscResources.resx$InstallFailed$Message
 msgid "Installation failed"
@@ -737,7 +737,7 @@ msgstr "安装失败"
 
 #: FDesktop.resx$tsInterleave.Text$Message
 msgid "Interleave"
-msgstr "间隔"
+msgstr "取消奇偶页分别排列"
 
 #: MiscResources.resx$FileTypeJpeg$Message
 msgid "JPEG File (*.jpg, *.jpeg)"
@@ -753,7 +753,7 @@ msgstr "关键词"
 
 #: SettingsResources.resx$TiffComp_Lzw$Message
 msgid "LZW"
-msgstr ""
+msgstr "LZW"
 
 #: FDesktop.resx$toolStripDropDownButton1.Text$Message
 msgid "Language"
@@ -765,11 +765,11 @@ msgstr "左对齐"
 
 #: SettingsResources.resx$TwainImpl_Legacy$Message
 msgid "Legacy (native UI only)"
-msgstr "传统（原生用户界面）"
+msgstr "传统（仅限本地界面）"
 
 #: FBatchScan.resx$rdLoadIntoNaps2.Text$Message
 msgid "Load images into NAPS2"
-msgstr "载入图片到NAPS2"
+msgstr "载入图片至 NAPS2"
 
 #: FDesktop.resx$tStrip.Text$Message
 msgid "Main toolbar"
@@ -810,11 +810,11 @@ msgstr "上移"
 
 #: FBatchScan.resx$rdMultipleScansDelay.Text$Message
 msgid "Multiple scans (fixed delay between scans)"
-msgstr "多扫描（扫描之间的固定延迟）"
+msgstr "多次扫描（每次扫描间固定延时）"
 
 #: FBatchScan.resx$rdMultipleScansPrompt.Text$Message
 msgid "Multiple scans (prompt between scans)"
-msgstr "多扫描（扫描迅速之间）"
+msgstr "多次扫描（每次扫描间提示）"
 
 #: MiscResources.resx$NAPS2$Message
 msgid "NAPS2"
@@ -822,23 +822,23 @@ msgstr "NAPS2"
 
 #: MiscResources.resx$DonatePrompt$Message
 msgid "NAPS2 is completely free. Consider making a donation"
-msgstr ""
+msgstr "NAPS2 是完全免费的。请考虑捐款资助"
 
 #: FPageSize.resx$label1.Text$Message
 msgid "Name (optional)"
-msgstr "名称（可选） "
+msgstr "名称（可选）"
 
 #: MiscResources.resx$NameMissing$Message
 msgid "Name missing"
-msgstr "缺少名称"
+msgstr "请输入配置名称"
 
 #: FProfiles.resx$btnAdd.Text$Message
 msgid "New"
-msgstr "新增"
+msgstr "新建"
 
 #: FDesktop.resx$tsNewProfile.Text$Message
 msgid "New Profile"
-msgstr "新增配置文件"
+msgstr "新建配置文件"
 
 #: FViewer.resx$tsNext.Text$Message
 msgid "Next"
@@ -850,39 +850,38 @@ msgstr "下一个扫描"
 
 #: MiscResources.resx$NoDeviceSelected$Message
 msgid "No device selected"
-msgstr "尚未选择设备"
+msgstr "未选择设备"
 
 #: MiscResources.resx$NoPagesInFeeder$Message
 msgid "No pages are in the feeder"
-msgstr "没有页面在进纸器中"
+msgstr "输稿器中未发现纸张"
 
 #: FEmailSettings.resx$lblProvider.Text$Message
 #: SettingsResources.resx$EmailProvider_NotSelected$Message
 msgid "No provider selected"
-msgstr ""
+msgstr "未选择邮件服务商"
 
 #: MiscResources.resx$NoDevicesFound$Message
 msgid "No scanning device was found"
-msgstr "没有找到扫描设备"
+msgstr "未找到扫描设备"
 
 #: MiscResources.resx$NoUpdates$Message
 msgid "No updates available"
-msgstr ""
+msgstr "未找到更新"
 
 #: SettingsResources.resx$TiffComp_None$Message
-#, fuzzy
 msgid "None"
-msgstr "完成"
+msgstr "无"
 
 #: FDesktop.resx$$this.Text$Message
 msgid "Not Another PDF Scanner 2"
-msgstr "不是另一个 PDF 扫描仪 2"
+msgstr "不是另一个 PDF 扫描仪 2 (NAPS 2)"
 
 #: FUpdate.resx$btnCancel.Text$Message
 #: FRecover.resx$btnCancel.Text$Message
 #: MiscResources.resx$NotNow$Message
 msgid "Not Now"
-msgstr "暂时不需要"
+msgstr "现在不需要"
 
 #: FBatchScan.resx$lblNumberOfScans.Text$Message
 msgid "Number of scans"
@@ -890,7 +889,7 @@ msgstr "扫描次数"
 
 #: FDesktop.resx$tsOcr.Text$Message
 msgid "OCR"
-msgstr "光学字符识别(OCR)"
+msgstr "光学字符识别 (OCR)"
 
 #: FOcrLanguageDownload.resx$$this.Text$Message
 msgid "OCR Download"
@@ -898,11 +897,11 @@ msgstr "OCR 下载"
 
 #: MiscResources.resx$OcrProgress$Message
 msgid "OCR Progress"
-msgstr ""
+msgstr "OCR 识别进度"
 
 #: FOcrSetup.resx$$this.Text$Message
 msgid "OCR Setup"
-msgstr "OCR 安装"
+msgstr "OCR 设置"
 
 #: FOcrSetup.resx$label1.Text$Message
 msgid "OCR language"
@@ -910,7 +909,7 @@ msgstr "OCR 语言"
 
 #: FOcrSetup.resx$labelOcrMode.Text$Message
 msgid "OCR mode"
-msgstr ""
+msgstr "OCR 模式"
 
 #: FPdfPassword.resx$btnOK.Text$Message
 #: FPdfSettings.resx$btnOK.Text$Message
@@ -935,11 +934,11 @@ msgstr "确定"
 
 #: FAdvancedScanSettings.resx$cbWiaOffsetWidth.Text$Message
 msgid "Offset width based on alignment (WIA)"
-msgstr "基于对齐宽度偏移（WIA）"
+msgstr "基于对齐的偏移宽度 (WIA)"
 
 #: SettingsResources.resx$TwainImpl_OldDsm$Message
 msgid "Old DSM"
-msgstr "旧 DSM"
+msgstr "旧版 DSM"
 
 #: FBatchScan.resx$rdFilePerPage.Text$Message
 #: FAutoSaveSettings.resx$rdFilePerPage.Text$Message
@@ -949,7 +948,7 @@ msgstr "每页一个文件"
 #: FBatchScan.resx$rdFilePerScan.Text$Message
 #: FAutoSaveSettings.resx$rdFilePerScan.Text$Message
 msgid "One file per scan"
-msgstr "每扫描一个文件"
+msgstr "每次扫描一个文件"
 
 #: MiscResources.resx$FilesCouldNotBeDownloaded$Message
 msgid "One or more files could not be downloaded"
@@ -961,11 +960,11 @@ msgstr "打开文件夹"
 
 #: MiscResources.resx$ActiveOperations$Message
 msgid "Operation in Progress"
-msgstr ""
+msgstr "正在进行操作"
 
 #: SettingsResources.resx$EmailProviderType_OutlookWeb$Message
 msgid "Outlook Web Access"
-msgstr ""
+msgstr "Outlook 网页访问"
 
 #: FBatchScan.resx$groupboxOutput.Text$Message
 msgid "Output"
@@ -995,27 +994,27 @@ msgstr "PDF 保存"
 
 #: SettingsResources.resx$PdfCompat_PdfA1B$Message
 msgid "PDF/A-1b"
-msgstr ""
+msgstr "PDF/A-1b"
 
 #: SettingsResources.resx$PdfCompat_PdfA2B$Message
 msgid "PDF/A-2b"
-msgstr ""
+msgstr "PDF/A-2b"
 
 #: SettingsResources.resx$PdfCompat_PdfA3B$Message
 msgid "PDF/A-3b"
-msgstr ""
+msgstr "PDF/A-3b"
 
 #: SettingsResources.resx$PdfCompat_PdfA3U$Message
 msgid "PDF/A-3u"
-msgstr ""
+msgstr "PDF/A-3u"
 
 #: MiscResources.resx$FileTypePng$Message
 msgid "PNG File (*.png)"
-msgstr "PNG 文件(*.png)"
+msgstr "PNG 文件 (*.png)"
 
 #: FEditProfile.resx$label4.Text$Message
 msgid "Page size"
-msgstr "页面大小"
+msgstr "纸张大小"
 
 #: FEditProfile.resx$label2.Text$Message
 msgid "Paper source"
@@ -1038,7 +1037,7 @@ msgstr "粘贴"
 #: FPdfSettings.resx$linkPlaceholders.Text$Message
 #: FAutoSaveSettings.resx$linkPlaceholders.Text$Message
 msgid "Placeholders"
-msgstr "占位符"
+msgstr "格式符"
 
 #: FAdvancedScanSettings.resx$groupBox4.Text$Message
 msgid "Post-processing"
@@ -1046,7 +1045,7 @@ msgstr "后处理"
 
 #: FBatchScan.resx$lblStatus.Text$Message
 msgid "Press Start when ready"
-msgstr "当就绪时点击开始"
+msgstr "准备好后点击开始"
 
 #: FViewer.resx$$this.Text$Message
 #: FPlaceholders.resx$label2.Text$Message
@@ -1063,7 +1062,7 @@ msgstr "打印"
 
 #: FBatchScan.resx$lblProfile.Text$Message
 msgid "Profile"
-msgstr "配置"
+msgstr "配置文件"
 
 #: FEditProfile.resx$$this.Text$Message
 msgid "Profile Settings"
@@ -1080,11 +1079,11 @@ msgstr "文件路径提示"
 
 #: FEmailSettings.resx$groupBox1.Text$Message
 msgid "Provider"
-msgstr ""
+msgstr "服务供应商"
 
 #: FBatchPrompt.resx$lblStatus.Text$Message
 msgid "Ready for scan {0}"
-msgstr "准备扫描 {0}"
+msgstr "已准备扫描 {0}"
 
 #: FRecover.resx$btnRecover.Text$Message
 msgid "Recover"
@@ -1096,7 +1095,7 @@ msgstr "修复已扫描的图像"
 
 #: MiscResources.resx$Recovering$Message
 msgid "Recovering"
-msgstr "修复中"
+msgstr "正在修复"
 
 #: MiscResources.resx$RecoveryProgress$Message
 msgid "Recovery Progress"
@@ -1161,36 +1160,36 @@ msgstr "旋转"
 #: FDesktop.resx$tsRotateLeft.Text$Message
 #: FViewer.resx$tsRotateLeft.Text$Message
 msgid "Rotate Left"
-msgstr "向左旋转"
+msgstr "逆时针旋转"
 
 #: FDesktop.resx$tsRotateRight.Text$Message
 #: FViewer.resx$tsRotateRight.Text$Message
 msgid "Rotate Right"
-msgstr "向右旋转"
+msgstr "顺时针旋转"
 
 #: FProgress.resx$btnRunInBG.Text$Message
 msgid "Run in Background"
-msgstr ""
+msgstr "在后台运行"
 
 #: MiscResources.resx$RunningOcr$Message
 msgid "Running OCR"
-msgstr ""
+msgstr "执行 OCR"
 
 #: FEditProfile.resx$rdSANE.Text$Message
 msgid "SANE Driver"
-msgstr ""
+msgstr "SANE 驱动"
 
 #: FViewer.resx$tsSaveImage.Text$Message
 msgid "Save Image"
-msgstr "保存图片"
+msgstr "保存图像"
 
 #: FDesktop.resx$tsdSaveImages.Text$Message
 msgid "Save Images"
-msgstr "保存图片"
+msgstr "保存图像"
 
 #: MiscResources.resx$SaveImagesProgress$Message
 msgid "Save Images Progress"
-msgstr "图片保存进度"
+msgstr "图像保存进度"
 
 #: FDesktop.resx$tsdSavePDF.Text$Message
 #: FViewer.resx$tsSavePDF.Text$Message
@@ -1269,7 +1268,7 @@ msgstr "选择来源"
 
 #: MiscResources.resx$SelectProfileBeforeScan$Message
 msgid "Select a profile before clicking Scan"
-msgstr "点击 [扫描] 前请先选择配置文件"
+msgstr "请先选择配置文件，然后点击 [扫描] "
 
 #: FOcrLanguageDownload.resx$label3.Text$Message
 msgid "Select one or more languages"
@@ -1286,7 +1285,7 @@ msgstr "已选择 ({0})"
 #: FBatchScan.resx$rdSeparateByPatchT.Text$Message
 #: FAutoSaveSettings.resx$rdSeparateByPatchT.Text$Message
 msgid "Separate files by Patch-T"
-msgstr "通过 Patch-T 分离文件"
+msgstr "通过 Patch-T 拆分文件"
 
 #: FProfiles.resx$ctxSetDefault.Text$Message
 msgid "Set Default"
@@ -1296,7 +1295,7 @@ msgstr "设为默认设置"
 #: FViewer.resx$tsSharpen.Text$Message
 #: FSharpen.resx$$this.Text$Message
 msgid "Sharpen"
-msgstr ""
+msgstr "锐化"
 
 #: FPdfSettings.resx$cbShowOwnerPassword.Text$Message
 #: FPdfSettings.resx$cbShowUserPassword.Text$Message
@@ -1305,7 +1304,7 @@ msgstr "显示"
 
 #: FImageSettings.resx$cbSinglePageTiff.Text$Message
 msgid "Single page files"
-msgstr ""
+msgstr "单页文件"
 
 #: FBatchScan.resx$rdSingleScan.Text$Message
 msgid "Single scan"
@@ -1343,16 +1342,16 @@ msgstr "技术细节"
 #: MiscResources.resx$TesseractNotAvailable$Message
 msgid ""
 "The OCR engine is not available. Make sure to install the required package"
-msgstr ""
+msgstr "OCR 组件不可用。请确认已安装所需的软件包"
 
 #: MiscResources.resx$SaneNotAvailable$Message
 msgid ""
 "The SANE driver is not available. Make sure to install the required packages"
-msgstr ""
+msgstr "SANE 驱动不可用。请确认已安装所需的软件包"
 
 #: MiscResources.resx$ImportErrorCouldNot$Message
 msgid "The file '{0}' could not be imported"
-msgstr "无法导入文件'{0}'"
+msgstr "无法导入文件 '{0}'"
 
 #: MiscResources.resx$ImportErrorNAPS2Pdf$Message
 msgid ""
@@ -1362,11 +1361,11 @@ msgstr "无法导入文件 '{0}'。 只有 NAPS2 生成的 PDF 才能被导入"
 
 #: MiscResources.resx$FileInUse$Message
 msgid "The file could not be overwritten because it is currently in use"
-msgstr "文件不能被覆盖，因为它正在被使用"
+msgstr "文件正在使用，无法覆盖"
 
 #: MiscResources.resx$ConfirmOverwriteFile$Message
 msgid "The file {0} already exists. Do you want to overwrite it?"
-msgstr "已存在该文件{0}，请您确认是否覆盖？"
+msgstr "文件 {0} 已存在，是否覆盖？"
 
 #: FPdfPassword.resx$lblPrompt.Text$Message
 msgid "The following file is encrypted and requires a password to open: {0}"
@@ -1374,7 +1373,7 @@ msgstr "以下文件已加密，请输入密码打开: {0}"
 
 #: MiscResources.resx$DevicePaperJam$Message
 msgid "The scanner has a paper jam"
-msgstr "扫描仪已卡纸"
+msgstr "扫描仪发生卡纸"
 
 #: MiscResources.resx$DeviceWarmingUp$Message
 msgid "The scanner is warming up"
@@ -1382,11 +1381,11 @@ msgstr "扫描仪正在预热"
 
 #: MiscResources.resx$DeviceCoverOpen$Message
 msgid "The scanner's cover is open"
-msgstr "扫描仪的盖子是否被打开？"
+msgstr "扫描仪原稿盖已打开"
 
 #: MiscResources.resx$DriverNotSupported$Message
 msgid "The selected driver is not supported on this system"
-msgstr ""
+msgstr "所选驱动程序不受本系统支持"
 
 #: MiscResources.resx$DeviceNotFound$Message
 msgid "The selected scanner could not be found"
@@ -1396,17 +1395,17 @@ msgstr "无法找到所选的扫描仪"
 msgid ""
 "The selected scanner does not support using a feeder. If your scanner does "
 "have a feeder, try using a different driver"
-msgstr "所选的扫描仪不支持使用进纸器。如果您的扫描仪确实有一个进纸器，请尝试使用不同的驱动程序"
+msgstr "所选的扫描仪不支持使用输稿器。如果您的扫描仪确实有输稿器，请尝试使用不同的驱动程序"
 
 #: MiscResources.resx$NoDuplexSupport$Message
 msgid ""
 "The selected scanner does not support using duplex. If your scanner is "
 "supposed to support duplex, try using a different driver"
-msgstr "所选的扫描仪不支持使用双面扫描。如果您的扫描仪支持双面扫描，请尝试使用不同的驱动程序"
+msgstr "所选的扫描仪不支持双面扫描。如果您的扫描仪支持双面扫描，请尝试使用不同的驱动程序"
 
 #: MiscResources.resx$DeviceBusy$Message
 msgid "The selected scanner is busy"
-msgstr "选定的扫描仪正忙"
+msgstr "选定的扫描仪正在工作"
 
 #: MiscResources.resx$DeviceOffline$Message
 msgid "The selected scanner is offline"
@@ -1414,7 +1413,7 @@ msgstr "选定的扫描仪处于脱机状态"
 
 #: FImageSettings.resx$groupTiff.Text$Message
 msgid "Tiff Options"
-msgstr ""
+msgstr "TIFF 格式设置"
 
 #: FBatchScan.resx$lblTimeBetweenScans.Text$Message
 msgid "Time between scans (seconds)"
@@ -1426,7 +1425,7 @@ msgstr "标题"
 
 #: FAdvancedScanSettings.resx$label1.Text$Message
 msgid "Twain Implementation"
-msgstr "Twain 启用"
+msgstr "Twain 实现"
 
 #: SettingsResources.resx$PageSize_Legal$Message
 msgid "US Legal (8.5x14 in)"
@@ -1442,19 +1441,19 @@ msgstr "未保存的更改"
 
 #: MiscResources.resx$UpdateProgress$Message
 msgid "Update Progress"
-msgstr ""
+msgstr "更新进度"
 
 #: MiscResources.resx$Updating$Message
 msgid "Updating"
-msgstr ""
+msgstr "正在更新"
 
 #: MiscResources.resx$UploadingEmail$Message
 msgid "Uploading email"
-msgstr ""
+msgstr "上传邮件"
 
 #: FEditProfile.resx$rdbNative.Text$Message
 msgid "Use native UI"
-msgstr "使用原生的UI "
+msgstr "使用本地界面 "
 
 #: FEditProfile.resx$rdbConfig.Text$Message
 msgid "Use predefined settings"
@@ -1466,7 +1465,7 @@ msgstr "用户密码"
 
 #: FOcrLanguageDownload.resx$label1.Text$Message
 msgid "Using OCR requires you to download each language you want to scan"
-msgstr "使用OCR 需要你下载你所需的语言"
+msgstr "使用 OCR 需要下载您所需的语言"
 
 #: MiscResources.resx$Version$Message
 msgid "Version {0}"
@@ -1487,7 +1486,7 @@ msgstr "正在等待 TWAIN 完成"
 
 #: FAuthorize.resx$lblWaiting.Text$Message
 msgid "Waiting for authorization"
-msgstr ""
+msgstr "等待授权"
 
 #: MiscResources.resx$BatchStatusWaitingForScan$Message
 msgid "Waiting for scan {0}"
@@ -1511,17 +1510,17 @@ msgstr "年份 (00-99)"
 
 #: MiscResources.resx$PdfNoPermissionToExtractContent$Message
 msgid "You do not have permission to copy content from the file '{0}'"
-msgstr "您没有从文件'{0}'中复制内容的权限"
+msgstr "您没有从文件 '{0}' 中复制内容的权限"
 
 #: MiscResources.resx$DontHavePermission$Message
 msgid "You don't have permission to save files at this location"
-msgstr "您没有保存文件的权限"
+msgstr "您没有在该位置保存文件的权限"
 
 #: MiscResources.resx$ExitWithUnsavedChanges$Message
 msgid ""
 "You have unsaved changes. Are you sure you want to exit and discard those "
 "changes?"
-msgstr "您有未保存的修改.您确定要放弃这些修改吗？"
+msgstr "您有未保存的修改，确定要放弃这些修改并退出吗？"
 
 #: TiffViewerCtl.resx$tsZoom.ToolTipText$Message
 msgid "Zoom"
@@ -1529,7 +1528,7 @@ msgstr "缩放"
 
 #: TiffViewerCtl.resx$tsZoomActual.ToolTipText$Message
 msgid "Zoom Actual"
-msgstr "缩放实际大小"
+msgstr "缩放至实际大小"
 
 #: TiffViewerCtl.resx$tsZoomPlus.ToolTipText$Message
 msgid "Zoom In"
@@ -1541,7 +1540,7 @@ msgstr "缩小"
 
 #: SettingsResources.resx$PageSizeUnit_Centimetre$Message
 msgid "cm"
-msgstr "厘米（公分）"
+msgstr "厘米"
 
 #: FAbout.resx$linkLabel2.Text$Message
 msgid "http://www.fatcow.com/free-icons"
@@ -1586,12 +1585,12 @@ msgstr "{0} / {1} 个文件"
 msgid ""
 "{0} image(s) scanned on {1} at {2} may not have been saved, and are "
 "recoverable. Do you want to recover them?"
-msgstr "于 {1}  通过 {2} 扫描的 {0} 张图像可能还没有被保存，并且是可恢复的。你想恢复它们吗？"
+msgstr "使用 {2} 在 {1} 上扫描的 {0} 张图像可能还未保存，现在可以恢复。您需要恢复这些图像吗？"
 
 #: MiscResources.resx$ImagesSaved$Message
 msgid "{0} images saved"
-msgstr "{0} 图像保存"
+msgstr "已保存 {0} 张图像"
 
 #: MiscResources.resx$PdfStatus$Message
 msgid "{0} of {1}"
-msgstr "{1} 中的 {0}"
+msgstr "{0} / {1}"

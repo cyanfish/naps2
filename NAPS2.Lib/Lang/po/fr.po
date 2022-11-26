@@ -3,14 +3,14 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-09-17 20:27+0000\n"
-"PO-Revision-Date: 2019-02-15 08:22+0000\n"
+"PO-Revision-Date: 2020-06-06 06:40+0000\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Pootle 2.8\n"
-"X-POOTLE-MTIME: 1550218924.219494\n"
+"X-POOTLE-MTIME: 1591425658.050323\n"
 
 #: SettingsResources.resx$Dpi_100$Message
 msgid "100 dpi"
@@ -367,7 +367,7 @@ msgstr "Modifier…"
 
 #: FAbout.resx$cbCheckForUpdates.Text$Message
 msgid "Check for updates"
-msgstr "Vérifier les mises à jours"
+msgstr "Vérifier les mises à jour"
 
 #: MiscResources.resx$CheckingForUpdates$Message
 msgid "Checking"

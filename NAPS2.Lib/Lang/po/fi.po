@@ -3,14 +3,14 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-09-17 20:27+0000\n"
-"PO-Revision-Date: 2018-12-09 16:28+0000\n"
+"PO-Revision-Date: 2019-12-23 09:32+0000\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: fi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Pootle 2.8\n"
-"X-POOTLE-MTIME: 1544372910.797957\n"
+"X-POOTLE-MTIME: 1577093528.473406\n"
 
 #: SettingsResources.resx$Dpi_100$Message
 msgid "100 dpi"
@@ -71,7 +71,7 @@ msgstr "Haetaan tietoja"
 
 #: FEditProfile.resx$btnAdvanced.Text$Message
 msgid "Advanced"
-msgstr "Edistyneet"
+msgstr "Lisäasetukset"
 
 #: FAdvancedScanSettings.resx$$this.Text$Message
 msgid "Advanced Profile Settings"
@@ -444,7 +444,7 @@ msgstr "Rajaa sivun kokoon"
 
 #: SettingsResources.resx$PageSize_Custom$Message
 msgid "Custom"
-msgstr "Mukautett"
+msgstr "Mukautettu"
 
 #: MiscResources.resx$CustomPageSizeFormat$Message
 msgid "Custom ({0}x{1} {2})"
@@ -691,7 +691,7 @@ msgstr "Kuva-asetukset"
 
 #: MiscResources.resx$ImageSaved$Message
 msgid "Image saved"
-msgstr "Kuva lalletettu"
+msgstr "Kuva talletettu"
 
 #: FDesktop.resx$tsImport.Text$Message
 msgid "Import"
@@ -1024,7 +1024,7 @@ msgstr "Liitä"
 #: FPlaceholders.resx$$this.Text$Message
 #: FPlaceholders.resx$gboxPlaceholders.Text$Message
 msgid "Placeholders"
-msgstr "Varaukset"
+msgstr "Paikkamerkit"
 
 #: FAdvancedScanSettings.resx$groupBox4.Text$Message
 msgid "Post-processing"
@@ -1032,7 +1032,7 @@ msgstr "Jälkikäsittely"
 
 #: FBatchScan.resx$lblStatus.Text$Message
 msgid "Press Start when ready"
-msgstr "Paina Start, kun olet vlamis"
+msgstr "Paina Aloita, kun olet vlamis"
 
 #: FPlaceholders.resx$label2.Text$Message
 #: FViewer.resx$$this.Text$Message
@@ -1127,11 +1127,11 @@ msgstr "Taaksepäin"
 
 #: ImageForm.resx$btnRevert.Text$Message
 msgid "Revert"
-msgstr "Käännä"
+msgstr "Palauta"
 
 #: SettingsResources.resx$HorizontalAlign_Right$Message
 msgid "Right"
-msgstr "oikealle"
+msgstr "Oikea"
 
 #: FDesktop.resx$tsdRotate.Text$Message
 #: FRotate.resx$$this.Text$Message
@@ -1226,7 +1226,7 @@ msgstr "Skannattu kuva"
 #: MiscResources.resx$BatchStatusPage$Message
 #: MiscResources.resx$ScanPageProgress$Message
 msgid "Scanning page {0}"
-msgstr "Skannataan kuvaa {0}"
+msgstr "Skannataan sivua {0}"
 
 #: MiscResources.resx$BatchStatusScanPage$Message
 msgid "Scanning page {0} (scan {1})"
@@ -1267,11 +1267,11 @@ msgstr "Valittu ({0})"
 #: FAutoSaveSettings.resx$rdSeparateByPatchT.Text$Message
 #: FBatchScan.resx$rdSeparateByPatchT.Text$Message
 msgid "Separate files by Patch-T"
-msgstr "Erota sivut Patch-T - koodilla"
+msgstr "Erota tiedostot Patch-T - koodilla"
 
 #: FProfiles.resx$ctxSetDefault.Text$Message
 msgid "Set Default"
-msgstr "Asetta oletus"
+msgstr "Aseta oletus"
 
 #: FDesktop.resx$tsSharpen.Text$Message
 #: FSharpen.resx$$this.Text$Message
@@ -1441,7 +1441,7 @@ msgstr "Lähetään sähköpostia"
 
 #: FEditProfile.resx$rdbNative.Text$Message
 msgid "Use native UI"
-msgstr "Käytä laiitteen käyttöliittymää"
+msgstr "Käytä laitteen käyttöliittymää"
 
 #: FEditProfile.resx$rdbConfig.Text$Message
 msgid "Use predefined settings"
@@ -1483,7 +1483,7 @@ msgstr "Odotetaan skannausta {0}"
 
 #: FAdvancedScanSettings.resx$label2.Text$Message
 msgid "White Threshold"
-msgstr "Valkoisen raja"
+msgstr "Valkoisen raja-arvo"
 
 #: FPageSize.resx$labelX.Text$Message
 msgid "X"
