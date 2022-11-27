@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="BitDepth_1BlackAndWhite" xml:space="preserve">
-    <value>Black/White</value>
+    <value>Black &amp; White</value>
   </data>
   <data name="BitDepth_24Color" xml:space="preserve">
     <value>24-bit Color</value>
@@ -281,8 +281,5 @@
   </data>
   <data name="OcrMode_Best" xml:space="preserve">
     <value>Best</value>
-  </data>
-  <data name="OcrMode_Legacy" xml:space="preserve">
-    <value>Legacy</value>
   </data>
 </root>

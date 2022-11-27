@@ -120,8 +120,8 @@
   <data name="AboutFormTitle" xml:space="preserve">
     <value>About</value>
   </data>
-  <data name="Copyright" xml:space="preserve">
-    <value>Copyright 2009, 2012-2020 NAPS2 Contributors</value>
+  <data name="CopyrightFormat" xml:space="preserve">
+    <value>Copyright {0} NAPS2 Contributors</value>
   </data>
   <data name="IconsFrom" xml:space="preserve">
     <value>Icons from:</value>
@@ -138,8 +138,8 @@
   <data name="ProfilesFormTitle" xml:space="preserve">
     <value>Profiles</value>
   </data>
-  <data name="Add" xml:space="preserve">
-    <value>Add</value>
+  <data name="New" xml:space="preserve">
+    <value>New</value>
   </data>
   <data name="Edit" xml:space="preserve">
     <value>Edit</value>
@@ -217,7 +217,7 @@
     <value>Hue / Saturation</value>
   </data>
   <data name="BlackAndWhite" xml:space="preserve">
-    <value>Black and White</value>
+    <value>Black &amp; White</value>
   </data>
   <data name="Sharpen" xml:space="preserve">
     <value>Sharpen</value>

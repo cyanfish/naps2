@@ -60,7 +60,7 @@ namespace NAPS2.Lang.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Black/White.
+        ///   Looks up a localized string similar to Black &amp; White.
         /// </summary>
         internal static string BitDepth_1BlackAndWhite {
             get {
@@ -236,15 +236,6 @@ namespace NAPS2.Lang.Resources {
         internal static string OcrMode_Fast {
             get {
                 return ResourceManager.GetString("OcrMode_Fast", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Legacy.
-        /// </summary>
-        internal static string OcrMode_Legacy {
-            get {
-                return ResourceManager.GetString("OcrMode_Legacy", resourceCulture);
             }
         }
         

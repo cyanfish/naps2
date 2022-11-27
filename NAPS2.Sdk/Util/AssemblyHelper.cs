@@ -4,6 +4,8 @@ namespace NAPS2.Util;
 
 public class AssemblyHelper
 {
+    public const string COPYRIGHT_YEARS = "2009, 2012-2022";
+
     public static string GetFolder(Assembly? assembly)
     {
         return Path.GetDirectoryName(assembly?.Location) ?? LibFolder;

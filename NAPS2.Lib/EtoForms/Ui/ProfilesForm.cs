@@ -55,7 +55,7 @@ public class ProfilesForm : EtoDialogBase
         };
         _addCommand = new ActionCommand(DoAdd)
         {
-            MenuText = UiStrings.Add,
+            MenuText = UiStrings.New,
             Image = Icons.add_small.ToEtoImage()
         };
         _editCommand = new ActionCommand(DoEdit)

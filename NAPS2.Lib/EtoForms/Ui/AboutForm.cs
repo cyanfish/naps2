@@ -63,7 +63,7 @@ public class AboutForm : EtoDialogBase
                 _checkForUpdates.Padding(left: 4),
                 _updatePanel,
                 C.TextSpace(),
-                C.NoWrap(UiStrings.Copyright),
+                C.NoWrap(string.Format(UiStrings.CopyrightFormat, AssemblyHelper.COPYRIGHT_YEARS)),
                 C.TextSpace(),
                 L.Row(
                     L.Column(
