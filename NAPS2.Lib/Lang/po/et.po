@@ -1,32 +1,39 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-09-17 20:27+0000\n"
-"PO-Revision-Date: 2018-09-17 20:24+0000\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"POT-Creation-Date: 2016-04-19 21:51+0000\n"
+"PO-Revision-Date: 2022-11-27 05:04\n"
+"Last-Translator: \n"
+"Language-Team: Estonian\n"
 "Language: et\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Pootle 2.8\n"
-"X-POOTLE-MTIME: 1537215868.532367\n"
+"X-Generator: Translate Toolkit 1.13.0\n"
+"X-Poedit-SourceCharset: iso-8859-1\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Crowdin-Project: naps2\n"
+"X-Crowdin-Project-ID: 531762\n"
+"X-Crowdin-Language: et\n"
+"X-Crowdin-File: templates.pot\n"
+"X-Crowdin-File-ID: 75\n"
 
 #: SettingsResources.resx$Dpi_100$Message
 msgid "100 dpi"
-msgstr "100 dpi"
+msgstr ""
 
 #: SettingsResources.resx$Dpi_1200$Message
 msgid "1200 dpi"
-msgstr "1200 dpi"
+msgstr ""
 
 #: SettingsResources.resx$Dpi_150$Message
 msgid "150 dpi"
-msgstr "150 dpi"
+msgstr ""
 
 #: SettingsResources.resx$Dpi_200$Message
 msgid "200 dpi"
-msgstr "200 dpi"
+msgstr ""
 
 #: SettingsResources.resx$BitDepth_24Color$Message
 msgid "24-bit Color"
@@ -34,19 +41,19 @@ msgstr "24-bitine värv"
 
 #: SettingsResources.resx$Dpi_300$Message
 msgid "300 dpi"
-msgstr "300 dpi"
+msgstr ""
 
 #: SettingsResources.resx$Dpi_400$Message
 msgid "400 dpi"
-msgstr "400 dpi"
+msgstr ""
 
 #: SettingsResources.resx$Dpi_600$Message
 msgid "600 dpi"
-msgstr "600 dpi"
+msgstr ""
 
 #: SettingsResources.resx$Dpi_800$Message
 msgid "800 dpi"
-msgstr "800 dpi"
+msgstr ""
 
 #: SettingsResources.resx$PageSize_A3$Message
 msgid "A3 (297x420 mm)"
@@ -66,6 +73,7 @@ msgid "About"
 msgstr "Meist"
 
 #: FScanProgress.resx$$this.Text$Message
+#: MiscResources.resx$AcquiringData$Message
 msgid "Acquiring data"
 msgstr "Andmeid pärimas"
 
@@ -134,12 +142,8 @@ msgid "Alternative Transfer"
 msgstr ""
 
 #: MiscResources.resx$PdfImportComponentNeeded$Message
-msgid ""
-"An additional component is needed to import this PDF file. Would you like to "
-"download it now?"
-msgstr ""
-"Selle PDF-faili importimiseks on vaja täiendavat komponenti. Kas soovite "
-"selle kohe alla laadida?"
+msgid "An additional component is needed to import this PDF file. Would you like to download it now?"
+msgstr "Selle PDF-faili importimiseks on vaja täiendavat komponenti. Kas soovite selle kohe alla laadida?"
 
 #: MiscResources.resx$UpdateError$Message
 msgid "An error occured when trying to install the update"
@@ -170,12 +174,8 @@ msgid "An error occurred with the scanning driver"
 msgstr "Skanneri draiveril ilmnes tõrge"
 
 #: MiscResources.resx$ExitWithActiveOperations$Message
-msgid ""
-"An operation is in progress. Are you sure you want to exit and cancel the "
-"operation?"
-msgstr ""
-"Käimas on toiming. Kas olete kindel, et soovite tegevuse lõpetada ja "
-"tühistada?"
+msgid "An operation is in progress. Are you sure you want to exit and cancel the operation?"
+msgstr "Käimas on toiming. Kas olete kindel, et soovite tegevuse lõpetada ja tühistada?"
 
 #: MiscResources.resx$BatchError$Message
 msgid "An unknown error ocurred during the batch scan"
@@ -239,7 +239,7 @@ msgstr "Autoriseeri"
 
 #: SettingsResources.resx$TiffComp_Auto$Message
 msgid "Auto"
-msgstr "Auto"
+msgstr ""
 
 #: FAutoSaveSettings.resx$$this.Text$Message
 #: FEditProfile.resx$linkAutoSaveSettings.Text$Message
@@ -268,11 +268,11 @@ msgstr ""
 
 #: SettingsResources.resx$PageSize_B4$Message
 msgid "B4 (250x353 mm)"
-msgstr "B4 (250x353 mm)"
+msgstr ""
 
 #: SettingsResources.resx$PageSize_B5$Message
 msgid "B5 (176x250 mm)"
-msgstr "B5 (176x250 mm)"
+msgstr ""
 
 #: FBatchScan.resx$$this.Text$Message
 #: FDesktop.resx$tsBatchScan.Text$Message
@@ -306,9 +306,8 @@ msgstr "Must ja valge"
 #: FBlackWhite.resx$$this.Text$Message
 #: FDesktop.resx$tsBlackWhite.Text$Message
 #: FViewer.resx$tsBlackWhite.Text$Message
-#, fuzzy
 msgid "Black and White"
-msgstr "Must ja valge"
+msgstr ""
 
 #: FAdvancedScanSettings.resx$groupBox3.Text$Message
 msgid "Blank Pages"
@@ -326,7 +325,7 @@ msgstr "Heledus / kontrastsus"
 
 #: SettingsResources.resx$TiffComp_Ccitt4$Message
 msgid "CCITT4"
-msgstr "CCITT4"
+msgstr ""
 
 #: FAdvancedScanSettings.resx$btnCancel.Text$Message
 #: FAuthorize.resx$btnCancel.Text$Message
@@ -471,6 +470,7 @@ msgstr "Päev (01-31)"
 
 #: SettingsResources.resx$PdfCompat_Default$Message
 #: SettingsResources.resx$TwainImpl_Default$Message
+#: SettingsResources.resx$WiaVersion_Default$Message
 msgid "Default"
 msgstr "Vaikimisi"
 
@@ -481,10 +481,6 @@ msgstr "Vaikimisi faili asukoht"
 
 #: FDesktop.resx$tsDeinterleave.Text$Message
 msgid "Deinterleave"
-msgstr ""
-
-#: FAdvancedScanSettings.resx$cbWiaDelayBetweenScans.Text$Message
-msgid "Delay between scans (WIA)"
 msgstr ""
 
 #: FDesktop.resx$ctxDelete.Text$Message
@@ -561,6 +557,7 @@ msgid "Edit"
 msgstr "Muuda"
 
 #: FDesktop.resx$tsdEmailPDF.Text$Message
+#: MiscResources.resx$EmailPdf$Message
 msgid "Email PDF"
 msgstr "PDF e-mailile"
 
@@ -630,9 +627,7 @@ msgid "Flip duplexed pages"
 msgstr ""
 
 #: FImageSettings.resx$lblWarning.Text$Message
-msgid ""
-"For high JPEG qualities (80+), also increase Image Quality in your profile "
-"for best results"
+msgid "For high JPEG qualities (80+), also increase Image Quality in your profile for best results"
 msgstr ""
 
 #: MiscResources.resx$FileTypeGif$Message
@@ -649,7 +644,7 @@ msgstr "Klaas"
 
 #: SettingsResources.resx$EmailProviderType_Gmail$Message
 msgid "Gmail"
-msgstr "Gmail"
+msgstr ""
 
 #: SettingsResources.resx$BitDepth_8Grayscale$Message
 msgid "Grayscale"
@@ -813,7 +808,7 @@ msgstr ""
 
 #: MiscResources.resx$NAPS2$Message
 msgid "NAPS2"
-msgstr "NAPS2"
+msgstr ""
 
 #: MiscResources.resx$DonatePrompt$Message
 msgid "NAPS2 is completely free. Consider making a donation"
@@ -865,13 +860,12 @@ msgid "No updates available"
 msgstr "Uuendusi pole saadaval"
 
 #: SettingsResources.resx$TiffComp_None$Message
-#, fuzzy
 msgid "None"
-msgstr "Valmis"
+msgstr ""
 
 #: FDesktop.resx$$this.Text$Message
 msgid "Not Another PDF Scanner 2"
-msgstr "Not Another PDF Scanner 2"
+msgstr ""
 
 #: FRecover.resx$btnCancel.Text$Message
 msgid "Not Now"
@@ -883,7 +877,7 @@ msgstr "Skaneerimiste arv"
 
 #: FDesktop.resx$tsOcr.Text$Message
 msgid "OCR"
-msgstr "OCR"
+msgstr ""
 
 #: FOcrLanguageDownload.resx$$this.Text$Message
 msgid "OCR Download"
@@ -983,15 +977,15 @@ msgstr "PDF salvestatud"
 
 #: SettingsResources.resx$PdfCompat_PdfA1B$Message
 msgid "PDF/A-1b"
-msgstr "PDF/A-1b"
+msgstr ""
 
 #: SettingsResources.resx$PdfCompat_PdfA2B$Message
 msgid "PDF/A-2b"
-msgstr "PDF/A-2b"
+msgstr ""
 
 #: SettingsResources.resx$PdfCompat_PdfA3B$Message
 msgid "PDF/A-3b"
-msgstr "PDF/A-3b"
+msgstr ""
 
 #: SettingsResources.resx$PdfCompat_PdfA3U$Message
 msgid "PDF/A-3u"
@@ -1046,6 +1040,7 @@ msgid "Previous"
 msgstr "Eelmine"
 
 #: FDesktop.resx$tsPrint.Text$Message
+#: MiscResources.resx$Print$Message
 msgid "Print"
 msgstr "Prindi"
 
@@ -1119,10 +1114,6 @@ msgstr "Resolutsioon"
 msgid "Restore Defaults"
 msgstr "Taasta algsed sätted"
 
-#: FAdvancedScanSettings.resx$cbWiaRetryOnFailure.Text$Message
-msgid "Retry on failure (WIA)"
-msgstr ""
-
 #: FDesktop.resx$tsReverse.Text$Message
 msgid "Reverse"
 msgstr ""
@@ -1168,6 +1159,7 @@ msgid "Save Image"
 msgstr "Pildi salvestamine"
 
 #: FDesktop.resx$tsdSaveImages.Text$Message
+#: MiscResources.resx$SaveImages$Message
 msgid "Save Images"
 msgstr "Piltide salvestamine"
 
@@ -1177,6 +1169,7 @@ msgstr ""
 
 #: FDesktop.resx$tsdSavePDF.Text$Message
 #: FViewer.resx$tsSavePDF.Text$Message
+#: MiscResources.resx$SavePdf$Message
 msgid "Save PDF"
 msgstr "Salvesta PDF"
 
@@ -1227,6 +1220,7 @@ msgstr "Skaneeritud pilt"
 #: FScanProgress.resx$labelPage.Text$Message
 #: MiscResources.resx$BatchStatusPage$Message
 #: MiscResources.resx$ScanPageProgress$Message
+#: MiscResources.resx$ScanProgressPage$Message
 msgid "Scanning page {0}"
 msgstr ""
 
@@ -1301,7 +1295,7 @@ msgstr ""
 
 #: FBatchScan.resx$btnStart.Text$Message
 msgid "Start"
-msgstr "Start"
+msgstr ""
 
 #: FAdvancedScanSettings.resx$cbForcePageSize.Text$Message
 msgid "Stretch to page size"
@@ -1324,13 +1318,11 @@ msgid "Technical Details"
 msgstr "Tehnilised detailid"
 
 #: MiscResources.resx$TesseractNotAvailable$Message
-msgid ""
-"The OCR engine is not available. Make sure to install the required package"
+msgid "The OCR engine is not available. Make sure to install the required package"
 msgstr "OCR-mootor pole saadaval. Paigaldage vajalik osa"
 
 #: MiscResources.resx$SaneNotAvailable$Message
-msgid ""
-"The SANE driver is not available. Make sure to install the required packages"
+msgid "The SANE driver is not available. Make sure to install the required packages"
 msgstr ""
 
 #: MiscResources.resx$ImportErrorCouldNot$Message
@@ -1338,9 +1330,7 @@ msgid "The file '{0}' could not be imported"
 msgstr ""
 
 #: MiscResources.resx$ImportErrorNAPS2Pdf$Message
-msgid ""
-"The file '{0}' could not be imported. Only PDF files generated by NAPS2 can "
-"be imported"
+msgid "The file '{0}' could not be imported. Only PDF files generated by NAPS2 can be imported"
 msgstr ""
 
 #: MiscResources.resx$FileInUse$Message
@@ -1376,20 +1366,12 @@ msgid "The selected scanner could not be found"
 msgstr "Valitud skännerit ei leitud"
 
 #: MiscResources.resx$NoFeederSupport$Message
-msgid ""
-"The selected scanner does not support using a feeder. If your scanner does "
-"have a feeder, try using a different driver"
-msgstr ""
-"Valitud skanner ei toeta sööturi kasutamist. Kui teie skanneril on söötur, "
-"proovige kasutada teist draiverit"
+msgid "The selected scanner does not support using a feeder. If your scanner does have a feeder, try using a different driver"
+msgstr "Valitud skanner ei toeta sööturi kasutamist. Kui teie skanneril on söötur, proovige kasutada teist draiverit"
 
 #: MiscResources.resx$NoDuplexSupport$Message
-msgid ""
-"The selected scanner does not support using duplex. If your scanner is "
-"supposed to support duplex, try using a different driver"
-msgstr ""
-"Valitud skanner ei toeta dupleksi kasutamist. Kui teie skanner peaks "
-"dupleksit toetama, proovige kasutada teist draiverit"
+msgid "The selected scanner does not support using duplex. If your scanner is supposed to support duplex, try using a different driver"
+msgstr "Valitud skanner ei toeta dupleksi kasutamist. Kui teie skanner peaks dupleksit toetama, proovige kasutada teist draiverit"
 
 #: MiscResources.resx$DeviceBusy$Message
 msgid "The selected scanner is busy"
@@ -1453,9 +1435,7 @@ msgstr "Kasutaja parool"
 
 #: FOcrLanguageDownload.resx$label1.Text$Message
 msgid "Using OCR requires you to download each language you want to scan"
-msgstr ""
-"OCR-i kasutamine eeldab, et laaditakse alla kõik keeled, mida soovite "
-"skaneerida"
+msgstr "OCR-i kasutamine eeldab, et laaditakse alla kõik keeled, mida soovite skaneerida"
 
 #: MiscResources.resx$Version$Message
 msgid "Version {0}"
@@ -1486,6 +1466,10 @@ msgstr ""
 msgid "White Threshold"
 msgstr ""
 
+#: FAdvancedScanSettings.resx$label4.Text$Message
+msgid "Wia Version"
+msgstr ""
+
 #: FPageSize.resx$labelX.Text$Message
 msgid "X"
 msgstr ""
@@ -1507,12 +1491,8 @@ msgid "You don't have permission to save files at this location"
 msgstr "Teil ei ole õigust failide salvestamiseks selles asukohas"
 
 #: MiscResources.resx$ExitWithUnsavedChanges$Message
-msgid ""
-"You have unsaved changes. Are you sure you want to exit and discard those "
-"changes?"
-msgstr ""
-"Teil on salvestamata muudatusi. Kas olete kindel, et soovite neist "
-"muudatustest loobuda?"
+msgid "You have unsaved changes. Are you sure you want to exit and discard those changes?"
+msgstr "Teil on salvestamata muudatusi. Kas olete kindel, et soovite neist muudatustest loobuda?"
 
 #: TiffViewerCtl.resx$tsZoom.ToolTipText$Message
 msgid "Zoom"
@@ -1574,9 +1554,7 @@ msgid "{0} / {1} files"
 msgstr ""
 
 #: FRecover.resx$lblPrompt.Text$Message
-msgid ""
-"{0} image(s) scanned on {1} at {2} may not have been saved, and are "
-"recoverable. Do you want to recover them?"
+msgid "{0} image(s) scanned on {1} at {2} may not have been saved, and are recoverable. Do you want to recover them?"
 msgstr ""
 
 #: MiscResources.resx$ImagesSaved$Message
@@ -1586,3 +1564,4 @@ msgstr ""
 #: MiscResources.resx$PdfStatus$Message
 msgid "{0} of {1}"
 msgstr ""
+

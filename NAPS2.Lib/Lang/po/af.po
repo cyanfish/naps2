@@ -1,67 +1,71 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-09-17 20:27+0000\n"
-"PO-Revision-Date: 2018-09-17 20:24+0000\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"POT-Creation-Date: 2016-04-19 21:51+0000\n"
+"PO-Revision-Date: 2022-11-27 05:04\n"
+"Last-Translator: \n"
+"Language-Team: Afrikaans\n"
 "Language: af\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Pootle 2.8\n"
-"X-POOTLE-MTIME: 1537215862.453224\n"
+"X-Generator: Translate Toolkit 1.13.0\n"
+"X-Poedit-SourceCharset: iso-8859-1\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Crowdin-Project: naps2\n"
+"X-Crowdin-Project-ID: 531762\n"
+"X-Crowdin-Language: af\n"
+"X-Crowdin-File: templates.pot\n"
+"X-Crowdin-File-ID: 75\n"
 
 #: SettingsResources.resx$Dpi_100$Message
 msgid "100 dpi"
-msgstr "100 dpi"
+msgstr ""
 
 #: SettingsResources.resx$Dpi_1200$Message
 msgid "1200 dpi"
-msgstr "1200 dpi"
+msgstr ""
 
 #: SettingsResources.resx$Dpi_150$Message
 msgid "150 dpi"
-msgstr "150 dpi"
+msgstr ""
 
 #: SettingsResources.resx$Dpi_200$Message
 msgid "200 dpi"
-msgstr "200 dpi"
+msgstr ""
 
 #: SettingsResources.resx$BitDepth_24Color$Message
 msgid "24-bit Color"
 msgstr " "
 
 #: SettingsResources.resx$Dpi_300$Message
-#, fuzzy
 msgid "300 dpi"
-msgstr "100 dpi"
+msgstr ""
 
 #: SettingsResources.resx$Dpi_400$Message
-#, fuzzy
 msgid "400 dpi"
-msgstr "100 dpi"
+msgstr ""
 
 #: SettingsResources.resx$Dpi_600$Message
-#, fuzzy
 msgid "600 dpi"
-msgstr "100 dpi"
+msgstr ""
 
 #: SettingsResources.resx$Dpi_800$Message
 msgid "800 dpi"
-msgstr "800 dpi"
+msgstr ""
 
 #: SettingsResources.resx$PageSize_A3$Message
 msgid "A3 (297x420 mm)"
-msgstr "A3 (297x420 mm)"
+msgstr ""
 
 #: SettingsResources.resx$PageSize_A4$Message
 msgid "A4 (210x297 mm)"
-msgstr "A4 (210x297 mm)"
+msgstr ""
 
 #: SettingsResources.resx$PageSize_A5$Message
 msgid "A5 (148x210 mm)"
-msgstr "A5 (148x210 mm)"
+msgstr ""
 
 #: FAbout.resx$$this.Text$Message
 #: FDesktop.resx$tsAbout.Text$Message
@@ -69,6 +73,7 @@ msgid "About"
 msgstr "Thông Tin Phần Mềm"
 
 #: FScanProgress.resx$$this.Text$Message
+#: MiscResources.resx$AcquiringData$Message
 msgid "Acquiring data"
 msgstr "Thu thập dữ liệu"
 
@@ -126,20 +131,18 @@ msgstr "Cho phép in"
 
 #: FDesktop.resx$tsAltDeinterleave.Text$Message
 msgid "Alternate Deinterleave"
-msgstr "Alternate Deinterleave"
+msgstr ""
 
 #: FDesktop.resx$tsAltInterleave.Text$Message
 msgid "Alternate Interleave"
-msgstr "Alternate Interleave"
+msgstr ""
 
 #: SettingsResources.resx$TwainImpl_MemXfer$Message
 msgid "Alternative Transfer"
 msgstr ""
 
 #: MiscResources.resx$PdfImportComponentNeeded$Message
-msgid ""
-"An additional component is needed to import this PDF file. Would you like to "
-"download it now?"
+msgid "An additional component is needed to import this PDF file. Would you like to download it now?"
 msgstr ""
 
 #: MiscResources.resx$UpdateError$Message
@@ -171,12 +174,8 @@ msgid "An error occurred with the scanning driver"
 msgstr "Có lỗi xảy ra với trình điều khiển máy quét"
 
 #: MiscResources.resx$ExitWithActiveOperations$Message
-msgid ""
-"An operation is in progress. Are you sure you want to exit and cancel the "
-"operation?"
-msgstr ""
-"Die program is tans besig met 'n taak. Is jy seker dat jy die program wil "
-"verlaat en die taak kanselleer?"
+msgid "An operation is in progress. Are you sure you want to exit and cancel the operation?"
+msgstr "Die program is tans besig met 'n taak. Is jy seker dat jy die program wil verlaat en die taak kanselleer?"
 
 #: MiscResources.resx$BatchError$Message
 msgid "An unknown error ocurred during the batch scan"
@@ -261,7 +260,7 @@ msgstr "số tự động-incrementing (3 digits)"
 
 #: FPlaceholders.resx$label10.Text$Message
 msgid "Auto-incrementing number (4 digits)"
-msgstr "Auto-incrementing number (4 digits)"
+msgstr ""
 
 #: FOcrSetup.resx$checkBoxRunInBG.Text$Message
 msgid "Automatically run OCR after scanning"
@@ -269,11 +268,11 @@ msgstr ""
 
 #: SettingsResources.resx$PageSize_B4$Message
 msgid "B4 (250x353 mm)"
-msgstr "B4 (250x353 mm)"
+msgstr ""
 
 #: SettingsResources.resx$PageSize_B5$Message
 msgid "B5 (176x250 mm)"
-msgstr "B5 (176x250 mm)"
+msgstr ""
 
 #: FBatchScan.resx$$this.Text$Message
 #: FDesktop.resx$tsBatchScan.Text$Message
@@ -298,7 +297,7 @@ msgstr "Chiều sâu"
 
 #: MiscResources.resx$FileTypeBmp$Message
 msgid "Bitmap Files (*.bmp)"
-msgstr "Bitmap Files (*.bmp)"
+msgstr ""
 
 #: SettingsResources.resx$BitDepth_1BlackAndWhite$Message
 msgid "Black & White"
@@ -307,9 +306,8 @@ msgstr "Trắng & Đen"
 #: FBlackWhite.resx$$this.Text$Message
 #: FDesktop.resx$tsBlackWhite.Text$Message
 #: FViewer.resx$tsBlackWhite.Text$Message
-#, fuzzy
 msgid "Black and White"
-msgstr "Trắng & Đen"
+msgstr ""
 
 #: FAdvancedScanSettings.resx$groupBox3.Text$Message
 msgid "Blank Pages"
@@ -472,6 +470,7 @@ msgstr "Ngày(01-31)"
 
 #: SettingsResources.resx$PdfCompat_Default$Message
 #: SettingsResources.resx$TwainImpl_Default$Message
+#: SettingsResources.resx$WiaVersion_Default$Message
 msgid "Default"
 msgstr "Mặc định"
 
@@ -482,10 +481,6 @@ msgstr "Đường dẫn mặc định"
 
 #: FDesktop.resx$tsDeinterleave.Text$Message
 msgid "Deinterleave"
-msgstr "Deinterleave"
-
-#: FAdvancedScanSettings.resx$cbWiaDelayBetweenScans.Text$Message
-msgid "Delay between scans (WIA)"
 msgstr ""
 
 #: FDesktop.resx$ctxDelete.Text$Message
@@ -562,12 +557,13 @@ msgid "Edit"
 msgstr "Sửa"
 
 #: FDesktop.resx$tsdEmailPDF.Text$Message
+#: MiscResources.resx$EmailPdf$Message
 msgid "Email PDF"
-msgstr "Email PDF"
+msgstr ""
 
 #: MiscResources.resx$EmailPdfProgress$Message
 msgid "Email PDF Progress"
-msgstr "Email PDF Progress"
+msgstr ""
 
 #: FDesktop.resx$tsEmailSettings.Text$Message
 #: FEmailSettings.resx$$this.Text$Message
@@ -584,11 +580,11 @@ msgstr "Mã hóa PDF"
 
 #: FPdfSettings.resx$groupProtection.Text$Message
 msgid "Encryption"
-msgstr "Encryption"
+msgstr ""
 
 #: MiscResources.resx$FileTypeEmf$Message
 msgid "Enhanced Windows MetaFile (*.emf)"
-msgstr "Enhanced Windows MetaFile (*.emf)"
+msgstr ""
 
 #: FError.resx$$this.Text$Message
 #: MiscResources.resx$Error$Message
@@ -602,7 +598,7 @@ msgstr "Ước tính kích thước download: {0} MB"
 
 #: MiscResources.resx$FileTypeExif$Message
 msgid "Exchangeable Image File (*.exif)"
-msgstr "Exchangeable Image File (*.exif)"
+msgstr ""
 
 #: FAdvancedScanSettings.resx$cbExcludeBlankPages.Text$Message
 msgid "Exclude blank pages"
@@ -610,7 +606,7 @@ msgstr "Loại trừ các trang trống"
 
 #: SettingsResources.resx$Source_Feeder$Message
 msgid "Feeder"
-msgstr "Feeder"
+msgstr ""
 
 #: FPlaceholders.resx$label1.Text$Message
 msgid "File Name"
@@ -631,14 +627,12 @@ msgid "Flip duplexed pages"
 msgstr "Lật 2 mặt trang"
 
 #: FImageSettings.resx$lblWarning.Text$Message
-msgid ""
-"For high JPEG qualities (80+), also increase Image Quality in your profile "
-"for best results"
+msgid "For high JPEG qualities (80+), also increase Image Quality in your profile for best results"
 msgstr ""
 
 #: MiscResources.resx$FileTypeGif$Message
 msgid "GIF File (*.gif)"
-msgstr "GIF File (*.gif)"
+msgstr ""
 
 #: FOcrSetup.resx$linkGetLanguages.Text$Message
 msgid "Get more languages"
@@ -654,7 +648,7 @@ msgstr ""
 
 #: SettingsResources.resx$BitDepth_8Grayscale$Message
 msgid "Grayscale"
-msgstr "Grayscale"
+msgstr ""
 
 #: FEditProfile.resx$label9.Text$Message
 msgid "Horizontal align"
@@ -672,7 +666,7 @@ msgstr ""
 
 #: FAbout.resx$label1.Text$Message
 msgid "Icons from"
-msgstr "Icons from"
+msgstr ""
 
 #: FDesktop.resx$tsdImage.Text$Message
 msgid "Image"
@@ -733,15 +727,15 @@ msgstr "Cài đặt thất bại"
 
 #: FDesktop.resx$tsInterleave.Text$Message
 msgid "Interleave"
-msgstr "Interleave"
+msgstr ""
 
 #: MiscResources.resx$FileTypeJpeg$Message
 msgid "JPEG File (*.jpg, *.jpeg)"
-msgstr "JPEG File (*.jpg, *.jpeg)"
+msgstr ""
 
 #: FImageSettings.resx$groupJpeg.Text$Message
 msgid "Jpeg Quality"
-msgstr "Jpeg Quality"
+msgstr ""
 
 #: FPdfSettings.resx$label6.Text$Message
 msgid "Keywords"
@@ -781,7 +775,7 @@ msgstr "Tập tin quá lớn"
 
 #: FPdfSettings.resx$groupMetadata.Text$Message
 msgid "Metadata"
-msgstr "Metadata"
+msgstr ""
 
 #: FPlaceholders.resx$label8.Text$Message
 msgid "Minute (00-59)"
@@ -814,7 +808,7 @@ msgstr "Veelvuldige skanderings (vinnige tussen skanderings)"
 
 #: MiscResources.resx$NAPS2$Message
 msgid "NAPS2"
-msgstr "NAPS2"
+msgstr ""
 
 #: MiscResources.resx$DonatePrompt$Message
 msgid "NAPS2 is completely free. Consider making a donation"
@@ -866,9 +860,8 @@ msgid "No updates available"
 msgstr ""
 
 #: SettingsResources.resx$TiffComp_None$Message
-#, fuzzy
 msgid "None"
-msgstr "Xong"
+msgstr ""
 
 #: FDesktop.resx$$this.Text$Message
 msgid "Not Another PDF Scanner 2"
@@ -884,7 +877,7 @@ msgstr "Aantal skanderings"
 
 #: FDesktop.resx$tsOcr.Text$Message
 msgid "OCR"
-msgstr "OCR"
+msgstr ""
 
 #: FOcrLanguageDownload.resx$$this.Text$Message
 msgid "OCR Download"
@@ -1047,6 +1040,7 @@ msgid "Previous"
 msgstr "Vorige"
 
 #: FDesktop.resx$tsPrint.Text$Message
+#: MiscResources.resx$Print$Message
 msgid "Print"
 msgstr "Afdruk"
 
@@ -1120,10 +1114,6 @@ msgstr ""
 msgid "Restore Defaults"
 msgstr ""
 
-#: FAdvancedScanSettings.resx$cbWiaRetryOnFailure.Text$Message
-msgid "Retry on failure (WIA)"
-msgstr ""
-
 #: FDesktop.resx$tsReverse.Text$Message
 msgid "Reverse"
 msgstr ""
@@ -1169,6 +1159,7 @@ msgid "Save Image"
 msgstr ""
 
 #: FDesktop.resx$tsdSaveImages.Text$Message
+#: MiscResources.resx$SaveImages$Message
 msgid "Save Images"
 msgstr ""
 
@@ -1178,13 +1169,13 @@ msgstr ""
 
 #: FDesktop.resx$tsdSavePDF.Text$Message
 #: FViewer.resx$tsSavePDF.Text$Message
+#: MiscResources.resx$SavePdf$Message
 msgid "Save PDF"
 msgstr ""
 
 #: MiscResources.resx$SavePdfProgress$Message
-#, fuzzy
 msgid "Save PDF Progress"
-msgstr "Email PDF Progress"
+msgstr ""
 
 #: FBatchScan.resx$rdSaveToSingleFile.Text$Message
 msgid "Save to a single file"
@@ -1229,6 +1220,7 @@ msgstr ""
 #: FScanProgress.resx$labelPage.Text$Message
 #: MiscResources.resx$BatchStatusPage$Message
 #: MiscResources.resx$ScanPageProgress$Message
+#: MiscResources.resx$ScanProgressPage$Message
 msgid "Scanning page {0}"
 msgstr ""
 
@@ -1326,13 +1318,11 @@ msgid "Technical Details"
 msgstr ""
 
 #: MiscResources.resx$TesseractNotAvailable$Message
-msgid ""
-"The OCR engine is not available. Make sure to install the required package"
+msgid "The OCR engine is not available. Make sure to install the required package"
 msgstr ""
 
 #: MiscResources.resx$SaneNotAvailable$Message
-msgid ""
-"The SANE driver is not available. Make sure to install the required packages"
+msgid "The SANE driver is not available. Make sure to install the required packages"
 msgstr ""
 
 #: MiscResources.resx$ImportErrorCouldNot$Message
@@ -1340,9 +1330,7 @@ msgid "The file '{0}' could not be imported"
 msgstr ""
 
 #: MiscResources.resx$ImportErrorNAPS2Pdf$Message
-msgid ""
-"The file '{0}' could not be imported. Only PDF files generated by NAPS2 can "
-"be imported"
+msgid "The file '{0}' could not be imported. Only PDF files generated by NAPS2 can be imported"
 msgstr ""
 
 #: MiscResources.resx$FileInUse$Message
@@ -1378,15 +1366,11 @@ msgid "The selected scanner could not be found"
 msgstr ""
 
 #: MiscResources.resx$NoFeederSupport$Message
-msgid ""
-"The selected scanner does not support using a feeder. If your scanner does "
-"have a feeder, try using a different driver"
+msgid "The selected scanner does not support using a feeder. If your scanner does have a feeder, try using a different driver"
 msgstr ""
 
 #: MiscResources.resx$NoDuplexSupport$Message
-msgid ""
-"The selected scanner does not support using duplex. If your scanner is "
-"supposed to support duplex, try using a different driver"
+msgid "The selected scanner does not support using duplex. If your scanner is supposed to support duplex, try using a different driver"
 msgstr ""
 
 #: MiscResources.resx$DeviceBusy$Message
@@ -1482,6 +1466,10 @@ msgstr ""
 msgid "White Threshold"
 msgstr ""
 
+#: FAdvancedScanSettings.resx$label4.Text$Message
+msgid "Wia Version"
+msgstr ""
+
 #: FPageSize.resx$labelX.Text$Message
 msgid "X"
 msgstr ""
@@ -1503,9 +1491,7 @@ msgid "You don't have permission to save files at this location"
 msgstr ""
 
 #: MiscResources.resx$ExitWithUnsavedChanges$Message
-msgid ""
-"You have unsaved changes. Are you sure you want to exit and discard those "
-"changes?"
+msgid "You have unsaved changes. Are you sure you want to exit and discard those changes?"
 msgstr ""
 
 #: TiffViewerCtl.resx$tsZoom.ToolTipText$Message
@@ -1568,9 +1554,7 @@ msgid "{0} / {1} files"
 msgstr ""
 
 #: FRecover.resx$lblPrompt.Text$Message
-msgid ""
-"{0} image(s) scanned on {1} at {2} may not have been saved, and are "
-"recoverable. Do you want to recover them?"
+msgid "{0} image(s) scanned on {1} at {2} may not have been saved, and are recoverable. Do you want to recover them?"
 msgstr ""
 
 #: MiscResources.resx$ImagesSaved$Message
@@ -1580,3 +1564,4 @@ msgstr ""
 #: MiscResources.resx$PdfStatus$Message
 msgid "{0} of {1}"
 msgstr ""
+

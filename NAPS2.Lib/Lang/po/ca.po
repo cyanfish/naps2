@@ -1,16 +1,23 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-09-17 20:27+0000\n"
-"PO-Revision-Date: 2022-11-26 21:15+0000\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"POT-Creation-Date: 2016-04-19 21:51+0000\n"
+"PO-Revision-Date: 2022-11-27 05:04\n"
+"Last-Translator: \n"
+"Language-Team: Catalan\n"
 "Language: ca\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Pootle 2.8\n"
-"X-POOTLE-MTIME: 1669497323.669566\n"
+"X-Generator: Translate Toolkit 1.13.0\n"
+"X-Poedit-SourceCharset: iso-8859-1\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Crowdin-Project: naps2\n"
+"X-Crowdin-Project-ID: 531762\n"
+"X-Crowdin-Language: ca\n"
+"X-Crowdin-File: templates.pot\n"
+"X-Crowdin-File-ID: 75\n"
 
 #: SettingsResources.resx$Dpi_100$Message
 msgid "100 dpi"
@@ -50,15 +57,15 @@ msgstr "800 ppp"
 
 #: SettingsResources.resx$PageSize_A3$Message
 msgid "A3 (297x420 mm)"
-msgstr "A3 (297x420 mm)"
+msgstr ""
 
 #: SettingsResources.resx$PageSize_A4$Message
 msgid "A4 (210x297 mm)"
-msgstr "A4 (210x297 mm)"
+msgstr ""
 
 #: SettingsResources.resx$PageSize_A5$Message
 msgid "A5 (148x210 mm)"
-msgstr "A5 (148x210 mm)"
+msgstr ""
 
 #: FAbout.resx$$this.Text$Message
 #: FDesktop.resx$tsAbout.Text$Message
@@ -66,6 +73,7 @@ msgid "About"
 msgstr "Quant a"
 
 #: FScanProgress.resx$$this.Text$Message
+#: MiscResources.resx$AcquiringData$Message
 msgid "Acquiring data"
 msgstr "S'estan obtenint les dades..."
 
@@ -134,12 +142,8 @@ msgid "Alternative Transfer"
 msgstr "Baixada opcional"
 
 #: MiscResources.resx$PdfImportComponentNeeded$Message
-msgid ""
-"An additional component is needed to import this PDF file. Would you like to "
-"download it now?"
-msgstr ""
-"Es requereix un complement extra per importar aquest fitxer PDF. Voleu "
-"baixar-ho ara?"
+msgid "An additional component is needed to import this PDF file. Would you like to download it now?"
+msgstr "Es requereix un complement extra per importar aquest fitxer PDF. Voleu baixar-ho ara?"
 
 #: MiscResources.resx$UpdateError$Message
 msgid "An error occured when trying to install the update"
@@ -170,9 +174,7 @@ msgid "An error occurred with the scanning driver"
 msgstr "S'ha produït un error amb el driver del escaner"
 
 #: MiscResources.resx$ExitWithActiveOperations$Message
-msgid ""
-"An operation is in progress. Are you sure you want to exit and cancel the "
-"operation?"
+msgid "An operation is in progress. Are you sure you want to exit and cancel the operation?"
 msgstr "Encara s'està executant. Segur que voleu cancel·lar l'operació?"
 
 #: MiscResources.resx$BatchError$Message
@@ -270,7 +272,7 @@ msgstr "B4 (250 x 353 mm)"
 
 #: SettingsResources.resx$PageSize_B5$Message
 msgid "B5 (176x250 mm)"
-msgstr "B5 (176x250 mm)"
+msgstr ""
 
 #: FBatchScan.resx$$this.Text$Message
 #: FDesktop.resx$tsBatchScan.Text$Message
@@ -323,7 +325,7 @@ msgstr "Brillantor/Contrast"
 
 #: SettingsResources.resx$TiffComp_Ccitt4$Message
 msgid "CCITT4"
-msgstr "CCITT4"
+msgstr ""
 
 #: FAdvancedScanSettings.resx$btnCancel.Text$Message
 #: FAuthorize.resx$btnCancel.Text$Message
@@ -408,7 +410,7 @@ msgstr "Compressió"
 
 #: FEditProfile.resx$label7.Text$Message
 msgid "Contrast"
-msgstr "Contrast"
+msgstr ""
 
 #: FDesktop.resx$ctxCopy.Text$Message
 #: FProfiles.resx$ctxCopy.Text$Message
@@ -468,6 +470,7 @@ msgstr "Dia (01-31)"
 
 #: SettingsResources.resx$PdfCompat_Default$Message
 #: SettingsResources.resx$TwainImpl_Default$Message
+#: SettingsResources.resx$WiaVersion_Default$Message
 msgid "Default"
 msgstr "Per defecte"
 
@@ -479,10 +482,6 @@ msgstr "Camí predeterminat"
 #: FDesktop.resx$tsDeinterleave.Text$Message
 msgid "Deinterleave"
 msgstr "Desentrellaça"
-
-#: FAdvancedScanSettings.resx$cbWiaDelayBetweenScans.Text$Message
-msgid "Delay between scans (WIA)"
-msgstr "Retard entre escanejos (WIA)"
 
 #: FDesktop.resx$ctxDelete.Text$Message
 #: FDesktop.resx$tsDelete.Text$Message
@@ -558,8 +557,9 @@ msgid "Edit"
 msgstr "Edita"
 
 #: FDesktop.resx$tsdEmailPDF.Text$Message
+#: MiscResources.resx$EmailPdf$Message
 msgid "Email PDF"
-msgstr "Email PDF"
+msgstr ""
 
 #: MiscResources.resx$EmailPdfProgress$Message
 msgid "Email PDF Progress"
@@ -589,7 +589,7 @@ msgstr "Metafitxer millorat (*.emf)"
 #: FError.resx$$this.Text$Message
 #: MiscResources.resx$Error$Message
 msgid "Error"
-msgstr "Error"
+msgstr ""
 
 #: FOcrLanguageDownload.resx$labelSizeEstimate.Text$Message
 #: MiscResources.resx$EstimatedDownloadSize$Message
@@ -598,7 +598,7 @@ msgstr "Mida estimada de la baixada: {0} MB"
 
 #: MiscResources.resx$FileTypeExif$Message
 msgid "Exchangeable Image File (*.exif)"
-msgstr "Exchangeable Image File (*.exif)"
+msgstr ""
 
 #: FAdvancedScanSettings.resx$cbExcludeBlankPages.Text$Message
 msgid "Exclude blank pages"
@@ -627,14 +627,12 @@ msgid "Flip duplexed pages"
 msgstr ""
 
 #: FImageSettings.resx$lblWarning.Text$Message
-msgid ""
-"For high JPEG qualities (80+), also increase Image Quality in your profile "
-"for best results"
+msgid "For high JPEG qualities (80+), also increase Image Quality in your profile for best results"
 msgstr ""
 
 #: MiscResources.resx$FileTypeGif$Message
 msgid "GIF File (*.gif)"
-msgstr "GIF File (*.gif)"
+msgstr ""
 
 #: FOcrSetup.resx$linkGetLanguages.Text$Message
 msgid "Get more languages"
@@ -646,7 +644,7 @@ msgstr "Vidre"
 
 #: SettingsResources.resx$EmailProviderType_Gmail$Message
 msgid "Gmail"
-msgstr "Gmail"
+msgstr ""
 
 #: SettingsResources.resx$BitDepth_8Grayscale$Message
 msgid "Grayscale"
@@ -721,9 +719,7 @@ msgstr "Ha fallat la instal·lació"
 
 #: MiscResources.resx$InstallCompletePromptRestart$Message
 msgid "Installation complete. Do you want to restart NAPS2 now?"
-msgstr ""
-"S'ha instal·lat correctament. Voleu reiniciar el NAPS2 ara per aplicar els "
-"canvis?"
+msgstr "S'ha instal·lat correctament. Voleu reiniciar el NAPS2 ara per aplicar els canvis?"
 
 #: MiscResources.resx$InstallFailed$Message
 msgid "Installation failed"
@@ -735,7 +731,7 @@ msgstr ""
 
 #: MiscResources.resx$FileTypeJpeg$Message
 msgid "JPEG File (*.jpg, *.jpeg)"
-msgstr "JPEG File (*.jpg, *.jpeg)"
+msgstr ""
 
 #: FImageSettings.resx$groupJpeg.Text$Message
 msgid "Jpeg Quality"
@@ -747,7 +743,7 @@ msgstr "Paraules clau"
 
 #: SettingsResources.resx$TiffComp_Lzw$Message
 msgid "LZW"
-msgstr "LZW"
+msgstr ""
 
 #: FDesktop.resx$toolStripDropDownButton1.Text$Message
 msgid "Language"
@@ -812,7 +808,7 @@ msgstr "Escaneig múltiple (demana entre cada escaneig)"
 
 #: MiscResources.resx$NAPS2$Message
 msgid "NAPS2"
-msgstr "NAPS2"
+msgstr ""
 
 #: MiscResources.resx$DonatePrompt$Message
 msgid "NAPS2 is completely free. Consider making a donation"
@@ -869,7 +865,7 @@ msgstr "Cap"
 
 #: FDesktop.resx$$this.Text$Message
 msgid "Not Another PDF Scanner 2"
-msgstr "Not Another PDF Scanner 2"
+msgstr ""
 
 #: FRecover.resx$btnCancel.Text$Message
 msgid "Not Now"
@@ -881,7 +877,7 @@ msgstr "Nombre d'escanejos"
 
 #: FDesktop.resx$tsOcr.Text$Message
 msgid "OCR"
-msgstr "OCR"
+msgstr ""
 
 #: FOcrLanguageDownload.resx$$this.Text$Message
 msgid "OCR Download"
@@ -981,19 +977,19 @@ msgstr "S'ha desat el PDF"
 
 #: SettingsResources.resx$PdfCompat_PdfA1B$Message
 msgid "PDF/A-1b"
-msgstr "PDF/A-1b"
+msgstr ""
 
 #: SettingsResources.resx$PdfCompat_PdfA2B$Message
 msgid "PDF/A-2b"
-msgstr "PDF/A-2b"
+msgstr ""
 
 #: SettingsResources.resx$PdfCompat_PdfA3B$Message
 msgid "PDF/A-3b"
-msgstr "PDF/A-3b"
+msgstr ""
 
 #: SettingsResources.resx$PdfCompat_PdfA3U$Message
 msgid "PDF/A-3u"
-msgstr "PDF/A-3u"
+msgstr ""
 
 #: MiscResources.resx$FileTypePng$Message
 msgid "PNG File (*.png)"
@@ -1044,6 +1040,7 @@ msgid "Previous"
 msgstr "Anterior"
 
 #: FDesktop.resx$tsPrint.Text$Message
+#: MiscResources.resx$Print$Message
 msgid "Print"
 msgstr "Imprimeix"
 
@@ -1117,10 +1114,6 @@ msgstr "Resolució"
 msgid "Restore Defaults"
 msgstr "Restaura als valors per defecte"
 
-#: FAdvancedScanSettings.resx$cbWiaRetryOnFailure.Text$Message
-msgid "Retry on failure (WIA)"
-msgstr "Torna a provar en fallar (WIA)"
-
 #: FDesktop.resx$tsReverse.Text$Message
 msgid "Reverse"
 msgstr ""
@@ -1166,6 +1159,7 @@ msgid "Save Image"
 msgstr "Desa (imatge)"
 
 #: FDesktop.resx$tsdSaveImages.Text$Message
+#: MiscResources.resx$SaveImages$Message
 msgid "Save Images"
 msgstr "Desa les imatges"
 
@@ -1175,6 +1169,7 @@ msgstr "Progrés del desat d'imatges"
 
 #: FDesktop.resx$tsdSavePDF.Text$Message
 #: FViewer.resx$tsSavePDF.Text$Message
+#: MiscResources.resx$SavePdf$Message
 msgid "Save PDF"
 msgstr "Desa (PDF)"
 
@@ -1225,6 +1220,7 @@ msgstr "Imatge escanejada"
 #: FScanProgress.resx$labelPage.Text$Message
 #: MiscResources.resx$BatchStatusPage$Message
 #: MiscResources.resx$ScanPageProgress$Message
+#: MiscResources.resx$ScanProgressPage$Message
 msgid "Scanning page {0}"
 msgstr "S'està escanejant la pàgina {0}"
 
@@ -1322,29 +1318,20 @@ msgid "Technical Details"
 msgstr "Detalls tècnics"
 
 #: MiscResources.resx$TesseractNotAvailable$Message
-msgid ""
-"The OCR engine is not available. Make sure to install the required package"
-msgstr ""
-"No s'ha trobat el motor OCR. Assegureu-vos d'instal·lar el paquet necessari"
+msgid "The OCR engine is not available. Make sure to install the required package"
+msgstr "No s'ha trobat el motor OCR. Assegureu-vos d'instal·lar el paquet necessari"
 
 #: MiscResources.resx$SaneNotAvailable$Message
-msgid ""
-"The SANE driver is not available. Make sure to install the required packages"
-msgstr ""
-"No s'ha trobat el controlador SANE. Assegureu-vos d'instal·lar les "
-"dependències necessàries"
+msgid "The SANE driver is not available. Make sure to install the required packages"
+msgstr "No s'ha trobat el controlador SANE. Assegureu-vos d'instal·lar les dependències necessàries"
 
 #: MiscResources.resx$ImportErrorCouldNot$Message
 msgid "The file '{0}' could not be imported"
 msgstr "No s'ha pogut importar el fitxer '{0}'"
 
 #: MiscResources.resx$ImportErrorNAPS2Pdf$Message
-msgid ""
-"The file '{0}' could not be imported. Only PDF files generated by NAPS2 can "
-"be imported"
-msgstr ""
-"No s'ha pogut importar el fitxer '{0}'. Només es poden importar fitxers "
-"generats amb el NAPS2"
+msgid "The file '{0}' could not be imported. Only PDF files generated by NAPS2 can be imported"
+msgstr "No s'ha pogut importar el fitxer '{0}'. Només es poden importar fitxers generats amb el NAPS2"
 
 #: MiscResources.resx$FileInUse$Message
 msgid "The file could not be overwritten because it is currently in use"
@@ -1356,8 +1343,7 @@ msgstr "El fitxer {0} ja existeix. Voleu sobreescriure'l?"
 
 #: FPdfPassword.resx$lblPrompt.Text$Message
 msgid "The following file is encrypted and requires a password to open: {0}"
-msgstr ""
-"Aquest fitxer està xifrat per contrasenya i és requereix per accedir: {0}"
+msgstr "Aquest fitxer està xifrat per contrasenya i és requereix per accedir: {0}"
 
 #: MiscResources.resx$DevicePaperJam$Message
 msgid "The scanner has a paper jam"
@@ -1380,21 +1366,12 @@ msgid "The selected scanner could not be found"
 msgstr "El scanner seleccionat no s'ha pogut trobar "
 
 #: MiscResources.resx$NoFeederSupport$Message
-msgid ""
-"The selected scanner does not support using a feeder. If your scanner does "
-"have a feeder, try using a different driver"
-msgstr ""
-"L'escàner seleccionat no suporta alimentació des d'un alimentador. Si el "
-"vostre escàner té alimentador de paper, seleccioneu un controlador diferent"
+msgid "The selected scanner does not support using a feeder. If your scanner does have a feeder, try using a different driver"
+msgstr "L'escàner seleccionat no suporta alimentació des d'un alimentador. Si el vostre escàner té alimentador de paper, seleccioneu un controlador diferent"
 
 #: MiscResources.resx$NoDuplexSupport$Message
-msgid ""
-"The selected scanner does not support using duplex. If your scanner is "
-"supposed to support duplex, try using a different driver"
-msgstr ""
-"L'escàner seleccionat no suporta dúplex (escaneig per dues cares). Si el "
-"vostre escàner suporta aquesta tecnologia, seleccioneu un controlador "
-"diferent"
+msgid "The selected scanner does not support using duplex. If your scanner is supposed to support duplex, try using a different driver"
+msgstr "L'escàner seleccionat no suporta dúplex (escaneig per dues cares). Si el vostre escàner suporta aquesta tecnologia, seleccioneu un controlador diferent"
 
 #: MiscResources.resx$DeviceBusy$Message
 msgid "The selected scanner is busy"
@@ -1422,11 +1399,11 @@ msgstr "Implementació Twain"
 
 #: SettingsResources.resx$PageSize_Legal$Message
 msgid "US Legal (8.5x14 in)"
-msgstr "US Legal (8.5x14 in)"
+msgstr ""
 
 #: SettingsResources.resx$PageSize_Letter$Message
 msgid "US Letter (8.5x11 in)"
-msgstr "US Letter (8.5x11 in)"
+msgstr ""
 
 #: MiscResources.resx$UnsavedChanges$Message
 msgid "Unsaved Changes"
@@ -1458,8 +1435,7 @@ msgstr "Contrasenya de l'usuari"
 
 #: FOcrLanguageDownload.resx$label1.Text$Message
 msgid "Using OCR requires you to download each language you want to scan"
-msgstr ""
-"La tecnologia OCR requereix baixar fitxers dels idiomes que voleu escanejar"
+msgstr "La tecnologia OCR requereix baixar fitxers dels idiomes que voleu escanejar"
 
 #: MiscResources.resx$Version$Message
 msgid "Version {0}"
@@ -1490,9 +1466,13 @@ msgstr "S'està esperant l'escàner {0}"
 msgid "White Threshold"
 msgstr "Llindar del blanc"
 
+#: FAdvancedScanSettings.resx$label4.Text$Message
+msgid "Wia Version"
+msgstr ""
+
 #: FPageSize.resx$labelX.Text$Message
 msgid "X"
-msgstr "X"
+msgstr ""
 
 #: FPlaceholders.resx$label3.Text$Message
 msgid "Year"
@@ -1511,9 +1491,7 @@ msgid "You don't have permission to save files at this location"
 msgstr "No teniu permís per desar fitxers en aquesta ubicació"
 
 #: MiscResources.resx$ExitWithUnsavedChanges$Message
-msgid ""
-"You have unsaved changes. Are you sure you want to exit and discard those "
-"changes?"
+msgid "You have unsaved changes. Are you sure you want to exit and discard those changes?"
 msgstr "Teniu modificacions sense desar. Voleu tancar i descartar els canvis?"
 
 #: TiffViewerCtl.resx$tsZoom.ToolTipText$Message
@@ -1534,11 +1512,11 @@ msgstr "Allunya"
 
 #: SettingsResources.resx$PageSizeUnit_Centimetre$Message
 msgid "cm"
-msgstr "cm"
+msgstr ""
 
 #: FAbout.resx$linkLabel2.Text$Message
 msgid "http://www.fatcow.com/free-icons"
-msgstr "http://www.fatcow.com/free-icons"
+msgstr ""
 
 #: FAbout.resx$linkLabel1.Text$Message
 msgid "http://www.naps2.com"
@@ -1546,11 +1524,11 @@ msgstr "https://www.naps2.com/"
 
 #: SettingsResources.resx$PageSizeUnit_Inch$Message
 msgid "in"
-msgstr "in"
+msgstr ""
 
 #: SettingsResources.resx$PageSizeUnit_Millimetre$Message
 msgid "mm"
-msgstr "mm"
+msgstr ""
 
 #: FViewer.resx$lblPageTotal.Text$Message
 #: MiscResources.resx$OfN$Message
@@ -1559,11 +1537,11 @@ msgstr "de {0}"
 
 #: SettingsResources.resx$TwainImpl_X64$Message
 msgid "x64"
-msgstr "x64"
+msgstr ""
 
 #: MiscResources.resx$NamedPageSizeFormat$Message
 msgid "{0} ({1}x{2} {3})"
-msgstr "{0} ({1}x{2} {3})"
+msgstr ""
 
 #: FDownloadProgress.resx$labelSub.Text$Message
 #: MiscResources.resx$SizeProgress$Message
@@ -1576,12 +1554,8 @@ msgid "{0} / {1} files"
 msgstr "{0}/{1} fitxers"
 
 #: FRecover.resx$lblPrompt.Text$Message
-msgid ""
-"{0} image(s) scanned on {1} at {2} may not have been saved, and are "
-"recoverable. Do you want to recover them?"
-msgstr ""
-"Possiblement {0} imatges escanejades a {1} el {2} no s'han desat però es "
-"poden recuperar. Voleu continuar amb la recuperació?"
+msgid "{0} image(s) scanned on {1} at {2} may not have been saved, and are recoverable. Do you want to recover them?"
+msgstr "Possiblement {0} imatges escanejades a {1} el {2} no s'han desat però es poden recuperar. Voleu continuar amb la recuperació?"
 
 #: MiscResources.resx$ImagesSaved$Message
 msgid "{0} images saved"
@@ -1590,3 +1564,4 @@ msgstr "{0} imatges desades"
 #: MiscResources.resx$PdfStatus$Message
 msgid "{0} of {1}"
 msgstr "{0} de {1}"
+

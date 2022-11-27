@@ -1,32 +1,39 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-09-17 20:27+0000\n"
-"PO-Revision-Date: 2018-09-17 20:24+0000\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: zh-TW\n"
+"POT-Creation-Date: 2016-04-19 21:51+0000\n"
+"PO-Revision-Date: 2022-11-27 05:04\n"
+"Last-Translator: \n"
+"Language-Team: Chinese Traditional\n"
+"Language: zh\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Pootle 2.8\n"
-"X-POOTLE-MTIME: 1537215898.754928\n"
+"X-Generator: Translate Toolkit 1.13.0\n"
+"X-Poedit-SourceCharset: iso-8859-1\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Crowdin-Project: naps2\n"
+"X-Crowdin-Project-ID: 531762\n"
+"X-Crowdin-Language: zh-TW\n"
+"X-Crowdin-File: templates.pot\n"
+"X-Crowdin-File-ID: 75\n"
 
 #: SettingsResources.resx$Dpi_100$Message
 msgid "100 dpi"
-msgstr "100 dpi"
+msgstr ""
 
 #: SettingsResources.resx$Dpi_1200$Message
 msgid "1200 dpi"
-msgstr "1200 dpi"
+msgstr ""
 
 #: SettingsResources.resx$Dpi_150$Message
 msgid "150 dpi"
-msgstr "150 dpi"
+msgstr ""
 
 #: SettingsResources.resx$Dpi_200$Message
 msgid "200 dpi"
-msgstr "200 dpi"
+msgstr ""
 
 #: SettingsResources.resx$BitDepth_24Color$Message
 msgid "24-bit Color"
@@ -34,31 +41,31 @@ msgstr "24 位元色彩"
 
 #: SettingsResources.resx$Dpi_300$Message
 msgid "300 dpi"
-msgstr "300 dpi"
+msgstr ""
 
 #: SettingsResources.resx$Dpi_400$Message
 msgid "400 dpi"
-msgstr "400 dpi"
+msgstr ""
 
 #: SettingsResources.resx$Dpi_600$Message
 msgid "600 dpi"
-msgstr "600 dpi"
+msgstr ""
 
 #: SettingsResources.resx$Dpi_800$Message
 msgid "800 dpi"
-msgstr "800 dpi"
+msgstr ""
 
 #: SettingsResources.resx$PageSize_A3$Message
 msgid "A3 (297x420 mm)"
-msgstr "A3 (297x420 mm)"
+msgstr ""
 
 #: SettingsResources.resx$PageSize_A4$Message
 msgid "A4 (210x297 mm)"
-msgstr "A4 (210x297 mm)"
+msgstr ""
 
 #: SettingsResources.resx$PageSize_A5$Message
 msgid "A5 (148x210 mm)"
-msgstr "A5 (148x210 mm)"
+msgstr ""
 
 #: FAbout.resx$$this.Text$Message
 #: FDesktop.resx$tsAbout.Text$Message
@@ -66,6 +73,7 @@ msgid "About"
 msgstr "關於"
 
 #: FScanProgress.resx$$this.Text$Message
+#: MiscResources.resx$AcquiringData$Message
 msgid "Acquiring data"
 msgstr "正在取得資料"
 
@@ -134,9 +142,7 @@ msgid "Alternative Transfer"
 msgstr ""
 
 #: MiscResources.resx$PdfImportComponentNeeded$Message
-msgid ""
-"An additional component is needed to import this PDF file. Would you like to "
-"download it now?"
+msgid "An additional component is needed to import this PDF file. Would you like to download it now?"
 msgstr ""
 
 #: MiscResources.resx$UpdateError$Message
@@ -148,9 +154,8 @@ msgid "An error occurred when trying to authorize"
 msgstr ""
 
 #: MiscResources.resx$AutoSaveError$Message
-#, fuzzy
 msgid "An error occurred when trying to auto save"
-msgstr "儲存此檔時發生錯誤"
+msgstr ""
 
 #: MiscResources.resx$ErrorSaving$Message
 msgid "An error occurred when trying to save the file"
@@ -169,9 +174,7 @@ msgid "An error occurred with the scanning driver"
 msgstr "掃瞄時發生錯誤。"
 
 #: MiscResources.resx$ExitWithActiveOperations$Message
-msgid ""
-"An operation is in progress. Are you sure you want to exit and cancel the "
-"operation?"
+msgid "An operation is in progress. Are you sure you want to exit and cancel the operation?"
 msgstr ""
 
 #: MiscResources.resx$BatchError$Message
@@ -203,9 +206,8 @@ msgid "Are you sure you want to clear {0} item(s)?"
 msgstr "您確定要清除 {0} 個項目嗎?"
 
 #: MiscResources.resx$ConfirmDelete$Message
-#, fuzzy
 msgid "Are you sure you want to delete \"{0}\"?"
-msgstr "您確定要刪除 {0} 個項目嗎?"
+msgstr ""
 
 #: MiscResources.resx$ConfirmDeleteSingleProfile$Message
 msgid "Are you sure you want to delete the profile {0}?"
@@ -266,11 +268,11 @@ msgstr ""
 
 #: SettingsResources.resx$PageSize_B4$Message
 msgid "B4 (250x353 mm)"
-msgstr "B4 (250x353 mm)"
+msgstr ""
 
 #: SettingsResources.resx$PageSize_B5$Message
 msgid "B5 (176x250 mm)"
-msgstr "B5 (176x250 mm)"
+msgstr ""
 
 #: FBatchScan.resx$$this.Text$Message
 #: FDesktop.resx$tsBatchScan.Text$Message
@@ -304,9 +306,8 @@ msgstr "黑白"
 #: FBlackWhite.resx$$this.Text$Message
 #: FDesktop.resx$tsBlackWhite.Text$Message
 #: FViewer.resx$tsBlackWhite.Text$Message
-#, fuzzy
 msgid "Black and White"
-msgstr "黑白"
+msgstr ""
 
 #: FAdvancedScanSettings.resx$groupBox3.Text$Message
 msgid "Blank Pages"
@@ -469,22 +470,18 @@ msgstr "天 (01-31)"
 
 #: SettingsResources.resx$PdfCompat_Default$Message
 #: SettingsResources.resx$TwainImpl_Default$Message
+#: SettingsResources.resx$WiaVersion_Default$Message
 msgid "Default"
 msgstr ""
 
 #: FImageSettings.resx$label1.Text$Message
 #: FPdfSettings.resx$label1.Text$Message
-#, fuzzy
 msgid "Default File Path"
-msgstr "預設檔案名稱"
+msgstr ""
 
 #: FDesktop.resx$tsDeinterleave.Text$Message
 msgid "Deinterleave"
 msgstr "去掉間隔"
-
-#: FAdvancedScanSettings.resx$cbWiaDelayBetweenScans.Text$Message
-msgid "Delay between scans (WIA)"
-msgstr ""
 
 #: FDesktop.resx$ctxDelete.Text$Message
 #: FDesktop.resx$tsDelete.Text$Message
@@ -560,6 +557,7 @@ msgid "Edit"
 msgstr "編輯"
 
 #: FDesktop.resx$tsdEmailPDF.Text$Message
+#: MiscResources.resx$EmailPdf$Message
 msgid "Email PDF"
 msgstr "電子郵件發送 PDF"
 
@@ -629,9 +627,7 @@ msgid "Flip duplexed pages"
 msgstr ""
 
 #: FImageSettings.resx$lblWarning.Text$Message
-msgid ""
-"For high JPEG qualities (80+), also increase Image Quality in your profile "
-"for best results"
+msgid "For high JPEG qualities (80+), also increase Image Quality in your profile for best results"
 msgstr ""
 
 #: MiscResources.resx$FileTypeGif$Message
@@ -812,7 +808,7 @@ msgstr ""
 
 #: MiscResources.resx$NAPS2$Message
 msgid "NAPS2"
-msgstr "NAPS2"
+msgstr ""
 
 #: MiscResources.resx$DonatePrompt$Message
 msgid "NAPS2 is completely free. Consider making a donation"
@@ -864,13 +860,12 @@ msgid "No updates available"
 msgstr ""
 
 #: SettingsResources.resx$TiffComp_None$Message
-#, fuzzy
 msgid "None"
-msgstr "完成"
+msgstr ""
 
 #: FDesktop.resx$$this.Text$Message
 msgid "Not Another PDF Scanner 2"
-msgstr "Not Another PDF Scanner 2"
+msgstr ""
 
 #: FRecover.resx$btnCancel.Text$Message
 msgid "Not Now"
@@ -967,9 +962,8 @@ msgid "Owner Password"
 msgstr "擁有者密碼"
 
 #: MiscResources.resx$FileTypePdf$Message
-#, fuzzy
 msgid "PDF Document (*.pdf)"
-msgstr "PDF 文件 (*.pdf)"
+msgstr ""
 
 #: FDesktop.resx$tsPDFSettings.Text$Message
 #: FDesktop.resx$tsPdfSettings2.Text$Message
@@ -1046,13 +1040,13 @@ msgid "Previous"
 msgstr "上一頁"
 
 #: FDesktop.resx$tsPrint.Text$Message
+#: MiscResources.resx$Print$Message
 msgid "Print"
 msgstr "列印"
 
 #: FBatchScan.resx$lblProfile.Text$Message
-#, fuzzy
 msgid "Profile"
-msgstr "設定檔"
+msgstr ""
 
 #: FEditProfile.resx$$this.Text$Message
 msgid "Profile Settings"
@@ -1120,10 +1114,6 @@ msgstr "解析度"
 msgid "Restore Defaults"
 msgstr "還原預設值"
 
-#: FAdvancedScanSettings.resx$cbWiaRetryOnFailure.Text$Message
-msgid "Retry on failure (WIA)"
-msgstr ""
-
 #: FDesktop.resx$tsReverse.Text$Message
 msgid "Reverse"
 msgstr "反轉"
@@ -1165,11 +1155,11 @@ msgid "SANE Driver"
 msgstr ""
 
 #: FViewer.resx$tsSaveImage.Text$Message
-#, fuzzy
 msgid "Save Image"
-msgstr "儲存圖像"
+msgstr ""
 
 #: FDesktop.resx$tsdSaveImages.Text$Message
+#: MiscResources.resx$SaveImages$Message
 msgid "Save Images"
 msgstr "儲存圖像"
 
@@ -1179,6 +1169,7 @@ msgstr ""
 
 #: FDesktop.resx$tsdSavePDF.Text$Message
 #: FViewer.resx$tsSavePDF.Text$Message
+#: MiscResources.resx$SavePdf$Message
 msgid "Save PDF"
 msgstr "儲存 PDF"
 
@@ -1229,6 +1220,7 @@ msgstr "已掃瞄的圖像"
 #: FScanProgress.resx$labelPage.Text$Message
 #: MiscResources.resx$BatchStatusPage$Message
 #: MiscResources.resx$ScanPageProgress$Message
+#: MiscResources.resx$ScanProgressPage$Message
 msgid "Scanning page {0}"
 msgstr "掃瞄頁面 {0}"
 
@@ -1326,13 +1318,11 @@ msgid "Technical Details"
 msgstr ""
 
 #: MiscResources.resx$TesseractNotAvailable$Message
-msgid ""
-"The OCR engine is not available. Make sure to install the required package"
+msgid "The OCR engine is not available. Make sure to install the required package"
 msgstr ""
 
 #: MiscResources.resx$SaneNotAvailable$Message
-msgid ""
-"The SANE driver is not available. Make sure to install the required packages"
+msgid "The SANE driver is not available. Make sure to install the required packages"
 msgstr ""
 
 #: MiscResources.resx$ImportErrorCouldNot$Message
@@ -1340,9 +1330,7 @@ msgid "The file '{0}' could not be imported"
 msgstr "檔案 '{0}' 無法匯入"
 
 #: MiscResources.resx$ImportErrorNAPS2Pdf$Message
-msgid ""
-"The file '{0}' could not be imported. Only PDF files generated by NAPS2 can "
-"be imported"
+msgid "The file '{0}' could not be imported. Only PDF files generated by NAPS2 can be imported"
 msgstr "檔案 '{0}' 無法匯入。僅能匯入 NAPS2 產生的 PDF 檔"
 
 #: MiscResources.resx$FileInUse$Message
@@ -1378,21 +1366,16 @@ msgid "The selected scanner could not be found"
 msgstr "找不到所選的掃瞄器。"
 
 #: MiscResources.resx$NoFeederSupport$Message
-msgid ""
-"The selected scanner does not support using a feeder. If your scanner does "
-"have a feeder, try using a different driver"
+msgid "The selected scanner does not support using a feeder. If your scanner does have a feeder, try using a different driver"
 msgstr "所選掃瞄器不支援使用送紙器。如果您的掃瞄器沒有送紙器，請試著使用不同的驅動程式"
 
 #: MiscResources.resx$NoDuplexSupport$Message
-msgid ""
-"The selected scanner does not support using duplex. If your scanner is "
-"supposed to support duplex, try using a different driver"
+msgid "The selected scanner does not support using duplex. If your scanner is supposed to support duplex, try using a different driver"
 msgstr ""
 
 #: MiscResources.resx$DeviceBusy$Message
-#, fuzzy
 msgid "The selected scanner is busy"
-msgstr "所選的掃瞄器離線"
+msgstr ""
 
 #: MiscResources.resx$DeviceOffline$Message
 msgid "The selected scanner is offline"
@@ -1416,11 +1399,11 @@ msgstr ""
 
 #: SettingsResources.resx$PageSize_Legal$Message
 msgid "US Legal (8.5x14 in)"
-msgstr "US Legal (8.5x14 in)"
+msgstr ""
 
 #: SettingsResources.resx$PageSize_Letter$Message
 msgid "US Letter (8.5x11 in)"
-msgstr "US Letter (8.5x11 in)"
+msgstr ""
 
 #: MiscResources.resx$UnsavedChanges$Message
 msgid "Unsaved Changes"
@@ -1483,9 +1466,13 @@ msgstr ""
 msgid "White Threshold"
 msgstr ""
 
+#: FAdvancedScanSettings.resx$label4.Text$Message
+msgid "Wia Version"
+msgstr ""
+
 #: FPageSize.resx$labelX.Text$Message
 msgid "X"
-msgstr "X"
+msgstr ""
 
 #: FPlaceholders.resx$label3.Text$Message
 msgid "Year"
@@ -1504,9 +1491,7 @@ msgid "You don't have permission to save files at this location"
 msgstr "您沒有在該位置儲存檔案的權限。"
 
 #: MiscResources.resx$ExitWithUnsavedChanges$Message
-msgid ""
-"You have unsaved changes. Are you sure you want to exit and discard those "
-"changes?"
+msgid "You have unsaved changes. Are you sure you want to exit and discard those changes?"
 msgstr "您有未儲存的變更。您確定要結束並放棄那些變更嗎?"
 
 #: TiffViewerCtl.resx$tsZoom.ToolTipText$Message
@@ -1518,14 +1503,12 @@ msgid "Zoom Actual"
 msgstr "縮放實際大小"
 
 #: TiffViewerCtl.resx$tsZoomPlus.ToolTipText$Message
-#, fuzzy
 msgid "Zoom In"
-msgstr "放大"
+msgstr ""
 
 #: TiffViewerCtl.resx$tsZoomOut.ToolTipText$Message
-#, fuzzy
 msgid "Zoom Out"
-msgstr "縮小"
+msgstr ""
 
 #: SettingsResources.resx$PageSizeUnit_Centimetre$Message
 msgid "cm"
@@ -1533,11 +1516,11 @@ msgstr "公分"
 
 #: FAbout.resx$linkLabel2.Text$Message
 msgid "http://www.fatcow.com/free-icons"
-msgstr "http://www.fatcow.com/free-icons"
+msgstr ""
 
 #: FAbout.resx$linkLabel1.Text$Message
 msgid "http://www.naps2.com"
-msgstr "http://www.naps2.com"
+msgstr ""
 
 #: SettingsResources.resx$PageSizeUnit_Inch$Message
 msgid "in"
@@ -1563,7 +1546,7 @@ msgstr ""
 #: FDownloadProgress.resx$labelSub.Text$Message
 #: MiscResources.resx$SizeProgress$Message
 msgid "{0} / {1} MB"
-msgstr "{0} / {1} MB"
+msgstr ""
 
 #: FDownloadProgress.resx$labelTop.Text$Message
 #: MiscResources.resx$FilesProgressFormat$Message
@@ -1571,9 +1554,7 @@ msgid "{0} / {1} files"
 msgstr "{0} / {1} 檔案"
 
 #: FRecover.resx$lblPrompt.Text$Message
-msgid ""
-"{0} image(s) scanned on {1} at {2} may not have been saved, and are "
-"recoverable. Do you want to recover them?"
+msgid "{0} image(s) scanned on {1} at {2} may not have been saved, and are recoverable. Do you want to recover them?"
 msgstr "在 {1} 上已掃瞄 {0} 個圖像，在 {2} 可能沒有被儲存，且可復原。您要將它們復原嗎?"
 
 #: MiscResources.resx$ImagesSaved$Message
@@ -1583,3 +1564,4 @@ msgstr ""
 #: MiscResources.resx$PdfStatus$Message
 msgid "{0} of {1}"
 msgstr "{0} / {1}"
+

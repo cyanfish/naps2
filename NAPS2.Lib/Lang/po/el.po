@@ -1,32 +1,39 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-09-17 20:27+0000\n"
-"PO-Revision-Date: 2022-11-26 21:47+0000\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"POT-Creation-Date: 2016-04-19 21:51+0000\n"
+"PO-Revision-Date: 2022-11-27 05:04\n"
+"Last-Translator: \n"
+"Language-Team: Greek\n"
 "Language: el\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Pootle 2.8\n"
-"X-POOTLE-MTIME: 1669499266.642073\n"
+"X-Generator: Translate Toolkit 1.13.0\n"
+"X-Poedit-SourceCharset: iso-8859-1\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Crowdin-Project: naps2\n"
+"X-Crowdin-Project-ID: 531762\n"
+"X-Crowdin-Language: el\n"
+"X-Crowdin-File: templates.pot\n"
+"X-Crowdin-File-ID: 75\n"
 
 #: SettingsResources.resx$Dpi_100$Message
 msgid "100 dpi"
-msgstr "100 dpi"
+msgstr ""
 
 #: SettingsResources.resx$Dpi_1200$Message
 msgid "1200 dpi"
-msgstr "1200 dpi"
+msgstr ""
 
 #: SettingsResources.resx$Dpi_150$Message
 msgid "150 dpi"
-msgstr "150 dpi"
+msgstr ""
 
 #: SettingsResources.resx$Dpi_200$Message
 msgid "200 dpi"
-msgstr "200 dpi"
+msgstr ""
 
 #: SettingsResources.resx$BitDepth_24Color$Message
 msgid "24-bit Color"
@@ -34,19 +41,19 @@ msgstr "Χρώμα 24-bit"
 
 #: SettingsResources.resx$Dpi_300$Message
 msgid "300 dpi"
-msgstr "300 dpi"
+msgstr ""
 
 #: SettingsResources.resx$Dpi_400$Message
 msgid "400 dpi"
-msgstr "400 dpi"
+msgstr ""
 
 #: SettingsResources.resx$Dpi_600$Message
 msgid "600 dpi"
-msgstr "600 dpi"
+msgstr ""
 
 #: SettingsResources.resx$Dpi_800$Message
 msgid "800 dpi"
-msgstr "800 dpi"
+msgstr ""
 
 #: SettingsResources.resx$PageSize_A3$Message
 msgid "A3 (297x420 mm)"
@@ -66,6 +73,7 @@ msgid "About"
 msgstr "Σχετικά"
 
 #: FScanProgress.resx$$this.Text$Message
+#: MiscResources.resx$AcquiringData$Message
 msgid "Acquiring data"
 msgstr "Απόκτηση δεδομένων"
 
@@ -134,12 +142,8 @@ msgid "Alternative Transfer"
 msgstr "Εναλλακτική Μεταφορά"
 
 #: MiscResources.resx$PdfImportComponentNeeded$Message
-msgid ""
-"An additional component is needed to import this PDF file. Would you like to "
-"download it now?"
-msgstr ""
-"Ένα πρόσθετο συστατικό είναι απαραίτητο για την εισαγωγή αυτού του PDF. "
-"Θέλετε την λήψη του τώρα;"
+msgid "An additional component is needed to import this PDF file. Would you like to download it now?"
+msgstr "Ένα πρόσθετο συστατικό είναι απαραίτητο για την εισαγωγή αυτού του PDF. Θέλετε την λήψη του τώρα;"
 
 #: MiscResources.resx$UpdateError$Message
 msgid "An error occured when trying to install the update"
@@ -170,9 +174,7 @@ msgid "An error occurred with the scanning driver"
 msgstr "Σφάλμα του οδηγού σάρωσης"
 
 #: MiscResources.resx$ExitWithActiveOperations$Message
-msgid ""
-"An operation is in progress. Are you sure you want to exit and cancel the "
-"operation?"
+msgid "An operation is in progress. Are you sure you want to exit and cancel the operation?"
 msgstr ""
 
 #: MiscResources.resx$BatchError$Message
@@ -323,7 +325,7 @@ msgstr "Φωτεινότητα / Αντίθεση"
 
 #: SettingsResources.resx$TiffComp_Ccitt4$Message
 msgid "CCITT4"
-msgstr "CCITT4"
+msgstr ""
 
 #: FAdvancedScanSettings.resx$btnCancel.Text$Message
 #: FAuthorize.resx$btnCancel.Text$Message
@@ -468,6 +470,7 @@ msgstr "Ημέρα (01-31)"
 
 #: SettingsResources.resx$PdfCompat_Default$Message
 #: SettingsResources.resx$TwainImpl_Default$Message
+#: SettingsResources.resx$WiaVersion_Default$Message
 msgid "Default"
 msgstr "Προεπιλεγμένο"
 
@@ -479,10 +482,6 @@ msgstr "Προεπιλεγμένη Διαδρομή Αρχείου"
 #: FDesktop.resx$tsDeinterleave.Text$Message
 msgid "Deinterleave"
 msgstr "Αποπαρεμβολή"
-
-#: FAdvancedScanSettings.resx$cbWiaDelayBetweenScans.Text$Message
-msgid "Delay between scans (WIA)"
-msgstr "Καθυστέρηση μεταξύ σαρώσεων (WIA)"
 
 #: FDesktop.resx$ctxDelete.Text$Message
 #: FDesktop.resx$tsDelete.Text$Message
@@ -558,6 +557,7 @@ msgid "Edit"
 msgstr "Επεξεργασία"
 
 #: FDesktop.resx$tsdEmailPDF.Text$Message
+#: MiscResources.resx$EmailPdf$Message
 msgid "Email PDF"
 msgstr "Αποστολή PDF (Email)"
 
@@ -627,12 +627,8 @@ msgid "Flip duplexed pages"
 msgstr "Αναστροφή σελίδων διπλής όψης"
 
 #: FImageSettings.resx$lblWarning.Text$Message
-msgid ""
-"For high JPEG qualities (80+), also increase Image Quality in your profile "
-"for best results"
-msgstr ""
-"Για υψηλές ποιότητες JPEG (80+), η Ποιότητα Εικόνας μπορεί να αυξηθεί από "
-"τις ρυθμίσεις προφίλ"
+msgid "For high JPEG qualities (80+), also increase Image Quality in your profile for best results"
+msgstr "Για υψηλές ποιότητες JPEG (80+), η Ποιότητα Εικόνας μπορεί να αυξηθεί από τις ρυθμίσεις προφίλ"
 
 #: MiscResources.resx$FileTypeGif$Message
 msgid "GIF File (*.gif)"
@@ -648,7 +644,7 @@ msgstr "Γυαλί"
 
 #: SettingsResources.resx$EmailProviderType_Gmail$Message
 msgid "Gmail"
-msgstr "Gmail"
+msgstr ""
 
 #: SettingsResources.resx$BitDepth_8Grayscale$Message
 msgid "Grayscale"
@@ -747,7 +743,7 @@ msgstr "Λέξεις Κλειδιά"
 
 #: SettingsResources.resx$TiffComp_Lzw$Message
 msgid "LZW"
-msgstr "LZW"
+msgstr ""
 
 #: FDesktop.resx$toolStripDropDownButton1.Text$Message
 msgid "Language"
@@ -812,7 +808,7 @@ msgstr "Πολλαπλές σαρώσεις (προτροπή μεταξύ σα�
 
 #: MiscResources.resx$NAPS2$Message
 msgid "NAPS2"
-msgstr "NAPS2"
+msgstr ""
 
 #: MiscResources.resx$DonatePrompt$Message
 msgid "NAPS2 is completely free. Consider making a donation"
@@ -869,7 +865,7 @@ msgstr "Καμία"
 
 #: FDesktop.resx$$this.Text$Message
 msgid "Not Another PDF Scanner 2"
-msgstr "Not Another PDF Scanner 2"
+msgstr ""
 
 #: FRecover.resx$btnCancel.Text$Message
 msgid "Not Now"
@@ -881,7 +877,7 @@ msgstr "Αριθμός σαρώσεων"
 
 #: FDesktop.resx$tsOcr.Text$Message
 msgid "OCR"
-msgstr "OCR"
+msgstr ""
 
 #: FOcrLanguageDownload.resx$$this.Text$Message
 msgid "OCR Download"
@@ -981,19 +977,19 @@ msgstr "Το PDF αποθηκεύτηκε"
 
 #: SettingsResources.resx$PdfCompat_PdfA1B$Message
 msgid "PDF/A-1b"
-msgstr "PDF/A-1b"
+msgstr ""
 
 #: SettingsResources.resx$PdfCompat_PdfA2B$Message
 msgid "PDF/A-2b"
-msgstr "PDF/A-2b"
+msgstr ""
 
 #: SettingsResources.resx$PdfCompat_PdfA3B$Message
 msgid "PDF/A-3b"
-msgstr "PDF/A-3b"
+msgstr ""
 
 #: SettingsResources.resx$PdfCompat_PdfA3U$Message
 msgid "PDF/A-3u"
-msgstr "PDF/A-3u"
+msgstr ""
 
 #: MiscResources.resx$FileTypePng$Message
 msgid "PNG File (*.png)"
@@ -1044,6 +1040,7 @@ msgid "Previous"
 msgstr "Προηγούμενη"
 
 #: FDesktop.resx$tsPrint.Text$Message
+#: MiscResources.resx$Print$Message
 msgid "Print"
 msgstr "Εκτύπωση"
 
@@ -1117,10 +1114,6 @@ msgstr "Ανάλυση"
 msgid "Restore Defaults"
 msgstr "Επαναφορά Προεπιλογών"
 
-#: FAdvancedScanSettings.resx$cbWiaRetryOnFailure.Text$Message
-msgid "Retry on failure (WIA)"
-msgstr "Επανάληψη μετά απο αποτυχία (WIA)"
-
 #: FDesktop.resx$tsReverse.Text$Message
 msgid "Reverse"
 msgstr "Αντιστροφή"
@@ -1166,6 +1159,7 @@ msgid "Save Image"
 msgstr "Αποθήκευση Εικόνας"
 
 #: FDesktop.resx$tsdSaveImages.Text$Message
+#: MiscResources.resx$SaveImages$Message
 msgid "Save Images"
 msgstr "Αποθήκευση Εικόνων"
 
@@ -1175,6 +1169,7 @@ msgstr "Πρόοδος Αποθήκευσης Εικόνων"
 
 #: FDesktop.resx$tsdSavePDF.Text$Message
 #: FViewer.resx$tsSavePDF.Text$Message
+#: MiscResources.resx$SavePdf$Message
 msgid "Save PDF"
 msgstr "Αποθήκευση PDF"
 
@@ -1225,6 +1220,7 @@ msgstr "Σαρωμένη Εικόνα"
 #: FScanProgress.resx$labelPage.Text$Message
 #: MiscResources.resx$BatchStatusPage$Message
 #: MiscResources.resx$ScanPageProgress$Message
+#: MiscResources.resx$ScanProgressPage$Message
 msgid "Scanning page {0}"
 msgstr "Σάρωση σελίδας {0}"
 
@@ -1322,13 +1318,11 @@ msgid "Technical Details"
 msgstr "Τεχνικές Λεπτομέρειες"
 
 #: MiscResources.resx$TesseractNotAvailable$Message
-msgid ""
-"The OCR engine is not available. Make sure to install the required package"
+msgid "The OCR engine is not available. Make sure to install the required package"
 msgstr ""
 
 #: MiscResources.resx$SaneNotAvailable$Message
-msgid ""
-"The SANE driver is not available. Make sure to install the required packages"
+msgid "The SANE driver is not available. Make sure to install the required packages"
 msgstr ""
 
 #: MiscResources.resx$ImportErrorCouldNot$Message
@@ -1336,12 +1330,8 @@ msgid "The file '{0}' could not be imported"
 msgstr "Το αρχείο '{0}' δεν μπόρεσε να εισαχθεί"
 
 #: MiscResources.resx$ImportErrorNAPS2Pdf$Message
-msgid ""
-"The file '{0}' could not be imported. Only PDF files generated by NAPS2 can "
-"be imported"
-msgstr ""
-"Το αρχείο '{0}' δεν μπόρεσε να εισαχθεί. Μόνο αρχεία PDF που έχουν παραχθεί "
-"από το NAPS2 είναι συμβατά"
+msgid "The file '{0}' could not be imported. Only PDF files generated by NAPS2 can be imported"
+msgstr "Το αρχείο '{0}' δεν μπόρεσε να εισαχθεί. Μόνο αρχεία PDF που έχουν παραχθεί από το NAPS2 είναι συμβατά"
 
 #: MiscResources.resx$FileInUse$Message
 msgid "The file could not be overwritten because it is currently in use"
@@ -1353,9 +1343,7 @@ msgstr "Το αρχείο '{0}' υπάρχει ήδη. Θέλετε να αντ�
 
 #: FPdfPassword.resx$lblPrompt.Text$Message
 msgid "The following file is encrypted and requires a password to open: {0}"
-msgstr ""
-"Το ακόλουθο αρχείο είναι κρυπτογραφημένο και απαιτεί κωδικό για να ανοίξει: "
-"'{0}'"
+msgstr "Το ακόλουθο αρχείο είναι κρυπτογραφημένο και απαιτεί κωδικό για να ανοίξει: '{0}'"
 
 #: MiscResources.resx$DevicePaperJam$Message
 msgid "The scanner has a paper jam"
@@ -1378,21 +1366,12 @@ msgid "The selected scanner could not be found"
 msgstr "Ο επιλεγμένος σαρωτής δεν μπόρεσε να βρεθεί"
 
 #: MiscResources.resx$NoFeederSupport$Message
-msgid ""
-"The selected scanner does not support using a feeder. If your scanner does "
-"have a feeder, try using a different driver"
-msgstr ""
-"Ο επιλεγμένος σαρωτής δεν υποστηρίζει χρήση τροφοδότη. Εάν ο σαρωτής "
-"πράγματι διαθέτει τροφοδότη, προτείνεται η χρήση διαφορετικού οδηγού"
+msgid "The selected scanner does not support using a feeder. If your scanner does have a feeder, try using a different driver"
+msgstr "Ο επιλεγμένος σαρωτής δεν υποστηρίζει χρήση τροφοδότη. Εάν ο σαρωτής πράγματι διαθέτει τροφοδότη, προτείνεται η χρήση διαφορετικού οδηγού"
 
 #: MiscResources.resx$NoDuplexSupport$Message
-msgid ""
-"The selected scanner does not support using duplex. If your scanner is "
-"supposed to support duplex, try using a different driver"
-msgstr ""
-"Ο επιλεγμένος σαρωτής δεν υποστηρίζει λειτουργία διπλής όψης. Εάν ο σαρωτής "
-"πράγματι διαθέτει λειτουργία διπλής όψης, προτείνεται η χρήση διαφορετικού "
-"οδηγού"
+msgid "The selected scanner does not support using duplex. If your scanner is supposed to support duplex, try using a different driver"
+msgstr "Ο επιλεγμένος σαρωτής δεν υποστηρίζει λειτουργία διπλής όψης. Εάν ο σαρωτής πράγματι διαθέτει λειτουργία διπλής όψης, προτείνεται η χρήση διαφορετικού οδηγού"
 
 #: MiscResources.resx$DeviceBusy$Message
 msgid "The selected scanner is busy"
@@ -1487,9 +1466,13 @@ msgstr "Σε αναμονή για σάρωση {0}"
 msgid "White Threshold"
 msgstr "Κατώτατο Όριο Λευκού"
 
+#: FAdvancedScanSettings.resx$label4.Text$Message
+msgid "Wia Version"
+msgstr ""
+
 #: FPageSize.resx$labelX.Text$Message
 msgid "X"
-msgstr "X"
+msgstr ""
 
 #: FPlaceholders.resx$label3.Text$Message
 msgid "Year"
@@ -1508,12 +1491,8 @@ msgid "You don't have permission to save files at this location"
 msgstr "Δεν υπάρχει δικαίωμα αποθήκευσης αρχείων σε αυτή την τοποθεσία"
 
 #: MiscResources.resx$ExitWithUnsavedChanges$Message
-msgid ""
-"You have unsaved changes. Are you sure you want to exit and discard those "
-"changes?"
-msgstr ""
-"Υπάρχουν αλλαγές που δεν έχουν αποθηκευτεί. Θέλετε σίγουρα να τερματιστεί η "
-"εφαρμογή;"
+msgid "You have unsaved changes. Are you sure you want to exit and discard those changes?"
+msgstr "Υπάρχουν αλλαγές που δεν έχουν αποθηκευτεί. Θέλετε σίγουρα να τερματιστεί η εφαρμογή;"
 
 #: TiffViewerCtl.resx$tsZoom.ToolTipText$Message
 msgid "Zoom"
@@ -1537,11 +1516,11 @@ msgstr "εκ."
 
 #: FAbout.resx$linkLabel2.Text$Message
 msgid "http://www.fatcow.com/free-icons"
-msgstr "http://www.fatcow.com/free-icons"
+msgstr ""
 
 #: FAbout.resx$linkLabel1.Text$Message
 msgid "http://www.naps2.com"
-msgstr "http://www.naps2.com"
+msgstr ""
 
 #: SettingsResources.resx$PageSizeUnit_Inch$Message
 msgid "in"
@@ -1558,16 +1537,16 @@ msgstr "από {0}"
 
 #: SettingsResources.resx$TwainImpl_X64$Message
 msgid "x64"
-msgstr "x64"
+msgstr ""
 
 #: MiscResources.resx$NamedPageSizeFormat$Message
 msgid "{0} ({1}x{2} {3})"
-msgstr "{0} ({1}x{2} {3})"
+msgstr ""
 
 #: FDownloadProgress.resx$labelSub.Text$Message
 #: MiscResources.resx$SizeProgress$Message
 msgid "{0} / {1} MB"
-msgstr "{0} / {1} MB"
+msgstr ""
 
 #: FDownloadProgress.resx$labelTop.Text$Message
 #: MiscResources.resx$FilesProgressFormat$Message
@@ -1575,12 +1554,8 @@ msgid "{0} / {1} files"
 msgstr "{0} / {1} αρχεία"
 
 #: FRecover.resx$lblPrompt.Text$Message
-msgid ""
-"{0} image(s) scanned on {1} at {2} may not have been saved, and are "
-"recoverable. Do you want to recover them?"
-msgstr ""
-"Υπάρχουν {0} εικόνες που σαρώθηκαν στις {1} και ώρα {2} οι οποίες ενδέχεται "
-"να μην έχουν αποθηκευτεί. Θέλετε να ανακτηθούν;"
+msgid "{0} image(s) scanned on {1} at {2} may not have been saved, and are recoverable. Do you want to recover them?"
+msgstr "Υπάρχουν {0} εικόνες που σαρώθηκαν στις {1} και ώρα {2} οι οποίες ενδέχεται να μην έχουν αποθηκευτεί. Θέλετε να ανακτηθούν;"
 
 #: MiscResources.resx$ImagesSaved$Message
 msgid "{0} images saved"
@@ -1589,3 +1564,4 @@ msgstr "{0} εικόνες αποθηκεύτηκαν"
 #: MiscResources.resx$PdfStatus$Message
 msgid "{0} of {1}"
 msgstr "{0} από {1}"
+

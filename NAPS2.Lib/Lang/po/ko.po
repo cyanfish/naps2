@@ -1,31 +1,39 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-09-17 20:27+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"POT-Creation-Date: 2016-04-19 21:51+0000\n"
+"PO-Revision-Date: 2022-11-27 05:04\n"
+"Last-Translator: \n"
+"Language-Team: Korean\n"
 "Language: ko\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Translate Toolkit 2.2.5\n"
+"X-Generator: Translate Toolkit 1.13.0\n"
+"X-Poedit-SourceCharset: iso-8859-1\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Crowdin-Project: naps2\n"
+"X-Crowdin-Project-ID: 531762\n"
+"X-Crowdin-Language: ko\n"
+"X-Crowdin-File: templates.pot\n"
+"X-Crowdin-File-ID: 75\n"
 
 #: SettingsResources.resx$Dpi_100$Message
 msgid "100 dpi"
-msgstr "100 dpi"
+msgstr ""
 
 #: SettingsResources.resx$Dpi_1200$Message
 msgid "1200 dpi"
-msgstr "1200 dpi"
+msgstr ""
 
 #: SettingsResources.resx$Dpi_150$Message
 msgid "150 dpi"
-msgstr "150 dpi"
+msgstr ""
 
 #: SettingsResources.resx$Dpi_200$Message
 msgid "200 dpi"
-msgstr "200 dpi"
+msgstr ""
 
 #: SettingsResources.resx$BitDepth_24Color$Message
 msgid "24-bit Color"
@@ -33,31 +41,31 @@ msgstr "24-비트 컬러"
 
 #: SettingsResources.resx$Dpi_300$Message
 msgid "300 dpi"
-msgstr "300 dpi"
+msgstr ""
 
 #: SettingsResources.resx$Dpi_400$Message
 msgid "400 dpi"
-msgstr "400 dpi"
+msgstr ""
 
 #: SettingsResources.resx$Dpi_600$Message
 msgid "600 dpi"
-msgstr "600 dpi"
+msgstr ""
 
 #: SettingsResources.resx$Dpi_800$Message
 msgid "800 dpi"
-msgstr "800 dpi"
+msgstr ""
 
 #: SettingsResources.resx$PageSize_A3$Message
 msgid "A3 (297x420 mm)"
-msgstr "A3 (297x420 mm)"
+msgstr ""
 
 #: SettingsResources.resx$PageSize_A4$Message
 msgid "A4 (210x297 mm)"
-msgstr "A4 (210x297 mm)"
+msgstr ""
 
 #: SettingsResources.resx$PageSize_A5$Message
 msgid "A5 (148x210 mm)"
-msgstr "A5 (148x210 mm)"
+msgstr ""
 
 #: FAbout.resx$$this.Text$Message
 #: FDesktop.resx$tsAbout.Text$Message
@@ -65,6 +73,7 @@ msgid "About"
 msgstr "정보"
 
 #: FScanProgress.resx$$this.Text$Message
+#: MiscResources.resx$AcquiringData$Message
 msgid "Acquiring data"
 msgstr "수집 데이터"
 
@@ -133,9 +142,7 @@ msgid "Alternative Transfer"
 msgstr "대체 전송"
 
 #: MiscResources.resx$PdfImportComponentNeeded$Message
-msgid ""
-"An additional component is needed to import this PDF file. Would you like to "
-"download it now?"
+msgid "An additional component is needed to import this PDF file. Would you like to download it now?"
 msgstr "이 PDF 파일을 불러오기 위해서는 추가적인 컴포넌트가 필요합니다. 지금 다운로드 하시겠습니까?"
 
 #: MiscResources.resx$UpdateError$Message
@@ -167,9 +174,7 @@ msgid "An error occurred with the scanning driver"
 msgstr "스캔 중 오류가 발생했습니다."
 
 #: MiscResources.resx$ExitWithActiveOperations$Message
-msgid ""
-"An operation is in progress. Are you sure you want to exit and cancel the "
-"operation?"
+msgid "An operation is in progress. Are you sure you want to exit and cancel the operation?"
 msgstr ""
 
 #: MiscResources.resx$BatchError$Message
@@ -263,11 +268,11 @@ msgstr ""
 
 #: SettingsResources.resx$PageSize_B4$Message
 msgid "B4 (250x353 mm)"
-msgstr "B4 (250x353 mm)"
+msgstr ""
 
 #: SettingsResources.resx$PageSize_B5$Message
 msgid "B5 (176x250 mm)"
-msgstr "B5 (176x250 mm)"
+msgstr ""
 
 #: FBatchScan.resx$$this.Text$Message
 #: FDesktop.resx$tsBatchScan.Text$Message
@@ -465,6 +470,7 @@ msgstr "일자 (01-31)"
 
 #: SettingsResources.resx$PdfCompat_Default$Message
 #: SettingsResources.resx$TwainImpl_Default$Message
+#: SettingsResources.resx$WiaVersion_Default$Message
 msgid "Default"
 msgstr "기본값"
 
@@ -476,10 +482,6 @@ msgstr "기본 파일 경로"
 #: FDesktop.resx$tsDeinterleave.Text$Message
 msgid "Deinterleave"
 msgstr "디인터리브"
-
-#: FAdvancedScanSettings.resx$cbWiaDelayBetweenScans.Text$Message
-msgid "Delay between scans (WIA)"
-msgstr "스캔 간 지연 (WIA)"
 
 #: FDesktop.resx$ctxDelete.Text$Message
 #: FDesktop.resx$tsDelete.Text$Message
@@ -555,6 +557,7 @@ msgid "Edit"
 msgstr "편집"
 
 #: FDesktop.resx$tsdEmailPDF.Text$Message
+#: MiscResources.resx$EmailPdf$Message
 msgid "Email PDF"
 msgstr "이메일 PDF"
 
@@ -624,9 +627,7 @@ msgid "Flip duplexed pages"
 msgstr "양면 인쇄 된 페이지 뒤집기"
 
 #: FImageSettings.resx$lblWarning.Text$Message
-msgid ""
-"For high JPEG qualities (80+), also increase Image Quality in your profile "
-"for best results"
+msgid "For high JPEG qualities (80+), also increase Image Quality in your profile for best results"
 msgstr ""
 
 #: MiscResources.resx$FileTypeGif$Message
@@ -807,7 +808,7 @@ msgstr "여러장 스캔하기 (매 장마다 팝업 표시)"
 
 #: MiscResources.resx$NAPS2$Message
 msgid "NAPS2"
-msgstr "NAPS2"
+msgstr ""
 
 #: MiscResources.resx$DonatePrompt$Message
 msgid "NAPS2 is completely free. Consider making a donation"
@@ -859,13 +860,12 @@ msgid "No updates available"
 msgstr ""
 
 #: SettingsResources.resx$TiffComp_None$Message
-#, fuzzy
 msgid "None"
-msgstr "완료"
+msgstr ""
 
 #: FDesktop.resx$$this.Text$Message
 msgid "Not Another PDF Scanner 2"
-msgstr "Not Another PDF Scanner 2"
+msgstr ""
 
 #: FRecover.resx$btnCancel.Text$Message
 msgid "Not Now"
@@ -877,7 +877,7 @@ msgstr "스캔 장 수"
 
 #: FDesktop.resx$tsOcr.Text$Message
 msgid "OCR"
-msgstr "OCR"
+msgstr ""
 
 #: FOcrLanguageDownload.resx$$this.Text$Message
 msgid "OCR Download"
@@ -1040,6 +1040,7 @@ msgid "Previous"
 msgstr "이전"
 
 #: FDesktop.resx$tsPrint.Text$Message
+#: MiscResources.resx$Print$Message
 msgid "Print"
 msgstr "인쇄"
 
@@ -1113,10 +1114,6 @@ msgstr "해상도"
 msgid "Restore Defaults"
 msgstr "초기설정으로 복원"
 
-#: FAdvancedScanSettings.resx$cbWiaRetryOnFailure.Text$Message
-msgid "Retry on failure (WIA)"
-msgstr "실패시 재시도 (WIA)"
-
 #: FDesktop.resx$tsReverse.Text$Message
 msgid "Reverse"
 msgstr "뒤집기"
@@ -1162,6 +1159,7 @@ msgid "Save Image"
 msgstr "이미지 저장"
 
 #: FDesktop.resx$tsdSaveImages.Text$Message
+#: MiscResources.resx$SaveImages$Message
 msgid "Save Images"
 msgstr "이미지 저장"
 
@@ -1171,6 +1169,7 @@ msgstr "이미지 저장 상황"
 
 #: FDesktop.resx$tsdSavePDF.Text$Message
 #: FViewer.resx$tsSavePDF.Text$Message
+#: MiscResources.resx$SavePdf$Message
 msgid "Save PDF"
 msgstr "PDF 저장"
 
@@ -1221,6 +1220,7 @@ msgstr "스캔된 이미지"
 #: FScanProgress.resx$labelPage.Text$Message
 #: MiscResources.resx$BatchStatusPage$Message
 #: MiscResources.resx$ScanPageProgress$Message
+#: MiscResources.resx$ScanProgressPage$Message
 msgid "Scanning page {0}"
 msgstr "{0} 페이지 스캔 중"
 
@@ -1318,13 +1318,11 @@ msgid "Technical Details"
 msgstr "기술 상세"
 
 #: MiscResources.resx$TesseractNotAvailable$Message
-msgid ""
-"The OCR engine is not available. Make sure to install the required package"
+msgid "The OCR engine is not available. Make sure to install the required package"
 msgstr ""
 
 #: MiscResources.resx$SaneNotAvailable$Message
-msgid ""
-"The SANE driver is not available. Make sure to install the required packages"
+msgid "The SANE driver is not available. Make sure to install the required packages"
 msgstr ""
 
 #: MiscResources.resx$ImportErrorCouldNot$Message
@@ -1332,9 +1330,7 @@ msgid "The file '{0}' could not be imported"
 msgstr "'{0}' 파일을 불러올 수 없습니다."
 
 #: MiscResources.resx$ImportErrorNAPS2Pdf$Message
-msgid ""
-"The file '{0}' could not be imported. Only PDF files generated by NAPS2 can "
-"be imported"
+msgid "The file '{0}' could not be imported. Only PDF files generated by NAPS2 can be imported"
 msgstr "'{0}' 파일을 불러올 수 없습니다. NAPS2 는 PDF 파일만 제작이 가능합니다."
 
 #: MiscResources.resx$FileInUse$Message
@@ -1370,15 +1366,11 @@ msgid "The selected scanner could not be found"
 msgstr "선택된 스캐너를 찾을 수 없습니다."
 
 #: MiscResources.resx$NoFeederSupport$Message
-msgid ""
-"The selected scanner does not support using a feeder. If your scanner does "
-"have a feeder, try using a different driver"
+msgid "The selected scanner does not support using a feeder. If your scanner does have a feeder, try using a different driver"
 msgstr "선택된 스캐너에서는 지급기를 사용할 수 없습니다. 만약 지급기가 있는 스캐너라면, 다른 드라이버를 선택 해 주세요."
 
 #: MiscResources.resx$NoDuplexSupport$Message
-msgid ""
-"The selected scanner does not support using duplex. If your scanner is "
-"supposed to support duplex, try using a different driver"
+msgid "The selected scanner does not support using duplex. If your scanner is supposed to support duplex, try using a different driver"
 msgstr "선택된 스캐너에서는 양면 기능을 사용할 수 없습니다. 만약 스캐너가 양면 기능을 지원한다면, 다른 드라이버를 선택 해 주세요."
 
 #: MiscResources.resx$DeviceBusy$Message
@@ -1407,11 +1399,11 @@ msgstr "Twain 구현"
 
 #: SettingsResources.resx$PageSize_Legal$Message
 msgid "US Legal (8.5x14 in)"
-msgstr "US Legal (8.5x14 in)"
+msgstr ""
 
 #: SettingsResources.resx$PageSize_Letter$Message
 msgid "US Letter (8.5x11 in)"
-msgstr "US Letter (8.5x11 in)"
+msgstr ""
 
 #: MiscResources.resx$UnsavedChanges$Message
 msgid "Unsaved Changes"
@@ -1474,9 +1466,13 @@ msgstr "{0} 스캔 대기중"
 msgid "White Threshold"
 msgstr "백색 임계값"
 
+#: FAdvancedScanSettings.resx$label4.Text$Message
+msgid "Wia Version"
+msgstr ""
+
 #: FPageSize.resx$labelX.Text$Message
 msgid "X"
-msgstr "X"
+msgstr ""
 
 #: FPlaceholders.resx$label3.Text$Message
 msgid "Year"
@@ -1495,9 +1491,7 @@ msgid "You don't have permission to save files at this location"
 msgstr "이 위치에 파일을 쓸 수 있는 권한을 가지고 있지 않습니다."
 
 #: MiscResources.resx$ExitWithUnsavedChanges$Message
-msgid ""
-"You have unsaved changes. Are you sure you want to exit and discard those "
-"changes?"
+msgid "You have unsaved changes. Are you sure you want to exit and discard those changes?"
 msgstr "저장되지 않은 변경사항이 있습니다. 변경사항을 무시하고 종료하시겠습니까?"
 
 #: TiffViewerCtl.resx$tsZoom.ToolTipText$Message
@@ -1518,41 +1512,41 @@ msgstr "축소"
 
 #: SettingsResources.resx$PageSizeUnit_Centimetre$Message
 msgid "cm"
-msgstr "cm"
+msgstr ""
 
 #: FAbout.resx$linkLabel2.Text$Message
 msgid "http://www.fatcow.com/free-icons"
-msgstr "http://www.fatcow.com/free-icons"
+msgstr ""
 
 #: FAbout.resx$linkLabel1.Text$Message
 msgid "http://www.naps2.com"
-msgstr "http://www.naps2.com"
+msgstr ""
 
 #: SettingsResources.resx$PageSizeUnit_Inch$Message
 msgid "in"
-msgstr "in"
+msgstr ""
 
 #: SettingsResources.resx$PageSizeUnit_Millimetre$Message
 msgid "mm"
-msgstr "mm"
+msgstr ""
 
 #: FViewer.resx$lblPageTotal.Text$Message
 #: MiscResources.resx$OfN$Message
 msgid "of {0}"
-msgstr "of {0}"
+msgstr ""
 
 #: SettingsResources.resx$TwainImpl_X64$Message
 msgid "x64"
-msgstr "x64"
+msgstr ""
 
 #: MiscResources.resx$NamedPageSizeFormat$Message
 msgid "{0} ({1}x{2} {3})"
-msgstr "{0} ({1}x{2} {3})"
+msgstr ""
 
 #: FDownloadProgress.resx$labelSub.Text$Message
 #: MiscResources.resx$SizeProgress$Message
 msgid "{0} / {1} MB"
-msgstr "{0} / {1} MB"
+msgstr ""
 
 #: FDownloadProgress.resx$labelTop.Text$Message
 #: MiscResources.resx$FilesProgressFormat$Message
@@ -1560,9 +1554,7 @@ msgid "{0} / {1} files"
 msgstr "{0} / {1} 파일"
 
 #: FRecover.resx$lblPrompt.Text$Message
-msgid ""
-"{0} image(s) scanned on {1} at {2} may not have been saved, and are "
-"recoverable. Do you want to recover them?"
+msgid "{0} image(s) scanned on {1} at {2} may not have been saved, and are recoverable. Do you want to recover them?"
 msgstr "스캔된 {0} 이미지가 {2} 의 {1} 에 저장되지 않았을 수 있습니다. 복구 하시겠습니까?"
 
 #: MiscResources.resx$ImagesSaved$Message
@@ -1572,3 +1564,4 @@ msgstr "{0} 개의 이미지가 저장되었습니다"
 #: MiscResources.resx$PdfStatus$Message
 msgid "{0} of {1}"
 msgstr "{1} 의 {0}"
+

@@ -1,16 +1,23 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-09-17 20:27+0000\n"
-"PO-Revision-Date: 2018-09-17 20:24+0000\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"POT-Creation-Date: 2016-04-19 21:51+0000\n"
+"PO-Revision-Date: 2022-11-27 05:04\n"
+"Last-Translator: \n"
+"Language-Team: Ukrainian\n"
 "Language: uk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Pootle 2.8\n"
-"X-POOTLE-MTIME: 1537215896.323924\n"
+"X-Generator: Translate Toolkit 1.13.0\n"
+"X-Poedit-SourceCharset: iso-8859-1\n"
+"Plural-Forms: nplurals=4; plural=((n%10==1 && n%100!=11) ? 0 : ((n%10 >= 2 && n%10 <=4 && (n%100 < 12 || n%100 > 14)) ? 1 : ((n%10 == 0 || (n%10 >= 5 && n%10 <=9)) || (n%100 >= 11 && n%100 <= 14)) ? 2 : 3));\n"
+"X-Crowdin-Project: naps2\n"
+"X-Crowdin-Project-ID: 531762\n"
+"X-Crowdin-Language: uk\n"
+"X-Crowdin-File: templates.pot\n"
+"X-Crowdin-File-ID: 75\n"
 
 #: SettingsResources.resx$Dpi_100$Message
 msgid "100 dpi"
@@ -66,6 +73,7 @@ msgid "About"
 msgstr "Про програму"
 
 #: FScanProgress.resx$$this.Text$Message
+#: MiscResources.resx$AcquiringData$Message
 msgid "Acquiring data"
 msgstr "Отримання даних"
 
@@ -134,9 +142,7 @@ msgid "Alternative Transfer"
 msgstr ""
 
 #: MiscResources.resx$PdfImportComponentNeeded$Message
-msgid ""
-"An additional component is needed to import this PDF file. Would you like to "
-"download it now?"
+msgid "An additional component is needed to import this PDF file. Would you like to download it now?"
 msgstr ""
 
 #: MiscResources.resx$UpdateError$Message
@@ -148,9 +154,8 @@ msgid "An error occurred when trying to authorize"
 msgstr ""
 
 #: MiscResources.resx$AutoSaveError$Message
-#, fuzzy
 msgid "An error occurred when trying to auto save"
-msgstr "Під час збереження файлу трапилась помилка"
+msgstr ""
 
 #: MiscResources.resx$ErrorSaving$Message
 msgid "An error occurred when trying to save the file"
@@ -169,9 +174,7 @@ msgid "An error occurred with the scanning driver"
 msgstr "Помилка драйвера сканування"
 
 #: MiscResources.resx$ExitWithActiveOperations$Message
-msgid ""
-"An operation is in progress. Are you sure you want to exit and cancel the "
-"operation?"
+msgid "An operation is in progress. Are you sure you want to exit and cancel the operation?"
 msgstr ""
 
 #: MiscResources.resx$BatchError$Message
@@ -203,9 +206,8 @@ msgid "Are you sure you want to clear {0} item(s)?"
 msgstr "Ви справді бажаєте очистити профіль(лі) {0}?"
 
 #: MiscResources.resx$ConfirmDelete$Message
-#, fuzzy
 msgid "Are you sure you want to delete \"{0}\"?"
-msgstr "Ви справді бажаєте видалити {0} профілі(в)?"
+msgstr ""
 
 #: MiscResources.resx$ConfirmDeleteSingleProfile$Message
 msgid "Are you sure you want to delete the profile {0}?"
@@ -304,9 +306,8 @@ msgstr "Чорно-білий"
 #: FBlackWhite.resx$$this.Text$Message
 #: FDesktop.resx$tsBlackWhite.Text$Message
 #: FViewer.resx$tsBlackWhite.Text$Message
-#, fuzzy
 msgid "Black and White"
-msgstr "Чорно-білий"
+msgstr ""
 
 #: FAdvancedScanSettings.resx$groupBox3.Text$Message
 msgid "Blank Pages"
@@ -469,22 +470,18 @@ msgstr "День (1-31)"
 
 #: SettingsResources.resx$PdfCompat_Default$Message
 #: SettingsResources.resx$TwainImpl_Default$Message
+#: SettingsResources.resx$WiaVersion_Default$Message
 msgid "Default"
 msgstr ""
 
 #: FImageSettings.resx$label1.Text$Message
 #: FPdfSettings.resx$label1.Text$Message
-#, fuzzy
 msgid "Default File Path"
-msgstr "Назва файлу за замовчуванням"
+msgstr ""
 
 #: FDesktop.resx$tsDeinterleave.Text$Message
 msgid "Deinterleave"
 msgstr "Позбавити чергування"
-
-#: FAdvancedScanSettings.resx$cbWiaDelayBetweenScans.Text$Message
-msgid "Delay between scans (WIA)"
-msgstr ""
 
 #: FDesktop.resx$ctxDelete.Text$Message
 #: FDesktop.resx$tsDelete.Text$Message
@@ -560,6 +557,7 @@ msgid "Edit"
 msgstr "Редагувати"
 
 #: FDesktop.resx$tsdEmailPDF.Text$Message
+#: MiscResources.resx$EmailPdf$Message
 msgid "Email PDF"
 msgstr "PDF поштою"
 
@@ -629,9 +627,7 @@ msgid "Flip duplexed pages"
 msgstr ""
 
 #: FImageSettings.resx$lblWarning.Text$Message
-msgid ""
-"For high JPEG qualities (80+), also increase Image Quality in your profile "
-"for best results"
+msgid "For high JPEG qualities (80+), also increase Image Quality in your profile for best results"
 msgstr ""
 
 #: MiscResources.resx$FileTypeGif$Message
@@ -812,7 +808,7 @@ msgstr ""
 
 #: MiscResources.resx$NAPS2$Message
 msgid "NAPS2"
-msgstr "NAPS2"
+msgstr ""
 
 #: MiscResources.resx$DonatePrompt$Message
 msgid "NAPS2 is completely free. Consider making a donation"
@@ -864,9 +860,8 @@ msgid "No updates available"
 msgstr ""
 
 #: SettingsResources.resx$TiffComp_None$Message
-#, fuzzy
 msgid "None"
-msgstr "Завершити"
+msgstr ""
 
 #: FDesktop.resx$$this.Text$Message
 msgid "Not Another PDF Scanner 2"
@@ -918,7 +913,7 @@ msgstr ""
 #: FPlaceholders.resx$btnOK.Text$Message
 #: ImageForm.resx$btnOK.Text$Message
 msgid "OK"
-msgstr "OK"
+msgstr ""
 
 #: FAdvancedScanSettings.resx$cbWiaOffsetWidth.Text$Message
 msgid "Offset width based on alignment (WIA)"
@@ -967,9 +962,8 @@ msgid "Owner Password"
 msgstr "Гасло власника"
 
 #: MiscResources.resx$FileTypePdf$Message
-#, fuzzy
 msgid "PDF Document (*.pdf)"
-msgstr "PDF документ (*.pdf)"
+msgstr ""
 
 #: FDesktop.resx$tsPDFSettings.Text$Message
 #: FDesktop.resx$tsPdfSettings2.Text$Message
@@ -1046,13 +1040,13 @@ msgid "Previous"
 msgstr "Попередня"
 
 #: FDesktop.resx$tsPrint.Text$Message
+#: MiscResources.resx$Print$Message
 msgid "Print"
 msgstr "Друк"
 
 #: FBatchScan.resx$lblProfile.Text$Message
-#, fuzzy
 msgid "Profile"
-msgstr "Профілі"
+msgstr ""
 
 #: FEditProfile.resx$$this.Text$Message
 msgid "Profile Settings"
@@ -1120,10 +1114,6 @@ msgstr "Роздільна здатність"
 msgid "Restore Defaults"
 msgstr "Відновити типові"
 
-#: FAdvancedScanSettings.resx$cbWiaRetryOnFailure.Text$Message
-msgid "Retry on failure (WIA)"
-msgstr ""
-
 #: FDesktop.resx$tsReverse.Text$Message
 msgid "Reverse"
 msgstr "Зворотній"
@@ -1165,11 +1155,11 @@ msgid "SANE Driver"
 msgstr ""
 
 #: FViewer.resx$tsSaveImage.Text$Message
-#, fuzzy
 msgid "Save Image"
-msgstr "Зберегти як зображення"
+msgstr ""
 
 #: FDesktop.resx$tsdSaveImages.Text$Message
+#: MiscResources.resx$SaveImages$Message
 msgid "Save Images"
 msgstr "Зберегти як зображення"
 
@@ -1179,6 +1169,7 @@ msgstr ""
 
 #: FDesktop.resx$tsdSavePDF.Text$Message
 #: FViewer.resx$tsSavePDF.Text$Message
+#: MiscResources.resx$SavePdf$Message
 msgid "Save PDF"
 msgstr "Зберегти PDF"
 
@@ -1229,6 +1220,7 @@ msgstr "Зіскановане зображення"
 #: FScanProgress.resx$labelPage.Text$Message
 #: MiscResources.resx$BatchStatusPage$Message
 #: MiscResources.resx$ScanPageProgress$Message
+#: MiscResources.resx$ScanProgressPage$Message
 msgid "Scanning page {0}"
 msgstr "Сканування сторінки {0}"
 
@@ -1326,13 +1318,11 @@ msgid "Technical Details"
 msgstr ""
 
 #: MiscResources.resx$TesseractNotAvailable$Message
-msgid ""
-"The OCR engine is not available. Make sure to install the required package"
+msgid "The OCR engine is not available. Make sure to install the required package"
 msgstr ""
 
 #: MiscResources.resx$SaneNotAvailable$Message
-msgid ""
-"The SANE driver is not available. Make sure to install the required packages"
+msgid "The SANE driver is not available. Make sure to install the required packages"
 msgstr ""
 
 #: MiscResources.resx$ImportErrorCouldNot$Message
@@ -1340,12 +1330,8 @@ msgid "The file '{0}' could not be imported"
 msgstr "Файл '{0}' не може бути імпортований"
 
 #: MiscResources.resx$ImportErrorNAPS2Pdf$Message
-msgid ""
-"The file '{0}' could not be imported. Only PDF files generated by NAPS2 can "
-"be imported"
-msgstr ""
-"Не можна імпортувати файл '{0}'. Можуть бути імпортовані лише  PDF файли "
-"створені NAPS2."
+msgid "The file '{0}' could not be imported. Only PDF files generated by NAPS2 can be imported"
+msgstr "Не можна імпортувати файл '{0}'. Можуть бути імпортовані лише  PDF файли створені NAPS2."
 
 #: MiscResources.resx$FileInUse$Message
 msgid "The file could not be overwritten because it is currently in use"
@@ -1380,23 +1366,16 @@ msgid "The selected scanner could not be found"
 msgstr "Не знайдено вибраний сканер"
 
 #: MiscResources.resx$NoFeederSupport$Message
-msgid ""
-"The selected scanner does not support using a feeder. If your scanner does "
-"have a feeder, try using a different driver"
-msgstr ""
-"Цей сканер не підтримує автоматичну подачу паперу. Якщо Ваш сканер має "
-"автоматичну подачу паперу, спробуйте використати інший драйвер."
+msgid "The selected scanner does not support using a feeder. If your scanner does have a feeder, try using a different driver"
+msgstr "Цей сканер не підтримує автоматичну подачу паперу. Якщо Ваш сканер має автоматичну подачу паперу, спробуйте використати інший драйвер."
 
 #: MiscResources.resx$NoDuplexSupport$Message
-msgid ""
-"The selected scanner does not support using duplex. If your scanner is "
-"supposed to support duplex, try using a different driver"
+msgid "The selected scanner does not support using duplex. If your scanner is supposed to support duplex, try using a different driver"
 msgstr ""
 
 #: MiscResources.resx$DeviceBusy$Message
-#, fuzzy
 msgid "The selected scanner is busy"
-msgstr "Вибраний сканер відключений"
+msgstr ""
 
 #: MiscResources.resx$DeviceOffline$Message
 msgid "The selected scanner is offline"
@@ -1487,6 +1466,10 @@ msgstr ""
 msgid "White Threshold"
 msgstr ""
 
+#: FAdvancedScanSettings.resx$label4.Text$Message
+msgid "Wia Version"
+msgstr ""
+
 #: FPageSize.resx$labelX.Text$Message
 msgid "X"
 msgstr "українська"
@@ -1508,11 +1491,8 @@ msgid "You don't have permission to save files at this location"
 msgstr "У вас немає прав для створення файлів у цьому каталозі."
 
 #: MiscResources.resx$ExitWithUnsavedChanges$Message
-msgid ""
-"You have unsaved changes. Are you sure you want to exit and discard those "
-"changes?"
-msgstr ""
-"Є незбережені зміни. Ви впевнені, що хочете вийти та відмовитись від них?"
+msgid "You have unsaved changes. Are you sure you want to exit and discard those changes?"
+msgstr "Є незбережені зміни. Ви впевнені, що хочете вийти та відмовитись від них?"
 
 #: TiffViewerCtl.resx$tsZoom.ToolTipText$Message
 msgid "Zoom"
@@ -1536,11 +1516,11 @@ msgstr "см"
 
 #: FAbout.resx$linkLabel2.Text$Message
 msgid "http://www.fatcow.com/free-icons"
-msgstr "http://www.fatcow.com/free-icons"
+msgstr ""
 
 #: FAbout.resx$linkLabel1.Text$Message
 msgid "http://www.naps2.com"
-msgstr "http://www.naps2.com"
+msgstr ""
 
 #: SettingsResources.resx$PageSizeUnit_Inch$Message
 msgid "in"
@@ -1574,12 +1554,8 @@ msgid "{0} / {1} files"
 msgstr "{0} / {1} файлів"
 
 #: FRecover.resx$lblPrompt.Text$Message
-msgid ""
-"{0} image(s) scanned on {1} at {2} may not have been saved, and are "
-"recoverable. Do you want to recover them?"
-msgstr ""
-"Зображення ({0} шт.), відскановані на {1} в {2}, можливо не були збережені "
-"та можуть бути відновлені. Бажаєте їх відновити?"
+msgid "{0} image(s) scanned on {1} at {2} may not have been saved, and are recoverable. Do you want to recover them?"
+msgstr "Зображення ({0} шт.), відскановані на {1} в {2}, можливо не були збережені та можуть бути відновлені. Бажаєте їх відновити?"
 
 #: MiscResources.resx$ImagesSaved$Message
 msgid "{0} images saved"
@@ -1588,3 +1564,4 @@ msgstr ""
 #: MiscResources.resx$PdfStatus$Message
 msgid "{0} of {1}"
 msgstr "{0} з {1}"
+

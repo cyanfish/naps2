@@ -1,32 +1,39 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-09-17 20:27+0000\n"
-"PO-Revision-Date: 2018-09-18 04:53+0000\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"POT-Creation-Date: 2016-04-19 21:51+0000\n"
+"PO-Revision-Date: 2022-11-27 05:04\n"
+"Last-Translator: \n"
+"Language-Team: Polish\n"
 "Language: pl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Pootle 2.8\n"
-"X-POOTLE-MTIME: 1537246422.954290\n"
+"X-Generator: Translate Toolkit 1.13.0\n"
+"X-Poedit-SourceCharset: iso-8859-1\n"
+"Plural-Forms: nplurals=4; plural=(n==1 ? 0 : (n%10>=2 && n%10<=4) && (n%100<12 || n%100>14) ? 1 : n!=1 && (n%10>=0 && n%10<=1) || (n%10>=5 && n%10<=9) || (n%100>=12 && n%100<=14) ? 2 : 3);\n"
+"X-Crowdin-Project: naps2\n"
+"X-Crowdin-Project-ID: 531762\n"
+"X-Crowdin-Language: pl\n"
+"X-Crowdin-File: templates.pot\n"
+"X-Crowdin-File-ID: 75\n"
 
 #: SettingsResources.resx$Dpi_100$Message
 msgid "100 dpi"
-msgstr "100 dpi"
+msgstr ""
 
 #: SettingsResources.resx$Dpi_1200$Message
 msgid "1200 dpi"
-msgstr "1200 dpi"
+msgstr ""
 
 #: SettingsResources.resx$Dpi_150$Message
 msgid "150 dpi"
-msgstr "150 dpi"
+msgstr ""
 
 #: SettingsResources.resx$Dpi_200$Message
 msgid "200 dpi"
-msgstr "200 dpi"
+msgstr ""
 
 #: SettingsResources.resx$BitDepth_24Color$Message
 msgid "24-bit Color"
@@ -34,19 +41,19 @@ msgstr "Kolor 24-bitowy"
 
 #: SettingsResources.resx$Dpi_300$Message
 msgid "300 dpi"
-msgstr "300 dpi"
+msgstr ""
 
 #: SettingsResources.resx$Dpi_400$Message
 msgid "400 dpi"
-msgstr "400 dpi"
+msgstr ""
 
 #: SettingsResources.resx$Dpi_600$Message
 msgid "600 dpi"
-msgstr "600 dpi"
+msgstr ""
 
 #: SettingsResources.resx$Dpi_800$Message
 msgid "800 dpi"
-msgstr "800 dpi"
+msgstr ""
 
 #: SettingsResources.resx$PageSize_A3$Message
 msgid "A3 (297x420 mm)"
@@ -66,6 +73,7 @@ msgid "About"
 msgstr "O programie"
 
 #: FScanProgress.resx$$this.Text$Message
+#: MiscResources.resx$AcquiringData$Message
 msgid "Acquiring data"
 msgstr "Pozyskiwanie danych"
 
@@ -134,12 +142,8 @@ msgid "Alternative Transfer"
 msgstr "Alternatywny transfer"
 
 #: MiscResources.resx$PdfImportComponentNeeded$Message
-msgid ""
-"An additional component is needed to import this PDF file. Would you like to "
-"download it now?"
-msgstr ""
-"Do zaimportowania tego pliku PDF potrzebny jest dodatkowy składnik. Czy "
-"chcesz go teraz pobrać?"
+msgid "An additional component is needed to import this PDF file. Would you like to download it now?"
+msgstr "Do zaimportowania tego pliku PDF potrzebny jest dodatkowy składnik. Czy chcesz go teraz pobrać?"
 
 #: MiscResources.resx$UpdateError$Message
 msgid "An error occured when trying to install the update"
@@ -170,11 +174,8 @@ msgid "An error occurred with the scanning driver"
 msgstr "Wystąpił błąd w sterowniku skanowania"
 
 #: MiscResources.resx$ExitWithActiveOperations$Message
-msgid ""
-"An operation is in progress. Are you sure you want to exit and cancel the "
-"operation?"
-msgstr ""
-"Operacja jest w toku. Czy na pewno chcesz zakończyć i anulować operację?"
+msgid "An operation is in progress. Are you sure you want to exit and cancel the operation?"
+msgstr "Operacja jest w toku. Czy na pewno chcesz zakończyć i anulować operację?"
 
 #: MiscResources.resx$BatchError$Message
 msgid "An unknown error ocurred during the batch scan"
@@ -324,7 +325,7 @@ msgstr "Jasność / kontrast"
 
 #: SettingsResources.resx$TiffComp_Ccitt4$Message
 msgid "CCITT4"
-msgstr "CCITT4"
+msgstr ""
 
 #: FAdvancedScanSettings.resx$btnCancel.Text$Message
 #: FAuthorize.resx$btnCancel.Text$Message
@@ -469,6 +470,7 @@ msgstr "Dzień (01-31)"
 
 #: SettingsResources.resx$PdfCompat_Default$Message
 #: SettingsResources.resx$TwainImpl_Default$Message
+#: SettingsResources.resx$WiaVersion_Default$Message
 msgid "Default"
 msgstr "Domyślna"
 
@@ -480,10 +482,6 @@ msgstr "Domyślna ścieżka pliku"
 #: FDesktop.resx$tsDeinterleave.Text$Message
 msgid "Deinterleave"
 msgstr "Usuń przeplatanie"
-
-#: FAdvancedScanSettings.resx$cbWiaDelayBetweenScans.Text$Message
-msgid "Delay between scans (WIA)"
-msgstr "Opóźnienie między skanami (WIA)"
 
 #: FDesktop.resx$ctxDelete.Text$Message
 #: FDesktop.resx$tsDelete.Text$Message
@@ -559,6 +557,7 @@ msgid "Edit"
 msgstr "Modyfikuj"
 
 #: FDesktop.resx$tsdEmailPDF.Text$Message
+#: MiscResources.resx$EmailPdf$Message
 msgid "Email PDF"
 msgstr "Wyślij PDF"
 
@@ -628,12 +627,8 @@ msgid "Flip duplexed pages"
 msgstr "Odwróć strony dwustronne"
 
 #: FImageSettings.resx$lblWarning.Text$Message
-msgid ""
-"For high JPEG qualities (80+), also increase Image Quality in your profile "
-"for best results"
-msgstr ""
-"Ponadto zwiększ Jakość obrazu w swoim profilu, dla wysokiej jakości JPEG "
-"(80+), aby uzyskać najlepsze rezultaty"
+msgid "For high JPEG qualities (80+), also increase Image Quality in your profile for best results"
+msgstr "Ponadto zwiększ Jakość obrazu w swoim profilu, dla wysokiej jakości JPEG (80+), aby uzyskać najlepsze rezultaty"
 
 #: MiscResources.resx$FileTypeGif$Message
 msgid "GIF File (*.gif)"
@@ -649,7 +644,7 @@ msgstr "Szyba skanera"
 
 #: SettingsResources.resx$EmailProviderType_Gmail$Message
 msgid "Gmail"
-msgstr "Gmail"
+msgstr ""
 
 #: SettingsResources.resx$BitDepth_8Grayscale$Message
 msgid "Grayscale"
@@ -748,7 +743,7 @@ msgstr "Słowa kluczowe"
 
 #: SettingsResources.resx$TiffComp_Lzw$Message
 msgid "LZW"
-msgstr "LZW"
+msgstr ""
 
 #: FDesktop.resx$toolStripDropDownButton1.Text$Message
 msgid "Language"
@@ -813,7 +808,7 @@ msgstr "Wielokrotne skanowanie (monit pomiędzy skanowaniami)"
 
 #: MiscResources.resx$NAPS2$Message
 msgid "NAPS2"
-msgstr "NAPS2"
+msgstr ""
 
 #: MiscResources.resx$DonatePrompt$Message
 msgid "NAPS2 is completely free. Consider making a donation"
@@ -870,7 +865,7 @@ msgstr "Brak"
 
 #: FDesktop.resx$$this.Text$Message
 msgid "Not Another PDF Scanner 2"
-msgstr "Not Another PDF Scanner 2"
+msgstr ""
 
 #: FRecover.resx$btnCancel.Text$Message
 msgid "Not Now"
@@ -882,7 +877,7 @@ msgstr "Liczba skanowań"
 
 #: FDesktop.resx$tsOcr.Text$Message
 msgid "OCR"
-msgstr "OCR"
+msgstr ""
 
 #: FOcrLanguageDownload.resx$$this.Text$Message
 msgid "OCR Download"
@@ -918,7 +913,7 @@ msgstr "Tryb OCR"
 #: FPlaceholders.resx$btnOK.Text$Message
 #: ImageForm.resx$btnOK.Text$Message
 msgid "OK"
-msgstr "OK"
+msgstr ""
 
 #: FAdvancedScanSettings.resx$cbWiaOffsetWidth.Text$Message
 msgid "Offset width based on alignment (WIA)"
@@ -952,7 +947,7 @@ msgstr "Operacja w toku"
 
 #: SettingsResources.resx$EmailProviderType_OutlookWeb$Message
 msgid "Outlook Web Access"
-msgstr "Outlook Web Access"
+msgstr ""
 
 #: FBatchScan.resx$groupboxOutput.Text$Message
 msgid "Output"
@@ -982,19 +977,19 @@ msgstr "Zapisano PDF"
 
 #: SettingsResources.resx$PdfCompat_PdfA1B$Message
 msgid "PDF/A-1b"
-msgstr "PDF/A-1b"
+msgstr ""
 
 #: SettingsResources.resx$PdfCompat_PdfA2B$Message
 msgid "PDF/A-2b"
-msgstr "PDF/A-2b"
+msgstr ""
 
 #: SettingsResources.resx$PdfCompat_PdfA3B$Message
 msgid "PDF/A-3b"
-msgstr "PDF/A-3b"
+msgstr ""
 
 #: SettingsResources.resx$PdfCompat_PdfA3U$Message
 msgid "PDF/A-3u"
-msgstr "PDF/A-3u"
+msgstr ""
 
 #: MiscResources.resx$FileTypePng$Message
 msgid "PNG File (*.png)"
@@ -1045,6 +1040,7 @@ msgid "Previous"
 msgstr "Poprzedni"
 
 #: FDesktop.resx$tsPrint.Text$Message
+#: MiscResources.resx$Print$Message
 msgid "Print"
 msgstr "Drukuj"
 
@@ -1118,10 +1114,6 @@ msgstr "Rozdzielczość"
 msgid "Restore Defaults"
 msgstr "Przywróć domyślne"
 
-#: FAdvancedScanSettings.resx$cbWiaRetryOnFailure.Text$Message
-msgid "Retry on failure (WIA)"
-msgstr "Ponów przy niepowodzeniu (WIA)"
-
 #: FDesktop.resx$tsReverse.Text$Message
 msgid "Reverse"
 msgstr "Оdwróć"
@@ -1167,6 +1159,7 @@ msgid "Save Image"
 msgstr "Zapisz obraz"
 
 #: FDesktop.resx$tsdSaveImages.Text$Message
+#: MiscResources.resx$SaveImages$Message
 msgid "Save Images"
 msgstr "Zapisz obraz"
 
@@ -1176,6 +1169,7 @@ msgstr "Postęp zapisywania obrazów"
 
 #: FDesktop.resx$tsdSavePDF.Text$Message
 #: FViewer.resx$tsSavePDF.Text$Message
+#: MiscResources.resx$SavePdf$Message
 msgid "Save PDF"
 msgstr "Zapisz PDF"
 
@@ -1226,6 +1220,7 @@ msgstr "Zeskanowane obrazy"
 #: FScanProgress.resx$labelPage.Text$Message
 #: MiscResources.resx$BatchStatusPage$Message
 #: MiscResources.resx$ScanPageProgress$Message
+#: MiscResources.resx$ScanProgressPage$Message
 msgid "Scanning page {0}"
 msgstr "Skanowanie strony {0}"
 
@@ -1323,29 +1318,20 @@ msgid "Technical Details"
 msgstr "Szczegóły techniczne"
 
 #: MiscResources.resx$TesseractNotAvailable$Message
-msgid ""
-"The OCR engine is not available. Make sure to install the required package"
-msgstr ""
-"Silnik OCR nie jest dostępny. Upewnij się, że zainstalowałeś wymagany pakiet"
+msgid "The OCR engine is not available. Make sure to install the required package"
+msgstr "Silnik OCR nie jest dostępny. Upewnij się, że zainstalowałeś wymagany pakiet"
 
 #: MiscResources.resx$SaneNotAvailable$Message
-msgid ""
-"The SANE driver is not available. Make sure to install the required packages"
-msgstr ""
-"Sterownik SANE nie jest dostępny. Upewnij się, że zainstalowałeś wymagane "
-"pakiety"
+msgid "The SANE driver is not available. Make sure to install the required packages"
+msgstr "Sterownik SANE nie jest dostępny. Upewnij się, że zainstalowałeś wymagane pakiety"
 
 #: MiscResources.resx$ImportErrorCouldNot$Message
 msgid "The file '{0}' could not be imported"
 msgstr "Nie można zaimportować pliku '{0}'"
 
 #: MiscResources.resx$ImportErrorNAPS2Pdf$Message
-msgid ""
-"The file '{0}' could not be imported. Only PDF files generated by NAPS2 can "
-"be imported"
-msgstr ""
-"Nie można zaimportować pliku '{0}'. Tylko pliki PDF wygenerowane prez NAPS2 "
-"mogą być zaimportowane"
+msgid "The file '{0}' could not be imported. Only PDF files generated by NAPS2 can be imported"
+msgstr "Nie można zaimportować pliku '{0}'. Tylko pliki PDF wygenerowane prez NAPS2 mogą być zaimportowane"
 
 #: MiscResources.resx$FileInUse$Message
 msgid "The file could not be overwritten because it is currently in use"
@@ -1357,8 +1343,7 @@ msgstr "Plik {0} już istnieje. Czy chcesz go zastąpić?"
 
 #: FPdfPassword.resx$lblPrompt.Text$Message
 msgid "The following file is encrypted and requires a password to open: {0}"
-msgstr ""
-"Następujący plik jest zaszyfrowany i potrzebuje hasła do otworzenia: {0}"
+msgstr "Następujący plik jest zaszyfrowany i potrzebuje hasła do otworzenia: {0}"
 
 #: MiscResources.resx$DevicePaperJam$Message
 msgid "The scanner has a paper jam"
@@ -1381,20 +1366,12 @@ msgid "The selected scanner could not be found"
 msgstr "Nie można odnaleźć wybranego skanera"
 
 #: MiscResources.resx$NoFeederSupport$Message
-msgid ""
-"The selected scanner does not support using a feeder. If your scanner does "
-"have a feeder, try using a different driver"
-msgstr ""
-"Wybrany skaner nie obsługuje podajnika. Jeżeli twój skaner ma podajnik, "
-"spróbuj użyć innego sterownika"
+msgid "The selected scanner does not support using a feeder. If your scanner does have a feeder, try using a different driver"
+msgstr "Wybrany skaner nie obsługuje podajnika. Jeżeli twój skaner ma podajnik, spróbuj użyć innego sterownika"
 
 #: MiscResources.resx$NoDuplexSupport$Message
-msgid ""
-"The selected scanner does not support using duplex. If your scanner is "
-"supposed to support duplex, try using a different driver"
-msgstr ""
-"Wybrany skaner nie obsługuje druku obustronnego. Jeśli twój skaner powinien "
-"wspierać druk obustronny, spróbuj użyć innego sterownika"
+msgid "The selected scanner does not support using duplex. If your scanner is supposed to support duplex, try using a different driver"
+msgstr "Wybrany skaner nie obsługuje druku obustronnego. Jeśli twój skaner powinien wspierać druk obustronny, spróbuj użyć innego sterownika"
 
 #: MiscResources.resx$DeviceBusy$Message
 msgid "The selected scanner is busy"
@@ -1489,9 +1466,13 @@ msgstr "Oczekiwanie na skanowanie {0}"
 msgid "White Threshold"
 msgstr "Próg bieli"
 
+#: FAdvancedScanSettings.resx$label4.Text$Message
+msgid "Wia Version"
+msgstr ""
+
 #: FPageSize.resx$labelX.Text$Message
 msgid "X"
-msgstr "X"
+msgstr ""
 
 #: FPlaceholders.resx$label3.Text$Message
 msgid "Year"
@@ -1510,12 +1491,8 @@ msgid "You don't have permission to save files at this location"
 msgstr "Nie masz uprawnień do zapisywania plików we wskazanym położeniu"
 
 #: MiscResources.resx$ExitWithUnsavedChanges$Message
-msgid ""
-"You have unsaved changes. Are you sure you want to exit and discard those "
-"changes?"
-msgstr ""
-"Dokonałeś niezapisanych zmian. Czy na pewno chcesz zamknąć i odrzucić te "
-"zmiany?"
+msgid "You have unsaved changes. Are you sure you want to exit and discard those changes?"
+msgstr "Dokonałeś niezapisanych zmian. Czy na pewno chcesz zamknąć i odrzucić te zmiany?"
 
 #: TiffViewerCtl.resx$tsZoom.ToolTipText$Message
 msgid "Zoom"
@@ -1535,23 +1512,23 @@ msgstr "Oddal"
 
 #: SettingsResources.resx$PageSizeUnit_Centimetre$Message
 msgid "cm"
-msgstr "cm"
+msgstr ""
 
 #: FAbout.resx$linkLabel2.Text$Message
 msgid "http://www.fatcow.com/free-icons"
-msgstr "http://www.fatcow.com/free-icons"
+msgstr ""
 
 #: FAbout.resx$linkLabel1.Text$Message
 msgid "http://www.naps2.com"
-msgstr "http://www.naps2.com"
+msgstr ""
 
 #: SettingsResources.resx$PageSizeUnit_Inch$Message
 msgid "in"
-msgstr "in"
+msgstr ""
 
 #: SettingsResources.resx$PageSizeUnit_Millimetre$Message
 msgid "mm"
-msgstr "mm"
+msgstr ""
 
 #: FViewer.resx$lblPageTotal.Text$Message
 #: MiscResources.resx$OfN$Message
@@ -1560,16 +1537,16 @@ msgstr "z {0}"
 
 #: SettingsResources.resx$TwainImpl_X64$Message
 msgid "x64"
-msgstr "x64"
+msgstr ""
 
 #: MiscResources.resx$NamedPageSizeFormat$Message
 msgid "{0} ({1}x{2} {3})"
-msgstr "{0} ({1}x{2} {3})"
+msgstr ""
 
 #: FDownloadProgress.resx$labelSub.Text$Message
 #: MiscResources.resx$SizeProgress$Message
 msgid "{0} / {1} MB"
-msgstr "{0} / {1} MB"
+msgstr ""
 
 #: FDownloadProgress.resx$labelTop.Text$Message
 #: MiscResources.resx$FilesProgressFormat$Message
@@ -1577,12 +1554,8 @@ msgid "{0} / {1} files"
 msgstr "{0} / {1} plików"
 
 #: FRecover.resx$lblPrompt.Text$Message
-msgid ""
-"{0} image(s) scanned on {1} at {2} may not have been saved, and are "
-"recoverable. Do you want to recover them?"
-msgstr ""
-"{0} plik(i) przeskanowane w {1} na {2} mogły nie zostać zapisane, ale są do "
-"odzyskania. Czy chcesz je odzyskać?"
+msgid "{0} image(s) scanned on {1} at {2} may not have been saved, and are recoverable. Do you want to recover them?"
+msgstr "{0} plik(i) przeskanowane w {1} na {2} mogły nie zostać zapisane, ale są do odzyskania. Czy chcesz je odzyskać?"
 
 #: MiscResources.resx$ImagesSaved$Message
 msgid "{0} images saved"
@@ -1591,3 +1564,4 @@ msgstr "{0} obrazy/obrazów zapisano"
 #: MiscResources.resx$PdfStatus$Message
 msgid "{0} of {1}"
 msgstr "{0} z {1}"
+

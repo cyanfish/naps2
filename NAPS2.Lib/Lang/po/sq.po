@@ -1,61 +1,59 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-09-17 20:27+0000\n"
-"PO-Revision-Date: 2020-03-27 03:36+0000\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"POT-Creation-Date: 2016-04-19 21:51+0000\n"
+"PO-Revision-Date: 2022-11-27 05:04\n"
+"Last-Translator: \n"
+"Language-Team: Albanian\n"
 "Language: sq\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Pootle 2.8\n"
-"X-POOTLE-MTIME: 1585280216.862054\n"
+"X-Generator: Translate Toolkit 1.13.0\n"
+"X-Poedit-SourceCharset: iso-8859-1\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Crowdin-Project: naps2\n"
+"X-Crowdin-Project-ID: 531762\n"
+"X-Crowdin-Language: sq\n"
+"X-Crowdin-File: templates.pot\n"
+"X-Crowdin-File-ID: 75\n"
 
-# No need for change.
 #: SettingsResources.resx$Dpi_100$Message
 msgid "100 dpi"
-msgstr "100 dpi"
+msgstr ""
 
-# No need for change.
 #: SettingsResources.resx$Dpi_1200$Message
 msgid "1200 dpi"
-msgstr "1200 dpi"
+msgstr ""
 
-# No change needed.
 #: SettingsResources.resx$Dpi_150$Message
 msgid "150 dpi"
-msgstr "150 dpi"
+msgstr ""
 
-# No change needed.
 #: SettingsResources.resx$Dpi_200$Message
 msgid "200 dpi"
-msgstr "200 dpi"
+msgstr ""
 
-# No change needed.
 #: SettingsResources.resx$BitDepth_24Color$Message
 msgid "24-bit Color"
 msgstr "Ngjyra me 24 bit"
 
-# No change needed.
 #: SettingsResources.resx$Dpi_300$Message
 msgid "300 dpi"
-msgstr "300 dpi"
+msgstr ""
 
-# No change needed.
 #: SettingsResources.resx$Dpi_400$Message
 msgid "400 dpi"
-msgstr "400 dpi"
+msgstr ""
 
-# No change needed.
 #: SettingsResources.resx$Dpi_600$Message
 msgid "600 dpi"
-msgstr "600 dpi"
+msgstr ""
 
-# No change needed.
 #: SettingsResources.resx$Dpi_800$Message
 msgid "800 dpi"
-msgstr "800 dpi"
+msgstr ""
 
 #: SettingsResources.resx$PageSize_A3$Message
 msgid "A3 (297x420 mm)"
@@ -75,6 +73,7 @@ msgid "About"
 msgstr "Rreth"
 
 #: FScanProgress.resx$$this.Text$Message
+#: MiscResources.resx$AcquiringData$Message
 msgid "Acquiring data"
 msgstr "Po merr të dhënat"
 
@@ -143,12 +142,8 @@ msgid "Alternative Transfer"
 msgstr "Transfertë alternative"
 
 #: MiscResources.resx$PdfImportComponentNeeded$Message
-msgid ""
-"An additional component is needed to import this PDF file. Would you like to "
-"download it now?"
-msgstr ""
-"Nevojitet një komponent shtesë për të importuar këtë skedar PDF. A dëshiron "
-"ta shkarkosh tani?"
+msgid "An additional component is needed to import this PDF file. Would you like to download it now?"
+msgstr "Nevojitet një komponent shtesë për të importuar këtë skedar PDF. A dëshiron ta shkarkosh tani?"
 
 #: MiscResources.resx$UpdateError$Message
 msgid "An error occured when trying to install the update"
@@ -179,12 +174,8 @@ msgid "An error occurred with the scanning driver"
 msgstr "Ndodhi një gabim me drejtuesin e skanimit"
 
 #: MiscResources.resx$ExitWithActiveOperations$Message
-msgid ""
-"An operation is in progress. Are you sure you want to exit and cancel the "
-"operation?"
-msgstr ""
-"Një operacion është në progres. Je i sigurt se dëshiron të dalësh dhe të "
-"anulosh operacionin?"
+msgid "An operation is in progress. Are you sure you want to exit and cancel the operation?"
+msgstr "Një operacion është në progres. Je i sigurt se dëshiron të dalësh dhe të anulosh operacionin?"
 
 #: MiscResources.resx$BatchError$Message
 msgid "An unknown error ocurred during the batch scan"
@@ -210,12 +201,10 @@ msgstr "Zbato te të gjithë imazhet e zgjedhura {0}"
 msgid "Are you sure you want to cancel the batch scan?"
 msgstr "Je i sigurt se do ta anulosh skanimin në grup?"
 
-# No change needed.
 #: MiscResources.resx$ConfirmClearItems$Message
 msgid "Are you sure you want to clear {0} item(s)?"
 msgstr "A je i sigurt se dëshiron të pastrosh {0} element(e)?"
 
-# No change needed.
 #: MiscResources.resx$ConfirmDelete$Message
 msgid "Are you sure you want to delete \"{0}\"?"
 msgstr "A je i sigurt se dëshiron të fshish \"{0}\"?"
@@ -224,7 +213,6 @@ msgstr "A je i sigurt se dëshiron të fshish \"{0}\"?"
 msgid "Are you sure you want to delete the profile {0}?"
 msgstr "A je i sigurt se dëshiron të fshish profilin {0}?"
 
-# No change needed.
 #: MiscResources.resx$ConfirmDeleteItems$Message
 msgid "Are you sure you want to delete {0} item(s)?"
 msgstr "A je i sigurt se dëshiron të fshish {0} element(e)?"
@@ -280,11 +268,11 @@ msgstr "Ekzekuto OCR automatikisht pas skanimit"
 
 #: SettingsResources.resx$PageSize_B4$Message
 msgid "B4 (250x353 mm)"
-msgstr "B4 (250x353 mm)"
+msgstr ""
 
 #: SettingsResources.resx$PageSize_B5$Message
 msgid "B5 (176x250 mm)"
-msgstr "B5 (176x250 mm)"
+msgstr ""
 
 #: FBatchScan.resx$$this.Text$Message
 #: FDesktop.resx$tsBatchScan.Text$Message
@@ -337,7 +325,7 @@ msgstr "Ndriçimi/Kontrasti"
 
 #: SettingsResources.resx$TiffComp_Ccitt4$Message
 msgid "CCITT4"
-msgstr "CCITT4"
+msgstr ""
 
 #: FAdvancedScanSettings.resx$btnCancel.Text$Message
 #: FAuthorize.resx$btnCancel.Text$Message
@@ -459,7 +447,6 @@ msgstr "Prit te madhësia e faqes"
 msgid "Custom"
 msgstr "E personalizuar"
 
-# No change needed.
 #: MiscResources.resx$CustomPageSizeFormat$Message
 msgid "Custom ({0}x{1} {2})"
 msgstr "E personalizuar ({0}x{1} {2})"
@@ -477,13 +464,13 @@ msgstr "Rrotullim i personalizuar"
 msgid "Custom SMTP"
 msgstr "SMTP e personalizuar"
 
-# No need for change.
 #: FPlaceholders.resx$label6.Text$Message
 msgid "Day (01-31)"
 msgstr "Dita (01-31)"
 
 #: SettingsResources.resx$PdfCompat_Default$Message
 #: SettingsResources.resx$TwainImpl_Default$Message
+#: SettingsResources.resx$WiaVersion_Default$Message
 msgid "Default"
 msgstr "E paracaktuar"
 
@@ -495,10 +482,6 @@ msgstr "Shtegu i paracaktuar i skedarit"
 #: FDesktop.resx$tsDeinterleave.Text$Message
 msgid "Deinterleave"
 msgstr "Heq përzierjen"
-
-#: FAdvancedScanSettings.resx$cbWiaDelayBetweenScans.Text$Message
-msgid "Delay between scans (WIA)"
-msgstr "Vonesa midis skanimeve (WIA)"
 
 #: FDesktop.resx$ctxDelete.Text$Message
 #: FDesktop.resx$tsDelete.Text$Message
@@ -574,6 +557,7 @@ msgid "Edit"
 msgstr "Modifiko"
 
 #: FDesktop.resx$tsdEmailPDF.Text$Message
+#: MiscResources.resx$EmailPdf$Message
 msgid "Email PDF"
 msgstr "Dërgo PDF me email"
 
@@ -643,12 +627,8 @@ msgid "Flip duplexed pages"
 msgstr "Kthe përmbys faqet duplekse"
 
 #: FImageSettings.resx$lblWarning.Text$Message
-msgid ""
-"For high JPEG qualities (80+), also increase Image Quality in your profile "
-"for best results"
-msgstr ""
-"Për cilësi të larta të JPEG (80+), gjithashtu rrisni Cilësinë e imazhit te "
-"profili juaj për rezultatet më të mira"
+msgid "For high JPEG qualities (80+), also increase Image Quality in your profile for best results"
+msgstr "Për cilësi të larta të JPEG (80+), gjithashtu rrisni Cilësinë e imazhit te profili juaj për rezultatet më të mira"
 
 #: MiscResources.resx$FileTypeGif$Message
 msgid "GIF File (*.gif)"
@@ -664,7 +644,7 @@ msgstr "Xham"
 
 #: SettingsResources.resx$EmailProviderType_Gmail$Message
 msgid "Gmail"
-msgstr "Gmail"
+msgstr ""
 
 #: SettingsResources.resx$BitDepth_8Grayscale$Message
 msgid "Grayscale"
@@ -674,7 +654,6 @@ msgstr "E hirtë"
 msgid "Horizontal align"
 msgstr "Drejto horizontalisht"
 
-# No need for change.
 #: FPlaceholders.resx$label7.Text$Message
 msgid "Hour (0-23)"
 msgstr "Ora (0-23)"
@@ -764,7 +743,7 @@ msgstr "Fjalët kyçe"
 
 #: SettingsResources.resx$TiffComp_Lzw$Message
 msgid "LZW"
-msgstr "LZW"
+msgstr ""
 
 #: FDesktop.resx$toolStripDropDownButton1.Text$Message
 msgid "Language"
@@ -798,12 +777,10 @@ msgstr "Cilësi maksimale (skedarë të mëdhenj)"
 msgid "Metadata"
 msgstr "Të dhëna mbi të dhënat"
 
-# No need for change.
 #: FPlaceholders.resx$label8.Text$Message
 msgid "Minute (00-59)"
 msgstr "Minuta (00-59)"
 
-# No need for change.
 #: FPlaceholders.resx$label5.Text$Message
 msgid "Month (01-12)"
 msgstr "Muaji (01-12)"
@@ -831,7 +808,7 @@ msgstr "Shumë skanime (pyet ndërmjet skanimeve)"
 
 #: MiscResources.resx$NAPS2$Message
 msgid "NAPS2"
-msgstr "NAPS2"
+msgstr ""
 
 #: MiscResources.resx$DonatePrompt$Message
 msgid "NAPS2 is completely free. Consider making a donation"
@@ -888,7 +865,7 @@ msgstr "Asnjë"
 
 #: FDesktop.resx$$this.Text$Message
 msgid "Not Another PDF Scanner 2"
-msgstr "Not Another PDF Scanner 2"
+msgstr ""
 
 #: FRecover.resx$btnCancel.Text$Message
 msgid "Not Now"
@@ -900,7 +877,7 @@ msgstr "Numri i skanimeve"
 
 #: FDesktop.resx$tsOcr.Text$Message
 msgid "OCR"
-msgstr "OCR"
+msgstr ""
 
 #: FOcrLanguageDownload.resx$$this.Text$Message
 msgid "OCR Download"
@@ -936,7 +913,7 @@ msgstr "Regjimi OCR"
 #: FPlaceholders.resx$btnOK.Text$Message
 #: ImageForm.resx$btnOK.Text$Message
 msgid "OK"
-msgstr "OK"
+msgstr ""
 
 #: FAdvancedScanSettings.resx$cbWiaOffsetWidth.Text$Message
 msgid "Offset width based on alignment (WIA)"
@@ -1000,19 +977,19 @@ msgstr "PDF u ruajt"
 
 #: SettingsResources.resx$PdfCompat_PdfA1B$Message
 msgid "PDF/A-1b"
-msgstr "PDF/A-1b"
+msgstr ""
 
 #: SettingsResources.resx$PdfCompat_PdfA2B$Message
 msgid "PDF/A-2b"
-msgstr "PDF/A-2b"
+msgstr ""
 
 #: SettingsResources.resx$PdfCompat_PdfA3B$Message
 msgid "PDF/A-3b"
-msgstr "PDF/A-3b"
+msgstr ""
 
 #: SettingsResources.resx$PdfCompat_PdfA3U$Message
 msgid "PDF/A-3u"
-msgstr "PDF/A-3u"
+msgstr ""
 
 #: MiscResources.resx$FileTypePng$Message
 msgid "PNG File (*.png)"
@@ -1063,6 +1040,7 @@ msgid "Previous"
 msgstr "Paraardhës"
 
 #: FDesktop.resx$tsPrint.Text$Message
+#: MiscResources.resx$Print$Message
 msgid "Print"
 msgstr "Printo"
 
@@ -1136,10 +1114,6 @@ msgstr "Rezolucioni"
 msgid "Restore Defaults"
 msgstr "Rikthe të paracaktuarat"
 
-#: FAdvancedScanSettings.resx$cbWiaRetryOnFailure.Text$Message
-msgid "Retry on failure (WIA)"
-msgstr "Riprovo në moskryerje (WIA)"
-
 #: FDesktop.resx$tsReverse.Text$Message
 msgid "Reverse"
 msgstr "Kthe mbrapsht"
@@ -1185,6 +1159,7 @@ msgid "Save Image"
 msgstr "Ruaj Imazhin"
 
 #: FDesktop.resx$tsdSaveImages.Text$Message
+#: MiscResources.resx$SaveImages$Message
 msgid "Save Images"
 msgstr "Ruaj imazhet"
 
@@ -1194,6 +1169,7 @@ msgstr "Progresi i ruajtjes së imazheve"
 
 #: FDesktop.resx$tsdSavePDF.Text$Message
 #: FViewer.resx$tsSavePDF.Text$Message
+#: MiscResources.resx$SavePdf$Message
 msgid "Save PDF"
 msgstr "Ruaj PDF"
 
@@ -1244,6 +1220,7 @@ msgstr "Imazhi i skanuar"
 #: FScanProgress.resx$labelPage.Text$Message
 #: MiscResources.resx$BatchStatusPage$Message
 #: MiscResources.resx$ScanPageProgress$Message
+#: MiscResources.resx$ScanProgressPage$Message
 msgid "Scanning page {0}"
 msgstr "Po skanon faqen {0}"
 
@@ -1251,7 +1228,6 @@ msgstr "Po skanon faqen {0}"
 msgid "Scanning page {0} (scan {1})"
 msgstr "Po skanon faqen {0} (skanimi {1})"
 
-# No need for change.
 #: FPlaceholders.resx$label9.Text$Message
 msgid "Second (00-59)"
 msgstr "Sekonda (00-59)"
@@ -1342,30 +1318,20 @@ msgid "Technical Details"
 msgstr "Detajet teknike"
 
 #: MiscResources.resx$TesseractNotAvailable$Message
-msgid ""
-"The OCR engine is not available. Make sure to install the required package"
-msgstr ""
-"Motori i OCR nuk është i disponueshëm. Sigurohu të instalosh paketën e "
-"kërkuar"
+msgid "The OCR engine is not available. Make sure to install the required package"
+msgstr "Motori i OCR nuk është i disponueshëm. Sigurohu të instalosh paketën e kërkuar"
 
 #: MiscResources.resx$SaneNotAvailable$Message
-msgid ""
-"The SANE driver is not available. Make sure to install the required packages"
-msgstr ""
-"Drejtuesi SANE nuk është i disponueshëm. Sigurohuni të instaloni paketat e "
-"duhura"
+msgid "The SANE driver is not available. Make sure to install the required packages"
+msgstr "Drejtuesi SANE nuk është i disponueshëm. Sigurohuni të instaloni paketat e duhura"
 
 #: MiscResources.resx$ImportErrorCouldNot$Message
 msgid "The file '{0}' could not be imported"
 msgstr "Skedari '{0}' nuk mund të importohej"
 
 #: MiscResources.resx$ImportErrorNAPS2Pdf$Message
-msgid ""
-"The file '{0}' could not be imported. Only PDF files generated by NAPS2 can "
-"be imported"
-msgstr ""
-"Skedari '{0}' nuk mund të importohej. Vetëm skedarët PDF të gjeneruar nga "
-"NAPS2 mund të importohen"
+msgid "The file '{0}' could not be imported. Only PDF files generated by NAPS2 can be imported"
+msgstr "Skedari '{0}' nuk mund të importohej. Vetëm skedarët PDF të gjeneruar nga NAPS2 mund të importohen"
 
 #: MiscResources.resx$FileInUse$Message
 msgid "The file could not be overwritten because it is currently in use"
@@ -1377,9 +1343,7 @@ msgstr "Skedari {0} tashmë ekziston. A dëshironi ta mbishkruani?"
 
 #: FPdfPassword.resx$lblPrompt.Text$Message
 msgid "The following file is encrypted and requires a password to open: {0}"
-msgstr ""
-"Skedari i mëposhtëm është i shifruar dhe kërkon një fjalëkalim për t'u hapur:"
-" {0}"
+msgstr "Skedari i mëposhtëm është i shifruar dhe kërkon një fjalëkalim për t'u hapur: {0}"
 
 #: MiscResources.resx$DevicePaperJam$Message
 msgid "The scanner has a paper jam"
@@ -1402,20 +1366,12 @@ msgid "The selected scanner could not be found"
 msgstr "Skaneri i zgjedhur nuk mund të gjendej"
 
 #: MiscResources.resx$NoFeederSupport$Message
-msgid ""
-"The selected scanner does not support using a feeder. If your scanner does "
-"have a feeder, try using a different driver"
-msgstr ""
-"Skaneri i zgjedhur nuk e mbështet përdorimin e furnizuesit. Nëse skaneri yt "
-"nuk ka një furnizues, provo të përdorësh një drejtues të ndryshëm"
+msgid "The selected scanner does not support using a feeder. If your scanner does have a feeder, try using a different driver"
+msgstr "Skaneri i zgjedhur nuk e mbështet përdorimin e furnizuesit. Nëse skaneri yt nuk ka një furnizues, provo të përdorësh një drejtues të ndryshëm"
 
 #: MiscResources.resx$NoDuplexSupport$Message
-msgid ""
-"The selected scanner does not support using duplex. If your scanner is "
-"supposed to support duplex, try using a different driver"
-msgstr ""
-"Skaneri i zgjedhur nuk e mbështet dupleksin. Nëse skaneri supozohet se e "
-"pranon dupleksin, provoni të përdorni një drejtues tjetër"
+msgid "The selected scanner does not support using duplex. If your scanner is supposed to support duplex, try using a different driver"
+msgstr "Skaneri i zgjedhur nuk e mbështet dupleksin. Nëse skaneri supozohet se e pranon dupleksin, provoni të përdorni një drejtues tjetër"
 
 #: MiscResources.resx$DeviceBusy$Message
 msgid "The selected scanner is busy"
@@ -1479,8 +1435,7 @@ msgstr "Fjalëkalimi i përdoruesit"
 
 #: FOcrLanguageDownload.resx$label1.Text$Message
 msgid "Using OCR requires you to download each language you want to scan"
-msgstr ""
-"Përdorimi i OCR ju kërkon të shkarkoni çdo gjuhë që dëshironi të skanoni"
+msgstr "Përdorimi i OCR ju kërkon të shkarkoni çdo gjuhë që dëshironi të skanoni"
 
 #: MiscResources.resx$Version$Message
 msgid "Version {0}"
@@ -1511,15 +1466,18 @@ msgstr "Po pret për skanimin {0}"
 msgid "White Threshold"
 msgstr "Kufiri i bardhë"
 
+#: FAdvancedScanSettings.resx$label4.Text$Message
+msgid "Wia Version"
+msgstr ""
+
 #: FPageSize.resx$labelX.Text$Message
 msgid "X"
-msgstr "X"
+msgstr ""
 
 #: FPlaceholders.resx$label3.Text$Message
 msgid "Year"
 msgstr "Viti"
 
-# No need for change.
 #: FPlaceholders.resx$label4.Text$Message
 msgid "Year (00-99)"
 msgstr "Viti (00-99)"
@@ -1533,12 +1491,8 @@ msgid "You don't have permission to save files at this location"
 msgstr "Nuk ke të drejta për të ruajtur skedarët në këtë vendndodhje"
 
 #: MiscResources.resx$ExitWithUnsavedChanges$Message
-msgid ""
-"You have unsaved changes. Are you sure you want to exit and discard those "
-"changes?"
-msgstr ""
-"Ke ndryshime të paruajtura. A je i sigurt se dëshiron të dalësh dhe të mos i "
-"ruash ato ndryshime?"
+msgid "You have unsaved changes. Are you sure you want to exit and discard those changes?"
+msgstr "Ke ndryshime të paruajtura. A je i sigurt se dëshiron të dalësh dhe të mos i ruash ato ndryshime?"
 
 #: TiffViewerCtl.resx$tsZoom.ToolTipText$Message
 msgid "Zoom"
@@ -1558,15 +1512,15 @@ msgstr "Zvogëlo"
 
 #: SettingsResources.resx$PageSizeUnit_Centimetre$Message
 msgid "cm"
-msgstr "cm"
+msgstr ""
 
 #: FAbout.resx$linkLabel2.Text$Message
 msgid "http://www.fatcow.com/free-icons"
-msgstr "http://www.fatcow.com/free-icons"
+msgstr ""
 
 #: FAbout.resx$linkLabel1.Text$Message
 msgid "http://www.naps2.com"
-msgstr "http://www.naps2.com"
+msgstr ""
 
 #: SettingsResources.resx$PageSizeUnit_Inch$Message
 msgid "in"
@@ -1574,7 +1528,7 @@ msgstr "inç"
 
 #: SettingsResources.resx$PageSizeUnit_Millimetre$Message
 msgid "mm"
-msgstr "mm"
+msgstr ""
 
 #: FViewer.resx$lblPageTotal.Text$Message
 #: MiscResources.resx$OfN$Message
@@ -1583,16 +1537,16 @@ msgstr "nga {0}"
 
 #: SettingsResources.resx$TwainImpl_X64$Message
 msgid "x64"
-msgstr "x64"
+msgstr ""
 
 #: MiscResources.resx$NamedPageSizeFormat$Message
 msgid "{0} ({1}x{2} {3})"
-msgstr "{0} ({1}x{2} {3})"
+msgstr ""
 
 #: FDownloadProgress.resx$labelSub.Text$Message
 #: MiscResources.resx$SizeProgress$Message
 msgid "{0} / {1} MB"
-msgstr "{0} / {1} MB"
+msgstr ""
 
 #: FDownloadProgress.resx$labelTop.Text$Message
 #: MiscResources.resx$FilesProgressFormat$Message
@@ -1600,12 +1554,8 @@ msgid "{0} / {1} files"
 msgstr "{0} / {1} skedarë"
 
 #: FRecover.resx$lblPrompt.Text$Message
-msgid ""
-"{0} image(s) scanned on {1} at {2} may not have been saved, and are "
-"recoverable. Do you want to recover them?"
-msgstr ""
-"{0} imazh(e) i(të) skanuar në {1} në {2} mund të mos jenë ruajtur, dhe janë "
-"të rikuperueshme. A dëshironi t'i rikuperoni ato?"
+msgid "{0} image(s) scanned on {1} at {2} may not have been saved, and are recoverable. Do you want to recover them?"
+msgstr "{0} imazh(e) i(të) skanuar në {1} në {2} mund të mos jenë ruajtur, dhe janë të rikuperueshme. A dëshironi t'i rikuperoni ato?"
 
 #: MiscResources.resx$ImagesSaved$Message
 msgid "{0} images saved"
@@ -1614,3 +1564,4 @@ msgstr "{0} imazhe u ruajtën"
 #: MiscResources.resx$PdfStatus$Message
 msgid "{0} of {1}"
 msgstr "{0} nga {1}"
+
