@@ -86,33 +86,6 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
 
-    <EmbeddedResource Remove="WinForms\FBlackWhite.*.resx" Condition="'$(Configuration)' == 'Debug'" />
-    <EmbeddedResource Update="WinForms\FBlackWhite.*.resx">
-      <DependentUpon>FBlackWhite.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Update="WinForms\FBlackWhite.resx">
-      <DependentUpon>FBlackWhite.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-
-    <EmbeddedResource Remove="WinForms\FBrightnessContrast.*.resx" Condition="'$(Configuration)' == 'Debug'" />
-    <EmbeddedResource Update="WinForms\FBrightnessContrast.*.resx">
-      <DependentUpon>FBrightnessContrast.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Update="WinForms\FBrightnessContrast.resx">
-      <DependentUpon>FBrightnessContrast.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-
-    <EmbeddedResource Remove="WinForms\FCrop.*.resx" Condition="'$(Configuration)' == 'Debug'" />
-    <EmbeddedResource Update="WinForms\FCrop.*.resx">
-      <DependentUpon>FCrop.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Update="WinForms\FCrop.resx">
-      <DependentUpon>FCrop.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-
     <EmbeddedResource Remove="WinForms\FDesktop.*.resx" Condition="'$(Configuration)' == 'Debug'" />
     <EmbeddedResource Update="WinForms\FDesktop.*.resx">
       <DependentUpon>FDesktop.cs</DependentUpon>
@@ -160,15 +133,6 @@
     </EmbeddedResource>
     <EmbeddedResource Update="WinForms\FError.resx">
       <DependentUpon>FError.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-
-    <EmbeddedResource Remove="WinForms\FHueSaturation.*.resx" Condition="'$(Configuration)' == 'Debug'" />
-    <EmbeddedResource Update="WinForms\FHueSaturation.*.resx">
-      <DependentUpon>FHueSaturation.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Update="WinForms\FHueSaturation.resx">
-      <DependentUpon>FHueSaturation.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
 
@@ -262,30 +226,12 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
 
-    <EmbeddedResource Remove="WinForms\FRotate.*.resx" Condition="'$(Configuration)' == 'Debug'" />
-    <EmbeddedResource Update="WinForms\FRotate.*.resx">
-      <DependentUpon>FRotate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Update="WinForms\FRotate.resx">
-      <DependentUpon>FRotate.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-
     <EmbeddedResource Remove="WinForms\FSelectDevice.*.resx" Condition="'$(Configuration)' == 'Debug'" />
     <EmbeddedResource Update="WinForms\FSelectDevice.*.resx">
       <DependentUpon>FSelectDevice.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Update="WinForms\FSelectDevice.resx">
       <DependentUpon>FSelectDevice.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-
-    <EmbeddedResource Remove="WinForms\FSharpen.*.resx" Condition="'$(Configuration)' == 'Debug'" />
-    <EmbeddedResource Update="WinForms\FSharpen.*.resx">
-      <DependentUpon>FSharpen.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Update="WinForms\FSharpen.resx">
-      <DependentUpon>FSharpen.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
 
@@ -327,15 +273,6 @@
     </EmbeddedResource>
     <EmbeddedResource Update="WinForms\TiffViewerCtl.resx">
       <DependentUpon>TiffViewerCtl.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-
-    <EmbeddedResource Remove="WinForms\ImageForm.*.resx" Condition="'$(Configuration)' == 'Debug'" />
-    <EmbeddedResource Update="WinForms\ImageForm.*.resx">
-      <DependentUpon>ImageForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Update="WinForms\ImageForm.resx">
-      <DependentUpon>ImageForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
 
