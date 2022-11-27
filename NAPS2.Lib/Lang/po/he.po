@@ -3,13 +3,14 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-09-17 20:27+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: 2022-11-26 21:57+0000\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: he\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Translate Toolkit 2.2.5\n"
+"X-Generator: Pootle 2.8\n"
+"X-POOTLE-MTIME: 1669499834.835977\n"
 
 #: SettingsResources.resx$Dpi_100$Message
 msgid "100 dpi"
@@ -136,11 +137,11 @@ msgstr ""
 msgid ""
 "An additional component is needed to import this PDF file. Would you like to "
 "download it now?"
-msgstr ""
+msgstr "נדרש רכיב נוסף כדי לייבא קובץ PDF זה. האם ברצונך להוריד אותו כעת?"
 
 #: MiscResources.resx$UpdateError$Message
 msgid "An error occured when trying to install the update"
-msgstr ""
+msgstr "אירעה שגיאה בעת ניסיון להתקין את העדכון"
 
 #: MiscResources.resx$AuthError$Message
 msgid "An error occurred when trying to authorize"
@@ -156,7 +157,7 @@ msgstr "תקלה בשמירת הקובץ"
 
 #: MiscResources.resx$ErrorEmailing$Message
 msgid "An error occurred when trying to send the email"
-msgstr ""
+msgstr "שגיאה התרחשה בעת הנסיון לשלוח מייל."
 
 #: MiscResources.resx$EmailError$Message
 msgid "An error occurred while trying to send an email"
@@ -170,7 +171,7 @@ msgstr "אירעה שגיאה במנהל ההתקן של הסורק"
 msgid ""
 "An operation is in progress. Are you sure you want to exit and cancel the "
 "operation?"
-msgstr ""
+msgstr "פעולה מתבצעת. האם אתה בטוח שברצונך לצאת ולבטל את הפעולה?"
 
 #: MiscResources.resx$BatchError$Message
 msgid "An unknown error ocurred during the batch scan"
@@ -178,7 +179,7 @@ msgstr "שגיאה בלתי ידוע אירע בעת סריקת אצווה"
 
 #: MiscResources.resx$UpdateAvailable$Message
 msgid "An update is available"
-msgstr ""
+msgstr "קיים עדכון זמין"
 
 #: MiscResources.resx$OcrUpdateAvailable$Message
 msgid "An update to OCR is available"
@@ -194,7 +195,7 @@ msgstr "החל על כל {0} התמונות שנבחרו"
 
 #: MiscResources.resx$ConfirmCancelBatch$Message
 msgid "Are you sure you want to cancel the batch scan?"
-msgstr ""
+msgstr "האם אתה בטוח שאתה רוצה לבטל את קבוצות הסריקות? "
 
 #: MiscResources.resx$ConfirmClearItems$Message
 msgid "Are you sure you want to clear {0} item(s)?"
@@ -234,7 +235,7 @@ msgstr ""
 
 #: SettingsResources.resx$TiffComp_Auto$Message
 msgid "Auto"
-msgstr ""
+msgstr "אוטומטי"
 
 #: FAutoSaveSettings.resx$$this.Text$Message
 #: FEditProfile.resx$linkAutoSaveSettings.Text$Message
@@ -259,7 +260,7 @@ msgstr "מס' מונה אוטומטי (ארבע ספרות)"
 
 #: FOcrSetup.resx$checkBoxRunInBG.Text$Message
 msgid "Automatically run OCR after scanning"
-msgstr ""
+msgstr "הרץ OCR בצורת אוטומטית בסוף הסריקה"
 
 #: SettingsResources.resx$PageSize_B4$Message
 msgid "B4 (250x353 mm)"
@@ -364,7 +365,7 @@ msgstr ""
 
 #: FAbout.resx$cbCheckForUpdates.Text$Message
 msgid "Check for updates"
-msgstr ""
+msgstr "בדוק עדכונים"
 
 #: MiscResources.resx$CheckingForUpdates$Message
 msgid "Checking"
@@ -389,7 +390,7 @@ msgstr "מחק הכל"
 
 #: FAutoSaveSettings.resx$cbClearAfterSave.Text$Message
 msgid "Clear images after saving"
-msgstr ""
+msgstr "נקה תמונות לאחר שמירה"
 
 #: MiscResources.resx$Close$Message
 msgid "Close"
@@ -402,7 +403,7 @@ msgstr "תאימות"
 
 #: FImageSettings.resx$label3.Text$Message
 msgid "Compression"
-msgstr ""
+msgstr "דחיסה"
 
 #: FEditProfile.resx$label7.Text$Message
 msgid "Contrast"
@@ -437,7 +438,7 @@ msgstr "חיתוך"
 
 #: FAdvancedScanSettings.resx$cbForcePageSizeCrop.Text$Message
 msgid "Crop to page size"
-msgstr ""
+msgstr "חתוך לגודל הדף"
 
 #: SettingsResources.resx$PageSize_Custom$Message
 msgid "Custom"
@@ -523,7 +524,7 @@ msgstr "שם תצוגה"
 
 #: MiscResources.resx$Donate$Message
 msgid "Donate"
-msgstr ""
+msgstr "תרום"
 
 #: FBatchPrompt.resx$btnDone.Text$Message
 #: FProfiles.resx$btnDone.Text$Message
@@ -570,7 +571,7 @@ msgstr "הגדרות דוא\"ל"
 
 #: FEditProfile.resx$cbAutoSave.Text$Message
 msgid "Enable Auto Save"
-msgstr ""
+msgstr "הפעל שמירה אוטומטית"
 
 #: FPdfSettings.resx$cbEncryptPdf.Text$Message
 msgid "Encrypt PDF"
@@ -613,7 +614,7 @@ msgstr "שם קובץ"
 #: FAutoSaveSettings.resx$lblFilePath.Text$Message
 #: FBatchScan.resx$lblFilePath.Text$Message
 msgid "File path"
-msgstr ""
+msgstr "נתיב קובץ"
 
 #: FDesktop.resx$tsFlip.Text$Message
 #: FViewer.resx$tsFlip.Text$Message
@@ -644,7 +645,7 @@ msgstr "זכוכית (משטח)"
 
 #: SettingsResources.resx$EmailProviderType_Gmail$Message
 msgid "Gmail"
-msgstr ""
+msgstr "Gmail"
 
 #: SettingsResources.resx$BitDepth_8Grayscale$Message
 msgid "Grayscale"
@@ -674,11 +675,11 @@ msgstr "תמונה"
 
 #: MiscResources.resx$FileTypeImageFiles$Message
 msgid "Image Files"
-msgstr ""
+msgstr "קבצי תמונה"
 
 #: FAdvancedScanSettings.resx$groupBox1.Text$Message
 msgid "Image Quality"
-msgstr ""
+msgstr "איכות תמונה"
 
 #: FDesktop.resx$tsImageSettings.Text$Message
 #: FImageSettings.resx$$this.Text$Message
@@ -687,7 +688,7 @@ msgstr "הגדרות תמונה"
 
 #: MiscResources.resx$ImageSaved$Message
 msgid "Image saved"
-msgstr ""
+msgstr "התמונה נשמרה"
 
 #: FDesktop.resx$tsImport.Text$Message
 msgid "Import"
@@ -699,7 +700,7 @@ msgstr ""
 
 #: MiscResources.resx$Importing$Message
 msgid "Importing"
-msgstr ""
+msgstr "מייבא"
 
 #: MiscResources.resx$ImportingFormat$Message
 msgid "Importing {0}"
@@ -759,7 +760,7 @@ msgstr ""
 
 #: FBatchScan.resx$rdLoadIntoNaps2.Text$Message
 msgid "Load images into NAPS2"
-msgstr ""
+msgstr "טען תמונות לתוך NAPS2"
 
 #: FDesktop.resx$tStrip.Text$Message
 msgid "Main toolbar"
@@ -788,7 +789,7 @@ msgstr "חודש (01-12)"
 #: FAutoSaveSettings.resx$linkPatchCodeInfo.Text$Message
 #: FBatchScan.resx$linkPatchCodeInfo.Text$Message
 msgid "More info"
-msgstr ""
+msgstr "מידע נוסף"
 
 #: FDesktop.resx$tsMove.SecondText$Message
 msgid "Move Down"
@@ -808,15 +809,15 @@ msgstr ""
 
 #: MiscResources.resx$NAPS2$Message
 msgid "NAPS2"
-msgstr ""
+msgstr "NAPS2"
 
 #: MiscResources.resx$DonatePrompt$Message
 msgid "NAPS2 is completely free. Consider making a donation"
-msgstr ""
+msgstr "NAPS2 הוא לגמרי בחינם. שקול לבצע תרומה"
 
 #: FPageSize.resx$label1.Text$Message
 msgid "Name (optional)"
-msgstr ""
+msgstr "שם: (לא חובה)"
 
 #: MiscResources.resx$NameMissing$Message
 msgid "Name missing"
@@ -898,7 +899,7 @@ msgstr "שפת OCR"
 
 #: FOcrSetup.resx$labelOcrMode.Text$Message
 msgid "OCR mode"
-msgstr ""
+msgstr "מצב OCR"
 
 #: FAbout.resx$okButton.Text$Message
 #: FAdvancedScanSettings.resx$btnOK.Text$Message
@@ -927,12 +928,12 @@ msgstr ""
 #: FAutoSaveSettings.resx$rdFilePerPage.Text$Message
 #: FBatchScan.resx$rdFilePerPage.Text$Message
 msgid "One file per page"
-msgstr ""
+msgstr "קובץ נפרד לכל דף"
 
 #: FAutoSaveSettings.resx$rdFilePerScan.Text$Message
 #: FBatchScan.resx$rdFilePerScan.Text$Message
 msgid "One file per scan"
-msgstr ""
+msgstr "קובץ אחד לכל סריקה"
 
 #: MiscResources.resx$FilesCouldNotBeDownloaded$Message
 msgid "One or more files could not be downloaded"
@@ -940,7 +941,7 @@ msgstr "תקלה בהורדת קובץ אחד או יותר"
 
 #: NotifyWidget.resx$openFolderToolStripMenuItem.Text$Message
 msgid "Open Folder"
-msgstr ""
+msgstr "פתח תיקייה"
 
 #: MiscResources.resx$ActiveOperations$Message
 msgid "Operation in Progress"
@@ -975,7 +976,7 @@ msgstr "הגדרות PDF"
 
 #: MiscResources.resx$PdfSaved$Message
 msgid "PDF saved"
-msgstr ""
+msgstr "PDF נשמר"
 
 #: SettingsResources.resx$PdfCompat_PdfA1B$Message
 msgid "PDF/A-1b"
@@ -1012,7 +1013,7 @@ msgstr "סיסמה"
 #: FDesktop.resx$ctxPaste.Text$Message
 #: FProfiles.resx$ctxPaste.Text$Message
 msgid "Paste"
-msgstr ""
+msgstr "הדבק"
 
 #: FAutoSaveSettings.resx$linkPlaceholders.Text$Message
 #: FBatchScan.resx$linkPlaceholders.Text$Message
@@ -1184,11 +1185,11 @@ msgstr ""
 
 #: FBatchScan.resx$rdSaveToSingleFile.Text$Message
 msgid "Save to a single file"
-msgstr ""
+msgstr "שמור לקובץ יחיד"
 
 #: FBatchScan.resx$rdSaveToMultipleFiles.Text$Message
 msgid "Save to multiple files"
-msgstr ""
+msgstr "שמור לקבצים מרובים"
 
 #: MiscResources.resx$BatchStatusSaving$Message
 msgid "Saving batch results"
@@ -1246,7 +1247,7 @@ msgstr "בחר הכל"
 
 #: FSelectDevice.resx$$this.Text$Message
 msgid "Select Source"
-msgstr ""
+msgstr "בחר מקור"
 
 #: MiscResources.resx$SelectProfileBeforeScan$Message
 msgid "Select a profile before clicking Scan"
@@ -1299,11 +1300,11 @@ msgstr ""
 
 #: FBatchScan.resx$btnStart.Text$Message
 msgid "Start"
-msgstr ""
+msgstr "התחל"
 
 #: FAdvancedScanSettings.resx$cbForcePageSize.Text$Message
 msgid "Stretch to page size"
-msgstr ""
+msgstr "מתח לגודל הדף"
 
 #: FPdfSettings.resx$label5.Text$Message
 msgid "Subject"

@@ -163,11 +163,11 @@ msgstr "En feil oppsto ved sending av epost"
 
 #: MiscResources.resx$EmailError$Message
 msgid "An error occurred while trying to send an email"
-msgstr ""
+msgstr "En feil oppsto ved forsøk på å sende en epost"
 
 #: MiscResources.resx$UnknownDriverError$Message
 msgid "An error occurred with the scanning driver"
-msgstr ""
+msgstr "Det oppstod en feil med skannerdriveren"
 
 #: MiscResources.resx$ExitWithActiveOperations$Message
 msgid ""
@@ -177,143 +177,143 @@ msgstr ""
 
 #: MiscResources.resx$BatchError$Message
 msgid "An unknown error ocurred during the batch scan"
-msgstr ""
+msgstr "En ukjent feil oppstod under serieskanningen"
 
 #: MiscResources.resx$UpdateAvailable$Message
 msgid "An update is available"
-msgstr ""
+msgstr "En oppdatering er tilgjengelig"
 
 #: MiscResources.resx$OcrUpdateAvailable$Message
 msgid "An update to OCR is available"
-msgstr ""
+msgstr "En oppdatering for OCR er tilgjengelig"
 
 #: FAdvancedScanSettings.resx$cbBrightnessContrastAfterScan.Text$Message
 msgid "Apply brightness/contrast after scan"
-msgstr ""
+msgstr "Tilfør lyshet/kontrast etter skanning"
 
 #: ImageForm.resx$checkboxApplyToSelected.Text$Message
 msgid "Apply to all {0} selected images"
-msgstr ""
+msgstr "Bruk på alle {0} valgte bilder"
 
 #: MiscResources.resx$ConfirmCancelBatch$Message
 msgid "Are you sure you want to cancel the batch scan?"
-msgstr ""
+msgstr "Er du sikker på at du vil avbryte serieskanningen?"
 
 #: MiscResources.resx$ConfirmClearItems$Message
 msgid "Are you sure you want to clear {0} item(s)?"
-msgstr ""
+msgstr "Er du sikker på at du vil slette {0} element(er)?"
 
 #: MiscResources.resx$ConfirmDelete$Message
 msgid "Are you sure you want to delete \"{0}\"?"
-msgstr ""
+msgstr "Er du sikker på at du vil slette \"{0}\"?"
 
 #: MiscResources.resx$ConfirmDeleteSingleProfile$Message
 msgid "Are you sure you want to delete the profile {0}?"
-msgstr ""
+msgstr "Er du sikker på at du vil slette profilen {0}?"
 
 #: MiscResources.resx$ConfirmDeleteItems$Message
 msgid "Are you sure you want to delete {0} item(s)?"
-msgstr ""
+msgstr "Er du sikker på at du vil slette {0} element(er)?"
 
 #: MiscResources.resx$ConfirmDeleteMultipleProfiles$Message
 msgid "Are you sure you want to delete {0} profiles?"
-msgstr ""
+msgstr "Er du sikker på at du vil slette {0} profiler?"
 
 #: MiscResources.resx$ConfirmResetImages$Message
 msgid "Are you sure you want undo your changes to {0} image(s)?"
-msgstr ""
+msgstr "Er du sikker på at du vil angre endringer på {0} bilde(r)?"
 
 #: FEmailSettings.resx$label1.Text$Message
 msgid "Attachment Name"
-msgstr ""
+msgstr "Vedleggsnavn"
 
 #: FPdfSettings.resx$label3.Text$Message
 msgid "Author"
-msgstr ""
+msgstr "Forfatter"
 
 #: FAuthorize.resx$$this.Text$Message
 msgid "Authorize"
-msgstr ""
+msgstr "Autoriser"
 
 #: SettingsResources.resx$TiffComp_Auto$Message
 msgid "Auto"
-msgstr ""
+msgstr "Auto"
 
 #: FAutoSaveSettings.resx$$this.Text$Message
 #: FEditProfile.resx$linkAutoSaveSettings.Text$Message
 msgid "Auto Save Settings"
-msgstr ""
+msgstr "Innstillinger for Automatisk Lagring"
 
 #: FPlaceholders.resx$label13.Text$Message
 msgid "Auto-incrementing number (1 digit)"
-msgstr ""
+msgstr "Auto-økningstall (1 siffer)"
 
 #: FPlaceholders.resx$label12.Text$Message
 msgid "Auto-incrementing number (2 digits)"
-msgstr ""
+msgstr "Auto-økningstall (2 siffer)"
 
 #: FPlaceholders.resx$label11.Text$Message
 msgid "Auto-incrementing number (3 digits)"
-msgstr ""
+msgstr "Auto-økningstall (3 siffer)"
 
 #: FPlaceholders.resx$label10.Text$Message
 msgid "Auto-incrementing number (4 digits)"
-msgstr ""
+msgstr "Auto-økningstall (4 siffer)"
 
 #: FOcrSetup.resx$checkBoxRunInBG.Text$Message
 msgid "Automatically run OCR after scanning"
-msgstr ""
+msgstr "Kjør OCR automatisk etter skanning"
 
 #: SettingsResources.resx$PageSize_B4$Message
 msgid "B4 (250x353 mm)"
-msgstr ""
+msgstr "B4 (250x353 mm)"
 
 #: SettingsResources.resx$PageSize_B5$Message
 msgid "B5 (176x250 mm)"
-msgstr ""
+msgstr "B5 (176x250 mm)"
 
 #: FBatchScan.resx$$this.Text$Message
 #: FDesktop.resx$tsBatchScan.Text$Message
 msgid "Batch Scan"
-msgstr ""
+msgstr "Serieskanning"
 
 #: MiscResources.resx$BatchStatusCancelled$Message
 msgid "Batch cancelled"
-msgstr ""
+msgstr "Serieskanning avbrutt"
 
 #: MiscResources.resx$BatchStatusComplete$Message
 msgid "Batch completed successfully"
-msgstr ""
+msgstr "Serieskanning fullført"
 
 #: MiscResources.resx$BatchStatusError$Message
 msgid "Batch scan stopped due to error"
-msgstr ""
+msgstr "Serieskanning avbrutt på grunn av feil"
 
 #: FEditProfile.resx$label3.Text$Message
 msgid "Bit depth"
-msgstr ""
+msgstr "Bitdybde"
 
 #: MiscResources.resx$FileTypeBmp$Message
 msgid "Bitmap Files (*.bmp)"
-msgstr ""
+msgstr "Bitmap Filer (*.bmp)"
 
 #: SettingsResources.resx$BitDepth_1BlackAndWhite$Message
 msgid "Black & White"
-msgstr ""
+msgstr "Svart-hvitt"
 
 #: FBlackWhite.resx$$this.Text$Message
 #: FDesktop.resx$tsBlackWhite.Text$Message
 #: FViewer.resx$tsBlackWhite.Text$Message
 msgid "Black and White"
-msgstr ""
+msgstr "Sort hvitt"
 
 #: FAdvancedScanSettings.resx$groupBox3.Text$Message
 msgid "Blank Pages"
-msgstr ""
+msgstr "Blanke sider"
 
 #: FEditProfile.resx$label6.Text$Message
 msgid "Brightness"
-msgstr ""
+msgstr "Lysstyrke"
 
 #: FBrightnessContrast.resx$$this.Text$Message
 #: FDesktop.resx$tsBrightnessContrast.Text$Message
@@ -346,19 +346,19 @@ msgstr ""
 #: MiscResources.resx$Cancel$Message
 #: OperationProgressNotifyWidget.resx$cancelToolStripMenuItem.Text$Message
 msgid "Cancel"
-msgstr ""
+msgstr "Avbryt"
 
 #: MiscResources.resx$CancelBatch$Message
 msgid "Cancel Batch"
-msgstr ""
+msgstr "Avbryt serieskanning"
 
 #: MiscResources.resx$BatchStatusCancelling$Message
 msgid "Cancelling"
-msgstr ""
+msgstr "Avbryter"
 
 #: SettingsResources.resx$HorizontalAlign_Center$Message
 msgid "Center"
-msgstr ""
+msgstr "Senter"
 
 #: FEmailSettings.resx$btnChangeProvider.Text$Message
 msgid "Change"
@@ -366,62 +366,62 @@ msgstr ""
 
 #: FAbout.resx$cbCheckForUpdates.Text$Message
 msgid "Check for updates"
-msgstr ""
+msgstr "Se etter oppdateringer"
 
 #: MiscResources.resx$CheckingForUpdates$Message
 msgid "Checking"
-msgstr ""
+msgstr "Sjekker"
 
 #: FEmailProvider.resx$$this.Text$Message
 msgid "Choose Email Provider"
-msgstr ""
+msgstr "Velg eposttilbyder"
 
 #: MiscResources.resx$ChooseProfile$Message
 msgid "Choose Profile"
-msgstr ""
+msgstr "Velg profil"
 
 #: FEditProfile.resx$btnChooseDevice.Text$Message
 msgid "Choose device"
-msgstr ""
+msgstr "Velg enhet"
 
 #: FDesktop.resx$tsClear.Text$Message
 #: MiscResources.resx$Clear$Message
 msgid "Clear"
-msgstr ""
+msgstr "Tøm"
 
 #: FAutoSaveSettings.resx$cbClearAfterSave.Text$Message
 msgid "Clear images after saving"
-msgstr ""
+msgstr "Tøm bilder etter lagring"
 
 #: MiscResources.resx$Close$Message
 msgid "Close"
-msgstr ""
+msgstr "Lukk"
 
 #: FAdvancedScanSettings.resx$groupBox2.Text$Message
 #: FPdfSettings.resx$groupCompat.Text$Message
 msgid "Compatibility"
-msgstr ""
+msgstr "Kompatibilitet"
 
 #: FImageSettings.resx$label3.Text$Message
 msgid "Compression"
-msgstr ""
+msgstr "Komprimering"
 
 #: FEditProfile.resx$label7.Text$Message
 msgid "Contrast"
-msgstr ""
+msgstr "Kontrast"
 
 #: FDesktop.resx$ctxCopy.Text$Message
 #: FProfiles.resx$ctxCopy.Text$Message
 msgid "Copy"
-msgstr ""
+msgstr "Kopier"
 
 #: MiscResources.resx$CopyProgress$Message
 msgid "Copy Progress"
-msgstr ""
+msgstr "Kopieringsfremdrift"
 
 #: MiscResources.resx$Copying$Message
 msgid "Copying"
-msgstr ""
+msgstr "Kopierer"
 
 #: FAbout.resx$labelCopyright.Text$Message
 msgid "Copyright 2009, 2012-2018 NAPS2 Contributors"
@@ -429,34 +429,34 @@ msgstr ""
 
 #: FAdvancedScanSettings.resx$label3.Text$Message
 msgid "Coverage Threshold"
-msgstr ""
+msgstr "Dekningsterskel"
 
 #: FCrop.resx$$this.Text$Message
 #: FDesktop.resx$tsCrop.Text$Message
 #: FViewer.resx$tsCrop.Text$Message
 msgid "Crop"
-msgstr ""
+msgstr "Beskjær"
 
 #: FAdvancedScanSettings.resx$cbForcePageSizeCrop.Text$Message
 msgid "Crop to page size"
-msgstr ""
+msgstr "Beskjær til sidestørrelse"
 
 #: SettingsResources.resx$PageSize_Custom$Message
 msgid "Custom"
-msgstr ""
+msgstr "Egendefinert"
 
 #: MiscResources.resx$CustomPageSizeFormat$Message
 msgid "Custom ({0}x{1} {2})"
-msgstr ""
+msgstr "Egendefinert ({0}x{1} {2})"
 
 #: FPageSize.resx$$this.Text$Message
 msgid "Custom Page Size"
-msgstr ""
+msgstr "Egendefinert Sidestørrelse"
 
 #: FDesktop.resx$tsCustomRotation.Text$Message
 #: FViewer.resx$tsCustomRotation.Text$Message
 msgid "Custom Rotation"
-msgstr ""
+msgstr "Egendefinert rotasjon"
 
 #: SettingsResources.resx$EmailProviderType_CustomSmtp$Message
 msgid "Custom SMTP"
@@ -464,21 +464,21 @@ msgstr ""
 
 #: FPlaceholders.resx$label6.Text$Message
 msgid "Day (01-31)"
-msgstr ""
+msgstr "Dag (01-31)"
 
 #: SettingsResources.resx$PdfCompat_Default$Message
 #: SettingsResources.resx$TwainImpl_Default$Message
 msgid "Default"
-msgstr ""
+msgstr "Standard"
 
 #: FImageSettings.resx$label1.Text$Message
 #: FPdfSettings.resx$label1.Text$Message
 msgid "Default File Path"
-msgstr ""
+msgstr "Standard filsti"
 
 #: FDesktop.resx$tsDeinterleave.Text$Message
 msgid "Deinterleave"
-msgstr ""
+msgstr "Deinterleave"
 
 #: FAdvancedScanSettings.resx$cbWiaDelayBetweenScans.Text$Message
 msgid "Delay between scans (WIA)"
@@ -517,7 +517,7 @@ msgstr "Enhet"
 
 #: FPageSize.resx$label2.Text$Message
 msgid "Dimensions"
-msgstr ""
+msgstr "Størrelser"
 
 #: FEditProfile.resx$label8.Text$Message
 msgid "Display name"
@@ -563,28 +563,28 @@ msgstr "Send PDF i epost"
 
 #: MiscResources.resx$EmailPdfProgress$Message
 msgid "Email PDF Progress"
-msgstr ""
+msgstr "Epost PDF Fremdrift"
 
 #: FDesktop.resx$tsEmailSettings.Text$Message
 #: FEmailSettings.resx$$this.Text$Message
 msgid "Email Settings"
-msgstr ""
+msgstr "E-postinnstillinger"
 
 #: FEditProfile.resx$cbAutoSave.Text$Message
 msgid "Enable Auto Save"
-msgstr ""
+msgstr "Aktiver Autolagring"
 
 #: FPdfSettings.resx$cbEncryptPdf.Text$Message
 msgid "Encrypt PDF"
-msgstr ""
+msgstr "Krypter PDF"
 
 #: FPdfSettings.resx$groupProtection.Text$Message
 msgid "Encryption"
-msgstr ""
+msgstr "Kryptering"
 
 #: MiscResources.resx$FileTypeEmf$Message
 msgid "Enhanced Windows MetaFile (*.emf)"
-msgstr ""
+msgstr "Enhanced Windows MetaFile (*.emf)"
 
 #: FError.resx$$this.Text$Message
 #: MiscResources.resx$Error$Message
@@ -598,33 +598,33 @@ msgstr "Anslått størrelse for nedlasting: {0} MB"
 
 #: MiscResources.resx$FileTypeExif$Message
 msgid "Exchangeable Image File (*.exif)"
-msgstr ""
+msgstr "Exchangeable Image File (*.exif)"
 
 #: FAdvancedScanSettings.resx$cbExcludeBlankPages.Text$Message
 msgid "Exclude blank pages"
-msgstr ""
+msgstr "Utelat blanke sider"
 
 #: SettingsResources.resx$Source_Feeder$Message
 msgid "Feeder"
-msgstr ""
+msgstr "Mater"
 
 #: FPlaceholders.resx$label1.Text$Message
 msgid "File Name"
-msgstr ""
+msgstr "Filnavn"
 
 #: FAutoSaveSettings.resx$lblFilePath.Text$Message
 #: FBatchScan.resx$lblFilePath.Text$Message
 msgid "File path"
-msgstr ""
+msgstr "Filsti"
 
 #: FDesktop.resx$tsFlip.Text$Message
 #: FViewer.resx$tsFlip.Text$Message
 msgid "Flip"
-msgstr ""
+msgstr "Speilvend"
 
 #: FAdvancedScanSettings.resx$cbFlipDuplex.Text$Message
 msgid "Flip duplexed pages"
-msgstr ""
+msgstr "Speilvend dupleks-sider"
 
 #: FImageSettings.resx$lblWarning.Text$Message
 msgid ""
@@ -634,7 +634,7 @@ msgstr ""
 
 #: MiscResources.resx$FileTypeGif$Message
 msgid "GIF File (*.gif)"
-msgstr ""
+msgstr "GIF File (*.gif)"
 
 #: FOcrSetup.resx$linkGetLanguages.Text$Message
 msgid "Get more languages"
@@ -642,7 +642,7 @@ msgstr "Installer flere språk"
 
 #: SettingsResources.resx$Source_Glass$Message
 msgid "Glass"
-msgstr ""
+msgstr "Glass"
 
 #: SettingsResources.resx$EmailProviderType_Gmail$Message
 msgid "Gmail"
@@ -650,15 +650,15 @@ msgstr ""
 
 #: SettingsResources.resx$BitDepth_8Grayscale$Message
 msgid "Grayscale"
-msgstr ""
+msgstr "Gråtoner"
 
 #: FEditProfile.resx$label9.Text$Message
 msgid "Horizontal align"
-msgstr ""
+msgstr "Horisontal justering"
 
 #: FPlaceholders.resx$label7.Text$Message
 msgid "Hour (0-23)"
-msgstr ""
+msgstr "Time (0-23)"
 
 #: FDesktop.resx$tsHueSaturation.Text$Message
 #: FHueSaturation.resx$$this.Text$Message
@@ -672,24 +672,24 @@ msgstr "Ikoner fra"
 
 #: FDesktop.resx$tsdImage.Text$Message
 msgid "Image"
-msgstr ""
+msgstr "Bilde"
 
 #: MiscResources.resx$FileTypeImageFiles$Message
 msgid "Image Files"
-msgstr ""
+msgstr "Bildefiler"
 
 #: FAdvancedScanSettings.resx$groupBox1.Text$Message
 msgid "Image Quality"
-msgstr ""
+msgstr "Bildekvalitet"
 
 #: FDesktop.resx$tsImageSettings.Text$Message
 #: FImageSettings.resx$$this.Text$Message
 msgid "Image Settings"
-msgstr ""
+msgstr "Innstillinger for bilde"
 
 #: MiscResources.resx$ImageSaved$Message
 msgid "Image saved"
-msgstr ""
+msgstr "Bilde lagret"
 
 #: FDesktop.resx$tsImport.Text$Message
 msgid "Import"
@@ -697,7 +697,7 @@ msgstr "Importer"
 
 #: MiscResources.resx$ImportProgress$Message
 msgid "Import Progress"
-msgstr ""
+msgstr "Importframgang"
 
 #: MiscResources.resx$Importing$Message
 msgid "Importing"
@@ -1084,7 +1084,7 @@ msgstr ""
 
 #: MiscResources.resx$RecoveryProgress$Message
 msgid "Recovery Progress"
-msgstr ""
+msgstr "Gjenopprettingsfremdrift"
 
 #: FEmailSettings.resx$cbRememberSettings.Text$Message
 #: FImageSettings.resx$cbRememberSettings.Text$Message
@@ -1169,7 +1169,7 @@ msgstr "Lagre bilder"
 
 #: MiscResources.resx$SaveImagesProgress$Message
 msgid "Save Images Progress"
-msgstr ""
+msgstr "Lagre Bilder Fremdrift"
 
 #: FDesktop.resx$tsdSavePDF.Text$Message
 #: FViewer.resx$tsSavePDF.Text$Message
@@ -1178,23 +1178,23 @@ msgstr "Lagre PDF"
 
 #: MiscResources.resx$SavePdfProgress$Message
 msgid "Save PDF Progress"
-msgstr ""
+msgstr "Lagre PDF Fremdrift"
 
 #: FBatchScan.resx$rdSaveToSingleFile.Text$Message
 msgid "Save to a single file"
-msgstr ""
+msgstr "Lagre til en enkelt fil"
 
 #: FBatchScan.resx$rdSaveToMultipleFiles.Text$Message
 msgid "Save to multiple files"
-msgstr ""
+msgstr "Lagre til flere filer"
 
 #: MiscResources.resx$BatchStatusSaving$Message
 msgid "Saving batch results"
-msgstr ""
+msgstr "Lagrer Batch resultat"
 
 #: MiscResources.resx$SavingFormat$Message
 msgid "Saving {0}"
-msgstr ""
+msgstr "Lagrer {0}"
 
 #: FEditProfile.resx$label10.Text$Message
 msgid "Scale"
@@ -1202,7 +1202,7 @@ msgstr "Skalering"
 
 #: TiffViewerCtl.resx$tsStretch.ToolTipText$Message
 msgid "Scale With Window"
-msgstr ""
+msgstr "Skaler med Vindu"
 
 #: FBatchPrompt.resx$btnScan.Text$Message
 #: FDesktop.resx$tsScan.Text$Message
@@ -1214,7 +1214,7 @@ msgstr "Skann"
 
 #: FBatchScan.resx$groupboxScanConfig.Text$Message
 msgid "Scan Configuration"
-msgstr ""
+msgstr "Skanneoppsett"
 
 #: MiscResources.resx$ScannedImage$Message
 msgid "Scanned Image"
@@ -1224,19 +1224,19 @@ msgstr "Skannet bilde"
 #: MiscResources.resx$BatchStatusPage$Message
 #: MiscResources.resx$ScanPageProgress$Message
 msgid "Scanning page {0}"
-msgstr ""
+msgstr "Skanner side {0}"
 
 #: MiscResources.resx$BatchStatusScanPage$Message
 msgid "Scanning page {0} (scan {1})"
-msgstr ""
+msgstr "Skanner side {0} (skanning {1})"
 
 #: FPlaceholders.resx$label9.Text$Message
 msgid "Second (00-59)"
-msgstr ""
+msgstr "Sekund (00-59)"
 
 #: FSelectDevice.resx$btnSelect.Text$Message
 msgid "Select"
-msgstr ""
+msgstr "Velg"
 
 #: FDesktop.resx$ctxSelectAll.Text$Message
 msgid "Select All"
@@ -1244,7 +1244,7 @@ msgstr "Velg alle"
 
 #: FSelectDevice.resx$$this.Text$Message
 msgid "Select Source"
-msgstr ""
+msgstr "Velg kilde"
 
 #: MiscResources.resx$SelectProfileBeforeScan$Message
 msgid "Select a profile before clicking Scan"
@@ -1252,7 +1252,7 @@ msgstr "Velg en profil før du klikker Skann"
 
 #: FOcrLanguageDownload.resx$label3.Text$Message
 msgid "Select one or more languages"
-msgstr ""
+msgstr "Velg ett eller flere språk"
 
 #: FDesktop.resx$tsEmailPDFSelected.Text$Message
 #: FDesktop.resx$tsReverseSelected.Text$Message
@@ -1260,7 +1260,7 @@ msgstr ""
 #: FDesktop.resx$tsSavePDFSelected.Text$Message
 #: MiscResources.resx$SelectedCount$Message
 msgid "Selected ({0})"
-msgstr ""
+msgstr "Valgt ({0})"
 
 #: FAutoSaveSettings.resx$rdSeparateByPatchT.Text$Message
 #: FBatchScan.resx$rdSeparateByPatchT.Text$Message
@@ -1269,7 +1269,7 @@ msgstr ""
 
 #: FProfiles.resx$ctxSetDefault.Text$Message
 msgid "Set Default"
-msgstr ""
+msgstr "Angi standard"
 
 #: FDesktop.resx$tsSharpen.Text$Message
 #: FSharpen.resx$$this.Text$Message
@@ -1280,7 +1280,7 @@ msgstr ""
 #: FPdfSettings.resx$cbShowOwnerPassword.Text$Message
 #: FPdfSettings.resx$cbShowUserPassword.Text$Message
 msgid "Show"
-msgstr ""
+msgstr "Vis"
 
 #: FImageSettings.resx$cbSinglePageTiff.Text$Message
 msgid "Single page files"
@@ -1288,7 +1288,7 @@ msgstr ""
 
 #: FBatchScan.resx$rdSingleScan.Text$Message
 msgid "Single scan"
-msgstr ""
+msgstr "Enkeltskanning"
 
 #: FImageSettings.resx$cbSkipSavePrompt.Text$Message
 #: FPdfSettings.resx$cbSkipSavePrompt.Text$Message

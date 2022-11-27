@@ -14,39 +14,39 @@ msgstr ""
 
 #: SettingsResources.resx$Dpi_100$Message
 msgid "100 dpi"
-msgstr "100 dpi"
+msgstr "100 نقطة لكل بوصة"
 
 #: SettingsResources.resx$Dpi_1200$Message
 msgid "1200 dpi"
-msgstr "1200 dpi"
+msgstr "1200 نقطة لكل بوصة"
 
 #: SettingsResources.resx$Dpi_150$Message
 msgid "150 dpi"
-msgstr "150 dpi"
+msgstr "150 نقطة لكل بوصة"
 
 #: SettingsResources.resx$Dpi_200$Message
 msgid "200 dpi"
-msgstr "200 dpi"
+msgstr "200 نقطة لكل بوصة"
 
 #: SettingsResources.resx$BitDepth_24Color$Message
 msgid "24-bit Color"
-msgstr "لون 24 بت"
+msgstr "لون 24-بت"
 
 #: SettingsResources.resx$Dpi_300$Message
 msgid "300 dpi"
-msgstr "300 dpi"
+msgstr "300 نقطة لكل بوصة"
 
 #: SettingsResources.resx$Dpi_400$Message
 msgid "400 dpi"
-msgstr "400 dpi"
+msgstr "400 نقطة لكل بوصة"
 
 #: SettingsResources.resx$Dpi_600$Message
 msgid "600 dpi"
-msgstr "600 dpi"
+msgstr "600 نقطة لكل بوصة"
 
 #: SettingsResources.resx$Dpi_800$Message
 msgid "800 dpi"
-msgstr "800 dpi"
+msgstr "800 نقطة لكل بوصة"
 
 #: SettingsResources.resx$PageSize_A3$Message
 msgid "A3 (297x420 mm)"
@@ -144,11 +144,11 @@ msgstr ""
 
 #: MiscResources.resx$UpdateError$Message
 msgid "An error occured when trying to install the update"
-msgstr ""
+msgstr "حدث خطأ ما أثناء تثبيت التحديثات‏"
 
 #: MiscResources.resx$AuthError$Message
 msgid "An error occurred when trying to authorize"
-msgstr ""
+msgstr "حدث خطأ أثناء محاولة التوثيق‏"
 
 #: MiscResources.resx$AutoSaveError$Message
 msgid "An error occurred when trying to auto save"
@@ -160,7 +160,7 @@ msgstr "حدث خطأ أثناء محاولة حفظ الملف"
 
 #: MiscResources.resx$ErrorEmailing$Message
 msgid "An error occurred when trying to send the email"
-msgstr ""
+msgstr "حدث خطأ أثناء محاولة ارسال البريد الالكتروني‏"
 
 #: MiscResources.resx$EmailError$Message
 msgid "An error occurred while trying to send an email"
@@ -175,6 +175,7 @@ msgid ""
 "An operation is in progress. Are you sure you want to exit and cancel the "
 "operation?"
 msgstr ""
+"هناك عملية قيد التنفيذ الآن. هل أنت متأكد أنك تريد إلغاء العملية والخروج؟‏"
 
 #: MiscResources.resx$BatchError$Message
 msgid "An unknown error ocurred during the batch scan"
@@ -182,7 +183,7 @@ msgstr "حدث خطأ غير معروف أثناء المسح الضوئي عل�
 
 #: MiscResources.resx$UpdateAvailable$Message
 msgid "An update is available"
-msgstr ""
+msgstr "هناك تحديث متاح‏"
 
 #: MiscResources.resx$OcrUpdateAvailable$Message
 msgid "An update to OCR is available"
@@ -198,7 +199,7 @@ msgstr "تطبيق على كل الصور المحددة وعددها {0}"
 
 #: MiscResources.resx$ConfirmCancelBatch$Message
 msgid "Are you sure you want to cancel the batch scan?"
-msgstr ""
+msgstr "هل أنت متأكد من أنك تريد الغاء عملية المسح ؟"
 
 #: MiscResources.resx$ConfirmClearItems$Message
 msgid "Are you sure you want to clear {0} item(s)?"
@@ -235,7 +236,7 @@ msgstr "المؤلف"
 
 #: FAuthorize.resx$$this.Text$Message
 msgid "Authorize"
-msgstr ""
+msgstr "رَخّص"
 
 #: SettingsResources.resx$TiffComp_Auto$Message
 msgid "Auto"
@@ -264,7 +265,7 @@ msgstr "رقم متزايد تلقائياً (4 أعداد)"
 
 #: FOcrSetup.resx$checkBoxRunInBG.Text$Message
 msgid "Automatically run OCR after scanning"
-msgstr ""
+msgstr "مباشرة اقلاع قارئ الحروف بعد الفحص"
 
 #: SettingsResources.resx$PageSize_B4$Message
 msgid "B4 (250x353 mm)"
@@ -306,9 +307,8 @@ msgstr "أبيض و أسود"
 #: FBlackWhite.resx$$this.Text$Message
 #: FDesktop.resx$tsBlackWhite.Text$Message
 #: FViewer.resx$tsBlackWhite.Text$Message
-#, fuzzy
 msgid "Black and White"
-msgstr "أبيض و أسود"
+msgstr "أبيض و أسود‬"
 
 #: FAdvancedScanSettings.resx$groupBox3.Text$Message
 msgid "Blank Pages"
@@ -322,7 +322,7 @@ msgstr "السطوع"
 #: FDesktop.resx$tsBrightnessContrast.Text$Message
 #: FViewer.resx$tsBrightnessContrast.Text$Message
 msgid "Brightness / Contrast"
-msgstr ""
+msgstr "السطوع-التباين"
 
 #: SettingsResources.resx$TiffComp_Ccitt4$Message
 msgid "CCITT4"
@@ -353,7 +353,7 @@ msgstr "إلغاء"
 
 #: MiscResources.resx$CancelBatch$Message
 msgid "Cancel Batch"
-msgstr ""
+msgstr "إلغاء العملية"
 
 #: MiscResources.resx$BatchStatusCancelling$Message
 msgid "Cancelling"
@@ -365,19 +365,19 @@ msgstr "منتصف"
 
 #: FEmailSettings.resx$btnChangeProvider.Text$Message
 msgid "Change"
-msgstr ""
+msgstr "تغيير"
 
 #: FAbout.resx$cbCheckForUpdates.Text$Message
 msgid "Check for updates"
-msgstr ""
+msgstr "التحقق من وجود تحديثات:"
 
 #: MiscResources.resx$CheckingForUpdates$Message
 msgid "Checking"
-msgstr ""
+msgstr "يجري الفحص..."
 
 #: FEmailProvider.resx$$this.Text$Message
 msgid "Choose Email Provider"
-msgstr ""
+msgstr "اختر مقدم خدمة الاميل"
 
 #: MiscResources.resx$ChooseProfile$Message
 msgid "Choose Profile"
@@ -407,7 +407,7 @@ msgstr "التوافق"
 
 #: FImageSettings.resx$label3.Text$Message
 msgid "Compression"
-msgstr ""
+msgstr "الضغط"
 
 #: FEditProfile.resx$label7.Text$Message
 msgid "Contrast"
@@ -428,7 +428,7 @@ msgstr "ينسخ"
 
 #: FAbout.resx$labelCopyright.Text$Message
 msgid "Copyright 2009, 2012-2018 NAPS2 Contributors"
-msgstr ""
+msgstr "حق النشر 2009 , 2002-2018 NAPS2 مساهم"
 
 #: FAdvancedScanSettings.resx$label3.Text$Message
 msgid "Coverage Threshold"
@@ -442,7 +442,7 @@ msgstr "قطع"
 
 #: FAdvancedScanSettings.resx$cbForcePageSizeCrop.Text$Message
 msgid "Crop to page size"
-msgstr ""
+msgstr "اقتصاص لحجم الصفحة"
 
 #: SettingsResources.resx$PageSize_Custom$Message
 msgid "Custom"
@@ -463,7 +463,7 @@ msgstr "استدارة مخصصة"
 
 #: SettingsResources.resx$EmailProviderType_CustomSmtp$Message
 msgid "Custom SMTP"
-msgstr ""
+msgstr "بروتوكول نقل البريد البسيط المخصص"
 
 #: FPlaceholders.resx$label6.Text$Message
 msgid "Day (01-31)"
@@ -504,7 +504,7 @@ msgstr ""
 
 #: MiscResources.resx$AutoDeskewProgress$Message
 msgid "Deskew Progress"
-msgstr ""
+msgstr "تقدم Deskew"
 
 #: FAdvancedScanSettings.resx$cbAutoDeskew.Text$Message
 msgid "Deskew scanned pages"
@@ -512,7 +512,7 @@ msgstr ""
 
 #: MiscResources.resx$AutoDeskewing$Message
 msgid "Deskewing"
-msgstr ""
+msgstr "مسح ضوئي"
 
 #: FEditProfile.resx$label1.Text$Message
 msgid "Device"
@@ -528,7 +528,7 @@ msgstr "اسم العرض"
 
 #: MiscResources.resx$Donate$Message
 msgid "Donate"
-msgstr ""
+msgstr "تبرع"
 
 #: FBatchPrompt.resx$btnDone.Text$Message
 #: FProfiles.resx$btnDone.Text$Message
@@ -545,7 +545,7 @@ msgstr "خطأ في التنزيل"
 
 #: MiscResources.resx$DownloadNeeded$Message
 msgid "Download Needed"
-msgstr ""
+msgstr "تحميل اللوازم"
 
 #: FDownloadProgress.resx$$this.Text$Message
 msgid "Download Progress"
@@ -649,7 +649,7 @@ msgstr "الزجاج"
 
 #: SettingsResources.resx$EmailProviderType_Gmail$Message
 msgid "Gmail"
-msgstr ""
+msgstr "Gmail"
 
 #: SettingsResources.resx$BitDepth_8Grayscale$Message
 msgid "Grayscale"
@@ -667,7 +667,7 @@ msgstr "ساعة (0-23)"
 #: FHueSaturation.resx$$this.Text$Message
 #: FViewer.resx$tsHueSaturation.Text$Message
 msgid "Hue / Saturation"
-msgstr ""
+msgstr "التدرج والتشبع"
 
 #: FAbout.resx$label1.Text$Message
 msgid "Icons from"
@@ -712,7 +712,7 @@ msgstr "يستورد {0}"
 
 #: MiscResources.resx$Install$Message
 msgid "Install {0}"
-msgstr ""
+msgstr "تنصيب {0}"
 
 #: MiscResources.resx$InstallComplete$Message
 msgid "Installation Complete"
@@ -862,7 +862,7 @@ msgstr "لم يتم العثور على أي جهاز مسح الضوئي"
 
 #: MiscResources.resx$NoUpdates$Message
 msgid "No updates available"
-msgstr ""
+msgstr "لا يوجد تحديثات"
 
 #: SettingsResources.resx$TiffComp_None$Message
 #, fuzzy
@@ -949,7 +949,7 @@ msgstr "فتح المجلد"
 
 #: MiscResources.resx$ActiveOperations$Message
 msgid "Operation in Progress"
-msgstr ""
+msgstr "العملية قيد التقدم"
 
 #: SettingsResources.resx$EmailProviderType_OutlookWeb$Message
 msgid "Outlook Web Access"
@@ -1068,7 +1068,7 @@ msgstr ""
 
 #: FEmailSettings.resx$groupBox1.Text$Message
 msgid "Provider"
-msgstr ""
+msgstr "مزود"
 
 #: FBatchPrompt.resx$lblStatus.Text$Message
 msgid "Ready for scan {0}"
@@ -1289,7 +1289,7 @@ msgstr "إظهار"
 
 #: FImageSettings.resx$cbSinglePageTiff.Text$Message
 msgid "Single page files"
-msgstr ""
+msgstr "صفحه واحده"
 
 #: FBatchScan.resx$rdSingleScan.Text$Message
 msgid "Single scan"
@@ -1322,7 +1322,7 @@ msgstr "تعريف TWAIN"
 
 #: FError.resx$linkDetails.Text$Message
 msgid "Technical Details"
-msgstr ""
+msgstr "تفاصيل تقنيه"
 
 #: MiscResources.resx$TesseractNotAvailable$Message
 msgid ""
@@ -1404,7 +1404,7 @@ msgstr "الماسح الضوئي المحدد غير متصل"
 
 #: FImageSettings.resx$groupTiff.Text$Message
 msgid "Tiff Options"
-msgstr ""
+msgstr "خيارات Tiff"
 
 #: FBatchScan.resx$lblTimeBetweenScans.Text$Message
 msgid "Time between scans (seconds)"
@@ -1436,11 +1436,11 @@ msgstr ""
 
 #: MiscResources.resx$Updating$Message
 msgid "Updating"
-msgstr ""
+msgstr "تحديث"
 
 #: MiscResources.resx$UploadingEmail$Message
 msgid "Uploading email"
-msgstr ""
+msgstr "تحميل الرساله"
 
 #: FEditProfile.resx$rdbNative.Text$Message
 msgid "Use native UI"
@@ -1478,7 +1478,7 @@ msgstr "في انتظار TWAIN للإكتمال"
 
 #: FAuthorize.resx$lblWaiting.Text$Message
 msgid "Waiting for authorization"
-msgstr ""
+msgstr "انتظر التفويض"
 
 #: MiscResources.resx$BatchStatusWaitingForScan$Message
 msgid "Waiting for scan {0}"

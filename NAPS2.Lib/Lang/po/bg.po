@@ -368,11 +368,11 @@ msgstr "Проверка за обновяване"
 
 #: MiscResources.resx$CheckingForUpdates$Message
 msgid "Checking"
-msgstr ""
+msgstr "Проверяване"
 
 #: FEmailProvider.resx$$this.Text$Message
 msgid "Choose Email Provider"
-msgstr ""
+msgstr "Избери е-майл доставчик"
 
 #: MiscResources.resx$ChooseProfile$Message
 msgid "Choose Profile"
@@ -402,7 +402,7 @@ msgstr "Съвместимост"
 
 #: FImageSettings.resx$label3.Text$Message
 msgid "Compression"
-msgstr ""
+msgstr "Компресиране"
 
 #: FEditProfile.resx$label7.Text$Message
 msgid "Contrast"
@@ -482,7 +482,7 @@ msgstr "Deinterleave"
 
 #: FAdvancedScanSettings.resx$cbWiaDelayBetweenScans.Text$Message
 msgid "Delay between scans (WIA)"
-msgstr ""
+msgstr "Пауза между сканиранията (WIA)"
 
 #: FDesktop.resx$ctxDelete.Text$Message
 #: FDesktop.resx$tsDelete.Text$Message

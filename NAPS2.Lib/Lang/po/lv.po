@@ -3,13 +3,14 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-09-17 20:27+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: 2018-09-17 20:24+0000\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: lv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Translate Toolkit 2.2.5\n"
+"X-Generator: Pootle 2.8\n"
+"X-POOTLE-MTIME: 1537215879.438276\n"
 
 #: SettingsResources.resx$Dpi_100$Message
 msgid "100 dpi"
@@ -142,11 +143,11 @@ msgstr ""
 
 #: MiscResources.resx$UpdateError$Message
 msgid "An error occured when trying to install the update"
-msgstr ""
+msgstr "Notikusi kļūda mēģinot instalēt jauninājumu"
 
 #: MiscResources.resx$AuthError$Message
 msgid "An error occurred when trying to authorize"
-msgstr ""
+msgstr "Notikusi kļūda mēģinot autorizēt"
 
 #: MiscResources.resx$AutoSaveError$Message
 msgid "An error occurred when trying to auto save"
@@ -158,7 +159,7 @@ msgstr "Notika kļūda mēģinot saglabāt datni"
 
 #: MiscResources.resx$ErrorEmailing$Message
 msgid "An error occurred when trying to send the email"
-msgstr ""
+msgstr "Notikusi kļūda mēģinot sūtīt e-pastu"
 
 #: MiscResources.resx$EmailError$Message
 msgid "An error occurred while trying to send an email"
@@ -173,6 +174,8 @@ msgid ""
 "An operation is in progress. Are you sure you want to exit and cancel the "
 "operation?"
 msgstr ""
+"Notiek darbība. Vai esat pārliecināti, ka vēlaties iziet un pārtraukt "
+"darbību?"
 
 #: MiscResources.resx$BatchError$Message
 msgid "An unknown error ocurred during the batch scan"
@@ -180,7 +183,7 @@ msgstr "Notika nezināma kļūda partijas skenēšanas laikā"
 
 #: MiscResources.resx$UpdateAvailable$Message
 msgid "An update is available"
-msgstr ""
+msgstr "Pieejams atjauninājums"
 
 #: MiscResources.resx$OcrUpdateAvailable$Message
 msgid "An update to OCR is available"
@@ -237,7 +240,7 @@ msgstr "Autors"
 
 #: FAuthorize.resx$$this.Text$Message
 msgid "Authorize"
-msgstr ""
+msgstr "Autorizēt"
 
 #: SettingsResources.resx$TiffComp_Auto$Message
 msgid "Auto"
@@ -266,7 +269,7 @@ msgstr "Automātiski palielināt skaitli (4 cipari)"
 
 #: FOcrSetup.resx$checkBoxRunInBG.Text$Message
 msgid "Automatically run OCR after scanning"
-msgstr ""
+msgstr "Automātiski palaist OCR (teksta atpazīšanu) pēc skenēšanas"
 
 #: SettingsResources.resx$PageSize_B4$Message
 msgid "B4 (250x353 mm)"
@@ -369,19 +372,19 @@ msgstr "Centrēt"
 
 #: FEmailSettings.resx$btnChangeProvider.Text$Message
 msgid "Change"
-msgstr ""
+msgstr "Mainīt"
 
 #: FAbout.resx$cbCheckForUpdates.Text$Message
 msgid "Check for updates"
-msgstr ""
+msgstr "Pārbaudīt atjauninājumus"
 
 #: MiscResources.resx$CheckingForUpdates$Message
 msgid "Checking"
-msgstr ""
+msgstr "Pārbauda"
 
 #: FEmailProvider.resx$$this.Text$Message
 msgid "Choose Email Provider"
-msgstr ""
+msgstr "Izvēlēties e-pasta provaideri"
 
 #: MiscResources.resx$ChooseProfile$Message
 msgid "Choose Profile"
@@ -467,7 +470,7 @@ msgstr "Pielāgota pagriešana"
 
 #: SettingsResources.resx$EmailProviderType_CustomSmtp$Message
 msgid "Custom SMTP"
-msgstr ""
+msgstr "Izvēles SMTP"
 
 #: FPlaceholders.resx$label6.Text$Message
 msgid "Day (01-31)"
@@ -657,7 +660,7 @@ msgstr "Stikls"
 
 #: SettingsResources.resx$EmailProviderType_Gmail$Message
 msgid "Gmail"
-msgstr ""
+msgstr "Gmail"
 
 #: SettingsResources.resx$BitDepth_8Grayscale$Message
 msgid "Grayscale"
@@ -862,7 +865,7 @@ msgstr "Padevē nav lapu"
 #: FEmailSettings.resx$lblProvider.Text$Message
 #: SettingsResources.resx$EmailProvider_NotSelected$Message
 msgid "No provider selected"
-msgstr ""
+msgstr "Nav izvēlēts provaideris"
 
 #: MiscResources.resx$NoDevicesFound$Message
 msgid "No scanning device was found"
@@ -870,7 +873,7 @@ msgstr "Netika atrasta skenēšanas ierīce"
 
 #: MiscResources.resx$NoUpdates$Message
 msgid "No updates available"
-msgstr ""
+msgstr "Atjauninājumi nav pieejami"
 
 #: SettingsResources.resx$TiffComp_None$Message
 msgid "None"
@@ -900,7 +903,7 @@ msgstr "OCR lejupielāde"
 
 #: MiscResources.resx$OcrProgress$Message
 msgid "OCR Progress"
-msgstr ""
+msgstr "OCR progress"
 
 #: FOcrSetup.resx$$this.Text$Message
 msgid "OCR Setup"
@@ -963,11 +966,11 @@ msgstr "Atvērt mapi"
 
 #: MiscResources.resx$ActiveOperations$Message
 msgid "Operation in Progress"
-msgstr ""
+msgstr "Notiek darbība"
 
 #: SettingsResources.resx$EmailProviderType_OutlookWeb$Message
 msgid "Outlook Web Access"
-msgstr ""
+msgstr "Outllok WEB pieeja"
 
 #: FBatchScan.resx$groupboxOutput.Text$Message
 msgid "Output"
@@ -1082,7 +1085,7 @@ msgstr "Datnes ceļa dialogs"
 
 #: FEmailSettings.resx$groupBox1.Text$Message
 msgid "Provider"
-msgstr ""
+msgstr "Provaideris"
 
 #: FBatchPrompt.resx$lblStatus.Text$Message
 msgid "Ready for scan {0}"
@@ -1172,11 +1175,11 @@ msgstr "Pagriezt pa labi"
 
 #: FProgress.resx$btnRunInBG.Text$Message
 msgid "Run in Background"
-msgstr ""
+msgstr "Darbojas fonā"
 
 #: MiscResources.resx$RunningOcr$Message
 msgid "Running OCR"
-msgstr ""
+msgstr "Notiek OCR"
 
 #: FEditProfile.resx$rdSANE.Text$Message
 msgid "SANE Driver"
@@ -1346,6 +1349,8 @@ msgstr "Tehniskās detaļas"
 msgid ""
 "The OCR engine is not available. Make sure to install the required package"
 msgstr ""
+"OCR (teksta atpazīšanas) dzinis nav pieejams. Instalējiet nepieciešamo "
+"spraudni"
 
 #: MiscResources.resx$SaneNotAvailable$Message
 msgid ""
@@ -1390,7 +1395,7 @@ msgstr "Skenera vāks ir atvērts"
 
 #: MiscResources.resx$DriverNotSupported$Message
 msgid "The selected driver is not supported on this system"
-msgstr ""
+msgstr "Izvēlētais draiveris šajā sistēmā nav atbalstīts"
 
 #: MiscResources.resx$DeviceNotFound$Message
 msgid "The selected scanner could not be found"
@@ -1450,15 +1455,15 @@ msgstr "Nesaglabātās izmaiņas"
 
 #: MiscResources.resx$UpdateProgress$Message
 msgid "Update Progress"
-msgstr ""
+msgstr "Atjauninājuma progress"
 
 #: MiscResources.resx$Updating$Message
 msgid "Updating"
-msgstr ""
+msgstr "Atjaunina"
 
 #: MiscResources.resx$UploadingEmail$Message
 msgid "Uploading email"
-msgstr ""
+msgstr "Sūta e-pastu"
 
 #: FEditProfile.resx$rdbNative.Text$Message
 msgid "Use native UI"
@@ -1495,7 +1500,7 @@ msgstr "Gaida TWAIN, lai pabeigtu"
 
 #: FAuthorize.resx$lblWaiting.Text$Message
 msgid "Waiting for authorization"
-msgstr ""
+msgstr "Gaida autorizāciju"
 
 #: MiscResources.resx$BatchStatusWaitingForScan$Message
 msgid "Waiting for scan {0}"

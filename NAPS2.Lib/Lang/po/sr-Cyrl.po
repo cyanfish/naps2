@@ -3,13 +3,14 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-09-17 20:27+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: 2018-09-17 20:24+0000\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: sr-Cyrl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Translate Toolkit 2.2.5\n"
+"X-Generator: Pootle 2.8\n"
+"X-POOTLE-MTIME: 1537215891.624137\n"
 
 #: SettingsResources.resx$Dpi_100$Message
 msgid "100 dpi"
@@ -182,7 +183,7 @@ msgstr ""
 
 #: MiscResources.resx$OcrUpdateAvailable$Message
 msgid "An update to OCR is available"
-msgstr ""
+msgstr "ажурирање софтвера за препознавање текста је доступно"
 
 #: FAdvancedScanSettings.resx$cbBrightnessContrastAfterScan.Text$Message
 msgid "Apply brightness/contrast after scan"
@@ -416,7 +417,7 @@ msgstr "Копирај"
 
 #: MiscResources.resx$CopyProgress$Message
 msgid "Copy Progress"
-msgstr ""
+msgstr "Копирање у току"
 
 #: MiscResources.resx$Copying$Message
 msgid "Copying"
@@ -473,7 +474,7 @@ msgstr "Подразумевано"
 #: FImageSettings.resx$label1.Text$Message
 #: FPdfSettings.resx$label1.Text$Message
 msgid "Default File Path"
-msgstr ""
+msgstr "подразумевани фајл"
 
 #: FDesktop.resx$tsDeinterleave.Text$Message
 msgid "Deinterleave"
@@ -516,7 +517,7 @@ msgstr "Уређај"
 
 #: FPageSize.resx$label2.Text$Message
 msgid "Dimensions"
-msgstr ""
+msgstr "димензије"
 
 #: FEditProfile.resx$label8.Text$Message
 msgid "Display name"
@@ -558,7 +559,7 @@ msgstr "Уреди"
 
 #: FDesktop.resx$tsdEmailPDF.Text$Message
 msgid "Email PDF"
-msgstr ""
+msgstr "Пошаљи мејлом ПДФ"
 
 #: MiscResources.resx$EmailPdfProgress$Message
 msgid "Email PDF Progress"
@@ -623,7 +624,7 @@ msgstr "Окрени"
 
 #: FAdvancedScanSettings.resx$cbFlipDuplex.Text$Message
 msgid "Flip duplexed pages"
-msgstr ""
+msgstr "окрени дуплирану страну"
 
 #: FImageSettings.resx$lblWarning.Text$Message
 msgid ""
@@ -688,7 +689,7 @@ msgstr "Подешавање слике"
 
 #: MiscResources.resx$ImageSaved$Message
 msgid "Image saved"
-msgstr ""
+msgstr "скен сачуван"
 
 #: FDesktop.resx$tsImport.Text$Message
 msgid "Import"
@@ -817,7 +818,7 @@ msgstr ""
 
 #: FPageSize.resx$label1.Text$Message
 msgid "Name (optional)"
-msgstr ""
+msgstr "Име (опционално)"
 
 #: MiscResources.resx$NameMissing$Message
 msgid "Name missing"
@@ -941,7 +942,7 @@ msgstr "Једна или више датотека није могло бити
 
 #: NotifyWidget.resx$openFolderToolStripMenuItem.Text$Message
 msgid "Open Folder"
-msgstr ""
+msgstr "Отвори фолдер"
 
 #: MiscResources.resx$ActiveOperations$Message
 msgid "Operation in Progress"
@@ -965,7 +966,7 @@ msgstr "Лозинка власника"
 
 #: MiscResources.resx$FileTypePdf$Message
 msgid "PDF Document (*.pdf)"
-msgstr ""
+msgstr "ПДФ документ"
 
 #: FDesktop.resx$tsPDFSettings.Text$Message
 #: FDesktop.resx$tsPdfSettings2.Text$Message
@@ -975,7 +976,7 @@ msgstr "PDF подешавања"
 
 #: MiscResources.resx$PdfSaved$Message
 msgid "PDF saved"
-msgstr ""
+msgstr "ПДФ сачуван"
 
 #: SettingsResources.resx$PdfCompat_PdfA1B$Message
 msgid "PDF/A-1b"
@@ -1003,7 +1004,7 @@ msgstr "Величина странице"
 
 #: FEditProfile.resx$label2.Text$Message
 msgid "Paper source"
-msgstr ""
+msgstr "извор папира"
 
 #: FPdfPassword.resx$$this.Text$Message
 msgid "Password"
@@ -1319,7 +1320,7 @@ msgstr "ТWАИН Драјвер"
 
 #: FError.resx$linkDetails.Text$Message
 msgid "Technical Details"
-msgstr ""
+msgstr "технички детаљи"
 
 #: MiscResources.resx$TesseractNotAvailable$Message
 msgid ""
@@ -1345,7 +1346,7 @@ msgstr ""
 
 #: MiscResources.resx$FileInUse$Message
 msgid "The file could not be overwritten because it is currently in use"
-msgstr ""
+msgstr "Фајл не може бити преписан, јер је тренутно у употреби"
 
 #: MiscResources.resx$ConfirmOverwriteFile$Message
 msgid "The file {0} already exists. Do you want to overwrite it?"
@@ -1357,15 +1358,15 @@ msgstr "Ова датотека је заштићена и захтева лоз
 
 #: MiscResources.resx$DevicePaperJam$Message
 msgid "The scanner has a paper jam"
-msgstr ""
+msgstr "заглављен папир у скенеру"
 
 #: MiscResources.resx$DeviceWarmingUp$Message
 msgid "The scanner is warming up"
-msgstr ""
+msgstr "Скенер се загрева"
 
 #: MiscResources.resx$DeviceCoverOpen$Message
 msgid "The scanner's cover is open"
-msgstr ""
+msgstr "Поклопац скенера је отворен"
 
 #: MiscResources.resx$DriverNotSupported$Message
 msgid "The selected driver is not supported on this system"
@@ -1524,11 +1525,11 @@ msgstr "Увећај на праву величину"
 
 #: TiffViewerCtl.resx$tsZoomPlus.ToolTipText$Message
 msgid "Zoom In"
-msgstr ""
+msgstr "Увеличај"
 
 #: TiffViewerCtl.resx$tsZoomOut.ToolTipText$Message
 msgid "Zoom Out"
-msgstr ""
+msgstr "Смањи"
 
 #: SettingsResources.resx$PageSizeUnit_Centimetre$Message
 msgid "cm"

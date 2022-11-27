@@ -3,13 +3,14 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-09-17 20:27+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: 2018-09-17 20:24+0000\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: et\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Translate Toolkit 2.2.5\n"
+"X-Generator: Pootle 2.8\n"
+"X-POOTLE-MTIME: 1537215868.532367\n"
 
 #: SettingsResources.resx$Dpi_100$Message
 msgid "100 dpi"
@@ -66,7 +67,7 @@ msgstr "Meist"
 
 #: FScanProgress.resx$$this.Text$Message
 msgid "Acquiring data"
-msgstr ""
+msgstr "Andmeid pärimas"
 
 #: FEditProfile.resx$btnAdvanced.Text$Message
 msgid "Advanced"
@@ -74,7 +75,7 @@ msgstr "Profiili lisavalikud"
 
 #: FAdvancedScanSettings.resx$$this.Text$Message
 msgid "Advanced Profile Settings"
-msgstr ""
+msgstr "Profiili lisavalikud"
 
 #: FDesktop.resx$tsEmailPDFAll.Text$Message
 #: FDesktop.resx$tsReverseAll.Text$Message
@@ -90,7 +91,7 @@ msgstr "Kõik failid"
 
 #: FPdfSettings.resx$clbPerms.Items6$Message
 msgid "Allow Annotations"
-msgstr ""
+msgstr "Luba märkused"
 
 #: FPdfSettings.resx$clbPerms.Items4$Message
 msgid "Allow Content Copying"
@@ -106,15 +107,15 @@ msgstr ""
 
 #: FPdfSettings.resx$clbPerms.Items2$Message
 msgid "Allow Document Modification"
-msgstr ""
+msgstr "Luba dokumendi muutmine"
 
 #: FPdfSettings.resx$clbPerms.Items7$Message
 msgid "Allow Form Filling"
-msgstr ""
+msgstr "Luba vormi täitmine"
 
 #: FPdfSettings.resx$clbPerms.Items1$Message
 msgid "Allow Full Quality Printing"
-msgstr ""
+msgstr "Luba täiskvaliteetne printimine"
 
 #: FPdfSettings.resx$clbPerms.Items$Message
 msgid "Allow Printing"
@@ -137,40 +138,44 @@ msgid ""
 "An additional component is needed to import this PDF file. Would you like to "
 "download it now?"
 msgstr ""
+"Selle PDF-faili importimiseks on vaja täiendavat komponenti. Kas soovite "
+"selle kohe alla laadida?"
 
 #: MiscResources.resx$UpdateError$Message
 msgid "An error occured when trying to install the update"
-msgstr ""
+msgstr "Värskenduse installimisel tekkis viga"
 
 #: MiscResources.resx$AuthError$Message
 msgid "An error occurred when trying to authorize"
-msgstr ""
+msgstr "Autoriseerimisel tekkis viga"
 
 #: MiscResources.resx$AutoSaveError$Message
 msgid "An error occurred when trying to auto save"
-msgstr ""
+msgstr "Automaatsel salvestamisel tekkis viga"
 
 #: MiscResources.resx$ErrorSaving$Message
 msgid "An error occurred when trying to save the file"
-msgstr ""
+msgstr "Faili salvestamisel tekkis viga"
 
 #: MiscResources.resx$ErrorEmailing$Message
 msgid "An error occurred when trying to send the email"
-msgstr ""
+msgstr "E-kirja saatmisel tekkis viga"
 
 #: MiscResources.resx$EmailError$Message
 msgid "An error occurred while trying to send an email"
-msgstr ""
+msgstr "E-kirja saatmise ajal tekkis viga"
 
 #: MiscResources.resx$UnknownDriverError$Message
 msgid "An error occurred with the scanning driver"
-msgstr ""
+msgstr "Skanneri draiveril ilmnes tõrge"
 
 #: MiscResources.resx$ExitWithActiveOperations$Message
 msgid ""
 "An operation is in progress. Are you sure you want to exit and cancel the "
 "operation?"
 msgstr ""
+"Käimas on toiming. Kas olete kindel, et soovite tegevuse lõpetada ja "
+"tühistada?"
 
 #: MiscResources.resx$BatchError$Message
 msgid "An unknown error ocurred during the batch scan"
@@ -178,19 +183,19 @@ msgstr ""
 
 #: MiscResources.resx$UpdateAvailable$Message
 msgid "An update is available"
-msgstr ""
+msgstr "Värskendus on saadaval"
 
 #: MiscResources.resx$OcrUpdateAvailable$Message
 msgid "An update to OCR is available"
-msgstr ""
+msgstr "OCR-i värskendus on saadaval"
 
 #: FAdvancedScanSettings.resx$cbBrightnessContrastAfterScan.Text$Message
 msgid "Apply brightness/contrast after scan"
-msgstr ""
+msgstr "Rakendage heledust / kontrasti pärast skaneerimist"
 
 #: ImageForm.resx$checkboxApplyToSelected.Text$Message
 msgid "Apply to all {0} selected images"
-msgstr ""
+msgstr "Rakenda kõigile {0} valitud piltidele"
 
 #: MiscResources.resx$ConfirmCancelBatch$Message
 msgid "Are you sure you want to cancel the batch scan?"
@@ -218,7 +223,7 @@ msgstr "Oled sa kindel, et soovid kustutada {0} profiili?"
 
 #: MiscResources.resx$ConfirmResetImages$Message
 msgid "Are you sure you want undo your changes to {0} image(s)?"
-msgstr ""
+msgstr "Kas olete kindel, et soovite tühistada {0} pildi muudatused?"
 
 #: FEmailSettings.resx$label1.Text$Message
 msgid "Attachment Name"
@@ -230,11 +235,11 @@ msgstr "Autor"
 
 #: FAuthorize.resx$$this.Text$Message
 msgid "Authorize"
-msgstr ""
+msgstr "Autoriseeri"
 
 #: SettingsResources.resx$TiffComp_Auto$Message
 msgid "Auto"
-msgstr ""
+msgstr "Auto"
 
 #: FAutoSaveSettings.resx$$this.Text$Message
 #: FEditProfile.resx$linkAutoSaveSettings.Text$Message
@@ -288,11 +293,11 @@ msgstr ""
 
 #: FEditProfile.resx$label3.Text$Message
 msgid "Bit depth"
-msgstr ""
+msgstr "Bitisügavus"
 
 #: MiscResources.resx$FileTypeBmp$Message
 msgid "Bitmap Files (*.bmp)"
-msgstr ""
+msgstr "Bitmap-failid (* .bmp)"
 
 #: SettingsResources.resx$BitDepth_1BlackAndWhite$Message
 msgid "Black & White"
@@ -317,11 +322,11 @@ msgstr "Heledus"
 #: FDesktop.resx$tsBrightnessContrast.Text$Message
 #: FViewer.resx$tsBrightnessContrast.Text$Message
 msgid "Brightness / Contrast"
-msgstr ""
+msgstr "Heledus / kontrastsus"
 
 #: SettingsResources.resx$TiffComp_Ccitt4$Message
 msgid "CCITT4"
-msgstr ""
+msgstr "CCITT4"
 
 #: FAdvancedScanSettings.resx$btnCancel.Text$Message
 #: FAuthorize.resx$btnCancel.Text$Message
@@ -360,19 +365,19 @@ msgstr "Keskel"
 
 #: FEmailSettings.resx$btnChangeProvider.Text$Message
 msgid "Change"
-msgstr ""
+msgstr "Muuda"
 
 #: FAbout.resx$cbCheckForUpdates.Text$Message
 msgid "Check for updates"
-msgstr ""
+msgstr "Kontrolli kas uuendused on saadaval"
 
 #: MiscResources.resx$CheckingForUpdates$Message
 msgid "Checking"
-msgstr ""
+msgstr "Kontrollimine"
 
 #: FEmailProvider.resx$$this.Text$Message
 msgid "Choose Email Provider"
-msgstr ""
+msgstr "Valige e-posti pakkuja"
 
 #: MiscResources.resx$ChooseProfile$Message
 msgid "Choose Profile"
@@ -393,16 +398,16 @@ msgstr ""
 
 #: MiscResources.resx$Close$Message
 msgid "Close"
-msgstr ""
+msgstr "Sulge"
 
 #: FAdvancedScanSettings.resx$groupBox2.Text$Message
 #: FPdfSettings.resx$groupCompat.Text$Message
 msgid "Compatibility"
-msgstr ""
+msgstr "Ühilduvus"
 
 #: FImageSettings.resx$label3.Text$Message
 msgid "Compression"
-msgstr ""
+msgstr "Tihendus"
 
 #: FEditProfile.resx$label7.Text$Message
 msgid "Contrast"
@@ -467,7 +472,7 @@ msgstr "Päev (01-31)"
 #: SettingsResources.resx$PdfCompat_Default$Message
 #: SettingsResources.resx$TwainImpl_Default$Message
 msgid "Default"
-msgstr ""
+msgstr "Vaikimisi"
 
 #: FImageSettings.resx$label1.Text$Message
 #: FPdfSettings.resx$label1.Text$Message
@@ -570,7 +575,7 @@ msgstr "E-posti sätted"
 
 #: FEditProfile.resx$cbAutoSave.Text$Message
 msgid "Enable Auto Save"
-msgstr ""
+msgstr "Luba automaatne salvestamine"
 
 #: FPdfSettings.resx$cbEncryptPdf.Text$Message
 msgid "Encrypt PDF"
@@ -600,7 +605,7 @@ msgstr ""
 
 #: FAdvancedScanSettings.resx$cbExcludeBlankPages.Text$Message
 msgid "Exclude blank pages"
-msgstr ""
+msgstr "Tühjade lehtede eemaldamine"
 
 #: SettingsResources.resx$Source_Feeder$Message
 msgid "Feeder"
@@ -608,12 +613,12 @@ msgstr "Söötur"
 
 #: FPlaceholders.resx$label1.Text$Message
 msgid "File Name"
-msgstr ""
+msgstr "Faili nimi"
 
 #: FAutoSaveSettings.resx$lblFilePath.Text$Message
 #: FBatchScan.resx$lblFilePath.Text$Message
 msgid "File path"
-msgstr ""
+msgstr "Faili asukoht"
 
 #: FDesktop.resx$tsFlip.Text$Message
 #: FViewer.resx$tsFlip.Text$Message
@@ -632,11 +637,11 @@ msgstr ""
 
 #: MiscResources.resx$FileTypeGif$Message
 msgid "GIF File (*.gif)"
-msgstr ""
+msgstr "GIF fail (*.gif)"
 
 #: FOcrSetup.resx$linkGetLanguages.Text$Message
 msgid "Get more languages"
-msgstr ""
+msgstr "Hankige rohkem keeli"
 
 #: SettingsResources.resx$Source_Glass$Message
 msgid "Glass"
@@ -644,7 +649,7 @@ msgstr "Klaas"
 
 #: SettingsResources.resx$EmailProviderType_Gmail$Message
 msgid "Gmail"
-msgstr ""
+msgstr "Gmail"
 
 #: SettingsResources.resx$BitDepth_8Grayscale$Message
 msgid "Grayscale"
@@ -678,7 +683,7 @@ msgstr "Pildifailid"
 
 #: FAdvancedScanSettings.resx$groupBox1.Text$Message
 msgid "Image Quality"
-msgstr ""
+msgstr "Pildi kvaliteet"
 
 #: FDesktop.resx$tsImageSettings.Text$Message
 #: FImageSettings.resx$$this.Text$Message
@@ -687,7 +692,7 @@ msgstr "Pildi seadistused"
 
 #: MiscResources.resx$ImageSaved$Message
 msgid "Image saved"
-msgstr ""
+msgstr "Pilt salvestatud"
 
 #: FDesktop.resx$tsImport.Text$Message
 msgid "Import"
@@ -699,7 +704,7 @@ msgstr ""
 
 #: MiscResources.resx$Importing$Message
 msgid "Importing"
-msgstr ""
+msgstr "Importimine"
 
 #: MiscResources.resx$ImportingFormat$Message
 msgid "Importing {0}"
@@ -719,7 +724,7 @@ msgstr "Paigaldamine nurjus"
 
 #: MiscResources.resx$InstallCompletePromptRestart$Message
 msgid "Installation complete. Do you want to restart NAPS2 now?"
-msgstr ""
+msgstr "Paigaldamine on lõppenud. Kas soovite taaskäivitada NAPS2 kohe?"
 
 #: MiscResources.resx$InstallFailed$Message
 msgid "Installation failed"
@@ -731,7 +736,7 @@ msgstr ""
 
 #: MiscResources.resx$FileTypeJpeg$Message
 msgid "JPEG File (*.jpg, *.jpeg)"
-msgstr ""
+msgstr "JPEG fail (*.jpg, *.jpeg)"
 
 #: FImageSettings.resx$groupJpeg.Text$Message
 msgid "Jpeg Quality"
@@ -751,7 +756,7 @@ msgstr "Keel"
 
 #: SettingsResources.resx$HorizontalAlign_Left$Message
 msgid "Left"
-msgstr ""
+msgstr "Vasak"
 
 #: SettingsResources.resx$TwainImpl_Legacy$Message
 msgid "Legacy (native UI only)"
@@ -767,7 +772,7 @@ msgstr "Peamine tööriistariba"
 
 #: FOcrSetup.resx$checkBoxEnableOcr.Text$Message
 msgid "Make PDFs searchable using OCR"
-msgstr ""
+msgstr "Tehke OCR-i abil PDF-id otsitavaks"
 
 #: FAdvancedScanSettings.resx$cbHighQuality.Text$Message
 msgid "Maximum quality (large files)"
@@ -779,7 +784,7 @@ msgstr "Metaandmed"
 
 #: FPlaceholders.resx$label8.Text$Message
 msgid "Minute (00-59)"
-msgstr ""
+msgstr "Minutid (00-59)"
 
 #: FPlaceholders.resx$label5.Text$Message
 msgid "Month (01-12)"
@@ -788,7 +793,7 @@ msgstr "Kuu (01-12)"
 #: FAutoSaveSettings.resx$linkPatchCodeInfo.Text$Message
 #: FBatchScan.resx$linkPatchCodeInfo.Text$Message
 msgid "More info"
-msgstr ""
+msgstr "Rohkem infot"
 
 #: FDesktop.resx$tsMove.SecondText$Message
 msgid "Move Down"
@@ -816,48 +821,48 @@ msgstr ""
 
 #: FPageSize.resx$label1.Text$Message
 msgid "Name (optional)"
-msgstr ""
+msgstr "Nimi (valikuline)"
 
 #: MiscResources.resx$NameMissing$Message
 msgid "Name missing"
-msgstr ""
+msgstr "Nimi puudub"
 
 #: FProfiles.resx$btnAdd.Text$Message
 msgid "New"
-msgstr ""
+msgstr "Uus"
 
 #: FDesktop.resx$tsNewProfile.Text$Message
 msgid "New Profile"
-msgstr ""
+msgstr "Uus profiil"
 
 #: FViewer.resx$tsNext.Text$Message
 msgid "Next"
-msgstr ""
+msgstr "Järgmine"
 
 #: FBatchPrompt.resx$$this.Text$Message
 msgid "Next Scan"
-msgstr ""
+msgstr "Uus skaneerimine"
 
 #: MiscResources.resx$NoDeviceSelected$Message
 msgid "No device selected"
-msgstr ""
+msgstr "Ükski seade pole valitud"
 
 #: MiscResources.resx$NoPagesInFeeder$Message
 msgid "No pages are in the feeder"
-msgstr ""
+msgstr "Sööturis ei ole ühtegi lehte"
 
 #: FEmailSettings.resx$lblProvider.Text$Message
 #: SettingsResources.resx$EmailProvider_NotSelected$Message
 msgid "No provider selected"
-msgstr ""
+msgstr "Ükski pakkuja pole valitud"
 
 #: MiscResources.resx$NoDevicesFound$Message
 msgid "No scanning device was found"
-msgstr ""
+msgstr "Skaneerimisseadet ei leitud"
 
 #: MiscResources.resx$NoUpdates$Message
 msgid "No updates available"
-msgstr ""
+msgstr "Uuendusi pole saadaval"
 
 #: SettingsResources.resx$TiffComp_None$Message
 #, fuzzy
@@ -866,7 +871,7 @@ msgstr "Valmis"
 
 #: FDesktop.resx$$this.Text$Message
 msgid "Not Another PDF Scanner 2"
-msgstr ""
+msgstr "Not Another PDF Scanner 2"
 
 #: FRecover.resx$btnCancel.Text$Message
 msgid "Not Now"
@@ -874,7 +879,7 @@ msgstr "Mitte praegu"
 
 #: FBatchScan.resx$lblNumberOfScans.Text$Message
 msgid "Number of scans"
-msgstr ""
+msgstr "Skaneerimiste arv"
 
 #: FDesktop.resx$tsOcr.Text$Message
 msgid "OCR"
@@ -927,24 +932,24 @@ msgstr ""
 #: FAutoSaveSettings.resx$rdFilePerPage.Text$Message
 #: FBatchScan.resx$rdFilePerPage.Text$Message
 msgid "One file per page"
-msgstr ""
+msgstr "Üks fail lehe kohta"
 
 #: FAutoSaveSettings.resx$rdFilePerScan.Text$Message
 #: FBatchScan.resx$rdFilePerScan.Text$Message
 msgid "One file per scan"
-msgstr ""
+msgstr "Üks fail skaneerimise kohta"
 
 #: MiscResources.resx$FilesCouldNotBeDownloaded$Message
 msgid "One or more files could not be downloaded"
-msgstr ""
+msgstr "Ühte või mitut faili ei saanud alla laadida"
 
 #: NotifyWidget.resx$openFolderToolStripMenuItem.Text$Message
 msgid "Open Folder"
-msgstr ""
+msgstr "Ava kaust"
 
 #: MiscResources.resx$ActiveOperations$Message
 msgid "Operation in Progress"
-msgstr ""
+msgstr "Töö käib"
 
 #: SettingsResources.resx$EmailProviderType_OutlookWeb$Message
 msgid "Outlook Web Access"
@@ -952,7 +957,7 @@ msgstr ""
 
 #: FBatchScan.resx$groupboxOutput.Text$Message
 msgid "Output"
-msgstr ""
+msgstr "Väljund"
 
 #: MiscResources.resx$OverwriteFile$Message
 msgid "Overwrite File"
@@ -964,29 +969,29 @@ msgstr "Omaniku parool"
 
 #: MiscResources.resx$FileTypePdf$Message
 msgid "PDF Document (*.pdf)"
-msgstr ""
+msgstr "PDF dokument (*.pdf)"
 
 #: FDesktop.resx$tsPDFSettings.Text$Message
 #: FDesktop.resx$tsPdfSettings2.Text$Message
 #: FPdfSettings.resx$$this.Text$Message
 msgid "PDF Settings"
-msgstr ""
+msgstr "PDF seaded"
 
 #: MiscResources.resx$PdfSaved$Message
 msgid "PDF saved"
-msgstr ""
+msgstr "PDF salvestatud"
 
 #: SettingsResources.resx$PdfCompat_PdfA1B$Message
 msgid "PDF/A-1b"
-msgstr ""
+msgstr "PDF/A-1b"
 
 #: SettingsResources.resx$PdfCompat_PdfA2B$Message
 msgid "PDF/A-2b"
-msgstr ""
+msgstr "PDF/A-2b"
 
 #: SettingsResources.resx$PdfCompat_PdfA3B$Message
 msgid "PDF/A-3b"
-msgstr ""
+msgstr "PDF/A-3b"
 
 #: SettingsResources.resx$PdfCompat_PdfA3U$Message
 msgid "PDF/A-3u"
@@ -994,24 +999,24 @@ msgstr ""
 
 #: MiscResources.resx$FileTypePng$Message
 msgid "PNG File (*.png)"
-msgstr ""
+msgstr "PNG fail (*.png)"
 
 #: FEditProfile.resx$label4.Text$Message
 msgid "Page size"
-msgstr ""
+msgstr "Lehe suurus"
 
 #: FEditProfile.resx$label2.Text$Message
 msgid "Paper source"
-msgstr ""
+msgstr "Paberi allikas"
 
 #: FPdfPassword.resx$$this.Text$Message
 msgid "Password"
-msgstr ""
+msgstr "Parool"
 
 #: FDesktop.resx$ctxPaste.Text$Message
 #: FProfiles.resx$ctxPaste.Text$Message
 msgid "Paste"
-msgstr ""
+msgstr "Aseta"
 
 #: FAutoSaveSettings.resx$linkPlaceholders.Text$Message
 #: FBatchScan.resx$linkPlaceholders.Text$Message
@@ -1029,7 +1034,7 @@ msgstr ""
 
 #: FBatchScan.resx$lblStatus.Text$Message
 msgid "Press Start when ready"
-msgstr ""
+msgstr "Kui olete valmis, vajutage nuppu Start"
 
 #: FPlaceholders.resx$label2.Text$Message
 #: FViewer.resx$$this.Text$Message
@@ -1063,7 +1068,7 @@ msgstr ""
 
 #: FEmailSettings.resx$groupBox1.Text$Message
 msgid "Provider"
-msgstr ""
+msgstr "Pakkuja"
 
 #: FBatchPrompt.resx$lblStatus.Text$Message
 msgid "Ready for scan {0}"
@@ -1079,7 +1084,7 @@ msgstr "Taasta skännitud pildid"
 
 #: MiscResources.resx$Recovering$Message
 msgid "Recovering"
-msgstr ""
+msgstr "Taastamine"
 
 #: MiscResources.resx$RecoveryProgress$Message
 msgid "Recovery Progress"
@@ -1093,26 +1098,26 @@ msgstr "Mälesta neid seadeid"
 
 #: FDesktop.resx$tsdReorder.Text$Message
 msgid "Reorder"
-msgstr ""
+msgstr "Muuda järjestust"
 
 #: FDesktop.resx$tsReset.Text$Message
 msgid "Reset"
-msgstr ""
+msgstr "Lähtesta"
 
 #: MiscResources.resx$ResetImage$Message
 msgid "Reset Image"
-msgstr ""
+msgstr "Lähtesta pilt"
 
 #: FEditProfile.resx$label5.Text$Message
 msgid "Resolution"
-msgstr ""
+msgstr "Resolutsioon"
 
 #: FAdvancedScanSettings.resx$btnRestoreDefaults.Text$Message
 #: FEmailSettings.resx$btnRestoreDefaults.Text$Message
 #: FImageSettings.resx$btnRestoreDefaults.Text$Message
 #: FPdfSettings.resx$btnRestoreDefaults.Text$Message
 msgid "Restore Defaults"
-msgstr ""
+msgstr "Taasta algsed sätted"
 
 #: FAdvancedScanSettings.resx$cbWiaRetryOnFailure.Text$Message
 msgid "Retry on failure (WIA)"
@@ -1148,20 +1153,19 @@ msgstr "Pööramine paremale"
 
 #: FProgress.resx$btnRunInBG.Text$Message
 msgid "Run in Background"
-msgstr ""
+msgstr "Käivita taustal"
 
 #: MiscResources.resx$RunningOcr$Message
 msgid "Running OCR"
-msgstr ""
+msgstr "OCR-i käivitamine"
 
 #: FEditProfile.resx$rdSANE.Text$Message
 msgid "SANE Driver"
 msgstr ""
 
 #: FViewer.resx$tsSaveImage.Text$Message
-#, fuzzy
 msgid "Save Image"
-msgstr "Piltide salvestamine"
+msgstr "Pildi salvestamine"
 
 #: FDesktop.resx$tsdSaveImages.Text$Message
 msgid "Save Images"
@@ -1182,11 +1186,11 @@ msgstr ""
 
 #: FBatchScan.resx$rdSaveToSingleFile.Text$Message
 msgid "Save to a single file"
-msgstr ""
+msgstr "Salvesta ühte faili"
 
 #: FBatchScan.resx$rdSaveToMultipleFiles.Text$Message
 msgid "Save to multiple files"
-msgstr ""
+msgstr "Salvesta mitmesse faili"
 
 #: MiscResources.resx$BatchStatusSaving$Message
 msgid "Saving batch results"
@@ -1214,11 +1218,11 @@ msgstr "Skaneeri"
 
 #: FBatchScan.resx$groupboxScanConfig.Text$Message
 msgid "Scan Configuration"
-msgstr ""
+msgstr "Skaneerimise seaded"
 
 #: MiscResources.resx$ScannedImage$Message
 msgid "Scanned Image"
-msgstr ""
+msgstr "Skaneeritud pilt"
 
 #: FScanProgress.resx$labelPage.Text$Message
 #: MiscResources.resx$BatchStatusPage$Message
@@ -1232,27 +1236,27 @@ msgstr ""
 
 #: FPlaceholders.resx$label9.Text$Message
 msgid "Second (00-59)"
-msgstr ""
+msgstr "Sekund (00-59)"
 
 #: FSelectDevice.resx$btnSelect.Text$Message
 msgid "Select"
-msgstr ""
+msgstr "Vali"
 
 #: FDesktop.resx$ctxSelectAll.Text$Message
 msgid "Select All"
-msgstr ""
+msgstr "Vali kõik"
 
 #: FSelectDevice.resx$$this.Text$Message
 msgid "Select Source"
-msgstr ""
+msgstr "Vali allikas"
 
 #: MiscResources.resx$SelectProfileBeforeScan$Message
 msgid "Select a profile before clicking Scan"
-msgstr ""
+msgstr "Enne skaneerimist valige profiil"
 
 #: FOcrLanguageDownload.resx$label3.Text$Message
 msgid "Select one or more languages"
-msgstr ""
+msgstr "Valige üks või mitu keelt"
 
 #: FDesktop.resx$tsEmailPDFSelected.Text$Message
 #: FDesktop.resx$tsReverseSelected.Text$Message
@@ -1269,26 +1273,26 @@ msgstr ""
 
 #: FProfiles.resx$ctxSetDefault.Text$Message
 msgid "Set Default"
-msgstr ""
+msgstr "Määra vaikimisi"
 
 #: FDesktop.resx$tsSharpen.Text$Message
 #: FSharpen.resx$$this.Text$Message
 #: FViewer.resx$tsSharpen.Text$Message
 msgid "Sharpen"
-msgstr ""
+msgstr "Teravdama"
 
 #: FPdfSettings.resx$cbShowOwnerPassword.Text$Message
 #: FPdfSettings.resx$cbShowUserPassword.Text$Message
 msgid "Show"
-msgstr ""
+msgstr "Näita"
 
 #: FImageSettings.resx$cbSinglePageTiff.Text$Message
 msgid "Single page files"
-msgstr ""
+msgstr "Ühelehelised failid"
 
 #: FBatchScan.resx$rdSingleScan.Text$Message
 msgid "Single scan"
-msgstr ""
+msgstr "Ühekordne skaneerimine"
 
 #: FImageSettings.resx$cbSkipSavePrompt.Text$Message
 #: FPdfSettings.resx$cbSkipSavePrompt.Text$Message
@@ -1297,11 +1301,11 @@ msgstr ""
 
 #: FBatchScan.resx$btnStart.Text$Message
 msgid "Start"
-msgstr ""
+msgstr "Start"
 
 #: FAdvancedScanSettings.resx$cbForcePageSize.Text$Message
 msgid "Stretch to page size"
-msgstr ""
+msgstr "Venita lehe suuruseni"
 
 #: FPdfSettings.resx$label5.Text$Message
 msgid "Subject"
@@ -1317,12 +1321,12 @@ msgstr "TWAIN draiver"
 
 #: FError.resx$linkDetails.Text$Message
 msgid "Technical Details"
-msgstr ""
+msgstr "Tehnilised detailid"
 
 #: MiscResources.resx$TesseractNotAvailable$Message
 msgid ""
 "The OCR engine is not available. Make sure to install the required package"
-msgstr ""
+msgstr "OCR-mootor pole saadaval. Paigaldage vajalik osa"
 
 #: MiscResources.resx$SaneNotAvailable$Message
 msgid ""
@@ -1341,51 +1345,55 @@ msgstr ""
 
 #: MiscResources.resx$FileInUse$Message
 msgid "The file could not be overwritten because it is currently in use"
-msgstr ""
+msgstr "Faili ei saa üle kirjutada, kuna see on praegu kasutusel"
 
 #: MiscResources.resx$ConfirmOverwriteFile$Message
 msgid "The file {0} already exists. Do you want to overwrite it?"
-msgstr ""
+msgstr "Fail {0} on juba olemas. Kas soovite selle üle kirjutada?"
 
 #: FPdfPassword.resx$lblPrompt.Text$Message
 msgid "The following file is encrypted and requires a password to open: {0}"
-msgstr ""
+msgstr "Järgmine fail on krüptitud ja nõuab parooli avamiseks: {0}"
 
 #: MiscResources.resx$DevicePaperJam$Message
 msgid "The scanner has a paper jam"
-msgstr ""
+msgstr "Skanneril on paberiummistus"
 
 #: MiscResources.resx$DeviceWarmingUp$Message
 msgid "The scanner is warming up"
-msgstr ""
+msgstr "Skanner soojeneb"
 
 #: MiscResources.resx$DeviceCoverOpen$Message
 msgid "The scanner's cover is open"
-msgstr ""
+msgstr "Skanneri kaas on avatud"
 
 #: MiscResources.resx$DriverNotSupported$Message
 msgid "The selected driver is not supported on this system"
-msgstr ""
+msgstr "Valitud draiverit ei toetata selles süsteemis"
 
 #: MiscResources.resx$DeviceNotFound$Message
 msgid "The selected scanner could not be found"
-msgstr ""
+msgstr "Valitud skännerit ei leitud"
 
 #: MiscResources.resx$NoFeederSupport$Message
 msgid ""
 "The selected scanner does not support using a feeder. If your scanner does "
 "have a feeder, try using a different driver"
 msgstr ""
+"Valitud skanner ei toeta sööturi kasutamist. Kui teie skanneril on söötur, "
+"proovige kasutada teist draiverit"
 
 #: MiscResources.resx$NoDuplexSupport$Message
 msgid ""
 "The selected scanner does not support using duplex. If your scanner is "
 "supposed to support duplex, try using a different driver"
 msgstr ""
+"Valitud skanner ei toeta dupleksi kasutamist. Kui teie skanner peaks "
+"dupleksit toetama, proovige kasutada teist draiverit"
 
 #: MiscResources.resx$DeviceBusy$Message
 msgid "The selected scanner is busy"
-msgstr ""
+msgstr "Valitud skanner on hõivatud"
 
 #: MiscResources.resx$DeviceOffline$Message
 msgid "The selected scanner is offline"
@@ -1397,11 +1405,11 @@ msgstr ""
 
 #: FBatchScan.resx$lblTimeBetweenScans.Text$Message
 msgid "Time between scans (seconds)"
-msgstr ""
+msgstr "Skaneerimiste vaheline aeg (sekundid)"
 
 #: FPdfSettings.resx$label4.Text$Message
 msgid "Title"
-msgstr ""
+msgstr "Pealkiri"
 
 #: FAdvancedScanSettings.resx$label1.Text$Message
 msgid "Twain Implementation"
@@ -1417,7 +1425,7 @@ msgstr ""
 
 #: MiscResources.resx$UnsavedChanges$Message
 msgid "Unsaved Changes"
-msgstr ""
+msgstr "Salvestamata muudatused"
 
 #: MiscResources.resx$UpdateProgress$Message
 msgid "Update Progress"
@@ -1425,11 +1433,11 @@ msgstr ""
 
 #: MiscResources.resx$Updating$Message
 msgid "Updating"
-msgstr ""
+msgstr "Uuendamine"
 
 #: MiscResources.resx$UploadingEmail$Message
 msgid "Uploading email"
-msgstr ""
+msgstr "E-posti üleslaadimine"
 
 #: FEditProfile.resx$rdbNative.Text$Message
 msgid "Use native UI"
@@ -1437,7 +1445,7 @@ msgstr ""
 
 #: FEditProfile.resx$rdbConfig.Text$Message
 msgid "Use predefined settings"
-msgstr ""
+msgstr "Kasutage eelmääratud sätteid"
 
 #: FPdfSettings.resx$lblUserPassword.Text$Message
 msgid "User Password"
@@ -1446,6 +1454,8 @@ msgstr "Kasutaja parool"
 #: FOcrLanguageDownload.resx$label1.Text$Message
 msgid "Using OCR requires you to download each language you want to scan"
 msgstr ""
+"OCR-i kasutamine eeldab, et laaditakse alla kõik keeled, mida soovite "
+"skaneerida"
 
 #: MiscResources.resx$Version$Message
 msgid "Version {0}"
@@ -1482,29 +1492,31 @@ msgstr ""
 
 #: FPlaceholders.resx$label3.Text$Message
 msgid "Year"
-msgstr ""
+msgstr "Aasta"
 
 #: FPlaceholders.resx$label4.Text$Message
 msgid "Year (00-99)"
-msgstr ""
+msgstr "Aasta (00-99)"
 
 #: MiscResources.resx$PdfNoPermissionToExtractContent$Message
 msgid "You do not have permission to copy content from the file '{0}'"
-msgstr ""
+msgstr "Teil pole luba sisu kopeerimiseks failist \"{0}\""
 
 #: MiscResources.resx$DontHavePermission$Message
 msgid "You don't have permission to save files at this location"
-msgstr ""
+msgstr "Teil ei ole õigust failide salvestamiseks selles asukohas"
 
 #: MiscResources.resx$ExitWithUnsavedChanges$Message
 msgid ""
 "You have unsaved changes. Are you sure you want to exit and discard those "
 "changes?"
 msgstr ""
+"Teil on salvestamata muudatusi. Kas olete kindel, et soovite neist "
+"muudatustest loobuda?"
 
 #: TiffViewerCtl.resx$tsZoom.ToolTipText$Message
 msgid "Zoom"
-msgstr ""
+msgstr "Suurendus"
 
 #: TiffViewerCtl.resx$tsZoomActual.ToolTipText$Message
 msgid "Zoom Actual"

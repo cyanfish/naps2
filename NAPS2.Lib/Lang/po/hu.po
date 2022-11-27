@@ -139,10 +139,12 @@ msgid ""
 "An additional component is needed to import this PDF file. Would you like to "
 "download it now?"
 msgstr ""
+"További bővitmény szükséges, hogy ezt a PDF fájlt importálhassa. Szeretné "
+"most letölteni?"
 
 #: MiscResources.resx$UpdateError$Message
 msgid "An error occured when trying to install the update"
-msgstr ""
+msgstr "Hiba történt a frissités telepitésekor"
 
 #: MiscResources.resx$AuthError$Message
 msgid "An error occurred when trying to authorize"
@@ -226,7 +228,7 @@ msgstr ""
 
 #: FEmailSettings.resx$label1.Text$Message
 msgid "Attachment Name"
-msgstr ""
+msgstr "Csatolt állomány neve"
 
 #: FPdfSettings.resx$label3.Text$Message
 msgid "Author"
@@ -243,7 +245,7 @@ msgstr ""
 #: FAutoSaveSettings.resx$$this.Text$Message
 #: FEditProfile.resx$linkAutoSaveSettings.Text$Message
 msgid "Auto Save Settings"
-msgstr ""
+msgstr "Automatikus mentés beállításai"
 
 #: FPlaceholders.resx$label13.Text$Message
 msgid "Auto-incrementing number (1 digit)"
@@ -267,16 +269,16 @@ msgstr ""
 
 #: SettingsResources.resx$PageSize_B4$Message
 msgid "B4 (250x353 mm)"
-msgstr ""
+msgstr "B4 (250 x 353 mm)"
 
 #: SettingsResources.resx$PageSize_B5$Message
 msgid "B5 (176x250 mm)"
-msgstr ""
+msgstr "B5 (176 x 250 mm)"
 
 #: FBatchScan.resx$$this.Text$Message
 #: FDesktop.resx$tsBatchScan.Text$Message
 msgid "Batch Scan"
-msgstr ""
+msgstr "Kötegelt beolvasás"
 
 #: MiscResources.resx$BatchStatusCancelled$Message
 msgid "Batch cancelled"
@@ -284,11 +286,11 @@ msgstr ""
 
 #: MiscResources.resx$BatchStatusComplete$Message
 msgid "Batch completed successfully"
-msgstr ""
+msgstr "A folyamat befejeződött"
 
 #: MiscResources.resx$BatchStatusError$Message
 msgid "Batch scan stopped due to error"
-msgstr ""
+msgstr "Hiba történt a művelet során, a folyamat megszakadt"
 
 #: FEditProfile.resx$label3.Text$Message
 msgid "Bit depth"
@@ -356,7 +358,7 @@ msgstr ""
 
 #: MiscResources.resx$BatchStatusCancelling$Message
 msgid "Cancelling"
-msgstr ""
+msgstr "Visszavonás"
 
 #: SettingsResources.resx$HorizontalAlign_Center$Message
 msgid "Center"
@@ -419,7 +421,7 @@ msgstr "Másolás"
 
 #: MiscResources.resx$CopyProgress$Message
 msgid "Copy Progress"
-msgstr ""
+msgstr "Folyamatban"
 
 #: MiscResources.resx$Copying$Message
 msgid "Copying"
@@ -453,7 +455,7 @@ msgstr ""
 
 #: FPageSize.resx$$this.Text$Message
 msgid "Custom Page Size"
-msgstr ""
+msgstr "Egyedi lap méret"
 
 #: FDesktop.resx$tsCustomRotation.Text$Message
 #: FViewer.resx$tsCustomRotation.Text$Message
@@ -471,7 +473,7 @@ msgstr ""
 #: SettingsResources.resx$PdfCompat_Default$Message
 #: SettingsResources.resx$TwainImpl_Default$Message
 msgid "Default"
-msgstr ""
+msgstr "Alapértelmezett"
 
 #: FImageSettings.resx$label1.Text$Message
 #: FPdfSettings.resx$label1.Text$Message
@@ -674,11 +676,11 @@ msgstr "Ikonok forrása"
 
 #: FDesktop.resx$tsdImage.Text$Message
 msgid "Image"
-msgstr ""
+msgstr "Kép"
 
 #: MiscResources.resx$FileTypeImageFiles$Message
 msgid "Image Files"
-msgstr ""
+msgstr "Képfájlok"
 
 #: FAdvancedScanSettings.resx$groupBox1.Text$Message
 msgid "Image Quality"
@@ -848,7 +850,7 @@ msgstr "Nincs kiválasztott eszköz"
 
 #: MiscResources.resx$NoPagesInFeeder$Message
 msgid "No pages are in the feeder"
-msgstr ""
+msgstr "Nincs lap a beolvasóban"
 
 #: FEmailSettings.resx$lblProvider.Text$Message
 #: SettingsResources.resx$EmailProvider_NotSelected$Message
@@ -1104,11 +1106,11 @@ msgstr "Rendezés"
 
 #: FDesktop.resx$tsReset.Text$Message
 msgid "Reset"
-msgstr ""
+msgstr "Visszaállítás"
 
 #: MiscResources.resx$ResetImage$Message
 msgid "Reset Image"
-msgstr ""
+msgstr "Kép visszaállítása"
 
 #: FEditProfile.resx$label5.Text$Message
 msgid "Resolution"
@@ -1251,7 +1253,7 @@ msgstr "Összes kijelölése"
 
 #: FSelectDevice.resx$$this.Text$Message
 msgid "Select Source"
-msgstr ""
+msgstr "Forrás kiválasztása"
 
 #: MiscResources.resx$SelectProfileBeforeScan$Message
 msgid "Select a profile before clicking Scan"
@@ -1393,13 +1395,12 @@ msgid ""
 msgstr ""
 
 #: MiscResources.resx$DeviceBusy$Message
-#, fuzzy
 msgid "The selected scanner is busy"
-msgstr "A kiválasztott képolvasó nem elérhető"
+msgstr "A kiválasztott képolvasó nem elérhető (foglalt)"
 
 #: MiscResources.resx$DeviceOffline$Message
 msgid "The selected scanner is offline"
-msgstr "A kiválasztott képolvasó nem elérhető"
+msgstr "A kiválasztott képolvasó nem elérhető (leválasztva)"
 
 #: FImageSettings.resx$groupTiff.Text$Message
 msgid "Tiff Options"
@@ -1411,7 +1412,7 @@ msgstr ""
 
 #: FPdfSettings.resx$label4.Text$Message
 msgid "Title"
-msgstr ""
+msgstr "Cím"
 
 #: FAdvancedScanSettings.resx$label1.Text$Message
 msgid "Twain Implementation"
@@ -1426,11 +1427,8 @@ msgid "US Letter (8.5x11 in)"
 msgstr "US Letter (8.5x11 in)"
 
 #: MiscResources.resx$UnsavedChanges$Message
-#, fuzzy
 msgid "Unsaved Changes"
-msgstr ""
-"Nem mentett módosításai vannak, amik elvesznek ha bezárja a programot. "
-"Biztosan kilép?"
+msgstr "Nem mentett módosítások"
 
 #: MiscResources.resx$UpdateProgress$Message
 msgid "Update Progress"
@@ -1529,14 +1527,12 @@ msgid "Zoom Actual"
 msgstr "Eredeti méret"
 
 #: TiffViewerCtl.resx$tsZoomPlus.ToolTipText$Message
-#, fuzzy
 msgid "Zoom In"
-msgstr "Eredeti méret"
+msgstr "Nagyítás"
 
 #: TiffViewerCtl.resx$tsZoomOut.ToolTipText$Message
-#, fuzzy
 msgid "Zoom Out"
-msgstr "Eredeti méret"
+msgstr "Kicsinyítés"
 
 #: SettingsResources.resx$PageSizeUnit_Centimetre$Message
 msgid "cm"

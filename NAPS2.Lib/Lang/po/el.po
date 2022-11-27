@@ -3,13 +3,14 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-09-17 20:27+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: 2022-11-26 21:47+0000\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: el\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Translate Toolkit 2.2.5\n"
+"X-Generator: Pootle 2.8\n"
+"X-POOTLE-MTIME: 1669499266.642073\n"
 
 #: SettingsResources.resx$Dpi_100$Message
 msgid "100 dpi"
@@ -146,7 +147,7 @@ msgstr ""
 
 #: MiscResources.resx$AuthError$Message
 msgid "An error occurred when trying to authorize"
-msgstr ""
+msgstr "Παρουσιάστηκε ένα σφάλμα κατά την προσπάθεια εκτέλεσης του"
 
 #: MiscResources.resx$AutoSaveError$Message
 msgid "An error occurred when trying to auto save"
@@ -158,7 +159,7 @@ msgstr "Σφάλμα κατά την αποθήκευση του αρχείου"
 
 #: MiscResources.resx$ErrorEmailing$Message
 msgid "An error occurred when trying to send the email"
-msgstr ""
+msgstr "Δημιουργήθηκε σφάλμα κατά την εκτύπωση του αρχείου"
 
 #: MiscResources.resx$EmailError$Message
 msgid "An error occurred while trying to send an email"
@@ -180,7 +181,7 @@ msgstr "Άγνωστο σφάλμα κατά την μαζική σάρωση"
 
 #: MiscResources.resx$UpdateAvailable$Message
 msgid "An update is available"
-msgstr ""
+msgstr "Δεν υπάρχουν διαθέσιμες ενημερώσεις"
 
 #: MiscResources.resx$OcrUpdateAvailable$Message
 msgid "An update to OCR is available"
@@ -361,19 +362,19 @@ msgstr "Κέντρο"
 
 #: FEmailSettings.resx$btnChangeProvider.Text$Message
 msgid "Change"
-msgstr ""
+msgstr "Αλλαγή"
 
 #: FAbout.resx$cbCheckForUpdates.Text$Message
 msgid "Check for updates"
-msgstr ""
+msgstr "Ελέγξτε για ενημερώσεις."
 
 #: MiscResources.resx$CheckingForUpdates$Message
 msgid "Checking"
-msgstr ""
+msgstr "Έλεγχος"
 
 #: FEmailProvider.resx$$this.Text$Message
 msgid "Choose Email Provider"
-msgstr ""
+msgstr "Επιλέξτε πάροχο Email"
 
 #: MiscResources.resx$ChooseProfile$Message
 msgid "Choose Profile"
@@ -647,7 +648,7 @@ msgstr "Γυαλί"
 
 #: SettingsResources.resx$EmailProviderType_Gmail$Message
 msgid "Gmail"
-msgstr ""
+msgstr "Gmail"
 
 #: SettingsResources.resx$BitDepth_8Grayscale$Message
 msgid "Grayscale"
@@ -860,7 +861,7 @@ msgstr "Δεν βρέθηκε συσκευή σάρωσης"
 
 #: MiscResources.resx$NoUpdates$Message
 msgid "No updates available"
-msgstr ""
+msgstr "Δεν υπάρχουν διαθέσιμες ενημερώσεις"
 
 #: SettingsResources.resx$TiffComp_None$Message
 msgid "None"
@@ -1154,7 +1155,7 @@ msgstr ""
 
 #: MiscResources.resx$RunningOcr$Message
 msgid "Running OCR"
-msgstr ""
+msgstr "Γίνεται Οπτική Αναγνώριση Χαρακτήρων."
 
 #: FEditProfile.resx$rdSANE.Text$Message
 msgid "SANE Driver"
@@ -1435,7 +1436,7 @@ msgstr ""
 
 #: MiscResources.resx$Updating$Message
 msgid "Updating"
-msgstr ""
+msgstr "Γίνεται ενημέρωση"
 
 #: MiscResources.resx$UploadingEmail$Message
 msgid "Uploading email"

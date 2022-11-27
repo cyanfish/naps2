@@ -147,7 +147,7 @@ msgstr "A intervenit o eroare la instalarea actualizării"
 
 #: MiscResources.resx$AuthError$Message
 msgid "An error occurred when trying to authorize"
-msgstr ""
+msgstr "A survenit o eroare la încercarea de autorizare"
 
 #: MiscResources.resx$AutoSaveError$Message
 msgid "An error occurred when trying to auto save"
@@ -159,7 +159,7 @@ msgstr "A apărut o eroare la salvarea fișierului"
 
 #: MiscResources.resx$ErrorEmailing$Message
 msgid "An error occurred when trying to send the email"
-msgstr ""
+msgstr "A survenit o eroare la încercarea de trimitere email"
 
 #: MiscResources.resx$EmailError$Message
 msgid "An error occurred while trying to send an email"
@@ -173,7 +173,7 @@ msgstr "A apărut o eroare la driver-ul de scanare."
 msgid ""
 "An operation is in progress. Are you sure you want to exit and cancel the "
 "operation?"
-msgstr ""
+msgstr "O operație este în curs. Sigur doriți să ieșiți și să anulați operația?"
 
 #: MiscResources.resx$BatchError$Message
 msgid "An unknown error ocurred during the batch scan"
@@ -325,7 +325,7 @@ msgstr "Luminozitate"
 #: FViewer.resx$tsBrightnessContrast.Text$Message
 #: FBrightnessContrast.resx$$this.Text$Message
 msgid "Brightness / Contrast"
-msgstr ""
+msgstr "Luminozitate - Contrast"
 
 #: SettingsResources.resx$TiffComp_Ccitt4$Message
 msgid "CCITT4"
@@ -359,7 +359,7 @@ msgstr "Renunță"
 
 #: MiscResources.resx$CancelBatch$Message
 msgid "Cancel Batch"
-msgstr ""
+msgstr "Anuleaza Batch-ul"
 
 #: MiscResources.resx$BatchStatusCancelling$Message
 msgid "Cancelling"
@@ -375,7 +375,7 @@ msgstr "Schimbă"
 
 #: FAbout.resx$cbCheckForUpdates.Text$Message
 msgid "Check for updates"
-msgstr ""
+msgstr "Verificare actualizări"
 
 #: MiscResources.resx$CheckingForUpdates$Message
 msgid "Checking"
@@ -434,7 +434,7 @@ msgstr "Copiere"
 
 #: FAbout.resx$labelCopyright.Text$Message
 msgid "Copyright 2009, 2012-2018 NAPS2 Contributors"
-msgstr ""
+msgstr "Copyright 2009, 2012-2018 Colaboratorii NAPS2"
 
 #: FAdvancedScanSettings.resx$label3.Text$Message
 msgid "Coverage Threshold"
@@ -712,7 +712,7 @@ msgstr "Progres import"
 
 #: MiscResources.resx$Importing$Message
 msgid "Importing"
-msgstr ""
+msgstr "Se importă"
 
 #: MiscResources.resx$ImportingFormat$Message
 msgid "Importing {0}"
@@ -720,7 +720,7 @@ msgstr "Importare {0}"
 
 #: MiscResources.resx$Install$Message
 msgid "Install {0}"
-msgstr ""
+msgstr "Instalează {0}"
 
 #: MiscResources.resx$InstallComplete$Message
 msgid "Installation Complete"
@@ -756,7 +756,7 @@ msgstr "Cuvinte cheie"
 
 #: SettingsResources.resx$TiffComp_Lzw$Message
 msgid "LZW"
-msgstr ""
+msgstr "LZW"
 
 #: FDesktop.resx$toolStripDropDownButton1.Text$Message
 msgid "Language"
@@ -870,12 +870,11 @@ msgstr "Nu a fost găsit nici un dispozitiv scaner"
 
 #: MiscResources.resx$NoUpdates$Message
 msgid "No updates available"
-msgstr ""
+msgstr "Nicio actualizare disponibilă"
 
 #: SettingsResources.resx$TiffComp_None$Message
-#, fuzzy
 msgid "None"
-msgstr "Finalizat"
+msgstr "Nimic"
 
 #: FDesktop.resx$$this.Text$Message
 msgid "Not Another PDF Scanner 2"
@@ -889,7 +888,7 @@ msgstr "Nu acum"
 
 #: FBatchScan.resx$lblNumberOfScans.Text$Message
 msgid "Number of scans"
-msgstr ""
+msgstr "Numarul de scanări"
 
 #: FDesktop.resx$tsOcr.Text$Message
 msgid "OCR"
@@ -960,15 +959,15 @@ msgstr "Unul sau mai multe fișiere nu s-au putut descărca"
 
 #: NotifyWidget.resx$openFolderToolStripMenuItem.Text$Message
 msgid "Open Folder"
-msgstr ""
+msgstr "Deschide folder-ul"
 
 #: MiscResources.resx$ActiveOperations$Message
 msgid "Operation in Progress"
-msgstr ""
+msgstr "Operaţiune în desfăşurare"
 
 #: SettingsResources.resx$EmailProviderType_OutlookWeb$Message
 msgid "Outlook Web Access"
-msgstr ""
+msgstr "Outlook Web Access"
 
 #: FBatchScan.resx$groupboxOutput.Text$Message
 msgid "Output"
@@ -995,23 +994,23 @@ msgstr "Setări PDF"
 
 #: MiscResources.resx$PdfSaved$Message
 msgid "PDF saved"
-msgstr ""
+msgstr "PDF salvat"
 
 #: SettingsResources.resx$PdfCompat_PdfA1B$Message
 msgid "PDF/A-1b"
-msgstr ""
+msgstr "PDF/A-1b"
 
 #: SettingsResources.resx$PdfCompat_PdfA2B$Message
 msgid "PDF/A-2b"
-msgstr ""
+msgstr "PDF/A-2b"
 
 #: SettingsResources.resx$PdfCompat_PdfA3B$Message
 msgid "PDF/A-3b"
-msgstr ""
+msgstr "PDF/A-3b"
 
 #: SettingsResources.resx$PdfCompat_PdfA3U$Message
 msgid "PDF/A-3u"
-msgstr ""
+msgstr "PDF/A-3u"
 
 #: MiscResources.resx$FileTypePng$Message
 msgid "PNG File (*.png)"
@@ -1084,7 +1083,7 @@ msgstr "Cere calea fișierului"
 
 #: FEmailSettings.resx$groupBox1.Text$Message
 msgid "Provider"
-msgstr ""
+msgstr "Furnizor"
 
 #: FBatchPrompt.resx$lblStatus.Text$Message
 msgid "Ready for scan {0}"
@@ -1174,7 +1173,7 @@ msgstr "Rotește la dreapta"
 
 #: FProgress.resx$btnRunInBG.Text$Message
 msgid "Run in Background"
-msgstr ""
+msgstr "Rulează în fundal"
 
 #: MiscResources.resx$RunningOcr$Message
 msgid "Running OCR"
@@ -1182,7 +1181,7 @@ msgstr ""
 
 #: FEditProfile.resx$rdSANE.Text$Message
 msgid "SANE Driver"
-msgstr ""
+msgstr "Driver SANE"
 
 #: FViewer.resx$tsSaveImage.Text$Message
 msgid "Save Image"
@@ -1309,7 +1308,7 @@ msgstr "Arată"
 
 #: FImageSettings.resx$cbSinglePageTiff.Text$Message
 msgid "Single page files"
-msgstr ""
+msgstr "Fișier cu o singură pagină."
 
 #: FBatchScan.resx$rdSingleScan.Text$Message
 msgid "Single scan"
@@ -1348,6 +1347,7 @@ msgstr "Detalii tehnice"
 msgid ""
 "The OCR engine is not available. Make sure to install the required package"
 msgstr ""
+"Motorul OCR nu este disponibil. Asigură-te că ai instalat pachetul necesar."
 
 #: MiscResources.resx$SaneNotAvailable$Message
 msgid ""
@@ -1392,7 +1392,7 @@ msgstr "Capacul scanerului este deschis"
 
 #: MiscResources.resx$DriverNotSupported$Message
 msgid "The selected driver is not supported on this system"
-msgstr ""
+msgstr "Driver-ul selectat nu este suportat de acest sistem."
 
 #: MiscResources.resx$DeviceNotFound$Message
 msgid "The selected scanner could not be found"
@@ -1424,7 +1424,7 @@ msgstr "Scanerul selectat este deconectat"
 
 #: FImageSettings.resx$groupTiff.Text$Message
 msgid "Tiff Options"
-msgstr ""
+msgstr "Opțiuni Tiff"
 
 #: FBatchScan.resx$lblTimeBetweenScans.Text$Message
 msgid "Time between scans (seconds)"
@@ -1436,7 +1436,7 @@ msgstr "Titlu"
 
 #: FAdvancedScanSettings.resx$label1.Text$Message
 msgid "Twain Implementation"
-msgstr ""
+msgstr "Implementare Twain"
 
 #: SettingsResources.resx$PageSize_Legal$Message
 msgid "US Legal (8.5x14 in)"
@@ -1452,15 +1452,15 @@ msgstr "Modificări nesalvate"
 
 #: MiscResources.resx$UpdateProgress$Message
 msgid "Update Progress"
-msgstr ""
+msgstr "Progres Actualizare"
 
 #: MiscResources.resx$Updating$Message
 msgid "Updating"
-msgstr ""
+msgstr "Se actualizează"
 
 #: MiscResources.resx$UploadingEmail$Message
 msgid "Uploading email"
-msgstr ""
+msgstr "Se încarcă e-mailul "
 
 #: FEditProfile.resx$rdbNative.Text$Message
 msgid "Use native UI"
@@ -1499,7 +1499,7 @@ msgstr "Se așteaptă ca scanerul TWAIN să termine"
 
 #: FAuthorize.resx$lblWaiting.Text$Message
 msgid "Waiting for authorization"
-msgstr ""
+msgstr "Se așteaptă autorizarea."
 
 #: MiscResources.resx$BatchStatusWaitingForScan$Message
 msgid "Waiting for scan {0}"
@@ -1507,7 +1507,7 @@ msgstr "Așteptați scanarea {0}"
 
 #: FAdvancedScanSettings.resx$label2.Text$Message
 msgid "White Threshold"
-msgstr ""
+msgstr "Limita albă"
 
 #: FPageSize.resx$labelX.Text$Message
 msgid "X"
@@ -1580,11 +1580,11 @@ msgstr "din {0}"
 
 #: SettingsResources.resx$TwainImpl_X64$Message
 msgid "x64"
-msgstr ""
+msgstr "x64"
 
 #: MiscResources.resx$NamedPageSizeFormat$Message
 msgid "{0} ({1}x{2} {3})"
-msgstr ""
+msgstr "{0} ({1}x{2} {3})"
 
 #: MiscResources.resx$SizeProgress$Message
 #: FDownloadProgress.resx$labelSub.Text$Message
@@ -1594,7 +1594,7 @@ msgstr "{0} / {1} MB"
 #: MiscResources.resx$FilesProgressFormat$Message
 #: FDownloadProgress.resx$labelTop.Text$Message
 msgid "{0} / {1} files"
-msgstr ""
+msgstr "0} / {1} files"
 
 #: FRecover.resx$lblPrompt.Text$Message
 msgid ""
@@ -1606,7 +1606,7 @@ msgstr ""
 
 #: MiscResources.resx$ImagesSaved$Message
 msgid "{0} images saved"
-msgstr ""
+msgstr "{0} imagini salvate"
 
 #: MiscResources.resx$PdfStatus$Message
 msgid "{0} of {1}"

@@ -3,14 +3,14 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-09-17 20:27+0000\n"
-"PO-Revision-Date: 2019-06-21 15:05+0000\n"
+"PO-Revision-Date: 2022-11-26 21:39+0000\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: ja\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Pootle 2.8\n"
-"X-POOTLE-MTIME: 1561129507.406320\n"
+"X-POOTLE-MTIME: 1669498782.675364\n"
 
 #: SettingsResources.resx$Dpi_100$Message
 msgid "100 dpi"
@@ -199,7 +199,7 @@ msgstr "一括スキャンをキャンセルしますか?"
 
 #: MiscResources.resx$ConfirmClearItems$Message
 msgid "Are you sure you want to clear {0} item(s)?"
-msgstr ""
+msgstr "{0}個のアイテムをクリアしますか?"
 
 #: MiscResources.resx$ConfirmDelete$Message
 msgid "Are you sure you want to delete \"{0}\"?"
@@ -235,7 +235,7 @@ msgstr "認証"
 
 #: SettingsResources.resx$TiffComp_Auto$Message
 msgid "Auto"
-msgstr ""
+msgstr "自動"
 
 #: FAutoSaveSettings.resx$$this.Text$Message
 #: FEditProfile.resx$linkAutoSaveSettings.Text$Message
@@ -289,7 +289,7 @@ msgstr "エラーのために一括スキャンは異常終了しました"
 
 #: FEditProfile.resx$label3.Text$Message
 msgid "Bit depth"
-msgstr ""
+msgstr "ビット深度"
 
 #: MiscResources.resx$FileTypeBmp$Message
 msgid "Bitmap Files (*.bmp)"
@@ -389,7 +389,7 @@ msgstr "クリア"
 
 #: FAutoSaveSettings.resx$cbClearAfterSave.Text$Message
 msgid "Clear images after saving"
-msgstr ""
+msgstr "保存後にイメージをクリア"
 
 #: MiscResources.resx$Close$Message
 msgid "Close"
@@ -472,7 +472,7 @@ msgstr "デフォルト"
 #: FImageSettings.resx$label1.Text$Message
 #: FPdfSettings.resx$label1.Text$Message
 msgid "Default File Path"
-msgstr ""
+msgstr "デフォルトのパス"
 
 #: FDesktop.resx$tsDeinterleave.Text$Message
 msgid "Deinterleave"
@@ -640,7 +640,7 @@ msgstr "他の言語を追加"
 
 #: SettingsResources.resx$Source_Glass$Message
 msgid "Glass"
-msgstr ""
+msgstr "フラットヘッド"
 
 #: SettingsResources.resx$EmailProviderType_Gmail$Message
 msgid "Gmail"
@@ -727,7 +727,7 @@ msgstr "インストールに失敗しました"
 
 #: FDesktop.resx$tsInterleave.Text$Message
 msgid "Interleave"
-msgstr ""
+msgstr "インターリーブ"
 
 #: MiscResources.resx$FileTypeJpeg$Message
 msgid "JPEG File (*.jpg, *.jpeg)"
@@ -1286,7 +1286,7 @@ msgstr "単一ページのファイル"
 
 #: FBatchScan.resx$rdSingleScan.Text$Message
 msgid "Single scan"
-msgstr ""
+msgstr "1枚だけスキャン"
 
 #: FImageSettings.resx$cbSkipSavePrompt.Text$Message
 #: FPdfSettings.resx$cbSkipSavePrompt.Text$Message

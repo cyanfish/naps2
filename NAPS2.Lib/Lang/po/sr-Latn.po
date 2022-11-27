@@ -3,13 +3,14 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-09-17 20:27+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: 2018-09-17 20:24+0000\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: sr-Latn\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Translate Toolkit 2.2.5\n"
+"X-Generator: Pootle 2.8\n"
+"X-POOTLE-MTIME: 1537215892.417802\n"
 
 #: SettingsResources.resx$Dpi_100$Message
 msgid "100 dpi"
@@ -130,17 +131,19 @@ msgstr "Izmeni ispreplitanost"
 
 #: SettingsResources.resx$TwainImpl_MemXfer$Message
 msgid "Alternative Transfer"
-msgstr ""
+msgstr "Alternativni Prenos"
 
 #: MiscResources.resx$PdfImportComponentNeeded$Message
 msgid ""
 "An additional component is needed to import this PDF file. Would you like to "
 "download it now?"
 msgstr ""
+"Potrebna je dodatna komponenta za uvoz ovog PDF fajla. Da li želite da je "
+"sada preuzmete?"
 
 #: MiscResources.resx$UpdateError$Message
 msgid "An error occured when trying to install the update"
-msgstr ""
+msgstr "Nastala je greška prilikom pokušaja instalacije nadogradnje"
 
 #: MiscResources.resx$AuthError$Message
 msgid "An error occurred when trying to authorize"
@@ -182,7 +185,7 @@ msgstr ""
 
 #: MiscResources.resx$OcrUpdateAvailable$Message
 msgid "An update to OCR is available"
-msgstr ""
+msgstr "Dostupno je ažuriranje za OCR."
 
 #: FAdvancedScanSettings.resx$cbBrightnessContrastAfterScan.Text$Message
 msgid "Apply brightness/contrast after scan"
@@ -194,7 +197,7 @@ msgstr "Primeni na svih {0} izabranih slika"
 
 #: MiscResources.resx$ConfirmCancelBatch$Message
 msgid "Are you sure you want to cancel the batch scan?"
-msgstr ""
+msgstr "Da li ste sigurni da želite otkazati kolektivno skeniranje?"
 
 #: MiscResources.resx$ConfirmClearItems$Message
 msgid "Are you sure you want to clear {0} item(s)?"
@@ -235,7 +238,7 @@ msgstr ""
 
 #: SettingsResources.resx$TiffComp_Auto$Message
 msgid "Auto"
-msgstr ""
+msgstr "Automatsko"
 
 #: FAutoSaveSettings.resx$$this.Text$Message
 #: FEditProfile.resx$linkAutoSaveSettings.Text$Message
@@ -318,7 +321,7 @@ msgstr "Osvetljenost"
 #: FDesktop.resx$tsBrightnessContrast.Text$Message
 #: FViewer.resx$tsBrightnessContrast.Text$Message
 msgid "Brightness / Contrast"
-msgstr ""
+msgstr "Osvetljenje / Kontrast"
 
 #: SettingsResources.resx$TiffComp_Ccitt4$Message
 msgid "CCITT4"
@@ -349,7 +352,7 @@ msgstr "Prekini"
 
 #: MiscResources.resx$CancelBatch$Message
 msgid "Cancel Batch"
-msgstr ""
+msgstr "Otkazivanje kolektivnog skeniranja"
 
 #: MiscResources.resx$BatchStatusCancelling$Message
 msgid "Cancelling"
@@ -403,7 +406,7 @@ msgstr "Kompatibilnost"
 
 #: FImageSettings.resx$label3.Text$Message
 msgid "Compression"
-msgstr ""
+msgstr "Kompresija"
 
 #: FEditProfile.resx$label7.Text$Message
 msgid "Contrast"
@@ -438,7 +441,7 @@ msgstr "Iseci"
 
 #: FAdvancedScanSettings.resx$cbForcePageSizeCrop.Text$Message
 msgid "Crop to page size"
-msgstr ""
+msgstr "Smanjiti do veličine stranice"
 
 #: SettingsResources.resx$PageSize_Custom$Message
 msgid "Custom"
@@ -473,7 +476,7 @@ msgstr "Podrazumevano"
 #: FImageSettings.resx$label1.Text$Message
 #: FPdfSettings.resx$label1.Text$Message
 msgid "Default File Path"
-msgstr ""
+msgstr "Podrazumevana putanja"
 
 #: FDesktop.resx$tsDeinterleave.Text$Message
 msgid "Deinterleave"
@@ -481,7 +484,7 @@ msgstr "Neukršteno"
 
 #: FAdvancedScanSettings.resx$cbWiaDelayBetweenScans.Text$Message
 msgid "Delay between scans (WIA)"
-msgstr ""
+msgstr "Razmak između skeniranja"
 
 #: FDesktop.resx$ctxDelete.Text$Message
 #: FDesktop.resx$tsDelete.Text$Message

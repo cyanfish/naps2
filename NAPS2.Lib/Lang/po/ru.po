@@ -172,7 +172,7 @@ msgstr "Ошибка драйвера сканирования"
 msgid ""
 "An operation is in progress. Are you sure you want to exit and cancel the "
 "operation?"
-msgstr ""
+msgstr "Выполняется операция. Вы уверены, что хотите выйти и отменить операцию?"
 
 #: MiscResources.resx$BatchError$Message
 msgid "An unknown error ocurred during the batch scan"
@@ -237,7 +237,7 @@ msgstr "Автор"
 
 #: FAuthorize.resx$$this.Text$Message
 msgid "Authorize"
-msgstr ""
+msgstr "Авторизовать"
 
 #: SettingsResources.resx$TiffComp_Auto$Message
 msgid "Auto"
@@ -266,7 +266,7 @@ msgstr "Автоувеличение номера (4 цифры)"
 
 #: FOcrSetup.resx$checkBoxRunInBG.Text$Message
 msgid "Automatically run OCR after scanning"
-msgstr ""
+msgstr "Автоматически запустить распознавание текста (OCR) после сканирования"
 
 #: SettingsResources.resx$PageSize_B4$Message
 msgid "B4 (250x353 mm)"
@@ -308,9 +308,8 @@ msgstr "Чёрно-белое"
 #: FDesktop.resx$tsBlackWhite.Text$Message
 #: FViewer.resx$tsBlackWhite.Text$Message
 #: FBlackWhite.resx$$this.Text$Message
-#, fuzzy
 msgid "Black and White"
-msgstr "Чёрно-белое"
+msgstr "Черно-белая"
 
 #: FAdvancedScanSettings.resx$groupBox3.Text$Message
 msgid "Blank Pages"
@@ -370,19 +369,19 @@ msgstr "Центрировать"
 
 #: FEmailSettings.resx$btnChangeProvider.Text$Message
 msgid "Change"
-msgstr ""
+msgstr "Изменить"
 
 #: FAbout.resx$cbCheckForUpdates.Text$Message
 msgid "Check for updates"
-msgstr ""
+msgstr "Проверить наличие обновлений"
 
 #: MiscResources.resx$CheckingForUpdates$Message
 msgid "Checking"
-msgstr ""
+msgstr "Проверка"
 
 #: FEmailProvider.resx$$this.Text$Message
 msgid "Choose Email Provider"
-msgstr ""
+msgstr "Выбрать email провайдера "
 
 #: MiscResources.resx$ChooseProfile$Message
 msgid "Choose Profile"
@@ -468,7 +467,7 @@ msgstr "Другой поворот"
 
 #: SettingsResources.resx$EmailProviderType_CustomSmtp$Message
 msgid "Custom SMTP"
-msgstr ""
+msgstr "Свой SMTP сервер"
 
 #: FPlaceholders.resx$label6.Text$Message
 msgid "Day (01-31)"
@@ -661,7 +660,7 @@ msgstr "Со стекла"
 
 #: SettingsResources.resx$EmailProviderType_Gmail$Message
 msgid "Gmail"
-msgstr ""
+msgstr "Gmail"
 
 #: SettingsResources.resx$BitDepth_8Grayscale$Message
 msgid "Grayscale"
@@ -876,7 +875,7 @@ msgstr "Сканеры не найдены"
 
 #: MiscResources.resx$NoUpdates$Message
 msgid "No updates available"
-msgstr ""
+msgstr "Нет доступных обновлений"
 
 #: SettingsResources.resx$TiffComp_None$Message
 msgid "None"
@@ -906,7 +905,7 @@ msgstr "Загрузка файлов для распознавания текс
 
 #: MiscResources.resx$OcrProgress$Message
 msgid "OCR Progress"
-msgstr ""
+msgstr "Идет распознавание текста (OCR)"
 
 #: FOcrSetup.resx$$this.Text$Message
 msgid "OCR Setup"
@@ -918,7 +917,7 @@ msgstr "Язык распознавания"
 
 #: FOcrSetup.resx$labelOcrMode.Text$Message
 msgid "OCR mode"
-msgstr ""
+msgstr "Режим распознавания текста (OCR)"
 
 #: FPdfPassword.resx$btnOK.Text$Message
 #: FPdfSettings.resx$btnOK.Text$Message
@@ -969,11 +968,11 @@ msgstr "Открыть папку"
 
 #: MiscResources.resx$ActiveOperations$Message
 msgid "Operation in Progress"
-msgstr ""
+msgstr "Операция в процессе"
 
 #: SettingsResources.resx$EmailProviderType_OutlookWeb$Message
 msgid "Outlook Web Access"
-msgstr ""
+msgstr "Outlook Web Access"
 
 #: FBatchScan.resx$groupboxOutput.Text$Message
 msgid "Output"
@@ -1088,7 +1087,7 @@ msgstr "Запрашивать путь сохранения"
 
 #: FEmailSettings.resx$groupBox1.Text$Message
 msgid "Provider"
-msgstr ""
+msgstr "Провайдер"
 
 #: FBatchPrompt.resx$lblStatus.Text$Message
 msgid "Ready for scan {0}"
@@ -1182,11 +1181,11 @@ msgstr "Запустить в фоновом режиме"
 
 #: MiscResources.resx$RunningOcr$Message
 msgid "Running OCR"
-msgstr ""
+msgstr "Идет распознавание текста (OCR)"
 
 #: FEditProfile.resx$rdSANE.Text$Message
 msgid "SANE Driver"
-msgstr ""
+msgstr "Драйвер SANE"
 
 #: FViewer.resx$tsSaveImage.Text$Message
 msgid "Save Image"
@@ -1352,11 +1351,13 @@ msgstr "Технические сведения"
 msgid ""
 "The OCR engine is not available. Make sure to install the required package"
 msgstr ""
+"Инструменты распознавания текста (OCR) недоступны. Убедитесь, что "
+"необходимые пакеты установлены"
 
 #: MiscResources.resx$SaneNotAvailable$Message
 msgid ""
 "The SANE driver is not available. Make sure to install the required packages"
-msgstr ""
+msgstr "Драйвер SANE недоступен. Убедитесь, что необходимые пакеты установлены"
 
 #: MiscResources.resx$ImportErrorCouldNot$Message
 msgid "The file '{0}' could not be imported"
@@ -1396,7 +1397,7 @@ msgstr "Крышка сканера открыта"
 
 #: MiscResources.resx$DriverNotSupported$Message
 msgid "The selected driver is not supported on this system"
-msgstr ""
+msgstr "Выбранный драйвер не поддерживается в этой системе"
 
 #: MiscResources.resx$DeviceNotFound$Message
 msgid "The selected scanner could not be found"
@@ -1456,15 +1457,15 @@ msgstr "Несохранённые изменения"
 
 #: MiscResources.resx$UpdateProgress$Message
 msgid "Update Progress"
-msgstr ""
+msgstr "Ход обновления"
 
 #: MiscResources.resx$Updating$Message
 msgid "Updating"
-msgstr ""
+msgstr "Обновление"
 
 #: MiscResources.resx$UploadingEmail$Message
 msgid "Uploading email"
-msgstr ""
+msgstr "Загрузка электронного сообщения"
 
 #: FEditProfile.resx$rdbNative.Text$Message
 msgid "Use native UI"
@@ -1501,7 +1502,7 @@ msgstr "Ожидание завершения работы TWAIN"
 
 #: FAuthorize.resx$lblWaiting.Text$Message
 msgid "Waiting for authorization"
-msgstr ""
+msgstr "Ожидание авторизации"
 
 #: MiscResources.resx$BatchStatusWaitingForScan$Message
 msgid "Waiting for scan {0}"

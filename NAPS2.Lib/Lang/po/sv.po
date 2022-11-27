@@ -3,13 +3,14 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-09-17 20:27+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: 2022-11-27 00:43+0000\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: sv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Translate Toolkit 2.2.5\n"
+"X-Generator: Pootle 2.8\n"
+"X-POOTLE-MTIME: 1669509810.668547\n"
 
 #: SettingsResources.resx$Dpi_100$Message
 msgid "100 dpi"
@@ -130,17 +131,19 @@ msgstr "Alternativ interfoliering"
 
 #: SettingsResources.resx$TwainImpl_MemXfer$Message
 msgid "Alternative Transfer"
-msgstr ""
+msgstr "Annan överföring"
 
 #: MiscResources.resx$PdfImportComponentNeeded$Message
 msgid ""
 "An additional component is needed to import this PDF file. Would you like to "
 "download it now?"
 msgstr ""
+"En extra komponent behövs för att importera denna PDF-fil. Vill du ladda ner "
+"den nu?"
 
 #: MiscResources.resx$UpdateError$Message
 msgid "An error occured when trying to install the update"
-msgstr ""
+msgstr "Ett fel inträffade när uppdateringen försökte installeras"
 
 #: MiscResources.resx$AuthError$Message
 msgid "An error occurred when trying to authorize"
@@ -156,7 +159,7 @@ msgstr "Ett fel inträffade vid försök att spara filen"
 
 #: MiscResources.resx$ErrorEmailing$Message
 msgid "An error occurred when trying to send the email"
-msgstr ""
+msgstr "Ett fel uppstod när man försökte skicka till E-Post"
 
 #: MiscResources.resx$EmailError$Message
 msgid "An error occurred while trying to send an email"
@@ -170,7 +173,7 @@ msgstr "Ett fel uppstod med skannerdrivrutinen"
 msgid ""
 "An operation is in progress. Are you sure you want to exit and cancel the "
 "operation?"
-msgstr ""
+msgstr "En tjänst är aktiv. Är du säker på du vill avbryta eller avsluta?"
 
 #: MiscResources.resx$BatchError$Message
 msgid "An unknown error ocurred during the batch scan"
@@ -178,7 +181,7 @@ msgstr "Ett okänt fel inträffade under mängdskanning"
 
 #: MiscResources.resx$UpdateAvailable$Message
 msgid "An update is available"
-msgstr ""
+msgstr "En uppdatering är tillgänglig"
 
 #: MiscResources.resx$OcrUpdateAvailable$Message
 msgid "An update to OCR is available"
@@ -194,7 +197,7 @@ msgstr "Tillämpa på {0} markerade bilder"
 
 #: MiscResources.resx$ConfirmCancelBatch$Message
 msgid "Are you sure you want to cancel the batch scan?"
-msgstr ""
+msgstr "Är du säker på du vill avbryta eller avsluta multi scan?"
 
 #: MiscResources.resx$ConfirmClearItems$Message
 msgid "Are you sure you want to clear {0} item(s)?"
@@ -230,11 +233,11 @@ msgstr "Upphovsman"
 
 #: FAuthorize.resx$$this.Text$Message
 msgid "Authorize"
-msgstr ""
+msgstr "Autentisera"
 
 #: SettingsResources.resx$TiffComp_Auto$Message
 msgid "Auto"
-msgstr ""
+msgstr "Automatiskt"
 
 #: FAutoSaveSettings.resx$$this.Text$Message
 #: FEditProfile.resx$linkAutoSaveSettings.Text$Message
@@ -259,7 +262,7 @@ msgstr "Automatiskt uppräkningnummer (4 siffror)"
 
 #: FOcrSetup.resx$checkBoxRunInBG.Text$Message
 msgid "Automatically run OCR after scanning"
-msgstr ""
+msgstr "Automatiskt köra ORC scanning"
 
 #: SettingsResources.resx$PageSize_B4$Message
 msgid "B4 (250x353 mm)"
@@ -317,11 +320,11 @@ msgstr "Ljus"
 #: FDesktop.resx$tsBrightnessContrast.Text$Message
 #: FViewer.resx$tsBrightnessContrast.Text$Message
 msgid "Brightness / Contrast"
-msgstr ""
+msgstr "Ljusstyrka / Kontrast"
 
 #: SettingsResources.resx$TiffComp_Ccitt4$Message
 msgid "CCITT4"
-msgstr ""
+msgstr "CCITT4"
 
 #: FAdvancedScanSettings.resx$btnCancel.Text$Message
 #: FAuthorize.resx$btnCancel.Text$Message
@@ -348,7 +351,7 @@ msgstr "Avbryt"
 
 #: MiscResources.resx$CancelBatch$Message
 msgid "Cancel Batch"
-msgstr ""
+msgstr "Avbryta batch"
 
 #: MiscResources.resx$BatchStatusCancelling$Message
 msgid "Cancelling"
@@ -360,19 +363,19 @@ msgstr "Centrera"
 
 #: FEmailSettings.resx$btnChangeProvider.Text$Message
 msgid "Change"
-msgstr ""
+msgstr "Ändra"
 
 #: FAbout.resx$cbCheckForUpdates.Text$Message
 msgid "Check for updates"
-msgstr ""
+msgstr "Kontrollera för uppdatering"
 
 #: MiscResources.resx$CheckingForUpdates$Message
 msgid "Checking"
-msgstr ""
+msgstr "Kontrollerar"
 
 #: FEmailProvider.resx$$this.Text$Message
 msgid "Choose Email Provider"
-msgstr ""
+msgstr "Välj e-post leverantör"
 
 #: MiscResources.resx$ChooseProfile$Message
 msgid "Choose Profile"
@@ -402,7 +405,7 @@ msgstr "Kompatibilitet"
 
 #: FImageSettings.resx$label3.Text$Message
 msgid "Compression"
-msgstr ""
+msgstr "Komprimera"
 
 #: FEditProfile.resx$label7.Text$Message
 msgid "Contrast"
@@ -423,7 +426,7 @@ msgstr "Kopierar"
 
 #: FAbout.resx$labelCopyright.Text$Message
 msgid "Copyright 2009, 2012-2018 NAPS2 Contributors"
-msgstr ""
+msgstr "Copyright 2009, 2012-2018 NAPS2 Bidragsgivare"
 
 #: FAdvancedScanSettings.resx$label3.Text$Message
 msgid "Coverage Threshold"
@@ -437,7 +440,7 @@ msgstr "Beskär"
 
 #: FAdvancedScanSettings.resx$cbForcePageSizeCrop.Text$Message
 msgid "Crop to page size"
-msgstr ""
+msgstr "Ändra till sidstorlek "
 
 #: SettingsResources.resx$PageSize_Custom$Message
 msgid "Custom"
@@ -458,7 +461,7 @@ msgstr "Anpassad rotation"
 
 #: SettingsResources.resx$EmailProviderType_CustomSmtp$Message
 msgid "Custom SMTP"
-msgstr ""
+msgstr "Modifierad SMTP"
 
 #: FPlaceholders.resx$label6.Text$Message
 msgid "Day (01-31)"
@@ -480,7 +483,7 @@ msgstr "Interfoliera inte"
 
 #: FAdvancedScanSettings.resx$cbWiaDelayBetweenScans.Text$Message
 msgid "Delay between scans (WIA)"
-msgstr ""
+msgstr "Paus mellan scanning (WIA)"
 
 #: FDesktop.resx$ctxDelete.Text$Message
 #: FDesktop.resx$tsDelete.Text$Message
@@ -495,19 +498,19 @@ msgstr "Ta bort"
 #: FDesktop.resx$tsDeskew.Text$Message
 #: FViewer.resx$tsDeskew.Text$Message
 msgid "Deskew"
-msgstr ""
+msgstr "Rätta upp"
 
 #: MiscResources.resx$AutoDeskewProgress$Message
 msgid "Deskew Progress"
-msgstr ""
+msgstr "Rättar upp framsteg"
 
 #: FAdvancedScanSettings.resx$cbAutoDeskew.Text$Message
 msgid "Deskew scanned pages"
-msgstr ""
+msgstr "Rättar scannade sidor"
 
 #: MiscResources.resx$AutoDeskewing$Message
 msgid "Deskewing"
-msgstr ""
+msgstr "Rättar"
 
 #: FEditProfile.resx$label1.Text$Message
 msgid "Device"
@@ -523,7 +526,7 @@ msgstr "Visningsnamn"
 
 #: MiscResources.resx$Donate$Message
 msgid "Donate"
-msgstr ""
+msgstr "Donerar"
 
 #: FBatchPrompt.resx$btnDone.Text$Message
 #: FProfiles.resx$btnDone.Text$Message
@@ -540,7 +543,7 @@ msgstr "Nedladdningsfel"
 
 #: MiscResources.resx$DownloadNeeded$Message
 msgid "Download Needed"
-msgstr ""
+msgstr "Nerladdning behövs"
 
 #: FDownloadProgress.resx$$this.Text$Message
 msgid "Download Progress"
@@ -629,6 +632,8 @@ msgid ""
 "For high JPEG qualities (80+), also increase Image Quality in your profile "
 "for best results"
 msgstr ""
+"För hög JPEG kvalitet (80+), öka bild kvaliteten i din profil för bästa "
+"resultat"
 
 #: MiscResources.resx$FileTypeGif$Message
 msgid "GIF File (*.gif)"
@@ -644,7 +649,7 @@ msgstr "Glas"
 
 #: SettingsResources.resx$EmailProviderType_Gmail$Message
 msgid "Gmail"
-msgstr ""
+msgstr "Gmail"
 
 #: SettingsResources.resx$BitDepth_8Grayscale$Message
 msgid "Grayscale"
@@ -662,7 +667,7 @@ msgstr "Timma (0-23)"
 #: FHueSaturation.resx$$this.Text$Message
 #: FViewer.resx$tsHueSaturation.Text$Message
 msgid "Hue / Saturation"
-msgstr ""
+msgstr "Ljus / Mättnad"
 
 #: FAbout.resx$label1.Text$Message
 msgid "Icons from"
@@ -707,7 +712,7 @@ msgstr "Importerar {0}"
 
 #: MiscResources.resx$Install$Message
 msgid "Install {0}"
-msgstr ""
+msgstr "Installera {0}"
 
 #: MiscResources.resx$InstallComplete$Message
 msgid "Installation Complete"
@@ -743,7 +748,7 @@ msgstr "Nyckelord"
 
 #: SettingsResources.resx$TiffComp_Lzw$Message
 msgid "LZW"
-msgstr ""
+msgstr "LZW"
 
 #: FDesktop.resx$toolStripDropDownButton1.Text$Message
 msgid "Language"
@@ -812,7 +817,7 @@ msgstr "NAPS2"
 
 #: MiscResources.resx$DonatePrompt$Message
 msgid "NAPS2 is completely free. Consider making a donation"
-msgstr ""
+msgstr "NAPS2 är helt gratis. Tänk gärna på att donera."
 
 #: FPageSize.resx$label1.Text$Message
 msgid "Name (optional)"
@@ -849,7 +854,7 @@ msgstr "Det finns inga sidor i mataren"
 #: FEmailSettings.resx$lblProvider.Text$Message
 #: SettingsResources.resx$EmailProvider_NotSelected$Message
 msgid "No provider selected"
-msgstr ""
+msgstr "Ingen leverantör vald"
 
 #: MiscResources.resx$NoDevicesFound$Message
 msgid "No scanning device was found"
@@ -857,12 +862,11 @@ msgstr "Ingen skannerenhet hittades"
 
 #: MiscResources.resx$NoUpdates$Message
 msgid "No updates available"
-msgstr ""
+msgstr "Ingen uppdatering tillgänglig"
 
 #: SettingsResources.resx$TiffComp_None$Message
-#, fuzzy
 msgid "None"
-msgstr "Klart"
+msgstr "Ingen"
 
 #: FDesktop.resx$$this.Text$Message
 msgid "Not Another PDF Scanner 2"
@@ -886,7 +890,7 @@ msgstr "OCR-nedladdning"
 
 #: MiscResources.resx$OcrProgress$Message
 msgid "OCR Progress"
-msgstr ""
+msgstr "OCR Framgång"
 
 #: FOcrSetup.resx$$this.Text$Message
 msgid "OCR Setup"
@@ -898,7 +902,7 @@ msgstr "OCR-språk"
 
 #: FOcrSetup.resx$labelOcrMode.Text$Message
 msgid "OCR mode"
-msgstr ""
+msgstr "OCR läge"
 
 #: FAbout.resx$okButton.Text$Message
 #: FAdvancedScanSettings.resx$btnOK.Text$Message
@@ -944,11 +948,11 @@ msgstr "Öppna mapp"
 
 #: MiscResources.resx$ActiveOperations$Message
 msgid "Operation in Progress"
-msgstr ""
+msgstr "Tjänsten körs"
 
 #: SettingsResources.resx$EmailProviderType_OutlookWeb$Message
 msgid "Outlook Web Access"
-msgstr ""
+msgstr "Outlook Web Access"
 
 #: FBatchScan.resx$groupboxOutput.Text$Message
 msgid "Output"
@@ -978,19 +982,19 @@ msgstr "PDF sparad"
 
 #: SettingsResources.resx$PdfCompat_PdfA1B$Message
 msgid "PDF/A-1b"
-msgstr ""
+msgstr "PDF/A-1b"
 
 #: SettingsResources.resx$PdfCompat_PdfA2B$Message
 msgid "PDF/A-2b"
-msgstr ""
+msgstr "PDF/A-2b"
 
 #: SettingsResources.resx$PdfCompat_PdfA3B$Message
 msgid "PDF/A-3b"
-msgstr ""
+msgstr "PDF/A-3b"
 
 #: SettingsResources.resx$PdfCompat_PdfA3U$Message
 msgid "PDF/A-3u"
-msgstr ""
+msgstr "PDF/A-3u"
 
 #: MiscResources.resx$FileTypePng$Message
 msgid "PNG File (*.png)"
@@ -1025,7 +1029,7 @@ msgstr "Platshållare"
 
 #: FAdvancedScanSettings.resx$groupBox4.Text$Message
 msgid "Post-processing"
-msgstr ""
+msgstr "För behandling"
 
 #: FBatchScan.resx$lblStatus.Text$Message
 msgid "Press Start when ready"
@@ -1059,11 +1063,11 @@ msgstr "Profiler"
 
 #: FAutoSaveSettings.resx$cbPromptForFilePath.Text$Message
 msgid "Prompt for file path"
-msgstr ""
+msgstr "Ange fil sökväg"
 
 #: FEmailSettings.resx$groupBox1.Text$Message
 msgid "Provider"
-msgstr ""
+msgstr "Leverantör"
 
 #: FBatchPrompt.resx$lblStatus.Text$Message
 msgid "Ready for scan {0}"
@@ -1116,7 +1120,7 @@ msgstr "Återställ standard"
 
 #: FAdvancedScanSettings.resx$cbWiaRetryOnFailure.Text$Message
 msgid "Retry on failure (WIA)"
-msgstr ""
+msgstr "Försök igen vid fel (WIA)"
 
 #: FDesktop.resx$tsReverse.Text$Message
 msgid "Reverse"
@@ -1148,20 +1152,19 @@ msgstr "Rotera höger"
 
 #: FProgress.resx$btnRunInBG.Text$Message
 msgid "Run in Background"
-msgstr ""
+msgstr "Körs i bakgrunden"
 
 #: MiscResources.resx$RunningOcr$Message
 msgid "Running OCR"
-msgstr ""
+msgstr "Kör OCR"
 
 #: FEditProfile.resx$rdSANE.Text$Message
 msgid "SANE Driver"
-msgstr ""
+msgstr "SANE Driver"
 
 #: FViewer.resx$tsSaveImage.Text$Message
-#, fuzzy
 msgid "Save Image"
-msgstr "Spara bilder"
+msgstr "Spara bild"
 
 #: FDesktop.resx$tsdSaveImages.Text$Message
 msgid "Save Images"
@@ -1265,7 +1268,7 @@ msgstr "Markerade ({0})"
 #: FAutoSaveSettings.resx$rdSeparateByPatchT.Text$Message
 #: FBatchScan.resx$rdSeparateByPatchT.Text$Message
 msgid "Separate files by Patch-T"
-msgstr ""
+msgstr "Delade filer av Patch-T"
 
 #: FProfiles.resx$ctxSetDefault.Text$Message
 msgid "Set Default"
@@ -1275,7 +1278,7 @@ msgstr "Ange standard"
 #: FSharpen.resx$$this.Text$Message
 #: FViewer.resx$tsSharpen.Text$Message
 msgid "Sharpen"
-msgstr ""
+msgstr "Skarpare"
 
 #: FPdfSettings.resx$cbShowOwnerPassword.Text$Message
 #: FPdfSettings.resx$cbShowUserPassword.Text$Message
@@ -1284,7 +1287,7 @@ msgstr "Visa"
 
 #: FImageSettings.resx$cbSinglePageTiff.Text$Message
 msgid "Single page files"
-msgstr ""
+msgstr "Enstaka sid filer"
 
 #: FBatchScan.resx$rdSingleScan.Text$Message
 msgid "Single scan"
@@ -1301,7 +1304,7 @@ msgstr "Starta"
 
 #: FAdvancedScanSettings.resx$cbForcePageSize.Text$Message
 msgid "Stretch to page size"
-msgstr ""
+msgstr "Anpassa till sid storlek"
 
 #: FPdfSettings.resx$label5.Text$Message
 msgid "Subject"
@@ -1317,17 +1320,20 @@ msgstr "TWAIN-drivrutin"
 
 #: FError.resx$linkDetails.Text$Message
 msgid "Technical Details"
-msgstr ""
+msgstr "Tekniska detaljer"
 
 #: MiscResources.resx$TesseractNotAvailable$Message
 msgid ""
 "The OCR engine is not available. Make sure to install the required package"
 msgstr ""
+"OCR motorn är inte tillgänglig. Kontrollera och installera paketet som krävs"
 
 #: MiscResources.resx$SaneNotAvailable$Message
 msgid ""
 "The SANE driver is not available. Make sure to install the required packages"
 msgstr ""
+"SANE drivrutin är inte tillgänglig. Kontroller och installera nödvändigt "
+"paket"
 
 #: MiscResources.resx$ImportErrorCouldNot$Message
 msgid "The file '{0}' could not be imported"
@@ -1343,7 +1349,7 @@ msgstr ""
 
 #: MiscResources.resx$FileInUse$Message
 msgid "The file could not be overwritten because it is currently in use"
-msgstr ""
+msgstr "Filen kunde inte skrivas över eftersom den används"
 
 #: MiscResources.resx$ConfirmOverwriteFile$Message
 msgid "The file {0} already exists. Do you want to overwrite it?"
@@ -1367,7 +1373,7 @@ msgstr "Skannerlocket är öppet"
 
 #: MiscResources.resx$DriverNotSupported$Message
 msgid "The selected driver is not supported on this system"
-msgstr ""
+msgstr "Valda drivrutinen är inte supporterad för detta system"
 
 #: MiscResources.resx$DeviceNotFound$Message
 msgid "The selected scanner could not be found"
@@ -1399,7 +1405,7 @@ msgstr "Den valda skannern är offline"
 
 #: FImageSettings.resx$groupTiff.Text$Message
 msgid "Tiff Options"
-msgstr ""
+msgstr "Tiff Val"
 
 #: FBatchScan.resx$lblTimeBetweenScans.Text$Message
 msgid "Time between scans (seconds)"
@@ -1427,15 +1433,15 @@ msgstr "Osparade ändringar"
 
 #: MiscResources.resx$UpdateProgress$Message
 msgid "Update Progress"
-msgstr ""
+msgstr "Uppdatering körs"
 
 #: MiscResources.resx$Updating$Message
 msgid "Updating"
-msgstr ""
+msgstr "Uppdatering pågår"
 
 #: MiscResources.resx$UploadingEmail$Message
 msgid "Uploading email"
-msgstr ""
+msgstr "Laddar upp e-post"
 
 #: FEditProfile.resx$rdbNative.Text$Message
 msgid "Use native UI"
@@ -1472,7 +1478,7 @@ msgstr "Väntar på att TWAIN skall slutföras"
 
 #: FAuthorize.resx$lblWaiting.Text$Message
 msgid "Waiting for authorization"
-msgstr ""
+msgstr "Väntar på auktorisering"
 
 #: MiscResources.resx$BatchStatusWaitingForScan$Message
 msgid "Waiting for scan {0}"
