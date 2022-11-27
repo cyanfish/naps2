@@ -117,35 +117,17 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="en" xml:space="preserve">
-    <value>English</value>
+  <data name="af" xml:space="preserve">
+    <value>Afrikaans</value>
   </data>
-  <data name="de" xml:space="preserve">
-    <value>Deutsch</value>
+  <data name="ar" xml:space="preserve">
+    <value>العَرَبِية</value>
   </data>
-  <data name="es" xml:space="preserve">
-    <value>Español</value>
+  <data name="bg" xml:space="preserve">
+    <value>български</value>
   </data>
-  <data name="fr" xml:space="preserve">
-    <value>Français</value>
-  </data>
-  <data name="hi" xml:space="preserve">
-    <value>हिन्दी</value>
-  </data>
-  <data name="it" xml:space="preserve">
-    <value>Italiano</value>
-  </data>
-  <data name="pl" xml:space="preserve">
-    <value>Polski</value>
-  </data>
-  <data name="ru" xml:space="preserve">
-    <value>Русский язык</value>
-  </data>
-  <data name="uk" xml:space="preserve">
-    <value>Українська</value>
-  </data>
-  <data name="he" xml:space="preserve">
-    <value>עברית</value>
+  <data name="bn" xml:space="preserve">
+    <value>বাংলা</value>
   </data>
   <data name="ca" xml:space="preserve">
     <value>Català</value>
@@ -156,8 +138,71 @@
   <data name="da" xml:space="preserve">
     <value>Dansk</value>
   </data>
-  <data name="bg" xml:space="preserve">
-    <value>български</value>
+  <data name="de" xml:space="preserve">
+    <value>Deutsch</value>
+  </data>
+  <data name="el" xml:space="preserve">
+    <value>Ελληνικά</value>
+  </data>
+  <data name="en" xml:space="preserve">
+    <value>English</value>
+  </data>
+  <data name="es" xml:space="preserve">
+    <value>Español</value>
+  </data>
+  <data name="et" xml:space="preserve">
+    <value>Eesti keel</value>
+  </data>
+  <data name="fa" xml:space="preserve">
+    <value>فارسى</value>
+  </data>
+  <data name="fi" xml:space="preserve">
+    <value>Suomi</value>
+  </data>
+  <data name="fr" xml:space="preserve">
+    <value>Français</value>
+  </data>
+  <data name="he" xml:space="preserve">
+    <value>עברית</value>
+  </data>
+  <data name="hi" xml:space="preserve">
+    <value>हिन्दी</value>
+  </data>
+  <data name="hr" xml:space="preserve">
+    <value>Hrvatski</value>
+  </data>
+  <data name="hu" xml:space="preserve">
+    <value>Magyar</value>
+  </data>
+  <data name="id" xml:space="preserve">
+    <value>Bahasa Indonesia</value>
+  </data>
+  <data name="it" xml:space="preserve">
+    <value>Italiano</value>
+  </data>
+  <data name="ja" xml:space="preserve">
+    <value>日本語</value>
+  </data>
+  <data name="ko" xml:space="preserve">
+    <value>한국어</value>
+  </data>
+  <data name="lt" xml:space="preserve">
+    <value>Lietuvių kalba</value>
+  </data>
+  <data name="lv" xml:space="preserve">
+    <value>Latviešu valoda</value>
+  </data>
+  <data name="nb" xml:space="preserve">
+    <value>Bokmål</value>
+  </data>
+  <data name="nl" xml:space="preserve">
+    <value>Nederlands</value>
+  </data>
+  <data name="nn" xml:space="preserve">
+    <value>Nynorsk</value>
+  </data>
+  <data name="pl" xml:space="preserve">
+    <value>Polski</value>
   </data>
   <data name="pt_BR" xml:space="preserve">
     <value>Português (Brasil)</value>
@@ -165,56 +210,23 @@
   <data name="pt_PT" xml:space="preserve">
     <value>Português (Portugal)</value>
   </data>
-  <data name="hu" xml:space="preserve">
-    <value>Magyar</value>
-  </data>
-  <data name="hr" xml:space="preserve">
-    <value>Hrvatski</value>
-  </data>
-  <data name="nl" xml:space="preserve">
-    <value>Nederlands</value>
-  </data>
-  <data name="sv" xml:space="preserve">
-    <value>Svenska</value>
-  </data>
-  <data name="sq" xml:space="preserve">
-    <value>Shqip</value>
-  </data>
-  <data name="zh_TW" xml:space="preserve">
-    <value>台語 台灣話</value>
-  </data>
-  <data name="tr" xml:space="preserve">
-    <value>Türkçe</value>
-  </data>
-  <data name="nb" xml:space="preserve">
-    <value>Bokmål</value>
-  </data>
   <data name="ro" xml:space="preserve">
     <value>Limba Română</value>
   </data>
-  <data name="el" xml:space="preserve">
-    <value>Ελληνικά</value>
+  <data name="ru" xml:space="preserve">
+    <value>Русский язык</value>
   </data>
-  <data name="et" xml:space="preserve">
-    <value>Eesti keel</value>
-  </data>
-  <data name="fi" xml:space="preserve">
-    <value>Suomi</value>
-  </data>
-  <data name="lt" xml:space="preserve">
-    <value>Lietuvių kalba</value>
-  </data>
-  <data name="ko" xml:space="preserve">
-    <value>한국어</value>
-  </data>
-  <data name="fa" xml:space="preserve">
-    <value>فارسى</value>
-  </data>
-  <data name="ar" xml:space="preserve">
-    <value>العَرَبِية</value>
+  <data name="si" xml:space="preserve">
+    <value>සිංහල</value>
   </data>
   <data name="sk" xml:space="preserve">
     <value>Slovenčina</value>
+  </data>
+  <data name="sl" xml:space="preserve">
+    <value>Slovenščina</value>
+  </data>
+  <data name="sq" xml:space="preserve">
+    <value>Shqip</value>
   </data>
   <data name="sr_Cyrl" xml:space="preserve">
     <value>Српски</value>
@@ -222,25 +234,28 @@
   <data name="sr_Latn" xml:space="preserve">
     <value>Srpski</value>
   </data>
-  <data name="lv" xml:space="preserve">
-    <value>Latviešu valoda</value>
+  <data name="sv" xml:space="preserve">
+    <value>Svenska</value>
   </data>
-  <data name="af" xml:space="preserve">
-    <value>Afrikaans</value>
+  <data name="th" xml:space="preserve">
+    <value>ภาษาไทย</value>
+  </data>
+  <data name="tr" xml:space="preserve">
+    <value>Türkçe</value>
+  </data>
+  <data name="uk" xml:space="preserve">
+    <value>Українська</value>
+  </data>
+  <data name="ur" xml:space="preserve">
+    <value>اُردُو</value>
   </data>
   <data name="vi" xml:space="preserve">
     <value>Tiếng việt</value>
   </data>
-  <data name="sl" xml:space="preserve">
-    <value>Slovenščina</value>
+  <data name="zh_CN" xml:space="preserve">
+    <value>简化字</value>
   </data>
-  <data name="nn" xml:space="preserve">
-    <value>Nynorsk</value>
-  </data>
-  <data name="si" xml:space="preserve">
-    <value>සිංහල</value>
-  </data>
-  <data name="ja" xml:space="preserve">
-    <value>日本語</value>
+  <data name="zh_TW" xml:space="preserve">
+    <value>繁體字</value>
   </data>
 </root>
