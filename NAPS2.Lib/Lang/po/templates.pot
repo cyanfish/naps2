@@ -188,7 +188,6 @@ msgstr ""
 msgid "Apply brightness/contrast after scan"
 msgstr ""
 
-#: ImageForm.resx$checkboxApplyToSelected.Text$Message
 #: UiStrings.resx$ApplyToSelected$Message
 msgid "Apply to all {0} selected images"
 msgstr ""
@@ -302,7 +301,6 @@ msgstr ""
 msgid "Bitmap Files (*.bmp)"
 msgstr ""
 
-#: FBlackWhite.resx$$this.Text$Message
 #: SettingsResources.resx$BitDepth_1BlackAndWhite$Message
 #: UiStrings.resx$BlackAndWhite$Message
 msgid "Black & White"
@@ -317,7 +315,6 @@ msgstr ""
 msgid "Brightness"
 msgstr ""
 
-#: FBrightnessContrast.resx$$this.Text$Message
 #: UiStrings.resx$BrightnessContrast$Message
 msgid "Brightness / Contrast"
 msgstr ""
@@ -342,7 +339,6 @@ msgstr ""
 #: FPlaceholders.resx$btnCancel.Text$Message
 #: FProgress.resx$btnCancel.Text$Message
 #: FSelectDevice.resx$btnCancel.Text$Message
-#: ImageForm.resx$btnCancel.Text$Message
 #: MiscResources.resx$Cancel$Message
 #: OperationProgressNotifyWidget.resx$cancelToolStripMenuItem.Text$Message
 #: UiStrings.resx$Cancel$Message
@@ -437,7 +433,6 @@ msgstr ""
 msgid "Coverage Threshold"
 msgstr ""
 
-#: FCrop.resx$$this.Text$Message
 #: UiStrings.resx$Crop$Message
 msgid "Crop"
 msgstr ""
@@ -679,7 +674,6 @@ msgstr ""
 msgid "Hour (0-23)"
 msgstr ""
 
-#: FHueSaturation.resx$$this.Text$Message
 #: UiStrings.resx$HueSaturation$Message
 msgid "Hue / Saturation"
 msgstr ""
@@ -944,7 +938,6 @@ msgstr ""
 #: FPdfPassword.resx$btnOK.Text$Message
 #: FPdfSettings.resx$btnOK.Text$Message
 #: FPlaceholders.resx$btnOK.Text$Message
-#: ImageForm.resx$btnOK.Text$Message
 #: UiStrings.resx$OK$Message
 msgid "OK"
 msgstr ""
@@ -1154,7 +1147,6 @@ msgstr ""
 msgid "Reverse"
 msgstr ""
 
-#: ImageForm.resx$btnRevert.Text$Message
 #: UiStrings.resx$Revert$Message
 msgid "Revert"
 msgstr ""
@@ -1163,7 +1155,6 @@ msgstr ""
 msgid "Right"
 msgstr ""
 
-#: FRotate.resx$$this.Text$Message
 #: UiStrings.resx$Rotate$Message
 msgid "Rotate"
 msgstr ""
@@ -1313,7 +1304,6 @@ msgstr ""
 msgid "Set Default"
 msgstr ""
 
-#: FSharpen.resx$$this.Text$Message
 #: UiStrings.resx$Sharpen$Message
 msgid "Sharpen"
 msgstr ""
@@ -1534,10 +1524,6 @@ msgstr ""
 msgid "Wia Version"
 msgstr ""
 
-#: FPageSize.resx$labelX.Text$Message
-msgid "X"
-msgstr ""
-
 #: FPlaceholders.resx$label3.Text$Message
 msgid "Year"
 msgstr ""
@@ -1600,6 +1586,11 @@ msgstr ""
 
 #: MiscResources.resx$NamedPageSizeFormat$Message
 msgid "{0} ({1}x{2} {3})"
+msgstr ""
+
+#: FProgress.resx$labelNumber.Text$Message
+#: MiscResources.resx$ProgressFormat$Message
+msgid "{0} / {1}"
 msgstr ""
 
 #: FDownloadProgress.resx$labelSub.Text$Message
