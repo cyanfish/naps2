@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2022-11-27 02:13\n"
+"PO-Revision-Date: 2022-11-27 02:32\n"
 "Last-Translator: \n"
 "Language-Team: Sinhala\n"
 "Language: si\n"
@@ -21,39 +21,39 @@ msgstr ""
 
 #: SettingsResources.resx$Dpi_100$Message
 msgid "100 dpi"
-msgstr ""
+msgstr "අඟලට තිත් 100"
 
 #: SettingsResources.resx$Dpi_1200$Message
 msgid "1200 dpi"
-msgstr ""
+msgstr "අඟලට තිත් 1200"
 
 #: SettingsResources.resx$Dpi_150$Message
 msgid "150 dpi"
-msgstr ""
+msgstr "අඟලට තිත් 150"
 
 #: SettingsResources.resx$Dpi_200$Message
 msgid "200 dpi"
-msgstr ""
+msgstr "අඟලට තිත් 200"
 
 #: SettingsResources.resx$BitDepth_24Color$Message
 msgid "24-bit Color"
-msgstr ""
+msgstr "බිටු 24 වර්ණ "
 
 #: SettingsResources.resx$Dpi_300$Message
 msgid "300 dpi"
-msgstr ""
+msgstr "අඟලට තිත් 300"
 
 #: SettingsResources.resx$Dpi_400$Message
 msgid "400 dpi"
-msgstr ""
+msgstr "අඟලට තිත් 400"
 
 #: SettingsResources.resx$Dpi_600$Message
 msgid "600 dpi"
-msgstr ""
+msgstr "අඟලට තිත් 600"
 
 #: SettingsResources.resx$Dpi_800$Message
 msgid "800 dpi"
-msgstr ""
+msgstr "අඟලට තිත් 800"
 
 #: SettingsResources.resx$PageSize_A3$Message
 msgid "A3 (297x420 mm)"
@@ -70,20 +70,20 @@ msgstr ""
 #: FAbout.resx$$this.Text$Message
 #: FDesktop.resx$tsAbout.Text$Message
 msgid "About"
-msgstr ""
+msgstr "මෘදුකාංගය පිලිබඳ තොරතුරු "
 
 #: FScanProgress.resx$$this.Text$Message
 #: MiscResources.resx$AcquiringData$Message
 msgid "Acquiring data"
-msgstr ""
+msgstr "දත්ත ලබාගනිමින් පවතී"
 
 #: FEditProfile.resx$btnAdvanced.Text$Message
 msgid "Advanced"
-msgstr ""
+msgstr "ප්‍රගත  "
 
 #: FAdvancedScanSettings.resx$$this.Text$Message
 msgid "Advanced Profile Settings"
-msgstr ""
+msgstr "ප්‍රගත පැතිකඩ සැකසුම් "
 
 #: FDesktop.resx$tsEmailPDFAll.Text$Message
 #: FDesktop.resx$tsReverseAll.Text$Message
@@ -91,43 +91,43 @@ msgstr ""
 #: FDesktop.resx$tsSavePDFAll.Text$Message
 #: MiscResources.resx$AllCount$Message
 msgid "All ({0})"
-msgstr ""
+msgstr "සියල්ල ({0})"
 
 #: MiscResources.resx$FileTypeAllFiles$Message
 msgid "All Files"
-msgstr ""
+msgstr "සියලුම ගොනු"
 
 #: FPdfSettings.resx$clbPerms.Items6$Message
 msgid "Allow Annotations"
-msgstr ""
+msgstr "අනුසටහන් සඳහා ඉඩ ලබාදේ"
 
 #: FPdfSettings.resx$clbPerms.Items4$Message
 msgid "Allow Content Copying"
-msgstr ""
+msgstr "අන්තර්ගතය පිටපත් කිරීමට ඉඩ ලබාදේ"
 
 #: FPdfSettings.resx$clbPerms.Items5$Message
 msgid "Allow Content Copying for Accessibility"
-msgstr ""
+msgstr "ප්‍රවේශය සඳහා අන්තර්ගතය පිටපත් කිරීමට ඉඩ ලබාදේ"
 
 #: FPdfSettings.resx$clbPerms.Items3$Message
 msgid "Allow Document Assembly"
-msgstr ""
+msgstr "ලේඛන එකලස් කිරීමට ඉඩ ලබාදේ"
 
 #: FPdfSettings.resx$clbPerms.Items2$Message
 msgid "Allow Document Modification"
-msgstr ""
+msgstr "ලේඛන සංශෝධනය කිරීමට ඉඩ ලබාදේ"
 
 #: FPdfSettings.resx$clbPerms.Items7$Message
 msgid "Allow Form Filling"
-msgstr ""
+msgstr "ෆෝරම පිරවීමට ඉඩ ලබාදේ"
 
 #: FPdfSettings.resx$clbPerms.Items1$Message
 msgid "Allow Full Quality Printing"
-msgstr ""
+msgstr "පුර්ණ ගුණාත්මයෙන් යුතුව මුද්‍රණය අනුමත කරයි "
 
 #: FPdfSettings.resx$clbPerms.Items$Message
 msgid "Allow Printing"
-msgstr ""
+msgstr "මුද්‍රණයට ඉඩදේ "
 
 #: FDesktop.resx$tsAltDeinterleave.Text$Message
 msgid "Alternate Deinterleave"
@@ -135,15 +135,15 @@ msgstr ""
 
 #: FDesktop.resx$tsAltInterleave.Text$Message
 msgid "Alternate Interleave"
-msgstr ""
+msgstr "මාරුවෙන් මාරුවට කොළ එකතු කිරීම "
 
 #: SettingsResources.resx$TwainImpl_MemXfer$Message
 msgid "Alternative Transfer"
-msgstr ""
+msgstr "විකල්ප මාරුව "
 
 #: MiscResources.resx$PdfImportComponentNeeded$Message
 msgid "An additional component is needed to import this PDF file. Would you like to download it now?"
-msgstr ""
+msgstr "මෙම PDF ගොනුව ලබාගැනීමට අමතර උපාංගයක් අවශ්‍යය. එය දැන්ම බාගත කරන්න ඔබ කැමතිද?"
 
 #: MiscResources.resx$UpdateError$Message
 msgid "An error occured when trying to install the update"
@@ -155,11 +155,11 @@ msgstr ""
 
 #: MiscResources.resx$AutoSaveError$Message
 msgid "An error occurred when trying to auto save"
-msgstr ""
+msgstr "නිතැන් සුරැකීමට උත්සාහ කරද්දී දෝෂයක් පැනනැගිනි"
 
 #: MiscResources.resx$ErrorSaving$Message
 msgid "An error occurred when trying to save the file"
-msgstr ""
+msgstr "ගොනුව සුරැකීමට උත්සාහ කරද්දී දෝෂයක් පැනනැගිනි"
 
 #: MiscResources.resx$ErrorEmailing$Message
 msgid "An error occurred when trying to send the email"
@@ -167,11 +167,11 @@ msgstr ""
 
 #: MiscResources.resx$EmailError$Message
 msgid "An error occurred while trying to send an email"
-msgstr ""
+msgstr "විද්‍යුත් තැපැල් පණිවිඩයක් යැවීමට උත්සාහ කරද්දී දෝෂයක් පැනනැගිනි"
 
 #: MiscResources.resx$UnknownDriverError$Message
 msgid "An error occurred with the scanning driver"
-msgstr ""
+msgstr "පරිලෝකකයෙහි උපක්‍රම ධාවකයෙහි දෝෂයක් පැනනැගිනි"
 
 #: MiscResources.resx$ExitWithActiveOperations$Message
 msgid "An operation is in progress. Are you sure you want to exit and cancel the operation?"
@@ -179,7 +179,7 @@ msgstr ""
 
 #: MiscResources.resx$BatchError$Message
 msgid "An unknown error ocurred during the batch scan"
-msgstr ""
+msgstr "කාණ්ඩ පරිලෝකනයේදී නාදුනන දෝෂයක් හටගැනින"
 
 #: MiscResources.resx$UpdateAvailable$Message
 msgid "An update is available"
@@ -187,7 +187,7 @@ msgstr ""
 
 #: MiscResources.resx$OcrUpdateAvailable$Message
 msgid "An update to OCR is available"
-msgstr ""
+msgstr "ප්‍රකාශ අක්ෂර කියවනය සඳහා යාවත්කාල කිරීමක් සුදානම්ව ඇත "
 
 #: FAdvancedScanSettings.resx$cbBrightnessContrastAfterScan.Text$Message
 msgid "Apply brightness/contrast after scan"
@@ -223,15 +223,15 @@ msgstr ""
 
 #: MiscResources.resx$ConfirmResetImages$Message
 msgid "Are you sure you want undo your changes to {0} image(s)?"
-msgstr ""
+msgstr "{0} චායාරූපයේ/රූපයන්ගේ සිදුකල වෙනස්කම් ඔබ නිසැකයෙන්ම අස්කර ගන්නවාද?"
 
 #: FEmailSettings.resx$label1.Text$Message
 msgid "Attachment Name"
-msgstr ""
+msgstr "ඇමුණුමෙහි නම "
 
 #: FPdfSettings.resx$label3.Text$Message
 msgid "Author"
-msgstr ""
+msgstr "රචකයා "
 
 #: FAuthorize.resx$$this.Text$Message
 msgid "Authorize"
