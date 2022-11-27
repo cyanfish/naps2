@@ -10,7 +10,7 @@ public class TemplatesCommand : ICommand<TemplatesOptions>
         ctx.Load(Path.Combine(Paths.SolutionRoot, @"NAPS2.Sdk\Lang\Resources"), false);
         ctx.Load(Path.Combine(Paths.SolutionRoot, @"NAPS2.Lib\Lang\Resources"), false);
         ctx.Load(Path.Combine(Paths.SolutionRoot, @"NAPS2.Lib.WinForms\WinForms"), true);
-        ctx.Save(Paths.PoFolder);
+        ctx.Save(Paths.TemplatesFile);
         return 0;
     }
 }

@@ -12,7 +12,7 @@ public static class Rules
     {
         prefix = "";
         suffix = "";
-        if (!original.Any(char.IsLetter))
+        if (!original.Any(char.IsLetter) && !original.Contains("{0}"))
         {
             return false;
         }
