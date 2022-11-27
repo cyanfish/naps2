@@ -59,39 +59,20 @@ public class GdiImageTransformer : AbstractImageTransformer<GdiImage>
         return resultImage;
     }
 
-    protected override GdiImage PerformTransform(GdiImage image, ScaleTransform transform)
+    protected override GdiImage PerformTransform(GdiImage image, ResizeTransform transform)
     {
-        int realWidth = (int) Math.Round(image.Width * transform.ScaleFactor);
-        int realHeight = (int) Math.Round(image.Height * transform.ScaleFactor);
-
-        double horizontalRes = image.HorizontalResolution * transform.ScaleFactor;
-        double verticalRes = image.VerticalResolution * transform.ScaleFactor;
-
-        var result = new Bitmap(realWidth, realHeight, PixelFormat.Format24bppRgb);
+        var result = new Bitmap(transform.Width, transform.Height, PixelFormat.Format24bppRgb);
         using Graphics g = Graphics.FromImage(result);
         g.InterpolationMode = InterpolationMode.HighQualityBicubic;
-        g.DrawImage(image.Bitmap, 0, 0, realWidth, realHeight);
-        result.SafeSetResolution((float) horizontalRes, (float) verticalRes);
-        return new GdiImage(ImageContext, result);
-    }
-
-    protected override GdiImage PerformTransform(GdiImage image, ThumbnailTransform transform)
-    {
-        var result = new Bitmap(transform.Size, transform.Size);
-        using (Graphics g = Graphics.FromImage(result))
-        {
-            // We want a nice thumbnail, so use the maximum quality interpolation
-            g.InterpolationMode = InterpolationMode.HighQualityBicubic;
-
-            // Draw the original bitmap onto the new bitmap, using the calculated location and dimensions
-            // Note that there may be some padding if the aspect ratios don't match
-            var (left, top, width, height) = transform.GetDrawRect(image.Width, image.Height);
-            var destRect = new RectangleF(left, top, width, height);
-            var srcRect = new RectangleF(0, 0, image.Width, image.Height);
-            g.DrawImage(image.Bitmap, destRect, srcRect, GraphicsUnit.Pixel);
-            // Draw a border around the original bitmap's content, inside the padding
-            g.DrawRectangle(Pens.Black, left, top, width - 1, height - 1);
-        }
+        // We set WrapMode to avoid artifacts
+        // https://stackoverflow.com/questions/4772273/interpolationmode-highqualitybicubic-introducing-artefacts-on-edge-of-resized-im
+        using var imageAttrs = new ImageAttributes();
+        imageAttrs.SetWrapMode(WrapMode.TileFlipXY);
+        var destRect = new Rectangle(0, 0, transform.Width, transform.Height);
+        g.DrawImage(image.Bitmap, destRect, 0, 0, image.Width, image.Height, GraphicsUnit.Pixel, imageAttrs);
+        result.SetResolution(
+            image.HorizontalResolution * image.Width / transform.Width,
+            image.VerticalResolution * image.Height / transform.Height);
         return new GdiImage(ImageContext, result);
     }
 }

@@ -405,14 +405,7 @@ public class TransformTests : ContextualTests
 
         actual = actual.PerformTransform(new ThumbnailTransform(256));
 
-#if NET6_0_OR_GREATER
-        Assert.Equal(expected.Width, actual.Width);
-#else
-        // TODO: The image is off by 1 pixel, it might have something to do with how the cggraphics coordinate
-        // system is a double and not pixel-aligned
-        // TODO: Fix expected resolution
         ImageAsserts.Similar(expected, actual, ImageAsserts.XPLAT_RMSE_THRESHOLD, ignoreResolution: true);
-#endif
     }
 
     public static IEnumerable<object[]> CommutativeGrayTransforms = new List<object[]>

@@ -97,6 +97,7 @@ public abstract class DesktopForm : EtoFormBase
         _desktopFormProvider.DesktopForm = this;
         _thumbnailController.ListView = _listView;
         _thumbnailController.ThumbnailSizeChanged += ThumbnailController_ThumbnailSizeChanged;
+        SetThumbnailSpacing(_thumbnailController.VisibleSize);
         ImageList.SelectionChanged += ImageList_SelectionChanged;
         ImageList.ImagesUpdated += ImageList_ImagesUpdated;
         _profileManager.ProfilesUpdated += ProfileManager_ProfilesUpdated;

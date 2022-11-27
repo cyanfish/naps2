@@ -36,27 +36,14 @@ public class MacImageTransformer : AbstractImageTransformer<MacImage>
         return newImage;
     }
 
-    protected override MacImage PerformTransform(MacImage image, ScaleTransform transform)
+    protected override MacImage PerformTransform(MacImage image, ResizeTransform transform)
     {
-        var width = (int) Math.Round(image.Width * transform.ScaleFactor);
-        var height = (int) Math.Round(image.Height * transform.ScaleFactor);
-        return DoScale(image, width, height, GetDrawingPixelFormat(image));
-    }
-
-    protected override MacImage PerformTransform(MacImage image, ThumbnailTransform transform)
-    {
-        var (_, _, width, height) = transform.GetDrawRect(image.Width, image.Height);
-        return DoScale(image, width, height, GetDrawingPixelFormat(image));
-    }
-
-    private MacImage DoScale(MacImage image, int width, int height, ImagePixelFormat pixelFormat)
-    {
-        var newImage = (MacImage) ImageContext.Create(width, height, pixelFormat);
+        var newImage = (MacImage) ImageContext.Create(transform.Width, transform.Height, GetDrawingPixelFormat(image));
         newImage.SetResolution(
-            image.HorizontalResolution * image.Width / width,
-            image.VerticalResolution * image.Height / height);
+            image.HorizontalResolution * image.Width / transform.Width,
+            image.VerticalResolution * image.Height / transform.Height);
         using CGBitmapContext c = MacBitmapHelper.CreateContext(newImage);
-        CGRect rect = new CGRect(0, 0, width, height);
+        CGRect rect = new CGRect(0, 0, transform.Width, transform.Height);
         // TODO: This changes the image size to match the original which we probably don't want.
         c.DrawImage(rect, image.Rep.AsCGImage(ref rect, null, null));
         return newImage;

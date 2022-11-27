@@ -35,12 +35,14 @@ public abstract class AbstractImageTransformer<TImage> where TImage : IMemoryIma
                 return PerformTransform(image, cropTransform);
             case ScaleTransform scaleTransform:
                 return PerformTransform(image, scaleTransform);
+            case ResizeTransform resizeTransform:
+                return PerformTransform(image, resizeTransform);
+            case ThumbnailTransform thumbnailTransform:
+                return PerformTransform(image, thumbnailTransform);
             case BlackWhiteTransform blackWhiteTransform:
                 return PerformTransform(image, blackWhiteTransform);
             case ColorBitDepthTransform colorBitDepthTransform:
                 return PerformTransform(image, colorBitDepthTransform);
-            case ThumbnailTransform thumbnailTransform:
-                return PerformTransform(image, thumbnailTransform);
             case CorrectionTransform correctionTransform:
                 return PerformTransform(image, correctionTransform);
             default:
@@ -195,7 +197,26 @@ public abstract class AbstractImageTransformer<TImage> where TImage : IMemoryIma
         return val;
     }
 
-    protected abstract TImage PerformTransform(TImage image, ScaleTransform transform);
+    protected virtual TImage PerformTransform(TImage image, ScaleTransform transform)
+    {
+        var width = (int) Math.Round(image.Width * transform.ScaleFactor);
+        var height = (int) Math.Round(image.Height * transform.ScaleFactor);
+        return PerformTransform(image, new ResizeTransform(width, height));
+    }
+
+    /// <summary>
+    /// Gets a bitmap resized to fit within a thumbnail rectangle.
+    /// </summary>
+    /// <param name="image">The bitmap to resize.</param>
+    /// <param name="transform">The maximum width and height of the thumbnail.</param>
+    /// <returns>The thumbnail bitmap.</returns>
+    protected virtual TImage PerformTransform(TImage image, ThumbnailTransform transform)
+    {
+        var (_, _, width, height) = transform.GetDrawRect(image.Width, image.Height);
+        return PerformTransform(image, new ResizeTransform(width, height));
+    }
+
+    protected abstract TImage PerformTransform(TImage image, ResizeTransform transform);
 
     protected virtual TImage PerformTransform(TImage image, BlackWhiteTransform transform)
     {
@@ -225,14 +246,6 @@ public abstract class AbstractImageTransformer<TImage> where TImage : IMemoryIma
         image.Dispose();
         return (TImage) colorBitmap;
     }
-
-    /// <summary>
-    /// Gets a bitmap resized to fit within a thumbnail rectangle, including a border around the picture.
-    /// </summary>
-    /// <param name="image">The bitmap to resize.</param>
-    /// <param name="transform">The maximum width and height of the thumbnail.</param>
-    /// <returns>The thumbnail bitmap.</returns>
-    protected abstract TImage PerformTransform(TImage image, ThumbnailTransform transform);
 
     /// <summary>
     /// If the provided bitmap is 1-bit (black and white), replace it with a 24-bit bitmap so that image transforms will work. If the bitmap is replaced, the original is disposed.

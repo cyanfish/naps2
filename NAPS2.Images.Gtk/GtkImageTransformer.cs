@@ -41,32 +41,23 @@ public class GtkImageTransformer : AbstractImageTransformer<GtkImage>
         return newImage;
     }
 
-    protected override GtkImage PerformTransform(GtkImage image, ScaleTransform transform)
+    protected override GtkImage PerformTransform(GtkImage image, ResizeTransform transform)
     {
         var format = image.PixelFormat == ImagePixelFormat.ARGB32 ? Format.Argb32 : Format.Rgb24;
-        int width = (int) Math.Round(image.Width * transform.ScaleFactor);
-        int height = (int) Math.Round(image.Height * transform.ScaleFactor);
-        using var surface = new ImageSurface(format, width, height);
+        using var surface = new ImageSurface(format, transform.Width, transform.Height);
         using var context = new Context(surface);
-        context.Scale(width / (double) image.Width, height / (double) image.Height);
+        context.Scale(transform.Width / (double) image.Width, transform.Height / (double) image.Height);
         CairoHelper.SetSourcePixbuf(context, image.Pixbuf, 0, 0);
         context.Paint();
-        var newImage = new GtkImage(ImageContext, new Pixbuf(surface, 0, 0, width, height));
+        var newImage = new GtkImage(ImageContext, new Pixbuf(surface, 0, 0, transform.Width, transform.Height));
         newImage.LogicalPixelFormat = image.LogicalPixelFormat == ImagePixelFormat.BW1
             ? ImagePixelFormat.Gray8
             : image.LogicalPixelFormat;
         newImage.SetResolution(
-            image.HorizontalResolution * image.Width / width,
-            image.VerticalResolution * image.Height / height);
+            image.HorizontalResolution * image.Width / transform.Width,
+            image.VerticalResolution * image.Height / transform.Height);
         image.Dispose();
         return newImage;
-    }
-
-    protected override GtkImage PerformTransform(GtkImage image, ThumbnailTransform transform)
-    {
-        var (_, _, width, height) = transform.GetDrawRect(image.Width, image.Height);
-        var scaleFactor = width > height ? width / (double) image.Width : height / (double) image.Height;
-        return PerformTransform(image, new ScaleTransform(scaleFactor));
     }
 
     protected override GtkImage PerformTransform(GtkImage image, BlackWhiteTransform transform)

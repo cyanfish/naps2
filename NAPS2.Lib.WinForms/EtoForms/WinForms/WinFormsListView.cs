@@ -7,6 +7,9 @@ namespace NAPS2.EtoForms.WinForms;
 
 public class WinFormsListView<T> : IListView<T> where T : notnull
 {
+    private static readonly Pen DefaultPen = new(Color.Black, 1);
+    private static readonly Pen SelectionPen = new(Color.FromArgb(0, 0x66, 0xe8), 3);
+
     private readonly ListView _view;
     private readonly ListViewBehavior<T> _behavior;
 
@@ -46,6 +49,38 @@ public class WinFormsListView<T> : IListView<T> where T : notnull
         _view.DragLeave += OnDragLeave;
         _view.MouseMove += OnMouseMove;
         _view.MouseLeave += OnMouseLeave;
+
+        _view.OwnerDraw = true;
+        _view.DrawItem += ViewOnDrawItem;
+    }
+
+    private void ViewOnDrawItem(object sender, DrawListViewItemEventArgs e)
+    {
+        int width, height;
+        var image = ImageList[e.Item.Index];
+        if (image.Width > image.Height)
+        {
+            width = ImageSize;
+            height = (int) Math.Round(width * (image.Height / (double) image.Width));
+        }
+        else
+        {
+            height = ImageSize;
+            width = (int) Math.Round(height * (image.Width / (double) image.Height));
+        }
+        var x = e.Bounds.Left + (e.Bounds.Width - width) / 2;
+        var y = e.Bounds.Top + (e.Bounds.Height - height) / 2;
+        e.Graphics.DrawImage(image, new Rectangle(x, y, width, height));
+
+        // Draw border
+        if (e.Item.Selected)
+        {
+            e.Graphics.DrawRectangle(SelectionPen, x - 2, y - 2, width + 3, height + 3);
+        }
+        else
+        {
+            e.Graphics.DrawRectangle(DefaultPen, x, y, width, height);
+        }
     }
 
     public int ImageSize
@@ -82,9 +117,9 @@ public class WinFormsListView<T> : IListView<T> where T : notnull
 
     public event EventHandler<DropEventArgs>? Drop;
 
-    private ImageList.ImageCollection ImageList => _view.LargeImageList.Images;
-
     private ListView.ListViewItemCollection Items => _view.Items;
+
+    private List<Image> ImageList { get; } = new();
 
     public void SetItems(IEnumerable<T> items)
     {
@@ -94,23 +129,27 @@ public class WinFormsListView<T> : IListView<T> where T : notnull
         }
         _refreshing = true;
         Items.Clear();
-        if (!_behavior.Checkboxes)
-        {
-            ImageList.Clear();
-        }
+        ClearImageList();
         foreach (var item in items)
         {
             if (!_behavior.Checkboxes)
             {
                 ImageList.Add(_behavior.GetImage(item, ImageSize).ToSD());
             }
-            var listViewItem = _behavior.Checkboxes
-                ? Items.Add(GetLabel(item))
-                : Items.Add(GetLabel(item), ImageList.Count - 1);
+            var listViewItem = Items.Add(GetLabel(item));
             listViewItem.Tag = item;
         }
         SetSelectedItems();
         _refreshing = false;
+    }
+
+    private void ClearImageList()
+    {
+        if (!_behavior.Checkboxes)
+        {
+            foreach (var image in ImageList) image.Dispose();
+            ImageList.Clear();
+        }
     }
 
     private void SetSelectedItems()
@@ -137,15 +176,11 @@ public class WinFormsListView<T> : IListView<T> where T : notnull
         }
         _refreshing = true;
         _view.BeginUpdate();
-        if (ImageList.Count > 0)
-        {
-            ImageList.Clear();
-        }
+        ClearImageList();
 
-        var list = new List<Image>();
         foreach (var image in Items.OfType<ListViewItem>().Select(x => (T) x.Tag))
         {
-            list.Add(_behavior.GetImage(image, ImageSize).ToSD());
+            ImageList.Add(_behavior.GetImage(image, ImageSize).ToSD());
         }
 
         foreach (ListViewItem item in Items)
@@ -153,7 +188,6 @@ public class WinFormsListView<T> : IListView<T> where T : notnull
             item.ImageIndex = item.Index;
         }
 
-        ImageList.AddRange(list.ToArray());
         _view.EndUpdate();
         _refreshing = false;
     }
@@ -174,7 +208,7 @@ public class WinFormsListView<T> : IListView<T> where T : notnull
         if (!diffs.AppendOperations.Any() && !diffs.ReplaceOperations.Any() &&
             diffs.TrimOperations.Any(x => x.Count == Items.Count))
         {
-            ImageList.Clear();
+            ClearImageList();
             Items.Clear();
         }
         else
@@ -190,14 +224,13 @@ public class WinFormsListView<T> : IListView<T> where T : notnull
                 if (!_behavior.Checkboxes)
                 {
                     ImageList.Add(_behavior.GetImage(append.Item, ImageSize).ToSD());
-                    // TODO: This isn't used above, is it needed?
-                    item.ImageIndex = ImageList.Count - 1;
                 }
             }
             foreach (var replace in diffs.ReplaceOperations)
             {
                 if (!_behavior.Checkboxes)
                 {
+                    ImageList[replace.Index].Dispose();
                     ImageList[replace.Index] = _behavior.GetImage(replace.Item, ImageSize).ToSD();
                 }
                 Items[replace.Index].Tag = replace.Item;
@@ -208,6 +241,7 @@ public class WinFormsListView<T> : IListView<T> where T : notnull
                 {
                     if (!_behavior.Checkboxes)
                     {
+                        ImageList[ImageList.Count - 1].Dispose();
                         ImageList.RemoveAt(ImageList.Count - 1);
                     }
                     Items.RemoveAt(Items.Count - 1);
