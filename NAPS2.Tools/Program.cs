@@ -31,6 +31,8 @@ public static class Program
             .Add<ShareOptions, ShareCommand>()
             .Add<TemplatesOptions, TemplatesCommand>()
             .Add<LanguageOptions, LanguageCommand>()
+            .Add<PushTemplatesOptions, PushTemplatesCommand>()
+            .Add<PullTranslationsOptions, PullTranslationsCommand>()
             .Add<SaneOptsOptions, SaneOptsCommand>();
 
         var result = Parser.Default.ParseArguments(args, commands.OptionTypes);
