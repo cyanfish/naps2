@@ -30,7 +30,7 @@ public static class Program
             .Add<VirusScanOptions, VirusScanCommand>()
             .Add<ShareOptions, ShareCommand>()
             .Add<TemplatesOptions, TemplatesCommand>()
-            .Add<LanguageOptions, LanguageCommand>()
+            .Add<ResxOptions, ResxCommand>()
             .Add<PushTemplatesOptions, PushTemplatesCommand>()
             .Add<PullTranslationsOptions, PullTranslationsCommand>()
             .Add<SaneOptsOptions, SaneOptsCommand>();

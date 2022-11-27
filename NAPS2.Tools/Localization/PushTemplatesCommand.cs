@@ -12,8 +12,7 @@ public class PushTemplatesCommand : ICommand<PushTemplatesOptions>
         {
             var client = CrowdinHelper.GetClient();
 
-            await using var templatesFile =
-                File.OpenRead(Path.Combine(Paths.SolutionRoot, "NAPS2.Lib", "Lang", "po", "templates.pot"));
+            await using var templatesFile = File.OpenRead(Paths.TemplatesFile);
             var storage = await client.Storage.AddStorage(templatesFile, "templates.pot");
 
             await client.SourceFiles.UpdateOrRestoreFile(CrowdinHelper.PROJECT_ID, CrowdinHelper.TEMPLATES_FILE_ID,

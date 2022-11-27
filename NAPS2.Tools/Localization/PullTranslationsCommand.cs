@@ -16,8 +16,7 @@ public class PullTranslationsCommand : ICommand<PullTranslationsOptions>
         {
             var client = CrowdinHelper.GetClient();
 
-            await using var templatesFile =
-                File.OpenRead(Path.Combine(Paths.SolutionRoot, "NAPS2.Lib", "Lang", "po", "templates.pot"));
+            await using var templatesFile = File.OpenRead(Paths.TemplatesFile);
             var storage = await client.Storage.AddStorage(templatesFile, "templates.pot");
 
             await client.SourceFiles.UpdateOrRestoreFile(CrowdinHelper.PROJECT_ID, CrowdinHelper.TEMPLATES_FILE_ID,
@@ -75,7 +74,7 @@ public class PullTranslationsCommand : ICommand<PullTranslationsOptions>
                         outputLocale = langCode;
                     }
                 }
-                var outputPath = Path.Combine(Paths.SolutionRoot, "NAPS2.Lib", "Lang", "po", $"{outputLocale}.po");
+                var outputPath = Path.Combine(Paths.PoFolder, $"{outputLocale}.po");
                 await using var outputStream = File.OpenWrite(outputPath);
                 await entry.Open().CopyToAsync(outputStream);
             }
