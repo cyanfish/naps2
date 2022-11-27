@@ -70,7 +70,7 @@ public class PullTranslationsCommand : ICommand<PullTranslationsOptions>
                 if (locale.Contains("-"))
                 {
                     var langCode = locale.Split("-")[0];
-                    if (localeMap.Count(x => x.locale.StartsWith($"{langCode}-")) == 1)
+                    if (localeMap.Count(x => x.locale.StartsWith(langCode)) == 1)
                     {
                         outputLocale = langCode;
                     }
