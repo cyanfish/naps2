@@ -1,0 +1,3 @@
+files:
+  - source: /NAPS2.Lib/Lang/po/templates.pot
+    translation: '%original_path%/%locale%.po'
