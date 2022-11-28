@@ -2,9 +2,14 @@
 
 public class ResxContext
 {
+    // Fraction of strings translated before we start including the language in NAPS2
+    private const double INCLUDE_THRESHOLD = 0.05;
+
     private readonly string _langCode;
 
     public Dictionary<string, TranslatableString> Strings { get; } = new Dictionary<string, TranslatableString>();
+
+    public int TranslationCount { get; set; }
 
     public ResxContext(string langCode)
     {
@@ -16,6 +21,7 @@ public class ResxContext
         using var reader = new StreamReader(poFile);
         string? line;
         string? NextLine() => reader.ReadLine()?.Trim();
+        NextLine();
         while ((line = NextLine()) != null)
         {
             if (!line.StartsWith("msgid", StringComparison.InvariantCulture))
@@ -41,6 +47,10 @@ public class ResxContext
             }
 
             Strings[original] = new TranslatableString(original, translated);
+            if (!string.IsNullOrWhiteSpace(translated))
+            {
+                TranslationCount++;
+            }
         }
     }
 
@@ -90,6 +100,13 @@ public class ResxContext
         doc.Descendants("assembly").Remove();
 
         string savePath = file.FullName.Replace(".resx", $".{_langCode}.resx");
-        doc.Save(savePath);
+        if (TranslationCount > Strings.Count * INCLUDE_THRESHOLD)
+        {
+            doc.Save(savePath);
+        }
+        else if (File.Exists(savePath))
+        {
+            File.Delete(savePath);
+        }
     }
 }

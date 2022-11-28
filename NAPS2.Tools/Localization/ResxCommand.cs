@@ -24,7 +24,7 @@ public class ResxCommand : ICommand<ResxOptions>
 
     private static void TranslateResources(string langCode)
     {
-        var ctx = new LanguageContext(langCode);
+        var ctx = new ResxContext(langCode);
         ctx.Load(Path.Combine(Paths.PoFolder, $"{langCode}.po"));
         ctx.Translate(Path.Combine(Paths.SolutionRoot, "NAPS2.Sdk", "Lang", "Resources"), false);
         ctx.Translate(Path.Combine(Paths.SolutionRoot, "NAPS2.Lib", "Lang", "Resources"), false);
