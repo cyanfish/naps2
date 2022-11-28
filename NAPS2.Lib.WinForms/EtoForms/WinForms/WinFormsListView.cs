@@ -50,14 +50,24 @@ public class WinFormsListView<T> : IListView<T> where T : notnull
         _view.MouseMove += OnMouseMove;
         _view.MouseLeave += OnMouseLeave;
 
-        _view.OwnerDraw = true;
-        _view.DrawItem += ViewOnDrawItem;
+        ImageList = UseCustomRendering
+            ? new WinFormsImageList<T>.Custom(this, _behavior)
+            : !_behavior.Checkboxes
+                ? new WinFormsImageList<T>.Native(this, _behavior)
+                : new WinFormsImageList<T>.Stub(this, _behavior);
+        if (UseCustomRendering)
+        {
+            _view.OwnerDraw = true;
+            _view.DrawItem += CustomRenderItem;
+        }
     }
 
-    private void ViewOnDrawItem(object sender, DrawListViewItemEventArgs e)
+    private bool UseCustomRendering => !_behavior.ShowLabels && !_behavior.Checkboxes;
+
+    private void CustomRenderItem(object sender, DrawListViewItemEventArgs e)
     {
         int width, height;
-        var image = ImageList[e.Item.Index];
+        var image = ImageList.Get(e.Item);
         if (image.Width > image.Height)
         {
             width = ImageSize;
@@ -119,7 +129,7 @@ public class WinFormsListView<T> : IListView<T> where T : notnull
 
     private ListView.ListViewItemCollection Items => _view.Items;
 
-    private List<Image> ImageList { get; } = new();
+    private WinFormsImageList<T> ImageList { get; }
 
     public void SetItems(IEnumerable<T> items)
     {
@@ -129,27 +139,15 @@ public class WinFormsListView<T> : IListView<T> where T : notnull
         }
         _refreshing = true;
         Items.Clear();
-        ClearImageList();
+        ImageList.Clear();
         foreach (var item in items)
         {
-            if (!_behavior.Checkboxes)
-            {
-                ImageList.Add(_behavior.GetImage(item, ImageSize).ToSD());
-            }
             var listViewItem = Items.Add(GetLabel(item));
             listViewItem.Tag = item;
+            ImageList.Append(item, listViewItem);
         }
         SetSelectedItems();
         _refreshing = false;
-    }
-
-    private void ClearImageList()
-    {
-        if (!_behavior.Checkboxes)
-        {
-            foreach (var image in ImageList) image.Dispose();
-            ImageList.Clear();
-        }
     }
 
     private void SetSelectedItems()
@@ -176,17 +174,15 @@ public class WinFormsListView<T> : IListView<T> where T : notnull
         }
         _refreshing = true;
         _view.BeginUpdate();
-        ClearImageList();
+        ImageList.Clear();
 
-        foreach (var image in Items.OfType<ListViewItem>().Select(x => (T) x.Tag))
+        var images = new List<Image>();
+        foreach (ListViewItem listViewItem in Items)
         {
-            ImageList.Add(_behavior.GetImage(image, ImageSize).ToSD());
+            var item = (T) listViewItem.Tag;
+            images.Add(ImageList.PartialAppend(item));
         }
-
-        foreach (ListViewItem item in Items)
-        {
-            item.ImageIndex = item.Index;
-        }
+        ImageList.FinishPartialAppends(images);
 
         _view.EndUpdate();
         _refreshing = false;
@@ -208,7 +204,7 @@ public class WinFormsListView<T> : IListView<T> where T : notnull
         if (!diffs.AppendOperations.Any() && !diffs.ReplaceOperations.Any() &&
             diffs.TrimOperations.Any(x => x.Count == Items.Count))
         {
-            ClearImageList();
+            ImageList.Clear();
             Items.Clear();
         }
         else
@@ -219,32 +215,21 @@ public class WinFormsListView<T> : IListView<T> where T : notnull
                 // TODO: Use AddRange instead?
                 // TODO: Add this to the new ImageListViewBehavior
                 //  _thumbnailProvider.GetThumbnail(append.Image.Source, ThumbnailSize)
-                var item = Items.Add(GetLabel(append.Item));
-                item.Tag = append.Item;
-                if (!_behavior.Checkboxes)
-                {
-                    ImageList.Add(_behavior.GetImage(append.Item, ImageSize).ToSD());
-                }
+                var listViewItem = Items.Add(GetLabel(append.Item));
+                listViewItem.Tag = append.Item;
+                ImageList.Append(append.Item, listViewItem);
             }
             foreach (var replace in diffs.ReplaceOperations)
             {
-                if (!_behavior.Checkboxes)
-                {
-                    ImageList[replace.Index].Dispose();
-                    ImageList[replace.Index] = _behavior.GetImage(replace.Item, ImageSize).ToSD();
-                }
                 Items[replace.Index].Tag = replace.Item;
+                ImageList.Replace(replace.Item, replace.Index);
             }
             foreach (var trim in diffs.TrimOperations)
             {
                 for (int i = 0; i < trim.Count; i++)
                 {
-                    if (!_behavior.Checkboxes)
-                    {
-                        ImageList[ImageList.Count - 1].Dispose();
-                        ImageList.RemoveAt(ImageList.Count - 1);
-                    }
                     Items.RemoveAt(Items.Count - 1);
+                    ImageList.DeleteFromEnd();
                 }
             }
         }

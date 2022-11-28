@@ -398,6 +398,7 @@ public abstract class DesktopForm : EtoFormBase
             Commands.ReorderMenu.Enabled =
                 Commands.EmailPdf.Enabled = Commands.Print.Enabled = ImageList.Images.Any();
 
+        // TODO: Changing the text on the command doesn't actually propagate to the widget
         // "All" dropdown items
         Commands.SaveAllPdf.MenuText = Commands.SaveAllImages.MenuText = Commands.EmailAllPdf.MenuText =
             Commands.ReverseAll.MenuText = string.Format(MiscResources.AllCount, ImageList.Images.Count);
