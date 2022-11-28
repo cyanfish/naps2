@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="DeviceNotFound" xml:space="preserve">
+    <value>Избраният скенер не е достъпен.</value>
+  </data>
+  <data name="DeviceOffline" xml:space="preserve">
+    <value>Избраният скенер е недостъпен.</value>
+  </data>
+  <data name="NAPS2" xml:space="preserve">
+    <value>NAPS2</value>
+  </data>
+  <data name="NoDeviceSelected" xml:space="preserve">
+    <value>Не е избрано устройство.</value>
+  </data>
+  <data name="NoDevicesFound" xml:space="preserve">
+    <value>Не е открито сканиращо устройство.</value>
+  </data>
+  <data name="UnknownDriverError" xml:space="preserve">
+    <value>Проблем с драйвъра на скенера.</value>
+  </data>
+  <data name="Version" xml:space="preserve">
+    <value>Версия {0}</value>
+  </data>
+  <data name="ImportErrorCouldNot" xml:space="preserve">
+    <value>Файлът '{0}' не може да бъде внесен.</value>
+  </data>
+  <data name="NoFeederSupport" xml:space="preserve">
+    <value>Избраният скенер не поддържа автоматично подаване на листове. Ако вашият скенер има устройство за автоматично подаване на листове, опитайте различен драйвър..</value>
+  </data>
+  <data name="NoPagesInFeeder" xml:space="preserve">
+    <value>Няма листoве в устройството за подаване.</value>
+  </data>
+  <data name="PdfNoPermissionToExtractContent" xml:space="preserve">
+    <value>Нямате разрешение да копирате съдържание от файл '{0}'.</value>
+  </data>
+  <data name="NoDuplexSupport" xml:space="preserve">
+    <value>Избраният скенер не поддържа двустранно сканиране. Ако тази функция би трябвало да се поддържа, използвайте различен драйвер..</value>
+  </data>
+  <data name="DeviceBusy" xml:space="preserve">
+    <value>Избраният скенер е недостъпен.</value>
+  </data>
+  <data name="DeviceCoverOpen" xml:space="preserve">
+    <value>Капакът на скенера не е затворен.</value>
+  </data>
+  <data name="DevicePaperJam" xml:space="preserve">
+    <value>Заседнала хартия в скенера.</value>
+  </data>
+  <data name="DeviceWarmingUp" xml:space="preserve">
+    <value>Подготовка на скенера.</value>
+  </data>
+  <data name="SaneNotAvailable" xml:space="preserve">
+    <value>The SANE driver is not available. Make sure to install the required packages:</value>
+  </data>
+  <data name="TesseractNotAvailable" xml:space="preserve">
+    <value>The OCR engine is not available. Make sure to install the required package:</value>
+  </data>
+  <data name="DriverNotSupported" xml:space="preserve">
+    <value>The selected driver is not supported on this system.</value>
+  </data>
+</root>

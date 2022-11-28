@@ -72,6 +72,9 @@
   <data name="FileTypeTiff" xml:space="preserve">
     <value>TIFF Datei (*.tiff, *.tif)</value>
   </data>
+  <data name="FileTypeJp2" xml:space="preserve">
+    <value>JPEG2000 File (*.jp2, *.jpx)</value>
+  </data>
   <data name="NameMissing" xml:space="preserve">
     <value>Name fehlt.</value>
   </data>
@@ -222,6 +225,9 @@
   <data name="NoDuplexSupport" xml:space="preserve">
     <value>Der ausgewählte Scanner unterstützt keinen Duplexscan. Sollte der Scanner einen Duplexscan unterstützen, probieren sie einen anderen Treiber aus.</value>
   </data>
+  <data name="ProgressFormat" xml:space="preserve">
+    <value>{0} / {1}</value>
+  </data>
   <data name="ImportingFormat" xml:space="preserve">
     <value>Importiere {0}...</value>
   </data>
@@ -360,6 +366,9 @@
   <data name="CheckingForUpdates" xml:space="preserve">
     <value>Prüfe...</value>
   </data>
+  <data name="UpdateCheckDisabled" xml:space="preserve">
+    <value>Update checking is disabled.</value>
+  </data>
   <data name="UpdateError" xml:space="preserve">
     <value>Beim Versuch das Update zu installieren ist ein Fehler aufgetreten.</value>
   </data>
@@ -377,15 +386,6 @@
   </data>
   <data name="ErrorEmailing" xml:space="preserve">
     <value>Beim Senden der E-Mail ist ein Fehler aufgetreten.</value>
-  </data>
-  <data name="Naps2Server" xml:space="preserve">
-    <value>NAPS2 Server</value>
-  </data>
-  <data name="ServerStarted" xml:space="preserve">
-    <value>Server started</value>
-  </data>
-  <data name="ListeningOnPort" xml:space="preserve">
-    <value>Listening on port {0}</value>
   </data>
   <data name="ScanProgressPage" xml:space="preserve">
     <value>Seite {0} wird eingescannt...</value>

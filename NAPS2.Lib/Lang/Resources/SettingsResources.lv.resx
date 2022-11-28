@@ -46,16 +46,16 @@
     <value>800 dpi</value>
   </data>
   <data name="EmailProviderType_CustomSmtp" xml:space="preserve">
-    <value>Custom SMTP</value>
+    <value>Izvēles SMTP</value>
   </data>
   <data name="EmailProviderType_Gmail" xml:space="preserve">
     <value>Gmail</value>
   </data>
   <data name="EmailProviderType_OutlookWeb" xml:space="preserve">
-    <value>Outlook Web Access</value>
+    <value>Outllok WEB pieeja</value>
   </data>
   <data name="EmailProvider_NotSelected" xml:space="preserve">
-    <value>No provider selected.</value>
+    <value>Nav izvēlēts provaideris.</value>
   </data>
   <data name="HorizontalAlign_Center" xml:space="preserve">
     <value>Centrēt</value>
@@ -152,5 +152,11 @@
   </data>
   <data name="WiaVersion_Default" xml:space="preserve">
     <value>Noklusētais</value>
+  </data>
+  <data name="OcrMode_Fast" xml:space="preserve">
+    <value>Fast</value>
+  </data>
+  <data name="OcrMode_Best" xml:space="preserve">
+    <value>Best</value>
   </data>
 </root>

@@ -22,7 +22,7 @@
     <value>Escala de grisos</value>
   </data>
   <data name="Dpi_100" xml:space="preserve">
-    <value>100 dpi</value>
+    <value>100 ppp</value>
   </data>
   <data name="Dpi_1200" xml:space="preserve">
     <value>1200 ppp</value>
@@ -46,16 +46,16 @@
     <value>800 ppp</value>
   </data>
   <data name="EmailProviderType_CustomSmtp" xml:space="preserve">
-    <value>Custom SMTP</value>
+    <value>SMTP personalitzat</value>
   </data>
   <data name="EmailProviderType_Gmail" xml:space="preserve">
     <value>Gmail</value>
   </data>
   <data name="EmailProviderType_OutlookWeb" xml:space="preserve">
-    <value>Outlook Web Access</value>
+    <value>Accés web de l'Outlook</value>
   </data>
   <data name="EmailProvider_NotSelected" xml:space="preserve">
-    <value>No provider selected.</value>
+    <value>No s'ha seleccionat cap proveïdor.</value>
   </data>
   <data name="HorizontalAlign_Center" xml:space="preserve">
     <value>Centre</value>
@@ -85,13 +85,13 @@
     <value>A5 (148x210 mm)</value>
   </data>
   <data name="PageSize_B4" xml:space="preserve">
-    <value>B4 (250x353 mm)</value>
+    <value>B4 (250 x 353 mm)</value>
   </data>
   <data name="PageSize_B5" xml:space="preserve">
     <value>B5 (176x250 mm)</value>
   </data>
   <data name="PageSize_Custom" xml:space="preserve">
-    <value>Custom...</value>
+    <value>Personalitzat...</value>
   </data>
   <data name="PageSize_Legal" xml:space="preserve">
     <value>US Legal (8.5x14 in)</value>
@@ -100,7 +100,7 @@
     <value>US Letter (8.5x11 in)</value>
   </data>
   <data name="PdfCompat_Default" xml:space="preserve">
-    <value>Default</value>
+    <value>Per defecte</value>
   </data>
   <data name="PdfCompat_PdfA1B" xml:space="preserve">
     <value>PDF/A-1b</value>
@@ -124,7 +124,7 @@
     <value>Vidre</value>
   </data>
   <data name="TiffComp_Auto" xml:space="preserve">
-    <value>Auto</value>
+    <value>Automàtic</value>
   </data>
   <data name="TiffComp_Ccitt4" xml:space="preserve">
     <value>CCITT4</value>
@@ -133,24 +133,30 @@
     <value>LZW</value>
   </data>
   <data name="TiffComp_None" xml:space="preserve">
-    <value>Fet</value>
+    <value>Cap</value>
   </data>
   <data name="TwainImpl_Default" xml:space="preserve">
-    <value>Default</value>
+    <value>Per defecte</value>
   </data>
   <data name="TwainImpl_Legacy" xml:space="preserve">
     <value>Legacy (native UI only)</value>
   </data>
   <data name="TwainImpl_MemXfer" xml:space="preserve">
-    <value>Alternative Transfer</value>
+    <value>Baixada opcional</value>
   </data>
   <data name="TwainImpl_OldDsm" xml:space="preserve">
-    <value>Old DSM</value>
+    <value>DSM antic</value>
   </data>
   <data name="TwainImpl_X64" xml:space="preserve">
     <value>x64</value>
   </data>
   <data name="WiaVersion_Default" xml:space="preserve">
-    <value>Default</value>
+    <value>Per defecte</value>
+  </data>
+  <data name="OcrMode_Fast" xml:space="preserve">
+    <value>Fast</value>
+  </data>
+  <data name="OcrMode_Best" xml:space="preserve">
+    <value>Best</value>
   </data>
 </root>

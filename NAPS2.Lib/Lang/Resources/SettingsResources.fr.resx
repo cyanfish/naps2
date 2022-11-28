@@ -13,7 +13,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="BitDepth_1BlackAndWhite" xml:space="preserve">
-    <value>Black/White</value>
+    <value>Noir et blanc</value>
   </data>
   <data name="BitDepth_24Color" xml:space="preserve">
     <value>Couleurs sur 24 bits</value>
@@ -124,7 +124,7 @@
     <value>Vitre</value>
   </data>
   <data name="TiffComp_Auto" xml:space="preserve">
-    <value>Auto.</value>
+    <value>Auto</value>
   </data>
   <data name="TiffComp_Ccitt4" xml:space="preserve">
     <value>CCITT4</value>
@@ -158,8 +158,5 @@
   </data>
   <data name="OcrMode_Best" xml:space="preserve">
     <value>Best</value>
-  </data>
-  <data name="OcrMode_Legacy" xml:space="preserve">
-    <value>Legacy</value>
   </data>
 </root>

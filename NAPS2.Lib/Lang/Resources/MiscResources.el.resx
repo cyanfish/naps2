@@ -72,6 +72,9 @@
   <data name="FileTypeTiff" xml:space="preserve">
     <value>Αρχεία TIFF (*.tiff, *.tif)</value>
   </data>
+  <data name="FileTypeJp2" xml:space="preserve">
+    <value>JPEG2000 File (*.jp2, *.jpx)</value>
+  </data>
   <data name="NameMissing" xml:space="preserve">
     <value>Απουσιάζει το όνομα.</value>
   </data>
@@ -222,6 +225,9 @@
   <data name="NoDuplexSupport" xml:space="preserve">
     <value>Ο επιλεγμένος σαρωτής δεν υποστηρίζει λειτουργία διπλής όψης. Εάν ο σαρωτής πράγματι διαθέτει λειτουργία διπλής όψης, προτείνεται η χρήση διαφορετικού οδηγού.</value>
   </data>
+  <data name="ProgressFormat" xml:space="preserve">
+    <value>{0} / {1}</value>
+  </data>
   <data name="ImportingFormat" xml:space="preserve">
     <value>Εισαγωγή '{0}'...</value>
   </data>
@@ -346,19 +352,22 @@
     <value>OCR Progress</value>
   </data>
   <data name="RunningOcr" xml:space="preserve">
-    <value>Running OCR...</value>
+    <value>Γίνεται Οπτική Αναγνώριση Χαρακτήρων....</value>
   </data>
   <data name="UpdateProgress" xml:space="preserve">
     <value>Update Progress</value>
   </data>
   <data name="Updating" xml:space="preserve">
-    <value>Updating...</value>
+    <value>Γίνεται ενημέρωση...</value>
   </data>
   <data name="NoUpdates" xml:space="preserve">
-    <value>No updates available.</value>
+    <value>Δεν υπάρχουν διαθέσιμες ενημερώσεις.</value>
   </data>
   <data name="CheckingForUpdates" xml:space="preserve">
-    <value>Checking...</value>
+    <value>Έλεγχος...</value>
+  </data>
+  <data name="UpdateCheckDisabled" xml:space="preserve">
+    <value>Update checking is disabled.</value>
   </data>
   <data name="UpdateError" xml:space="preserve">
     <value>An error occured when trying to install the update.</value>
@@ -367,25 +376,16 @@
     <value>Install {0}</value>
   </data>
   <data name="UpdateAvailable" xml:space="preserve">
-    <value>An update is available.</value>
+    <value>Δεν υπάρχουν διαθέσιμες ενημερώσεις.</value>
   </data>
   <data name="AuthError" xml:space="preserve">
-    <value>An error occurred when trying to authorize.</value>
+    <value>Παρουσιάστηκε ένα σφάλμα κατά την προσπάθεια εκτέλεσης του.</value>
   </data>
   <data name="UploadingEmail" xml:space="preserve">
     <value>Uploading email...</value>
   </data>
   <data name="ErrorEmailing" xml:space="preserve">
-    <value>An error occurred when trying to send the email.</value>
-  </data>
-  <data name="Naps2Server" xml:space="preserve">
-    <value>NAPS2 Server</value>
-  </data>
-  <data name="ServerStarted" xml:space="preserve">
-    <value>Server started</value>
-  </data>
-  <data name="ListeningOnPort" xml:space="preserve">
-    <value>Listening on port {0}</value>
+    <value>Δημιουργήθηκε σφάλμα κατά την εκτύπωση του αρχείου.</value>
   </data>
   <data name="ScanProgressPage" xml:space="preserve">
     <value>Σάρωση σελίδας {0}...</value>

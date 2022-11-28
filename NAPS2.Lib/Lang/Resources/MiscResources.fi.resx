@@ -72,6 +72,9 @@
   <data name="FileTypeTiff" xml:space="preserve">
     <value>TIFF-tiedosto (*.tiff, *.tif)</value>
   </data>
+  <data name="FileTypeJp2" xml:space="preserve">
+    <value>JPEG2000 File (*.jp2, *.jpx)</value>
+  </data>
   <data name="NameMissing" xml:space="preserve">
     <value>Nimi puuttuu.</value>
   </data>
@@ -169,7 +172,7 @@
     <value>Toiminto käynnissä</value>
   </data>
   <data name="ScanPageProgress" xml:space="preserve">
-    <value>Skannataan kuvaa {0}</value>
+    <value>Skannataan sivua {0}</value>
   </data>
   <data name="NoFeederSupport" xml:space="preserve">
     <value>Valittu skanneri ei tue syöttölaitetta. Jos skannerissasi on syöttölaite, kokeile toista ajuria.</value>
@@ -202,7 +205,7 @@
     <value>Sarjaskannaus pysäytetty virheen takia.</value>
   </data>
   <data name="BatchStatusPage" xml:space="preserve">
-    <value>Skannataan kuvaa {0}...</value>
+    <value>Skannataan sivua {0}...</value>
   </data>
   <data name="BatchStatusScanPage" xml:space="preserve">
     <value>Skannataan sivua {0} (skannaus {1})...</value>
@@ -221,6 +224,9 @@
   </data>
   <data name="NoDuplexSupport" xml:space="preserve">
     <value>Valittu skanneri ei tue monipuoleisuutta. Jos skannerisi luultavasti tukee sitä, kokeile toista ajuria.</value>
+  </data>
+  <data name="ProgressFormat" xml:space="preserve">
+    <value>{0} / {1}</value>
   </data>
   <data name="ImportingFormat" xml:space="preserve">
     <value>Tuodaan {0}...</value>
@@ -292,7 +298,7 @@
     <value>OCR-päivitys on saatavana.</value>
   </data>
   <data name="ImageSaved" xml:space="preserve">
-    <value>Kuva lalletettu.</value>
+    <value>Kuva talletettu.</value>
   </data>
   <data name="ImagesSaved" xml:space="preserve">
     <value>{0} kuva(a) tallennettu.</value>
@@ -360,6 +366,9 @@
   <data name="CheckingForUpdates" xml:space="preserve">
     <value>Tarkistetaan...</value>
   </data>
+  <data name="UpdateCheckDisabled" xml:space="preserve">
+    <value>Update checking is disabled.</value>
+  </data>
   <data name="UpdateError" xml:space="preserve">
     <value>Virhe päivityksen asennuksessa.</value>
   </data>
@@ -378,17 +387,8 @@
   <data name="ErrorEmailing" xml:space="preserve">
     <value>Virhe sähköpostin lähetykessa.</value>
   </data>
-  <data name="Naps2Server" xml:space="preserve">
-    <value>NAPS2 Server</value>
-  </data>
-  <data name="ServerStarted" xml:space="preserve">
-    <value>Server started</value>
-  </data>
-  <data name="ListeningOnPort" xml:space="preserve">
-    <value>Listening on port {0}</value>
-  </data>
   <data name="ScanProgressPage" xml:space="preserve">
-    <value>Skannataan kuvaa {0}...</value>
+    <value>Skannataan sivua {0}...</value>
   </data>
   <data name="AcquiringData" xml:space="preserve">
     <value>Haetaan tietoja...</value>

@@ -121,10 +121,10 @@
     <value>フィーダー</value>
   </data>
   <data name="Source_Glass" xml:space="preserve">
-    <value>Glass</value>
+    <value>フラットヘッド</value>
   </data>
   <data name="TiffComp_Auto" xml:space="preserve">
-    <value>Auto</value>
+    <value>自動</value>
   </data>
   <data name="TiffComp_Ccitt4" xml:space="preserve">
     <value>CCITT4</value>
@@ -152,5 +152,11 @@
   </data>
   <data name="WiaVersion_Default" xml:space="preserve">
     <value>デフォルト</value>
+  </data>
+  <data name="OcrMode_Fast" xml:space="preserve">
+    <value>Fast</value>
+  </data>
+  <data name="OcrMode_Best" xml:space="preserve">
+    <value>Best</value>
   </data>
 </root>

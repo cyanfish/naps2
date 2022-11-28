@@ -72,6 +72,9 @@
   <data name="FileTypeTiff" xml:space="preserve">
     <value>TIFF byla (*.tiff, *.tif)</value>
   </data>
+  <data name="FileTypeJp2" xml:space="preserve">
+    <value>JPEG2000 File (*.jp2, *.jpx)</value>
+  </data>
   <data name="NameMissing" xml:space="preserve">
     <value>Nenurodytas pavadinimas.</value>
   </data>
@@ -222,6 +225,9 @@
   <data name="NoDuplexSupport" xml:space="preserve">
     <value>Pasirinktas skeneris nepalaiko dvipusio skenavimo. Jei jūsų skeneris turi dvipusio skenavimo galimybę, pabandykite naudoti kitą tvarkyklę.</value>
   </data>
+  <data name="ProgressFormat" xml:space="preserve">
+    <value>{0} / {1}</value>
+  </data>
   <data name="ImportingFormat" xml:space="preserve">
     <value>Importuojama {0}...</value>
   </data>
@@ -277,7 +283,7 @@
     <value>Vaizdo bylos</value>
   </data>
   <data name="DeviceBusy" xml:space="preserve">
-    <value>Pasirinktas skeneris neprisijungęs.</value>
+    <value>The selected scanner is busy.</value>
   </data>
   <data name="DeviceCoverOpen" xml:space="preserve">
     <value>The scanner's cover is open.</value>
@@ -360,8 +366,11 @@
   <data name="CheckingForUpdates" xml:space="preserve">
     <value>Checking...</value>
   </data>
+  <data name="UpdateCheckDisabled" xml:space="preserve">
+    <value>Update checking is disabled.</value>
+  </data>
   <data name="UpdateError" xml:space="preserve">
-    <value>An error occured when trying to install the update.</value>
+    <value>Įvyko klaida bandant įdiegti atnaujinimus.</value>
   </data>
   <data name="Install" xml:space="preserve">
     <value>Install {0}</value>
@@ -377,15 +386,6 @@
   </data>
   <data name="ErrorEmailing" xml:space="preserve">
     <value>An error occurred when trying to send the email.</value>
-  </data>
-  <data name="Naps2Server" xml:space="preserve">
-    <value>NAPS2 Server</value>
-  </data>
-  <data name="ServerStarted" xml:space="preserve">
-    <value>Server started</value>
-  </data>
-  <data name="ListeningOnPort" xml:space="preserve">
-    <value>Listening on port {0}</value>
   </data>
   <data name="ScanProgressPage" xml:space="preserve">
     <value>Skenuojamas puslapis {0}...</value>

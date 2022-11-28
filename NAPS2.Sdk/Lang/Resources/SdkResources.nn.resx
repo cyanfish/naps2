@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="DeviceNotFound" xml:space="preserve">
+    <value>Den valde skannaren vart ikkje funnen.</value>
+  </data>
+  <data name="DeviceOffline" xml:space="preserve">
+    <value>Den valde skannaren er fråkopla.</value>
+  </data>
+  <data name="NAPS2" xml:space="preserve">
+    <value>NAPS2</value>
+  </data>
+  <data name="NoDeviceSelected" xml:space="preserve">
+    <value>Ingen skannar vald.</value>
+  </data>
+  <data name="NoDevicesFound" xml:space="preserve">
+    <value>Ingen skannar vart funnen.</value>
+  </data>
+  <data name="UnknownDriverError" xml:space="preserve">
+    <value>Ukjend feil med skanne-drivaren.</value>
+  </data>
+  <data name="Version" xml:space="preserve">
+    <value>Versjon {0}</value>
+  </data>
+  <data name="ImportErrorCouldNot" xml:space="preserve">
+    <value>Fila '{0}' kunne ikkje importerast.</value>
+  </data>
+  <data name="NoFeederSupport" xml:space="preserve">
+    <value>Den valde skannaren støtter ikkje bruk av matar. Hvis skannaren din har ein matar, prøv å bruka ein annan drivar.</value>
+  </data>
+  <data name="NoPagesInFeeder" xml:space="preserve">
+    <value>Der er ingen ark i mataren.</value>
+  </data>
+  <data name="PdfNoPermissionToExtractContent" xml:space="preserve">
+    <value>Du har ikkje løyve til å kopiera innhald frå fila '{0}'.</value>
+  </data>
+  <data name="NoDuplexSupport" xml:space="preserve">
+    <value>Den valde skannaren støtter ikkje tosidig. Hvis skannaren din skal støtta tosidig, prøv å bruka ein annan driver.</value>
+  </data>
+  <data name="DeviceBusy" xml:space="preserve">
+    <value>Den valde skannaren er opptatt.</value>
+  </data>
+  <data name="DeviceCoverOpen" xml:space="preserve">
+    <value>Skannardekselet er opent.</value>
+  </data>
+  <data name="DevicePaperJam" xml:space="preserve">
+    <value>Skannaren har papirstopp.</value>
+  </data>
+  <data name="DeviceWarmingUp" xml:space="preserve">
+    <value>Skannaren varmer opp.</value>
+  </data>
+  <data name="SaneNotAvailable" xml:space="preserve">
+    <value>SANE-drivaren er ikkje tilgjengeleg. Installer den nødvendige pakken:</value>
+  </data>
+  <data name="TesseractNotAvailable" xml:space="preserve">
+    <value>OCR-motoren er ikkje tilgjengeleg. Installer den nødvendige pakken:</value>
+  </data>
+  <data name="DriverNotSupported" xml:space="preserve">
+    <value>Den valde drivaren er ikkje støtta på dette systemet.</value>
+  </data>
+</root>

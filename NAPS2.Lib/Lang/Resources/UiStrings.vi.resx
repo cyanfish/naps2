@@ -1,0 +1,351 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AboutFormTitle" xml:space="preserve">
+    <value>Thông Tin Phần Mềm</value>
+  </data>
+  <data name="CopyrightFormat" xml:space="preserve">
+    <value>Copyright {0} NAPS2 Contributors</value>
+  </data>
+  <data name="IconsFrom" xml:space="preserve">
+    <value>Icons from:</value>
+  </data>
+  <data name="CheckForUpdates" xml:space="preserve">
+    <value>Kiểm tra phiên bản mới</value>
+  </data>
+  <data name="OK" xml:space="preserve">
+    <value>Đồng Ý</value>
+  </data>
+  <data name="Donate" xml:space="preserve">
+    <value>Donate</value>
+  </data>
+  <data name="ProfilesFormTitle" xml:space="preserve">
+    <value>Profiles</value>
+  </data>
+  <data name="New" xml:space="preserve">
+    <value>Mới</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>Sửa</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Xóa</value>
+  </data>
+  <data name="Scan" xml:space="preserve">
+    <value>Quét</value>
+  </data>
+  <data name="SetDefault" xml:space="preserve">
+    <value>Về mặc định</value>
+  </data>
+  <data name="Copy" xml:space="preserve">
+    <value>Sao chép</value>
+  </data>
+  <data name="Paste" xml:space="preserve">
+    <value>Dán</value>
+  </data>
+  <data name="Done" xml:space="preserve">
+    <value>Xong</value>
+  </data>
+  <data name="Default" xml:space="preserve">
+    <value>Mặc định</value>
+  </data>
+  <data name="NewProfile" xml:space="preserve">
+    <value>Hồ sơ mới</value>
+  </data>
+  <data name="BatchScan" xml:space="preserve">
+    <value>Scan hàng loạt</value>
+  </data>
+  <data name="Ocr" xml:space="preserve">
+    <value>OCR</value>
+  </data>
+  <data name="Profiles" xml:space="preserve">
+    <value>Profiles</value>
+  </data>
+  <data name="Import" xml:space="preserve">
+    <value>Chèn</value>
+  </data>
+  <data name="SavePdf" xml:space="preserve">
+    <value>Lưu PDF</value>
+  </data>
+  <data name="PdfSettings" xml:space="preserve">
+    <value>Cài đặt PDF</value>
+  </data>
+  <data name="SaveImages" xml:space="preserve">
+    <value>Lưu Ảnh</value>
+  </data>
+  <data name="ImageSettings" xml:space="preserve">
+    <value>Cài đặt ảnh</value>
+  </data>
+  <data name="EmailPdf" xml:space="preserve">
+    <value>Email PDF</value>
+  </data>
+  <data name="EmailSettings" xml:space="preserve">
+    <value>Cài đặt Email</value>
+  </data>
+  <data name="Print" xml:space="preserve">
+    <value>In</value>
+  </data>
+  <data name="Image" xml:space="preserve">
+    <value>Ảnh</value>
+  </data>
+  <data name="View" xml:space="preserve">
+    <value>Xem</value>
+  </data>
+  <data name="Crop" xml:space="preserve">
+    <value>Chỉnh sửa</value>
+  </data>
+  <data name="BrightnessContrast" xml:space="preserve">
+    <value>Độ Sáng / Tương Phản</value>
+  </data>
+  <data name="HueSaturation" xml:space="preserve">
+    <value>Hue / Saturation</value>
+  </data>
+  <data name="BlackAndWhite" xml:space="preserve">
+    <value>Đen / Trắng</value>
+  </data>
+  <data name="Sharpen" xml:space="preserve">
+    <value>Độ nét</value>
+  </data>
+  <data name="DocumentCorrection" xml:space="preserve">
+    <value>Document Correction</value>
+  </data>
+  <data name="Reset" xml:space="preserve">
+    <value>Thiết lập lại</value>
+  </data>
+  <data name="Rotate" xml:space="preserve">
+    <value>Xoay</value>
+  </data>
+  <data name="RotateLeft" xml:space="preserve">
+    <value>Xoay Trái</value>
+  </data>
+  <data name="RotateRight" xml:space="preserve">
+    <value>Xoay Phải</value>
+  </data>
+  <data name="Flip" xml:space="preserve">
+    <value>Lật</value>
+  </data>
+  <data name="Deskew" xml:space="preserve">
+    <value>Deskew</value>
+  </data>
+  <data name="CustomRotation" xml:space="preserve">
+    <value>Tùy chỉnh xoay</value>
+  </data>
+  <data name="MoveUp" xml:space="preserve">
+    <value>Chuyển lên</value>
+  </data>
+  <data name="MoveDown" xml:space="preserve">
+    <value>Chuyển xuống</value>
+  </data>
+  <data name="Reorder" xml:space="preserve">
+    <value>Sắp xếp lại</value>
+  </data>
+  <data name="Interleave" xml:space="preserve">
+    <value>Interleave</value>
+  </data>
+  <data name="Deinterleave" xml:space="preserve">
+    <value>Deinterleave</value>
+  </data>
+  <data name="AltInterleave" xml:space="preserve">
+    <value>Alternate Interleave</value>
+  </data>
+  <data name="AltDeinterleave" xml:space="preserve">
+    <value>Alternate Deinterleave</value>
+  </data>
+  <data name="Reverse" xml:space="preserve">
+    <value>Đảo ngược</value>
+  </data>
+  <data name="Clear" xml:space="preserve">
+    <value>Xóa</value>
+  </data>
+  <data name="ClearAll" xml:space="preserve">
+    <value>Clear All</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>Ngôn ngữ</value>
+  </data>
+  <data name="About" xml:space="preserve">
+    <value>Thông Tin Phần Mềm</value>
+  </data>
+  <data name="Zoom" xml:space="preserve">
+    <value>Phóng</value>
+  </data>
+  <data name="ZoomIn" xml:space="preserve">
+    <value>Phóng To</value>
+  </data>
+  <data name="ZoomOut" xml:space="preserve">
+    <value>Thu Nhỏ</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="SaveAllAsPdf" xml:space="preserve">
+    <value>Save All as PDF</value>
+  </data>
+  <data name="SaveSelectedAsPdf" xml:space="preserve">
+    <value>Save Selected as PDF</value>
+  </data>
+  <data name="SaveAllAsImages" xml:space="preserve">
+    <value>Save All as Images</value>
+  </data>
+  <data name="SaveSelectedAsImages" xml:space="preserve">
+    <value>Save Selected as Images</value>
+  </data>
+  <data name="EmailAllAsPdf" xml:space="preserve">
+    <value>Email All as PDF</value>
+  </data>
+  <data name="EmailSelectedAsPdf" xml:space="preserve">
+    <value>Email Selected as PDF</value>
+  </data>
+  <data name="EditProfileFormTitle" xml:space="preserve">
+    <value>Cài đặt Hồ sơ</value>
+  </data>
+  <data name="DisplayNameLabel" xml:space="preserve">
+    <value>Hiển thị tên:</value>
+  </data>
+  <data name="WiaDriver" xml:space="preserve">
+    <value>WIA Driver</value>
+  </data>
+  <data name="TwainDriver" xml:space="preserve">
+    <value>TWAIN Driver</value>
+  </data>
+  <data name="AppleDriver" xml:space="preserve">
+    <value>Apple Driver</value>
+  </data>
+  <data name="SaneDriver" xml:space="preserve">
+    <value>SANE Driver</value>
+  </data>
+  <data name="DeviceLabel" xml:space="preserve">
+    <value>Thiết bị:</value>
+  </data>
+  <data name="ChooseDevice" xml:space="preserve">
+    <value>Chọn Ổ Đĩa</value>
+  </data>
+  <data name="UsePredefinedSettings" xml:space="preserve">
+    <value>Sử dụng các thiết lập được xác định trước</value>
+  </data>
+  <data name="UseNativeUi" xml:space="preserve">
+    <value>Sử dụng giao diện người dùng tự nhiên</value>
+  </data>
+  <data name="PaperSourceLabel" xml:space="preserve">
+    <value>Trang gốc:</value>
+  </data>
+  <data name="PageSizeLabel" xml:space="preserve">
+    <value>Kích thước trang:</value>
+  </data>
+  <data name="ResolutionLabel" xml:space="preserve">
+    <value>Nghị quyết:</value>
+  </data>
+  <data name="BrightnessLabel" xml:space="preserve">
+    <value>Độ sáng:</value>
+  </data>
+  <data name="BitDepthLabel" xml:space="preserve">
+    <value>Chiều sâu:</value>
+  </data>
+  <data name="HorizontalAlignLabel" xml:space="preserve">
+    <value>Chỉnh chiều ngang:</value>
+  </data>
+  <data name="ScaleLabel" xml:space="preserve">
+    <value>Tỉ lệ:</value>
+  </data>
+  <data name="ContrastLabel" xml:space="preserve">
+    <value>Tương phản:</value>
+  </data>
+  <data name="EnableAutoSave" xml:space="preserve">
+    <value>Kích hoạt Lưu tự động</value>
+  </data>
+  <data name="AutoSaveSettings" xml:space="preserve">
+    <value>Cài đặt Tự động Lưu</value>
+  </data>
+  <data name="Advanced" xml:space="preserve">
+    <value>Nâng cao</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Hủy</value>
+  </data>
+  <data name="Select" xml:space="preserve">
+    <value>Chọn</value>
+  </data>
+  <data name="SelectSource" xml:space="preserve">
+    <value>Chọn nguồn</value>
+  </data>
+  <data name="RunInBackground" xml:space="preserve">
+    <value>Chạy ngầm</value>
+  </data>
+  <data name="Naps2" xml:space="preserve">
+    <value>NAPS2</value>
+  </data>
+  <data name="Naps2TitleFormat" xml:space="preserve">
+    <value>NAPS2 - {0}</value>
+  </data>
+  <data name="Naps2FullName" xml:space="preserve">
+    <value>Not Another PDF Scanner</value>
+  </data>
+  <data name="OcrSetupFormTitle" xml:space="preserve">
+    <value>Cài đặt OCR</value>
+  </data>
+  <data name="MakePdfsSearchable" xml:space="preserve">
+    <value>Hãy tìm kiếm các file PDF sử dụng OCR</value>
+  </data>
+  <data name="OcrLanguageLabel" xml:space="preserve">
+    <value>Ngôn ngữ OCR:</value>
+  </data>
+  <data name="OcrModeLabel" xml:space="preserve">
+    <value>Chế độ OCR:</value>
+  </data>
+  <data name="RunOcrAfterScanning" xml:space="preserve">
+    <value>Tự động thực thi OCR (nhận diện chữ trên bản scan) sau khi scan</value>
+  </data>
+  <data name="GetMoreLanguages" xml:space="preserve">
+    <value>Thêm Ngôn ngữ</value>
+  </data>
+  <data name="OcrDownloadFormTitle" xml:space="preserve">
+    <value>Tải OCR</value>
+  </data>
+  <data name="OcrDownloadSummaryText" xml:space="preserve">
+    <value>Sử dụng OCR đòi hỏi bạn phải tải về từng ngôn ngữ mà bạn muốn quét.</value>
+  </data>
+  <data name="OcrSelectLanguageLabel" xml:space="preserve">
+    <value>Chọn một hoặc nhiều ngôn ngữ:</value>
+  </data>
+  <data name="EstimatedDownloadSize" xml:space="preserve">
+    <value>Ước tính kích thước download: {0} MB</value>
+  </data>
+  <data name="Download" xml:space="preserve">
+    <value>Tải Về</value>
+  </data>
+  <data name="DownloadProgressFormTitle" xml:space="preserve">
+    <value>Tiến độ tải về</value>
+  </data>
+  <data name="PreviewFormTitle" xml:space="preserve">
+    <value>Xem trước</value>
+  </data>
+  <data name="Next" xml:space="preserve">
+    <value>Tới</value>
+  </data>
+  <data name="Previous" xml:space="preserve">
+    <value>Lùi lại</value>
+  </data>
+  <data name="XOfY" xml:space="preserve">
+    <value>{0} tới {1}</value>
+  </data>
+  <data name="Revert" xml:space="preserve">
+    <value>Trở lại</value>
+  </data>
+  <data name="ApplyToSelected" xml:space="preserve">
+    <value>Áp dụng cho tất cả {0} hình ảnh được chọn</value>
+  </data>
+  <data name="SelectAll" xml:space="preserve">
+    <value>Chọn hết</value>
+  </data>
+</root>

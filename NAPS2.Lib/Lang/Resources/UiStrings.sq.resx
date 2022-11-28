@@ -1,0 +1,351 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AboutFormTitle" xml:space="preserve">
+    <value>Rreth</value>
+  </data>
+  <data name="CopyrightFormat" xml:space="preserve">
+    <value>Copyright {0} NAPS2 Contributors</value>
+  </data>
+  <data name="IconsFrom" xml:space="preserve">
+    <value>Ikonat nga:</value>
+  </data>
+  <data name="CheckForUpdates" xml:space="preserve">
+    <value>Kontrollo për përditësime</value>
+  </data>
+  <data name="OK" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="Donate" xml:space="preserve">
+    <value>Dhuro</value>
+  </data>
+  <data name="ProfilesFormTitle" xml:space="preserve">
+    <value>Profilet</value>
+  </data>
+  <data name="New" xml:space="preserve">
+    <value>I ri</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>Modifiko</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Fshi</value>
+  </data>
+  <data name="Scan" xml:space="preserve">
+    <value>Skano</value>
+  </data>
+  <data name="SetDefault" xml:space="preserve">
+    <value>Vendos të paracaktuar</value>
+  </data>
+  <data name="Copy" xml:space="preserve">
+    <value>Kopjo</value>
+  </data>
+  <data name="Paste" xml:space="preserve">
+    <value>Ngjit</value>
+  </data>
+  <data name="Done" xml:space="preserve">
+    <value>U krye</value>
+  </data>
+  <data name="Default" xml:space="preserve">
+    <value>E paracaktuar</value>
+  </data>
+  <data name="NewProfile" xml:space="preserve">
+    <value>Profil i ri</value>
+  </data>
+  <data name="BatchScan" xml:space="preserve">
+    <value>Skanim në grup</value>
+  </data>
+  <data name="Ocr" xml:space="preserve">
+    <value>OCR</value>
+  </data>
+  <data name="Profiles" xml:space="preserve">
+    <value>Profilet</value>
+  </data>
+  <data name="Import" xml:space="preserve">
+    <value>Importo</value>
+  </data>
+  <data name="SavePdf" xml:space="preserve">
+    <value>Ruaj PDF</value>
+  </data>
+  <data name="PdfSettings" xml:space="preserve">
+    <value>Cilësimet e PDF</value>
+  </data>
+  <data name="SaveImages" xml:space="preserve">
+    <value>Ruaj imazhet</value>
+  </data>
+  <data name="ImageSettings" xml:space="preserve">
+    <value>Cilësimet e imazhit</value>
+  </data>
+  <data name="EmailPdf" xml:space="preserve">
+    <value>Dërgo PDF me email</value>
+  </data>
+  <data name="EmailSettings" xml:space="preserve">
+    <value>Cilësimet e emailit</value>
+  </data>
+  <data name="Print" xml:space="preserve">
+    <value>Printo</value>
+  </data>
+  <data name="Image" xml:space="preserve">
+    <value>Imazhi</value>
+  </data>
+  <data name="View" xml:space="preserve">
+    <value>Shfaq</value>
+  </data>
+  <data name="Crop" xml:space="preserve">
+    <value>Preje</value>
+  </data>
+  <data name="BrightnessContrast" xml:space="preserve">
+    <value>Ndriçimi/Kontrasti</value>
+  </data>
+  <data name="HueSaturation" xml:space="preserve">
+    <value>Ngjyrimi/Ngopja</value>
+  </data>
+  <data name="BlackAndWhite" xml:space="preserve">
+    <value>Bardhë e zi</value>
+  </data>
+  <data name="Sharpen" xml:space="preserve">
+    <value>Thekso</value>
+  </data>
+  <data name="DocumentCorrection" xml:space="preserve">
+    <value>Document Correction</value>
+  </data>
+  <data name="Reset" xml:space="preserve">
+    <value>Rivendos</value>
+  </data>
+  <data name="Rotate" xml:space="preserve">
+    <value>Rrotullo</value>
+  </data>
+  <data name="RotateLeft" xml:space="preserve">
+    <value>Rrotullo majtas</value>
+  </data>
+  <data name="RotateRight" xml:space="preserve">
+    <value>Rrotullo djathtas</value>
+  </data>
+  <data name="Flip" xml:space="preserve">
+    <value>Përmbys</value>
+  </data>
+  <data name="Deskew" xml:space="preserve">
+    <value>Drejto</value>
+  </data>
+  <data name="CustomRotation" xml:space="preserve">
+    <value>Rrotullim i personalizuar</value>
+  </data>
+  <data name="MoveUp" xml:space="preserve">
+    <value>Lëviz lart</value>
+  </data>
+  <data name="MoveDown" xml:space="preserve">
+    <value>Lëviz poshtë</value>
+  </data>
+  <data name="Reorder" xml:space="preserve">
+    <value>Rirendit</value>
+  </data>
+  <data name="Interleave" xml:space="preserve">
+    <value>Përziej</value>
+  </data>
+  <data name="Deinterleave" xml:space="preserve">
+    <value>Heq përzierjen</value>
+  </data>
+  <data name="AltInterleave" xml:space="preserve">
+    <value>Krijimi i shtresave alternative</value>
+  </data>
+  <data name="AltDeinterleave" xml:space="preserve">
+    <value>Heqja e shtresave alternative</value>
+  </data>
+  <data name="Reverse" xml:space="preserve">
+    <value>Kthe mbrapsht</value>
+  </data>
+  <data name="Clear" xml:space="preserve">
+    <value>Pastro</value>
+  </data>
+  <data name="ClearAll" xml:space="preserve">
+    <value>Clear All</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>Gjuha</value>
+  </data>
+  <data name="About" xml:space="preserve">
+    <value>Rreth</value>
+  </data>
+  <data name="Zoom" xml:space="preserve">
+    <value>Shkalla e zmadhimit</value>
+  </data>
+  <data name="ZoomIn" xml:space="preserve">
+    <value>Zmadho</value>
+  </data>
+  <data name="ZoomOut" xml:space="preserve">
+    <value>Zvogëlo</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="SaveAllAsPdf" xml:space="preserve">
+    <value>Save All as PDF</value>
+  </data>
+  <data name="SaveSelectedAsPdf" xml:space="preserve">
+    <value>Save Selected as PDF</value>
+  </data>
+  <data name="SaveAllAsImages" xml:space="preserve">
+    <value>Save All as Images</value>
+  </data>
+  <data name="SaveSelectedAsImages" xml:space="preserve">
+    <value>Save Selected as Images</value>
+  </data>
+  <data name="EmailAllAsPdf" xml:space="preserve">
+    <value>Email All as PDF</value>
+  </data>
+  <data name="EmailSelectedAsPdf" xml:space="preserve">
+    <value>Email Selected as PDF</value>
+  </data>
+  <data name="EditProfileFormTitle" xml:space="preserve">
+    <value>Cilësimet e profilit</value>
+  </data>
+  <data name="DisplayNameLabel" xml:space="preserve">
+    <value>Emri i afishimit:</value>
+  </data>
+  <data name="WiaDriver" xml:space="preserve">
+    <value>Drejtuesi WIA</value>
+  </data>
+  <data name="TwainDriver" xml:space="preserve">
+    <value>Drejtuesi TWAIN</value>
+  </data>
+  <data name="AppleDriver" xml:space="preserve">
+    <value>Apple Driver</value>
+  </data>
+  <data name="SaneDriver" xml:space="preserve">
+    <value>Drejtuesi SANE</value>
+  </data>
+  <data name="DeviceLabel" xml:space="preserve">
+    <value>Pajisja:</value>
+  </data>
+  <data name="ChooseDevice" xml:space="preserve">
+    <value>Zgjidh pajisjen</value>
+  </data>
+  <data name="UsePredefinedSettings" xml:space="preserve">
+    <value>Përdor cilësimet e paracaktuara</value>
+  </data>
+  <data name="UseNativeUi" xml:space="preserve">
+    <value>Përdor UI origjinal</value>
+  </data>
+  <data name="PaperSourceLabel" xml:space="preserve">
+    <value>Burimi i letrës:</value>
+  </data>
+  <data name="PageSizeLabel" xml:space="preserve">
+    <value>Madhësia e faqes:</value>
+  </data>
+  <data name="ResolutionLabel" xml:space="preserve">
+    <value>Rezolucioni:</value>
+  </data>
+  <data name="BrightnessLabel" xml:space="preserve">
+    <value>Shkëlqimi:</value>
+  </data>
+  <data name="BitDepthLabel" xml:space="preserve">
+    <value>Thellësia e bitit:</value>
+  </data>
+  <data name="HorizontalAlignLabel" xml:space="preserve">
+    <value>Drejto horizontalisht:</value>
+  </data>
+  <data name="ScaleLabel" xml:space="preserve">
+    <value>Shkalla:</value>
+  </data>
+  <data name="ContrastLabel" xml:space="preserve">
+    <value>Kontrasti:</value>
+  </data>
+  <data name="EnableAutoSave" xml:space="preserve">
+    <value>Aktivizo ruajtjen automatike</value>
+  </data>
+  <data name="AutoSaveSettings" xml:space="preserve">
+    <value>Cilësimet e ruajtjes automatike</value>
+  </data>
+  <data name="Advanced" xml:space="preserve">
+    <value>I avancuar</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Anulo</value>
+  </data>
+  <data name="Select" xml:space="preserve">
+    <value>Zgjidh</value>
+  </data>
+  <data name="SelectSource" xml:space="preserve">
+    <value>Zgjidh burimin</value>
+  </data>
+  <data name="RunInBackground" xml:space="preserve">
+    <value>Ekzekuto në sfond</value>
+  </data>
+  <data name="Naps2" xml:space="preserve">
+    <value>NAPS2</value>
+  </data>
+  <data name="Naps2TitleFormat" xml:space="preserve">
+    <value>NAPS2 - {0}</value>
+  </data>
+  <data name="Naps2FullName" xml:space="preserve">
+    <value>Not Another PDF Scanner</value>
+  </data>
+  <data name="OcrSetupFormTitle" xml:space="preserve">
+    <value>Konfigurimi i OCR</value>
+  </data>
+  <data name="MakePdfsSearchable" xml:space="preserve">
+    <value>Bëji PDF-të të kërkueshme duke përdorur OCR</value>
+  </data>
+  <data name="OcrLanguageLabel" xml:space="preserve">
+    <value>Gjuha e OCR:</value>
+  </data>
+  <data name="OcrModeLabel" xml:space="preserve">
+    <value>Regjimi OCR:</value>
+  </data>
+  <data name="RunOcrAfterScanning" xml:space="preserve">
+    <value>Ekzekuto OCR automatikisht pas skanimit</value>
+  </data>
+  <data name="GetMoreLanguages" xml:space="preserve">
+    <value>Merr më shumë gjuhë</value>
+  </data>
+  <data name="OcrDownloadFormTitle" xml:space="preserve">
+    <value>Shkarkim i OCR</value>
+  </data>
+  <data name="OcrDownloadSummaryText" xml:space="preserve">
+    <value>Përdorimi i OCR ju kërkon të shkarkoni çdo gjuhë që dëshironi të skanoni.</value>
+  </data>
+  <data name="OcrSelectLanguageLabel" xml:space="preserve">
+    <value>Zgjidh një ose më shumë gjuhë:</value>
+  </data>
+  <data name="EstimatedDownloadSize" xml:space="preserve">
+    <value>Madhësia e vlerësuar e shkarkimit: {0} MB</value>
+  </data>
+  <data name="Download" xml:space="preserve">
+    <value>Shkarko</value>
+  </data>
+  <data name="DownloadProgressFormTitle" xml:space="preserve">
+    <value>Progresi i shkarkimit</value>
+  </data>
+  <data name="PreviewFormTitle" xml:space="preserve">
+    <value>Shiko paraprakisht</value>
+  </data>
+  <data name="Next" xml:space="preserve">
+    <value>Pasardhëse</value>
+  </data>
+  <data name="Previous" xml:space="preserve">
+    <value>Paraardhës</value>
+  </data>
+  <data name="XOfY" xml:space="preserve">
+    <value>{0} nga {1}</value>
+  </data>
+  <data name="Revert" xml:space="preserve">
+    <value>Rikthe</value>
+  </data>
+  <data name="ApplyToSelected" xml:space="preserve">
+    <value>Zbato te të gjithë imazhet e zgjedhura {0}</value>
+  </data>
+  <data name="SelectAll" xml:space="preserve">
+    <value>Zgjidhi të gjitha</value>
+  </data>
+</root>

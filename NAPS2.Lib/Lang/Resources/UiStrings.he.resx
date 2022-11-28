@@ -15,26 +15,26 @@
   <data name="AboutFormTitle" xml:space="preserve">
     <value>אודות</value>
   </data>
-  <data name="Copyright" xml:space="preserve">
-    <value>Copyright 2009, 2012-2020 NAPS2 Contributors</value>
+  <data name="CopyrightFormat" xml:space="preserve">
+    <value>Copyright {0} NAPS2 Contributors</value>
   </data>
   <data name="IconsFrom" xml:space="preserve">
     <value>צלמיות מתוך:</value>
   </data>
   <data name="CheckForUpdates" xml:space="preserve">
-    <value>Check for updates</value>
+    <value>בדוק עדכונים</value>
   </data>
   <data name="OK" xml:space="preserve">
     <value>אישור</value>
   </data>
   <data name="Donate" xml:space="preserve">
-    <value>Donate</value>
+    <value>תרום</value>
   </data>
   <data name="ProfilesFormTitle" xml:space="preserve">
     <value>פרופילים</value>
   </data>
-  <data name="Add" xml:space="preserve">
-    <value>Add</value>
+  <data name="New" xml:space="preserve">
+    <value>חדש</value>
   </data>
   <data name="Edit" xml:space="preserve">
     <value>עריכה</value>
@@ -52,7 +52,7 @@
     <value>העתקה</value>
   </data>
   <data name="Paste" xml:space="preserve">
-    <value>Paste</value>
+    <value>הדבק</value>
   </data>
   <data name="Done" xml:space="preserve">
     <value>אישור</value>
@@ -262,7 +262,7 @@
     <value>ניגודיות:</value>
   </data>
   <data name="EnableAutoSave" xml:space="preserve">
-    <value>Enable Auto Save</value>
+    <value>הפעל שמירה אוטומטית</value>
   </data>
   <data name="AutoSaveSettings" xml:space="preserve">
     <value>הגדרות שמירה אוטומטית</value>
@@ -277,7 +277,7 @@
     <value>Select</value>
   </data>
   <data name="SelectSource" xml:space="preserve">
-    <value>Select Source</value>
+    <value>בחר מקור</value>
   </data>
   <data name="RunInBackground" xml:space="preserve">
     <value>Run in Background</value>
@@ -301,10 +301,10 @@
     <value>שפת OCR:</value>
   </data>
   <data name="OcrModeLabel" xml:space="preserve">
-    <value>OCR mode:</value>
+    <value>מצב OCR:</value>
   </data>
   <data name="RunOcrAfterScanning" xml:space="preserve">
-    <value>Automatically run OCR after scanning</value>
+    <value>הרץ OCR בצורת אוטומטית בסוף הסריקה</value>
   </data>
   <data name="GetMoreLanguages" xml:space="preserve">
     <value>קבל שפות נוספות</value>
@@ -326,5 +326,26 @@
   </data>
   <data name="DownloadProgressFormTitle" xml:space="preserve">
     <value>התקדמות ההורדה</value>
+  </data>
+  <data name="PreviewFormTitle" xml:space="preserve">
+    <value>תצוגה מקדימה</value>
+  </data>
+  <data name="Next" xml:space="preserve">
+    <value>הבא</value>
+  </data>
+  <data name="Previous" xml:space="preserve">
+    <value>הקודם</value>
+  </data>
+  <data name="XOfY" xml:space="preserve">
+    <value>{0} מתוך {1}</value>
+  </data>
+  <data name="Revert" xml:space="preserve">
+    <value>בטל שינויים</value>
+  </data>
+  <data name="ApplyToSelected" xml:space="preserve">
+    <value>החל על כל {0} התמונות שנבחרו</value>
+  </data>
+  <data name="SelectAll" xml:space="preserve">
+    <value>בחר הכל</value>
   </data>
 </root>

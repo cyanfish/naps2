@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="DeviceNotFound" xml:space="preserve">
+    <value>无法找到所选的扫描仪.</value>
+  </data>
+  <data name="DeviceOffline" xml:space="preserve">
+    <value>选定的扫描仪处于脱机状态.</value>
+  </data>
+  <data name="NAPS2" xml:space="preserve">
+    <value>NAPS2</value>
+  </data>
+  <data name="NoDeviceSelected" xml:space="preserve">
+    <value>未选择设备.</value>
+  </data>
+  <data name="NoDevicesFound" xml:space="preserve">
+    <value>未找到扫描设备.</value>
+  </data>
+  <data name="UnknownDriverError" xml:space="preserve">
+    <value>尝试扫描文件发生错误.</value>
+  </data>
+  <data name="Version" xml:space="preserve">
+    <value>版本 {0}</value>
+  </data>
+  <data name="ImportErrorCouldNot" xml:space="preserve">
+    <value>无法导入文件 '{0}'.</value>
+  </data>
+  <data name="NoFeederSupport" xml:space="preserve">
+    <value>所选的扫描仪不支持使用输稿器。如果您的扫描仪确实有输稿器，请尝试使用不同的驱动程序.</value>
+  </data>
+  <data name="NoPagesInFeeder" xml:space="preserve">
+    <value>输稿器中未发现纸张.</value>
+  </data>
+  <data name="PdfNoPermissionToExtractContent" xml:space="preserve">
+    <value>您没有从文件 '{0}' 中复制内容的权限.</value>
+  </data>
+  <data name="NoDuplexSupport" xml:space="preserve">
+    <value>所选的扫描仪不支持双面扫描。如果您的扫描仪支持双面扫描，请尝试使用不同的驱动程序.</value>
+  </data>
+  <data name="DeviceBusy" xml:space="preserve">
+    <value>选定的扫描仪正在工作.</value>
+  </data>
+  <data name="DeviceCoverOpen" xml:space="preserve">
+    <value>扫描仪原稿盖已打开.</value>
+  </data>
+  <data name="DevicePaperJam" xml:space="preserve">
+    <value>扫描仪发生卡纸.</value>
+  </data>
+  <data name="DeviceWarmingUp" xml:space="preserve">
+    <value>扫描仪正在预热.</value>
+  </data>
+  <data name="SaneNotAvailable" xml:space="preserve">
+    <value>SANE 驱动不可用。请确认已安装所需的软件包:</value>
+  </data>
+  <data name="TesseractNotAvailable" xml:space="preserve">
+    <value>OCR 组件不可用。请确认已安装所需的软件包:</value>
+  </data>
+  <data name="DriverNotSupported" xml:space="preserve">
+    <value>所选驱动程序不受本系统支持.</value>
+  </data>
+</root>

@@ -1,0 +1,351 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AboutFormTitle" xml:space="preserve">
+    <value>Over</value>
+  </data>
+  <data name="CopyrightFormat" xml:space="preserve">
+    <value>Copyright {0} NAPS2 Contributors</value>
+  </data>
+  <data name="IconsFrom" xml:space="preserve">
+    <value>Pictogrammen van:</value>
+  </data>
+  <data name="CheckForUpdates" xml:space="preserve">
+    <value>Controleer op updates</value>
+  </data>
+  <data name="OK" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="Donate" xml:space="preserve">
+    <value>Doneer</value>
+  </data>
+  <data name="ProfilesFormTitle" xml:space="preserve">
+    <value>Profielen</value>
+  </data>
+  <data name="New" xml:space="preserve">
+    <value>Nieuw</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>Bewerken</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Verwijderen</value>
+  </data>
+  <data name="Scan" xml:space="preserve">
+    <value>Scannen</value>
+  </data>
+  <data name="SetDefault" xml:space="preserve">
+    <value>Als standaard instellen</value>
+  </data>
+  <data name="Copy" xml:space="preserve">
+    <value>Kopiëren</value>
+  </data>
+  <data name="Paste" xml:space="preserve">
+    <value>Plakken</value>
+  </data>
+  <data name="Done" xml:space="preserve">
+    <value>Gereed</value>
+  </data>
+  <data name="Default" xml:space="preserve">
+    <value>Standaard</value>
+  </data>
+  <data name="NewProfile" xml:space="preserve">
+    <value>Nieuw profiel</value>
+  </data>
+  <data name="BatchScan" xml:space="preserve">
+    <value>Automatisch scannen</value>
+  </data>
+  <data name="Ocr" xml:space="preserve">
+    <value>OCR</value>
+  </data>
+  <data name="Profiles" xml:space="preserve">
+    <value>Profielen</value>
+  </data>
+  <data name="Import" xml:space="preserve">
+    <value>Importeren</value>
+  </data>
+  <data name="SavePdf" xml:space="preserve">
+    <value>PDF opslaan</value>
+  </data>
+  <data name="PdfSettings" xml:space="preserve">
+    <value>PDF instellingen</value>
+  </data>
+  <data name="SaveImages" xml:space="preserve">
+    <value>Afbeeldingen opslaan</value>
+  </data>
+  <data name="ImageSettings" xml:space="preserve">
+    <value>Instellingen afbeeldingen</value>
+  </data>
+  <data name="EmailPdf" xml:space="preserve">
+    <value>PDF mailen</value>
+  </data>
+  <data name="EmailSettings" xml:space="preserve">
+    <value>E-mailinstellingen</value>
+  </data>
+  <data name="Print" xml:space="preserve">
+    <value>Afdrukken</value>
+  </data>
+  <data name="Image" xml:space="preserve">
+    <value>Afbeelding</value>
+  </data>
+  <data name="View" xml:space="preserve">
+    <value>Beeld</value>
+  </data>
+  <data name="Crop" xml:space="preserve">
+    <value>Bijsnijden</value>
+  </data>
+  <data name="BrightnessContrast" xml:space="preserve">
+    <value>Helderheid / contrast</value>
+  </data>
+  <data name="HueSaturation" xml:space="preserve">
+    <value>Tint / verzadiging</value>
+  </data>
+  <data name="BlackAndWhite" xml:space="preserve">
+    <value>Zwart-wit</value>
+  </data>
+  <data name="Sharpen" xml:space="preserve">
+    <value>Verscherpen</value>
+  </data>
+  <data name="DocumentCorrection" xml:space="preserve">
+    <value>Document Correction</value>
+  </data>
+  <data name="Reset" xml:space="preserve">
+    <value>Reset</value>
+  </data>
+  <data name="Rotate" xml:space="preserve">
+    <value>Draaien</value>
+  </data>
+  <data name="RotateLeft" xml:space="preserve">
+    <value>Linksom draaien</value>
+  </data>
+  <data name="RotateRight" xml:space="preserve">
+    <value>Rechtsom draaien</value>
+  </data>
+  <data name="Flip" xml:space="preserve">
+    <value>Spiegelen</value>
+  </data>
+  <data name="Deskew" xml:space="preserve">
+    <value>Rechtzetten</value>
+  </data>
+  <data name="CustomRotation" xml:space="preserve">
+    <value>Aangepast roteren</value>
+  </data>
+  <data name="MoveUp" xml:space="preserve">
+    <value>Omhoog</value>
+  </data>
+  <data name="MoveDown" xml:space="preserve">
+    <value>Omlaag</value>
+  </data>
+  <data name="Reorder" xml:space="preserve">
+    <value>Hersorteren</value>
+  </data>
+  <data name="Interleave" xml:space="preserve">
+    <value>Afwisselend tussenvoegen</value>
+  </data>
+  <data name="Deinterleave" xml:space="preserve">
+    <value>Terug tussenvoegen</value>
+  </data>
+  <data name="AltInterleave" xml:space="preserve">
+    <value>Alternatief afwisselend tussenvoegen</value>
+  </data>
+  <data name="AltDeinterleave" xml:space="preserve">
+    <value>Alternatief terug tussenvoegen</value>
+  </data>
+  <data name="Reverse" xml:space="preserve">
+    <value>Omdraaien</value>
+  </data>
+  <data name="Clear" xml:space="preserve">
+    <value>Wissen</value>
+  </data>
+  <data name="ClearAll" xml:space="preserve">
+    <value>Clear All</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>Taal</value>
+  </data>
+  <data name="About" xml:space="preserve">
+    <value>Over</value>
+  </data>
+  <data name="Zoom" xml:space="preserve">
+    <value>Zoomen</value>
+  </data>
+  <data name="ZoomIn" xml:space="preserve">
+    <value>Inzoomen</value>
+  </data>
+  <data name="ZoomOut" xml:space="preserve">
+    <value>Uitzoomen</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="SaveAllAsPdf" xml:space="preserve">
+    <value>Save All as PDF</value>
+  </data>
+  <data name="SaveSelectedAsPdf" xml:space="preserve">
+    <value>Save Selected as PDF</value>
+  </data>
+  <data name="SaveAllAsImages" xml:space="preserve">
+    <value>Save All as Images</value>
+  </data>
+  <data name="SaveSelectedAsImages" xml:space="preserve">
+    <value>Save Selected as Images</value>
+  </data>
+  <data name="EmailAllAsPdf" xml:space="preserve">
+    <value>Email All as PDF</value>
+  </data>
+  <data name="EmailSelectedAsPdf" xml:space="preserve">
+    <value>Email Selected as PDF</value>
+  </data>
+  <data name="EditProfileFormTitle" xml:space="preserve">
+    <value>Profielinstellingen</value>
+  </data>
+  <data name="DisplayNameLabel" xml:space="preserve">
+    <value>Schermnaam:</value>
+  </data>
+  <data name="WiaDriver" xml:space="preserve">
+    <value>WIA driver</value>
+  </data>
+  <data name="TwainDriver" xml:space="preserve">
+    <value>TWAIN driver</value>
+  </data>
+  <data name="AppleDriver" xml:space="preserve">
+    <value>Apple Driver</value>
+  </data>
+  <data name="SaneDriver" xml:space="preserve">
+    <value>SANE driver</value>
+  </data>
+  <data name="DeviceLabel" xml:space="preserve">
+    <value>Apparaat:</value>
+  </data>
+  <data name="ChooseDevice" xml:space="preserve">
+    <value>Apparaat kiezen</value>
+  </data>
+  <data name="UsePredefinedSettings" xml:space="preserve">
+    <value>Gebruik voorgedefinieerd</value>
+  </data>
+  <data name="UseNativeUi" xml:space="preserve">
+    <value>Gebruik native interface</value>
+  </data>
+  <data name="PaperSourceLabel" xml:space="preserve">
+    <value>Papierbron:</value>
+  </data>
+  <data name="PageSizeLabel" xml:space="preserve">
+    <value>Paginaformaat:</value>
+  </data>
+  <data name="ResolutionLabel" xml:space="preserve">
+    <value>Resolutie:</value>
+  </data>
+  <data name="BrightnessLabel" xml:space="preserve">
+    <value>Helderheid:</value>
+  </data>
+  <data name="BitDepthLabel" xml:space="preserve">
+    <value>Kleurdiepte:</value>
+  </data>
+  <data name="HorizontalAlignLabel" xml:space="preserve">
+    <value>Horizontaal uitlijnen:</value>
+  </data>
+  <data name="ScaleLabel" xml:space="preserve">
+    <value>Schalen:</value>
+  </data>
+  <data name="ContrastLabel" xml:space="preserve">
+    <value>Contrast:</value>
+  </data>
+  <data name="EnableAutoSave" xml:space="preserve">
+    <value>Automatisch opslaan inschakelen</value>
+  </data>
+  <data name="AutoSaveSettings" xml:space="preserve">
+    <value>Instellingen voor automatisch opslaan</value>
+  </data>
+  <data name="Advanced" xml:space="preserve">
+    <value>Geavanceerd</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Annuleren</value>
+  </data>
+  <data name="Select" xml:space="preserve">
+    <value>Selecteer</value>
+  </data>
+  <data name="SelectSource" xml:space="preserve">
+    <value>Bron selecteren</value>
+  </data>
+  <data name="RunInBackground" xml:space="preserve">
+    <value>In de achtergrond draaien</value>
+  </data>
+  <data name="Naps2" xml:space="preserve">
+    <value>NAPS2</value>
+  </data>
+  <data name="Naps2TitleFormat" xml:space="preserve">
+    <value>NAPS2 - {0}</value>
+  </data>
+  <data name="Naps2FullName" xml:space="preserve">
+    <value>Not Another PDF Scanner</value>
+  </data>
+  <data name="OcrSetupFormTitle" xml:space="preserve">
+    <value>OCR instellingen</value>
+  </data>
+  <data name="MakePdfsSearchable" xml:space="preserve">
+    <value>PDFs doorzoekbaar maken middels OCR</value>
+  </data>
+  <data name="OcrLanguageLabel" xml:space="preserve">
+    <value>OCR taal:</value>
+  </data>
+  <data name="OcrModeLabel" xml:space="preserve">
+    <value>OCR modus:</value>
+  </data>
+  <data name="RunOcrAfterScanning" xml:space="preserve">
+    <value>Start OCR automatisch na het scannen</value>
+  </data>
+  <data name="GetMoreLanguages" xml:space="preserve">
+    <value>Meer talen installeren</value>
+  </data>
+  <data name="OcrDownloadFormTitle" xml:space="preserve">
+    <value>OCR downloaden</value>
+  </data>
+  <data name="OcrDownloadSummaryText" xml:space="preserve">
+    <value>Voor OCR moet u elke taal downloaden die u wilt laten herkennen.</value>
+  </data>
+  <data name="OcrSelectLanguageLabel" xml:space="preserve">
+    <value>Kies een of meer talen:</value>
+  </data>
+  <data name="EstimatedDownloadSize" xml:space="preserve">
+    <value>Geschatte omvang: {0} MB</value>
+  </data>
+  <data name="Download" xml:space="preserve">
+    <value>Downloaden</value>
+  </data>
+  <data name="DownloadProgressFormTitle" xml:space="preserve">
+    <value>Downloadvoortgang</value>
+  </data>
+  <data name="PreviewFormTitle" xml:space="preserve">
+    <value>Voorbeeld</value>
+  </data>
+  <data name="Next" xml:space="preserve">
+    <value>Volgende</value>
+  </data>
+  <data name="Previous" xml:space="preserve">
+    <value>Vorige</value>
+  </data>
+  <data name="XOfY" xml:space="preserve">
+    <value>{0} van {1}</value>
+  </data>
+  <data name="Revert" xml:space="preserve">
+    <value>Herstel</value>
+  </data>
+  <data name="ApplyToSelected" xml:space="preserve">
+    <value>Toepassen op {0} geselecteerde afbeeldingen</value>
+  </data>
+  <data name="SelectAll" xml:space="preserve">
+    <value>Alles selecteren</value>
+  </data>
+</root>

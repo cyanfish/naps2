@@ -153,4 +153,10 @@
   <data name="WiaVersion_Default" xml:space="preserve">
     <value>Domyślna</value>
   </data>
+  <data name="OcrMode_Fast" xml:space="preserve">
+    <value>Szybka</value>
+  </data>
+  <data name="OcrMode_Best" xml:space="preserve">
+    <value>Najlepsza</value>
+  </data>
 </root>

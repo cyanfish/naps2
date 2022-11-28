@@ -64,7 +64,7 @@
     <value>Vasen</value>
   </data>
   <data name="HorizontalAlign_Right" xml:space="preserve">
-    <value>oikealle</value>
+    <value>Oikea</value>
   </data>
   <data name="PageSizeUnit_Centimetre" xml:space="preserve">
     <value>cm</value>
@@ -91,7 +91,7 @@
     <value>B5 (176x250 mm)</value>
   </data>
   <data name="PageSize_Custom" xml:space="preserve">
-    <value>Mukautett...</value>
+    <value>Mukautettu...</value>
   </data>
   <data name="PageSize_Legal" xml:space="preserve">
     <value>US Legal (8.5x14 in)</value>
@@ -152,5 +152,11 @@
   </data>
   <data name="WiaVersion_Default" xml:space="preserve">
     <value>Oletus</value>
+  </data>
+  <data name="OcrMode_Fast" xml:space="preserve">
+    <value>Fast</value>
+  </data>
+  <data name="OcrMode_Best" xml:space="preserve">
+    <value>Best</value>
   </data>
 </root>

@@ -16,37 +16,37 @@
     <value>أبيض و أسود</value>
   </data>
   <data name="BitDepth_24Color" xml:space="preserve">
-    <value>لون 24 بت</value>
+    <value>لون 24-بت</value>
   </data>
   <data name="BitDepth_8Grayscale" xml:space="preserve">
     <value>تدرج الرمادي</value>
   </data>
   <data name="Dpi_100" xml:space="preserve">
-    <value>100 dpi</value>
+    <value>100 نقطة لكل بوصة</value>
   </data>
   <data name="Dpi_1200" xml:space="preserve">
-    <value>1200 dpi</value>
+    <value>1200 نقطة لكل بوصة</value>
   </data>
   <data name="Dpi_150" xml:space="preserve">
-    <value>150 dpi</value>
+    <value>150 نقطة لكل بوصة</value>
   </data>
   <data name="Dpi_200" xml:space="preserve">
-    <value>200 dpi</value>
+    <value>200 نقطة لكل بوصة</value>
   </data>
   <data name="Dpi_300" xml:space="preserve">
-    <value>300 dpi</value>
+    <value>300 نقطة لكل بوصة</value>
   </data>
   <data name="Dpi_400" xml:space="preserve">
-    <value>400 dpi</value>
+    <value>400 نقطة لكل بوصة</value>
   </data>
   <data name="Dpi_600" xml:space="preserve">
-    <value>600 dpi</value>
+    <value>600 نقطة لكل بوصة</value>
   </data>
   <data name="Dpi_800" xml:space="preserve">
-    <value>800 dpi</value>
+    <value>800 نقطة لكل بوصة</value>
   </data>
   <data name="EmailProviderType_CustomSmtp" xml:space="preserve">
-    <value>Custom SMTP</value>
+    <value>بروتوكول نقل البريد البسيط المخصص</value>
   </data>
   <data name="EmailProviderType_Gmail" xml:space="preserve">
     <value>Gmail</value>
@@ -76,10 +76,10 @@
     <value>مم</value>
   </data>
   <data name="PageSize_A3" xml:space="preserve">
-    <value>A3 (297×420 مم)</value>
+    <value>أ3 297 × 420 مم</value>
   </data>
   <data name="PageSize_A4" xml:space="preserve">
-    <value>A4 (210×297 مم)</value>
+    <value>أ4 210 × 297 مم</value>
   </data>
   <data name="PageSize_A5" xml:space="preserve">
     <value>A5 (148×210 مم)</value>
@@ -133,7 +133,7 @@
     <value>LZW</value>
   </data>
   <data name="TiffComp_None" xml:space="preserve">
-    <value>تم</value>
+    <value>None</value>
   </data>
   <data name="TwainImpl_Default" xml:space="preserve">
     <value>الإفتراضي</value>
@@ -152,5 +152,11 @@
   </data>
   <data name="WiaVersion_Default" xml:space="preserve">
     <value>الإفتراضي</value>
+  </data>
+  <data name="OcrMode_Fast" xml:space="preserve">
+    <value>Fast</value>
+  </data>
+  <data name="OcrMode_Best" xml:space="preserve">
+    <value>Best</value>
   </data>
 </root>

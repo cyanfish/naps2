@@ -1,0 +1,351 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AboutFormTitle" xml:space="preserve">
+    <value>Om</value>
+  </data>
+  <data name="CopyrightFormat" xml:space="preserve">
+    <value>Copyright {0} NAPS2 Contributors</value>
+  </data>
+  <data name="IconsFrom" xml:space="preserve">
+    <value>Ikoner från:</value>
+  </data>
+  <data name="CheckForUpdates" xml:space="preserve">
+    <value>Kontrollera för uppdatering</value>
+  </data>
+  <data name="OK" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="Donate" xml:space="preserve">
+    <value>Donerar</value>
+  </data>
+  <data name="ProfilesFormTitle" xml:space="preserve">
+    <value>Profiler</value>
+  </data>
+  <data name="New" xml:space="preserve">
+    <value>Nytt</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>Redigera</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Ta bort</value>
+  </data>
+  <data name="Scan" xml:space="preserve">
+    <value>Skanna</value>
+  </data>
+  <data name="SetDefault" xml:space="preserve">
+    <value>Ange standard</value>
+  </data>
+  <data name="Copy" xml:space="preserve">
+    <value>Kopiera</value>
+  </data>
+  <data name="Paste" xml:space="preserve">
+    <value>Klistra in</value>
+  </data>
+  <data name="Done" xml:space="preserve">
+    <value>Klart</value>
+  </data>
+  <data name="Default" xml:space="preserve">
+    <value>Standard</value>
+  </data>
+  <data name="NewProfile" xml:space="preserve">
+    <value>Ny profil</value>
+  </data>
+  <data name="BatchScan" xml:space="preserve">
+    <value>Mängdskanning</value>
+  </data>
+  <data name="Ocr" xml:space="preserve">
+    <value>OCR</value>
+  </data>
+  <data name="Profiles" xml:space="preserve">
+    <value>Profiler</value>
+  </data>
+  <data name="Import" xml:space="preserve">
+    <value>Importera</value>
+  </data>
+  <data name="SavePdf" xml:space="preserve">
+    <value>Spara PDF</value>
+  </data>
+  <data name="PdfSettings" xml:space="preserve">
+    <value>PDF-inställningar</value>
+  </data>
+  <data name="SaveImages" xml:space="preserve">
+    <value>Spara bilder</value>
+  </data>
+  <data name="ImageSettings" xml:space="preserve">
+    <value>Bildinställningar</value>
+  </data>
+  <data name="EmailPdf" xml:space="preserve">
+    <value>E-posta PDF</value>
+  </data>
+  <data name="EmailSettings" xml:space="preserve">
+    <value>E-postinställningar</value>
+  </data>
+  <data name="Print" xml:space="preserve">
+    <value>Skriv ut</value>
+  </data>
+  <data name="Image" xml:space="preserve">
+    <value>Bild</value>
+  </data>
+  <data name="View" xml:space="preserve">
+    <value>Visa</value>
+  </data>
+  <data name="Crop" xml:space="preserve">
+    <value>Beskär</value>
+  </data>
+  <data name="BrightnessContrast" xml:space="preserve">
+    <value>Ljusstyrka / Kontrast</value>
+  </data>
+  <data name="HueSaturation" xml:space="preserve">
+    <value>Ljus / Mättnad</value>
+  </data>
+  <data name="BlackAndWhite" xml:space="preserve">
+    <value>Svartvitt</value>
+  </data>
+  <data name="Sharpen" xml:space="preserve">
+    <value>Skarpare</value>
+  </data>
+  <data name="DocumentCorrection" xml:space="preserve">
+    <value>Document Correction</value>
+  </data>
+  <data name="Reset" xml:space="preserve">
+    <value>Återställ</value>
+  </data>
+  <data name="Rotate" xml:space="preserve">
+    <value>Rotera</value>
+  </data>
+  <data name="RotateLeft" xml:space="preserve">
+    <value>Rotera vänster</value>
+  </data>
+  <data name="RotateRight" xml:space="preserve">
+    <value>Rotera höger</value>
+  </data>
+  <data name="Flip" xml:space="preserve">
+    <value>Vänd</value>
+  </data>
+  <data name="Deskew" xml:space="preserve">
+    <value>Rätta upp</value>
+  </data>
+  <data name="CustomRotation" xml:space="preserve">
+    <value>Anpassad rotation</value>
+  </data>
+  <data name="MoveUp" xml:space="preserve">
+    <value>Flytta upp</value>
+  </data>
+  <data name="MoveDown" xml:space="preserve">
+    <value>Flytta ner</value>
+  </data>
+  <data name="Reorder" xml:space="preserve">
+    <value>Sortera om</value>
+  </data>
+  <data name="Interleave" xml:space="preserve">
+    <value>Interfoliera</value>
+  </data>
+  <data name="Deinterleave" xml:space="preserve">
+    <value>Interfoliera inte</value>
+  </data>
+  <data name="AltInterleave" xml:space="preserve">
+    <value>Alternativ interfoliering</value>
+  </data>
+  <data name="AltDeinterleave" xml:space="preserve">
+    <value>Alternativ avinterfoliering</value>
+  </data>
+  <data name="Reverse" xml:space="preserve">
+    <value>Omvänt</value>
+  </data>
+  <data name="Clear" xml:space="preserve">
+    <value>Rensa</value>
+  </data>
+  <data name="ClearAll" xml:space="preserve">
+    <value>Clear All</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>Språk</value>
+  </data>
+  <data name="About" xml:space="preserve">
+    <value>Om</value>
+  </data>
+  <data name="Zoom" xml:space="preserve">
+    <value>Zoom</value>
+  </data>
+  <data name="ZoomIn" xml:space="preserve">
+    <value>Zooma in</value>
+  </data>
+  <data name="ZoomOut" xml:space="preserve">
+    <value>Zooma ut</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="SaveAllAsPdf" xml:space="preserve">
+    <value>Save All as PDF</value>
+  </data>
+  <data name="SaveSelectedAsPdf" xml:space="preserve">
+    <value>Save Selected as PDF</value>
+  </data>
+  <data name="SaveAllAsImages" xml:space="preserve">
+    <value>Save All as Images</value>
+  </data>
+  <data name="SaveSelectedAsImages" xml:space="preserve">
+    <value>Save Selected as Images</value>
+  </data>
+  <data name="EmailAllAsPdf" xml:space="preserve">
+    <value>Email All as PDF</value>
+  </data>
+  <data name="EmailSelectedAsPdf" xml:space="preserve">
+    <value>Email Selected as PDF</value>
+  </data>
+  <data name="EditProfileFormTitle" xml:space="preserve">
+    <value>Profilinställningar</value>
+  </data>
+  <data name="DisplayNameLabel" xml:space="preserve">
+    <value>Visningsnamn:</value>
+  </data>
+  <data name="WiaDriver" xml:space="preserve">
+    <value>WIA-drivrutin</value>
+  </data>
+  <data name="TwainDriver" xml:space="preserve">
+    <value>TWAIN-drivrutin</value>
+  </data>
+  <data name="AppleDriver" xml:space="preserve">
+    <value>Apple Driver</value>
+  </data>
+  <data name="SaneDriver" xml:space="preserve">
+    <value>SANE Driver</value>
+  </data>
+  <data name="DeviceLabel" xml:space="preserve">
+    <value>Enhet:</value>
+  </data>
+  <data name="ChooseDevice" xml:space="preserve">
+    <value>Välj enhet</value>
+  </data>
+  <data name="UsePredefinedSettings" xml:space="preserve">
+    <value>Använd fördefinierade inställningar</value>
+  </data>
+  <data name="UseNativeUi" xml:space="preserve">
+    <value>Använd inbyggt användargränssnitt</value>
+  </data>
+  <data name="PaperSourceLabel" xml:space="preserve">
+    <value>Papperskälla:</value>
+  </data>
+  <data name="PageSizeLabel" xml:space="preserve">
+    <value>Sidstorlek:</value>
+  </data>
+  <data name="ResolutionLabel" xml:space="preserve">
+    <value>Upplösning:</value>
+  </data>
+  <data name="BrightnessLabel" xml:space="preserve">
+    <value>Ljus:</value>
+  </data>
+  <data name="BitDepthLabel" xml:space="preserve">
+    <value>Bitdjup:</value>
+  </data>
+  <data name="HorizontalAlignLabel" xml:space="preserve">
+    <value>Horisontell justering:</value>
+  </data>
+  <data name="ScaleLabel" xml:space="preserve">
+    <value>Skala:</value>
+  </data>
+  <data name="ContrastLabel" xml:space="preserve">
+    <value>Kontrast:</value>
+  </data>
+  <data name="EnableAutoSave" xml:space="preserve">
+    <value>Spara automatiskt</value>
+  </data>
+  <data name="AutoSaveSettings" xml:space="preserve">
+    <value>Spara inställningar automatiskt</value>
+  </data>
+  <data name="Advanced" xml:space="preserve">
+    <value>Avancerat</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Avbryt</value>
+  </data>
+  <data name="Select" xml:space="preserve">
+    <value>Markera</value>
+  </data>
+  <data name="SelectSource" xml:space="preserve">
+    <value>Välj källa</value>
+  </data>
+  <data name="RunInBackground" xml:space="preserve">
+    <value>Körs i bakgrunden</value>
+  </data>
+  <data name="Naps2" xml:space="preserve">
+    <value>NAPS2</value>
+  </data>
+  <data name="Naps2TitleFormat" xml:space="preserve">
+    <value>NAPS2 - {0}</value>
+  </data>
+  <data name="Naps2FullName" xml:space="preserve">
+    <value>Not Another PDF Scanner</value>
+  </data>
+  <data name="OcrSetupFormTitle" xml:space="preserve">
+    <value>OCR-installation</value>
+  </data>
+  <data name="MakePdfsSearchable" xml:space="preserve">
+    <value>Gör PDF:er sökbara med hjälp av OCR</value>
+  </data>
+  <data name="OcrLanguageLabel" xml:space="preserve">
+    <value>OCR-språk:</value>
+  </data>
+  <data name="OcrModeLabel" xml:space="preserve">
+    <value>OCR läge:</value>
+  </data>
+  <data name="RunOcrAfterScanning" xml:space="preserve">
+    <value>Automatiskt köra ORC scanning</value>
+  </data>
+  <data name="GetMoreLanguages" xml:space="preserve">
+    <value>Hämta fler språk</value>
+  </data>
+  <data name="OcrDownloadFormTitle" xml:space="preserve">
+    <value>OCR-nedladdning</value>
+  </data>
+  <data name="OcrDownloadSummaryText" xml:space="preserve">
+    <value>Användning av OCR kräver nedladdning av varje språk du vill skanna.</value>
+  </data>
+  <data name="OcrSelectLanguageLabel" xml:space="preserve">
+    <value>Välj ett eller flera språk:</value>
+  </data>
+  <data name="EstimatedDownloadSize" xml:space="preserve">
+    <value>Beräknad nedladdningsstorlek: {0} MB</value>
+  </data>
+  <data name="Download" xml:space="preserve">
+    <value>Ladda ner</value>
+  </data>
+  <data name="DownloadProgressFormTitle" xml:space="preserve">
+    <value>Nedladdningsförlopp</value>
+  </data>
+  <data name="PreviewFormTitle" xml:space="preserve">
+    <value>Förhandsgranskning</value>
+  </data>
+  <data name="Next" xml:space="preserve">
+    <value>Nästa</value>
+  </data>
+  <data name="Previous" xml:space="preserve">
+    <value>Föregående</value>
+  </data>
+  <data name="XOfY" xml:space="preserve">
+    <value>{0} av {1}</value>
+  </data>
+  <data name="Revert" xml:space="preserve">
+    <value>Återgå</value>
+  </data>
+  <data name="ApplyToSelected" xml:space="preserve">
+    <value>Tillämpa på {0} markerade bilder</value>
+  </data>
+  <data name="SelectAll" xml:space="preserve">
+    <value>Markera alla</value>
+  </data>
+</root>

@@ -55,13 +55,13 @@
     <value>Outlook Web Access</value>
   </data>
   <data name="EmailProvider_NotSelected" xml:space="preserve">
-    <value>No provider selected.</value>
+    <value>Ükski pakkuja pole valitud.</value>
   </data>
   <data name="HorizontalAlign_Center" xml:space="preserve">
     <value>Keskel</value>
   </data>
   <data name="HorizontalAlign_Left" xml:space="preserve">
-    <value>Left</value>
+    <value>Vasak</value>
   </data>
   <data name="HorizontalAlign_Right" xml:space="preserve">
     <value>Right</value>
@@ -100,7 +100,7 @@
     <value>US Letter (8.5x11 in)</value>
   </data>
   <data name="PdfCompat_Default" xml:space="preserve">
-    <value>Default</value>
+    <value>Vaikimisi</value>
   </data>
   <data name="PdfCompat_PdfA1B" xml:space="preserve">
     <value>PDF/A-1b</value>
@@ -133,10 +133,10 @@
     <value>LZW</value>
   </data>
   <data name="TiffComp_None" xml:space="preserve">
-    <value>Valmis</value>
+    <value>None</value>
   </data>
   <data name="TwainImpl_Default" xml:space="preserve">
-    <value>Default</value>
+    <value>Vaikimisi</value>
   </data>
   <data name="TwainImpl_Legacy" xml:space="preserve">
     <value>Legacy (native UI only)</value>
@@ -151,6 +151,12 @@
     <value>x64</value>
   </data>
   <data name="WiaVersion_Default" xml:space="preserve">
-    <value>Default</value>
+    <value>Vaikimisi</value>
+  </data>
+  <data name="OcrMode_Fast" xml:space="preserve">
+    <value>Fast</value>
+  </data>
+  <data name="OcrMode_Best" xml:space="preserve">
+    <value>Best</value>
   </data>
 </root>

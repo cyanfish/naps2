@@ -46,16 +46,16 @@
     <value>800 dpi</value>
   </data>
   <data name="EmailProviderType_CustomSmtp" xml:space="preserve">
-    <value>Custom SMTP</value>
+    <value>SMTP po meri</value>
   </data>
   <data name="EmailProviderType_Gmail" xml:space="preserve">
     <value>Gmail</value>
   </data>
   <data name="EmailProviderType_OutlookWeb" xml:space="preserve">
-    <value>Outlook Web Access</value>
+    <value>Outlook Splet</value>
   </data>
   <data name="EmailProvider_NotSelected" xml:space="preserve">
-    <value>No provider selected.</value>
+    <value>Ponudnik ni izbran.</value>
   </data>
   <data name="HorizontalAlign_Center" xml:space="preserve">
     <value>Sredina</value>
@@ -124,7 +124,7 @@
     <value>Steklo</value>
   </data>
   <data name="TiffComp_Auto" xml:space="preserve">
-    <value>Auto</value>
+    <value>Samodejno</value>
   </data>
   <data name="TiffComp_Ccitt4" xml:space="preserve">
     <value>CCITT4</value>
@@ -133,7 +133,7 @@
     <value>LZW</value>
   </data>
   <data name="TiffComp_None" xml:space="preserve">
-    <value>Končaj</value>
+    <value>Brez</value>
   </data>
   <data name="TwainImpl_Default" xml:space="preserve">
     <value>Privzeto</value>
@@ -152,5 +152,11 @@
   </data>
   <data name="WiaVersion_Default" xml:space="preserve">
     <value>Privzeto</value>
+  </data>
+  <data name="OcrMode_Fast" xml:space="preserve">
+    <value>Fast</value>
+  </data>
+  <data name="OcrMode_Best" xml:space="preserve">
+    <value>Best</value>
   </data>
 </root>

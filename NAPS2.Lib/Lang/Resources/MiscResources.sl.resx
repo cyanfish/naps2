@@ -72,6 +72,9 @@
   <data name="FileTypeTiff" xml:space="preserve">
     <value>TIFF Datoteka (*.tiff, *.tif)</value>
   </data>
+  <data name="FileTypeJp2" xml:space="preserve">
+    <value>JPEG2000 File (*.jp2, *.jpx)</value>
+  </data>
   <data name="NameMissing" xml:space="preserve">
     <value>Manjka ime.</value>
   </data>
@@ -160,13 +163,13 @@
     <value>Imate neshranjene spremembe. Ali ste prepričani, da želite zavreči spremembe in zapreti program?</value>
   </data>
   <data name="ExitWithActiveOperations" xml:space="preserve">
-    <value>An operation is in progress. Are you sure you want to exit and cancel the operation?</value>
+    <value>Operacija je v teku. Želite prekiniti operacijo in zapustiti aplikacijo?</value>
   </data>
   <data name="UnsavedChanges" xml:space="preserve">
     <value>Neshranjene Spremembe</value>
   </data>
   <data name="ActiveOperations" xml:space="preserve">
-    <value>Operation in Progress</value>
+    <value>Opravilo v teku</value>
   </data>
   <data name="ScanPageProgress" xml:space="preserve">
     <value>Skeniram stran {0}</value>
@@ -221,6 +224,9 @@
   </data>
   <data name="NoDuplexSupport" xml:space="preserve">
     <value>Izbran skener ne podpira obojestranskega skeniranja. Če bi naj vaš skener podpiral obojestransko skeniranje, poizkusite z drugim gonilnikom.</value>
+  </data>
+  <data name="ProgressFormat" xml:space="preserve">
+    <value>{0} / {1}</value>
   </data>
   <data name="ImportingFormat" xml:space="preserve">
     <value>Uvažanje {0}...</value>
@@ -322,70 +328,64 @@
     <value>Za uvoz te PDF datoteke je potrebna dodatna komponenta. Jo želite prenesti sedaj?</value>
   </data>
   <data name="ConfirmCancelBatch" xml:space="preserve">
-    <value>Are you sure you want to cancel the batch scan?</value>
+    <value>Prekini zaporedno skeniranje?</value>
   </data>
   <data name="CancelBatch" xml:space="preserve">
-    <value>Cancel Batch</value>
+    <value>Prekliči paket</value>
   </data>
   <data name="Donate" xml:space="preserve">
-    <value>Donate</value>
+    <value>Donacije</value>
   </data>
   <data name="DonatePrompt" xml:space="preserve">
-    <value>NAPS2 is completely free. Consider making a donation.</value>
+    <value>NAPS2 je popolnoma brezplačen. Razmislite o donaciji.</value>
   </data>
   <data name="SaneNotAvailable" xml:space="preserve">
-    <value>The SANE driver is not available. Make sure to install the required packages:</value>
+    <value>SANE gonilnik ni na voljo. Preverite namestitev potrebnega dodatka:</value>
   </data>
   <data name="TesseractNotAvailable" xml:space="preserve">
-    <value>The OCR engine is not available. Make sure to install the required package:</value>
+    <value>OCR ni na voljo. Preverite namestitev potrebnega dodatka:</value>
   </data>
   <data name="DriverNotSupported" xml:space="preserve">
-    <value>The selected driver is not supported on this system.</value>
+    <value>Izbran gonilnik ni na voljo v tem sistemu.</value>
   </data>
   <data name="OcrProgress" xml:space="preserve">
-    <value>OCR Progress</value>
+    <value>Potek OCR</value>
   </data>
   <data name="RunningOcr" xml:space="preserve">
-    <value>Running OCR...</value>
+    <value>Poteka OCR...</value>
   </data>
   <data name="UpdateProgress" xml:space="preserve">
-    <value>Update Progress</value>
+    <value>Potek posodobitve</value>
   </data>
   <data name="Updating" xml:space="preserve">
-    <value>Updating...</value>
+    <value>Posodabljanje...</value>
   </data>
   <data name="NoUpdates" xml:space="preserve">
-    <value>No updates available.</value>
+    <value>Ni posodobitev.</value>
   </data>
   <data name="CheckingForUpdates" xml:space="preserve">
-    <value>Checking...</value>
+    <value>Preverjanje...</value>
+  </data>
+  <data name="UpdateCheckDisabled" xml:space="preserve">
+    <value>Update checking is disabled.</value>
   </data>
   <data name="UpdateError" xml:space="preserve">
-    <value>An error occured when trying to install the update.</value>
+    <value>Med nameščanjem posodobitve je prišlo do napake.</value>
   </data>
   <data name="Install" xml:space="preserve">
-    <value>Install {0}</value>
+    <value>Namesti {0}</value>
   </data>
   <data name="UpdateAvailable" xml:space="preserve">
-    <value>An update is available.</value>
+    <value>Posodobitev je na voljo.</value>
   </data>
   <data name="AuthError" xml:space="preserve">
-    <value>An error occurred when trying to authorize.</value>
+    <value>Napaka pri avtorizaciji.</value>
   </data>
   <data name="UploadingEmail" xml:space="preserve">
-    <value>Uploading email...</value>
+    <value>Nalaganje elektronske pošte...</value>
   </data>
   <data name="ErrorEmailing" xml:space="preserve">
-    <value>An error occurred when trying to send the email.</value>
-  </data>
-  <data name="Naps2Server" xml:space="preserve">
-    <value>NAPS2 Server</value>
-  </data>
-  <data name="ServerStarted" xml:space="preserve">
-    <value>Server started</value>
-  </data>
-  <data name="ListeningOnPort" xml:space="preserve">
-    <value>Listening on port {0}</value>
+    <value>Napaka pri pošiljanju elektronske pošte.</value>
   </data>
   <data name="ScanProgressPage" xml:space="preserve">
     <value>Skeniram stran {0}...</value>

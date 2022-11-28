@@ -72,6 +72,9 @@
   <data name="FileTypeTiff" xml:space="preserve">
     <value>TIFF File (*.tiff, *.tif)</value>
   </data>
+  <data name="FileTypeJp2" xml:space="preserve">
+    <value>JPEG2000 File (*.jp2, *.jpx)</value>
+  </data>
   <data name="NameMissing" xml:space="preserve">
     <value>Đặt tên lỗi.</value>
   </data>
@@ -222,6 +225,9 @@
   <data name="NoDuplexSupport" xml:space="preserve">
     <value>Máy quét chọn không hỗ trợ sử dụng hai mặt. Nếu máy quét của bạn phải hỗ trợ hai mặt, hãy thử sử dụng một trình điều khiển khác nhau.</value>
   </data>
+  <data name="ProgressFormat" xml:space="preserve">
+    <value>{0} / {1}</value>
+  </data>
   <data name="ImportingFormat" xml:space="preserve">
     <value>Đang chèn {0}...</value>
   </data>
@@ -360,6 +366,9 @@
   <data name="CheckingForUpdates" xml:space="preserve">
     <value>Đang kiểm tra...</value>
   </data>
+  <data name="UpdateCheckDisabled" xml:space="preserve">
+    <value>Update checking is disabled.</value>
+  </data>
   <data name="UpdateError" xml:space="preserve">
     <value>Có lỗi khi đang cập nhật..</value>
   </data>
@@ -377,15 +386,6 @@
   </data>
   <data name="ErrorEmailing" xml:space="preserve">
     <value>Có lỗi khi đang gửi email..</value>
-  </data>
-  <data name="Naps2Server" xml:space="preserve">
-    <value>NAPS2 Server</value>
-  </data>
-  <data name="ServerStarted" xml:space="preserve">
-    <value>Server started</value>
-  </data>
-  <data name="ListeningOnPort" xml:space="preserve">
-    <value>Listening on port {0}</value>
   </data>
   <data name="ScanProgressPage" xml:space="preserve">
     <value>Trang quét {0}...</value>

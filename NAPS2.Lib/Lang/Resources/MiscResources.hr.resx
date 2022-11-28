@@ -64,13 +64,16 @@
     <value>JPEG datoteka (*.jpg, *.jpeg)</value>
   </data>
   <data name="FileTypePdf" xml:space="preserve">
-    <value>PDF dokument (*.pdf)</value>
+    <value>PDF Document (*.pdf)</value>
   </data>
   <data name="FileTypePng" xml:space="preserve">
     <value>PNG datoteka (*.png)</value>
   </data>
   <data name="FileTypeTiff" xml:space="preserve">
     <value>TIFF datoteka (*.tiff, *tif)</value>
+  </data>
+  <data name="FileTypeJp2" xml:space="preserve">
+    <value>JPEG2000 File (*.jp2, *.jpx)</value>
   </data>
   <data name="NameMissing" xml:space="preserve">
     <value>Nedostaje ime.</value>
@@ -222,6 +225,9 @@
   <data name="NoDuplexSupport" xml:space="preserve">
     <value>The selected scanner does not support using duplex. If your scanner is supposed to support duplex, try using a different driver.</value>
   </data>
+  <data name="ProgressFormat" xml:space="preserve">
+    <value>{0} / {1}</value>
+  </data>
   <data name="ImportingFormat" xml:space="preserve">
     <value>Importing {0}...</value>
   </data>
@@ -277,7 +283,7 @@
     <value>Image Files</value>
   </data>
   <data name="DeviceBusy" xml:space="preserve">
-    <value>Odabrani skener nije uključen.</value>
+    <value>The selected scanner is busy.</value>
   </data>
   <data name="DeviceCoverOpen" xml:space="preserve">
     <value>The scanner's cover is open.</value>
@@ -360,6 +366,9 @@
   <data name="CheckingForUpdates" xml:space="preserve">
     <value>Checking...</value>
   </data>
+  <data name="UpdateCheckDisabled" xml:space="preserve">
+    <value>Update checking is disabled.</value>
+  </data>
   <data name="UpdateError" xml:space="preserve">
     <value>An error occured when trying to install the update.</value>
   </data>
@@ -377,15 +386,6 @@
   </data>
   <data name="ErrorEmailing" xml:space="preserve">
     <value>An error occurred when trying to send the email.</value>
-  </data>
-  <data name="Naps2Server" xml:space="preserve">
-    <value>NAPS2 Server</value>
-  </data>
-  <data name="ServerStarted" xml:space="preserve">
-    <value>Server started</value>
-  </data>
-  <data name="ListeningOnPort" xml:space="preserve">
-    <value>Listening on port {0}</value>
   </data>
   <data name="ScanProgressPage" xml:space="preserve">
     <value>Scanning page {0}...</value>

@@ -15,8 +15,8 @@
   <data name="AboutFormTitle" xml:space="preserve">
     <value>Sobre</value>
   </data>
-  <data name="Copyright" xml:space="preserve">
-    <value>Copyright 2009, 2012-2020 NAPS2 Contributors</value>
+  <data name="CopyrightFormat" xml:space="preserve">
+    <value>Copyright {0} NAPS2 Contributors</value>
   </data>
   <data name="IconsFrom" xml:space="preserve">
     <value>Ícones de:</value>
@@ -33,8 +33,8 @@
   <data name="ProfilesFormTitle" xml:space="preserve">
     <value>Perfis</value>
   </data>
-  <data name="Add" xml:space="preserve">
-    <value>Add</value>
+  <data name="New" xml:space="preserve">
+    <value>Novo</value>
   </data>
   <data name="Edit" xml:space="preserve">
     <value>Editar</value>
@@ -344,5 +344,8 @@
   </data>
   <data name="ApplyToSelected" xml:space="preserve">
     <value>Aplicar para todas as {0} imagens selecionadas</value>
+  </data>
+  <data name="SelectAll" xml:space="preserve">
+    <value>Seleciona tudo</value>
   </data>
 </root>

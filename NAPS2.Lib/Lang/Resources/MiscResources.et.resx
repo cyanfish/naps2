@@ -31,25 +31,25 @@
     <value>Kas oled kindel, et tahad profiili '{0}' kustutada?</value>
   </data>
   <data name="ConfirmOverwriteFile" xml:space="preserve">
-    <value>The file {0} already exists. Do you want to overwrite it?</value>
+    <value>Fail {0} on juba olemas. Kas soovite selle üle kirjutada?</value>
   </data>
   <data name="Delete" xml:space="preserve">
     <value>Kustuta</value>
   </data>
   <data name="DeviceNotFound" xml:space="preserve">
-    <value>The selected scanner could not be found.</value>
+    <value>Valitud skännerit ei leitud.</value>
   </data>
   <data name="DeviceOffline" xml:space="preserve">
     <value>The selected scanner is offline.</value>
   </data>
   <data name="DontHavePermission" xml:space="preserve">
-    <value>You don't have permission to save files at this location.</value>
+    <value>Teil ei ole õigust failide salvestamiseks selles asukohas.</value>
   </data>
   <data name="Error" xml:space="preserve">
     <value>Viga</value>
   </data>
   <data name="FileTypeBmp" xml:space="preserve">
-    <value>Bitmap Files (*.bmp)</value>
+    <value>Bitmap-failid (* .bmp)</value>
   </data>
   <data name="FileTypeEmf" xml:space="preserve">
     <value>Laiendatud metafail (*.emf)</value>
@@ -58,31 +58,34 @@
     <value>Exchangeable Image File (*.exif)</value>
   </data>
   <data name="FileTypeGif" xml:space="preserve">
-    <value>GIF File (*.gif)</value>
+    <value>GIF fail (*.gif)</value>
   </data>
   <data name="FileTypeJpeg" xml:space="preserve">
-    <value>JPEG File (*.jpg, *.jpeg)</value>
+    <value>JPEG fail (*.jpg, *.jpeg)</value>
   </data>
   <data name="FileTypePdf" xml:space="preserve">
-    <value>PDF Document (*.pdf)</value>
+    <value>PDF dokument (*.pdf)</value>
   </data>
   <data name="FileTypePng" xml:space="preserve">
-    <value>PNG File (*.png)</value>
+    <value>PNG fail (*.png)</value>
   </data>
   <data name="FileTypeTiff" xml:space="preserve">
     <value>TIFF fail (*.tiff, *.tif)</value>
   </data>
+  <data name="FileTypeJp2" xml:space="preserve">
+    <value>JPEG2000 File (*.jp2, *.jpx)</value>
+  </data>
   <data name="NameMissing" xml:space="preserve">
-    <value>Name missing.</value>
+    <value>Nimi puudub.</value>
   </data>
   <data name="NAPS2" xml:space="preserve">
     <value>NAPS2</value>
   </data>
   <data name="NoDeviceSelected" xml:space="preserve">
-    <value>No device selected.</value>
+    <value>Ükski seade pole valitud.</value>
   </data>
   <data name="NoDevicesFound" xml:space="preserve">
-    <value>No scanning device was found.</value>
+    <value>Skaneerimisseadet ei leitud.</value>
   </data>
   <data name="OverwriteFile" xml:space="preserve">
     <value>Kirjuta fail üle</value>
@@ -91,25 +94,25 @@
     <value>{0} of {1}</value>
   </data>
   <data name="ScannedImage" xml:space="preserve">
-    <value>Scanned Image</value>
+    <value>Skaneeritud pilt</value>
   </data>
   <data name="SelectProfileBeforeScan" xml:space="preserve">
-    <value>Select a profile before clicking Scan.</value>
+    <value>Enne skaneerimist valige profiil.</value>
   </data>
   <data name="UnknownDriverError" xml:space="preserve">
-    <value>An error occurred with the scanning driver.</value>
+    <value>Skanneri draiveril ilmnes tõrge.</value>
   </data>
   <data name="Version" xml:space="preserve">
     <value>Version {0}</value>
   </data>
   <data name="EmailError" xml:space="preserve">
-    <value>An error occurred while trying to send an email.</value>
+    <value>E-kirja saatmise ajal tekkis viga.</value>
   </data>
   <data name="InstallComplete" xml:space="preserve">
     <value>Paigaldamine on lõpetatud</value>
   </data>
   <data name="InstallCompletePromptRestart" xml:space="preserve">
-    <value>Installation complete. Do you want to restart NAPS2 now?</value>
+    <value>Paigaldamine on lõppenud. Kas soovite taaskäivitada NAPS2 kohe?</value>
   </data>
   <data name="InstallFailed" xml:space="preserve">
     <value>Paigaldamine nurjus.</value>
@@ -142,7 +145,7 @@
     <value>Allalaadimise viga</value>
   </data>
   <data name="FilesCouldNotBeDownloaded" xml:space="preserve">
-    <value>One or more files could not be downloaded.</value>
+    <value>Ühte või mitut faili ei saanud alla laadida.</value>
   </data>
   <data name="CustomPageSizeFormat" xml:space="preserve">
     <value>Custom ({0}x{1} {2})</value>
@@ -151,37 +154,37 @@
     <value>Skaneeri</value>
   </data>
   <data name="ConfirmResetImages" xml:space="preserve">
-    <value>Are you sure you want undo your changes to {0} image(s)?</value>
+    <value>Kas olete kindel, et soovite tühistada {0} pildi muudatused?</value>
   </data>
   <data name="ResetImage" xml:space="preserve">
-    <value>Reset Image</value>
+    <value>Lähtesta pilt</value>
   </data>
   <data name="ExitWithUnsavedChanges" xml:space="preserve">
-    <value>You have unsaved changes. Are you sure you want to exit and discard those changes?</value>
+    <value>Teil on salvestamata muudatusi. Kas olete kindel, et soovite neist muudatustest loobuda?</value>
   </data>
   <data name="ExitWithActiveOperations" xml:space="preserve">
-    <value>An operation is in progress. Are you sure you want to exit and cancel the operation?</value>
+    <value>Käimas on toiming. Kas olete kindel, et soovite tegevuse lõpetada ja tühistada?</value>
   </data>
   <data name="UnsavedChanges" xml:space="preserve">
-    <value>Unsaved Changes</value>
+    <value>Salvestamata muudatused</value>
   </data>
   <data name="ActiveOperations" xml:space="preserve">
-    <value>Operation in Progress</value>
+    <value>Töö käib</value>
   </data>
   <data name="ScanPageProgress" xml:space="preserve">
     <value>Scanning page {0}</value>
   </data>
   <data name="NoFeederSupport" xml:space="preserve">
-    <value>The selected scanner does not support using a feeder. If your scanner does have a feeder, try using a different driver.</value>
+    <value>Valitud skanner ei toeta sööturi kasutamist. Kui teie skanneril on söötur, proovige kasutada teist draiverit.</value>
   </data>
   <data name="NoPagesInFeeder" xml:space="preserve">
-    <value>No pages are in the feeder.</value>
+    <value>Sööturis ei ole ühtegi lehte.</value>
   </data>
   <data name="PdfNoPermissionToExtractContent" xml:space="preserve">
-    <value>You do not have permission to copy content from the file '{0}'.</value>
+    <value>Teil pole luba sisu kopeerimiseks failist \"{0}\".</value>
   </data>
   <data name="ErrorSaving" xml:space="preserve">
-    <value>An error occurred when trying to save the file.</value>
+    <value>Faili salvestamisel tekkis viga.</value>
   </data>
   <data name="OfN" xml:space="preserve">
     <value>of {0}</value>
@@ -214,13 +217,16 @@
     <value>Loobu</value>
   </data>
   <data name="Close" xml:space="preserve">
-    <value>Close</value>
+    <value>Sulge</value>
   </data>
   <data name="BatchStatusSaving" xml:space="preserve">
     <value>Saving batch results...</value>
   </data>
   <data name="NoDuplexSupport" xml:space="preserve">
-    <value>The selected scanner does not support using duplex. If your scanner is supposed to support duplex, try using a different driver.</value>
+    <value>Valitud skanner ei toeta dupleksi kasutamist. Kui teie skanner peaks dupleksit toetama, proovige kasutada teist draiverit.</value>
+  </data>
+  <data name="ProgressFormat" xml:space="preserve">
+    <value>{0} / {1}</value>
   </data>
   <data name="ImportingFormat" xml:space="preserve">
     <value>Importing {0}...</value>
@@ -229,7 +235,7 @@
     <value>Import Progress</value>
   </data>
   <data name="Recovering" xml:space="preserve">
-    <value>Recovering...</value>
+    <value>Taastamine...</value>
   </data>
   <data name="RecoveryProgress" xml:space="preserve">
     <value>Recovery Progress</value>
@@ -259,7 +265,7 @@
     <value>Copy Progress</value>
   </data>
   <data name="Importing" xml:space="preserve">
-    <value>Importing...</value>
+    <value>Importimine...</value>
   </data>
   <data name="EmailPdf" xml:space="preserve">
     <value>PDF e-mailile</value>
@@ -268,7 +274,7 @@
     <value>Email PDF Progress</value>
   </data>
   <data name="AutoSaveError" xml:space="preserve">
-    <value>An error occurred when trying to auto save.</value>
+    <value>Automaatsel salvestamisel tekkis viga.</value>
   </data>
   <data name="FileTypeAllFiles" xml:space="preserve">
     <value>Kõik failid</value>
@@ -277,28 +283,28 @@
     <value>Pildifailid</value>
   </data>
   <data name="DeviceBusy" xml:space="preserve">
-    <value>The selected scanner is busy.</value>
+    <value>Valitud skanner on hõivatud.</value>
   </data>
   <data name="DeviceCoverOpen" xml:space="preserve">
-    <value>The scanner's cover is open.</value>
+    <value>Skanneri kaas on avatud.</value>
   </data>
   <data name="DevicePaperJam" xml:space="preserve">
-    <value>The scanner has a paper jam.</value>
+    <value>Skanneril on paberiummistus.</value>
   </data>
   <data name="DeviceWarmingUp" xml:space="preserve">
-    <value>The scanner is warming up.</value>
+    <value>Skanner soojeneb.</value>
   </data>
   <data name="OcrUpdateAvailable" xml:space="preserve">
-    <value>An update to OCR is available.</value>
+    <value>OCR-i värskendus on saadaval.</value>
   </data>
   <data name="ImageSaved" xml:space="preserve">
-    <value>Image saved.</value>
+    <value>Pilt salvestatud.</value>
   </data>
   <data name="ImagesSaved" xml:space="preserve">
     <value>{0} images saved.</value>
   </data>
   <data name="PdfSaved" xml:space="preserve">
-    <value>PDF saved.</value>
+    <value>PDF salvestatud.</value>
   </data>
   <data name="NamedPageSizeFormat" xml:space="preserve">
     <value>{0} ({1}x{2} {3})</value>
@@ -307,7 +313,7 @@
     <value>Are you sure you want to delete "{0}"?</value>
   </data>
   <data name="FileInUse" xml:space="preserve">
-    <value>The file could not be overwritten because it is currently in use.</value>
+    <value>Faili ei saa üle kirjutada, kuna see on praegu kasutusel.</value>
   </data>
   <data name="AutoDeskewing" xml:space="preserve">
     <value>Deskewing...</value>
@@ -319,7 +325,7 @@
     <value>Download Needed</value>
   </data>
   <data name="PdfImportComponentNeeded" xml:space="preserve">
-    <value>An additional component is needed to import this PDF file. Would you like to download it now?</value>
+    <value>Selle PDF-faili importimiseks on vaja täiendavat komponenti. Kas soovite selle kohe alla laadida?</value>
   </data>
   <data name="ConfirmCancelBatch" xml:space="preserve">
     <value>Are you sure you want to cancel the batch scan?</value>
@@ -337,60 +343,54 @@
     <value>The SANE driver is not available. Make sure to install the required packages:</value>
   </data>
   <data name="TesseractNotAvailable" xml:space="preserve">
-    <value>The OCR engine is not available. Make sure to install the required package:</value>
+    <value>OCR-mootor pole saadaval. Paigaldage vajalik osa:</value>
   </data>
   <data name="DriverNotSupported" xml:space="preserve">
-    <value>The selected driver is not supported on this system.</value>
+    <value>Valitud draiverit ei toetata selles süsteemis.</value>
   </data>
   <data name="OcrProgress" xml:space="preserve">
     <value>OCR Progress</value>
   </data>
   <data name="RunningOcr" xml:space="preserve">
-    <value>Running OCR...</value>
+    <value>OCR-i käivitamine...</value>
   </data>
   <data name="UpdateProgress" xml:space="preserve">
     <value>Update Progress</value>
   </data>
   <data name="Updating" xml:space="preserve">
-    <value>Updating...</value>
+    <value>Uuendamine...</value>
   </data>
   <data name="NoUpdates" xml:space="preserve">
-    <value>No updates available.</value>
+    <value>Uuendusi pole saadaval.</value>
   </data>
   <data name="CheckingForUpdates" xml:space="preserve">
-    <value>Checking...</value>
+    <value>Kontrollimine...</value>
+  </data>
+  <data name="UpdateCheckDisabled" xml:space="preserve">
+    <value>Update checking is disabled.</value>
   </data>
   <data name="UpdateError" xml:space="preserve">
-    <value>An error occured when trying to install the update.</value>
+    <value>Värskenduse installimisel tekkis viga.</value>
   </data>
   <data name="Install" xml:space="preserve">
     <value>Install {0}</value>
   </data>
   <data name="UpdateAvailable" xml:space="preserve">
-    <value>An update is available.</value>
+    <value>Värskendus on saadaval.</value>
   </data>
   <data name="AuthError" xml:space="preserve">
-    <value>An error occurred when trying to authorize.</value>
+    <value>Autoriseerimisel tekkis viga.</value>
   </data>
   <data name="UploadingEmail" xml:space="preserve">
-    <value>Uploading email...</value>
+    <value>E-posti üleslaadimine...</value>
   </data>
   <data name="ErrorEmailing" xml:space="preserve">
-    <value>An error occurred when trying to send the email.</value>
-  </data>
-  <data name="Naps2Server" xml:space="preserve">
-    <value>NAPS2 Server</value>
-  </data>
-  <data name="ServerStarted" xml:space="preserve">
-    <value>Server started</value>
-  </data>
-  <data name="ListeningOnPort" xml:space="preserve">
-    <value>Listening on port {0}</value>
+    <value>E-kirja saatmisel tekkis viga.</value>
   </data>
   <data name="ScanProgressPage" xml:space="preserve">
     <value>Scanning page {0}...</value>
   </data>
   <data name="AcquiringData" xml:space="preserve">
-    <value>Acquiring data...</value>
+    <value>Andmeid pärimas...</value>
   </data>
 </root>

@@ -43,7 +43,7 @@
     <value>Scanerul selectat este deconectat.</value>
   </data>
   <data name="DontHavePermission" xml:space="preserve">
-    <value>You don't have permission to save files at this location.</value>
+    <value>Nu aveţi permisiune de salvare în această locație.</value>
   </data>
   <data name="Error" xml:space="preserve">
     <value>Eroare</value>
@@ -64,13 +64,16 @@
     <value>Fișier JPEG (*.jpg, *.jpeg)</value>
   </data>
   <data name="FileTypePdf" xml:space="preserve">
-    <value>Document PDF (*.pdf)</value>
+    <value>PDF Document (*.pdf)</value>
   </data>
   <data name="FileTypePng" xml:space="preserve">
     <value>Fișier PNG (*.png)</value>
   </data>
   <data name="FileTypeTiff" xml:space="preserve">
     <value>Fișier TIFF (*.tiff, *.tif)</value>
+  </data>
+  <data name="FileTypeJp2" xml:space="preserve">
+    <value>JPEG2000 File (*.jp2, *.jpx)</value>
   </data>
   <data name="NameMissing" xml:space="preserve">
     <value>Lipsește numele.</value>
@@ -121,13 +124,13 @@
     <value>Toate ({0})</value>
   </data>
   <data name="SelectedCount" xml:space="preserve">
-    <value>Alese ({0})</value>
+    <value>Selectate ({0})</value>
   </data>
   <data name="EstimatedDownloadSize" xml:space="preserve">
     <value>Mărime estimată de download: {0} MB</value>
   </data>
   <data name="FilesProgressFormat" xml:space="preserve">
-    <value>{0} / {1} files</value>
+    <value>0} / {1} files</value>
   </data>
   <data name="SizeProgress" xml:space="preserve">
     <value>{0} / {1} MB</value>
@@ -151,154 +154,157 @@
     <value>Scanează</value>
   </data>
   <data name="ConfirmResetImages" xml:space="preserve">
-    <value>Sunteti sigur că vreti sa anulati schimbarile pentru {0} imagini(e)?</value>
+    <value>Sunteți sigur că vreți să anulați modificările pentru {0} imagini?</value>
   </data>
   <data name="ResetImage" xml:space="preserve">
-    <value>Resetează Imaginea</value>
+    <value>Reinițializează imaginea</value>
   </data>
   <data name="ExitWithUnsavedChanges" xml:space="preserve">
-    <value>Ai facut modificari care nu sunt salvate. Esti sigur ca vrei sa iesi si sa anulezi aceste modificari?</value>
+    <value>Există modificări care nu sunt salvate. Sigur vreți să ieșiți și să renunțați la aceste modificări?</value>
   </data>
   <data name="ExitWithActiveOperations" xml:space="preserve">
-    <value>An operation is in progress. Are you sure you want to exit and cancel the operation?</value>
+    <value>O operație este în curs. Sigur doriți să ieșiți și să anulați operația?</value>
   </data>
   <data name="UnsavedChanges" xml:space="preserve">
-    <value>Unsaved Changes</value>
+    <value>Modificări nesalvate</value>
   </data>
   <data name="ActiveOperations" xml:space="preserve">
-    <value>Operation in Progress</value>
+    <value>Operaţiune în desfăşurare</value>
   </data>
   <data name="ScanPageProgress" xml:space="preserve">
-    <value>Scaneaza pagina {0}</value>
+    <value>Scanare pagina {0}</value>
   </data>
   <data name="NoFeederSupport" xml:space="preserve">
-    <value>The selected scanner does not support using a feeder. If your scanner does have a feeder, try using a different driver.</value>
+    <value>Scanerul selectat nu suportă alimentarea automată. Dacă scanerul are totuși alimentare automată, atunci încercați alt driver.</value>
   </data>
   <data name="NoPagesInFeeder" xml:space="preserve">
     <value>Nici o foaie in alimentator.</value>
   </data>
   <data name="PdfNoPermissionToExtractContent" xml:space="preserve">
-    <value>You do not have permission to copy content from the file '{0}'.</value>
+    <value>Nu aveţi permisiunea să copiaţi conţinut din fisierul '{0}'.</value>
   </data>
   <data name="ErrorSaving" xml:space="preserve">
-    <value>A aparut o eroare in timpul salvării fisierului.</value>
+    <value>A apărut o eroare la salvarea fișierului.</value>
   </data>
   <data name="OfN" xml:space="preserve">
     <value>din {0}</value>
   </data>
   <data name="BatchError" xml:space="preserve">
-    <value>An unknown error ocurred during the batch scan.</value>
+    <value>A apărut o eroare necunoscută la scanarea multiplă.</value>
   </data>
   <data name="BatchStatusCancelled" xml:space="preserve">
-    <value>Batch cancelled.</value>
+    <value>Scanare multiplă anulată.</value>
   </data>
   <data name="BatchStatusCancelling" xml:space="preserve">
-    <value>Cancelling....</value>
+    <value>Se anulează....</value>
   </data>
   <data name="BatchStatusComplete" xml:space="preserve">
-    <value>Batch completed successfully.</value>
+    <value>Scanare multiplă terminată cu succes.</value>
   </data>
   <data name="BatchStatusError" xml:space="preserve">
-    <value>Batch scan stopped due to error.</value>
+    <value>Scanarea multiplă oprită din cauza unei erori.</value>
   </data>
   <data name="BatchStatusPage" xml:space="preserve">
-    <value>Scaneaza pagina {0}...</value>
+    <value>Scanare pagina {0}...</value>
   </data>
   <data name="BatchStatusScanPage" xml:space="preserve">
-    <value>Scanning page {0} (scan {1})...</value>
+    <value>Scanare pagina {0} (scan {1})...</value>
   </data>
   <data name="BatchStatusWaitingForScan" xml:space="preserve">
-    <value>Waiting for scan {0}...</value>
+    <value>Așteptați scanarea {0}...</value>
   </data>
   <data name="Cancel" xml:space="preserve">
     <value>Renunță</value>
   </data>
   <data name="Close" xml:space="preserve">
-    <value>Close</value>
+    <value>Închide</value>
   </data>
   <data name="BatchStatusSaving" xml:space="preserve">
-    <value>Saving batch results...</value>
+    <value>Salvare rezultate procesare multiplă...</value>
   </data>
   <data name="NoDuplexSupport" xml:space="preserve">
-    <value>The selected scanner does not support using duplex. If your scanner is supposed to support duplex, try using a different driver.</value>
+    <value>Scanerul selectat nu suportă funcția duplex. Dacă scanerul are totuși duplex, atunci încercați alt driver.</value>
+  </data>
+  <data name="ProgressFormat" xml:space="preserve">
+    <value>{0} / {1}</value>
   </data>
   <data name="ImportingFormat" xml:space="preserve">
-    <value>Importing {0}...</value>
+    <value>Importare {0}...</value>
   </data>
   <data name="ImportProgress" xml:space="preserve">
-    <value>Import Progress</value>
+    <value>Progres import</value>
   </data>
   <data name="Recovering" xml:space="preserve">
-    <value>Recovering...</value>
+    <value>Recuperare...</value>
   </data>
   <data name="RecoveryProgress" xml:space="preserve">
-    <value>Recovery Progress</value>
+    <value>Progres recuperare</value>
   </data>
   <data name="SaveImages" xml:space="preserve">
     <value>Salvează imaginile</value>
   </data>
   <data name="SaveImagesProgress" xml:space="preserve">
-    <value>Save Images Progress</value>
+    <value>Progres salvare imagini</value>
   </data>
   <data name="SavePdf" xml:space="preserve">
     <value>Salvează PDF</value>
   </data>
   <data name="SavePdfProgress" xml:space="preserve">
-    <value>Save PDF Progress</value>
+    <value>Progres salvare PDF</value>
   </data>
   <data name="SavingFormat" xml:space="preserve">
-    <value>Saving {0}...</value>
+    <value>Salvare {0}...</value>
   </data>
   <data name="Print" xml:space="preserve">
     <value>Tipărire</value>
   </data>
   <data name="Copying" xml:space="preserve">
-    <value>Copying...</value>
+    <value>Copiere...</value>
   </data>
   <data name="CopyProgress" xml:space="preserve">
-    <value>Copy Progress</value>
+    <value>Progres copiere</value>
   </data>
   <data name="Importing" xml:space="preserve">
-    <value>Importing...</value>
+    <value>Se importă...</value>
   </data>
   <data name="EmailPdf" xml:space="preserve">
     <value>Trimite PDF prin email</value>
   </data>
   <data name="EmailPdfProgress" xml:space="preserve">
-    <value>Email PDF Progress</value>
+    <value>Progres trimitere PDF prin email</value>
   </data>
   <data name="AutoSaveError" xml:space="preserve">
-    <value>A aparut o eroare in timpul salvării fisierului.</value>
+    <value>A apărut o eroare în timpul salvării automate.</value>
   </data>
   <data name="FileTypeAllFiles" xml:space="preserve">
-    <value>All Files</value>
+    <value>Toate fișierele</value>
   </data>
   <data name="FileTypeImageFiles" xml:space="preserve">
-    <value>Image Files</value>
+    <value>Fișiere Imagine</value>
   </data>
   <data name="DeviceBusy" xml:space="preserve">
-    <value>Scanerul selectat este deconectat.</value>
+    <value>Scanerul selectat este ocupat.</value>
   </data>
   <data name="DeviceCoverOpen" xml:space="preserve">
-    <value>The scanner's cover is open.</value>
+    <value>Capacul scanerului este deschis.</value>
   </data>
   <data name="DevicePaperJam" xml:space="preserve">
-    <value>The scanner has a paper jam.</value>
+    <value>Scanerul are o foaie mototolită.</value>
   </data>
   <data name="DeviceWarmingUp" xml:space="preserve">
-    <value>The scanner is warming up.</value>
+    <value>Scanerul se inițializează.</value>
   </data>
   <data name="OcrUpdateAvailable" xml:space="preserve">
-    <value>An update to OCR is available.</value>
+    <value>Este disponibilă o actualizare a componentei OCR.</value>
   </data>
   <data name="ImageSaved" xml:space="preserve">
-    <value>Image saved.</value>
+    <value>Imagine salvată.</value>
   </data>
   <data name="ImagesSaved" xml:space="preserve">
-    <value>{0} images saved.</value>
+    <value>{0} imagini salvate.</value>
   </data>
   <data name="PdfSaved" xml:space="preserve">
-    <value>PDF saved.</value>
+    <value>PDF salvat.</value>
   </data>
   <data name="NamedPageSizeFormat" xml:space="preserve">
     <value>{0} ({1}x{2} {3})</value>
@@ -307,25 +313,25 @@
     <value>Are you sure you want to delete "{0}"?</value>
   </data>
   <data name="FileInUse" xml:space="preserve">
-    <value>The file could not be overwritten because it is currently in use.</value>
+    <value>Fișierul nu poate fi suprascris deoarece este în uz.</value>
   </data>
   <data name="AutoDeskewing" xml:space="preserve">
-    <value>Deskewing...</value>
+    <value>Îndreptare...</value>
   </data>
   <data name="AutoDeskewProgress" xml:space="preserve">
-    <value>Deskew Progress</value>
+    <value>Progres îndreptare</value>
   </data>
   <data name="DownloadNeeded" xml:space="preserve">
-    <value>Download Needed</value>
+    <value>Descărcarea este necesară</value>
   </data>
   <data name="PdfImportComponentNeeded" xml:space="preserve">
-    <value>An additional component is needed to import this PDF file. Would you like to download it now?</value>
+    <value>Este necesară o nouă componentă pentru a putea importa acest fișier PDF. O adăugăm acum?</value>
   </data>
   <data name="ConfirmCancelBatch" xml:space="preserve">
-    <value>Are you sure you want to cancel the batch scan?</value>
+    <value>Esti sigur că vrei să opreşti scanarea multiplă?</value>
   </data>
   <data name="CancelBatch" xml:space="preserve">
-    <value>Cancel Batch</value>
+    <value>Anuleaza Batch-ul</value>
   </data>
   <data name="Donate" xml:space="preserve">
     <value>Donate</value>
@@ -337,10 +343,10 @@
     <value>The SANE driver is not available. Make sure to install the required packages:</value>
   </data>
   <data name="TesseractNotAvailable" xml:space="preserve">
-    <value>The OCR engine is not available. Make sure to install the required package:</value>
+    <value>Motorul OCR nu este disponibil. Asigură-te că ai instalat pachetul necesar.:</value>
   </data>
   <data name="DriverNotSupported" xml:space="preserve">
-    <value>The selected driver is not supported on this system.</value>
+    <value>Driver-ul selectat nu este suportat de acest sistem..</value>
   </data>
   <data name="OcrProgress" xml:space="preserve">
     <value>OCR Progress</value>
@@ -349,46 +355,40 @@
     <value>Running OCR...</value>
   </data>
   <data name="UpdateProgress" xml:space="preserve">
-    <value>Update Progress</value>
+    <value>Progres Actualizare</value>
   </data>
   <data name="Updating" xml:space="preserve">
-    <value>Updating...</value>
+    <value>Se actualizează...</value>
   </data>
   <data name="NoUpdates" xml:space="preserve">
-    <value>No updates available.</value>
+    <value>Nicio actualizare disponibilă.</value>
   </data>
   <data name="CheckingForUpdates" xml:space="preserve">
-    <value>Checking...</value>
+    <value>Verificare...</value>
+  </data>
+  <data name="UpdateCheckDisabled" xml:space="preserve">
+    <value>Update checking is disabled.</value>
   </data>
   <data name="UpdateError" xml:space="preserve">
-    <value>An error occured when trying to install the update.</value>
+    <value>A intervenit o eroare la instalarea actualizării.</value>
   </data>
   <data name="Install" xml:space="preserve">
-    <value>Install {0}</value>
+    <value>Instalează {0}</value>
   </data>
   <data name="UpdateAvailable" xml:space="preserve">
-    <value>An update is available.</value>
+    <value>Este disponibilă o actualizare.</value>
   </data>
   <data name="AuthError" xml:space="preserve">
-    <value>An error occurred when trying to authorize.</value>
+    <value>A survenit o eroare la încercarea de autorizare.</value>
   </data>
   <data name="UploadingEmail" xml:space="preserve">
-    <value>Uploading email...</value>
+    <value>Se încarcă e-mailul ...</value>
   </data>
   <data name="ErrorEmailing" xml:space="preserve">
-    <value>An error occurred when trying to send the email.</value>
-  </data>
-  <data name="Naps2Server" xml:space="preserve">
-    <value>NAPS2 Server</value>
-  </data>
-  <data name="ServerStarted" xml:space="preserve">
-    <value>Server started</value>
-  </data>
-  <data name="ListeningOnPort" xml:space="preserve">
-    <value>Listening on port {0}</value>
+    <value>A survenit o eroare la încercarea de trimitere email.</value>
   </data>
   <data name="ScanProgressPage" xml:space="preserve">
-    <value>Scaneaza pagina {0}...</value>
+    <value>Scanare pagina {0}...</value>
   </data>
   <data name="AcquiringData" xml:space="preserve">
     <value>Colectează datele...</value>

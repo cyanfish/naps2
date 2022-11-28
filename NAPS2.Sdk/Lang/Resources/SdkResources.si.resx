@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="DeviceNotFound" xml:space="preserve">
+    <value>The selected scanner could not be found.</value>
+  </data>
+  <data name="DeviceOffline" xml:space="preserve">
+    <value>The selected scanner is offline.</value>
+  </data>
+  <data name="NAPS2" xml:space="preserve">
+    <value>NAPS2</value>
+  </data>
+  <data name="NoDeviceSelected" xml:space="preserve">
+    <value>No device selected.</value>
+  </data>
+  <data name="NoDevicesFound" xml:space="preserve">
+    <value>No scanning device was found.</value>
+  </data>
+  <data name="UnknownDriverError" xml:space="preserve">
+    <value>පරිලෝකකයෙහි උපක්‍රම ධාවකයෙහි දෝෂයක් පැනනැගිනි.</value>
+  </data>
+  <data name="Version" xml:space="preserve">
+    <value>Version {0}</value>
+  </data>
+  <data name="ImportErrorCouldNot" xml:space="preserve">
+    <value>The file '{0}' could not be imported.</value>
+  </data>
+  <data name="NoFeederSupport" xml:space="preserve">
+    <value>The selected scanner does not support using a feeder. If your scanner does have a feeder, try using a different driver.</value>
+  </data>
+  <data name="NoPagesInFeeder" xml:space="preserve">
+    <value>No pages are in the feeder.</value>
+  </data>
+  <data name="PdfNoPermissionToExtractContent" xml:space="preserve">
+    <value>You do not have permission to copy content from the file '{0}'.</value>
+  </data>
+  <data name="NoDuplexSupport" xml:space="preserve">
+    <value>The selected scanner does not support using duplex. If your scanner is supposed to support duplex, try using a different driver.</value>
+  </data>
+  <data name="DeviceBusy" xml:space="preserve">
+    <value>The selected scanner is busy.</value>
+  </data>
+  <data name="DeviceCoverOpen" xml:space="preserve">
+    <value>The scanner's cover is open.</value>
+  </data>
+  <data name="DevicePaperJam" xml:space="preserve">
+    <value>The scanner has a paper jam.</value>
+  </data>
+  <data name="DeviceWarmingUp" xml:space="preserve">
+    <value>The scanner is warming up.</value>
+  </data>
+  <data name="SaneNotAvailable" xml:space="preserve">
+    <value>The SANE driver is not available. Make sure to install the required packages:</value>
+  </data>
+  <data name="TesseractNotAvailable" xml:space="preserve">
+    <value>The OCR engine is not available. Make sure to install the required package:</value>
+  </data>
+  <data name="DriverNotSupported" xml:space="preserve">
+    <value>The selected driver is not supported on this system.</value>
+  </data>
+</root>

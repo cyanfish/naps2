@@ -19,7 +19,7 @@
     <value>クリア</value>
   </data>
   <data name="ConfirmClearItems" xml:space="preserve">
-    <value>Are you sure you want to clear {0} item(s)?</value>
+    <value>{0}個のアイテムをクリアしますか?</value>
   </data>
   <data name="ConfirmDeleteItems" xml:space="preserve">
     <value>{0}個のアイテムを削除しますか?</value>
@@ -71,6 +71,9 @@
   </data>
   <data name="FileTypeTiff" xml:space="preserve">
     <value>TIFF File (*.tiff, *.tif)</value>
+  </data>
+  <data name="FileTypeJp2" xml:space="preserve">
+    <value>JPEG2000 File (*.jp2, *.jpx)</value>
   </data>
   <data name="NameMissing" xml:space="preserve">
     <value>名前がありません.</value>
@@ -222,6 +225,9 @@
   <data name="NoDuplexSupport" xml:space="preserve">
     <value>両面スキャンがこのスキャナではできません。スキャナに両面機能が備わっている場合は、別のドライバを試してみてください。.</value>
   </data>
+  <data name="ProgressFormat" xml:space="preserve">
+    <value>{0} / {1}</value>
+  </data>
   <data name="ImportingFormat" xml:space="preserve">
     <value>{0}を読み込み中...</value>
   </data>
@@ -360,6 +366,9 @@
   <data name="CheckingForUpdates" xml:space="preserve">
     <value>確認中です...</value>
   </data>
+  <data name="UpdateCheckDisabled" xml:space="preserve">
+    <value>Update checking is disabled.</value>
+  </data>
   <data name="UpdateError" xml:space="preserve">
     <value>アップデートをインストールする際にエラーが発生しました.</value>
   </data>
@@ -377,15 +386,6 @@
   </data>
   <data name="ErrorEmailing" xml:space="preserve">
     <value>メール送信時にエラーが発生しました.</value>
-  </data>
-  <data name="Naps2Server" xml:space="preserve">
-    <value>NAPS2 Server</value>
-  </data>
-  <data name="ServerStarted" xml:space="preserve">
-    <value>Server started</value>
-  </data>
-  <data name="ListeningOnPort" xml:space="preserve">
-    <value>Listening on port {0}</value>
   </data>
   <data name="ScanProgressPage" xml:space="preserve">
     <value>ページ {0} をスキャン中...</value>

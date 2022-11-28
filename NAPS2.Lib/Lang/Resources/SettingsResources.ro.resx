@@ -46,7 +46,7 @@
     <value>800 dpi</value>
   </data>
   <data name="EmailProviderType_CustomSmtp" xml:space="preserve">
-    <value>Custom SMTP</value>
+    <value>Adresă server SMTP personalizată</value>
   </data>
   <data name="EmailProviderType_Gmail" xml:space="preserve">
     <value>Gmail</value>
@@ -100,7 +100,7 @@
     <value>US Letter (8.5x11 in)</value>
   </data>
   <data name="PdfCompat_Default" xml:space="preserve">
-    <value>Default</value>
+    <value>Implicit</value>
   </data>
   <data name="PdfCompat_PdfA1B" xml:space="preserve">
     <value>PDF/A-1b</value>
@@ -133,24 +133,30 @@
     <value>LZW</value>
   </data>
   <data name="TiffComp_None" xml:space="preserve">
-    <value>Finalizat</value>
+    <value>Nimic</value>
   </data>
   <data name="TwainImpl_Default" xml:space="preserve">
-    <value>Default</value>
+    <value>Implicit</value>
   </data>
   <data name="TwainImpl_Legacy" xml:space="preserve">
     <value>Legacy (native UI only)</value>
   </data>
   <data name="TwainImpl_MemXfer" xml:space="preserve">
-    <value>Alternative Transfer</value>
+    <value>Transfer alternativ</value>
   </data>
   <data name="TwainImpl_OldDsm" xml:space="preserve">
-    <value>Old DSM</value>
+    <value>DSM vechi</value>
   </data>
   <data name="TwainImpl_X64" xml:space="preserve">
     <value>x64</value>
   </data>
   <data name="WiaVersion_Default" xml:space="preserve">
-    <value>Default</value>
+    <value>Implicit</value>
+  </data>
+  <data name="OcrMode_Fast" xml:space="preserve">
+    <value>Fast</value>
+  </data>
+  <data name="OcrMode_Best" xml:space="preserve">
+    <value>Best</value>
   </data>
 </root>

@@ -72,6 +72,9 @@
   <data name="FileTypeTiff" xml:space="preserve">
     <value>پرونده TIFF (*.tiff, *.tif)</value>
   </data>
+  <data name="FileTypeJp2" xml:space="preserve">
+    <value>JPEG2000 File (*.jp2, *.jpx)</value>
+  </data>
   <data name="NameMissing" xml:space="preserve">
     <value>فاقد نام.</value>
   </data>
@@ -160,13 +163,13 @@
     <value>شما تغییرات ذخیره شده دارید. آیا مطمئنید می‌خواهید خارج شوید و تغییرات را نادیده بگیرید؟</value>
   </data>
   <data name="ExitWithActiveOperations" xml:space="preserve">
-    <value>An operation is in progress. Are you sure you want to exit and cancel the operation?</value>
+    <value>عملیات در حال اجراست، آیا مطمئن هستید می‌خواهد خارج شده و عملیات را لغو کنید؟</value>
   </data>
   <data name="UnsavedChanges" xml:space="preserve">
     <value>تغییرات ذخیره نشده</value>
   </data>
   <data name="ActiveOperations" xml:space="preserve">
-    <value>Operation in Progress</value>
+    <value>عملیات در حال پیش‌روی است</value>
   </data>
   <data name="ScanPageProgress" xml:space="preserve">
     <value>اسکن صفحه {0}</value>
@@ -221,6 +224,9 @@
   </data>
   <data name="NoDuplexSupport" xml:space="preserve">
     <value>اسکنر انتخاب شده استفاده از  اسکن دورو را پشتیبانی نمی‌کند. اگر اسکنر پشتیبانی از اسکن دورو را پیشنهاد می‌دهد، تلاش کنید از درایور دیگری استفاده کنید.</value>
+  </data>
+  <data name="ProgressFormat" xml:space="preserve">
+    <value>{0} / {1}</value>
   </data>
   <data name="ImportingFormat" xml:space="preserve">
     <value>وارد کردن {0}...</value>
@@ -289,16 +295,16 @@
     <value>اسکنر در حال گرم شدن است.</value>
   </data>
   <data name="OcrUpdateAvailable" xml:space="preserve">
-    <value>An update to OCR is available.</value>
+    <value>یک بروزرسانی برای OCR موجود است..</value>
   </data>
   <data name="ImageSaved" xml:space="preserve">
-    <value>Image saved.</value>
+    <value>تصویر ذخیره شد.</value>
   </data>
   <data name="ImagesSaved" xml:space="preserve">
-    <value>{0} images saved.</value>
+    <value>{0} تصویر ذخیره شد..</value>
   </data>
   <data name="PdfSaved" xml:space="preserve">
-    <value>PDF saved.</value>
+    <value>PDF ذخیره شد..</value>
   </data>
   <data name="NamedPageSizeFormat" xml:space="preserve">
     <value>{0} ({1}x{2} {3})</value>
@@ -307,85 +313,79 @@
     <value>Are you sure you want to delete "{0}"?</value>
   </data>
   <data name="FileInUse" xml:space="preserve">
-    <value>The file could not be overwritten because it is currently in use.</value>
+    <value>پرونده قابل بازنویسی نیست زیاد در حال استفاده است..</value>
   </data>
   <data name="AutoDeskewing" xml:space="preserve">
-    <value>Deskewing...</value>
+    <value>مرتب‌سازی...</value>
   </data>
   <data name="AutoDeskewProgress" xml:space="preserve">
-    <value>Deskew Progress</value>
+    <value>مرتب‌سازی درحال اجراست</value>
   </data>
   <data name="DownloadNeeded" xml:space="preserve">
-    <value>Download Needed</value>
+    <value>به دانلود نیاز است</value>
   </data>
   <data name="PdfImportComponentNeeded" xml:space="preserve">
-    <value>An additional component is needed to import this PDF file. Would you like to download it now?</value>
+    <value>برای درون‌ریزی این پرونده PDF به کامپونت جدیدی نیاز است. آیا مایل به دانلود آن هستید؟</value>
   </data>
   <data name="ConfirmCancelBatch" xml:space="preserve">
-    <value>Are you sure you want to cancel the batch scan?</value>
+    <value>آیا مطمئنید که می‌خواهید اسکن دسته‌ای را لغو کنید؟</value>
   </data>
   <data name="CancelBatch" xml:space="preserve">
-    <value>Cancel Batch</value>
+    <value>لغو دسته‌ای</value>
   </data>
   <data name="Donate" xml:space="preserve">
-    <value>Donate</value>
+    <value>کمک مالی</value>
   </data>
   <data name="DonatePrompt" xml:space="preserve">
-    <value>NAPS2 is completely free. Consider making a donation.</value>
+    <value>NAPS2 کاملا رایگان است. کمک مالی کنید..</value>
   </data>
   <data name="SaneNotAvailable" xml:space="preserve">
-    <value>The SANE driver is not available. Make sure to install the required packages:</value>
+    <value>درایور SANE موجود نیست. مطمئن شوید بسته‌های مورد نیاز را نصب کرده‌اید.:</value>
   </data>
   <data name="TesseractNotAvailable" xml:space="preserve">
-    <value>The OCR engine is not available. Make sure to install the required package:</value>
+    <value>موتور OCR در دسترس نیست. مطمئن شوید بسته‌های مورد نیاز را نصب کرده‌اید.:</value>
   </data>
   <data name="DriverNotSupported" xml:space="preserve">
-    <value>The selected driver is not supported on this system.</value>
+    <value>درایور انتخابیدر این سیستم قابل استفاده نیست..</value>
   </data>
   <data name="OcrProgress" xml:space="preserve">
-    <value>OCR Progress</value>
+    <value>در حال اجرای OCR</value>
   </data>
   <data name="RunningOcr" xml:space="preserve">
-    <value>Running OCR...</value>
+    <value>اجرای OCR...</value>
   </data>
   <data name="UpdateProgress" xml:space="preserve">
-    <value>Update Progress</value>
+    <value>پیشرفت بروزرسانی</value>
   </data>
   <data name="Updating" xml:space="preserve">
-    <value>Updating...</value>
+    <value>درحال بروزرسانی...</value>
   </data>
   <data name="NoUpdates" xml:space="preserve">
-    <value>No updates available.</value>
+    <value>هیچ بروزرسانی‌ای موجود نیست.</value>
   </data>
   <data name="CheckingForUpdates" xml:space="preserve">
-    <value>Checking...</value>
+    <value>درحال بررسی......</value>
+  </data>
+  <data name="UpdateCheckDisabled" xml:space="preserve">
+    <value>Update checking is disabled.</value>
   </data>
   <data name="UpdateError" xml:space="preserve">
-    <value>An error occured when trying to install the update.</value>
+    <value>خطایی هنگام تلاش برای بروزرسانی رخ داد..</value>
   </data>
   <data name="Install" xml:space="preserve">
-    <value>Install {0}</value>
+    <value>نصب {0}</value>
   </data>
   <data name="UpdateAvailable" xml:space="preserve">
-    <value>An update is available.</value>
+    <value>یک بروزرسانی موجود است.</value>
   </data>
   <data name="AuthError" xml:space="preserve">
-    <value>An error occurred when trying to authorize.</value>
+    <value>خطایی هنگام تلاش برای احراز هویت رخ داد..</value>
   </data>
   <data name="UploadingEmail" xml:space="preserve">
-    <value>Uploading email...</value>
+    <value>بارگزاری ایمیل...</value>
   </data>
   <data name="ErrorEmailing" xml:space="preserve">
-    <value>An error occurred when trying to send the email.</value>
-  </data>
-  <data name="Naps2Server" xml:space="preserve">
-    <value>NAPS2 Server</value>
-  </data>
-  <data name="ServerStarted" xml:space="preserve">
-    <value>Server started</value>
-  </data>
-  <data name="ListeningOnPort" xml:space="preserve">
-    <value>Listening on port {0}</value>
+    <value>هنگام تلاش برای ارسال ایمیل خطایی رخ داد.</value>
   </data>
   <data name="ScanProgressPage" xml:space="preserve">
     <value>اسکن صفحه {0}...</value>

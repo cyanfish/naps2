@@ -64,28 +64,31 @@
     <value>JPEG File (*.jpg, *.jpeg)</value>
   </data>
   <data name="FileTypePdf" xml:space="preserve">
-    <value>PDF Document (*.pdf)</value>
+    <value>PDF dokument (* .pdf)</value>
   </data>
   <data name="FileTypePng" xml:space="preserve">
-    <value>PNG File (*.png)</value>
+    <value>PNG-lêer (* png)</value>
   </data>
   <data name="FileTypeTiff" xml:space="preserve">
     <value>TIFF File (*.tiff, *.tif)</value>
   </data>
+  <data name="FileTypeJp2" xml:space="preserve">
+    <value>JPEG2000 File (*.jp2, *.jpx)</value>
+  </data>
   <data name="NameMissing" xml:space="preserve">
-    <value>Name missing.</value>
+    <value>Noem ontbreek.</value>
   </data>
   <data name="NAPS2" xml:space="preserve">
     <value>NAPS2</value>
   </data>
   <data name="NoDeviceSelected" xml:space="preserve">
-    <value>No device selected.</value>
+    <value>Geen toestel gekies.</value>
   </data>
   <data name="NoDevicesFound" xml:space="preserve">
-    <value>No scanning device was found.</value>
+    <value>Geen skandering toestel gevind.</value>
   </data>
   <data name="OverwriteFile" xml:space="preserve">
-    <value>Overwrite File</value>
+    <value>Oorskryf Lêer</value>
   </data>
   <data name="PdfStatus" xml:space="preserve">
     <value>{0} of {1}</value>
@@ -142,7 +145,7 @@
     <value>Tải Về lỗi</value>
   </data>
   <data name="FilesCouldNotBeDownloaded" xml:space="preserve">
-    <value>One or more files could not be downloaded.</value>
+    <value>Een of meer lêers kon nie afgelaai word.</value>
   </data>
   <data name="CustomPageSizeFormat" xml:space="preserve">
     <value>Tùy chỉnh ({0}x{1} {2})</value>
@@ -160,7 +163,7 @@
     <value>You have unsaved changes. Are you sure you want to exit and discard those changes?</value>
   </data>
   <data name="ExitWithActiveOperations" xml:space="preserve">
-    <value>An operation is in progress. Are you sure you want to exit and cancel the operation?</value>
+    <value>Die program is tans besig met 'n taak. Is jy seker dat jy die program wil verlaat en die taak kanselleer?</value>
   </data>
   <data name="UnsavedChanges" xml:space="preserve">
     <value>Unsaved Changes</value>
@@ -175,7 +178,7 @@
     <value>The selected scanner does not support using a feeder. If your scanner does have a feeder, try using a different driver.</value>
   </data>
   <data name="NoPagesInFeeder" xml:space="preserve">
-    <value>No pages are in the feeder.</value>
+    <value>Geen bladsye is in die voerder.</value>
   </data>
   <data name="PdfNoPermissionToExtractContent" xml:space="preserve">
     <value>You do not have permission to copy content from the file '{0}'.</value>
@@ -222,6 +225,9 @@
   <data name="NoDuplexSupport" xml:space="preserve">
     <value>The selected scanner does not support using duplex. If your scanner is supposed to support duplex, try using a different driver.</value>
   </data>
+  <data name="ProgressFormat" xml:space="preserve">
+    <value>{0} / {1}</value>
+  </data>
   <data name="ImportingFormat" xml:space="preserve">
     <value>Đang chèn {0}...</value>
   </data>
@@ -229,7 +235,7 @@
     <value>Chèn xong</value>
   </data>
   <data name="Recovering" xml:space="preserve">
-    <value>Recovering...</value>
+    <value>Herstel...</value>
   </data>
   <data name="RecoveryProgress" xml:space="preserve">
     <value>Recovery Progress</value>
@@ -244,13 +250,13 @@
     <value>Save PDF</value>
   </data>
   <data name="SavePdfProgress" xml:space="preserve">
-    <value>Email PDF Progress</value>
+    <value>Save PDF Progress</value>
   </data>
   <data name="SavingFormat" xml:space="preserve">
     <value>Saving {0}...</value>
   </data>
   <data name="Print" xml:space="preserve">
-    <value>Print</value>
+    <value>Afdruk</value>
   </data>
   <data name="Copying" xml:space="preserve">
     <value>Đang sao chép...</value>
@@ -298,7 +304,7 @@
     <value>{0} images saved.</value>
   </data>
   <data name="PdfSaved" xml:space="preserve">
-    <value>PDF saved.</value>
+    <value>PDF gered.</value>
   </data>
   <data name="NamedPageSizeFormat" xml:space="preserve">
     <value>{0} ({1}x{2} {3})</value>
@@ -360,8 +366,11 @@
   <data name="CheckingForUpdates" xml:space="preserve">
     <value>Checking...</value>
   </data>
+  <data name="UpdateCheckDisabled" xml:space="preserve">
+    <value>Update checking is disabled.</value>
+  </data>
   <data name="UpdateError" xml:space="preserve">
-    <value>An error occured when trying to install the update.</value>
+    <value>'n Nuwe weergawe is beskikbaar.</value>
   </data>
   <data name="Install" xml:space="preserve">
     <value>Install {0}</value>
@@ -376,16 +385,7 @@
     <value>Uploading email...</value>
   </data>
   <data name="ErrorEmailing" xml:space="preserve">
-    <value>An error occurred when trying to send the email.</value>
-  </data>
-  <data name="Naps2Server" xml:space="preserve">
-    <value>NAPS2 Server</value>
-  </data>
-  <data name="ServerStarted" xml:space="preserve">
-    <value>Server started</value>
-  </data>
-  <data name="ListeningOnPort" xml:space="preserve">
-    <value>Listening on port {0}</value>
+    <value>Daar was a 'n fout tydens die e-pos versending.</value>
   </data>
   <data name="ScanProgressPage" xml:space="preserve">
     <value>Scanning page {0}...</value>

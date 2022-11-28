@@ -19,7 +19,7 @@
     <value>Temizle</value>
   </data>
   <data name="ConfirmClearItems" xml:space="preserve">
-    <value>{0} adet ögeyi temizlemek istediğinize emin misiniz?</value>
+    <value>{0} ögeyi temizlemek istediğinize emin misiniz?</value>
   </data>
   <data name="ConfirmDeleteItems" xml:space="preserve">
     <value>{0} adet ögeyi silmek istediğinize emin misiniz?</value>
@@ -43,7 +43,7 @@
     <value>Seçilen tarayıcı çevrim dışı.</value>
   </data>
   <data name="DontHavePermission" xml:space="preserve">
-    <value>Bu konuma kaydetmek için yetkiniz bulunmuyor..</value>
+    <value>Bu konuma kaydetmek için yetkiniz bulunmuyor.</value>
   </data>
   <data name="Error" xml:space="preserve">
     <value>Hata</value>
@@ -71,6 +71,9 @@
   </data>
   <data name="FileTypeTiff" xml:space="preserve">
     <value>TIFF Dosyası (*.tiff, *.tif)</value>
+  </data>
+  <data name="FileTypeJp2" xml:space="preserve">
+    <value>JPEG2000 File (*.jp2, *.jpx)</value>
   </data>
   <data name="NameMissing" xml:space="preserve">
     <value>Ad eksik.</value>
@@ -136,7 +139,7 @@
     <value>'{0}' dosyası içeri aktarılamadı.</value>
   </data>
   <data name="ImportErrorNAPS2Pdf" xml:space="preserve">
-    <value>'{0}' dosyası içeri aktarılamadı. Yalnızca NAPS2 tarafından üretilen PDF dosyaları içeri aktarılabilir..</value>
+    <value>'{0}' dosyası içeri aktarılamadı. Yalnızca NAPS2 tarafından üretilen PDF dosyaları içeri aktarılabilir.</value>
   </data>
   <data name="DownloadError" xml:space="preserve">
     <value>İndirme Hatası</value>
@@ -160,13 +163,13 @@
     <value>Kaydedilmemiş değişiklikleriniz var. Değişiklikleri iptal edip çıkmak istediğinize emin misiniz?</value>
   </data>
   <data name="ExitWithActiveOperations" xml:space="preserve">
-    <value>An operation is in progress. Are you sure you want to exit and cancel the operation?</value>
+    <value>Süren işlem var. Çıkmak ve süreci iptal etmek istediğinize emin misiniz?</value>
   </data>
   <data name="UnsavedChanges" xml:space="preserve">
     <value>Kaydedilmemiş Değişiklikler</value>
   </data>
   <data name="ActiveOperations" xml:space="preserve">
-    <value>Operation in Progress</value>
+    <value>İşlem Sürüyor</value>
   </data>
   <data name="ScanPageProgress" xml:space="preserve">
     <value>{0}. sayfa taranıyor</value>
@@ -181,7 +184,7 @@
     <value>'{0}' dosyasından içeriği kopyalamaya yetkiniz yok.</value>
   </data>
   <data name="ErrorSaving" xml:space="preserve">
-    <value>Dosya kaydedilmeye çalışılırken bir hata oluştu..</value>
+    <value>Dosya kaydedilmeye çalışılırken hata oluştu.</value>
   </data>
   <data name="OfN" xml:space="preserve">
     <value> / {0}</value>
@@ -221,6 +224,9 @@
   </data>
   <data name="NoDuplexSupport" xml:space="preserve">
     <value>Seçilen tarayıcı, çift taraflı kullanımı desteklemiyor. Eğer tarayıcınız çift taraflı kullanımı destekliyorsa başka bir sürücü kullanmayı deneyin.</value>
+  </data>
+  <data name="ProgressFormat" xml:space="preserve">
+    <value>{0} / {1}</value>
   </data>
   <data name="ImportingFormat" xml:space="preserve">
     <value>{0} içe aktarılıyor...</value>
@@ -334,58 +340,52 @@
     <value>NAPS2 tümüyle ücretsizdir. Bağış yapmayı düşünün.</value>
   </data>
   <data name="SaneNotAvailable" xml:space="preserve">
-    <value>The SANE driver is not available. Make sure to install the required packages:</value>
+    <value>SANE sürücüsü kullanılamıyor. Gerekli paketlerin kuruluduğundan emin olun:</value>
   </data>
   <data name="TesseractNotAvailable" xml:space="preserve">
-    <value>The OCR engine is not available. Make sure to install the required package:</value>
+    <value>OCR motoru kullanılamıyor. Gerekli paketin kurulduğundan emin olun:</value>
   </data>
   <data name="DriverNotSupported" xml:space="preserve">
-    <value>The selected driver is not supported on this system.</value>
+    <value>Seçilen sürücü bu sistemde desteklenmiyor.</value>
   </data>
   <data name="OcrProgress" xml:space="preserve">
-    <value>OCR Progress</value>
+    <value>OCR Süreci</value>
   </data>
   <data name="RunningOcr" xml:space="preserve">
-    <value>Running OCR...</value>
+    <value>OCR Çalıştırılıyor...</value>
   </data>
   <data name="UpdateProgress" xml:space="preserve">
-    <value>Update Progress</value>
+    <value>Güncelleme Süreci</value>
   </data>
   <data name="Updating" xml:space="preserve">
-    <value>Updating...</value>
+    <value>Güncelleniyor...</value>
   </data>
   <data name="NoUpdates" xml:space="preserve">
-    <value>No updates available.</value>
+    <value>Güncelleme yok.</value>
   </data>
   <data name="CheckingForUpdates" xml:space="preserve">
-    <value>Checking...</value>
+    <value>Denetleniyor...</value>
+  </data>
+  <data name="UpdateCheckDisabled" xml:space="preserve">
+    <value>Update checking is disabled.</value>
   </data>
   <data name="UpdateError" xml:space="preserve">
-    <value>An error occured when trying to install the update.</value>
+    <value>Güncelleme kurulmaya çalışılırken hata oluştu.</value>
   </data>
   <data name="Install" xml:space="preserve">
-    <value>Install {0}</value>
+    <value>{0} Kur</value>
   </data>
   <data name="UpdateAvailable" xml:space="preserve">
-    <value>An update is available.</value>
+    <value>Güncelleme var.</value>
   </data>
   <data name="AuthError" xml:space="preserve">
-    <value>An error occurred when trying to authorize.</value>
+    <value>Yetkilendirmeye çalışılırken hata oluştu.</value>
   </data>
   <data name="UploadingEmail" xml:space="preserve">
-    <value>Uploading email...</value>
+    <value>E-posta yükleniyor...</value>
   </data>
   <data name="ErrorEmailing" xml:space="preserve">
-    <value>An error occurred when trying to send the email.</value>
-  </data>
-  <data name="Naps2Server" xml:space="preserve">
-    <value>NAPS2 Server</value>
-  </data>
-  <data name="ServerStarted" xml:space="preserve">
-    <value>Server started</value>
-  </data>
-  <data name="ListeningOnPort" xml:space="preserve">
-    <value>Listening on port {0}</value>
+    <value>E-posta gönderilmeye çalışılırken hata oluştu.</value>
   </data>
   <data name="ScanProgressPage" xml:space="preserve">
     <value>{0}. sayfa taranıyor...</value>

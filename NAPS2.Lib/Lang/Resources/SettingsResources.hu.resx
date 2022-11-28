@@ -85,10 +85,10 @@
     <value>A5 (148x210 mm)</value>
   </data>
   <data name="PageSize_B4" xml:space="preserve">
-    <value>B4 (250x353 mm)</value>
+    <value>B4 (250 x 353 mm)</value>
   </data>
   <data name="PageSize_B5" xml:space="preserve">
-    <value>B5 (176x250 mm)</value>
+    <value>B5 (176 x 250 mm)</value>
   </data>
   <data name="PageSize_Custom" xml:space="preserve">
     <value>Custom...</value>
@@ -100,7 +100,7 @@
     <value>US Letter (8.5x11 in)</value>
   </data>
   <data name="PdfCompat_Default" xml:space="preserve">
-    <value>Default</value>
+    <value>Alapértelmezett</value>
   </data>
   <data name="PdfCompat_PdfA1B" xml:space="preserve">
     <value>PDF/A-1b</value>
@@ -133,10 +133,10 @@
     <value>LZW</value>
   </data>
   <data name="TiffComp_None" xml:space="preserve">
-    <value>Kész</value>
+    <value>None</value>
   </data>
   <data name="TwainImpl_Default" xml:space="preserve">
-    <value>Default</value>
+    <value>Alapértelmezett</value>
   </data>
   <data name="TwainImpl_Legacy" xml:space="preserve">
     <value>Legacy (native UI only)</value>
@@ -151,6 +151,12 @@
     <value>x64</value>
   </data>
   <data name="WiaVersion_Default" xml:space="preserve">
-    <value>Default</value>
+    <value>Alapértelmezett</value>
+  </data>
+  <data name="OcrMode_Fast" xml:space="preserve">
+    <value>Fast</value>
+  </data>
+  <data name="OcrMode_Best" xml:space="preserve">
+    <value>Best</value>
   </data>
 </root>

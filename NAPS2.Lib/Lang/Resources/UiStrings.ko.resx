@@ -1,0 +1,351 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AboutFormTitle" xml:space="preserve">
+    <value>정보</value>
+  </data>
+  <data name="CopyrightFormat" xml:space="preserve">
+    <value>Copyright {0} NAPS2 Contributors</value>
+  </data>
+  <data name="IconsFrom" xml:space="preserve">
+    <value>아이콘 출처:</value>
+  </data>
+  <data name="CheckForUpdates" xml:space="preserve">
+    <value>Check for updates</value>
+  </data>
+  <data name="OK" xml:space="preserve">
+    <value>확인</value>
+  </data>
+  <data name="Donate" xml:space="preserve">
+    <value>Donate</value>
+  </data>
+  <data name="ProfilesFormTitle" xml:space="preserve">
+    <value>프로파일</value>
+  </data>
+  <data name="New" xml:space="preserve">
+    <value>새로 만들기</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>편집</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>삭제</value>
+  </data>
+  <data name="Scan" xml:space="preserve">
+    <value>스캔</value>
+  </data>
+  <data name="SetDefault" xml:space="preserve">
+    <value>기본값 설정</value>
+  </data>
+  <data name="Copy" xml:space="preserve">
+    <value>복사</value>
+  </data>
+  <data name="Paste" xml:space="preserve">
+    <value>붙여넣기</value>
+  </data>
+  <data name="Done" xml:space="preserve">
+    <value>완료</value>
+  </data>
+  <data name="Default" xml:space="preserve">
+    <value>기본값</value>
+  </data>
+  <data name="NewProfile" xml:space="preserve">
+    <value>새 프로파일</value>
+  </data>
+  <data name="BatchScan" xml:space="preserve">
+    <value>일괄 스캔</value>
+  </data>
+  <data name="Ocr" xml:space="preserve">
+    <value>OCR</value>
+  </data>
+  <data name="Profiles" xml:space="preserve">
+    <value>프로파일</value>
+  </data>
+  <data name="Import" xml:space="preserve">
+    <value>가져오기</value>
+  </data>
+  <data name="SavePdf" xml:space="preserve">
+    <value>PDF 저장</value>
+  </data>
+  <data name="PdfSettings" xml:space="preserve">
+    <value>PDF 설정</value>
+  </data>
+  <data name="SaveImages" xml:space="preserve">
+    <value>이미지 저장</value>
+  </data>
+  <data name="ImageSettings" xml:space="preserve">
+    <value>이미지 설정</value>
+  </data>
+  <data name="EmailPdf" xml:space="preserve">
+    <value>이메일 PDF</value>
+  </data>
+  <data name="EmailSettings" xml:space="preserve">
+    <value>이메일 설정</value>
+  </data>
+  <data name="Print" xml:space="preserve">
+    <value>인쇄</value>
+  </data>
+  <data name="Image" xml:space="preserve">
+    <value>이미지</value>
+  </data>
+  <data name="View" xml:space="preserve">
+    <value>보기</value>
+  </data>
+  <data name="Crop" xml:space="preserve">
+    <value>잘라내기</value>
+  </data>
+  <data name="BrightnessContrast" xml:space="preserve">
+    <value>밝기 / 명암</value>
+  </data>
+  <data name="HueSaturation" xml:space="preserve">
+    <value>색조 / 채도</value>
+  </data>
+  <data name="BlackAndWhite" xml:space="preserve">
+    <value>흑백</value>
+  </data>
+  <data name="Sharpen" xml:space="preserve">
+    <value>샤픈</value>
+  </data>
+  <data name="DocumentCorrection" xml:space="preserve">
+    <value>Document Correction</value>
+  </data>
+  <data name="Reset" xml:space="preserve">
+    <value>초기화</value>
+  </data>
+  <data name="Rotate" xml:space="preserve">
+    <value>회전</value>
+  </data>
+  <data name="RotateLeft" xml:space="preserve">
+    <value>왼쪽으로 회전</value>
+  </data>
+  <data name="RotateRight" xml:space="preserve">
+    <value>오른쪽으로 회전</value>
+  </data>
+  <data name="Flip" xml:space="preserve">
+    <value>뒤집기</value>
+  </data>
+  <data name="Deskew" xml:space="preserve">
+    <value>기울기 보정</value>
+  </data>
+  <data name="CustomRotation" xml:space="preserve">
+    <value>사용자 정의 회전</value>
+  </data>
+  <data name="MoveUp" xml:space="preserve">
+    <value>위로 이동</value>
+  </data>
+  <data name="MoveDown" xml:space="preserve">
+    <value>아래로 이동</value>
+  </data>
+  <data name="Reorder" xml:space="preserve">
+    <value>재정렬</value>
+  </data>
+  <data name="Interleave" xml:space="preserve">
+    <value>인터리브</value>
+  </data>
+  <data name="Deinterleave" xml:space="preserve">
+    <value>디인터리브</value>
+  </data>
+  <data name="AltInterleave" xml:space="preserve">
+    <value>대체 인터리브</value>
+  </data>
+  <data name="AltDeinterleave" xml:space="preserve">
+    <value>대체 디인터리브</value>
+  </data>
+  <data name="Reverse" xml:space="preserve">
+    <value>뒤집기</value>
+  </data>
+  <data name="Clear" xml:space="preserve">
+    <value>비우기</value>
+  </data>
+  <data name="ClearAll" xml:space="preserve">
+    <value>Clear All</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>언어</value>
+  </data>
+  <data name="About" xml:space="preserve">
+    <value>정보</value>
+  </data>
+  <data name="Zoom" xml:space="preserve">
+    <value>확대/축소</value>
+  </data>
+  <data name="ZoomIn" xml:space="preserve">
+    <value>확대</value>
+  </data>
+  <data name="ZoomOut" xml:space="preserve">
+    <value>축소</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="SaveAllAsPdf" xml:space="preserve">
+    <value>Save All as PDF</value>
+  </data>
+  <data name="SaveSelectedAsPdf" xml:space="preserve">
+    <value>Save Selected as PDF</value>
+  </data>
+  <data name="SaveAllAsImages" xml:space="preserve">
+    <value>Save All as Images</value>
+  </data>
+  <data name="SaveSelectedAsImages" xml:space="preserve">
+    <value>Save Selected as Images</value>
+  </data>
+  <data name="EmailAllAsPdf" xml:space="preserve">
+    <value>Email All as PDF</value>
+  </data>
+  <data name="EmailSelectedAsPdf" xml:space="preserve">
+    <value>Email Selected as PDF</value>
+  </data>
+  <data name="EditProfileFormTitle" xml:space="preserve">
+    <value>프로파일 설정</value>
+  </data>
+  <data name="DisplayNameLabel" xml:space="preserve">
+    <value>표시 이름:</value>
+  </data>
+  <data name="WiaDriver" xml:space="preserve">
+    <value>WIA 드라이버</value>
+  </data>
+  <data name="TwainDriver" xml:space="preserve">
+    <value>TWAIN 드라이버</value>
+  </data>
+  <data name="AppleDriver" xml:space="preserve">
+    <value>Apple Driver</value>
+  </data>
+  <data name="SaneDriver" xml:space="preserve">
+    <value>SANE Driver</value>
+  </data>
+  <data name="DeviceLabel" xml:space="preserve">
+    <value>장치:</value>
+  </data>
+  <data name="ChooseDevice" xml:space="preserve">
+    <value>장치 선택</value>
+  </data>
+  <data name="UsePredefinedSettings" xml:space="preserve">
+    <value>사전 정의 설정 사용</value>
+  </data>
+  <data name="UseNativeUi" xml:space="preserve">
+    <value>네이티브 UI 사용</value>
+  </data>
+  <data name="PaperSourceLabel" xml:space="preserve">
+    <value>용지 공급:</value>
+  </data>
+  <data name="PageSizeLabel" xml:space="preserve">
+    <value>용지 크기:</value>
+  </data>
+  <data name="ResolutionLabel" xml:space="preserve">
+    <value>해상도:</value>
+  </data>
+  <data name="BrightnessLabel" xml:space="preserve">
+    <value>밝기:</value>
+  </data>
+  <data name="BitDepthLabel" xml:space="preserve">
+    <value>비트 깊이:</value>
+  </data>
+  <data name="HorizontalAlignLabel" xml:space="preserve">
+    <value>수평 정렬:</value>
+  </data>
+  <data name="ScaleLabel" xml:space="preserve">
+    <value>크기 조정:</value>
+  </data>
+  <data name="ContrastLabel" xml:space="preserve">
+    <value>대비:</value>
+  </data>
+  <data name="EnableAutoSave" xml:space="preserve">
+    <value>자동 저장 켜기</value>
+  </data>
+  <data name="AutoSaveSettings" xml:space="preserve">
+    <value>자동 저장 설정</value>
+  </data>
+  <data name="Advanced" xml:space="preserve">
+    <value>상세</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>취소</value>
+  </data>
+  <data name="Select" xml:space="preserve">
+    <value>선택</value>
+  </data>
+  <data name="SelectSource" xml:space="preserve">
+    <value>원본 선택</value>
+  </data>
+  <data name="RunInBackground" xml:space="preserve">
+    <value>Run in Background</value>
+  </data>
+  <data name="Naps2" xml:space="preserve">
+    <value>NAPS2</value>
+  </data>
+  <data name="Naps2TitleFormat" xml:space="preserve">
+    <value>NAPS2 - {0}</value>
+  </data>
+  <data name="Naps2FullName" xml:space="preserve">
+    <value>Not Another PDF Scanner</value>
+  </data>
+  <data name="OcrSetupFormTitle" xml:space="preserve">
+    <value>OCR 설정</value>
+  </data>
+  <data name="MakePdfsSearchable" xml:space="preserve">
+    <value>OCR 을 이용하여 검색 가능한 PDF 만들기</value>
+  </data>
+  <data name="OcrLanguageLabel" xml:space="preserve">
+    <value>OCR 언어:</value>
+  </data>
+  <data name="OcrModeLabel" xml:space="preserve">
+    <value>OCR mode:</value>
+  </data>
+  <data name="RunOcrAfterScanning" xml:space="preserve">
+    <value>Automatically run OCR after scanning</value>
+  </data>
+  <data name="GetMoreLanguages" xml:space="preserve">
+    <value>더 많은 언어 설치하기</value>
+  </data>
+  <data name="OcrDownloadFormTitle" xml:space="preserve">
+    <value>OCR 다운로드</value>
+  </data>
+  <data name="OcrDownloadSummaryText" xml:space="preserve">
+    <value>OCR 을 이용하여 스캔하고자 하는 각 언어를 선택 해 주세요..</value>
+  </data>
+  <data name="OcrSelectLanguageLabel" xml:space="preserve">
+    <value>한 개 또는 그 이상의 언어를 선택 해 주세요.:</value>
+  </data>
+  <data name="EstimatedDownloadSize" xml:space="preserve">
+    <value>예상 다운로드 용량: {0} MB</value>
+  </data>
+  <data name="Download" xml:space="preserve">
+    <value>다운로드</value>
+  </data>
+  <data name="DownloadProgressFormTitle" xml:space="preserve">
+    <value>다운로드 진행상황</value>
+  </data>
+  <data name="PreviewFormTitle" xml:space="preserve">
+    <value>미리보기</value>
+  </data>
+  <data name="Next" xml:space="preserve">
+    <value>다음</value>
+  </data>
+  <data name="Previous" xml:space="preserve">
+    <value>이전</value>
+  </data>
+  <data name="XOfY" xml:space="preserve">
+    <value>{1} 의 {0}</value>
+  </data>
+  <data name="Revert" xml:space="preserve">
+    <value>되돌림</value>
+  </data>
+  <data name="ApplyToSelected" xml:space="preserve">
+    <value>선택된 {0} 개의 이미지에 적용</value>
+  </data>
+  <data name="SelectAll" xml:space="preserve">
+    <value>전체 선택</value>
+  </data>
+</root>

@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="DeviceNotFound" xml:space="preserve">
+    <value>Ο επιλεγμένος σαρωτής δεν μπόρεσε να βρεθεί.</value>
+  </data>
+  <data name="DeviceOffline" xml:space="preserve">
+    <value>Ο επιλεγμένος σαρωτής βρίσκεται εκτός σύνδεσης (offline).</value>
+  </data>
+  <data name="NAPS2" xml:space="preserve">
+    <value>NAPS2</value>
+  </data>
+  <data name="NoDeviceSelected" xml:space="preserve">
+    <value>Δεν επιλέχθηκε συσκευή.</value>
+  </data>
+  <data name="NoDevicesFound" xml:space="preserve">
+    <value>Δεν βρέθηκε συσκευή σάρωσης.</value>
+  </data>
+  <data name="UnknownDriverError" xml:space="preserve">
+    <value>Σφάλμα του οδηγού σάρωσης.</value>
+  </data>
+  <data name="Version" xml:space="preserve">
+    <value>Έκδοση {0}</value>
+  </data>
+  <data name="ImportErrorCouldNot" xml:space="preserve">
+    <value>Το αρχείο '{0}' δεν μπόρεσε να εισαχθεί.</value>
+  </data>
+  <data name="NoFeederSupport" xml:space="preserve">
+    <value>Ο επιλεγμένος σαρωτής δεν υποστηρίζει χρήση τροφοδότη. Εάν ο σαρωτής πράγματι διαθέτει τροφοδότη, προτείνεται η χρήση διαφορετικού οδηγού.</value>
+  </data>
+  <data name="NoPagesInFeeder" xml:space="preserve">
+    <value>Δεν υπάρχουν σελίδες στον τροφοδότη.</value>
+  </data>
+  <data name="PdfNoPermissionToExtractContent" xml:space="preserve">
+    <value>Δεν υπάρχει δικαίωμα αντιγραφής περιεχομένου από το αρχείο '{0}'.</value>
+  </data>
+  <data name="NoDuplexSupport" xml:space="preserve">
+    <value>Ο επιλεγμένος σαρωτής δεν υποστηρίζει λειτουργία διπλής όψης. Εάν ο σαρωτής πράγματι διαθέτει λειτουργία διπλής όψης, προτείνεται η χρήση διαφορετικού οδηγού.</value>
+  </data>
+  <data name="DeviceBusy" xml:space="preserve">
+    <value>Ο επιλεγμένος σαρωτής είναι απασχολημένος.</value>
+  </data>
+  <data name="DeviceCoverOpen" xml:space="preserve">
+    <value>Το κάλυμμα του σαρωτή είναι ανοικτό.</value>
+  </data>
+  <data name="DevicePaperJam" xml:space="preserve">
+    <value>Εμπλοκή χαρτιού στον σαρωτή.</value>
+  </data>
+  <data name="DeviceWarmingUp" xml:space="preserve">
+    <value>Προθέρμανση σαρωτή.</value>
+  </data>
+  <data name="SaneNotAvailable" xml:space="preserve">
+    <value>The SANE driver is not available. Make sure to install the required packages:</value>
+  </data>
+  <data name="TesseractNotAvailable" xml:space="preserve">
+    <value>The OCR engine is not available. Make sure to install the required package:</value>
+  </data>
+  <data name="DriverNotSupported" xml:space="preserve">
+    <value>The selected driver is not supported on this system.</value>
+  </data>
+</root>

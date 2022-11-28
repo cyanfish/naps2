@@ -72,6 +72,9 @@
   <data name="FileTypeTiff" xml:space="preserve">
     <value>TIFF bestand (*.tiff, *.tif)</value>
   </data>
+  <data name="FileTypeJp2" xml:space="preserve">
+    <value>JPEG2000 File (*.jp2, *.jpx)</value>
+  </data>
   <data name="NameMissing" xml:space="preserve">
     <value>Naam ontbreekt.</value>
   </data>
@@ -151,7 +154,7 @@
     <value>Scannen</value>
   </data>
   <data name="ConfirmResetImages" xml:space="preserve">
-    <value>Weet u zeker dat u wijzingen ongedaan wilt maken aan {0} afbeelding(en)?</value>
+    <value>Weet u zeker dat u wijzigingen ongedaan wilt maken aan {0} afbeelding(en)?</value>
   </data>
   <data name="ResetImage" xml:space="preserve">
     <value>Afbeeldingen resetten</value>
@@ -187,7 +190,7 @@
     <value>van {0}</value>
   </data>
   <data name="BatchError" xml:space="preserve">
-    <value>Er is een onbekende fout opgetreden tijdens het batch scannen..</value>
+    <value>Er is een onbekende fout opgetreden tijdens het batch scannen.</value>
   </data>
   <data name="BatchStatusCancelled" xml:space="preserve">
     <value>Batch geannuleerd.</value>
@@ -221,6 +224,9 @@
   </data>
   <data name="NoDuplexSupport" xml:space="preserve">
     <value>De geselecteerde scanner ondersteunt geen dubbelzijdig scannen. Als uw scanner dit hoort te ondersteunen, probeer dan een andere driver.</value>
+  </data>
+  <data name="ProgressFormat" xml:space="preserve">
+    <value>{0} / {1}</value>
   </data>
   <data name="ImportingFormat" xml:space="preserve">
     <value>Importeren {0}...</value>
@@ -360,6 +366,9 @@
   <data name="CheckingForUpdates" xml:space="preserve">
     <value>Controleert...</value>
   </data>
+  <data name="UpdateCheckDisabled" xml:space="preserve">
+    <value>Update checking is disabled.</value>
+  </data>
   <data name="UpdateError" xml:space="preserve">
     <value>Er was een fout bij het installeren van de update.</value>
   </data>
@@ -377,15 +386,6 @@
   </data>
   <data name="ErrorEmailing" xml:space="preserve">
     <value>Er was een fout bij het verzenden van de e-mail.</value>
-  </data>
-  <data name="Naps2Server" xml:space="preserve">
-    <value>NAPS2 Server</value>
-  </data>
-  <data name="ServerStarted" xml:space="preserve">
-    <value>Server started</value>
-  </data>
-  <data name="ListeningOnPort" xml:space="preserve">
-    <value>Listening on port {0}</value>
   </data>
   <data name="ScanProgressPage" xml:space="preserve">
     <value>Scannen pagina {0}...</value>

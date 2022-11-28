@@ -225,6 +225,9 @@
   <data name="NoDuplexSupport" xml:space="preserve">
     <value>O scanner selecionado não suporta o uso duplex. Se o scanner realmente suporta duplex, tente usar um driver diferente.</value>
   </data>
+  <data name="ProgressFormat" xml:space="preserve">
+    <value>{0} / {1}</value>
+  </data>
   <data name="ImportingFormat" xml:space="preserve">
     <value>Importando {0}...</value>
   </data>
@@ -383,15 +386,6 @@
   </data>
   <data name="ErrorEmailing" xml:space="preserve">
     <value>Ocorreu um erro ao tentar enviar o e-mail.</value>
-  </data>
-  <data name="Naps2Server" xml:space="preserve">
-    <value>NAPS2 Server</value>
-  </data>
-  <data name="ServerStarted" xml:space="preserve">
-    <value>Server started</value>
-  </data>
-  <data name="ListeningOnPort" xml:space="preserve">
-    <value>Listening on port {0}</value>
   </data>
   <data name="ScanProgressPage" xml:space="preserve">
     <value>Digitalizando página {0}...</value>

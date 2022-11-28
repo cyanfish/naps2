@@ -64,7 +64,7 @@
     <value>קובץ JPEG (*.jpg, *.jpeg)</value>
   </data>
   <data name="FileTypePdf" xml:space="preserve">
-    <value>מסמך PDF (*.pdf)</value>
+    <value>PDF Document (*.pdf)</value>
   </data>
   <data name="FileTypePng" xml:space="preserve">
     <value>קובץ PNG (*.png)</value>
@@ -163,7 +163,7 @@
     <value>ישנם שינויים שלא נשמרו. האם לסגור את התוכנה ולאבד את השינויים הללו?</value>
   </data>
   <data name="ExitWithActiveOperations" xml:space="preserve">
-    <value>An operation is in progress. Are you sure you want to exit and cancel the operation?</value>
+    <value>פעולה מתבצעת. האם אתה בטוח שברצונך לצאת ולבטל את הפעולה?</value>
   </data>
   <data name="UnsavedChanges" xml:space="preserve">
     <value>שינויים שלא נשמרו</value>
@@ -225,6 +225,9 @@
   <data name="NoDuplexSupport" xml:space="preserve">
     <value>The selected scanner does not support using duplex. If your scanner is supposed to support duplex, try using a different driver.</value>
   </data>
+  <data name="ProgressFormat" xml:space="preserve">
+    <value>{0} / {1}</value>
+  </data>
   <data name="ImportingFormat" xml:space="preserve">
     <value>Importing {0}...</value>
   </data>
@@ -262,7 +265,7 @@
     <value>התקדמות העתקה</value>
   </data>
   <data name="Importing" xml:space="preserve">
-    <value>Importing...</value>
+    <value>מייבא...</value>
   </data>
   <data name="EmailPdf" xml:space="preserve">
     <value>שליחת PDF בדוא\"ל</value>
@@ -277,10 +280,10 @@
     <value>כל הקבצים</value>
   </data>
   <data name="FileTypeImageFiles" xml:space="preserve">
-    <value>Image Files</value>
+    <value>קבצי תמונה</value>
   </data>
   <data name="DeviceBusy" xml:space="preserve">
-    <value>הסורק שנבחר איננו מקוון (OFFLINE).</value>
+    <value>The selected scanner is busy.</value>
   </data>
   <data name="DeviceCoverOpen" xml:space="preserve">
     <value>The scanner's cover is open.</value>
@@ -295,13 +298,13 @@
     <value>עדכון ל- OCR זמין.</value>
   </data>
   <data name="ImageSaved" xml:space="preserve">
-    <value>Image saved.</value>
+    <value>התמונה נשמרה.</value>
   </data>
   <data name="ImagesSaved" xml:space="preserve">
     <value>{0} images saved.</value>
   </data>
   <data name="PdfSaved" xml:space="preserve">
-    <value>PDF saved.</value>
+    <value>PDF נשמר.</value>
   </data>
   <data name="NamedPageSizeFormat" xml:space="preserve">
     <value>{0} ({1}x{2} {3})</value>
@@ -322,19 +325,19 @@
     <value>Download Needed</value>
   </data>
   <data name="PdfImportComponentNeeded" xml:space="preserve">
-    <value>An additional component is needed to import this PDF file. Would you like to download it now?</value>
+    <value>נדרש רכיב נוסף כדי לייבא קובץ PDF זה. האם ברצונך להוריד אותו כעת?</value>
   </data>
   <data name="ConfirmCancelBatch" xml:space="preserve">
-    <value>Are you sure you want to cancel the batch scan?</value>
+    <value>האם אתה בטוח שאתה רוצה לבטל את קבוצות הסריקות? </value>
   </data>
   <data name="CancelBatch" xml:space="preserve">
     <value>Cancel Batch</value>
   </data>
   <data name="Donate" xml:space="preserve">
-    <value>Donate</value>
+    <value>תרום</value>
   </data>
   <data name="DonatePrompt" xml:space="preserve">
-    <value>NAPS2 is completely free. Consider making a donation.</value>
+    <value>NAPS2 הוא לגמרי בחינם. שקול לבצע תרומה.</value>
   </data>
   <data name="SaneNotAvailable" xml:space="preserve">
     <value>The SANE driver is not available. Make sure to install the required packages:</value>
@@ -367,13 +370,13 @@
     <value>Update checking is disabled.</value>
   </data>
   <data name="UpdateError" xml:space="preserve">
-    <value>An error occured when trying to install the update.</value>
+    <value>אירעה שגיאה בעת ניסיון להתקין את העדכון.</value>
   </data>
   <data name="Install" xml:space="preserve">
     <value>Install {0}</value>
   </data>
   <data name="UpdateAvailable" xml:space="preserve">
-    <value>An update is available.</value>
+    <value>קיים עדכון זמין.</value>
   </data>
   <data name="AuthError" xml:space="preserve">
     <value>An error occurred when trying to authorize.</value>
@@ -382,16 +385,7 @@
     <value>Uploading email...</value>
   </data>
   <data name="ErrorEmailing" xml:space="preserve">
-    <value>An error occurred when trying to send the email.</value>
-  </data>
-  <data name="Naps2Server" xml:space="preserve">
-    <value>NAPS2 Server</value>
-  </data>
-  <data name="ServerStarted" xml:space="preserve">
-    <value>Server started</value>
-  </data>
-  <data name="ListeningOnPort" xml:space="preserve">
-    <value>Listening on port {0}</value>
+    <value>שגיאה התרחשה בעת הנסיון לשלוח מייל..</value>
   </data>
   <data name="ScanProgressPage" xml:space="preserve">
     <value>סורק עמוד {0}...</value>

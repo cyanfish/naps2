@@ -67,7 +67,7 @@
     <value>Rechts</value>
   </data>
   <data name="PageSizeUnit_Centimetre" xml:space="preserve">
-    <value>Uitzoomen</value>
+    <value>cm</value>
   </data>
   <data name="PageSizeUnit_Inch" xml:space="preserve">
     <value>in</value>
@@ -152,5 +152,11 @@
   </data>
   <data name="WiaVersion_Default" xml:space="preserve">
     <value>Standaard</value>
+  </data>
+  <data name="OcrMode_Fast" xml:space="preserve">
+    <value>Fast</value>
+  </data>
+  <data name="OcrMode_Best" xml:space="preserve">
+    <value>Best</value>
   </data>
 </root>

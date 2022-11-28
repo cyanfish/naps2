@@ -46,16 +46,16 @@
     <value>۸۰۰ نقطه در اینچ</value>
   </data>
   <data name="EmailProviderType_CustomSmtp" xml:space="preserve">
-    <value>Custom SMTP</value>
+    <value>SMTP خاص</value>
   </data>
   <data name="EmailProviderType_Gmail" xml:space="preserve">
-    <value>Gmail</value>
+    <value>پست الکترونیکی جی‌میل</value>
   </data>
   <data name="EmailProviderType_OutlookWeb" xml:space="preserve">
-    <value>Outlook Web Access</value>
+    <value>دسترسی وب Outlook</value>
   </data>
   <data name="EmailProvider_NotSelected" xml:space="preserve">
-    <value>No provider selected.</value>
+    <value>هیچ فراهم‌کننده‌ای‌ انتخاب نشده.</value>
   </data>
   <data name="HorizontalAlign_Center" xml:space="preserve">
     <value>مرکز</value>
@@ -124,7 +124,7 @@
     <value>شیشه</value>
   </data>
   <data name="TiffComp_Auto" xml:space="preserve">
-    <value>Auto</value>
+    <value>خودکار</value>
   </data>
   <data name="TiffComp_Ccitt4" xml:space="preserve">
     <value>CCITT4</value>
@@ -133,7 +133,7 @@
     <value>LZW</value>
   </data>
   <data name="TiffComp_None" xml:space="preserve">
-    <value>انجام شد</value>
+    <value>هیچ‌کدام</value>
   </data>
   <data name="TwainImpl_Default" xml:space="preserve">
     <value>پیش‌فرض</value>
@@ -142,15 +142,21 @@
     <value>ارث (فقط رابط کاربری بومی)</value>
   </data>
   <data name="TwainImpl_MemXfer" xml:space="preserve">
-    <value>Alternative Transfer</value>
+    <value>روش انتقال جایگزین</value>
   </data>
   <data name="TwainImpl_OldDsm" xml:space="preserve">
-    <value>Old DSM</value>
+    <value>DSM قدیمی</value>
   </data>
   <data name="TwainImpl_X64" xml:space="preserve">
     <value>x64</value>
   </data>
   <data name="WiaVersion_Default" xml:space="preserve">
     <value>پیش‌فرض</value>
+  </data>
+  <data name="OcrMode_Fast" xml:space="preserve">
+    <value>Fast</value>
+  </data>
+  <data name="OcrMode_Best" xml:space="preserve">
+    <value>Best</value>
   </data>
 </root>

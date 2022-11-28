@@ -15,14 +15,14 @@
   <data name="AboutFormTitle" xml:space="preserve">
     <value>À propos</value>
   </data>
-  <data name="Copyright" xml:space="preserve">
-    <value>Copyright 2009, 2012-2020 NAPS2 Contributors</value>
+  <data name="CopyrightFormat" xml:space="preserve">
+    <value>Copyright {0} NAPS2 Contributors</value>
   </data>
   <data name="IconsFrom" xml:space="preserve">
-    <value>Icônes provenant de :</value>
+    <value>Icônes provenant de:</value>
   </data>
   <data name="CheckForUpdates" xml:space="preserve">
-    <value>Vérifier les mises à jours</value>
+    <value>Vérifier les mises à jour</value>
   </data>
   <data name="OK" xml:space="preserve">
     <value>OK</value>
@@ -33,11 +33,11 @@
   <data name="ProfilesFormTitle" xml:space="preserve">
     <value>Profils</value>
   </data>
-  <data name="Add" xml:space="preserve">
-    <value>Add</value>
+  <data name="New" xml:space="preserve">
+    <value>Nouveau</value>
   </data>
   <data name="Edit" xml:space="preserve">
-    <value>Modifier...</value>
+    <value>Modifier</value>
   </data>
   <data name="Delete" xml:space="preserve">
     <value>Supprimer</value>
@@ -61,7 +61,7 @@
     <value>Prédéfinie</value>
   </data>
   <data name="NewProfile" xml:space="preserve">
-    <value>Nouveau profil...</value>
+    <value>Nouveau profil</value>
   </data>
   <data name="BatchScan" xml:space="preserve">
     <value>Acquisition par lot</value>
@@ -100,7 +100,7 @@
     <value>Image</value>
   </data>
   <data name="View" xml:space="preserve">
-    <value>Afficher...</value>
+    <value>Afficher</value>
   </data>
   <data name="Crop" xml:space="preserve">
     <value>Recadrer</value>
@@ -121,7 +121,7 @@
     <value>Document Correction</value>
   </data>
   <data name="Reset" xml:space="preserve">
-    <value>Réinitialiser…</value>
+    <value>Réinitialiser</value>
   </data>
   <data name="Rotate" xml:space="preserve">
     <value>Rotation</value>
@@ -139,7 +139,7 @@
     <value>Réaligner</value>
   </data>
   <data name="CustomRotation" xml:space="preserve">
-    <value>Rotation personnalisée...</value>
+    <value>Rotation personnalisée</value>
   </data>
   <data name="MoveUp" xml:space="preserve">
     <value>Monter</value>
@@ -157,10 +157,10 @@
     <value>Désappairer [142536&gt;123456]</value>
   </data>
   <data name="AltInterleave" xml:space="preserve">
-    <value>Appairer alternativ. [135642&gt;123456]</value>
+    <value>Appairer alternative. [135642&gt;123456]</value>
   </data>
   <data name="AltDeinterleave" xml:space="preserve">
-    <value>Désappairer alt. [162534&gt;123456]</value>
+    <value>Désappairer alternative. [162534&gt;123456]</value>
   </data>
   <data name="Reverse" xml:space="preserve">
     <value>Inverser</value>
@@ -211,7 +211,7 @@
     <value>Paramètres de profil</value>
   </data>
   <data name="DisplayNameLabel" xml:space="preserve">
-    <value>Nom d'affichage :</value>
+    <value>Nom d'affichage:</value>
   </data>
   <data name="WiaDriver" xml:space="preserve">
     <value>Pilote WIA</value>
@@ -226,10 +226,10 @@
     <value>Pilote SANE</value>
   </data>
   <data name="DeviceLabel" xml:space="preserve">
-    <value>Périphérique :</value>
+    <value>Périphérique:</value>
   </data>
   <data name="ChooseDevice" xml:space="preserve">
-    <value>Sélectionner...</value>
+    <value>Sélectionner</value>
   </data>
   <data name="UsePredefinedSettings" xml:space="preserve">
     <value>Paramètres prédéfinis</value>
@@ -238,28 +238,28 @@
     <value>Interface native</value>
   </data>
   <data name="PaperSourceLabel" xml:space="preserve">
-    <value>Source du papier :</value>
+    <value>Source du papier:</value>
   </data>
   <data name="PageSizeLabel" xml:space="preserve">
-    <value>Taille de la page :</value>
+    <value>Taille de la page:</value>
   </data>
   <data name="ResolutionLabel" xml:space="preserve">
-    <value>Résolution :</value>
+    <value>Résolution:</value>
   </data>
   <data name="BrightnessLabel" xml:space="preserve">
-    <value>Luminosité :</value>
+    <value>Luminosité:</value>
   </data>
   <data name="BitDepthLabel" xml:space="preserve">
-    <value>Profondeur d'échantillonnage :</value>
+    <value>Profondeur d'échantillonnage:</value>
   </data>
   <data name="HorizontalAlignLabel" xml:space="preserve">
-    <value>Alignement horizontal :</value>
+    <value>Alignement horizontal:</value>
   </data>
   <data name="ScaleLabel" xml:space="preserve">
-    <value>Échelle :</value>
+    <value>Échelle:</value>
   </data>
   <data name="ContrastLabel" xml:space="preserve">
-    <value>Contraste :</value>
+    <value>Contraste:</value>
   </data>
   <data name="EnableAutoSave" xml:space="preserve">
     <value>Activer l'enregistrement automatique</value>
@@ -268,7 +268,7 @@
     <value>Paramètres d'enregistrement automatique</value>
   </data>
   <data name="Advanced" xml:space="preserve">
-    <value>Avancés…</value>
+    <value>Avancés</value>
   </data>
   <data name="Cancel" xml:space="preserve">
     <value>Annuler</value>
@@ -298,10 +298,10 @@
     <value>Rendre possible la recherche dans les PDF issus d'OCR</value>
   </data>
   <data name="OcrLanguageLabel" xml:space="preserve">
-    <value>Langue OCR :</value>
+    <value>Langue OCR:</value>
   </data>
   <data name="OcrModeLabel" xml:space="preserve">
-    <value>Mode de l'OCR :</value>
+    <value>Mode de l'OCR:</value>
   </data>
   <data name="RunOcrAfterScanning" xml:space="preserve">
     <value>Exécuter automatiquement l'OCR après la numérisation</value>
@@ -316,7 +316,7 @@
     <value>Télécharger chaque langue OCR appropriée au document numérisé.</value>
   </data>
   <data name="OcrSelectLanguageLabel" xml:space="preserve">
-    <value>Sélectionner une ou plusieurs langues :</value>
+    <value>Sélectionner une ou plusieurs langues:</value>
   </data>
   <data name="EstimatedDownloadSize" xml:space="preserve">
     <value>Taille estimée du téléchargement : {0} Mo</value>
@@ -326,5 +326,26 @@
   </data>
   <data name="DownloadProgressFormTitle" xml:space="preserve">
     <value>Progression du téléchargement</value>
+  </data>
+  <data name="PreviewFormTitle" xml:space="preserve">
+    <value>Aperçu</value>
+  </data>
+  <data name="Next" xml:space="preserve">
+    <value>Suivant</value>
+  </data>
+  <data name="Previous" xml:space="preserve">
+    <value>Précédent</value>
+  </data>
+  <data name="XOfY" xml:space="preserve">
+    <value>{0} sur {1}</value>
+  </data>
+  <data name="Revert" xml:space="preserve">
+    <value>Rétablir</value>
+  </data>
+  <data name="ApplyToSelected" xml:space="preserve">
+    <value>Appliquer aux {0} images sélectionnées</value>
+  </data>
+  <data name="SelectAll" xml:space="preserve">
+    <value>Tout sélectionner</value>
   </data>
 </root>

@@ -13,13 +13,13 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="BitDepth_1BlackAndWhite" xml:space="preserve">
-    <value>Crno/belo</value>
+    <value>Црно/бело</value>
   </data>
   <data name="BitDepth_24Color" xml:space="preserve">
-    <value>24-bitna Boja</value>
+    <value>24-битна Боја</value>
   </data>
   <data name="BitDepth_8Grayscale" xml:space="preserve">
-    <value>Nijanse sive</value>
+    <value>Нијансе сиве</value>
   </data>
   <data name="Dpi_100" xml:space="preserve">
     <value>100 dpi</value>
@@ -58,13 +58,13 @@
     <value>No provider selected.</value>
   </data>
   <data name="HorizontalAlign_Center" xml:space="preserve">
-    <value>Centrirano</value>
+    <value>Центрирано</value>
   </data>
   <data name="HorizontalAlign_Left" xml:space="preserve">
-    <value>Levo</value>
+    <value>Лево</value>
   </data>
   <data name="HorizontalAlign_Right" xml:space="preserve">
-    <value>Desno</value>
+    <value>Десно</value>
   </data>
   <data name="PageSizeUnit_Centimetre" xml:space="preserve">
     <value>cm</value>
@@ -91,7 +91,7 @@
     <value>B5 (176x250 mm)</value>
   </data>
   <data name="PageSize_Custom" xml:space="preserve">
-    <value>Proizvoljno...</value>
+    <value>Произвољно...</value>
   </data>
   <data name="PageSize_Legal" xml:space="preserve">
     <value>US Legal (8.5x14 in)</value>
@@ -100,7 +100,7 @@
     <value>US Letter (8.5x11 in)</value>
   </data>
   <data name="PdfCompat_Default" xml:space="preserve">
-    <value>Podrazumevano</value>
+    <value>Подразумевано</value>
   </data>
   <data name="PdfCompat_PdfA1B" xml:space="preserve">
     <value>PDF/A-1b</value>
@@ -115,13 +115,13 @@
     <value>PDF/A-3u</value>
   </data>
   <data name="Source_Duplex" xml:space="preserve">
-    <value>Dvostrano</value>
+    <value>Двострано</value>
   </data>
   <data name="Source_Feeder" xml:space="preserve">
-    <value>Umetač</value>
+    <value>Увлакач (Уметач)</value>
   </data>
   <data name="Source_Glass" xml:space="preserve">
-    <value>Staklo (flatbed)</value>
+    <value>Стакло (flatbed)</value>
   </data>
   <data name="TiffComp_Auto" xml:space="preserve">
     <value>Auto</value>
@@ -133,13 +133,13 @@
     <value>LZW</value>
   </data>
   <data name="TiffComp_None" xml:space="preserve">
-    <value>Gotovo</value>
+    <value>None</value>
   </data>
   <data name="TwainImpl_Default" xml:space="preserve">
-    <value>Podrazumevano</value>
+    <value>Подразумевано</value>
   </data>
   <data name="TwainImpl_Legacy" xml:space="preserve">
-    <value>Legacy (native UI only)</value>
+    <value>Легат (изворни кориснички интерфејс)</value>
   </data>
   <data name="TwainImpl_MemXfer" xml:space="preserve">
     <value>Alternative Transfer</value>
@@ -151,6 +151,12 @@
     <value>x64</value>
   </data>
   <data name="WiaVersion_Default" xml:space="preserve">
-    <value>Podrazumevano</value>
+    <value>Подразумевано</value>
+  </data>
+  <data name="OcrMode_Fast" xml:space="preserve">
+    <value>Fast</value>
+  </data>
+  <data name="OcrMode_Best" xml:space="preserve">
+    <value>Best</value>
   </data>
 </root>

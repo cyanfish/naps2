@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="DeviceNotFound" xml:space="preserve">
+    <value>Den valgte skanner kan ikke findes.</value>
+  </data>
+  <data name="DeviceOffline" xml:space="preserve">
+    <value>Den valgte skanner er offline.</value>
+  </data>
+  <data name="NAPS2" xml:space="preserve">
+    <value>NAPS2</value>
+  </data>
+  <data name="NoDeviceSelected" xml:space="preserve">
+    <value>Ingen enheder valgt.</value>
+  </data>
+  <data name="NoDevicesFound" xml:space="preserve">
+    <value>Ingen skannerenheder blev fundet.</value>
+  </data>
+  <data name="UnknownDriverError" xml:space="preserve">
+    <value>Der opstod en fejl med scanner driveren.</value>
+  </data>
+  <data name="Version" xml:space="preserve">
+    <value>Version {0}</value>
+  </data>
+  <data name="ImportErrorCouldNot" xml:space="preserve">
+    <value>Filen '{0}' kunne ikke blive importeret.</value>
+  </data>
+  <data name="NoFeederSupport" xml:space="preserve">
+    <value>Den valgte scanner understøtter ikke at bruge en dokumentføder. Hvis din scanner har en dokumentføder, skal du prøve at bruge en anden driver.</value>
+  </data>
+  <data name="NoPagesInFeeder" xml:space="preserve">
+    <value>Der er ingen billeder i føderen.</value>
+  </data>
+  <data name="PdfNoPermissionToExtractContent" xml:space="preserve">
+    <value>Du har ikke rettigheder til at kopiere indhold fra filen '{0}'.</value>
+  </data>
+  <data name="NoDuplexSupport" xml:space="preserve">
+    <value>Den valgte scanner understøtter ikke brugen af duplex. Hvis din scanner burde understøtte duplex, kan du prøve at bruge en anden driver.</value>
+  </data>
+  <data name="DeviceBusy" xml:space="preserve">
+    <value>Den valgte scanner er optaget.</value>
+  </data>
+  <data name="DeviceCoverOpen" xml:space="preserve">
+    <value>Scannerens cover er åbent.</value>
+  </data>
+  <data name="DevicePaperJam" xml:space="preserve">
+    <value>Scanneren har papirstop.</value>
+  </data>
+  <data name="DeviceWarmingUp" xml:space="preserve">
+    <value>Scanneren varmer op.</value>
+  </data>
+  <data name="SaneNotAvailable" xml:space="preserve">
+    <value>The SANE driver is not available. Make sure to install the required packages:</value>
+  </data>
+  <data name="TesseractNotAvailable" xml:space="preserve">
+    <value>The OCR engine is not available. Make sure to install the required package:</value>
+  </data>
+  <data name="DriverNotSupported" xml:space="preserve">
+    <value>The selected driver is not supported on this system.</value>
+  </data>
+</root>

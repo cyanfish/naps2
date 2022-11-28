@@ -72,6 +72,9 @@
   <data name="FileTypeTiff" xml:space="preserve">
     <value>Plik TIFF (*.tiff, *.tif)</value>
   </data>
+  <data name="FileTypeJp2" xml:space="preserve">
+    <value>Plik JPEG2000 (*.jp2, *.jpx)</value>
+  </data>
   <data name="NameMissing" xml:space="preserve">
     <value>Brak nazwy.</value>
   </data>
@@ -118,7 +121,7 @@
     <value>Instalacja nieudana</value>
   </data>
   <data name="AllCount" xml:space="preserve">
-    <value>Wszystko ({0})</value>
+    <value>Wszystkie ({0})</value>
   </data>
   <data name="SelectedCount" xml:space="preserve">
     <value>Zaznaczone ({0})</value>
@@ -145,7 +148,7 @@
     <value>Nie można pobrać jednego lub więcej plików.</value>
   </data>
   <data name="CustomPageSizeFormat" xml:space="preserve">
-    <value>Niestandardowy ({0}x{1} {2})</value>
+    <value>Niestandardowy ({0} x {1} {2})</value>
   </data>
   <data name="Scan" xml:space="preserve">
     <value>Skanuj</value>
@@ -157,7 +160,7 @@
     <value>Zresetuj obraz</value>
   </data>
   <data name="ExitWithUnsavedChanges" xml:space="preserve">
-    <value>Dokonałeś niezapisanych zmian. Czy na pewno chcesz zamknąć i odrzucić te zmiany?</value>
+    <value>Masz niezapisane zmiany. Czy na pewno chcesz wyjść i odrzucić te zmiany?</value>
   </data>
   <data name="ExitWithActiveOperations" xml:space="preserve">
     <value>Operacja jest w toku. Czy na pewno chcesz zakończyć i anulować operację?</value>
@@ -222,6 +225,9 @@
   <data name="NoDuplexSupport" xml:space="preserve">
     <value>Wybrany skaner nie obsługuje druku obustronnego. Jeśli twój skaner powinien wspierać druk obustronny, spróbuj użyć innego sterownika.</value>
   </data>
+  <data name="ProgressFormat" xml:space="preserve">
+    <value>{0} / {1}</value>
+  </data>
   <data name="ImportingFormat" xml:space="preserve">
     <value>Importowanie {0}...</value>
   </data>
@@ -265,7 +271,7 @@
     <value>Wyślij PDF</value>
   </data>
   <data name="EmailPdfProgress" xml:space="preserve">
-    <value>Postęp e-maila PDF</value>
+    <value>Postęp wysyłania PDF</value>
   </data>
   <data name="AutoSaveError" xml:space="preserve">
     <value>Wystąpił błąd podczas próby automatycznego zapisania.</value>
@@ -301,7 +307,7 @@
     <value>Zapisano PDF.</value>
   </data>
   <data name="NamedPageSizeFormat" xml:space="preserve">
-    <value>{0} ({1}x{2} {3})</value>
+    <value>{0} ({1} x {2} {3})</value>
   </data>
   <data name="ConfirmDelete" xml:space="preserve">
     <value>Are you sure you want to delete "{0}"?</value>
@@ -360,6 +366,9 @@
   <data name="CheckingForUpdates" xml:space="preserve">
     <value>Sprawdzanie...</value>
   </data>
+  <data name="UpdateCheckDisabled" xml:space="preserve">
+    <value>Sprawdzanie aktualizacji jest wyłączone.</value>
+  </data>
   <data name="UpdateError" xml:space="preserve">
     <value>Wystąpił błąd podczas próby zainstalowania aktualizacji.</value>
   </data>
@@ -377,15 +386,6 @@
   </data>
   <data name="ErrorEmailing" xml:space="preserve">
     <value>Wystąpił błąd podczas próby wysłania e-maila.</value>
-  </data>
-  <data name="Naps2Server" xml:space="preserve">
-    <value>NAPS2 Server</value>
-  </data>
-  <data name="ServerStarted" xml:space="preserve">
-    <value>Server started</value>
-  </data>
-  <data name="ListeningOnPort" xml:space="preserve">
-    <value>Listening on port {0}</value>
   </data>
   <data name="ScanProgressPage" xml:space="preserve">
     <value>Skanowanie strony {0}...</value>

@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="DeviceNotFound" xml:space="preserve">
+    <value>Vybraný skener sa nenašiel.</value>
+  </data>
+  <data name="DeviceOffline" xml:space="preserve">
+    <value>Vybraný skener je offline.</value>
+  </data>
+  <data name="NAPS2" xml:space="preserve">
+    <value>NAPS2</value>
+  </data>
+  <data name="NoDeviceSelected" xml:space="preserve">
+    <value>Nebolo vybrané žiadne zariadenie.</value>
+  </data>
+  <data name="NoDevicesFound" xml:space="preserve">
+    <value>Nenašlo sa žiadne skenovacie zariadenie.</value>
+  </data>
+  <data name="UnknownDriverError" xml:space="preserve">
+    <value>Pri ovládači skenovania sa vyskytla chyba.</value>
+  </data>
+  <data name="Version" xml:space="preserve">
+    <value>Verzia {0}</value>
+  </data>
+  <data name="ImportErrorCouldNot" xml:space="preserve">
+    <value>Súbor '{0}' sa nemožno importovať.</value>
+  </data>
+  <data name="NoFeederSupport" xml:space="preserve">
+    <value>Vybraný skener nepodporuje použitie podávača. Ak skener obsahuje podávač, skúste použiť iný ovládač.</value>
+  </data>
+  <data name="NoPagesInFeeder" xml:space="preserve">
+    <value>V podávači nie sú žiadne listy.</value>
+  </data>
+  <data name="PdfNoPermissionToExtractContent" xml:space="preserve">
+    <value>Nemáte povolenie na kopírovanie obsahu zo súboru '{0}'.</value>
+  </data>
+  <data name="NoDuplexSupport" xml:space="preserve">
+    <value>Vybraný skener neskenuje obojstranne. Ak sa v parametroch skenera uvádza, že ho podporuje, potom treba nájsť iný ovládač.</value>
+  </data>
+  <data name="DeviceBusy" xml:space="preserve">
+    <value>Vybraný skener je zaneprázdnený.</value>
+  </data>
+  <data name="DeviceCoverOpen" xml:space="preserve">
+    <value>Kryt skenera je otvorený.</value>
+  </data>
+  <data name="DevicePaperJam" xml:space="preserve">
+    <value>V skeneri sa zasekol papier.</value>
+  </data>
+  <data name="DeviceWarmingUp" xml:space="preserve">
+    <value>Skener sa zahrieva.</value>
+  </data>
+  <data name="SaneNotAvailable" xml:space="preserve">
+    <value>Ovládač SANE nie je k dispozícii. Preverte požadované balíky pre inštaláciu:</value>
+  </data>
+  <data name="TesseractNotAvailable" xml:space="preserve">
+    <value>Mechanizmus OCR nie je k dispozícii. Určite preverte požadovaný balík pre inštaláciu:</value>
+  </data>
+  <data name="DriverNotSupported" xml:space="preserve">
+    <value>Vybraný ovládač nie je v tomto systéme podporovaný.</value>
+  </data>
+</root>

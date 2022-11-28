@@ -72,6 +72,9 @@
   <data name="FileTypeTiff" xml:space="preserve">
     <value>Skedar TIFF (*.tiff, *.tif)</value>
   </data>
+  <data name="FileTypeJp2" xml:space="preserve">
+    <value>JPEG2000 File (*.jp2, *.jpx)</value>
+  </data>
   <data name="NameMissing" xml:space="preserve">
     <value>Emri mungon.</value>
   </data>
@@ -220,7 +223,10 @@
     <value>Po ruan rezultatet në grup...</value>
   </data>
   <data name="NoDuplexSupport" xml:space="preserve">
-    <value>Skaneri i zgjedhur nuk e mbështet dupleksin. Nëse skaneri supozohet se e pranon dupleksin, provoni të përdorni një drejtues tjetër..</value>
+    <value>Skaneri i zgjedhur nuk e mbështet dupleksin. Nëse skaneri supozohet se e pranon dupleksin, provoni të përdorni një drejtues tjetër.</value>
+  </data>
+  <data name="ProgressFormat" xml:space="preserve">
+    <value>{0} / {1}</value>
   </data>
   <data name="ImportingFormat" xml:space="preserve">
     <value>Po importon {0}...</value>
@@ -310,37 +316,37 @@
     <value>Skedari nuk mund të mbishkruhej sepse aktualisht është në përdorim.</value>
   </data>
   <data name="AutoDeskewing" xml:space="preserve">
-    <value>Deskewing...</value>
+    <value>Po drejton...</value>
   </data>
   <data name="AutoDeskewProgress" xml:space="preserve">
-    <value>Deskew Progress</value>
+    <value>Progresi i drejtimit</value>
   </data>
   <data name="DownloadNeeded" xml:space="preserve">
-    <value>Download Needed</value>
+    <value>Nevojitet shkarkim</value>
   </data>
   <data name="PdfImportComponentNeeded" xml:space="preserve">
     <value>Nevojitet një komponent shtesë për të importuar këtë skedar PDF. A dëshiron ta shkarkosh tani?</value>
   </data>
   <data name="ConfirmCancelBatch" xml:space="preserve">
-    <value>Are you sure you want to cancel the batch scan?</value>
+    <value>Je i sigurt se do ta anulosh skanimin në grup?</value>
   </data>
   <data name="CancelBatch" xml:space="preserve">
-    <value>Cancel Batch</value>
+    <value>Anulo Grupin</value>
   </data>
   <data name="Donate" xml:space="preserve">
     <value>Dhuro</value>
   </data>
   <data name="DonatePrompt" xml:space="preserve">
-    <value>NAPS2 is completely free. Consider making a donation.</value>
+    <value>NAPS2 is tërësisht falas. Mendoni të dhuroni.</value>
   </data>
   <data name="SaneNotAvailable" xml:space="preserve">
-    <value>The SANE driver is not available. Make sure to install the required packages:</value>
+    <value>Drejtuesi SANE nuk është i disponueshëm. Sigurohuni të instaloni paketat e duhura:</value>
   </data>
   <data name="TesseractNotAvailable" xml:space="preserve">
     <value>Motori i OCR nuk është i disponueshëm. Sigurohu të instalosh paketën e kërkuar:</value>
   </data>
   <data name="DriverNotSupported" xml:space="preserve">
-    <value>The selected driver is not supported on this system.</value>
+    <value>Drejtuesi i zgjedhur nuk mbështetet në këtë sistem.</value>
   </data>
   <data name="OcrProgress" xml:space="preserve">
     <value>Progresi i OCR</value>
@@ -355,13 +361,16 @@
     <value>Po përditëson...</value>
   </data>
   <data name="NoUpdates" xml:space="preserve">
-    <value>No updates available.</value>
+    <value>Nuk ka përditësime të disponueshme.</value>
   </data>
   <data name="CheckingForUpdates" xml:space="preserve">
     <value>Po kontrollon...</value>
   </data>
+  <data name="UpdateCheckDisabled" xml:space="preserve">
+    <value>Update checking is disabled.</value>
+  </data>
   <data name="UpdateError" xml:space="preserve">
-    <value>Ndodhi një gabim gjatë instalimit të përditësimit .</value>
+    <value>Ndodhi një gabim gjatë instalimit të përditësimit.</value>
   </data>
   <data name="Install" xml:space="preserve">
     <value>Instalo {0}</value>
@@ -377,15 +386,6 @@
   </data>
   <data name="ErrorEmailing" xml:space="preserve">
     <value>Ndodhi një gabim gjatë provës për të dërguar email.</value>
-  </data>
-  <data name="Naps2Server" xml:space="preserve">
-    <value>NAPS2 Server</value>
-  </data>
-  <data name="ServerStarted" xml:space="preserve">
-    <value>Server started</value>
-  </data>
-  <data name="ListeningOnPort" xml:space="preserve">
-    <value>Listening on port {0}</value>
   </data>
   <data name="ScanProgressPage" xml:space="preserve">
     <value>Po skanon faqen {0}...</value>

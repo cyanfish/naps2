@@ -1,0 +1,351 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AboutFormTitle" xml:space="preserve">
+    <value>О програму</value>
+  </data>
+  <data name="CopyrightFormat" xml:space="preserve">
+    <value>Copyright {0} NAPS2 Contributors</value>
+  </data>
+  <data name="IconsFrom" xml:space="preserve">
+    <value>Иконице из:</value>
+  </data>
+  <data name="CheckForUpdates" xml:space="preserve">
+    <value>Check for updates</value>
+  </data>
+  <data name="OK" xml:space="preserve">
+    <value>У реду</value>
+  </data>
+  <data name="Donate" xml:space="preserve">
+    <value>Donate</value>
+  </data>
+  <data name="ProfilesFormTitle" xml:space="preserve">
+    <value>Профили</value>
+  </data>
+  <data name="New" xml:space="preserve">
+    <value>Нови</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>Уреди</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Обриши</value>
+  </data>
+  <data name="Scan" xml:space="preserve">
+    <value>Скенирај</value>
+  </data>
+  <data name="SetDefault" xml:space="preserve">
+    <value>Постави као подразумевано</value>
+  </data>
+  <data name="Copy" xml:space="preserve">
+    <value>Копирај</value>
+  </data>
+  <data name="Paste" xml:space="preserve">
+    <value>Налепи</value>
+  </data>
+  <data name="Done" xml:space="preserve">
+    <value>Готово</value>
+  </data>
+  <data name="Default" xml:space="preserve">
+    <value>Подразумевано</value>
+  </data>
+  <data name="NewProfile" xml:space="preserve">
+    <value>Нови профил</value>
+  </data>
+  <data name="BatchScan" xml:space="preserve">
+    <value>Пакетно скенирање</value>
+  </data>
+  <data name="Ocr" xml:space="preserve">
+    <value>OCR</value>
+  </data>
+  <data name="Profiles" xml:space="preserve">
+    <value>Профили</value>
+  </data>
+  <data name="Import" xml:space="preserve">
+    <value>Увези</value>
+  </data>
+  <data name="SavePdf" xml:space="preserve">
+    <value>Сними PDF</value>
+  </data>
+  <data name="PdfSettings" xml:space="preserve">
+    <value>PDF подешавања</value>
+  </data>
+  <data name="SaveImages" xml:space="preserve">
+    <value>Сними слике</value>
+  </data>
+  <data name="ImageSettings" xml:space="preserve">
+    <value>Подешавање слике</value>
+  </data>
+  <data name="EmailPdf" xml:space="preserve">
+    <value>Пошаљи мејлом ПДФ</value>
+  </data>
+  <data name="EmailSettings" xml:space="preserve">
+    <value>Е-маил подешавања</value>
+  </data>
+  <data name="Print" xml:space="preserve">
+    <value>Штампај</value>
+  </data>
+  <data name="Image" xml:space="preserve">
+    <value>Слика</value>
+  </data>
+  <data name="View" xml:space="preserve">
+    <value>Поглед</value>
+  </data>
+  <data name="Crop" xml:space="preserve">
+    <value>Исеци</value>
+  </data>
+  <data name="BrightnessContrast" xml:space="preserve">
+    <value>Brightness / Contrast</value>
+  </data>
+  <data name="HueSaturation" xml:space="preserve">
+    <value>Hue / Saturation</value>
+  </data>
+  <data name="BlackAndWhite" xml:space="preserve">
+    <value>Црно/бело</value>
+  </data>
+  <data name="Sharpen" xml:space="preserve">
+    <value>Sharpen</value>
+  </data>
+  <data name="DocumentCorrection" xml:space="preserve">
+    <value>Document Correction</value>
+  </data>
+  <data name="Reset" xml:space="preserve">
+    <value>Ресет</value>
+  </data>
+  <data name="Rotate" xml:space="preserve">
+    <value>Ротирај</value>
+  </data>
+  <data name="RotateLeft" xml:space="preserve">
+    <value>Ротирај лево</value>
+  </data>
+  <data name="RotateRight" xml:space="preserve">
+    <value>Ротирај десно</value>
+  </data>
+  <data name="Flip" xml:space="preserve">
+    <value>Окрени</value>
+  </data>
+  <data name="Deskew" xml:space="preserve">
+    <value>Deskew</value>
+  </data>
+  <data name="CustomRotation" xml:space="preserve">
+    <value>Произвољна ротација</value>
+  </data>
+  <data name="MoveUp" xml:space="preserve">
+    <value>Помери горе</value>
+  </data>
+  <data name="MoveDown" xml:space="preserve">
+    <value>Помери доле</value>
+  </data>
+  <data name="Reorder" xml:space="preserve">
+    <value>Ресортирај</value>
+  </data>
+  <data name="Interleave" xml:space="preserve">
+    <value>Укрштање</value>
+  </data>
+  <data name="Deinterleave" xml:space="preserve">
+    <value>Неукрштено</value>
+  </data>
+  <data name="AltInterleave" xml:space="preserve">
+    <value>Измени испреплитаност</value>
+  </data>
+  <data name="AltDeinterleave" xml:space="preserve">
+    <value>Измени неиспреплитаност</value>
+  </data>
+  <data name="Reverse" xml:space="preserve">
+    <value>Уназад</value>
+  </data>
+  <data name="Clear" xml:space="preserve">
+    <value>Очисти</value>
+  </data>
+  <data name="ClearAll" xml:space="preserve">
+    <value>Clear All</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>Језик (language)</value>
+  </data>
+  <data name="About" xml:space="preserve">
+    <value>О програму</value>
+  </data>
+  <data name="Zoom" xml:space="preserve">
+    <value>Uvećaj/Umanji</value>
+  </data>
+  <data name="ZoomIn" xml:space="preserve">
+    <value>Увеличај</value>
+  </data>
+  <data name="ZoomOut" xml:space="preserve">
+    <value>Смањи</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="SaveAllAsPdf" xml:space="preserve">
+    <value>Save All as PDF</value>
+  </data>
+  <data name="SaveSelectedAsPdf" xml:space="preserve">
+    <value>Save Selected as PDF</value>
+  </data>
+  <data name="SaveAllAsImages" xml:space="preserve">
+    <value>Save All as Images</value>
+  </data>
+  <data name="SaveSelectedAsImages" xml:space="preserve">
+    <value>Save Selected as Images</value>
+  </data>
+  <data name="EmailAllAsPdf" xml:space="preserve">
+    <value>Email All as PDF</value>
+  </data>
+  <data name="EmailSelectedAsPdf" xml:space="preserve">
+    <value>Email Selected as PDF</value>
+  </data>
+  <data name="EditProfileFormTitle" xml:space="preserve">
+    <value>Поставке профила</value>
+  </data>
+  <data name="DisplayNameLabel" xml:space="preserve">
+    <value>Име за приказ:</value>
+  </data>
+  <data name="WiaDriver" xml:space="preserve">
+    <value>WIA Драјвер</value>
+  </data>
+  <data name="TwainDriver" xml:space="preserve">
+    <value>ТWАИН Драјвер</value>
+  </data>
+  <data name="AppleDriver" xml:space="preserve">
+    <value>Apple Driver</value>
+  </data>
+  <data name="SaneDriver" xml:space="preserve">
+    <value>SANE Driver</value>
+  </data>
+  <data name="DeviceLabel" xml:space="preserve">
+    <value>Уређај:</value>
+  </data>
+  <data name="ChooseDevice" xml:space="preserve">
+    <value>Одаберите уређај</value>
+  </data>
+  <data name="UsePredefinedSettings" xml:space="preserve">
+    <value>Користи предефинисане поставке</value>
+  </data>
+  <data name="UseNativeUi" xml:space="preserve">
+    <value>Користи изворни кориснички интерфејс</value>
+  </data>
+  <data name="PaperSourceLabel" xml:space="preserve">
+    <value>извор папира:</value>
+  </data>
+  <data name="PageSizeLabel" xml:space="preserve">
+    <value>Величина странице:</value>
+  </data>
+  <data name="ResolutionLabel" xml:space="preserve">
+    <value>Резолуција:</value>
+  </data>
+  <data name="BrightnessLabel" xml:space="preserve">
+    <value>Осветљеност:</value>
+  </data>
+  <data name="BitDepthLabel" xml:space="preserve">
+    <value>Дубина битова:</value>
+  </data>
+  <data name="HorizontalAlignLabel" xml:space="preserve">
+    <value>Водоравно поравнање:</value>
+  </data>
+  <data name="ScaleLabel" xml:space="preserve">
+    <value>Размер:</value>
+  </data>
+  <data name="ContrastLabel" xml:space="preserve">
+    <value>Контраст:</value>
+  </data>
+  <data name="EnableAutoSave" xml:space="preserve">
+    <value>Омогући аутоматско снимање</value>
+  </data>
+  <data name="AutoSaveSettings" xml:space="preserve">
+    <value>Подешавања аутоматског снимања</value>
+  </data>
+  <data name="Advanced" xml:space="preserve">
+    <value>Напредне опције</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Прекини</value>
+  </data>
+  <data name="Select" xml:space="preserve">
+    <value>Изабери</value>
+  </data>
+  <data name="SelectSource" xml:space="preserve">
+    <value>Одабери извор</value>
+  </data>
+  <data name="RunInBackground" xml:space="preserve">
+    <value>Run in Background</value>
+  </data>
+  <data name="Naps2" xml:space="preserve">
+    <value>NAPS2</value>
+  </data>
+  <data name="Naps2TitleFormat" xml:space="preserve">
+    <value>NAPS2 - {0}</value>
+  </data>
+  <data name="Naps2FullName" xml:space="preserve">
+    <value>Not Another PDF Scanner</value>
+  </data>
+  <data name="OcrSetupFormTitle" xml:space="preserve">
+    <value>Подеси OCR</value>
+  </data>
+  <data name="MakePdfsSearchable" xml:space="preserve">
+    <value>Учините PDF-ове претраживим користећи OCR</value>
+  </data>
+  <data name="OcrLanguageLabel" xml:space="preserve">
+    <value>OCR језик:</value>
+  </data>
+  <data name="OcrModeLabel" xml:space="preserve">
+    <value>OCR mode:</value>
+  </data>
+  <data name="RunOcrAfterScanning" xml:space="preserve">
+    <value>Automatically run OCR after scanning</value>
+  </data>
+  <data name="GetMoreLanguages" xml:space="preserve">
+    <value>Инсталирај више језика</value>
+  </data>
+  <data name="OcrDownloadFormTitle" xml:space="preserve">
+    <value>Преузми OCR</value>
+  </data>
+  <data name="OcrDownloadSummaryText" xml:space="preserve">
+    <value>Коришћење ОЦР-а захтева да преузмете сваки језик који желите да скенирате.</value>
+  </data>
+  <data name="OcrSelectLanguageLabel" xml:space="preserve">
+    <value>Изаберите један или више језика:</value>
+  </data>
+  <data name="EstimatedDownloadSize" xml:space="preserve">
+    <value>Процењена величина преузимања: {0} MB</value>
+  </data>
+  <data name="Download" xml:space="preserve">
+    <value>Преузми</value>
+  </data>
+  <data name="DownloadProgressFormTitle" xml:space="preserve">
+    <value>Ток преузимања</value>
+  </data>
+  <data name="PreviewFormTitle" xml:space="preserve">
+    <value>Преглед</value>
+  </data>
+  <data name="Next" xml:space="preserve">
+    <value>Следеће</value>
+  </data>
+  <data name="Previous" xml:space="preserve">
+    <value>Претходни</value>
+  </data>
+  <data name="XOfY" xml:space="preserve">
+    <value>{0} од {1}</value>
+  </data>
+  <data name="Revert" xml:space="preserve">
+    <value>Врати</value>
+  </data>
+  <data name="ApplyToSelected" xml:space="preserve">
+    <value>Примени на свих {0} изабраних слика</value>
+  </data>
+  <data name="SelectAll" xml:space="preserve">
+    <value>Изабери све</value>
+  </data>
+</root>

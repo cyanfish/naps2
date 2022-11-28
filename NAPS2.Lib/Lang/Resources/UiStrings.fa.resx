@@ -1,0 +1,351 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AboutFormTitle" xml:space="preserve">
+    <value>درباره</value>
+  </data>
+  <data name="CopyrightFormat" xml:space="preserve">
+    <value>Copyright {0} NAPS2 Contributors</value>
+  </data>
+  <data name="IconsFrom" xml:space="preserve">
+    <value>آیکون‌ها از:</value>
+  </data>
+  <data name="CheckForUpdates" xml:space="preserve">
+    <value>بررسی وجود نسخه جدید</value>
+  </data>
+  <data name="OK" xml:space="preserve">
+    <value>تأیید</value>
+  </data>
+  <data name="Donate" xml:space="preserve">
+    <value>کمک مالی</value>
+  </data>
+  <data name="ProfilesFormTitle" xml:space="preserve">
+    <value>پروفایل‌ها</value>
+  </data>
+  <data name="New" xml:space="preserve">
+    <value>جدید</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>ویرایش</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>حذف</value>
+  </data>
+  <data name="Scan" xml:space="preserve">
+    <value>اسکن</value>
+  </data>
+  <data name="SetDefault" xml:space="preserve">
+    <value>پیش‌فرض کن</value>
+  </data>
+  <data name="Copy" xml:space="preserve">
+    <value>رونوشت</value>
+  </data>
+  <data name="Paste" xml:space="preserve">
+    <value>چسباندن</value>
+  </data>
+  <data name="Done" xml:space="preserve">
+    <value>انجام شد</value>
+  </data>
+  <data name="Default" xml:space="preserve">
+    <value>پیش‌فرض</value>
+  </data>
+  <data name="NewProfile" xml:space="preserve">
+    <value>مجموعه تنظیمات جدید</value>
+  </data>
+  <data name="BatchScan" xml:space="preserve">
+    <value>اسکن دسته‌ای</value>
+  </data>
+  <data name="Ocr" xml:space="preserve">
+    <value>OCR</value>
+  </data>
+  <data name="Profiles" xml:space="preserve">
+    <value>پروفایل‌ها</value>
+  </data>
+  <data name="Import" xml:space="preserve">
+    <value>وارد کردن</value>
+  </data>
+  <data name="SavePdf" xml:space="preserve">
+    <value>ذخیره PDF</value>
+  </data>
+  <data name="PdfSettings" xml:space="preserve">
+    <value>تنظیمات پی‌دی‌اف</value>
+  </data>
+  <data name="SaveImages" xml:space="preserve">
+    <value>ذخیره کردن تصاویر</value>
+  </data>
+  <data name="ImageSettings" xml:space="preserve">
+    <value>تنظیمات تصویر</value>
+  </data>
+  <data name="EmailPdf" xml:space="preserve">
+    <value>رایانامه PDF</value>
+  </data>
+  <data name="EmailSettings" xml:space="preserve">
+    <value>تنظیمات رایانامه</value>
+  </data>
+  <data name="Print" xml:space="preserve">
+    <value>چاپ</value>
+  </data>
+  <data name="Image" xml:space="preserve">
+    <value>تصویر</value>
+  </data>
+  <data name="View" xml:space="preserve">
+    <value>نما</value>
+  </data>
+  <data name="Crop" xml:space="preserve">
+    <value>برش کناره‌ها</value>
+  </data>
+  <data name="BrightnessContrast" xml:space="preserve">
+    <value>روشنایی / سایه روشن</value>
+  </data>
+  <data name="HueSaturation" xml:space="preserve">
+    <value>پرده / غلظت</value>
+  </data>
+  <data name="BlackAndWhite" xml:space="preserve">
+    <value>سیاه و سفید</value>
+  </data>
+  <data name="Sharpen" xml:space="preserve">
+    <value>وضوح</value>
+  </data>
+  <data name="DocumentCorrection" xml:space="preserve">
+    <value>Document Correction</value>
+  </data>
+  <data name="Reset" xml:space="preserve">
+    <value>تنظیم مجدد</value>
+  </data>
+  <data name="Rotate" xml:space="preserve">
+    <value>چرخش</value>
+  </data>
+  <data name="RotateLeft" xml:space="preserve">
+    <value>چرخش چپ</value>
+  </data>
+  <data name="RotateRight" xml:space="preserve">
+    <value>چرخش راست</value>
+  </data>
+  <data name="Flip" xml:space="preserve">
+    <value>پشت و رو</value>
+  </data>
+  <data name="Deskew" xml:space="preserve">
+    <value>میز</value>
+  </data>
+  <data name="CustomRotation" xml:space="preserve">
+    <value>چرخش سفارشی</value>
+  </data>
+  <data name="MoveUp" xml:space="preserve">
+    <value>بردن به بالا</value>
+  </data>
+  <data name="MoveDown" xml:space="preserve">
+    <value>بردن به پایین</value>
+  </data>
+  <data name="Reorder" xml:space="preserve">
+    <value>چیدمان دوباره</value>
+  </data>
+  <data name="Interleave" xml:space="preserve">
+    <value>جایگذاری</value>
+  </data>
+  <data name="Deinterleave" xml:space="preserve">
+    <value>صفحات سفید را حذف کردن</value>
+  </data>
+  <data name="AltInterleave" xml:space="preserve">
+    <value>جایگذاری متناوب</value>
+  </data>
+  <data name="AltDeinterleave" xml:space="preserve">
+    <value>صفحات سفید را بصورت متناوب حذف کردن</value>
+  </data>
+  <data name="Reverse" xml:space="preserve">
+    <value>معکوس</value>
+  </data>
+  <data name="Clear" xml:space="preserve">
+    <value>پاک‌کردن</value>
+  </data>
+  <data name="ClearAll" xml:space="preserve">
+    <value>Clear All</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>زبان</value>
+  </data>
+  <data name="About" xml:space="preserve">
+    <value>درباره</value>
+  </data>
+  <data name="Zoom" xml:space="preserve">
+    <value>بزرگنمایی</value>
+  </data>
+  <data name="ZoomIn" xml:space="preserve">
+    <value>زوم به داخل</value>
+  </data>
+  <data name="ZoomOut" xml:space="preserve">
+    <value>زوم به خارج</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="SaveAllAsPdf" xml:space="preserve">
+    <value>Save All as PDF</value>
+  </data>
+  <data name="SaveSelectedAsPdf" xml:space="preserve">
+    <value>Save Selected as PDF</value>
+  </data>
+  <data name="SaveAllAsImages" xml:space="preserve">
+    <value>Save All as Images</value>
+  </data>
+  <data name="SaveSelectedAsImages" xml:space="preserve">
+    <value>Save Selected as Images</value>
+  </data>
+  <data name="EmailAllAsPdf" xml:space="preserve">
+    <value>Email All as PDF</value>
+  </data>
+  <data name="EmailSelectedAsPdf" xml:space="preserve">
+    <value>Email Selected as PDF</value>
+  </data>
+  <data name="EditProfileFormTitle" xml:space="preserve">
+    <value>تنظیمات پروفایل</value>
+  </data>
+  <data name="DisplayNameLabel" xml:space="preserve">
+    <value>نام ظاهری:</value>
+  </data>
+  <data name="WiaDriver" xml:space="preserve">
+    <value>درایور WIA</value>
+  </data>
+  <data name="TwainDriver" xml:space="preserve">
+    <value>درایور TWAIN</value>
+  </data>
+  <data name="AppleDriver" xml:space="preserve">
+    <value>Apple Driver</value>
+  </data>
+  <data name="SaneDriver" xml:space="preserve">
+    <value>درایور SANE</value>
+  </data>
+  <data name="DeviceLabel" xml:space="preserve">
+    <value>دستگاه:</value>
+  </data>
+  <data name="ChooseDevice" xml:space="preserve">
+    <value>انتخاب دستگاه</value>
+  </data>
+  <data name="UsePredefinedSettings" xml:space="preserve">
+    <value>استفاده از تنظیمات پیش تعریف شده</value>
+  </data>
+  <data name="UseNativeUi" xml:space="preserve">
+    <value>استفاده از رابط کاربری بومی</value>
+  </data>
+  <data name="PaperSourceLabel" xml:space="preserve">
+    <value>منبع کاغذ:</value>
+  </data>
+  <data name="PageSizeLabel" xml:space="preserve">
+    <value>اندازه صفحه:</value>
+  </data>
+  <data name="ResolutionLabel" xml:space="preserve">
+    <value>دقت:</value>
+  </data>
+  <data name="BrightnessLabel" xml:space="preserve">
+    <value>روشنایی:</value>
+  </data>
+  <data name="BitDepthLabel" xml:space="preserve">
+    <value>عمق بیت:</value>
+  </data>
+  <data name="HorizontalAlignLabel" xml:space="preserve">
+    <value>چیدمان افقی:</value>
+  </data>
+  <data name="ScaleLabel" xml:space="preserve">
+    <value>مقیاس:</value>
+  </data>
+  <data name="ContrastLabel" xml:space="preserve">
+    <value>شفافیت:</value>
+  </data>
+  <data name="EnableAutoSave" xml:space="preserve">
+    <value>فعال سازی ذخیره خودکار</value>
+  </data>
+  <data name="AutoSaveSettings" xml:space="preserve">
+    <value>ذخیره خودکار تنظیمات‌</value>
+  </data>
+  <data name="Advanced" xml:space="preserve">
+    <value>پیشرفته</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>لغو</value>
+  </data>
+  <data name="Select" xml:space="preserve">
+    <value>انتخاب</value>
+  </data>
+  <data name="SelectSource" xml:space="preserve">
+    <value>انتخاب منبع</value>
+  </data>
+  <data name="RunInBackground" xml:space="preserve">
+    <value>اجرا در پس‌زمینه</value>
+  </data>
+  <data name="Naps2" xml:space="preserve">
+    <value>NAPS2</value>
+  </data>
+  <data name="Naps2TitleFormat" xml:space="preserve">
+    <value>NAPS2 - {0}</value>
+  </data>
+  <data name="Naps2FullName" xml:space="preserve">
+    <value>Not Another PDF Scanner</value>
+  </data>
+  <data name="OcrSetupFormTitle" xml:space="preserve">
+    <value>پیکربندی OCR</value>
+  </data>
+  <data name="MakePdfsSearchable" xml:space="preserve">
+    <value>ایجاد PDF قابل جستجو بوسیله OCR</value>
+  </data>
+  <data name="OcrLanguageLabel" xml:space="preserve">
+    <value>زبان OCR:</value>
+  </data>
+  <data name="OcrModeLabel" xml:space="preserve">
+    <value>حالت OCR:</value>
+  </data>
+  <data name="RunOcrAfterScanning" xml:space="preserve">
+    <value>پس از اسکن OCR بصورت خودکار اجرا شود.</value>
+  </data>
+  <data name="GetMoreLanguages" xml:space="preserve">
+    <value>دریافت زبان‌های بیشتر</value>
+  </data>
+  <data name="OcrDownloadFormTitle" xml:space="preserve">
+    <value>دریافت OCR</value>
+  </data>
+  <data name="OcrDownloadSummaryText" xml:space="preserve">
+    <value>برای استفاده از OCR نیاز است هر زبانی را که می‌خواهید اسکن کنید را دانلود کنید.</value>
+  </data>
+  <data name="OcrSelectLanguageLabel" xml:space="preserve">
+    <value>یک یا چند زبان انتخاب کنید:</value>
+  </data>
+  <data name="EstimatedDownloadSize" xml:space="preserve">
+    <value>تخمین حجم دانلود: {0} مگابایت</value>
+  </data>
+  <data name="Download" xml:space="preserve">
+    <value>بارگیری</value>
+  </data>
+  <data name="DownloadProgressFormTitle" xml:space="preserve">
+    <value>پیشرفت دانلود</value>
+  </data>
+  <data name="PreviewFormTitle" xml:space="preserve">
+    <value>پیش‌نمایش</value>
+  </data>
+  <data name="Next" xml:space="preserve">
+    <value>بعدی</value>
+  </data>
+  <data name="Previous" xml:space="preserve">
+    <value>قبلی</value>
+  </data>
+  <data name="XOfY" xml:space="preserve">
+    <value>{0} از {1}</value>
+  </data>
+  <data name="Revert" xml:space="preserve">
+    <value>برگرداندن</value>
+  </data>
+  <data name="ApplyToSelected" xml:space="preserve">
+    <value>اعمال روی {0} عکس انتخاب شده</value>
+  </data>
+  <data name="SelectAll" xml:space="preserve">
+    <value>انتخاب همه</value>
+  </data>
+</root>

@@ -40,7 +40,7 @@
     <value>A kiválasztott képolvasó nem található.</value>
   </data>
   <data name="DeviceOffline" xml:space="preserve">
-    <value>A kiválasztott képolvasó nem elérhető.</value>
+    <value>A kiválasztott képolvasó nem elérhető (leválasztva).</value>
   </data>
   <data name="DontHavePermission" xml:space="preserve">
     <value>Nincs hozzáférési egedélye az adott helyhez..</value>
@@ -64,13 +64,16 @@
     <value>JPEG fájl (*.jpg, *.jpeg)</value>
   </data>
   <data name="FileTypePdf" xml:space="preserve">
-    <value>PDF dokumentum (*.pdf)</value>
+    <value>PDF Document (*.pdf)</value>
   </data>
   <data name="FileTypePng" xml:space="preserve">
     <value>PNG fájl (*.png)</value>
   </data>
   <data name="FileTypeTiff" xml:space="preserve">
     <value>TIFF fájl (*.tiff, *.tif)</value>
+  </data>
+  <data name="FileTypeJp2" xml:space="preserve">
+    <value>JPEG2000 File (*.jp2, *.jpx)</value>
   </data>
   <data name="NameMissing" xml:space="preserve">
     <value>Hiányzó név.</value>
@@ -154,19 +157,19 @@
     <value>Are you sure you want undo your changes to {0} image(s)?</value>
   </data>
   <data name="ResetImage" xml:space="preserve">
-    <value>Reset Image</value>
+    <value>Kép visszaállítása</value>
   </data>
   <data name="ExitWithUnsavedChanges" xml:space="preserve">
-    <value>You have unsaved changes. Are you sure you want to exit and discard those changes?</value>
+    <value>Nem mentett módosításai vannak, amik elvesznek ha bezárja a programot. Biztosan kilép?</value>
   </data>
   <data name="ExitWithActiveOperations" xml:space="preserve">
     <value>An operation is in progress. Are you sure you want to exit and cancel the operation?</value>
   </data>
   <data name="UnsavedChanges" xml:space="preserve">
-    <value>Unsaved Changes</value>
+    <value>Nem mentett módosítások</value>
   </data>
   <data name="ActiveOperations" xml:space="preserve">
-    <value>Operation in Progress</value>
+    <value>Művelet folyamatban</value>
   </data>
   <data name="ScanPageProgress" xml:space="preserve">
     <value>Scanning page {0}</value>
@@ -175,7 +178,7 @@
     <value>The selected scanner does not support using a feeder. If your scanner does have a feeder, try using a different driver.</value>
   </data>
   <data name="NoPagesInFeeder" xml:space="preserve">
-    <value>No pages are in the feeder.</value>
+    <value>Nincs lap a beolvasóban.</value>
   </data>
   <data name="PdfNoPermissionToExtractContent" xml:space="preserve">
     <value>You do not have permission to copy content from the file '{0}'.</value>
@@ -193,13 +196,13 @@
     <value>Batch cancelled.</value>
   </data>
   <data name="BatchStatusCancelling" xml:space="preserve">
-    <value>Cancelling....</value>
+    <value>Visszavonás....</value>
   </data>
   <data name="BatchStatusComplete" xml:space="preserve">
-    <value>Batch completed successfully.</value>
+    <value>A folyamat befejeződött.</value>
   </data>
   <data name="BatchStatusError" xml:space="preserve">
-    <value>Batch scan stopped due to error.</value>
+    <value>Hiba történt a művelet során, a folyamat megszakadt.</value>
   </data>
   <data name="BatchStatusPage" xml:space="preserve">
     <value>Scanning page {0}...</value>
@@ -214,7 +217,7 @@
     <value>Mégse</value>
   </data>
   <data name="Close" xml:space="preserve">
-    <value>Close</value>
+    <value>Bezárás</value>
   </data>
   <data name="BatchStatusSaving" xml:space="preserve">
     <value>Saving batch results...</value>
@@ -222,17 +225,20 @@
   <data name="NoDuplexSupport" xml:space="preserve">
     <value>The selected scanner does not support using duplex. If your scanner is supposed to support duplex, try using a different driver.</value>
   </data>
+  <data name="ProgressFormat" xml:space="preserve">
+    <value>{0} / {1}</value>
+  </data>
   <data name="ImportingFormat" xml:space="preserve">
-    <value>Importing {0}...</value>
+    <value>Importálás {0}...</value>
   </data>
   <data name="ImportProgress" xml:space="preserve">
     <value>Import Progress</value>
   </data>
   <data name="Recovering" xml:space="preserve">
-    <value>Recovering...</value>
+    <value>Helyreállítás...</value>
   </data>
   <data name="RecoveryProgress" xml:space="preserve">
-    <value>Recovery Progress</value>
+    <value>Helyreállítási folyamat</value>
   </data>
   <data name="SaveImages" xml:space="preserve">
     <value>Képek mentése</value>
@@ -250,16 +256,16 @@
     <value>Saving {0}...</value>
   </data>
   <data name="Print" xml:space="preserve">
-    <value>Print</value>
+    <value>Nyomtatás</value>
   </data>
   <data name="Copying" xml:space="preserve">
-    <value>Copying...</value>
+    <value>Másolás folyamatban...</value>
   </data>
   <data name="CopyProgress" xml:space="preserve">
-    <value>Copy Progress</value>
+    <value>Folyamatban</value>
   </data>
   <data name="Importing" xml:space="preserve">
-    <value>Importing...</value>
+    <value>Importálás...</value>
   </data>
   <data name="EmailPdf" xml:space="preserve">
     <value>PDF küldése Email-ben</value>
@@ -274,10 +280,10 @@
     <value>Minden fájl</value>
   </data>
   <data name="FileTypeImageFiles" xml:space="preserve">
-    <value>Image Files</value>
+    <value>Képfájlok</value>
   </data>
   <data name="DeviceBusy" xml:space="preserve">
-    <value>A kiválasztott képolvasó nem elérhető.</value>
+    <value>A kiválasztott képolvasó nem elérhető (foglalt).</value>
   </data>
   <data name="DeviceCoverOpen" xml:space="preserve">
     <value>The scanner's cover is open.</value>
@@ -292,13 +298,13 @@
     <value>An update to OCR is available.</value>
   </data>
   <data name="ImageSaved" xml:space="preserve">
-    <value>Image saved.</value>
+    <value>Kép mentve.</value>
   </data>
   <data name="ImagesSaved" xml:space="preserve">
     <value>{0} images saved.</value>
   </data>
   <data name="PdfSaved" xml:space="preserve">
-    <value>PDF saved.</value>
+    <value>PDF mentve.</value>
   </data>
   <data name="NamedPageSizeFormat" xml:space="preserve">
     <value>{0} ({1}x{2} {3})</value>
@@ -310,16 +316,16 @@
     <value>The file could not be overwritten because it is currently in use.</value>
   </data>
   <data name="AutoDeskewing" xml:space="preserve">
-    <value>Deskewing...</value>
+    <value>Visszatorzítás...</value>
   </data>
   <data name="AutoDeskewProgress" xml:space="preserve">
-    <value>Deskew Progress</value>
+    <value>Visszatorzítás folyamatban</value>
   </data>
   <data name="DownloadNeeded" xml:space="preserve">
-    <value>Download Needed</value>
+    <value>Letöltés szükséges</value>
   </data>
   <data name="PdfImportComponentNeeded" xml:space="preserve">
-    <value>An additional component is needed to import this PDF file. Would you like to download it now?</value>
+    <value>További bővitmény szükséges, hogy ezt a PDF fájlt importálhassa. Szeretné most letölteni?</value>
   </data>
   <data name="ConfirmCancelBatch" xml:space="preserve">
     <value>Are you sure you want to cancel the batch scan?</value>
@@ -328,7 +334,7 @@
     <value>Cancel Batch</value>
   </data>
   <data name="Donate" xml:space="preserve">
-    <value>Donate</value>
+    <value>Támogatás</value>
   </data>
   <data name="DonatePrompt" xml:space="preserve">
     <value>NAPS2 is completely free. Consider making a donation.</value>
@@ -346,7 +352,7 @@
     <value>OCR Progress</value>
   </data>
   <data name="RunningOcr" xml:space="preserve">
-    <value>Running OCR...</value>
+    <value>OCR futtatása...</value>
   </data>
   <data name="UpdateProgress" xml:space="preserve">
     <value>Update Progress</value>
@@ -355,13 +361,16 @@
     <value>Updating...</value>
   </data>
   <data name="NoUpdates" xml:space="preserve">
-    <value>No updates available.</value>
+    <value>Nem érhető el frissítés.</value>
   </data>
   <data name="CheckingForUpdates" xml:space="preserve">
     <value>Checking...</value>
   </data>
+  <data name="UpdateCheckDisabled" xml:space="preserve">
+    <value>Update checking is disabled.</value>
+  </data>
   <data name="UpdateError" xml:space="preserve">
-    <value>An error occured when trying to install the update.</value>
+    <value>Hiba történt a frissités telepitésekor.</value>
   </data>
   <data name="Install" xml:space="preserve">
     <value>Install {0}</value>
@@ -377,15 +386,6 @@
   </data>
   <data name="ErrorEmailing" xml:space="preserve">
     <value>An error occurred when trying to send the email.</value>
-  </data>
-  <data name="Naps2Server" xml:space="preserve">
-    <value>NAPS2 Server</value>
-  </data>
-  <data name="ServerStarted" xml:space="preserve">
-    <value>Server started</value>
-  </data>
-  <data name="ListeningOnPort" xml:space="preserve">
-    <value>Listening on port {0}</value>
   </data>
   <data name="ScanProgressPage" xml:space="preserve">
     <value>Scanning page {0}...</value>

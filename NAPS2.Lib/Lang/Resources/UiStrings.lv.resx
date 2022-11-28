@@ -1,0 +1,351 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AboutFormTitle" xml:space="preserve">
+    <value>Par</value>
+  </data>
+  <data name="CopyrightFormat" xml:space="preserve">
+    <value>Copyright {0} NAPS2 Contributors</value>
+  </data>
+  <data name="IconsFrom" xml:space="preserve">
+    <value>Ikonas no:</value>
+  </data>
+  <data name="CheckForUpdates" xml:space="preserve">
+    <value>Pārbaudīt atjauninājumus</value>
+  </data>
+  <data name="OK" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="Donate" xml:space="preserve">
+    <value>Ziedot</value>
+  </data>
+  <data name="ProfilesFormTitle" xml:space="preserve">
+    <value>Profili</value>
+  </data>
+  <data name="New" xml:space="preserve">
+    <value>Jauns</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>Rediģēt</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Dzēst</value>
+  </data>
+  <data name="Scan" xml:space="preserve">
+    <value>Skenēt</value>
+  </data>
+  <data name="SetDefault" xml:space="preserve">
+    <value>Uzstādīt noklusējumu</value>
+  </data>
+  <data name="Copy" xml:space="preserve">
+    <value>Kopēt</value>
+  </data>
+  <data name="Paste" xml:space="preserve">
+    <value>Ielīmēt</value>
+  </data>
+  <data name="Done" xml:space="preserve">
+    <value>Pabeigts</value>
+  </data>
+  <data name="Default" xml:space="preserve">
+    <value>Noklusētais</value>
+  </data>
+  <data name="NewProfile" xml:space="preserve">
+    <value>Jauns profils</value>
+  </data>
+  <data name="BatchScan" xml:space="preserve">
+    <value>Partijas skenēšana</value>
+  </data>
+  <data name="Ocr" xml:space="preserve">
+    <value>OCR</value>
+  </data>
+  <data name="Profiles" xml:space="preserve">
+    <value>Profili</value>
+  </data>
+  <data name="Import" xml:space="preserve">
+    <value>Importēt</value>
+  </data>
+  <data name="SavePdf" xml:space="preserve">
+    <value>Saglabāt PDF</value>
+  </data>
+  <data name="PdfSettings" xml:space="preserve">
+    <value>PDF iestatījumi</value>
+  </data>
+  <data name="SaveImages" xml:space="preserve">
+    <value>Saglabāt attēlus</value>
+  </data>
+  <data name="ImageSettings" xml:space="preserve">
+    <value>Attēla iestatījumi</value>
+  </data>
+  <data name="EmailPdf" xml:space="preserve">
+    <value>PDF uz e-pastu</value>
+  </data>
+  <data name="EmailSettings" xml:space="preserve">
+    <value>E-pasta iestatījumi</value>
+  </data>
+  <data name="Print" xml:space="preserve">
+    <value>Drukāt</value>
+  </data>
+  <data name="Image" xml:space="preserve">
+    <value>Attēls</value>
+  </data>
+  <data name="View" xml:space="preserve">
+    <value>Skatīt</value>
+  </data>
+  <data name="Crop" xml:space="preserve">
+    <value>Apgriezt</value>
+  </data>
+  <data name="BrightnessContrast" xml:space="preserve">
+    <value>Spilgtums / Kontrasts</value>
+  </data>
+  <data name="HueSaturation" xml:space="preserve">
+    <value>Tonis / Piesātinājums</value>
+  </data>
+  <data name="BlackAndWhite" xml:space="preserve">
+    <value>Melns &amp; balts</value>
+  </data>
+  <data name="Sharpen" xml:space="preserve">
+    <value>Asināt</value>
+  </data>
+  <data name="DocumentCorrection" xml:space="preserve">
+    <value>Document Correction</value>
+  </data>
+  <data name="Reset" xml:space="preserve">
+    <value>Atiestatīt</value>
+  </data>
+  <data name="Rotate" xml:space="preserve">
+    <value>Pagriezt</value>
+  </data>
+  <data name="RotateLeft" xml:space="preserve">
+    <value>Pagriezt pa kreisi</value>
+  </data>
+  <data name="RotateRight" xml:space="preserve">
+    <value>Pagriezt pa labi</value>
+  </data>
+  <data name="Flip" xml:space="preserve">
+    <value>Apvērst</value>
+  </data>
+  <data name="Deskew" xml:space="preserve">
+    <value>Izlīdzināt</value>
+  </data>
+  <data name="CustomRotation" xml:space="preserve">
+    <value>Pielāgota pagriešana</value>
+  </data>
+  <data name="MoveUp" xml:space="preserve">
+    <value>Pārvietot uz augšu</value>
+  </data>
+  <data name="MoveDown" xml:space="preserve">
+    <value>Pārvietot uz leju</value>
+  </data>
+  <data name="Reorder" xml:space="preserve">
+    <value>Pārkārtot</value>
+  </data>
+  <data name="Interleave" xml:space="preserve">
+    <value>Pārkārtot</value>
+  </data>
+  <data name="Deinterleave" xml:space="preserve">
+    <value>Noņemt kārtojumu</value>
+  </data>
+  <data name="AltInterleave" xml:space="preserve">
+    <value>Pārkārtot pretēji</value>
+  </data>
+  <data name="AltDeinterleave" xml:space="preserve">
+    <value>Noņemt pretēju kārtojumu</value>
+  </data>
+  <data name="Reverse" xml:space="preserve">
+    <value>Apvērst</value>
+  </data>
+  <data name="Clear" xml:space="preserve">
+    <value>Notīrīt</value>
+  </data>
+  <data name="ClearAll" xml:space="preserve">
+    <value>Clear All</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>Valoda</value>
+  </data>
+  <data name="About" xml:space="preserve">
+    <value>Par</value>
+  </data>
+  <data name="Zoom" xml:space="preserve">
+    <value>Mērogs</value>
+  </data>
+  <data name="ZoomIn" xml:space="preserve">
+    <value>Palielināt</value>
+  </data>
+  <data name="ZoomOut" xml:space="preserve">
+    <value>Samazināt</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="SaveAllAsPdf" xml:space="preserve">
+    <value>Save All as PDF</value>
+  </data>
+  <data name="SaveSelectedAsPdf" xml:space="preserve">
+    <value>Save Selected as PDF</value>
+  </data>
+  <data name="SaveAllAsImages" xml:space="preserve">
+    <value>Save All as Images</value>
+  </data>
+  <data name="SaveSelectedAsImages" xml:space="preserve">
+    <value>Save Selected as Images</value>
+  </data>
+  <data name="EmailAllAsPdf" xml:space="preserve">
+    <value>Email All as PDF</value>
+  </data>
+  <data name="EmailSelectedAsPdf" xml:space="preserve">
+    <value>Email Selected as PDF</value>
+  </data>
+  <data name="EditProfileFormTitle" xml:space="preserve">
+    <value>Profila iestatījumi</value>
+  </data>
+  <data name="DisplayNameLabel" xml:space="preserve">
+    <value>Parādāmais nosaukums:</value>
+  </data>
+  <data name="WiaDriver" xml:space="preserve">
+    <value>WIA draiveris</value>
+  </data>
+  <data name="TwainDriver" xml:space="preserve">
+    <value>TWAIN draiveris</value>
+  </data>
+  <data name="AppleDriver" xml:space="preserve">
+    <value>Apple Driver</value>
+  </data>
+  <data name="SaneDriver" xml:space="preserve">
+    <value>SANE Driver</value>
+  </data>
+  <data name="DeviceLabel" xml:space="preserve">
+    <value>Ierīce:</value>
+  </data>
+  <data name="ChooseDevice" xml:space="preserve">
+    <value>Izvēlies ierīci</value>
+  </data>
+  <data name="UsePredefinedSettings" xml:space="preserve">
+    <value>Lietot iepriekšdefinētos iestatījumus</value>
+  </data>
+  <data name="UseNativeUi" xml:space="preserve">
+    <value>Lietot noklusējuma saskarni</value>
+  </data>
+  <data name="PaperSourceLabel" xml:space="preserve">
+    <value>Papīra avots:</value>
+  </data>
+  <data name="PageSizeLabel" xml:space="preserve">
+    <value>Lappuses izmērs:</value>
+  </data>
+  <data name="ResolutionLabel" xml:space="preserve">
+    <value>Izšķirtspēja:</value>
+  </data>
+  <data name="BrightnessLabel" xml:space="preserve">
+    <value>Spilgtums:</value>
+  </data>
+  <data name="BitDepthLabel" xml:space="preserve">
+    <value>Bitu dziļums:</value>
+  </data>
+  <data name="HorizontalAlignLabel" xml:space="preserve">
+    <value>Līdzināt horizontāli:</value>
+  </data>
+  <data name="ScaleLabel" xml:space="preserve">
+    <value>Mērogs:</value>
+  </data>
+  <data name="ContrastLabel" xml:space="preserve">
+    <value>Kontrasts:</value>
+  </data>
+  <data name="EnableAutoSave" xml:space="preserve">
+    <value>Iespējot automātisku saglabāšanu</value>
+  </data>
+  <data name="AutoSaveSettings" xml:space="preserve">
+    <value>Automātiski saglabāt iestatījumus</value>
+  </data>
+  <data name="Advanced" xml:space="preserve">
+    <value>Papildu</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Atcelt</value>
+  </data>
+  <data name="Select" xml:space="preserve">
+    <value>Izvēlēties</value>
+  </data>
+  <data name="SelectSource" xml:space="preserve">
+    <value>Izvēlēties avotu</value>
+  </data>
+  <data name="RunInBackground" xml:space="preserve">
+    <value>Darbojas fonā</value>
+  </data>
+  <data name="Naps2" xml:space="preserve">
+    <value>NAPS2</value>
+  </data>
+  <data name="Naps2TitleFormat" xml:space="preserve">
+    <value>NAPS2 - {0}</value>
+  </data>
+  <data name="Naps2FullName" xml:space="preserve">
+    <value>Not Another PDF Scanner</value>
+  </data>
+  <data name="OcrSetupFormTitle" xml:space="preserve">
+    <value>OCR uzstādīšana</value>
+  </data>
+  <data name="MakePdfsSearchable" xml:space="preserve">
+    <value>Padarīt PDF meklējamus, izmantojot OCR</value>
+  </data>
+  <data name="OcrLanguageLabel" xml:space="preserve">
+    <value>OCR valoda:</value>
+  </data>
+  <data name="OcrModeLabel" xml:space="preserve">
+    <value>OCR mode:</value>
+  </data>
+  <data name="RunOcrAfterScanning" xml:space="preserve">
+    <value>Automātiski palaist OCR (teksta atpazīšanu) pēc skenēšanas</value>
+  </data>
+  <data name="GetMoreLanguages" xml:space="preserve">
+    <value>Iegūt vairāk valodu</value>
+  </data>
+  <data name="OcrDownloadFormTitle" xml:space="preserve">
+    <value>OCR lejupielāde</value>
+  </data>
+  <data name="OcrDownloadSummaryText" xml:space="preserve">
+    <value>Lai lietotu OCR, jums jālejupielādē katra valoda, kuru vēlaties skenēt.</value>
+  </data>
+  <data name="OcrSelectLanguageLabel" xml:space="preserve">
+    <value>Izvēlieties vienu vai vairākas valodas:</value>
+  </data>
+  <data name="EstimatedDownloadSize" xml:space="preserve">
+    <value>Paredzamais lejupielādes izmērs: {0} MB</value>
+  </data>
+  <data name="Download" xml:space="preserve">
+    <value>Lejupielādēt</value>
+  </data>
+  <data name="DownloadProgressFormTitle" xml:space="preserve">
+    <value>Lejupielādes progress</value>
+  </data>
+  <data name="PreviewFormTitle" xml:space="preserve">
+    <value>Priekšskatījums</value>
+  </data>
+  <data name="Next" xml:space="preserve">
+    <value>Nākamais</value>
+  </data>
+  <data name="Previous" xml:space="preserve">
+    <value>Iepriekšējais</value>
+  </data>
+  <data name="XOfY" xml:space="preserve">
+    <value>{0} no {1}</value>
+  </data>
+  <data name="Revert" xml:space="preserve">
+    <value>Atgriezt</value>
+  </data>
+  <data name="ApplyToSelected" xml:space="preserve">
+    <value>Pielietot visiem {0} iezīmētajiem attēliem</value>
+  </data>
+  <data name="SelectAll" xml:space="preserve">
+    <value>Izvēlēties visu</value>
+  </data>
+</root>

@@ -46,7 +46,7 @@
     <value>800 dpi</value>
   </data>
   <data name="EmailProviderType_CustomSmtp" xml:space="preserve">
-    <value>Custom SMTP</value>
+    <value>Modifierad SMTP</value>
   </data>
   <data name="EmailProviderType_Gmail" xml:space="preserve">
     <value>Gmail</value>
@@ -55,7 +55,7 @@
     <value>Outlook Web Access</value>
   </data>
   <data name="EmailProvider_NotSelected" xml:space="preserve">
-    <value>No provider selected.</value>
+    <value>Ingen leverantör vald.</value>
   </data>
   <data name="HorizontalAlign_Center" xml:space="preserve">
     <value>Centrera</value>
@@ -124,7 +124,7 @@
     <value>Glas</value>
   </data>
   <data name="TiffComp_Auto" xml:space="preserve">
-    <value>Auto</value>
+    <value>Automatiskt</value>
   </data>
   <data name="TiffComp_Ccitt4" xml:space="preserve">
     <value>CCITT4</value>
@@ -133,7 +133,7 @@
     <value>LZW</value>
   </data>
   <data name="TiffComp_None" xml:space="preserve">
-    <value>Klart</value>
+    <value>Ingen</value>
   </data>
   <data name="TwainImpl_Default" xml:space="preserve">
     <value>Standard</value>
@@ -142,7 +142,7 @@
     <value>Inbyggd (endast inbyggt användargränssnitt)</value>
   </data>
   <data name="TwainImpl_MemXfer" xml:space="preserve">
-    <value>Alternative Transfer</value>
+    <value>Annan överföring</value>
   </data>
   <data name="TwainImpl_OldDsm" xml:space="preserve">
     <value>Gammal DSM</value>
@@ -152,5 +152,11 @@
   </data>
   <data name="WiaVersion_Default" xml:space="preserve">
     <value>Standard</value>
+  </data>
+  <data name="OcrMode_Fast" xml:space="preserve">
+    <value>Fast</value>
+  </data>
+  <data name="OcrMode_Best" xml:space="preserve">
+    <value>Best</value>
   </data>
 </root>
