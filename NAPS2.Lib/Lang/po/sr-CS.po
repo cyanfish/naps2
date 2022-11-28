@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2022-11-27 05:04\n"
+"PO-Revision-Date: 2022-11-28 04:41\n"
 "Last-Translator: \n"
 "Language-Team: Serbian (Latin)\n"
 "Language: sr\n"
@@ -67,17 +67,17 @@ msgstr ""
 msgid "A5 (148x210 mm)"
 msgstr ""
 
-#: FAbout.resx$$this.Text$Message
-#: FDesktop.resx$tsAbout.Text$Message
+#: UiStrings.resx$About$Message
+#: UiStrings.resx$AboutFormTitle$Message
 msgid "About"
 msgstr "O programu"
 
-#: FScanProgress.resx$$this.Text$Message
 #: MiscResources.resx$AcquiringData$Message
-msgid "Acquiring data"
-msgstr "Prikupljam podatke"
+msgid "Acquiring data..."
+msgstr "Prikupljam podatke..."
 
 #: FEditProfile.resx$btnAdvanced.Text$Message
+#: UiStrings.resx$Advanced$Message
 msgid "Advanced"
 msgstr "Napredne opcije"
 
@@ -85,10 +85,6 @@ msgstr "Napredne opcije"
 msgid "Advanced Profile Settings"
 msgstr "Napredne opcije profila"
 
-#: FDesktop.resx$tsEmailPDFAll.Text$Message
-#: FDesktop.resx$tsReverseAll.Text$Message
-#: FDesktop.resx$tsSaveImagesAll.Text$Message
-#: FDesktop.resx$tsSavePDFAll.Text$Message
 #: MiscResources.resx$AllCount$Message
 msgid "All ({0})"
 msgstr "Sve ({0})"
@@ -129,11 +125,11 @@ msgstr "Dozvoli štampu najvišeg kvaliteta"
 msgid "Allow Printing"
 msgstr "Dozvoli štampu"
 
-#: FDesktop.resx$tsAltDeinterleave.Text$Message
+#: UiStrings.resx$AltDeinterleave$Message
 msgid "Alternate Deinterleave"
 msgstr "Izmeni neispreplitanost"
 
-#: FDesktop.resx$tsAltInterleave.Text$Message
+#: UiStrings.resx$AltInterleave$Message
 msgid "Alternate Interleave"
 msgstr "Izmeni ispreplitanost"
 
@@ -146,54 +142,59 @@ msgid "An additional component is needed to import this PDF file. Would you like
 msgstr "Potrebna je dodatna komponenta za uvoz ovog PDF fajla. Da li želite da je sada preuzmete?"
 
 #: MiscResources.resx$UpdateError$Message
-msgid "An error occured when trying to install the update"
-msgstr "Nastala je greška prilikom pokušaja instalacije nadogradnje"
+msgid "An error occured when trying to install the update."
+msgstr "Nastala je greška prilikom pokušaja instalacije nadogradnje."
 
 #: MiscResources.resx$AuthError$Message
-msgid "An error occurred when trying to authorize"
+msgid "An error occurred when trying to authorize."
 msgstr ""
 
 #: MiscResources.resx$AutoSaveError$Message
-msgid "An error occurred when trying to auto save"
-msgstr "Došlo je do greške prilikom automatskog snimanja"
+msgid "An error occurred when trying to auto save."
+msgstr "Došlo je do greške prilikom automatskog snimanja."
 
 #: MiscResources.resx$ErrorSaving$Message
-msgid "An error occurred when trying to save the file"
-msgstr "Došlo je do greške u pokušaju snimanja datoteke"
+msgid "An error occurred when trying to save the file."
+msgstr "Došlo je do greške u pokušaju snimanja datoteke."
 
 #: MiscResources.resx$ErrorEmailing$Message
-msgid "An error occurred when trying to send the email"
+msgid "An error occurred when trying to send the email."
 msgstr ""
 
 #: MiscResources.resx$EmailError$Message
-msgid "An error occurred while trying to send an email"
-msgstr "Došlo je do greške u pokušaju slanja mejla."
+msgid "An error occurred while trying to send an email."
+msgstr "Došlo je do greške u pokušaju slanja mejla.."
 
 #: MiscResources.resx$UnknownDriverError$Message
-msgid "An error occurred with the scanning driver"
-msgstr "Došlo je do greške sa driver-om za skener"
+#: SdkResources.resx$UnknownDriverError$Message
+msgid "An error occurred with the scanning driver."
+msgstr "Došlo je do greške sa driver-om za skener."
 
 #: MiscResources.resx$ExitWithActiveOperations$Message
 msgid "An operation is in progress. Are you sure you want to exit and cancel the operation?"
 msgstr ""
 
 #: MiscResources.resx$BatchError$Message
-msgid "An unknown error ocurred during the batch scan"
-msgstr "Došlo je do nepoznate greške u toku paketnog skeniranja"
+msgid "An unknown error ocurred during the batch scan."
+msgstr "Došlo je do nepoznate greške u toku paketnog skeniranja."
 
 #: MiscResources.resx$UpdateAvailable$Message
-msgid "An update is available"
+msgid "An update is available."
 msgstr ""
 
 #: MiscResources.resx$OcrUpdateAvailable$Message
-msgid "An update to OCR is available"
-msgstr "Dostupno je ažuriranje za OCR."
+msgid "An update to OCR is available."
+msgstr "Dostupno je ažuriranje za OCR.."
+
+#: UiStrings.resx$AppleDriver$Message
+msgid "Apple Driver"
+msgstr ""
 
 #: FAdvancedScanSettings.resx$cbBrightnessContrastAfterScan.Text$Message
 msgid "Apply brightness/contrast after scan"
 msgstr "Primeni osvetljenje/kontrast nakon skeniranja"
 
-#: ImageForm.resx$checkboxApplyToSelected.Text$Message
+#: UiStrings.resx$ApplyToSelected$Message
 msgid "Apply to all {0} selected images"
 msgstr "Primeni na svih {0} izabranih slika"
 
@@ -226,12 +227,12 @@ msgid "Are you sure you want undo your changes to {0} image(s)?"
 msgstr "Da li zaista želite da poništite promene na sledećem broju slika: {0}"
 
 #: FEmailSettings.resx$label1.Text$Message
-msgid "Attachment Name"
-msgstr "Naziv priloga"
+msgid "Attachment Name:"
+msgstr "Naziv priloga:"
 
 #: FPdfSettings.resx$label3.Text$Message
-msgid "Author"
-msgstr "Autor"
+msgid "Author:"
+msgstr "Autor:"
 
 #: FAuthorize.resx$$this.Text$Message
 msgid "Authorize"
@@ -243,6 +244,7 @@ msgstr "Automatsko"
 
 #: FAutoSaveSettings.resx$$this.Text$Message
 #: FEditProfile.resx$linkAutoSaveSettings.Text$Message
+#: UiStrings.resx$AutoSaveSettings$Message
 msgid "Auto Save Settings"
 msgstr "Podešavanja automatskog snimanja"
 
@@ -263,6 +265,7 @@ msgid "Auto-incrementing number (4 digits)"
 msgstr "Automatsko uvećavanje broja (4 cifre)"
 
 #: FOcrSetup.resx$checkBoxRunInBG.Text$Message
+#: UiStrings.resx$RunOcrAfterScanning$Message
 msgid "Automatically run OCR after scanning"
 msgstr ""
 
@@ -275,53 +278,52 @@ msgid "B5 (176x250 mm)"
 msgstr ""
 
 #: FBatchScan.resx$$this.Text$Message
-#: FDesktop.resx$tsBatchScan.Text$Message
+#: UiStrings.resx$BatchScan$Message
 msgid "Batch Scan"
 msgstr "Paketno skeniranje"
 
 #: MiscResources.resx$BatchStatusCancelled$Message
-msgid "Batch cancelled"
-msgstr "Paketna obrada otkazana"
+msgid "Batch cancelled."
+msgstr "Paketna obrada otkazana."
 
 #: MiscResources.resx$BatchStatusComplete$Message
-msgid "Batch completed successfully"
-msgstr "Paketna obrada uspešno završena"
+msgid "Batch completed successfully."
+msgstr "Paketna obrada uspešno završena."
 
 #: MiscResources.resx$BatchStatusError$Message
-msgid "Batch scan stopped due to error"
-msgstr "Paketno skeniranje zaustavljeno usled greške"
+msgid "Batch scan stopped due to error."
+msgstr "Paketno skeniranje zaustavljeno usled greške."
+
+#: SettingsResources.resx$OcrMode_Best$Message
+msgid "Best"
+msgstr ""
 
 #: FEditProfile.resx$label3.Text$Message
-msgid "Bit depth"
-msgstr "Dubina bitova"
+#: UiStrings.resx$BitDepthLabel$Message
+msgid "Bit depth:"
+msgstr "Dubina bitova:"
 
 #: MiscResources.resx$FileTypeBmp$Message
 msgid "Bitmap Files (*.bmp)"
 msgstr "Bitmap datoteka (*.bmp)"
 
 #: SettingsResources.resx$BitDepth_1BlackAndWhite$Message
+#: UiStrings.resx$BlackAndWhite$Message
 msgid "Black & White"
 msgstr "Crno/belo"
-
-#: FBlackWhite.resx$$this.Text$Message
-#: FDesktop.resx$tsBlackWhite.Text$Message
-#: FViewer.resx$tsBlackWhite.Text$Message
-msgid "Black and White"
-msgstr ""
 
 #: FAdvancedScanSettings.resx$groupBox3.Text$Message
 msgid "Blank Pages"
 msgstr "Prazne strane"
 
-#: FEditProfile.resx$label6.Text$Message
-msgid "Brightness"
-msgstr "Osvetljenost"
-
-#: FBrightnessContrast.resx$$this.Text$Message
-#: FDesktop.resx$tsBrightnessContrast.Text$Message
-#: FViewer.resx$tsBrightnessContrast.Text$Message
+#: UiStrings.resx$BrightnessContrast$Message
 msgid "Brightness / Contrast"
 msgstr "Osvetljenje / Kontrast"
+
+#: FEditProfile.resx$label6.Text$Message
+#: UiStrings.resx$BrightnessLabel$Message
+msgid "Brightness:"
+msgstr "Osvetljenost:"
 
 #: SettingsResources.resx$TiffComp_Ccitt4$Message
 msgid "CCITT4"
@@ -342,11 +344,10 @@ msgstr ""
 #: FPdfSettings.resx$btnCancel.Text$Message
 #: FPlaceholders.resx$btnCancel.Text$Message
 #: FProgress.resx$btnCancel.Text$Message
-#: FScanProgress.resx$btnCancel.Text$Message
 #: FSelectDevice.resx$btnCancel.Text$Message
-#: ImageForm.resx$btnCancel.Text$Message
 #: MiscResources.resx$Cancel$Message
 #: OperationProgressNotifyWidget.resx$cancelToolStripMenuItem.Text$Message
+#: UiStrings.resx$Cancel$Message
 msgid "Cancel"
 msgstr "Prekini"
 
@@ -355,8 +356,8 @@ msgid "Cancel Batch"
 msgstr "Otkazivanje kolektivnog skeniranja"
 
 #: MiscResources.resx$BatchStatusCancelling$Message
-msgid "Cancelling"
-msgstr "Prekid u toku"
+msgid "Cancelling...."
+msgstr "Prekid u toku...."
 
 #: SettingsResources.resx$HorizontalAlign_Center$Message
 msgid "Center"
@@ -366,12 +367,12 @@ msgstr "Centrirano"
 msgid "Change"
 msgstr ""
 
-#: FAbout.resx$cbCheckForUpdates.Text$Message
+#: UiStrings.resx$CheckForUpdates$Message
 msgid "Check for updates"
 msgstr ""
 
 #: MiscResources.resx$CheckingForUpdates$Message
-msgid "Checking"
+msgid "Checking..."
 msgstr ""
 
 #: FEmailProvider.resx$$this.Text$Message
@@ -383,13 +384,18 @@ msgid "Choose Profile"
 msgstr "Odaberite profil"
 
 #: FEditProfile.resx$btnChooseDevice.Text$Message
+#: UiStrings.resx$ChooseDevice$Message
 msgid "Choose device"
 msgstr "Odaberite uređaj"
 
-#: FDesktop.resx$tsClear.Text$Message
 #: MiscResources.resx$Clear$Message
+#: UiStrings.resx$Clear$Message
 msgid "Clear"
 msgstr "Očisti"
+
+#: UiStrings.resx$ClearAll$Message
+msgid "Clear All"
+msgstr ""
 
 #: FAutoSaveSettings.resx$cbClearAfterSave.Text$Message
 msgid "Clear images after saving"
@@ -405,15 +411,15 @@ msgid "Compatibility"
 msgstr "Kompatibilnost"
 
 #: FImageSettings.resx$label3.Text$Message
-msgid "Compression"
-msgstr "Kompresija"
+msgid "Compression:"
+msgstr "Kompresija:"
 
 #: FEditProfile.resx$label7.Text$Message
-msgid "Contrast"
-msgstr "Kontrast"
+#: UiStrings.resx$ContrastLabel$Message
+msgid "Contrast:"
+msgstr "Kontrast:"
 
-#: FDesktop.resx$ctxCopy.Text$Message
-#: FProfiles.resx$ctxCopy.Text$Message
+#: UiStrings.resx$Copy$Message
 msgid "Copy"
 msgstr "Kopiraj"
 
@@ -422,30 +428,24 @@ msgid "Copy Progress"
 msgstr "Tok kopiranja"
 
 #: MiscResources.resx$Copying$Message
-msgid "Copying"
-msgstr "Kopiranje"
+msgid "Copying..."
+msgstr "Kopiranje..."
 
-#: FAbout.resx$labelCopyright.Text$Message
-msgid "Copyright 2009, 2012-2018 NAPS2 Contributors"
+#: UiStrings.resx$CopyrightFormat$Message
+msgid "Copyright {0} NAPS2 Contributors"
 msgstr ""
 
 #: FAdvancedScanSettings.resx$label3.Text$Message
 msgid "Coverage Threshold"
 msgstr "Granična vrednost pokrivenosti"
 
-#: FCrop.resx$$this.Text$Message
-#: FDesktop.resx$tsCrop.Text$Message
-#: FViewer.resx$tsCrop.Text$Message
+#: UiStrings.resx$Crop$Message
 msgid "Crop"
 msgstr "Iseci"
 
 #: FAdvancedScanSettings.resx$cbForcePageSizeCrop.Text$Message
 msgid "Crop to page size"
 msgstr "Smanjiti do veličine stranice"
-
-#: SettingsResources.resx$PageSize_Custom$Message
-msgid "Custom"
-msgstr "Proizvoljno"
 
 #: MiscResources.resx$CustomPageSizeFormat$Message
 msgid "Custom ({0}x{1} {2})"
@@ -455,14 +455,17 @@ msgstr "Proizvoljno ({0}x{1} {2})"
 msgid "Custom Page Size"
 msgstr "Proizvoljna veličina strane"
 
-#: FDesktop.resx$tsCustomRotation.Text$Message
-#: FViewer.resx$tsCustomRotation.Text$Message
+#: UiStrings.resx$CustomRotation$Message
 msgid "Custom Rotation"
 msgstr "Proizvoljna rotacija"
 
 #: SettingsResources.resx$EmailProviderType_CustomSmtp$Message
 msgid "Custom SMTP"
 msgstr ""
+
+#: SettingsResources.resx$PageSize_Custom$Message
+msgid "Custom..."
+msgstr "Proizvoljno..."
 
 #: FPlaceholders.resx$label6.Text$Message
 msgid "Day (01-31)"
@@ -471,30 +474,26 @@ msgstr "Dan (01-31)"
 #: SettingsResources.resx$PdfCompat_Default$Message
 #: SettingsResources.resx$TwainImpl_Default$Message
 #: SettingsResources.resx$WiaVersion_Default$Message
+#: UiStrings.resx$Default$Message
 msgid "Default"
 msgstr "Podrazumevano"
 
 #: FImageSettings.resx$label1.Text$Message
 #: FPdfSettings.resx$label1.Text$Message
-msgid "Default File Path"
-msgstr "Podrazumevana putanja"
+msgid "Default File Path:"
+msgstr "Podrazumevana putanja:"
 
-#: FDesktop.resx$tsDeinterleave.Text$Message
+#: UiStrings.resx$Deinterleave$Message
 msgid "Deinterleave"
 msgstr "Neukršteno"
 
-#: FDesktop.resx$ctxDelete.Text$Message
-#: FDesktop.resx$tsDelete.Text$Message
-#: FProfiles.resx$btnDelete.Text$Message
-#: FProfiles.resx$ctxDelete.Text$Message
 #: FRecover.resx$btnDelete.Text$Message
-#: FViewer.resx$tsDelete.Text$Message
 #: MiscResources.resx$Delete$Message
+#: UiStrings.resx$Delete$Message
 msgid "Delete"
 msgstr "Obriši"
 
-#: FDesktop.resx$tsDeskew.Text$Message
-#: FViewer.resx$tsDeskew.Text$Message
+#: UiStrings.resx$Deskew$Message
 msgid "Deskew"
 msgstr ""
 
@@ -507,31 +506,39 @@ msgid "Deskew scanned pages"
 msgstr ""
 
 #: MiscResources.resx$AutoDeskewing$Message
-msgid "Deskewing"
+msgid "Deskewing..."
 msgstr ""
 
 #: FEditProfile.resx$label1.Text$Message
-msgid "Device"
-msgstr "Uređaj"
+#: UiStrings.resx$DeviceLabel$Message
+msgid "Device:"
+msgstr "Uređaj:"
 
 #: FPageSize.resx$label2.Text$Message
 msgid "Dimensions"
 msgstr ""
 
 #: FEditProfile.resx$label8.Text$Message
-msgid "Display name"
-msgstr "Ime za prikaz"
+#: UiStrings.resx$DisplayNameLabel$Message
+msgid "Display name:"
+msgstr "Ime za prikaz:"
+
+#: UiStrings.resx$DocumentCorrection$Message
+msgid "Document Correction"
+msgstr ""
 
 #: MiscResources.resx$Donate$Message
+#: UiStrings.resx$Donate$Message
 msgid "Donate"
 msgstr ""
 
 #: FBatchPrompt.resx$btnDone.Text$Message
-#: FProfiles.resx$btnDone.Text$Message
+#: UiStrings.resx$Done$Message
 msgid "Done"
 msgstr "Gotovo"
 
 #: FOcrLanguageDownload.resx$btnDownload.Text$Message
+#: UiStrings.resx$Download$Message
 msgid "Download"
 msgstr "Preuzmi"
 
@@ -544,6 +551,7 @@ msgid "Download Needed"
 msgstr ""
 
 #: FDownloadProgress.resx$$this.Text$Message
+#: UiStrings.resx$DownloadProgressFormTitle$Message
 msgid "Download Progress"
 msgstr "Tok preuzimanja"
 
@@ -551,13 +559,16 @@ msgstr "Tok preuzimanja"
 msgid "Duplex"
 msgstr "Dvostrano"
 
-#: FProfiles.resx$btnEdit.Text$Message
-#: FProfiles.resx$ctxEdit.Text$Message
+#: UiStrings.resx$Edit$Message
 msgid "Edit"
 msgstr "Uredi"
 
-#: FDesktop.resx$tsdEmailPDF.Text$Message
+#: UiStrings.resx$EmailAllAsPdf$Message
+msgid "Email All as PDF"
+msgstr ""
+
 #: MiscResources.resx$EmailPdf$Message
+#: UiStrings.resx$EmailPdf$Message
 msgid "Email PDF"
 msgstr "Pošalji PDF e-mailom"
 
@@ -565,12 +576,17 @@ msgstr "Pošalji PDF e-mailom"
 msgid "Email PDF Progress"
 msgstr "Tok slanja PDF e-mailom"
 
-#: FDesktop.resx$tsEmailSettings.Text$Message
+#: UiStrings.resx$EmailSelectedAsPdf$Message
+msgid "Email Selected as PDF"
+msgstr ""
+
 #: FEmailSettings.resx$$this.Text$Message
+#: UiStrings.resx$EmailSettings$Message
 msgid "Email Settings"
 msgstr "E-mail podešavanja"
 
 #: FEditProfile.resx$cbAutoSave.Text$Message
+#: UiStrings.resx$EnableAutoSave$Message
 msgid "Enable Auto Save"
 msgstr "Omogući automatsko snimanje"
 
@@ -593,6 +609,7 @@ msgstr "Greška"
 
 #: FOcrLanguageDownload.resx$labelSizeEstimate.Text$Message
 #: MiscResources.resx$EstimatedDownloadSize$Message
+#: UiStrings.resx$EstimatedDownloadSize$Message
 msgid "Estimated download size: {0} MB"
 msgstr "Procenjena veličina preuzimanja: {0} MB"
 
@@ -604,6 +621,10 @@ msgstr "Razmenjiva slika (*.exif)"
 msgid "Exclude blank pages"
 msgstr "Izostavi prazne strane"
 
+#: SettingsResources.resx$OcrMode_Fast$Message
+msgid "Fast"
+msgstr ""
+
 #: SettingsResources.resx$Source_Feeder$Message
 msgid "Feeder"
 msgstr "Umetač"
@@ -614,11 +635,10 @@ msgstr "Naziv datoteke"
 
 #: FAutoSaveSettings.resx$lblFilePath.Text$Message
 #: FBatchScan.resx$lblFilePath.Text$Message
-msgid "File path"
-msgstr "Putanja datoteke"
+msgid "File path:"
+msgstr "Putanja datoteke:"
 
-#: FDesktop.resx$tsFlip.Text$Message
-#: FViewer.resx$tsFlip.Text$Message
+#: UiStrings.resx$Flip$Message
 msgid "Flip"
 msgstr "Okreni"
 
@@ -627,7 +647,7 @@ msgid "Flip duplexed pages"
 msgstr ""
 
 #: FImageSettings.resx$lblWarning.Text$Message
-msgid "For high JPEG qualities (80+), also increase Image Quality in your profile for best results"
+msgid "For high JPEG qualities (80+), also increase Image Quality in your profile for best results."
 msgstr ""
 
 #: MiscResources.resx$FileTypeGif$Message
@@ -635,6 +655,7 @@ msgid "GIF File (*.gif)"
 msgstr "GIF datoteka (*.gif)"
 
 #: FOcrSetup.resx$linkGetLanguages.Text$Message
+#: UiStrings.resx$GetMoreLanguages$Message
 msgid "Get more languages"
 msgstr "Instaliraj više jezika"
 
@@ -651,24 +672,23 @@ msgid "Grayscale"
 msgstr "Nijanse sive"
 
 #: FEditProfile.resx$label9.Text$Message
-msgid "Horizontal align"
-msgstr "Vodoravno poravnanje"
+#: UiStrings.resx$HorizontalAlignLabel$Message
+msgid "Horizontal align:"
+msgstr "Vodoravno poravnanje:"
 
 #: FPlaceholders.resx$label7.Text$Message
 msgid "Hour (0-23)"
 msgstr "Sat (0-23)"
 
-#: FDesktop.resx$tsHueSaturation.Text$Message
-#: FHueSaturation.resx$$this.Text$Message
-#: FViewer.resx$tsHueSaturation.Text$Message
+#: UiStrings.resx$HueSaturation$Message
 msgid "Hue / Saturation"
 msgstr ""
 
-#: FAbout.resx$label1.Text$Message
-msgid "Icons from"
-msgstr "Ikonice iz"
+#: UiStrings.resx$IconsFrom$Message
+msgid "Icons from:"
+msgstr "Ikonice iz:"
 
-#: FDesktop.resx$tsdImage.Text$Message
+#: UiStrings.resx$Image$Message
 msgid "Image"
 msgstr "Slika"
 
@@ -680,16 +700,16 @@ msgstr "Slikovne datoteke"
 msgid "Image Quality"
 msgstr "Kvalitet slike"
 
-#: FDesktop.resx$tsImageSettings.Text$Message
 #: FImageSettings.resx$$this.Text$Message
+#: UiStrings.resx$ImageSettings$Message
 msgid "Image Settings"
 msgstr "Podešavanje slike"
 
 #: MiscResources.resx$ImageSaved$Message
-msgid "Image saved"
+msgid "Image saved."
 msgstr ""
 
-#: FDesktop.resx$tsImport.Text$Message
+#: UiStrings.resx$Import$Message
 msgid "Import"
 msgstr "Uvezi"
 
@@ -697,13 +717,13 @@ msgstr "Uvezi"
 msgid "Import Progress"
 msgstr "Uvoz u toku"
 
-#: MiscResources.resx$Importing$Message
-msgid "Importing"
-msgstr "Uvozim"
-
 #: MiscResources.resx$ImportingFormat$Message
-msgid "Importing {0}"
-msgstr "Uvozim {0}"
+msgid "Importing {0}..."
+msgstr "Uvozim {0}..."
+
+#: MiscResources.resx$Importing$Message
+msgid "Importing..."
+msgstr "Uvozim..."
 
 #: MiscResources.resx$Install$Message
 msgid "Install {0}"
@@ -722,10 +742,10 @@ msgid "Installation complete. Do you want to restart NAPS2 now?"
 msgstr "Instalacija uspešna. Da li želite restart aplikacije?"
 
 #: MiscResources.resx$InstallFailed$Message
-msgid "Installation failed"
-msgstr "Instalacija nije uspela"
+msgid "Installation failed."
+msgstr "Instalacija nije uspela."
 
-#: FDesktop.resx$tsInterleave.Text$Message
+#: UiStrings.resx$Interleave$Message
 msgid "Interleave"
 msgstr "Ukrštanje"
 
@@ -733,19 +753,23 @@ msgstr "Ukrštanje"
 msgid "JPEG File (*.jpg, *.jpeg)"
 msgstr "JPEG datoteka (*.jpg, *.jpeg)"
 
+#: MiscResources.resx$FileTypeJp2$Message
+msgid "JPEG2000 File (*.jp2, *.jpx)"
+msgstr ""
+
 #: FImageSettings.resx$groupJpeg.Text$Message
 msgid "Jpeg Quality"
 msgstr "Jpeg kvalitet"
 
 #: FPdfSettings.resx$label6.Text$Message
-msgid "Keywords"
-msgstr "Ključne reči"
+msgid "Keywords:"
+msgstr "Ključne reči:"
 
 #: SettingsResources.resx$TiffComp_Lzw$Message
 msgid "LZW"
 msgstr ""
 
-#: FDesktop.resx$toolStripDropDownButton1.Text$Message
+#: UiStrings.resx$Language$Message
 msgid "Language"
 msgstr "Jezik (language)"
 
@@ -761,11 +785,8 @@ msgstr ""
 msgid "Load images into NAPS2"
 msgstr "Učitaj slike u aplikaciju"
 
-#: FDesktop.resx$tStrip.Text$Message
-msgid "Main toolbar"
-msgstr "Glavna traka sa alatima"
-
 #: FOcrSetup.resx$checkBoxEnableOcr.Text$Message
+#: UiStrings.resx$MakePdfsSearchable$Message
 msgid "Make PDFs searchable using OCR"
 msgstr "Učinite PDF-ove pretraživim koristeći OCR"
 
@@ -790,11 +811,11 @@ msgstr "Mesec (01-12)"
 msgid "More info"
 msgstr "Više informacija"
 
-#: FDesktop.resx$tsMove.SecondText$Message
+#: UiStrings.resx$MoveDown$Message
 msgid "Move Down"
 msgstr "Pomeri dole"
 
-#: FDesktop.resx$tsMove.FirstText$Message
+#: UiStrings.resx$MoveUp$Message
 msgid "Move Up"
 msgstr "Pomeri gore"
 
@@ -807,11 +828,17 @@ msgid "Multiple scans (prompt between scans)"
 msgstr "Višestruko skeniranje (pitaj između skeniranja)"
 
 #: MiscResources.resx$NAPS2$Message
+#: SdkResources.resx$NAPS2$Message
+#: UiStrings.resx$Naps2$Message
 msgid "NAPS2"
 msgstr ""
 
+#: UiStrings.resx$Naps2TitleFormat$Message
+msgid "NAPS2 - {0}"
+msgstr ""
+
 #: MiscResources.resx$DonatePrompt$Message
-msgid "NAPS2 is completely free. Consider making a donation"
+msgid "NAPS2 is completely free. Consider making a donation."
 msgstr ""
 
 #: FPageSize.resx$label1.Text$Message
@@ -819,18 +846,18 @@ msgid "Name (optional)"
 msgstr ""
 
 #: MiscResources.resx$NameMissing$Message
-msgid "Name missing"
-msgstr "Nedostaje ime"
+msgid "Name missing."
+msgstr "Nedostaje ime."
 
-#: FProfiles.resx$btnAdd.Text$Message
+#: UiStrings.resx$New$Message
 msgid "New"
 msgstr "Novi"
 
-#: FDesktop.resx$tsNewProfile.Text$Message
+#: UiStrings.resx$NewProfile$Message
 msgid "New Profile"
 msgstr "Novi profil"
 
-#: FViewer.resx$tsNext.Text$Message
+#: UiStrings.resx$Next$Message
 msgid "Next"
 msgstr "Sledeće"
 
@@ -839,32 +866,35 @@ msgid "Next Scan"
 msgstr "Sledeći sken"
 
 #: MiscResources.resx$NoDeviceSelected$Message
-msgid "No device selected"
-msgstr "Uređaj nije odabran"
+#: SdkResources.resx$NoDeviceSelected$Message
+msgid "No device selected."
+msgstr "Uređaj nije odabran."
 
 #: MiscResources.resx$NoPagesInFeeder$Message
-msgid "No pages are in the feeder"
-msgstr "Nema listova u uvlakaču"
+#: SdkResources.resx$NoPagesInFeeder$Message
+msgid "No pages are in the feeder."
+msgstr "Nema listova u uvlakaču."
 
 #: FEmailSettings.resx$lblProvider.Text$Message
 #: SettingsResources.resx$EmailProvider_NotSelected$Message
-msgid "No provider selected"
+msgid "No provider selected."
 msgstr ""
 
 #: MiscResources.resx$NoDevicesFound$Message
-msgid "No scanning device was found"
-msgstr "Uređaj za skeniranje nije pronađen"
+#: SdkResources.resx$NoDevicesFound$Message
+msgid "No scanning device was found."
+msgstr "Uređaj za skeniranje nije pronađen."
 
 #: MiscResources.resx$NoUpdates$Message
-msgid "No updates available"
+msgid "No updates available."
 msgstr ""
 
 #: SettingsResources.resx$TiffComp_None$Message
 msgid "None"
 msgstr ""
 
-#: FDesktop.resx$$this.Text$Message
-msgid "Not Another PDF Scanner 2"
+#: UiStrings.resx$Naps2FullName$Message
+msgid "Not Another PDF Scanner"
 msgstr ""
 
 #: FRecover.resx$btnCancel.Text$Message
@@ -872,14 +902,15 @@ msgid "Not Now"
 msgstr "Ne sada"
 
 #: FBatchScan.resx$lblNumberOfScans.Text$Message
-msgid "Number of scans"
-msgstr "Broj skenova"
+msgid "Number of scans:"
+msgstr "Broj skenova:"
 
-#: FDesktop.resx$tsOcr.Text$Message
+#: UiStrings.resx$Ocr$Message
 msgid "OCR"
 msgstr ""
 
 #: FOcrLanguageDownload.resx$$this.Text$Message
+#: UiStrings.resx$OcrDownloadFormTitle$Message
 msgid "OCR Download"
 msgstr "Preuzmi OCR"
 
@@ -888,18 +919,20 @@ msgid "OCR Progress"
 msgstr ""
 
 #: FOcrSetup.resx$$this.Text$Message
+#: UiStrings.resx$OcrSetupFormTitle$Message
 msgid "OCR Setup"
 msgstr "Podesi OCR"
 
 #: FOcrSetup.resx$label1.Text$Message
-msgid "OCR language"
-msgstr "OCR jezik"
+#: UiStrings.resx$OcrLanguageLabel$Message
+msgid "OCR language:"
+msgstr "OCR jezik:"
 
 #: FOcrSetup.resx$labelOcrMode.Text$Message
-msgid "OCR mode"
+#: UiStrings.resx$OcrModeLabel$Message
+msgid "OCR mode:"
 msgstr ""
 
-#: FAbout.resx$okButton.Text$Message
 #: FAdvancedScanSettings.resx$btnOK.Text$Message
 #: FAutoSaveSettings.resx$btnOK.Text$Message
 #: FEditProfile.resx$btnOK.Text$Message
@@ -911,7 +944,7 @@ msgstr ""
 #: FPdfPassword.resx$btnOK.Text$Message
 #: FPdfSettings.resx$btnOK.Text$Message
 #: FPlaceholders.resx$btnOK.Text$Message
-#: ImageForm.resx$btnOK.Text$Message
+#: UiStrings.resx$OK$Message
 msgid "OK"
 msgstr "U redu"
 
@@ -934,8 +967,8 @@ msgid "One file per scan"
 msgstr "Svaki sken je zasebna datoteka"
 
 #: MiscResources.resx$FilesCouldNotBeDownloaded$Message
-msgid "One or more files could not be downloaded"
-msgstr "Jedna ili više datoteka nije moglo biti preuzeto"
+msgid "One or more files could not be downloaded."
+msgstr "Jedna ili više datoteka nije moglo biti preuzeto."
 
 #: NotifyWidget.resx$openFolderToolStripMenuItem.Text$Message
 msgid "Open Folder"
@@ -958,21 +991,20 @@ msgid "Overwrite File"
 msgstr "Presnimiti datoteku?"
 
 #: FPdfSettings.resx$lblOwnerPassword.Text$Message
-msgid "Owner Password"
-msgstr "Lozinka vlasnika"
+msgid "Owner Password:"
+msgstr "Lozinka vlasnika:"
 
 #: MiscResources.resx$FileTypePdf$Message
 msgid "PDF Document (*.pdf)"
 msgstr ""
 
-#: FDesktop.resx$tsPDFSettings.Text$Message
-#: FDesktop.resx$tsPdfSettings2.Text$Message
 #: FPdfSettings.resx$$this.Text$Message
+#: UiStrings.resx$PdfSettings$Message
 msgid "PDF Settings"
 msgstr "PDF podešavanja"
 
 #: MiscResources.resx$PdfSaved$Message
-msgid "PDF saved"
+msgid "PDF saved."
 msgstr ""
 
 #: SettingsResources.resx$PdfCompat_PdfA1B$Message
@@ -996,19 +1028,20 @@ msgid "PNG File (*.png)"
 msgstr "PNG datoteka (*.png)"
 
 #: FEditProfile.resx$label4.Text$Message
-msgid "Page size"
-msgstr "Veličina stranice"
+#: UiStrings.resx$PageSizeLabel$Message
+msgid "Page size:"
+msgstr "Veličina stranice:"
 
 #: FEditProfile.resx$label2.Text$Message
-msgid "Paper source"
+#: UiStrings.resx$PaperSourceLabel$Message
+msgid "Paper source:"
 msgstr ""
 
 #: FPdfPassword.resx$$this.Text$Message
 msgid "Password"
 msgstr "Lozinka"
 
-#: FDesktop.resx$ctxPaste.Text$Message
-#: FProfiles.resx$ctxPaste.Text$Message
+#: UiStrings.resx$Paste$Message
 msgid "Paste"
 msgstr "Nalepi"
 
@@ -1027,33 +1060,37 @@ msgid "Post-processing"
 msgstr ""
 
 #: FBatchScan.resx$lblStatus.Text$Message
-msgid "Press Start when ready"
-msgstr "Pritisni Start kada si spreman"
+msgid "Press Start when ready."
+msgstr "Pritisni Start kada si spreman."
 
-#: FPlaceholders.resx$label2.Text$Message
-#: FViewer.resx$$this.Text$Message
+#: UiStrings.resx$PreviewFormTitle$Message
 msgid "Preview"
 msgstr "Pregled"
 
-#: FViewer.resx$tsPrev.Text$Message
+#: FPlaceholders.resx$label2.Text$Message
+msgid "Preview:"
+msgstr "Pregled:"
+
+#: UiStrings.resx$Previous$Message
 msgid "Previous"
 msgstr "Prethodni"
 
-#: FDesktop.resx$tsPrint.Text$Message
 #: MiscResources.resx$Print$Message
+#: UiStrings.resx$Print$Message
 msgid "Print"
 msgstr "Štampaj"
 
-#: FBatchScan.resx$lblProfile.Text$Message
-msgid "Profile"
-msgstr ""
-
 #: FEditProfile.resx$$this.Text$Message
+#: UiStrings.resx$EditProfileFormTitle$Message
 msgid "Profile Settings"
 msgstr "Postavke profila"
 
-#: FDesktop.resx$tsProfiles.Text$Message
-#: FProfiles.resx$$this.Text$Message
+#: FBatchScan.resx$lblProfile.Text$Message
+msgid "Profile:"
+msgstr ""
+
+#: UiStrings.resx$Profiles$Message
+#: UiStrings.resx$ProfilesFormTitle$Message
 msgid "Profiles"
 msgstr "Profil"
 
@@ -1066,8 +1103,8 @@ msgid "Provider"
 msgstr ""
 
 #: FBatchPrompt.resx$lblStatus.Text$Message
-msgid "Ready for scan {0}"
-msgstr "Spreman za skeniranje {0}"
+msgid "Ready for scan {0}."
+msgstr "Spreman za skeniranje {0}."
 
 #: FRecover.resx$btnRecover.Text$Message
 msgid "Recover"
@@ -1078,8 +1115,8 @@ msgid "Recover Scanned Images"
 msgstr "Oporavi skenirane slike"
 
 #: MiscResources.resx$Recovering$Message
-msgid "Recovering"
-msgstr "Oporavljanje"
+msgid "Recovering..."
+msgstr "Oporavljanje..."
 
 #: MiscResources.resx$RecoveryProgress$Message
 msgid "Recovery Progress"
@@ -1091,11 +1128,11 @@ msgstr "Tok oporavka"
 msgid "Remember these settings"
 msgstr "Zapamti ova podešavanja"
 
-#: FDesktop.resx$tsdReorder.Text$Message
+#: UiStrings.resx$Reorder$Message
 msgid "Reorder"
 msgstr "Resortiraj"
 
-#: FDesktop.resx$tsReset.Text$Message
+#: UiStrings.resx$Reset$Message
 msgid "Reset"
 msgstr ""
 
@@ -1104,8 +1141,9 @@ msgid "Reset Image"
 msgstr "Reset slike"
 
 #: FEditProfile.resx$label5.Text$Message
-msgid "Resolution"
-msgstr "Rezolucija"
+#: UiStrings.resx$ResolutionLabel$Message
+msgid "Resolution:"
+msgstr "Rezolucija:"
 
 #: FAdvancedScanSettings.resx$btnRestoreDefaults.Text$Message
 #: FEmailSettings.resx$btnRestoreDefaults.Text$Message
@@ -1114,11 +1152,11 @@ msgstr "Rezolucija"
 msgid "Restore Defaults"
 msgstr "Vrati na podrazumevana podešavanja"
 
-#: FDesktop.resx$tsReverse.Text$Message
+#: UiStrings.resx$Reverse$Message
 msgid "Reverse"
 msgstr "Unazad"
 
-#: ImageForm.resx$btnRevert.Text$Message
+#: UiStrings.resx$Revert$Message
 msgid "Revert"
 msgstr "Vrati"
 
@@ -1126,40 +1164,46 @@ msgstr "Vrati"
 msgid "Right"
 msgstr "Desno"
 
-#: FDesktop.resx$tsdRotate.Text$Message
-#: FRotate.resx$$this.Text$Message
-#: FViewer.resx$tsdRotate.Text$Message
+#: UiStrings.resx$Rotate$Message
 msgid "Rotate"
 msgstr " Rotiraj"
 
-#: FDesktop.resx$tsRotateLeft.Text$Message
-#: FViewer.resx$tsRotateLeft.Text$Message
+#: UiStrings.resx$RotateLeft$Message
 msgid "Rotate Left"
 msgstr "Rotiraj levo"
 
-#: FDesktop.resx$tsRotateRight.Text$Message
-#: FViewer.resx$tsRotateRight.Text$Message
+#: UiStrings.resx$RotateRight$Message
 msgid "Rotate Right"
 msgstr "Rotiraj desno"
 
 #: FProgress.resx$btnRunInBG.Text$Message
+#: UiStrings.resx$RunInBackground$Message
 msgid "Run in Background"
 msgstr ""
 
 #: MiscResources.resx$RunningOcr$Message
-msgid "Running OCR"
+msgid "Running OCR..."
 msgstr ""
 
 #: FEditProfile.resx$rdSANE.Text$Message
+#: UiStrings.resx$SaneDriver$Message
 msgid "SANE Driver"
 msgstr ""
 
-#: FViewer.resx$tsSaveImage.Text$Message
-msgid "Save Image"
+#: UiStrings.resx$Save$Message
+msgid "Save"
 msgstr ""
 
-#: FDesktop.resx$tsdSaveImages.Text$Message
+#: UiStrings.resx$SaveAllAsImages$Message
+msgid "Save All as Images"
+msgstr ""
+
+#: UiStrings.resx$SaveAllAsPdf$Message
+msgid "Save All as PDF"
+msgstr ""
+
 #: MiscResources.resx$SaveImages$Message
+#: UiStrings.resx$SaveImages$Message
 msgid "Save Images"
 msgstr "Snimi slike"
 
@@ -1167,15 +1211,22 @@ msgstr "Snimi slike"
 msgid "Save Images Progress"
 msgstr "Tok snimanja slike"
 
-#: FDesktop.resx$tsdSavePDF.Text$Message
-#: FViewer.resx$tsSavePDF.Text$Message
 #: MiscResources.resx$SavePdf$Message
+#: UiStrings.resx$SavePdf$Message
 msgid "Save PDF"
 msgstr "Snimi PDF"
 
 #: MiscResources.resx$SavePdfProgress$Message
 msgid "Save PDF Progress"
 msgstr "Tok snimanja PDF"
+
+#: UiStrings.resx$SaveSelectedAsImages$Message
+msgid "Save Selected as Images"
+msgstr ""
+
+#: UiStrings.resx$SaveSelectedAsPdf$Message
+msgid "Save Selected as PDF"
+msgstr ""
 
 #: FBatchScan.resx$rdSaveToSingleFile.Text$Message
 msgid "Save to a single file"
@@ -1186,26 +1237,25 @@ msgid "Save to multiple files"
 msgstr "Snimi kao više datoteka"
 
 #: MiscResources.resx$BatchStatusSaving$Message
-msgid "Saving batch results"
+msgid "Saving batch results..."
 msgstr ""
 
 #: MiscResources.resx$SavingFormat$Message
-msgid "Saving {0}"
-msgstr "Snimanje {0}"
+msgid "Saving {0}..."
+msgstr "Snimanje {0}..."
 
-#: FEditProfile.resx$label10.Text$Message
-msgid "Scale"
-msgstr "Razmer"
-
-#: TiffViewerCtl.resx$tsStretch.ToolTipText$Message
+#: TiffViewerCtl.resx$_tsStretch.ToolTipText$Message
 msgid "Scale With Window"
 msgstr "Skaliraj sa veličinom prozora"
 
+#: FEditProfile.resx$label10.Text$Message
+#: UiStrings.resx$ScaleLabel$Message
+msgid "Scale:"
+msgstr "Razmer:"
+
 #: FBatchPrompt.resx$btnScan.Text$Message
-#: FDesktop.resx$tsScan.Text$Message
-#: FProfiles.resx$btnScan.Text$Message
-#: FProfiles.resx$ctxScan.Text$Message
 #: MiscResources.resx$Scan$Message
+#: UiStrings.resx$Scan$Message
 msgid "Scan"
 msgstr "Skeniraj"
 
@@ -1217,45 +1267,46 @@ msgstr "Konfiguracija skeniranja"
 msgid "Scanned Image"
 msgstr "Skenirana slika"
 
-#: FScanProgress.resx$labelPage.Text$Message
-#: MiscResources.resx$BatchStatusPage$Message
 #: MiscResources.resx$ScanPageProgress$Message
-#: MiscResources.resx$ScanProgressPage$Message
 msgid "Scanning page {0}"
 msgstr "Skeniranje strane {0}"
 
 #: MiscResources.resx$BatchStatusScanPage$Message
-msgid "Scanning page {0} (scan {1})"
-msgstr "Skeniranje strane {0} (scan {1})"
+msgid "Scanning page {0} (scan {1})..."
+msgstr "Skeniranje strane {0} (scan {1})..."
+
+#: MiscResources.resx$BatchStatusPage$Message
+#: MiscResources.resx$ScanProgressPage$Message
+msgid "Scanning page {0}..."
+msgstr "Skeniranje strane {0}..."
 
 #: FPlaceholders.resx$label9.Text$Message
 msgid "Second (00-59)"
 msgstr "Sekunde (00-59)"
 
 #: FSelectDevice.resx$btnSelect.Text$Message
+#: UiStrings.resx$Select$Message
 msgid "Select"
 msgstr "Izaberi"
 
-#: FDesktop.resx$ctxSelectAll.Text$Message
+#: UiStrings.resx$SelectAll$Message
 msgid "Select All"
 msgstr "Izaberi sve sve"
 
 #: FSelectDevice.resx$$this.Text$Message
+#: UiStrings.resx$SelectSource$Message
 msgid "Select Source"
 msgstr "Odaberi izvor"
 
 #: MiscResources.resx$SelectProfileBeforeScan$Message
-msgid "Select a profile before clicking Scan"
-msgstr "Izaberite profil pre nego kliknete dugme za skeniranje"
+msgid "Select a profile before clicking Scan."
+msgstr "Izaberite profil pre nego kliknete dugme za skeniranje."
 
 #: FOcrLanguageDownload.resx$label3.Text$Message
-msgid "Select one or more languages"
-msgstr "Izaberite jedan ili više jezika"
+#: UiStrings.resx$OcrSelectLanguageLabel$Message
+msgid "Select one or more languages:"
+msgstr "Izaberite jedan ili više jezika:"
 
-#: FDesktop.resx$tsEmailPDFSelected.Text$Message
-#: FDesktop.resx$tsReverseSelected.Text$Message
-#: FDesktop.resx$tsSaveImagesSelected.Text$Message
-#: FDesktop.resx$tsSavePDFSelected.Text$Message
 #: MiscResources.resx$SelectedCount$Message
 msgid "Selected ({0})"
 msgstr "Odabrano ({0})"
@@ -1265,13 +1316,11 @@ msgstr "Odabrano ({0})"
 msgid "Separate files by Patch-T"
 msgstr ""
 
-#: FProfiles.resx$ctxSetDefault.Text$Message
+#: UiStrings.resx$SetDefault$Message
 msgid "Set Default"
 msgstr "Postavi kao podrazumevano"
 
-#: FDesktop.resx$tsSharpen.Text$Message
-#: FSharpen.resx$$this.Text$Message
-#: FViewer.resx$tsSharpen.Text$Message
+#: UiStrings.resx$Sharpen$Message
 msgid "Sharpen"
 msgstr ""
 
@@ -1302,14 +1351,15 @@ msgid "Stretch to page size"
 msgstr ""
 
 #: FPdfSettings.resx$label5.Text$Message
-msgid "Subject"
-msgstr "Tema"
+msgid "Subject:"
+msgstr "Tema:"
 
 #: MiscResources.resx$FileTypeTiff$Message
 msgid "TIFF File (*.tiff, *.tif)"
 msgstr "TIFF datoteka (*.tiff, *tif)"
 
 #: FEditProfile.resx$rdTWAIN.Text$Message
+#: UiStrings.resx$TwainDriver$Message
 msgid "TWAIN Driver"
 msgstr ""
 
@@ -1318,23 +1368,26 @@ msgid "Technical Details"
 msgstr ""
 
 #: MiscResources.resx$TesseractNotAvailable$Message
-msgid "The OCR engine is not available. Make sure to install the required package"
+#: SdkResources.resx$TesseractNotAvailable$Message
+msgid "The OCR engine is not available. Make sure to install the required package:"
 msgstr ""
 
 #: MiscResources.resx$SaneNotAvailable$Message
-msgid "The SANE driver is not available. Make sure to install the required packages"
+#: SdkResources.resx$SaneNotAvailable$Message
+msgid "The SANE driver is not available. Make sure to install the required packages:"
 msgstr ""
 
 #: MiscResources.resx$ImportErrorCouldNot$Message
-msgid "The file '{0}' could not be imported"
-msgstr "Datoteka '{0}' nije mogla biti uvezena"
+#: SdkResources.resx$ImportErrorCouldNot$Message
+msgid "The file '{0}' could not be imported."
+msgstr "Datoteka '{0}' nije mogla biti uvezena."
 
 #: MiscResources.resx$ImportErrorNAPS2Pdf$Message
-msgid "The file '{0}' could not be imported. Only PDF files generated by NAPS2 can be imported"
-msgstr "Datoteka '{0}' nije mogla biti uvezena. Samo PDF datoteke generisane od strane ove aplikacije mogu biti uvezene"
+msgid "The file '{0}' could not be imported. Only PDF files generated by NAPS2 can be imported."
+msgstr "Datoteka '{0}' nije mogla biti uvezena. Samo PDF datoteke generisane od strane ove aplikacije mogu biti uvezene."
 
 #: MiscResources.resx$FileInUse$Message
-msgid "The file could not be overwritten because it is currently in use"
+msgid "The file could not be overwritten because it is currently in use."
 msgstr ""
 
 #: MiscResources.resx$ConfirmOverwriteFile$Message
@@ -1346,56 +1399,65 @@ msgid "The following file is encrypted and requires a password to open: {0}"
 msgstr "Ova datoteka je zaštićena i zahteva lozinku da je otvorite: {0}"
 
 #: MiscResources.resx$DevicePaperJam$Message
-msgid "The scanner has a paper jam"
+#: SdkResources.resx$DevicePaperJam$Message
+msgid "The scanner has a paper jam."
 msgstr ""
 
 #: MiscResources.resx$DeviceWarmingUp$Message
-msgid "The scanner is warming up"
+#: SdkResources.resx$DeviceWarmingUp$Message
+msgid "The scanner is warming up."
 msgstr ""
 
 #: MiscResources.resx$DeviceCoverOpen$Message
-msgid "The scanner's cover is open"
+#: SdkResources.resx$DeviceCoverOpen$Message
+msgid "The scanner's cover is open."
 msgstr ""
 
 #: MiscResources.resx$DriverNotSupported$Message
-msgid "The selected driver is not supported on this system"
+#: SdkResources.resx$DriverNotSupported$Message
+msgid "The selected driver is not supported on this system."
 msgstr ""
 
 #: MiscResources.resx$DeviceNotFound$Message
-msgid "The selected scanner could not be found"
-msgstr "Odabrani skener nije pronađen"
+#: SdkResources.resx$DeviceNotFound$Message
+msgid "The selected scanner could not be found."
+msgstr "Odabrani skener nije pronađen."
 
 #: MiscResources.resx$NoFeederSupport$Message
-msgid "The selected scanner does not support using a feeder. If your scanner does have a feeder, try using a different driver"
-msgstr "Odabrani skener ne podržava korišćenje uvlakača. Ako vaš skener nema uvlakač, pokušajte da instalirate drugi drajver"
+#: SdkResources.resx$NoFeederSupport$Message
+msgid "The selected scanner does not support using a feeder. If your scanner does have a feeder, try using a different driver."
+msgstr "Odabrani skener ne podržava korišćenje uvlakača. Ako vaš skener nema uvlakač, pokušajte da instalirate drugi drajver."
 
 #: MiscResources.resx$NoDuplexSupport$Message
-msgid "The selected scanner does not support using duplex. If your scanner is supposed to support duplex, try using a different driver"
-msgstr "Odabrani skener ne podržava dvostrano skeniranje. Ako vaš skener nema duplekser, pokušajte da instalirate drugi drajver"
+#: SdkResources.resx$NoDuplexSupport$Message
+msgid "The selected scanner does not support using duplex. If your scanner is supposed to support duplex, try using a different driver."
+msgstr "Odabrani skener ne podržava dvostrano skeniranje. Ako vaš skener nema duplekser, pokušajte da instalirate drugi drajver."
 
 #: MiscResources.resx$DeviceBusy$Message
-msgid "The selected scanner is busy"
+#: SdkResources.resx$DeviceBusy$Message
+msgid "The selected scanner is busy."
 msgstr ""
 
 #: MiscResources.resx$DeviceOffline$Message
-msgid "The selected scanner is offline"
-msgstr "Odabrani skener nije uključen"
+#: SdkResources.resx$DeviceOffline$Message
+msgid "The selected scanner is offline."
+msgstr "Odabrani skener nije uključen."
 
 #: FImageSettings.resx$groupTiff.Text$Message
 msgid "Tiff Options"
 msgstr ""
 
 #: FBatchScan.resx$lblTimeBetweenScans.Text$Message
-msgid "Time between scans (seconds)"
-msgstr "Vreme između skenova (sekunde)"
+msgid "Time between scans (seconds):"
+msgstr "Vreme između skenova (sekunde):"
 
 #: FPdfSettings.resx$label4.Text$Message
-msgid "Title"
-msgstr "Naslov"
+msgid "Title:"
+msgstr "Naslov:"
 
 #: FAdvancedScanSettings.resx$label1.Text$Message
-msgid "Twain Implementation"
-msgstr "Uvođenje TWAIN-a"
+msgid "Twain Implementation:"
+msgstr "Uvođenje TWAIN-a:"
 
 #: SettingsResources.resx$PageSize_Legal$Message
 msgid "US Legal (8.5x14 in)"
@@ -1413,65 +1475,69 @@ msgstr "Nesnimljene promene"
 msgid "Update Progress"
 msgstr ""
 
+#: MiscResources.resx$UpdateCheckDisabled$Message
+msgid "Update checking is disabled."
+msgstr ""
+
 #: MiscResources.resx$Updating$Message
-msgid "Updating"
+msgid "Updating..."
 msgstr ""
 
 #: MiscResources.resx$UploadingEmail$Message
-msgid "Uploading email"
+msgid "Uploading email..."
 msgstr ""
 
 #: FEditProfile.resx$rdbNative.Text$Message
+#: UiStrings.resx$UseNativeUi$Message
 msgid "Use native UI"
 msgstr "Koristi izvorni korisnički interfejs"
 
 #: FEditProfile.resx$rdbConfig.Text$Message
+#: UiStrings.resx$UsePredefinedSettings$Message
 msgid "Use predefined settings"
 msgstr "Koristi predefinisane postavke"
 
 #: FPdfSettings.resx$lblUserPassword.Text$Message
-msgid "User Password"
-msgstr "Korisnička lozinka"
+msgid "User Password:"
+msgstr "Korisnička lozinka:"
 
 #: FOcrLanguageDownload.resx$label1.Text$Message
-msgid "Using OCR requires you to download each language you want to scan"
-msgstr "Korišćenje OCR-a zahteva da preuzmete svaki jezik koji želite da skenirate"
+#: UiStrings.resx$OcrDownloadSummaryText$Message
+msgid "Using OCR requires you to download each language you want to scan."
+msgstr "Korišćenje OCR-a zahteva da preuzmete svaki jezik koji želite da skenirate."
 
 #: MiscResources.resx$Version$Message
+#: SdkResources.resx$Version$Message
 msgid "Version {0}"
 msgstr "Verzija {0}"
 
-#: FDesktop.resx$ctxView.Text$Message
-#: FDesktop.resx$tsView.Text$Message
+#: UiStrings.resx$View$Message
 msgid "View"
 msgstr "Pogled"
 
 #: FEditProfile.resx$rdWIA.Text$Message
+#: UiStrings.resx$WiaDriver$Message
 msgid "WIA Driver"
 msgstr ""
 
 #: FTwainGui.resx$label1.Text$Message
-msgid "Waiting for TWAIN to complete"
-msgstr "Čekam da TWAIN završi"
+msgid "Waiting for TWAIN to complete..."
+msgstr "Čekam da TWAIN završi..."
 
 #: FAuthorize.resx$lblWaiting.Text$Message
-msgid "Waiting for authorization"
+msgid "Waiting for authorization..."
 msgstr ""
 
 #: MiscResources.resx$BatchStatusWaitingForScan$Message
-msgid "Waiting for scan {0}"
-msgstr "Čekam skeniranje {0}"
+msgid "Waiting for scan {0}..."
+msgstr "Čekam skeniranje {0}..."
 
 #: FAdvancedScanSettings.resx$label2.Text$Message
 msgid "White Threshold"
 msgstr "Granična vrednost belog"
 
 #: FAdvancedScanSettings.resx$label4.Text$Message
-msgid "Wia Version"
-msgstr ""
-
-#: FPageSize.resx$labelX.Text$Message
-msgid "X"
+msgid "Wia Version:"
 msgstr ""
 
 #: FPlaceholders.resx$label3.Text$Message
@@ -1483,43 +1549,39 @@ msgid "Year (00-99)"
 msgstr "Godina (00-99)"
 
 #: MiscResources.resx$PdfNoPermissionToExtractContent$Message
-msgid "You do not have permission to copy content from the file '{0}'"
-msgstr "Nije vam dopušteno da kopirate sadržaj datoteke '{0}'"
+#: SdkResources.resx$PdfNoPermissionToExtractContent$Message
+msgid "You do not have permission to copy content from the file '{0}'."
+msgstr "Nije vam dopušteno da kopirate sadržaj datoteke '{0}'."
 
 #: MiscResources.resx$DontHavePermission$Message
-msgid "You don't have permission to save files at this location"
-msgstr "Nemate dopuštenja da snimite datoteke na ovu lokaciju"
+msgid "You don't have permission to save files at this location."
+msgstr "Nemate dopuštenja da snimite datoteke na ovu lokaciju."
 
 #: MiscResources.resx$ExitWithUnsavedChanges$Message
 msgid "You have unsaved changes. Are you sure you want to exit and discard those changes?"
 msgstr "Promene nisu snimljene. Da li ste sigurni da želite da napustite program i odbacite promene?"
 
-#: TiffViewerCtl.resx$tsZoom.ToolTipText$Message
+#: TiffViewerCtl.resx$_tsZoom.ToolTipText$Message
+#: UiStrings.resx$Zoom$Message
 msgid "Zoom"
 msgstr "Uvećaj/Umanji"
 
-#: TiffViewerCtl.resx$tsZoomActual.ToolTipText$Message
+#: TiffViewerCtl.resx$_tsZoomActual.ToolTipText$Message
 msgid "Zoom Actual"
 msgstr "Uvećaj na pravu veličinu"
 
-#: TiffViewerCtl.resx$tsZoomPlus.ToolTipText$Message
+#: TiffViewerCtl.resx$_tsZoomPlus.ToolTipText$Message
+#: UiStrings.resx$ZoomIn$Message
 msgid "Zoom In"
 msgstr ""
 
-#: TiffViewerCtl.resx$tsZoomOut.ToolTipText$Message
+#: TiffViewerCtl.resx$_tsZoomOut.ToolTipText$Message
+#: UiStrings.resx$ZoomOut$Message
 msgid "Zoom Out"
 msgstr ""
 
 #: SettingsResources.resx$PageSizeUnit_Centimetre$Message
 msgid "cm"
-msgstr ""
-
-#: FAbout.resx$linkLabel2.Text$Message
-msgid "http://www.fatcow.com/free-icons"
-msgstr ""
-
-#: FAbout.resx$linkLabel1.Text$Message
-msgid "http://www.naps2.com"
 msgstr ""
 
 #: SettingsResources.resx$PageSizeUnit_Inch$Message
@@ -1530,7 +1592,6 @@ msgstr ""
 msgid "mm"
 msgstr ""
 
-#: FViewer.resx$lblPageTotal.Text$Message
 #: MiscResources.resx$OfN$Message
 msgid "of {0}"
 msgstr "od {0}"
@@ -1541,6 +1602,11 @@ msgstr ""
 
 #: MiscResources.resx$NamedPageSizeFormat$Message
 msgid "{0} ({1}x{2} {3})"
+msgstr ""
+
+#: FProgress.resx$labelNumber.Text$Message
+#: MiscResources.resx$ProgressFormat$Message
+msgid "{0} / {1}"
 msgstr ""
 
 #: FDownloadProgress.resx$labelSub.Text$Message
@@ -1558,10 +1624,11 @@ msgid "{0} image(s) scanned on {1} at {2} may not have been saved, and are recov
 msgstr "{0} slika skeniranih na {1} na {2} možda nije sačuvano, i mogu ponovo da se kreiraju. Da li želite da ih kreirate ponovo?"
 
 #: MiscResources.resx$ImagesSaved$Message
-msgid "{0} images saved"
+msgid "{0} images saved."
 msgstr ""
 
 #: MiscResources.resx$PdfStatus$Message
+#: UiStrings.resx$XOfY$Message
 msgid "{0} of {1}"
 msgstr "{0} od {1}"
 

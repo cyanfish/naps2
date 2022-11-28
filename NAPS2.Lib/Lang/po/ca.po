@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2022-11-27 05:04\n"
+"PO-Revision-Date: 2022-11-28 04:41\n"
 "Last-Translator: \n"
 "Language-Team: Catalan\n"
 "Language: ca\n"
@@ -67,17 +67,17 @@ msgstr ""
 msgid "A5 (148x210 mm)"
 msgstr ""
 
-#: FAbout.resx$$this.Text$Message
-#: FDesktop.resx$tsAbout.Text$Message
+#: UiStrings.resx$About$Message
+#: UiStrings.resx$AboutFormTitle$Message
 msgid "About"
 msgstr "Quant a"
 
-#: FScanProgress.resx$$this.Text$Message
 #: MiscResources.resx$AcquiringData$Message
-msgid "Acquiring data"
-msgstr "S'estan obtenint les dades..."
+msgid "Acquiring data..."
+msgstr "S'estan obtenint les dades......"
 
 #: FEditProfile.resx$btnAdvanced.Text$Message
+#: UiStrings.resx$Advanced$Message
 msgid "Advanced"
 msgstr "Avançat"
 
@@ -85,10 +85,6 @@ msgstr "Avançat"
 msgid "Advanced Profile Settings"
 msgstr "Configuració avançada del perfil"
 
-#: FDesktop.resx$tsEmailPDFAll.Text$Message
-#: FDesktop.resx$tsReverseAll.Text$Message
-#: FDesktop.resx$tsSaveImagesAll.Text$Message
-#: FDesktop.resx$tsSavePDFAll.Text$Message
 #: MiscResources.resx$AllCount$Message
 msgid "All ({0})"
 msgstr "Tot ({0})"
@@ -129,11 +125,11 @@ msgstr "Permet la impressió en resolució alta"
 msgid "Allow Printing"
 msgstr "Permet la impressió"
 
-#: FDesktop.resx$tsAltDeinterleave.Text$Message
+#: UiStrings.resx$AltDeinterleave$Message
 msgid "Alternate Deinterleave"
 msgstr "Desintercalat alternatiu"
 
-#: FDesktop.resx$tsAltInterleave.Text$Message
+#: UiStrings.resx$AltInterleave$Message
 msgid "Alternate Interleave"
 msgstr "Intercalat alternatiu"
 
@@ -146,54 +142,59 @@ msgid "An additional component is needed to import this PDF file. Would you like
 msgstr "Es requereix un complement extra per importar aquest fitxer PDF. Voleu baixar-ho ara?"
 
 #: MiscResources.resx$UpdateError$Message
-msgid "An error occured when trying to install the update"
-msgstr "S'ha produït un error en instal·lar l'actualització"
+msgid "An error occured when trying to install the update."
+msgstr "S'ha produït un error en instal·lar l'actualització."
 
 #: MiscResources.resx$AuthError$Message
-msgid "An error occurred when trying to authorize"
-msgstr "S'ha produït un error amb l'autorització"
+msgid "An error occurred when trying to authorize."
+msgstr "S'ha produït un error amb l'autorització."
 
 #: MiscResources.resx$AutoSaveError$Message
-msgid "An error occurred when trying to auto save"
-msgstr "S'ha produït un error amb el desat automàtic"
+msgid "An error occurred when trying to auto save."
+msgstr "S'ha produït un error amb el desat automàtic."
 
 #: MiscResources.resx$ErrorSaving$Message
-msgid "An error occurred when trying to save the file"
-msgstr "S'ha produït un error en desar el fitxer"
+msgid "An error occurred when trying to save the file."
+msgstr "S'ha produït un error en desar el fitxer."
 
 #: MiscResources.resx$ErrorEmailing$Message
-msgid "An error occurred when trying to send the email"
-msgstr "S'ha produït un error en enviar el correu electrònic"
+msgid "An error occurred when trying to send the email."
+msgstr "S'ha produït un error en enviar el correu electrònic."
 
 #: MiscResources.resx$EmailError$Message
-msgid "An error occurred while trying to send an email"
-msgstr "S'ha produït un error mentre s'enviava el correu-e "
+msgid "An error occurred while trying to send an email."
+msgstr "S'ha produït un error mentre s'enviava el correu-e ."
 
 #: MiscResources.resx$UnknownDriverError$Message
-msgid "An error occurred with the scanning driver"
-msgstr "S'ha produït un error amb el driver del escaner"
+#: SdkResources.resx$UnknownDriverError$Message
+msgid "An error occurred with the scanning driver."
+msgstr "S'ha produït un error amb el driver del escaner."
 
 #: MiscResources.resx$ExitWithActiveOperations$Message
 msgid "An operation is in progress. Are you sure you want to exit and cancel the operation?"
 msgstr "Encara s'està executant. Segur que voleu cancel·lar l'operació?"
 
 #: MiscResources.resx$BatchError$Message
-msgid "An unknown error ocurred during the batch scan"
-msgstr "S'ha produït un error desconegut en l'escaneig per lots"
+msgid "An unknown error ocurred during the batch scan."
+msgstr "S'ha produït un error desconegut en l'escaneig per lots."
 
 #: MiscResources.resx$UpdateAvailable$Message
-msgid "An update is available"
-msgstr "Hi ha una actualització disponible"
+msgid "An update is available."
+msgstr "Hi ha una actualització disponible."
 
 #: MiscResources.resx$OcrUpdateAvailable$Message
-msgid "An update to OCR is available"
-msgstr "Hi ha una actualització de l'OCR disponible"
+msgid "An update to OCR is available."
+msgstr "Hi ha una actualització de l'OCR disponible."
+
+#: UiStrings.resx$AppleDriver$Message
+msgid "Apple Driver"
+msgstr ""
 
 #: FAdvancedScanSettings.resx$cbBrightnessContrastAfterScan.Text$Message
 msgid "Apply brightness/contrast after scan"
 msgstr "Aplica brillantor/contrast després d'escanejar"
 
-#: ImageForm.resx$checkboxApplyToSelected.Text$Message
+#: UiStrings.resx$ApplyToSelected$Message
 msgid "Apply to all {0} selected images"
 msgstr "Aplica a les {0} imatges seleccionades"
 
@@ -226,12 +227,12 @@ msgid "Are you sure you want undo your changes to {0} image(s)?"
 msgstr "Segur que voleu desfer els canvis en {0} imatges?"
 
 #: FEmailSettings.resx$label1.Text$Message
-msgid "Attachment Name"
-msgstr "Nom de l'adjunt"
+msgid "Attachment Name:"
+msgstr "Nom de l'adjunt:"
 
 #: FPdfSettings.resx$label3.Text$Message
-msgid "Author"
-msgstr "Autoria"
+msgid "Author:"
+msgstr "Autoria:"
 
 #: FAuthorize.resx$$this.Text$Message
 msgid "Authorize"
@@ -243,6 +244,7 @@ msgstr "Automàtic"
 
 #: FAutoSaveSettings.resx$$this.Text$Message
 #: FEditProfile.resx$linkAutoSaveSettings.Text$Message
+#: UiStrings.resx$AutoSaveSettings$Message
 msgid "Auto Save Settings"
 msgstr "Opcions de desat automàtic"
 
@@ -263,6 +265,7 @@ msgid "Auto-incrementing number (4 digits)"
 msgstr "Increment automàtic del número (4 dígits)"
 
 #: FOcrSetup.resx$checkBoxRunInBG.Text$Message
+#: UiStrings.resx$RunOcrAfterScanning$Message
 msgid "Automatically run OCR after scanning"
 msgstr "Inicia l'OCR automàticament després d'escanejar"
 
@@ -275,53 +278,52 @@ msgid "B5 (176x250 mm)"
 msgstr ""
 
 #: FBatchScan.resx$$this.Text$Message
-#: FDesktop.resx$tsBatchScan.Text$Message
+#: UiStrings.resx$BatchScan$Message
 msgid "Batch Scan"
 msgstr "Escaneig per lots"
 
 #: MiscResources.resx$BatchStatusCancelled$Message
-msgid "Batch cancelled"
-msgstr "S'ha cancel·lat l'escaneig per lots"
+msgid "Batch cancelled."
+msgstr "S'ha cancel·lat l'escaneig per lots."
 
 #: MiscResources.resx$BatchStatusComplete$Message
-msgid "Batch completed successfully"
-msgstr "L'escaneig per lots ha finalitzat correctament"
+msgid "Batch completed successfully."
+msgstr "L'escaneig per lots ha finalitzat correctament."
 
 #: MiscResources.resx$BatchStatusError$Message
-msgid "Batch scan stopped due to error"
-msgstr "Un error ha aturat l'escaneig en lot"
+msgid "Batch scan stopped due to error."
+msgstr "Un error ha aturat l'escaneig en lot."
+
+#: SettingsResources.resx$OcrMode_Best$Message
+msgid "Best"
+msgstr ""
 
 #: FEditProfile.resx$label3.Text$Message
-msgid "Bit depth"
-msgstr "Bit de profunditat"
+#: UiStrings.resx$BitDepthLabel$Message
+msgid "Bit depth:"
+msgstr "Bit de profunditat:"
 
 #: MiscResources.resx$FileTypeBmp$Message
 msgid "Bitmap Files (*.bmp)"
 msgstr "Fitxers Bitmap (*.bmp)"
 
 #: SettingsResources.resx$BitDepth_1BlackAndWhite$Message
+#: UiStrings.resx$BlackAndWhite$Message
 msgid "Black & White"
-msgstr "Blanc i negre"
-
-#: FBlackWhite.resx$$this.Text$Message
-#: FDesktop.resx$tsBlackWhite.Text$Message
-#: FViewer.resx$tsBlackWhite.Text$Message
-msgid "Black and White"
 msgstr "Blanc i negre"
 
 #: FAdvancedScanSettings.resx$groupBox3.Text$Message
 msgid "Blank Pages"
 msgstr "Pàgines buides"
 
-#: FEditProfile.resx$label6.Text$Message
-msgid "Brightness"
-msgstr "Brillantor"
-
-#: FBrightnessContrast.resx$$this.Text$Message
-#: FDesktop.resx$tsBrightnessContrast.Text$Message
-#: FViewer.resx$tsBrightnessContrast.Text$Message
+#: UiStrings.resx$BrightnessContrast$Message
 msgid "Brightness / Contrast"
 msgstr "Brillantor/Contrast"
+
+#: FEditProfile.resx$label6.Text$Message
+#: UiStrings.resx$BrightnessLabel$Message
+msgid "Brightness:"
+msgstr "Brillantor:"
 
 #: SettingsResources.resx$TiffComp_Ccitt4$Message
 msgid "CCITT4"
@@ -342,11 +344,10 @@ msgstr ""
 #: FPdfSettings.resx$btnCancel.Text$Message
 #: FPlaceholders.resx$btnCancel.Text$Message
 #: FProgress.resx$btnCancel.Text$Message
-#: FScanProgress.resx$btnCancel.Text$Message
 #: FSelectDevice.resx$btnCancel.Text$Message
-#: ImageForm.resx$btnCancel.Text$Message
 #: MiscResources.resx$Cancel$Message
 #: OperationProgressNotifyWidget.resx$cancelToolStripMenuItem.Text$Message
+#: UiStrings.resx$Cancel$Message
 msgid "Cancel"
 msgstr "Cancel·la"
 
@@ -355,8 +356,8 @@ msgid "Cancel Batch"
 msgstr "Cancel·la la tasca"
 
 #: MiscResources.resx$BatchStatusCancelling$Message
-msgid "Cancelling"
-msgstr "S'està cancel·lant..."
+msgid "Cancelling...."
+msgstr "S'està cancel·lant......."
 
 #: SettingsResources.resx$HorizontalAlign_Center$Message
 msgid "Center"
@@ -366,13 +367,13 @@ msgstr "Centre"
 msgid "Change"
 msgstr "Canvia"
 
-#: FAbout.resx$cbCheckForUpdates.Text$Message
+#: UiStrings.resx$CheckForUpdates$Message
 msgid "Check for updates"
 msgstr "Comprova si hi ha actualitzacions"
 
 #: MiscResources.resx$CheckingForUpdates$Message
-msgid "Checking"
-msgstr "S'està comprovant..."
+msgid "Checking..."
+msgstr "S'està comprovant......"
 
 #: FEmailProvider.resx$$this.Text$Message
 msgid "Choose Email Provider"
@@ -383,13 +384,18 @@ msgid "Choose Profile"
 msgstr "Trieu el perfil"
 
 #: FEditProfile.resx$btnChooseDevice.Text$Message
+#: UiStrings.resx$ChooseDevice$Message
 msgid "Choose device"
 msgstr "Trieu dispositiu"
 
-#: FDesktop.resx$tsClear.Text$Message
 #: MiscResources.resx$Clear$Message
+#: UiStrings.resx$Clear$Message
 msgid "Clear"
 msgstr "Neteja"
+
+#: UiStrings.resx$ClearAll$Message
+msgid "Clear All"
+msgstr ""
 
 #: FAutoSaveSettings.resx$cbClearAfterSave.Text$Message
 msgid "Clear images after saving"
@@ -405,15 +411,15 @@ msgid "Compatibility"
 msgstr "Compatibilitat"
 
 #: FImageSettings.resx$label3.Text$Message
-msgid "Compression"
-msgstr "Compressió"
+msgid "Compression:"
+msgstr "Compressió:"
 
 #: FEditProfile.resx$label7.Text$Message
-msgid "Contrast"
+#: UiStrings.resx$ContrastLabel$Message
+msgid "Contrast:"
 msgstr ""
 
-#: FDesktop.resx$ctxCopy.Text$Message
-#: FProfiles.resx$ctxCopy.Text$Message
+#: UiStrings.resx$Copy$Message
 msgid "Copy"
 msgstr "Copia"
 
@@ -422,30 +428,24 @@ msgid "Copy Progress"
 msgstr "Progrés de la còpia"
 
 #: MiscResources.resx$Copying$Message
-msgid "Copying"
-msgstr "S'està copiant..."
+msgid "Copying..."
+msgstr "S'està copiant......"
 
-#: FAbout.resx$labelCopyright.Text$Message
-msgid "Copyright 2009, 2012-2018 NAPS2 Contributors"
-msgstr "Copyright 2009, 2012-2018 contribuïdors del NAPS2"
+#: UiStrings.resx$CopyrightFormat$Message
+msgid "Copyright {0} NAPS2 Contributors"
+msgstr ""
 
 #: FAdvancedScanSettings.resx$label3.Text$Message
 msgid "Coverage Threshold"
 msgstr "Llindar de cobertura"
 
-#: FCrop.resx$$this.Text$Message
-#: FDesktop.resx$tsCrop.Text$Message
-#: FViewer.resx$tsCrop.Text$Message
+#: UiStrings.resx$Crop$Message
 msgid "Crop"
 msgstr "Escapça"
 
 #: FAdvancedScanSettings.resx$cbForcePageSizeCrop.Text$Message
 msgid "Crop to page size"
 msgstr "Escapça a la mida de la pàgina"
-
-#: SettingsResources.resx$PageSize_Custom$Message
-msgid "Custom"
-msgstr "Personalitzat"
 
 #: MiscResources.resx$CustomPageSizeFormat$Message
 msgid "Custom ({0}x{1} {2})"
@@ -455,14 +455,17 @@ msgstr "Personalitzat ({0}x{1} {2})"
 msgid "Custom Page Size"
 msgstr "Mida personalitzada de la pàgina"
 
-#: FDesktop.resx$tsCustomRotation.Text$Message
-#: FViewer.resx$tsCustomRotation.Text$Message
+#: UiStrings.resx$CustomRotation$Message
 msgid "Custom Rotation"
 msgstr "Rotació personalitzada"
 
 #: SettingsResources.resx$EmailProviderType_CustomSmtp$Message
 msgid "Custom SMTP"
 msgstr "SMTP personalitzat"
+
+#: SettingsResources.resx$PageSize_Custom$Message
+msgid "Custom..."
+msgstr "Personalitzat..."
 
 #: FPlaceholders.resx$label6.Text$Message
 msgid "Day (01-31)"
@@ -471,30 +474,26 @@ msgstr "Dia (01-31)"
 #: SettingsResources.resx$PdfCompat_Default$Message
 #: SettingsResources.resx$TwainImpl_Default$Message
 #: SettingsResources.resx$WiaVersion_Default$Message
+#: UiStrings.resx$Default$Message
 msgid "Default"
 msgstr "Per defecte"
 
 #: FImageSettings.resx$label1.Text$Message
 #: FPdfSettings.resx$label1.Text$Message
-msgid "Default File Path"
-msgstr "Camí predeterminat"
+msgid "Default File Path:"
+msgstr "Camí predeterminat:"
 
-#: FDesktop.resx$tsDeinterleave.Text$Message
+#: UiStrings.resx$Deinterleave$Message
 msgid "Deinterleave"
 msgstr "Desentrellaça"
 
-#: FDesktop.resx$ctxDelete.Text$Message
-#: FDesktop.resx$tsDelete.Text$Message
-#: FProfiles.resx$btnDelete.Text$Message
-#: FProfiles.resx$ctxDelete.Text$Message
 #: FRecover.resx$btnDelete.Text$Message
-#: FViewer.resx$tsDelete.Text$Message
 #: MiscResources.resx$Delete$Message
+#: UiStrings.resx$Delete$Message
 msgid "Delete"
 msgstr "Esborra"
 
-#: FDesktop.resx$tsDeskew.Text$Message
-#: FViewer.resx$tsDeskew.Text$Message
+#: UiStrings.resx$Deskew$Message
 msgid "Deskew"
 msgstr "Alinea"
 
@@ -507,31 +506,39 @@ msgid "Deskew scanned pages"
 msgstr "Alinea les pàgines escanejades"
 
 #: MiscResources.resx$AutoDeskewing$Message
-msgid "Deskewing"
-msgstr "S'està alineant..."
+msgid "Deskewing..."
+msgstr "S'està alineant......"
 
 #: FEditProfile.resx$label1.Text$Message
-msgid "Device"
-msgstr "Dispositiu"
+#: UiStrings.resx$DeviceLabel$Message
+msgid "Device:"
+msgstr "Dispositiu:"
 
 #: FPageSize.resx$label2.Text$Message
 msgid "Dimensions"
 msgstr "Mides"
 
 #: FEditProfile.resx$label8.Text$Message
-msgid "Display name"
-msgstr "Mostra el nom"
+#: UiStrings.resx$DisplayNameLabel$Message
+msgid "Display name:"
+msgstr "Mostra el nom:"
+
+#: UiStrings.resx$DocumentCorrection$Message
+msgid "Document Correction"
+msgstr ""
 
 #: MiscResources.resx$Donate$Message
+#: UiStrings.resx$Donate$Message
 msgid "Donate"
 msgstr "Donació"
 
 #: FBatchPrompt.resx$btnDone.Text$Message
-#: FProfiles.resx$btnDone.Text$Message
+#: UiStrings.resx$Done$Message
 msgid "Done"
 msgstr "Fet"
 
 #: FOcrLanguageDownload.resx$btnDownload.Text$Message
+#: UiStrings.resx$Download$Message
 msgid "Download"
 msgstr "Baixa"
 
@@ -544,6 +551,7 @@ msgid "Download Needed"
 msgstr "Baixada necessària"
 
 #: FDownloadProgress.resx$$this.Text$Message
+#: UiStrings.resx$DownloadProgressFormTitle$Message
 msgid "Download Progress"
 msgstr "Progrés de la baixada"
 
@@ -551,13 +559,16 @@ msgstr "Progrés de la baixada"
 msgid "Duplex"
 msgstr "Dúplex"
 
-#: FProfiles.resx$btnEdit.Text$Message
-#: FProfiles.resx$ctxEdit.Text$Message
+#: UiStrings.resx$Edit$Message
 msgid "Edit"
 msgstr "Edita"
 
-#: FDesktop.resx$tsdEmailPDF.Text$Message
+#: UiStrings.resx$EmailAllAsPdf$Message
+msgid "Email All as PDF"
+msgstr ""
+
 #: MiscResources.resx$EmailPdf$Message
+#: UiStrings.resx$EmailPdf$Message
 msgid "Email PDF"
 msgstr ""
 
@@ -565,12 +576,17 @@ msgstr ""
 msgid "Email PDF Progress"
 msgstr "Progrés d'enviament del PDF"
 
-#: FDesktop.resx$tsEmailSettings.Text$Message
+#: UiStrings.resx$EmailSelectedAsPdf$Message
+msgid "Email Selected as PDF"
+msgstr ""
+
 #: FEmailSettings.resx$$this.Text$Message
+#: UiStrings.resx$EmailSettings$Message
 msgid "Email Settings"
 msgstr "Paràmetres del correu electrònic"
 
 #: FEditProfile.resx$cbAutoSave.Text$Message
+#: UiStrings.resx$EnableAutoSave$Message
 msgid "Enable Auto Save"
 msgstr "Habilita el desat automàtic"
 
@@ -593,6 +609,7 @@ msgstr ""
 
 #: FOcrLanguageDownload.resx$labelSizeEstimate.Text$Message
 #: MiscResources.resx$EstimatedDownloadSize$Message
+#: UiStrings.resx$EstimatedDownloadSize$Message
 msgid "Estimated download size: {0} MB"
 msgstr "Mida estimada de la baixada: {0} MB"
 
@@ -604,6 +621,10 @@ msgstr ""
 msgid "Exclude blank pages"
 msgstr "Exclou les pàgines en blanc"
 
+#: SettingsResources.resx$OcrMode_Fast$Message
+msgid "Fast"
+msgstr ""
+
 #: SettingsResources.resx$Source_Feeder$Message
 msgid "Feeder"
 msgstr "Alimentador"
@@ -614,11 +635,10 @@ msgstr "Nom del fitxer"
 
 #: FAutoSaveSettings.resx$lblFilePath.Text$Message
 #: FBatchScan.resx$lblFilePath.Text$Message
-msgid "File path"
-msgstr "Camí del fitxer"
+msgid "File path:"
+msgstr "Camí del fitxer:"
 
-#: FDesktop.resx$tsFlip.Text$Message
-#: FViewer.resx$tsFlip.Text$Message
+#: UiStrings.resx$Flip$Message
 msgid "Flip"
 msgstr "Gira"
 
@@ -627,7 +647,7 @@ msgid "Flip duplexed pages"
 msgstr ""
 
 #: FImageSettings.resx$lblWarning.Text$Message
-msgid "For high JPEG qualities (80+), also increase Image Quality in your profile for best results"
+msgid "For high JPEG qualities (80+), also increase Image Quality in your profile for best results."
 msgstr ""
 
 #: MiscResources.resx$FileTypeGif$Message
@@ -635,6 +655,7 @@ msgid "GIF File (*.gif)"
 msgstr ""
 
 #: FOcrSetup.resx$linkGetLanguages.Text$Message
+#: UiStrings.resx$GetMoreLanguages$Message
 msgid "Get more languages"
 msgstr ""
 
@@ -651,24 +672,23 @@ msgid "Grayscale"
 msgstr "Escala de grisos"
 
 #: FEditProfile.resx$label9.Text$Message
-msgid "Horizontal align"
-msgstr "Alineació horitzontal"
+#: UiStrings.resx$HorizontalAlignLabel$Message
+msgid "Horizontal align:"
+msgstr "Alineació horitzontal:"
 
 #: FPlaceholders.resx$label7.Text$Message
 msgid "Hour (0-23)"
 msgstr "Hora (0-23)"
 
-#: FDesktop.resx$tsHueSaturation.Text$Message
-#: FHueSaturation.resx$$this.Text$Message
-#: FViewer.resx$tsHueSaturation.Text$Message
+#: UiStrings.resx$HueSaturation$Message
 msgid "Hue / Saturation"
 msgstr "To/Saturació"
 
-#: FAbout.resx$label1.Text$Message
-msgid "Icons from"
-msgstr "Icons desde"
+#: UiStrings.resx$IconsFrom$Message
+msgid "Icons from:"
+msgstr "Icons desde:"
 
-#: FDesktop.resx$tsdImage.Text$Message
+#: UiStrings.resx$Image$Message
 msgid "Image"
 msgstr "Imatge"
 
@@ -680,16 +700,16 @@ msgstr "Imatges"
 msgid "Image Quality"
 msgstr "Qualitat de la imatge"
 
-#: FDesktop.resx$tsImageSettings.Text$Message
 #: FImageSettings.resx$$this.Text$Message
+#: UiStrings.resx$ImageSettings$Message
 msgid "Image Settings"
 msgstr "Opcions de la imatge"
 
 #: MiscResources.resx$ImageSaved$Message
-msgid "Image saved"
-msgstr "S'ha desat la imatge"
+msgid "Image saved."
+msgstr "S'ha desat la imatge."
 
-#: FDesktop.resx$tsImport.Text$Message
+#: UiStrings.resx$Import$Message
 msgid "Import"
 msgstr "Importa"
 
@@ -697,13 +717,13 @@ msgstr "Importa"
 msgid "Import Progress"
 msgstr "Progrés de la importació"
 
-#: MiscResources.resx$Importing$Message
-msgid "Importing"
-msgstr "S'està important"
-
 #: MiscResources.resx$ImportingFormat$Message
-msgid "Importing {0}"
-msgstr "S'està important {0}"
+msgid "Importing {0}..."
+msgstr "S'està important {0}..."
+
+#: MiscResources.resx$Importing$Message
+msgid "Importing..."
+msgstr "S'està important..."
 
 #: MiscResources.resx$Install$Message
 msgid "Install {0}"
@@ -722,10 +742,10 @@ msgid "Installation complete. Do you want to restart NAPS2 now?"
 msgstr "S'ha instal·lat correctament. Voleu reiniciar el NAPS2 ara per aplicar els canvis?"
 
 #: MiscResources.resx$InstallFailed$Message
-msgid "Installation failed"
-msgstr "S'ha produït un error en la instal·lació"
+msgid "Installation failed."
+msgstr "S'ha produït un error en la instal·lació."
 
-#: FDesktop.resx$tsInterleave.Text$Message
+#: UiStrings.resx$Interleave$Message
 msgid "Interleave"
 msgstr ""
 
@@ -733,19 +753,23 @@ msgstr ""
 msgid "JPEG File (*.jpg, *.jpeg)"
 msgstr ""
 
+#: MiscResources.resx$FileTypeJp2$Message
+msgid "JPEG2000 File (*.jp2, *.jpx)"
+msgstr ""
+
 #: FImageSettings.resx$groupJpeg.Text$Message
 msgid "Jpeg Quality"
 msgstr "Qualitat Jpeg"
 
 #: FPdfSettings.resx$label6.Text$Message
-msgid "Keywords"
-msgstr "Paraules clau"
+msgid "Keywords:"
+msgstr "Paraules clau:"
 
 #: SettingsResources.resx$TiffComp_Lzw$Message
 msgid "LZW"
 msgstr ""
 
-#: FDesktop.resx$toolStripDropDownButton1.Text$Message
+#: UiStrings.resx$Language$Message
 msgid "Language"
 msgstr "Idioma"
 
@@ -761,11 +785,8 @@ msgstr ""
 msgid "Load images into NAPS2"
 msgstr "Carrega les imatges al NAPS2"
 
-#: FDesktop.resx$tStrip.Text$Message
-msgid "Main toolbar"
-msgstr "Barra d'eines principal"
-
 #: FOcrSetup.resx$checkBoxEnableOcr.Text$Message
+#: UiStrings.resx$MakePdfsSearchable$Message
 msgid "Make PDFs searchable using OCR"
 msgstr "Crea documents PDF amb opció de cerca mitjançant l'OCR"
 
@@ -790,11 +811,11 @@ msgstr "Mes (01-12)"
 msgid "More info"
 msgstr "Més informació"
 
-#: FDesktop.resx$tsMove.SecondText$Message
+#: UiStrings.resx$MoveDown$Message
 msgid "Move Down"
 msgstr "Mou avall"
 
-#: FDesktop.resx$tsMove.FirstText$Message
+#: UiStrings.resx$MoveUp$Message
 msgid "Move Up"
 msgstr "Mou amunt"
 
@@ -807,30 +828,36 @@ msgid "Multiple scans (prompt between scans)"
 msgstr "Escaneig múltiple (demana entre cada escaneig)"
 
 #: MiscResources.resx$NAPS2$Message
+#: SdkResources.resx$NAPS2$Message
+#: UiStrings.resx$Naps2$Message
 msgid "NAPS2"
 msgstr ""
 
+#: UiStrings.resx$Naps2TitleFormat$Message
+msgid "NAPS2 - {0}"
+msgstr ""
+
 #: MiscResources.resx$DonatePrompt$Message
-msgid "NAPS2 is completely free. Consider making a donation"
-msgstr "El NAPS2 és completament gratuït. Considereu fer una donació"
+msgid "NAPS2 is completely free. Consider making a donation."
+msgstr "El NAPS2 és completament gratuït. Considereu fer una donació."
 
 #: FPageSize.resx$label1.Text$Message
 msgid "Name (optional)"
 msgstr "Nom (opcional)"
 
 #: MiscResources.resx$NameMissing$Message
-msgid "Name missing"
-msgstr "Manca el nom"
+msgid "Name missing."
+msgstr "Manca el nom."
 
-#: FProfiles.resx$btnAdd.Text$Message
+#: UiStrings.resx$New$Message
 msgid "New"
 msgstr "Nou"
 
-#: FDesktop.resx$tsNewProfile.Text$Message
+#: UiStrings.resx$NewProfile$Message
 msgid "New Profile"
 msgstr "Perfil nou"
 
-#: FViewer.resx$tsNext.Text$Message
+#: UiStrings.resx$Next$Message
 msgid "Next"
 msgstr "Següent"
 
@@ -839,32 +866,35 @@ msgid "Next Scan"
 msgstr ""
 
 #: MiscResources.resx$NoDeviceSelected$Message
-msgid "No device selected"
-msgstr "No s'ha seleccionat cap dispositiu"
+#: SdkResources.resx$NoDeviceSelected$Message
+msgid "No device selected."
+msgstr "No s'ha seleccionat cap dispositiu."
 
 #: MiscResources.resx$NoPagesInFeeder$Message
-msgid "No pages are in the feeder"
-msgstr "No hi ha cap pàgina a l'alimentador"
+#: SdkResources.resx$NoPagesInFeeder$Message
+msgid "No pages are in the feeder."
+msgstr "No hi ha cap pàgina a l'alimentador."
 
 #: FEmailSettings.resx$lblProvider.Text$Message
 #: SettingsResources.resx$EmailProvider_NotSelected$Message
-msgid "No provider selected"
-msgstr "No s'ha seleccionat cap proveïdor"
+msgid "No provider selected."
+msgstr "No s'ha seleccionat cap proveïdor."
 
 #: MiscResources.resx$NoDevicesFound$Message
-msgid "No scanning device was found"
-msgstr "No s'ha trobat cap dispositiu d'escaneig"
+#: SdkResources.resx$NoDevicesFound$Message
+msgid "No scanning device was found."
+msgstr "No s'ha trobat cap dispositiu d'escaneig."
 
 #: MiscResources.resx$NoUpdates$Message
-msgid "No updates available"
-msgstr "No hi ha actualitzacions disponibles"
+msgid "No updates available."
+msgstr "No hi ha actualitzacions disponibles."
 
 #: SettingsResources.resx$TiffComp_None$Message
 msgid "None"
 msgstr "Cap"
 
-#: FDesktop.resx$$this.Text$Message
-msgid "Not Another PDF Scanner 2"
+#: UiStrings.resx$Naps2FullName$Message
+msgid "Not Another PDF Scanner"
 msgstr ""
 
 #: FRecover.resx$btnCancel.Text$Message
@@ -872,14 +902,15 @@ msgid "Not Now"
 msgstr "Ara no"
 
 #: FBatchScan.resx$lblNumberOfScans.Text$Message
-msgid "Number of scans"
-msgstr "Nombre d'escanejos"
+msgid "Number of scans:"
+msgstr "Nombre d'escanejos:"
 
-#: FDesktop.resx$tsOcr.Text$Message
+#: UiStrings.resx$Ocr$Message
 msgid "OCR"
 msgstr ""
 
 #: FOcrLanguageDownload.resx$$this.Text$Message
+#: UiStrings.resx$OcrDownloadFormTitle$Message
 msgid "OCR Download"
 msgstr "Baixada de l'OCR"
 
@@ -888,18 +919,20 @@ msgid "OCR Progress"
 msgstr "Progrés de l'OCR"
 
 #: FOcrSetup.resx$$this.Text$Message
+#: UiStrings.resx$OcrSetupFormTitle$Message
 msgid "OCR Setup"
 msgstr "Configuració de l'OCR"
 
 #: FOcrSetup.resx$label1.Text$Message
-msgid "OCR language"
-msgstr "Idioma de l'OCR"
+#: UiStrings.resx$OcrLanguageLabel$Message
+msgid "OCR language:"
+msgstr "Idioma de l'OCR:"
 
 #: FOcrSetup.resx$labelOcrMode.Text$Message
-msgid "OCR mode"
-msgstr "Mode de l'OCR"
+#: UiStrings.resx$OcrModeLabel$Message
+msgid "OCR mode:"
+msgstr "Mode de l'OCR:"
 
-#: FAbout.resx$okButton.Text$Message
 #: FAdvancedScanSettings.resx$btnOK.Text$Message
 #: FAutoSaveSettings.resx$btnOK.Text$Message
 #: FEditProfile.resx$btnOK.Text$Message
@@ -911,7 +944,7 @@ msgstr "Mode de l'OCR"
 #: FPdfPassword.resx$btnOK.Text$Message
 #: FPdfSettings.resx$btnOK.Text$Message
 #: FPlaceholders.resx$btnOK.Text$Message
-#: ImageForm.resx$btnOK.Text$Message
+#: UiStrings.resx$OK$Message
 msgid "OK"
 msgstr "D'acord"
 
@@ -934,8 +967,8 @@ msgid "One file per scan"
 msgstr "Un fitxer per escaneig"
 
 #: MiscResources.resx$FilesCouldNotBeDownloaded$Message
-msgid "One or more files could not be downloaded"
-msgstr "No s'ha pogut baixar un o més fitxers"
+msgid "One or more files could not be downloaded."
+msgstr "No s'ha pogut baixar un o més fitxers."
 
 #: NotifyWidget.resx$openFolderToolStripMenuItem.Text$Message
 msgid "Open Folder"
@@ -958,22 +991,21 @@ msgid "Overwrite File"
 msgstr "Sobreescriu el fitxer"
 
 #: FPdfSettings.resx$lblOwnerPassword.Text$Message
-msgid "Owner Password"
-msgstr "Contrasenya del propietari"
+msgid "Owner Password:"
+msgstr "Contrasenya del propietari:"
 
 #: MiscResources.resx$FileTypePdf$Message
 msgid "PDF Document (*.pdf)"
 msgstr "Document PDF (*.pdf)"
 
-#: FDesktop.resx$tsPDFSettings.Text$Message
-#: FDesktop.resx$tsPdfSettings2.Text$Message
 #: FPdfSettings.resx$$this.Text$Message
+#: UiStrings.resx$PdfSettings$Message
 msgid "PDF Settings"
 msgstr "Opcions del PDF"
 
 #: MiscResources.resx$PdfSaved$Message
-msgid "PDF saved"
-msgstr "S'ha desat el PDF"
+msgid "PDF saved."
+msgstr "S'ha desat el PDF."
 
 #: SettingsResources.resx$PdfCompat_PdfA1B$Message
 msgid "PDF/A-1b"
@@ -996,19 +1028,20 @@ msgid "PNG File (*.png)"
 msgstr "Fitxer PNG (*.png)"
 
 #: FEditProfile.resx$label4.Text$Message
-msgid "Page size"
-msgstr "Mida de la pàgina"
+#: UiStrings.resx$PageSizeLabel$Message
+msgid "Page size:"
+msgstr "Mida de la pàgina:"
 
 #: FEditProfile.resx$label2.Text$Message
-msgid "Paper source"
-msgstr "Origen del paper"
+#: UiStrings.resx$PaperSourceLabel$Message
+msgid "Paper source:"
+msgstr "Origen del paper:"
 
 #: FPdfPassword.resx$$this.Text$Message
 msgid "Password"
 msgstr "Contrasenya"
 
-#: FDesktop.resx$ctxPaste.Text$Message
-#: FProfiles.resx$ctxPaste.Text$Message
+#: UiStrings.resx$Paste$Message
 msgid "Paste"
 msgstr "Enganxa"
 
@@ -1027,33 +1060,37 @@ msgid "Post-processing"
 msgstr "Post-processament"
 
 #: FBatchScan.resx$lblStatus.Text$Message
-msgid "Press Start when ready"
-msgstr "Premeu Inicia per continuar"
+msgid "Press Start when ready."
+msgstr "Premeu Inicia per continuar."
 
-#: FPlaceholders.resx$label2.Text$Message
-#: FViewer.resx$$this.Text$Message
+#: UiStrings.resx$PreviewFormTitle$Message
 msgid "Preview"
 msgstr "Previsualitza"
 
-#: FViewer.resx$tsPrev.Text$Message
+#: FPlaceholders.resx$label2.Text$Message
+msgid "Preview:"
+msgstr "Previsualitza:"
+
+#: UiStrings.resx$Previous$Message
 msgid "Previous"
 msgstr "Anterior"
 
-#: FDesktop.resx$tsPrint.Text$Message
 #: MiscResources.resx$Print$Message
+#: UiStrings.resx$Print$Message
 msgid "Print"
 msgstr "Imprimeix"
 
-#: FBatchScan.resx$lblProfile.Text$Message
-msgid "Profile"
-msgstr "Perfils"
-
 #: FEditProfile.resx$$this.Text$Message
+#: UiStrings.resx$EditProfileFormTitle$Message
 msgid "Profile Settings"
 msgstr "Paràmetres del perfil"
 
-#: FDesktop.resx$tsProfiles.Text$Message
-#: FProfiles.resx$$this.Text$Message
+#: FBatchScan.resx$lblProfile.Text$Message
+msgid "Profile:"
+msgstr "Perfils:"
+
+#: UiStrings.resx$Profiles$Message
+#: UiStrings.resx$ProfilesFormTitle$Message
 msgid "Profiles"
 msgstr "Perfils"
 
@@ -1066,7 +1103,7 @@ msgid "Provider"
 msgstr "Proveïdor"
 
 #: FBatchPrompt.resx$lblStatus.Text$Message
-msgid "Ready for scan {0}"
+msgid "Ready for scan {0}."
 msgstr ""
 
 #: FRecover.resx$btnRecover.Text$Message
@@ -1078,8 +1115,8 @@ msgid "Recover Scanned Images"
 msgstr ""
 
 #: MiscResources.resx$Recovering$Message
-msgid "Recovering"
-msgstr "S'està recuperant..."
+msgid "Recovering..."
+msgstr "S'està recuperant......"
 
 #: MiscResources.resx$RecoveryProgress$Message
 msgid "Recovery Progress"
@@ -1091,11 +1128,11 @@ msgstr "Progrés de la recuperació"
 msgid "Remember these settings"
 msgstr "Recorda aquesta configuració"
 
-#: FDesktop.resx$tsdReorder.Text$Message
+#: UiStrings.resx$Reorder$Message
 msgid "Reorder"
 msgstr "Organitza"
 
-#: FDesktop.resx$tsReset.Text$Message
+#: UiStrings.resx$Reset$Message
 msgid "Reset"
 msgstr "Restaura"
 
@@ -1104,8 +1141,9 @@ msgid "Reset Image"
 msgstr "Restaura la imatge"
 
 #: FEditProfile.resx$label5.Text$Message
-msgid "Resolution"
-msgstr "Resolució"
+#: UiStrings.resx$ResolutionLabel$Message
+msgid "Resolution:"
+msgstr "Resolució:"
 
 #: FAdvancedScanSettings.resx$btnRestoreDefaults.Text$Message
 #: FEmailSettings.resx$btnRestoreDefaults.Text$Message
@@ -1114,11 +1152,11 @@ msgstr "Resolució"
 msgid "Restore Defaults"
 msgstr "Restaura als valors per defecte"
 
-#: FDesktop.resx$tsReverse.Text$Message
+#: UiStrings.resx$Reverse$Message
 msgid "Reverse"
 msgstr ""
 
-#: ImageForm.resx$btnRevert.Text$Message
+#: UiStrings.resx$Revert$Message
 msgid "Revert"
 msgstr "Restaura"
 
@@ -1126,40 +1164,46 @@ msgstr "Restaura"
 msgid "Right"
 msgstr "Dreta"
 
-#: FDesktop.resx$tsdRotate.Text$Message
-#: FRotate.resx$$this.Text$Message
-#: FViewer.resx$tsdRotate.Text$Message
+#: UiStrings.resx$Rotate$Message
 msgid "Rotate"
 msgstr ""
 
-#: FDesktop.resx$tsRotateLeft.Text$Message
-#: FViewer.resx$tsRotateLeft.Text$Message
+#: UiStrings.resx$RotateLeft$Message
 msgid "Rotate Left"
 msgstr "Gira a l'esquerra"
 
-#: FDesktop.resx$tsRotateRight.Text$Message
-#: FViewer.resx$tsRotateRight.Text$Message
+#: UiStrings.resx$RotateRight$Message
 msgid "Rotate Right"
 msgstr "Gira a la dreta"
 
 #: FProgress.resx$btnRunInBG.Text$Message
+#: UiStrings.resx$RunInBackground$Message
 msgid "Run in Background"
 msgstr "Executa en rerefons"
 
 #: MiscResources.resx$RunningOcr$Message
-msgid "Running OCR"
-msgstr "OCR en ús"
+msgid "Running OCR..."
+msgstr "OCR en ús..."
 
 #: FEditProfile.resx$rdSANE.Text$Message
+#: UiStrings.resx$SaneDriver$Message
 msgid "SANE Driver"
 msgstr "Controlador SANE"
 
-#: FViewer.resx$tsSaveImage.Text$Message
-msgid "Save Image"
-msgstr "Desa (imatge)"
+#: UiStrings.resx$Save$Message
+msgid "Save"
+msgstr ""
 
-#: FDesktop.resx$tsdSaveImages.Text$Message
+#: UiStrings.resx$SaveAllAsImages$Message
+msgid "Save All as Images"
+msgstr ""
+
+#: UiStrings.resx$SaveAllAsPdf$Message
+msgid "Save All as PDF"
+msgstr ""
+
 #: MiscResources.resx$SaveImages$Message
+#: UiStrings.resx$SaveImages$Message
 msgid "Save Images"
 msgstr "Desa les imatges"
 
@@ -1167,15 +1211,22 @@ msgstr "Desa les imatges"
 msgid "Save Images Progress"
 msgstr "Progrés del desat d'imatges"
 
-#: FDesktop.resx$tsdSavePDF.Text$Message
-#: FViewer.resx$tsSavePDF.Text$Message
 #: MiscResources.resx$SavePdf$Message
+#: UiStrings.resx$SavePdf$Message
 msgid "Save PDF"
 msgstr "Desa (PDF)"
 
 #: MiscResources.resx$SavePdfProgress$Message
 msgid "Save PDF Progress"
 msgstr "Progrés del desat en PDF"
+
+#: UiStrings.resx$SaveSelectedAsImages$Message
+msgid "Save Selected as Images"
+msgstr ""
+
+#: UiStrings.resx$SaveSelectedAsPdf$Message
+msgid "Save Selected as PDF"
+msgstr ""
 
 #: FBatchScan.resx$rdSaveToSingleFile.Text$Message
 msgid "Save to a single file"
@@ -1186,26 +1237,25 @@ msgid "Save to multiple files"
 msgstr "Desa en fitxers múltiples"
 
 #: MiscResources.resx$BatchStatusSaving$Message
-msgid "Saving batch results"
-msgstr "Resultats del desat en lot"
+msgid "Saving batch results..."
+msgstr "Resultats del desat en lot..."
 
 #: MiscResources.resx$SavingFormat$Message
-msgid "Saving {0}"
-msgstr "S'està desant {0}"
+msgid "Saving {0}..."
+msgstr "S'està desant {0}..."
 
-#: FEditProfile.resx$label10.Text$Message
-msgid "Scale"
-msgstr "Escala"
-
-#: TiffViewerCtl.resx$tsStretch.ToolTipText$Message
+#: TiffViewerCtl.resx$_tsStretch.ToolTipText$Message
 msgid "Scale With Window"
 msgstr ""
 
+#: FEditProfile.resx$label10.Text$Message
+#: UiStrings.resx$ScaleLabel$Message
+msgid "Scale:"
+msgstr "Escala:"
+
 #: FBatchPrompt.resx$btnScan.Text$Message
-#: FDesktop.resx$tsScan.Text$Message
-#: FProfiles.resx$btnScan.Text$Message
-#: FProfiles.resx$ctxScan.Text$Message
 #: MiscResources.resx$Scan$Message
+#: UiStrings.resx$Scan$Message
 msgid "Scan"
 msgstr "Escaneja"
 
@@ -1217,45 +1267,46 @@ msgstr "Configuració de l’escàner"
 msgid "Scanned Image"
 msgstr "Imatge escanejada"
 
-#: FScanProgress.resx$labelPage.Text$Message
-#: MiscResources.resx$BatchStatusPage$Message
 #: MiscResources.resx$ScanPageProgress$Message
-#: MiscResources.resx$ScanProgressPage$Message
 msgid "Scanning page {0}"
 msgstr "S'està escanejant la pàgina {0}"
 
 #: MiscResources.resx$BatchStatusScanPage$Message
-msgid "Scanning page {0} (scan {1})"
-msgstr "S'està escanejant la pàgina {0} (escàner {1})"
+msgid "Scanning page {0} (scan {1})..."
+msgstr "S'està escanejant la pàgina {0} (escàner {1})..."
+
+#: MiscResources.resx$BatchStatusPage$Message
+#: MiscResources.resx$ScanProgressPage$Message
+msgid "Scanning page {0}..."
+msgstr "S'està escanejant la pàgina {0}..."
 
 #: FPlaceholders.resx$label9.Text$Message
 msgid "Second (00-59)"
 msgstr "Segons (00-59)"
 
 #: FSelectDevice.resx$btnSelect.Text$Message
+#: UiStrings.resx$Select$Message
 msgid "Select"
 msgstr "Selecciona"
 
-#: FDesktop.resx$ctxSelectAll.Text$Message
+#: UiStrings.resx$SelectAll$Message
 msgid "Select All"
 msgstr "Selecciona-ho tot"
 
 #: FSelectDevice.resx$$this.Text$Message
+#: UiStrings.resx$SelectSource$Message
 msgid "Select Source"
 msgstr "Origen"
 
 #: MiscResources.resx$SelectProfileBeforeScan$Message
-msgid "Select a profile before clicking Scan"
-msgstr "Selecciona un perfil abans de fer click a Scanejar"
+msgid "Select a profile before clicking Scan."
+msgstr "Selecciona un perfil abans de fer click a Scanejar."
 
 #: FOcrLanguageDownload.resx$label3.Text$Message
-msgid "Select one or more languages"
-msgstr "Seleccioneu un o més idiomes"
+#: UiStrings.resx$OcrSelectLanguageLabel$Message
+msgid "Select one or more languages:"
+msgstr "Seleccioneu un o més idiomes:"
 
-#: FDesktop.resx$tsEmailPDFSelected.Text$Message
-#: FDesktop.resx$tsReverseSelected.Text$Message
-#: FDesktop.resx$tsSaveImagesSelected.Text$Message
-#: FDesktop.resx$tsSavePDFSelected.Text$Message
 #: MiscResources.resx$SelectedCount$Message
 msgid "Selected ({0})"
 msgstr "Seleccionat ({0})"
@@ -1265,13 +1316,11 @@ msgstr "Seleccionat ({0})"
 msgid "Separate files by Patch-T"
 msgstr "Separació amb codis Patch-T"
 
-#: FProfiles.resx$ctxSetDefault.Text$Message
+#: UiStrings.resx$SetDefault$Message
 msgid "Set Default"
 msgstr "Estableix per defecte"
 
-#: FDesktop.resx$tsSharpen.Text$Message
-#: FSharpen.resx$$this.Text$Message
-#: FViewer.resx$tsSharpen.Text$Message
+#: UiStrings.resx$Sharpen$Message
 msgid "Sharpen"
 msgstr "Nitidesa"
 
@@ -1302,14 +1351,15 @@ msgid "Stretch to page size"
 msgstr "Ajusta a la mida de la pàgina"
 
 #: FPdfSettings.resx$label5.Text$Message
-msgid "Subject"
-msgstr "Assumpte"
+msgid "Subject:"
+msgstr "Assumpte:"
 
 #: MiscResources.resx$FileTypeTiff$Message
 msgid "TIFF File (*.tiff, *.tif)"
 msgstr "Fitxer TIFF (*.tiff, *.tif)"
 
 #: FEditProfile.resx$rdTWAIN.Text$Message
+#: UiStrings.resx$TwainDriver$Message
 msgid "TWAIN Driver"
 msgstr "Dispositiu TWAIN"
 
@@ -1318,24 +1368,27 @@ msgid "Technical Details"
 msgstr "Detalls tècnics"
 
 #: MiscResources.resx$TesseractNotAvailable$Message
-msgid "The OCR engine is not available. Make sure to install the required package"
-msgstr "No s'ha trobat el motor OCR. Assegureu-vos d'instal·lar el paquet necessari"
+#: SdkResources.resx$TesseractNotAvailable$Message
+msgid "The OCR engine is not available. Make sure to install the required package:"
+msgstr "No s'ha trobat el motor OCR. Assegureu-vos d'instal·lar el paquet necessari:"
 
 #: MiscResources.resx$SaneNotAvailable$Message
-msgid "The SANE driver is not available. Make sure to install the required packages"
-msgstr "No s'ha trobat el controlador SANE. Assegureu-vos d'instal·lar les dependències necessàries"
+#: SdkResources.resx$SaneNotAvailable$Message
+msgid "The SANE driver is not available. Make sure to install the required packages:"
+msgstr "No s'ha trobat el controlador SANE. Assegureu-vos d'instal·lar les dependències necessàries:"
 
 #: MiscResources.resx$ImportErrorCouldNot$Message
-msgid "The file '{0}' could not be imported"
-msgstr "No s'ha pogut importar el fitxer '{0}'"
+#: SdkResources.resx$ImportErrorCouldNot$Message
+msgid "The file '{0}' could not be imported."
+msgstr "No s'ha pogut importar el fitxer '{0}'."
 
 #: MiscResources.resx$ImportErrorNAPS2Pdf$Message
-msgid "The file '{0}' could not be imported. Only PDF files generated by NAPS2 can be imported"
-msgstr "No s'ha pogut importar el fitxer '{0}'. Només es poden importar fitxers generats amb el NAPS2"
+msgid "The file '{0}' could not be imported. Only PDF files generated by NAPS2 can be imported."
+msgstr "No s'ha pogut importar el fitxer '{0}'. Només es poden importar fitxers generats amb el NAPS2."
 
 #: MiscResources.resx$FileInUse$Message
-msgid "The file could not be overwritten because it is currently in use"
-msgstr "No es pot sobreescriure el fitxer perquè està en ús"
+msgid "The file could not be overwritten because it is currently in use."
+msgstr "No es pot sobreescriure el fitxer perquè està en ús."
 
 #: MiscResources.resx$ConfirmOverwriteFile$Message
 msgid "The file {0} already exists. Do you want to overwrite it?"
@@ -1346,56 +1399,65 @@ msgid "The following file is encrypted and requires a password to open: {0}"
 msgstr "Aquest fitxer està xifrat per contrasenya i és requereix per accedir: {0}"
 
 #: MiscResources.resx$DevicePaperJam$Message
-msgid "The scanner has a paper jam"
-msgstr "L'escàner té un embús de paper"
+#: SdkResources.resx$DevicePaperJam$Message
+msgid "The scanner has a paper jam."
+msgstr "L'escàner té un embús de paper."
 
 #: MiscResources.resx$DeviceWarmingUp$Message
-msgid "The scanner is warming up"
-msgstr "S'està posant a punt l'escàner..."
+#: SdkResources.resx$DeviceWarmingUp$Message
+msgid "The scanner is warming up."
+msgstr "S'està posant a punt l'escàner...."
 
 #: MiscResources.resx$DeviceCoverOpen$Message
-msgid "The scanner's cover is open"
-msgstr "La tapa de l'escàner està oberta"
+#: SdkResources.resx$DeviceCoverOpen$Message
+msgid "The scanner's cover is open."
+msgstr "La tapa de l'escàner està oberta."
 
 #: MiscResources.resx$DriverNotSupported$Message
-msgid "The selected driver is not supported on this system"
-msgstr "El controlador seleccionat no està suportat en aquest sistema"
+#: SdkResources.resx$DriverNotSupported$Message
+msgid "The selected driver is not supported on this system."
+msgstr "El controlador seleccionat no està suportat en aquest sistema."
 
 #: MiscResources.resx$DeviceNotFound$Message
-msgid "The selected scanner could not be found"
-msgstr "El scanner seleccionat no s'ha pogut trobar "
+#: SdkResources.resx$DeviceNotFound$Message
+msgid "The selected scanner could not be found."
+msgstr "El scanner seleccionat no s'ha pogut trobar ."
 
 #: MiscResources.resx$NoFeederSupport$Message
-msgid "The selected scanner does not support using a feeder. If your scanner does have a feeder, try using a different driver"
-msgstr "L'escàner seleccionat no suporta alimentació des d'un alimentador. Si el vostre escàner té alimentador de paper, seleccioneu un controlador diferent"
+#: SdkResources.resx$NoFeederSupport$Message
+msgid "The selected scanner does not support using a feeder. If your scanner does have a feeder, try using a different driver."
+msgstr "L'escàner seleccionat no suporta alimentació des d'un alimentador. Si el vostre escàner té alimentador de paper, seleccioneu un controlador diferent."
 
 #: MiscResources.resx$NoDuplexSupport$Message
-msgid "The selected scanner does not support using duplex. If your scanner is supposed to support duplex, try using a different driver"
-msgstr "L'escàner seleccionat no suporta dúplex (escaneig per dues cares). Si el vostre escàner suporta aquesta tecnologia, seleccioneu un controlador diferent"
+#: SdkResources.resx$NoDuplexSupport$Message
+msgid "The selected scanner does not support using duplex. If your scanner is supposed to support duplex, try using a different driver."
+msgstr "L'escàner seleccionat no suporta dúplex (escaneig per dues cares). Si el vostre escàner suporta aquesta tecnologia, seleccioneu un controlador diferent."
 
 #: MiscResources.resx$DeviceBusy$Message
-msgid "The selected scanner is busy"
-msgstr "L'escàner seleccionat esta ocupat"
+#: SdkResources.resx$DeviceBusy$Message
+msgid "The selected scanner is busy."
+msgstr "L'escàner seleccionat esta ocupat."
 
 #: MiscResources.resx$DeviceOffline$Message
-msgid "The selected scanner is offline"
-msgstr "El scaner seleccionat esta apagat"
+#: SdkResources.resx$DeviceOffline$Message
+msgid "The selected scanner is offline."
+msgstr "El scaner seleccionat esta apagat."
 
 #: FImageSettings.resx$groupTiff.Text$Message
 msgid "Tiff Options"
 msgstr "Opcions Tiff"
 
 #: FBatchScan.resx$lblTimeBetweenScans.Text$Message
-msgid "Time between scans (seconds)"
-msgstr "Temps entre escanejos (segons)"
+msgid "Time between scans (seconds):"
+msgstr "Temps entre escanejos (segons):"
 
 #: FPdfSettings.resx$label4.Text$Message
-msgid "Title"
-msgstr "Títol"
+msgid "Title:"
+msgstr "Títol:"
 
 #: FAdvancedScanSettings.resx$label1.Text$Message
-msgid "Twain Implementation"
-msgstr "Implementació Twain"
+msgid "Twain Implementation:"
+msgstr "Implementació Twain:"
 
 #: SettingsResources.resx$PageSize_Legal$Message
 msgid "US Legal (8.5x14 in)"
@@ -1413,65 +1475,69 @@ msgstr "Canvis no desats"
 msgid "Update Progress"
 msgstr "Progrés de l'actualització"
 
+#: MiscResources.resx$UpdateCheckDisabled$Message
+msgid "Update checking is disabled."
+msgstr ""
+
 #: MiscResources.resx$Updating$Message
-msgid "Updating"
-msgstr "S'està actualitzant..."
+msgid "Updating..."
+msgstr "S'està actualitzant......"
 
 #: MiscResources.resx$UploadingEmail$Message
-msgid "Uploading email"
-msgstr "Enviament per correu-e"
+msgid "Uploading email..."
+msgstr "Enviament per correu-e..."
 
 #: FEditProfile.resx$rdbNative.Text$Message
+#: UiStrings.resx$UseNativeUi$Message
 msgid "Use native UI"
 msgstr "Utilitza la interfície nativa"
 
 #: FEditProfile.resx$rdbConfig.Text$Message
+#: UiStrings.resx$UsePredefinedSettings$Message
 msgid "Use predefined settings"
 msgstr "Utiltza els ajustos predeterminats"
 
 #: FPdfSettings.resx$lblUserPassword.Text$Message
-msgid "User Password"
-msgstr "Contrasenya de l'usuari"
+msgid "User Password:"
+msgstr "Contrasenya de l'usuari:"
 
 #: FOcrLanguageDownload.resx$label1.Text$Message
-msgid "Using OCR requires you to download each language you want to scan"
-msgstr "La tecnologia OCR requereix baixar fitxers dels idiomes que voleu escanejar"
+#: UiStrings.resx$OcrDownloadSummaryText$Message
+msgid "Using OCR requires you to download each language you want to scan."
+msgstr "La tecnologia OCR requereix baixar fitxers dels idiomes que voleu escanejar."
 
 #: MiscResources.resx$Version$Message
+#: SdkResources.resx$Version$Message
 msgid "Version {0}"
 msgstr "Versió {0}"
 
-#: FDesktop.resx$ctxView.Text$Message
-#: FDesktop.resx$tsView.Text$Message
+#: UiStrings.resx$View$Message
 msgid "View"
 msgstr "Visualitza"
 
 #: FEditProfile.resx$rdWIA.Text$Message
+#: UiStrings.resx$WiaDriver$Message
 msgid "WIA Driver"
 msgstr "Dispositiu WIA"
 
 #: FTwainGui.resx$label1.Text$Message
-msgid "Waiting for TWAIN to complete"
-msgstr "Esperant a TWAIN per completar"
+msgid "Waiting for TWAIN to complete..."
+msgstr "Esperant a TWAIN per completar..."
 
 #: FAuthorize.resx$lblWaiting.Text$Message
-msgid "Waiting for authorization"
-msgstr "S'està esperant autorització"
+msgid "Waiting for authorization..."
+msgstr "S'està esperant autorització..."
 
 #: MiscResources.resx$BatchStatusWaitingForScan$Message
-msgid "Waiting for scan {0}"
-msgstr "S'està esperant l'escàner {0}"
+msgid "Waiting for scan {0}..."
+msgstr "S'està esperant l'escàner {0}..."
 
 #: FAdvancedScanSettings.resx$label2.Text$Message
 msgid "White Threshold"
 msgstr "Llindar del blanc"
 
 #: FAdvancedScanSettings.resx$label4.Text$Message
-msgid "Wia Version"
-msgstr ""
-
-#: FPageSize.resx$labelX.Text$Message
-msgid "X"
+msgid "Wia Version:"
 msgstr ""
 
 #: FPlaceholders.resx$label3.Text$Message
@@ -1483,44 +1549,40 @@ msgid "Year (00-99)"
 msgstr "Any (00-99)"
 
 #: MiscResources.resx$PdfNoPermissionToExtractContent$Message
-msgid "You do not have permission to copy content from the file '{0}'"
-msgstr "No teniu prou permisos per copiar el contingut del fitxer '{0}'"
+#: SdkResources.resx$PdfNoPermissionToExtractContent$Message
+msgid "You do not have permission to copy content from the file '{0}'."
+msgstr "No teniu prou permisos per copiar el contingut del fitxer '{0}'."
 
 #: MiscResources.resx$DontHavePermission$Message
-msgid "You don't have permission to save files at this location"
-msgstr "No teniu permís per desar fitxers en aquesta ubicació"
+msgid "You don't have permission to save files at this location."
+msgstr "No teniu permís per desar fitxers en aquesta ubicació."
 
 #: MiscResources.resx$ExitWithUnsavedChanges$Message
 msgid "You have unsaved changes. Are you sure you want to exit and discard those changes?"
 msgstr "Teniu modificacions sense desar. Voleu tancar i descartar els canvis?"
 
-#: TiffViewerCtl.resx$tsZoom.ToolTipText$Message
+#: TiffViewerCtl.resx$_tsZoom.ToolTipText$Message
+#: UiStrings.resx$Zoom$Message
 msgid "Zoom"
 msgstr "Ampliació"
 
-#: TiffViewerCtl.resx$tsZoomActual.ToolTipText$Message
+#: TiffViewerCtl.resx$_tsZoomActual.ToolTipText$Message
 msgid "Zoom Actual"
 msgstr "Escala actual"
 
-#: TiffViewerCtl.resx$tsZoomPlus.ToolTipText$Message
+#: TiffViewerCtl.resx$_tsZoomPlus.ToolTipText$Message
+#: UiStrings.resx$ZoomIn$Message
 msgid "Zoom In"
 msgstr "Amplia"
 
-#: TiffViewerCtl.resx$tsZoomOut.ToolTipText$Message
+#: TiffViewerCtl.resx$_tsZoomOut.ToolTipText$Message
+#: UiStrings.resx$ZoomOut$Message
 msgid "Zoom Out"
 msgstr "Allunya"
 
 #: SettingsResources.resx$PageSizeUnit_Centimetre$Message
 msgid "cm"
 msgstr ""
-
-#: FAbout.resx$linkLabel2.Text$Message
-msgid "http://www.fatcow.com/free-icons"
-msgstr ""
-
-#: FAbout.resx$linkLabel1.Text$Message
-msgid "http://www.naps2.com"
-msgstr "https://www.naps2.com/"
 
 #: SettingsResources.resx$PageSizeUnit_Inch$Message
 msgid "in"
@@ -1530,7 +1592,6 @@ msgstr ""
 msgid "mm"
 msgstr ""
 
-#: FViewer.resx$lblPageTotal.Text$Message
 #: MiscResources.resx$OfN$Message
 msgid "of {0}"
 msgstr "de {0}"
@@ -1541,6 +1602,11 @@ msgstr ""
 
 #: MiscResources.resx$NamedPageSizeFormat$Message
 msgid "{0} ({1}x{2} {3})"
+msgstr ""
+
+#: FProgress.resx$labelNumber.Text$Message
+#: MiscResources.resx$ProgressFormat$Message
+msgid "{0} / {1}"
 msgstr ""
 
 #: FDownloadProgress.resx$labelSub.Text$Message
@@ -1558,10 +1624,11 @@ msgid "{0} image(s) scanned on {1} at {2} may not have been saved, and are recov
 msgstr "Possiblement {0} imatges escanejades a {1} el {2} no s'han desat però es poden recuperar. Voleu continuar amb la recuperació?"
 
 #: MiscResources.resx$ImagesSaved$Message
-msgid "{0} images saved"
-msgstr "{0} imatges desades"
+msgid "{0} images saved."
+msgstr "{0} imatges desades."
 
 #: MiscResources.resx$PdfStatus$Message
+#: UiStrings.resx$XOfY$Message
 msgid "{0} of {1}"
 msgstr "{0} de {1}"
 
