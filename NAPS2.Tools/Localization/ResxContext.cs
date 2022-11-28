@@ -1,12 +1,12 @@
 ﻿namespace NAPS2.Tools.Localization;
 
-public class LanguageContext
+public class ResxContext
 {
     private readonly string _langCode;
 
     public Dictionary<string, TranslatableString> Strings { get; } = new Dictionary<string, TranslatableString>();
 
-    public LanguageContext(string langCode)
+    public ResxContext(string langCode)
     {
         _langCode = langCode;
     }
@@ -64,7 +64,7 @@ public class LanguageContext
         {
             var prop = item.Attribute("name")?.Value;
             var original = item.Element("value")?.Value;
-            if (prop == null || original == null || !Rules.IsTranslatable(winforms, prop, ref original, out string prefix, out string suffix))
+            if (prop == null || original == null || !Rules.IsTranslatable(winforms, prop, ref original, out string prefix))
             {
                 // Trim untranslatable strings from localized resx files
                 item.Remove();
@@ -76,7 +76,7 @@ public class LanguageContext
                 var translation = Strings[original].Translation;
                 if (!string.IsNullOrWhiteSpace(translation))
                 {
-                    item.Element("value")!.Value = prefix + Strings[original].Translation + suffix;
+                    item.Element("value")!.Value = prefix + Strings[original].Translation;
                 }
             }
         }
