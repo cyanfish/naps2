@@ -34,7 +34,7 @@ public class SaneOptsCommand : ICommand<SaneOptsOptions>
 
         foreach (var poFile in dir.EnumerateFiles("*.po"))
         {
-            var ctx = new LanguageContext(poFile.Name.Replace(".po", ""));
+            var ctx = new ResxContext(poFile.Name.Replace(".po", ""));
             ctx.Load(poFile.FullName);
             foreach (var s in NeededStrings)
             {

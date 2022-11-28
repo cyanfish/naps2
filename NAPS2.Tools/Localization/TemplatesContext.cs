@@ -37,7 +37,7 @@ msgstr """"
         {
             var prop = item.Attribute("name")?.Value;
             var original = item.Element("value")?.Value;
-            if (prop == null || original == null || !Rules.IsTranslatable(winforms, prop, ref original, out _, out _))
+            if (prop == null || original == null || !Rules.IsTranslatable(winforms, prop, ref original, out _))
             {
                 continue;
             }

@@ -4,23 +4,15 @@ namespace NAPS2.Tools.Localization;
 
 public static class Rules
 {
-    private static readonly Regex SuffixRegex = new Regex(@"[:.]+$");
     private static readonly Regex HotkeyRegex = new Regex(@"&(\w)");
     private static readonly Regex TextPropRegex = new Regex(@"(Text|Items\d*)$");
 
-    public static bool IsTranslatable(bool winforms, string prop, ref string original, out string prefix, out string suffix)
+    public static bool IsTranslatable(bool winforms, string prop, ref string original, out string prefix)
     {
         prefix = "";
-        suffix = "";
         if (!original.Any(char.IsLetter) && !original.Contains("{0}") || original.Length <= 1)
         {
             return false;
-        }
-        var match = SuffixRegex.Match(original);
-        if (match.Success)
-        {
-            suffix = match.Value;
-            original = original.Substring(0, match.Index);
         }
         if (winforms)
         {
