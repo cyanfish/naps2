@@ -395,18 +395,18 @@ namespace NAPS2.Lang {
         /// <summary>
         ///   Looks up a localized string similar to Српски.
         /// </summary>
-        internal static string sr_Cyrl {
+        internal static string sr {
             get {
-                return ResourceManager.GetString("sr_Cyrl", resourceCulture);
+                return ResourceManager.GetString("sr", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Srpski.
         /// </summary>
-        internal static string sr_Latn {
+        internal static string sr_CS {
             get {
-                return ResourceManager.GetString("sr_Latn", resourceCulture);
+                return ResourceManager.GetString("sr_CS", resourceCulture);
             }
         }
         

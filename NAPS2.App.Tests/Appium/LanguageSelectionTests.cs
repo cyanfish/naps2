@@ -9,8 +9,7 @@ namespace NAPS2.App.Tests.Appium;
 [Collection("appium")]
 public class LanguageSelectionTests : AppiumTests
 {
-    // TODO: Verify why zh-TW isn't here (and that hi still hasn't been translated)
-    private static readonly HashSet<string> ExpectedMissingLanguages = new() { "zh-TW", "hi" };
+    private static readonly HashSet<string> ExpectedMissingLanguages = new() { "bn", "hi", "id", "th", "ur" };
 
     [VerifyFact(AllowDebug = true)]
     public void OpenLanguageDropdown()
@@ -19,16 +18,7 @@ public class LanguageSelectionTests : AppiumTests
         ClickAtName("Language");
         var menuItems = GetMenuItems();
 
-        if (!Debugger.IsAttached)
-        {
-            // Verify all expected languages have menu items
-            var menuItemTexts = menuItems.Select(x => x.Text).ToHashSet();
-            var allLanguages = GetAllLanguages();
-            var missingLanguages = allLanguages
-                .Where(x => !menuItemTexts.Contains(x.langName) && !ExpectedMissingLanguages.Contains(x.langCode))
-                .ToList();
-            Assert.True(missingLanguages.Count == 0, $"Missing languages: {string.Join(",", missingLanguages)}");
-        }
+        VerifyMissingLanguages(menuItems);
 
         // Verify French (fr) translation as a standard language example
         ClickAndResetWindow("Français");
@@ -47,6 +37,21 @@ public class LanguageSelectionTests : AppiumTests
         ClickAtName("Language");
     
         AppTestHelper.AssertNoErrorLog(FolderPath);
+    }
+
+    private void VerifyMissingLanguages(ReadOnlyCollection<WindowsElement> menuItems)
+    {
+#if !DEBUG_LANG
+        // In Debug mode (without DEBUG_LANG) we don't expect to have all languages
+        if (Debugger.IsAttached) return;
+#endif
+        // Verify all expected languages have menu items
+        var menuItemTexts = menuItems.Select(x => x.Text).ToHashSet();
+        var allLanguages = GetAllLanguages();
+        var missingLanguages = allLanguages
+            .Where(x => !menuItemTexts.Contains(x.langName) && !ExpectedMissingLanguages.Contains(x.langCode))
+            .ToList();
+        Assert.True(missingLanguages.Count == 0, $"Missing languages: {string.Join(",", missingLanguages)}");
     }
 
     private void ClickAndResetWindow(string name)

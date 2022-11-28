@@ -228,10 +228,10 @@
   <data name="sq" xml:space="preserve">
     <value>Shqip</value>
   </data>
-  <data name="sr_Cyrl" xml:space="preserve">
+  <data name="sr" xml:space="preserve">
     <value>Српски</value>
   </data>
-  <data name="sr_Latn" xml:space="preserve">
+  <data name="sr_CS" xml:space="preserve">
     <value>Srpski</value>
   </data>
   <data name="sv" xml:space="preserve">

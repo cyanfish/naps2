@@ -5,6 +5,8 @@
         <TargetFrameworks Condition="!$([MSBuild]::IsOSPlatform('Windows'))">net6</TargetFrameworks>
         <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
         <ResolveAssemblyWarnOrErrorOnTargetArchitectureMismatch>None</ResolveAssemblyWarnOrErrorOnTargetArchitectureMismatch>
+        <Configurations>Debug;Release;DebugLang</Configurations>
+        <DefineConstants Condition=" '$(Configuration)' == 'DebugLang' ">DEBUG_LANG</DefineConstants>
     </PropertyGroup>
 
     <Import Project="..\NAPS2.Setup\CommonTargets.targets" />
