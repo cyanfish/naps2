@@ -609,6 +609,15 @@ namespace NAPS2.Lang.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Not Now.
+        /// </summary>
+        internal static string NotNow {
+            get {
+                return ResourceManager.GetString("NotNow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to OCR.
         /// </summary>
         internal static string Ocr {
@@ -758,6 +767,33 @@ namespace NAPS2.Lang.Resources {
         internal static string ProfilesFormTitle {
             get {
                 return ResourceManager.GetString("ProfilesFormTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Recover.
+        /// </summary>
+        internal static string Recover {
+            get {
+                return ResourceManager.GetString("Recover", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Recover Scanned Images.
+        /// </summary>
+        internal static string RecoverFormTitle {
+            get {
+                return ResourceManager.GetString("RecoverFormTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} image(s) scanned on {1} at {2} may not have been saved, and are recoverable. Do you want to recover them?.
+        /// </summary>
+        internal static string RecoverPrompt {
+            get {
+                return ResourceManager.GetString("RecoverPrompt", resourceCulture);
             }
         }
         

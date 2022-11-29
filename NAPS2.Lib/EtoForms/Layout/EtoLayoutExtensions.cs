@@ -58,6 +58,12 @@ public static class EtoLayoutExtensions
     public static ControlWithLayoutAttributes Padding(this Control control, int left = 0, int top = 0, int right = 0, int bottom = 0) =>
         new ControlWithLayoutAttributes(control, padding: new Padding(left, top, right, bottom));
 
+    public static ControlWithLayoutAttributes Wrap(this Label label, int defaultWidth)
+    {
+        label.Wrap = WrapMode.Word;
+        return new ControlWithLayoutAttributes(label, wrapDefaultWidth: defaultWidth);;
+    }
+
     public static ControlWithLayoutAttributes Width(this ControlWithLayoutAttributes control, int width) =>
         new ControlWithLayoutAttributes(control, width: width);
     public static ControlWithLayoutAttributes Height(this ControlWithLayoutAttributes control, int height) =>

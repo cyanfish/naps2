@@ -287,13 +287,12 @@ public class DesktopController
     private void ShowRecoveryPrompt()
     {
         // Allow scanned images to be recovered in case of an unexpected close
-        // TODO: Eto implementation
-        // var op = _operationFactory.Create<RecoveryOperation>();
-        // if (op.Start(_desktopImagesController.ReceiveScannedImage(),
-        //         new RecoveryParams { ThumbnailSize = _config.ThumbnailSize() }))
-        // {
-        //     _operationProgress.ShowProgress(op);
-        // }
+        var op = _operationFactory.Create<RecoveryOperation>();
+        if (op.Start(_desktopImagesController.ReceiveScannedImage(),
+                new RecoveryParams { ThumbnailSize = _thumbnailController.RenderSize }))
+        {
+            _operationProgress.ShowProgress(op);
+        }
     }
 
     private void InitThumbnailRendering()

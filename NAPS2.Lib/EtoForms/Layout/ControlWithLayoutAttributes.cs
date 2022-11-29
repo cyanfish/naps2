@@ -24,7 +24,7 @@ public class ControlWithLayoutAttributes : LayoutElement
         ControlWithLayoutAttributes control, bool? xScale = null, bool? yScale = null,
         Padding? padding = null,
         int? width = null, int? height = null,
-        int? naturalWidth = null, int? naturalHeight = null,
+        int? naturalWidth = null, int? naturalHeight = null, int? wrapDefaultWidth = null,
         LayoutAlignment? alignment = null)
     {
         Control = control.Control;
@@ -35,6 +35,7 @@ public class ControlWithLayoutAttributes : LayoutElement
         Height = height ?? control.Height;
         NaturalWidth = naturalWidth ?? control.NaturalWidth;
         NaturalHeight = naturalHeight ?? control.NaturalHeight;
+        WrapDefaultWidth = wrapDefaultWidth ?? control.WrapDefaultWidth;
         Alignment = alignment ?? control.Alignment;
     }
 
@@ -47,6 +48,7 @@ public class ControlWithLayoutAttributes : LayoutElement
     private int? Height { get; }
     public int? NaturalWidth { get; }
     public int? NaturalHeight { get; }
+    public int? WrapDefaultWidth { get; }
 
     public override void DoLayout(LayoutContext context, RectangleF bounds)
     {
@@ -78,7 +80,14 @@ public class ControlWithLayoutAttributes : LayoutElement
         if (Control != null)
         {
             EnsureIsAdded(context);
-            size = EtoPlatform.Current.GetPreferredSize(Control, parentBounds.Size);
+            if (WrapDefaultWidth is { } width)
+            {
+                size = EtoPlatform.Current.GetWrappedSize(Control, width);
+            }
+            else
+            {
+                size = EtoPlatform.Current.GetPreferredSize(Control, parentBounds.Size);
+            }
         }
         size = UpdateFixedDimensions(context, size);
         return new SizeF(size.Width + Padding.Horizontal, size.Height + Padding.Vertical);
@@ -115,6 +124,7 @@ public class ControlWithLayoutAttributes : LayoutElement
         }
         if (context.IsFirstLayout && !_isWindowSet && context.Window != null)
         {
+            // TODO: Why are abort buttons not working again? Is this broken?
             Control.Properties.Set<Container>(VisualParentField.GetValue(null), context.Window);
             TriggerLoadMethod.Invoke(Control, new object[] { EventArgs.Empty });
             _isWindowSet = true;

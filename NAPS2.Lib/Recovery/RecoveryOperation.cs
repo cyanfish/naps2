@@ -1,6 +1,5 @@
-using System.Windows.Forms;
 using NAPS2.EtoForms;
-using NAPS2.WinForms;
+using NAPS2.EtoForms.Ui;
 
 namespace NAPS2.Recovery;
 
@@ -35,7 +34,7 @@ internal class RecoveryOperation : OperationBase
         {
             switch (PromptToRecover(recoverableFolder))
             {
-                case DialogResult.Yes: // Recover
+                case RecoverAction.Recover:
                     RunAsync(() =>
                     {
                         try
@@ -49,7 +48,7 @@ internal class RecoveryOperation : OperationBase
                         }
                     });
                     return true;
-                case DialogResult.No: // Delete
+                case RecoverAction.Delete:
                     recoverableFolder.TryDelete();
                     recoverableFolder.Dispose();
                     break;
@@ -66,10 +65,11 @@ internal class RecoveryOperation : OperationBase
         return false;
     }
 
-    private DialogResult PromptToRecover(RecoverableFolder recoverableFolder)
+    private RecoverAction PromptToRecover(RecoverableFolder recoverableFolder)
     {
-        var recoveryPromptForm = _formFactory.Create<FRecover>();
+        var recoveryPromptForm = _formFactory.Create<RecoverForm>();
         recoveryPromptForm.SetData(recoverableFolder.ImageCount, recoverableFolder.ScannedDateTime);
-        return recoveryPromptForm.ShowDialog();
+        recoveryPromptForm.ShowModal();
+        return recoveryPromptForm.SelectedAction;
     }
 }

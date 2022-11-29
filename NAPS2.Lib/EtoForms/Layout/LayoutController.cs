@@ -5,6 +5,7 @@ namespace NAPS2.EtoForms.Layout;
 
 public class LayoutController
 {
+    public const int MAX_SIZE = int.MaxValue / 2;
     private readonly Control _layout = EtoPlatform.Current.CreateContainer();
     private LayoutElement? _content;
     private Window? _window;
@@ -45,7 +46,7 @@ public class LayoutController
     public Size GetLayoutSize(bool natural)
     {
         if (_content == null) throw new InvalidOperationException();
-        var bounds = new RectangleF(0, 0, int.MaxValue, int.MaxValue);
+        var bounds = new RectangleF(0, 0, MAX_SIZE, MAX_SIZE);
         var context = GetLayoutContext() with { IsNaturalSizeQuery = natural };
         var contentSize = _content.GetPreferredSize(context, bounds);
         var padding = new SizeF(RootPadding * 2, RootPadding * 2);

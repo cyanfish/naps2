@@ -453,4 +453,16 @@
   <data name="SelectAll" xml:space="preserve">
     <value>Select All</value>
   </data>
+  <data name="Recover" xml:space="preserve">
+    <value>Recover</value>
+  </data>
+  <data name="NotNow" xml:space="preserve">
+    <value>Not Now</value>
+  </data>
+  <data name="RecoverFormTitle" xml:space="preserve">
+    <value>Recover Scanned Images</value>
+  </data>
+  <data name="RecoverPrompt" xml:space="preserve">
+    <value>{0} image(s) scanned on {1} at {2} may not have been saved, and are recoverable. Do you want to recover them?</value>
+  </data>
 </root>

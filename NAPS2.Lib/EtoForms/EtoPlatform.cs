@@ -82,4 +82,9 @@ public abstract class EtoPlatform
     public virtual void ConfigureZoomButton(Button button)
     {
     }
+
+    public virtual SizeF GetWrappedSize(Control control, int defaultWidth)
+    {
+        return control.GetPreferredSize(new SizeF(defaultWidth, LayoutController.MAX_SIZE));
+    }
 }

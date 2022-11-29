@@ -126,6 +126,17 @@ public class WinFormsEtoPlatform : EtoPlatform
             control.ToNative().PreferredSize.ToEto());
     }
 
+    public override SizeF GetWrappedSize(Control control, int defaultWidth)
+    {
+        if (control.ControlObject is wf.Label label)
+        {
+            label.AutoSize = false;
+            label.Width = 0;
+            return label.GetPreferredSize(new sd.Size(defaultWidth, 0)).ToEto();
+        }
+        return base.GetWrappedSize(control, defaultWidth);
+    }
+
     public override Control CreateContainer()
     {
         return new wf.Panel().ToEto();
