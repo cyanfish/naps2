@@ -17,7 +17,7 @@ public class PreviewForm : EtoDialogBase
         ImageList = imageList;
 
         Title = UiStrings.PreviewFormTitle;
-        Icon = Icons.picture.ToEtoIcon();
+        Icon = new Icon(1f, Icons.picture.ToEtoImage());
 
         FormStateController.AutoLayoutSize = false;
         FormStateController.DefaultClientSize = new Size(800, 600);
