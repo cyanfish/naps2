@@ -1,7 +1,9 @@
 using System.Drawing;
 using System.Windows.Forms;
 using Eto.WinForms;
+using Eto.WinForms.Forms.Menu;
 using NAPS2.WinForms;
+using ContextMenu = Eto.Forms.ContextMenu;
 
 namespace NAPS2.EtoForms.WinForms;
 
@@ -15,6 +17,7 @@ public class WinFormsListView<T> : IListView<T> where T : notnull
 
     private ListSelection<T> _selection = ListSelection.Empty<T>();
     private bool _refreshing;
+    private ContextMenu? _contextMenu;
 
     public WinFormsListView(ListViewBehavior<T> behavior)
     {
@@ -118,6 +121,16 @@ public class WinFormsListView<T> : IListView<T> where T : notnull
     }
 
     public Eto.Forms.Control Control => Eto.Forms.WinFormsHelpers.ToEto(_view);
+
+    public ContextMenu? ContextMenu
+    {
+        get => _contextMenu;
+        set
+        {
+            _contextMenu = value;
+            _view.ContextMenuStrip = (_contextMenu?.Handler as ContextMenuHandler)?.Control;
+        }
+    }
 
     public ListView NativeControl => _view;
 

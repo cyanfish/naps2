@@ -27,6 +27,7 @@ public abstract class DesktopForm : EtoFormBase
 
     private readonly ListProvider<Command> _scanMenuCommands = new();
     private readonly ListProvider<Command> _languageMenuCommands = new();
+    private readonly ContextMenu _contextMenu = new();
 
     protected IListView<UiImage> _listView;
     private ImageListSyncer? _imageListSyncer;
@@ -78,6 +79,11 @@ public abstract class DesktopForm : EtoFormBase
         _listView.Drop += ListViewDrop;
         _listView.SelectionChanged += ListViewSelectionChanged;
         _listView.ImageSize = _thumbnailController.VisibleSize;
+        _listView.ContextMenu = _contextMenu;
+
+        // TODO: Fix Eto so that we don't need to set an item here (otherwise the first time we right click nothing happens)
+        _contextMenu.Items.Add(Commands.SelectAll);
+        _contextMenu.Opening += OpeningContextMenu;
 
         LayoutController.RootPadding = 0;
         FormStateController.AutoLayoutSize = false;
@@ -101,6 +107,35 @@ public abstract class DesktopForm : EtoFormBase
         ImageList.SelectionChanged += ImageList_SelectionChanged;
         ImageList.ImagesUpdated += ImageList_ImagesUpdated;
         _profileManager.ProfilesUpdated += ProfileManager_ProfilesUpdated;
+    }
+
+    private void OpeningContextMenu(object sender, EventArgs e)
+    {
+        _contextMenu.Items.Clear();
+        Commands.Paste.Enabled = _imageTransfer.IsInClipboard();
+        if (ImageList.Selection.Any())
+        {
+            // TODO: Remove icon from delete command somehow
+            // TODO: Is this memory leaking (because of event handlers) when commands are converted to menuitems?
+            _contextMenu.Items.AddRange(new List<MenuItem>
+            {
+                Commands.ViewImage,
+                new SeparatorMenuItem(),
+                Commands.SelectAll,
+                Commands.Copy,
+                Commands.Paste,
+                new SeparatorMenuItem(),
+                Commands.Delete
+            });
+        }
+        else
+        {
+            _contextMenu.Items.AddRange(new List<MenuItem>
+            {
+                Commands.SelectAll,
+                Commands.Paste
+            });
+        }
     }
 
     private void ImageList_SelectionChanged(object? sender, EventArgs e)
@@ -137,11 +172,11 @@ public abstract class DesktopForm : EtoFormBase
         _imageListSyncer = new ImageListSyncer(ImageList, _listView.ApplyDiffs, SynchronizationContext.Current!);
     }
 
-    protected override void OnShown(EventArgs e)
+    protected override async void OnShown(EventArgs e)
     {
         base.OnShown(e);
         UpdateToolbar();
-        _desktopController.Initialize();
+        await _desktopController.Initialize();
     }
 
     // protected override void OnClosing(CancelEventArgs e)

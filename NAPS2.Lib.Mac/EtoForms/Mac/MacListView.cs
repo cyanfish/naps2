@@ -1,4 +1,5 @@
 using Eto.Forms;
+using Eto.Mac.Forms.Menu;
 
 namespace NAPS2.EtoForms.Mac;
 
@@ -12,6 +13,7 @@ public class MacListView<T> : NSCollectionViewDelegateFlowLayout, IListView<T> w
 
     private ListSelection<T> _selection = ListSelection.Empty<T>();
     private bool _refreshing;
+    private ContextMenu? _contextMenu;
 
     public MacListView(ListViewBehavior<T> behavior)
     {
@@ -56,6 +58,16 @@ public class MacListView<T> : NSCollectionViewDelegateFlowLayout, IListView<T> w
     }
 
     public Control Control => _scrollView.ToEto();
+
+    public ContextMenu? ContextMenu
+    {
+        get => _contextMenu;
+        set
+        {
+            _contextMenu = value;
+            _view.Menu = (_contextMenu?.Handler as ContextMenuHandler)?.Control;
+        }
+    }
 
     public event EventHandler? SelectionChanged;
 

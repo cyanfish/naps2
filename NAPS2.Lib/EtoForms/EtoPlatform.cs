@@ -87,4 +87,9 @@ public abstract class EtoPlatform
     {
         return control.GetPreferredSize(new SizeF(defaultWidth, LayoutController.MAX_SIZE));
     }
+
+    public virtual void SetClipboardImage(Clipboard clipboard, Bitmap image)
+    {
+        clipboard.Image = image;
+    }
 }

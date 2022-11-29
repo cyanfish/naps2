@@ -64,6 +64,9 @@ public class GtkListView<T> : IListView<T> where T : notnull
 
     public Control Control => _scrolledWindow.ToEto();
 
+    // TODO: Make this work
+    public ContextMenu? ContextMenu { get; set; }
+
     public event EventHandler? Updated;
 
     public event EventHandler? SelectionChanged;

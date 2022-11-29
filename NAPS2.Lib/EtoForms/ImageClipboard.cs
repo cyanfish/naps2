@@ -28,12 +28,12 @@ public class ImageClipboard
         // Fast path for copying within NAPS2
         _imageTransfer.SetClipboard(imageList);
 
-        // Slow path for more full-featured copying
         if (includeBitmap)
         {
-            using var firstBitmap = imageList[0].Render();
-            Clipboard.Instance.Image = firstBitmap.ToEtoImage();
-            var encodedRtf = await RtfEncodeImages(firstBitmap, imageList);
+            // Slow path for more full-featured copying, expensive parts not run on UI thread
+            using var firstBitmap = await Task.Run(() => imageList[0].Render());
+            EtoPlatform.Current.SetClipboardImage(Clipboard.Instance, firstBitmap.ToEtoImage());
+            var encodedRtf = await Task.Run(() => RtfEncodeImages(firstBitmap, imageList));
             if (encodedRtf != null)
             {
                 Clipboard.Instance.SetString(encodedRtf, "Rich Text Format");
@@ -41,8 +41,7 @@ public class ImageClipboard
         }
     }
 
-    // TODO: Do we need to run this in a task?
-    private async Task<string?> RtfEncodeImages(IMemoryImage firstBitmap, List<ProcessedImage> images)
+    private string? RtfEncodeImages(IMemoryImage firstBitmap, List<ProcessedImage> images)
     {
         var sb = new StringBuilder();
         sb.Append("{");

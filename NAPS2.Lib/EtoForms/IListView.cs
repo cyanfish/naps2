@@ -6,6 +6,8 @@ public interface IListView<T> : Util.ISelectable<T> where T : notnull
 {
     Control Control { get; }
 
+    ContextMenu? ContextMenu { get; set; }
+
     // TODO: Maybe convert this back to a Size
     int ImageSize { get; set; }
 

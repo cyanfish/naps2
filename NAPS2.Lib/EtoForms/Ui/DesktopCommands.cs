@@ -264,6 +264,18 @@ public class DesktopCommands
             Text = UiStrings.ZoomOut,
             Image = iconProvider.GetIcon("zoom_out")
         };
+        SelectAll = new ActionCommand(imageListActions.SelectAll)
+        {
+            Text = UiStrings.SelectAll
+        };
+        Copy = new ActionCommand(desktopController.Copy)
+        {
+            Text = UiStrings.Copy
+        };
+        Paste = new ActionCommand(desktopController.Paste)
+        {
+            Text = UiStrings.Paste
+        };
     }
 
     public DesktopCommands WithSelection(ListSelection<UiImage> selection)
@@ -330,4 +342,7 @@ public class DesktopCommands
     public ActionCommand About { get; set; }
     public ActionCommand ZoomIn { get; set; }
     public ActionCommand ZoomOut { get; set; }
+    public ActionCommand SelectAll { get; set; }
+    public ActionCommand Copy { get; set; }
+    public ActionCommand Paste { get; set; }
 }

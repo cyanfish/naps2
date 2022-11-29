@@ -169,4 +169,10 @@ public class WinFormsEtoPlatform : EtoPlatform
         wfButton.BackColor = sd.Color.White;
         wfButton.FlatStyle = wf.FlatStyle.Flat;
     }
+
+    public override void SetClipboardImage(Clipboard clipboard, Bitmap image)
+    {
+        var dataObj = (wf.DataObject) clipboard.ControlObject;
+        dataObj.SetImage(image.ToSD());
+    }
 }
