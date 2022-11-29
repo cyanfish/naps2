@@ -204,6 +204,10 @@ public class WinFormsDesktopForm : DesktopForm
     {
         item.Image = command.Image.ToSD();
         item.Text = item is wf.ToolStripMenuItem ? command.MenuText : command.ToolBarText;
+        if (item is wf.ToolStripMenuItem menuItem)
+        {
+            menuItem.ShortcutKeys = command.Shortcut.ToSWF();
+        }
         command.EnabledChanged += (_, _) => item.Enabled = command.Enabled;
         if (item is wf.ToolStripSplitButton button)
         {

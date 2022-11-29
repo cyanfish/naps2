@@ -16,6 +16,8 @@ public class KeyboardShortcutManager
         { "del", Keys.Delete },
         { "ins", Keys.Insert },
         { "break", Keys.Pause },
+        { "oemplus", Keys.Equal },
+        { "oemminus", Keys.Minus },
     }; 
 
     public Keys Parse(string? value)

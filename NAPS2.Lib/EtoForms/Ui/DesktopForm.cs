@@ -445,17 +445,19 @@ public abstract class DesktopForm : EtoFormBase
     {
         var defaultProfile = _profileManager.DefaultProfile;
         UpdateTitle(defaultProfile);
-        _scanMenuCommands.Value = _profileManager.Profiles.Select(profile =>
+        var commandList = _profileManager.Profiles.Select(profile =>
                 new ActionCommand(() => _desktopScanController.ScanWithProfile(profile))
                 {
+                    // TODO: Does this need to change on non-WinForms?
                     MenuText = profile.DisplayName.Replace("&", "&&"),
                     Image = profile == defaultProfile ? Icons.accept_small.ToEtoImage() : null
                 })
             .ToImmutableList<Command>();
-        for (int i = 0; i < _scanMenuCommands.Value.Count; i++)
+        for (int i = 0; i < commandList.Count; i++)
         {
-            _keyboardShortcuts.AssignProfileShortcut(i, _scanMenuCommands.Value[i]);
+            _keyboardShortcuts.AssignProfileShortcut(i + 1, commandList[i]);
         }
+        _scanMenuCommands.Value = commandList;
     }
 
     private void OnKeyDown(object sender, KeyEventArgs e)
