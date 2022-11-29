@@ -12,7 +12,7 @@ namespace NAPS2.EtoForms.Ui;
 
 public abstract class DesktopForm : EtoFormBase
 {
-    // private readonly KeyboardShortcutManager _ksm;
+    private readonly DesktopKeyboardShortcuts _keyboardShortcuts;
     private readonly INotificationManager _notify;
     private readonly CultureHelper _cultureHelper;
     private readonly IProfileManager _profileManager;
@@ -34,7 +34,7 @@ public abstract class DesktopForm : EtoFormBase
 
     public DesktopForm(
         Naps2Config config,
-        // KeyboardShortcutManager ksm,
+        DesktopKeyboardShortcuts keyboardShortcuts,
         INotificationManager notify,
         CultureHelper cultureHelper,
         IProfileManager profileManager,
@@ -49,7 +49,7 @@ public abstract class DesktopForm : EtoFormBase
         IDesktopSubFormController desktopSubFormController,
         DesktopCommands commands) : base(config)
     {
-        // _ksm = ksm;
+        _keyboardShortcuts = keyboardShortcuts;
         _notify = notify;
         _cultureHelper = cultureHelper;
         _profileManager = profileManager;
@@ -84,6 +84,8 @@ public abstract class DesktopForm : EtoFormBase
         // TODO: Fix Eto so that we don't need to set an item here (otherwise the first time we right click nothing happens)
         _contextMenu.Items.Add(Commands.SelectAll);
         _contextMenu.Opening += OpeningContextMenu;
+        _keyboardShortcuts.Assign(Commands);
+        KeyDown += OnKeyDown;
 
         LayoutController.RootPadding = 0;
         FormStateController.AutoLayoutSize = false;
@@ -351,10 +353,6 @@ public abstract class DesktopForm : EtoFormBase
         return L.Row(zoomOut, zoomIn).Spacing(-1);
     }
 
-    // // protected override void OnLoad(EventArgs args) => PostInitializeComponent();
-    //
-    // protected override void OnLoadComplete(EventArgs args) => AfterLayout();
-
     // /// <summary>
     // /// Runs when the form is first loaded and every time the language is changed.
     // /// </summary>
@@ -409,19 +407,6 @@ public abstract class DesktopForm : EtoFormBase
     {
         Application.Instance.MainForm = newMainForm;
     }
-    //
-    // private async void FDesktop_Shown(object sender, EventArgs e)
-    // {
-    //     // TODO: Start the Eto application in the entry point once all forms (or at least FDesktop?) are migrated
-    //     new Eto.Forms.Application(Eto.Platforms.WinForms).Attach();
-    //
-    //     UpdateToolbar();
-    //     await _desktopController.Initialize();
-    // }
-    //
-    // #endregion
-
-    #region Toolbar
 
     protected virtual void UpdateToolbar()
     {
@@ -445,13 +430,9 @@ public abstract class DesktopForm : EtoFormBase
             Commands.ReverseSelected.MenuText = string.Format(MiscResources.SelectedCount, ImageList.Selection.Count);
         Commands.SaveSelectedPdf.Enabled = Commands.SaveSelectedImages.Enabled = Commands.EmailSelectedPdf.Enabled =
             Commands.ReverseSelected.Enabled = ImageList.Selection.Any();
-        //
-        // // Context-menu actions
-        // ctxView.Visible = ctxCopy.Visible = ctxDelete.Visible =
-        //     ctxSeparator1.Visible = ctxSeparator2.Visible = _imageList.Selection.Any();
-        // ctxSelectAll.Enabled = _imageList.Images.Any();
-        //
+
         // Other
+        Commands.SelectAll.Enabled = ImageList.Images.Any();
         Commands.ZoomIn.Enabled = ImageList.Images.Any() && _thumbnailController.VisibleSize < ThumbnailSizes.MAX_SIZE;
         Commands.ZoomOut.Enabled = ImageList.Images.Any() && _thumbnailController.VisibleSize > ThumbnailSizes.MIN_SIZE;
         Commands.NewProfile.Enabled =
@@ -469,6 +450,15 @@ public abstract class DesktopForm : EtoFormBase
                     Image = profile == defaultProfile ? Icons.accept_small.ToEtoImage() : null
                 })
             .ToImmutableList<Command>();
+        for (int i = 0; i < _scanMenuCommands.Value.Count; i++)
+        {
+            _keyboardShortcuts.AssignProfileShortcut(i, _scanMenuCommands.Value[i]);
+        }
+    }
+
+    private void OnKeyDown(object sender, KeyEventArgs e)
+    {
+        e.Handled = _keyboardShortcuts.Perform(e.KeyData);
     }
 
     protected virtual void UpdateTitle(ScanProfile? defaultProfile)
@@ -476,132 +466,6 @@ public abstract class DesktopForm : EtoFormBase
         Title = string.Format(UiStrings.Naps2TitleFormat, defaultProfile?.DisplayName ?? UiStrings.Naps2FullName);
     }
 
-    #endregion
-
-    //
-    // #region Keyboard Shortcuts
-    //
-    // private void AssignKeyboardShortcuts()
-    // {
-    //     // Defaults
-    //
-    //     _ksm.Assign("Ctrl+Enter", tsScan);
-    //     _ksm.Assign("Ctrl+B", tsBatchScan);
-    //     _ksm.Assign("Ctrl+O", tsImport);
-    //     _ksm.Assign("Ctrl+S", tsdSavePDF);
-    //     _ksm.Assign("Ctrl+P", tsPrint);
-    //     _ksm.Assign("Ctrl+Up", _imageListActions.MoveUp);
-    //     _ksm.Assign("Ctrl+Left", _imageListActions.MoveUp);
-    //     _ksm.Assign("Ctrl+Down", _imageListActions.MoveDown);
-    //     _ksm.Assign("Ctrl+Right", _imageListActions.MoveDown);
-    //     _ksm.Assign("Ctrl+Shift+Del", tsClear);
-    //     _ksm.Assign("F1", _desktopSubFormController.ShowAboutForm);
-    //     _ksm.Assign("Ctrl+OemMinus", btnZoomOut);
-    //     _ksm.Assign("Ctrl+Oemplus", btnZoomIn);
-    //     _ksm.Assign("Del", ctxDelete);
-    //     _ksm.Assign("Ctrl+A", ctxSelectAll);
-    //     _ksm.Assign("Ctrl+C", ctxCopy);
-    //     _ksm.Assign("Ctrl+V", ctxPaste);
-    //
-    //     // Configured
-    //
-    //     var ks = Config.Get(c => c.KeyboardShortcuts);
-    //
-    //     _ksm.Assign(ks.About, _desktopSubFormController.ShowAboutForm);
-    //     _ksm.Assign(ks.BatchScan, tsBatchScan);
-    //     _ksm.Assign(ks.Clear, tsClear);
-    //     _ksm.Assign(ks.Delete, tsDelete);
-    //     _ksm.Assign(ks.EmailPDF, tsdEmailPDF);
-    //     _ksm.Assign(ks.EmailPDFAll, tsEmailPDFAll);
-    //     _ksm.Assign(ks.EmailPDFSelected, tsEmailPDFSelected);
-    //     _ksm.Assign(ks.ImageBlackWhite, tsBlackWhite);
-    //     _ksm.Assign(ks.ImageBrightness, tsBrightnessContrast);
-    //     _ksm.Assign(ks.ImageContrast, tsBrightnessContrast);
-    //     _ksm.Assign(ks.ImageCrop, tsCrop);
-    //     _ksm.Assign(ks.ImageHue, tsHueSaturation);
-    //     _ksm.Assign(ks.ImageSaturation, tsHueSaturation);
-    //     _ksm.Assign(ks.ImageSharpen, tsSharpen);
-    //     _ksm.Assign(ks.ImageReset, tsReset);
-    //     _ksm.Assign(ks.ImageView, tsView);
-    //     _ksm.Assign(ks.Import, tsImport);
-    //     _ksm.Assign(ks.MoveDown, _imageListActions.MoveDown);
-    //     _ksm.Assign(ks.MoveUp, _imageListActions.MoveUp);
-    //     _ksm.Assign(ks.NewProfile, tsNewProfile);
-    //     _ksm.Assign(ks.Ocr, tsOcr);
-    //     _ksm.Assign(ks.Print, tsPrint);
-    //     _ksm.Assign(ks.Profiles, tsProfiles);
-    //
-    //     _ksm.Assign(ks.ReorderAltDeinterleave, tsAltDeinterleave);
-    //     _ksm.Assign(ks.ReorderAltInterleave, tsAltInterleave);
-    //     _ksm.Assign(ks.ReorderDeinterleave, tsDeinterleave);
-    //     _ksm.Assign(ks.ReorderInterleave, tsInterleave);
-    //     _ksm.Assign(ks.ReorderReverseAll, tsReverseAll);
-    //     _ksm.Assign(ks.ReorderReverseSelected, tsReverseSelected);
-    //     _ksm.Assign(ks.RotateCustom, tsCustomRotation);
-    //     _ksm.Assign(ks.RotateFlip, tsFlip);
-    //     _ksm.Assign(ks.RotateLeft, tsRotateLeft);
-    //     _ksm.Assign(ks.RotateRight, tsRotateRight);
-    //     _ksm.Assign(ks.SaveImages, tsdSaveImages);
-    //     _ksm.Assign(ks.SaveImagesAll, tsSaveImagesAll);
-    //     _ksm.Assign(ks.SaveImagesSelected, tsSaveImagesSelected);
-    //     _ksm.Assign(ks.SavePDF, tsdSavePDF);
-    //     _ksm.Assign(ks.SavePDFAll, tsSavePDFAll);
-    //     _ksm.Assign(ks.SavePDFSelected, tsSavePDFSelected);
-    //     _ksm.Assign(ks.ScanDefault, tsScan);
-    //
-    //     _ksm.Assign(ks.ZoomIn, btnZoomIn);
-    //     _ksm.Assign(ks.ZoomOut, btnZoomOut);
-    // }
-    //
-    // private void AssignProfileShortcut(int i, ToolStripMenuItem item)
-    // {
-    //     var sh = GetProfileShortcut(i);
-    //     if (string.IsNullOrWhiteSpace(sh) && i <= 11)
-    //     {
-    //         sh = "F" + (i + 1);
-    //     }
-    //     _ksm.Assign(sh, item);
-    // }
-    //
-    // private string? GetProfileShortcut(int i)
-    // {
-    //     // TODO: Granular
-    //     var ks = Config.Get(c => c.KeyboardShortcuts);
-    //     switch (i)
-    //     {
-    //         case 1:
-    //             return ks.ScanProfile1;
-    //         case 2:
-    //             return ks.ScanProfile2;
-    //         case 3:
-    //             return ks.ScanProfile3;
-    //         case 4:
-    //             return ks.ScanProfile4;
-    //         case 5:
-    //             return ks.ScanProfile5;
-    //         case 6:
-    //             return ks.ScanProfile6;
-    //         case 7:
-    //             return ks.ScanProfile7;
-    //         case 8:
-    //             return ks.ScanProfile8;
-    //         case 9:
-    //             return ks.ScanProfile9;
-    //         case 10:
-    //             return ks.ScanProfile10;
-    //         case 11:
-    //             return ks.ScanProfile11;
-    //         case 12:
-    //             return ks.ScanProfile12;
-    //     }
-    //     return null;
-    // }
-    //
-    // private void ListViewKeyDown(object? sender, KeyEventArgs e)
-    // {
-    //     e.Handled = _ksm.Perform(e.KeyData);
-    // }
-    //
     // private void ListViewMouseWheel(object? sender, MouseEventArgs e)
     // {
     //     if (ModifierKeys.HasFlag(Keys.Control))
@@ -614,43 +478,9 @@ public abstract class DesktopForm : EtoFormBase
     //
     //
 
-    // #region Context Menu
-    //
-    // private void contextMenuStrip_Opening(object sender, System.ComponentModel.CancelEventArgs e)
-    // {
-    //     ctxPaste.Enabled = _imageTransfer.IsInClipboard();
-    //     if (!_imageList.Images.Any() && !ctxPaste.Enabled)
-    //     {
-    //         e.Cancel = true;
-    //     }
-    // }
-    //
-    // private void ctxSelectAll_Click(object sender, EventArgs e) => _imageListActions.SelectAll();
-    // private void ctxView_Click(object sender, EventArgs e) => _desktopSubFormController.ShowViewerForm();
-    // private void ctxDelete_Click(object sender, EventArgs e) => _desktopController.Delete();
-    //
-    // private async void ctxCopy_Click(object sender, EventArgs e) => await _desktopController.Copy();
-    //
-    // private void ctxPaste_Click(object sender, EventArgs e) => _desktopController.Paste();
-    //
-    // #endregion
-    //
-    // #region Thumbnail Resizing
-    //
-    //
-
     protected virtual void SetThumbnailSpacing(int thumbnailSize)
     {
     }
-
-    //
-    // private void btnZoomOut_Click(object sender, EventArgs e) => StepThumbnailSize(-1);
-    // private void btnZoomIn_Click(object sender, EventArgs e) => StepThumbnailSize(1);
-    //
-    // #endregion
-    //
-
-    #region Drag/Drop
 
     private void ListViewItemClicked(object? sender, EventArgs e) => _desktopSubFormController.ShowViewerForm();
 
@@ -693,6 +523,4 @@ public abstract class DesktopForm : EtoFormBase
             _imageListActions.MoveTo(position);
         }
     }
-
-    #endregion
 }

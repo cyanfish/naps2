@@ -1,17 +1,14 @@
-﻿using System.ComponentModel;
-using System.Windows.Forms;
+﻿using Eto.Forms;
 
-namespace NAPS2.Util;
+namespace NAPS2.EtoForms;
 
-// TODO: Refactor to Eto and move to NAPS2.EtoForms
-// TODO: Most dialogs should close on Escape being pressed
 /// <summary>
-/// A helper class to assign keyboard shortcuts to actions or WinForm buttons.
+/// A helper class to assign keyboard shortcuts to commands.
 /// </summary>
 public class KeyboardShortcutManager
 {
     private readonly Dictionary<Keys, Action> _dict = new();
-    private readonly Dictionary<Keys, ToolStripMenuItem> _itemDict = new();
+    private readonly Dictionary<Keys, Command> _commandDict = new();
 
     private readonly Dictionary<string, Keys> _customMap = new()
     {
@@ -55,35 +52,35 @@ public class KeyboardShortcutManager
         if (keys != Keys.None)
         {
             _dict[keys] = action;
-            if (_itemDict.ContainsKey(keys))
+            if (_commandDict.ContainsKey(keys))
             {
-                _itemDict[keys].ShortcutKeys = Keys.None;
-                _itemDict.Remove(keys);
+                ActionCommand c;
+                _commandDict[keys].Shortcut = Keys.None;
+                _commandDict.Remove(keys);
             }
             return true;
         }
         return false;
     }
 
-    public bool Assign(string? value, ToolStripMenuItem item, Action action)
+    public bool Assign(string? value, Command command, Action action)
     {
         var keys = Parse(value);
         if (keys != Keys.None)
         {
             try
             {
-                item.ShortcutKeys = Keys.None;
-                item.ShortcutKeyDisplayString = TypeDescriptor.GetConverter(typeof(Keys)).ConvertToString(keys);
-                _itemDict[keys] = item;
+                command.Shortcut = keys;
+                _commandDict[keys] = command;
                 _dict[keys] = action;
             }
             catch (Exception)
             {
                 _dict[keys] = action;
-                if (_itemDict.ContainsKey(keys))
+                if (_commandDict.ContainsKey(keys))
                 {
-                    _itemDict[keys].ShortcutKeys = Keys.None;
-                    _itemDict.Remove(keys);
+                    _commandDict[keys].Shortcut = Keys.None;
+                    _commandDict.Remove(keys);
                 }
             }
             return true;
@@ -91,38 +88,9 @@ public class KeyboardShortcutManager
         return false;
     }
 
-    public bool Assign(string? value, ToolStripButton item)
+    public bool Assign(string? value, Command command)
     {
-        if (item.GetCurrentParent() == null) return false;
-        if (Assign(value, item.PerformClick))
-        {
-            item.AutoToolTip = true;
-            item.ToolTipText = value;
-            return true;
-        }
-        return false;
-    }
-
-    public bool Assign(string? value, ToolStripMenuItem item)
-    {
-        return Assign(value, item, item.PerformClick);
-    }
-
-    public bool Assign(string? value, ToolStripSplitButton item)
-    {
-        if (item.GetCurrentParent() == null) return false;
-        if (Assign(value, item.PerformButtonClick))
-        {
-            item.AutoToolTip = true;
-            item.ToolTipText = value;
-            return true;
-        }
-        return false;
-    }
-
-    public bool Assign(string? value, Button item)
-    {
-        return Assign(value, item.PerformClick);
+        return Assign(value, command, command.Execute);
     }
 
     public bool Perform(Keys keyData)

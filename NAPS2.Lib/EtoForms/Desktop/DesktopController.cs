@@ -365,7 +365,7 @@ public class DesktopController
             if (MessageBox.Show(_desktopFormProvider.DesktopForm,
                     string.Format(MiscResources.ConfirmDeleteItems, _imageList.Selection.Count),
                     MiscResources.Delete, MessageBoxButtons.OKCancel,
-                    MessageBoxType.Question) == DialogResult.Ok)
+                    MessageBoxType.Question, MessageBoxDefaultButton.OK) == DialogResult.Ok)
             {
                 _imageListActions.DeleteSelected();
             }
@@ -387,7 +387,7 @@ public class DesktopController
             if (MessageBox.Show(_desktopFormProvider.DesktopForm,
                     string.Format(MiscResources.ConfirmResetImages, _imageList.Selection.Count),
                     MiscResources.ResetImage,
-                    MessageBoxButtons.OKCancel, MessageBoxType.Question) == DialogResult.Ok)
+                    MessageBoxButtons.OKCancel, MessageBoxType.Question, MessageBoxDefaultButton.OK) == DialogResult.Ok)
             {
                 _imageListActions.ResetTransforms();
             }

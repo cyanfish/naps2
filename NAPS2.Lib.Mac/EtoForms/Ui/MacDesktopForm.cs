@@ -12,7 +12,7 @@ public class MacDesktopForm : DesktopForm
 {
     public MacDesktopForm(
         Naps2Config config,
-        // KeyboardShortcutManager ksm,
+        DesktopKeyboardShortcuts keyboardShortcuts,
         INotificationManager notify,
         CultureHelper cultureHelper,
         IProfileManager profileManager,
@@ -26,7 +26,7 @@ public class MacDesktopForm : DesktopForm
         DesktopFormProvider desktopFormProvider,
         IDesktopSubFormController desktopSubFormController,
         DesktopCommands commands)
-        : base(config, /*ksm,*/ notify, cultureHelper, profileManager,
+        : base(config, keyboardShortcuts, notify, cultureHelper, profileManager,
             imageList, imageTransfer, thumbnailController, thumbnailProvider, desktopController, desktopScanController,
             imageListActions, desktopFormProvider, desktopSubFormController, commands)
     {
