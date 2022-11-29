@@ -8,7 +8,7 @@ namespace NAPS2.EtoForms.WinForms;
 public class WinFormsListView<T> : IListView<T> where T : notnull
 {
     private static readonly Pen DefaultPen = new(Color.Black, 1);
-    private static readonly Pen SelectionPen = new(Color.FromArgb(0, 0x66, 0xe8), 3);
+    private static readonly Pen SelectionPen = new(Color.FromArgb(0x60, 0xa0, 0xe8), 3);
 
     private readonly ListView _view;
     private readonly ListViewBehavior<T> _behavior;
