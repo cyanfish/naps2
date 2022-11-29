@@ -13,6 +13,7 @@ public class WinFormsListView<T> : IListView<T> where T : notnull
     private static readonly Pen SelectionPen = new(Color.FromArgb(0x60, 0xa0, 0xe8), 3);
 
     private readonly ListView _view;
+    private readonly Eto.Forms.Control _viewEtoControl;
     private readonly ListViewBehavior<T> _behavior;
 
     private ListSelection<T> _selection = ListSelection.Empty<T>();
@@ -53,6 +54,7 @@ public class WinFormsListView<T> : IListView<T> where T : notnull
         _view.MouseMove += OnMouseMove;
         _view.MouseLeave += OnMouseLeave;
 
+        _viewEtoControl = Eto.Forms.WinFormsHelpers.ToEto(_view);
         ImageList = UseCustomRendering
             ? new WinFormsImageList<T>.Custom(this, _behavior)
             : !_behavior.Checkboxes
@@ -120,7 +122,7 @@ public class WinFormsListView<T> : IListView<T> where T : notnull
         e.Effect = _behavior.GetDropEffect(e.Data.ToEto()).ToSwf();
     }
 
-    public Eto.Forms.Control Control => Eto.Forms.WinFormsHelpers.ToEto(_view);
+    public Eto.Forms.Control Control => _viewEtoControl;
 
     public ContextMenu? ContextMenu
     {

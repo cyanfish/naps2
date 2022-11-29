@@ -124,7 +124,6 @@ public class ControlWithLayoutAttributes : LayoutElement
         }
         if (context.IsFirstLayout && !_isWindowSet && context.Window != null)
         {
-            // TODO: Why are abort buttons not working again? Is this broken?
             Control.Properties.Set<Container>(VisualParentField.GetValue(null), context.Window);
             TriggerLoadMethod.Invoke(Control, new object[] { EventArgs.Empty });
             _isWindowSet = true;

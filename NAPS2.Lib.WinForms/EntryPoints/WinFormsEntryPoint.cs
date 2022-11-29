@@ -1,6 +1,8 @@
-﻿using System.Threading;
+﻿using System.Reflection;
+using System.Threading;
 using Autofac;
 using Eto.Forms;
+using Eto.WinForms.Forms;
 using NAPS2.EtoForms;
 using NAPS2.EtoForms.Ui;
 using NAPS2.EtoForms.WinForms;
@@ -50,6 +52,9 @@ public static class WinFormsEntryPoint
         var appContext = new wf.ApplicationContext(desktop.ToNative());
         Invoker.Current = new WinFormsInvoker(appContext);
         WinFormsDesktopForm.ApplicationContext = appContext;
+        var setOptionsMethod =
+            typeof(ApplicationHandler).GetMethod("SetOptions", BindingFlags.Instance | BindingFlags.NonPublic);
+        setOptionsMethod!.Invoke(application.Handler, Array.Empty<object>());
         wf.Application.Run(appContext);
     }
 

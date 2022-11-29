@@ -86,6 +86,8 @@ public abstract class DesktopForm : EtoFormBase
         _contextMenu.Opening += OpeningContextMenu;
         _keyboardShortcuts.Assign(Commands);
         KeyDown += OnKeyDown;
+        _listView.Control.KeyDown += OnKeyDown;
+        _listView.Control.MouseWheel += ListViewMouseWheel;
 
         LayoutController.RootPadding = 0;
         FormStateController.AutoLayoutSize = false;
@@ -458,6 +460,7 @@ public abstract class DesktopForm : EtoFormBase
 
     private void OnKeyDown(object sender, KeyEventArgs e)
     {
+        // TODO: The custom listview control isn't propagating events back to the parent window
         e.Handled = _keyboardShortcuts.Perform(e.KeyData);
     }
 
@@ -466,17 +469,13 @@ public abstract class DesktopForm : EtoFormBase
         Title = string.Format(UiStrings.Naps2TitleFormat, defaultProfile?.DisplayName ?? UiStrings.Naps2FullName);
     }
 
-    // private void ListViewMouseWheel(object? sender, MouseEventArgs e)
-    // {
-    //     if (ModifierKeys.HasFlag(Keys.Control))
-    //     {
-    //         StepThumbnailSize(e.Delta / (double) SystemInformation.MouseWheelScrollDelta);
-    //     }
-    // }
-    //
-    // #endregion
-    //
-    //
+    private void ListViewMouseWheel(object? sender, MouseEventArgs e)
+    {
+        if (e.Modifiers.HasFlag(Keys.Control))
+        {
+            _thumbnailController.StepSize(e.Delta.Height); //  / (double) SystemInformation.MouseWheelScrollDelta
+        }
+    }
 
     protected virtual void SetThumbnailSpacing(int thumbnailSize)
     {
