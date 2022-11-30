@@ -6,6 +6,7 @@
 [Setup]
 AppName=NAPS2 (Not Another PDF Scanner 2)
 AppVerName=NAPS2 {#AppVersion}
+AppVersion={#AppVersion}
 AppPublisher=Ben Olden-Cooligan
 AppPublisherURL=http://www.sourceforge.net/projects/naps2
 AppSupportURL=http://www.sourceforge.net/projects/naps2
