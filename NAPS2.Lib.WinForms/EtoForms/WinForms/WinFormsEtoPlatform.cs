@@ -175,4 +175,9 @@ public class WinFormsEtoPlatform : EtoPlatform
         var dataObj = (wf.DataObject) clipboard.ControlObject;
         dataObj.SetImage(image.ToSD());
     }
+
+    public override void ConfigureDropDown(DropDown dropDown)
+    {
+        ((wf.ComboBox) dropDown.ControlObject).DrawMode = wf.DrawMode.Normal;
+    }
 }

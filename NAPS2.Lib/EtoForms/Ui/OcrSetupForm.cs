@@ -10,7 +10,7 @@ public class OcrSetupForm : EtoDialogBase
     private readonly TesseractLanguageManager _tesseractLanguageManager;
 
     private readonly CheckBox _enableOcr = C.CheckBox(UiStrings.MakePdfsSearchable);
-    private readonly DropDown _ocrLang = new();
+    private readonly DropDown _ocrLang = C.DropDown();
     private readonly DropDown _ocrMode = C.EnumDropDown(LocalizedOcrMode.Fast, LocalizedOcrMode.Best);
     private readonly CheckBox _ocrAfterScanning = C.CheckBox(UiStrings.RunOcrAfterScanning);
     private readonly LinkButton _moreLanguages = C.Link(UiStrings.GetMoreLanguages);

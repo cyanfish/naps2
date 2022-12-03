@@ -92,4 +92,8 @@ public abstract class EtoPlatform
     {
         clipboard.Image = image;
     }
+
+    public virtual void ConfigureDropDown(DropDown dropDown)
+    {
+    }
 }

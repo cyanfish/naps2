@@ -136,18 +136,26 @@ public static class C
 
     public static Label Label(string text) => new() { Text = text };
 
+    public static DropDown DropDown()
+    {
+        var dropDown = new DropDown();
+        EtoPlatform.Current.ConfigureDropDown(dropDown);
+        return dropDown;
+    }
+
     public static DropDown EnumDropDown<T>(params T[] values) where T : Enum
     {
-        var combo = new DropDown();
+        var dropDown = new DropDown();
+        EtoPlatform.Current.ConfigureDropDown(dropDown);
         foreach (var item in values)
         {
-            combo.Items.Add(new ListItem
+            dropDown.Items.Add(new ListItem
             {
                 Key = item.ToString(),
                 Text = item.Description()
             });
         }
-        return combo;
+        return dropDown;
     }
 
     public static DropDown EnumDropDown<T>() where T : Enum
@@ -157,16 +165,17 @@ public static class C
 
     public static DropDown EnumDropDown<T>(Func<T, string> format) where T : Enum
     {
-        var combo = new DropDown();
+        var dropDown = new DropDown();
+        EtoPlatform.Current.ConfigureDropDown(dropDown);
         foreach (var item in Enum.GetValues(typeof(T)))
         {
-            combo.Items.Add(new ListItem
+            dropDown.Items.Add(new ListItem
             {
                 Key = item.ToString(),
                 Text = format((T) item)
             });
         }
-        return combo;
+        return dropDown;
     }
 
     public static CheckBox CheckBox(string text) => new() { Text = text };
