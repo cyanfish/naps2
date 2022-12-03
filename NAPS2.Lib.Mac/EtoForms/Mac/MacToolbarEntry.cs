@@ -20,7 +20,8 @@ public static class MacToolbarItems
             Title = title ?? "",
             Label = command.ToolBarText ?? "",
             ToolTip = tooltip ?? command.ToolBarText ?? "",
-            Bordered = true
+            Bordered = true,
+            Autovalidates = false
         }.WithAction(command.Execute);
         if (OperatingSystem.IsMacOSVersionAtLeast(11))
         {
