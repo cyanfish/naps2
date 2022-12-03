@@ -28,27 +28,32 @@ public class DesktopCommands
         Scan = new ActionCommand(desktopScanController.ScanDefault)
         {
             Text = UiStrings.Scan,
-            Image = iconProvider.GetIcon("control_play_blue")
+            Image = iconProvider.GetIcon("control_play_blue"),
+            Shortcut = Application.Instance.CommonModifier | Keys.Period
         };
         NewProfile = new ActionCommand(desktopScanController.ScanWithNewProfile)
         {
             Text = UiStrings.NewProfile,
-            Image = iconProvider.GetIcon("add_small")
+            Image = iconProvider.GetIcon("add_small"),
+            Shortcut = Application.Instance.CommonModifier | Keys.N
         };
         BatchScan = new ActionCommand(desktopSubFormController.ShowBatchScanForm)
         {
             Text = UiStrings.BatchScan,
-            Image = iconProvider.GetIcon("application_cascade")
+            Image = iconProvider.GetIcon("application_cascade"),
+            Shortcut = Application.Instance.CommonModifier | Keys.B
         };
         Profiles = new ActionCommand(desktopSubFormController.ShowProfilesForm)
         {
             Text = UiStrings.Profiles,
-            Image = iconProvider.GetIcon("blueprints")
+            Image = iconProvider.GetIcon("blueprints"),
+            Shortcut = Application.Instance.CommonModifier | Keys.L
         };
         Ocr = new ActionCommand(desktopSubFormController.ShowOcrForm)
         {
             Text = UiStrings.Ocr,
-            Image = iconProvider.GetIcon("text")
+            Image = iconProvider.GetIcon("text"),
+            Shortcut = Application.Instance.CommonModifier | Keys.Alt | Keys.O
         };
         Import = new ActionCommand(desktopController.Import)
         {
@@ -83,7 +88,8 @@ public class DesktopCommands
         };
         PdfSettings = new ActionCommand(desktopSubFormController.ShowPdfSettingsForm)
         {
-            Text = UiStrings.PdfSettings
+            Text = UiStrings.PdfSettings,
+            Shortcut = Application.Instance.CommonModifier | Keys.Alt | Keys.P
         };
         SaveImages = new ActionCommand(desktopController.SaveImages)
         {
@@ -100,7 +106,8 @@ public class DesktopCommands
         };
         ImageSettings = new ActionCommand(desktopSubFormController.ShowImageSettingsForm)
         {
-            Text = UiStrings.ImageSettings
+            Text = UiStrings.ImageSettings,
+            Shortcut = Application.Instance.CommonModifier | Keys.Alt | Keys.I
         };
         EmailPdf = new ActionCommand(desktopController.EmailPdf)
         {
@@ -119,7 +126,8 @@ public class DesktopCommands
         };
         EmailSettings = new ActionCommand(desktopSubFormController.ShowEmailSettingsForm)
         {
-            Text = UiStrings.EmailSettings
+            Text = UiStrings.EmailSettings,
+            Shortcut = Application.Instance.CommonModifier | Keys.Alt | Keys.E
         };
         Print = new ActionCommand(desktopController.Print)
         {

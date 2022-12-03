@@ -82,6 +82,10 @@ public class MacDesktopForm : DesktopForm
                         Commands.EmailSelected,
                         Commands.Print,
                         new SeparatorMenuItem(),
+                        Commands.PdfSettings,
+                        Commands.ImageSettings,
+                        Commands.EmailSettings,
+                        new SeparatorMenuItem(),
                         Commands.ClearAll
                     }
                 },
