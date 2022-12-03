@@ -44,8 +44,8 @@ public class DesktopKeyboardShortcuts
         _ksm.Assign(ks.Clear, commands.ClearAll);
         _ksm.Assign(ks.Delete, commands.Delete);
         _ksm.Assign(ks.EmailPDF, commands.EmailPdf);
-        _ksm.Assign(ks.EmailPDFAll, commands.EmailAllPdf);
-        _ksm.Assign(ks.EmailPDFSelected, commands.EmailSelectedPdf);
+        _ksm.Assign(ks.EmailPDFAll, commands.EmailAll);
+        _ksm.Assign(ks.EmailPDFSelected, commands.EmailSelected);
         _ksm.Assign(ks.ImageBlackWhite, commands.BlackWhite);
         _ksm.Assign(ks.ImageBrightness, commands.BrightCont);
         _ksm.Assign(ks.ImageContrast, commands.BrightCont);

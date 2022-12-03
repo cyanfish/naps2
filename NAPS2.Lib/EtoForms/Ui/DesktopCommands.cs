@@ -56,15 +56,17 @@ public class DesktopCommands
             Image = iconProvider.GetIcon("folder_picture"),
             Shortcut = Application.Instance.CommonModifier | Keys.O
         };
-        Save = new ActionCommand
+        SaveAll = new ActionCommand(_imageListActions.SaveAllAsPdfOrImages)
         {
-            Text = UiStrings.Save,
+            Text = UiStrings.SaveAll,
             Image = iconProvider.GetIcon("save"),
+            Shortcut = Application.Instance.CommonModifier | Keys.S
         };
         SaveSelected = new ActionCommand(_imageListActions.SaveSelectedAsPdfOrImages)
         {
-            Text = UiStrings.Save,
+            Text = UiStrings.SaveSelected,
             Image = iconProvider.GetIcon("save"),
+            Shortcut = Application.Instance.CommonModifier | Keys.Shift | Keys.S
         };
         SavePdf = new ActionCommand(desktopController.SavePdf)
         {
@@ -105,13 +107,15 @@ public class DesktopCommands
             Text = UiStrings.EmailPdf,
             Image = iconProvider.GetIcon("email_attach")
         };
-        EmailAllPdf = new ActionCommand(imageListActions.EmailAllAsPdf)
+        EmailAll = new ActionCommand(imageListActions.EmailAllAsPdf)
         {
-            Text = UiStrings.EmailAllAsPdf
+            Text = UiStrings.EmailAll,
+            Shortcut = Application.Instance.CommonModifier | Keys.E
         };
-        EmailSelectedPdf = new ActionCommand(imageListActions.EmailSelectedAsPdf)
+        EmailSelected = new ActionCommand(imageListActions.EmailSelectedAsPdf)
         {
-            Text = UiStrings.EmailSelectedAsPdf
+            Text = UiStrings.EmailSelected,
+            Shortcut = Application.Instance.CommonModifier | Keys.Shift | Keys.E
         };
         EmailSettings = new ActionCommand(desktopSubFormController.ShowEmailSettingsForm)
         {
@@ -296,7 +300,7 @@ public class DesktopCommands
     public ActionCommand Profiles { get; set; }
     public ActionCommand Ocr { get; set; }
     public ActionCommand Import { get; set; }
-    public ActionCommand Save { get; set; }
+    public ActionCommand SaveAll { get; set; }
     public ActionCommand SaveSelected { get; set; }
     public ActionCommand SavePdf { get; set; }
     public ActionCommand SaveAllPdf { get; set; }
@@ -307,8 +311,8 @@ public class DesktopCommands
     public ActionCommand SaveSelectedImages { get; set; }
     public ActionCommand ImageSettings { get; set; }
     public ActionCommand EmailPdf { get; set; }
-    public ActionCommand EmailAllPdf { get; set; }
-    public ActionCommand EmailSelectedPdf { get; set; }
+    public ActionCommand EmailAll { get; set; }
+    public ActionCommand EmailSelected { get; set; }
     public ActionCommand EmailSettings { get; set; }
     public ActionCommand Print { get; set; }
     public ActionCommand ImageMenu { get; set; }

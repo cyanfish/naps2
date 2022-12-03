@@ -75,13 +75,11 @@ public class MacDesktopForm : DesktopForm
                     {
                         Commands.Import,
                         new SeparatorMenuItem(),
-                        Commands.SaveAllPdf,
-                        Commands.SaveSelectedPdf,
-                        Commands.SaveAllImages,
-                        Commands.SaveSelectedImages,
+                        Commands.SaveAll,
+                        Commands.SaveSelected,
                         new SeparatorMenuItem(),
-                        Commands.EmailAllPdf,
-                        Commands.EmailSelectedPdf,
+                        Commands.EmailAll,
+                        Commands.EmailSelected,
                         Commands.Print,
                         new SeparatorMenuItem(),
                         Commands.ClearAll
@@ -151,15 +149,12 @@ public class MacDesktopForm : DesktopForm
     {
         return new List<NSToolbarItem>
         {
-            MacToolbarItems.Create("scan", Commands.Scan, UiStrings.Scan),
-            MacToolbarItems.Create("profiles", Commands.Profiles, UiStrings.Profiles),
-            MacToolbarItems.Create("import", Commands.Import, UiStrings.Import),
-            MacToolbarItems.CreateMenu("save", Commands.Save, new MenuProvider()
-                    .Append(Commands.SaveAllPdf)
-                    .Append(Commands.SaveSelectedPdf)
-                    .Append(Commands.SaveAllImages)
-                    .Append(Commands.SaveSelectedImages),
-                UiStrings.Save),
+            MacToolbarItems.Create("scan", Commands.Scan),
+            MacToolbarItems.Create("profiles", Commands.Profiles),
+            MacToolbarItems.CreateSpace(),
+            MacToolbarItems.Create("import", Commands.Import),
+            MacToolbarItems.Create("save", Commands.SaveAll),
+            MacToolbarItems.CreateSpace(),
             MacToolbarItems.Create("viewer", Commands.ViewImage),
             MacToolbarItems.CreateMenu("rotate", Commands.RotateMenu, GetRotateMenuProvider()),
             MacToolbarItems.Create("moveUp", Commands.MoveUp, tooltip: UiStrings.MoveUp),

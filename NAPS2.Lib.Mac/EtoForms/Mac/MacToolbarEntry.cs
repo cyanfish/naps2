@@ -70,4 +70,9 @@ public static class MacToolbarItems
         });
         return menu;
     }
+
+    public static NSToolbarItem CreateSpace()
+    {
+        return null!;
+    }
 }

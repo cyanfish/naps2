@@ -113,7 +113,7 @@ public abstract class DesktopForm : EtoFormBase
         _profileManager.ProfilesUpdated += ProfileManager_ProfilesUpdated;
     }
 
-    private void OpeningContextMenu(object sender, EventArgs e)
+    private void OpeningContextMenu(object? sender, EventArgs e)
     {
         _contextMenu.Items.Clear();
         Commands.Paste.Enabled = _imageTransfer.IsInClipboard();
@@ -238,8 +238,8 @@ public abstract class DesktopForm : EtoFormBase
                 .Append(Commands.ImageSettings));
         if (!hiddenButtons.HasFlag(ToolbarButtons.EmailPdf))
             CreateToolbarButtonWithMenu(Commands.EmailPdf, new MenuProvider()
-                .Append(Commands.EmailAllPdf)
-                .Append(Commands.EmailSelectedPdf)
+                .Append(Commands.EmailAll)
+                .Append(Commands.EmailSelected)
                 .Separator()
                 .Append(Commands.EmailSettings)
                 .Append(Commands.PdfSettings));
@@ -422,15 +422,15 @@ public abstract class DesktopForm : EtoFormBase
 
         // TODO: Changing the text on the command doesn't actually propagate to the widget
         // "All" dropdown items
-        Commands.SaveAllPdf.MenuText = Commands.SaveAllImages.MenuText = Commands.EmailAllPdf.MenuText =
+        Commands.SaveAllPdf.MenuText = Commands.SaveAllImages.MenuText = Commands.EmailAll.MenuText =
             Commands.ReverseAll.MenuText = string.Format(MiscResources.AllCount, ImageList.Images.Count);
-        Commands.SaveAllPdf.Enabled = Commands.SaveAllImages.Enabled = Commands.EmailAllPdf.Enabled =
+        Commands.SaveAllPdf.Enabled = Commands.SaveAllImages.Enabled = Commands.EmailAll.Enabled =
             Commands.ReverseAll.Enabled = ImageList.Images.Any();
 
         // "Selected" dropdown items
-        Commands.SaveSelectedPdf.MenuText = Commands.SaveSelectedImages.MenuText = Commands.EmailSelectedPdf.MenuText =
+        Commands.SaveSelectedPdf.MenuText = Commands.SaveSelectedImages.MenuText = Commands.EmailSelected.MenuText =
             Commands.ReverseSelected.MenuText = string.Format(MiscResources.SelectedCount, ImageList.Selection.Count);
-        Commands.SaveSelectedPdf.Enabled = Commands.SaveSelectedImages.Enabled = Commands.EmailSelectedPdf.Enabled =
+        Commands.SaveSelectedPdf.Enabled = Commands.SaveSelectedImages.Enabled = Commands.EmailSelected.Enabled =
             Commands.ReverseSelected.Enabled = ImageList.Selection.Any();
 
         // Other
@@ -460,7 +460,7 @@ public abstract class DesktopForm : EtoFormBase
         _scanMenuCommands.Value = commandList;
     }
 
-    private void OnKeyDown(object sender, KeyEventArgs e)
+    private void OnKeyDown(object? sender, KeyEventArgs e)
     {
         // TODO: The custom listview control isn't propagating events back to the parent window
         e.Handled = _keyboardShortcuts.Perform(e.KeyData);

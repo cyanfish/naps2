@@ -7,10 +7,10 @@ public class MacToolbarDelegate : NSToolbarDelegate
     private readonly string[] _identifiers;
     private readonly Dictionary<string, NSToolbarItem> _itemMap;
 
-    public MacToolbarDelegate(List<NSToolbarItem> items)
+    public MacToolbarDelegate(List<NSToolbarItem?> items)
     {
-        _identifiers = items.Select(x => x.Identifier).ToArray();
-        _itemMap = items.ToDictionary(x => x.Identifier);
+        _identifiers = items.Select(x => x?.Identifier ?? NSToolbar.NSToolbarSpaceItemIdentifier).ToArray();
+        _itemMap = items.WhereNotNull().ToDictionary(x => x.Identifier);
     }
 
     public NativeHandle Handle { get; }
