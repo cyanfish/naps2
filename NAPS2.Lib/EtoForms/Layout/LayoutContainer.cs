@@ -6,7 +6,7 @@ public abstract class LayoutContainer : LayoutElement
 {
     protected LayoutContainer(LayoutElement[] children)
     {
-        Children = children.Where(c => c is not SkipLayoutElement).ToArray();
+        Children = ExpandChildren(children);
     }
 
     protected internal LayoutElement[] Children { get; }

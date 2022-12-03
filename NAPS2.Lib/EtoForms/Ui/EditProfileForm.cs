@@ -147,8 +147,9 @@ public class EditProfileForm : EtoDialogBase
             L.Row(
                 _advanced,
                 C.Filler(),
-                _ok,
-                _cancel
+                L.OkCancel(
+                    _ok,
+                    _cancel)
             )
         );
     }

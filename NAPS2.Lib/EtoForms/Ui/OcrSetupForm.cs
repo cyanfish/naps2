@@ -52,9 +52,10 @@ public class OcrSetupForm : EtoDialogBase
             L.Row(
                 _moreLanguages.AlignCenter().Padding(right: 30),
                 C.Filler(),
-                C.OkButton(this, Save),
-                // TODO: Should we allow Esc to close the window if there are unsaved changes?
-                C.CancelButton(this)
+                L.OkCancel(
+                    C.OkButton(this, Save),
+                      // TODO: Should we allow Esc to close the window if there are unsaved changes?
+                    C.CancelButton(this))
             )
         );
     }

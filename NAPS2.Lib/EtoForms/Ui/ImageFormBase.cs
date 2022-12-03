@@ -99,8 +99,9 @@ public abstract class ImageFormBase : EtoDialogBase
             L.Row(
                 _revert,
                 C.Filler(),
-                C.CancelButton(this),
-                C.OkButton(this, beforeClose: Apply)
+                L.OkCancel(
+                    C.OkButton(this, beforeClose: Apply),
+                    C.CancelButton(this))
             )
         );
 
