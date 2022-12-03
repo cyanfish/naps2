@@ -8,6 +8,7 @@ public class MacListView<T> : NSCollectionViewDelegateFlowLayout, IListView<T> w
     private readonly ListViewBehavior<T> _behavior;
     private readonly NSCollectionView _view = new();
     private readonly NSScrollView _scrollView = new();
+    private readonly Panel _panel = new();
     private readonly NSCollectionViewFlowLayout _layout;
     private readonly ListViewDataSource<T> _dataSource;
 
@@ -35,6 +36,7 @@ public class MacListView<T> : NSCollectionViewDelegateFlowLayout, IListView<T> w
         _view.Selectable = true;
         _view.AllowsMultipleSelection = behavior.MultiSelect;
         _scrollView.DocumentView = _view;
+        _panel.Content = _scrollView.ToEto();
     }
 
     public int ImageSize
@@ -57,7 +59,7 @@ public class MacListView<T> : NSCollectionViewDelegateFlowLayout, IListView<T> w
         e.Effects = _behavior.GetDropEffect(e.Data);
     }
 
-    public Control Control => _scrollView.ToEto();
+    public Control Control => _panel;
 
     public ContextMenu? ContextMenu
     {
@@ -134,7 +136,14 @@ public class MacListView<T> : NSCollectionViewDelegateFlowLayout, IListView<T> w
     public override void ItemsSelected(NSCollectionView collectionView, NSSet indexPaths)
     {
         _selection = ListSelection.FromSelectedIndices(_dataSource.Items,
-            indexPaths.Cast<NSIndexPath>().Select(x => (int) x.Item));
+            _view.SelectionIndexes.Select(x => (int) x));
+        SelectionChanged?.Invoke(this, EventArgs.Empty);
+    }
+
+    public override void ItemsDeselected(NSCollectionView collectionView, NSSet indexPaths)
+    {
+        _selection = ListSelection.FromSelectedIndices(_dataSource.Items,
+            _view.SelectionIndexes.Select(x => (int) x));
         SelectionChanged?.Invoke(this, EventArgs.Empty);
     }
 
