@@ -1,3 +1,5 @@
+using Eto.Drawing;
+
 namespace NAPS2.EtoForms.Ui;
 
 public class BrightContForm : ImageFormBase
@@ -8,6 +10,9 @@ public class BrightContForm : ImageFormBase
     public BrightContForm(Naps2Config config, ThumbnailController thumbnailController, IIconProvider iconProvider) :
         base(config, thumbnailController)
     {
+        Icon = new Icon(1f, Icons.contrast_with_sun.ToEtoImage());
+        Title = UiStrings.BrightnessContrast;
+
         _brightnessSlider.Icon = iconProvider.GetIcon("weather_sun");
         _contrastSlider.Icon = iconProvider.GetIcon("contrast");
         Sliders = new[] { _brightnessSlider, _contrastSlider };

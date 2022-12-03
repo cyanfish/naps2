@@ -15,6 +15,9 @@ public class RotateForm : ImageFormBase
     public RotateForm(Naps2Config config, ThumbnailController thumbnailController, IIconProvider iconProvider) :
         base(config, thumbnailController)
     {
+        Icon = new Icon(1f, Icons.arrow_rotate_anticlockwise_small.ToEtoImage());
+        Title = UiStrings.Rotate;
+
         _angleSlider.Icon = iconProvider.GetIcon("arrow_rotate_anticlockwise_small");
         Sliders = new[] { _angleSlider };
         Overlay.Paint += Overlay_Paint;

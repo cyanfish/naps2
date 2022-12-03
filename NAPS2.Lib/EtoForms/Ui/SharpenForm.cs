@@ -1,3 +1,5 @@
+using Eto.Drawing;
+
 namespace NAPS2.EtoForms.Ui;
 
 public class SharpenForm : ImageFormBase
@@ -7,6 +9,9 @@ public class SharpenForm : ImageFormBase
     public SharpenForm(Naps2Config config, ThumbnailController thumbnailController, IIconProvider iconProvider) :
         base(config, thumbnailController)
     {
+        Icon = new Icon(1f, Icons.sharpen.ToEtoImage());
+        Title = UiStrings.Sharpen;
+
         _sharpenSlider.Icon = iconProvider.GetIcon("sharpen");
         Sliders = new[] { _sharpenSlider };
     }

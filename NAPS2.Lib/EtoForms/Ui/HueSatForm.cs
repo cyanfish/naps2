@@ -1,3 +1,5 @@
+using Eto.Drawing;
+
 namespace NAPS2.EtoForms.Ui;
 
 public class HueSatForm : ImageFormBase
@@ -8,6 +10,9 @@ public class HueSatForm : ImageFormBase
     public HueSatForm(Naps2Config config, ThumbnailController thumbnailController, IIconProvider iconProvider) :
         base(config, thumbnailController)
     {
+        Icon = new Icon(1f, Icons.color_management.ToEtoImage());
+        Title = UiStrings.HueSaturation;
+
         _hueSlider.Icon = iconProvider.GetIcon("color_wheel");
         _saturationSlider.Icon = iconProvider.GetIcon("color_gradient");
         Sliders = new[] { _hueSlider, _saturationSlider };

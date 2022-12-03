@@ -28,6 +28,9 @@ public class CropForm : ImageFormBase
     public CropForm(Naps2Config config, ThumbnailController thumbnailController) :
         base(config, thumbnailController)
     {
+        Icon = new Icon(1f, Icons.transform_crop.ToEtoImage());
+        Title = UiStrings.Crop;
+
         UseImageView = false;
         Overlay.Paint += Overlay_Paint;
         Overlay.MouseDown += Overlay_MouseDown;

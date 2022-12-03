@@ -1,3 +1,5 @@
+using Eto.Drawing;
+
 namespace NAPS2.EtoForms.Ui;
 
 public class BlackWhiteForm : ImageFormBase
@@ -7,6 +9,9 @@ public class BlackWhiteForm : ImageFormBase
     public BlackWhiteForm(Naps2Config config, ThumbnailController thumbnailController, IIconProvider iconProvider) :
         base(config, thumbnailController)
     {
+        Icon = new Icon(1f, Icons.contrast_high.ToEtoImage());
+        Title = UiStrings.BlackAndWhite;
+
         _thresholdSlider.Icon = iconProvider.GetIcon("contrast_high");
         Sliders = new[] { _thresholdSlider };
     }
