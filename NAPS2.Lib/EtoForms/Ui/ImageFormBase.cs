@@ -14,37 +14,85 @@ public abstract class ImageFormBase : EtoDialogBase
 
     private readonly RefreshThrottle _renderThrottle;
 
+    // Image bounds in the coordinate space of the overlay control
+    protected float _overlayT, _overlayL, _overlayR, _overlayB, _overlayW, _overlayH;
+
     public ImageFormBase(Naps2Config config, ThumbnailController thumbnailController) : base(config)
     {
         _thumbnailController = thumbnailController;
         _revert.Click += Revert;
         _renderThrottle = new RefreshThrottle(RenderImage);
         FormStateController.DefaultExtraLayoutSize = new Size(400, 400);
+        Overlay.Paint += PaintOverlay;
     }
 
-    protected bool UseImageView { get; set; } = true;
     protected int ImageHeight { get; set; }
     protected int ImageWidth { get; set; }
 
     protected IMemoryImage? WorkingImage { get; private set; }
+    protected IMemoryImage? DisplayImage { get; private set; }
     protected Drawable Overlay { get; } = new();
+    protected int OverlayBorderSize { get; set; }
 
     protected SliderWithTextBox[] Sliders { get; set; } = Array.Empty<SliderWithTextBox>();
+
+    protected override void OnSizeChanged(EventArgs e)
+    {
+        base.OnSizeChanged(e);
+        UpdateImageCoords();
+    }
+
+    protected override void OnShown(EventArgs e)
+    {
+        base.OnShown(e);
+        UpdateImageCoords();
+    }
+
+    private void UpdateImageCoords()
+    {
+        if (!Overlay.Loaded) return;
+        var widthRatio = ImageWidth / (float) (Overlay.Width - OverlayBorderSize * 2);
+        var heightRatio = ImageHeight / (float) (Overlay.Height - OverlayBorderSize * 2);
+        var ratio = widthRatio / heightRatio;
+        if (ratio > 1)
+        {
+            _overlayL = OverlayBorderSize;
+            _overlayR = Overlay.Width - OverlayBorderSize * 2;
+            var empty = Overlay.Height - Overlay.Height / ratio;
+            _overlayT = empty / 2 + OverlayBorderSize;
+            _overlayB = Overlay.Height - empty / 2 - OverlayBorderSize * 2;
+        }
+        else
+        {
+            _overlayT = OverlayBorderSize;
+            _overlayB = Overlay.Height - OverlayBorderSize * 2;
+            var empty = Overlay.Width - Overlay.Width * ratio;
+            _overlayL = empty / 2 + OverlayBorderSize;
+            _overlayR = Overlay.Width - empty / 2 - OverlayBorderSize * 2;
+        }
+        _overlayW = _overlayR - _overlayL;
+        _overlayH = _overlayB - _overlayT;
+    }
+
+    protected virtual void PaintOverlay(object? sender, PaintEventArgs e)
+    {
+        e.Graphics.DrawImage(DisplayImage!.ToEtoImage(), _overlayL, _overlayT, _overlayW, _overlayH);
+    }
 
     private void RenderImage()
     {
         var bitmap = RenderPreview();
         Invoker.Current.SafeInvoke(() =>
         {
-            if (UseImageView)
+            DisplayImage?.Dispose();
+            DisplayImage = bitmap;
+            if (DisplayImage.Width != ImageWidth || DisplayImage.Height != ImageHeight)
             {
-                _imageView.Image?.Dispose();
-                _imageView.Image = bitmap.ToEtoImage();
+                ImageWidth = DisplayImage.Width;
+                ImageHeight = DisplayImage.Height;
+                UpdateImageCoords();
             }
-            else
-            {
-                Overlay.Invalidate();
-            }
+            Overlay.Invalidate();
         });
     }
 
@@ -65,7 +113,7 @@ public abstract class ImageFormBase : EtoDialogBase
 
     protected virtual IMemoryImage RenderPreview()
     {
-        var result = WorkingImage.Clone();
+        var result = WorkingImage!.Clone();
         return result.PerformAllTransforms(Transforms);
     }
 
@@ -93,7 +141,7 @@ public abstract class ImageFormBase : EtoDialogBase
         }
 
         LayoutController.Content = L.Column(
-            L.Overlay(UseImageView ? _imageView : C.None(), Overlay).YScale(),
+            Overlay.YScale(),
             CreateControls(),
             SelectedImages is { Count: > 1 } ? _applyToSelected : C.None(),
             L.Row(
@@ -115,8 +163,9 @@ public abstract class ImageFormBase : EtoDialogBase
 
         using var imageToRender = Image.GetClonedImage();
         WorkingImage = imageToRender.Render();
-        ImageWidth = WorkingImage.Width;
-        ImageHeight = WorkingImage.Height;
+        DisplayImage = WorkingImage.Clone();
+        ImageWidth = DisplayImage.Width;
+        ImageHeight = DisplayImage.Height;
         InitTransform();
         UpdatePreviewBox();
     }
@@ -157,6 +206,7 @@ public abstract class ImageFormBase : EtoDialogBase
     {
         base.OnClosed(e);
         WorkingImage?.Dispose();
+        DisplayImage?.Dispose();
         _imageView.Image?.Dispose();
     }
 }

@@ -13,10 +13,7 @@ public class SliderWithTextBox
 
     public SliderWithTextBox()
     {
-        _slider.ValueChanged += (_, _) =>
-        {
-            Value = _slider.Value;
-        };
+        _slider.ValueChanged += (_, _) => { Value = _slider.Value; };
         _textBox.TextChanged += (_, _) =>
         {
             if (int.TryParse(_textBox.Text, out int value))
@@ -75,7 +72,11 @@ public class SliderWithTextBox
     public static implicit operator LayoutElement(SliderWithTextBox control)
     {
         return L.Row(
-            control.Icon != null ? new ImageView { Image = control.Icon }.AlignCenter() : C.None(),
+            control.Icon != null
+                ? new ImageView { Image = control.Icon }
+                    .Align(EtoPlatform.Current.IsWinForms ? LayoutAlignment.Leading : LayoutAlignment.Center)
+                    .Padding(top: 2, bottom: 2)
+                : C.None(),
             control._slider.XScale(),
             control._textBox.Width(EtoPlatform.Current.IsGtk ? 50 : 40)
                 .Align(EtoPlatform.Current.IsWinForms ? LayoutAlignment.Leading : LayoutAlignment.Center)

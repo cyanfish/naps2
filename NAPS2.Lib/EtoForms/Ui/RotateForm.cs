@@ -20,7 +20,6 @@ public class RotateForm : ImageFormBase
 
         _angleSlider.Icon = iconProvider.GetIcon("arrow_rotate_anticlockwise_small");
         Sliders = new[] { _angleSlider };
-        Overlay.Paint += Overlay_Paint;
         Overlay.MouseDown += Overlay_MouseDown;
         Overlay.MouseMove += Overlay_MouseMove;
         Overlay.MouseUp += Overlay_MouseUp;
@@ -78,8 +77,10 @@ public class RotateForm : ImageFormBase
         Overlay.Invalidate();
     }
 
-    private void Overlay_Paint(object? sender, PaintEventArgs e)
+    protected override void PaintOverlay(object? sender, PaintEventArgs e)
     {
+        base.PaintOverlay(sender, e);
+
         if (_guideExists)
         {
             e.Graphics.AntiAlias = true;

@@ -13,9 +13,6 @@ public class CropForm : ImageFormBase
     // Mouse down location
     private PointF _mouseOrigin;
 
-    // Image bounds in the coordinate space of the overlay control
-    private float _overlayT, _overlayL, _overlayR, _overlayB, _overlayW, _overlayH;
-
     // Crop amounts from each side as a fraction of the total image size (updated as the user drags)
     private float _cropL, _cropR, _cropT, _cropB;
 
@@ -31,55 +28,16 @@ public class CropForm : ImageFormBase
         Icon = new Icon(1f, Icons.transform_crop.ToEtoImage());
         Title = UiStrings.Crop;
 
-        UseImageView = false;
-        Overlay.Paint += Overlay_Paint;
+        OverlayBorderSize = HANDLE_WIDTH;
         Overlay.MouseDown += Overlay_MouseDown;
         Overlay.MouseMove += Overlay_MouseMove;
         Overlay.MouseUp += Overlay_MouseUp;
-    }
-
-    protected override void OnSizeChanged(EventArgs e)
-    {
-        base.OnSizeChanged(e);
-        UpdateImageCoords();
-    }
-
-    protected override void OnShown(EventArgs e)
-    {
-        base.OnShown(e);
-        UpdateImageCoords();
     }
 
     protected override void ResetTransform()
     {
         _cropT = _cropL = _cropB = _cropR = _realT = _realL = _realB = _realR = 0;
         Overlay.Invalidate();
-    }
-
-    private void UpdateImageCoords()
-    {
-        if (!Overlay.Loaded) return;
-        var widthRatio = ImageWidth / (float) (Overlay.Width - HANDLE_WIDTH * 2);
-        var heightRatio = ImageHeight / (float) (Overlay.Height - HANDLE_WIDTH * 2);
-        var ratio = widthRatio / heightRatio;
-        if (ratio > 1)
-        {
-            _overlayL = HANDLE_WIDTH;
-            _overlayR = Overlay.Width - HANDLE_WIDTH * 2;
-            var empty = Overlay.Height - Overlay.Height / ratio;
-            _overlayT = empty / 2 + HANDLE_WIDTH;
-            _overlayB = Overlay.Height - empty / 2 - HANDLE_WIDTH * 2;
-        }
-        else
-        {
-            _overlayT = HANDLE_WIDTH;
-            _overlayB = Overlay.Height - HANDLE_WIDTH * 2;
-            var empty = Overlay.Width - Overlay.Width * ratio;
-            _overlayL = empty / 2 + HANDLE_WIDTH;
-            _overlayR = Overlay.Width - empty / 2 - HANDLE_WIDTH * 2;
-        }
-        _overlayW = _overlayR - _overlayL;
-        _overlayH = _overlayB - _overlayT;
     }
 
     protected override IEnumerable<Transform> Transforms =>
@@ -166,9 +124,9 @@ public class CropForm : ImageFormBase
         Overlay.Invalidate();
     }
 
-    private void Overlay_Paint(object? sender, PaintEventArgs e)
+    protected override void PaintOverlay(object? sender, PaintEventArgs e)
     {
-        e.Graphics.DrawImage(WorkingImage!.ToEtoImage(), _overlayL, _overlayT, _overlayW, _overlayH);
+        base.PaintOverlay(sender, e);
 
         var offsetL = _cropL * _overlayW;
         var offsetT = _cropT * _overlayH;
