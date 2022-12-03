@@ -303,7 +303,7 @@ msgstr ""
 
 #: SettingsResources.resx$BitDepth_1BlackAndWhite$Message
 #: UiStrings.resx$BlackAndWhite$Message
-msgid "Black & White"
+msgid "Black and White"
 msgstr ""
 
 #: FAdvancedScanSettings.resx$groupBox3.Text$Message
@@ -892,6 +892,7 @@ msgid "Not Another PDF Scanner"
 msgstr ""
 
 #: FRecover.resx$btnCancel.Text$Message
+#: UiStrings.resx$NotNow$Message
 msgid "Not Now"
 msgstr ""
 
@@ -1101,10 +1102,12 @@ msgid "Ready for scan {0}."
 msgstr ""
 
 #: FRecover.resx$btnRecover.Text$Message
+#: UiStrings.resx$Recover$Message
 msgid "Recover"
 msgstr ""
 
 #: FRecover.resx$$this.Text$Message
+#: UiStrings.resx$RecoverFormTitle$Message
 msgid "Recover Scanned Images"
 msgstr ""
 
@@ -1614,6 +1617,7 @@ msgid "{0} / {1} files"
 msgstr ""
 
 #: FRecover.resx$lblPrompt.Text$Message
+#: UiStrings.resx$RecoverPrompt$Message
 msgid "{0} image(s) scanned on {1} at {2} may not have been saved, and are recoverable. Do you want to recover them?"
 msgstr ""
 
