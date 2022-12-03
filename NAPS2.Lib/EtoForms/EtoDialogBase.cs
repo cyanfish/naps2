@@ -10,6 +10,7 @@ public abstract class EtoDialogBase : Dialog, IFormBase
     protected EtoDialogBase(Naps2Config config)
     {
         EtoPlatform.Current.UpdateRtl(this);
+        EtoPlatform.Current.ShowIcon(this);
         Config = config;
         FormStateController = new FormStateController(this, config);
         Resizable = true;

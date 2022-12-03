@@ -96,4 +96,8 @@ public abstract class EtoPlatform
     public virtual void ConfigureDropDown(DropDown dropDown)
     {
     }
+
+    public virtual void ShowIcon(Dialog dialog)
+    {
+    }
 }

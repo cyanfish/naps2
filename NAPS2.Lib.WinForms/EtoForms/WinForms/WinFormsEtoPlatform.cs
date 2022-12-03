@@ -180,4 +180,9 @@ public class WinFormsEtoPlatform : EtoPlatform
     {
         ((wf.ComboBox) dropDown.ControlObject).DrawMode = wf.DrawMode.Normal;
     }
+
+    public override void ShowIcon(Dialog dialog)
+    {
+        ((wf.Form) dialog.ControlObject).ShowIcon = true;
+    }
 }
