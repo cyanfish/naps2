@@ -82,9 +82,8 @@ public class DesktopControllerTests : ContextualTests
             _scannedImagePrinter.Object
         );
 
-        // TODO: Enable for eto
-        // _operationFactory.Setup(x => x.Create<RecoveryOperation>()).Returns(
-        //     new RecoveryOperation(new Mock<IFormFactory>().Object, new RecoveryManager(ScanningContext)));
+        _operationFactory.Setup(x => x.Create<RecoveryOperation>()).Returns(
+            new RecoveryOperation(new Mock<IFormFactory>().Object, new RecoveryManager(ScanningContext)));
     }
 
     public override void Dispose()
