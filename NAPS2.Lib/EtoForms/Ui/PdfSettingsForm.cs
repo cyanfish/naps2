@@ -178,7 +178,6 @@ public class PdfSettingsForm : EtoDialogBase
             Compat = (PdfCompat) _compat.SelectedIndex
         };
 
-        // TODO: Somehow run transact values are taking precedence despite removing them here?
         _runTransact.Remove(c => c.PdfSettings);
         _userTransact.Remove(c => c.PdfSettings);
         bool remember = _rememberSettings.IsChecked();

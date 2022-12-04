@@ -15,6 +15,7 @@ namespace NAPS2.Config.Model;
 /// </summary>
 public class TransactionConfigScope<TConfig> : ConfigScope<TConfig>
 {
+    private List<Action> _removeActions = new();
     private ConfigStorage<TConfig> _changes = new();
 
     public TransactionConfigScope(ConfigScope<TConfig> originalScope) : base(ConfigScopeMode.ReadWrite)
@@ -51,8 +52,13 @@ public class TransactionConfigScope<TConfig> : ConfigScope<TConfig>
         {
             lock (OriginalScope)
             {
+                foreach (var action in _removeActions)
+                {
+                    action();
+                }
                 OriginalScope.CopyFrom(_changes);
                 _changes = new();
+                _removeActions = new();
             }
             ChangesFlushed();
         }
@@ -66,6 +72,7 @@ public class TransactionConfigScope<TConfig> : ConfigScope<TConfig>
         lock (this)
         {
             _changes = new();
+            _removeActions = new();
             ChangesFlushed();
         }
     }
@@ -88,6 +95,7 @@ public class TransactionConfigScope<TConfig> : ConfigScope<TConfig>
     protected override void RemoveInternal<T>(Expression<Func<TConfig, T>> accessor)
     {
         _changes.Remove(accessor);
+        _removeActions.Add(() => OriginalScope.Remove(accessor));
         ChangesMade();
     }
 
