@@ -49,21 +49,13 @@ public class PdfSettingsForm : EtoDialogBase
         _ => throw new ArgumentException()
     });
 
-    private TransactionConfigScope<CommonConfig> _userTransact;
-    private TransactionConfigScope<CommonConfig> _runTransact;
-    private Naps2Config _transactionConfig;
-
     public PdfSettingsForm(Naps2Config config, DialogHelper dialogHelper) : base(config)
     {
         _dialogHelper = dialogHelper;
         Title = UiStrings.PdfSettingsFormTitle;
         Icon = new Icon(1f, Icons.file_extension_pdf_small.ToEtoImage());
 
-        _userTransact = Config.User.BeginTransaction();
-        _runTransact = Config.Run.BeginTransaction();
-        _transactionConfig = Config.WithTransaction(_userTransact, _runTransact);
-
-        UpdateValues();
+        UpdateValues(Config);
         UpdateEnabled();
 
         _restoreDefaults.Click += RestoreDefaults_Click;
@@ -122,28 +114,28 @@ public class PdfSettingsForm : EtoDialogBase
         );
     }
 
-    private void UpdateValues()
+    private void UpdateValues(Naps2Config config)
     {
-        _defaultFilePath.Text = _transactionConfig.Get(c => c.PdfSettings.DefaultFileName);
-        _skipSavePrompt.Checked = _transactionConfig.Get(c => c.PdfSettings.SkipSavePrompt);
-        _title.Text = _transactionConfig.Get(c => c.PdfSettings.Metadata.Title);
-        _author.Text = _transactionConfig.Get(c => c.PdfSettings.Metadata.Author);
-        _subject.Text = _transactionConfig.Get(c => c.PdfSettings.Metadata.Subject);
-        _keywords.Text = _transactionConfig.Get(c => c.PdfSettings.Metadata.Keywords);
-        _encryptPdf.Checked = _transactionConfig.Get(c => c.PdfSettings.Encryption.EncryptPdf);
-        _ownerPassword.Text = _transactionConfig.Get(c => c.PdfSettings.Encryption.OwnerPassword);
-        _userPassword.Text = _transactionConfig.Get(c => c.PdfSettings.Encryption.UserPassword);
-        _permissions[0].Checked = _transactionConfig.Get(c => c.PdfSettings.Encryption.AllowPrinting);
-        _permissions[1].Checked = _transactionConfig.Get(c => c.PdfSettings.Encryption.AllowFullQualityPrinting);
-        _permissions[2].Checked = _transactionConfig.Get(c => c.PdfSettings.Encryption.AllowDocumentModification);
-        _permissions[3].Checked = _transactionConfig.Get(c => c.PdfSettings.Encryption.AllowDocumentAssembly);
-        _permissions[4].Checked = _transactionConfig.Get(c => c.PdfSettings.Encryption.AllowContentCopying);
+        _defaultFilePath.Text = config.Get(c => c.PdfSettings.DefaultFileName);
+        _skipSavePrompt.Checked = config.Get(c => c.PdfSettings.SkipSavePrompt);
+        _title.Text = config.Get(c => c.PdfSettings.Metadata.Title);
+        _author.Text = config.Get(c => c.PdfSettings.Metadata.Author);
+        _subject.Text = config.Get(c => c.PdfSettings.Metadata.Subject);
+        _keywords.Text = config.Get(c => c.PdfSettings.Metadata.Keywords);
+        _encryptPdf.Checked = config.Get(c => c.PdfSettings.Encryption.EncryptPdf);
+        _ownerPassword.Text = config.Get(c => c.PdfSettings.Encryption.OwnerPassword);
+        _userPassword.Text = config.Get(c => c.PdfSettings.Encryption.UserPassword);
+        _permissions[0].Checked = config.Get(c => c.PdfSettings.Encryption.AllowPrinting);
+        _permissions[1].Checked = config.Get(c => c.PdfSettings.Encryption.AllowFullQualityPrinting);
+        _permissions[2].Checked = config.Get(c => c.PdfSettings.Encryption.AllowDocumentModification);
+        _permissions[3].Checked = config.Get(c => c.PdfSettings.Encryption.AllowDocumentAssembly);
+        _permissions[4].Checked = config.Get(c => c.PdfSettings.Encryption.AllowContentCopying);
         _permissions[5].Checked =
-            _transactionConfig.Get(c => c.PdfSettings.Encryption.AllowContentCopyingForAccessibility);
-        _permissions[6].Checked = _transactionConfig.Get(c => c.PdfSettings.Encryption.AllowAnnotations);
-        _permissions[7].Checked = _transactionConfig.Get(c => c.PdfSettings.Encryption.AllowFormFilling);
-        _compat.SelectedIndex = (int) _transactionConfig.Get(c => c.PdfSettings.Compat);
-        _rememberSettings.Checked = _transactionConfig.Get(c => c.RememberPdfSettings);
+            config.Get(c => c.PdfSettings.Encryption.AllowContentCopyingForAccessibility);
+        _permissions[6].Checked = config.Get(c => c.PdfSettings.Encryption.AllowAnnotations);
+        _permissions[7].Checked = config.Get(c => c.PdfSettings.Encryption.AllowFormFilling);
+        _compat.SelectedIndex = (int) config.Get(c => c.PdfSettings.Compat);
+        _rememberSettings.Checked = config.Get(c => c.RememberPdfSettings);
     }
 
     private void UpdateEnabled()
@@ -191,23 +183,17 @@ public class PdfSettingsForm : EtoDialogBase
             Compat = (PdfCompat) _compat.SelectedIndex
         };
 
-        _runTransact.Remove(c => c.PdfSettings);
-        _userTransact.Remove(c => c.PdfSettings);
         bool remember = _rememberSettings.IsChecked();
-        _userTransact.Set(c => c.RememberPdfSettings, remember);
-        var scope = remember ? _userTransact : _runTransact;
-        scope.Set(c => c.PdfSettings, pdfSettings);
-
-        _userTransact.Commit();
-        _runTransact.Commit();
+        var writeScope = remember ? Config.User : Config.Run;
+        Config.Run.Remove(c => c.PdfSettings);
+        Config.User.Remove(c => c.PdfSettings);
+        Config.User.Set(c => c.RememberPdfSettings, remember);
+        writeScope.Set(c => c.PdfSettings, pdfSettings);
     }
 
     private void RestoreDefaults_Click(object sender, EventArgs e)
     {
-        _runTransact.Remove(c => c.PdfSettings);
-        _userTransact.Remove(c => c.PdfSettings);
-        _userTransact.Set(c => c.RememberPdfSettings, false);
-        UpdateValues();
+        UpdateValues(Config.DefaultsOnly);
         UpdateEnabled();
     }
 
