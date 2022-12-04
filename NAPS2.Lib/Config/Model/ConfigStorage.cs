@@ -7,7 +7,6 @@ public class ConfigStorage<TConfig>
 {
     private readonly StorageNode _root = new(typeof(TConfig))
     {
-        IsRoot = true,
         IsLeaf = !ConfigLookup.HasConfigAttribute(typeof(TConfig))
     };
 
@@ -36,13 +35,32 @@ public class ConfigStorage<TConfig>
             {
                 throw new ArgumentException("You can't access a child config directly on a ConfigScope");
             }
-            if (!node.HasValue)
+            if (node.State != NodeState.Present)
             {
                 value = default!;
                 return false;
             }
             value = node.Value!;
             return true;
+        }
+    }
+
+    public bool IsRemoved(ConfigLookup lookup)
+    {
+        lock (this)
+        {
+            for (var node = GetNode(lookup); node != null; node = node.Parent)
+            {
+                if (node.State == NodeState.Present)
+                {
+                    return false;
+                }
+                if (node.State == NodeState.Removed)
+                {
+                    return true;
+                }
+            }
+            return false;
         }
     }
 
@@ -60,14 +78,9 @@ public class ConfigStorage<TConfig>
         lock (this)
         {
             var node = GetNode(ConfigLookup.ExpandExpression(accessor));
-            if (node.IsRoot)
-            {
-                node.Children.Clear();
-            }
-            else
-            {
-                node.Parent!.Children.Remove(node.Key!);
-            }
+            node.Children.Clear();
+            node.Value = null;
+            node.State = NodeState.Removed;
         }
     }
 
@@ -107,12 +120,19 @@ public class ConfigStorage<TConfig>
 
     private void CopyNodeToNode(StorageNode src, StorageNode dst)
     {
+        if (src.State == NodeState.Removed)
+        {
+            // We copy the removed state, but keep iterating as descendants could have been set since its removal.
+            dst.Children.Clear();
+            dst.Value = null;
+            dst.State = NodeState.Removed;
+        }
         if (src.IsLeaf)
         {
-            if (src.HasValue)
+            if (src.State == NodeState.Present)
             {
-                dst.HasValue = true;
                 dst.Value = src.Value;
+                dst.State = NodeState.Present;
             }
             return;
         }
@@ -135,7 +155,7 @@ public class ConfigStorage<TConfig>
         if (node.IsLeaf)
         {
             node.Value = obj;
-            node.HasValue = true;
+            node.State = NodeState.Present;
             return;
         }
         if (obj == null)
@@ -161,7 +181,7 @@ public class ConfigStorage<TConfig>
     {
         if (src.IsLeaf)
         {
-            if (src.HasValue)
+            if (src.State == NodeState.Present)
             {
                 serializer.SerializeToXElement(src.ValueType, src.Value, dst);
             }
@@ -186,7 +206,7 @@ public class ConfigStorage<TConfig>
         {
             var value = serializer.DeserializeFromXElement(dst.ValueType, src);
             dst.Value = value;
-            dst.HasValue = true;
+            dst.State = NodeState.Present;
             return;
         }
         var propDataDict = ConfigLookup.GetPropertyData(dst.ValueType).ToDictionary(x => x.Name);
@@ -208,7 +228,7 @@ public class ConfigStorage<TConfig>
     {
         lock (this)
         {
-            if (_root.IsLeaf && !_root.HasValue)
+            if (_root.IsLeaf && _root.State != NodeState.Present)
             {
                 // A valid XML doc needs a root node so this case makes no sense
                 throw new InvalidOperationException("When serializing a plain object, a value must be specified");
@@ -239,16 +259,21 @@ public class ConfigStorage<TConfig>
 
         public bool IsLeaf { get; init; }
 
-        public bool IsRoot { get; init; }
-
         public string? Key { get; init; }
 
         public object? Value { get; set; }
 
-        public bool HasValue { get; set; }
+        public NodeState State { get; set; }
 
         public StorageNode? Parent { get; init; }
 
         public Dictionary<string, StorageNode> Children { get; } = new();
+    }
+
+    private enum NodeState
+    {
+        Absent,
+        Present,
+        Removed
     }
 }

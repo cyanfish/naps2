@@ -47,7 +47,7 @@ public class FileConfigScope<TConfig> : ConfigScope<TConfig>
     protected override void RemoveInternal<T>(Expression<Func<TConfig, T>> accessor)
     {
         _changes.Remove(accessor);
-        WriteHandshake(() => _cache.Remove(accessor));
+        WriteHandshake();
     }
 
     protected override void CopyFromInternal(ConfigStorage<TConfig> source)
@@ -84,7 +84,7 @@ public class FileConfigScope<TConfig> : ConfigScope<TConfig>
         }
     }
 
-    private void WriteHandshake(Action? afterReload = null)
+    private void WriteHandshake()
     {
         // TODO: Retry, maybe async?
         try
@@ -102,7 +102,6 @@ public class FileConfigScope<TConfig> : ConfigScope<TConfig>
                     // Failed to load. Since we're using FileShare.None, it can't be concurrent modification.
                     // Either the file is newly created, or it was corrupted. In either case we can ignore and overwrite.
                 }
-                afterReload?.Invoke();
                 // Merge the cache and our changes into a local copy (so in case of exceptions nothing is changed)
                 copy = new ConfigStorage<TConfig>();
                 copy.CopyFrom(_cache);

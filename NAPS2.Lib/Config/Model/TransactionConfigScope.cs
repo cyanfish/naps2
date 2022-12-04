@@ -76,6 +76,10 @@ public class TransactionConfigScope<TConfig> : ConfigScope<TConfig>
         {
             return true;
         }
+        if (_changes.IsRemoved(lookup))
+        {
+            return false;
+        }
         return OriginalScope.TryGet(lookup, out value);
     }
 
@@ -87,10 +91,8 @@ public class TransactionConfigScope<TConfig> : ConfigScope<TConfig>
 
     protected override void RemoveInternal<T>(Expression<Func<TConfig, T>> accessor)
     {
-        // TODO: Supporting arbitrary removal is very complicated - probably the best is a full transaction log and
-        // then, to commit, apply each operation to the underlying scope in order. But that's probably not worth
-        // supporting.
-        throw new NotSupportedException("Can't remove config properties in a transaction");
+        _changes.Remove(accessor);
+        ChangesMade();
     }
 
     protected override void CopyFromInternal(ConfigStorage<TConfig> source)

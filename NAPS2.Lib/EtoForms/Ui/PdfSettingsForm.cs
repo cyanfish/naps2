@@ -194,12 +194,18 @@ public class PdfSettingsForm : EtoDialogBase
             Compat = (PdfCompat) _compat.SelectedIndex
         };
 
+        var runTransact = Config.Run.BeginTransaction();
+        var userTransact = Config.User.BeginTransaction();
         bool remember = _rememberSettings.IsChecked();
-        var writeScope = remember ? Config.User : Config.Run;
-        Config.Run.Remove(c => c.PdfSettings);
-        Config.User.Remove(c => c.PdfSettings);
-        Config.User.Set(c => c.RememberPdfSettings, remember);
-        writeScope.Set(c => c.PdfSettings, pdfSettings);
+        var transactToWrite = remember ? userTransact : runTransact;
+
+        runTransact.Remove(c => c.PdfSettings);
+        userTransact.Remove(c => c.PdfSettings);
+        transactToWrite.Set(c => c.PdfSettings, pdfSettings);
+        userTransact.Set(c => c.RememberPdfSettings, remember);
+
+        runTransact.Commit();
+        userTransact.Commit();
     }
 
     private void RestoreDefaults_Click(object sender, EventArgs e)
