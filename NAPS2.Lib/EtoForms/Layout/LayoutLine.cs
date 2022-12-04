@@ -38,8 +38,7 @@ public abstract class LayoutLine<TOrthogonal> : LayoutContainer
         var childContext = GetChildContext(context, bounds);
         GetInitialCellLengthsAndScaling(context, childContext, bounds, out var cellLengths, out var cellScaling);
 
-        var spacing = Spacing ?? context.DefaultSpacing;
-        UpdateCellLengthsForAvailableSpace(cellLengths, cellScaling, bounds, spacing);
+        UpdateCellLengthsForAvailableSpace(cellLengths, cellScaling, bounds, context);
 
         // The "cell" size and origin define the space the control can fit in, while the "child" size and origin define
         // the actual space the control fills. The child always fills the cell length-wise, but breadth-wise it depends
@@ -52,8 +51,14 @@ public abstract class LayoutLine<TOrthogonal> : LayoutContainer
             GetChildSizeAndOrigin(child, childContext, cellSize, cellOrigin,
                 out var childSize, out var childOrigin);
             child.DoLayout(childContext, new RectangleF(childOrigin, childSize));
-            cellOrigin = UpdatePosition(cellOrigin, GetLength(childSize) + spacing);
+            cellOrigin = UpdatePosition(cellOrigin, GetLength(childSize) + GetSpacing(i, context));
         }
+    }
+
+    protected virtual int GetSpacing(int i, LayoutContext context)
+    {
+        if (i == Children.Length - 1) return 0;
+        return Children[i].SpacingAfter ?? Spacing ?? context.DefaultSpacing;
     }
 
     private void GetChildSizeAndOrigin(LayoutElement child, LayoutContext childContext,
@@ -81,14 +86,12 @@ public abstract class LayoutLine<TOrthogonal> : LayoutContainer
         var size = SizeF.Empty;
         GetInitialCellLengthsAndScaling(context, childContext, parentBounds, out var cellLengths, out var cellScaling);
         UpdateCellLengthsWithPreferredLength(cellLengths, cellScaling);
-        var spacing = Spacing ?? context.DefaultSpacing;
         for (int i = 0; i < Children.Length; i++)
         {
             var childSize = Children[i].GetPreferredSize(childContext, parentBounds);
             var childLayoutSize = GetSize(cellLengths[i], GetBreadth(childSize));
-            size = UpdateTotalSize(size, childLayoutSize, spacing);
+            size = UpdateTotalSize(size, childLayoutSize, GetSpacing(i, context));
         }
-        size = UpdateTotalSize(size, SizeF.Empty, -spacing);
         size += new SizeF(Padding?.Horizontal ?? 0, Padding?.Vertical ?? 0);
         return size;
     }
@@ -150,7 +153,7 @@ public abstract class LayoutLine<TOrthogonal> : LayoutContainer
     }
 
     private void UpdateCellLengthsForAvailableSpace(List<float> cellLengths, List<bool> cellScaling, RectangleF bounds,
-        int spacing)
+        LayoutContext context)
     {
         var scaleCount = cellScaling.Count(scales => scales);
         if (scaleCount == 0)
@@ -160,13 +163,14 @@ public abstract class LayoutLine<TOrthogonal> : LayoutContainer
         // If no controls scale, then they will all take up their preferred length.
         // If some controls scale, then we take [excess = remaining space + length of all scaling controls],
         // and divide that evenly among all scaling controls so they all have equal length.
-        var excess = GetLength(bounds.Size) - spacing * (Children.Length - 1);
+        var excess = GetLength(bounds.Size);
         for (int i = 0; i < Children.Length; i++)
         {
             if (!cellScaling[i])
             {
                 excess -= cellLengths[i];
             }
+            excess -= GetSpacing(i, context);
         }
         // TODO: This protects against both forms being shrunk below their minimum size, but also
         // on Gtk apparently the bounds are wrong for non-resizable forms. This would become visible

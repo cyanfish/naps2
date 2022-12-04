@@ -28,6 +28,7 @@ public class LayoutController
     }
 
     public int RootPadding { get; set; } = 10;
+    public int DefaultLabelSpacing { get; set; } = 2;
     public int DefaultSpacing { get; set; } = 6;
 
     public void Bind(Window window)
@@ -80,6 +81,7 @@ public class LayoutController
         return new LayoutContext(_layout)
         {
             DefaultSpacing = DefaultSpacing,
+            DefaultLabelSpacing = DefaultLabelSpacing,
             IsFirstLayout = _firstLayout
         };
     }

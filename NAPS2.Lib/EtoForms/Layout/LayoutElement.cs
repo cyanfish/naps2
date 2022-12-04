@@ -16,6 +16,7 @@ public abstract class LayoutElement
     protected internal bool XScale { get; set; }
     protected internal bool YScale { get; set; }
     protected internal LayoutAlignment Alignment { get; set; }
+    protected internal int? SpacingAfter { get; set; }
 
     public static implicit operator LayoutElement(Control control) =>
         new ControlWithLayoutAttributes(control);

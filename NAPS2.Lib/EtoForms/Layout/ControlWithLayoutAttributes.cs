@@ -22,8 +22,8 @@ public class ControlWithLayoutAttributes : LayoutElement
 
     public ControlWithLayoutAttributes(
         ControlWithLayoutAttributes control, bool? xScale = null, bool? yScale = null,
-        Padding? padding = null,
-        int? width = null, int? height = null,
+        Padding? padding = null, int? spacingAfter = null,
+        int? width = null, int? minWidth = null, int? height = null,
         int? naturalWidth = null, int? naturalHeight = null, int? wrapDefaultWidth = null,
         LayoutAlignment? alignment = null)
     {
@@ -31,7 +31,9 @@ public class ControlWithLayoutAttributes : LayoutElement
         XScale = xScale ?? control.XScale;
         YScale = yScale ?? control.YScale;
         Padding = padding ?? control.Padding;
+        SpacingAfter = spacingAfter ?? control.SpacingAfter;
         Width = width ?? control.Width;
+        MinWidth = minWidth ?? control.MinWidth;
         Height = height ?? control.Height;
         NaturalWidth = naturalWidth ?? control.NaturalWidth;
         NaturalHeight = naturalHeight ?? control.NaturalHeight;
@@ -42,13 +44,14 @@ public class ControlWithLayoutAttributes : LayoutElement
     public static implicit operator ControlWithLayoutAttributes(Control control) =>
         new ControlWithLayoutAttributes(control);
 
-    private Control? Control { get; }
+    internal Control? Control { get; }
     private Padding Padding { get; }
     private int? Width { get; }
+    private int? MinWidth { get; }
     private int? Height { get; }
-    public int? NaturalWidth { get; }
-    public int? NaturalHeight { get; }
-    public int? WrapDefaultWidth { get; }
+    private int? NaturalWidth { get; }
+    private int? NaturalHeight { get; }
+    private int? WrapDefaultWidth { get; }
 
     public override void DoLayout(LayoutContext context, RectangleF bounds)
     {
@@ -95,6 +98,10 @@ public class ControlWithLayoutAttributes : LayoutElement
 
     private SizeF UpdateFixedDimensions(LayoutContext context, SizeF size)
     {
+        if (MinWidth != null)
+        {
+            size.Width = Math.Max(size.Width, MinWidth.Value);
+        }
         if (Width != null)
         {
             size.Width = Width.Value;

@@ -78,30 +78,42 @@ public class PdfSettingsForm : EtoDialogBase
         FormStateController.FixedHeightLayout = true;
         LayoutController.Content = L.Column(
             C.Label(UiStrings.DefaultFilePathLabel),
-            L.Row(_defaultFilePath.XScale(), _chooseFolder),
+            L.Row(_defaultFilePath.XScale(), _chooseFolder.Width(40)),
             _placeholders,
             _skipSavePrompt,
             _singlePageFiles,
-            // TODO: Group boxes
-            C.Label(UiStrings.TitleLabel),
-            _title,
-            C.Label(UiStrings.AuthorLabel),
-            _author,
-            C.Label(UiStrings.SubjectLabel),
-            _subject,
-            C.Label(UiStrings.KeywordsLabel),
-            _keywords,
-            _encryptPdf,
-            L.Row(C.Label(UiStrings.OwnerPasswordLabel), C.Filler(), _showOwnerPassword),
-            _ownerPassword,
-            L.Row(C.Label(UiStrings.UserPasswordLabel), C.Filler(), _showUserPassword),
-            _userPassword,
-            _permissions.Expand(),
-            _compat,
+            L.GroupBox(
+                UiStrings.Metadata,
+                L.Column(
+                    C.Label(UiStrings.TitleLabel),
+                    _title,
+                    C.Label(UiStrings.AuthorLabel),
+                    _author,
+                    C.Label(UiStrings.SubjectLabel),
+                    _subject,
+                    C.Label(UiStrings.KeywordsLabel),
+                    _keywords
+                )
+            ),
+            L.GroupBox(
+                UiStrings.Encryption,
+                L.Column(
+                    _encryptPdf,
+                    L.Row(C.Label(UiStrings.OwnerPasswordLabel), C.Filler(), _showOwnerPassword).SpacingAfter(2),
+                    _ownerPassword,
+                    L.Row(C.Label(UiStrings.UserPasswordLabel), C.Filler(), _showUserPassword).SpacingAfter(2),
+                    _userPassword,
+                    L.Column(_permissions.Expand()).Spacing(0)
+                )
+            ),
+            L.GroupBox(
+                UiStrings.Compatibility,
+                _compat
+            ),
             C.Filler(),
             _rememberSettings,
             L.Row(
-                _restoreDefaults,
+                _restoreDefaults.MinWidth(140),
                 C.Filler(),
                 L.OkCancel(
                     C.OkButton(this, Save),
@@ -126,7 +138,8 @@ public class PdfSettingsForm : EtoDialogBase
         _permissions[2].Checked = _transactionConfig.Get(c => c.PdfSettings.Encryption.AllowDocumentModification);
         _permissions[3].Checked = _transactionConfig.Get(c => c.PdfSettings.Encryption.AllowDocumentAssembly);
         _permissions[4].Checked = _transactionConfig.Get(c => c.PdfSettings.Encryption.AllowContentCopying);
-        _permissions[5].Checked = _transactionConfig.Get(c => c.PdfSettings.Encryption.AllowContentCopyingForAccessibility);
+        _permissions[5].Checked =
+            _transactionConfig.Get(c => c.PdfSettings.Encryption.AllowContentCopyingForAccessibility);
         _permissions[6].Checked = _transactionConfig.Get(c => c.PdfSettings.Encryption.AllowAnnotations);
         _permissions[7].Checked = _transactionConfig.Get(c => c.PdfSettings.Encryption.AllowFormFilling);
         _compat.SelectedIndex = (int) _transactionConfig.Get(c => c.PdfSettings.Compat);

@@ -9,12 +9,13 @@ public class LayoutRow : LayoutLine<LayoutColumn>
     {
     }
 
-    public LayoutRow(LayoutRow original, Padding? padding = null, int? spacing = null, bool? yScale = null,
-        bool? aligned = null)
+    public LayoutRow(LayoutRow original, Padding? padding = null, int? spacing = null, int? spacingAfter = null,
+        bool? yScale = null, bool? aligned = null)
         : base(original.Children)
     {
         Padding = padding ?? original.Padding;
         Spacing = spacing ?? original.Spacing;
+        SpacingAfter = spacingAfter ?? original.SpacingAfter;
         YScale = yScale ?? original.YScale;
         Aligned = aligned ?? original.Aligned;
     }

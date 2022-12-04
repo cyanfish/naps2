@@ -549,4 +549,13 @@
   <data name="RememberTheseSettings" xml:space="preserve">
     <value>Remember these settings</value>
   </data>
+  <data name="Metadata" xml:space="preserve">
+    <value>Metadata</value>
+  </data>
+  <data name="Encryption" xml:space="preserve">
+    <value>Encryption</value>
+  </data>
+  <data name="Compatibility" xml:space="preserve">
+    <value>Compatibility</value>
+  </data>
 </root>

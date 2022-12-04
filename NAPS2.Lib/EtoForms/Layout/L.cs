@@ -1,3 +1,5 @@
+using Eto.Forms;
+
 namespace NAPS2.EtoForms.Layout;
 
 public static class L
@@ -41,5 +43,15 @@ public static class L
         return okFirst
             ? new ExpandLayoutElement(ok, cancel)
             : new ExpandLayoutElement(cancel, ok);
+    }
+
+    public static LayoutElement GroupBox(string title, LayoutElement content)
+    {
+        return L.Overlay(new GroupBox { Text = title }, L.Buffer(content, 6, 18, 6, 6));
+    }
+
+    private static LayoutElement Buffer(LayoutElement element, int left, int top, int right, int bottom)
+    {
+        return new BufferLayoutElement(element, left, top, right, bottom);
     }
 }

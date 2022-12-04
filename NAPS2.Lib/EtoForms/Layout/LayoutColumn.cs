@@ -9,15 +9,19 @@ public class LayoutColumn : LayoutLine<LayoutRow>
     {
     }
 
-    public LayoutColumn(LayoutColumn original, Padding? padding = null, int? spacing = null, bool? xScale = null,
-        bool? aligned = null)
+    public LayoutColumn(LayoutColumn original, Padding? padding = null, int? spacing = null, int? labelSpacing = null,
+        int? spacingAfter = null, bool? xScale = null, bool? aligned = null)
         : base(original.Children)
     {
         Padding = padding ?? original.Padding;
         Spacing = spacing ?? original.Spacing;
+        LabelSpacing = spacing ?? original.LabelSpacing;
+        SpacingAfter = spacingAfter ?? original.SpacingAfter;
         XScale = xScale ?? original.XScale;
         Aligned = aligned ?? original.Aligned;
     }
+
+    protected int? LabelSpacing { get; init; }
 
     protected override PointF UpdatePosition(PointF position, float delta)
     {
@@ -39,6 +43,15 @@ public class LayoutColumn : LayoutLine<LayoutRow>
     }
 
     protected internal override bool DoesChildScale(LayoutElement child) => child.YScale;
+
+    protected override int GetSpacing(int i, LayoutContext context)
+    {
+        if (i < Children.Length - 1 && Children[i] is ControlWithLayoutAttributes { Control: Label })
+        {
+            return Children[i].SpacingAfter ?? LabelSpacing ?? context.DefaultLabelSpacing;
+        }
+        return base.GetSpacing(i, context);
+    }
 
     protected override float GetBreadth(SizeF size) => size.Width;
     protected override float GetLength(SizeF size) => size.Height;
