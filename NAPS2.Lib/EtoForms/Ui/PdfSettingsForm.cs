@@ -1,6 +1,5 @@
 using Eto.Drawing;
 using Eto.Forms;
-using NAPS2.Config.Model;
 using NAPS2.EtoForms.Layout;
 using NAPS2.ImportExport.Pdf;
 
@@ -20,10 +19,8 @@ public class PdfSettingsForm : EtoDialogBase
     private readonly TextBox _subject = new();
     private readonly TextBox _keywords = new();
     private readonly CheckBox _encryptPdf = new() { Text = UiStrings.EncryptPdf };
-    private readonly TextBox _ownerPassword = new();
-    private readonly CheckBox _showOwnerPassword = new() { Text = UiStrings.Show };
-    private readonly TextBox _userPassword = new();
-    private readonly CheckBox _showUserPassword = new() { Text = UiStrings.Show };
+    private readonly PasswordBoxWithToggle _ownerPassword = new() { Title = UiStrings.OwnerPasswordLabel };
+    private readonly PasswordBoxWithToggle _userPassword = new() { Title = UiStrings.UserPasswordLabel };
     private readonly CheckBox _rememberSettings = new() { Text = UiStrings.RememberTheseSettings };
     private readonly Button _restoreDefaults = new() { Text = UiStrings.RestoreDefaults };
 
@@ -61,8 +58,6 @@ public class PdfSettingsForm : EtoDialogBase
         _restoreDefaults.Click += RestoreDefaults_Click;
         _defaultFilePath.TextChanged += DefaultFilePath_TextChanged;
         _encryptPdf.CheckedChanged += EncryptPdf_CheckedChanged;
-        _showOwnerPassword.CheckedChanged += ShowOwnerPassword_CheckedChanged;
-        _showUserPassword.CheckedChanged += ShowUserPassword_CheckedChanged;
         _placeholders.Click += Placeholders_Click;
         _chooseFolder.Click += ChooseFolder_Click;
 
@@ -94,17 +89,7 @@ public class PdfSettingsForm : EtoDialogBase
                 UiStrings.Encryption,
                 L.Column(
                     _encryptPdf,
-                    L.Row(
-                        C.Label(UiStrings.OwnerPasswordLabel),
-                        C.Filler(),
-                        _showOwnerPassword
-                    ).SpacingAfter(2),
                     _ownerPassword,
-                    L.Row(
-                        C.Label(UiStrings.UserPasswordLabel),
-                        C.Filler(),
-                        _showUserPassword
-                    ).SpacingAfter(2),
                     _userPassword,
                     L.Column(_permissions.Expand()).Spacing(0)
                 )
@@ -154,8 +139,7 @@ public class PdfSettingsForm : EtoDialogBase
         _skipSavePrompt.Enabled = Path.IsPathRooted(_defaultFilePath.Text);
 
         bool encrypt = _encryptPdf.IsChecked();
-        _userPassword.Enabled = _ownerPassword.Enabled = _showOwnerPassword.Enabled = _showUserPassword.Enabled =
-            _userPassword.Enabled = _ownerPassword.Enabled = encrypt;
+        _userPassword.Enabled = _ownerPassword.Enabled = encrypt;
         foreach (var perm in _permissions)
         {
             perm.Enabled = encrypt;
@@ -208,34 +192,23 @@ public class PdfSettingsForm : EtoDialogBase
         userTransact.Commit();
     }
 
-    private void RestoreDefaults_Click(object sender, EventArgs e)
+    private void RestoreDefaults_Click(object? sender, EventArgs e)
     {
         UpdateValues(Config.DefaultsOnly);
         UpdateEnabled();
     }
 
-    private void DefaultFilePath_TextChanged(object sender, EventArgs e)
+    private void DefaultFilePath_TextChanged(object? sender, EventArgs e)
     {
         UpdateEnabled();
     }
 
-    private void EncryptPdf_CheckedChanged(object sender, EventArgs e)
+    private void EncryptPdf_CheckedChanged(object? sender, EventArgs e)
     {
         UpdateEnabled();
     }
 
-    private void ShowOwnerPassword_CheckedChanged(object sender, EventArgs e)
-    {
-        // TODO: Switch between password box
-        // txtOwnerPassword.UseSystemPasswordChar = !cbShowOwnerPassword.Checked;
-    }
-
-    private void ShowUserPassword_CheckedChanged(object sender, EventArgs e)
-    {
-        // txtUserPassword.UseSystemPasswordChar = !cbShowUserPassword.Checked;
-    }
-
-    private void Placeholders_Click(object sender, EventArgs eventArgs)
+    private void Placeholders_Click(object? sender, EventArgs eventArgs)
     {
         // var form = FormFactory.Create<PlaceholdersForm>();
         // form.FileName = _defaultFilePath.Text;
@@ -245,7 +218,7 @@ public class PdfSettingsForm : EtoDialogBase
         // }
     }
 
-    private void ChooseFolder_Click(object sender, EventArgs e)
+    private void ChooseFolder_Click(object? sender, EventArgs e)
     {
         if (_dialogHelper.PromptToSavePdf(_defaultFilePath.Text, out string? savePath))
         {
