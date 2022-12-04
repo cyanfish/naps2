@@ -118,6 +118,11 @@ public static class EtoLayoutExtensions
     public static LayoutOverlay YScale(this LayoutOverlay overlay) =>
         new LayoutOverlay(overlay, yScale: true);
 
+    public static LayoutElement Expand(this IEnumerable<LayoutElement> elements) =>
+        new ExpandLayoutElement(elements.ToArray());
+    public static LayoutElement Expand(this IEnumerable<Control> elements) =>
+        new ExpandLayoutElement(elements.Select(x => (LayoutElement) x).ToArray());
+
     public static void AddItems(this ContextMenu contextMenu, params MenuItem[] menuItems)
     {
         contextMenu.Items.AddRange(menuItems);

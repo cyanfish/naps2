@@ -83,7 +83,7 @@ public class DesktopSubFormController : IDesktopSubFormController
 
     public void ShowPdfSettingsForm()
     {
-        _formFactory.Create<FPdfSettings>().ShowDialog();
+        _formFactory.Create<PdfSettingsForm>().ShowModal();
     }
 
     public void ShowImageSettingsForm()

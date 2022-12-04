@@ -477,4 +477,76 @@
   <data name="RecoverPrompt" xml:space="preserve">
     <value>{0} image(s) scanned on {1} at {2} may not have been saved, and are recoverable. Do you want to recover them?</value>
   </data>
+  <data name="Ellipsis" xml:space="preserve">
+    <value>...</value>
+  </data>
+  <data name="Placeholders" xml:space="preserve">
+    <value>Placeholders</value>
+  </data>
+  <data name="SkipSavePrompt" xml:space="preserve">
+    <value>Skip save prompt</value>
+  </data>
+  <data name="SinglePageFiles" xml:space="preserve">
+    <value>Single page files</value>
+  </data>
+  <data name="EncryptPdf" xml:space="preserve">
+    <value>Encrypt PDF</value>
+  </data>
+  <data name="Show" xml:space="preserve">
+    <value>Show</value>
+  </data>
+  <data name="RestoreDefaults" xml:space="preserve">
+    <value>Restore Defaults</value>
+  </data>
+  <data name="PdfSettingsFormTitle" xml:space="preserve">
+    <value>PDF Settings</value>
+  </data>
+  <data name="AllowPrinting" xml:space="preserve">
+    <value>Allow Printing</value>
+  </data>
+  <data name="AllowFullQualityPrinting" xml:space="preserve">
+    <value>Allow Full Quality Printing</value>
+  </data>
+  <data name="AllowDocumentModification" xml:space="preserve">
+    <value>Allow Document Modification</value>
+  </data>
+  <data name="AllowDocumentAssembly" xml:space="preserve">
+    <value>Allow Document Assembly</value>
+  </data>
+  <data name="AllowContentCopying" xml:space="preserve">
+    <value>Allow Content Copying</value>
+  </data>
+  <data name="AllowContentCopyingForAccessibility" xml:space="preserve">
+    <value>Allow Content Copying for Accessibility</value>
+  </data>
+  <data name="AllowAnnotations" xml:space="preserve">
+    <value>Allow Annotations</value>
+  </data>
+  <data name="AllowFormFilling" xml:space="preserve">
+    <value>Allow Form Filling</value>
+  </data>
+  <data name="DefaultFilePathLabel" xml:space="preserve">
+    <value>Default File Path:</value>
+  </data>
+  <data name="TitleLabel" xml:space="preserve">
+    <value>Title:</value>
+  </data>
+  <data name="AuthorLabel" xml:space="preserve">
+    <value>Author:</value>
+  </data>
+  <data name="SubjectLabel" xml:space="preserve">
+    <value>Subject:</value>
+  </data>
+  <data name="KeywordsLabel" xml:space="preserve">
+    <value>Keywords:</value>
+  </data>
+  <data name="OwnerPasswordLabel" xml:space="preserve">
+    <value>Owner Password:</value>
+  </data>
+  <data name="UserPasswordLabel" xml:space="preserve">
+    <value>User Password:</value>
+  </data>
+  <data name="RememberTheseSettings" xml:space="preserve">
+    <value>Remember these settings</value>
+  </data>
 </root>

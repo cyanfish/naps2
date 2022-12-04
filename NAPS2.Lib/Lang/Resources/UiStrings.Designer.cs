@@ -764,5 +764,149 @@ namespace NAPS2.Lang.Resources {
                 return ResourceManager.GetString("RecoverPrompt", resourceCulture);
             }
         }
+        
+        internal static string Ellipsis {
+            get {
+                return ResourceManager.GetString("Ellipsis", resourceCulture);
+            }
+        }
+        
+        internal static string Placeholders {
+            get {
+                return ResourceManager.GetString("Placeholders", resourceCulture);
+            }
+        }
+        
+        internal static string SkipSavePrompt {
+            get {
+                return ResourceManager.GetString("SkipSavePrompt", resourceCulture);
+            }
+        }
+        
+        internal static string SinglePageFiles {
+            get {
+                return ResourceManager.GetString("SinglePageFiles", resourceCulture);
+            }
+        }
+        
+        internal static string EncryptPdf {
+            get {
+                return ResourceManager.GetString("EncryptPdf", resourceCulture);
+            }
+        }
+        
+        internal static string Show {
+            get {
+                return ResourceManager.GetString("Show", resourceCulture);
+            }
+        }
+        
+        internal static string RestoreDefaults {
+            get {
+                return ResourceManager.GetString("RestoreDefaults", resourceCulture);
+            }
+        }
+        
+        internal static string PdfSettingsFormTitle {
+            get {
+                return ResourceManager.GetString("PdfSettingsFormTitle", resourceCulture);
+            }
+        }
+        
+        internal static string AllowPrinting {
+            get {
+                return ResourceManager.GetString("AllowPrinting", resourceCulture);
+            }
+        }
+        
+        internal static string AllowFullQualityPrinting {
+            get {
+                return ResourceManager.GetString("AllowFullQualityPrinting", resourceCulture);
+            }
+        }
+        
+        internal static string AllowDocumentModification {
+            get {
+                return ResourceManager.GetString("AllowDocumentModification", resourceCulture);
+            }
+        }
+        
+        internal static string AllowDocumentAssembly {
+            get {
+                return ResourceManager.GetString("AllowDocumentAssembly", resourceCulture);
+            }
+        }
+        
+        internal static string AllowContentCopying {
+            get {
+                return ResourceManager.GetString("AllowContentCopying", resourceCulture);
+            }
+        }
+        
+        internal static string AllowContentCopyingForAccessibility {
+            get {
+                return ResourceManager.GetString("AllowContentCopyingForAccessibility", resourceCulture);
+            }
+        }
+        
+        internal static string AllowAnnotations {
+            get {
+                return ResourceManager.GetString("AllowAnnotations", resourceCulture);
+            }
+        }
+        
+        internal static string AllowFormFilling {
+            get {
+                return ResourceManager.GetString("AllowFormFilling", resourceCulture);
+            }
+        }
+        
+        internal static string DefaultFilePathLabel {
+            get {
+                return ResourceManager.GetString("DefaultFilePathLabel", resourceCulture);
+            }
+        }
+        
+        internal static string TitleLabel {
+            get {
+                return ResourceManager.GetString("TitleLabel", resourceCulture);
+            }
+        }
+        
+        internal static string AuthorLabel {
+            get {
+                return ResourceManager.GetString("AuthorLabel", resourceCulture);
+            }
+        }
+        
+        internal static string SubjectLabel {
+            get {
+                return ResourceManager.GetString("SubjectLabel", resourceCulture);
+            }
+        }
+        
+        internal static string KeywordsLabel {
+            get {
+                return ResourceManager.GetString("KeywordsLabel", resourceCulture);
+            }
+        }
+        
+        internal static string OwnerPasswordLabel {
+            get {
+                return ResourceManager.GetString("OwnerPasswordLabel", resourceCulture);
+            }
+        }
+        
+        internal static string UserPasswordLabel {
+            get {
+                return ResourceManager.GetString("UserPasswordLabel", resourceCulture);
+            }
+        }
+        
+        internal static string RememberTheseSettings {
+            get {
+                return ResourceManager.GetString("RememberTheseSettings", resourceCulture);
+            }
+        }
     }
 }

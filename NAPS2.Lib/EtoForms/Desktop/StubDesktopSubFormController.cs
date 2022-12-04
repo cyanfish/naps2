@@ -86,6 +86,7 @@ public class StubDesktopSubFormController : IDesktopSubFormController
 
     public void ShowPdfSettingsForm()
     {
+        _formFactory.Create<PdfSettingsForm>().ShowModal();
     }
 
     public void ShowImageSettingsForm()
