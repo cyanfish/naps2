@@ -15,8 +15,6 @@ namespace NAPS2.Config.Model;
 /// </summary>
 public class TransactionConfigScope<TConfig> : ConfigScope<TConfig>
 {
-    private List<Action> _removeActions = new();
-    private NodeTree _removedNodes = new();
     private ConfigStorage<TConfig> _changes = new();
 
     public TransactionConfigScope(ConfigScope<TConfig> originalScope) : base(ConfigScopeMode.ReadWrite)
@@ -53,14 +51,8 @@ public class TransactionConfigScope<TConfig> : ConfigScope<TConfig>
         {
             lock (OriginalScope)
             {
-                foreach (var action in _removeActions)
-                {
-                    action();
-                }
                 OriginalScope.CopyFrom(_changes);
                 _changes = new();
-                _removeActions = new();
-                _removedNodes = new();
             }
             ChangesFlushed();
         }
@@ -74,8 +66,6 @@ public class TransactionConfigScope<TConfig> : ConfigScope<TConfig>
         lock (this)
         {
             _changes = new();
-            _removeActions = new();
-            _removedNodes = new();
             ChangesFlushed();
         }
     }
@@ -85,10 +75,6 @@ public class TransactionConfigScope<TConfig> : ConfigScope<TConfig>
         if (_changes.TryGet(lookup, out value))
         {
             return true;
-        }
-        if (_removedNodes.ContainsPrefix(lookup))
-        {
-            return false;
         }
         return OriginalScope.TryGet(lookup, out value);
     }
@@ -101,10 +87,10 @@ public class TransactionConfigScope<TConfig> : ConfigScope<TConfig>
 
     protected override void RemoveInternal<T>(Expression<Func<TConfig, T>> accessor)
     {
-        _changes.Remove(accessor);
-        _removeActions.Add(() => OriginalScope.Remove(accessor));
-        _removedNodes.Add(ConfigLookup.ExpandExpression(accessor));
-        ChangesMade();
+        // TODO: Supporting arbitrary removal is very complicated - probably the best is a full transaction log and
+        // then, to commit, apply each operation to the underlying scope in order. But that's probably not worth
+        // supporting.
+        throw new NotSupportedException("Can't remove config properties in a transaction");
     }
 
     protected override void CopyFromInternal(ConfigStorage<TConfig> source)

@@ -13,7 +13,6 @@ public class TransactionConfigScopeTests
     {
         _baseScope = ConfigScope.Memory<CommonConfig>();
         _baseScope.Set(c => c.Culture, "fr");
-        _baseScope.Set(c => c.PdfSettings.DefaultFileName, "test");
         _transact = _baseScope.BeginTransaction();
     }
 
@@ -75,61 +74,5 @@ public class TransactionConfigScopeTests
         _transact.Commit();
         mockHandler.Verify(x => x(_transact, EventArgs.Empty));
         mockHandler.VerifyNoOtherCalls();
-    }
-
-    [Fact]
-    public void SetThenRemove()
-    {
-        _transact.Set(c => c.Culture, "de");
-        Assert.True(_transact.TryGet(c => c.Culture, out _));
-        _transact.Remove(c => c.Culture);
-        Assert.False(_transact.TryGet(c => c.Culture, out _));
-        Assert.True(_transact.HasChanges);
-
-        _transact.Commit();
-        Assert.False(_transact.HasChanges);
-        Assert.False(_baseScope.TryGet(c => c.Culture, out _));
-    }
-
-    [Fact]
-    public void RemoveThenSet()
-    {
-        _transact.Remove(c => c.Culture);
-        Assert.False(_transact.TryGet(c => c.Culture, out _));
-        _transact.Set(c => c.Culture, "de");
-        Assert.True(_transact.TryGet(c => c.Culture, out _));
-        Assert.True(_transact.HasChanges);
-
-        _transact.Commit();
-        Assert.False(_transact.HasChanges);
-        Assert.Equal("de", _baseScope.GetOrDefault(c => c.Culture));
-    }
-
-    [Fact]
-    public void RemoveParentThenSet()
-    {
-        _transact.Remove(c => c.PdfSettings);
-        Assert.False(_transact.TryGet(c => c.PdfSettings.DefaultFileName, out _));
-        _transact.Set(c => c.PdfSettings.DefaultFileName, "test");
-        Assert.True(_transact.TryGet(c => c.PdfSettings.DefaultFileName, out _));
-        Assert.True(_transact.HasChanges);
-
-        _transact.Commit();
-        Assert.False(_transact.HasChanges);
-        Assert.Equal("test", _baseScope.GetOrDefault(c => c.PdfSettings.DefaultFileName));
-    }
-
-    [Fact]
-    public void SetThenRemoveParent()
-    {
-        _transact.Set(c => c.PdfSettings.DefaultFileName, "test");
-        Assert.True(_transact.TryGet(c => c.PdfSettings.DefaultFileName, out _));
-        _transact.Remove(c => c.PdfSettings);
-        Assert.False(_transact.TryGet(c => c.PdfSettings.DefaultFileName, out _));
-        Assert.True(_transact.HasChanges);
-
-        _transact.Commit();
-        Assert.False(_transact.HasChanges);
-        Assert.False(_transact.TryGet(c => c.PdfSettings.DefaultFileName, out _));
     }
 }
