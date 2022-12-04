@@ -121,6 +121,10 @@ public class WinFormsEtoPlatform : EtoPlatform
 
     public override SizeF GetPreferredSize(Control control, SizeF availableSpace)
     {
+        if (control.GetType() == typeof(Panel))
+        {
+            return GetPreferredSize(((Panel) control).Content, availableSpace);
+        }
         return SizeF.Max(
             base.GetPreferredSize(control, availableSpace),
             control.ToNative().PreferredSize.ToEto());

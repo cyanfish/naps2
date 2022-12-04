@@ -6,7 +6,7 @@ namespace NAPS2.EtoForms;
 public class PasswordBoxWithToggle
 {
     private readonly TextBox _plain = new();
-    private readonly PasswordBox _hidden = new ();
+    private readonly PasswordBox _hidden = new();
     private readonly CheckBox _show = new() { Text = UiStrings.Show };
     private readonly Label _title = new();
     private readonly Panel _panel = new();
@@ -62,9 +62,9 @@ public class PasswordBoxWithToggle
     public static implicit operator LayoutElement(PasswordBoxWithToggle control)
     {
         return L.Column(
-            L.Row(C.Label(control.Title), C.Filler(), control._show),
-                control._panel
-            );
+            L.Row(C.Label(control.Title), C.Filler(), control._show).SpacingAfter(2),
+            control._panel.Height(20)
+        );
     }
 
     public event Action? TextChanged;
