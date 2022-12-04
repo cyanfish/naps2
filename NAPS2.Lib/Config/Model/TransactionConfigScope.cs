@@ -16,6 +16,7 @@ namespace NAPS2.Config.Model;
 public class TransactionConfigScope<TConfig> : ConfigScope<TConfig>
 {
     private List<Action> _removeActions = new();
+    private NodeTree _removedNodes = new();
     private ConfigStorage<TConfig> _changes = new();
 
     public TransactionConfigScope(ConfigScope<TConfig> originalScope) : base(ConfigScopeMode.ReadWrite)
@@ -59,6 +60,7 @@ public class TransactionConfigScope<TConfig> : ConfigScope<TConfig>
                 OriginalScope.CopyFrom(_changes);
                 _changes = new();
                 _removeActions = new();
+                _removedNodes = new();
             }
             ChangesFlushed();
         }
@@ -73,6 +75,7 @@ public class TransactionConfigScope<TConfig> : ConfigScope<TConfig>
         {
             _changes = new();
             _removeActions = new();
+            _removedNodes = new();
             ChangesFlushed();
         }
     }
@@ -82,6 +85,10 @@ public class TransactionConfigScope<TConfig> : ConfigScope<TConfig>
         if (_changes.TryGet(lookup, out value))
         {
             return true;
+        }
+        if (_removedNodes.ContainsPrefix(lookup))
+        {
+            return false;
         }
         return OriginalScope.TryGet(lookup, out value);
     }
@@ -96,6 +103,7 @@ public class TransactionConfigScope<TConfig> : ConfigScope<TConfig>
     {
         _changes.Remove(accessor);
         _removeActions.Add(() => OriginalScope.Remove(accessor));
+        _removedNodes.Add(ConfigLookup.ExpandExpression(accessor));
         ChangesMade();
     }
 
