@@ -35,8 +35,14 @@ public static class EtoLayoutExtensions
         new ControlWithLayoutAttributes(control, width: width);
     public static ControlWithLayoutAttributes MinWidth(this Control control, int minWidth) =>
         new ControlWithLayoutAttributes(control, minWidth: minWidth);
+    public static ControlWithLayoutAttributes MaxWidth(this Control control, int maxWidth) =>
+        new ControlWithLayoutAttributes(control, maxWidth: maxWidth);
     public static ControlWithLayoutAttributes Height(this Control control, int height) =>
         new ControlWithLayoutAttributes(control, height: height);
+    public static ControlWithLayoutAttributes MinHeight(this Control control, int minHeight) =>
+        new ControlWithLayoutAttributes(control, minHeight: minHeight);
+    public static ControlWithLayoutAttributes MaxHeight(this Control control, int maxHeight) =>
+        new ControlWithLayoutAttributes(control, maxHeight: maxHeight);
     public static ControlWithLayoutAttributes Size(this Control control, int width, int height) =>
         new ControlWithLayoutAttributes(control, width: width, height: height);
     public static ControlWithLayoutAttributes NaturalSize(this Control control, int width, int height) =>
@@ -70,8 +76,16 @@ public static class EtoLayoutExtensions
 
     public static ControlWithLayoutAttributes Width(this ControlWithLayoutAttributes control, int width) =>
         new ControlWithLayoutAttributes(control, width: width);
+    public static ControlWithLayoutAttributes MinWidth(this ControlWithLayoutAttributes control, int minWidth) =>
+        new ControlWithLayoutAttributes(control, minWidth: minWidth);
+    public static ControlWithLayoutAttributes MaxWidth(this ControlWithLayoutAttributes control, int maxWidth) =>
+        new ControlWithLayoutAttributes(control, maxWidth: maxWidth);
     public static ControlWithLayoutAttributes Height(this ControlWithLayoutAttributes control, int height) =>
         new ControlWithLayoutAttributes(control, height: height);
+    public static ControlWithLayoutAttributes MinHeight(this ControlWithLayoutAttributes control, int minHeight) =>
+        new ControlWithLayoutAttributes(control, minHeight: minHeight);
+    public static ControlWithLayoutAttributes MaxHeight(this ControlWithLayoutAttributes control, int maxHeight) =>
+        new ControlWithLayoutAttributes(control, maxHeight: maxHeight);
     public static ControlWithLayoutAttributes XScale(this ControlWithLayoutAttributes control) =>
         new ControlWithLayoutAttributes(control, xScale: true);
     public static ControlWithLayoutAttributes YScale(this ControlWithLayoutAttributes control) =>

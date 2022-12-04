@@ -70,7 +70,10 @@ public class PdfSettingsForm : EtoDialogBase
         FormStateController.FixedHeightLayout = true;
         LayoutController.Content = L.Column(
             C.Label(UiStrings.DefaultFilePathLabel),
-            L.Row(_defaultFilePath.XScale().AlignCenter(), _chooseFolder.Size(40, 22)).SpacingAfter(2),
+            L.Row(
+                _defaultFilePath.XScale().AlignCenter(),
+                _chooseFolder.Width(40).MaxHeight(22)
+            ).SpacingAfter(2),
             _placeholders,
             _skipSavePrompt,
             _singlePageFiles,
@@ -91,9 +94,17 @@ public class PdfSettingsForm : EtoDialogBase
                 UiStrings.Encryption,
                 L.Column(
                     _encryptPdf,
-                    L.Row(C.Label(UiStrings.OwnerPasswordLabel), C.Filler(), _showOwnerPassword).SpacingAfter(2),
+                    L.Row(
+                        C.Label(UiStrings.OwnerPasswordLabel),
+                        C.Filler(),
+                        _showOwnerPassword
+                    ).SpacingAfter(2),
                     _ownerPassword,
-                    L.Row(C.Label(UiStrings.UserPasswordLabel), C.Filler(), _showUserPassword).SpacingAfter(2),
+                    L.Row(
+                        C.Label(UiStrings.UserPasswordLabel),
+                        C.Filler(),
+                        _showUserPassword
+                    ).SpacingAfter(2),
                     _userPassword,
                     L.Column(_permissions.Expand()).Spacing(0)
                 )

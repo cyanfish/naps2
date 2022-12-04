@@ -21,11 +21,12 @@ public class ControlWithLayoutAttributes : LayoutElement
     }
 
     public ControlWithLayoutAttributes(
-        ControlWithLayoutAttributes control, bool? xScale = null, bool? yScale = null,
+        ControlWithLayoutAttributes control,
+        bool? xScale = null, bool? yScale = null,
         Padding? padding = null, int? spacingAfter = null,
-        int? width = null, int? minWidth = null, int? height = null,
-        int? naturalWidth = null, int? naturalHeight = null, int? wrapDefaultWidth = null,
-        LayoutAlignment? alignment = null)
+        int? width = null, int? minWidth = null, int? maxWidth = null, int? naturalWidth = null,
+        int? height = null, int? minHeight = null, int? maxHeight = null, int? naturalHeight = null,
+        int? wrapDefaultWidth = null, LayoutAlignment? alignment = null)
     {
         Control = control.Control;
         XScale = xScale ?? control.XScale;
@@ -34,8 +35,11 @@ public class ControlWithLayoutAttributes : LayoutElement
         SpacingAfter = spacingAfter ?? control.SpacingAfter;
         Width = width ?? control.Width;
         MinWidth = minWidth ?? control.MinWidth;
-        Height = height ?? control.Height;
+        MaxWidth = maxWidth ?? control.MaxWidth;
         NaturalWidth = naturalWidth ?? control.NaturalWidth;
+        Height = height ?? control.Height;
+        MinHeight = minHeight ?? control.MinHeight;
+        MaxHeight = maxHeight ?? control.MaxHeight;
         NaturalHeight = naturalHeight ?? control.NaturalHeight;
         WrapDefaultWidth = wrapDefaultWidth ?? control.WrapDefaultWidth;
         Alignment = alignment ?? control.Alignment;
@@ -48,8 +52,11 @@ public class ControlWithLayoutAttributes : LayoutElement
     private Padding Padding { get; }
     private int? Width { get; }
     private int? MinWidth { get; }
-    private int? Height { get; }
+    private int? MaxWidth { get; }
     private int? NaturalWidth { get; }
+    private int? Height { get; }
+    private int? MinHeight { get; }
+    private int? MaxHeight { get; }
     private int? NaturalHeight { get; }
     private int? WrapDefaultWidth { get; }
 
@@ -98,6 +105,10 @@ public class ControlWithLayoutAttributes : LayoutElement
 
     private SizeF UpdateFixedDimensions(LayoutContext context, SizeF size)
     {
+        if (MaxWidth != null)
+        {
+            size.Width = Math.Min(size.Width, MaxWidth.Value);
+        }
         if (MinWidth != null)
         {
             size.Width = Math.Max(size.Width, MinWidth.Value);
@@ -106,13 +117,21 @@ public class ControlWithLayoutAttributes : LayoutElement
         {
             size.Width = Width.Value;
         }
+        if (context.IsNaturalSizeQuery && NaturalWidth != null)
+        {
+            size.Width = Math.Max(size.Width, NaturalWidth.Value);
+        }
         if (Height != null)
         {
             size.Height = Height.Value;
         }
-        if (context.IsNaturalSizeQuery && NaturalWidth != null)
+        if (MaxHeight != null)
         {
-            size.Width = Math.Max(size.Width, NaturalWidth.Value);
+            size.Height = Math.Min(size.Height, MaxHeight.Value);
+        }
+        if (MinHeight != null)
+        {
+            size.Height = Math.Max(size.Height, MinHeight.Value);
         }
         if (context.IsNaturalSizeQuery && NaturalHeight != null)
         {
