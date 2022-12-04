@@ -78,7 +78,7 @@ public class PdfSettingsForm : EtoDialogBase
         FormStateController.FixedHeightLayout = true;
         LayoutController.Content = L.Column(
             C.Label(UiStrings.DefaultFilePathLabel),
-            L.Row(_defaultFilePath.XScale(), _chooseFolder.Width(40)),
+            L.Row(_defaultFilePath.XScale().AlignCenter(), _chooseFolder.Size(40, 22)).SpacingAfter(2),
             _placeholders,
             _skipSavePrompt,
             _singlePageFiles,

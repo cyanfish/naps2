@@ -148,6 +148,9 @@
   <data name="file_extension_pdf" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\file_extension_pdf.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="file_extension_pdf_small" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Icons\file_extension_pdf_small.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="information" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\information.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
@@ -309,9 +312,6 @@
   </data>
   <data name="close" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\close.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="file_extension_pdf_small" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Icons\file_extension_pdf.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="picture_small" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\picture.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>

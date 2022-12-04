@@ -1,3 +1,4 @@
+using Eto.Drawing;
 using Eto.Forms;
 using NAPS2.EtoForms.Layout;
 
@@ -18,10 +19,15 @@ public abstract class EtoDialogBase : Dialog, IFormBase
         LayoutController.ContentSet += (_, _) => FormStateController.UpdateLayoutSize(LayoutController);
     }
 
-    public void ShowIcon()
+    // TODO: PR for Eto to integrate this
+    public new Icon Icon
     {
-        // TODO: PR for Eto to make Dialog.ShowIcon a property
-        EtoPlatform.Current.ShowIcon(this);
+        get => base.Icon;
+        set
+        {
+            base.Icon = value;
+            EtoPlatform.Current.ShowIcon(this);
+        }
     }
 
     public FormStateController FormStateController { get; }
