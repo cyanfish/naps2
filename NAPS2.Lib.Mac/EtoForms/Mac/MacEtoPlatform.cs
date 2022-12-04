@@ -1,7 +1,9 @@
 using Eto;
 using Eto.Drawing;
 using Eto.Forms;
+using Eto.Mac;
 using Eto.Mac.Drawing;
+using NAPS2.EtoForms.Layout;
 using NAPS2.Images.Mac;
 using sd = System.Drawing;
 
@@ -65,5 +67,23 @@ public class MacEtoPlatform : EtoPlatform
     {
         // TODO
         return new NSView().ToEto();
+    }
+
+    public override LayoutElement CreateGroupBox(string title, LayoutElement content)
+    {
+        var titleLabel = new Label
+        {
+            Text = title,
+            Font = NSFont.BoldSystemFontOfSize(12).ToEto()
+        };
+        var groupBox = new GroupBox();
+
+        return L.Overlay(
+            L.Column(
+                titleLabel.Padding(top: 8).SpacingAfter(6),
+                groupBox.YScale()
+            ),
+            L.Buffer(content, 6, 32, 6, 6)
+        );
     }
 }
