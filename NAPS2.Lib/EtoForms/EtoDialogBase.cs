@@ -10,13 +10,18 @@ public abstract class EtoDialogBase : Dialog, IFormBase
     protected EtoDialogBase(Naps2Config config)
     {
         EtoPlatform.Current.UpdateRtl(this);
-        EtoPlatform.Current.ShowIcon(this);
         Config = config;
         FormStateController = new FormStateController(this, config);
         Resizable = true;
         ShowInTaskbar = true;
         LayoutController.Bind(this);
         LayoutController.ContentSet += (_, _) => FormStateController.UpdateLayoutSize(LayoutController);
+    }
+
+    public void ShowIcon()
+    {
+        // TODO: PR for Eto to make Dialog.ShowIcon a property
+        EtoPlatform.Current.ShowIcon(this);
     }
 
     public FormStateController FormStateController { get; }
