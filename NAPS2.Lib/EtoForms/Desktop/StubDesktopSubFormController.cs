@@ -91,6 +91,7 @@ public class StubDesktopSubFormController : IDesktopSubFormController
 
     public void ShowImageSettingsForm()
     {
+        _formFactory.Create<ImageSettingsForm>().ShowModal();
     }
 
     public void ShowEmailSettingsForm()

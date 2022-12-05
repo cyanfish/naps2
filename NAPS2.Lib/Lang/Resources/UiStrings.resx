@@ -600,4 +600,19 @@
   <data name="PreviewLabel" xml:space="preserve">
     <value>Preview:</value>
   </data>
+  <data name="JpegQualityHelp" xml:space="preserve">
+    <value>For high JPEG qualities (80+), also increase Image Quality in your profile for best results.</value>
+  </data>
+  <data name="JpegQuality" xml:space="preserve">
+    <value>Jpeg Quality</value>
+  </data>
+  <data name="TiffOptions" xml:space="preserve">
+    <value>Tiff Options</value>
+  </data>
+  <data name="CompressionLabel" xml:space="preserve">
+    <value>Compression:</value>
+  </data>
+  <data name="ImageSettingsFormTitle" xml:space="preserve">
+    <value>Image Settings</value>
+  </data>
 </root>

@@ -71,17 +71,22 @@ public class SliderWithTextBox
 
     public static implicit operator LayoutElement(SliderWithTextBox control)
     {
-        return L.Row(
-            control.Icon != null
-                ? new ImageView { Image = control.Icon }
-                    .Align(EtoPlatform.Current.IsWinForms ? LayoutAlignment.Leading : LayoutAlignment.Center)
-                    .Padding(top: 2, bottom: 2)
-                : C.None(),
-            control._slider.XScale(),
-            control._textBox.Width(EtoPlatform.Current.IsGtk ? 50 : 40)
-                .Align(EtoPlatform.Current.IsWinForms ? LayoutAlignment.Leading : LayoutAlignment.Center)
-        );
+        return control.AsControl();
     }
 
     public event Action? ValueChanged;
+
+    public LayoutRow AsControl()
+    {
+        return L.Row(
+            Icon != null
+                ? new ImageView { Image = Icon }
+                    .Align(EtoPlatform.Current.IsWinForms ? LayoutAlignment.Leading : LayoutAlignment.Center)
+                    .Padding(top: 2, bottom: 2)
+                : C.None(),
+            _slider.XScale(),
+            _textBox.Width(EtoPlatform.Current.IsGtk ? 50 : 40)
+                .Align(EtoPlatform.Current.IsWinForms ? LayoutAlignment.Leading : LayoutAlignment.Center)
+        );
+    }
 }

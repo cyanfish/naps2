@@ -348,6 +348,15 @@ namespace NAPS2.Lang.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Compression:.
+        /// </summary>
+        internal static string CompressionLabel {
+            get {
+                return ResourceManager.GetString("CompressionLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Contrast:.
         /// </summary>
         internal static string ContrastLabel {
@@ -708,6 +717,15 @@ namespace NAPS2.Lang.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Image Settings.
+        /// </summary>
+        internal static string ImageSettingsFormTitle {
+            get {
+                return ResourceManager.GetString("ImageSettingsFormTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Import.
         /// </summary>
         internal static string Import {
@@ -722,6 +740,24 @@ namespace NAPS2.Lang.Resources {
         internal static string Interleave {
             get {
                 return ResourceManager.GetString("Interleave", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Jpeg Quality.
+        /// </summary>
+        internal static string JpegQuality {
+            get {
+                return ResourceManager.GetString("JpegQuality", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to For high JPEG qualities (80+), also increase Image Quality in your profile for best results..
+        /// </summary>
+        internal static string JpegQualityHelp {
+            get {
+                return ResourceManager.GetString("JpegQualityHelp", resourceCulture);
             }
         }
         
@@ -1388,6 +1424,15 @@ namespace NAPS2.Lang.Resources {
         internal static string SubjectLabel {
             get {
                 return ResourceManager.GetString("SubjectLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tiff Options.
+        /// </summary>
+        internal static string TiffOptions {
+            get {
+                return ResourceManager.GetString("TiffOptions", resourceCulture);
             }
         }
         

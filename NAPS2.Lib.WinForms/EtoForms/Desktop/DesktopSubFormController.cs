@@ -88,7 +88,7 @@ public class DesktopSubFormController : IDesktopSubFormController
 
     public void ShowImageSettingsForm()
     {
-        _formFactory.Create<FImageSettings>().ShowDialog();
+        _formFactory.Create<ImageSettingsForm>().ShowModal();
     }
 
     public void ShowEmailSettingsForm()
