@@ -452,6 +452,16 @@ namespace NAPS2 {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
+        internal static byte[] email_small {
+            get {
+                object obj = ResourceManager.GetObject("email_small", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
         internal static byte[] favicon {
             get {
                 object obj = ResourceManager.GetObject("favicon", resourceCulture);
@@ -545,6 +555,16 @@ namespace NAPS2 {
         internal static byte[] information_small {
             get {
                 object obj = ResourceManager.GetObject("information_small", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] key_small {
+            get {
+                object obj = ResourceManager.GetObject("key_small", resourceCulture);
                 return ((byte[])(obj));
             }
         }

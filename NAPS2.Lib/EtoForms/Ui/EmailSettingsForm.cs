@@ -21,7 +21,7 @@ public class EmailSettingsForm : EtoDialogBase
     {
         _systemEmailClients = systemEmailClients;
         Title = UiStrings.EmailSettingsFormTitle;
-        Icon = new Icon(1f, Icons.picture_small.ToEtoImage());
+        Icon = new Icon(1f, Icons.email_small.ToEtoImage());
 
         UpdateValues(Config);
         UpdateProvider(Config);

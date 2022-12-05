@@ -630,4 +630,10 @@
   <data name="EmailProviderFormTitle" xml:space="preserve">
     <value>Choose Email Provider</value>
   </data>
+  <data name="AuthorizeFormTitle" xml:space="preserve">
+    <value>Authorize</value>
+  </data>
+  <data name="WaitingForAuthorization" xml:space="preserve">
+    <value>Waiting for authorization...</value>
+  </data>
 </root>

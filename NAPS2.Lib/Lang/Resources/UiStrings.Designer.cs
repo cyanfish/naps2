@@ -204,6 +204,15 @@ namespace NAPS2.Lang.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Authorize.
+        /// </summary>
+        internal static string AuthorizeFormTitle {
+            get {
+                return ResourceManager.GetString("AuthorizeFormTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Author:.
         /// </summary>
         internal static string AuthorLabel {
@@ -1532,6 +1541,15 @@ namespace NAPS2.Lang.Resources {
         internal static string View {
             get {
                 return ResourceManager.GetString("View", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Waiting for authorization....
+        /// </summary>
+        internal static string WaitingForAuthorization {
+            get {
+                return ResourceManager.GetString("WaitingForAuthorization", resourceCulture);
             }
         }
         

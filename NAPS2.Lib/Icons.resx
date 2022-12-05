@@ -142,6 +142,12 @@
   <data name="cross" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\cross.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="key_small" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Icons\key-small.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="email_small" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Icons\email-small.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="email_attach" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\email_attach.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>

@@ -1,41 +1,49 @@
-﻿using System.Drawing;
 using System.Threading;
-using System.Windows.Forms;
+using Eto.Drawing;
+using NAPS2.EtoForms.Layout;
 using NAPS2.ImportExport.Email.Oauth;
 
-namespace NAPS2.WinForms;
+namespace NAPS2.EtoForms.Ui;
 
-public partial class FAuthorize : FormBase
+public class AuthorizeForm : EtoDialogBase
 {
     private readonly ErrorOutput _errorOutput;
     private CancellationTokenSource? _cancelTokenSource;
 
-    public FAuthorize(ErrorOutput errorOutput)
+    public AuthorizeForm(Naps2Config config, ErrorOutput errorOutput) : base(config)
     {
         _errorOutput = errorOutput;
-        RestoreFormState = false;
-        InitializeComponent();
+        Title = UiStrings.AuthorizeFormTitle;
+        Icon = new Icon(1f, Icons.key_small.ToEtoImage());
+
+        FormStateController.FixedHeightLayout = true;
+        FormStateController.RestoreFormState = false;
+        FormStateController.Resizable = false;
+        LayoutController.Content = L.Row(
+            C.Label(UiStrings.WaitingForAuthorization).Padding(right: 30),
+            C.CancelButton(this)
+        );
     }
 
     public OauthProvider? OauthProvider { get; set; }
 
-    private void FAuthorize_Load(object sender, EventArgs e)
+    public bool Result { get; private set; }
+
+    protected override void OnLoad(EventArgs e)
     {
+        base.OnLoad(e);
+
         if (OauthProvider == null) throw new InvalidOperationException("OauthProvider must be specified");
-            
-        MaximumSize = new Size(Math.Max(lblWaiting.Width + 142, 272), Height);
-        MinimumSize = new Size(Math.Max(lblWaiting.Width + 142, 272), Height);
 
         _cancelTokenSource = new CancellationTokenSource();
         Task.Run(() =>
         {
             try
             {
-                // TODO: This isn't actually working...
                 OauthProvider.AcquireToken(_cancelTokenSource.Token);
-                Invoke(() =>
+                Invoker.Current.SafeInvoke(() =>
                 {
-                    DialogResult = DialogResult.OK;
+                    Result = true;
                     Close();
                 });
             }
@@ -46,17 +54,14 @@ public partial class FAuthorize : FormBase
             {
                 _errorOutput.DisplayError(MiscResources.AuthError, ex);
                 Log.ErrorException("Error acquiring Oauth token", ex);
-                Invoke(() =>
-                {
-                    DialogResult = DialogResult.Cancel;
-                    Close();
-                });
+                Invoker.Current.SafeInvoke(Close);
             }
         });
     }
 
-    private void FAuthorize_FormClosed(object sender, FormClosedEventArgs e)
+    protected override void OnClosed(EventArgs e)
     {
+        base.OnClosed(e);
         _cancelTokenSource?.Cancel();
     }
 }

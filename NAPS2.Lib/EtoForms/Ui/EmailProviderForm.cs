@@ -25,7 +25,7 @@ public class EmailProviderForm : EtoDialogBase
         _gmailOauthProvider = gmailOauthProvider;
         _outlookWebOauthProvider = outlookWebOauthProvider;
         Title = UiStrings.EmailProviderFormTitle;
-        Icon = new Icon(1f, Icons.picture_small.ToEtoImage());
+        Icon = new Icon(1f, Icons.email_small.ToEtoImage());
 
         _providerWidgets = new List<EmailProviderWidget>();
 #if NET6_0_OR_GREATER
@@ -119,14 +119,14 @@ public class EmailProviderForm : EtoDialogBase
 
     private void ChooseOauth(OauthProvider provider)
     {
-        // var authForm = FormFactory.Create<AuthorizeForm>();
-        // authForm.OauthProvider = provider;
-        // authForm.ShowModal();
-        // if (authForm.Result)
-        // {
-        //     Result = true;
-        //     Close();
-        // }
+        var authForm = FormFactory.Create<AuthorizeForm>();
+        authForm.OauthProvider = provider;
+        authForm.ShowModal();
+        if (authForm.Result)
+        {
+            Result = true;
+            Close();
+        }
     }
 
     private EmailProviderWidget? GetDefaultWidget()
