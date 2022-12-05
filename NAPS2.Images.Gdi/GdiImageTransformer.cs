@@ -69,8 +69,15 @@ public class GdiImageTransformer : AbstractImageTransformer<GdiImage>
         using var imageAttrs = new ImageAttributes();
         imageAttrs.SetWrapMode(WrapMode.TileFlipXY);
         var destRect = new Rectangle(0, 0, transform.Width, transform.Height);
-        // For some reason we have to use +1 to get it to align correctly
-        g.DrawImage(image.Bitmap, destRect, 0, 0, image.Width + 1, image.Height + 1, GraphicsUnit.Pixel, imageAttrs);
+        var srcW = image.Width;
+        var srcH = image.Height;
+        if (transform.Width < image.Width && transform.Height < image.Height)
+        {
+            // For some reason we have to use +1 to get it to align correctly
+            srcW++;
+            srcH++;
+        }
+        g.DrawImage(image.Bitmap, destRect, 0, 0, srcW, srcH, GraphicsUnit.Pixel, imageAttrs);
         result.SetResolution(
             image.HorizontalResolution * image.Width / transform.Width,
             image.VerticalResolution * image.Height / transform.Height);
