@@ -93,7 +93,7 @@ public class DesktopSubFormController : IDesktopSubFormController
 
     public void ShowEmailSettingsForm()
     {
-        _formFactory.Create<FEmailSettings>().ShowDialog();
+        _formFactory.Create<EmailSettingsForm>().ShowModal();
     }
 
     public void ShowAboutForm()

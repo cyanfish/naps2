@@ -615,4 +615,16 @@
   <data name="ImageSettingsFormTitle" xml:space="preserve">
     <value>Image Settings</value>
   </data>
+  <data name="EmailSettingsFormTitle" xml:space="preserve">
+    <value>Email Settings</value>
+  </data>
+  <data name="Provider" xml:space="preserve">
+    <value>Provider</value>
+  </data>
+  <data name="Change" xml:space="preserve">
+    <value>Change</value>
+  </data>
+  <data name="AttachmentNameLabel" xml:space="preserve">
+    <value>Attachment Name:</value>
+  </data>
 </root>

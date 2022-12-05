@@ -195,6 +195,15 @@ namespace NAPS2.Lang.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Attachment Name:.
+        /// </summary>
+        internal static string AttachmentNameLabel {
+            get {
+                return ResourceManager.GetString("AttachmentNameLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Author:.
         /// </summary>
         internal static string AuthorLabel {
@@ -299,6 +308,15 @@ namespace NAPS2.Lang.Resources {
         internal static string Cancel {
             get {
                 return ResourceManager.GetString("Cancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Change.
+        /// </summary>
+        internal static string Change {
+            get {
+                return ResourceManager.GetString("Change", resourceCulture);
             }
         }
         
@@ -596,6 +614,15 @@ namespace NAPS2.Lang.Resources {
         internal static string EmailSettings {
             get {
                 return ResourceManager.GetString("EmailSettings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Email Settings.
+        /// </summary>
+        internal static string EmailSettingsFormTitle {
+            get {
+                return ResourceManager.GetString("EmailSettingsFormTitle", resourceCulture);
             }
         }
         
@@ -1091,6 +1118,15 @@ namespace NAPS2.Lang.Resources {
         internal static string ProfilesFormTitle {
             get {
                 return ResourceManager.GetString("ProfilesFormTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Provider.
+        /// </summary>
+        internal static string Provider {
+            get {
+                return ResourceManager.GetString("Provider", resourceCulture);
             }
         }
         
