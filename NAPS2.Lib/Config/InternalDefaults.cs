@@ -80,7 +80,8 @@ public static class InternalDefaults
                 },
                 Compat = PdfCompat.Default,
                 DefaultFileName = "",
-                SkipSavePrompt = false
+                SkipSavePrompt = false,
+                SinglePagePdfs = false
             },
             RememberPdfSettings = false,
             ImageSettings = new ImageSettings

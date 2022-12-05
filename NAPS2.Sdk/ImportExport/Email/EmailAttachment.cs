@@ -1,20 +1,8 @@
 ﻿namespace NAPS2.ImportExport.Email;
 
-public class EmailAttachment
-{
-    public EmailAttachment(string filePath, string attachmentName)
-    {
-        FilePath = filePath;
-        AttachmentName = attachmentName;
-    }
-        
-    /// <summary>
-    /// The path of the source file to be attached.
-    /// </summary>
-    public string FilePath { get; }
-
-    /// <summary>
-    /// The name of the attachment (usually the source file name).
-    /// </summary>
-    public string AttachmentName { get; }
-}
+/// <summary>
+/// Represents an attachment for an EmailMessage.
+/// </summary>
+/// <param name="FilePath">The path of the source file to be attached.</param>
+/// <param name="AttachmentName">The name of the attachment (usually the source file name).</param>
+public record EmailAttachment(string FilePath, string AttachmentName);

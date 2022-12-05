@@ -17,6 +17,8 @@ public class PdfSettings
 
     public bool SkipSavePrompt { get; set; }
 
+    public bool SinglePagePdfs { get; set; }
+
     [Config]
     public PdfMetadata Metadata
     {

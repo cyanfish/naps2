@@ -13,7 +13,7 @@ public class PdfSettingsForm : EtoDialogBase
     private readonly Button _chooseFolder = new() { Text = UiStrings.Ellipsis };
     private readonly LinkButton _placeholders = new() { Text = UiStrings.Placeholders };
     private readonly CheckBox _skipSavePrompt = new() { Text = UiStrings.SkipSavePrompt };
-    private readonly CheckBox _singlePageFiles = new() { Text = UiStrings.SinglePageFiles };
+    private readonly CheckBox _singlePagePdfs = new() { Text = UiStrings.SinglePageFiles };
     private readonly TextBox _title = new();
     private readonly TextBox _author = new();
     private readonly TextBox _subject = new();
@@ -65,13 +65,14 @@ public class PdfSettingsForm : EtoDialogBase
         FormStateController.FixedHeightLayout = true;
         LayoutController.Content = L.Column(
             C.Label(UiStrings.DefaultFilePathLabel),
+            // TODO: Maybe make a widget for this kind of file picker
             L.Row(
                 _defaultFilePath.XScale().AlignCenter(),
                 _chooseFolder.Width(40).MaxHeight(22)
             ).SpacingAfter(2),
             _placeholders,
             _skipSavePrompt,
-            _singlePageFiles,
+            _singlePagePdfs,
             L.GroupBox(
                 UiStrings.Metadata,
                 L.Column(
@@ -114,6 +115,7 @@ public class PdfSettingsForm : EtoDialogBase
     {
         _defaultFilePath.Text = config.Get(c => c.PdfSettings.DefaultFileName);
         _skipSavePrompt.Checked = config.Get(c => c.PdfSettings.SkipSavePrompt);
+        _singlePagePdfs.Checked = config.Get(c => c.PdfSettings.SinglePagePdfs);
         _title.Text = config.Get(c => c.PdfSettings.Metadata.Title);
         _author.Text = config.Get(c => c.PdfSettings.Metadata.Author);
         _subject.Text = config.Get(c => c.PdfSettings.Metadata.Subject);
@@ -154,6 +156,7 @@ public class PdfSettingsForm : EtoDialogBase
         {
             DefaultFileName = _defaultFilePath.Text,
             SkipSavePrompt = _skipSavePrompt.IsChecked(),
+            SinglePagePdfs = _singlePagePdfs.IsChecked(),
             Metadata = new PdfMetadata
             {
                 Title = _title.Text,

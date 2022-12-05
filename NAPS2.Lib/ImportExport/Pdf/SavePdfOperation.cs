@@ -20,6 +20,9 @@ public class SavePdfOperation : OperationBase
         AllowBackground = true;
     }
 
+    // TODO: Do something with this?
+    public string FirstFileSaved { get; private set; }
+
     public bool Start(string fileName, Placeholders placeholders, ICollection<ProcessedImage> images,
         PdfSettings pdfSettings, OcrParams ocrParams)
     {
@@ -29,6 +32,7 @@ public class SavePdfOperation : OperationBase
     public bool Start(string fileName, Placeholders placeholders, ICollection<ProcessedImage> images,
         PdfSettings pdfSettings, OcrParams ocrParams, bool email, EmailMessage? emailMessage)
     {
+        // TODO: This needs tests. And ideally simplification.
         ProgressTitle = email ? MiscResources.EmailPdfProgress : MiscResources.SavePdfProgress;
         var subFileName = placeholders.Substitute(fileName);
         Status = new OperationStatus
@@ -42,29 +46,65 @@ public class SavePdfOperation : OperationBase
             // Not supposed to be a directory, but ok...
             subFileName = placeholders.Substitute(Path.Combine(subFileName, "$(n).pdf"));
         }
-        if (File.Exists(subFileName))
+        // TODO: We need to make sure we dispose of the images in all cases (e.g. on choosing not to overwrite)
+        var singleFile = !pdfSettings.SinglePagePdfs || images.Count == 1;
+        if (singleFile)
         {
-            // TODO: Gtk auto prompts for overwrite in the save dialog. How to handle this and avoid duplicate prompts?
-            // Can we just change the overwrite prompt implementation or will that be a problem in some cases where the save dialog isn't used, e.g. auto save, batch, etc?
-            if (_overwritePrompt.ConfirmOverwrite(subFileName) != OverwriteResponse.Yes)
+            if (File.Exists(subFileName))
             {
-                return false;
-            }
-            if (FileSystemHelper.IsFileInUse(subFileName, out var ex))
-            {
-                InvokeError(MiscResources.FileInUse, ex!);
-                return false;
+                // TODO: Gtk auto prompts for overwrite in the save dialog. How to handle this and avoid duplicate prompts?
+                // Can we just change the overwrite prompt implementation or will that be a problem in some cases where the save dialog isn't used, e.g. auto save, batch, etc?
+                if (_overwritePrompt.ConfirmOverwrite(subFileName) != OverwriteResponse.Yes)
+                {
+                    return false;
+                }
+                if (FileSystemHelper.IsFileInUse(subFileName, out var ex))
+                {
+                    InvokeError(MiscResources.FileInUse, ex!);
+                    return false;
+                }
             }
         }
 
+        var imagesByFile = pdfSettings.SinglePagePdfs ? images.Select(x => new[] { x }).ToArray() : new[] { images.ToArray() };
         RunAsync(async () =>
         {
             bool result = false;
             try
             {
-                result = await _pdfExporter.Export(subFileName, images,
-                    new PdfExportParams(pdfSettings.Metadata, pdfSettings.Encryption,
-                        pdfSettings.Compat), ocrParams, ProgressHandler);
+                int digits = (int)Math.Floor(Math.Log10(images.Count)) + 1;
+                int i = 0;
+                foreach (var imagesForFile in imagesByFile)
+                {
+                    var currentFileName = placeholders.Substitute(fileName, true, i, singleFile ? 0 : digits);
+                    Status.StatusText = string.Format(MiscResources.SavingFormat, Path.GetFileName(currentFileName));
+                    InvokeStatusChanged();
+                    if (singleFile && IsFileInUse(currentFileName, out var ex))
+                    {
+                        InvokeError(MiscResources.FileInUse, ex);
+                        break;
+                    }
+
+
+                    var progress = singleFile ? (ProgressHandler) OnProgress : new ProgressHandler();
+                    result = await _pdfExporter.Export(currentFileName, imagesForFile,
+                        new PdfExportParams(pdfSettings.Metadata, pdfSettings.Encryption,
+                            pdfSettings.Compat), ocrParams, progress);
+                    if (!result || CancelToken.IsCancellationRequested)
+                    {
+                        break;
+                    }
+                    emailMessage?.Attachments.Add(new EmailAttachment(currentFileName, Path.GetFileName(currentFileName)));
+                    if (i == 0)
+                    {
+                        FirstFileSaved = subFileName;
+                    }
+                    i++;
+                    if (!singleFile)
+                    {
+                        OnProgress(i, imagesByFile.Length);
+                    }
+                }
             }
             catch (UnauthorizedAccessException ex)
             {
@@ -89,7 +129,6 @@ public class SavePdfOperation : OperationBase
             }
             finally
             {
-                // TODO: Here (and in every other operation that takes a list of images), clone the images on input and then dispose when finished
                 foreach (var image in images)
                 {
                     image.Dispose();
@@ -147,5 +186,26 @@ public class SavePdfOperation : OperationBase
         }, TaskContinuationOptions.OnlyOnRanToCompletion);
 
         return true;
+    }
+
+    private bool IsFileInUse(string filePath, out Exception? exception)
+    {
+        // TODO: Generalize this for images too
+        exception = null;
+        if (File.Exists(filePath))
+        {
+            try
+            {
+                using (new FileStream(filePath, FileMode.Open, FileAccess.ReadWrite, FileShare.None))
+                {
+                }
+            }
+            catch (IOException ex)
+            {
+                exception = ex;
+                return true;
+            }
+        }
+        return false;
     }
 }
