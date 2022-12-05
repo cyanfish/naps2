@@ -1,7 +1,8 @@
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
     
     <PropertyGroup>
-        <LangVersion>10</LangVersion>
+        <LangVersion>11</LangVersion>
+        <EnablePreviewFeatures>true</EnablePreviewFeatures>
     </PropertyGroup>
 
     <Import Project="..\NAPS2.Setup\VersionTargets.targets" />
