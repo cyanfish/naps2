@@ -210,12 +210,13 @@ public class PdfSettingsForm : EtoDialogBase
 
     private void Placeholders_Click(object? sender, EventArgs eventArgs)
     {
-        // var form = FormFactory.Create<PlaceholdersForm>();
-        // form.FileName = _defaultFilePath.Text;
-        // if (form.ShowModal() == DialogResult.OK)
-        // {
-        //     _defaultFilePath.Text = form.FileName;
-        // }
+        var form = FormFactory.Create<PlaceholdersForm>();
+        form.FileName = _defaultFilePath.Text;
+        form.ShowModal();
+        if (form.Updated)
+        {
+            _defaultFilePath.Text = form.FileName;
+        }
     }
 
     private void ChooseFolder_Click(object? sender, EventArgs e)

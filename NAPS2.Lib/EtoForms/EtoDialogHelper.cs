@@ -20,7 +20,7 @@ public class EtoDialogHelper : DialogHelper
             CheckFileExists = false,
             // TODO
             // AddExtension = true,
-            FileName = Path.GetFileName(defaultPath)
+            FileName = Path.IsPathRooted(defaultPath) ? Path.GetFileName(defaultPath) : null
         };
         _fileFilters.Set(sd, FileFilterGroup.Pdf | FileFilterGroup.Image);
         SetDir(sd, defaultPath);
@@ -39,7 +39,7 @@ public class EtoDialogHelper : DialogHelper
         {
             CheckFileExists = false,
             // AddExtension = true,
-            FileName = Path.GetFileName(defaultPath)
+            FileName = Path.IsPathRooted(defaultPath) ? Path.GetFileName(defaultPath) : null
         };
         _fileFilters.Set(sd, FileFilterGroup.Pdf);
         SetDir(sd, defaultPath);
@@ -58,7 +58,7 @@ public class EtoDialogHelper : DialogHelper
         {
             CheckFileExists = false,
             // AddExtension = true,
-            FileName = Path.GetFileName(defaultPath)
+            FileName = Path.IsPathRooted(defaultPath) ? Path.GetFileName(defaultPath) : null
         };
         var lastExt = _config.Get(c => c.LastImageExt)?.ToLowerInvariant();
         _fileFilters.Set(sd, FileFilterGroup.Image, lastExt ?? "jpg");

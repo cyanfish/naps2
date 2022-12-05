@@ -106,4 +106,8 @@ public abstract class EtoPlatform
     public virtual void ShowIcon(Dialog dialog)
     {
     }
+
+    public virtual void ConfigureEllipsis(Label label)
+    {
+    }
 }

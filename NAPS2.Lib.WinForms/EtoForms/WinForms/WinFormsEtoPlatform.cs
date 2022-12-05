@@ -189,4 +189,10 @@ public class WinFormsEtoPlatform : EtoPlatform
     {
         ((wf.Form) dialog.ControlObject).ShowIcon = true;
     }
+
+    public override void ConfigureEllipsis(Label label)
+    {
+        var handler = (LabelHandler) label.Handler;
+        handler.Control.AutoEllipsis = true;
+    }
 }

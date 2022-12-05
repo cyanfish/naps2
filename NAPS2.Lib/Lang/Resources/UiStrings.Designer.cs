@@ -204,6 +204,42 @@ namespace NAPS2.Lang.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Auto-incrementing number (1 digits).
+        /// </summary>
+        internal static string AutoIncrementing1Digit {
+            get {
+                return ResourceManager.GetString("AutoIncrementing1Digit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Auto-incrementing number (2 digits).
+        /// </summary>
+        internal static string AutoIncrementing2Digit {
+            get {
+                return ResourceManager.GetString("AutoIncrementing2Digit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Auto-incrementing number (3 digits).
+        /// </summary>
+        internal static string AutoIncrementing3Digit {
+            get {
+                return ResourceManager.GetString("AutoIncrementing3Digit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Auto-incrementing number (4 digits).
+        /// </summary>
+        internal static string AutoIncrementing4Digit {
+            get {
+                return ResourceManager.GetString("AutoIncrementing4Digit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Auto Save Settings.
         /// </summary>
         internal static string AutoSaveSettings {
@@ -353,6 +389,15 @@ namespace NAPS2.Lang.Resources {
         internal static string CustomRotation {
             get {
                 return ResourceManager.GetString("CustomRotation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Day (01-31).
+        /// </summary>
+        internal static string Day2Digit {
+            get {
+                return ResourceManager.GetString("Day2Digit", resourceCulture);
             }
         }
         
@@ -582,6 +627,15 @@ namespace NAPS2.Lang.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to File Name:.
+        /// </summary>
+        internal static string FileNameLabel {
+            get {
+                return ResourceManager.GetString("FileNameLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Flip.
         /// </summary>
         internal static string Flip {
@@ -605,6 +659,15 @@ namespace NAPS2.Lang.Resources {
         internal static string HorizontalAlignLabel {
             get {
                 return ResourceManager.GetString("HorizontalAlignLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hour (0-23).
+        /// </summary>
+        internal static string Hour2Digit {
+            get {
+                return ResourceManager.GetString("Hour2Digit", resourceCulture);
             }
         }
         
@@ -695,6 +758,24 @@ namespace NAPS2.Lang.Resources {
         internal static string Metadata {
             get {
                 return ResourceManager.GetString("Metadata", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Minute (00-59).
+        /// </summary>
+        internal static string Minute2Digit {
+            get {
+                return ResourceManager.GetString("Minute2Digit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Month (01-12).
+        /// </summary>
+        internal static string Month2Digit {
+            get {
+                return ResourceManager.GetString("Month2Digit", resourceCulture);
             }
         }
         
@@ -915,11 +996,29 @@ namespace NAPS2.Lang.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Placeholders.
+        /// </summary>
+        internal static string PlaceholdersFormTitle {
+            get {
+                return ResourceManager.GetString("PlaceholdersFormTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Preview.
         /// </summary>
         internal static string PreviewFormTitle {
             get {
                 return ResourceManager.GetString("PreviewFormTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Preview:.
+        /// </summary>
+        internal static string PreviewLabel {
+            get {
+                return ResourceManager.GetString("PreviewLabel", resourceCulture);
             }
         }
         
@@ -1203,6 +1302,15 @@ namespace NAPS2.Lang.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Second (00-59).
+        /// </summary>
+        internal static string Second2Digit {
+            get {
+                return ResourceManager.GetString("Second2Digit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Select.
         /// </summary>
         internal static string Select {
@@ -1352,6 +1460,24 @@ namespace NAPS2.Lang.Resources {
         internal static string XOfY {
             get {
                 return ResourceManager.GetString("XOfY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Year (00-99).
+        /// </summary>
+        internal static string Year2Digit {
+            get {
+                return ResourceManager.GetString("Year2Digit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Year.
+        /// </summary>
+        internal static string Year4Digit {
+            get {
+                return ResourceManager.GetString("Year4Digit", resourceCulture);
             }
         }
         

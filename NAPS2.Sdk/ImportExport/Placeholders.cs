@@ -20,6 +20,8 @@ public abstract class Placeholders
     public const string NUMBER_3_DIGITS = "$(nnn)";
     public const string NUMBER_2_DIGITS = "$(nn)";
     public const string NUMBER_1_DIGIT = "$(n)";
+    public const string FULL_DATE = "$(YYYY)-$(MM)-$(DD)";
+    public const string FULL_TIME = "$(hh)_$(mm)_$(ss)";
 
     /// <summary>
     /// Substitutes all the standard placeholders. For example, "$(YYYY)-$(MM)-$(DD) $(hh):$(mm):$(ss)" is substituted with the current date and time. Substitutes environment variables. Handles auto-numbering for multiple files,

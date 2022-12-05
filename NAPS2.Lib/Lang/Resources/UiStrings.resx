@@ -558,4 +558,46 @@
   <data name="Compatibility" xml:space="preserve">
     <value>Compatibility</value>
   </data>
+  <data name="PlaceholdersFormTitle" xml:space="preserve">
+    <value>Placeholders</value>
+  </data>
+  <data name="Year4Digit" xml:space="preserve">
+    <value>Year</value>
+  </data>
+  <data name="Year2Digit" xml:space="preserve">
+    <value>Year (00-99)</value>
+  </data>
+  <data name="Month2Digit" xml:space="preserve">
+    <value>Month (01-12)</value>
+  </data>
+  <data name="Day2Digit" xml:space="preserve">
+    <value>Day (01-31)</value>
+  </data>
+  <data name="Hour2Digit" xml:space="preserve">
+    <value>Hour (0-23)</value>
+  </data>
+  <data name="Minute2Digit" xml:space="preserve">
+    <value>Minute (00-59)</value>
+  </data>
+  <data name="Second2Digit" xml:space="preserve">
+    <value>Second (00-59)</value>
+  </data>
+  <data name="AutoIncrementing4Digit" xml:space="preserve">
+    <value>Auto-incrementing number (4 digits)</value>
+  </data>
+  <data name="AutoIncrementing3Digit" xml:space="preserve">
+    <value>Auto-incrementing number (3 digits)</value>
+  </data>
+  <data name="AutoIncrementing2Digit" xml:space="preserve">
+    <value>Auto-incrementing number (2 digits)</value>
+  </data>
+  <data name="AutoIncrementing1Digit" xml:space="preserve">
+    <value>Auto-incrementing number (1 digits)</value>
+  </data>
+  <data name="FileNameLabel" xml:space="preserve">
+    <value>File Name:</value>
+  </data>
+  <data name="PreviewLabel" xml:space="preserve">
+    <value>Preview:</value>
+  </data>
 </root>
