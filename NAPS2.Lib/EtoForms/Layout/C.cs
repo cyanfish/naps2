@@ -87,21 +87,21 @@ public static class C
     public static Button Button(Command command) =>
         Button(command.MenuText, command);
 
-    public static Button Button(Command command, ButtonImagePosition imagePosition)
+    public static Button Button(Command command, ButtonImagePosition imagePosition, bool big = false)
     {
-        var button = Button(command);
-        button.Image = command.Image;
-        button.ImagePosition = imagePosition;
-        EtoPlatform.Current.ConfigureImageButton(button);
-        return button;
+        return Button(command, command.Image, imagePosition, big);
     }
 
-    public static Button Button(Command command, Image image, ButtonImagePosition imagePosition = default)
+    public static Button Button(Command command, Image image, ButtonImagePosition imagePosition = default, bool big = false)
     {
         var button = Button(command);
         button.Image = image;
         button.ImagePosition = imagePosition;
-        EtoPlatform.Current.ConfigureImageButton(button);
+        if (big)
+        {
+            button.Font = new Font(button.Font.Family, 12);
+        }
+        EtoPlatform.Current.ConfigureImageButton(button, big);
         return button;
     }
 

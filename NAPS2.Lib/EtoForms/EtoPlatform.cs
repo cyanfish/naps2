@@ -20,7 +20,7 @@ public abstract class EtoPlatform
 
     public abstract Application CreateApplication();
     public abstract IListView<T> CreateListView<T>(ListViewBehavior<T> behavior) where T : notnull;
-    public abstract void ConfigureImageButton(Button button);
+    public abstract void ConfigureImageButton(Button button, bool big);
     public abstract Bitmap ToBitmap(IMemoryImage image);
     public abstract IMemoryImage DrawHourglass(ImageContext imageContext, IMemoryImage thumb);
     public abstract void SetFrame(Control container, Control control, Point location, Size size, bool inOverlay);
@@ -110,4 +110,6 @@ public abstract class EtoPlatform
     public virtual void ConfigureEllipsis(Label label)
     {
     }
+
+    public virtual Bitmap? ExtractAssociatedIcon(string exePath) => throw new NotSupportedException();
 }

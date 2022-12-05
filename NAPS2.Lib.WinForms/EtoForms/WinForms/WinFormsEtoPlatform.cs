@@ -28,25 +28,38 @@ public class WinFormsEtoPlatform : EtoPlatform
     public override IListView<T> CreateListView<T>(ListViewBehavior<T> behavior) =>
         new WinFormsListView<T>(behavior);
 
-    public override void ConfigureImageButton(Eto.Forms.Button button)
+    public override void ConfigureImageButton(Eto.Forms.Button button, bool big)
     {
         button.MinimumSize = MinImageButtonSize;
         if (button.ImagePosition == ButtonImagePosition.Left)
         {
             var native = (wf.Button) button.ToNative();
-            native.TextImageRelation = wf.TextImageRelation.Overlay;
+            native.TextImageRelation = big ? wf.TextImageRelation.ImageBeforeText : wf.TextImageRelation.Overlay;
             native.ImageAlign = sd.ContentAlignment.MiddleLeft;
-            native.TextAlign = sd.ContentAlignment.MiddleRight;
+            native.TextAlign = big ? sd.ContentAlignment.MiddleLeft : sd.ContentAlignment.MiddleRight;
+
+            if (big)
+            {
+                native.Text = @"  " + native.Text;
+            }
 
             var imageWidth = native.Image.Width;
             using var g = native.CreateGraphics();
             var textWidth = (int) g.MeasureString(native.Text, native.Font).Width;
             native.AutoSize = false;
 
-            var widthWithoutRightPadding = imageWidth + textWidth + IMAGE_PADDING + 15;
-            native.Width = Math.Max(widthWithoutRightPadding + IMAGE_PADDING, ButtonHandler.DefaultMinimumSize.Width);
-            var rightPadding = IMAGE_PADDING + (native.Width - widthWithoutRightPadding - IMAGE_PADDING) / 2;
-            native.Padding = native.Padding with { Left = IMAGE_PADDING, Right = rightPadding };
+            if (big)
+            {
+                native.Padding = native.Padding with { Left = IMAGE_PADDING, Right = IMAGE_PADDING };
+            }
+            else
+            {
+                var widthWithoutRightPadding = imageWidth + textWidth + IMAGE_PADDING + 15;
+                native.Width = Math.Max(widthWithoutRightPadding + IMAGE_PADDING,
+                    ButtonHandler.DefaultMinimumSize.Width);
+                var rightPadding = IMAGE_PADDING + (native.Width - widthWithoutRightPadding - IMAGE_PADDING) / 2;
+                native.Padding = native.Padding with { Left = IMAGE_PADDING, Right = rightPadding };
+            }
         }
     }
 
@@ -194,5 +207,10 @@ public class WinFormsEtoPlatform : EtoPlatform
     {
         var handler = (LabelHandler) label.Handler;
         handler.Control.AutoEllipsis = true;
+    }
+
+    public override Bitmap? ExtractAssociatedIcon(string exePath)
+    {
+        return sd.Icon.ExtractAssociatedIcon(exePath)?.ToBitmap().ToEto();
     }
 }

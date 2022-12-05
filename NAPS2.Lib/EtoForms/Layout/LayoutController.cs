@@ -55,7 +55,7 @@ public class LayoutController
         return naturalSize;
     }
 
-    private void DoLayout()
+    public void DoLayout()
     {
         if (_window == null || _content == null || !_isShown) return;
         // TODO: Handle added/removed things

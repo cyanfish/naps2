@@ -21,7 +21,7 @@ public class MacEtoPlatform : EtoPlatform
     public override IListView<T> CreateListView<T>(ListViewBehavior<T> behavior) =>
         new MacListView<T>(behavior);
 
-    public override void ConfigureImageButton(Button button)
+    public override void ConfigureImageButton(Button button, bool big)
     {
         if (button.ImagePosition == ButtonImagePosition.Above)
         {

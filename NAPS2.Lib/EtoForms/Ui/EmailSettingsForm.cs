@@ -11,7 +11,7 @@ public class EmailSettingsForm : EtoDialogBase
 {
     private readonly SystemEmailClients _systemEmailClients;
 
-    private readonly Label _provider = new() { Text = "\n" };
+    private readonly Label _provider = new() { Text = " \n " };
     private readonly TextBox _attachmentName = new();
     private readonly LinkButton _placeholders = new() { Text = UiStrings.Placeholders };
     private readonly CheckBox _rememberSettings = new() { Text = UiStrings.RememberTheseSettings };
@@ -34,7 +34,11 @@ public class EmailSettingsForm : EtoDialogBase
         LayoutController.Content = L.Column(
             L.GroupBox(
                 UiStrings.Provider,
-                L.Row(_provider, C.Filler(), C.Button(UiStrings.Change, ChangeProvider))
+                L.Row(
+                    _provider.AlignCenter(),
+                    C.Filler(),
+                    C.Button(UiStrings.Change, ChangeProvider).AlignCenter().Padding(top: 4, bottom: 4)
+                )
             ),
             C.Label(UiStrings.AttachmentNameLabel),
             _attachmentName,
@@ -87,6 +91,7 @@ public class EmailSettingsForm : EtoDialogBase
                 _provider.Text = SettingsResources.EmailProvider_NotSelected;
                 break;
         }
+        LayoutController.DoLayout();
     }
 
     private void Save()
@@ -128,11 +133,11 @@ public class EmailSettingsForm : EtoDialogBase
 
     private void ChangeProvider()
     {
-        // var form = FormFactory.Create<EmailProviderForm>();
-        // form.ShowModal();
-        // if (form.Result)
-        // {
-        //     UpdateProvider(Config);
-        // }
+        var form = FormFactory.Create<EmailProviderForm>();
+        form.ShowModal();
+        if (form.Result)
+        {
+            UpdateProvider(Config);
+        }
     }
 }

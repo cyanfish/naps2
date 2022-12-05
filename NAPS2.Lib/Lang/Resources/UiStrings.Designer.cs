@@ -591,6 +591,15 @@ namespace NAPS2.Lang.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Choose Email Provider.
+        /// </summary>
+        internal static string EmailProviderFormTitle {
+            get {
+                return ResourceManager.GetString("EmailProviderFormTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Email Selected.
         /// </summary>
         internal static string EmailSelected {

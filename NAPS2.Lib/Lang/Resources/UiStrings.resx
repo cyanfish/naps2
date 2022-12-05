@@ -627,4 +627,7 @@
   <data name="AttachmentNameLabel" xml:space="preserve">
     <value>Attachment Name:</value>
   </data>
+  <data name="EmailProviderFormTitle" xml:space="preserve">
+    <value>Choose Email Provider</value>
+  </data>
 </root>
