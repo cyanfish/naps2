@@ -31,9 +31,9 @@ public class RecoverForm : EtoDialogBase
             _prompt.Wrap(400).MinWidth(300),
             C.Filler(),
             L.Row(
-                recoverButton.XScale().Height(32),
-                deleteButton.XScale().Height(32),
-                notNowButton.XScale().Height(32)
+                recoverButton.Scale().Height(32),
+                deleteButton.Scale().Height(32),
+                notNowButton.Scale().Height(32)
             )
         );
     }

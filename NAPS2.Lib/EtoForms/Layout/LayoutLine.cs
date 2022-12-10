@@ -134,7 +134,7 @@ public abstract class LayoutLine<TOrthogonal> : LayoutContainer
         foreach (var child in Children)
         {
             cellLengths.Add(GetLength(child.GetPreferredSize(lengthChildContext, bounds)));
-            cellScaling.Add(child.IsVisible && DoesChildScale(child));
+            cellScaling.Add(child.IsVisible && child.Scale);
         }
     }
 
@@ -227,7 +227,7 @@ public abstract class LayoutLine<TOrthogonal> : LayoutContainer
                 for (int i = 0; i < opposite.Children.Length; i++)
                 {
                     if (cellScaling.Count <= i) cellScaling.Add(false);
-                    cellScaling[i] = cellScaling[i] || opposite.DoesChildScale(opposite.Children[i]);
+                    cellScaling[i] = cellScaling[i] || opposite.Children[i].Scale;
                 }
             }
         }

@@ -45,11 +45,11 @@ public class OcrSetupForm : EtoDialogBase
             _enableOcr,
             L.Row(
                 C.Label(UiStrings.OcrLanguageLabel).AlignCenter().Padding(right: 40),
-                _ocrLang.XScale()
+                _ocrLang.Scale()
             ).Aligned(),
             L.Row(
                 C.Label(UiStrings.OcrModeLabel).AlignCenter().Padding(right: 40),
-                _ocrMode.XScale()
+                _ocrMode.Scale()
             ).Aligned(),
             _ocrAfterScanning,
             C.Filler(),

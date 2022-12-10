@@ -51,10 +51,8 @@ public static class EtoLayoutExtensions
         new ControlWithLayoutAttributes(control, naturalWidth: width);
     public static ControlWithLayoutAttributes NaturalHeight(this Control control, int height) =>
         new ControlWithLayoutAttributes(control, naturalHeight: height);
-    public static ControlWithLayoutAttributes XScale(this Control control) =>
-        new ControlWithLayoutAttributes(control, xScale: true);
-    public static ControlWithLayoutAttributes YScale(this Control control) =>
-        new ControlWithLayoutAttributes(control, yScale: true);
+    public static ControlWithLayoutAttributes Scale(this Control control) =>
+        new ControlWithLayoutAttributes(control, scale: true);
     public static ControlWithLayoutAttributes SpacingAfter(this Control control, int spacingAfter) =>
         new ControlWithLayoutAttributes(control, spacingAfter: spacingAfter);
     public static ControlWithLayoutAttributes AlignCenter(this Control control) =>
@@ -98,10 +96,8 @@ public static class EtoLayoutExtensions
         new ControlWithLayoutAttributes(control, naturalWidth: width);
     public static ControlWithLayoutAttributes NaturalHeight(this ControlWithLayoutAttributes control, int height) =>
         new ControlWithLayoutAttributes(control, naturalHeight: height);
-    public static ControlWithLayoutAttributes XScale(this ControlWithLayoutAttributes control) =>
-        new ControlWithLayoutAttributes(control, xScale: true);
-    public static ControlWithLayoutAttributes YScale(this ControlWithLayoutAttributes control) =>
-        new ControlWithLayoutAttributes(control, yScale: true);
+    public static ControlWithLayoutAttributes Scale(this ControlWithLayoutAttributes control) =>
+        new ControlWithLayoutAttributes(control, scale: true);
     public static ControlWithLayoutAttributes SpacingAfter(this ControlWithLayoutAttributes control, int spacingAfter) =>
         new ControlWithLayoutAttributes(control, spacingAfter: spacingAfter);
     public static ControlWithLayoutAttributes AlignCenter(this ControlWithLayoutAttributes control) =>
@@ -131,8 +127,8 @@ public static class EtoLayoutExtensions
         new LayoutColumn(column, spacing: spacing);
     public static LayoutColumn SpacingAfter(this LayoutColumn column, int spacingAfter) =>
         new LayoutColumn(column, spacingAfter: spacingAfter);
-    public static LayoutColumn XScale(this LayoutColumn column) =>
-        new LayoutColumn(column, xScale: true);
+    public static LayoutColumn Scale(this LayoutColumn column) =>
+        new LayoutColumn(column, scale: true);
     public static LayoutColumn Aligned(this LayoutColumn column) =>
         new LayoutColumn(column, aligned: true);
 
@@ -146,15 +142,13 @@ public static class EtoLayoutExtensions
         new LayoutRow(row, spacing: spacing);
     public static LayoutRow SpacingAfter(this LayoutRow row, int spacingAfter) =>
         new LayoutRow(row, spacingAfter: spacingAfter);
-    public static LayoutRow YScale(this LayoutRow row) =>
-        new LayoutRow(row, yScale: true);
+    public static LayoutRow Scale(this LayoutRow row) =>
+        new LayoutRow(row, scale: true);
     public static LayoutRow Aligned(this LayoutRow row) =>
         new LayoutRow(row, aligned: true);
 
-    public static LayoutOverlay XScale(this LayoutOverlay overlay) =>
-        new LayoutOverlay(overlay, xScale: true);
-    public static LayoutOverlay YScale(this LayoutOverlay overlay) =>
-        new LayoutOverlay(overlay, yScale: true);
+    public static LayoutOverlay Scale(this LayoutOverlay overlay) =>
+        new LayoutOverlay(overlay, scale: true);
 
     public static LayoutElement Expand(this IEnumerable<LayoutElement> elements) =>
         new ExpandLayoutElement(elements.ToArray());

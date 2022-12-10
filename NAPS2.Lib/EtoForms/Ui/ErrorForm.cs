@@ -25,14 +25,14 @@ public class ErrorForm : EtoDialogBase
         LayoutController.Content = L.Column(
             L.Row(
                 _image.AlignCenter().Padding(right: 5),
-                _message.Wrap(350).NaturalWidth(350).AlignCenter().XScale()
+                _message.Wrap(350).NaturalWidth(350).AlignCenter().Scale()
             ),
             L.Row(
                 C.Link(UiStrings.TechnicalDetails, ToggleDetails).AlignCenter(),
                 C.Filler(),
                 C.OkButton(this)
             ),
-            _details.NaturalHeight(120).Visible(_detailsVisibility).YScale()
+            _details.NaturalHeight(120).Visible(_detailsVisibility).Scale()
         );
     }
 

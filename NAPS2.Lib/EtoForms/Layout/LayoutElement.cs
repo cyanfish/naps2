@@ -13,8 +13,7 @@ public abstract class LayoutElement
             .Where(c => c is not SkipLayoutElement).ToArray();
     }
 
-    protected internal bool XScale { get; set; }
-    protected internal bool YScale { get; set; }
+    protected internal bool Scale { get; set; }
     protected internal LayoutAlignment Alignment { get; set; }
     protected internal LayoutVisibility? Visibility { get; set; }
     protected internal bool IsVisible => Visibility?.IsVisible ?? true;

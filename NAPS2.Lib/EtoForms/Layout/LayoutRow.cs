@@ -10,13 +10,13 @@ public class LayoutRow : LayoutLine<LayoutColumn>
     }
 
     public LayoutRow(LayoutRow original, Padding? padding = null, int? spacing = null, int? spacingAfter = null,
-        bool? yScale = null, bool? aligned = null)
+        bool? scale = null, bool? aligned = null)
         : base(original.Children)
     {
         Padding = padding ?? original.Padding;
         Spacing = spacing ?? original.Spacing;
         SpacingAfter = spacingAfter ?? original.SpacingAfter;
-        YScale = yScale ?? original.YScale;
+        Scale = scale ?? original.Scale;
         Aligned = aligned ?? original.Aligned;
     }
 
@@ -38,8 +38,6 @@ public class LayoutRow : LayoutLine<LayoutColumn>
         size.Height = Math.Max(size.Height, childSize.Height);
         return size;
     }
-
-    protected internal override bool DoesChildScale(LayoutElement child) => child.XScale;
 
     protected override float GetBreadth(SizeF size) => size.Height;
     protected override float GetLength(SizeF size) => size.Width;

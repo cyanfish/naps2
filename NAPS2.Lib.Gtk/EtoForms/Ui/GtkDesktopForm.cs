@@ -95,7 +95,7 @@ public class GtkDesktopForm : DesktopForm
     {
         return L.Column(
             Eto.Forms.Gtk3Helpers.ToEto(_toolbar),
-            _listView.Control.YScale()
+            _listView.Control.Scale()
         ).Spacing(0);
     }
 

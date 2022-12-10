@@ -47,7 +47,7 @@ public class DownloadProgressForm : EtoDialogBase
             EtoPlatform.Current.FormatProgressBar(_totalProgressBar),
             EtoPlatform.Current.FormatProgressBar(_fileProgressBar),
             L.Row(
-                _fileStatus.XScale()
+                _fileStatus.Scale()
                     .Align(EtoPlatform.Current.IsWinForms ? LayoutAlignment.Center : LayoutAlignment.Leading),
                 C.Button(UiStrings.Cancel, Close)
             )

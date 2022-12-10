@@ -78,19 +78,19 @@ public class EditProfileForm : EtoDialogBase
         var driverElements = new List<LayoutElement>();
         if (PlatformCompat.System.IsWiaDriverSupported)
         {
-            driverElements.Add(_wiaDriver.XScale());
+            driverElements.Add(_wiaDriver.Scale());
         }
         if (PlatformCompat.System.IsTwainDriverSupported)
         {
-            driverElements.Add(_twainDriver.XScale());
+            driverElements.Add(_twainDriver.Scale());
         }
         if (PlatformCompat.System.IsAppleDriverSupported)
         {
-            driverElements.Add(_appleDriver.XScale());
+            driverElements.Add(_appleDriver.Scale());
         }
         if (PlatformCompat.System.IsSaneDriverSupported)
         {
-            driverElements.Add(_saneDriver.XScale());
+            driverElements.Add(_saneDriver.Scale());
         }
 
         Title = UiStrings.EditProfileFormTitle;
@@ -110,10 +110,10 @@ public class EditProfileForm : EtoDialogBase
                     C.Spacer(),
                     C.Label(UiStrings.DeviceLabel),
                     L.Row(
-                        _deviceName.XScale(),
+                        _deviceName.Scale(),
                         _chooseDevice
                     )
-                ).XScale(),
+                ).Scale(),
                 new ImageView { Image = Icons.scanner_48.ToEtoImage() }
             ),
             C.Spacer(),
@@ -132,7 +132,7 @@ public class EditProfileForm : EtoDialogBase
                     _resolution,
                     C.Label(UiStrings.BrightnessLabel),
                     _brightnessSlider
-                ).XScale(),
+                ).Scale(),
                 L.Column(
                     C.Label(UiStrings.BitDepthLabel),
                     _bitDepth,
@@ -142,7 +142,7 @@ public class EditProfileForm : EtoDialogBase
                     _scale,
                     C.Label(UiStrings.ContrastLabel),
                     _contrastSlider
-                ).XScale()
+                ).Scale()
             ),
             L.Row(
                 _enableAutoSave,

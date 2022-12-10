@@ -10,14 +10,14 @@ public class LayoutColumn : LayoutLine<LayoutRow>
     }
 
     public LayoutColumn(LayoutColumn original, Padding? padding = null, int? spacing = null, int? labelSpacing = null,
-        int? spacingAfter = null, bool? xScale = null, bool? aligned = null)
+        int? spacingAfter = null, bool? scale = null, bool? aligned = null)
         : base(original.Children)
     {
         Padding = padding ?? original.Padding;
         Spacing = spacing ?? original.Spacing;
         LabelSpacing = spacing ?? original.LabelSpacing;
         SpacingAfter = spacingAfter ?? original.SpacingAfter;
-        XScale = xScale ?? original.XScale;
+        Scale = scale ?? original.Scale;
         Aligned = aligned ?? original.Aligned;
     }
 
@@ -41,8 +41,6 @@ public class LayoutColumn : LayoutLine<LayoutRow>
         size.Width = Math.Max(size.Width, childSize.Width);
         return size;
     }
-
-    protected internal override bool DoesChildScale(LayoutElement child) => child.YScale;
 
     protected override int GetSpacingCore(int i, LayoutContext context)
     {

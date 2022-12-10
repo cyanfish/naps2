@@ -84,7 +84,7 @@ public class SliderWithTextBox
                     .Align(EtoPlatform.Current.IsWinForms ? LayoutAlignment.Leading : LayoutAlignment.Center)
                     .Padding(top: 2, bottom: 2)
                 : C.None(),
-            _slider.XScale(),
+            _slider.Scale(),
             _textBox.Width(EtoPlatform.Current.IsGtk ? 50 : 40)
                 .Align(EtoPlatform.Current.IsWinForms ? LayoutAlignment.Leading : LayoutAlignment.Center)
         );

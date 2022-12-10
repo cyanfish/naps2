@@ -22,15 +22,13 @@ public class ControlWithLayoutAttributes : LayoutElement
 
     public ControlWithLayoutAttributes(
         ControlWithLayoutAttributes control,
-        bool? xScale = null, bool? yScale = null,
-        Padding? padding = null, int? spacingAfter = null,
+        bool? scale = null, Padding? padding = null, int? spacingAfter = null,
         int? width = null, int? minWidth = null, int? maxWidth = null, int? naturalWidth = null,
         int? height = null, int? minHeight = null, int? maxHeight = null, int? naturalHeight = null,
         int? wrapDefaultWidth = null, LayoutAlignment? alignment = null, LayoutVisibility? visibility = null)
     {
         Control = control.Control;
-        XScale = xScale ?? control.XScale;
-        YScale = yScale ?? control.YScale;
+        Scale = scale ?? control.Scale;
         Padding = padding ?? control.Padding;
         SpacingAfter = spacingAfter ?? control.SpacingAfter;
         Width = width ?? control.Width;

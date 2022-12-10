@@ -69,7 +69,7 @@ public class AboutForm : EtoDialogBase
                     L.Column(
                         C.NoWrap(UiStrings.IconsFrom),
                         C.UrlLink(ICONS_HOMEPAGE)
-                    ).XScale(),
+                    ).Scale(),
                     L.Column(
                         C.Filler(),
                         C.DialogButton(this, UiStrings.OK, true, true)

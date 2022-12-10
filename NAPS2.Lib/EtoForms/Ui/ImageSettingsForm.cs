@@ -43,7 +43,7 @@ public class ImageSettingsForm : EtoDialogBase
         LayoutController.Content = L.Column(
             C.Label(UiStrings.DefaultFilePathLabel),
             L.Row(
-                _defaultFilePath.XScale().AlignCenter(),
+                _defaultFilePath.Scale().AlignCenter(),
                 _chooseFolder.Width(40).MaxHeight(22)
             ).SpacingAfter(2),
             _placeholders,

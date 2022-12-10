@@ -119,7 +119,7 @@ public static class C
     /// </summary>
     /// <returns></returns>
     public static ControlWithLayoutAttributes Filler() =>
-        new ControlWithLayoutAttributes(null).XScale().YScale();
+        new ControlWithLayoutAttributes(null).Scale();
 
     /// <summary>
     /// Creates a null placeholder for Eto layouts.

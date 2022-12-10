@@ -9,11 +9,10 @@ public class LayoutOverlay : LayoutElement
         Children = ExpandChildren(children);
     }
 
-    public LayoutOverlay(LayoutOverlay original, bool? xScale = null, bool? yScale = null, int? spacingAfter = null)
+    public LayoutOverlay(LayoutOverlay original, bool? scale = null, int? spacingAfter = null)
     {
         Children = original.Children;
-        XScale = xScale ?? original.XScale;
-        YScale = yScale ?? original.YScale;
+        Scale = scale ?? original.Scale;
         SpacingAfter = spacingAfter ?? original.SpacingAfter;
     }
 

@@ -50,10 +50,10 @@ public class OcrDownloadForm : EtoDialogBase
             C.Label(UiStrings.OcrDownloadSummaryText),
             C.Spacer(),
             C.Label(UiStrings.OcrSelectLanguageLabel),
-            _languageList.Control.YScale(),
+            _languageList.Control.Scale(),
             C.Spacer(),
             L.Row(
-                _downloadSize.XScale().AlignCenter(),
+                _downloadSize.Scale().AlignCenter(),
                 _downloadButton,
                 C.CancelButton(this)
             )

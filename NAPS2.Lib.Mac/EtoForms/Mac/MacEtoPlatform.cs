@@ -81,7 +81,7 @@ public class MacEtoPlatform : EtoPlatform
         return L.Overlay(
             L.Column(
                 titleLabel.Padding(top: 8).SpacingAfter(6),
-                groupBox.YScale()
+                groupBox.Scale()
             ),
             L.Buffer(content, 6, 32, 6, 6)
         );

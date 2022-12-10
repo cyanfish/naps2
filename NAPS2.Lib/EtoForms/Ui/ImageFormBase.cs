@@ -34,7 +34,7 @@ public abstract class ImageFormBase : EtoDialogBase
         }
 
         LayoutController.Content = L.Column(
-            Overlay.YScale(),
+            Overlay.Scale(),
             CreateControls(),
             SelectedImages is { Count: > 1 } ? _applyToSelected : C.None(),
             L.Row(
