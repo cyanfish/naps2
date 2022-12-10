@@ -130,10 +130,11 @@ public abstract class LayoutLine<TOrthogonal> : LayoutContainer
         // sizes and scaling directly without any special alignment constraints.
         cellLengths = new List<float>();
         cellScaling = new List<bool>();
+        var lengthChildContext = childContext with { IsCellLengthQuery = true };
         foreach (var child in Children)
         {
-            cellLengths.Add(GetLength(child.GetPreferredSize(childContext, bounds)));
-            cellScaling.Add(DoesChildScale(child));
+            cellLengths.Add(GetLength(child.GetPreferredSize(lengthChildContext, bounds)));
+            cellScaling.Add(child.IsVisible && DoesChildScale(child));
         }
     }
 

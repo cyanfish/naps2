@@ -75,7 +75,7 @@ public class LayoutController
         {
             return;
         }
-        var context = GetLayoutContext() with { Window = _window };
+        var context = GetLayoutContext() with { Window = _window, IsLayout = true };
         _firstLayout = false;
         if (LayoutElement.DEBUG_LAYOUT)
         {

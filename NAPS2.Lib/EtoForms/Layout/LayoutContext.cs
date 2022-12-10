@@ -12,9 +12,13 @@ public record LayoutContext(Control Layout)
 
     public List<bool>? CellScaling { get; init; }
 
+    public bool IsLayout { get; init; }
+
     public bool IsFirstLayout { get; init; }
 
     public bool IsNaturalSizeQuery { get; init; }
+
+    public bool IsCellLengthQuery { get; set; }
 
     public int Depth { get; init; }
 

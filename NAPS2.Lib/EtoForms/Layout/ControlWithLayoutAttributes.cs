@@ -96,9 +96,9 @@ public class ControlWithLayoutAttributes : LayoutElement
         if (Control != null)
         {
             EnsureIsAdded(context);
-            if (WrapDefaultWidth is { } width)
+            if (WrapDefaultWidth is { } wrapDefaultWidth)
             {
-                size = EtoPlatform.Current.GetWrappedSize(Control, width);
+                size = GetWrappedSize(context, parentBounds, wrapDefaultWidth);
             }
             else
             {
@@ -107,6 +107,33 @@ public class ControlWithLayoutAttributes : LayoutElement
         }
         size = UpdateFixedDimensions(context, size);
         return new SizeF(size.Width + Padding.Horizontal, size.Height + Padding.Vertical);
+    }
+
+    private SizeF GetWrappedSize(LayoutContext context, RectangleF parentBounds, int wrapDefaultWidth)
+    {
+        if (Control == null) throw new InvalidOperationException();
+        // Label wrapping is fairly complicated.
+        if (!context.IsLayout)
+        {
+            // If we're not in a layout operation (i.e. we're getting a minimum or default form size), the
+            // measured size should be based on the default width for wrapping.
+            // This produces the label width (if small) or the default width (if long enough to wrap).
+            return EtoPlatform.Current.GetWrappedSize(Control, wrapDefaultWidth);
+        }
+        if (context.IsCellLengthQuery)
+        {
+            // If we're measuring the size for a layout cell, we want the width to be the "real" width, and the
+            // height to be the maximum height needed (i.e. the height when at the default wrapping width).
+            // This ensures the cell height doesn't change as we changed the form width, which would otherwise
+            // cause other controls to shift around vertically as we resize the form horizontally, which is not
+            // usually what we want.
+            return new SizeF(
+                EtoPlatform.Current.GetWrappedSize(Control, (int) parentBounds.Width).Width,
+                EtoPlatform.Current.GetWrappedSize(Control, wrapDefaultWidth).Height);
+        }
+        // Now that we've handled the special cases, this measures the real dimensions of the label given
+        // the parent bounds. In a layout cell, this ensures we align correctly (e.g. centered vertically).
+        return EtoPlatform.Current.GetWrappedSize(Control, (int) parentBounds.Width);
     }
 
     private SizeF UpdateFixedDimensions(LayoutContext context, SizeF size)

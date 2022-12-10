@@ -13,9 +13,20 @@ public class LayoutVisibility
     {
         get => _isVisible; set
         {
-            _isVisible = value;
-            IsVisibleChanged?.Invoke(this, EventArgs.Empty);
+            if (_isVisible != value)
+            {
+                _isVisible = value;
+                IsVisibleChanged?.Invoke(this, EventArgs.Empty);
+            }
         }
+    }
+
+    public static LayoutVisibility operator !(LayoutVisibility value)
+    {
+        var negation = new LayoutVisibility(!value.IsVisible);
+        value.IsVisibleChanged += (_, _) => negation.IsVisible = !value.IsVisible;
+        negation.IsVisibleChanged += (_, _) => value.IsVisible = !negation.IsVisible;
+        return negation;
     }
 
     public event EventHandler? IsVisibleChanged;
