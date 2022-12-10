@@ -16,7 +16,7 @@ public abstract class EtoDialogBase : Dialog, IFormBase
         Resizable = true;
         ShowInTaskbar = true;
         LayoutController.Bind(this);
-        LayoutController.ContentSet += (_, _) => FormStateController.UpdateLayoutSize(LayoutController);
+        LayoutController.Invalidated += (_, _) => FormStateController.UpdateLayoutSize(LayoutController);
     }
 
     // TODO: PR for Eto to integrate this

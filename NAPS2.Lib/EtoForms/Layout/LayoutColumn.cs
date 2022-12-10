@@ -44,13 +44,13 @@ public class LayoutColumn : LayoutLine<LayoutRow>
 
     protected internal override bool DoesChildScale(LayoutElement child) => child.YScale;
 
-    protected override int GetSpacing(int i, LayoutContext context)
+    protected override int GetSpacingCore(int i, LayoutContext context)
     {
         if (i < Children.Length - 1 && Children[i] is ControlWithLayoutAttributes { Control: Label })
         {
             return Children[i].SpacingAfter ?? LabelSpacing ?? context.DefaultLabelSpacing;
         }
-        return base.GetSpacing(i, context);
+        return base.GetSpacingCore(i, context);
     }
 
     protected override float GetBreadth(SizeF size) => size.Width;

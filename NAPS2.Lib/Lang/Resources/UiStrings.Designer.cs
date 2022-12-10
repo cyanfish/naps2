@@ -672,6 +672,15 @@ namespace NAPS2.Lang.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Error.
+        /// </summary>
+        internal static string ErrorFormTitle {
+            get {
+                return ResourceManager.GetString("ErrorFormTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Estimated download size: {0} MB.
         /// </summary>
         internal static string EstimatedDownloadSize {
@@ -1478,6 +1487,15 @@ namespace NAPS2.Lang.Resources {
         internal static string SubjectLabel {
             get {
                 return ResourceManager.GetString("SubjectLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Technical Details.
+        /// </summary>
+        internal static string TechnicalDetails {
+            get {
+                return ResourceManager.GetString("TechnicalDetails", resourceCulture);
             }
         }
         

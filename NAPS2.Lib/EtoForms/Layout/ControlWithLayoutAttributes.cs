@@ -26,7 +26,7 @@ public class ControlWithLayoutAttributes : LayoutElement
         Padding? padding = null, int? spacingAfter = null,
         int? width = null, int? minWidth = null, int? maxWidth = null, int? naturalWidth = null,
         int? height = null, int? minHeight = null, int? maxHeight = null, int? naturalHeight = null,
-        int? wrapDefaultWidth = null, LayoutAlignment? alignment = null)
+        int? wrapDefaultWidth = null, LayoutAlignment? alignment = null, LayoutVisibility? visibility = null)
     {
         Control = control.Control;
         XScale = xScale ?? control.XScale;
@@ -43,6 +43,7 @@ public class ControlWithLayoutAttributes : LayoutElement
         NaturalHeight = naturalHeight ?? control.NaturalHeight;
         WrapDefaultWidth = wrapDefaultWidth ?? control.WrapDefaultWidth;
         Alignment = alignment ?? control.Alignment;
+        Visibility = visibility ?? control.Visibility;
     }
 
     public static implicit operator ControlWithLayoutAttributes(Control control) =>
@@ -87,6 +88,11 @@ public class ControlWithLayoutAttributes : LayoutElement
     public override SizeF GetPreferredSize(LayoutContext context, RectangleF parentBounds)
     {
         var size = SizeF.Empty;
+        if (!IsVisible)
+        {
+            EnsureIsAdded(context);
+            return size;
+        }
         if (Control != null)
         {
             EnsureIsAdded(context);
@@ -143,10 +149,15 @@ public class ControlWithLayoutAttributes : LayoutElement
     private void EnsureIsAdded(LayoutContext context)
     {
         if (Control == null) return;
+        Control.Visible = IsVisible;
         if (context.IsFirstLayout && !_isAdded)
         {
             EtoPlatform.Current.AddToContainer(context.Layout, Control, context.InOverlay);
             _isAdded = true;
+            if (Visibility != null)
+            {
+                Visibility.IsVisibleChanged += (_, _) => context.Invalidate();
+            }
         }
         if (context.IsFirstLayout && !_isWindowSet && context.Window != null)
         {

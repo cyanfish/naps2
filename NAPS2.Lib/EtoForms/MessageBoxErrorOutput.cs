@@ -1,14 +1,15 @@
 ﻿using Eto.Forms;
+using NAPS2.EtoForms.Ui;
 
 namespace NAPS2.EtoForms;
 
 public class MessageBoxErrorOutput : ErrorOutput
 {
-    private readonly DialogHelper _dialogHelper;
+    private readonly IFormFactory _formFactory;
 
-    public MessageBoxErrorOutput(DialogHelper dialogHelper)
+    public MessageBoxErrorOutput(IFormFactory formFactory)
     {
-        _dialogHelper = dialogHelper;
+        _formFactory = formFactory;
     }
 
     public override void DisplayError(string errorMessage)
@@ -25,15 +26,12 @@ public class MessageBoxErrorOutput : ErrorOutput
     {
         Invoker.Current.SafeInvoke(() => ShowErrorWithDetails(errorMessage, exception.ToString()));
     }
+
     private void ShowErrorWithDetails(string errorMessage, string details)
     {
-        // TODO: Migrate error form
-        MessageBox.Show(errorMessage, MessageBoxType.Error);
-        // var form = new FError
-        // {
-        //     ErrorMessage = errorMessage,
-        //     Details = details
-        // };
-        // form.ShowDialog();
+        var form = _formFactory.Create<ErrorForm>();
+        form.ErrorMessage = errorMessage;
+        form.Details = details;
+        form.ShowModal();
     }
 }

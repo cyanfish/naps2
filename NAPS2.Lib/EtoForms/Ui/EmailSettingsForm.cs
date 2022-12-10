@@ -91,7 +91,7 @@ public class EmailSettingsForm : EtoDialogBase
                 _provider.Text = SettingsResources.EmailProvider_NotSelected;
                 break;
         }
-        LayoutController.DoLayout();
+        LayoutController.Invalidate();
     }
 
     private void Save()

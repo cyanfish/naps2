@@ -55,9 +55,18 @@ public abstract class LayoutLine<TOrthogonal> : LayoutContainer
         }
     }
 
-    protected virtual int GetSpacing(int i, LayoutContext context)
+    private int GetSpacing(int i, LayoutContext context)
     {
-        if (i == Children.Length - 1) return 0;
+        if (Children.Skip(i + 1).All(child => !child.IsVisible))
+        {
+            return 0;
+        }
+        if (!Children[i].IsVisible) return 0;
+        return GetSpacingCore(i, context);
+    }
+
+    protected virtual int GetSpacingCore(int i, LayoutContext context)
+    {
         return Children[i].SpacingAfter ?? Spacing ?? context.DefaultSpacing;
     }
 
@@ -111,19 +120,20 @@ public abstract class LayoutLine<TOrthogonal> : LayoutContainer
     {
         // If this line is supposed to be aligned with adjacent lines (e.g. 2 rows in a parent column or vice versa),
         // then our parent will have pre-calculated our cell sizes and scaling for us.
-        cellLengths = Aligned ? context.CellLengths : null;
-        cellScaling = Aligned ? context.CellScaling : null;
+        if (Aligned && context.CellLengths != null && context.CellScaling != null)
+        {
+            cellLengths = context.CellLengths;
+            cellScaling = context.CellScaling;
+            return;
+        }
         // If we aren't aligned or we don't have a parent to do that pre-calculation, then we just determine our cell
         // sizes and scaling directly without any special alignment constraints.
-        if (cellLengths == null || cellScaling == null)
+        cellLengths = new List<float>();
+        cellScaling = new List<bool>();
+        foreach (var child in Children)
         {
-            cellLengths = new List<float>();
-            cellScaling = new List<bool>();
-            foreach (var child in Children)
-            {
-                cellLengths.Add(GetLength(child.GetPreferredSize(childContext, bounds)));
-                cellScaling.Add(DoesChildScale(child));
-            }
+            cellLengths.Add(GetLength(child.GetPreferredSize(childContext, bounds)));
+            cellScaling.Add(DoesChildScale(child));
         }
     }
 

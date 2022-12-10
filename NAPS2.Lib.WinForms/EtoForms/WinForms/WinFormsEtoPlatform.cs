@@ -147,8 +147,11 @@ public class WinFormsEtoPlatform : EtoPlatform
     {
         if (control.ControlObject is wf.Label label)
         {
-            label.AutoSize = false;
-            label.Width = 0;
+            if (!control.ParentWindow.Loaded)
+            {
+                label.AutoSize = false;
+                label.Width = 0;
+            }
             return label.GetPreferredSize(new sd.Size(defaultWidth, 0)).ToEto();
         }
         return base.GetWrappedSize(control, defaultWidth);

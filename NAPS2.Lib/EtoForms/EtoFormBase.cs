@@ -14,7 +14,7 @@ public abstract class EtoFormBase : Form, IFormBase
         FormStateController = new FormStateController(this, config);
         Resizable = true;
         LayoutController.Bind(this);
-        LayoutController.ContentSet += (_, _) => FormStateController.UpdateLayoutSize(LayoutController);
+        LayoutController.Invalidated += (_, _) => FormStateController.UpdateLayoutSize(LayoutController);
     }
 
     public FormStateController FormStateController { get; }

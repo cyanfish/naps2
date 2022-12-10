@@ -11,6 +11,7 @@ public class LayoutController
     private Window? _window;
     private bool _firstLayout = true;
     private bool _isShown;
+    private bool _layoutQueued;
 
     public LayoutElement? Content
     {
@@ -22,7 +23,7 @@ public class LayoutController
             DoLayout();
             if (setting)
             {
-                ContentSet?.Invoke(this, EventArgs.Empty);
+                Invalidated?.Invoke(this, EventArgs.Empty);
             }
         }
     }
@@ -55,9 +56,17 @@ public class LayoutController
         return naturalSize;
     }
 
-    public void DoLayout()
+    public void Invalidate()
     {
-        if (_window == null || _content == null || !_isShown) return;
+        _layoutQueued = true;
+        Invalidated?.Invoke(this, EventArgs.Empty);
+        _layoutQueued = false;
+        DoLayout();
+    }
+
+    private void DoLayout()
+    {
+        if (_window == null || _content == null || !_isShown || _layoutQueued) return;
         // TODO: Handle added/removed things
         var size = EtoPlatform.Current.GetClientSize(_window);
         int p = RootPadding;
@@ -82,9 +91,10 @@ public class LayoutController
         {
             DefaultSpacing = DefaultSpacing,
             DefaultLabelSpacing = DefaultLabelSpacing,
-            IsFirstLayout = _firstLayout
+            IsFirstLayout = _firstLayout,
+            Invalidate = Invalidate
         };
     }
 
-    public event EventHandler? ContentSet;
+    public event EventHandler? Invalidated;
 }

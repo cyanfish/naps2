@@ -4,6 +4,7 @@ using NAPS2.EtoForms.Layout;
 
 namespace NAPS2.EtoForms;
 
+// TODO: Verify all the size handling works correctly with maximized forms.
 public class FormStateController
 {
     private readonly Window _window;
@@ -46,10 +47,27 @@ public class FormStateController
         if (AutoLayoutSize)
         {
             _minimumClientSize = layoutController.GetLayoutSize(false);
+            var oldDefaultClientSize = DefaultClientSize;
+            var oldMaximumClientSize = _maximumClientSize;
             DefaultClientSize = layoutController.GetLayoutSize(true) + DefaultExtraLayoutSize;
-            if (FixedHeightLayout)
+            _maximumClientSize = FixedHeightLayout ? new Size(0, _minimumClientSize.Height) : Size.Empty;
+
+            if (_loaded)
             {
-                _maximumClientSize = new Size(0, _minimumClientSize.Height);
+                // Dynamic re-sizing because the layout contents have changed (not just a normal resize/maximize etc).
+                var size = EtoPlatform.Current.GetClientSize(_window);
+                if (oldMaximumClientSize.Height > 0)
+                {
+                    size.Height = Math.Min(size.Height, oldMaximumClientSize.Height);
+                }
+                size += DefaultClientSize - oldDefaultClientSize;
+                size = Size.Max(size, _minimumClientSize);
+                if (_maximumClientSize.Height > 0)
+                {
+                    size.Height = Math.Min(size.Height, _maximumClientSize.Height);
+                }
+                EtoPlatform.Current.SetMinimumClientSize(_window, _minimumClientSize);
+                EtoPlatform.Current.SetClientSize(_window, size);
             }
         }
     }

@@ -636,4 +636,10 @@
   <data name="WaitingForAuthorization" xml:space="preserve">
     <value>Waiting for authorization...</value>
   </data>
+  <data name="ErrorFormTitle" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="TechnicalDetails" xml:space="preserve">
+    <value>Technical Details</value>
+  </data>
 </root>

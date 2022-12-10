@@ -71,6 +71,8 @@ public static class EtoLayoutExtensions
         new ControlWithLayoutAttributes(control, padding: new Padding(all));
     public static ControlWithLayoutAttributes Padding(this Control control, int left = 0, int top = 0, int right = 0, int bottom = 0) =>
         new ControlWithLayoutAttributes(control, padding: new Padding(left, top, right, bottom));
+    public static ControlWithLayoutAttributes Visible(this Control control, LayoutVisibility visibility) =>
+        new ControlWithLayoutAttributes(control, visibility: visibility);
 
     public static ControlWithLayoutAttributes Wrap(this Label label, int defaultWidth)
     {
@@ -90,6 +92,12 @@ public static class EtoLayoutExtensions
         new ControlWithLayoutAttributes(control, minHeight: minHeight);
     public static ControlWithLayoutAttributes MaxHeight(this ControlWithLayoutAttributes control, int maxHeight) =>
         new ControlWithLayoutAttributes(control, maxHeight: maxHeight);
+    public static ControlWithLayoutAttributes NaturalSize(this ControlWithLayoutAttributes control, int width, int height) =>
+        new ControlWithLayoutAttributes(control, naturalWidth: width, naturalHeight: height);
+    public static ControlWithLayoutAttributes NaturalWidth(this ControlWithLayoutAttributes control, int width) =>
+        new ControlWithLayoutAttributes(control, naturalWidth: width);
+    public static ControlWithLayoutAttributes NaturalHeight(this ControlWithLayoutAttributes control, int height) =>
+        new ControlWithLayoutAttributes(control, naturalHeight: height);
     public static ControlWithLayoutAttributes XScale(this ControlWithLayoutAttributes control) =>
         new ControlWithLayoutAttributes(control, xScale: true);
     public static ControlWithLayoutAttributes YScale(this ControlWithLayoutAttributes control) =>
@@ -110,6 +118,8 @@ public static class EtoLayoutExtensions
         new ControlWithLayoutAttributes(control, padding: new Padding(all));
     public static ControlWithLayoutAttributes Padding(this ControlWithLayoutAttributes control, int left = 0, int top = 0, int right = 0, int bottom = 0) =>
         new ControlWithLayoutAttributes(control, padding: new Padding(left, top, right, bottom));
+    public static ControlWithLayoutAttributes Visible(this ControlWithLayoutAttributes control, LayoutVisibility visibility) =>
+        new ControlWithLayoutAttributes(control, visibility: visibility);
 
     public static LayoutColumn Padding(this LayoutColumn column, Padding padding) =>
         new LayoutColumn(column, padding: padding);

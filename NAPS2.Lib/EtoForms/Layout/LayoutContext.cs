@@ -21,4 +21,6 @@ public record LayoutContext(Control Layout)
     public Window? Window { get; init; }
 
     public bool InOverlay { get; init; }
+
+    public Action Invalidate { get; init; }
 }
