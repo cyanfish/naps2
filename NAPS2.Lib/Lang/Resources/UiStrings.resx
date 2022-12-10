@@ -642,4 +642,10 @@
   <data name="TechnicalDetails" xml:space="preserve">
     <value>Technical Details</value>
   </data>
+  <data name="PdfPasswordFormTitle" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="EncryptedFilePrompt" xml:space="preserve">
+    <value>The following file is encrypted and requires a password to open:</value>
+  </data>
 </root>

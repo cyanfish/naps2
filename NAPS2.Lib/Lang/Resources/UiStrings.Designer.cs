@@ -654,6 +654,15 @@ namespace NAPS2.Lang.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The following file is encrypted and requires a password to open:.
+        /// </summary>
+        internal static string EncryptedFilePrompt {
+            get {
+                return ResourceManager.GetString("EncryptedFilePrompt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Encryption.
         /// </summary>
         internal static string Encryption {
@@ -1055,6 +1064,15 @@ namespace NAPS2.Lang.Resources {
         internal static string Paste {
             get {
                 return ResourceManager.GetString("Paste", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Password.
+        /// </summary>
+        internal static string PdfPasswordFormTitle {
+            get {
+                return ResourceManager.GetString("PdfPasswordFormTitle", resourceCulture);
             }
         }
         

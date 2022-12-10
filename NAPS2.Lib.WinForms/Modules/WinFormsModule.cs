@@ -5,7 +5,6 @@ using NAPS2.EtoForms.Ui;
 using NAPS2.EtoForms.WinForms;
 using NAPS2.ImportExport;
 using NAPS2.ImportExport.Pdf;
-using NAPS2.Platform.Windows;
 using NAPS2.Scan;
 using NAPS2.Scan.Batch;
 using NAPS2.Update;
@@ -17,13 +16,14 @@ public class WinFormsModule : Module
 {
     protected override void Load(ContainerBuilder builder)
     {
+        // TODO: Move common registrations (between WinForms/Mac/Gtk) to a GuiModule
         builder.RegisterType<BatchScanPerformer>().As<IBatchScanPerformer>();
-        builder.RegisterType<WinFormsPdfPasswordProvider>().As<IPdfPasswordProvider>();
         builder.RegisterType<MessageBoxErrorOutput>().As<ErrorOutput>();
         builder.RegisterType<EtoOverwritePrompt>().As<IOverwritePrompt>();
         builder.RegisterType<EtoOperationProgress>().As<OperationProgress>().SingleInstance();
         builder.RegisterType<EtoDialogHelper>().As<DialogHelper>();
         builder.RegisterType<EtoDevicePrompt>().As<IDevicePrompt>();
+        builder.RegisterType<EtoPdfPasswordProvider>().As<IPdfPasswordProvider>();
         builder.RegisterType<NotificationManager>().As<INotificationManager>().SingleInstance();
         builder.Register<ISaveNotify>(ctx => ctx.Resolve<INotificationManager>());
         builder.RegisterType<PrintDocumentPrinter>().As<IScannedImagePrinter>();

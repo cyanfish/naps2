@@ -22,6 +22,7 @@ public class GtkModule : Module
         builder.RegisterType<EtoOperationProgress>().As<OperationProgress>().SingleInstance();
         builder.RegisterType<EtoDialogHelper>().As<DialogHelper>();
         builder.RegisterType<EtoDevicePrompt>().As<IDevicePrompt>();
+        builder.RegisterType<EtoPdfPasswordProvider>().As<IPdfPasswordProvider>();
         builder.RegisterType<StubNotificationManager>().As<INotificationManager>().SingleInstance();
         builder.Register<ISaveNotify>(ctx => ctx.Resolve<INotificationManager>());
         builder.RegisterType<StubScannedImagePrinter>().As<IScannedImagePrinter>();
