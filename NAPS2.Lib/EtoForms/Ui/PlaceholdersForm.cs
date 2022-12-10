@@ -7,15 +7,7 @@ namespace NAPS2.EtoForms.Ui;
 
 public class PlaceholdersForm : EtoDialogBase
 {
-    private readonly TextBox _fileName = new();
-    private readonly Label _preview = new() { Text = " " };
-
-    public PlaceholdersForm(Naps2Config config) : base(config)
-    {
-        Title = UiStrings.PlaceholdersFormTitle;
-
-        var placeholders = new (string val, string text)[]
-        {
+    private static readonly (string val, string text)[] PlaceholderButtons = {
             (Placeholders.YEAR_4_DIGITS, UiStrings.Year4Digit),
             (Placeholders.YEAR_2_DIGITS, UiStrings.Year2Digit),
             (Placeholders.MONTH_2_DIGITS, UiStrings.Month2Digit),
@@ -29,12 +21,23 @@ public class PlaceholdersForm : EtoDialogBase
             (Placeholders.NUMBER_1_DIGIT, UiStrings.AutoIncrementing1Digit)
         };
 
+    private readonly TextBox _fileName = new();
+    private readonly Label _preview = new() { Text = " " };
+
+    public PlaceholdersForm(Naps2Config config) : base(config)
+    {
         // TODO: Ellipsis aren't working, presumably because Eto uses custom label rendering on WinForms
         EtoPlatform.Current.ConfigureEllipsis(_preview);
         _fileName.TextChanged += FileName_TextChanged;
+    }
+
+    protected override void BuildLayout()
+    {
+        Title = UiStrings.PlaceholdersFormTitle;
 
         FormStateController.DefaultExtraLayoutSize = new Size(60, 0);
         FormStateController.FixedHeightLayout = true;
+
         LayoutController.Content = L.Column(
             C.Label(UiStrings.FileNameLabel),
             _fileName,
@@ -49,7 +52,7 @@ public class PlaceholdersForm : EtoDialogBase
             L.GroupBox(
                 UiStrings.Placeholders,
                 L.Column(
-                    placeholders.Select(x => L.Row(
+                    PlaceholderButtons.Select(x => L.Row(
                         C.Button(x.val, () => Add(x.val)),
                         C.Label(x.text)
                     )).Expand(),

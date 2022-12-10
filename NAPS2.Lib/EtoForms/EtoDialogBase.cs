@@ -19,6 +19,14 @@ public abstract class EtoDialogBase : Dialog, IFormBase
         LayoutController.Invalidated += (_, _) => FormStateController.UpdateLayoutSize(LayoutController);
     }
 
+    protected abstract void BuildLayout();
+
+    protected override void OnPreLoad(EventArgs e)
+    {
+        BuildLayout();
+        base.OnPreLoad(e);
+    }
+
     // TODO: PR for Eto to integrate this
     public new Icon Icon
     {

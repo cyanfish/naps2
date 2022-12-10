@@ -28,15 +28,19 @@ public class DownloadProgressForm : EtoDialogBase
 
     public DownloadProgressForm(Naps2Config config) : base(config)
     {
-        FormStateController.RestoreFormState = false;
-        Title = UiStrings.DownloadProgressFormTitle;
-        Icon = new Icon(1f, Icons.text_small.ToEtoImage());
-
         // TODO: Is this needed for net462?
         ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
 
         _client.DownloadFileCompleted += client_DownloadFileCompleted;
         _client.DownloadProgressChanged += client_DownloadProgressChanged;
+    }
+
+    protected override void BuildLayout()
+    {
+        Title = UiStrings.DownloadProgressFormTitle;
+        Icon = new Icon(1f, Icons.text_small.ToEtoImage());
+
+        FormStateController.RestoreFormState = false;
 
         LayoutController.Content = L.Column(
             _totalStatus,

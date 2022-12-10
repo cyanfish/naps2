@@ -17,6 +17,14 @@ public abstract class EtoFormBase : Form, IFormBase
         LayoutController.Invalidated += (_, _) => FormStateController.UpdateLayoutSize(LayoutController);
     }
 
+    protected abstract void BuildLayout();
+
+    protected override void OnPreLoad(EventArgs e)
+    {
+        BuildLayout();
+        base.OnPreLoad(e);
+    }
+
     public FormStateController FormStateController { get; }
 
     public LayoutController LayoutController { get; } = new();

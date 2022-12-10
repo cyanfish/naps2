@@ -22,8 +22,29 @@ public abstract class ImageFormBase : EtoDialogBase
         _thumbnailController = thumbnailController;
         _revert.Click += Revert;
         _renderThrottle = new RefreshThrottle(RenderImage);
-        FormStateController.DefaultExtraLayoutSize = new Size(400, 400);
         Overlay.Paint += PaintOverlay;
+        FormStateController.DefaultExtraLayoutSize = new Size(400, 400);
+    }
+
+    protected override void BuildLayout()
+    {
+        foreach (var slider in Sliders)
+        {
+            slider.ValueChanged += UpdatePreviewBox;
+        }
+
+        LayoutController.Content = L.Column(
+            Overlay.YScale(),
+            CreateControls(),
+            SelectedImages is { Count: > 1 } ? _applyToSelected : C.None(),
+            L.Row(
+                _revert,
+                C.Filler(),
+                L.OkCancel(
+                    C.OkButton(this, beforeClose: Apply),
+                    C.CancelButton(this))
+            )
+        );
     }
 
     protected int ImageHeight { get; set; }
@@ -131,29 +152,6 @@ public abstract class ImageFormBase : EtoDialogBase
 
     protected virtual void TransformSaved()
     {
-    }
-
-    protected override void OnPreLoad(EventArgs e)
-    {
-        foreach (var slider in Sliders)
-        {
-            slider.ValueChanged += UpdatePreviewBox;
-        }
-
-        LayoutController.Content = L.Column(
-            Overlay.YScale(),
-            CreateControls(),
-            SelectedImages is { Count: > 1 } ? _applyToSelected : C.None(),
-            L.Row(
-                _revert,
-                C.Filler(),
-                L.OkCancel(
-                    C.OkButton(this, beforeClose: Apply),
-                    C.CancelButton(this))
-            )
-        );
-
-        base.OnPreLoad(e);
     }
 
     protected override void OnLoad(EventArgs e)

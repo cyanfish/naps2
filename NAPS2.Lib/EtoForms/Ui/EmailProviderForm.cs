@@ -24,8 +24,6 @@ public class EmailProviderForm : EtoDialogBase
         _systemEmailClients = systemEmailClients;
         _gmailOauthProvider = gmailOauthProvider;
         _outlookWebOauthProvider = outlookWebOauthProvider;
-        Title = UiStrings.EmailProviderFormTitle;
-        Icon = new Icon(1f, Icons.email_small.ToEtoImage());
 
         _providerWidgets = new List<EmailProviderWidget>();
 #if NET6_0_OR_GREATER
@@ -93,8 +91,15 @@ public class EmailProviderForm : EtoDialogBase
             _providerWidgets.Remove(defaultWidget);
             _providerWidgets.Insert(0, defaultWidget);
         }
+    }
+
+    protected override void BuildLayout()
+    {
+        Title = UiStrings.EmailProviderFormTitle;
+        Icon = new Icon(1f, Icons.email_small.ToEtoImage());
 
         FormStateController.FixedHeightLayout = true;
+
         LayoutController.DefaultSpacing = 0;
         LayoutController.Content = L.Column(
             _providerWidgets.Select(x => C.Button(new ActionCommand(x.ClickAction)

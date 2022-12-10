@@ -5,6 +5,7 @@ namespace NAPS2.EtoForms.Ui;
 
 public class ErrorForm : EtoDialogBase
 {
+    private readonly ImageView _image = new() { Image = Icons.exclamation.ToEtoImage() };
     private readonly Label _message = new();
     private readonly TextArea _details = new() { ReadOnly = true };
     private readonly LayoutVisibility _detailsVisibility = new(false);
@@ -12,15 +13,18 @@ public class ErrorForm : EtoDialogBase
     public ErrorForm(Naps2Config config)
         : base(config)
     {
+    }
+
+    protected override void BuildLayout()
+    {
         Title = UiStrings.ErrorFormTitle;
+
         FormStateController.RestoreFormState = false;
-
-        var image = new ImageView { Image = Icons.exclamation.ToEtoImage() };
-
         FormStateController.FixedHeightLayout = true;
+
         LayoutController.Content = L.Column(
             L.Row(
-                image.AlignCenter().Padding(right: 5),
+                _image.AlignCenter().Padding(right: 5),
                 _message.Wrap(350).NaturalWidth(350).AlignCenter().XScale()
             ),
             L.Row(

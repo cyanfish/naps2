@@ -11,24 +11,24 @@ public class RecoverForm : EtoDialogBase
 
     public RecoverForm(Naps2Config config) : base(config)
     {
-        FormStateController.SaveFormState = false;
-        FormStateController.RestoreFormState = false;
-
-        Title = UiStrings.RecoverFormTitle;
-        // FormStateController.Resizable = false;
     }
 
-    protected override void OnPreLoad(EventArgs e)
+    protected override void BuildLayout()
     {
+        Title = UiStrings.RecoverFormTitle;
+
+        FormStateController.SaveFormState = false;
+        FormStateController.RestoreFormState = false;
+        // FormStateController.Resizable = false;
+
         var recoverButton = C.DialogButton(this, UiStrings.Recover,
             beforeClose: () => SelectedAction = RecoverAction.Recover);
         var deleteButton = C.DialogButton(this, UiStrings.Delete,
             beforeClose: () => SelectedAction = RecoverAction.Delete);
         var notNowButton = C.CancelButton(this, UiStrings.NotNow);
 
-        MinimumSize = new Size(350, 0);
         LayoutController.Content = L.Column(
-            _prompt.Wrap(400),
+            _prompt.Wrap(400).MinWidth(300),
             C.Filler(),
             L.Row(
                 recoverButton.XScale().Height(32),
@@ -36,7 +36,6 @@ public class RecoverForm : EtoDialogBase
                 notNowButton.XScale().Height(32)
             )
         );
-        base.OnPreLoad(e);
     }
 
     public RecoverAction SelectedAction { get; private set; }

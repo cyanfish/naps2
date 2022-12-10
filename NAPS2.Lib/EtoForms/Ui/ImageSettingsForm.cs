@@ -22,8 +22,6 @@ public class ImageSettingsForm : EtoDialogBase
     public ImageSettingsForm(Naps2Config config, DialogHelper dialogHelper) : base(config)
     {
         _dialogHelper = dialogHelper;
-        Title = UiStrings.ImageSettingsFormTitle;
-        Icon = new Icon(1f, Icons.picture_small.ToEtoImage());
 
         UpdateValues(Config);
         UpdateEnabled();
@@ -32,9 +30,16 @@ public class ImageSettingsForm : EtoDialogBase
         _defaultFilePath.TextChanged += DefaultFilePath_TextChanged;
         _placeholders.Click += Placeholders_Click;
         _chooseFolder.Click += ChooseFolder_Click;
+    }
+
+    protected override void BuildLayout()
+    {
+        Title = UiStrings.ImageSettingsFormTitle;
+        Icon = new Icon(1f, Icons.picture_small.ToEtoImage());
 
         FormStateController.DefaultExtraLayoutSize = new Size(60, 0);
         FormStateController.FixedHeightLayout = true;
+
         LayoutController.Content = L.Column(
             C.Label(UiStrings.DefaultFilePathLabel),
             L.Row(

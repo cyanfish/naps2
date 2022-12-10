@@ -19,12 +19,15 @@ public class ProgressForm : EtoDialogBase
 
     public ProgressForm(Naps2Config config) : base(config)
     {
-        FormStateController.RestoreFormState = false;
-
         _cancel.Click += Cancel_Click;
         _runInBg.Click += RunInBg_Click;
 
         Size = new Size();
+    }
+
+    protected override void BuildLayout()
+    {
+        FormStateController.RestoreFormState = false;
 
         LayoutController.Content = L.Column(
             _status,

@@ -16,14 +16,6 @@ public class PreviewForm : EtoDialogBase
         _desktopCommands = desktopCommands;
         ImageList = imageList;
 
-        Title = UiStrings.PreviewFormTitle;
-        Icon = new Icon(1f, Icons.picture.ToEtoImage());
-
-        FormStateController.AutoLayoutSize = false;
-        FormStateController.DefaultClientSize = new Size(800, 600);
-        LayoutController.RootPadding = 0;
-        LayoutController.Content = _imageView;
-
         GoToPrevCommand = new ActionCommand(() => GoTo(ImageIndex - 1))
         {
             Text = UiStrings.Previous,
@@ -34,6 +26,18 @@ public class PreviewForm : EtoDialogBase
             Text = UiStrings.Next,
             Image = iconProvider.GetIcon("arrow_right")
         };
+    }
+
+    protected override void BuildLayout()
+    {
+        Title = UiStrings.PreviewFormTitle;
+        Icon = new Icon(1f, Icons.picture.ToEtoImage());
+
+        FormStateController.AutoLayoutSize = false;
+        FormStateController.DefaultClientSize = new Size(800, 600);
+
+        LayoutController.RootPadding = 0;
+        LayoutController.Content = _imageView;
     }
 
     protected DesktopCommands Commands { get; set; } = null!;

@@ -20,17 +20,22 @@ public class EmailSettingsForm : EtoDialogBase
     public EmailSettingsForm(Naps2Config config, SystemEmailClients systemEmailClients) : base(config)
     {
         _systemEmailClients = systemEmailClients;
-        Title = UiStrings.EmailSettingsFormTitle;
-        Icon = new Icon(1f, Icons.email_small.ToEtoImage());
 
         UpdateValues(Config);
         UpdateProvider(Config);
 
         _restoreDefaults.Click += RestoreDefaults_Click;
         _placeholders.Click += Placeholders_Click;
+    }
+
+    protected override void BuildLayout()
+    {
+        Title = UiStrings.EmailSettingsFormTitle;
+        Icon = new Icon(1f, Icons.email_small.ToEtoImage());
 
         FormStateController.DefaultExtraLayoutSize = new Size(60, 0);
         FormStateController.FixedHeightLayout = true;
+
         LayoutController.Content = L.Column(
             L.GroupBox(
                 UiStrings.Provider,

@@ -66,7 +66,6 @@ public abstract class DesktopForm : EtoFormBase
 
         // PostInitializeComponent();
         //
-        Icon = Icons.favicon.ToEtoIcon();
         CreateToolbarsAndMenus();
         UpdateScanButton();
         InitLanguageDropdown();
@@ -89,17 +88,6 @@ public abstract class DesktopForm : EtoFormBase
         _listView.Control.KeyDown += OnKeyDown;
         _listView.Control.MouseWheel += ListViewMouseWheel;
 
-        LayoutController.RootPadding = 0;
-        FormStateController.AutoLayoutSize = false;
-        FormStateController.DefaultClientSize = new Size(1210, 600);
-        LayoutController.Content = L.Overlay(
-            GetMainContent(),
-            L.Column(
-                C.Filler(),
-                L.Row(GetZoomButtons(), C.Filler())
-            ).Padding(10)
-        );
-
         //
         // Shown += FDesktop_Shown;
         // Closing += FDesktop_Closing;
@@ -111,6 +99,23 @@ public abstract class DesktopForm : EtoFormBase
         ImageList.SelectionChanged += ImageList_SelectionChanged;
         ImageList.ImagesUpdated += ImageList_ImagesUpdated;
         _profileManager.ProfilesUpdated += ProfileManager_ProfilesUpdated;
+    }
+
+    protected override void BuildLayout()
+    {
+        Icon = Icons.favicon.ToEtoIcon();
+
+        FormStateController.AutoLayoutSize = false;
+        FormStateController.DefaultClientSize = new Size(1210, 600);
+
+        LayoutController.RootPadding = 0;
+        LayoutController.Content = L.Overlay(
+            GetMainContent(),
+            L.Column(
+                C.Filler(),
+                L.Row(GetZoomButtons(), C.Filler())
+            ).Padding(10)
+        );
     }
 
     private void OpeningContextMenu(object? sender, EventArgs e)

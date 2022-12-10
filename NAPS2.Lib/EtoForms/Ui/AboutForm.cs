@@ -25,11 +25,6 @@ public class AboutForm : EtoDialogBase
     {
         _updateChecker = updateChecker;
 
-        Title = UiStrings.AboutFormTitle;
-        Icon = new Icon(1f, Icons.information_small.ToEtoImage());
-        FormStateController.Resizable = false;
-        FormStateController.RestoreFormState = false;
-
         _donateButton = EtoPlatform.Current.AccessibleImageButton(
             Icons.btn_donate_LG.ToEtoImage(),
             UiStrings.Donate,
@@ -39,11 +34,16 @@ public class AboutForm : EtoDialogBase
         _updatePanel = new Panel();
 
         UpdateControls();
-        BuildLayout();
     }
 
-    private void BuildLayout()
+    protected override void BuildLayout()
     {
+        Title = UiStrings.AboutFormTitle;
+        Icon = new Icon(1f, Icons.information_small.ToEtoImage());
+
+        FormStateController.Resizable = false;
+        FormStateController.RestoreFormState = false;
+
         LayoutController.DefaultSpacing = 2;
         LayoutController.Content = L.Row(
             L.Column(new ImageView { Image = Icons.scanner_128.ToEtoImage() }).Padding(right: 4),

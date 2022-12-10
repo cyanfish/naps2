@@ -36,9 +36,6 @@ public class ProfilesForm : EtoDialogBase
         _profileTransfer = profileTransfer;
         _thumbnailController = thumbnailController;
 
-        Title = UiStrings.ProfilesFormTitle;
-        Icon = new Icon(1f, Icons.blueprints_small.ToEtoImage());
-
         // TODO: Do this only in WinForms (?)
         // switch (Handler)
         // {
@@ -119,13 +116,15 @@ public class ProfilesForm : EtoDialogBase
         ContextMenu.AddItems(
             new ButtonMenuItem(_deleteCommand));
         ContextMenu.Opening += ContextMenuOpening;
-
-        BuildLayout();
     }
 
-    private void BuildLayout()
+    protected override void BuildLayout()
     {
+        Title = UiStrings.ProfilesFormTitle;
+        Icon = new Icon(1f, Icons.blueprints_small.ToEtoImage());
+
         FormStateController.DefaultExtraLayoutSize = new Size(200, 0);
+
         LayoutController.Content = L.Column(
             L.Row(
                 _listView.Control.XScale(),

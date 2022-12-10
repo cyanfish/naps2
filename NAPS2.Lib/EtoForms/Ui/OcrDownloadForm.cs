@@ -18,10 +18,6 @@ public class OcrDownloadForm : EtoDialogBase
     {
         _tesseractLanguageManager = tesseractLanguageManager;
 
-        Title = UiStrings.OcrDownloadFormTitle;
-        Icon = new Icon(1f, Icons.text_small.ToEtoImage());
-        FormStateController.RestoreFormState = false;
-
         var initialSelection = new HashSet<string>();
         // TODO: We used to select old installed languages here, maybe we could do it again if we get new lang data
         if (!_tesseractLanguageManager.InstalledLanguages.Any())
@@ -40,8 +36,16 @@ public class OcrDownloadForm : EtoDialogBase
         _languageList.SelectionChanged += (_, _) => UpdateView();
 
         UpdateView();
+    }
 
+    protected override void BuildLayout()
+    {
+        Title = UiStrings.OcrDownloadFormTitle;
+        Icon = new Icon(1f, Icons.text_small.ToEtoImage());
+
+        FormStateController.RestoreFormState = false;
         FormStateController.DefaultExtraLayoutSize = new Size(300, 300);
+
         LayoutController.Content = L.Column(
             C.Label(UiStrings.OcrDownloadSummaryText),
             C.Spacer(),

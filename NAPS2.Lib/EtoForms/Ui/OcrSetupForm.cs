@@ -19,10 +19,6 @@ public class OcrSetupForm : EtoDialogBase
     {
         _tesseractLanguageManager = tesseractLanguageManager;
 
-        Title = UiStrings.OcrSetupFormTitle;
-        Icon = new Icon(1f, Icons.text_small.ToEtoImage());
-        FormStateController.Resizable = false;
-
         _enableOcr.CheckedChanged += EnableOcr_CheckedChanged;
         _moreLanguages.Click += MoreLanguages_Click;
 
@@ -36,6 +32,14 @@ public class OcrSetupForm : EtoDialogBase
         _ocrAfterScanning.Checked = Config.Get(c => c.OcrAfterScanning);
 
         UpdateView();
+    }
+
+    protected override void BuildLayout()
+    {
+        Title = UiStrings.OcrSetupFormTitle;
+        Icon = new Icon(1f, Icons.text_small.ToEtoImage());
+
+        FormStateController.Resizable = false;
 
         LayoutController.Content = L.Column(
             _enableOcr,
@@ -54,7 +58,7 @@ public class OcrSetupForm : EtoDialogBase
                 C.Filler(),
                 L.OkCancel(
                     C.OkButton(this, Save),
-                      // TODO: Should we allow Esc to close the window if there are unsaved changes?
+                    // TODO: Should we allow Esc to close the window if there are unsaved changes?
                     C.CancelButton(this))
             )
         );

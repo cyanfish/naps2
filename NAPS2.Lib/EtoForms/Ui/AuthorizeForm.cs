@@ -13,12 +13,17 @@ public class AuthorizeForm : EtoDialogBase
     public AuthorizeForm(Naps2Config config, ErrorOutput errorOutput) : base(config)
     {
         _errorOutput = errorOutput;
+    }
+
+    protected override void BuildLayout()
+    {
         Title = UiStrings.AuthorizeFormTitle;
         Icon = new Icon(1f, Icons.key_small.ToEtoImage());
 
         FormStateController.FixedHeightLayout = true;
         FormStateController.RestoreFormState = false;
         FormStateController.Resizable = false;
+
         LayoutController.Content = L.Row(
             C.Label(UiStrings.WaitingForAuthorization).Padding(right: 30),
             C.CancelButton(this)

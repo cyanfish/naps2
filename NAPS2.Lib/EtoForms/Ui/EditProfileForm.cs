@@ -48,8 +48,6 @@ public class EditProfileForm : EtoDialogBase
         _scanPerformer = scanPerformer;
         _errorOutput = errorOutput;
         _profileNameTracker = profileNameTracker;
-        Title = UiStrings.EditProfileFormTitle;
-        Icon = new Icon(1f, Icons.blueprints_small.ToEtoImage());
 
         _wiaDriver = new RadioButton { Text = UiStrings.WiaDriver };
         _twainDriver = new RadioButton(_wiaDriver) { Text = UiStrings.TwainDriver };
@@ -67,6 +65,15 @@ public class EditProfileForm : EtoDialogBase
         _ok.Click += Ok_Click;
         _cancel.Click += Cancel_Click;
 
+        _chooseDevice.Click += ChooseDevice;
+        _enableAutoSave.CheckedChanged += EnableAutoSave_CheckedChanged;
+        _autoSaveSettings.Click += AutoSaveSettings_LinkClicked;
+        _advanced.Click += Advanced_Click;
+        _deviceName.KeyDown += DeviceName_KeyDown;
+    }
+
+    protected override void BuildLayout()
+    {
         // TODO: Don't show if only one driver is available
         var driverElements = new List<LayoutElement>();
         if (PlatformCompat.System.IsWiaDriverSupported)
@@ -86,14 +93,12 @@ public class EditProfileForm : EtoDialogBase
             driverElements.Add(_saneDriver.XScale());
         }
 
-        _chooseDevice.Click += ChooseDevice;
-        _enableAutoSave.CheckedChanged += EnableAutoSave_CheckedChanged;
-        _autoSaveSettings.Click += AutoSaveSettings_LinkClicked;
-        _advanced.Click += Advanced_Click;
-        _deviceName.KeyDown += DeviceName_KeyDown;
+        Title = UiStrings.EditProfileFormTitle;
+        Icon = new Icon(1f, Icons.blueprints_small.ToEtoImage());
 
         FormStateController.DefaultExtraLayoutSize = new Size(60, 0);
         FormStateController.FixedHeightLayout = true;
+
         LayoutController.Content = L.Column(
             L.Row(
                 L.Column(
