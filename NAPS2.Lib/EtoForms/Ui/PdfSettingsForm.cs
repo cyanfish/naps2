@@ -7,11 +7,7 @@ namespace NAPS2.EtoForms.Ui;
 
 public class PdfSettingsForm : EtoDialogBase
 {
-    private readonly DialogHelper _dialogHelper;
-
-    private readonly TextBox _defaultFilePath = new();
-    private readonly Button _chooseFolder = new() { Text = UiStrings.Ellipsis };
-    private readonly LinkButton _placeholders = new() { Text = UiStrings.Placeholders };
+    private readonly FilePathWithPlaceholders _defaultFilePath;
     private readonly CheckBox _skipSavePrompt = new() { Text = UiStrings.SkipSavePrompt };
     private readonly CheckBox _singlePagePdfs = new() { Text = UiStrings.SinglePageFiles };
     private readonly TextBox _title = new();
@@ -48,7 +44,7 @@ public class PdfSettingsForm : EtoDialogBase
 
     public PdfSettingsForm(Naps2Config config, DialogHelper dialogHelper) : base(config)
     {
-        _dialogHelper = dialogHelper;
+        _defaultFilePath = new(this, dialogHelper);
 
         UpdateValues(Config);
         UpdateEnabled();
@@ -56,8 +52,6 @@ public class PdfSettingsForm : EtoDialogBase
         _restoreDefaults.Click += RestoreDefaults_Click;
         _defaultFilePath.TextChanged += DefaultFilePath_TextChanged;
         _encryptPdf.CheckedChanged += EncryptPdf_CheckedChanged;
-        _placeholders.Click += Placeholders_Click;
-        _chooseFolder.Click += ChooseFolder_Click;
     }
 
     protected override void BuildLayout()
@@ -70,12 +64,7 @@ public class PdfSettingsForm : EtoDialogBase
 
         LayoutController.Content = L.Column(
             C.Label(UiStrings.DefaultFilePathLabel),
-            // TODO: Maybe make a widget for this kind of file picker
-            L.Row(
-                _defaultFilePath.Scale().AlignCenter(),
-                _chooseFolder.Width(40).MaxHeight(22)
-            ).SpacingAfter(2),
-            _placeholders,
+            _defaultFilePath,
             _skipSavePrompt,
             _singlePagePdfs,
             L.GroupBox(
@@ -214,24 +203,5 @@ public class PdfSettingsForm : EtoDialogBase
     private void EncryptPdf_CheckedChanged(object? sender, EventArgs e)
     {
         UpdateEnabled();
-    }
-
-    private void Placeholders_Click(object? sender, EventArgs eventArgs)
-    {
-        var form = FormFactory.Create<PlaceholdersForm>();
-        form.FileName = _defaultFilePath.Text;
-        form.ShowModal();
-        if (form.Updated)
-        {
-            _defaultFilePath.Text = form.FileName;
-        }
-    }
-
-    private void ChooseFolder_Click(object? sender, EventArgs e)
-    {
-        if (_dialogHelper.PromptToSavePdf(_defaultFilePath.Text, out string? savePath))
-        {
-            _defaultFilePath.Text = savePath!;
-        }
     }
 }

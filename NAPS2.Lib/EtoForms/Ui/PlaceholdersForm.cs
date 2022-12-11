@@ -33,6 +33,8 @@ public class PlaceholdersForm : EtoDialogBase
 
     protected override void BuildLayout()
     {
+        _fileName.Text = FileName;
+
         Title = UiStrings.PlaceholdersFormTitle;
 
         FormStateController.DefaultExtraLayoutSize = new Size(60, 0);

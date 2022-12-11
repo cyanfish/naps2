@@ -30,7 +30,7 @@ public class PasswordBoxWithToggle
         _panel.Content = _show.IsChecked() ? _plain : _hidden;
     }
 
-    public string Title { get; set; }
+    public string? Title { get; set; }
 
     public string? Text
     {

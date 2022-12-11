@@ -267,6 +267,15 @@ namespace NAPS2.Lang.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Auto Save Settings.
+        /// </summary>
+        internal static string AutoSaveSettingsFormTitle {
+            get {
+                return ResourceManager.GetString("AutoSaveSettingsFormTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Batch Scan.
         /// </summary>
         internal static string BatchScan {
@@ -353,6 +362,15 @@ namespace NAPS2.Lang.Resources {
         internal static string Clear {
             get {
                 return ResourceManager.GetString("Clear", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Clear images after saving.
+        /// </summary>
+        internal static string ClearAfterSaving {
+            get {
+                return ResourceManager.GetString("ClearAfterSaving", resourceCulture);
             }
         }
         
@@ -708,6 +726,15 @@ namespace NAPS2.Lang.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to File Path:.
+        /// </summary>
+        internal static string FilePathLabel {
+            get {
+                return ResourceManager.GetString("FilePathLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Flip.
         /// </summary>
         internal static string Flip {
@@ -879,6 +906,15 @@ namespace NAPS2.Lang.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to More info.
+        /// </summary>
+        internal static string MoreInfo {
+            get {
+                return ResourceManager.GetString("MoreInfo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Move Down.
         /// </summary>
         internal static string MoveDown {
@@ -1032,6 +1068,24 @@ namespace NAPS2.Lang.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to One file per page.
+        /// </summary>
+        internal static string OneFilePerPage {
+            get {
+                return ResourceManager.GetString("OneFilePerPage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to One file per scan.
+        /// </summary>
+        internal static string OneFilePerScan {
+            get {
+                return ResourceManager.GetString("OneFilePerScan", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Owner Password:.
         /// </summary>
         internal static string OwnerPasswordLabel {
@@ -1163,6 +1217,15 @@ namespace NAPS2.Lang.Resources {
         internal static string ProfilesFormTitle {
             get {
                 return ResourceManager.GetString("ProfilesFormTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Prompt for file path.
+        /// </summary>
+        internal static string PromptForFilePath {
+            get {
+                return ResourceManager.GetString("PromptForFilePath", resourceCulture);
             }
         }
         
@@ -1451,6 +1514,15 @@ namespace NAPS2.Lang.Resources {
         internal static string SelectSource {
             get {
                 return ResourceManager.GetString("SelectSource", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Separate files by Patch-T.
+        /// </summary>
+        internal static string SeparateByPatchT {
+            get {
+                return ResourceManager.GetString("SeparateByPatchT", resourceCulture);
             }
         }
         

@@ -384,6 +384,9 @@
   <data name="AutoSaveSettings" xml:space="preserve">
     <value>Auto Save Settings</value>
   </data>
+  <data name="AutoSaveSettingsFormTitle" xml:space="preserve">
+    <value>Auto Save Settings</value>
+  </data>
   <data name="Advanced" xml:space="preserve">
     <value>Advanced</value>
   </data>
@@ -528,6 +531,9 @@
   <data name="DefaultFilePathLabel" xml:space="preserve">
     <value>Default File Path:</value>
   </data>
+  <data name="FilePathLabel" xml:space="preserve">
+    <value>File Path:</value>
+  </data>
   <data name="TitleLabel" xml:space="preserve">
     <value>Title:</value>
   </data>
@@ -647,5 +653,23 @@
   </data>
   <data name="EncryptedFilePrompt" xml:space="preserve">
     <value>The following file is encrypted and requires a password to open:</value>
+  </data>
+  <data name="PromptForFilePath" xml:space="preserve">
+    <value>Prompt for file path</value>
+  </data>
+  <data name="OneFilePerPage" xml:space="preserve">
+    <value>One file per page</value>
+  </data>
+  <data name="OneFilePerScan" xml:space="preserve">
+    <value>One file per scan</value>
+  </data>
+  <data name="SeparateByPatchT" xml:space="preserve">
+    <value>Separate files by Patch-T</value>
+  </data>
+  <data name="MoreInfo" xml:space="preserve">
+    <value>More info</value>
+  </data>
+  <data name="ClearAfterSaving" xml:space="preserve">
+    <value>Clear images after saving</value>
   </data>
 </root>

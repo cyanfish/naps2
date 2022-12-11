@@ -514,10 +514,10 @@ public class EditProfileForm : EtoDialogBase
         {
             return;
         }
-        // var form = FormFactory.Create<FAutoSaveSettings>();
-        // ScanProfile.DriverName = DeviceDriver.ToString().ToLowerInvariant();
-        // form.ScanProfile = ScanProfile;
-        // form.ShowDialog();
+        var form = FormFactory.Create<AutoSaveSettingsForm>();
+        ScanProfile.DriverName = DeviceDriver.ToString().ToLowerInvariant();
+        form.ScanProfile = ScanProfile;
+        form.ShowModal();
     }
 
     private void Advanced_Click(object? sender, EventArgs e)
@@ -536,13 +536,13 @@ public class EditProfileForm : EtoDialogBase
             if (_enableAutoSave.IsChecked())
             {
                 _autoSaveSettings.Enabled = true;
-                // var form = FormFactory.Create<FAutoSaveSettings>();
-                // form.ScanProfile = ScanProfile;
-                // form.ShowDialog();
-                // if (!form.Result)
-                // {
-                //     _enableAutoSave.Checked = false;
-                // }
+                var form = FormFactory.Create<AutoSaveSettingsForm>();
+                form.ScanProfile = ScanProfile;
+                form.ShowModal();
+                if (!form.Result)
+                {
+                    _enableAutoSave.Checked = false;
+                }
             }
         }
         _autoSaveSettings.Enabled = _enableAutoSave.IsChecked();

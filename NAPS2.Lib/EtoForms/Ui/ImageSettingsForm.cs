@@ -7,11 +7,7 @@ namespace NAPS2.EtoForms.Ui;
 
 public class ImageSettingsForm : EtoDialogBase
 {
-    private readonly DialogHelper _dialogHelper;
-
-    private readonly TextBox _defaultFilePath = new();
-    private readonly Button _chooseFolder = new() { Text = UiStrings.Ellipsis };
-    private readonly LinkButton _placeholders = new() { Text = UiStrings.Placeholders };
+    private readonly FilePathWithPlaceholders _defaultFilePath;
     private readonly CheckBox _skipSavePrompt = new() { Text = UiStrings.SkipSavePrompt };
     private readonly SliderWithTextBox _jpegQuality = new() { MinValue = 0, MaxValue = 100, TickFrequency = 25 };
     private readonly CheckBox _singlePageTiff = new() { Text = UiStrings.SinglePageFiles };
@@ -21,15 +17,13 @@ public class ImageSettingsForm : EtoDialogBase
 
     public ImageSettingsForm(Naps2Config config, DialogHelper dialogHelper) : base(config)
     {
-        _dialogHelper = dialogHelper;
+        _defaultFilePath = new(this, dialogHelper);
 
         UpdateValues(Config);
         UpdateEnabled();
 
         _restoreDefaults.Click += RestoreDefaults_Click;
         _defaultFilePath.TextChanged += DefaultFilePath_TextChanged;
-        _placeholders.Click += Placeholders_Click;
-        _chooseFolder.Click += ChooseFolder_Click;
     }
 
     protected override void BuildLayout()
@@ -42,11 +36,7 @@ public class ImageSettingsForm : EtoDialogBase
 
         LayoutController.Content = L.Column(
             C.Label(UiStrings.DefaultFilePathLabel),
-            L.Row(
-                _defaultFilePath.Scale().AlignCenter(),
-                _chooseFolder.Width(40).MaxHeight(22)
-            ).SpacingAfter(2),
-            _placeholders,
+            _defaultFilePath,
             _skipSavePrompt,
             L.GroupBox(
                 UiStrings.JpegQuality,
@@ -124,24 +114,5 @@ public class ImageSettingsForm : EtoDialogBase
     private void DefaultFilePath_TextChanged(object? sender, EventArgs e)
     {
         UpdateEnabled();
-    }
-
-    private void Placeholders_Click(object? sender, EventArgs eventArgs)
-    {
-        var form = FormFactory.Create<PlaceholdersForm>();
-        form.FileName = _defaultFilePath.Text;
-        form.ShowModal();
-        if (form.Updated)
-        {
-            _defaultFilePath.Text = form.FileName;
-        }
-    }
-
-    private void ChooseFolder_Click(object? sender, EventArgs e)
-    {
-        if (_dialogHelper.PromptToSaveImage(_defaultFilePath.Text, out string? savePath))
-        {
-            _defaultFilePath.Text = savePath!;
-        }
     }
 }

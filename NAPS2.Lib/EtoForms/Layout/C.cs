@@ -19,13 +19,14 @@ public static class C
     /// Creates a link button with the given URL as both text and click action.
     /// </summary>
     /// <param name="url"></param>
+    /// <param name="label"></param>
     /// <returns></returns>
-    public static LinkButton UrlLink(string url)
+    public static LinkButton UrlLink(string url, string? label = null)
     {
         void OnClick() => Process.Start(new ProcessStartInfo(url) { UseShellExecute = true });
         return new LinkButton
         {
-            Text = url,
+            Text = label ?? url,
             Command = new ActionCommand(OnClick)
         };
     }
@@ -186,11 +187,18 @@ public static class C
     public static Button OkButton(Dialog dialog, Action? beforeClose = null, string? text = null) =>
         DialogButton(dialog, text ?? UiStrings.OK, isDefault: true, beforeClose: beforeClose);
 
+    public static Button OkButton(Dialog dialog, Func<bool>? beforeCloseWithCancel, string? text = null) =>
+        DialogButton(dialog, text ?? UiStrings.OK, isDefault: true, beforeCloseWithCancel: beforeCloseWithCancel);
+
     public static Button DialogButton(Dialog dialog, string text, bool isDefault = false, bool isAbort = false,
-        Action? beforeClose = null)
+        Action? beforeClose = null, Func<bool>? beforeCloseWithCancel = null)
     {
         var button = Button(text, () =>
         {
+            if (!(beforeCloseWithCancel?.Invoke() ?? true))
+            {
+                return;
+            }
             beforeClose?.Invoke();
             dialog.Close();
         });

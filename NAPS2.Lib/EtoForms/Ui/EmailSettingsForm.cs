@@ -12,20 +12,19 @@ public class EmailSettingsForm : EtoDialogBase
     private readonly SystemEmailClients _systemEmailClients;
 
     private readonly Label _provider = new() { Text = " \n " };
-    private readonly TextBox _attachmentName = new();
-    private readonly LinkButton _placeholders = new() { Text = UiStrings.Placeholders };
+    private readonly FilePathWithPlaceholders _attachmentName;
     private readonly CheckBox _rememberSettings = new() { Text = UiStrings.RememberTheseSettings };
     private readonly Button _restoreDefaults = new() { Text = UiStrings.RestoreDefaults };
 
     public EmailSettingsForm(Naps2Config config, SystemEmailClients systemEmailClients) : base(config)
     {
         _systemEmailClients = systemEmailClients;
+        _attachmentName = new(this);
 
         UpdateValues(Config);
         UpdateProvider(Config);
 
         _restoreDefaults.Click += RestoreDefaults_Click;
-        _placeholders.Click += Placeholders_Click;
     }
 
     protected override void BuildLayout()
@@ -47,7 +46,6 @@ public class EmailSettingsForm : EtoDialogBase
             ),
             C.Label(UiStrings.AttachmentNameLabel),
             _attachmentName,
-            _placeholders,
             C.Filler(),
             _rememberSettings,
             L.Row(
@@ -96,7 +94,6 @@ public class EmailSettingsForm : EtoDialogBase
                 _provider.Text = SettingsResources.EmailProvider_NotSelected;
                 break;
         }
-        LayoutController.Invalidate();
     }
 
     private void Save()
@@ -143,6 +140,7 @@ public class EmailSettingsForm : EtoDialogBase
         if (form.Result)
         {
             UpdateProvider(Config);
+            LayoutController.Invalidate();
         }
     }
 }
