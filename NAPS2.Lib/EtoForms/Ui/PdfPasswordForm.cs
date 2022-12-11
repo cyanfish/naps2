@@ -31,7 +31,7 @@ public class PdfPasswordForm : EtoDialogBase
                 C.Label(UiStrings.EncryptedFilePrompt),
                 C.Spacer()
             ).Aligned(),
-            _passwordBox.Inline(),
+            _passwordBox.AsInlineControl(),
             L.Row(
                 C.Filler(),
                 L.OkCancel(

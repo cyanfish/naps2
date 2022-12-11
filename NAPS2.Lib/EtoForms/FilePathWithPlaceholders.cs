@@ -11,6 +11,8 @@ public class FilePathWithPlaceholders
 
     private readonly TextBox _path = new();
     private readonly Button _choose = new() { Text = UiStrings.Ellipsis };
+    private readonly LinkButton _placeholders = C.Link(UiStrings.Placeholders);
+    private LayoutVisibility _visibility;
 
     public FilePathWithPlaceholders(IFormBase form, DialogHelper? dialogHelper = null)
     {
@@ -18,6 +20,7 @@ public class FilePathWithPlaceholders
         _dialogHelper = dialogHelper;
         _choose.Click += OpenPathDialog;
         _path.TextChanged += (_, _) => TextChanged?.Invoke(this, EventArgs.Empty);
+        _placeholders.Click += (_, _) => OpenPlaceholdersForm();
     }
 
     public string? Text
@@ -26,18 +29,34 @@ public class FilePathWithPlaceholders
         set => _path.Text = value;
     }
 
+    public bool Enabled
+    {
+        get => _path.Enabled;
+        set
+        {
+            _path.Enabled = value;
+            _choose.Enabled = value;
+            _placeholders.Enabled = value;
+        }
+    }
+
     public event EventHandler? TextChanged;
 
     public static implicit operator LayoutElement(FilePathWithPlaceholders control)
     {
+        return control.AsControl();
+    }
+
+    public LayoutColumn AsControl()
+    {
         return L.Column(
             L.Row(
-                control._path.Scale().AlignCenter(),
-                control._dialogHelper != null
-                    ? control._choose.Width(40).MaxHeight(22)
+                _path.Scale().AlignCenter().Visible(_visibility),
+                _dialogHelper != null
+                    ? _choose.Width(40).MaxHeight(22).Visible(_visibility)
                     : C.None()
             ).SpacingAfter(2),
-            C.Link(UiStrings.Placeholders, control.OpenPlaceholdersForm)
+            _placeholders.Visible(_visibility)
         );
     }
 
@@ -63,5 +82,12 @@ public class FilePathWithPlaceholders
     public void Focus()
     {
         _path.Focus();
+    }
+
+    // TODO: Better solution
+    public FilePathWithPlaceholders Visible(LayoutVisibility visibility)
+    {
+        _visibility = visibility;
+        return this;
     }
 }

@@ -1,15 +1,11 @@
 ﻿using System.Threading;
-using System.Windows.Forms;
-using NAPS2.Config;
+using Eto.Forms;
 using NAPS2.EtoForms;
-using NAPS2.Images;
+using NAPS2.EtoForms.Ui;
 using NAPS2.ImportExport;
 using NAPS2.ImportExport.Images;
 using NAPS2.ImportExport.Pdf;
 using NAPS2.Ocr;
-using NAPS2.Operation;
-using NAPS2.Platform.Windows;
-using NAPS2.WinForms;
 
 namespace NAPS2.Scan.Batch;
 
@@ -37,7 +33,7 @@ public class BatchScanPerformer : IBatchScanPerformer
         _thumbnailController = thumbnailController;
     }
 
-    public async Task PerformBatchScan(BatchSettings settings, FormBase batchForm,
+    public async Task PerformBatchScan(BatchSettings settings, IFormBase batchForm,
         Action<ProcessedImage> imageCallback, Action<string> progressCallback, CancellationToken cancelToken)
     {
         var state = new BatchState(_scanPerformer, _pdfExporter, _operationFactory, _formFactory, _config,
@@ -57,7 +53,7 @@ public class BatchScanPerformer : IBatchScanPerformer
         private readonly BatchSettings _settings;
         private readonly Action<string> _progressCallback;
         private readonly CancellationToken _cancelToken;
-        private readonly FormBase _batchForm;
+        private readonly IFormBase _batchForm;
         private readonly Action<ProcessedImage> _loadImageCallback;
 
         private ScanProfile _profile;
@@ -67,7 +63,7 @@ public class BatchScanPerformer : IBatchScanPerformer
         public BatchState(IScanPerformer scanPerformer, IPdfExporter pdfExporter, IOperationFactory operationFactory,
             IFormFactory formFactory, Naps2Config config, IProfileManager profileManager,
             ThumbnailController thumbnailController, BatchSettings settings,
-            Action<string> progressCallback, CancellationToken cancelToken, FormBase batchForm,
+            Action<string> progressCallback, CancellationToken cancelToken, IFormBase batchForm,
             Action<ProcessedImage> loadImageCallback)
         {
             _scanPerformer = scanPerformer;
@@ -204,8 +200,9 @@ public class BatchScanPerformer : IBatchScanPerformer
 
         private async Task DoScan(int scanNumber, List<ProcessedImage> scan, int pageNumber)
         {
+            var handle = Invoker.Current.InvokeGet(() => (_batchForm as Window)?.NativeHandle ?? IntPtr.Zero);
             var images =
-                _scanPerformer.PerformScan(_profile, _scanParams, _batchForm.SafeHandle(), _cancelToken);
+                _scanPerformer.PerformScan(_profile, _scanParams, handle, _cancelToken);
             await foreach(var image in images)
             {
                 scan.Add(image);
@@ -218,9 +215,13 @@ public class BatchScanPerformer : IBatchScanPerformer
 
         private bool PromptForNextScan()
         {
-            var promptForm = _formFactory.Create<FBatchPrompt>();
-            promptForm.ScanNumber = _scans.Count + 1;
-            return promptForm.ShowDialog() == DialogResult.OK;
+            return Invoker.Current.InvokeGet(() =>
+            {
+                var promptForm = _formFactory.Create<BatchPromptForm>();
+                promptForm.ScanNumber = _scans.Count + 1;
+                promptForm.ShowModal();
+                return promptForm.Result;
+            });
         }
 
         private async Task Output()

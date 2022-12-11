@@ -735,4 +735,52 @@
   <data name="TwainImplLabel" xml:space="preserve">
     <value>Twain Implementation:</value>
   </data>
+  <data name="BatchScanFormTitle" xml:space="preserve">
+    <value>Batch Scan</value>
+  </data>
+  <data name="PressStartWhenReady" xml:space="preserve">
+    <value>Press Start when ready.</value>
+  </data>
+  <data name="ScanConfig" xml:space="preserve">
+    <value>Scan Configuration</value>
+  </data>
+  <data name="Output" xml:space="preserve">
+    <value>Output</value>
+  </data>
+  <data name="ProfileLabel" xml:space="preserve">
+    <value>Profile:</value>
+  </data>
+  <data name="SingleScan" xml:space="preserve">
+    <value>Single scan</value>
+  </data>
+  <data name="MultipleScansPrompt" xml:space="preserve">
+    <value>Multiple scans (prompt between scans)</value>
+  </data>
+  <data name="MultipleScansDelay" xml:space="preserve">
+    <value>Multiple scans (fixed delay between scans)</value>
+  </data>
+  <data name="NumberOfScansLabel" xml:space="preserve">
+    <value>Number of scans:</value>
+  </data>
+  <data name="TimeBetweenScansLabel" xml:space="preserve">
+    <value>Time between scans (seconds):</value>
+  </data>
+  <data name="LoadIn" xml:space="preserve">
+    <value>Load images into NAPS2</value>
+  </data>
+  <data name="SaveToSingleFile" xml:space="preserve">
+    <value>Save to a single file</value>
+  </data>
+  <data name="SaveToMultipleFiles" xml:space="preserve">
+    <value>Save to multiple files</value>
+  </data>
+  <data name="Start" xml:space="preserve">
+    <value>Start</value>
+  </data>
+  <data name="BatchPromptFormTitle" xml:space="preserve">
+    <value>Next Scan</value>
+  </data>
+  <data name="ReadyForScan" xml:space="preserve">
+    <value>Ready for scan {0}.</value>
+  </data>
 </root>

@@ -62,12 +62,17 @@ public class PasswordBoxWithToggle
 
     public static implicit operator LayoutElement(PasswordBoxWithToggle control)
     {
+        return control.AsControl();
+    }
+
+    private LayoutColumn AsControl()
+    {
         return L.Column(
-            control.Inline()
+            AsInlineControl()
         );
     }
 
-    public LayoutElement Inline()
+    public LayoutElement AsInlineControl()
     {
         return new LayoutElement[]
         {

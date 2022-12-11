@@ -65,9 +65,9 @@ public class DesktopSubFormController : IDesktopSubFormController
 
     public void ShowBatchScanForm()
     {
-        var form = _formFactory.Create<FBatchScan>();
+        var form = _formFactory.Create<BatchScanForm>();
         form.ImageCallback = _desktopImagesController.ReceiveScannedImage();
-        form.ShowDialog();
+        form.ShowModal();
     }
 
     public void ShowViewerForm()

@@ -10,7 +10,7 @@ public class LayoutRow : LayoutLine<LayoutColumn>
     }
 
     public LayoutRow(LayoutRow original, Padding? padding = null, int? spacing = null, int? spacingAfter = null,
-        bool? scale = null, bool? aligned = null)
+        bool? scale = null, bool? aligned = null, LayoutVisibility? visibility = null)
         : base(original.Children)
     {
         Padding = padding ?? original.Padding;
@@ -18,6 +18,7 @@ public class LayoutRow : LayoutLine<LayoutColumn>
         SpacingAfter = spacingAfter ?? original.SpacingAfter;
         Scale = scale ?? original.Scale;
         Aligned = aligned ?? original.Aligned;
+        Visibility = visibility ?? original.Visibility;
     }
 
     protected override PointF UpdatePosition(PointF position, float delta)

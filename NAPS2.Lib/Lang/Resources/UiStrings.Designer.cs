@@ -285,11 +285,29 @@ namespace NAPS2.Lang.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Next Scan.
+        /// </summary>
+        internal static string BatchPromptFormTitle {
+            get {
+                return ResourceManager.GetString("BatchPromptFormTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Batch Scan.
         /// </summary>
         internal static string BatchScan {
             get {
                 return ResourceManager.GetString("BatchScan", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Batch Scan.
+        /// </summary>
+        internal static string BatchScanFormTitle {
+            get {
+                return ResourceManager.GetString("BatchScanFormTitle", resourceCulture);
             }
         }
         
@@ -960,6 +978,15 @@ namespace NAPS2.Lang.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Load images into NAPS2.
+        /// </summary>
+        internal static string LoadIn {
+            get {
+                return ResourceManager.GetString("LoadIn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Make PDFs searchable using OCR.
         /// </summary>
         internal static string MakePdfsSearchable {
@@ -1032,6 +1059,24 @@ namespace NAPS2.Lang.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Multiple scans (fixed delay between scans).
+        /// </summary>
+        internal static string MultipleScansDelay {
+            get {
+                return ResourceManager.GetString("MultipleScansDelay", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Multiple scans (prompt between scans).
+        /// </summary>
+        internal static string MultipleScansPrompt {
+            get {
+                return ResourceManager.GetString("MultipleScansPrompt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Name (optional).
         /// </summary>
         internal static string NameOptional {
@@ -1100,6 +1145,15 @@ namespace NAPS2.Lang.Resources {
         internal static string NotNow {
             get {
                 return ResourceManager.GetString("NotNow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Number of scans:.
+        /// </summary>
+        internal static string NumberOfScansLabel {
+            get {
+                return ResourceManager.GetString("NumberOfScansLabel", resourceCulture);
             }
         }
         
@@ -1203,6 +1257,15 @@ namespace NAPS2.Lang.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Output.
+        /// </summary>
+        internal static string Output {
+            get {
+                return ResourceManager.GetString("Output", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Owner Password:.
         /// </summary>
         internal static string OwnerPasswordLabel {
@@ -1302,6 +1365,15 @@ namespace NAPS2.Lang.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Press Start when ready..
+        /// </summary>
+        internal static string PressStartWhenReady {
+            get {
+                return ResourceManager.GetString("PressStartWhenReady", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Preview.
         /// </summary>
         internal static string PreviewFormTitle {
@@ -1338,6 +1410,15 @@ namespace NAPS2.Lang.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Profile:.
+        /// </summary>
+        internal static string ProfileLabel {
+            get {
+                return ResourceManager.GetString("ProfileLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Profiles.
         /// </summary>
         internal static string Profiles {
@@ -1370,6 +1451,15 @@ namespace NAPS2.Lang.Resources {
         internal static string Provider {
             get {
                 return ResourceManager.GetString("Provider", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ready for scan {0}..
+        /// </summary>
+        internal static string ReadyForScan {
+            get {
+                return ResourceManager.GetString("ReadyForScan", resourceCulture);
             }
         }
         
@@ -1599,6 +1689,24 @@ namespace NAPS2.Lang.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Save to multiple files.
+        /// </summary>
+        internal static string SaveToMultipleFiles {
+            get {
+                return ResourceManager.GetString("SaveToMultipleFiles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save to a single file.
+        /// </summary>
+        internal static string SaveToSingleFile {
+            get {
+                return ResourceManager.GetString("SaveToSingleFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Scale:.
         /// </summary>
         internal static string ScaleLabel {
@@ -1613,6 +1721,15 @@ namespace NAPS2.Lang.Resources {
         internal static string Scan {
             get {
                 return ResourceManager.GetString("Scan", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Scan Configuration.
+        /// </summary>
+        internal static string ScanConfig {
+            get {
+                return ResourceManager.GetString("ScanConfig", resourceCulture);
             }
         }
         
@@ -1698,11 +1815,29 @@ namespace NAPS2.Lang.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Single scan.
+        /// </summary>
+        internal static string SingleScan {
+            get {
+                return ResourceManager.GetString("SingleScan", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Skip save prompt.
         /// </summary>
         internal static string SkipSavePrompt {
             get {
                 return ResourceManager.GetString("SkipSavePrompt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Start.
+        /// </summary>
+        internal static string Start {
+            get {
+                return ResourceManager.GetString("Start", resourceCulture);
             }
         }
         
@@ -1739,6 +1874,15 @@ namespace NAPS2.Lang.Resources {
         internal static string TiffOptions {
             get {
                 return ResourceManager.GetString("TiffOptions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Time between scans (seconds):.
+        /// </summary>
+        internal static string TimeBetweenScansLabel {
+            get {
+                return ResourceManager.GetString("TimeBetweenScansLabel", resourceCulture);
             }
         }
         

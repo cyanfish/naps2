@@ -10,7 +10,7 @@ public class LayoutColumn : LayoutLine<LayoutRow>
     }
 
     public LayoutColumn(LayoutColumn original, Padding? padding = null, int? spacing = null, int? labelSpacing = null,
-        int? spacingAfter = null, bool? scale = null, bool? aligned = null)
+        int? spacingAfter = null, bool? scale = null, bool? aligned = null, LayoutVisibility? visibility = null)
         : base(original.Children)
     {
         Padding = padding ?? original.Padding;
@@ -19,6 +19,7 @@ public class LayoutColumn : LayoutLine<LayoutRow>
         SpacingAfter = spacingAfter ?? original.SpacingAfter;
         Scale = scale ?? original.Scale;
         Aligned = aligned ?? original.Aligned;
+        Visibility = visibility ?? original.Visibility;
     }
 
     protected int? LabelSpacing { get; init; }

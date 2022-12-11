@@ -131,6 +131,8 @@ public static class EtoLayoutExtensions
         new LayoutColumn(column, scale: true);
     public static LayoutColumn Aligned(this LayoutColumn column) =>
         new LayoutColumn(column, aligned: true);
+    // public static LayoutColumn Visible(this LayoutColumn column, LayoutVisibility visibility) =>
+    //     new LayoutColumn(column, visibility: visibility);
 
     public static LayoutRow Padding(this LayoutRow row, Padding padding) =>
         new LayoutRow(row, padding: padding);
@@ -146,6 +148,8 @@ public static class EtoLayoutExtensions
         new LayoutRow(row, scale: true);
     public static LayoutRow Aligned(this LayoutRow row) =>
         new LayoutRow(row, aligned: true);
+    // public static LayoutRow Visible(this LayoutRow row, LayoutVisibility visibility) =>
+    //     new LayoutRow(row, visibility: visibility);
 
     public static LayoutOverlay Scale(this LayoutOverlay overlay) =>
         new LayoutOverlay(overlay, scale: true);

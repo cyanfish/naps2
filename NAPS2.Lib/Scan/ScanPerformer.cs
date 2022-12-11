@@ -284,7 +284,7 @@ internal class ScanPerformer : IScanPerformer
             using var deviceManager = new WiaDeviceManager((WiaVersion) options.WiaOptions.WiaApiVersion);
             try
             {
-                var wiaDevice = deviceManager.PromptForDevice(options.DialogParent);
+                var wiaDevice = Invoker.Current.InvokeGet(() => deviceManager.PromptForDevice(options.DialogParent));
                 if (wiaDevice == null)
                 {
                     return null;
@@ -308,6 +308,6 @@ internal class ScanPerformer : IScanPerformer
         {
             throw new NoDevicesFoundException();
         }
-        return _devicePrompt.PromptForDevice(deviceList, options.DialogParent);
+        return Invoker.Current.InvokeGet(() => _devicePrompt.PromptForDevice(deviceList, options.DialogParent));
     }
 }

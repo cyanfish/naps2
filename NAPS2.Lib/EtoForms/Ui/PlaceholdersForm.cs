@@ -16,7 +16,7 @@ public class PlaceholdersForm : EtoDialogBase
             (Placeholders.MINUTE_2_DIGITS, UiStrings.Minute2Digit),
             (Placeholders.SECOND_2_DIGITS, UiStrings.Second2Digit),
             (Placeholders.NUMBER_4_DIGITS, UiStrings.AutoIncrementing4Digit),
-            (Placeholders.NUMBER_3_DIGITS, UiStrings.AutoIncrementing2Digit),
+            (Placeholders.NUMBER_3_DIGITS, UiStrings.AutoIncrementing3Digit),
             (Placeholders.NUMBER_2_DIGITS, UiStrings.AutoIncrementing2Digit),
             (Placeholders.NUMBER_1_DIGIT, UiStrings.AutoIncrementing1Digit)
         };
