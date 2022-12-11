@@ -681,4 +681,7 @@
   <data name="Dimensions" xml:space="preserve">
     <value>Dimensions</value>
   </data>
+  <data name="WaitingForTwain" xml:space="preserve">
+    <value>Waiting for TWAIN to complete...</value>
+  </data>
 </root>

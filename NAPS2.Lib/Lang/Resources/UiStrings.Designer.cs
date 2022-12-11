@@ -1689,6 +1689,15 @@ namespace NAPS2.Lang.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Waiting for TWAIN to complete....
+        /// </summary>
+        internal static string WaitingForTwain {
+            get {
+                return ResourceManager.GetString("WaitingForTwain", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to WIA Driver.
         /// </summary>
         internal static string WiaDriver {
