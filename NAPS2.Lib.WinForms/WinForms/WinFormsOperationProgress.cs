@@ -1,6 +1,7 @@
 ﻿using System.Collections.Immutable;
 using System.Windows.Forms;
 using NAPS2.EtoForms;
+using NAPS2.EtoForms.Ui;
 
 namespace NAPS2.WinForms;
 
@@ -54,9 +55,9 @@ public class WinFormsOperationProgress : OperationProgress
 
         if (!op.IsFinished)
         {
-            var form = _formFactory.Create<FProgress>();
+            var form = _formFactory.Create<ProgressForm>();
             form.Operation = op;
-            form.ShowDialog();
+            form.ShowModal();
         }
 
         if (!op.IsFinished)

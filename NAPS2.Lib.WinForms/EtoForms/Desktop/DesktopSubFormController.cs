@@ -55,7 +55,7 @@ public class DesktopSubFormController : IDesktopSubFormController
         }
         else
         {
-            _formFactory.Create<FOcrLanguageDownload>().ShowDialog();
+            _formFactory.Create<OcrDownloadForm>().ShowModal();
             if (_tesseractLanguageManager.InstalledLanguages.Any())
             {
                 _formFactory.Create<OcrSetupForm>().ShowModal();
