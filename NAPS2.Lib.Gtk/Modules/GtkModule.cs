@@ -30,7 +30,7 @@ public class GtkModule : Module
         builder.RegisterType<DesktopScanController>().As<IDesktopScanController>();
         builder.RegisterType<UpdateChecker>().As<IUpdateChecker>();
         builder.RegisterType<ExportController>().As<IExportController>();
-        builder.RegisterType<StubDesktopSubFormController>().As<IDesktopSubFormController>();
+        builder.RegisterType<DesktopSubFormController>().As<IDesktopSubFormController>();
         builder.RegisterType<DesktopFormProvider>().AsSelf().SingleInstance();
         builder.RegisterType<GtkImageContext>().As<ImageContext>();
         builder.RegisterType<GtkImageContext>().AsSelf();
