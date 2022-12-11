@@ -684,4 +684,55 @@
   <data name="WaitingForTwain" xml:space="preserve">
     <value>Waiting for TWAIN to complete...</value>
   </data>
+  <data name="AdvancedProfileFormTitle" xml:space="preserve">
+    <value>Advanced Profile Settings</value>
+  </data>
+  <data name="ImageQuality" xml:space="preserve">
+    <value>Image Quality</value>
+  </data>
+  <data name="MaximumQuality" xml:space="preserve">
+    <value>Maximum quality (large files)</value>
+  </data>
+  <data name="BlankPages" xml:space="preserve">
+    <value>Blank Pages</value>
+  </data>
+  <data name="ExcludeBlankPages" xml:space="preserve">
+    <value>Exclude blank pages</value>
+  </data>
+  <data name="WhiteThreshold" xml:space="preserve">
+    <value>White Threshold</value>
+  </data>
+  <data name="CoverageThreshold" xml:space="preserve">
+    <value>Coverage Threshold</value>
+  </data>
+  <data name="PostProcessing" xml:space="preserve">
+    <value>Post-processing</value>
+  </data>
+  <data name="DeskewScannedPages" xml:space="preserve">
+    <value>Deskew scanned pages</value>
+  </data>
+  <data name="Compatibility" xml:space="preserve">
+    <value>Compatibility</value>
+  </data>
+  <data name="BrightnessContrastAfterScan" xml:space="preserve">
+    <value>Apply brightness/contrast after scan</value>
+  </data>
+  <data name="OffsetWidth" xml:space="preserve">
+    <value>Offset width based on alignment (WIA)</value>
+  </data>
+  <data name="StretchToPageSize" xml:space="preserve">
+    <value>Stretch to page size</value>
+  </data>
+  <data name="CropToPageSize" xml:space="preserve">
+    <value>Crop to page size</value>
+  </data>
+  <data name="FlipDuplexedPages" xml:space="preserve">
+    <value>Flip duplexed pages</value>
+  </data>
+  <data name="WiaVersionLabel" xml:space="preserve">
+    <value>Wia Version:</value>
+  </data>
+  <data name="TwainImplLabel" xml:space="preserve">
+    <value>Twain Implementation:</value>
+  </data>
 </root>

@@ -523,11 +523,11 @@ public class EditProfileForm : EtoDialogBase
 
     private void Advanced_Click(object? sender, EventArgs e)
     {
-        // var form = FormFactory.Create<FAdvancedScanSettings>();
-        // ScanProfile.DriverName = DeviceDriver.ToString().ToLowerInvariant();
-        // ScanProfile.BitDepth = (ScanBitDepth)_bitDepth.SelectedIndex;
-        // form.ScanProfile = ScanProfile;
-        // form.ShowDialog();
+        var form = FormFactory.Create<AdvancedProfileForm>();
+        ScanProfile.DriverName = DeviceDriver.ToString().ToLowerInvariant();
+        ScanProfile.BitDepth = (ScanBitDepth)_bitDepth.SelectedIndex;
+        form.ScanProfile = ScanProfile;
+        form.ShowModal();
     }
 
     private void EnableAutoSave_CheckedChanged(object? sender, EventArgs e)

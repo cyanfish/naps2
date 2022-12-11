@@ -87,6 +87,15 @@ namespace NAPS2.Lang.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Advanced Profile Settings.
+        /// </summary>
+        internal static string AdvancedProfileFormTitle {
+            get {
+                return ResourceManager.GetString("AdvancedProfileFormTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Allow Annotations.
         /// </summary>
         internal static string AllowAnnotations {
@@ -303,11 +312,29 @@ namespace NAPS2.Lang.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Blank Pages.
+        /// </summary>
+        internal static string BlankPages {
+            get {
+                return ResourceManager.GetString("BlankPages", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Brightness / Contrast.
         /// </summary>
         internal static string BrightnessContrast {
             get {
                 return ResourceManager.GetString("BrightnessContrast", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Apply brightness/contrast after scan.
+        /// </summary>
+        internal static string BrightnessContrastAfterScan {
+            get {
+                return ResourceManager.GetString("BrightnessContrastAfterScan", resourceCulture);
             }
         }
         
@@ -429,11 +456,29 @@ namespace NAPS2.Lang.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Coverage Threshold.
+        /// </summary>
+        internal static string CoverageThreshold {
+            get {
+                return ResourceManager.GetString("CoverageThreshold", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Crop.
         /// </summary>
         internal static string Crop {
             get {
                 return ResourceManager.GetString("Crop", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Crop to page size.
+        /// </summary>
+        internal static string CropToPageSize {
+            get {
+                return ResourceManager.GetString("CropToPageSize", resourceCulture);
             }
         }
         
@@ -497,6 +542,15 @@ namespace NAPS2.Lang.Resources {
         internal static string Deskew {
             get {
                 return ResourceManager.GetString("Deskew", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Deskew scanned pages.
+        /// </summary>
+        internal static string DeskewScannedPages {
+            get {
+                return ResourceManager.GetString("DeskewScannedPages", resourceCulture);
             }
         }
         
@@ -726,6 +780,15 @@ namespace NAPS2.Lang.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Exclude blank pages.
+        /// </summary>
+        internal static string ExcludeBlankPages {
+            get {
+                return ResourceManager.GetString("ExcludeBlankPages", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to File Name:.
         /// </summary>
         internal static string FileNameLabel {
@@ -749,6 +812,15 @@ namespace NAPS2.Lang.Resources {
         internal static string Flip {
             get {
                 return ResourceManager.GetString("Flip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Flip duplexed pages.
+        /// </summary>
+        internal static string FlipDuplexedPages {
+            get {
+                return ResourceManager.GetString("FlipDuplexedPages", resourceCulture);
             }
         }
         
@@ -803,6 +875,15 @@ namespace NAPS2.Lang.Resources {
         internal static string Image {
             get {
                 return ResourceManager.GetString("Image", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Image Quality.
+        /// </summary>
+        internal static string ImageQuality {
+            get {
+                return ResourceManager.GetString("ImageQuality", resourceCulture);
             }
         }
         
@@ -884,6 +965,15 @@ namespace NAPS2.Lang.Resources {
         internal static string MakePdfsSearchable {
             get {
                 return ResourceManager.GetString("MakePdfsSearchable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Maximum quality (large files).
+        /// </summary>
+        internal static string MaximumQuality {
+            get {
+                return ResourceManager.GetString("MaximumQuality", resourceCulture);
             }
         }
         
@@ -1077,6 +1167,15 @@ namespace NAPS2.Lang.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Offset width based on alignment (WIA).
+        /// </summary>
+        internal static string OffsetWidth {
+            get {
+                return ResourceManager.GetString("OffsetWidth", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to OK.
         /// </summary>
         internal static string OK {
@@ -1190,6 +1289,15 @@ namespace NAPS2.Lang.Resources {
         internal static string PlaceholdersFormTitle {
             get {
                 return ResourceManager.GetString("PlaceholdersFormTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Post-processing.
+        /// </summary>
+        internal static string PostProcessing {
+            get {
+                return ResourceManager.GetString("PostProcessing", resourceCulture);
             }
         }
         
@@ -1599,6 +1707,15 @@ namespace NAPS2.Lang.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Stretch to page size.
+        /// </summary>
+        internal static string StretchToPageSize {
+            get {
+                return ResourceManager.GetString("StretchToPageSize", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Subject:.
         /// </summary>
         internal static string SubjectLabel {
@@ -1640,6 +1757,15 @@ namespace NAPS2.Lang.Resources {
         internal static string TwainDriver {
             get {
                 return ResourceManager.GetString("TwainDriver", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Twain Implementation:.
+        /// </summary>
+        internal static string TwainImplLabel {
+            get {
+                return ResourceManager.GetString("TwainImplLabel", resourceCulture);
             }
         }
         
@@ -1698,11 +1824,29 @@ namespace NAPS2.Lang.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to White Threshold.
+        /// </summary>
+        internal static string WhiteThreshold {
+            get {
+                return ResourceManager.GetString("WhiteThreshold", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to WIA Driver.
         /// </summary>
         internal static string WiaDriver {
             get {
                 return ResourceManager.GetString("WiaDriver", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wia Version:.
+        /// </summary>
+        internal static string WiaVersionLabel {
+            get {
+                return ResourceManager.GetString("WiaVersionLabel", resourceCulture);
             }
         }
         
