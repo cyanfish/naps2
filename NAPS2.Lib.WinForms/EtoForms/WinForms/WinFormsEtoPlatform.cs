@@ -13,6 +13,7 @@ namespace NAPS2.EtoForms.WinForms;
 
 public class WinFormsEtoPlatform : EtoPlatform
 {
+    private static readonly Size MinImageOnlyButtonSize = new(20, 20);
     private static readonly Size MinImageButtonSize = new(75, 32);
     private const int IMAGE_PADDING = 5;
 
@@ -30,6 +31,15 @@ public class WinFormsEtoPlatform : EtoPlatform
 
     public override void ConfigureImageButton(Eto.Forms.Button button, bool big)
     {
+        if (string.IsNullOrEmpty(button.Text))
+        {
+            button.MinimumSize = MinImageOnlyButtonSize;
+            var native = (wf.Button) button.ToNative();
+            native.TextImageRelation = wf.TextImageRelation.Overlay;
+            native.ImageAlign = sd.ContentAlignment.MiddleCenter;
+            return;
+        }
+
         button.MinimumSize = MinImageButtonSize;
         if (button.ImagePosition == ButtonImagePosition.Left)
         {

@@ -672,4 +672,13 @@
   <data name="ClearAfterSaving" xml:space="preserve">
     <value>Clear images after saving</value>
   </data>
+  <data name="PageSizeFormTitle" xml:space="preserve">
+    <value>Custom Page Size</value>
+  </data>
+  <data name="NameOptional" xml:space="preserve">
+    <value>Name (optional)</value>
+  </data>
+  <data name="Dimensions" xml:space="preserve">
+    <value>Dimensions</value>
+  </data>
 </root>

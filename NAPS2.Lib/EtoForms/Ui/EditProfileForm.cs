@@ -490,19 +490,20 @@ public class EditProfileForm : EtoDialogBase
         if (_pageSize.SelectedIndex == _pageSize.Items.Count - 1)
         {
             // "Custom..." selected
-            // var form = FormFactory.Create<FPageSize>();
-            // form.PageSizeDimens = _lastPageSizeItem.Type == ScanPageSize.Custom
-            //     ? _lastPageSizeItem.CustomDimens
-            //     : _lastPageSizeItem.Type.PageDimensions();
-            // if (form.ShowDialog() == DialogResult.OK)
-            // {
-            //     UpdatePageSizeList();
-            //     SelectCustomPageSize(form.PageSizeName, form.PageSizeDimens);
-            // }
-            // else
-            // {
-            //     _pageSize.SelectedIndex = _lastPageSizeIndex;
-            // }
+            var form = FormFactory.Create<PageSizeForm>();
+            form.PageSizeDimens = _lastPageSizeItem.Type == ScanPageSize.Custom
+                ? _lastPageSizeItem.CustomDimens
+                : _lastPageSizeItem.Type.PageDimensions();
+            form.ShowModal();
+            if (form.Result)
+            {
+                UpdatePageSizeList();
+                SelectCustomPageSize(form.PageSizeName!, form.PageSizeDimens!);
+            }
+            else
+            {
+                _pageSize.SelectedIndex = _lastPageSizeIndex;
+            }
         }
         _lastPageSizeIndex = _pageSize.SelectedIndex;
         _lastPageSizeItem = (PageSizeListItem) _pageSize.SelectedValue;

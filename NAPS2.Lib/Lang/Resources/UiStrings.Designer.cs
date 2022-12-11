@@ -510,6 +510,15 @@ namespace NAPS2.Lang.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Dimensions.
+        /// </summary>
+        internal static string Dimensions {
+            get {
+                return ResourceManager.GetString("Dimensions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Display name:.
         /// </summary>
         internal static string DisplayNameLabel {
@@ -933,6 +942,15 @@ namespace NAPS2.Lang.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Name (optional).
+        /// </summary>
+        internal static string NameOptional {
+            get {
+                return ResourceManager.GetString("NameOptional", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to NAPS2.
         /// </summary>
         internal static string Naps2 {
@@ -1091,6 +1109,15 @@ namespace NAPS2.Lang.Resources {
         internal static string OwnerPasswordLabel {
             get {
                 return ResourceManager.GetString("OwnerPasswordLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Custom Page Size.
+        /// </summary>
+        internal static string PageSizeFormTitle {
+            get {
+                return ResourceManager.GetString("PageSizeFormTitle", resourceCulture);
             }
         }
         
