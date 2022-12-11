@@ -1257,6 +1257,15 @@ namespace NAPS2.Lang.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Open Folder.
+        /// </summary>
+        internal static string OpenFolder {
+            get {
+                return ResourceManager.GetString("OpenFolder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Output.
         /// </summary>
         internal static string Output {

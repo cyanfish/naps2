@@ -783,4 +783,7 @@
   <data name="ReadyForScan" xml:space="preserve">
     <value>Ready for scan {0}.</value>
   </data>
+  <data name="OpenFolder" xml:space="preserve">
+    <value>Open Folder</value>
+  </data>
 </root>

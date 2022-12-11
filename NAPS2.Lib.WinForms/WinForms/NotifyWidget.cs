@@ -29,6 +29,8 @@ public partial class NotifyWidget : NotifyWidgetBase
         {
             contextMenuStrip1.Enabled = false;
         }
+
+        openFolderToolStripMenuItem.Text = UiStrings.OpenFolder;
     }
 
     private void hideTimer_Tick(object sender, EventArgs e)
