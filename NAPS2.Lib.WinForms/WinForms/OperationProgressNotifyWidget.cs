@@ -14,6 +14,7 @@ public partial class OperationProgressNotifyWidget : NotifyWidgetBase
         _operationProgress = operationProgress;
         _op = op;
 
+        cancelToolStripMenuItem.Text = UiStrings.Cancel;
         cancelToolStripMenuItem.Visible = op.AllowCancel;
         op.StatusChanged += Op_StatusChanged;
         op.Finished += Op_Finished;
