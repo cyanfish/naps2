@@ -711,9 +711,6 @@
   <data name="DeskewScannedPages" xml:space="preserve">
     <value>Deskew scanned pages</value>
   </data>
-  <data name="Compatibility" xml:space="preserve">
-    <value>Compatibility</value>
-  </data>
   <data name="BrightnessContrastAfterScan" xml:space="preserve">
     <value>Apply brightness/contrast after scan</value>
   </data>
