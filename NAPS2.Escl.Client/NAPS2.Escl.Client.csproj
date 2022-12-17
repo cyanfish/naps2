@@ -11,4 +11,8 @@
       <ProjectReference Include="..\NAPS2.Escl\NAPS2.Escl.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <PackageReference Include="LibUsbDotNet" Version="3.0.102-alpha" />
+    </ItemGroup>
+
 </Project>
