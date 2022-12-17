@@ -1,3 +1,4 @@
+#if ESCL
 using System.Threading;
 using NAPS2.Escl;
 using NAPS2.Escl.Client;
@@ -49,3 +50,4 @@ public class EsclScanDriver : IScanDriver
         }
     }
 }
+#endif
