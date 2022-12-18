@@ -270,6 +270,10 @@ public class DesktopController
                     formOnTop.BringToFront();
                 });
             }
+            if (msg.Equals(Pipes.MSG_CLOSE_WINDOW))
+            {
+                Invoker.Current.SafeInvoke(() => _desktopFormProvider.DesktopForm.Close());
+            }
         });
     }
 
