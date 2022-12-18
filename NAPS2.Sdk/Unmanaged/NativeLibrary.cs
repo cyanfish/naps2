@@ -7,7 +7,7 @@ public class NativeLibrary
     public static string FindPath(string libraryName, string? baseFolder = null)
     {
         var baseFolders = !string.IsNullOrWhiteSpace(baseFolder)
-            ? new[] { baseFolder }
+            ? new[] { baseFolder, Path.Combine(baseFolder, "lib") }
             : new[] { AssemblyHelper.LibFolder, AssemblyHelper.EntryFolder };
         foreach (var actualBaseFolder in baseFolders)
         {

@@ -1,4 +1,5 @@
 using System.Collections.ObjectModel;
+using System.Threading;
 using NAPS2.App.Tests.Targets;
 using NAPS2.App.Tests.Verification;
 using OpenQA.Selenium.Appium.Windows;
@@ -60,6 +61,7 @@ public class LanguageSelectionTests : AppiumTests
     private void ClickAndResetWindow(string name)
     {
         ClickAtName(name);
+        Thread.Sleep(100);
         ResetMainWindow();
     }
 

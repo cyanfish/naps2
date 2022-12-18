@@ -5,7 +5,8 @@ namespace NAPS2.Tools;
 
 public static class Cli
 {
-    public static void Run(string command, string args, Dictionary<string, string>? env = null, CancellationToken cancel = default)
+    public static void Run(string command, string args, Dictionary<string, string>? env = null,
+        CancellationToken cancel = default, bool noVerbose = false)
     {
         var startInfo = new ProcessStartInfo
         {
@@ -30,29 +31,43 @@ public static class Cli
         {
             throw new Exception($"Could not start {command}");
         }
+
+        void ConsoleCancel(object? sender, EventArgs e)
+        {
+            proc.Kill();
+        }
+
         cancel.Register(proc.Kill);
-        // TODO: Maybe we forward Console.CancelKeyPress
+        Console.CancelKeyPress += ConsoleCancel;
+        try
+        {
+            var savedOutput = new StringBuilder();
 
-        var savedOutput = new StringBuilder();
-        void Save(object sender, DataReceivedEventArgs e)
-        {
-            savedOutput.AppendLine(e.Data);
-        }
-
-        proc.OutputDataReceived += Output.EnableVerbose ? Print : Save;
-        proc.ErrorDataReceived += Print;
-        proc.BeginOutputReadLine();
-        proc.BeginErrorReadLine();
-        while (!proc.WaitForExit(100))
-        {
-        }
-        if (proc.ExitCode != 0 && !cancel.IsCancellationRequested)
-        {
-            if (!Output.EnableVerbose)
+            void Save(object sender, DataReceivedEventArgs e)
             {
-                Console.Write(savedOutput);
+                savedOutput.AppendLine(e.Data);
             }
-            throw new Exception($"Command failed: {command} {args}");
+
+            bool print = Output.EnableVerbose && !noVerbose;
+            proc.OutputDataReceived += print ? Print : Save;
+            proc.ErrorDataReceived += Print;
+            proc.BeginOutputReadLine();
+            proc.BeginErrorReadLine();
+            while (!proc.WaitForExit(100))
+            {
+            }
+            if (proc.ExitCode != 0 && !cancel.IsCancellationRequested)
+            {
+                if (!print)
+                {
+                    Console.Write(savedOutput);
+                }
+                throw new Exception($"Command failed: {command} {args}");
+            }
+        }
+        finally
+        {
+            Console.CancelKeyPress -= ConsoleCancel;
         }
     }
 
