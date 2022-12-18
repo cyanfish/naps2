@@ -1,4 +1,5 @@
 using System.Collections.ObjectModel;
+using NAPS2.App.Tests.Targets;
 using NAPS2.App.Tests.Verification;
 using OpenQA.Selenium.Appium.Windows;
 using Xunit;
@@ -11,9 +12,11 @@ public class LanguageSelectionTests : AppiumTests
 {
     private static readonly HashSet<string> ExpectedMissingLanguages = new() { "bn", "hi", "id", "th", "ur" };
 
-    [VerifyFact(AllowDebug = true)]
-    public void OpenLanguageDropdown()
+    [VerifyTheory(AllowDebug = true)]
+    [ClassData(typeof(AppiumTestData))]
+    public void OpenLanguageDropdown(IAppTestTarget target)
     {
+        Init(target);
         // Open the Language dropdown
         ClickAtName("Language");
         var menuItems = GetMenuItems();

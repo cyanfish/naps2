@@ -1,4 +1,5 @@
 using System.Threading;
+using NAPS2.App.Tests.Targets;
 using NAPS2.Sdk.Tests;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Appium;
@@ -8,19 +9,19 @@ namespace NAPS2.App.Tests.Appium;
 
 public class AppiumTests : ContextualTests
 {
-    protected readonly WindowsDriver<WindowsElement> _session;
+    protected WindowsDriver<WindowsElement> _session;
 
-    private static WindowsDriver<WindowsElement> StartSession(string exeName, string appData)
+    private static WindowsDriver<WindowsElement> StartSession(AppTestExe exe, string appData)
     {
         var opts = new AppiumOptions();
-        opts.AddAdditionalCapability("app", AppTestHelper.GetExePath(exeName));
+        opts.AddAdditionalCapability("app", AppTestHelper.GetExePath(exe));
         opts.AddAdditionalCapability("appArguments", $"/Naps2TestData \"{appData}\"");
         return new WindowsDriver<WindowsElement>(new Uri("http://127.0.0.1:4723"), opts);
     }
 
-    public AppiumTests()
+    public void Init(IAppTestTarget target)
     {
-        _session = StartSession("NAPS2.exe", FolderPath);
+        _session = StartSession(target.Gui, FolderPath);
     }
 
     public override void Dispose()

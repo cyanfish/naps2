@@ -1,3 +1,4 @@
+using NAPS2.App.Tests.Targets;
 using NAPS2.Sdk.Tests;
 using Xunit;
 
@@ -5,10 +6,11 @@ namespace NAPS2.App.Tests;
 
 public class WinFormsAppTests : ContextualTests
 {
-    [Fact]
-    public void CreatesWindow()
+    [Theory]
+    [ClassData(typeof(AppTestData))]
+    public void CreatesWindow(IAppTestTarget target)
     {
-        var process = AppTestHelper.StartGuiProcess("NAPS2.exe", FolderPath);
+        var process = AppTestHelper.StartGuiProcess(target.Gui, FolderPath);
         try
         {
             AppTestHelper.WaitForVisibleWindow(process);

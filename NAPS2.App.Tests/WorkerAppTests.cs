@@ -1,4 +1,5 @@
 using GrpcDotNetNamedPipes;
+using NAPS2.App.Tests.Targets;
 using NAPS2.Remoting.Worker;
 using NAPS2.Sdk.Tests;
 using Xunit;
@@ -7,10 +8,11 @@ namespace NAPS2.App.Tests;
 
 public class WorkerAppTests : ContextualTests
 {
-    [Fact]
-    public void CreatesPipeServer()
+    [Theory]
+    [ClassData(typeof(AppTestData))]
+    public void CreatesPipeServer(IAppTestTarget target)
     {
-        var process = AppTestHelper.StartProcess("NAPS2.Worker.exe", FolderPath, Process.GetCurrentProcess().Id.ToString());
+        var process = AppTestHelper.StartProcess(target.Worker, FolderPath, Process.GetCurrentProcess().Id.ToString());
         try
         {
             Assert.Equal("ready", process.StandardOutput.ReadLine());

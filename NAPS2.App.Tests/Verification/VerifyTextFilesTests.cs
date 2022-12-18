@@ -4,28 +4,31 @@ namespace NAPS2.App.Tests.Verification;
 
 public class VerifyTextFilesTests
 {
-    [VerifyFact]
-    public void License()
+    [VerifyTheory]
+    [ClassData(typeof(InstallDirTestData))]
+    public void License(string installDir)
     {
-        var path = Path.Combine(AppTestHelper.GetBaseDirectory(), "license.txt");
+        var path = Path.Combine(installDir, "license.txt");
         Assert.True(File.Exists(path));
         var text = File.ReadAllText(path);
         Assert.Contains("This program is free software", text);
     }
 
-    [VerifyFact]
-    public void Contributors()
+    [VerifyTheory]
+    [ClassData(typeof(InstallDirTestData))]
+    public void Contributors(string installDir)
     {
-        var path = Path.Combine(AppTestHelper.GetBaseDirectory(), "contributors.txt");
+        var path = Path.Combine(installDir, "contributors.txt");
         Assert.True(File.Exists(path));
         var text = File.ReadAllText(path);
         Assert.Contains("Primary NAPS2 developer", text);
     }
-    
-    [VerifyFact]
-    public void AppSettings()
+
+    [VerifyTheory]
+    [ClassData(typeof(InstallDirTestData))]
+    public void AppSettings(string installDir)
     {
-        var path = Path.Combine(AppTestHelper.GetBaseDirectory(), "appsettings.xml");
+        var path = Path.Combine(installDir, "appsettings.xml");
         Assert.True(File.Exists(path));
         var text = File.ReadAllText(path);
         Assert.Contains("<AppConfig>", text);

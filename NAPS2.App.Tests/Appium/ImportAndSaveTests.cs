@@ -1,4 +1,5 @@
 using System.Threading;
+using NAPS2.App.Tests.Targets;
 using NAPS2.App.Tests.Verification;
 using NAPS2.Sdk.Tests;
 using NAPS2.Sdk.Tests.Asserts;
@@ -9,9 +10,11 @@ namespace NAPS2.App.Tests.Appium;
 [Collection("appium")]
 public class ImportAndSaveTests : AppiumTests
 {
-    [VerifyFact(AllowDebug = true)]
-    public void ImportVariousAndSavePdfWithOcr()
+    [VerifyTheory(AllowDebug = true)]
+    [ClassData(typeof(AppiumTestData))]
+    public void ImportVariousAndSavePdfWithOcr(IAppTestTarget target)
     {
+        Init(target);
         CopyResourceToFile(PdfResources.word_generated_pdf, "word.pdf");
         CopyResourceToFile(PdfResources.word_patcht_pdf, "patcht.pdf");
         CopyResourceToFile(PdfResources.image_pdf, "image.pdf");

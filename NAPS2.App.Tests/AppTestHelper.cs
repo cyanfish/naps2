@@ -1,31 +1,34 @@
 using System.Runtime.InteropServices;
 using System.Threading;
+using NAPS2.App.Tests.Targets;
 using Xunit;
 
 namespace NAPS2.App.Tests;
 
 public static class AppTestHelper
 {
-    public static Process StartGuiProcess(string exeName, string appData, string args = null)
+    public static Process StartGuiProcess(AppTestExe exe, string appData, string args = null)
     {
-        var startInfo = GetProcessStartInfo(exeName, appData, args);
+        var startInfo = GetProcessStartInfo(exe, appData, args);
         return Process.Start(startInfo);
     }
 
-    public static Process StartProcess(string exeName, string appData, string args = null)
+    public static Process StartProcess(AppTestExe exe, string appData, string args = null)
     {
-        var startInfo = GetProcessStartInfo(exeName, appData, args);
+        var startInfo = GetProcessStartInfo(exe, appData, args);
         startInfo.RedirectStandardInput = true;
         startInfo.RedirectStandardOutput = true;
         startInfo.RedirectStandardError = true;
         return Process.Start(startInfo);
     }
 
-    private static ProcessStartInfo GetProcessStartInfo(string exeName, string appData, string args) =>
+    private static ProcessStartInfo GetProcessStartInfo(AppTestExe exe, string appData, string args) =>
         new()
         {
-            FileName = GetExePath(exeName),
-            Arguments = args ?? "",
+            FileName = GetExePath(exe),
+            Arguments = exe.ArgPrefix != null && args != null
+                ? $"{exe.ArgPrefix} {args}"
+                : exe.ArgPrefix ?? args ?? "",
             UseShellExecute = false,
             EnvironmentVariables =
             {
@@ -33,24 +36,24 @@ public static class AppTestHelper
             }
         };
 
-    public static string GetBaseDirectory()
+    public static string GetBaseDirectory(AppTestExe exe)
     {
         var envDirectory = Environment.GetEnvironmentVariable("NAPS2_TEST_ROOT");
-        var testDirectory = AssemblyHelper.LibFolder;
+        var testDirectory = exe.DefaultRootPath;
         return string.IsNullOrEmpty(envDirectory) ? testDirectory : envDirectory;
     }
 
-    public static string GetExePath(string exeName)
+    public static string GetExePath(AppTestExe exe)
     {
-        var dir = GetBaseDirectory();
-        var file = Path.Combine(dir, exeName);
-        if (!File.Exists(file))
+        var dir = GetBaseDirectory(exe);
+        if (dir != exe.DefaultRootPath)
         {
-            file = Path.Combine(dir, "lib", exeName);
+            dir = Path.Combine(dir, exe.TestRootSubPath);
         }
+        var file = Path.Combine(dir, exe.ExeSubPath);
         if (!File.Exists(file))
         {
-            throw new Exception($"Could not find {exeName} in {dir}");
+            throw new Exception($"Could not find {exe.ExeSubPath} in {dir}");
         }
         return file;
     }
@@ -98,4 +101,6 @@ public static class AppTestHelper
         var path = Path.Combine(appData, "errorlog.txt");
         Assert.True(File.Exists(path), path);
     }
+
+    public static string SolutionRoot => Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "..", "..", "..", ".."));
 }

@@ -1,4 +1,5 @@
 using System.Threading;
+using NAPS2.App.Tests.Targets;
 using NAPS2.App.Tests.Verification;
 using NAPS2.Sdk.Tests.Asserts;
 using Xunit;
@@ -11,9 +12,11 @@ public class ScanAndSaveTests : AppiumTests
     private const string WIA_DEVICE_NAME = "";
     private const string TWAIN_DEVICE_NAME = "Canon MP495 ser";
 
-    [VerifyFact(AllowDebug = true)]
-    public void ScanWiaSavePdf()
+    [VerifyTheory(AllowDebug = true)]
+    [ClassData(typeof(AppiumTestData))]
+    public void ScanWiaSavePdf(IAppTestTarget target)
     {
+        Init(target);
         // Clicking Scan without a profile opens the profile settings window
         ClickAtName("Scan");
         // WIA driver is selected by default, so we open the WIA device dialog
@@ -44,9 +47,11 @@ public class ScanAndSaveTests : AppiumTests
         AppTestHelper.AssertNoErrorLog(FolderPath);
     }
 
-    [VerifyFact(AllowDebug = true)]
-    public void ScanTwainSaveImage()
+    [VerifyTheory(AllowDebug = true)]
+    [ClassData(typeof(AppiumTestData))]
+    public void ScanTwainSaveImage(IAppTestTarget target)
     {
+        Init(target);
         // Clicking Scan without a profile opens the profile settings window
         ClickAtName("Scan");
         ClickAtName("TWAIN Driver");

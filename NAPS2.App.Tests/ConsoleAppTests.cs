@@ -1,3 +1,4 @@
+using NAPS2.App.Tests.Targets;
 using NAPS2.Sdk.Tests;
 using Xunit;
 
@@ -5,14 +6,15 @@ namespace NAPS2.App.Tests;
 
 public class ConsoleAppTests : ContextualTests
 {
-    [Fact]
-    public void ConvertsImportedFile()
+    [Theory]
+    [ClassData(typeof(AppTestData))]
+    public void ConvertsImportedFile(IAppTestTarget target)
     {
         var importPath = CopyResourceToFile(ImageResources.dog, "in.png");
         var outputPath = Path.Combine(FolderPath, "out.jpg");
         var args = $"-n 0 -i \"{importPath}\" -o \"{outputPath}\"";
 
-        var process = AppTestHelper.StartProcess("NAPS2.Console.exe", FolderPath, args);
+        var process = AppTestHelper.StartProcess(target.Console, FolderPath, args);
         try
         {
             Assert.True(process.WaitForExit(5000));
@@ -28,14 +30,15 @@ public class ConsoleAppTests : ContextualTests
         }
     }
 
-    [Fact]
-    public void NonZeroExitCodeForError()
+    [Theory]
+    [ClassData(typeof(AppTestData))]
+    public void NonZeroExitCodeForError(IAppTestTarget target)
     {
         var importPath = Path.Combine(FolderPath, "doesnotexist.png");
         var outputPath = Path.Combine(FolderPath, "out.jpg");
         var args = $"-n 0 -i \"{importPath}\" -o \"{outputPath}\"";
 
-        var process = AppTestHelper.StartProcess("NAPS2.Console.exe", FolderPath, args);
+        var process = AppTestHelper.StartProcess(target.Console, FolderPath, args);
         try
         {
             Assert.True(process.WaitForExit(5000));
