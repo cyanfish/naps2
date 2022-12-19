@@ -272,7 +272,17 @@ public class DesktopController
             }
             if (msg.Equals(Pipes.MSG_CLOSE_WINDOW))
             {
-                Invoker.Current.SafeInvoke(() => _desktopFormProvider.DesktopForm.Close());
+                Invoker.Current.SafeInvoke(() =>
+                {
+                    _desktopFormProvider.DesktopForm.Close();
+#if NET6_0_OR_GREATER
+                    if (OperatingSystem.IsMacOS())
+                    {
+                        // Closing the main window isn't enough to quit the app on Mac
+                        Application.Instance.Quit();
+                    }
+#endif
+                });
             }
         });
     }
