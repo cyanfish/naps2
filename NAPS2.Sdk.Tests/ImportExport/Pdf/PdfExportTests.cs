@@ -1,3 +1,5 @@
+using System.Threading;
+using Moq;
 using NAPS2.ImportExport.Pdf;
 using NAPS2.Sdk.Tests.Asserts;
 using Xunit;
@@ -236,5 +238,52 @@ public class PdfExporterTests : ContextualTests
 
         PdfAsserts.AssertEncrypted(filePath, "hello", "world");
         PdfAsserts.AssertMetadata(metadata with { Creator = "NAPS2" }, filePath, "world");
+    }
+
+    [Theory]
+    [ClassData(typeof(OcrTestData))]
+    public async Task ExportProgress(OcrTestConfig config)
+    {
+        config.StorageConfig.Apply(this);
+
+        var progressMock = new Mock<ProgressCallback>();
+
+        var filePath = Path.Combine(FolderPath, "test.pdf");
+        var images = new[] { CreateScannedImage(), CreateScannedImage(), CreateScannedImage() };
+        var result = await _exporter.Export(filePath, images, new PdfExportParams(), config.OcrParams,
+            progress: progressMock.Object);
+
+        Assert.True(result);
+        progressMock.Verify(x => x(0, 3));
+        progressMock.Verify(x => x(1, 3));
+        progressMock.Verify(x => x(2, 3));
+        progressMock.Verify(x => x(3, 3));
+        progressMock.VerifyNoOtherCalls();
+    }
+
+    [Theory]
+    [ClassData(typeof(OcrTestData))]
+    public async Task ExportCancellation(OcrTestConfig config)
+    {
+        config.StorageConfig.Apply(this);
+
+        var progressMock = new Mock<ProgressCallback>();
+        var cts = new CancellationTokenSource();
+
+        void Progress(int current, int total)
+        {
+            progressMock.Object(current, total);
+            if (current == 1) cts.Cancel();
+        }
+
+        var filePath = Path.Combine(FolderPath, "test.pdf");
+        var images = new[] { CreateScannedImage(), CreateScannedImage(), CreateScannedImage() };
+        var result = await _exporter.Export(filePath, images, new PdfExportParams(), config.OcrParams,
+            progress: new ProgressHandler(Progress, cts.Token));
+
+        Assert.False(result);
+        progressMock.Verify(x => x(0, 3));
+        progressMock.Verify(x => x(1, 3));
+        progressMock.VerifyNoOtherCalls();
     }
 }

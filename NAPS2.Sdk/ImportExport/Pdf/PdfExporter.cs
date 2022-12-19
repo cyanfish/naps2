@@ -53,13 +53,24 @@ public class PdfExporter : IPdfExporter
             var imagePages = new List<PageExportState>();
             var pdfPages = new List<PageExportState>();
 
+            int currentProgress = 0;
+
+            void IncrementProgress()
+            {
+                Interlocked.Increment(ref currentProgress);
+                progress.Report(currentProgress, images.Count);
+            }
+
+            progress.Report(0, images.Count);
+
             try
             {
                 int pageIndex = 0;
                 foreach (var image in images)
                 {
                     var pageState = new PageExportState(
-                        image, pageIndex++, document, document.AddPage(), ocrEngine, ocrParams, progress.CancelToken, exportParams.Compat);
+                        image, pageIndex++, document, document.AddPage(), ocrEngine, ocrParams, IncrementProgress,
+                        progress.CancelToken, exportParams.Compat);
                     // TODO: To improve our ability to passthrough, we could consider using Pdfium to apply the transform to
                     // the underlying PDF file. For example, doing color shifting on individual text + image objects, or
                     // applying matrix changes.
@@ -105,12 +116,14 @@ public class PdfExporter : IPdfExporter
 
                 await imagePagesPipeline;
                 await pdfPagesOcrPipeline;
+                if (progress.IsCancellationRequested) return false;
 
                 // TODO: Doing in memory as that's presumably faster than IO, but of course that's quite a bit of memory use potentially...
                 var stream = FinalizeAndSaveDocument(document, exportParams);
+                if (progress.IsCancellationRequested) return false;
 
                 var passthroughPages = pdfPages.Where(x => !x.NeedsOcr).ToList();
-                MergePassthroughPages(stream, path, passthroughPages, exportParams);
+                return MergePassthroughPages(stream, path, passthroughPages, exportParams, progress);
             }
             finally
             {
@@ -125,14 +138,14 @@ public class PdfExporter : IPdfExporter
         });
     }
 
-    private void MergePassthroughPages(MemoryStream stream, string path, List<PageExportState> passthroughPages,
-        PdfExportParams exportParams)
+    private bool MergePassthroughPages(MemoryStream stream, string path, List<PageExportState> passthroughPages,
+        PdfExportParams exportParams, ProgressHandler progress)
     {
         if (!passthroughPages.Any())
         {
             using var fileStream = new FileStream(path, FileMode.Create);
             stream.CopyTo(fileStream);
-            return;
+            return true;
         }
         lock (PdfiumNativeLibrary.Instance)
         {
@@ -167,8 +180,10 @@ public class PdfExporter : IPdfExporter
                             sourceHandle.Free();
                         }
                     }
+                    if (progress.IsCancellationRequested) return false;
                 }
                 destDoc.Save(path);
+                return true;
             }
             finally
             {
@@ -225,6 +240,7 @@ public class PdfExporter : IPdfExporter
 
     private PageExportState RenderStep(PageExportState state)
     {
+        if (state.CancelToken.IsCancellationRequested) return state;
         state.RenderedImage = state.Image.Render();
         // TODO: How to set this?
         state.FileFormat = ImageFileFormat.Jpeg;
@@ -233,6 +249,7 @@ public class PdfExporter : IPdfExporter
 
     private PageExportState WriteToPdfSharpStep(PageExportState state)
     {
+        if (state.CancelToken.IsCancellationRequested) return state;
         // TODO: Try and avoid locking somehow
         lock (state.Document)
         {
@@ -255,6 +272,7 @@ public class PdfExporter : IPdfExporter
                 DrawOcrTextOnPage(state.Page, state.OcrTask.Result);
             }
         }
+        state.IncrementProgress();
         return state;
     }
 
@@ -301,6 +319,7 @@ public class PdfExporter : IPdfExporter
 
     private PageExportState InitOcrStep(PageExportState state)
     {
+        if (state.CancelToken.IsCancellationRequested) return state;
         var ext = state.FileFormat == ImageFileFormat.Png ? ".png" : ".jpg";
         string ocrTempFilePath = Path.Combine(_scanningContext.TempFolderPath, Path.GetRandomFileName() + ext);
         if (!_scanningContext.OcrRequestQueue.HasCachedResult(state.OcrEngine!, state.Image, state.OcrParams!))
@@ -320,12 +339,14 @@ public class PdfExporter : IPdfExporter
 
     private async Task<PageExportState> WaitForOcrStep(PageExportState state)
     {
+        if (state.CancelToken.IsCancellationRequested) return state;
         await state.OcrTask!;
         return state;
     }
 
     private PageExportState CheckIfOcrNeededStep(PageExportState state)
     {
+        if (state.CancelToken.IsCancellationRequested) return state;
         try
         {
             if (state.Image.Storage is ImageFileStorage fileStorage)
@@ -448,7 +469,8 @@ public class PdfExporter : IPdfExporter
     private class PageExportState
     {
         public PageExportState(ProcessedImage image, int pageIndex, PdfDocument document, PdfPage page,
-            IOcrEngine? ocrEngine, OcrParams? ocrParams, CancellationToken cancelToken, PdfCompat compat)
+            IOcrEngine? ocrEngine, OcrParams? ocrParams, Action incrementProgress, CancellationToken cancelToken,
+            PdfCompat compat)
         {
             Image = image;
             PageIndex = pageIndex;
@@ -456,6 +478,7 @@ public class PdfExporter : IPdfExporter
             Page = page;
             OcrEngine = ocrEngine;
             OcrParams = ocrParams;
+            IncrementProgress = incrementProgress;
             CancelToken = cancelToken;
             Compat = compat;
         }
@@ -467,6 +490,7 @@ public class PdfExporter : IPdfExporter
         public PdfPage Page { get; set; }
         public IOcrEngine? OcrEngine { get; }
         public OcrParams? OcrParams { get; }
+        public Action IncrementProgress { get; }
         public CancellationToken CancelToken { get; }
         public PdfCompat Compat { get; }
 
