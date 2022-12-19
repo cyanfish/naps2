@@ -28,6 +28,10 @@ internal static class Paths
     }
 
     public static string Setup => Path.Combine(SolutionRoot, "NAPS2.Setup");
+
+    public static string SetupWindows => Path.Combine(Setup, "config", "windows");
+
+    public static string SetupLinux => Path.Combine(Setup, "config", "linux");
     
     public static string SetupObj => Path.Combine(Setup, "obj");
     

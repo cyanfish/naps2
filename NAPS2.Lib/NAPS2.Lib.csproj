@@ -13,8 +13,8 @@
     <Configurations>Debug;Release;DebugLang</Configurations>
   </PropertyGroup>
 
-  <Import Project="..\NAPS2.Setup\CommonTargets.targets" />
-  <Import Project="..\NAPS2.Setup\LibUsers.targets" />
+  <Import Project="..\NAPS2.Setup\targets\CommonTargets.targets" />
+  <Import Project="..\NAPS2.Setup\targets\LibUsers.targets" />
 
   <PropertyGroup Condition="'$(TargetFramework)' == 'net6-macos10.15'">
     <DefineConstants>MAC</DefineConstants>

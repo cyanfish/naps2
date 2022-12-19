@@ -5,7 +5,7 @@
         <EnablePreviewFeatures>true</EnablePreviewFeatures>
     </PropertyGroup>
 
-    <Import Project="..\NAPS2.Setup\VersionTargets.targets" />
+    <Import Project="VersionTargets.targets" />
 
     <ItemGroup>
         <Using Include="System" />

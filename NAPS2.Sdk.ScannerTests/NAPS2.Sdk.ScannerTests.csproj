@@ -6,9 +6,9 @@
         <RootNamespace>NAPS2.Sdk.ScannerTests</RootNamespace>
     </PropertyGroup>
 
-    <Import Project="..\NAPS2.Setup\CommonTargets.targets" />
-    <Import Project="..\NAPS2.Setup\NativeLibs.targets" />
-    <Import Project="..\NAPS2.Setup\SdkUsers.targets" />
+    <Import Project="..\NAPS2.Setup\targets\CommonTargets.targets" />
+    <Import Project="..\NAPS2.Setup\targets\NativeLibs.targets" />
+    <Import Project="..\NAPS2.Setup\targets\SdkUsers.targets" />
 
     <ItemGroup>
         <ProjectReference Include="..\NAPS2.Sdk.Tests\NAPS2.Sdk.Tests.csproj" />

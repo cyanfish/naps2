@@ -19,6 +19,6 @@
     <PackageReference Include="VirusTotalNet" Version="2.0.1" />
   </ItemGroup>
 
-  <Import Project="..\NAPS2.Setup\CommonTargets.targets" />
+  <Import Project="..\NAPS2.Setup\targets\CommonTargets.targets" />
   
 </Project>

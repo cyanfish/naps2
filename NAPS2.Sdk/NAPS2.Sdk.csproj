@@ -15,8 +15,8 @@
     <Configurations>Debug;InstallerEXE;DebugLang;InstallerMSI;Standalone</Configurations>
   </PropertyGroup>
 
-  <Import Project="..\NAPS2.Setup\CommonTargets.targets" />
-  <Import Project="..\NAPS2.Setup\SdkUsers.targets" />
+  <Import Project="..\NAPS2.Setup\targets\CommonTargets.targets" />
+  <Import Project="..\NAPS2.Setup\targets\SdkUsers.targets" />
 
   <PropertyGroup Condition="'$(OS)' != 'Windows_NT'">
     <DefineConstants>NONWINDOWS</DefineConstants>

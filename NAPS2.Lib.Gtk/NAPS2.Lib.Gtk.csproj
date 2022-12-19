@@ -11,8 +11,8 @@
         <Copyright>Copyright 2009, 2012-2020 NAPS2 Contributors; Icons from http://www.fatcow.com/free-icons</Copyright>
     </PropertyGroup>
 
-    <Import Project="..\NAPS2.Setup\CommonTargets.targets" />
-    <Import Project="..\NAPS2.Setup\LibUsers.targets" />
+    <Import Project="..\NAPS2.Setup\targets\CommonTargets.targets" />
+    <Import Project="..\NAPS2.Setup\targets\LibUsers.targets" />
 
     <ItemGroup>
         <ProjectReference Include="..\NAPS2.Images.Gtk\NAPS2.Images.Gtk.csproj" />

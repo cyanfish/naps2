@@ -31,6 +31,6 @@
         </AssemblyAttribute>
     </ItemGroup>
 
-    <Import Project="..\NAPS2.Setup\CommonTargets.targets" />
-    <Import Project="..\NAPS2.Setup\ImageUsers.targets" />
+    <Import Project="..\NAPS2.Setup\targets\CommonTargets.targets" />
+    <Import Project="..\NAPS2.Setup\targets\ImageUsers.targets" />
 </Project>

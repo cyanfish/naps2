@@ -1,6 +1,6 @@
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 
-    <Import Project="..\NAPS2.Setup\ImageUsers.targets" />
+    <Import Project="ImageUsers.targets" />
 
     <ItemGroup>
         <Using Include="NAPS2.Lang.Resources" />

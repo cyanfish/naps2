@@ -15,8 +15,8 @@
     <Configurations>Debug;Release;DebugLang</Configurations>
   </PropertyGroup>
 
-  <Import Project="..\NAPS2.Setup\CommonTargets.targets" />
-  <Import Project="..\NAPS2.Setup\LibUsers.targets" />
+  <Import Project="..\NAPS2.Setup\targets\CommonTargets.targets" />
+  <Import Project="..\NAPS2.Setup\targets\LibUsers.targets" />
 
   <ItemGroup>
     <ProjectReference Include="..\NAPS2.Lib\NAPS2.Lib.csproj" />

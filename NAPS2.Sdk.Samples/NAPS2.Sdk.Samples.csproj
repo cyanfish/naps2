@@ -4,8 +4,8 @@
     <TargetFrameworks>net6;net462</TargetFrameworks>
   </PropertyGroup>
   
-  <Import Project="..\NAPS2.Setup\CommonTargets.targets" />
-  <Import Project="..\NAPS2.Setup\SdkUsers.targets" />
+  <Import Project="..\NAPS2.Setup\targets\CommonTargets.targets" />
+  <Import Project="..\NAPS2.Setup\targets\SdkUsers.targets" />
   
   <ItemGroup>
     <ProjectReference Include="..\NAPS2.Sdk\NAPS2.Sdk.csproj" />

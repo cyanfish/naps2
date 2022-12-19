@@ -11,9 +11,9 @@
     <DefineConstants Condition="$([MSBuild]::IsOSPlatform('Windows'))">WINDOWS</DefineConstants>
   </PropertyGroup>
 
-  <Import Project="..\NAPS2.Setup\CommonTargets.targets" />
-  <Import Project="..\NAPS2.Setup\NativeLibs.targets" />
-  <Import Project="..\NAPS2.Setup\SdkUsers.targets" />
+  <Import Project="..\NAPS2.Setup\targets\CommonTargets.targets" />
+  <Import Project="..\NAPS2.Setup\targets\NativeLibs.targets" />
+  <Import Project="..\NAPS2.Setup\targets\SdkUsers.targets" />
 
   <ItemGroup>
     <Reference Include="PdfSharpCore">

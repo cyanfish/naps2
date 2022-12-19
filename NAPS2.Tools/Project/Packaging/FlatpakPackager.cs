@@ -16,7 +16,7 @@ public static class FlatpakPackager
         VerifyCanBuildArch(packageInfo.Platform);
 
         // Update metainfo file with the current version/date
-        var metaInfo = File.ReadAllText(Path.Combine(Paths.Setup, "com.naps2.Naps2.metainfo.xml"));
+        var metaInfo = File.ReadAllText(Path.Combine(Paths.SetupLinux, "com.naps2.Naps2.metainfo.xml"));
         var version = ProjectHelper.GetDefaultProjectVersion();
         var date = DateTime.Now.ToString("yyyy-MM-dd");
         metaInfo = Regex.Replace(metaInfo,
@@ -24,7 +24,7 @@ public static class FlatpakPackager
             $"<release version=\"{version}\" date=\"{date}\" />");
 
         // Update manifest file with the correct paths
-        var manifest = File.ReadAllText(Path.Combine(Paths.Setup, "com.naps2.Naps2.yml"));
+        var manifest = File.ReadAllText(Path.Combine(Paths.SetupLinux, "com.naps2.Naps2.yml"));
         // TODO: Update this after we use a real repo path
         manifest = manifest.Replace("../../../../../..", Paths.SolutionRoot);
 
@@ -34,7 +34,7 @@ public static class FlatpakPackager
         File.WriteAllText(Path.Combine(packageDir, "com.naps2.Naps2.metainfo.xml"), metaInfo);
         File.WriteAllText(Path.Combine(packageDir, "com.naps2.Naps2.yml"), manifest);
         File.Copy(
-            Path.Combine(Paths.Setup, "com.naps2.Naps2.desktop"),
+            Path.Combine(Paths.SetupLinux, "com.naps2.Naps2.desktop"),
             Path.Combine(packageDir, "com.naps2.Naps2.desktop"), true);
         File.Copy(
             Path.Combine(Paths.SolutionRoot, "NAPS2.Lib", "Icons", "scanner-128.png"),
@@ -47,7 +47,7 @@ public static class FlatpakPackager
             // TODO: Maybe have an option to just restore for the current arch? When we do an upload we definitely want all
             // of them, but for just building a single file we only need the current
             Output.Verbose("Generating nuget sources");
-            var scriptPath = Path.Combine(Paths.Setup, "flatpak-dotnet-generator.py");
+            var scriptPath = Path.Combine(Paths.SetupLinux, "flatpak-dotnet-generator.py");
             var nugetSourcesPath = Path.Combine(packageDir, "nuget-sources.json");
             var projectPath = Path.Combine(Paths.SolutionRoot, "NAPS2.App.Gtk", "NAPS2.App.Gtk.csproj");
             Cli.Run("python3", $"{scriptPath} {nugetSourcesPath} {projectPath}");

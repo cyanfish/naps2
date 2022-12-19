@@ -15,9 +15,9 @@
     <Copyright>Copyright 2009, 2012-2022 NAPS2 Contributors</Copyright>
   </PropertyGroup>
 
-  <Import Project="..\NAPS2.Setup\CommonTargets.targets" />
-  <Import Project="..\NAPS2.Setup\NativeLibs.Mac.targets" />
-  <Import Project="..\NAPS2.Setup\SdkUsers.targets" />
+  <Import Project="..\NAPS2.Setup\targets\CommonTargets.targets" />
+  <Import Project="..\NAPS2.Setup\targets\NativeLibs.Mac.targets" />
+  <Import Project="..\NAPS2.Setup\targets\SdkUsers.targets" />
   
   <ItemGroup>
     <PackageReference Include="NAPS2.Sane.Binaries" Version="1.0.4" />

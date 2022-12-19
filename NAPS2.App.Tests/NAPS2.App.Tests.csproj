@@ -8,9 +8,9 @@
         <DefineConstants Condition=" '$(Configuration)' == 'DebugLang' ">DEBUG_LANG</DefineConstants>
     </PropertyGroup>
 
-    <Import Project="..\NAPS2.Setup\CommonTargets.targets" />
-    <Import Project="..\NAPS2.Setup\NativeLibs.targets" />
-    <Import Project="..\NAPS2.Setup\LibUsers.targets" />
+    <Import Project="..\NAPS2.Setup\targets\CommonTargets.targets" />
+    <Import Project="..\NAPS2.Setup\targets\NativeLibs.targets" />
+    <Import Project="..\NAPS2.Setup\targets\LibUsers.targets" />
 
     <ItemGroup>
         <PackageReference Include="NAPS2.Tesseract.Binaries" Version="1.0.3" />

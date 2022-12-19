@@ -1,6 +1,6 @@
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 
-    <Import Project="..\NAPS2.Setup\SdkUsers.targets" />
+    <Import Project="SdkUsers.targets" />
 
     <ItemGroup>
         <Using Include="NAPS2.Config" />

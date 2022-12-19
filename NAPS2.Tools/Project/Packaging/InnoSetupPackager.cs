@@ -21,7 +21,7 @@ public static class InnoSetupPackager
 
     private static string GenerateInnoDef(PackageInfo packageInfo)
     {
-        var template = File.ReadAllText(Path.Combine(Paths.Setup, "setup.template.iss"));
+        var template = File.ReadAllText(Path.Combine(Paths.SetupWindows, "setup.template.iss"));
 
         var defLines = new StringBuilder();
         defLines.AppendLine($"#define AppVersion \"{packageInfo.Version}\"");
