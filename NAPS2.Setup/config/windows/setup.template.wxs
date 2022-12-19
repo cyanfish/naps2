@@ -31,11 +31,11 @@
     </Feature>
 
     <Directory Id="TARGETDIR" Name="SourceDir">
-      <Directory Id="ProgramFiles{{ !64 }}64{{ !~64 }}{{ !univ }}32{{ !~univ }}Folder">
+      <Directory Id="ProgramFiles{{ !64 }}64{{ !~64 }}Folder">
         <Directory Id="INSTALLFOLDER" Name="NAPS2">
           <Directory Id="LIBFOLDER" Name="lib">
-            <Directory Id="LIBWIN32FOLDER" Name="win32" />
-            <!-- !64 --><Directory Id="LIBWIN64FOLDER" Name="win64" /><!-- !~64 -->
+            <Directory Id="LIBWIN32FOLDER" Name="_win32" />
+            <!-- !64 --><Directory Id="LIBWIN64FOLDER" Name="_win64" /><!-- !~64 -->
           </Directory>
         </Directory>
       </Directory>
