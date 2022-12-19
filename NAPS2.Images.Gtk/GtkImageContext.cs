@@ -1,3 +1,4 @@
+using System.Threading;
 using Gdk;
 using NAPS2.Util;
 
@@ -24,6 +25,13 @@ public class GtkImageContext : ImageContext
 
     protected override IMemoryImage LoadCore(Stream stream, ImageFileFormat format)
     {
+        if (format == ImageFileFormat.Tiff)
+        {
+            IMemoryImage image = null;
+            var cts = new CancellationTokenSource();
+            _tiffIo.LoadTiff(img => { image = img; cts.Cancel(); }, stream, cts.Token);
+            return image;
+        }
         return new GtkImage(this, new Pixbuf(stream));
     }
 
@@ -42,6 +50,8 @@ public class GtkImageContext : ImageContext
     }
 
     public override ITiffWriter TiffWriter => _tiffIo;
+
+    internal LibTiffIo TiffIo => _tiffIo;
 
     public override IMemoryImage Create(int width, int height, ImagePixelFormat pixelFormat)
     {

@@ -111,8 +111,7 @@ internal class LibTiffIo : ITiffWriter
         }));
         if (pixelFormat == ImagePixelFormat.ARGB32)
         {
-            // TODO: I think this is completely wrong
-            LibTiff.TIFFSetField(tiff, TiffTag.ExtraSamples, 1);
+            LibTiff.TIFFSetField(tiff, TiffTag.ExtraSamples, 1, new short[] { 2 });
         }
         if (image.HorizontalResolution != 0 && image.VerticalResolution != 0)
         {
@@ -158,6 +157,9 @@ internal class LibTiffIo : ITiffWriter
                 img.OriginalFileFormat = ImageFileFormat.Tiff;
                 using var imageLock = img.Lock(LockMode.WriteOnly, out var data);
                 ReadTiffFrame(data.safePtr, tiff, w, h);
+                imageLock.Dispose();
+                // LibTiff always produces pre-multiplied alpha, which we don't want
+                new UnmultiplyAlphaOp().Perform(img);
                 produceImage(img);
                 progress.Report(++i, count);
             } while (LibTiff.TIFFReadDirectory(tiff) == 1);

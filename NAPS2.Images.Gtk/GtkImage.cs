@@ -75,6 +75,11 @@ public class GtkImage : IMemoryImage
         {
             imageFormat = ImageContext.GetFileFormatFromExtension(path);
         }
+        if (imageFormat == ImageFileFormat.Tiff)
+        {
+            ((GtkImageContext) ImageContext).TiffIo.SaveTiff(new List<IMemoryImage> { this }, path);
+            return;
+        }
         ImageContext.CheckSupportsFormat(imageFormat);
         var type = GetType(imageFormat);
         var (keys, values) = GetSaveOptions(imageFormat, quality);
@@ -86,6 +91,11 @@ public class GtkImage : IMemoryImage
         if (imageFormat == ImageFileFormat.Unspecified)
         {
             throw new ArgumentException("Format required to save to a stream", nameof(imageFormat));
+        }
+        if (imageFormat == ImageFileFormat.Tiff)
+        {
+            ((GtkImageContext) ImageContext).TiffIo.SaveTiff(new List<IMemoryImage> { this }, stream);
+            return;
         }
         ImageContext.CheckSupportsFormat(imageFormat);
         var type = GetType(imageFormat);

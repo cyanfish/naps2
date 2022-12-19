@@ -76,6 +76,9 @@ internal static class LibTiff
     public static extern int TIFFSetField(IntPtr tiff, TiffTag tag, double field);
 
     [DllImport("libtiff.so.5")]
+    public static extern int TIFFSetField(IntPtr tiff, TiffTag tag, short field, short[] array);
+
+    [DllImport("libtiff.so.5")]
     public static extern int TIFFWriteScanline(
         IntPtr tiff, tdata_t buf, int row, short sample);
 
