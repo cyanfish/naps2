@@ -5,7 +5,7 @@ namespace NAPS2.Escl.Tests;
 
 public class UsbTests
 {
-    [Fact]
+    [Fact(Skip = "Requires USB device")]
     public async Task Usb()
     {
         var poller = new EsclUsbPoller();
