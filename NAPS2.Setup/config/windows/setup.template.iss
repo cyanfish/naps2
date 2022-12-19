@@ -1,5 +1,9 @@
 ; !defs
 
+; Set up for InnoDependencyInstaller
+#define public Dependency_NoExampleSetup
+#include "..\config\windows\CodeDependencies.iss"
+
 [Setup]
 AppName=NAPS2 - Not Another PDF Scanner
 AppVerName=NAPS2 {#AppVersion}
@@ -74,6 +78,14 @@ Name: "Vietnamese";           MessagesFile: "..\..\NAPS2.Setup\config\windows\in
 
 [Tasks]
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
+
+; Impl for InnoDependencyInstaller
+[Code]
+function InitializeSetup: Boolean;
+begin
+  Dependency_AddVC2015To2022;
+  Result := True;
+end;
 
 [Files]                              
 ; !files
