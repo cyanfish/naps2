@@ -85,8 +85,7 @@ public class SavePdfOperation : OperationBase
                         break;
                     }
 
-
-                    var progress = singleFile ? (ProgressHandler) OnProgress : new ProgressHandler();
+                    var progress = new ProgressHandler(singleFile ? OnProgress : null, CancelToken);
                     result = await _pdfExporter.Export(currentFileName, imagesForFile,
                         new PdfExportParams(pdfSettings.Metadata, pdfSettings.Encryption,
                             pdfSettings.Compat), ocrParams, progress);
