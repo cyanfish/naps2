@@ -33,8 +33,7 @@ public class ProgressForm : EtoDialogBase
             _status,
             EtoPlatform.Current.FormatProgressBar(_progressBar),
             L.Row(
-                _numeric,
-                C.Filler(),
+                _numeric.Scale().AlignCenter(),
                 _runInBg,
                 _cancel
             )
