@@ -87,8 +87,6 @@ public class PdfExporter : IPdfExporter
                     }
                 }
 
-                // TODO: Parallelize later
-                // TODO: Cancellation and progress reporting
                 var imagePagesPipeline = ocrEngine != null
                     ? Pipeline.For(imagePages)
                         .Step(RenderStep)
@@ -127,14 +125,12 @@ public class PdfExporter : IPdfExporter
             }
             finally
             {
-                // TODO: Easier way to handle this?
+                // We can't use a DisposableList as the objects we need to dispose are generated on the fly
                 foreach (var state in imagePages.Concat(pdfPages))
                 {
                     state.RenderedImage?.Dispose();
                 }
             }
-
-            return true;
         });
     }
 
@@ -147,9 +143,9 @@ public class PdfExporter : IPdfExporter
             stream.CopyTo(fileStream);
             return true;
         }
+        // TODO: Should we do this (or maybe the whole pdf export/import) in a worker to avoid contention?
         lock (PdfiumNativeLibrary.Instance)
         {
-            // TODO: Need to set a password if needed
             var destBuffer = stream.GetBuffer();
             var destHandle = GCHandle.Alloc(destBuffer, GCHandleType.Pinned);
             try
@@ -242,31 +238,16 @@ public class PdfExporter : IPdfExporter
     {
         if (state.CancelToken.IsCancellationRequested) return state;
         state.RenderedImage = state.Image.Render();
-        // TODO: How to set this?
-        state.FileFormat = ImageFileFormat.Jpeg;
         return state;
     }
 
     private PageExportState WriteToPdfSharpStep(PageExportState state)
     {
         if (state.CancelToken.IsCancellationRequested) return state;
-        // TODO: Try and avoid locking somehow
         lock (state.Document)
         {
-            // TODO: Is there any way we can clean this up?
-            var exportFormat = new ImageExportHelper()
-                .GetExportFormat(state.RenderedImage!, state.Image.Metadata.BitDepth, state.Image.Metadata.Lossless);
-            if (exportFormat.FileFormat == ImageFileFormat.Unspecified)
-            {
-                exportFormat = exportFormat with { FileFormat = ImageFileFormat.Jpeg };
-            }
-            if (exportFormat.PixelFormat == ImagePixelFormat.BW1 &&
-                state.RenderedImage!.LogicalPixelFormat != ImagePixelFormat.BW1)
-            {
-                state.RenderedImage = state.RenderedImage.PerformTransform(new BlackWhiteTransform());
-            }
+            var exportFormat = PrepareForExport(state);
             DrawImageOnPage(state.Page, state.RenderedImage!, exportFormat, state.Compat);
-            // TODO: Maybe split this up to a different step
             if (state.OcrTask?.Result != null)
             {
                 DrawOcrTextOnPage(state.Page, state.OcrTask.Result);
@@ -274,6 +255,22 @@ public class PdfExporter : IPdfExporter
         }
         state.IncrementProgress();
         return state;
+    }
+
+    private static ImageExportFormat PrepareForExport(PageExportState state)
+    {
+        var exportFormat = new ImageExportHelper()
+            .GetExportFormat(state.RenderedImage!, state.Image.Metadata.BitDepth, state.Image.Metadata.Lossless);
+        if (exportFormat.FileFormat == ImageFileFormat.Unspecified)
+        {
+            exportFormat = exportFormat with { FileFormat = ImageFileFormat.Jpeg };
+        }
+        if (exportFormat.PixelFormat == ImagePixelFormat.BW1 &&
+            state.RenderedImage!.LogicalPixelFormat != ImagePixelFormat.BW1)
+        {
+            state.RenderedImage = state.RenderedImage.PerformTransform(new BlackWhiteTransform());
+        }
+        return exportFormat;
     }
 
     private static MemoryStream FinalizeAndSaveDocument(PdfDocument document, PdfExportParams exportParams)
@@ -320,7 +317,7 @@ public class PdfExporter : IPdfExporter
     private PageExportState InitOcrStep(PageExportState state)
     {
         if (state.CancelToken.IsCancellationRequested) return state;
-        var ext = state.FileFormat == ImageFileFormat.Png ? ".png" : ".jpg";
+        var ext = state.RenderedImage!.OriginalFileFormat == ImageFileFormat.Png ? ".png" : ".jpg";
         string ocrTempFilePath = Path.Combine(_scanningContext.TempFolderPath, Path.GetRandomFileName() + ext);
         if (!_scanningContext.OcrRequestQueue.HasCachedResult(state.OcrEngine!, state.Image, state.OcrParams!))
         {
@@ -496,7 +493,6 @@ public class PdfExporter : IPdfExporter
 
         public bool NeedsOcr { get; set; }
         public IMemoryImage? RenderedImage { get; set; }
-        public ImageFileFormat FileFormat { get; set; }
         public Task<OcrResult?>? OcrTask { get; set; }
         public PdfDocument? PageDocument { get; set; }
     }
