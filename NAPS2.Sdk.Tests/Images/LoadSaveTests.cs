@@ -218,7 +218,7 @@ public class LoadSaveTests : ContextualTests
         new object[]
         {
             ImageFileFormat.Jpeg, ".jpg", "dog_bw_jpg",
-            new[] { "dog_bw" }, new[] { ImagePixelFormat.Gray8 }, false
+            new[] { "dog_bw_jpg" }, new[] { ImagePixelFormat.Gray8 }, false
         },
         new object[]
         {

@@ -125,7 +125,9 @@ public class GtkImage : IMemoryImage
     public IMemoryImage Clone() => new GtkImage(ImageContext, (Pixbuf) Pixbuf.Clone())
     {
         OriginalFileFormat = OriginalFileFormat,
-        LogicalPixelFormat = LogicalPixelFormat
+        LogicalPixelFormat = LogicalPixelFormat,
+        HorizontalResolution = HorizontalResolution,
+        VerticalResolution = VerticalResolution
     };
 
     public void Dispose()

@@ -81,6 +81,7 @@ public class GdiImageTransformer : AbstractImageTransformer<GdiImage>
         result.SetResolution(
             image.HorizontalResolution * image.Width / transform.Width,
             image.VerticalResolution * image.Height / transform.Height);
+        image.Dispose();
         return new GdiImage(ImageContext, result);
     }
 }

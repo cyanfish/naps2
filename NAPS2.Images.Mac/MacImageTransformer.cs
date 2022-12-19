@@ -33,6 +33,7 @@ public class MacImageTransformer : AbstractImageTransformer<MacImage>
 
         CGRect rect = new CGRect(0, 0, image.Width, image.Height);
         c.DrawImage(rect, image.Rep.AsCGImage(ref rect, null, null));
+        image.Dispose();
         return newImage;
     }
 
@@ -46,6 +47,7 @@ public class MacImageTransformer : AbstractImageTransformer<MacImage>
         CGRect rect = new CGRect(0, 0, transform.Width, transform.Height);
         // TODO: This changes the image size to match the original which we probably don't want.
         c.DrawImage(rect, image.Rep.AsCGImage(ref rect, null, null));
+        image.Dispose();
         return newImage;
     }
 

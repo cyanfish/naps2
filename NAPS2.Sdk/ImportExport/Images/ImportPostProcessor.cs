@@ -15,27 +15,16 @@ public class ImportPostProcessor
             return disposeOriginalImage ? image : image.Clone();
         }
 
-        var disposeRendered = rendered == null;
-        rendered ??= image.Render();
-        try
+        using var actualRendered = rendered == null ? image.Render() : rendered.Clone();
+        var barcodeDetection = BarcodeDetector.Detect(actualRendered, barcodeDetectionOptions);
+        var thumbnail = thumbnailSize.HasValue
+            ? actualRendered.PerformTransform(new ThumbnailTransform(thumbnailSize.Value))
+            : null;
+        return image.WithPostProcessingData(image.PostProcessingData with
         {
-            var thumbnail = thumbnailSize.HasValue
-                ? rendered.PerformTransform(new ThumbnailTransform(thumbnailSize.Value))
-                : null;
-            var barcodeDetection = BarcodeDetector.Detect(rendered, barcodeDetectionOptions);
-            return image.WithPostProcessingData(image.PostProcessingData with
-            {
-                Thumbnail = thumbnail,
-                ThumbnailTransformState = image.TransformState,
-                BarcodeDetection = barcodeDetection
-            }, disposeOriginalImage);
-        }
-        finally
-        {
-            if (disposeRendered)
-            {
-                rendered.Dispose();
-            }
-        }
+            Thumbnail = thumbnail,
+            ThumbnailTransformState = image.TransformState,
+            BarcodeDetection = barcodeDetection
+        }, disposeOriginalImage);
     }
 }

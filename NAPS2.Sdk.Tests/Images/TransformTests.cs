@@ -390,7 +390,6 @@ public class TransformTests : ContextualTests
         IMemoryImage expected = LoadImage(ImageResources.dog_bw_24bit);
 
         actual = actual.PerformTransform(new BlackWhiteTransform());
-        Assert.Equal(ImagePixelFormat.BW1, actual.PixelFormat);
         actual = actual.PerformTransform(new ColorBitDepthTransform());
         Assert.Equal(ImagePixelFormat.RGB24, actual.PixelFormat);
 
