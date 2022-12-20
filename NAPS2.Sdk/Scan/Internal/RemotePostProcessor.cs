@@ -125,7 +125,11 @@ internal class RemotePostProcessor : IRemotePostProcessor
         var data = processedImage.PostProcessingData;
         if (options.ThumbnailSize.HasValue)
         {
-            data = data with { Thumbnail = image.PerformTransform(new ThumbnailTransform(options.ThumbnailSize.Value)) };
+            data = data with
+            {
+                // TODO: Maybe there's a way we can do this without needing to clone
+                Thumbnail = image.Clone().PerformTransform(new ThumbnailTransform(options.ThumbnailSize.Value))
+            };
         }
 
         if (!options.UseNativeUI && options.BrightnessContrastAfterScan)
