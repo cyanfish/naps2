@@ -62,7 +62,9 @@ public static class TargetsHelper
         {
             foreach (var platform in platformsParsed)
             {
-                if (buildType == BuildType.Msi && platform == Platform.Win) continue;
+                if (constraints.RequireBuildablePlatform && buildType == BuildType.Msi &&
+                    platform == Platform.Win) continue;
+
                 yield return new Target(buildType, platform);
             }
         }
