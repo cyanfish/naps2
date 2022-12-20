@@ -16,5 +16,7 @@
     <string></string>
     <key>CFBundleIconFile</key>
     <string>Icon.icns</string>
+    <key>NSPrincipalClass</key>
+    <string>NSApplication</string>
   </dict>
 </plist>
