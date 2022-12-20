@@ -135,18 +135,21 @@ public class MacDesktopForm : DesktopForm
         toolbar.Delegate = new MacToolbarDelegate(CreateMacToolbarItems());
         toolbar.AllowsUserCustomization = true;
         // toolbar.AutosavesConfiguration = true;
-        toolbar.DisplayMode = NSToolbarDisplayMode.Icon;
 
-        // TODO: Get rid of the borders/excessive padding on macOS 13
         var window = this.ToNative();
-        window.Toolbar = toolbar;
         if (OperatingSystem.IsMacOSVersionAtLeast(11))
         {
+            toolbar.DisplayMode = NSToolbarDisplayMode.Icon;
             window.ToolbarStyle = NSWindowToolbarStyle.Unified;
+            window.StyleMask |= NSWindowStyle.FullSizeContentView;
+            window.StyleMask |= NSWindowStyle.UnifiedTitleAndToolbar;
         }
-        // TODO: Do we want full size content?
-        window.StyleMask |= NSWindowStyle.FullSizeContentView;
-        window.StyleMask |= NSWindowStyle.UnifiedTitleAndToolbar;
+        else
+        {
+            toolbar.DisplayMode = NSToolbarDisplayMode.IconAndLabel;
+        }
+
+        window.Toolbar = toolbar;
     }
 
     private List<NSToolbarItem> CreateMacToolbarItems()

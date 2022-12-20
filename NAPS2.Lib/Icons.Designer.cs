@@ -432,6 +432,16 @@ namespace NAPS2 {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
+        internal static byte[] diskette {
+            get {
+                object obj = ResourceManager.GetObject("diskette", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
         internal static byte[] email_attach {
             get {
                 object obj = ResourceManager.GetObject("email_attach", resourceCulture);
@@ -875,6 +885,16 @@ namespace NAPS2 {
         internal static byte[] world {
             get {
                 object obj = ResourceManager.GetObject("world", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] zoom {
+            get {
+                object obj = ResourceManager.GetObject("zoom", resourceCulture);
                 return ((byte[])(obj));
             }
         }

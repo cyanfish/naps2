@@ -19,7 +19,8 @@ public static class MacToolbarItems
             Image = command.Image?.ToNS(),
             Title = title ?? "",
             Label = command.ToolBarText ?? "",
-            ToolTip = tooltip ?? command.ToolBarText ?? "",
+            // TODO: Verify this fixes label display on macOS 10.15
+            ToolTip = OperatingSystem.IsMacOSVersionAtLeast(11) ? tooltip ?? command.ToolBarText ?? "" : "",
             Bordered = true,
             Autovalidates = false
         }.WithAction(command.Execute);

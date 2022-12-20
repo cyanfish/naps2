@@ -64,13 +64,13 @@ public class DesktopCommands
         SaveAll = new ActionCommand(_imageListActions.SaveAllAsPdfOrImages)
         {
             Text = UiStrings.SaveAll,
-            Image = iconProvider.GetIcon("save"),
+            Image = iconProvider.GetIcon("diskette"),
             Shortcut = Application.Instance.CommonModifier | Keys.S
         };
         SaveSelected = new ActionCommand(_imageListActions.SaveSelectedAsPdfOrImages)
         {
             Text = UiStrings.SaveSelected,
-            Image = iconProvider.GetIcon("save"),
+            Image = iconProvider.GetIcon("diskette"),
             Shortcut = Application.Instance.CommonModifier | Keys.Shift | Keys.S
         };
         SavePdf = new ActionCommand(desktopController.SavePdf)
@@ -143,7 +143,7 @@ public class DesktopCommands
         ViewImage = new ActionCommand(desktopSubFormController.ShowViewerForm)
         {
             Text = UiStrings.View,
-            Image = iconProvider.GetIcon("viewfinder")
+            Image = iconProvider.GetIcon("zoom")
         };
         Crop = new ActionCommand(desktopSubFormController.ShowCropForm)
         {

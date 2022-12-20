@@ -10,8 +10,8 @@ public class MacIconProvider : IIconProvider
         { "control_play_blue", "play" },
         { "blueprints", "list.bullet" },
         { "folder_picture", "folder" },
-        { "save", "square.and.arrow.down" },
-        { "viewfinder", "viewfinder" },
+        { "diskette", "square.and.arrow.down" },
+        { "zoom", "viewfinder" },
         { "arrow_rotate_anticlockwise", "arrow.counterclockwise" },
         { "arrow_rotate_anticlockwise_small", "arrow.counterclockwise" },
         { "arrow_rotate_clockwise_small", "arrow.clockwise" },
@@ -44,7 +44,12 @@ public class MacIconProvider : IIconProvider
 
     public Image? GetIcon(string name)
     {
-        // TODO: Fix names (like "save") that have no non-mac image and will break on macOS 10.15
+        if (!OperatingSystem.IsMacOSVersionAtLeast(11) && name == "arrow_rotate_anticlockwise")
+        {
+            // TODO: Verify this fixes the rotate menu on macOS 10.15
+            // TODO: Also maybe map other icons to 16x16 versions (e.g. control_play_blue) for better rendering
+            return _defaultIconProvider.GetIcon("arrow_rotate_anticlockwise_small");
+        }
         if (OperatingSystem.IsMacOSVersionAtLeast(11) && IconMap.ContainsKey(name))
         {
             var symbol = NSImage.GetSystemSymbol(IconMap[name], null);
