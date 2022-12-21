@@ -36,9 +36,9 @@ public class MacPreviewForm : PreviewForm
         }
     }
 
-    private List<NSToolbarItem> CreateMacToolbarItems()
+    private List<NSToolbarItem?> CreateMacToolbarItems()
     {
-        return new List<NSToolbarItem>
+        return new List<NSToolbarItem?>
         {
             MacToolbarItems.Create("prev", GoToPrevCommand, nav: true),
             MacToolbarItems.Create("next", GoToNextCommand, nav: true),

@@ -73,9 +73,15 @@ public class MacListView<T> : NSCollectionViewDelegateFlowLayout, IListView<T> w
 
     public event EventHandler? SelectionChanged;
 
+    // TODO: Implement item double-click
+#pragma warning disable CS0067
     public event EventHandler? ItemClicked;
+#pragma warning restore CS0067
 
+    // TODO: Implement drag/drop
+#pragma warning disable CS0067
     public event EventHandler<DropEventArgs>? Drop;
+#pragma warning restore CS0067
 
     public void SetItems(IEnumerable<T> items)
     {

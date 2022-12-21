@@ -10,7 +10,7 @@ public class ListViewItem : NSCollectionViewItem
     private readonly Image _itemImage;
     private readonly string? _label;
     private bool _selected;
-    private NSImageView _imageView;
+    private NSImageView? _imageView;
 
     public ListViewItem(Image itemImage, string? label)
     {

@@ -37,7 +37,7 @@ public class MacDesktopForm : DesktopForm
     protected override void OnLoad(EventArgs e)
     {
         // TODO: What's the best place to initialize this? It needs to happen from the UI event loop.
-        Invoker.Current = new SyncContextInvoker(SynchronizationContext.Current);
+        Invoker.Current = new SyncContextInvoker(SynchronizationContext.Current!);
         base.OnLoad(e);
     }
 
@@ -152,9 +152,9 @@ public class MacDesktopForm : DesktopForm
         window.Toolbar = toolbar;
     }
 
-    private List<NSToolbarItem> CreateMacToolbarItems()
+    private List<NSToolbarItem?> CreateMacToolbarItems()
     {
-        return new List<NSToolbarItem>
+        return new List<NSToolbarItem?>
         {
             MacToolbarItems.Create("scan", Commands.Scan),
             MacToolbarItems.Create("profiles", Commands.Profiles),
@@ -173,10 +173,14 @@ public class MacDesktopForm : DesktopForm
                     MinValue = 0,
                     MaxValue = 1,
                     DoubleValue = ThumbnailSizes.SizeToCurve(_thumbnailController.VisibleSize),
-                    ToolTip = UiStrings.Zoom,
-                    Title = UiStrings.Zoom
+                    ToolTip = UiStrings.Zoom
                 }.WithAction(ZoomUpdated),
+                // MaxSize still works even though it's deprecated
+#pragma warning disable CA1416
+#pragma warning disable CA1422
                 MaxSize = new CGSize(64, 999)
+#pragma warning restore CA1422
+#pragma warning restore CA1416
             }
         };
     }

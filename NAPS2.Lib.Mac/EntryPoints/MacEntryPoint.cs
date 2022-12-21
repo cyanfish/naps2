@@ -66,6 +66,7 @@ public static class MacEntryPoint
 
     private static void UnhandledException(object? sender, UnhandledExceptionEventArgs e)
     {
-        Log.FatalException("An error occurred that caused the application to close.", e.ExceptionObject as Exception);
+        Log.FatalException("An error occurred that caused the application to close.",
+            e.ExceptionObject as Exception ?? new Exception());
     }
 }

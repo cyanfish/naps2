@@ -29,11 +29,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ContentWithTargetPath Include="..\NAPS2.Setup\appsettings.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    <Content Include="..\NAPS2.Setup\appsettings.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <Link>appsettings.xml</Link>
-      <TargetPath>appsettings.xml</TargetPath>
-    </ContentWithTargetPath>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>

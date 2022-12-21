@@ -5,7 +5,6 @@ using Eto.Mac;
 using Eto.Mac.Drawing;
 using NAPS2.EtoForms.Layout;
 using NAPS2.Images.Mac;
-using sd = System.Drawing;
 
 namespace NAPS2.EtoForms.Mac;
 

@@ -1,5 +1,3 @@
-using Eto.Mac.Forms.ToolBar;
-
 namespace NAPS2.EtoForms.Mac;
 
 public class MacToolbarDelegate : NSToolbarDelegate
@@ -11,12 +9,6 @@ public class MacToolbarDelegate : NSToolbarDelegate
     {
         _identifiers = items.Select(x => x?.Identifier ?? NSToolbar.NSToolbarSpaceItemIdentifier).ToArray();
         _itemMap = items.WhereNotNull().ToDictionary(x => x.Identifier);
-    }
-
-    public NativeHandle Handle { get; }
-
-    public void Dispose()
-    {
     }
 
     public override string[] AllowedItemIdentifiers(NSToolbar toolbar) => _identifiers;
