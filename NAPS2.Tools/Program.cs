@@ -17,6 +17,8 @@ public static class Program
     // - Updates language resources for that language
     // - Possibly then runs "pkg zip --name test-{lang}"
 
+    // TODO: Add a "setver" command that updates version targets, Info.plist, and anything else that needs a version
+
     public static int Main(string[] args)
     {
         var commands = new CommandList()
