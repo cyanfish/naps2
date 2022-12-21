@@ -52,7 +52,7 @@ public class ProgressForm : EtoDialogBase
         }
     }
 
-    void operation_StatusChanged(object sender, EventArgs e)
+    void operation_StatusChanged(object? sender, EventArgs e)
     {
         if (_loaded && !_background)
         {
@@ -60,7 +60,7 @@ public class ProgressForm : EtoDialogBase
         }
     }
 
-    void operation_Finished(object sender, EventArgs e)
+    void operation_Finished(object? sender, EventArgs e)
     {
         if (_loaded && !_background)
         {
@@ -87,7 +87,7 @@ public class ProgressForm : EtoDialogBase
         EtoOperationProgress.RenderStatus(Operation, _status, _numeric, _progressBar);
     }
 
-    private void Cancel_Click(object sender, EventArgs e)
+    private void Cancel_Click(object? sender, EventArgs e)
     {
         TryCancelOp();
     }
@@ -111,7 +111,7 @@ public class ProgressForm : EtoDialogBase
         }
     }
 
-    private void RunInBg_Click(object sender, EventArgs e)
+    private void RunInBg_Click(object? sender, EventArgs e)
     {
         _background = true;
         Close();

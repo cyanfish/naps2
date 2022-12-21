@@ -26,5 +26,5 @@ public record LayoutContext(Control Layout)
 
     public bool InOverlay { get; init; }
 
-    public Action Invalidate { get; init; }
+    public required Action Invalidate { get; init; }
 }

@@ -40,7 +40,7 @@ internal class AppleScanDriver : IScanDriver
         var tcs = new TaskCompletionSource<ICScannerDevice>();
         reader.DeviceFound += (_, args) =>
         {
-            if (args.Device.Uuid == scanDevice.Id)
+            if (args.Device.Uuid == scanDevice.ID)
             {
                 tcs.TrySetResult(args.Device);
             }

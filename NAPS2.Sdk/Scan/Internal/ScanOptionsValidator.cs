@@ -18,7 +18,7 @@ public class ScanOptionsValidator
 
         if (requireDevice)
         {
-            if (string.IsNullOrEmpty(options.Device?.Id))
+            if (string.IsNullOrEmpty(options.Device?.ID))
             {
                 throw new ArgumentException("ScanOptions.Device.ID must be specified");
             }

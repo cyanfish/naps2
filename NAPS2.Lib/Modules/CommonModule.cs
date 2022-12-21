@@ -29,7 +29,7 @@ public class CommonModule : Module
         // Export
         builder.RegisterType<PdfExporter>().As<IPdfExporter>();
         builder.RegisterType<AutofacEmailProviderFactory>().As<IEmailProviderFactory>();
-        builder.RegisterType<MapiWrapper>().As<IMapiWrapper>();
+        builder.RegisterType<StubMapiWrapper>().As<IMapiWrapper>();
         builder.RegisterType<OcrRequestQueue>().AsSelf().SingleInstance();
 
         // Scan

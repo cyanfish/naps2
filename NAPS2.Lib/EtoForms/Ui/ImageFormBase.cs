@@ -122,7 +122,7 @@ public abstract class ImageFormBase : EtoDialogBase
         return L.Column(Sliders.Select(x => (LayoutElement) x).ToArray());
     }
 
-    public UiImage Image { get; set; }
+    public UiImage Image { get; set; } = null!;
 
     public List<UiImage>? SelectedImages { get; set; }
 
@@ -181,7 +181,7 @@ public abstract class ImageFormBase : EtoDialogBase
             foreach (var img in ImagesToTransform)
             {
                 IMemoryImage? updatedThumb = null;
-                if (img == Image)
+                if (img == Image && WorkingImage != null)
                 {
                     // Optimize thumbnail rendering for the first (or only) image since we already have it loaded into memory
                     var transformed = WorkingImage.Clone().PerformAllTransforms(Transforms);
@@ -194,7 +194,7 @@ public abstract class ImageFormBase : EtoDialogBase
         TransformSaved();
     }
 
-    private void Revert(object sender, EventArgs e)
+    private void Revert(object? sender, EventArgs e)
     {
         ResetTransform();
         UpdatePreviewBox();

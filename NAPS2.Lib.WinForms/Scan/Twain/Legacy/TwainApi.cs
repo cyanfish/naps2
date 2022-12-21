@@ -59,7 +59,7 @@ internal static class TwainApi
         {
             throw new DeviceNotFoundException();
         }
-        if (!tw.SelectByName(device.Id!))
+        if (!tw.SelectByName(device.ID!))
         {
             throw new DeviceNotFoundException();
         }

@@ -92,7 +92,7 @@ public class FormStateController
         _loaded = true;
     }
 
-    private void OnShownInternal(object sender, EventArgs e)
+    private void OnShownInternal(object? sender, EventArgs e)
     {
         if (!_minimumClientSize.IsEmpty)
         {

@@ -19,7 +19,7 @@ public class SelectDeviceForm : EtoDialogBase
         {
             _devices.Items.Add(new ListItem
             {
-                Key = device.Id,
+                Key = device.ID,
                 Text = device.Name
             });
         }
@@ -54,6 +54,6 @@ public class SelectDeviceForm : EtoDialogBase
             _devices.Focus();
             return;
         }
-        SelectedDevice = DeviceList.FirstOrDefault(x => x.Id == _devices.SelectedKey);
+        SelectedDevice = DeviceList.FirstOrDefault(x => x.ID == _devices.SelectedKey);
     }
 }

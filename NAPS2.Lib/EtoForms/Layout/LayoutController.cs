@@ -3,6 +3,8 @@ using Eto.Forms;
 
 namespace NAPS2.EtoForms.Layout;
 
+// Ignore unreachable code for DEBUG_LAYOUT
+#pragma warning disable CS0162
 public class LayoutController
 {
     public const int MAX_SIZE = int.MaxValue / 2;

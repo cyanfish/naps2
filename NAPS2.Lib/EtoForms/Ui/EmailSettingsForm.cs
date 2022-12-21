@@ -100,7 +100,7 @@ public class EmailSettingsForm : EtoDialogBase
     {
         var emailSettings = new EmailSettings
         {
-            AttachmentName = _attachmentName.Text
+            AttachmentName = _attachmentName.Text ?? ""
         };
 
         var runTransact = Config.Run.BeginTransaction();

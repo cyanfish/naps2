@@ -23,12 +23,12 @@ public class RemoteScanControllerTests : ContextualTests
 
         var deviceList = await controller.GetDeviceList(new ScanOptions { Driver = Driver.Wia });
         Assert.Equal(2, deviceList.Count);
-        Assert.Equal("test_id1", deviceList[0].Id);
-        Assert.Equal("WIA-test_id2", deviceList[1].Id);
+        Assert.Equal("test_id1", deviceList[0].ID);
+        Assert.Equal("WIA-test_id2", deviceList[1].ID);
 
         deviceList = await controller.GetDeviceList(new ScanOptions { Driver = Driver.Twain });
         Assert.Single(deviceList);
-        Assert.Equal("test_id1", deviceList[0].Id);
+        Assert.Equal("test_id1", deviceList[0].ID);
 
         deviceList = await controller.GetDeviceList(new ScanOptions
             { Driver = Driver.Twain, TwainOptions = { IncludeWiaDevices = true } });

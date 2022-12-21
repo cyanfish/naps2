@@ -56,7 +56,6 @@ public class KeyboardShortcutManager
             _dict[keys] = action;
             if (_commandDict.ContainsKey(keys))
             {
-                ActionCommand c;
                 _commandDict[keys].Shortcut = Keys.None;
                 _commandDict.Remove(keys);
             }

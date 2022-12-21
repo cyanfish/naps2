@@ -2,6 +2,8 @@ using Eto.Drawing;
 
 namespace NAPS2.EtoForms.Layout;
 
+// Ignore unreachable code for DEBUG_LAYOUT
+#pragma warning disable CS0162
 /// <summary>
 /// Abstract base class for LayoutColumn and LayoutRow. We use this class to generalize column and row layout logic.
 /// </summary>

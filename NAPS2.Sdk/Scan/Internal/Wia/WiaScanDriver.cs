@@ -79,7 +79,7 @@ internal class WiaScanDriver : IScanDriver
         public async Task Scan(WiaVersion wiaVersion)
         {
             using var deviceManager = new WiaDeviceManager(wiaVersion);
-            using var device = deviceManager.FindDevice(_options.Device!.Id!);
+            using var device = deviceManager.FindDevice(_options.Device!.ID!);
             if (device.Version == WiaVersion.Wia20 && _options.UseNativeUI)
             {
                 await DoWia20NativeTransfer(deviceManager, device);

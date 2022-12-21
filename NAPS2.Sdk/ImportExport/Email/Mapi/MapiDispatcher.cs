@@ -34,6 +34,7 @@ public class MapiDispatcher
 #if NET6_0_OR_GREATER
         if (!OperatingSystem.IsWindowsVersionAtLeast(7)) throw new InvalidOperationException("Windows-only");
 #endif
+        // TODO: We should always do this in a worker (64 or 32 bit). Specifically, loading the outlook library does something weird to WinForms such that "new Eto.Forms.TextArea()" errors with a missing office dll.
         if (UseWorker && !_mapiWrapper.CanLoadClient(clientName))
         {
             if (_scanningContext.WorkerFactory == null)

@@ -61,7 +61,8 @@ public class GmailOauthProvider : OauthProvider
     public string GetEmailAddress()
     {
         var resp = GetAuthorized("https://www.googleapis.com/gmail/v1/users/me/profile");
-        return resp.Value<string>("emailAddress");
+        return resp.Value<string>("emailAddress") ??
+               throw new InvalidOperationException("Could not get emailAddress from Gmail profile response");
     }
 
     public async Task<DraftInfo> UploadDraft(string messageRaw, ProgressHandler progress = default)
@@ -72,8 +73,10 @@ public class GmailOauthProvider : OauthProvider
             "message/rfc822",
             progress);
         return new DraftInfo(
-            resp.Value<JObject>("message").Value<string>("id"),
-            resp.Value<string>("id")
+            resp.Value<JObject>("message")?.Value<string>("id") ??
+            throw new InvalidOperationException("Could not get message id from Gmail draft upload response"),
+            resp.Value<string>("id") ??
+            throw new InvalidOperationException("Could not get id from Gmail draft upload response")
         );
     }
 
@@ -83,7 +86,7 @@ public class GmailOauthProvider : OauthProvider
             new JObject
             {
                 { "id", draftId }
-            }.ToString(), 
+            }.ToString(),
             "application/json");
     }
 

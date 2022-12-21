@@ -73,7 +73,7 @@ internal class SaneScanDriver : IScanDriver
                 {
                     using var client = new SaneClient();
                     if (cancelToken.IsCancellationRequested) return;
-                    using var device = client.OpenDevice(options.Device!.Id!);
+                    using var device = client.OpenDevice(options.Device!.ID!);
                     if (cancelToken.IsCancellationRequested) return;
                     SetOptions(device, options);
                     // TODO: We apparently need to cancel even upon normal completion, i.e. one sane_cancel per sane_start

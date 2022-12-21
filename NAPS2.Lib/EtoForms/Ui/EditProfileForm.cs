@@ -483,12 +483,17 @@ public class EditProfileForm : EtoDialogBase
     }
 
     private int _lastPageSizeIndex = -1;
-    private PageSizeListItem _lastPageSizeItem = null;
+    private PageSizeListItem? _lastPageSizeItem;
 
     private void PageSize_SelectedIndexChanged(object? sender, EventArgs e)
     {
         if (_pageSize.SelectedIndex == _pageSize.Items.Count - 1)
         {
+            if (_lastPageSizeItem == null)
+            {
+                Log.Error("Expected last page size to be set");
+                return;
+            }
             // "Custom..." selected
             var form = FormFactory.Create<PageSizeForm>();
             form.PageSizeDimens = _lastPageSizeItem.Type == ScanPageSize.Custom

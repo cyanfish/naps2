@@ -58,13 +58,13 @@ public class OutlookWebOauthProvider : OauthProvider
     public string GetEmailAddress()
     {
         var resp = GetAuthorized("https://outlook.office.com/api/v1.0/me");
-        return resp.Value<string>("Id");
+        return resp.Value<string>("Id") ?? throw new InvalidOperationException("Could not get Id from Outlook profile response");
     }
 
     public async Task<string> UploadDraft(string messageRaw, ProgressHandler progress = default)
     {
         var resp = await PostAuthorized("https://outlook.office.com/api/v1.0/me/messages", messageRaw, "application/json", progress);
-        return resp.Value<string>("WebLink");
+        return resp.Value<string>("WebLink") ?? throw new InvalidOperationException("Could not get WebLink from Outlook messages response");
     }
 
     #endregion

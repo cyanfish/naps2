@@ -79,7 +79,7 @@ public class PreviewForm : EtoDialogBase
         }
     }
 
-    protected override void OnLoad(EventArgs eventArgs)
+    protected override async void OnLoad(EventArgs eventArgs)
     {
         base.OnLoad(eventArgs);
         // TODO: Implement
@@ -103,7 +103,7 @@ public class PreviewForm : EtoDialogBase
         CreateToolbar();
 
         UpdatePage();
-        UpdateImage().AssertNoAwait();
+        await UpdateImage();
     }
 
     protected virtual void CreateToolbar()
@@ -170,7 +170,8 @@ public class PreviewForm : EtoDialogBase
         // _tiffViewer1.Image?.Dispose();
         // _tiffViewer1.Image = null;
         using var imageToRender = CurrentImage.GetClonedImage();
-        _imageView.Image = imageToRender.Render().ToEtoImage();
+        var rendered = await Task.Run(() => imageToRender.Render());
+        _imageView.Image = rendered.ToEtoImage();
         // _tiffViewer1.Image = imageToRender.RenderToBitmap();
     }
 

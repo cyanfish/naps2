@@ -71,7 +71,7 @@ public class WorkerChannelTests : ContextualTests
         var deviceList = await channel.Client.GetDeviceList(new ScanOptions());
 
         Assert.Single(deviceList);
-        Assert.Equal("test_id", deviceList[0].Id);
+        Assert.Equal("test_id", deviceList[0].ID);
         Assert.Equal("test_name", deviceList[0].Name);
         remoteScanController.Verify(rsc => rsc.GetDeviceList(It.IsAny<ScanOptions>()));
         remoteScanController.VerifyNoOtherCalls();

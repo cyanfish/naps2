@@ -69,7 +69,7 @@ public static class EtoLayoutExtensions
         new ControlWithLayoutAttributes(control, padding: new Padding(all));
     public static ControlWithLayoutAttributes Padding(this Control control, int left = 0, int top = 0, int right = 0, int bottom = 0) =>
         new ControlWithLayoutAttributes(control, padding: new Padding(left, top, right, bottom));
-    public static ControlWithLayoutAttributes Visible(this Control control, LayoutVisibility visibility) =>
+    public static ControlWithLayoutAttributes Visible(this Control control, LayoutVisibility? visibility) =>
         new ControlWithLayoutAttributes(control, visibility: visibility);
 
     public static ControlWithLayoutAttributes Wrap(this Label label, int defaultWidth)
@@ -114,7 +114,7 @@ public static class EtoLayoutExtensions
         new ControlWithLayoutAttributes(control, padding: new Padding(all));
     public static ControlWithLayoutAttributes Padding(this ControlWithLayoutAttributes control, int left = 0, int top = 0, int right = 0, int bottom = 0) =>
         new ControlWithLayoutAttributes(control, padding: new Padding(left, top, right, bottom));
-    public static ControlWithLayoutAttributes Visible(this ControlWithLayoutAttributes control, LayoutVisibility visibility) =>
+    public static ControlWithLayoutAttributes Visible(this ControlWithLayoutAttributes control, LayoutVisibility? visibility) =>
         new ControlWithLayoutAttributes(control, visibility: visibility);
 
     public static LayoutColumn Padding(this LayoutColumn column, Padding padding) =>

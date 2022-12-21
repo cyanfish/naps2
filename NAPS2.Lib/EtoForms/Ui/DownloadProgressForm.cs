@@ -16,15 +16,18 @@ public class DownloadProgressForm : EtoDialogBase
     private readonly ProgressBar _totalProgressBar = new();
     private readonly ProgressBar _fileProgressBar = new();
 
-    private readonly List<QueueItem> _filesToDownload = new List<QueueItem>();
-    private int _filesDownloaded = 0;
-    private int _urlIndex = 0;
-    private double _currentFileSize = 0.0;
-    private double _currentFileProgress = 0.0;
+    private readonly List<QueueItem> _filesToDownload = new();
+    private int _filesDownloaded;
+    private int _urlIndex;
+    private double _currentFileSize;
+    private double _currentFileProgress;
     private bool _hasError;
     private bool _cancel;
 
-    private readonly WebClient _client = new WebClient();
+    // TODO: Migrate to HttpClient
+#pragma warning disable SYSLIB0014
+    private readonly WebClient _client = new();
+#pragma warning restore SYSLIB0014
 
     public DownloadProgressForm(Naps2Config config) : base(config)
     {
@@ -61,15 +64,14 @@ public class DownloadProgressForm : EtoDialogBase
         StartNextDownload();
     }
 
-    void client_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
+    void client_DownloadProgressChanged(object? sender, DownloadProgressChangedEventArgs e)
     {
-        Console.WriteLine($"bytes {e.BytesReceived} {e.TotalBytesToReceive}");
         _currentFileProgress = e.BytesReceived;
         _currentFileSize = e.TotalBytesToReceive;
         DisplayProgress();
     }
 
-    void client_DownloadFileCompleted(object sender, AsyncCompletedEventArgs e)
+    void client_DownloadFileCompleted(object? sender, AsyncCompletedEventArgs e)
     {
         var file = _filesToDownload[_filesDownloaded];
         if (e.Error != null)
@@ -80,7 +82,7 @@ public class DownloadProgressForm : EtoDialogBase
                 Log.ErrorException("Error downloading file: " + file.DownloadInfo.FileName, e.Error);
             }
         }
-        else if (file.DownloadInfo.Sha1 != CalculateSha1((Path.Combine(file.TempFolder, file.DownloadInfo.FileName))))
+        else if (file.DownloadInfo.Sha1 != CalculateSha1(Path.Combine(file.TempFolder!, file.DownloadInfo.FileName)))
         {
             _hasError = true;
             Log.Error("Error downloading file (invalid checksum): " + file.DownloadInfo.FileName);
@@ -97,7 +99,7 @@ public class DownloadProgressForm : EtoDialogBase
 
     private string CalculateSha1(string filePath)
     {
-        using var sha = new SHA1CryptoServiceProvider();
+        using var sha = SHA1.Create();
         using FileStream stream = File.OpenRead(filePath);
         byte[] checksum = sha.ComputeHash(stream);
         string str = BitConverter.ToString(checksum).Replace("-", String.Empty).ToLowerInvariant();
@@ -109,7 +111,7 @@ public class DownloadProgressForm : EtoDialogBase
         if (_hasError)
         {
             var prev = _filesToDownload[_filesDownloaded];
-            Directory.Delete(prev.TempFolder, true);
+            Directory.Delete(prev.TempFolder!, true);
             if (_cancel)
             {
                 return;
@@ -125,7 +127,7 @@ public class DownloadProgressForm : EtoDialogBase
         if (_filesDownloaded > 0 && _urlIndex == 0)
         {
             var prev = _filesToDownload[_filesDownloaded - 1];
-            var filePath = Path.Combine(prev.TempFolder, prev.DownloadInfo.FileName);
+            var filePath = Path.Combine(prev.TempFolder!, prev.DownloadInfo.FileName);
             try
             {
                 var preparedFilePath = prev.DownloadInfo.Format.Prepare(filePath);
@@ -136,7 +138,7 @@ public class DownloadProgressForm : EtoDialogBase
                 Log.ErrorException("Error preparing downloaded file", ex);
                 MessageBox.Show(MiscResources.FilesCouldNotBeDownloaded, MiscResources.DownloadError, MessageBoxButtons.OK, MessageBoxType.Error);
             }
-            Directory.Delete(prev.TempFolder, true);
+            Directory.Delete(prev.TempFolder!, true);
         }
         if (_filesDownloaded >= _filesToDownload.Count)
         {
@@ -187,10 +189,10 @@ public class DownloadProgressForm : EtoDialogBase
 
     private class QueueItem
     {
-        public DownloadInfo DownloadInfo { get; set; }
+        public required DownloadInfo DownloadInfo { get; set; }
 
-        public string TempFolder { get; set; }
+        public string? TempFolder { get; set; }
 
-        public Action<string> FileCallback { get; set; }
+        public required Action<string> FileCallback { get; set; }
     }
 }

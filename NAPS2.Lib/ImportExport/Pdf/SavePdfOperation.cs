@@ -20,8 +20,8 @@ public class SavePdfOperation : OperationBase
         AllowBackground = true;
     }
 
-    // TODO: Do something with this?
-    public string FirstFileSaved { get; private set; }
+    // TODO: Do something with this re: notifications?
+    public string? FirstFileSaved { get; private set; }
 
     public bool Start(string fileName, Placeholders placeholders, ICollection<ProcessedImage> images,
         PdfSettings pdfSettings, OcrParams ocrParams)
@@ -81,7 +81,7 @@ public class SavePdfOperation : OperationBase
                     InvokeStatusChanged();
                     if (singleFile && IsFileInUse(currentFileName, out var ex))
                     {
-                        InvokeError(MiscResources.FileInUse, ex);
+                        InvokeError(MiscResources.FileInUse, ex!);
                         break;
                     }
 

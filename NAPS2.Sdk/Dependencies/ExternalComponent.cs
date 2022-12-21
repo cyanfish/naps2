@@ -2,7 +2,7 @@
 
 public class ExternalComponent : IExternalComponent
 {
-    public ExternalComponent(string id, string path, DownloadInfo? downloadInfo)
+    public ExternalComponent(string id, string path, DownloadInfo downloadInfo)
     {
         Id = id;
         Path = path;
@@ -13,7 +13,7 @@ public class ExternalComponent : IExternalComponent
 
     public string Path { get; }
 
-    public DownloadInfo? DownloadInfo { get; }
+    public DownloadInfo DownloadInfo { get; }
 
     public bool IsInstalled => File.Exists(Path);
 

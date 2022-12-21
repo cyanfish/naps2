@@ -67,7 +67,7 @@ internal class TwainSessionScanRunner
             }
 
             Debug.WriteLine("NAPS2.TW - Finding source");
-            _source = _session.FirstOrDefault(x => x.Name == _options.Device!.Id);
+            _source = _session.FirstOrDefault(x => x.Name == _options.Device!.ID);
             if (_source == null)
             {
                 throw new DeviceNotFoundException();

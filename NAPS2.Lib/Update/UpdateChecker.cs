@@ -1,4 +1,4 @@
-﻿using System.Net;
+﻿using System.Net.Http;
 using System.Reflection;
 using Newtonsoft.Json.Linq;
 
@@ -30,25 +30,26 @@ public class UpdateChecker : IUpdateChecker
     {
         var json = await GetJson(UPDATE_CHECK_ENDPOINT);
         var currentVersion = Assembly.GetExecutingAssembly().GetName().Version;
-        foreach (var release in json.Value<JArray>("versions"))
+        foreach (var release in json.Value<JArray>("versions")!)
         {
-            var versionName = release.Value<string>("name");
+            var versionName = release.Value<string>("name")!;
             var version = ParseVersion(versionName);
 
             if (currentVersion >= version) continue;
 
-            var gte = release["requires"].Value<string>("gte");
+            var gte = release["requires"]!.Value<string>("gte");
             var gteVersion = gte != null ? ParseVersion(gte) : null;
             if (gteVersion != null && currentVersion < gteVersion) continue;
 
-            var updateFile = release["files"].Value<JToken>(UPDATE_FILE_EXT);
+            var updateFile = release["files"]!.Value<JToken>(UPDATE_FILE_EXT);
             if (updateFile == null) continue;
 
             var sha1 = updateFile.Value<string>("sha1");
             var sig = updateFile.Value<string>("sig");
             if (sha1 == null || sig == null) continue;
 
-            return new UpdateInfo(versionName, updateFile.Value<string>("url"), Convert.FromBase64String(sha1), Convert.FromBase64String(sig));
+            return new UpdateInfo(versionName, updateFile.Value<string>("url")!, Convert.FromBase64String(sha1),
+                Convert.FromBase64String(sig));
         }
         return null;
     }
@@ -68,11 +69,8 @@ public class UpdateChecker : IUpdateChecker
 
     private async Task<JObject> GetJson(string url)
     {
-        return await Task.Run(() =>
-        {
-            using var client = new WebClient();
-            var response = client.DownloadString(url);
-            return JObject.Parse(response);
-        });
+        using var client = new HttpClient();
+        var response = await client.GetStringAsync(url);
+        return JObject.Parse(response);
     }
 }

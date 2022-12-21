@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System.Runtime.CompilerServices;
+using System.Threading;
 using NAPS2.ImportExport;
 using NAPS2.Ocr;
 using NAPS2.Scan.Exceptions;
@@ -46,7 +47,7 @@ internal class ScanPerformer : IScanPerformer
     }
 
     public async IAsyncEnumerable<ProcessedImage> PerformScan(ScanProfile scanProfile, ScanParams scanParams,
-        IntPtr dialogParent = default, CancellationToken cancelToken = default)
+        IntPtr dialogParent = default, [EnumeratorCancellation] CancellationToken cancelToken = default)
     {
         var options = BuildOptions(scanProfile, scanParams, dialogParent);
         // Make sure we get a real driver value (not just "Default")
@@ -251,7 +252,7 @@ internal class ScanPerformer : IScanPerformer
     private async Task<bool> PopulateDevice(ScanProfile scanProfile, ScanOptions options)
     {
         // If a device wasn't specified, prompt the user to pick one
-        if (string.IsNullOrEmpty(scanProfile.Device?.Id))
+        if (string.IsNullOrEmpty(scanProfile.Device?.ID))
         {
             options.Device = await PromptForDevice(options);
             if (options.Device == null)

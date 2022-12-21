@@ -46,8 +46,8 @@ public class BatchScanForm : EtoDialogBase
     private readonly LayoutVisibility _fileVis = new(false);
     private readonly FilePathWithPlaceholders _filePath;
 
-    private TransactionConfigScope<CommonConfig> _userTransact;
-    private Naps2Config _transactionConfig;
+    private readonly TransactionConfigScope<CommonConfig> _userTransact;
+    private readonly Naps2Config _transactionConfig;
     private bool _batchRunning;
     private CancellationTokenSource _cts = new();
 
@@ -75,11 +75,14 @@ public class BatchScanForm : EtoDialogBase
         _saveToSingleFile.CheckedChanged += UpdateVisibility;
         _saveToMultipleFiles.CheckedChanged += UpdateVisibility;
 
+        _userTransact = Config.User.BeginTransaction();
+        _transactionConfig = Config.WithTransaction(_userTransact);
+
         EditProfileCommand = new ActionCommand(EditProfile) { Image = Icons.pencil_small.ToEtoImage() };
         NewProfileCommand = new ActionCommand(NewProfile) { Image = Icons.add_small.ToEtoImage() };
     }
 
-    private void UpdateVisibility(object sender, EventArgs e)
+    private void UpdateVisibility(object? sender, EventArgs e)
     {
         // TODO: Bundle multiple updates together before invalidating somehow
         _delayVis.IsVisible = _multipleScansDelay.Checked;
@@ -88,7 +91,7 @@ public class BatchScanForm : EtoDialogBase
         LayoutController.Invalidate();
     }
 
-    public Action<ProcessedImage> ImageCallback { get; set; }
+    public Action<ProcessedImage> ImageCallback { get; set; } = null!;
 
     private Command NewProfileCommand { get; }
 
@@ -98,8 +101,6 @@ public class BatchScanForm : EtoDialogBase
     {
         NewProfileCommand.Enabled =
             !(Config.Get(c => c.NoUserProfiles) && _profileManager.Profiles.Any(x => x.IsLocked));
-        _userTransact = Config.User.BeginTransaction();
-        _transactionConfig = Config.WithTransaction(_userTransact);
         UpdateUIFromSettings();
 
         Title = UiStrings.BatchScanFormTitle;

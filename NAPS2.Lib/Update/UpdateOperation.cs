@@ -58,7 +58,10 @@ public class UpdateOperation : OperationBase
         _tempPath = Path.Combine(_tempFolder,
             updateInfo.DownloadUrl.Substring(updateInfo.DownloadUrl.LastIndexOf('/') + 1));
 
+        // TODO: Migrate to HttpClient
+#pragma warning disable SYSLIB0014
         _client = new WebClient();
+#pragma warning restore SYSLIB0014
         _client.DownloadProgressChanged += DownloadProgress;
         _client.DownloadFileCompleted += DownloadCompleted;
         _client.DownloadFileAsync(new Uri(updateInfo.DownloadUrl), _tempPath);
@@ -134,7 +137,7 @@ public class UpdateOperation : OperationBase
 
     private void InstallZip()
     {
-        ZipFile.ExtractToDirectory(_tempPath, _tempFolder);
+        ZipFile.ExtractToDirectory(_tempPath!, _tempFolder!);
         string portableLauncherPath = Path.Combine(AssemblyHelper.LibFolder, "..", "..", "NAPS2.Portable.exe");
         AtomicReplaceFile(Path.Combine(_tempFolder!, "NAPS2.Portable.exe"), portableLauncherPath);
         Process.Start(new ProcessStartInfo
@@ -167,7 +170,7 @@ public class UpdateOperation : OperationBase
 
     private bool VerifyHash()
     {
-        using var sha = new SHA1CryptoServiceProvider();
+        using var sha = SHA1.Create();
         using FileStream stream = File.OpenRead(_tempPath!);
         byte[] checksum = sha.ComputeHash(stream);
         return checksum.SequenceEqual(_update!.Sha1);
@@ -176,8 +179,9 @@ public class UpdateOperation : OperationBase
     private bool VerifySignature()
     {
         var cert = new X509Certificate2(ClientCreds_.naps2_public);
-        var csp = (RSACryptoServiceProvider) cert.PublicKey.Key;
-        return csp.VerifyHash(_update!.Sha1, CryptoConfig.MapNameToOID("SHA1"), _update.Signature);
+        var csp = cert.GetRSAPublicKey();
+        if (csp == null) return false;
+        return csp.VerifyHash(_update!.Sha1, _update.Signature, HashAlgorithmName.SHA1, RSASignaturePadding.Pkcs1);
     }
 
     private void DownloadProgress(object sender, DownloadProgressChangedEventArgs e)

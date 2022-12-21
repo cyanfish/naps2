@@ -2,7 +2,7 @@
 
 public interface IExternalComponent
 {
-    DownloadInfo? DownloadInfo { get; }
+    DownloadInfo DownloadInfo { get; }
 
     string Id { get; }
 

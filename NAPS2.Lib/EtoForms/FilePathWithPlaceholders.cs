@@ -12,7 +12,7 @@ public class FilePathWithPlaceholders
     private readonly TextBox _path = new();
     private readonly Button _choose = new() { Text = UiStrings.Ellipsis };
     private readonly LinkButton _placeholders = C.Link(UiStrings.Placeholders);
-    private LayoutVisibility _visibility;
+    private LayoutVisibility? _visibility;
 
     public FilePathWithPlaceholders(IFormBase form, DialogHelper? dialogHelper = null)
     {
@@ -62,7 +62,7 @@ public class FilePathWithPlaceholders
 
     private void OpenPathDialog(object? sender, EventArgs e)
     {
-        if (_dialogHelper.PromptToSavePdf(_path.Text, out string? savePath))
+        if (_dialogHelper!.PromptToSavePdf(_path.Text, out string? savePath))
         {
             _path.Text = savePath!;
         }

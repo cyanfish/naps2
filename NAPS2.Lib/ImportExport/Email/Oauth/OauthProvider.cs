@@ -8,6 +8,8 @@ using Newtonsoft.Json.Linq;
 
 namespace NAPS2.ImportExport.Email.Oauth;
 
+// TODO: Migrate to HttpClient
+#pragma warning disable SYSLIB0014
 public abstract class OauthProvider
 {
     private static readonly int[] PortNumbers = { 50086, 53893, 58985, 49319, 50320 };

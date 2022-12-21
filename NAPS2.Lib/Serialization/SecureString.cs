@@ -26,9 +26,9 @@ public class SecureString
     {
     }
 
-    public static implicit operator SecureString(string s) => new(s);
+    public static implicit operator SecureString?(string? s) => s == null ? null : new(s);
 
-    public static implicit operator string(SecureString s) => s.ToString();
+    public static implicit operator string?(SecureString? s) => s?.ToString();
 
     public override string ToString()
     {

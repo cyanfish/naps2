@@ -10,7 +10,7 @@ namespace NAPS2.ImportExport;
 /// <typeparam name="TData">The protobuf type representing the transferred data.</typeparam>
 public abstract class TransferHelper<TInput, TData> where TData : IMessage<TData>, new()
 {
-    private readonly string _typeName = typeof(TData).FullName;
+    private readonly string _typeName = typeof(TData).FullName!;
 
     /// <summary>
     /// Clears the clipboard and stores the serialized input.
