@@ -4,15 +4,14 @@
         <TargetFrameworks>net6.0;net462;netstandard2.0</TargetFrameworks>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
-        <LangVersion>10</LangVersion>
+        <LangVersion>11</LangVersion>
+        <DefineConstants Condition="'$(TargetFramework)' == 'net6.0'">USB</DefineConstants>
     </PropertyGroup>
 
     <ItemGroup>
       <ProjectReference Include="..\NAPS2.Escl\NAPS2.Escl.csproj" />
-    </ItemGroup>
 
-    <ItemGroup>
-      <PackageReference Include="LibUsbDotNet" Version="3.0.102-alpha" />
+      <PackageReference Include="LibUsbDotNet" Version="3.0.102-alpha" Condition="'$(TargetFramework)' == 'net6.0'" />
     </ItemGroup>
 
 </Project>

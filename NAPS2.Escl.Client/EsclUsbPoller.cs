@@ -1,4 +1,5 @@
-﻿using LibUsbDotNet;
+﻿#if USB
+using LibUsbDotNet;
 using LibUsbDotNet.Info;
 using LibUsbDotNet.LibUsb;
 
@@ -49,3 +50,4 @@ public class EsclUsbPoller
         });
     }
 }
+#endif

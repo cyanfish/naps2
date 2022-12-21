@@ -28,10 +28,7 @@ public class EsclServer : IDisposable
                 .WithMode(HttpListenerMode.EmbedIO)
                 .WithUrlPrefix(url))
             .WithWebApi("/escl", m => m.WithController(() => new EsclApiController(_serverConfig, _serverState)));
-        _server.HandleHttpException(async (ctx, ex) =>
-        {
-            
-        });
+        // _server.HandleHttpException(async (_, _) => { });
         _server.StateChanged += ServerOnStateChanged;
         // TODO: This might block on tasks, maybe copy impl but async
         _server.Start(_cts.Token);

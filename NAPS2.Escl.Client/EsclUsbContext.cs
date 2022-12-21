@@ -1,3 +1,4 @@
+#if USB
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
@@ -152,3 +153,4 @@ public class EsclUsbContext : IDisposable
         _usbContext.Dispose();
     }
 }
+#endif

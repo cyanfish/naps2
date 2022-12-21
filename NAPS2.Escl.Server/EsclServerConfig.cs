@@ -2,5 +2,5 @@ namespace NAPS2.Escl.Server;
 
 public class EsclServerConfig
 {
-    public EsclCapabilities Capabilities { get; init; }
+    public required EsclCapabilities Capabilities { get; init; }
 }

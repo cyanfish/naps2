@@ -103,7 +103,7 @@ internal class EsclApiController : WebApiController
     }
 
     [Route(HttpVerbs.Post, "/ScanJobs")]
-    public async Task CreateScanJob()
+    public void CreateScanJob()
     {
         var jobState = JobState.CreateNewJob();
         _serverState.Jobs[jobState.Id] = jobState;
@@ -112,7 +112,7 @@ internal class EsclApiController : WebApiController
     }
 
     [Route(HttpVerbs.Delete, "/ScanJobs/{jobId}")]
-    public async Task CancelScanJob(string jobId)
+    public void CancelScanJob(string jobId)
     {
         if (_serverState.Jobs.TryGetValue(jobId, out var jobState) &&
             jobState.Status is JobStatus.Pending or JobStatus.Processing)
@@ -127,12 +127,12 @@ internal class EsclApiController : WebApiController
     }
 
     [Route(HttpVerbs.Get, "/ScanJobs/{jobId}/ScanImageInfo")]
-    public async Task GetImageinfo(string jobId)
+    public void GetImageinfo(string jobId)
     {
     }
 
     [Route(HttpVerbs.Get, "/ScanJobs/{jobId}/NextDocument")]
-    public async Task NextDocument(string jobId)
+    public void NextDocument(string jobId)
     {
         if (_serverState.Jobs.TryGetValue(jobId, out var jobState) &&
             jobState.Status is JobStatus.Pending or JobStatus.Processing)
@@ -141,7 +141,7 @@ internal class EsclApiController : WebApiController
             // Bypass https://github.com/unosquare/embedio/issues/510
             var field = Response.GetType().GetField("<ProtocolVersion>k__BackingField",
                 BindingFlags.Instance | BindingFlags.NonPublic);
-            field.SetValue(Response, new Version(1, 1));
+            field!.SetValue(Response, new Version(1, 1));
             Response.SendChunked = true;
             Response.ContentType = "image/jpeg";
             Response.ContentEncoding = null;

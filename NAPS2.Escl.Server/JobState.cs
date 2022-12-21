@@ -14,11 +14,11 @@ internal class JobState
         };
     }
 
-    public string Id { get; init; }
+    public required string Id { get; init; }
 
-    public JobStatus Status { get; set; }
+    public required JobStatus Status { get; set; }
     
-    public Stopwatch LastUpdated { get; set; }
+    public required Stopwatch LastUpdated { get; set; }
 }
 
 internal enum JobStatus

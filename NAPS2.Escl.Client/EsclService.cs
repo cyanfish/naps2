@@ -4,10 +4,8 @@ namespace NAPS2.Escl.Client;
 
 public class EsclService
 {
-    public string Uuid { get; init; }
-    public string Name { get; init; }
-    public IPAddress Ip { get; init; }
-    public int Port { get; init; }
-    public bool Tls { get; init; }
-    public string RootUrl { get; init; }
+    public required IPAddress Ip { get; init; }
+    public required int Port { get; init; }
+    public required bool Tls { get; init; }
+    public required string RootUrl { get; init; }
 }

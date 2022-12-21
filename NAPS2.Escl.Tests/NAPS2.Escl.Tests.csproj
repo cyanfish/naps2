@@ -5,6 +5,7 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <LangVersion>10</LangVersion>
+        <DefineConstants Condition="'$(TargetFramework)' == 'net6.0'">USB</DefineConstants>
     </PropertyGroup>
 
     <ItemGroup>

@@ -19,7 +19,7 @@ public class EsclServiceLocator
                     locatedServices.Add(service);
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 // TODO: Log?
             }
@@ -89,8 +89,8 @@ public class EsclServiceLocator
         }
         return new EsclService
         {
-            Uuid = props["uuid"],
-            Name = props["ty"],
+            // Uuid = props["uuid"],
+            // Name = props["ty"],
             Ip = ip,
             Port = port,
             Tls = https,
