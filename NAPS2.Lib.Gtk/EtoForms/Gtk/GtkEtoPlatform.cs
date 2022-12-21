@@ -23,9 +23,9 @@ public class GtkEtoPlatform : EtoPlatform
         application.Initialized += (_, _) =>
         {
             // Hack to force Eto to use normal title bars for dialogs
-            var type = Assembly.GetAssembly(typeof(Eto.GtkSharp.Platform)).GetType("Eto.GtkSharp.Helper");
-            var prop = type.GetField("UseHeaderBar", BindingFlags.Public | BindingFlags.Static);
-            prop.SetValue(null, false);
+            var type = Assembly.GetAssembly(typeof(Eto.GtkSharp.Platform))!.GetType("Eto.GtkSharp.Helper");
+            var prop = type!.GetField("UseHeaderBar", BindingFlags.Public | BindingFlags.Static);
+            prop!.SetValue(null, false);
         };
         return application;
     }

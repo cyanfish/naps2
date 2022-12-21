@@ -53,11 +53,11 @@ public static class GtkEntryPoint
     {
         if (e.IsTerminating)
         {
-            Log.FatalException("An error occurred that caused the task to terminate.", e.ExceptionObject as Exception);
+            Log.FatalException("An error occurred that caused the task to terminate.", e.ExceptionObject as Exception ?? new Exception());
         }
         else
         {
-            Log.ErrorException("An unhandled error occurred.", e.ExceptionObject as Exception);
+            Log.ErrorException("An unhandled error occurred.", e.ExceptionObject as Exception ?? new Exception());
         }
     }
 
@@ -69,6 +69,6 @@ public static class GtkEntryPoint
 
     private static void UnhandledException(object? sender, UnhandledExceptionEventArgs e)
     {
-        Log.FatalException("An error occurred that caused the application to close.", e.ExceptionObject as Exception);
+        Log.FatalException("An error occurred that caused the application to close.", e.ExceptionObject as Exception ?? new Exception());
     }
 }

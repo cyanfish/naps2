@@ -13,11 +13,11 @@ namespace NAPS2.EtoForms.Ui;
 
 public class GtkDesktopForm : DesktopForm
 {
-    private Toolbar _toolbar;
+    private Toolbar _toolbar = null!;
     private int _toolbarButtonCount;
     private int _toolbarMenuToggleCount;
     private int _toolbarPadding;
-    private CssProvider _toolbarPaddingCssProvider;
+    private CssProvider? _toolbarPaddingCssProvider;
 
     public GtkDesktopForm(
         Naps2Config config,
@@ -57,7 +57,7 @@ public class GtkDesktopForm : DesktopForm
     protected override void OnLoad(EventArgs e)
     {
         // TODO: What's the best place to initialize this? It needs to happen from the UI event loop.
-        Invoker.Current = new SyncContextInvoker(SynchronizationContext.Current);
+        Invoker.Current = new SyncContextInvoker(SynchronizationContext.Current!);
         base.OnLoad(e);
         var listView = (GtkListView<UiImage>) _listView;
         listView.NativeControl.StyleContext.AddClass("desktop-listview");

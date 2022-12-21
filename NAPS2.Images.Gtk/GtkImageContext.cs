@@ -27,7 +27,7 @@ public class GtkImageContext : ImageContext
     {
         if (format == ImageFileFormat.Tiff)
         {
-            IMemoryImage image = null;
+            IMemoryImage image = null!;
             var cts = new CancellationTokenSource();
             _tiffIo.LoadTiff(img => { image = img; cts.Cancel(); }, stream, cts.Token);
             return image;

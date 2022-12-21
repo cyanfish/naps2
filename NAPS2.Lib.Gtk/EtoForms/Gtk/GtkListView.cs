@@ -71,9 +71,15 @@ public class GtkListView<T> : IListView<T> where T : notnull
 
     public event EventHandler? SelectionChanged;
 
+    // TODO: Implement item double-click
+#pragma warning disable CS0067
     public event EventHandler? ItemClicked;
+#pragma warning restore CS0067
 
+    // TODO: Implement drag/drop
+#pragma warning disable CS0067
     public event EventHandler<DropEventArgs>? Drop;
+#pragma warning restore CS0067
 
     public void SetItems(IEnumerable<T> items)
     {
@@ -294,8 +300,8 @@ public class GtkListView<T> : IListView<T> where T : notnull
 
     private class Entry
     {
-        public T Item { get; set; }
-        public Widget Widget { get; set; }
-        public int Index { get; init; }
+        public required T Item { get; set; }
+        public required Widget Widget { get; set; }
+        public required int Index { get; init; }
     }
 }
