@@ -6,7 +6,7 @@ namespace NAPS2.Tools;
 public static class Cli
 {
     public static void Run(string command, string args, Dictionary<string, string>? env = null,
-        CancellationToken cancel = default, bool noVerbose = false)
+        CancellationToken cancel = default, bool noVerbose = false, string? ignoreErrorIfOutputContains = null)
     {
         var startInfo = new ProcessStartInfo
         {
@@ -51,12 +51,22 @@ public static class Cli
             bool print = Output.EnableVerbose && !noVerbose;
             proc.OutputDataReceived += print ? Print : Save;
             proc.ErrorDataReceived += Print;
+
+            bool ignoreError = false;
+            if (ignoreErrorIfOutputContains != null)
+            {
+                proc.OutputDataReceived += (_, e) =>
+                    ignoreError |= e.Data?.Contains(ignoreErrorIfOutputContains) ?? false;
+                proc.ErrorDataReceived += (_, e) =>
+                    ignoreError |= e.Data?.Contains(ignoreErrorIfOutputContains) ?? false;
+            }
+
             proc.BeginOutputReadLine();
             proc.BeginErrorReadLine();
             while (!proc.WaitForExit(100))
             {
             }
-            if (proc.ExitCode != 0 && !cancel.IsCancellationRequested)
+            if (proc.ExitCode != 0 && !cancel.IsCancellationRequested && !ignoreError)
             {
                 if (!print)
                 {

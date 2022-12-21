@@ -13,6 +13,12 @@ public class PackageOptions : OptionsBase
 
     [Option("nopre", Required = false, HelpText = "Skip pre-packaging steps")]
     public bool NoPre { get; set; }
+
+    [Option("nosign", Required = false, HelpText = "Skip code signing/notarization")]
+    public bool NoSign { get; set; }
+
+    [Option("nonotarize", Required = false, HelpText = "Skip notarization only")]
+    public bool NoNotarize { get; set; }
     
     // TODO: Add net target (net462/net6/net6-windows etc.)
 

@@ -27,7 +27,7 @@ public class PackageCommand : ICommand<PackageOptions>
                     }
                     else if (target.Platform.IsMac())
                     {
-                        MacPackager.Package(GetPackageInfo(target.Platform, "InstallerEXE"));
+                        MacPackager.Package(GetPackageInfo(target.Platform, "InstallerEXE"), opts.NoSign, opts.NoNotarize);
                     }
                     else if (target.Platform.IsWindows())
                     {
