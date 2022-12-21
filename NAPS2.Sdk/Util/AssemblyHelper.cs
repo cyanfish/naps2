@@ -29,7 +29,7 @@ public class AssemblyHelper
 
     private static string GetAssemblyAttributeValue<T>(Func<T, string> selector)
     {
-        object[] attributes = Assembly.GetEntryAssembly().GetCustomAttributes(typeof(T), false);
+        object[] attributes = Assembly.GetEntryAssembly()!.GetCustomAttributes(typeof(T), false);
         if (attributes.Length == 0)
         {
             return "";
@@ -37,20 +37,9 @@ public class AssemblyHelper
         return selector((T) attributes[0]);
     }
 
-    public static string Title
-    {
-        get
-        {
-            string title = GetAssemblyAttributeValue<AssemblyTitleAttribute>(x => x.Title);
-            if (string.IsNullOrEmpty(title))
-            {
-                title = Path.GetFileNameWithoutExtension(Assembly.GetEntryAssembly().CodeBase);
-            }
-            return title;
-        }
-    }
+    public static string Title => GetAssemblyAttributeValue<AssemblyTitleAttribute>(x => x.Title);
 
-    public static string Version => Assembly.GetEntryAssembly().GetName().Version.ToString();
+    public static string Version => Assembly.GetEntryAssembly()!.GetName().Version!.ToString();
 
     public static string Description => GetAssemblyAttributeValue<AssemblyDescriptionAttribute>(x => x.Description);
 

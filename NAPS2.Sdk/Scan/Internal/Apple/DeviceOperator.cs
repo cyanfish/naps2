@@ -69,7 +69,7 @@ internal class DeviceOperator : ICScannerDeviceDelegate
 
     public override void DidEncounterError(ICDevice device, NSError? error)
     {
-        var ex = new DeviceException(error.Description);
+        var ex = error != null ? new DeviceException(error.Description) : new DeviceException();
         // TODO: Put these in a list or something
         _openSessionTcs.TrySetException(ex);
         _readyTcs.TrySetException(ex);

@@ -8,29 +8,27 @@ public class ToolStripDoubleButton : ToolStripButton
 {
     private int _currentButton = -1;
 
-    public ToolStripDoubleButton()
-    {
-    }
+    public event EventHandler? FirstClick;
+    public event EventHandler? SecondClick;
 
-    public event EventHandler FirstClick;
-    public event EventHandler SecondClick;
-
-    public Image FirstImage { get; set; }
-    public Image SecondImage { get; set; }
+    public required Image FirstImage { get; init; }
+    public required Image SecondImage { get; init; }
 
     [Localizable(true)]
-    public string FirstText { get; set; }
-    [Localizable(true)]
-    public string SecondText { get; set; }
+    public required string FirstText { get; init; }
 
-    public int MaxTextWidth { get; set; }
+    [Localizable(true)]
+    public required string SecondText { get; init; }
+
+    public int MaxTextWidth { get; init; }
 
     public override Size GetPreferredSize(Size constrainingSize)
     {
         bool wrap = false;
         var sumWidth = Padding.Left + Padding.Right
                                     + Math.Max(FirstImage?.Width ?? 0, SecondImage?.Width ?? 0)
-                                    + Math.Max(MeasureTextWidth(FirstText, ref wrap), MeasureTextWidth(SecondText, ref wrap));
+                                    + Math.Max(MeasureTextWidth(FirstText, ref wrap),
+                                        MeasureTextWidth(SecondText, ref wrap));
         var sumHeight = Padding.Top + Padding.Bottom
                                     + (FirstImage?.Height ?? 0) + (SecondImage?.Height ?? 0)
                                     + 16 + (wrap ? 12 : 0);
@@ -40,7 +38,7 @@ public class ToolStripDoubleButton : ToolStripButton
     private int MeasureTextWidth(string text, ref bool wrap)
     {
         using var g = Graphics.FromImage(new Bitmap(1, 1));
-        var width = (int)Math.Ceiling(g.MeasureString(text, Font).Width);
+        var width = (int) Math.Ceiling(g.MeasureString(text, Font).Width);
         if (MaxTextWidth > 0 && width > MaxTextWidth)
         {
             var words = text.Split(' ');
@@ -48,7 +46,7 @@ public class ToolStripDoubleButton : ToolStripButton
             {
                 var left = string.Join(" ", words.Take(words.Length - i));
                 var right = string.Join(" ", words.Skip(words.Length - i));
-                var wrappedWidth = (int)Math.Ceiling(g.MeasureString(left + "\n" + right, Font).Width);
+                var wrappedWidth = (int) Math.Ceiling(g.MeasureString(left + "\n" + right, Font).Width);
                 if (wrappedWidth < width)
                 {
                     width = wrappedWidth;
@@ -83,35 +81,31 @@ public class ToolStripDoubleButton : ToolStripButton
             flags |= TextFormatFlags.WordBreak;
         }
 
-        if (FirstImage != null && FirstText != null)
+        if (Enabled)
         {
-            if (Enabled)
-            {
-                e.Graphics.DrawImage(FirstImage, new Point(Padding.Left, Height / 4 - FirstImage.Height / 2 + 1));
-            }
-            else
-            {
-                ControlPaint.DrawImageDisabled(e.Graphics, FirstImage, Padding.Left, Height / 4 - FirstImage.Height / 2 + 1, Color.Transparent);
-            }
-
-            var textRectangle = new Rectangle(Padding.Left + FirstImage.Width, 0, textWidth, Height / 2);
-            renderer.DrawItemText(new ToolStripItemTextRenderEventArgs(e.Graphics, this, FirstText, textRectangle, ForeColor, Font, flags));
+            e.Graphics.DrawImage(FirstImage, new Point(Padding.Left, Height / 4 - FirstImage.Height / 2 + 1));
         }
-
-        if (SecondImage != null && SecondText != null)
+        else
         {
-            if (Enabled)
-            {
-                e.Graphics.DrawImage(SecondImage, new Point(Padding.Left, Height * 3 / 4 - SecondImage.Height / 2));
-            }
-            else
-            {
-                ControlPaint.DrawImageDisabled(e.Graphics, SecondImage, Padding.Left, Height * 3 / 4 - SecondImage.Height / 2, Color.Transparent);
-            }
-
-            var textRectangle = new Rectangle(Padding.Left + SecondImage.Width, Height / 2, textWidth, Height / 2);
-            renderer.DrawItemText(new ToolStripItemTextRenderEventArgs(e.Graphics, this, SecondText, textRectangle, ForeColor, Font, flags));
+            ControlPaint.DrawImageDisabled(e.Graphics, FirstImage, Padding.Left, Height / 4 - FirstImage.Height / 2 + 1,
+                Color.Transparent);
         }
+        var textRectangle1 = new Rectangle(Padding.Left + FirstImage.Width, 0, textWidth, Height / 2);
+        renderer.DrawItemText(new ToolStripItemTextRenderEventArgs(e.Graphics, this, FirstText, textRectangle1,
+            ForeColor, Font, flags));
+
+        if (Enabled)
+        {
+            e.Graphics.DrawImage(SecondImage, new Point(Padding.Left, Height * 3 / 4 - SecondImage.Height / 2));
+        }
+        else
+        {
+            ControlPaint.DrawImageDisabled(e.Graphics, SecondImage, Padding.Left,
+                Height * 3 / 4 - SecondImage.Height / 2, Color.Transparent);
+        }
+        var textRectangle2 = new Rectangle(Padding.Left + SecondImage.Width, Height / 2, textWidth, Height / 2);
+        renderer.DrawItemText(new ToolStripItemTextRenderEventArgs(e.Graphics, this, SecondText, textRectangle2,
+            ForeColor, Font, flags));
 
         Image = null;
     }

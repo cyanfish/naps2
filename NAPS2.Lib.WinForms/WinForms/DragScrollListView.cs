@@ -28,7 +28,7 @@ public class DragScrollListView : ListView
 
     private int EdgeSize => Font.Height;
 
-    private void ListViewBase_DragOver(object sender, DragEventArgs e)
+    private void ListViewBase_DragOver(object? sender, DragEventArgs e)
     {
         Point position = PointToClient(new Point(e.X, e.Y));
 

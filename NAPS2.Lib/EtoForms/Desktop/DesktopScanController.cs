@@ -44,7 +44,7 @@ public class DesktopScanController : IDesktopScanController
     {
         _desktopFormProvider.DesktopForm.BringToFront();
         ScanProfile? profile;
-        if (_profileManager.DefaultProfile?.Device?.ID == deviceID)
+        if (_profileManager.DefaultProfile?.Device?.Id == deviceID)
         {
             // Try to use the default profile if it has the right device
             profile = _profileManager.DefaultProfile;
@@ -53,7 +53,7 @@ public class DesktopScanController : IDesktopScanController
         {
             // Otherwise just pick any old profile with the right device
             // Not sure if this is the best way to do it, but it's hard to prioritize profiles
-            profile = _profileManager.Profiles.FirstOrDefault(x => x.Device != null && x.Device.ID == deviceID);
+            profile = _profileManager.Profiles.FirstOrDefault(x => x.Device != null && x.Device.Id == deviceID);
         }
         if (profile == null)
         {

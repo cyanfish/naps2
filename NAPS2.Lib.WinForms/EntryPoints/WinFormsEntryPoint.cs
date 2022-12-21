@@ -50,7 +50,7 @@ public static class WinFormsEntryPoint
         application.MainForm = desktop;
         desktop.Show();
         var appContext = new wf.ApplicationContext(desktop.ToNative());
-        Invoker.Current = new WinFormsInvoker(appContext);
+        Invoker.Current = new WinFormsInvoker(() => appContext.MainForm!);
         WinFormsDesktopForm.ApplicationContext = appContext;
         var setOptionsMethod =
             typeof(ApplicationHandler).GetMethod("SetOptions", BindingFlags.Instance | BindingFlags.NonPublic);

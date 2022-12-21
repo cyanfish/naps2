@@ -69,7 +69,7 @@ public class WinFormsListView<T> : IListView<T> where T : notnull
 
     private bool UseCustomRendering => !_behavior.ShowLabels && !_behavior.Checkboxes;
 
-    private void CustomRenderItem(object sender, DrawListViewItemEventArgs e)
+    private void CustomRenderItem(object? sender, DrawListViewItemEventArgs e)
     {
         int width, height;
         var image = ImageList.Get(e.Item);

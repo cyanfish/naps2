@@ -1,6 +1,7 @@
 // ReSharper disable once CheckNamespace
 namespace NAPS2.Util;
 
+#pragma warning disable CS0162
 public class LeakTracer
 {
     private const bool ENABLE_TRACING = false;

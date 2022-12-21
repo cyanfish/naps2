@@ -251,7 +251,7 @@ internal class ScanPerformer : IScanPerformer
     private async Task<bool> PopulateDevice(ScanProfile scanProfile, ScanOptions options)
     {
         // If a device wasn't specified, prompt the user to pick one
-        if (string.IsNullOrEmpty(scanProfile.Device?.ID))
+        if (string.IsNullOrEmpty(scanProfile.Device?.Id))
         {
             options.Device = await PromptForDevice(options);
             if (options.Device == null)

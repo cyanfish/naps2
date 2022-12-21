@@ -13,13 +13,12 @@ namespace NAPS2.EtoForms.Ui;
 
 public class WinFormsDesktopForm : DesktopForm
 {
-    public static wf.ApplicationContext ApplicationContext { get; set; }
+    public static wf.ApplicationContext? ApplicationContext { get; set; }
 
     private readonly ToolbarFormatter _toolbarFormatter = new(new StringWrapper());
     private readonly wf.Form _form;
     private wf.ToolStrip _toolStrip = null!;
     private wf.ToolStripContainer _container = null!;
-    private wf.Button btnZoomIn, btnZoomOut, btnZoomMouseCatcher;
 
     public WinFormsDesktopForm(
         Naps2Config config,
@@ -67,14 +66,14 @@ public class WinFormsDesktopForm : DesktopForm
         // Disabled buttons don't prevent click events from being sent to the listview below the button, so without this
         // "mouse catcher" control you could e.g. spam click zoom out until it's maxed and then accidentally keep
         // clicking and change the listview selection.
-        btnZoomMouseCatcher = new wf.Button
+        var mouseCatcher = new wf.Button
         {
             BackColor = Color.White,
             Size = new Size(45, 23),
             FlatStyle = wf.FlatStyle.Flat
         };
         return L.Overlay(
-            btnZoomMouseCatcher.ToEto(),
+            mouseCatcher.ToEto(),
             base.GetZoomButtons()
         );
     }
@@ -84,6 +83,11 @@ public class WinFormsDesktopForm : DesktopForm
     protected override void SetMainForm(Form newMainForm)
     {
         base.SetMainForm(newMainForm);
+        if (ApplicationContext == null)
+        {
+            Log.Error("ApplicationContext should not be null");
+            return;
+        }
         ApplicationContext.MainForm = newMainForm.ToSWF();
     }
 

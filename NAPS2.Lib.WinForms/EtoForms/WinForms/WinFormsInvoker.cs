@@ -4,22 +4,22 @@ namespace NAPS2.EtoForms.WinForms;
 
 public class WinFormsInvoker : IInvoker
 {
-    private readonly ApplicationContext _appContext;
+    private readonly Func<Form> _formFunc;
 
-    public WinFormsInvoker(ApplicationContext appContext)
+    public WinFormsInvoker(Func<Form> formFunc)
     {
-        _appContext = appContext;
+        _formFunc = formFunc;
     }
 
     public void Invoke(Action action)
     {
-        _appContext.MainForm.Invoke(action);
+        _formFunc().Invoke(action);
     }
 
     // TODO: Maybe these can be extension methods?
     public T InvokeGet<T>(Func<T> func)
     {
-        T value = default;
+        T value = default!;
         Invoke(() => value = func());
         return value;
     }

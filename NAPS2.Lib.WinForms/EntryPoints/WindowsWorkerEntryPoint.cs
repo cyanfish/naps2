@@ -1,5 +1,6 @@
 ﻿using System.Threading;
 using System.Windows.Forms;
+using NAPS2.EtoForms.WinForms;
 using NAPS2.Modules;
 using NAPS2.Scan.Internal.Twain;
 using NAPS2.WinForms;
@@ -22,7 +23,7 @@ public static class WindowsWorkerEntryPoint
         // Set up a form for the worker process
         // A parent form is needed for some operations, namely 64-bit TWAIN scanning
         var form = new BackgroundForm();
-        Invoker.Current = form;
+        Invoker.Current = new WinFormsInvoker(() => form);
         TwainHandleManager.Factory = () => new WinFormsTwainHandleManager(form);
 
         return WorkerEntryPoint.Run(args, new GdiModule(), () => Application.Run(form), () => form.Close());

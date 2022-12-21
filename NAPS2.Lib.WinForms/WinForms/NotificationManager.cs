@@ -13,7 +13,7 @@ public class NotificationManager : INotificationManager
     private const int SPACING_Y = 20;
 
     private readonly Naps2Config _config;
-    private readonly List<NotifyWidgetBase> _slots = new();
+    private readonly List<NotifyWidgetBase?> _slots = new();
     private wf.Form? _parentForm;
 
     public NotificationManager(Naps2Config config, DesktopFormProvider desktopFormProvider)
@@ -68,9 +68,10 @@ public class NotificationManager : INotificationManager
         _slots.Clear();
         for (int i = 0; i < old.Count; i++)
         {
-            if (old[i] != null)
+            var slot = old[i];
+            if (slot != null)
             {
-                Show(old[i].Clone());
+                Show(slot.Clone());
             }
         }
     }
@@ -93,13 +94,14 @@ public class NotificationManager : INotificationManager
         });
     }
 
-    private void parentForm_Resize(object sender, EventArgs e)
+    private void parentForm_Resize(object? sender, EventArgs e)
     {
         for (int i = 0; i < _slots.Count; i++)
         {
-            if (_slots[i] != null)
+            var slot = _slots[i];
+            if (slot != null)
             {
-                _slots[i].Location = GetPosition(_slots[i], i);
+                slot.Location = GetPosition(slot, i);
             }
         }
     }

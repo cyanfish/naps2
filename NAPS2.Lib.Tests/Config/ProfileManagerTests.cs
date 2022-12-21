@@ -52,7 +52,7 @@ public class ProfileManagerTests : ContextualTests
         Assert.Single(profiles);
 
         Assert.Equal("test_driver", profiles[0].DriverName);
-        Assert.Equal("test_id", profiles[0].Device?.ID);
+        Assert.Equal("test_id", profiles[0].Device?.Id);
         Assert.Equal(2, profiles[0].Version);
         Assert.Null(profiles[0].UpgradedFrom);
     }
@@ -67,7 +67,7 @@ public class ProfileManagerTests : ContextualTests
         Assert.Single(profiles);
 
         Assert.Equal("wia", profiles[0].DriverName);
-        Assert.Equal("test_id", profiles[0].Device?.ID);
+        Assert.Equal("test_id", profiles[0].Device?.Id);
         Assert.Equal(ScanDpi.Dpi200, profiles[0].Resolution);
         Assert.Equal(2, profiles[0].Version);
         Assert.Equal(0, profiles[0].UpgradedFrom);
@@ -83,7 +83,7 @@ public class ProfileManagerTests : ContextualTests
         Assert.Single(profiles);
 
         Assert.Equal("wia", profiles[0].DriverName);
-        Assert.Equal("test_id", profiles[0].Device?.ID);
+        Assert.Equal("test_id", profiles[0].Device?.Id);
         Assert.Equal(ScanDpi.Dpi200, profiles[0].Resolution);
         Assert.Equal(2, profiles[0].Version);
         Assert.Equal(1, profiles[0].UpgradedFrom);
@@ -99,7 +99,7 @@ public class ProfileManagerTests : ContextualTests
         Assert.Single(profiles);
 
         Assert.Equal("twain", profiles[0].DriverName);
-        Assert.Equal("test_id", profiles[0].Device?.ID);
+        Assert.Equal("test_id", profiles[0].Device?.Id);
         Assert.True(profiles[0].UseNativeUI);
         Assert.Equal(2, profiles[0].Version);
         Assert.Equal(1, profiles[0].UpgradedFrom);

@@ -23,7 +23,7 @@ internal class RemoteScanController : IRemoteScanController
         var deviceList = await _scanDriverFactory.Create(options).GetDeviceList(options);
         if (options.Driver == Driver.Twain && !options.TwainOptions.IncludeWiaDevices)
         {
-            deviceList = deviceList.Where(x => !x.ID.StartsWith("WIA-", StringComparison.InvariantCulture)).ToList();
+            deviceList = deviceList.Where(x => !x.Id.StartsWith("WIA-", StringComparison.InvariantCulture)).ToList();
         }
         return deviceList;
     }

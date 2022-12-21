@@ -6,11 +6,12 @@ using Xunit;
 
 namespace NAPS2.App.Tests.Appium;
 
+#pragma warning disable CS0162
 [Collection("appium")]
 public class ScanAndSaveTests : AppiumTests
 {
     private const string WIA_DEVICE_NAME = "";
-    private const string TWAIN_DEVICE_NAME = "Canon MP495 ser";
+    private const string TWAIN_DEVICE_NAME = "";
 
     [VerifyTheory(AllowDebug = true)]
     [ClassData(typeof(AppiumTestData))]

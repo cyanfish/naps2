@@ -5,7 +5,7 @@ namespace NAPS2.WinForms;
 /// <summary>
 /// A basic implementation of an invisible form.
 /// </summary>
-public class BackgroundForm : FormBase
+public class BackgroundForm : Form
 {
     public BackgroundForm()
     {

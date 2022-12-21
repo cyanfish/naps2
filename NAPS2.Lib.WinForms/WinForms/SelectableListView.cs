@@ -16,7 +16,7 @@ public class SelectableListView<T> : ISelectable<T> where T : notnull
 
     public event EventHandler? SelectionChanged;
 
-    private void ListViewOnSelectedIndexChanged(object sender, EventArgs e)
+    private void ListViewOnSelectedIndexChanged(object? sender, EventArgs e)
     {
         if (!_refreshing)
         {

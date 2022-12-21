@@ -39,7 +39,8 @@ public class PrintDocumentPrinter : IScannedImagePrinter
         return false;
     }
 
-    public async Task<bool> Print(PrinterSettings printerSettings, IList<ProcessedImage> images, IList<ProcessedImage> selectedImages)
+    public async Task<bool> Print(PrinterSettings printerSettings, IList<ProcessedImage> images,
+        IList<ProcessedImage> selectedImages)
     {
         IList<ProcessedImage> imagesToPrint;
         switch (printerSettings.PrintRange)
@@ -87,7 +88,7 @@ public class PrintDocumentPrinter : IScannedImagePrinter
                             ? new Rectangle(pb.Left, pb.Top, image.Width * pb.Height / image.Height, pb.Height)
                             : new Rectangle(pb.Left, pb.Top, pb.Width, image.Height * pb.Width / image.Width);
 
-                        e.Graphics.DrawImage(image.AsBitmap(), rect);
+                        e.Graphics!.DrawImage(image.AsBitmap(), rect);
                     }
                     finally
                     {
@@ -98,7 +99,7 @@ public class PrintDocumentPrinter : IScannedImagePrinter
                 };
                 printDocument.PrinterSettings = printerSettings;
                 printDocument.Print();
-                    
+
                 Log.Event(EventType.Print, new EventParams
                 {
                     Name = MiscResources.Print,

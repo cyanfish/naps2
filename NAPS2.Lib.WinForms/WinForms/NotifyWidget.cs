@@ -4,10 +4,10 @@ namespace NAPS2.WinForms;
 
 public partial class NotifyWidget : NotifyWidgetBase
 {
-    private readonly string _linkTarget;
+    private readonly string? _linkTarget;
     private readonly string? _folderTarget;
 
-    public NotifyWidget(string title, string linkLabel, string linkTarget, string? folderTarget)
+    public NotifyWidget(string title, string linkLabel, string? linkTarget, string? folderTarget)
     {
         _linkTarget = linkTarget;
         _folderTarget = folderTarget;
@@ -66,6 +66,11 @@ public partial class NotifyWidget : NotifyWidgetBase
 
     protected virtual void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
     {
+        if (_linkTarget == null)
+        {
+            Log.Error("Link target should not be null");
+            return;
+        }
         if (e.Button == MouseButtons.Right)
         {
             contextMenuStrip1.Show(linkLabel1, linkLabel1.Location);

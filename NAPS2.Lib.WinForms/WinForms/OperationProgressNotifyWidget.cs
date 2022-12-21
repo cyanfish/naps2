@@ -47,23 +47,23 @@ public partial class OperationProgressNotifyWidget : NotifyWidgetBase
         InvokeHideNotify();
     }
 
-    private void Op_StatusChanged(object sender, EventArgs e)
+    private void Op_StatusChanged(object? sender, EventArgs e)
     {
-        SafeInvoke(DisplayProgress);
+        Invoker.Current.SafeInvoke(DisplayProgress);
     }
 
-    private void Op_Finished(object sender, EventArgs e)
+    private void Op_Finished(object? sender, EventArgs e)
     {
         DoHideNotify();
     }
 
-    private void cancelToolStripMenuItem_Click(object sender, EventArgs e)
+    private void cancelToolStripMenuItem_Click(object? sender, EventArgs e)
     {
         _op.Cancel();
         cancelToolStripMenuItem.Enabled = false;
     }
 
-    private void OperationProgressNotifyWidget_Click(object sender, MouseEventArgs e)
+    private void OperationProgressNotifyWidget_Click(object? sender, MouseEventArgs e)
     {
         if (e.Button == MouseButtons.Left)
         {

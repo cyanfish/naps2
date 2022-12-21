@@ -238,7 +238,7 @@ internal class TwImageInfo
     public int ImageLength;
     public short SamplesPerPixel;
     [MarshalAs(UnmanagedType.ByValArray, SizeConst = 8)]
-    public short[] BitsPerSample;
+    public short[]? BitsPerSample;
     public short BitsPerPixel;
     public short Planar;
     public short PixelType;

@@ -19,7 +19,10 @@ internal class AppleScanDriver : IScanDriver
         using var reader = new DeviceReader();
         reader.Start();
         await Task.Delay(2000);
-        return reader.Devices.Select(x => new ScanDevice(x.Uuid, x.Name)).ToList();
+        return reader.Devices
+            .Where(x => x.Uuid != null && x.Name != null)
+            .Select(x => new ScanDevice(x.Uuid!, x.Name!))
+            .ToList();
     }
 
     public async Task Scan(ScanOptions options, CancellationToken cancelToken, IScanEvents scanEvents,
@@ -37,7 +40,7 @@ internal class AppleScanDriver : IScanDriver
         var tcs = new TaskCompletionSource<ICScannerDevice>();
         reader.DeviceFound += (_, args) =>
         {
-            if (args.Device.Uuid == scanDevice.ID)
+            if (args.Device.Uuid == scanDevice.Id)
             {
                 tcs.TrySetResult(args.Device);
             }

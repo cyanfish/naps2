@@ -69,7 +69,7 @@ public class EsclClient
         response.EnsureSuccessStatusCode();
         return new EsclJob
         {
-            Uri = response.Headers.Location
+            Uri = response.Headers.Location!
         };
     }
 

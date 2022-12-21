@@ -45,7 +45,7 @@ public class ScanErrorHandling : ContextualTests
         controller.PropagateErrors = true;
 
         bridgeFactory.Setup(factory => factory.Create(It.IsAny<ScanOptions>())).Throws<InvalidOperationException>();
-        var source = controller.Scan(new ScanOptions { Device = new ScanDevice { ID = "blah" } });
+        var source = controller.Scan(new ScanOptions { Device = new ScanDevice("foo", "bar") });
         await Assert.ThrowsAsync<InvalidOperationException>(async () => await source.ToListAsync());
     }
 
@@ -91,7 +91,7 @@ public class ScanErrorHandling : ContextualTests
         localPostProcessor.Setup(pp =>
                 pp.PostProcess(It.IsAny<ProcessedImage>(), It.IsAny<ScanOptions>(), It.IsAny<PostProcessingContext>()))
             .Throws<InvalidOperationException>();
-        var source = controller.Scan(new ScanOptions { Device = new ScanDevice { ID = "blah" } });
+        var source = controller.Scan(new ScanOptions { Device = new ScanDevice("foo", "bar") });
         await Assert.ThrowsAsync<InvalidOperationException>(async () => await source.ToListAsync());
     }
 
@@ -107,7 +107,7 @@ public class ScanErrorHandling : ContextualTests
         controller.PropagateErrors = true;
 
         bridgeFactory.Setup(factory => factory.Create(It.IsAny<ScanOptions>())).Returns(bridge);
-        var source = controller.Scan(new ScanOptions { Device = new ScanDevice { ID = "blah" } });
+        var source = controller.Scan(new ScanOptions { Device = new ScanDevice("foo", "bar") });
         await Assert.ThrowsAsync<InvalidOperationException>(async () => await source.ToListAsync());
     }
 

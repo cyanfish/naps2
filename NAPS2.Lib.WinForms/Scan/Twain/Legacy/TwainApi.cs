@@ -44,7 +44,10 @@ internal static class TwainApi
         do
         {
             string? name = tw.GetCurrentName();
-            result.Add(new ScanDevice(name, name));
+            if (name != null)
+            {
+                result.Add(new ScanDevice(name, name));
+            }
         } while (tw.GetNext());
         return result;
     }
@@ -56,7 +59,7 @@ internal static class TwainApi
         {
             throw new DeviceNotFoundException();
         }
-        if (!tw.SelectByName(device.ID!))
+        if (!tw.SelectByName(device.Id!))
         {
             throw new DeviceNotFoundException();
         }
