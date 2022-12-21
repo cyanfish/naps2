@@ -512,8 +512,7 @@ public abstract class DesktopForm : EtoFormBase
         }
         else if (args.Data.Contains("FileDrop"))
         {
-            // TODO: Is this xplat-compatible?
-            var data = args.Data.GetObject<string[]>("FileDrop");
+            var data = args.Data.Uris.Select(uri => uri.AbsolutePath);
             _desktopController.ImportFiles(data);
         }
     }
