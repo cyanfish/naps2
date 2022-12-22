@@ -1,5 +1,6 @@
 using Eto.Drawing;
 using Eto.Forms;
+using Google.Protobuf;
 using NAPS2.ImportExport.Images;
 
 namespace NAPS2.EtoForms;
@@ -24,35 +25,40 @@ public class ImageListViewBehavior : ListViewBehavior<UiImage>
         return _thumbnailProvider.GetThumbnail(item, imageSize).ToEtoImage();
     }
 
-    public override void SetDragData(ListSelection<UiImage> selection, IDataObject dataObject)
+    public override bool AllowDragDrop => true;
+
+    public override bool AllowFileDrop => true;
+
+    public override string CustomDragDataType => _imageTransfer.TypeName;
+
+    public override byte[] SerializeCustomDragData(UiImage[] items)
     {
-        if (selection.Any())
-        {
-            using var selectedImages = selection.Select(x => x.GetClonedImage()).ToDisposableList();
-            _imageTransfer.AddTo(dataObject, selectedImages.InnerList);
-        }
+        using var processedImages = items.Select(x => x.GetClonedImage()).ToDisposableList();
+        return _imageTransfer.ToBinaryData(processedImages);
     }
 
-    public override DragEffects GetDropEffect(IDataObject dataObject)
+    public override DragEffects GetCustomDragEffect(byte[] data)
     {
-        try
+        var dataObj = _imageTransfer.FromBinaryData(data);
+        return dataObj.ProcessId == Process.GetCurrentProcess().Id
+            ? DragEffects.Move
+            : DragEffects.Copy;
+    }
+
+    public override byte[] MergeCustomDragData(byte[][] dataItems)
+    {
+        // TODO: Move to ImageTransfer?
+        var mergedObj = new ImageTransferData();
+        foreach (var data in dataItems)
         {
-            if (_imageTransfer.IsIn(dataObject))
+            var dataObj = _imageTransfer.FromBinaryData(data);
+            if (mergedObj.ProcessId != 0 && mergedObj.ProcessId != dataObj.ProcessId)
             {
-                var data = _imageTransfer.GetFrom(dataObject);
-                return data.ProcessId == Process.GetCurrentProcess().Id
-                    ? DragEffects.Move
-                    : DragEffects.Copy;
+                throw new ArgumentException("Inconsistent process IDs in drag data");
             }
-            if (dataObject.Contains("FileDrop")) // TODO: Constant
-            {
-                return DragEffects.Copy;
-            }
+            mergedObj.ProcessId = dataObj.ProcessId;
+            mergedObj.SerializedImages.AddRange(dataObj.SerializedImages);
         }
-        catch (Exception ex)
-        {
-            Log.ErrorException("Error receiving drag/drop", ex);
-        }
-        return DragEffects.None;
+        return mergedObj.ToByteArray();
     }
 }

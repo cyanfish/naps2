@@ -20,7 +20,15 @@ public abstract class ListViewBehavior<T> where T : notnull
 
     public virtual Image GetImage(T item, int imageSize) => throw new NotSupportedException();
 
-    public virtual void SetDragData(ListSelection<T> selection, IDataObject dataObject) => throw new NotSupportedException();
+    public virtual bool AllowDragDrop => false;
 
-    public virtual DragEffects GetDropEffect(IDataObject dataObject) => throw new NotSupportedException();
+    public virtual bool AllowFileDrop => false;
+
+    public virtual string CustomDragDataType => throw new NotSupportedException();
+
+    public virtual byte[] SerializeCustomDragData(T[] items) => throw new NotSupportedException();
+
+    public virtual byte[] MergeCustomDragData(byte[][] dataItems) => throw new NotSupportedException();
+
+    public virtual DragEffects GetCustomDragEffect(byte[] data) => throw new NotSupportedException();
 }

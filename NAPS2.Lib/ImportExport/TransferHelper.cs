@@ -10,7 +10,7 @@ namespace NAPS2.ImportExport;
 /// <typeparam name="TData">The protobuf type representing the transferred data.</typeparam>
 public abstract class TransferHelper<TInput, TData> where TData : IMessage<TData>, new()
 {
-    private readonly string _typeName = typeof(TData).FullName!;
+    public string TypeName { get; } = typeof(TData).FullName!;
 
     /// <summary>
     /// Clears the clipboard and stores the serialized input.
@@ -28,20 +28,15 @@ public abstract class TransferHelper<TInput, TData> where TData : IMessage<TData
 
     public void AddTo(IDataObject dataObject, TInput input)
     {
-        dataObject.SetData(AsData(input).ToByteArray(), _typeName);
+        dataObject.SetData(ToBinaryData(input), TypeName);
     }
 
     public bool IsIn(IDataObject dataObject)
     {
-        return dataObject.Contains(_typeName);
+        return dataObject.Contains(TypeName);
     }
 
-    public TData GetFrom(IDataObject dataObject)
-    {
-        var data = new TData();
-        data.MergeFrom(dataObject.GetData(_typeName));
-        return data;
-    }
+    public TData GetFrom(IDataObject dataObject) => FromBinaryData(dataObject.GetData(TypeName));
 
     /// <summary>
     /// Converts the domain type to the protobuf type for serialization.
@@ -49,4 +44,13 @@ public abstract class TransferHelper<TInput, TData> where TData : IMessage<TData
     /// <param name="input"></param>
     /// <returns></returns>
     protected abstract TData AsData(TInput input);
+
+    public byte[] ToBinaryData(TInput input) => AsData(input).ToByteArray();
+
+    public TData FromBinaryData(byte[] data)
+    {
+        var dataObj = new TData();
+        dataObj.MergeFrom(data);
+        return dataObj;
+    }
 }

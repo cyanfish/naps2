@@ -104,22 +104,17 @@ public class WinFormsListView<T> : IListView<T> where T : notnull
         set => WinFormsHacks.SetImageSize(_view.LargeImageList, new Size(value, value));
     }
 
-    // TODO: Properties here vs on behavior?
-    public bool AllowDrag { get; set; }
-
-    public bool AllowDrop
-    {
-        get => _view.AllowDrop;
-        set => _view.AllowDrop = value;
-    }
-
     private void OnDragEnter(object? sender, DragEventArgs e)
     {
-        if (!AllowDrop)
+        var data = e.Data.ToEto();
+        if (data.Contains(_behavior.CustomDragDataType) && _behavior.AllowDragDrop)
         {
-            return;
+            e.Effect = _behavior.GetCustomDragEffect(data.GetData(_behavior.CustomDragDataType)).ToSwf();
         }
-        e.Effect = _behavior.GetDropEffect(e.Data.ToEto()).ToSwf();
+        else if (data.Contains("FileDrop") && _behavior.AllowFileDrop)
+        {
+            e.Effect = DragDropEffects.Copy;
+        }
     }
 
     public Eto.Forms.Control Control => _viewEtoControl;
@@ -309,7 +304,7 @@ public class WinFormsListView<T> : IListView<T> where T : notnull
 
     private void OnItemDrag(object? sender, ItemDragEventArgs e)
     {
-        if (!AllowDrag)
+        if (!_behavior.AllowDragDrop)
         {
             return;
         }
@@ -317,7 +312,7 @@ public class WinFormsListView<T> : IListView<T> where T : notnull
         if (Selection.Count > 0)
         {
             var dataObject = new DataObject();
-            _behavior.SetDragData(Selection, dataObject.ToEto());
+            dataObject.SetData(_behavior.CustomDragDataType, _behavior.SerializeCustomDragData(Selection.ToArray()));
             _view.DoDragDrop(dataObject, DragDropEffects.Move | DragDropEffects.Copy);
         }
     }
@@ -327,7 +322,16 @@ public class WinFormsListView<T> : IListView<T> where T : notnull
         var index = GetDragIndex(e);
         if (index != -1)
         {
-            Drop?.Invoke(this, new DropEventArgs(index, e.Data.ToEto()));
+            var data = e.Data.ToEto();
+            if (data.Contains(_behavior.CustomDragDataType))
+            {
+                Drop?.Invoke(this, new DropEventArgs(index, data.GetData(_behavior.CustomDragDataType)));
+            }
+            else if (data.Contains("FileDrop"))
+            {
+                var filePaths = e.Data.ToEto().Uris.Select(uri => uri.AbsolutePath);
+                Drop?.Invoke(this, new DropEventArgs(index, filePaths));
+            }
         }
         _view.InsertionMark.Index = -1;
     }

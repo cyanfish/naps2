@@ -17,10 +17,6 @@ public interface IListView<T> : Util.ISelectable<T> where T : notnull
 
     event EventHandler<DropEventArgs> Drop;
 
-    bool AllowDrag { get; set; }
-
-    bool AllowDrop { get; set; }
-
     void SetItems(IEnumerable<T> items);
 
     void ApplyDiffs(ListViewDiffs<T> diffs);

@@ -44,6 +44,7 @@ public class ProfilesForm : EtoDialogBase
         //         break;
         // }
 
+        profileListViewBehavior.NoUserProfiles = NoUserProfiles;
         _listView = EtoPlatform.Current.CreateListView(profileListViewBehavior);
         _scanCommand = new ActionCommand(DoScan)
         {
@@ -83,8 +84,6 @@ public class ProfilesForm : EtoDialogBase
         };
 
         _listView.ImageSize = 48;
-        _listView.AllowDrag = true;
-        _listView.AllowDrop = !NoUserProfiles;
         _listView.ItemClicked += ItemClicked;
         _listView.SelectionChanged += SelectionChanged;
         _listView.Drop += Drop;
@@ -188,9 +187,9 @@ public class ProfilesForm : EtoDialogBase
     private void Drop(object? sender, DropEventArgs e)
     {
         // Receive drop data
-        if (_profileTransfer.IsIn(e.Data))
+        if (e.CustomData != null)
         {
-            var data = _profileTransfer.GetFrom(e.Data);
+            var data = _profileTransfer.FromBinaryData(e.CustomData);
             if (data.ProcessId == Process.GetCurrentProcess().Id)
             {
                 if (data.Locked)

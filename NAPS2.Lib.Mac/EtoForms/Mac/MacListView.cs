@@ -1,4 +1,5 @@
 using Eto.Forms;
+using Eto.Mac;
 using Eto.Mac.Forms.Menu;
 
 namespace NAPS2.EtoForms.Mac;
@@ -35,6 +36,14 @@ public class MacListView<T> : NSCollectionViewDelegateFlowLayout, IListView<T> w
         _view.CollectionViewLayout = _layout;
         _view.Selectable = true;
         _view.AllowsMultipleSelection = behavior.MultiSelect;
+        if (_behavior.AllowDragDrop)
+        {
+            _view.RegisterForDraggedTypes(new[] { _behavior.CustomDragDataType });
+        }
+        if (_behavior.AllowFileDrop)
+        {
+            _view.RegisterForDraggedTypes(new string[] { NSPasteboard.NSPasteboardTypeFileUrl });
+        }
         _scrollView.DocumentView = _view;
         _panel.Content = _scrollView.ToEto();
     }
@@ -43,20 +52,6 @@ public class MacListView<T> : NSCollectionViewDelegateFlowLayout, IListView<T> w
     {
         get => (int) _layout.ItemSize.Width;
         set => _layout.ItemSize = new CGSize(value, value);
-    }
-
-    // TODO: Properties here vs on behavior?
-    public bool AllowDrag { get; set; }
-
-    public bool AllowDrop { get; set; }
-
-    private void OnDragEnter(object? sender, DragEventArgs e)
-    {
-        if (!AllowDrop)
-        {
-            return;
-        }
-        e.Effects = _behavior.GetDropEffect(e.Data);
     }
 
     public Control Control => _panel;
@@ -176,5 +171,110 @@ public class MacListView<T> : NSCollectionViewDelegateFlowLayout, IListView<T> w
             var max = (double) Math.Max(size.Width, size.Height);
             return new CGSize(size.Width * ImageSize / max, size.Height * ImageSize / max);
         }
+    }
+
+    public override bool AcceptDrop(NSCollectionView collectionView, INSDraggingInfo draggingInfo,
+        NSIndexPath indexPath,
+        NSCollectionViewDropOperation dropOperation)
+    {
+        try
+        {
+            var position = (int) (dropOperation == NSCollectionViewDropOperation.Before
+                ? indexPath.Item
+                : indexPath.Item + 1);
+            if (_behavior.AllowDragDrop && GetCustomData(draggingInfo, out var data))
+            {
+                Drop?.Invoke(this, new DropEventArgs(position, data));
+                return true;
+            }
+            if (_behavior.AllowFileDrop && GetFilePaths(draggingInfo, out var filePaths))
+            {
+                Drop?.Invoke(this, new DropEventArgs(position, filePaths));
+                return true;
+            }
+        }
+        catch (Exception ex)
+        {
+            Log.ErrorException("Error dropping data", ex);
+        }
+        return false;
+    }
+
+    private bool GetCustomData(INSDraggingInfo draggingInfo, out byte[] data)
+    {
+        if (draggingInfo.DraggingPasteboard.CanReadItemWithDataConformingToTypes(new[]
+                { _behavior.CustomDragDataType }))
+        {
+            var items = draggingInfo.DraggingPasteboard.PasteboardItems;
+            data = items.Length > 1
+                ? _behavior.MergeCustomDragData(items
+                    .Select(x => x.GetDataForType(_behavior.CustomDragDataType).ToArray()).ToArray())
+                : items[0].GetDataForType(_behavior.CustomDragDataType).ToArray();
+            return true;
+        }
+        data = null!;
+        return false;
+    }
+
+    private bool GetFilePaths(INSDraggingInfo draggingInfo, out IEnumerable<string> filePaths)
+    {
+        if (draggingInfo.DraggingPasteboard.CanReadItemWithDataConformingToTypes(new string[]
+                { NSPasteboard.NSPasteboardTypeFileUrl }))
+        {
+            var items = draggingInfo.DraggingPasteboard.PasteboardItems;
+            filePaths =
+                items.Select(x =>
+                {
+                    var url = new NSUrl(x.GetStringForType(NSPasteboard.NSPasteboardTypeFileUrl));
+                    return url.FilePathUrl?.Path;
+                }).WhereNotNull();
+            return true;
+        }
+        filePaths = null!;
+        return false;
+    }
+
+    public override NSDragOperation ValidateDrop(NSCollectionView collectionView, INSDraggingInfo draggingInfo,
+        ref NSIndexPath proposedDropIndexPath, ref NSCollectionViewDropOperation proposedDropOperation)
+    {
+        if (_behavior.AllowDragDrop && GetCustomData(draggingInfo, out var data))
+        {
+            return _behavior.GetCustomDragEffect(data).ToNS();
+        }
+        if (_behavior.AllowFileDrop && draggingInfo.DraggingPasteboard.CanReadItemWithDataConformingToTypes(new string[]
+                { NSPasteboard.NSPasteboardTypeFileUrl }))
+        {
+            return NSDragOperation.Copy;
+        }
+        return NSDragOperation.None;
+    }
+
+    public override bool CanDragItems(NSCollectionView collectionView, NSIndexSet indexes, NSEvent evt)
+    {
+        return _behavior.AllowDragDrop && indexes.Count > 0;
+    }
+
+    public override INSPasteboardWriting? GetPasteboardWriter(NSCollectionView collectionView, NSIndexPath indexPath)
+    {
+        var item = new NSPasteboardItem();
+        var binaryData = _behavior.SerializeCustomDragData(new[] { _dataSource.Items[(int) indexPath.Item] });
+        item.SetDataForType(NSData.FromArray(binaryData), _behavior.CustomDragDataType);
+        return item;
+    }
+
+    public override void UpdateDraggingItemsForDrag(NSCollectionView collectionView, INSDraggingInfo draggingInfo)
+    {
+    }
+
+    public override void DraggingSessionWillBegin(NSCollectionView collectionView, NSDraggingSession draggingSession,
+        CGPoint screenPoint,
+        NSIndexSet indexes)
+    {
+    }
+
+    public override void DraggingSessionEnded(NSCollectionView collectionView, NSDraggingSession draggingSession,
+        CGPoint screenPoint,
+        NSDragOperation dragOperation)
+    {
     }
 }

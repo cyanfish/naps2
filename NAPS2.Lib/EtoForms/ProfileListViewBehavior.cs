@@ -17,6 +17,8 @@ public class ProfileListViewBehavior : ListViewBehavior<ScanProfile>
         ScrollOnDrag = false;
     }
 
+    public bool NoUserProfiles { get; set; }
+
     public override string GetLabel(ScanProfile item) => item.DisplayName ?? "";
 
     public override Image GetImage(ScanProfile item, int imageSize)
@@ -36,33 +38,26 @@ public class ProfileListViewBehavior : ListViewBehavior<ScanProfile>
         return Icons.scanner_48_old.ToEtoImage();
     }
 
-    public override void SetDragData(ListSelection<ScanProfile> selection, IDataObject dataObject)
+    public override bool AllowDragDrop => true;
+
+    public override string CustomDragDataType => _profileTransfer.TypeName;
+
+    public override DragEffects GetCustomDragEffect(byte[] data)
     {
-        if (selection.Count > 0)
+        if (NoUserProfiles)
         {
-            _profileTransfer.AddTo(dataObject, selection.Single());
+            return DragEffects.None;
         }
+        var dataObj = _profileTransfer.FromBinaryData(data);
+        return dataObj.ProcessId == Process.GetCurrentProcess().Id
+            ? dataObj.Locked
+                ? DragEffects.None
+                : DragEffects.Move
+            : DragEffects.Copy;
     }
 
-    public override DragEffects GetDropEffect(IDataObject dataObject)
+    public override byte[] SerializeCustomDragData(ScanProfile[] items)
     {
-        // Determine if drop data is compatible
-        try
-        {
-            if (_profileTransfer.IsIn(dataObject))
-            {
-                var data = _profileTransfer.GetFrom(dataObject);
-                return data.ProcessId == Process.GetCurrentProcess().Id
-                    ? data.Locked
-                        ? DragEffects.None
-                        : DragEffects.Move
-                    : DragEffects.Copy;
-            }
-        }
-        catch (Exception ex)
-        {
-            Log.ErrorException("Error receiving drag/drop", ex);
-        }
-        return DragEffects.None;
+        return _profileTransfer.ToBinaryData(items.Single());
     }
 }

@@ -71,8 +71,6 @@ public abstract class DesktopForm : EtoFormBase
         InitLanguageDropdown();
 
         _listView = EtoPlatform.Current.CreateListView(new ImageListViewBehavior(_thumbnailProvider, _imageTransfer));
-        _listView.AllowDrag = true;
-        _listView.AllowDrop = true;
         _listView.Selection = ImageList.Selection;
         _listView.ItemClicked += ListViewItemClicked;
         _listView.Drop += ListViewDrop;
@@ -498,9 +496,9 @@ public abstract class DesktopForm : EtoFormBase
 
     private void ListViewDrop(object? sender, DropEventArgs args)
     {
-        if (_imageTransfer.IsIn(args.Data))
+        if (args.CustomData != null)
         {
-            var data = _imageTransfer.GetFrom(args.Data);
+            var data = _imageTransfer.FromBinaryData(args.CustomData);
             if (data.ProcessId == Process.GetCurrentProcess().Id)
             {
                 DragMoveImages(args.Position);
@@ -510,10 +508,9 @@ public abstract class DesktopForm : EtoFormBase
                 _desktopController.ImportDirect(data, false);
             }
         }
-        else if (args.Data.Contains("FileDrop"))
+        else if (args.FilePaths != null)
         {
-            var data = args.Data.Uris.Select(uri => uri.AbsolutePath);
-            _desktopController.ImportFiles(data);
+            _desktopController.ImportFiles(args.FilePaths);
         }
     }
 
