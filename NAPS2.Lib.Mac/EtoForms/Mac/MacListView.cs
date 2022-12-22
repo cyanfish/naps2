@@ -237,14 +237,35 @@ public class MacListView<T> : NSCollectionViewDelegateFlowLayout, IListView<T> w
     public override NSDragOperation ValidateDrop(NSCollectionView collectionView, INSDraggingInfo draggingInfo,
         ref NSIndexPath proposedDropIndexPath, ref NSCollectionViewDropOperation proposedDropOperation)
     {
-        if (_behavior.AllowDragDrop && GetCustomData(draggingInfo, out var data))
+        try
         {
-            return _behavior.GetCustomDragEffect(data).ToNS();
+            if (proposedDropOperation == NSCollectionViewDropOperation.On)
+            {
+                // If we're dropping on top of an image, instead make it before/after the same image based on which
+                // edge we're closer to.
+                var itemFrame = _view.GetFrameForItem(proposedDropIndexPath.Item);
+                var dragX = draggingInfo.DraggingLocation.X;
+                if (dragX - itemFrame.Left > itemFrame.Right - dragX)
+                {
+                    proposedDropIndexPath =
+                        NSIndexPath.Create(proposedDropIndexPath.Section, proposedDropIndexPath.Item + 1);
+                }
+                proposedDropOperation = NSCollectionViewDropOperation.Before;
+            }
+            if (_behavior.AllowDragDrop && GetCustomData(draggingInfo, out var data))
+            {
+                return _behavior.GetCustomDragEffect(data).ToNS();
+            }
+            if (_behavior.AllowFileDrop && draggingInfo.DraggingPasteboard.CanReadItemWithDataConformingToTypes(
+                    new string[]
+                        { NSPasteboard.NSPasteboardTypeFileUrl }))
+            {
+                return NSDragOperation.Copy;
+            }
         }
-        if (_behavior.AllowFileDrop && draggingInfo.DraggingPasteboard.CanReadItemWithDataConformingToTypes(new string[]
-                { NSPasteboard.NSPasteboardTypeFileUrl }))
+        catch (Exception ex)
         {
-            return NSDragOperation.Copy;
+            Log.ErrorException("Error validating drop", ex);
         }
         return NSDragOperation.None;
     }
@@ -256,10 +277,18 @@ public class MacListView<T> : NSCollectionViewDelegateFlowLayout, IListView<T> w
 
     public override INSPasteboardWriting? GetPasteboardWriter(NSCollectionView collectionView, NSIndexPath indexPath)
     {
-        var item = new NSPasteboardItem();
-        var binaryData = _behavior.SerializeCustomDragData(new[] { _dataSource.Items[(int) indexPath.Item] });
-        item.SetDataForType(NSData.FromArray(binaryData), _behavior.CustomDragDataType);
-        return item;
+        try
+        {
+            var item = new NSPasteboardItem();
+            var binaryData = _behavior.SerializeCustomDragData(new[] { _dataSource.Items[(int) indexPath.Item] });
+            item.SetDataForType(NSData.FromArray(binaryData), _behavior.CustomDragDataType);
+            return item;
+        }
+        catch (Exception ex)
+        {
+            Log.ErrorException("Error serializing data for drag", ex);
+        }
+        return null;
     }
 
     public override void UpdateDraggingItemsForDrag(NSCollectionView collectionView, INSDraggingInfo draggingInfo)
