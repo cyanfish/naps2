@@ -7,9 +7,9 @@ public class SaneNativeLibrary : Unmanaged.NativeLibrary
     private static readonly Lazy<SaneNativeLibrary> LazyInstance = new(() =>
     {
         var testRoot = Environment.GetEnvironmentVariable("NAPS2_TEST_ROOT");
-        var libraryPath = FindPath(PlatformCompat.System.SaneLibraryName, testRoot);
+        var libraryPath = FindLibraryPath(PlatformCompat.System.SaneLibraryName, testRoot);
         var libraryDeps = PlatformCompat.System.SaneLibraryDeps
-            ?.Select(path => FindPath(path, testRoot)).ToArray();
+            ?.Select(path => FindLibraryPath(path, testRoot)).ToArray();
         if (libraryDeps != null)
         {
             // If we're using a bundled SANE, we will need to manually set the environment

@@ -91,7 +91,7 @@ public class CommonModule : Module
         {
             var tesseractPath = PlatformCompat.System.UseSystemTesseract
                 ? "tesseract"
-                : NativeLibrary.FindPath(PlatformCompat.System.TesseractExecutableName!);
+                : NativeLibrary.FindExePath(PlatformCompat.System.TesseractExecutableName);
             return new TesseractOcrEngine(
                 tesseractPath,
                 ctx.Resolve<TesseractLanguageManager>().TessdataBasePath,

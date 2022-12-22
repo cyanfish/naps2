@@ -4,14 +4,20 @@ namespace NAPS2.Unmanaged;
 
 public class NativeLibrary
 {
-    public static string FindPath(string libraryName, string? baseFolder = null)
+    public static string FindLibraryPath(string libraryName, string? baseFolder = null) =>
+        FindPath(libraryName, baseFolder, PlatformCompat.System.LibrarySearchPaths);
+
+    public static string FindExePath(string exeName, string? baseFolder = null) =>
+        FindPath(exeName, baseFolder, PlatformCompat.System.ExeSearchPaths);
+
+    private static string FindPath(string libraryName, string? baseFolder, string[] systemSearchPaths)
     {
         var baseFolders = !string.IsNullOrWhiteSpace(baseFolder)
             ? new[] { baseFolder, Path.Combine(baseFolder, "lib") }
             : new[] { AssemblyHelper.LibFolder, AssemblyHelper.EntryFolder };
         foreach (var actualBaseFolder in baseFolders)
         {
-            foreach (var searchPath in PlatformCompat.System.LibrarySearchPaths)
+            foreach (var searchPath in systemSearchPaths)
             {
                 var path = Path.Combine(actualBaseFolder, searchPath, libraryName);
                 if (File.Exists(path))

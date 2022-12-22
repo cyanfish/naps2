@@ -4,6 +4,8 @@ namespace NAPS2.Platform;
 
 public class Windows64SystemCompat : WindowsSystemCompat
 {
+    public override string[] ExeSearchPaths => new[] { "_win64" };
+
     public override string[] LibrarySearchPaths => new[] { "_win64" };
     
     public override IntPtr LoadSymbol(IntPtr libraryHandle, string symbol)

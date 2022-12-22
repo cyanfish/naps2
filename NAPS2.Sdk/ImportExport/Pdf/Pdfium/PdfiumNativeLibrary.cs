@@ -9,7 +9,7 @@ public class PdfiumNativeLibrary : Unmanaged.NativeLibrary
     private static readonly Lazy<PdfiumNativeLibrary> LazyInstance = new(() =>
     {
         var testRoot = Environment.GetEnvironmentVariable("NAPS2_TEST_ROOT");
-        var libraryPath = FindPath(PlatformCompat.System.PdfiumLibraryName, testRoot);
+        var libraryPath = FindLibraryPath(PlatformCompat.System.PdfiumLibraryName, testRoot);
         var nativeLib = new PdfiumNativeLibrary(libraryPath);
         nativeLib.FPDF_InitLibrary();
         return nativeLib;

@@ -1,5 +1,4 @@
 ﻿using System.Runtime.InteropServices;
-using NAPS2.Dependencies;
 using NAPS2.Platform.Windows;
 
 namespace NAPS2.Platform;
@@ -21,6 +20,8 @@ public abstract class WindowsSystemCompat : ISystemCompat
     public bool RenderInWorker => true;
 
     public bool UseSeparateWorkerExe => true;
+
+    public abstract string[] ExeSearchPaths { get;  }
 
     public abstract string[] LibrarySearchPaths { get;  }
 

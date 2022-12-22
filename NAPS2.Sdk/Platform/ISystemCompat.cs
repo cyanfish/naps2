@@ -18,6 +18,8 @@ public interface ISystemCompat
 
     bool UseSeparateWorkerExe { get; }
 
+    string[] ExeSearchPaths { get; }
+
     string[] LibrarySearchPaths { get; }
 
     string TesseractExecutableName { get; }

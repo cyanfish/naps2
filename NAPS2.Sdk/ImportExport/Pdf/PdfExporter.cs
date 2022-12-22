@@ -144,6 +144,7 @@ public class PdfExporter : IPdfExporter
             return true;
         }
         // TODO: Should we do this (or maybe the whole pdf export/import) in a worker to avoid contention?
+        // TODO: Although we would need to be careful to handle OcrRequestQueue state correctly across processes.
         lock (PdfiumNativeLibrary.Instance)
         {
             var destBuffer = stream.GetBuffer();

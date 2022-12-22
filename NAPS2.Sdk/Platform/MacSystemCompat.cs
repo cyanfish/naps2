@@ -24,6 +24,8 @@ public class MacSystemCompat : ISystemCompat
 
     public bool UseSeparateWorkerExe => false;
 
+    public string[] ExeSearchPaths => LibrarySearchPaths;
+
     public string[] LibrarySearchPaths
     {
         get

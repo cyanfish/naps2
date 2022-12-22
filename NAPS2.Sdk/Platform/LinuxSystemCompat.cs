@@ -23,6 +23,8 @@ public class LinuxSystemCompat : ISystemCompat
 
     public bool UseSeparateWorkerExe => false;
 
+    public string[] ExeSearchPaths => LibrarySearchPaths;
+
     public string[] LibrarySearchPaths => new[] { "_linux" };
 
     public string TesseractExecutableName => "tesseract";
