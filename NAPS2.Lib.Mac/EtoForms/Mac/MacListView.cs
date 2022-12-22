@@ -73,10 +73,7 @@ public class MacListView<T> : NSCollectionViewDelegateFlowLayout, IListView<T> w
     public event EventHandler? ItemClicked;
 #pragma warning restore CS0067
 
-    // TODO: Implement drag/drop
-#pragma warning disable CS0067
     public event EventHandler<DropEventArgs>? Drop;
-#pragma warning restore CS0067
 
     public void SetItems(IEnumerable<T> items)
     {
@@ -93,6 +90,7 @@ public class MacListView<T> : NSCollectionViewDelegateFlowLayout, IListView<T> w
 
     public void ApplyDiffs(ListViewDiffs<T> diffs)
     {
+        var originalItems = _dataSource.Items.ToList();
         foreach (var op in diffs.AppendOperations)
         {
             _dataSource.Items.Add(op.Item);
@@ -105,7 +103,61 @@ public class MacListView<T> : NSCollectionViewDelegateFlowLayout, IListView<T> w
         {
             _dataSource.Items.RemoveRange(_dataSource.Items.Count - op.Count, op.Count);
         }
-        _view.ReloadData();
+        if (IsSingleItemMove(originalItems, diffs, out var fromIndex, out var toIndex))
+        {
+            // If we're moving a single item, we can animate it + also improve selection behavior by doing a granular
+            // move instead of reloading the whole list.
+            // TODO: Should we do this in SetItems too? Or alternatively have ProfilesForm use ApplyDiffs?
+            // TODO: Can we do this for anything else (e.g. multi-item moves)?
+            var animator = (NSCollectionView) _view.Animator;
+            animator.MoveItem(NSIndexPath.Create(0, fromIndex), NSIndexPath.Create(0, toIndex));
+        }
+        else
+        {
+            _view.ReloadData();
+        }
+    }
+
+    private bool IsSingleItemMove(List<T> originalItems, ListViewDiffs<T> diffs, out int fromIndex, out int toIndex)
+    {
+        fromIndex = toIndex = 0;
+        if (diffs.AppendOperations.Any() || diffs.TrimOperations.Any())
+        {
+            return false;
+        }
+        var replaces = diffs.ReplaceOperations;
+        if (replaces.Count < 2)
+        {
+            return false;
+        }
+
+        // If this is a single item move, it's either moving from the highest index to the lowest index, or vice versa.
+        // We can simulate each move on the original list of items and compare the results against the actual result
+        // of all the diffs. This seems like the simplest solution.
+        var lowest = replaces.Min(x => x.Index);
+        var highest = replaces.Max(x => x.Index);
+
+        var moveToLowest = originalItems.ToList();
+        moveToLowest.RemoveAt(highest);
+        moveToLowest.Insert(lowest, diffs.ReplaceOperations.Single(x => x.Index == lowest).Item);
+        if (moveToLowest.SequenceEqual(_dataSource.Items))
+        {
+            fromIndex = highest;
+            toIndex = lowest;
+            return true;
+        }
+
+        var moveToHighest = originalItems.ToList();
+        moveToHighest.RemoveAt(lowest);
+        moveToHighest.Insert(highest, diffs.ReplaceOperations.Single(x => x.Index == highest).Item);
+        if (moveToHighest.SequenceEqual(_dataSource.Items))
+        {
+            fromIndex = lowest;
+            toIndex = highest;
+            return true;
+        }
+
+        return false;
     }
 
     public ListSelection<T> Selection
