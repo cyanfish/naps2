@@ -43,9 +43,12 @@ public class DesktopKeyboardShortcuts
         _ksm.Assign(ks.BatchScan, commands.BatchScan);
         _ksm.Assign(ks.Clear, commands.ClearAll);
         _ksm.Assign(ks.Delete, commands.Delete);
-        _ksm.Assign(ks.EmailPDF, commands.EmailPdf);
-        _ksm.Assign(ks.EmailPDFAll, commands.EmailAll);
-        _ksm.Assign(ks.EmailPDFSelected, commands.EmailSelected);
+        if (PlatformCompat.System.CanEmail)
+        {
+            _ksm.Assign(ks.EmailPDF, commands.EmailPdf);
+            _ksm.Assign(ks.EmailPDFAll, commands.EmailAll);
+            _ksm.Assign(ks.EmailPDFSelected, commands.EmailSelected);
+        }
         _ksm.Assign(ks.ImageBlackWhite, commands.BlackWhite);
         _ksm.Assign(ks.ImageBrightness, commands.BrightCont);
         _ksm.Assign(ks.ImageContrast, commands.BrightCont);
@@ -60,7 +63,10 @@ public class DesktopKeyboardShortcuts
         _ksm.Assign(ks.MoveUp, commands.MoveUp);
         _ksm.Assign(ks.NewProfile, commands.NewProfile);
         _ksm.Assign(ks.Ocr, commands.Ocr);
-        _ksm.Assign(ks.Print, commands.Print);
+        if (PlatformCompat.System.CanPrint)
+        {
+            _ksm.Assign(ks.Print, commands.Print);
+        }
         _ksm.Assign(ks.Profiles, commands.Profiles);
 
         _ksm.Assign(ks.ReorderAltDeinterleave, commands.AltDeinterleave);

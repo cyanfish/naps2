@@ -15,6 +15,10 @@ public abstract class WindowsSystemCompat : ISystemCompat
 
     public bool CanUseWin32 => true;
 
+    public bool CanEmail => true;
+
+    public bool CanPrint => true;
+
     public bool UseSystemTesseract => false;
 
     public bool RenderInWorker => true;

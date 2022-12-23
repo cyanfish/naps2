@@ -12,6 +12,11 @@ public interface ISystemCompat
 
     bool CanUseWin32 { get; }
 
+    // TODO: Implement Print/Email on Mac/Linux
+    bool CanEmail { get; }
+
+    bool CanPrint { get; }
+
     bool UseSystemTesseract { get; }
 
     bool RenderInWorker { get; }

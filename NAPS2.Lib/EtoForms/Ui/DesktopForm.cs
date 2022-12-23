@@ -239,14 +239,14 @@ public abstract class DesktopForm : EtoFormBase
                 .Append(Commands.SaveSelectedImages)
                 .Separator()
                 .Append(Commands.ImageSettings));
-        if (!hiddenButtons.HasFlag(ToolbarButtons.EmailPdf))
+        if (!hiddenButtons.HasFlag(ToolbarButtons.EmailPdf) && PlatformCompat.System.CanEmail)
             CreateToolbarButtonWithMenu(Commands.EmailPdf, new MenuProvider()
                 .Append(Commands.EmailAll)
                 .Append(Commands.EmailSelected)
                 .Separator()
                 .Append(Commands.EmailSettings)
                 .Append(Commands.PdfSettings));
-        if (!hiddenButtons.HasFlag(ToolbarButtons.Print))
+        if (!hiddenButtons.HasFlag(ToolbarButtons.Print) && PlatformCompat.System.CanPrint)
             CreateToolbarButton(Commands.Print);
         CreateToolbarSeparator();
         if (!hiddenButtons.HasFlag(ToolbarButtons.Image))
