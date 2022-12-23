@@ -44,4 +44,31 @@ public class CopyBitwiseImageOpTests : ContextualTests
 
         ImageAsserts.Similar(original, dest, 0);
     }
+
+    [Fact]
+    public void RgbToRgba()
+    {
+        var color  = LoadImage(ImageResources.dog);
+        var original = color.CopyWithPixelFormat(ImagePixelFormat.RGB24);
+        var dest = original.CopyWithPixelFormat(ImagePixelFormat.ARGB32);
+        ImageAsserts.Similar(original, dest, 0);
+    }
+
+    [Fact]
+    public void GrayToRgba()
+    {
+        var color  = LoadImage(ImageResources.dog);
+        var original = color.CopyWithPixelFormat(ImagePixelFormat.Gray8);
+        var dest = original.CopyWithPixelFormat(ImagePixelFormat.ARGB32);
+        ImageAsserts.Similar(original, dest, 0);
+    }
+
+    [Fact]
+    public void BlackWhiteToRgba()
+    {
+        var color  = LoadImage(ImageResources.dog);
+        var original = color.CopyWithPixelFormat(ImagePixelFormat.BW1);
+        var dest = original.CopyWithPixelFormat(ImagePixelFormat.ARGB32);
+        ImageAsserts.Similar(original, dest, 0);
+    }
 }

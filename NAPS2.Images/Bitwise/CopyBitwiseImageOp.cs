@@ -99,6 +99,7 @@ public class CopyBitwiseImageOp : BinaryBitwiseImageOp
         bool copyToGreen = dst.bytesPerPixel != 1 && DestChannel is ColorChannel.All or ColorChannel.Green;
         bool copyToBlue = dst.bytesPerPixel != 1 && DestChannel is ColorChannel.All or ColorChannel.Blue;
         bool copyToGray = dst.bytesPerPixel == 1;
+        bool resetAlpha = dst.hasAlpha && !src.hasAlpha;
         bool invertY = src.invertY ^ dst.invertY;
         for (int i = partStart; i < partEnd; i++)
         {
@@ -133,6 +134,7 @@ public class CopyBitwiseImageOp : BinaryBitwiseImageOp
                 if (copyToGreen) *(dstPixel + dst.gOff) = g;
                 if (copyToBlue) *(dstPixel + dst.bOff) = b;
                 if (copyAlpha) *(dstPixel + dst.aOff) = *(srcPixel + src.aOff);
+                if (resetAlpha) *(dstPixel + dst.aOff) = 255;
             }
         }
     }
@@ -188,6 +190,7 @@ public class CopyBitwiseImageOp : BinaryBitwiseImageOp
     {
         var w = Columns ?? src.w;
         bool copyToGray = dst.bytesPerPixel == 1;
+        bool resetAlpha = dst.hasAlpha;
         bool invertY = src.invertY ^ dst.invertY;
         for (int i = partStart; i < partEnd; i++)
         {
@@ -218,6 +221,10 @@ public class CopyBitwiseImageOp : BinaryBitwiseImageOp
                             *(dstPixel + dst.rOff) = luma;
                             *(dstPixel + dst.gOff) = luma;
                             *(dstPixel + dst.bOff) = luma;
+                        }
+                        if (resetAlpha)
+                        {
+                            *(dstPixel + dst.aOff) = 255;
                         }
                     }
                 }

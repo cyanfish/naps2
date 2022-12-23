@@ -44,19 +44,22 @@ public class RmseBitwiseImageOp : BinaryBitwiseImageOp
 
                 partCount += (r1 - r2) * (r1 - r2) + (g1 - g2) * (g1 - g2) + (b1 - b2) * (b1 - b2);
 
-                // TODO: Should we validate alpha is 255 if only one image has alpha?
-                if (src.hasAlpha && dst.hasAlpha)
+                byte a1 = 255, a2 = 255;
+                if (src.hasAlpha)
                 {
-                    byte a1 = *(srcPixel + src.aOff);
-                    byte a2 = *(dstPixel + dst.aOff);
-                    partCount += (a1 - a2) * (a1 - a2);
+                    a1 = *(srcPixel + src.aOff);
                 }
+                if (dst.hasAlpha)
+                {
+                    a2 = *(dstPixel + dst.aOff);
+                }
+                partCount += (a1 - a2) * (a1 - a2);
             }
         }
         lock (this)
         {
             _count += partCount;
-            _total += src.w * (partEnd - partStart) * (src.hasAlpha ? 4 : 3);
+            _total += src.w * (partEnd - partStart) * (src.hasAlpha || dst.hasAlpha ? 4 : 3);
         }
     }
 
