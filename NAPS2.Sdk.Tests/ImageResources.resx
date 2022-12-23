@@ -250,6 +250,9 @@
   <data name="animals_tiff" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\animals.tiff;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="dog_clustered_gray" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\dog_clustered_gray.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="dog_gray" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\dog_gray.jpg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>

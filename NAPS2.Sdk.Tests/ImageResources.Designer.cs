@@ -353,6 +353,13 @@ namespace NAPS2.Sdk.Tests {
             }
         }
         
+        internal static byte[] dog_clustered_gray {
+            get {
+                object obj = ResourceManager.GetObject("dog_clustered_gray", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
         internal static byte[] dog_gray {
             get {
                 object obj = ResourceManager.GetObject("dog_gray", resourceCulture);

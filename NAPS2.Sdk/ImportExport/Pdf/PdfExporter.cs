@@ -519,8 +519,8 @@ public class PdfExporter : IPdfExporter
             var subPixelType = _exportFormat.PixelFormat switch
             {
                 ImagePixelFormat.ARGB32 => SubPixelType.Bgra,
-                ImagePixelFormat.RGB24 => SubPixelType.Bgr,
-                _ => throw new InvalidOperationException("Expected 24 or 32 bit bitmap")
+                ImagePixelFormat.RGB24 or ImagePixelFormat.Gray8 => SubPixelType.Bgr,
+                _ => throw new InvalidOperationException("Expected 8/24/32 bit bitmap")
             };
             var dstPixelInfo = new PixelInfo(_image.Width, _image.Height, subPixelType) { InvertY = true };
             ms.SetLength(dstPixelInfo.Length);
@@ -556,7 +556,8 @@ public class PdfExporter : IPdfExporter
                 {
                     return XImageFormat.Argb32;
                 }
-                if (_exportFormat.PixelFormat == ImagePixelFormat.RGB24)
+                // TODO: Ideally we should have Gray8 support in PdfSharp
+                if (_exportFormat.PixelFormat is ImagePixelFormat.RGB24 or ImagePixelFormat.Gray8)
                 {
                     return XImageFormat.Rgb24;
                 }
