@@ -93,6 +93,7 @@ public abstract class ImageFormBase : EtoDialogBase
         }
         _overlayW = _overlayR - _overlayL;
         _overlayH = _overlayB - _overlayT;
+        Overlay.Invalidate();
     }
 
     protected virtual void PaintOverlay(object? sender, PaintEventArgs e)
