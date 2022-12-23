@@ -5,8 +5,6 @@
     <TargetFrameworks Condition="!$([MSBuild]::IsOSPlatform('Linux'))">net6;net6-macos10.15;net462</TargetFrameworks>
     <Nullable>enable</Nullable>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <!-- TODO: Move ClientCreds etc out of NAPS2.Sdk -->
-    <GenerateResourceUsePreserializedResources>true</GenerateResourceUsePreserializedResources>
     <RootNamespace>NAPS2</RootNamespace>
 
     <Title>NAPS2 - Not Another PDF Scanner</Title>
