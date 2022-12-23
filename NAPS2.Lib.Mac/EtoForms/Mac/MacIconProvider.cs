@@ -12,6 +12,7 @@ public class MacIconProvider : IIconProvider
         { "folder_picture", "folder" },
         { "diskette", "square.and.arrow.down" },
         { "zoom", "viewfinder" },
+        { "zoom_small", "viewfinder" },
         { "arrow_rotate_anticlockwise", "arrow.counterclockwise" },
         { "arrow_rotate_anticlockwise_small", "arrow.counterclockwise" },
         { "arrow_rotate_clockwise_small", "arrow.clockwise" },
