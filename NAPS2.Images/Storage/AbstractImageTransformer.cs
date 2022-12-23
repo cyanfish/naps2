@@ -94,16 +94,15 @@ public abstract class AbstractImageTransformer<TImage> where TImage : IMemoryIma
 
         float brightnessNormalized = transform.Brightness / 1000f;
         EnsurePixelFormat(ref image);
-        // TODO: We need to implement brightness for Gray8
         new BrightnessBitwiseImageOp(brightnessNormalized).Perform(image);
         return image;
     }
 
     protected virtual TImage PerformTransform(TImage image, TrueContrastTransform transform)
     {
-        if (image.PixelFormat is ImagePixelFormat.BW1 or ImagePixelFormat.Gray8)
+        if (image.PixelFormat is ImagePixelFormat.BW1)
         {
-            // No need to handle grayscale since contrast is a null transform
+            // No need to handle black/white since contrast is a null transform
             return image;
         }
 

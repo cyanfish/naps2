@@ -7,7 +7,7 @@ public class TransformTests : ContextualTests
 {
     // TODO: Test handling of other pixel formats
     // ARGB32 -> should work (ignoring alpha channel)
-    // Gray -> commutativity tests mostly done, need to verify ones that don't work
+    // Gray -> done
     // BW1 -> should work where applicable
     // Unsupported -> should throw an exception
     // This might require some actual changes to the transforms.
@@ -409,11 +409,10 @@ public class TransformTests : ContextualTests
 
     public static IEnumerable<object[]> CommutativeGrayTransforms = new List<object[]>
     {
-        // TODO: These don't work - should they?
-        // new object[] { new BrightnessTransform(300) },
-        // new object[] { new TrueContrastTransform(300) },
-        // new object[] { new HueTransform(300) },
-        // new object[] { new SaturationTransform(300) },
+        // Note that hue and saturation aren't commutative with grayscale as the the grayscale transform weighs each
+        // color channel differently
+        new object[] { new BrightnessTransform(300) },
+        new object[] { new TrueContrastTransform(300) },
         new object[] { new ScaleTransform(0.5) },
         new object[] { new RotationTransform(46) },
         new object[] { new ThumbnailTransform() },
