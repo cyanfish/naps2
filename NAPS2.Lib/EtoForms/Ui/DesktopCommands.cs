@@ -143,7 +143,7 @@ public class DesktopCommands
         ViewImage = new ActionCommand(desktopSubFormController.ShowViewerForm)
         {
             Text = UiStrings.View,
-            Image = iconProvider.GetIcon("zoom")
+            Image = iconProvider.GetIcon("zoom_small")
         };
         Crop = new ActionCommand(desktopSubFormController.ShowCropForm)
         {

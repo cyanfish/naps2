@@ -928,5 +928,15 @@ namespace NAPS2 {
                 return ((byte[])(obj));
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] zoom_small {
+            get {
+                object obj = ResourceManager.GetObject("zoom_small", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
     }
 }
