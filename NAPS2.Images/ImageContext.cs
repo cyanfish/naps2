@@ -1,9 +1,8 @@
 ﻿using System.Collections.Immutable;
 using NAPS2.Util;
 
-namespace NAPS2.Images.Storage;
+namespace NAPS2.Images;
 
-// TODO: Move this (and related classes) to top level Images namespace?
 public abstract class ImageContext
 {
     private readonly IPdfRenderer? _pdfRenderer;

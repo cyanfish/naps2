@@ -1,4 +1,4 @@
-﻿namespace NAPS2.Images.Storage;
+﻿namespace NAPS2.Images;
 
 public enum LockMode
 {
