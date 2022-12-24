@@ -14,7 +14,7 @@ public static class MacPackager
         Output.Info($"Packaging installer: {pkgPath}");
 
         Output.Verbose("Building bundle");
-        var basePath = Path.Combine(Paths.SolutionRoot, "NAPS2.App.Mac", "bin", "InstallerEXE", "net7-macos10.15");
+        var basePath = Path.Combine(Paths.SolutionRoot, "NAPS2.App.Mac", "bin", "Release", "net7-macos10.15");
         string bundlePath = packageInfo.Platform switch
         {
             Platform.Mac => Path.Combine(basePath, "NAPS2.app"),
@@ -28,12 +28,12 @@ public static class MacPackager
         }
         if (packageInfo.Platform == Platform.Mac)
         {
-            Cli.Run("dotnet", $"build NAPS2.App.Mac -c InstallerEXE");
+            Cli.Run("dotnet", $"build NAPS2.App.Mac -c Release");
         }
         else
         {
             var runtimeId = packageInfo.Platform == Platform.MacArm ? "osx-arm64" : "osx-x64";
-            Cli.Run("dotnet", $"build NAPS2.App.Mac -c InstallerEXE -r {runtimeId}");
+            Cli.Run("dotnet", $"build NAPS2.App.Mac -c Release -r {runtimeId}");
         }
 
         Output.Verbose("Building package");

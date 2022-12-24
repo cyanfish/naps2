@@ -19,26 +19,25 @@ public class PackageCommand : ICommand<PackageOptions>
             switch (target.BuildType)
             {
                 case BuildType.Exe:
-                    // TODO: We need configs designed for mac + linux (and/or runtime changes - but either way
-                    // we should rename the config)
+                    // TODO: We might need configs designed for mac + linux
                     if (target.Platform.IsLinux())
                     {
-                        FlatpakPackager.Package(GetPackageInfo(target.Platform, "InstallerEXE"), opts.NoPre);
+                        FlatpakPackager.Package(GetPackageInfo(target.Platform, "Release"), opts.NoPre);
                     }
                     else if (target.Platform.IsMac())
                     {
-                        MacPackager.Package(GetPackageInfo(target.Platform, "InstallerEXE"), opts.NoSign, opts.NoNotarize);
+                        MacPackager.Package(GetPackageInfo(target.Platform, "Release"), opts.NoSign, opts.NoNotarize);
                     }
                     else if (target.Platform.IsWindows())
                     {
-                        InnoSetupPackager.PackageExe(GetPackageInfo(target.Platform, "InstallerEXE"));
+                        InnoSetupPackager.PackageExe(GetPackageInfo(target.Platform, "Release"));
                     }
                     break;
                 case BuildType.Msi:
-                    WixToolsetPackager.PackageMsi(GetPackageInfo(target.Platform, "InstallerMSI"));
+                    WixToolsetPackager.PackageMsi(GetPackageInfo(target.Platform, "Release-Msi"));
                     break;
                 case BuildType.Zip:
-                    ZipArchivePackager.PackageZip(GetPackageInfo(target.Platform, "Standalone"));
+                    ZipArchivePackager.PackageZip(GetPackageInfo(target.Platform, "Release-Zip"));
                     break;
             }
         }

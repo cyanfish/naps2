@@ -17,7 +17,7 @@ public static class SecureStorage
     [return: NotNullIfNotNull("plaintext")]
     public static string? Encrypt(string plaintext)
     {
-#if STANDALONE
+#if ZIP
         return plaintext;
 #else
 #if NET6_0_OR_GREATER
@@ -38,7 +38,7 @@ public static class SecureStorage
     [return: NotNullIfNotNull("coded")]
     public static string? Decrypt(string coded)
     {
-#if STANDALONE
+#if ZIP
         return coded;
 #else
 #if NET6_0_OR_GREATER

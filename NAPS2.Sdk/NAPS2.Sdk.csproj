@@ -10,7 +10,7 @@
     <Title>NAPS2 - Not Another PDF Scanner</Title>
     <Product>NAPS2 - Not Another PDF Scanner</Product>
     <Copyright>Copyright 2009, 2012-2020 NAPS2 Contributors; Icons from http://www.fatcow.com/free-icons</Copyright>
-    <Configurations>Debug;InstallerEXE;DebugLang;InstallerMSI;Standalone</Configurations>
+    <Configurations>Debug;Release;DebugLang;Release-Msi;Release-Zip</Configurations>
   </PropertyGroup>
 
   <Import Project="..\NAPS2.Setup\targets\CommonTargets.targets" />
@@ -19,14 +19,11 @@
   <PropertyGroup Condition="'$(OS)' != 'Windows_NT'">
     <DefineConstants>NONWINDOWS</DefineConstants>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'InstallerEXE|AnyCPU'">
-    <DefineConstants>INSTALLER INSTALLER_EXE</DefineConstants>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release-Msi|AnyCPU'">
+    <DefineConstants>MSI</DefineConstants>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'InstallerMSI|AnyCPU'">
-    <DefineConstants>INSTALLER INSTALLER_MSI</DefineConstants>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Standalone|AnyCPU'">
-    <DefineConstants>STANDALONE</DefineConstants>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release-Zip|AnyCPU'">
+    <DefineConstants>ZIP</DefineConstants>
   </PropertyGroup>
   <PropertyGroup Condition="'$(TargetFramework)' == 'net6-macos10.15'">
     <DefineConstants>MAC</DefineConstants>

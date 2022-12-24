@@ -92,7 +92,7 @@ public class DesktopController
     private void ShowDonationPrompt()
     {
         // Show a donation prompt after a month of use
-#if !INSTALLER_MSI
+#if !MSI
         if (!_config.Get(c => c.HiddenButtons).HasFlag(ToolbarButtons.Donate) &&
             !_config.Get(c => c.HasBeenPromptedForDonation) &&
             DateTime.Now - _config.Get(c => c.FirstRunDate) > TimeSpan.FromDays(30))
@@ -108,7 +108,7 @@ public class DesktopController
 
     private void ShowUpdatePrompt()
     {
-#if !INSTALLER_MSI
+#if !MSI
         if (_config.Get(c => c.CheckForUpdates) &&
             !_config.Get(c => c.NoUpdatePrompt) &&
             (!_config.Get(c => c.HasCheckedForUpdates) ||

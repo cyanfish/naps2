@@ -23,9 +23,9 @@ public class BuildCommand : ICommand<BuildOptions>
     private static string GetConfig(BuildType buildType) => buildType switch
     {
         BuildType.Debug => "Debug",
-        BuildType.Exe => "InstallerEXE",
-        BuildType.Msi => "InstallerMSI",
-        BuildType.Zip => "Standalone",
+        BuildType.Exe => "Release",
+        BuildType.Msi => "Release-Msi",
+        BuildType.Zip => "Release-Zip",
         _ => throw new ArgumentException()
     };
 }

@@ -10,7 +10,7 @@ public static class Paths
 
     static Paths()
     {
-#if STANDALONE
+#if ZIP
         AppDataPath = Path.Combine(ExecutablePath, "..", "Data");
 #else
         var userAppData = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);

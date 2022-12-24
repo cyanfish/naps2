@@ -9,9 +9,9 @@ public class UpdateChecker : IUpdateChecker
     public static readonly TimeSpan CheckInterval = TimeSpan.FromDays(7);
 
     private const string UPDATE_CHECK_ENDPOINT = "https://www.naps2.com/api/v1/update";
-#if STANDALONE
+#if ZIP
         private const string UPDATE_FILE_EXT = "zip";
-#elif INSTALLER_MSI
+#elif MSI
         private const string UPDATE_FILE_EXT = "msi";
 #else
     private const string UPDATE_FILE_EXT = "exe";

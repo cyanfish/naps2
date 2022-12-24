@@ -105,7 +105,7 @@ public class UpdateOperation : OperationBase
                 return;
             }
 
-#if STANDALONE
+#if ZIP
                 InstallZip();
 #else
             InstallExe();

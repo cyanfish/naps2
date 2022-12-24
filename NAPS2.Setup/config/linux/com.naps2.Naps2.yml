@@ -71,8 +71,8 @@ modules:
             RUNTIME: linux-x64
     build-commands:
       - mkdir -p /app/bin
-      - dotnet publish NAPS2.App.Gtk -c InstallerEXE -r $RUNTIME --self-contained --source ./nuget-sources
-      - cp -r --remove-destination /run/build/main/NAPS2.App.Gtk/bin/InstallerEXE/net6/$RUNTIME/publish/. /app/bin/
+      - dotnet publish NAPS2.App.Gtk -c Release -r $RUNTIME --self-contained --source ./nuget-sources
+      - cp -r --remove-destination /run/build/main/NAPS2.App.Gtk/bin/Release/net6/$RUNTIME/publish/. /app/bin/
       - install -Dm644 com.naps2.Naps2.png /app/share/icons/hicolor/128x128/apps/com.naps2.Naps2.png
       - install -Dm644 com.naps2.Naps2.metainfo.xml /app/share/metainfo/com.naps2.Naps2.metainfo.xml
       - install -Dm644 com.naps2.Naps2.desktop /app/share/applications/com.naps2.Naps2.desktop
