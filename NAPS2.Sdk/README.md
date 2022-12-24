@@ -1,5 +1,7 @@
 # NAPS2.Sdk
 
+> NAPS2.Sdk is a **work in progress**. Nuget packages will be made available once it is ready for public consumption.
+
 NAPS2.Sdk is a fully-featured scanning library, supporting WIA, TWAIN, SANE, and ESCL scanners on Windows, Mac, and Linux.
 
 ## Drivers
