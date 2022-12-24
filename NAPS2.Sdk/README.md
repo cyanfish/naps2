@@ -7,17 +7,20 @@ NAPS2.Sdk is a fully-featured scanning library, supporting WIA, TWAIN, SANE, and
 |           | Windows | Mac | Linux |
 |-----------|---------|-----|-------|
 | **WIA**   | X       |     |       |
-| **TWAIN** | X       | X   |       |
-| **SANE**  |         |     | X     |
+| **TWAIN** | X       | *   |       |
+| **Apple** |         | X   |       |
+| **SANE**  |         | X   | X     |
 | **ESCL**  | X       | X   | X     |
 
 [WIA](https://docs.microsoft.com/en-us/windows/win32/wia/-wia-startpage) (Windows Image Acquisition) is a Microsoft technology for scanners (and cameras). Many scanners provide WIA drivers for Windows.
 
 [TWAIN](https://twain.org/) is a cross-platform standard for image acquisition. Many scanners provide TWAIN drivers for Windows and/or Mac.
 
+Apple's [ImageCaptureCore](https://developer.apple.com/documentation/imagecapturecore) provides access to TWAIN and ESCL scanners on Mac devices.
+
 [SANE](http://www.sane-project.org/) is an open-source API and set of backends for various scanners. Primarily for Linux, [supported devices](http://www.sane-project.org/sane-supported-devices.html) use backends made by open-source contributors or the manufacturer themselves.
 
-[ESCL](https://mopria.org/mopria-escl-specification), also known as Apple AirScan, is a standard protocol for scanning over a network. Many modern scanners support ESCL, and as it's a network protocol, specific drivers aren't required.
+[ESCL](https://mopria.org/mopria-escl-specification), also known as Apple AirScan, is a standard protocol for scanning over a network. Many modern scanners support ESCL, and as it's a network protocol, specific drivers aren't required. ESCL can also be used over a USB connection in some cases.
 
 ## Usage
 
