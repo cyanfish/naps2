@@ -6,6 +6,7 @@
 
 [Setup]
 AppName=NAPS2 - Not Another PDF Scanner
+AppVersion={#AppVersion}
 AppVerName=NAPS2 {#AppVersion}
 AppPublisher=Ben Olden-Cooligan
 AppPublisherURL=https://www.naps2.com
