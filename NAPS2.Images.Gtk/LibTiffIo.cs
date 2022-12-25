@@ -160,8 +160,8 @@ internal class LibTiffIo : ITiffWriter
                 imageLock.Dispose();
                 // LibTiff always produces pre-multiplied alpha, which we don't want
                 new UnmultiplyAlphaOp().Perform(img);
-                produceImage(img);
                 progress.Report(++i, count);
+                produceImage(img);
             } while (LibTiff.TIFFReadDirectory(tiff) == 1);
         }
         finally

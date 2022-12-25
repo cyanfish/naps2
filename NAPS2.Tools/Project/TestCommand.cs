@@ -13,11 +13,20 @@ public class TestCommand : ICommand<TestOptions>
             : OperatingSystem.IsLinux()
                 ? $"NAPS2.App.Gtk/bin/Debug/net6/linux-{arch}"
                 : "NAPS2.App.WinForms/bin/Debug/net462";
-        Output.Info("Running tests");
-        Cli.Run("dotnet", "test", new()
+        var frameworkArg = OperatingSystem.IsWindows() ? "" : "-f net6";
+
+        void RunTests(string project)
         {
-            { "NAPS2_TEST_DEPS", Path.Combine(Paths.SolutionRoot, depsRootPath) }
-        });
+            Cli.Run("dotnet", $"test --verbosity=normal {frameworkArg} {project}", new()
+            {
+                { "NAPS2_TEST_DEPS", Path.Combine(Paths.SolutionRoot, depsRootPath) }
+            });
+        }
+
+        Output.Info("Running tests");
+        RunTests("NAPS2.Sdk.Tests");
+        RunTests("NAPS2.Lib.Tests");
+        RunTests("NAPS2.App.Tests");
         Output.Info("Tests passed.");
         return 0;
     }

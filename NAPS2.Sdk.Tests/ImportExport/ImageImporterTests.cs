@@ -117,7 +117,8 @@ public class ImageImporterTests : ContextualTests
         progressMock.VerifyNoOtherCalls();
     }
 
-    [Fact]
+    // TODO: Why is this flaking on Linux?
+    [PlatformFact(exclude: PlatformFlags.Linux)]
     public async Task MultiFrameProgress()
     {
         var filePath = CopyResourceToFile(ImageResources.animals_tiff, "image.tiff");
@@ -154,8 +155,8 @@ public class ImageImporterTests : ContextualTests
         Assert.False(await enumerator.MoveNextAsync());
     }
 
-    // This test doesn't work on Mac as the full file is loaded first, making per-frame loading instant
-    [PlatformFact(exclude: PlatformFlags.Mac)]
+    // This test doesn't work on Mac (and flaky on Linux) as the full file is loaded first, making enumeration instant
+    [PlatformFact(exclude: PlatformFlags.Mac | PlatformFlags.Linux)]
     public async Task MultiFrameCancellation()
     {
         var filePath = CopyResourceToFile(ImageResources.animals_tiff, "image.tiff");
