@@ -12,8 +12,6 @@ using Xunit;
 
 namespace NAPS2.Sdk.Tests.Worker;
 
-// TODO: Should these tests really be disabled on non-windows? Not sure if we still need the worker for mac/linux
-// Although in that case we really need to test GrpcDotNetNamedPipes for mac/linux.
 public class WorkerChannelTests : ContextualTests
 {
     private Channel Start(IRemoteScanController remoteScanController = null, ThumbnailRenderer thumbnailRenderer = null,
@@ -33,18 +31,7 @@ public class WorkerChannelTests : ContextualTests
         };
     }
 
-    // TODO: Move this to a client/server test
-    // [PlatformFact(include: Platform.Windows)]
-    // public void SslCreds()
-    // {
-    //     var (cert, privateKey) = SslHelper.GenerateRootCertificate();
-    //     var serverCreds = RemotingHelper.GetServerCreds(cert, privateKey);
-    //     var clientCreds = RemotingHelper.GetClientCreds(cert, privateKey);
-    //     using var channel = Start(serverCreds: serverCreds, clientCreds: clientCreds);
-    //     channel.Client.Init(null);
-    // }
-
-    [PlatformFact(include: PlatformFlags.Windows)]
+    [Fact]
     public void Init()
     {
         using var channel = Start();
@@ -52,14 +39,14 @@ public class WorkerChannelTests : ContextualTests
         Assert.StartsWith(@"C:\Somewhere", ScanningContext.FileStorageManager.NextFilePath());
     }
 
-    [PlatformFact(include: PlatformFlags.Windows)]
+    [Fact]
     public void Wia10NativeUi()
     {
         // TODO: This is not testable yet
         // channel.Client.Wia10NativeUI(...);
     }
 
-    [PlatformFact(include: PlatformFlags.Windows)]
+    [Fact]
     public async Task GetDeviceList()
     {
         var remoteScanController = new Mock<IRemoteScanController>();
@@ -77,13 +64,13 @@ public class WorkerChannelTests : ContextualTests
         remoteScanController.VerifyNoOtherCalls();
     }
 
-    [PlatformFact(include: PlatformFlags.Windows)]
+    [Fact]
     public async Task ScanWithMemoryStorage()
     {
         await ScanInternalTest();
     }
 
-    [PlatformFact(include: PlatformFlags.Windows)]
+    [Fact]
     public async Task ScanWithFileStorage()
     {
         ScanningContext.FileStorageManager = FileStorageManager.CreateFolder(Path.Combine(FolderPath, "recovery"));
@@ -114,7 +101,7 @@ public class WorkerChannelTests : ContextualTests
         // TODO: Verify that thumbnails are set correctly (with and without revertible transforms)
     }
 
-    [PlatformFact(include: PlatformFlags.Windows)]
+    [Fact]
     public async Task ScanException()
     {
         var remoteScanController = new MockRemoteScanController
@@ -137,7 +124,7 @@ public class WorkerChannelTests : ContextualTests
         Assert.Contains("Test error", ex.Message);
     }
 
-    [PlatformFact(include: PlatformFlags.Windows)]
+    [Fact]
     public async Task TwainScan()
     {
         var twainEvents = new Mock<ITwainEvents>();
