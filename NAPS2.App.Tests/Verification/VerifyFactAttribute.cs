@@ -5,6 +5,7 @@ namespace NAPS2.App.Tests.Verification;
 public sealed class VerifyTheoryAttribute : TheoryAttribute
 {
     private bool _allowDebug;
+    private bool _windowsAppium;
     
     public VerifyTheoryAttribute()
     {
@@ -31,6 +32,19 @@ public sealed class VerifyTheoryAttribute : TheoryAttribute
                 }
             }
             _allowDebug = value;
+        }
+    }
+
+    public bool WindowsAppium
+    {
+        get => _windowsAppium;
+        set
+        {
+            if (value && Skip == null && !OperatingSystem.IsWindows())
+            {
+                Skip = "Appium tests are only supported on Windows right now.";
+            }
+            _windowsAppium = value;
         }
     }
 }

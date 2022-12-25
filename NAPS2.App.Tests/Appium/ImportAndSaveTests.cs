@@ -10,7 +10,7 @@ namespace NAPS2.App.Tests.Appium;
 [Collection("appium")]
 public class ImportAndSaveTests : AppiumTests
 {
-    [VerifyTheory(AllowDebug = true)]
+    [VerifyTheory(AllowDebug = true, WindowsAppium = true)]
     [ClassData(typeof(AppiumTestData))]
     public void ImportVariousAndSavePdfWithOcr(IAppTestTarget target)
     {

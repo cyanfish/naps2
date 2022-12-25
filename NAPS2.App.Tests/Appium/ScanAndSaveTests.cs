@@ -13,7 +13,7 @@ public class ScanAndSaveTests : AppiumTests
     private const string WIA_DEVICE_NAME = "";
     private const string TWAIN_DEVICE_NAME = "";
 
-    [VerifyTheory(AllowDebug = true)]
+    [VerifyTheory(AllowDebug = true, WindowsAppium = true)]
     [ClassData(typeof(AppiumTestData))]
     public void ScanWiaSavePdf(IAppTestTarget target)
     {
@@ -48,7 +48,7 @@ public class ScanAndSaveTests : AppiumTests
         AppTestHelper.AssertNoErrorLog(FolderPath);
     }
 
-    [VerifyTheory(AllowDebug = true)]
+    [VerifyTheory(AllowDebug = true, WindowsAppium = true)]
     [ClassData(typeof(AppiumTestData))]
     public void ScanTwainSaveImage(IAppTestTarget target)
     {
