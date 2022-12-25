@@ -51,15 +51,6 @@ public class GtkListView<T> : IListView<T> where T : notnull
 
     public bool AllowDrop { get; set; }
 
-    private void OnDragEnter(object? sender, DragEventArgs e)
-    {
-        if (!AllowDrop)
-        {
-            return;
-        }
-        e.Effects = _behavior.GetDropEffect(e.Data);
-    }
-
     public ScrolledWindow NativeControl => _scrolledWindow;
 
     public Control Control => _scrolledWindow.ToEto();
