@@ -39,6 +39,7 @@ public class MacSystemCompat : ISystemCompat
                 : "_mac";
             return new[]
             {
+                "",
                 prefix,
                 $"../Resources/{prefix}" // Path in .app bundle
             };
