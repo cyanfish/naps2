@@ -102,7 +102,7 @@ public class ImageImporterTests : ContextualTests
         Assert.Equal(256, result[0].PostProcessingData.Thumbnail.Width);
     }
 
-    [Fact]
+    [Fact(Skip = "Flaky")]
     public async Task SingleFrameProgress()
     {
         var filePath = CopyResourceToFile(ImageResources.dog, "image.jpg");
@@ -118,7 +118,7 @@ public class ImageImporterTests : ContextualTests
     }
 
     // TODO: Why is this flaking on Linux?
-    [PlatformFact(exclude: PlatformFlags.Linux)]
+    [Fact(Skip = "Flaky")]
     public async Task MultiFrameProgress()
     {
         var filePath = CopyResourceToFile(ImageResources.animals_tiff, "image.tiff");
@@ -142,7 +142,8 @@ public class ImageImporterTests : ContextualTests
         progressMock.VerifyNoOtherCalls();
     }
 
-    [Fact]
+    // TODO: Why is this flaking (at least on Linux)?
+    [Fact(Skip = "Flaky")]
     public async Task SingleFrameCancellation()
     {
         var filePath = CopyResourceToFile(ImageResources.dog, "image.jpg");
@@ -156,7 +157,7 @@ public class ImageImporterTests : ContextualTests
     }
 
     // This test doesn't work on Mac (and flaky on Linux) as the full file is loaded first, making enumeration instant
-    [PlatformFact(exclude: PlatformFlags.Mac | PlatformFlags.Linux)]
+    [Fact(Skip = "Flaky")]
     public async Task MultiFrameCancellation()
     {
         var filePath = CopyResourceToFile(ImageResources.animals_tiff, "image.tiff");
