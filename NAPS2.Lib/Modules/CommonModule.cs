@@ -95,7 +95,8 @@ public class CommonModule : Module
             return new TesseractOcrEngine(
                 tesseractPath,
                 ctx.Resolve<TesseractLanguageManager>().TessdataBasePath,
-                Paths.Temp);
+                Paths.Temp,
+                ctx.Resolve<ErrorOutput>());
         }).SingleInstance();
     }
 }

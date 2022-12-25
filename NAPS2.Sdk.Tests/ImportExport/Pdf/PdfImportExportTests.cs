@@ -1,19 +1,22 @@
 using NAPS2.ImportExport.Pdf;
-using NAPS2.Ocr;
 using NAPS2.Sdk.Tests.Asserts;
 using Xunit;
+using Xunit.Abstractions;
 
 namespace NAPS2.Sdk.Tests.ImportExport.Pdf;
 
 public class PdfImportExportTests : ContextualTests
 {
+    private readonly ITestOutputHelper _testOutputHelper;
+
     private readonly PdfImporter _importer;
     private readonly PdfExporter _exporter;
     private readonly string _importPath;
     private readonly string _exportPath;
 
-    public PdfImportExportTests()
+    public PdfImportExportTests(ITestOutputHelper testOutputHelper)
     {
+        _testOutputHelper = testOutputHelper;
         _importer = new PdfImporter(ScanningContext);
         _exporter = new PdfExporter(ScanningContext);
         _importPath = CopyResourceToFile(PdfResources.word_generated_pdf, "import.pdf");
@@ -80,7 +83,7 @@ public class PdfImportExportTests : ContextualTests
     public async Task ImportExportOcrablePdf(OcrTestConfig config)
     {
         config.StorageConfig.Apply(this);
-        SetUpOcr();
+        SetUpOcr(_testOutputHelper);
 
         var importPathForOcr = Path.Combine(FolderPath, "import_ocr.pdf");
         File.WriteAllBytes(importPathForOcr, PdfResources.word_patcht_pdf);
@@ -146,7 +149,7 @@ public class PdfImportExportTests : ContextualTests
         images.Add(ScanningContext.CreateProcessedImage(LoadImage(ImageResources.ocr_test)));
         Assert.Equal(5, images.Count);
 
-        SetUpOcr();
+        SetUpOcr(_testOutputHelper);
         await _exporter.Export(_exportPath, images, new PdfExportParams(), config.OcrParams);
 
         PdfAsserts.AssertImages(_exportPath,

@@ -8,12 +8,14 @@ public class TesseractOcrEngine : IOcrEngine
     private readonly string _tesseractPath;
     private readonly string? _languageDataBasePath;
     private readonly string _tempFolder;
+    private readonly ErrorOutput? _errorOutput;
 
-    public TesseractOcrEngine(string tesseractPath, string? languageDataBasePath, string tempFolder)
+    public TesseractOcrEngine(string tesseractPath, string? languageDataBasePath, string tempFolder, ErrorOutput? errorOutput)
     {
         _tesseractPath = tesseractPath;
         _languageDataBasePath = languageDataBasePath;
         _tempFolder = tempFolder;
+        _errorOutput = errorOutput;
     }
     
     public async Task<OcrResult?> ProcessImage(string imagePath, OcrParams ocrParams, CancellationToken cancelToken)
@@ -63,6 +65,7 @@ public class TesseractOcrEngine : IOcrEngine
             {
                 if (!cancelToken.IsCancellationRequested)
                 {
+                    _errorOutput?.DisplayError(SdkResources.OcrTimeout);
                     Log.Error("OCR process timed out.");
                 }
                 try
@@ -111,6 +114,7 @@ public class TesseractOcrEngine : IOcrEngine
         catch (Exception e)
         {
             Log.ErrorException("Error running OCR", e);
+            _errorOutput?.DisplayError(SdkResources.OcrError, e);
             return null;
         }
         finally

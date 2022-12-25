@@ -1,6 +1,7 @@
 using System.Threading;
 using NAPS2.Ocr;
 using Xunit;
+using Xunit.Abstractions;
 
 namespace NAPS2.Sdk.Tests.Ocr;
 
@@ -10,9 +11,9 @@ public class TesseractOcrEngineTests : ContextualTests
     private readonly string _testImagePath;
     private readonly string _testImagePathHebrew;
 
-    public TesseractOcrEngineTests()
+    public TesseractOcrEngineTests(ITestOutputHelper testOutputHelper)
     {
-        SetUpOcr();
+        SetUpOcr(testOutputHelper);
         _testImagePath = CopyResourceToFile(BinaryResources.ocr_test, "ocr_test.jpg");
         _testImagePathHebrew = CopyResourceToFile(BinaryResources.ocr_test_hebrew, "ocr_test_hebrew.jpg");
         _engine = (TesseractOcrEngine) ScanningContext.OcrEngine;
@@ -71,7 +72,7 @@ public class TesseractOcrEngineTests : ContextualTests
     [Fact]
     public async Task Timeout()
     {
-        var timeout = 0.1;
+        var timeout = 0.01;
         var result = await _engine.ProcessImage(_testImagePath, new OcrParams("eng", OcrMode.Fast, timeout), CancellationToken.None);
         Assert.Null(result);
     }

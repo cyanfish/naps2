@@ -80,11 +80,18 @@
     <Folder Include="ImportExport\Email\Oauth" />
   </ItemGroup>
 
-  <ItemGroup Condition="'$(Configuration)' == 'Debug'">
+  <ItemGroup>
 
     <EmbeddedResource Remove="Lang\Resources\SdkResources.*.resx" Condition="'$(Configuration)' == 'Debug'" />
+    <EmbeddedResource Include="Lang\Resources\SdkResources.fr.resx" Condition="'$(Configuration)' == 'Debug'" />
+    <EmbeddedResource Include="Lang\Resources\SdkResources.he.resx" Condition="'$(Configuration)' == 'Debug'" />
+    <EmbeddedResource Include="Lang\Resources\SdkResources.pt-BR.resx" Condition="'$(Configuration)' == 'Debug'" />
     <EmbeddedResource Update="Lang\Resources\SdkResources.*.resx">
       <DependentUpon>SdkResources.resx</DependentUpon>
+    </EmbeddedResource>
+
+    <EmbeddedResource Update="**/*.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
     </EmbeddedResource>
 
   </ItemGroup>

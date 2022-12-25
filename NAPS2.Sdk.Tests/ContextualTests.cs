@@ -3,6 +3,7 @@ using NAPS2.ImportExport.Pdf;
 using NAPS2.Ocr;
 using NAPS2.Scan;
 using NAPS2.Unmanaged;
+using Xunit.Abstractions;
 
 namespace NAPS2.Sdk.Tests;
 
@@ -47,7 +48,7 @@ public class ContextualTests : IDisposable
         }
     }
 
-    public void SetUpOcr()
+    public void SetUpOcr(ITestOutputHelper testOutputHelper)
     {
         var best = Path.Combine(FolderPath, "best");
         Directory.CreateDirectory(best);
@@ -58,7 +59,7 @@ public class ContextualTests : IDisposable
         var tesseractPath = NativeLibrary.FindExePath(PlatformCompat.System.TesseractExecutableName, depsRoot);
         CopyResourceToFile(BinaryResources.eng_traineddata, fast, "eng.traineddata");
         CopyResourceToFile(BinaryResources.heb_traineddata, fast, "heb.traineddata");
-        ScanningContext.OcrEngine = new TesseractOcrEngine(tesseractPath, FolderPath, FolderPath);
+        ScanningContext.OcrEngine = new TesseractOcrEngine(tesseractPath, FolderPath, FolderPath, new TestErrorOutput(testOutputHelper));
     }
     
     public string CopyResourceToFile(byte[] resource, string folder, string fileName)
@@ -116,6 +117,33 @@ public class ContextualTests : IDisposable
         catch (Exception)
         {
             return true;
+        }
+    }
+
+    private class TestErrorOutput : ErrorOutput
+    {
+        private readonly ITestOutputHelper _testOutputHelper;
+
+        public TestErrorOutput(ITestOutputHelper testOutputHelper)
+        {
+            _testOutputHelper = testOutputHelper;
+        }
+
+        public override void DisplayError(string errorMessage)
+        {
+            _testOutputHelper.WriteLine(errorMessage);
+        }
+
+        public override void DisplayError(string errorMessage, string details)
+        {
+            _testOutputHelper.WriteLine(errorMessage);
+            _testOutputHelper.WriteLine(details);
+        }
+
+        public override void DisplayError(string errorMessage, Exception exception)
+        {
+            _testOutputHelper.WriteLine(errorMessage);
+            _testOutputHelper.WriteLine(exception.ToString());
         }
     }
 }

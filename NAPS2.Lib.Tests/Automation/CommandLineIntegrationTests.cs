@@ -22,9 +22,11 @@ public class CommandLineIntegrationTests : ContextualTests
     private static readonly byte[] PatchT = ImageResources.patcht;
 
     private readonly AutomationHelper _automationHelper;
+    private readonly ITestOutputHelper _testOutputHelper;
 
     public CommandLineIntegrationTests(ITestOutputHelper testOutputHelper)
     {
+        _testOutputHelper = testOutputHelper;
         _automationHelper = new AutomationHelper(this, testOutputHelper);
     }
 
@@ -60,7 +62,7 @@ public class CommandLineIntegrationTests : ContextualTests
     [Fact]
     public async Task ScanWithOcr()
     {
-        SetUpOcr();
+        SetUpOcr(_testOutputHelper);
         var path = $"{FolderPath}/test.pdf";
         await _automationHelper.RunCommand(
             new AutomatedScanningOptions
