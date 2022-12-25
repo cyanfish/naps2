@@ -4,6 +4,7 @@ using NAPS2.ImportExport.Pdf.Pdfium;
 using PdfSharpCore.Pdf.IO;
 using PdfSharpCore.Pdf.Security;
 using Xunit;
+using Xunit.Sdk;
 
 namespace NAPS2.Sdk.Tests.Asserts;
 
@@ -28,12 +29,20 @@ public static class PdfAsserts
 
     public static void AssertContainsTextOnce(string text, string filePath)
     {
-        Assert.Equal(1, CountText(text, filePath));
+        var value = CountText(text, filePath);
+        if (value != 1)
+        {
+            throw new AssertActualExpectedException(1, value, $"Unexpected count for \"{text}\"");
+        }
     }
 
     public static void AssertDoesNotContainText(string text, string filePath)
     {
-        Assert.Equal(0, CountText(text, filePath));
+        var value = CountText(text, filePath);
+        if (value != 0)
+        {
+            throw new AssertActualExpectedException(0, value, $"Unexpected count for \"{text}\"");
+        }
     }
 
     private static int CountText(string text, string filePath)

@@ -17,7 +17,7 @@ public class TestCommand : ICommand<TestOptions>
 
         void RunTests(string project)
         {
-            Cli.Run("dotnet", $"test --verbosity=normal {frameworkArg} {project}", new()
+            Cli.Run("dotnet", $"test -l \"console;verbosity=normal\" {frameworkArg} {project}", new()
             {
                 { "NAPS2_TEST_DEPS", Path.Combine(Paths.SolutionRoot, depsRootPath) }
             });

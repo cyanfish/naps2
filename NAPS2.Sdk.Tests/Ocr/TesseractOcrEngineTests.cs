@@ -63,7 +63,7 @@ public class TesseractOcrEngineTests : ContextualTests
     public async Task CancelWhileProcessing()
     {
         CancellationTokenSource cts = new CancellationTokenSource();
-        cts.CancelAfter(50);
+        cts.CancelAfter(20);
         var result = await _engine.ProcessImage(_testImagePath, new OcrParams("eng", OcrMode.Fast, 0), cts.Token);
         Assert.Null(result);
     }
