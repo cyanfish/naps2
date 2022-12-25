@@ -8,7 +8,7 @@ namespace NAPS2.App.Tests;
 
 public class GuiAppTests : ContextualTests
 {
-    [Theory]
+    [GuiTheory]
     [ClassData(typeof(AppTestData))]
     public void CreatesWindow(IAppTestTarget target)
     {

@@ -19,7 +19,8 @@ public class TestCommand : ICommand<TestOptions>
         {
             Cli.Run("dotnet", $"test -l \"console;verbosity=normal\" {frameworkArg} {project}", new()
             {
-                { "NAPS2_TEST_DEPS", Path.Combine(Paths.SolutionRoot, depsRootPath) }
+                { "NAPS2_TEST_DEPS", Path.Combine(Paths.SolutionRoot, depsRootPath) },
+                { "NAPS2_TEST_NOGUI", opts.NoGui ? "1" : "0" }
             });
         }
 
