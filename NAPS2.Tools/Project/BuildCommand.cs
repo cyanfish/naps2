@@ -22,7 +22,11 @@ public class BuildCommand : ICommand<BuildOptions>
 
     private static string GetConfig(BuildType buildType) => buildType switch
     {
-        BuildType.Debug => "Debug",
+        BuildType.Debug => OperatingSystem.IsMacOS()
+            ? "Debug-Mac"
+            : OperatingSystem.IsLinux()
+                ? "Debug-Linux"
+                : "Debug-Windows",
         BuildType.Exe => "Release",
         BuildType.Msi => "Release-Msi",
         BuildType.Zip => "Release-Zip",

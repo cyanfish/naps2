@@ -80,11 +80,11 @@ public static class TargetsHelper
         }
         if (OperatingSystem.IsMacOS())
         {
-            return new[] { "exe" };
+            return constraints.AllowDebug ? new[] { "debug", "exe" } : new[] { "exe" };
         }
         if (OperatingSystem.IsLinux())
         {
-            return new[] { "exe" };
+            return constraints.AllowDebug ? new[] { "debug", "exe" } : new[] { "exe" };
         }
         throw new InvalidOperationException("Unsupported OS");
     }

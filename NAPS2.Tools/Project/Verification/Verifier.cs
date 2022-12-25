@@ -7,6 +7,7 @@ public static class Verifier
         Output.Info($"Running verification tests in: {testRoot}");
         Cli.Run("dotnet", "test NAPS2.App.Tests", new()
         {
+            { "NAPS2_TEST_DEPS", testRoot },
             { "NAPS2_TEST_ROOT", testRoot },
             { "NAPS2_TEST_VERIFY", "1" }
         });

@@ -54,8 +54,8 @@ public class ContextualTests : IDisposable
         var fast = Path.Combine(FolderPath, "fast");
         Directory.CreateDirectory(fast);
 
-        var testRoot = Environment.GetEnvironmentVariable("NAPS2_TEST_ROOT");
-        var tesseractPath = NativeLibrary.FindExePath(PlatformCompat.System.TesseractExecutableName, testRoot);
+        var depsRoot = Environment.GetEnvironmentVariable("NAPS2_TEST_DEPS");
+        var tesseractPath = NativeLibrary.FindExePath(PlatformCompat.System.TesseractExecutableName, depsRoot);
         CopyResourceToFile(BinaryResources.eng_traineddata, fast, "eng.traineddata");
         CopyResourceToFile(BinaryResources.heb_traineddata, fast, "heb.traineddata");
         ScanningContext.OcrEngine = new TesseractOcrEngine(tesseractPath, FolderPath, FolderPath);

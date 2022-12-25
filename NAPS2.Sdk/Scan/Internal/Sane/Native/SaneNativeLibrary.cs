@@ -6,7 +6,7 @@ public class SaneNativeLibrary : Unmanaged.NativeLibrary
 {
     private static readonly Lazy<SaneNativeLibrary> LazyInstance = new(() =>
     {
-        var testRoot = Environment.GetEnvironmentVariable("NAPS2_TEST_ROOT");
+        var testRoot = Environment.GetEnvironmentVariable("NAPS2_TEST_DEPS");
         var libraryPath = FindLibraryPath(PlatformCompat.System.SaneLibraryName, testRoot);
         var libraryDeps = PlatformCompat.System.SaneLibraryDeps
             ?.Select(path => FindLibraryPath(path, testRoot)).ToArray();
