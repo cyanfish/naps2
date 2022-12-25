@@ -101,7 +101,7 @@ public class DesktopControllerTests : ContextualTests
         await _desktopController.Initialize();
 
         Assert.True(_config.Get(c => c.HasBeenRun));
-        DateAsserts.Recent(TimeSpan.FromMilliseconds(100), _config.Get(c => c.FirstRunDate));
+        DateAsserts.Recent(TimeSpan.FromMilliseconds(1000), _config.Get(c => c.FirstRunDate));
         _notificationManager.VerifyNoOtherCalls();
     }
 
@@ -130,7 +130,7 @@ public class DesktopControllerTests : ContextualTests
 
         _notificationManager.Verify(x => x.DonatePrompt());
         Assert.True(_config.Get(c => c.HasBeenPromptedForDonation));
-        DateAsserts.Recent(TimeSpan.FromMilliseconds(100), _config.Get(c => c.LastDonatePromptDate));
+        DateAsserts.Recent(TimeSpan.FromMilliseconds(1000), _config.Get(c => c.LastDonatePromptDate));
     }
 
     [Fact]
@@ -165,7 +165,7 @@ public class DesktopControllerTests : ContextualTests
     public async Task Initialize_WithUpdateChecksDisabled_DoesntCheckForUpdate()
     {
         await _desktopController.Initialize();
-        await Task.Delay(50);
+        await Task.Delay(500);
 
         Assert.False(_config.Get(c => c.HasCheckedForUpdates));
         Assert.Null(_config.Get(c => c.LastUpdateCheckDate));
@@ -178,10 +178,10 @@ public class DesktopControllerTests : ContextualTests
         _config.User.Set(c => c.CheckForUpdates, true);
 
         await _desktopController.Initialize();
-        await Task.Delay(50);
+        await Task.Delay(500);
 
         Assert.True(_config.Get(c => c.HasCheckedForUpdates));
-        DateAsserts.Recent(TimeSpan.FromMilliseconds(100), _config.Get(c => c.LastUpdateCheckDate));
+        DateAsserts.Recent(TimeSpan.FromMilliseconds(1000), _config.Get(c => c.LastUpdateCheckDate));
         _updateChecker.Verify(x => x.CheckForUpdates());
         _updateChecker.VerifyNoOtherCalls();
         _notificationManager.VerifyNoOtherCalls();
@@ -196,10 +196,10 @@ public class DesktopControllerTests : ContextualTests
         _updateChecker.Setup(x => x.CheckForUpdates()).ReturnsAsync(mockUpdateInfo);
 
         await _desktopController.Initialize();
-        await Task.Delay(50);
+        await Task.Delay(500);
 
         Assert.True(_config.Get(c => c.HasCheckedForUpdates));
-        DateAsserts.Recent(TimeSpan.FromMilliseconds(100), _config.Get(c => c.LastUpdateCheckDate));
+        DateAsserts.Recent(TimeSpan.FromMilliseconds(1000), _config.Get(c => c.LastUpdateCheckDate));
         _updateChecker.Verify(x => x.CheckForUpdates());
         _notificationManager.Verify(x => x.UpdateAvailable(_updateChecker.Object, mockUpdateInfo));
         _updateChecker.VerifyNoOtherCalls();
@@ -213,7 +213,7 @@ public class DesktopControllerTests : ContextualTests
         _config.User.Set(c => c.CheckForUpdates, true);
 
         await _desktopController.Initialize();
-        await Task.Delay(50);
+        await Task.Delay(500);
 
         Assert.False(_config.Get(c => c.HasCheckedForUpdates));
         Assert.Null(_config.Get(c => c.LastUpdateCheckDate));
@@ -230,7 +230,7 @@ public class DesktopControllerTests : ContextualTests
         _config.User.Set(c => c.LastUpdateCheckDate, updateCheckDate);
 
         await _desktopController.Initialize();
-        await Task.Delay(50);
+        await Task.Delay(500);
 
         Assert.True(_config.Get(c => c.HasCheckedForUpdates));
         Assert.Equal(updateCheckDate, _config.Get(c => c.LastUpdateCheckDate));
@@ -250,10 +250,10 @@ public class DesktopControllerTests : ContextualTests
         _updateChecker.Setup(x => x.CheckForUpdates()).ReturnsAsync(mockUpdateInfo);
 
         await _desktopController.Initialize();
-        await Task.Delay(50);
+        await Task.Delay(500);
 
         Assert.True(_config.Get(c => c.HasCheckedForUpdates));
-        DateAsserts.Recent(TimeSpan.FromMilliseconds(100), _config.Get(c => c.LastUpdateCheckDate));
+        DateAsserts.Recent(TimeSpan.FromMilliseconds(1000), _config.Get(c => c.LastUpdateCheckDate));
         _updateChecker.Verify(x => x.CheckForUpdates());
         _notificationManager.Verify(x => x.UpdateAvailable(_updateChecker.Object, mockUpdateInfo));
         _updateChecker.VerifyNoOtherCalls();
