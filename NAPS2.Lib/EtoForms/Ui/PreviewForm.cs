@@ -14,6 +14,11 @@ public class PreviewForm : EtoDialogBase
     private UiImage? _currentImage;
     private Bitmap? _renderedImage;
     private Size _renderSize;
+    private float _renderFactor;
+    private PointF? _mousePos;
+    private PointF? _initialMousePos;
+    private Point? _initialScrollPos;
+    private bool _mouseIsDown;
 
     public PreviewForm(Naps2Config config, DesktopCommands desktopCommands, UiImageList imageList,
         IIconProvider iconProvider, KeyboardShortcutManager ksm) : base(config)
@@ -25,6 +30,13 @@ public class PreviewForm : EtoDialogBase
 
         _scrollable.Content = _imageView;
         _imageView.Paint += ImagePaint;
+        _scrollable.MouseEnter += OnMouseEnter;
+        _scrollable.MouseLeave += OnMouseLeave;
+        _scrollable.MouseMove += OnMouseMove;
+        _scrollable.MouseDown += OnMouseDown;
+        _scrollable.MouseUp += OnMouseUp;
+        EtoPlatform.Current.AttachMouseWheelEvent(_scrollable, OnMouseWheel);
+        _scrollable.Cursor = Cursors.Pointer;
 
         GoToPrevCommand = new ActionCommand(() => GoTo(ImageIndex - 1))
         {
@@ -63,15 +75,46 @@ public class PreviewForm : EtoDialogBase
         };
     }
 
-    private void ImagePaint(object sender, PaintEventArgs e)
+    private void OnMouseEnter(object? sender, MouseEventArgs e)
+    {
+        _mousePos = e.Location;
+    }
+
+    private void OnMouseUp(object? sender, MouseEventArgs e)
+    {
+        _mouseIsDown = false;
+    }
+
+    private void OnMouseDown(object? sender, MouseEventArgs e)
+    {
+        _mouseIsDown = true;
+        _initialMousePos = e.Location;
+        _initialScrollPos = _scrollable.ScrollPosition;
+    }
+
+    private void OnMouseMove(object? sender, MouseEventArgs e)
+    {
+        if (_mouseIsDown && _initialMousePos.HasValue && _initialScrollPos.HasValue)
+        {
+            _scrollable.ScrollPosition = _initialScrollPos.Value + Point.Round(_initialMousePos.Value - e.Location);
+        }
+        _mousePos = e.Location;
+    }
+
+    private void OnMouseLeave(object? sender, MouseEventArgs e)
+    {
+        _mousePos = null;
+    }
+
+    private void ImagePaint(object? sender, PaintEventArgs e)
     {
         e.Graphics.Clear(Colors.White);
         if (_renderedImage != null)
         {
-            var xOff = (_imageView.Width - RenderSize.Width) / 2;
-            var yOff = (_imageView.Height - RenderSize.Height) / 2;
-            e.Graphics.DrawRectangle(Colors.Black, xOff - 1, yOff - 1, RenderSize.Width + 1, RenderSize.Height + 1);
-            e.Graphics.DrawImage(_renderedImage, xOff, yOff, RenderSize.Width, RenderSize.Height);
+            e.Graphics.DrawRectangle(Colors.Black, XOffset - 1, YOffset - 1, RenderSize.Width + 1,
+                RenderSize.Height + 1);
+            // TODO: Do we need to take ClipRectangle into account here?
+            e.Graphics.DrawImage(_renderedImage, XOffset, YOffset, RenderSize.Width, RenderSize.Height);
         }
     }
 
@@ -104,10 +147,19 @@ public class PreviewForm : EtoDialogBase
         set
         {
             _renderSize = value;
-            _imageView.Size = value + new Size(2, 2);
+            _imageView.Size = Size.Round(value) + new Size(2, 2);
             _imageView.Invalidate();
         }
     }
+
+    protected int AvailableWidth => _scrollable.Width - 2;
+    protected int AvailableHeight => _scrollable.Height - 2;
+
+    protected bool IsWidthBound =>
+        _renderedImage!.Width / (float) _renderedImage.Height > AvailableWidth / (float) AvailableHeight;
+
+    protected float XOffset => Math.Max((_imageView.Width - RenderSize.Width) / 2, 0);
+    protected float YOffset => Math.Max((_imageView.Height - RenderSize.Height) / 2, 0);
 
     public UiImage CurrentImage
     {
@@ -257,31 +309,83 @@ public class PreviewForm : EtoDialogBase
         // _tiffViewer1.Image = imageToRender.RenderToBitmap();
     }
 
-    private void Zoom(double step)
+    // TODO: Clean up this class
+    private void Zoom(float step)
     {
-        RenderSize = Size.Round(RenderSize * (float) Math.Pow(1.1, step));
+        _renderFactor *= (float) Math.Pow(1.2, step);
+        SuspendLayout();
+        var anchor = GetMouseAnchor();
+        Debug.WriteLine($"Anchor: {anchor}");
+        RenderSize =
+            Size.Round(new SizeF(_renderedImage!.Width * _renderFactor, _renderedImage.Height * _renderFactor));
+        SetMouseAnchor(anchor);
+        ResumeLayout();
         // TODO: Min/max?
     }
 
     private void ZoomToActual()
     {
-        if (_renderedImage == null) return;
-        RenderSize = new Size(_renderedImage.Width, _renderedImage.Height);
+        RenderSize = new Size(_renderedImage!.Width, _renderedImage.Height);
+        _renderFactor = 1f;
     }
 
     private void ZoomToWindow()
     {
-        if (_renderedImage == null || !_scrollable.Loaded) return;
-        if (_renderedImage.Width / (float) _renderedImage.Height > _scrollable.Width / (float) _scrollable.Height)
+        if (!_scrollable.Loaded)
         {
-            RenderSize = new Size(_scrollable.Width,
-                (int) Math.Round(_renderedImage.Height * _scrollable.Width / (float) _renderedImage.Width));
+            return;
+        }
+        if (IsWidthBound)
+        {
+            RenderSize = new Size(AvailableWidth,
+                (int) Math.Round(_renderedImage!.Height * AvailableWidth / (float) _renderedImage.Width));
+            _renderFactor = AvailableWidth / (float) _renderedImage.Width;
         }
         else
         {
             RenderSize =
-                new Size((int) Math.Round(_renderedImage.Width * _scrollable.Height / (float) _renderedImage.Height),
-                    _scrollable.Height);
+                new Size((int) Math.Round(_renderedImage!.Width * AvailableHeight / (float) _renderedImage.Height),
+                    AvailableHeight);
+            _renderFactor = AvailableHeight / (float) _renderedImage.Height;
+        }
+    }
+
+    private PointF? GetMouseAnchor()
+    {
+        if (_mousePos is not { } mousePos ||
+            mousePos.X < _scrollable.Location.X + 1 ||
+            mousePos.Y < _scrollable.Location.Y + 1 ||
+            mousePos.X > _scrollable.Location.X + _scrollable.Width - 2 ||
+            mousePos.Y > _scrollable.Location.Y + _scrollable.Height - 2)
+        {
+            return null;
+        }
+        var relativePos = mousePos - _scrollable.Location - new Point(1, 1);
+        var x = (relativePos.X + _scrollable.ScrollPosition.X - XOffset) / RenderSize.Width;
+        var y = (relativePos.Y + _scrollable.ScrollPosition.Y - YOffset) / RenderSize.Height;
+        if (x < 0 || y < 0 || x > 1 || y > 1)
+        {
+            return null;
+        }
+        return new PointF(x, y);
+    }
+
+    private void SetMouseAnchor(PointF? anchor)
+    {
+        if (_mousePos is not { } mousePos)
+        {
+            throw new InvalidOperationException();
+        }
+        if (anchor == null)
+        {
+            // TODO: Keep center aligned somehow
+        }
+        else
+        {
+            var relativePos = mousePos - _scrollable.Location - new Point(1, 1);
+            var xScroll = anchor.Value.X * RenderSize.Width + XOffset - relativePos.X;
+            var yScroll = anchor.Value.Y * RenderSize.Height + YOffset - relativePos.Y;
+            _scrollable.ScrollPosition = Point.Round(new PointF(xScroll, yScroll));
         }
     }
 
@@ -339,7 +443,7 @@ public class PreviewForm : EtoDialogBase
         }
     }
 
-    protected override async void OnKeyDown(KeyEventArgs? e)
+    protected override async void OnKeyDown(KeyEventArgs e)
     {
         if (!(e.Control || e.Shift || e.Alt))
         {
@@ -363,6 +467,15 @@ public class PreviewForm : EtoDialogBase
         }
 
         e.Handled = _ksm.Perform(e.KeyData);
+    }
+
+    private void OnMouseWheel(object? sender, MouseEventArgs e)
+    {
+        if (e.Modifiers == Keys.Control)
+        {
+            Zoom(e.Delta.Height);
+            e.Handled = true;
+        }
     }
 
     private void AssignKeyboardShortcuts()

@@ -222,4 +222,20 @@ public class WinFormsEtoPlatform : EtoPlatform
     {
         return sd.Icon.ExtractAssociatedIcon(exePath)?.ToBitmap().ToEto();
     }
+
+    public override void AttachMouseWheelEvent(Control control, EventHandler<MouseEventArgs> handler)
+    {
+        var wfControl = control.ToNative();
+        wfControl.MouseWheel += (sender, args) =>
+        {
+            // TODO: We need to override OnMouseWheel in the Eto CustomScrollable control to make sure
+            // the scroll view doesn't double-handle the mouse wheel event
+            var etoArgs = args.ToEto(wfControl);
+            handler.Invoke(sender, etoArgs);
+            if (args is wf.HandledMouseEventArgs handledArgs)
+            {
+                handledArgs.Handled |= etoArgs.Handled;
+            }
+        };
+    }
 }

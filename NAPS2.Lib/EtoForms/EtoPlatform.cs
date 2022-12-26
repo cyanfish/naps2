@@ -112,4 +112,9 @@ public abstract class EtoPlatform
     }
 
     public virtual Bitmap? ExtractAssociatedIcon(string exePath) => throw new NotSupportedException();
+
+    public virtual void AttachMouseWheelEvent(Control control, EventHandler<MouseEventArgs> handler)
+    {
+        control.MouseWheel += handler;
+    }
 }
