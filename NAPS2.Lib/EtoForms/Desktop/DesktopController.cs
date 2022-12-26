@@ -373,7 +373,6 @@ public class DesktopController
 
     public void Delete()
     {
-        // TODO: Move to ImageListActions and use a null parent form
         if (_imageList.Selection.Any())
         {
             if (MessageBox.Show(_desktopFormProvider.DesktopForm,

@@ -290,17 +290,19 @@ public class DesktopCommands
         };
     }
 
-    public DesktopCommands WithSelection(ListSelection<UiImage> selection)
+    public DesktopCommands WithSelection(Func<ListSelection<UiImage>> selectionFunc)
     {
         return new DesktopCommands(
             _desktopController,
             _desktopScanController,
             _desktopSubFormController,
             _imageList,
-            _imageListActions.WithSelection(selection),
+            _imageListActions.WithSelection(selectionFunc),
             _thumbnailController,
             _iconProvider);
     }
+
+    public ImageListActions ImageListActions => _imageListActions;
 
     public ActionCommand Scan { get; set; }
     public ActionCommand NewProfile { get; set; }

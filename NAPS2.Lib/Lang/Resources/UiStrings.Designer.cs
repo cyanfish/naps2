@@ -2040,6 +2040,15 @@ namespace NAPS2.Lang.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Zoom Actual.
+        /// </summary>
+        internal static string ZoomActual {
+            get {
+                return ResourceManager.GetString("ZoomActual", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Zoom In.
         /// </summary>
         internal static string ZoomIn {

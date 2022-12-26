@@ -291,6 +291,9 @@
   <data name="ZoomOut" xml:space="preserve">
     <value>Zoom Out</value>
   </data>
+  <data name="ZoomActual" xml:space="preserve">
+    <value>Zoom Actual</value>
+  </data>
   <data name="Save" xml:space="preserve">
     <value>Save</value>
   </data>

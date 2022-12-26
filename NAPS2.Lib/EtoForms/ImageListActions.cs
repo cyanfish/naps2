@@ -23,14 +23,16 @@ public class ImageListActions
         _notify = notify;
     }
 
-    private ListSelection<UiImage>? Selection { get; init; }
+    private Func<ListSelection<UiImage>>? SelectionFunc { get; init; }
 
-    public ImageListActions WithSelection(ListSelection<UiImage> selection)
+    private ListSelection<UiImage>? Selection => SelectionFunc?.Invoke();
+
+    public ImageListActions WithSelection(Func<ListSelection<UiImage>> selectionFunc)
     {
         return new ImageListActions(_imageList, _operationFactory, _operationProgress, _config, _thumbnailController,
             _exportController, _notify)
         {
-            Selection = selection
+            SelectionFunc = selectionFunc
         };
     }
 
