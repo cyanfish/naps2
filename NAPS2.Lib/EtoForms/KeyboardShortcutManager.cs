@@ -18,6 +18,16 @@ public class KeyboardShortcutManager
         { "break", Keys.Pause },
         { "oemplus", Keys.Equal },
         { "oemminus", Keys.Minus },
+        { "0", Keys.D0 },
+        { "1", Keys.D1 },
+        { "2", Keys.D2 },
+        { "3", Keys.D3 },
+        { "4", Keys.D4 },
+        { "5", Keys.D5 },
+        { "6", Keys.D6 },
+        { "7", Keys.D7 },
+        { "8", Keys.D8 },
+        { "9", Keys.D9 }
     }; 
 
     public Keys Parse(string? value)

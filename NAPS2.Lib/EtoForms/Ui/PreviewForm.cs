@@ -9,8 +9,11 @@ public class PreviewForm : EtoDialogBase
     private readonly IIconProvider _iconProvider;
     private readonly KeyboardShortcutManager _ksm;
 
-    private readonly ImageView _imageView = new();
+    private readonly Scrollable _scrollable = new() { Border = BorderType.None };
+    private readonly Drawable _imageView = new() { BackgroundColor = Colors.White };
     private UiImage? _currentImage;
+    private Bitmap? _renderedImage;
+    private Size _renderSize;
 
     public PreviewForm(Naps2Config config, DesktopCommands desktopCommands, UiImageList imageList,
         IIconProvider iconProvider, KeyboardShortcutManager ksm) : base(config)
@@ -19,6 +22,9 @@ public class PreviewForm : EtoDialogBase
         ImageList = imageList;
         _iconProvider = iconProvider;
         _ksm = ksm;
+
+        _scrollable.Content = _imageView;
+        _imageView.Paint += ImagePaint;
 
         GoToPrevCommand = new ActionCommand(() => GoTo(ImageIndex - 1))
         {
@@ -40,7 +46,12 @@ public class PreviewForm : EtoDialogBase
             Text = UiStrings.ZoomOut,
             Image = iconProvider.GetIcon("zoom_out")
         };
-        ZoomActualCommand = new ActionCommand(ZoomToWindow)
+        ZoomWindowCommand = new ActionCommand(ZoomToWindow)
+        {
+            Text = UiStrings.ZoomActual,
+            Image = iconProvider.GetIcon("zoom_actual")
+        };
+        ZoomActualCommand = new ActionCommand(ZoomToActual)
         {
             Text = UiStrings.ZoomActual,
             Image = iconProvider.GetIcon("zoom_actual")
@@ -52,6 +63,18 @@ public class PreviewForm : EtoDialogBase
         };
     }
 
+    private void ImagePaint(object sender, PaintEventArgs e)
+    {
+        e.Graphics.Clear(Colors.White);
+        if (_renderedImage != null)
+        {
+            var xOff = (_imageView.Width - RenderSize.Width) / 2;
+            var yOff = (_imageView.Height - RenderSize.Height) / 2;
+            e.Graphics.DrawRectangle(Colors.Black, xOff - 1, yOff - 1, RenderSize.Width + 1, RenderSize.Height + 1);
+            e.Graphics.DrawImage(_renderedImage, xOff, yOff, RenderSize.Width, RenderSize.Height);
+        }
+    }
+
     protected override void BuildLayout()
     {
         Title = UiStrings.PreviewFormTitle;
@@ -61,7 +84,7 @@ public class PreviewForm : EtoDialogBase
         FormStateController.DefaultClientSize = new Size(800, 600);
 
         LayoutController.RootPadding = 0;
-        LayoutController.Content = _imageView;
+        LayoutController.Content = _scrollable;
     }
 
     protected DesktopCommands Commands { get; set; } = null!;
@@ -74,6 +97,17 @@ public class PreviewForm : EtoDialogBase
     protected ActionCommand ZoomActualCommand { get; }
 
     protected UiImageList ImageList { get; }
+
+    protected Size RenderSize
+    {
+        get => _renderSize;
+        set
+        {
+            _renderSize = value;
+            _imageView.Size = value + new Size(2, 2);
+            _imageView.Invalidate();
+        }
+    }
 
     public UiImage CurrentImage
     {
@@ -135,6 +169,12 @@ public class PreviewForm : EtoDialogBase
         await UpdateImage();
     }
 
+    protected override void OnShown(EventArgs e)
+    {
+        base.OnShown(e);
+        ZoomToWindow();
+    }
+
     protected virtual void CreateToolbar()
     {
         ToolBar = new ToolBar
@@ -163,7 +203,6 @@ public class PreviewForm : EtoDialogBase
                 MakeToolButton(Commands.SaveSelectedPdf, _iconProvider.GetIcon("file_extension_pdf")),
                 MakeToolButton(Commands.SaveSelectedImages, _iconProvider.GetIcon("picture_small")),
                 new SeparatorToolItem(),
-                // TODO: Fix handling of deletion (
                 MakeToolButton(DeleteCurrentImageCommand),
             }
         };
@@ -213,19 +252,43 @@ public class PreviewForm : EtoDialogBase
         // _tiffViewer1.Image = null;
         using var imageToRender = CurrentImage.GetClonedImage();
         var rendered = await Task.Run(() => imageToRender.Render());
-        _imageView.Image = rendered.ToEtoImage();
-        LayoutController.Invalidate();
+        _renderedImage = rendered.ToEtoImage();
+        ZoomToWindow();
         // _tiffViewer1.Image = imageToRender.RenderToBitmap();
     }
 
     private void Zoom(double step)
     {
-        // TODO
+        RenderSize = Size.Round(RenderSize * (float) Math.Pow(1.1, step));
+        // TODO: Min/max?
+    }
+
+    private void ZoomToActual()
+    {
+        if (_renderedImage == null) return;
+        RenderSize = new Size(_renderedImage.Width, _renderedImage.Height);
     }
 
     private void ZoomToWindow()
     {
-        // TODO
+        if (_renderedImage == null || !_scrollable.Loaded) return;
+        if (_renderedImage.Width / (float) _renderedImage.Height > _scrollable.Width / (float) _scrollable.Height)
+        {
+            RenderSize = new Size(_scrollable.Width,
+                (int) Math.Round(_renderedImage.Height * _scrollable.Width / (float) _renderedImage.Width));
+        }
+        else
+        {
+            RenderSize =
+                new Size((int) Math.Round(_renderedImage.Width * _scrollable.Height / (float) _renderedImage.Height),
+                    _scrollable.Height);
+        }
+    }
+
+    protected override void OnSizeChanged(EventArgs e)
+    {
+        base.OnSizeChanged(e);
+        ZoomToWindow();
     }
 
     // private async void tbPageCurrent_TextChanged(object sender, EventArgs e)
@@ -276,7 +339,7 @@ public class PreviewForm : EtoDialogBase
         }
     }
 
-    protected override async void OnKeyDown(KeyEventArgs e)
+    protected override async void OnKeyDown(KeyEventArgs? e)
     {
         if (!(e.Control || e.Shift || e.Alt))
         {
@@ -307,6 +370,9 @@ public class PreviewForm : EtoDialogBase
         // Defaults
 
         _ksm.Assign("Del", DeleteCurrentImageCommand);
+        _ksm.Assign("Ctrl+Oemplus", ZoomInCommand);
+        _ksm.Assign("Ctrl+OemMinus", ZoomOutCommand);
+        _ksm.Assign("Ctrl+0", ZoomActualCommand);
 
         // Configured
 
@@ -333,7 +399,8 @@ public class PreviewForm : EtoDialogBase
     {
         if (disposing)
         {
-            _imageView.Image?.Dispose();
+            _renderedImage?.Dispose();
+            _renderedImage = null;
         }
         base.Dispose(disposing);
     }
