@@ -5,6 +5,7 @@ using Eto.Forms;
 using Eto.WinForms;
 using Eto.WinForms.Forms.Controls;
 using NAPS2.EtoForms.Layout;
+using NAPS2.EtoForms.Widgets;
 using NAPS2.Images.Gdi;
 using sd = System.Drawing;
 using wf = System.Windows.Forms;

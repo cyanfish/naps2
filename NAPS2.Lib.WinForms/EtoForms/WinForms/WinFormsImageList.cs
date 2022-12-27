@@ -1,6 +1,7 @@
 using System.Drawing;
 using System.Windows.Forms;
 using Eto.WinForms;
+using NAPS2.EtoForms.Widgets;
 
 namespace NAPS2.EtoForms.WinForms;
 

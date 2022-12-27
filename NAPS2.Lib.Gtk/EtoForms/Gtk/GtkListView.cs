@@ -1,6 +1,7 @@
 using Eto.Forms;
 using Eto.GtkSharp;
 using Gtk;
+using NAPS2.EtoForms.Widgets;
 using Label = Gtk.Label;
 using Orientation = Gtk.Orientation;
 

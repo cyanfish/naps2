@@ -2,6 +2,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using Eto.WinForms;
 using Eto.WinForms.Forms.Menu;
+using NAPS2.EtoForms.Widgets;
 using NAPS2.WinForms;
 using ContextMenu = Eto.Forms.ContextMenu;
 

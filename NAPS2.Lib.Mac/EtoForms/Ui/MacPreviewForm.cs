@@ -1,4 +1,5 @@
 using Eto.Forms;
+using NAPS2.EtoForms.Desktop;
 using NAPS2.EtoForms.Mac;
 
 namespace NAPS2.EtoForms.Ui;
@@ -6,7 +7,8 @@ namespace NAPS2.EtoForms.Ui;
 public class MacPreviewForm : PreviewForm
 {
     public MacPreviewForm(Naps2Config config, DesktopCommands desktopCommands, UiImageList imageList,
-        IIconProvider iconProvider) : base(config, desktopCommands, imageList, iconProvider)
+        IIconProvider iconProvider, KeyboardShortcutManager ksm) : base(config, desktopCommands, imageList,
+        iconProvider, ksm)
     {
     }
 

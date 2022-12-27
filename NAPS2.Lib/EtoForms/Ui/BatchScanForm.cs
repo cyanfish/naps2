@@ -4,6 +4,7 @@ using System.Threading;
 using Eto.Forms;
 using NAPS2.Config.Model;
 using NAPS2.EtoForms.Layout;
+using NAPS2.EtoForms.Widgets;
 using NAPS2.ImportExport;
 using NAPS2.Scan;
 using NAPS2.Scan.Batch;

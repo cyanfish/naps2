@@ -1,6 +1,6 @@
 using Eto.Forms;
 
-namespace NAPS2.EtoForms;
+namespace NAPS2.EtoForms.Widgets;
 
 public interface IListView<T> : Util.ISelectable<T> where T : notnull
 {

@@ -1,4 +1,6 @@
-namespace NAPS2.EtoForms;
+using NAPS2.ImportExport;
+
+namespace NAPS2.EtoForms.Desktop;
 
 public class ImageListActions
 {

@@ -4,6 +4,7 @@ using Eto.Forms;
 using Eto.Mac;
 using Eto.Mac.Drawing;
 using NAPS2.EtoForms.Layout;
+using NAPS2.EtoForms.Widgets;
 using NAPS2.Images.Mac;
 
 namespace NAPS2.EtoForms.Mac;

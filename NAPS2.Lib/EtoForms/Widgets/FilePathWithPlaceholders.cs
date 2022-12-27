@@ -2,7 +2,7 @@ using Eto.Forms;
 using NAPS2.EtoForms.Layout;
 using NAPS2.EtoForms.Ui;
 
-namespace NAPS2.EtoForms;
+namespace NAPS2.EtoForms.Widgets;
 
 public class FilePathWithPlaceholders
 {

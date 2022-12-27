@@ -1,6 +1,7 @@
 using Eto.Drawing;
 using Eto.Forms;
 using NAPS2.EtoForms.Layout;
+using NAPS2.EtoForms.Widgets;
 using NAPS2.ImportExport.Email;
 using NAPS2.ImportExport.Email.Mapi;
 using NAPS2.ImportExport.Images;

@@ -1,6 +1,7 @@
 using Eto.Forms;
 using Eto.Mac;
 using Eto.Mac.Forms.Menu;
+using NAPS2.EtoForms.Widgets;
 
 namespace NAPS2.EtoForms.Mac;
 

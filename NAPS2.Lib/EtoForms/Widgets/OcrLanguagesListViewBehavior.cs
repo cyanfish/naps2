@@ -1,6 +1,6 @@
 using NAPS2.Ocr;
 
-namespace NAPS2.EtoForms;
+namespace NAPS2.EtoForms.Widgets;
 
 public class OcrLanguagesListViewBehavior : ListViewBehavior<Language>
 {

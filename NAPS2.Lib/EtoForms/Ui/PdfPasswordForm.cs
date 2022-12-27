@@ -1,4 +1,5 @@
 using NAPS2.EtoForms.Layout;
+using NAPS2.EtoForms.Widgets;
 
 namespace NAPS2.EtoForms.Ui;
 

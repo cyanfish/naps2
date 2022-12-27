@@ -3,7 +3,7 @@ using Eto.Forms;
 using NAPS2.ImportExport.Profiles;
 using NAPS2.Scan;
 
-namespace NAPS2.EtoForms;
+namespace NAPS2.EtoForms.Widgets;
 
 public class ProfileListViewBehavior : ListViewBehavior<ScanProfile>
 {

@@ -1,7 +1,7 @@
 using Eto.Forms;
 using NAPS2.EtoForms.Layout;
 
-namespace NAPS2.EtoForms;
+namespace NAPS2.EtoForms.Widgets;
 
 public class PasswordBoxWithToggle
 {

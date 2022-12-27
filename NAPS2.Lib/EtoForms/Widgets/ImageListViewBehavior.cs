@@ -3,7 +3,7 @@ using Eto.Forms;
 using Google.Protobuf;
 using NAPS2.ImportExport.Images;
 
-namespace NAPS2.EtoForms;
+namespace NAPS2.EtoForms.Widgets;
 
 public class ImageListViewBehavior : ListViewBehavior<UiImage>
 {

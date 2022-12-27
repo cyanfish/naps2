@@ -1,4 +1,4 @@
-namespace NAPS2.EtoForms;
+namespace NAPS2.ImportExport;
 
 public interface IExportController
 {

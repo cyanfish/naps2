@@ -1,9 +1,9 @@
-﻿using NAPS2.ImportExport;
+﻿using NAPS2.EtoForms;
 using NAPS2.ImportExport.Email;
 using NAPS2.ImportExport.Images;
 using NAPS2.ImportExport.Pdf;
 
-namespace NAPS2.EtoForms;
+namespace NAPS2.ImportExport;
 
 public class ExportController : IExportController
 {

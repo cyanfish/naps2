@@ -1,4 +1,5 @@
 using NAPS2.EtoForms;
+using NAPS2.EtoForms.Widgets;
 
 namespace NAPS2.Images;
 

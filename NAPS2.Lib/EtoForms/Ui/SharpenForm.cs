@@ -1,4 +1,5 @@
 using Eto.Drawing;
+using NAPS2.EtoForms.Widgets;
 
 namespace NAPS2.EtoForms.Ui;
 

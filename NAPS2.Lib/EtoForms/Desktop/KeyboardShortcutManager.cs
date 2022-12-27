@@ -1,6 +1,6 @@
 ﻿using Eto.Forms;
 
-namespace NAPS2.EtoForms;
+namespace NAPS2.EtoForms.Desktop;
 
 /// <summary>
 /// A helper class to assign keyboard shortcuts to commands.

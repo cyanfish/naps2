@@ -1,8 +1,7 @@
 using Eto.Drawing;
 using Eto.Forms;
-using IDataObject = Eto.Forms.IDataObject;
 
-namespace NAPS2.EtoForms;
+namespace NAPS2.EtoForms.Widgets;
 
 public abstract class ListViewBehavior<T> where T : notnull
 {

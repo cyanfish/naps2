@@ -1,3 +1,5 @@
+using NAPS2.EtoForms.Widgets;
+
 namespace NAPS2.EtoForms.Mac;
 
 public class ListViewDataSource<T> : NSCollectionViewDataSource where T : notnull
