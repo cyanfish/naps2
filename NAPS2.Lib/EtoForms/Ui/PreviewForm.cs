@@ -11,6 +11,8 @@ public class PreviewForm : EtoDialogBase
     private readonly IIconProvider _iconProvider;
     private readonly KeyboardShortcutManager _ksm;
 
+    private readonly ButtonToolItem _pageNumberButton = new();
+    private readonly ButtonToolItem _zoomPercentButton = new();
     private readonly ScrollZoomImageViewer _imageViewer = new();
     private UiImage? _currentImage;
 
@@ -21,6 +23,8 @@ public class PreviewForm : EtoDialogBase
         ImageList = imageList;
         _iconProvider = iconProvider;
         _ksm = ksm;
+
+        _imageViewer.ZoomChanged += ImageViewerZoomChanged;
 
         GoToPrevCommand = new ActionCommand(() => GoTo(ImageIndex - 1))
         {
@@ -44,8 +48,9 @@ public class PreviewForm : EtoDialogBase
         };
         ZoomWindowCommand = new ActionCommand(_imageViewer.ZoomToContainer)
         {
-            Text = UiStrings.ZoomActual,
-            Image = iconProvider.GetIcon("zoom_actual")
+            // TODO: Update this string as it's now a button and not a toggle
+            Text = UiStrings.ScaleWithWindow,
+            Image = iconProvider.GetIcon("arrow_out")
         };
         ZoomActualCommand = new ActionCommand(_imageViewer.ZoomToActual)
         {
@@ -57,6 +62,11 @@ public class PreviewForm : EtoDialogBase
             Text = UiStrings.Delete,
             Image = iconProvider.GetIcon("cross")
         };
+    }
+
+    private void ImageViewerZoomChanged(object? sender, ZoomChangedEventArgs e)
+    {
+        _zoomPercentButton.Text = e.Zoom.ToString("P0");
     }
 
     protected override void BuildLayout()
@@ -118,18 +128,7 @@ public class PreviewForm : EtoDialogBase
     protected override async void OnLoad(EventArgs eventArgs)
     {
         base.OnLoad(eventArgs);
-        // TODO: Implement
-        // _tbPageCurrent.Visible = PlatformCompat.Runtime.IsToolbarTextboxSupported;
-        // if (Config.Get(c => c.HiddenButtons).HasFlag(ToolbarButtons.SavePdf))
-        // {
-        //     _toolStrip1.Items.Remove(_tsSavePdf);
-        // }
-        // if (Config.Get(c => c.HiddenButtons).HasFlag(ToolbarButtons.SaveImages))
-        // {
-        //     _toolStrip1.Items.Remove(_tsSaveImage);
-        // }
 
-        // TODO: Implement mouse and keyboard controls
         AssignKeyboardShortcuts();
 
         // TODO: We should definitely start with separate image forms, but it might be fairly trivial to, when opened
@@ -138,8 +137,8 @@ public class PreviewForm : EtoDialogBase
         // desktop form should still open the full image editing form (for now at least).
         CreateToolbar();
 
-        UpdatePage();
         await UpdateImage();
+        UpdatePage();
     }
 
     protected override void OnShown(EventArgs e)
@@ -154,6 +153,17 @@ public class PreviewForm : EtoDialogBase
         {
             Items =
             {
+                // TODO: Either embed an editable textbox, or make this button pop up a window or widget to enter a page number
+                _pageNumberButton,
+                MakeToolButton(GoToPrevCommand),
+                MakeToolButton(GoToNextCommand),
+                new SeparatorToolItem(),
+                MakeToolButton(ZoomWindowCommand),
+                MakeToolButton(ZoomActualCommand),
+                MakeToolButton(ZoomInCommand),
+                MakeToolButton(ZoomOutCommand),
+                _zoomPercentButton,
+                new SeparatorToolItem(),
                 new DropDownToolItem
                 {
                     Image = _iconProvider.GetIcon("arrow_rotate_anticlockwise_small"),
@@ -179,6 +189,14 @@ public class PreviewForm : EtoDialogBase
                 MakeToolButton(DeleteCurrentImageCommand),
             }
         };
+        if (Config.Get(c => c.HiddenButtons).HasFlag(ToolbarButtons.SavePdf))
+        {
+            ToolBar.Items.Remove(ToolBar.Items.Single(x => x.Command == Commands.SaveSelectedPdf));
+        }
+        if (Config.Get(c => c.HiddenButtons).HasFlag(ToolbarButtons.SaveImages))
+        {
+            ToolBar.Items.Remove(ToolBar.Items.Single(x => x.Command == Commands.SaveSelectedImages));
+        }
     }
 
     private ToolItem MakeToolButton(ActionCommand command, Image? image = null)
@@ -203,31 +221,22 @@ public class PreviewForm : EtoDialogBase
             CurrentImage = ImageList.Images[index];
             ImageList.UpdateSelection(ListSelection.Of(CurrentImage));
         }
-        UpdatePage();
         await UpdateImage();
+        UpdatePage();
     }
 
     protected virtual void UpdatePage()
     {
-        // TODO: Implement
-        // _tbPageCurrent.Text = (ImageIndex + 1).ToString(CultureInfo.CurrentCulture);
-        // _lblPageTotal.Text = string.Format(MiscResources.OfN, _imageList.Images.Count);
-        // if (!PlatformCompat.Runtime.IsToolbarTextboxSupported)
-        // {
-        //     _lblPageTotal.Text = _tbPageCurrent.Text + ' ' + _lblPageTotal.Text;
-        // }
+        _pageNumberButton.Text = string.Format(UiStrings.XOfY, ImageIndex + 1, ImageList.Images.Count);
     }
 
     private async Task UpdateImage()
     {
-        // TODO: Implement
-        // _tiffViewer1.Image?.Dispose();
-        // _tiffViewer1.Image = null;
         using var imageToRender = CurrentImage.GetClonedImage();
         var rendered = await Task.Run(() => imageToRender.Render());
+        _imageViewer.Image?.Dispose();
         _imageViewer.Image = rendered.ToEtoImage();
         _imageViewer.ZoomToContainer();
-        // _tiffViewer1.Image = imageToRender.RenderToBitmap();
     }
 
     protected override void OnSizeChanged(EventArgs e)
@@ -235,14 +244,6 @@ public class PreviewForm : EtoDialogBase
         base.OnSizeChanged(e);
         _imageViewer.ZoomToContainer();
     }
-
-    // private async void tbPageCurrent_TextChanged(object sender, EventArgs e)
-    // {
-    //     if (int.TryParse(_tbPageCurrent.Text, out int indexOffBy1))
-    //     {
-    //         await GoTo(indexOffBy1 - 1);
-    //     }
-    // }
 
     private async Task DeleteCurrentImage()
     {

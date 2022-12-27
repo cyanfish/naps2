@@ -30,6 +30,8 @@ public class ScrollZoomImageViewer
 
     public Bitmap? Image { get; set; }
 
+    public event EventHandler<ZoomChangedEventArgs>? ZoomChanged;
+
     private Size RenderSize
     {
         get => _renderSize;
@@ -87,40 +89,41 @@ public class ScrollZoomImageViewer
     {
         if (e.Modifiers == Keys.Control)
         {
-            ChangeZoom(e.Delta.Height);
+            ChangeZoom(e.Delta.Height, true);
             e.Handled = true;
         }
     }
 
     private void ImagePaint(object? sender, PaintEventArgs e)
     {
+        e.Graphics.SetClip(e.ClipRectangle);
         e.Graphics.Clear(Colors.White);
         if (Image != null)
         {
             e.Graphics.DrawRectangle(Colors.Black, XOffset - 1, YOffset - 1, RenderSize.Width + 1,
                 RenderSize.Height + 1);
-            // TODO: Do we need to take ClipRectangle into account here?
             e.Graphics.DrawImage(Image, XOffset, YOffset, RenderSize.Width, RenderSize.Height);
         }
     }
 
-    public void ChangeZoom(float step)
+    public void ChangeZoom(float step, bool anchorToMouse = false)
     {
         _renderFactor *= (float) Math.Pow(1.2, step);
+        _renderFactor = _renderFactor.Clamp(0.1f, 10);
         _scrollable.SuspendLayout();
-        var anchor = GetMouseAnchor();
-        Debug.WriteLine($"Anchor: {anchor}");
+        var anchor = GetMouseAnchor(anchorToMouse);
         RenderSize =
             Size.Round(new SizeF(Image!.Width * _renderFactor, Image.Height * _renderFactor));
         SetMouseAnchor(anchor);
         _scrollable.ResumeLayout();
-        // TODO: Min/max?
+        ZoomChanged?.Invoke(this, new ZoomChangedEventArgs(_renderFactor));
     }
 
     public void ZoomToActual()
     {
         RenderSize = new Size(Image!.Width, Image.Height);
         _renderFactor = 1f;
+        ZoomChanged?.Invoke(this, new ZoomChangedEventArgs(_renderFactor));
     }
 
     public void ZoomToContainer()
@@ -142,6 +145,7 @@ public class ScrollZoomImageViewer
                     AvailableHeight);
             _renderFactor = AvailableHeight / (float) Image.Height;
         }
+        ZoomChanged?.Invoke(this, new ZoomChangedEventArgs(_renderFactor));
     }
 
     // When we zoom in/out (e.g. with Ctrl+mousewheel), we want the point in the image underneath the mouse cursor to
@@ -151,13 +155,14 @@ public class ScrollZoomImageViewer
     // This function calculates the image anchor as a fraction (i.e. a point in the range [<0,0>, <1,1>]). It also
     // returns the mouse position relative to the top left of the Scrollable (or the middle of the scrollable if the
     // mouse is not overtop the image).
-    private (PointF imageAnchor, PointF mouseRelativePos) GetMouseAnchor()
+    private (PointF imageAnchor, PointF mouseRelativePos) GetMouseAnchor(bool anchorToMouse)
     {
         var anchorMiddle = new PointF(0.5f, 0.5f);
         var scrollableMiddle = new PointF(
             _scrollable.Location.X + _scrollable.Width / 2,
             _scrollable.Location.Y + _scrollable.Height / 2);
-        if (_mousePos is not { } mousePos ||
+        if (!anchorToMouse ||
+            _mousePos is not { } mousePos ||
             mousePos.X < _scrollable.Location.X ||
             mousePos.Y < _scrollable.Location.Y ||
             mousePos.X > _scrollable.Location.X + _scrollable.Width ||
@@ -181,6 +186,7 @@ public class ScrollZoomImageViewer
     // in the image that was underneath the mouse back there (after the image size has been changed).
     private void SetMouseAnchor((PointF imageAnchor, PointF mouseRelativePos) anchor)
     {
+        // TODO: This is off a bit for the "middle" anchor, probably because the scrollbars themselves appear
         var xScroll = anchor.imageAnchor.X * RenderSize.Width + XOffset - anchor.mouseRelativePos.X;
         var yScroll = anchor.imageAnchor.Y * RenderSize.Height + YOffset - anchor.mouseRelativePos.Y;
         _scrollable.ScrollPosition = Point.Round(new PointF(xScroll, yScroll));

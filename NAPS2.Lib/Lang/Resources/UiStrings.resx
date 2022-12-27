@@ -294,6 +294,9 @@
   <data name="ZoomActual" xml:space="preserve">
     <value>Zoom Actual</value>
   </data>
+  <data name="ScaleWithWindow" xml:space="preserve">
+    <value>Scale With Window</value>
+  </data>
   <data name="Save" xml:space="preserve">
     <value>Save</value>
   </data>

@@ -1725,6 +1725,15 @@ namespace NAPS2.Lang.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Scale With Window.
+        /// </summary>
+        internal static string ScaleWithWindow {
+            get {
+                return ResourceManager.GetString("ScaleWithWindow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Scan.
         /// </summary>
         internal static string Scan {
