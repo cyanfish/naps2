@@ -77,6 +77,7 @@ public class PreviewForm : EtoDialogBase
 
     private void OnMouseEnter(object? sender, MouseEventArgs e)
     {
+        // TODO: Mouse enter/leave events aren't firing on WinForms, why?
         _mousePos = e.Location;
     }
 
@@ -350,43 +351,46 @@ public class PreviewForm : EtoDialogBase
         }
     }
 
-    private PointF? GetMouseAnchor()
+    // When we zoom in/out (e.g. with Ctrl+mousewheel), we want the point in the image underneath the mouse cursor to
+    // stay stationary relative to the mouse (as much as permitted by the available scroll region). If the mouse is not
+    // overtop the image, the middle of the image (as currently visible) should stay stationary.
+    //
+    // This function calculates the image anchor as a fraction (i.e. a point in the range [<0,0>, <1,1>]). It also
+    // returns the mouse position relative to the top left of the Scrollable (or the middle of the scrollable if the
+    // mouse is not overtop the image).
+    private (PointF imageAnchor, PointF mouseRelativePos) GetMouseAnchor()
     {
+        var anchorMiddle = new PointF(0.5f, 0.5f);
+        var scrollableMiddle = new PointF(
+            _scrollable.Location.X + _scrollable.Width / 2,
+            _scrollable.Location.Y + _scrollable.Height / 2);
         if (_mousePos is not { } mousePos ||
-            mousePos.X < _scrollable.Location.X + 1 ||
-            mousePos.Y < _scrollable.Location.Y + 1 ||
-            mousePos.X > _scrollable.Location.X + _scrollable.Width - 2 ||
-            mousePos.Y > _scrollable.Location.Y + _scrollable.Height - 2)
+            mousePos.X < _scrollable.Location.X ||
+            mousePos.Y < _scrollable.Location.Y ||
+            mousePos.X > _scrollable.Location.X + _scrollable.Width ||
+            mousePos.Y > _scrollable.Location.Y + _scrollable.Height)
         {
-            return null;
+            // Mouse is outside the scrollable
+            return (anchorMiddle, scrollableMiddle);
         }
-        var relativePos = mousePos - _scrollable.Location - new Point(1, 1);
-        var x = (relativePos.X + _scrollable.ScrollPosition.X - XOffset) / RenderSize.Width;
-        var y = (relativePos.Y + _scrollable.ScrollPosition.Y - YOffset) / RenderSize.Height;
+        var mouseRelativePos = mousePos - _scrollable.Location - new Point(1, 1);
+        var x = (mouseRelativePos.X + _scrollable.ScrollPosition.X - XOffset) / RenderSize.Width;
+        var y = (mouseRelativePos.Y + _scrollable.ScrollPosition.Y - YOffset) / RenderSize.Height;
         if (x < 0 || y < 0 || x > 1 || y > 1)
         {
-            return null;
+            // Mouse is inside the scrollable but outside the area covered by the image
+            return (anchorMiddle, scrollableMiddle);
         }
-        return new PointF(x, y);
+        return (new PointF(x, y), mouseRelativePos);
     }
 
-    private void SetMouseAnchor(PointF? anchor)
+    // This function inverts the calculation done in GetMouseAnchor to get the correct scroll position to move the point
+    // in the image that was underneath the mouse back there (after the image size has been changed).
+    private void SetMouseAnchor((PointF imageAnchor, PointF mouseRelativePos) anchor)
     {
-        if (_mousePos is not { } mousePos)
-        {
-            throw new InvalidOperationException();
-        }
-        if (anchor == null)
-        {
-            // TODO: Keep center aligned somehow
-        }
-        else
-        {
-            var relativePos = mousePos - _scrollable.Location - new Point(1, 1);
-            var xScroll = anchor.Value.X * RenderSize.Width + XOffset - relativePos.X;
-            var yScroll = anchor.Value.Y * RenderSize.Height + YOffset - relativePos.Y;
-            _scrollable.ScrollPosition = Point.Round(new PointF(xScroll, yScroll));
-        }
+        var xScroll = anchor.imageAnchor.X * RenderSize.Width + XOffset - anchor.mouseRelativePos.X;
+        var yScroll = anchor.imageAnchor.Y * RenderSize.Height + YOffset - anchor.mouseRelativePos.Y;
+        _scrollable.ScrollPosition = Point.Round(new PointF(xScroll, yScroll));
     }
 
     protected override void OnSizeChanged(EventArgs e)

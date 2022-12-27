@@ -223,19 +223,58 @@ public class WinFormsEtoPlatform : EtoPlatform
         return sd.Icon.ExtractAssociatedIcon(exePath)?.ToBitmap().ToEto();
     }
 
-    public override void AttachMouseWheelEvent(Control control, EventHandler<MouseEventArgs> handler)
+    public override void AttachMouseWheelEvent(Control control, EventHandler<MouseEventArgs> eventHandler)
     {
-        var wfControl = control.ToNative();
-        wfControl.MouseWheel += (sender, args) =>
+        if (control is Scrollable scrollable)
         {
-            // TODO: We need to override OnMouseWheel in the Eto CustomScrollable control to make sure
-            // the scroll view doesn't double-handle the mouse wheel event
-            var etoArgs = args.ToEto(wfControl);
-            handler.Invoke(sender, etoArgs);
-            if (args is wf.HandledMouseEventArgs handledArgs)
+            var content = scrollable.Content;
+            var border = scrollable.Border;
+            var wfControl = new ScrollableWithMouseWheelEvents((ScrollableHandler) scrollable.Handler, eventHandler);
+            ((ScrollableHandler) control.Handler).Control = wfControl;
+            scrollable.Content = content;
+            scrollable.Border = border;
+        }
+        else
+        {
+            throw new NotImplementedException("Only implemented for Scrollable");
+        }
+    }
+
+    private class ScrollableWithMouseWheelEvents : ScrollableHandler.CustomScrollable
+    {
+        private readonly EventHandler<MouseEventArgs> _mouseWheelHandler;
+
+        public ScrollableWithMouseWheelEvents(ScrollableHandler handler, EventHandler<MouseEventArgs> mouseWheelHandler)
+        {
+            _mouseWheelHandler = mouseWheelHandler;
+
+            // TODO: Fix this in Eto so we don't need a custom class
+            Handler = handler;
+            Size = sd.Size.Empty;
+            MinimumSize = sd.Size.Empty;
+            BorderStyle = wf.BorderStyle.Fixed3D;
+            AutoScroll = true;
+            AutoSize = true;
+            AutoSizeMode = wf.AutoSizeMode.GrowAndShrink;
+            VerticalScroll.SmallChange = 5;
+            VerticalScroll.LargeChange = 10;
+            HorizontalScroll.SmallChange = 5;
+            HorizontalScroll.LargeChange = 10;
+            Controls.Add(handler.ContainerContentControl);
+        }
+
+        protected override void OnMouseWheel(wf.MouseEventArgs e)
+        {
+            var etoArgs = e.ToEto(this);
+            _mouseWheelHandler.Invoke(this, etoArgs);
+            if (e is wf.HandledMouseEventArgs handledArgs)
             {
                 handledArgs.Handled |= etoArgs.Handled;
             }
-        };
+            if (!etoArgs.Handled)
+            {
+                base.OnMouseWheel(e);
+            }
+        }
     }
 }
