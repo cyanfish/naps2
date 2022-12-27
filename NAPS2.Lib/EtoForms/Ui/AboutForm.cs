@@ -98,7 +98,7 @@ public class AboutForm : EtoDialogBase
                 }
                 _update = task.Result;
                 _hasCheckedForUpdates = true;
-                Invoker.Current.SafeInvoke(UpdateControls);
+                Invoker.Current.Invoke(UpdateControls);
             });
         }
     }

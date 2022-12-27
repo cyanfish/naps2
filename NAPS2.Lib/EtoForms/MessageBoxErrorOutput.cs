@@ -14,17 +14,17 @@ public class MessageBoxErrorOutput : ErrorOutput
 
     public override void DisplayError(string errorMessage)
     {
-        Invoker.Current.SafeInvoke(() => MessageBox.Show(errorMessage, MiscResources.Error, MessageBoxButtons.OK, MessageBoxType.Error));
+        Invoker.Current.Invoke(() => MessageBox.Show(errorMessage, MiscResources.Error, MessageBoxButtons.OK, MessageBoxType.Error));
     }
 
     public override void DisplayError(string errorMessage, string details)
     {
-        Invoker.Current.SafeInvoke(() => ShowErrorWithDetails(errorMessage, details));
+        Invoker.Current.Invoke(() => ShowErrorWithDetails(errorMessage, details));
     }
 
     public override void DisplayError(string errorMessage, Exception exception)
     {
-        Invoker.Current.SafeInvoke(() => ShowErrorWithDetails(errorMessage, exception.ToString()));
+        Invoker.Current.Invoke(() => ShowErrorWithDetails(errorMessage, exception.ToString()));
     }
 
     private void ShowErrorWithDetails(string errorMessage, string details)

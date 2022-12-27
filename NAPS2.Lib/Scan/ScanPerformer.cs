@@ -144,7 +144,7 @@ internal class ScanPerformer : IScanPerformer
 
         Task.Run(() =>
         {
-            Invoker.Current.SafeInvoke(() =>
+            Invoker.Current.Invoke(() =>
             {
                 if (scanParams.Modal)
                 {

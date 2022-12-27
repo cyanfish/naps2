@@ -8,7 +8,7 @@ public class NotifyWidgetBase : UserControl
 
     protected void InvokeHideNotify()
     {
-        Invoker.Current.SafeInvoke(() => HideNotify?.Invoke(this, EventArgs.Empty));
+        Invoker.Current.Invoke(() => HideNotify?.Invoke(this, EventArgs.Empty));
     }
 
     public virtual void ShowNotify()

@@ -353,8 +353,8 @@ public class BatchScanForm : EtoDialogBase
         try
         {
             await _batchScanPerformer.PerformBatchScan(Config.Get(c => c.BatchSettings), this,
-                image => Invoker.Current.SafeInvoke(() => ImageCallback(image)), ProgressCallback, _cts.Token);
-            Invoker.Current.SafeInvoke(() =>
+                image => Invoker.Current.Invoke(() => ImageCallback(image)), ProgressCallback, _cts.Token);
+            Invoker.Current.Invoke(() =>
             {
                 _status.Text = _cts.IsCancellationRequested
                     ? MiscResources.BatchStatusCancelled
@@ -377,9 +377,9 @@ public class BatchScanForm : EtoDialogBase
         {
             Log.ErrorException("Error in batch scan", ex);
             _errorOutput.DisplayError(MiscResources.BatchError, ex);
-            Invoker.Current.SafeInvoke(() => { _status.Text = MiscResources.BatchStatusError; });
+            Invoker.Current.Invoke(() => { _status.Text = MiscResources.BatchStatusError; });
         }
-        Invoker.Current.SafeInvoke(() =>
+        Invoker.Current.Invoke(() =>
         {
             _batchRunning = false;
             _cts = new CancellationTokenSource();
@@ -393,7 +393,7 @@ public class BatchScanForm : EtoDialogBase
 
     private void ProgressCallback(string status)
     {
-        Invoker.Current.SafeInvoke(() => { _status.Text = status; });
+        Invoker.Current.Invoke(() => { _status.Text = status; });
     }
 
     private void Cancel(object? sender, EventArgs e)

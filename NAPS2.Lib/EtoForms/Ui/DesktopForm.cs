@@ -148,7 +148,7 @@ public abstract class DesktopForm : EtoFormBase
 
     private void ImageList_SelectionChanged(object? sender, EventArgs e)
     {
-        Invoker.Current.SafeInvoke(() =>
+        Invoker.Current.Invoke(() =>
         {
             UpdateToolbar();
             _listView!.Selection = ImageList.Selection;
@@ -157,7 +157,7 @@ public abstract class DesktopForm : EtoFormBase
 
     private void ImageList_ImagesUpdated(object? sender, ImageListEventArgs e)
     {
-        Invoker.Current.SafeInvoke(UpdateToolbar);
+        Invoker.Current.Invoke(UpdateToolbar);
     }
 
     private void ProfileManager_ProfilesUpdated(object? sender, EventArgs e)

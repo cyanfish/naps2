@@ -49,7 +49,7 @@ public partial class OperationProgressNotifyWidget : NotifyWidgetBase
 
     private void Op_StatusChanged(object? sender, EventArgs e)
     {
-        Invoker.Current.SafeInvoke(DisplayProgress);
+        Invoker.Current.Invoke(DisplayProgress);
     }
 
     private void Op_Finished(object? sender, EventArgs e)

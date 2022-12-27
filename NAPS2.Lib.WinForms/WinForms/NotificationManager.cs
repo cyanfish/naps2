@@ -83,7 +83,7 @@ public class NotificationManager : INotificationManager
             return;
         }
             
-        Invoker.Current.SafeInvoke(() =>
+        Invoker.Current.Invoke(() =>
         {
             int slot = FillNextSlot(n);
             n.Location = GetPosition(n, slot);

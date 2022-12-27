@@ -16,9 +16,9 @@ public class SyncContextInvoker : IInvoker
         _current.Send(_ => action(), null);
     }
 
-    public void SafeInvoke(Action action)
+    public void InvokeAsync(Action action)
     {
-        _current.Send(_ => action(), null);
+        _current.Post(_ => action(), null);
     }
 
     public T InvokeGet<T>(Func<T> func)

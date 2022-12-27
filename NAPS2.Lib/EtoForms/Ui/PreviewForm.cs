@@ -109,7 +109,7 @@ public class PreviewForm : EtoDialogBase
 
     private void ImageThumbnailInvalidated(object? sender, EventArgs e)
     {
-        Invoker.Current.SafeInvoke(() => UpdateImage().AssertNoAwait());
+        Invoker.Current.Invoke(() => UpdateImage().AssertNoAwait());
     }
 
     protected int ImageIndex

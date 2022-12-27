@@ -13,22 +13,9 @@ public class WinFormsInvoker : IInvoker
 
     public void Invoke(Action action)
     {
-        _formFunc().Invoke(action);
-    }
-
-    // TODO: Maybe these can be extension methods?
-    public T InvokeGet<T>(Func<T> func)
-    {
-        T value = default!;
-        Invoke(() => value = func());
-        return value;
-    }
-
-    public void SafeInvoke(Action action)
-    {
         try
         {
-            Invoke(action);
+            _formFunc().Invoke(action);
         }
         catch (ObjectDisposedException)
         {
@@ -36,5 +23,26 @@ public class WinFormsInvoker : IInvoker
         catch (InvalidOperationException)
         {
         }
+    }
+
+    public void InvokeAsync(Action action)
+    {
+        try
+        {
+            _formFunc().BeginInvoke(action);
+        }
+        catch (ObjectDisposedException)
+        {
+        }
+        catch (InvalidOperationException)
+        {
+        }
+    }
+
+    public T InvokeGet<T>(Func<T> func)
+    {
+        T value = default!;
+        _formFunc().Invoke(() => value = func());
+        return value;
     }
 }

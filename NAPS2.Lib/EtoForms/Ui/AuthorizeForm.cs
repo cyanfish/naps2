@@ -46,7 +46,7 @@ public class AuthorizeForm : EtoDialogBase
             try
             {
                 OauthProvider.AcquireToken(_cancelTokenSource.Token);
-                Invoker.Current.SafeInvoke(() =>
+                Invoker.Current.Invoke(() =>
                 {
                     Result = true;
                     Close();
@@ -59,7 +59,7 @@ public class AuthorizeForm : EtoDialogBase
             {
                 _errorOutput.DisplayError(MiscResources.AuthError, ex);
                 Log.ErrorException("Error acquiring Oauth token", ex);
-                Invoker.Current.SafeInvoke(Close);
+                Invoker.Current.Invoke(Close);
             }
         });
     }

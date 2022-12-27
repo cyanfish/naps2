@@ -74,7 +74,7 @@ public class EtoOperationProgress : OperationProgress
 
         if (!op.IsFinished)
         {
-            Invoker.Current.SafeInvoke(() => _notificationManager.OperationProgress(this, op));
+            Invoker.Current.Invoke(() => _notificationManager.OperationProgress(this, op));
         }
     }
 

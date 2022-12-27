@@ -239,7 +239,7 @@ public class DesktopController
                 {
                 }
                 _closed = true;
-                Invoker.Current.SafeInvoke(_desktopFormProvider.DesktopForm.Close);
+                Invoker.Current.Invoke(_desktopFormProvider.DesktopForm.Close);
             });
             return false;
         }
@@ -254,12 +254,12 @@ public class DesktopController
         {
             if (msg.StartsWith(Pipes.MSG_SCAN_WITH_DEVICE, StringComparison.InvariantCulture))
             {
-                Invoker.Current.SafeInvoke(async () =>
+                Invoker.Current.Invoke(async () =>
                     await _desktopScanController.ScanWithDevice(msg.Substring(Pipes.MSG_SCAN_WITH_DEVICE.Length)));
             }
             if (msg.Equals(Pipes.MSG_ACTIVATE))
             {
-                Invoker.Current.SafeInvoke(() =>
+                Invoker.Current.Invoke(() =>
                 {
                     // TODO: xplat
                     var formOnTop = Application.Instance.Windows.Last();
@@ -272,7 +272,7 @@ public class DesktopController
             }
             if (msg.Equals(Pipes.MSG_CLOSE_WINDOW))
             {
-                Invoker.Current.SafeInvoke(() =>
+                Invoker.Current.Invoke(() =>
                 {
                     _desktopFormProvider.DesktopForm.Close();
 #if NET6_0_OR_GREATER

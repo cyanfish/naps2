@@ -105,7 +105,7 @@ public abstract class ImageFormBase : EtoDialogBase
     private void RenderImage()
     {
         var bitmap = RenderPreview();
-        Invoker.Current.SafeInvoke(() =>
+        Invoker.Current.Invoke(() =>
         {
             DisplayImage?.Dispose();
             DisplayImage = bitmap;
