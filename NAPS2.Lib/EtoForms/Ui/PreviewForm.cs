@@ -9,16 +9,8 @@ public class PreviewForm : EtoDialogBase
     private readonly IIconProvider _iconProvider;
     private readonly KeyboardShortcutManager _ksm;
 
-    private readonly Scrollable _scrollable = new() { Border = BorderType.None };
-    private readonly Drawable _imageView = new() { BackgroundColor = Colors.White };
+    private readonly ScrollZoomImageViewer _imageViewer = new();
     private UiImage? _currentImage;
-    private Bitmap? _renderedImage;
-    private Size _renderSize;
-    private float _renderFactor;
-    private PointF? _mousePos;
-    private PointF? _initialMousePos;
-    private Point? _initialScrollPos;
-    private bool _mouseIsDown;
 
     public PreviewForm(Naps2Config config, DesktopCommands desktopCommands, UiImageList imageList,
         IIconProvider iconProvider, KeyboardShortcutManager ksm) : base(config)
@@ -27,16 +19,6 @@ public class PreviewForm : EtoDialogBase
         ImageList = imageList;
         _iconProvider = iconProvider;
         _ksm = ksm;
-
-        _scrollable.Content = _imageView;
-        _imageView.Paint += ImagePaint;
-        _scrollable.MouseEnter += OnMouseEnter;
-        _scrollable.MouseLeave += OnMouseLeave;
-        _scrollable.MouseMove += OnMouseMove;
-        _scrollable.MouseDown += OnMouseDown;
-        _scrollable.MouseUp += OnMouseUp;
-        EtoPlatform.Current.AttachMouseWheelEvent(_scrollable, OnMouseWheel);
-        _scrollable.Cursor = Cursors.Pointer;
 
         GoToPrevCommand = new ActionCommand(() => GoTo(ImageIndex - 1))
         {
@@ -48,22 +30,22 @@ public class PreviewForm : EtoDialogBase
             Text = UiStrings.Next,
             Image = iconProvider.GetIcon("arrow_right")
         };
-        ZoomInCommand = new ActionCommand(() => Zoom(1))
+        ZoomInCommand = new ActionCommand(() => _imageViewer.ChangeZoom(1))
         {
             Text = UiStrings.ZoomIn,
             Image = iconProvider.GetIcon("zoom_in")
         };
-        ZoomOutCommand = new ActionCommand(() => Zoom(-1))
+        ZoomOutCommand = new ActionCommand(() => _imageViewer.ChangeZoom(-1))
         {
             Text = UiStrings.ZoomOut,
             Image = iconProvider.GetIcon("zoom_out")
         };
-        ZoomWindowCommand = new ActionCommand(ZoomToWindow)
+        ZoomWindowCommand = new ActionCommand(_imageViewer.ZoomToContainer)
         {
             Text = UiStrings.ZoomActual,
             Image = iconProvider.GetIcon("zoom_actual")
         };
-        ZoomActualCommand = new ActionCommand(ZoomToActual)
+        ZoomActualCommand = new ActionCommand(_imageViewer.ZoomToActual)
         {
             Text = UiStrings.ZoomActual,
             Image = iconProvider.GetIcon("zoom_actual")
@@ -75,50 +57,6 @@ public class PreviewForm : EtoDialogBase
         };
     }
 
-    private void OnMouseEnter(object? sender, MouseEventArgs e)
-    {
-        // TODO: Mouse enter/leave events aren't firing on WinForms, why?
-        _mousePos = e.Location;
-    }
-
-    private void OnMouseUp(object? sender, MouseEventArgs e)
-    {
-        _mouseIsDown = false;
-    }
-
-    private void OnMouseDown(object? sender, MouseEventArgs e)
-    {
-        _mouseIsDown = true;
-        _initialMousePos = e.Location;
-        _initialScrollPos = _scrollable.ScrollPosition;
-    }
-
-    private void OnMouseMove(object? sender, MouseEventArgs e)
-    {
-        if (_mouseIsDown && _initialMousePos.HasValue && _initialScrollPos.HasValue)
-        {
-            _scrollable.ScrollPosition = _initialScrollPos.Value + Point.Round(_initialMousePos.Value - e.Location);
-        }
-        _mousePos = e.Location;
-    }
-
-    private void OnMouseLeave(object? sender, MouseEventArgs e)
-    {
-        _mousePos = null;
-    }
-
-    private void ImagePaint(object? sender, PaintEventArgs e)
-    {
-        e.Graphics.Clear(Colors.White);
-        if (_renderedImage != null)
-        {
-            e.Graphics.DrawRectangle(Colors.Black, XOffset - 1, YOffset - 1, RenderSize.Width + 1,
-                RenderSize.Height + 1);
-            // TODO: Do we need to take ClipRectangle into account here?
-            e.Graphics.DrawImage(_renderedImage, XOffset, YOffset, RenderSize.Width, RenderSize.Height);
-        }
-    }
-
     protected override void BuildLayout()
     {
         Title = UiStrings.PreviewFormTitle;
@@ -128,7 +66,7 @@ public class PreviewForm : EtoDialogBase
         FormStateController.DefaultClientSize = new Size(800, 600);
 
         LayoutController.RootPadding = 0;
-        LayoutController.Content = _scrollable;
+        LayoutController.Content = _imageViewer;
     }
 
     protected DesktopCommands Commands { get; set; } = null!;
@@ -141,26 +79,6 @@ public class PreviewForm : EtoDialogBase
     protected ActionCommand ZoomActualCommand { get; }
 
     protected UiImageList ImageList { get; }
-
-    protected Size RenderSize
-    {
-        get => _renderSize;
-        set
-        {
-            _renderSize = value;
-            _imageView.Size = Size.Round(value) + new Size(2, 2);
-            _imageView.Invalidate();
-        }
-    }
-
-    protected int AvailableWidth => _scrollable.Width - 2;
-    protected int AvailableHeight => _scrollable.Height - 2;
-
-    protected bool IsWidthBound =>
-        _renderedImage!.Width / (float) _renderedImage.Height > AvailableWidth / (float) AvailableHeight;
-
-    protected float XOffset => Math.Max((_imageView.Width - RenderSize.Width) / 2, 0);
-    protected float YOffset => Math.Max((_imageView.Height - RenderSize.Height) / 2, 0);
 
     public UiImage CurrentImage
     {
@@ -225,7 +143,7 @@ public class PreviewForm : EtoDialogBase
     protected override void OnShown(EventArgs e)
     {
         base.OnShown(e);
-        ZoomToWindow();
+        _imageViewer.ZoomToContainer();
     }
 
     protected virtual void CreateToolbar()
@@ -305,98 +223,15 @@ public class PreviewForm : EtoDialogBase
         // _tiffViewer1.Image = null;
         using var imageToRender = CurrentImage.GetClonedImage();
         var rendered = await Task.Run(() => imageToRender.Render());
-        _renderedImage = rendered.ToEtoImage();
-        ZoomToWindow();
+        _imageViewer.Image = rendered.ToEtoImage();
+        _imageViewer.ZoomToContainer();
         // _tiffViewer1.Image = imageToRender.RenderToBitmap();
-    }
-
-    // TODO: Clean up this class
-    private void Zoom(float step)
-    {
-        _renderFactor *= (float) Math.Pow(1.2, step);
-        SuspendLayout();
-        var anchor = GetMouseAnchor();
-        Debug.WriteLine($"Anchor: {anchor}");
-        RenderSize =
-            Size.Round(new SizeF(_renderedImage!.Width * _renderFactor, _renderedImage.Height * _renderFactor));
-        SetMouseAnchor(anchor);
-        ResumeLayout();
-        // TODO: Min/max?
-    }
-
-    private void ZoomToActual()
-    {
-        RenderSize = new Size(_renderedImage!.Width, _renderedImage.Height);
-        _renderFactor = 1f;
-    }
-
-    private void ZoomToWindow()
-    {
-        if (!_scrollable.Loaded)
-        {
-            return;
-        }
-        if (IsWidthBound)
-        {
-            RenderSize = new Size(AvailableWidth,
-                (int) Math.Round(_renderedImage!.Height * AvailableWidth / (float) _renderedImage.Width));
-            _renderFactor = AvailableWidth / (float) _renderedImage.Width;
-        }
-        else
-        {
-            RenderSize =
-                new Size((int) Math.Round(_renderedImage!.Width * AvailableHeight / (float) _renderedImage.Height),
-                    AvailableHeight);
-            _renderFactor = AvailableHeight / (float) _renderedImage.Height;
-        }
-    }
-
-    // When we zoom in/out (e.g. with Ctrl+mousewheel), we want the point in the image underneath the mouse cursor to
-    // stay stationary relative to the mouse (as much as permitted by the available scroll region). If the mouse is not
-    // overtop the image, the middle of the image (as currently visible) should stay stationary.
-    //
-    // This function calculates the image anchor as a fraction (i.e. a point in the range [<0,0>, <1,1>]). It also
-    // returns the mouse position relative to the top left of the Scrollable (or the middle of the scrollable if the
-    // mouse is not overtop the image).
-    private (PointF imageAnchor, PointF mouseRelativePos) GetMouseAnchor()
-    {
-        var anchorMiddle = new PointF(0.5f, 0.5f);
-        var scrollableMiddle = new PointF(
-            _scrollable.Location.X + _scrollable.Width / 2,
-            _scrollable.Location.Y + _scrollable.Height / 2);
-        if (_mousePos is not { } mousePos ||
-            mousePos.X < _scrollable.Location.X ||
-            mousePos.Y < _scrollable.Location.Y ||
-            mousePos.X > _scrollable.Location.X + _scrollable.Width ||
-            mousePos.Y > _scrollable.Location.Y + _scrollable.Height)
-        {
-            // Mouse is outside the scrollable
-            return (anchorMiddle, scrollableMiddle);
-        }
-        var mouseRelativePos = mousePos - _scrollable.Location - new Point(1, 1);
-        var x = (mouseRelativePos.X + _scrollable.ScrollPosition.X - XOffset) / RenderSize.Width;
-        var y = (mouseRelativePos.Y + _scrollable.ScrollPosition.Y - YOffset) / RenderSize.Height;
-        if (x < 0 || y < 0 || x > 1 || y > 1)
-        {
-            // Mouse is inside the scrollable but outside the area covered by the image
-            return (anchorMiddle, scrollableMiddle);
-        }
-        return (new PointF(x, y), mouseRelativePos);
-    }
-
-    // This function inverts the calculation done in GetMouseAnchor to get the correct scroll position to move the point
-    // in the image that was underneath the mouse back there (after the image size has been changed).
-    private void SetMouseAnchor((PointF imageAnchor, PointF mouseRelativePos) anchor)
-    {
-        var xScroll = anchor.imageAnchor.X * RenderSize.Width + XOffset - anchor.mouseRelativePos.X;
-        var yScroll = anchor.imageAnchor.Y * RenderSize.Height + YOffset - anchor.mouseRelativePos.Y;
-        _scrollable.ScrollPosition = Point.Round(new PointF(xScroll, yScroll));
     }
 
     protected override void OnSizeChanged(EventArgs e)
     {
         base.OnSizeChanged(e);
-        ZoomToWindow();
+        _imageViewer.ZoomToContainer();
     }
 
     // private async void tbPageCurrent_TextChanged(object sender, EventArgs e)
@@ -473,15 +308,6 @@ public class PreviewForm : EtoDialogBase
         e.Handled = _ksm.Perform(e.KeyData);
     }
 
-    private void OnMouseWheel(object? sender, MouseEventArgs e)
-    {
-        if (e.Modifiers == Keys.Control)
-        {
-            Zoom(e.Delta.Height);
-            e.Handled = true;
-        }
-    }
-
     private void AssignKeyboardShortcuts()
     {
         // Defaults
@@ -516,8 +342,8 @@ public class PreviewForm : EtoDialogBase
     {
         if (disposing)
         {
-            _renderedImage?.Dispose();
-            _renderedImage = null;
+            _imageViewer.Image?.Dispose();
+            _imageViewer.Image = null;
         }
         base.Dispose(disposing);
     }
