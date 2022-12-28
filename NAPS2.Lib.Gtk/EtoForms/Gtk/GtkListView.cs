@@ -41,8 +41,14 @@ public class GtkListView<T> : IListView<T> where T : notnull
         {
             _flowBox.SelectedChildrenChanged += FlowBoxSelectionChanged;
         }
+        _flowBox.ChildActivated += OnChildActivated;
         _scrolledWindow.Add(_flowBox);
         _scrolledWindow.StyleContext.AddClass("listview");
+    }
+
+    private void OnChildActivated(object o, ChildActivatedArgs args)
+    {
+        ItemClicked?.Invoke(this, EventArgs.Empty);
     }
 
     public int ImageSize { get; set; }
@@ -63,10 +69,7 @@ public class GtkListView<T> : IListView<T> where T : notnull
 
     public event EventHandler? SelectionChanged;
 
-    // TODO: Implement item double-click
-#pragma warning disable CS0067
     public event EventHandler? ItemClicked;
-#pragma warning restore CS0067
 
     // TODO: Implement drag/drop
 #pragma warning disable CS0067
