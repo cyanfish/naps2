@@ -80,7 +80,7 @@ public class PasswordBoxWithToggle
                 GetTitleElement(),
                 _show.Padding(left: 10)
             ).Aligned().SpacingAfter(2),
-            _panel.Height(20)
+            _panel.Height(EtoPlatform.Current.IsGtk ? null : 20)
         }.Expand();
     }
 
