@@ -128,6 +128,11 @@ public class CropForm : ImageFormBase
     {
         base.PaintOverlay(sender, e);
 
+        if (_overlayW == 0 || _overlayH == 0)
+        {
+            return;
+        }
+
         var offsetL = _cropL * _overlayW;
         var offsetT = _cropT * _overlayH;
         var offsetR = _cropR * _overlayW;
