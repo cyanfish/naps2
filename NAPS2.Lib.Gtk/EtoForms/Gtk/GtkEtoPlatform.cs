@@ -53,27 +53,43 @@ public class GtkEtoPlatform : EtoPlatform
     public override void SetFrame(Control container, Control control, Point location, Size size, bool inOverlay)
     {
         var overlay = (gtk.Overlay) container.ToNative();
-        var panel = (gtk.Fixed) overlay.Children[inOverlay ? 1 : 0];
-        panel.Move(control.ToNative(), location.X - X_OFF, location.Y - Y_OFF);
-        control.ToNative().SetSizeRequest(size.Width, size.Height);
+        var widget = control.ToNative();
+        if (inOverlay)
+        {
+            // TODO: Ideally we would use GetChildPosition instead of margin but that signal is not firing, not sure why
+            widget.MarginTop = location.Y - Y_OFF;
+            widget.MarginStart = location.X - X_OFF;
+        }
+        else
+        {
+            var panel = (gtk.Fixed) overlay.Children[0];
+            panel.Move(widget, location.X - X_OFF, location.Y - Y_OFF);
+        }
+        widget.SetSizeRequest(size.Width, size.Height);
     }
 
     public override Control CreateContainer()
     {
         var overlay = new gtk.Overlay();
         overlay.Add(new gtk.Fixed());
-        var overlayPanel = new gtk.Fixed();
-        overlay.AddOverlay(overlayPanel);
-        overlay.SetOverlayPassThrough(overlayPanel, true);
         return overlay.ToEto();
     }
 
     public override void AddToContainer(Control container, Control control, bool inOverlay)
     {
         var overlay = (gtk.Overlay) container.ToNative();
-        var panel = (gtk.Fixed) overlay.Children[inOverlay ? 1 : 0];
         var widget = control.ToNative();
-        panel.Add(widget);
+        if (inOverlay)
+        {
+            overlay.AddOverlay(widget);
+            widget.Halign = gtk.Align.Start;
+            widget.Valign = gtk.Align.Start;
+        }
+        else
+        {
+            var panel = (gtk.Fixed) overlay.Children[0];
+            panel.Add(widget);
+        }
         widget.ShowAll();
     }
 
@@ -105,6 +121,12 @@ public class GtkEtoPlatform : EtoPlatform
     public override SizeF GetPreferredSize(Control control, SizeF availableSpace)
     {
         var widget = control.ToNative();
+        // TODO: This is a hack to make overlays work. Gtk Overlay uses the margin to adjust the control position but
+        // then the margin messes with size calculations. If we set the margin to 0 here (which should be fine as we
+        // don't use margin otherwise) then the size calculations normalize, while the overlay has already determined
+        // the position so it doesn't affect that any more. However, there is a chance this will break in some edge
+        // cases.
+        widget.Margin = 0;
         if (widget.IsRealized)
         {
             return base.GetPreferredSize(control, availableSpace);
