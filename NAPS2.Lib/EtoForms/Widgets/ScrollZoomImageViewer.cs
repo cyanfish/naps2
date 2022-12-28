@@ -26,6 +26,7 @@ public class ScrollZoomImageViewer
         _scrollable.MouseUp += OnMouseUp;
         EtoPlatform.Current.AttachMouseWheelEvent(_scrollable, OnMouseWheel);
         _scrollable.Cursor = Cursors.Pointer;
+        _scrollable.SizeChanged += (_, _) => ZoomToContainer();
     }
 
     public Bitmap? Image { get; set; }
@@ -128,7 +129,7 @@ public class ScrollZoomImageViewer
 
     public void ZoomToContainer()
     {
-        if (!_scrollable.Loaded)
+        if (!_scrollable.Loaded || Image == null || _scrollable.Width <= 0 || _scrollable.Height <= 0)
         {
             return;
         }

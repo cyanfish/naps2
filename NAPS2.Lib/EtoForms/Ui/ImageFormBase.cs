@@ -24,6 +24,7 @@ public abstract class ImageFormBase : EtoDialogBase
         _revert.Click += Revert;
         _renderThrottle = new RefreshThrottle(RenderImage);
         Overlay.Paint += PaintOverlay;
+        Overlay.SizeChanged += (_, _) => UpdateImageCoords();
         FormStateController.DefaultExtraLayoutSize = new Size(400, 400);
     }
 
