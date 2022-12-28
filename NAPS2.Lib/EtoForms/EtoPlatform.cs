@@ -45,7 +45,7 @@ public abstract class EtoPlatform
         window.Size = size;
     }
 
-    public virtual Size GetClientSize(Window window)
+    public virtual Size GetClientSize(Window window, bool excludeToolbars = false)
     {
         return window.ClientSize;
     }

@@ -36,6 +36,7 @@ public class GtkModule : Module
         builder.RegisterType<GtkImageContext>().AsSelf();
 
         builder.RegisterType<GtkDesktopForm>().As<DesktopForm>();
+        builder.RegisterType<GtkPreviewForm>().As<PreviewForm>();
 
         EtoPlatform.Current = new GtkEtoPlatform();
         // Log.EventLogger = new WindowsEventLogger(Kernel!.Get<Naps2Config>());

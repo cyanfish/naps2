@@ -113,11 +113,16 @@ public class GtkEtoPlatform : EtoPlatform
         return new SizeF(naturalSize.Width, naturalSize.Height);
     }
 
-    public override Size GetClientSize(Window window)
+    public override Size GetClientSize(Window window, bool excludeToolbars)
     {
         var gtkWindow = (gtk.Window) window.ToNative();
         gtkWindow.GetSize(out var w, out var h);
-        return new Size(w, h);
+        var size = new Size(w, h);
+        if (excludeToolbars && window.ToolBar != null)
+        {
+            size -= new Size(0, ((gtk.Toolbar) window.ToolBar.ControlObject).AllocatedHeight);
+        }
+        return size;
     }
 
     public override void SetClientSize(Window window, Size clientSize)

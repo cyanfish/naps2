@@ -70,7 +70,7 @@ public class LayoutController
     {
         if (_window == null || _content == null || !_isShown || _layoutQueued) return;
         // TODO: Handle added/removed things
-        var size = EtoPlatform.Current.GetClientSize(_window);
+        var size = EtoPlatform.Current.GetClientSize(_window, true);
         int p = RootPadding;
         var bounds = new Rectangle(p, p, size.Width - 2 * p, size.Height - 2 * p);
         if (bounds.Width < 0 || bounds.Height < 0)

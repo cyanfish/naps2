@@ -44,7 +44,7 @@ public class GtkDesktopForm : DesktopForm
             .desktop-toolbar-button * { min-width: 0; padding-left: 0; padding-right: 0; }
             .desktop-toolbar .image-button { min-width: 50px; padding-left: 0; padding-right: 0; }
             .desktop-toolbar .toggle { min-width: 0; padding-left: 0; padding-right: 0; }
-            .desktop-toolbar { border-bottom: 1px solid #ddd; }
+            toolbar { border-bottom: 1px solid #ddd; }
             .listview .frame { background-color: #fff; }
             .desktop-listview .listview-item image { border: 1px solid #000; }
             .link { padding: 0; }
@@ -91,14 +91,6 @@ public class GtkDesktopForm : DesktopForm
         ");
     }
 
-    protected override LayoutElement GetMainContent()
-    {
-        return L.Column(
-            Eto.Forms.Gtk3Helpers.ToEto(_toolbar),
-            _listView.Control.Scale()
-        ).Spacing(0);
-    }
-
     protected override void ConfigureToolbar()
     {
         // TODO: Zoom is behaving weirdly - full zoomout and images become invisible
@@ -106,10 +98,6 @@ public class GtkDesktopForm : DesktopForm
         // TODO: Also zoom buttons (and listview) are 2px above the bottom for no apparent reason
 
         _toolbar = ((ToolBarHandler) ToolBar.Handler).Control;
-        // Remove the toolbar from the container as we will manually layout it
-        // TODO: Clean this up
-        var parent = (Container) _toolbar.Parent;
-        parent.Remove(_toolbar);
         _toolbar.Style = ToolbarStyle.Both;
         _toolbar.StyleContext.AddClass("desktop-toolbar");
     }
