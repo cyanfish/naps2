@@ -6,6 +6,7 @@ namespace NAPS2.EtoForms.Layout;
 
 // Ignore unreachable code for DEBUG_LAYOUT
 #pragma warning disable CS0162
+// TODO: Rename this to LayoutControl
 public class ControlWithLayoutAttributes : LayoutElement
 {
     private static readonly FieldInfo VisualParentField =

@@ -86,7 +86,7 @@ public abstract class EtoPlatform
 
     public virtual SizeF GetWrappedSize(Control control, int defaultWidth)
     {
-        return control.GetPreferredSize(new SizeF(defaultWidth, LayoutController.MAX_SIZE));
+        return GetPreferredSize(control, new SizeF(defaultWidth, LayoutController.MAX_SIZE));
     }
 
     public virtual void SetClipboardImage(Clipboard clipboard, Bitmap image)

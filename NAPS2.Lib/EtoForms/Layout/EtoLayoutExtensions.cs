@@ -75,7 +75,7 @@ public static class EtoLayoutExtensions
     public static ControlWithLayoutAttributes Wrap(this Label label, int defaultWidth)
     {
         label.Wrap = WrapMode.Word;
-        return new ControlWithLayoutAttributes(label, wrapDefaultWidth: defaultWidth);;
+        return new ControlWithLayoutAttributes(label, wrapDefaultWidth: defaultWidth);
     }
 
     public static ControlWithLayoutAttributes Width(this ControlWithLayoutAttributes control, int width) =>
