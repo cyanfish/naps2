@@ -205,7 +205,7 @@ public class PreviewForm : EtoDialogBase
         {
             Command = command,
             Image = image ?? command.Image,
-            Text = "",
+            Text = null,
             ToolTip = command.Text
         };
     }

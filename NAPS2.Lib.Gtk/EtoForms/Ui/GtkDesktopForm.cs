@@ -44,6 +44,8 @@ public class GtkDesktopForm : DesktopForm
             .desktop-toolbar-button * { min-width: 0; padding-left: 0; padding-right: 0; }
             .desktop-toolbar .image-button { min-width: 50px; padding-left: 0; padding-right: 0; }
             .desktop-toolbar .toggle { min-width: 0; padding-left: 0; padding-right: 0; }
+            .preview-toolbar-button * { min-width: 0; padding-left: 0; padding-right: 0; }
+            .preview-toolbar-button button { padding: 0 5px; }
             toolbar { border-bottom: 1px solid #ddd; }
             .listview .frame { background-color: #fff; }
             .desktop-listview .listview-item image { border: 1px solid #000; }

@@ -16,5 +16,14 @@ public class GtkPreviewForm : PreviewForm
         base.CreateToolbar();
         var toolBar = (Toolbar) ToolBar.ControlObject;
         toolBar.IconSize = IconSize.SmallToolbar;
+        toolBar.Style = ToolbarStyle.Icons;
+        foreach (var item in toolBar.Children)
+        {
+            if (item is ToolItem toolItem)
+            {
+                toolItem.Homogeneous = false;
+                item.StyleContext.AddClass("preview-toolbar-button");
+            }
+        }
     }
 }
