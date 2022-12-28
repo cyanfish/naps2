@@ -81,10 +81,10 @@ public class AdvancedProfileForm : EtoDialogBase
                     _stretchToPageSize,
                     _cropToPageSize,
                     _flipDuplexed,
-                    C.Label(UiStrings.WiaVersionLabel),
-                    _wiaVersion,
-                    C.Label(UiStrings.TwainImplLabel),
-                    _twainImpl
+                    PlatformCompat.System.IsWiaDriverSupported ? C.Label(UiStrings.WiaVersionLabel) : C.None(),
+                    PlatformCompat.System.IsWiaDriverSupported ? _wiaVersion : C.None(),
+                    PlatformCompat.System.IsTwainDriverSupported ? C.Label(UiStrings.TwainImplLabel) : C.None(),
+                    PlatformCompat.System.IsTwainDriverSupported ? _twainImpl : C.None()
                 )
             ),
             L.Row(
