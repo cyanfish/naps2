@@ -45,7 +45,7 @@ public class LayoutColumn : LayoutLine<LayoutRow>
 
     protected override int GetSpacingCore(int i, LayoutContext context)
     {
-        if (i < Children.Length - 1 && Children[i] is ControlWithLayoutAttributes { Control: Label })
+        if (i < Children.Length - 1 && Children[i] is LayoutControl { Control: Label })
         {
             return Children[i].SpacingAfter ?? LabelSpacing ?? context.DefaultLabelSpacing;
         }

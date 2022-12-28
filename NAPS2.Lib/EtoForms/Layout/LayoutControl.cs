@@ -6,8 +6,7 @@ namespace NAPS2.EtoForms.Layout;
 
 // Ignore unreachable code for DEBUG_LAYOUT
 #pragma warning disable CS0162
-// TODO: Rename this to LayoutControl
-public class ControlWithLayoutAttributes : LayoutElement
+public class LayoutControl : LayoutElement
 {
     private static readonly FieldInfo VisualParentField =
         typeof(Control).GetField("VisualParent_Key", BindingFlags.NonPublic | BindingFlags.Static)!;
@@ -18,13 +17,13 @@ public class ControlWithLayoutAttributes : LayoutElement
     private bool _isAdded;
     private bool _isWindowSet;
 
-    public ControlWithLayoutAttributes(Control? control)
+    public LayoutControl(Control? control)
     {
         Control = control;
     }
 
-    public ControlWithLayoutAttributes(
-        ControlWithLayoutAttributes control,
+    public LayoutControl(
+        LayoutControl control,
         bool? scale = null, Padding? padding = null, int? spacingAfter = null,
         int? width = null, int? minWidth = null, int? maxWidth = null, int? naturalWidth = null,
         int? height = null, int? minHeight = null, int? maxHeight = null, int? naturalHeight = null,
@@ -47,8 +46,8 @@ public class ControlWithLayoutAttributes : LayoutElement
         Visibility = visibility ?? control.Visibility;
     }
 
-    public static implicit operator ControlWithLayoutAttributes(Control control) =>
-        new ControlWithLayoutAttributes(control);
+    public static implicit operator LayoutControl(Control control) =>
+        new LayoutControl(control);
 
     internal Control? Control { get; }
     private Padding Padding { get; }

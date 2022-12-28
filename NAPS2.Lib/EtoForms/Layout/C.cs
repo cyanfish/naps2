@@ -119,15 +119,15 @@ public static class C
     /// Creates a null placeholder for Eto layouts that absorbs scaling.
     /// </summary>
     /// <returns></returns>
-    public static ControlWithLayoutAttributes Filler() =>
-        new ControlWithLayoutAttributes(null).Scale();
+    public static LayoutControl Filler() =>
+        new LayoutControl(null).Scale();
 
     /// <summary>
     /// Creates a null placeholder for Eto layouts.
     /// </summary>
     /// <returns></returns>
-    public static ControlWithLayoutAttributes Spacer() =>
-        new ControlWithLayoutAttributes(null);
+    public static LayoutControl Spacer() =>
+        new LayoutControl(null);
 
     /// <summary>
     /// Creates an label of default height to be used as a visual paragraph separator.

@@ -20,7 +20,7 @@ public abstract class LayoutElement
     protected internal int? SpacingAfter { get; set; }
 
     public static implicit operator LayoutElement(Control control) =>
-        new ControlWithLayoutAttributes(control);
+        new LayoutControl(control);
 
     public abstract void DoLayout(LayoutContext context, RectangleF bounds);
 
