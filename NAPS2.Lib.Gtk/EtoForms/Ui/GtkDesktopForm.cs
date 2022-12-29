@@ -180,6 +180,7 @@ public class GtkDesktopForm : DesktopForm
                 switch (item)
                 {
                     case MenuProvider.CommandItem commandItem:
+                    {
                         var menuItem = new MenuItem
                         {
                             Label = commandItem.Command.MenuText
@@ -187,8 +188,13 @@ public class GtkDesktopForm : DesktopForm
                         menuItem.Sensitive = commandItem.Command.Enabled;
                         commandItem.Command.EnabledChanged +=
                             (_, _) => menuItem.Sensitive = commandItem.Command.Enabled;
+                        if (commandItem.Command is ActionCommand actionCommand)
+                        {
+                            actionCommand.TextChanged += (_, _) => menuItem.Label = actionCommand.MenuText;
+                        }
                         menuItem.Activated += (_, _) => commandItem.Command.Execute();
                         menuWidget.Add(menuItem);
+                    }
                         break;
                     case MenuProvider.SeparatorItem:
                         menuWidget.Add(new SeparatorMenuItem());
