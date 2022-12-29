@@ -179,7 +179,7 @@ public class MacDesktopForm : DesktopForm
                 // MaxSize still works even though it's deprecated
 #pragma warning disable CA1416
 #pragma warning disable CA1422
-                MaxSize = new CGSize(64, 999)
+                MaxSize = new CGSize(64, 24)
 #pragma warning restore CA1422
 #pragma warning restore CA1416
             }
