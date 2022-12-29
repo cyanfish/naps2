@@ -1,3 +1,4 @@
+using System.Runtime.InteropServices;
 using NAPS2.Images.Bitwise;
 using NAPS2.Util;
 
@@ -129,16 +130,11 @@ internal class LibTiffIo : ITiffWriter
         EnumerateTiffFrames(produceImage, tiff, progress, client);
     }
 
-    public void LoadTiff(Action<IMemoryImage> produceImage, string path, ProgressHandler progress)
-    {
-        var tiff = LibTiff.TIFFOpen(path, "r");
-        EnumerateTiffFrames(produceImage, tiff, progress);
-    }
-
     private void EnumerateTiffFrames(Action<IMemoryImage> produceImage, IntPtr tiff,
-        ProgressHandler progress, LibTiffStreamClient? client = null)
+        ProgressHandler progress, LibTiffStreamClient client)
     {
         // We keep a reference to the client to avoid garbage collection
+        var handle = GCHandle.Alloc(client);
         try
         {
             var count = LibTiff.TIFFNumberOfDirectories(tiff);
@@ -167,6 +163,7 @@ internal class LibTiffIo : ITiffWriter
         finally
         {
             LibTiff.TIFFClose(tiff);
+            handle.Free();
         }
     }
 
