@@ -3,7 +3,7 @@ namespace NAPS2.Images;
 public static class ThumbnailSizes
 {
     public const int MIN_SIZE = 64;
-    public const int DEFAULT_SIZE = 128;
+    public const int DEFAULT_SIZE = 256;
     public static int MAX_SIZE = 1024;
 
     public static int Validate(int inputSize)
