@@ -129,11 +129,11 @@ public class BatchScanForm : EtoDialogBase
                     _multipleScansPrompt,
                     _multipleScansDelay,
                     L.Column(
-                        C.Label(UiStrings.NumberOfScansLabel).Visible(_delayVis),
-                        _numberOfScans.Width(50).Visible(_delayVis),
-                        C.Label(UiStrings.TimeBetweenScansLabel).Visible(_delayVis),
-                        _timeBetweenScans.Width(50).Visible(_delayVis)
-                    ).Padding(left: 20)
+                        C.Label(UiStrings.NumberOfScansLabel),
+                        _numberOfScans.Width(50),
+                        C.Label(UiStrings.TimeBetweenScansLabel),
+                        _timeBetweenScans.Width(50)
+                    ).Padding(left: 20).Visible(_delayVis)
                 )
             ),
             L.GroupBox(
@@ -142,17 +142,16 @@ public class BatchScanForm : EtoDialogBase
                     _load,
                     _saveToSingleFile,
                     _saveToMultipleFiles,
-                    // TODO: Support visibility on rows/columns
                     L.Column(
-                        _filePerScan.Visible(_multiVis),
-                        _filePerPage.Visible(_multiVis),
-                        _separateByPatchT.Visible(_multiVis),
-                        _moreInfo.Visible(_multiVis)
-                    ).Padding(left: 20),
+                        _filePerScan,
+                        _filePerPage,
+                        _separateByPatchT,
+                        _moreInfo
+                    ).Padding(left: 20).Visible(_multiVis),
                     L.Column(
-                        C.Label(UiStrings.FilePathLabel).Visible(_fileVis),
-                        _filePath.Visible(_fileVis)
-                    )
+                        C.Label(UiStrings.FilePathLabel),
+                        _filePath
+                    ).Visible(_fileVis)
                 )
             )
         );

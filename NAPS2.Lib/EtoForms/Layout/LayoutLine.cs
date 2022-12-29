@@ -94,6 +94,10 @@ public abstract class LayoutLine<TOrthogonal> : LayoutContainer
     public override SizeF GetPreferredSize(LayoutContext context, RectangleF parentBounds)
     {
         var childContext = GetChildContext(context, parentBounds);
+        if (!childContext.IsParentVisible)
+        {
+            return SizeF.Empty;
+        }
         var size = SizeF.Empty;
         GetInitialCellLengthsAndScaling(context, childContext, parentBounds, out var cellLengths, out var cellScaling);
         UpdateCellLengthsWithPreferredLength(cellLengths, cellScaling);
@@ -113,7 +117,8 @@ public abstract class LayoutLine<TOrthogonal> : LayoutContainer
         {
             CellLengths = GetChildCellLengths(context, bounds),
             CellScaling = GetChildCellScaling(),
-            Depth = context.Depth + 1
+            Depth = context.Depth + 1,
+            IsParentVisible = context.IsParentVisible && IsVisible
         };
     }
 
