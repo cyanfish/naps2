@@ -6,10 +6,23 @@ namespace NAPS2.EtoForms.Ui;
 
 public class MacPreviewForm : PreviewForm
 {
+    private readonly NSSlider _zoomSlider;
+
     public MacPreviewForm(Naps2Config config, DesktopCommands desktopCommands, UiImageList imageList,
         IIconProvider iconProvider, KeyboardShortcutManager ksm) : base(config, desktopCommands, imageList,
         iconProvider, ksm)
     {
+        _zoomSlider = new NSSlider
+        {
+            MinValue = -2,
+            MaxValue = 1,
+            DoubleValue = 0,
+            ToolTip = UiStrings.Zoom
+        }.WithAction(ZoomUpdated);
+        ImageViewer.ZoomChanged += (_, _) =>
+        {
+            _zoomSlider.DoubleValue = Math.Log10(ImageViewer.ZoomFactor);
+        };
     }
 
     protected override void CreateToolbar()
@@ -59,7 +72,23 @@ public class MacPreviewForm : PreviewForm
             MacToolbarItems.Create("save", Commands.SaveSelected),
             // TODO: Fix this
             // MacToolbarItems.CreateSeparator("sep1"),
-            MacToolbarItems.Create("delete", Commands.Delete)
+            MacToolbarItems.Create("delete", Commands.Delete),
+            // TODO: Using the slider is a bit janky
+            new NSToolbarItem("zoom")
+            {
+                View = _zoomSlider,
+                // MaxSize still works even though it's deprecated
+#pragma warning disable CA1416
+#pragma warning disable CA1422
+                MaxSize = new CGSize(64, 24)
+#pragma warning restore CA1422
+#pragma warning restore CA1416
+            }
         };
+    }
+
+    private void ZoomUpdated(NSSlider sender)
+    {
+        ImageViewer.SetZoom((float) Math.Pow(10, sender.DoubleValue));
     }
 }
