@@ -23,6 +23,9 @@ public class ActionCommand : Command
         {
             ToolBarText = value;
             MenuText = value;
+            TextChanged?.Invoke(this, EventArgs.Empty);
         }
     }
+
+    public event EventHandler? TextChanged;
 }
