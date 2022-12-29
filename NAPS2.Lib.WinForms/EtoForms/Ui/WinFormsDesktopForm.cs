@@ -213,7 +213,9 @@ public class WinFormsDesktopForm : DesktopForm
         {
             actionCommand.TextChanged += (_, _) => SetItemText();
         }
-        if (item is wf.ToolStripMenuItem menuItem)
+        // TODO: We want a better way of determining which keyboard shortcuts are worth showing
+        // Ideally we could show them all, but it can be really distracting. So only showing F2/F3 etc. right now.
+        if (item is wf.ToolStripMenuItem menuItem && !command.Shortcut.ToString().Contains(","))
         {
             menuItem.ShortcutKeys = command.Shortcut.ToSWF();
         }
