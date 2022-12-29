@@ -13,7 +13,6 @@ public class PreviewForm : EtoDialogBase
 
     private readonly ButtonToolItem _pageNumberButton = new();
     private readonly ButtonToolItem _zoomPercentButton = new();
-    private readonly ScrollZoomImageViewer _imageViewer = new();
     private UiImage? _currentImage;
 
     public PreviewForm(Naps2Config config, DesktopCommands desktopCommands, UiImageList imageList,
@@ -24,7 +23,7 @@ public class PreviewForm : EtoDialogBase
         _iconProvider = iconProvider;
         _ksm = ksm;
 
-        _imageViewer.ZoomChanged += ImageViewerZoomChanged;
+        ImageViewer.ZoomChanged += ImageViewerZoomChanged;
 
         GoToPrevCommand = new ActionCommand(() => GoTo(ImageIndex - 1))
         {
@@ -36,23 +35,23 @@ public class PreviewForm : EtoDialogBase
             Text = UiStrings.Next,
             Image = iconProvider.GetIcon("arrow_right")
         };
-        ZoomInCommand = new ActionCommand(() => _imageViewer.ChangeZoom(1))
+        ZoomInCommand = new ActionCommand(() => ImageViewer.ChangeZoom(1))
         {
             Text = UiStrings.ZoomIn,
             Image = iconProvider.GetIcon("zoom_in")
         };
-        ZoomOutCommand = new ActionCommand(() => _imageViewer.ChangeZoom(-1))
+        ZoomOutCommand = new ActionCommand(() => ImageViewer.ChangeZoom(-1))
         {
             Text = UiStrings.ZoomOut,
             Image = iconProvider.GetIcon("zoom_out")
         };
-        ZoomWindowCommand = new ActionCommand(_imageViewer.ZoomToContainer)
+        ZoomWindowCommand = new ActionCommand(ImageViewer.ZoomToContainer)
         {
             // TODO: Update this string as it's now a button and not a toggle
             Text = UiStrings.ScaleWithWindow,
             Image = iconProvider.GetIcon("arrow_out")
         };
-        ZoomActualCommand = new ActionCommand(_imageViewer.ZoomToActual)
+        ZoomActualCommand = new ActionCommand(ImageViewer.ZoomToActual)
         {
             Text = UiStrings.ZoomActual,
             Image = iconProvider.GetIcon("zoom_actual")
@@ -63,6 +62,8 @@ public class PreviewForm : EtoDialogBase
             Image = iconProvider.GetIcon("cross")
         };
     }
+
+    protected ScrollZoomImageViewer ImageViewer { get; } = new();
 
     private void ImageViewerZoomChanged(object? sender, ZoomChangedEventArgs e)
     {
@@ -78,7 +79,7 @@ public class PreviewForm : EtoDialogBase
         FormStateController.DefaultClientSize = new Size(800, 600);
 
         LayoutController.RootPadding = 0;
-        LayoutController.Content = _imageViewer;
+        LayoutController.Content = ImageViewer;
     }
 
     protected DesktopCommands Commands { get; set; } = null!;
@@ -144,7 +145,7 @@ public class PreviewForm : EtoDialogBase
     protected override void OnShown(EventArgs e)
     {
         base.OnShown(e);
-        _imageViewer.ZoomToContainer();
+        ImageViewer.ZoomToContainer();
     }
 
     protected virtual void CreateToolbar()
@@ -234,15 +235,15 @@ public class PreviewForm : EtoDialogBase
     {
         using var imageToRender = CurrentImage.GetClonedImage();
         var rendered = await Task.Run(() => imageToRender.Render());
-        _imageViewer.Image?.Dispose();
-        _imageViewer.Image = rendered.ToEtoImage();
-        _imageViewer.ZoomToContainer();
+        ImageViewer.Image?.Dispose();
+        ImageViewer.Image = rendered.ToEtoImage();
+        ImageViewer.ZoomToContainer();
     }
 
     protected override void OnSizeChanged(EventArgs e)
     {
         base.OnSizeChanged(e);
-        _imageViewer.ZoomToContainer();
+        ImageViewer.ZoomToContainer();
     }
 
     private async Task DeleteCurrentImage()
@@ -345,8 +346,8 @@ public class PreviewForm : EtoDialogBase
     {
         if (disposing)
         {
-            _imageViewer.Image?.Dispose();
-            _imageViewer.Image = null;
+            ImageViewer.Image?.Dispose();
+            ImageViewer.Image = null;
         }
         base.Dispose(disposing);
     }

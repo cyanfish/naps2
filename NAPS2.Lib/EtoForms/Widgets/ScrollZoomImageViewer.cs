@@ -18,6 +18,7 @@ public class ScrollZoomImageViewer
     public ScrollZoomImageViewer()
     {
         _scrollable.Content = _imageView;
+        _scrollable.BackgroundColor = Colors.White;
         _imageView.Paint += ImagePaint;
         _scrollable.MouseEnter += OnMouseEnter;
         _scrollable.MouseLeave += OnMouseLeave;
@@ -125,10 +126,17 @@ public class ScrollZoomImageViewer
         }
     }
 
+    public float ZoomFactor => _renderFactor;
+
     public void ChangeZoom(float step, bool anchorToMouse = false)
     {
-        _renderFactor *= (float) Math.Pow(1.2, step);
-        _renderFactor = _renderFactor.Clamp(0.1f, 10);
+        SetZoom(_renderFactor * (float) Math.Pow(1.2, step), anchorToMouse);
+    }
+    public void SetZoom(float value, bool anchorToMouse = false)
+    {
+        // TODO: Adjust clamp values based on image size
+        // (and also propagate that to the Mac slider limits)
+        _renderFactor = value.Clamp(0.01f, 10);
         _scrollable.SuspendLayout();
         var anchor = GetMouseAnchor(anchorToMouse);
         RenderSize =
