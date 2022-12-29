@@ -66,6 +66,10 @@ public class GtkEtoPlatform : EtoPlatform
             panel.Move(widget, location.X - X_OFF, location.Y - Y_OFF);
         }
         widget.SetSizeRequest(size.Width, size.Height);
+        if (widget is gtk.Bin { Child: gtk.Label { Wrap: true } label })
+        {
+            label.MaxWidthChars = EstimateCharactersWide(size.Width, label);
+        }
     }
 
     public override Control CreateContainer()
@@ -133,6 +137,28 @@ public class GtkEtoPlatform : EtoPlatform
         }
         widget.GetPreferredSize(out var minSize, out var naturalSize);
         return new SizeF(naturalSize.Width, naturalSize.Height);
+    }
+
+    public override SizeF GetWrappedSize(Control control, int defaultWidth)
+    {
+        var widget = control.ToNative();
+        if (widget is gtk.Bin { Child: gtk.Label label })
+        {
+            label.MaxWidthChars = EstimateCharactersWide(defaultWidth, label);
+            label.GetPreferredSize(out var minSize, out var naturalSize);
+            label.GetPreferredHeightForWidth(defaultWidth, out var minHeight, out var naturalHeight);
+            return new SizeF(Math.Min(naturalSize.Width, defaultWidth), naturalHeight);
+        }
+        return base.GetWrappedSize(control, defaultWidth);
+    }
+
+    private static int EstimateCharactersWide(int pixelWidth, gtk.Label label)
+    {
+        // TODO: This could vary based on font and text. Can we do better somehow?
+        // Ideally we'd be able to wrap based on a pixel width. Maybe if we put the label in a container?
+        var fontSize = label.GetFont().Size / Pango.Scale.PangoScale;
+        var approxCharWidth = fontSize * 0.8;
+        return (int) Math.Floor(pixelWidth / approxCharWidth);
     }
 
     public override Size GetClientSize(Window window, bool excludeToolbars)
