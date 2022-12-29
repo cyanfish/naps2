@@ -60,10 +60,14 @@ public class LayoutController
 
     public void Invalidate()
     {
+        if (_layoutQueued) return;
         _layoutQueued = true;
-        Invalidated?.Invoke(this, EventArgs.Empty);
-        _layoutQueued = false;
-        DoLayout();
+        Invoker.Current.InvokeAsync(() =>
+        {
+            Invalidated?.Invoke(this, EventArgs.Empty);
+            _layoutQueued = false;
+            DoLayout();
+        });
     }
 
     private void DoLayout()
