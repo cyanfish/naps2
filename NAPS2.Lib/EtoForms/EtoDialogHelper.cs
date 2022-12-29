@@ -17,9 +17,6 @@ public class EtoDialogHelper : DialogHelper
     {
         var sd = new SaveFileDialog
         {
-            CheckFileExists = false,
-            // TODO
-            // AddExtension = true,
             FileName = Path.IsPathRooted(defaultPath) ? Path.GetFileName(defaultPath) : null
         };
         _fileFilters.Set(sd, FileFilterGroup.Pdf | FileFilterGroup.Image);
@@ -37,8 +34,6 @@ public class EtoDialogHelper : DialogHelper
     {
         var sd = new SaveFileDialog
         {
-            CheckFileExists = false,
-            // AddExtension = true,
             FileName = Path.IsPathRooted(defaultPath) ? Path.GetFileName(defaultPath) : null
         };
         _fileFilters.Set(sd, FileFilterGroup.Pdf);
@@ -56,8 +51,6 @@ public class EtoDialogHelper : DialogHelper
     {
         var sd = new SaveFileDialog
         {
-            CheckFileExists = false,
-            // AddExtension = true,
             FileName = Path.IsPathRooted(defaultPath) ? Path.GetFileName(defaultPath) : null
         };
         var lastExt = _config.Get(c => c.LastImageExt)?.ToLowerInvariant();
@@ -75,7 +68,7 @@ public class EtoDialogHelper : DialogHelper
 
     private void SetDir(SaveFileDialog dialog, string? defaultPath)
     {
-        string? path = null;
+        string? path;
         if (Paths.IsTestAppDataPath)
         {
             // For UI test automation we choose the appdata folder for test isolation and consistency

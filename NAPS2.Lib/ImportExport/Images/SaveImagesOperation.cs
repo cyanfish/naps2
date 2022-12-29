@@ -25,9 +25,11 @@ public class SaveImagesOperation : OperationBase
     /// <param name="fileName">The name of the file to save. For multiple images, this is modified by appending a number before the extension.</param>
     /// <param name="placeholders"></param>
     /// <param name="images">The collection of images to save.</param>
+    /// <param name="overwriteFile"></param>
     /// <param name="batch"></param>
+    /// <param name="imageSettings"></param>
     public bool Start(string fileName, Placeholders placeholders, IList<ProcessedImage> images,
-        ImageSettings imageSettings, bool batch = false)
+        ImageSettings imageSettings, string? overwriteFile = null, bool batch = false)
     {
         Status = new OperationStatus
         {
@@ -51,7 +53,8 @@ public class SaveImagesOperation : OperationBase
                 {
                     if (File.Exists(subFileName))
                     {
-                        if (_overwritePrompt.ConfirmOverwrite(subFileName) != OverwriteResponse.Yes)
+                        if (subFileName != overwriteFile &&
+                            _overwritePrompt.ConfirmOverwrite(subFileName) != OverwriteResponse.Yes)
                         {
                             return false;
                         }
@@ -82,7 +85,9 @@ public class SaveImagesOperation : OperationBase
 
                     if (images.Count == 1 && File.Exists(subFileName))
                     {
-                        var overwriteResponse = _overwritePrompt.ConfirmOverwrite(subFileName);
+                        var overwriteResponse = subFileName == overwriteFile
+                            ? OverwriteResponse.Yes
+                            : _overwritePrompt.ConfirmOverwrite(subFileName);
                         if (overwriteResponse == OverwriteResponse.No)
                         {
                             continue;

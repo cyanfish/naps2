@@ -294,7 +294,7 @@ public class BatchScanPerformer : IBatchScanPerformer
             else
             {
                 var op = _operationFactory.Create<SaveImagesOperation>();
-                op.Start(subPath, placeholders, images, _config.Get(c => c.ImageSettings), true);
+                op.Start(subPath, placeholders, images, _config.Get(c => c.ImageSettings), batch: true);
                 await op.Success;
             }
         }

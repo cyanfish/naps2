@@ -158,7 +158,7 @@ public class ExportController : IExportController
     {
         var op = _operationFactory.Create<SaveImagesOperation>();
         var state = _imageList.CurrentState;
-        if (op.Start(savePath, Placeholders.All.WithDate(DateTime.Now), images, _config.Get(c => c.ImageSettings)))
+        if (op.Start(savePath, Placeholders.All.WithDate(DateTime.Now), images, _config.Get(c => c.ImageSettings), savePath))
         {
             _operationProgress.ShowProgress(op);
         }
@@ -204,7 +204,7 @@ public class ExportController : IExportController
         var op = _operationFactory.Create<SavePdfOperation>();
 
         if (op.Start(filename, Placeholders.All.WithDate(DateTime.Now), images, _config.Get(c => c.PdfSettings),
-                _config.DefaultOcrParams(), email, emailMessage))
+                _config.DefaultOcrParams(), email, emailMessage, filename))
         {
             _operationProgress.ShowProgress(op);
         }

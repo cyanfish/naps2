@@ -24,13 +24,8 @@ public class SavePdfOperation : OperationBase
     public string? FirstFileSaved { get; private set; }
 
     public bool Start(string fileName, Placeholders placeholders, ICollection<ProcessedImage> images,
-        PdfSettings pdfSettings, OcrParams ocrParams)
-    {
-        return Start(fileName, placeholders, images, pdfSettings, ocrParams, false, null);
-    }
-
-    public bool Start(string fileName, Placeholders placeholders, ICollection<ProcessedImage> images,
-        PdfSettings pdfSettings, OcrParams ocrParams, bool email, EmailMessage? emailMessage)
+        PdfSettings pdfSettings, OcrParams ocrParams, bool email = false, EmailMessage? emailMessage = null,
+        string? overwriteFile = null)
     {
         // TODO: This needs tests. And ideally simplification.
         ProgressTitle = email ? MiscResources.EmailPdfProgress : MiscResources.SavePdfProgress;
@@ -52,9 +47,8 @@ public class SavePdfOperation : OperationBase
         {
             if (File.Exists(subFileName))
             {
-                // TODO: Gtk auto prompts for overwrite in the save dialog. How to handle this and avoid duplicate prompts?
-                // Can we just change the overwrite prompt implementation or will that be a problem in some cases where the save dialog isn't used, e.g. auto save, batch, etc?
-                if (_overwritePrompt.ConfirmOverwrite(subFileName) != OverwriteResponse.Yes)
+                if (subFileName != overwriteFile &&
+                    _overwritePrompt.ConfirmOverwrite(subFileName) != OverwriteResponse.Yes)
                 {
                     return false;
                 }
@@ -66,17 +60,20 @@ public class SavePdfOperation : OperationBase
             }
         }
 
-        var imagesByFile = pdfSettings.SinglePagePdfs ? images.Select(x => new[] { x }).ToArray() : new[] { images.ToArray() };
+        var imagesByFile = pdfSettings.SinglePagePdfs
+            ? images.Select(x => new[] { x }).ToArray()
+            : new[] { images.ToArray() };
         RunAsync(async () =>
         {
             bool result = false;
             try
             {
-                int digits = (int)Math.Floor(Math.Log10(images.Count)) + 1;
+                int digits = (int) Math.Floor(Math.Log10(images.Count)) + 1;
                 int i = 0;
                 foreach (var imagesForFile in imagesByFile)
                 {
                     var currentFileName = placeholders.Substitute(fileName, true, i, singleFile ? 0 : digits);
+                    // TODO: Overwrite prompt non-single file?
                     Status.StatusText = string.Format(MiscResources.SavingFormat, Path.GetFileName(currentFileName));
                     InvokeStatusChanged();
                     if (singleFile && IsFileInUse(currentFileName, out var ex))
@@ -93,7 +90,8 @@ public class SavePdfOperation : OperationBase
                     {
                         break;
                     }
-                    emailMessage?.Attachments.Add(new EmailAttachment(currentFileName, Path.GetFileName(currentFileName)));
+                    emailMessage?.Attachments.Add(new EmailAttachment(currentFileName,
+                        Path.GetFileName(currentFileName)));
                     if (i == 0)
                     {
                         FirstFileSaved = subFileName;
