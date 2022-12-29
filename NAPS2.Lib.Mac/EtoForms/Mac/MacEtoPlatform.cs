@@ -86,4 +86,18 @@ public class MacEtoPlatform : EtoPlatform
             L.Buffer(content, 6, 32, 6, 6)
         );
     }
+
+    public override void SetClientSize(Window window, Size clientSize)
+    {
+        if (window.Loaded)
+        {
+            // The Eto ClientSize setter also changes the y-position and causes jumps
+            var nsWindow = window.ToNative();
+            nsWindow.SetContentSize(clientSize.ToNS());
+        }
+        else
+        {
+            base.SetClientSize(window, clientSize);
+        }
+    }
 }
