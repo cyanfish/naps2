@@ -62,11 +62,13 @@ public class AutoSaverTests : ContextualTests
         {
             FilePath = Path.Combine(FolderPath, "test$(n).pdf")
         };
-        var scanned = CreateScannedImages(ImageResources.dog).ToAsyncEnumerable();
 
-        var output = _autoSaver.Save(settings, scanned);
+        var scanned = CreateScannedImages(ImageResources.dog).ToList();
+        var output = await _autoSaver.Save(settings, scanned.ToAsyncEnumerable()).ToListAsync();
 
-        Assert.Single(await output.ToListAsync());
+        Assert.Single(output);
+        Assert.False(IsDisposed(output[0]));
+        Assert.True(IsDisposed(scanned[0]));
         Assert.Single(Folder.GetFiles());
         PdfAsserts.AssertImages(Path.Combine(FolderPath, "test1.pdf"), ImageResources.dog);
     }
@@ -78,11 +80,13 @@ public class AutoSaverTests : ContextualTests
         {
             FilePath = Path.Combine(FolderPath, "test$(n).jpg")
         };
-        var scanned = CreateScannedImages(ImageResources.dog).ToAsyncEnumerable();
 
-        var output = _autoSaver.Save(settings, scanned);
+        var scanned = CreateScannedImages(ImageResources.dog).ToList();
+        var output = await _autoSaver.Save(settings, scanned.ToAsyncEnumerable()).ToListAsync();
 
-        Assert.Single(await output.ToListAsync());
+        Assert.Single(output);
+        Assert.False(IsDisposed(output[0]));
+        Assert.True(IsDisposed(scanned[0]));
         Assert.Single(Folder.GetFiles());
         ImageAsserts.Similar(ImageResources.dog, Path.Combine(FolderPath, "test1.jpg"));
     }
