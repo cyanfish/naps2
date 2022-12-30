@@ -247,7 +247,8 @@ public class DesktopCommands
         Delete = new ActionCommand(desktopController.Delete)
         {
             Text = UiStrings.Delete,
-            Image = iconProvider.GetIcon("cross")
+            Image = iconProvider.GetIcon("cross"),
+            Shortcut = Keys.Delete
         };
         ClearAll = new ActionCommand(desktopController.Clear)
         {
@@ -278,15 +279,18 @@ public class DesktopCommands
         };
         SelectAll = new ActionCommand(imageListActions.SelectAll)
         {
-            Text = UiStrings.SelectAll
+            Text = UiStrings.SelectAll,
+            Shortcut = Application.Instance.CommonModifier | Keys.A
         };
         Copy = new ActionCommand(desktopController.Copy)
         {
-            Text = UiStrings.Copy
+            Text = UiStrings.Copy,
+            Shortcut = Application.Instance.CommonModifier | Keys.C
         };
         Paste = new ActionCommand(desktopController.Paste)
         {
-            Text = UiStrings.Paste
+            Text = UiStrings.Paste,
+            Shortcut = Application.Instance.CommonModifier | Keys.V
         };
     }
 

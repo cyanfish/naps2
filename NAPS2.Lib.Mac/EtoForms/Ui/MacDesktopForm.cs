@@ -92,7 +92,15 @@ public class MacDesktopForm : DesktopForm
                 },
                 new SubMenuItem
                 {
-                    Text = "Edit"
+                    // The space makes sure this doesn't match the default "Edit" menu
+                    Text = "Edit ",
+                    Items =
+                    {
+                        Commands.SelectAll,
+                        Commands.Copy,
+                        Commands.Paste,
+                        Commands.Delete
+                    }
                 },
                 new SubMenuItem
                 {

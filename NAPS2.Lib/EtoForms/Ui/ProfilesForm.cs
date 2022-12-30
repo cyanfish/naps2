@@ -76,12 +76,12 @@ public class ProfilesForm : EtoDialogBase
         _copyCommand = new ActionCommand(DoCopy)
         {
             MenuText = UiStrings.Copy,
-            Shortcut = Keys.Control | Keys.C
+            Shortcut = Application.Instance.CommonModifier | Keys.C
         };
         _pasteCommand = new ActionCommand(DoPaste)
         {
             MenuText = UiStrings.Paste,
-            Shortcut = Keys.Control | Keys.V
+            Shortcut = Application.Instance.CommonModifier | Keys.V
         };
 
         _listView.ImageSize = 48;
