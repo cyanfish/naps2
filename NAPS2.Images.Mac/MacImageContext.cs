@@ -11,7 +11,6 @@ public class MacImageContext : ImageContext
 
     public MacImageContext(IPdfRenderer? pdfRenderer = null) : base(typeof(MacImage), pdfRenderer)
     {
-        // TODO: Not sure if this is truly thread safe.
         NSApplication.CheckForIllegalCrossThreadCalls = false;
         _imageTransformer = new MacImageTransformer(this);
     }

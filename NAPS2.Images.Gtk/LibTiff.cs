@@ -89,7 +89,4 @@ internal static class LibTiff
     [DllImport("libtiff.so.5")]
     public static extern int TIFFReadRGBAImageOriented(
         IntPtr tiff, int w, int h, IntPtr raster, int orientation, int stopOnError);
-
-    // TODO: For streams
-    // https://linux.die.net/man/3/tiffclientopen
 }

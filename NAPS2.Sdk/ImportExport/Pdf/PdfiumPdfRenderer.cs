@@ -73,7 +73,6 @@ public class PdfiumPdfRenderer : IPdfRenderer
 
         // As Pdfium only supports BGR, to be general we need to store it in an intermediate buffer,
         // then use a copy operation to get the data to our output image (which might be BGR or RGB).
-        // TODO: Consider bypassing this by supporting BGR on mac etc.
         var pixelInfo = new PixelInfo(widthInPx, heightInPx, SubPixelType.Bgr);
         var buffer = new byte[pixelInfo.Length];
         fixed (byte* ptr = buffer)

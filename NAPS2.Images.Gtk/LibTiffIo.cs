@@ -87,7 +87,6 @@ internal class LibTiffIo : ITiffWriter
         LibTiff.TIFFSetField(tiff, TiffTag.ImageWidth, image.Width);
         LibTiff.TIFFSetField(tiff, TiffTag.ImageHeight, image.Height);
         LibTiff.TIFFSetField(tiff, TiffTag.PlanarConfig, 1);
-        // TODO: Test setting g4 compression when it's not a BW image
         LibTiff.TIFFSetField(tiff, TiffTag.Compression, (int) (compression switch
         {
             TiffCompressionType.Ccitt4 => TiffCompression.G4,

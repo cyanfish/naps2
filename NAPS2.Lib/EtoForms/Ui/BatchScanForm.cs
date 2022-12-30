@@ -85,7 +85,6 @@ public class BatchScanForm : EtoDialogBase
 
     private void UpdateVisibility(object? sender, EventArgs e)
     {
-        // TODO: Bundle multiple updates together before invalidating somehow
         _delayVis.IsVisible = _multipleScansDelay.Checked;
         _multiVis.IsVisible = _saveToMultipleFiles.Checked;
         _fileVis.IsVisible = _saveToSingleFile.Checked || _saveToMultipleFiles.Checked;

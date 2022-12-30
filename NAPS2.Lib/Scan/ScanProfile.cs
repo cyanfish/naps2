@@ -23,7 +23,7 @@ public class ScanProfile
         PaperSource = ScanSource.Glass;
         Quality = 75;
         BlankPageWhiteThreshold = 70;
-        BlankPageCoverageThreshold = 25;
+        BlankPageCoverageThreshold = 15;
         WiaDelayBetweenScansSeconds = 2.0;
     }
 
@@ -51,6 +51,7 @@ public class ScanProfile
 
     public string? DriverName { get; set; }
 
+    // TODO: Remove these if it's safe to do so
     public ScanProxyConfig? ProxyConfig { get; set; }
 
     public string? ProxyDriverName { get; set; }

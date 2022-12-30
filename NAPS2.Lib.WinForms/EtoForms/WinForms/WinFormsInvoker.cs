@@ -15,7 +15,23 @@ public class WinFormsInvoker : IInvoker
     {
         try
         {
-            _formFunc().Invoke(action);
+            Exception? error = null;
+            _formFunc().Invoke(() =>
+            {
+                try
+                {
+                    action();
+                }
+                catch (Exception ex)
+                {
+                    error = ex;
+                }
+            });
+            if (error != null)
+            {
+                error.PreserveStackTrace();
+                throw error;
+            }
         }
         catch (ObjectDisposedException)
         {
@@ -29,7 +45,23 @@ public class WinFormsInvoker : IInvoker
     {
         try
         {
-            _formFunc().BeginInvoke(action);
+            Exception? error = null;
+            _formFunc().BeginInvoke(() =>
+            {
+                try
+                {
+                    action();
+                }
+                catch (Exception ex)
+                {
+                    error = ex;
+                }
+            });
+            if (error != null)
+            {
+                error.PreserveStackTrace();
+                throw error;
+            }
         }
         catch (ObjectDisposedException)
         {
@@ -42,7 +74,23 @@ public class WinFormsInvoker : IInvoker
     public T InvokeGet<T>(Func<T> func)
     {
         T value = default!;
-        _formFunc().Invoke(() => value = func());
+        Exception? error = null;
+        _formFunc().Invoke(() =>
+        {
+            try
+            {
+                value = func();
+            }
+            catch (Exception ex)
+            {
+                error = ex;
+            }
+            if (error != null)
+            {
+                error.PreserveStackTrace();
+                throw error;
+            }
+        });
         return value;
     }
 }

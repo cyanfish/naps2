@@ -2,7 +2,6 @@
 
 namespace NAPS2.Images.Mac;
 
-// TODO: We might need to dispose things more aggressively
 public class MacImage : IMemoryImage
 {
     public MacImage(ImageContext imageContext, NSImage image)

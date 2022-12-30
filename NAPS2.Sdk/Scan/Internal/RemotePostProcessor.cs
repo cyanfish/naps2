@@ -1,6 +1,7 @@
-﻿namespace NAPS2.Scan.Internal;
+﻿using NAPS2.Images.Bitwise;
 
-// TODO: Add tests for this class
+namespace NAPS2.Scan.Internal;
+
 internal class RemotePostProcessor : IRemotePostProcessor
 {
     private readonly ScanningContext _scanningContext;
@@ -31,12 +32,16 @@ internal class RemotePostProcessor : IRemotePostProcessor
         image = DoInitialTransforms(image, options);
         try
         {
-            if (options.ExcludeBlankPages &&
-                BlankDetector.IsBlank(image, options.BlankPageWhiteThreshold, options.BlankPageCoverageThreshold))
+            if (options.ExcludeBlankPages)
             {
-                // TODO: Consider annotating the image as blank via postprocessingdata rather than excluding here
-                // TODO: In theory we might want to add some functionality to allow the user to correct blank detection
-                return null;
+                var op = new BlankDetectionImageOp(options.BlankPageWhiteThreshold, options.BlankPageCoverageThreshold);
+                op.Perform(image);
+                if (op.IsBlank)
+                {
+                    // TODO: Consider annotating the image as blank via postprocessingdata rather than excluding here
+                    // TODO: In theory we might want to add some functionality to allow the user to correct blank detection
+                    return null;
+                }
             }
 
             var bitDepth = options.UseNativeUI ? BitDepth.Color : options.BitDepth;

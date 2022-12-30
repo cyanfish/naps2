@@ -16,8 +16,6 @@ using NAPS2.Serialization;
 
 namespace NAPS2.Remoting.Worker;
 
-// TODO: Scan and GetDeviceList are obsolete (see TwainScan and TwainGetDeviceList), as Twain is the only thing that
-// needs the worker. But I'm keeping them around for now as they could come in handy later. 
 public class WorkerServiceImpl : WorkerService.WorkerServiceBase
 {
     private readonly ScanningContext _scanningContext;

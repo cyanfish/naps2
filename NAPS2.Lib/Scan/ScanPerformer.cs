@@ -201,11 +201,6 @@ internal class ScanPerformer : IScanPerformer
                     ? new KeyValueScanOptions(scanProfile.KeyValueOptions)
                     : new KeyValueScanOptions()
             },
-            NetworkOptions =
-            {
-                Ip = scanProfile.ProxyConfig?.Ip,
-                Port = scanProfile.ProxyConfig?.Port
-            },
             BarcodeDetectionOptions =
             {
                 DetectBarcodes = scanParams.DetectPatchT ||

@@ -453,7 +453,6 @@ public abstract class DesktopForm : EtoFormBase
 
     private void OnKeyDown(object? sender, KeyEventArgs e)
     {
-        // TODO: The custom listview control isn't propagating events back to the parent window
         e.Handled = _keyboardShortcuts.Perform(e.KeyData);
     }
 

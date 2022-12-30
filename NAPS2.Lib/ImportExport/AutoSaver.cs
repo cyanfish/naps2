@@ -39,12 +39,10 @@ public class AutoSaver
             {
                 await foreach (var img in images)
                 {
-                    // TODO: We should assume the returned sink may dispose what we give it, therefore we should make
-                    // a clone before sending it out, and then dispose the clone when we're done with it
                     imageList.Add(img);
                     if (!settings.ClearImagesAfterSaving)
                     {
-                        produceImage(img);
+                        produceImage(img.Clone());
                     }
                 }
             }
@@ -56,6 +54,13 @@ public class AutoSaver
                     foreach (var img in imageList)
                     {
                         produceImage(img);
+                    }
+                }
+                else
+                {
+                    foreach (var img in imageList)
+                    {
+                        img.Dispose();
                     }
                 }
             }

@@ -22,8 +22,6 @@ public class ScanOptions
 
     public int Contrast { get; set; }
 
-    public NetworkOptions NetworkOptions { get; set; } = new();
-
     public WiaOptions WiaOptions { get; set; } = new();
 
     public TwainOptions TwainOptions { get; set; } = new();
@@ -54,9 +52,9 @@ public class ScanOptions
 
     public bool ExcludeBlankPages { get; set; }
 
-    public int BlankPageWhiteThreshold { get; set; }
+    public int BlankPageWhiteThreshold { get; set; } = 70;
 
-    public int BlankPageCoverageThreshold { get; set; }
+    public int BlankPageCoverageThreshold { get; set; } = 15;
 
     public bool MaxQuality { get; set; }
 

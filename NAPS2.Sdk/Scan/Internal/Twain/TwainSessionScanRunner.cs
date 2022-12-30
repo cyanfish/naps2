@@ -206,7 +206,7 @@ internal class TwainSessionScanRunner
         Debug.WriteLine("NAPS2.TW - DataTransferred");
         try
         {
-            // TODO: We probably want to support native transfer for mac/net6
+            // TODO: We probably want to support native transfer for net6
 #if NET6_0_OR_GREATER
             _twainEvents.MemoryBufferTransferred(ToMemoryBuffer(e.MemoryData, e.MemoryInfo));
 #else

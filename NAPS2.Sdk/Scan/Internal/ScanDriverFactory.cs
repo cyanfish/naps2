@@ -21,7 +21,7 @@ internal class ScanDriverFactory : IScanDriverFactory
                 return new Wia.WiaScanDriver(_scanningContext);
             case Driver.Twain:
                 return options.TwainOptions.Adapter == TwainAdapter.Legacy
-                    ? new Twain.LegacyTwainScanDriver()
+                    ? _scanningContext.LegacyTwainDriver ?? throw new NotSupportedException()
                     : new Twain.TwainScanDriver(_scanningContext);
 #endif
             case Driver.Sane:

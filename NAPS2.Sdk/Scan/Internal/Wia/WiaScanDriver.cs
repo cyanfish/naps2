@@ -115,7 +115,6 @@ internal class WiaScanDriver : IScanDriver
                     {
                         using (image)
                         {
-                            // TODO: Might still need to do some work on ownership for in-memory ScannedImage storage
                             _callback(image);
                         }
                     }
