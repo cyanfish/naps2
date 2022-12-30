@@ -367,6 +367,7 @@ public class DesktopController
                     MessageBoxType.Question) == DialogResult.Ok)
             {
                 _imageListActions.DeleteAll();
+                GC.Collect();
             }
         }
     }
@@ -381,6 +382,7 @@ public class DesktopController
                     MessageBoxType.Question, MessageBoxDefaultButton.OK) == DialogResult.Ok)
             {
                 _imageListActions.DeleteSelected();
+                GC.Collect();
             }
         }
     }
