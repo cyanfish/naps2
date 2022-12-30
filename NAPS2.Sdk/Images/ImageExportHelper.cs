@@ -63,8 +63,8 @@ public class ImageExportHelper
             // so the image will be png-encoded below instead of using a 1-bit bitmap
             return new ImageExportFormat(ImageFileFormat.Png, ImagePixelFormat.BW1);
         }
-        // TODO: Also for ARGB32? Or is OriginalFileFormat enough if we populate that more consistently?
-        if (lossless || image.OriginalFileFormat == ImageFileFormat.Png)
+        if (lossless || image.LogicalPixelFormat == ImagePixelFormat.ARGB32 ||
+            image.OriginalFileFormat == ImageFileFormat.Png)
         {
             // Store as PNG
             // Lossless, but some images (color/grayscale) take up lots of storage
