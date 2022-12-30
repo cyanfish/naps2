@@ -41,7 +41,6 @@ public class CommonModule : Module
         builder.RegisterType<RemoteScanController>().As<IRemoteScanController>();
         builder.RegisterType<InProcScanBridge>().AsSelf();
         builder.RegisterType<WorkerScanBridge>().AsSelf();
-        builder.RegisterType<NetworkScanBridge>().AsSelf();
 
         // Config
         builder.Register(_ => new Naps2Config(Path.Combine(Paths.Executable, "appsettings.xml"),

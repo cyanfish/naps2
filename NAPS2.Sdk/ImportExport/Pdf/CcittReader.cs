@@ -56,7 +56,6 @@ public static class CcittReader
         Write(stream, TiffTrailer);
         stream.Seek(0, SeekOrigin.Begin);
 
-        // TODO: If we need a TIFF hint for loading, it should go here.
         return imageContext.Load(stream);
     }
 

@@ -25,7 +25,6 @@ public static class WixToolsetPackager
 
     private static string GenerateWxs(PackageInfo packageInfo)
     {
-        // TODO: Delete Setup.Msi project
         var template = File.ReadAllText(Path.Combine(Paths.SetupWindows, "setup.template.wxs"));
 
         template = template.Replace("{{ !version }}", packageInfo.Version);

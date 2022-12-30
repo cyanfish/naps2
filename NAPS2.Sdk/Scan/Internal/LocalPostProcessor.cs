@@ -26,11 +26,9 @@ internal class LocalPostProcessor : ILocalPostProcessor
     {
         if (tempPath == null)
         {
-            if (string.IsNullOrEmpty(options.NetworkOptions.Ip))
-            {
-                throw new InvalidOperationException("Expected OCR tempPath to be set for non-network scan");
-            }
-            tempPath = _scanningContext.SaveToTempFile(image, options.BitDepth);
+            throw new InvalidOperationException("Expected OCR tempPath to be set");
+            // TODO: If we ever support a network scan bridge again, we'll want to set this here in that case
+            // tempPath = _scanningContext.SaveToTempFile(image, options.BitDepth);
         }
         _ocrController.Start(ref image, tempPath, options.OcrParams, options.OcrPriority).AssertNoAwait();
     }

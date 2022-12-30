@@ -85,7 +85,6 @@ public class ScanningContext : IDisposable
 
     private IImageStorage ConvertStorageIfNeeded(IImageStorage storage, BitDepth bitDepth, bool lossless, int quality)
     {
-        // TODO: We should revisit existing tests and make sure we have coverage for both filestorage and non
         if (FileStorageManager != null)
         {
             return ConvertToFileStorage(storage, bitDepth, lossless, quality);

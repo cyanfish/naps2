@@ -58,11 +58,6 @@ public class ScanOptionsValidator
             throw new ArgumentException("OCR is enabled but no OCR engine is set on ScanningContext.");
         }
 
-        if (string.IsNullOrEmpty(options.NetworkOptions.Ip) != (options.NetworkOptions.Port == null))
-        {
-            throw new ArgumentException("NetworkOptions.Ip and .Port must both be either set or unset.");
-        }
-
         // TODO: Do we need to validate the presence of a device?
         // TODO: Probably more things as well.
 

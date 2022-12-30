@@ -95,10 +95,6 @@ public class GtkDesktopForm : DesktopForm
 
     protected override void ConfigureToolbar()
     {
-        // TODO: Zoom is behaving weirdly - full zoomout and images become invisible
-        // TODO: Also getting "g_sequence_remove: assertion 'iter != NULL' failed" on zoom
-        // TODO: Also zoom buttons (and listview) are 2px above the bottom for no apparent reason
-
         _toolbar = ((ToolBarHandler) ToolBar.Handler).Control;
         _toolbar.Style = ToolbarStyle.Both;
         _toolbar.StyleContext.AddClass("desktop-toolbar");

@@ -39,13 +39,11 @@ internal class SaneScanDriver : IScanDriver
     {
         return Task.Run(() =>
         {
-            // TODO: Run SANE in a worker process so we can parallelize
             // TODO: Maybe use a mutex in SaneClient instead of needing manual locking?
             lock (SaneNativeLibrary.Instance)
             {
                 // TODO: This is crashing after a delay for no apparent reason.
-                // Presumably it's a bad backend.
-                // TODO: Run SANE in a worker process for added stability.
+                // That's okay because we're in a worker process, but ideally we could fix it in SANE.
                 using var client = new SaneClient();
                 // TODO: We can use device.type and .vendor to help pick an icon etc.
                 // https://sane-project.gitlab.io/standard/api.html#device-descriptor-type
