@@ -23,8 +23,7 @@ public class ScanProfile
         PaperSource = ScanSource.Glass;
         Quality = 75;
         BlankPageWhiteThreshold = 70;
-        // TODO: Change default value? In tests we use 15 instead of 25
-        BlankPageCoverageThreshold = 25;
+        BlankPageCoverageThreshold = 15;
         WiaDelayBetweenScansSeconds = 2.0;
     }
 

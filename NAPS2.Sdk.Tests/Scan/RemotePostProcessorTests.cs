@@ -8,7 +8,7 @@ public class RemotePostProcessorTests : ContextualTests
 {
     // TODO: Add more tests
 
-    private RemotePostProcessor _remotePostProcessor;
+    private readonly RemotePostProcessor _remotePostProcessor;
 
     public RemotePostProcessorTests()
     {
@@ -21,9 +21,7 @@ public class RemotePostProcessorTests : ContextualTests
         var image = LoadImage(ImageResources.blank1);
         var options = new ScanOptions
         {
-            ExcludeBlankPages = true,
-            BlankPageWhiteThreshold = 70,
-            BlankPageCoverageThreshold = 15
+            ExcludeBlankPages = true
         };
         var result = _remotePostProcessor.PostProcess(image, options, new PostProcessingContext());
         Assert.Null(result);
@@ -35,9 +33,7 @@ public class RemotePostProcessorTests : ContextualTests
         var image = LoadImage(ImageResources.notblank);
         var options = new ScanOptions
         {
-            ExcludeBlankPages = true,
-            BlankPageWhiteThreshold = 70,
-            BlankPageCoverageThreshold = 15
+            ExcludeBlankPages = true
         };
         var result = _remotePostProcessor.PostProcess(image, options, new PostProcessingContext());
         Assert.NotNull(result);

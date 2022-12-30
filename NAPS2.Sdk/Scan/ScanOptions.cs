@@ -52,10 +52,9 @@ public class ScanOptions
 
     public bool ExcludeBlankPages { get; set; }
 
-    // TODO: Set default values for these
-    public int BlankPageWhiteThreshold { get; set; }
+    public int BlankPageWhiteThreshold { get; set; } = 70;
 
-    public int BlankPageCoverageThreshold { get; set; }
+    public int BlankPageCoverageThreshold { get; set; } = 15;
 
     public bool MaxQuality { get; set; }
 
