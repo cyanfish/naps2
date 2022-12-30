@@ -36,7 +36,7 @@ public class MacEtoPlatform : EtoPlatform
         // Eto seems to use NsImage.Size instead of Rep.PixelsWide/High.
         // That can be incorrect (see MacImageTransformer.DoScale).
         var nsImage = ((MacImage) image).NsImage;
-        return new Bitmap(new BitmapHandler(nsImage));
+        return new Bitmap(new BitmapHandler((NSImage) nsImage.Copy()));
     }
 
     public override IMemoryImage DrawHourglass(ImageContext imageContext, IMemoryImage image)

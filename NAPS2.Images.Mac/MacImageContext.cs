@@ -31,11 +31,21 @@ public class MacImageContext : ImageContext
         {
             var image = new NSImage(NSData.FromStream(stream) ?? throw new ArgumentException(nameof(stream)));
             var reps = image.Representations();
-            if (reps.Length > 1)
+            try
             {
-                return CreateImage(reps[0]);
+                if (reps.Length > 1)
+                {
+                    return CreateImage(reps[0]);
+                }
+                return new MacImage(this, image);
             }
-            return new MacImage(this, image);
+            finally
+            {
+                foreach (var rep in reps)
+                {
+                    rep.Dispose();
+                }
+            }
         }
     }
 
@@ -48,13 +58,23 @@ public class MacImageContext : ImageContext
             image = new NSImage(NSData.FromStream(stream) ?? throw new ArgumentException(nameof(stream)));
         }
         var reps = image.Representations();
-        for (int i = 0; i < reps.Length; i++)
+        try
         {
-            progress.Report(i, reps.Length);
-            if (progress.IsCancellationRequested) break;
-            produceImage(CreateImage(reps[i]));
+            for (int i = 0; i < reps.Length; i++)
+            {
+                progress.Report(i, reps.Length);
+                if (progress.IsCancellationRequested) break;
+                produceImage(CreateImage(reps[i]));
+            }
+            progress.Report(reps.Length, reps.Length);
         }
-        progress.Report(reps.Length, reps.Length);
+        finally
+        {
+            foreach (var rep in reps)
+            {
+                rep.Dispose();
+            }
+        }
     }
 
     public override ITiffWriter TiffWriter { get; } = new MacTiffWriter();
@@ -77,6 +97,7 @@ public class MacImageContext : ImageContext
             var rep = MacBitmapHelper.CreateRep(width, height, pixelFormat);
             var image = new NSImage(rep.Size);
             image.AddRepresentation(rep);
+            rep.Dispose();
             return new MacImage(this, image);
         }
     }

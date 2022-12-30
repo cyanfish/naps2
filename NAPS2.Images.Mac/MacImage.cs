@@ -13,6 +13,10 @@ public class MacImage : IMemoryImage
         var reps = NsImage.Representations();
         if (reps.Length != 1)
         {
+            foreach (var rep in reps)
+            {
+                rep.Dispose();
+            }
             throw new ArgumentException("Expected NSImage with exactly one representation");
         }
         lock (MacImageContext.ConstructorLock)
@@ -69,12 +73,6 @@ public class MacImage : IMemoryImage
     public NSImage NsImage { get; }
 
     internal NSBitmapImageRep Rep { get; private set; }
-
-    public void Dispose()
-    {
-        NsImage.Dispose();
-        // TODO: Does this need to dispose the imageRep?
-    }
 
     public int Width => (int) Rep.PixelsWide;
     public int Height => (int) Rep.PixelsHigh;
@@ -199,5 +197,11 @@ public class MacImage : IMemoryImage
                 LogicalPixelFormat = LogicalPixelFormat
             };
         }
+    }
+
+    public void Dispose()
+    {
+        Rep.Dispose();
+        NsImage.Dispose();
     }
 }

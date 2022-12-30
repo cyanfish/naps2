@@ -100,7 +100,8 @@ public abstract class ImageFormBase : EtoDialogBase
 
     protected virtual void PaintOverlay(object? sender, PaintEventArgs e)
     {
-        e.Graphics.DrawImage(DisplayImage!.ToEtoImage(), _overlayL, _overlayT, _overlayW, _overlayH);
+        using var etoImage = DisplayImage!.ToEtoImage();
+        e.Graphics.DrawImage(etoImage, _overlayL, _overlayT, _overlayW, _overlayH);
     }
 
     private void RenderImage()
