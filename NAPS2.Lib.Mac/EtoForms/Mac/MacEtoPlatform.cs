@@ -65,8 +65,13 @@ public class MacEtoPlatform : EtoPlatform
     public override Control AccessibleImageButton(Image image, String text, Action onClick,
         int xOffset = 0, int yOffset = 0)
     {
-        // TODO
-        return new NSView().ToEto();
+        return new NSButton
+        {
+            Title = text,
+            Image = image.ToNS(),
+            ImagePosition = NSCellImagePosition.ImageOnly,
+            Bordered = false
+        }.WithAction(onClick).ToEto();
     }
 
     public override LayoutElement CreateGroupBox(string title, LayoutElement content)
