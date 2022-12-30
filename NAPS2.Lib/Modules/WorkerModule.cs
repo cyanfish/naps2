@@ -8,7 +8,7 @@ public class WorkerModule : Module
 {
     protected override void Load(ContainerBuilder builder)
     {
-        builder.Register(ctx => new ScanningContext(ctx.Resolve<ImageContext>()));
+        builder.Register(ctx => new ScanningContext(ctx.Resolve<ImageContext>())).SingleInstance();
 #if MAC
         builder.RegisterType<StubTwainSessionController>().As<ITwainSessionController>();
 #else

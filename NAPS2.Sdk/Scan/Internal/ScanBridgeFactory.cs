@@ -32,6 +32,12 @@ internal class ScanBridgeFactory : IScanBridgeFactory
             // Run SANE in a worker process for added stability
             return _workerScanBridge;
         }
+        if (options is { Driver: Driver.Twain, TwainOptions.Adapter: TwainAdapter.Legacy })
+        {
+            // Legacy twain needs to run in a 32-bit worker
+            // (Normal twain also does, but it runs the worker at a lower level via RemoteTwainSessionController)
+            return _workerScanBridge;
+        }
         return _inProcScanBridge;
     }
 }

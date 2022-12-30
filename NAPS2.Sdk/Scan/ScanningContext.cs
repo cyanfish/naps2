@@ -1,6 +1,7 @@
 using System.Collections.Immutable;
 using NAPS2.Ocr;
 using NAPS2.Remoting.Worker;
+using NAPS2.Scan.Internal;
 
 namespace NAPS2.Scan;
 
@@ -43,6 +44,8 @@ public class ScanningContext : IDisposable
     public OcrRequestQueue OcrRequestQueue { get; } = new();
 
     public IOcrEngine? OcrEngine { get; set; }
+
+    internal IScanDriver? LegacyTwainDriver { get; set; }
 
     public ProcessedImage CreateProcessedImage(IImageStorage storage)
     {
