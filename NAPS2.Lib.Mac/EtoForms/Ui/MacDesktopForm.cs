@@ -103,15 +103,11 @@ public class MacDesktopForm : DesktopForm
                         Commands.Delete
                     }
                 },
-                new SubMenuItem
-                {
-                    Text = UiStrings.Scan,
-                    Items =
-                    {
-                        Commands.Scan,
-                        Commands.NewProfile
-                    }
-                },
+                CreateSubMenu(Commands.Scan, new MenuProvider()
+                    .Dynamic(_scanMenuCommands)
+                    .Separator()
+                    .Append(Commands.NewProfile)
+                    .Append(Commands.BatchScan)),
                 new SubMenuItem
                 {
                     Text = UiStrings.Image,

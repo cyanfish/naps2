@@ -26,7 +26,7 @@ public abstract class DesktopForm : EtoFormBase
     private readonly DesktopFormProvider _desktopFormProvider;
     private readonly IDesktopSubFormController _desktopSubFormController;
 
-    private readonly ListProvider<Command> _scanMenuCommands = new();
+    protected readonly ListProvider<Command> _scanMenuCommands = new();
     private readonly ListProvider<Command> _languageMenuCommands = new();
     private readonly ContextMenu _contextMenu = new();
 
@@ -82,7 +82,12 @@ public abstract class DesktopForm : EtoFormBase
         // TODO: Fix Eto so that we don't need to set an item here (otherwise the first time we right click nothing happens)
         _contextMenu.Items.Add(Commands.SelectAll);
         _contextMenu.Opening += OpeningContextMenu;
-        _keyboardShortcuts.Assign(Commands);
+        if (!EtoPlatform.Current.IsMac)
+        {
+            // For Mac the menu shortcuts work without needing manual hooks
+            // Maybe at some point we can support custom assignment on Mac, though we'll need to fix Ctrl vs Command
+            _keyboardShortcuts.Assign(Commands);
+        }
         KeyDown += OnKeyDown;
         _listView.Control.KeyDown += OnKeyDown;
         _listView.Control.MouseWheel += ListViewMouseWheel;
@@ -120,7 +125,11 @@ public abstract class DesktopForm : EtoFormBase
     private void OpeningContextMenu(object? sender, EventArgs e)
     {
         _contextMenu.Items.Clear();
-        Commands.Paste.Enabled = _imageTransfer.IsInClipboard();
+        if (!EtoPlatform.Current.IsMac)
+        {
+            // TODO: Can't do this on Mac yet as it disables the menu item indefinitely
+            Commands.Paste.Enabled = _imageTransfer.IsInClipboard();
+        }
         if (ImageList.Selection.Any())
         {
             // TODO: Remove icon from delete command somehow
@@ -359,27 +368,6 @@ public abstract class DesktopForm : EtoFormBase
         return L.Row(zoomOut, zoomIn).Spacing(-1);
     }
 
-    // /// <summary>
-    // /// Runs when the form is first loaded and every time the language is changed.
-    // /// </summary>
-    // private void PostInitializeComponent()
-    // {
-    //
-    //     int thumbnailSize = Config.ThumbnailSize();
-    //     _listView.ImageSize = thumbnailSize;
-    //     SetThumbnailSpacing(thumbnailSize);
-    //
-    //     LoadToolStripLocation();
-    //     InitLanguageDropdown();
-    //     AssignKeyboardShortcuts();
-    //     UpdateScanButton();
-    //
-    //     _listView.NativeControl.SizeChanged += (_, _) => _layoutManager.UpdateLayout();
-    //
-    //     _imageListSyncer = new ImageListSyncer(_imageList, _listView.ApplyDiffs, SynchronizationContext.Current!);
-    //     _listView.NativeControl.Focus();
-    // }
-    //
     private void InitLanguageDropdown()
     {
         _languageMenuCommands.Value = _cultureHelper.GetAvailableCultures().Select(x =>
