@@ -242,8 +242,14 @@ public class DesktopCommands
         {
             Text = UiStrings.Reverse
         };
-        ReverseAll = new ActionCommand(imageListActions.ReverseAll);
-        ReverseSelected = new ActionCommand(imageListActions.ReverseSelected);
+        ReverseAll = new ActionCommand(imageListActions.ReverseAll)
+        {
+            Text = UiStrings.ReverseAll
+        };
+        ReverseSelected = new ActionCommand(imageListActions.ReverseSelected)
+        {
+            Text = UiStrings.ReverseSelected
+        };
         Delete = new ActionCommand(desktopController.Delete)
         {
             Text = UiStrings.Delete,

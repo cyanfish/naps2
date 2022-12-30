@@ -270,6 +270,12 @@
   <data name="Reverse" xml:space="preserve">
     <value>Reverse</value>
   </data>
+  <data name="ReverseAll" xml:space="preserve">
+    <value>Reverse All</value>
+  </data>
+  <data name="ReverseSelected" xml:space="preserve">
+    <value>Reverse Selected</value>
+  </data>
   <data name="Clear" xml:space="preserve">
     <value>Clear</value>
   </data>
@@ -788,5 +794,8 @@
   </data>
   <data name="OpenFolder" xml:space="preserve">
     <value>Open Folder</value>
+  </data>
+  <data name="Tools" xml:space="preserve">
+    <value>Tools</value>
   </data>
 </root>

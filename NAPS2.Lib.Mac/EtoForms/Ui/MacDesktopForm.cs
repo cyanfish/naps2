@@ -70,6 +70,7 @@ public class MacDesktopForm : DesktopForm
             {
                 new SubMenuItem
                 {
+                    // TODO: Localize this?
                     Text = "File",
                     Items =
                     {
@@ -93,7 +94,7 @@ public class MacDesktopForm : DesktopForm
                 new SubMenuItem
                 {
                     // The space makes sure this doesn't match the default "Edit" menu
-                    Text = "Edit ",
+                    Text = UiStrings.Edit + " ",
                     Items =
                     {
                         Commands.SelectAll,
@@ -104,7 +105,7 @@ public class MacDesktopForm : DesktopForm
                 },
                 new SubMenuItem
                 {
-                    Text = "Scan",
+                    Text = UiStrings.Scan,
                     Items =
                     {
                         Commands.Scan,
@@ -113,7 +114,7 @@ public class MacDesktopForm : DesktopForm
                 },
                 new SubMenuItem
                 {
-                    Text = "Image",
+                    Text = UiStrings.Image,
                     Items =
                     {
                         Commands.ViewImage,
@@ -125,12 +126,33 @@ public class MacDesktopForm : DesktopForm
                         Commands.Sharpen,
                         Commands.DocumentCorrection,
                         new SeparatorMenuItem(),
+                        Commands.RotateLeft,
+                        Commands.RotateRight,
+                        Commands.Flip,
+                        Commands.Deskew,
+                        Commands.CustomRotate,
+                        new SeparatorMenuItem(),
                         Commands.ResetImage
                     }
                 },
                 new SubMenuItem
                 {
-                    Text = "Tools",
+                    Text = UiStrings.Reorder,
+                    Items =
+                    {
+                        Commands.Interleave,
+                        Commands.Deinterleave,
+                        new SeparatorMenuItem(),
+                        Commands.AltInterleave,
+                        Commands.AltDeinterleave,
+                        new SeparatorMenuItem(),
+                        Commands.ReverseAll,
+                        Commands.ReverseSelected
+                    }
+                },
+                new SubMenuItem
+                {
+                    Text = UiStrings.Tools,
                     Items =
                     {
                         Commands.BatchScan,
