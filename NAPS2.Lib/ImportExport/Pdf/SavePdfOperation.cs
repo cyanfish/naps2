@@ -41,7 +41,6 @@ public class SavePdfOperation : OperationBase
             // Not supposed to be a directory, but ok...
             subFileName = placeholders.Substitute(Path.Combine(subFileName, "$(n).pdf"));
         }
-        // TODO: We need to make sure we dispose of the images in all cases (e.g. on choosing not to overwrite)
         var singleFile = !pdfSettings.SinglePagePdfs || images.Count == 1;
         if (singleFile)
         {
@@ -126,10 +125,6 @@ public class SavePdfOperation : OperationBase
             }
             finally
             {
-                foreach (var image in images)
-                {
-                    image.Dispose();
-                }
                 GC.Collect();
             }
 

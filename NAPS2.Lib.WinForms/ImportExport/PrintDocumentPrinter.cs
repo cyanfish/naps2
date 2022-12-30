@@ -67,56 +67,45 @@ public class PrintDocumentPrinter : IScannedImagePrinter
 
         return await Task.Run(() =>
         {
-            try
+            var printDocument = new PrintDocument();
+            int i = 0;
+            printDocument.PrintPage += (sender, e) =>
             {
-                var printDocument = new PrintDocument();
-                int i = 0;
-                printDocument.PrintPage += (sender, e) =>
+                var image = imagesToPrint[i].Render();
+                try
                 {
-                    var image = imagesToPrint[i].Render();
-                    try
+                    var pb = e.PageBounds;
+                    if (Math.Sign(image.Width - image.Height) != Math.Sign(pb.Width - pb.Height))
                     {
-                        var pb = e.PageBounds;
-                        if (Math.Sign(image.Width - image.Height) != Math.Sign(pb.Width - pb.Height))
-                        {
-                            // Flip portrait/landscape to match output
-                            image = image.PerformTransform(new RotationTransform(90));
-                        }
-
-                        // Fit the image into the output rect while maintaining its aspect ratio
-                        var rect = image.Width / pb.Width < image.Height / pb.Height
-                            ? new Rectangle(pb.Left, pb.Top, image.Width * pb.Height / image.Height, pb.Height)
-                            : new Rectangle(pb.Left, pb.Top, pb.Width, image.Height * pb.Width / image.Width);
-
-                        e.Graphics!.DrawImage(image.AsBitmap(), rect);
-                    }
-                    finally
-                    {
-                        image.Dispose();
+                        // Flip portrait/landscape to match output
+                        image = image.PerformTransform(new RotationTransform(90));
                     }
 
-                    e.HasMorePages = (++i < imagesToPrint.Count);
-                };
-                printDocument.PrinterSettings = printerSettings;
-                printDocument.Print();
+                    // Fit the image into the output rect while maintaining its aspect ratio
+                    var rect = image.Width / pb.Width < image.Height / pb.Height
+                        ? new Rectangle(pb.Left, pb.Top, image.Width * pb.Height / image.Height, pb.Height)
+                        : new Rectangle(pb.Left, pb.Top, pb.Width, image.Height * pb.Width / image.Width);
 
-                Log.Event(EventType.Print, new EventParams
-                {
-                    Name = MiscResources.Print,
-                    Pages = images.Count,
-                    DeviceName = printDocument.PrinterSettings.PrinterName
-                });
-
-                return true;
-            }
-            finally
-            {
-                // TODO: Clone & dispose
-                foreach (var image in images)
+                    e.Graphics!.DrawImage(image.AsBitmap(), rect);
+                }
+                finally
                 {
                     image.Dispose();
                 }
-            }
+
+                e.HasMorePages = (++i < imagesToPrint.Count);
+            };
+            printDocument.PrinterSettings = printerSettings;
+            printDocument.Print();
+
+            Log.Event(EventType.Print, new EventParams
+            {
+                Name = MiscResources.Print,
+                Pages = images.Count,
+                DeviceName = printDocument.PrinterSettings.PrinterName
+            });
+
+            return true;
         });
     }
 }
