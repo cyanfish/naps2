@@ -31,7 +31,7 @@ public class MacListView<T> : NSCollectionViewDelegateFlowLayout, IListView<T> w
             TopAlign = behavior.ShowLabels,
             LeftGravity = false // TODO: I prefer this true, but it glitches out selection
         };
-        _dataSource = new ListViewDataSource<T>(this, _behavior);
+        _dataSource = new ListViewDataSource<T>(this, _behavior, ItemActivated);
         _view.DataSource = _dataSource;
         _view.Delegate = this;
         _view.CollectionViewLayout = _layout;
@@ -47,6 +47,14 @@ public class MacListView<T> : NSCollectionViewDelegateFlowLayout, IListView<T> w
         }
         _scrollView.DocumentView = _view;
         _panel.Content = _scrollView.ToEto();
+    }
+
+    private void ItemActivated(T item)
+    {
+        // TODO: Propagate the item back to the click handler
+        // That doesn't matter on e.g. Windows where double clicking sets the item as the sole selection. But on Mac
+        // it's possible to select multiple items and double-click on one without losing your selection.
+        ItemClicked?.Invoke(this, EventArgs.Empty);
     }
 
     public int ImageSize
@@ -69,10 +77,7 @@ public class MacListView<T> : NSCollectionViewDelegateFlowLayout, IListView<T> w
 
     public event EventHandler? SelectionChanged;
 
-    // TODO: Implement item double-click
-#pragma warning disable CS0067
     public event EventHandler? ItemClicked;
-#pragma warning restore CS0067
 
     public event EventHandler<DropEventArgs>? Drop;
 
@@ -214,7 +219,7 @@ public class MacListView<T> : NSCollectionViewDelegateFlowLayout, IListView<T> w
         if (_behavior.ShowLabels)
         {
             using var image = _behavior.GetImage(item, ImageSize);
-            using var listItem = new ListViewItem(image, _behavior.GetLabel(item));
+            using var listItem = new ListViewItem(image, _behavior.GetLabel(item), () => { });
             listItem.LoadView();
             return listItem.View.FittingSize;
         }

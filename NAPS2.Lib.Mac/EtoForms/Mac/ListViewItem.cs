@@ -9,13 +9,15 @@ public class ListViewItem : NSCollectionViewItem
 {
     private readonly Image _itemImage;
     private readonly string? _label;
+    private readonly Action _onActivate;
     private bool _selected;
     private NSImageView? _imageView;
 
-    public ListViewItem(Image itemImage, string? label)
+    public ListViewItem(Image itemImage, string? label, Action onActivate)
     {
         _itemImage = itemImage;
         _label = label;
+        _onActivate = onActivate;
     }
 
     public override void LoadView()
@@ -60,6 +62,12 @@ public class ListViewItem : NSCollectionViewItem
         }
         View.WantsLayer = true;
         UpdateViewForSelectedState();
+
+        View.AddGestureRecognizer(new NSClickGestureRecognizer(_onActivate)
+        {
+            NumberOfClicksRequired = 2,
+            DelaysPrimaryMouseButtonEvents = false
+        });
     }
 
     public override bool Selected

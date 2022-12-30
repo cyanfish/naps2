@@ -6,11 +6,13 @@ public class ListViewDataSource<T> : NSCollectionViewDataSource where T : notnul
 {
     private readonly IListView<T> _listView;
     private readonly ListViewBehavior<T> _behavior;
+    private readonly Action<T> _itemActivated;
 
-    public ListViewDataSource(IListView<T> listView, ListViewBehavior<T> behavior)
+    public ListViewDataSource(IListView<T> listView, ListViewBehavior<T> behavior, Action<T> itemActivated)
     {
         _listView = listView;
         _behavior = behavior;
+        _itemActivated = itemActivated;
     }
 
     public List<T> Items { get; } = new();
@@ -23,8 +25,9 @@ public class ListViewDataSource<T> : NSCollectionViewDataSource where T : notnul
     public override NSCollectionViewItem GetItem(NSCollectionView collectionView, NSIndexPath indexPath)
     {
         var i = (int) indexPath.Item;
-        var image = _behavior.GetImage(Items[i], _listView.ImageSize);
-        var label = _behavior.ShowLabels ? _behavior.GetLabel(Items[i]) : null;
-        return new ListViewItem(image, label);
+        var item = Items[i];
+        var image = _behavior.GetImage(item, _listView.ImageSize);
+        var label = _behavior.ShowLabels ? _behavior.GetLabel(item) : null;
+        return new ListViewItem(image, label, () => _itemActivated(item));
     }
 }
