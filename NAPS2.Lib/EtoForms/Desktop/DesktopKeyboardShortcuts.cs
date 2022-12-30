@@ -103,7 +103,6 @@ public class DesktopKeyboardShortcuts
 
     private string? GetProfileShortcut(int i)
     {
-        // TODO: Granular
         var ks = _config.Get(c => c.KeyboardShortcuts);
         switch (i)
         {

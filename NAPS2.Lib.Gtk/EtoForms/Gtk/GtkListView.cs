@@ -53,11 +53,6 @@ public class GtkListView<T> : IListView<T> where T : notnull
 
     public int ImageSize { get; set; }
 
-    // TODO: Properties here vs on behavior?
-    public bool AllowDrag { get; set; }
-
-    public bool AllowDrop { get; set; }
-
     public ScrolledWindow NativeControl => _scrolledWindow;
 
     public Control Control => _scrolledWindow.ToEto();

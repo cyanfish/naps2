@@ -8,7 +8,6 @@ using NAPS2.WinForms;
 
 namespace NAPS2.Scan.Twain.Legacy;
 
-// TODO: Either make this usable without a form, or just get rid of it...
 internal static class TwainApi
 {
     public static ScanDevice? SelectDeviceUI()

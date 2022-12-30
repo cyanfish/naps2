@@ -1,6 +1,5 @@
 ﻿namespace NAPS2.ImportExport.Images;
 
-// TODO: Cross-platform TIFF
 public class SaveImagesOperation : OperationBase
 {
     private readonly IOverwritePrompt _overwritePrompt;

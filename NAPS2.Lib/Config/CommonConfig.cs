@@ -9,8 +9,6 @@ using NAPS2.Scan.Batch;
 
 namespace NAPS2.Config;
 
-// TODO: Remove all unnecessary nullables
-// TODO: Maybe have this serialize with the root node named as AppConfig/UserConfig somehow?
 [Config]
 public class CommonConfig
 {

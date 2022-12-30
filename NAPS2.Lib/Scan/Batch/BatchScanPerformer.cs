@@ -273,10 +273,8 @@ public class BatchScanPerformer : IBatchScanPerformer
                 {
                     subPath = placeholders.Substitute(subPath, true, 0, 1);
                 }
-                // TODO: Make copies of images and dispose
                 try
                 {
-                    // TODO: This is broken due to not accessing the child fields directly
                     var exportParams = new PdfExportParams(
                         _config.Get(c => c.PdfSettings.Metadata),
                         _config.Get(c => c.PdfSettings.Encryption),

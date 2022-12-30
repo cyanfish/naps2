@@ -467,8 +467,6 @@ public class EditProfileForm : EtoDialogBase
 
             _advanced.Enabled = !locked;
 
-            // TODO: Adjust form height?
-
             _suppressChangeEvent = false;
         }
     }

@@ -43,8 +43,6 @@ public static class GtkEntryPoint
         application.UnhandledException += UnhandledException;
         var formFactory = container.Resolve<IFormFactory>();
         var desktop = formFactory.Create<DesktopForm>();
-        // TODO: Clean up invoker setting
-        // Invoker.Current = new WinFormsInvoker(desktop.ToNative());
         application.Run(desktop);
         return 0;
     }

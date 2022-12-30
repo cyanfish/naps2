@@ -10,12 +10,6 @@ using NAPS2.Update;
 
 namespace NAPS2.EtoForms.Desktop;
 
-// TODO: We undoubtedly want to decompose this file even further.
-// We almost certainly want a DesktopScanController for the scanning-related logic.
-// We could have a DesktopPipesController that depends on DesktopScanController.
-// Specifically each line in Initialize might make sense as a sub-controller.
-// We also need to think about how to pass the Form instance around as needed. (e.g. to Activate it). Maybe this should be something injectable, and could also be used by UpdateOperation instead of searching through open forms.
-// i.e. (I)DesktopFormProvider
 public class DesktopController
 {
     private readonly ScanningContext _scanningContext;
@@ -165,7 +159,6 @@ public class DesktopController
         {
             try
             {
-                // TODO: Figure out and fix undisposed processed images
                 _scanningContext.Dispose();
                 _recoveryStorageManager.Dispose();
             }
@@ -263,7 +256,7 @@ public class DesktopController
                 {
                     // TODO: xplat
                     var formOnTop = Application.Instance.Windows.Last();
-                    if (formOnTop.WindowState == WindowState.Minimized)
+                    if (formOnTop.WindowState == WindowState.Minimized && PlatformCompat.System.CanUseWin32)
                     {
                         Win32.ShowWindow(formOnTop.NativeHandle, Win32.ShowWindowCommands.Restore);
                     }

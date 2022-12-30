@@ -31,7 +31,6 @@ public class MacIconProvider : IIconProvider
         { "contrast_high", "circle.righthalf.filled" },
         { "sharpen", "rhombus" },
         { "cross", "trash" },
-        // TODO: Probably just use the save icon for these
         { "file_extension_pdf", "doc.richtext" },
         { "pictures", "photo" }
     };
