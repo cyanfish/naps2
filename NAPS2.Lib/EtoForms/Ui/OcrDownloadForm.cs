@@ -86,7 +86,7 @@ public class OcrDownloadForm : EtoDialogBase
         var selected = SelectedLanguageComponents;
         foreach (var langComponent in _tesseractLanguageManager.LanguageComponents.Where(x => selected.Contains(x.Id)))
         {
-            progressForm.QueueFile(langComponent);
+            progressForm.Controller.QueueFile(langComponent);
         }
 
         Close();

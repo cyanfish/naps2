@@ -1,4 +1,5 @@
 ﻿using System.Threading;
+using NAPS2.Dependencies;
 using NAPS2.EtoForms;
 using NAPS2.ImportExport;
 using NAPS2.ImportExport.Email;
@@ -83,7 +84,7 @@ public class AutomatedScanning
 
             if (_options.Install != null)
             {
-                InstallComponents();
+                await InstallComponents();
                 if (_options.OutputPath == null && _options.EmailFileName == null && !_options.AutoSave)
                 {
                     return;
@@ -165,44 +166,44 @@ public class AutomatedScanning
         _ocrParams = _config.DefaultOcrParams();
     }
 
-    private void InstallComponents()
+    private async Task InstallComponents()
     {
-        // TODO: Extract out a DownloadController from FDownloadProgress and use that
-        throw new NotImplementedException();
+        var availableComponents = new List<IExternalComponent>();
+        availableComponents.AddRange(_tesseractLanguageManager.LanguageComponents);
 
-        // var availableComponents = new List<IExternalComponent>();
-        // availableComponents.AddRange(_tesseractLanguageManager.LanguageComponents);
-        //
-        // var componentDict = availableComponents.ToDictionary(x => x.Id.ToLowerInvariant());
-        // var installId = _options.Install!.ToLowerInvariant();
-        // if (!componentDict.TryGetValue(installId, out var toInstall))
-        // {
-        //     _output.Writer.WriteLine(ConsoleResources.ComponentNotAvailable);
-        //     return;
-        // }
-        // if (toInstall.IsInstalled)
-        // {
-        //     _output.Writer.WriteLine(ConsoleResources.ComponentAlreadyInstalled);
-        //     return;
-        // }
-        // // Using a form here is not ideal (since this is supposed to be a console app), but good enough for now
-        // // Especially considering wia/twain often show forms anyway
-        // var progressForm = _formFactory.Create<FDownloadProgress>();
-        // if (toInstall.Id.StartsWith("ocr-", StringComparison.InvariantCulture) &&
-        //     componentDict.TryGetValue("ocr", out var ocrExe) && !ocrExe.IsInstalled)
-        // {
-        //     progressForm.QueueFile(ocrExe);
-        //     if (_options.Verbose)
-        //     {
-        //         _output.Writer.WriteLine(ConsoleResources.Installing, ocrExe.Id);
-        //     }
-        // }
-        // progressForm.QueueFile(toInstall);
-        // if (_options.Verbose)
-        // {
-        //     _output.Writer.WriteLine(ConsoleResources.Installing, toInstall.Id);
-        // }
-        // progressForm.ShowDialog();
+        var componentDict = availableComponents.ToDictionary(x => x.Id.ToLowerInvariant());
+        var installId = _options.Install!.ToLowerInvariant();
+        if (!componentDict.TryGetValue(installId, out var toInstall))
+        {
+            _output.Writer.WriteLine(ConsoleResources.ComponentNotAvailable);
+            return;
+        }
+        if (toInstall.IsInstalled)
+        {
+            _output.Writer.WriteLine(ConsoleResources.ComponentAlreadyInstalled);
+            return;
+        }
+        var downloadController = new DownloadController(_scanningContext);
+        if (toInstall.Id.StartsWith("ocr-", StringComparison.InvariantCulture) &&
+            componentDict.TryGetValue("ocr", out var ocrExe) && !ocrExe.IsInstalled)
+        {
+            downloadController.QueueFile(ocrExe);
+            if (_options.Verbose)
+            {
+                _output.Writer.WriteLine(ConsoleResources.Installing, ocrExe.Id);
+            }
+        }
+        downloadController.QueueFile(toInstall);
+        if (_options.Verbose)
+        {
+            _output.Writer.WriteLine(ConsoleResources.Installing, toInstall.Id);
+        }
+        downloadController.DownloadError += (_, _) =>
+        {
+            _errorOutput.DisplayError(MiscResources.FilesCouldNotBeDownloaded);
+        };
+        downloadController.Start();
+        await downloadController.CompletionTask;
     }
 
     private void ReorderScannedImages()
