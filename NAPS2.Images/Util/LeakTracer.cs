@@ -28,6 +28,11 @@ public class LeakTracer
 
     public static void PrintTraces()
     {
+        if (!ENABLE_TRACING)
+        {
+            Console.WriteLine("Leak tracing not enabled.");
+            return;
+        }
         var traceCounts = new Dictionary<string, int>();
         foreach (var trace in _traces.Values)
         {
@@ -41,6 +46,10 @@ public class LeakTracer
         {
             Console.WriteLine($"Potential leak (count: {kvp.Value}):");
             Console.WriteLine(kvp.Key);
+        }
+        if (!traceCounts.Any())
+        {
+            Console.WriteLine("No leaks.");
         }
     }
 }
