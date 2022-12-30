@@ -234,7 +234,7 @@ public class PreviewForm : EtoDialogBase
     private async Task UpdateImage()
     {
         using var imageToRender = CurrentImage.GetClonedImage();
-        var rendered = await Task.Run(() => imageToRender.Render());
+        using var rendered = await Task.Run(() => imageToRender.Render());
         ImageViewer.Image?.Dispose();
         ImageViewer.Image = rendered.ToEtoImage();
         ImageViewer.ZoomToContainer();
