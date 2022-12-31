@@ -40,7 +40,7 @@ public class GtkEtoPlatform : EtoPlatform
 
     public override Bitmap ToBitmap(IMemoryImage image)
     {
-        var pixbuf = ((GtkImage) image).Pixbuf;
+        var pixbuf = ((GtkImage) image).Pixbuf.Copy();
         return new Bitmap(new BitmapHandler(pixbuf));
     }
 

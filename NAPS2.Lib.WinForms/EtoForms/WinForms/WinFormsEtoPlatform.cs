@@ -97,7 +97,9 @@ public class WinFormsEtoPlatform : EtoPlatform
 
     public override Bitmap ToBitmap(IMemoryImage image)
     {
-        return ((GdiImage) image).Bitmap.ToEto();
+        var gdiImage = (GdiImage) image;
+        var bitmap = (sd.Bitmap) gdiImage.Bitmap.Clone();
+        return bitmap.ToEto();
     }
 
     public override IMemoryImage DrawHourglass(ImageContext imageContext, IMemoryImage image)
