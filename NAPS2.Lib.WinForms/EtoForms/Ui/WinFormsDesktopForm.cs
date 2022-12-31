@@ -1,3 +1,4 @@
+using System.ComponentModel;
 using System.Drawing;
 using Eto.Forms;
 using Eto.WinForms;
@@ -42,6 +43,21 @@ public class WinFormsDesktopForm : DesktopForm
             imageListActions, desktopFormProvider, desktopSubFormController, commands)
     {
         _form = this.ToNative();
+        _form.FormClosing += OnFormClosing;
+    }
+
+    protected override void OnClosing(CancelEventArgs e)
+    {
+        // Don't do anything here as we have a separate FormClosing event handler
+        // That allows us to check the close reason (which Eto doesn't provide)
+    }
+
+    private void OnFormClosing(object? sender, wf.FormClosingEventArgs e)
+    {
+        if (!_desktopController.PrepareForClosing(e.CloseReason == wf.CloseReason.UserClosing))
+        {
+            e.Cancel = true;
+        }
     }
 
     protected override void OnLoad(EventArgs e)

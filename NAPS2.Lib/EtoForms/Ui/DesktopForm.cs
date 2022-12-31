@@ -1,4 +1,5 @@
 using System.Collections.Immutable;
+using System.ComponentModel;
 using System.Threading;
 using Eto.Drawing;
 using Eto.Forms;
@@ -19,7 +20,7 @@ public abstract class DesktopForm : EtoFormBase
     private readonly ImageTransfer _imageTransfer;
     protected readonly ThumbnailController _thumbnailController;
     private readonly UiThumbnailProvider _thumbnailProvider;
-    private readonly DesktopController _desktopController;
+    protected readonly DesktopController _desktopController;
     private readonly IDesktopScanController _desktopScanController;
     private readonly ImageListActions _imageListActions;
     private readonly DesktopFormProvider _desktopFormProvider;
@@ -195,13 +196,13 @@ public abstract class DesktopForm : EtoFormBase
         await _desktopController.Initialize();
     }
 
-    // protected override void OnClosing(CancelEventArgs e)
-    // {
-    //     if (!_desktopController.PrepareForClosing(e.CloseReason == CloseReason.UserClosing))
-    //     {
-    //         e.Cancel = true;
-    //     }
-    // }
+    protected override void OnClosing(CancelEventArgs e)
+    {
+        if (!_desktopController.PrepareForClosing(true))
+        {
+            e.Cancel = true;
+        }
+    }
 
     protected override void OnClosed(EventArgs e)
     {
