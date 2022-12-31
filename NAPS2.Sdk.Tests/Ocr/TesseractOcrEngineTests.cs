@@ -51,7 +51,7 @@ public class TesseractOcrEngineTests : ContextualTests
         Assert.Equal("הקדמת", result.Elements[0].Text);
     }
 
-    [Fact]
+    [Fact(Skip = "flaky")]
     public async Task ImmediateCancel()
     {
         CancellationTokenSource cts = new CancellationTokenSource();
