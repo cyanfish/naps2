@@ -19,6 +19,8 @@ public abstract class WindowsSystemCompat : ISystemCompat
 
     public bool CanPrint => true;
 
+    public bool ShouldRememberBackgroundOperations => true;
+
     public bool UseSystemTesseract => false;
 
     public bool RenderInWorker => true;

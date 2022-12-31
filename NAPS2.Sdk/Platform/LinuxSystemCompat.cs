@@ -21,6 +21,8 @@ public class LinuxSystemCompat : ISystemCompat
 
     public bool CanPrint => false;
 
+    public bool ShouldRememberBackgroundOperations => false;
+
     public bool UseSystemTesseract => false;
 
     public bool RenderInWorker => false;

@@ -33,7 +33,8 @@ public class EtoOperationProgress : OperationProgress
 
     public override void ShowProgress(IOperation op)
     {
-        if (_config.Get(c => c.BackgroundOperations).Contains(op.GetType().Name))
+        if (PlatformCompat.System.ShouldRememberBackgroundOperations &&
+            _config.Get(c => c.BackgroundOperations).Contains(op.GetType().Name))
         {
             ShowBackgroundProgress(op);
         }
@@ -103,7 +104,8 @@ public class EtoOperationProgress : OperationProgress
         else
         {
             numberLabel.Text = status.ProgressType == OperationProgressType.MB
-                ? string.Format(MiscResources.SizeProgress, (status.CurrentProgress / 1000000.0).ToString("f1"), (status.MaxProgress / 1000000.0).ToString("f1"))
+                ? string.Format(MiscResources.SizeProgress, (status.CurrentProgress / 1000000.0).ToString("f1"),
+                    (status.MaxProgress / 1000000.0).ToString("f1"))
                 : string.Format(MiscResources.ProgressFormat, status.CurrentProgress, status.MaxProgress);
             progressBar.MaxValue = status.MaxProgress;
             progressBar.Value = status.CurrentProgress;

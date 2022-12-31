@@ -17,6 +17,9 @@ public interface ISystemCompat
 
     bool CanPrint { get; }
 
+    // TODO: Implement background progress notifications on Mac/Linux
+    bool ShouldRememberBackgroundOperations { get; }
+
     bool UseSystemTesseract { get; }
 
     bool RenderInWorker { get; }
