@@ -1,5 +1,7 @@
 ﻿using System.Threading;
 using NAPS2.Config.Model;
+using NAPS2.ImportExport.Pdf;
+using NAPS2.Ocr;
 using NAPS2.Sdk.Tests;
 using Xunit;
 
@@ -96,7 +98,7 @@ public class FileConfigScopeTests : ContextualTests
     {
         var configPath = Path.Combine(FolderPath, "config.xml");
         File.WriteAllText(configPath, @"<?xml version=""1.0"" encoding=""utf-8""?><Blah><Culture>fr</Culture></Blah>");
-        var scope = new FileConfigScope<CommonConfig>(configPath, new ConfigSerializer(ConfigReadMode.DefaultOnly, ConfigRootName.UserConfig), ConfigScopeMode.ReadWrite);
+        var scope = new FileConfigScope<CommonConfig>(configPath, new ConfigSerializer(ConfigReadMode.DefaultOnly, ConfigRootName.AppConfig), ConfigScopeMode.ReadWrite);
 
         Assert.False(scope.TryGet(c => c.Culture, out _));
     }
@@ -105,9 +107,38 @@ public class FileConfigScopeTests : ContextualTests
     public void ReadWithMissingFile()
     {
         var configPath = Path.Combine(FolderPath, "config.xml");
-        var scope = new FileConfigScope<CommonConfig>(configPath, new ConfigSerializer(ConfigReadMode.DefaultOnly, ConfigRootName.UserConfig), ConfigScopeMode.ReadWrite);
+        var scope = new FileConfigScope<CommonConfig>(configPath, new ConfigSerializer(ConfigReadMode.DefaultOnly, ConfigRootName.AppConfig), ConfigScopeMode.ReadWrite);
 
         Assert.False(scope.TryGet(c => c.Culture, out _));
+    }
+
+    [Fact]
+    public void ReadAppSettings()
+    {
+        var configPath = Path.Combine(FolderPath, "appsettings.xml");
+        File.WriteAllText(configPath, ConfigData.AppSettings);
+        var defaultsScope = new FileConfigScope<CommonConfig>(configPath, new ConfigSerializer(ConfigReadMode.DefaultOnly, ConfigRootName.AppConfig), ConfigScopeMode.ReadOnly);
+        var lockedScope = new FileConfigScope<CommonConfig>(configPath, new ConfigSerializer(ConfigReadMode.LockedOnly, ConfigRootName.AppConfig), ConfigScopeMode.ReadOnly);
+
+        Assert.False(lockedScope.TryGet(c => c.AlwaysRememberDevice, out _));
+        Assert.True(lockedScope.TryGet(c => c.PdfSettings.Compat, out var pdfCompat));
+        Assert.Equal(PdfCompat.PdfA1B, pdfCompat);
+
+        Assert.False(defaultsScope.TryGet(c => c.PdfSettings.Compat, out _));
+        Assert.True(defaultsScope.TryGet(c => c.AlwaysRememberDevice, out var alwaysRememberDevice));
+        Assert.True(alwaysRememberDevice);
+    }
+
+    [Fact]
+    public void ReadWithOldConfig()
+    {
+        var configPath = Path.Combine(FolderPath, "config.xml");
+        File.WriteAllText(configPath, ConfigData.OldUserConfig);
+        var scope = new FileConfigScope<CommonConfig>(configPath, new ConfigSerializer(ConfigReadMode.All, ConfigRootName.UserConfig), ConfigScopeMode.ReadWrite);
+
+        Assert.False(scope.TryGet(c => c.LockSystemProfiles, out _));
+        Assert.True(scope.TryGet(c => c.OcrMode, out var ocrMode));
+        Assert.Equal(LocalizedOcrMode.Best, ocrMode);
     }
 
     private static void DirectSetValue(FileStream stream, string tagName, string value)

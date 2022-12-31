@@ -18,7 +18,6 @@
   <LockUnspecifiedDevices>false</LockUnspecifiedDevices>
   <NoUserProfiles>false</NoUserProfiles>
   <AlwaysRememberDevice>false</AlwaysRememberDevice>
-  <DisableGenericPdfImport>false</DisableGenericPdfImport>
   <NoUpdatePrompt>false</NoUpdatePrompt>
   <DeleteAfterSaving>false</DeleteAfterSaving>
   <DisableSaveNotifications>false</DisableSaveNotifications>

@@ -84,52 +84,50 @@ public class ConfigSerializer : VersionedSerializer<ConfigStorage<CommonConfig>>
         }
     }
 
-    private ConfigStorage<CommonConfig> AppConfigV0ToCommonConfigDefault(AppConfigV0 c) =>
-        new(new CommonConfig
-        {
-            // TODO: This initializes all properties, we need to specify exactly what's set
-            // Could maybe move the app-only properties to Locked scope, but it really shouldn't matter
-            Version = CommonConfig.CURRENT_VERSION,
-            Culture = c.DefaultCulture,
-            StartupMessageTitle = c.StartupMessageTitle,
-            StartupMessageText = c.StartupMessageText,
-            StartupMessageIcon = c.StartupMessageIcon,
-            DefaultProfileSettings = c.DefaultProfileSettings,
-            SaveButtonDefaultAction = c.SaveButtonDefaultAction,
-            HiddenButtons = GetHiddenButtonFlags(c),
-            DisableAutoSave = c.DisableAutoSave,
-            LockSystemProfiles = c.LockSystemProfiles,
-            LockUnspecifiedDevices = c.LockUnspecifiedDevices,
-            NoUserProfiles = c.NoUserProfiles,
-            AlwaysRememberDevice = c.AlwaysRememberDevice,
-            DisableGenericPdfImport = c.DisableGenericPdfImport,
-            NoUpdatePrompt = c.NoUpdatePrompt,
-            DeleteAfterSaving = c.DeleteAfterSaving,
-            DisableSaveNotifications = c.DisableSaveNotifications,
-            SingleInstance = c.SingleInstance,
-            ComponentsPath = c.ComponentsPath,
-            OcrTimeoutInSeconds = c.OcrTimeoutInSeconds,
-            OcrLanguageCode = c.OcrDefaultLanguage,
-            OcrMode = c.OcrDefaultMode,
-            OcrAfterScanning = c.OcrDefaultAfterScanning,
-            EventLogging = c.EventLogging,
-            KeyboardShortcuts = c.KeyboardShortcuts ?? new KeyboardShortcuts()
-        });
+    private ConfigStorage<CommonConfig> AppConfigV0ToCommonConfigDefault(AppConfigV0 c)
+    {
+        var storage = new ConfigStorage<CommonConfig>();
+        storage.Set(x => x.Version, CommonConfig.CURRENT_VERSION);
+        storage.Set(x => x.Culture, c.DefaultCulture);
+        storage.Set(x => x.StartupMessageTitle, c.StartupMessageTitle);
+        storage.Set(x => x.StartupMessageText, c.StartupMessageText);
+        storage.Set(x => x.StartupMessageIcon, c.StartupMessageIcon);
+        storage.Set(x => x.DefaultProfileSettings, c.DefaultProfileSettings);
+        storage.Set(x => x.SaveButtonDefaultAction, c.SaveButtonDefaultAction);
+        storage.Set(x => x.HiddenButtons, GetHiddenButtonFlags(c));
+        storage.Set(x => x.DisableAutoSave, c.DisableAutoSave);
+        storage.Set(x => x.LockSystemProfiles, c.LockSystemProfiles);
+        storage.Set(x => x.LockUnspecifiedDevices, c.LockUnspecifiedDevices);
+        storage.Set(x => x.NoUserProfiles, c.NoUserProfiles);
+        storage.Set(x => x.AlwaysRememberDevice, c.AlwaysRememberDevice);
+        storage.Set(x => x.NoUpdatePrompt, c.NoUpdatePrompt);
+        storage.Set(x => x.DeleteAfterSaving, c.DeleteAfterSaving);
+        storage.Set(x => x.DisableSaveNotifications, c.DisableSaveNotifications);
+        storage.Set(x => x.SingleInstance, c.SingleInstance);
+        storage.Set(x => x.ComponentsPath, c.ComponentsPath);
+        storage.Set(x => x.OcrTimeoutInSeconds, c.OcrTimeoutInSeconds);
+        storage.Set(x => x.OcrLanguageCode, c.OcrDefaultLanguage);
+        storage.Set(x => x.OcrMode, c.OcrDefaultMode);
+        storage.Set(x => x.OcrAfterScanning, c.OcrDefaultAfterScanning);
+        storage.Set(x => x.EventLogging, c.EventLogging);
+        storage.Set(x => x.KeyboardShortcuts, c.KeyboardShortcuts ?? new KeyboardShortcuts());
+        return storage;
+    }
 
     private ConfigStorage<CommonConfig> AppConfigV0ToCommonConfigLocked(AppConfigV0 c)
     {
         var storage = new ConfigStorage<CommonConfig>();
         if (c.OcrState == OcrState.Enabled)
         {
-            storage.Set(c => c.EnableOcr, true);            
+            storage.Set(x => x.EnableOcr, true);
         }
         if (c.OcrState == OcrState.Disabled)
         {
-            storage.Set(c => c.EnableOcr, false);            
+            storage.Set(x => x.EnableOcr, false);
         }
         if (c.ForcePdfCompat != PdfCompat.Default)
         {
-            storage.Set(c => c.PdfSettings.Compat, c.ForcePdfCompat);            
+            storage.Set(x => x.PdfSettings.Compat, c.ForcePdfCompat);
         }
         return storage;
     }
@@ -147,32 +145,44 @@ public class ConfigSerializer : VersionedSerializer<ConfigStorage<CommonConfig>>
         return flags;
     }
 
-    private static ConfigStorage<CommonConfig> UserConfigV0ToCommonConfig(UserConfigV0 c) =>
-        new(new CommonConfig // TODO: We don't want new config fields to be considered specified 
+    private static ConfigStorage<CommonConfig> UserConfigV0ToCommonConfig(UserConfigV0 c)
+    {
+        var storage = new ConfigStorage<CommonConfig>();
+        storage.Set(x => x.Version, CommonConfig.CURRENT_VERSION);
+        storage.Set(x => x.Culture, c.Culture);
+        // The new form states have different values (client size instead of form size), so best to go with defaults
+        storage.Set(x => x.FormStates, ImmutableList<FormState>.Empty);
+        if (c.BackgroundOperations != null)
         {
-            Version = CommonConfig.CURRENT_VERSION,
-            Culture = c.Culture,
-            // The new form states have different values (client size instead of form size), so best to go with defaults
-            FormStates = ImmutableList<FormState>.Empty, // ImmutableList.CreateRange(c.FormStates),
-            BackgroundOperations = ImmutableHashSet.CreateRange(c.BackgroundOperations),
-            CheckForUpdates = c.CheckForUpdates,
-            LastUpdateCheckDate = c.LastUpdateCheckDate,
-            FirstRunDate = c.FirstRunDate,
-            LastDonatePromptDate = c.LastDonatePromptDate,
-            EnableOcr = c.EnableOcr,
-            OcrLanguageCode = c.OcrLanguageCode,
-            OcrMode = c.OcrMode,
-            OcrAfterScanning = c.OcrAfterScanning,
-            LastImageExt = c.LastImageExt,
-            PdfSettings = c.PdfSettings,
-            ImageSettings = c.ImageSettings,
-            EmailSettings = c.EmailSettings,
-            EmailSetup = c.EmailSetup,
-            ThumbnailSize = c.ThumbnailSize,
-            BatchSettings = c.LastBatchSettings ?? new(), // TODO: This is broken
-            DesktopToolStripDock = c.DesktopToolStripDock,
-            KeyboardShortcuts = c.KeyboardShortcuts,
-            CustomPageSizePresets = ImmutableList.CreateRange(c.CustomPageSizePresets),
-            SavedProxies = ImmutableList.CreateRange(c.SavedProxies)
-        });
+            storage.Set(x => x.BackgroundOperations, ImmutableHashSet.CreateRange(c.BackgroundOperations));
+        }
+        storage.Set(x => x.CheckForUpdates, c.CheckForUpdates);
+        storage.Set(x => x.LastUpdateCheckDate, c.LastUpdateCheckDate);
+        storage.Set(x => x.FirstRunDate, c.FirstRunDate);
+        storage.Set(x => x.LastDonatePromptDate, c.LastDonatePromptDate);
+        storage.Set(x => x.EnableOcr, c.EnableOcr);
+        storage.Set(x => x.OcrLanguageCode, c.OcrLanguageCode);
+        storage.Set(x => x.OcrMode, c.OcrMode);
+        storage.Set(x => x.OcrAfterScanning, c.OcrAfterScanning);
+        storage.Set(x => x.LastImageExt, c.LastImageExt);
+        storage.Set(x => x.PdfSettings, c.PdfSettings);
+        storage.Set(x => x.ImageSettings, c.ImageSettings);
+        storage.Set(x => x.EmailSettings, c.EmailSettings);
+        storage.Set(x => x.EmailSetup, c.EmailSetup);
+        storage.Set(x => x.ThumbnailSize, c.ThumbnailSize);
+        if (c.LastBatchSettings != null)
+        {
+            storage.Set(x => x.BatchSettings, c.LastBatchSettings);
+        }
+        storage.Set(x => x.DesktopToolStripDock, c.DesktopToolStripDock);
+        if (c.KeyboardShortcuts != null)
+        {
+            storage.Set(x => x.KeyboardShortcuts, c.KeyboardShortcuts);
+        }
+        if (c.CustomPageSizePresets != null)
+        {
+            storage.Set(x => x.CustomPageSizePresets, ImmutableList.CreateRange(c.CustomPageSizePresets));
+        }
+        return storage;
+    }
 }

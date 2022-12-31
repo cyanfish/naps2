@@ -196,4 +196,87 @@
   &lt;/ScanSettings&gt;
 &lt;/ArrayOfScanSettings&gt;</value>
   </data>
+  <data name="OldUserConfig" xml:space="preserve">
+    <value>&lt;?xml version="1.0"?&gt;
+&lt;UserConfig xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"&gt;
+  &lt;Version&gt;2&lt;/Version&gt;
+  &lt;Culture&gt;en&lt;/Culture&gt;
+  &lt;FormStates&gt;
+    &lt;FormState&gt;
+      &lt;Name&gt;FDesktop&lt;/Name&gt;
+      &lt;Location&gt;
+        &lt;X&gt;300&lt;/X&gt;
+        &lt;Y&gt;300&lt;/Y&gt;
+      &lt;/Location&gt;
+      &lt;Size&gt;
+        &lt;Width&gt;1200&lt;/Width&gt;
+        &lt;Height&gt;450&lt;/Height&gt;
+      &lt;/Size&gt;
+      &lt;Maximized&gt;false&lt;/Maximized&gt;
+    &lt;/FormState&gt;
+  &lt;/FormStates&gt;
+  &lt;BackgroundOperations /&gt;
+  &lt;CheckForUpdates&gt;false&lt;/CheckForUpdates&gt;
+  &lt;LastUpdateCheckDate xsi:nil="true" /&gt;
+  &lt;FirstRunDate&gt;2022-01-01T12:00:00.0000000-07:00&lt;/FirstRunDate&gt;
+  &lt;LastDonatePromptDate&gt;2022-01-02T12:00:00.00000-07:00&lt;/LastDonatePromptDate&gt;
+  &lt;EnableOcr&gt;true&lt;/EnableOcr&gt;
+  &lt;OcrMode&gt;Best&lt;/OcrMode&gt;
+  &lt;OcrAfterScanning xsi:nil="true" /&gt;
+  &lt;LastImageExt&gt;jpg&lt;/LastImageExt&gt;
+  &lt;EmailSetup&gt;
+    &lt;ProviderType&gt;Gmail&lt;/ProviderType&gt;
+    &lt;SystemProviderName&gt;Hotmail&lt;/SystemProviderName&gt;
+    &lt;SmtpPort xsi:nil="true" /&gt;
+    &lt;SmtpTls&gt;false&lt;/SmtpTls&gt;
+  &lt;/EmailSetup&gt;
+  &lt;ThumbnailSize&gt;224&lt;/ThumbnailSize&gt;
+  &lt;LastBatchSettings&gt;
+    &lt;ProfileDisplayName&gt;test_name&lt;/ProfileDisplayName&gt;
+    &lt;ScanType&gt;MultipleWithPrompt&lt;/ScanType&gt;
+    &lt;ScanCount&gt;0&lt;/ScanCount&gt;
+    &lt;ScanIntervalSeconds&gt;0&lt;/ScanIntervalSeconds&gt;
+    &lt;OutputType&gt;Load&lt;/OutputType&gt;
+    &lt;SaveSeparator&gt;FilePerPage&lt;/SaveSeparator&gt;
+    &lt;SavePath /&gt;
+  &lt;/LastBatchSettings&gt;
+  &lt;DesktopToolStripDock&gt;Top&lt;/DesktopToolStripDock&gt;
+  &lt;CustomPageSizePresets /&gt;
+  &lt;SavedProxies /&gt;
+&lt;/UserConfig&gt;</value>
+  </data>
+  <data name="AppSettings" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8" ?&gt;
+&lt;AppConfig&gt;
+  &lt;DefaultCulture&gt;&lt;/DefaultCulture&gt;
+  &lt;StartupMessageTitle&gt;&lt;/StartupMessageTitle&gt;
+  &lt;StartupMessageText&gt;&lt;/StartupMessageText&gt;
+  &lt;StartupMessageIcon&gt;Information&lt;/StartupMessageIcon&gt;
+  &lt;SaveButtonDefaultAction&gt;SaveAll&lt;/SaveButtonDefaultAction&gt;
+  &lt;HideOcrButton&gt;false&lt;/HideOcrButton&gt;
+  &lt;HideImportButton&gt;false&lt;/HideImportButton&gt;
+  &lt;HideSavePdfButton&gt;false&lt;/HideSavePdfButton&gt;
+  &lt;HideSaveImagesButton&gt;false&lt;/HideSaveImagesButton&gt;
+  &lt;HideEmailButton&gt;false&lt;/HideEmailButton&gt;
+  &lt;HidePrintButton&gt;false&lt;/HidePrintButton&gt;
+  &lt;HideDonateButton&gt;false&lt;/HideDonateButton&gt;
+  &lt;DisableAutoSave&gt;false&lt;/DisableAutoSave&gt;
+  &lt;LockSystemProfiles&gt;false&lt;/LockSystemProfiles&gt;
+  &lt;LockUnspecifiedDevices&gt;false&lt;/LockUnspecifiedDevices&gt;
+  &lt;NoUserProfiles&gt;false&lt;/NoUserProfiles&gt;
+  &lt;AlwaysRememberDevice&gt;true&lt;/AlwaysRememberDevice&gt;
+  &lt;NoUpdatePrompt&gt;false&lt;/NoUpdatePrompt&gt;
+  &lt;DeleteAfterSaving&gt;false&lt;/DeleteAfterSaving&gt;
+  &lt;DisableSaveNotifications&gt;false&lt;/DisableSaveNotifications&gt;
+  &lt;SingleInstance&gt;false&lt;/SingleInstance&gt;
+  &lt;ComponentsPath&gt;&lt;/ComponentsPath&gt;
+  &lt;OcrTimeoutInSeconds&gt;600&lt;/OcrTimeoutInSeconds&gt;
+  &lt;OcrState&gt;UserConfig&lt;/OcrState&gt;
+  &lt;OcrDefaultLanguage&gt;&lt;/OcrDefaultLanguage&gt;
+  &lt;OcrDefaultMode&gt;Fast&lt;/OcrDefaultMode&gt;
+  &lt;OcrDefaultAfterScanning&gt;true&lt;/OcrDefaultAfterScanning&gt;
+  &lt;ForcePdfCompat&gt;PdfA1B&lt;/ForcePdfCompat&gt;
+  &lt;EventLogging&gt;None&lt;/EventLogging&gt;
+&lt;/AppConfig&gt;</value>
+  </data>
 </root>

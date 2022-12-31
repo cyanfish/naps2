@@ -29,9 +29,6 @@ public class CommonConfig
     [Common]
     public ImmutableList<NamedPageSize> CustomPageSizePresets { get; set; } = ImmutableList<NamedPageSize>.Empty;
 
-    [User]
-    public ImmutableList<ScanProxyConfig>? SavedProxies { get; set; }
-
     [App]
     public string? StartupMessageTitle { get; set; }
 
@@ -61,9 +58,6 @@ public class CommonConfig
 
     [Common]
     public bool AlwaysRememberDevice { get; set; }
-
-    [App]
-    public bool DisableGenericPdfImport { get; set; }
 
     [Common]
     public bool NoUpdatePrompt { get; set; }

@@ -15,9 +15,9 @@ public class UserConfigV0
 
     public string? Culture { get; set; }
 
-    public List<FormState> FormStates { get; set; } = new();
+    public List<FormState>? FormStates { get; set; }
 
-    public HashSet<string> BackgroundOperations { get; set; } = new();
+    public HashSet<string>? BackgroundOperations { get; set; }
 
     public bool CheckForUpdates { get; set; }
 
@@ -47,13 +47,11 @@ public class UserConfigV0
 
     public int ThumbnailSize { get; set; } = ThumbnailSizes.DEFAULT_SIZE;
 
-    public BatchSettings? LastBatchSettings { get; set; } // TODO: Handle this being null.
+    public BatchSettings? LastBatchSettings { get; set; }
 
     public DockStyle DesktopToolStripDock { get; set; }
 
-    public KeyboardShortcuts KeyboardShortcuts { get; set; } = new();
+    public KeyboardShortcuts? KeyboardShortcuts { get; set; }
 
-    public List<NamedPageSize> CustomPageSizePresets { get; set; } = new();
-
-    public List<ScanProxyConfig> SavedProxies { get; set; } = new();
+    public List<NamedPageSize>? CustomPageSizePresets { get; set; }
 }

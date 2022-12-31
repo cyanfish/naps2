@@ -31,6 +31,21 @@ public class XmlSerializerTests
     }
 
     [Fact]
+    public void DeserializeWithUnknownElement()
+    {
+        var serializer = new XmlSerializer<Poco>();
+
+        var doc = new XDocument(new XElement("Poco",
+            new XElement("Str", "Hello world"),
+            new XElement("Int", "42"),
+            new XElement("doesnotexist", "foobar")));
+
+        var poco = serializer.DeserializeFromXDocument(doc);
+        Assert.Equal("Hello world", poco!.Str);
+        Assert.Equal(42, poco.Int);
+    }
+
+    [Fact]
     public void SerializePrivateSetter()
     {
         var original = new PrivateSetter("Hello");
@@ -190,7 +205,8 @@ public class XmlSerializerTests
     [Fact]
     public void SerializeImmutableHashSet()
     {
-        VerifySerializeCollection(ImmutableHashSet.Create(new Poco { Str = "Hello" }, new Poco { Str = "World" }), true);
+        VerifySerializeCollection(ImmutableHashSet.Create(new Poco { Str = "Hello" }, new Poco { Str = "World" }),
+            true);
     }
 
     private void VerifySerializeCollection<T>(T original, bool unordered = false) where T : IEnumerable<Poco>
@@ -357,10 +373,10 @@ public class XmlSerializerTests
     {
         [XmlElement(Order = 1)]
         public string A { get; set; }
-        
+
         [XmlElement(Order = 4)]
         public string B { get; set; }
-        
+
         [XmlElement(Order = 2)]
         public string C { get; set; }
 

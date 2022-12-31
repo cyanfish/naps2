@@ -46,8 +46,6 @@ public class AppConfigV0
 
     public bool AlwaysRememberDevice { get; set; }
 
-    public bool DisableGenericPdfImport { get; set; }
-
     public bool NoUpdatePrompt { get; set; }
 
     public bool DeleteAfterSaving { get; set; }

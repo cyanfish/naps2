@@ -51,11 +51,6 @@ public class ScanProfile
 
     public string? DriverName { get; set; }
 
-    // TODO: Remove these if it's safe to do so
-    public ScanProxyConfig? ProxyConfig { get; set; }
-
-    public string? ProxyDriverName { get; set; }
-
     public string DisplayName { get; set; } = "";
 
     public int IconID { get; set; }
@@ -121,13 +116,6 @@ public class ScanProfile
     public bool FlipDuplexedPages { get; set; }
 
     public KeyValueScanOptions? KeyValueOptions { get; set; }
-}
-
-public record ScanProxyConfig
-{
-    public string Name { get; init; } = "";
-    public string Ip { get; init; } = "";
-    public int? Port { get; init; }
 }
 
 /// <summary>

@@ -45,7 +45,7 @@ public class ProfileManagerTests : ContextualTests
     [Fact]
     public void LoadOneProfile()
     {
-        var xml = ProfileSerializerTestsData.SingleProfile;
+        var xml = ConfigData.SingleProfile;
         File.WriteAllText(_userPath, xml);
 
         var profiles = _profileManager.Profiles;
@@ -60,7 +60,7 @@ public class ProfileManagerTests : ContextualTests
     [Fact]
     public void LoadVeryOldProfile()
     {
-        var xml = ProfileSerializerTestsData.VeryOldProfile;
+        var xml = ConfigData.VeryOldProfile;
         File.WriteAllText(_userPath, xml);
 
         var profiles = _profileManager.Profiles;
@@ -76,7 +76,7 @@ public class ProfileManagerTests : ContextualTests
     [Fact]
     public void LoadOldProfile()
     {
-        var xml = ProfileSerializerTestsData.OldProfile;
+        var xml = ConfigData.OldProfile;
         File.WriteAllText(_userPath, xml);
 
         var profiles = _profileManager.Profiles;
@@ -92,7 +92,7 @@ public class ProfileManagerTests : ContextualTests
     [Fact]
     public void LoadOldTwainProfile()
     {
-        var xml = ProfileSerializerTestsData.OldTwainProfile;
+        var xml = ConfigData.OldTwainProfile;
         File.WriteAllText(_userPath, xml);
 
         var profiles = _profileManager.Profiles;
