@@ -28,6 +28,6 @@ public class ListViewDataSource<T> : NSCollectionViewDataSource where T : notnul
         var item = Items[i];
         var image = _behavior.GetImage(item, _listView.ImageSize);
         var label = _behavior.ShowLabels ? _behavior.GetLabel(item) : null;
-        return new ListViewItem(image, label, () => _itemActivated(item));
+        return new ListViewItem(image, label, _listView.Selection.Contains(item), () => _itemActivated(item));
     }
 }

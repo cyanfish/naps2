@@ -13,10 +13,11 @@ public class ListViewItem : NSCollectionViewItem
     private bool _selected;
     private NSImageView? _imageView;
 
-    public ListViewItem(Image itemImage, string? label, Action onActivate)
+    public ListViewItem(Image itemImage, string? label, bool selected, Action onActivate)
     {
         _itemImage = itemImage;
         _label = label;
+        _selected = selected;
         _onActivate = onActivate;
     }
 
