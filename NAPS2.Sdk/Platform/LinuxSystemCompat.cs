@@ -27,7 +27,7 @@ public class LinuxSystemCompat : ISystemCompat
 
     public bool RenderInWorker => false;
 
-    public bool UseSeparateWorkerExe => false;
+    public bool SupportsWinX86Worker => false;
 
     public string[] ExeSearchPaths => LibrarySearchPaths;
 

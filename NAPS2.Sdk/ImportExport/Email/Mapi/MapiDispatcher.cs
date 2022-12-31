@@ -1,3 +1,4 @@
+using NAPS2.Remoting.Worker;
 using NAPS2.Scan;
 
 namespace NAPS2.ImportExport.Email.Mapi;
@@ -42,7 +43,7 @@ public class MapiDispatcher
                 throw new InvalidOperationException(
                     "ScanningContext.WorkerFactory must be set to use MAPI from a 64-bit process.");
             }
-            using var worker = _scanningContext.WorkerFactory.Create();
+            using var worker = _scanningContext.WorkerFactory.Create(WorkerType.WinX86);
             return await worker.Service.SendMapiEmail(clientName, message);
         }
         return await _mapiWrapper.SendEmail(clientName, message);

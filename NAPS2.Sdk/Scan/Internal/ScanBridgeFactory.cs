@@ -1,19 +1,14 @@
-﻿namespace NAPS2.Scan.Internal;
+﻿using NAPS2.Remoting.Worker;
+
+namespace NAPS2.Scan.Internal;
 
 internal class ScanBridgeFactory : IScanBridgeFactory
 {
-    private readonly InProcScanBridge _inProcScanBridge;
-    private readonly WorkerScanBridge _workerScanBridge;
+    private readonly ScanningContext _scanningContext;
 
     public ScanBridgeFactory(ScanningContext scanningContext)
-        : this(new InProcScanBridge(scanningContext), new WorkerScanBridge(scanningContext))
     {
-    }
-
-    public ScanBridgeFactory(InProcScanBridge inProcScanBridge, WorkerScanBridge workerScanBridge)
-    {
-        _inProcScanBridge = inProcScanBridge;
-        _workerScanBridge = workerScanBridge;
+        _scanningContext = scanningContext;
     }
 
     public IScanBridge Create(ScanOptions options)
@@ -21,14 +16,14 @@ internal class ScanBridgeFactory : IScanBridgeFactory
         if (options.Driver == Driver.Sane)
         {
             // Run SANE in a worker process for added stability
-            return _workerScanBridge;
+            return new WorkerScanBridge(_scanningContext, WorkerType.Native);
         }
         if (options is { Driver: Driver.Twain, TwainOptions.Adapter: TwainAdapter.Legacy })
         {
             // Legacy twain needs to run in a 32-bit worker
             // (Normal twain also does, but it runs the worker at a lower level via RemoteTwainSessionController)
-            return _workerScanBridge;
+            return new WorkerScanBridge(_scanningContext, WorkerType.WinX86);
         }
-        return _inProcScanBridge;
+        return new InProcScanBridge(_scanningContext);
     }
 }

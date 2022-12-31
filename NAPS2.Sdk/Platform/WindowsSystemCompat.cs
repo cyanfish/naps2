@@ -25,7 +25,7 @@ public abstract class WindowsSystemCompat : ISystemCompat
 
     public bool RenderInWorker => true;
 
-    public bool UseSeparateWorkerExe => true;
+    public bool SupportsWinX86Worker => true;
 
     public abstract string[] ExeSearchPaths { get;  }
 

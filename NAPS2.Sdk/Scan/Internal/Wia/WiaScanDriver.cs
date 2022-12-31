@@ -1,5 +1,6 @@
 ﻿#if !MAC
 using System.Threading;
+using NAPS2.Remoting.Worker;
 using NAPS2.Scan.Exceptions;
 using NAPS2.Wia;
 
@@ -208,7 +209,7 @@ internal class WiaScanDriver : IScanDriver
                             "ScanningContext.WorkerFactory must be set to use WIA 1.0 Native UI from a 64-bit process");
                     }
                     WiaConfiguration? config;
-                    using (var worker = _scanningContext.WorkerFactory.Create())
+                    using (var worker = _scanningContext.WorkerFactory.Create(WorkerType.WinX86))
                     {
                         config = worker.Service.Wia10NativeUI(device.Id(), _options.DialogParent);
                     }

@@ -20,7 +20,7 @@ public class WorkerFactory : IWorkerFactory
     private readonly FileStorageManager _fileStorageManager;
 
     private string? _workerExePath;
-    private BlockingCollection<WorkerContext>? _workerQueue;
+    private Dictionary<WorkerType, BlockingCollection<WorkerContext>>? _workerQueues;
 
     public WorkerFactory(FileStorageManager fileStorageManager)
     {
@@ -47,12 +47,16 @@ public class WorkerFactory : IWorkerFactory
         }
     }
 
-    private Process StartWorkerProcess()
+    private Process StartWorkerProcess(WorkerType workerType)
     {
         var parentId = Process.GetCurrentProcess().Id;
         Process? proc;
-        if (PlatformCompat.System.UseSeparateWorkerExe)
+        if (workerType == WorkerType.WinX86)
         {
+            if (!PlatformCompat.System.SupportsWinX86Worker)
+            {
+                throw new InvalidOperationException("Unexpected worker configuration");
+            }
             proc = Process.Start(new ProcessStartInfo
             {
                 FileName = WorkerExePath,
@@ -64,18 +68,18 @@ public class WorkerFactory : IWorkerFactory
         }
         else
         {
-#if NET6_0_OR_GREATER
             proc = Process.Start(new ProcessStartInfo
             {
+#if NET6_0_OR_GREATER
                 FileName = Environment.ProcessPath,
+#else
+                FileName = AssemblyHelper.EntryFile,
+#endif
                 Arguments = $"worker {parentId}",
                 RedirectStandardInput = true,
                 RedirectStandardOutput = true,
                 UseShellExecute = false
             });
-#else
-            throw new Exception("Unexpected worker configuration");
-#endif
         }
         if (proc == null)
         {
@@ -110,38 +114,50 @@ public class WorkerFactory : IWorkerFactory
         return proc;
     }
 
-    private void StartWorkerService()
+    private void StartWorkerService(WorkerType workerType)
     {
         Task.Run(() =>
         {
-            var proc = StartWorkerProcess();
+            var proc = StartWorkerProcess(workerType);
             var channel = new NamedPipeChannel(".", string.Format(PIPE_NAME_FORMAT, proc.Id));
-            _workerQueue!.Add(new WorkerContext(new WorkerServiceAdapter(channel), proc));
+            _workerQueues![workerType].Add(new WorkerContext(workerType, new WorkerServiceAdapter(channel), proc));
         });
     }
 
-    private WorkerContext NextWorker()
+    private WorkerContext NextWorker(WorkerType workerType)
     {
-        StartWorkerService();
-        return _workerQueue!.Take();
+        StartWorkerService(workerType);
+        return _workerQueues![workerType]!.Take();
     }
 
     public void Init()
     {
-        if (_workerQueue == null)
+        if (_workerQueues == null)
         {
-            _workerQueue = new BlockingCollection<WorkerContext>();
-            StartWorkerService();
+            _workerQueues = new()
+            {
+                { WorkerType.Native, new BlockingCollection<WorkerContext>() },
+                { WorkerType.WinX86, new BlockingCollection<WorkerContext>() }
+            };
+            // We start a "spare" worker so that when we need one, it's immediately ready (and then we'll start another
+            // spare for the next request).
+            StartWorkerService(WorkerType.Native);
+            if (PlatformCompat.System.SupportsWinX86Worker)
+            {
+                // On windows as we need 32-bit and 64-bit workers for different things, we will have two spare workers,
+                // which isn't ideal but not a big deal.
+                StartWorkerService(WorkerType.WinX86);
+            }
         }
     }
 
-    public WorkerContext Create()
+    public WorkerContext Create(WorkerType workerType)
     {
-        if (_workerQueue == null)
+        if (_workerQueues == null)
         {
             throw new InvalidOperationException("WorkerFactory has not been initialized");
         }
-        var worker = NextWorker();
+        var worker = NextWorker(workerType);
         worker.Service.Init(_fileStorageManager.FolderPath);
         return worker;
     }

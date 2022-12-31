@@ -10,12 +10,15 @@ public class WorkerContext : IDisposable
     /// </summary>
     private static readonly TimeSpan WorkerStopTimeout = TimeSpan.FromSeconds(60);
 
-    public WorkerContext(WorkerServiceAdapter service, Process process)
+    public WorkerContext(WorkerType workerType, WorkerServiceAdapter service, Process process)
     {
+        Type = workerType;
         Service = service;
         Process = process;
     }
-        
+
+    public WorkerType Type { get; }
+
     public WorkerServiceAdapter Service { get; }
 
     public Process Process { get; }

@@ -6,5 +6,5 @@
 public interface IWorkerFactory
 {
     void Init();
-    WorkerContext Create();
+    WorkerContext Create(WorkerType workerType);
 }

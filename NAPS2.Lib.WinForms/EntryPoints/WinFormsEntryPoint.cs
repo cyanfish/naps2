@@ -18,8 +18,13 @@ namespace NAPS2.EntryPoints;
 /// </summary>
 public static class WinFormsEntryPoint
 {
-    public static void Run(string[] args)
+    public static int Run(string[] args)
     {
+        if (args.Length > 0 && args[0] == "worker")
+        {
+            return WindowsWorkerEntryPoint.Run(args.Skip(1).ToArray());
+        }
+
         // Initialize Autofac (the DI framework)
         var container = AutoFacHelper.FromModules(
             new CommonModule(), new GdiModule(), new WinFormsModule(), new RecoveryModule(), new ContextModule());
@@ -56,6 +61,7 @@ public static class WinFormsEntryPoint
             typeof(ApplicationHandler).GetMethod("SetOptions", BindingFlags.Instance | BindingFlags.NonPublic);
         setOptionsMethod!.Invoke(application.Handler, Array.Empty<object>());
         wf.Application.Run(appContext);
+        return 0;
     }
 
     private static void UnhandledTaskException(object? sender, UnobservedTaskExceptionEventArgs e)

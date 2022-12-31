@@ -1,5 +1,6 @@
 using System.Threading;
 using NAPS2.Platform.Windows;
+using NAPS2.Remoting.Worker;
 
 namespace NAPS2.Scan.Internal.Twain;
 
@@ -22,7 +23,7 @@ public class RemoteTwainSessionController : ITwainSessionController
             throw new InvalidOperationException(
                 "ScanningContext.WorkerFactory must be set to use TWAIN from a 64-bit process.");
         }
-        using var workerContext = _scanningContext.WorkerFactory.Create();
+        using var workerContext = _scanningContext.WorkerFactory.Create(WorkerType.WinX86);
         return await workerContext.Service.TwainGetDeviceList(options);
     }
 
@@ -33,7 +34,7 @@ public class RemoteTwainSessionController : ITwainSessionController
             throw new InvalidOperationException(
                 "ScanningContext.WorkerFactory must be set to use TWAIN from a 64-bit process.");
         }
-        using var workerContext = _scanningContext.WorkerFactory.Create();
+        using var workerContext = _scanningContext.WorkerFactory.Create(WorkerType.WinX86);
         try
         {
             await workerContext.Service.TwainScan(options, cancelToken, twainEvents);

@@ -54,9 +54,11 @@ public class DirectImportOperation : OperationBase
                         ProcessedImage newImg;
                         try
                         {
-                            newImg = _workerPool.Use(ctx =>
-                                ctx.Service.ImportPostProcess(_scanningContext, img, thumbnailSize,
-                                    new BarcodeDetectionOptions()));
+                            newImg = _workerPool.Use(
+                                WorkerType.Native,
+                                ctx =>
+                                    ctx.Service.ImportPostProcess(_scanningContext, img, thumbnailSize,
+                                        new BarcodeDetectionOptions()));
                         }
                         catch (Exception)
                         {

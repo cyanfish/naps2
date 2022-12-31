@@ -31,8 +31,12 @@ public class WorkerPool : IDisposable
         }
     }
 
-    public T Use<T>(Func<WorkerContext, T> func)
+    public T Use<T>(WorkerType workerType, Func<WorkerContext, T> func)
     {
+        if (workerType != WorkerType.Native)
+        {
+            throw new NotSupportedException("WorkerPool only supports native workers");
+        }
         var worker = Take();
         T result;
         try
@@ -58,7 +62,7 @@ public class WorkerPool : IDisposable
                 _entries.RemoveAt(_entries.Count - 1);
                 return entry.Worker;
             }
-            return _workerFactory.Create();
+            return _workerFactory.Create(WorkerType.Native);
         }
     }
 

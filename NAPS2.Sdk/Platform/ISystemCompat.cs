@@ -24,7 +24,7 @@ public interface ISystemCompat
 
     bool RenderInWorker { get; }
 
-    bool UseSeparateWorkerExe { get; }
+    bool SupportsWinX86Worker { get; }
 
     string[] ExeSearchPaths { get; }
 
