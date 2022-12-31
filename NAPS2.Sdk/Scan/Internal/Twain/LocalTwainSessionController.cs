@@ -69,10 +69,6 @@ public class LocalTwainSessionController : ITwainSessionController
     
     public async Task StartScan(ScanOptions options, ITwainEvents twainEvents, CancellationToken cancelToken)
     {
-        // TODO: An error in NTwain doesn't seem to be logged or propagated back to the parent process correctly
-        // TODO: Specifically, in TwainSessionRunner.Init
-        // TODO: Cancelling twain shows a cancellation error
-        // TODO: There seems to be some issue with the UI getting locked; probably event-loop related, inconsistent. Unsure if related to the new NTWAIN or the new implementation or what. 
         try
         {
             await InternalScan(options.TwainOptions.Dsm, options, cancelToken, twainEvents);
