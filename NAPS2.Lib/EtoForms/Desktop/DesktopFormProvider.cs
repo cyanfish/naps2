@@ -1,10 +1,12 @@
+using NAPS2.EtoForms.Ui;
+
 namespace NAPS2.EtoForms.Desktop;
 
 public class DesktopFormProvider
 {
-    private EtoFormBase? _desktopForm;
+    private DesktopForm? _desktopForm;
 
-    public EtoFormBase DesktopForm
+    public DesktopForm DesktopForm
     {
         get => _desktopForm ?? throw new InvalidOperationException();
         set

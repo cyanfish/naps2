@@ -15,6 +15,7 @@ public class WinFormsDesktopForm : DesktopForm
 {
     public static wf.ApplicationContext? ApplicationContext { get; set; }
 
+    private readonly Dictionary<DesktopToolbarMenuType, wf.ToolStripSplitButton> _menuButtons = new();
     private readonly ToolbarFormatter _toolbarFormatter = new(new StringWrapper());
     private readonly wf.Form _form;
     private wf.ToolStrip _toolStrip = null!;
@@ -139,7 +140,8 @@ public class WinFormsDesktopForm : DesktopForm
         _toolStrip.Items.Add(item);
     }
 
-    protected override void CreateToolbarButtonWithMenu(Command command, MenuProvider menu)
+    protected override void CreateToolbarButtonWithMenu(Command command, DesktopToolbarMenuType menuType,
+        MenuProvider menu)
     {
         var item = new wf.ToolStripSplitButton
         {
@@ -148,6 +150,7 @@ public class WinFormsDesktopForm : DesktopForm
         ApplyCommand(item, command);
         _toolStrip.Items.Add(item);
         menu.Handle(subItems => SetUpMenu(item, subItems));
+        _menuButtons[menuType] = item;
     }
 
     private void SetUpMenu(wf.ToolStripDropDownItem item, List<MenuProvider.Item> subItems)
@@ -234,6 +237,11 @@ public class WinFormsDesktopForm : DesktopForm
     protected override void CreateToolbarSeparator()
     {
         _toolStrip.Items.Add(new wf.ToolStripSeparator());
+    }
+
+    public override void ShowToolbarMenu(DesktopToolbarMenuType menuType)
+    {
+        _menuButtons.Get(menuType)?.ShowDropDown();
     }
 
 

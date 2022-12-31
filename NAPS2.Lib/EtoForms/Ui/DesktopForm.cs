@@ -1,5 +1,4 @@
 using System.Collections.Immutable;
-using System.ComponentModel;
 using System.Threading;
 using Eto.Drawing;
 using Eto.Forms;
@@ -225,7 +224,7 @@ public abstract class DesktopForm : EtoFormBase
         var hiddenButtons = Config.Get(c => c.HiddenButtons);
 
         if (!hiddenButtons.HasFlag(ToolbarButtons.Scan))
-            CreateToolbarButtonWithMenu(Commands.Scan, new MenuProvider()
+            CreateToolbarButtonWithMenu(Commands.Scan, DesktopToolbarMenuType.Scan, new MenuProvider()
                 .Dynamic(_scanMenuCommands)
                 .Separator()
                 .Append(Commands.NewProfile)
@@ -238,19 +237,19 @@ public abstract class DesktopForm : EtoFormBase
             CreateToolbarButton(Commands.Import);
         CreateToolbarSeparator();
         if (!hiddenButtons.HasFlag(ToolbarButtons.SavePdf))
-            CreateToolbarButtonWithMenu(Commands.SavePdf, new MenuProvider()
+            CreateToolbarButtonWithMenu(Commands.SavePdf, DesktopToolbarMenuType.SavePdf, new MenuProvider()
                 .Append(Commands.SaveAllPdf)
                 .Append(Commands.SaveSelectedPdf)
                 .Separator()
                 .Append(Commands.PdfSettings));
         if (!hiddenButtons.HasFlag(ToolbarButtons.SaveImages))
-            CreateToolbarButtonWithMenu(Commands.SaveImages, new MenuProvider()
+            CreateToolbarButtonWithMenu(Commands.SaveImages, DesktopToolbarMenuType.SaveImages, new MenuProvider()
                 .Append(Commands.SaveAllImages)
                 .Append(Commands.SaveSelectedImages)
                 .Separator()
                 .Append(Commands.ImageSettings));
         if (!hiddenButtons.HasFlag(ToolbarButtons.EmailPdf) && PlatformCompat.System.CanEmail)
-            CreateToolbarButtonWithMenu(Commands.EmailPdf, new MenuProvider()
+            CreateToolbarButtonWithMenu(Commands.EmailPdf, DesktopToolbarMenuType.EmailPdf, new MenuProvider()
                 .Append(Commands.EmailAll)
                 .Append(Commands.EmailSelected)
                 .Separator()
@@ -298,6 +297,10 @@ public abstract class DesktopForm : EtoFormBase
             CreateToolbarButton(Commands.About);
     }
 
+    public virtual void ShowToolbarMenu(DesktopToolbarMenuType menuType)
+    {
+    }
+
     protected MenuProvider GetRotateMenuProvider() =>
         new MenuProvider()
             .Append(Commands.RotateLeft)
@@ -317,7 +320,8 @@ public abstract class DesktopForm : EtoFormBase
 
     protected virtual void CreateToolbarButton(Command command) => throw new InvalidOperationException();
 
-    protected virtual void CreateToolbarButtonWithMenu(Command command, MenuProvider menu) =>
+    protected virtual void CreateToolbarButtonWithMenu(Command command, DesktopToolbarMenuType menuType,
+        MenuProvider menu) =>
         throw new InvalidOperationException();
 
     protected virtual void CreateToolbarMenu(Command command, MenuProvider menu) =>

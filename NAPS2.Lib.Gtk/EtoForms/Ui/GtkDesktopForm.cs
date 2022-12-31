@@ -5,7 +5,6 @@ using Gdk;
 using Gtk;
 using NAPS2.EtoForms.Desktop;
 using NAPS2.EtoForms.Gtk;
-using NAPS2.EtoForms.Layout;
 using NAPS2.ImportExport.Images;
 using Command = Eto.Forms.Command;
 
@@ -13,6 +12,7 @@ namespace NAPS2.EtoForms.Ui;
 
 public class GtkDesktopForm : DesktopForm
 {
+    private readonly Dictionary<DesktopToolbarMenuType, MenuToolButton> _menuButtons = new();
     private Toolbar _toolbar = null!;
     private int _toolbarButtonCount;
     private int _toolbarMenuToggleCount;
@@ -130,7 +130,8 @@ public class GtkDesktopForm : DesktopForm
         _toolbarButtonCount++;
     }
 
-    protected override void CreateToolbarButtonWithMenu(Command command, MenuProvider menu)
+    protected override void CreateToolbarButtonWithMenu(Command command, DesktopToolbarMenuType menuType,
+        MenuProvider menu)
     {
         var button = new MenuToolButton(command.Image.ToGtk(), command.ToolBarText)
         {
@@ -144,6 +145,7 @@ public class GtkDesktopForm : DesktopForm
         _toolbar.Add(button);
         _toolbarButtonCount++;
         _toolbarMenuToggleCount++;
+        _menuButtons[menuType] = button;
     }
 
     protected override void CreateToolbarMenu(Command command, MenuProvider menu)
@@ -213,6 +215,12 @@ public class GtkDesktopForm : DesktopForm
     private EventHandler GetMenuDelegate(Menu menuWidget, Widget button)
     {
         return (_, _) => menuWidget.PopupAtWidget(button, Gravity.SouthWest, Gravity.NorthWest, null);
+    }
+
+    public override void ShowToolbarMenu(DesktopToolbarMenuType menuType)
+    {
+        var button = _menuButtons.Get(menuType);
+        (button?.Menu as Menu)?.PopupAtWidget(button, Gravity.SouthWest, Gravity.NorthWest, null);
     }
 
     private void AddCustomToolItem(Widget item)

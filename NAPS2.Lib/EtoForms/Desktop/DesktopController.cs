@@ -25,7 +25,6 @@ public class DesktopController
     private readonly ImageTransfer _imageTransfer;
     private readonly ImageClipboard _imageClipboard;
     private readonly ImageListActions _imageListActions;
-    private readonly IExportController _exportController;
     private readonly DialogHelper _dialogHelper;
     private readonly DesktopImagesController _desktopImagesController;
     private readonly IDesktopScanController _desktopScanController;
@@ -41,7 +40,7 @@ public class DesktopController
         OperationProgress operationProgress, Naps2Config config, IOperationFactory operationFactory,
         StillImage stillImage,
         IUpdateChecker updateChecker, INotificationManager notify, ImageTransfer imageTransfer,
-        ImageClipboard imageClipboard, ImageListActions imageListActions, IExportController exportController,
+        ImageClipboard imageClipboard, ImageListActions imageListActions,
         DialogHelper dialogHelper,
         DesktopImagesController desktopImagesController, IDesktopScanController desktopScanController,
         DesktopFormProvider desktopFormProvider, IScannedImagePrinter scannedImagePrinter)
@@ -59,7 +58,6 @@ public class DesktopController
         _imageTransfer = imageTransfer;
         _imageClipboard = imageClipboard;
         _imageListActions = imageListActions;
-        _exportController = exportController;
         _dialogHelper = dialogHelper;
         _desktopImagesController = desktopImagesController;
         _desktopScanController = desktopScanController;
@@ -409,8 +407,7 @@ public class DesktopController
         if (action == SaveButtonDefaultAction.AlwaysPrompt
             || action == SaveButtonDefaultAction.PromptIfSelected && _imageList.Selection.Any())
         {
-            // TODO
-            // tsdSavePDF.ShowDropDown();
+            _desktopFormProvider.DesktopForm.ShowToolbarMenu(DesktopToolbarMenuType.SavePdf);
         }
         else if (action == SaveButtonDefaultAction.SaveSelected && _imageList.Selection.Any())
         {
@@ -429,8 +426,7 @@ public class DesktopController
         if (action == SaveButtonDefaultAction.AlwaysPrompt
             || action == SaveButtonDefaultAction.PromptIfSelected && _imageList.Selection.Any())
         {
-            // TODO
-            // tsdSaveImages.ShowDropDown();
+            _desktopFormProvider.DesktopForm.ShowToolbarMenu(DesktopToolbarMenuType.SaveImages);
         }
         else if (action == SaveButtonDefaultAction.SaveSelected && _imageList.Selection.Any())
         {
@@ -449,8 +445,7 @@ public class DesktopController
         if (action == SaveButtonDefaultAction.AlwaysPrompt
             || action == SaveButtonDefaultAction.PromptIfSelected && _imageList.Selection.Any())
         {
-            // TODO
-            // tsdEmailPDF.ShowDropDown();
+            _desktopFormProvider.DesktopForm.ShowToolbarMenu(DesktopToolbarMenuType.EmailPdf);
         }
         else if (action == SaveButtonDefaultAction.SaveSelected && _imageList.Selection.Any())
         {

@@ -74,7 +74,6 @@ public class DesktopControllerTests : ContextualTests
             _imageClipboard,
             new ImageListActions(_imageList, _operationFactory.Object, _operationProgress.Object,
                 _config, _thumbnailController, _exportHelper.Object, _notificationManager.Object),
-            _exportHelper.Object,
             _dialogHelper.Object,
             _desktopImagesController,
             _desktopScanController.Object,
