@@ -27,7 +27,8 @@ internal class RemotePostProcessor : IRemotePostProcessor
     //    return image;
     //}
 
-    public ProcessedImage? PostProcess(IMemoryImage image, ScanOptions options, PostProcessingContext postProcessingContext)
+    public ProcessedImage? PostProcess(IMemoryImage image, ScanOptions options,
+        PostProcessingContext postProcessingContext)
     {
         image = DoInitialTransforms(image, options);
         try
@@ -49,7 +50,6 @@ internal class RemotePostProcessor : IRemotePostProcessor
                 options.Quality);
             DoRevertibleTransforms(ref scannedImage, ref image, options, postProcessingContext);
             postProcessingContext.TempPath = SaveForBackgroundOcr(image, options);
-            // TODO: We need to attach the thumbnail to the scanned image
             return scannedImage;
         }
         finally
@@ -115,7 +115,8 @@ internal class RemotePostProcessor : IRemotePostProcessor
                 }
                 else
                 {
-                    scaled.SetResolution((float) (original.Width / options.PageSize.WidthInInches), (float) (original.Height / options.PageSize.HeightInInches));
+                    scaled.SetResolution((float) (original.Width / options.PageSize.WidthInInches),
+                        (float) (original.Height / options.PageSize.HeightInInches));
                 }
             }
         }
@@ -125,41 +126,48 @@ internal class RemotePostProcessor : IRemotePostProcessor
     }
 
     // TODO: This is more than just transforms.
-    private void DoRevertibleTransforms(ref ProcessedImage processedImage, ref IMemoryImage image, ScanOptions options, PostProcessingContext postProcessingContext)
+    private void DoRevertibleTransforms(ref ProcessedImage processedImage, ref IMemoryImage image, ScanOptions options,
+        PostProcessingContext postProcessingContext)
     {
         var data = processedImage.PostProcessingData;
-        if (options.ThumbnailSize.HasValue)
+
+        if ((!options.UseNativeUI && options.BrightnessContrastAfterScan) ||
+            options.Driver is not (Driver.Wia or Driver.Twain))
         {
-            data = data with
-            {
-                // TODO: Maybe there's a way we can do this without needing to clone
-                Thumbnail = image.Clone().PerformTransform(new ThumbnailTransform(options.ThumbnailSize.Value))
-            };
+            processedImage = processedImage.WithTransform(new BrightnessTransform(options.Brightness), true);
+            processedImage = processedImage.WithTransform(new TrueContrastTransform(options.Contrast), true);
         }
 
-        if (!options.UseNativeUI && options.BrightnessContrastAfterScan)
+        if (options.FlipDuplexedPages && options.PaperSource == PaperSource.Duplex &&
+            postProcessingContext.PageNumber % 2 == 0)
         {
-            processedImage = AddTransformAndUpdateThumbnail(processedImage, ref image, new BrightnessTransform(options.Brightness), options);
-            processedImage = AddTransformAndUpdateThumbnail(processedImage, ref image, new TrueContrastTransform(options.Contrast), options);
-        }
-
-        // TODO: Do we need to restrict this to only when an actual duplex scan is happening?
-        if (options.FlipDuplexedPages && postProcessingContext.PageNumber % 2 == 0)
-        {
-            processedImage = AddTransformAndUpdateThumbnail(processedImage, ref image, new RotationTransform(180), options);
+            processedImage = processedImage.WithTransform(new RotationTransform(180), true);
         }
 
         if (options.AutoDeskew)
         {
-            processedImage = AddTransformAndUpdateThumbnail(processedImage, ref image, Deskewer.GetDeskewTransform(image), options);
+            processedImage = processedImage.WithTransform(Deskewer.GetDeskewTransform(image), true);
         }
 
         if (!data.BarcodeDetection.IsBarcodePresent)
         {
             // Even if barcode detection was attempted previously and failed, image adjustments may improve detection.
-            data = data with { BarcodeDetection = BarcodeDetector.Detect(image, options.BarcodeDetectionOptions) };
+            data = data with
+            {
+                BarcodeDetection = BarcodeDetector.Detect(image, options.BarcodeDetectionOptions)
+            };
         }
-        data = data with { ThumbnailTransformState = processedImage.TransformState };
+        if (options.ThumbnailSize.HasValue)
+        {
+            data = data with
+            {
+                // TODO: Maybe there's a way we can do this without needing to clone
+                Thumbnail = image.Clone()
+                    .PerformAllTransforms(processedImage.TransformState.Transforms)
+                    .PerformTransform(new ThumbnailTransform(options.ThumbnailSize.Value)),
+                ThumbnailTransformState = processedImage.TransformState
+            };
+        }
         processedImage = processedImage.WithPostProcessingData(data, true);
     }
 
@@ -172,31 +180,5 @@ internal class RemotePostProcessor : IRemotePostProcessor
             return _scanningContext.SaveToTempFile(bitmap, options.BitDepth);
         }
         return null;
-    }
-
-    private ProcessedImage AddTransformAndUpdateThumbnail(ProcessedImage processedImage, ref IMemoryImage image, Transform transform, ScanOptions options)
-    {
-        if (transform.IsNull)
-        {
-            return processedImage;
-        }
-        ProcessedImage transformed = processedImage.WithTransform(transform, true);
-        if (options.ThumbnailSize.HasValue)
-        {
-            // TODO: We may want to do the transform on the original thumbnail, maybe situationally?
-            // TODO: Should probably dispose the original image & thumbnail
-            // TODO: This should probably be done even without thumbnails, otherwise deskew/barcode might misfire
-            // TODO: If we're doing a number of transforms, this is redundant...
-            // TODO: So basically we should probably do ONE thumbnail render, after all transforms are determined.
-            // TODO: BUT we should have some kind of fast path (not just used here) that moves the thumbnail transform up the transform stack
-            // TODO: as long as subsequent transforms are size agnostic (i.e. 90 deg rotation).
-            image = image.PerformTransform(transform);
-            transformed = transformed.WithPostProcessingData(
-                transformed.PostProcessingData with
-                {
-                    Thumbnail = image.PerformTransform(new ThumbnailTransform(options.ThumbnailSize.Value))
-                }, true);
-        }
-        return transformed;
     }
 }
