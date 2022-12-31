@@ -1,4 +1,5 @@
 ﻿using NAPS2.EtoForms;
+using NAPS2.EtoForms.Ui;
 using NAPS2.ImportExport.Email;
 using NAPS2.ImportExport.Images;
 using NAPS2.ImportExport.Pdf;
@@ -109,16 +110,16 @@ public class ExportController : IExportController
             return false;
         }
 
-        // TODO: What?
-        // if (_config == null)
-        // {
-        //     // First run; prompt for a
-        //     var form = _formFactory.Create<FEmailProvider>();
-        //     if (form.ShowDialog() != DialogResult.OK)
-        //     {
-        //         return false;
-        //     }
-        // }
+        if (!_config.User.TryGet(c => c.EmailSetup.ProviderType, out _))
+        {
+            // First email attempt; prompt for a provider
+            var form = _formFactory.Create<EmailProviderForm>();
+            await form.ShowModalAsync();
+            if (!form.Result)
+            {
+                return false;
+            }
+        }
 
         var invalidChars = new HashSet<char>(Path.GetInvalidFileNameChars());
         var attachmentName = new string(_config.Get(c => c.EmailSettings.AttachmentName)
