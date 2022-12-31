@@ -20,18 +20,20 @@ public static class ListSelection
 
 public class ListSelection<T> : ICollection<T>, IEquatable<ListSelection<T>> where T : notnull
 {
-    private readonly HashSet<T> _internalSelection;
+    private readonly List<T> _internalSelection;
+    private readonly HashSet<T> _internalSelectionSet;
 
     public ListSelection(IEnumerable<T> selectedItems)
     {
-        _internalSelection = new HashSet<T>(selectedItems);
+        _internalSelection = selectedItems.ToList();
+        _internalSelectionSet = _internalSelection.ToHashSet();
     }
 
     public IEnumerable<int> ToSelectedIndices(List<T> list) => list.IndiciesOf(_internalSelection);
 
     public int Count => _internalSelection.Count;
 
-    public bool Contains(T item) => _internalSelection.Contains(item);
+    public bool Contains(T item) => _internalSelectionSet.Contains(item);
 
     public bool IsReadOnly => true;
     public void Add(T item) => throw new NotSupportedException();
@@ -48,7 +50,7 @@ public class ListSelection<T> : ICollection<T>, IEquatable<ListSelection<T>> whe
     {
         if (ReferenceEquals(null, other)) return false;
         if (ReferenceEquals(this, other)) return true;
-        return _internalSelection.SetEquals(other._internalSelection);
+        return _internalSelectionSet.SetEquals(other._internalSelectionSet);
     }
 
     public override bool Equals(object? obj)
