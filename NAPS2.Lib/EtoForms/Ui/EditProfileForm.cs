@@ -118,10 +118,12 @@ public class EditProfileForm : EtoDialogBase
                 new ImageView { Image = Icons.scanner_48.ToEtoImage() }
             ),
             C.Spacer(),
-            L.Row(
-                _predefinedSettings,
-                _nativeUi
-            ),
+            PlatformCompat.System.IsWiaDriverSupported || PlatformCompat.System.IsTwainDriverSupported
+                ? L.Row(
+                    _predefinedSettings,
+                    _nativeUi
+                )
+                : C.None(),
             C.Spacer(),
             L.Row(
                 L.Column(
@@ -529,7 +531,7 @@ public class EditProfileForm : EtoDialogBase
     {
         var form = FormFactory.Create<AdvancedProfileForm>();
         ScanProfile.DriverName = DeviceDriver.ToString().ToLowerInvariant();
-        ScanProfile.BitDepth = (ScanBitDepth)_bitDepth.SelectedIndex;
+        ScanProfile.BitDepth = (ScanBitDepth) _bitDepth.SelectedIndex;
         form.ScanProfile = ScanProfile;
         form.ShowModal();
     }

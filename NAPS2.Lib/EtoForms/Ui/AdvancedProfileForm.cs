@@ -19,6 +19,7 @@ public class AdvancedProfileForm : EtoDialogBase
     private readonly CheckBox _stretchToPageSize = new() { Text = UiStrings.StretchToPageSize };
     private readonly CheckBox _cropToPageSize = new() { Text = UiStrings.CropToPageSize };
     private readonly CheckBox _flipDuplexed = new() { Text = UiStrings.FlipDuplexedPages };
+
     private readonly DropDown _wiaVersion = C.EnumDropDown<WiaApiVersion>(value => value switch
     {
         WiaApiVersion.Default => SettingsResources.WiaVersion_Default,
@@ -26,6 +27,7 @@ public class AdvancedProfileForm : EtoDialogBase
         WiaApiVersion.Wia20 => SettingsResources.WiaVersion_Wia20,
         _ => value.ToString()
     });
+
     private readonly DropDown _twainImpl = C.EnumDropDown<TwainImpl>();
     private readonly Button _restoreDefaults = new() { Text = UiStrings.RestoreDefaults };
 
@@ -76,8 +78,10 @@ public class AdvancedProfileForm : EtoDialogBase
             L.GroupBox(
                 UiStrings.Compatibility,
                 L.Column(
-                    _brightContAfterScan,
-                    _offsetWidth,
+                    PlatformCompat.System.IsWiaDriverSupported || PlatformCompat.System.IsTwainDriverSupported
+                        ? _brightContAfterScan
+                        : C.None(),
+                    PlatformCompat.System.IsWiaDriverSupported ? _offsetWidth : C.None(),
                     _stretchToPageSize,
                     _cropToPageSize,
                     _flipDuplexed,
@@ -104,11 +108,11 @@ public class AdvancedProfileForm : EtoDialogBase
         _brightContAfterScan.Checked = scanProfile.BrightnessContrastAfterScan;
         _deskew.Checked = scanProfile.AutoDeskew;
         _offsetWidth.Checked = scanProfile.WiaOffsetWidth;
-        _wiaVersion.SelectedIndex = (int)scanProfile.WiaVersion;
+        _wiaVersion.SelectedIndex = (int) scanProfile.WiaVersion;
         _stretchToPageSize.Checked = scanProfile.ForcePageSize;
         _cropToPageSize.Checked = scanProfile.ForcePageSizeCrop;
         _flipDuplexed.Checked = scanProfile.FlipDuplexedPages;
-        _twainImpl.SelectedIndex = (int)scanProfile.TwainImpl;
+        _twainImpl.SelectedIndex = (int) scanProfile.TwainImpl;
         _excludeBlank.Checked = scanProfile.ExcludeBlankPages;
         _whiteThreshold.Value = scanProfile.BlankPageWhiteThreshold;
         _coverageThreshold.Value = scanProfile.BlankPageCoverageThreshold;
@@ -142,7 +146,7 @@ public class AdvancedProfileForm : EtoDialogBase
         ScanProfile.FlipDuplexedPages = _flipDuplexed.IsChecked();
         if (_twainImpl.SelectedIndex != -1)
         {
-            ScanProfile.TwainImpl = (TwainImpl)_twainImpl.SelectedIndex;
+            ScanProfile.TwainImpl = (TwainImpl) _twainImpl.SelectedIndex;
         }
         ScanProfile.ExcludeBlankPages = _excludeBlank.IsChecked();
         ScanProfile.BlankPageWhiteThreshold = _whiteThreshold.Value;

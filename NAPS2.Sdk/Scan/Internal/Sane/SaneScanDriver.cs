@@ -125,7 +125,6 @@ internal class SaneScanDriver : IScanDriver
 
     private void SetOptions(SaneDevice device, ScanOptions options)
     {
-        // TODO: How to handle brightness, contrast, etc.?
         var controller = new SaneOptionController(device);
 
         if (options.PaperSource == PaperSource.Flatbed)
