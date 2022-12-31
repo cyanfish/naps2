@@ -18,23 +18,13 @@ public class RemoteTwainSessionController : ITwainSessionController
 
     public async Task<List<ScanDevice>> GetDeviceList(ScanOptions options)
     {
-        if (_scanningContext.WorkerFactory == null)
-        {
-            throw new InvalidOperationException(
-                "ScanningContext.WorkerFactory must be set to use TWAIN from a 64-bit process.");
-        }
-        using var workerContext = _scanningContext.WorkerFactory.Create(WorkerType.WinX86);
+        using var workerContext = CreateWorker(options);
         return await workerContext.Service.TwainGetDeviceList(options);
     }
 
     public async Task StartScan(ScanOptions options, ITwainEvents twainEvents, CancellationToken cancelToken)
     {
-        if (_scanningContext.WorkerFactory == null)
-        {
-            throw new InvalidOperationException(
-                "ScanningContext.WorkerFactory must be set to use TWAIN from a 64-bit process.");
-        }
-        using var workerContext = _scanningContext.WorkerFactory.Create(WorkerType.WinX86);
+        using var workerContext = CreateWorker(options);
         try
         {
             await workerContext.Service.TwainScan(options, cancelToken, twainEvents);
@@ -43,6 +33,19 @@ public class RemoteTwainSessionController : ITwainSessionController
         {
             EnableWindow(options.DialogParent);
         }
+    }
+
+    private WorkerContext CreateWorker(ScanOptions options)
+    {
+        // TODO: Allow TWAIN to be used without a worker for SDK users
+        if (_scanningContext.WorkerFactory == null)
+        {
+            throw new InvalidOperationException(
+                "ScanningContext.WorkerFactory must be set to use TWAIN.");
+        }
+        return _scanningContext.WorkerFactory.Create(options.TwainOptions.Dsm == TwainDsm.NewX64
+            ? WorkerType.Native
+            : WorkerType.WinX86);
     }
 
     private void EnableWindow(IntPtr dialogParent)

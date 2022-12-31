@@ -33,11 +33,7 @@ internal class TwainScanDriver : IScanDriver
 
     private ITwainSessionController GetSessionController(ScanOptions options)
     {
-        if (options.TwainOptions.Dsm != TwainDsm.NewX64 && RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
-        {
-            return new RemoteTwainSessionController(_scanningContext);
-        }
-        return new LocalTwainSessionController();
+        return new RemoteTwainSessionController(_scanningContext);
     }
 }
 #endif
