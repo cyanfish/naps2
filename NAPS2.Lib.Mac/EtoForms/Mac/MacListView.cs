@@ -219,7 +219,7 @@ public class MacListView<T> : NSCollectionViewDelegateFlowLayout, IListView<T> w
         if (_behavior.ShowLabels)
         {
             using var image = _behavior.GetImage(item, ImageSize);
-            using var listItem = new ListViewItem(image, _behavior.GetLabel(item), () => { });
+            using var listItem = new ListViewItem(image, _behavior.GetLabel(item), false, () => { });
             listItem.LoadView();
             return listItem.View.FittingSize;
         }
