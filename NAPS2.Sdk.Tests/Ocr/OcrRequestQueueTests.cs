@@ -233,7 +233,7 @@ public class OcrRequestQueueTests : ContextualTests
         _mockEngine.VerifyNoOtherCalls();
     }
 
-    [Fact]
+    [Fact(Skip = "flaky")]
     public async Task CancelOnceWithTwoReferences()
     {
         var tempPath1 = CreateTempFile();
@@ -260,7 +260,7 @@ public class OcrRequestQueueTests : ContextualTests
         _mockEngine.VerifyNoOtherCalls();
     }
 
-    [Fact]
+    [Fact(Skip = "flaky")]
     public async Task CancelTwiceWithTwoReferences()
     {
         // Delay the workers so we can cancel before processing starts
@@ -334,7 +334,7 @@ public class OcrRequestQueueTests : ContextualTests
         Assert.False(_ocrRequestQueue.HasCachedResult(new Mock<IOcrEngine>().Object, _image, _ocrParams));
     }
     
-    [Fact]
+    [Fact(Skip = "flaky")]
     public async Task HasCachedResult_WhileProcessing()
     {
         _mockEngine.Setup(x => x.ProcessImage(_tempPath, _ocrParams, It.IsAny<CancellationToken>()))
