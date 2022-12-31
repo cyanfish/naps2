@@ -44,14 +44,20 @@ public class GmailOauthProvider : OauthProvider
 
     protected override void SaveToken(OauthToken token, bool refresh)
     {
-        var emailSetup = _config.Get(c => c.EmailSetup);
-        emailSetup.GmailToken = token;
-        if (!refresh)
+        if (refresh)
         {
-            emailSetup.GmailUser = GetEmailAddress();
-            emailSetup.ProviderType = EmailProviderType.Gmail;
+            _config.User.Set(c => c.EmailSetup.GmailToken, token);
         }
-        _config.User.Set(c => c.EmailSetup, emailSetup);
+        else
+        {
+            var transact = _config.User.BeginTransaction();
+            transact.Remove(c => c.EmailSetup);
+            transact.Set(c => c.EmailSetup.GmailToken, token);
+            transact.Set(c => c.EmailSetup.ProviderType, EmailProviderType.Gmail);
+            transact.Commit();
+            // We need to commit the token before we can read the email address
+            _config.User.Set(c => c.EmailSetup.GmailUser, GetEmailAddress());
+        }
     }
 
     #endregion

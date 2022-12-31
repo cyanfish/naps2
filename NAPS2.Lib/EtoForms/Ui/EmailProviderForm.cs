@@ -114,10 +114,11 @@ public class EmailProviderForm : EtoDialogBase
 
     private void ChooseSystem(string clientName)
     {
-        var emailSetup = Config.Get(c => c.EmailSetup);
-        emailSetup.SystemProviderName = clientName;
-        emailSetup.ProviderType = EmailProviderType.System;
-        Config.User.Set(c => c.EmailSetup, emailSetup);
+        var transact = Config.User.BeginTransaction();
+        transact.Remove(c => c.EmailSetup);
+        transact.Set(c => c.EmailSetup.SystemProviderName, clientName);
+        transact.Set(c => c.EmailSetup.ProviderType, EmailProviderType.System);
+        transact.Commit();
         Result = true;
         Close();
     }

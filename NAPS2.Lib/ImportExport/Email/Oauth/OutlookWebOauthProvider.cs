@@ -41,14 +41,20 @@ public class OutlookWebOauthProvider : OauthProvider
 
     protected override void SaveToken(OauthToken token, bool refresh)
     {
-        var emailSetup = _config.Get(c => c.EmailSetup);
-        emailSetup.OutlookWebToken = token;
-        if (!refresh)
+        if (refresh)
         {
-            emailSetup.OutlookWebUser = GetEmailAddress();
-            emailSetup.ProviderType = EmailProviderType.OutlookWeb;
+            _config.User.Set(c => c.EmailSetup.OutlookWebToken, token);
         }
-        _config.User.Set(c => c.EmailSetup, emailSetup);
+        else
+        {
+            var transact = _config.User.BeginTransaction();
+            transact.Remove(c => c.EmailSetup);
+            transact.Set(c => c.EmailSetup.OutlookWebToken, token);
+            transact.Set(c => c.EmailSetup.ProviderType, EmailProviderType.OutlookWeb);
+            transact.Commit();
+            // We need to commit the token before we can read the email address
+            _config.User.Set(c => c.EmailSetup.OutlookWebUser, GetEmailAddress());
+        }
     }
 
     #endregion
