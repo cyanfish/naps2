@@ -62,9 +62,6 @@ public class UiImage : IDisposable
                 _thumbnail.Dispose();
                 _thumbnail = null;
             }
-        
-            // TODO: This shouldn't be here, OCR cancellation needs to be figured out
-            FullyDisposed?.Invoke(this, EventArgs.Empty);
         }
     }
 
@@ -156,9 +153,6 @@ public class UiImage : IDisposable
     public EventHandler? ThumbnailChanged;
 
     public EventHandler? ThumbnailInvalidated;
-
-    // TODO: Maybe delete depending on how we handle ocr cancellation
-    public EventHandler? FullyDisposed;
 
     public ImageRenderState GetImageRenderState()
     {
