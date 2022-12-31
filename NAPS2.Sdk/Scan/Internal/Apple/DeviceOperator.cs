@@ -59,7 +59,6 @@ internal class DeviceOperator : ICScannerDeviceDelegate
     public override void DidReceiveStatusInformation(ICDevice device, NSDictionary<NSString, NSObject> status)
     {
         var state = status[ICStatusNotificationKeys.NotificationKey] as NSString;
-        Console.WriteLine($"{nameof(DidReceiveStatusInformation)}: Status: {status} State {state}");
 
         if (state == ICScannerStatus.WarmingUp)
         {
@@ -82,7 +81,6 @@ internal class DeviceOperator : ICScannerDeviceDelegate
     // TODO: to become available before sending a busy error.
     public override void DidBecomeAvailable(ICScannerDevice scanner)
     {
-        Console.WriteLine($"{nameof(DidBecomeAvailable)}: {scanner}");
     }
 
     public override void DidSelectFunctionalUnit(
@@ -98,7 +96,7 @@ internal class DeviceOperator : ICScannerDeviceDelegate
             (ICScannerPixelDataType.BW, 1, 1) => (ImagePixelFormat.BW1, SubPixelType.Bit),
             (ICScannerPixelDataType.Gray, 1, 8) => (ImagePixelFormat.Gray8, SubPixelType.Gray),
             (ICScannerPixelDataType.Rgb, 3, 8) => (ImagePixelFormat.RGB24, SubPixelType.Rgb),
-            (ICScannerPixelDataType.Rgb, 4, 8) => (ImagePixelFormat.ARGB32, SubPixelType.Rgba),
+            (ICScannerPixelDataType.Rgb, 4, 8) => (ImagePixelFormat.RGB24, SubPixelType.Rgbn),
             _ => (ImagePixelFormat.Unsupported, null)
         };
         if (pixelFormat == ImagePixelFormat.Unsupported)
@@ -117,11 +115,15 @@ internal class DeviceOperator : ICScannerDeviceDelegate
         _scanEvents.PageProgress(_buffer.Length / (double) bufferInfo.Length);
         if (_buffer.Length >= bufferInfo.Length)
         {
-            var image = _scanningContext.ImageContext.Create(
-                (int) data.FullImageWidth, (int) data.FullImageHeight, pixelFormat);
-            new CopyBitwiseImageOp().Perform(_buffer.GetBuffer(), bufferInfo, image);
-            _callback(image);
+            var fullBuffer = _buffer;
             _buffer = null;
+            Task.Run(() =>
+            {
+                var image = _scanningContext.ImageContext.Create(
+                    (int) data.FullImageWidth, (int) data.FullImageHeight, pixelFormat);
+                new CopyBitwiseImageOp().Perform(fullBuffer.GetBuffer(), bufferInfo, image);
+                _callback(image);
+            });
         }
     }
 
