@@ -22,8 +22,6 @@ public class MapiDispatcher
         _mapiWrapper = mapiWrapper;
     }
 
-    private bool UseWorker => Environment.Is64BitProcess;
-
     /// <summary>
     /// Sends an email described by the given message object.
     /// </summary>
@@ -32,20 +30,35 @@ public class MapiDispatcher
     /// <returns>The MAPI return code.</returns>
     public async Task<MapiSendMailReturnCode> SendEmail(string? clientName, EmailMessage message)
     {
+        // We always run MAPI in a worker as it can cause weird changes to the application state.
+        if (_scanningContext.WorkerFactory == null)
+        {
+            // TODO: Maybe allow non-worker use for SDK?
+            throw new InvalidOperationException(
+                "ScanningContext.WorkerFactory must be set to use MAPI.");
+        }
 #if NET6_0_OR_GREATER
         if (!OperatingSystem.IsWindowsVersionAtLeast(7)) throw new InvalidOperationException("Windows-only");
 #endif
-        // TODO: We should always do this in a worker (64 or 32 bit). Specifically, loading the outlook library does something weird to WinForms such that "new Eto.Forms.TextArea()" errors with a missing office dll.
-        if (UseWorker && !_mapiWrapper.CanLoadClient(clientName))
+
+        if (Environment.Is64BitProcess)
         {
-            if (_scanningContext.WorkerFactory == null)
+            // Try 64-bit first
+            using var worker1 = _scanningContext.WorkerFactory.Create(WorkerType.Native);
+            if (await worker1.Service.CanLoadMapi(clientName))
             {
-                throw new InvalidOperationException(
-                    "ScanningContext.WorkerFactory must be set to use MAPI from a 64-bit process.");
+                return await worker1.Service.SendMapiEmail(clientName, message);
             }
-            using var worker = _scanningContext.WorkerFactory.Create(WorkerType.WinX86);
-            return await worker.Service.SendMapiEmail(clientName, message);
+            worker1.Dispose();
         }
-        return await _mapiWrapper.SendEmail(clientName, message);
+
+        // If 64-bit failed, try 32-bit
+        using var worker2 = _scanningContext.WorkerFactory.Create(WorkerType.WinX86);
+        if (await worker2.Service.CanLoadMapi(clientName))
+        {
+            return await _mapiWrapper.SendEmail(clientName, message);
+        }
+
+        throw new Exception($"Could not load MAPI dll: {clientName}");
     }
 }

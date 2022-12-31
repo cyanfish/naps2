@@ -166,6 +166,27 @@ public class WorkerServiceImpl : WorkerService.WorkerServiceBase
         await sequencedWriter.WaitForCompletion();
     }
 
+    public override Task<LoadMapiResponse> LoadMapi(LoadMapiRequest request,
+        ServerCallContext context)
+    {
+        using var callRef = StartCall();
+        try
+        {
+            var loaded = _mapiWrapper.CanLoadClient(request.ClientName);
+            return Task.FromResult(new LoadMapiResponse
+            {
+                Loaded = loaded
+            });
+        }
+        catch (Exception)
+        {
+            return Task.FromResult(new LoadMapiResponse
+            {
+                Loaded = false
+            });
+        }
+    }
+
     public override async Task<SendMapiEmailResponse> SendMapiEmail(SendMapiEmailRequest request,
         ServerCallContext context)
     {

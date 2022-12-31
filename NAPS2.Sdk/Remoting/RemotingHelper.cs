@@ -12,9 +12,7 @@ public static class RemotingHelper
             var exceptionType = Assembly.GetAssembly(typeof(ScanDriverException))!
                 .GetTypes()
                 .FirstOrDefault(x => x.FullName == error.Type);
-            var exception = exceptionType != null
-                ? (Exception) Activator.CreateInstance(exceptionType)!
-                : new Exception();
+            var exception = CreateExceptionType(exceptionType);
             var messageField =
                 typeof(Exception).GetField("_message", BindingFlags.NonPublic | BindingFlags.Instance);
             var stackTraceField = typeof(Exception).GetField("_stackTraceString",
@@ -25,6 +23,22 @@ public static class RemotingHelper
             exception.PreserveStackTrace();
             throw exception;
         }
+    }
+
+    private static Exception CreateExceptionType(Type? exceptionType)
+    {
+        if (exceptionType != null)
+        {
+            try
+            {
+                return (Exception) Activator.CreateInstance(exceptionType)!;
+            }
+            catch (Exception)
+            {
+                // If the exception is not constructable, just use the default Exception type
+            }
+        }
+        return new Exception();
     }
 
     public static Error ToError(Exception e) =>

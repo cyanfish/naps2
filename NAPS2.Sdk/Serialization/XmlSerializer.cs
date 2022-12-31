@@ -151,7 +151,15 @@ public abstract class XmlSerializer
         {
             return typeInfo.CustomSerializer.DeserializeObject(element, actualType);
         }
-        var obj = Activator.CreateInstance(actualType, true)!;
+        object obj;
+        try
+        {
+            obj = Activator.CreateInstance(actualType, true)!;
+        }
+        catch (Exception ex)
+        {
+            throw new InvalidOperationException($"Could not create type for deserialization: {actualType.FullName}", ex);
+        }
         foreach (var propInfo in typeInfo.Properties!)
         {
             // TODO: Detect unmapped elements

@@ -84,3 +84,4 @@ public class SystemEmailClients
     internal delegate MapiSendMailReturnCode MapiSendMailDelegate(IntPtr session, IntPtr hwnd, MapiMessage message, MapiSendMailFlags flags, int reserved);
     internal delegate MapiSendMailReturnCode MapiSendMailDelegateW(IntPtr session, IntPtr hwnd, MapiMessageW message, MapiSendMailFlags flags, int reserved);
 }
+

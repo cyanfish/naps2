@@ -89,8 +89,11 @@ public class SavePdfOperation : OperationBase
                     {
                         break;
                     }
-                    emailMessage?.Attachments.Add(new EmailAttachment(currentFileName,
-                        Path.GetFileName(currentFileName)));
+                    emailMessage?.Attachments.Add(new EmailAttachment
+                    {
+                        FilePath = currentFileName,
+                        AttachmentName = Path.GetFileName(currentFileName)
+                    });
                     if (i == 0)
                     {
                         FirstFileSaved = subFileName;

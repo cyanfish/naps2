@@ -347,7 +347,11 @@ public class AutomatedScanning
                     {
                         string attachmentName = _placeholders.Substitute(_options.EmailFileName!, false, i++,
                             _scanList.Count > 1 ? digits : 0);
-                        message.Attachments.Add(new EmailAttachment(path, attachmentName));
+                        message.Attachments.Add(new EmailAttachment
+                        {
+                            FilePath = path,
+                            AttachmentName = attachmentName
+                        });
                     }
                 }
                 else
@@ -395,7 +399,11 @@ public class AutomatedScanning
         foreach (var file in folder.EnumerateFiles())
         {
             OutputVerbose(ConsoleResources.Attaching, file.Name);
-            message.Attachments.Add(new EmailAttachment(file.FullName, file.Name));
+            message.Attachments.Add(new EmailAttachment
+            {
+                FilePath = file.FullName,
+                AttachmentName = file.Name
+            });
         }
     }
 

@@ -89,6 +89,13 @@ public class WorkerServiceAdapter
         }
     }
 
+    public async Task<bool> CanLoadMapi(string? clientName)
+    {
+        var req = new LoadMapiRequest { ClientName = clientName };
+        var resp = await _client.LoadMapiAsync(req);
+        return resp.Loaded;
+    }
+
     public async Task<MapiSendMailReturnCode> SendMapiEmail(string? clientName, EmailMessage message)
     {
         var req = new SendMapiEmailRequest { ClientName = clientName, EmailMessageXml = message.ToXml() };

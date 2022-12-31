@@ -158,7 +158,8 @@ public class ExportController : IExportController
     {
         var op = _operationFactory.Create<SaveImagesOperation>();
         var state = _imageList.CurrentState;
-        if (op.Start(savePath, Placeholders.All.WithDate(DateTime.Now), images, _config.Get(c => c.ImageSettings), savePath))
+        if (op.Start(savePath, Placeholders.All.WithDate(DateTime.Now), images, _config.Get(c => c.ImageSettings),
+                savePath))
         {
             _operationProgress.ShowProgress(op);
         }
@@ -182,7 +183,14 @@ public class ExportController : IExportController
 
             var message = new EmailMessage
             {
-                Attachments = { new EmailAttachment(targetPath, attachmentName) }
+                Attachments =
+                {
+                    new EmailAttachment
+                    {
+                        FilePath = targetPath,
+                        AttachmentName = attachmentName
+                    }
+                }
             };
 
             if (await RunSavePdfOperation(targetPath, images, true, message))
