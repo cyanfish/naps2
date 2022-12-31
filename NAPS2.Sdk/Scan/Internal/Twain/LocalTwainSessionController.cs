@@ -1,7 +1,10 @@
 #if !MAC
+using System.Reflection;
 using System.Threading;
+using NAPS2.Platform.Windows;
 using NAPS2.Scan.Exceptions;
 using NTwain;
+using NTwain.Data;
 
 namespace NAPS2.Scan.Internal.Twain;
 
@@ -10,6 +13,22 @@ namespace NAPS2.Scan.Internal.Twain;
 /// </summary>
 public class LocalTwainSessionController : ITwainSessionController
 {
+    public static readonly TWIdentity TwainAppId =
+        TWIdentity.CreateFromAssembly(DataGroups.Image | DataGroups.Control, Assembly.GetEntryAssembly());
+
+    static LocalTwainSessionController()
+    {
+        // Path to the folder containing the 64-bit twaindsm.dll relative to NAPS2.Core.dll
+        if (PlatformCompat.System.CanUseWin32)
+        {
+            string libDir = Environment.Is64BitProcess ? "_win64" : "_win32";
+            Win32.SetDllDirectory(Path.Combine(AssemblyHelper.LibFolder, libDir));
+        }
+#if DEBUG
+        PlatformInfo.Current.Log.IsDebugEnabled = true;
+#endif
+    }
+
     public Task<List<ScanDevice>> GetDeviceList(ScanOptions options)
     {
         return Task.Run(() =>
@@ -29,7 +48,7 @@ public class LocalTwainSessionController : ITwainSessionController
     private static List<ScanDevice> InternalGetDeviceList(ScanOptions options)
     {
         PlatformInfo.Current.PreferNewDSM = options.TwainOptions.Dsm != TwainDsm.Old;
-        var session = new TwainSession(TwainScanDriver.TwainAppId);
+        var session = new TwainSession(TwainAppId);
         session.Open();
         try
         {
@@ -75,7 +94,7 @@ public class LocalTwainSessionController : ITwainSessionController
 
     private async Task InternalScan(TwainDsm dsm, ScanOptions options, CancellationToken cancelToken, ITwainEvents twainEvents)
     {
-        var runner = new TwainSessionScanRunner(dsm, options, cancelToken, twainEvents);
+        var runner = new TwainSessionScanRunner(TwainAppId, dsm, options, cancelToken, twainEvents);
         await runner.Run();
     }
 }

@@ -1,10 +1,6 @@
 ﻿#if !MAC
-using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Threading;
-using NAPS2.Platform.Windows;
-using NTwain;
-using NTwain.Data;
 
 namespace NAPS2.Scan.Internal.Twain;
 
@@ -14,22 +10,6 @@ namespace NAPS2.Scan.Internal.Twain;
 /// </summary>
 internal class TwainScanDriver : IScanDriver
 {
-    public static readonly TWIdentity TwainAppId =
-        TWIdentity.CreateFromAssembly(DataGroups.Image | DataGroups.Control, Assembly.GetEntryAssembly());
-
-    static TwainScanDriver()
-    {
-        // Path to the folder containing the 64-bit twaindsm.dll relative to NAPS2.Core.dll
-        if (PlatformCompat.System.CanUseWin32)
-        {
-            string libDir = Environment.Is64BitProcess ? "_win64" : "_win32";
-            Win32.SetDllDirectory(Path.Combine(AssemblyHelper.LibFolder, libDir));
-        }
-#if DEBUG
-        PlatformInfo.Current.Log.IsDebugEnabled = true;
-#endif
-    }
-
     private readonly ScanningContext _scanningContext;
 
     public TwainScanDriver(ScanningContext scanningContext)

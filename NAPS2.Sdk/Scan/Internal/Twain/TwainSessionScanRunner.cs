@@ -24,7 +24,8 @@ internal class TwainSessionScanRunner
     private readonly TaskCompletionSource<bool> _tcs;
     private DataSource? _source;
 
-    public TwainSessionScanRunner(TwainDsm dsm, ScanOptions options, CancellationToken cancelToken,
+    public TwainSessionScanRunner(TWIdentity twainAppId, TwainDsm dsm, ScanOptions options,
+        CancellationToken cancelToken,
         ITwainEvents twainEvents)
     {
         _dsm = dsm;
@@ -35,7 +36,7 @@ internal class TwainSessionScanRunner
         _handleManager = TwainHandleManager.Factory();
         PlatformInfo.Current.PreferNewDSM = dsm != TwainDsm.Old;
         Debug.WriteLine($"Using TWAIN DSM: {PlatformInfo.Current.ExpectedDsmPath}");
-        _session = new TwainSession(TwainScanDriver.TwainAppId);
+        _session = new TwainSession(twainAppId);
         _session.TransferReady += TransferReady;
         _session.DataTransferred += DataTransferred;
         _session.TransferError += TransferError;
