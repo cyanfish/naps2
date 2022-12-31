@@ -60,15 +60,20 @@ public class WinFormsDesktopForm : DesktopForm
         }
     }
 
+    protected override void OnClosed(EventArgs e)
+    {
+        SaveToolStripLocation();
+        base.OnClosed(e);
+    }
+
     protected override void OnLoad(EventArgs e)
     {
         base.OnLoad(e);
 
+        LoadToolStripLocation();
+
         NativeListView.TabIndex = 7;
         NativeListView.Dock = wf.DockStyle.Fill;
-        // NativeListView.ContextMenuStrip = contextMenuStrip;
-        // NativeListView.KeyDown += ListViewKeyDown;
-        // NativeListView.MouseWheel += ListViewMouseWheel;
         NativeListView.Focus();
     }
 
@@ -106,6 +111,12 @@ public class WinFormsDesktopForm : DesktopForm
             return;
         }
         ApplicationContext.MainForm = newMainForm.ToSWF();
+    }
+
+    protected override void SetCulture(string cultureId)
+    {
+        SaveToolStripLocation();
+        base.SetCulture(cultureId);
     }
 
     protected override void ConfigureToolbar()
@@ -259,9 +270,6 @@ public class WinFormsDesktopForm : DesktopForm
     {
         _menuButtons.Get(menuType)?.ShowDropDown();
     }
-
-
-    // TODO: Call these
 
     private void SaveToolStripLocation()
     {

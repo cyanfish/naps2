@@ -382,7 +382,7 @@ public abstract class DesktopForm : EtoFormBase
             }).ToImmutableList<Command>();
     }
 
-    private void SetCulture(string cultureId)
+    protected virtual void SetCulture(string cultureId)
     {
         _desktopController.Suspend();
         try
