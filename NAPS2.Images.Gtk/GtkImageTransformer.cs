@@ -43,6 +43,8 @@ public class GtkImageTransformer : AbstractImageTransformer<GtkImage>
 
     protected override GtkImage PerformTransform(GtkImage image, ResizeTransform transform)
     {
+        // TODO: Can we improve interpolation? Somehow integrate Cairo.Filter.Bilinear or Cairo.Filter.Best, though
+        // it's not clear how to reconcile that with SetSourcePixbuf.
         var format = image.PixelFormat == ImagePixelFormat.ARGB32 ? Format.Argb32 : Format.Rgb24;
         using var surface = new ImageSurface(format, transform.Width, transform.Height);
         using var context = new Context(surface);
