@@ -19,10 +19,10 @@
     <DefineConstants>MAC</DefineConstants>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)' == 'Release-Msi'">
-    <DefineConstants>MSI</DefineConstants>
+    <DefineConstants>$(DefineConstants);MSI</DefineConstants>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)' == 'Release-Zip'">
-    <DefineConstants>ZIP</DefineConstants>
+    <DefineConstants>$(DefineConstants);ZIP</DefineConstants>
   </PropertyGroup>
 
   <ItemGroup>
