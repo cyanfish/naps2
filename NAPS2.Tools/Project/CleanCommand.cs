@@ -5,7 +5,7 @@ public class CleanCommand : ICommand<CleanOptions>
     public int Run(CleanOptions opts)
     {
         Output.Info("Starting clean");
-        int rc = 0;
+        bool hasError = false;
         foreach (var projectDir in new DirectoryInfo(Paths.SolutionRoot).EnumerateDirectories("NAPS2.*")
                      .Where(x => x.Name.ToLower() != "naps2.tools"))
         {
@@ -21,13 +21,17 @@ public class CleanCommand : ICommand<CleanOptions>
                     catch (Exception ex)
                     {
                         Output.Info($"Could not delete {projectDir.Name}/{cleanDir.Name}/{subDir.Name}: {ex.Message}");
-                        rc = 1;
+                        hasError = true;
                     }
                 }
             }
             Output.Verbose($"Cleaned {projectDir.Name}");
         }
-        Output.Info(rc == 0 ? "Cleaned." : "Cleaned with failures.");
-        return rc;
+        if (hasError)
+        {
+            throw new Exception("Cleaned with failures.");
+        }
+        Output.Info("Cleaned.");
+        return 0;
     }
 }
