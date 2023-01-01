@@ -17,6 +17,11 @@ public class BuildCommand : ICommand<BuildOptions>
             try
             {
                 Cli.Run("dotnet", $"build -c {config}");
+                if (OperatingSystem.IsMacOS())
+                {
+                    // TODO: Figure out why we need to build twice to get native deps in the output
+                    Cli.Run("dotnet", $"build -c {config}");
+                }
             }
             catch (Exception)
             {
