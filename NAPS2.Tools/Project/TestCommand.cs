@@ -15,13 +15,22 @@ public class TestCommand : ICommand<TestOptions>
                 : "NAPS2.App.WinForms/bin/Debug/net462";
         var frameworkArg = OperatingSystem.IsWindows() ? "" : "-f net6";
 
-        void RunTests(string project)
+        void RunTests(string project, bool isRetry = false)
         {
-            Cli.Run("dotnet", $"test -l \"console;verbosity=normal\" {frameworkArg} {project}", new()
+            try {
+
+                Cli.Run("dotnet", $"test -l \"console;verbosity=normal\" {frameworkArg} {project}", new()
+                {
+                    { "NAPS2_TEST_DEPS", Path.Combine(Paths.SolutionRoot, depsRootPath) },
+                    { "NAPS2_TEST_NOGUI", opts.NoGui ? "1" : "0" }
+                });
+            }
+            catch (Exception)
             {
-                { "NAPS2_TEST_DEPS", Path.Combine(Paths.SolutionRoot, depsRootPath) },
-                { "NAPS2_TEST_NOGUI", opts.NoGui ? "1" : "0" }
-            });
+                if (isRetry) throw;
+                Output.Info("Tests failed, retrying once");
+                RunTests(project, true);
+            }
         }
 
         Output.Info("Running tests");
