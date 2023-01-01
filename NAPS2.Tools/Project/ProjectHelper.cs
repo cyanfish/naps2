@@ -9,7 +9,7 @@ public static class ProjectHelper
     {
         var versionTargetsPath = Path.Combine(Paths.Setup, "targets", "VersionTargets.targets");
         var versionTargetsFile = XDocument.Load(versionTargetsPath);
-        var version = versionTargetsFile.Descendants().SingleOrDefault(x => x.Name == "Version")?.Value;
+        var version = versionTargetsFile.Descendants().SingleOrDefault(x => x.Name.LocalName == "Version")?.Value;
         if (version == null)
         {
             throw new Exception($"Could not read version from project: {versionTargetsPath}");
@@ -21,7 +21,7 @@ public static class ProjectHelper
     {
         var versionTargetsPath = Path.Combine(Paths.Setup, "targets", "VersionTargets.targets");
         var versionTargetsFile = XDocument.Load(versionTargetsPath);
-        var version = versionTargetsFile.Descendants().SingleOrDefault(x => x.Name == "VersionName")?.Value;
+        var version = versionTargetsFile.Descendants().SingleOrDefault(x => x.Name.LocalName == "VersionName")?.Value;
         if (version == null)
         {
             throw new Exception($"Could not read version from project: {versionTargetsPath}");

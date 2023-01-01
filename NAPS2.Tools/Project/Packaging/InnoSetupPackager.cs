@@ -24,7 +24,8 @@ public static class InnoSetupPackager
         var template = File.ReadAllText(Path.Combine(Paths.SetupWindows, "setup.template.iss"));
 
         var defLines = new StringBuilder();
-        defLines.AppendLine($"#define AppVersion \"{packageInfo.Version}\"");
+        defLines.AppendLine($"#define AppVersion \"{packageInfo.VersionNumber}\"");
+        defLines.AppendLine($"#define AppVersionName \"{packageInfo.VersionName}\"");
         defLines.AppendLine($"#define AppPlatform \"{packageInfo.Platform.PackageName()}\"");
         template = template.Replace("; !defs", defLines.ToString());
 

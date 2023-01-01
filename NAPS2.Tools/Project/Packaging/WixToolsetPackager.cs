@@ -27,7 +27,7 @@ public static class WixToolsetPackager
     {
         var template = File.ReadAllText(Path.Combine(Paths.SetupWindows, "setup.template.wxs"));
 
-        template = template.Replace("{{ !version }}", packageInfo.Version);
+        template = template.Replace("{{ !version }}", packageInfo.VersionNumber);
         
         var rootLines = new StringBuilder();
         foreach (var rootFile in packageInfo.Files.Where(x => x.DestDir == ""))

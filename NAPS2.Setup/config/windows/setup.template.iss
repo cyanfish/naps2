@@ -7,15 +7,15 @@
 [Setup]
 AppName=NAPS2 - Not Another PDF Scanner
 AppVersion={#AppVersion}
-AppVerName=NAPS2 {#AppVersion}
+AppVerName=NAPS2 {#AppVersionName}
 AppPublisher=Ben Olden-Cooligan
 AppPublisherURL=https://www.naps2.com
 AppSupportURL=https://www.naps2.com/support
 AppUpdatesURL=https://www.naps2.com/download
 DefaultDirName={commonpf}\NAPS2
 DefaultGroupName=NAPS2
-OutputDir=../publish/{#AppVersion}
-OutputBaseFilename=naps2-{#AppVersion}-{#AppPlatform}       
+OutputDir=../publish/{#AppVersionName}
+OutputBaseFilename=naps2-{#AppVersionName}-{#AppPlatform}
 Compression=lzma2/ultra
 LZMAUseSeparateProcess=yes
 SolidCompression=yes

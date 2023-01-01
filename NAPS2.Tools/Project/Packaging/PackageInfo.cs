@@ -7,19 +7,22 @@ public class PackageInfo
     private readonly List<PackageFile> _files = new();
     private readonly HashSet<string> _destPaths = new();
 
-    public PackageInfo(Platform platform, string version)
+    public PackageInfo(Platform platform, string versionName, string versionNumber)
     {
         Platform = platform;
-        Version = version;
+        VersionName = versionName;
+        VersionNumber = versionNumber;
     }
 
     public Platform Platform { get; }
     
-    public string Version { get; }
+    public string VersionName { get; }
+
+    public string VersionNumber { get; }
 
     public string GetPath(string ext)
     {
-        return ProjectHelper.GetPackagePath(ext, Platform, Version);
+        return ProjectHelper.GetPackagePath(ext, Platform, VersionName);
     }
 
     public IEnumerable<PackageFile> Files => _files;

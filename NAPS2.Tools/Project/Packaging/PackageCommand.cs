@@ -46,7 +46,7 @@ public class PackageCommand : ICommand<PackageOptions>
 
     private static PackageInfo GetPackageInfo(Platform platform, string preferredConfig)
     {
-        var pkgInfo = new PackageInfo(platform, ProjectHelper.GetCurrentVersionName());
+        var pkgInfo = new PackageInfo(platform, ProjectHelper.GetCurrentVersionName(), ProjectHelper.GetCurrentVersion());
 
         if (!platform.IsWindows())
         {
