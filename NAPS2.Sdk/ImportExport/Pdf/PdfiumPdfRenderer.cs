@@ -50,11 +50,14 @@ public class PdfiumPdfRenderer : IPdfRenderer
         {
             using var page = doc.GetPage(pageIndex);
 
-            var image = PdfiumImageExtractor.GetSingleImage(imageContext, page);
-            if (image != null)
+            if (!NoExtraction)
             {
-                yield return image;
-                continue;
+                var image = PdfiumImageExtractor.GetSingleImage(imageContext, page);
+                if (image != null)
+                {
+                    yield return image;
+                    continue;
+                }
             }
             yield return RenderPageToNewImage(imageContext, page, pageIndex, renderSize);
         }
@@ -87,4 +90,11 @@ public class PdfiumPdfRenderer : IPdfRenderer
             return bitmap;
         }
     }
+
+    /// <summary>
+    /// If true, full Pdfium rendering will always be used instead of the more efficient (and resolution-preserving)
+    /// direct image extraction. This can be set for tests to ensure that any incompatibilities with the encoded image
+    /// are identified.
+    /// </summary>
+    public bool NoExtraction { get; set; }
 }

@@ -90,7 +90,7 @@ public static class PdfAsserts
     public static void AssertImages(string filePath, string password, params byte[][] expectedImages)
     {
         Assert.True(File.Exists(filePath));
-        var renderer = new PdfiumPdfRenderer();
+        var renderer = new PdfiumPdfRenderer { NoExtraction = true };
         using var expectedImagesRendered =
             expectedImages.Select(data => TestImageContextFactory.Get().Load(data)).ToDisposableList();
         var renderSizes = PdfRenderSize.FromIndividualPageSizes(
