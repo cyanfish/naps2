@@ -72,7 +72,7 @@ public class MacPreviewForm : PreviewForm
             MacToolbarItems.Create("save", Commands.SaveSelected),
             // TODO: Fix this
             // MacToolbarItems.CreateSeparator("sep1"),
-            MacToolbarItems.Create("delete", Commands.Delete),
+            MacToolbarItems.Create("delete", DeleteCurrentImageCommand),
             // TODO: Using the slider is a bit janky
             new NSToolbarItem("zoom")
             {
