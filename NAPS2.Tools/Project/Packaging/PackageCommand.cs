@@ -78,6 +78,14 @@ public class PackageCommand : ICommand<PackageOptions>
         else if (platform == Platform.Win32)
         {
             AddPlatformFiles(pkgInfo, appBuildPath, "_win32");
+            // Even for the 32-bit package, we can always install it on a 64-bit machine. That's a problem as .NET
+            // AnyCPU will run in 64-bit mode and we won't be able to load the 32-bit DLLs, so we have to include 64-bit
+            // too.
+            // TODO: Any better way to handle this? Run everything in the guaranteed 32-bit worker? Have a separate WinForms32 project?
+            // Or maybe we can deprecate the 32-bit MSI installer. Idk.
+            AddPlatformFile(pkgInfo, appBuildPath, "_win64", "NAPS2.Wia.Native.dll");
+            AddPlatformFile(pkgInfo, appBuildPath, "_win64", "twaindsm.dll");
+            AddPlatformFile(pkgInfo, appBuildPath, "_win64", "pdfium.dll");
         }
         else if (platform == Platform.Win64)
         {

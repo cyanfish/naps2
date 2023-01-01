@@ -24,7 +24,7 @@
       <ComponentRef Id="Exec" />
       <ComponentRef Id="Deps" />
       <ComponentRef Id="DepsWin32" />
-      <!-- !64 --><ComponentRef Id="DepsWin64" /><!-- !~64 -->
+      <ComponentRef Id="DepsWin64" />
       <ComponentRef Id="ApplicationShortcut" />
       <ComponentRef Id="RegistryEntries" />
       <ComponentGroupRef Id="LangComponents" />
@@ -35,7 +35,7 @@
         <Directory Id="INSTALLFOLDER" Name="NAPS2">
           <Directory Id="LIBFOLDER" Name="lib">
             <Directory Id="LIBWIN32FOLDER" Name="_win32" />
-            <!-- !64 --><Directory Id="LIBWIN64FOLDER" Name="_win64" /><!-- !~64 -->
+            <Directory Id="LIBWIN64FOLDER" Name="_win64" />
           </Directory>
         </Directory>
       </Directory>
@@ -83,11 +83,11 @@
         <!-- !win32 -->
       </Component>
     </DirectoryRef>
-    <!-- !64 --><DirectoryRef Id="LIBWIN64FOLDER">
+    <DirectoryRef Id="LIBWIN64FOLDER">
       <Component Id="DepsWin64" Guid="9F734E22-7835-43B9-8B58-E10EF6484DD7">
         <!-- !win64 -->
       </Component>
-    </DirectoryRef><!-- !~64 -->
+    </DirectoryRef>
 
     <DirectoryRef Id="ProgramMenuDir">
       <Component Id="ApplicationShortcut" Guid="F5122C0C-7DCA-4D0A-AF70-C87C972267AB">

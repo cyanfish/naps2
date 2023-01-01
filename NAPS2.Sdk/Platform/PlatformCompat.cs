@@ -32,9 +32,7 @@ public class PlatformCompat
     private static ISystemCompat GetWindowsSystemCompat() =>
         Environment.Is64BitProcess
             ? new Windows64SystemCompat()
-            : Environment.Is64BitOperatingSystem
-                ? new Windows32On64SystemCompat()
-                : new Windows32SystemCompat();
+            : new Windows32SystemCompat();
 
     public static ISystemCompat System
     {
