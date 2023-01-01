@@ -22,7 +22,7 @@ public class PackageCommand : ICommand<PackageOptions>
                     // TODO: We might need configs designed for mac + linux
                     if (target.Platform.IsLinux())
                     {
-                        FlatpakPackager.Package(GetPackageInfo(target.Platform, "Release"), opts.NoPre);
+                        FlatpakPackager.Package(GetPackageInfo(target.Platform, "Release-Linux"), opts.NoPre);
                     }
                     else if (target.Platform.IsMac())
                     {

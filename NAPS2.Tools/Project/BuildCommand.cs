@@ -40,7 +40,11 @@ public class BuildCommand : ICommand<BuildOptions>
             : OperatingSystem.IsLinux()
                 ? "Debug-Linux"
                 : "Debug-Windows",
-        BuildType.Exe => "Release",
+        BuildType.Exe => OperatingSystem.IsMacOS()
+            ? "Release"
+            : OperatingSystem.IsLinux()
+                ? "Release-Linux"
+                : "Release",
         BuildType.Msi => "Release-Msi",
         BuildType.Zip => "Release-Zip",
         _ => throw new ArgumentException()
