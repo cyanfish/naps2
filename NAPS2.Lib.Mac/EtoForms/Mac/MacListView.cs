@@ -11,7 +11,7 @@ public class MacListView<T> : NSCollectionViewDelegateFlowLayout, IListView<T> w
     private readonly NSCollectionView _view = new();
     private readonly NSScrollView _scrollView = new();
     private readonly Panel _panel = new();
-    private readonly NSCollectionViewFlowLayout _layout;
+    private readonly NSCollectionViewLayout _layout;
     private readonly ListViewDataSource<T> _dataSource;
 
     private ListSelection<T> _selection = ListSelection.Empty<T>();
@@ -21,22 +21,29 @@ public class MacListView<T> : NSCollectionViewDelegateFlowLayout, IListView<T> w
     public MacListView(ListViewBehavior<T> behavior)
     {
         _behavior = behavior;
-        _layout = new CustomFlowLayout
-        {
-            SectionInset = behavior.ShowLabels
-                ? new NSEdgeInsets(5, 5, 5, 5)
-                : new NSEdgeInsets(20, 20, 20, 20),
-            MinimumInteritemSpacing = behavior.ShowLabels ? 5 : 15,
-            MinimumLineSpacing = behavior.ShowLabels ? 5 : 15,
-            TopAlign = behavior.ShowLabels,
-            LeftGravity = false // TODO: I prefer this true, but it glitches out selection
-        };
-        _dataSource = new ListViewDataSource<T>(this, _behavior, ItemActivated);
+        _layout = _behavior.Checkboxes
+            ? new NSCollectionViewGridLayout
+            {
+                MinimumInteritemSpacing = 0,
+                MinimumLineSpacing = 0,
+                MinimumItemSize = new CGSize(200, 17)
+            }
+            : new CustomFlowLayout
+            {
+                SectionInset = behavior.ShowLabels
+                    ? new NSEdgeInsets(5, 5, 5, 5)
+                    : new NSEdgeInsets(20, 20, 20, 20),
+                MinimumInteritemSpacing = behavior.ShowLabels ? 5 : 15,
+                MinimumLineSpacing = behavior.ShowLabels ? 5 : 15,
+                TopAlign = behavior.ShowLabels,
+                LeftGravity = false // TODO: I prefer this true, but it glitches out selection
+            };
+        _dataSource = new ListViewDataSource<T>(this, _behavior, ItemChecked, ItemActivated);
         _view.DataSource = _dataSource;
         _view.Delegate = this;
         _view.CollectionViewLayout = _layout;
-        _view.Selectable = true;
-        _view.AllowsMultipleSelection = behavior.MultiSelect;
+        _view.Selectable = !behavior.Checkboxes;
+        _view.AllowsMultipleSelection = !behavior.Checkboxes && behavior.MultiSelect;
         if (_behavior.AllowDragDrop)
         {
             _view.RegisterForDraggedTypes(new[] { _behavior.CustomDragDataType });
@@ -49,6 +56,12 @@ public class MacListView<T> : NSCollectionViewDelegateFlowLayout, IListView<T> w
         _panel.Content = _scrollView.ToEto();
     }
 
+    private void ItemChecked(T item, bool isChecked)
+    {
+        _selection = ListSelection.From(isChecked ? _selection.Append(item) : _selection.Except(new[] { item }));
+        SelectionChanged?.Invoke(this, EventArgs.Empty);
+    }
+
     private void ItemActivated(T item)
     {
         // TODO: Propagate the item back to the click handler
@@ -59,8 +72,8 @@ public class MacListView<T> : NSCollectionViewDelegateFlowLayout, IListView<T> w
 
     public int ImageSize
     {
-        get => (int) _layout.ItemSize.Width;
-        set => _layout.ItemSize = new CGSize(value, value);
+        get => (int) ((NSCollectionViewFlowLayout) _layout).ItemSize.Width;
+        set => ((NSCollectionViewFlowLayout) _layout).ItemSize = new CGSize(value, value);
     }
 
     public Control Control => _panel;
@@ -186,14 +199,22 @@ public class MacListView<T> : NSCollectionViewDelegateFlowLayout, IListView<T> w
         if (!_refreshing)
         {
             _refreshing = true;
-            _view.SelectionIndexes =
-                NSIndexSet.FromArray(_selection.ToSelectedIndices(_dataSource.Items).Where(x => x != -1).ToArray());
+            if (_behavior.Checkboxes)
+            {
+                // TODO: Support this?
+            }
+            else
+            {
+                _view.SelectionIndexes =
+                    NSIndexSet.FromArray(_selection.ToSelectedIndices(_dataSource.Items).Where(x => x != -1).ToArray());
+            }
             _refreshing = false;
         }
     }
 
     public override void ItemsSelected(NSCollectionView collectionView, NSSet indexPaths)
     {
+        if (_behavior.Checkboxes) return;
         _selection = ListSelection.FromSelectedIndices(_dataSource.Items,
             _view.SelectionIndexes.Select(x => (int) x));
         SelectionChanged?.Invoke(this, EventArgs.Empty);
@@ -201,6 +222,7 @@ public class MacListView<T> : NSCollectionViewDelegateFlowLayout, IListView<T> w
 
     public override void ItemsDeselected(NSCollectionView collectionView, NSSet indexPaths)
     {
+        if (_behavior.Checkboxes) return;
         _selection = ListSelection.FromSelectedIndices(_dataSource.Items,
             _view.SelectionIndexes.Select(x => (int) x));
         SelectionChanged?.Invoke(this, EventArgs.Empty);
@@ -218,8 +240,9 @@ public class MacListView<T> : NSCollectionViewDelegateFlowLayout, IListView<T> w
         var item = _dataSource.Items[(int) indexPath.Item];
         if (_behavior.ShowLabels)
         {
-            using var image = _behavior.GetImage(item, ImageSize);
-            using var listItem = new ListViewItem(image, _behavior.GetLabel(item), false, () => { });
+            using var image = _behavior.Checkboxes ? null : _behavior.GetImage(item, ImageSize);
+            using var listItem = new ListViewItem(
+                image, _behavior.GetLabel(item), _behavior.Checkboxes, null, false, () => { });
             listItem.LoadView();
             return listItem.View.FittingSize;
         }

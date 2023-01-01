@@ -7,16 +7,20 @@ namespace NAPS2.EtoForms.Mac;
 
 public class ListViewItem : NSCollectionViewItem
 {
-    private readonly Image _itemImage;
+    private readonly Image? _itemImage;
     private readonly string? _label;
+    private readonly bool _checkbox;
+    private readonly Action<bool>? _checkedChanged;
     private readonly Action _onActivate;
     private bool _selected;
     private NSImageView? _imageView;
 
-    public ListViewItem(Image itemImage, string? label, bool selected, Action onActivate)
+    public ListViewItem(Image? itemImage, string? label, bool checkbox, Action<bool>? checkedChanged, bool selected, Action onActivate)
     {
         _itemImage = itemImage;
         _label = label;
+        _checkbox = checkbox;
+        _checkedChanged = checkedChanged;
         _selected = selected;
         _onActivate = onActivate;
     }
@@ -26,7 +30,15 @@ public class ListViewItem : NSCollectionViewItem
         // TODO: Add padding/insets for the image from its border? Ideally the border shouldn't cover the actual image
         // The Photos app also interestingly has a 1px white between the image and the blue selection border
         // Though we're doing it differently as we have the black border always
-        if (_label != null)
+        if (_checkbox)
+        {
+            NSButton button = null!;
+            // ReSharper disable once AccessToModifiedClosure
+            button = NSButton.CreateCheckbox(_label, () => _checkedChanged!(button.State == NSCellStateValue.On));
+            button.State = _selected ? NSCellStateValue.On : NSCellStateValue.Off;
+            View = button;
+        }
+        else if (_label != null)
         {
             _imageView = new NSImageView
             {
@@ -64,11 +76,14 @@ public class ListViewItem : NSCollectionViewItem
         View.WantsLayer = true;
         UpdateViewForSelectedState();
 
-        View.AddGestureRecognizer(new NSClickGestureRecognizer(_onActivate)
+        if (!_checkbox)
         {
-            NumberOfClicksRequired = 2,
-            DelaysPrimaryMouseButtonEvents = false
-        });
+            View.AddGestureRecognizer(new NSClickGestureRecognizer(_onActivate)
+            {
+                NumberOfClicksRequired = 2,
+                DelaysPrimaryMouseButtonEvents = false
+            });
+        }
     }
 
     public override bool Selected
@@ -83,6 +98,7 @@ public class ListViewItem : NSCollectionViewItem
 
     private void UpdateViewForSelectedState()
     {
+        if (_checkbox) return;
         var layer = View.Layer!;
         layer.BorderWidth = Selected ? 3 : _label == null ? 1 : 0;
         layer.CornerRadius = _label == null ? 0 : 4;

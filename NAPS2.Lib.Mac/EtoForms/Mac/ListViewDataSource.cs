@@ -6,12 +6,15 @@ public class ListViewDataSource<T> : NSCollectionViewDataSource where T : notnul
 {
     private readonly IListView<T> _listView;
     private readonly ListViewBehavior<T> _behavior;
+    private readonly Action<T, bool> _itemChecked;
     private readonly Action<T> _itemActivated;
 
-    public ListViewDataSource(IListView<T> listView, ListViewBehavior<T> behavior, Action<T> itemActivated)
+    public ListViewDataSource(IListView<T> listView, ListViewBehavior<T> behavior, Action<T, bool> itemChecked,
+        Action<T> itemActivated)
     {
         _listView = listView;
         _behavior = behavior;
+        _itemChecked = itemChecked;
         _itemActivated = itemActivated;
     }
 
@@ -26,8 +29,9 @@ public class ListViewDataSource<T> : NSCollectionViewDataSource where T : notnul
     {
         var i = (int) indexPath.Item;
         var item = Items[i];
-        var image = _behavior.GetImage(item, _listView.ImageSize);
+        var image = _behavior.Checkboxes ? null : _behavior.GetImage(item, _listView.ImageSize);
         var label = _behavior.ShowLabels ? _behavior.GetLabel(item) : null;
-        return new ListViewItem(image, label, _listView.Selection.Contains(item), () => _itemActivated(item));
+        return new ListViewItem(image, label, _behavior.Checkboxes, isChecked => _itemChecked(item, isChecked),
+            _listView.Selection.Contains(item), () => _itemActivated(item));
     }
 }
