@@ -57,6 +57,18 @@ public static class MacPackager
             Cli.Run("codesign",
                 $"-s \"{applicationIdentity}\" \"{mainExe}\" -f --options runtime --entitlements \"{entitlements}\"");
         }
+
+        var tesseractPath1 = Path.Combine(bundlePath, "Contents", "Resources", "_mac", "tesseract");
+        if (Path.Exists(tesseractPath1))
+        {
+            Cli.Run("chmod", $"+x \"{tesseractPath1}\"");
+        }
+        var tesseractPath2 = Path.Combine(bundlePath, "Contents", "Resources", "_macarm", "tesseract");
+        if (Path.Exists(tesseractPath2))
+        {
+            Cli.Run("chmod", $"+x \"{tesseractPath2}\"");
+        }
+
         var signArgs = string.IsNullOrEmpty(installerIdentity) ? "" : $"--sign \"{installerIdentity}\"";
         Cli.Run("productbuild", $"--component \"{bundlePath}\" /Applications {signArgs} \"{pkgPath}\"");
 
