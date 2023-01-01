@@ -62,8 +62,9 @@ public static class TargetsHelper
         {
             foreach (var platform in platformsParsed)
             {
-                if (constraints.RequireBuildablePlatform && buildType == BuildType.Msi &&
-                    platform == Platform.Win) continue;
+                // We only want to support certain combos (i.e. win exe, win32 msi, win64 msi, win zip)
+                if (buildType == BuildType.Msi && platform == Platform.Win) continue;
+                if (buildType is BuildType.Exe or BuildType.Zip && platform is Platform.Win32 or Platform.Win64) continue;
 
                 yield return new Target(buildType, platform);
             }
