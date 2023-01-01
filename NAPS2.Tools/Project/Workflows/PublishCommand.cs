@@ -18,11 +18,14 @@ public class PublishCommand : ICommand<PublishOptions>
             BuildType = opts.BuildType,
             Platform = opts.Platform
         });
-        new VerifyCommand().Run(new VerifyOptions
-        { 
-            BuildType = opts.BuildType,
-            Platform = opts.Platform
-        });
+        if (!opts.NoVerify)
+        {
+            new VerifyCommand().Run(new VerifyOptions
+            {
+                BuildType = opts.BuildType,
+                Platform = opts.Platform
+            });
+        }
         return 0;
     }
 }

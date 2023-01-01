@@ -11,6 +11,6 @@ public class PublishOptions : OptionsBase
     [Option('p', "platform", Required = false, HelpText = "all|win|win32|win64|mac|macintel|macarm|linux")]
     public string? Platform { get; set; }
 
-    [Option("nocleanup", Required = false, HelpText = "Skip cleaning up temp files")]
-    public bool NoCleanup { get; set; }
+    [Option("noverify", Required = false, HelpText = "Don't run verification tests")]
+    public bool NoVerify { get; set; }
 }
