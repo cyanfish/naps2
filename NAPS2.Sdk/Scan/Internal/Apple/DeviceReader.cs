@@ -22,6 +22,11 @@ internal class DeviceReader : ICDeviceBrowserDelegate
         _browser.Start();
     }
 
+    public void Stop()
+    {
+        _browser.Stop();
+    }
+
     public event EventHandler<DeviceEventArgs>? DeviceFound;
 
     public override void DidAddDevice(ICDeviceBrowser browser, ICDevice device, bool moreComing)
@@ -43,6 +48,7 @@ internal class DeviceReader : ICDeviceBrowserDelegate
     {
         if (disposing)
         {
+            // TODO: This causes some kind of error. For scans, I ended up calling Stop manually after the device is ready.
             // _browser.Stop();
             // _browser.Dispose();
         }

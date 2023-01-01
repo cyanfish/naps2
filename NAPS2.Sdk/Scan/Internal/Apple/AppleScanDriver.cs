@@ -31,7 +31,7 @@ internal class AppleScanDriver : IScanDriver
         using var reader = new DeviceReader();
         using var device = await GetDevice(reader, options.Device!);
         using var oper =
-            new DeviceOperator(_scanningContext, device, options, cancelToken, scanEvents, callback);
+            new DeviceOperator(_scanningContext, device, reader, options, cancelToken, scanEvents, callback);
         await oper.Scan();
     }
 

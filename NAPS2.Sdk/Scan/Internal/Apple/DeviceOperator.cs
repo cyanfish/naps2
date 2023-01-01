@@ -12,6 +12,7 @@ internal class DeviceOperator : ICScannerDeviceDelegate
 {
     private readonly ScanningContext _scanningContext;
     private readonly ICScannerDevice _device;
+    private readonly DeviceReader _reader;
     private readonly ScanOptions _options;
     private readonly IScanEvents _scanEvents;
     private readonly Action<IMemoryImage> _callback;
@@ -20,13 +21,15 @@ internal class DeviceOperator : ICScannerDeviceDelegate
     private TaskCompletionSource<ICScannerFunctionalUnit> _unitTcs = new();
     private readonly TaskCompletionSource _scanTcs = new();
     private readonly TaskCompletionSource _closeTcs = new();
+    private readonly List<Task> _copyTasks = new();
     private MemoryStream? _buffer;
 
-    public DeviceOperator(ScanningContext scanningContext, ICScannerDevice device, ScanOptions options,
-        CancellationToken cancelToken, IScanEvents scanEvents, Action<IMemoryImage> callback)
+    public DeviceOperator(ScanningContext scanningContext, ICScannerDevice device, DeviceReader reader,
+        ScanOptions options, CancellationToken cancelToken, IScanEvents scanEvents, Action<IMemoryImage> callback)
     {
         _scanningContext = scanningContext;
         _device = device;
+        _reader = reader;
         _options = options;
         _scanEvents = scanEvents;
         _callback = callback;
@@ -117,13 +120,17 @@ internal class DeviceOperator : ICScannerDeviceDelegate
         {
             var fullBuffer = _buffer;
             _buffer = null;
-            Task.Run(() =>
+            var copyTask = Task.Run(() =>
             {
                 var image = _scanningContext.ImageContext.Create(
                     (int) data.FullImageWidth, (int) data.FullImageHeight, pixelFormat);
                 new CopyBitwiseImageOp().Perform(fullBuffer.GetBuffer(), bufferInfo, image);
                 _callback(image);
             });
+            lock (this)
+            {
+                _copyTasks.Add(copyTask);
+            }
         }
     }
 
@@ -172,6 +179,8 @@ internal class DeviceOperator : ICScannerDeviceDelegate
             _device.Delegate = this;
             _device.RequestOpenSession();
             await _openSessionTcs.Task;
+            // Calling reader.Stop frees ununsed devices, so we can only do it after we've opened a session
+            _reader.Stop();
             await _readyTcs.Task;
             var unit = await SelectUnit(_options.PaperSource == PaperSource.Flatbed
                 ? ICScannerFunctionalUnitType.Flatbed
@@ -193,6 +202,12 @@ internal class DeviceOperator : ICScannerDeviceDelegate
             _device.MaxMemoryBandSize = 65536;
             _device.RequestScan();
             await _scanTcs.Task;
+            Task[] copyTasks;
+            lock (this)
+            {
+                copyTasks = _copyTasks.ToArray();
+            }
+            await Task.WhenAll(copyTasks);
             _device.RequestCloseSession();
             await _closeTcs.Task;
         }
