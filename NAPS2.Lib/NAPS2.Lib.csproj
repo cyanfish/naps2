@@ -9,7 +9,7 @@
 
     <Title>NAPS2 - Not Another PDF Scanner</Title>
     <Product>NAPS2 - Not Another PDF Scanner</Product>
-    <Configurations>Debug;Release;DebugLang</Configurations>
+    <Configurations>Debug;Release;DebugLang;Release-Msi;Release-Zip</Configurations>
   </PropertyGroup>
 
   <Import Project="..\NAPS2.Setup\targets\CommonTargets.targets" />
@@ -17,6 +17,12 @@
 
   <PropertyGroup Condition="'$(TargetFramework)' == 'net6-macos10.15'">
     <DefineConstants>MAC</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)' == 'Release-Msi'">
+    <DefineConstants>MSI</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)' == 'Release-Zip'">
+    <DefineConstants>ZIP</DefineConstants>
   </PropertyGroup>
 
   <ItemGroup>
