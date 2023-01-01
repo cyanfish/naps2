@@ -26,12 +26,12 @@ public static class MacPackager
         {
             Directory.Delete(bundlePath, true);
         }
-        if (packageInfo.Platform == Platform.Mac)
+        Cli.Run("dotnet", $"build NAPS2.App.Mac -c Release");
+        if (packageInfo.Platform != Platform.Mac)
         {
-            Cli.Run("dotnet", $"build NAPS2.App.Mac -c Release");
-        }
-        else
-        {
+            // By default resource files are only copied into the universal bundle.
+            // We also need to run this to copy into the arch-specific bundle.
+            // (And we still have to build above as weirdly this command on its own ONLY copies resources.)
             var runtimeId = packageInfo.Platform == Platform.MacArm ? "osx-arm64" : "osx-x64";
             Cli.Run("dotnet", $"build NAPS2.App.Mac -c Release -r {runtimeId}");
         }
@@ -100,7 +100,7 @@ public static class MacPackager
                 .Select(file => file.FullName));
         if (files.Length > 0)
         {
-            Cli.Run("codesign", $"-s \"{signingIdentity}\" -f --options runtime \"{files}\"");
+            Cli.Run("codesign", $"-s \"{signingIdentity}\" -f --options runtime \"{files}\"", ignoreErrorIfOutputContains: "replacing existing signature");
         }
     }
 }
