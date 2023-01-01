@@ -1,5 +1,6 @@
 using System.Collections.Immutable;
 using System.Threading;
+using System.Xml;
 
 namespace NAPS2.Ocr;
 
@@ -110,6 +111,12 @@ public class TesseractOcrEngine : IOcrEngine
                     return new OcrResultElement(text, lang, rtl, bounds);
                 }).ToImmutableList();
             return new OcrResult(pageBounds, elements);
+        }
+        catch (XmlException e)
+        {
+            Log.ErrorException("Error running OCR", e);
+            // Don't display to the error output as an xml exception may just indicate a normal OCR failure
+            return null;
         }
         catch (Exception e)
         {
