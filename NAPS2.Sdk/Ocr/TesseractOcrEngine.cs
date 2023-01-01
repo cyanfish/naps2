@@ -138,16 +138,27 @@ public class TesseractOcrEngine : IOcrEngine
 
     private void EnsureHocrConfigExists(DirectoryInfo tessdata)
     {
-        var configDir = new DirectoryInfo(Path.Combine(tessdata.FullName, "configs"));
-        if (!configDir.Exists)
+        try
         {
-            configDir.Create();
+            var configDir = new DirectoryInfo(Path.Combine(tessdata.FullName, "configs"));
+            if (!configDir.Exists)
+            {
+                configDir.Create();
+            }
+            var hocrConfigFile = new FileInfo(Path.Combine(configDir.FullName, "hocr"));
+            if (!hocrConfigFile.Exists)
+            {
+                using var writer = hocrConfigFile.CreateText();
+                writer.Write("tessedit_create_hocr 1");
+            }
         }
-        var hocrConfigFile = new FileInfo(Path.Combine(configDir.FullName, "hocr"));
-        if (!hocrConfigFile.Exists)
+        catch (Exception)
         {
-            using var writer = hocrConfigFile.CreateText();
-            writer.Write("tessedit_create_hocr 1");
+            // Possibly contention over creating the file. As long as it's created assume everything is okay.
+            if (!File.Exists(Path.Combine(tessdata.FullName, "configs", "hocr")))
+            {
+                throw;
+            }
         }
     }
 
