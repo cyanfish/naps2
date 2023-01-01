@@ -46,7 +46,7 @@ public class PackageCommand : ICommand<PackageOptions>
 
     private static PackageInfo GetPackageInfo(Platform platform, string preferredConfig)
     {
-        var pkgInfo = new PackageInfo(platform, ProjectHelper.GetProjectVersion("NAPS2.App.WinForms"));
+        var pkgInfo = new PackageInfo(platform, ProjectHelper.GetCurrentVersionName());
 
         if (!platform.IsWindows())
         {

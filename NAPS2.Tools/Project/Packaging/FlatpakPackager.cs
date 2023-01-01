@@ -17,7 +17,7 @@ public static class FlatpakPackager
 
         // Update metainfo file with the current version/date
         var metaInfo = File.ReadAllText(Path.Combine(Paths.SetupLinux, "com.naps2.Naps2.metainfo.xml"));
-        var version = ProjectHelper.GetDefaultProjectVersion();
+        var version = ProjectHelper.GetCurrentVersionName();
         var date = DateTime.Now.ToString("yyyy-MM-dd");
         metaInfo = Regex.Replace(metaInfo,
             @"<release [^>]+/>",

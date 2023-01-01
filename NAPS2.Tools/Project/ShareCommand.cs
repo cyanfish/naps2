@@ -7,7 +7,7 @@ public class ShareCommand : ICommand<ShareOptions>
         bool doIn = opts.ShareType is "both" or "in";
         bool doOut = opts.ShareType is "both" or "out";
 
-        var version = ProjectHelper.GetDefaultProjectVersion();
+        var version = ProjectHelper.GetCurrentVersionName();
 
         var syncBaseFolder = N2Config.ShareDir;
         if (!Directory.Exists(syncBaseFolder))

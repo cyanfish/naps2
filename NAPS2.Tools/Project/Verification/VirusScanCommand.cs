@@ -9,7 +9,7 @@ public class VirusScanCommand : ICommand<VirusScanOptions>
     public int Run(VirusScanOptions opts)
     {
         Output.Info("Checking for antivirus false positives");
-        var version = ProjectHelper.GetDefaultProjectVersion();
+        var version = ProjectHelper.GetCurrentVersionName();
 
         var constraints = new TargetConstraints
         {

@@ -6,7 +6,7 @@ public class InstallCommand : ICommand<InstallOptions>
 {
     public int Run(InstallOptions opts)
     {
-        var version = ProjectHelper.GetDefaultProjectVersion();
+        var version = ProjectHelper.GetCurrentVersionName();
 
         var constraints = new TargetConstraints
         {

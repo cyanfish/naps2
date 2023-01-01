@@ -1,4 +1,3 @@
-using System.Text.RegularExpressions;
 using System.Threading;
 using NAPS2.Tools.Project.Targets;
 
@@ -6,30 +5,33 @@ namespace NAPS2.Tools.Project;
 
 public static class ProjectHelper
 {
-    public static string GetProjectVersion(string projectName)
+    public static string GetCurrentVersion()
     {
-        var projectPath = Path.Combine(Paths.SolutionRoot, projectName, $"{projectName}.csproj");
-        var projectFile = XDocument.Load(projectPath);
-        var version = projectFile.Descendants().SingleOrDefault(x => x.Name == "Version")?.Value;
+        var versionTargetsPath = Path.Combine(Paths.Setup, "targets", "VersionTargets.targets");
+        var versionTargetsFile = XDocument.Load(versionTargetsPath);
+        var version = versionTargetsFile.Descendants().SingleOrDefault(x => x.Name == "Version")?.Value;
         if (version == null)
         {
-            throw new Exception($"Could not read version from project: {projectPath}");
-        }
-        if (!Regex.IsMatch(version, @"[0-9]+(\.[0-9]+){2}"))
-        {
-            throw new Exception($"Invalid project version: {version}");
+            throw new Exception($"Could not read version from project: {versionTargetsPath}");
         }
         return version;
     }
 
-    public static string GetDefaultProjectVersion()
+    public static string GetCurrentVersionName()
     {
-        return GetProjectVersion("NAPS2.App.WinForms");
+        var versionTargetsPath = Path.Combine(Paths.Setup, "targets", "VersionTargets.targets");
+        var versionTargetsFile = XDocument.Load(versionTargetsPath);
+        var version = versionTargetsFile.Descendants().SingleOrDefault(x => x.Name == "VersionName")?.Value;
+        if (version == null)
+        {
+            throw new Exception($"Could not read version from project: {versionTargetsPath}");
+        }
+        return version;
     }
 
     public static string GetPackagePath(string ext, Platform platform, string? version = null)
     {
-        version ??= GetProjectVersion("NAPS2.App.WinForms");
+        version ??= GetCurrentVersion();
         var path = Path.Combine(Paths.Publish, version, $"naps2-{version}-{platform.PackageName()}.{ext}");
         Directory.CreateDirectory(Path.GetDirectoryName(path)!);
         return path;

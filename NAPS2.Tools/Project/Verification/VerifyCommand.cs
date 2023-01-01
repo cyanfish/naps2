@@ -6,7 +6,7 @@ public class VerifyCommand : ICommand<VerifyOptions>
 {
     public int Run(VerifyOptions opts)
     {
-        var version = ProjectHelper.GetDefaultProjectVersion();
+        var version = ProjectHelper.GetCurrentVersionName();
         
         using var appDriverRunner = AppDriverRunner.Start();
 

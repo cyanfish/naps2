@@ -3,6 +3,7 @@ using NAPS2.Tools.Localization;
 using NAPS2.Tools.Project;
 using NAPS2.Tools.Project.Installation;
 using NAPS2.Tools.Project.Packaging;
+using NAPS2.Tools.Project.Release;
 using NAPS2.Tools.Project.Verification;
 using NAPS2.Tools.Project.Workflows;
 
@@ -35,6 +36,7 @@ public static class Program
             .Add<ResxOptions, ResxCommand>()
             .Add<PushTemplatesOptions, PushTemplatesCommand>()
             .Add<PullTranslationsOptions, PullTranslationsCommand>()
+            .Add<SetVersionOptions, SetVersionCommand>()
             .Add<SaneOptsOptions, SaneOptsCommand>();
 
         var result = Parser.Default.ParseArguments(args, commands.OptionTypes);
