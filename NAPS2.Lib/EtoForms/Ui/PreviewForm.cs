@@ -243,7 +243,17 @@ public class PreviewForm : EtoDialogBase
     protected override void OnSizeChanged(EventArgs e)
     {
         base.OnSizeChanged(e);
-        ImageViewer.ZoomToContainer();
+        if (EtoPlatform.Current.IsGtk)
+        {
+            // Gtk delays adjusting the imageview size after the container size changes, which messes this up unless
+            // we queue it after the current UI thread options.
+            // We don't want to do this on Windows/Mac as it results in the render size lagging the window size.
+            Invoker.Current.InvokeAsync(ImageViewer.ZoomToContainer);
+        }
+        else
+        {
+            ImageViewer.ZoomToContainer();
+        }
     }
 
     private async Task DeleteCurrentImage()

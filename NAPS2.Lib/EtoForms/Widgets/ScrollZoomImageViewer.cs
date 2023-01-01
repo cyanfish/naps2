@@ -27,22 +27,6 @@ public class ScrollZoomImageViewer
         _scrollable.MouseUp += OnMouseUp;
         EtoPlatform.Current.AttachMouseWheelEvent(_scrollable, OnMouseWheel);
         _scrollable.Cursor = Cursors.Pointer;
-        _scrollable.SizeChanged += ScrollableSizeChanged;
-    }
-
-    private void ScrollableSizeChanged(object? sender, EventArgs eventArgs)
-    {
-        if (EtoPlatform.Current.IsGtk)
-        {
-            // Gtk delays adjusting the imageview size after the container size changes, which messes this up unless
-            // we queue it after the current UI thread options.
-            // TODO: See if we can do this unconditionally on Windows/Mac
-            Invoker.Current.InvokeAsync(ZoomToContainer);
-        }
-        else
-        {
-            ZoomToContainer();
-        }
     }
 
     // For some reason Gtk can't render a few pixels width around the edge of the image, so we need to correct for that.
