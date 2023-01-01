@@ -12,7 +12,8 @@ public class VerifyCommand : ICommand<VerifyOptions>
 
         var constraints = new TargetConstraints
         {
-            AllowMultiplePlatforms = true
+            AllowMultiplePlatforms = true,
+            RequireBuildablePlatform = true
         };
         foreach (var target in TargetsHelper.Enumerate(opts.BuildType, opts.Platform, constraints))
         {
