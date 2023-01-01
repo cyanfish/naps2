@@ -511,7 +511,16 @@ public class PdfExporter : IPdfExporter
 
         public void SaveAsJpeg(MemoryStream ms)
         {
-            _image.Save(ms, ImageFileFormat.Jpeg);
+            if (_image.PixelFormat == ImagePixelFormat.Gray8)
+            {
+                // PDFs require RGB channels so we need to make sure we're exporting that
+                using var copy = _image.CopyWithPixelFormat(ImagePixelFormat.RGB24);
+                copy.Save(ms, ImageFileFormat.Jpeg);
+            }
+            else
+            {
+                _image.Save(ms, ImageFileFormat.Jpeg);
+            }
         }
 
         public void SaveAsPdfBitmap(MemoryStream ms)

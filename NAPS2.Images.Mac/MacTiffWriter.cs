@@ -30,7 +30,8 @@ public class MacTiffWriter : ITiffWriter
         lock (MacImageContext.ConstructorLock)
         {
             data = new NSMutableData();
-            // TODO: Fix unsupported warning
+            // TODO: We get a warning for UTType
+#pragma warning disable CA1416
 #if MONOMAC
             dest = CGImageDestination.FromData(
 #else

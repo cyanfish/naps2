@@ -159,18 +159,6 @@ public class MacImage : IMemoryImage
                 ImageFileFormat.Jpeg2000 => NSBitmapImageFileType.Jpeg2000,
                 _ => throw new InvalidOperationException("Unsupported image format")
             };
-            var targetFormat = LogicalPixelFormat;
-            if (imageFormat == ImageFileFormat.Bmp && targetFormat == ImagePixelFormat.Gray8)
-            {
-                // Workaround for NSImage issue saving 8bit BMPs
-                targetFormat = ImagePixelFormat.RGB24;
-            }
-            if (targetFormat != PixelFormat)
-            {
-                // We only want to save with the needed color info to minimize file sizes
-                using var copy = (MacImage) this.CopyWithPixelFormat(targetFormat);
-                return copy.Rep.RepresentationUsingTypeProperties(fileType, props);
-            }
             return Rep.RepresentationUsingTypeProperties(fileType, props);
         }
     }
