@@ -133,7 +133,16 @@ public class GtkEtoPlatform : EtoPlatform
         widget.Margin = 0;
         if (widget.IsRealized)
         {
-            return base.GetPreferredSize(control, availableSpace);
+            widget.GetSizeRequest(out var oldWidth, out var oldHeight);
+            widget.SetSizeRequest(0, 0);
+            try
+            {
+                return base.GetPreferredSize(control, availableSpace);
+            }
+            finally
+            {
+                widget.SetSizeRequest(oldWidth, oldHeight);
+            }
         }
         widget.GetPreferredSize(out var minSize, out var naturalSize);
         return new SizeF(naturalSize.Width, naturalSize.Height);
