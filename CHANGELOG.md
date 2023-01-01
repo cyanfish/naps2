@@ -1,3 +1,51 @@
+Changes in 7.0b1:
+- Most NAPS2 code has been rewritten. Things should mostly look the same but under the hood there are many differences.
+    - [Beta feedback thread]()
+- Added Mac support
+    - Supports macOS 10.15 and later
+    - The Universal download should work for all users. Or you can use the Intel/Apple Silicon downloads for a smaller download/install size if you know which one your Mac has.
+    - NAPS2 on Mac bundles SANE drivers for USB scanners, allowing supported scanners to be used even on new M1/M2 Macs (which normally wouldn't work without manufacturer-provided drivers)
+- Added native Linux support
+    - Requires Flatpak for installation (https://flatpak.org/setup/)
+    - Mono is no longer required
+    - The UI should now feel like a native Linux app
+    - Much better performance and reliability
+- TWAIN support has been reworked
+    - Some lifecycle-related issues should hopefully be fixed (e.g. only being able to scan once)
+    - With "Use predefined settings", TWAIN now uses the built-in NAPS2 progress window, which allows multitasking
+    - TWAIN UI should no longer be visible in console and batch mode
+    - TWAIN should also now support scanning larger images (e.g. 1200dpi) without out-of-memory issues
+- Upgraded Tesseract to 5.2.0 for OCR
+    - Up to 30% faster OCR performance
+    - Tesseract is now bundled with the NAPS2 download, so no extra download is required (though you still need to download language data if you don't already have it).
+- PDF import and export have been rewritten to leverage Pdfium
+    - This means better support for importing different kinds of PDFs
+    - In some cases this means much faster import/export
+    - Pdfium is bundled with the NAPS2 download so there is no longer an extra download needed to import non-NAPS2 PDFs
+- New Crop UI
+- Minor tweaks to blank page detection
+- Image list tweaks
+    - Selected images appear with just a blue border
+    - Spacing has been optimized
+- New automatic image correction functionality (work in progress)
+    - "Document Correction" under the Image menu
+    - Automatic fixing of color calibration, noise, skew, and other common scanning issues
+    - Eventually this will be integrated into profiles
+- JPEG2000 support for importing/saving images (Mac only for now)
+- Dropped support for rarely-used image file formats (.emf, .exif, .gif)
+    - Please request if you want this back
+- NAPS2 on Windows now requires .NET Framework 4.6.2
+    - This means no more support for Windows XP
+    - Windows 7 SP1 is now the minimum requirement
+- The 64-bit Windows install location is now "Program Files" instead of "Program Files (x86)"
+- The MSI installer now has separate 64-bit and 32-bit downloads
+- The AppData format for config.xml and Tesseract files has changed (will be automatically migrated)
+- Improved icon quality
+- Translations have been moved to Crowdin
+    - See translate.naps2.com
+- Various performance and reliability improvements
+- Bug fixes
+
 Changes in 6.1.2:
 - Added --autosend support for Gmail in NAPS2.Console
 - Bug fixes
@@ -18,15 +66,15 @@ Changes in 6.0b4:
 - Upgraded WIA version from 1.0 to 2.0; can be changed back in your profile under Advanced
 - Improved WIA compatibility with feeders and duplex
 - Added support for background scanning with WIA
-    -- Does not work with "Use native UI"
-    -- This means you can scan with multiple devices at the same time
+    - Does not work with "Use native UI"
+    - This means you can scan with multiple devices at the same time
 - Removed some obsolete WIA compatibility options
 - Bug fixes
 
 Changes in 6.0b3:
 - Beta feedback thread: https://sourceforge.net/p/naps2/discussion/general/thread/8776c818/
 - Added optional event logging
-    -- See https://www.naps2.com/doc-org-use.html#event-logging
+    - See https://www.naps2.com/doc-org-use.html#event-logging
 - Improved console import speed
 - Bug fixes
 
@@ -40,18 +88,18 @@ Changes in 6.0b2:
 Changes in 6.0b1:
 - Beta feedback thread: https://sourceforge.net/p/naps2/discussion/general/thread/8776c818/
 - Linux support (download one of the portable archives - currently experimental, please give feedback!)
-    -- Requires Mono (5.17+ preferably), see https://www.naps2.com/doc-getting-started.html#system-requirements
+    - Requires Mono (5.17+ preferably), see https://www.naps2.com/doc-getting-started.html#system-requirements
 - Added an automatic update check
-    -- Opt in from the About window
-	-- Not available if installed from the MSI
+    - Opt in from the About window
+    - Not available if installed from the MSI
 - New OCR version, significantly more accurate in many cases
-    -- The OCR button will prompt to update. This can be disabled with the NoUpdatePrompt flag in appsettings.xml
-	-- Not supported on Windows XP (will use the older version instead)
-	-- You can choose between multiple modes: Fast (recommended), Best (slow), and Legacy (to simulate the older version)
+    - The OCR button will prompt to update. This can be disabled with the NoUpdatePrompt flag in appsettings.xml
+    - Not supported on Windows XP (will use the older version instead)
+    - You can choose between multiple modes: Fast (recommended), Best (slow), and Legacy (to simulate the older version)
 - Added the ability to choose an email provider
-    -- When you first click Email PDF, you will be prompted to choose. Afterwards use Email Settings to change
-	-- Switch between installed clients (Outlook, Thunderbird, etc.)
-	-- Webmail integration for Gmail and Outlook Web Access
+    - When you first click Email PDF, you will be prompted to choose. Afterwards use Email Settings to change
+    - Switch between installed clients (Outlook, Thunderbird, etc.)
+    - Webmail integration for Gmail and Outlook Web Access
 - Added support for Unicode in email attachment names
 - Crop selection will be remembered (in case you're cropping multiple images but need to adjust them individually)
 - Added the ability to run most operations in the background for multitasking
@@ -59,10 +107,10 @@ Changes in 6.0b1:
 - Substantially reduced installation footprint and portable zip size
 - Minimized TWAIN UI in console and batch mode
 - NAPS2 installers are now signed
-    -- This should eventually help remove SmartScreen notifications
+    - This should eventually help remove SmartScreen notifications
 - NAPS2 will now run in 64-bit mode on compatible systems
-	-- If you have a 64-bit system, NAPS2 will better handle memory-intensive operations
-    -- If you downloaded the add-on to open any PDF (gsdll32.dll), you may need to re-download the 64-bit version
+    - If you have a 64-bit system, NAPS2 will better handle memory-intensive operations
+    - If you downloaded the add-on to open any PDF (gsdll32.dll), you may need to re-download the 64-bit version
 - Improved documentation and usability for developers (see https://www.naps2.com/doc-dev-onboarding.html)
 - Bug fixes
 
@@ -76,27 +124,27 @@ Changes in 5.8.1:
 
 Changes in 5.8.0:
 - PDF/A support
-    -- PDF/A1-b, PDF/A2-b, PDF/A3-b, and PDF/A3-u support
-    -- In the "Save PDF" menu, click "PDF Settings", and select it under "Compatibility"
-    -- Use --pdfcompat in NAPS2.Console. See www.naps2.com/doc-command-line.html#pdf-options
-    -- Use ForcePdfCompat in appsettings.xml. See www.naps2.com/doc-org-use.html#force-pdf-compat
+    - PDF/A1-b, PDF/A2-b, PDF/A3-b, and PDF/A3-u support
+    - In the "Save PDF" menu, click "PDF Settings", and select it under "Compatibility"
+    - Use --pdfcompat in NAPS2.Console. See www.naps2.com/doc-command-line.html#pdf-options
+    - Use ForcePdfCompat in appsettings.xml. See www.naps2.com/doc-org-use.html#force-pdf-compat
 - TIFF changes
-    -- Better compression for black and white TIFF files by default
-    -- Added a "Compression" option under Image Settings
-    -- Added a "Single page files" option under Image Settings that prevents saving multi-page TIFF files
-    -- Use --tiffcomp and --split in NAPS2.Console. See www.naps2.com/doc-command-line.html#image-options
+    - Better compression for black and white TIFF files by default
+    - Added a "Compression" option under Image Settings
+    - Added a "Single page files" option under Image Settings that prevents saving multi-page TIFF files
+    - Use --tiffcomp and --split in NAPS2.Console. See www.naps2.com/doc-command-line.html#image-options
 - Donate button
-    -- The About window now has a Donate button
-    -- An unobtrusive donation prompt is shown after a month of use
-    -- Use HideDonateButton in appsettings.xml to disable both. See www.naps2.com/doc-org-use.html#hide-donate-button
-    -- The prompt is disabled by default in the MSI distribution
+    - The About window now has a Donate button
+    - An unobtrusive donation prompt is shown after a month of use
+    - Use HideDonateButton in appsettings.xml to disable both. See www.naps2.com/doc-org-use.html#hide-donate-button
+    - The prompt is disabled by default in the MSI distribution
 - Added multi-language support to the EXE installation wizard
 
 Changes in 5.7.1:
 - Added --split, --splitscans, --splitpatcht, and --splitsize options to NAPS2.Console
-    -- See www.naps2.com/doc-command-line.html#split-options
+    - See www.naps2.com/doc-command-line.html#split-options
 - Added slice support to --import in NAPS2.Console
-    -- See www.naps2.com/doc-command-line.html#slicing-imported-files
+    - See www.naps2.com/doc-command-line.html#slicing-imported-files
 
 Changes in 5.7.0:
 - Fixed downloads for OCR (etc.)
@@ -198,14 +246,14 @@ Changes in 5.0b2:
 
 Changes in 5.0b1:
 - Updated tesseract-ocr (from 3.02 to 3.04)
-    -- The OCR button will prompt to update. This can be disabled with the NoUpdatePrompt flag in appsettings.xml
-	-- If you have the old version it will continue to function normally
+    - The OCR button will prompt to update. This can be disabled with the NoUpdatePrompt flag in appsettings.xml
+    - If you have the old version it will continue to function normally
 - Updated the default TWAIN implementation
-    -- Choose the "Old DSM" implementation under advanced profile settings to revert
+    - Choose the "Old DSM" implementation under advanced profile settings to revert
 - Changed the default Horizontal Align in profile settings from Left to Right to match most scanners
-    -- If you deploy your own appsettings.xml the specified alignment specified will continue to be used as default
+    - If you deploy your own appsettings.xml the specified alignment specified will continue to be used as default
 - Added a "LockSystemProfiles" flag to appsettings.xml that allows an administrator better control over user profiles
-    -- See www.naps2.com/doc-org-use.html#lock-system-profiles
+    - See www.naps2.com/doc-org-use.html#lock-system-profiles
 - Added an "Offset width based on alignment (WIA)" compatibility option (for ticket #124)
 - Added Farsi and Korean languages to installers
 
