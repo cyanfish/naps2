@@ -6,6 +6,12 @@ public class VerifyCommand : ICommand<VerifyOptions>
 {
     public int Run(VerifyOptions opts)
     {
+        if (!OperatingSystem.IsWindows())
+        {
+            Output.Info("Verification tests are currently only supported on Windows.");
+            return 0;
+        }
+
         var version = ProjectHelper.GetCurrentVersionName();
         
         using var appDriverRunner = AppDriverRunner.Start();
