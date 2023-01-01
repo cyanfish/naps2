@@ -190,7 +190,7 @@
     <value>од {0}</value>
   </data>
   <data name="BatchError" xml:space="preserve">
-    <value>Дошло је до непознате грешке у току пакетног скенирања.</value>
+    <value>An unknown error ocurred during the batch scan.</value>
   </data>
   <data name="BatchStatusCancelled" xml:space="preserve">
     <value>Пакетна обрада отказана.</value>

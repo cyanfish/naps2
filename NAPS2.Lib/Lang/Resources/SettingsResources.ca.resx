@@ -124,7 +124,7 @@
     <value>Vidre</value>
   </data>
   <data name="TiffComp_Auto" xml:space="preserve">
-    <value>Automàtic</value>
+    <value>Automàtica</value>
   </data>
   <data name="TiffComp_Ccitt4" xml:space="preserve">
     <value>CCITT4</value>
@@ -154,9 +154,9 @@
     <value>Per defecte</value>
   </data>
   <data name="OcrMode_Fast" xml:space="preserve">
-    <value>Fast</value>
+    <value>Ràpid</value>
   </data>
   <data name="OcrMode_Best" xml:space="preserve">
-    <value>Best</value>
+    <value>Millor</value>
   </data>
 </root>

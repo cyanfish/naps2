@@ -190,7 +190,7 @@
     <value>av {0}</value>
   </data>
   <data name="BatchError" xml:space="preserve">
-    <value>Ett okänt fel inträffade under mängdskanning.</value>
+    <value>An unknown error ocurred during the batch scan.</value>
   </data>
   <data name="BatchStatusCancelled" xml:space="preserve">
     <value>Mängdskanning avbruten.</value>

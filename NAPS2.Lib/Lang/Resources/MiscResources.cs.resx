@@ -190,7 +190,7 @@
     <value>z {0}</value>
   </data>
   <data name="BatchError" xml:space="preserve">
-    <value>Během dávkového skenování došlo k chybě.</value>
+    <value>An unknown error ocurred during the batch scan.</value>
   </data>
   <data name="BatchStatusCancelled" xml:space="preserve">
     <value>Dávka byla přerušena.</value>

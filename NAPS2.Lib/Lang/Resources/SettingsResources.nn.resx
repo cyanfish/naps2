@@ -79,25 +79,25 @@
     <value>A3 (297x420 mm)</value>
   </data>
   <data name="PageSize_A4" xml:space="preserve">
-    <value>A4 (210x297 mm)</value>
+    <value>A4 (210 x 297 mm)</value>
   </data>
   <data name="PageSize_A5" xml:space="preserve">
-    <value>A5 (148x210 mm)</value>
+    <value>A5 (148 x 210 mm)</value>
   </data>
   <data name="PageSize_B4" xml:space="preserve">
-    <value>B4 (250x353 mm)</value>
+    <value>B4 (250 x 353 mm)</value>
   </data>
   <data name="PageSize_B5" xml:space="preserve">
-    <value>B5 (176x250 mm)</value>
+    <value>B5 (176 x 250 mm)</value>
   </data>
   <data name="PageSize_Custom" xml:space="preserve">
     <value>Eigendefinert...</value>
   </data>
   <data name="PageSize_Legal" xml:space="preserve">
-    <value>US Legal (8.5x14 in)</value>
+    <value>US Legal (8,5x14 in)</value>
   </data>
   <data name="PageSize_Letter" xml:space="preserve">
-    <value>US Letter (8.5x11 in)</value>
+    <value>US Letter (8,5x11 in)</value>
   </data>
   <data name="PdfCompat_Default" xml:space="preserve">
     <value>Standard</value>
@@ -154,9 +154,9 @@
     <value>Standard</value>
   </data>
   <data name="OcrMode_Fast" xml:space="preserve">
-    <value>Fast</value>
+    <value>Kjapp</value>
   </data>
   <data name="OcrMode_Best" xml:space="preserve">
-    <value>Best</value>
+    <value>Beste</value>
   </data>
 </root>

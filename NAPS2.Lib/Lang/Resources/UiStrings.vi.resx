@@ -165,6 +165,12 @@
   <data name="Reverse" xml:space="preserve">
     <value>Đảo ngược</value>
   </data>
+  <data name="ReverseAll" xml:space="preserve">
+    <value>Reverse All</value>
+  </data>
+  <data name="ReverseSelected" xml:space="preserve">
+    <value>Reverse Selected</value>
+  </data>
   <data name="Clear" xml:space="preserve">
     <value>Xóa</value>
   </data>
@@ -186,8 +192,20 @@
   <data name="ZoomOut" xml:space="preserve">
     <value>Thu Nhỏ</value>
   </data>
+  <data name="ZoomActual" xml:space="preserve">
+    <value>Phóng thực tế</value>
+  </data>
+  <data name="ScaleWithWindow" xml:space="preserve">
+    <value>Tỉ lệ với cửa sổ</value>
+  </data>
   <data name="Save" xml:space="preserve">
     <value>Save</value>
+  </data>
+  <data name="SaveAll" xml:space="preserve">
+    <value>Save All</value>
+  </data>
+  <data name="SaveSelected" xml:space="preserve">
+    <value>Save Selected</value>
   </data>
   <data name="SaveAllAsPdf" xml:space="preserve">
     <value>Save All as PDF</value>
@@ -200,6 +218,12 @@
   </data>
   <data name="SaveSelectedAsImages" xml:space="preserve">
     <value>Save Selected as Images</value>
+  </data>
+  <data name="EmailAll" xml:space="preserve">
+    <value>Email All</value>
+  </data>
+  <data name="EmailSelected" xml:space="preserve">
+    <value>Email Selected</value>
   </data>
   <data name="EmailAllAsPdf" xml:space="preserve">
     <value>Email All as PDF</value>
@@ -265,6 +289,9 @@
     <value>Kích hoạt Lưu tự động</value>
   </data>
   <data name="AutoSaveSettings" xml:space="preserve">
+    <value>Cài đặt Tự động Lưu</value>
+  </data>
+  <data name="AutoSaveSettingsFormTitle" xml:space="preserve">
     <value>Cài đặt Tự động Lưu</value>
   </data>
   <data name="Advanced" xml:space="preserve">
@@ -347,5 +374,320 @@
   </data>
   <data name="SelectAll" xml:space="preserve">
     <value>Chọn hết</value>
+  </data>
+  <data name="Recover" xml:space="preserve">
+    <value>Phục hồi</value>
+  </data>
+  <data name="NotNow" xml:space="preserve">
+    <value>bây giờ không thấy</value>
+  </data>
+  <data name="RecoverFormTitle" xml:space="preserve">
+    <value>Khôi phục hình ảnh scan</value>
+  </data>
+  <data name="RecoverPrompt" xml:space="preserve">
+    <value>{0} hình ảnh) quét trên {1} tại {2} có thể không được lưu lại, và có thể phục hồi được. Bạn có muốn khôi phục chúng?</value>
+  </data>
+  <data name="Placeholders" xml:space="preserve">
+    <value>Placeholders</value>
+  </data>
+  <data name="SkipSavePrompt" xml:space="preserve">
+    <value>Bỏ qua Lưu nhanh </value>
+  </data>
+  <data name="SinglePageFiles" xml:space="preserve">
+    <value>Single page files</value>
+  </data>
+  <data name="EncryptPdf" xml:space="preserve">
+    <value>Mã hóa PDF</value>
+  </data>
+  <data name="Show" xml:space="preserve">
+    <value>Xem</value>
+  </data>
+  <data name="RestoreDefaults" xml:space="preserve">
+    <value>Khôi phục mặc định</value>
+  </data>
+  <data name="PdfSettingsFormTitle" xml:space="preserve">
+    <value>Cài đặt PDF</value>
+  </data>
+  <data name="AllowPrinting" xml:space="preserve">
+    <value>Cho phép in</value>
+  </data>
+  <data name="AllowFullQualityPrinting" xml:space="preserve">
+    <value>Cho phép cải thiện bản In</value>
+  </data>
+  <data name="AllowDocumentModification" xml:space="preserve">
+    <value>Cho phép thay đổi tài liệu</value>
+  </data>
+  <data name="AllowDocumentAssembly" xml:space="preserve">
+    <value>Cho phép tài liệu Assembly</value>
+  </data>
+  <data name="AllowContentCopying" xml:space="preserve">
+    <value>Cho phép sao chép nội dung</value>
+  </data>
+  <data name="AllowContentCopyingForAccessibility" xml:space="preserve">
+    <value>Cho phép sao chép chỉnh sửa nội dung</value>
+  </data>
+  <data name="AllowAnnotations" xml:space="preserve">
+    <value>Cho phép ghi chú</value>
+  </data>
+  <data name="AllowFormFilling" xml:space="preserve">
+    <value>Cho phép Điền Form</value>
+  </data>
+  <data name="DefaultFilePathLabel" xml:space="preserve">
+    <value>Đường dẫn mặc định:</value>
+  </data>
+  <data name="FilePathLabel" xml:space="preserve">
+    <value>Đường dẫn:</value>
+  </data>
+  <data name="TitleLabel" xml:space="preserve">
+    <value>Tiêu đề:</value>
+  </data>
+  <data name="AuthorLabel" xml:space="preserve">
+    <value>Tác giả:</value>
+  </data>
+  <data name="SubjectLabel" xml:space="preserve">
+    <value>Tiêu đề:</value>
+  </data>
+  <data name="KeywordsLabel" xml:space="preserve">
+    <value>Từ khóa:</value>
+  </data>
+  <data name="OwnerPasswordLabel" xml:space="preserve">
+    <value>Owner Password:</value>
+  </data>
+  <data name="UserPasswordLabel" xml:space="preserve">
+    <value>Dùng Mật khẩu:</value>
+  </data>
+  <data name="RememberTheseSettings" xml:space="preserve">
+    <value>Ghi các thiết lập</value>
+  </data>
+  <data name="Metadata" xml:space="preserve">
+    <value>Metadata</value>
+  </data>
+  <data name="Encryption" xml:space="preserve">
+    <value>Encryption</value>
+  </data>
+  <data name="Compatibility" xml:space="preserve">
+    <value>Khả năng tương thích</value>
+  </data>
+  <data name="PlaceholdersFormTitle" xml:space="preserve">
+    <value>Placeholders</value>
+  </data>
+  <data name="Year4Digit" xml:space="preserve">
+    <value>Năm</value>
+  </data>
+  <data name="Year2Digit" xml:space="preserve">
+    <value>Năm (00-99)</value>
+  </data>
+  <data name="Month2Digit" xml:space="preserve">
+    <value>Tháng (01-12)</value>
+  </data>
+  <data name="Day2Digit" xml:space="preserve">
+    <value>Ngày(01-31)</value>
+  </data>
+  <data name="Hour2Digit" xml:space="preserve">
+    <value>Giờ (0-23)</value>
+  </data>
+  <data name="Minute2Digit" xml:space="preserve">
+    <value>Phút (00-59)</value>
+  </data>
+  <data name="Second2Digit" xml:space="preserve">
+    <value>Giây (00-59)</value>
+  </data>
+  <data name="AutoIncrementing4Digit" xml:space="preserve">
+    <value>Tự động tăng số (4 chữ số)</value>
+  </data>
+  <data name="AutoIncrementing3Digit" xml:space="preserve">
+    <value>Tự động tăng số (3 chữ số)</value>
+  </data>
+  <data name="AutoIncrementing2Digit" xml:space="preserve">
+    <value>Tự động tăng số (2 chữ số)</value>
+  </data>
+  <data name="AutoIncrementing1Digit" xml:space="preserve">
+    <value>Auto-incrementing number (1 digits)</value>
+  </data>
+  <data name="FileNameLabel" xml:space="preserve">
+    <value>Tên tệp</value>
+  </data>
+  <data name="PreviewLabel" xml:space="preserve">
+    <value>Xem trước:</value>
+  </data>
+  <data name="JpegQualityHelp" xml:space="preserve">
+    <value>Để JPEG được chất lượng cao, nhớ tăng chất lượng hình trong thiết lập mẫu có sẵn của bạn..</value>
+  </data>
+  <data name="JpegQuality" xml:space="preserve">
+    <value>Jpeg Quality</value>
+  </data>
+  <data name="TiffOptions" xml:space="preserve">
+    <value>Thông số Tiff</value>
+  </data>
+  <data name="CompressionLabel" xml:space="preserve">
+    <value>Nén:</value>
+  </data>
+  <data name="ImageSettingsFormTitle" xml:space="preserve">
+    <value>Cài đặt ảnh</value>
+  </data>
+  <data name="EmailSettingsFormTitle" xml:space="preserve">
+    <value>Cài đặt Email</value>
+  </data>
+  <data name="Provider" xml:space="preserve">
+    <value>Nhà cung cấp</value>
+  </data>
+  <data name="Change" xml:space="preserve">
+    <value>Thay đổi</value>
+  </data>
+  <data name="AttachmentNameLabel" xml:space="preserve">
+    <value>Tên tập tin đính kèm:</value>
+  </data>
+  <data name="EmailProviderFormTitle" xml:space="preserve">
+    <value>Chọn nhà cung cấp Email</value>
+  </data>
+  <data name="AuthorizeFormTitle" xml:space="preserve">
+    <value>Cho phép</value>
+  </data>
+  <data name="WaitingForAuthorization" xml:space="preserve">
+    <value>Đang đợi cho phép...</value>
+  </data>
+  <data name="ErrorFormTitle" xml:space="preserve">
+    <value>Lỗi</value>
+  </data>
+  <data name="TechnicalDetails" xml:space="preserve">
+    <value>Chi tiết kỹ thuật</value>
+  </data>
+  <data name="PdfPasswordFormTitle" xml:space="preserve">
+    <value>Mật Khẩu</value>
+  </data>
+  <data name="EncryptedFilePrompt" xml:space="preserve">
+    <value>The following file is encrypted and requires a password to open:</value>
+  </data>
+  <data name="PromptForFilePath" xml:space="preserve">
+    <value>Hỏi nơi lưu.</value>
+  </data>
+  <data name="OneFilePerPage" xml:space="preserve">
+    <value>Một tập tin cho mỗi trang</value>
+  </data>
+  <data name="OneFilePerScan" xml:space="preserve">
+    <value>Một tập tin cho mỗi quét</value>
+  </data>
+  <data name="SeparateByPatchT" xml:space="preserve">
+    <value>Tập tin riêng biệt của Patch-T</value>
+  </data>
+  <data name="MoreInfo" xml:space="preserve">
+    <value>Thêm thông tin</value>
+  </data>
+  <data name="ClearAfterSaving" xml:space="preserve">
+    <value>Xóa ảnh sau khi lưu</value>
+  </data>
+  <data name="PageSizeFormTitle" xml:space="preserve">
+    <value>Tùy chỉnh kiểu giấy</value>
+  </data>
+  <data name="NameOptional" xml:space="preserve">
+    <value>Tên (bắt buộc)</value>
+  </data>
+  <data name="Dimensions" xml:space="preserve">
+    <value>Kích thước</value>
+  </data>
+  <data name="WaitingForTwain" xml:space="preserve">
+    <value>Đang chờ TWAIN để hoàn thành...</value>
+  </data>
+  <data name="AdvancedProfileFormTitle" xml:space="preserve">
+    <value>Cài đặt chi tiết</value>
+  </data>
+  <data name="ImageQuality" xml:space="preserve">
+    <value>Chất lượng ảnh</value>
+  </data>
+  <data name="MaximumQuality" xml:space="preserve">
+    <value>Chất lượng tối đa (tập tin lớn)</value>
+  </data>
+  <data name="BlankPages" xml:space="preserve">
+    <value>Trang Trắng</value>
+  </data>
+  <data name="ExcludeBlankPages" xml:space="preserve">
+    <value>Loại trừ các trang trống</value>
+  </data>
+  <data name="WhiteThreshold" xml:space="preserve">
+    <value>Ngưỡng trắng</value>
+  </data>
+  <data name="CoverageThreshold" xml:space="preserve">
+    <value>Bảo hiểm Threshold</value>
+  </data>
+  <data name="PostProcessing" xml:space="preserve">
+    <value>Post-processing</value>
+  </data>
+  <data name="DeskewScannedPages" xml:space="preserve">
+    <value>Deskew scanned pages</value>
+  </data>
+  <data name="BrightnessContrastAfterScan" xml:space="preserve">
+    <value>Áp dụng độ sáng / tương phản sau khi quét</value>
+  </data>
+  <data name="OffsetWidth" xml:space="preserve">
+    <value>Offset width based on alignment (WIA)</value>
+  </data>
+  <data name="StretchToPageSize" xml:space="preserve">
+    <value>Kéo dãn ra vừa kích thước trang</value>
+  </data>
+  <data name="CropToPageSize" xml:space="preserve">
+    <value>Cắt về kích thước trang</value>
+  </data>
+  <data name="FlipDuplexedPages" xml:space="preserve">
+    <value>Lật 2 mặt trang</value>
+  </data>
+  <data name="WiaVersionLabel" xml:space="preserve">
+    <value>Wia Version:</value>
+  </data>
+  <data name="TwainImplLabel" xml:space="preserve">
+    <value>Twain thực hiện:</value>
+  </data>
+  <data name="BatchScanFormTitle" xml:space="preserve">
+    <value>Scan hàng loạt</value>
+  </data>
+  <data name="PressStartWhenReady" xml:space="preserve">
+    <value>Nhấn Start khi đã sẵn sàng.</value>
+  </data>
+  <data name="ScanConfig" xml:space="preserve">
+    <value>Cấu hình quét</value>
+  </data>
+  <data name="Output" xml:space="preserve">
+    <value>Đầu ra</value>
+  </data>
+  <data name="ProfileLabel" xml:space="preserve">
+    <value>Hồ sơ:</value>
+  </data>
+  <data name="SingleScan" xml:space="preserve">
+    <value>quét đơn</value>
+  </data>
+  <data name="MultipleScansPrompt" xml:space="preserve">
+    <value>Quét nhiều (nhắc giữa quét)</value>
+  </data>
+  <data name="MultipleScansDelay" xml:space="preserve">
+    <value>Quét nhiều (trễ cố định giữa quét)</value>
+  </data>
+  <data name="NumberOfScansLabel" xml:space="preserve">
+    <value>Số trang quét:</value>
+  </data>
+  <data name="TimeBetweenScansLabel" xml:space="preserve">
+    <value>Thời gian giữa quét (giây):</value>
+  </data>
+  <data name="LoadIn" xml:space="preserve">
+    <value>Tải hình ảnh vào NAPS2</value>
+  </data>
+  <data name="SaveToSingleFile" xml:space="preserve">
+    <value>Lưu vào một tập tin duy nhất</value>
+  </data>
+  <data name="SaveToMultipleFiles" xml:space="preserve">
+    <value>Lưu vào nhiều file</value>
+  </data>
+  <data name="Start" xml:space="preserve">
+    <value>Bắt Đầu</value>
+  </data>
+  <data name="BatchPromptFormTitle" xml:space="preserve">
+    <value>Quét Trang tiếp</value>
+  </data>
+  <data name="ReadyForScan" xml:space="preserve">
+    <value>Sẵn sàng cho quét {0}.</value>
+  </data>
+  <data name="OpenFolder" xml:space="preserve">
+    <value>Mở Thư mục</value>
+  </data>
+  <data name="Tools" xml:space="preserve">
+    <value>Tools</value>
   </data>
 </root>

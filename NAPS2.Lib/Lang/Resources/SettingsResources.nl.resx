@@ -124,7 +124,7 @@
     <value>Glasplaat</value>
   </data>
   <data name="TiffComp_Auto" xml:space="preserve">
-    <value>Auto</value>
+    <value>Automatisch</value>
   </data>
   <data name="TiffComp_Ccitt4" xml:space="preserve">
     <value>CCITT4</value>
@@ -154,9 +154,9 @@
     <value>Standaard</value>
   </data>
   <data name="OcrMode_Fast" xml:space="preserve">
-    <value>Fast</value>
+    <value>Snel</value>
   </data>
   <data name="OcrMode_Best" xml:space="preserve">
-    <value>Best</value>
+    <value>Beste</value>
   </data>
 </root>

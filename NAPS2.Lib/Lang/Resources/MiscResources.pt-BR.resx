@@ -190,7 +190,7 @@
     <value>de {0}</value>
   </data>
   <data name="BatchError" xml:space="preserve">
-    <value>Ocorreu um erro desconhecido durante a digitalização em lote.</value>
+    <value>An unknown error ocurred during the batch scan.</value>
   </data>
   <data name="BatchStatusCancelled" xml:space="preserve">
     <value>Digitalização em lote cancelada.</value>

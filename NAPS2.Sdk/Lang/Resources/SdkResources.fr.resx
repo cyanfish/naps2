@@ -46,7 +46,7 @@
     <value>Vous n'avez pas la permission de copier le contenu du fichier « {0} »..</value>
   </data>
   <data name="NoDuplexSupport" xml:space="preserve">
-    <value>Le scanner sélectionné ne gère pas le recto-verso. Si ce scanner est supposé le gérer, essayer d'utiliser un autre pilote.</value>
+    <value>Le scanner sélectionné ne gère pas le recto-verso. Si ce scanner est supposé le prendre en charge, essayer d'utiliser un autre pilote.</value>
   </data>
   <data name="DeviceBusy" xml:space="preserve">
     <value>Le scanner sélectionné est occupé.</value>
@@ -61,12 +61,18 @@
     <value>Le scanner est en train de préchauffer.</value>
   </data>
   <data name="SaneNotAvailable" xml:space="preserve">
-    <value>Le pilote SANE n'est pas disponible. Merci d'installer les paquets requis:</value>
+    <value>Le pilote SANE n'est pas disponible. Merci d'installer les paquets requis :</value>
   </data>
   <data name="TesseractNotAvailable" xml:space="preserve">
-    <value>Le moteur OCR n'est pas disponible. Merci d'installer le paquet requis:</value>
+    <value>Le moteur OCR n'est pas disponible. Merci d'installer le paquet requis :</value>
   </data>
   <data name="DriverNotSupported" xml:space="preserve">
     <value>Le pilote sélectionné n'est pas pris en charge sur ce système.</value>
+  </data>
+  <data name="OcrError" xml:space="preserve">
+    <value>An error occurred running OCR.</value>
+  </data>
+  <data name="OcrTimeout" xml:space="preserve">
+    <value>The OCR operation timed out.</value>
   </data>
 </root>

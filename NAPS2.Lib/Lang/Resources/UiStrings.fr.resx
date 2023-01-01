@@ -16,10 +16,10 @@
     <value>À propos</value>
   </data>
   <data name="CopyrightFormat" xml:space="preserve">
-    <value>Copyright {0} NAPS2 Contributors</value>
+    <value>Copyright {0} Contributeurs NAPS2</value>
   </data>
   <data name="IconsFrom" xml:space="preserve">
-    <value>Icônes provenant de:</value>
+    <value>Icônes provenant de :</value>
   </data>
   <data name="CheckForUpdates" xml:space="preserve">
     <value>Vérifier les mises à jour</value>
@@ -118,7 +118,7 @@
     <value>Accentuation</value>
   </data>
   <data name="DocumentCorrection" xml:space="preserve">
-    <value>Document Correction</value>
+    <value>Correction de document</value>
   </data>
   <data name="Reset" xml:space="preserve">
     <value>Réinitialiser</value>
@@ -157,19 +157,25 @@
     <value>Désappairer [142536&gt;123456]</value>
   </data>
   <data name="AltInterleave" xml:space="preserve">
-    <value>Appairer alternative. [135642&gt;123456]</value>
+    <value>Appairer alternativement [135642&gt;123456]</value>
   </data>
   <data name="AltDeinterleave" xml:space="preserve">
-    <value>Désappairer alternative. [162534&gt;123456]</value>
+    <value>Désappairer alternativement [162534&gt;123456]</value>
   </data>
   <data name="Reverse" xml:space="preserve">
     <value>Inverser</value>
   </data>
+  <data name="ReverseAll" xml:space="preserve">
+    <value>Reverse All</value>
+  </data>
+  <data name="ReverseSelected" xml:space="preserve">
+    <value>Reverse Selected</value>
+  </data>
   <data name="Clear" xml:space="preserve">
-    <value>Tout supprimer</value>
+    <value>Tout effacer</value>
   </data>
   <data name="ClearAll" xml:space="preserve">
-    <value>Clear All</value>
+    <value>Tout effacer</value>
   </data>
   <data name="Language" xml:space="preserve">
     <value>Langue</value>
@@ -186,32 +192,50 @@
   <data name="ZoomOut" xml:space="preserve">
     <value>Zoom arrière</value>
   </data>
+  <data name="ZoomActual" xml:space="preserve">
+    <value>Zoom courant</value>
+  </data>
+  <data name="ScaleWithWindow" xml:space="preserve">
+    <value>Mettre à l'échelle de la fenêtre</value>
+  </data>
   <data name="Save" xml:space="preserve">
-    <value>Save</value>
+    <value>Enregistrer</value>
+  </data>
+  <data name="SaveAll" xml:space="preserve">
+    <value>Save All</value>
+  </data>
+  <data name="SaveSelected" xml:space="preserve">
+    <value>Save Selected</value>
   </data>
   <data name="SaveAllAsPdf" xml:space="preserve">
-    <value>Save All as PDF</value>
+    <value>Tout enregistrer en PDF</value>
   </data>
   <data name="SaveSelectedAsPdf" xml:space="preserve">
-    <value>Save Selected as PDF</value>
+    <value>Enregistrer la sélection en PDF</value>
   </data>
   <data name="SaveAllAsImages" xml:space="preserve">
-    <value>Save All as Images</value>
+    <value>Tout enregistrer en images</value>
   </data>
   <data name="SaveSelectedAsImages" xml:space="preserve">
-    <value>Save Selected as Images</value>
+    <value>Enregistrer la sélection en images</value>
+  </data>
+  <data name="EmailAll" xml:space="preserve">
+    <value>Email All</value>
+  </data>
+  <data name="EmailSelected" xml:space="preserve">
+    <value>Email Selected</value>
   </data>
   <data name="EmailAllAsPdf" xml:space="preserve">
-    <value>Email All as PDF</value>
+    <value>Tout envoyer en PDF par courriel</value>
   </data>
   <data name="EmailSelectedAsPdf" xml:space="preserve">
-    <value>Email Selected as PDF</value>
+    <value>Envoyer la sélection en PDF par courriel</value>
   </data>
   <data name="EditProfileFormTitle" xml:space="preserve">
     <value>Paramètres de profil</value>
   </data>
   <data name="DisplayNameLabel" xml:space="preserve">
-    <value>Nom d'affichage:</value>
+    <value>Nom d'affichage :</value>
   </data>
   <data name="WiaDriver" xml:space="preserve">
     <value>Pilote WIA</value>
@@ -220,13 +244,13 @@
     <value>Pilote TWAIN</value>
   </data>
   <data name="AppleDriver" xml:space="preserve">
-    <value>Apple Driver</value>
+    <value>Pilote Apple</value>
   </data>
   <data name="SaneDriver" xml:space="preserve">
     <value>Pilote SANE</value>
   </data>
   <data name="DeviceLabel" xml:space="preserve">
-    <value>Périphérique:</value>
+    <value>Périphérique :</value>
   </data>
   <data name="ChooseDevice" xml:space="preserve">
     <value>Sélectionner</value>
@@ -238,33 +262,36 @@
     <value>Interface native</value>
   </data>
   <data name="PaperSourceLabel" xml:space="preserve">
-    <value>Source du papier:</value>
+    <value>Source du papier :</value>
   </data>
   <data name="PageSizeLabel" xml:space="preserve">
-    <value>Taille de la page:</value>
+    <value>Taille de la page :</value>
   </data>
   <data name="ResolutionLabel" xml:space="preserve">
-    <value>Résolution:</value>
+    <value>Résolution :</value>
   </data>
   <data name="BrightnessLabel" xml:space="preserve">
-    <value>Luminosité:</value>
+    <value>Luminosité :</value>
   </data>
   <data name="BitDepthLabel" xml:space="preserve">
-    <value>Profondeur d'échantillonnage:</value>
+    <value>Profondeur d'échantillonnage :</value>
   </data>
   <data name="HorizontalAlignLabel" xml:space="preserve">
-    <value>Alignement horizontal:</value>
+    <value>Alignement horizontal :</value>
   </data>
   <data name="ScaleLabel" xml:space="preserve">
     <value>Échelle:</value>
   </data>
   <data name="ContrastLabel" xml:space="preserve">
-    <value>Contraste:</value>
+    <value>Contraste :</value>
   </data>
   <data name="EnableAutoSave" xml:space="preserve">
     <value>Activer l'enregistrement automatique</value>
   </data>
   <data name="AutoSaveSettings" xml:space="preserve">
+    <value>Paramètres d'enregistrement automatique</value>
+  </data>
+  <data name="AutoSaveSettingsFormTitle" xml:space="preserve">
     <value>Paramètres d'enregistrement automatique</value>
   </data>
   <data name="Advanced" xml:space="preserve">
@@ -298,10 +325,10 @@
     <value>Rendre possible la recherche dans les PDF issus d'OCR</value>
   </data>
   <data name="OcrLanguageLabel" xml:space="preserve">
-    <value>Langue OCR:</value>
+    <value>Langue OCR :</value>
   </data>
   <data name="OcrModeLabel" xml:space="preserve">
-    <value>Mode de l'OCR:</value>
+    <value>Mode de l'OCR :</value>
   </data>
   <data name="RunOcrAfterScanning" xml:space="preserve">
     <value>Exécuter automatiquement l'OCR après la numérisation</value>
@@ -316,7 +343,7 @@
     <value>Télécharger chaque langue OCR appropriée au document numérisé.</value>
   </data>
   <data name="OcrSelectLanguageLabel" xml:space="preserve">
-    <value>Sélectionner une ou plusieurs langues:</value>
+    <value>Sélectionner une ou plusieurs langues :</value>
   </data>
   <data name="EstimatedDownloadSize" xml:space="preserve">
     <value>Taille estimée du téléchargement : {0} Mo</value>
@@ -347,5 +374,320 @@
   </data>
   <data name="SelectAll" xml:space="preserve">
     <value>Tout sélectionner</value>
+  </data>
+  <data name="Recover" xml:space="preserve">
+    <value>Récupérer</value>
+  </data>
+  <data name="NotNow" xml:space="preserve">
+    <value>Pas maintenant</value>
+  </data>
+  <data name="RecoverFormTitle" xml:space="preserve">
+    <value>Récupérer des images numérisées</value>
+  </data>
+  <data name="RecoverPrompt" xml:space="preserve">
+    <value>{0} image(s) numérisée(s) le {1} à {2} n'a(ont) peut-être pas été enregistrée(s), et est(sont) récupérable(s). Faut-il procéder à la récupération ?</value>
+  </data>
+  <data name="Placeholders" xml:space="preserve">
+    <value>Chaînes de substitution</value>
+  </data>
+  <data name="SkipSavePrompt" xml:space="preserve">
+    <value>Ignorer l'invite d'enregistrement</value>
+  </data>
+  <data name="SinglePageFiles" xml:space="preserve">
+    <value>Fichiers à page unique</value>
+  </data>
+  <data name="EncryptPdf" xml:space="preserve">
+    <value>Chiffrer le PDF</value>
+  </data>
+  <data name="Show" xml:space="preserve">
+    <value>Afficher</value>
+  </data>
+  <data name="RestoreDefaults" xml:space="preserve">
+    <value>Valeurs par défaut</value>
+  </data>
+  <data name="PdfSettingsFormTitle" xml:space="preserve">
+    <value>Paramètres PDF</value>
+  </data>
+  <data name="AllowPrinting" xml:space="preserve">
+    <value>Permettre l'impression</value>
+  </data>
+  <data name="AllowFullQualityPrinting" xml:space="preserve">
+    <value>Permettre l'impression en qualité maximale</value>
+  </data>
+  <data name="AllowDocumentModification" xml:space="preserve">
+    <value>Permettre la modification des documents</value>
+  </data>
+  <data name="AllowDocumentAssembly" xml:space="preserve">
+    <value>Permettre l'assemblage des documents</value>
+  </data>
+  <data name="AllowContentCopying" xml:space="preserve">
+    <value>Permettre la copie du contenu</value>
+  </data>
+  <data name="AllowContentCopyingForAccessibility" xml:space="preserve">
+    <value>Permettre la copie du contenu pour l'accessibilité</value>
+  </data>
+  <data name="AllowAnnotations" xml:space="preserve">
+    <value>Permettre les annotations</value>
+  </data>
+  <data name="AllowFormFilling" xml:space="preserve">
+    <value>Permettre l'édition de formulaires</value>
+  </data>
+  <data name="DefaultFilePathLabel" xml:space="preserve">
+    <value>Chemin de fichier par défaut :</value>
+  </data>
+  <data name="FilePathLabel" xml:space="preserve">
+    <value>Chemin du fichier :</value>
+  </data>
+  <data name="TitleLabel" xml:space="preserve">
+    <value>Titre :</value>
+  </data>
+  <data name="AuthorLabel" xml:space="preserve">
+    <value>Auteur :</value>
+  </data>
+  <data name="SubjectLabel" xml:space="preserve">
+    <value>Sujet :</value>
+  </data>
+  <data name="KeywordsLabel" xml:space="preserve">
+    <value>Mots-clés :</value>
+  </data>
+  <data name="OwnerPasswordLabel" xml:space="preserve">
+    <value>Mot de passe du propriétaire :</value>
+  </data>
+  <data name="UserPasswordLabel" xml:space="preserve">
+    <value>Mot de passe utilisateur:</value>
+  </data>
+  <data name="RememberTheseSettings" xml:space="preserve">
+    <value>Mémoriser ces paramètres</value>
+  </data>
+  <data name="Metadata" xml:space="preserve">
+    <value>Métadonnées</value>
+  </data>
+  <data name="Encryption" xml:space="preserve">
+    <value>Chiffrement</value>
+  </data>
+  <data name="Compatibility" xml:space="preserve">
+    <value>Compatibilité</value>
+  </data>
+  <data name="PlaceholdersFormTitle" xml:space="preserve">
+    <value>Chaînes de substitution</value>
+  </data>
+  <data name="Year4Digit" xml:space="preserve">
+    <value>Année</value>
+  </data>
+  <data name="Year2Digit" xml:space="preserve">
+    <value>Année (00-99)</value>
+  </data>
+  <data name="Month2Digit" xml:space="preserve">
+    <value>Mois (01-12)</value>
+  </data>
+  <data name="Day2Digit" xml:space="preserve">
+    <value>Jour (01-31)</value>
+  </data>
+  <data name="Hour2Digit" xml:space="preserve">
+    <value>Heure (0-23)</value>
+  </data>
+  <data name="Minute2Digit" xml:space="preserve">
+    <value>Minute (00-59)</value>
+  </data>
+  <data name="Second2Digit" xml:space="preserve">
+    <value>Seconde (00-59)</value>
+  </data>
+  <data name="AutoIncrementing4Digit" xml:space="preserve">
+    <value>Numéro auto-incrémenté (4 chiffres)</value>
+  </data>
+  <data name="AutoIncrementing3Digit" xml:space="preserve">
+    <value>Numéro auto-incrémenté (3 chiffres)</value>
+  </data>
+  <data name="AutoIncrementing2Digit" xml:space="preserve">
+    <value>Numéro auto-incrémenté (2 chiffres)</value>
+  </data>
+  <data name="AutoIncrementing1Digit" xml:space="preserve">
+    <value>Auto-incrementing number (1 digits)</value>
+  </data>
+  <data name="FileNameLabel" xml:space="preserve">
+    <value>Nom du fichier</value>
+  </data>
+  <data name="PreviewLabel" xml:space="preserve">
+    <value>Aperçu :</value>
+  </data>
+  <data name="JpegQualityHelp" xml:space="preserve">
+    <value>En JPEG haute qualité (80+), augmenter aussi la Qualité d'Image dans le profil pour de meilleurs résultats.</value>
+  </data>
+  <data name="JpegQuality" xml:space="preserve">
+    <value>Qualité JPEG</value>
+  </data>
+  <data name="TiffOptions" xml:space="preserve">
+    <value>Options TIFF</value>
+  </data>
+  <data name="CompressionLabel" xml:space="preserve">
+    <value>Compression :</value>
+  </data>
+  <data name="ImageSettingsFormTitle" xml:space="preserve">
+    <value>Paramètres d'image</value>
+  </data>
+  <data name="EmailSettingsFormTitle" xml:space="preserve">
+    <value>Paramètres de messagerie</value>
+  </data>
+  <data name="Provider" xml:space="preserve">
+    <value>Fournisseur</value>
+  </data>
+  <data name="Change" xml:space="preserve">
+    <value>Modifier</value>
+  </data>
+  <data name="AttachmentNameLabel" xml:space="preserve">
+    <value>Nom de la pièce jointe :</value>
+  </data>
+  <data name="EmailProviderFormTitle" xml:space="preserve">
+    <value>Choisir un fournisseur de messagerie</value>
+  </data>
+  <data name="AuthorizeFormTitle" xml:space="preserve">
+    <value>Autoriser</value>
+  </data>
+  <data name="WaitingForAuthorization" xml:space="preserve">
+    <value>En attente d'autorisation...</value>
+  </data>
+  <data name="ErrorFormTitle" xml:space="preserve">
+    <value>Erreur</value>
+  </data>
+  <data name="TechnicalDetails" xml:space="preserve">
+    <value>Détails techniques</value>
+  </data>
+  <data name="PdfPasswordFormTitle" xml:space="preserve">
+    <value>Mot de passe</value>
+  </data>
+  <data name="EncryptedFilePrompt" xml:space="preserve">
+    <value>The following file is encrypted and requires a password to open:</value>
+  </data>
+  <data name="PromptForFilePath" xml:space="preserve">
+    <value>Demander le chemin pour le fichier</value>
+  </data>
+  <data name="OneFilePerPage" xml:space="preserve">
+    <value>Un fichier par page</value>
+  </data>
+  <data name="OneFilePerScan" xml:space="preserve">
+    <value>Un fichier par numérisation</value>
+  </data>
+  <data name="SeparateByPatchT" xml:space="preserve">
+    <value>Délimitation des fichiers par Patch-T</value>
+  </data>
+  <data name="MoreInfo" xml:space="preserve">
+    <value>Plus d'informations</value>
+  </data>
+  <data name="ClearAfterSaving" xml:space="preserve">
+    <value>Effacer les images après l'enregistrement</value>
+  </data>
+  <data name="PageSizeFormTitle" xml:space="preserve">
+    <value>Taille de page personnalisée</value>
+  </data>
+  <data name="NameOptional" xml:space="preserve">
+    <value>Nom (optionnel)</value>
+  </data>
+  <data name="Dimensions" xml:space="preserve">
+    <value>Dimensions</value>
+  </data>
+  <data name="WaitingForTwain" xml:space="preserve">
+    <value>En attente de la fin du transfert TWAIN...</value>
+  </data>
+  <data name="AdvancedProfileFormTitle" xml:space="preserve">
+    <value>Paramètres de profil avancés</value>
+  </data>
+  <data name="ImageQuality" xml:space="preserve">
+    <value>Qualité d'image</value>
+  </data>
+  <data name="MaximumQuality" xml:space="preserve">
+    <value>Qualité maximale (fichiers volumineux)</value>
+  </data>
+  <data name="BlankPages" xml:space="preserve">
+    <value>Pages blanches</value>
+  </data>
+  <data name="ExcludeBlankPages" xml:space="preserve">
+    <value>Exclure les pages blanches</value>
+  </data>
+  <data name="WhiteThreshold" xml:space="preserve">
+    <value>Seuil du blanc</value>
+  </data>
+  <data name="CoverageThreshold" xml:space="preserve">
+    <value>Seuil de couverture</value>
+  </data>
+  <data name="PostProcessing" xml:space="preserve">
+    <value>Post-traitement</value>
+  </data>
+  <data name="DeskewScannedPages" xml:space="preserve">
+    <value>Réaligner les pages numérisées</value>
+  </data>
+  <data name="BrightnessContrastAfterScan" xml:space="preserve">
+    <value>Appliquer la luminosité/contraste après acquisition</value>
+  </data>
+  <data name="OffsetWidth" xml:space="preserve">
+    <value>Largeur de décalage basée sur l'alignement (WIA)</value>
+  </data>
+  <data name="StretchToPageSize" xml:space="preserve">
+    <value>Étirer aux dimensions de la page</value>
+  </data>
+  <data name="CropToPageSize" xml:space="preserve">
+    <value>Recadrer aux dimensions de la page</value>
+  </data>
+  <data name="FlipDuplexedPages" xml:space="preserve">
+    <value>Retourner les pages recto-verso</value>
+  </data>
+  <data name="WiaVersionLabel" xml:space="preserve">
+    <value>Wia Version:</value>
+  </data>
+  <data name="TwainImplLabel" xml:space="preserve">
+    <value>Implémentation TWAIN :</value>
+  </data>
+  <data name="BatchScanFormTitle" xml:space="preserve">
+    <value>Acquisition par lot</value>
+  </data>
+  <data name="PressStartWhenReady" xml:space="preserve">
+    <value>Presser « Démarrer » une fois prêt.</value>
+  </data>
+  <data name="ScanConfig" xml:space="preserve">
+    <value>Configuration d'acquisition</value>
+  </data>
+  <data name="Output" xml:space="preserve">
+    <value>Sortie</value>
+  </data>
+  <data name="ProfileLabel" xml:space="preserve">
+    <value>Profil :</value>
+  </data>
+  <data name="SingleScan" xml:space="preserve">
+    <value>Acquisition unique</value>
+  </data>
+  <data name="MultipleScansPrompt" xml:space="preserve">
+    <value>Acquisitions multiples (demande à chaque numérisation)</value>
+  </data>
+  <data name="MultipleScansDelay" xml:space="preserve">
+    <value>Acquisitions multiples (délai fixe entre les numérisations)</value>
+  </data>
+  <data name="NumberOfScansLabel" xml:space="preserve">
+    <value>Nombre de numérisations :</value>
+  </data>
+  <data name="TimeBetweenScansLabel" xml:space="preserve">
+    <value>Délai entre 2 numérisations (secondes) :</value>
+  </data>
+  <data name="LoadIn" xml:space="preserve">
+    <value>Charger les images dans NAPS2</value>
+  </data>
+  <data name="SaveToSingleFile" xml:space="preserve">
+    <value>Enregistrer en un fichier multipages unique</value>
+  </data>
+  <data name="SaveToMultipleFiles" xml:space="preserve">
+    <value>Enregistrer en fichiers uniques</value>
+  </data>
+  <data name="Start" xml:space="preserve">
+    <value>Démarrer</value>
+  </data>
+  <data name="BatchPromptFormTitle" xml:space="preserve">
+    <value>Prochaine acquisition</value>
+  </data>
+  <data name="ReadyForScan" xml:space="preserve">
+    <value>Prêt à numériser {0}.</value>
+  </data>
+  <data name="OpenFolder" xml:space="preserve">
+    <value>Ouvrir un dossier</value>
+  </data>
+  <data name="Tools" xml:space="preserve">
+    <value>Tools</value>
   </data>
 </root>

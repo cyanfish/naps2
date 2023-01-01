@@ -16,7 +16,7 @@
     <value>Siyah &amp; Beyaz</value>
   </data>
   <data name="BitDepth_24Color" xml:space="preserve">
-    <value>24 Bit Renk</value>
+    <value>24-bit Renk</value>
   </data>
   <data name="BitDepth_8Grayscale" xml:space="preserve">
     <value>Gri tonlama</value>
@@ -94,10 +94,10 @@
     <value>Özel...</value>
   </data>
   <data name="PageSize_Legal" xml:space="preserve">
-    <value>US Legal (8.5x14 in)</value>
+    <value>US Legal (8.5x14 inç)</value>
   </data>
   <data name="PageSize_Letter" xml:space="preserve">
-    <value>US Letter (8.5x11 in)</value>
+    <value>US Letter (8.5x11 inç)</value>
   </data>
   <data name="PdfCompat_Default" xml:space="preserve">
     <value>Öntanımlı</value>
@@ -154,9 +154,9 @@
     <value>Öntanımlı</value>
   </data>
   <data name="OcrMode_Fast" xml:space="preserve">
-    <value>Fast</value>
+    <value>Hızlı</value>
   </data>
   <data name="OcrMode_Best" xml:space="preserve">
-    <value>Best</value>
+    <value>En iyi</value>
   </data>
 </root>

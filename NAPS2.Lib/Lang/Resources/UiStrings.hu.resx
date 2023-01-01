@@ -16,19 +16,19 @@
     <value>Névjegy</value>
   </data>
   <data name="CopyrightFormat" xml:space="preserve">
-    <value>Copyright {0} NAPS2 Contributors</value>
+    <value>Copyright {0} NAPS2 Közreműködők</value>
   </data>
   <data name="IconsFrom" xml:space="preserve">
     <value>Ikonok forrása:</value>
   </data>
   <data name="CheckForUpdates" xml:space="preserve">
-    <value>Frissítések keresése</value>
+    <value>Frissítések ellenőrzése</value>
   </data>
   <data name="OK" xml:space="preserve">
-    <value>Ok</value>
+    <value>OK</value>
   </data>
   <data name="Donate" xml:space="preserve">
-    <value>Támogatás</value>
+    <value>Adományozás</value>
   </data>
   <data name="ProfilesFormTitle" xml:space="preserve">
     <value>Profilok</value>
@@ -40,13 +40,13 @@
     <value>Szerkesztés</value>
   </data>
   <data name="Delete" xml:space="preserve">
-    <value>Oldal törlése</value>
+    <value>Törlés</value>
   </data>
   <data name="Scan" xml:space="preserve">
-    <value>Képolvasás</value>
+    <value>Beolvasás</value>
   </data>
   <data name="SetDefault" xml:space="preserve">
-    <value>Set Default</value>
+    <value>Beállítás alapértelmezettként</value>
   </data>
   <data name="Copy" xml:space="preserve">
     <value>Másolás</value>
@@ -76,22 +76,22 @@
     <value>Importálás</value>
   </data>
   <data name="SavePdf" xml:space="preserve">
-    <value>PDF mentése</value>
+    <value>PDF mentés</value>
   </data>
   <data name="PdfSettings" xml:space="preserve">
-    <value>PDF beállításai</value>
+    <value>PDF beállítások</value>
   </data>
   <data name="SaveImages" xml:space="preserve">
     <value>Képek mentése</value>
   </data>
   <data name="ImageSettings" xml:space="preserve">
-    <value>Kép beállításai</value>
+    <value>Kép beállítások</value>
   </data>
   <data name="EmailPdf" xml:space="preserve">
-    <value>PDF küldése Email-ben</value>
+    <value>PDF küldése e-mailben</value>
   </data>
   <data name="EmailSettings" xml:space="preserve">
-    <value>Email beállítások</value>
+    <value>E-mail beállítások</value>
   </data>
   <data name="Print" xml:space="preserve">
     <value>Nyomtatás</value>
@@ -100,16 +100,16 @@
     <value>Kép</value>
   </data>
   <data name="View" xml:space="preserve">
-    <value>Nézet</value>
+    <value>Megtekintés</value>
   </data>
   <data name="Crop" xml:space="preserve">
     <value>Levágás</value>
   </data>
   <data name="BrightnessContrast" xml:space="preserve">
-    <value>Fényerő / kontraszt</value>
+    <value>Fényerő / Kontraszt</value>
   </data>
   <data name="HueSaturation" xml:space="preserve">
-    <value>Hue / Saturation</value>
+    <value>Színárnyalat / telítettség</value>
   </data>
   <data name="BlackAndWhite" xml:space="preserve">
     <value>Fekete-fehér</value>
@@ -118,7 +118,7 @@
     <value>Élesítés</value>
   </data>
   <data name="DocumentCorrection" xml:space="preserve">
-    <value>Document Correction</value>
+    <value>Dokumentum javítás</value>
   </data>
   <data name="Reset" xml:space="preserve">
     <value>Visszaállítás</value>
@@ -136,10 +136,10 @@
     <value>Átfordítás</value>
   </data>
   <data name="Deskew" xml:space="preserve">
-    <value>Visszatorzítás</value>
+    <value>Kiegyenesítés</value>
   </data>
   <data name="CustomRotation" xml:space="preserve">
-    <value>Custom Rotation</value>
+    <value>Egyéni forgatás</value>
   </data>
   <data name="MoveUp" xml:space="preserve">
     <value>Le</value>
@@ -148,7 +148,7 @@
     <value>Fel</value>
   </data>
   <data name="Reorder" xml:space="preserve">
-    <value>Rendezés</value>
+    <value>Átrendezés</value>
   </data>
   <data name="Interleave" xml:space="preserve">
     <value>Átrendezés</value>
@@ -163,13 +163,19 @@
     <value>Alternatív képminőség javítás</value>
   </data>
   <data name="Reverse" xml:space="preserve">
-    <value>Reverse</value>
+    <value>Visszafelé</value>
+  </data>
+  <data name="ReverseAll" xml:space="preserve">
+    <value>Reverse All</value>
+  </data>
+  <data name="ReverseSelected" xml:space="preserve">
+    <value>Reverse Selected</value>
   </data>
   <data name="Clear" xml:space="preserve">
-    <value>Kép tisztítása</value>
+    <value>Összes törlése</value>
   </data>
   <data name="ClearAll" xml:space="preserve">
-    <value>Clear All</value>
+    <value>Összes törlése</value>
   </data>
   <data name="Language" xml:space="preserve">
     <value>Nyelv</value>
@@ -186,59 +192,77 @@
   <data name="ZoomOut" xml:space="preserve">
     <value>Kicsinyítés</value>
   </data>
+  <data name="ZoomActual" xml:space="preserve">
+    <value>Eredeti méret</value>
+  </data>
+  <data name="ScaleWithWindow" xml:space="preserve">
+    <value>Méretezés az ablakhoz</value>
+  </data>
   <data name="Save" xml:space="preserve">
-    <value>Save</value>
+    <value>Mentés</value>
+  </data>
+  <data name="SaveAll" xml:space="preserve">
+    <value>Save All</value>
+  </data>
+  <data name="SaveSelected" xml:space="preserve">
+    <value>Save Selected</value>
   </data>
   <data name="SaveAllAsPdf" xml:space="preserve">
-    <value>Save All as PDF</value>
+    <value>Összes mentése PDF-ként</value>
   </data>
   <data name="SaveSelectedAsPdf" xml:space="preserve">
-    <value>Save Selected as PDF</value>
+    <value>Kiválasztott mentése PDF-ként</value>
   </data>
   <data name="SaveAllAsImages" xml:space="preserve">
-    <value>Save All as Images</value>
+    <value>Összes mentése képekként</value>
   </data>
   <data name="SaveSelectedAsImages" xml:space="preserve">
-    <value>Save Selected as Images</value>
+    <value>Kiválasztottak mentése képekként</value>
+  </data>
+  <data name="EmailAll" xml:space="preserve">
+    <value>Email All</value>
+  </data>
+  <data name="EmailSelected" xml:space="preserve">
+    <value>Email Selected</value>
   </data>
   <data name="EmailAllAsPdf" xml:space="preserve">
-    <value>Email All as PDF</value>
+    <value>Összes elküldése e-mailben, PDF-ként</value>
   </data>
   <data name="EmailSelectedAsPdf" xml:space="preserve">
-    <value>Email Selected as PDF</value>
+    <value>Kiválasztottak elküldése e-mailbenm PDF-ként</value>
   </data>
   <data name="EditProfileFormTitle" xml:space="preserve">
-    <value>Profil-beálítások</value>
+    <value>Profil beállítások</value>
   </data>
   <data name="DisplayNameLabel" xml:space="preserve">
-    <value>Név:</value>
+    <value>Megjelenített név:</value>
   </data>
   <data name="WiaDriver" xml:space="preserve">
-    <value>WIA meghajtó</value>
+    <value>WIA illesztőprogram</value>
   </data>
   <data name="TwainDriver" xml:space="preserve">
-    <value>TWAIN meghajtó</value>
+    <value>TWAIN illesztőprogram</value>
   </data>
   <data name="AppleDriver" xml:space="preserve">
-    <value>Apple Driver</value>
+    <value>Apple illesztőprogram</value>
   </data>
   <data name="SaneDriver" xml:space="preserve">
-    <value>SANE Driver</value>
+    <value>SANE illesztőprogram</value>
   </data>
   <data name="DeviceLabel" xml:space="preserve">
     <value>Eszköz:</value>
   </data>
   <data name="ChooseDevice" xml:space="preserve">
-    <value>Képolvasó kiválasztása</value>
+    <value>Eszköz kiválasztása</value>
   </data>
   <data name="UsePredefinedSettings" xml:space="preserve">
-    <value>A következő bállítások használata</value>
+    <value>Előre meghatározott beállítások használata</value>
   </data>
   <data name="UseNativeUi" xml:space="preserve">
-    <value>Use native UI</value>
+    <value>Natív felhasználói felület használata</value>
   </data>
   <data name="PaperSourceLabel" xml:space="preserve">
-    <value>Forrás:</value>
+    <value>Papírforrás:</value>
   </data>
   <data name="PageSizeLabel" xml:space="preserve">
     <value>Oldalméret:</value>
@@ -267,6 +291,9 @@
   <data name="AutoSaveSettings" xml:space="preserve">
     <value>Automatikus mentés beállításai</value>
   </data>
+  <data name="AutoSaveSettingsFormTitle" xml:space="preserve">
+    <value>Automatikus mentés beállításai</value>
+  </data>
   <data name="Advanced" xml:space="preserve">
     <value>Haladó</value>
   </data>
@@ -280,7 +307,7 @@
     <value>Forrás kiválasztása</value>
   </data>
   <data name="RunInBackground" xml:space="preserve">
-    <value>Háttérbe</value>
+    <value>Futtatás a háttérben</value>
   </data>
   <data name="Naps2" xml:space="preserve">
     <value>NAPS2</value>
@@ -292,7 +319,7 @@
     <value>Not Another PDF Scanner</value>
   </data>
   <data name="OcrSetupFormTitle" xml:space="preserve">
-    <value>OCR Telepítés</value>
+    <value>Karakterfelismerés beállítás</value>
   </data>
   <data name="MakePdfsSearchable" xml:space="preserve">
     <value>A PDF-ek kereshetővé tétele karakterfelismeréssel</value>
@@ -301,22 +328,22 @@
     <value>Karakterfelismerés nyelve:</value>
   </data>
   <data name="OcrModeLabel" xml:space="preserve">
-    <value>OCR mode:</value>
+    <value>Karakterfelismerés mód:</value>
   </data>
   <data name="RunOcrAfterScanning" xml:space="preserve">
-    <value>Automatically run OCR after scanning</value>
+    <value>Karakterfelismerés automatikus futtatása beolvasás után</value>
   </data>
   <data name="GetMoreLanguages" xml:space="preserve">
     <value>További nyelvek beszerzése</value>
   </data>
   <data name="OcrDownloadFormTitle" xml:space="preserve">
-    <value>OCR Letöltés</value>
+    <value>Karakterfelismerés letöltés</value>
   </data>
   <data name="OcrDownloadSummaryText" xml:space="preserve">
-    <value>Az karakterfelismerés használatához le kell tölteni az összes szkennelési nyelvet.</value>
+    <value>Az karakterfelismerés használatához minden olyan nyelvet le kell töltenie, amelyet be szeretne olvasni.</value>
   </data>
   <data name="OcrSelectLanguageLabel" xml:space="preserve">
-    <value>Válasszon ki legalább egy nyelvet.:</value>
+    <value>Válasszon ki egy vagy több nyelvet:</value>
   </data>
   <data name="EstimatedDownloadSize" xml:space="preserve">
     <value>Becsült letöltési méret: {0} MB</value>
@@ -340,12 +367,327 @@
     <value>{0} / {1}</value>
   </data>
   <data name="Revert" xml:space="preserve">
-    <value>Revert</value>
+    <value>Alaphelyzet</value>
   </data>
   <data name="ApplyToSelected" xml:space="preserve">
-    <value>Apply to all {0} selected images</value>
+    <value>Alkalmazás az összes kiválasztott {0} képre</value>
   </data>
   <data name="SelectAll" xml:space="preserve">
     <value>Összes kijelölése</value>
+  </data>
+  <data name="Recover" xml:space="preserve">
+    <value>Helyreállítás</value>
+  </data>
+  <data name="NotNow" xml:space="preserve">
+    <value>Most nem</value>
+  </data>
+  <data name="RecoverFormTitle" xml:space="preserve">
+    <value>Beolvasott képek helyreállítása</value>
+  </data>
+  <data name="RecoverPrompt" xml:space="preserve">
+    <value>{0} image(s) scanned on {1} at {2} may not have been saved, and are recoverable. Do you want to recover them?</value>
+  </data>
+  <data name="Placeholders" xml:space="preserve">
+    <value>Helyettesítők</value>
+  </data>
+  <data name="SkipSavePrompt" xml:space="preserve">
+    <value>Mentési felszólítás kihagyása</value>
+  </data>
+  <data name="SinglePageFiles" xml:space="preserve">
+    <value>Egyoldalas fájlok</value>
+  </data>
+  <data name="EncryptPdf" xml:space="preserve">
+    <value>PDF titkosítása</value>
+  </data>
+  <data name="Show" xml:space="preserve">
+    <value>Megjelenítés</value>
+  </data>
+  <data name="RestoreDefaults" xml:space="preserve">
+    <value>Alapértelmezések visszaállítása</value>
+  </data>
+  <data name="PdfSettingsFormTitle" xml:space="preserve">
+    <value>PDF beállítások</value>
+  </data>
+  <data name="AllowPrinting" xml:space="preserve">
+    <value>Nyomtatás engedélyezése</value>
+  </data>
+  <data name="AllowFullQualityPrinting" xml:space="preserve">
+    <value>Legjobb minőségű nyomtatás engedélyezése</value>
+  </data>
+  <data name="AllowDocumentModification" xml:space="preserve">
+    <value>Dkoumentum módosításának engedélyezése</value>
+  </data>
+  <data name="AllowDocumentAssembly" xml:space="preserve">
+    <value>Dokumentum összeállításának engedélyezése</value>
+  </data>
+  <data name="AllowContentCopying" xml:space="preserve">
+    <value>Tartalom másolásának engedélyezése</value>
+  </data>
+  <data name="AllowContentCopyingForAccessibility" xml:space="preserve">
+    <value>Tartalom másolásának engedélyezése az akadálymentesítés érdekében</value>
+  </data>
+  <data name="AllowAnnotations" xml:space="preserve">
+    <value>Jegyzet engedélyezése</value>
+  </data>
+  <data name="AllowFormFilling" xml:space="preserve">
+    <value>Űrlap kitöltésének engedélyezése</value>
+  </data>
+  <data name="DefaultFilePathLabel" xml:space="preserve">
+    <value>Alapértelmezett fájl elérési útvonal:</value>
+  </data>
+  <data name="FilePathLabel" xml:space="preserve">
+    <value>Fájl elérési útvonal:</value>
+  </data>
+  <data name="TitleLabel" xml:space="preserve">
+    <value>Cím:</value>
+  </data>
+  <data name="AuthorLabel" xml:space="preserve">
+    <value>Szerző:</value>
+  </data>
+  <data name="SubjectLabel" xml:space="preserve">
+    <value>Tárgy:</value>
+  </data>
+  <data name="KeywordsLabel" xml:space="preserve">
+    <value>Kulcsszavak:</value>
+  </data>
+  <data name="OwnerPasswordLabel" xml:space="preserve">
+    <value>Tulajdonos jelszó:</value>
+  </data>
+  <data name="UserPasswordLabel" xml:space="preserve">
+    <value>Felhasználó jelszó:</value>
+  </data>
+  <data name="RememberTheseSettings" xml:space="preserve">
+    <value>Emlékezzen ezekre a beállításokra</value>
+  </data>
+  <data name="Metadata" xml:space="preserve">
+    <value>Metaadatok</value>
+  </data>
+  <data name="Encryption" xml:space="preserve">
+    <value>Titkosítás</value>
+  </data>
+  <data name="Compatibility" xml:space="preserve">
+    <value>Kompatibilitás</value>
+  </data>
+  <data name="PlaceholdersFormTitle" xml:space="preserve">
+    <value>Helyettesítők</value>
+  </data>
+  <data name="Year4Digit" xml:space="preserve">
+    <value>Év</value>
+  </data>
+  <data name="Year2Digit" xml:space="preserve">
+    <value>Év (00-99)</value>
+  </data>
+  <data name="Month2Digit" xml:space="preserve">
+    <value>Hónap (01-12)</value>
+  </data>
+  <data name="Day2Digit" xml:space="preserve">
+    <value>Nap (01-31)</value>
+  </data>
+  <data name="Hour2Digit" xml:space="preserve">
+    <value>Óra (0-23)</value>
+  </data>
+  <data name="Minute2Digit" xml:space="preserve">
+    <value>Perc (00-59)</value>
+  </data>
+  <data name="Second2Digit" xml:space="preserve">
+    <value>Másodperc (00-59)</value>
+  </data>
+  <data name="AutoIncrementing4Digit" xml:space="preserve">
+    <value>Automatikusan növekvő szám (4 számjegy)</value>
+  </data>
+  <data name="AutoIncrementing3Digit" xml:space="preserve">
+    <value>Automatikusan növekvő szám (3 számjegy)</value>
+  </data>
+  <data name="AutoIncrementing2Digit" xml:space="preserve">
+    <value>Automatikusan növekvő szám (2 számjegy)</value>
+  </data>
+  <data name="AutoIncrementing1Digit" xml:space="preserve">
+    <value>Auto-incrementing number (1 digits)</value>
+  </data>
+  <data name="FileNameLabel" xml:space="preserve">
+    <value>Fájlnév</value>
+  </data>
+  <data name="PreviewLabel" xml:space="preserve">
+    <value>Előnézet:</value>
+  </data>
+  <data name="JpegQualityHelp" xml:space="preserve">
+    <value>Magas JPEG minőség (80+) elérése érdekében növelje a képminőséget a profilban a legjobb eredmény eléréséhez.</value>
+  </data>
+  <data name="JpegQuality" xml:space="preserve">
+    <value>Jpeg minőség</value>
+  </data>
+  <data name="TiffOptions" xml:space="preserve">
+    <value>Tiff beállítások</value>
+  </data>
+  <data name="CompressionLabel" xml:space="preserve">
+    <value>Tömörítés:</value>
+  </data>
+  <data name="ImageSettingsFormTitle" xml:space="preserve">
+    <value>Kép beállítások</value>
+  </data>
+  <data name="EmailSettingsFormTitle" xml:space="preserve">
+    <value>E-mail beállítások</value>
+  </data>
+  <data name="Provider" xml:space="preserve">
+    <value>Szolgáltató</value>
+  </data>
+  <data name="Change" xml:space="preserve">
+    <value>Változtatás</value>
+  </data>
+  <data name="AttachmentNameLabel" xml:space="preserve">
+    <value>Melléklet neve:</value>
+  </data>
+  <data name="EmailProviderFormTitle" xml:space="preserve">
+    <value>E-mail szolgáltató kiválasztása</value>
+  </data>
+  <data name="AuthorizeFormTitle" xml:space="preserve">
+    <value>Engedélyezés</value>
+  </data>
+  <data name="WaitingForAuthorization" xml:space="preserve">
+    <value>Várakozás az engedélyezésre...</value>
+  </data>
+  <data name="ErrorFormTitle" xml:space="preserve">
+    <value>Hiba</value>
+  </data>
+  <data name="TechnicalDetails" xml:space="preserve">
+    <value>Technikai részletek</value>
+  </data>
+  <data name="PdfPasswordFormTitle" xml:space="preserve">
+    <value>Jelszó</value>
+  </data>
+  <data name="EncryptedFilePrompt" xml:space="preserve">
+    <value>The following file is encrypted and requires a password to open:</value>
+  </data>
+  <data name="PromptForFilePath" xml:space="preserve">
+    <value>Kérdezzen rá a fájl elérési útvonalára</value>
+  </data>
+  <data name="OneFilePerPage" xml:space="preserve">
+    <value>Egy fájl oldalanként</value>
+  </data>
+  <data name="OneFilePerScan" xml:space="preserve">
+    <value>Egy fájl beolvasásonként</value>
+  </data>
+  <data name="SeparateByPatchT" xml:space="preserve">
+    <value>Különálló fájlok Patch-T szerint</value>
+  </data>
+  <data name="MoreInfo" xml:space="preserve">
+    <value>További információ</value>
+  </data>
+  <data name="ClearAfterSaving" xml:space="preserve">
+    <value>Képek törlése mentés után</value>
+  </data>
+  <data name="PageSizeFormTitle" xml:space="preserve">
+    <value>Egyéni oldalméret</value>
+  </data>
+  <data name="NameOptional" xml:space="preserve">
+    <value>Név (nem kötelező)</value>
+  </data>
+  <data name="Dimensions" xml:space="preserve">
+    <value>Méretek</value>
+  </data>
+  <data name="WaitingForTwain" xml:space="preserve">
+    <value>Várakozás a TWAIN-re a befejezéshez...</value>
+  </data>
+  <data name="AdvancedProfileFormTitle" xml:space="preserve">
+    <value>Haladó profilbeállítások</value>
+  </data>
+  <data name="ImageQuality" xml:space="preserve">
+    <value>Képminőség</value>
+  </data>
+  <data name="MaximumQuality" xml:space="preserve">
+    <value>Legjobb minőség (nagy fájlok)</value>
+  </data>
+  <data name="BlankPages" xml:space="preserve">
+    <value>Üres oldalak</value>
+  </data>
+  <data name="ExcludeBlankPages" xml:space="preserve">
+    <value>Üres oldalak kizárása</value>
+  </data>
+  <data name="WhiteThreshold" xml:space="preserve">
+    <value>Fehér küszöbérték</value>
+  </data>
+  <data name="CoverageThreshold" xml:space="preserve">
+    <value>Lefedettségi küszöbérték</value>
+  </data>
+  <data name="PostProcessing" xml:space="preserve">
+    <value>Utófeldogozás</value>
+  </data>
+  <data name="DeskewScannedPages" xml:space="preserve">
+    <value>Beolvasott oldalak kiegyenesítése</value>
+  </data>
+  <data name="BrightnessContrastAfterScan" xml:space="preserve">
+    <value>Fényerő/kontraszt alkalmazása a beolvasás után</value>
+  </data>
+  <data name="OffsetWidth" xml:space="preserve">
+    <value>Igazításon alapuló eltolási szélesség (WIA)</value>
+  </data>
+  <data name="StretchToPageSize" xml:space="preserve">
+    <value>Nyújtás az oldal méretére</value>
+  </data>
+  <data name="CropToPageSize" xml:space="preserve">
+    <value>Levágás oldalméretre</value>
+  </data>
+  <data name="FlipDuplexedPages" xml:space="preserve">
+    <value>Kétoldalas oldalak megfordítása</value>
+  </data>
+  <data name="WiaVersionLabel" xml:space="preserve">
+    <value>Wia verzió:</value>
+  </data>
+  <data name="TwainImplLabel" xml:space="preserve">
+    <value>Twain megvalósítás:</value>
+  </data>
+  <data name="BatchScanFormTitle" xml:space="preserve">
+    <value>Kötegelt beolvasás</value>
+  </data>
+  <data name="PressStartWhenReady" xml:space="preserve">
+    <value>Ha kész, nyomja meg a Kezdés gombot.</value>
+  </data>
+  <data name="ScanConfig" xml:space="preserve">
+    <value>Beolvasási konfiguráció</value>
+  </data>
+  <data name="Output" xml:space="preserve">
+    <value>Kimenet</value>
+  </data>
+  <data name="ProfileLabel" xml:space="preserve">
+    <value>Profil:</value>
+  </data>
+  <data name="SingleScan" xml:space="preserve">
+    <value>Egyetlen beolvasás</value>
+  </data>
+  <data name="MultipleScansPrompt" xml:space="preserve">
+    <value>Többszörös beolvasás ( kérdés a beolvasások között)</value>
+  </data>
+  <data name="MultipleScansDelay" xml:space="preserve">
+    <value>Többszörös beolvasás (rögzített késleltetés a beolvasások között)</value>
+  </data>
+  <data name="NumberOfScansLabel" xml:space="preserve">
+    <value>A beolvasások száma:</value>
+  </data>
+  <data name="TimeBetweenScansLabel" xml:space="preserve">
+    <value>Beolvasások közötti idő (másodperc):</value>
+  </data>
+  <data name="LoadIn" xml:space="preserve">
+    <value>Képek betöltése a NAPS2-be</value>
+  </data>
+  <data name="SaveToSingleFile" xml:space="preserve">
+    <value>Mentés egyetlen fájlba</value>
+  </data>
+  <data name="SaveToMultipleFiles" xml:space="preserve">
+    <value>Mentés több fájlba</value>
+  </data>
+  <data name="Start" xml:space="preserve">
+    <value>Kezdés</value>
+  </data>
+  <data name="BatchPromptFormTitle" xml:space="preserve">
+    <value>Következő beolvasás</value>
+  </data>
+  <data name="ReadyForScan" xml:space="preserve">
+    <value>Készen áll {0} beolvasásra.</value>
+  </data>
+  <data name="OpenFolder" xml:space="preserve">
+    <value>Mappa megnyitása</value>
+  </data>
+  <data name="Tools" xml:space="preserve">
+    <value>Tools</value>
   </data>
 </root>

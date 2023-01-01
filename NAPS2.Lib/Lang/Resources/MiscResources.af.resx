@@ -64,7 +64,7 @@
     <value>JPEG File (*.jpg, *.jpeg)</value>
   </data>
   <data name="FileTypePdf" xml:space="preserve">
-    <value>PDF dokument (* .pdf)</value>
+    <value>PDF dokument (*.pdf)</value>
   </data>
   <data name="FileTypePng" xml:space="preserve">
     <value>PNG-lêer (* png)</value>
@@ -190,7 +190,7 @@
     <value>of {0}</value>
   </data>
   <data name="BatchError" xml:space="preserve">
-    <value>xảy ra một lỗi không rõ trong đợt quét.</value>
+    <value>An unknown error ocurred during the batch scan.</value>
   </data>
   <data name="BatchStatusCancelled" xml:space="preserve">
     <value>Hủy Scan hàng loạt.</value>

@@ -154,9 +154,9 @@
     <value>Padrão</value>
   </data>
   <data name="OcrMode_Fast" xml:space="preserve">
-    <value>Fast</value>
+    <value>Rápido</value>
   </data>
   <data name="OcrMode_Best" xml:space="preserve">
-    <value>Best</value>
+    <value>Melhor</value>
   </data>
 </root>

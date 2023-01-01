@@ -13,61 +13,61 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="DeviceNotFound" xml:space="preserve">
-    <value>Valittua skanneria ei löydy.</value>
+    <value>The selected scanner could not be found.</value>
   </data>
   <data name="DeviceOffline" xml:space="preserve">
-    <value>Valittu skanneri on offline-tilassa.</value>
+    <value>The selected scanner is offline.</value>
   </data>
   <data name="NAPS2" xml:space="preserve">
     <value>NAPS2</value>
   </data>
   <data name="NoDeviceSelected" xml:space="preserve">
-    <value>Laitetta ei valittu.</value>
+    <value>No device selected.</value>
   </data>
   <data name="NoDevicesFound" xml:space="preserve">
-    <value>Skannauslaitetta ei löydy.</value>
+    <value>No scanning device was found.</value>
   </data>
   <data name="UnknownDriverError" xml:space="preserve">
-    <value>Virhe skannausajurissa.</value>
+    <value>স্ক্যানিং ড্রাইভারের সাথে একটি ত্রুটি ঘটেছে৷</value>
   </data>
   <data name="Version" xml:space="preserve">
-    <value>Versio {0}</value>
+    <value>Version {0}</value>
   </data>
   <data name="ImportErrorCouldNot" xml:space="preserve">
-    <value>Tiedostoa '{0}' ei voitu tuoda.</value>
+    <value>The file '{0}' could not be imported.</value>
   </data>
   <data name="NoFeederSupport" xml:space="preserve">
-    <value>Valittu skanneri ei tue syöttölaitetta. Jos skannerissasi on syöttölaite, kokeile toista ajuria.</value>
+    <value>The selected scanner does not support using a feeder. If your scanner does have a feeder, try using a different driver.</value>
   </data>
   <data name="NoPagesInFeeder" xml:space="preserve">
-    <value>Syöttölaite on tyjä.</value>
+    <value>No pages are in the feeder.</value>
   </data>
   <data name="PdfNoPermissionToExtractContent" xml:space="preserve">
-    <value>Sinulla ei ole oikeuksia kopioida tiedoston '{0}' sisältöä.</value>
+    <value>You do not have permission to copy content from the file '{0}'.</value>
   </data>
   <data name="NoDuplexSupport" xml:space="preserve">
-    <value>Valittu skanneri ei tue monipuoleisuutta. Jos skannerisi luultavasti tukee sitä, kokeile toista ajuria.</value>
+    <value>The selected scanner does not support using duplex. If your scanner is supposed to support duplex, try using a different driver.</value>
   </data>
   <data name="DeviceBusy" xml:space="preserve">
-    <value>Valittu skanneri on varattu.</value>
+    <value>The selected scanner is busy.</value>
   </data>
   <data name="DeviceCoverOpen" xml:space="preserve">
-    <value>Skannerin kansi on auki.</value>
+    <value>The scanner's cover is open.</value>
   </data>
   <data name="DevicePaperJam" xml:space="preserve">
-    <value>Skannerissa on paperitukos.</value>
+    <value>The scanner has a paper jam.</value>
   </data>
   <data name="DeviceWarmingUp" xml:space="preserve">
-    <value>Skanneri lämpiää.</value>
+    <value>The scanner is warming up.</value>
   </data>
   <data name="SaneNotAvailable" xml:space="preserve">
-    <value>SANE - ajuri ei ole käytettävissä. Asenna tarvittava osat:</value>
+    <value>The SANE driver is not available. Make sure to install the required packages:</value>
   </data>
   <data name="TesseractNotAvailable" xml:space="preserve">
-    <value>OCR - moottori ei ole käytettävissä. Asenna tarvittava osat:</value>
+    <value>The OCR engine is not available. Make sure to install the required package:</value>
   </data>
   <data name="DriverNotSupported" xml:space="preserve">
-    <value>Valittua ajuria ei tueta tässä järjestelmässä.</value>
+    <value>The selected driver is not supported on this system.</value>
   </data>
   <data name="OcrError" xml:space="preserve">
     <value>An error occurred running OCR.</value>

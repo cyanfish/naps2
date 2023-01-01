@@ -16,40 +16,40 @@
     <value>Profil kiválasztása</value>
   </data>
   <data name="Clear" xml:space="preserve">
-    <value>Kép tisztítása</value>
+    <value>Összes törlése</value>
   </data>
   <data name="ConfirmClearItems" xml:space="preserve">
-    <value>Biztos hogy tisztítja a(z) {0} képet?</value>
+    <value>Biztos, hogy törölni szeretné a {0} elemet?</value>
   </data>
   <data name="ConfirmDeleteItems" xml:space="preserve">
-    <value>Biztos hogy törli mind a(z) {0} oldalt?</value>
+    <value>Biztos, hogy törölni szeretne {0} elemet?</value>
   </data>
   <data name="ConfirmDeleteMultipleProfiles" xml:space="preserve">
-    <value>Biztos hogy törli mind a(z) {0} profilt?</value>
+    <value>Biztos, hogy törölni szeretne {0} profilt?</value>
   </data>
   <data name="ConfirmDeleteSingleProfile" xml:space="preserve">
-    <value>Biztos hogy törli a következő profilt: {0}?</value>
+    <value>Biztos, hogy törölni szeretné a következő profilt: {0}?</value>
   </data>
   <data name="ConfirmOverwriteFile" xml:space="preserve">
-    <value>Már létezik {0} nevű fájl, felül szeretné írni?</value>
+    <value>A következő fájl már létezik: {0}. Szeretné felülírni?</value>
   </data>
   <data name="Delete" xml:space="preserve">
-    <value>Oldal törlése</value>
+    <value>Törlés</value>
   </data>
   <data name="DeviceNotFound" xml:space="preserve">
-    <value>A kiválasztott képolvasó nem található.</value>
+    <value>A kiválasztott lapolvasó nem található.</value>
   </data>
   <data name="DeviceOffline" xml:space="preserve">
-    <value>A kiválasztott képolvasó nem elérhető (leválasztva).</value>
+    <value>A kiválasztott lapolvasó inaktív.</value>
   </data>
   <data name="DontHavePermission" xml:space="preserve">
-    <value>Nincs hozzáférési egedélye az adott helyhez..</value>
+    <value>Nincs jogosultsága fájlok mentésére ezen a helyen.</value>
   </data>
   <data name="Error" xml:space="preserve">
     <value>Hiba</value>
   </data>
   <data name="FileTypeBmp" xml:space="preserve">
-    <value>BMP fájl (*.bmp)</value>
+    <value>BMP fájlok (*.bmp)</value>
   </data>
   <data name="FileTypeEmf" xml:space="preserve">
     <value>EMF fájl (*.emf)</value>
@@ -64,7 +64,7 @@
     <value>JPEG fájl (*.jpg, *.jpeg)</value>
   </data>
   <data name="FileTypePdf" xml:space="preserve">
-    <value>PDF Document (*.pdf)</value>
+    <value>PDF dokumentum (*.pdf)</value>
   </data>
   <data name="FileTypePng" xml:space="preserve">
     <value>PNG fájl (*.png)</value>
@@ -73,10 +73,10 @@
     <value>TIFF fájl (*.tiff, *.tif)</value>
   </data>
   <data name="FileTypeJp2" xml:space="preserve">
-    <value>JPEG2000 File (*.jp2, *.jpx)</value>
+    <value>JPEG2000 fájl (*.jp2, *.jpx)</value>
   </data>
   <data name="NameMissing" xml:space="preserve">
-    <value>Hiányzó név.</value>
+    <value>A név hiányzik.</value>
   </data>
   <data name="NAPS2" xml:space="preserve">
     <value>NAPS2</value>
@@ -85,7 +85,7 @@
     <value>Nincs kiválasztott eszköz.</value>
   </data>
   <data name="NoDevicesFound" xml:space="preserve">
-    <value>Nincs elérhető képolvasó.</value>
+    <value>Nem található lapolvasó eszköz.</value>
   </data>
   <data name="OverwriteFile" xml:space="preserve">
     <value>Fájl felülírása</value>
@@ -97,22 +97,22 @@
     <value>Beolvasott kép</value>
   </data>
   <data name="SelectProfileBeforeScan" xml:space="preserve">
-    <value>Válasszon profilt a képolvasás elött.</value>
+    <value>Válasszon ki egy profilt, mielőtt a Beolvasás gombra kattint.</value>
   </data>
   <data name="UnknownDriverError" xml:space="preserve">
-    <value>Hiba történt a képolvasó meghajtójával..</value>
+    <value>Hiba történt a lapolvasó illesztőprogrammal.</value>
   </data>
   <data name="Version" xml:space="preserve">
     <value>Verzió: {0}</value>
   </data>
   <data name="EmailError" xml:space="preserve">
-    <value>Hiba történt az e-mail küldése során..</value>
+    <value>Hiba történt e-mail küldése közben.</value>
   </data>
   <data name="InstallComplete" xml:space="preserve">
     <value>A telepítés befejeződött</value>
   </data>
   <data name="InstallCompletePromptRestart" xml:space="preserve">
-    <value>A telepítés sikeres. Újra szeretnéd indítani a NAPS2 programot most?</value>
+    <value>A telepítés befejeződött. Szeretné most újraindítani a NAPS2 programot?</value>
   </data>
   <data name="InstallFailed" xml:space="preserve">
     <value>A telepítés sikertelen.</value>
@@ -124,22 +124,22 @@
     <value>Mind ({0})</value>
   </data>
   <data name="SelectedCount" xml:space="preserve">
-    <value>Kiválasztva ({0})</value>
+    <value>Kiválasztott ({0})</value>
   </data>
   <data name="EstimatedDownloadSize" xml:space="preserve">
     <value>Becsült letöltési méret: {0} MB</value>
   </data>
   <data name="FilesProgressFormat" xml:space="preserve">
-    <value>{0} / {1} files</value>
+    <value>{0} / {1} fájl</value>
   </data>
   <data name="SizeProgress" xml:space="preserve">
     <value>{0} / {1} MB</value>
   </data>
   <data name="ImportErrorCouldNot" xml:space="preserve">
-    <value>A '{0}' fájl nem importálható..</value>
+    <value>A következő fájlt nem lehetett importálni: '{0}'.</value>
   </data>
   <data name="ImportErrorNAPS2Pdf" xml:space="preserve">
-    <value>A '{0}' fájlt nem lehet importálni. Csak a NAPS2 által generált PDF fájlokat lehet importálni.</value>
+    <value>A következő fájlt nem lehetett importálni: '{0}'. Csak a NAPS2 által generált PDF fájlok importálhatók.</value>
   </data>
   <data name="DownloadError" xml:space="preserve">
     <value>Letöltési hiba</value>
@@ -148,22 +148,22 @@
     <value>Egy vagy több fájlt nem sikerült letölteni.</value>
   </data>
   <data name="CustomPageSizeFormat" xml:space="preserve">
-    <value>Custom ({0}x{1} {2})</value>
+    <value>Egyéni ({0}x{1} {2})</value>
   </data>
   <data name="Scan" xml:space="preserve">
-    <value>Képolvasás</value>
+    <value>Beolvasás</value>
   </data>
   <data name="ConfirmResetImages" xml:space="preserve">
-    <value>Are you sure you want undo your changes to {0} image(s)?</value>
+    <value>Biztos benne, hogy vissza szeretné vonni {0} kép módosítását?</value>
   </data>
   <data name="ResetImage" xml:space="preserve">
     <value>Kép visszaállítása</value>
   </data>
   <data name="ExitWithUnsavedChanges" xml:space="preserve">
-    <value>Nem mentett módosításai vannak, amik elvesznek ha bezárja a programot. Biztosan kilép?</value>
+    <value>Vannak el nem mentett módosításai. Biztos, hogy ki akar lépni és el akarja vetni ezeket a módosításokat?</value>
   </data>
   <data name="ExitWithActiveOperations" xml:space="preserve">
-    <value>An operation is in progress. Are you sure you want to exit and cancel the operation?</value>
+    <value>Egy művelet folyamatban van. Biztos, hogy ki szeretne lépni és meg szeretné szakítani a műveletet?</value>
   </data>
   <data name="UnsavedChanges" xml:space="preserve">
     <value>Nem mentett módosítások</value>
@@ -172,46 +172,46 @@
     <value>Művelet folyamatban</value>
   </data>
   <data name="ScanPageProgress" xml:space="preserve">
-    <value>Scanning page {0}</value>
+    <value>{0}. oldal beolvasása</value>
   </data>
   <data name="NoFeederSupport" xml:space="preserve">
-    <value>The selected scanner does not support using a feeder. If your scanner does have a feeder, try using a different driver.</value>
+    <value>A kiválasztott lapolvasó nem támogatja az lapadagoló használatát. Ha a lapolvasója rendelkezik lapadagolóval, próbáljon meg másik illesztőprogramot használni.</value>
   </data>
   <data name="NoPagesInFeeder" xml:space="preserve">
-    <value>Nincs lap a beolvasóban.</value>
+    <value>Nincs lap a lapadagolóban.</value>
   </data>
   <data name="PdfNoPermissionToExtractContent" xml:space="preserve">
-    <value>You do not have permission to copy content from the file '{0}'.</value>
+    <value>Nincs jogosultsága a következő fájl tartalmát másolni: '{0}'.</value>
   </data>
   <data name="ErrorSaving" xml:space="preserve">
-    <value>An error occurred when trying to save the file.</value>
+    <value>Hiba történt a fájl mentésekor.</value>
   </data>
   <data name="OfN" xml:space="preserve">
-    <value>of {0}</value>
+    <value>/ {0}</value>
   </data>
   <data name="BatchError" xml:space="preserve">
     <value>An unknown error ocurred during the batch scan.</value>
   </data>
   <data name="BatchStatusCancelled" xml:space="preserve">
-    <value>Batch cancelled.</value>
+    <value>A kötegelt feldolgozás törlésre került.</value>
   </data>
   <data name="BatchStatusCancelling" xml:space="preserve">
     <value>Visszavonás....</value>
   </data>
   <data name="BatchStatusComplete" xml:space="preserve">
-    <value>A folyamat befejeződött.</value>
+    <value>A kötegelt feldolgozás sikeresen befejeződött.</value>
   </data>
   <data name="BatchStatusError" xml:space="preserve">
-    <value>Hiba történt a művelet során, a folyamat megszakadt.</value>
+    <value>A kötegelt beolvasás hiba miatt megszakadt.</value>
   </data>
   <data name="BatchStatusPage" xml:space="preserve">
-    <value>Scanning page {0}...</value>
+    <value>{0}. oldal beolvasása...</value>
   </data>
   <data name="BatchStatusScanPage" xml:space="preserve">
-    <value>Scanning page {0} (scan {1})...</value>
+    <value>{0}. oldal beolvasása ({1}. beolvasás)...</value>
   </data>
   <data name="BatchStatusWaitingForScan" xml:space="preserve">
-    <value>Waiting for scan {0}...</value>
+    <value>Várakozás a beolvasásra {0}...</value>
   </data>
   <data name="Cancel" xml:space="preserve">
     <value>Mégse</value>
@@ -220,10 +220,10 @@
     <value>Bezárás</value>
   </data>
   <data name="BatchStatusSaving" xml:space="preserve">
-    <value>Saving batch results...</value>
+    <value>A kötegelt feldolgozás eredményének mentése...</value>
   </data>
   <data name="NoDuplexSupport" xml:space="preserve">
-    <value>The selected scanner does not support using duplex. If your scanner is supposed to support duplex, try using a different driver.</value>
+    <value>A kiválasztott lapolvasó nem támogatja a kétoldalas használatot. Ha a lapolvasó feltehetőleg támogatja a kétoldalas használatot, próbáljon meg másik illesztőprogramot használni.</value>
   </data>
   <data name="ProgressFormat" xml:space="preserve">
     <value>{0} / {1}</value>
@@ -232,49 +232,49 @@
     <value>Importálás {0}...</value>
   </data>
   <data name="ImportProgress" xml:space="preserve">
-    <value>Import Progress</value>
+    <value>Importálás folyamata</value>
   </data>
   <data name="Recovering" xml:space="preserve">
     <value>Helyreállítás...</value>
   </data>
   <data name="RecoveryProgress" xml:space="preserve">
-    <value>Helyreállítási folyamat</value>
+    <value>Helyreállítás folyamata</value>
   </data>
   <data name="SaveImages" xml:space="preserve">
     <value>Képek mentése</value>
   </data>
   <data name="SaveImagesProgress" xml:space="preserve">
-    <value>Save Images Progress</value>
+    <value>Képmentés folyamata</value>
   </data>
   <data name="SavePdf" xml:space="preserve">
-    <value>PDF mentése</value>
+    <value>PDF mentés</value>
   </data>
   <data name="SavePdfProgress" xml:space="preserve">
-    <value>Save PDF Progress</value>
+    <value>PDF mentésének folyamata</value>
   </data>
   <data name="SavingFormat" xml:space="preserve">
-    <value>Saving {0}...</value>
+    <value>Mentés {0}...</value>
   </data>
   <data name="Print" xml:space="preserve">
     <value>Nyomtatás</value>
   </data>
   <data name="Copying" xml:space="preserve">
-    <value>Másolás folyamatban...</value>
+    <value>Másolás...</value>
   </data>
   <data name="CopyProgress" xml:space="preserve">
-    <value>Folyamatban</value>
+    <value>Másolás folyamata</value>
   </data>
   <data name="Importing" xml:space="preserve">
     <value>Importálás...</value>
   </data>
   <data name="EmailPdf" xml:space="preserve">
-    <value>PDF küldése Email-ben</value>
+    <value>PDF küldése e-mailben</value>
   </data>
   <data name="EmailPdfProgress" xml:space="preserve">
-    <value>Email PDF Progress</value>
+    <value>PDF e-mailben történő elküldésének folyamata</value>
   </data>
   <data name="AutoSaveError" xml:space="preserve">
-    <value>An error occurred when trying to auto save.</value>
+    <value>Hiba történt az automatikus mentés során.</value>
   </data>
   <data name="FileTypeAllFiles" xml:space="preserve">
     <value>Minden fájl</value>
@@ -283,19 +283,19 @@
     <value>Képfájlok</value>
   </data>
   <data name="DeviceBusy" xml:space="preserve">
-    <value>A kiválasztott képolvasó nem elérhető (foglalt).</value>
+    <value>A kiválasztott lapolvasó foglalt.</value>
   </data>
   <data name="DeviceCoverOpen" xml:space="preserve">
-    <value>The scanner's cover is open.</value>
+    <value>A lapolvasó fedele nyitva van.</value>
   </data>
   <data name="DevicePaperJam" xml:space="preserve">
-    <value>The scanner has a paper jam.</value>
+    <value>A lapolvasóban papírelakadás van.</value>
   </data>
   <data name="DeviceWarmingUp" xml:space="preserve">
-    <value>The scanner is warming up.</value>
+    <value>A lapolvasó felmelegedik.</value>
   </data>
   <data name="OcrUpdateAvailable" xml:space="preserve">
-    <value>An update to OCR is available.</value>
+    <value>Elérhető egy frissítés a karakterfelismeréshez.</value>
   </data>
   <data name="ImageSaved" xml:space="preserve">
     <value>Kép mentve.</value>
@@ -313,84 +313,84 @@
     <value>Are you sure you want to delete "{0}"?</value>
   </data>
   <data name="FileInUse" xml:space="preserve">
-    <value>The file could not be overwritten because it is currently in use.</value>
+    <value>A fájlt nem lehetett felülírni, mert jelenleg használatban van.</value>
   </data>
   <data name="AutoDeskewing" xml:space="preserve">
-    <value>Visszatorzítás...</value>
+    <value>Kiegyenesítés...</value>
   </data>
   <data name="AutoDeskewProgress" xml:space="preserve">
-    <value>Visszatorzítás folyamatban</value>
+    <value>Kiegyenesítés folyamata</value>
   </data>
   <data name="DownloadNeeded" xml:space="preserve">
     <value>Letöltés szükséges</value>
   </data>
   <data name="PdfImportComponentNeeded" xml:space="preserve">
-    <value>További bővitmény szükséges, hogy ezt a PDF fájlt importálhassa. Szeretné most letölteni?</value>
+    <value>A PDF-fájl importálásához egy további összetevőre van szükség. Szeretné letölteni most?</value>
   </data>
   <data name="ConfirmCancelBatch" xml:space="preserve">
-    <value>Are you sure you want to cancel the batch scan?</value>
+    <value>Biztos, hogy meg szeretné szakítani a kötegelt beolvasást?</value>
   </data>
   <data name="CancelBatch" xml:space="preserve">
-    <value>Cancel Batch</value>
+    <value>A kötegelt feldolgozás törlése</value>
   </data>
   <data name="Donate" xml:space="preserve">
-    <value>Támogatás</value>
+    <value>Adományozás</value>
   </data>
   <data name="DonatePrompt" xml:space="preserve">
-    <value>NAPS2 is completely free. Consider making a donation.</value>
+    <value>A NAPS2 teljesen ingyenes. Fontolja meg az adományozást.</value>
   </data>
   <data name="SaneNotAvailable" xml:space="preserve">
-    <value>The SANE driver is not available. Make sure to install the required packages:</value>
+    <value>A SANE illesztőprogram nem áll rendelkezésre. Győződjön meg róla, hogy telepítette a szükséges csomagokat:</value>
   </data>
   <data name="TesseractNotAvailable" xml:space="preserve">
-    <value>The OCR engine is not available. Make sure to install the required package:</value>
+    <value>Az karakterfelismerő motor nem áll rendelkezésre. Győződjön meg róla, hogy telepítette a szükséges csomagot:</value>
   </data>
   <data name="DriverNotSupported" xml:space="preserve">
-    <value>The selected driver is not supported on this system.</value>
+    <value>A kiválasztott illesztőprogram nem támogatott ezen a rendszeren.</value>
   </data>
   <data name="OcrProgress" xml:space="preserve">
-    <value>OCR Progress</value>
+    <value>Karakterfelismerés folyamata</value>
   </data>
   <data name="RunningOcr" xml:space="preserve">
-    <value>OCR futtatása...</value>
+    <value>Karakterfelismerés futtatása...</value>
   </data>
   <data name="UpdateProgress" xml:space="preserve">
-    <value>Update Progress</value>
+    <value>Frissítés folyamata</value>
   </data>
   <data name="Updating" xml:space="preserve">
-    <value>Updating...</value>
+    <value>Frissítés...</value>
   </data>
   <data name="NoUpdates" xml:space="preserve">
-    <value>Nem érhető el frissítés.</value>
+    <value>Nem érhetők el frissítések.</value>
   </data>
   <data name="CheckingForUpdates" xml:space="preserve">
-    <value>Checking...</value>
+    <value>Ellenőrzés...</value>
   </data>
   <data name="UpdateCheckDisabled" xml:space="preserve">
-    <value>Update checking is disabled.</value>
+    <value>A frissítés ellenőrzése le van tiltva.</value>
   </data>
   <data name="UpdateError" xml:space="preserve">
-    <value>Hiba történt a frissités telepitésekor.</value>
+    <value>Hiba történt a frissítés telepítésekor.</value>
   </data>
   <data name="Install" xml:space="preserve">
-    <value>Install {0}</value>
+    <value>{0} telepítése</value>
   </data>
   <data name="UpdateAvailable" xml:space="preserve">
-    <value>An update is available.</value>
+    <value>Elérhető egy frissítés.</value>
   </data>
   <data name="AuthError" xml:space="preserve">
-    <value>An error occurred when trying to authorize.</value>
+    <value>Hiba történt az engedélyezés során.</value>
   </data>
   <data name="UploadingEmail" xml:space="preserve">
-    <value>Uploading email...</value>
+    <value>E-mail feltöltése...</value>
   </data>
   <data name="ErrorEmailing" xml:space="preserve">
-    <value>An error occurred when trying to send the email.</value>
+    <value>Hiba történt az e-mail elküldésekor.</value>
   </data>
   <data name="ScanProgressPage" xml:space="preserve">
-    <value>Scanning page {0}...</value>
+    <value>{0}. oldal beolvasása...</value>
   </data>
   <data name="AcquiringData" xml:space="preserve">
-    <value>Beolvasás...</value>
+    <value>Adatgyűjtés...</value>
   </data>
 </root>

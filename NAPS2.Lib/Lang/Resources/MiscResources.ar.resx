@@ -100,7 +100,7 @@
     <value>حدد ملف شخصي قبل النقر فوق مسح ضوئي.</value>
   </data>
   <data name="UnknownDriverError" xml:space="preserve">
-    <value>حدث خطأ مع تعريف المسح الضوئي..</value>
+    <value>حدث خطأ مع تعريف المسح الضوئي.</value>
   </data>
   <data name="Version" xml:space="preserve">
     <value>الإصدارة {0}</value>
@@ -109,7 +109,7 @@
     <value>حدث خطأ أثناء محاولة إرسال بريد إلكتروني.</value>
   </data>
   <data name="InstallComplete" xml:space="preserve">
-    <value>اكتمل التثبيت.</value>
+    <value>اكتمل التثبيت</value>
   </data>
   <data name="InstallCompletePromptRestart" xml:space="preserve">
     <value>اكتمل التثبيت. هل تريد إعادة تشغيل NAPS2 الآن؟</value>
@@ -163,7 +163,7 @@
     <value>لديك تغييرات غير محفوظة. هل أنت متأكد من أنك تريد الخروج وتجاهل هذه التغييرات؟</value>
   </data>
   <data name="ExitWithActiveOperations" xml:space="preserve">
-    <value>هناك عملية قيد التنفيذ الآن. هل أنت متأكد أنك تريد إلغاء العملية والخروج؟‏</value>
+    <value>هناك عملية قيد التنفيذ الآن. هل أنت متأكد أنك تريد إلغاء العملية والخروج؟</value>
   </data>
   <data name="UnsavedChanges" xml:space="preserve">
     <value>التغييرات التي لم يتم حفظها</value>
@@ -190,7 +190,7 @@
     <value>من {0}</value>
   </data>
   <data name="BatchError" xml:space="preserve">
-    <value>حدث خطأ غير معروف أثناء المسح الضوئي على دفعات.</value>
+    <value>An unknown error ocurred during the batch scan.</value>
   </data>
   <data name="BatchStatusCancelled" xml:space="preserve">
     <value>الدفعات تم إلغائها.</value>
@@ -325,7 +325,7 @@
     <value>تحميل اللوازم</value>
   </data>
   <data name="PdfImportComponentNeeded" xml:space="preserve">
-    <value>قوائم الأرشفة هى نتاج ماتم إنشاءه سابقا فى الإعدادات العامة (التراميز) والمجموعات بشقيها الرئيسي والفرعى والقوالب وهيكلها بعد أن تم إنشاءها لتظهرلنا على الشكل المراد إظهارها عليه :</value>
+    <value>قوائم الأرشفة هى نتاج ماتم إنشاءه سابقا فى الإعدادات العامة (التراميز) والمجموعات بشقيها الرئيسي والفرعى والقوالب وهيكلها بعد أن تم إنشاءها لتظهرلنا على الشكل المراد إظهارها عليه؟</value>
   </data>
   <data name="ConfirmCancelBatch" xml:space="preserve">
     <value>هل أنت متأكد من أنك تريد الغاء عملية المسح ؟</value>
@@ -364,7 +364,7 @@
     <value>لا يوجد تحديثات.</value>
   </data>
   <data name="CheckingForUpdates" xml:space="preserve">
-    <value>يجري الفحص......</value>
+    <value>يجري الفحص...</value>
   </data>
   <data name="UpdateCheckDisabled" xml:space="preserve">
     <value>Update checking is disabled.</value>

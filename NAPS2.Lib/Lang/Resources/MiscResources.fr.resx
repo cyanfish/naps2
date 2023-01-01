@@ -16,7 +16,7 @@
     <value>Choisir un profil</value>
   </data>
   <data name="Clear" xml:space="preserve">
-    <value>Tout supprimer</value>
+    <value>Tout effacer</value>
   </data>
   <data name="ConfirmClearItems" xml:space="preserve">
     <value>Faut-il vraiment effacer {0} élément(s) ?</value>
@@ -25,7 +25,7 @@
     <value>Faut-il vraiment supprimer {0} élément(s) ?</value>
   </data>
   <data name="ConfirmDeleteMultipleProfiles" xml:space="preserve">
-    <value>Faut-il vraiment supprimer {0} profils ?</value>
+    <value>Faut-il vraiment supprimer {0} profil(s) ?</value>
   </data>
   <data name="ConfirmDeleteSingleProfile" xml:space="preserve">
     <value>Faut-il vraiment supprimer le profil « {0} » ?</value>
@@ -73,7 +73,7 @@
     <value>Fichier TIFF (*.tiff, *.tif)</value>
   </data>
   <data name="FileTypeJp2" xml:space="preserve">
-    <value>JPEG2000 File (*.jp2, *.jpx)</value>
+    <value>Fichier JPEG2000 (*.jp2, *.jpx)</value>
   </data>
   <data name="NameMissing" xml:space="preserve">
     <value>Nom manquant.</value>
@@ -190,7 +190,7 @@
     <value>de {0}</value>
   </data>
   <data name="BatchError" xml:space="preserve">
-    <value>Une erreur inconnue est survenue lors de l'acquisition par lot.</value>
+    <value>An unknown error ocurred during the batch scan.</value>
   </data>
   <data name="BatchStatusCancelled" xml:space="preserve">
     <value>Lot annulé.</value>
@@ -223,7 +223,7 @@
     <value>Enregistrement des acquisitions par lot...</value>
   </data>
   <data name="NoDuplexSupport" xml:space="preserve">
-    <value>Le scanner sélectionné ne gère pas le recto-verso. Si ce scanner est supposé le gérer, essayer d'utiliser un autre pilote.</value>
+    <value>Le scanner sélectionné ne gère pas le recto-verso. Si ce scanner est supposé le prendre en charge, essayer d'utiliser un autre pilote.</value>
   </data>
   <data name="ProgressFormat" xml:space="preserve">
     <value>{0} / {1}</value>
@@ -340,10 +340,10 @@
     <value>NAPS2 est gratuit, mais il est possible de faire un don.</value>
   </data>
   <data name="SaneNotAvailable" xml:space="preserve">
-    <value>Le pilote SANE n'est pas disponible. Merci d'installer les paquets requis:</value>
+    <value>Le pilote SANE n'est pas disponible. Merci d'installer les paquets requis :</value>
   </data>
   <data name="TesseractNotAvailable" xml:space="preserve">
-    <value>Le moteur OCR n'est pas disponible. Merci d'installer le paquet requis:</value>
+    <value>Le moteur OCR n'est pas disponible. Merci d'installer le paquet requis :</value>
   </data>
   <data name="DriverNotSupported" xml:space="preserve">
     <value>Le pilote sélectionné n'est pas pris en charge sur ce système.</value>
@@ -379,7 +379,7 @@
     <value>Une mise à jour est disponible.</value>
   </data>
   <data name="AuthError" xml:space="preserve">
-    <value>Une erreur est survenue en essayent d'autoriser.</value>
+    <value>Une erreur est survenue en essayant d'autoriser.</value>
   </data>
   <data name="UploadingEmail" xml:space="preserve">
     <value>Envoi du courriel...</value>

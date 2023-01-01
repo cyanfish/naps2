@@ -190,7 +190,7 @@
     <value>af {0}</value>
   </data>
   <data name="BatchError" xml:space="preserve">
-    <value>En ukendt fejl opstod under batch scanning.</value>
+    <value>An unknown error ocurred during the batch scan.</value>
   </data>
   <data name="BatchStatusCancelled" xml:space="preserve">
     <value>Batch annulleret.</value>

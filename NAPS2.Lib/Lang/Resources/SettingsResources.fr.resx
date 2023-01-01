@@ -61,10 +61,10 @@
     <value>Centré</value>
   </data>
   <data name="HorizontalAlign_Left" xml:space="preserve">
-    <value>Gauche</value>
+    <value>À gauche</value>
   </data>
   <data name="HorizontalAlign_Right" xml:space="preserve">
-    <value>Droite</value>
+    <value>À droite</value>
   </data>
   <data name="PageSizeUnit_Centimetre" xml:space="preserve">
     <value>cm</value>
@@ -154,9 +154,9 @@
     <value>Prédéfinie</value>
   </data>
   <data name="OcrMode_Fast" xml:space="preserve">
-    <value>Fast</value>
+    <value>Rapide</value>
   </data>
   <data name="OcrMode_Best" xml:space="preserve">
-    <value>Best</value>
+    <value>Meilleure</value>
   </data>
 </root>

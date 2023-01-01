@@ -16,7 +16,7 @@
     <value>Om</value>
   </data>
   <data name="CopyrightFormat" xml:space="preserve">
-    <value>Copyright {0} NAPS2 Contributors</value>
+    <value>Opphavsrett {0} NAPS2 bidragsytarar</value>
   </data>
   <data name="IconsFrom" xml:space="preserve">
     <value>Ikonar frå:</value>
@@ -73,7 +73,7 @@
     <value>Profilar</value>
   </data>
   <data name="Import" xml:space="preserve">
-    <value>Import</value>
+    <value>Importer</value>
   </data>
   <data name="SavePdf" xml:space="preserve">
     <value>Lagre PDF</value>
@@ -118,7 +118,7 @@
     <value>Gjer skarpare</value>
   </data>
   <data name="DocumentCorrection" xml:space="preserve">
-    <value>Document Correction</value>
+    <value>Dokumentretting</value>
   </data>
   <data name="Reset" xml:space="preserve">
     <value>Resett</value>
@@ -165,11 +165,17 @@
   <data name="Reverse" xml:space="preserve">
     <value>Reverser</value>
   </data>
+  <data name="ReverseAll" xml:space="preserve">
+    <value>Reverse All</value>
+  </data>
+  <data name="ReverseSelected" xml:space="preserve">
+    <value>Reverse Selected</value>
+  </data>
   <data name="Clear" xml:space="preserve">
     <value>Fjern</value>
   </data>
   <data name="ClearAll" xml:space="preserve">
-    <value>Clear All</value>
+    <value>Fjern alle</value>
   </data>
   <data name="Language" xml:space="preserve">
     <value>Språk</value>
@@ -186,26 +192,44 @@
   <data name="ZoomOut" xml:space="preserve">
     <value>Zoom ut</value>
   </data>
+  <data name="ZoomActual" xml:space="preserve">
+    <value>Zoom faktisk</value>
+  </data>
+  <data name="ScaleWithWindow" xml:space="preserve">
+    <value>Skaler med vindu</value>
+  </data>
   <data name="Save" xml:space="preserve">
-    <value>Save</value>
+    <value>Lagre</value>
+  </data>
+  <data name="SaveAll" xml:space="preserve">
+    <value>Save All</value>
+  </data>
+  <data name="SaveSelected" xml:space="preserve">
+    <value>Save Selected</value>
   </data>
   <data name="SaveAllAsPdf" xml:space="preserve">
-    <value>Save All as PDF</value>
+    <value>Lagre alle som PDF</value>
   </data>
   <data name="SaveSelectedAsPdf" xml:space="preserve">
-    <value>Save Selected as PDF</value>
+    <value>Lagre valde som PDF</value>
   </data>
   <data name="SaveAllAsImages" xml:space="preserve">
-    <value>Save All as Images</value>
+    <value>Lagre alle som bilder</value>
   </data>
   <data name="SaveSelectedAsImages" xml:space="preserve">
-    <value>Save Selected as Images</value>
+    <value>Lagre valde som bilde</value>
+  </data>
+  <data name="EmailAll" xml:space="preserve">
+    <value>Email All</value>
+  </data>
+  <data name="EmailSelected" xml:space="preserve">
+    <value>Email Selected</value>
   </data>
   <data name="EmailAllAsPdf" xml:space="preserve">
-    <value>Email All as PDF</value>
+    <value>Send alle som PDF</value>
   </data>
   <data name="EmailSelectedAsPdf" xml:space="preserve">
-    <value>Email Selected as PDF</value>
+    <value>Send valde som PDF i e-post</value>
   </data>
   <data name="EditProfileFormTitle" xml:space="preserve">
     <value>Profilsettingar</value>
@@ -220,10 +244,10 @@
     <value>TWAIN driver</value>
   </data>
   <data name="AppleDriver" xml:space="preserve">
-    <value>Apple Driver</value>
+    <value>Apple driver</value>
   </data>
   <data name="SaneDriver" xml:space="preserve">
-    <value>SANE Driver</value>
+    <value>SANE driver</value>
   </data>
   <data name="DeviceLabel" xml:space="preserve">
     <value>Skannar:</value>
@@ -267,6 +291,9 @@
   <data name="AutoSaveSettings" xml:space="preserve">
     <value>Settingar for autolagring</value>
   </data>
+  <data name="AutoSaveSettingsFormTitle" xml:space="preserve">
+    <value>Settingar for autolagring</value>
+  </data>
   <data name="Advanced" xml:space="preserve">
     <value>Avansert</value>
   </data>
@@ -286,7 +313,7 @@
     <value>NAPS2</value>
   </data>
   <data name="Naps2TitleFormat" xml:space="preserve">
-    <value>NAPS2 - {0}</value>
+    <value>NAPS2 – {0}</value>
   </data>
   <data name="Naps2FullName" xml:space="preserve">
     <value>Not Another PDF Scanner</value>
@@ -347,5 +374,320 @@
   </data>
   <data name="SelectAll" xml:space="preserve">
     <value>Vel alle</value>
+  </data>
+  <data name="Recover" xml:space="preserve">
+    <value>Hent tilbake</value>
+  </data>
+  <data name="NotNow" xml:space="preserve">
+    <value>Ikkje nå</value>
+  </data>
+  <data name="RecoverFormTitle" xml:space="preserve">
+    <value>Hent tilbake skanna bilde</value>
+  </data>
+  <data name="RecoverPrompt" xml:space="preserve">
+    <value>{0} bilde skanna på {1} ved {2} er kanskje ikkje lagra, men kan gjenopprettast. Vil du gjenoppretta dei?</value>
+  </data>
+  <data name="Placeholders" xml:space="preserve">
+    <value>Plassholdar</value>
+  </data>
+  <data name="SkipSavePrompt" xml:space="preserve">
+    <value>Hopp over lagre-spørsmål</value>
+  </data>
+  <data name="SinglePageFiles" xml:space="preserve">
+    <value>Enkelside filer</value>
+  </data>
+  <data name="EncryptPdf" xml:space="preserve">
+    <value>Krypter PDF</value>
+  </data>
+  <data name="Show" xml:space="preserve">
+    <value>Vis</value>
+  </data>
+  <data name="RestoreDefaults" xml:space="preserve">
+    <value>Hent standard</value>
+  </data>
+  <data name="PdfSettingsFormTitle" xml:space="preserve">
+    <value>PDF settingar</value>
+  </data>
+  <data name="AllowPrinting" xml:space="preserve">
+    <value>Tillat utskrift</value>
+  </data>
+  <data name="AllowFullQualityPrinting" xml:space="preserve">
+    <value>Tillat full kvalitet utskrift</value>
+  </data>
+  <data name="AllowDocumentModification" xml:space="preserve">
+    <value>Tillat dokumentmodifikasjon</value>
+  </data>
+  <data name="AllowDocumentAssembly" xml:space="preserve">
+    <value>Tillat dokumentsamansetting</value>
+  </data>
+  <data name="AllowContentCopying" xml:space="preserve">
+    <value>Tillat innhaldskopiering</value>
+  </data>
+  <data name="AllowContentCopyingForAccessibility" xml:space="preserve">
+    <value>Tillat innhaldskopiering for tilgjengelighet</value>
+  </data>
+  <data name="AllowAnnotations" xml:space="preserve">
+    <value>Tillat merknader</value>
+  </data>
+  <data name="AllowFormFilling" xml:space="preserve">
+    <value>Tillat formfylling</value>
+  </data>
+  <data name="DefaultFilePathLabel" xml:space="preserve">
+    <value>Standard fil-sti:</value>
+  </data>
+  <data name="FilePathLabel" xml:space="preserve">
+    <value>Fil-sti:</value>
+  </data>
+  <data name="TitleLabel" xml:space="preserve">
+    <value>Tittel:</value>
+  </data>
+  <data name="AuthorLabel" xml:space="preserve">
+    <value>Forfattar:</value>
+  </data>
+  <data name="SubjectLabel" xml:space="preserve">
+    <value>Emne:</value>
+  </data>
+  <data name="KeywordsLabel" xml:space="preserve">
+    <value>Stikkord:</value>
+  </data>
+  <data name="OwnerPasswordLabel" xml:space="preserve">
+    <value>Eigarpassord:</value>
+  </data>
+  <data name="UserPasswordLabel" xml:space="preserve">
+    <value>Brukarpassord:</value>
+  </data>
+  <data name="RememberTheseSettings" xml:space="preserve">
+    <value>Hugs desse settingane</value>
+  </data>
+  <data name="Metadata" xml:space="preserve">
+    <value>Metadata</value>
+  </data>
+  <data name="Encryption" xml:space="preserve">
+    <value>Kryptering</value>
+  </data>
+  <data name="Compatibility" xml:space="preserve">
+    <value>Kompatibilitet</value>
+  </data>
+  <data name="PlaceholdersFormTitle" xml:space="preserve">
+    <value>Plassholdar</value>
+  </data>
+  <data name="Year4Digit" xml:space="preserve">
+    <value>År</value>
+  </data>
+  <data name="Year2Digit" xml:space="preserve">
+    <value>År (00-99)</value>
+  </data>
+  <data name="Month2Digit" xml:space="preserve">
+    <value>Månad (01-12)</value>
+  </data>
+  <data name="Day2Digit" xml:space="preserve">
+    <value>Dag (01-31)</value>
+  </data>
+  <data name="Hour2Digit" xml:space="preserve">
+    <value>Time (0-23)</value>
+  </data>
+  <data name="Minute2Digit" xml:space="preserve">
+    <value>Minutt (00-59)</value>
+  </data>
+  <data name="Second2Digit" xml:space="preserve">
+    <value>Sekund (00-59)</value>
+  </data>
+  <data name="AutoIncrementing4Digit" xml:space="preserve">
+    <value>Auto-inkrementer nummer (4 siffer)</value>
+  </data>
+  <data name="AutoIncrementing3Digit" xml:space="preserve">
+    <value>Auto-inkrementer nummer (3 siffer)</value>
+  </data>
+  <data name="AutoIncrementing2Digit" xml:space="preserve">
+    <value>Auto-inkrementer nummer (2 siffer)</value>
+  </data>
+  <data name="AutoIncrementing1Digit" xml:space="preserve">
+    <value>Auto-incrementing number (1 digits)</value>
+  </data>
+  <data name="FileNameLabel" xml:space="preserve">
+    <value>Filnamn</value>
+  </data>
+  <data name="PreviewLabel" xml:space="preserve">
+    <value>Førehandsvising:</value>
+  </data>
+  <data name="JpegQualityHelp" xml:space="preserve">
+    <value>For høg JPEG kvalitet (80+), auk også bildekvalitet i profilen for å få best resultat.</value>
+  </data>
+  <data name="JpegQuality" xml:space="preserve">
+    <value>Jpeg-kvalitet</value>
+  </data>
+  <data name="TiffOptions" xml:space="preserve">
+    <value>Innstillingar for Tiff</value>
+  </data>
+  <data name="CompressionLabel" xml:space="preserve">
+    <value>Komprimering:</value>
+  </data>
+  <data name="ImageSettingsFormTitle" xml:space="preserve">
+    <value>Bildesettingar</value>
+  </data>
+  <data name="EmailSettingsFormTitle" xml:space="preserve">
+    <value>Epost-settingar</value>
+  </data>
+  <data name="Provider" xml:space="preserve">
+    <value>Leverandør</value>
+  </data>
+  <data name="Change" xml:space="preserve">
+    <value>Endre</value>
+  </data>
+  <data name="AttachmentNameLabel" xml:space="preserve">
+    <value>Vedleggsnamn:</value>
+  </data>
+  <data name="EmailProviderFormTitle" xml:space="preserve">
+    <value>Velg epost-leverandør</value>
+  </data>
+  <data name="AuthorizeFormTitle" xml:space="preserve">
+    <value>Autoriser</value>
+  </data>
+  <data name="WaitingForAuthorization" xml:space="preserve">
+    <value>Venter på autorisasjon...</value>
+  </data>
+  <data name="ErrorFormTitle" xml:space="preserve">
+    <value>Feil</value>
+  </data>
+  <data name="TechnicalDetails" xml:space="preserve">
+    <value>Tekniske detaljar</value>
+  </data>
+  <data name="PdfPasswordFormTitle" xml:space="preserve">
+    <value>Passord</value>
+  </data>
+  <data name="EncryptedFilePrompt" xml:space="preserve">
+    <value>The following file is encrypted and requires a password to open:</value>
+  </data>
+  <data name="PromptForFilePath" xml:space="preserve">
+    <value>Spør etter fil-sti</value>
+  </data>
+  <data name="OneFilePerPage" xml:space="preserve">
+    <value>Ei fil per side</value>
+  </data>
+  <data name="OneFilePerScan" xml:space="preserve">
+    <value>Ei fil per skann</value>
+  </data>
+  <data name="SeparateByPatchT" xml:space="preserve">
+    <value>Separate filer av Patch-T</value>
+  </data>
+  <data name="MoreInfo" xml:space="preserve">
+    <value>Meir informasjon</value>
+  </data>
+  <data name="ClearAfterSaving" xml:space="preserve">
+    <value>Fjern foto etter lagring</value>
+  </data>
+  <data name="PageSizeFormTitle" xml:space="preserve">
+    <value>Eigendefinert sidestorleik</value>
+  </data>
+  <data name="NameOptional" xml:space="preserve">
+    <value>Namn (valfri)</value>
+  </data>
+  <data name="Dimensions" xml:space="preserve">
+    <value>Dimensjonar</value>
+  </data>
+  <data name="WaitingForTwain" xml:space="preserve">
+    <value>Venter på at TWAIN blir ferdig...</value>
+  </data>
+  <data name="AdvancedProfileFormTitle" xml:space="preserve">
+    <value>Avanserte profilsettingar</value>
+  </data>
+  <data name="ImageQuality" xml:space="preserve">
+    <value>Bildekvalitet</value>
+  </data>
+  <data name="MaximumQuality" xml:space="preserve">
+    <value>Maksimum kvalitet (blir stor fil)</value>
+  </data>
+  <data name="BlankPages" xml:space="preserve">
+    <value>Tome sider</value>
+  </data>
+  <data name="ExcludeBlankPages" xml:space="preserve">
+    <value>Ikkje bruk tome sider</value>
+  </data>
+  <data name="WhiteThreshold" xml:space="preserve">
+    <value>Kvit-terskel</value>
+  </data>
+  <data name="CoverageThreshold" xml:space="preserve">
+    <value>Dekningsterskel</value>
+  </data>
+  <data name="PostProcessing" xml:space="preserve">
+    <value>Post-prosessering</value>
+  </data>
+  <data name="DeskewScannedPages" xml:space="preserve">
+    <value>Rett opp skanna sider</value>
+  </data>
+  <data name="BrightnessContrastAfterScan" xml:space="preserve">
+    <value>Juster lysstyrke/kontrast etter skanning</value>
+  </data>
+  <data name="OffsetWidth" xml:space="preserve">
+    <value>Offsett bredde basert på justering (WIA)</value>
+  </data>
+  <data name="StretchToPageSize" xml:space="preserve">
+    <value>Strekk til sidestorleik</value>
+  </data>
+  <data name="CropToPageSize" xml:space="preserve">
+    <value>Beskjær til sidestorleik</value>
+  </data>
+  <data name="FlipDuplexedPages" xml:space="preserve">
+    <value>Vend tosidige sider</value>
+  </data>
+  <data name="WiaVersionLabel" xml:space="preserve">
+    <value>Wia Version:</value>
+  </data>
+  <data name="TwainImplLabel" xml:space="preserve">
+    <value>Twain implementering:</value>
+  </data>
+  <data name="BatchScanFormTitle" xml:space="preserve">
+    <value>Multiskann</value>
+  </data>
+  <data name="PressStartWhenReady" xml:space="preserve">
+    <value>Trykk start når du er klar.</value>
+  </data>
+  <data name="ScanConfig" xml:space="preserve">
+    <value>Skann-konfigurasjon</value>
+  </data>
+  <data name="Output" xml:space="preserve">
+    <value>Data frå skannar</value>
+  </data>
+  <data name="ProfileLabel" xml:space="preserve">
+    <value>Profil:</value>
+  </data>
+  <data name="SingleScan" xml:space="preserve">
+    <value>Enkelt skann</value>
+  </data>
+  <data name="MultipleScansPrompt" xml:space="preserve">
+    <value>Fleire skann (spør mellom skann)</value>
+  </data>
+  <data name="MultipleScansDelay" xml:space="preserve">
+    <value>Fleire skann (fast opphald mellom skann)</value>
+  </data>
+  <data name="NumberOfScansLabel" xml:space="preserve">
+    <value>Tal på skann:</value>
+  </data>
+  <data name="TimeBetweenScansLabel" xml:space="preserve">
+    <value>Tid mellom skann (sekund):</value>
+  </data>
+  <data name="LoadIn" xml:space="preserve">
+    <value>Last inn bilde i NAPS2</value>
+  </data>
+  <data name="SaveToSingleFile" xml:space="preserve">
+    <value>Lagre til ei enkel fil</value>
+  </data>
+  <data name="SaveToMultipleFiles" xml:space="preserve">
+    <value>Lagre til fleire filer</value>
+  </data>
+  <data name="Start" xml:space="preserve">
+    <value>Start</value>
+  </data>
+  <data name="BatchPromptFormTitle" xml:space="preserve">
+    <value>Neste skann</value>
+  </data>
+  <data name="ReadyForScan" xml:space="preserve">
+    <value>Klar for skann {0}.</value>
+  </data>
+  <data name="OpenFolder" xml:space="preserve">
+    <value>Opne folder</value>
+  </data>
+  <data name="Tools" xml:space="preserve">
+    <value>Tools</value>
   </data>
 </root>

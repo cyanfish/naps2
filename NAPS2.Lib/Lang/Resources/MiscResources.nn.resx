@@ -73,7 +73,7 @@
     <value>TIFF fil (*.tiff, *.tif)</value>
   </data>
   <data name="FileTypeJp2" xml:space="preserve">
-    <value>JPEG2000 File (*.jp2, *.jpx)</value>
+    <value>JPEG2000 fil (*.jp2, *.jpx)</value>
   </data>
   <data name="NameMissing" xml:space="preserve">
     <value>Namn manglar.</value>
@@ -190,7 +190,7 @@
     <value>av {0}</value>
   </data>
   <data name="BatchError" xml:space="preserve">
-    <value>Ukjend feil ved gruppeskanning.</value>
+    <value>An unknown error ocurred during the batch scan.</value>
   </data>
   <data name="BatchStatusCancelled" xml:space="preserve">
     <value>Multiskann avbroten.</value>

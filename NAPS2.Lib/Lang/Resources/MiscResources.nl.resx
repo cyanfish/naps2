@@ -73,7 +73,7 @@
     <value>TIFF bestand (*.tiff, *.tif)</value>
   </data>
   <data name="FileTypeJp2" xml:space="preserve">
-    <value>JPEG2000 File (*.jp2, *.jpx)</value>
+    <value>JPEG2000 bestand(*.jp2, *.jpx)</value>
   </data>
   <data name="NameMissing" xml:space="preserve">
     <value>Naam ontbreekt.</value>
@@ -190,7 +190,7 @@
     <value>van {0}</value>
   </data>
   <data name="BatchError" xml:space="preserve">
-    <value>Er is een onbekende fout opgetreden tijdens het batch scannen.</value>
+    <value>An unknown error ocurred during the batch scan.</value>
   </data>
   <data name="BatchStatusCancelled" xml:space="preserve">
     <value>Batch geannuleerd.</value>

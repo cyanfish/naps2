@@ -165,6 +165,12 @@
   <data name="Reverse" xml:space="preserve">
     <value>Taaksepäin</value>
   </data>
+  <data name="ReverseAll" xml:space="preserve">
+    <value>Reverse All</value>
+  </data>
+  <data name="ReverseSelected" xml:space="preserve">
+    <value>Reverse Selected</value>
+  </data>
   <data name="Clear" xml:space="preserve">
     <value>Tyhjennä</value>
   </data>
@@ -186,8 +192,20 @@
   <data name="ZoomOut" xml:space="preserve">
     <value>Pienennä</value>
   </data>
+  <data name="ZoomActual" xml:space="preserve">
+    <value>Alkuperäiseen kokoon</value>
+  </data>
+  <data name="ScaleWithWindow" xml:space="preserve">
+    <value>Skaalaa ikkunan mukaan</value>
+  </data>
   <data name="Save" xml:space="preserve">
     <value>Save</value>
+  </data>
+  <data name="SaveAll" xml:space="preserve">
+    <value>Save All</value>
+  </data>
+  <data name="SaveSelected" xml:space="preserve">
+    <value>Save Selected</value>
   </data>
   <data name="SaveAllAsPdf" xml:space="preserve">
     <value>Save All as PDF</value>
@@ -200,6 +218,12 @@
   </data>
   <data name="SaveSelectedAsImages" xml:space="preserve">
     <value>Save Selected as Images</value>
+  </data>
+  <data name="EmailAll" xml:space="preserve">
+    <value>Email All</value>
+  </data>
+  <data name="EmailSelected" xml:space="preserve">
+    <value>Email Selected</value>
   </data>
   <data name="EmailAllAsPdf" xml:space="preserve">
     <value>Email All as PDF</value>
@@ -265,6 +289,9 @@
     <value>Salli automaattinen tallennus</value>
   </data>
   <data name="AutoSaveSettings" xml:space="preserve">
+    <value>Automaattisen tallennuksen asetukset</value>
+  </data>
+  <data name="AutoSaveSettingsFormTitle" xml:space="preserve">
     <value>Automaattisen tallennuksen asetukset</value>
   </data>
   <data name="Advanced" xml:space="preserve">
@@ -347,5 +374,320 @@
   </data>
   <data name="SelectAll" xml:space="preserve">
     <value>Valitse kaikki</value>
+  </data>
+  <data name="Recover" xml:space="preserve">
+    <value>Palauta</value>
+  </data>
+  <data name="NotNow" xml:space="preserve">
+    <value>Ei nyt</value>
+  </data>
+  <data name="RecoverFormTitle" xml:space="preserve">
+    <value>Palauta skannatut kuvat</value>
+  </data>
+  <data name="RecoverPrompt" xml:space="preserve">
+    <value>{0} kuva(a) skannattu {1} {2} ei ehkä ole tallennettu ja voidaan palauttaa. Haluatko palauttaa?</value>
+  </data>
+  <data name="Placeholders" xml:space="preserve">
+    <value>Paikkamerkit</value>
+  </data>
+  <data name="SkipSavePrompt" xml:space="preserve">
+    <value>Ohita talleta - kysymys</value>
+  </data>
+  <data name="SinglePageFiles" xml:space="preserve">
+    <value>Yhden sivun tiedostot</value>
+  </data>
+  <data name="EncryptPdf" xml:space="preserve">
+    <value>Salaa PDF</value>
+  </data>
+  <data name="Show" xml:space="preserve">
+    <value>Näytä</value>
+  </data>
+  <data name="RestoreDefaults" xml:space="preserve">
+    <value>Palauta oletusarvoihin</value>
+  </data>
+  <data name="PdfSettingsFormTitle" xml:space="preserve">
+    <value>PDF - asetukset</value>
+  </data>
+  <data name="AllowPrinting" xml:space="preserve">
+    <value>Salli tulostaminen</value>
+  </data>
+  <data name="AllowFullQualityPrinting" xml:space="preserve">
+    <value>Salli korkealaatuinen tulostus</value>
+  </data>
+  <data name="AllowDocumentModification" xml:space="preserve">
+    <value>Salli asiakirjan muokkaus</value>
+  </data>
+  <data name="AllowDocumentAssembly" xml:space="preserve">
+    <value>Salli asiakirjan kokoaminen</value>
+  </data>
+  <data name="AllowContentCopying" xml:space="preserve">
+    <value>Salli sisällön kopiointi</value>
+  </data>
+  <data name="AllowContentCopyingForAccessibility" xml:space="preserve">
+    <value>Salli sisällön kopioiminen helppokäyttötoimintoja varten</value>
+  </data>
+  <data name="AllowAnnotations" xml:space="preserve">
+    <value>Salli kommentit</value>
+  </data>
+  <data name="AllowFormFilling" xml:space="preserve">
+    <value>Salli lomakkeiden täyttäminen</value>
+  </data>
+  <data name="DefaultFilePathLabel" xml:space="preserve">
+    <value>Oletuspolku:</value>
+  </data>
+  <data name="FilePathLabel" xml:space="preserve">
+    <value>Tiedostopolku:</value>
+  </data>
+  <data name="TitleLabel" xml:space="preserve">
+    <value>Otsikko:</value>
+  </data>
+  <data name="AuthorLabel" xml:space="preserve">
+    <value>Tekijä:</value>
+  </data>
+  <data name="SubjectLabel" xml:space="preserve">
+    <value>Aihe:</value>
+  </data>
+  <data name="KeywordsLabel" xml:space="preserve">
+    <value>Avainsanat:</value>
+  </data>
+  <data name="OwnerPasswordLabel" xml:space="preserve">
+    <value>Omistajan salasana:</value>
+  </data>
+  <data name="UserPasswordLabel" xml:space="preserve">
+    <value>Käyttäjän salasana:</value>
+  </data>
+  <data name="RememberTheseSettings" xml:space="preserve">
+    <value>Muista asetukset</value>
+  </data>
+  <data name="Metadata" xml:space="preserve">
+    <value>Metatiedot</value>
+  </data>
+  <data name="Encryption" xml:space="preserve">
+    <value>Salaus</value>
+  </data>
+  <data name="Compatibility" xml:space="preserve">
+    <value>Yhteensopivuus</value>
+  </data>
+  <data name="PlaceholdersFormTitle" xml:space="preserve">
+    <value>Paikkamerkit</value>
+  </data>
+  <data name="Year4Digit" xml:space="preserve">
+    <value>Vuosi</value>
+  </data>
+  <data name="Year2Digit" xml:space="preserve">
+    <value>Vuosi (00-99)</value>
+  </data>
+  <data name="Month2Digit" xml:space="preserve">
+    <value>Kuukausi (01-12)</value>
+  </data>
+  <data name="Day2Digit" xml:space="preserve">
+    <value>Päivä (01-31)</value>
+  </data>
+  <data name="Hour2Digit" xml:space="preserve">
+    <value>Tunti (0-23)</value>
+  </data>
+  <data name="Minute2Digit" xml:space="preserve">
+    <value>Minuutti (00-59)</value>
+  </data>
+  <data name="Second2Digit" xml:space="preserve">
+    <value>Sekunti (00-59)</value>
+  </data>
+  <data name="AutoIncrementing4Digit" xml:space="preserve">
+    <value>Automaattinen lisäys (4 numeroa)</value>
+  </data>
+  <data name="AutoIncrementing3Digit" xml:space="preserve">
+    <value>Automaattinen lisäys (3 numeroa)</value>
+  </data>
+  <data name="AutoIncrementing2Digit" xml:space="preserve">
+    <value>Automaattinen lisäys (2 numeroa)</value>
+  </data>
+  <data name="AutoIncrementing1Digit" xml:space="preserve">
+    <value>Auto-incrementing number (1 digits)</value>
+  </data>
+  <data name="FileNameLabel" xml:space="preserve">
+    <value>Tiedoston nimi</value>
+  </data>
+  <data name="PreviewLabel" xml:space="preserve">
+    <value>Esikatsele:</value>
+  </data>
+  <data name="JpegQualityHelp" xml:space="preserve">
+    <value>Lisää myös kuvan laatua profiilissasi laadukkaita JPEG (80+) kuvia varten.</value>
+  </data>
+  <data name="JpegQuality" xml:space="preserve">
+    <value>Jpeg - laatu</value>
+  </data>
+  <data name="TiffOptions" xml:space="preserve">
+    <value>Tiff - vaihtoehdot</value>
+  </data>
+  <data name="CompressionLabel" xml:space="preserve">
+    <value>Pakkaus:</value>
+  </data>
+  <data name="ImageSettingsFormTitle" xml:space="preserve">
+    <value>Kuva-asetukset</value>
+  </data>
+  <data name="EmailSettingsFormTitle" xml:space="preserve">
+    <value>Sähköpostiasetukset</value>
+  </data>
+  <data name="Provider" xml:space="preserve">
+    <value>Palveluntarjoaja</value>
+  </data>
+  <data name="Change" xml:space="preserve">
+    <value>Muuta</value>
+  </data>
+  <data name="AttachmentNameLabel" xml:space="preserve">
+    <value>Liitteen nimi:</value>
+  </data>
+  <data name="EmailProviderFormTitle" xml:space="preserve">
+    <value>Valitse sähköpostin lähetystapa</value>
+  </data>
+  <data name="AuthorizeFormTitle" xml:space="preserve">
+    <value>Valtuuta</value>
+  </data>
+  <data name="WaitingForAuthorization" xml:space="preserve">
+    <value>Odotetaan valtuutusta...</value>
+  </data>
+  <data name="ErrorFormTitle" xml:space="preserve">
+    <value>Virhe</value>
+  </data>
+  <data name="TechnicalDetails" xml:space="preserve">
+    <value>Tekniset yksityiskohdat</value>
+  </data>
+  <data name="PdfPasswordFormTitle" xml:space="preserve">
+    <value>Salasana</value>
+  </data>
+  <data name="EncryptedFilePrompt" xml:space="preserve">
+    <value>The following file is encrypted and requires a password to open:</value>
+  </data>
+  <data name="PromptForFilePath" xml:space="preserve">
+    <value>Kysy tiedostopolkua</value>
+  </data>
+  <data name="OneFilePerPage" xml:space="preserve">
+    <value>Tiedosto joka sivusta</value>
+  </data>
+  <data name="OneFilePerScan" xml:space="preserve">
+    <value>Skannauksesta yksi tiedosto</value>
+  </data>
+  <data name="SeparateByPatchT" xml:space="preserve">
+    <value>Erota tiedostot Patch-T - koodilla</value>
+  </data>
+  <data name="MoreInfo" xml:space="preserve">
+    <value>Lisätietoja</value>
+  </data>
+  <data name="ClearAfterSaving" xml:space="preserve">
+    <value>Pyyhi kuvat tallennukset jälkeen</value>
+  </data>
+  <data name="PageSizeFormTitle" xml:space="preserve">
+    <value>Mukautettu sivun koko</value>
+  </data>
+  <data name="NameOptional" xml:space="preserve">
+    <value>Nimi (valinnainen)</value>
+  </data>
+  <data name="Dimensions" xml:space="preserve">
+    <value>Mittasuhteet</value>
+  </data>
+  <data name="WaitingForTwain" xml:space="preserve">
+    <value>Odotetaan TWAINin valmistumista...</value>
+  </data>
+  <data name="AdvancedProfileFormTitle" xml:space="preserve">
+    <value>Profiilin lisäasetukset</value>
+  </data>
+  <data name="ImageQuality" xml:space="preserve">
+    <value>Kuvan laatu</value>
+  </data>
+  <data name="MaximumQuality" xml:space="preserve">
+    <value>Korkein laatu (suuret tiedostot)</value>
+  </data>
+  <data name="BlankPages" xml:space="preserve">
+    <value>Tyhjät sivut</value>
+  </data>
+  <data name="ExcludeBlankPages" xml:space="preserve">
+    <value>Ohita tyhjät sivut</value>
+  </data>
+  <data name="WhiteThreshold" xml:space="preserve">
+    <value>Valkoisen raja-arvo</value>
+  </data>
+  <data name="CoverageThreshold" xml:space="preserve">
+    <value>Peitto</value>
+  </data>
+  <data name="PostProcessing" xml:space="preserve">
+    <value>Jälkikäsittely</value>
+  </data>
+  <data name="DeskewScannedPages" xml:space="preserve">
+    <value>Suorista skannatut sivut</value>
+  </data>
+  <data name="BrightnessContrastAfterScan" xml:space="preserve">
+    <value>Käytä kirkkautta/kontrastia skannauksen jälkeen</value>
+  </data>
+  <data name="OffsetWidth" xml:space="preserve">
+    <value>Siirtymän suurus kohdistuksen perusteella (WIA)</value>
+  </data>
+  <data name="StretchToPageSize" xml:space="preserve">
+    <value>Venytä sivun kokoon</value>
+  </data>
+  <data name="CropToPageSize" xml:space="preserve">
+    <value>Rajaa sivun kokoon</value>
+  </data>
+  <data name="FlipDuplexedPages" xml:space="preserve">
+    <value>Käännä kaksipuoleiset sivut</value>
+  </data>
+  <data name="WiaVersionLabel" xml:space="preserve">
+    <value>Wia Version:</value>
+  </data>
+  <data name="TwainImplLabel" xml:space="preserve">
+    <value>Twain - toteutus:</value>
+  </data>
+  <data name="BatchScanFormTitle" xml:space="preserve">
+    <value>Sarjaskannaus</value>
+  </data>
+  <data name="PressStartWhenReady" xml:space="preserve">
+    <value>Paina Aloita, kun olet vlamis.</value>
+  </data>
+  <data name="ScanConfig" xml:space="preserve">
+    <value>Skannausasetukset</value>
+  </data>
+  <data name="Output" xml:space="preserve">
+    <value>Tulos</value>
+  </data>
+  <data name="ProfileLabel" xml:space="preserve">
+    <value>Profiilit:</value>
+  </data>
+  <data name="SingleScan" xml:space="preserve">
+    <value>Yksittäisskannaus</value>
+  </data>
+  <data name="MultipleScansPrompt" xml:space="preserve">
+    <value>Monta skannausta (kysy skannausten välillä)</value>
+  </data>
+  <data name="MultipleScansDelay" xml:space="preserve">
+    <value>Monta skannausta (vakioviive skannausten välillä)</value>
+  </data>
+  <data name="NumberOfScansLabel" xml:space="preserve">
+    <value>Skannauksia:</value>
+  </data>
+  <data name="TimeBetweenScansLabel" xml:space="preserve">
+    <value>Aika skannausten välillä (sekuntia):</value>
+  </data>
+  <data name="LoadIn" xml:space="preserve">
+    <value>Lataa kuvia NAPS2:een</value>
+  </data>
+  <data name="SaveToSingleFile" xml:space="preserve">
+    <value>Tallenna yhteen tiedostoon</value>
+  </data>
+  <data name="SaveToMultipleFiles" xml:space="preserve">
+    <value>Tallenna useaan tiedostoon</value>
+  </data>
+  <data name="Start" xml:space="preserve">
+    <value>Aloita</value>
+  </data>
+  <data name="BatchPromptFormTitle" xml:space="preserve">
+    <value>Seuraava skannaus</value>
+  </data>
+  <data name="ReadyForScan" xml:space="preserve">
+    <value>Valmis skannaamaan {0}.</value>
+  </data>
+  <data name="OpenFolder" xml:space="preserve">
+    <value>Avaa kansio</value>
+  </data>
+  <data name="Tools" xml:space="preserve">
+    <value>Tools</value>
   </data>
 </root>

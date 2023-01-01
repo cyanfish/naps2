@@ -19,16 +19,16 @@
     <value>Neteja</value>
   </data>
   <data name="ConfirmClearItems" xml:space="preserve">
-    <value>Segur de voler buidar {0} pagina(s)?</value>
+    <value>Segur que voleu buidar {0} pàgines?</value>
   </data>
   <data name="ConfirmDeleteItems" xml:space="preserve">
-    <value>Esteu segur que voleu suprimir {0} element(s)?</value>
+    <value>Segur que voleu suprimir {0} element(s)?</value>
   </data>
   <data name="ConfirmDeleteMultipleProfiles" xml:space="preserve">
-    <value>Esteu segur que voleu suprimir {0} perfils?</value>
+    <value>Segur que voleu suprimir {0} perfils?</value>
   </data>
   <data name="ConfirmDeleteSingleProfile" xml:space="preserve">
-    <value>Esteu segur que voleu suprimir el perfil {0}?</value>
+    <value>Segur que voleu suprimir el perfil {0}?</value>
   </data>
   <data name="ConfirmOverwriteFile" xml:space="preserve">
     <value>El fitxer {0} ja existeix. Voleu sobreescriure'l?</value>
@@ -55,7 +55,7 @@
     <value>Metafitxer millorat (*.emf)</value>
   </data>
   <data name="FileTypeExif" xml:space="preserve">
-    <value>Exchangeable Image File (*.exif)</value>
+    <value>Fitxer d'intercanvi d'imatge (*.exif)</value>
   </data>
   <data name="FileTypeGif" xml:space="preserve">
     <value>GIF File (*.gif)</value>
@@ -190,7 +190,7 @@
     <value>de {0}</value>
   </data>
   <data name="BatchError" xml:space="preserve">
-    <value>S'ha produït un error desconegut en l'escaneig per lots.</value>
+    <value>An unknown error ocurred during the batch scan.</value>
   </data>
   <data name="BatchStatusCancelled" xml:space="preserve">
     <value>S'ha cancel·lat l'escaneig per lots.</value>
@@ -259,7 +259,7 @@
     <value>Imprimeix</value>
   </data>
   <data name="Copying" xml:space="preserve">
-    <value>S'està copiant......</value>
+    <value>S'està copiant...</value>
   </data>
   <data name="CopyProgress" xml:space="preserve">
     <value>Progrés de la còpia</value>
@@ -364,7 +364,7 @@
     <value>No hi ha actualitzacions disponibles.</value>
   </data>
   <data name="CheckingForUpdates" xml:space="preserve">
-    <value>S'està comprovant......</value>
+    <value>S'està comprovant...</value>
   </data>
   <data name="UpdateCheckDisabled" xml:space="preserve">
     <value>Update checking is disabled.</value>

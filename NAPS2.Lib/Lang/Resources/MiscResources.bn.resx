@@ -13,384 +13,384 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ChooseProfile" xml:space="preserve">
-    <value>Wybierz profil</value>
+    <value>Choose Profile</value>
   </data>
   <data name="Clear" xml:space="preserve">
-    <value>Wyczyść</value>
+    <value>Clear</value>
   </data>
   <data name="ConfirmClearItems" xml:space="preserve">
-    <value>Czy na pewno chcesz wyczyścić {0} element(y/ów)?</value>
+    <value>Are you sure you want to clear {0} item(s)?</value>
   </data>
   <data name="ConfirmDeleteItems" xml:space="preserve">
-    <value>Czy na pewno chcesz usunąć {0} element(y/ów)?</value>
+    <value>আপনি কি নিশ্চিত যে আপনি \"{0}\"টি জিনিসকে মুছে ফেলতে চান?</value>
   </data>
   <data name="ConfirmDeleteMultipleProfiles" xml:space="preserve">
-    <value>Czy na pewno chcesz usunąć {0} profile/profilów?</value>
+    <value>আপনি কি নিশ্চিত যে আপনি \"{0}\"টি প্রোফাইলকে মুছে ফেলতে চান?</value>
   </data>
   <data name="ConfirmDeleteSingleProfile" xml:space="preserve">
-    <value>Czy na pewno chcesz usunąć profil {0}?</value>
+    <value>আপনি কি নিশ্চিত \"{0}\" প্রোফাইলটি মুছে ফেলতে চান?</value>
   </data>
   <data name="ConfirmOverwriteFile" xml:space="preserve">
-    <value>Plik {0} już istnieje. Czy chcesz go zastąpić?</value>
+    <value>The file {0} already exists. Do you want to overwrite it?</value>
   </data>
   <data name="Delete" xml:space="preserve">
-    <value>Usuń</value>
+    <value>Delete</value>
   </data>
   <data name="DeviceNotFound" xml:space="preserve">
-    <value>Nie można odnaleźć wybranego skanera.</value>
+    <value>The selected scanner could not be found.</value>
   </data>
   <data name="DeviceOffline" xml:space="preserve">
-    <value>Wybrany skaner jest w trybie offline.</value>
+    <value>The selected scanner is offline.</value>
   </data>
   <data name="DontHavePermission" xml:space="preserve">
-    <value>Nie masz uprawnień do zapisywania plików we wskazanym położeniu.</value>
+    <value>You don't have permission to save files at this location.</value>
   </data>
   <data name="Error" xml:space="preserve">
-    <value>Błąd</value>
+    <value>Error</value>
   </data>
   <data name="FileTypeBmp" xml:space="preserve">
-    <value>Pliki bitmapowe (*.bmp)</value>
+    <value>Bitmap Files (*.bmp)</value>
   </data>
   <data name="FileTypeEmf" xml:space="preserve">
-    <value>Plik Enhanced Windows MetaFile (*.emf)</value>
+    <value>Enhanced Windows MetaFile (*.emf)</value>
   </data>
   <data name="FileTypeExif" xml:space="preserve">
-    <value>Plik Exchangeable Image File (*.exif)</value>
+    <value>Exchangeable Image File (*.exif)</value>
   </data>
   <data name="FileTypeGif" xml:space="preserve">
-    <value>Plik GIF (*.gif)</value>
+    <value>GIF File (*.gif)</value>
   </data>
   <data name="FileTypeJpeg" xml:space="preserve">
-    <value>Plik JPEG (*.jpg, *.jpeg)</value>
+    <value>JPEG File (*.jpg, *.jpeg)</value>
   </data>
   <data name="FileTypePdf" xml:space="preserve">
-    <value>Dokument PDF (*.pdf)</value>
+    <value>PDF Document (*.pdf)</value>
   </data>
   <data name="FileTypePng" xml:space="preserve">
-    <value>Plik PNG (*.png)</value>
+    <value>PNG File (*.png)</value>
   </data>
   <data name="FileTypeTiff" xml:space="preserve">
-    <value>Plik TIFF (*.tiff, *.tif)</value>
+    <value>TIFF File (*.tiff, *.tif)</value>
   </data>
   <data name="FileTypeJp2" xml:space="preserve">
-    <value>Plik JPEG2000 (*.jp2, *.jpx)</value>
+    <value>JPEG2000 File (*.jp2, *.jpx)</value>
   </data>
   <data name="NameMissing" xml:space="preserve">
-    <value>Brak nazwy.</value>
+    <value>Name missing.</value>
   </data>
   <data name="NAPS2" xml:space="preserve">
     <value>NAPS2</value>
   </data>
   <data name="NoDeviceSelected" xml:space="preserve">
-    <value>Nie wybrano urządzenia.</value>
+    <value>No device selected.</value>
   </data>
   <data name="NoDevicesFound" xml:space="preserve">
-    <value>Nie odnaleziono urządzenia skanującego.</value>
+    <value>No scanning device was found.</value>
   </data>
   <data name="OverwriteFile" xml:space="preserve">
-    <value>Nadpisz plik</value>
+    <value>Overwrite File</value>
   </data>
   <data name="PdfStatus" xml:space="preserve">
-    <value>{0} z {1}</value>
+    <value>{0} of {1}</value>
   </data>
   <data name="ScannedImage" xml:space="preserve">
-    <value>Zeskanowane obrazy</value>
+    <value>Scanned Image</value>
   </data>
   <data name="SelectProfileBeforeScan" xml:space="preserve">
-    <value>Wybierz profil przed naciśnięciem przycisku Skanuj.</value>
+    <value>Select a profile before clicking Scan.</value>
   </data>
   <data name="UnknownDriverError" xml:space="preserve">
-    <value>Wystąpił błąd w sterowniku skanowania.</value>
+    <value>স্ক্যানিং ড্রাইভারের সাথে একটি ত্রুটি ঘটেছে৷</value>
   </data>
   <data name="Version" xml:space="preserve">
-    <value>Wersja {0}</value>
+    <value>Version {0}</value>
   </data>
   <data name="EmailError" xml:space="preserve">
-    <value>Wystąpił błąd podczas wysyłania do wiadomości e-mail.</value>
+    <value>An error occurred while trying to send an email.</value>
   </data>
   <data name="InstallComplete" xml:space="preserve">
-    <value>Instalacja zakończona</value>
+    <value>Installation Complete</value>
   </data>
   <data name="InstallCompletePromptRestart" xml:space="preserve">
-    <value>Instalacja zakończona. Czy chcesz teraz uruchomić ponownie NAPS2?</value>
+    <value>Installation complete. Do you want to restart NAPS2 now?</value>
   </data>
   <data name="InstallFailed" xml:space="preserve">
-    <value>Instalacja zakończona niepowodzeniem.</value>
+    <value>Installation failed.</value>
   </data>
   <data name="InstallFailedTitle" xml:space="preserve">
-    <value>Instalacja nieudana</value>
+    <value>Installation Failed</value>
   </data>
   <data name="AllCount" xml:space="preserve">
-    <value>Wszystkie ({0})</value>
+    <value>All ({0})</value>
   </data>
   <data name="SelectedCount" xml:space="preserve">
-    <value>Zaznaczone ({0})</value>
+    <value>Selected ({0})</value>
   </data>
   <data name="EstimatedDownloadSize" xml:space="preserve">
-    <value>Przewidywany rozmiar do pobrania: {0} MB</value>
+    <value>Estimated download size: {0} MB</value>
   </data>
   <data name="FilesProgressFormat" xml:space="preserve">
-    <value>{0} / {1} plików</value>
+    <value>{0} / {1} files</value>
   </data>
   <data name="SizeProgress" xml:space="preserve">
     <value>{0} / {1} MB</value>
   </data>
   <data name="ImportErrorCouldNot" xml:space="preserve">
-    <value>Nie można zaimportować pliku '{0}'.</value>
+    <value>The file '{0}' could not be imported.</value>
   </data>
   <data name="ImportErrorNAPS2Pdf" xml:space="preserve">
-    <value>Nie można zaimportować pliku '{0}'. Tylko pliki PDF wygenerowane prez NAPS2 mogą być zaimportowane.</value>
+    <value>The file '{0}' could not be imported. Only PDF files generated by NAPS2 can be imported.</value>
   </data>
   <data name="DownloadError" xml:space="preserve">
-    <value>Błąd pobierania</value>
+    <value>Download Error</value>
   </data>
   <data name="FilesCouldNotBeDownloaded" xml:space="preserve">
-    <value>Nie można pobrać jednego lub więcej plików.</value>
+    <value>One or more files could not be downloaded.</value>
   </data>
   <data name="CustomPageSizeFormat" xml:space="preserve">
-    <value>Niestandardowy ({0} x {1} {2})</value>
+    <value>Custom ({0}x{1} {2})</value>
   </data>
   <data name="Scan" xml:space="preserve">
-    <value>Skanuj</value>
+    <value>Scan</value>
   </data>
   <data name="ConfirmResetImages" xml:space="preserve">
-    <value>Czy na pewno chcesz cofnąć zmiany w pliku/plikach {0}?</value>
+    <value>Are you sure you want undo your changes to {0} image(s)?</value>
   </data>
   <data name="ResetImage" xml:space="preserve">
-    <value>Zresetuj obraz</value>
+    <value>Reset Image</value>
   </data>
   <data name="ExitWithUnsavedChanges" xml:space="preserve">
-    <value>Masz niezapisane zmiany. Czy na pewno chcesz wyjść i odrzucić te zmiany?</value>
+    <value>You have unsaved changes. Are you sure you want to exit and discard those changes?</value>
   </data>
   <data name="ExitWithActiveOperations" xml:space="preserve">
-    <value>Operacja jest w toku. Czy na pewno chcesz zakończyć i anulować operację?</value>
+    <value>An operation is in progress. Are you sure you want to exit and cancel the operation?</value>
   </data>
   <data name="UnsavedChanges" xml:space="preserve">
-    <value>Niezapisane zmiany</value>
+    <value>Unsaved Changes</value>
   </data>
   <data name="ActiveOperations" xml:space="preserve">
-    <value>Operacja w toku</value>
+    <value>Operation in Progress</value>
   </data>
   <data name="ScanPageProgress" xml:space="preserve">
-    <value>Skanowanie strony {0}</value>
+    <value>Scanning page {0}</value>
   </data>
   <data name="NoFeederSupport" xml:space="preserve">
-    <value>Wybrany skaner nie obsługuje podajnika. Jeżeli twój skaner ma podajnik, spróbuj użyć innego sterownika.</value>
+    <value>The selected scanner does not support using a feeder. If your scanner does have a feeder, try using a different driver.</value>
   </data>
   <data name="NoPagesInFeeder" xml:space="preserve">
-    <value>Nie ma stron w podajniku.</value>
+    <value>No pages are in the feeder.</value>
   </data>
   <data name="PdfNoPermissionToExtractContent" xml:space="preserve">
-    <value>Nie masz zezwolenia na skopiowanie zawartości z pliku '{0}'.</value>
+    <value>You do not have permission to copy content from the file '{0}'.</value>
   </data>
   <data name="ErrorSaving" xml:space="preserve">
-    <value>Wystąpił błąd podczas próby zapisania pliku.</value>
+    <value>An error occurred when trying to save the file.</value>
   </data>
   <data name="OfN" xml:space="preserve">
-    <value>z {0}</value>
+    <value>of {0}</value>
   </data>
   <data name="BatchError" xml:space="preserve">
     <value>An unknown error ocurred during the batch scan.</value>
   </data>
   <data name="BatchStatusCancelled" xml:space="preserve">
-    <value>Anulowano przetwarzanie.</value>
+    <value>Batch cancelled.</value>
   </data>
   <data name="BatchStatusCancelling" xml:space="preserve">
-    <value>Anulowanie....</value>
+    <value>Cancelling....</value>
   </data>
   <data name="BatchStatusComplete" xml:space="preserve">
-    <value>Przetwarzanie wykonano pomyślnie.</value>
+    <value>Batch completed successfully.</value>
   </data>
   <data name="BatchStatusError" xml:space="preserve">
-    <value>Skanowanie wsadowe zatrzymane z powodu błędu.</value>
+    <value>Batch scan stopped due to error.</value>
   </data>
   <data name="BatchStatusPage" xml:space="preserve">
-    <value>Skanowanie strony {0}...</value>
+    <value>Scanning page {0}...</value>
   </data>
   <data name="BatchStatusScanPage" xml:space="preserve">
-    <value>Skanowana strona {0} (skanowanie {1})...</value>
+    <value>Scanning page {0} (scan {1})...</value>
   </data>
   <data name="BatchStatusWaitingForScan" xml:space="preserve">
-    <value>Oczekiwanie na skanowanie {0}...</value>
+    <value>Waiting for scan {0}...</value>
   </data>
   <data name="Cancel" xml:space="preserve">
-    <value>Anuluj</value>
+    <value>Cancel</value>
   </data>
   <data name="Close" xml:space="preserve">
-    <value>Zamknij</value>
+    <value>Close</value>
   </data>
   <data name="BatchStatusSaving" xml:space="preserve">
-    <value>Zapisywanie wyników przetwarzania...</value>
+    <value>Saving batch results...</value>
   </data>
   <data name="NoDuplexSupport" xml:space="preserve">
-    <value>Wybrany skaner nie obsługuje druku obustronnego. Jeśli twój skaner powinien wspierać druk obustronny, spróbuj użyć innego sterownika.</value>
+    <value>The selected scanner does not support using duplex. If your scanner is supposed to support duplex, try using a different driver.</value>
   </data>
   <data name="ProgressFormat" xml:space="preserve">
     <value>{0} / {1}</value>
   </data>
   <data name="ImportingFormat" xml:space="preserve">
-    <value>Importowanie {0}...</value>
+    <value>Importing {0}...</value>
   </data>
   <data name="ImportProgress" xml:space="preserve">
-    <value>Postęp importowania</value>
+    <value>Import Progress</value>
   </data>
   <data name="Recovering" xml:space="preserve">
-    <value>Odzyskiwanie...</value>
+    <value>Recovering...</value>
   </data>
   <data name="RecoveryProgress" xml:space="preserve">
-    <value>Postęp odzyskiwania</value>
+    <value>Recovery Progress</value>
   </data>
   <data name="SaveImages" xml:space="preserve">
-    <value>Zapisz obraz</value>
+    <value>Save Images</value>
   </data>
   <data name="SaveImagesProgress" xml:space="preserve">
-    <value>Postęp zapisywania obrazów</value>
+    <value>Save Images Progress</value>
   </data>
   <data name="SavePdf" xml:space="preserve">
-    <value>Zapisz PDF</value>
+    <value>Save PDF</value>
   </data>
   <data name="SavePdfProgress" xml:space="preserve">
-    <value>Zapisz postęp PDF</value>
+    <value>Save PDF Progress</value>
   </data>
   <data name="SavingFormat" xml:space="preserve">
-    <value>Zapisywanie {0}...</value>
+    <value>Saving {0}...</value>
   </data>
   <data name="Print" xml:space="preserve">
-    <value>Drukuj</value>
+    <value>Print</value>
   </data>
   <data name="Copying" xml:space="preserve">
-    <value>Kopiowanie...</value>
+    <value>Copying...</value>
   </data>
   <data name="CopyProgress" xml:space="preserve">
-    <value>Postęp kopiowania</value>
+    <value>Copy Progress</value>
   </data>
   <data name="Importing" xml:space="preserve">
-    <value>Importowanie...</value>
+    <value>Importing...</value>
   </data>
   <data name="EmailPdf" xml:space="preserve">
-    <value>Wyślij PDF</value>
+    <value>Email PDF</value>
   </data>
   <data name="EmailPdfProgress" xml:space="preserve">
-    <value>Postęp wysyłania PDF</value>
+    <value>Email PDF Progress</value>
   </data>
   <data name="AutoSaveError" xml:space="preserve">
-    <value>Wystąpił błąd podczas próby automatycznego zapisania.</value>
+    <value>An error occurred when trying to auto save.</value>
   </data>
   <data name="FileTypeAllFiles" xml:space="preserve">
-    <value>Wszystkie pliki</value>
+    <value>All Files</value>
   </data>
   <data name="FileTypeImageFiles" xml:space="preserve">
-    <value>Pliki obrazów</value>
+    <value>Image Files</value>
   </data>
   <data name="DeviceBusy" xml:space="preserve">
-    <value>Wybrany skaner jest zajęty.</value>
+    <value>The selected scanner is busy.</value>
   </data>
   <data name="DeviceCoverOpen" xml:space="preserve">
-    <value>Pokrywa skanera jest otwarta.</value>
+    <value>The scanner's cover is open.</value>
   </data>
   <data name="DevicePaperJam" xml:space="preserve">
-    <value>W skanerze zaciął się papier.</value>
+    <value>The scanner has a paper jam.</value>
   </data>
   <data name="DeviceWarmingUp" xml:space="preserve">
-    <value>Skaner się rozgrzewa.</value>
+    <value>The scanner is warming up.</value>
   </data>
   <data name="OcrUpdateAvailable" xml:space="preserve">
-    <value>Dostępna jest aktualizacja OCR.</value>
+    <value>An update to OCR is available.</value>
   </data>
   <data name="ImageSaved" xml:space="preserve">
-    <value>Zapisano obraz.</value>
+    <value>Image saved.</value>
   </data>
   <data name="ImagesSaved" xml:space="preserve">
-    <value>{0} obrazy/obrazów zapisano.</value>
+    <value>{0} images saved.</value>
   </data>
   <data name="PdfSaved" xml:space="preserve">
-    <value>Zapisano PDF.</value>
+    <value>PDF saved.</value>
   </data>
   <data name="NamedPageSizeFormat" xml:space="preserve">
-    <value>{0} ({1} x {2} {3})</value>
+    <value>{0} ({1}x{2} {3})</value>
   </data>
   <data name="ConfirmDelete" xml:space="preserve">
     <value>Are you sure you want to delete "{0}"?</value>
   </data>
   <data name="FileInUse" xml:space="preserve">
-    <value>Plik nie mógł zostać zastąpiony, ponieważ jest obecnie w użyciu.</value>
+    <value>The file could not be overwritten because it is currently in use.</value>
   </data>
   <data name="AutoDeskewing" xml:space="preserve">
-    <value>Prostowanie...</value>
+    <value>Deskewing...</value>
   </data>
   <data name="AutoDeskewProgress" xml:space="preserve">
-    <value>Postęp prostowania</value>
+    <value>Deskew Progress</value>
   </data>
   <data name="DownloadNeeded" xml:space="preserve">
-    <value>Potrzebne pobranie</value>
+    <value>Download Needed</value>
   </data>
   <data name="PdfImportComponentNeeded" xml:space="preserve">
-    <value>Do zaimportowania tego pliku PDF potrzebny jest dodatkowy składnik. Czy chcesz go teraz pobrać?</value>
+    <value>An additional component is needed to import this PDF file. Would you like to download it now?</value>
   </data>
   <data name="ConfirmCancelBatch" xml:space="preserve">
-    <value>Czy na pewno chcesz anulować skanowanie wsadowe?</value>
+    <value>Are you sure you want to cancel the batch scan?</value>
   </data>
   <data name="CancelBatch" xml:space="preserve">
-    <value>Anuluj przetwarzanie</value>
+    <value>Cancel Batch</value>
   </data>
   <data name="Donate" xml:space="preserve">
-    <value>Wspomóż</value>
+    <value>Donate</value>
   </data>
   <data name="DonatePrompt" xml:space="preserve">
-    <value>NAPS2 jest całkowicie bezpłatny. Rozważ przekazanie darowizny.</value>
+    <value>NAPS2 is completely free. Consider making a donation.</value>
   </data>
   <data name="SaneNotAvailable" xml:space="preserve">
-    <value>Sterownik SANE nie jest dostępny. Upewnij się, że zainstalowałeś wymagane pakiety:</value>
+    <value>The SANE driver is not available. Make sure to install the required packages:</value>
   </data>
   <data name="TesseractNotAvailable" xml:space="preserve">
-    <value>Silnik OCR nie jest dostępny. Upewnij się, że zainstalowałeś wymagany pakiet:</value>
+    <value>The OCR engine is not available. Make sure to install the required package:</value>
   </data>
   <data name="DriverNotSupported" xml:space="preserve">
-    <value>Wybrany sterownik nie jest obsługiwany w tym systemie.</value>
+    <value>The selected driver is not supported on this system.</value>
   </data>
   <data name="OcrProgress" xml:space="preserve">
-    <value>Postęp OCR</value>
+    <value>OCR Progress</value>
   </data>
   <data name="RunningOcr" xml:space="preserve">
-    <value>Uruchamianie OCR...</value>
+    <value>Running OCR...</value>
   </data>
   <data name="UpdateProgress" xml:space="preserve">
-    <value>Postęp aktualizacji</value>
+    <value>Update Progress</value>
   </data>
   <data name="Updating" xml:space="preserve">
-    <value>Aktualizacja...</value>
+    <value>Updating...</value>
   </data>
   <data name="NoUpdates" xml:space="preserve">
-    <value>Brak dostępnych aktualizacji.</value>
+    <value>No updates available.</value>
   </data>
   <data name="CheckingForUpdates" xml:space="preserve">
-    <value>Sprawdzanie...</value>
+    <value>Checking...</value>
   </data>
   <data name="UpdateCheckDisabled" xml:space="preserve">
-    <value>Sprawdzanie aktualizacji jest wyłączone.</value>
+    <value>Update checking is disabled.</value>
   </data>
   <data name="UpdateError" xml:space="preserve">
-    <value>Wystąpił błąd podczas próby zainstalowania aktualizacji.</value>
+    <value>An error occured when trying to install the update.</value>
   </data>
   <data name="Install" xml:space="preserve">
-    <value>Zainstaluj {0}</value>
+    <value>Install {0}</value>
   </data>
   <data name="UpdateAvailable" xml:space="preserve">
-    <value>Aktualizacja jest dostępna.</value>
+    <value>An update is available.</value>
   </data>
   <data name="AuthError" xml:space="preserve">
-    <value>Wystąpił błąd podczas próby autoryzacji.</value>
+    <value>An error occurred when trying to authorize.</value>
   </data>
   <data name="UploadingEmail" xml:space="preserve">
-    <value>Przesyłanie wiadomości e-mail...</value>
+    <value>Uploading email...</value>
   </data>
   <data name="ErrorEmailing" xml:space="preserve">
-    <value>Wystąpił błąd podczas próby wysłania e-maila.</value>
+    <value>An error occurred when trying to send the email.</value>
   </data>
   <data name="ScanProgressPage" xml:space="preserve">
-    <value>Skanowanie strony {0}...</value>
+    <value>Scanning page {0}...</value>
   </data>
   <data name="AcquiringData" xml:space="preserve">
-    <value>Pozyskiwanie danych...</value>
+    <value>তথ্য সংগ্রহ করা হচ্ছে...</value>
   </data>
 </root>

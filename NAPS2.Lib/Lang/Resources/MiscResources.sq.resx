@@ -190,7 +190,7 @@
     <value>nga {0}</value>
   </data>
   <data name="BatchError" xml:space="preserve">
-    <value>Ndodhi një gabim i panjohur gjatë skanimit në grup.</value>
+    <value>An unknown error ocurred during the batch scan.</value>
   </data>
   <data name="BatchStatusCancelled" xml:space="preserve">
     <value>Grupi u anulua.</value>

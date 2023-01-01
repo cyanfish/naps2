@@ -28,45 +28,51 @@
     <value>Nenhum scanner foi encontrado.</value>
   </data>
   <data name="UnknownDriverError" xml:space="preserve">
-    <value>Ocorreu um erro com o driver do scanner.</value>
+    <value>Ocorreu um erro com o controlador de digitalização.</value>
   </data>
   <data name="Version" xml:space="preserve">
     <value>Versão {0}</value>
   </data>
   <data name="ImportErrorCouldNot" xml:space="preserve">
-    <value>The file '{0}' could not be imported.</value>
+    <value>O ficheiro \"{0}\" não pôde ser importado.</value>
   </data>
   <data name="NoFeederSupport" xml:space="preserve">
-    <value>The selected scanner does not support using a feeder. If your scanner does have a feeder, try using a different driver.</value>
+    <value>O scanner escolhido aparentemente não possui um alimentador automático. Se o seu scanner possui um alimentador automático, tente usar um controlador diferente.</value>
   </data>
   <data name="NoPagesInFeeder" xml:space="preserve">
     <value>Não existem folhas no alimentador.</value>
   </data>
   <data name="PdfNoPermissionToExtractContent" xml:space="preserve">
-    <value>You do not have permission to copy content from the file '{0}'.</value>
+    <value>Não tem permissão para copiar conteúdo do ficheiro \"{0}\".</value>
   </data>
   <data name="NoDuplexSupport" xml:space="preserve">
-    <value>The selected scanner does not support using duplex. If your scanner is supposed to support duplex, try using a different driver.</value>
+    <value>O scanner escolhido aparentemente não possui frente e verso automático. Se o seu scanner possui frente e verso automático, tente usar um controlador diferente.</value>
   </data>
   <data name="DeviceBusy" xml:space="preserve">
-    <value>The selected scanner is busy.</value>
+    <value>O scanner escolhido está ocupado.</value>
   </data>
   <data name="DeviceCoverOpen" xml:space="preserve">
-    <value>The scanner's cover is open.</value>
+    <value>A tampa do scanner está aberta.</value>
   </data>
   <data name="DevicePaperJam" xml:space="preserve">
-    <value>The scanner has a paper jam.</value>
+    <value>O scanner está com papel encravado.</value>
   </data>
   <data name="DeviceWarmingUp" xml:space="preserve">
-    <value>The scanner is warming up.</value>
+    <value>O scanner está a aquecer.</value>
   </data>
   <data name="SaneNotAvailable" xml:space="preserve">
-    <value>The SANE driver is not available. Make sure to install the required packages:</value>
+    <value>O controlador SANE não está disponível. Certifique-se que instala os pacotes necessários:</value>
   </data>
   <data name="TesseractNotAvailable" xml:space="preserve">
-    <value>The OCR engine is not available. Make sure to install the required package:</value>
+    <value>O motor do OCR não está disponível. Certifique-se que instala o pacote necessário:</value>
   </data>
   <data name="DriverNotSupported" xml:space="preserve">
-    <value>The selected driver is not supported on this system.</value>
+    <value>O controlador escolhido não é suportado neste sistema.</value>
+  </data>
+  <data name="OcrError" xml:space="preserve">
+    <value>An error occurred running OCR.</value>
+  </data>
+  <data name="OcrTimeout" xml:space="preserve">
+    <value>The OCR operation timed out.</value>
   </data>
 </root>

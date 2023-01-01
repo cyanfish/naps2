@@ -73,7 +73,7 @@
     <value>TIFF Dosyası (*.tiff, *.tif)</value>
   </data>
   <data name="FileTypeJp2" xml:space="preserve">
-    <value>JPEG2000 File (*.jp2, *.jpx)</value>
+    <value>JPEG2000 Dosyası (*.jp2, *.jpx)</value>
   </data>
   <data name="NameMissing" xml:space="preserve">
     <value>Ad eksik.</value>
@@ -190,7 +190,7 @@
     <value> / {0}</value>
   </data>
   <data name="BatchError" xml:space="preserve">
-    <value>Yığın tarama sırasında bilinmeyen bir hata oluştu.</value>
+    <value>An unknown error ocurred during the batch scan.</value>
   </data>
   <data name="BatchStatusCancelled" xml:space="preserve">
     <value>Yığın iptal edildi.</value>
