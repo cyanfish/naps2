@@ -9,7 +9,6 @@
         <Optimize>true</Optimize>
 
         <Title>NAPS2.Images</Title>
-        <Copyright>Copyright 2022 Ben Olden-Cooligan</Copyright>
     </PropertyGroup>
 
     <ItemGroup>

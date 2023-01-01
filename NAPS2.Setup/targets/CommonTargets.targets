@@ -3,6 +3,7 @@
     <PropertyGroup>
         <LangVersion>11</LangVersion>
         <EnablePreviewFeatures>true</EnablePreviewFeatures>
+        <Copyright>Copyright 2009-2023 NAPS2 Contributors</Copyright>
     </PropertyGroup>
 
     <Import Project="VersionTargets.targets" />

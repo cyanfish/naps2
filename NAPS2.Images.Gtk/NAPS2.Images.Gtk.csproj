@@ -7,7 +7,6 @@
         <RootNamespace>NAPS2.Images.Gtk</RootNamespace>
 
         <Title>NAPS2.Images.Gtk</Title>
-        <Copyright>Copyright 2022 Ben Olden-Cooligan</Copyright>
     </PropertyGroup>
 
     <ItemGroup>

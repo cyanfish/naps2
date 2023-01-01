@@ -8,7 +8,6 @@
         <RootNamespace>NAPS2.Images.Gdi</RootNamespace>
 
         <Title>NAPS2.Images.Gdi</Title>
-        <Copyright>Copyright 2022 Ben Olden-Cooligan</Copyright>
     </PropertyGroup>
 
     <ItemGroup>
