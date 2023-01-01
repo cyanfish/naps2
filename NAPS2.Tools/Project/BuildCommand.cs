@@ -14,7 +14,15 @@ public class BuildCommand : ICommand<BuildOptions>
         {
             var config = GetConfig(target.BuildType);
             Output.Info($"Building: {config}");
-            Cli.Run("dotnet", $"build -c {config}");
+            try
+            {
+                Cli.Run("dotnet", $"build -c {config}");
+            }
+            catch (Exception)
+            {
+                Output.Info("Build failed, retrying once");
+                Cli.Run("dotnet", $"build -c {config}");
+            }
             Output.OperationEnd($"Built: {config}");
         }
         return 0;
