@@ -60,7 +60,7 @@ namespace NAPS2.Lang.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Black &amp; White.
+        ///   Looks up a localized string similar to Black and White.
         /// </summary>
         internal static string BitDepth_1BlackAndWhite {
             get {
