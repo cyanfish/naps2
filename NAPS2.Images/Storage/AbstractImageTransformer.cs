@@ -52,6 +52,10 @@ public abstract class AbstractImageTransformer<TImage> where TImage : IMemoryIma
 
     private TImage PerformTransform(TImage image, CorrectionTransform transform)
     {
+        if (image.LogicalPixelFormat == ImagePixelFormat.BW1)
+        {
+            return image;
+        }
         // TODO: Include deskew?
         // TODO: Add border detection/removal? After deskew.
         var stopwatch = Stopwatch.StartNew();
