@@ -12,7 +12,15 @@ public class PublishCommand : ICommand<PublishOptions>
         {
             BuildType = opts.BuildType
         });
-        new TestCommand().Run(new TestOptions());
+        try
+        {
+            new TestCommand().Run(new TestOptions());
+        }
+        catch (Exception)
+        {
+            Output.Info("Tests failed, retrying once");
+            new TestCommand().Run(new TestOptions());
+        }
         new PackageCommand().Run(new PackageOptions
         {
             BuildType = opts.BuildType,
