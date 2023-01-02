@@ -46,6 +46,7 @@ public class WinFormsListView<T> : IListView<T> where T : notnull
             _view.SelectedIndexChanged += OnSelectedIndexChanged;
         }
 
+        _view.AllowDrop = _behavior.AllowDragDrop;
         _view.ItemActivate += OnItemActivate;
         _view.ItemDrag += OnItemDrag;
         _view.DragEnter += OnDragEnter;
