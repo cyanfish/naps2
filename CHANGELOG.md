@@ -1,6 +1,6 @@
 Changes in 7.0b1:
 - Most NAPS2 code has been rewritten. Things should mostly look the same but under the hood there are many differences.
-    - [Beta feedback thread]()
+    - [Beta feedback thread](https://github.com/cyanfish/naps2/discussions/35)
 - Added Mac support
     - Supports macOS 10.15 and later
     - The Universal download should work for all users. Or you can use the Intel/Apple Silicon downloads for a smaller download/install size if you know which one your Mac has.
@@ -42,7 +42,7 @@ Changes in 7.0b1:
 - The AppData format for config.xml and Tesseract files has changed (will be automatically migrated)
 - Improved icon quality
 - Translations have been moved to Crowdin
-    - See translate.naps2.com
+    - See [translate.naps2.com](https://translate.naps2.com)
 - Various performance and reliability improvements
 - Bug fixes
 
