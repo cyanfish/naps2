@@ -189,6 +189,20 @@ public class PdfExporterTests : ContextualTests
 
     [Theory]
     [ClassData(typeof(StorageAwareTestData))]
+    public async Task ExportUnicodePath(StorageConfig storageConfig)
+    {
+        storageConfig.Apply(this);
+
+        var filePath = Path.Combine(FolderPath, "מְחַבֵּר.pdf");
+        using var image = ScanningContext.CreateProcessedImage(LoadImage(ImageResources.dog));
+
+        await _exporter.Export(filePath, new[] { image }, new PdfExportParams());
+
+        PdfAsserts.AssertImages(filePath, ImageResources.dog);
+    }
+
+    [Theory]
+    [ClassData(typeof(StorageAwareTestData))]
     public async Task ExportEncrypted(StorageConfig storageConfig)
     {
         storageConfig.Apply(this);
