@@ -51,6 +51,20 @@ public class PdfImportTests : ContextualTests
 
     [Theory]
     [ClassData(typeof(StorageAwareTestData))]
+    public async Task ImportNaps2PdfWithUnicodePath(StorageConfig storageConfig)
+    {
+        storageConfig.Apply(this);
+
+        var importPath = CopyResourceToFile(PdfResources.image_pdf, "מְחַבֵּר.pdf");
+        var images = await _importer.Import(importPath).ToListAsync();
+
+        Assert.Single(images);
+        storageConfig.AssertJpegStorage(images[0].Storage);
+        ImageAsserts.Similar(ImageResources.dog, images[0]);
+    }
+
+    [Theory]
+    [ClassData(typeof(StorageAwareTestData))]
     public async Task ImportNaps2PngPdf(StorageConfig storageConfig)
     {
         storageConfig.Apply(this);

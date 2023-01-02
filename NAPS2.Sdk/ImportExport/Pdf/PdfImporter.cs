@@ -91,9 +91,9 @@ public class PdfImporter : IPdfImporter
                 {
                     if (!File.Exists(filePath))
                     {
-                        throw new FileNotFoundException($"Could not find pdf file '{filePath}'.");
+                        throw new FileNotFoundException($"Could not find pdf file: '{filePath}'");
                     }
-                    throw new IOException($"Error reading pdf file '{filePath}'.");
+                    throw new IOException($"Could not open pdf file for reading: '{filePath}'");
                 }
             }
             return doc;

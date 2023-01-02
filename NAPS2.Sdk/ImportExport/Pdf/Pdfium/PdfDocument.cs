@@ -8,12 +8,25 @@ public class PdfDocument : NativePdfiumObject
 {
     public static PdfDocument Load(string path, string? password = null)
     {
-        return new PdfDocument(Native.FPDF_LoadDocument(path, password), PlatformCompat.System.FileReadLock(path));
+        return new PdfDocument(
+            Native.FPDF_LoadDocument(ToUtf(path)!, ToUtf(password)),
+            PlatformCompat.System.FileReadLock(path));
     }
 
     public static PdfDocument Load(IntPtr buffer, int length, string? password = null)
     {
-        return new PdfDocument(Native.FPDF_LoadMemDocument(buffer, length, password));
+        return new PdfDocument(
+            Native.FPDF_LoadMemDocument(buffer, length, ToUtf(password)));
+    }
+
+    // TODO: If we upgrade to .NET Framework 4.7 we can use [MarshalAs(UnmanagedType.LPUTF8Str)]
+    private static byte[]? ToUtf(string? str)
+    {
+        if (str == null)
+        {
+            return null;
+        }
+        return Encoding.UTF8.GetBytes(str);
     }
 
     public static PdfDocument CreateNew()

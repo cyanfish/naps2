@@ -61,13 +61,9 @@ public class PdfiumNativeLibrary : Unmanaged.NativeLibrary
 
     public delegate IntPtr FPDF_CreateNewDocument_delegate();
 
-    public delegate IntPtr FPDF_LoadDocument_delegate([MarshalAs(UnmanagedType.LPStr)] string filePath,
-        [MarshalAs(UnmanagedType.LPStr)]
-        string? password);
+    public delegate IntPtr FPDF_LoadDocument_delegate(byte[] filePath, byte[]? password);
 
-    public delegate IntPtr FPDF_LoadMemDocument_delegate(IntPtr buffer, int size,
-        [MarshalAs(UnmanagedType.LPStr)]
-        string? password);
+    public delegate IntPtr FPDF_LoadMemDocument_delegate(IntPtr buffer, int size, byte[]? password);
 
     public delegate void FPDF_CloseDocument_delegate(IntPtr document);
 
