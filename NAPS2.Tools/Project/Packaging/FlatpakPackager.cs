@@ -67,12 +67,16 @@ public static class FlatpakPackager
 
         // Generate a temp repo with the package info
         Output.Verbose("Creating flatpak repo");
-        var repoDir = Path.Combine(packageDir, "repo");
-        Cli.Run("flatpak", $"build-export --arch {arch} {repoDir} {buildDir}");
+        var repoDir = N2Config.FlatpakRepo;
+        repoDir = string.IsNullOrEmpty(repoDir) ? Path.Combine(packageDir, "repo") : repoDir;
+        var branch = version.Contains('b') ? "beta" : "stable";
+        var gpg = N2Config.FlatpakGpgKey;
+        var gpgArgs = string.IsNullOrEmpty(gpg) ? "" : $"--gpg-sign={gpg}";
+        Cli.Run("flatpak", $"build-export {gpgArgs} --arch {arch} {repoDir} {buildDir} {branch}");
 
         // Generate a single-file bundle from the temp repo
         Output.Verbose("Building flatpak bundle");
-        Cli.Run("flatpak", $"build-bundle --arch {arch} {repoDir} {bundlePath} com.naps2.Naps2");
+        Cli.Run("flatpak", $"build-bundle {gpgArgs} --arch {arch} {repoDir} {bundlePath} com.naps2.Naps2 {branch} --runtime-repo=https://flathub.org/repo/flathub.flatpakrepo");
 
         Output.OperationEnd($"Packaged flatpak: {bundlePath}");
     }
