@@ -2,7 +2,7 @@ namespace NAPS2.Images.Bitwise;
 
 public class PixelInfo
 {
-    public PixelInfo(int width, int height, SubPixelType subPixelType, int stride = -1)
+    public PixelInfo(int width, int height, SubPixelType subPixelType, int stride = -1, int strideAlign = -1)
     {
         var minStride = (width * subPixelType.BitsPerPixel + 7) / 8;
         if (stride == -1)
@@ -12,6 +12,10 @@ public class PixelInfo
         else if (stride < minStride)
         {
             throw new ArgumentException("Invalid stride");
+        }
+        if (strideAlign > 0)
+        {
+            stride = (stride + (strideAlign - 1)) / strideAlign * strideAlign;
         }
         Width = width;
         Height = height;

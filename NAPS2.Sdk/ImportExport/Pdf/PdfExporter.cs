@@ -531,7 +531,8 @@ public class PdfExporter : IPdfExporter
                 ImagePixelFormat.RGB24 or ImagePixelFormat.Gray8 => SubPixelType.Bgr,
                 _ => throw new InvalidOperationException("Expected 8/24/32 bit bitmap")
             };
-            var dstPixelInfo = new PixelInfo(_image.Width, _image.Height, subPixelType) { InvertY = true };
+            var dstPixelInfo =
+                new PixelInfo(_image.Width, _image.Height, subPixelType, strideAlign: 4) { InvertY = true };
             ms.SetLength(dstPixelInfo.Length);
             new CopyBitwiseImageOp().Perform(_image, ms.GetBuffer(), dstPixelInfo);
         }
@@ -540,7 +541,8 @@ public class PdfExporter : IPdfExporter
         {
             if (_image.LogicalPixelFormat != ImagePixelFormat.BW1)
                 throw new InvalidOperationException("Expected 1 bit bitmap");
-            var dstPixelInfo = new PixelInfo(_image.Width, _image.Height, SubPixelType.Bit) { InvertY = true };
+            var dstPixelInfo =
+                new PixelInfo(_image.Width, _image.Height, SubPixelType.Bit) { InvertY = true };
             ms.SetLength(dstPixelInfo.Length);
             new CopyBitwiseImageOp().Perform(_image, ms.GetBuffer(), dstPixelInfo);
         }

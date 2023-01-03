@@ -63,6 +63,23 @@ public class PdfExporterTests : ContextualTests
 
     [Theory]
     [ClassData(typeof(StorageAwareTestData))]
+    public async Task ExportUnalignedPngImage(StorageConfig storageConfig)
+    {
+        storageConfig.Apply(this);
+
+        var filePath = Path.Combine(FolderPath, "test.pdf");
+        // Width is 99 (not divisible by 4)
+        var image = ScanningContext.CreateProcessedImage(
+            LoadImage(ImageResources.dog_99w), BitDepth.Color, true, -1);
+
+        await _exporter.Export(filePath, new[] { image }, new PdfExportParams());
+
+        PdfAsserts.AssertImages(filePath, ImageResources.dog_99w);
+        PdfAsserts.AssertImageFilter(filePath, 0, "FlateDecode");
+    }
+
+    [Theory]
+    [ClassData(typeof(StorageAwareTestData))]
     public async Task ExportAlphaImage(StorageConfig storageConfig)
     {
         storageConfig.Apply(this);
