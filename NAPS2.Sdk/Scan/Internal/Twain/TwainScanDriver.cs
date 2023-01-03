@@ -1,5 +1,4 @@
 ﻿#if !MAC
-using System.Runtime.InteropServices;
 using System.Threading;
 
 namespace NAPS2.Scan.Internal.Twain;
@@ -17,18 +16,24 @@ internal class TwainScanDriver : IScanDriver
         _scanningContext = scanningContext;
     }
 
-    public async Task<List<ScanDevice>> GetDeviceList(ScanOptions options)
+    public Task<List<ScanDevice>> GetDeviceList(ScanOptions options)
     {
-        var controller = GetSessionController(options);
-        return await controller.GetDeviceList(options);
+        return Task.Run(async () =>
+        {
+            var controller = GetSessionController(options);
+            return await controller.GetDeviceList(options);
+        });
     }
 
-    public async Task Scan(ScanOptions options, CancellationToken cancelToken, IScanEvents scanEvents,
+    public Task Scan(ScanOptions options, CancellationToken cancelToken, IScanEvents scanEvents,
         Action<IMemoryImage> callback)
     {
-        var controller = GetSessionController(options);
-        using var state = new TwainImageProcessor(_scanningContext, options, scanEvents, callback);
-        await controller.StartScan(options, state, cancelToken);
+        return Task.Run(async () =>
+        {
+            var controller = GetSessionController(options);
+            using var state = new TwainImageProcessor(_scanningContext, options, scanEvents, callback);
+            await controller.StartScan(options, state, cancelToken);
+        });
     }
 
     private ITwainSessionController GetSessionController(ScanOptions options)
