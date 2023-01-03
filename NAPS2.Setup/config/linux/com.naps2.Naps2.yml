@@ -53,6 +53,29 @@ modules:
         url: https://gitlab.com/sane-project/backends
         tag: 1.1.1
         commit: 332edc8b7ce642bb06132cf204a8c2dd57720bce
+  - name: avahi
+    buildsystem: autotools
+    config-opts:
+      - --with-distro=debian
+      - --disable-libevent
+      - --disable-qt4
+      - --disable-qt5
+      - --disable-libdaemon
+      - --disable-python
+      - --disable-mono
+      - --disable-manpages
+    sources:
+      - type: git
+        url: https://github.com/lathiat/avahi
+        tag: v0.8
+        commit: f060abee2807c943821d88839c013ce15db17b58
+  - name: sane-airscan
+    buildsystem: meson
+    sources:
+      - type: git
+        url: https://github.com/alexpevzner/sane-airscan
+        tag: 0.99.27
+        commit: 053f5654cd4d16f077fe5cb40d32004aaa321462
   - name: main
     buildsystem: simple
     build-options:
