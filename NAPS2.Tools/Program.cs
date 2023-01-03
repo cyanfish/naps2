@@ -37,6 +37,7 @@ public static class Program
             .Add<PushTemplatesOptions, PushTemplatesCommand>()
             .Add<PullTranslationsOptions, PullTranslationsCommand>()
             .Add<SetVersionOptions, SetVersionCommand>()
+            .Add<WebsiteUpdateOptions, WebsiteUpdateCommand>()
             .Add<SaneOptsOptions, SaneOptsCommand>();
 
         var result = Parser.Default.ParseArguments(args, commands.OptionTypes);

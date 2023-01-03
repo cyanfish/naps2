@@ -31,7 +31,7 @@ public static class ProjectHelper
 
     public static string GetPackagePath(string ext, Platform platform, string? version = null)
     {
-        version ??= GetCurrentVersion();
+        version ??= GetCurrentVersionName();
         var path = Path.Combine(Paths.Publish, version, $"naps2-{version}-{platform.PackageName()}.{ext}");
         Directory.CreateDirectory(Path.GetDirectoryName(path)!);
         return path;
