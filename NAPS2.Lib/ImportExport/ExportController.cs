@@ -29,28 +29,29 @@ public class ExportController : IExportController
     public async Task<bool> SavePdf(ICollection<UiImage> uiImages, ISaveNotify notify)
     {
         using var images = GetSnapshots(uiImages);
-        if (images.Any())
+        if (!images.Any())
         {
-            string savePath;
+            return false;
+        }
 
-            var defaultFileName = _config.Get(c => c.PdfSettings.DefaultFileName);
-            if (_config.Get(c => c.PdfSettings.SkipSavePrompt) && Path.IsPathRooted(defaultFileName))
+        string savePath;
+        var defaultFileName = _config.Get(c => c.PdfSettings.DefaultFileName);
+        if (_config.Get(c => c.PdfSettings.SkipSavePrompt) && Path.IsPathRooted(defaultFileName))
+        {
+            savePath = defaultFileName;
+        }
+        else
+        {
+            if (!_dialogHelper.PromptToSavePdf(defaultFileName, out savePath!))
             {
-                savePath = defaultFileName!;
+                return false;
             }
-            else
-            {
-                if (!_dialogHelper.PromptToSavePdf(defaultFileName, out savePath!))
-                {
-                    return false;
-                }
-            }
+        }
 
-            if (await DoSavePdf(images, notify, savePath))
-            {
-                MaybeDeleteAfterSaving(uiImages);
-                return true;
-            }
+        if (await DoSavePdf(images, notify, savePath))
+        {
+            MaybeDeleteAfterSaving(uiImages);
+            return true;
         }
         return false;
     }
@@ -58,28 +59,30 @@ public class ExportController : IExportController
     public async Task<bool> SaveImages(ICollection<UiImage> uiImages, ISaveNotify notify)
     {
         using var images = GetSnapshots(uiImages);
-        if (images.Any())
+        if (!images.Any())
         {
-            string savePath;
+            return false;
+        }
 
-            if (_config.Get(c => c.ImageSettings.SkipSavePrompt) &&
-                Path.IsPathRooted(_config.Get(c => c.ImageSettings.DefaultFileName)))
+        string savePath;
+        var defaultFileName = _config.Get(c => c.ImageSettings.DefaultFileName);
+        if (_config.Get(c => c.ImageSettings.SkipSavePrompt) &&
+            Path.IsPathRooted(defaultFileName))
+        {
+            savePath = defaultFileName;
+        }
+        else
+        {
+            if (!_dialogHelper.PromptToSaveImage(defaultFileName, out savePath!))
             {
-                savePath = _config.Get(c => c.ImageSettings.DefaultFileName)!;
+                return false;
             }
-            else
-            {
-                if (!_dialogHelper.PromptToSaveImage(_config.Get(c => c.ImageSettings.DefaultFileName), out savePath!))
-                {
-                    return false;
-                }
-            }
+        }
 
-            if (await DoSaveImages(images, notify, savePath))
-            {
-                MaybeDeleteAfterSaving(uiImages);
-                return true;
-            }
+        if (await DoSaveImages(images, notify, savePath))
+        {
+            MaybeDeleteAfterSaving(uiImages);
+            return true;
         }
         return false;
     }
@@ -88,11 +91,30 @@ public class ExportController : IExportController
     {
         // Note this path bypasses some of the pdf/image save options (e.g. default file name)
         using var images = GetSnapshots(uiImages);
-        if (!_dialogHelper.PromptToSavePdfOrImage(null, out var savePath))
+
+        string savePath;
+        var pdfDefaultFileName = _config.Get(c => c.PdfSettings.DefaultFileName);
+        var imageDefaultFileName = _config.Get(c => c.ImageSettings.DefaultFileName);
+        if (_config.Get(c => c.PdfSettings.SkipSavePrompt) && Path.IsPathRooted(pdfDefaultFileName))
         {
-            return false;
+            savePath = pdfDefaultFileName;
         }
-        if (Path.GetExtension(savePath!).ToLowerInvariant() == ".pdf"
+        else if (_config.Get(c => c.ImageSettings.SkipSavePrompt) && Path.IsPathRooted(imageDefaultFileName))
+        {
+            savePath = imageDefaultFileName;
+        }
+        else
+        {
+            var defaultFileName = string.IsNullOrWhiteSpace(pdfDefaultFileName)
+                ? imageDefaultFileName
+                : pdfDefaultFileName;
+            if (!_dialogHelper.PromptToSavePdfOrImage(defaultFileName, out savePath!))
+            {
+                return false;
+            }
+        }
+
+        if (Path.GetExtension(savePath).ToLowerInvariant() == ".pdf"
                 ? await DoSavePdf(images, notify, savePath!)
                 : await DoSaveImages(images, notify, savePath!))
         {
