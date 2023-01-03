@@ -1,3 +1,6 @@
+Changes in 7.0b2:
+- Bug fixes
+
 Changes in 7.0b1:
 - Most NAPS2 code has been rewritten. Things should mostly look the same but under the hood there are many differences.
     - [Beta feedback thread](https://github.com/cyanfish/naps2/discussions/35)
