@@ -25,14 +25,11 @@ public class FileFilters
         if (groups.HasFlag(FileFilterGroup.AllImages))
         {
             filters.Add(new FileFilter(MiscResources.FileTypeImageFiles,
-                ".bmp", ".emf", ".exif", ".gif", "jpg", ".jpeg", ".png", ".tiff", ".tif"));
+                ".bmp", "jpg", ".jpeg", ".png", ".tiff", ".tif"));
         }
         if (groups.HasFlag(FileFilterGroup.Image))
         {
             filters.Add(new FileFilter(MiscResources.FileTypeBmp, ".bmp"));
-            filters.Add(new FileFilter(MiscResources.FileTypeEmf, ".emf"));
-            filters.Add(new FileFilter(MiscResources.FileTypeExif, ".exif"));
-            filters.Add(new FileFilter(MiscResources.FileTypeGif, ".gif"));
             filters.Add(new FileFilter(MiscResources.FileTypeJpeg, ".jpg", ".jpeg"));
             if (_imageContext.SupportsFormat(ImageFileFormat.Jpeg2000))
             {
