@@ -45,7 +45,7 @@ public class PdfSettingsForm : EtoDialogBase
 
     public PdfSettingsForm(Naps2Config config, DialogHelper dialogHelper) : base(config)
     {
-        _defaultFilePath = new(this, dialogHelper);
+        _defaultFilePath = new(this, dialogHelper) { PdfOnly = true };
 
         UpdateValues(Config);
         UpdateEnabled();

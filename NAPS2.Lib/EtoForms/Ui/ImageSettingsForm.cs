@@ -18,7 +18,7 @@ public class ImageSettingsForm : EtoDialogBase
 
     public ImageSettingsForm(Naps2Config config, DialogHelper dialogHelper) : base(config)
     {
-        _defaultFilePath = new(this, dialogHelper);
+        _defaultFilePath = new(this, dialogHelper) { ImagesOnly = true };
 
         UpdateValues(Config);
         UpdateEnabled();

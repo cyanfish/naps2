@@ -40,6 +40,10 @@ public class FilePathWithPlaceholders
         }
     }
 
+    public bool PdfOnly { get; set; }
+
+    public bool ImagesOnly { get; set; }
+
     public event EventHandler? TextChanged;
 
     public static implicit operator LayoutElement(FilePathWithPlaceholders control)
@@ -62,9 +66,26 @@ public class FilePathWithPlaceholders
 
     private void OpenPathDialog(object? sender, EventArgs e)
     {
-        if (_dialogHelper!.PromptToSavePdf(_path.Text, out string? savePath))
+        if (PdfOnly)
         {
-            _path.Text = savePath!;
+            if (_dialogHelper!.PromptToSavePdf(_path.Text, out string? savePath))
+            {
+                _path.Text = savePath!;
+            }
+        }
+        else if (ImagesOnly)
+        {
+            if (_dialogHelper!.PromptToSaveImage(_path.Text, out string? savePath))
+            {
+                _path.Text = savePath!;
+            }
+        }
+        else
+        {
+            if (_dialogHelper!.PromptToSavePdfOrImage(_path.Text, out string? savePath))
+            {
+                _path.Text = savePath!;
+            }
         }
     }
 
