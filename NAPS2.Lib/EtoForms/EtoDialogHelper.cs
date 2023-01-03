@@ -19,11 +19,13 @@ public class EtoDialogHelper : DialogHelper
         {
             FileName = Path.IsPathRooted(defaultPath) ? Path.GetFileName(defaultPath) : null
         };
-        _fileFilters.Set(sd, FileFilterGroup.Pdf | FileFilterGroup.Image);
+        var lastExt = _config.Get(c => c.LastPdfOrImageExt)?.ToLowerInvariant();
+        _fileFilters.Set(sd, FileFilterGroup.Pdf | FileFilterGroup.Image, lastExt ?? "pdf");
         SetDir(sd, defaultPath);
         if (sd.ShowDialog(null) == DialogResult.Ok)
         {
             savePath = sd.FileName;
+            _config.User.Set(c => c.LastPdfOrImageExt, (Path.GetExtension(sd.FileName) ?? "").Replace(".", ""));
             return true;
         }
         savePath = null;

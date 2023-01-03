@@ -49,6 +49,7 @@ public static class InternalDefaults
             OcrMode = LocalizedOcrMode.Fast,
             OcrAfterScanning = true,
             LastImageExt = "",
+            LastPdfOrImageExt = "",
             ThumbnailSize = ThumbnailSizes.DEFAULT_SIZE,
             DesktopToolStripDock = DockStyle.Top,
             EventLogging = EventType.None,

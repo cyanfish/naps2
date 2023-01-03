@@ -116,6 +116,9 @@ public class CommonConfig
     [User]
     public string? LastImageExt { get; set; }
 
+    [User]
+    public string? LastPdfOrImageExt { get; set; }
+
     [Common]
     public int ThumbnailSize { get; set; }
 
