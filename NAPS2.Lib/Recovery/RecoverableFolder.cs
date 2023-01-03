@@ -14,29 +14,45 @@ public class RecoverableFolder : IDisposable
     private readonly RecoveryIndex _recoveryIndex;
     private bool _disposed;
 
-    public RecoverableFolder(ScanningContext scanningContext, ImportPostProcessor importPostProcessor,
+    public static RecoverableFolder? TryCreate(ScanningContext scanningContext, ImportPostProcessor importPostProcessor,
         DirectoryInfo directory)
+    {
+        string indexFilePath = Path.Combine(directory.FullName, "index.xml");
+        string lockFilePath = Path.Combine(directory.FullName, RecoveryStorageManager.LOCK_FILE_NAME);
+        if (!File.Exists(indexFilePath) || !File.Exists(lockFilePath))
+        {
+            return null;
+        }
+        var lockFile = new FileStream(lockFilePath, FileMode.Open, FileAccess.Read, FileShare.None);
+        try
+        {
+            var serializer = new XmlSerializer<RecoveryIndex>();
+            var recoveryIndex = serializer.DeserializeFromFile(indexFilePath);
+            var imageCount = recoveryIndex.Images.Count;
+            var scannedDateTime = directory.LastWriteTime;
+            // TODO: Consider auto-delete in this case
+            // TODO: Also in the case where you have a lock file but no index is written (especially if no images are present)
+            if (imageCount == 0) return null;
+            return new RecoverableFolder(scanningContext, importPostProcessor, directory, lockFile, recoveryIndex,
+                imageCount, scannedDateTime);
+        }
+        catch (Exception)
+        {
+            lockFile.Dispose();
+            return null;
+        }
+    }
+
+    public RecoverableFolder(ScanningContext scanningContext, ImportPostProcessor importPostProcessor,
+        DirectoryInfo directory, FileStream lockFile, RecoveryIndex recoveryIndex, int imageCount, DateTime scannedDateTime)
     {
         _scanningContext = scanningContext;
         _importPostProcessor = importPostProcessor;
         _directory = directory;
-        string lockFilePath = Path.Combine(directory.FullName, RecoveryStorageManager.LOCK_FILE_NAME);
-        _lockFile = new FileStream(lockFilePath, FileMode.Open, FileAccess.Read, FileShare.None);
-        try
-        {
-            var serializer = new XmlSerializer<RecoveryIndex>();
-            _recoveryIndex = serializer.DeserializeFromFile(Path.Combine(directory.FullName, "index.xml"));
-            ImageCount = _recoveryIndex.Images.Count;
-            ScannedDateTime = directory.LastWriteTime;
-            // TODO: Consider auto-delete in this case
-            // TODO: Also in the case where you have a lock file but no index is written (especially if no images are present)
-            if (ImageCount == 0) throw new ArgumentException("No images to recover in this folder");
-        }
-        catch (Exception)
-        {
-            _lockFile.Dispose();
-            throw;
-        }
+        _lockFile = lockFile;
+        _recoveryIndex = recoveryIndex;
+        ImageCount = imageCount;
+        ScannedDateTime = scannedDateTime;
     }
 
     public int ImageCount { get; }

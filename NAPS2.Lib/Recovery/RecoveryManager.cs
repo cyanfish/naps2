@@ -43,11 +43,11 @@ public class RecoveryManager
     {
         try
         {
-            return new RecoverableFolder(_scanningContext, _importPostProcessor, directory);
+            return RecoverableFolder.TryCreate(_scanningContext, _importPostProcessor, directory);
         }
         catch (Exception)
         {
-            // Some problem, e.g. the folder is already locked or has no images
+            // Some problem, e.g. the folder is already locked
             return null;
         }
     }
