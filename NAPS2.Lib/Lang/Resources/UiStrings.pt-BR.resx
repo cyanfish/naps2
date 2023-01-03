@@ -166,10 +166,10 @@
     <value>Inverter</value>
   </data>
   <data name="ReverseAll" xml:space="preserve">
-    <value>Reverse All</value>
+    <value>Inverter tudo</value>
   </data>
   <data name="ReverseSelected" xml:space="preserve">
-    <value>Reverse Selected</value>
+    <value>Inverter selecionados</value>
   </data>
   <data name="Clear" xml:space="preserve">
     <value>Limpar</value>
@@ -202,10 +202,10 @@
     <value>Salvar</value>
   </data>
   <data name="SaveAll" xml:space="preserve">
-    <value>Save All</value>
+    <value>Salvar Tudo</value>
   </data>
   <data name="SaveSelected" xml:space="preserve">
-    <value>Save Selected</value>
+    <value>Salvar Selecionados</value>
   </data>
   <data name="SaveAllAsPdf" xml:space="preserve">
     <value>Salvar Tudo como PDF</value>
@@ -220,10 +220,10 @@
     <value>Salvar seleção como Imagens</value>
   </data>
   <data name="EmailAll" xml:space="preserve">
-    <value>Email All</value>
+    <value>Enviar tudo</value>
   </data>
   <data name="EmailSelected" xml:space="preserve">
-    <value>Email Selected</value>
+    <value>Enviar Selecionados</value>
   </data>
   <data name="EmailAllAsPdf" xml:space="preserve">
     <value>Enviar tudo como PDF</value>
@@ -502,7 +502,7 @@
     <value>Auto-incrementar número (2 dígitos)</value>
   </data>
   <data name="AutoIncrementing1Digit" xml:space="preserve">
-    <value>Auto-incrementing number (1 digits)</value>
+    <value>Auto-incrementar número (1 dígito)</value>
   </data>
   <data name="FileNameLabel" xml:space="preserve">
     <value>Nome do Arquivo</value>
@@ -556,7 +556,7 @@
     <value>Senha</value>
   </data>
   <data name="EncryptedFilePrompt" xml:space="preserve">
-    <value>The following file is encrypted and requires a password to open:</value>
+    <value>O seguinte arquivo é criptografado e requer uma senha para abrir:</value>
   </data>
   <data name="PromptForFilePath" xml:space="preserve">
     <value>Solicitar o caminho do arquivo</value>
@@ -688,6 +688,6 @@
     <value>Abrir pasta</value>
   </data>
   <data name="Tools" xml:space="preserve">
-    <value>Tools</value>
+    <value>Ferramentas</value>
   </data>
 </root>

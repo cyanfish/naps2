@@ -166,10 +166,10 @@
     <value>Оdwróć</value>
   </data>
   <data name="ReverseAll" xml:space="preserve">
-    <value>Reverse All</value>
+    <value>Odwróć wszystkie</value>
   </data>
   <data name="ReverseSelected" xml:space="preserve">
-    <value>Reverse Selected</value>
+    <value>Odwróć zaznaczone</value>
   </data>
   <data name="Clear" xml:space="preserve">
     <value>Wyczyść</value>
@@ -202,10 +202,10 @@
     <value>Zapisz</value>
   </data>
   <data name="SaveAll" xml:space="preserve">
-    <value>Save All</value>
+    <value>Zapisz wszystkie</value>
   </data>
   <data name="SaveSelected" xml:space="preserve">
-    <value>Save Selected</value>
+    <value>Zapisz zaznaczone</value>
   </data>
   <data name="SaveAllAsPdf" xml:space="preserve">
     <value>Zapisz wszystkie jako PDF</value>
@@ -220,10 +220,10 @@
     <value>Zapisz zaznaczone jako obrazy</value>
   </data>
   <data name="EmailAll" xml:space="preserve">
-    <value>Email All</value>
+    <value>Wyślij wszystkie</value>
   </data>
   <data name="EmailSelected" xml:space="preserve">
-    <value>Email Selected</value>
+    <value>Wyślij zaznaczone</value>
   </data>
   <data name="EmailAllAsPdf" xml:space="preserve">
     <value>Wyślij wszystkie jako PDF</value>
@@ -502,7 +502,7 @@
     <value>Numer autoinkrementacji (2 cyfry)</value>
   </data>
   <data name="AutoIncrementing1Digit" xml:space="preserve">
-    <value>Auto-incrementing number (1 digits)</value>
+    <value>Numer autoinkrementacji (1 cyfra)</value>
   </data>
   <data name="FileNameLabel" xml:space="preserve">
     <value>Nazwa pliku</value>
@@ -556,7 +556,7 @@
     <value>Hasło</value>
   </data>
   <data name="EncryptedFilePrompt" xml:space="preserve">
-    <value>The following file is encrypted and requires a password to open:</value>
+    <value>Następujący plik jest zaszyfrowany i wymaga hasła do otwarcia:</value>
   </data>
   <data name="PromptForFilePath" xml:space="preserve">
     <value>Pytaj o ścieżkę pliku</value>
@@ -688,6 +688,6 @@
     <value>Otwórz folder</value>
   </data>
   <data name="Tools" xml:space="preserve">
-    <value>Tools</value>
+    <value>Narzędzia</value>
   </data>
 </root>

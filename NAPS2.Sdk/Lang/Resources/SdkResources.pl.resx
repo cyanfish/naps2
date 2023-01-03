@@ -70,9 +70,9 @@
     <value>Wybrany sterownik nie jest obsługiwany w tym systemie.</value>
   </data>
   <data name="OcrError" xml:space="preserve">
-    <value>An error occurred running OCR.</value>
+    <value>Wystąpił błąd podczas uruchamiania OCR.</value>
   </data>
   <data name="OcrTimeout" xml:space="preserve">
-    <value>The OCR operation timed out.</value>
+    <value>Upłynął limit czasu operacji OCR.</value>
   </data>
 </root>
