@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2023-01-01 02:14\n"
+"PO-Revision-Date: 2023-01-03 03:15\n"
 "Last-Translator: \n"
 "Language-Team: Polish\n"
 "Language: pl\n"
@@ -146,7 +146,7 @@ msgstr "Wystąpił błąd podczas próby zainstalowania aktualizacji."
 
 #: SdkResources.resx$OcrError$Message
 msgid "An error occurred running OCR."
-msgstr ""
+msgstr "Wystąpił błąd podczas uruchamiania OCR."
 
 #: MiscResources.resx$AuthError$Message
 msgid "An error occurred when trying to authorize."
@@ -179,7 +179,7 @@ msgstr "Operacja jest w toku. Czy na pewno chcesz zakończyć i anulować operac
 
 #: MiscResources.resx$BatchError$Message
 msgid "An unknown error ocurred during the batch scan."
-msgstr ""
+msgstr "Wystąpił nieznany błąd podczas skanowania wsadowego."
 
 #: MiscResources.resx$UpdateAvailable$Message
 msgid "An update is available."
@@ -252,7 +252,7 @@ msgstr "Ustawienia automatycznego zapisywania"
 
 #: UiStrings.resx$AutoIncrementing1Digit$Message
 msgid "Auto-incrementing number (1 digits)"
-msgstr ""
+msgstr "Numer autoinkrementacji (1 cyfra)"
 
 #: UiStrings.resx$AutoIncrementing2Digit$Message
 msgid "Auto-incrementing number (2 digits)"
@@ -537,7 +537,7 @@ msgstr "Modyfikuj"
 
 #: UiStrings.resx$EmailAll$Message
 msgid "Email All"
-msgstr ""
+msgstr "Wyślij wszystkie"
 
 #: UiStrings.resx$EmailAllAsPdf$Message
 msgid "Email All as PDF"
@@ -554,7 +554,7 @@ msgstr "Postęp wysyłania PDF"
 
 #: UiStrings.resx$EmailSelected$Message
 msgid "Email Selected"
-msgstr ""
+msgstr "Wyślij zaznaczone"
 
 #: UiStrings.resx$EmailSelectedAsPdf$Message
 msgid "Email Selected as PDF"
@@ -1099,11 +1099,11 @@ msgstr "Оdwróć"
 
 #: UiStrings.resx$ReverseAll$Message
 msgid "Reverse All"
-msgstr ""
+msgstr "Odwróć wszystkie"
 
 #: UiStrings.resx$ReverseSelected$Message
 msgid "Reverse Selected"
-msgstr ""
+msgstr "Odwróć zaznaczone"
 
 #: UiStrings.resx$Revert$Message
 msgid "Revert"
@@ -1143,7 +1143,7 @@ msgstr "Zapisz"
 
 #: UiStrings.resx$SaveAll$Message
 msgid "Save All"
-msgstr ""
+msgstr "Zapisz wszystkie"
 
 #: UiStrings.resx$SaveAllAsImages$Message
 msgid "Save All as Images"
@@ -1173,7 +1173,7 @@ msgstr "Zapisz postęp PDF"
 
 #: UiStrings.resx$SaveSelected$Message
 msgid "Save Selected"
-msgstr ""
+msgstr "Zapisz zaznaczone"
 
 #: UiStrings.resx$SaveSelectedAsImages$Message
 msgid "Save Selected as Images"
@@ -1320,7 +1320,7 @@ msgstr "Silnik OCR nie jest dostępny. Upewnij się, że zainstalowałeś wymaga
 
 #: SdkResources.resx$OcrTimeout$Message
 msgid "The OCR operation timed out."
-msgstr ""
+msgstr "Upłynął limit czasu operacji OCR."
 
 #: MiscResources.resx$SaneNotAvailable$Message
 #: SdkResources.resx$SaneNotAvailable$Message
@@ -1346,7 +1346,7 @@ msgstr "Plik {0} już istnieje. Czy chcesz go zastąpić?"
 
 #: UiStrings.resx$EncryptedFilePrompt$Message
 msgid "The following file is encrypted and requires a password to open:"
-msgstr ""
+msgstr "Następujący plik jest zaszyfrowany i wymaga hasła do otwarcia:"
 
 #: MiscResources.resx$DevicePaperJam$Message
 #: SdkResources.resx$DevicePaperJam$Message
@@ -1407,7 +1407,7 @@ msgstr "Tytuł:"
 
 #: UiStrings.resx$Tools$Message
 msgid "Tools"
-msgstr ""
+msgstr "Narzędzia"
 
 #: UiStrings.resx$TwainImplLabel$Message
 msgid "Twain Implementation:"
@@ -1550,6 +1550,33 @@ msgstr "x64"
 #: MiscResources.resx$NamedPageSizeFormat$Message
 msgid "{0} ({1}x{2} {3})"
 msgstr "{0} ({1} x {2} {3})"
+
+#: MiscResources.resx$ProgressFormat$Message
+msgid "{0} / {1}"
+msgstr "{0} / {1}"
+
+#: MiscResources.resx$SizeProgress$Message
+msgid "{0} / {1} MB"
+msgstr "{0} / {1} MB"
+
+#: MiscResources.resx$FilesProgressFormat$Message
+msgid "{0} / {1} files"
+msgstr "{0} / {1} plików"
+
+#: UiStrings.resx$RecoverPrompt$Message
+msgid "{0} image(s) scanned on {1} at {2} may not have been saved, and are recoverable. Do you want to recover them?"
+msgstr "{0} plik(i) przeskanowane w {1} na {2} mogły nie zostać zapisane, ale są do odzyskania. Czy chcesz je odzyskać?"
+
+#: MiscResources.resx$ImagesSaved$Message
+msgid "{0} images saved."
+msgstr "{0} obrazy/obrazów zapisano."
+
+#: MiscResources.resx$PdfStatus$Message
+#: UiStrings.resx$XOfY$Message
+msgid "{0} of {1}"
+msgstr "{0} z {1}"
+
+3})"
 
 #: MiscResources.resx$ProgressFormat$Message
 msgid "{0} / {1}"

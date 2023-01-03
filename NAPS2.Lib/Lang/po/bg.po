@@ -1576,6 +1576,43 @@ msgstr "{0} изображения са записани."
 msgid "{0} of {1}"
 msgstr "{0} от {1}"
 
+#: MiscResources.resx$OfN$Message
+msgid "of {0}"
+msgstr "от {0}"
+
+#: SettingsResources.resx$TwainImpl_X64$Message
+msgid "x64"
+msgstr ""
+
+#: MiscResources.resx$NamedPageSizeFormat$Message
+msgid "{0} ({1}x{2} {3})"
+msgstr ""
+
+#: MiscResources.resx$ProgressFormat$Message
+msgid "{0} / {1}"
+msgstr ""
+
+#: MiscResources.resx$SizeProgress$Message
+msgid "{0} / {1} MB"
+msgstr ""
+
+#: MiscResources.resx$FilesProgressFormat$Message
+msgid "{0} / {1} files"
+msgstr "{0} / {1} файлове"
+
+#: UiStrings.resx$RecoverPrompt$Message
+msgid "{0} image(s) scanned on {1} at {2} may not have been saved, and are recoverable. Do you want to recover them?"
+msgstr "{0} изображение/я, сканирани от {1} на {2} вероятно не са записани, но могат да бъдат възстановени. Искате ли да ги възстановите?"
+
+#: MiscResources.resx$ImagesSaved$Message
+msgid "{0} images saved."
+msgstr "{0} изображения са записани."
+
+#: MiscResources.resx$PdfStatus$Message
+#: UiStrings.resx$XOfY$Message
+msgid "{0} of {1}"
+msgstr "{0} от {1}"
+
 egal (8.5x14 инча)"
 
 #: SettingsResources.resx$PageSize_Letter$Message

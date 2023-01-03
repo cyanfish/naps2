@@ -1576,6 +1576,47 @@ msgstr ""
 msgid "{0} of {1}"
 msgstr "{0} з {1}"
 
+nit_Millimetre$Message
+msgid "mm"
+msgstr "мм"
+
+#: MiscResources.resx$OfN$Message
+msgid "of {0}"
+msgstr "з {0}"
+
+#: SettingsResources.resx$TwainImpl_X64$Message
+msgid "x64"
+msgstr ""
+
+#: MiscResources.resx$NamedPageSizeFormat$Message
+msgid "{0} ({1}x{2} {3})"
+msgstr ""
+
+#: MiscResources.resx$ProgressFormat$Message
+msgid "{0} / {1}"
+msgstr ""
+
+#: MiscResources.resx$SizeProgress$Message
+msgid "{0} / {1} MB"
+msgstr "{0} / {1} МБ"
+
+#: MiscResources.resx$FilesProgressFormat$Message
+msgid "{0} / {1} files"
+msgstr "{0} / {1} файлів"
+
+#: UiStrings.resx$RecoverPrompt$Message
+msgid "{0} image(s) scanned on {1} at {2} may not have been saved, and are recoverable. Do you want to recover them?"
+msgstr "Зображення ({0} шт.), відскановані на {1} в {2}, можливо не були збережені та можуть бути відновлені. Бажаєте їх відновити?"
+
+#: MiscResources.resx$ImagesSaved$Message
+msgid "{0} images saved."
+msgstr ""
+
+#: MiscResources.resx$PdfStatus$Message
+#: UiStrings.resx$XOfY$Message
+msgid "{0} of {1}"
+msgstr "{0} з {1}"
+
 Text$Message
 msgid "Title:"
 msgstr "Заголовок:"

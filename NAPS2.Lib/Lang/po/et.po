@@ -1576,6 +1576,61 @@ msgstr ""
 msgid "{0} of {1}"
 msgstr ""
 
+"
+
+#: UiStrings.resx$ZoomOut$Message
+msgid "Zoom Out"
+msgstr ""
+
+#: SettingsResources.resx$PageSizeUnit_Centimetre$Message
+msgid "cm"
+msgstr ""
+
+#: SettingsResources.resx$PageSizeUnit_Inch$Message
+msgid "in"
+msgstr ""
+
+#: SettingsResources.resx$PageSizeUnit_Millimetre$Message
+msgid "mm"
+msgstr ""
+
+#: MiscResources.resx$OfN$Message
+msgid "of {0}"
+msgstr ""
+
+#: SettingsResources.resx$TwainImpl_X64$Message
+msgid "x64"
+msgstr ""
+
+#: MiscResources.resx$NamedPageSizeFormat$Message
+msgid "{0} ({1}x{2} {3})"
+msgstr ""
+
+#: MiscResources.resx$ProgressFormat$Message
+msgid "{0} / {1}"
+msgstr ""
+
+#: MiscResources.resx$SizeProgress$Message
+msgid "{0} / {1} MB"
+msgstr ""
+
+#: MiscResources.resx$FilesProgressFormat$Message
+msgid "{0} / {1} files"
+msgstr ""
+
+#: UiStrings.resx$RecoverPrompt$Message
+msgid "{0} image(s) scanned on {1} at {2} may not have been saved, and are recoverable. Do you want to recover them?"
+msgstr ""
+
+#: MiscResources.resx$ImagesSaved$Message
+msgid "{0} images saved."
+msgstr ""
+
+#: MiscResources.resx$PdfStatus$Message
+#: UiStrings.resx$XOfY$Message
+msgid "{0} of {1}"
+msgstr ""
+
 eaks dupleksit toetama, proovige kasutada teist draiverit."
 
 #: MiscResources.resx$DeviceBusy$Message

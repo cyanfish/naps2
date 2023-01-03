@@ -1576,6 +1576,51 @@ msgstr "{0} kuva(a) tallennettu."
 msgid "{0} of {1}"
 msgstr "{0} / {1}"
 
+ttingsResources.resx$PageSizeUnit_Inch$Message
+msgid "in"
+msgstr "tuuma"
+
+#: SettingsResources.resx$PageSizeUnit_Millimetre$Message
+msgid "mm"
+msgstr ""
+
+#: MiscResources.resx$OfN$Message
+msgid "of {0}"
+msgstr "{0}:sta"
+
+#: SettingsResources.resx$TwainImpl_X64$Message
+msgid "x64"
+msgstr ""
+
+#: MiscResources.resx$NamedPageSizeFormat$Message
+msgid "{0} ({1}x{2} {3})"
+msgstr ""
+
+#: MiscResources.resx$ProgressFormat$Message
+msgid "{0} / {1}"
+msgstr ""
+
+#: MiscResources.resx$SizeProgress$Message
+msgid "{0} / {1} MB"
+msgstr ""
+
+#: MiscResources.resx$FilesProgressFormat$Message
+msgid "{0} / {1} files"
+msgstr "{0} / {1} tiedostoa"
+
+#: UiStrings.resx$RecoverPrompt$Message
+msgid "{0} image(s) scanned on {1} at {2} may not have been saved, and are recoverable. Do you want to recover them?"
+msgstr "{0} kuva(a) skannattu {1} {2} ei ehkä ole tallennettu ja voidaan palauttaa. Haluatko palauttaa?"
+
+#: MiscResources.resx$ImagesSaved$Message
+msgid "{0} images saved."
+msgstr "{0} kuva(a) tallennettu."
+
+#: MiscResources.resx$PdfStatus$Message
+#: UiStrings.resx$XOfY$Message
+msgid "{0} of {1}"
+msgstr "{0} / {1}"
+
 FImageSettings.resx$groupTiff.Text$Message
 msgid "Tiff Options"
 msgstr "Tiff - vaihtoehdot"

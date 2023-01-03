@@ -1576,6 +1576,51 @@ msgstr "{0} resim kaydedildi."
 msgid "{0} of {1}"
 msgstr "{0} / {1} dosya"
 
+ssage
+msgid "in"
+msgstr "inç"
+
+#: SettingsResources.resx$PageSizeUnit_Millimetre$Message
+msgid "mm"
+msgstr "mm"
+
+#: MiscResources.resx$OfN$Message
+msgid "of {0}"
+msgstr " / {0}"
+
+#: SettingsResources.resx$TwainImpl_X64$Message
+msgid "x64"
+msgstr "x64"
+
+#: MiscResources.resx$NamedPageSizeFormat$Message
+msgid "{0} ({1}x{2} {3})"
+msgstr "{0} ({1}x{2} {3})"
+
+#: MiscResources.resx$ProgressFormat$Message
+msgid "{0} / {1}"
+msgstr "{0} / {1}"
+
+#: MiscResources.resx$SizeProgress$Message
+msgid "{0} / {1} MB"
+msgstr "{0} / {1} MB"
+
+#: MiscResources.resx$FilesProgressFormat$Message
+msgid "{0} / {1} files"
+msgstr "{0} / {1} dosya"
+
+#: UiStrings.resx$RecoverPrompt$Message
+msgid "{0} image(s) scanned on {1} at {2} may not have been saved, and are recoverable. Do you want to recover them?"
+msgstr "{1} {2} tarihinde taranan {0} adet resim kaydedilmedi ve kurtarılabilir. Kurtarmak ister msiniz?"
+
+#: MiscResources.resx$ImagesSaved$Message
+msgid "{0} images saved."
+msgstr "{0} resim kaydedildi."
+
+#: MiscResources.resx$PdfStatus$Message
+#: UiStrings.resx$XOfY$Message
+msgid "{0} of {1}"
+msgstr "{0} / {1} dosya"
+
 sources.resx$UnsavedChanges$Message
 msgid "Unsaved Changes"
 msgstr "Kaydedilmemiş Değişiklikler"
