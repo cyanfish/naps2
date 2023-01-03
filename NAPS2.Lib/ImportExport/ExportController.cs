@@ -38,7 +38,7 @@ public class ExportController : IExportController
         var defaultFileName = _config.Get(c => c.PdfSettings.DefaultFileName);
         if (_config.Get(c => c.PdfSettings.SkipSavePrompt) && Path.IsPathRooted(defaultFileName))
         {
-            savePath = defaultFileName;
+            savePath = defaultFileName!;
         }
         else
         {
@@ -69,7 +69,7 @@ public class ExportController : IExportController
         if (_config.Get(c => c.ImageSettings.SkipSavePrompt) &&
             Path.IsPathRooted(defaultFileName))
         {
-            savePath = defaultFileName;
+            savePath = defaultFileName!;
         }
         else
         {
@@ -97,11 +97,11 @@ public class ExportController : IExportController
         var imageDefaultFileName = _config.Get(c => c.ImageSettings.DefaultFileName);
         if (_config.Get(c => c.PdfSettings.SkipSavePrompt) && Path.IsPathRooted(pdfDefaultFileName))
         {
-            savePath = pdfDefaultFileName;
+            savePath = pdfDefaultFileName!;
         }
         else if (_config.Get(c => c.ImageSettings.SkipSavePrompt) && Path.IsPathRooted(imageDefaultFileName))
         {
-            savePath = imageDefaultFileName;
+            savePath = imageDefaultFileName!;
         }
         else
         {
@@ -115,8 +115,8 @@ public class ExportController : IExportController
         }
 
         if (Path.GetExtension(savePath).ToLowerInvariant() == ".pdf"
-                ? await DoSavePdf(images, notify, savePath!)
-                : await DoSaveImages(images, notify, savePath!))
+                ? await DoSavePdf(images, notify, savePath)
+                : await DoSaveImages(images, notify, savePath))
         {
             MaybeDeleteAfterSaving(uiImages);
             return true;
@@ -171,7 +171,7 @@ public class ExportController : IExportController
         if (await RunSavePdfOperation(subSavePath, images, false, null))
         {
             _imageList.SavedState = state;
-            notify?.PdfSaved(subSavePath);
+            notify.PdfSaved(subSavePath);
             return true;
         }
         return false;
