@@ -1,4 +1,6 @@
 ﻿using System.Collections.Immutable;
+using System.Globalization;
+using System.Threading;
 using NAPS2.Serialization;
 using Xunit;
 using XmlElementAttribute = System.Xml.Serialization.XmlElementAttribute;
@@ -179,6 +181,59 @@ public class XmlSerializerTests
     }
 
     [Fact]
+    public void SerializeNumbers()
+    {
+        var original = new Numbers
+        {
+            Int = -1_000_000,
+            Double = -1.2345e20,
+            Decimal = -1_000.2345m
+        };
+        var serializer = new XmlSerializer<Numbers>();
+        var doc = serializer.SerializeToXDocument(original);
+
+        Assert.NotNull(doc.Root);
+        Assert.Equal("Numbers", doc.Root.Name);
+        Assert.Equal(3, doc.Root.Elements().Count());
+
+        var copy = serializer.DeserializeFromXDocument(doc);
+        Assert.Equal(original.Int, copy.Int);
+        Assert.Equal(original.Double, copy.Double);
+        Assert.Equal(original.Decimal, copy.Decimal);
+    }
+
+    [Fact]
+    public void SerializeNumbersWithLocale()
+    {
+        var originalCulture = Thread.CurrentThread.CurrentCulture;
+        Thread.CurrentThread.CurrentCulture = new CultureInfo("fr-FR");
+        try
+        {
+            var original = new Numbers
+            {
+                Int = -1_000_000,
+                Double = -1.2345e20,
+                Decimal = -1_000.2345m
+            };
+            var serializer = new XmlSerializer<Numbers>();
+            var doc = serializer.SerializeToXDocument(original);
+
+            Assert.NotNull(doc.Root);
+            Assert.Equal("Numbers", doc.Root.Name);
+            Assert.Equal(3, doc.Root.Elements().Count());
+
+            var copy = serializer.DeserializeFromXDocument(doc);
+            Assert.Equal(original.Int, copy.Int);
+            Assert.Equal(original.Double, copy.Double);
+            Assert.Equal(original.Decimal, copy.Decimal);
+        }
+        finally
+        {
+            Thread.CurrentThread.CurrentCulture = originalCulture;
+        }
+    }
+
+    [Fact]
     public void SerializeList()
     {
         VerifySerializeCollection(new List<Poco> { new Poco { Str = "Hello" }, new Poco { Str = "World" } });
@@ -321,7 +376,6 @@ public class XmlSerializerTests
     }
 
     // TODO: Custom serialization
-    // TODO: Ordering
 
     public class NestedPoco
     {
@@ -348,6 +402,15 @@ public class XmlSerializerTests
     public class PocoTypes : CustomXmlTypes<Poco>
     {
         protected override Type[] GetKnownTypes() => new[] { typeof(PocoSubtype) };
+    }
+
+    public class Numbers
+    {
+        public int Int { get; set; }
+
+        public double Double { get; set; }
+
+        public decimal Decimal { get; set; }
     }
 
     public class PrivateSetter

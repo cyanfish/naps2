@@ -158,7 +158,8 @@ public abstract class XmlSerializer
         }
         catch (Exception ex)
         {
-            throw new InvalidOperationException($"Could not create type for deserialization: {actualType.FullName}", ex);
+            throw new InvalidOperationException($"Could not create type for deserialization: {actualType.FullName}",
+                ex);
         }
         foreach (var propInfo in typeInfo.Properties!)
         {
@@ -304,7 +305,7 @@ public abstract class XmlSerializer
     {
         protected override void Serialize(char obj, XElement element)
         {
-            element.Value = obj.ToString();
+            element.Value = obj.ToString(CultureInfo.InvariantCulture);
         }
 
         protected override char Deserialize(XElement element)
@@ -343,12 +344,12 @@ public abstract class XmlSerializer
     {
         protected override void Serialize(byte obj, XElement element)
         {
-            element.Value = obj.ToString();
+            element.Value = obj.ToString(CultureInfo.InvariantCulture);
         }
 
         protected override byte Deserialize(XElement element)
         {
-            return byte.Parse(element.Value);
+            return byte.Parse(element.Value, CultureInfo.InvariantCulture);
         }
     }
 
@@ -356,12 +357,12 @@ public abstract class XmlSerializer
     {
         protected override void Serialize(sbyte obj, XElement element)
         {
-            element.Value = obj.ToString();
+            element.Value = obj.ToString(CultureInfo.InvariantCulture);
         }
 
         protected override sbyte Deserialize(XElement element)
         {
-            return sbyte.Parse(element.Value);
+            return sbyte.Parse(element.Value, CultureInfo.InvariantCulture);
         }
     }
 
@@ -369,12 +370,12 @@ public abstract class XmlSerializer
     {
         protected override void Serialize(short obj, XElement element)
         {
-            element.Value = obj.ToString();
+            element.Value = obj.ToString(CultureInfo.InvariantCulture);
         }
 
         protected override short Deserialize(XElement element)
         {
-            return short.Parse(element.Value);
+            return short.Parse(element.Value, CultureInfo.InvariantCulture);
         }
     }
 
@@ -382,12 +383,12 @@ public abstract class XmlSerializer
     {
         protected override void Serialize(ushort obj, XElement element)
         {
-            element.Value = obj.ToString();
+            element.Value = obj.ToString(CultureInfo.InvariantCulture);
         }
 
         protected override ushort Deserialize(XElement element)
         {
-            return ushort.Parse(element.Value);
+            return ushort.Parse(element.Value, CultureInfo.InvariantCulture);
         }
     }
 
@@ -395,12 +396,12 @@ public abstract class XmlSerializer
     {
         protected override void Serialize(int obj, XElement element)
         {
-            element.Value = obj.ToString();
+            element.Value = obj.ToString(CultureInfo.InvariantCulture);
         }
 
         protected override int Deserialize(XElement element)
         {
-            return int.Parse(element.Value);
+            return int.Parse(element.Value, CultureInfo.InvariantCulture);
         }
     }
 
@@ -408,12 +409,12 @@ public abstract class XmlSerializer
     {
         protected override void Serialize(uint obj, XElement element)
         {
-            element.Value = obj.ToString();
+            element.Value = obj.ToString(CultureInfo.InvariantCulture);
         }
 
         protected override uint Deserialize(XElement element)
         {
-            return uint.Parse(element.Value);
+            return uint.Parse(element.Value, CultureInfo.InvariantCulture);
         }
     }
 
@@ -421,12 +422,12 @@ public abstract class XmlSerializer
     {
         protected override void Serialize(long obj, XElement element)
         {
-            element.Value = obj.ToString();
+            element.Value = obj.ToString(CultureInfo.InvariantCulture);
         }
 
         protected override long Deserialize(XElement element)
         {
-            return long.Parse(element.Value);
+            return long.Parse(element.Value, CultureInfo.InvariantCulture);
         }
     }
 
@@ -434,12 +435,12 @@ public abstract class XmlSerializer
     {
         protected override void Serialize(ulong obj, XElement element)
         {
-            element.Value = obj.ToString();
+            element.Value = obj.ToString(CultureInfo.InvariantCulture);
         }
 
         protected override ulong Deserialize(XElement element)
         {
-            return ulong.Parse(element.Value);
+            return ulong.Parse(element.Value, CultureInfo.InvariantCulture);
         }
     }
 
@@ -452,7 +453,7 @@ public abstract class XmlSerializer
 
         protected override float Deserialize(XElement element)
         {
-            return float.Parse(element.Value);
+            return float.Parse(element.Value, CultureInfo.InvariantCulture);
         }
     }
 
@@ -465,7 +466,7 @@ public abstract class XmlSerializer
 
         protected override double Deserialize(XElement element)
         {
-            return double.Parse(element.Value);
+            return double.Parse(element.Value, CultureInfo.InvariantCulture);
         }
     }
 
@@ -478,7 +479,7 @@ public abstract class XmlSerializer
 
         protected override decimal Deserialize(XElement element)
         {
-            return decimal.Parse(element.Value);
+            return decimal.Parse(element.Value, CultureInfo.InvariantCulture);
         }
     }
 
@@ -486,12 +487,12 @@ public abstract class XmlSerializer
     {
         protected override void Serialize(IntPtr obj, XElement element)
         {
-            element.Value = obj.ToString();
+            element.Value = ((long) obj).ToString(CultureInfo.InvariantCulture);
         }
 
         protected override IntPtr Deserialize(XElement element)
         {
-            return (IntPtr) long.Parse(element.Value);
+            return (IntPtr) long.Parse(element.Value, CultureInfo.InvariantCulture);
         }
     }
 
@@ -499,12 +500,12 @@ public abstract class XmlSerializer
     {
         protected override void Serialize(UIntPtr obj, XElement element)
         {
-            element.Value = obj.ToString();
+            element.Value = ((ulong) obj).ToString(CultureInfo.InvariantCulture);
         }
 
         protected override UIntPtr Deserialize(XElement element)
         {
-            return (UIntPtr) ulong.Parse(element.Value);
+            return (UIntPtr) ulong.Parse(element.Value, CultureInfo.InvariantCulture);
         }
     }
 
