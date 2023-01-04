@@ -128,3 +128,5 @@ finish-args:
   # GVfs
   - --filesystem=xdg-run/gvfsd
   - --talk-name=org.gtk.vfs.*
+  # mDNS discovery for ESCL scanners
+  - --system-talk-name=org.freedesktop.Avahi
