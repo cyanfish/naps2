@@ -331,7 +331,7 @@ public class WinFormsListView<T> : IListView<T> where T : notnull
             }
             else if (data.Contains("FileDrop"))
             {
-                var filePaths = e.Data.ToEto().Uris.Select(uri => uri.AbsolutePath);
+                var filePaths = (string[]) e.Data!.GetData(DataFormats.FileDrop);
                 Drop?.Invoke(this, new DropEventArgs(index, filePaths));
             }
         }
