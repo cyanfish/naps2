@@ -80,8 +80,14 @@ public static class ImageAsserts
                 first.VerticalResolution + RESOLUTION_THRESHOLD);
         }
 
-        first = first.PerformTransform(new ColorBitDepthTransform());
-        second = second.PerformTransform(new ColorBitDepthTransform());
+        if (first.PixelFormat is ImagePixelFormat.BW1 or ImagePixelFormat.Gray8)
+        {
+            first = first.CopyWithPixelFormat(ImagePixelFormat.RGB24);
+        }
+        if (second.PixelFormat is ImagePixelFormat.BW1 or ImagePixelFormat.Gray8)
+        {
+            second = second.CopyWithPixelFormat(ImagePixelFormat.RGB24);
+        }
 
         var op = new RmseBitwiseImageOp();
         op.Perform(first, second);

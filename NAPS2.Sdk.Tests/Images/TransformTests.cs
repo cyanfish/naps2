@@ -15,225 +15,245 @@ public class TransformTests : ContextualTests
     [Fact]
     public void BrightnessNull()
     {
-        IMemoryImage actual = LoadImage(ImageResources.dog);
-        IMemoryImage expected = LoadImage(ImageResources.dog);
+        var original = LoadImage(ImageResources.dog);
+        var expected = LoadImage(ImageResources.dog);
 
-        actual = actual.PerformTransform(new BrightnessTransform());
+        var transformed = original.PerformTransform(new BrightnessTransform());
 
-        ImageAsserts.Similar(expected, actual, ImageAsserts.NULL_RMSE_THRESHOLD);
+        ImageAsserts.Similar(expected, transformed, ImageAsserts.NULL_RMSE_THRESHOLD);
+        AssertOwnership(original, transformed);
     }
 
     [Fact]
     public void BrightnessP300()
     {
-        IMemoryImage actual = LoadImage(ImageResources.dog);
-        IMemoryImage expected = LoadImage(ImageResources.dog_b_p300);
+        var original = LoadImage(ImageResources.dog);
+        var expected = LoadImage(ImageResources.dog_b_p300);
 
-        actual = actual.PerformTransform(new BrightnessTransform(300));
+        var transformed = original.PerformTransform(new BrightnessTransform(300));
 
-        ImageAsserts.Similar(expected, actual, ImageAsserts.GENERAL_RMSE_THRESHOLD);
+        ImageAsserts.Similar(expected, transformed, ImageAsserts.GENERAL_RMSE_THRESHOLD);
+        AssertOwnership(original, transformed);
     }
 
     [Fact]
     public void BrightnessN300()
     {
-        IMemoryImage actual = LoadImage(ImageResources.dog);
-        IMemoryImage expected = LoadImage(ImageResources.dog_b_n300);
+        var original = LoadImage(ImageResources.dog);
+        var expected = LoadImage(ImageResources.dog_b_n300);
 
-        actual = actual.PerformTransform(new BrightnessTransform(-300));
+        var transformed = original.PerformTransform(new BrightnessTransform(-300));
 
-        ImageAsserts.Similar(expected, actual, ImageAsserts.GENERAL_RMSE_THRESHOLD);
+        ImageAsserts.Similar(expected, transformed, ImageAsserts.GENERAL_RMSE_THRESHOLD);
+        AssertOwnership(original, transformed);
     }
 
     [Fact]
     public void ContrastNull()
     {
-        IMemoryImage actual = LoadImage(ImageResources.dog);
-        IMemoryImage expected = LoadImage(ImageResources.dog);
+        var original = LoadImage(ImageResources.dog);
+        var expected = LoadImage(ImageResources.dog);
 
-        actual = actual.PerformTransform(new TrueContrastTransform());
+        var transformed = original.PerformTransform(new TrueContrastTransform());
 
-        ImageAsserts.Similar(expected, actual, ImageAsserts.NULL_RMSE_THRESHOLD);
+        ImageAsserts.Similar(expected, transformed, ImageAsserts.NULL_RMSE_THRESHOLD);
+        AssertOwnership(original, transformed);
     }
 
     [Fact]
     public void ContrastP300()
     {
-        IMemoryImage actual = LoadImage(ImageResources.dog);
-        IMemoryImage expected = LoadImage(ImageResources.dog_c_p300);
+        var original = LoadImage(ImageResources.dog);
+        var expected = LoadImage(ImageResources.dog_c_p300);
 
-        actual = actual.PerformTransform(new TrueContrastTransform(300));
+        var transformed = original.PerformTransform(new TrueContrastTransform(300));
 
-        ImageAsserts.Similar(expected, actual, ImageAsserts.GENERAL_RMSE_THRESHOLD);
+        ImageAsserts.Similar(expected, transformed, ImageAsserts.GENERAL_RMSE_THRESHOLD);
+        AssertOwnership(original, transformed);
     }
 
     [Fact]
     public void ContrastN300()
     {
-        IMemoryImage actual = LoadImage(ImageResources.dog);
-        IMemoryImage expected = LoadImage(ImageResources.dog_c_n300);
+        var original = LoadImage(ImageResources.dog);
+        var expected = LoadImage(ImageResources.dog_c_n300);
 
-        actual = actual.PerformTransform(new TrueContrastTransform(-300));
+        var transformed = original.PerformTransform(new TrueContrastTransform(-300));
 
-        ImageAsserts.Similar(expected, actual, ImageAsserts.GENERAL_RMSE_THRESHOLD);
+        ImageAsserts.Similar(expected, transformed, ImageAsserts.GENERAL_RMSE_THRESHOLD);
+        AssertOwnership(original, transformed);
     }
 
     [Fact]
     public void HueNull()
     {
-        IMemoryImage actual = LoadImage(ImageResources.dog);
-        IMemoryImage expected = LoadImage(ImageResources.dog);
+        var original = LoadImage(ImageResources.dog);
+        var expected = LoadImage(ImageResources.dog);
 
-        actual = actual.PerformTransform(new HueTransform());
+        var transformed = original.PerformTransform(new HueTransform());
 
-        ImageAsserts.Similar(expected, actual, ImageAsserts.NULL_RMSE_THRESHOLD);
+        ImageAsserts.Similar(expected, transformed, ImageAsserts.NULL_RMSE_THRESHOLD);
+        AssertOwnership(original, transformed);
     }
 
     [Fact]
     public void HueP300()
     {
-        IMemoryImage actual = LoadImage(ImageResources.dog);
-        IMemoryImage expected = LoadImage(ImageResources.dog_h_p300);
+        var original = LoadImage(ImageResources.dog);
+        var expected = LoadImage(ImageResources.dog_h_p300);
 
-        actual = actual.PerformTransform(new HueTransform(300));
+        var transformed = original.PerformTransform(new HueTransform(300));
 
-        ImageAsserts.Similar(expected, actual, ImageAsserts.GENERAL_RMSE_THRESHOLD);
+        ImageAsserts.Similar(expected, transformed, ImageAsserts.GENERAL_RMSE_THRESHOLD);
+        AssertOwnership(original, transformed);
     }
 
     [Fact]
     public void HueN300()
     {
-        IMemoryImage actual = LoadImage(ImageResources.dog);
-        IMemoryImage expected = LoadImage(ImageResources.dog_h_n300);
+        var original = LoadImage(ImageResources.dog);
+        var expected = LoadImage(ImageResources.dog_h_n300);
 
-        actual = actual.PerformTransform(new HueTransform(-300));
+        var transformed = original.PerformTransform(new HueTransform(-300));
 
-        ImageAsserts.Similar(expected, actual, ImageAsserts.GENERAL_RMSE_THRESHOLD);
+        ImageAsserts.Similar(expected, transformed, ImageAsserts.GENERAL_RMSE_THRESHOLD);
+        AssertOwnership(original, transformed);
     }
 
     [Fact]
     public void SaturationNull()
     {
-        IMemoryImage actual = LoadImage(ImageResources.dog);
-        IMemoryImage expected = LoadImage(ImageResources.dog);
+        var original = LoadImage(ImageResources.dog);
+        var expected = LoadImage(ImageResources.dog);
 
-        actual = actual.PerformTransform(new SaturationTransform());
+        var transformed = original.PerformTransform(new SaturationTransform());
 
-        ImageAsserts.Similar(expected, actual, ImageAsserts.NULL_RMSE_THRESHOLD);
+        ImageAsserts.Similar(expected, transformed, ImageAsserts.NULL_RMSE_THRESHOLD);
+        AssertOwnership(original, transformed);
     }
 
     [Fact]
     public void SaturationP300()
     {
-        IMemoryImage actual = LoadImage(ImageResources.dog);
-        IMemoryImage expected = LoadImage(ImageResources.dog_s_p300);
+        var original = LoadImage(ImageResources.dog);
+        var expected = LoadImage(ImageResources.dog_s_p300);
 
-        actual = actual.PerformTransform(new SaturationTransform(300));
+        var transformed = original.PerformTransform(new SaturationTransform(300));
 
-        ImageAsserts.Similar(expected, actual, ImageAsserts.GENERAL_RMSE_THRESHOLD);
+        ImageAsserts.Similar(expected, transformed, ImageAsserts.GENERAL_RMSE_THRESHOLD);
+        AssertOwnership(original, transformed);
     }
 
     [Fact]
     public void SaturationN300()
     {
-        IMemoryImage actual = LoadImage(ImageResources.dog);
-        IMemoryImage expected = LoadImage(ImageResources.dog_s_n300);
+        var original = LoadImage(ImageResources.dog);
+        var expected = LoadImage(ImageResources.dog_s_n300);
 
-        actual = actual.PerformTransform(new SaturationTransform(-300));
+        var transformed = original.PerformTransform(new SaturationTransform(-300));
 
-        ImageAsserts.Similar(expected, actual, ImageAsserts.GENERAL_RMSE_THRESHOLD);
+        ImageAsserts.Similar(expected, transformed, ImageAsserts.GENERAL_RMSE_THRESHOLD);
+        AssertOwnership(original, transformed);
     }
 
     [Fact]
     public void SharpenNull()
     {
-        IMemoryImage actual = LoadImage(ImageResources.dog);
-        IMemoryImage expected = LoadImage(ImageResources.dog);
+        var original = LoadImage(ImageResources.dog);
+        var expected = LoadImage(ImageResources.dog);
 
-        actual = actual.PerformTransform(new SharpenTransform());
+        var transformed = original.PerformTransform(new SharpenTransform());
 
-        ImageAsserts.Similar(expected, actual, ImageAsserts.NULL_RMSE_THRESHOLD);
+        ImageAsserts.Similar(expected, transformed, ImageAsserts.NULL_RMSE_THRESHOLD);
+        AssertOwnership(original, transformed);
     }
 
     [Fact]
     public void SharpenP300()
     {
-        IMemoryImage actual = LoadImage(ImageResources.dog);
-        IMemoryImage expected = LoadImage(ImageResources.dog_sh_p1000);
+        var original = LoadImage(ImageResources.dog);
+        var expected = LoadImage(ImageResources.dog_sh_p1000);
 
-        actual = actual.PerformTransform(new SharpenTransform(1000));
+        var transformed = original.PerformTransform(new SharpenTransform(1000));
 
-        ImageAsserts.Similar(expected, actual, ImageAsserts.GENERAL_RMSE_THRESHOLD);
+        ImageAsserts.Similar(expected, transformed, ImageAsserts.GENERAL_RMSE_THRESHOLD);
+        AssertOwnership(original, transformed);
     }
 
     [Fact]
     public void SharpenN300()
     {
-        IMemoryImage actual = LoadImage(ImageResources.dog);
-        IMemoryImage expected = LoadImage(ImageResources.dog_sh_n1000);
+        var original = LoadImage(ImageResources.dog);
+        var expected = LoadImage(ImageResources.dog_sh_n1000);
 
-        actual = actual.PerformTransform(new SharpenTransform(-1000));
+        var transformed = original.PerformTransform(new SharpenTransform(-1000));
 
-        ImageAsserts.Similar(expected, actual, ImageAsserts.GENERAL_RMSE_THRESHOLD);
+        ImageAsserts.Similar(expected, transformed, ImageAsserts.GENERAL_RMSE_THRESHOLD);
+        AssertOwnership(original, transformed);
     }
 
     [Fact]
     public void RotationNull()
     {
-        IMemoryImage actual = LoadImage(ImageResources.dog);
-        IMemoryImage expected = LoadImage(ImageResources.dog);
+        var original = LoadImage(ImageResources.dog);
+        var expected = LoadImage(ImageResources.dog);
 
-        actual = actual.PerformTransform(new RotationTransform());
+        var transformed = original.PerformTransform(new RotationTransform());
 
-        ImageAsserts.Similar(expected, actual, ImageAsserts.NULL_RMSE_THRESHOLD);
+        ImageAsserts.Similar(expected, transformed, ImageAsserts.NULL_RMSE_THRESHOLD);
+        AssertOwnership(original, transformed);
     }
 
     [Fact]
     public void RotationP90()
     {
-        IMemoryImage actual = LoadImage(ImageResources.dog);
-        IMemoryImage expected = LoadImage(ImageResources.dog_r_p90);
+        var original = LoadImage(ImageResources.dog);
+        var expected = LoadImage(ImageResources.dog_r_p90);
 
-        actual = actual.PerformTransform(new RotationTransform(90));
+        var transformed = original.PerformTransform(new RotationTransform(90));
 
-        ImageAsserts.Similar(expected, actual, ImageAsserts.GENERAL_RMSE_THRESHOLD);
+        ImageAsserts.Similar(expected, transformed, ImageAsserts.GENERAL_RMSE_THRESHOLD);
+        AssertOwnership(original, transformed);
     }
 
     [Fact]
     public void RotationP46()
     {
-        IMemoryImage actual = LoadImage(ImageResources.dog);
-        IMemoryImage expected = LoadImage(ImageResources.dog_r_p46);
+        var original = LoadImage(ImageResources.dog);
+        var expected = LoadImage(ImageResources.dog_r_p46);
 
-        actual = actual.PerformTransform(new RotationTransform(46));
+        var transformed = original.PerformTransform(new RotationTransform(46));
 
-        ImageAsserts.Similar(expected, actual, ImageAsserts.XPLAT_RMSE_THRESHOLD);
+        ImageAsserts.Similar(expected, transformed, ImageAsserts.XPLAT_RMSE_THRESHOLD);
+        AssertOwnership(original, transformed);
     }
 
     [Fact]
     public void RotationN45()
     {
-        IMemoryImage actual = LoadImage(ImageResources.dog);
-        IMemoryImage expected = LoadImage(ImageResources.dog_r_n45);
+        var original = LoadImage(ImageResources.dog);
+        var expected = LoadImage(ImageResources.dog_r_n45);
 
-        actual = actual.PerformTransform(new RotationTransform(-45));
+        var transformed = original.PerformTransform(new RotationTransform(-45));
 
         // TODO: The mac rotated image looks way better than gdi, consider if we can improve the gdi end
-        ImageAsserts.Similar(expected, actual, ImageAsserts.XPLAT_RMSE_THRESHOLD);
+        ImageAsserts.Similar(expected, transformed, ImageAsserts.XPLAT_RMSE_THRESHOLD);
+        AssertOwnership(original, transformed);
     }
 
     [Fact]
     public void Rotation180()
     {
-        IMemoryImage actual = LoadImage(ImageResources.dog);
-        IMemoryImage actual2 = LoadImage(ImageResources.dog);
-        IMemoryImage expected = LoadImage(ImageResources.dog_r_180);
+        var original = LoadImage(ImageResources.dog);
+        var transformed2 = LoadImage(ImageResources.dog);
+        var expected = LoadImage(ImageResources.dog_r_180);
 
-        actual = actual.PerformTransform(new RotationTransform(180));
-        actual2 = actual2.PerformTransform(new RotationTransform(-180));
+        var transformed = original.PerformTransform(new RotationTransform(180));
+        transformed2 = transformed2.PerformTransform(new RotationTransform(-180));
 
-        ImageAsserts.Similar(actual2, actual, 0);
-        ImageAsserts.Similar(expected, actual, ImageAsserts.GENERAL_RMSE_THRESHOLD);
+        ImageAsserts.Similar(transformed2, transformed, 0);
+        ImageAsserts.Similar(expected, transformed, ImageAsserts.GENERAL_RMSE_THRESHOLD);
+        AssertOwnership(original, transformed);
     }
 
     // TODO: Add tests for rotating black and white images
@@ -241,79 +261,84 @@ public class TransformTests : ContextualTests
     [Fact]
     public void ScaleNull()
     {
-        IMemoryImage actual = LoadImage(ImageResources.dog);
-        IMemoryImage expected = LoadImage(ImageResources.dog);
+        var original = LoadImage(ImageResources.dog);
+        var expected = LoadImage(ImageResources.dog);
 
-        actual = actual.PerformTransform(new ScaleTransform());
+        var transformed = original.PerformTransform(new ScaleTransform());
 
-        ImageAsserts.Similar(expected, actual, ImageAsserts.NULL_RMSE_THRESHOLD);
+        ImageAsserts.Similar(expected, transformed, ImageAsserts.NULL_RMSE_THRESHOLD);
+        AssertOwnership(original, transformed);
     }
 
     [Fact]
     public void Scale50Percent()
     {
-        IMemoryImage actual = LoadImage(ImageResources.dog);
-        IMemoryImage expected = LoadImage(ImageResources.dog_sc_50pct);
+        var original = LoadImage(ImageResources.dog);
+        var expected = LoadImage(ImageResources.dog_sc_50pct);
 
-        actual = actual.PerformTransform(new ScaleTransform(0.5));
+        var transformed = original.PerformTransform(new ScaleTransform(0.5));
 
-        ImageAsserts.Similar(expected, actual, ImageAsserts.XPLAT_RMSE_THRESHOLD, ignoreResolution: true);
+        ImageAsserts.Similar(expected, transformed, ImageAsserts.XPLAT_RMSE_THRESHOLD, ignoreResolution: true);
+        AssertOwnership(original, transformed);
     }
 
     [Theory]
     [MemberData(nameof(CommutativeGrayTransforms))]
     public void GrayTransformsAreCommutative(Transform transform)
     {
-        IMemoryImage original = LoadImage(ImageResources.dog);
+        var original = LoadImage(ImageResources.dog);
 
-        var actual = original.CopyWithPixelFormat(ImagePixelFormat.Gray8);
-        actual = actual.PerformTransform(transform);
+        var transformed = original.CopyWithPixelFormat(ImagePixelFormat.Gray8);
+        transformed = transformed.PerformTransform(transform);
 
         var expected = original.Clone();
         expected = expected.PerformTransform(transform);
         expected = expected.CopyWithPixelFormat(ImagePixelFormat.Gray8);
 
-        ImageAsserts.Similar(expected, actual);
+        ImageAsserts.Similar(expected, transformed);
     }
 
     [Fact]
     public void Scale1000Percent()
     {
-        IMemoryImage actual = LoadImage(ImageResources.dog);
-        IMemoryImage expected = LoadImage(ImageResources.dog_huge);
+        var original = LoadImage(ImageResources.dog);
+        var expected = LoadImage(ImageResources.dog_huge);
 
-        actual = actual.PerformTransform(new ScaleTransform(10));
+        var transformed = original.PerformTransform(new ScaleTransform(10));
 
-        ImageAsserts.Similar(expected, actual, ImageAsserts.XPLAT_RMSE_THRESHOLD, ignoreResolution: true);
+        ImageAsserts.Similar(expected, transformed, ImageAsserts.XPLAT_RMSE_THRESHOLD, ignoreResolution: true);
+        AssertOwnership(original, transformed);
     }
 
     [Fact]
     public void CropNull()
     {
-        IMemoryImage actual = LoadImage(ImageResources.dog);
-        IMemoryImage expected = LoadImage(ImageResources.dog);
+        var original = LoadImage(ImageResources.dog);
+        var expected = LoadImage(ImageResources.dog);
 
-        actual = actual.PerformTransform(new CropTransform());
+        var transformed = original.PerformTransform(new CropTransform());
 
-        ImageAsserts.Similar(expected, actual, ImageAsserts.NULL_RMSE_THRESHOLD);
+        ImageAsserts.Similar(expected, transformed, ImageAsserts.NULL_RMSE_THRESHOLD);
+        AssertOwnership(original, transformed);
     }
 
     [Fact]
     public void Crop()
     {
-        IMemoryImage actual = LoadImage(ImageResources.dog);
-        IMemoryImage expected = LoadImage(ImageResources.dog_c_5_10_15_20);
+        var original = LoadImage(ImageResources.dog);
+        var expected = LoadImage(ImageResources.dog_c_5_10_15_20);
 
-        actual = actual.PerformTransform(new CropTransform(10, 20, 15, 5));
+        var transformed = original.PerformTransform(new CropTransform(10, 20, 15, 5));
 
-        ImageAsserts.Similar(expected, actual, ImageAsserts.GENERAL_RMSE_THRESHOLD);
+        ImageAsserts.Similar(expected, transformed, ImageAsserts.GENERAL_RMSE_THRESHOLD);
+        AssertOwnership(original, transformed);
     }
 
     [Fact]
     public void CropBlackWhiteBeforeAfter()
     {
-        IMemoryImage first = LoadImage(ImageResources.dog);
-        IMemoryImage second = LoadImage(ImageResources.dog);
+        var first = LoadImage(ImageResources.dog);
+        var second = LoadImage(ImageResources.dog);
 
         first = first.PerformTransform(new BlackWhiteTransform());
         first = first.PerformTransform(new CropTransform(10, 20, 15, 5));
@@ -326,85 +351,102 @@ public class TransformTests : ContextualTests
     [Fact]
     public void CropWithOriginal()
     {
-        IMemoryImage actual = LoadImage(ImageResources.dog);
-        IMemoryImage expected = LoadImage(ImageResources.dog_c_5_10_15_20);
+        var original = LoadImage(ImageResources.dog);
+        var expected = LoadImage(ImageResources.dog_c_5_10_15_20);
 
-        actual = actual.PerformTransform(new CropTransform(10, 20, 15, 5, actual.Width, actual.Height));
+        var transformed = original.PerformTransform(new CropTransform(10, 20, 15, 5, original.Width, original.Height));
 
-        ImageAsserts.Similar(expected, actual, ImageAsserts.GENERAL_RMSE_THRESHOLD);
+        ImageAsserts.Similar(expected, transformed, ImageAsserts.GENERAL_RMSE_THRESHOLD);
+        AssertOwnership(original, transformed);
     }
 
     [Fact]
     public void CropWithDifferentOriginal()
     {
-        IMemoryImage actual = LoadImage(ImageResources.dog);
-        IMemoryImage expected = LoadImage(ImageResources.dog_c_5_10_15_20);
+        var original = LoadImage(ImageResources.dog);
+        var expected = LoadImage(ImageResources.dog_c_5_10_15_20);
 
-        actual = ImageContext.PerformTransform(actual,
-            new CropTransform(20, 40, 30, 10, actual.Width * 2, actual.Height * 2));
+        var transformed = ImageContext.PerformTransform(original,
+            new CropTransform(20, 40, 30, 10, original.Width * 2, original.Height * 2));
 
-        ImageAsserts.Similar(expected, actual, ImageAsserts.GENERAL_RMSE_THRESHOLD);
+        ImageAsserts.Similar(expected, transformed, ImageAsserts.GENERAL_RMSE_THRESHOLD);
+        AssertOwnership(original, transformed);
     }
 
     [Fact]
     public void CropOutOfBounds()
     {
-        IMemoryImage actual = LoadImage(ImageResources.dog);
-        IMemoryImage expected = LoadImage(ImageResources.dog);
+        var original = LoadImage(ImageResources.dog);
+        var expected = LoadImage(ImageResources.dog);
 
-        actual = actual.PerformTransform(new CropTransform(-1, -1, -1, -1));
+        var transformed = original.PerformTransform(new CropTransform(-1, -1, -1, -1));
 
-        ImageAsserts.Similar(expected, actual, ImageAsserts.GENERAL_RMSE_THRESHOLD);
+        ImageAsserts.Similar(expected, transformed, ImageAsserts.GENERAL_RMSE_THRESHOLD);
+        AssertOwnership(original, transformed);
     }
 
     [Fact]
     public void BlackWhite()
     {
-        IMemoryImage actual = LoadImage(ImageResources.dog);
-        IMemoryImage expected = LoadImage(ImageResources.dog_bw);
+        var original = LoadImage(ImageResources.dog);
+        var expected = LoadImage(ImageResources.dog_bw);
 
-        actual = actual.PerformTransform(new BlackWhiteTransform());
-        Assert.Equal(ImagePixelFormat.BW1, actual.LogicalPixelFormat);
+        var transformed = original.PerformTransform(new BlackWhiteTransform());
+        Assert.Equal(ImagePixelFormat.BW1, transformed.LogicalPixelFormat);
 
         // TODO: There's no inherent reason this shouldn't be an exact match, unless I guess if
         // there's a slight pixel difference between png loading on mac/gdi
-        ImageAsserts.Similar(expected, actual, ImageAsserts.XPLAT_RMSE_THRESHOLD);
+        ImageAsserts.Similar(expected, transformed, ImageAsserts.XPLAT_RMSE_THRESHOLD);
+        AssertOwnership(original, transformed);
     }
 
     [Fact]
     public void BlackWhiteP300()
     {
-        IMemoryImage actual = LoadImage(ImageResources.dog);
-        IMemoryImage expected = LoadImage(ImageResources.dog_bw_p300);
+        var original = LoadImage(ImageResources.dog);
+        var expected = LoadImage(ImageResources.dog_bw_p300);
 
-        actual = actual.PerformTransform(new BlackWhiteTransform(300));
-        Assert.Equal(ImagePixelFormat.BW1, actual.LogicalPixelFormat);
+        var transformed = original.PerformTransform(new BlackWhiteTransform(300));
+        Assert.Equal(ImagePixelFormat.BW1, transformed.LogicalPixelFormat);
 
-        ImageAsserts.Similar(expected, actual, ImageAsserts.XPLAT_RMSE_THRESHOLD);
+        ImageAsserts.Similar(expected, transformed, ImageAsserts.XPLAT_RMSE_THRESHOLD);
+        AssertOwnership(original, transformed);
     }
 
     [Fact]
     public void ColorBitDepth()
     {
-        IMemoryImage actual = LoadImage(ImageResources.dog_bw);
-        IMemoryImage expected = LoadImage(ImageResources.dog_bw_24bit);
+        var original = LoadImage(ImageResources.dog_bw);
+        var expected = LoadImage(ImageResources.dog_bw_24bit);
 
-        actual = actual.PerformTransform(new BlackWhiteTransform());
-        actual = actual.PerformTransform(new ColorBitDepthTransform());
-        Assert.Equal(ImagePixelFormat.RGB24, actual.PixelFormat);
+        var transformed = original.PerformTransform(new BlackWhiteTransform());
+        transformed = transformed.PerformTransform(new ColorBitDepthTransform());
+        Assert.Equal(ImagePixelFormat.RGB24, transformed.PixelFormat);
 
-        ImageAsserts.Similar(expected, actual, ImageAsserts.NULL_RMSE_THRESHOLD);
+        ImageAsserts.Similar(expected, transformed, ImageAsserts.NULL_RMSE_THRESHOLD);
+        AssertOwnership(original, transformed);
     }
 
     [Fact]
     public void Thumbnail()
     {
-        IMemoryImage actual = LoadImage(ImageResources.dog);
-        IMemoryImage expected = LoadImage(ImageResources.dog_thumb_256);
+        var original = LoadImage(ImageResources.dog);
+        var expected = LoadImage(ImageResources.dog_thumb_256);
 
-        actual = actual.PerformTransform(new ThumbnailTransform(256));
+        var transformed = original.PerformTransform(new ThumbnailTransform(256));
 
-        ImageAsserts.Similar(expected, actual, ImageAsserts.XPLAT_RMSE_THRESHOLD, ignoreResolution: true);
+        ImageAsserts.Similar(expected, transformed, ImageAsserts.XPLAT_RMSE_THRESHOLD, ignoreResolution: true);
+        AssertOwnership(original, transformed);
+    }
+
+    private void AssertOwnership(IMemoryImage original, IMemoryImage transformed)
+    {
+        // The contract for a transform is that either it returns the original image or it disposes the original and
+        // returns a copy. This check works in both cases, and tests what we really care about (that disposing the
+        // result cleans up everything).
+        Assert.False(IsDisposed(transformed));
+        transformed.Dispose();
+        Assert.True(IsDisposed(original));
     }
 
     public static IEnumerable<object[]> CommutativeGrayTransforms = new List<object[]>
