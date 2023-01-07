@@ -201,9 +201,9 @@ public class WhiteBlackPointOp : UnaryBitwiseImageOp
                     int gL = iToL[g];
                     int bL = iToL[b];
                     // Scale the color values in the luminescence space
-                    rL = (rL - blackL) * 255 / (whiteL - blackL);
-                    gL = (gL - blackL) * 255 / (whiteL - blackL);
-                    bL = (bL - blackL) * 255 / (whiteL - blackL);
+                    rL = (rL - blackL) * GammaTables.MAX_LUM / (whiteL - blackL);
+                    gL = (gL - blackL) * GammaTables.MAX_LUM / (whiteL - blackL);
+                    bL = (bL - blackL) * GammaTables.MAX_LUM / (whiteL - blackL);
                     // Convert back to the intensity space
                     r = lToI[rL];
                     g = lToI[gL];
