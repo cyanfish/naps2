@@ -104,11 +104,9 @@ public class GdiImage : IMemoryImage
 
     public IMemoryImage Clone()
     {
-        var newImage = new GdiImage(ImageContext, (Bitmap) Bitmap.Clone());
-        // TODO: We want to make these more consistent when copying around and transforming images
-        newImage.OriginalFileFormat = OriginalFileFormat;
-        newImage.LogicalPixelFormat = LogicalPixelFormat;
-        return newImage;
+        // TODO: Ideally we'd like to make use of copy-on-write. But GDI copy-on-write (Clone) is not thread safe.
+        // Maybe we can implement something like CopyOnWrite<Bitmap> to use instead of just Bitmap.
+        return this.Copy();
     }
 
     public void Dispose()
