@@ -171,7 +171,7 @@ public class DesktopController
 
     public bool PrepareForClosing(bool userClosing)
     {
-        if (_closed) return true;
+        if (_suspended || _closed) return true;
 
         if (_operationProgress.ActiveOperations.Any())
         {
