@@ -18,16 +18,25 @@ public class WinFormsTwainHandleManager : TwainHandleManager
 
     public override IntPtr GetDsmHandle(IntPtr dialogParent, bool useNativeUi)
     {
+        // This handle is used for the TWAIN event loop
         return _baseForm.Handle;
     }
 
     public override IntPtr GetEnableHandle(IntPtr dialogParent, bool useNativeUi)
     {
+        // This handle is used as the parent window for TWAIN UI
         if (!useNativeUi || dialogParent == IntPtr.Zero)
         {
+            // If we're not expecting the driver to show UI (or have no real parent), we just give it an arbitrary
+            // form handle in this process as a parent.
             return _baseForm.Handle;
         }
+
+        // If we are expected to show UI, ideally we'd just return dialogParent. But I've found some issues with that
+        // where the window can become non-interactable (e.g. unable to cancel a native UI scan). The cause might be
+        // related to the window being in another process.
         _parentForm = new BackgroundForm();
+
         // At the Windows API level, a modal window is implemented by doing two things:
         // 1. Setting the parent on the child window
         // 2. Disabling the parent window
@@ -35,6 +44,7 @@ public class WinFormsTwainHandleManager : TwainHandleManager
         _parentForm.Show(new Win32Window(dialogParent));
         Win32.EnableWindow(dialogParent, false);
         _disabledWindow = dialogParent;
+
         return _parentForm.Handle;
     }
 

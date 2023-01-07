@@ -31,7 +31,7 @@ public class RemoteTwainSessionController : ITwainSessionController
         }
         finally
         {
-            EnableWindow(options.DialogParent);
+            EnableWindow(options);
         }
     }
 
@@ -48,16 +48,18 @@ public class RemoteTwainSessionController : ITwainSessionController
             : WorkerType.WinX86);
     }
 
-    private void EnableWindow(IntPtr dialogParent)
+    private void EnableWindow(ScanOptions options)
     {
-        if (dialogParent != IntPtr.Zero)
+        if (options.DialogParent != IntPtr.Zero && options.UseNativeUI)
         {
             // At the Windows API level, a modal window is implemented by doing two things:
             // 1. Setting the parent on the child window
             // 2. Disabling the parent window
             // The worker is supposed to re-enable the window before returning, but in case the process dies or
             // some other problem occurs, here we make sure that happens.
-            Win32.EnableWindow(dialogParent, true);
+            Win32.EnableWindow(options.DialogParent, true);
+            // We also want to make sure the main NAPS2 window is in the foreground
+            Win32.SetForegroundWindow(options.DialogParent);
         }
     }
 }

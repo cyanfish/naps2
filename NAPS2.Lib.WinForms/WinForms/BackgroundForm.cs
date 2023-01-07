@@ -11,7 +11,9 @@ public class BackgroundForm : Form
     {
         ShowInTaskbar = false;
         FormBorderStyle = FormBorderStyle.FixedToolWindow;
-        WindowState = FormWindowState.Minimized;
+        // Even though the form is invisible, we want to make sure it's positioned inside
+        // its parent (if present) so any child forms are also inside the parent.
+        StartPosition = FormStartPosition.CenterParent;
     }
 
     protected override void SetVisibleCore(bool value)
@@ -19,8 +21,8 @@ public class BackgroundForm : Form
         if (!IsHandleCreated)
         {
             CreateHandle();
-            value = false;
         }
+        value = false;
         base.SetVisibleCore(value);
     }
 }
