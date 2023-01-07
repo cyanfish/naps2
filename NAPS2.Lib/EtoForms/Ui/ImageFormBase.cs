@@ -165,6 +165,15 @@ public abstract class ImageFormBase : EtoDialogBase
 
         using var imageToRender = Image.GetClonedImage();
         WorkingImage = imageToRender.Render();
+
+        // Scale down the image to the screen size for better efficiency without losing much fidelity
+        var widthRatio = WorkingImage.Width / Screen.WorkingArea.Width;
+        var heightRatio = WorkingImage.Height / Screen.WorkingArea.Height;
+        if (widthRatio > 1 || heightRatio > 1)
+        {
+            WorkingImage = WorkingImage.PerformTransform(new ScaleTransform(1 / Math.Max(widthRatio, heightRatio)));
+        }
+
         DisplayImage = WorkingImage.Clone();
         ImageWidth = DisplayImage.Width;
         ImageHeight = DisplayImage.Height;
