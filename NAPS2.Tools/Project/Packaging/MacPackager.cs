@@ -100,7 +100,7 @@ public static class MacPackager
                 .Select(file => file.FullName));
         if (files.Length > 0)
         {
-            Cli.Run("codesign", $"-s \"{signingIdentity}\" -f --options runtime \"{files}\"", ignoreErrorIfOutputContains: "replacing existing signature");
+            Cli.Run("codesign", $"-s \"{signingIdentity}\" -f --options runtime \"{files}\"");
         }
     }
 }
