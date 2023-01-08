@@ -70,9 +70,9 @@
     <value>Le pilote sélectionné n'est pas pris en charge sur ce système.</value>
   </data>
   <data name="OcrError" xml:space="preserve">
-    <value>An error occurred running OCR.</value>
+    <value>Une erreur s'est produite lors de l'exécution de l'OCR.</value>
   </data>
   <data name="OcrTimeout" xml:space="preserve">
-    <value>The OCR operation timed out.</value>
+    <value>L'opération OCR a expiré.</value>
   </data>
 </root>

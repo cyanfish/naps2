@@ -190,7 +190,7 @@
     <value>von {0}</value>
   </data>
   <data name="BatchError" xml:space="preserve">
-    <value>An unknown error ocurred during the batch scan.</value>
+    <value>Beim Stapel-Scan ist ein unbekannter Fehler aufgetreten.</value>
   </data>
   <data name="BatchStatusCancelled" xml:space="preserve">
     <value>Stapelverarbeitung abgebrochen.</value>

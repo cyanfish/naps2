@@ -394,7 +394,7 @@
     <value>Pomiń monit zapisu</value>
   </data>
   <data name="SinglePageFiles" xml:space="preserve">
-    <value>Pliki pojedynczej strony</value>
+    <value>Pliki jednostronicowe</value>
   </data>
   <data name="EncryptPdf" xml:space="preserve">
     <value>Zaszyfruj PDF</value>
@@ -424,7 +424,7 @@
     <value>Zezwalaj na kopiowanie zawartości</value>
   </data>
   <data name="AllowContentCopyingForAccessibility" xml:space="preserve">
-    <value>Zezwalaj na kopiowanie zawartości dla dostępności</value>
+    <value>Zezwalaj na kopiowanie zawartości w celu ułatwienia dostępu</value>
   </data>
   <data name="AllowAnnotations" xml:space="preserve">
     <value>Zezwalaj na adnotacje</value>
@@ -511,7 +511,7 @@
     <value>Podgląd:</value>
   </data>
   <data name="JpegQualityHelp" xml:space="preserve">
-    <value>Ponadto zwiększ Jakość obrazu w swoim profilu, dla wysokiej jakości JPEG (80+), aby uzyskać najlepsze rezultaty.</value>
+    <value>Aby uzyskać wysoką jakość JPEG (80+) i najlepsze wyniki, również zwiększ w swoim profilu Jakość obrazu.</value>
   </data>
   <data name="JpegQuality" xml:space="preserve">
     <value>Jakość JPEG</value>

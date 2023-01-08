@@ -118,7 +118,7 @@
     <value>Schärfen</value>
   </data>
   <data name="DocumentCorrection" xml:space="preserve">
-    <value>Document Correction</value>
+    <value>Dokumentkorrektur</value>
   </data>
   <data name="Reset" xml:space="preserve">
     <value>Zurücksetzen</value>
@@ -175,7 +175,7 @@
     <value>Alles Löschen</value>
   </data>
   <data name="ClearAll" xml:space="preserve">
-    <value>Clear All</value>
+    <value>Alles löschen</value>
   </data>
   <data name="Language" xml:space="preserve">
     <value>Sprache</value>
@@ -199,22 +199,22 @@
     <value>Skaliere mit Fenster</value>
   </data>
   <data name="Save" xml:space="preserve">
-    <value>Save</value>
+    <value>Speichern</value>
   </data>
   <data name="SaveAll" xml:space="preserve">
-    <value>Save All</value>
+    <value>Alles speichern</value>
   </data>
   <data name="SaveSelected" xml:space="preserve">
     <value>Save Selected</value>
   </data>
   <data name="SaveAllAsPdf" xml:space="preserve">
-    <value>Save All as PDF</value>
+    <value>Alles als PDF speichern</value>
   </data>
   <data name="SaveSelectedAsPdf" xml:space="preserve">
     <value>Save Selected as PDF</value>
   </data>
   <data name="SaveAllAsImages" xml:space="preserve">
-    <value>Save All as Images</value>
+    <value>Alles als Bilder speichern</value>
   </data>
   <data name="SaveSelectedAsImages" xml:space="preserve">
     <value>Save Selected as Images</value>
@@ -244,7 +244,7 @@
     <value>TWAIN Treiber</value>
   </data>
   <data name="AppleDriver" xml:space="preserve">
-    <value>Apple Driver</value>
+    <value>Apple Treiber</value>
   </data>
   <data name="SaneDriver" xml:space="preserve">
     <value>SANE-Treiber</value>

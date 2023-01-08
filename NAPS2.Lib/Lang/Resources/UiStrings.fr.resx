@@ -166,10 +166,10 @@
     <value>Inverser</value>
   </data>
   <data name="ReverseAll" xml:space="preserve">
-    <value>Reverse All</value>
+    <value>Tout inverser</value>
   </data>
   <data name="ReverseSelected" xml:space="preserve">
-    <value>Reverse Selected</value>
+    <value>Inverser la sélection</value>
   </data>
   <data name="Clear" xml:space="preserve">
     <value>Tout effacer</value>
@@ -202,10 +202,10 @@
     <value>Enregistrer</value>
   </data>
   <data name="SaveAll" xml:space="preserve">
-    <value>Save All</value>
+    <value>Enregistrer tout</value>
   </data>
   <data name="SaveSelected" xml:space="preserve">
-    <value>Save Selected</value>
+    <value>Enregistrer la sélection</value>
   </data>
   <data name="SaveAllAsPdf" xml:space="preserve">
     <value>Tout enregistrer en PDF</value>
@@ -220,10 +220,10 @@
     <value>Enregistrer la sélection en images</value>
   </data>
   <data name="EmailAll" xml:space="preserve">
-    <value>Email All</value>
+    <value>Courriel à tous</value>
   </data>
   <data name="EmailSelected" xml:space="preserve">
-    <value>Email Selected</value>
+    <value>Courriel sélectionné</value>
   </data>
   <data name="EmailAllAsPdf" xml:space="preserve">
     <value>Tout envoyer en PDF par courriel</value>
@@ -502,7 +502,7 @@
     <value>Numéro auto-incrémenté (2 chiffres)</value>
   </data>
   <data name="AutoIncrementing1Digit" xml:space="preserve">
-    <value>Auto-incrementing number (1 digits)</value>
+    <value>Numéro auto-incrémenté (1 chiffre)</value>
   </data>
   <data name="FileNameLabel" xml:space="preserve">
     <value>Nom du fichier</value>
@@ -556,7 +556,7 @@
     <value>Mot de passe</value>
   </data>
   <data name="EncryptedFilePrompt" xml:space="preserve">
-    <value>The following file is encrypted and requires a password to open:</value>
+    <value>Le fichier suivant est chiffré, son ouverture nécessite un mot de passe :</value>
   </data>
   <data name="PromptForFilePath" xml:space="preserve">
     <value>Demander le chemin pour le fichier</value>
@@ -688,6 +688,6 @@
     <value>Ouvrir un dossier</value>
   </data>
   <data name="Tools" xml:space="preserve">
-    <value>Tools</value>
+    <value>Outils</value>
   </data>
 </root>

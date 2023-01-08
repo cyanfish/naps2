@@ -70,7 +70,7 @@
     <value>Der ausgewählte Treiber wird auf diesem System nicht unterstützt.</value>
   </data>
   <data name="OcrError" xml:space="preserve">
-    <value>An error occurred running OCR.</value>
+    <value>Beim Ausführen von OCR ist ein Fehler aufgetreten.</value>
   </data>
   <data name="OcrTimeout" xml:space="preserve">
     <value>The OCR operation timed out.</value>

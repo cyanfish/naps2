@@ -190,7 +190,7 @@
     <value>de {0}</value>
   </data>
   <data name="BatchError" xml:space="preserve">
-    <value>An unknown error ocurred during the batch scan.</value>
+    <value>Une erreur inconnue s'est produite lors de la numérisation par lot.</value>
   </data>
   <data name="BatchStatusCancelled" xml:space="preserve">
     <value>Lot annulé.</value>

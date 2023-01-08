@@ -109,7 +109,7 @@
     <value>Яркост / Контраст</value>
   </data>
   <data name="HueSaturation" xml:space="preserve">
-    <value>Hue / Saturation</value>
+    <value>Нюанс / Насищане</value>
   </data>
   <data name="BlackAndWhite" xml:space="preserve">
     <value>Черно и бяло</value>
@@ -175,7 +175,7 @@
     <value>Изчистване</value>
   </data>
   <data name="ClearAll" xml:space="preserve">
-    <value>Clear All</value>
+    <value>Изчистване на всичко</value>
   </data>
   <data name="Language" xml:space="preserve">
     <value>Език</value>

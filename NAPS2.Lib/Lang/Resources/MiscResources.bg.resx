@@ -73,7 +73,7 @@
     <value>TIFF файл (*.tiff, *.tif)</value>
   </data>
   <data name="FileTypeJp2" xml:space="preserve">
-    <value>JPEG2000 File (*.jp2, *.jpx)</value>
+    <value>JPEG-2000 файл (*.jp2, *.jpx)</value>
   </data>
   <data name="NameMissing" xml:space="preserve">
     <value>Липсва име.</value>
@@ -190,7 +190,7 @@
     <value>от {0}</value>
   </data>
   <data name="BatchError" xml:space="preserve">
-    <value>An unknown error ocurred during the batch scan.</value>
+    <value>An unknown error occurred during the batch scan.</value>
   </data>
   <data name="BatchStatusCancelled" xml:space="preserve">
     <value>Груповата задача е отменена.</value>
@@ -370,7 +370,7 @@
     <value>Update checking is disabled.</value>
   </data>
   <data name="UpdateError" xml:space="preserve">
-    <value>An error occured when trying to install the update.</value>
+    <value>Грешка при опит за инталация на обновление.</value>
   </data>
   <data name="Install" xml:space="preserve">
     <value>Install {0}</value>
