@@ -50,7 +50,7 @@ public static class Cli
 
             bool print = Output.EnableVerbose && !noVerbose;
             proc.OutputDataReceived += print ? Print : Save;
-            proc.OutputDataReceived += print ? Print : Save;
+            proc.ErrorDataReceived += print ? Print : Save;
 
             bool ignoreError = false;
             if (ignoreErrorIfOutputContains != null)
