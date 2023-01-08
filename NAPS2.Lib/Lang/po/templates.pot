@@ -172,7 +172,7 @@ msgid "An operation is in progress. Are you sure you want to exit and cancel the
 msgstr ""
 
 #: MiscResources.resx$BatchError$Message
-msgid "An unknown error ocurred during the batch scan."
+msgid "An unknown error occurred during the batch scan."
 msgstr ""
 
 #: MiscResources.resx$UpdateAvailable$Message
