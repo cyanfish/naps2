@@ -38,6 +38,8 @@ public class AboutForm : EtoDialogBase
 
     protected override void BuildLayout()
     {
+        _checkForUpdates.Checked = Config.Get(c => c.CheckForUpdates);
+
         Title = UiStrings.AboutFormTitle;
         Icon = new Icon(1f, Icons.information_small.ToEtoImage());
 
