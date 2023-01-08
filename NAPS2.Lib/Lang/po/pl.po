@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2023-01-03 03:15\n"
+"PO-Revision-Date: 2023-01-08 00:18\n"
 "Last-Translator: \n"
 "Language-Team: Polish\n"
 "Language: pl\n"
@@ -102,7 +102,7 @@ msgstr "Zezwalaj na kopiowanie zawartości"
 
 #: UiStrings.resx$AllowContentCopyingForAccessibility$Message
 msgid "Allow Content Copying for Accessibility"
-msgstr "Zezwalaj na kopiowanie zawartości dla dostępności"
+msgstr "Zezwalaj na kopiowanie zawartości w celu ułatwienia dostępu"
 
 #: UiStrings.resx$AllowDocumentAssembly$Message
 msgid "Allow Document Assembly"
@@ -178,7 +178,7 @@ msgid "An operation is in progress. Are you sure you want to exit and cancel the
 msgstr "Operacja jest w toku. Czy na pewno chcesz zakończyć i anulować operację?"
 
 #: MiscResources.resx$BatchError$Message
-msgid "An unknown error ocurred during the batch scan."
+msgid "An unknown error occurred during the batch scan."
 msgstr "Wystąpił nieznany błąd podczas skanowania wsadowego."
 
 #: MiscResources.resx$UpdateAvailable$Message
@@ -625,7 +625,7 @@ msgstr "Odwróć strony dwustronne"
 
 #: UiStrings.resx$JpegQualityHelp$Message
 msgid "For high JPEG qualities (80+), also increase Image Quality in your profile for best results."
-msgstr "Ponadto zwiększ Jakość obrazu w swoim profilu, dla wysokiej jakości JPEG (80+), aby uzyskać najlepsze rezultaty."
+msgstr "Aby uzyskać wysoką jakość JPEG (80+) i najlepsze wyniki, również zwiększ w swoim profilu Jakość obrazu."
 
 #: MiscResources.resx$FileTypeGif$Message
 msgid "GIF File (*.gif)"
@@ -1279,7 +1279,7 @@ msgstr "Wyświetl"
 
 #: UiStrings.resx$SinglePageFiles$Message
 msgid "Single page files"
-msgstr "Pliki pojedynczej strony"
+msgstr "Pliki jednostronicowe"
 
 #: UiStrings.resx$SingleScan$Message
 msgid "Single scan"
@@ -1576,7 +1576,7 @@ msgstr "{0} obrazy/obrazów zapisano."
 msgid "{0} of {1}"
 msgstr "{0} z {1}"
 
-3})"
+)"
 
 #: MiscResources.resx$ProgressFormat$Message
 msgid "{0} / {1}"

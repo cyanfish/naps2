@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2023-01-01 02:14\n"
+"PO-Revision-Date: 2023-01-08 00:18\n"
 "Last-Translator: \n"
 "Language-Team: German\n"
 "Language: de\n"
@@ -21,19 +21,19 @@ msgstr ""
 
 #: SettingsResources.resx$Dpi_100$Message
 msgid "100 dpi"
-msgstr ""
+msgstr "100 dpi"
 
 #: SettingsResources.resx$Dpi_1200$Message
 msgid "1200 dpi"
-msgstr ""
+msgstr "1200 dpi"
 
 #: SettingsResources.resx$Dpi_150$Message
 msgid "150 dpi"
-msgstr ""
+msgstr "150 dpi"
 
 #: SettingsResources.resx$Dpi_200$Message
 msgid "200 dpi"
-msgstr ""
+msgstr "200 dpi"
 
 #: SettingsResources.resx$BitDepth_24Color$Message
 msgid "24-bit Color"
@@ -41,19 +41,19 @@ msgstr "24-Bit Farbtiefe"
 
 #: SettingsResources.resx$Dpi_300$Message
 msgid "300 dpi"
-msgstr ""
+msgstr "300 dpi"
 
 #: SettingsResources.resx$Dpi_400$Message
 msgid "400 dpi"
-msgstr ""
+msgstr "400 dpi"
 
 #: SettingsResources.resx$Dpi_600$Message
 msgid "600 dpi"
-msgstr ""
+msgstr "600 dpi"
 
 #: SettingsResources.resx$Dpi_800$Message
 msgid "800 dpi"
-msgstr ""
+msgstr "800 dpi"
 
 #: SettingsResources.resx$PageSize_A3$Message
 msgid "A3 (297x420 mm)"
@@ -61,11 +61,11 @@ msgstr "A3 (297 × 420 mm)"
 
 #: SettingsResources.resx$PageSize_A4$Message
 msgid "A4 (210x297 mm)"
-msgstr ""
+msgstr "A4 (210x297 mm)"
 
 #: SettingsResources.resx$PageSize_A5$Message
 msgid "A5 (148x210 mm)"
-msgstr ""
+msgstr "A5 (148x210 mm)"
 
 #: UiStrings.resx$About$Message
 #: UiStrings.resx$AboutFormTitle$Message
@@ -146,7 +146,7 @@ msgstr "Beim Versuch das Update zu installieren ist ein Fehler aufgetreten."
 
 #: SdkResources.resx$OcrError$Message
 msgid "An error occurred running OCR."
-msgstr ""
+msgstr "Beim Ausführen von OCR ist ein Fehler aufgetreten."
 
 #: MiscResources.resx$AuthError$Message
 msgid "An error occurred when trying to authorize."
@@ -178,8 +178,8 @@ msgid "An operation is in progress. Are you sure you want to exit and cancel the
 msgstr "Verarbeitung läuft noch. Wollen Sie wirklich beenden und die Verarbeitung abbrechen?"
 
 #: MiscResources.resx$BatchError$Message
-msgid "An unknown error ocurred during the batch scan."
-msgstr ""
+msgid "An unknown error occurred during the batch scan."
+msgstr "Beim Stapel-Scan ist ein unbekannter Fehler aufgetreten."
 
 #: MiscResources.resx$UpdateAvailable$Message
 msgid "An update is available."
@@ -191,7 +191,7 @@ msgstr "Ein Update für OCR ist verfügbar."
 
 #: UiStrings.resx$AppleDriver$Message
 msgid "Apple Driver"
-msgstr ""
+msgstr "Apple Treiber"
 
 #: UiStrings.resx$BrightnessContrastAfterScan$Message
 msgid "Apply brightness/contrast after scan"
@@ -272,11 +272,11 @@ msgstr "OCR nach dem Scannen automatisch starten"
 
 #: SettingsResources.resx$PageSize_B4$Message
 msgid "B4 (250x353 mm)"
-msgstr ""
+msgstr "B4 (250x353 mm)"
 
 #: SettingsResources.resx$PageSize_B5$Message
 msgid "B5 (176x250 mm)"
-msgstr ""
+msgstr "B5 (176x250 mm)"
 
 #: UiStrings.resx$BatchScan$Message
 #: UiStrings.resx$BatchScanFormTitle$Message
@@ -297,7 +297,7 @@ msgstr "Die Stapelverarbeitung wurde auf Grund eines Fehlers abgebrochen."
 
 #: SettingsResources.resx$OcrMode_Best$Message
 msgid "Best"
-msgstr ""
+msgstr "Am besten"
 
 #: UiStrings.resx$BitDepthLabel$Message
 msgid "Bit depth:"
@@ -326,7 +326,7 @@ msgstr "Helligkeit:"
 
 #: SettingsResources.resx$TiffComp_Ccitt4$Message
 msgid "CCITT4"
-msgstr ""
+msgstr "CCITT4"
 
 #: MiscResources.resx$Cancel$Message
 #: UiStrings.resx$Cancel$Message
@@ -376,7 +376,7 @@ msgstr "Alles Löschen"
 
 #: UiStrings.resx$ClearAll$Message
 msgid "Clear All"
-msgstr ""
+msgstr "Alles löschen"
 
 #: UiStrings.resx$ClearAfterSaving$Message
 msgid "Clear images after saving"
@@ -500,7 +500,7 @@ msgstr "Angezeigter Name:"
 
 #: UiStrings.resx$DocumentCorrection$Message
 msgid "Document Correction"
-msgstr ""
+msgstr "Dokumentkorrektur"
 
 #: MiscResources.resx$Donate$Message
 #: UiStrings.resx$Donate$Message
@@ -529,7 +529,7 @@ msgstr "Download-Fortschritt"
 
 #: SettingsResources.resx$Source_Duplex$Message
 msgid "Duplex"
-msgstr ""
+msgstr "Duplex"
 
 #: UiStrings.resx$Edit$Message
 msgid "Edit"
@@ -804,11 +804,11 @@ msgstr "Mehrere Scans (Zwischen den Scans nachfragen)"
 #: SdkResources.resx$NAPS2$Message
 #: UiStrings.resx$Naps2$Message
 msgid "NAPS2"
-msgstr ""
+msgstr "NAPS2"
 
 #: UiStrings.resx$Naps2TitleFormat$Message
 msgid "NAPS2 - {0}"
-msgstr ""
+msgstr "NAPS2 - {0}"
 
 #: MiscResources.resx$DonatePrompt$Message
 msgid "NAPS2 is completely free. Consider making a donation."
@@ -964,19 +964,19 @@ msgstr "PDF gespeichert."
 
 #: SettingsResources.resx$PdfCompat_PdfA1B$Message
 msgid "PDF/A-1b"
-msgstr ""
+msgstr "PDF/A-1b"
 
 #: SettingsResources.resx$PdfCompat_PdfA2B$Message
 msgid "PDF/A-2b"
-msgstr ""
+msgstr "PDF/A-2b"
 
 #: SettingsResources.resx$PdfCompat_PdfA3B$Message
 msgid "PDF/A-3b"
-msgstr ""
+msgstr "PDF/A-3b"
 
 #: SettingsResources.resx$PdfCompat_PdfA3U$Message
 msgid "PDF/A-3u"
-msgstr ""
+msgstr "PDF/A-3u"
 
 #: MiscResources.resx$FileTypePng$Message
 msgid "PNG File (*.png)"
@@ -1139,19 +1139,19 @@ msgstr "SANE-Treiber"
 
 #: UiStrings.resx$Save$Message
 msgid "Save"
-msgstr ""
+msgstr "Speichern"
 
 #: UiStrings.resx$SaveAll$Message
 msgid "Save All"
-msgstr ""
+msgstr "Alles speichern"
 
 #: UiStrings.resx$SaveAllAsImages$Message
 msgid "Save All as Images"
-msgstr ""
+msgstr "Alles als Bilder speichern"
 
 #: UiStrings.resx$SaveAllAsPdf$Message
 msgid "Save All as PDF"
-msgstr ""
+msgstr "Alles als PDF speichern"
 
 #: MiscResources.resx$SaveImages$Message
 #: UiStrings.resx$SaveImages$Message
@@ -1460,7 +1460,7 @@ msgstr "Um die Texterkennung verwenden zu können, müssen die benötigten Sprac
 #: MiscResources.resx$Version$Message
 #: SdkResources.resx$Version$Message
 msgid "Version {0}"
-msgstr ""
+msgstr "Version {0}"
 
 #: UiStrings.resx$View$Message
 msgid "View"
@@ -1488,7 +1488,7 @@ msgstr "Weiß Schwellwert"
 
 #: UiStrings.resx$WiaVersionLabel$Message
 msgid "Wia Version:"
-msgstr ""
+msgstr "Wia Version:"
 
 #: UiStrings.resx$Year4Digit$Message
 msgid "Year"
@@ -1513,7 +1513,7 @@ msgstr "Es gibt ungespeicherte Änderungen. Möchten Sie das Programm beenden un
 
 #: UiStrings.resx$Zoom$Message
 msgid "Zoom"
-msgstr ""
+msgstr "Zoom"
 
 #: UiStrings.resx$ZoomActual$Message
 msgid "Zoom Actual"
@@ -1529,15 +1529,15 @@ msgstr "Verkleinern"
 
 #: SettingsResources.resx$PageSizeUnit_Centimetre$Message
 msgid "cm"
-msgstr ""
+msgstr "cm"
 
 #: SettingsResources.resx$PageSizeUnit_Inch$Message
 msgid "in"
-msgstr ""
+msgstr "in"
 
 #: SettingsResources.resx$PageSizeUnit_Millimetre$Message
 msgid "mm"
-msgstr ""
+msgstr "mm"
 
 #: MiscResources.resx$OfN$Message
 msgid "of {0}"
@@ -1545,19 +1545,19 @@ msgstr "von {0}"
 
 #: SettingsResources.resx$TwainImpl_X64$Message
 msgid "x64"
-msgstr ""
+msgstr "x64"
 
 #: MiscResources.resx$NamedPageSizeFormat$Message
 msgid "{0} ({1}x{2} {3})"
-msgstr ""
+msgstr "{0} ({1}x{2} {3})"
 
 #: MiscResources.resx$ProgressFormat$Message
 msgid "{0} / {1}"
-msgstr ""
+msgstr "{0} / {1}"
 
 #: MiscResources.resx$SizeProgress$Message
 msgid "{0} / {1} MB"
-msgstr ""
+msgstr "{0} / {1} MB"
 
 #: MiscResources.resx$FilesProgressFormat$Message
 msgid "{0} / {1} files"
@@ -1569,39 +1569,14 @@ msgstr "{0} Bilder wurden am {1} um {2} gescannt und wurden möglicherweise nich
 
 #: MiscResources.resx$ImagesSaved$Message
 msgid "{0} images saved."
-msgstr "{0} bilder gespeichert."
+msgstr "{0} Bilder gespeichert."
 
 #: MiscResources.resx$PdfStatus$Message
 #: UiStrings.resx$XOfY$Message
 msgid "{0} of {1}"
-msgstr ""
+msgstr "{0} von {1}"
 
-Message
-msgid "in"
-msgstr ""
-
-#: SettingsResources.resx$PageSizeUnit_Millimetre$Message
-msgid "mm"
-msgstr ""
-
-#: MiscResources.resx$OfN$Message
-msgid "of {0}"
-msgstr "von {0}"
-
-#: SettingsResources.resx$TwainImpl_X64$Message
-msgid "x64"
-msgstr ""
-
-#: MiscResources.resx$NamedPageSizeFormat$Message
-msgid "{0} ({1}x{2} {3})"
-msgstr ""
-
-#: MiscResources.resx$ProgressFormat$Message
-msgid "{0} / {1}"
-msgstr ""
-
-#: MiscResources.resx$SizeProgress$Message
-msgid "{0} / {1} MB"
+B"
 msgstr ""
 
 #: MiscResources.resx$FilesProgressFormat$Message

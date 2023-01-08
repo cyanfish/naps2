@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2023-01-01 02:14\n"
+"PO-Revision-Date: 2023-01-08 00:18\n"
 "Last-Translator: \n"
 "Language-Team: French\n"
 "Language: fr\n"
@@ -146,7 +146,7 @@ msgstr "Une erreur est survenue en essayant d'installer la mise à jour."
 
 #: SdkResources.resx$OcrError$Message
 msgid "An error occurred running OCR."
-msgstr ""
+msgstr "Une erreur s'est produite lors de l'exécution de l'OCR."
 
 #: MiscResources.resx$AuthError$Message
 msgid "An error occurred when trying to authorize."
@@ -178,8 +178,8 @@ msgid "An operation is in progress. Are you sure you want to exit and cancel the
 msgstr "Une opération est en cours. Faut-il vraiment quitter et annuler l'opération ?"
 
 #: MiscResources.resx$BatchError$Message
-msgid "An unknown error ocurred during the batch scan."
-msgstr ""
+msgid "An unknown error occurred during the batch scan."
+msgstr "Une erreur inconnue s'est produite lors de la numérisation par lot."
 
 #: MiscResources.resx$UpdateAvailable$Message
 msgid "An update is available."
@@ -252,7 +252,7 @@ msgstr "Paramètres d'enregistrement automatique"
 
 #: UiStrings.resx$AutoIncrementing1Digit$Message
 msgid "Auto-incrementing number (1 digits)"
-msgstr ""
+msgstr "Numéro auto-incrémenté (1 chiffre)"
 
 #: UiStrings.resx$AutoIncrementing2Digit$Message
 msgid "Auto-incrementing number (2 digits)"
@@ -537,7 +537,7 @@ msgstr "Modifier"
 
 #: UiStrings.resx$EmailAll$Message
 msgid "Email All"
-msgstr ""
+msgstr "Courriel à tous"
 
 #: UiStrings.resx$EmailAllAsPdf$Message
 msgid "Email All as PDF"
@@ -554,7 +554,7 @@ msgstr "Progression du PDF par courriel"
 
 #: UiStrings.resx$EmailSelected$Message
 msgid "Email Selected"
-msgstr ""
+msgstr "Courriel sélectionné"
 
 #: UiStrings.resx$EmailSelectedAsPdf$Message
 msgid "Email Selected as PDF"
@@ -1099,11 +1099,11 @@ msgstr "Inverser"
 
 #: UiStrings.resx$ReverseAll$Message
 msgid "Reverse All"
-msgstr ""
+msgstr "Tout inverser"
 
 #: UiStrings.resx$ReverseSelected$Message
 msgid "Reverse Selected"
-msgstr ""
+msgstr "Inverser la sélection"
 
 #: UiStrings.resx$Revert$Message
 msgid "Revert"
@@ -1143,7 +1143,7 @@ msgstr "Enregistrer"
 
 #: UiStrings.resx$SaveAll$Message
 msgid "Save All"
-msgstr ""
+msgstr "Enregistrer tout"
 
 #: UiStrings.resx$SaveAllAsImages$Message
 msgid "Save All as Images"
@@ -1173,7 +1173,7 @@ msgstr "Progression de l'enregistrement en PDF"
 
 #: UiStrings.resx$SaveSelected$Message
 msgid "Save Selected"
-msgstr ""
+msgstr "Enregistrer la sélection"
 
 #: UiStrings.resx$SaveSelectedAsImages$Message
 msgid "Save Selected as Images"
@@ -1320,7 +1320,7 @@ msgstr "Le moteur OCR n'est pas disponible. Merci d'installer le paquet requis :
 
 #: SdkResources.resx$OcrTimeout$Message
 msgid "The OCR operation timed out."
-msgstr ""
+msgstr "L'opération OCR a expiré."
 
 #: MiscResources.resx$SaneNotAvailable$Message
 #: SdkResources.resx$SaneNotAvailable$Message
@@ -1346,7 +1346,7 @@ msgstr "Le fichier « {0} » existe déjà. Faut-il vraiment l'écraser ?"
 
 #: UiStrings.resx$EncryptedFilePrompt$Message
 msgid "The following file is encrypted and requires a password to open:"
-msgstr ""
+msgstr "Le fichier suivant est chiffré, son ouverture nécessite un mot de passe :"
 
 #: MiscResources.resx$DevicePaperJam$Message
 #: SdkResources.resx$DevicePaperJam$Message
@@ -1407,7 +1407,7 @@ msgstr "Titre :"
 
 #: UiStrings.resx$Tools$Message
 msgid "Tools"
-msgstr ""
+msgstr "Outils"
 
 #: UiStrings.resx$TwainImplLabel$Message
 msgid "Twain Implementation:"
@@ -1576,25 +1576,7 @@ msgstr "{0} image(s) enregistrée(s)."
 msgid "{0} of {1}"
 msgstr "{0} sur {1}"
 
-t_Millimetre$Message
-msgid "mm"
-msgstr "mm"
-
-#: MiscResources.resx$OfN$Message
-msgid "of {0}"
-msgstr "de {0}"
-
-#: SettingsResources.resx$TwainImpl_X64$Message
-msgid "x64"
-msgstr "x64"
-
-#: MiscResources.resx$NamedPageSizeFormat$Message
-msgid "{0} ({1}x{2} {3})"
-msgstr "{0} ({1}x{2} {3})"
-
-#: MiscResources.resx$ProgressFormat$Message
-msgid "{0} / {1}"
-msgstr "{0} / {1}"
+ {1}"
 
 #: MiscResources.resx$SizeProgress$Message
 msgid "{0} / {1} MB"

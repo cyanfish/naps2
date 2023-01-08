@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2023-01-01 02:14\n"
+"PO-Revision-Date: 2023-01-08 00:18\n"
 "Last-Translator: \n"
 "Language-Team: Bulgarian\n"
 "Language: bg\n"
@@ -142,7 +142,7 @@ msgstr ""
 
 #: MiscResources.resx$UpdateError$Message
 msgid "An error occured when trying to install the update."
-msgstr ""
+msgstr "Грешка при опит за инталация на обновление."
 
 #: SdkResources.resx$OcrError$Message
 msgid "An error occurred running OCR."
@@ -178,7 +178,7 @@ msgid "An operation is in progress. Are you sure you want to exit and cancel the
 msgstr ""
 
 #: MiscResources.resx$BatchError$Message
-msgid "An unknown error ocurred during the batch scan."
+msgid "An unknown error occurred during the batch scan."
 msgstr ""
 
 #: MiscResources.resx$UpdateAvailable$Message
@@ -297,7 +297,7 @@ msgstr "Груповото сканиране спря поради грешка
 
 #: SettingsResources.resx$OcrMode_Best$Message
 msgid "Best"
-msgstr ""
+msgstr "Най-добър"
 
 #: UiStrings.resx$BitDepthLabel$Message
 msgid "Bit depth:"
@@ -376,7 +376,7 @@ msgstr "Изчистване"
 
 #: UiStrings.resx$ClearAll$Message
 msgid "Clear All"
-msgstr ""
+msgstr "Изчистване на всичко"
 
 #: UiStrings.resx$ClearAfterSaving$Message
 msgid "Clear images after saving"
@@ -601,7 +601,7 @@ msgstr "Пропусни празните страници"
 
 #: SettingsResources.resx$OcrMode_Fast$Message
 msgid "Fast"
-msgstr ""
+msgstr "Бърз"
 
 #: SettingsResources.resx$Source_Feeder$Message
 msgid "Feeder"
@@ -641,7 +641,7 @@ msgstr "Стъкло"
 
 #: SettingsResources.resx$EmailProviderType_Gmail$Message
 msgid "Gmail"
-msgstr ""
+msgstr "Gmail"
 
 #: SettingsResources.resx$BitDepth_8Grayscale$Message
 msgid "Grayscale"
@@ -657,7 +657,7 @@ msgstr "Час (0-23)"
 
 #: UiStrings.resx$HueSaturation$Message
 msgid "Hue / Saturation"
-msgstr ""
+msgstr "Нюанс / Насищане"
 
 #: UiStrings.resx$IconsFrom$Message
 msgid "Icons from:"
@@ -730,7 +730,7 @@ msgstr "JPEG файл (*.jpg, *.jpeg)"
 
 #: MiscResources.resx$FileTypeJp2$Message
 msgid "JPEG2000 File (*.jp2, *.jpx)"
-msgstr ""
+msgstr "JPEG-2000 файл (*.jp2, *.jpx)"
 
 #: UiStrings.resx$JpegQuality$Message
 msgid "Jpeg Quality"
@@ -804,7 +804,7 @@ msgstr "Многократно сканиране (запитване между
 #: SdkResources.resx$NAPS2$Message
 #: UiStrings.resx$Naps2$Message
 msgid "NAPS2"
-msgstr ""
+msgstr "NAPS2"
 
 #: UiStrings.resx$Naps2TitleFormat$Message
 msgid "NAPS2 - {0}"
@@ -1576,16 +1576,7 @@ msgstr "{0} изображения са записани."
 msgid "{0} of {1}"
 msgstr "{0} от {1}"
 
-#: MiscResources.resx$OfN$Message
-msgid "of {0}"
-msgstr "от {0}"
-
-#: SettingsResources.resx$TwainImpl_X64$Message
-msgid "x64"
-msgstr ""
-
-#: MiscResources.resx$NamedPageSizeFormat$Message
-msgid "{0} ({1}x{2} {3})"
+{2} {3})"
 msgstr ""
 
 #: MiscResources.resx$ProgressFormat$Message

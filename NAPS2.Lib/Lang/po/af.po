@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2023-01-01 02:14\n"
+"PO-Revision-Date: 2023-01-08 00:18\n"
 "Last-Translator: \n"
 "Language-Team: Afrikaans\n"
 "Language: af\n"
@@ -178,7 +178,7 @@ msgid "An operation is in progress. Are you sure you want to exit and cancel the
 msgstr "Die program is tans besig met 'n taak. Is jy seker dat jy die program wil verlaat en die taak kanselleer?"
 
 #: MiscResources.resx$BatchError$Message
-msgid "An unknown error ocurred during the batch scan."
+msgid "An unknown error occurred during the batch scan."
 msgstr ""
 
 #: MiscResources.resx$UpdateAvailable$Message
