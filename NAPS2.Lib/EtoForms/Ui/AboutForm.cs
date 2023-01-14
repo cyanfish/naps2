@@ -11,34 +11,38 @@ public class AboutForm : EtoDialogBase
     private const string ICONS_HOMEPAGE = "https://www.fatcow.com/free-icons";
     private const string DONATE_URL = "https://www.naps2.com/donate";
 
-    private readonly UpdateChecker _updateChecker;
-
     private readonly Control _donateButton;
+
+#if !MSI
+    private readonly UpdateChecker _updateChecker;
     private readonly CheckBox _checkForUpdates;
     private readonly Panel _updatePanel;
-
     private bool _hasCheckedForUpdates;
     private UpdateInfo? _update;
+#endif
 
     public AboutForm(Naps2Config config, UpdateChecker updateChecker)
         : base(config)
     {
-        _updateChecker = updateChecker;
-
         _donateButton = EtoPlatform.Current.AccessibleImageButton(
             Icons.btn_donate_LG.ToEtoImage(),
             UiStrings.Donate,
             () => Process.Start(new ProcessStartInfo(DONATE_URL) { UseShellExecute = true }));
+
+#if !MSI
+        _updateChecker = updateChecker;
         _checkForUpdates = new CheckBox { Text = UiStrings.CheckForUpdates };
         _checkForUpdates.CheckedChanged += CheckForUpdatesChanged;
         _updatePanel = new Panel();
-
         UpdateControls();
+#endif
     }
 
     protected override void BuildLayout()
     {
+#if !MSI
         _checkForUpdates.Checked = Config.Get(c => c.CheckForUpdates);
+#endif
 
         Title = UiStrings.AboutFormTitle;
         Icon = new Icon(1f, Icons.information_small.ToEtoImage());
@@ -56,14 +60,18 @@ public class AboutForm : EtoDialogBase
                         C.NoWrap(string.Format(MiscResources.Version, AssemblyHelper.Version)),
                         C.UrlLink(NAPS2_HOMEPAGE)
                     ),
-                    L.Column(
-                        C.Filler(),
-                        _donateButton
-                    ).Padding(left: 10)
+                    Config.Get(c => c.HiddenButtons).HasFlag(ToolbarButtons.Donate)
+                        ? C.None()
+                        : L.Column(
+                            C.Filler(),
+                            _donateButton
+                        ).Padding(left: 10)
                 ),
+#if !MSI
                 C.TextSpace(),
                 _checkForUpdates.Padding(left: 4),
                 _updatePanel,
+#endif
                 C.TextSpace(),
                 C.NoWrap(string.Format(UiStrings.CopyrightFormat, AssemblyHelper.COPYRIGHT_YEARS)),
                 C.TextSpace(),
@@ -81,6 +89,7 @@ public class AboutForm : EtoDialogBase
         );
     }
 
+#if !MSI
     private void DoUpdateCheck()
     {
         if (_checkForUpdates.IsChecked())
@@ -142,4 +151,5 @@ public class AboutForm : EtoDialogBase
         UpdateControls();
         DoUpdateCheck();
     }
+#endif
 }
