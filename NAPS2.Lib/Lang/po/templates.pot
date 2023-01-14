@@ -135,7 +135,7 @@ msgid "An additional component is needed to import this PDF file. Would you like
 msgstr ""
 
 #: MiscResources.resx$UpdateError$Message
-msgid "An error occured when trying to install the update."
+msgid "An error occurred when trying to install the update."
 msgstr ""
 
 #: SdkResources.resx$OcrError$Message
