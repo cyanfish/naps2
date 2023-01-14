@@ -25,7 +25,7 @@ public class UpdateOperation : OperationBase
         try
         {
             const int tls13 = 12288;
-            ServicePointManager.SecurityProtocol = (SecurityProtocolType) tls13;
+            ServicePointManager.SecurityProtocol = (SecurityProtocolType) tls13 | SecurityProtocolType.Tls12;
         }
         catch (NotSupportedException)
         {
