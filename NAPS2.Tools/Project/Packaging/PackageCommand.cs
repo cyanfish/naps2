@@ -7,6 +7,14 @@ public class PackageCommand : ICommand<PackageOptions>
 {
     public int Run(PackageOptions opts)
     {
+        if (opts.Build)
+        {
+            new BuildCommand().Run(new BuildOptions
+            {
+                BuildType = opts.BuildType
+            });
+        }
+
         // TODO: Fix windows targets to ensure that the project is built
         // TODO: Allow customizing dotnet version
         var constraints = new TargetConstraints
