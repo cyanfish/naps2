@@ -127,6 +127,7 @@ public class ThumbnailRenderQueue : IDisposable
             _renderThumbnailsCompleteHandle.Set();
             _renderThumbnailsWaitHandle.WaitOne();
         }
+        worker?.Dispose();
     }
 
     private IMemoryImage RenderThumbnailWithWorker(WorkerContext worker, ProcessedImage imageToRender,

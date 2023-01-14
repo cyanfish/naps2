@@ -5,6 +5,7 @@ using NAPS2.ImportExport;
 using NAPS2.ImportExport.Images;
 using NAPS2.Platform.Windows;
 using NAPS2.Recovery;
+using NAPS2.Remoting.Worker;
 using NAPS2.Sdk.Tests;
 using NAPS2.Sdk.Tests.Asserts;
 using NAPS2.Update;
@@ -36,6 +37,7 @@ public class DesktopControllerTests : ContextualTests
     private readonly DesktopFormProvider _desktopFormProvider;
     private readonly Mock<IScannedImagePrinter> _scannedImagePrinter;
     private readonly ThumbnailController _thumbnailController;
+    private readonly Mock<IWorkerFactory> _workerFactory;
 
     public DesktopControllerTests()
     {
@@ -59,6 +61,7 @@ public class DesktopControllerTests : ContextualTests
         _desktopFormProvider = new DesktopFormProvider();
         _scannedImagePrinter = new Mock<IScannedImagePrinter>();
         _thumbnailController = new ThumbnailController(_thumbnailRenderQueue, _config);
+        _workerFactory = new Mock<IWorkerFactory>();
         _desktopController = new DesktopController(
             ScanningContext,
             _imageList,
@@ -78,7 +81,8 @@ public class DesktopControllerTests : ContextualTests
             _desktopImagesController,
             _desktopScanController.Object,
             _desktopFormProvider,
-            _scannedImagePrinter.Object
+            _scannedImagePrinter.Object,
+            _workerFactory.Object
         );
 
         _operationFactory.Setup(x => x.Create<RecoveryOperation>()).Returns(

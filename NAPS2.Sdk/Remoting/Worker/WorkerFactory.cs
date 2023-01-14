@@ -161,4 +161,16 @@ public class WorkerFactory : IWorkerFactory
         worker.Service.Init(_fileStorageManager.FolderPath);
         return worker;
     }
+
+    public void Dispose()
+    {
+        if (_workerQueues == null) return;
+        foreach (var queue in _workerQueues.Values)
+        {
+            while (queue.TryTake(out var worker))
+            {
+                worker.Dispose();
+            }
+        }
+    }
 }

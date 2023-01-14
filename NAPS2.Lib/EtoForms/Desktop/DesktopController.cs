@@ -5,6 +5,7 @@ using NAPS2.ImportExport.Images;
 using NAPS2.Platform.Windows;
 using NAPS2.Recovery;
 using NAPS2.Remoting;
+using NAPS2.Remoting.Worker;
 using NAPS2.Scan;
 using NAPS2.Update;
 
@@ -30,6 +31,7 @@ public class DesktopController
     private readonly IDesktopScanController _desktopScanController;
     private readonly DesktopFormProvider _desktopFormProvider;
     private readonly IScannedImagePrinter _scannedImagePrinter;
+    private readonly IWorkerFactory _workerFactory;
 
     private bool _closed;
     private bool _initialized;
@@ -43,7 +45,7 @@ public class DesktopController
         ImageClipboard imageClipboard, ImageListActions imageListActions,
         DialogHelper dialogHelper,
         DesktopImagesController desktopImagesController, IDesktopScanController desktopScanController,
-        DesktopFormProvider desktopFormProvider, IScannedImagePrinter scannedImagePrinter)
+        DesktopFormProvider desktopFormProvider, IScannedImagePrinter scannedImagePrinter, IWorkerFactory workerFactory)
     {
         _scanningContext = scanningContext;
         _imageList = imageList;
@@ -63,6 +65,7 @@ public class DesktopController
         _desktopScanController = desktopScanController;
         _desktopFormProvider = desktopFormProvider;
         _scannedImagePrinter = scannedImagePrinter;
+        _workerFactory = workerFactory;
     }
 
     public bool SkipRecoveryCleanup { get; set; }
@@ -167,6 +170,7 @@ public class DesktopController
         }
         _closed = true;
         _thumbnailController.Dispose();
+        _workerFactory.Dispose();
     }
 
     public bool PrepareForClosing(bool userClosing)
