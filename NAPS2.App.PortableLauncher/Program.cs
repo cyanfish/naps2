@@ -1,4 +1,5 @@
 ﻿using System.Reflection;
+using System.Threading;
 
 namespace NAPS2.Portable;
 
@@ -19,18 +20,37 @@ class Program
             finally
             {
                 var portableExePath = Path.Combine(portableExeDir, "App", "NAPS2.exe");
-                typeof(Process).GetMethod("Start", new[] {typeof(string)}).Invoke(null, new object[] {portableExePath});
+                // Use reflection to avoid antivirus false positives (yes, really)
+                typeof(Process).GetMethod("Start", new[] { typeof(string) })
+                    .Invoke(null, new object[] { portableExePath });
             }
         }
     }
 
     private static void UpdatePortableApp(string portableExeDir, string procId, string newAppFolderPath)
     {
-        // Wait for the starting process to finish so we don't try to mess with files in use
+        // Wait for the starting process and workers to finish so we don't try to mess with files in use
         try
         {
-            var proc = Process.GetProcessById(int.Parse(procId));
-            proc.WaitForExit();
+            var stopwatch = Stopwatch.StartNew();
+
+            // Wait for the starting process to exit
+            var mainProc = Process.GetProcessById(int.Parse(procId));
+            mainProc.WaitForExit();
+
+            // Assume any process named NAPS2 or NAPS2.Worker could be a worker, although this isn't necessarily true
+            // if there are multiple NAPS2 installations.
+            var processesToWaitOn =
+                Process.GetProcessesByName("NAPS2")
+                    .Concat(Process.GetProcessesByName("NAPS2.Worker"))
+                    .ToList();
+
+            // Wait at most 10 seconds for them to exit (which is WorkerEntryPoint.ParentCheckInterval)
+            const int waitTimeout = 10_000;
+            while (stopwatch.ElapsedMilliseconds < waitTimeout && processesToWaitOn.Any(x => !x.HasExited))
+            {
+                Thread.Sleep(100);
+            }
         }
         catch (ArgumentException)
         {
