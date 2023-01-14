@@ -26,6 +26,11 @@ public static class PdfiumImageExtractor
     private static IMemoryImage? GetImageFromObject(ImageContext imageContext, PdfPageObject imageObj,
         PdfImageMetadata metadata)
     {
+        // TODO: Add a test for rendering CMYK
+        if (metadata.Colorspace is not (Colorspace.DeviceRgb or Colorspace.DeviceGray or Colorspace.Indexed))
+        {
+            return null;
+        }
         // TODO: This condition is never actually true for some reason, we need to use this code path if there is either a monochrome mask or softmask
         // TODO: Might need a pdfium fix.
         if (imageObj.HasTransparency)
