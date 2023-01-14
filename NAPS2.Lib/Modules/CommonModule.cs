@@ -43,8 +43,9 @@ public class CommonModule : Module
         builder.RegisterType<WorkerScanBridge>().AsSelf();
 
         // Config
+        // TODO: Make this a usable path on Mac/Linux
         builder.Register(_ => new Naps2Config(Path.Combine(Paths.Executable, "appsettings.xml"),
-                Path.Combine(Paths.AppData, "config.xml"))).SingleInstance();
+            Path.Combine(Paths.AppData, "config.xml"))).SingleInstance();
 
         // Host
         builder.RegisterType<WorkerFactory>().As<IWorkerFactory>().SingleInstance();
@@ -71,6 +72,7 @@ public class CommonModule : Module
             var config = ctx.Resolve<Naps2Config>();
             return new ProfileManager(
                 Path.Combine(Paths.AppData, "profiles.xml"),
+                // TODO: Make this a usable path on Mac/Linux
                 Path.Combine(AssemblyHelper.EntryFolder, "profiles.xml"),
                 config.Get(c => c.LockSystemProfiles),
                 config.Get(c => c.LockUnspecifiedDevices),
