@@ -27,6 +27,10 @@ public class ScanOperation : OperationBase
 
     public void Progress(int current, int total)
     {
+        if (current > 0 && total > 0)
+        {
+            Status.IndeterminateProgress = false;
+        }
         Status.CurrentProgress = current;
         Status.MaxProgress = total;
         InvokeStatusChanged();

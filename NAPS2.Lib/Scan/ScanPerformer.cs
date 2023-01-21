@@ -186,10 +186,11 @@ internal class ScanPerformer : IScanPerformer
                 Adapter = scanProfile.TwainImpl == TwainImpl.Legacy ? TwainAdapter.Legacy : TwainAdapter.NTwain,
                 Dsm = scanProfile.TwainImpl == TwainImpl.X64
                     ? TwainDsm.NewX64
-                    : scanProfile.TwainImpl == TwainImpl.OldDsm || scanProfile.TwainImpl == TwainImpl.Legacy
+                    : scanProfile.TwainImpl is TwainImpl.OldDsm or TwainImpl.Legacy
                         ? TwainDsm.Old
                         : TwainDsm.New,
-                TransferMode = scanProfile.TwainImpl == TwainImpl.MemXfer
+                // MemXfer is the default
+                TransferMode = scanProfile.TwainImpl is TwainImpl.Default or TwainImpl.MemXfer
                     ? TwainTransferMode.Memory
                     : TwainTransferMode.Native,
                 IncludeWiaDevices = false

@@ -134,8 +134,11 @@ public record AutoSaveSettings
 /// </summary>
 public enum TwainImpl
 {
+    // The default is currently equivalent ot MemXfer
     [LocalizedDescription(typeof(SettingsResources), "TwainImpl_Default")]
     Default,
+    [LocalizedDescription(typeof(SettingsResources), "TwainImpl_NativeXfer")]
+    NativeXfer,
     [LocalizedDescription(typeof(SettingsResources), "TwainImpl_MemXfer")]
     MemXfer,
     [LocalizedDescription(typeof(SettingsResources), "TwainImpl_OldDsm")]
