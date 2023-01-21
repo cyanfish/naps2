@@ -185,6 +185,10 @@ internal class DeviceOperator : ICScannerDeviceDelegate
             var unit = await SelectUnit(_options.PaperSource == PaperSource.Flatbed
                 ? ICScannerFunctionalUnitType.Flatbed
                 : ICScannerFunctionalUnitType.DocumentFeeder);
+            if (unit is ICScannerFunctionalUnitDocumentFeeder { SupportsDuplexScanning: true } feederUnit)
+            {
+                feederUnit.DuplexScanningEnabled = _options.PaperSource == PaperSource.Duplex;
+            }
             SetScanArea(unit);
             // TODO: Check supported resolutions?
             unit.Resolution = (nuint) _options.Dpi;
