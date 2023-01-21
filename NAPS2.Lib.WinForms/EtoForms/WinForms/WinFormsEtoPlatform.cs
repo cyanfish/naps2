@@ -30,7 +30,7 @@ public class WinFormsEtoPlatform : EtoPlatform
     public override IListView<T> CreateListView<T>(ListViewBehavior<T> behavior) =>
         new WinFormsListView<T>(behavior);
 
-    public override void ConfigureImageButton(Eto.Forms.Button button, bool big)
+    public override void ConfigureImageButton(Button button, bool big)
     {
         if (string.IsNullOrEmpty(button.Text))
         {
@@ -66,7 +66,7 @@ public class WinFormsEtoPlatform : EtoPlatform
             else
             {
                 var widthWithoutRightPadding = imageWidth + textWidth + IMAGE_PADDING + 15;
-                native.Width = Math.Max(widthWithoutRightPadding + IMAGE_PADDING,
+                button.Width = Math.Max(widthWithoutRightPadding + IMAGE_PADDING,
                     ButtonHandler.DefaultMinimumSize.Width);
                 var rightPadding = IMAGE_PADDING + (native.Width - widthWithoutRightPadding - IMAGE_PADDING) / 2;
                 native.Padding = native.Padding with { Left = IMAGE_PADDING, Right = rightPadding };
