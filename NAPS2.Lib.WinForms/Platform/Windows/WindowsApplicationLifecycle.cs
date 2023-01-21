@@ -32,6 +32,7 @@ public class WindowsApplicationLifecycle
     {
         bool silent = args.Any(x => x.Equals("/Silent", StringComparison.InvariantCultureIgnoreCase));
         bool noElevation = args.Any(x => x.Equals("/NoElevation", StringComparison.InvariantCultureIgnoreCase));
+        bool failedUpdate = args.Any(x => x.Equals("/FailedUpdate", StringComparison.InvariantCultureIgnoreCase));
 
         // Utility function to send a message to the user (if /Silent is not specified)
         void Out(string message)
@@ -59,6 +60,11 @@ public class WindowsApplicationLifecycle
                 }
                 throw;
             }
+        }
+
+        if (failedUpdate)
+        {
+            Out(MiscResources.UpdateError);
         }
 
         // Let StillImage figure out what it should do from the command-line args

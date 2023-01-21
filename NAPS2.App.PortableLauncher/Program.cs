@@ -10,19 +10,27 @@ class Program
         var portableExeDir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
         if (portableExeDir != null)
         {
+            bool failedUpdate = false;
             try
             {
                 if (args.Length == 3 && args[0] == "/Update")
                 {
+                    failedUpdate = true;
                     UpdatePortableApp(portableExeDir, args[1], args[2]);
+                    failedUpdate = false;
                 }
             }
             finally
             {
                 var portableExePath = Path.Combine(portableExeDir, "App", "NAPS2.exe");
-                // Use reflection to avoid antivirus false positives (yes, really)
-                typeof(Process).GetMethod("Start", new[] { typeof(string) })
-                    .Invoke(null, new object[] { portableExePath });
+                if (failedUpdate)
+                {
+                    Process.Start(portableExePath, "/FailedUpdate");
+                }
+                else
+                {
+                    Process.Start(portableExePath);
+                }
             }
         }
     }
