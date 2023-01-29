@@ -36,14 +36,6 @@ public class WorkerFactory : IWorkerFactory
     public WorkerFactory(string nativeWorkerExePath, string? winX86WorkerExePath = null,
         FileStorageManager? fileStorageManager = null)
     {
-        if (!File.Exists(nativeWorkerExePath))
-        {
-            throw new InvalidOperationException($"Worker exe does not exist: {nativeWorkerExePath}");
-        }
-        if (winX86WorkerExePath != null && !File.Exists(winX86WorkerExePath))
-        {
-            throw new InvalidOperationException($"Worker exe does not exist: {winX86WorkerExePath}");
-        }
         _nativeWorkerExePath = nativeWorkerExePath;
         _winX86WorkerExePath = winX86WorkerExePath;
         _fileStorageManager = fileStorageManager;
@@ -130,6 +122,15 @@ public class WorkerFactory : IWorkerFactory
 
     public void Init(WorkerFactoryInitOptions? options)
     {
+        if (!File.Exists(_nativeWorkerExePath))
+        {
+            throw new InvalidOperationException($"Worker exe does not exist: {_nativeWorkerExePath}");
+        }
+        if (_winX86WorkerExePath != null && !File.Exists(_winX86WorkerExePath))
+        {
+            throw new InvalidOperationException($"Worker exe does not exist: {_winX86WorkerExePath}");
+        }
+
         options ??= new WorkerFactoryInitOptions();
         if (_workerQueues == null)
         {
