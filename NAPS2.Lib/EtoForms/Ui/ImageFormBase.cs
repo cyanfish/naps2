@@ -167,11 +167,15 @@ public abstract class ImageFormBase : EtoDialogBase
         WorkingImage = imageToRender.Render();
 
         // Scale down the image to the screen size for better efficiency without losing much fidelity
-        var widthRatio = WorkingImage.Width / Screen.WorkingArea.Width;
-        var heightRatio = WorkingImage.Height / Screen.WorkingArea.Height;
-        if (widthRatio > 1 || heightRatio > 1)
+        var screen = Screen ?? Screen.PrimaryScreen;
+        if (screen != null)
         {
-            WorkingImage = WorkingImage.PerformTransform(new ScaleTransform(1 / Math.Max(widthRatio, heightRatio)));
+            var widthRatio = WorkingImage.Width / screen.WorkingArea.Width;
+            var heightRatio = WorkingImage.Height / screen.WorkingArea.Height;
+            if (widthRatio > 1 || heightRatio > 1)
+            {
+                WorkingImage = WorkingImage.PerformTransform(new ScaleTransform(1 / Math.Max(widthRatio, heightRatio)));
+            }
         }
 
         DisplayImage = WorkingImage.Clone();
