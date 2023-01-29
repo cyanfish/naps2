@@ -4,47 +4,49 @@ using GrpcDotNetNamedPipes;
 namespace NAPS2.Remoting.Worker;
 
 /// <summary>
-/// A class to manage the lifecycle of NAPS2.Worker.exe instances and hook up the WCF channels.
+/// A class to manage the lifecycle of worker processes and hook up the named pipe channels.
 /// </summary>
 public class WorkerFactory : IWorkerFactory
 {
-    public const string WORKER_EXE_NAME = "NAPS2.Worker.exe";
     public const string PIPE_NAME_FORMAT = "NAPS2.Worker.{0}";
 
-    public static string?[] SearchDirs => new[]
-    {
-        AssemblyHelper.LibFolder,
-        AssemblyHelper.EntryFolder
-    };
+    private readonly string _nativeWorkerExePath;
+    private readonly string? _winX86WorkerExePath;
+    private readonly FileStorageManager? _fileStorageManager;
 
-    private readonly FileStorageManager _fileStorageManager;
-
-    private string? _workerExePath;
     private Dictionary<WorkerType, BlockingCollection<WorkerContext>>? _workerQueues;
 
-    public WorkerFactory(FileStorageManager fileStorageManager)
+    public static WorkerFactory CreateDefault(FileStorageManager? fileStorageManager)
     {
-        _fileStorageManager = fileStorageManager;
+#if NET6_0_OR_GREATER
+        if (!OperatingSystem.IsWindows())
+        {
+            return new WorkerFactory(Environment.ProcessPath!, null, fileStorageManager);
+        }
+#endif
+        var exePath = Path.Combine(AssemblyHelper.EntryFolder, "NAPS2.exe");
+        var workerExePath = Path.Combine(AssemblyHelper.EntryFolder, "NAPS2.Worker.exe");
+        if (!File.Exists(workerExePath))
+        {
+            workerExePath = Path.Combine(AssemblyHelper.EntryFolder, "lib", "NAPS2.Worker.exe");
+        }
+        return new WorkerFactory(exePath, workerExePath, fileStorageManager);
     }
 
-    private string WorkerExePath
+    public WorkerFactory(string nativeWorkerExePath, string? winX86WorkerExePath = null,
+        FileStorageManager? fileStorageManager = null)
     {
-        get
+        if (!File.Exists(nativeWorkerExePath))
         {
-            if (_workerExePath == null)
-            {
-                foreach (var dir in SearchDirs.WhereNotNull())
-                {
-                    _workerExePath = Path.Combine(dir, WORKER_EXE_NAME);
-                    if (File.Exists(_workerExePath))
-                    {
-                        break;
-                    }
-                }
-            }
-
-            return _workerExePath!;
+            throw new InvalidOperationException($"Worker exe does not exist: {nativeWorkerExePath}");
         }
+        if (winX86WorkerExePath != null && !File.Exists(winX86WorkerExePath))
+        {
+            throw new InvalidOperationException($"Worker exe does not exist: {winX86WorkerExePath}");
+        }
+        _nativeWorkerExePath = nativeWorkerExePath;
+        _winX86WorkerExePath = winX86WorkerExePath;
+        _fileStorageManager = fileStorageManager;
     }
 
     private Process StartWorkerProcess(WorkerType workerType)
@@ -53,13 +55,13 @@ public class WorkerFactory : IWorkerFactory
         Process? proc;
         if (workerType == WorkerType.WinX86)
         {
-            if (!PlatformCompat.System.SupportsWinX86Worker)
+            if (!PlatformCompat.System.SupportsWinX86Worker || _winX86WorkerExePath == null)
             {
                 throw new InvalidOperationException("Unexpected worker configuration");
             }
             proc = Process.Start(new ProcessStartInfo
             {
-                FileName = WorkerExePath,
+                FileName = _winX86WorkerExePath,
                 Arguments = $"{parentId}",
                 RedirectStandardInput = true,
                 RedirectStandardOutput = true,
@@ -70,12 +72,7 @@ public class WorkerFactory : IWorkerFactory
         {
             proc = Process.Start(new ProcessStartInfo
             {
-                // TODO: For NAPS2.Console.exe, this should be the main NAPS2.exe
-#if NET6_0_OR_GREATER
-                FileName = Environment.ProcessPath,
-#else
-                FileName = AssemblyHelper.EntryFile,
-#endif
+                FileName = _nativeWorkerExePath,
                 Arguments = $"worker {parentId}",
                 RedirectStandardInput = true,
                 RedirectStandardOutput = true,
@@ -163,7 +160,7 @@ public class WorkerFactory : IWorkerFactory
             throw new InvalidOperationException("WorkerFactory has not been initialized");
         }
         var worker = NextWorker(workerType);
-        worker.Service.Init(_fileStorageManager.FolderPath);
+        worker.Service.Init(_fileStorageManager?.FolderPath);
         return worker;
     }
 

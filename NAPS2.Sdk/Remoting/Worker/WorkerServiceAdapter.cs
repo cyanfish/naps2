@@ -19,7 +19,7 @@ public class WorkerServiceAdapter
         _client = new WorkerService.WorkerServiceClient(callInvoker);
     }
 
-    public void Init(string recoveryFolderPath)
+    public void Init(string? recoveryFolderPath)
     {
         var req = new InitRequest { RecoveryFolderPath = recoveryFolderPath ?? "" };
         var resp = _client.Init(req);

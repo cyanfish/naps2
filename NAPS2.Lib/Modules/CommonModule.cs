@@ -48,7 +48,8 @@ public class CommonModule : Module
             Path.Combine(Paths.AppData, "config.xml"))).SingleInstance();
 
         // Host
-        builder.RegisterType<WorkerFactory>().As<IWorkerFactory>().SingleInstance();
+        builder.Register<IWorkerFactory>(ctx =>
+            WorkerFactory.CreateDefault(ctx.Resolve<FileStorageManager>())).SingleInstance();
 
         // Misc
         builder.RegisterType<AutofacFormFactory>().As<IFormFactory>();
