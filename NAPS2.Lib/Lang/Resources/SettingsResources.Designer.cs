@@ -501,7 +501,7 @@ namespace NAPS2.Lang.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Alternative Transfer.
+        ///   Looks up a localized string similar to Memory Transfer.
         /// </summary>
         internal static string TwainImpl_MemXfer {
             get {
