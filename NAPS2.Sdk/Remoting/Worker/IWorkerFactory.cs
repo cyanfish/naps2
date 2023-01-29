@@ -5,6 +5,6 @@
 /// </summary>
 public interface IWorkerFactory : IDisposable
 {
-    void Init();
+    void Init(WorkerFactoryInitOptions? options = null);
     WorkerContext Create(WorkerType workerType);
 }

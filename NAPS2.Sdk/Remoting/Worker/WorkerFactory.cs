@@ -70,6 +70,7 @@ public class WorkerFactory : IWorkerFactory
         {
             proc = Process.Start(new ProcessStartInfo
             {
+                // TODO: For NAPS2.Console.exe, this should be the main NAPS2.exe
 #if NET6_0_OR_GREATER
                 FileName = Environment.ProcessPath,
 #else
@@ -130,8 +131,9 @@ public class WorkerFactory : IWorkerFactory
         return _workerQueues![workerType]!.Take();
     }
 
-    public void Init()
+    public void Init(WorkerFactoryInitOptions? options)
     {
+        options ??= new WorkerFactoryInitOptions();
         if (_workerQueues == null)
         {
             _workerQueues = new()
@@ -139,14 +141,17 @@ public class WorkerFactory : IWorkerFactory
                 { WorkerType.Native, new BlockingCollection<WorkerContext>() },
                 { WorkerType.WinX86, new BlockingCollection<WorkerContext>() }
             };
-            // We start a "spare" worker so that when we need one, it's immediately ready (and then we'll start another
-            // spare for the next request).
-            StartWorkerService(WorkerType.Native);
-            if (PlatformCompat.System.SupportsWinX86Worker)
+            if (options.StartSpareWorkers)
             {
-                // On windows as we need 32-bit and 64-bit workers for different things, we will have two spare workers,
-                // which isn't ideal but not a big deal.
-                StartWorkerService(WorkerType.WinX86);
+                // We start a "spare" worker so that when we need one, it's immediately ready (and then we'll start another
+                // spare for the next request).
+                StartWorkerService(WorkerType.Native);
+                if (PlatformCompat.System.SupportsWinX86Worker)
+                {
+                    // On windows as we need 32-bit and 64-bit workers for different things, we will have two spare workers,
+                    // which isn't ideal but not a big deal.
+                    StartWorkerService(WorkerType.WinX86);
+                }
             }
         }
     }

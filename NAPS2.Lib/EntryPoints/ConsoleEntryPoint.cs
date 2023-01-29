@@ -27,7 +27,7 @@ public static class ConsoleEntryPoint
         Paths.ClearTemp();
 
         // Start a pending worker process
-        container.Resolve<IWorkerFactory>().Init();
+        container.Resolve<IWorkerFactory>().Init(new WorkerFactoryInitOptions { StartSpareWorkers = false });
 
         // Run the scan automation logic
         var scanning = container.Resolve<AutomatedScanning>();
