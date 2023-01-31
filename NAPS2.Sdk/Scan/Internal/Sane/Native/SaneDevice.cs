@@ -4,7 +4,7 @@ namespace NAPS2.Scan.Internal.Sane.Native;
 
 public class SaneDevice : SaneNativeObject
 {
-    public SaneDevice(IntPtr handle) : base(handle)
+    public SaneDevice(SaneNativeLibrary native, IntPtr handle) : base(native, handle)
     {
     }
 

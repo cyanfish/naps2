@@ -1,11 +1,24 @@
 using System.Runtime.InteropServices;
+using System.Threading;
 
 namespace NAPS2.Scan.Internal.Sane.Native;
 
 public class SaneClient : SaneNativeObject
 {
-    public SaneClient() : base(IntPtr.Zero)
+    private static readonly object SaneLock = new();
+
+    private static SaneNativeLibrary GetNativeLibrary(ISaneInstallation saneInstallation)
     {
+        lock (SaneLock)
+        {
+            saneInstallation.Initialize();
+            return new SaneNativeLibrary(saneInstallation.LibraryPath, saneInstallation.LibraryDeps);
+        }
+    }
+
+    public SaneClient(ISaneInstallation saneInstallation) : base(GetNativeLibrary(saneInstallation), IntPtr.Zero)
+    {
+        Monitor.Enter(SaneLock);
         Native.sane_init(out _, IntPtr.Zero);
     }
 
@@ -24,7 +37,7 @@ public class SaneClient : SaneNativeObject
     public SaneDevice OpenDevice(string deviceName)
     {
         HandleStatus(Native.sane_open(deviceName, out var handle));
-        return new SaneDevice(handle);
+        return new SaneDevice(Native, handle);
     }
 
     protected override void Dispose(bool disposing)
@@ -33,5 +46,6 @@ public class SaneClient : SaneNativeObject
         {
             Native.sane_exit();
         }
+        Monitor.Exit(SaneLock);
     }
 }

@@ -35,27 +35,28 @@ internal class SaneScanDriver : IScanDriver
         _scanningContext = scanningContext;
     }
 
+    private ISaneInstallation Installation =>
+        File.Exists("/.flatpak-info")
+            ? new FlatpakSaneInstallation(_scanningContext)
+            : new BundledSaneInstallation();
+
     public Task<List<ScanDevice>> GetDeviceList(ScanOptions options)
     {
         return Task.Run(() =>
         {
-            // TODO: Maybe use a mutex in SaneClient instead of needing manual locking?
-            lock (SaneNativeLibrary.Instance)
-            {
-                // TODO: This is crashing after a delay for no apparent reason.
-                // That's okay because we're in a worker process, but ideally we could fix it in SANE.
-                using var client = new SaneClient();
-                // TODO: We can use device.type and .vendor to help pick an icon etc.
-                // https://sane-project.gitlab.io/standard/api.html#device-descriptor-type
-                return client.GetDevices()
-                    .Select(device =>
-                    {
-                        // TODO: The backend should be part of the device metadata, e.g. DriverSubType
-                        var backend = device.Name.Split(':')[0];
-                        return new ScanDevice(device.Name, $"{device.Model} ({backend})");
-                    })
-                    .ToList();
-            }
+            // TODO: This is crashing after a delay for no apparent reason.
+            // That's okay because we're in a worker process, but ideally we could fix it in SANE.
+            using var client = new SaneClient(Installation);
+            // TODO: We can use device.type and .vendor to help pick an icon etc.
+            // https://sane-project.gitlab.io/standard/api.html#device-descriptor-type
+            return client.GetDevices()
+                .Select(device =>
+                {
+                    // TODO: The backend should be part of the device metadata, e.g. DriverSubType
+                    var backend = device.Name.Split(':')[0];
+                    return new ScanDevice(device.Name, $"{device.Model} ({backend})");
+                })
+                .ToList();
         });
     }
 
@@ -64,60 +65,57 @@ internal class SaneScanDriver : IScanDriver
     {
         return Task.Run(() =>
         {
-            lock (SaneNativeLibrary.Instance)
+            bool hasAtLeastOneImage = false;
+            try
             {
-                bool hasAtLeastOneImage = false;
-                try
-                {
-                    using var client = new SaneClient();
-                    if (cancelToken.IsCancellationRequested) return;
-                    using var device = client.OpenDevice(options.Device!.ID!);
-                    if (cancelToken.IsCancellationRequested) return;
-                    SetOptions(device, options);
-                    // TODO: We apparently need to cancel even upon normal completion, i.e. one sane_cancel per sane_start
-                    cancelToken.Register(device.Cancel);
+                using var client = new SaneClient(Installation);
+                if (cancelToken.IsCancellationRequested) return;
+                using var device = client.OpenDevice(options.Device!.ID!);
+                if (cancelToken.IsCancellationRequested) return;
+                SetOptions(device, options);
+                // TODO: We apparently need to cancel even upon normal completion, i.e. one sane_cancel per sane_start
+                cancelToken.Register(device.Cancel);
 
-                    // TODO: Can we validate whether it's really an adf?
-                    if (options.PaperSource == PaperSource.Flatbed)
+                // TODO: Can we validate whether it's really an adf?
+                if (options.PaperSource == PaperSource.Flatbed)
+                {
+                    var image = ScanPage(device, scanEvents) ??
+                                throw new DeviceException("SANE expected image");
+                    callback(image);
+                }
+                else
+                {
+                    while (ScanPage(device, scanEvents) is { } image)
                     {
-                        var image = ScanPage(device, scanEvents) ??
-                                    throw new DeviceException("SANE expected image");
+                        hasAtLeastOneImage = true;
                         callback(image);
                     }
-                    else
-                    {
-                        while (ScanPage(device, scanEvents) is { } image)
-                        {
-                            hasAtLeastOneImage = true;
-                            callback(image);
-                        }
-                    }
                 }
-                catch (SaneException ex)
+            }
+            catch (SaneException ex)
+            {
+                switch (ex.Status)
                 {
-                    switch (ex.Status)
-                    {
-                        case SaneStatus.Good:
-                        case SaneStatus.Cancelled:
-                            return;
-                        case SaneStatus.NoDocs:
-                            if (!hasAtLeastOneImage)
-                            {
-                                throw new NoPagesException();
-                            }
-                            break;
-                        case SaneStatus.DeviceBusy:
-                            throw new DeviceException(SdkResources.DeviceBusy);
-                        case SaneStatus.Invalid:
-                            // TODO: Maybe not always correct? e.g. when setting options
-                            throw new DeviceException(SdkResources.DeviceOffline);
-                        case SaneStatus.Jammed:
-                            throw new DeviceException(SdkResources.DevicePaperJam);
-                        case SaneStatus.CoverOpen:
-                            throw new DeviceException(SdkResources.DeviceCoverOpen);
-                        default:
-                            throw new DeviceException($"SANE error: {ex.Status}");
-                    }
+                    case SaneStatus.Good:
+                    case SaneStatus.Cancelled:
+                        return;
+                    case SaneStatus.NoDocs:
+                        if (!hasAtLeastOneImage)
+                        {
+                            throw new NoPagesException();
+                        }
+                        break;
+                    case SaneStatus.DeviceBusy:
+                        throw new DeviceException(SdkResources.DeviceBusy);
+                    case SaneStatus.Invalid:
+                        // TODO: Maybe not always correct? e.g. when setting options
+                        throw new DeviceException(SdkResources.DeviceOffline);
+                    case SaneStatus.Jammed:
+                        throw new DeviceException(SdkResources.DevicePaperJam);
+                    case SaneStatus.CoverOpen:
+                        throw new DeviceException(SdkResources.DeviceCoverOpen);
+                    default:
+                        throw new DeviceException($"SANE error: {ex.Status}");
                 }
             }
         });

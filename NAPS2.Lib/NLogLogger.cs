@@ -26,6 +26,11 @@ public class NLogLogger : ILogger
         _logger = LogManager.GetLogger("NAPS2");
     }
 
+    public void Info(string message)
+    {
+        _logger.Info(message);
+    }
+
     public void Error(string message)
     {
         _logger.Error(message);

@@ -4,34 +4,7 @@ namespace NAPS2.Scan.Internal.Sane.Native;
 
 public class SaneNativeLibrary : Unmanaged.NativeLibrary
 {
-    private static readonly Lazy<SaneNativeLibrary> LazyInstance = new(() =>
-    {
-        var testRoot = Environment.GetEnvironmentVariable("NAPS2_TEST_DEPS");
-        var libraryPath = FindLibraryPath(PlatformCompat.System.SaneLibraryName, testRoot);
-        var libraryDeps = PlatformCompat.System.SaneLibraryDeps
-            ?.Select(path => FindLibraryPath(path, testRoot)).ToArray();
-        if (libraryDeps != null)
-        {
-            // If we're using a bundled SANE, we will need to manually set the environment
-            // variables to the appropriate folders.
-            var backendsFolder = Path.GetFullPath(Path.Combine(Path.GetDirectoryName(libraryPath)!, "sane"));
-            var configFolder =
-                Path.GetFullPath(Path.Combine(Path.GetDirectoryName(libraryPath)!, "..", "_config", "sane"));
-            // We can't use Environment.SetEnvironmentVariable as that will just change the .NET
-            // env and won't be visible to SANE. Instead we use setenv which is technically not
-            // thread-safe but in practice should be fine here.
-            PlatformCompat.System.SetEnv("LD_LIBRARY_PATH", backendsFolder);
-            PlatformCompat.System.SetEnv("SANE_CONFIG_DIR", configFolder);
-            // Note: We can add SANE debug variables here
-            // PlatformCompat.System.SetEnv("SANE_DEBUG_DLL", "255");
-        }
-        var nativeLib = new SaneNativeLibrary(libraryPath, libraryDeps);
-        return nativeLib;
-    });
-
-    public static SaneNativeLibrary Instance => LazyInstance.Value;
-
-    private SaneNativeLibrary(string libraryPath, string[]? libraryDeps)
+    public SaneNativeLibrary(string libraryPath, string[]? libraryDeps)
         : base(libraryPath, libraryDeps)
     {
     }
