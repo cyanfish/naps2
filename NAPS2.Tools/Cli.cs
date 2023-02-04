@@ -6,7 +6,8 @@ namespace NAPS2.Tools;
 public static class Cli
 {
     public static void Run(string command, string args, Dictionary<string, string>? env = null,
-        CancellationToken cancel = default, bool noVerbose = false, string? ignoreErrorIfOutputContains = null)
+        CancellationToken cancel = default, bool noVerbose = false, bool alwaysVerbose = false,
+        string? ignoreErrorIfOutputContains = null)
     {
         var startInfo = new ProcessStartInfo
         {
@@ -48,7 +49,7 @@ public static class Cli
                 savedOutput.AppendLine(e.Data);
             }
 
-            bool print = Output.EnableVerbose && !noVerbose;
+            bool print = (Output.EnableVerbose && !noVerbose) || alwaysVerbose;
             proc.OutputDataReceived += print ? Print : Save;
             proc.ErrorDataReceived += print ? Print : Save;
 

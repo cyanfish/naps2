@@ -27,6 +27,15 @@ public class CleanCommand : ICommand<CleanOptions>
             }
             Output.Verbose($"Cleaned {projectDir.Name}");
         }
+        try
+        {
+            Directory.Delete(Path.Combine(Paths.SolutionRoot, "NAPS2.Sdk", "_doc", "obj"), true);
+        }
+        catch (Exception ex)
+        {
+            Output.Info($"Could not delete NAPS2.Sdk/doc/obj: {ex.Message}");
+            hasError = true;
+        }
         if (hasError)
         {
             throw new Exception("Cleaned with failures.");

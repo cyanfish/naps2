@@ -38,6 +38,7 @@ public static class Program
             .Add<PullTranslationsOptions, PullTranslationsCommand>()
             .Add<SetVersionOptions, SetVersionCommand>()
             .Add<WebsiteUpdateOptions, WebsiteUpdateCommand>()
+            .Add<DocOptions, DocCommand>()
             .Add<SaneOptsOptions, SaneOptsCommand>();
 
         var result = Parser.Default.ParseArguments(args, commands.OptionTypes);
