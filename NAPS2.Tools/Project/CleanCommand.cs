@@ -29,7 +29,11 @@ public class CleanCommand : ICommand<CleanOptions>
         }
         try
         {
-            Directory.Delete(Path.Combine(Paths.SolutionRoot, "NAPS2.Sdk", "_doc", "obj"), true);
+            var docObj = new DirectoryInfo(Path.Combine(Paths.SolutionRoot, "NAPS2.Sdk", "_doc", "obj"));
+            if (docObj.Exists)
+            {
+                docObj.Delete(true);
+            }
         }
         catch (Exception ex)
         {
