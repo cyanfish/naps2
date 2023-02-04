@@ -4,7 +4,7 @@ using NAPS2.Scan.Internal;
 
 namespace NAPS2.Scan;
 
-public class ScanController : IScanController
+public class ScanController
 {
     private readonly ScanningContext _scanningContext;
     private readonly ILocalPostProcessor _localPostProcessor;

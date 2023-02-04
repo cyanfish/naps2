@@ -1,7 +1,7 @@
 ﻿namespace NAPS2.Scan.Internal;
 
 /// <summary>
-/// Performs local post-processing on an image just before it is returned from IScanController.
+/// Performs local post-processing on an image just before it is returned from ScanController.
 /// </summary>
 internal interface ILocalPostProcessor
 {
