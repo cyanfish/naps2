@@ -11,6 +11,9 @@ public class PackageOptions : OptionsBase
     [Option('p', "platform", Required = false, HelpText = "win|win32|win64|mac|macintel|macarm|linux")]
     public string? Platform { get; set; }
 
+    [Option("name", Required = false, HelpText = "Name to be appended to the package filename")]
+    public string? Name { get; set; }
+
     [Option("build", Required = false, HelpText = "Build before packaging")]
     public bool Build { get; set; }
 
@@ -22,8 +25,6 @@ public class PackageOptions : OptionsBase
 
     [Option("nonotarize", Required = false, HelpText = "Skip notarization only")]
     public bool NoNotarize { get; set; }
-    
-    // TODO: Add net target (net462/net6/net6-windows etc.)
 
-    // TODO: Add an option to change the package name for building test packages
+    // TODO: Add net target (net462/net6/net6-windows etc.)
 }

@@ -29,10 +29,12 @@ public static class ProjectHelper
         return version;
     }
 
-    public static string GetPackagePath(string ext, Platform platform, string? version = null)
+    public static string GetPackagePath(string ext, Platform platform, string? version = null,
+        string? packageName = null)
     {
         version ??= GetCurrentVersionName();
-        var path = Path.Combine(Paths.Publish, version, $"naps2-{version}-{platform.PackageName()}.{ext}");
+        packageName ??= platform.PackageName();
+        var path = Path.Combine(Paths.Publish, version, $"naps2-{version}-{packageName}.{ext}");
         Directory.CreateDirectory(Path.GetDirectoryName(path)!);
         return path;
     }

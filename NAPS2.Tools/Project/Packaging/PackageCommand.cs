@@ -24,37 +24,39 @@ public class PackageCommand : ICommand<PackageOptions>
         };
         foreach (var target in TargetsHelper.Enumerate(opts.BuildType, opts.Platform, constraints))
         {
+            PackageInfo GetPackageInfoForConfig(string config) => GetPackageInfo(target.Platform, config, opts.Name);
             switch (target.BuildType)
             {
                 case BuildType.Exe:
                     // TODO: We might need configs designed for mac + linux
                     if (target.Platform.IsLinux())
                     {
-                        FlatpakPackager.Package(GetPackageInfo(target.Platform, "Release-Linux"), opts.NoPre);
+                        FlatpakPackager.Package(GetPackageInfoForConfig("Release-Linux"), opts.NoPre);
                     }
                     else if (target.Platform.IsMac())
                     {
-                        MacPackager.Package(GetPackageInfo(target.Platform, "Release"), opts.NoSign, opts.NoNotarize);
+                        MacPackager.Package(GetPackageInfoForConfig("Release"), opts.NoSign, opts.NoNotarize);
                     }
                     else if (target.Platform.IsWindows())
                     {
-                        InnoSetupPackager.PackageExe(GetPackageInfo(target.Platform, "Release"));
+                        InnoSetupPackager.PackageExe(GetPackageInfoForConfig("Release"));
                     }
                     break;
                 case BuildType.Msi:
-                    WixToolsetPackager.PackageMsi(GetPackageInfo(target.Platform, "Release-Msi"));
+                    WixToolsetPackager.PackageMsi(GetPackageInfoForConfig("Release-Msi"));
                     break;
                 case BuildType.Zip:
-                    ZipArchivePackager.PackageZip(GetPackageInfo(target.Platform, "Release-Zip"));
+                    ZipArchivePackager.PackageZip(GetPackageInfoForConfig("Release-Zip"));
                     break;
             }
         }
         return 0;
     }
 
-    private static PackageInfo GetPackageInfo(Platform platform, string preferredConfig)
+    private static PackageInfo GetPackageInfo(Platform platform, string preferredConfig, string? packageName)
     {
-        var pkgInfo = new PackageInfo(platform, ProjectHelper.GetCurrentVersionName(), ProjectHelper.GetCurrentVersion());
+        var pkgInfo = new PackageInfo(platform, ProjectHelper.GetCurrentVersionName(),
+            ProjectHelper.GetCurrentVersion(), packageName);
 
         if (!platform.IsWindows())
         {
@@ -144,7 +146,8 @@ public class PackageCommand : ICommand<PackageOptions>
             // TODO: Blacklist unneeded dlls
             pkgInfo.AddFile(dllFile, "lib");
         }
-        foreach (var langFolder in dir.EnumerateDirectories().Where(x => Regex.IsMatch(x.Name, "[a-z]{2}(-[A-Za-z]+)?")))
+        foreach (var langFolder in dir.EnumerateDirectories()
+                     .Where(x => Regex.IsMatch(x.Name, "[a-z]{2}(-[A-Za-z]+)?")))
         {
             foreach (var resourceDll in langFolder.EnumerateFiles("*.resources.dll"))
             {
@@ -165,6 +168,7 @@ public class PackageCommand : ICommand<PackageOptions>
 
     private static void AddPlatformFile(PackageInfo pkgInfo, string buildPath, string platformPath, string fileName)
     {
-        pkgInfo.AddFile(new PackageFile(Path.Combine(buildPath, platformPath), Path.Combine("lib", platformPath), fileName));
+        pkgInfo.AddFile(new PackageFile(Path.Combine(buildPath, platformPath), Path.Combine("lib", platformPath),
+            fileName));
     }
 }
