@@ -169,6 +169,82 @@ public class LoadSaveTests : ContextualTests
         ImageAsserts.Similar(ImageResources.dog, images[0]);
     }
 
+    [Fact]
+    public void SavePngOptimizesBitDepth()
+    {
+        var image32Bpp = LoadImage(ImageResources.dog_bw).CopyWithPixelFormat(ImagePixelFormat.ARGB32);
+        var image24Bpp = LoadImage(ImageResources.dog_bw).CopyWithPixelFormat(ImagePixelFormat.RGB24);
+        var image8Bpp = LoadImage(ImageResources.dog_bw).CopyWithPixelFormat(ImagePixelFormat.Gray8);
+        var image1Bpp = LoadImage(ImageResources.dog_bw).CopyWithPixelFormat(ImagePixelFormat.BW1);
+
+        var optimized32Bpp = GetSavedSize(image24Bpp, ImageFileFormat.Png);
+        var optimized24Bpp = GetSavedSize(image24Bpp, ImageFileFormat.Png);
+        var optimized8Bpp = GetSavedSize(image8Bpp, ImageFileFormat.Png);
+        var optimized1Bpp = GetSavedSize(image1Bpp, ImageFileFormat.Png);
+
+        // All should be equal as since the logical pixel format is BW1, all should be converted to BW1 for saving.
+        Assert.Equal(optimized24Bpp, optimized32Bpp);
+        Assert.Equal(optimized24Bpp, optimized8Bpp);
+        Assert.Equal(optimized24Bpp, optimized1Bpp);
+    }
+
+    // Gtk does not support saving with 1bpp/8bpp
+    [PlatformFact(exclude: PlatformFlags.Linux)]
+    public void SavePngWithUnoptimizedBitDepth()
+    {
+        var image32Bpp = LoadImage(ImageResources.dog_bw).CopyWithPixelFormat(ImagePixelFormat.ARGB32);
+        var image24Bpp = LoadImage(ImageResources.dog_bw).CopyWithPixelFormat(ImagePixelFormat.RGB24);
+        var image8Bpp = LoadImage(ImageResources.dog_bw).CopyWithPixelFormat(ImagePixelFormat.Gray8);
+        var image1Bpp = LoadImage(ImageResources.dog_bw).CopyWithPixelFormat(ImagePixelFormat.BW1);
+
+        // Specifying a PixelFormatHint equal to the real pixel format prevents optimized saving.
+
+        var optimized32Bpp = GetSavedSize(image32Bpp, ImageFileFormat.Png);
+        var unoptimized32Bpp = GetSavedSize(image32Bpp, ImageFileFormat.Png,
+            new ImageSaveOptions { PixelFormatHint = ImagePixelFormat.ARGB32 });
+
+        var optimized24Bpp = GetSavedSize(image24Bpp, ImageFileFormat.Png);
+        var unoptimized24Bpp = GetSavedSize(image24Bpp, ImageFileFormat.Png,
+            new ImageSaveOptions { PixelFormatHint = ImagePixelFormat.RGB24 });
+
+        var optimized8Bpp = GetSavedSize(image8Bpp, ImageFileFormat.Png);
+        var unoptimized8Bpp = GetSavedSize(image8Bpp, ImageFileFormat.Png,
+            new ImageSaveOptions { PixelFormatHint = ImagePixelFormat.Gray8 });
+
+        var optimized1Bpp = GetSavedSize(image1Bpp, ImageFileFormat.Png);
+        var unoptimized1Bpp = GetSavedSize(image1Bpp, ImageFileFormat.Png,
+            new ImageSaveOptions { PixelFormatHint = ImagePixelFormat.BW1 });
+
+        // All optimized values should be less than their unoptimized counterparts.
+        Assert.True(optimized32Bpp < unoptimized32Bpp);
+        Assert.True(optimized24Bpp < unoptimized24Bpp);
+        Assert.True(optimized8Bpp < unoptimized8Bpp);
+        Assert.Equal(optimized1Bpp, unoptimized1Bpp);
+
+        // Verify that 1bpp < 8bpp < 24bpp. 32bpp and 24bpp should be close but may vary so it isn't worth testing.
+        Assert.True(unoptimized1Bpp < unoptimized8Bpp);
+        Assert.True(unoptimized8Bpp < unoptimized24Bpp);
+    }
+
+    [Fact]
+    public void PixelFormatHintDoesntLoseColor()
+    {
+        var original = LoadImage(ImageResources.dog);
+
+        var stream = new MemoryStream();
+        original.Save(stream, ImageFileFormat.Png, new ImageSaveOptions { PixelFormatHint = ImagePixelFormat.BW1 });
+
+        var copy = ImageContext.Load(stream);
+        ImageAsserts.Similar(ImageResources.dog, copy);
+    }
+
+    private int GetSavedSize(IMemoryImage image, ImageFileFormat fileFormat, ImageSaveOptions options = null)
+    {
+        var stream = new MemoryStream();
+        image.Save(stream, fileFormat, options);
+        return (int) stream.Length;
+    }
+
     private static byte[] GetResource(string resource) =>
         (byte[]) ImageResources.ResourceManager.GetObject(resource, CultureInfo.InvariantCulture);
 

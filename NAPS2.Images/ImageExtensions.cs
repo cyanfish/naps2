@@ -92,10 +92,10 @@ public static class ImageExtensions
     }
 
     public static MemoryStream SaveToMemoryStream(this IMemoryImage image, ImageFileFormat imageFormat,
-        int quality = -1)
+        ImageSaveOptions? options = null)
     {
         var stream = new MemoryStream();
-        image.Save(stream, imageFormat, quality);
+        image.Save(stream, imageFormat, options);
         stream.Seek(0, SeekOrigin.Begin);
         return stream;
     }

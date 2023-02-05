@@ -156,9 +156,9 @@ public class SaveImagesOperation : OperationBase
     private void DoSaveImage(ProcessedImage image, string path, ImageFileFormat format, ImageSettings imageSettings)
     {
         FileSystemHelper.EnsureParentDirExists(path);
+        using var renderedImage = image.Render();
         if (format == ImageFileFormat.Tiff)
         {
-            using var renderedImage = image.Render();
             _imageContext.TiffWriter.SaveTiff(new[] { renderedImage }, path,
                 imageSettings.TiffCompression.ToTiffCompressionType(), CancelToken);
         }
@@ -167,8 +167,7 @@ public class SaveImagesOperation : OperationBase
             // Quality will be ignored when not needed
             // TODO: Scale quality differently for jpeg2000?
             var quality = imageSettings.JpegQuality.Clamp(0, 100);
-            using var bitmap = image.Render();
-            bitmap.Save(path, format, quality);
+            renderedImage.Save(path, format, new ImageSaveOptions { Quality = quality });
         }
     }
 }

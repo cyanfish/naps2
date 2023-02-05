@@ -117,37 +117,39 @@ public class MacImage : IMemoryImage
 
     public ImagePixelFormat LogicalPixelFormat { get; set; }
 
-    public void Save(string path, ImageFileFormat imageFormat = ImageFileFormat.Unspecified, int quality = -1)
+    public void Save(string path, ImageFileFormat imageFormat = ImageFileFormat.Unspecified,
+        ImageSaveOptions? options = null)
     {
         if (imageFormat == ImageFileFormat.Unspecified)
         {
             imageFormat = ImageContext.GetFileFormatFromExtension(path);
         }
         ImageContext.CheckSupportsFormat(imageFormat);
-        var rep = GetRepForSaving(imageFormat, quality);
+        var rep = GetRepForSaving(imageFormat, options);
         if (!rep.Save(path, false, out var error))
         {
             throw new IOException(error!.Description);
         }
     }
 
-    public void Save(Stream stream, ImageFileFormat imageFormat, int quality = -1)
+    public void Save(Stream stream, ImageFileFormat imageFormat, ImageSaveOptions? options = null)
     {
         if (imageFormat == ImageFileFormat.Unspecified)
         {
             throw new ArgumentException("Format required to save to a stream", nameof(imageFormat));
         }
         ImageContext.CheckSupportsFormat(imageFormat);
-        var rep = GetRepForSaving(imageFormat, quality);
+        var rep = GetRepForSaving(imageFormat, options);
         rep.AsStream().CopyTo(stream);
     }
 
-    private NSData GetRepForSaving(ImageFileFormat imageFormat, int quality)
+    private NSData GetRepForSaving(ImageFileFormat imageFormat, ImageSaveOptions? options)
     {
+        options ??= new ImageSaveOptions();
         lock (MacImageContext.ConstructorLock)
         {
-            var props = quality != -1 && imageFormat is ImageFileFormat.Jpeg or ImageFileFormat.Jpeg2000
-                ? NSDictionary.FromObjectAndKey(NSNumber.FromDouble(quality / 100.0),
+            var props = options.Quality != -1 && imageFormat is ImageFileFormat.Jpeg or ImageFileFormat.Jpeg2000
+                ? NSDictionary.FromObjectAndKey(NSNumber.FromDouble(options.Quality / 100.0),
                     NSBitmapImageRep.CompressionFactor)
                 : null;
             var fileType = imageFormat switch
@@ -159,18 +161,15 @@ public class MacImage : IMemoryImage
                 ImageFileFormat.Jpeg2000 => NSBitmapImageFileType.Jpeg2000,
                 _ => throw new InvalidOperationException("Unsupported image format")
             };
-            var targetFormat = PixelFormat;
-            if (imageFormat == ImageFileFormat.Bmp && targetFormat == ImagePixelFormat.Gray8)
+            var targetFormat = options.PixelFormatHint;
+            if (imageFormat == ImageFileFormat.Bmp && targetFormat == ImagePixelFormat.Unsupported &&
+                PixelFormat == ImagePixelFormat.Gray8)
             {
                 // Workaround for issue in some macOS versions with 8bit BMPs
                 targetFormat = ImagePixelFormat.RGB24;
             }
-            if (targetFormat != PixelFormat)
-            {
-                using var copy = (MacImage) this.CopyWithPixelFormat(targetFormat);
-                return copy.Rep.RepresentationUsingTypeProperties(fileType, props);
-            }
-            return Rep.RepresentationUsingTypeProperties(fileType, props);
+            using var helper = PixelFormatHelper.Create(this, targetFormat);
+            return helper.Image.Rep.RepresentationUsingTypeProperties(fileType, props);
         }
     }
 

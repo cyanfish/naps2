@@ -33,8 +33,8 @@ public class MemoryImageTests : ContextualTests
         var highQualityPath = Path.Combine(FolderPath, "highq.jpg");
         var lowQualityPath = Path.Combine(FolderPath, "lowq.jpg");
         
-        image.Save(highQualityPath, ImageFileFormat.Jpeg, 75);
-        image.Save(lowQualityPath, ImageFileFormat.Jpeg, 25);
+        image.Save(highQualityPath, ImageFileFormat.Jpeg, new ImageSaveOptions { Quality = 75 });
+        image.Save(lowQualityPath, ImageFileFormat.Jpeg, new ImageSaveOptions { Quality = 25 });
 
         var highQuality = TestImageContextFactory.Get().Load(highQualityPath);
         var lowQuality = TestImageContextFactory.Get().Load(lowQualityPath);
@@ -66,8 +66,8 @@ public class MemoryImageTests : ContextualTests
         var highQualityStream = new MemoryStream();
         var lowQualityStream = new MemoryStream();
 
-        image.Save(highQualityStream, ImageFileFormat.Jpeg, 75);
-        image.Save(lowQualityStream, ImageFileFormat.Jpeg, 25);
+        image.Save(highQualityStream, ImageFileFormat.Jpeg, new ImageSaveOptions { Quality = 75 });
+        image.Save(lowQualityStream, ImageFileFormat.Jpeg, new ImageSaveOptions { Quality = 25 });
 
         var highQuality = TestImageContextFactory.Get().Load(highQualityStream);
         var lowQuality = TestImageContextFactory.Get().Load(lowQualityStream);

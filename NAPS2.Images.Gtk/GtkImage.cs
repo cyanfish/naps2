@@ -69,7 +69,8 @@ public class GtkImage : IMemoryImage
 
     public ImagePixelFormat LogicalPixelFormat { get; set; }
 
-    public void Save(string path, ImageFileFormat imageFormat = ImageFileFormat.Unspecified, int quality = -1)
+    public void Save(string path, ImageFileFormat imageFormat = ImageFileFormat.Unspecified,
+        ImageSaveOptions? options = null)
     {
         if (imageFormat == ImageFileFormat.Unspecified)
         {
@@ -81,12 +82,14 @@ public class GtkImage : IMemoryImage
             return;
         }
         ImageContext.CheckSupportsFormat(imageFormat);
+        options ??= new ImageSaveOptions();
         var type = GetType(imageFormat);
-        var (keys, values) = GetSaveOptions(imageFormat, quality);
-        Pixbuf.Savev(path, type, keys, values);
+        var (keys, values) = GetSaveOptions(imageFormat, options.Quality);
+        using var helper = PixelFormatHelper.Create(this, options.PixelFormatHint, minFormat: ImagePixelFormat.RGB24);
+        helper.Image.Pixbuf.Savev(path, type, keys, values);
     }
 
-    public void Save(Stream stream, ImageFileFormat imageFormat, int quality = -1)
+    public void Save(Stream stream, ImageFileFormat imageFormat, ImageSaveOptions? options = null)
     {
         if (imageFormat == ImageFileFormat.Unspecified)
         {
@@ -98,10 +101,12 @@ public class GtkImage : IMemoryImage
             return;
         }
         ImageContext.CheckSupportsFormat(imageFormat);
+        options ??= new ImageSaveOptions();
         var type = GetType(imageFormat);
-        var (keys, values) = GetSaveOptions(imageFormat, quality);
+        var (keys, values) = GetSaveOptions(imageFormat, options.Quality);
         // TODO: Map to OutputStream directly?
-        stream.Write(Pixbuf.SaveToBuffer(type, keys, values));
+        using var helper = PixelFormatHelper.Create(this, options.PixelFormatHint, minFormat: ImagePixelFormat.RGB24);
+        stream.Write(helper.Image.Pixbuf.SaveToBuffer(type, keys, values));
     }
 
     private string GetType(ImageFileFormat fileFormat) => fileFormat switch

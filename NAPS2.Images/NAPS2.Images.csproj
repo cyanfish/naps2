@@ -31,6 +31,15 @@
         <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
             <_Parameter1>NAPS2.Lib.WinForms</_Parameter1>
         </AssemblyAttribute>
+        <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
+            <_Parameter1>NAPS2.Images.Gdi</_Parameter1>
+        </AssemblyAttribute>
+        <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
+            <_Parameter1>NAPS2.Images.Gtk</_Parameter1>
+        </AssemblyAttribute>
+        <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
+            <_Parameter1>NAPS2.Images.Mac</_Parameter1>
+        </AssemblyAttribute>
     </ItemGroup>
 
     <Import Project="..\NAPS2.Setup\targets\CommonTargets.targets" />

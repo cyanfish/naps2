@@ -77,16 +77,16 @@ public interface IMemoryImage : IImageStorage
     /// </summary>
     /// <param name="path">The path to save the image file to.</param>
     /// <param name="imageFormat">The file format to use.</param>
-    /// <param name="quality">The quality parameter for JPEG compression, if applicable. -1 for default.</param>
-    void Save(string path, ImageFileFormat imageFormat = ImageFileFormat.Unspecified, int quality = -1);
+    /// <param name="options">Options for saving, e.g. JPEG quality.</param>
+    void Save(string path, ImageFileFormat imageFormat = ImageFileFormat.Unspecified, ImageSaveOptions? options = null);
 
     /// <summary>
     /// Saves the image to the given stream. The file format must be specified.
     /// </summary>
     /// <param name="stream">The stream to save the image to.</param>
     /// <param name="imageFormat">The file format to use.</param>
-    /// <param name="quality">The quality parameter for JPEG compression, if applicable. -1 for default.</param>
-    void Save(Stream stream, ImageFileFormat imageFormat, int quality = -1);
+    /// <param name="options">Options for saving, e.g. JPEG quality.</param>
+    void Save(Stream stream, ImageFileFormat imageFormat, ImageSaveOptions? options = null);
 
     /// <summary>
     /// Creates a copy of the image so that one can be edited or disposed without affecting the other.

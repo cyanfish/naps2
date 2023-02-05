@@ -31,11 +31,11 @@ public class ImageExportHelper
         if (exportFormat.FileFormat == ImageFileFormat.Jpeg)
         {
             imageFileFormat = ImageFileFormat.Jpeg;
-            return image.SaveToMemoryStream(ImageFileFormat.Jpeg, quality);
+            return image.SaveToMemoryStream(ImageFileFormat.Jpeg, new ImageSaveOptions { Quality = quality });
         }
         // Save as PNG/JPEG depending on which is smaller
         var pngEncoded = image.SaveToMemoryStream(ImageFileFormat.Png);
-        var jpegEncoded = image.SaveToMemoryStream(ImageFileFormat.Jpeg, quality);
+        var jpegEncoded = image.SaveToMemoryStream(ImageFileFormat.Jpeg, new ImageSaveOptions { Quality = quality });
         if (pngEncoded.Length <= jpegEncoded.Length)
         {
             // Probably a black and white image (e.g. from native WIA, where bitDepth is unknown), which PNG compresses well vs. JPEG

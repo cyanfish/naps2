@@ -57,39 +57,43 @@ public class GdiImage : IMemoryImage
 
     public ImagePixelFormat LogicalPixelFormat { get; set; }
 
-    public void Save(string path, ImageFileFormat imageFormat = ImageFileFormat.Unspecified, int quality = -1)
+    public void Save(string path, ImageFileFormat imageFormat = ImageFileFormat.Unspecified, ImageSaveOptions? options = null)
     {
         if (imageFormat == ImageFileFormat.Unspecified)
         {
             imageFormat = ImageContext.GetFileFormatFromExtension(path);
         }
         ImageContext.CheckSupportsFormat(imageFormat);
-        if (imageFormat == ImageFileFormat.Jpeg && quality != -1)
+        options ??= new ImageSaveOptions();
+        using var helper = PixelFormatHelper.Create(this, options.PixelFormatHint);
+        if (imageFormat == ImageFileFormat.Jpeg && options.Quality != -1)
         {
-            var (encoder, encoderParams) = GetJpegSaveArgs(quality);
-            Bitmap.Save(path, encoder, encoderParams);
+            var (encoder, encoderParams) = GetJpegSaveArgs(options.Quality);
+            helper.Image.Bitmap.Save(path, encoder, encoderParams);
         }
         else
         {
-            Bitmap.Save(path, imageFormat.AsImageFormat());
+            helper.Image.Bitmap.Save(path, imageFormat.AsImageFormat());
         }
     }
 
-    public void Save(Stream stream, ImageFileFormat imageFormat, int quality = -1)
+    public void Save(Stream stream, ImageFileFormat imageFormat, ImageSaveOptions? options = null)
     {
         if (imageFormat == ImageFileFormat.Unspecified)
         {
             throw new ArgumentException("Format required to save to a stream", nameof(imageFormat));
         }
         ImageContext.CheckSupportsFormat(imageFormat);
-        if (imageFormat == ImageFileFormat.Jpeg && quality != -1)
+        options ??= new ImageSaveOptions();
+        using var helper = PixelFormatHelper.Create(this, options.PixelFormatHint);
+        if (imageFormat == ImageFileFormat.Jpeg && options.Quality != -1)
         {
-            var (encoder, encoderParams) = GetJpegSaveArgs(quality);
-            Bitmap.Save(stream, encoder, encoderParams);
+            var (encoder, encoderParams) = GetJpegSaveArgs(options.Quality);
+            helper.Image.Bitmap.Save(stream, encoder, encoderParams);
         }
         else
         {
-            Bitmap.Save(stream, imageFormat.AsImageFormat());
+            helper.Image.Bitmap.Save(stream, imageFormat.AsImageFormat());
         }
     }
 
