@@ -22,19 +22,22 @@ public static class ImageAsserts
 
     public static void Similar(byte[] first, ProcessedImage second, double rmseThreshold = GENERAL_RMSE_THRESHOLD, bool ignoreResolution = false)
     {
-        using var rendered = second.Render();
-        Similar(TestImageContextFactory.Get().Load(first), rendered, rmseThreshold, ignoreResolution);
+        using var firstLoaded = TestImageContextFactory.Get().Load(first);
+        using var secondRendered = second.Render();
+        Similar(firstLoaded, secondRendered, rmseThreshold, ignoreResolution);
     }
 
     public static void Similar(byte[] first, string secondPath, double rmseThreshold = GENERAL_RMSE_THRESHOLD, bool ignoreResolution = false)
     {
-        using var second = TestImageContextFactory.Get().Load(secondPath);
-        Similar(TestImageContextFactory.Get().Load(first), second, rmseThreshold, ignoreResolution);
+        using var firstLoaded = TestImageContextFactory.Get().Load(first);
+        using var secondRendered = TestImageContextFactory.Get().Load(secondPath);
+        Similar(firstLoaded, secondRendered, rmseThreshold, ignoreResolution);
     }
 
     public static void Similar(byte[] first, IMemoryImage second, double rmseThreshold = GENERAL_RMSE_THRESHOLD, bool ignoreResolution = false)
     {
-        Similar(TestImageContextFactory.Get().Load(first), second, rmseThreshold, ignoreResolution);
+        using var firstLoaded = TestImageContextFactory.Get().Load(first);
+        Similar(firstLoaded, second, rmseThreshold, ignoreResolution);
     }
 
     public static void Similar(IMemoryImage first, IMemoryImage second,
@@ -45,13 +48,15 @@ public static class ImageAsserts
 
     public static void NotSimilar(byte[] first, ProcessedImage second, double rmseThreshold = GENERAL_RMSE_THRESHOLD, bool ignoreResolution = false)
     {
-        using var rendered = second.Render();
-        NotSimilar(TestImageContextFactory.Get().Load(first), rendered, rmseThreshold, ignoreResolution);
+        using var firstLoaded = TestImageContextFactory.Get().Load(first);
+        using var secondRendered = second.Render();
+        NotSimilar(firstLoaded, secondRendered, rmseThreshold, ignoreResolution);
     }
 
     public static void NotSimilar(byte[] first, IMemoryImage second, double rmseThreshold = GENERAL_RMSE_THRESHOLD, bool ignoreResolution = false)
     {
-        NotSimilar(TestImageContextFactory.Get().Load(first), second, rmseThreshold, ignoreResolution);
+        using var firstLoaded = TestImageContextFactory.Get().Load(first);
+        NotSimilar(firstLoaded, second, rmseThreshold, ignoreResolution);
     }
 
     public static void NotSimilar(IMemoryImage first, IMemoryImage second,
