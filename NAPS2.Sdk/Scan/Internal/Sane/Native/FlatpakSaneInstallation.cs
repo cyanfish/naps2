@@ -32,8 +32,8 @@ public class FlatpakSaneInstallation : ISaneInstallation
         {
             return;
         }
-        Log.Info($"Found external SANE config path: {externalBackendsPath}");
-        Log.Info($"Found internal SANE config path: {internalBackendsPath}");
+        Log.Info($"Found external SANE config path: {externalConfigPath}");
+        Log.Info($"Found internal SANE config path: {internalConfigPath}");
 
         var externalDllConf = ReadDllConf(externalConfigPath);
         var internalDllConf = ReadDllConf(externalConfigPath);
@@ -64,6 +64,7 @@ public class FlatpakSaneInstallation : ISaneInstallation
                 try
                 {
                     File.Copy(sourcePath, destPath, true);
+                    Log.Info($"Copied sane backend {backendToCopy}");
                     copiedBackends.Add(backendToCopy);
                 }
                 catch (Exception ex)
@@ -89,11 +90,40 @@ public class FlatpakSaneInstallation : ISaneInstallation
                 .Select(x => x.BackendName)
                 .Concat(copiedBackends);
             File.WriteAllLines(tempConfigPath, enabledBackends);
+            Log.Info($"Setting sane config dir to {tempConfigFolder}");
             PlatformCompat.System.SetEnv("SANE_CONFIG_DIR", tempConfigFolder);
+            PlatformCompat.System.SetEnv("SANE_DEBUG_DLL", "255");
         }
         catch (Exception ex)
         {
             Log.ErrorException("Error creating temporary sane config", ex);
+        }
+
+        try
+        {
+            foreach (var configFile in new DirectoryInfo(internalConfigPath)
+                         .EnumerateFiles("*.conf")
+                         .Where(x => x.Name != "dll.conf"))
+            {
+                File.Copy(
+                    configFile.FullName,
+                    Path.Combine(tempConfigFolder, configFile.Name));
+            }
+            // External (user-provided) config should overwrite internal (default) config
+            // There is a potential issue here if there's a version mismatch that affects the config format.
+            foreach (var configFile in new DirectoryInfo(externalConfigPath)
+                         .EnumerateFiles("*.conf")
+                         .Where(x => x.Name != "dll.conf"))
+            {
+                File.Copy(
+                    configFile.FullName,
+                    Path.Combine(tempConfigFolder, configFile.Name),
+                    true);
+            }
+        }
+        catch (Exception ex)
+        {
+            Log.ErrorException("Error copying additional sane config files", ex);
         }
 
         // TODO: Also copy other config files
@@ -104,17 +134,36 @@ public class FlatpakSaneInstallation : ISaneInstallation
         try
         {
             var entries = new List<DllConfEntry>();
-            foreach (var line in File.ReadLines(configPath))
+            var dllConfPaths = new List<string> { Path.Combine(configPath, "dll.conf") };
+            try
             {
-                var enabledMatch = Regex.Match(line.Trim(), @"\w+");
-                var disabledMatch = Regex.Match(line.Trim(), @"#\w+");
-                if (enabledMatch.Success)
+                var dllD = new DirectoryInfo(Path.Combine(configPath, "dll.d"));
+                if (dllD.Exists)
                 {
-                    entries.Add(new DllConfEntry(enabledMatch.Value, true));
+                    foreach (var file in dllD.EnumerateFiles())
+                    {
+                        dllConfPaths.Add(file.FullName);
+                    }
                 }
-                else if (disabledMatch.Success)
+            }
+            catch (Exception ex)
+            {
+                Log.ErrorException("Error enumerating sane dll.d conf files", ex);
+            }
+            foreach (var dllConfPath in dllConfPaths)
+            {
+                foreach (var line in File.ReadLines(dllConfPath))
                 {
-                    entries.Add(new DllConfEntry(disabledMatch.Value.Substring(1), false));
+                    var enabledMatch = Regex.Match(line.Trim(), @"^\w+$");
+                    var disabledMatch = Regex.Match(line.Trim(), @"^#\w+$");
+                    if (enabledMatch.Success)
+                    {
+                        entries.Add(new DllConfEntry(enabledMatch.Value, true));
+                    }
+                    else if (disabledMatch.Success)
+                    {
+                        entries.Add(new DllConfEntry(disabledMatch.Value.Substring(1), false));
+                    }
                 }
             }
             return entries;
@@ -131,13 +180,18 @@ public class FlatpakSaneInstallation : ISaneInstallation
         var searchPaths = new[]
         {
             WithPrefix("/etc/sane.d/", prefix),
-            WithPrefix("/usr/etc/sane.d/", prefix)
+            WithPrefix("/usr/etc/sane.d/", prefix),
+            WithPrefix("/app/etc/sane.d/", prefix)
         };
         foreach (var searchPath in searchPaths)
         {
             if (Directory.Exists(searchPath))
             {
                 return searchPath;
+            }
+            else
+            {
+                Log.Error($"Dir does not exist: {searchPath} with prefix {prefix}");
             }
         }
         Log.Error($"Could not find sane config with prefix '{prefix}'");
@@ -146,7 +200,7 @@ public class FlatpakSaneInstallation : ISaneInstallation
 
     private string? FindSaneBackendsPath(string? prefix)
     {
-        var searchPaths = ParseLdPaths("/etc/ld.so.conf", prefix);
+        var searchPaths = ParseLdPaths(WithPrefix("/etc/ld.so.conf", prefix), prefix);
         foreach (var searchPath in searchPaths)
         {
             var backendsPath = Path.Combine(searchPath, "sane");
@@ -159,23 +213,40 @@ public class FlatpakSaneInstallation : ISaneInstallation
         return null;
     }
 
-    private IEnumerable<string> ParseLdPaths(string path, string? prefix)
+    private IEnumerable<string> ParseLdPaths(string prefixedPath, string? prefix)
     {
-        var prefixedPath = WithPrefix(path, prefix);
-        if (!File.Exists(prefixedPath)) yield break;
+        if (!File.Exists(prefixedPath))
+        {
+            Log.Error($"Ld skipping nonexistent {prefixedPath}");
+            yield break;
+        }
+        Log.Info($"Ld loading {prefixedPath}");
         foreach (var line in File.ReadLines(prefixedPath))
         {
             if (line.StartsWith("/"))
             {
-                yield return line.Trim();
+                Log.Info($"Ld returning {line.Trim()}");
+                yield return WithPrefix(line.Trim(), prefix);
             }
             if (line.StartsWith("include "))
             {
                 var includedPathPattern = line.Substring(8).Trim();
                 var lastDirIndex = includedPathPattern.LastIndexOf('/');
-                var includedPathFolder = includedPathPattern.Substring(0, lastDirIndex);
+                var includedPathFolder = WithPrefix(includedPathPattern.Substring(0, lastDirIndex), prefix);
                 var includedPathFilePattern = includedPathPattern.Substring(lastDirIndex + 1);
-                foreach (var file in new DirectoryInfo(includedPathFolder).EnumerateFiles(includedPathFilePattern))
+                IEnumerable<FileInfo> files;
+                try
+                {
+                    Log.Info($"Ld searching in {includedPathFolder} for {includedPathFilePattern}");
+                    files = new DirectoryInfo(includedPathFolder).EnumerateFiles(includedPathFilePattern);
+                }
+                catch (Exception ex)
+                {
+                    Log.ErrorException(
+                        $"Error enumerating lib paths for sane: {includedPathFolder} {includedPathFilePattern}", ex);
+                    continue;
+                }
+                foreach (var file in files)
                 {
                     foreach (var includedPath in ParseLdPaths(file.FullName, prefix))
                     {
@@ -188,10 +259,10 @@ public class FlatpakSaneInstallation : ISaneInstallation
 
     private static string WithPrefix(string path, string? prefix)
     {
-        return prefix == null ? path : Path.Combine(prefix, path);
+        return prefix == null ? path : Path.Combine(prefix, path.StartsWith("/") ? path.Substring(1) : path);
     }
 
-    public string LibraryPath => "libsane.1.so";
+    public string LibraryPath => "libsane.so.1";
 
     public string[]? LibraryDeps => null;
 
