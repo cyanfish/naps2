@@ -45,7 +45,6 @@ public class WinFormsInvoker : IInvoker
     {
         try
         {
-            Exception? error = null;
             _formFunc().BeginInvoke(() =>
             {
                 try
@@ -54,14 +53,9 @@ public class WinFormsInvoker : IInvoker
                 }
                 catch (Exception ex)
                 {
-                    error = ex;
+                    Log.ErrorException("Error in InvokeAsync action", ex);
                 }
             });
-            if (error != null)
-            {
-                error.PreserveStackTrace();
-                throw error;
-            }
         }
         catch (ObjectDisposedException)
         {
