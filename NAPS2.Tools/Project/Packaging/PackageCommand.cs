@@ -65,7 +65,7 @@ public class PackageCommand : ICommand<PackageOptions>
         }
 
         foreach (var project in new[]
-                     { "NAPS2.Sdk", "NAPS2.Lib", "NAPS2.App.Worker", "NAPS2.App.Console", "NAPS2.App.WinForms" })
+                     { "NAPS2.Sdk", "NAPS2.Lib", "NAPS2.App.Worker", "NAPS2.App.WinForms", "NAPS2.App.Console" })
         {
             var buildPath = Path.Combine(Paths.SolutionRoot, project, "bin", preferredConfig, "net462");
             if (!Directory.Exists(buildPath))
