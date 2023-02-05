@@ -350,7 +350,7 @@ public class BatchScanForm : EtoDialogBase
     {
         try
         {
-            await _batchScanPerformer.PerformBatchScan(Config.Get(c => c.BatchSettings), this,
+            await _batchScanPerformer.PerformBatchScan(_transactionConfig.Get(c => c.BatchSettings), this,
                 image => Invoker.Current.Invoke(() => ImageCallback(image)), ProgressCallback, _cts.Token);
             Invoker.Current.Invoke(() =>
             {
