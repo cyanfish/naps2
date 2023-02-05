@@ -54,9 +54,12 @@ public class EtoOperationProgress : OperationProgress
 
         if (!op.IsFinished)
         {
-            var form = _formFactory.Create<ProgressForm>();
-            form.Operation = op;
-            form.ShowModal();
+            Invoker.Current.Invoke(() =>
+            {
+                var form = _formFactory.Create<ProgressForm>();
+                form.Operation = op;
+                form.ShowModal();
+            });
         }
 
         if (!op.IsFinished)
