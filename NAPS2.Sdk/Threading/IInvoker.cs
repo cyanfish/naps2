@@ -15,7 +15,7 @@ public interface IInvoker
     /// Start running an action on the UI thread and immediately return.
     /// </summary>
     /// <param name="action"></param>
-    void InvokeAsync(Action action);
+    void InvokeDispatch(Action action);
 
     /// <summary>
     /// Run a function on the UI thread, wait for its result, then return that result.

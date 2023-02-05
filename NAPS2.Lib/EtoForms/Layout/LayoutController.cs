@@ -62,7 +62,7 @@ public class LayoutController
     {
         if (_layoutQueued) return;
         _layoutQueued = true;
-        Invoker.Current.InvokeAsync(() =>
+        Invoker.Current.InvokeDispatch(() =>
         {
             Invalidated?.Invoke(this, EventArgs.Empty);
             _layoutQueued = false;

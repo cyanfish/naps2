@@ -142,19 +142,16 @@ internal class ScanPerformer : IScanPerformer
             return;
         }
 
-        Task.Run(() =>
+        Invoker.Current.InvokeDispatch(() =>
         {
-            Invoker.Current.Invoke(() =>
+            if (scanParams.Modal)
             {
-                if (scanParams.Modal)
-                {
-                    _operationProgress.ShowModalProgress(op);
-                }
-                else
-                {
-                    _operationProgress.ShowBackgroundProgress(op);
-                }
-            });
+                _operationProgress.ShowModalProgress(op);
+            }
+            else
+            {
+                _operationProgress.ShowBackgroundProgress(op);
+            }
         });
     }
 

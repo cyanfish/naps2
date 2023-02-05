@@ -16,7 +16,7 @@ public class SyncContextInvoker : IInvoker
         _current.Send(_ => action(), null);
     }
 
-    public void InvokeAsync(Action action)
+    public void InvokeDispatch(Action action)
     {
         _current.Post(_ => action(), null);
     }

@@ -110,7 +110,7 @@ public class PreviewForm : EtoDialogBase
 
     private void ImageThumbnailInvalidated(object? sender, EventArgs e)
     {
-        Invoker.Current.InvokeAsync(() => UpdateImage().AssertNoAwait());
+        Invoker.Current.InvokeDispatch(() => UpdateImage().AssertNoAwait());
     }
 
     protected int ImageIndex
@@ -248,7 +248,7 @@ public class PreviewForm : EtoDialogBase
             // Gtk delays adjusting the imageview size after the container size changes, which messes this up unless
             // we queue it after the current UI thread options.
             // We don't want to do this on Windows/Mac as it results in the render size lagging the window size.
-            Invoker.Current.InvokeAsync(ImageViewer.ZoomToContainer);
+            Invoker.Current.InvokeDispatch(ImageViewer.ZoomToContainer);
         }
         else
         {

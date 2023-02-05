@@ -41,7 +41,7 @@ public class WinFormsInvoker : IInvoker
         }
     }
 
-    public void InvokeAsync(Action action)
+    public void InvokeDispatch(Action action)
     {
         try
         {
