@@ -41,6 +41,8 @@ public abstract class AbstractImageTransformer<TImage> where TImage : IMemoryIma
                 return PerformTransform(image, thumbnailTransform);
             case BlackWhiteTransform blackWhiteTransform:
                 return PerformTransform(image, blackWhiteTransform);
+            case GrayscaleTransform grayscaleTransform:
+                return PerformTransform(image, grayscaleTransform);
             case ColorBitDepthTransform colorBitDepthTransform:
                 return PerformTransform(image, colorBitDepthTransform);
             case CorrectionTransform correctionTransform:
@@ -236,6 +238,18 @@ public abstract class AbstractImageTransformer<TImage> where TImage : IMemoryIma
         image.Dispose();
 
         return (TImage) monoBitmap;
+    }
+
+    protected virtual TImage PerformTransform(TImage image, GrayscaleTransform transform)
+    {
+        if (image.PixelFormat is ImagePixelFormat.BW1 or ImagePixelFormat.Gray8)
+        {
+            return image;
+        }
+
+        var grayscaleBitmap = image.CopyWithPixelFormat(ImagePixelFormat.Gray8);
+        image.Dispose();
+        return (TImage) grayscaleBitmap;
     }
 
     protected virtual TImage PerformTransform(TImage image, ColorBitDepthTransform transform)

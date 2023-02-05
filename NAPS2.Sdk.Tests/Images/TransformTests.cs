@@ -414,6 +414,19 @@ public class TransformTests : ContextualTests
     }
 
     [Fact]
+    public void Grayscale()
+    {
+        var original = LoadImage(ImageResources.dog);
+        var expected = LoadImage(ImageResources.dog_gray);
+
+        var transformed = original.PerformTransform(new GrayscaleTransform());
+        Assert.Equal(ImagePixelFormat.Gray8, transformed.LogicalPixelFormat);
+
+        ImageAsserts.Similar(expected, transformed, ImageAsserts.GENERAL_RMSE_THRESHOLD);
+        AssertOwnership(original, transformed);
+    }
+
+    [Fact]
     public void ColorBitDepth()
     {
         var original = LoadImage(ImageResources.dog_bw);
