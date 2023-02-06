@@ -35,10 +35,12 @@ internal class SaneScanDriver : IScanDriver
         _scanningContext = scanningContext;
     }
 
-    private ISaneInstallation Installation =>
-        File.Exists("/.flatpak-info")
-            ? new FlatpakSaneInstallation(_scanningContext)
-            : new BundledSaneInstallation();
+    private ISaneInstallation Installation => Environment.OSVersion.Platform == PlatformID.MacOSX
+        ? new BundledSaneInstallation()
+        : new SystemSaneInstallation();
+    // File.Exists("/.flatpak-info")
+    //     ? new FlatpakSaneInstallation(_scanningContext)
+    //     : new BundledSaneInstallation();
 
     public Task<List<ScanDevice>> GetDeviceList(ScanOptions options)
     {
@@ -104,6 +106,7 @@ internal class SaneScanDriver : IScanDriver
                         {
                             throw new NoPagesException();
                         }
+
                         break;
                     case SaneStatus.DeviceBusy:
                         throw new DeviceException(SdkResources.DeviceBusy);
@@ -160,8 +163,8 @@ internal class SaneScanDriver : IScanDriver
         if (scanAreaController.CanSetArea)
         {
             var (minX, minY, maxX, maxY) = scanAreaController.GetBounds();
-            var width = Math.Min((double) options.PageSize!.WidthInMm, maxX - minX);
-            var height = Math.Min((double) options.PageSize.HeightInMm, maxY - minY);
+            var width = Math.Min((double)options.PageSize!.WidthInMm, maxX - minX);
+            var height = Math.Min((double)options.PageSize.HeightInMm, maxY - minY);
             var deltaX = maxX - minX - width;
             var offsetX = options.PageAlign switch
             {
@@ -181,10 +184,12 @@ internal class SaneScanDriver : IScanDriver
         {
             return null;
         }
+
         if (p.Frame is SaneFrameType.Red or SaneFrameType.Green or SaneFrameType.Blue)
         {
             return ProcessMultiFrameImage(device, scanEvents, p, data);
         }
+
         return ProcessSingleFrameImage(p, data);
     }
 
@@ -240,6 +245,7 @@ internal class SaneScanDriver : IScanDriver
         {
             scanEvents.PageStart();
         }
+
         p = device.GetParameters();
         bool isMultiFrame = p.Frame is SaneFrameType.Red or SaneFrameType.Green or SaneFrameType.Blue;
         var frameSize = p.BytesPerLine * p.Lines;
@@ -248,23 +254,26 @@ internal class SaneScanDriver : IScanDriver
         var data = new byte[frameSize];
         var index = 0;
         var buffer = new byte[65536];
-        scanEvents.PageProgress(currentProgress / (double) totalProgress);
+        scanEvents.PageProgress(currentProgress / (double)totalProgress);
 
         while (device.Read(buffer, out var len))
         {
             Array.Copy(buffer, 0, data, index, len);
             index += len;
             currentProgress += len;
-            scanEvents.PageProgress(currentProgress / (double) totalProgress);
+            scanEvents.PageProgress(currentProgress / (double)totalProgress);
         }
+
         if (index == 0)
         {
             return null;
         }
+
         if (index != frameSize)
         {
             throw new DeviceException($"SANE unexpected data length, got {index}, expected {frameSize}");
         }
+
         return data;
     }
 
