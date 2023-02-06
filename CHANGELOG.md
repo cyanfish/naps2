@@ -1,3 +1,10 @@
+Changes in 7.0b4:
+- Twain: Changed default transfer mode
+  - "Alternative Transfer" has been renamed "Memory Transfer" and is now used when "Default" is selected
+  - "Native Transfer" can be used to revert to the old transfer mode
+- Saved images now use optimized bit depths for smaller file sizes
+- Bug fixes 
+
 Changes in 7.0b3:
 - Bug fixes
 
