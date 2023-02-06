@@ -22,7 +22,7 @@ public class LocalTwainSessionController : ITwainSessionController
         if (PlatformCompat.System.CanUseWin32)
         {
             string libDir = Environment.Is64BitProcess ? "_win64" : "_win32";
-            Win32.SetDllDirectory(Path.Combine(AssemblyHelper.LibFolder, libDir));
+            Win32.AddDllDirectory(Path.Combine(AssemblyHelper.LibFolder, libDir));
         }
 #if DEBUG
         PlatformInfo.Current.Log.IsDebugEnabled = true;
