@@ -370,7 +370,7 @@
     <value>Update checking is disabled.</value>
   </data>
   <data name="UpdateError" xml:space="preserve">
-    <value>Güncelleme kurulmaya çalışılırken hata oluştu.</value>
+    <value>An error occured when trying to install the update.</value>
   </data>
   <data name="Install" xml:space="preserve">
     <value>{0} Kur</value>

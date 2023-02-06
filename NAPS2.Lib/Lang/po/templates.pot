@@ -126,16 +126,8 @@ msgstr ""
 msgid "Alternate Interleave"
 msgstr ""
 
-#: SettingsResources.resx$TwainImpl_MemXfer$Message
-msgid "Alternative Transfer"
-msgstr ""
-
 #: MiscResources.resx$PdfImportComponentNeeded$Message
 msgid "An additional component is needed to import this PDF file. Would you like to download it now?"
-msgstr ""
-
-#: MiscResources.resx$UpdateError$Message
-msgid "An error occurred when trying to install the update."
 msgstr ""
 
 #: SdkResources.resx$OcrError$Message
@@ -148,6 +140,10 @@ msgstr ""
 
 #: MiscResources.resx$AutoSaveError$Message
 msgid "An error occurred when trying to auto save."
+msgstr ""
+
+#: MiscResources.resx$UpdateError$Message
+msgid "An error occurred when trying to install the update."
 msgstr ""
 
 #: MiscResources.resx$ErrorSaving$Message
@@ -762,6 +758,10 @@ msgstr ""
 msgid "Maximum quality (large files)"
 msgstr ""
 
+#: SettingsResources.resx$TwainImpl_MemXfer$Message
+msgid "Memory Transfer"
+msgstr ""
+
 #: UiStrings.resx$Metadata$Message
 msgid "Metadata"
 msgstr ""
@@ -814,6 +814,10 @@ msgstr ""
 
 #: MiscResources.resx$NameMissing$Message
 msgid "Name missing."
+msgstr ""
+
+#: SettingsResources.resx$TwainImpl_NativeXfer$Message
+msgid "Native Transfer"
 msgstr ""
 
 #: UiStrings.resx$New$Message

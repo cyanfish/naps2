@@ -46,16 +46,16 @@
     <value>800 dpi</value>
   </data>
   <data name="EmailProviderType_CustomSmtp" xml:space="preserve">
-    <value>Custom SMTP</value>
+    <value>Προσαρμοσμένο SMTP</value>
   </data>
   <data name="EmailProviderType_Gmail" xml:space="preserve">
     <value>Gmail</value>
   </data>
   <data name="EmailProviderType_OutlookWeb" xml:space="preserve">
-    <value>Outlook Web Access</value>
+    <value>Outlook Πρόσβαση μέσω Web</value>
   </data>
   <data name="EmailProvider_NotSelected" xml:space="preserve">
-    <value>No provider selected.</value>
+    <value>Δεν έχει επιλεγεί πάροχος.</value>
   </data>
   <data name="HorizontalAlign_Center" xml:space="preserve">
     <value>Κέντρο</value>
@@ -141,8 +141,11 @@
   <data name="TwainImpl_Legacy" xml:space="preserve">
     <value>Παρωχημένο (εγγενές περιβάλλον μόνο)</value>
   </data>
+  <data name="TwainImpl_NativeXfer" xml:space="preserve">
+    <value>Native Transfer</value>
+  </data>
   <data name="TwainImpl_MemXfer" xml:space="preserve">
-    <value>Εναλλακτική Μεταφορά</value>
+    <value>Memory Transfer</value>
   </data>
   <data name="TwainImpl_OldDsm" xml:space="preserve">
     <value>Παλαιός Διαχειριστής Πηγής Δεδομένων (DSM)</value>
@@ -154,9 +157,9 @@
     <value>Προεπιλεγμένο</value>
   </data>
   <data name="OcrMode_Fast" xml:space="preserve">
-    <value>Fast</value>
+    <value>Γρήγορα</value>
   </data>
   <data name="OcrMode_Best" xml:space="preserve">
-    <value>Best</value>
+    <value>Βέλτιστα</value>
   </data>
 </root>

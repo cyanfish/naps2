@@ -141,8 +141,11 @@
   <data name="TwainImpl_Legacy" xml:space="preserve">
     <value>레거시 (네이티브 UI 만 가능)</value>
   </data>
+  <data name="TwainImpl_NativeXfer" xml:space="preserve">
+    <value>Native Transfer</value>
+  </data>
   <data name="TwainImpl_MemXfer" xml:space="preserve">
-    <value>대체 전송</value>
+    <value>Memory Transfer</value>
   </data>
   <data name="TwainImpl_OldDsm" xml:space="preserve">
     <value>구 DSM</value>

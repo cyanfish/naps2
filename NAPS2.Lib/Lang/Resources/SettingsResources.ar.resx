@@ -141,8 +141,11 @@
   <data name="TwainImpl_Legacy" xml:space="preserve">
     <value>وراثي (واجهة المستخدم الأصلية فقط)</value>
   </data>
+  <data name="TwainImpl_NativeXfer" xml:space="preserve">
+    <value>Native Transfer</value>
+  </data>
   <data name="TwainImpl_MemXfer" xml:space="preserve">
-    <value>التحويل البديل</value>
+    <value>Memory Transfer</value>
   </data>
   <data name="TwainImpl_OldDsm" xml:space="preserve">
     <value>DSM القديم</value>

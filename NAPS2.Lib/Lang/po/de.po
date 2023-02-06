@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2023-01-08 00:18\n"
+"PO-Revision-Date: 2023-02-06 03:29\n"
 "Last-Translator: \n"
 "Language-Team: German\n"
 "Language: de\n"
@@ -126,11 +126,11 @@ msgstr "Drucken erlauben"
 
 #: UiStrings.resx$AltDeinterleave$Message
 msgid "Alternate Deinterleave"
-msgstr "Alternatives Deinterleave"
+msgstr "Alternativ Auseinander Fächern"
 
 #: UiStrings.resx$AltInterleave$Message
 msgid "Alternate Interleave"
-msgstr "Alternatives Interleave"
+msgstr "Alternativ Ineinander Fächern"
 
 #: SettingsResources.resx$TwainImpl_MemXfer$Message
 msgid "Alternative Transfer"
@@ -141,7 +141,7 @@ msgid "An additional component is needed to import this PDF file. Would you like
 msgstr "Eine zusätzliche Komponente wird benötigt, um diese PDF-Datei zu importieren. Möchten Sie diese jetzt herunterladen?"
 
 #: MiscResources.resx$UpdateError$Message
-msgid "An error occured when trying to install the update."
+msgid "An error occurred when trying to install the update."
 msgstr "Beim Versuch das Update zu installieren ist ein Fehler aufgetreten."
 
 #: SdkResources.resx$OcrError$Message
@@ -252,7 +252,7 @@ msgstr "Einstellungen zum automatischen Speichern"
 
 #: UiStrings.resx$AutoIncrementing1Digit$Message
 msgid "Auto-incrementing number (1 digits)"
-msgstr ""
+msgstr "Automatisches Hochzählen (1 Stelle)"
 
 #: UiStrings.resx$AutoIncrementing2Digit$Message
 msgid "Auto-incrementing number (2 digits)"
@@ -412,7 +412,7 @@ msgstr "Kopieren..."
 
 #: UiStrings.resx$CopyrightFormat$Message
 msgid "Copyright {0} NAPS2 Contributors"
-msgstr ""
+msgstr "Copyright {0} NAPS2 Mitwirkende"
 
 #: UiStrings.resx$CoverageThreshold$Message
 msgid "Coverage Threshold"
@@ -463,7 +463,7 @@ msgstr "Standarddateipfad:"
 
 #: UiStrings.resx$Deinterleave$Message
 msgid "Deinterleave"
-msgstr "Zeilensprünge entfernen"
+msgstr "Auseinander Fächern"
 
 #: MiscResources.resx$Delete$Message
 #: UiStrings.resx$Delete$Message
@@ -513,7 +513,7 @@ msgstr "Fertig"
 
 #: UiStrings.resx$Download$Message
 msgid "Download"
-msgstr "Herunterladen"
+msgstr "Download"
 
 #: MiscResources.resx$DownloadError$Message
 msgid "Download Error"
@@ -537,33 +537,33 @@ msgstr "Bearbeiten"
 
 #: UiStrings.resx$EmailAll$Message
 msgid "Email All"
-msgstr ""
+msgstr "E-Mail alle"
 
 #: UiStrings.resx$EmailAllAsPdf$Message
 msgid "Email All as PDF"
-msgstr ""
+msgstr "E-Mail alle als PDF"
 
 #: MiscResources.resx$EmailPdf$Message
 #: UiStrings.resx$EmailPdf$Message
 msgid "Email PDF"
-msgstr ""
+msgstr "E-Mail als PDF"
 
 #: MiscResources.resx$EmailPdfProgress$Message
 msgid "Email PDF Progress"
-msgstr "Email PDF Fortschritt"
+msgstr "E-Mail PDF Fortschritt"
 
 #: UiStrings.resx$EmailSelected$Message
 msgid "Email Selected"
-msgstr ""
+msgstr "Auswahl per E-Mail versenden"
 
 #: UiStrings.resx$EmailSelectedAsPdf$Message
 msgid "Email Selected as PDF"
-msgstr ""
+msgstr "Auswahl als PDF per E-Mail versenden"
 
 #: UiStrings.resx$EmailSettings$Message
 #: UiStrings.resx$EmailSettingsFormTitle$Message
 msgid "Email Settings"
-msgstr "Einstellungen für EMail"
+msgstr "E-Mail Einstellungen"
 
 #: UiStrings.resx$EnableAutoSave$Message
 msgid "Enable Auto Save"
@@ -579,7 +579,7 @@ msgstr "Verschlüsselung"
 
 #: MiscResources.resx$FileTypeEmf$Message
 msgid "Enhanced Windows MetaFile (*.emf)"
-msgstr ""
+msgstr "Enhanced Windows MetaFile (*.emf)"
 
 #: MiscResources.resx$Error$Message
 #: UiStrings.resx$ErrorFormTitle$Message
@@ -593,7 +593,7 @@ msgstr "Geschätzte Download-Größe: {0} MB"
 
 #: MiscResources.resx$FileTypeExif$Message
 msgid "Exchangeable Image File (*.exif)"
-msgstr ""
+msgstr "Exchangeable Image File (*.exif)"
 
 #: UiStrings.resx$ExcludeBlankPages$Message
 msgid "Exclude blank pages"
@@ -601,7 +601,7 @@ msgstr "Leerseiten unterdrücken"
 
 #: SettingsResources.resx$OcrMode_Fast$Message
 msgid "Fast"
-msgstr ""
+msgstr "Schnell"
 
 #: SettingsResources.resx$Source_Feeder$Message
 msgid "Feeder"
@@ -722,7 +722,7 @@ msgstr "Installation fehlgeschlagen."
 
 #: UiStrings.resx$Interleave$Message
 msgid "Interleave"
-msgstr ""
+msgstr "Ineinander Fächern"
 
 #: MiscResources.resx$FileTypeJpeg$Message
 msgid "JPEG File (*.jpg, *.jpeg)"
@@ -730,7 +730,7 @@ msgstr "JPEG Datei (*.jpg, *.jpeg)"
 
 #: MiscResources.resx$FileTypeJp2$Message
 msgid "JPEG2000 File (*.jp2, *.jpx)"
-msgstr ""
+msgstr "JPEG2000 Datei (*.jp2, *.jpx)"
 
 #: UiStrings.resx$JpegQuality$Message
 msgid "Jpeg Quality"
@@ -742,7 +742,7 @@ msgstr "Schlagwörter:"
 
 #: SettingsResources.resx$TiffComp_Lzw$Message
 msgid "LZW"
-msgstr ""
+msgstr "LZW"
 
 #: UiStrings.resx$Language$Message
 msgid "Language"
@@ -774,7 +774,7 @@ msgstr "Metadaten"
 
 #: UiStrings.resx$Minute2Digit$Message
 msgid "Minute (00-59)"
-msgstr ""
+msgstr "Minute (00-59)"
 
 #: UiStrings.resx$Month2Digit$Message
 msgid "Month (01-12)"
@@ -816,7 +816,7 @@ msgstr "NAPS2 ist vollständig gratis. Unterstützen Sie uns mit einer Spende."
 
 #: UiStrings.resx$NameOptional$Message
 msgid "Name (optional)"
-msgstr ""
+msgstr "Name (optional)"
 
 #: MiscResources.resx$NameMissing$Message
 msgid "Name missing."
@@ -867,7 +867,7 @@ msgstr "Keine"
 
 #: UiStrings.resx$Naps2FullName$Message
 msgid "Not Another PDF Scanner"
-msgstr ""
+msgstr "Not Another PDF Scanner"
 
 #: UiStrings.resx$NotNow$Message
 msgid "Not Now"
@@ -903,7 +903,7 @@ msgstr "OCR-Modus:"
 
 #: UiStrings.resx$OK$Message
 msgid "OK"
-msgstr ""
+msgstr "OK"
 
 #: UiStrings.resx$OffsetWidth$Message
 msgid "Offset width based on alignment (WIA)"
@@ -935,7 +935,7 @@ msgstr "Verarbeitung läuft"
 
 #: SettingsResources.resx$EmailProviderType_OutlookWeb$Message
 msgid "Outlook Web Access"
-msgstr ""
+msgstr "Outlook im Web"
 
 #: UiStrings.resx$Output$Message
 msgid "Output"
@@ -1099,11 +1099,11 @@ msgstr "Umkehren"
 
 #: UiStrings.resx$ReverseAll$Message
 msgid "Reverse All"
-msgstr ""
+msgstr "Alle umkehren"
 
 #: UiStrings.resx$ReverseSelected$Message
 msgid "Reverse Selected"
-msgstr ""
+msgstr "Auswahl umkehren"
 
 #: UiStrings.resx$Revert$Message
 msgid "Revert"
@@ -1173,15 +1173,15 @@ msgstr "Fortschritt des PDF-Speicherns"
 
 #: UiStrings.resx$SaveSelected$Message
 msgid "Save Selected"
-msgstr ""
+msgstr "Auswahl speichern"
 
 #: UiStrings.resx$SaveSelectedAsImages$Message
 msgid "Save Selected as Images"
-msgstr ""
+msgstr "Auswahl als Bilder speichern"
 
 #: UiStrings.resx$SaveSelectedAsPdf$Message
 msgid "Save Selected as PDF"
-msgstr ""
+msgstr "Auswahl als PDF speichern"
 
 #: UiStrings.resx$SaveToSingleFile$Message
 msgid "Save to a single file"
@@ -1291,7 +1291,7 @@ msgstr "Überspringe Speicherdialog"
 
 #: UiStrings.resx$Start$Message
 msgid "Start"
-msgstr ""
+msgstr "Start"
 
 #: UiStrings.resx$StretchToPageSize$Message
 msgid "Stretch to page size"
@@ -1320,7 +1320,7 @@ msgstr "Das OCR-Modul ist nicht verfügbar. Stelle sicher, dass das benötigte P
 
 #: SdkResources.resx$OcrTimeout$Message
 msgid "The OCR operation timed out."
-msgstr ""
+msgstr "Zeitüberschreitung bei der Texterkennung."
 
 #: MiscResources.resx$SaneNotAvailable$Message
 #: SdkResources.resx$SaneNotAvailable$Message
@@ -1346,7 +1346,7 @@ msgstr "Die Datei {0} existiert bereits. Möchten Sie diese überschreiben?"
 
 #: UiStrings.resx$EncryptedFilePrompt$Message
 msgid "The following file is encrypted and requires a password to open:"
-msgstr ""
+msgstr "Die folgende Datei ist verschlüsselt und benötigt ein Passwort zum Öffnen:"
 
 #: MiscResources.resx$DevicePaperJam$Message
 #: SdkResources.resx$DevicePaperJam$Message
@@ -1407,7 +1407,7 @@ msgstr "Titel:"
 
 #: UiStrings.resx$Tools$Message
 msgid "Tools"
-msgstr ""
+msgstr "Werkzeuge"
 
 #: UiStrings.resx$TwainImplLabel$Message
 msgid "Twain Implementation:"
@@ -1415,11 +1415,11 @@ msgstr "Twain Implementierung:"
 
 #: SettingsResources.resx$PageSize_Legal$Message
 msgid "US Legal (8.5x14 in)"
-msgstr ""
+msgstr "US Legal (8.5x14 Zoll)"
 
 #: SettingsResources.resx$PageSize_Letter$Message
 msgid "US Letter (8.5x11 in)"
-msgstr ""
+msgstr "US Letter (8.5x11 Zoll)"
 
 #: MiscResources.resx$UnsavedChanges$Message
 msgid "Unsaved Changes"
@@ -1431,7 +1431,7 @@ msgstr "Update-Fortschritt"
 
 #: MiscResources.resx$UpdateCheckDisabled$Message
 msgid "Update checking is disabled."
-msgstr ""
+msgstr "Updateprüfung ist deaktiviert."
 
 #: MiscResources.resx$Updating$Message
 msgid "Updating..."
@@ -1576,27 +1576,7 @@ msgstr "{0} Bilder gespeichert."
 msgid "{0} of {1}"
 msgstr "{0} von {1}"
 
-B"
-msgstr ""
-
-#: MiscResources.resx$FilesProgressFormat$Message
-msgid "{0} / {1} files"
-msgstr "{0} / {1} Dateien"
-
-#: UiStrings.resx$RecoverPrompt$Message
-msgid "{0} image(s) scanned on {1} at {2} may not have been saved, and are recoverable. Do you want to recover them?"
-msgstr "{0} Bilder wurden am {1} um {2} gescannt und wurden möglicherweise nicht gespeichert, sind aber wiederherstellbar. Sollen sie wiederhergestellt werden?"
-
-#: MiscResources.resx$ImagesSaved$Message
-msgid "{0} images saved."
-msgstr "{0} bilder gespeichert."
-
-#: MiscResources.resx$PdfStatus$Message
-#: UiStrings.resx$XOfY$Message
-msgid "{0} of {1}"
-msgstr ""
-
-s.resx$groupTiff.Text$Message
+f.Text$Message
 msgid "Tiff Options"
 msgstr "Tiff Einstellungen"
 

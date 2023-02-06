@@ -25,7 +25,7 @@
     <value>100 dpi</value>
   </data>
   <data name="Dpi_1200" xml:space="preserve">
-    <value>1200 dpi</value>
+    <value>1 200 dpi</value>
   </data>
   <data name="Dpi_150" xml:space="preserve">
     <value>150 dpi</value>
@@ -141,8 +141,11 @@
   <data name="TwainImpl_Legacy" xml:space="preserve">
     <value>Staršie (len natívne užívateľské rozhranie)</value>
   </data>
+  <data name="TwainImpl_NativeXfer" xml:space="preserve">
+    <value>Native Transfer</value>
+  </data>
   <data name="TwainImpl_MemXfer" xml:space="preserve">
-    <value>Alternatívny prenos</value>
+    <value>Memory Transfer</value>
   </data>
   <data name="TwainImpl_OldDsm" xml:space="preserve">
     <value>Staršie DSM</value>
@@ -154,9 +157,9 @@
     <value>Pôvodné</value>
   </data>
   <data name="OcrMode_Fast" xml:space="preserve">
-    <value>Fast</value>
+    <value>Rýchlo</value>
   </data>
   <data name="OcrMode_Best" xml:space="preserve">
-    <value>Best</value>
+    <value>Najlepšie</value>
   </data>
 </root>

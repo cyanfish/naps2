@@ -73,7 +73,7 @@
     <value>TIFF Datei (*.tiff, *.tif)</value>
   </data>
   <data name="FileTypeJp2" xml:space="preserve">
-    <value>JPEG2000 File (*.jp2, *.jpx)</value>
+    <value>JPEG2000 Datei (*.jp2, *.jpx)</value>
   </data>
   <data name="NameMissing" xml:space="preserve">
     <value>Name fehlt.</value>
@@ -268,10 +268,10 @@
     <value>Import...</value>
   </data>
   <data name="EmailPdf" xml:space="preserve">
-    <value>Email PDF</value>
+    <value>E-Mail als PDF</value>
   </data>
   <data name="EmailPdfProgress" xml:space="preserve">
-    <value>Email PDF Fortschritt</value>
+    <value>E-Mail PDF Fortschritt</value>
   </data>
   <data name="AutoSaveError" xml:space="preserve">
     <value>Beim automatischen Speichern der Datei ist ein Fehler aufgetreten.</value>
@@ -370,7 +370,7 @@
     <value>Update checking is disabled.</value>
   </data>
   <data name="UpdateError" xml:space="preserve">
-    <value>Beim Versuch das Update zu installieren ist ein Fehler aufgetreten.</value>
+    <value>An error occured when trying to install the update.</value>
   </data>
   <data name="Install" xml:space="preserve">
     <value>Installiere {0}</value>

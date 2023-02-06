@@ -370,7 +370,7 @@
     <value>Update checking is disabled.</value>
   </data>
   <data name="UpdateError" xml:space="preserve">
-    <value>Грешка при опит за инталация на обновление.</value>
+    <value>An error occured when trying to install the update.</value>
   </data>
   <data name="Install" xml:space="preserve">
     <value>Install {0}</value>

@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2023-01-08 00:18\n"
+"PO-Revision-Date: 2023-02-06 03:29\n"
 "Last-Translator: \n"
 "Language-Team: Dutch\n"
 "Language: nl\n"
@@ -141,7 +141,7 @@ msgid "An additional component is needed to import this PDF file. Would you like
 msgstr "Er is een additioneel component nodig om deze PDF te importeren. Nu downloaden?"
 
 #: MiscResources.resx$UpdateError$Message
-msgid "An error occured when trying to install the update."
+msgid "An error occurred when trying to install the update."
 msgstr "Er was een fout bij het installeren van de update."
 
 #: SdkResources.resx$OcrError$Message

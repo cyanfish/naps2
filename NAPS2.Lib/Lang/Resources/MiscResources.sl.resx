@@ -370,7 +370,7 @@
     <value>Update checking is disabled.</value>
   </data>
   <data name="UpdateError" xml:space="preserve">
-    <value>Med nameščanjem posodobitve je prišlo do napake.</value>
+    <value>An error occured when trying to install the update.</value>
   </data>
   <data name="Install" xml:space="preserve">
     <value>Namesti {0}</value>

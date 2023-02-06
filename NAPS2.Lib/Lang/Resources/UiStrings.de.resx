@@ -16,7 +16,7 @@
     <value>Über</value>
   </data>
   <data name="CopyrightFormat" xml:space="preserve">
-    <value>Copyright {0} NAPS2 Contributors</value>
+    <value>Copyright {0} NAPS2 Mitwirkende</value>
   </data>
   <data name="IconsFrom" xml:space="preserve">
     <value>Icons von:</value>
@@ -88,10 +88,10 @@
     <value>Bildeinstellungen</value>
   </data>
   <data name="EmailPdf" xml:space="preserve">
-    <value>Email PDF</value>
+    <value>E-Mail als PDF</value>
   </data>
   <data name="EmailSettings" xml:space="preserve">
-    <value>Einstellungen für EMail</value>
+    <value>E-Mail Einstellungen</value>
   </data>
   <data name="Print" xml:space="preserve">
     <value>Drucken</value>
@@ -151,25 +151,25 @@
     <value>Neu ordnen</value>
   </data>
   <data name="Interleave" xml:space="preserve">
-    <value>Interleave</value>
+    <value>Ineinander Fächern</value>
   </data>
   <data name="Deinterleave" xml:space="preserve">
-    <value>Zeilensprünge entfernen</value>
+    <value>Auseinander Fächern</value>
   </data>
   <data name="AltInterleave" xml:space="preserve">
-    <value>Alternatives Interleave</value>
+    <value>Alternativ Ineinander Fächern</value>
   </data>
   <data name="AltDeinterleave" xml:space="preserve">
-    <value>Alternatives Deinterleave</value>
+    <value>Alternativ Auseinander Fächern</value>
   </data>
   <data name="Reverse" xml:space="preserve">
     <value>Umkehren</value>
   </data>
   <data name="ReverseAll" xml:space="preserve">
-    <value>Reverse All</value>
+    <value>Alle umkehren</value>
   </data>
   <data name="ReverseSelected" xml:space="preserve">
-    <value>Reverse Selected</value>
+    <value>Auswahl umkehren</value>
   </data>
   <data name="Clear" xml:space="preserve">
     <value>Alles Löschen</value>
@@ -205,31 +205,31 @@
     <value>Alles speichern</value>
   </data>
   <data name="SaveSelected" xml:space="preserve">
-    <value>Save Selected</value>
+    <value>Auswahl speichern</value>
   </data>
   <data name="SaveAllAsPdf" xml:space="preserve">
     <value>Alles als PDF speichern</value>
   </data>
   <data name="SaveSelectedAsPdf" xml:space="preserve">
-    <value>Save Selected as PDF</value>
+    <value>Auswahl als PDF speichern</value>
   </data>
   <data name="SaveAllAsImages" xml:space="preserve">
     <value>Alles als Bilder speichern</value>
   </data>
   <data name="SaveSelectedAsImages" xml:space="preserve">
-    <value>Save Selected as Images</value>
+    <value>Auswahl als Bilder speichern</value>
   </data>
   <data name="EmailAll" xml:space="preserve">
-    <value>Email All</value>
+    <value>E-Mail alle</value>
   </data>
   <data name="EmailSelected" xml:space="preserve">
-    <value>Email Selected</value>
+    <value>Auswahl per E-Mail versenden</value>
   </data>
   <data name="EmailAllAsPdf" xml:space="preserve">
-    <value>Email All as PDF</value>
+    <value>E-Mail alle als PDF</value>
   </data>
   <data name="EmailSelectedAsPdf" xml:space="preserve">
-    <value>Email Selected as PDF</value>
+    <value>Auswahl als PDF per E-Mail versenden</value>
   </data>
   <data name="EditProfileFormTitle" xml:space="preserve">
     <value>Profileinstellungen</value>
@@ -349,7 +349,7 @@
     <value>Geschätzte Download-Größe: {0} MB</value>
   </data>
   <data name="Download" xml:space="preserve">
-    <value>Herunterladen</value>
+    <value>Download</value>
   </data>
   <data name="DownloadProgressFormTitle" xml:space="preserve">
     <value>Download-Fortschritt</value>
@@ -502,7 +502,7 @@
     <value>Automatisches Hochzählen (2 Stellen)</value>
   </data>
   <data name="AutoIncrementing1Digit" xml:space="preserve">
-    <value>Auto-incrementing number (1 digits)</value>
+    <value>Automatisches Hochzählen (1 Stelle)</value>
   </data>
   <data name="FileNameLabel" xml:space="preserve">
     <value>Dateiname</value>
@@ -526,7 +526,7 @@
     <value>Bildeinstellungen</value>
   </data>
   <data name="EmailSettingsFormTitle" xml:space="preserve">
-    <value>Einstellungen für EMail</value>
+    <value>E-Mail Einstellungen</value>
   </data>
   <data name="Provider" xml:space="preserve">
     <value>Anbieter</value>
@@ -556,7 +556,7 @@
     <value>Passwort</value>
   </data>
   <data name="EncryptedFilePrompt" xml:space="preserve">
-    <value>The following file is encrypted and requires a password to open:</value>
+    <value>Die folgende Datei ist verschlüsselt und benötigt ein Passwort zum Öffnen:</value>
   </data>
   <data name="PromptForFilePath" xml:space="preserve">
     <value>Dateipfad bestätigen</value>
@@ -688,6 +688,6 @@
     <value>Ordner öffnen</value>
   </data>
   <data name="Tools" xml:space="preserve">
-    <value>Tools</value>
+    <value>Werkzeuge</value>
   </data>
 </root>

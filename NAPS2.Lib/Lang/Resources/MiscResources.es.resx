@@ -190,7 +190,7 @@
     <value>de {0}</value>
   </data>
   <data name="BatchError" xml:space="preserve">
-    <value>An unknown error occurred during the batch scan.</value>
+    <value>Se ha producido un error desconocido durante el escaneo por lotes.</value>
   </data>
   <data name="BatchStatusCancelled" xml:space="preserve">
     <value>Proceso por lotes cancelado.</value>
@@ -370,7 +370,7 @@
     <value>Update checking is disabled.</value>
   </data>
   <data name="UpdateError" xml:space="preserve">
-    <value>Ha ocurrido un error al intentar instalar la actualización.</value>
+    <value>An error occured when trying to install the update.</value>
   </data>
   <data name="Install" xml:space="preserve">
     <value>Instalar {0}</value>

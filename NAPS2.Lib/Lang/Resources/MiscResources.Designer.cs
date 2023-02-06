@@ -1158,7 +1158,7 @@ namespace NAPS2.Lang.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to An error occured when trying to install the update..
+        ///   Looks up a localized string similar to An error occurred when trying to install the update..
         /// </summary>
         internal static string UpdateError {
             get {

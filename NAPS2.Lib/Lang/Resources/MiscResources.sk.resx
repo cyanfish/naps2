@@ -190,7 +190,7 @@
     <value>z {0}</value>
   </data>
   <data name="BatchError" xml:space="preserve">
-    <value>An unknown error occurred during the batch scan.</value>
+    <value>Počas dávkového skenovania došlo k neznámej chybe.</value>
   </data>
   <data name="BatchStatusCancelled" xml:space="preserve">
     <value>Dávka zrušená.</value>
@@ -370,7 +370,7 @@
     <value>Update checking is disabled.</value>
   </data>
   <data name="UpdateError" xml:space="preserve">
-    <value>Pri pokuse o inštaláciu aktualizácie sa vyskytla chyba.</value>
+    <value>An error occured when trying to install the update.</value>
   </data>
   <data name="Install" xml:space="preserve">
     <value>Inštalovať {0}</value>

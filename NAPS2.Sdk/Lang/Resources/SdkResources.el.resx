@@ -61,18 +61,18 @@
     <value>Προθέρμανση σαρωτή.</value>
   </data>
   <data name="SaneNotAvailable" xml:space="preserve">
-    <value>The SANE driver is not available. Make sure to install the required packages:</value>
+    <value>Ο οδηγός SANE δεν είναι διαθέσιμος. Βεβαιωθείτε ότι έχετε εγκαταστήσει τα απαιτούμενα πακέτα:</value>
   </data>
   <data name="TesseractNotAvailable" xml:space="preserve">
-    <value>The OCR engine is not available. Make sure to install the required package:</value>
+    <value>Η εφαρμογή OCR δεν είναι διαθέσιμη. Βεβαιωθείτε ότι έχετε εγκαταστήσει το απαιτούμενο πακέτο:</value>
   </data>
   <data name="DriverNotSupported" xml:space="preserve">
-    <value>The selected driver is not supported on this system.</value>
+    <value>Ο επιλεγμένος οδηγός δεν υποστηρίζεται σε αυτό το σύστημα.</value>
   </data>
   <data name="OcrError" xml:space="preserve">
-    <value>An error occurred running OCR.</value>
+    <value>Σφάλμα κατά την εκτέλεση της OCR.</value>
   </data>
   <data name="OcrTimeout" xml:space="preserve">
-    <value>The OCR operation timed out.</value>
+    <value>Εξέπνευσε ο χρόνος για την λειτουργία OCR.</value>
   </data>
 </root>

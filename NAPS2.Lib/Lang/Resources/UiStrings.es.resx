@@ -16,7 +16,7 @@
     <value>Acerca de</value>
   </data>
   <data name="CopyrightFormat" xml:space="preserve">
-    <value>Copyright {0} NAPS2 Contributors</value>
+    <value>Copyright {0} colaboradores NAPS2</value>
   </data>
   <data name="IconsFrom" xml:space="preserve">
     <value>Iconos de:</value>
@@ -118,7 +118,7 @@
     <value>Enfoque</value>
   </data>
   <data name="DocumentCorrection" xml:space="preserve">
-    <value>Document Correction</value>
+    <value>Corrección de documento</value>
   </data>
   <data name="Reset" xml:space="preserve">
     <value>Reiniciar</value>
@@ -175,7 +175,7 @@
     <value>Limpiar</value>
   </data>
   <data name="ClearAll" xml:space="preserve">
-    <value>Clear All</value>
+    <value>Limpiar todo</value>
   </data>
   <data name="Language" xml:space="preserve">
     <value>Idioma</value>
@@ -244,7 +244,7 @@
     <value>Controlador TWAIN</value>
   </data>
   <data name="AppleDriver" xml:space="preserve">
-    <value>Apple Driver</value>
+    <value>Controlador de Apple</value>
   </data>
   <data name="SaneDriver" xml:space="preserve">
     <value>Controlador SANE</value>
@@ -502,7 +502,7 @@
     <value>Número autoincremental (2 dígitos)</value>
   </data>
   <data name="AutoIncrementing1Digit" xml:space="preserve">
-    <value>Auto-incrementing number (1 digits)</value>
+    <value>Número autoincremental (1 dígitos)</value>
   </data>
   <data name="FileNameLabel" xml:space="preserve">
     <value>Nombre de archivo</value>

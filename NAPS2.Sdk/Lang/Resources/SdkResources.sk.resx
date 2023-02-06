@@ -70,9 +70,9 @@
     <value>Vybraný ovládač nie je v tomto systéme podporovaný.</value>
   </data>
   <data name="OcrError" xml:space="preserve">
-    <value>An error occurred running OCR.</value>
+    <value>Pri spustení OCR došlo k chybe.</value>
   </data>
   <data name="OcrTimeout" xml:space="preserve">
-    <value>The OCR operation timed out.</value>
+    <value>Čas OCR operácie vypršal.</value>
   </data>
 </root>

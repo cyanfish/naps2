@@ -16,7 +16,7 @@
     <value>Επιλογή Προφίλ</value>
   </data>
   <data name="Clear" xml:space="preserve">
-    <value>Ολική Διαγραφή</value>
+    <value>Εκκαθάριση</value>
   </data>
   <data name="ConfirmClearItems" xml:space="preserve">
     <value>Θέλετε σίγουρα ολική διαγραφή ({0} αντικείμενα);</value>
@@ -49,7 +49,7 @@
     <value>Σφάλμα</value>
   </data>
   <data name="FileTypeBmp" xml:space="preserve">
-    <value>Αρχεία BMP (*.bmp)</value>
+    <value>Αρχεία Bitmap (*.bmp)</value>
   </data>
   <data name="FileTypeEmf" xml:space="preserve">
     <value>Αρχεία EMF (*.emf)</value>
@@ -73,7 +73,7 @@
     <value>Αρχεία TIFF (*.tiff, *.tif)</value>
   </data>
   <data name="FileTypeJp2" xml:space="preserve">
-    <value>JPEG2000 File (*.jp2, *.jpx)</value>
+    <value>Αρχείο JPEG2000 (*.jp2, *.jpx)</value>
   </data>
   <data name="NameMissing" xml:space="preserve">
     <value>Απουσιάζει το όνομα.</value>
@@ -163,13 +163,13 @@
     <value>Υπάρχουν αλλαγές που δεν έχουν αποθηκευτεί. Θέλετε σίγουρα να τερματιστεί η εφαρμογή;</value>
   </data>
   <data name="ExitWithActiveOperations" xml:space="preserve">
-    <value>An operation is in progress. Are you sure you want to exit and cancel the operation?</value>
+    <value>Υπάρχει εργασία σε εξέλιξη. Είστε σίγουρος ότι θέλετε την ακύρωσή της και έξοδο;</value>
   </data>
   <data name="UnsavedChanges" xml:space="preserve">
     <value>Μη Αποθηκευμένες Αλλαγές</value>
   </data>
   <data name="ActiveOperations" xml:space="preserve">
-    <value>Operation in Progress</value>
+    <value>Εργασία σε Εξέλιξη</value>
   </data>
   <data name="ScanPageProgress" xml:space="preserve">
     <value>Σάρωση σελίδας {0}</value>
@@ -190,10 +190,10 @@
     <value>από {0}</value>
   </data>
   <data name="BatchError" xml:space="preserve">
-    <value>An unknown error occurred during the batch scan.</value>
+    <value>Ένα άγνωστο σφάλμα προέκυψε κατά την μαζική σάρωση.</value>
   </data>
   <data name="BatchStatusCancelled" xml:space="preserve">
-    <value>Η μαζική ακυρώθηκε.</value>
+    <value>Η μαζική επεξεργασία ακυρώθηκε.</value>
   </data>
   <data name="BatchStatusCancelling" xml:space="preserve">
     <value>Ακύρωση....</value>
@@ -214,7 +214,7 @@
     <value>Σε αναμονή για σάρωση {0}...</value>
   </data>
   <data name="Cancel" xml:space="preserve">
-    <value>Άκυρο</value>
+    <value>Ακύρωση</value>
   </data>
   <data name="Close" xml:space="preserve">
     <value>Κλείσιμο</value>
@@ -340,22 +340,22 @@
     <value>Το NAPS2 είναι ελεύθερο λογισμικό. Αξιολογήστε την επιλογή μιας δωρεάς.</value>
   </data>
   <data name="SaneNotAvailable" xml:space="preserve">
-    <value>The SANE driver is not available. Make sure to install the required packages:</value>
+    <value>Ο οδηγός SANE δεν είναι διαθέσιμος. Βεβαιωθείτε ότι έχετε εγκαταστήσει τα απαιτούμενα πακέτα:</value>
   </data>
   <data name="TesseractNotAvailable" xml:space="preserve">
-    <value>The OCR engine is not available. Make sure to install the required package:</value>
+    <value>Η εφαρμογή OCR δεν είναι διαθέσιμη. Βεβαιωθείτε ότι έχετε εγκαταστήσει το απαιτούμενο πακέτο:</value>
   </data>
   <data name="DriverNotSupported" xml:space="preserve">
-    <value>The selected driver is not supported on this system.</value>
+    <value>Ο επιλεγμένος οδηγός δεν υποστηρίζεται σε αυτό το σύστημα.</value>
   </data>
   <data name="OcrProgress" xml:space="preserve">
-    <value>OCR Progress</value>
+    <value>Πρόοδος OCR</value>
   </data>
   <data name="RunningOcr" xml:space="preserve">
     <value>Γίνεται Οπτική Αναγνώριση Χαρακτήρων....</value>
   </data>
   <data name="UpdateProgress" xml:space="preserve">
-    <value>Update Progress</value>
+    <value>Εξέλιξη ενημέρωσης</value>
   </data>
   <data name="Updating" xml:space="preserve">
     <value>Γίνεται ενημέρωση...</value>
@@ -367,13 +367,13 @@
     <value>Έλεγχος...</value>
   </data>
   <data name="UpdateCheckDisabled" xml:space="preserve">
-    <value>Update checking is disabled.</value>
+    <value>Ο έλεγχος ενημερώσεων είναι απενεργοποιημένος.</value>
   </data>
   <data name="UpdateError" xml:space="preserve">
     <value>An error occured when trying to install the update.</value>
   </data>
   <data name="Install" xml:space="preserve">
-    <value>Install {0}</value>
+    <value>Εγκατάσταση {0}</value>
   </data>
   <data name="UpdateAvailable" xml:space="preserve">
     <value>Δεν υπάρχουν διαθέσιμες ενημερώσεις.</value>
@@ -382,7 +382,7 @@
     <value>Παρουσιάστηκε ένα σφάλμα κατά την προσπάθεια εκτέλεσης του.</value>
   </data>
   <data name="UploadingEmail" xml:space="preserve">
-    <value>Uploading email...</value>
+    <value>Ανέβασμα email...</value>
   </data>
   <data name="ErrorEmailing" xml:space="preserve">
     <value>Δημιουργήθηκε σφάλμα κατά την εκτύπωση του αρχείου.</value>
@@ -391,6 +391,6 @@
     <value>Σάρωση σελίδας {0}...</value>
   </data>
   <data name="AcquiringData" xml:space="preserve">
-    <value>Απόκτηση δεδομένων...</value>
+    <value>Συλλογή δεδομένων...</value>
   </data>
 </root>

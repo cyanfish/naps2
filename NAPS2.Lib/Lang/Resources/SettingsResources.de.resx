@@ -52,7 +52,7 @@
     <value>GMail</value>
   </data>
   <data name="EmailProviderType_OutlookWeb" xml:space="preserve">
-    <value>Outlook Web Access</value>
+    <value>Outlook im Web</value>
   </data>
   <data name="EmailProvider_NotSelected" xml:space="preserve">
     <value>Kein Anbieter ausgewählt.</value>
@@ -141,8 +141,11 @@
   <data name="TwainImpl_Legacy" xml:space="preserve">
     <value>Altsystem (nur ursprüngliche Oberfläche)</value>
   </data>
+  <data name="TwainImpl_NativeXfer" xml:space="preserve">
+    <value>Native Transfer</value>
+  </data>
   <data name="TwainImpl_MemXfer" xml:space="preserve">
-    <value>Alternative Übertragung</value>
+    <value>Memory Transfer</value>
   </data>
   <data name="TwainImpl_OldDsm" xml:space="preserve">
     <value>Alte Datenquellenverwaltung</value>
@@ -154,7 +157,7 @@
     <value>Standard</value>
   </data>
   <data name="OcrMode_Fast" xml:space="preserve">
-    <value>Fast</value>
+    <value>Schnell</value>
   </data>
   <data name="OcrMode_Best" xml:space="preserve">
     <value>Am besten</value>

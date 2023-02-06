@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2023-01-08 00:18\n"
+"PO-Revision-Date: 2023-02-06 03:29\n"
 "Last-Translator: \n"
 "Language-Team: Spanish\n"
 "Language: es\n"
@@ -141,12 +141,12 @@ msgid "An additional component is needed to import this PDF file. Would you like
 msgstr "Se necesita un componente adicional para importar este archivo PDF. ¿Quiere descargarlo ahora?"
 
 #: MiscResources.resx$UpdateError$Message
-msgid "An error occured when trying to install the update."
+msgid "An error occurred when trying to install the update."
 msgstr "Ha ocurrido un error al intentar instalar la actualización."
 
 #: SdkResources.resx$OcrError$Message
 msgid "An error occurred running OCR."
-msgstr ""
+msgstr "Se ha producido un error ejecutando OCR."
 
 #: MiscResources.resx$AuthError$Message
 msgid "An error occurred when trying to authorize."
@@ -179,7 +179,7 @@ msgstr "Una operación está en marcha. ¿Está seguro de que quiere salir y can
 
 #: MiscResources.resx$BatchError$Message
 msgid "An unknown error occurred during the batch scan."
-msgstr ""
+msgstr "Se ha producido un error desconocido durante el escaneo por lotes."
 
 #: MiscResources.resx$UpdateAvailable$Message
 msgid "An update is available."
@@ -191,7 +191,7 @@ msgstr "Hay una actualización de OCR."
 
 #: UiStrings.resx$AppleDriver$Message
 msgid "Apple Driver"
-msgstr ""
+msgstr "Controlador de Apple"
 
 #: UiStrings.resx$BrightnessContrastAfterScan$Message
 msgid "Apply brightness/contrast after scan"
@@ -252,7 +252,7 @@ msgstr "Configuración de autoguardado"
 
 #: UiStrings.resx$AutoIncrementing1Digit$Message
 msgid "Auto-incrementing number (1 digits)"
-msgstr ""
+msgstr "Número autoincremental (1 dígitos)"
 
 #: UiStrings.resx$AutoIncrementing2Digit$Message
 msgid "Auto-incrementing number (2 digits)"
@@ -272,11 +272,11 @@ msgstr "Ejecutar OCR automáticamente después del escaneo"
 
 #: SettingsResources.resx$PageSize_B4$Message
 msgid "B4 (250x353 mm)"
-msgstr ""
+msgstr "B4 (250x353 mm)"
 
 #: SettingsResources.resx$PageSize_B5$Message
 msgid "B5 (176x250 mm)"
-msgstr ""
+msgstr "B5 (176x250 mm)"
 
 #: UiStrings.resx$BatchScan$Message
 #: UiStrings.resx$BatchScanFormTitle$Message
@@ -297,7 +297,7 @@ msgstr "Escaneo por lotes detenido debido a un error."
 
 #: SettingsResources.resx$OcrMode_Best$Message
 msgid "Best"
-msgstr ""
+msgstr "Mejor"
 
 #: UiStrings.resx$BitDepthLabel$Message
 msgid "Bit depth:"
@@ -326,7 +326,7 @@ msgstr "Brillo:"
 
 #: SettingsResources.resx$TiffComp_Ccitt4$Message
 msgid "CCITT4"
-msgstr ""
+msgstr "CCITT4"
 
 #: MiscResources.resx$Cancel$Message
 #: UiStrings.resx$Cancel$Message
@@ -376,7 +376,7 @@ msgstr "Limpiar"
 
 #: UiStrings.resx$ClearAll$Message
 msgid "Clear All"
-msgstr ""
+msgstr "Limpiar todo"
 
 #: UiStrings.resx$ClearAfterSaving$Message
 msgid "Clear images after saving"
@@ -412,7 +412,7 @@ msgstr "Copiando..."
 
 #: UiStrings.resx$CopyrightFormat$Message
 msgid "Copyright {0} NAPS2 Contributors"
-msgstr ""
+msgstr "Copyright {0} colaboradores NAPS2"
 
 #: UiStrings.resx$CoverageThreshold$Message
 msgid "Coverage Threshold"
@@ -500,7 +500,7 @@ msgstr "Nombre mostrado:"
 
 #: UiStrings.resx$DocumentCorrection$Message
 msgid "Document Correction"
-msgstr ""
+msgstr "Corrección de documento"
 
 #: MiscResources.resx$Donate$Message
 #: UiStrings.resx$Donate$Message
@@ -1576,21 +1576,7 @@ msgstr "{0} imágenes guardadas."
 msgid "{0} of {1}"
 msgstr "{0} de {1}"
 
-SizeUnit_Inch$Message
-msgid "in"
-msgstr "pulg"
-
-#: SettingsResources.resx$PageSizeUnit_Millimetre$Message
-msgid "mm"
-msgstr ""
-
-#: MiscResources.resx$OfN$Message
-msgid "of {0}"
-msgstr "de {0}"
-
-#: SettingsResources.resx$TwainImpl_X64$Message
-msgid "x64"
-msgstr ""
+tr ""
 
 #: MiscResources.resx$NamedPageSizeFormat$Message
 msgid "{0} ({1}x{2} {3})"

@@ -70,7 +70,7 @@
     <value>El controlador seleccionado no está admitido en este sistema.</value>
   </data>
   <data name="OcrError" xml:space="preserve">
-    <value>An error occurred running OCR.</value>
+    <value>Se ha producido un error ejecutando OCR.</value>
   </data>
   <data name="OcrTimeout" xml:space="preserve">
     <value>The OCR operation timed out.</value>

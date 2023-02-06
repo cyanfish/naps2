@@ -16,13 +16,13 @@
     <value>Σχετικά</value>
   </data>
   <data name="CopyrightFormat" xml:space="preserve">
-    <value>Copyright {0} NAPS2 Contributors</value>
+    <value>Πνευματικά δικαιώματα {0} Συνεισφέροντες NAPS2</value>
   </data>
   <data name="IconsFrom" xml:space="preserve">
     <value>Προέλευση εικονιδίων:</value>
   </data>
   <data name="CheckForUpdates" xml:space="preserve">
-    <value>Ελέγξτε για ενημερώσεις.</value>
+    <value>Έλεγχος για ενημερώσεις</value>
   </data>
   <data name="OK" xml:space="preserve">
     <value>Εντάξει</value>
@@ -118,7 +118,7 @@
     <value>Οξύτητα</value>
   </data>
   <data name="DocumentCorrection" xml:space="preserve">
-    <value>Document Correction</value>
+    <value>Διόρθωση Κειμένου</value>
   </data>
   <data name="Reset" xml:space="preserve">
     <value>Αρχικοποίηση</value>
@@ -166,16 +166,16 @@
     <value>Αντιστροφή</value>
   </data>
   <data name="ReverseAll" xml:space="preserve">
-    <value>Reverse All</value>
+    <value>Αναστροφή Όλων</value>
   </data>
   <data name="ReverseSelected" xml:space="preserve">
-    <value>Reverse Selected</value>
+    <value>Αναστροφή Επιλεγμένων</value>
   </data>
   <data name="Clear" xml:space="preserve">
-    <value>Ολική Διαγραφή</value>
+    <value>Εκκαθάριση</value>
   </data>
   <data name="ClearAll" xml:space="preserve">
-    <value>Clear All</value>
+    <value>Εκκαθάριση Όλων</value>
   </data>
   <data name="Language" xml:space="preserve">
     <value>Γλώσσα</value>
@@ -199,37 +199,37 @@
     <value>Μέγεθος Βάση Παραθύρου</value>
   </data>
   <data name="Save" xml:space="preserve">
-    <value>Save</value>
+    <value>Αποθήκευση</value>
   </data>
   <data name="SaveAll" xml:space="preserve">
-    <value>Save All</value>
+    <value>Αποθήκευση Όλων</value>
   </data>
   <data name="SaveSelected" xml:space="preserve">
-    <value>Save Selected</value>
+    <value>Αποθήκευση Επιλεγμένων</value>
   </data>
   <data name="SaveAllAsPdf" xml:space="preserve">
-    <value>Save All as PDF</value>
+    <value>Αποθήκευση Όλων ως PDF</value>
   </data>
   <data name="SaveSelectedAsPdf" xml:space="preserve">
-    <value>Save Selected as PDF</value>
+    <value>Αποθήκευση Επιλεγμένων ως PDF</value>
   </data>
   <data name="SaveAllAsImages" xml:space="preserve">
-    <value>Save All as Images</value>
+    <value>Αποθήκευση Όλων ως Εικόνες</value>
   </data>
   <data name="SaveSelectedAsImages" xml:space="preserve">
-    <value>Save Selected as Images</value>
+    <value>Αποθήκευση Επιλεγμένων ως Εικόνες</value>
   </data>
   <data name="EmailAll" xml:space="preserve">
-    <value>Email All</value>
+    <value>Αποστολή Όλων</value>
   </data>
   <data name="EmailSelected" xml:space="preserve">
-    <value>Email Selected</value>
+    <value>Αποστολή Επιλεγμένων</value>
   </data>
   <data name="EmailAllAsPdf" xml:space="preserve">
-    <value>Email All as PDF</value>
+    <value>Αποστολή Όλων ως PDF</value>
   </data>
   <data name="EmailSelectedAsPdf" xml:space="preserve">
-    <value>Email Selected as PDF</value>
+    <value>Αποστολή Επιλεγμένων ως PDF</value>
   </data>
   <data name="EditProfileFormTitle" xml:space="preserve">
     <value>Ρυθμίσεις Προφίλ</value>
@@ -244,10 +244,10 @@
     <value>Οδηγός TWAIN</value>
   </data>
   <data name="AppleDriver" xml:space="preserve">
-    <value>Apple Driver</value>
+    <value>Οδηγός Apple</value>
   </data>
   <data name="SaneDriver" xml:space="preserve">
-    <value>SANE Driver</value>
+    <value>Οδηγός SANE</value>
   </data>
   <data name="DeviceLabel" xml:space="preserve">
     <value>Συσκευή:</value>
@@ -298,7 +298,7 @@
     <value>Για προχωρημένους</value>
   </data>
   <data name="Cancel" xml:space="preserve">
-    <value>Άκυρο</value>
+    <value>Ακύρωση</value>
   </data>
   <data name="Select" xml:space="preserve">
     <value>Επιλογή</value>
@@ -307,7 +307,7 @@
     <value>Επιλογή Προέλευσης</value>
   </data>
   <data name="RunInBackground" xml:space="preserve">
-    <value>Run in Background</value>
+    <value>Εκτέλεση στο Παρασκήνιο</value>
   </data>
   <data name="Naps2" xml:space="preserve">
     <value>NAPS2</value>
@@ -316,7 +316,7 @@
     <value>NAPS2 - {0}</value>
   </data>
   <data name="Naps2FullName" xml:space="preserve">
-    <value>Not Another PDF Scanner</value>
+    <value>Όχι άλλος σαρωτής PDF</value>
   </data>
   <data name="OcrSetupFormTitle" xml:space="preserve">
     <value>Διαμόρφωση OCR (Οπτική Αναγνώριση Χαρακτήρων)</value>
@@ -328,10 +328,10 @@
     <value>Γλώσσα OCR:</value>
   </data>
   <data name="OcrModeLabel" xml:space="preserve">
-    <value>OCR mode:</value>
+    <value>Λειτουργία OCR:</value>
   </data>
   <data name="RunOcrAfterScanning" xml:space="preserve">
-    <value>Automatically run OCR after scanning</value>
+    <value>Αυτόματη εκτέλεση OCR μετά την σάρωση</value>
   </data>
   <data name="GetMoreLanguages" xml:space="preserve">
     <value>Περισσότερες γλώσσες</value>
@@ -502,10 +502,10 @@
     <value>Αυτόματη αρίθμηση (2 ψηφία)</value>
   </data>
   <data name="AutoIncrementing1Digit" xml:space="preserve">
-    <value>Auto-incrementing number (1 digits)</value>
+    <value>Αυτόματη αρίθμηση (1 ψηφίο)</value>
   </data>
   <data name="FileNameLabel" xml:space="preserve">
-    <value>Όνομα Αρχείου</value>
+    <value>Όνομα Αρχείου:</value>
   </data>
   <data name="PreviewLabel" xml:space="preserve">
     <value>Προεπισκόπηση:</value>
@@ -529,7 +529,7 @@
     <value>Ρυθμίσεις Email</value>
   </data>
   <data name="Provider" xml:space="preserve">
-    <value>Provider</value>
+    <value>Πάροχος</value>
   </data>
   <data name="Change" xml:space="preserve">
     <value>Αλλαγή</value>
@@ -541,7 +541,7 @@
     <value>Επιλέξτε πάροχο Email</value>
   </data>
   <data name="AuthorizeFormTitle" xml:space="preserve">
-    <value>Authorize</value>
+    <value>Εξουσιοδότηση</value>
   </data>
   <data name="WaitingForAuthorization" xml:space="preserve">
     <value>Waiting for authorization...</value>
@@ -556,7 +556,7 @@
     <value>Κωδικός</value>
   </data>
   <data name="EncryptedFilePrompt" xml:space="preserve">
-    <value>The following file is encrypted and requires a password to open:</value>
+    <value>Το ακόλουθο αρχείο είναι κρυπτογραφημένο και απαιτεί συνθηματικό για να ανοίξει:</value>
   </data>
   <data name="PromptForFilePath" xml:space="preserve">
     <value>Προτροπή για διαδρομή αρχείου</value>
@@ -688,6 +688,6 @@
     <value>Άνοιγμα Φακέλου</value>
   </data>
   <data name="Tools" xml:space="preserve">
-    <value>Tools</value>
+    <value>Εργαλεία</value>
   </data>
 </root>
