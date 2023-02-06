@@ -6,9 +6,13 @@ public class SystemSaneInstallation : ISaneInstallation
 
     public void Initialize()
     {
-        _libraryPath = Environment.OSVersion.Platform == PlatformID.MacOSX
+#if NET6_0_OR_GREATER
+        _libraryPath = OperatingSystem.IsMacOS()
             ? "libsane.1.dylib"
             : "libsane.so.1";
+#else
+        _libraryPath = null;
+#endif
     }
 
     public string LibraryPath => _libraryPath ?? throw new InvalidOperationException();

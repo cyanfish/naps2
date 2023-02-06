@@ -35,9 +35,13 @@ internal class SaneScanDriver : IScanDriver
         _scanningContext = scanningContext;
     }
 
-    private ISaneInstallation Installation => Environment.OSVersion.Platform == PlatformID.MacOSX
+#if NET6_0_OR_GREATER
+    private ISaneInstallation Installation => OperatingSystem.IsMacOS()
         ? new BundledSaneInstallation()
         : new SystemSaneInstallation();
+#else
+    private ISaneInstallation Installation => throw new NotSupportedException();
+#endif
     // File.Exists("/.flatpak-info")
     //     ? new FlatpakSaneInstallation(_scanningContext)
     //     : new BundledSaneInstallation();
