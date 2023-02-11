@@ -13,7 +13,7 @@ service WorkerService {
 	rpc RenderThumbnail (RenderThumbnailRequest) returns (RenderThumbnailResponse) {}
 	rpc RenderPdf (RenderPdfRequest) returns (RenderPdfResponse) {}
 	rpc ImportPostProcess (ImportPostProcessRequest) returns (ImportPostProcessResponse) {}
-	rpc GetDeviceList (GetDeviceListRequest) returns (GetDeviceListResponse) {}
+	rpc GetDevices (GetDevicesRequest) returns (stream GetDevicesResponse) {}
 	rpc Scan (ScanRequest) returns (stream ScanResponse) {}
 	rpc TwainGetDeviceList (GetDeviceListRequest) returns (GetDeviceListResponse) {}
 	rpc TwainScan (TwainScanRequest) returns (stream TwainScanResponse) {}
@@ -36,6 +36,15 @@ message Wia10NativeUiRequest {
 message Wia10NativeUiResponse {
 	NAPS2.Remoting.Error error = 1;
 	string wiaConfigurationXml = 2;
+}
+
+message GetDevicesRequest {
+	string optionsXml = 1;
+}
+
+message GetDevicesResponse {
+	NAPS2.Remoting.Error error = 1;
+	string deviceXml = 2;
 }
 
 message GetDeviceListRequest {

@@ -15,18 +15,18 @@ internal class WiaScanDriver : IScanDriver
         _scanningContext = scanningContext;
     }
 
-    public Task<List<ScanDevice>> GetDeviceList(ScanOptions options)
+    public Task GetDevices(ScanOptions options, CancellationToken cancelToken, Action<ScanDevice> callback)
     {
         return Task.Run(() =>
         {
             using var deviceManager = new WiaDeviceManager((WiaVersion) options.WiaOptions.WiaApiVersion);
-            return deviceManager.GetDeviceInfos().Select(deviceInfo =>
+            foreach (var deviceInfo in deviceManager.GetDeviceInfos())
             {
                 using (deviceInfo)
                 {
-                    return new ScanDevice(deviceInfo.Id(), deviceInfo.Name());
+                    callback(new ScanDevice(deviceInfo.Id(), deviceInfo.Name()));
                 }
-            }).ToList();
+            }
         });
     }
 

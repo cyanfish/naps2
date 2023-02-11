@@ -15,12 +15,16 @@ public class EsclScanDriver : IScanDriver
         _scanningContext = scanningContext;
     }
     
-    public async Task<List<ScanDevice>> GetDeviceList(ScanOptions options)
+    public async Task GetDevices(ScanOptions options, CancellationToken cancelToken, Action<ScanDevice> callback)
     {
         // TODO: Run location in a persistent background service
         EsclServiceLocator locator = new EsclServiceLocator();
+        // TODO: Have EsclServiceLocator return devices as discovered
         var services = await locator.Locate();
-        return services.Select(x => new ScanDevice(x.Uuid, x.Name)).ToList();
+        foreach (var service in services)
+        {
+            callback(new ScanDevice(service.Uuid, service.Name));
+        }
     }
 
     public async Task Scan(ScanOptions options, CancellationToken cancelToken, IScanEvents scanEvents, Action<IMemoryImage> callback)

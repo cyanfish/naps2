@@ -41,7 +41,9 @@ public class ScanController
     {
         options = _scanOptionsValidator.ValidateAll(options, _scanningContext, false);
         var bridge = _scanBridgeFactory.Create(options);
-        return await bridge.GetDeviceList(options);
+        var devices = new List<ScanDevice>();
+        await bridge.GetDevices(options, CancellationToken.None, devices.Add);
+        return devices;
     }
 
     public IAsyncEnumerable<ProcessedImage> Scan(ScanOptions options, CancellationToken cancelToken = default)

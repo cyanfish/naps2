@@ -36,7 +36,7 @@ public class ScanDriverFactoryBuilder
 
     private class StubScanDriver : IScanDriver
     {
-        private readonly Queue<List<IMemoryImage>> _scans = new Queue<List<IMemoryImage>>();
+        private readonly Queue<List<IMemoryImage>> _scans = new();
             
         public List<ScanDevice> DeviceList { get; set; }
 
@@ -45,9 +45,13 @@ public class ScanDriverFactoryBuilder
             _scans.Enqueue(images);
         }
             
-        public Task<List<ScanDevice>> GetDeviceList(ScanOptions options)
+        public Task GetDevices(ScanOptions options, CancellationToken cancelToken, Action<ScanDevice> callback)
         {
-            return Task.FromResult(DeviceList ?? throw new NotSupportedException());
+            foreach (var device in DeviceList)
+            {
+                callback(device);
+            }
+            return Task.CompletedTask;
         }
 
         public Task Scan(ScanOptions options, CancellationToken cancelToken, IScanEvents scanEvents, Action<IMemoryImage> callback)

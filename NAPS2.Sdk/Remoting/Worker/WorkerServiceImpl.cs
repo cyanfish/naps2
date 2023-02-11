@@ -106,23 +106,26 @@ public class WorkerServiceImpl : WorkerService.WorkerServiceBase
 #endif
     }
 
-    public override async Task<GetDeviceListResponse> GetDeviceList(GetDeviceListRequest request,
-        ServerCallContext context)
+    public override async Task GetDevices(GetDevicesRequest request,
+        IServerStreamWriter<GetDevicesResponse> responseStream, ServerCallContext context)
     {
         using var callRef = StartCall();
+        var sequencedWriter = new SequencedWriter<GetDevicesResponse>(responseStream);
         try
         {
             var scanOptions = request.OptionsXml.FromXml<ScanOptions>();
-            var deviceList = await _remoteScanController.GetDeviceList(scanOptions);
-            return new GetDeviceListResponse
-            {
-                DeviceListXml = deviceList.ToXml()
-            };
+            await _remoteScanController.GetDevices(scanOptions,
+                context.CancellationToken,
+                device => sequencedWriter.Write(new GetDevicesResponse
+                {
+                    DeviceXml = device.ToXml()
+                }));
         }
         catch (Exception e)
         {
-            return new GetDeviceListResponse { Error = RemotingHelper.ToError(e) };
+            sequencedWriter.Write(new GetDevicesResponse { Error = RemotingHelper.ToError(e) });
         }
+        await sequencedWriter.WaitForCompletion();
     }
 
     public override async Task Scan(ScanRequest request, IServerStreamWriter<ScanResponse> responseStream,

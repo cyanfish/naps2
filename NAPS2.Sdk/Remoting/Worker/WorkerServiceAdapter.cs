@@ -42,12 +42,29 @@ public class WorkerServiceAdapter
         return resp.WiaConfigurationXml.FromXml<WiaConfiguration>();
     }
 
-    public async Task<List<ScanDevice>> GetDeviceList(ScanOptions options)
+    public async Task GetDevices(ScanOptions options, CancellationToken cancelToken, Action<ScanDevice> callback)
     {
-        var req = new GetDeviceListRequest { OptionsXml = options.ToXml() };
-        var resp = await _client.GetDeviceListAsync(req);
-        RemotingHelper.HandleErrors(resp.Error);
-        return resp.DeviceListXml.FromXml<List<ScanDevice>>();
+        var req = new GetDevicesRequest
+        {
+            OptionsXml = options.ToXml()
+        };
+        try
+        {
+            var streamingCall = _client.GetDevices(req, cancellationToken: cancelToken);
+            while (await streamingCall.ResponseStream.MoveNext())
+            {
+                var resp = streamingCall.ResponseStream.Current;
+                RemotingHelper.HandleErrors(resp.Error);
+                callback(resp.DeviceXml.FromXml<ScanDevice>());
+            }
+        }
+        catch (RpcException ex)
+        {
+            if (ex.Status.StatusCode != StatusCode.Cancelled)
+            {
+                throw;
+            }
+        }
     }
 
     public async Task Scan(ScanningContext scanningContext, ScanOptions options, CancellationToken cancelToken,

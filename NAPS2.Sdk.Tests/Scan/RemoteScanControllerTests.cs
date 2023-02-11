@@ -12,26 +12,37 @@ namespace NAPS2.Sdk.Tests.Scan;
 public class RemoteScanControllerTests : ContextualTests
 {
     [Fact]
-    public async Task GetDeviceList()
+    public async Task GetDevices()
     {
         var device = new ScanDevice("test_id1", "test_name1");
         var wiaDevice = new ScanDevice("WIA-test_id2", "test_name2");
         var scanDriver = new Mock<IScanDriver>();
-        scanDriver.Setup(x => x.GetDeviceList(It.IsAny<ScanOptions>()))
-            .ReturnsAsync(new List<ScanDevice> { device, wiaDevice });
+        scanDriver.Setup(x =>
+                x.GetDevices(It.IsAny<ScanOptions>(), It.IsAny<CancellationToken>(), It.IsAny<Action<ScanDevice>>()))
+            .Returns((ScanOptions options, CancellationToken cancelToken, Action<ScanDevice> callback) =>
+            {
+                callback(device);
+                callback(wiaDevice);
+                return Task.CompletedTask;
+            });
         var controller = CreateControllerWithMockDriver(scanDriver.Object);
 
-        var deviceList = await controller.GetDeviceList(new ScanOptions { Driver = Driver.Wia });
+        var deviceList = new List<ScanDevice>();
+        await controller.GetDevices(new ScanOptions { Driver = Driver.Wia }, CancellationToken.None, deviceList.Add);
         Assert.Equal(2, deviceList.Count);
         Assert.Equal("test_id1", deviceList[0].ID);
         Assert.Equal("WIA-test_id2", deviceList[1].ID);
 
-        deviceList = await controller.GetDeviceList(new ScanOptions { Driver = Driver.Twain });
+        deviceList.Clear();
+        await controller.GetDevices(new ScanOptions { Driver = Driver.Twain }, CancellationToken.None, deviceList.Add);
         Assert.Single(deviceList);
         Assert.Equal("test_id1", deviceList[0].ID);
 
-        deviceList = await controller.GetDeviceList(new ScanOptions
-            { Driver = Driver.Twain, TwainOptions = { IncludeWiaDevices = true } });
+        deviceList.Clear();
+        await controller.GetDevices(
+            new ScanOptions { Driver = Driver.Twain, TwainOptions = { IncludeWiaDevices = true } },
+            CancellationToken.None,
+            deviceList.Add);
         Assert.Equal(2, deviceList.Count);
     }
 
@@ -51,6 +62,7 @@ public class RemoteScanControllerTests : ContextualTests
         var controller = CreateControllerWithMockDriver(scanDriver.Object);
 
         var images = new List<ProcessedImage>();
+
         void Callback(ProcessedImage image, PostProcessingContext context)
         {
             images.Add(image);
@@ -61,7 +73,7 @@ public class RemoteScanControllerTests : ContextualTests
             AutoDeskew = true
         };
         await controller.Scan(options, CancellationToken.None, ScanEvents.Stub, Callback);
-        
+
         Assert.Single(images);
         ImageAsserts.Similar(ImageResources.deskewed, images[0], ImageAsserts.XPLAT_RMSE_THRESHOLD);
     }

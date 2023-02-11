@@ -12,7 +12,7 @@ internal class StubScanBridge : IScanBridge
         
     public Exception Error { get; set; }
 
-    public Task<List<ScanDevice>> GetDeviceList(ScanOptions options)
+    public Task GetDevices(ScanOptions options, CancellationToken cancelToken, Action<ScanDevice> callback)
     {
         return Task.Run(() =>
         {
@@ -21,7 +21,10 @@ internal class StubScanBridge : IScanBridge
                 throw Error;
             }
 
-            return MockDevices;
+            foreach (var device in MockDevices)
+            {
+                callback(device);
+            }
         });
     }
 

@@ -16,12 +16,15 @@ internal class TwainScanDriver : IScanDriver
         _scanningContext = scanningContext;
     }
 
-    public Task<List<ScanDevice>> GetDeviceList(ScanOptions options)
+    public Task GetDevices(ScanOptions options, CancellationToken cancelToken, Action<ScanDevice> callback)
     {
         return Task.Run(async () =>
         {
             var controller = GetSessionController(options);
-            return await controller.GetDeviceList(options);
+            foreach (var device in await controller.GetDeviceList(options))
+            {
+                callback(device);
+            }
         });
     }
 

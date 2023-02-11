@@ -12,9 +12,15 @@ internal class LegacyTwainScanDriver : IScanDriver
         _scanningContext = scanningContext;
     }
 
-    public Task<List<ScanDevice>> GetDeviceList(ScanOptions options)
+    public Task GetDevices(ScanOptions options, CancellationToken cancelToken, Action<ScanDevice> callback)
     {
-        return Task.Run(() => Invoker.Current.InvokeGet(() => TwainApi.GetDeviceList(options)));
+        return Task.Run(() => Invoker.Current.Invoke(() =>
+        {
+            foreach (var device in TwainApi.GetDeviceList(options))
+            {
+                callback(device);
+            }
+        }));
     }
 
     public Task Scan(ScanOptions options, CancellationToken cancelToken, IScanEvents scanEvents, Action<IMemoryImage> callback)

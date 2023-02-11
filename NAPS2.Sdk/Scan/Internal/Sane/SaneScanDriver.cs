@@ -46,7 +46,7 @@ internal class SaneScanDriver : IScanDriver
     //     ? new FlatpakSaneInstallation(_scanningContext)
     //     : new BundledSaneInstallation();
 
-    public Task<List<ScanDevice>> GetDeviceList(ScanOptions options)
+    public Task GetDevices(ScanOptions options, CancellationToken cancelToken, Action<ScanDevice> callback)
     {
         return Task.Run(() =>
         {
@@ -55,14 +55,11 @@ internal class SaneScanDriver : IScanDriver
             using var client = new SaneClient(Installation);
             // TODO: We can use device.type and .vendor to help pick an icon etc.
             // https://sane-project.gitlab.io/standard/api.html#device-descriptor-type
-            return client.GetDevices()
-                .Select(device =>
-                {
-                    // TODO: The backend should be part of the device metadata, e.g. DriverSubType
-                    var backend = device.Name.Split(':')[0];
-                    return new ScanDevice(device.Name, $"{device.Model} ({backend})");
-                })
-                .ToList();
+            foreach (var device in client.GetDevices())
+            {
+                var backend = device.Name.Split(':')[0];
+                callback(new ScanDevice(device.Name, $"{device.Model} ({backend})"));
+            }
         });
     }
 

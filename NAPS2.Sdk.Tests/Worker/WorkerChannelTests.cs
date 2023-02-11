@@ -47,20 +47,27 @@ public class WorkerChannelTests : ContextualTests
     }
 
     [Fact]
-    public async Task GetDeviceList()
+    public async Task GetDevices()
     {
         var remoteScanController = new Mock<IRemoteScanController>();
         using var channel = Start(remoteScanController.Object);
         remoteScanController
-            .Setup(rsc => rsc.GetDeviceList(It.IsAny<ScanOptions>()))
-            .ReturnsAsync(new List<ScanDevice> { new ScanDevice("test_id", "test_name") });
+            .Setup(rsc => rsc.GetDevices(It.IsAny<ScanOptions>(), It.IsAny<CancellationToken>(),
+                It.IsAny<Action<ScanDevice>>()))
+            .Returns((ScanOptions options, CancellationToken cancelToken, Action<ScanDevice> callback) =>
+            {
+                callback(new ScanDevice("test_id", "test_name"));
+                return Task.CompletedTask;
+            });
 
-        var deviceList = await channel.Client.GetDeviceList(new ScanOptions());
+        var deviceList = new List<ScanDevice>();
+        await channel.Client.GetDevices(new ScanOptions(), CancellationToken.None, deviceList.Add);
 
         Assert.Single(deviceList);
         Assert.Equal("test_id", deviceList[0].ID);
         Assert.Equal("test_name", deviceList[0].Name);
-        remoteScanController.Verify(rsc => rsc.GetDeviceList(It.IsAny<ScanOptions>()));
+        remoteScanController.Verify(rsc => rsc.GetDevices(It.IsAny<ScanOptions>(), It.IsAny<CancellationToken>(),
+            It.IsAny<Action<ScanDevice>>()));
         remoteScanController.VerifyNoOtherCalls();
     }
 
@@ -144,7 +151,7 @@ public class WorkerChannelTests : ContextualTests
 
         using var channel = Start(twainSessionController: sessionController.Object);
         await channel.Client.TwainScan(new ScanOptions(), CancellationToken.None, twainEvents.Object);
-        
+
         twainEvents.Verify(x => x.PageStart(It.IsAny<TwainPageStart>()));
         twainEvents.Verify(x => x.MemoryBufferTransferred(It.IsAny<TwainMemoryBuffer>()));
         twainEvents.Verify(x => x.PageStart(It.IsAny<TwainPageStart>()));
@@ -158,7 +165,8 @@ public class WorkerChannelTests : ContextualTests
 
         public Exception Exception { get; set; }
 
-        public Task<List<ScanDevice>> GetDeviceList(ScanOptions options) => throw new NotSupportedException();
+        public Task GetDevices(ScanOptions options, CancellationToken cancelToken, Action<ScanDevice> callback) =>
+            throw new NotSupportedException();
 
         public Task Scan(ScanOptions options, CancellationToken cancelToken, IScanEvents scanEvents,
             Action<ProcessedImage, PostProcessingContext> callback)
