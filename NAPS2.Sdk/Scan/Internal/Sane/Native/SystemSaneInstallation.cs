@@ -4,6 +4,8 @@ public class SystemSaneInstallation : ISaneInstallation
 {
     private string? _libraryPath;
 
+    public bool CanStreamDevices => false;
+
     public void Initialize()
     {
 #if NET6_0_OR_GREATER
