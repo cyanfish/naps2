@@ -12,8 +12,6 @@ public class SelectDeviceForm : EtoDialogBase
     private readonly List<ScanDevice> _lazyDeviceList = new();
     // TODO: The spinner doesn't seem to animate on WinForms
     private readonly Spinner _spinner = new() { Enabled = true };
-    // TODO: As we don't care to relayout, we should just be able to set .Visible=false without it resetting on form resize
-    private readonly LayoutVisibility _spinnerVisible = new(true);
 
     public SelectDeviceForm(Naps2Config config) : base(config)
     {
@@ -34,7 +32,7 @@ public class SelectDeviceForm : EtoDialogBase
             L.Column(
                 _selectDevice,
                 C.CancelButton(this),
-                _spinner.AlignCenter().Visible(_spinnerVisible)
+                _spinner.AlignCenter()
             )
         );
     }
@@ -58,7 +56,7 @@ public class SelectDeviceForm : EtoDialogBase
                 _devices.SelectedIndex = 0;
                 _selectDevice.Enabled = true;
             }
-            _spinnerVisible.IsVisible = false;
+            _spinner.Visible = false;
         }
         else if (AsyncDevices != null)
         {
@@ -83,7 +81,7 @@ public class SelectDeviceForm : EtoDialogBase
                     });
                 }
                 // TODO: If we have no devices, show that message (dialog or inline?).
-                Invoker.Current.Invoke(() => _spinnerVisible.IsVisible = false);
+                Invoker.Current.Invoke(() => _spinner.Visible = false);
             });
         }
         else
