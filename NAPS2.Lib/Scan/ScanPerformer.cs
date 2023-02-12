@@ -297,11 +297,6 @@ internal class ScanPerformer : IScanPerformer
 #endif
 
         // Other drivers do not, so use a generic dialog
-        var deviceList = await new ScanController(_scanningContext).GetDeviceList(options);
-        if (deviceList.Count == 0)
-        {
-            throw new NoDevicesFoundException();
-        }
-        return Invoker.Current.InvokeGet(() => _devicePrompt.PromptForDevice(deviceList, options.DialogParent));
+        return await _devicePrompt.PromptForDevice(options);
     }
 }
