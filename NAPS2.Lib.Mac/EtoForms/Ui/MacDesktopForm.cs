@@ -158,10 +158,11 @@ public class MacDesktopForm : DesktopForm
             }
         };
 
+        // TODO: If we ever make significant changes to the toolbar layout, maybe add ".v2" so it resets saved config
         var toolbar = new NSToolbar("naps2.desktop.toolbar");
         toolbar.Delegate = new MacToolbarDelegate(CreateMacToolbarItems());
         toolbar.AllowsUserCustomization = true;
-        // toolbar.AutosavesConfiguration = true;
+        toolbar.AutosavesConfiguration = true;
 
         var window = this.ToNative();
         if (OperatingSystem.IsMacOSVersionAtLeast(11))
