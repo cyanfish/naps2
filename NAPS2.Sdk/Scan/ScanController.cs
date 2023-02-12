@@ -46,17 +46,19 @@ public class ScanController
         return devices;
     }
 
-    public IAsyncEnumerable<ScanDevice> GetDevices() => GetDevices(new ScanOptions());
+    public IAsyncEnumerable<ScanDevice> GetDevices(CancellationToken cancelToken = default) =>
+        GetDevices(new ScanOptions(), cancelToken);
 
-    public IAsyncEnumerable<ScanDevice> GetDevices(Driver driver) => GetDevices(new ScanOptions { Driver = driver});
+    public IAsyncEnumerable<ScanDevice> GetDevices(Driver driver, CancellationToken cancelToken = default) =>
+        GetDevices(new ScanOptions { Driver = driver }, cancelToken);
 
-    public IAsyncEnumerable<ScanDevice> GetDevices(ScanOptions options)
+    public IAsyncEnumerable<ScanDevice> GetDevices(ScanOptions options, CancellationToken cancelToken = default)
     {
         options = _scanOptionsValidator.ValidateAll(options, _scanningContext, false);
         var bridge = _scanBridgeFactory.Create(options);
         return AsyncProducers.RunProducer<ScanDevice>(async produce =>
         {
-            await bridge.GetDevices(options, CancellationToken.None, produce);
+            await bridge.GetDevices(options, cancelToken, produce);
         });
     }
 

@@ -17,13 +17,16 @@ internal class AppleScanDriver : IScanDriver
     public async Task GetDevices(ScanOptions options, CancellationToken cancelToken, Action<ScanDevice> callback)
     {
         using var reader = new DeviceReader();
-        reader.Start();
-        // TODO: Have DeviceReader return devices as discovered
-        await Task.Delay(2000);
-        foreach (var device in reader.Devices.Where(x => x.Uuid != null && x.Name != null))
+        reader.DeviceFound += (_, args) =>
         {
-            callback(new ScanDevice(device.Uuid!, device.Name!));
-        }
+            var device = args.Device;
+            if (device.Uuid != null && device.Name != null)
+            {
+                callback(new ScanDevice(device.Uuid, device.Name));
+            }
+        };
+        reader.Start();
+        await Task.Delay(2000, cancelToken);
     }
 
     public async Task Scan(ScanOptions options, CancellationToken cancelToken, IScanEvents scanEvents,

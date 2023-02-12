@@ -1,4 +1,5 @@
-﻿using NAPS2.EtoForms.Ui;
+﻿using System.Threading;
+using NAPS2.EtoForms.Ui;
 using NAPS2.Scan;
 using NAPS2.Scan.Exceptions;
 
@@ -39,12 +40,14 @@ public class EtoDevicePrompt : IDevicePrompt
         }
         else
         {
-            var devices = new ScanController(_scanningContext).GetDevices(options);
+            var cts = new CancellationTokenSource();
+            var devices = new ScanController(_scanningContext).GetDevices(options, cts.Token);
             return Invoker.Current.InvokeGet(() =>
             {
                 var deviceForm = _formFactory.Create<SelectDeviceForm>();
                 deviceForm.AsyncDevices = devices;
                 deviceForm.ShowModal();
+                cts.Cancel();
                 return deviceForm.SelectedDevice;
             });
         }

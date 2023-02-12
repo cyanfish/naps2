@@ -82,6 +82,7 @@ public class SelectDeviceForm : EtoDialogBase
                         }
                     });
                 }
+                // TODO: If we have no devices, show that message (dialog or inline?).
                 Invoker.Current.Invoke(() => _spinnerVisible.IsVisible = false);
             });
         }
