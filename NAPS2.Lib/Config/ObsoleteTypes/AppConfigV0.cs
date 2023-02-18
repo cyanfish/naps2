@@ -1,6 +1,6 @@
 using System.Xml.Serialization;
-using NAPS2.ImportExport.Pdf;
 using NAPS2.Ocr;
+using NAPS2.Pdf;
 using NAPS2.Scan;
 
 namespace NAPS2.Config.ObsoleteTypes;

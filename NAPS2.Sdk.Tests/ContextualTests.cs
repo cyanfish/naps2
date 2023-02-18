@@ -1,6 +1,6 @@
 ﻿using System.Threading;
-using NAPS2.ImportExport.Pdf;
 using NAPS2.Ocr;
+using NAPS2.Pdf;
 using NAPS2.Scan;
 using NAPS2.Unmanaged;
 using Xunit.Abstractions;

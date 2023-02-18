@@ -1,4 +1,4 @@
-﻿using NAPS2.ImportExport.Pdf;
+﻿using NAPS2.Pdf;
 using NAPS2.Scan;
 using NAPS2.Sdk.Tests.Asserts;
 using NAPS2.Serialization;

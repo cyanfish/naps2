@@ -4,8 +4,8 @@ using NAPS2.EtoForms;
 using NAPS2.EtoForms.Ui;
 using NAPS2.ImportExport;
 using NAPS2.ImportExport.Images;
-using NAPS2.ImportExport.Pdf;
 using NAPS2.Ocr;
+using NAPS2.Pdf;
 
 namespace NAPS2.Scan.Batch;
 

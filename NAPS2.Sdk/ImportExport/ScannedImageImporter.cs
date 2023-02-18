@@ -1,5 +1,5 @@
 ﻿using NAPS2.ImportExport.Images;
-using NAPS2.ImportExport.Pdf;
+using NAPS2.Pdf;
 
 namespace NAPS2.ImportExport;
 

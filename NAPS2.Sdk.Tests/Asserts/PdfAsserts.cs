@@ -1,6 +1,6 @@
 ﻿using Codeuctivity;
-using NAPS2.ImportExport.Pdf;
-using NAPS2.ImportExport.Pdf.Pdfium;
+using NAPS2.Pdf;
+using NAPS2.Pdf.Pdfium;
 using PdfSharpCore.Pdf.IO;
 using PdfSharpCore.Pdf.Security;
 using Xunit;

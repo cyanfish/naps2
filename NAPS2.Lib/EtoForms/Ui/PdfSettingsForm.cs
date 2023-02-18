@@ -2,7 +2,7 @@ using Eto.Drawing;
 using Eto.Forms;
 using NAPS2.EtoForms.Layout;
 using NAPS2.EtoForms.Widgets;
-using NAPS2.ImportExport.Pdf;
+using NAPS2.Pdf;
 
 namespace NAPS2.EtoForms.Ui;
 

@@ -2,7 +2,7 @@
 using NAPS2.EtoForms.Ui;
 using NAPS2.ImportExport.Email;
 using NAPS2.ImportExport.Images;
-using NAPS2.ImportExport.Pdf;
+using NAPS2.Pdf;
 
 namespace NAPS2.ImportExport;
 

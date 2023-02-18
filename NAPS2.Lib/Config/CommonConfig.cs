@@ -2,7 +2,7 @@
 using NAPS2.Config.Model;
 using NAPS2.ImportExport.Email;
 using NAPS2.ImportExport.Images;
-using NAPS2.ImportExport.Pdf;
+using NAPS2.Pdf;
 using NAPS2.Ocr;
 using NAPS2.Scan;
 using NAPS2.Scan.Batch;

@@ -1,4 +1,4 @@
-using NAPS2.ImportExport.Pdf;
+using NAPS2.Pdf;
 using NAPS2.Sdk.Tests.Asserts;
 
 namespace NAPS2.Sdk.Tests.ImportExport.Pdf;

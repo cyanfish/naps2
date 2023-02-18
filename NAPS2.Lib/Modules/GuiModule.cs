@@ -2,7 +2,7 @@ using Autofac;
 using NAPS2.EtoForms;
 using NAPS2.EtoForms.Desktop;
 using NAPS2.ImportExport;
-using NAPS2.ImportExport.Pdf;
+using NAPS2.Pdf;
 using NAPS2.Scan;
 using NAPS2.Scan.Batch;
 using NAPS2.Update;

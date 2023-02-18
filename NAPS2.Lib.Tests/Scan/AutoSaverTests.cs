@@ -1,7 +1,7 @@
 ﻿using Moq;
 using NAPS2.EtoForms;
 using NAPS2.ImportExport;
-using NAPS2.ImportExport.Pdf;
+using NAPS2.Pdf;
 using NAPS2.Scan;
 using NAPS2.Sdk.Tests;
 using NAPS2.Sdk.Tests.Asserts;

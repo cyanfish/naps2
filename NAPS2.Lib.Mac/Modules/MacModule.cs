@@ -4,7 +4,7 @@ using NAPS2.EtoForms.Mac;
 using NAPS2.EtoForms.Ui;
 using NAPS2.Images.Mac;
 using NAPS2.ImportExport;
-using NAPS2.ImportExport.Pdf;
+using NAPS2.Pdf;
 using NAPS2.Update;
 
 namespace NAPS2.Modules;
