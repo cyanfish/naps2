@@ -62,6 +62,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NAPS2.Images.Gtk", "NAPS2.I
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NAPS2.App.Gtk", "NAPS2.App.Gtk\NAPS2.App.Gtk.csproj", "{DCAC4A2E-BF9A-4F90-9B16-08DC38038A71}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NAPS2.Internals", "NAPS2.Internals\NAPS2.Internals.csproj", "{62A65443-AACD-43E9-A7F2-F1312812FA5A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -494,6 +496,25 @@ Global
 		{DCAC4A2E-BF9A-4F90-9B16-08DC38038A71}.Release-Msi|Any CPU.Build.0 = Release|Any CPU
 		{DCAC4A2E-BF9A-4F90-9B16-08DC38038A71}.Release-Linux|Any CPU.ActiveCfg = Release|Any CPU
 		{DCAC4A2E-BF9A-4F90-9B16-08DC38038A71}.Release-Linux|Any CPU.Build.0 = Release|Any CPU
+		{62A65443-AACD-43E9-A7F2-F1312812FA5A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{62A65443-AACD-43E9-A7F2-F1312812FA5A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{62A65443-AACD-43E9-A7F2-F1312812FA5A}.DebugLang|Any CPU.ActiveCfg = Debug|Any CPU
+		{62A65443-AACD-43E9-A7F2-F1312812FA5A}.DebugLang|Any CPU.Build.0 = Debug|Any CPU
+		{62A65443-AACD-43E9-A7F2-F1312812FA5A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{62A65443-AACD-43E9-A7F2-F1312812FA5A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{62A65443-AACD-43E9-A7F2-F1312812FA5A}.Release-Msi|Any CPU.ActiveCfg = Debug|Any CPU
+		{62A65443-AACD-43E9-A7F2-F1312812FA5A}.Release-Msi|Any CPU.Build.0 = Debug|Any CPU
+		{62A65443-AACD-43E9-A7F2-F1312812FA5A}.Release-Zip|Any CPU.ActiveCfg = Debug|Any CPU
+		{62A65443-AACD-43E9-A7F2-F1312812FA5A}.Release-Zip|Any CPU.Build.0 = Debug|Any CPU
+		{62A65443-AACD-43E9-A7F2-F1312812FA5A}.Tools|Any CPU.ActiveCfg = Debug|Any CPU
+		{62A65443-AACD-43E9-A7F2-F1312812FA5A}.Debug-Linux|Any CPU.ActiveCfg = Debug|Any CPU
+		{62A65443-AACD-43E9-A7F2-F1312812FA5A}.Debug-Linux|Any CPU.Build.0 = Debug|Any CPU
+		{62A65443-AACD-43E9-A7F2-F1312812FA5A}.Debug-Windows|Any CPU.ActiveCfg = Debug|Any CPU
+		{62A65443-AACD-43E9-A7F2-F1312812FA5A}.Debug-Windows|Any CPU.Build.0 = Debug|Any CPU
+		{62A65443-AACD-43E9-A7F2-F1312812FA5A}.Debug-Mac|Any CPU.ActiveCfg = Debug|Any CPU
+		{62A65443-AACD-43E9-A7F2-F1312812FA5A}.Debug-Mac|Any CPU.Build.0 = Debug|Any CPU
+		{62A65443-AACD-43E9-A7F2-F1312812FA5A}.Release-Linux|Any CPU.ActiveCfg = Debug|Any CPU
+		{62A65443-AACD-43E9-A7F2-F1312812FA5A}.Release-Linux|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -12,10 +12,12 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="Microsoft.Bcl.AsyncInterfaces" Version="6.0.0" />
-      <PackageReference Include="System.Collections.Immutable" Version="5.0.0" />
-        <PackageReference Include="System.ValueTuple" Version="4.3.1" />
-        <PackageReference Include="ZXing.Net" Version="0.16.4" />
+        <PackageReference Include="Microsoft.Bcl.AsyncInterfaces" Version="6.0.0"/>
+        <PackageReference Include="System.Collections.Immutable" Version="5.0.0"/>
+        <PackageReference Include="System.ValueTuple" Version="4.3.1"/>
+        <PackageReference Include="ZXing.Net" Version="0.16.4"/>
+
+        <ProjectReference Include="..\NAPS2.Internals\NAPS2.Internals.csproj"/>
     </ItemGroup>
 
     <ItemGroup>
@@ -42,6 +44,6 @@
         </AssemblyAttribute>
     </ItemGroup>
 
-    <Import Project="..\NAPS2.Setup\targets\CommonTargets.targets" />
-    <Import Project="..\NAPS2.Setup\targets\ImageUsers.targets" />
+    <Import Project="..\NAPS2.Setup\targets\CommonTargets.targets"/>
+    <Import Project="..\NAPS2.Setup\targets\ImageUsers.targets"/>
 </Project>
