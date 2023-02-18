@@ -1,9 +1,25 @@
 ﻿using System.Collections.Immutable;
+using System.Reflection;
+using NAPS2.Serialization;
 
 namespace NAPS2.Images.Transforms;
 
 public abstract class Transform
 {
+    static Transform()
+    {
+        XmlSerializer.RegisterCustomTypes(new TransformTypes());
+    }
+
+    private class TransformTypes : CustomXmlTypes<Transform>
+    {
+        protected override Type[] GetKnownTypes() => Assembly
+            .GetExecutingAssembly()
+            .GetTypes()
+            .Where(t => typeof(Transform).IsAssignableFrom(t))
+            .ToArray();
+    }
+
     /// <summary>
     /// Appends the specified transform to the list, merging with the previous transform on the list if simplication is possible.
     /// </summary>

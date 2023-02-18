@@ -6,6 +6,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Xml;
 using System.Xml.Serialization;
+using NAPS2.Util;
 
 namespace NAPS2.Serialization;
 
@@ -50,16 +51,6 @@ public abstract class XmlSerializer
         { typeof(ImmutableHashSet<>), new XmlTypeInfo { CustomSerializer = new ImmutableHashSetSerializer() } },
         { typeof(DateTime), new XmlTypeInfo { CustomSerializer = new DateTimeSerializer() } },
         { typeof(Nullable<>), new XmlTypeInfo { CustomSerializer = new NullableSerializer() } },
-        {
-            typeof(Transform), new XmlTypeInfo
-            {
-                KnownTypesByElementName = Assembly
-                    .GetAssembly(typeof(Transform))!
-                    .GetTypes()
-                    .Where(t => typeof(Transform).IsAssignableFrom(t))
-                    .ToDictionary(GetElementNameForType, t => t)
-            }
-        },
     };
 
     private static readonly Dictionary<string, Type> PrimitiveTypesByElementName =

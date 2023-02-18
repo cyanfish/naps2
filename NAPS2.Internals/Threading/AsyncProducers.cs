@@ -1,7 +1,7 @@
 ﻿// ReSharper disable once CheckNamespace
 namespace NAPS2.Util;
 
-internal static class AsyncProducers
+public static class AsyncProducers
 {
     public static IAsyncEnumerable<T> RunProducer<T>(ItemProducer<T> producer) where T : class
     {

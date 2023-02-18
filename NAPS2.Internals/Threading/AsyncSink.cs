@@ -1,7 +1,7 @@
 // ReSharper disable once CheckNamespace
 namespace NAPS2.Util;
 
-internal class AsyncSink<T> where T : class
+public class AsyncSink<T> where T : class
 {
     private static TaskCompletionSource<T?> CreateTcs() => new(TaskCreationOptions.RunContinuationsAsynchronously);
 

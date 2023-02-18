@@ -8,5 +8,10 @@
         <Title>NAPS2.Internals</Title>
     </PropertyGroup>
 
-    <Import Project="..\NAPS2.Setup\targets\CommonTargets.targets"/>
+    <ItemGroup>
+        <PackageReference Include="Microsoft.Bcl.AsyncInterfaces" Version="6.0.0" />
+        <PackageReference Include="System.Collections.Immutable" Version="5.0.0" />
+    </ItemGroup>
+
+    <Import Project="..\NAPS2.Setup\targets\CommonTargets.targets" />
 </Project>

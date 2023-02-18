@@ -1,7 +1,7 @@
 // ReSharper disable once CheckNamespace
 namespace NAPS2.Util;
 
-internal class RefCount
+public class RefCount
 {
     private readonly IDisposable _disposable;
     private int _count;

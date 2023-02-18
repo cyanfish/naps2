@@ -12,26 +12,17 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Microsoft.Bcl.AsyncInterfaces" Version="6.0.0"/>
-        <PackageReference Include="System.Collections.Immutable" Version="5.0.0"/>
-        <PackageReference Include="System.ValueTuple" Version="4.3.1"/>
-        <PackageReference Include="ZXing.Net" Version="0.16.4"/>
+        <PackageReference Include="Microsoft.Bcl.AsyncInterfaces" Version="6.0.0" />
+        <PackageReference Include="System.Collections.Immutable" Version="5.0.0" />
+        <PackageReference Include="System.ValueTuple" Version="4.3.1" />
+        <PackageReference Include="ZXing.Net" Version="0.16.4" />
 
-        <ProjectReference Include="..\NAPS2.Internals\NAPS2.Internals.csproj"/>
+        <ProjectReference Include="..\NAPS2.Internals\NAPS2.Internals.csproj" />
     </ItemGroup>
 
     <ItemGroup>
         <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
             <_Parameter1>NAPS2.Sdk</_Parameter1>
-        </AssemblyAttribute>
-        <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
-            <_Parameter1>NAPS2.Sdk.Tests</_Parameter1>
-        </AssemblyAttribute>
-        <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
-            <_Parameter1>NAPS2.Lib</_Parameter1>
-        </AssemblyAttribute>
-        <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
-            <_Parameter1>NAPS2.Lib.WinForms</_Parameter1>
         </AssemblyAttribute>
         <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
             <_Parameter1>NAPS2.Images.Gdi</_Parameter1>
@@ -44,6 +35,6 @@
         </AssemblyAttribute>
     </ItemGroup>
 
-    <Import Project="..\NAPS2.Setup\targets\CommonTargets.targets"/>
-    <Import Project="..\NAPS2.Setup\targets\ImageUsers.targets"/>
+    <Import Project="..\NAPS2.Setup\targets\CommonTargets.targets" />
+    <Import Project="..\NAPS2.Setup\targets\ImageUsers.targets" />
 </Project>
