@@ -36,9 +36,11 @@ internal class SaneScanDriver : IScanDriver
     }
 
 #if NET6_0_OR_GREATER
-    private ISaneInstallation Installation => OperatingSystem.IsMacOS()
+    private readonly Lazy<ISaneInstallation> _installation = new(() => OperatingSystem.IsMacOS()
         ? new BundledSaneInstallation()
-        : new SystemSaneInstallation();
+        : new SystemSaneInstallation());
+
+    private ISaneInstallation Installation => _installation.Value;
 #else
     private ISaneInstallation Installation => throw new NotSupportedException();
 #endif
@@ -55,12 +57,24 @@ internal class SaneScanDriver : IScanDriver
             using var client = new SaneClient(Installation);
             // TODO: We can use device.type and .vendor to help pick an icon etc.
             // https://sane-project.gitlab.io/standard/api.html#device-descriptor-type
-            foreach (var device in client.GetDevices())
+            if (Installation.CanStreamDevices)
             {
-                var backend = device.Name.Split(':')[0];
-                callback(new ScanDevice(device.Name, $"{device.Model} ({backend})"));
+                client.StreamDevices(device => callback(GetScanDevice(device)), cancelToken);
+            }
+            else
+            {
+                foreach (var device in client.GetDevices())
+                {
+                    callback(GetScanDevice(device));
+                }
             }
         });
+    }
+
+    private static ScanDevice GetScanDevice(SaneDeviceInfo device)
+    {
+        var backend = device.Name.Split(':')[0];
+        return new ScanDevice(device.Name, $"{device.Model} ({backend})");
     }
 
     public Task Scan(ScanOptions options, CancellationToken cancelToken, IScanEvents scanEvents,

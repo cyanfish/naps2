@@ -104,8 +104,10 @@ public class GtkImage : IMemoryImage
         options ??= new ImageSaveOptions();
         var type = GetType(imageFormat);
         var (keys, values) = GetSaveOptions(imageFormat, options.Quality);
-        // TODO: Map to OutputStream directly?
+        // TODO: GDK doesn't support optimizing bit depth (e.g. 1bit/8bit instead of 24bit/32bit) for BMP/PNG/JPEG.
+        // We'd probably need to use libpng/libjpeg etc. directly to fix that.
         using var helper = PixelFormatHelper.Create(this, options.PixelFormatHint, minFormat: ImagePixelFormat.RGB24);
+        // TODO: Map to OutputStream directly?
         stream.Write(helper.Image.Pixbuf.SaveToBuffer(type, keys, values));
     }
 

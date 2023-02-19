@@ -13,6 +13,8 @@ public class FlatpakSaneInstallation : ISaneInstallation
         _scanningContext = scanningContext;
     }
 
+    public bool CanStreamDevices => false;
+
     // TODO: We might want to make this a singleton or have some kind of static already-initialized state
     public void Initialize()
     {

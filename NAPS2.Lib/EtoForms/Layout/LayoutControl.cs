@@ -176,7 +176,10 @@ public class LayoutControl : LayoutElement
     private void EnsureIsAdded(LayoutContext context)
     {
         if (Control == null) return;
-        Control.Visible = IsVisible && context.IsParentVisible;
+        if (Visibility != null || context.IsParentVisible != null)
+        {
+            Control.Visible = IsVisible && (context.IsParentVisible ?? true);
+        }
         if (context.IsFirstLayout && !_isAdded)
         {
             EtoPlatform.Current.AddToContainer(context.Layout, Control, context.InOverlay);

@@ -7,6 +7,8 @@ public class BundledSaneInstallation : ISaneInstallation
     private string? _libraryPath;
     private string[]? _libraryDeps;
 
+    public bool CanStreamDevices => true;
+
     public void Initialize()
     {
         var testRoot = Environment.GetEnvironmentVariable("NAPS2_TEST_DEPS");
