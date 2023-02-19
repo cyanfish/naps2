@@ -1,0 +1,11 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+    <ItemGroup>
+        <Content Include="$(MSBuildThisFileDirectory)\..\contentFiles\NAPS2.Worker.exe"
+                 Condition="$(RuntimeIdentifier) == 'win-x86' or $(RuntimeIdentifier) == 'win-x64' or $(TargetFramework.StartsWith('net4')) or ($(RuntimeIdentifier) == '' and !$(TargetFramework.Contains('macos')))">
+            <Link>NAPS2.Worker.exe</Link>
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
+    </ItemGroup>
+
+</Project>
