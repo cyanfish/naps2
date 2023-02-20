@@ -330,6 +330,8 @@ public class AutomatedScanning
         message.Recipients.AddRange(EmailRecipient.FromText(EmailRecipientType.Cc, _options.EmailCc));
         message.Recipients.AddRange(EmailRecipient.FromText(EmailRecipientType.Bcc, _options.EmailBcc));
 
+        // TODO: We may want to normalize this to use SavePdfOperation's email functionality
+        // TODO: Definitely need to add some email CLI tests too (email only, email + save pdf, email + save images, email multiple files, etc.)
         var tempFolder = new DirectoryInfo(Path.Combine(Paths.Temp, Path.GetRandomFileName()));
         tempFolder.Create();
         try
@@ -585,7 +587,7 @@ public class AutomatedScanning
             };
             int digits = (int) Math.Floor(Math.Log10(_scanList.Count)) + 1;
             string actualPath = _placeholders.Substitute(path, true, scanIndex++, _scanList.Count > 1 ? digits : 0);
-            op.Start(actualPath, _placeholders, fileContents, _config.Get(c => c.PdfSettings), _ocrParams, email, null);
+            op.Start(actualPath, _placeholders, fileContents, _config.Get(c => c.PdfSettings), _ocrParams);
             if (!await op.Success)
             {
                 return false;

@@ -25,11 +25,11 @@ public class SavePdfOperation : OperationBase
     public string? FirstFileSaved { get; private set; }
 
     public bool Start(string fileName, Placeholders placeholders, ICollection<ProcessedImage> images,
-        PdfSettings pdfSettings, OcrParams ocrParams, bool email = false, EmailMessage? emailMessage = null,
+        PdfSettings pdfSettings, OcrParams ocrParams, EmailMessage? emailMessage = null,
         string? overwriteFile = null)
     {
         // TODO: This needs tests. And ideally simplification.
-        ProgressTitle = email ? MiscResources.EmailPdfProgress : MiscResources.SavePdfProgress;
+        ProgressTitle = emailMessage != null ? MiscResources.EmailPdfProgress : MiscResources.SavePdfProgress;
         var subFileName = placeholders.Substitute(fileName);
         Status = new OperationStatus
         {
@@ -132,7 +132,7 @@ public class SavePdfOperation : OperationBase
                 GC.Collect();
             }
 
-            if (result && email && emailMessage != null && _emailProviderFactory != null)
+            if (result && emailMessage != null && _emailProviderFactory != null)
             {
                 Status.StatusText = MiscResources.UploadingEmail;
                 Status.CurrentProgress = 0;
@@ -160,7 +160,7 @@ public class SavePdfOperation : OperationBase
         {
             if (task.Result)
             {
-                if (email)
+                if (emailMessage != null)
                 {
                     Log.Event(EventType.Email, new EventParams
                     {

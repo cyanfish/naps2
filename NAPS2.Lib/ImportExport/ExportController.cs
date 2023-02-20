@@ -168,7 +168,7 @@ public class ExportController : IExportController
     {
         var subSavePath = Placeholders.All.Substitute(savePath);
         var state = _imageList.CurrentState;
-        if (await RunSavePdfOperation(subSavePath, images, false, null))
+        if (await RunSavePdfOperation(subSavePath, images))
         {
             _imageList.SavedState = state;
             notify.PdfSaved(subSavePath);
@@ -204,19 +204,7 @@ public class ExportController : IExportController
             string targetPath = Path.Combine(tempFolder.FullName, attachmentName);
             var state = _imageList.CurrentState;
 
-            var message = new EmailMessage
-            {
-                Attachments =
-                {
-                    new EmailAttachment
-                    {
-                        FilePath = targetPath,
-                        AttachmentName = attachmentName
-                    }
-                }
-            };
-
-            if (await RunSavePdfOperation(targetPath, images, true, message))
+            if (await RunSavePdfOperation(targetPath, images, new EmailMessage()))
             {
                 _imageList.SavedState = state;
                 return true;
@@ -229,13 +217,13 @@ public class ExportController : IExportController
         return false;
     }
 
-    private async Task<bool> RunSavePdfOperation(string filename, IList<ProcessedImage> images, bool email,
-        EmailMessage? emailMessage)
+    private async Task<bool> RunSavePdfOperation(string filename, IList<ProcessedImage> images,
+        EmailMessage? emailMessage = null)
     {
         var op = _operationFactory.Create<SavePdfOperation>();
 
         if (op.Start(filename, Placeholders.All.WithDate(DateTime.Now), images, _config.Get(c => c.PdfSettings),
-                _config.DefaultOcrParams(), email, emailMessage, filename))
+                _config.DefaultOcrParams(), emailMessage, filename))
         {
             _operationProgress.ShowProgress(op);
         }
