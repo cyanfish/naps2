@@ -98,7 +98,19 @@ internal class PdfPageObject : NativePdfiumObject
         return Encoding.Unicode.GetString(buffer);
     }
 
-    public TextRenderMode TextRenderMode => (TextRenderMode) Native.FPDFTextObj_GetTextRenderMode(Handle);
+    public void SetText(string text)
+    {
+        if (!Native.FPDFText_SetText(Handle, text))
+        {
+            throw new Exception("Could not set text");
+        }
+    }
+
+    public TextRenderMode TextRenderMode
+    {
+        get => (TextRenderMode) Native.FPDFTextObj_GetTextRenderMode(Handle);
+        set => Native.FPDFTextObj_SetTextRenderMode(Handle, (int) value);
+    }
 
     public PdfBitmap GetBitmap()
     {

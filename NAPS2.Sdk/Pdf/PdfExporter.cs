@@ -109,7 +109,6 @@ public class PdfExporter : IPdfExporter
                     .Step(RenderStep)
                     .Step(InitOcrStep)
                     .Step(WaitForOcrStep)
-                    .Step(WriteToPdfSharpStep)
                     .Run();
 
                 await imagePagesPipeline;
@@ -120,8 +119,7 @@ public class PdfExporter : IPdfExporter
                 var stream = FinalizeAndSaveDocument(document, exportParams);
                 if (progress.IsCancellationRequested) return false;
 
-                var passthroughPages = pdfPages.Where(x => !x.NeedsOcr).ToList();
-                return MergePassthroughPages(stream, path, passthroughPages, exportParams, progress);
+                return MergePassthroughPages(stream, path, pdfPages, exportParams, progress);
             }
             finally
             {
@@ -176,6 +174,11 @@ public class PdfExporter : IPdfExporter
                         {
                             sourceHandle.Free();
                         }
+                    }
+                    if (state.OcrTask?.Result != null)
+                    {
+                        using var page = destDoc.GetPage(state.PageIndex);
+                        DrawOcrTextOnPdfiumPage(state.Page, destDoc, page, state.OcrTask.Result);
                     }
                     if (progress.IsCancellationRequested) return false;
                 }
@@ -384,25 +387,57 @@ public class PdfExporter : IPdfExporter
         var tf = new XTextFormatter(gfx);
         foreach (var element in ocrResult.Elements)
         {
-            if (string.IsNullOrEmpty(element.Text)) continue;
-
-            var adjustedBounds = AdjustBounds(element.Bounds, (float) page.Width / ocrResult.PageBounds.w,
-                (float) page.Height / ocrResult.PageBounds.h);
+            var info = GetTextDrawInfo(page, gfx, ocrResult, element);
+            if (info == null) continue;
 #if DEBUG && DEBUGOCR
-                    gfx.DrawRectangle(new XPen(XColor.FromArgb(255, 0, 0)), adjustedBounds);
+            gfx.DrawRectangle(new XPen(XColor.FromArgb(255, 0, 0)), info.Bounds);
 #endif
-            var adjustedFontSize = CalculateFontSize(element.Text, adjustedBounds, gfx);
-            // Special case to avoid accidentally recognizing big lines as dashes/underscores
-            if (adjustedFontSize > 100 && (element.Text == "-" || element.Text == "_")) continue;
-            var font = new XFont("Times New Roman", adjustedFontSize, XFontStyle.Regular,
-                new XPdfFontOptions(PdfFontEncoding.Unicode));
-            var adjustedTextSize = gfx.MeasureString(element.Text, font);
-            var verticalOffset = (adjustedBounds.Height - adjustedTextSize.Height) / 2;
-            var horizontalOffset = (adjustedBounds.Width - adjustedTextSize.Width) / 2;
-            adjustedBounds.Offset((float) horizontalOffset, (float) verticalOffset);
-            tf.DrawString(element.RightToLeft ? ReverseText(element.Text) : element.Text, font, XBrushes.Transparent,
-                adjustedBounds);
+            tf.DrawString(info.Text, info.Font, XBrushes.Transparent, info.Bounds);
         }
+    }
+
+    private static void DrawOcrTextOnPdfiumPage(PdfPage page, Pdfium.PdfDocument pdfiumDocument,
+        Pdfium.PdfPage pdfiumPage, OcrResult ocrResult)
+    {
+        using XGraphics gfx = XGraphics.FromPdfPage(page, XGraphicsPdfPageOptions.Prepend);
+        foreach (var element in ocrResult.Elements)
+        {
+            var info = GetTextDrawInfo(page, gfx, ocrResult, element);
+            if (info == null) continue;
+
+            var textObj = pdfiumDocument.NewText("TimesNewRoman", info.FontSize);
+            textObj.TextRenderMode = TextRenderMode.Invisible;
+            textObj.SetText(info.Text);
+            // This ends up being slightly different alignment then the PdfSharp-based text. Maybe at some point we can
+            // try to make them identical, although it's not perfect to begin with.
+            textObj.Matrix = new PdfMatrix(1, 0, 0, 1, info.X, (float) page.Height - (info.Y + info.TextHeight));
+            pdfiumPage.InsertObject(textObj);
+        }
+        pdfiumPage.GenerateContent();
+    }
+
+    private static TextDrawInfo? GetTextDrawInfo(PdfPage page, XGraphics gfx, OcrResult ocrResult,
+        OcrResultElement element)
+    {
+        if (string.IsNullOrEmpty(element.Text)) return null;
+
+        var adjustedBounds = AdjustBounds(element.Bounds, (float) page.Width / ocrResult.PageBounds.w,
+            (float) page.Height / ocrResult.PageBounds.h);
+        var adjustedFontSize = CalculateFontSize(element.Text, adjustedBounds, gfx);
+        // Special case to avoid accidentally recognizing big lines as dashes/underscores
+        if (adjustedFontSize > 100 && (element.Text == "-" || element.Text == "_")) return null;
+        var font = new XFont("Times New Roman", adjustedFontSize, XFontStyle.Regular,
+            new XPdfFontOptions(PdfFontEncoding.Unicode));
+        var adjustedTextSize = gfx.MeasureString(element.Text, font);
+        var verticalOffset = (adjustedBounds.Height - adjustedTextSize.Height) / 2;
+        var horizontalOffset = (adjustedBounds.Width - adjustedTextSize.Width) / 2;
+        adjustedBounds.Offset((float) horizontalOffset, (float) verticalOffset);
+
+        return new TextDrawInfo(
+            element.RightToLeft ? ReverseText(element.Text) : element.Text,
+            font,
+            adjustedBounds,
+            adjustedTextSize);
     }
 
     private static string ReverseText(string text)
@@ -463,6 +498,17 @@ public class PdfExporter : IPdfExporter
         ImageMemoryStorage memoryStorage => memoryStorage.TypeHint == ".pdf",
         _ => false
     };
+
+    private record TextDrawInfo(string Text, XFont Font, XRect Bounds, XSize TextSize)
+    {
+        public int FontSize => (int) Font.Size;
+        public float X => (float) Bounds.X;
+        public float Y => (float) Bounds.Y;
+        public float Width => (float) Bounds.Width;
+        public float Height => (float) Bounds.Height;
+        public float TextWidth => (float) TextSize.Width;
+        public float TextHeight => (float) TextSize.Height;
+    }
 
     private class PageExportState
     {

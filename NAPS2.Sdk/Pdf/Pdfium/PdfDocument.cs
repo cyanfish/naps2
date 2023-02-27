@@ -58,6 +58,11 @@ internal class PdfDocument : NativePdfiumObject
         return new PdfPageObject(Native.FPDFPageObj_NewImageObj(Handle), this, null, true);
     }
 
+    public PdfPageObject NewText(string font, int fontSize)
+    {
+        return new PdfPageObject(Native.FPDFPageObj_NewTextObj(Handle, font, fontSize), this, null, true);
+    }
+
     public PdfPage NewPage(double width, double height)
     {
         return new PdfPage(Native.FPDFPage_New(Handle, int.MaxValue, width, height), this, -1);

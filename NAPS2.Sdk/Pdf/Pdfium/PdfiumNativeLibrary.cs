@@ -92,7 +92,8 @@ internal class PdfiumNativeLibrary : Unmanaged.NativeLibrary
     public delegate IntPtr FPDFText_ClosePage_delegate(IntPtr text_page);
 
     public delegate bool FPDF_ImportPages_delegate(IntPtr dest_doc, IntPtr src_doc,
-        [MarshalAs(UnmanagedType.LPStr)] string? pagerange, int index);
+        [MarshalAs(UnmanagedType.LPStr)]
+        string? pagerange, int index);
 
     public delegate int FPDFText_CountChars_delegate(IntPtr text_page);
 
@@ -102,6 +103,12 @@ internal class PdfiumNativeLibrary : Unmanaged.NativeLibrary
         out double bottom, out double top);
 
     public delegate IntPtr FPDFPageObj_NewImageObj_delegate(IntPtr document);
+
+    public delegate IntPtr FPDFPageObj_NewTextObj_delegate(IntPtr document,
+        [MarshalAs(UnmanagedType.LPStr)] string font, float font_size);
+
+    public delegate bool FPDFText_SetText_delegate(IntPtr text_object,
+        [MarshalAs(UnmanagedType.LPWStr)] string text);
 
     public delegate void FPDFPageObj_Destroy_delegate(IntPtr page_obj);
 
@@ -135,7 +142,8 @@ internal class PdfiumNativeLibrary : Unmanaged.NativeLibrary
 
     public delegate IntPtr FPDFImageObj_GetImageDataRaw_delegate(IntPtr image_object, byte[]? buffer, IntPtr buflen);
 
-    public delegate IntPtr FPDFImageObj_GetImageDataDecoded_delegate(IntPtr image_object, byte[]? buffer, IntPtr buflen);
+    public delegate IntPtr
+        FPDFImageObj_GetImageDataDecoded_delegate(IntPtr image_object, byte[]? buffer, IntPtr buflen);
 
     public delegate IntPtr
         FPDFImageObj_GetRenderedBitmap_delegate(IntPtr document, IntPtr page, IntPtr image_object);
@@ -162,6 +170,8 @@ internal class PdfiumNativeLibrary : Unmanaged.NativeLibrary
         FPDFTextObj_GetText_delegate(IntPtr text_object, IntPtr text_page, byte[]? buffer, IntPtr length);
 
     public delegate int FPDFTextObj_GetTextRenderMode_delegate(IntPtr text);
+
+    public delegate bool FPDFTextObj_SetTextRenderMode_delegate(IntPtr text, int render_mode);
 
     public FPDF_InitLibrary_delegate FPDF_InitLibrary => Load<FPDF_InitLibrary_delegate>();
     public FPDF_GetLastError_delegate FPDF_GetLastError => Load<FPDF_GetLastError_delegate>();
@@ -194,13 +204,18 @@ internal class PdfiumNativeLibrary : Unmanaged.NativeLibrary
     public FPDFText_GetUnicode_delegate FPDFText_GetUnicode => Load<FPDFText_GetUnicode_delegate>();
     public FPDFText_GetCharBox_delegate FPDFText_GetCharBox => Load<FPDFText_GetCharBox_delegate>();
     public FPDFPageObj_NewImageObj_delegate FPDFPageObj_NewImageObj => Load<FPDFPageObj_NewImageObj_delegate>();
+    public FPDFPageObj_NewTextObj_delegate FPDFPageObj_NewTextObj => Load<FPDFPageObj_NewTextObj_delegate>();
+    public FPDFText_SetText_delegate FPDFText_SetText => Load<FPDFText_SetText_delegate>();
     public FPDFPageObj_Destroy_delegate FPDFPageObj_Destroy => Load<FPDFPageObj_Destroy_delegate>();
     public FPDFPage_InsertObject_delegate FPDFPage_InsertObject => Load<FPDFPage_InsertObject_delegate>();
     public FPDFImageObj_SetBitmap_delegate FPDFImageObj_SetBitmap => Load<FPDFImageObj_SetBitmap_delegate>();
     public FPDFPage_New_delegate FPDFPage_New => Load<FPDFPage_New_delegate>();
     public FPDFPage_GenerateContent_delegate FPDFPage_GenerateContent => Load<FPDFPage_GenerateContent_delegate>();
     public FPDFPageObj_SetMatrix_delegate FPDFPageObj_SetMatrix => Load<FPDFPageObj_SetMatrix_delegate>();
-    public FPDFPageObj_HasTransparency_delegate FPDFPageObj_HasTransparency => Load<FPDFPageObj_HasTransparency_delegate>();
+
+    public FPDFPageObj_HasTransparency_delegate FPDFPageObj_HasTransparency =>
+        Load<FPDFPageObj_HasTransparency_delegate>();
+
     public FPDFImageObj_LoadJpegFile_delegate FPDFImageObj_LoadJpegFile => Load<FPDFImageObj_LoadJpegFile_delegate>();
 
     public FPDFImageObj_LoadJpegFileInline_delegate FPDFImageObj_LoadJpegFileInline =>
@@ -211,8 +226,12 @@ internal class PdfiumNativeLibrary : Unmanaged.NativeLibrary
     public FPDFPage_RemoveObject_delegate FPDFPage_RemoveObject => Load<FPDFPage_RemoveObject_delegate>();
     public FPDFPage_HasTransparency_delegate FPDFPage_HasTransparency => Load<FPDFPage_HasTransparency_delegate>();
     public FPDFImageObj_GetBitmap_delegate FPDFImageObj_GetBitmap => Load<FPDFImageObj_GetBitmap_delegate>();
-    public FPDFImageObj_GetImageDataRaw_delegate FPDFImageObj_GetImageDataRaw => Load<FPDFImageObj_GetImageDataRaw_delegate>();
-    public FPDFImageObj_GetImageDataDecoded_delegate FPDFImageObj_GetImageDataDecoded => Load<FPDFImageObj_GetImageDataDecoded_delegate>();
+
+    public FPDFImageObj_GetImageDataRaw_delegate FPDFImageObj_GetImageDataRaw =>
+        Load<FPDFImageObj_GetImageDataRaw_delegate>();
+
+    public FPDFImageObj_GetImageDataDecoded_delegate FPDFImageObj_GetImageDataDecoded =>
+        Load<FPDFImageObj_GetImageDataDecoded_delegate>();
 
     public FPDFImageObj_GetRenderedBitmap_delegate FPDFImageObj_GetRenderedBitmap =>
         Load<FPDFImageObj_GetRenderedBitmap_delegate>();
@@ -239,6 +258,9 @@ internal class PdfiumNativeLibrary : Unmanaged.NativeLibrary
 
     public FPDFTextObj_GetTextRenderMode_delegate FPDFTextObj_GetTextRenderMode =>
         Load<FPDFTextObj_GetTextRenderMode_delegate>();
+
+    public FPDFTextObj_SetTextRenderMode_delegate FPDFTextObj_SetTextRenderMode =>
+        Load<FPDFTextObj_SetTextRenderMode_delegate>();
 
     public struct FPDF_FileWrite
     {
