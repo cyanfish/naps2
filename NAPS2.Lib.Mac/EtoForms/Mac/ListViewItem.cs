@@ -32,10 +32,15 @@ public class ListViewItem : NSCollectionViewItem
         // Though we're doing it differently as we have the black border always
         if (_checkbox)
         {
-            NSButton button = null!;
-            // ReSharper disable once AccessToModifiedClosure
-            button = NSButton.CreateCheckbox(_label, () => _checkedChanged!(button.State == NSCellStateValue.On));
-            button.State = _selected ? NSCellStateValue.On : NSCellStateValue.Off;
+            // TODO: File a bug in xamarin-macios as NSButton.CreateCheckbox doesn't prevent garbage collection of the
+            // delegate parameter.
+            var button = new NSButton
+            {
+                Title = _label!,
+                State = _selected ? NSCellStateValue.On : NSCellStateValue.Off
+            };
+            button.SetButtonType(NSButtonType.Switch);
+            button.WithAction(() => _checkedChanged!(button.State == NSCellStateValue.On));
             View = button;
         }
         else if (_label != null)
