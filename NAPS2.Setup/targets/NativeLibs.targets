@@ -1,31 +1,5 @@
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
     <ItemGroup>
-        <ContentWithTargetPath Include="..\NAPS2.Setup\lib\win64\pdfium.dll">
-            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-            <Link>lib\win64\pdfium.dll</Link>
-            <TargetPath>_win64\pdfium.dll</TargetPath>
-        </ContentWithTargetPath>
-        <ContentWithTargetPath Include="..\NAPS2.Setup\lib\win32\pdfium.dll">
-            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-            <Link>lib\win32\pdfium.dll</Link>
-            <TargetPath>_win32\pdfium.dll</TargetPath>
-        </ContentWithTargetPath>
-        <ContentWithTargetPath Include="..\NAPS2.Setup\lib\linux\libpdfium.so">
-            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-            <Link>lib\linux\libpdfium.so</Link>
-            <TargetPath>_linux\libpdfium.so</TargetPath>
-        </ContentWithTargetPath>
-        <ContentWithTargetPath Include="..\NAPS2.Setup\lib\mac\libpdfium.dylib">
-            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-            <Link>lib\mac\libpdfium.dylib</Link>
-            <TargetPath>_mac\libpdfium.dylib</TargetPath>
-        </ContentWithTargetPath>
-        <ContentWithTargetPath Include="..\NAPS2.Setup\lib\macarm\libpdfium.dylib">
-            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-            <Link>lib\macarm\libpdfium.dylib</Link>
-            <TargetPath>_macarm\libpdfium.dylib</TargetPath>
-        </ContentWithTargetPath>
-
         <ContentWithTargetPath Include="..\NAPS2.Setup\lib\win64\twaindsm.dll">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
             <Link>lib\win64\twaindsm.dll</Link>

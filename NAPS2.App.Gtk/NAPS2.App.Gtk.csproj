@@ -18,10 +18,10 @@
     </PropertyGroup>
 
     <Import Project="..\NAPS2.Setup\targets\CommonTargets.targets" />
-    <Import Project="..\NAPS2.Setup\targets\NativeLibs.Linux.targets" />
     <Import Project="..\NAPS2.Setup\targets\SdkUsers.targets" />
 
     <ItemGroup>
+        <PackageReference Include="NAPS2.Pdfium.Binaries" Version="1.0.0" />
         <PackageReference Include="NAPS2.Tesseract.Binaries" Version="1.0.3" />
 
         <ProjectReference Include="..\NAPS2.Lib.Gtk\NAPS2.Lib.Gtk.csproj" />

@@ -12,7 +12,6 @@
   </PropertyGroup>
 
   <Import Project="..\NAPS2.Setup\targets\CommonTargets.targets" />
-  <Import Project="..\NAPS2.Setup\targets\NativeLibs.targets" />
   <Import Project="..\NAPS2.Setup\targets\SdkUsers.targets" />
 
   <ItemGroup>
@@ -25,6 +24,7 @@
     <ProjectReference Include="..\NAPS2.Images.Mac\NAPS2.Images.Mac.csproj" Condition="$([MSBuild]::IsOSPlatform('OSX'))" />
     <ProjectReference Include="..\NAPS2.Images.Gtk\NAPS2.Images.Gtk.csproj" Condition="$([MSBuild]::IsOSPlatform('Linux'))" />
 
+    <PackageReference Include="NAPS2.Pdfium.Binaries" Version="1.0.0" />
     <PackageReference Include="NAPS2.Tesseract.Binaries" Version="1.0.3" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.4.1" />
     <PackageReference Include="Moq" Version="4.18.1" />
