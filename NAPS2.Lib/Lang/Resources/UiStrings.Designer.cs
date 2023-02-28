@@ -789,6 +789,33 @@ namespace NAPS2.Lang.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ESCL Driver.
+        /// </summary>
+        internal static string EsclDriver {
+            get {
+                return ResourceManager.GetString("EsclDriver", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ESCL Network Driver.
+        /// </summary>
+        internal static string EsclNetworkDriver {
+            get {
+                return ResourceManager.GetString("EsclNetworkDriver", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ESCL USB Driver.
+        /// </summary>
+        internal static string EsclUsbDriver {
+            get {
+                return ResourceManager.GetString("EsclUsbDriver", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Estimated download size: {0} MB.
         /// </summary>
         internal static string EstimatedDownloadSize {
