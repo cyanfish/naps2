@@ -16,7 +16,7 @@ public abstract class ImageContext
             ".jpg" or ".jpeg" => ImageFileFormat.Jpeg,
             ".tif" or ".tiff" => ImageFileFormat.Tiff,
             ".jp2" or ".jpx" => ImageFileFormat.Jpeg2000,
-            _ => throw new ArgumentException($"Could not infer file format from extension: {path}")
+            _ => ImageFileFormat.Unspecified
         };
     }
 
