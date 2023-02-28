@@ -54,4 +54,16 @@ public class RemotePostProcessorTests : ContextualTests
         Assert.Equal(300, Assert.IsType<BrightnessTransform>(result.TransformState.Transforms[0]).Brightness);
         ImageAsserts.Similar(ImageResources.dog_b_p300_thumb_256, result.PostProcessingData.Thumbnail, ignoreResolution: true, rmseThreshold: ImageAsserts.XPLAT_RMSE_THRESHOLD);
     }
+
+    [Fact]
+    public void AutoDeskew()
+    {
+        var image = LoadImage(ImageResources.skewed);
+        var options = new ScanOptions
+        {
+            AutoDeskew = true
+        };
+        var result = _remotePostProcessor.PostProcess(image, options, new PostProcessingContext());
+        ImageAsserts.Similar(ImageResources.deskewed, result, ImageAsserts.XPLAT_RMSE_THRESHOLD);
+    }
 }
