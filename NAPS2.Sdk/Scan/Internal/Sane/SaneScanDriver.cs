@@ -33,20 +33,19 @@ internal class SaneScanDriver : IScanDriver
     public SaneScanDriver(ScanningContext scanningContext)
     {
         _scanningContext = scanningContext;
-    }
 
 #if NET6_0_OR_GREATER
-    private readonly Lazy<ISaneInstallation> _installation = new(() => OperatingSystem.IsMacOS()
-        ? new BundledSaneInstallation()
-        : new SystemSaneInstallation());
-
-    private ISaneInstallation Installation => _installation.Value;
+        Installation = OperatingSystem.IsMacOS()
+            ? new BundledSaneInstallation()
+            : File.Exists("/.flatpak-info")
+                ? new FlatpakSaneInstallation()
+                : new SystemSaneInstallation();
 #else
-    private ISaneInstallation Installation => throw new NotSupportedException();
+        Installation = null!;
 #endif
-    // File.Exists("/.flatpak-info")
-    //     ? new FlatpakSaneInstallation(_scanningContext)
-    //     : new BundledSaneInstallation();
+    }
+
+    private ISaneInstallation Installation { get; }
 
     public Task GetDevices(ScanOptions options, CancellationToken cancelToken, Action<ScanDevice> callback)
     {
