@@ -30,31 +30,17 @@ public abstract class ImageContext
         stream.Seek(0, SeekOrigin.Begin);
         stream.Read(firstBytes, 0, 8);
         stream.Seek(0, SeekOrigin.Begin);
-        if (firstBytes[0] == 0x89 && firstBytes[1] == 0x50 && firstBytes[2] == 0x4E && firstBytes[3] == 0x47)
+
+        return firstBytes switch
         {
-            return ImageFileFormat.Png;
-        }
-        if (firstBytes[0] == 0xFF && firstBytes[1] == 0xD8)
-        {
-            return ImageFileFormat.Jpeg;
-        }
-        if (firstBytes[0] == 0x42 && firstBytes[1] == 0x4D)
-        {
-            return ImageFileFormat.Bmp;
-        }
-        if (firstBytes[0] == 0x49 && firstBytes[1] == 0x49 && firstBytes[2] == 0x2A && firstBytes[3] == 0x00)
-        {
-            return ImageFileFormat.Tiff;
-        }
-        if (firstBytes[0] == 0x4D && firstBytes[1] == 0x4D && firstBytes[2] == 0x00 && firstBytes[3] == 0x2A)
-        {
-            return ImageFileFormat.Tiff;
-        }
-        if (firstBytes[4] == 0x6A && firstBytes[5] == 0x50 && firstBytes[6] == 0x20 && firstBytes[7] == 0x20)
-        {
-            return ImageFileFormat.Jpeg2000;
-        }
-        return ImageFileFormat.Unspecified;
+            [0x89, 0x50, 0x4E, 0x47, ..] => ImageFileFormat.Png,
+            [0xFF, 0xD8, ..] => ImageFileFormat.Jpeg,
+            [0x42, 0x4D, ..] => ImageFileFormat.Bmp,
+            [0x49, 0x49, 0x2A, 0x00, ..] => ImageFileFormat.Tiff,
+            [0x4D, 0x4D, 0x00, 0x2A, ..] => ImageFileFormat.Tiff,
+            [0x6A, 0x50, 0x20, 0x20, ..] => ImageFileFormat.Jpeg2000,
+            _ => ImageFileFormat.Unspecified
+        };
     }
 
     protected ImageContext(Type imageType, IPdfRenderer? pdfRenderer = null)
