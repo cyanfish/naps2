@@ -130,6 +130,23 @@ public class FileConfigScopeTests : ContextualTests
     }
 
     [Fact]
+    public void ReadNewAppSettings()
+    {
+        var configPath = Path.Combine(FolderPath, "appsettings.xml");
+        File.WriteAllText(configPath, ConfigData.NewAppSettings);
+        var defaultsScope = new FileConfigScope<CommonConfig>(configPath, new ConfigSerializer(ConfigReadMode.DefaultOnly, ConfigRootName.AppConfig), ConfigScopeMode.ReadOnly);
+        var lockedScope = new FileConfigScope<CommonConfig>(configPath, new ConfigSerializer(ConfigReadMode.LockedOnly, ConfigRootName.AppConfig), ConfigScopeMode.ReadOnly);
+
+        Assert.False(lockedScope.TryGet(c => c.SingleInstance, out _));
+        Assert.True(lockedScope.TryGet(c => c.DeleteAfterSaving, out var deleteAfterSaving));
+        Assert.True(deleteAfterSaving);
+
+        Assert.False(defaultsScope.TryGet(c => c.DeleteAfterSaving, out _));
+        Assert.True(defaultsScope.TryGet(c => c.SingleInstance, out var singleInstance));
+        Assert.True(singleInstance);
+    }
+
+    [Fact]
     public void ReadWithOldConfig()
     {
         var configPath = Path.Combine(FolderPath, "config.xml");

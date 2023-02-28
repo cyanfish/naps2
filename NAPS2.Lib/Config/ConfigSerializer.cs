@@ -63,7 +63,9 @@ public class ConfigSerializer : VersionedSerializer<ConfigStorage<CommonConfig>>
     private ConfigStorage<CommonConfig> DeserializeXDoc(XDocument doc)
     {
         var filteredStream = new MemoryStream();
-        doc.WriteTo(new XmlTextWriter(filteredStream, Encoding.UTF8));
+        var xmlWriter = new XmlTextWriter(filteredStream, Encoding.UTF8);
+        doc.WriteTo(xmlWriter);
+        xmlWriter.Flush();
         filteredStream.Seek(0, SeekOrigin.Begin);
         return _storageSerializer.Deserialize(filteredStream);
     }

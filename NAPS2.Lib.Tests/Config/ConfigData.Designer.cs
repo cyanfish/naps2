@@ -80,6 +80,20 @@ namespace NAPS2.Lib.Tests.Config {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot; ?&gt;
+        ///&lt;AppConfig&gt;
+        ///  &lt;Version&gt;3&lt;/Version&gt;
+        ///  &lt;DeleteAfterSaving mode=&quot;override&quot;&gt;true&lt;/DeleteAfterSaving&gt;
+        ///  &lt;SingleInstance mode=&quot;default&quot;&gt;true&lt;/SingleInstance&gt;
+        ///&lt;/AppConfig&gt;.
+        /// </summary>
+        internal static string NewAppSettings {
+            get {
+                return ResourceManager.GetString("NewAppSettings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot;?&gt;
         ///&lt;ArrayOfExtendedScanSettings xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xmlns:xsd=&quot;http://www.w3.org/2001/XMLSchema&quot;&gt;
         ///  &lt;ExtendedScanSettings&gt;

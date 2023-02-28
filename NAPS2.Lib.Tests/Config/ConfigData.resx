@@ -279,4 +279,12 @@
   &lt;EventLogging&gt;None&lt;/EventLogging&gt;
 &lt;/AppConfig&gt;</value>
   </data>
+  <data name="NewAppSettings" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8" ?&gt;
+&lt;AppConfig&gt;
+  &lt;Version&gt;3&lt;/Version&gt;
+  &lt;DeleteAfterSaving mode="override"&gt;true&lt;/DeleteAfterSaving&gt;
+  &lt;SingleInstance mode="default"&gt;true&lt;/SingleInstance&gt;
+&lt;/AppConfig&gt;</value>
+  </data>
 </root>
