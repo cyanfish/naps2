@@ -39,6 +39,9 @@ public static class FlatpakPackager
         File.Copy(
             Path.Combine(Paths.SolutionRoot, "NAPS2.Lib", "Icons", "scanner-128.png"),
             Path.Combine(packageDir, "com.naps2.Naps2.png"), true);
+        File.Copy(
+            Path.Combine(Paths.SetupLinux, "sane-streamdevices.patch"),
+            Path.Combine(packageDir, "sane-streamdevices.patch"), true);
 
         if (!noPre)
         {

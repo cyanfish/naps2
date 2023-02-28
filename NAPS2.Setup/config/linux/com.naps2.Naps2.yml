@@ -69,6 +69,8 @@ modules:
         url: https://gitlab.com/sane-project/backends
         tag: 1.1.1
         commit: 332edc8b7ce642bb06132cf204a8c2dd57720bce
+      - type: patch
+        path: sane-streamdevices.patch
   - name: sane-airscan
     buildsystem: meson
     sources:

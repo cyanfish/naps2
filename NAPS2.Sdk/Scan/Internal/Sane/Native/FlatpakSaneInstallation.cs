@@ -2,7 +2,7 @@ namespace NAPS2.Scan.Internal.Sane.Native;
 
 public class FlatpakSaneInstallation : ISaneInstallation
 {
-    public bool CanStreamDevices => false;
+    public bool CanStreamDevices => true;
 
     public void Initialize()
     {

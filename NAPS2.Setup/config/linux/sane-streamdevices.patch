@@ -1,0 +1,121 @@
+diff --git a/backend/dll.c b/backend/dll.c
+index bf34c4f6d..3cd4e53f0 100644
+--- a/backend/dll.c
++++ b/backend/dll.c
+@@ -1169,6 +1169,96 @@ sane_get_devices (const SANE_Device *** device_list, SANE_Bool local_only)
+   return SANE_STATUS_GOOD;
+ }
+ 
++SANE_Status
++sane_stream_devices (SANE_Device_Callback callback, SANE_Bool local_only)
++{
++  const SANE_Device **be_list;
++  struct backend *be;
++  SANE_Status status;
++  char *full_name;
++  int i, num_devs;
++  size_t len;
++
++  DBG (3, "sane_stream_devices\n");
++
++  for (be = first_backend; be; be = be->next)
++  {
++      if (!be->inited)
++          if (init (be) != SANE_STATUS_GOOD)
++              continue;
++
++      status = (*(op_get_devs_t)be->op[OP_GET_DEVS]) (&be_list, local_only);
++      if (status != SANE_STATUS_GOOD || !be_list)
++	continue;
++
++      /* count the number of devices for this backend: */
++      for (num_devs = 0; be_list[num_devs]; ++num_devs);
++
++      for (i = 0; i < num_devs; ++i)
++	{
++	  SANE_Device *dev;
++	  char *mem;
++	  struct alias *alias;
++
++	  for (alias = first_alias; alias != NULL; alias = alias->next)
++	    {
++	      len = strlen (be->name);
++	      if (strlen (alias->oldname) <= len)
++		continue;
++	      if (strncmp (alias->oldname, be->name, len) == 0
++		  && alias->oldname[len] == ':'
++		  && strcmp (&alias->oldname[len + 1], be_list[i]->name) == 0)
++		break;
++	    }
++
++	  if (alias)
++	    {
++	      if (!alias->newname)	/* hidden device */
++		continue;
++
++	      len = strlen (alias->newname);
++	      mem = malloc (sizeof (*dev) + len + 1);
++	      if (!mem)
++		return SANE_STATUS_NO_MEM;
++
++	      full_name = mem + sizeof (*dev);
++	      strcpy (full_name, alias->newname);
++	    }
++	  else
++	    {
++	      /* create a new device entry with a device name that is the
++	         sum of the backend name a colon and the backend's device
++	         name: */
++	      len = strlen (be->name) + 1 + strlen (be_list[i]->name);
++	      mem = malloc (sizeof (*dev) + len + 1);
++	      if (!mem)
++		return SANE_STATUS_NO_MEM;
++
++	      full_name = mem + sizeof (*dev);
++	      strcpy (full_name, be->name);
++	      strcat (full_name, ":");
++	      strcat (full_name, be_list[i]->name);
++	    }
++
++	  dev = (SANE_Device *) mem;
++	  dev->name = full_name;
++	  dev->vendor = be_list[i]->vendor;
++	  dev->model = be_list[i]->model;
++	  dev->type = be_list[i]->type;
++
++	  callback(dev);
++      free ((void *) dev);
++	}
++      if (!callback(NULL))
++      {
++          break;
++      }
++    }
++
++  DBG (3, "sane_stream_devices: done streaming\n");
++  return SANE_STATUS_GOOD;
++}
++
+ SANE_Status
+ sane_open (SANE_String_Const full_name, SANE_Handle * meta_handle)
+ {
+diff --git a/include/sane/sane.h b/include/sane/sane.h
+index 494ee891b..09487280d 100644
+--- a/include/sane/sane.h
++++ b/include/sane/sane.h
+@@ -215,11 +215,15 @@ typedef void (*SANE_Auth_Callback) (SANE_String_Const resource,
+ 				    SANE_Char *username,
+ 				    SANE_Char *password);
+ 
++typedef SANE_Bool (*SANE_Device_Callback) (SANE_Device* device);
++
+ extern SANE_Status sane_init (SANE_Int * version_code,
+ 			      SANE_Auth_Callback authorize);
+ extern void sane_exit (void);
+ extern SANE_Status sane_get_devices (const SANE_Device *** device_list,
+ 				     SANE_Bool local_only);
++extern SANE_Status sane_stream_devices (SANE_Device_Callback callback,
++				     SANE_Bool local_only);
+ extern SANE_Status sane_open (SANE_String_Const devicename,
+ 			      SANE_Handle * handle);
+ extern void sane_close (SANE_Handle handle);
