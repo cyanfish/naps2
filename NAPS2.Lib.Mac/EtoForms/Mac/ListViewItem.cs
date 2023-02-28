@@ -32,8 +32,7 @@ public class ListViewItem : NSCollectionViewItem
         // Though we're doing it differently as we have the black border always
         if (_checkbox)
         {
-            // TODO: File a bug in xamarin-macios as NSButton.CreateCheckbox doesn't prevent garbage collection of the
-            // delegate parameter.
+            // Note we can't use NSButton.CreateCheckbox due to https://github.com/xamarin/xamarin-macios/issues/17635
             var button = new NSButton
             {
                 Title = _label!,
