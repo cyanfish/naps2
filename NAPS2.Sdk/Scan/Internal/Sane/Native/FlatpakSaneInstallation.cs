@@ -1,4 +1,7 @@
+using System.Runtime.InteropServices;
+using System.Text;
 using System.Text.RegularExpressions;
+using NAPS2.Platform.Linux;
 
 namespace NAPS2.Scan.Internal.Sane.Native;
 
@@ -18,6 +21,10 @@ public class FlatpakSaneInstallation : ISaneInstallation
     // TODO: We might want to make this a singleton or have some kind of static already-initialized state
     public void Initialize()
     {
+        Log.Info($"ApplicationData: {Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)}");
+        Log.Info($"XDG_CONFIG_HOME: {Environment.GetEnvironmentVariable("XDG_CONFIG_HOME")}");
+        Log.Info($"TempFolderPath: {_scanningContext.TempFolderPath}");
+
         // TODO: Maybe cache these
         var externalBackendsPath = FindSaneBackendsPath(EXTERNAL_PREFIX);
         var internalBackendsPath = FindSaneBackendsPath(null);
@@ -25,6 +32,7 @@ public class FlatpakSaneInstallation : ISaneInstallation
         {
             return;
         }
+
         Log.Info($"Found external SANE backends path: {externalBackendsPath}");
         Log.Info($"Found internal SANE backends path: {internalBackendsPath}");
 
@@ -34,20 +42,33 @@ public class FlatpakSaneInstallation : ISaneInstallation
         {
             return;
         }
+
         Log.Info($"Found external SANE config path: {externalConfigPath}");
         Log.Info($"Found internal SANE config path: {internalConfigPath}");
 
         var externalDllConf = ReadDllConf(externalConfigPath);
-        var internalDllConf = ReadDllConf(externalConfigPath);
+        var internalDllConf = ReadDllConf(internalConfigPath);
         if (externalDllConf == null || internalDllConf == null)
         {
             return;
+        }
+        
+        var tempLibFolder = Path.Combine(_scanningContext.TempFolderPath, Path.GetRandomFileName());
+        // TODO: Better error handling
+        Directory.CreateDirectory(tempLibFolder);
+        foreach (var file in new DirectoryInfo(internalBackendsPath).EnumerateFiles())
+        {
+            file.CopyTo(Path.Combine(tempLibFolder, file.Name));
         }
 
         var backendsToCopy = externalDllConf
             .Where(x => x.IsEnabled)
             .Select(x => x.BackendName)
             .Except(internalDllConf.Select(x => x.BackendName));
+        
+        Log.Error($"Backends to copy: {string.Join(", ", backendsToCopy)}");
+        Log.Error($"External backends: {string.Join(", ", externalDllConf.Select(x => x.BackendName))}");
+        Log.Error($"Internal backends: {string.Join(", ", internalDllConf.Select(x => x.BackendName))}");
 
         List<string> copiedBackends = new();
 
@@ -62,11 +83,27 @@ public class FlatpakSaneInstallation : ISaneInstallation
             }
             else
             {
-                var destPath = Path.Combine(internalBackendsPath, fileName);
+                var destPath = Path.Combine(tempLibFolder, fileName);
                 try
                 {
-                    File.Copy(sourcePath, destPath, true);
-                    Log.Info($"Copied sane backend {backendToCopy}");
+                    var linkBuf = new byte[1024];
+                    int bytesWritten = LinuxInterop.readlink(sourcePath, linkBuf, linkBuf.Length);
+                    if (bytesWritten < 0)
+                    {
+                        // Not a symlink
+                        File.Copy(sourcePath, destPath, true);
+                        Log.Info($"Copied sane backend {backendToCopy}");
+                    }
+                    else
+                    {
+                        // Adjust symlink path
+                        var link = Encoding.UTF8.GetString(linkBuf, 0, bytesWritten);
+                        var newLink = WithPrefix(link, EXTERNAL_PREFIX);
+                        int linkResult = LinuxInterop.symlink(newLink, destPath);
+                        Log.Info(
+                            $"Copied sane backend {backendToCopy} with symlink {destPath} to {newLink} with code {linkResult} {Marshal.GetLastWin32Error()}");
+                    }
+
                     copiedBackends.Add(backendToCopy);
                 }
                 catch (Exception ex)
@@ -82,19 +119,25 @@ public class FlatpakSaneInstallation : ISaneInstallation
         }
 
         // TODO: Make this IDisposable and clean up after
+        // TODO: Test unicode in this path
         var tempConfigFolder = Path.Combine(_scanningContext.TempFolderPath, Path.GetRandomFileName());
         var tempConfigPath = Path.Combine(tempConfigFolder, "dll.conf");
         try
         {
             Directory.CreateDirectory(tempConfigFolder);
+            // TODO: Is this the right logic for which backends should be enabled?
             var enabledBackends = internalDllConf
                 .Where(x => x.IsEnabled)
                 .Select(x => x.BackendName)
-                .Concat(copiedBackends);
+                .Concat(copiedBackends)
+                .OrderBy(x => x);
             File.WriteAllLines(tempConfigPath, enabledBackends);
+            Log.Info($"Setting sane lib dir to {tempLibFolder}");
             Log.Info($"Setting sane config dir to {tempConfigFolder}");
+            PlatformCompat.System.SetEnv("LD_LIBRARY_PATH", tempLibFolder);
             PlatformCompat.System.SetEnv("SANE_CONFIG_DIR", tempConfigFolder);
             PlatformCompat.System.SetEnv("SANE_DEBUG_DLL", "255");
+            PlatformCompat.System.SetEnv("SANE_DEBUG_ESCL", "255");
         }
         catch (Exception ex)
         {
@@ -111,6 +154,7 @@ public class FlatpakSaneInstallation : ISaneInstallation
                     configFile.FullName,
                     Path.Combine(tempConfigFolder, configFile.Name));
             }
+
             // External (user-provided) config should overwrite internal (default) config
             // There is a potential issue here if there's a version mismatch that affects the config format.
             foreach (var configFile in new DirectoryInfo(externalConfigPath)
@@ -152,6 +196,7 @@ public class FlatpakSaneInstallation : ISaneInstallation
             {
                 Log.ErrorException("Error enumerating sane dll.d conf files", ex);
             }
+
             foreach (var dllConfPath in dllConfPaths)
             {
                 foreach (var line in File.ReadLines(dllConfPath))
@@ -168,6 +213,7 @@ public class FlatpakSaneInstallation : ISaneInstallation
                     }
                 }
             }
+
             return entries;
         }
         catch (Exception ex)
@@ -196,6 +242,7 @@ public class FlatpakSaneInstallation : ISaneInstallation
                 Log.Error($"Dir does not exist: {searchPath} with prefix {prefix}");
             }
         }
+
         Log.Error($"Could not find sane config with prefix '{prefix}'");
         return null;
     }
@@ -211,6 +258,7 @@ public class FlatpakSaneInstallation : ISaneInstallation
                 return backendsPath;
             }
         }
+
         Log.Error($"Could not find sane backends with prefix '{prefix}'");
         return null;
     }
@@ -222,6 +270,7 @@ public class FlatpakSaneInstallation : ISaneInstallation
             Log.Error($"Ld skipping nonexistent {prefixedPath}");
             yield break;
         }
+
         Log.Info($"Ld loading {prefixedPath}");
         foreach (var line in File.ReadLines(prefixedPath))
         {
@@ -230,6 +279,7 @@ public class FlatpakSaneInstallation : ISaneInstallation
                 Log.Info($"Ld returning {line.Trim()}");
                 yield return WithPrefix(line.Trim(), prefix);
             }
+
             if (line.StartsWith("include "))
             {
                 var includedPathPattern = line.Substring(8).Trim();
@@ -248,6 +298,7 @@ public class FlatpakSaneInstallation : ISaneInstallation
                         $"Error enumerating lib paths for sane: {includedPathFolder} {includedPathFilePattern}", ex);
                     continue;
                 }
+
                 foreach (var file in files)
                 {
                     foreach (var includedPath in ParseLdPaths(file.FullName, prefix))
