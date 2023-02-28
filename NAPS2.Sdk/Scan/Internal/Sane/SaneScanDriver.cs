@@ -252,7 +252,7 @@ internal class SaneScanDriver : IScanDriver
         _ => throw new ArgumentException()
     };
 
-    private byte[]? ScanFrame(SaneDevice device, IScanEvents scanEvents, int frame, out SaneReadParameters p)
+    internal byte[]? ScanFrame(ISaneDevice device, IScanEvents scanEvents, int frame, out SaneReadParameters p)
     {
         device.Start();
         if (frame == 0)
@@ -262,33 +262,57 @@ internal class SaneScanDriver : IScanDriver
 
         p = device.GetParameters();
         bool isMultiFrame = p.Frame is SaneFrameType.Red or SaneFrameType.Green or SaneFrameType.Blue;
-        var frameSize = p.BytesPerLine * p.Lines;
+        // p.Lines can be -1, in which case we don't know the frame size ahead of time
+        var frameSize = p.Lines == -1 ? 0 : p.BytesPerLine * p.Lines;
         var currentProgress = frame * frameSize;
         var totalProgress = isMultiFrame ? frameSize * 3 : frameSize;
-        var data = new byte[frameSize];
         var index = 0;
         var buffer = new byte[65536];
-        scanEvents.PageProgress(currentProgress / (double)totalProgress);
+        if (totalProgress > 0)
+        {
+            scanEvents.PageProgress(currentProgress / (double) totalProgress);
+        }
+
+        // We can only use a pre-allocated array if we know the frame size ahead of time.
+        // A MemoryStream is more general, but as these buffers could be very large (GB) it's a worthwhile optimization
+        // to use the pre-allocated array when possible and avoid unnecessary copies.
+        var dataArray = p.Lines != -1 ? new byte[frameSize] : null;
+        var dataStream = new MemoryStream();
 
         while (device.Read(buffer, out var len))
         {
-            Array.Copy(buffer, 0, data, index, len);
+            if (dataArray != null)
+            {
+                Array.Copy(buffer, 0, dataArray, index, len);
+            }
+            else
+            {
+                dataStream.Write(buffer, 0, len);
+            }
             index += len;
             currentProgress += len;
-            scanEvents.PageProgress(currentProgress / (double)totalProgress);
+            if (totalProgress > 0)
+            {
+                scanEvents.PageProgress(currentProgress / (double) totalProgress);
+            }
         }
 
         if (index == 0)
         {
             return null;
         }
-
-        if (index != frameSize)
+        if (p.Lines != -1 && index != frameSize)
         {
             throw new DeviceException($"SANE unexpected data length, got {index}, expected {frameSize}");
         }
+        if (p.Lines == -1)
+        {
+            // Now that we've read the data we implicitly know the frame size and can work backwards to get the number
+            // of lines.
+            p.Lines = (int) dataStream.Length / p.BytesPerLine;
+        }
 
-        return data;
+        return dataArray ?? dataStream.ToArray();
     }
 
     // private KeyValueScanOptions GetKeyValueOptions(ScanOptions options)
