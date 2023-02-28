@@ -1,4 +1,5 @@
-﻿using NAPS2.Platform.Linux;
+﻿using System.Runtime.InteropServices;
+using NAPS2.Platform.Linux;
 
 namespace NAPS2.Platform;
 
@@ -6,7 +7,7 @@ public class LinuxSystemCompat : ISystemCompat
 {
     private const int RTLD_LAZY = 1;
     private const int RTLD_GLOBAL = 8;
-    
+
     public bool IsWiaDriverSupported => false;
 
     public bool IsTwainDriverSupported => false;
@@ -31,7 +32,10 @@ public class LinuxSystemCompat : ISystemCompat
 
     public string[] ExeSearchPaths => LibrarySearchPaths;
 
-    public string[] LibrarySearchPaths => new[] { "_linux" };
+    public string[] LibrarySearchPaths => new[]
+    {
+        RuntimeInformation.ProcessArchitecture == Architecture.Arm64 ? "_linuxarm" : "_linux"
+    };
 
     public string TesseractExecutableName => "tesseract";
 
@@ -40,7 +44,7 @@ public class LinuxSystemCompat : ISystemCompat
     public string[]? SaneLibraryDeps => null;
 
     public string SaneLibraryName => "libsane.so.1";
-    
+
     public IntPtr LoadLibrary(string path) => LinuxInterop.dlopen(path, RTLD_LAZY | RTLD_GLOBAL);
 
     public IntPtr LoadSymbol(IntPtr libraryHandle, string symbol) => LinuxInterop.dlsym(libraryHandle, symbol);
