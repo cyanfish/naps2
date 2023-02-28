@@ -20,6 +20,6 @@ public class SharpenForm : ImageFormBase
     protected override IEnumerable<Transform> Transforms =>
         new Transform[]
         {
-            new SharpenTransform(_sharpenSlider.Value)
+            new SharpenTransform(_sharpenSlider.IntValue)
         };
 }

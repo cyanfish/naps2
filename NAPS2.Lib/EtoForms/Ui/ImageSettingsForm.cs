@@ -10,7 +10,7 @@ public class ImageSettingsForm : EtoDialogBase
 {
     private readonly FilePathWithPlaceholders _defaultFilePath;
     private readonly CheckBox _skipSavePrompt = new() { Text = UiStrings.SkipSavePrompt };
-    private readonly SliderWithTextBox _jpegQuality = new() { MinValue = 0, MaxValue = 100, TickFrequency = 25 };
+    private readonly SliderWithTextBox _jpegQuality = new(new SliderWithTextBox.IntConstraints(0, 100, 25));
     private readonly CheckBox _singlePageTiff = new() { Text = UiStrings.SinglePageFiles };
     private readonly DropDown _compression = C.EnumDropDown<TiffCompression>();
     private readonly CheckBox _rememberSettings = new() { Text = UiStrings.RememberTheseSettings };
@@ -70,7 +70,7 @@ public class ImageSettingsForm : EtoDialogBase
     {
         _defaultFilePath.Text = config.Get(c => c.ImageSettings.DefaultFileName);
         _skipSavePrompt.Checked = config.Get(c => c.ImageSettings.SkipSavePrompt);
-        _jpegQuality.Value = config.Get(c => c.ImageSettings.JpegQuality);
+        _jpegQuality.IntValue = config.Get(c => c.ImageSettings.JpegQuality);
         _singlePageTiff.Checked = config.Get(c => c.ImageSettings.SinglePageTiff);
         _compression.SelectedIndex = (int) config.Get(c => c.ImageSettings.TiffCompression);
         _rememberSettings.Checked = config.Get(c => c.RememberImageSettings);
@@ -87,7 +87,7 @@ public class ImageSettingsForm : EtoDialogBase
         {
             DefaultFileName = _defaultFilePath.Text,
             SkipSavePrompt = _skipSavePrompt.IsChecked(),
-            JpegQuality = _jpegQuality.Value,
+            JpegQuality = _jpegQuality.IntValue,
             TiffCompression = (TiffCompression) _compression.SelectedIndex,
             SinglePageTiff = _singlePageTiff.IsChecked()
         };

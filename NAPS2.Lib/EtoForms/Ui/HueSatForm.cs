@@ -22,7 +22,7 @@ public class HueSatForm : ImageFormBase
     protected override IEnumerable<Transform> Transforms =>
         new Transform[]
         {
-            new HueTransform(_hueSlider.Value),
-            new SaturationTransform(_saturationSlider.Value)
+            new HueTransform(_hueSlider.IntValue),
+            new SaturationTransform(_saturationSlider.IntValue)
         };
 }

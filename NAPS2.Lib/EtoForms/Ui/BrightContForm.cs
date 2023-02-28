@@ -22,7 +22,7 @@ public class BrightContForm : ImageFormBase
     protected override IEnumerable<Transform> Transforms =>
         new Transform[]
         {
-            new BrightnessTransform(_brightnessSlider.Value),
-            new TrueContrastTransform(_contrastSlider.Value)
+            new BrightnessTransform(_brightnessSlider.IntValue),
+            new TrueContrastTransform(_contrastSlider.IntValue)
         };
 }

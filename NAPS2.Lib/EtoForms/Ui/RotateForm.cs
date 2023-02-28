@@ -8,7 +8,7 @@ public class RotateForm : ImageFormBase
 {
     private const int MIN_LINE_DISTANCE = 50;
 
-    private readonly SliderWithTextBox _angleSlider = new() { MinValue = -1800, MaxValue = 1800, TickFrequency = 450 };
+    private readonly SliderWithTextBox _angleSlider = new(new SliderWithTextBox.DecimalConstraints(-180, 180, 45, 1));
 
     private bool _guideExists;
     private PointF _guideStart, _guideEnd;
@@ -29,7 +29,7 @@ public class RotateForm : ImageFormBase
     protected override IEnumerable<Transform> Transforms =>
         new Transform[]
         {
-            new RotationTransform(_angleSlider.Value / 10.0)
+            new RotationTransform((double) _angleSlider.DecimalValue)
         };
 
     private void Overlay_MouseDown(object? sender, MouseEventArgs e)
@@ -56,7 +56,7 @@ public class RotateForm : ImageFormBase
             {
                 angle += 90.0;
             }
-            var oldAngle = _angleSlider.Value / 10.0;
+            var oldAngle = (double) _angleSlider.DecimalValue;
             var newAngle = angle + oldAngle;
             while (newAngle > 180.0)
             {
@@ -66,7 +66,7 @@ public class RotateForm : ImageFormBase
             {
                 newAngle += 360.0;
             }
-            _angleSlider.Value = (int)Math.Round(newAngle * 10);
+            _angleSlider.DecimalValue = (decimal) newAngle;
         }
         Overlay.Invalidate();
     }
@@ -85,7 +85,7 @@ public class RotateForm : ImageFormBase
         if (_guideExists)
         {
             e.Graphics.AntiAlias = true;
-            e.Graphics.DrawLine(new Pen(new Color(0, 0,0 )), _guideStart, _guideEnd);
+            e.Graphics.DrawLine(new Pen(new Color(0, 0, 0)), _guideStart, _guideEnd);
         }
     }
 }

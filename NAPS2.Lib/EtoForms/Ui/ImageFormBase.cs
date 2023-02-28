@@ -150,7 +150,7 @@ public abstract class ImageFormBase : EtoDialogBase
     {
         foreach (var slider in Sliders)
         {
-            slider.Value = 0;
+            slider.IntValue = 0;
         }
     }
 

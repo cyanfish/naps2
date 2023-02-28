@@ -222,8 +222,8 @@ public class EditProfileForm : EtoDialogBase
         _paperSource.SelectedIndex = (int) ScanProfile.PaperSource;
         _bitDepth.SelectedIndex = (int) ScanProfile.BitDepth;
         _resolution.SelectedIndex = (int) ScanProfile.Resolution;
-        _contrastSlider.Value = ScanProfile.Contrast;
-        _brightnessSlider.Value = ScanProfile.Brightness;
+        _contrastSlider.IntValue = ScanProfile.Contrast;
+        _brightnessSlider.IntValue = ScanProfile.Brightness;
         UpdatePageSizeList();
         SelectPageSize();
         _scale.SelectedIndex = (int) ScanProfile.AfterScanScale;
@@ -379,8 +379,8 @@ public class EditProfileForm : EtoDialogBase
 
             AfterScanScale = (ScanScale) _scale.SelectedIndex,
             BitDepth = (ScanBitDepth) _bitDepth.SelectedIndex,
-            Brightness = _brightnessSlider.Value,
-            Contrast = _contrastSlider.Value,
+            Brightness = _brightnessSlider.IntValue,
+            Contrast = _contrastSlider.IntValue,
             PageAlign = (ScanHorizontalAlign) _horAlign.SelectedIndex,
             PageSize = pageSize.Type,
             CustomPageSizeName = pageSize.CustomName,

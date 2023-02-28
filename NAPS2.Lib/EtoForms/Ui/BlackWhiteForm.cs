@@ -20,6 +20,6 @@ public class BlackWhiteForm : ImageFormBase
     protected override IEnumerable<Transform> Transforms =>
         new Transform[]
         {
-            new BlackWhiteTransform(_thresholdSlider.Value)
+            new BlackWhiteTransform(_thresholdSlider.IntValue)
         };
 }
