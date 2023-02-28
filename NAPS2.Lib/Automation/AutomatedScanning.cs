@@ -579,7 +579,7 @@ public class AutomatedScanning
             int i = -1;
             op.StatusChanged += (sender, args) =>
             {
-                if (op.Status.CurrentProgress > i)
+                if (op.Status.CurrentProgress > i && op.Status.CurrentProgress < op.Status.MaxProgress)
                 {
                     OutputVerbose(ConsoleResources.ExportingPage, op.Status.CurrentProgress + 1, fileContents.Count);
                     i = op.Status.CurrentProgress;
