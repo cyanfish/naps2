@@ -521,6 +521,18 @@ msgstr ""
 msgid "Duplex"
 msgstr ""
 
+#: UiStrings.resx$EsclDriver$Message
+msgid "ESCL Driver"
+msgstr ""
+
+#: UiStrings.resx$EsclNetworkDriver$Message
+msgid "ESCL Network Driver"
+msgstr ""
+
+#: UiStrings.resx$EsclUsbDriver$Message
+msgid "ESCL USB Driver"
+msgstr ""
+
 #: UiStrings.resx$Edit$Message
 msgid "Edit"
 msgstr ""
@@ -1559,6 +1571,10 @@ msgstr ""
 
 #: MiscResources.resx$FilesProgressFormat$Message
 msgid "{0} / {1} files"
+msgstr ""
+
+#: SettingsResources.resx$DpiFormat$Message
+msgid "{0} dpi"
 msgstr ""
 
 #: UiStrings.resx$RecoverPrompt$Message
