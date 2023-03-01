@@ -1,3 +1,4 @@
+using System.Threading;
 using Eto.Drawing;
 using Eto.Forms;
 using NAPS2.EtoForms.Layout;
@@ -85,7 +86,7 @@ public class SelectDeviceForm : EtoDialogBase
                 Invoker.Current.Invoke(() =>
                 {
                     _spinner.Visible = false;
-                    if (_lazyDeviceList.Count == 0)
+                    if (_lazyDeviceList.Count == 0 && !AsyncCancelToken.IsCancellationRequested)
                     {
                         Close();
                         _errorOutput.DisplayError(SdkResources.NoDevicesFound);
@@ -100,6 +101,8 @@ public class SelectDeviceForm : EtoDialogBase
     }
 
     public IAsyncEnumerable<ScanDevice>? AsyncDevices { get; set; }
+
+    public CancellationToken AsyncCancelToken { get; set; }
 
     public List<ScanDevice>? DeviceList { get; set; }
 

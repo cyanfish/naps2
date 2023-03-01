@@ -46,6 +46,7 @@ public class EtoDevicePrompt : IDevicePrompt
             {
                 var deviceForm = _formFactory.Create<SelectDeviceForm>();
                 deviceForm.AsyncDevices = devices;
+                deviceForm.AsyncCancelToken = cts.Token;
                 deviceForm.ShowModal();
                 cts.Cancel();
                 return deviceForm.SelectedDevice;
