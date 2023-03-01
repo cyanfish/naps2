@@ -87,74 +87,11 @@ namespace NAPS2.Lang.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 100 dpi.
+        ///   Looks up a localized string similar to {0} dpi.
         /// </summary>
-        internal static string Dpi_100 {
+        internal static string DpiFormat {
             get {
-                return ResourceManager.GetString("Dpi_100", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to 1200 dpi.
-        /// </summary>
-        internal static string Dpi_1200 {
-            get {
-                return ResourceManager.GetString("Dpi_1200", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to 150 dpi.
-        /// </summary>
-        internal static string Dpi_150 {
-            get {
-                return ResourceManager.GetString("Dpi_150", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to 200 dpi.
-        /// </summary>
-        internal static string Dpi_200 {
-            get {
-                return ResourceManager.GetString("Dpi_200", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to 300 dpi.
-        /// </summary>
-        internal static string Dpi_300 {
-            get {
-                return ResourceManager.GetString("Dpi_300", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to 400 dpi.
-        /// </summary>
-        internal static string Dpi_400 {
-            get {
-                return ResourceManager.GetString("Dpi_400", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to 600 dpi.
-        /// </summary>
-        internal static string Dpi_600 {
-            get {
-                return ResourceManager.GetString("Dpi_600", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to 800 dpi.
-        /// </summary>
-        internal static string Dpi_800 {
-            get {
-                return ResourceManager.GetString("Dpi_800", resourceCulture);
+                return ResourceManager.GetString("DpiFormat", resourceCulture);
             }
         }
         

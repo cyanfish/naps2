@@ -180,21 +180,13 @@ public enum ScanBitDepth
 /// </summary>
 public enum ScanDpi
 {
-    [LocalizedDescription(typeof(SettingsResources), "Dpi_100")]
     Dpi100,
-    [LocalizedDescription(typeof(SettingsResources), "Dpi_150")]
     Dpi150,
-    [LocalizedDescription(typeof(SettingsResources), "Dpi_200")]
     Dpi200,
-    [LocalizedDescription(typeof(SettingsResources), "Dpi_300")]
     Dpi300,
-    [LocalizedDescription(typeof(SettingsResources), "Dpi_400")]
     Dpi400,
-    [LocalizedDescription(typeof(SettingsResources), "Dpi_600")]
     Dpi600,
-    [LocalizedDescription(typeof(SettingsResources), "Dpi_800")]
     Dpi800,
-    [LocalizedDescription(typeof(SettingsResources), "Dpi_1200")]
     Dpi1200
 }
 

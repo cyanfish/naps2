@@ -1,3 +1,4 @@
+using System.Globalization;
 using Eto.Drawing;
 using Eto.Forms;
 using NAPS2.EtoForms.Layout;
@@ -25,7 +26,8 @@ public class EditProfileForm : EtoDialogBase
     private readonly RadioButton _nativeUi;
     private readonly DropDown _paperSource = C.EnumDropDown<ScanSource>();
     private readonly DropDown _pageSize = C.EnumDropDown<ScanPageSize>();
-    private readonly DropDown _resolution = C.EnumDropDown<ScanDpi>();
+    private readonly DropDown _resolution = C.EnumDropDown<ScanDpi>(
+        dpi => string.Format(SettingsResources.DpiFormat, dpi.ToIntDpi().ToString(CultureInfo.CurrentCulture)));
     private readonly DropDown _bitDepth = C.EnumDropDown<ScanBitDepth>();
     private readonly DropDown _horAlign = C.EnumDropDown<ScanHorizontalAlign>();
     private readonly DropDown _scale = C.EnumDropDown<ScanScale>();
