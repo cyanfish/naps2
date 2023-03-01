@@ -7,14 +7,16 @@ namespace NAPS2.EtoForms.Ui;
 
 public class SelectDeviceForm : EtoDialogBase
 {
+    private readonly ErrorOutput _errorOutput;
     private readonly ListBox _devices = new();
     private readonly Button _selectDevice;
     private readonly List<ScanDevice> _lazyDeviceList = new();
     // TODO: The spinner doesn't seem to animate on WinForms
     private readonly Spinner _spinner = new() { Enabled = true };
 
-    public SelectDeviceForm(Naps2Config config) : base(config)
+    public SelectDeviceForm(Naps2Config config, ErrorOutput errorOutput) : base(config)
     {
+        _errorOutput = errorOutput;
         _selectDevice = C.OkButton(this, SelectDevice, UiStrings.Select);
         _selectDevice.Enabled = false;
     }
@@ -80,8 +82,15 @@ public class SelectDeviceForm : EtoDialogBase
                         }
                     });
                 }
-                // TODO: If we have no devices, show that message (dialog or inline?).
-                Invoker.Current.Invoke(() => _spinner.Visible = false);
+                Invoker.Current.Invoke(() =>
+                {
+                    _spinner.Visible = false;
+                    if (_lazyDeviceList.Count == 0)
+                    {
+                        Close();
+                        _errorOutput.DisplayError(SdkResources.NoDevicesFound);
+                    }
+                });
             });
         }
         else
