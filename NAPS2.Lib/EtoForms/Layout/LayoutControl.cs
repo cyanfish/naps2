@@ -10,9 +10,12 @@ public class LayoutControl : LayoutElement
 {
     private static readonly FieldInfo VisualParentField =
         typeof(Control).GetField("VisualParent_Key", BindingFlags.NonPublic | BindingFlags.Static)!;
-
+    private static readonly MethodInfo TriggerPreLoadMethod =
+        typeof(Control).GetMethod("TriggerPreLoad", BindingFlags.NonPublic | BindingFlags.Instance)!;
     private static readonly MethodInfo TriggerLoadMethod =
         typeof(Control).GetMethod("TriggerLoad", BindingFlags.NonPublic | BindingFlags.Instance)!;
+    private static readonly MethodInfo TriggerLoadCompleteMethod =
+        typeof(Control).GetMethod("TriggerLoadComplete", BindingFlags.NonPublic | BindingFlags.Instance)!;
 
     private bool _isAdded;
     private bool _isWindowSet;
@@ -192,7 +195,9 @@ public class LayoutControl : LayoutElement
         if (context.IsFirstLayout && !_isWindowSet && context.Window != null)
         {
             Control.Properties.Set<Container>(VisualParentField.GetValue(null), context.Window);
+            TriggerPreLoadMethod.Invoke(Control, new object[] { EventArgs.Empty });
             TriggerLoadMethod.Invoke(Control, new object[] { EventArgs.Empty });
+            TriggerLoadCompleteMethod.Invoke(Control, new object[] { EventArgs.Empty });
             _isWindowSet = true;
         }
     }
