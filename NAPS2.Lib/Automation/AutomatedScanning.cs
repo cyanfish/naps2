@@ -331,7 +331,6 @@ public class AutomatedScanning
         message.Recipients.AddRange(EmailRecipient.FromText(EmailRecipientType.Bcc, _options.EmailBcc));
 
         // TODO: We may want to normalize this to use SavePdfOperation's email functionality
-        // TODO: Definitely need to add some email CLI tests too (email only, email + save pdf, email + save images, email multiple files, etc.)
         var tempFolder = new DirectoryInfo(Path.Combine(Paths.Temp, Path.GetRandomFileName()));
         tempFolder.Create();
         try
@@ -517,6 +516,7 @@ public class AutomatedScanning
     {
         var defaults = InternalDefaults.GetCommonConfig();
 
+        _config.Run.Set(c => c.PdfSettings.SinglePagePdfs, false);
         if (!_options.UseSavedMetadata)
         {
             _config.Run.Set(c => c.PdfSettings.Metadata, defaults.PdfSettings.Metadata);

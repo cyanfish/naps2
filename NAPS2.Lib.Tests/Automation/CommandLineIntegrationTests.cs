@@ -1,5 +1,4 @@
 using Autofac;
-using Moq;
 using NAPS2.Automation;
 using NAPS2.ImportExport.Email;
 using NAPS2.Pdf;
@@ -538,15 +537,54 @@ public class CommandLineIntegrationTests : ContextualTests
     }
 
     [Fact]
+    public async Task IgnoreSinglePagePdfSetting()
+    {
+        var path = $"{FolderPath}/test.pdf";
+        await _automationHelper.WithContainer(container =>
+        {
+            var config = container.Resolve<Naps2Config>();
+            config.User.Set(c => c.PdfSettings.SinglePagePdfs, true);
+        }).RunCommand(
+            new AutomatedScanningOptions
+            {
+                OutputPath = path,
+                Verbose = true
+            },
+            new[] { Image1, Image2, Image3 });
+        PdfAsserts.AssertImages(path, Image1, Image2, Image3);
+        AssertRecoveryCleanedUp();
+    }
+
+    [Fact]
+    public async Task ScanToImageFiles()
+    {
+        var path = $"{FolderPath}/test$(n).jpg";
+        await _automationHelper.RunCommand(
+            new AutomatedScanningOptions
+            {
+                OutputPath = path,
+                Split = true,
+                Verbose = true
+            },
+            new[] { Image1, Image2, Image3 });
+        ImageAsserts.Similar(Image1, ImageContext.Load($"{FolderPath}/test1.jpg"));
+        ImageAsserts.Similar(Image2, ImageContext.Load($"{FolderPath}/test2.jpg"));
+        ImageAsserts.Similar(Image3, ImageContext.Load($"{FolderPath}/test3.jpg"));
+        Assert.False(File.Exists($"{FolderPath}/test4.jpg"));
+        AssertRecoveryCleanedUp();
+    }
+
+    [Fact]
     public async Task EmailPdf()
     {
         var emailProviderFactory = new MockEmailProviderFactory(message =>
         {
             Assert.Equal("Hello", message.Subject);
-            Assert.Equal(3, message.Recipients.Count);
+            Assert.Equal(4, message.Recipients.Count);
             Assert.Contains(message.Recipients, x => x.Address == "a@example.com" && x.Type == EmailRecipientType.To);
             Assert.Contains(message.Recipients, x => x.Address == "b@example.com" && x.Type == EmailRecipientType.Cc);
             Assert.Contains(message.Recipients, x => x.Address == "c@example.com" && x.Type == EmailRecipientType.Bcc);
+            Assert.Contains(message.Recipients, x => x.Address == "d@example.com" && x.Type == EmailRecipientType.To);
             Assert.Equal("Hello world", message.BodyText);
             Assert.True(message.AutoSend);
             Assert.True(message.SilentSend);
@@ -563,7 +601,7 @@ public class CommandLineIntegrationTests : ContextualTests
             {
                 EmailFileName = "attachment.pdf",
                 EmailSubject = "Hello",
-                EmailTo = "a@example.com",
+                EmailTo = "a@example.com,d@example.com",
                 EmailCc = "b@example.com",
                 EmailBcc = "c@example.com",
                 EmailBody = "Hello world",
@@ -575,6 +613,188 @@ public class CommandLineIntegrationTests : ContextualTests
 
         emailProviderFactory.CheckAsserts();
         emailProviderFactory.VerifyExactlyOneMessageSent();
+        AssertRecoveryCleanedUp();
+    }
+
+    [Fact]
+    public async Task EmailSplitPdfs()
+    {
+        var emailProviderFactory = new MockEmailProviderFactory(message =>
+        {
+            Assert.Equal(2, message.Attachments.Count);
+            Assert.Equal("attachment1.pdf", message.Attachments[0].AttachmentName);
+            PdfAsserts.AssertImages(message.Attachments[0].FilePath, Image1);
+            Assert.Equal("attachment2.pdf", message.Attachments[1].AttachmentName);
+            PdfAsserts.AssertImages(message.Attachments[1].FilePath, Image2);
+        });
+
+        await _automationHelper.WithContainerBuilder(builder =>
+        {
+            builder.RegisterInstance<IEmailProviderFactory>(emailProviderFactory);
+        }).RunCommand(
+            new AutomatedScanningOptions
+            {
+                EmailFileName = "attachment$(n).pdf",
+                Split = true,
+                Verbose = true
+            },
+            Image1, Image2);
+
+        emailProviderFactory.CheckAsserts();
+        emailProviderFactory.VerifyExactlyOneMessageSent();
+        AssertRecoveryCleanedUp();
+    }
+
+    [Fact]
+    public async Task EmailImageFiles()
+    {
+        var emailProviderFactory = new MockEmailProviderFactory(message =>
+        {
+            Assert.Equal(2, message.Attachments.Count);
+            Assert.Equal("attachment1.jpg", message.Attachments[0].AttachmentName);
+            ImageAsserts.Similar(Image1, ImageContext.Load(message.Attachments[0].FilePath));
+            Assert.Equal("attachment2.jpg", message.Attachments[1].AttachmentName);
+            ImageAsserts.Similar(Image2, ImageContext.Load(message.Attachments[1].FilePath));
+        });
+
+        await _automationHelper.WithContainerBuilder(builder =>
+        {
+            builder.RegisterInstance<IEmailProviderFactory>(emailProviderFactory);
+        }).RunCommand(
+            new AutomatedScanningOptions
+            {
+                EmailFileName = "attachment$(n).jpg",
+                Split = true,
+                Verbose = true
+            },
+            Image1, Image2);
+
+        emailProviderFactory.CheckAsserts();
+        emailProviderFactory.VerifyExactlyOneMessageSent();
+        AssertRecoveryCleanedUp();
+    }
+
+    [Fact]
+    public async Task EmailAndSavePdf()
+    {
+        var path = $"{FolderPath}/test.pdf";
+        var emailProviderFactory = new MockEmailProviderFactory(message =>
+        {
+            Assert.Single(message.Attachments);
+            Assert.Equal("attachment.pdf", message.Attachments[0].AttachmentName);
+            PdfAsserts.AssertImages(message.Attachments[0].FilePath, Image1, Image2);
+        });
+
+        await _automationHelper.WithContainerBuilder(builder =>
+        {
+            builder.RegisterInstance<IEmailProviderFactory>(emailProviderFactory);
+        }).RunCommand(
+            new AutomatedScanningOptions
+            {
+                OutputPath = path,
+                EmailFileName = "attachment.pdf",
+                Verbose = true
+            },
+            Image1, Image2);
+
+        emailProviderFactory.CheckAsserts();
+        emailProviderFactory.VerifyExactlyOneMessageSent();
+        PdfAsserts.AssertImages(path, Image1, Image2);
+        AssertRecoveryCleanedUp();
+    }
+
+    [Fact]
+    public async Task EmailAndSaveImageFiles()
+    {
+        var path = $"{FolderPath}/test$(n).jpg";
+        var emailProviderFactory = new MockEmailProviderFactory(message =>
+        {
+            Assert.Equal(2, message.Attachments.Count);
+            Assert.Equal("attachment1.jpg", message.Attachments[0].AttachmentName);
+            ImageAsserts.Similar(Image1, ImageContext.Load(message.Attachments[0].FilePath));
+            Assert.Equal("attachment2.jpg", message.Attachments[1].AttachmentName);
+            ImageAsserts.Similar(Image2, ImageContext.Load(message.Attachments[1].FilePath));
+        });
+
+        await _automationHelper.WithContainerBuilder(builder =>
+        {
+            builder.RegisterInstance<IEmailProviderFactory>(emailProviderFactory);
+        }).RunCommand(
+            new AutomatedScanningOptions
+            {
+                OutputPath = path,
+                EmailFileName = "attachment$(n).jpg",
+                Verbose = true
+            },
+            Image1, Image2);
+
+        emailProviderFactory.CheckAsserts();
+        emailProviderFactory.VerifyExactlyOneMessageSent();
+        ImageAsserts.Similar(Image1, ImageContext.Load($"{FolderPath}/test1.jpg"));
+        ImageAsserts.Similar(Image2, ImageContext.Load($"{FolderPath}/test2.jpg"));
+        Assert.False(File.Exists($"{FolderPath}/test3.jpg"));
+        AssertRecoveryCleanedUp();
+    }
+
+    [Fact]
+    public async Task EmailPdfAndSaveImageFiles()
+    {
+        var path = $"{FolderPath}/test$(n).jpg";
+        var emailProviderFactory = new MockEmailProviderFactory(message =>
+        {
+            Assert.Single(message.Attachments);
+            Assert.Equal("attachment.pdf", message.Attachments[0].AttachmentName);
+            PdfAsserts.AssertImages(message.Attachments[0].FilePath, Image1, Image2);
+        });
+
+        await _automationHelper.WithContainerBuilder(builder =>
+        {
+            builder.RegisterInstance<IEmailProviderFactory>(emailProviderFactory);
+        }).RunCommand(
+            new AutomatedScanningOptions
+            {
+                OutputPath = path,
+                EmailFileName = "attachment.pdf",
+                Verbose = true
+            },
+            Image1, Image2);
+
+        emailProviderFactory.CheckAsserts();
+        emailProviderFactory.VerifyExactlyOneMessageSent();
+        ImageAsserts.Similar(Image1, ImageContext.Load($"{FolderPath}/test1.jpg"));
+        ImageAsserts.Similar(Image2, ImageContext.Load($"{FolderPath}/test2.jpg"));
+        Assert.False(File.Exists($"{FolderPath}/test3.jpg"));
+        AssertRecoveryCleanedUp();
+    }
+
+    [Fact]
+    public async Task EmailImageFilesAndSavePdf()
+    {
+        var path = $"{FolderPath}/test.pdf";
+        var emailProviderFactory = new MockEmailProviderFactory(message =>
+        {
+            Assert.Equal(2, message.Attachments.Count);
+            Assert.Equal("attachment1.jpg", message.Attachments[0].AttachmentName);
+            ImageAsserts.Similar(Image1, ImageContext.Load(message.Attachments[0].FilePath));
+            Assert.Equal("attachment2.jpg", message.Attachments[1].AttachmentName);
+            ImageAsserts.Similar(Image2, ImageContext.Load(message.Attachments[1].FilePath));
+        });
+
+        await _automationHelper.WithContainerBuilder(builder =>
+        {
+            builder.RegisterInstance<IEmailProviderFactory>(emailProviderFactory);
+        }).RunCommand(
+            new AutomatedScanningOptions
+            {
+                OutputPath = path,
+                EmailFileName = "attachment$(n).jpg",
+                Verbose = true
+            },
+            Image1, Image2);
+
+        emailProviderFactory.CheckAsserts();
+        emailProviderFactory.VerifyExactlyOneMessageSent();
+        PdfAsserts.AssertImages(path, Image1, Image2);
         AssertRecoveryCleanedUp();
     }
 
