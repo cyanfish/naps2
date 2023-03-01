@@ -12,6 +12,8 @@ internal class AutomationHelper
 {
     private readonly ContextualTests _testClass;
     private readonly ITestOutputHelper _testOutputHelper;
+    private Action<ContainerBuilder> _containerBuilderSetup;
+    private Action<IContainer> _containerSetup;
 
     public AutomationHelper(ContextualTests testClass, ITestOutputHelper testOutputHelper)
     {
@@ -19,27 +21,33 @@ internal class AutomationHelper
         _testOutputHelper = testOutputHelper;
     }
 
+    public AutomationHelper WithContainer(Action<IContainer> setup)
+    {
+        return new AutomationHelper(_testClass, _testOutputHelper)
+        {
+            _containerSetup = setup
+        };
+    }
+
+    public AutomationHelper WithContainerBuilder(Action<ContainerBuilder> setup)
+    {
+        return new AutomationHelper(_testClass, _testOutputHelper)
+        {
+            _containerBuilderSetup = setup
+        };
+    }
+
     public Task RunCommand(AutomatedScanningOptions options, params byte[][] imagesToScan)
     {
-        return RunCommand(options, null, imagesToScan);
+        return RunCommand(options, new ScanDriverFactoryBuilder().WithScannedImages(imagesToScan).Build());
     }
 
-    public Task RunCommand(AutomatedScanningOptions options, Action<IContainer> setup, params byte[][] imagesToScan)
-    {
-        return RunCommand(options, setup, new ScanDriverFactoryBuilder().WithScannedImages(imagesToScan).Build());
-    }
-
-    public Task RunCommand(AutomatedScanningOptions options, IScanDriverFactory scanDriverFactory)
-    {
-        return RunCommand(options, null, scanDriverFactory);
-    }
-
-    public async Task RunCommand(AutomatedScanningOptions options, Action<IContainer> setup, IScanDriverFactory scanDriverFactory)
+    public async Task RunCommand(AutomatedScanningOptions options, IScanDriverFactory scanDriverFactory)
     {
         var container = AutoFacHelper.FromModules(new CommonModule(), new ConsoleModule(options),
             new TestModule(_testClass.ScanningContext, _testClass.ImageContext, scanDriverFactory, _testOutputHelper,
-                _testClass.FolderPath));
-        setup?.Invoke(container);
+                _testClass.FolderPath, _containerBuilderSetup));
+        _containerSetup?.Invoke(container);
         var automatedScanning = container.Resolve<AutomatedScanning>();
         await automatedScanning.Execute();
     }

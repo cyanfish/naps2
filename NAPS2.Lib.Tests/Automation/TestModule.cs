@@ -16,16 +16,18 @@ internal class TestModule : Module
     private readonly IScanDriverFactory _scanDriverFactory;
     private readonly ITestOutputHelper _testOutputHelper;
     private readonly string _folderPath;
+    private readonly Action<ContainerBuilder> _containerBuilderSetup;
 
     public TestModule(ScanningContext scanningContext, ImageContext imageContext,
         IScanDriverFactory scanDriverFactory,
-        ITestOutputHelper testOutputHelper, string folderPath)
+        ITestOutputHelper testOutputHelper, string folderPath, Action<ContainerBuilder> containerBuilderSetup)
     {
         _scanningContext = scanningContext;
         _imageContext = imageContext;
         _scanDriverFactory = scanDriverFactory;
         _testOutputHelper = testOutputHelper;
         _folderPath = folderPath;
+        _containerBuilderSetup = containerBuilderSetup;
     }
 
     protected override void Load(ContainerBuilder builder)
@@ -66,5 +68,7 @@ internal class TestModule : Module
 
         builder.RegisterBuildCallback(ctx =>
             ctx.Resolve<ScanningContext>().TempFolderPath = _scanningContext.TempFolderPath);
+
+        _containerBuilderSetup?.Invoke(builder);
     }
 }

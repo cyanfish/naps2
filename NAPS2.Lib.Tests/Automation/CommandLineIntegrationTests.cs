@@ -1,5 +1,7 @@
 using Autofac;
+using Moq;
 using NAPS2.Automation;
+using NAPS2.ImportExport.Email;
 using NAPS2.Pdf;
 using NAPS2.Sdk.Tests;
 using NAPS2.Sdk.Tests.Asserts;
@@ -80,23 +82,22 @@ public class CommandLineIntegrationTests : ContextualTests
     public async Task ScanPdfSettings_DefaultMetadata()
     {
         var path = $"{FolderPath}/test.pdf";
-        await _automationHelper.RunCommand(
+        await _automationHelper.WithContainer(container =>
+        {
+            var config = container.Resolve<Naps2Config>();
+            config.User.Set(c => c.PdfSettings.Metadata, new PdfMetadata
+            {
+                Author = "author1",
+                Creator = "creator1",
+                Keywords = "keywords1",
+                Subject = "subject1",
+                Title = "title1"
+            });
+        }).RunCommand(
             new AutomatedScanningOptions
             {
                 OutputPath = path,
                 Verbose = true
-            },
-            container =>
-            {
-                var config = container.Resolve<Naps2Config>();
-                config.User.Set(c => c.PdfSettings.Metadata, new PdfMetadata
-                {
-                    Author = "author1",
-                    Creator = "creator1",
-                    Keywords = "keywords1",
-                    Subject = "subject1",
-                    Title = "title1"
-                });
             },
             Image1);
         PdfAsserts.AssertMetadata(new PdfMetadata
@@ -114,24 +115,23 @@ public class CommandLineIntegrationTests : ContextualTests
     public async Task ScanPdfSettings_SavedMetadata()
     {
         var path = $"{FolderPath}/test.pdf";
-        await _automationHelper.RunCommand(
+        await _automationHelper.WithContainer(container =>
+        {
+            var config = container.Resolve<Naps2Config>();
+            config.User.Set(c => c.PdfSettings.Metadata, new PdfMetadata
+            {
+                Author = "author1",
+                Creator = "creator1",
+                Keywords = "keywords1",
+                Subject = "subject1",
+                Title = "title1"
+            });
+        }).RunCommand(
             new AutomatedScanningOptions
             {
                 OutputPath = path,
                 UseSavedMetadata = true,
                 Verbose = true
-            },
-            container =>
-            {
-                var config = container.Resolve<Naps2Config>();
-                config.User.Set(c => c.PdfSettings.Metadata, new PdfMetadata
-                {
-                    Author = "author1",
-                    Creator = "creator1",
-                    Keywords = "keywords1",
-                    Subject = "subject1",
-                    Title = "title1"
-                });
             },
             Image1);
         PdfAsserts.AssertMetadata(new PdfMetadata
@@ -175,24 +175,23 @@ public class CommandLineIntegrationTests : ContextualTests
     public async Task ScanPdfSettings_SavedEncryptConfig()
     {
         var path = $"{FolderPath}/test.pdf";
-        await _automationHelper.RunCommand(
+        await _automationHelper.WithContainer(container =>
+        {
+            var config = container.Resolve<Naps2Config>();
+            config.User.Set(c => c.PdfSettings.Encryption, new PdfEncryption
+            {
+                EncryptPdf = true,
+                OwnerPassword = "hello",
+                UserPassword = "world",
+                AllowAnnotations = true,
+                AllowContentCopying = false
+            });
+        }).RunCommand(
             new AutomatedScanningOptions
             {
                 OutputPath = path,
                 UseSavedEncryptConfig = true,
                 Verbose = true
-            },
-            container =>
-            {
-                var config = container.Resolve<Naps2Config>();
-                config.User.Set(c => c.PdfSettings.Encryption, new PdfEncryption
-                {
-                    EncryptPdf = true,
-                    OwnerPassword = "hello",
-                    UserPassword = "world",
-                    AllowAnnotations = true,
-                    AllowContentCopying = false
-                });
             },
             Image1);
         PdfAsserts.AssertEncrypted(path, "hello", "world", x =>
@@ -535,6 +534,47 @@ public class CommandLineIntegrationTests : ContextualTests
         PdfAsserts.AssertImages($"{FolderPath}/2.pdf", Image3);
         PdfAsserts.AssertImages($"{FolderPath}/3.pdf", Image4);
         Assert.False(File.Exists($"{FolderPath}/4.pdf"));
+        AssertRecoveryCleanedUp();
+    }
+
+    [Fact]
+    public async Task EmailPdf()
+    {
+        var emailProviderFactory = new MockEmailProviderFactory(message =>
+        {
+            Assert.Equal("Hello", message.Subject);
+            Assert.Equal(3, message.Recipients.Count);
+            Assert.Contains(message.Recipients, x => x.Address == "a@example.com" && x.Type == EmailRecipientType.To);
+            Assert.Contains(message.Recipients, x => x.Address == "b@example.com" && x.Type == EmailRecipientType.Cc);
+            Assert.Contains(message.Recipients, x => x.Address == "c@example.com" && x.Type == EmailRecipientType.Bcc);
+            Assert.Equal("Hello world", message.BodyText);
+            Assert.True(message.AutoSend);
+            Assert.True(message.SilentSend);
+            Assert.Single(message.Attachments);
+            Assert.Equal("attachment.pdf", message.Attachments[0].AttachmentName);
+            PdfAsserts.AssertImages(message.Attachments[0].FilePath, Image1, Image2);
+        });
+
+        await _automationHelper.WithContainerBuilder(builder =>
+        {
+            builder.RegisterInstance<IEmailProviderFactory>(emailProviderFactory);
+        }).RunCommand(
+            new AutomatedScanningOptions
+            {
+                EmailFileName = "attachment.pdf",
+                EmailSubject = "Hello",
+                EmailTo = "a@example.com",
+                EmailCc = "b@example.com",
+                EmailBcc = "c@example.com",
+                EmailBody = "Hello world",
+                EmailAutoSend = true,
+                EmailSilentSend = true,
+                Verbose = true
+            },
+            Image1, Image2);
+
+        emailProviderFactory.CheckAsserts();
+        emailProviderFactory.VerifyExactlyOneMessageSent();
         AssertRecoveryCleanedUp();
     }
 
