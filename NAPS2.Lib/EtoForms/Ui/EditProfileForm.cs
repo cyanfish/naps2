@@ -273,6 +273,11 @@ public class EditProfileForm : EtoDialogBase
                 _errorOutput.DisplayError(ex.Message);
             }
         }
+        catch (Exception ex)
+        {
+            Log.ErrorException(ex.Message, ex.InnerException!);
+            _errorOutput.DisplayError(ex.Message, ex);
+        }
     }
 
     private void UpdatePageSizeList()
