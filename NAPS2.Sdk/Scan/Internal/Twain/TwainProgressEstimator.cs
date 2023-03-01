@@ -29,7 +29,7 @@ internal class TwainProgressEstimator
 
     private static TimingKey GetTimingKey(ScanOptions options)
     {
-        return new TimingKey(options.Device!.ID!, options.BitDepth, options.PageSize!);
+        return new TimingKey(options.Device!.ID!, options.BitDepth, options.Dpi, options.PageSize!);
     }
 
     public TwainProgressEstimator(ScanOptions options, IScanEvents scanEvents)
@@ -145,7 +145,7 @@ internal class TwainProgressEstimator
         private readonly Dictionary<TimingKey, TimingInfo> _cache = new();
     }
 
-    public record TimingKey(string DeviceId, BitDepth BitDepth, PageSize PageSize);
+    public record TimingKey(string DeviceId, BitDepth BitDepth, int Dpi, PageSize PageSize);
 
     public record TimingInfo(long OverheadMillis, long TotalMillis);
 }
