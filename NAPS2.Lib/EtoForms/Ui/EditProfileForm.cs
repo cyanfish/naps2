@@ -312,7 +312,7 @@ public class EditProfileForm : EtoDialogBase
     {
         if (ScanProfile.PageSize == ScanPageSize.Custom)
         {
-            if (ScanProfile.CustomPageSizeName != null && ScanProfile.CustomPageSize != null)
+            if (ScanProfile.CustomPageSize != null)
             {
                 SelectCustomPageSize(ScanProfile.CustomPageSizeName, ScanProfile.CustomPageSize);
             }
@@ -327,7 +327,7 @@ public class EditProfileForm : EtoDialogBase
         }
     }
 
-    private void SelectCustomPageSize(string name, PageDimensions dimens)
+    private void SelectCustomPageSize(string? name, PageDimensions dimens)
     {
         for (int i = 0; i < _pageSize.Items.Count; i++)
         {
