@@ -29,6 +29,15 @@ public static class Win32
     [DllImport("kernel32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
     public static extern IntPtr AddDllDirectory(string directory);
 
+    [DllImport("kernel32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
+    public static extern IntPtr SetDllDirectory(string directory);
+
+    [DllImport("kernel32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
+    [return: MarshalAs(UnmanagedType.Bool)]
+    public static extern bool SetDefaultDllDirectories(int directoryFlags);
+
+    public const int LOAD_LIBRARY_SEARCH_DEFAULT_DIRS = 0x00001000;
+
     [DllImport("kernel32.dll")]
     public static extern IntPtr LoadLibrary(string path);
 

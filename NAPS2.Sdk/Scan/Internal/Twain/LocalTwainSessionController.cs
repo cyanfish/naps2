@@ -21,8 +21,21 @@ public class LocalTwainSessionController : ITwainSessionController
         // Path to the folder containing the 64-bit twaindsm.dll relative to NAPS2.Core.dll
         if (PlatformCompat.System.CanUseWin32)
         {
-            string libDir = Environment.Is64BitProcess ? "_win64" : "_win32";
-            Win32.AddDllDirectory(Path.Combine(AssemblyHelper.LibFolder, libDir));
+            var libDir = Environment.Is64BitProcess ? "_win64" : "_win32";
+            var dllDir = Path.Combine(AssemblyHelper.LibFolder, libDir);
+            if (Environment.Is64BitProcess)
+            {
+                // TODO: Why is SetDllDirectory needed for 64-bit instead of AddDllDirectory?
+                // Otherwise I get a dll not found error.
+                // SetDefaultDllDirectories(Win32.LOAD_LIBRARY_SEARCH_DEFAULT_DIRS) + AddDllDirectory works too but
+                // I'm not sure which is more destructive (as the latter fails completely on 32-bit).
+                Win32.SetDllDirectory(dllDir);
+            }
+            else
+            {
+                // AddDllDirectory is preferred, see https://github.com/cyanfish/naps2/pull/69
+                Win32.AddDllDirectory(dllDir);
+            }
         }
 #if DEBUG
         PlatformInfo.Current.Log.IsDebugEnabled = true;
