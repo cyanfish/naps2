@@ -5,7 +5,7 @@
     <project_license>GPL-2.0-or-later</project_license>
 
     <name>NAPS2 - Not Another PDF Scanner</name>
-    <summary>Scan documents to PDF and other file types, as simply as possible.</summary>
+    <summary>Scan documents to PDF and more, as simply as possible.</summary>
     <description>
         <p>
             NAPS2 on Linux allows you to scan from USB (using SANE) and network scanners. Use your chosen settings, or

@@ -7,7 +7,7 @@ public static class Cli
 {
     public static void Run(string command, string args, Dictionary<string, string>? env = null,
         CancellationToken cancel = default, bool noVerbose = false, bool alwaysVerbose = false,
-        string? ignoreErrorIfOutputContains = null)
+        string? ignoreErrorIfOutputContains = null, string? workingDir = null)
     {
         var startInfo = new ProcessStartInfo
         {
@@ -17,7 +17,7 @@ public static class Cli
             RedirectStandardError = true,
             RedirectStandardOutput = true,
             CreateNoWindow = true,
-            WorkingDirectory = Paths.SolutionRoot
+            WorkingDirectory = workingDir ?? Paths.SolutionRoot
         };
         if (env != null)
         {

@@ -1,0 +1,16 @@
+Package: naps2
+Source: naps2
+Priority: optional
+Section: graphics
+Maintainer: Ben Olden-Cooligan <ben.cyanfish@gmail.com>
+Architecture: {!arch}
+Version: {!version}
+Description: Scan documents to PDF and more, as simply as possible.
+ NAPS2 on Linux allows you to scan from USB (using SANE) and network scanners. Use your chosen settings, or
+ set up multiple profiles for different devices and configurations. Once you've finished scanning, you can
+ save, email, or print with only a couple clicks. Save to PDF, TIFF, JPEG, PNG, or other file types.
+ .
+ Easily rotate, crop, and rearrange scanned pages. Adjust brightness, contrast, and apply automatic document
+ corrections to make your scanned pages look great. Use OCR to add searchable text to your PDFs in any of
+ over 100 languages. Use batch scanning, advanced profile settings, and an optional CLI to automate tedious
+ tasks.

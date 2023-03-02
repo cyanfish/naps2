@@ -1,5 +1,4 @@
 using System.Runtime.InteropServices;
-using System.Text.RegularExpressions;
 using NAPS2.Tools.Project.Targets;
 
 namespace NAPS2.Tools.Project.Packaging;
@@ -15,14 +14,6 @@ public static class FlatpakPackager
 
         VerifyCanBuildArch(packageInfo.Platform);
 
-        // Update metainfo file with the current version/date
-        var metaInfo = File.ReadAllText(Path.Combine(Paths.SetupLinux, "com.naps2.Naps2.metainfo.xml"));
-        var version = ProjectHelper.GetCurrentVersionName();
-        var date = DateTime.Now.ToString("yyyy-MM-dd");
-        metaInfo = Regex.Replace(metaInfo,
-            @"<release [^>]+/>",
-            $"<release version=\"{version}\" date=\"{date}\" />");
-
         // Update manifest file with the correct paths
         var manifest = File.ReadAllText(Path.Combine(Paths.SetupLinux, "com.naps2.Naps2.yml"));
         // TODO: Update this after we use a real repo path
@@ -31,7 +22,8 @@ public static class FlatpakPackager
         // Copy metainfo, manifest, icon, and desktop files to a temp folder
         var packageDir = Path.Combine(Paths.SetupObj, "flatpak");
         Directory.CreateDirectory(packageDir);
-        File.WriteAllText(Path.Combine(packageDir, "com.naps2.Naps2.metainfo.xml"), metaInfo);
+        File.WriteAllText(Path.Combine(packageDir, "com.naps2.Naps2.metainfo.xml"),
+            ProjectHelper.GetLinuxMetaInfo(packageInfo));
         File.WriteAllText(Path.Combine(packageDir, "com.naps2.Naps2.yml"), manifest);
         File.Copy(
             Path.Combine(Paths.SetupLinux, "com.naps2.Naps2.desktop"),
@@ -72,14 +64,15 @@ public static class FlatpakPackager
         Output.Verbose("Creating flatpak repo");
         var repoDir = N2Config.FlatpakRepo;
         repoDir = string.IsNullOrEmpty(repoDir) ? Path.Combine(packageDir, "repo") : repoDir;
-        var branch = version.Contains('b') ? "beta" : "stable";
+        var branch = packageInfo.VersionName.Contains('b') ? "beta" : "stable";
         var gpg = N2Config.FlatpakGpgKey;
         var gpgArgs = string.IsNullOrEmpty(gpg) ? "" : $"--gpg-sign={gpg}";
         Cli.Run("flatpak", $"build-export {gpgArgs} --arch {arch} {repoDir} {buildDir} {branch}");
 
         // Generate a single-file bundle from the temp repo
         Output.Verbose("Building flatpak bundle");
-        Cli.Run("flatpak", $"build-bundle {gpgArgs} --arch {arch} {repoDir} {bundlePath} com.naps2.Naps2 {branch} --runtime-repo=https://flathub.org/repo/flathub.flatpakrepo");
+        Cli.Run("flatpak",
+            $"build-bundle {gpgArgs} --arch {arch} {repoDir} {bundlePath} com.naps2.Naps2 {branch} --runtime-repo=https://flathub.org/repo/flathub.flatpakrepo");
 
         Output.OperationEnd($"Packaged flatpak: {bundlePath}");
     }

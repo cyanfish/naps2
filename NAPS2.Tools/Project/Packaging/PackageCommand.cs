@@ -28,6 +28,9 @@ public class PackageCommand : ICommand<PackageOptions>
                 case PackageType.Exe:
                     InnoSetupPackager.PackageExe(GetPackageInfoForConfig("Release"));
                     break;
+                case PackageType.Deb:
+                    DebPackager.PackageDeb(GetPackageInfoForConfig("Release-Linux"));
+                    break;
                 case PackageType.Flatpak:
                     FlatpakPackager.Package(GetPackageInfoForConfig("Release-Linux"), opts.NoPre);
                     break;

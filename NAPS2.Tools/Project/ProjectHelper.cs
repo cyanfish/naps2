@@ -1,4 +1,6 @@
+using System.Text.RegularExpressions;
 using System.Threading;
+using NAPS2.Tools.Project.Packaging;
 using NAPS2.Tools.Project.Targets;
 
 namespace NAPS2.Tools.Project;
@@ -79,5 +81,36 @@ public static class ProjectHelper
             }
             Thread.Sleep(100);
         }
+    }
+
+    public static void CopyDirectory(string sourceDir, string destinationDir)
+    {
+        
+        var dir = new DirectoryInfo(sourceDir);
+        if (!dir.Exists)
+            throw new DirectoryNotFoundException($"Source directory not found: {dir.FullName}");
+        DirectoryInfo[] dirs = dir.GetDirectories();
+        Directory.CreateDirectory(destinationDir);
+        foreach (FileInfo file in dir.GetFiles())
+        {
+            string targetFilePath = Path.Combine(destinationDir, file.Name);
+            file.CopyTo(targetFilePath);
+        }
+        foreach (DirectoryInfo subDir in dirs)
+        {
+            string newDestinationDir = Path.Combine(destinationDir, subDir.Name);
+            CopyDirectory(subDir.FullName, newDestinationDir);
+        }
+    }
+
+    public static string GetLinuxMetaInfo(PackageInfo packageInfo)
+    {
+        // Update metainfo file with the current version/date
+        var metaInfo = File.ReadAllText(Path.Combine(Paths.SetupLinux, "com.naps2.Naps2.metainfo.xml"));
+        var date = DateTime.Now.ToString("yyyy-MM-dd");
+        metaInfo = Regex.Replace(metaInfo,
+            @"<release [^>]+/>",
+            $"<release version=\"{packageInfo.VersionName}\" date=\"{date}\" />");
+        return metaInfo;
     }
 }
