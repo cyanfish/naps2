@@ -17,114 +17,126 @@ public static class TargetsHelper
         _ => throw new ArgumentException()
     };
 
-    public static IEnumerable<Target> Enumerate(string? buildTypeOpt, string? platformOpt,
-        TargetConstraints constraints)
+    public static IEnumerable<BuildType> EnumerateBuildTargets(string? buildType)
     {
-        if (string.IsNullOrEmpty(buildTypeOpt))
-        {
-            buildTypeOpt = "all";
-        }
-        if (string.IsNullOrEmpty(platformOpt))
-        {
-            platformOpt = constraints.AllowMultiplePlatforms ? "all" : GetBuildablePlatforms()[0].ToString().ToLowerInvariant();
-        }
-
-        string[] allowedBuildTypes = GetAllowedBuildTypes(constraints);
-        string[] buildTypes = buildTypeOpt == "all" ? allowedBuildTypes : buildTypeOpt.Split("+");
-        foreach (var buildType in buildTypes)
-        {
-            if (!allowedBuildTypes.Contains(buildType))
+        return
+            buildType?.ToLowerInvariant() switch
             {
-                throw new Exception(
-                    $"Invalid build type '{buildType}', expected one of {string.Join(",", allowedBuildTypes)}");
+                var x when string.IsNullOrEmpty(x) || x == "all" =>
+                    new[] { BuildType.Debug, BuildType.Release, BuildType.Msi, BuildType.Zip },
+                "debug" => new[] { BuildType.Debug },
+                "release" => new[] { BuildType.Release },
+                "msi" => new[] { BuildType.Msi },
+                "zip" => new[] { BuildType.Zip },
+                _ => Array.Empty<BuildType>()
+            };
+    }
+
+    public static IEnumerable<PackageTarget> EnumeratePackageTargets(string? packageTypeOpt, string? platformOpt,
+        bool requireCompatiblePlatform)
+    {
+        var targets = DoEnumeratePackageTargets(packageTypeOpt, platformOpt, requireCompatiblePlatform).ToList();
+        if (targets.Count == 0)
+        {
+            throw new Exception($"Invalid package/platform combination: {packageTypeOpt}/{platformOpt}");
+        }
+        return targets;
+    }
+
+    private static IEnumerable<PackageTarget> DoEnumeratePackageTargets(string? packageTypeOpt, string? platformOpt,
+        bool requireCompatiblePlatform)
+    {
+        packageTypeOpt = packageTypeOpt?.ToLowerInvariant() ?? "";
+        platformOpt = platformOpt?.ToLowerInvariant() ?? "";
+
+        foreach (var packageType in packageTypeOpt.Split("+"))
+        {
+            foreach (var platform in platformOpt.Split("+"))
+            {
+                bool allPkg = string.IsNullOrEmpty(packageType) || packageType == "all";
+                bool allPlat = string.IsNullOrEmpty(platform) || platform == "all";
+                if ((allPkg || packageType == "exe") && (!requireCompatiblePlatform || OperatingSystem.IsWindows()))
+                {
+                    if (allPlat || platform == "win")
+                    {
+                        yield return new PackageTarget(PackageType.Exe, Platform.Win);
+                    }
+                    // Only build 32/64-bit exe installers if explicitly requested
+                    if (platform == "win32")
+                    {
+                        yield return new PackageTarget(PackageType.Exe, Platform.Win32);
+                    }
+                    if (platform == "win64")
+                    {
+                        yield return new PackageTarget(PackageType.Exe, Platform.Win64);
+                    }
+                }
+                if ((allPkg || packageType == "msi") && (!requireCompatiblePlatform || OperatingSystem.IsWindows()))
+                {
+                    if (allPlat || platform == "win32")
+                    {
+                        yield return new PackageTarget(PackageType.Msi, Platform.Win32);
+                    }
+                    if (allPlat || platform == "win64")
+                    {
+                        yield return new PackageTarget(PackageType.Msi, Platform.Win64);
+                    }
+                }
+                if ((allPkg || packageType == "zip") && (!requireCompatiblePlatform || OperatingSystem.IsWindows()))
+                {
+                    if (allPlat || platform == "zip")
+                    {
+                        yield return new PackageTarget(PackageType.Zip, Platform.Win);
+                    }
+                    // Only build 32/64-bit zip archives if explicitly requested
+                    if (platform == "win32")
+                    {
+                        yield return new PackageTarget(PackageType.Zip, Platform.Win32);
+                    }
+                    if (platform == "win64")
+                    {
+                        yield return new PackageTarget(PackageType.Zip, Platform.Win64);
+                    }
+                }
+                if ((allPkg || packageType == "flatpak") && (!requireCompatiblePlatform || OperatingSystem.IsLinux()))
+                {
+                    if (allPlat || platform == "linux")
+                    {
+                        yield return new PackageTarget(PackageType.Flatpak, Platform.Linux);
+                    }
+                    if (allPlat || platform == "linuxarm")
+                    {
+                        yield return new PackageTarget(PackageType.Flatpak, Platform.LinuxArm);
+                    }
+                }
+                if ((allPkg || packageType == "pkg") && (!requireCompatiblePlatform || OperatingSystem.IsMacOS()))
+                {
+                    if ((allPlat || platform == "mac") && (!requireCompatiblePlatform ||
+                                                           RuntimeInformation.OSArchitecture == Architecture.Arm64))
+                    {
+                        yield return new PackageTarget(PackageType.Pkg, Platform.Mac);
+                    }
+                    if (allPlat || platform == "macintel")
+                    {
+                        yield return new PackageTarget(PackageType.Pkg, Platform.MacIntel);
+                    }
+                    if ((allPlat || platform == "macarm") && (!requireCompatiblePlatform ||
+                                                              RuntimeInformation.OSArchitecture == Architecture.Arm64))
+                    {
+                        yield return new PackageTarget(PackageType.Pkg, Platform.MacArm);
+                    }
+                }
             }
         }
-        var buildTypesParsed = buildTypes.Select(ParseBuildType).ToList();
-
-        string[] allowedPlatforms = (constraints.RequireBuildablePlatform ? GetBuildablePlatforms() : GetAllPlatforms())
-            .Select(x => x.ToString().ToLowerInvariant()).ToArray();
-        string[] platforms = platformOpt == "all" ? allowedPlatforms : platformOpt.Split("+");
-        foreach (var platform in platforms)
-        {
-            if (!allowedPlatforms.Contains(platform))
-            {
-                throw new Exception($"Invalid platform '{platform}', expected one of {string.Join(",", allowedPlatforms)}");
-            }
-        }
-        var platformsParsed = platforms.Select(ParsePlatform).ToList();
-
-        if (!constraints.AllowMultiplePlatforms && platformsParsed.Count > 1)
-        {
-            throw new Exception("Only one platform can be specified");
-        }
-
-        foreach (var buildType in buildTypesParsed)
-        {
-            foreach (var platform in platformsParsed)
-            {
-                // We only want to support certain combos (i.e. win exe, win32 msi, win64 msi, win zip)
-                if (buildType == BuildType.Msi && platform == Platform.Win) continue;
-                if (buildType is BuildType.Exe or BuildType.Zip && platform is Platform.Win32 or Platform.Win64) continue;
-
-                yield return new Target(buildType, platform);
-            }
-        }
     }
 
-    private static string[] GetAllowedBuildTypes(TargetConstraints constraints)
+    public static IEnumerable<string?> GetBuildTypesFromPackageType(string? packageType)
     {
-        if (OperatingSystem.IsWindows())
+        return EnumeratePackageTargets(packageType, null, true).Select(x => (x.Type switch
         {
-            return constraints.InstallersOnly ? new[] { "exe", "msi" } :
-                constraints.AllowDebug ? new[] { "debug", "exe", "msi", "zip" } :
-                new[] { "exe", "msi", "zip" };
-        }
-        if (OperatingSystem.IsMacOS())
-        {
-            return constraints.AllowDebug ? new[] { "debug", "exe" } : new[] { "exe" };
-        }
-        if (OperatingSystem.IsLinux())
-        {
-            return constraints.AllowDebug ? new[] { "debug", "exe" } : new[] { "exe" };
-        }
-        throw new InvalidOperationException("Unsupported OS");
-    }
-
-    private static Platform[] GetAllPlatforms() =>
-        new[]
-        {
-            Platform.Win, Platform.Win64, Platform.Win32, Platform.Mac, Platform.MacArm, Platform.MacIntel, Platform.Linux, Platform.LinuxArm
-        };
-
-    private static Platform[] GetBuildablePlatforms()
-    {
-        if (OperatingSystem.IsWindows()) return new[] { Platform.Win, Platform.Win64, Platform.Win32 };
-        if (OperatingSystem.IsMacOS())
-        {
-            return RuntimeInformation.OSArchitecture == Architecture.Arm64
-                ? new[] { Platform.Mac, Platform.MacArm, Platform.MacIntel }
-                : new[] { Platform.MacIntel };
-        }
-        if (OperatingSystem.IsLinux())
-        {
-            return RuntimeInformation.OSArchitecture == Architecture.Arm64
-                ? new[] { Platform.LinuxArm, Platform.Linux }
-                : new[] { Platform.Linux, Platform.LinuxArm };
-        }
-        throw new InvalidOperationException("Unsupported OS");
-    }
-
-    private static BuildType ParseBuildType(string value)
-    {
-        return Enum.TryParse(typeof(BuildType), value, true, out var buildType)
-            ? (BuildType) buildType!
-            : throw new Exception("Invalid build type");
-    }
-
-    public static Platform ParsePlatform(string value)
-    {
-        return Enum.TryParse(typeof(Platform), value, true, out var platform)
-            ? (Platform) platform!
-            : throw new Exception("Invalid platform");
+            PackageType.Msi => BuildType.Msi,
+            PackageType.Zip => BuildType.Zip,
+            _ => BuildType.Release
+        }).ToString().ToLowerInvariant()).Distinct();
     }
 }

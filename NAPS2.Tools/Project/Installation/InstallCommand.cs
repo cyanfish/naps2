@@ -8,30 +8,18 @@ public class InstallCommand : ICommand<InstallOptions>
     {
         var version = ProjectHelper.GetCurrentVersionName();
 
-        var constraints = new TargetConstraints
+        foreach (var target in TargetsHelper.EnumeratePackageTargets(opts.PackageType, opts.Platform, true))
         {
-            InstallersOnly = true
-        };
-        foreach (var target in TargetsHelper.Enumerate(opts.BuildType, opts.Platform, constraints))
-        {
-            switch (target.BuildType)
+            switch (target.Type)
             {
-                case BuildType.Exe:
-                    if (target.Platform.IsLinux())
-                    {
-                        FlatpakInstaller.Install(target.Platform, version, opts.Run);
-                    }
-                    else if (target.Platform.IsMac())
-                    {
-                        // TODO: Mac install?
-                    }
-                    else if (target.Platform.IsWindows())
-                    {
-                        ExeInstaller.Install(target.Platform, version, opts.Run);
-                    }
+                case PackageType.Exe:
+                    ExeInstaller.Install(target.Platform, version, opts.Run);
                     break;
-                case BuildType.Msi:
+                case PackageType.Msi:
                     MsiInstaller.Install(target.Platform, version, opts.Run);
+                    break;
+                case PackageType.Flatpak:
+                    FlatpakInstaller.Install(target.Platform, version, opts.Run);
                     break;
             }
         }

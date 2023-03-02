@@ -9,43 +9,35 @@ public class PackageCommand : ICommand<PackageOptions>
     {
         if (opts.Build)
         {
-            new BuildCommand().Run(new BuildOptions
+            foreach (var buildType in TargetsHelper.GetBuildTypesFromPackageType(opts.PackageType))
             {
-                BuildType = opts.BuildType
-            });
+                new BuildCommand().Run(new BuildOptions
+                {
+                    BuildType = buildType
+                });
+            }
         }
 
         // TODO: Fix windows targets to ensure that the project is built
         // TODO: Allow customizing dotnet version
-        var constraints = new TargetConstraints
-        {
-            AllowMultiplePlatforms = true,
-            RequireBuildablePlatform = true
-        };
-        foreach (var target in TargetsHelper.Enumerate(opts.BuildType, opts.Platform, constraints))
+        foreach (var target in TargetsHelper.EnumeratePackageTargets(opts.PackageType, opts.Platform, true))
         {
             PackageInfo GetPackageInfoForConfig(string config) => GetPackageInfo(target.Platform, config, opts.Name);
-            switch (target.BuildType)
+            switch (target.Type)
             {
-                case BuildType.Exe:
-                    // TODO: We might need configs designed for mac + linux
-                    if (target.Platform.IsLinux())
-                    {
-                        FlatpakPackager.Package(GetPackageInfoForConfig("Release-Linux"), opts.NoPre);
-                    }
-                    else if (target.Platform.IsMac())
-                    {
-                        MacPackager.Package(GetPackageInfoForConfig("Release"), opts.NoSign, opts.NoNotarize);
-                    }
-                    else if (target.Platform.IsWindows())
-                    {
-                        InnoSetupPackager.PackageExe(GetPackageInfoForConfig("Release"));
-                    }
+                case PackageType.Exe:
+                    InnoSetupPackager.PackageExe(GetPackageInfoForConfig("Release"));
                     break;
-                case BuildType.Msi:
+                case PackageType.Flatpak:
+                    FlatpakPackager.Package(GetPackageInfoForConfig("Release-Linux"), opts.NoPre);
+                    break;
+                case PackageType.Pkg:
+                    MacPackager.Package(GetPackageInfoForConfig("Release"), opts.NoSign, opts.NoNotarize);
+                    break;
+                case PackageType.Msi:
                     WixToolsetPackager.PackageMsi(GetPackageInfoForConfig("Release-Msi"));
                     break;
-                case BuildType.Zip:
+                case PackageType.Zip:
                     ZipArchivePackager.PackageZip(GetPackageInfoForConfig("Release-Zip"));
                     break;
             }
@@ -67,6 +59,7 @@ public class PackageCommand : ICommand<PackageOptions>
         foreach (var project in new[]
                      { "NAPS2.Sdk", "NAPS2.Lib", "NAPS2.App.Worker", "NAPS2.App.WinForms", "NAPS2.App.Console" })
         {
+            // TODO: We shouldn't do a fallback here, it should be explicit based on the project
             var buildPath = Path.Combine(Paths.SolutionRoot, project, "bin", preferredConfig, "net462");
             if (!Directory.Exists(buildPath))
             {

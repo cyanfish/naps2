@@ -16,23 +16,21 @@ public class VerifyCommand : ICommand<VerifyOptions>
         
         using var appDriverRunner = AppDriverRunner.Start();
 
-        var constraints = new TargetConstraints
+        foreach (var target in TargetsHelper.EnumeratePackageTargets(opts.PackageType, opts.Platform, true))
         {
-            AllowMultiplePlatforms = true,
-            RequireBuildablePlatform = true
-        };
-        foreach (var target in TargetsHelper.Enumerate(opts.BuildType, opts.Platform, constraints))
-        {
-            switch (target.BuildType)
+            switch (target.Type)
             {
-                case BuildType.Exe:
+                case PackageType.Exe:
                     ExeSetupVerifier.Verify(target.Platform, version);
                     break;
-                case BuildType.Msi:
+                case PackageType.Msi:
                     MsiSetupVerifier.Verify(target.Platform, version);
                     break;
-                case BuildType.Zip:
+                case PackageType.Zip:
                     ZipArchiveVerifier.Verify(target.Platform, version, opts.NoCleanup);
+                    break;
+                default:
+                    Output.Info($"Unsupported package type for verification: {target.Type}");
                     break;
             }
         }

@@ -6,13 +6,9 @@ public class BuildCommand : ICommand<BuildOptions>
 {
     public int Run(BuildOptions opts)
     {
-        var constraints = new TargetConstraints
+        foreach (var target in TargetsHelper.EnumerateBuildTargets(opts.BuildType))
         {
-            AllowDebug = true
-        };
-        foreach (var target in TargetsHelper.Enumerate(opts.BuildType, null, constraints))
-        {
-            var config = GetConfig(target.BuildType);
+            var config = GetConfig(target);
             Output.Info($"Building: {config}");
             try
             {
@@ -40,7 +36,7 @@ public class BuildCommand : ICommand<BuildOptions>
             : OperatingSystem.IsLinux()
                 ? "Debug-Linux"
                 : "Debug-Windows",
-        BuildType.Exe => OperatingSystem.IsMacOS()
+        BuildType.Release => OperatingSystem.IsMacOS()
             ? "Release"
             : OperatingSystem.IsLinux()
                 ? "Release-Linux"

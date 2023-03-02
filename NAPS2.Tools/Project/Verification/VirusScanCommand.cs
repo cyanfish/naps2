@@ -11,26 +11,11 @@ public class VirusScanCommand : ICommand<VirusScanOptions>
         Output.Info("Checking for antivirus false positives");
         var version = ProjectHelper.GetCurrentVersionName();
 
-        var constraints = new TargetConstraints
-        {
-            AllowMultiplePlatforms = true
-        };
         var tasks = new List<Task>();
-        foreach (var target in TargetsHelper.Enumerate(opts.BuildType, opts.Platform, constraints))
+        foreach (var target in TargetsHelper.EnumeratePackageTargets(opts.PackageType, opts.Platform, false))
         {
-            switch (target.BuildType)
-            {
-                case BuildType.Exe:
-                    var ext = target.Platform.IsMac() ? "pkg" : target.Platform.IsLinux() ? "flatpak" : "exe";
-                    tasks.Add(StartVirusScan(ProjectHelper.GetPackagePath(ext, target.Platform, version)));
-                    break;
-                case BuildType.Msi:
-                    tasks.Add(StartVirusScan(ProjectHelper.GetPackagePath("msi", target.Platform, version)));
-                    break;
-                case BuildType.Zip:
-                    tasks.Add(StartVirusScan(ProjectHelper.GetPackagePath("zip", target.Platform, version)));
-                    break;
-            }
+            var ext = target.Type.ToString().ToLowerInvariant();
+            tasks.Add(StartVirusScan(ProjectHelper.GetPackagePath(ext, target.Platform, version)));
         }
         Task.WaitAll(tasks.ToArray());
         Output.OperationEnd("No antivirus false positives.");
