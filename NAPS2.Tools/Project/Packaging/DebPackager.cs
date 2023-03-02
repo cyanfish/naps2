@@ -53,6 +53,9 @@ public static class DebPackager
             Path.Combine(appsDir, "naps2.desktop"));
         File.WriteAllText(Path.Combine(metainfoDir, "com.naps2.Naps2.metainfo.xml"),
             ProjectHelper.GetLinuxMetaInfo(pkgInfo));
+        File.Copy(
+            Path.Combine(Paths.SolutionRoot, "LICENSE"),
+            Path.Combine(targetDir, "LICENSE.txt"));
 
         // Create symlinks
         var binDir = Path.Combine(workingDir, "usr/bin");
