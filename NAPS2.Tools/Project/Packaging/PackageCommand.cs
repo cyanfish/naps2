@@ -45,7 +45,7 @@ public class PackageCommand : ICommand<PackageOptions>
         return 0;
     }
 
-    private static PackageInfo GetPackageInfo(Platform platform, string preferredConfig, string? packageName)
+    private static PackageInfo GetPackageInfo(Platform platform, string libConfig, string? packageName)
     {
         var pkgInfo = new PackageInfo(platform, ProjectHelper.GetCurrentVersionName(),
             ProjectHelper.GetCurrentVersion(), packageName);
@@ -59,12 +59,8 @@ public class PackageCommand : ICommand<PackageOptions>
         foreach (var project in new[]
                      { "NAPS2.Sdk", "NAPS2.Lib", "NAPS2.App.Worker", "NAPS2.App.WinForms", "NAPS2.App.Console" })
         {
-            // TODO: We shouldn't do a fallback here, it should be explicit based on the project
-            var buildPath = Path.Combine(Paths.SolutionRoot, project, "bin", preferredConfig, "net462");
-            if (!Directory.Exists(buildPath))
-            {
-                buildPath = Path.Combine(Paths.SolutionRoot, project, "bin", "Release", "net462");
-            }
+            var config = project == "NAPS2.Lib" ? libConfig : "Release";
+            var buildPath = Path.Combine(Paths.SolutionRoot, project, "bin", config, "net462");
             if (!Directory.Exists(buildPath))
             {
                 throw new Exception($"Could not find build path. Maybe run 'n2 build' first? {buildPath}");
