@@ -172,7 +172,14 @@ internal class WiaScanDriver : IScanDriver
             using (_cancelToken.Register(transfer.Cancel))
             {
                 _scanEvents.PageStart();
-                transfer.Download();
+                try
+                {
+                    transfer.Download();
+                }
+                catch (WiaException e) when (e.ErrorCode == 0x210001)
+                {
+                    // This error code is undocumented but seems to mean "no more pages" which can be ignored
+                }
 
                 if (device.Version == WiaVersion.Wia10 && _options.PaperSource != PaperSource.Flatbed)
                 {
