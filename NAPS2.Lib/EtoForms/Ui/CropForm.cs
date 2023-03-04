@@ -5,6 +5,8 @@ namespace NAPS2.EtoForms.Ui;
 
 public class CropForm : ImageFormBase
 {
+    private static CropTransform? _lastTransform;
+
     private const int HANDLE_WIDTH = 3;
     private const int HANDLE_LENGTH = 20;
 
@@ -34,10 +36,36 @@ public class CropForm : ImageFormBase
         Overlay.MouseUp += Overlay_MouseUp;
     }
 
+    protected override void InitTransform()
+    {
+        if (_lastTransform != null && _lastTransform.OriginalWidth == ImageWidth &&
+            _lastTransform.OriginalHeight == ImageHeight)
+        {
+            _realL = _lastTransform.Left;
+            _realR = _lastTransform.Right;
+            _realT = _lastTransform.Top;
+            _realB = _lastTransform.Bottom;
+            _cropL = _realL / ImageWidth;
+            _cropR = _realR / ImageWidth;
+            _cropT = _realT / ImageHeight;
+            _cropB = _realB / ImageHeight;
+        }
+    }
+
+    protected override void TransformSaved()
+    {
+        _lastTransform = (CropTransform) Transforms.Single();
+    }
+
     protected override void ResetTransform()
     {
         _cropT = _cropL = _cropB = _cropR = _realT = _realL = _realB = _realR = 0;
         Overlay.Invalidate();
+    }
+
+    protected override IMemoryImage RenderPreview()
+    {
+        return WorkingImage!.Clone();
     }
 
     protected override IEnumerable<Transform> Transforms =>
