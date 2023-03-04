@@ -8,7 +8,9 @@ public class CropForm : ImageFormBase
     private static CropTransform? _lastTransform;
 
     private const int HANDLE_WIDTH = 3;
-    private const int HANDLE_LENGTH = 20;
+    private const int HANDLE_LENGTH = 30;
+    // The user can click/drag the handle even if they miss a bit
+    private const int GRAB_HANDLE_LENGTH = 45;
 
     // TODO: Textboxes for direct editing
 
@@ -21,8 +23,8 @@ public class CropForm : ImageFormBase
     // Crop amounts from each side as pixels of the image to be cropped (updated on mouse up)
     private float _realL, _realR, _realT, _realB;
 
-    // Whether the given crop handle is currently being moved by the user (multiple can be true for corners)
-    private bool _activeT, _activeL, _activeB, _activeR;
+    // The crop handle currently being moved by the user
+    private Handle _activeHandle;
 
     public CropForm(Naps2Config config, ThumbnailController thumbnailController) :
         base(config, thumbnailController)
@@ -82,6 +84,16 @@ public class CropForm : ImageFormBase
 
     private void Overlay_MouseDown(object? sender, MouseEventArgs e)
     {
+        _activeHandle = GetHandleUnderMouse(e);
+        if (_activeHandle != Handle.None)
+        {
+            _mouseOrigin = e.Location;
+        }
+        Overlay.Invalidate();
+    }
+
+    private Handle GetHandleUnderMouse(MouseEventArgs e)
+    {
         // We calculate the distance between the mouse and each handle side
         // The 0.1 offset is to provide a bit of affinity so that if the crop size is 0 (so all distances are the same),
         // you can still e.g. pick the top-left handle if you put the mouse a bit top-left of it.
@@ -97,20 +109,19 @@ public class CropForm : ImageFormBase
         var dxM = Math.Abs(e.Location.X - (l + r) / 2);
         var dxMin = Math.Min(Math.Min(dxL, dxR), dxM);
         var dyMin = Math.Min(Math.Min(dyT, dyB), dyM);
-        if (dxMin < HANDLE_LENGTH && dyMin < HANDLE_LENGTH)
+        if (dxMin < GRAB_HANDLE_LENGTH && dyMin < GRAB_HANDLE_LENGTH)
         {
             // ReSharper disable CompareOfFloatsByEqualityOperator
-            if (dyT == dyMin && dxL == dxMin) _activeT = _activeL = true;
-            else if (dyT == dyMin && dxR == dxMin) _activeT = _activeR = true;
-            else if (dyB == dyMin && dxL == dxMin) _activeB = _activeL = true;
-            else if (dyB == dyMin && dxR == dxMin) _activeB = _activeR = true;
-            else if (dyT == dyMin && dxM == dxMin) _activeT = true;
-            else if (dyM == dyMin && dxL == dxMin) _activeL = true;
-            else if (dyB == dyMin && dxM == dxMin) _activeB = true;
-            else if (dyM == dyMin && dxR == dxMin) _activeR = true;
-            _mouseOrigin = e.Location;
+            if (dyT == dyMin && dxL == dxMin) return Handle.TopLeft;
+            if (dyT == dyMin && dxR == dxMin) return Handle.TopRight;
+            if (dyB == dyMin && dxL == dxMin) return Handle.BottomLeft;
+            if (dyB == dyMin && dxR == dxMin) return Handle.BottomRight;
+            if (dyT == dyMin && dxM == dxMin) return Handle.Top;
+            if (dyM == dyMin && dxL == dxMin) return Handle.Left;
+            if (dyB == dyMin && dxM == dxMin) return Handle.Bottom;
+            if (dyM == dyMin && dxR == dxMin) return Handle.Right;
         }
-        Overlay.Invalidate();
+        return Handle.None;
     }
 
     private void Overlay_MouseUp(object? sender, MouseEventArgs e)
@@ -119,26 +130,26 @@ public class CropForm : ImageFormBase
         _realB = _cropB * ImageHeight;
         _realL = _cropL * ImageWidth;
         _realR = _cropR * ImageWidth;
-        _activeT = _activeL = _activeB = _activeR = false;
+        _activeHandle = Handle.None;
         Overlay.Invalidate();
     }
 
     private void UpdateCrop(PointF mousePos)
     {
         var delta = mousePos - _mouseOrigin;
-        if (_activeT)
+        if (_activeHandle.HasFlag(Handle.Top))
         {
             _cropT = (_realT / ImageHeight + delta.Y / _overlayH).Clamp(0, 1 - _cropB);
         }
-        if (_activeR)
+        if (_activeHandle.HasFlag(Handle.Right))
         {
             _cropR = (_realR / ImageWidth - delta.X / _overlayW).Clamp(0, 1 - _cropL);
         }
-        if (_activeB)
+        if (_activeHandle.HasFlag(Handle.Bottom))
         {
             _cropB = (_realB / ImageHeight - delta.Y / _overlayH).Clamp(0, 1 - _cropT);
         }
-        if (_activeL)
+        if (_activeHandle.HasFlag(Handle.Left))
         {
             _cropL = (_realL / ImageWidth + delta.X / _overlayW).Clamp(0, 1 - _cropR);
         }
@@ -146,8 +157,9 @@ public class CropForm : ImageFormBase
 
     private void Overlay_MouseMove(object? sender, MouseEventArgs e)
     {
-        // TODO: Update cursor based on proximity to handle & state
-        Overlay.Cursor = Cursors.Crosshair;
+        Overlay.Cursor = _activeHandle == Handle.None && GetHandleUnderMouse(e) == Handle.None
+            ? Cursors.Crosshair
+            : Cursors.Pointer;
         UpdateCrop(e.Location);
         Overlay.Invalidate();
     }
@@ -210,5 +222,19 @@ public class CropForm : ImageFormBase
         e.Graphics.DrawLine(handlePen, x2, yMid - HANDLE_LENGTH / 2f, x2, yMid + HANDLE_LENGTH / 2f);
         e.Graphics.DrawLine(handlePen, xMid - HANDLE_LENGTH / 2f, y1, xMid + HANDLE_LENGTH / 2f, y1);
         e.Graphics.DrawLine(handlePen, xMid - HANDLE_LENGTH / 2f, y2, xMid + HANDLE_LENGTH / 2f, y2);
+    }
+
+    [Flags]
+    private enum Handle
+    {
+        None = 0,
+        Left = 1,
+        Right = 2,
+        Top = 4,
+        Bottom = 8,
+        TopLeft = Top | Left,
+        TopRight = Top | Right,
+        BottomLeft = Bottom | Left,
+        BottomRight = Bottom | Right
     }
 }
