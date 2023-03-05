@@ -1,4 +1,5 @@
 using NAPS2.Images.Bitwise;
+using NAPS2.Util;
 
 namespace NAPS2.Images.Storage;
 
@@ -168,11 +169,11 @@ public abstract class AbstractImageTransformer<TImage> where TImage : IMemoryIma
         double xScale = image.Width / (double) (transform.OriginalWidth ?? image.Width),
             yScale = image.Height / (double) (transform.OriginalHeight ?? image.Height);
 
-        int x = Clamp((int) Math.Round(transform.Left * xScale), 0, image.Width - 1);
-        int y = Clamp((int) Math.Round(transform.Top * yScale), 0, image.Height - 1);
-        int width = Clamp(image.Width - (int) Math.Round((transform.Left + transform.Right) * xScale), 1,
+        int x = ((int) Math.Round(transform.Left * xScale)).Clamp(0, image.Width - 1);
+        int y = ((int) Math.Round(transform.Top * yScale)).Clamp(0, image.Height - 1);
+        int width = (image.Width - (int) Math.Round((transform.Left + transform.Right) * xScale)).Clamp(1,
             image.Width - x);
-        int height = Clamp(image.Height - (int) Math.Round((transform.Top + transform.Bottom) * yScale), 1,
+        int height = (image.Height - (int) Math.Round((transform.Top + transform.Bottom) * yScale)).Clamp(1,
             image.Height - y);
 
         var result = ImageContext.Create(width, height, image.PixelFormat);
@@ -187,19 +188,6 @@ public abstract class AbstractImageTransformer<TImage> where TImage : IMemoryIma
         image.Dispose();
 
         return (TImage) result;
-    }
-
-    private int Clamp(int val, int min, int max)
-    {
-        if (val.CompareTo(min) < 0)
-        {
-            return min;
-        }
-        if (val.CompareTo(max) > 0)
-        {
-            return max;
-        }
-        return val;
     }
 
     protected virtual TImage PerformTransform(TImage image, ScaleTransform transform)
