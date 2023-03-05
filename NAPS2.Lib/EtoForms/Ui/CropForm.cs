@@ -11,6 +11,7 @@ public class CropForm : ImageFormBase
     private const int HANDLE_LENGTH = 30;
     // The user can click/drag the handle even if they miss a bit
     private const int GRAB_HANDLE_LENGTH = 45;
+    private const int FREEFORM_MIN_SIZE = 10;
 
     // TODO: Textboxes for direct editing
 
@@ -25,6 +26,9 @@ public class CropForm : ImageFormBase
 
     // The crop handle currently being moved by the user
     private Handle _activeHandle;
+
+    private bool _freeformAvailable;
+    private bool _freeformActive;
 
     public CropForm(Naps2Config config, ThumbnailController thumbnailController) :
         base(config, thumbnailController)
@@ -85,10 +89,11 @@ public class CropForm : ImageFormBase
     private void Overlay_MouseDown(object? sender, MouseEventArgs e)
     {
         _activeHandle = GetHandleUnderMouse(e);
-        if (_activeHandle != Handle.None)
+        if (_activeHandle == Handle.None)
         {
-            _mouseOrigin = e.Location;
+            _freeformAvailable = true;
         }
+        _mouseOrigin = e.Location;
         Overlay.Invalidate();
     }
 
@@ -131,35 +136,70 @@ public class CropForm : ImageFormBase
         _realL = _cropL * ImageWidth;
         _realR = _cropR * ImageWidth;
         _activeHandle = Handle.None;
+        _freeformAvailable = false;
+        _freeformActive = false;
         Overlay.Invalidate();
     }
 
     private void UpdateCrop(PointF mousePos)
     {
         var delta = mousePos - _mouseOrigin;
-        if (_activeHandle.HasFlag(Handle.Top))
+        if (_freeformActive)
         {
-            _cropT = (_realT / ImageHeight + delta.Y / _overlayH).Clamp(0, 1 - _cropB);
+            var origin = _mouseOrigin - new PointF(_overlayL, _overlayT);
+            var current = mousePos - new PointF(_overlayL, _overlayT);
+            if (delta.Y > 0)
+            {
+                _cropT = (origin.Y / _overlayH).Clamp(0, 1);
+                _cropB = (1 - current.Y / _overlayH).Clamp(0, 1);
+            }
+            else
+            {
+                _cropT = (current.Y / _overlayH).Clamp(0, 1);
+                _cropB = (1 - origin.Y / _overlayH).Clamp(0, 1);
+            }
+            if (delta.X > 0)
+            {
+                _cropL = (origin.X / _overlayW).Clamp(0, 1);
+                _cropR = (1 - current.X / _overlayW).Clamp(0, 1);
+            }
+            else
+            {
+                _cropL = (current.X / _overlayW).Clamp(0, 1);
+                _cropR = (1 - origin.X / _overlayW).Clamp(0, 1);
+            }
         }
-        if (_activeHandle.HasFlag(Handle.Right))
+        else
         {
-            _cropR = (_realR / ImageWidth - delta.X / _overlayW).Clamp(0, 1 - _cropL);
-        }
-        if (_activeHandle.HasFlag(Handle.Bottom))
-        {
-            _cropB = (_realB / ImageHeight - delta.Y / _overlayH).Clamp(0, 1 - _cropT);
-        }
-        if (_activeHandle.HasFlag(Handle.Left))
-        {
-            _cropL = (_realL / ImageWidth + delta.X / _overlayW).Clamp(0, 1 - _cropR);
+            if (_activeHandle.HasFlag(Handle.Top))
+            {
+                _cropT = (_realT / ImageHeight + delta.Y / _overlayH).Clamp(0, 1 - _cropB);
+            }
+            if (_activeHandle.HasFlag(Handle.Right))
+            {
+                _cropR = (_realR / ImageWidth - delta.X / _overlayW).Clamp(0, 1 - _cropL);
+            }
+            if (_activeHandle.HasFlag(Handle.Bottom))
+            {
+                _cropB = (_realB / ImageHeight - delta.Y / _overlayH).Clamp(0, 1 - _cropT);
+            }
+            if (_activeHandle.HasFlag(Handle.Left))
+            {
+                _cropL = (_realL / ImageWidth + delta.X / _overlayW).Clamp(0, 1 - _cropR);
+            }
         }
     }
 
     private void Overlay_MouseMove(object? sender, MouseEventArgs e)
     {
-        Overlay.Cursor = _activeHandle == Handle.None && GetHandleUnderMouse(e) == Handle.None
+        Overlay.Cursor = _freeformAvailable || (_activeHandle == Handle.None && GetHandleUnderMouse(e) == Handle.None)
             ? Cursors.Crosshair
             : Cursors.Pointer;
+        if (_freeformAvailable && (Math.Abs(e.Location.Y - _mouseOrigin.Y) > FREEFORM_MIN_SIZE ||
+                                   Math.Abs(e.Location.X - _mouseOrigin.X) > FREEFORM_MIN_SIZE))
+        {
+            _freeformActive = true;
+        }
         UpdateCrop(e.Location);
         Overlay.Invalidate();
     }
@@ -178,7 +218,7 @@ public class CropForm : ImageFormBase
         var offsetR = _cropR * _overlayW;
         var offsetB = _cropB * _overlayH;
         var fillColor = new Color(0.3f, 0.3f, 0.3f, 0.5f);
-        var handlePen = new Pen(new Color(0, 0, 0), HANDLE_WIDTH);
+        var handlePen = new Pen(Colors.Black, HANDLE_WIDTH);
 
         // Fade out cropped-out portions of the image
         using var fade = new Bitmap((int) _overlayW, (int) _overlayH, PixelFormat.Format32bppRgba);
@@ -199,29 +239,37 @@ public class CropForm : ImageFormBase
         var xMid = (x1 + x2) / 2;
         var yMid = (y1 + y2) / 2;
 
-        // Draw corner handles
-        e.Graphics.DrawLines(handlePen,
-            new PointF(x1, y1 + HANDLE_LENGTH),
-            new PointF(x1, y1),
-            new PointF(x1 + HANDLE_LENGTH, y1));
-        e.Graphics.DrawLines(handlePen,
-            new PointF(x1, y2 - HANDLE_LENGTH),
-            new PointF(x1, y2),
-            new PointF(x1 + HANDLE_LENGTH, y2));
-        e.Graphics.DrawLines(handlePen,
-            new PointF(x2, y1 + HANDLE_LENGTH),
-            new PointF(x2, y1),
-            new PointF(x2 - HANDLE_LENGTH, y1));
-        e.Graphics.DrawLines(handlePen,
-            new PointF(x2, y2 - HANDLE_LENGTH),
-            new PointF(x2, y2),
-            new PointF(x2 - HANDLE_LENGTH, y2));
+        if (_freeformActive)
+        {
+            // Draw border
+            e.Graphics.DrawRectangle(new Pen(Colors.Black), x1, y1, x2 - x1 - 1, y2 - y1 - 1);
+        }
+        else
+        {
+            // Draw corner handles
+            e.Graphics.DrawLines(handlePen,
+                new PointF(x1, y1 + HANDLE_LENGTH),
+                new PointF(x1, y1),
+                new PointF(x1 + HANDLE_LENGTH, y1));
+            e.Graphics.DrawLines(handlePen,
+                new PointF(x1, y2 - HANDLE_LENGTH),
+                new PointF(x1, y2),
+                new PointF(x1 + HANDLE_LENGTH, y2));
+            e.Graphics.DrawLines(handlePen,
+                new PointF(x2, y1 + HANDLE_LENGTH),
+                new PointF(x2, y1),
+                new PointF(x2 - HANDLE_LENGTH, y1));
+            e.Graphics.DrawLines(handlePen,
+                new PointF(x2, y2 - HANDLE_LENGTH),
+                new PointF(x2, y2),
+                new PointF(x2 - HANDLE_LENGTH, y2));
 
-        // Draw edge handles
-        e.Graphics.DrawLine(handlePen, x1, yMid - HANDLE_LENGTH / 2f, x1, yMid + HANDLE_LENGTH / 2f);
-        e.Graphics.DrawLine(handlePen, x2, yMid - HANDLE_LENGTH / 2f, x2, yMid + HANDLE_LENGTH / 2f);
-        e.Graphics.DrawLine(handlePen, xMid - HANDLE_LENGTH / 2f, y1, xMid + HANDLE_LENGTH / 2f, y1);
-        e.Graphics.DrawLine(handlePen, xMid - HANDLE_LENGTH / 2f, y2, xMid + HANDLE_LENGTH / 2f, y2);
+            // Draw edge handles
+            e.Graphics.DrawLine(handlePen, x1, yMid - HANDLE_LENGTH / 2f, x1, yMid + HANDLE_LENGTH / 2f);
+            e.Graphics.DrawLine(handlePen, x2, yMid - HANDLE_LENGTH / 2f, x2, yMid + HANDLE_LENGTH / 2f);
+            e.Graphics.DrawLine(handlePen, xMid - HANDLE_LENGTH / 2f, y1, xMid + HANDLE_LENGTH / 2f, y1);
+            e.Graphics.DrawLine(handlePen, xMid - HANDLE_LENGTH / 2f, y2, xMid + HANDLE_LENGTH / 2f, y2);
+        }
     }
 
     [Flags]
