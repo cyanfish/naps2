@@ -8,9 +8,8 @@ public class CropForm : ImageFormBase
     private static CropTransform? _lastTransform;
 
     private const int HANDLE_WIDTH = 3;
-    private const int HANDLE_LENGTH = 30;
-    // The user can click/drag the handle even if they miss a bit
-    private const int GRAB_HANDLE_LENGTH = 45;
+    private const double HANDLE_LENGTH_RATIO = 0.07;
+    private const int HANDLE_MIN_LENGTH = 30;
     private const int FREEFORM_MIN_SIZE = 10;
 
     // TODO: Textboxes for direct editing
@@ -41,6 +40,10 @@ public class CropForm : ImageFormBase
         Overlay.MouseMove += Overlay_MouseMove;
         Overlay.MouseUp += Overlay_MouseUp;
     }
+
+    // The handle length is proportional to the window size
+    private int HandleLength =>
+        (int) Math.Max(Math.Round(Math.Min(_overlayH, _overlayW) * HANDLE_LENGTH_RATIO), HANDLE_MIN_LENGTH);
 
     protected override void InitTransform()
     {
@@ -114,7 +117,8 @@ public class CropForm : ImageFormBase
         var dxM = Math.Abs(e.Location.X - (l + r) / 2);
         var dxMin = Math.Min(Math.Min(dxL, dxR), dxM);
         var dyMin = Math.Min(Math.Min(dyT, dyB), dyM);
-        if (dxMin < GRAB_HANDLE_LENGTH && dyMin < GRAB_HANDLE_LENGTH)
+        // The user can click/drag the handle even if they miss a bit
+        if (dxMin < HandleLength * 1.5 && dyMin < HandleLength * 1.5)
         {
             // ReSharper disable CompareOfFloatsByEqualityOperator
             if (dyT == dyMin && dxL == dxMin) return Handle.TopLeft;
@@ -242,8 +246,9 @@ public class CropForm : ImageFormBase
         var xMid = (x1 + x2) / 2;
         var yMid = (y1 + y2) / 2;
 
-        var xHandleLen = Math.Min(HANDLE_LENGTH, (x2 - x1) / 5);
-        var yHandleLen = Math.Min(HANDLE_LENGTH, (y2 - y1) / 5);
+        // For a small crop selection, we shrink the handles so they don't overlap
+        var xHandleLen = Math.Min(HandleLength, (x2 - x1) / 5);
+        var yHandleLen = Math.Min(HandleLength, (y2 - y1) / 5);
 
         if (_freeformActive)
         {
