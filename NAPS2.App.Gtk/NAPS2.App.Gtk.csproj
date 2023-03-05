@@ -22,7 +22,7 @@
 
     <ItemGroup>
         <PackageReference Include="NAPS2.Pdfium.Binaries" Version="1.0.0" />
-        <PackageReference Include="NAPS2.Tesseract.Binaries" Version="1.0.3" />
+        <PackageReference Include="NAPS2.Tesseract.Binaries" Version="1.0.4" />
 
         <ProjectReference Include="..\NAPS2.Lib.Gtk\NAPS2.Lib.Gtk.csproj" />
 
