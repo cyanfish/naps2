@@ -6,6 +6,7 @@ public class EtoDialogHelper : DialogHelper
 {
     private readonly Naps2Config _config;
     private readonly FileFilters _fileFilters;
+    private bool _addExt = EtoPlatform.Current.IsGtk;
 
     public EtoDialogHelper(Naps2Config config, FileFilters fileFilters)
     {
@@ -15,12 +16,17 @@ public class EtoDialogHelper : DialogHelper
 
     public override bool PromptToSavePdfOrImage(string? defaultPath, out string? savePath)
     {
+        var lastExt = _config.Get(c => c.LastPdfOrImageExt)?.ToLowerInvariant();
+        if (string.IsNullOrEmpty(lastExt))
+        {
+            lastExt = "pdf";
+        }
+        var defaultFileName = _addExt ? $".{lastExt}" : null;
         var sd = new SaveFileDialog
         {
-            FileName = Path.IsPathRooted(defaultPath) ? Path.GetFileName(defaultPath) : null
+            FileName = Path.IsPathRooted(defaultPath) ? Path.GetFileName(defaultPath) : defaultFileName
         };
-        var lastExt = _config.Get(c => c.LastPdfOrImageExt)?.ToLowerInvariant();
-        _fileFilters.Set(sd, FileFilterGroup.Pdf | FileFilterGroup.Image, lastExt ?? "pdf");
+        _fileFilters.Set(sd, FileFilterGroup.Pdf | FileFilterGroup.Image, lastExt);
         SetDir(sd, defaultPath);
         if (sd.ShowDialog(null) == DialogResult.Ok)
         {
@@ -34,9 +40,10 @@ public class EtoDialogHelper : DialogHelper
 
     public override bool PromptToSavePdf(string? defaultPath, out string? savePath)
     {
+        var defaultFileName = _addExt ? $".pdf" : null;
         var sd = new SaveFileDialog
         {
-            FileName = Path.IsPathRooted(defaultPath) ? Path.GetFileName(defaultPath) : null
+            FileName = Path.IsPathRooted(defaultPath) ? Path.GetFileName(defaultPath) : defaultFileName
         };
         _fileFilters.Set(sd, FileFilterGroup.Pdf);
         SetDir(sd, defaultPath);
@@ -51,12 +58,20 @@ public class EtoDialogHelper : DialogHelper
 
     public override bool PromptToSaveImage(string? defaultPath, out string? savePath)
     {
+        var lastExt = _config.Get(c => c.LastImageExt)?.ToLowerInvariant();
+        if (string.IsNullOrEmpty(lastExt))
+        {
+            lastExt = "jpg";
+        }
+        var defaultFileName = _addExt ? $".{lastExt}" : null;
         var sd = new SaveFileDialog
         {
-            FileName = Path.IsPathRooted(defaultPath) ? Path.GetFileName(defaultPath) : null
+            FileName = Path.IsPathRooted(defaultPath) ? Path.GetFileName(defaultPath) : defaultFileName
         };
-        var lastExt = _config.Get(c => c.LastImageExt)?.ToLowerInvariant();
-        _fileFilters.Set(sd, FileFilterGroup.Image, lastExt ?? "jpg");
+        var filterGroups = EtoPlatform.Current.IsGtk
+            ? FileFilterGroup.AllImages | FileFilterGroup.Image
+            : FileFilterGroup.Image;
+        _fileFilters.Set(sd, filterGroups, lastExt);
         SetDir(sd, defaultPath);
         if (sd.ShowDialog(null) == DialogResult.Ok)
         {
