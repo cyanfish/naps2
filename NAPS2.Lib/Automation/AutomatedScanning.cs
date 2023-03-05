@@ -397,7 +397,7 @@ public class AutomatedScanning
 
     private void AttachFilesInFolder(DirectoryInfo folder, EmailMessage message)
     {
-        foreach (var file in folder.EnumerateFiles())
+        foreach (var file in folder.EnumerateFiles().OrderBy(x => x.Name))
         {
             OutputVerbose(ConsoleResources.Attaching, file.Name);
             message.Attachments.Add(new EmailAttachment
