@@ -38,7 +38,7 @@ public abstract class ImageContext
             [0x42, 0x4D, ..] => ImageFileFormat.Bmp,
             [0x49, 0x49, 0x2A, 0x00, ..] => ImageFileFormat.Tiff,
             [0x4D, 0x4D, 0x00, 0x2A, ..] => ImageFileFormat.Tiff,
-            [0x6A, 0x50, 0x20, 0x20, ..] => ImageFileFormat.Jpeg2000,
+            [_, _, _, _, 0x6A, 0x50, 0x20, 0x20, ..] => ImageFileFormat.Jpeg2000,
             _ => ImageFileFormat.Unspecified
         };
     }
