@@ -220,17 +220,20 @@ public class CropForm : ImageFormBase
         var fillColor = new Color(0.3f, 0.3f, 0.3f, 0.5f);
         var handlePen = new Pen(Colors.Black, HANDLE_WIDTH);
 
-        // Fade out cropped-out portions of the image
-        using var fade = new Bitmap((int) _overlayW, (int) _overlayH, PixelFormat.Format32bppRgba);
-        var fadeGraphics = new Graphics(fade);
-        fadeGraphics.FillRectangle(fillColor, 0, 0, _overlayW, _overlayH);
-        fadeGraphics.SetClip(new RectangleF(
-            offsetL, offsetT,
-            _overlayW - offsetL - offsetR,
-            _overlayH - offsetT - offsetB));
-        fadeGraphics.Clear();
-        fadeGraphics.Dispose();
-        e.Graphics.DrawImage(fade, _overlayL, _overlayT);
+        if (_overlayW >= 1 && _overlayH >= 1)
+        {
+            // Fade out cropped-out portions of the image
+            using var fade = new Bitmap((int) _overlayW, (int) _overlayH, PixelFormat.Format32bppRgba);
+            var fadeGraphics = new Graphics(fade);
+            fadeGraphics.FillRectangle(fillColor, 0, 0, _overlayW, _overlayH);
+            fadeGraphics.SetClip(new RectangleF(
+                offsetL, offsetT,
+                _overlayW - offsetL - offsetR,
+                _overlayH - offsetT - offsetB));
+            fadeGraphics.Clear();
+            fadeGraphics.Dispose();
+            e.Graphics.DrawImage(fade, _overlayL, _overlayT);
+        }
 
         var x1 = _overlayL + offsetL - HANDLE_WIDTH / 2f;
         var y1 = _overlayT + offsetT - HANDLE_WIDTH / 2f;
@@ -238,6 +241,9 @@ public class CropForm : ImageFormBase
         var y2 = _overlayB - offsetB + HANDLE_WIDTH / 2f - 0.5f;
         var xMid = (x1 + x2) / 2;
         var yMid = (y1 + y2) / 2;
+
+        var xHandleLen = Math.Min(HANDLE_LENGTH, (x2 - x1) / 5);
+        var yHandleLen = Math.Min(HANDLE_LENGTH, (y2 - y1) / 5);
 
         if (_freeformActive)
         {
@@ -248,27 +254,27 @@ public class CropForm : ImageFormBase
         {
             // Draw corner handles
             e.Graphics.DrawLines(handlePen,
-                new PointF(x1, y1 + HANDLE_LENGTH),
+                new PointF(x1, y1 + yHandleLen),
                 new PointF(x1, y1),
-                new PointF(x1 + HANDLE_LENGTH, y1));
+                new PointF(x1 + xHandleLen, y1));
             e.Graphics.DrawLines(handlePen,
-                new PointF(x1, y2 - HANDLE_LENGTH),
+                new PointF(x1, y2 - yHandleLen),
                 new PointF(x1, y2),
-                new PointF(x1 + HANDLE_LENGTH, y2));
+                new PointF(x1 + xHandleLen, y2));
             e.Graphics.DrawLines(handlePen,
-                new PointF(x2, y1 + HANDLE_LENGTH),
+                new PointF(x2, y1 + yHandleLen),
                 new PointF(x2, y1),
-                new PointF(x2 - HANDLE_LENGTH, y1));
+                new PointF(x2 - xHandleLen, y1));
             e.Graphics.DrawLines(handlePen,
-                new PointF(x2, y2 - HANDLE_LENGTH),
+                new PointF(x2, y2 - yHandleLen),
                 new PointF(x2, y2),
-                new PointF(x2 - HANDLE_LENGTH, y2));
+                new PointF(x2 - xHandleLen, y2));
 
             // Draw edge handles
-            e.Graphics.DrawLine(handlePen, x1, yMid - HANDLE_LENGTH / 2f, x1, yMid + HANDLE_LENGTH / 2f);
-            e.Graphics.DrawLine(handlePen, x2, yMid - HANDLE_LENGTH / 2f, x2, yMid + HANDLE_LENGTH / 2f);
-            e.Graphics.DrawLine(handlePen, xMid - HANDLE_LENGTH / 2f, y1, xMid + HANDLE_LENGTH / 2f, y1);
-            e.Graphics.DrawLine(handlePen, xMid - HANDLE_LENGTH / 2f, y2, xMid + HANDLE_LENGTH / 2f, y2);
+            e.Graphics.DrawLine(handlePen, x1, yMid - yHandleLen / 2f, x1, yMid + yHandleLen / 2f);
+            e.Graphics.DrawLine(handlePen, x2, yMid - yHandleLen / 2f, x2, yMid + yHandleLen / 2f);
+            e.Graphics.DrawLine(handlePen, xMid - xHandleLen / 2f, y1, xMid + xHandleLen / 2f, y1);
+            e.Graphics.DrawLine(handlePen, xMid - xHandleLen / 2f, y2, xMid + xHandleLen / 2f, y2);
         }
     }
 
