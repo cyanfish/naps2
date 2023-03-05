@@ -28,20 +28,23 @@ public class PackageCommand : ICommand<PackageOptions>
                 case PackageType.Exe:
                     InnoSetupPackager.PackageExe(GetPackageInfoForConfig("Release"));
                     break;
+                case PackageType.Msi:
+                    WixToolsetPackager.PackageMsi(GetPackageInfoForConfig("Release-Msi"));
+                    break;
+                case PackageType.Zip:
+                    ZipArchivePackager.PackageZip(GetPackageInfoForConfig("Release-Zip"));
+                    break;
                 case PackageType.Deb:
                     DebPackager.PackageDeb(GetPackageInfoForConfig("Release-Linux"));
+                    break;
+                case PackageType.Rpm:
+                    RpmPackager.PackageRpm(GetPackageInfoForConfig("Release-Linux"));
                     break;
                 case PackageType.Flatpak:
                     FlatpakPackager.Package(GetPackageInfoForConfig("Release-Linux"), opts.NoPre);
                     break;
                 case PackageType.Pkg:
                     MacPackager.Package(GetPackageInfoForConfig("Release"), opts.NoSign, opts.NoNotarize);
-                    break;
-                case PackageType.Msi:
-                    WixToolsetPackager.PackageMsi(GetPackageInfoForConfig("Release-Msi"));
-                    break;
-                case PackageType.Zip:
-                    ZipArchivePackager.PackageZip(GetPackageInfoForConfig("Release-Zip"));
                     break;
             }
         }

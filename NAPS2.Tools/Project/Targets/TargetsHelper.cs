@@ -116,6 +116,13 @@ public static class TargetsHelper
                         yield return new PackageTarget(PackageType.Deb, Platform.Linux);
                     }
                 }
+                if ((allPkg || packageType == "rpm") && (!requireCompatiblePlatform || OperatingSystem.IsLinux()))
+                {
+                    if (allPlat || platform == "linux")
+                    {
+                        yield return new PackageTarget(PackageType.Rpm, Platform.Linux);
+                    }
+                }
                 if ((allPkg || packageType == "pkg") && (!requireCompatiblePlatform || OperatingSystem.IsMacOS()))
                 {
                     if ((allPlat || platform == "mac") && (!requireCompatiblePlatform ||
