@@ -405,6 +405,7 @@ public class PdfExporter : IPdfExporter
             var info = GetTextDrawInfo(page, gfx, ocrResult, element);
             if (info == null) continue;
 
+            // TODO: We should embed the font data, both for PDF compatibility (e.g. PDF/A) and for Linux support 
             var textObj = pdfiumDocument.NewText("TimesNewRoman", info.FontSize);
             textObj.TextRenderMode = TextRenderMode.Invisible;
             textObj.SetText(info.Text);
@@ -426,7 +427,7 @@ public class PdfExporter : IPdfExporter
         var adjustedFontSize = CalculateFontSize(element.Text, adjustedBounds, gfx);
         // Special case to avoid accidentally recognizing big lines as dashes/underscores
         if (adjustedFontSize > 100 && (element.Text == "-" || element.Text == "_")) return null;
-        var font = new XFont("Times New Roman", adjustedFontSize, XFontStyle.Regular,
+        var font = new XFont(GetFontName(), adjustedFontSize, XFontStyle.Regular,
             new XPdfFontOptions(PdfFontEncoding.Unicode));
         var adjustedTextSize = gfx.MeasureString(element.Text, font);
         var verticalOffset = (adjustedBounds.Height - adjustedTextSize.Height) / 2;
@@ -486,10 +487,24 @@ public class PdfExporter : IPdfExporter
     {
         int fontSizeGuess = Math.Max(1, (int) (adjustedBounds.Height));
         var measuredBoundsForGuess =
-            gfx.MeasureString(text, new XFont("Times New Roman", fontSizeGuess, XFontStyle.Regular));
+            gfx.MeasureString(text, new XFont(GetFontName(), fontSizeGuess, XFontStyle.Regular));
         double adjustmentFactor = adjustedBounds.Width / measuredBoundsForGuess.Width;
         int adjustedFontSize = Math.Max(1, (int) Math.Floor(fontSizeGuess * adjustmentFactor));
         return adjustedFontSize;
+    }
+
+    private static string GetFontName()
+    {
+#if NET6_0_OR_GREATER
+        if (OperatingSystem.IsLinux())
+        {
+            // Liberation Serif is broadly included in Linux distros and is designed to have the same measurements
+            // as Times New Roman.
+            // TODO: Maybe we should use Times New Roman if available?
+            return "Liberation Serif";
+        }
+#endif
+        return "Times New Roman";
     }
 
     private static bool IsPdfStorage(IImageStorage storage) => storage switch
