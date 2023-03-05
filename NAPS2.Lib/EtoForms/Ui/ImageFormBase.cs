@@ -167,15 +167,12 @@ public abstract class ImageFormBase : EtoDialogBase
         WorkingImage = imageToRender.Render();
 
         // Scale down the image to the screen size for better efficiency without losing much fidelity
-        var screen = Screen ?? Screen.PrimaryScreen;
-        if (screen != null)
+        var workingArea = GetScreenWorkingArea();
+        var widthRatio = WorkingImage.Width / workingArea.Width;
+        var heightRatio = WorkingImage.Height / workingArea.Height;
+        if (widthRatio > 1 || heightRatio > 1)
         {
-            var widthRatio = WorkingImage.Width / screen.WorkingArea.Width;
-            var heightRatio = WorkingImage.Height / screen.WorkingArea.Height;
-            if (widthRatio > 1 || heightRatio > 1)
-            {
-                WorkingImage = WorkingImage.PerformTransform(new ScaleTransform(1 / Math.Max(widthRatio, heightRatio)));
-            }
+            WorkingImage = WorkingImage.PerformTransform(new ScaleTransform(1 / Math.Max(widthRatio, heightRatio)));
         }
 
         DisplayImage = WorkingImage.Clone();
@@ -183,6 +180,25 @@ public abstract class ImageFormBase : EtoDialogBase
         ImageHeight = DisplayImage.Height;
         InitTransform();
         UpdatePreviewBox();
+    }
+
+    private RectangleF GetScreenWorkingArea()
+    {
+        try
+        {
+            var screen = Screen ?? Screen.PrimaryScreen;
+            if (screen != null)
+            {
+                return screen.WorkingArea;
+            }
+        }
+        catch (Exception)
+        {
+            // On Linux sometimes we can't get the working area
+        }
+
+        // Assume 1080p screen by default
+        return new RectangleF(0, 0, 1920, 1080);
     }
 
     protected void UpdatePreviewBox()
