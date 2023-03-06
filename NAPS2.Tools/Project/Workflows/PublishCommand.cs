@@ -9,6 +9,10 @@ public class PublishCommand : ICommand<PublishOptions>
     public int Run(PublishOptions opts)
     {
         new CleanCommand().Run(new CleanOptions());
+        new BuildCommand().Run(new BuildOptions
+        {
+            BuildType = "debug"
+        });
         foreach (var buildType in TargetsHelper.GetBuildTypesFromPackageType(opts.PackageType))
         {
             new BuildCommand().Run(new BuildOptions
