@@ -81,6 +81,6 @@ public class ShareCommand : ICommand<ShareOptions>
     private static IEnumerable<FileInfo> GetFiles(string folderPath)
     {
         return new DirectoryInfo(folderPath).EnumerateFiles()
-            .Where(x => x.Extension is ".exe" or ".msi" or ".zip" or ".pkg" or ".flatpak");
+            .Where(x => x.Extension is ".exe" or ".msi" or ".zip" or ".pkg" or ".flatpak" or ".deb" or ".rpm");
     }
 }
