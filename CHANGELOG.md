@@ -1,3 +1,11 @@
+Changes in 7.0b5:
+- Added 2400/4800 dpi options
+- Linux: Added .deb/.rpm packages
+- Sane: Show devices incrementally (only with Mac / Linux flatpak)
+- Crop improvements
+- Fixed formatting for OCR of non-NAPS2 PDFs
+- Bug fixes
+
 Changes in 7.0b4:
 - Twain: Changed default transfer mode
   - "Alternative Transfer" has been renamed "Memory Transfer" and is now used when "Default" is selected
