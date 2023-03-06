@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2023-02-06 03:29\n"
+"PO-Revision-Date: 2023-03-06 01:43\n"
 "Last-Translator: \n"
 "Language-Team: Romanian\n"
 "Language: ro\n"
@@ -19,41 +19,9 @@ msgstr ""
 "X-Crowdin-File: templates.pot\n"
 "X-Crowdin-File-ID: 75\n"
 
-#: SettingsResources.resx$Dpi_100$Message
-msgid "100 dpi"
-msgstr ""
-
-#: SettingsResources.resx$Dpi_1200$Message
-msgid "1200 dpi"
-msgstr ""
-
-#: SettingsResources.resx$Dpi_150$Message
-msgid "150 dpi"
-msgstr ""
-
-#: SettingsResources.resx$Dpi_200$Message
-msgid "200 dpi"
-msgstr ""
-
 #: SettingsResources.resx$BitDepth_24Color$Message
 msgid "24-bit Color"
 msgstr "Color pe 24 biți"
-
-#: SettingsResources.resx$Dpi_300$Message
-msgid "300 dpi"
-msgstr ""
-
-#: SettingsResources.resx$Dpi_400$Message
-msgid "400 dpi"
-msgstr ""
-
-#: SettingsResources.resx$Dpi_600$Message
-msgid "600 dpi"
-msgstr ""
-
-#: SettingsResources.resx$Dpi_800$Message
-msgid "800 dpi"
-msgstr ""
 
 #: SettingsResources.resx$PageSize_A3$Message
 msgid "A3 (297x420 mm)"
@@ -132,17 +100,9 @@ msgstr "Deintercalare alternativă"
 msgid "Alternate Interleave"
 msgstr ""
 
-#: SettingsResources.resx$TwainImpl_MemXfer$Message
-msgid "Alternative Transfer"
-msgstr "Transfer alternativ"
-
 #: MiscResources.resx$PdfImportComponentNeeded$Message
 msgid "An additional component is needed to import this PDF file. Would you like to download it now?"
 msgstr "Este necesară o nouă componentă pentru a putea importa acest fișier PDF. O adăugăm acum?"
-
-#: MiscResources.resx$UpdateError$Message
-msgid "An error occurred when trying to install the update."
-msgstr "A intervenit o eroare la instalarea actualizării."
 
 #: SdkResources.resx$OcrError$Message
 msgid "An error occurred running OCR."
@@ -155,6 +115,10 @@ msgstr "A survenit o eroare la încercarea de autorizare."
 #: MiscResources.resx$AutoSaveError$Message
 msgid "An error occurred when trying to auto save."
 msgstr "A apărut o eroare în timpul salvării automate."
+
+#: MiscResources.resx$UpdateError$Message
+msgid "An error occurred when trying to install the update."
+msgstr "A intervenit o eroare la instalarea actualizării."
 
 #: MiscResources.resx$ErrorSaving$Message
 msgid "An error occurred when trying to save the file."
@@ -531,6 +495,18 @@ msgstr "Progresul descărcării"
 msgid "Duplex"
 msgstr "Fată-verso"
 
+#: UiStrings.resx$EsclDriver$Message
+msgid "ESCL Driver"
+msgstr ""
+
+#: UiStrings.resx$EsclNetworkDriver$Message
+msgid "ESCL Network Driver"
+msgstr ""
+
+#: UiStrings.resx$EsclUsbDriver$Message
+msgid "ESCL USB Driver"
+msgstr ""
+
 #: UiStrings.resx$Edit$Message
 msgid "Edit"
 msgstr "Editare"
@@ -768,6 +744,10 @@ msgstr "Crează fișier PDF cu posibilitatea căutării în text"
 msgid "Maximum quality (large files)"
 msgstr "Calitate maximă (fișiere mari)"
 
+#: SettingsResources.resx$TwainImpl_MemXfer$Message
+msgid "Memory Transfer"
+msgstr ""
+
 #: UiStrings.resx$Metadata$Message
 msgid "Metadata"
 msgstr "Metadate"
@@ -821,6 +801,10 @@ msgstr "Nume (opțional)"
 #: MiscResources.resx$NameMissing$Message
 msgid "Name missing."
 msgstr "Lipsește numele."
+
+#: SettingsResources.resx$TwainImpl_NativeXfer$Message
+msgid "Native Transfer"
+msgstr ""
 
 #: UiStrings.resx$New$Message
 msgid "New"
@@ -1563,11 +1547,24 @@ msgstr ""
 msgid "{0} / {1} files"
 msgstr "0} / {1} files"
 
+#: SettingsResources.resx$DpiFormat$Message
+msgid "{0} dpi"
+msgstr ""
+
 #: UiStrings.resx$RecoverPrompt$Message
 msgid "{0} image(s) scanned on {1} at {2} may not have been saved, and are recoverable. Do you want to recover them?"
 msgstr "{0} imagini scanate în {1} la {2} nu au fost salvate și pot fi recuperate. Doriți să le recuperăm?"
 
 #: MiscResources.resx$ImagesSaved$Message
+msgid "{0} images saved."
+msgstr "{0} imagini salvate."
+
+#: MiscResources.resx$PdfStatus$Message
+#: UiStrings.resx$XOfY$Message
+msgid "{0} of {1}"
+msgstr "{0} din {1}"
+
+ImagesSaved$Message
 msgid "{0} images saved."
 msgstr "{0} imagini salvate."
 

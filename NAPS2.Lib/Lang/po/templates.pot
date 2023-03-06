@@ -13,40 +13,8 @@ msgstr ""
 "X-Generator: Translate Toolkit 1.13.0\n"
 "X-Poedit-SourceCharset: iso-8859-1\n"
 
-#: SettingsResources.resx$Dpi_100$Message
-msgid "100 dpi"
-msgstr ""
-
-#: SettingsResources.resx$Dpi_1200$Message
-msgid "1200 dpi"
-msgstr ""
-
-#: SettingsResources.resx$Dpi_150$Message
-msgid "150 dpi"
-msgstr ""
-
-#: SettingsResources.resx$Dpi_200$Message
-msgid "200 dpi"
-msgstr ""
-
 #: SettingsResources.resx$BitDepth_24Color$Message
 msgid "24-bit Color"
-msgstr ""
-
-#: SettingsResources.resx$Dpi_300$Message
-msgid "300 dpi"
-msgstr ""
-
-#: SettingsResources.resx$Dpi_400$Message
-msgid "400 dpi"
-msgstr ""
-
-#: SettingsResources.resx$Dpi_600$Message
-msgid "600 dpi"
-msgstr ""
-
-#: SettingsResources.resx$Dpi_800$Message
-msgid "800 dpi"
 msgstr ""
 
 #: SettingsResources.resx$PageSize_A3$Message

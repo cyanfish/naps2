@@ -21,29 +21,8 @@
   <data name="BitDepth_8Grayscale" xml:space="preserve">
     <value>تدرج الرمادي</value>
   </data>
-  <data name="Dpi_100" xml:space="preserve">
-    <value>100 نقطة لكل بوصة</value>
-  </data>
-  <data name="Dpi_1200" xml:space="preserve">
-    <value>1200 نقطة لكل بوصة</value>
-  </data>
-  <data name="Dpi_150" xml:space="preserve">
-    <value>150 نقطة لكل بوصة</value>
-  </data>
-  <data name="Dpi_200" xml:space="preserve">
-    <value>200 نقطة لكل بوصة</value>
-  </data>
-  <data name="Dpi_300" xml:space="preserve">
-    <value>300 نقطة لكل بوصة</value>
-  </data>
-  <data name="Dpi_400" xml:space="preserve">
-    <value>400 نقطة لكل بوصة</value>
-  </data>
-  <data name="Dpi_600" xml:space="preserve">
-    <value>600 نقطة لكل بوصة</value>
-  </data>
-  <data name="Dpi_800" xml:space="preserve">
-    <value>800 نقطة لكل بوصة</value>
+  <data name="DpiFormat" xml:space="preserve">
+    <value>{0} نقطة لكل بوصة</value>
   </data>
   <data name="EmailProviderType_CustomSmtp" xml:space="preserve">
     <value>بروتوكول نقل البريد البسيط المخصص</value>

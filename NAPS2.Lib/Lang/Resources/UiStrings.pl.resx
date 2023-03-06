@@ -243,6 +243,15 @@
   <data name="TwainDriver" xml:space="preserve">
     <value>Sterownik TWAIN</value>
   </data>
+  <data name="EsclDriver" xml:space="preserve">
+    <value>Sterownik ESCL</value>
+  </data>
+  <data name="EsclNetworkDriver" xml:space="preserve">
+    <value>Sterownik sieciowy ESCL</value>
+  </data>
+  <data name="EsclUsbDriver" xml:space="preserve">
+    <value>Sterownik USB ESCL</value>
+  </data>
   <data name="AppleDriver" xml:space="preserve">
     <value>Sterownik Apple</value>
   </data>

@@ -190,7 +190,7 @@
     <value>/ {0}</value>
   </data>
   <data name="BatchError" xml:space="preserve">
-    <value>An unknown error occurred during the batch scan.</value>
+    <value>Ismeretlen hiba történt a kötegelt lapolvasás során.</value>
   </data>
   <data name="BatchStatusCancelled" xml:space="preserve">
     <value>A kötegelt feldolgozás törlésre került.</value>
@@ -370,7 +370,7 @@
     <value>A frissítés ellenőrzése le van tiltva.</value>
   </data>
   <data name="UpdateError" xml:space="preserve">
-    <value>An error occured when trying to install the update.</value>
+    <value>Hiba történt a frissítés telepítésekor.</value>
   </data>
   <data name="Install" xml:space="preserve">
     <value>{0} telepítése</value>

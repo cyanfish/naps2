@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2023-02-06 03:29\n"
+"PO-Revision-Date: 2023-03-06 01:43\n"
 "Last-Translator: \n"
 "Language-Team: Ukrainian\n"
 "Language: uk\n"
@@ -19,41 +19,9 @@ msgstr ""
 "X-Crowdin-File: templates.pot\n"
 "X-Crowdin-File-ID: 75\n"
 
-#: SettingsResources.resx$Dpi_100$Message
-msgid "100 dpi"
-msgstr "100 т/д"
-
-#: SettingsResources.resx$Dpi_1200$Message
-msgid "1200 dpi"
-msgstr "1200 т/д"
-
-#: SettingsResources.resx$Dpi_150$Message
-msgid "150 dpi"
-msgstr "150 т/д"
-
-#: SettingsResources.resx$Dpi_200$Message
-msgid "200 dpi"
-msgstr "200 т/д"
-
 #: SettingsResources.resx$BitDepth_24Color$Message
 msgid "24-bit Color"
 msgstr "Кольорове 24-біти"
-
-#: SettingsResources.resx$Dpi_300$Message
-msgid "300 dpi"
-msgstr "300 т/д"
-
-#: SettingsResources.resx$Dpi_400$Message
-msgid "400 dpi"
-msgstr "400 т/д"
-
-#: SettingsResources.resx$Dpi_600$Message
-msgid "600 dpi"
-msgstr "600 т/д"
-
-#: SettingsResources.resx$Dpi_800$Message
-msgid "800 dpi"
-msgstr "800 т/д"
 
 #: SettingsResources.resx$PageSize_A3$Message
 msgid "A3 (297x420 mm)"
@@ -132,16 +100,8 @@ msgstr ""
 msgid "Alternate Interleave"
 msgstr ""
 
-#: SettingsResources.resx$TwainImpl_MemXfer$Message
-msgid "Alternative Transfer"
-msgstr ""
-
 #: MiscResources.resx$PdfImportComponentNeeded$Message
 msgid "An additional component is needed to import this PDF file. Would you like to download it now?"
-msgstr ""
-
-#: MiscResources.resx$UpdateError$Message
-msgid "An error occurred when trying to install the update."
 msgstr ""
 
 #: SdkResources.resx$OcrError$Message
@@ -154,6 +114,10 @@ msgstr ""
 
 #: MiscResources.resx$AutoSaveError$Message
 msgid "An error occurred when trying to auto save."
+msgstr ""
+
+#: MiscResources.resx$UpdateError$Message
+msgid "An error occurred when trying to install the update."
 msgstr ""
 
 #: MiscResources.resx$ErrorSaving$Message
@@ -531,6 +495,18 @@ msgstr "Поступ звантаження"
 msgid "Duplex"
 msgstr "Двосторонній"
 
+#: UiStrings.resx$EsclDriver$Message
+msgid "ESCL Driver"
+msgstr ""
+
+#: UiStrings.resx$EsclNetworkDriver$Message
+msgid "ESCL Network Driver"
+msgstr ""
+
+#: UiStrings.resx$EsclUsbDriver$Message
+msgid "ESCL USB Driver"
+msgstr ""
+
 #: UiStrings.resx$Edit$Message
 msgid "Edit"
 msgstr "Редагувати"
@@ -768,6 +744,10 @@ msgstr "Створити PDF файл з можливістю пошуку"
 msgid "Maximum quality (large files)"
 msgstr "Максимальна якість (великий розмір)"
 
+#: SettingsResources.resx$TwainImpl_MemXfer$Message
+msgid "Memory Transfer"
+msgstr ""
+
 #: UiStrings.resx$Metadata$Message
 msgid "Metadata"
 msgstr "Метадані"
@@ -821,6 +801,10 @@ msgstr ""
 #: MiscResources.resx$NameMissing$Message
 msgid "Name missing."
 msgstr "Відсутнє ім'я."
+
+#: SettingsResources.resx$TwainImpl_NativeXfer$Message
+msgid "Native Transfer"
+msgstr ""
 
 #: UiStrings.resx$New$Message
 msgid "New"
@@ -1563,9 +1547,24 @@ msgstr "{0} / {1} МБ"
 msgid "{0} / {1} files"
 msgstr "{0} / {1} файлів"
 
+#: SettingsResources.resx$DpiFormat$Message
+msgid "{0} dpi"
+msgstr "{0} т/д"
+
 #: UiStrings.resx$RecoverPrompt$Message
 msgid "{0} image(s) scanned on {1} at {2} may not have been saved, and are recoverable. Do you want to recover them?"
 msgstr "Зображення ({0} шт.), відскановані на {1} в {2}, можливо не були збережені та можуть бути відновлені. Бажаєте їх відновити?"
+
+#: MiscResources.resx$ImagesSaved$Message
+msgid "{0} images saved."
+msgstr ""
+
+#: MiscResources.resx$PdfStatus$Message
+#: UiStrings.resx$XOfY$Message
+msgid "{0} of {1}"
+msgstr "{0} з {1}"
+
+. Бажаєте їх відновити?"
 
 #: MiscResources.resx$ImagesSaved$Message
 msgid "{0} images saved."

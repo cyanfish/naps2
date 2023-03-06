@@ -16,7 +16,7 @@
     <value>O aplikaci</value>
   </data>
   <data name="CopyrightFormat" xml:space="preserve">
-    <value>Copyright {0} NAPS2 Contributors</value>
+    <value>Autorská práva {0} přispěvatelů NAPS2</value>
   </data>
   <data name="IconsFrom" xml:space="preserve">
     <value>Použité ikony:</value>
@@ -73,7 +73,7 @@
     <value>Profily</value>
   </data>
   <data name="Import" xml:space="preserve">
-    <value>Import</value>
+    <value>Importovat</value>
   </data>
   <data name="SavePdf" xml:space="preserve">
     <value>Uložit PDF</value>
@@ -118,7 +118,7 @@
     <value>Zaostřit</value>
   </data>
   <data name="DocumentCorrection" xml:space="preserve">
-    <value>Document Correction</value>
+    <value>Korekce dokumentu</value>
   </data>
   <data name="Reset" xml:space="preserve">
     <value>Resetovat</value>
@@ -166,16 +166,16 @@
     <value>Obrátit</value>
   </data>
   <data name="ReverseAll" xml:space="preserve">
-    <value>Reverse All</value>
+    <value>Obrátit vše</value>
   </data>
   <data name="ReverseSelected" xml:space="preserve">
-    <value>Reverse Selected</value>
+    <value>Obrátit vybrané</value>
   </data>
   <data name="Clear" xml:space="preserve">
     <value>Vymazat</value>
   </data>
   <data name="ClearAll" xml:space="preserve">
-    <value>Clear All</value>
+    <value>Smazat vše</value>
   </data>
   <data name="Language" xml:space="preserve">
     <value>Jazyk</value>
@@ -199,37 +199,37 @@
     <value>Stupnice s oknem</value>
   </data>
   <data name="Save" xml:space="preserve">
-    <value>Save</value>
+    <value>Uložit</value>
   </data>
   <data name="SaveAll" xml:space="preserve">
-    <value>Save All</value>
+    <value>Uložit vše</value>
   </data>
   <data name="SaveSelected" xml:space="preserve">
-    <value>Save Selected</value>
+    <value>Uložit vybrané</value>
   </data>
   <data name="SaveAllAsPdf" xml:space="preserve">
-    <value>Save All as PDF</value>
+    <value>Uložit vše jako PDF</value>
   </data>
   <data name="SaveSelectedAsPdf" xml:space="preserve">
-    <value>Save Selected as PDF</value>
+    <value>Uložit vybrané jako PDF</value>
   </data>
   <data name="SaveAllAsImages" xml:space="preserve">
-    <value>Save All as Images</value>
+    <value>Uložit vše jako obrázky</value>
   </data>
   <data name="SaveSelectedAsImages" xml:space="preserve">
-    <value>Save Selected as Images</value>
+    <value>Uložit vybrané jako obrázky</value>
   </data>
   <data name="EmailAll" xml:space="preserve">
-    <value>Email All</value>
+    <value>Odeslat vše</value>
   </data>
   <data name="EmailSelected" xml:space="preserve">
-    <value>Email Selected</value>
+    <value>Odeslat vybrané</value>
   </data>
   <data name="EmailAllAsPdf" xml:space="preserve">
-    <value>Email All as PDF</value>
+    <value>Odeslat vše jako PDF</value>
   </data>
   <data name="EmailSelectedAsPdf" xml:space="preserve">
-    <value>Email Selected as PDF</value>
+    <value>Odeslat vybrané jako PDF</value>
   </data>
   <data name="EditProfileFormTitle" xml:space="preserve">
     <value>Nastavení profilu</value>
@@ -243,8 +243,17 @@
   <data name="TwainDriver" xml:space="preserve">
     <value>Ovladač TWAIN</value>
   </data>
+  <data name="EsclDriver" xml:space="preserve">
+    <value>ESCL Driver</value>
+  </data>
+  <data name="EsclNetworkDriver" xml:space="preserve">
+    <value>ESCL Network Driver</value>
+  </data>
+  <data name="EsclUsbDriver" xml:space="preserve">
+    <value>ESCL USB Driver</value>
+  </data>
   <data name="AppleDriver" xml:space="preserve">
-    <value>Apple Driver</value>
+    <value>Ovladač Apple</value>
   </data>
   <data name="SaneDriver" xml:space="preserve">
     <value>SANE ovladač</value>
@@ -502,7 +511,7 @@
     <value>Automatické zvyšování čísla (2 číslice)</value>
   </data>
   <data name="AutoIncrementing1Digit" xml:space="preserve">
-    <value>Auto-incrementing number (1 digits)</value>
+    <value>Automatický přírůstek čísla (1 znak)</value>
   </data>
   <data name="FileNameLabel" xml:space="preserve">
     <value>Název souboru</value>
@@ -556,7 +565,7 @@
     <value>Heslo</value>
   </data>
   <data name="EncryptedFilePrompt" xml:space="preserve">
-    <value>The following file is encrypted and requires a password to open:</value>
+    <value>Následující soubor je zašifrován a k otevření vyžaduje heslo:</value>
   </data>
   <data name="PromptForFilePath" xml:space="preserve">
     <value>Výzva pro cestu k souboru</value>
@@ -688,6 +697,6 @@
     <value>Otevřít složku</value>
   </data>
   <data name="Tools" xml:space="preserve">
-    <value>Tools</value>
+    <value>Nástroje</value>
   </data>
 </root>

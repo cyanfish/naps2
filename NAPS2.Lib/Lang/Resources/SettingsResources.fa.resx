@@ -21,29 +21,8 @@
   <data name="BitDepth_8Grayscale" xml:space="preserve">
     <value>بی‌رنگ</value>
   </data>
-  <data name="Dpi_100" xml:space="preserve">
-    <value>۱۰۰ نقطه در اینچ</value>
-  </data>
-  <data name="Dpi_1200" xml:space="preserve">
-    <value>۱۲۰۰ نقطه در اینچ</value>
-  </data>
-  <data name="Dpi_150" xml:space="preserve">
-    <value>۱۵۰ نقطه در اینچ</value>
-  </data>
-  <data name="Dpi_200" xml:space="preserve">
-    <value>۲۰۰ نقطه در اینچ</value>
-  </data>
-  <data name="Dpi_300" xml:space="preserve">
-    <value>۳۰۰ نقطه در اینچ</value>
-  </data>
-  <data name="Dpi_400" xml:space="preserve">
-    <value>۴۰۰ نقطه در اینچ</value>
-  </data>
-  <data name="Dpi_600" xml:space="preserve">
-    <value>۶۰۰ نقطه در اینچ</value>
-  </data>
-  <data name="Dpi_800" xml:space="preserve">
-    <value>۸۰۰ نقطه در اینچ</value>
+  <data name="DpiFormat" xml:space="preserve">
+    <value>{0} نقطه در اینچ</value>
   </data>
   <data name="EmailProviderType_CustomSmtp" xml:space="preserve">
     <value>SMTP خاص</value>

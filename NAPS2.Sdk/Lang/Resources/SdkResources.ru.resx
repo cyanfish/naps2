@@ -37,7 +37,7 @@
     <value>Файл '{0}' не может быть импортирован.</value>
   </data>
   <data name="NoFeederSupport" xml:space="preserve">
-    <value>Выбранный сканер не поддерживает использование автоподатчика. Если ваш сканер имеет АПД, попробуйте другой драйвер..</value>
+    <value>Выбранный сканер не поддерживает использование автоподатчика. Если ваш сканер имеет АПД, попробуйте другой драйвер.</value>
   </data>
   <data name="NoPagesInFeeder" xml:space="preserve">
     <value>В податчике нет листов.</value>
@@ -70,9 +70,9 @@
     <value>Выбранный драйвер не поддерживается в этой системе.</value>
   </data>
   <data name="OcrError" xml:space="preserve">
-    <value>An error occurred running OCR.</value>
+    <value>При распознавании текста произошла ошибка.</value>
   </data>
   <data name="OcrTimeout" xml:space="preserve">
-    <value>The OCR operation timed out.</value>
+    <value>Время выполнения операции распознавания текста истекло.</value>
   </data>
 </root>

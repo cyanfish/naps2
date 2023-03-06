@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2023-02-06 03:29\n"
+"PO-Revision-Date: 2023-03-06 01:43\n"
 "Last-Translator: \n"
 "Language-Team: Catalan\n"
 "Language: ca\n"
@@ -19,41 +19,9 @@ msgstr ""
 "X-Crowdin-File: templates.pot\n"
 "X-Crowdin-File-ID: 75\n"
 
-#: SettingsResources.resx$Dpi_100$Message
-msgid "100 dpi"
-msgstr "100 ppp"
-
-#: SettingsResources.resx$Dpi_1200$Message
-msgid "1200 dpi"
-msgstr "1200 ppp"
-
-#: SettingsResources.resx$Dpi_150$Message
-msgid "150 dpi"
-msgstr "150 ppp"
-
-#: SettingsResources.resx$Dpi_200$Message
-msgid "200 dpi"
-msgstr "1200 ppp"
-
 #: SettingsResources.resx$BitDepth_24Color$Message
 msgid "24-bit Color"
 msgstr "Color de 24-bits"
-
-#: SettingsResources.resx$Dpi_300$Message
-msgid "300 dpi"
-msgstr "300 ppp"
-
-#: SettingsResources.resx$Dpi_400$Message
-msgid "400 dpi"
-msgstr "400 ppp"
-
-#: SettingsResources.resx$Dpi_600$Message
-msgid "600 dpi"
-msgstr "600 ppp"
-
-#: SettingsResources.resx$Dpi_800$Message
-msgid "800 dpi"
-msgstr "800 ppp"
 
 #: SettingsResources.resx$PageSize_A3$Message
 msgid "A3 (297x420 mm)"
@@ -132,21 +100,13 @@ msgstr "Desintercalat alternatiu"
 msgid "Alternate Interleave"
 msgstr "Intercalat alternatiu"
 
-#: SettingsResources.resx$TwainImpl_MemXfer$Message
-msgid "Alternative Transfer"
-msgstr "Baixada opcional"
-
 #: MiscResources.resx$PdfImportComponentNeeded$Message
 msgid "An additional component is needed to import this PDF file. Would you like to download it now?"
 msgstr "Es requereix un complement extra per importar aquest fitxer PDF. Voleu baixar-ho ara?"
 
-#: MiscResources.resx$UpdateError$Message
-msgid "An error occurred when trying to install the update."
-msgstr "S'ha produït un error en instal·lar l'actualització."
-
 #: SdkResources.resx$OcrError$Message
 msgid "An error occurred running OCR."
-msgstr ""
+msgstr "S'ha produït un error en iniciar l'OCR."
 
 #: MiscResources.resx$AuthError$Message
 msgid "An error occurred when trying to authorize."
@@ -155,6 +115,10 @@ msgstr "S'ha produït un error amb l'autorització."
 #: MiscResources.resx$AutoSaveError$Message
 msgid "An error occurred when trying to auto save."
 msgstr "S'ha produït un error amb el desat automàtic."
+
+#: MiscResources.resx$UpdateError$Message
+msgid "An error occurred when trying to install the update."
+msgstr "S'ha produït un error en instal·lar l'actualització."
 
 #: MiscResources.resx$ErrorSaving$Message
 msgid "An error occurred when trying to save the file."
@@ -179,7 +143,7 @@ msgstr "Encara s'està executant. Segur que voleu cancel·lar l'operació?"
 
 #: MiscResources.resx$BatchError$Message
 msgid "An unknown error occurred during the batch scan."
-msgstr ""
+msgstr "S'ha produït un error desconegut en l'escaneig per lots."
 
 #: MiscResources.resx$UpdateAvailable$Message
 msgid "An update is available."
@@ -191,7 +155,7 @@ msgstr "Hi ha una actualització de l'OCR disponible."
 
 #: UiStrings.resx$AppleDriver$Message
 msgid "Apple Driver"
-msgstr ""
+msgstr "Controlador d'Apple"
 
 #: UiStrings.resx$BrightnessContrastAfterScan$Message
 msgid "Apply brightness/contrast after scan"
@@ -252,7 +216,7 @@ msgstr "Opcions de desat automàtic"
 
 #: UiStrings.resx$AutoIncrementing1Digit$Message
 msgid "Auto-incrementing number (1 digits)"
-msgstr ""
+msgstr "Increment automàtic del número (1 dígit)"
 
 #: UiStrings.resx$AutoIncrementing2Digit$Message
 msgid "Auto-incrementing number (2 digits)"
@@ -531,13 +495,25 @@ msgstr "Progrés de la baixada"
 msgid "Duplex"
 msgstr "Dúplex"
 
+#: UiStrings.resx$EsclDriver$Message
+msgid "ESCL Driver"
+msgstr ""
+
+#: UiStrings.resx$EsclNetworkDriver$Message
+msgid "ESCL Network Driver"
+msgstr ""
+
+#: UiStrings.resx$EsclUsbDriver$Message
+msgid "ESCL USB Driver"
+msgstr ""
+
 #: UiStrings.resx$Edit$Message
 msgid "Edit"
 msgstr "Edita"
 
 #: UiStrings.resx$EmailAll$Message
 msgid "Email All"
-msgstr ""
+msgstr "Envia-ho tot"
 
 #: UiStrings.resx$EmailAllAsPdf$Message
 msgid "Email All as PDF"
@@ -546,7 +522,7 @@ msgstr "Envia-ho tot com a PDF per correu-e"
 #: MiscResources.resx$EmailPdf$Message
 #: UiStrings.resx$EmailPdf$Message
 msgid "Email PDF"
-msgstr ""
+msgstr "PDF per correu-e"
 
 #: MiscResources.resx$EmailPdfProgress$Message
 msgid "Email PDF Progress"
@@ -554,7 +530,7 @@ msgstr "Progrés d'enviament del PDF"
 
 #: UiStrings.resx$EmailSelected$Message
 msgid "Email Selected"
-msgstr ""
+msgstr "Seleccionat"
 
 #: UiStrings.resx$EmailSelectedAsPdf$Message
 msgid "Email Selected as PDF"
@@ -621,19 +597,19 @@ msgstr "Gira"
 
 #: UiStrings.resx$FlipDuplexedPages$Message
 msgid "Flip duplexed pages"
-msgstr ""
+msgstr "Gira les pàgines doblegades"
 
 #: UiStrings.resx$JpegQualityHelp$Message
 msgid "For high JPEG qualities (80+), also increase Image Quality in your profile for best results."
-msgstr ""
+msgstr "Per a obtenir imatges JPEG d'alta qualitat (80+), incrementeu també la resolució al perfil."
 
 #: MiscResources.resx$FileTypeGif$Message
 msgid "GIF File (*.gif)"
-msgstr ""
+msgstr "Fitxer GIF (*.gif)"
 
 #: UiStrings.resx$GetMoreLanguages$Message
 msgid "Get more languages"
-msgstr ""
+msgstr "Més idiomes"
 
 #: SettingsResources.resx$Source_Glass$Message
 msgid "Glass"
@@ -641,7 +617,7 @@ msgstr "Vidre"
 
 #: SettingsResources.resx$EmailProviderType_Gmail$Message
 msgid "Gmail"
-msgstr ""
+msgstr "Gmail"
 
 #: SettingsResources.resx$BitDepth_8Grayscale$Message
 msgid "Grayscale"
@@ -661,7 +637,7 @@ msgstr "To/Saturació"
 
 #: UiStrings.resx$IconsFrom$Message
 msgid "Icons from:"
-msgstr "Icons desde:"
+msgstr "Icones de:"
 
 #: UiStrings.resx$Image$Message
 msgid "Image"
@@ -722,15 +698,15 @@ msgstr "S'ha produït un error en la instal·lació."
 
 #: UiStrings.resx$Interleave$Message
 msgid "Interleave"
-msgstr ""
+msgstr "Intercala"
 
 #: MiscResources.resx$FileTypeJpeg$Message
 msgid "JPEG File (*.jpg, *.jpeg)"
-msgstr ""
+msgstr "Fitxer JPEG (*.jpg, *.jpeg)"
 
 #: MiscResources.resx$FileTypeJp2$Message
 msgid "JPEG2000 File (*.jp2, *.jpx)"
-msgstr ""
+msgstr "Fitxer JPEG2000 (*.jp2, *.jpx)"
 
 #: UiStrings.resx$JpegQuality$Message
 msgid "Jpeg Quality"
@@ -742,7 +718,7 @@ msgstr "Paraules clau:"
 
 #: SettingsResources.resx$TiffComp_Lzw$Message
 msgid "LZW"
-msgstr ""
+msgstr "LZW"
 
 #: UiStrings.resx$Language$Message
 msgid "Language"
@@ -767,6 +743,10 @@ msgstr "Crea documents PDF amb opció de cerca mitjançant l'OCR"
 #: UiStrings.resx$MaximumQuality$Message
 msgid "Maximum quality (large files)"
 msgstr "Qualitat màxima (fitxers grans)"
+
+#: SettingsResources.resx$TwainImpl_MemXfer$Message
+msgid "Memory Transfer"
+msgstr ""
 
 #: UiStrings.resx$Metadata$Message
 msgid "Metadata"
@@ -804,11 +784,11 @@ msgstr "Escaneig múltiple (demana entre cada escaneig)"
 #: SdkResources.resx$NAPS2$Message
 #: UiStrings.resx$Naps2$Message
 msgid "NAPS2"
-msgstr ""
+msgstr "NAPS2"
 
 #: UiStrings.resx$Naps2TitleFormat$Message
 msgid "NAPS2 - {0}"
-msgstr ""
+msgstr "NAPS2 - {0}"
 
 #: MiscResources.resx$DonatePrompt$Message
 msgid "NAPS2 is completely free. Consider making a donation."
@@ -821,6 +801,10 @@ msgstr "Nom (opcional)"
 #: MiscResources.resx$NameMissing$Message
 msgid "Name missing."
 msgstr "Manca el nom."
+
+#: SettingsResources.resx$TwainImpl_NativeXfer$Message
+msgid "Native Transfer"
+msgstr ""
 
 #: UiStrings.resx$New$Message
 msgid "New"
@@ -879,7 +863,7 @@ msgstr "Nombre d'escanejos:"
 
 #: UiStrings.resx$Ocr$Message
 msgid "OCR"
-msgstr ""
+msgstr "OCR"
 
 #: UiStrings.resx$OcrDownloadFormTitle$Message
 msgid "OCR Download"
@@ -964,19 +948,19 @@ msgstr "S'ha desat el PDF."
 
 #: SettingsResources.resx$PdfCompat_PdfA1B$Message
 msgid "PDF/A-1b"
-msgstr ""
+msgstr "PDF/A-1b"
 
 #: SettingsResources.resx$PdfCompat_PdfA2B$Message
 msgid "PDF/A-2b"
-msgstr ""
+msgstr "PDF/A-2b"
 
 #: SettingsResources.resx$PdfCompat_PdfA3B$Message
 msgid "PDF/A-3b"
-msgstr ""
+msgstr "PDF/A-3b"
 
 #: SettingsResources.resx$PdfCompat_PdfA3U$Message
 msgid "PDF/A-3u"
-msgstr ""
+msgstr "PDF/A-3u"
 
 #: MiscResources.resx$FileTypePng$Message
 msgid "PNG File (*.png)"
@@ -1043,7 +1027,7 @@ msgstr "Perfils"
 
 #: UiStrings.resx$PromptForFilePath$Message
 msgid "Prompt for file path"
-msgstr ""
+msgstr "Demana la ruta de destinació"
 
 #: UiStrings.resx$Provider$Message
 msgid "Provider"
@@ -1055,7 +1039,7 @@ msgstr ""
 
 #: UiStrings.resx$Recover$Message
 msgid "Recover"
-msgstr ""
+msgstr "Recupera"
 
 #: UiStrings.resx$RecoverFormTitle$Message
 msgid "Recover Scanned Images"
@@ -1095,15 +1079,15 @@ msgstr "Restaura als valors per defecte"
 
 #: UiStrings.resx$Reverse$Message
 msgid "Reverse"
-msgstr ""
+msgstr "Inverteix"
 
 #: UiStrings.resx$ReverseAll$Message
 msgid "Reverse All"
-msgstr ""
+msgstr "Inverteix-ho tot"
 
 #: UiStrings.resx$ReverseSelected$Message
 msgid "Reverse Selected"
-msgstr ""
+msgstr "Selecció inversa"
 
 #: UiStrings.resx$Revert$Message
 msgid "Revert"
@@ -1115,7 +1099,7 @@ msgstr "Dreta"
 
 #: UiStrings.resx$Rotate$Message
 msgid "Rotate"
-msgstr ""
+msgstr "Gira"
 
 #: UiStrings.resx$RotateLeft$Message
 msgid "Rotate Left"
@@ -1139,19 +1123,19 @@ msgstr "Controlador SANE"
 
 #: UiStrings.resx$Save$Message
 msgid "Save"
-msgstr ""
+msgstr "Desa"
 
 #: UiStrings.resx$SaveAll$Message
 msgid "Save All"
-msgstr ""
+msgstr "Desa-ho tot"
 
 #: UiStrings.resx$SaveAllAsImages$Message
 msgid "Save All as Images"
-msgstr ""
+msgstr "Desa com a imatges"
 
 #: UiStrings.resx$SaveAllAsPdf$Message
 msgid "Save All as PDF"
-msgstr ""
+msgstr "Desa com a PDF"
 
 #: MiscResources.resx$SaveImages$Message
 #: UiStrings.resx$SaveImages$Message
@@ -1173,15 +1157,15 @@ msgstr "Progrés del desat en PDF"
 
 #: UiStrings.resx$SaveSelected$Message
 msgid "Save Selected"
-msgstr ""
+msgstr "Desa la selecció"
 
 #: UiStrings.resx$SaveSelectedAsImages$Message
 msgid "Save Selected as Images"
-msgstr ""
+msgstr "Desa la selecció com a imatges"
 
 #: UiStrings.resx$SaveSelectedAsPdf$Message
 msgid "Save Selected as PDF"
-msgstr ""
+msgstr "Desa la selecció com a PDF"
 
 #: UiStrings.resx$SaveToSingleFile$Message
 msgid "Save to a single file"
@@ -1283,7 +1267,7 @@ msgstr "Un fitxer per cada pàgina"
 
 #: UiStrings.resx$SingleScan$Message
 msgid "Single scan"
-msgstr ""
+msgstr "Escaneig senzill"
 
 #: UiStrings.resx$SkipSavePrompt$Message
 msgid "Skip save prompt"
@@ -1320,7 +1304,7 @@ msgstr "No s'ha trobat el motor OCR. Assegureu-vos d'instal·lar el paquet neces
 
 #: SdkResources.resx$OcrTimeout$Message
 msgid "The OCR operation timed out."
-msgstr ""
+msgstr "S'ha excedit el temps d'espera d'OCR."
 
 #: MiscResources.resx$SaneNotAvailable$Message
 #: SdkResources.resx$SaneNotAvailable$Message
@@ -1407,7 +1391,7 @@ msgstr "Títol:"
 
 #: UiStrings.resx$Tools$Message
 msgid "Tools"
-msgstr ""
+msgstr "Eines"
 
 #: UiStrings.resx$TwainImplLabel$Message
 msgid "Twain Implementation:"
@@ -1415,11 +1399,11 @@ msgstr "Implementació Twain:"
 
 #: SettingsResources.resx$PageSize_Legal$Message
 msgid "US Legal (8.5x14 in)"
-msgstr ""
+msgstr "US Legal (8.5x14 in)"
 
 #: SettingsResources.resx$PageSize_Letter$Message
 msgid "US Letter (8.5x11 in)"
-msgstr ""
+msgstr "Carta US (8.5x11 in)"
 
 #: MiscResources.resx$UnsavedChanges$Message
 msgid "Unsaved Changes"
@@ -1488,7 +1472,7 @@ msgstr "Llindar del blanc"
 
 #: UiStrings.resx$WiaVersionLabel$Message
 msgid "Wia Version:"
-msgstr ""
+msgstr "Versió Wia:"
 
 #: UiStrings.resx$Year4Digit$Message
 msgid "Year"
@@ -1529,15 +1513,15 @@ msgstr "Allunya"
 
 #: SettingsResources.resx$PageSizeUnit_Centimetre$Message
 msgid "cm"
-msgstr ""
+msgstr "cm"
 
 #: SettingsResources.resx$PageSizeUnit_Inch$Message
 msgid "in"
-msgstr ""
+msgstr "in"
 
 #: SettingsResources.resx$PageSizeUnit_Millimetre$Message
 msgid "mm"
-msgstr ""
+msgstr "mm"
 
 #: MiscResources.resx$OfN$Message
 msgid "of {0}"
@@ -1545,15 +1529,15 @@ msgstr "de {0}"
 
 #: SettingsResources.resx$TwainImpl_X64$Message
 msgid "x64"
-msgstr ""
+msgstr "x64"
 
 #: MiscResources.resx$NamedPageSizeFormat$Message
 msgid "{0} ({1}x{2} {3})"
-msgstr ""
+msgstr "{0} ({1}x{2} {3})"
 
 #: MiscResources.resx$ProgressFormat$Message
 msgid "{0} / {1}"
-msgstr ""
+msgstr "{0} / {1}"
 
 #: MiscResources.resx$SizeProgress$Message
 msgid "{0} / {1} MB"
@@ -1562,6 +1546,10 @@ msgstr "{0}/{1} MB"
 #: MiscResources.resx$FilesProgressFormat$Message
 msgid "{0} / {1} files"
 msgstr "{0}/{1} fitxers"
+
+#: SettingsResources.resx$DpiFormat$Message
+msgid "{0} dpi"
+msgstr "{0} ppp"
 
 #: UiStrings.resx$RecoverPrompt$Message
 msgid "{0} image(s) scanned on {1} at {2} may not have been saved, and are recoverable. Do you want to recover them?"
@@ -1576,35 +1564,7 @@ msgstr "{0} imatges desades."
 msgid "{0} of {1}"
 msgstr "{0} de {1}"
 
-eUnit_Inch$Message
-msgid "in"
-msgstr ""
 
-#: SettingsResources.resx$PageSizeUnit_Millimetre$Message
-msgid "mm"
-msgstr ""
-
-#: MiscResources.resx$OfN$Message
-msgid "of {0}"
-msgstr "de {0}"
-
-#: SettingsResources.resx$TwainImpl_X64$Message
-msgid "x64"
-msgstr ""
-
-#: MiscResources.resx$NamedPageSizeFormat$Message
-msgid "{0} ({1}x{2} {3})"
-msgstr ""
-
-#: MiscResources.resx$ProgressFormat$Message
-msgid "{0} / {1}"
-msgstr ""
-
-#: MiscResources.resx$SizeProgress$Message
-msgid "{0} / {1} MB"
-msgstr "{0}/{1} MB"
-
-#: MiscResources.resx$FilesProgressFormat$Message
 msgid "{0} / {1} files"
 msgstr "{0}/{1} fitxers"
 

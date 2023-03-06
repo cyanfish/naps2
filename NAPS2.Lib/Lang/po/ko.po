@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2023-02-06 03:29\n"
+"PO-Revision-Date: 2023-03-06 01:43\n"
 "Last-Translator: \n"
 "Language-Team: Korean\n"
 "Language: ko\n"
@@ -19,41 +19,9 @@ msgstr ""
 "X-Crowdin-File: templates.pot\n"
 "X-Crowdin-File-ID: 75\n"
 
-#: SettingsResources.resx$Dpi_100$Message
-msgid "100 dpi"
-msgstr ""
-
-#: SettingsResources.resx$Dpi_1200$Message
-msgid "1200 dpi"
-msgstr ""
-
-#: SettingsResources.resx$Dpi_150$Message
-msgid "150 dpi"
-msgstr ""
-
-#: SettingsResources.resx$Dpi_200$Message
-msgid "200 dpi"
-msgstr ""
-
 #: SettingsResources.resx$BitDepth_24Color$Message
 msgid "24-bit Color"
 msgstr "24-비트 컬러"
-
-#: SettingsResources.resx$Dpi_300$Message
-msgid "300 dpi"
-msgstr ""
-
-#: SettingsResources.resx$Dpi_400$Message
-msgid "400 dpi"
-msgstr ""
-
-#: SettingsResources.resx$Dpi_600$Message
-msgid "600 dpi"
-msgstr ""
-
-#: SettingsResources.resx$Dpi_800$Message
-msgid "800 dpi"
-msgstr ""
 
 #: SettingsResources.resx$PageSize_A3$Message
 msgid "A3 (297x420 mm)"
@@ -132,17 +100,9 @@ msgstr "대체 디인터리브"
 msgid "Alternate Interleave"
 msgstr "대체 인터리브"
 
-#: SettingsResources.resx$TwainImpl_MemXfer$Message
-msgid "Alternative Transfer"
-msgstr "대체 전송"
-
 #: MiscResources.resx$PdfImportComponentNeeded$Message
 msgid "An additional component is needed to import this PDF file. Would you like to download it now?"
 msgstr "이 PDF 파일을 불러오기 위해서는 추가적인 컴포넌트가 필요합니다. 지금 다운로드 하시겠습니까?"
-
-#: MiscResources.resx$UpdateError$Message
-msgid "An error occurred when trying to install the update."
-msgstr ""
 
 #: SdkResources.resx$OcrError$Message
 msgid "An error occurred running OCR."
@@ -155,6 +115,10 @@ msgstr ""
 #: MiscResources.resx$AutoSaveError$Message
 msgid "An error occurred when trying to auto save."
 msgstr "파일을 자동으로 저장하는 중 오류가 발생했습니다.."
+
+#: MiscResources.resx$UpdateError$Message
+msgid "An error occurred when trying to install the update."
+msgstr ""
 
 #: MiscResources.resx$ErrorSaving$Message
 msgid "An error occurred when trying to save the file."
@@ -531,6 +495,18 @@ msgstr "다운로드 진행상황"
 msgid "Duplex"
 msgstr "양방향"
 
+#: UiStrings.resx$EsclDriver$Message
+msgid "ESCL Driver"
+msgstr ""
+
+#: UiStrings.resx$EsclNetworkDriver$Message
+msgid "ESCL Network Driver"
+msgstr ""
+
+#: UiStrings.resx$EsclUsbDriver$Message
+msgid "ESCL USB Driver"
+msgstr ""
+
 #: UiStrings.resx$Edit$Message
 msgid "Edit"
 msgstr "편집"
@@ -768,6 +744,10 @@ msgstr "OCR 을 이용하여 검색 가능한 PDF 만들기"
 msgid "Maximum quality (large files)"
 msgstr "최대 품질 (용량 큼)"
 
+#: SettingsResources.resx$TwainImpl_MemXfer$Message
+msgid "Memory Transfer"
+msgstr ""
+
 #: UiStrings.resx$Metadata$Message
 msgid "Metadata"
 msgstr "메타데이터"
@@ -821,6 +801,10 @@ msgstr "이름 (선택사항)"
 #: MiscResources.resx$NameMissing$Message
 msgid "Name missing."
 msgstr "이름이 없습니다."
+
+#: SettingsResources.resx$TwainImpl_NativeXfer$Message
+msgid "Native Transfer"
+msgstr ""
 
 #: UiStrings.resx$New$Message
 msgid "New"
@@ -1563,12 +1547,24 @@ msgstr ""
 msgid "{0} / {1} files"
 msgstr "{0} / {1} 파일"
 
+#: SettingsResources.resx$DpiFormat$Message
+msgid "{0} dpi"
+msgstr ""
+
 #: UiStrings.resx$RecoverPrompt$Message
 msgid "{0} image(s) scanned on {1} at {2} may not have been saved, and are recoverable. Do you want to recover them?"
 msgstr "스캔된 {0} 이미지가 {2} 의 {1} 에 저장되지 않았을 수 있습니다. 복구 하시겠습니까?"
 
 #: MiscResources.resx$ImagesSaved$Message
 msgid "{0} images saved."
+msgstr "{0} 개의 이미지가 저장되었습니다."
+
+#: MiscResources.resx$PdfStatus$Message
+#: UiStrings.resx$XOfY$Message
+msgid "{0} of {1}"
+msgstr "{1} 의 {0}"
+
+images saved."
 msgstr "{0} 개의 이미지가 저장되었습니다."
 
 #: MiscResources.resx$PdfStatus$Message

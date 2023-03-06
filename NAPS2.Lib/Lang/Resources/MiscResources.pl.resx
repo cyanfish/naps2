@@ -370,7 +370,7 @@
     <value>Sprawdzanie aktualizacji jest wyłączone.</value>
   </data>
   <data name="UpdateError" xml:space="preserve">
-    <value>An error occured when trying to install the update.</value>
+    <value>Wystąpił błąd podczas próby zainstalowania aktualizacji.</value>
   </data>
   <data name="Install" xml:space="preserve">
     <value>Zainstaluj {0}</value>

@@ -243,6 +243,15 @@
   <data name="TwainDriver" xml:space="preserve">
     <value>درایور TWAIN</value>
   </data>
+  <data name="EsclDriver" xml:space="preserve">
+    <value>ESCL Driver</value>
+  </data>
+  <data name="EsclNetworkDriver" xml:space="preserve">
+    <value>ESCL Network Driver</value>
+  </data>
+  <data name="EsclUsbDriver" xml:space="preserve">
+    <value>ESCL USB Driver</value>
+  </data>
   <data name="AppleDriver" xml:space="preserve">
     <value>Apple Driver</value>
   </data>

@@ -370,7 +370,7 @@
     <value>Update checking is disabled.</value>
   </data>
   <data name="UpdateError" xml:space="preserve">
-    <value>An error occured when trying to install the update.</value>
+    <value>Ndodhi një gabim gjatë instalimit të përditësimit.</value>
   </data>
   <data name="Install" xml:space="preserve">
     <value>Instalo {0}</value>

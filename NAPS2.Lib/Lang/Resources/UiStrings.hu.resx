@@ -205,7 +205,7 @@
     <value>Save All</value>
   </data>
   <data name="SaveSelected" xml:space="preserve">
-    <value>Save Selected</value>
+    <value>Kiválasztott mentése</value>
   </data>
   <data name="SaveAllAsPdf" xml:space="preserve">
     <value>Összes mentése PDF-ként</value>
@@ -242,6 +242,15 @@
   </data>
   <data name="TwainDriver" xml:space="preserve">
     <value>TWAIN illesztőprogram</value>
+  </data>
+  <data name="EsclDriver" xml:space="preserve">
+    <value>ESCL Driver</value>
+  </data>
+  <data name="EsclNetworkDriver" xml:space="preserve">
+    <value>ESCL Network Driver</value>
+  </data>
+  <data name="EsclUsbDriver" xml:space="preserve">
+    <value>ESCL USB Driver</value>
   </data>
   <data name="AppleDriver" xml:space="preserve">
     <value>Apple illesztőprogram</value>
@@ -502,7 +511,7 @@
     <value>Automatikusan növekvő szám (2 számjegy)</value>
   </data>
   <data name="AutoIncrementing1Digit" xml:space="preserve">
-    <value>Auto-incrementing number (1 digits)</value>
+    <value>Automatikusan növekvő szám (1 számjegy)</value>
   </data>
   <data name="FileNameLabel" xml:space="preserve">
     <value>Fájlnév</value>
@@ -556,7 +565,7 @@
     <value>Jelszó</value>
   </data>
   <data name="EncryptedFilePrompt" xml:space="preserve">
-    <value>The following file is encrypted and requires a password to open:</value>
+    <value>A következő fájl titkosított, és a megnyitásához jelszó szükséges:</value>
   </data>
   <data name="PromptForFilePath" xml:space="preserve">
     <value>Kérdezzen rá a fájl elérési útvonalára</value>
@@ -688,6 +697,6 @@
     <value>Mappa megnyitása</value>
   </data>
   <data name="Tools" xml:space="preserve">
-    <value>Tools</value>
+    <value>Eszközök</value>
   </data>
 </root>

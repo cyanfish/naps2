@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2023-02-06 03:29\n"
+"PO-Revision-Date: 2023-03-06 01:43\n"
 "Last-Translator: \n"
 "Language-Team: Spanish\n"
 "Language: es\n"
@@ -19,41 +19,9 @@ msgstr ""
 "X-Crowdin-File: templates.pot\n"
 "X-Crowdin-File-ID: 75\n"
 
-#: SettingsResources.resx$Dpi_100$Message
-msgid "100 dpi"
-msgstr "100 ppp"
-
-#: SettingsResources.resx$Dpi_1200$Message
-msgid "1200 dpi"
-msgstr "1200 ppp"
-
-#: SettingsResources.resx$Dpi_150$Message
-msgid "150 dpi"
-msgstr "150 ppp"
-
-#: SettingsResources.resx$Dpi_200$Message
-msgid "200 dpi"
-msgstr "200 ppp"
-
 #: SettingsResources.resx$BitDepth_24Color$Message
 msgid "24-bit Color"
 msgstr "Color de 24 bits"
-
-#: SettingsResources.resx$Dpi_300$Message
-msgid "300 dpi"
-msgstr "300 ppp"
-
-#: SettingsResources.resx$Dpi_400$Message
-msgid "400 dpi"
-msgstr "400 ppp"
-
-#: SettingsResources.resx$Dpi_600$Message
-msgid "600 dpi"
-msgstr "600 ppp"
-
-#: SettingsResources.resx$Dpi_800$Message
-msgid "800 dpi"
-msgstr "800 ppp"
 
 #: SettingsResources.resx$PageSize_A3$Message
 msgid "A3 (297x420 mm)"
@@ -132,17 +100,9 @@ msgstr "Desentrelazado alternativo"
 msgid "Alternate Interleave"
 msgstr "Entrelazado alternativo"
 
-#: SettingsResources.resx$TwainImpl_MemXfer$Message
-msgid "Alternative Transfer"
-msgstr "Transferencia alternativa"
-
 #: MiscResources.resx$PdfImportComponentNeeded$Message
 msgid "An additional component is needed to import this PDF file. Would you like to download it now?"
 msgstr "Se necesita un componente adicional para importar este archivo PDF. ¿Quiere descargarlo ahora?"
-
-#: MiscResources.resx$UpdateError$Message
-msgid "An error occurred when trying to install the update."
-msgstr "Ha ocurrido un error al intentar instalar la actualización."
 
 #: SdkResources.resx$OcrError$Message
 msgid "An error occurred running OCR."
@@ -155,6 +115,10 @@ msgstr "Ha ocurrido un error al intentar conceder la autorización."
 #: MiscResources.resx$AutoSaveError$Message
 msgid "An error occurred when trying to auto save."
 msgstr "Ocurrió un error al intentar guardar el archivo automáticamente."
+
+#: MiscResources.resx$UpdateError$Message
+msgid "An error occurred when trying to install the update."
+msgstr "Ha ocurrido un error al intentar instalar la actualización."
 
 #: MiscResources.resx$ErrorSaving$Message
 msgid "An error occurred when trying to save the file."
@@ -531,6 +495,18 @@ msgstr "Progreso de la descarga"
 msgid "Duplex"
 msgstr "Dúplex"
 
+#: UiStrings.resx$EsclDriver$Message
+msgid "ESCL Driver"
+msgstr ""
+
+#: UiStrings.resx$EsclNetworkDriver$Message
+msgid "ESCL Network Driver"
+msgstr ""
+
+#: UiStrings.resx$EsclUsbDriver$Message
+msgid "ESCL USB Driver"
+msgstr ""
+
 #: UiStrings.resx$Edit$Message
 msgid "Edit"
 msgstr "Editar"
@@ -768,6 +744,10 @@ msgstr "Hacer que los PDFs sean buscables usando OCR"
 msgid "Maximum quality (large files)"
 msgstr "Máxima calidad (ficheros grandes)"
 
+#: SettingsResources.resx$TwainImpl_MemXfer$Message
+msgid "Memory Transfer"
+msgstr ""
+
 #: UiStrings.resx$Metadata$Message
 msgid "Metadata"
 msgstr "Metadatos"
@@ -821,6 +801,10 @@ msgstr "Nombre (opcional)"
 #: MiscResources.resx$NameMissing$Message
 msgid "Name missing."
 msgstr "Falta nombre."
+
+#: SettingsResources.resx$TwainImpl_NativeXfer$Message
+msgid "Native Transfer"
+msgstr ""
 
 #: UiStrings.resx$New$Message
 msgid "New"
@@ -1563,9 +1547,24 @@ msgstr ""
 msgid "{0} / {1} files"
 msgstr "{0} / {1} archivos"
 
+#: SettingsResources.resx$DpiFormat$Message
+msgid "{0} dpi"
+msgstr "{0} ppp"
+
 #: UiStrings.resx$RecoverPrompt$Message
 msgid "{0} image(s) scanned on {1} at {2} may not have been saved, and are recoverable. Do you want to recover them?"
 msgstr "{0} imagen(es) escaneada(s) el {1} a las {2} quizás no se ha(n) guardado y se puede(n) recuperar. ¿Deseas recuperarla(s)?"
+
+#: MiscResources.resx$ImagesSaved$Message
+msgid "{0} images saved."
+msgstr "{0} imágenes guardadas."
+
+#: MiscResources.resx$PdfStatus$Message
+#: UiStrings.resx$XOfY$Message
+msgid "{0} of {1}"
+msgstr "{0} de {1}"
+
+ar. ¿Deseas recuperarla(s)?"
 
 #: MiscResources.resx$ImagesSaved$Message
 msgid "{0} images saved."

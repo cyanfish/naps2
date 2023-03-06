@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2023-02-06 03:29\n"
+"PO-Revision-Date: 2023-03-06 01:43\n"
 "Last-Translator: \n"
 "Language-Team: Greek\n"
 "Language: el\n"
@@ -19,41 +19,9 @@ msgstr ""
 "X-Crowdin-File: templates.pot\n"
 "X-Crowdin-File-ID: 75\n"
 
-#: SettingsResources.resx$Dpi_100$Message
-msgid "100 dpi"
-msgstr "100 dpi"
-
-#: SettingsResources.resx$Dpi_1200$Message
-msgid "1200 dpi"
-msgstr "1200 dpi"
-
-#: SettingsResources.resx$Dpi_150$Message
-msgid "150 dpi"
-msgstr "150 dpi"
-
-#: SettingsResources.resx$Dpi_200$Message
-msgid "200 dpi"
-msgstr "200 dpi"
-
 #: SettingsResources.resx$BitDepth_24Color$Message
 msgid "24-bit Color"
 msgstr "Χρώμα 24-bit"
-
-#: SettingsResources.resx$Dpi_300$Message
-msgid "300 dpi"
-msgstr "300 dpi"
-
-#: SettingsResources.resx$Dpi_400$Message
-msgid "400 dpi"
-msgstr "400 dpi"
-
-#: SettingsResources.resx$Dpi_600$Message
-msgid "600 dpi"
-msgstr "600 dpi"
-
-#: SettingsResources.resx$Dpi_800$Message
-msgid "800 dpi"
-msgstr "800 dpi"
 
 #: SettingsResources.resx$PageSize_A3$Message
 msgid "A3 (297x420 mm)"
@@ -132,17 +100,9 @@ msgstr "Εναλλακτική Αποπαρεμβολή [135642...]"
 msgid "Alternate Interleave"
 msgstr "Εναλλακτική Παρεμβολή"
 
-#: SettingsResources.resx$TwainImpl_MemXfer$Message
-msgid "Alternative Transfer"
-msgstr "Εναλλακτική Μεταφορά"
-
 #: MiscResources.resx$PdfImportComponentNeeded$Message
 msgid "An additional component is needed to import this PDF file. Would you like to download it now?"
 msgstr "Ένα πρόσθετο συστατικό είναι απαραίτητο για την εισαγωγή αυτού του PDF. Θέλετε την λήψη του τώρα;"
-
-#: MiscResources.resx$UpdateError$Message
-msgid "An error occurred when trying to install the update."
-msgstr "Προέκυψε σφάλμα κατά την εγκατάσταση της ενημέρωσης."
 
 #: SdkResources.resx$OcrError$Message
 msgid "An error occurred running OCR."
@@ -155,6 +115,10 @@ msgstr "Παρουσιάστηκε ένα σφάλμα κατά την προσ�
 #: MiscResources.resx$AutoSaveError$Message
 msgid "An error occurred when trying to auto save."
 msgstr "Σφάλμα κατά την αυτόματη αποθήκευση."
+
+#: MiscResources.resx$UpdateError$Message
+msgid "An error occurred when trying to install the update."
+msgstr "Προέκυψε σφάλμα κατά την εγκατάσταση της ενημέρωσης."
 
 #: MiscResources.resx$ErrorSaving$Message
 msgid "An error occurred when trying to save the file."
@@ -531,6 +495,18 @@ msgstr "Πρόοδος Λήψης"
 msgid "Duplex"
 msgstr "Διπλή Όψη"
 
+#: UiStrings.resx$EsclDriver$Message
+msgid "ESCL Driver"
+msgstr ""
+
+#: UiStrings.resx$EsclNetworkDriver$Message
+msgid "ESCL Network Driver"
+msgstr ""
+
+#: UiStrings.resx$EsclUsbDriver$Message
+msgid "ESCL USB Driver"
+msgstr ""
+
 #: UiStrings.resx$Edit$Message
 msgid "Edit"
 msgstr "Επεξεργασία"
@@ -768,6 +744,10 @@ msgstr "Χρήση OCR για δυνατότητα αναζήτησης στα P
 msgid "Maximum quality (large files)"
 msgstr "Μέγιστη ποιότητα (μεγάλα αρχεία)"
 
+#: SettingsResources.resx$TwainImpl_MemXfer$Message
+msgid "Memory Transfer"
+msgstr ""
+
 #: UiStrings.resx$Metadata$Message
 msgid "Metadata"
 msgstr "Μεταδεδομένα (Metadata)"
@@ -821,6 +801,10 @@ msgstr "Όνομα (προαιρετικό)"
 #: MiscResources.resx$NameMissing$Message
 msgid "Name missing."
 msgstr "Απουσιάζει το όνομα."
+
+#: SettingsResources.resx$TwainImpl_NativeXfer$Message
+msgid "Native Transfer"
+msgstr ""
 
 #: UiStrings.resx$New$Message
 msgid "New"
@@ -1563,9 +1547,24 @@ msgstr "{0} / {1} MB"
 msgid "{0} / {1} files"
 msgstr "{0} / {1} αρχεία"
 
+#: SettingsResources.resx$DpiFormat$Message
+msgid "{0} dpi"
+msgstr "{0} dpi"
+
 #: UiStrings.resx$RecoverPrompt$Message
 msgid "{0} image(s) scanned on {1} at {2} may not have been saved, and are recoverable. Do you want to recover them?"
 msgstr "Υπάρχουν {0} εικόνες που σαρώθηκαν στις {1} και ώρα {2} οι οποίες ενδέχεται να μην έχουν αποθηκευτεί. Θέλετε να ανακτηθούν;"
+
+#: MiscResources.resx$ImagesSaved$Message
+msgid "{0} images saved."
+msgstr "{0} εικόνες αποθηκεύτηκαν."
+
+#: MiscResources.resx$PdfStatus$Message
+#: UiStrings.resx$XOfY$Message
+msgid "{0} of {1}"
+msgstr "{0} από {1}"
+
+�κτηθούν;"
 
 #: MiscResources.resx$ImagesSaved$Message
 msgid "{0} images saved."

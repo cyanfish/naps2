@@ -70,9 +70,9 @@
     <value>El controlador seleccionat no està suportat en aquest sistema.</value>
   </data>
   <data name="OcrError" xml:space="preserve">
-    <value>An error occurred running OCR.</value>
+    <value>S'ha produït un error en iniciar l'OCR.</value>
   </data>
   <data name="OcrTimeout" xml:space="preserve">
-    <value>The OCR operation timed out.</value>
+    <value>S'ha excedit el temps d'espera d'OCR.</value>
   </data>
 </root>

@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2023-02-06 03:29\n"
+"PO-Revision-Date: 2023-03-06 01:43\n"
 "Last-Translator: \n"
 "Language-Team: German\n"
 "Language: de\n"
@@ -19,41 +19,9 @@ msgstr ""
 "X-Crowdin-File: templates.pot\n"
 "X-Crowdin-File-ID: 75\n"
 
-#: SettingsResources.resx$Dpi_100$Message
-msgid "100 dpi"
-msgstr "100 dpi"
-
-#: SettingsResources.resx$Dpi_1200$Message
-msgid "1200 dpi"
-msgstr "1200 dpi"
-
-#: SettingsResources.resx$Dpi_150$Message
-msgid "150 dpi"
-msgstr "150 dpi"
-
-#: SettingsResources.resx$Dpi_200$Message
-msgid "200 dpi"
-msgstr "200 dpi"
-
 #: SettingsResources.resx$BitDepth_24Color$Message
 msgid "24-bit Color"
 msgstr "24-Bit Farbtiefe"
-
-#: SettingsResources.resx$Dpi_300$Message
-msgid "300 dpi"
-msgstr "300 dpi"
-
-#: SettingsResources.resx$Dpi_400$Message
-msgid "400 dpi"
-msgstr "400 dpi"
-
-#: SettingsResources.resx$Dpi_600$Message
-msgid "600 dpi"
-msgstr "600 dpi"
-
-#: SettingsResources.resx$Dpi_800$Message
-msgid "800 dpi"
-msgstr "800 dpi"
 
 #: SettingsResources.resx$PageSize_A3$Message
 msgid "A3 (297x420 mm)"
@@ -132,17 +100,9 @@ msgstr "Alternativ Auseinander Fächern"
 msgid "Alternate Interleave"
 msgstr "Alternativ Ineinander Fächern"
 
-#: SettingsResources.resx$TwainImpl_MemXfer$Message
-msgid "Alternative Transfer"
-msgstr "Alternative Übertragung"
-
 #: MiscResources.resx$PdfImportComponentNeeded$Message
 msgid "An additional component is needed to import this PDF file. Would you like to download it now?"
 msgstr "Eine zusätzliche Komponente wird benötigt, um diese PDF-Datei zu importieren. Möchten Sie diese jetzt herunterladen?"
-
-#: MiscResources.resx$UpdateError$Message
-msgid "An error occurred when trying to install the update."
-msgstr "Beim Versuch das Update zu installieren ist ein Fehler aufgetreten."
 
 #: SdkResources.resx$OcrError$Message
 msgid "An error occurred running OCR."
@@ -155,6 +115,10 @@ msgstr "Bei der Anmeldung ist ein Fehler aufgetreten."
 #: MiscResources.resx$AutoSaveError$Message
 msgid "An error occurred when trying to auto save."
 msgstr "Beim automatischen Speichern der Datei ist ein Fehler aufgetreten."
+
+#: MiscResources.resx$UpdateError$Message
+msgid "An error occurred when trying to install the update."
+msgstr "Beim Versuch das Update zu installieren ist ein Fehler aufgetreten."
 
 #: MiscResources.resx$ErrorSaving$Message
 msgid "An error occurred when trying to save the file."
@@ -531,6 +495,18 @@ msgstr "Download-Fortschritt"
 msgid "Duplex"
 msgstr "Duplex"
 
+#: UiStrings.resx$EsclDriver$Message
+msgid "ESCL Driver"
+msgstr ""
+
+#: UiStrings.resx$EsclNetworkDriver$Message
+msgid "ESCL Network Driver"
+msgstr ""
+
+#: UiStrings.resx$EsclUsbDriver$Message
+msgid "ESCL USB Driver"
+msgstr ""
+
 #: UiStrings.resx$Edit$Message
 msgid "Edit"
 msgstr "Bearbeiten"
@@ -754,7 +730,7 @@ msgstr "Links"
 
 #: SettingsResources.resx$TwainImpl_Legacy$Message
 msgid "Legacy (native UI only)"
-msgstr "Altsystem (nur ursprüngliche Oberfläche)"
+msgstr "Altsystem (nur native Oberfläche)"
 
 #: UiStrings.resx$LoadIn$Message
 msgid "Load images into NAPS2"
@@ -767,6 +743,10 @@ msgstr "PDF mittels OCR durchsuchbar machen"
 #: UiStrings.resx$MaximumQuality$Message
 msgid "Maximum quality (large files)"
 msgstr "Maximale Qualität (große Dateien)"
+
+#: SettingsResources.resx$TwainImpl_MemXfer$Message
+msgid "Memory Transfer"
+msgstr "Gepufferte Übertragung"
 
 #: UiStrings.resx$Metadata$Message
 msgid "Metadata"
@@ -821,6 +801,10 @@ msgstr "Name (optional)"
 #: MiscResources.resx$NameMissing$Message
 msgid "Name missing."
 msgstr "Name fehlt."
+
+#: SettingsResources.resx$TwainImpl_NativeXfer$Message
+msgid "Native Transfer"
+msgstr "Native Übertragung"
 
 #: UiStrings.resx$New$Message
 msgid "New"
@@ -1443,7 +1427,7 @@ msgstr "Hochladen der E-Mail..."
 
 #: UiStrings.resx$UseNativeUi$Message
 msgid "Use native UI"
-msgstr "Ursprüngliche Oberfäche verwenden"
+msgstr "Scanner-Dialog verwenden"
 
 #: UiStrings.resx$UsePredefinedSettings$Message
 msgid "Use predefined settings"
@@ -1563,9 +1547,24 @@ msgstr "{0} / {1} MB"
 msgid "{0} / {1} files"
 msgstr "{0} / {1} Dateien"
 
+#: SettingsResources.resx$DpiFormat$Message
+msgid "{0} dpi"
+msgstr "{0} dpi"
+
 #: UiStrings.resx$RecoverPrompt$Message
 msgid "{0} image(s) scanned on {1} at {2} may not have been saved, and are recoverable. Do you want to recover them?"
 msgstr "{0} Bilder wurden am {1} um {2} gescannt und wurden möglicherweise nicht gespeichert, sind aber wiederherstellbar. Sollen sie wiederhergestellt werden?"
+
+#: MiscResources.resx$ImagesSaved$Message
+msgid "{0} images saved."
+msgstr "{0} Bilder gespeichert."
+
+#: MiscResources.resx$PdfStatus$Message
+#: UiStrings.resx$XOfY$Message
+msgid "{0} of {1}"
+msgstr "{0} von {1}"
+
+den?"
 
 #: MiscResources.resx$ImagesSaved$Message
 msgid "{0} images saved."

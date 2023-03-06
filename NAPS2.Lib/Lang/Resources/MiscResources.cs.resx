@@ -73,7 +73,7 @@
     <value>Soubor TIFF (*.tiff, *.tif)</value>
   </data>
   <data name="FileTypeJp2" xml:space="preserve">
-    <value>JPEG2000 File (*.jp2, *.jpx)</value>
+    <value>Soubor JPEG2000 (*.jp2, *.jpx)</value>
   </data>
   <data name="NameMissing" xml:space="preserve">
     <value>Název chybí.</value>
@@ -190,7 +190,7 @@
     <value>z {0}</value>
   </data>
   <data name="BatchError" xml:space="preserve">
-    <value>An unknown error occurred during the batch scan.</value>
+    <value>Během dávkového skenování došlo k chybě.</value>
   </data>
   <data name="BatchStatusCancelled" xml:space="preserve">
     <value>Dávka byla přerušena.</value>
@@ -370,7 +370,7 @@
     <value>Update checking is disabled.</value>
   </data>
   <data name="UpdateError" xml:space="preserve">
-    <value>An error occured when trying to install the update.</value>
+    <value>Při pokusu o aktualizaci došlo k chybě..</value>
   </data>
   <data name="Install" xml:space="preserve">
     <value>Instalovat {0}</value>

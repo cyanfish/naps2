@@ -58,10 +58,10 @@
     <value>Fitxer d'intercanvi d'imatge (*.exif)</value>
   </data>
   <data name="FileTypeGif" xml:space="preserve">
-    <value>GIF File (*.gif)</value>
+    <value>Fitxer GIF (*.gif)</value>
   </data>
   <data name="FileTypeJpeg" xml:space="preserve">
-    <value>JPEG File (*.jpg, *.jpeg)</value>
+    <value>Fitxer JPEG (*.jpg, *.jpeg)</value>
   </data>
   <data name="FileTypePdf" xml:space="preserve">
     <value>Document PDF (*.pdf)</value>
@@ -73,7 +73,7 @@
     <value>Fitxer TIFF (*.tiff, *.tif)</value>
   </data>
   <data name="FileTypeJp2" xml:space="preserve">
-    <value>JPEG2000 File (*.jp2, *.jpx)</value>
+    <value>Fitxer JPEG2000 (*.jp2, *.jpx)</value>
   </data>
   <data name="NameMissing" xml:space="preserve">
     <value>Manca el nom.</value>
@@ -190,7 +190,7 @@
     <value>de {0}</value>
   </data>
   <data name="BatchError" xml:space="preserve">
-    <value>An unknown error occurred during the batch scan.</value>
+    <value>S'ha produït un error desconegut en l'escaneig per lots.</value>
   </data>
   <data name="BatchStatusCancelled" xml:space="preserve">
     <value>S'ha cancel·lat l'escaneig per lots.</value>
@@ -268,7 +268,7 @@
     <value>S'està important...</value>
   </data>
   <data name="EmailPdf" xml:space="preserve">
-    <value>Email PDF</value>
+    <value>PDF per correu-e</value>
   </data>
   <data name="EmailPdfProgress" xml:space="preserve">
     <value>Progrés d'enviament del PDF</value>
@@ -370,7 +370,7 @@
     <value>Update checking is disabled.</value>
   </data>
   <data name="UpdateError" xml:space="preserve">
-    <value>An error occured when trying to install the update.</value>
+    <value>S'ha produït un error en instal·lar l'actualització.</value>
   </data>
   <data name="Install" xml:space="preserve">
     <value>Instal·la {0}</value>

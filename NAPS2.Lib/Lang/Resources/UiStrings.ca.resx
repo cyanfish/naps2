@@ -19,7 +19,7 @@
     <value>Copyright {0} Contribuïdors del NAPS2</value>
   </data>
   <data name="IconsFrom" xml:space="preserve">
-    <value>Icons desde:</value>
+    <value>Icones de:</value>
   </data>
   <data name="CheckForUpdates" xml:space="preserve">
     <value>Comprova si hi ha actualitzacions</value>
@@ -88,7 +88,7 @@
     <value>Opcions de la imatge</value>
   </data>
   <data name="EmailPdf" xml:space="preserve">
-    <value>Email PDF</value>
+    <value>PDF per correu-e</value>
   </data>
   <data name="EmailSettings" xml:space="preserve">
     <value>Paràmetres del correu electrònic</value>
@@ -124,7 +124,7 @@
     <value>Restaura</value>
   </data>
   <data name="Rotate" xml:space="preserve">
-    <value>Rotate</value>
+    <value>Gira</value>
   </data>
   <data name="RotateLeft" xml:space="preserve">
     <value>Gira a l'esquerra</value>
@@ -151,7 +151,7 @@
     <value>Organitza</value>
   </data>
   <data name="Interleave" xml:space="preserve">
-    <value>Interleave</value>
+    <value>Intercala</value>
   </data>
   <data name="Deinterleave" xml:space="preserve">
     <value>Desentrellaça</value>
@@ -163,13 +163,13 @@
     <value>Desintercalat alternatiu</value>
   </data>
   <data name="Reverse" xml:space="preserve">
-    <value>Reverse</value>
+    <value>Inverteix</value>
   </data>
   <data name="ReverseAll" xml:space="preserve">
-    <value>Reverse All</value>
+    <value>Inverteix-ho tot</value>
   </data>
   <data name="ReverseSelected" xml:space="preserve">
-    <value>Reverse Selected</value>
+    <value>Selecció inversa</value>
   </data>
   <data name="Clear" xml:space="preserve">
     <value>Neteja</value>
@@ -199,31 +199,31 @@
     <value>Scale With Window</value>
   </data>
   <data name="Save" xml:space="preserve">
-    <value>Save</value>
+    <value>Desa</value>
   </data>
   <data name="SaveAll" xml:space="preserve">
-    <value>Save All</value>
+    <value>Desa-ho tot</value>
   </data>
   <data name="SaveSelected" xml:space="preserve">
-    <value>Save Selected</value>
+    <value>Desa la selecció</value>
   </data>
   <data name="SaveAllAsPdf" xml:space="preserve">
-    <value>Save All as PDF</value>
+    <value>Desa com a PDF</value>
   </data>
   <data name="SaveSelectedAsPdf" xml:space="preserve">
-    <value>Save Selected as PDF</value>
+    <value>Desa la selecció com a PDF</value>
   </data>
   <data name="SaveAllAsImages" xml:space="preserve">
-    <value>Save All as Images</value>
+    <value>Desa com a imatges</value>
   </data>
   <data name="SaveSelectedAsImages" xml:space="preserve">
-    <value>Save Selected as Images</value>
+    <value>Desa la selecció com a imatges</value>
   </data>
   <data name="EmailAll" xml:space="preserve">
-    <value>Email All</value>
+    <value>Envia-ho tot</value>
   </data>
   <data name="EmailSelected" xml:space="preserve">
-    <value>Email Selected</value>
+    <value>Seleccionat</value>
   </data>
   <data name="EmailAllAsPdf" xml:space="preserve">
     <value>Envia-ho tot com a PDF per correu-e</value>
@@ -243,8 +243,17 @@
   <data name="TwainDriver" xml:space="preserve">
     <value>Dispositiu TWAIN</value>
   </data>
+  <data name="EsclDriver" xml:space="preserve">
+    <value>ESCL Driver</value>
+  </data>
+  <data name="EsclNetworkDriver" xml:space="preserve">
+    <value>ESCL Network Driver</value>
+  </data>
+  <data name="EsclUsbDriver" xml:space="preserve">
+    <value>ESCL USB Driver</value>
+  </data>
   <data name="AppleDriver" xml:space="preserve">
-    <value>Apple Driver</value>
+    <value>Controlador d'Apple</value>
   </data>
   <data name="SaneDriver" xml:space="preserve">
     <value>Controlador SANE</value>
@@ -334,7 +343,7 @@
     <value>Inicia l'OCR automàticament després d'escanejar</value>
   </data>
   <data name="GetMoreLanguages" xml:space="preserve">
-    <value>Get more languages</value>
+    <value>Més idiomes</value>
   </data>
   <data name="OcrDownloadFormTitle" xml:space="preserve">
     <value>Baixada de l'OCR</value>
@@ -376,7 +385,7 @@
     <value>Selecciona-ho tot</value>
   </data>
   <data name="Recover" xml:space="preserve">
-    <value>Recover</value>
+    <value>Recupera</value>
   </data>
   <data name="NotNow" xml:space="preserve">
     <value>Ara no</value>
@@ -502,7 +511,7 @@
     <value>Increment automàtic del número (2 dígits)</value>
   </data>
   <data name="AutoIncrementing1Digit" xml:space="preserve">
-    <value>Auto-incrementing number (1 digits)</value>
+    <value>Increment automàtic del número (1 dígit)</value>
   </data>
   <data name="FileNameLabel" xml:space="preserve">
     <value>Nom del fitxer</value>
@@ -511,7 +520,7 @@
     <value>Previsualitza:</value>
   </data>
   <data name="JpegQualityHelp" xml:space="preserve">
-    <value>For high JPEG qualities (80+), also increase Image Quality in your profile for best results.</value>
+    <value>Per a obtenir imatges JPEG d'alta qualitat (80+), incrementeu també la resolució al perfil.</value>
   </data>
   <data name="JpegQuality" xml:space="preserve">
     <value>Qualitat Jpeg</value>
@@ -559,7 +568,7 @@
     <value>The following file is encrypted and requires a password to open:</value>
   </data>
   <data name="PromptForFilePath" xml:space="preserve">
-    <value>Prompt for file path</value>
+    <value>Demana la ruta de destinació</value>
   </data>
   <data name="OneFilePerPage" xml:space="preserve">
     <value>Un fitxer per pàgina</value>
@@ -628,7 +637,7 @@
     <value>Escapça a la mida de la pàgina</value>
   </data>
   <data name="FlipDuplexedPages" xml:space="preserve">
-    <value>Flip duplexed pages</value>
+    <value>Gira les pàgines doblegades</value>
   </data>
   <data name="WiaVersionLabel" xml:space="preserve">
     <value>Wia Version:</value>
@@ -652,7 +661,7 @@
     <value>Perfils:</value>
   </data>
   <data name="SingleScan" xml:space="preserve">
-    <value>Single scan</value>
+    <value>Escaneig senzill</value>
   </data>
   <data name="MultipleScansPrompt" xml:space="preserve">
     <value>Escaneig múltiple (demana entre cada escaneig)</value>
@@ -688,6 +697,6 @@
     <value>Obre una carpeta</value>
   </data>
   <data name="Tools" xml:space="preserve">
-    <value>Tools</value>
+    <value>Eines</value>
   </data>
 </root>

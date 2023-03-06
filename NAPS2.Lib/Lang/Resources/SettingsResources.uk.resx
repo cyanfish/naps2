@@ -21,29 +21,8 @@
   <data name="BitDepth_8Grayscale" xml:space="preserve">
     <value>Відтінки сірого</value>
   </data>
-  <data name="Dpi_100" xml:space="preserve">
-    <value>100 т/д</value>
-  </data>
-  <data name="Dpi_1200" xml:space="preserve">
-    <value>1200 т/д</value>
-  </data>
-  <data name="Dpi_150" xml:space="preserve">
-    <value>150 т/д</value>
-  </data>
-  <data name="Dpi_200" xml:space="preserve">
-    <value>200 т/д</value>
-  </data>
-  <data name="Dpi_300" xml:space="preserve">
-    <value>300 т/д</value>
-  </data>
-  <data name="Dpi_400" xml:space="preserve">
-    <value>400 т/д</value>
-  </data>
-  <data name="Dpi_600" xml:space="preserve">
-    <value>600 т/д</value>
-  </data>
-  <data name="Dpi_800" xml:space="preserve">
-    <value>800 т/д</value>
+  <data name="DpiFormat" xml:space="preserve">
+    <value>{0} т/д</value>
   </data>
   <data name="EmailProviderType_CustomSmtp" xml:space="preserve">
     <value>Custom SMTP</value>

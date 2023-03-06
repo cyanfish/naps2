@@ -21,29 +21,8 @@
   <data name="BitDepth_8Grayscale" xml:space="preserve">
     <value>Escala de grises</value>
   </data>
-  <data name="Dpi_100" xml:space="preserve">
-    <value>100 ppp</value>
-  </data>
-  <data name="Dpi_1200" xml:space="preserve">
-    <value>1200 ppp</value>
-  </data>
-  <data name="Dpi_150" xml:space="preserve">
-    <value>150 ppp</value>
-  </data>
-  <data name="Dpi_200" xml:space="preserve">
-    <value>200 ppp</value>
-  </data>
-  <data name="Dpi_300" xml:space="preserve">
-    <value>300 ppp</value>
-  </data>
-  <data name="Dpi_400" xml:space="preserve">
-    <value>400 ppp</value>
-  </data>
-  <data name="Dpi_600" xml:space="preserve">
-    <value>600 ppp</value>
-  </data>
-  <data name="Dpi_800" xml:space="preserve">
-    <value>800 ppp</value>
+  <data name="DpiFormat" xml:space="preserve">
+    <value>{0} ppp</value>
   </data>
   <data name="EmailProviderType_CustomSmtp" xml:space="preserve">
     <value>SMTP personalizado</value>

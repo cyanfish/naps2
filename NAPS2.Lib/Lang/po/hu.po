@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2023-02-06 03:29\n"
+"PO-Revision-Date: 2023-03-06 01:43\n"
 "Last-Translator: \n"
 "Language-Team: Hungarian\n"
 "Language: hu\n"
@@ -19,41 +19,9 @@ msgstr ""
 "X-Crowdin-File: templates.pot\n"
 "X-Crowdin-File-ID: 75\n"
 
-#: SettingsResources.resx$Dpi_100$Message
-msgid "100 dpi"
-msgstr "100 dpi"
-
-#: SettingsResources.resx$Dpi_1200$Message
-msgid "1200 dpi"
-msgstr "1200 dpi"
-
-#: SettingsResources.resx$Dpi_150$Message
-msgid "150 dpi"
-msgstr "150 dpi"
-
-#: SettingsResources.resx$Dpi_200$Message
-msgid "200 dpi"
-msgstr "200 dpi"
-
 #: SettingsResources.resx$BitDepth_24Color$Message
 msgid "24-bit Color"
 msgstr "24 bites szín"
-
-#: SettingsResources.resx$Dpi_300$Message
-msgid "300 dpi"
-msgstr "300 dpi"
-
-#: SettingsResources.resx$Dpi_400$Message
-msgid "400 dpi"
-msgstr "400 dpi"
-
-#: SettingsResources.resx$Dpi_600$Message
-msgid "600 dpi"
-msgstr "600 dpi"
-
-#: SettingsResources.resx$Dpi_800$Message
-msgid "800 dpi"
-msgstr "800 dpi"
 
 #: SettingsResources.resx$PageSize_A3$Message
 msgid "A3 (297x420 mm)"
@@ -132,21 +100,13 @@ msgstr "Alternatív képminőség javítás"
 msgid "Alternate Interleave"
 msgstr ""
 
-#: SettingsResources.resx$TwainImpl_MemXfer$Message
-msgid "Alternative Transfer"
-msgstr "Alternatív átvitel"
-
 #: MiscResources.resx$PdfImportComponentNeeded$Message
 msgid "An additional component is needed to import this PDF file. Would you like to download it now?"
 msgstr "A PDF-fájl importálásához egy további összetevőre van szükség. Szeretné letölteni most?"
 
-#: MiscResources.resx$UpdateError$Message
-msgid "An error occurred when trying to install the update."
-msgstr "Hiba történt a frissítés telepítésekor."
-
 #: SdkResources.resx$OcrError$Message
 msgid "An error occurred running OCR."
-msgstr ""
+msgstr "Hiba történt a karakterfelismerő futtatásakor."
 
 #: MiscResources.resx$AuthError$Message
 msgid "An error occurred when trying to authorize."
@@ -155,6 +115,10 @@ msgstr "Hiba történt az engedélyezés során."
 #: MiscResources.resx$AutoSaveError$Message
 msgid "An error occurred when trying to auto save."
 msgstr "Hiba történt az automatikus mentés során."
+
+#: MiscResources.resx$UpdateError$Message
+msgid "An error occurred when trying to install the update."
+msgstr "Hiba történt a frissítés telepítésekor."
 
 #: MiscResources.resx$ErrorSaving$Message
 msgid "An error occurred when trying to save the file."
@@ -179,7 +143,7 @@ msgstr "Egy művelet folyamatban van. Biztos, hogy ki szeretne lépni és meg sz
 
 #: MiscResources.resx$BatchError$Message
 msgid "An unknown error occurred during the batch scan."
-msgstr ""
+msgstr "Ismeretlen hiba történt a kötegelt lapolvasás során."
 
 #: MiscResources.resx$UpdateAvailable$Message
 msgid "An update is available."
@@ -252,7 +216,7 @@ msgstr "Automatikus mentés beállításai"
 
 #: UiStrings.resx$AutoIncrementing1Digit$Message
 msgid "Auto-incrementing number (1 digits)"
-msgstr ""
+msgstr "Automatikusan növekvő szám (1 számjegy)"
 
 #: UiStrings.resx$AutoIncrementing2Digit$Message
 msgid "Auto-incrementing number (2 digits)"
@@ -531,6 +495,18 @@ msgstr "Letöltési folyamat"
 msgid "Duplex"
 msgstr "Kétoldalas"
 
+#: UiStrings.resx$EsclDriver$Message
+msgid "ESCL Driver"
+msgstr ""
+
+#: UiStrings.resx$EsclNetworkDriver$Message
+msgid "ESCL Network Driver"
+msgstr ""
+
+#: UiStrings.resx$EsclUsbDriver$Message
+msgid "ESCL USB Driver"
+msgstr ""
+
 #: UiStrings.resx$Edit$Message
 msgid "Edit"
 msgstr "Szerkesztés"
@@ -768,6 +744,10 @@ msgstr "A PDF-ek kereshetővé tétele karakterfelismeréssel"
 msgid "Maximum quality (large files)"
 msgstr "Legjobb minőség (nagy fájlok)"
 
+#: SettingsResources.resx$TwainImpl_MemXfer$Message
+msgid "Memory Transfer"
+msgstr "Memória átvitel"
+
 #: UiStrings.resx$Metadata$Message
 msgid "Metadata"
 msgstr "Metaadatok"
@@ -821,6 +801,10 @@ msgstr "Név (nem kötelező)"
 #: MiscResources.resx$NameMissing$Message
 msgid "Name missing."
 msgstr "A név hiányzik."
+
+#: SettingsResources.resx$TwainImpl_NativeXfer$Message
+msgid "Native Transfer"
+msgstr "Natív átvitel"
 
 #: UiStrings.resx$New$Message
 msgid "New"
@@ -1173,7 +1157,7 @@ msgstr "PDF mentésének folyamata"
 
 #: UiStrings.resx$SaveSelected$Message
 msgid "Save Selected"
-msgstr ""
+msgstr "Kiválasztott mentése"
 
 #: UiStrings.resx$SaveSelectedAsImages$Message
 msgid "Save Selected as Images"
@@ -1346,7 +1330,7 @@ msgstr "A következő fájl már létezik: {0}. Szeretné felülírni?"
 
 #: UiStrings.resx$EncryptedFilePrompt$Message
 msgid "The following file is encrypted and requires a password to open:"
-msgstr ""
+msgstr "A következő fájl titkosított, és a megnyitásához jelszó szükséges:"
 
 #: MiscResources.resx$DevicePaperJam$Message
 #: SdkResources.resx$DevicePaperJam$Message
@@ -1407,7 +1391,7 @@ msgstr "Cím:"
 
 #: UiStrings.resx$Tools$Message
 msgid "Tools"
-msgstr ""
+msgstr "Eszközök"
 
 #: UiStrings.resx$TwainImplLabel$Message
 msgid "Twain Implementation:"
@@ -1563,6 +1547,10 @@ msgstr "{0} / {1} MB"
 msgid "{0} / {1} files"
 msgstr "{0} / {1} fájl"
 
+#: SettingsResources.resx$DpiFormat$Message
+msgid "{0} dpi"
+msgstr "{0} dpi"
+
 #: UiStrings.resx$RecoverPrompt$Message
 msgid "{0} image(s) scanned on {1} at {2} may not have been saved, and are recoverable. Do you want to recover them?"
 msgstr "A {1} {2}-kor beolvasott {0} kép lehet, hogy nem került mentésre, és visszaállítható. Szeretné visszaállítani őket?"
@@ -1576,9 +1564,7 @@ msgstr "{0} kép mentve."
 msgid "{0} of {1}"
 msgstr "{0} / {1}"
 
-gstr "hüvelyk"
-
-#: SettingsResources.resx$PageSizeUnit_Millimetre$Message
+geSizeUnit_Millimetre$Message
 msgid "mm"
 msgstr "mm"
 

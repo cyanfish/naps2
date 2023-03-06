@@ -16,16 +16,16 @@
     <value>О программе</value>
   </data>
   <data name="CopyrightFormat" xml:space="preserve">
-    <value>Copyright {0} NAPS2 Contributors</value>
+    <value>Авторские права защищены {0} Контрибьюторы NAPS2</value>
   </data>
   <data name="IconsFrom" xml:space="preserve">
     <value>Значки из:</value>
   </data>
   <data name="CheckForUpdates" xml:space="preserve">
-    <value>Проверить наличие обновлений</value>
+    <value>Проверять наличие обновлений</value>
   </data>
   <data name="OK" xml:space="preserve">
-    <value>OK</value>
+    <value>ОК</value>
   </data>
   <data name="Donate" xml:space="preserve">
     <value>Пожертвовать</value>
@@ -118,7 +118,7 @@
     <value>Резкость</value>
   </data>
   <data name="DocumentCorrection" xml:space="preserve">
-    <value>Document Correction</value>
+    <value>Коррекция документа</value>
   </data>
   <data name="Reset" xml:space="preserve">
     <value>Сброс</value>
@@ -142,10 +142,10 @@
     <value>Другой поворот</value>
   </data>
   <data name="MoveUp" xml:space="preserve">
-    <value>Выше</value>
+    <value>Переместить выше</value>
   </data>
   <data name="MoveDown" xml:space="preserve">
-    <value>Ниже</value>
+    <value>Переместить ниже</value>
   </data>
   <data name="Reorder" xml:space="preserve">
     <value>Изменить порядок</value>
@@ -163,19 +163,19 @@
     <value>Альтернативное устранение чередования</value>
   </data>
   <data name="Reverse" xml:space="preserve">
-    <value>Обратить</value>
+    <value>В обратном порядке</value>
   </data>
   <data name="ReverseAll" xml:space="preserve">
-    <value>Reverse All</value>
+    <value>Обратить всё</value>
   </data>
   <data name="ReverseSelected" xml:space="preserve">
-    <value>Reverse Selected</value>
+    <value>Обратить выделенное</value>
   </data>
   <data name="Clear" xml:space="preserve">
     <value>Очистить</value>
   </data>
   <data name="ClearAll" xml:space="preserve">
-    <value>Clear All</value>
+    <value>Очистить всё</value>
   </data>
   <data name="Language" xml:space="preserve">
     <value>Язык</value>
@@ -199,37 +199,37 @@
     <value>Масштабировать с окном</value>
   </data>
   <data name="Save" xml:space="preserve">
-    <value>Save</value>
+    <value>Сохранить</value>
   </data>
   <data name="SaveAll" xml:space="preserve">
-    <value>Save All</value>
+    <value>Сохранить всё</value>
   </data>
   <data name="SaveSelected" xml:space="preserve">
-    <value>Save Selected</value>
+    <value>Сохранить выбранные</value>
   </data>
   <data name="SaveAllAsPdf" xml:space="preserve">
-    <value>Save All as PDF</value>
+    <value>Сохранить все как PDF</value>
   </data>
   <data name="SaveSelectedAsPdf" xml:space="preserve">
-    <value>Save Selected as PDF</value>
+    <value>Сохранить выбранные как PDF</value>
   </data>
   <data name="SaveAllAsImages" xml:space="preserve">
-    <value>Save All as Images</value>
+    <value>Сохранить все как изображения</value>
   </data>
   <data name="SaveSelectedAsImages" xml:space="preserve">
-    <value>Save Selected as Images</value>
+    <value>Сохранить выбранные как изображения</value>
   </data>
   <data name="EmailAll" xml:space="preserve">
-    <value>Email All</value>
+    <value>Отправить всё</value>
   </data>
   <data name="EmailSelected" xml:space="preserve">
-    <value>Email Selected</value>
+    <value>Отправить отмеченные</value>
   </data>
   <data name="EmailAllAsPdf" xml:space="preserve">
-    <value>Email All as PDF</value>
+    <value>Отправить всё как PDF</value>
   </data>
   <data name="EmailSelectedAsPdf" xml:space="preserve">
-    <value>Email Selected as PDF</value>
+    <value>Отправить отмеченные как PDF</value>
   </data>
   <data name="EditProfileFormTitle" xml:space="preserve">
     <value>Настройки профиля</value>
@@ -243,8 +243,17 @@
   <data name="TwainDriver" xml:space="preserve">
     <value>Драйвер TWAIN</value>
   </data>
+  <data name="EsclDriver" xml:space="preserve">
+    <value>Драйвер ESCL</value>
+  </data>
+  <data name="EsclNetworkDriver" xml:space="preserve">
+    <value>Сетевой драйвер ESCL</value>
+  </data>
+  <data name="EsclUsbDriver" xml:space="preserve">
+    <value>USB-драйвер ESCL</value>
+  </data>
   <data name="AppleDriver" xml:space="preserve">
-    <value>Apple Driver</value>
+    <value>Драйвер Apple</value>
   </data>
   <data name="SaneDriver" xml:space="preserve">
     <value>Драйвер SANE</value>
@@ -361,7 +370,7 @@
     <value>Далее</value>
   </data>
   <data name="Previous" xml:space="preserve">
-    <value>Назад</value>
+    <value>Предыдущие</value>
   </data>
   <data name="XOfY" xml:space="preserve">
     <value>{0} из {1}</value>
@@ -376,7 +385,7 @@
     <value>Выбрать все</value>
   </data>
   <data name="Recover" xml:space="preserve">
-    <value>Востановление</value>
+    <value>Восстановить</value>
   </data>
   <data name="NotNow" xml:space="preserve">
     <value>Не сейчас</value>
@@ -388,7 +397,7 @@
     <value>Изображения ({0} шт.), сканированные на {1} в {2}, возможно, не были сохранены и могут быть восстановлены. Хотите восстановить их?</value>
   </data>
   <data name="Placeholders" xml:space="preserve">
-    <value>Подстановка</value>
+    <value>Поля для заполнения</value>
   </data>
   <data name="SkipSavePrompt" xml:space="preserve">
     <value>Пропустить запрос на сохранение</value>
@@ -397,13 +406,13 @@
     <value>Одностраничные файлы</value>
   </data>
   <data name="EncryptPdf" xml:space="preserve">
-    <value>Шифрование PDF</value>
+    <value>Зашифровать PDF</value>
   </data>
   <data name="Show" xml:space="preserve">
     <value>Показать</value>
   </data>
   <data name="RestoreDefaults" xml:space="preserve">
-    <value>Восстановить стандартные</value>
+    <value>Восстановить по умолчанию</value>
   </data>
   <data name="PdfSettingsFormTitle" xml:space="preserve">
     <value>Настройки PDF</value>
@@ -412,7 +421,7 @@
     <value>Разрешить печать</value>
   </data>
   <data name="AllowFullQualityPrinting" xml:space="preserve">
-    <value>Разрешить полнокачественную печать</value>
+    <value>Разрешить печать в полном качестве</value>
   </data>
   <data name="AllowDocumentModification" xml:space="preserve">
     <value>Разрешить изменение документа</value>
@@ -424,7 +433,7 @@
     <value>Разрешить копирование содержимого</value>
   </data>
   <data name="AllowContentCopyingForAccessibility" xml:space="preserve">
-    <value>Разрешить копирование содержимого для доступа</value>
+    <value>Разрешить копирование содержимого средствами для людей с ограниченными возможностями</value>
   </data>
   <data name="AllowAnnotations" xml:space="preserve">
     <value>Разрешить примечания</value>
@@ -469,7 +478,7 @@
     <value>Совместимость</value>
   </data>
   <data name="PlaceholdersFormTitle" xml:space="preserve">
-    <value>Подстановка</value>
+    <value>Поля для заполнения</value>
   </data>
   <data name="Year4Digit" xml:space="preserve">
     <value>Год</value>
@@ -502,10 +511,10 @@
     <value>Автоувеличение номера (2 цифры)</value>
   </data>
   <data name="AutoIncrementing1Digit" xml:space="preserve">
-    <value>Auto-incrementing number (1 digits)</value>
+    <value>Автоувеличение номера (1 цифра)</value>
   </data>
   <data name="FileNameLabel" xml:space="preserve">
-    <value>Имя файла</value>
+    <value>Имя файла:</value>
   </data>
   <data name="PreviewLabel" xml:space="preserve">
     <value>Предпросмотр:</value>
@@ -538,10 +547,10 @@
     <value>Имя вложения:</value>
   </data>
   <data name="EmailProviderFormTitle" xml:space="preserve">
-    <value>Выбрать email провайдера </value>
+    <value>Выбрать поставщика эл. почты</value>
   </data>
   <data name="AuthorizeFormTitle" xml:space="preserve">
-    <value>Авторизовать</value>
+    <value>Авторизация</value>
   </data>
   <data name="WaitingForAuthorization" xml:space="preserve">
     <value>Ожидание авторизации...</value>
@@ -556,7 +565,7 @@
     <value>Пароль</value>
   </data>
   <data name="EncryptedFilePrompt" xml:space="preserve">
-    <value>The following file is encrypted and requires a password to open:</value>
+    <value>Этот файл зашифрован, и для открытия требуется пароль:</value>
   </data>
   <data name="PromptForFilePath" xml:space="preserve">
     <value>Запрашивать путь сохранения</value>
@@ -640,7 +649,7 @@
     <value>Пакетное сканирование</value>
   </data>
   <data name="PressStartWhenReady" xml:space="preserve">
-    <value>Нажмите «Старт», для запуска..</value>
+    <value>Нажмите «Запустить», чтобы начать.</value>
   </data>
   <data name="ScanConfig" xml:space="preserve">
     <value>Настройка сканирования</value>
@@ -655,10 +664,10 @@
     <value>Одиночное сканирование</value>
   </data>
   <data name="MultipleScansPrompt" xml:space="preserve">
-    <value>Многостраничное сканирование (запрос между сканированием)</value>
+    <value>Многостраничное сканирование (запрос перед каждым сканированием)</value>
   </data>
   <data name="MultipleScansDelay" xml:space="preserve">
-    <value>Многостраничное сканирование (задержка по времени)</value>
+    <value>Многостраничное сканирование (с задержкой по времени)</value>
   </data>
   <data name="NumberOfScansLabel" xml:space="preserve">
     <value>Количество страниц:</value>
@@ -673,7 +682,7 @@
     <value>Сохранить в один файл</value>
   </data>
   <data name="SaveToMultipleFiles" xml:space="preserve">
-    <value>Сохранить в множество файлов</value>
+    <value>Сохранить как множество файлов</value>
   </data>
   <data name="Start" xml:space="preserve">
     <value>Запустить</value>
@@ -688,6 +697,6 @@
     <value>Открыть папку</value>
   </data>
   <data name="Tools" xml:space="preserve">
-    <value>Tools</value>
+    <value>Инструменты</value>
   </data>
 </root>

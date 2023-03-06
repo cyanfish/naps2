@@ -370,7 +370,7 @@
     <value>Ο έλεγχος ενημερώσεων είναι απενεργοποιημένος.</value>
   </data>
   <data name="UpdateError" xml:space="preserve">
-    <value>An error occured when trying to install the update.</value>
+    <value>Προέκυψε σφάλμα κατά την εγκατάσταση της ενημέρωσης.</value>
   </data>
   <data name="Install" xml:space="preserve">
     <value>Εγκατάσταση {0}</value>

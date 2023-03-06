@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2023-02-06 03:29\n"
+"PO-Revision-Date: 2023-03-06 01:43\n"
 "Last-Translator: \n"
 "Language-Team: Latvian\n"
 "Language: lv\n"
@@ -19,41 +19,9 @@ msgstr ""
 "X-Crowdin-File: templates.pot\n"
 "X-Crowdin-File-ID: 75\n"
 
-#: SettingsResources.resx$Dpi_100$Message
-msgid "100 dpi"
-msgstr ""
-
-#: SettingsResources.resx$Dpi_1200$Message
-msgid "1200 dpi"
-msgstr ""
-
-#: SettingsResources.resx$Dpi_150$Message
-msgid "150 dpi"
-msgstr ""
-
-#: SettingsResources.resx$Dpi_200$Message
-msgid "200 dpi"
-msgstr ""
-
 #: SettingsResources.resx$BitDepth_24Color$Message
 msgid "24-bit Color"
 msgstr "24-bitu krāsa"
-
-#: SettingsResources.resx$Dpi_300$Message
-msgid "300 dpi"
-msgstr ""
-
-#: SettingsResources.resx$Dpi_400$Message
-msgid "400 dpi"
-msgstr ""
-
-#: SettingsResources.resx$Dpi_600$Message
-msgid "600 dpi"
-msgstr ""
-
-#: SettingsResources.resx$Dpi_800$Message
-msgid "800 dpi"
-msgstr ""
 
 #: SettingsResources.resx$PageSize_A3$Message
 msgid "A3 (297x420 mm)"
@@ -132,17 +100,9 @@ msgstr "Noņemt pretēju kārtojumu"
 msgid "Alternate Interleave"
 msgstr "Pārkārtot pretēji"
 
-#: SettingsResources.resx$TwainImpl_MemXfer$Message
-msgid "Alternative Transfer"
-msgstr "Alternatīvā pārnešana"
-
 #: MiscResources.resx$PdfImportComponentNeeded$Message
 msgid "An additional component is needed to import this PDF file. Would you like to download it now?"
 msgstr "Lai importētu šo PDF datni, vajadzīga papildus komponente. Vai vēlaties to lejuplādēt tūlīt?"
-
-#: MiscResources.resx$UpdateError$Message
-msgid "An error occurred when trying to install the update."
-msgstr "Notikusi kļūda mēģinot instalēt jauninājumu."
 
 #: SdkResources.resx$OcrError$Message
 msgid "An error occurred running OCR."
@@ -155,6 +115,10 @@ msgstr "Notikusi kļūda mēģinot autorizēt."
 #: MiscResources.resx$AutoSaveError$Message
 msgid "An error occurred when trying to auto save."
 msgstr "Notika kļūda mēģinot veikt automātisko saglabāšanu."
+
+#: MiscResources.resx$UpdateError$Message
+msgid "An error occurred when trying to install the update."
+msgstr "Notikusi kļūda mēģinot instalēt jauninājumu."
 
 #: MiscResources.resx$ErrorSaving$Message
 msgid "An error occurred when trying to save the file."
@@ -531,6 +495,18 @@ msgstr "Lejupielādes progress"
 msgid "Duplex"
 msgstr "Duplekss"
 
+#: UiStrings.resx$EsclDriver$Message
+msgid "ESCL Driver"
+msgstr ""
+
+#: UiStrings.resx$EsclNetworkDriver$Message
+msgid "ESCL Network Driver"
+msgstr ""
+
+#: UiStrings.resx$EsclUsbDriver$Message
+msgid "ESCL USB Driver"
+msgstr ""
+
 #: UiStrings.resx$Edit$Message
 msgid "Edit"
 msgstr "Rediģēt"
@@ -768,6 +744,10 @@ msgstr "Padarīt PDF meklējamus, izmantojot OCR"
 msgid "Maximum quality (large files)"
 msgstr "Maksimālā kvalitāte (lielas datnes)"
 
+#: SettingsResources.resx$TwainImpl_MemXfer$Message
+msgid "Memory Transfer"
+msgstr ""
+
 #: UiStrings.resx$Metadata$Message
 msgid "Metadata"
 msgstr "Metadati"
@@ -821,6 +801,10 @@ msgstr "Nosaukums (neobligāts)"
 #: MiscResources.resx$NameMissing$Message
 msgid "Name missing."
 msgstr "Nav nosaukuma."
+
+#: SettingsResources.resx$TwainImpl_NativeXfer$Message
+msgid "Native Transfer"
+msgstr ""
 
 #: UiStrings.resx$New$Message
 msgid "New"
@@ -1563,11 +1547,24 @@ msgstr ""
 msgid "{0} / {1} files"
 msgstr "{0} / {1} datnes"
 
+#: SettingsResources.resx$DpiFormat$Message
+msgid "{0} dpi"
+msgstr ""
+
 #: UiStrings.resx$RecoverPrompt$Message
 msgid "{0} image(s) scanned on {1} at {2} may not have been saved, and are recoverable. Do you want to recover them?"
 msgstr "{0} attēls(i), kas skenēti {1} {2}, iespējams nav saglabāti un ir atgūstami. Vai vēlaties tos atgūt?"
 
 #: MiscResources.resx$ImagesSaved$Message
+msgid "{0} images saved."
+msgstr "{0} attēli saglabāti."
+
+#: MiscResources.resx$PdfStatus$Message
+#: UiStrings.resx$XOfY$Message
+msgid "{0} of {1}"
+msgstr "{0} no {1}"
+
+esx$ImagesSaved$Message
 msgid "{0} images saved."
 msgstr "{0} attēli saglabāti."
 

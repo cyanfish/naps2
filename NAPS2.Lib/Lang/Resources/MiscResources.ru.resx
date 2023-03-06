@@ -52,7 +52,7 @@
     <value>Bitmap-файлы (*.bmp)</value>
   </data>
   <data name="FileTypeEmf" xml:space="preserve">
-    <value>Улучшенный метафайл (*.emf)</value>
+    <value>Расширенный метафайл (*.emf)</value>
   </data>
   <data name="FileTypeExif" xml:space="preserve">
     <value>Файл метаданных (*.exif)</value>
@@ -73,7 +73,7 @@
     <value>Файл TIFF (*.tiff, *.tif)</value>
   </data>
   <data name="FileTypeJp2" xml:space="preserve">
-    <value>JPEG2000 File (*.jp2, *.jpx)</value>
+    <value>Файл JPEG2000 (*.jp2, *.jpx)</value>
   </data>
   <data name="NameMissing" xml:space="preserve">
     <value>Не указано имя.</value>
@@ -88,7 +88,7 @@
     <value>Сканеры не найдены.</value>
   </data>
   <data name="OverwriteFile" xml:space="preserve">
-    <value>Заменить файл</value>
+    <value>Перезаписать файл</value>
   </data>
   <data name="PdfStatus" xml:space="preserve">
     <value>{0} из {1}</value>
@@ -115,10 +115,10 @@
     <value>Установка завершена. Перезапустить NAPS2?</value>
   </data>
   <data name="InstallFailed" xml:space="preserve">
-    <value>Ошибка установки.</value>
+    <value>Ошибка при установке.</value>
   </data>
   <data name="InstallFailedTitle" xml:space="preserve">
-    <value>Ошибка установки</value>
+    <value>Ошибка при установке</value>
   </data>
   <data name="AllCount" xml:space="preserve">
     <value>Все ({0})</value>
@@ -163,7 +163,7 @@
     <value>Есть несохранённые изменения. Вы уверены, что хотите выйти и отказаться от этих изменений?</value>
   </data>
   <data name="ExitWithActiveOperations" xml:space="preserve">
-    <value>Выполняется операция. Вы уверены, что хотите выйти и отменить операцию?</value>
+    <value>Уже выполняется операция. Вы уверены, что хотите выйти и отменить операцию?</value>
   </data>
   <data name="UnsavedChanges" xml:space="preserve">
     <value>Несохранённые изменения</value>
@@ -175,7 +175,7 @@
     <value>Сканирование страницы {0}</value>
   </data>
   <data name="NoFeederSupport" xml:space="preserve">
-    <value>Выбранный сканер не поддерживает использование автоподатчика. Если ваш сканер имеет АПД, попробуйте другой драйвер..</value>
+    <value>Выбранный сканер не поддерживает использование автоподатчика. Если ваш сканер имеет АПД, попробуйте другой драйвер.</value>
   </data>
   <data name="NoPagesInFeeder" xml:space="preserve">
     <value>В податчике нет листов.</value>
@@ -190,7 +190,7 @@
     <value>из {0}</value>
   </data>
   <data name="BatchError" xml:space="preserve">
-    <value>An unknown error occurred during the batch scan.</value>
+    <value>Произошла неизвестная ошибка при пакетном сканировании.</value>
   </data>
   <data name="BatchStatusCancelled" xml:space="preserve">
     <value>Обработка отменена.</value>
@@ -265,7 +265,7 @@
     <value>Копирование…</value>
   </data>
   <data name="Importing" xml:space="preserve">
-    <value>Импорт......</value>
+    <value>Импортирование...</value>
   </data>
   <data name="EmailPdf" xml:space="preserve">
     <value>Отправить PDF почтой</value>
@@ -295,7 +295,7 @@
     <value>Разогрев сканера.</value>
   </data>
   <data name="OcrUpdateAvailable" xml:space="preserve">
-    <value>Обновить распознавание.</value>
+    <value>Доступно обновление средства распознавания текста (OCR).</value>
   </data>
   <data name="ImageSaved" xml:space="preserve">
     <value>Изображение сохранено.</value>
@@ -337,7 +337,7 @@
     <value>Пожертвовать</value>
   </data>
   <data name="DonatePrompt" xml:space="preserve">
-    <value>NAPS2 - бесплатная программа,однако Вы можете пожертвовать деньги на развитие проекта.</value>
+    <value>NAPS2 - бесплатная программа, однако Вы можете пожертвовать деньги на развитие проекта.</value>
   </data>
   <data name="SaneNotAvailable" xml:space="preserve">
     <value>Драйвер SANE недоступен. Убедитесь, что необходимые пакеты установлены:</value>
@@ -370,7 +370,7 @@
     <value>Update checking is disabled.</value>
   </data>
   <data name="UpdateError" xml:space="preserve">
-    <value>An error occured when trying to install the update.</value>
+    <value>Произошла ошибка во время установки обновления.</value>
   </data>
   <data name="Install" xml:space="preserve">
     <value>Установить {0}</value>
@@ -379,7 +379,7 @@
     <value>Доступно обновление.</value>
   </data>
   <data name="AuthError" xml:space="preserve">
-    <value>Произошла ошибка во время авторизации.</value>
+    <value>При попытке авторизации произошла ошибка.</value>
   </data>
   <data name="UploadingEmail" xml:space="preserve">
     <value>Загрузка электронного сообщения...</value>
