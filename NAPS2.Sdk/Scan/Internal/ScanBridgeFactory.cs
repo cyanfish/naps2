@@ -13,8 +13,11 @@ internal class ScanBridgeFactory : IScanBridgeFactory
 
     public IScanBridge Create(ScanOptions options)
     {
-        // TODO: Ideally Apple could be run in a worker too for stability. But we would need to set up the worker with
-        // an NSApplication etc. (I assume - trying without gives a Device Offline error)
+        if (options.Driver == Driver.Apple)
+        {
+            // Run ImageCaptureCore in a worker process for added stability
+            return new WorkerScanBridge(_scanningContext, WorkerType.Native);
+        }
         if (options.Driver == Driver.Sane)
         {
             // Run SANE in a worker process for added stability

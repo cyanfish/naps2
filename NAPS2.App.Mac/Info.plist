@@ -17,6 +17,10 @@
     <key>CFBundleIconFile</key>
     <string>Icon.icns</string>
     <key>NSPrincipalClass</key>
+    <!-- We start as a background application in case we're in worker mode and don't want to show a UI.
+     If we're in GUI mode we dynamically switch to a foreground application (see MacEntryPoint.cs). -->
     <string>NSApplication</string>
+    <key>LSBackgroundOnly</key>
+    <true/>
   </dict>
 </plist>

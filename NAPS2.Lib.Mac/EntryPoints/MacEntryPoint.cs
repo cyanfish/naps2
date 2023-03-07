@@ -20,8 +20,13 @@ public static class MacEntryPoint
         }
         if (args.Length > 0 && args[0] == "worker")
         {
-            return WorkerEntryPoint.Run(args.Skip(1).ToArray(), new MacModule());
+            return MacWorkerEntryPoint.Run(args.Skip(1).ToArray());
         }
+
+        // We start the process as a background process (by setting LSBackgroundOnly in Info.plist) and only turn it
+        // into a foreground process once we know we're not in worker or console mode. This ensures workers don't have
+        // a chance to show in the dock.
+        MacProcessHelper.TransformThisProcessToForeground();
 
         // Initialize Autofac (the DI framework)
         var container = AutoFacHelper.FromModules(
