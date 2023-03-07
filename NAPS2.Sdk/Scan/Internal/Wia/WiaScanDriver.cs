@@ -156,9 +156,10 @@ internal class WiaScanDriver : IScanDriver
             {
                 try
                 {
-                    using (args.Stream)
-                    using (var image = _scanningContext.ImageContext.Load(args.Stream))
+                    using var stream = args.Stream;
+                    if (stream.Length > 0)
                     {
+                        using var image = _scanningContext.ImageContext.Load(stream);
                         _callback(image);
                     }
                 }
