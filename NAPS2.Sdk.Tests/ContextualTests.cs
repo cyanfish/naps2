@@ -1,7 +1,10 @@
-﻿using System.Threading;
+﻿using System.Collections.Immutable;
+using System.Threading;
+using Moq;
 using NAPS2.Ocr;
 using NAPS2.Pdf;
 using NAPS2.Scan;
+using NAPS2.Sdk.Tests.Asserts;
 using NAPS2.Unmanaged;
 using Xunit.Abstractions;
 
@@ -59,9 +62,33 @@ public class ContextualTests : IDisposable
         var tesseractPath = NativeLibrary.FindExePath(PlatformCompat.System.TesseractExecutableName, depsRoot);
         CopyResourceToFile(BinaryResources.eng_traineddata, fast, "eng.traineddata");
         CopyResourceToFile(BinaryResources.heb_traineddata, fast, "heb.traineddata");
-        ScanningContext.OcrEngine = new TesseractOcrEngine(tesseractPath, FolderPath, FolderPath, new TestErrorOutput(testOutputHelper));
+        ScanningContext.OcrEngine =
+            new TesseractOcrEngine(tesseractPath, FolderPath, FolderPath, new TestErrorOutput(testOutputHelper));
     }
-    
+
+    public void SetUpFakeOcr(Dictionary<IMemoryImage, string> ocrTextByImage)
+    {
+        var ocrMock = new Mock<IOcrEngine>();
+        ocrMock.Setup(x => x.ProcessImage(It.IsAny<string>(), It.IsAny<OcrParams>(), It.IsAny<CancellationToken>()))
+            .Returns(
+                async (string path, OcrParams _, CancellationToken _) =>
+                {
+                    var ocrImage = ImageContext.Load(path);
+                    await Task.Delay(200);
+                    foreach (var image in ocrTextByImage.Keys)
+                    {
+                        if (ImageAsserts.IsSimilar(image, ocrImage))
+                        {
+                            return new OcrResult((0, 0, 100, 100),
+                                ImmutableList.Create(
+                                    new OcrResultElement(ocrTextByImage[image], "eng", false, (0, 0, 10, 10))));
+                        }
+                    }
+                    return null;
+                });
+        ScanningContext.OcrEngine = ocrMock.Object;
+    }
+
     public string CopyResourceToFile(byte[] resource, string folder, string fileName)
     {
         string path = Path.Combine(folder, fileName);

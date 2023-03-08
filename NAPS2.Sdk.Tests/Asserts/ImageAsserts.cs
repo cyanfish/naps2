@@ -65,7 +65,7 @@ public static class ImageAsserts
         Similar(first, second, rmseThreshold, ignoreResolution, false);
     }
 
-    private static unsafe void Similar(IMemoryImage first, IMemoryImage second,
+    private static void Similar(IMemoryImage first, IMemoryImage second,
         double rmseThreshold, bool ignoreResolution, bool isSimilar)
     {
         if (first.PixelFormat == ImagePixelFormat.Unsupported || second.PixelFormat == ImagePixelFormat.Unsupported)
@@ -105,6 +105,24 @@ public static class ImageAsserts
         {
             Assert.True(rmse > rmseThreshold, $"RMSE was {rmse}, expected > {rmseThreshold}");
         }
+    }
+
+    public static bool IsSimilar(IMemoryImage first, IMemoryImage second, double rmseThreshold = GENERAL_RMSE_THRESHOLD)
+    {
+        if (first.Width != second.Width || first.Height != second.Height) return false;
+
+        if (first.PixelFormat is ImagePixelFormat.BW1 or ImagePixelFormat.Gray8)
+        {
+            first = first.CopyWithPixelFormat(ImagePixelFormat.RGB24);
+        }
+        if (second.PixelFormat is ImagePixelFormat.BW1 or ImagePixelFormat.Gray8)
+        {
+            second = second.CopyWithPixelFormat(ImagePixelFormat.RGB24);
+        }
+
+        var op = new RmseBitwiseImageOp();
+        op.Perform(first, second);
+        return op.Rmse <= rmseThreshold;
     }
 
     public static unsafe void PixelColors(IMemoryImage image, PixelColorData colorData)

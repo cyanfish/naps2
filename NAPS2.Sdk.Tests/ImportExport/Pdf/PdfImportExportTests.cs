@@ -83,7 +83,12 @@ public class PdfImportExportTests : ContextualTests
     public async Task ImportExportOcrablePdf(OcrTestConfig config)
     {
         config.StorageConfig.Apply(this);
-        SetUpOcr(_testOutputHelper);
+        SetUpFakeOcr(new()
+        {
+            { LoadImage(PdfResources.word_p1), "Page one."},
+            { LoadImage(PdfResources.word_p2), "Page two."},
+            { LoadImage(PdfResources.word_patcht_p1), "Sized for printing unscaled"}
+        });
 
         var importPathForOcr = Path.Combine(FolderPath, "import_ocr.pdf");
         File.WriteAllBytes(importPathForOcr, PdfResources.word_patcht_pdf);
@@ -149,7 +154,14 @@ public class PdfImportExportTests : ContextualTests
         images.Add(ScanningContext.CreateProcessedImage(LoadImage(ImageResources.ocr_test)));
         Assert.Equal(5, images.Count);
 
-        SetUpOcr(_testOutputHelper);
+        SetUpFakeOcr(new()
+        {
+            { LoadImage(PdfResources.word_p1), "Page one."},
+            { LoadImage(PdfResources.word_p2), "Page two."},
+            { LoadImage(PdfResources.word_patcht_p1), "Sized for printing unscaled"},
+            { LoadImage(ImageResources.dog), ""},
+            { LoadImage(ImageResources.ocr_test), "ADVERTISEMENT."},
+        });
         await _exporter.Export(_exportPath, images, new PdfExportParams(), config.OcrParams);
 
         PdfAsserts.AssertImages(_exportPath,
