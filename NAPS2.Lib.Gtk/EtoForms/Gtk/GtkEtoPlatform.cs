@@ -131,7 +131,7 @@ public class GtkEtoPlatform : EtoPlatform
         // the position so it doesn't affect that any more. However, there is a chance this will break in some edge
         // cases.
         widget.Margin = 0;
-        if (widget.IsRealized)
+        if (widget.IsRealized && widget is not gtk.DrawingArea)
         {
             widget.GetSizeRequest(out var oldWidth, out var oldHeight);
             widget.SetSizeRequest(0, 0);
