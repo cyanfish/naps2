@@ -157,11 +157,13 @@ internal class WiaScanDriver : IScanDriver
                 try
                 {
                     using var stream = args.Stream;
-                    if (stream.Length > 0)
+                    if (stream.Length == 0)
                     {
-                        using var image = _scanningContext.ImageContext.Load(stream);
-                        _callback(image);
+                        Log.Error("Ignoring empty stream from WIA");
+                        return;
                     }
+                    using var image = _scanningContext.ImageContext.Load(stream);
+                    _callback(image);
                 }
                 catch (Exception e)
                 {
