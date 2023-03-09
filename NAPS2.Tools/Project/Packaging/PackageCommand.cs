@@ -7,13 +7,16 @@ public class PackageCommand : ICommand<PackageOptions>
 {
     public int Run(PackageOptions opts)
     {
+        if (opts.Debug && !opts.Build) throw new Exception("--debug requires --build too");
+
         if (opts.Build)
         {
             foreach (var buildType in TargetsHelper.GetBuildTypesFromPackageType(opts.PackageType))
             {
                 new BuildCommand().Run(new BuildOptions
                 {
-                    BuildType = buildType
+                    BuildType = buildType,
+                    Debug = opts.Debug
                 });
             }
         }

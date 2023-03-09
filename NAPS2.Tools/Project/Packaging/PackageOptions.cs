@@ -26,5 +26,8 @@ public class PackageOptions : OptionsBase
     [Option("nonotarize", Required = false, HelpText = "Skip notarization only")]
     public bool NoNotarize { get; set; }
 
+    [Option("debug", Required = false, HelpText = "Set DEBUG compile-time constant. Requires --build.")]
+    public bool Debug { get; set; }
+
     // TODO: Add net target (net462/net6/net6-windows etc.)
 }

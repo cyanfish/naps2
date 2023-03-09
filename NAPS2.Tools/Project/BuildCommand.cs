@@ -9,6 +9,10 @@ public class BuildCommand : ICommand<BuildOptions>
         foreach (var target in TargetsHelper.EnumerateBuildTargets(opts.BuildType))
         {
             var config = GetConfig(target);
+            if (opts.Debug)
+            {
+                config += " /p:AddDebugConstant=1";
+            }
             Output.Info($"Building: {config}");
             try
             {

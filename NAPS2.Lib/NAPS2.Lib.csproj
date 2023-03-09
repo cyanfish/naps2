@@ -24,6 +24,9 @@
   <PropertyGroup Condition="'$(Configuration)' == 'Release-Zip'">
     <DefineConstants>$(DefineConstants);ZIP</DefineConstants>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(AddDebugConstant)' == '1'">
+    <DefineConstants>$(DefineConstants);DEBUG</DefineConstants>
+  </PropertyGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\NAPS2.Sdk\NAPS2.Sdk.csproj" />
