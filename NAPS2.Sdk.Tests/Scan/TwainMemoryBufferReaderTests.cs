@@ -339,7 +339,7 @@ public class TwainMemoryBufferReaderTests : ContextualTests
             Width = 2,
             PixelType = (int) PixelType.RGB,
             BitsPerPixel = 24,
-            BitsPerSample = { 8, 7, 9 },
+            BitsPerSample = { 7, 8, 9 },
             SamplesPerPixel = 3
         };
         var image = Create24BitImage(2, 2);

@@ -16,6 +16,7 @@ public static class TwainMemoryBufferReader
         var subPixelType = ((PixelType) imageData.PixelType, imageData.BitsPerPixel, imageData.SamplesPerPixel,
                 imageData.BitsPerSample) switch
             {
+                // Technically for RGB we should check for [8, 8, 8, ...] but some scanners only set the first value
                 (PixelType.RGB, 24, 3, [8, ..]) => SubPixelType.Rgb,
                 (PixelType.Gray, 8, 1, [8, ..]) => SubPixelType.Gray,
                 (PixelType.BlackWhite, 1, 1, [1, ..]) => SubPixelType.Bit,

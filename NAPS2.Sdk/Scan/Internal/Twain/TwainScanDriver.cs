@@ -36,6 +36,7 @@ internal class TwainScanDriver : IScanDriver
             var controller = GetSessionController(options);
             using var state = new TwainImageProcessor(_scanningContext, options, scanEvents, callback);
             await controller.StartScan(options, state, cancelToken);
+            state.Flush();
         });
     }
 
