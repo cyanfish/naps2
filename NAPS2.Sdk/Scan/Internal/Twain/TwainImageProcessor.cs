@@ -68,11 +68,11 @@ internal class TwainImageProcessor : ITwainEvents, IDisposable
         // The image will be realloc'd to the real size once we're done and know what that is.
         if (_transferredWidth > _currentImage.Width)
         {
-            ReallocImage(_currentImage.Width * 2, _currentImage.Height);
+            ReallocImage(Math.Max(_currentImage.Width * 2, _transferredWidth), _currentImage.Height);
         }
         if (_transferredHeight > _currentImage.Height)
         {
-            ReallocImage(_currentImage.Width, _currentImage.Height * 2);
+            ReallocImage(_currentImage.Width, Math.Max(_currentImage.Height * 2, _transferredHeight));
         }
 
         TwainMemoryBufferReader.CopyBufferToImage(memoryBuffer, _currentImageData, _currentImage);
