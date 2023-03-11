@@ -10,14 +10,15 @@ public class OcrDownloadForm : EtoDialogBase
 {
     private readonly TesseractLanguageManager _tesseractLanguageManager;
 
-    private readonly IListView<Language> _languageList =
-        EtoPlatform.Current.CreateListView(new OcrLanguagesListViewBehavior());
+    private readonly IListView<Language> _languageList;
     private readonly Label _downloadSize = new();
     private readonly Button _downloadButton;
 
-    public OcrDownloadForm(Naps2Config config, TesseractLanguageManager tesseractLanguageManager) : base(config)
+    public OcrDownloadForm(Naps2Config config, TesseractLanguageManager tesseractLanguageManager,
+        OcrLanguagesListViewBehavior ocrLanguagesListViewBehavior) : base(config)
     {
         _tesseractLanguageManager = tesseractLanguageManager;
+        _languageList = EtoPlatform.Current.CreateListView(ocrLanguagesListViewBehavior);
 
         var initialSelection = new HashSet<string>();
         // TODO: We used to select old installed languages here, maybe we could do it again if we get new lang data

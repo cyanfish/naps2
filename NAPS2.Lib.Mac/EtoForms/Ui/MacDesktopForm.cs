@@ -3,6 +3,7 @@ using Eto.Forms;
 using NAPS2.EtoForms.Desktop;
 using NAPS2.EtoForms.Layout;
 using NAPS2.EtoForms.Mac;
+using NAPS2.EtoForms.Widgets;
 using NAPS2.ImportExport.Images;
 using NAPS2.Scan;
 
@@ -15,6 +16,7 @@ public class MacDesktopForm : DesktopForm
         DesktopKeyboardShortcuts keyboardShortcuts,
         INotificationManager notify,
         CultureHelper cultureHelper,
+        ColorScheme colorScheme,
         IProfileManager profileManager,
         UiImageList imageList,
         ImageTransfer imageTransfer,
@@ -23,12 +25,13 @@ public class MacDesktopForm : DesktopForm
         DesktopController desktopController,
         IDesktopScanController desktopScanController,
         ImageListActions imageListActions,
+        ImageListViewBehavior imageListViewBehavior,
         DesktopFormProvider desktopFormProvider,
         IDesktopSubFormController desktopSubFormController,
         DesktopCommands commands)
-        : base(config, keyboardShortcuts, notify, cultureHelper, profileManager,
+        : base(config, keyboardShortcuts, notify, cultureHelper, colorScheme, profileManager,
             imageList, imageTransfer, thumbnailController, thumbnailProvider, desktopController, desktopScanController,
-            imageListActions, desktopFormProvider, desktopSubFormController, commands)
+            imageListActions, imageListViewBehavior, desktopFormProvider, desktopSubFormController, commands)
     {
         // For retina screens
         _thumbnailController.Oversample = 2.0;

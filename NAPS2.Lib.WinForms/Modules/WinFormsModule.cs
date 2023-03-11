@@ -15,6 +15,7 @@ public class WinFormsModule : GuiModule
 
         builder.RegisterType<NotificationManager>().As<INotificationManager>().SingleInstance();
         builder.RegisterType<PrintDocumentPrinter>().As<IScannedImagePrinter>();
+        builder.RegisterType<WinFormsDarkModeProvider>().As<IDarkModeProvider>().SingleInstance();
 
         builder.RegisterType<WinFormsDesktopForm>().As<DesktopForm>();
 

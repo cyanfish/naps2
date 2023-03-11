@@ -5,6 +5,8 @@ namespace NAPS2.EtoForms.Widgets;
 
 public abstract class ListViewBehavior<T> where T : notnull
 {
+    public ColorScheme ColorScheme { get; protected set; }
+
     public bool MultiSelect { get; protected set; }
         
     public bool ShowLabels { get; protected set; }

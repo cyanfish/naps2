@@ -5,6 +5,7 @@ using Gdk;
 using Gtk;
 using NAPS2.EtoForms.Desktop;
 using NAPS2.EtoForms.Gtk;
+using NAPS2.EtoForms.Widgets;
 using NAPS2.ImportExport.Images;
 using Command = Eto.Forms.Command;
 
@@ -24,6 +25,7 @@ public class GtkDesktopForm : DesktopForm
         DesktopKeyboardShortcuts keyboardShortcuts,
         INotificationManager notify,
         CultureHelper cultureHelper,
+        ColorScheme colorScheme,
         IProfileManager profileManager,
         UiImageList imageList,
         ImageTransfer imageTransfer,
@@ -32,12 +34,13 @@ public class GtkDesktopForm : DesktopForm
         DesktopController desktopController,
         IDesktopScanController desktopScanController,
         ImageListActions imageListActions,
+        ImageListViewBehavior imageListViewBehavior,
         DesktopFormProvider desktopFormProvider,
         IDesktopSubFormController desktopSubFormController,
         DesktopCommands commands)
-        : base(config, keyboardShortcuts, notify, cultureHelper, profileManager,
+        : base(config, keyboardShortcuts, notify, cultureHelper, colorScheme, profileManager,
             imageList, imageTransfer, thumbnailController, thumbnailProvider, desktopController, desktopScanController,
-            imageListActions, desktopFormProvider, desktopSubFormController, commands)
+            imageListActions, imageListViewBehavior, desktopFormProvider, desktopSubFormController, commands)
     {
         var cssProvider = new CssProvider();
         cssProvider.LoadFromData(@"

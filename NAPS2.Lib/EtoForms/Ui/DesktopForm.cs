@@ -16,6 +16,7 @@ public abstract class DesktopForm : EtoFormBase
     private readonly DesktopKeyboardShortcuts _keyboardShortcuts;
     private readonly INotificationManager _notify;
     private readonly CultureHelper _cultureHelper;
+    protected readonly ColorScheme _colorScheme;
     private readonly IProfileManager _profileManager;
     private readonly ImageTransfer _imageTransfer;
     protected readonly ThumbnailController _thumbnailController;
@@ -38,6 +39,7 @@ public abstract class DesktopForm : EtoFormBase
         DesktopKeyboardShortcuts keyboardShortcuts,
         INotificationManager notify,
         CultureHelper cultureHelper,
+        ColorScheme colorScheme,
         IProfileManager profileManager,
         UiImageList imageList,
         ImageTransfer imageTransfer,
@@ -46,6 +48,7 @@ public abstract class DesktopForm : EtoFormBase
         DesktopController desktopController,
         IDesktopScanController desktopScanController,
         ImageListActions imageListActions,
+        ImageListViewBehavior imageListViewBehavior,
         DesktopFormProvider desktopFormProvider,
         IDesktopSubFormController desktopSubFormController,
         DesktopCommands commands) : base(config)
@@ -53,6 +56,7 @@ public abstract class DesktopForm : EtoFormBase
         _keyboardShortcuts = keyboardShortcuts;
         _notify = notify;
         _cultureHelper = cultureHelper;
+        _colorScheme = colorScheme;
         _profileManager = profileManager;
         ImageList = imageList;
         _imageTransfer = imageTransfer;
@@ -71,7 +75,7 @@ public abstract class DesktopForm : EtoFormBase
         UpdateScanButton();
         InitLanguageDropdown();
 
-        _listView = EtoPlatform.Current.CreateListView(new ImageListViewBehavior(_thumbnailProvider, _imageTransfer));
+        _listView = EtoPlatform.Current.CreateListView(imageListViewBehavior);
         _listView.Selection = ImageList.Selection;
         _listView.ItemClicked += ListViewItemClicked;
         _listView.Drop += ListViewDrop;
@@ -120,6 +124,14 @@ public abstract class DesktopForm : EtoFormBase
                 L.Row(GetZoomButtons(), C.Filler())
             ).Padding(10)
         );
+
+        UpdateColors();
+        // TODO: Memory leak?
+        _colorScheme.ColorSchemeChanged += (_, _) => UpdateColors();
+    }
+
+    protected virtual void UpdateColors()
+    {
     }
 
     private void OpeningContextMenu(object? sender, EventArgs e)

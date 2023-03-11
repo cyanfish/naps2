@@ -10,10 +10,12 @@ public class ImageListViewBehavior : ListViewBehavior<UiImage>
     private readonly UiThumbnailProvider _thumbnailProvider;
     private readonly ImageTransfer _imageTransfer;
 
-    public ImageListViewBehavior(UiThumbnailProvider thumbnailProvider, ImageTransfer imageTransfer)
+    public ImageListViewBehavior(UiThumbnailProvider thumbnailProvider, ImageTransfer imageTransfer,
+        ColorScheme colorScheme)
     {
         _thumbnailProvider = thumbnailProvider;
         _imageTransfer = imageTransfer;
+        ColorScheme = colorScheme;
         MultiSelect = true;
         ShowLabels = false;
         ScrollOnDrag = true;

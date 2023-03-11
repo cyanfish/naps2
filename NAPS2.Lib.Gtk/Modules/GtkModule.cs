@@ -16,6 +16,7 @@ public class GtkModule : GuiModule
 
         builder.RegisterType<StubNotificationManager>().As<INotificationManager>().SingleInstance();
         builder.RegisterType<StubScannedImagePrinter>().As<IScannedImagePrinter>();
+        builder.RegisterType<GtkDarkModeProvider>().As<IDarkModeProvider>();
         builder.RegisterType<GtkImageContext>().As<ImageContext>();
         builder.RegisterType<GtkImageContext>().AsSelf();
 

@@ -5,6 +5,7 @@ using Eto.WinForms;
 using Eto.WinForms.Forms.ToolBar;
 using NAPS2.EtoForms.Desktop;
 using NAPS2.EtoForms.Layout;
+using NAPS2.EtoForms.Widgets;
 using NAPS2.EtoForms.WinForms;
 using NAPS2.ImportExport.Images;
 using NAPS2.WinForms;
@@ -27,6 +28,7 @@ public class WinFormsDesktopForm : DesktopForm
         DesktopKeyboardShortcuts keyboardShortcuts,
         INotificationManager notify,
         CultureHelper cultureHelper,
+        ColorScheme colorScheme,
         IProfileManager profileManager,
         UiImageList imageList,
         ImageTransfer imageTransfer,
@@ -35,12 +37,13 @@ public class WinFormsDesktopForm : DesktopForm
         DesktopController desktopController,
         IDesktopScanController desktopScanController,
         ImageListActions imageListActions,
+        ImageListViewBehavior imageListViewBehavior,
         DesktopFormProvider desktopFormProvider,
         IDesktopSubFormController desktopSubFormController,
         DesktopCommands commands)
-        : base(config, keyboardShortcuts, notify, cultureHelper, profileManager,
+        : base(config, keyboardShortcuts, notify, cultureHelper, colorScheme, profileManager,
             imageList, imageTransfer, thumbnailController, thumbnailProvider, desktopController, desktopScanController,
-            imageListActions, desktopFormProvider, desktopSubFormController, commands)
+            imageListActions, imageListViewBehavior, desktopFormProvider, desktopSubFormController, commands)
     {
         _form = this.ToNative();
         _form.FormClosing += OnFormClosing;

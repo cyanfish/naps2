@@ -17,6 +17,7 @@ public class MacModule : GuiModule
 
         builder.RegisterType<StubNotificationManager>().As<INotificationManager>().SingleInstance();
         builder.RegisterType<StubScannedImagePrinter>().As<IScannedImagePrinter>();
+        builder.RegisterType<MacDarkModeProvider>().As<IDarkModeProvider>();
         builder.RegisterType<MacImageContext>().As<ImageContext>();
         builder.RegisterType<MacImageContext>().AsSelf();
         builder.RegisterType<MacIconProvider>().As<IIconProvider>();

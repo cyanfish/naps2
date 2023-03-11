@@ -4,8 +4,9 @@ namespace NAPS2.EtoForms.Widgets;
 
 public class OcrLanguagesListViewBehavior : ListViewBehavior<Language>
 {
-    public OcrLanguagesListViewBehavior()
+    public OcrLanguagesListViewBehavior(ColorScheme colorScheme)
     {
+        ColorScheme = colorScheme;
         ShowLabels = true;
         Checkboxes = true;
     }
