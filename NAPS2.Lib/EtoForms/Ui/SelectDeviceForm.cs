@@ -46,58 +46,80 @@ public class SelectDeviceForm : EtoDialogBase
         if (DeviceList != null)
         {
             // If we have a full device list, show it immediately.
-            foreach (var device in DeviceList)
-            {
-                _devices.Items.Add(new ListItem
-                {
-                    Key = device.ID,
-                    Text = device.Name
-                });
-            }
-            if (_devices.Items.Count > 0)
-            {
-                _devices.SelectedIndex = 0;
-                _selectDevice.Enabled = true;
-            }
-            _spinner.Visible = false;
+            ShowImmediateDeviceList();
         }
         else if (AsyncDevices != null)
         {
             // If we have an IAsyncEnumerable, lazily populate the device list.
-            Task.Run(async () =>
-            {
-                await foreach (var device in AsyncDevices)
-                {
-                    Invoker.Current.Invoke(() =>
-                    {
-                        _lazyDeviceList.Add(device);
-                        _devices.Items.Add(new ListItem
-                        {
-                            Key = device.ID,
-                            Text = device.Name
-                        });
-                        if (_devices.Items.Count == 1)
-                        {
-                            _devices.SelectedIndex = 0;
-                            _selectDevice.Enabled = true;
-                        }
-                    });
-                }
-                Invoker.Current.Invoke(() =>
-                {
-                    _spinner.Visible = false;
-                    if (_lazyDeviceList.Count == 0 && !AsyncCancelToken.IsCancellationRequested)
-                    {
-                        Close();
-                        _errorOutput.DisplayError(SdkResources.NoDevicesFound);
-                    }
-                });
-            });
+            Task.Run(ShowAsyncDeviceList);
         }
         else
         {
             throw new InvalidOperationException();
         }
+    }
+
+    private async Task ShowAsyncDeviceList()
+    {
+        try
+        {
+            await foreach (var device in AsyncDevices!)
+            {
+                Invoker.Current.Invoke(() =>
+                {
+                    _lazyDeviceList.Add(device);
+                    _devices.Items.Add(new ListItem
+                    {
+                        Key = device.ID,
+                        Text = device.Name
+                    });
+                    if (_devices.Items.Count == 1)
+                    {
+                        _devices.SelectedIndex = 0;
+                        _selectDevice.Enabled = true;
+                    }
+                });
+            }
+            Invoker.Current.Invoke(() =>
+            {
+                _spinner.Visible = false;
+                if (_lazyDeviceList.Count == 0 && !AsyncCancelToken.IsCancellationRequested)
+                {
+                    Close();
+                    _errorOutput.DisplayError(SdkResources.NoDevicesFound);
+                }
+            });
+        }
+        catch (Exception ex)
+        {
+            Invoker.Current.Invoke(() =>
+            {
+                _spinner.Visible = false;
+                if (_lazyDeviceList.Count == 0 && !AsyncCancelToken.IsCancellationRequested)
+                {
+                    Close();
+                }
+                _errorOutput.DisplayError(ex.Message, ex);
+            });
+        }
+    }
+
+    private void ShowImmediateDeviceList()
+    {
+        foreach (var device in DeviceList!)
+        {
+            _devices.Items.Add(new ListItem
+            {
+                Key = device.ID,
+                Text = device.Name
+            });
+        }
+        if (_devices.Items.Count > 0)
+        {
+            _devices.SelectedIndex = 0;
+            _selectDevice.Enabled = true;
+        }
+        _spinner.Visible = false;
     }
 
     public IAsyncEnumerable<ScanDevice>? AsyncDevices { get; set; }
