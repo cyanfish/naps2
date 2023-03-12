@@ -394,7 +394,7 @@
     <value>Beolvasott képek helyreállítása</value>
   </data>
   <data name="RecoverPrompt" xml:space="preserve">
-    <value>{0} image(s) scanned on {1} at {2} may not have been saved, and are recoverable. Do you want to recover them?</value>
+    <value>A {1} {2}-kor beolvasott {0} kép lehet, hogy nem került mentésre, és visszaállítható. Szeretné visszaállítani őket?</value>
   </data>
   <data name="Placeholders" xml:space="preserve">
     <value>Helyettesítők</value>

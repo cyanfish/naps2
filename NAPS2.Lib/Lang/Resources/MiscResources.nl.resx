@@ -367,7 +367,7 @@
     <value>Controleert...</value>
   </data>
   <data name="UpdateCheckDisabled" xml:space="preserve">
-    <value>Update checking is disabled.</value>
+    <value>Controleren van updates is uitgeschakeld.</value>
   </data>
   <data name="UpdateError" xml:space="preserve">
     <value>Er was een fout bij het installeren van de update.</value>

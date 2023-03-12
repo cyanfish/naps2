@@ -640,7 +640,7 @@
     <value>Çift taraflı sayfaları ters yüz et</value>
   </data>
   <data name="WiaVersionLabel" xml:space="preserve">
-    <value>Wia Version:</value>
+    <value>Wia Sürümü:</value>
   </data>
   <data name="TwainImplLabel" xml:space="preserve">
     <value>Twain Uyarlaması:</value>

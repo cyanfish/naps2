@@ -349,7 +349,7 @@
     <value>Téléchargement OCR (reconnaissance optique de caractères)</value>
   </data>
   <data name="OcrDownloadSummaryText" xml:space="preserve">
-    <value>Télécharger chaque langue OCR appropriée au document numérisé.</value>
+    <value>Télécharger chaque langue OCR appropriée aux documents numérisés.</value>
   </data>
   <data name="OcrSelectLanguageLabel" xml:space="preserve">
     <value>Sélectionner une ou plusieurs langues :</value>
@@ -463,7 +463,7 @@
     <value>Mot de passe du propriétaire :</value>
   </data>
   <data name="UserPasswordLabel" xml:space="preserve">
-    <value>Mot de passe utilisateur:</value>
+    <value>Mot de passe utilisateur :</value>
   </data>
   <data name="RememberTheseSettings" xml:space="preserve">
     <value>Mémoriser ces paramètres</value>
@@ -640,7 +640,7 @@
     <value>Retourner les pages recto-verso</value>
   </data>
   <data name="WiaVersionLabel" xml:space="preserve">
-    <value>Wia Version:</value>
+    <value>Version WIA :</value>
   </data>
   <data name="TwainImplLabel" xml:space="preserve">
     <value>Implémentation TWAIN :</value>

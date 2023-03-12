@@ -43,7 +43,7 @@
     <value>В податчике нет листов.</value>
   </data>
   <data name="PdfNoPermissionToExtractContent" xml:space="preserve">
-    <value>У вас нет разрешения копировать содержимое из файла '{0}'..</value>
+    <value>У вас нет разрешения копировать содержимое из файла '{0}'.</value>
   </data>
   <data name="NoDuplexSupport" xml:space="preserve">
     <value>Выбранный сканер не поддерживает дуплекс. Если Ваш сканер поддерживает двустраничное сканирование, попробуйте использовать другой драйвер.</value>

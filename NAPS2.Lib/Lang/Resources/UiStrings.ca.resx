@@ -640,7 +640,7 @@
     <value>Gira les pàgines doblegades</value>
   </data>
   <data name="WiaVersionLabel" xml:space="preserve">
-    <value>Wia Version:</value>
+    <value>Versió Wia:</value>
   </data>
   <data name="TwainImplLabel" xml:space="preserve">
     <value>Implementació Twain:</value>

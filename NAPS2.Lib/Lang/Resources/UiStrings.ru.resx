@@ -193,7 +193,7 @@
     <value>Уменьшить</value>
   </data>
   <data name="ZoomActual" xml:space="preserve">
-    <value>Настоящий размер</value>
+    <value>Исходный размер</value>
   </data>
   <data name="ScaleWithWindow" xml:space="preserve">
     <value>Масштабировать с окном</value>
@@ -394,7 +394,7 @@
     <value>Восстановить отсканированные изображения</value>
   </data>
   <data name="RecoverPrompt" xml:space="preserve">
-    <value>Изображения ({0} шт.), сканированные на {1} в {2}, возможно, не были сохранены и могут быть восстановлены. Хотите восстановить их?</value>
+    <value>Изображения ({0} шт.), сканированные {1} в {2}, возможно, не были сохранены и могут быть восстановлены. Хотите восстановить их?</value>
   </data>
   <data name="Placeholders" xml:space="preserve">
     <value>Поля для заполнения</value>
@@ -613,7 +613,7 @@
     <value>Исключить пустые страницы</value>
   </data>
   <data name="WhiteThreshold" xml:space="preserve">
-    <value>Белый порог</value>
+    <value>Порог белого</value>
   </data>
   <data name="CoverageThreshold" xml:space="preserve">
     <value>Порог покрытия</value>
@@ -640,7 +640,7 @@
     <value>Развернуть дуплексные страницы</value>
   </data>
   <data name="WiaVersionLabel" xml:space="preserve">
-    <value>Wia Version:</value>
+    <value>Версия WIA:</value>
   </data>
   <data name="TwainImplLabel" xml:space="preserve">
     <value>Реализация TWAIN:</value>

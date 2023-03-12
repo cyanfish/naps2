@@ -640,7 +640,7 @@
     <value>Preklopiť obojstranný scan</value>
   </data>
   <data name="WiaVersionLabel" xml:space="preserve">
-    <value>Wia Version:</value>
+    <value>Verzia Wia:</value>
   </data>
   <data name="TwainImplLabel" xml:space="preserve">
     <value>Implementácia Twain:</value>

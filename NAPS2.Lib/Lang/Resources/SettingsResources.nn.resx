@@ -49,7 +49,7 @@
     <value>cm</value>
   </data>
   <data name="PageSizeUnit_Inch" xml:space="preserve">
-    <value>in</value>
+    <value>tomme</value>
   </data>
   <data name="PageSizeUnit_Millimetre" xml:space="preserve">
     <value>mm</value>
@@ -130,7 +130,7 @@
     <value>Gammal DSM</value>
   </data>
   <data name="TwainImpl_X64" xml:space="preserve">
-    <value>x64</value>
+    <value>X64</value>
   </data>
   <data name="WiaVersion_Default" xml:space="preserve">
     <value>Standard</value>

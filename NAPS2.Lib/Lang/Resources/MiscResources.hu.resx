@@ -301,7 +301,7 @@
     <value>Kép mentve.</value>
   </data>
   <data name="ImagesSaved" xml:space="preserve">
-    <value>{0} images saved.</value>
+    <value>{0} kép mentve.</value>
   </data>
   <data name="PdfSaved" xml:space="preserve">
     <value>PDF mentve.</value>

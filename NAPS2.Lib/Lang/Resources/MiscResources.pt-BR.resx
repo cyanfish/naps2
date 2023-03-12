@@ -367,7 +367,7 @@
     <value>Verificando...</value>
   </data>
   <data name="UpdateCheckDisabled" xml:space="preserve">
-    <value>Update checking is disabled.</value>
+    <value>Verificação de atualizações está desativada.</value>
   </data>
   <data name="UpdateError" xml:space="preserve">
     <value>Ocorreu um erro ao tentar instalar a atualização.</value>

@@ -640,7 +640,7 @@
     <value>Překlopit oboustranné stánky</value>
   </data>
   <data name="WiaVersionLabel" xml:space="preserve">
-    <value>Wia Version:</value>
+    <value>Wia verze:</value>
   </data>
   <data name="TwainImplLabel" xml:space="preserve">
     <value>Implementace TWAIN:</value>

@@ -76,7 +76,7 @@
     <value>US Legal (8.5x14 in)</value>
   </data>
   <data name="PageSize_Letter" xml:space="preserve">
-    <value>US Letter (8.5x11 in)</value>
+    <value>Carta US (8.5x11 in)</value>
   </data>
   <data name="PdfCompat_Default" xml:space="preserve">
     <value>Per defecte</value>

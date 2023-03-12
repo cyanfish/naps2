@@ -184,7 +184,7 @@
     <value>Om</value>
   </data>
   <data name="Zoom" xml:space="preserve">
-    <value>Zoom</value>
+    <value>Forstørre</value>
   </data>
   <data name="ZoomIn" xml:space="preserve">
     <value>Zoom inn</value>
@@ -640,7 +640,7 @@
     <value>Vend tosidige sider</value>
   </data>
   <data name="WiaVersionLabel" xml:space="preserve">
-    <value>Wia Version:</value>
+    <value>Wia versjon:</value>
   </data>
   <data name="TwainImplLabel" xml:space="preserve">
     <value>Twain implementering:</value>

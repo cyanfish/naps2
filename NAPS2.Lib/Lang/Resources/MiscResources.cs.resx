@@ -367,7 +367,7 @@
     <value>Vyhledávání...</value>
   </data>
   <data name="UpdateCheckDisabled" xml:space="preserve">
-    <value>Update checking is disabled.</value>
+    <value>Kontrola aktualizací je vypnuta.</value>
   </data>
   <data name="UpdateError" xml:space="preserve">
     <value>Při pokusu o aktualizaci došlo k chybě..</value>

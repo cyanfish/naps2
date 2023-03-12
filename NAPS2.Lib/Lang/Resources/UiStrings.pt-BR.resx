@@ -640,7 +640,7 @@
     <value>Virar páginas frente e verso</value>
   </data>
   <data name="WiaVersionLabel" xml:space="preserve">
-    <value>Wia Version:</value>
+    <value>Versão Wia:</value>
   </data>
   <data name="TwainImplLabel" xml:space="preserve">
     <value>Implementação Twain:</value>

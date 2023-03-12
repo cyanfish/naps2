@@ -181,7 +181,7 @@
     <value>В податчике нет листов.</value>
   </data>
   <data name="PdfNoPermissionToExtractContent" xml:space="preserve">
-    <value>У вас нет разрешения копировать содержимое из файла '{0}'..</value>
+    <value>У вас нет разрешения копировать содержимое из файла '{0}'.</value>
   </data>
   <data name="ErrorSaving" xml:space="preserve">
     <value>Ошибка при сохранении файла.</value>
@@ -367,7 +367,7 @@
     <value>Проверка...</value>
   </data>
   <data name="UpdateCheckDisabled" xml:space="preserve">
-    <value>Update checking is disabled.</value>
+    <value>Проверка обновлений отключена.</value>
   </data>
   <data name="UpdateError" xml:space="preserve">
     <value>Произошла ошибка во время установки обновления.</value>

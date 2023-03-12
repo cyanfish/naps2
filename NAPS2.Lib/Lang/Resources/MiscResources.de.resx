@@ -91,7 +91,7 @@
     <value>Datei überschreiben</value>
   </data>
   <data name="PdfStatus" xml:space="preserve">
-    <value>{0} of {1}</value>
+    <value>{0} von {1}</value>
   </data>
   <data name="ScannedImage" xml:space="preserve">
     <value>Eingelesenes Bild</value>
@@ -301,7 +301,7 @@
     <value>Bild gespeichert.</value>
   </data>
   <data name="ImagesSaved" xml:space="preserve">
-    <value>{0} bilder gespeichert.</value>
+    <value>{0} Bilder gespeichert.</value>
   </data>
   <data name="PdfSaved" xml:space="preserve">
     <value>PDF gespeichert.</value>
@@ -367,7 +367,7 @@
     <value>Prüfe...</value>
   </data>
   <data name="UpdateCheckDisabled" xml:space="preserve">
-    <value>Update checking is disabled.</value>
+    <value>Updateprüfung ist deaktiviert.</value>
   </data>
   <data name="UpdateError" xml:space="preserve">
     <value>Beim Versuch das Update zu installieren ist ein Fehler aufgetreten.</value>

@@ -640,7 +640,7 @@
     <value>Dubbelzijdige pagina's omdraaien</value>
   </data>
   <data name="WiaVersionLabel" xml:space="preserve">
-    <value>Wia Version:</value>
+    <value>Wia versie:</value>
   </data>
   <data name="TwainImplLabel" xml:space="preserve">
     <value>Twain-implementatie:</value>

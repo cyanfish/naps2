@@ -367,7 +367,7 @@
     <value>Denetleniyor...</value>
   </data>
   <data name="UpdateCheckDisabled" xml:space="preserve">
-    <value>Update checking is disabled.</value>
+    <value>Güncelleme denetimi devre dışıdır.</value>
   </data>
   <data name="UpdateError" xml:space="preserve">
     <value>Güncelleme kurulmaya çalışılırken hata oluştu.</value>

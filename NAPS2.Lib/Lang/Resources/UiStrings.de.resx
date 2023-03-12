@@ -268,7 +268,7 @@
     <value>Vordefinierte Einstellungen verwenden</value>
   </data>
   <data name="UseNativeUi" xml:space="preserve">
-    <value>Ursprüngliche Oberfäche verwenden</value>
+    <value>Scanner-Dialog verwenden</value>
   </data>
   <data name="PaperSourceLabel" xml:space="preserve">
     <value>Papiereinzug:</value>
@@ -373,7 +373,7 @@
     <value>Vorheriger</value>
   </data>
   <data name="XOfY" xml:space="preserve">
-    <value>{0} of {1}</value>
+    <value>{0} von {1}</value>
   </data>
   <data name="Revert" xml:space="preserve">
     <value>Rückgängig</value>

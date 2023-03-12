@@ -553,7 +553,7 @@
     <value>Εξουσιοδότηση</value>
   </data>
   <data name="WaitingForAuthorization" xml:space="preserve">
-    <value>Waiting for authorization...</value>
+    <value>Αναμονή για εξουσιοδότηση...</value>
   </data>
   <data name="ErrorFormTitle" xml:space="preserve">
     <value>Σφάλμα</value>
@@ -640,7 +640,7 @@
     <value>Αναστροφή σελίδων διπλής όψης</value>
   </data>
   <data name="WiaVersionLabel" xml:space="preserve">
-    <value>Wia Version:</value>
+    <value>Έκδοση WIA:</value>
   </data>
   <data name="TwainImplLabel" xml:space="preserve">
     <value>Υλοποίηση Twain:</value>

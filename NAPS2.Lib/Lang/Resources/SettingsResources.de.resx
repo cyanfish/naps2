@@ -73,10 +73,10 @@
     <value>Benutzerdefiniert...</value>
   </data>
   <data name="PageSize_Legal" xml:space="preserve">
-    <value>US Legal (8.5x14 in)</value>
+    <value>US Legal (8.5x14 Zoll)</value>
   </data>
   <data name="PageSize_Letter" xml:space="preserve">
-    <value>US Letter (8.5x11 in)</value>
+    <value>US Letter (8.5x11 Zoll)</value>
   </data>
   <data name="PdfCompat_Default" xml:space="preserve">
     <value>Standard</value>

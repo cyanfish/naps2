@@ -367,7 +367,7 @@
     <value>Sjekker...</value>
   </data>
   <data name="UpdateCheckDisabled" xml:space="preserve">
-    <value>Update checking is disabled.</value>
+    <value>Oppdateringskontroll er deaktivert.</value>
   </data>
   <data name="UpdateError" xml:space="preserve">
     <value>Det vart ein feil ved installasjon av oppdatering.</value>
