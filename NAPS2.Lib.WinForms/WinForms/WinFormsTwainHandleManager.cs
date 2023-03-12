@@ -10,6 +10,7 @@ public class WinFormsTwainHandleManager : TwainHandleManager
     private Form? _parentForm;
     private IntPtr _disabledWindow;
     private bool _disposed;
+    private IntPtr? _handle;
 
     public WinFormsTwainHandleManager(Form baseForm)
     {
@@ -18,17 +19,22 @@ public class WinFormsTwainHandleManager : TwainHandleManager
 
     public override IntPtr GetDsmHandle(IntPtr dialogParent, bool useNativeUi)
     {
-        // This handle is used for the TWAIN event loop
-        return _baseForm.Handle;
+        // This handle is used for the TWAIN event loop. However, in some cases (e.g. an early error) it can still
+        // be used for UI.
+        return _handle ??= GetHandle(dialogParent, useNativeUi);
     }
 
     public override IntPtr GetEnableHandle(IntPtr dialogParent, bool useNativeUi)
     {
         // This handle is used as the parent window for TWAIN UI
-        if (!useNativeUi || dialogParent == IntPtr.Zero)
+        return _handle ??= GetHandle(dialogParent, useNativeUi);
+    }
+
+    private IntPtr GetHandle(IntPtr dialogParent, bool useNativeUi)
+    {
+        if (dialogParent == IntPtr.Zero)
         {
-            // If we're not expecting the driver to show UI (or have no real parent), we just give it an arbitrary
-            // form handle in this process as a parent.
+            // If we have no real parent, we just give it an arbitrary form handle in this process as a parent.
             return _baseForm.Handle;
         }
 
@@ -42,7 +48,12 @@ public class WinFormsTwainHandleManager : TwainHandleManager
         // 2. Disabling the parent window
         // We do this rather than calling ShowDialog to avoid blocking the thread.
         _parentForm.Show(new Win32Window(dialogParent));
-        Win32.EnableWindow(dialogParent, false);
+        if (useNativeUi)
+        {
+            // We only want to disable the parent window if we're showing the native UI. Otherwise, we expect that
+            // the NAPS2 UI should be interactable, and the only UI shown should be error messages.
+            Win32.EnableWindow(dialogParent, false);
+        }
         _disabledWindow = dialogParent;
 
         return _parentForm.Handle;
