@@ -12,6 +12,7 @@ internal class DeviceOperator : ICScannerDeviceDelegate
 {
     private readonly ScanningContext _scanningContext;
     private readonly ICScannerDevice _device;
+    private ICScannerFunctionalUnit? _unit;
     private readonly DeviceReader _reader;
     private readonly ScanOptions _options;
     private readonly IScanEvents _scanEvents;
@@ -19,7 +20,9 @@ internal class DeviceOperator : ICScannerDeviceDelegate
     private readonly TaskCompletionSource _openSessionTcs = new();
     private readonly TaskCompletionSource _readyTcs = new();
     private TaskCompletionSource<ICScannerFunctionalUnit> _unitTcs = new();
-    private readonly TaskCompletionSource _scanTcs = new();
+    private readonly TaskCompletionSource _scanSuccessTcs = new();
+    private readonly TaskCompletionSource _scanCompleteTcs = new();
+    private TaskCompletionSource? _cancelTcs;
     private readonly TaskCompletionSource _closeTcs = new();
     private readonly List<Task> _copyTasks = new();
     private MemoryStream? _buffer;
@@ -39,7 +42,7 @@ internal class DeviceOperator : ICScannerDeviceDelegate
             _openSessionTcs.TrySetCanceled();
             _readyTcs.TrySetCanceled();
             _unitTcs.TrySetCanceled();
-            _scanTcs.TrySetCanceled();
+            _scanSuccessTcs.TrySetCanceled();
             _closeTcs.TrySetCanceled();
         });
     }
@@ -67,6 +70,10 @@ internal class DeviceOperator : ICScannerDeviceDelegate
         {
             _scanEvents.PageStart();
         }
+        if (_cancelTcs != null && !_unit!.ScanInProgress)
+        {
+            _cancelTcs.SetResult();
+        }
     }
 
     public override void DidEncounterError(ICDevice device, NSError? error)
@@ -76,7 +83,7 @@ internal class DeviceOperator : ICScannerDeviceDelegate
         _openSessionTcs.TrySetException(ex);
         _readyTcs.TrySetException(ex);
         _unitTcs.TrySetException(ex);
-        _scanTcs.TrySetException(ex);
+        _scanSuccessTcs.TrySetException(ex);
         _closeTcs.TrySetException(ex);
     }
 
@@ -136,7 +143,8 @@ internal class DeviceOperator : ICScannerDeviceDelegate
 
     public override void DidCompleteScan(ICScannerDevice scanner, NSError? error)
     {
-        SetResultOrError(_scanTcs, error);
+        SetResultOrError(_scanSuccessTcs, error);
+        SetResultOrError(_scanCompleteTcs, error);
     }
 
     private void SetResultOrError(TaskCompletionSource tcs, NSError? error)
@@ -180,20 +188,20 @@ internal class DeviceOperator : ICScannerDeviceDelegate
             _device.RequestOpenSession();
             await _openSessionTcs.Task;
             await _readyTcs.Task;
-            var unit = await SelectUnit(_options.PaperSource == PaperSource.Flatbed
+            _unit = await SelectUnit(_options.PaperSource == PaperSource.Flatbed
                 ? ICScannerFunctionalUnitType.Flatbed
                 : ICScannerFunctionalUnitType.DocumentFeeder);
-            if (unit is ICScannerFunctionalUnitDocumentFeeder { SupportsDuplexScanning: true } feederUnit)
+            if (_unit is ICScannerFunctionalUnitDocumentFeeder { SupportsDuplexScanning: true } feederUnit)
             {
                 feederUnit.DuplexScanningEnabled = _options.PaperSource == PaperSource.Duplex;
             }
-            SetScanArea(unit);
+            SetScanArea(_unit);
             // TODO: Check supported resolutions?
-            unit.Resolution = (nuint) _options.Dpi;
-            unit.BitDepth = _options.BitDepth == BitDepth.BlackAndWhite
+            _unit.Resolution = (nuint) _options.Dpi;
+            _unit.BitDepth = _options.BitDepth == BitDepth.BlackAndWhite
                 ? ICScannerBitDepth.Bits1
                 : ICScannerBitDepth.Bits8;
-            unit.PixelDataType = _options.BitDepth switch
+            _unit.PixelDataType = _options.BitDepth switch
             {
                 BitDepth.BlackAndWhite => ICScannerPixelDataType.BW,
                 BitDepth.Grayscale => ICScannerPixelDataType.Gray,
@@ -203,7 +211,7 @@ internal class DeviceOperator : ICScannerDeviceDelegate
             // TODO: increase? or maybe not as this could still be useful progress for twain scanners
             _device.MaxMemoryBandSize = 65536;
             _device.RequestScan();
-            await _scanTcs.Task;
+            await _scanSuccessTcs.Task;
             Task[] copyTasks;
             lock (this)
             {
@@ -215,8 +223,12 @@ internal class DeviceOperator : ICScannerDeviceDelegate
         }
         catch (TaskCanceledException)
         {
-            // TODO: Cancellation not working
-            _device.CancelScan();
+            if (_unit != null && _unit.ScanInProgress)
+            {
+                _cancelTcs = new TaskCompletionSource();
+                _device.CancelScan();
+                await Task.WhenAny(_scanCompleteTcs.Task, _cancelTcs.Task);
+            }
         }
         finally
         {
