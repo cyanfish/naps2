@@ -48,9 +48,9 @@ internal class DeviceReader : ICDeviceBrowserDelegate
     {
         if (disposing)
         {
-            // TODO: This causes some kind of error. For scans, I ended up calling Stop manually after the device is ready.
-            // _browser.Stop();
-            // _browser.Dispose();
+            _browser.Delegate = null;
+            _browser.Stop();
+            _browser.Dispose();
         }
         base.Dispose(disposing);
     }

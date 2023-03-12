@@ -179,8 +179,6 @@ internal class DeviceOperator : ICScannerDeviceDelegate
             _device.Delegate = this;
             _device.RequestOpenSession();
             await _openSessionTcs.Task;
-            // Calling reader.Stop frees ununsed devices, so we can only do it after we've opened a session
-            _reader.Stop();
             await _readyTcs.Task;
             var unit = await SelectUnit(_options.PaperSource == PaperSource.Flatbed
                 ? ICScannerFunctionalUnitType.Flatbed
@@ -259,6 +257,15 @@ internal class DeviceOperator : ICScannerDeviceDelegate
             return result;
         }
         return _device.SelectedFunctionalUnit;
+    }
+
+    protected override void Dispose(bool disposing)
+    {
+        if (disposing)
+        {
+            _device.Delegate = null;
+        }
+        base.Dispose(disposing);
     }
 }
 #endif

@@ -33,7 +33,8 @@ internal class AppleScanDriver : IScanDriver
         Action<IMemoryImage> callback)
     {
         using var reader = new DeviceReader();
-        using var device = await GetDevice(reader, options.Device!);
+        // Note we don't want to dispose the device, as the ICDeviceBrowser manages its lifetime.
+        var device = await GetDevice(reader, options.Device!);
         using var oper =
             new DeviceOperator(_scanningContext, device, reader, options, cancelToken, scanEvents, callback);
         await oper.Scan();
