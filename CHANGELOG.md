@@ -1,3 +1,6 @@
+Changes in 7.0b6:
+- Bug fixes
+
 Changes in 7.0b5:
 - Added 2400/4800 dpi options
 - Linux: Added .deb/.rpm packages
