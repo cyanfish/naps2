@@ -173,6 +173,15 @@ public class WinFormsEtoPlatform : EtoPlatform
 
     public override void AddToContainer(Control container, Control control, bool inOverlay)
     {
+        if (control.ToNative() is wf.TextBox textBox)
+        {
+            // WinForms textboxes behave weirdly when resized during load and can push text offscreen. This fixes that.
+            control.Load += (_, _) =>
+            {
+                textBox.Select(0, 0);
+                textBox.ScrollToCaret();
+            };
+        }
         container.ToNative().Controls.Add(control.ToNative());
     }
 
