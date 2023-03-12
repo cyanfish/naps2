@@ -92,6 +92,12 @@ internal class TwainImageProcessor : ITwainEvents, IDisposable
         _currentImage = copy;
     }
 
+    public void TransferCanceled(TwainTransferCanceled transferCanceled)
+    {
+        _currentImage?.Dispose();
+        _currentImage = null;
+    }
+
     public void Flush()
     {
         if (_currentImage != null && _transferredWidth > 0 && _transferredHeight > 0)

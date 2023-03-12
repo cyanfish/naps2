@@ -178,6 +178,10 @@ public class WorkerServiceAdapter
                 {
                     twainEvents.MemoryBufferTransferred(resp.MemoryBuffer);
                 }
+                if (resp.TransferCanceled != null)
+                {
+                    twainEvents.TransferCanceled(resp.TransferCanceled);
+                }
             }
         }
         catch (RpcException ex)

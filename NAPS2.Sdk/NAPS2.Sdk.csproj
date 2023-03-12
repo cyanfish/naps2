@@ -28,6 +28,10 @@
     <Reference Include="PdfSharpCore">
       <HintPath>..\NAPS2.Setup\lib\PdfSharpCore.dll</HintPath>
     </Reference>
+    <!-- TODO: Switch back to the official nuget if https://github.com/soukoku/ntwain/pull/35 gets merged -->
+    <Reference Include="NTwain" Condition="'$(TargetFramework)' != 'net6-macos10.15'">
+      <HintPath>..\NAPS2.Setup\lib\NTwain.dll</HintPath>
+    </Reference>
     
     <PackageReference Include="Grpc.Tools" Version="2.47.0" PrivateAssets="all" />
     <PackageReference Include="GrpcDotNetNamedPipes" Version="2.0.0" />
@@ -35,7 +39,7 @@
     <PackageReference Include="NAPS2.Wia" Version="1.0.2" Condition="'$(TargetFramework)' != 'net6-macos10.15'" />
     <!-- Hide compatibility warnings for NTwain as it will only be actually used on Windows. -->
     <!-- TODO: Does this actually work if we build a net6 framework-dependent app and try to use Twain? -->
-    <PackageReference Include="NTwain" Version="3.7.1" NoWarn="NU1701" Condition="'$(TargetFramework)' != 'net6-macos10.15'" />
+<!--    <PackageReference Include="NTwain" Version="3.7.1" NoWarn="NU1701" Condition="'$(TargetFramework)' != 'net6-macos10.15'" />-->
     <PackageReference Include="Nullable" Version="1.2.0" Condition="'$(TargetFramework)' == 'net462'" />
     <PackageReference Include="System.Collections.Immutable" Version="6.0.0" />
     <PackageReference Include="System.Resources.Extensions" Version="6.0.0" />

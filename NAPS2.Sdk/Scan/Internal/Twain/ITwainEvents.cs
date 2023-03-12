@@ -9,4 +9,6 @@ public interface ITwainEvents
     void NativeImageTransferred(TwainNativeImage nativeImage);
 
     void MemoryBufferTransferred(TwainMemoryBuffer memoryBuffer);
+
+    void TransferCanceled(TwainTransferCanceled transferCanceled);
 }

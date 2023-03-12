@@ -18,6 +18,9 @@
     <Reference Include="PdfSharpCore">
       <HintPath>..\NAPS2.Setup\lib\PdfSharpCore.dll</HintPath>
     </Reference>
+    <Reference Include="NTwain">
+      <HintPath>..\NAPS2.Setup\lib\NTwain.dll</HintPath>
+    </Reference>
   
     <ProjectReference Include="..\NAPS2.Sdk\NAPS2.Sdk.csproj" />
     <ProjectReference Include="..\NAPS2.Images.Gdi\NAPS2.Images.Gdi.csproj" Condition="$([MSBuild]::IsOSPlatform('Windows'))" />

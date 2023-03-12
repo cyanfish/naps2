@@ -346,6 +346,10 @@ public class WorkerServiceImpl : WorkerService.WorkerServiceBase
                 memoryBuffer => sequencedWriter.Write(new TwainScanResponse
                 {
                     MemoryBuffer = memoryBuffer
+                }),
+                canceled => sequencedWriter.Write(new TwainScanResponse
+                {
+                    TransferCanceled = canceled
                 })
             );
             var options = request.OptionsXml.FromXml<ScanOptions>();

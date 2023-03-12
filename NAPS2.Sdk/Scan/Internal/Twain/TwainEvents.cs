@@ -7,13 +7,15 @@ class TwainEvents : ITwainEvents
     private readonly Action<TwainPageStart> _pageStartCallback;
     private readonly Action<TwainNativeImage> _nativeImageCallback;
     private readonly Action<TwainMemoryBuffer> _memoryBufferCallback;
+    private readonly Action<TwainTransferCanceled> _transferCanceledCallback;
 
     public TwainEvents(Action<TwainPageStart> pageStartCallback, Action<TwainNativeImage> nativeImageCallback,
-        Action<TwainMemoryBuffer> memoryBufferCallback)
+        Action<TwainMemoryBuffer> memoryBufferCallback, Action<TwainTransferCanceled> transferCanceledCallback)
     {
         _pageStartCallback = pageStartCallback;
         _nativeImageCallback = nativeImageCallback;
         _memoryBufferCallback = memoryBufferCallback;
+        _transferCanceledCallback = transferCanceledCallback;
     }
 
     public void PageStart(TwainPageStart pageStart)
@@ -29,5 +31,10 @@ class TwainEvents : ITwainEvents
     public void MemoryBufferTransferred(TwainMemoryBuffer memoryBuffer)
     {
         _memoryBufferCallback(memoryBuffer);
+    }
+
+    public void TransferCanceled(TwainTransferCanceled transferCanceled)
+    {
+        _transferCanceledCallback(transferCanceled);
     }
 }

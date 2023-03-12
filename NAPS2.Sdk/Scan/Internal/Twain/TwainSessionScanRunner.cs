@@ -25,8 +25,7 @@ internal class TwainSessionScanRunner
     private DataSource? _source;
 
     public TwainSessionScanRunner(TWIdentity twainAppId, TwainDsm dsm, ScanOptions options,
-        CancellationToken cancelToken,
-        ITwainEvents twainEvents)
+        CancellationToken cancelToken, ITwainEvents twainEvents)
     {
         _dsm = dsm;
         _options = options;
@@ -39,6 +38,7 @@ internal class TwainSessionScanRunner
         _session = new TwainSession(twainAppId);
         _session.TransferReady += TransferReady;
         _session.DataTransferred += DataTransferred;
+        _session.TransferCanceled += TransferCanceled;
         _session.TransferError += TransferError;
         _session.SourceDisabled += SourceDisabled;
         _session.StateChanged += StateChanged;
@@ -175,6 +175,12 @@ internal class TwainSessionScanRunner
     {
         Debug.WriteLine("NAPS2.TW - SourceDisabled");
         FinishWithCompletion();
+    }
+
+    private void TransferCanceled(object? sender, TransferCanceledEventArgs e)
+    {
+        Debug.WriteLine("NAPS2.TW - TransferCanceled");
+        _twainEvents.TransferCanceled(new TwainTransferCanceled());
     }
 
     private void TransferError(object? sender, TransferErrorEventArgs e)
