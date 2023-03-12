@@ -75,7 +75,7 @@ public class PullTranslationsCommand : ICommand<PullTranslationsOptions>
                     }
                 }
                 var outputPath = Path.Combine(Paths.PoFolder, $"{outputLocale}.po");
-                await using var outputStream = File.OpenWrite(outputPath);
+                await using var outputStream = new FileStream(outputPath, FileMode.Create);
                 await entry.Open().CopyToAsync(outputStream);
             }
 
