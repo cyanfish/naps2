@@ -1,5 +1,6 @@
 ﻿using System.Collections.Concurrent;
 using GrpcDotNetNamedPipes;
+using NAPS2.Unmanaged;
 
 namespace NAPS2.Remoting.Worker;
 
@@ -13,15 +14,30 @@ public class WorkerFactory : IWorkerFactory
     private readonly string _nativeWorkerExePath;
     private readonly string? _winX86WorkerExePath;
     private readonly FileStorageManager? _fileStorageManager;
+    private readonly Dictionary<string, string> _environmentVariables;
 
     private Dictionary<WorkerType, BlockingCollection<WorkerContext>>? _workerQueues;
 
     public static WorkerFactory CreateDefault(FileStorageManager? fileStorageManager)
     {
+        var env = new Dictionary<string, string>();
 #if NET6_0_OR_GREATER
+        if (OperatingSystem.IsMacOS())
+        {
+            // The intended way to load sane dependencies (libusb, libjpeg) is by enumerating SaneLibraryDeps and for
+            // each, calling dlopen. Then when we load sane it will use those loaded libraries.
+            // However, while that works on my arm64 macOS 13, it doesn't on my x64 macOS 10.15. I'm not sure why.
+            // But setting DYLD_LIBRARY_PATH on the sane worker process does work.
+            // TODO: This means there may be some cases where in-process sane won't work, which could affect SDK users.
+            var sanePath = NativeLibrary.FindLibraryPath(PlatformCompat.System.SaneLibraryName);
+            if (sanePath.Contains('/'))
+            {
+                env["DYLD_LIBRARY_PATH"] = Path.GetFullPath(Path.GetDirectoryName(sanePath)!);
+            }
+        }
         if (!OperatingSystem.IsWindows())
         {
-            return new WorkerFactory(Environment.ProcessPath!, null, fileStorageManager);
+            return new WorkerFactory(Environment.ProcessPath!, null, fileStorageManager, env);
         }
 #endif
         var exePath = Path.Combine(AssemblyHelper.EntryFolder, "NAPS2.exe");
@@ -30,47 +46,53 @@ public class WorkerFactory : IWorkerFactory
         {
             workerExePath = Path.Combine(AssemblyHelper.EntryFolder, "lib", "NAPS2.Worker.exe");
         }
-        return new WorkerFactory(exePath, workerExePath, fileStorageManager);
+        return new WorkerFactory(exePath, workerExePath, fileStorageManager, env);
     }
 
     public WorkerFactory(string nativeWorkerExePath, string? winX86WorkerExePath = null,
-        FileStorageManager? fileStorageManager = null)
+        FileStorageManager? fileStorageManager = null, Dictionary<string, string>? environmentVariables = null)
     {
         _nativeWorkerExePath = nativeWorkerExePath;
         _winX86WorkerExePath = winX86WorkerExePath;
         _fileStorageManager = fileStorageManager;
+        _environmentVariables = environmentVariables ?? new Dictionary<string, string>();
     }
 
     private Process StartWorkerProcess(WorkerType workerType)
     {
         var parentId = Process.GetCurrentProcess().Id;
-        Process? proc;
+        ProcessStartInfo startInfo;
         if (workerType == WorkerType.WinX86)
         {
             if (!PlatformCompat.System.SupportsWinX86Worker || _winX86WorkerExePath == null)
             {
                 throw new InvalidOperationException("Unexpected worker configuration");
             }
-            proc = Process.Start(new ProcessStartInfo
+            startInfo = new ProcessStartInfo
             {
                 FileName = _winX86WorkerExePath,
                 Arguments = $"{parentId}",
                 RedirectStandardInput = true,
                 RedirectStandardOutput = true,
                 UseShellExecute = false
-            });
+            };
         }
         else
         {
-            proc = Process.Start(new ProcessStartInfo
+            startInfo = new ProcessStartInfo
             {
                 FileName = _nativeWorkerExePath,
                 Arguments = $"worker {parentId}",
                 RedirectStandardInput = true,
                 RedirectStandardOutput = true,
                 UseShellExecute = false
-            });
+            };
         }
+        foreach (var name in _environmentVariables.Keys)
+        {
+            startInfo.EnvironmentVariables[name] = _environmentVariables[name];
+        }
+        var proc = Process.Start(startInfo);
         if (proc == null)
         {
             throw new Exception("Could not start worker process");
