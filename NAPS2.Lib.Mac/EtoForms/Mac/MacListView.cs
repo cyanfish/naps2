@@ -17,6 +17,7 @@ public class MacListView<T> : NSCollectionViewDelegateFlowLayout, IListView<T> w
     private ListSelection<T> _selection = ListSelection.Empty<T>();
     private bool _refreshing;
     private ContextMenu? _contextMenu;
+    private NSIndexPath? _lastClickedIndexPath;
 
     public MacListView(ListViewBehavior<T> behavior)
     {
@@ -226,6 +227,39 @@ public class MacListView<T> : NSCollectionViewDelegateFlowLayout, IListView<T> w
         _selection = ListSelection.FromSelectedIndices(_dataSource.Items,
             _view.SelectionIndexes.Select(x => (int) x));
         SelectionChanged?.Invoke(this, EventArgs.Empty);
+    }
+
+    public override NSSet ShouldDeselectItems(NSCollectionView collectionView, NSSet indexPaths)
+    {
+        _lastClickedIndexPath = null;
+        return indexPaths;
+    }
+
+    public override NSSet ShouldSelectItems(NSCollectionView collectionView, NSSet indexPaths)
+    {
+        // We want shift+click to select a range, instead of behaving the same as command+click.
+        if (indexPaths.Count != 1)
+        {
+            _lastClickedIndexPath = null;
+            return indexPaths;
+        }
+        var indexPath = (NSIndexPath) indexPaths.AnyObject;
+        var prevIndexPath = _lastClickedIndexPath;
+        _lastClickedIndexPath = indexPath;
+
+        var isShiftHeld = (NSEvent.CurrentModifierFlags & NSEventModifierMask.ShiftKeyMask) != 0;
+        if (!isShiftHeld || prevIndexPath == null)
+        {
+            return indexPaths;
+        }
+        var newIndexPaths = new NSMutableSet();
+        var min = Math.Min((int) indexPath.Item, (int) prevIndexPath.Item);
+        var max = Math.Max((int) indexPath.Item, (int) prevIndexPath.Item);
+        for (var i = min; i <= max; i++)
+        {
+            newIndexPaths.Add(NSIndexPath.Create(0, i));
+        }
+        return newIndexPaths;
     }
 
     public override void ItemsChanged(NSCollectionView collectionView, NSSet indexPaths,
