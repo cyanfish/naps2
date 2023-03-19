@@ -4,5 +4,9 @@
   <dict>
     <key>com.apple.security.cs.allow-jit</key>
     <true/>
+    <!-- Some macOS versions have trouble loading sane without dyld (see WorkerFactory.cs).
+         From a security perspective this should be ok as libraries will still need to have the right signature. -->
+    <key>com.apple.security.cs.allow-dyld-environment-variables</key>
+    <true/>
   </dict>
 </plist>
