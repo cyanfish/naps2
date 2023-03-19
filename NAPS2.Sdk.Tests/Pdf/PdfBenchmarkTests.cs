@@ -1,7 +1,7 @@
 using NAPS2.Pdf;
 using Xunit;
 
-namespace NAPS2.Sdk.Tests.ImportExport.Pdf;
+namespace NAPS2.Sdk.Tests.Pdf;
 
 public class PdfBenchmarkTests : ContextualTests
 {

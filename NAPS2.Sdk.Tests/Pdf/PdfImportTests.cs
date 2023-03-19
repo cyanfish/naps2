@@ -5,7 +5,7 @@ using NAPS2.Pdf.Pdfium;
 using NAPS2.Sdk.Tests.Asserts;
 using Xunit;
 
-namespace NAPS2.Sdk.Tests.ImportExport.Pdf;
+namespace NAPS2.Sdk.Tests.Pdf;
 
 // TODO: MemoryStorage tests are a lot slower than FileStorage, why?
 // TODO: Add an import test for 1bit png (not ccitt)

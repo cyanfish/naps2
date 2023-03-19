@@ -3,7 +3,7 @@ using NAPS2.Sdk.Tests.Asserts;
 using Xunit;
 using Xunit.Abstractions;
 
-namespace NAPS2.Sdk.Tests.ImportExport.Pdf;
+namespace NAPS2.Sdk.Tests.Pdf;
 
 public class PdfImportExportTests : ContextualTests
 {
