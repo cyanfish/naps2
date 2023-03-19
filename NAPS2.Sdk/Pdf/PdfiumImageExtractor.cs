@@ -11,7 +11,7 @@ internal static class PdfiumImageExtractor
         if (imageObj != null)
         {
             var metadata = imageObj.ImageMetadata;
-            var image = GetImageFromObject(imageContext, imageObj, metadata);
+            var image = GetImageFromObject(imageContext, page, imageObj, metadata);
             if (image != null)
             {
                 image.SetResolution((int) Math.Round(metadata.HorizontalDpi), (int) Math.Round(metadata.VerticalDpi));
@@ -23,7 +23,15 @@ internal static class PdfiumImageExtractor
 
     // TODO: This could be wrong if the image object has a mask, but GetRenderedBitmap does a re-encode which we don't really want
     // Ideally we would be do this conditionally based on the presence of a mask, if pdfium could provide us that info
-    private static IMemoryImage? GetImageFromObject(ImageContext imageContext, PdfPageObject imageObj,
+    private static IMemoryImage? GetImageFromObject(ImageContext imageContext, PdfPage page, PdfPageObject imageObj,
+        PdfImageMetadata metadata)
+    {
+        // Otherwise we render the entire page with the known image dimensions
+        return ExtractRawImageData(imageContext, imageObj, metadata) ??
+               RenderPdfPageToNewImage(imageContext, page, metadata);
+    }
+
+    private static IMemoryImage? ExtractRawImageData(ImageContext imageContext, PdfPageObject imageObj,
         PdfImageMetadata metadata)
     {
         if (metadata.Colorspace is not (Colorspace.DeviceRgb or Colorspace.DeviceGray or Colorspace.Indexed))
@@ -36,11 +44,6 @@ internal static class PdfiumImageExtractor
         {
             // If the image has transparency, that implies the bitmap has a mask, so we need to use GetRenderedBitmap
             // to apply the mask and get the correct image.
-            using var pdfBitmap = imageObj.GetRenderedBitmap();
-            if (pdfBitmap.Format is ImagePixelFormat.RGB24 or ImagePixelFormat.ARGB32)
-            {
-                return CopyPdfBitmapToNewImage(imageContext, pdfBitmap, metadata);
-            }
             return null;
         }
         // First try and read the raw image data, this is most efficient if we can handle it
@@ -50,6 +53,7 @@ internal static class PdfiumImageExtractor
         }
         if (imageObj.HasImageFilters("FlateDecode"))
         {
+            // TODO: Add tests for these cases to PdfiumPdfRendererTests
             if (metadata.BitsPerPixel == 24 && metadata.Colorspace == Colorspace.DeviceRgb)
             {
                 return LoadRaw(imageContext, imageObj.GetImageDataDecoded(), metadata, ImagePixelFormat.RGB24,
@@ -61,35 +65,54 @@ internal static class PdfiumImageExtractor
                     SubPixelType.Bit);
             }
         }
-        if (imageObj.HasImageFilters("CCITTFaxDecode"))
-        {
-            return CcittReader.LoadRawCcitt(imageContext, imageObj.GetImageDataDecoded(), metadata);
-        }
-        // If we can't read the raw data ourselves, we can try and rely on Pdfium to materialize a bitmap, which is a
-        // bit less efficient
-        // TODO: Maybe add support for black & white here too, with tests
-        // TODO: Also this won't have test coverage if everything is covered by the "raw" tests, maybe either find a
-        // test case or just have a switch to test this specifically
-        // TODO: Is 32 bit even possible here? As alpha is implemented with masks
-        if (metadata.BitsPerPixel == 24 || metadata.BitsPerPixel == 32)
-        {
-            using var pdfBitmap = imageObj.GetBitmap();
-            if (pdfBitmap.Format is ImagePixelFormat.RGB24 or ImagePixelFormat.ARGB32)
-            {
-                return CopyPdfBitmapToNewImage(imageContext, pdfBitmap, metadata);
-            }
-        }
-        // Otherwise we fall back to relying on Pdfium to render the whole page which is least efficient and won't have
-        // the correct DPI
+        // Previously we also had a way to load the raw CCITTFaxDecode filter with a custom CcittReader class, but that
+        // failed in some cases (https://github.com/cyanfish/naps2/issues/117)
         return null;
+    }
+
+    private static IMemoryImage RenderPdfPageToNewImage(ImageContext imageContext, PdfPage page,
+        PdfImageMetadata metadata)
+    {
+        // This maintains the correct image dimensions/resolution as we have that info from the metadata.
+        using var pdfBitmap = RenderPdfPageToBitmap(page, metadata);
+        return CopyPdfBitmapToNewImage(imageContext, pdfBitmap, metadata);
+    }
+
+    private static unsafe PdfBitmap RenderPdfPageToBitmap(PdfPage page, PdfImageMetadata imageMetadata)
+    {
+        var w = imageMetadata.Width;
+        var h = imageMetadata.Height;
+        var (subPixelType, format) = imageMetadata.BitsPerPixel switch
+        {
+            1 or 8 => (SubPixelType.Gray, PdfiumNativeLibrary.FPDFBitmap_Gray),
+            24 => (SubPixelType.Bgr, PdfiumNativeLibrary.FPDFBitmap_BGR),
+            32 => (SubPixelType.Bgra, PdfiumNativeLibrary.FPDFBitmap_BGRA),
+            _ => throw new ArgumentException()
+        };
+        var pixelInfo = new PixelInfo(w, h, subPixelType);
+        var buffer = new byte[pixelInfo.Length];
+        fixed (byte* ptr = buffer)
+        {
+            var pdfiumBitmap = PdfBitmap.CreateFromPointer(w, h, (IntPtr) ptr, pixelInfo.Stride, format);
+            pdfiumBitmap.FillRect(0, 0, w, h, PdfBitmap.WHITE);
+            pdfiumBitmap.RenderPage(page, 0, 0, w, h);
+            return pdfiumBitmap;
+        }
     }
 
     private static IMemoryImage CopyPdfBitmapToNewImage(ImageContext imageContext, PdfBitmap pdfBitmap,
         PdfImageMetadata imageMetadata)
     {
-        var dstImage = imageContext.Create(pdfBitmap.Width, pdfBitmap.Height, pdfBitmap.Format);
+        var (targetPixelFormat, subPixelType) = imageMetadata.BitsPerPixel switch
+        {
+            1 => (ImagePixelFormat.BW1, SubPixelType.Gray),
+            8 => (ImagePixelFormat.Gray8, SubPixelType.Gray),
+            24 => (ImagePixelFormat.RGB24, SubPixelType.Bgr),
+            32 => (ImagePixelFormat.ARGB32, SubPixelType.Bgra),
+            _ => throw new ArgumentException()
+        };
+        var dstImage = imageContext.Create(pdfBitmap.Width, pdfBitmap.Height, targetPixelFormat);
         dstImage.SetResolution(imageMetadata.HorizontalDpi, imageMetadata.VerticalDpi);
-        var subPixelType = pdfBitmap.Format == ImagePixelFormat.ARGB32 ? SubPixelType.Bgra : SubPixelType.Bgr;
         var srcPixelInfo = new PixelInfo(pdfBitmap.Width, pdfBitmap.Height, subPixelType, pdfBitmap.Stride);
         new CopyBitwiseImageOp().Perform(pdfBitmap.Buffer, srcPixelInfo, dstImage);
         return dstImage;

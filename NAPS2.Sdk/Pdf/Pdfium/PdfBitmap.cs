@@ -11,6 +11,12 @@ internal class PdfBitmap : NativePdfiumObject
             Native.FPDFBitmap_CreateEx(width, height, PdfiumNativeLibrary.FPDFBitmap_BGR, scan0, stride));
     }
 
+    public static PdfBitmap CreateFromPointer(int width, int height, IntPtr scan0, int stride, int format)
+    {
+        return new PdfBitmap(
+            Native.FPDFBitmap_CreateEx(width, height, format, scan0, stride));
+    }
+
     internal PdfBitmap(IntPtr handle) : base(handle)
     {
     }
@@ -21,12 +27,7 @@ internal class PdfBitmap : NativePdfiumObject
     
     public int Stride => Native.FPDFBitmap_GetStride(Handle);
 
-    public ImagePixelFormat Format => Native.FPDFBitmap_GetFormat(Handle) switch
-    {
-        PdfiumNativeLibrary.FPDFBitmap_BGR => ImagePixelFormat.RGB24,
-        PdfiumNativeLibrary.FPDFBitmap_BGRA => ImagePixelFormat.ARGB32,
-        _ => ImagePixelFormat.Unsupported
-    };
+    public int Format => Native.FPDFBitmap_GetFormat(Handle);
 
     public IntPtr Buffer => Native.FPDFBitmap_GetBuffer(Handle);
 

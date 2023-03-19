@@ -47,10 +47,11 @@ public class PdfiumPdfRendererTests : ContextualTests
     {
         var path = CopyResourceToFile(PdfResources.image_pdf_cmyk, "test.pdf");
 
-        var images = new PdfiumPdfRenderer().Render(ImageContext, path, PdfRenderSize.FromDimensions(788, 525)).ToList();
+        var images = new PdfiumPdfRenderer().Render(ImageContext, path, PdfRenderSize.Default).ToList();
 
         Assert.Single(images);
-        ImageAsserts.Similar(ImageResources.dog, images[0], ignoreResolution: true);
+        // This also verifies that the renderer gets the actual image dpi (72)
+        ImageAsserts.Similar(ImageResources.dog, images[0]);
     }
 
     [Fact]

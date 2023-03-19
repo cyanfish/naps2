@@ -17,6 +17,7 @@ internal class PdfiumNativeLibrary : Unmanaged.NativeLibrary
 
     public static PdfiumNativeLibrary Instance => LazyInstance.Value;
 
+    public const int FPDFBitmap_Gray = 1;
     public const int FPDFBitmap_BGR = 2;
     public const int FPDFBitmap_BGRA = 4;
 

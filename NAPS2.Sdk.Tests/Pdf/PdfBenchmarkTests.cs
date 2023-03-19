@@ -91,6 +91,19 @@ public class PdfBenchmarkTests : ContextualTests
     }
 
     [BenchmarkFact]
+    public async Task Import300Naps2Bw()
+    {
+        ScanningContext.FileStorageManager = FileStorageManager.CreateFolder("recovery");
+        var filePath = CopyResourceToFile(PdfResources.image_pdf_bw, "test.pdf");
+
+        var pdfExporter = new PdfImporter(ScanningContext);
+        for (int i = 0; i < 300; i++)
+        {
+            await pdfExporter.Import(filePath).ToListAsync();
+        }
+    }
+
+    [BenchmarkFact]
     public async Task Import300NonNaps2()
     {
         ScanningContext.FileStorageManager = FileStorageManager.CreateFolder("recovery");
