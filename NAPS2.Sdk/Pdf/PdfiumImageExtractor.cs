@@ -26,7 +26,6 @@ internal static class PdfiumImageExtractor
     private static IMemoryImage? GetImageFromObject(ImageContext imageContext, PdfPageObject imageObj,
         PdfImageMetadata metadata)
     {
-        // TODO: Add a test for rendering CMYK
         if (metadata.Colorspace is not (Colorspace.DeviceRgb or Colorspace.DeviceGray or Colorspace.Indexed))
         {
             return null;
@@ -117,7 +116,9 @@ internal static class PdfiumImageExtractor
             var pageObj = page.GetObject(i);
             // TODO: We could consider, even in cases where we don't have an exact matrix match etc., getting a smarter dpi estimate.
             // TODO: But it's not clear how well that will render if there's a subpixel offset.
-            if (pageObj.IsImage && pageObj.Matrix == PdfMatrix.FillPage(page.Width, page.Height) && imageObject == null)
+            if (pageObj.IsImage &&
+                PdfMatrix.EqualsWithinTolerance(pageObj.Matrix, PdfMatrix.FillPage(page.Width, page.Height)) &&
+                imageObject == null)
             {
                 imageObject = pageObj;
             }

@@ -41,4 +41,27 @@ public class PdfiumPdfRendererTests : ContextualTests
         // This also verifies that the renderer gets the actual image dpi (72)
         ImageAsserts.Similar(ImageResources.ocr_test, images[0], ignoreResolution: true);
     }
+
+    [Fact]
+    public void RenderCmykImagePdf()
+    {
+        var path = CopyResourceToFile(PdfResources.image_pdf_cmyk, "test.pdf");
+
+        var images = new PdfiumPdfRenderer().Render(ImageContext, path, PdfRenderSize.FromDimensions(788, 525)).ToList();
+
+        Assert.Single(images);
+        ImageAsserts.Similar(ImageResources.dog, images[0], ignoreResolution: true);
+    }
+
+    [Fact]
+    public void RenderBlackAndWhiteImagePdf()
+    {
+        var path = CopyResourceToFile(PdfResources.image_pdf_bw, "test.pdf");
+
+        var images = new PdfiumPdfRenderer().Render(ImageContext, path, PdfRenderSize.Default).ToList();
+
+        Assert.Single(images);
+        // This also verifies that the renderer gets the actual image dpi (72)
+        ImageAsserts.Similar(ImageResources.dog_bw, images[0]);
+    }
 }
