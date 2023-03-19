@@ -1,8 +1,8 @@
 #if !MAC
 using System.Reflection;
 using System.Threading;
-using NAPS2.Platform.Windows;
 using NAPS2.Scan.Exceptions;
+using NAPS2.Unmanaged;
 using NTwain;
 using NTwain.Data;
 
@@ -18,32 +18,23 @@ public class LocalTwainSessionController : ITwainSessionController
 
     static LocalTwainSessionController()
     {
-        // Path to the folder containing the 64-bit twaindsm.dll relative to NAPS2.Core.dll
-        if (PlatformCompat.System.CanUseWin32)
-        {
-            var libDir = Environment.Is64BitProcess ? "_win64" : "_win32";
-            var dllDir = Path.Combine(AssemblyHelper.LibFolder, libDir);
-            if (Environment.Is64BitProcess)
-            {
-                // TODO: Why is SetDllDirectory needed for 64-bit instead of AddDllDirectory?
-                // Otherwise I get a dll not found error.
-                // SetDefaultDllDirectories(Win32.LOAD_LIBRARY_SEARCH_DEFAULT_DIRS) + AddDllDirectory works too but
-                // I'm not sure which is more destructive (as the latter fails completely on 32-bit).
-                Win32.SetDllDirectory(dllDir);
-            }
-            else
-            {
-                // AddDllDirectory is preferred, see https://github.com/cyanfish/naps2/pull/69
-                Win32.AddDllDirectory(dllDir);
-            }
-        }
 #if DEBUG
         PlatformInfo.Current.Log.IsDebugEnabled = true;
 #endif
     }
 
+    private static readonly LazyRunner TwainDsmSetup = new(() =>
+    {
+        var twainDsmPath = NativeLibrary.FindLibraryPath("twaindsm.dll");
+        PlatformCompat.System.LoadLibrary(twainDsmPath);
+    });
+
     public Task<List<ScanDevice>> GetDeviceList(ScanOptions options)
     {
+        if (options.TwainOptions.Dsm != TwainDsm.Old)
+        {
+            TwainDsmSetup.Run();
+        }
         return Task.Run(() =>
         {
             var deviceList = InternalGetDeviceList(options);
@@ -79,9 +70,13 @@ public class LocalTwainSessionController : ITwainSessionController
             }
         }
     }
-    
+
     public async Task StartScan(ScanOptions options, ITwainEvents twainEvents, CancellationToken cancelToken)
     {
+        if (options.TwainOptions.Dsm != TwainDsm.Old)
+        {
+            TwainDsmSetup.Run();
+        }
         try
         {
             await InternalScan(options.TwainOptions.Dsm, options, cancelToken, twainEvents);
@@ -101,7 +96,8 @@ public class LocalTwainSessionController : ITwainSessionController
         }
     }
 
-    private async Task InternalScan(TwainDsm dsm, ScanOptions options, CancellationToken cancelToken, ITwainEvents twainEvents)
+    private async Task InternalScan(TwainDsm dsm, ScanOptions options, CancellationToken cancelToken,
+        ITwainEvents twainEvents)
     {
         var runner = new TwainSessionScanRunner(TwainAppId, dsm, options, cancelToken, twainEvents);
         await runner.Run();
