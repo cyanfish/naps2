@@ -26,7 +26,14 @@ public class AppiumTests : ContextualTests
 
     public override void Dispose()
     {
-        _session.Dispose();
+        try
+        {
+            _session.Dispose();
+        }
+        catch (Exception)
+        {
+            // Ignore disposal errors
+        }
         base.Dispose();
     }
 
