@@ -38,6 +38,7 @@ public static class Program
             .Add<PullTranslationsOptions, PullTranslationsCommand>()
             .Add<SetVersionOptions, SetVersionCommand>()
             .Add<WebsiteUpdateOptions, WebsiteUpdateCommand>()
+            .Add<UploadOptions, UploadCommand>()
             .Add<DocOptions, DocCommand>()
             .Add<SaneOptsOptions, SaneOptsCommand>();
 

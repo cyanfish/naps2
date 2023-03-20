@@ -32,6 +32,8 @@ public static class TargetsHelper
             };
     }
 
+    public static IEnumerable<PackageTarget> EnumeratePackageTargets() => EnumeratePackageTargets(null, null, false);
+
     public static IEnumerable<PackageTarget> EnumeratePackageTargets(string? packageTypeOpt, string? platformOpt,
         bool requireCompatiblePlatform)
     {
