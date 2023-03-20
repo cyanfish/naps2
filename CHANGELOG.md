@@ -1,3 +1,6 @@
+Changes in 7.0b7:
+- Bug fixes
+
 Changes in 7.0b6:
 - Bug fixes
 
