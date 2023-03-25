@@ -1,6 +1,7 @@
 using System.Threading;
 using NAPS2.App.Tests.Targets;
 using NAPS2.App.Tests.Verification;
+using NAPS2.Scan;
 using NAPS2.Sdk.Tests.Asserts;
 using Xunit;
 
@@ -10,9 +11,6 @@ namespace NAPS2.App.Tests.Appium;
 [Collection("appium")]
 public class ScanAndSaveTests : AppiumTests
 {
-    private const string WIA_DEVICE_NAME = "";
-    private const string TWAIN_DEVICE_NAME = "";
-
     [VerifyTheory(AllowDebug = true, WindowsAppium = true)]
     [ClassData(typeof(AppiumTestData))]
     public void ScanWiaSavePdf(IAppTestTarget target)
@@ -23,7 +21,8 @@ public class ScanAndSaveTests : AppiumTests
         // WIA driver is selected by default, so we open the WIA device dialog
         ClickAtName("Choose device");
         Thread.Sleep(100);
-        if (WIA_DEVICE_NAME != "") ClickAtName(WIA_DEVICE_NAME);
+        var deviceName = AppTestHelper.GetDeviceName(Driver.Wia);
+        if (!string.IsNullOrEmpty(deviceName)) ClickAtName(deviceName);
         // Click OK in the wia device dialog (selecting the first available device by default)
         // TODO: More consistent way to pick the right OK button
         ClickAt(_session.FindElementsByName("OK")[0]);
@@ -59,7 +58,8 @@ public class ScanAndSaveTests : AppiumTests
         // Open the TWAIN device dialog
         ClickAtName("Choose device");
         Thread.Sleep(100);
-        if (TWAIN_DEVICE_NAME != "") ClickAtName(TWAIN_DEVICE_NAME);
+        var deviceName = AppTestHelper.GetDeviceName(Driver.Twain);
+        if (!string.IsNullOrEmpty(deviceName)) ClickAtName(deviceName);
         // Click Select in the twain device dialog (selecting the first available device by default)
         ClickAtName("Select");
         WaitUntilGone("Select", 1_000);
