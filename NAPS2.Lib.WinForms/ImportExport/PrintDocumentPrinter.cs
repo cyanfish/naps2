@@ -7,14 +7,8 @@ namespace NAPS2.ImportExport;
 
 public class PrintDocumentPrinter : IScannedImagePrinter
 {
-    private readonly ImageContext _imageContext;
-
-    public PrintDocumentPrinter(ImageContext imageContext)
-    {
-        _imageContext = imageContext;
-    }
-
-    public async Task<bool> PromptToPrint(IList<ProcessedImage> images, IList<ProcessedImage> selectedImages)
+    public async Task<bool> PromptToPrint(
+        Eto.Forms.Window parentWindow, IList<ProcessedImage> images, IList<ProcessedImage> selectedImages)
     {
         if (!images.Any())
         {
@@ -22,6 +16,8 @@ public class PrintDocumentPrinter : IScannedImagePrinter
         }
         var printDialog = new PrintDialog
         {
+            // TODO: If we migrate this to WPF we might be able to enable print previews
+            // WinForms has UseEXDialog which will use the modern windows dialog but has no way to populate the preview
             AllowSelection = selectedImages.Any(),
             AllowSomePages = true,
             PrinterSettings =

@@ -20,7 +20,7 @@ public class LinuxSystemCompat : ISystemCompat
 
     public bool CanEmail => true;
 
-    public bool CanPrint => false;
+    public bool CanPrint => true;
 
     public bool ShouldRememberBackgroundOperations => false;
 

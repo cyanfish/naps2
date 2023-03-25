@@ -466,7 +466,8 @@ public class DesktopController
         var state = _imageList.CurrentState;
         using var allImages = _imageList.Images.Select(x => x.GetClonedImage()).ToDisposableList();
         using var selectedImages = _imageList.Selection.Select(x => x.GetClonedImage()).ToDisposableList();
-        if (await _scannedImagePrinter.PromptToPrint(allImages.InnerList, selectedImages.InnerList))
+        if (await _scannedImagePrinter.PromptToPrint(
+                _desktopFormProvider.DesktopForm, allImages.InnerList, selectedImages.InnerList))
         {
             _imageList.SavedState = state;
         }

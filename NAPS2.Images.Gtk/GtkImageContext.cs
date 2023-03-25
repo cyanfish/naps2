@@ -53,6 +53,11 @@ public class GtkImageContext : ImageContext
 
     internal LibTiffIo TiffIo => _tiffIo;
 
+    public Pixbuf RenderToPixbuf(IRenderableImage image)
+    {
+        return ((GtkImage) Render(image)).Pixbuf;
+    }
+
     public override IMemoryImage Create(int width, int height, ImagePixelFormat pixelFormat)
     {
         if (pixelFormat == ImagePixelFormat.Unsupported)

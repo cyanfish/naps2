@@ -15,7 +15,7 @@ public class GtkModule : GuiModule
         base.Load(builder);
 
         builder.RegisterType<StubNotificationManager>().As<INotificationManager>().SingleInstance();
-        builder.RegisterType<StubScannedImagePrinter>().As<IScannedImagePrinter>();
+        builder.RegisterType<GtkScannedImagePrinter>().As<IScannedImagePrinter>();
         builder.RegisterType<GtkDarkModeProvider>().As<IDarkModeProvider>();
         builder.RegisterType<GtkImageContext>().As<ImageContext>();
         builder.RegisterType<GtkImageContext>().AsSelf();
@@ -24,14 +24,6 @@ public class GtkModule : GuiModule
         builder.RegisterType<GtkPreviewForm>().As<PreviewForm>();
 
         EtoPlatform.Current = new GtkEtoPlatform();
-    }
-}
-
-public class StubScannedImagePrinter : IScannedImagePrinter
-{
-    public Task<bool> PromptToPrint(IList<ProcessedImage> images, IList<ProcessedImage> selectedImages)
-    {
-        return Task.FromResult(false);
     }
 }
 
