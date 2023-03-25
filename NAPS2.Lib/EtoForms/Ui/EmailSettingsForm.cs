@@ -4,7 +4,6 @@ using NAPS2.EtoForms.Layout;
 using NAPS2.EtoForms.Widgets;
 using NAPS2.ImportExport.Email;
 using NAPS2.ImportExport.Email.Mapi;
-using NAPS2.ImportExport.Images;
 
 namespace NAPS2.EtoForms.Ui;
 
@@ -75,7 +74,7 @@ public class EmailSettingsForm : EtoDialogBase
                 break;
             case EmailProviderType.OutlookWeb:
                 _provider.Text = SettingsResources.EmailProviderType_OutlookWeb + '\n' +
-                                 config.Get(c => c.EmailSetup.OutlookWebToken);
+                                 config.Get(c => c.EmailSetup.OutlookWebUser);
                 break;
             case EmailProviderType.CustomSmtp:
                 _provider.Text = config.Get(c => c.EmailSetup.SmtpHost) + '\n' + config.Get(c => c.EmailSetup.SmtpUser);
