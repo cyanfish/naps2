@@ -18,7 +18,7 @@ public class LinuxSystemCompat : ISystemCompat
 
     public bool CanUseWin32 => false;
 
-    public bool CanEmail => false;
+    public bool CanEmail => true;
 
     public bool CanPrint => false;
 

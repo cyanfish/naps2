@@ -39,7 +39,7 @@ public class EmailSettingsForm : EtoDialogBase
             L.GroupBox(
                 UiStrings.Provider,
                 L.Row(
-                    _provider.AlignCenter(),
+                    _provider.Wrap(150).AlignCenter(),
                     C.Filler(),
                     C.Button(UiStrings.Change, ChangeProvider).AlignCenter().Padding(top: 4, bottom: 4)
                 )
@@ -75,6 +75,9 @@ public class EmailSettingsForm : EtoDialogBase
             case EmailProviderType.OutlookWeb:
                 _provider.Text = SettingsResources.EmailProviderType_OutlookWeb + '\n' +
                                  config.Get(c => c.EmailSetup.OutlookWebUser);
+                break;
+            case EmailProviderType.Thunderbird:
+                _provider.Text = SettingsResources.EmailProviderType_Thunderbird;
                 break;
             case EmailProviderType.CustomSmtp:
                 _provider.Text = config.Get(c => c.EmailSetup.SmtpHost) + '\n' + config.Get(c => c.EmailSetup.SmtpUser);
