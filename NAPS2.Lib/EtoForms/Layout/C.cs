@@ -23,7 +23,7 @@ public static class C
     /// <returns></returns>
     public static LinkButton UrlLink(string url, string? label = null)
     {
-        void OnClick() => Process.Start(new ProcessStartInfo(url) { UseShellExecute = true });
+        void OnClick() => ProcessHelper.OpenUrl(url);
         return new LinkButton
         {
             Text = label ?? url,

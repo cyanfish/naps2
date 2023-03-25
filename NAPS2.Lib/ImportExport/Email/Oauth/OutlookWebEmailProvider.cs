@@ -34,7 +34,7 @@ public class OutlookWebEmailProvider : IEmailProvider
         var respUrl = await _outlookWebOauthProvider.UploadDraft(messageObj.ToString(), progress);
 
         // Open the draft in the user's browser
-        Process.Start(respUrl + "&ispopout=0");
+        ProcessHelper.OpenUrl(respUrl + "&ispopout=0");
 
         return true;
     }

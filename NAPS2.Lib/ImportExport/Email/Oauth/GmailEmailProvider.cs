@@ -22,7 +22,8 @@ public class GmailEmailProvider : MimeEmailProvider
         {
             var userEmail = _gmailOauthProvider.User;
             // Open the draft in the user's browser
-            Process.Start($"https://mail.google.com/mail/?authuser={userEmail}#drafts?compose={draft.MessageId}");
+            ProcessHelper.OpenUrl(
+                $"https://mail.google.com/mail/?authuser={userEmail}#drafts?compose={draft.MessageId}");
         }
     }
 }

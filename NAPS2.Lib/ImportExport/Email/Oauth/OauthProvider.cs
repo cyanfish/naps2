@@ -50,7 +50,7 @@ public abstract class OauthProvider
         // Open the user interface (which will redirect to our localhost listener)
         var url =
             $"{CodeEndpoint}?scope={Scope}&response_type=code&state={state}&redirect_uri={redirectUri}&client_id={ClientCreds.ClientId}";
-        Process.Start(url);
+        ProcessHelper.OpenUrl(url);
 
         // Wait for the authorization code to be sent to the local socket
         string code;

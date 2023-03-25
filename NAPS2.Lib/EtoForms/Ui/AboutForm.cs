@@ -27,7 +27,7 @@ public class AboutForm : EtoDialogBase
         _donateButton = EtoPlatform.Current.AccessibleImageButton(
             Icons.btn_donate_LG.ToEtoImage(),
             UiStrings.Donate,
-            () => Process.Start(new ProcessStartInfo(DONATE_URL) { UseShellExecute = true }));
+            () => ProcessHelper.OpenUrl(DONATE_URL));
 
 #if !MSI
         _updateChecker = updateChecker;
