@@ -13,17 +13,20 @@ public class EmailProviderForm : EtoDialogBase
     private readonly SystemEmailClients _systemEmailClients;
     private readonly GmailOauthProvider _gmailOauthProvider;
     private readonly OutlookWebOauthProvider _outlookWebOauthProvider;
+    private readonly ThunderbirdEmailProvider _thunderbirdProvider;
 
     private readonly List<EmailProviderWidget> _providerWidgets;
     private readonly string[] _systemClientNames;
     private readonly string? _defaultSystemClientName;
 
     public EmailProviderForm(Naps2Config config, SystemEmailClients systemEmailClients,
-        GmailOauthProvider gmailOauthProvider, OutlookWebOauthProvider outlookWebOauthProvider) : base(config)
+        GmailOauthProvider gmailOauthProvider, OutlookWebOauthProvider outlookWebOauthProvider,
+        ThunderbirdEmailProvider thunderbirdProvider) : base(config)
     {
         _systemEmailClients = systemEmailClients;
         _gmailOauthProvider = gmailOauthProvider;
         _outlookWebOauthProvider = outlookWebOauthProvider;
+        _thunderbirdProvider = thunderbirdProvider;
 
         _providerWidgets = new List<EmailProviderWidget>();
 #if NET6_0_OR_GREATER
@@ -51,6 +54,21 @@ public class EmailProviderForm : EtoDialogBase
                 });
             }
 #if NET6_0_OR_GREATER
+        }
+
+        // For Windows we expect Thunderbird to be used through MAPI. For Linux we need to handle it specially.
+        if (!OperatingSystem.IsWindows())
+        {
+            _providerWidgets.Add(new EmailProviderWidget
+            {
+                ProviderType = EmailProviderType.Thunderbird,
+                ProviderIcon = Icons.thunderbird.ToEtoImage(),
+                ProviderName = EmailProviderType.Thunderbird.Description(),
+                ClickAction = ChooseThunderbird,
+                // When Thunderbird isn't available, we disable it rather than hide it.
+                // The point is to give a hint to the user that Thunderbird support is present.
+                Enabled = _thunderbirdProvider.IsAvailable
+            });
         }
 #endif
 
@@ -105,7 +123,8 @@ public class EmailProviderForm : EtoDialogBase
             _providerWidgets.Select(x => C.Button(new ActionCommand(x.ClickAction)
             {
                 Text = x.ProviderName,
-                Image = x.ProviderIcon
+                Image = x.ProviderIcon,
+                Enabled = x.Enabled
             }, ButtonImagePosition.Left, big: true).NaturalWidth(500).Height(50)).Expand()
         );
     }
@@ -118,6 +137,16 @@ public class EmailProviderForm : EtoDialogBase
         transact.Remove(c => c.EmailSetup);
         transact.Set(c => c.EmailSetup.SystemProviderName, clientName);
         transact.Set(c => c.EmailSetup.ProviderType, EmailProviderType.System);
+        transact.Commit();
+        Result = true;
+        Close();
+    }
+
+    private void ChooseThunderbird()
+    {
+        var transact = Config.User.BeginTransaction();
+        transact.Remove(c => c.EmailSetup);
+        transact.Set(c => c.EmailSetup.ProviderType, EmailProviderType.Thunderbird);
         transact.Commit();
         Result = true;
         Close();
@@ -167,5 +196,6 @@ public class EmailProviderForm : EtoDialogBase
         public required Bitmap ProviderIcon { get; init; }
         public required string ProviderName { get; init; }
         public required Action ClickAction { get; init; }
+        public bool Enabled { get; set; } = true;
     }
 }

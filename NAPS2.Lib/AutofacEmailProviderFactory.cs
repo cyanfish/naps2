@@ -22,6 +22,8 @@ public class AutofacEmailProviderFactory : IEmailProviderFactory
                 return _container.Resolve<GmailEmailProvider>();
             case EmailProviderType.OutlookWeb:
                 return _container.Resolve<OutlookWebEmailProvider>();
+            case EmailProviderType.Thunderbird:
+                return _container.Resolve<ThunderbirdEmailProvider>();
             default:
                 return _container.Resolve<MapiEmailProvider>();
         }

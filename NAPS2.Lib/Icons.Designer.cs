@@ -612,6 +612,16 @@ namespace NAPS2 {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
+        internal static byte[] thunderbird {
+            get {
+                object obj = ResourceManager.GetObject("thunderbird", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
         internal static byte[] pdf_email {
             get {
                 object obj = ResourceManager.GetObject("pdf_email", resourceCulture);
