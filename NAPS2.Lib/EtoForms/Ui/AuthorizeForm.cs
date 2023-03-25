@@ -57,8 +57,11 @@ public class AuthorizeForm : EtoDialogBase
             }
             catch (Exception ex)
             {
-                _errorOutput.DisplayError(MiscResources.AuthError, ex);
-                Log.ErrorException("Error acquiring Oauth token", ex);
+                if (!_cancelTokenSource.IsCancellationRequested)
+                {
+                    _errorOutput.DisplayError(MiscResources.AuthError, ex);
+                    Log.ErrorException("Error acquiring Oauth token", ex);
+                }
                 Invoker.Current.Invoke(Close);
             }
         });

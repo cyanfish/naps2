@@ -74,6 +74,10 @@ public static class EtoLayoutExtensions
 
     public static LayoutControl Wrap(this Label label, int defaultWidth)
     {
+        if (defaultWidth == 0)
+        {
+            return label;
+        }
         label.Wrap = WrapMode.Word;
         return new LayoutControl(label, wrapDefaultWidth: defaultWidth);
     }

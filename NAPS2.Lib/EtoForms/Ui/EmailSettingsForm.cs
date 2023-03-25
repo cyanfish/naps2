@@ -39,7 +39,7 @@ public class EmailSettingsForm : EtoDialogBase
             L.GroupBox(
                 UiStrings.Provider,
                 L.Row(
-                    _provider.Wrap(150).AlignCenter(),
+                    _provider.Wrap(EtoPlatform.Current.IsGtk ? 150 : 0).AlignCenter(),
                     C.Filler(),
                     C.Button(UiStrings.Change, ChangeProvider).AlignCenter().Padding(top: 4, bottom: 4)
                 )
@@ -125,25 +125,11 @@ public class EmailSettingsForm : EtoDialogBase
         UpdateValues(Config.DefaultsOnly);
     }
 
-    private void Placeholders_Click(object? sender, EventArgs eventArgs)
-    {
-        var form = FormFactory.Create<PlaceholdersForm>();
-        form.FileName = _attachmentName.Text;
-        form.ShowModal();
-        if (form.Updated)
-        {
-            _attachmentName.Text = form.FileName;
-        }
-    }
-
     private void ChangeProvider()
     {
         var form = FormFactory.Create<EmailProviderForm>();
         form.ShowModal();
-        if (form.Result)
-        {
-            UpdateProvider(Config);
-            LayoutController.Invalidate();
-        }
+        UpdateProvider(Config);
+        LayoutController.Invalidate();
     }
 }

@@ -32,7 +32,7 @@ public class ThunderbirdEmailProvider : IEmailProvider
                 if (!string.IsNullOrEmpty(message.BodyText))
                 {
                     bodyFile = Path.Combine(Paths.Temp, Path.GetRandomFileName() + ".txt");
-                    await File.WriteAllTextAsync(bodyFile, message.BodyText, Encoding.UTF8);
+                    File.WriteAllText(bodyFile, message.BodyText, Encoding.UTF8);
                     arguments.Add($"message='{bodyFile}'");
                 }
                 if (!string.IsNullOrEmpty(message.Subject))
