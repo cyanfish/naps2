@@ -1,5 +1,7 @@
-﻿using NLog;
+﻿using System.Text;
+using NLog;
 using NLog.Config;
+using NLog.LayoutRenderers;
 using NLog.Targets;
 using ILogger = NAPS2.Logging.ILogger;
 
@@ -11,6 +13,7 @@ public class NLogLogger : ILogger
 
     public NLogLogger()
     {
+        LayoutRenderer.Register<CustomExceptionLayoutRenderer>("exception");
         var config = new LoggingConfiguration();
         var target = new FileTarget
         {
@@ -44,5 +47,13 @@ public class NLogLogger : ILogger
     public void FatalException(string message, Exception exception)
     {
         _logger.Fatal(exception, message);
+    }
+
+    private class CustomExceptionLayoutRenderer : ExceptionLayoutRenderer
+    {
+        protected override void AppendToString(StringBuilder sb, Exception ex)
+        {
+            sb.AppendDemystified(ex);
+        }
     }
 }

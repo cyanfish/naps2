@@ -24,7 +24,7 @@ public class MessageBoxErrorOutput : ErrorOutput
 
     public override void DisplayError(string errorMessage, Exception exception)
     {
-        Invoker.Current.Invoke(() => ShowErrorWithDetails(errorMessage, exception.ToString()));
+        Invoker.Current.Invoke(() => ShowErrorWithDetails(errorMessage, exception.ToStringDemystified()));
     }
 
     private void ShowErrorWithDetails(string errorMessage, string details)
