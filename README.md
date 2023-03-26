@@ -5,7 +5,7 @@ NAPS2 is a document scanning application with a focus on simplicity and ease of 
 System requirements:
 - Windows 7+ (x64, x86)
 - macOS 10.15+ (x64, arm64)
-- Linux (x64, arm64)
+- Linux (x64, arm64) (GTK 3.20+, glibc 2.27+)
 
 Visit the NAPS2 home page at [www.naps2.com](http://www.naps2.com).
 
