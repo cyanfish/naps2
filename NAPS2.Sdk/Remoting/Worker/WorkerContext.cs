@@ -1,4 +1,6 @@
-﻿namespace NAPS2.Remoting.Worker;
+﻿using Grpc.Core;
+
+namespace NAPS2.Remoting.Worker;
 
 /// <summary>
 /// A class storing the objects the client needs to use a NAPS2.Worker.exe instance.
@@ -42,6 +44,10 @@ public class WorkerContext : IDisposable
                     Log.ErrorException("Error killing worker", e);
                 }
             });
+        }
+        catch (RpcException e) when (e.Status.StatusCode == StatusCode.Unavailable)
+        {
+            Log.Error("Could not stop the worker process. It may have crashed.");
         }
         catch (Exception e)
         {
