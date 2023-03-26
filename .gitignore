@@ -1,4 +1,5 @@
 Desktop.ini
+.DS_Store
 packages/
 *.user
 *.suo
