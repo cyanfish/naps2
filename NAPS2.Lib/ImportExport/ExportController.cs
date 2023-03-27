@@ -136,7 +136,7 @@ public class ExportController : IExportController
         {
             // First email attempt; prompt for a provider
             var form = _formFactory.Create<EmailProviderForm>();
-            await form.ShowModalAsync();
+            Invoker.Current.Invoke(() => form.ShowModal());
             if (!form.Result)
             {
                 return false;

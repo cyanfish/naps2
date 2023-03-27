@@ -82,14 +82,13 @@ public class MacDesktopForm : DesktopForm
                         Commands.SaveAll,
                         Commands.SaveSelected,
                         new SeparatorMenuItem(),
-                        // TODO: Implement email on Mac
-                        // Commands.EmailAll,
-                        // Commands.EmailSelected,
+                        Commands.EmailAll,
+                        Commands.EmailSelected,
                         Commands.Print,
                         new SeparatorMenuItem(),
                         Commands.PdfSettings,
                         Commands.ImageSettings,
-                        // Commands.EmailSettings,
+                        Commands.EmailSettings,
                         new SeparatorMenuItem(),
                         Commands.ClearAll
                     }

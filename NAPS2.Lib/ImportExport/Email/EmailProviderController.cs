@@ -59,7 +59,7 @@ public class EmailProviderController
 
 #if NET6_0_OR_GREATER
         // For Windows we expect Thunderbird to be used through MAPI. For Linux we need to handle it specially.
-        MaybeAddWidget(EmailProviderType.Thunderbird, !OperatingSystem.IsWindows());
+        MaybeAddWidget(EmailProviderType.Thunderbird, OperatingSystem.IsLinux());
 #endif
         MaybeAddWidget(EmailProviderType.Gmail, _gmailOauthProvider.HasClientCreds);
         MaybeAddWidget(EmailProviderType.OutlookWeb, _outlookWebOauthProvider.HasClientCreds);
